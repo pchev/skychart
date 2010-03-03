@@ -66,7 +66,6 @@ type
     SpeedButton4: TSpeedButton;
     SpeedButton11: TSpeedButton;
     {Utility and form functions}
-    procedure formcreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
     procedure Timer1Timer(Sender: TObject);
     procedure setresClick(Sender: TObject);
@@ -86,8 +85,10 @@ type
     procedure SpeedButton11Click(Sender: TObject);
   private
     { Private declarations }
+    FConfig: string;
   public
     { Public declarations }
+    function  ReadConfig(ConfigPath : shortstring):boolean;
   end;
 
 procedure InitLib;
@@ -108,6 +109,7 @@ Procedure ScopeReset; stdcall;
 Function  ScopeInitialized : boolean ; stdcall;
 Function  ScopeConnected : boolean ; stdcall;
 Procedure ScopeClose; stdcall;
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
 
 var
   pop_scope: Tpop_scope;
@@ -120,7 +122,6 @@ uses comobj, variants;
 
 var CoordLock : boolean = false;
     Initialized : boolean = false;
-    Initial : boolean = true;
     Appdir : string;
     T : Variant;
   curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
@@ -198,6 +199,12 @@ begin
     str(sec:2:0,s);
     if abs(sec)<9.95 then s:='0'+trim(s);
     result := d+'h'+m+'m'+s+'s';
+end;
+
+Function Slash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
 {-------------------------------------------------------------------------------
@@ -385,7 +392,6 @@ Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boole
 begin
    if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
       Initialized := false;
-      Initial := true;
       pop_scope:=Tpop_scope.Create(nil);
    end;
    if ScopeConnected  then begin
@@ -452,33 +458,41 @@ begin
    end;
 end;
 
+Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
+begin
+  ok:=pop_scope.ReadConfig(ConfigPath);
+end;
+
 {-------------------------------------------------------------------------------
 
                        Form functions
 
 --------------------------------------------------------------------------------}
-procedure Tpop_scope.formcreate(Sender: TObject);
+
+function Tpop_scope.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
-    buf,nom : string;
+    nom : string;
 begin
-     Getdir(0,appdir);
-     buf:=extractfilepath(paramstr(0));
-     ini:=tinifile.create(buf+'scope.ini');
-     nom:= ini.readstring('Ascom','name','');
-     edit1.text:=nom;
-     ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
-     ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
-     lat.text:=ini.readstring('observatory','latitude','0');
-     long.text:=ini.readstring('observatory','longitude','0');
-     ini.free;
-     Timer1.Interval:=strtointdef(ReadIntBox.text,500);
-     UpdTrackingButton;
-     initial:=false;
+result:=DirectoryExists(ConfigPath);
+if Result then
+  FConfig:=slash(ConfigPath)+'scope.ini'
+else
+  FConfig:=slash(extractfilepath(paramstr(0)))+'scope.ini';
+ini:=tinifile.create(FConfig);
+nom:= ini.readstring('Ascom','name','');
+edit1.text:=nom;
+ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
+ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
+lat.text:=ini.readstring('observatory','latitude','0');
+long.text:=ini.readstring('observatory','longitude','0');
+ini.free;
+Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
 end;
 
 procedure InitLib;
 begin
      decimalseparator:='.';
+     Getdir(0,appdir);
 end;
 
 
@@ -518,7 +532,7 @@ procedure Tpop_scope.SaveConfig;
 var
 ini:tinifile;
 begin
-ini:=tinifile.create(extractfilepath(paramstr(0))+'scope.ini');
+ini:=tinifile.create(FConfig);
 ini.writestring('Ascom','name',edit1.text);
 ini.writestring('Ascom','read_interval',ReadIntBox.text);
 ini.writeBool('Ascom','AltAz',ShowAltAz.Checked);
@@ -553,7 +567,7 @@ end;
 
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
-ExecuteFile('ascomtel.html','',appdir+'\doc',SW_SHOWNORMAL);
+ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
 end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);

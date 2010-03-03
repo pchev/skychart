@@ -52,7 +52,8 @@ Exports
        ScopeInitialized,
        ScopeConnected,
        ScopeGetEqSys,
-       ScopeGetInfo;
+       ScopeGetInfo,
+       ScopeReadConfig;
 
 begin
   InitLib;

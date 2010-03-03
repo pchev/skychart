@@ -3191,6 +3191,7 @@ if Connect1.checked then begin
 end else begin
    if not Ftelescope.scopelibok then Ftelescope.InitScopeLibrary;
    if Ftelescope.scopelibok then begin
+     Ftelescope.ScopeReadConfig(ExtractFilePath(Configfile));
      Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      Ftelescope.ScopeShow;
      TelescopeTimer.Enabled:=ok;
