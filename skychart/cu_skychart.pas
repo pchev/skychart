@@ -232,6 +232,7 @@ try
   {$ifdef trace_debug}
   WriteTrace('SkyChart '+cfgsc.chartname+': Init');
   {$endif}
+  cfgsc.msg:='';
   InitObservatory;
   InitTime;
   InitChart;

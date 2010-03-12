@@ -41,12 +41,12 @@ const cdcversion = 'Version 3.1 svn';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
       MaxSim = 100 ;
-      MaxComet = 200;
-      MaxAsteroid = 1000;
+      MaxComet = 500;
+      MaxAsteroid = 10000;
       MaxPla = 32;
       MaxQuickSearch = 15;
       MaxWindow = 10;  // maximum number of chart window
-      maxlabels = 1000; //maximum number of label to a chart
+      maxlabels = 10000; //maximum number of label to a chart
       maxmodlabels = 1000; //maximum number of modified labels before older one are replaced
       MaxCircle = 100;
       MaxDSSurl = 20;
@@ -463,6 +463,7 @@ type
                 rectangle : array [1..10,1..4] of single; // width, height, rotation, offset
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double;
+                msg: string;
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_skychart);

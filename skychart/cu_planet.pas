@@ -1694,6 +1694,7 @@ qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
     +' limit '+inttostr(MaxAsteroid) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
+  if db2.Rowcount=MaxAsteroid then cfgsc.msg:=cfgsc.msg+'More than '+inttostr(MaxAsteroid)+' asteroids, result truncated!';
   if cfgsc.SimObject[12] then SimNb:=cfgsc.SimNb
                          else SimNb:=1;
   if SimNb>cfgsc.AsteroidLstSize then begin

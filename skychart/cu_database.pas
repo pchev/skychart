@@ -1005,8 +1005,8 @@ qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccen
     +' and epoch='+formatfloat(f1,epoch);
 db.Query(qry);
 if db.rowcount>0 then begin
-  h:=strtofloat(db.Results[0][1]);
-  g:=strtofloat(db.Results[0][2]);
+  if not trystrtofloat(db.Results[0][1],h) then h:=17;
+  if not trystrtofloat(db.Results[0][2],g) then g:=0.15;
   ma:=strtofloat(db.Results[0][4]);
   ap:=strtofloat(db.Results[0][5]);
   an:=strtofloat(db.Results[0][6]);
