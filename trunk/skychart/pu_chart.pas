@@ -508,7 +508,7 @@ if assigned(Fshowinfo) then begin
   if sc.cfgsc.TrackOn then
     IdentXY(Image1.Width div 2, Image1.Height div 2)
   else
-    Fshowinfo('');
+    Fshowinfo(sc.cfgsc.msg);
   {$endif}
 end;
 SetScrollBar;

@@ -449,7 +449,6 @@
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
-      <HeapSize Value="100000"/>
       <Optimizations>
         <OptimizationLevel Value="0"/>
       </Optimizations>
@@ -468,6 +467,7 @@
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
+      <CustomOptions Value="-dtrace_debug"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
