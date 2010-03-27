@@ -532,6 +532,7 @@ begin
  DownloadDialog1.onFeedback:=AsteroidFeedback;
  ok:=false;
  for i:=1 to n do begin
+    if copy(cmain.AsteroidUrlList[i-1],1,1)='*' then continue;
     DownloadDialog1.URL:=cmain.AsteroidUrlList[i-1];
     MemoMpc.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
     if i=1 then begin
@@ -627,6 +628,7 @@ begin
  DownloadDialog1.onFeedback:=CometFeedback;
  ok:=false;
  for i:=1 to n do begin
+    if copy(cmain.CometUrlList[i-1],1,1)='*' then continue;
     DownloadDialog1.URL:=cmain.CometUrlList[i-1];
     MemoCom.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
     if i=1 then begin

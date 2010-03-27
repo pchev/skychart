@@ -236,13 +236,13 @@ const cdcversion = 'Version 3.1 svn';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
       URL_BugTracker = 'http://www.ap-i.net/mantis/';
       
-      URL_HTTPCometElements = 'http://cfa-www.harvard.edu/iau/Ephemerides/Comets/Soft00Cmt.txt';
+      URL_HTTPCometElements = 'http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_HTTPCometElements2 = 'http://www.astro.cz/mpcorb/COMET.DAT';
-      URL_FTPCometElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
-      URL_HTTPAsteroidElements1 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
-      URL_HTTPAsteroidElements2 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Unusual/Soft00Unusual.txt';
-      URL_HTTPAsteroidElements3 = 'http://cfa-www.harvard.edu/iau/Ephemerides/Distant/Soft00Distant.txt';
-      URL_MPCORBAsteroidElements = 'ftp://cfa-ftp.harvard.edu/pub/MPCORB/MPCORB.DAT';
+      URL_FTPCometElements = '**ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
+      URL_HTTPAsteroidElements1 = '**http://www.minorplanetcenter.org/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
+      URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Unusual/Soft00Unusual.txt';
+      URL_HTTPAsteroidElements3 = '**http://www.minorplanetcenter.org/iau/Ephemerides/Distant/Soft00Distant.txt';
+      URL_MPCORBAsteroidElements = 'http://www.minorplanetcenter.org/iau/MPCORB/MPCORB.DAT';
       URL_MPCORBAsteroidElements2 = 'http://www.astro.cz/mpcorb/MPCORB.DAT';
       URL_CDCAsteroidElements = 'http://www.ap-i.net/skychart/data/mpc5000.dat';
       

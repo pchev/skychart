@@ -3,7 +3,7 @@ object f_config_solsys: Tf_config_solsys
   Height = 536
   Top = 171
   Width = 515
-  ActiveControl = MainPanel
+  ActiveControl = showcom
   Caption = 'Solar System'
   ClientHeight = 536
   ClientWidth = 515
@@ -28,7 +28,7 @@ object f_config_solsys: Tf_config_solsys
       Top = 1
       Width = 513
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -39,7 +39,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 7
           Height = 15
           Top = 17
-          Width = 101
+          Width = 115
           Caption = 'Solar System Setting'
           ParentColor = False
         end
@@ -47,7 +47,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 40
           Height = 15
           Top = 64
-          Width = 54
+          Width = 63
           Caption = 'Data Files :'
           ParentColor = False
         end
@@ -55,7 +55,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 62
           Height = 15
           Top = 280
-          Width = 282
+          Width = 324
           Caption = 'Uncheck to avoid double labeling with minor planet 134340'
           ParentColor = False
         end
@@ -99,7 +99,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 40
           Height = 22
           Top = 248
-          Width = 102
+          Width = 115
           Caption = 'Pluto is a planet.'
           OnChange = CheckBoxPlutoChange
           TabOrder = 2
@@ -391,7 +391,7 @@ object f_config_solsys: Tf_config_solsys
       object Page3: TPage
         Caption = 'Page3'
         ClientWidth = 507
-        ClientHeight = 452
+        ClientHeight = 478
         object ComPageControl: TPageControl
           Left = 0
           Height = 429
@@ -426,9 +426,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object Label216: TLabel
                 Left = 32
-                Height = 14
+                Height = 15
                 Top = 239
-                Width = 71
+                Width = 69
                 Caption = 'Show comet'
                 ParentColor = False
               end
@@ -444,7 +444,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object comlimitmag: TFloatEdit
                 Left = 350
-                Height = 22
+                Height = 20
                 Hint = '0..99'
                 Top = 159
                 Width = 41
@@ -458,9 +458,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object showcom: TCheckBox
                 Left = 32
-                Height = 21
+                Height = 22
                 Top = 14
-                Width = 173
+                Width = 166
                 Caption = 'Show comets on the chart'
                 OnClick = showcomClick
                 TabOrder = 0
@@ -493,7 +493,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object commagdiff: TFloatEdit
                 Left = 140
-                Height = 22
+                Height = 20
                 Hint = '0..99'
                 Top = 234
                 Width = 41
@@ -525,17 +525,17 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
-              Height = 14
+              Height = 15
               Top = 123
-              Width = 63
+              Width = 62
               Caption = 'Messages:'
               ParentColor = False
             end
             object Label233: TLabel
               Left = 15
-              Height = 14
+              Height = 15
               Top = 87
-              Width = 110
+              Width = 102
               Caption = 'Or use a local file :'
               ParentColor = False
             end
@@ -550,9 +550,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object Label2: TLabel
                 Left = 5
-                Height = 14
+                Height = 15
                 Top = 14
-                Width = 189
+                Width = 182
                 Caption = 'Download latest orbital elements'
                 ParentColor = False
               end
@@ -579,7 +579,7 @@ object f_config_solsys: Tf_config_solsys
             end
             object comfile: TFileNameEdit
               Left = 159
-              Height = 23
+              Height = 20
               Top = 83
               Width = 129
               DialogOptions = []
