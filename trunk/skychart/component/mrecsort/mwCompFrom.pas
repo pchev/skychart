@@ -27,7 +27,7 @@ function StrCompfrom(Const Item1, Item2; P, Count: Integer): Integer;
 function IStrCompfrom(Const Item1, Item2; P, Count: Integer): Integer;
 function CompIntAt(Const Item1, Item2; P: Integer): Integer;
 function CompShortAt(Const Item1, Item2; P: Integer): Integer;
-function CompSmallAt(Const Item1, Item2; P: Integer): Integer;
+function CompSmallAt(Const Item1, Item2: Pointer; P: PtrInt): Integer;
 function CompDoubleAt(Const Item1, Item2; P: Integer): Integer;
 var
   CompTable: array[#0..#255] of Char;
@@ -75,12 +75,12 @@ Var
 begin
   For I:= 1 to Count do
   begin
-  if Char(Pointer(Integer(Item1) + P)^) <> Char(Pointer(Integer(Item2) + P)^) then break;
+  if Char(Pointer(PtrUint(Item1) + P)^) <> Char(Pointer(PtrUint(Item2) + P)^) then break;
   inc(P);
   end;
-  if Char(Pointer(Integer(Item1) + P)^) < Char(Pointer(Integer(Item2) + P)^) then Result:= -1 else
-  if Char(Pointer(Integer(Item1) + P)^) = Char(Pointer(Integer(Item2) + P)^) then Result:= 0 else
-  if Char(Pointer(Integer(Item1) + P)^) > Char(Pointer(Integer(Item2) + P)^) then Result:= 1;
+  if Char(Pointer(PtrUint(Item1) + P)^) < Char(Pointer(PtrUint(Item2) + P)^) then Result:= -1 else
+  if Char(Pointer(PtrUint(Item1) + P)^) = Char(Pointer(PtrUint(Item2) + P)^) then Result:= 0 else
+  if Char(Pointer(PtrUint(Item1) + P)^) > Char(Pointer(PtrUint(Item2) + P)^) then Result:= 1;
 end;  { StrCompfrom }
 
 function IStrCompfrom(Const Item1, Item2; P, Count: Integer): Integer;
@@ -89,40 +89,45 @@ Var
 begin
   For I:= 1 to Count do
   begin
-  if CompTable[Char(Pointer(Integer(Item1) + P)^)] <> CompTable[Char(Pointer(Integer(Item2) + P)^)] then break;
+  if CompTable[Char(Pointer(PtrUint(Item1) + P)^)] <> CompTable[Char(Pointer(PtrUint(Item2) + P)^)] then break;
   inc(P);
   end;
-  if CompTable[Char(Pointer(Integer(Item1) + P)^)] < CompTable[Char(Pointer(Integer(Item2) + P)^)] then Result:= -1 else
-  if CompTable[Char(Pointer(Integer(Item1) + P)^)] = CompTable[Char(Pointer(Integer(Item2) + P)^)] then Result:= 0 else
-  if CompTable[Char(Pointer(Integer(Item1) + P)^)] > CompTable[Char(Pointer(Integer(Item2) + P)^)] then Result:= 1;
+  if CompTable[Char(Pointer(PtrUint(Item1) + P)^)] < CompTable[Char(Pointer(PtrUint(Item2) + P)^)] then Result:= -1 else
+  if CompTable[Char(Pointer(PtrUint(Item1) + P)^)] = CompTable[Char(Pointer(PtrUint(Item2) + P)^)] then Result:= 0 else
+  if CompTable[Char(Pointer(PtrUint(Item1) + P)^)] > CompTable[Char(Pointer(PtrUint(Item2) + P)^)] then Result:= 1;
 end;  { IStrCompfrom }
 
 function CompIntAt(Const Item1, Item2; P: Integer): Integer;
 begin
-  if Integer(Pointer(Integer(Item1) + P)^) < Integer(Pointer(Integer(Item2) + P)^) then Result:= -1 else
-  if Integer(Pointer(Integer(Item1) + P)^) = Integer(Pointer(Integer(Item2) + P)^) then Result:= 0 else
-  if Integer(Pointer(Integer(Item1) + P)^) > Integer(Pointer(Integer(Item2) + P)^) then Result:= 1;
+  if Integer(Pointer(PtrUint(Item1) + P)^) < Integer(Pointer(PtrUint(Item2) + P)^) then Result:= -1 else
+  if Integer(Pointer(PtrUint(Item1) + P)^) = Integer(Pointer(PtrUint(Item2) + P)^) then Result:= 0 else
+  if Integer(Pointer(PtrUint(Item1) + P)^) > Integer(Pointer(PtrUint(Item2) + P)^) then Result:= 1;
 end;  { CompIntAt }
 
 function CompShortAt(Const Item1, Item2; P: Integer): Integer;
 begin
-  if ShortInt(Pointer(Integer(Item1) + P)^) < ShortInt(Pointer(Integer(Item2) + P)^) then Result:= -1 else
-  if ShortInt(Pointer(Integer(Item1) + P)^) = ShortInt(Pointer(Integer(Item2) + P)^) then Result:= 0 else
-  if ShortInt(Pointer(Integer(Item1) + P)^) > ShortInt(Pointer(Integer(Item2) + P)^) then Result:= 1;
+  if ShortInt(Pointer(PtrUint(Item1) + P)^) < ShortInt(Pointer(PtrUint(Item2) + P)^) then Result:= -1 else
+  if ShortInt(Pointer(PtrUint(Item1) + P)^) = ShortInt(Pointer(PtrUint(Item2) + P)^) then Result:= 0 else
+  if ShortInt(Pointer(PtrUint(Item1) + P)^) > ShortInt(Pointer(PtrUint(Item2) + P)^) then Result:= 1;
 end;  { CompShortAt }
 
-function CompSmallAt(Const Item1, Item2; P: Integer): Integer;
+function CompSmallAt(Const Item1, Item2: Pointer; P: PtrInt): Integer;
+var a,b : smallint;
+    aptr:pointer;
 begin
-  if SmallInt(Pointer(Integer(Item1) + P)^) < SmallInt(Pointer(Integer(Item2) + P)^) then Result:= -1 else
-  if SmallInt(Pointer(Integer(Item1) + P)^) = SmallInt(Pointer(Integer(Item2) + P)^) then Result:= 0 else
-  if SmallInt(Pointer(Integer(Item1) + P)^) > SmallInt(Pointer(Integer(Item2) + P)^) then Result:= 1;
+aptr:=Pointer(PtrUInt(Item1) + P);
+a:= SmallInt(aptr^);
+b:= SmallInt(Pointer(PtrUInt(Item2) + P)^);
+  if SmallInt(Pointer(PtrUInt(Item1) + P)^) < SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= -1 else
+  if SmallInt(Pointer(PtrUInt(Item1) + P)^) = SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= 0 else
+  if SmallInt(Pointer(PtrUInt(Item1) + P)^) > SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= 1;
 end;  { CompSmallAt }
 
 function CompDoubleAt(Const Item1, Item2; P: Integer): Integer;
 begin
-  if Double(Pointer(Integer(Item1) + P)^) < Double(Pointer(Integer(Item2) + P)^) then Result:= -1 else
-  if Double(Pointer(Integer(Item1) + P)^) = Double(Pointer(Integer(Item2) + P)^) then Result:= 0 else
-  if Double(Pointer(Integer(Item1) + P)^) > Double(Pointer(Integer(Item2) + P)^) then Result:= 1;
+  if Double(Pointer(PtrUint(Item1) + P)^) < Double(Pointer(PtrUint(Item2) + P)^) then Result:= -1 else
+  if Double(Pointer(PtrUint(Item1) + P)^) = Double(Pointer(PtrUint(Item2) + P)^) then Result:= 0 else
+  if Double(Pointer(PtrUint(Item1) + P)^) > Double(Pointer(PtrUint(Item2) + P)^) then Result:= 1;
 end;
 
 initialization
