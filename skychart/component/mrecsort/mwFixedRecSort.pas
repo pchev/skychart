@@ -213,7 +213,7 @@ end;
 function TM3Array.Add(Item: Pointer): Integer;
 begin
   Result:=FCount;
-  if Result=FCapacity then Expand;
+  if Result>=FCapacity then Expand;
   FM3Array[Result]:=Item;
   Inc(FCount);
 end;
@@ -226,7 +226,7 @@ end;
 procedure TM3Array.SetCapacity(NewCapacity: Integer);
 begin
   FCapacity:=NewCapacity;
-  ReallocMem(FM3Array, FCapacity*4);
+  ReallocMem(FM3Array, FCapacity*sizeof(Pointer));
 end;
 
 procedure TM3Array.Clear;
@@ -413,7 +413,7 @@ procedure TM3Array.MergeSort(SorCompare: TMergeCompare);
 var
   a, b, c, N, todo: LongInt;
 begin
-  ReallocMem(TempArray, FCount*4);
+  ReallocMem(TempArray, FCount*sizeof(Pointer));
   FLeftArray:=TSub3Array.Create(FCount-1);
   FMidArray:=TSub3Array.Create(FCount-1);
   FRightArray:=TSub3Array.Create(FCount-1);
@@ -494,7 +494,7 @@ function TmSorIO.ReadData: Pointer;
 begin
   fEof:=False;
   if fNeedFill then FillBuffer;
-  Result:=Pointer(Integer(fBuffer)+fBufferPos);
+  Result:=Pointer(PtrUInt(fBuffer)+fBufferPos);
   inc(fBufferPos, fDataLen);
   if fBufferPos>=fFilledSize then
   begin
@@ -516,7 +516,7 @@ begin
       begin
         FlushBuffer;
       end;
-      Move(NewData, Pointer(LongInt(fBuffer)+fBufferPos)^, fDataLen);
+      Move(NewData, Pointer(PtrUInt(fBuffer)+fBufferPos)^, fDataLen);
       inc(fBufferPos, fDataLen);
       inc(fFilePos, fDataLen);
     end;
@@ -578,7 +578,7 @@ procedure TmMergePart.next;
 begin
   fEof:=False;
   if fNeedFill then FillBuffer;
-  fData:=Pointer(Integer(fBuffer)+fBufferPos);
+  fData:=Pointer(PtrUInt(fBuffer)+fBufferPos);
   inc(fBufferPos, fDataLen);
   inc(RecsReaded);
   if fBufferPos>=fBufferSize then fNeedFill:=True;
