@@ -80,6 +80,7 @@ end;
 
 Procedure Tf_image.LoadImage(f : string);
 begin
+ image1.Zoom:=1;
  image1.picture.LoadFromFile(f);
  imagewidth:=image1.picture.width;
  imageheight:=image1.picture.height;
