@@ -8,7 +8,7 @@ LazarusResources.Add('Tf_image','FORMDATA',[
   +'Caption'#6#7'f_image'#12'ClientHeight'#3#151#1#11'ClientWidth'#3'g'#2#11'Fo'
   +'nt.Height'#2#245#9'Font.Name'#6#13'MS Sans Serif'#8'OnCreate'#7#10'FormCrea'
   +'te'#10'OnKeyPress'#7#12'FormKeyPress'#8'OnResize'#7#10'FormResize'#8'Positi'
-  +'on'#7#14'poScreenCenter'#10'LCLVersion'#6#8'0.9.28.3'#0#10'TZoomImage'#6'Im'
+  +'on'#7#14'poScreenCenter'#10'LCLVersion'#6#8'0.9.28.2'#0#10'TZoomImage'#6'Im'
   +'age1'#4'Left'#2#0#6'Height'#3#9#1#3'Top'#2' '#5'Width'#3#209#1#17'Canvas.Au'
   +'toRedraw'#8#18'Canvas.Brush.Color'#7#7'clBlack'#18'Canvas.Font.Height'#2#245
   +#16'Canvas.Font.Name'#6#13'MS Sans Serif'#4'Zoom'#5#0#0#0#0#0#0#0#128#255'?'

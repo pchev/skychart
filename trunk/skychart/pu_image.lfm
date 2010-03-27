@@ -19,7 +19,7 @@ object f_image: Tf_image
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   Position = poScreenCenter
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.28.2'
   object Image1: TZoomImage
     Left = 0
     Height = 265

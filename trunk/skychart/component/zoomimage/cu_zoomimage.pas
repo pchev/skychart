@@ -167,12 +167,16 @@ with FBitmap.Canvas do begin
  brush.Style:=bsSolid;
  rectangle(0,0,width,height);
 end;
+try
 FBitmap.Canvas.CopyRect(Rect(0, 0, Fw, Fh),FPicture.Bitmap.Canvas,Rect(FXo, FYo, FXo+Fw, FYo+Fh));
 // Resize
 BitmapResize(FBitmap,TmpBmp,Width/FBitmap.Width);
 // refresh the image
 Paint;
 if Assigned(FOnPosChange) then FOnPosChange(Self);
+except
+
+end;
 end;
 end;
 
