@@ -718,7 +718,7 @@ var
   K, Readed: Integer;
   WriterPos, SorCount, PartNumber: LongInt;
 begin
-  TempFileName:='SorTemp.mkw';
+  TempFileName:=ExtractFilePath(Outfile)+PathDelim+'SorTemp.mkw';
   SorFileName:=OutFile;
   AssignFile(aFile, TempFileName);
   Rewrite(aFile);
