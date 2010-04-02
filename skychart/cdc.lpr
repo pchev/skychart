@@ -98,7 +98,6 @@ begin
     f_splash.Show; f_splash.Invalidate;
     Application.ProcessMessages;
   end;
-  sleep(5000);
   step:='Create f_position';
   {$ifdef trace_debug}
    WriteTrace(step);
