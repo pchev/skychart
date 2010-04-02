@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 374
-  Height = 580
-  Top = 120
+  Left = 137
+  Height = 571
+  Top = 0
   Width = 860
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 580
+  ClientHeight = 546
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -19,7 +19,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.28.2'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 492
+    Height = 458
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 492
+    ClientHeight = 458
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 492
+      Height = 458
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 492
+    Height = 458
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 492
+    ClientHeight = 458
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 242
+      Height = 208
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 546
+    Top = 512
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -3310,7 +3310,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 21
+        Height = 29
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3451,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeVal: TSpinEdit
         Left = 592
-        Height = 16
+        Height = 23
         Hint = 'Time'
         Top = 2
         Width = 56
@@ -3462,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 20
+        Height = 31
         Hint = 'Time Units'
         Top = 2
         Width = 80
