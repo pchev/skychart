@@ -3,6 +3,8 @@ object f_splash: Tf_splash
   Height = 263
   Top = 156
   Width = 496
+  ActiveControl = Panel1
+  BorderIcons = []
   BorderStyle = bsNone
   Caption = 'f_splash'
   ClientHeight = 263
@@ -10,12 +12,12 @@ object f_splash: Tf_splash
   Font.Color = clBlack
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
-  FormStyle = fsStayOnTop
+  FormStyle = fsSplash
   OnCreate = FormCreate
   OnMouseUp = FormMouseUp
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.28.2'
   object Panel1: TPanel
     Left = 0
     Height = 263
