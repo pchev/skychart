@@ -576,7 +576,6 @@ if locked or (fsCreating in FormState) then exit;
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
 if sc<>nil then begin
-  sc.plot.cfgplot.Color[0]:=clBlack;
   sc.plot.init(Image1.width,Image1.height);
 end;
 end;
@@ -741,7 +740,7 @@ end;
 if Zoomstep>1 then begin
      with Image1.Canvas do begin
       Pen.Width := 1;
-      pen.Color:=sc.plot.cfgplot.color[11];
+      pen.Color:=clWhite;
       Pen.Mode:=pmXor;
       brush.Style:=bsclear;
       rectangle(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
@@ -1580,7 +1579,7 @@ case action of
       Pen.Width := 1;
       pen.Color:=clWhite;
       Pen.Mode:=pmXor;
-      brush.Style:=bsclear;
+      brush.Style:=bsClear;
       if Zoomstep>1 then rectangle(Rect(XZoomD1,YZoomD1,XZoomD2,YZoomD2));
       Xzoom2:=x;
       Yzoom2:=Yzoom1+round(sgn(y-Yzoom1)*abs(Xzoom2-Xzoom1)/sc.cfgsc.windowratio);
