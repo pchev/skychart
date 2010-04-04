@@ -206,6 +206,7 @@ type
     locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
+    lastl,lastb: double;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
@@ -1443,6 +1444,7 @@ begin
 {$endif}
 lastx:=x;
 lasty:=y;
+GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 case Button of
    mbLeft  : ZoomBox(1,X,Y);
@@ -1666,26 +1668,22 @@ end;
 end;
 
 Procedure Tf_chart.TrackCursor(X,Y : integer);
-var xx,yy : integer;
+var newl,newb: double;
 begin
 if LockTrackCursor then exit;
 try
+  {$ifdef trace_debug}
+   WriteTrace('TrackCursor');
+  {$endif}
    LockTrackCursor:=true;
    image1.cursor:=crHandPoint;
-   xx:=sc.cfgsc.xcentre-(x-lastx);
-   yy:=sc.cfgsc.ycentre-(y-lasty);
+   GetCoordxy(x,y,newl,newb,sc.cfgsc);
+   sc.MoveCenter(lastl-newl,lastb-newb);
+   sc.cfgsc.quick:=true;
    lastx:=x;
    lasty:=y;
    lastyzoom:=y;
-   GetADxy(xx,yy,sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc);
-   if sc.cfgsc.racentre>pi2 then sc.cfgsc.racentre:=sc.cfgsc.racentre-pi2;
-   if sc.cfgsc.racentre<0 then sc.cfgsc.racentre:=sc.cfgsc.racentre+pi2;
-   sc.cfgsc.quick:=true;
-{$ifdef trace_debug}
- WriteTrace('TrackCursor');
-{$endif}
    Refresh;
-//   image1.cursor:=crHandPoint;
    application.processmessages;  // very important to empty the mouse event queue before to unlock
 finally
 LockTrackCursor:=false;

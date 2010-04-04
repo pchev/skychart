@@ -36,6 +36,7 @@ function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart ):bool
 PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart );
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; c: Tconf_skychart );
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Tconf_skychart );
+procedure GetCoordxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
 procedure GetADxy(x,y:Integer ; var a,d : Double; c: Tconf_skychart);
 procedure GetAHxy(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
@@ -472,6 +473,25 @@ Ecl:   begin
        end;
 end;
 end ;
+
+procedure GetCoordxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
+begin
+case c.Projpole of
+Altaz: begin
+       GetAHxy(x,y,l,b,c);
+       end;
+Equat: begin
+       GetADxy(x,y,l,b,c);
+       end;
+Gal:   begin
+       GetLBxy(x,y,l,b,c);
+       end;
+Ecl:   begin
+       GetLBExy(x,y,l,b,c);
+       end;
+  else raise exception.Create('Bad projection type');
+end;
+end;
 
 procedure GetADxy(x,y:Integer ; var a,d : Double; c: Tconf_skychart);
 var

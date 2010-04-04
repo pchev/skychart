@@ -106,6 +106,7 @@ Tskychart = class (TComponent)
     procedure DrawCRose;
     function TelescopeMove(ra,dec:double):boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
+    procedure MoveCenter(loffset,boffset:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
     procedure MovetoXY(X,Y : integer);
     procedure MovetoRaDec(ra,dec:double);
@@ -1379,26 +1380,64 @@ l:=rmod(l+pi2,pi2);
 le:=rmod(le+pi2,pi2);
 end;
 
+procedure Tskychart.MoveCenter(loffset,boffset:double);
+begin
+   case cfgsc.Projpole of
+    Altaz: begin
+           cfgsc.acentre:=rmod(cfgsc.acentre+loffset+pi2,pi2);
+           cfgsc.hcentre:=cfgsc.hcentre+boffset;
+           if cfgsc.hcentre>=pid2 then cfgsc.hcentre:=pid2-secarc;
+           if cfgsc.hcentre<=-pid2 then cfgsc.hcentre:=-pid2+secarc;
+           Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+           cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
+           end;
+    Equat: begin
+           cfgsc.racentre:=cfgsc.racentre+loffset;
+           cfgsc.decentre:=cfgsc.decentre+boffset;
+           end;
+    Gal:   begin
+           cfgsc.lcentre:=rmod(cfgsc.lcentre+loffset+pi2,pi2);
+           cfgsc.bcentre:=cfgsc.bcentre+boffset;
+           if cfgsc.bcentre>=pid2 then cfgsc.bcentre:=pid2-secarc;
+           if cfgsc.bcentre<=-pid2 then cfgsc.bcentre:=-pid2+secarc;
+           Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
+           end;
+    Ecl:   begin
+           cfgsc.lecentre:=rmod(cfgsc.lecentre+loffset+pi2,pi2);
+           cfgsc.becentre:=cfgsc.becentre+boffset;
+           if cfgsc.becentre>=pid2 then cfgsc.becentre:=pid2-secarc;
+           if cfgsc.becentre<=-pid2 then cfgsc.becentre:=-pid2+secarc;
+           Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+           end;
+   end;
+   cfgsc.racentre:=rmod(cfgsc.racentre+pi2,pi2);
+   if cfgsc.decentre>=pid2 then cfgsc.decentre:=pid2-secarc;
+   if cfgsc.decentre<=-pid2 then cfgsc.decentre:=-pid2+secarc;
+end;
+
 procedure Tskychart.MoveChart(ns,ew:integer; movefactor:double);
 begin
  cfgsc.TrackOn:=false;
  if cfgsc.Projpole=AltAz then begin
     cfgsc.acentre:=rmod(cfgsc.acentre-ew*cfgsc.fov/movefactor/cos(cfgsc.hcentre)+pi2,pi2);
     cfgsc.hcentre:=cfgsc.hcentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
-    if cfgsc.hcentre>pid2 then cfgsc.hcentre:=pi-cfgsc.hcentre;
+    if cfgsc.hcentre>=pid2 then cfgsc.hcentre:=pi-cfgsc.hcentre;
+    if cfgsc.hcentre<=-pid2 then cfgsc.hcentre:=-pi-cfgsc.hcentre;
     Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
     cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre;
  end
  else if cfgsc.Projpole=Gal then begin
     cfgsc.lcentre:=rmod(cfgsc.lcentre+ew*cfgsc.fov/movefactor/cos(cfgsc.bcentre)+pi2,pi2);
     cfgsc.bcentre:=cfgsc.bcentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
-    if cfgsc.bcentre>pid2 then cfgsc.bcentre:=pi-cfgsc.bcentre;
+    if cfgsc.bcentre>=pid2 then cfgsc.bcentre:=pi-cfgsc.bcentre;
+    if cfgsc.bcentre<=-pid2 then cfgsc.bcentre:=-pi-cfgsc.bcentre;
     Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc);
  end
  else if cfgsc.Projpole=Ecl then begin
     cfgsc.lecentre:=rmod(cfgsc.lecentre+ew*cfgsc.fov/movefactor/cos(cfgsc.becentre)+pi2,pi2);
     cfgsc.becentre:=cfgsc.becentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
-    if cfgsc.becentre>pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
+    if cfgsc.becentre>=pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
+    if cfgsc.becentre<=-pid2 then cfgsc.becentre:=-pi-cfgsc.becentre;
     Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
