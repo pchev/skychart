@@ -33,12 +33,14 @@ Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double; pixelized: b
 Procedure BitmapFlip(img:Tbitmap; flipx,flipy: boolean);
 Procedure BitmapSubstract(var img1:Tbitmap; img2:Tbitmap);
 Procedure BitmapLumCon(var img: TBitmap; Luminosity, Contrast: integer);
+Procedure BitmapNegative(var img: TBitmap);
 
 Procedure RotateImage(OriginalIntfImg, RotatedIntfImg:TLazIntfImage; theta:Double; oldAxis:TPOINT;var   newAxis:TPOINT;TransparentColor: TFPColor;RevertImage : Boolean);
 Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double; pixelized: boolean=false);
 Procedure FlipImage(OriginalIntfImg,FlipIntfImg:TLazIntfImage; flipx,flipy: boolean);
 Procedure SubstractImage(IntfImg1, IntfImg2:TLazIntfImage);
 Procedure LumConImage(OriginalIntfImg,IntfImg:TLazIntfImage; Luminosity, Contrast: integer);
+Procedure NegativeImage(OriginalIntfImg,IntfImg:TLazIntfImage);
 
 implementation
 
@@ -398,6 +400,41 @@ OriginalIntfImg:=img.CreateIntfImage;
 IntfImg:=img.CreateIntfImage;
 
 LumConImage(OriginalIntfImg,IntfImg, Luminosity, Contrast);
+
+img.FreeImage;
+IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+img.Handle:=ImgMaskHandle;
+img.FreeImage;
+img.Handle:=ImgHandle;
+OriginalIntfImg.Free;
+IntfImg.Free;
+end;
+
+Procedure NegativeImage(OriginalIntfImg,IntfImg:TLazIntfImage);
+var i,j,dmax:integer;
+    col: TFPColor;
+begin
+dmax:=65535;
+IntfImg.SetSize(OriginalIntfImg.Width,OriginalIntfImg.Height);
+  for i:=0 to OriginalIntfImg.Height-1 do begin
+    for j:=0 to OriginalIntfImg.Width-1 do begin
+       col:=OriginalIntfImg.Colors[j,i];
+       col.red:=dmax-col.red;
+       col.green:=dmax-col.green;
+       col.blue:=dmax-col.blue;
+       IntfImg.Colors[j,i]:=col;
+    end;
+  end;
+end;
+
+Procedure BitmapNegative(var img: TBitmap);
+var ImgHandle,ImgMaskHandle: HBitmap;
+    OriginalIntfImg, IntfImg : TLazIntfImage;
+begin
+OriginalIntfImg:=img.CreateIntfImage;
+IntfImg:=img.CreateIntfImage;
+
+NegativeImage(OriginalIntfImg,IntfImg);
 
 img.FreeImage;
 IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);

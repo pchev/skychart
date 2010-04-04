@@ -73,6 +73,7 @@ type
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
      procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
+     procedure PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -1389,6 +1390,7 @@ if not cfgplot.Invisible then begin
           {$endif}
           end;
       3 : begin // symbol
+          PlotPlanet4(xx,yy,ipla,pixscale,WhiteBg);
           end;
   end;
  end; 
@@ -1594,6 +1596,35 @@ end;
 if cfgplot.TransparentPlanet then mode:=0
    else mode:=2;
 if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
+end;
+
+procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
+var symbol: string;
+    ds,mode : integer;
+    spng: TPortableNetworkGraphic;
+    sbmp: TBitmap;
+begin
+ symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
+ if fileexists(symbol) then begin
+   spng:=TPortableNetworkGraphic.Create;
+   sbmp:=TBitmap.Create;
+   try
+   spng.LoadFromFile(symbol);
+   sbmp.Assign(spng);
+   if WhiteBg then BitmapNegative(sbmp);
+   BitmapResize(sbmp,PlanetBMP,cfgchart.drawsize);
+   finally
+   spng.Free;
+   sbmp.Free;
+   end;
+   planetbmppla:=ipla;
+   planetbmpjd:=MaxInt;
+   planetbmprot:=999;
+   ds:=planetbmp.Width;
+   if cfgplot.TransparentPlanet then mode:=0
+       else mode:=2;
+   PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,planetbmp,mode);
+ end;
 end;
 
 procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
