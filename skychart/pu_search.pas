@@ -152,7 +152,7 @@ begin
 Caption:=rsSearch;
 Button3.caption:=rsFilter;
 Button4.caption:=rsFilter;
-Label2.caption:=rsPlanet;
+Label2.caption:=rsSolarSystemO;
 Label3.caption:=rsNebula;
 Label4.caption:=rsStar;
 Label5.caption:=rsConstellatio;
@@ -166,7 +166,7 @@ RadioGroup1.Items[4]:=rsVariableStar;
 RadioGroup1.Items[5]:=rsDoubleStar;
 RadioGroup1.Items[6]:=rsComet;
 RadioGroup1.Items[7]:=rsAsteroid;
-RadioGroup1.Items[8]:=rsPlanet;
+RadioGroup1.Items[8]:=rsSolarSystem;
 RadioGroup1.Items[9]:=rsConstellatio;
 RadioGroup1.Items[10]:=rsOtherLinesCa;
 Button1.caption:=rsFind;

@@ -1778,7 +1778,7 @@ else if otype='P' then precision:=1
 else if otype='Ps' then precision:=1
 else precision:=0;
 isStar:=(otype='*');
-isSolarSystem:=((otype='P')or(otype='Ps')or(otype='As')or(otype='Cm'));
+isSolarSystem:=((otype='P')or(otype='Ps')or(otype='S*')or(otype='As')or(otype='Cm'));
 buf:=LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
@@ -1951,6 +1951,7 @@ else if txt='?' then txt:=rsUnknowObject
 else if txt='' then txt:=rsUnknowObject
 else if txt='-' then txt:=rsPlateDefect
 else if txt='PD' then txt:=rsPlateDefect
+else if txt='S*' then txt:=rsStar
 else if txt='P' then txt:=rsPlanet
 else if txt='Ps' then txt:=rsPlanetarySat
 else if txt='As' then txt:=rsAsteroid
