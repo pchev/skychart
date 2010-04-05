@@ -14,35 +14,7 @@ object f_search: Tf_search
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
-  object PlanetPanel: TPanel
-    Left = 8
-    Height = 41
-    Top = 232
-    Width = 416
-    ClientHeight = 41
-    ClientWidth = 416
-    FullRepaint = False
-    TabOrder = 7
-    Visible = False
-    object Label2: TLabel
-      Left = 13
-      Height = 14
-      Top = 14
-      Width = 34
-      Caption = 'Planet '
-      ParentColor = False
-    end
-    object PlanetBox: TComboBox
-      Left = 97
-      Height = 21
-      Top = 12
-      Width = 146
-      DropDownCount = 10
-      ItemHeight = 13
-      TabOrder = 0
-    end
-  end
+  LCLVersion = '0.9.28.2'
   object CometPanel: TPanel
     Left = 7
     Height = 41
@@ -53,7 +25,7 @@ object f_search: Tf_search
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 26
       Top = 10
       Width = 99
       TabOrder = 0
@@ -70,10 +42,10 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 21
+      Height = 32
       Top = 10
       Width = 216
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 2
     end
   end
@@ -87,7 +59,7 @@ object f_search: Tf_search
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 26
       Top = 10
       Width = 99
       TabOrder = 0
@@ -104,10 +76,10 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 21
+      Height = 32
       Top = 10
       Width = 216
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 2
     end
   end
@@ -123,7 +95,7 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 14
+      Height = 21
       Top = 14
       Width = 35
       Caption = 'Nebula'
@@ -131,10 +103,10 @@ object f_search: Tf_search
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 21
+      Height = 32
       Top = 11
       Width = 280
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 0
     end
   end
@@ -150,18 +122,18 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 14
+      Height = 21
       Top = 14
-      Width = 20
+      Width = 21
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 21
+      Height = 32
       Top = 11
       Width = 281
-      ItemHeight = 13
+      ItemHeight = 0
       TabOrder = 0
     end
   end
@@ -177,18 +149,18 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 14
+      Height = 21
       Top = 14
-      Width = 61
+      Width = 62
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 21
+      Height = 32
       Top = 11
       Width = 265
-      ItemHeight = 13
+      ItemHeight = 0
       Sorted = True
       TabOrder = 0
     end
@@ -204,9 +176,9 @@ object f_search: Tf_search
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 14
+      Height = 21
       Top = 14
-      Width = 63
+      Width = 68
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -375,7 +347,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 21
+      Height = 26
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -583,6 +555,34 @@ object f_search: Tf_search
       end
     end
   end
+  object PlanetPanel: TPanel
+    Left = 8
+    Height = 41
+    Top = 232
+    Width = 416
+    ClientHeight = 41
+    ClientWidth = 416
+    FullRepaint = False
+    TabOrder = 7
+    Visible = False
+    object Label2: TLabel
+      Left = 13
+      Height = 21
+      Top = 14
+      Width = 37
+      Caption = 'Planet '
+      ParentColor = False
+    end
+    object PlanetBox: TComboBox
+      Left = 184
+      Height = 32
+      Top = 8
+      Width = 146
+      DropDownCount = 10
+      ItemHeight = 0
+      TabOrder = 0
+    end
+  end
   object RadioGroup1: TRadioGroup
     Left = 7
     Height = 217
@@ -598,8 +598,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 199
-    ClientWidth = 412
+    ClientHeight = 196
+    ClientWidth = 414
     Columns = 2
     ItemIndex = 0
     Items.Strings = (
