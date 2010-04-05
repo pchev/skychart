@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 137
-  Height = 571
-  Top = 0
+  Left = 156
+  Height = 371
+  Top = 91
   Width = 860
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 546
+  ClientHeight = 346
   ClientWidth = 860
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 458
+    Height = 258
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 458
+    ClientHeight = 258
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 458
+      Height = 258
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 832
-    Height = 458
+    Height = 258
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 458
+    ClientHeight = 258
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 208
+      Height = 8
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 512
+    Top = 312
     Width = 860
     Align = alBottom
     BevelOuter = bvNone
@@ -4291,6 +4291,7 @@ object f_main: Tf_main
       Hint = 'New|Create a new chart'
       ImageIndex = 0
       OnExecute = FileNew1Execute
+      ShortCut = 16468
     end
     object FileOpen1: TAction
       Category = 'File'
@@ -4298,6 +4299,7 @@ object f_main: Tf_main
       Hint = 'Open|Open a chart'
       ImageIndex = 1
       OnExecute = FileOpen1Execute
+      ShortCut = 16463
     end
     object FileSaveAs1: TAction
       Category = 'File'
@@ -4305,6 +4307,7 @@ object f_main: Tf_main
       Hint = 'Save the current chart'
       ImageIndex = 2
       OnExecute = FileSaveAs1Execute
+      ShortCut = 16467
     end
     object FileExit1: TAction
       Category = 'File'
@@ -4319,6 +4322,7 @@ object f_main: Tf_main
       Hint = 'Print the chart'
       ImageIndex = 3
       OnExecute = Print1Execute
+      ShortCut = 16464
     end
     object FilePrintSetup1: TAction
       Category = 'File'
@@ -4402,12 +4406,14 @@ object f_main: Tf_main
       Hint = 'Undo Last Change'
       ImageIndex = 19
       OnExecute = UndoExecute
+      ShortCut = 16474
     end
     object Redo: TAction
       Category = 'Undo'
       Hint = 'Redo Last Change'
       ImageIndex = 20
       OnExecute = RedoExecute
+      ShortCut = 24666
     end
     object rot_plus: TAction
       Category = 'chart'
@@ -4450,6 +4456,7 @@ object f_main: Tf_main
       Caption = 'SaveImage'
       ImageIndex = 36
       OnExecute = SaveImageExecute
+      ShortCut = 24659
     end
     object ViewInfo: TAction
       Category = 'View'
@@ -4771,6 +4778,7 @@ object f_main: Tf_main
       Caption = 'FileClose1'
       Hint = 'Close Chart'
       OnExecute = FileClose1Execute
+      ShortCut = 16472
     end
     object SetupTime: TAction
       Category = 'Setup'
