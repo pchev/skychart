@@ -308,8 +308,8 @@ if readbin then begin
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
-    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
+    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
+    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
@@ -344,8 +344,8 @@ else
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
-    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
+    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
+    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
