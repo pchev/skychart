@@ -426,6 +426,7 @@ var
   CurColor: TFPColor;
   ImgHandle, ImgMaskHandle: HBitmap;
 begin
+try
 if (bmp.Width<2)or(bmp.Height<2) then exit;
     IntfImage:=nil;
     try
@@ -474,7 +475,6 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
        bmp.SaveToStream(memstream);
        memstream.position := 0;
        bmp.LoadFromStream(memstream);
-       memstream.free;
        bmp.Transparent:=true;
       {$ELSE}
        if isWin98 then begin
@@ -487,7 +487,12 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
       {$ENDIF}
     finally
       IntfImage.Free;
+      {$IFDEF OLD_MASK_TRANSPARENCY}
+      memstream.free;
+      {$ENDIF}
     end;
+except
+end;
 end;
 
 procedure TSplot.InitStarBmp;
@@ -1513,9 +1518,12 @@ end else begin
    cnv.Draw(0,0,imabmp);
 end;
 finally
+  try
+  rbmp.Free;
   memstream.Free;
   imabmp.Free;
-  rbmp.Free;
+  except
+  end;
 end;
 end;
 
