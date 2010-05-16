@@ -1682,7 +1682,7 @@ cfgp.Free;
 compass.free;
 arrow.free;
 if CursorImage1<>nil then begin
-  CursorImage1.FreeImage;
+  if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
 except
