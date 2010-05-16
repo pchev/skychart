@@ -611,7 +611,7 @@ var gzopen : Tgzopen;
 Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
-     compile_time,compile_version:string;
+     compile_time,compile_version, lclver : string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
      nightvision : Boolean;
