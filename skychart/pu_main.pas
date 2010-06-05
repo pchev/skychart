@@ -497,6 +497,22 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowAsteroidsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowCometsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowLineMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowLabelsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowMarkMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowPlanetsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonswitchbackgroundMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonswitchstarsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure VariableStar1Click(Sender: TObject);
     procedure View1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
@@ -1820,6 +1836,7 @@ else rot:=15;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
 end;
 
+
 procedure Tf_main.VariableStar1Click(Sender: TObject);
 begin
   ExecNoWait(varobs);
@@ -2698,6 +2715,24 @@ begin
  activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
 end;
 
+procedure Tf_main.ToolButtonShowPlanetsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if ssRight in Shift then SetupSolsysPage(1);
+end;
+
+procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if ssRight in Shift then SetupSolsysPage(3);
+end;
+
+procedure Tf_main.ToolButtonShowCometsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if ssRight in Shift then SetupSolsysPage(2);
+end;
+
 procedure Tf_main.SetupSolSysExecute(Sender: TObject);
 begin
  SetupSolsysPage(0);
@@ -2953,6 +2988,36 @@ begin
  activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
 end;
 
+procedure Tf_main.ToolButtonShowLabelsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if ssRight in Shift then SetupDisplayPage(5);
+end;
+
+procedure Tf_main.ToolButtonShowLineMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if ssRight in Shift then SetupDisplayPage(4);
+end;
+
+procedure Tf_main.ToolButtonswitchstarsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if ssRight in Shift then SetupDisplayPage(0);
+end;
+
+procedure Tf_main.ToolButtonswitchbackgroundMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if ssRight in Shift then SetupDisplayPage(3);
+end;
+
+procedure Tf_main.ToolButtonShowMarkMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if ssRight in Shift then SetupDisplayPage(7);
+end;
+
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
 begin
 SetupDisplayPage(0);
@@ -2997,6 +3062,7 @@ cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
+ConfigDisplay.Notebook1.PageIndex:=pagegroup;
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
@@ -3551,6 +3617,8 @@ for i:=1 to 10 do def_cfgsc.rectangle[i,3]:=0;
 for i:=1 to 10 do def_cfgsc.rectangle[i,4]:=0;
 for i:=1 to 10 do def_cfgsc.rectangleok[i]:=false;
 for i:=1 to 10 do def_cfgsc.rectanglelbl[i]:='';
+def_cfgsc.CircleLabel:=true;
+def_cfgsc.RectangleLabel:=true;
 def_cfgsc.circle[1,1]:=240;
 def_cfgsc.circle[2,1]:=120;
 def_cfgsc.circle[3,1]:=30;
@@ -3941,6 +4009,8 @@ end;
 try
 section:='Finder';
 csc.ShowCircle:=ReadBool(section,'ShowCircle',csc.ShowCircle);
+csc.CircleLabel:=ReadBool(section,'CircleLabel',csc.CircleLabel);
+csc.RectangleLabel:=ReadBool(section,'RectangleLabel',csc.RectangleLabel);
 for i:=1 to 10 do csc.circle[i,1]:=ReadFloat(section,'Circle'+inttostr(i),csc.circle[i,1]);
 for i:=1 to 10 do csc.circle[i,2]:=ReadFloat(section,'CircleR'+inttostr(i),csc.circle[i,2]);
 for i:=1 to 10 do csc.circle[i,3]:=ReadFloat(section,'CircleOffset'+inttostr(i),csc.circle[i,3]);
@@ -4549,6 +4619,8 @@ for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog
 for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
 section:='Finder';
 WriteBool(section,'ShowCircle',csc.ShowCircle);
+WriteBool(section,'CircleLabel',csc.CircleLabel);
+WriteBool(section,'RectangleLabel',csc.RectangleLabel);
 for i:=1 to 10 do WriteFloat(section,'Circle'+inttostr(i),csc.circle[i,1]);
 for i:=1 to 10 do WriteFloat(section,'CircleR'+inttostr(i),csc.circle[i,2]);
 for i:=1 to 10 do WriteFloat(section,'CircleOffset'+inttostr(i),csc.circle[i,3]);
