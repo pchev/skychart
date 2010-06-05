@@ -1963,7 +1963,8 @@ with cnv do begin
    laCenter : xx:=xx-(ts.cx div 2);
   end;
   case Yalign of
-   laBottom : yy:=yy-ts.cy;
+   laTop    : yy:=yy-r;
+   laBottom : yy:=yy-ts.cy+r;
    laCenter : yy:=yy-(ts.cy div 2);
   end;
   end;

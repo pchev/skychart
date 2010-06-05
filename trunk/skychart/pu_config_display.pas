@@ -44,6 +44,8 @@ type
     BtnWBColor: TButton;
     BtnBWColor: TButton;
     Button6: TButton;
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     DrawAllStarLabel: TCheckBox;
     DrawPmBox: TCheckBox;
     DrawPMy: TLongEdit;
@@ -332,6 +334,8 @@ type
     procedure Button6Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
     procedure DrawAllStarLabelClick(Sender: TObject);
     procedure DrawPMyChange(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
@@ -656,6 +660,7 @@ cb8.caption:=rsNo+' 8';
 cb9.caption:=rsNo+' 9';
 cb10.caption:=rsNo+' 10';
 CenterMark1.caption:=rsMarkTheChart;
+CheckBox1.Caption:=rsShowLabels;
 Page9.caption:=rsFinderRectan;
 Label308.caption:=rsFinderRectan;
 rb1.caption:=rsNo+' 1';
@@ -669,6 +674,7 @@ rb8.caption:=rsNo+' 8';
 rb9.caption:=rsNo+' 9';
 rb10.caption:=rsNo+'10';
 CenterMark2.caption:=rsMarkTheChart;
+CheckBox2.Caption:=rsShowLabels;
 Button2.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
@@ -750,6 +756,16 @@ end;
 procedure Tf_config_display.CFStyleChange(Sender: TObject);
 begin
 csc.StyleConstL:=TPenStyle(CFStyle.itemindex);
+end;
+
+procedure Tf_config_display.CheckBox1Click(Sender: TObject);
+begin
+  csc.CircleLabel:=CheckBox1.Checked;
+end;
+
+procedure Tf_config_display.CheckBox2Click(Sender: TObject);
+begin
+csc.RectangleLabel:=CheckBox2.Checked
 end;
 
 procedure Tf_config_display.DrawAllStarLabelClick(Sender: TObject);
@@ -1191,6 +1207,7 @@ for i:=1 to 10 do begin
   circlegrid.Cells[3,i]:=csc.circlelbl[i];
 end;
 CenterMark1.checked:=csc.ShowCircle;
+CheckBox1.Checked:=csc.CircleLabel;
 end;
 
 procedure Tf_config_display.ShowRectangle;
@@ -1224,6 +1241,7 @@ for i:=1 to 10 do begin
   rectanglegrid.Cells[4,i]:=csc.rectanglelbl[i];
 end;
 CenterMark2.checked:=csc.ShowCircle;
+CheckBox2.Checked:=csc.RectangleLabel;
 end;
 
 procedure Tf_config_display.nebuladisplayClick(Sender: TObject);

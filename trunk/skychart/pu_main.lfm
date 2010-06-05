@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 385
+  Left = 347
   Height = 587
-  Top = 124
+  Top = 122
   Width = 904
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 565
+  ClientHeight = 562
   ClientWidth = 904
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 477
+    Height = 474
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 474
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 477
+      Height = 474
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 876
-    Height = 477
+    Height = 474
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 474
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 227
+      Height = 224
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 531
+    Top = 528
     Width = 904
     Align = alBottom
     BevelOuter = bvNone
@@ -3310,7 +3310,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 23
+        Height = 25
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3451,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeVal: TSpinEdit
         Left = 592
-        Height = 20
+        Height = 25
         Hint = 'Time'
         Top = 2
         Width = 56
@@ -3462,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 24
+        Height = 27
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3560,72 +3560,84 @@ object f_main: Tf_main
         Top = 2
         Action = ShowPlanets
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowPlanetsMouseUp
       end
       object ToolButtonShowAsteroids: TToolButton
         Left = 185
         Top = 2
         Action = ShowAsteroids
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowAsteroidsMouseUp
       end
       object ToolButtonShowComets: TToolButton
         Left = 208
         Top = 2
         Action = ShowComets
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowCometsMouseUp
       end
       object ToolButtonShowMilkyWay: TToolButton
         Left = 231
         Top = 2
         Action = ShowMilkyWay
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonGrid: TToolButton
         Left = 254
         Top = 2
         Action = Grid
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonGridEq: TToolButton
         Left = 277
         Top = 2
         Action = GridEQ
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonShowConstellationLine: TToolButton
         Left = 300
         Top = 2
         Action = ShowConstellationLine
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonShowConstellationLimit: TToolButton
         Left = 323
         Top = 2
         Action = ShowConstellationLimit
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonShowGalacticEquator: TToolButton
         Left = 346
         Top = 2
         Action = ShowGalacticEquator
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonShowEcliptic: TToolButton
         Left = 369
         Top = 2
         Action = ShowEcliptic
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLineMouseUp
       end
       object ToolButtonShowMark: TToolButton
         Left = 392
         Top = 2
         Action = ShowMark
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowMarkMouseUp
       end
       object ToolButtonShowLabels: TToolButton
         Left = 415
         Top = 2
         Action = ShowLabels
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowLabelsMouseUp
       end
       object ToolButtonEditlabels: TToolButton
         Left = 438
@@ -3645,6 +3657,7 @@ object f_main: Tf_main
         Top = 2
         Action = switchbackground
         Style = tbsCheck
+        OnMouseUp = ToolButtonswitchbackgroundMouseUp
       end
       object ToolButtonSyncChart: TToolButton
         Left = 515
@@ -3663,6 +3676,7 @@ object f_main: Tf_main
         Top = 2
         Action = switchstars
         Style = tbsCheck
+        OnMouseUp = ToolButtonswitchstarsMouseUp
       end
       object ToolButton2: TToolButton
         Left = 561

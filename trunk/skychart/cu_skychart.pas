@@ -3016,6 +3016,14 @@ for i:=1 to numlabels do begin
      al:=laRight;
      av:=laBottom;
   end;
+  if al=laTop then begin
+     al:=laCenter;
+     av:=laTop;
+  end;
+  if al=laBottom then begin
+     al:=laCenter;
+     av:=laBottom;
+  end;
   txt:=labels[i].txt;
   labelnum:=labels[i].labelnum;
   fontnum:=labels[i].fontnum;
@@ -3038,14 +3046,13 @@ end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;
 var x1,y1,x2,y2,r : double;
-    i : integer;
-    xa,ya,xb,yb:single;
+    i,lid,sz : integer;
+    xa,ya,xb,yb,xla,yla:single;
     pa,xx1,xx2,yy1,yy2,rot,o : single;
     spa,cpa:extended;
     p : array [0..4] of Tpoint;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
-WindowXY(x1,y1,xa,ya,cfgsc);
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
 rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
 for i:=1 to 10 do if cfgsc.circleok[i] then begin
@@ -3059,6 +3066,13 @@ for i:=1 to 10 do if cfgsc.circleok[i] then begin
     WindowXY(x2-r,y2-r,xa,ya,cfgsc);
     WindowXY(x2+r,y2+r,xb,yb,cfgsc);
     Fplot.PlotCircle(xa,ya,xb,yb,Fplot.cfgplot.Color[18],moving);
+    if cfgsc.CircleLabel then begin
+      sz:=trunc(abs(cfgsc.BxGlb*r));
+      xla:=abs(xa+xb)/2;
+      yla:=abs(ya+yb)/2;
+      lid:=GetId(cfgsc.circlelbl[i]);
+      if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,cfgsc.circlelbl[i],laBottom);
+    end;
 end;
 for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
     pa:=deg2rad*cfgsc.rectangle[i,3]*cfgsc.FlipX;
@@ -3081,6 +3095,13 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
     p[3]:=Point(round(xa),round(ya));
     p[4]:=p[0];
     Fplot.PlotPolyline(p,Fplot.cfgplot.Color[18],moving);
+    if cfgsc.RectangleLabel then begin
+      xla:=abs(p[0].X+p[1].X)/2;
+      yla:=abs(p[0].Y+p[1].Y)/2;
+      sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
+      lid:=GetId(cfgsc.rectanglelbl[i]);
+      if sz>=20 then SetLabel(lid,xla,yla,0,2,7,cfgsc.rectanglelbl[i],laBottom);
+    end;
   end;
 end;
 
