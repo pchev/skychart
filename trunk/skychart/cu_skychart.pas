@@ -1162,7 +1162,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
           if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
              else ltxt:=ltxt+formatfloat(f1,magn);
       end;
-      SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
+      SetLabel((j+1)*1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
     end;
     case ipla of
       4 :  begin
@@ -1744,7 +1744,7 @@ begin
 end;
 Procedure FindatPosPlanet;
 begin
- ok:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
+ ok:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,trunc);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1753,12 +1753,12 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
+   ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
  end;
 end;
 Procedure FindatPosAsteroid;
 begin
- ok:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
+ ok:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,trunc);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1767,12 +1767,12 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
+   ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
  end;
 end;
 Procedure FindatPosComet;
 begin
- ok:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,false);
+ ok:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc,trunc);
  while ok do begin
    if i>maxln then break;
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
@@ -1781,7 +1781,7 @@ begin
       text:=text+desc+crlf;
       inc(i);
    end;
-   ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,false);
+   ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
  end;
 end;
 /////////////
@@ -2002,11 +2002,12 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 function DrawDEline(ra,de,da:double):boolean;
-var  n: integer;
+var  n,w: integer;
     x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
+if de=0 then w:=2 else w:=0;
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -2018,7 +2019,7 @@ repeat
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
-    Fplot.Plotline(xxp,yyp,xx,yy,col,0,cfgsc.StyleGrid);
+    Fplot.Plotline(xxp,yyp,xx,yy,col,w,cfgsc.StyleGrid);
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
@@ -2833,7 +2834,9 @@ b2.Left:=b1.Left+b2.Width+8;
 b1.Caption:=rsOK;
 b2.Caption:=rsCancel;
 b1.ModalResult:=mrOk;
+b1.Default:=true;
 b2.ModalResult:=mrCancel;
+b2.Cancel:=true;
 f1.ClientWidth:=e1.Width+16;
 f1.ClientHeight:=b1.top+b1.Height+8;
 e1.Text:=txt;

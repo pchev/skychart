@@ -49,7 +49,7 @@ const cdcversion = 'Version 3.1 svn';
       maxlabels = 1000; //maximum number of label to a chart
       maxmodlabels = 1000; //maximum number of modified labels before older one are replaced
       MaxCircle = 100;
-      MaxDSSurl = 20;
+      MaxDSSurl = 50;
       jd2000 =2451545.0 ;
       jd1950 =2433282.4235;
       jd1900 =2415020.3135;
@@ -264,6 +264,26 @@ const cdcversion = 'Version 3.1 svn';
       URL_DSS8 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=2MASS-H&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
       URL_DSS_NAME9 = 'IRAS 12 micron';
       URL_DSS9 = 'http://skyview.gsfc.nasa.gov/cgi-bin/images?Survey=IRAS12&position=$RAF,$DEF&Size=$FOVX,$FOVY&Pixels=$PIXX,$PIXY&Projection=Tan&Equinox=2000&Return=FITS';
+      URL_DSS_NAME10='All (combined plates)';
+      URL_DSS10='http://archive.stsci.edu/cgi-bin/dss_search?v=all&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME11='Quick-V Survey';
+      URL_DSS11='http://archive.stsci.edu/cgi-bin/dss_search?v=quickv&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME12='DSS1 (POSS1 RED in North, POSS2/UKSTU Blue in south)';
+      URL_DSS12='http://archive.stsci.edu/cgi-bin/dss_search?v=dss1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME13='POSS2/UKSTU Infrared';
+      URL_DSS13='http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_ir&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME14='POSS2/UKSTU Red';
+      URL_DSS14='http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME15='POSS2/UKSTU Blue';
+      URL_DSS15='http://archive.stsci.edu/cgi-bin/dss_search?v=poss2ukstu_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME16='POSS1 Red (First Generation)';
+      URL_DSS16='http://archive.stsci.edu/cgi-bin/dss_search?v=poss1_red&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME17='POSS1 Blue (First Generation)';
+      URL_DSS17='http://archive.stsci.edu/cgi-bin/dss_search?v=poss1_blue&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME18='HST Phase2 (GSC1)';
+      URL_DSS18='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_DSS_NAME19='HST Phase2 (GSC2)';
+      URL_DSS19='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
 
 {$ifdef linux}
       DefaultFontName='Helvetica';

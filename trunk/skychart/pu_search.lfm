@@ -42,7 +42,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 32
+      Height = 26
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -76,7 +76,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 32
+      Height = 26
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -95,7 +95,7 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 21
+      Height = 19
       Top = 14
       Width = 35
       Caption = 'Nebula'
@@ -103,7 +103,7 @@ object f_search: Tf_search
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 32
+      Height = 26
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -122,7 +122,7 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 21
+      Height = 19
       Top = 14
       Width = 21
       Caption = 'Star'
@@ -130,7 +130,7 @@ object f_search: Tf_search
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 32
+      Height = 26
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -149,7 +149,7 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 21
+      Height = 19
       Top = 14
       Width = 62
       Caption = 'Constellation'
@@ -157,7 +157,7 @@ object f_search: Tf_search
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 32
+      Height = 26
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -567,7 +567,7 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 21
+      Height = 19
       Top = 14
       Width = 37
       Caption = 'Planet '
@@ -575,7 +575,7 @@ object f_search: Tf_search
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 32
+      Height = 26
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -598,8 +598,8 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 196
-    ClientWidth = 414
+    ClientHeight = 197
+    ClientWidth = 412
     Columns = 2
     ItemIndex = 0
     Items.Strings = (
@@ -625,6 +625,7 @@ object f_search: Tf_search
     Width = 75
     BorderSpacing.InnerBorder = 4
     Caption = 'Find'
+    Default = True
     OnClick = Button1Click
     TabOrder = 8
   end

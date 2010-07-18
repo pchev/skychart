@@ -4318,3 +4318,7 @@ msgstr ""
 msgid "Prefix name with catalog short name"
 msgstr ""
 
+#: u_translation:rsnextchart
+msgid "Next Chart"
+msgstr ""
+

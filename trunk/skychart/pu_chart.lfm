@@ -209,8 +209,8 @@ object f_chart: Tf_chart
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    left = 304
-    top = 104
+    left = 272
+    top = 128
     object About1: TMenuItem
       Caption = 'About'
       Visible = False
@@ -300,7 +300,7 @@ object f_chart: Tf_chart
     Enabled = False
     Interval = 500
     OnTimer = TelescopeTimerTimer
-    left = 304
+    left = 344
     top = 152
   end
   object BlinkTimer: TTimer

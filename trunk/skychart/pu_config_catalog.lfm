@@ -1,18 +1,17 @@
 object f_config_catalog: Tf_config_catalog
   Left = 379
-  Height = 577
-  Top = 242
-  Width = 522
+  Height = 573
+  Top = 0
+  Width = 523
   ActiveControl = MainPanel
   Caption = 'Catalog'
-  ClientHeight = 577
-  ClientWidth = 522
+  ClientHeight = 573
+  ClientWidth = 523
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = False
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.2'
   object MainPanel: TPanel
     Left = 12
     Height = 520
@@ -36,27 +35,25 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 494
         ClientHeight = 460
         object Label37: TLabel
-          Left = 98
-          Height = 14
+          Left = 71
+          Height = 18
           Top = 17
-          Width = 246
+          Width = 273
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
           ParentColor = False
         end
         object StringGrid3: TStringGrid
+          Left = 0
           Height = 321
           Top = 48
           Width = 482
           ColCount = 6
           DefaultColWidth = 18
           DefaultRowHeight = 18
-          ExtendedSelect = True
-          FixedColor = clBtnFace
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
-          ParentColor = False
           RowCount = 2
           TabOrder = 1
           OnDrawCell = StringGrid3DrawCell
@@ -104,8 +101,9 @@ object f_config_catalog: Tf_config_catalog
       object Page2: TPage
         Caption = 'CdC Stars'
         ClientWidth = 494
-        ClientHeight = 437
+        ClientHeight = 433
         object Label2: TLabel
+          Left = 0
           Height = 20
           Top = 7
           Width = 151
@@ -223,12 +221,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 38
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object Fbsc2: TLongEdit
@@ -238,12 +235,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 38
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object SKYbox: TCheckBox
@@ -267,12 +263,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 66
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object Fsky2: TLongEdit
@@ -282,12 +277,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 66
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object TY2Box: TCheckBox
@@ -311,12 +305,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 94
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object Fty22: TLongEdit
@@ -326,12 +319,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 94
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object GSCFBox: TCheckBox
@@ -435,12 +427,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 122
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object fgscc1: TLongEdit
@@ -450,12 +441,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 150
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 17
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object fusn1: TLongEdit
@@ -465,12 +455,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 178
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 22
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object dsbase1: TLongEdit
@@ -480,12 +469,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 330
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 35
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object dstyc1: TLongEdit
@@ -495,12 +483,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 358
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 39
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object dsgsc1: TLongEdit
@@ -510,12 +497,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 386
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 43
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object dsgsc2: TLongEdit
@@ -525,12 +511,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 386
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 44
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object dstyc2: TLongEdit
@@ -540,12 +525,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 358
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 40
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object dsbase2: TLongEdit
@@ -555,12 +539,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 330
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 36
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object fusn2: TLongEdit
@@ -570,12 +553,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 178
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 23
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object fgscc2: TLongEdit
@@ -585,12 +567,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 150
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 18
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object fgscf2: TLongEdit
@@ -600,12 +581,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 122
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object Fgcv2: TLongEdit
@@ -615,12 +595,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 235
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 27
           OnChange = Fgcv2Change
+          Value = 0
           MaxValue = 10
         end
         object Fwds2: TLongEdit
@@ -630,12 +609,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 286
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 32
           OnChange = Fwds2Change
+          Value = 0
           MaxValue = 10
         end
         object Fwds1: TLongEdit
@@ -645,12 +623,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 286
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 31
           OnChange = Fwds1Change
+          Value = 0
           MaxValue = 10
         end
         object Fgcv1: TLongEdit
@@ -660,12 +637,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 235
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 26
           OnChange = Fgcv1Change
+          Value = 0
           MaxValue = 10
         end
         object GCVBox: TCheckBox
@@ -712,9 +688,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 38
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 3
           OnChange = CDCStarPathChange
         end
@@ -724,9 +700,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 67
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 7
           OnChange = CDCStarPathChange
         end
@@ -736,9 +712,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 94
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 11
           OnChange = CDCStarPathChange
         end
@@ -748,9 +724,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 122
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 15
           OnChange = CDCStarPathChange
         end
@@ -760,9 +736,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 150
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 19
           OnChange = CDCStarPathChange
         end
@@ -772,9 +748,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 179
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 24
           OnChange = CDCStarPathChange
         end
@@ -784,9 +760,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 330
           Width = 111
+          ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 37
           OnChange = CDCStarPathChange
         end
@@ -796,9 +772,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 359
           Width = 111
+          ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 41
           OnChange = CDCStarPathChange
         end
@@ -808,9 +784,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 386
           Width = 111
+          ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 45
           OnChange = CDCStarPathChange
         end
@@ -820,9 +796,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 235
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 28
           OnChange = gcv3Change
         end
@@ -832,9 +808,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 287
           Width = 111
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 33
           OnChange = wds3Change
         end
@@ -842,7 +818,7 @@ object f_config_catalog: Tf_config_catalog
       object Page3: TPage
         Caption = 'CdC Nebulae'
         ClientWidth = 494
-        ClientHeight = 437
+        ClientHeight = 433
         object Label3: TLabel
           Left = 1
           Height = 20
@@ -854,6 +830,7 @@ object f_config_catalog: Tf_config_catalog
         object Label15: TLabel
           Left = 279
           Height = 20
+          Top = 0
           Width = 74
           Alignment = taRightJustify
           Caption = 'Field number'
@@ -904,6 +881,7 @@ object f_config_catalog: Tf_config_catalog
           WordWrap = True
         end
         object PanelDef: TPanel
+          Left = 0
           Height = 45
           Top = 36
           Width = 488
@@ -939,12 +917,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 16
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object fsac2: TLongEdit
@@ -954,12 +931,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 16
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object sac3: TDirectoryEdit
@@ -968,14 +944,15 @@ object f_config_catalog: Tf_config_catalog
             Height = 21
             Top = 16
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 3
             OnChange = CDCNebPathChange
           end
         end
         object PanelGen: TPanel
+          Left = 0
           Height = 45
           Top = 84
           Width = 488
@@ -1011,12 +988,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 11
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 1
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object fngc2: TLongEdit
@@ -1026,12 +1002,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 11
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 2
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object ngc3: TDirectoryEdit
@@ -1040,14 +1015,15 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 11
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 3
             OnChange = CDCNebPathChange
           end
         end
         object PanelSpec: TPanel
+          Left = 0
           Height = 250
           Top = 132
           Width = 488
@@ -1195,12 +1171,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 8
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 6
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object flbn2: TLongEdit
@@ -1210,12 +1185,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 8
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 7
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object frc31: TLongEdit
@@ -1225,12 +1199,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 48
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 8
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object frc32: TLongEdit
@@ -1240,12 +1213,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 48
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 9
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object fpgc1: TLongEdit
@@ -1255,12 +1227,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 73
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 10
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object fpgc2: TLongEdit
@@ -1270,12 +1241,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 73
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 11
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object focl1: TLongEdit
@@ -1285,12 +1255,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 113
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 12
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object focl2: TLongEdit
@@ -1300,12 +1269,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 113
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 13
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object fgcm1: TLongEdit
@@ -1315,12 +1283,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 153
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 14
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object fgcm2: TLongEdit
@@ -1330,12 +1297,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 153
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 15
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object fgpn1: TLongEdit
@@ -1345,12 +1311,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 193
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 16
             OnChange = CDCNebField1Change
+            Value = 0
             MaxValue = 10
           end
           object fgpn2: TLongEdit
@@ -1360,12 +1325,11 @@ object f_config_catalog: Tf_config_catalog
             Hint = '0..10'
             Top = 193
             Width = 30
-            BorderStyle = bsSingle
-            ParentColor = False
             ParentShowHint = False
             ShowHint = True
             TabOrder = 17
             OnChange = CDCNebField2Change
+            Value = 0
             MaxValue = 10
           end
           object lbn3: TDirectoryEdit
@@ -1374,9 +1338,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 10
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 18
             OnChange = CDCNebPathChange
           end
@@ -1386,9 +1350,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 50
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 19
             OnChange = CDCNebPathChange
           end
@@ -1398,9 +1362,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 75
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 20
             OnChange = CDCNebPathChange
           end
@@ -1410,9 +1374,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 115
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 21
             OnChange = CDCNebPathChange
           end
@@ -1422,9 +1386,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 155
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 22
             OnChange = CDCNebPathChange
           end
@@ -1434,9 +1398,9 @@ object f_config_catalog: Tf_config_catalog
             Height = 19
             Top = 195
             Width = 104
+            ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            ParentColor = False
             TabOrder = 23
             OnChange = CDCNebPathChange
           end
@@ -1445,8 +1409,9 @@ object f_config_catalog: Tf_config_catalog
       object Page4: TPage
         Caption = 'Obsolete'
         ClientWidth = 494
-        ClientHeight = 437
+        ClientHeight = 433
         object Label88: TLabel
+          Left = 0
           Height = 15
           Top = 7
           Width = 314
@@ -1523,12 +1488,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 43
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 1
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object Ftyc2: TLongEdit
@@ -1538,12 +1502,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 43
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 2
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object TICbox: TCheckBox
@@ -1567,12 +1530,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 104
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 5
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object Ftic2: TLongEdit
@@ -1582,12 +1544,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 104
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 6
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object GSCbox: TCheckBox
@@ -1611,12 +1572,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 168
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 9
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object fgsc2: TLongEdit
@@ -1626,12 +1586,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 168
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 10
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object MCTBox: TCheckBox
@@ -1655,12 +1614,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 237
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 13
           OnChange = CDCStarField1Change
+          Value = 0
           MaxValue = 10
         end
         object fmct2: TLongEdit
@@ -1670,12 +1628,11 @@ object f_config_catalog: Tf_config_catalog
           Hint = '0..10'
           Top = 237
           Width = 30
-          BorderStyle = bsSingle
-          ParentColor = False
           ParentShowHint = False
           ShowHint = True
           TabOrder = 14
           OnChange = CDCStarField2Change
+          Value = 0
           MaxValue = 10
         end
         object tyc3: TDirectoryEdit
@@ -1684,9 +1641,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 45
           Width = 108
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 3
           OnChange = CDCStarPathChange
         end
@@ -1696,9 +1653,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 106
           Width = 108
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 7
           OnChange = CDCStarPathChange
         end
@@ -1708,9 +1665,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 170
           Width = 108
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 11
           OnChange = CDCStarPathChange
         end
@@ -1720,9 +1677,9 @@ object f_config_catalog: Tf_config_catalog
           Height = 21
           Top = 237
           Width = 108
+          ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          ParentColor = False
           TabOrder = 15
           OnChange = CDCStarPathChange
         end
@@ -1848,14 +1805,15 @@ object f_config_catalog: Tf_config_catalog
     end
   end
   object Panel1: TPanel
+    Left = 0
     Height = 50
-    Top = 527
-    Width = 522
+    Top = 523
+    Width = 523
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 522
+    ClientWidth = 523
     TabOrder = 1
     object DirOpenImg: TImage
       Left = 8
@@ -1889,6 +1847,7 @@ object f_config_catalog: Tf_config_catalog
       Width = 75
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
+      Default = True
       ModalResult = 1
       TabOrder = 0
     end
@@ -1908,6 +1867,7 @@ object f_config_catalog: Tf_config_catalog
       Top = 15
       Width = 75
       BorderSpacing.InnerBorder = 4
+      Cancel = True
       Caption = 'Cancel'
       ModalResult = 2
       TabOrder = 2

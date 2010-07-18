@@ -1066,6 +1066,8 @@ begin
  WriteTrace('GridExecute');
 {$endif}
  sc.cfgsc.ShowGrid := not sc.cfgsc.ShowGrid;
+ if sc.cfgsc.projpole=Equat then
+    sc.cfgsc.ShowEqGrid:=sc.cfgsc.ShowGrid;
  Refresh;
 end;
 
@@ -1419,8 +1421,11 @@ if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
    if zoomstep>0 then begin
      ZoomBox(3,X,Y);
    end
-   else
+   else begin
      IdentXY(x,y);
+     xcursor:=x;
+     ycursor:=y;
+   end;
 end
 else if (button=mbLeft)and(ssCtrl in shift) then begin
    IdentXY(x,y,false);
@@ -2096,139 +2101,82 @@ end;
 
 
 function Tf_Chart.cmd_SetCursorPosition(x,y:integer) :string;
-
 begin
-
 if (x>=0)and(x<=image1.width)and(y>=0)and(y<=image1.height) then begin
-
   xcursor:=x;
-
   ycursor:=y;
-
   result:=msgOK;
-
 end else result:=msgfailed+' Bad position.';
-
 end;
 
 
 function Tf_Chart.cmd_GetCursorPosition :string;
-
 begin
-
 result:=msgOK+blank+inttostr(xcursor)+blank+inttostr(ycursor);
-
 end;
 
 
 function Tf_Chart.cmd_SetGridEQ(onoff:string):string;
-
 begin
-
  sc.cfgsc.ShowEqGrid := (uppercase(onoff)='ON');
-
  result:=msgOK;
-
 end;
 
 function Tf_Chart.cmd_GetGridEQ:string;
 begin
-
  if sc.cfgsc.ShowEqGrid then result:=msgOK+' ON'
-
                         else result:=msgOK+' OFF'
-
 end;
 
 function Tf_Chart.cmd_SetGrid(onoff:string):string;
 begin
-
  sc.cfgsc.ShowGrid := (uppercase(onoff)='ON');
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_GetGrid:string;
-
 begin
-
  if sc.cfgsc.ShowGrid then result:=msgOK+' ON'
-
                       else result:=msgOK+' OFF'
-
 end;
-
 
 function Tf_Chart.cmd_SetGridNum(onoff:string):string;
-
 begin
-
  sc.cfgsc.ShowGridNum := (uppercase(onoff)='ON');
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_SetConstL(onoff:string):string;
-
 begin
-
  sc.cfgsc.ShowConstl := (uppercase(onoff)='ON');
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_SetConstB(onoff:string):string;
-
 begin
-
  sc.cfgsc.ShowConstB := (uppercase(onoff)='ON');
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_SwitchGridNum:string;
-
 begin
-
  sc.cfgsc.ShowGridNum := not sc.cfgsc.ShowGridNum;
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_SwitchConstL:string;
-
 begin
-
  sc.cfgsc.ShowConstl := not sc.cfgsc.ShowConstl;
-
  result:=msgOK;
-
 end;
-
 
 function Tf_Chart.cmd_SwitchConstB:string;
-
 begin
-
  sc.cfgsc.ShowConstB := not sc.cfgsc.ShowConstB;
-
  result:=msgOK;
-
 end;
 
-
 function Tf_chart.cmd_SetStarMode(i:integer):string;
-
 begin
 if (i>=0)and(i<=2) then begin
   sc.plot.cfgplot.starplot:=i;
@@ -2590,8 +2538,8 @@ begin
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=min(16,sc.catalog.cfgshr.AutoStarFilterMag+0.5)
 else begin
-   sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=min(sc.plot.cfgchart.max_catalog_mag,sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5);
-   if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
+  sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]+0.5;
+  if sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]>sc.plot.cfgchart.max_catalog_mag then sc.catalog.cfgshr.StarMagFilter[sc.cfgsc.FieldNum]:=99;
 end;
 refresh;
 end;

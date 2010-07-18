@@ -2615,6 +2615,10 @@ msgstr ""
 msgid "Next   >>"
 msgstr ""
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr ""

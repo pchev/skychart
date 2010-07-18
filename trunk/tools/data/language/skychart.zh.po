@@ -2481,6 +2481,10 @@ msgstr "新建标签"
 msgid "Next   >>"
 msgstr "下一步>>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr "夜视"

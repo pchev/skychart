@@ -2479,6 +2479,10 @@ msgstr "Nieuw label"
 msgid "Next   >>"
 msgstr "Volgende >>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr "Nachtzicht"
