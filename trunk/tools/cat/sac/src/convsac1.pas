@@ -1,13 +1,18 @@
 unit convsac1;
 
+{$MODE Delphi}
+
 interface
 
 uses
   math,StrUtils,
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, DBTables, StdCtrls;
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, LResources;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
     Button1: TButton;
     Edit1: TEdit;
@@ -34,7 +39,6 @@ var
 
 implementation
 
-{$R *.DFM}
 const
     lg_reg_x : array [0..5,1..2] of integer = (
 (   4, 47),(  9, 38),( 12, 26),
@@ -105,12 +109,14 @@ assignfile(s,'size.txt');
 rewrite(s);
 Assignfile(F,pathi);
 Reset(F);
+// header line
+Readln(F,lin);
 i:=0;
 repeat
   inc(i);
   Readln(F,lin);
-form1.Edit3.Text:=inttostr(i);
-//Form1.Update;
+if (i mod 100)=0 then form1.Edit3.Text:=inttostr(i);
+Application.ProcessMessages;
   ss1:=trim(nextword(lin))+blanc;
   ss2:=trim(nextword(lin))+blanc;
   if copy(ss2,1,2)='M ' then begin
@@ -168,8 +174,8 @@ form1.Edit3.Text:=inttostr(i);
   buf:=trim(nextword(lin));        // U2K
   buf:=trim(nextword(lin));        // TI
   buf:=nextword(lin);
-  ss1:=replacestr(copy(buf,1,7),'<','');
-  ss1:=trim(replacestr(ss1,'?',''));
+  ss1:=StringReplace(copy(buf,1,7),'<','',[rfReplaceAll]);
+  ss1:=trim(StringReplace(ss1,'?','',[rfReplaceAll]));
   if ss1='' then out.s1:=0
   else case buf[8] of
      'd' : out.s1:=strtofloat(ss1)*60;
@@ -178,8 +184,8 @@ form1.Edit3.Text:=inttostr(i);
      else showmessage('erreur s1 '+buf+'  '+inttostr(i));
   end;
   buf:=nextword(lin);
-  ss1:=replacestr(copy(buf,1,7),'<','');
-  ss1:=trim(replacestr(ss1,'?',''));
+  ss1:=StringReplace(copy(buf,1,7),'<','',[rfReplaceAll]);
+  ss1:=trim(StringReplace(ss1,'?','',[rfReplaceAll]));
   if ss1='' then out.s2:=out.s1
   else case buf[8] of
      'd' : out.s2:=strtofloat(ss1)*60;
@@ -232,14 +238,14 @@ Close(F);
 Close(s);
 nl:=i;
 form1.Edit3.Text:=inttostr(i);
-Form1.Update;
+Application.ProcessMessages;
 end;
 
 procedure wrt_lg(lgnum:integer);
 var i,n,zone :integer;
     ar,de : double;
 begin
-assignfile(fb,patho+'\'+padzeros(inttostr(lgnum),2)+'.dat');
+assignfile(fb,patho+PathDelim+padzeros(inttostr(lgnum),2)+'.dat');
 Rewrite(fb);
 i:=0;
 for n:=1 to nl do begin
@@ -257,7 +263,7 @@ for n:=1 to nl do begin
   end;
 end;
 form1.Edit3.Text:=inttostr(i);
-Form1.Update;
+Application.ProcessMessages;
 close(fb);
 end;
 
@@ -266,11 +272,15 @@ var lgnum : integer;
 begin
 pathi:=edit1.text;
 patho:=edit2.text;
+ForceDirectories(patho);
 Lecture;
 for lgnum:=1 to 50 do begin
   Edit1.Text:=inttostr(lgnum);
   wrt_lg(lgnum);
 end;
 end;
+
+initialization
+  {$i convsac1.lrs}
 
 end.

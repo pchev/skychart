@@ -1,0 +1,45 @@
+object Form1: TForm1
+  Left = 457
+  Height = 185
+  Top = 54
+  Width = 370
+  ActiveControl = Edit1
+  Caption = 'Form1'
+  ClientHeight = 185
+  ClientWidth = 370
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  LCLVersion = '0.9.28.2'
+  object Button1: TButton
+    Left = 264
+    Height = 25
+    Top = 32
+    Width = 75
+    Caption = 'insert'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Edit2: TEdit
+    Left = 24
+    Height = 26
+    Top = 80
+    Width = 217
+    TabOrder = 1
+    Text = 'sac81'
+  end
+  object Edit3: TEdit
+    Left = 24
+    Height = 26
+    Top = 128
+    Width = 121
+    TabOrder = 2
+  end
+  object Edit1: TEdit
+    Left = 24
+    Height = 26
+    Top = 24
+    Width = 217
+    TabOrder = 3
+    Text = 'SAC_DeepSky_Ver81_QCQ.TXT'
+  end
+end

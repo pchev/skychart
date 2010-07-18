@@ -1,11 +1,13 @@
 unit idxsac1;
 
+{$MODE Delphi}
+
 interface
 
 uses
   math,StrUtils,
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  DB, DBTables, StdCtrls;
+  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, LResources;
 
 type
   TForm1 = class(TForm)
@@ -37,7 +39,6 @@ var
 
 implementation
 
-{$R *.DFM}
 const
 maxl = 30000;
 
@@ -77,6 +78,7 @@ const blanc='                                                                  '
 begin
 Assignfile(F,pathi);
 Reset(F);
+Readln(F,lin);
 i:=0;
 repeat
   inc(i);
@@ -138,8 +140,8 @@ repeat
   buf:=trim(nextword(lin));        // U2K
   buf:=trim(nextword(lin));        // TI
   buf:=nextword(lin);
-  ss1:=replacestr(copy(buf,1,7),'<','');
-  ss1:=trim(replacestr(ss1,'?',''));
+  ss1:=StringReplace(copy(buf,1,7),'<','',[rfReplaceAll]);
+  ss1:=trim(StringReplace(ss1,'?','',[rfReplaceAll]));
   if ss1='' then out.s1:=0
   else case buf[8] of
      'd' : out.s1:=strtofloat(ss1)*60;
@@ -148,8 +150,8 @@ repeat
      else showmessage('erreur s1 '+buf+'  '+inttostr(i));
   end;
   buf:=nextword(lin);
-  ss1:=replacestr(copy(buf,1,7),'<','');
-  ss1:=trim(replacestr(ss1,'?',''));
+  ss1:=StringReplace(copy(buf,1,7),'<','',[rfReplaceAll]);
+  ss1:=trim(StringReplace(ss1,'?','',[rfReplaceAll]));
   if ss1='' then out.s2:=out.s1
   else case buf[8] of
      'd' : out.s2:=strtofloat(ss1)*60;
@@ -274,5 +276,8 @@ patho:=edit2.text;
   Ecriture;
 edit3.text:='terminé '+inttostr(nl);
 end;
+
+initialization
+  {$i idxsac1.lrs}
 
 end.

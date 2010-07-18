@@ -8,10 +8,10 @@ became more massive and we believe that it now covers a large portion of
 what could be seen in a telescope in the 10" to 14" range.  Addition of
 many more objects will add many small and faint galaxies, seeing as that
 is about all that remains below 14 magnitude.  We do not relish this task
-and probably will not undertake such a large work.
+and have no plans to undertake such a large work.
 
 Version 1.0 consisted of 1100 objects down to a magnitude limit of about
-11.5.  It was also the beginning of the navstar and multistr files.
+11.5.  It was also the beginning of the multiple star file.
 
 Version 2.0 started to add a variety of objects from the RNGC.  We soon
 discovered an excellent list of corrections from Brian Skiff and Dr.
@@ -53,7 +53,7 @@ Version 5.2 added several corrections, given in the file "errata50.txt".
 Dan Ward updated the Report Generator.
 
 Several internal versions existed within the SAC as we updated the
-information and Dan Ward set up Report Generator to accomodate the
+information and Dan Ward set up Report Generator to accommodate the
 changes.  We dropped the SOURCE field, finding that we where doing a
 poor job of keeping track of where each objects info source.  We
 added the SUBR field with info from RC3 on surface brightness.
@@ -76,12 +76,62 @@ consistent, such as finding a magnitude that was given as 08 and
 changing that to 08.0, so that all the data appears the same to
 the computer.
 
-Several SAC members have been working with the NGC project to 
+Version 7.0 is an outgrowth of the NGC project (www.ngcic.org) to 
 update the NGC and make certain that all the objects are identified
 with the correct object in the sky.  The fruit of this undertaking
-is in Version 7.0.  Dr. Harold Corwin and Wolfgang Steinike have
+is in Version 7.0.  Dr. Harold Corwin and Wolfgang Steinicke have
 provided info on many NGC objects and have solved many puzzles 
 concerning the NGC.  The number of truly unknown or unverified
 objects has shrunk to a fraction of where we began and this 
 version of the SAC database reflects that work.
+
+Version 7.1 quickly followed 7.0 to fix several small, but
+insidious, errors.  Four objects had quote marks within the
+text and that created problems with importing the data into
+a spreadsheet.  There was no "surface brightness" for about
+50 objects.  And, NGC 2736 is a bright nebula, not a galaxy.
+So, an afternoon spent repairing these problems makes version
+7.1 as good as the SAC database as ever been, enjoy.
+
+Version 7.2 also fixes a few errors, some of the NGC description
+fields have capital "RI" which should be "Ri" for "Rich" cluster.
+Also, a few places have a double comma with no quote between,
+this confuses some database manager programs.  A few spelling
+errors and typos in the Notes were also fixed.
+
+Versions 7.3 and 7.4 are internal to the SAC group working on
+the database.  They include changes in the data and additions
+to the brightnesses of central stars of planetary nebulae and
+open cluster data.  A few objects were both added and deleted.
+
+Version 7.5 is a release that taught me quite a bit about using
+Excel as a database manager.  It seemed to me that if you insert
+a group of three objects, that Excel would create three rows for
+the program so that the insert operation would not overwrite
+prefectly good data.  
+Not So!  In short, don't use version 7.5.
+
+Version 7.7 is the latest release.  A big thank you to Auke 
+Slotgraaf for help in double checking.
+
+Version 8.0 gave us an opportunity to deal with the Barnard
+Dark Nebulae.  The data we used in the past had grouped several
+of these nebulae all together on one line and that is difficult
+for a computer search routine to utilize.  So, this version
+has each Barnard number given its own record.  All the 'B'
+numbers are not provided, mostly because they are not very
+distinct. This version also fixed a few remaining errors, mostly
+in the NOTES area.
+
+Version 8.1 provided a chance to take on a variety of small
+errata that had been missed over the years.  Stephen Schrimpf
+and I combed through the data and looked for some small and
+persistent errata.
+
+NOTE:  from April 2010 forward we will update a text file
+on the SAC website which will contain any problems to be
+fixed.  I have no doubt that there are a few, but we have 
+done a fine job up to now keeping the data as free from
+errors as we can.  From now on, users can update their own
+copy of the data.
 
