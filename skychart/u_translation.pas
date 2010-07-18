@@ -1094,6 +1094,7 @@ resourcestring
   rsIconClickAct = 'Icon click action';
   rsAction = 'Action';
   rsPrefixNameWi = 'Prefix name with catalog short name';
+  rsNextChart = 'Next Chart';
 
 implementation
 

@@ -2481,6 +2481,10 @@ msgstr "Новая метка"
 msgid "Next   >>"
 msgstr "Далее >>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr "Ночной режим"

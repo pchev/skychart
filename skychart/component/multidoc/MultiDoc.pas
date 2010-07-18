@@ -113,6 +113,10 @@ type
     }
     function NewChild:TChildDoc;
     {
+     Focus next child on list
+    }
+    function NexChild:integer;
+    {
      Cascade the windows
     }
     procedure Cascade;
@@ -283,6 +287,19 @@ if DefaultPos.Y>10*FTitleHeight then begin
    if DefaultPos.X>30*FTitleHeight then DefaultPos.X:=0;
 end;
 result:=FChild[FChildIndex];
+end;
+
+function TMultiDoc.NexChild:integer;
+var i: integer;
+begin
+result:=0;
+if FChildIndex>0 then begin
+   i:=FActiveChild;
+   inc(i);
+   if i>FChildIndex then i:=0;
+   SetActiveChild(i);
+   result:=i;
+end;
 end;
 
 procedure TMultiDoc.FormCloseQuery(Sender: TObject; var CanClose: boolean);

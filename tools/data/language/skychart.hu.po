@@ -2993,6 +2993,10 @@ msgstr "Új címke"
 msgid "Next   >>"
 msgstr "Következő >>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 #, fuzzy
 #| msgid "Night Vision"

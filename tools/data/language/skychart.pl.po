@@ -2485,6 +2485,10 @@ msgstr "Nowa etykieta"
 msgid "Next   >>"
 msgstr "Następny >>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr "Tryb nocny"

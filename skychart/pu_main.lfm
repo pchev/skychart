@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 347
-  Height = 587
-  Top = 122
+  Left = 70
+  Height = 373
+  Top = 91
   Width = 904
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 565
+  ClientHeight = 348
   ClientWidth = 904
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 477
+    Height = 260
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 260
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 477
+      Height = 260
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 876
-    Height = 477
+    Height = 260
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 477
+    ClientHeight = 260
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 227
+      Height = 10
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 531
+    Top = 314
     Width = 904
     Align = alBottom
     BevelOuter = bvNone
@@ -3310,7 +3310,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 23
+        Height = 25
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3451,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeVal: TSpinEdit
         Left = 592
-        Height = 22
+        Height = 25
         Hint = 'Time'
         Top = 2
         Width = 56
@@ -3462,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 24
+        Height = 27
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3821,6 +3821,12 @@ object f_main: Tf_main
         Action = SetupInternet
         OnClick = SetupInternetExecute
       end
+      object ReloadLanguage1: TMenuItem
+        Caption = 'Reload Language'
+        ShortCut = 16460
+        Visible = False
+        OnClick = ReloadLanguage1Click
+      end
       object MenuItem26: TMenuItem
         Caption = '-'
       end
@@ -3850,11 +3856,13 @@ object f_main: Tf_main
       object FullScreen1: TMenuItem
         Action = ViewFullScreen
         GroupIndex = 2
+        ShowAlwaysCheckable = True
         OnClick = ViewFullScreenExecute
       end
       object NightVision1: TMenuItem
         Caption = 'Night Vision'
         GroupIndex = 2
+        ShowAlwaysCheckable = True
         OnClick = ToolButtonNightVisionClick
       end
       object oolBar1: TMenuItem
@@ -3865,34 +3873,40 @@ object f_main: Tf_main
           Caption = 'All Tools Bar'
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewBarExecute
         end
         object N5: TMenuItem
           Caption = '-'
           GroupIndex = 2
+          ShowAlwaysCheckable = True
         end
         object MainBar1: TMenuItem
           Action = ViewMainBar
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewMainBarExecute
         end
         object ObjectBar1: TMenuItem
           Action = ViewObjectBar
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewObjectBarExecute
         end
         object LeftBar1: TMenuItem
           Action = ViewLeftBar
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewLeftBarExecute
         end
         object RightBar1: TMenuItem
           Action = ViewRightBar
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewRightBarExecute
         end
         object ViewStatusBar1: TMenuItem
@@ -3900,6 +3914,7 @@ object f_main: Tf_main
           Caption = 'Status Bar'
           Checked = True
           GroupIndex = 2
+          ShowAlwaysCheckable = True
           OnClick = ViewStatusExecute
         end
       end
@@ -3954,6 +3969,7 @@ object f_main: Tf_main
       end
       object Menuswitchbackground: TMenuItem
         Action = switchbackground
+        ShowAlwaysCheckable = True
         OnClick = switchbackgroundExecute
       end
     end
@@ -3964,20 +3980,24 @@ object f_main: Tf_main
         Caption = 'Projection'
         object EquatorialCoordinate1: TMenuItem
           Action = EquatorialProjection
+          ShowAlwaysCheckable = True
           OnClick = EquatorialProjectionExecute
         end
         object AltAzProjection1: TMenuItem
           Action = AltAzProjection
+          ShowAlwaysCheckable = True
           OnClick = AltAzProjectionExecute
         end
         object EclipticProjection1: TMenuItem
           Action = EclipticProjection
           Caption = 'Ecliptic Coordinate'
+          ShowAlwaysCheckable = True
           OnClick = EclipticProjectionExecute
         end
         object GalacticProjection1: TMenuItem
           Action = GalacticProjection
           Caption = 'Galactic Coordinate'
+          ShowAlwaysCheckable = True
           OnClick = GalacticProjectionExecute
         end
       end
@@ -3985,18 +4005,22 @@ object f_main: Tf_main
         Caption = 'Transformation'
         object FlipX1: TMenuItem
           Action = FlipX
+          ShowAlwaysCheckable = True
           OnClick = FlipXExecute
         end
         object FlipY1: TMenuItem
           Action = FlipY
+          ShowAlwaysCheckable = True
           OnClick = FlipYExecute
         end
         object rotplus1: TMenuItem
           Action = rot_plus
+          ShowAlwaysCheckable = True
           OnClick = rot_plusExecute
         end
         object rotminus1: TMenuItem
           Action = rot_minus
+          ShowAlwaysCheckable = True
           OnClick = rot_minusExecute
         end
       end
@@ -4079,34 +4103,42 @@ object f_main: Tf_main
         Caption = 'Show Objects'
         object ShowStars1: TMenuItem
           Action = ShowStars
+          ShowAlwaysCheckable = True
           OnClick = ShowStarsExecute
         end
         object ShowNebulae1: TMenuItem
           Action = ShowNebulae
+          ShowAlwaysCheckable = True
           OnClick = ShowNebulaeExecute
         end
         object ShowPictures1: TMenuItem
           Action = ShowPictures
+          ShowAlwaysCheckable = True
           OnClick = ShowPicturesExecute
         end
         object ShowLines1: TMenuItem
           Action = ShowLines
+          ShowAlwaysCheckable = True
           OnClick = ShowLinesExecute
         end
         object ShowPlanets1: TMenuItem
           Action = ShowPlanets
+          ShowAlwaysCheckable = True
           OnClick = ShowPlanetsExecute
         end
         object ShowAsteroids1: TMenuItem
           Action = ShowAsteroids
+          ShowAlwaysCheckable = True
           OnClick = ShowAsteroidsExecute
         end
         object ShowComets1: TMenuItem
           Action = ShowComets
+          ShowAlwaysCheckable = True
           OnClick = ShowCometsExecute
         end
         object ShowMilkyWay1: TMenuItem
           Action = ShowMilkyWay
+          ShowAlwaysCheckable = True
           OnClick = ShowMilkyWayExecute
         end
       end
@@ -4114,30 +4146,37 @@ object f_main: Tf_main
         Caption = 'Lines / Grid'
         object Grid1: TMenuItem
           Action = Grid
+          ShowAlwaysCheckable = True
           OnClick = GridExecute
         end
         object GridEQ1: TMenuItem
           Action = GridEQ
+          ShowAlwaysCheckable = True
           OnClick = GridEQExecute
         end
         object ShowConstellationLine1: TMenuItem
           Action = ShowConstellationLine
+          ShowAlwaysCheckable = True
           OnClick = ShowConstellationLineExecute
         end
         object ShowConstellationLimit1: TMenuItem
           Action = ShowConstellationLimit
+          ShowAlwaysCheckable = True
           OnClick = ShowConstellationLimitExecute
         end
         object ShowGalacticEquator1: TMenuItem
           Action = ShowGalacticEquator
+          ShowAlwaysCheckable = True
           OnClick = ShowGalacticEquatorExecute
         end
         object ShowEcliptic1: TMenuItem
           Action = ShowEcliptic
+          ShowAlwaysCheckable = True
           OnClick = ShowEclipticExecute
         end
         object ShowMark1: TMenuItem
           Action = ShowMark
+          ShowAlwaysCheckable = True
           OnClick = ShowMarkExecute
         end
       end
@@ -4186,6 +4225,7 @@ object f_main: Tf_main
       GroupIndex = 2
       object telescopeConnect1: TMenuItem
         Action = TelescopeConnect
+        ShowAlwaysCheckable = True
         OnClick = TelescopeConnectExecute
       end
       object ControlPanel1: TMenuItem
@@ -4215,6 +4255,11 @@ object f_main: Tf_main
       end
       object MenuItem28: TMenuItem
         Caption = '-'
+      end
+      object NextChild1: TMenuItem
+        Caption = 'NextChild'
+        ShortCut = 16393
+        OnClick = NextChild1Click
       end
       object WindowCascadeItem: TMenuItem
         Caption = '&Cascade'

@@ -1,7 +1,7 @@
 object f_config_internet: Tf_config_internet
-  Left = 614
+  Left = 526
   Height = 484
-  Top = 91
+  Top = 88
   Width = 489
   ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
@@ -13,7 +13,7 @@ object f_config_internet: Tf_config_internet
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.28.2'
   object MainPanel: TPanel
     Left = 0
     Height = 434
@@ -45,7 +45,7 @@ object f_config_internet: Tf_config_internet
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 185
+          ClientHeight = 182
           ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
@@ -62,7 +62,7 @@ object f_config_internet: Tf_config_internet
             Height = 137
             Top = 40
             Width = 369
-            ClientHeight = 121
+            ClientHeight = 133
             ClientWidth = 365
             TabOrder = 1
             object Label2: TLabel
@@ -137,7 +137,7 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 104
+          ClientHeight = 101
           ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
@@ -179,7 +179,7 @@ object f_config_internet: Tf_config_internet
       object Page2: TPage
         Caption = 'Orbital Elements'
         ClientWidth = 485
-        ClientHeight = 428
+        ClientHeight = 403
         object Label6: TLabel
           Left = 28
           Height = 15
@@ -315,12 +315,12 @@ object f_config_internet: Tf_config_internet
       object Page3: TPage
         Caption = 'Online DSS'
         ClientWidth = 485
-        ClientHeight = 428
+        ClientHeight = 430
         object Label8: TLabel
           Left = 20
-          Height = 15
+          Height = 18
           Top = 19
-          Width = 135
+          Width = 147
           Caption = 'Online pictures servers'
           ParentColor = False
         end
@@ -333,7 +333,7 @@ object f_config_internet: Tf_config_internet
           DefaultColWidth = 120
           FixedCols = 0
           GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor, goSmoothScroll]
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
           RowCount = 11
           TabOrder = 0
           OnEditingDone = DSSpicturesEditingDone

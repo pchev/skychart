@@ -1,7 +1,7 @@
 object f_config: Tf_config
-  Left = 537
+  Left = 285
   Height = 540
-  Top = 125
+  Top = 32
   Width = 730
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
@@ -151,7 +151,7 @@ object f_config: Tf_config
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.28.2'
   object Panel2: TPanel
     Left = 0
     Height = 41
@@ -165,7 +165,7 @@ object f_config: Tf_config
       Left = 16
       Height = 22
       Top = 12
-      Width = 162
+      Width = 161
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
@@ -178,6 +178,7 @@ object f_config: Tf_config
       Width = 75
       BorderSpacing.InnerBorder = 4
       Caption = 'OK'
+      Default = True
       ModalResult = 1
       TabOrder = 1
     end

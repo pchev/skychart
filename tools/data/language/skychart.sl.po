@@ -2480,6 +2480,10 @@ msgstr "Nova oznaka"
 msgid "Next   >>"
 msgstr "Naprej >>"
 
+#: u_translation.rsnextchart
+msgid "Next Chart"
+msgstr ""
+
 #: u_translation.rsnightvision
 msgid "Night vision"
 msgstr "Nočni pogled"

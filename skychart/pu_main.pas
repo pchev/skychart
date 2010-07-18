@@ -35,7 +35,7 @@ uses
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil,
+  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -83,6 +83,8 @@ type
 
   Tf_main = class(TForm)
     MenuItem31: TMenuItem;
+    NextChild1: TMenuItem;
+    ReloadLanguage1: TMenuItem;
     ResetDefaultChart: TAction;
     EditCopy1: TAction;
     HelpFaq1: TAction;
@@ -478,8 +480,10 @@ type
     procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
+    procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure ReleaseNotes1Click(Sender: TObject);
+    procedure ReloadLanguage1Click(Sender: TObject);
     procedure ResetAllLabels1Click(Sender: TObject);
     procedure ResetDefaultChartExecute(Sender: TObject);
     procedure SetupCatalogExecute(Sender: TObject);
@@ -749,8 +753,17 @@ var
 implementation
 
 uses
-{$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
+{$if (lcl_major=0) and (lcl_minor=9) and (lcl_release<29) }
+    {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
      gtkproc,
+    {$endif}
+{$else}
+    {$ifdef LCLgtk}
+     gtkproc,
+    {$endif}
+    {$ifdef LCLgtk2}
+     gtk2proc,
+    {$endif}
 {$endif}
      LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
@@ -1308,6 +1321,11 @@ end;
 procedure Tf_main.Maillist1Click(Sender: TObject);
 begin
    ExecuteFile(URL_Maillist);
+end;
+
+procedure Tf_main.NextChild1Click(Sender: TObject);
+begin
+  MultiDoc1.NexChild;
 end;
 
 procedure Tf_main.BugReport1Click(Sender: TObject);
@@ -2576,6 +2594,11 @@ begin
   ShowReleaseNotes(false);
 end;
 
+procedure Tf_main.ReloadLanguage1Click(Sender: TObject);
+begin
+ChangeLanguage(cfgm.language);
+end;
+
 procedure Tf_main.SetupTimeExecute(Sender: TObject);
 begin
 SetupTimePage(0);
@@ -3450,6 +3473,26 @@ f_getdss.cfgdss.DSSurl[8,0]:=URL_DSS_NAME8;
 f_getdss.cfgdss.DSSurl[8,1]:=URL_DSS8;
 f_getdss.cfgdss.DSSurl[9,0]:=URL_DSS_NAME9;
 f_getdss.cfgdss.DSSurl[9,1]:=URL_DSS9;
+f_getdss.cfgdss.DSSurl[10,0]:=URL_DSS_NAME10;
+f_getdss.cfgdss.DSSurl[10,1]:=URL_DSS10;
+f_getdss.cfgdss.DSSurl[11,0]:=URL_DSS_NAME11;
+f_getdss.cfgdss.DSSurl[11,1]:=URL_DSS11;
+f_getdss.cfgdss.DSSurl[12,0]:=URL_DSS_NAME12;
+f_getdss.cfgdss.DSSurl[12,1]:=URL_DSS12;
+f_getdss.cfgdss.DSSurl[13,0]:=URL_DSS_NAME13;
+f_getdss.cfgdss.DSSurl[13,1]:=URL_DSS13;
+f_getdss.cfgdss.DSSurl[14,0]:=URL_DSS_NAME14;
+f_getdss.cfgdss.DSSurl[14,1]:=URL_DSS14;
+f_getdss.cfgdss.DSSurl[15,0]:=URL_DSS_NAME15;
+f_getdss.cfgdss.DSSurl[15,1]:=URL_DSS15;
+f_getdss.cfgdss.DSSurl[16,0]:=URL_DSS_NAME16;
+f_getdss.cfgdss.DSSurl[16,1]:=URL_DSS16;
+f_getdss.cfgdss.DSSurl[17,0]:=URL_DSS_NAME17;
+f_getdss.cfgdss.DSSurl[17,1]:=URL_DSS17;
+f_getdss.cfgdss.DSSurl[18,0]:=URL_DSS_NAME18;
+f_getdss.cfgdss.DSSurl[18,1]:=URL_DSS18;
+f_getdss.cfgdss.DSSurl[19,0]:=URL_DSS_NAME19;
+f_getdss.cfgdss.DSSurl[19,1]:=URL_DSS19;
 f_getdss.cfgdss.OnlineDSS:=true;
 f_getdss.cfgdss.OnlineDSSid:=1;
 for i:=1 to numfont do begin
@@ -5209,6 +5252,7 @@ telescopeSlew1.caption:='&'+rsSlew;
 telescopeSync1.caption:='&'+rsSync;
 Window1.caption:='&'+rsWindow;
 WindowCascadeItem.caption:='&'+rsCascade;
+NextChild1.Caption:='&'+rsNextChart;
 WindowTileItem.caption:='&'+rsTileHorizont;
 WindowTileItem2.caption:='&'+rsTileVertical;
 Maximize1.caption:='&'+rsMaximize;
@@ -5380,6 +5424,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                else
                   TConnect.Hint:=rsDisconnectTe;
                telescopeConnect1.caption:='&'+TConnect.hint;
+               telescopeConnect1.Checked:=true;
                Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end else begin
                TConnect.ImageIndex:=48;
@@ -5388,6 +5433,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                else
                   TConnect.Hint:=rsConnectTeles;
                telescopeConnect1.caption:='&'+TConnect.hint;
+               telescopeConnect1.Checked:=false;
                Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
@@ -5437,6 +5483,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     ToolButtonShowObjectbelowHorizon.down:=not sc.cfgsc.horizonopaque;
     ShowObjectbelowthehorizon1.checked:=not sc.cfgsc.horizonopaque;
     ToolButtonswitchbackground.down:= sc.plot.cfgplot.autoskycolor;
+    Menuswitchbackground.Checked:=sc.plot.cfgplot.autoskycolor;
     if sc.cfgsc.ProjPole=AltAz then begin
        ToolButtonShowObjectbelowHorizon.Enabled:=true;
        ToolButtonShowObjectbelowHorizon.Indeterminate:=false;
@@ -6363,7 +6410,6 @@ begin
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject=Sender then
       MultiDoc1.setActiveChild(i);
-
 end;
 
 

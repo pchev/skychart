@@ -1941,6 +1941,7 @@ if result then begin
    rec.ra:=deg2rad*lin.ar/100000;
    rec.dec:=deg2rad*lin.de/100000;
    rec.neb.id:=lin.name;
+   if trim(rec.neb.id)='' then rec.neb.id:=lin.id;
    rec.str[1]:=lin.id;
    rec.str[2]:=lin.spt;
    rec.num[1]:=lin.b_vt/100;
