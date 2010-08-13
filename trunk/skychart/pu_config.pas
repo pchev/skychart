@@ -367,7 +367,6 @@ begin
 end;
 
 procedure Tf_config.ActivateChanges;
-var i:integer;
 begin
   if Treeview1.selected<>nil then
      cmain.configpage:=Treeview1.selected.absoluteindex;

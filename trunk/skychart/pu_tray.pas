@@ -687,7 +687,6 @@ end;
 end;
 
 procedure Tf_tray.ConnectDB;
-var dbpath:string;
 begin
 try
     if ((DBtype=sqlite) and not Fileexists(db)) then begin

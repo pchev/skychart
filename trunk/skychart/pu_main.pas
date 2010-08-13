@@ -497,11 +497,15 @@ type
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure ToolButtonConfigClick(Sender: TObject);
+    procedure ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowAsteroidsMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowBackgroundImageMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowCometsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -510,6 +514,8 @@ type
     procedure ToolButtonShowLabelsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowMarkMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowPicturesMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowPlanetsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -617,6 +623,7 @@ type
     procedure ToolButtonNightVisionClick(Sender: TObject);
     procedure ViewFullScreenExecute(Sender: TObject);
     procedure SetTheme;
+    procedure SetStarShape;
   private
     { Private declarations }
     UniqueInstance1: TCdCUniqueInstance;
@@ -849,8 +856,8 @@ begin
      Child.sc.cfgsc.TrackType:=4;
   end;
   if not maxi then begin
-     cp.width:=w;
-     cp.height:=h;
+     cp.width:=min(w,multidoc1.ClientWidth-PanelRight.Width);
+     cp.height:=min(h,multidoc1.ClientHeight-PanelBottom.Height);
      if t>=0 then cp.top:=t;
      if l>=0 then cp.left:=l;
   end;
@@ -1146,7 +1153,7 @@ try
  WriteTrace('Cursor');
 {$endif}
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
-    CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur');
+    CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur'));
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
  else crRetic:=crCross;
@@ -1154,9 +1161,15 @@ try
  WriteTrace('Compass');
 {$endif}
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp');
+    compass.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp'));
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp');
+    arrow.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp'));
+{$ifdef trace_debug}
+ WriteTrace('Starshape file');
+{$endif}
+if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
+  starshape.Picture.LoadFromFile(cfgm.starshape_file);
+end;
 {$ifdef trace_debug}
  WriteTrace('Timezone');
 {$endif}
@@ -1384,6 +1397,9 @@ appdir:=expandfilename(appdir);
 privatedir:=expandfilename(PrivateDir);
 {$endif}
 {$ifdef mswindows}
+buf:=systoutf8(appdir);
+buf:=trim(buf);
+appdir:=SafeUTF8ToSys(buf);
 buf:='';
 SHGetSpecialFolderLocation(0, CSIDL_LOCAL_APPDATA, PIDL);
 SHGetPathFromIDList(PIDL, Folder);
@@ -1559,6 +1575,9 @@ isWin98:=false;
   isWin98:=FindWin98;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
+  if isWin98 then begin
+   MenuItem6.Visible:=false;
+  end;
 {$endif}
 {$ifdef unix}
   step:='Unix specific';
@@ -2609,6 +2628,12 @@ begin
   ToolButtonConfig.PopupMenu.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
 end;
 
+procedure Tf_main.ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupPicturesPage(2);
+end;
+
 procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
@@ -2741,19 +2766,25 @@ end;
 procedure Tf_main.ToolButtonShowPlanetsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if ssRight in Shift then SetupSolsysPage(1);
+if Button=mbRight then SetupSolsysPage(1);
 end;
 
 procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if ssRight in Shift then SetupSolsysPage(3);
+if Button=mbRight then SetupSolsysPage(3);
+end;
+
+procedure Tf_main.ToolButtonShowBackgroundImageMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if Button=mbRight then SetupPicturesPage(1);
 end;
 
 procedure Tf_main.ToolButtonShowCometsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if ssRight in Shift then SetupSolsysPage(2);
+if Button=mbRight then SetupSolsysPage(2);
 end;
 
 procedure Tf_main.SetupSolSysExecute(Sender: TObject);
@@ -3014,31 +3045,37 @@ end;
 procedure Tf_main.ToolButtonShowLabelsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if ssRight in Shift then SetupDisplayPage(5);
+  if Button=mbRight then SetupDisplayPage(5);
 end;
 
 procedure Tf_main.ToolButtonShowLineMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if ssRight in Shift then SetupDisplayPage(4);
+  if Button=mbRight then SetupDisplayPage(4);
 end;
 
 procedure Tf_main.ToolButtonswitchstarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if ssRight in Shift then SetupDisplayPage(0);
+  if Button=mbRight then SetupDisplayPage(0);
 end;
 
 procedure Tf_main.ToolButtonswitchbackgroundMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if ssRight in Shift then SetupDisplayPage(3);
+  if Button=mbRight then SetupDisplayPage(3);
 end;
 
 procedure Tf_main.ToolButtonShowMarkMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if ssRight in Shift then SetupDisplayPage(7);
+if Button=mbRight then SetupDisplayPage(7);
+end;
+
+procedure Tf_main.ToolButtonShowPicturesMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupPicturesPage(0);
 end;
 
 procedure Tf_main.SetupDisplayExecute(Sender: TObject);
@@ -3133,9 +3170,9 @@ end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
 var i:integer;
-  themechange,langchange: Boolean;
+  themechange,langchange,starchange: Boolean;
 begin
-    themechange:=false; langchange:=false;
+    themechange:=false; langchange:=false; starchange:=false;
     if cmain<>nil then begin
       if (cfgm.language<>cmain.language) then langchange:=true;
     end;
@@ -3145,9 +3182,12 @@ begin
          (cfgm.ButtonStandard <> cmain.ButtonStandard) or
          (cfgm.ThemeName <> cmain.ThemeName)
          then themechange:=true;
+      if cfgm.starshape_file<>cmain.starshape_file then
+         starchange:=true;
       cfgm.Assign(cmain);
     end;
     if themechange then SetTheme;
+    if starchange then SetStarShape;
     cfgm.updall:=applyall;
     if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
     privatedir:=cfgm.persdir;
@@ -3396,7 +3436,6 @@ end;
 
 procedure Tf_main.SetDefault;
 var i:integer;
-    buf:string;
 begin
 nightvision:=false;
 cfgm.MaxChildID:=0;
@@ -3451,6 +3490,7 @@ cfgm.AsteroidUrlList:=TStringList.Create;
 cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements3);
+cfgm.starshape_file:='';
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:='';
   f_getdss.cfgdss.DSSurl[i,1]:='';
@@ -3519,11 +3559,11 @@ def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelColor[7]:=clSilver;
 def_cfgplot.LabelSize[6]:=12;
-def_cfgplot.contrast:=400;
+def_cfgplot.contrast:=350;
 def_cfgplot.partsize:=1.2;
 def_cfgplot.red_move:=true;
 def_cfgplot.magsize:=4;
-def_cfgplot.saturation:=192;
+def_cfgplot.saturation:=255;
 cfgm.Constellationpath:=slash(appdir)+'data'+Pathdelim+'constellation';
 cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
 cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
@@ -3544,6 +3584,19 @@ def_cfgplot.nebplot:=1;
 def_cfgplot.plaplot:=1;
 def_cfgplot.TransparentPlanet:=false;
 def_cfgplot.AutoSkycolor:=false;
+def_cfgplot.DSOColorFillAst:=true;
+def_cfgplot.DSOColorFillOCl:=true;
+def_cfgplot.DSOColorFillGCl:=true;
+def_cfgplot.DSOColorFillPNe:=true;
+def_cfgplot.DSOColorFillDN:=true;
+def_cfgplot.DSOColorFillEN:=true;
+def_cfgplot.DSOColorFillRN:=true;
+def_cfgplot.DSOColorFillSN:=true;
+def_cfgplot.DSOColorFillGxy:=true;
+def_cfgplot.DSOColorFillGxyCl:=true;
+def_cfgplot.DSOColorFillQ:=true;
+def_cfgplot.DSOColorFillGL:=true;
+def_cfgplot.DSOColorFillNE:=true;
 def_cfgsc.winx:=clientwidth;
 def_cfgsc.winy:=clientheight;
 def_cfgsc.UseSystemTime:=true;
@@ -3907,7 +3960,7 @@ if config_version<cdcver then UpdateConfig;
 end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
-var i:integer;
+var i,t,l,w,h:integer;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -3917,13 +3970,19 @@ with inif do begin
 section:='main';
 try
 if resizemain then begin
-  f_main.Top := ReadInteger(section,'WinTop',f_main.Top);
-  f_main.Left := ReadInteger(section,'WinLeft',f_main.Left);
-  f_main.Width := ReadInteger(section,'WinWidth',f_main.Width);
-  f_main.Height := ReadInteger(section,'WinHeight',f_main.Height);
-  if f_main.Width>screen.Width then f_main.Width:=screen.Width;
-  if f_main.Height>(screen.Height-25) then f_main.Height:=screen.Height-25;
-  formpos(f_main,f_main.Left,f_main.Top);
+  t := ReadInteger(section,'WinTop',f_main.Top);
+  l := ReadInteger(section,'WinLeft',f_main.Left);
+  w := ReadInteger(section,'WinWidth',f_main.Width);
+  h := ReadInteger(section,'WinHeight',f_main.Height);
+  if w>screen.Width then begin
+    l:=0;
+    w:=screen.Width-80;
+  end;
+  if h>screen.Height then begin
+    t:=0;
+    h:=screen.Height-80;
+  end;
+  f_main.SetBounds(l,t,w,h);
 end;
 for i:=0 to MaxField do catalog.cfgshr.FieldNum[i]:=ReadFloat(section,'FieldNum'+inttostr(i),catalog.cfgshr.FieldNum[i]);
 except
@@ -4038,6 +4097,19 @@ cplot.magsize:=ReadFloat(section,'magsize',cplot.magsize);
 cplot.magsize:=max(cplot.magsize,1.0);
 cplot.magsize:=min(cplot.magsize,10.0);
 cplot.AutoSkycolor:=ReadBool(section,'AutoSkycolor',cplot.AutoSkycolor);
+cplot.DSOColorFillAst:=ReadBool(section,'DSOColorFillAst',cplot.DSOColorFillAst);
+cplot.DSOColorFillOCl:=ReadBool(section,'DSOColorFillOCl',cplot.DSOColorFillOCl);
+cplot.DSOColorFillGCl:=ReadBool(section,'DSOColorFillGCl',cplot.DSOColorFillGCl);
+cplot.DSOColorFillPNe:=ReadBool(section,'DSOColorFillPNe',cplot.DSOColorFillPNe);
+cplot.DSOColorFillDN:=ReadBool(section,'DSOColorFillDN',cplot.DSOColorFillDN);
+cplot.DSOColorFillEN:=ReadBool(section,'DSOColorFillEN',cplot.DSOColorFillEN);
+cplot.DSOColorFillRN:=ReadBool(section,'DSOColorFillRN',cplot.DSOColorFillRN);
+cplot.DSOColorFillSN:=ReadBool(section,'DSOColorFillSN',cplot.DSOColorFillSN);
+cplot.DSOColorFillGxy:=ReadBool(section,'DSOColorFillGxy',cplot.DSOColorFillGxy);
+cplot.DSOColorFillGxyCl:=ReadBool(section,'DSOColorFillGxyCl',cplot.DSOColorFillGxyCl);
+cplot.DSOColorFillQ:=ReadBool(section,'DSOColorFillQ',cplot.DSOColorFillQ);
+cplot.DSOColorFillGL:=ReadBool(section,'DSOColorFillGL',cplot.DSOColorFillGL);
+cplot.DSOColorFillNE:=ReadBool(section,'DSOColorFillNE',cplot.DSOColorFillNE);
 for i:=0 to maxcolor do cplot.color[i]:=ReadInteger(section,'color'+inttostr(i),cplot.color[i]);
 for i:=0 to 7 do cplot.skycolor[i]:=ReadInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 cplot.bgColor:=ReadInteger(section,'bgColor',cplot.bgColor);
@@ -4363,6 +4435,7 @@ cfgm.ProxyPort:=ReadString(section,'ProxyPort',cfgm.ProxyPort);
 cfgm.ProxyUser:=ReadString(section,'ProxyUser',cfgm.ProxyUser);
 cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
 cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
+cfgm.starshape_file:=ReadString(section,'starshape_file',cfgm.starshape_file);
 j:=ReadInteger(section,'CometUrlCount',0);
 if j>0 then begin
    cfgm.CometUrlList.Clear;
@@ -4645,6 +4718,19 @@ WriteBool(section,'redmove',cplot.red_move);
 WriteFloat(section,'partsize',cplot.partsize);
 WriteFloat(section,'magsize',cplot.magsize);
 WriteBool(section,'AutoSkycolor',cplot.AutoSkycolor);
+WriteBool(section,'DSOColorFillAst',cplot.DSOColorFillAst);
+WriteBool(section,'DSOColorFillOCl',cplot.DSOColorFillOCl);
+WriteBool(section,'DSOColorFillGCl',cplot.DSOColorFillGCl);
+WriteBool(section,'DSOColorFillPNe',cplot.DSOColorFillPNe);
+WriteBool(section,'DSOColorFillDN',cplot.DSOColorFillDN);
+WriteBool(section,'DSOColorFillEN',cplot.DSOColorFillEN);
+WriteBool(section,'DSOColorFillRN',cplot.DSOColorFillRN);
+WriteBool(section,'DSOColorFillSN',cplot.DSOColorFillSN);
+WriteBool(section,'DSOColorFillGxy',cplot.DSOColorFillGxy);
+WriteBool(section,'DSOColorFillGxyCl',cplot.DSOColorFillGxyCl);
+WriteBool(section,'DSOColorFillQ',cplot.DSOColorFillQ);
+WriteBool(section,'DSOColorFillGL',cplot.DSOColorFillGL);
+WriteBool(section,'DSOColorFillNE',cplot.DSOColorFillNE);
 for i:=0 to maxcolor do WriteInteger(section,'color'+inttostr(i),cplot.color[i]);
 for i:=0 to 7 do WriteInteger(section,'skycolor'+inttostr(i),cplot.skycolor[i]);
 WriteInteger(section,'bgColor',cplot.bgColor);
@@ -4906,6 +4992,7 @@ WriteString(section,'ProxyPort',cfgm.ProxyPort);
 WriteString(section,'ProxyUser',cfgm.ProxyUser);
 WriteString(section,'ProxyPass',cfgm.ProxyPass);
 WriteString(section,'AnonPass',cfgm.AnonPass);
+WriteString(section,'starshape_file',cfgm.starshape_file);
 j:=cfgm.CometUrlList.Count;
 WriteInteger(section,'CometUrlCount',j);
 if j>0 then begin
@@ -4978,9 +5065,6 @@ procedure Tf_main.SaveQuickSearch(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
     section : string;
-    {$ifdef mswindows}
-    instini: TIniFile;
-    {$endif}
 begin
 try
 inif:=TMeminifile.create(filename);
@@ -5971,17 +6055,21 @@ end;
 // Parameters that need to be set before program initialisation
 procedure Tf_main.ProcessParams1;
 var i,p: integer;
-    cmd, parms, buf : string;
-    pp: TStringList;
+    cmd, parms, parm : string;
 begin
 for i:=0 to Params.Count-1 do begin
    parms:= Params[i];
-   cmd:=words(parms,'',1,1);
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
+      parm:='';
+   end;
    if cmd='--config' then begin  // specify .ini file
-      p:=pos(' ',parms);
-      if p>0 then begin
-         buf:=copy(parms,p+1,999);
-         ForceConfig:=SafeUTF8ToSys(trim(buf));
+      if parm<>'' then begin
+         ForceConfig:=SafeUTF8ToSys(trim(parm));
       end;
    end else if cmd='--daemon' then begin
       showsplash:=false;
@@ -5996,7 +6084,7 @@ end;
 // Parameters that need to be set after a chart is available
 procedure Tf_main.ProcessParams2;
 var i,p: integer;
-    cmd, parm, parms, buf : string;
+    cmd, parm, parms : string;
     pp: TStringList;
 begin
 pp:=TStringList.Create;
@@ -6004,12 +6092,14 @@ try
 for i:=0 to Params.Count-1 do begin
    pp.Clear;
    parms:= Params[i];
-   cmd:=words(parms,'',1,1);
-   p:=pos(' ',parms);
-   if p>0 then
-      parm:=copy(parms,p+1,999)
-   else
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
       parm:='';
+   end;
    if cmd='--search' then begin
       pp.Add('SEARCH');
       pp.Add(parm);
@@ -6020,6 +6110,30 @@ for i:=0 to Params.Count-1 do begin
       ExecuteCmd('',pp);
    end else if cmd='--setfov' then begin
       pp.Add('SETFOV');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setra' then begin
+      pp.Add('SETRA');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setdec' then begin
+      pp.Add('SETDEC');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--load' then begin
+      pp.Add('LOAD');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setobs' then begin
+      pp.Add('SETOBS');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--settz' then begin
+      pp.Add('SETTZ');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+   end else if cmd='--setdate' then begin
+      pp.Add('SETDATE');
       pp.Add(parm);
       ExecuteCmd('',pp);
    end else if cmd='--test2' then begin
@@ -6035,8 +6149,7 @@ end;
 
 procedure Tf_main.ProcessParamsQuit;
 var i: integer;
-    cmd, parms, buf : string;
-    pp: TStringList;
+    cmd, parms : string;
 begin
 for i:=0 to Params.Count-1 do begin
    parms:= Params[i];
@@ -6236,7 +6349,7 @@ begin
    CursorImage1.FreeImage;
    CursorImage1.Free;
    CursorImage1:=TCursorImage.Create;
-   CursorImage1.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur');
+   CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur'));
    inc(crRetic);
    Screen.Cursors[crRetic]:=CursorImage1.Handle;
    for i:=0 to MultiDoc1.ChildCount-1 do
@@ -6245,17 +6358,36 @@ begin
  end;
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
-    compass.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp');
+    compass.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp'));
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
  end;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp') then begin
-    arrow.LoadFromFile(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp');
+    arrow.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp'));
     for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
  end;
+ SetStarShape;
+end;
+
+procedure Tf_main.SetStarShape;
+var i : integer;
+    defaultfile: string;
+begin
+  if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
+     starshape.Picture.LoadFromFile(cfgm.starshape_file);
+  end;
+  if (cfgm.starshape_file='') then begin
+     defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'starshape.bmp';
+     if not FileExists(defaultfile) then
+        defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash('default')+'starshape.bmp';
+     starshape.Picture.LoadFromFile(defaultfile);
+  end;
+  for i:=0 to MultiDoc1.ChildCount-1 do
+    if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+       Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.Starshape:=starshape.Picture.Bitmap;
 end;
 
 procedure Tf_main.SetButtonImage(button: Integer);

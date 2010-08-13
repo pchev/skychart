@@ -1095,6 +1095,9 @@ resourcestring
   rsAction = 'Action';
   rsPrefixNameWi = 'Prefix name with catalog short name';
   rsNextChart = 'Next Chart';
+  rsPrintedChart = 'Printed chart';
+  rsStarsBitmapF = 'Stars bitmap file';
+  rsPastel = 'Pastel';
 
 implementation
 

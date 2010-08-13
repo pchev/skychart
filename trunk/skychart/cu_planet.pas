@@ -156,7 +156,7 @@ Procedure TPlanet.Planet(ipla : integer; t0 : double ; var alpha,delta,distance,
 const
       s0 : array[1..9] of double =(3.34,8.41,0,4.68,98.47,83.33,34.28,36.56,1.57);
       V0 : array[1..9] of double =(-0.42,-4.40,0,-1.52,-9.40,-8.88,-7.19,-6.87,-1.0);
-      A0 : array[1..9] of double =(0.11,0.65,0,0.15,0.52,0.47,0.51,0.41,0.3);
+//      A0 : array[1..9] of double =(0.11,0.65,0,0.15,0.52,0.47,0.51,0.41,0.3);
 
 var  v1,v2: double6;
      w : array[1..3] of double;
@@ -166,6 +166,20 @@ var  v1,v2: double6;
      lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
+// always do this computation for phase sign
+  // Earth position
+  p.ipla:=3;
+  p.JD:=t0-tlight;
+  Plan404(addr(p));
+  lt:=p.l; bt:=p.b; rt:=p.r;
+  dt:=rt;
+  // planet position
+  p.ipla:=ipla;
+  p.JD:=t0;
+  Plan404(addr(p));
+  lp:=p.l; bp:=p.b; rp:=p.r;
+  dp:=rp;
+//
 if highprec and (t0>series96t1) and (t0<series96t2) then begin   // use SERIES96
          tjd:=t0;
          SunRect(tjd,false,v1[1],v1[2],v1[3],highprec);
@@ -188,18 +202,7 @@ if highprec and (t0>series96t1) and (t0<series96t2) then begin   // use SERIES96
          qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
          if qr<>0 then delta:=arctan(w[3]/qr);
 end else begin               // use Plan404
-     // Earth position
-     p.ipla:=3;
-     p.JD:=t0-tlight;
-     Plan404(addr(p));
-     lt:=p.l; bt:=p.b; rt:=p.r;
-     dt:=rt;
-     // planet position
-     p.ipla:=ipla;
-     p.JD:=t0;
-     Plan404(addr(p));
-     lp:=p.l; bp:=p.b; rp:=p.r;
-     dp:=rp;
+// position without light time already computed above
      // get distance for light time correction
      x:=rp*cos(bp)*cos(lp) - rt*cos(bt)*cos(lt);
      y:=rp*cos(bp)*sin(lp) - rt*cos(bt)*sin(lt);
@@ -226,18 +229,20 @@ end;
   illuminated fraction
   correct the phase sign with the difference of longitude with the sun.
 }
-     qr:=(2*dp*distance);
-     if qr<>0 then phase:=(dp*dp+distance*distance-dt*dt)/qr; //=cos(phase)
-     illum:=(1+phase)/2;
-     phase:=radtodeg(arccos(phase));
-     lsol:=rmod(pi4+pi+lt,pi2); // be sure to obtain a positive value
-     lp:=rmod(lp+pi2,pi2);
-     lp:=rmod(lsol-lp+pi2,pi2);
-     if (lp>0)and(lp<=pi) then phase:=-phase;
+ qr:=(2*dp*distance);
+ if qr<>0 then phase:=(dp*dp+distance*distance-dt*dt)/qr //=cos(phase)
+          else phase:=1;
+ illum:=(1+phase)/2;
+ phase:=radtodeg(arccos(phase));
+ // lt and lp must be computed!
+ lsol:=rmod(pi4+pi+lt,pi2); // be sure to obtain a positive value
+ lp:=rmod(lp+pi2,pi2);
+ lp:=rmod(lsol-lp+pi2,pi2);
+ if (lp>0)and(lp<=pi) then phase:=-phase;
 {
   apparent diameter
 }
-         if distance<>0 then diameter:=2*s0[ipla]/distance;
+ if distance<>0 then diameter:=2*s0[ipla]/distance;
 {
   magnitude
 }
@@ -250,12 +255,6 @@ case ipla of
     5 : magn:=magn+0.005*pha;
     6 : magn:=magn+0.044*pha;
 end;
-{case ipla of
-     1 : magn:=magn+0.02838*(phase-50)+0.0001023*(phase-50)*(phase-50);
-    2 : magn:=magn+phase*(0.01322+phase*0.0000004247);
-    4 : magn:=magn+0.01486*phase;
-    6 : magn:=magn+0.044*abs(phase);
-end;}
 end;
 
 Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double; highprec:boolean=true);

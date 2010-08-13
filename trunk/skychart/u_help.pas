@@ -76,8 +76,11 @@ resourcestring
 implementation
 
 procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
+var buf:string;
 begin
-aHelpDB.BaseURL:='file://'+slash(helpdir)+slash('wiki_doc')+hlpBaseDir;
+buf:=StringReplace(hlpBaseDir,'/',PathDelim,[rfReplaceAll]);
+buf:=StringReplace(hlpBaseDir,'\',PathDelim,[rfReplaceAll]);
+aHelpDB.BaseURL:='file://'+slash(helpdir)+slash('wiki_doc')+buf;
 aHelpDB.KeywordPrefix:='H/';
 end;
 

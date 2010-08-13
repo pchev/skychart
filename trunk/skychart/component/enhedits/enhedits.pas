@@ -105,7 +105,6 @@ type
     property Top;
     property Visible;
     property Width;
-    property OnExit;
     property OnChange;
     property OnClick;
     property OnDblClick;

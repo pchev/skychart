@@ -223,7 +223,7 @@ if velocities then begin
 *     Compute velocities (Poisson terms)
 *     ----------------------------------
 *}
-      wx:=1;
+      wx:=1; wy:=1;
       for m:=0 to mx[ipla] do begin
          nw:=nf[ipla,m];
          for i:=1 to nw do begin

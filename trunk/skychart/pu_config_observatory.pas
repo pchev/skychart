@@ -28,7 +28,7 @@ interface
 uses
   u_unzip,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
   Spin, downloaddialog, EditBtn, LazHelpHTML;
 
@@ -340,8 +340,7 @@ if fileexists(cmain.EarthMapFile)and(cmain.EarthMapFile<>ObsMapfile) then begin
    ObsMapfile:=cmain.EarthMapFile;
    img:=TJPEGImage.Create;
    pict:=TPicture.Create;
-   img.LoadFromFile(ObsMapfile);
-//   ZoomImage1.Picture.LoadFromFile(ObsMapfile);
+   img.LoadFromFile(SysToUTF8(ObsMapfile));
    pict.Assign(img);
    ZoomImage1.Picture:=pict;
    img.Free;
@@ -746,7 +745,7 @@ if opendialog1.execute
    cmain.EarthMapFile:=opendialog1.filename;
    ZoomImage1.Xcentre:=Obsposx;
    ZoomImage1.Ycentre:=Obsposy;
-   ZoomImage1.Picture.LoadFromFile(cmain.EarthMapFile);
+   ZoomImage1.Picture.LoadFromFile(SysToUTF8(cmain.EarthMapFile));
    SetScrollBar;
    Hscrollbar.Position:=ZoomImage1.SizeX div 2;
    Vscrollbar.Position:=ZoomImage1.SizeY div 2;

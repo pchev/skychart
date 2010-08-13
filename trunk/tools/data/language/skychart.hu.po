@@ -3345,6 +3345,10 @@ msgstr "Részleges"
 msgid "Password"
 msgstr "Jelszó"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Elérési út"
@@ -3588,6 +3592,10 @@ msgstr "Nyomtatás"
 #| msgid "Print Chart"
 msgid "Print chart"
 msgstr "Térkép nyomtatása"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -4562,6 +4570,10 @@ msgstr "Csillagok"
 #| msgid "Stars and Deep Sky catalogs prepared with "
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Csillag és mélyég katalógus készítése:"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 #, fuzzy

@@ -2776,6 +2776,10 @@ msgstr "Delen"
 msgid "Password"
 msgstr "Geslo"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Pot"
@@ -2989,6 +2993,10 @@ msgstr "Natisni"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "Natisni karto"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3773,6 +3781,10 @@ msgstr "Zvezde"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Katalogi zvezde in globokega vesolja pripravljeno z"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

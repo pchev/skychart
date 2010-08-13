@@ -272,7 +272,7 @@ end;
 
 function TCDCdb.dropDB(cmain: Tconf_main): string;
 var msg:string;
-    i: integer;
+    //i: integer;
 begin
 result:='';
 if DBtype=mysql then begin

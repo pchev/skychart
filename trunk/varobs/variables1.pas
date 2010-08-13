@@ -113,7 +113,6 @@ type
     procedure AAVSOChart1Click(Sender: TObject);
   private
     { Private declarations }
-    cdc : TCDCclientThrd;
     tcpclient: TCDCclient;
     UniqueInstance1: TCdCUniqueInstance;
     procedure OtherInstance(Sender : TObject; ParamCount: Integer; Parameters: array of String);
@@ -457,8 +456,7 @@ end;
 end;
 
 Procedure TVarForm.GetAppDir;
-var inif: TMemIniFile;
-    buf: string;
+var buf: string;
 {$ifdef darwin}
     i: integer;
 {$endif}
@@ -1076,7 +1074,6 @@ if OptForm.CheckBox2.Checked then SkychartCmd('SETFOV '+trim(OptForm.SpinEdit1.T
 end;
 
 Procedure TVarForm.DrawSkyChart;
-var buf : string;
 begin
 if (tcpclient=nil)or(not SkychartCmd('LISTCHART')) then InitSkyChart;
 SkychartCmd('SEARCH "'+trim(Grid1.Cells[0,currentrow])+'"');
@@ -1231,9 +1228,7 @@ begin
 end;
 
 procedure TVarForm.InstanceRunning(Sender : TObject);
-var i : integer;
 begin
-//if Params.Find('--unique',i) then
   UniqueInstance1.RetryOrHalt;
 end;
 

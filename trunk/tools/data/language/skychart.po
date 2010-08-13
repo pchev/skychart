@@ -4322,3 +4322,15 @@ msgstr ""
 msgid "Next Chart"
 msgstr ""
 
+#: u_translation:rsprintedchart
+msgid "Printed chart"
+msgstr ""
+
+#: u_translation:rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
+
+#: u_translation:rspastel
+msgid "Pastel"
+msgstr ""
+

@@ -2775,6 +2775,10 @@ msgstr "Gedeeltelijk"
 msgid "Password"
 msgstr "Paswoord"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Pad"
@@ -2988,6 +2992,10 @@ msgstr "Afdrukken"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "Afdrukken kaart"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3772,6 +3780,10 @@ msgstr "Sterren"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Sterren - en deep sky catalogi gecreëerd met"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

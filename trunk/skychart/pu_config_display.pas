@@ -44,8 +44,13 @@ type
     BtnWBColor: TButton;
     BtnBWColor: TButton;
     Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    FileNameEdit1: TFileNameEdit;
+    Label9: TLabel;
+    lstDSOCScheme: TComboBox;
     DrawAllStarLabel: TCheckBox;
     DrawPmBox: TCheckBox;
     DrawPMy: TLongEdit;
@@ -72,6 +77,7 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    Panel5: TPanel;
     red_moveBox: TCheckBox;
     Shape8: TShape;
     StarButton5: TButton;
@@ -273,7 +279,6 @@ type
     NebBrightBar: TTrackBar;
     NebGrayBar: TTrackBar;
     DefNebColorButton: TButton;
-    lstDSOCScheme: TListBox;
     NebColorPanel: TPanel;
     Shape29: TShape;
     Shape30: TShape;
@@ -332,6 +337,8 @@ type
     procedure BtnWBColorClick(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -341,12 +348,14 @@ type
     procedure DrawPmBoxClick(Sender: TObject);
     procedure EclipticStyleChange(Sender: TObject);
     procedure EqGridStyleChange(Sender: TObject);
+    procedure FileNameEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure GalEqStyleChange(Sender: TObject);
     procedure GridStyleChange(Sender: TObject);
+    procedure lstDSOCSchemeChange(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
     procedure StarButton6Click(Sender: TObject);
     procedure StarButton7Click(Sender: TObject);
@@ -412,7 +421,6 @@ type
 
 //  deep-sky objects colour
 
-    procedure lstDSOCSchemeClick(Sender: TObject);
     procedure ShapeDSOMouseUp(Sender: TObject; Button: TMouseButton;
               Shift: TShiftState; X, Y: Integer);
     procedure chkFillAstClick(Sender: TObject);
@@ -495,6 +503,7 @@ StarButton7.caption:=rsBigStars;
 groupbox9.Caption:=rsStarDisplayP;
 Label258.caption:=rsBrightStarsS;
 Label259.caption:=rsContrast;
+label9.Caption:=rsStarsBitmapF;
 
 Page2.caption:=rsColor;
 Label189.caption:=rsStarColourBV;
@@ -511,6 +520,7 @@ Label234.caption:=rsComet;
 Label269.caption:=rsMilkyWay;
 GroupBox7.caption:=rsStandardColo;
 BtnDefaultColor.caption:=rsDefault;
+Button8.Caption:=rsPastel;
 BtnRedColor.caption:=rsRed;
 BtnBWColor.caption:=rsWhiteOnBlack;
 BtnWBColor.caption:=rsBlackOnWhite;
@@ -555,6 +565,8 @@ Label4.caption:=rsBrighter;
 DefNebColorButton.caption:=rsDefault;
 lstDSOCScheme.items[0]:='CdC v2 '+rsDefault;
 lstDSOCScheme.items[1]:='CdC v3 '+rsDefault;
+lstDSOCScheme.items[2]:=rsPrintedChart;
+lstDSOCScheme.items[3]:=rsGreen;
 Page4.caption:=rsSkyColour;
 skycolorbox.caption:=rsSkyColour;
 skycolorbox.items[0]:=rsFixedBlack;
@@ -753,6 +765,11 @@ begin
 csc.StyleEqGrid:=TPenStyle(EqGridStyle.itemindex);
 end;
 
+procedure Tf_config_display.FileNameEdit1Change(Sender: TObject);
+begin
+  cmain.starshape_file:=FileNameEdit1.FileName;
+end;
+
 procedure Tf_config_display.CFStyleChange(Sender: TObject);
 begin
 csc.StyleConstL:=TPenStyle(CFStyle.itemindex);
@@ -876,6 +893,19 @@ begin
   ShowHelp;
 end;
 
+procedure Tf_config_display.Button7Click(Sender: TObject);
+begin
+  FileNameEdit1.FileName:='';
+  cmain.starshape_file:='';
+end;
+
+procedure Tf_config_display.Button8Click(Sender: TObject);
+begin
+ cplot.Color:=DfPastelColor;
+ cplot.bgcolor:=cplot.color[0];
+ ShowColor;
+end;
+
 procedure Tf_config_display.BtnDefaultColorClick(Sender: TObject);
 begin
  cplot.Color:=DfColor;
@@ -919,10 +949,12 @@ begin
  SaturationBar.position:=cplot.saturation;
  starvisual.visible:= (cplot.starplot=2);
  panel4.visible:= (cplot.starplot=0);
+ panel5.visible:= (cplot.starplot=1);
  SizeContrastBar.position:=round(cplot.magsize*10);
  red_moveBox.Checked:=cplot.red_move;
  StarSizeBar1.position:=cplot.starsize;
  StarDynBar1.position:=cplot.stardyn;
+ FileNameEdit1.FileName:=cmain.starshape_file;
 // Application.ProcessMessages;
 end;
 
@@ -1261,6 +1293,7 @@ if LockChange then exit;
 cplot.starplot:=stardisplay.itemindex;
 starvisual.visible:= (cplot.starplot=2);
 panel4.visible:= (cplot.starplot=0);
+panel5.visible:= (cplot.starplot=1);
 end;
 
 procedure Tf_config_display.StarSizeBar1Change(Sender: TObject);
@@ -1303,8 +1336,8 @@ procedure Tf_config_display.StarButton1Click(Sender: TObject);
 begin
 StarSizeBar.Position:=12;
 SizeContrastBar.Position:=40;
-StarContrastBar.Position:=400;
-SaturationBar.Position:=192;
+StarContrastBar.Position:=350;
+SaturationBar.Position:=255;
 cplot.partsize:= StarSizeBar.position/10;
 cplot.magsize:= SizeContrastBar.position/10;
 cplot.contrast:= StarContrastBar.position;
@@ -1447,7 +1480,6 @@ begin
 cplot.SkyColor:=dfSkyColor;
 ShowSkyColor;
 end;
-
 
 procedure Tf_config_display.ShapeDSOMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
@@ -1894,13 +1926,11 @@ with sender as TCheckbox do begin
   end;
 end;
 
-procedure Tf_config_display.lstDSOCSchemeClick(Sender: TObject);
+procedure Tf_config_display.lstDSOCSchemeChange(Sender: TObject);
 var
   i: Integer;
 begin
-  for i := 0 to (lstDSOCScheme.Items.Count - 1)
-    do begin
-      if lstDSOCScheme.Selected[i] then
+i:=lstDSOCScheme.ItemIndex;
         case i of
 //        CdC v2.nn
           0: begin //CdC v2.nn
@@ -1908,7 +1938,7 @@ begin
               shpOCl.Brush.Color:=16776960;
               shpGCl.Brush.Color:=16776960;
               shpPNe.Brush.Color:=8454016;
-              shpDN.Brush.Color:=12632256;
+              shpDN.Brush.Color:=4210752;
               shpEN.Brush.Color:=8454016;
               shpRN.Brush.Color:=8454016;
               shpSN.Brush.Color:=0;
@@ -1923,7 +1953,7 @@ begin
               shpOCl.Brush.Color:=8454143;
               shpGCl.Brush.Color:=16777088;
               shpPNe.Brush.Color:=8453888;
-              shpDN.Brush.Color:=12632256;
+              shpDN.Brush.Color:=4210752;
               shpEN.Brush.Color:=255;
               shpRN.Brush.Color:=16744448;
               shpSN.Brush.Color:=0;
@@ -1977,8 +2007,7 @@ begin
           cplot.Color[33]:=shpQ.Brush.Color;
           cplot.Color[34]:=shpGL.Brush.Color;
           cplot.Color[35]:=shpNE.Brush.Color;
-    end;
-  end;
+end;
 
 initialization
   {$i pu_config_display.lrs}

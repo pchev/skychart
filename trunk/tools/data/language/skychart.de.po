@@ -1016,10 +1016,12 @@ msgstr "%sCW"
 #: u_translation.rsdarknebula
 #, fuzzy
 #| msgid "Dark Nebula"
+msgctxt "u_translation.rsdarknebula"
 msgid "Dark nebula"
 msgstr "Dunkelnebel"
 
 #: u_translation.rsdarknebula2
+msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Dunkelnebel"
 
@@ -1958,10 +1960,12 @@ msgstr "Galaxie"
 #: u_translation.rsgalaxycluste
 #, fuzzy
 #| msgid "Galaxy Cluster"
+msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
 msgstr "Galaxienhaufen"
 
 #: u_translation.rsgalaxycluste2
+msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Galaxienhaufen"
 
@@ -3303,6 +3307,10 @@ msgstr "Teilweise"
 msgid "Password"
 msgstr "Passwort"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Pfad"
@@ -3368,6 +3376,7 @@ msgstr "Planet"
 #: u_translation.rsplanetaryneb
 #, fuzzy
 #| msgid "Planetary Nebula"
+msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
 msgstr "planetarische Nebel"
 
@@ -3376,6 +3385,7 @@ msgid "Planetary nebulae"
 msgstr "Planetarische Nebel"
 
 #: u_translation.rsplanetaryneb3
+msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "planetarische Nebel"
 
@@ -3546,6 +3556,10 @@ msgstr "Drucken"
 #| msgid "Print Chart"
 msgid "Print chart"
 msgstr "Karte drucken"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -4500,6 +4514,10 @@ msgstr "Sterne"
 #| msgid "Stars and Deep Sky catalogs prepared with "
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Stern- und Deep-Sky Kataloge vorbereitet mit"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 #, fuzzy

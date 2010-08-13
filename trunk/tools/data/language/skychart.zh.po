@@ -2777,6 +2777,10 @@ msgstr "偏食"
 msgid "Password"
 msgstr "密码"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "路径"
@@ -2990,6 +2994,10 @@ msgstr "打印"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "打印星图"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3774,6 +3782,10 @@ msgstr "恒星"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "恒星和深空星表编制使用"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

@@ -2402,6 +2402,7 @@ repeat
   end;
   break;
 until false ;
+CloseGCat;
 result:=ok;
 end;
 

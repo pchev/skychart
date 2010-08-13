@@ -49,7 +49,7 @@ TCdCSplitter = Class(TCustomSplitter)
     procedure MouseUp(Button: TMouseButton; Shift:TShiftState; X,Y:Integer); override;
   end;
   
-TCdCPanel = Class(TPanel)
+TCdCPanel = Class(TCustomPanel)
   public
     property OnMouseDown;
     property OnMouseMove;
@@ -58,7 +58,7 @@ TCdCPanel = Class(TPanel)
     property OnDblClick;
   end;
   
-  TChildDoc = class(TPanel)
+  TChildDoc = class(TCustomPanel)
     TopLeftBar, TopRightBar, BotLeftBar, BotRightBar : TCdCSplitter;
     TopBar, BotBar, LeftBar, RightBar : TCdCSplitter;
     MenuBar: TCDCPanel;
@@ -140,7 +140,57 @@ TCdCPanel = Class(TPanel)
      during move or resize.
     }
     property WireframeMoveResize: boolean read FWireframeMoveResize write FWireframeMoveResize;
-//    property onExit;
+   published
+    property Align;
+    property Alignment;
+    property Anchors;
+    property AutoSize;
+    property BorderSpacing;
+    property BevelInner;
+    property BevelOuter;
+    property BevelWidth;
+    property BorderWidth;
+    property BorderStyle;
+    property ChildSizing;
+    property ClientHeight;
+    property ClientWidth;
+    property Color;
+    property Constraints;
+    property DockSite;
+    property DragCursor;
+    property DragKind;
+    property DragMode;
+    property Enabled;
+    property Font;
+    property FullRepaint;
+    property ParentColor;
+    property ParentFont;
+    property ParentShowHint;
+    property PopupMenu;
+    property ShowHint;
+    property TabOrder;
+    property TabStop;
+    property UseDockManager default True;
+    property Visible;
+    property OnClick;
+    property OnDockDrop;
+    property OnDockOver;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+    property OnGetSiteInfo;
+    property OnGetDockCaption;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnResize;
+    property OnStartDock;
+    property OnStartDrag;
+    property OnUnDock;
   end;
 
 implementation

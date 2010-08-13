@@ -165,12 +165,13 @@ type
     LabelH, LabelM : TLabel;
     lockchange:boolean;
     FOnChange: TNotifyEvent;
-    procedure Paint; override;
     procedure EditChange(Sender: TObject);
     procedure SetTime(Value: TDateTime);
     function ReadTime: TDateTime;
     procedure SetEnable(value:boolean);
     function GetEnable: boolean;
+  protected
+    procedure Paint; override;
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;

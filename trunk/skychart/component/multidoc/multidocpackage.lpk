@@ -19,7 +19,7 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Version Minor="3"/>
+    <Version Minor="4"/>
     <Files Count="3">
       <Item1>
         <Filename Value="MultiDoc.pas"/>

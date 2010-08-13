@@ -2775,6 +2775,10 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr ""
@@ -2987,6 +2991,10 @@ msgstr ""
 
 #: u_translation.rsprintchart
 msgid "Print chart"
+msgstr ""
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
 msgstr ""
 
 #: u_translation.rsprinter
@@ -3771,6 +3779,10 @@ msgstr ""
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
+msgstr ""
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
 msgstr ""
 
 #: u_translation.rsstarsfilter

@@ -2250,7 +2250,6 @@ pagecontrol1.PageIndex:=pageColor;
 end;
 
 procedure Tf_catgen.Button12Click(Sender: TObject);
-var fn:string;
 begin
 ShowHelp;
 end;

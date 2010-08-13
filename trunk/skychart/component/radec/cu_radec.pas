@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-Uses Controls, Classes, SysUtils, LResources, Types, GraphType, ExtCtrls, StdCtrls;
+Uses Controls, Classes, SysUtils, LResources, GraphType, ExtCtrls, StdCtrls;
 
 type 
   Tradeckind=( RA, DE, Az, Alt );
@@ -46,8 +46,8 @@ type
     function ReadValue: Double;
     procedure SetKind(Val: Tradeckind);
     procedure EditChange(Sender: TObject);
-    procedure SetEnabled(value:boolean);
-    function GetEnabled: boolean;
+    procedure SetEnabled(value:boolean); override;
+    function GetEnabled: boolean; override;
   public
     { Public declarations }
      constructor Create(Aowner:Tcomponent); override;
@@ -354,7 +354,7 @@ end;
 end;
 
 function TRaDec.ReadValue: Double;
-var val,d,m,s: string;
+var val: string;
 begin
 try
 result:=0;

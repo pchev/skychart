@@ -70,10 +70,12 @@ type
     function GetServerId: String;
     procedure ReceiveMessage(Sender: TObject);
     procedure SetUpdateInterval(const AValue: Cardinal);
-    procedure Loaded; override;
+
     {$ifdef unix}
     procedure CheckMessage(Sender: TObject);
     {$endif}
+  protected
+    procedure Loaded; override;
   public
     constructor Create(AOwner: TComponent); override;
   published
@@ -257,8 +259,6 @@ begin
 end;
 
 Procedure TCdCUniqueInstance.RetryOrHalt;
-var i : integer;
-    s:string;
 begin
 {$ifdef unix}
   inc(retrycount);

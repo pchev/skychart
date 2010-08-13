@@ -126,8 +126,7 @@ implementation
 
 var
   dummy_ext : extended;
-  ftrace : textfile;
-  
+
 {$ifdef lclgtk2} {$define cdcutf8} {$endif}
 {$ifdef lclqt} {$define cdcutf8} {$endif}
 {$ifdef lclcarbon} {$define cdcutf8} {$endif}

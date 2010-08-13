@@ -2,7 +2,7 @@
 # Patrick Chevalley <pch@ap-i.net>, 2009, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-07-18 19:08+0200\n"
+"PO-Revision-Date: 2010-08-12 18:38+0200\n"
 "Last-Translator: pch\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -2778,6 +2778,10 @@ msgstr "Partiel"
 msgid "Password"
 msgstr "Mot de passe"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr "Pastel"
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Repertoire"
@@ -2991,6 +2995,10 @@ msgstr "Imprimer"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "Impression de la carte"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr "Carte imprimée"
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3775,6 +3783,10 @@ msgstr "Etoiles"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Catalogues préparés avec "
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr "Fichier des images d'étoiles"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

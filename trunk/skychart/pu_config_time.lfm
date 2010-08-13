@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 505
+  Left = 494
   Height = 564
-  Top = 8
+  Top = 0
   Width = 474
   ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
@@ -211,7 +211,7 @@ object f_config_time: Tf_config_time
           object Label1: TLabel
             Left = 8
             Height = 18
-            Top = 109
+            Top = 108
             Width = 18
             Caption = 'JD:'
             ParentColor = False
@@ -313,7 +313,7 @@ object f_config_time: Tf_config_time
           object JDEdit: TFloatEdit
             Left = 56
             Height = 25
-            Top = 106
+            Top = 105
             Width = 131
             TabOrder = 7
             OnChange = JDEditChange
@@ -354,9 +354,9 @@ object f_config_time: Tf_config_time
             TabOrder = 10
           end
           object BitBtn1: TBitBtn
-            Left = 197
+            Left = 190
             Height = 30
-            Top = 102
+            Top = 103
             Width = 32
             Glyph.Data = {
               76050000424D7605000000000000360000002800000015000000150000000100

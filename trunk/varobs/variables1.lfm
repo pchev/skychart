@@ -1,11 +1,11 @@
 object VarForm: TVarForm
-  Left = 308
-  Height = 600
-  Top = 98
+  Left = 215
+  Height = 500
+  Top = 0
   Width = 800
   ActiveControl = Panel1
   Caption = 'Variable stars observer'
-  ClientHeight = 580
+  ClientHeight = 475
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'Default'
@@ -122,7 +122,7 @@ object VarForm: TVarForm
   LCLVersion = '0.9.28.2'
   object Grid1: TStringGrid
     Left = 0
-    Height = 508
+    Height = 403
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
@@ -150,25 +150,25 @@ object VarForm: TVarForm
     TabOrder = 1
     object Label2: TLabel
       Left = 11
-      Height = 15
+      Height = 14
       Top = 10
-      Width = 23
+      Width = 27
       Caption = 'Date'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 22
-      Height = 15
+      Height = 14
       Top = 44
-      Width = 13
+      Width = 12
       Caption = 'JD'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 147
-      Height = 15
+      Height = 14
       Top = 44
-      Width = 23
+      Width = 26
       Caption = 'Dec.'
       ParentColor = False
     end
@@ -185,7 +185,7 @@ object VarForm: TVarForm
     end
     object Edit1: TEdit
       Left = 48
-      Height = 22
+      Height = 21
       Top = 42
       Width = 89
       OnExit = Edit1Change
@@ -194,7 +194,7 @@ object VarForm: TVarForm
     end
     object Edit2: TEdit
       Left = 176
-      Height = 22
+      Height = 21
       Top = 42
       Width = 97
       OnExit = Edit2Change
@@ -216,7 +216,7 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 20
+      ClientHeight = 23
       ClientWidth = 325
       Columns = 3
       ItemIndex = 0
@@ -229,7 +229,7 @@ object VarForm: TVarForm
     end
     object Edit4: TEdit
       Left = 376
-      Height = 22
+      Height = 21
       Top = 3
       Width = 121
       TabOrder = 5
@@ -246,7 +246,7 @@ object VarForm: TVarForm
     end
     object DateEdit1: TDateEdit
       Left = 48
-      Height = 22
+      Height = 21
       Top = 6
       Width = 80
       CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]

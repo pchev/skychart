@@ -2777,6 +2777,10 @@ msgstr "Частичный"
 msgid "Password"
 msgstr "Пароль"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Путь"
@@ -2990,6 +2994,10 @@ msgstr "Печать"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "Печатать карту"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3774,6 +3782,10 @@ msgstr "Звёзды"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Каталоги звёзд и Deep Sky, приготовленные"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

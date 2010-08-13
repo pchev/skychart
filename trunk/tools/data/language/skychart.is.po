@@ -1030,10 +1030,12 @@ msgstr "%sCW"
 #: u_translation.rsdarknebula
 #, fuzzy
 #| msgid "Dark Nebula"
+msgctxt "u_translation.rsdarknebula"
 msgid "Dark nebula"
 msgstr "Skuggaþoka"
 
 #: u_translation.rsdarknebula2
+msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Skuggaþoka"
 
@@ -1980,10 +1982,12 @@ msgstr "Vetrarbraut"
 #: u_translation.rsgalaxycluste
 #, fuzzy
 #| msgid "Galaxy Cluster"
+msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
 msgstr "Vetrarbrautaþyrping"
 
 #: u_translation.rsgalaxycluste2
+msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Vetrarbrautaþyrp."
 
@@ -3349,6 +3353,10 @@ msgstr "Deildarm."
 msgid "Password"
 msgstr "Lykilorð"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Slóð"
@@ -3414,6 +3422,7 @@ msgstr "Reikistj."
 #: u_translation.rsplanetaryneb
 #, fuzzy
 #| msgid "Planetary Nebula"
+msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
 msgstr "Hringþoka"
 
@@ -3422,6 +3431,7 @@ msgid "Planetary nebulae"
 msgstr "Hringþokur"
 
 #: u_translation.rsplanetaryneb3
+msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Hringþoka"
 
@@ -3598,6 +3608,10 @@ msgstr "Prenta"
 #| msgid "Print Chart"
 msgid "Print chart"
 msgstr "Prenta kort"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -4576,6 +4590,10 @@ msgstr "Stjörnur"
 #| msgid "Stars and Deep Sky catalogs prepared with "
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Skrár stjarna/djúpfyrirbæra undirbúnar með"
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 #, fuzzy
