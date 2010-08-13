@@ -137,6 +137,9 @@
       </Options>
     </Linking>
     <Other>
+      <Verbosity>
+        <ShowHints Value="False"/>
+      </Verbosity>
       <CustomOptions Value="-dUseCThreads
 "/>
       <CompilerPath Value="$(CompPath)"/>

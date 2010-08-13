@@ -1,8 +1,8 @@
-{ Ceci est un fichier ressource généré automatiquement par Lazarus }
+{ This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_config_time','FORMDATA',[
-  'TPF0'#14'Tf_config_time'#13'f_config_time'#4'Left'#3#249#1#6'Height'#3'4'#2#3
-  +'Top'#2#8#5'Width'#3#218#1#13'ActiveControl'#7#9'MainPanel'#11'BorderIcons'
+  'TPF0'#14'Tf_config_time'#13'f_config_time'#4'Left'#3#238#1#6'Height'#3'4'#2#3
+  +'Top'#2#0#5'Width'#3#218#1#13'ActiveControl'#7#9'MainPanel'#11'BorderIcons'
   +#11#12'biSystemMenu'#0#11'BorderStyle'#7#12'bsToolWindow'#7'Caption'#6#11'Da'
   +'te / Time'#12'ClientHeight'#3'4'#2#11'ClientWidth'#3#218#1#7'OnClose'#7#9'F'
   +'ormClose'#8'OnCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnS'
@@ -50,7 +50,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'Label145'#4'Left'#3#196#0#6'Height'#2#18#3'Top'#2#6#5'Width'#2#11#7'Caption'
   +#6#1'D'#11'ParentColor'#8#0#0#6'TLabel'#8'Label140'#4'Left'#2#8#6'Height'#2
   +#18#3'Top'#2#22#5'Width'#2' '#7'Caption'#6#4'Date'#11'ParentColor'#8#0#0#6'T'
-  +'Label'#6'Label1'#4'Left'#2#8#6'Height'#2#18#3'Top'#2'm'#5'Width'#2#18#7'Cap'
+  +'Label'#6'Label1'#4'Left'#2#8#6'Height'#2#18#3'Top'#2'l'#5'Width'#2#18#7'Cap'
   +'tion'#6#3'JD:'#11'ParentColor'#8#0#0#6'TLabel'#7'tzLabel'#4'Left'#3#11#1#6
   +'Height'#2#18#3'Top'#2'F'#5'Width'#2'/'#7'Caption'#6#7'tzLabel'#11'ParentCol'
   +'or'#8#0#0#11'TRadioGroup'#4'ADBC'#4'Left'#3#11#1#6'Height'#2''''#3'Top'#2#6
@@ -75,7 +75,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'meChange'#8'TabOrder'#2#5#5'Value'#2#1#0#0#9'TSpinEdit'#5't_sec'#4'Left'#3
   +#195#0#6'Height'#2#25#3'Top'#2'A'#5'Width'#2'<'#8'MaxValue'#2';'#8'OnChange'
   +#7#10'TimeChange'#8'TabOrder'#2#6#5'Value'#2#1#0#0#10'TFloatEdit'#6'JDEdit'#4
-  +'Left'#2'8'#6'Height'#2#25#3'Top'#2'j'#5'Width'#3#131#0#8'TabOrder'#2#7#8'On'
+  +'Left'#2'8'#6'Height'#2#25#3'Top'#2'i'#5'Width'#3#131#0#8'TabOrder'#2#7#8'On'
   +'Change'#7#12'JDEditChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'Decimals'#2#6#8
   +'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0#0#0#0#0#6'Digits'
   +#2#6#11'NumericType'#7#7'ntFixed'#0#0#7'TButton'#7'Button5'#4'Left'#3#11#1#6
@@ -86,7 +86,7 @@ LazarusResources.Add('Tf_config_time','FORMDATA',[
   +'lick'#8'TabOrder'#2#9#0#0#7'TButton'#7'BitBtn4'#4'Left'#3#11#1#6'Height'#2
   +#25#3'Top'#2'^'#5'Width'#3#137#0#7'Caption'#6#18'Actual system time'#7'OnCli'
   +'ck'#7#12'BitBtn4Click'#8'TabOrder'#2#10#0#0#7'TBitBtn'#7'BitBtn1'#4'Left'#3
-  +#197#0#6'Height'#2#30#3'Top'#2'f'#5'Width'#2' '#10'Glyph.Data'#10'z'#5#0#0'v'
+  +#190#0#6'Height'#2#30#3'Top'#2'g'#5'Width'#2' '#10'Glyph.Data'#10'z'#5#0#0'v'
   +#5#0#0'BMv'#5#0#0#0#0#0#0'6'#0#0#0'('#0#0#0#21#0#0#0#21#0#0#0#1#0#24#0#0#0#0
   +#0'@'#5#0#0#194#30#0#0#194#30#0#0#0#0#0#0#0#0#0#0#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192

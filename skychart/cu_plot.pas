@@ -621,7 +621,7 @@ var
   co : Tcolor;
   col: TFPColor;
 const
-  PointAlpha : single = 0.2;  // Transparency at Solid;
+  PointAlpha : single = 0.15;  // Transparency at Solid;
 
 begin
   if not IntfImgReady then exit;
@@ -678,7 +678,7 @@ begin
           if Distance>(LineWidth+AAWidth+0.5) then
             Alpha := 0
           else
-            Alpha := PointAlpha - PointAlpha * Distance / (LineWidth+AAWidth+0.5)
+            Alpha := PointAlpha - PointAlpha * (Distance / (LineWidth+AAWidth+0.5))
         end;
 
         col:=Colors[XCount,YCount];
@@ -686,15 +686,15 @@ begin
         ExistingPixelGreen :=  col.green;
         ExistingPixelRed   :=  col.red;
 
-        OutLevelR := (ExistingPixelRed)*(1-Alpha) +  ((Lum*R*(Alpha)*UseContrast) );
+        OutLevelR := ExistingPixelRed*(1-Alpha) + Lum*R*Alpha*UseContrast;
         NewPixelR := trunc(OutLevelR);
         if NewPixelR>65535 then NewPixelR := 65535;
 
-        OutLevelG := (ExistingPixelGreen)*(1-Alpha) +  ((Lum*G*(Alpha)*UseContrast) );
+        OutLevelG := ExistingPixelGreen*(1-Alpha) + Lum*G*Alpha*UseContrast;
         NewPixelG := trunc(OutLevelG);
         if NewPixelG>65535 then NewPixelG := 65535;
 
-        OutLevelB := (ExistingPixelBlue)*(1-Alpha) +  ((Lum*B*(Alpha)*UseContrast) );
+        OutLevelB := ExistingPixelBlue*(1-Alpha) + Lum*B*Alpha*UseContrast;
         NewPixelB := trunc(OutLevelB);
         if NewPixelB>65535 then NewPixelB := 65535;
 
@@ -1376,13 +1376,16 @@ if not cfgplot.Invisible then begin
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
+          if not IntfImgReady then InitPixelImg;
           PlotStar(x,y,magn,b_v);
           end;
       1 : begin // diam
+          if IntfImgReady then ClosePixelImg;
           PlotPlanet1(xx,yy,ipla,pixscale,diam);
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
+          if IntfImgReady then ClosePixelImg;
           rot:=rot*FlipX*FlipY;
           {$ifdef mswindows}
           if use_Xplanet then
@@ -1395,6 +1398,7 @@ if not cfgplot.Invisible then begin
           {$endif}
           end;
       3 : begin // symbol
+          if IntfImgReady then ClosePixelImg;
           PlotPlanet4(xx,yy,ipla,pixscale,WhiteBg);
           end;
   end;
@@ -1698,20 +1702,21 @@ begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
-if not (hidesat xor showhide) then
-   with cnv do begin
+  if not (hidesat xor showhide) then begin
+    ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+    ds2:=round(diam*pixscale);
+    if ds2>ds then begin
+      if IntfImgReady then ClosePixelImg;
+      with cnv do begin
+        ds:=ds2;
         Pen.Color := cfgplot.Color[0];
         Pen.Width := cfgchart.drawpen;
         Brush.style:=bsSolid;
         Pen.Mode := pmCopy;
-        brush.color:=cfgplot.Color[11];
-        ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
-        ds2:=round(diam*pixscale);
-        if ds2>ds then begin
-           ds:=ds2;
-           brush.color:=cfgplot.Color[20];
-           ds2:= round(ds/2);
-           if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
+        //brush.color:=cfgplot.Color[11];
+        brush.color:=cfgplot.Color[20];
+        ds2:= round(ds/2);
+        if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
            case ds of
                 1..2: Ellipse(xx,yy,xx+ds,yy+ds);
                 3: Ellipse(xx-1,yy-1,xx+2,yy+2);
@@ -1721,8 +1726,12 @@ if not (hidesat xor showhide) then
                 7: Ellipse(xx-3,yy-3,xx+4,yy+4);
                 else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
            end;
-           end;
-        end else PlotStar(x,y,ma,1020);                    
+        end;
+      end;
+     end else begin
+        if not IntfImgReady then InitPixelImg;
+        PlotStar(x,y,ma,1020)
+     end;
    end;
 end;
 
@@ -2376,7 +2385,7 @@ begin
       cnv.Pen.Mode:=pmCopy;
       cnv.Pen.Color:=cfgplot.Color[31];
 
-      if cfgplot.nebplot = 0 then // line mode
+      if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillGxy then // line mode
         begin
           cnv.Brush.style:=bsClear;
           if cfgplot.DSOColorFillGxy then
@@ -2387,7 +2396,7 @@ begin
             end;
         end;
 
-      if cfgplot.nebplot = 1 then // graphics mode
+      if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGxy then // graphics mode
         begin
           if Asbr<0 then
             begin
@@ -2443,7 +2452,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[24];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillOCl then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2451,6 +2460,7 @@ begin
             Adim:=1;
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
+      if Asbr<10 then Asbr:=10;  //some very bright cluster make too bright surface
 //    adjust colour by using Asbr and UI options
       col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
       r:=cfgplot.Color[24] and $FF;
@@ -2462,7 +2472,7 @@ begin
       cnv.Brush.Color := cnv.Pen.Color;
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillOCl then // line mode
 // line mode
     begin
       ds:=ds+cfgchart.drawpen;
@@ -2519,7 +2529,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[26];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillPNe then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2537,7 +2547,7 @@ begin
       cnv.Brush.Color := cnv.Pen.Color;
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillPNe then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillPNe then
@@ -2589,7 +2599,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[25];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGCl then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2615,7 +2625,7 @@ begin
       cnv.Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillGCl then // line mode
     begin
       ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
@@ -2644,9 +2654,6 @@ begin
 
 end;
 
-
-
-
 Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
 {
   Plot bright nebula - both emmission and reflection are plotted the same
@@ -2658,6 +2665,7 @@ var
   col,r,g,b : byte;
   nebcolor : Tcolor;
   ObjMorph:string;
+  fill: boolean;
 begin
 // set defaults
   xx:=round(Ax);
@@ -2671,12 +2679,17 @@ begin
 // emission of reflection nebula?
   ObjMorph:=LeftStr(Amorph, 1);
   if ObjMorph = 'R'
-  then cnv.Pen.Color := cfgplot.Color[29]
-  else cnv.Pen.Color := cfgplot.Color[28];
-
+  then begin
+    cnv.Pen.Color := cfgplot.Color[29];
+    fill:=cfgplot.DSOColorFillRN;
+  end
+  else begin
+    cnv.Pen.Color := cfgplot.Color[28];
+    fill:=cfgplot.DSOColorFillEN;
+  end;
   cnv.Brush.Style := bsClear;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1) and fill then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2697,7 +2710,7 @@ begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not fill then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
       cnv.Brush.Style := bsClear;
@@ -2753,7 +2766,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[29];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2773,10 +2786,10 @@ begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillRN then
+      if cfgplot.DSOColorFillEN then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[29];
@@ -2927,7 +2940,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[23];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillAst then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -2946,7 +2959,7 @@ begin
       cnv.Brush.Color := cnv.Pen.Color;
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillAst then // line mode
 // line mode
     begin
       ds:=ds+cfgchart.drawpen;
@@ -2996,7 +3009,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[28];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -3016,7 +3029,7 @@ begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillEN then
@@ -3077,6 +3090,7 @@ begin
   cnv.Pen.Style := psSolid;
 
 end;
+
 Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
 {
   Plot dark nebula
@@ -3099,7 +3113,7 @@ begin
   cnv.Pen.Color := cfgplot.Color[27];
   cnv.Brush.Style := bsSolid;
 
-  if cfgplot.nebplot = 1 then // graphic mode
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillDN then // graphic mode
     begin
       if Asbr<=0 then
         begin
@@ -3119,7 +3133,7 @@ begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
     end;
 
-  if cfgplot.nebplot = 0 then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillDN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
       if cfgplot.DSOColorFillDN then
@@ -3142,6 +3156,7 @@ begin
   cnv.Pen.Style := psSolid;
 
 end;
+
 Procedure TSplot.PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
 {
  Plot unknown object?

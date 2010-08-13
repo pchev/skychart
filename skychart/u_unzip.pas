@@ -107,11 +107,11 @@ end;
   var
     write_filename: PChar;
     skip:   cint;
-  var
+{  var
     rep:    char;
     ftestexist: FILEptr;
   var
-    answer: string[127];
+    answer: string[127]; }
   var
     c:      char;
   begin

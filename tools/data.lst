@@ -293,6 +293,8 @@ data/Themes
 data/Themes/default
 data/Themes/default/arrow.bmp
 data/Themes/default/compass.bmp
+data/Themes/default/starshape.bmp
+data/Themes/default/retic.cur
 data/Themes/default/icon_blue
 data/Themes/default/icon_blue/a1.png
 data/Themes/default/icon_blue/b1.png
@@ -661,7 +663,6 @@ data/Themes/default/icon_red/i86.png
 data/Themes/default/icon_red/i87.png
 data/Themes/default/icon_red/i8.png
 data/Themes/default/icon_red/i9.png
-data/Themes/default/retic.cur
 data/varobs/And.dat
 data/varobs/Ant.dat
 data/varobs/Aps.dat

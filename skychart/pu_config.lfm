@@ -355,16 +355,16 @@ object f_config: Tf_config
       Height = 497
       Top = 1
       Width = 491
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 3
-      Color = clBlack
-      ParentColor = False
-      TabOrder = 0
       Maximized = True
+      BorderWidth = 3
       TitleHeight = 12
       KeepLastChild = False
       WireframeMoveResize = False
+      Align = alClient
+      BevelOuter = bvNone
+      Color = clBlack
+      ParentColor = False
+      TabOrder = 0
     end
   end
   object Splitter1: TSplitter

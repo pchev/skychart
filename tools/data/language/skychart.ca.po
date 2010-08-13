@@ -2778,6 +2778,10 @@ msgstr "Parcial"
 msgid "Password"
 msgstr "Contrasenya"
 
+#: u_translation.rspastel
+msgid "Pastel"
+msgstr ""
+
 #: u_translation.rspath
 msgid "Path"
 msgstr "Directori"
@@ -2991,6 +2995,10 @@ msgstr "Imprimeix"
 #: u_translation.rsprintchart
 msgid "Print chart"
 msgstr "Impressió de la carta"
+
+#: u_translation.rsprintedchart
+msgid "Printed chart"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3775,6 +3783,10 @@ msgstr "Estels"
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
 msgstr "Catàlegs preparats amb "
+
+#: u_translation.rsstarsbitmapf
+msgid "Stars bitmap file"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"

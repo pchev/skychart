@@ -240,6 +240,13 @@ if (Fplot.cfgplot.starplot=1) then begin
    cfgsc.msg:='Cannot use this star drawing mode with Gtk2. Change star drawing mode to Line or Parametric.';
 end;
 {$endif}
+{$ifdef mswindows}
+if isWin98 and (Fplot.cfgplot.starplot=1) then begin
+   Fplot.cfgplot.starplot:=0;
+   cfgsc.msg:='Cannot use this star drawing mode with Win98. Change star drawing mode to Line or Parametric.';
+end;
+{$endif}
+
   InitObservatory;
   InitTime;
   InitChart;
@@ -1202,6 +1209,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
            end;
     end;
   end;
+  Fplot.ClosePixelImg;
   if cfgsc.ShowEarthShadow then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
 end;
 result:=true;
@@ -1245,6 +1253,7 @@ if cfgsc.ShowAsteroid then begin
  WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
 {$endif}
   Fplanet.ComputeAsteroid(cfgsc);
+  if (cfgsc.AstSymbol=1) then Fplot.InitPixelImg;
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
     for i:=1 to cfgsc.AsteroidNb do begin
@@ -1273,6 +1282,7 @@ if cfgsc.ShowAsteroid then begin
       end;
     end;
   end;
+  Fplot.ClosePixelImg;
   result:=true;
 end else begin
   cfgsc.AsteroidNb:=0;

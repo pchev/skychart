@@ -3130,7 +3130,6 @@ end;
 // Windows only telescope plugin 
 
 procedure Tf_chart.ConnectPlugin(Sender: TObject);
-var ok: boolean;
 begin
 if Connect1.checked then begin
    Ftelescope.ScopeShow;
@@ -3140,7 +3139,7 @@ end else begin
      Ftelescope.ScopeReadConfig(ExtractFilePath(Configfile));
      Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      Ftelescope.ScopeShow;
-     TelescopeTimer.Enabled:=ok;
+     TelescopeTimer.Enabled:=true;
      sc.cfgsc.TrackOn:=true;
    end;
 end;

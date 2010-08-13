@@ -74,8 +74,6 @@ procedure TPipeClientComm.SendMessage(MsgType : TMessagetype; AStream: TStream);
 
 Var
   Hdr : TMsgHeader;
-  P,L,Count : Integer;
-
 begin
   Hdr.Version:=MsgVersion;
   Hdr.msgType:=MsgType;
@@ -156,7 +154,7 @@ end;
 procedure TPipeServerComm.ReadMessage;
 
 Var
-  L,P,Count : Integer;
+  Count : Integer;
   Hdr : TMsgHeader;
 
 begin

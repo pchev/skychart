@@ -143,11 +143,14 @@ sed "s#%PREFIX%#$prefix#" Makefile.in > Makefile
 cd $basedir
 
 echo
-echo You can now run make 
-echo then make install 
-echo and make install_data
+echo You can now build with:
+echo make clean  
+echo make  
+echo make install 
+echo make install_data
 echo
 echo To crosscompile from Linux to Windows: 
+echo make clean OS_TARGET=win32 CPU_TARGET=i386
 echo make OS_TARGET=win32 CPU_TARGET=i386
 echo make install_win
 echo make install_win_data

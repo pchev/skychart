@@ -1,12 +1,12 @@
 object f_main: Tf_main
   Left = 70
-  Height = 373
-  Top = 91
-  Width = 904
+  Height = 546
+  Top = 12
+  Width = 924
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 348
-  ClientWidth = 904
+  ClientHeight = 521
+  ClientWidth = 924
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
   Menu = MainMenu1
@@ -25,8 +25,14 @@ object f_main: Tf_main
     Height = 230
     Top = 184
     Width = 304
-    BevelOuter = bvNone
+    Maximized = False
     BorderWidth = 3
+    TitleHeight = 15
+    KeepLastChild = False
+    WireframeMoveResize = True
+    onMaximize = MultiDoc1Maximize
+    onActiveChildChange = MultiDoc1ActiveChildChange
+    BevelOuter = bvNone
     ClientHeight = 230
     ClientWidth = 304
     Color = clBlack
@@ -34,16 +40,10 @@ object f_main: Tf_main
     ParentColor = False
     TabOrder = 0
     TabStop = True
-    Maximized = False
-    TitleHeight = 15
-    KeepLastChild = False
-    WireframeMoveResize = True
-    onMaximize = MultiDoc1Maximize
-    onActiveChildChange = MultiDoc1ActiveChildChange
     object starshape: TImage
-      Left = 0
+      Left = 32
       Height = 133
-      Top = 0
+      Top = 32
       Width = 209
       AutoSize = True
       Picture.Data = {
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 260
+    Height = 433
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 260
+    ClientHeight = 433
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 260
+      Height = 433
       Top = 0
       Width = 26
       Align = alClient
@@ -2769,19 +2769,19 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 876
-    Height = 260
+    Left = 896
+    Height = 433
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 260
+    ClientHeight = 433
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 10
+      Height = 183
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,12 +3020,12 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 314
-    Width = 904
+    Top = 487
+    Width = 924
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 904
+    ClientWidth = 924
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3075,30 +3075,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 682
+      Width = 702
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 682
+      ClientWidth = 702
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 682
+        Width = 702
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 682
+        ClientWidth = 702
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 682
+          Width = 702
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -3111,11 +3111,11 @@ object f_main: Tf_main
     Left = 0
     Height = 54
     Top = 0
-    Width = 904
+    Width = 924
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 54
-    ClientWidth = 904
+    ClientWidth = 924
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3123,7 +3123,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 904
+      Width = 924
       ButtonHeight = 23
       Images = ImageNormal
       ParentShowHint = False
@@ -3475,7 +3475,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 874
+        Left = 894
         Height = 23
         Top = 2
         Width = 30
@@ -3511,7 +3511,7 @@ object f_main: Tf_main
       Left = 0
       Height = 28
       Top = 26
-      Width = 904
+      Width = 924
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
@@ -3544,16 +3544,19 @@ object f_main: Tf_main
         Top = 2
         Action = ShowPictures
         Style = tbsCheck
+        OnMouseUp = ToolButtonShowPicturesMouseUp
       end
       object ToolButtonDSS: TToolButton
         Left = 93
         Top = 2
         Action = DSSImage
+        OnMouseUp = ToolButtonDSSMouseUp
       end
       object ToolButtonShowBackgroundImage: TToolButton
         Left = 116
         Top = 2
         Action = SetupPictures
+        OnMouseUp = ToolButtonShowBackgroundImageMouseUp
       end
       object ToolButtonShowPlanets: TToolButton
         Left = 162

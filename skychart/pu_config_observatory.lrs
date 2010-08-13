@@ -78,14 +78,14 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +'North'#6#5'South'#0#8'OnChange'#7#12'latdegChange'#8'TabOrder'#2#3#4'Text'#6
   +#5'North'#0#0#9'TLongEdit'#6'latdeg'#4'Left'#2#4#6'Height'#2#25#4'Hint'#6#5
   +'0..90'#3'Top'#2#20#5'Width'#2'!'#9'MaxLength'#2#2#14'ParentShowHint'#8#8'Sh'
-  +'owHint'#9#8'TabOrder'#2#0#6'OnExit'#7#12'latdegChange'#5'Value'#2#0#8'MaxVa'
-  +'lue'#2'Z'#0#0#9'TLongEdit'#6'latmin'#4'Left'#2'0'#6'Height'#2#25#4'Hint'#6#5
+  +'owHint'#9#8'TabOrder'#2#0#5'Value'#2#0#8'MaxValue'#2'Z'#6'OnExit'#7#12'latd'
+  +'egChange'#0#0#9'TLongEdit'#6'latmin'#4'Left'#2'0'#6'Height'#2#25#4'Hint'#6#5
   +'0..59'#3'Top'#2#20#5'Width'#2#25#9'MaxLength'#2#2#14'ParentShowHint'#8#8'Sh'
-  +'owHint'#9#8'TabOrder'#2#1#6'OnExit'#7#12'latdegChange'#5'Value'#2#0#8'MaxVa'
-  +'lue'#2';'#0#0#9'TLongEdit'#6'latsec'#4'Left'#2'P'#6'Height'#2#25#4'Hint'#6#5
+  +'owHint'#9#8'TabOrder'#2#1#5'Value'#2#0#8'MaxValue'#2';'#6'OnExit'#7#12'latd'
+  +'egChange'#0#0#9'TLongEdit'#6'latsec'#4'Left'#2'P'#6'Height'#2#25#4'Hint'#6#5
   +'0..59'#3'Top'#2#20#5'Width'#2#25#9'MaxLength'#2#2#14'ParentShowHint'#8#8'Sh'
-  +'owHint'#9#8'TabOrder'#2#2#6'OnExit'#7#12'latdegChange'#5'Value'#2#0#8'MaxVa'
-  +'lue'#2';'#0#0#0#9'TGroupBox'#9'Longitude'#4'Left'#3#192#0#6'Height'#2'D'#3
+  +'owHint'#9#8'TabOrder'#2#2#5'Value'#2#0#8'MaxValue'#2';'#6'OnExit'#7#12'latd'
+  +'egChange'#0#0#0#9'TGroupBox'#9'Longitude'#4'Left'#3#192#0#6'Height'#2'D'#3
   +'Top'#2'm'#5'Width'#3#185#0#7'Caption'#6#9'Longitude'#12'ClientHeight'#2'1'
   +#11'ClientWidth'#3#181#0#8'TabOrder'#2#2#0#6'TLabel'#7'Label61'#4'Left'#2#4#6
   +'Height'#2#18#3'Top'#2#4#5'Width'#2'0'#7'Caption'#6#6'Degree'#11'ParentColor'
@@ -97,14 +97,14 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +#2#0#9'ItemIndex'#2#1#13'Items.Strings'#1#6#4'West'#6#4'East'#0#8'OnChange'#7
   +#13'longdegChange'#8'TabOrder'#2#3#4'Text'#6#4'East'#0#0#9'TLongEdit'#7'long'
   +'deg'#4'Left'#2#4#6'Height'#2#25#4'Hint'#6#6'0..180'#3'Top'#2#20#5'Width'#2
-  +'!'#9'MaxLength'#2#4#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#6'On'
-  +'Exit'#7#13'longdegChange'#5'Value'#2#0#8'MaxValue'#3#180#0#0#0#9'TLongEdit'
+  +'!'#9'MaxLength'#2#4#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#5'Va'
+  +'lue'#2#0#8'MaxValue'#3#180#0#6'OnExit'#7#13'longdegChange'#0#0#9'TLongEdit'
   +#7'longmin'#4'Left'#2'0'#6'Height'#2#25#4'Hint'#6#5'0..59'#3'Top'#2#20#5'Wid'
   +'th'#2#25#9'MaxLength'#2#2#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1
-  +#6'OnExit'#7#13'longdegChange'#5'Value'#2#0#8'MaxValue'#2';'#0#0#9'TLongEdit'
+  +#5'Value'#2#0#8'MaxValue'#2';'#6'OnExit'#7#13'longdegChange'#0#0#9'TLongEdit'
   +#7'longsec'#4'Left'#2'P'#6'Height'#2#25#4'Hint'#6#5'0..59'#3'Top'#2#20#5'Wid'
   +'th'#2#25#9'MaxLength'#2#2#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2
-  +#6'OnExit'#7#13'longdegChange'#5'Value'#2#0#8'MaxValue'#2';'#0#0#0#9'TGroupB'
+  +#5'Value'#2#0#8'MaxValue'#2';'#6'OnExit'#7#13'longdegChange'#0#0#0#9'TGroupB'
   +'ox'#8'Altitude'#4'Left'#3'x'#1#6'Height'#2'D'#3'Top'#2'm'#5'Width'#2'Q'#7'C'
   +'aption'#6#8'Altitude'#12'ClientHeight'#2'1'#11'ClientWidth'#2'M'#8'TabOrder'
   +#2#3#0#6'TLabel'#7'Label70'#4'Left'#2#8#6'Height'#2#18#3'Top'#2#4#5'Width'#2
@@ -122,23 +122,23 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +'p'#2#1#5'Width'#3#139#0#7'Caption'#6#16'Country Timezone'#7'Checked'#9#8'On'
   +'Change'#7#15'CountryTZChange'#5'State'#7#9'cbChecked'#8'TabOrder'#2#1#0#0#0
   +#0#5'TPage'#5'Page2'#7'Caption'#6#7'Horizon'#11'ClientWidth'#3#220#1#12'Clie'
-  +'ntHeight'#3#226#1#0#9'TGroupBox'#9'GroupBox2'#4'Left'#2#8#6'Height'#2'Y'#3
+  +'ntHeight'#3#253#1#0#9'TGroupBox'#9'GroupBox2'#4'Left'#2#8#6'Height'#2'Y'#3
   +'Top'#3#142#0#5'Width'#3#201#1#7'Caption'#6'(Want to track an object before '
   +'it rise ?'#12'ClientHeight'#2'F'#11'ClientWidth'#3#197#1#8'TabOrder'#2#1#0#9
-  +'TCheckBox'#13'horizonopaque'#4'Left'#2#13#6'Height'#2#22#3'Top'#2#24#5'Widt'
-  +'h'#3#194#0#7'Caption'#6#29'Show Object below the horizon'#7'OnClick'#7#18'h'
+  +'TCheckBox'#13'horizonopaque'#4'Left'#2#13#6'Height'#2#21#3'Top'#2#24#5'Widt'
+  +'h'#3#218#0#7'Caption'#6#29'Show Object below the horizon'#7'OnClick'#7#18'h'
   +'orizonopaqueClick'#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#9'GroupBox1'#4'Left'#2
   +#8#6'Height'#2'y'#3'Top'#2#14#5'Width'#3#201#1#7'Caption'#6#13'Local Horizon'
   ,#12'ClientHeight'#2'f'#11'ClientWidth'#3#197#1#8'TabOrder'#2#0#0#6'TLabel'#6
-  +'hor_l1'#4'Left'#2#13#6'Height'#2#14#3'Top'#2'@'#5'Width'#3#146#0#7'Caption'
+  +'hor_l1'#4'Left'#2#13#6'Height'#2#18#3'Top'#2'@'#5'Width'#3#166#0#7'Caption'
   +#6#26'Local Horizon File Name : '#11'ParentColor'#8#0#0#9'TCheckBox'#14'disp'
-  +'layhorizon'#4'Left'#2#13#6'Height'#2#22#3'Top'#2#16#5'Width'#3#181#0#7'Capt'
+  +'layhorizon'#4'Left'#2#13#6'Height'#2#21#3'Top'#2#16#5'Width'#3#204#0#7'Capt'
   +'ion'#6#30'Display the local horizon line'#7'OnClick'#7#19'displayhorizonCli'
   +'ck'#8'TabOrder'#2#0#0#0#13'TFileNameEdit'#11'horizonfile'#4'Left'#3#197#0#6
-  +'Height'#2#23#3'Top'#2'8'#5'Width'#3#208#0#13'DialogOptions'#11#0#11'FilterI'
+  +'Height'#2#25#3'Top'#2'8'#5'Width'#3#208#0#13'DialogOptions'#11#0#11'FilterI'
   +'ndex'#2#0#15'HideDirectories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#8'Tab'
   +'Order'#2#2#8'OnChange'#7#17'horizonfileChange'#0#0#9'TCheckBox'#11'fillhori'
-  +'zon'#4'Left'#3#221#0#6'Height'#2#22#3'Top'#2#16#5'Width'#3#140#0#7'Caption'
+  +'zon'#4'Left'#3#221#0#6'Height'#2#21#3'Top'#2#16#5'Width'#3#153#0#7'Caption'
   +#6#23'Fill with horizon color'#7'OnClick'#7#16'fillhorizonClick'#8'TabOrder'
   +#2#1#0#0#0#9'TGroupBox'#9'GroupBox3'#4'Left'#2#8#6'Height'#2'y'#3'Top'#3#238
   +#0#5'Width'#3#201#1#7'Caption'#6'!Depression of the visible horizon'#12'Clie'
@@ -147,20 +147,20 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +'ption'#6'|You live on a big mountain near the ocean shore and you like to o'
   +'bserve the distorded image of the object below the horizon.'#11'ParentColor'
   +#8#8'WordWrap'#9#0#0#9'TCheckBox'#17'horizondepression'#4'Left'#2#13#6'Heigh'
-  +'t'#2#22#3'Top'#2'H'#5'Width'#3#253#0#7'Caption'#6'(Draw the apparent depres'
-  +'sed horizon line'#7'OnClick'#7#22'horizondepressionClick'#8'TabOrder'#2#0#0
-  +#0#0#9'TGroupBox'#10'refraction'#4'Left'#2#8#6'Height'#2'P'#3'Top'#3'n'#1#5
-  +'Width'#3#201#1#7'Caption'#6#22'Atmospheric Refraction'#12'ClientHeight'#2'='
+  +'t'#2#21#3'Top'#2'H'#5'Width'#3'"'#1#7'Caption'#6'(Draw the apparent depress'
+  +'ed horizon line'#7'OnClick'#7#22'horizondepressionClick'#8'TabOrder'#2#0#0#0
+  +#0#9'TGroupBox'#10'refraction'#4'Left'#2#8#6'Height'#2'P'#3'Top'#3'n'#1#5'Wi'
+  +'dth'#3#201#1#7'Caption'#6#22'Atmospheric Refraction'#12'ClientHeight'#2'='
   +#11'ClientWidth'#3#197#1#8'TabOrder'#2#3#0#6'TLabel'#7'Label82'#4'Left'#2'-'
-  +#6'Height'#2#14#3'Top'#2#7#5'Width'#2'e'#7'Caption'#6#19'Pressure (millibar)'
-  +#11'ParentColor'#8#0#0#6'TLabel'#7'Label83'#4'Left'#3#245#0#6'Height'#2#14#3
-  +'Top'#2#7#5'Width'#2'|'#7'Caption'#6#21'Temperature (Celsius)'#11'ParentColo'
-  +'r'#8#0#0#10'TFloatEdit'#8'pressure'#4'Left'#2'-'#6'Height'#2#22#4'Hint'#6#7
-  +'0..1500'#3'Top'#2#21#5'Width'#2'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'Tab'
-  +'Order'#2#0#8'OnChange'#7#14'pressureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8
-  +'Decimals'#2#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0
+  +#6'Height'#2#18#3'Top'#2#7#5'Width'#2'u'#7'Caption'#6#19'Pressure (millibar)'
+  +#11'ParentColor'#8#0#0#6'TLabel'#7'Label83'#4'Left'#3#245#0#6'Height'#2#18#3
+  +'Top'#2#7#5'Width'#3#141#0#7'Caption'#6#21'Temperature (Celsius)'#11'ParentC'
+  +'olor'#8#0#0#10'TFloatEdit'#8'pressure'#4'Left'#2'-'#6'Height'#2#25#4'Hint'#6
+  +#7'0..1500'#3'Top'#2#21#5'Width'#2'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'T'
+  +'abOrder'#2#0#8'OnChange'#7#14'pressureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0
+  +#8'Decimals'#2#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0
   +#128#187#9'@'#11'NumericType'#7#7'ntFixed'#0#0#10'TFloatEdit'#11'temperature'
-  +#4'Left'#3#245#0#6'Height'#2#22#4'Hint'#6#9'-100..100'#3'Top'#2#21#5'Width'#2
+  +#4'Left'#3#245#0#6'Height'#2#25#4'Hint'#6#9'-100..100'#3'Top'#2#21#5'Width'#2
   +'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'OnChange'#7#17'temp'
   +'eratureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0
   +#200#5#192#8'MaxValue'#5#0#0#0#0#0#0#0#200#5'@'#11'NumericType'#7#7'ntFixed'

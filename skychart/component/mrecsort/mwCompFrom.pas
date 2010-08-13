@@ -112,12 +112,7 @@ begin
 end;  { CompShortAt }
 
 function CompSmallAt(Const Item1, Item2: Pointer; P: PtrInt): Integer;
-var a,b : smallint;
-    aptr:pointer;
 begin
-aptr:=Pointer(PtrUInt(Item1) + P);
-a:= SmallInt(aptr^);
-b:= SmallInt(Pointer(PtrUInt(Item2) + P)^);
   if SmallInt(Pointer(PtrUInt(Item1) + P)^) < SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= -1 else
   if SmallInt(Pointer(PtrUInt(Item1) + P)^) = SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= 0 else
   if SmallInt(Pointer(PtrUInt(Item1) + P)^) > SmallInt(Pointer(PtrUInt(Item2) + P)^) then Result:= 1;

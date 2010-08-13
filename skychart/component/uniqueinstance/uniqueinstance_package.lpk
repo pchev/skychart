@@ -3,7 +3,7 @@
   <Package Version="3">
     <PathDelim Value="\"/>
     <Name Value="uniqueinstance_package"/>
-    <Author Value="Luiz Américo Pereira Câmara"/>
+    <Author Value="Luiz AmÃ©rico Pereira CÃ¢mara"/>
     <CompilerOptions>
       <Version Value="8"/>
       <PathDelim Value="\"/>
@@ -11,6 +11,9 @@
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <Other>
+        <Verbosity>
+          <ShowHints Value="False"/>
+        </Verbosity>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
@@ -18,7 +21,7 @@
 "/>
     <License Value="Modified LGPL
 "/>
-    <Version Minor="2" Release="1"/>
+    <Version Minor="2" Release="2"/>
     <Files Count="3">
       <Item1>
         <Filename Value="uniqueinstance.pas"/>

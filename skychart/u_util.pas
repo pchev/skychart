@@ -153,8 +153,10 @@ result:=UTF8Encode(v);
 end;
 
 function GreekSymbolUtf8(v:string):string;
+{$ifdef greekutf8}
 var c,n : string;
     i: integer;
+{$endif}
 begin
 {$ifdef greekutf8}
 result:='';

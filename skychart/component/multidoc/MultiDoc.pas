@@ -60,7 +60,7 @@ type
    MDIChildren[i]  -> MultiDoc1.Childs[i].DockedObject
                    or MultiDoc1.Childs[i]
 }
-  TMultiDoc = class(TPanel)
+  TMultiDoc = class(TCustomPanel)
   private
     { Private declarations }
     FChildIndex,FActiveChild: integer;
@@ -192,8 +192,57 @@ type
     {
      When resizings
     }
-//    property OnResize : TNotifyEvent read FOnResize write FOnResize;
-//    property OnExit;
+    property OnResize: TNotifyEvent read FOnResize write FOnResize;
+    published
+    property Align;
+    property Alignment;
+    property Anchors;
+    property AutoSize;
+    property BorderSpacing;
+    property BevelInner;
+    property BevelOuter;
+    property BevelWidth;
+    property BorderStyle;
+    property Caption;
+    property ChildSizing;
+    property ClientHeight;
+    property ClientWidth;
+    property Color;
+    property Constraints;
+    property DockSite;
+    property DragCursor;
+    property DragKind;
+    property DragMode;
+    property Enabled;
+    property Font;
+    property FullRepaint;
+    property ParentColor;
+    property ParentFont;
+    property ParentShowHint;
+    property PopupMenu;
+    property ShowHint;
+    property TabOrder;
+    property TabStop;
+    property UseDockManager default True;
+    property Visible;
+    property OnClick;
+    property OnDockDrop;
+    property OnDockOver;
+    property OnDblClick;
+    property OnDragDrop;
+    property OnDragOver;
+    property OnEndDock;
+    property OnEndDrag;
+    property OnEnter;
+    property OnExit;
+    property OnGetSiteInfo;
+    property OnGetDockCaption;
+    property OnMouseDown;
+    property OnMouseMove;
+    property OnMouseUp;
+    property OnStartDock;
+    property OnStartDrag;
+    property OnUnDock;
   end;
 
 procedure Register;

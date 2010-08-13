@@ -78,11 +78,12 @@ type
     procedure StartDownload;
     procedure HTTPComplete;
     procedure FTPComplete;
+    procedure progressreport;
+    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+  public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function Execute: Boolean; override;
-    procedure progressreport;
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
   published
     property URL : string read Furl write Furl;
     property SaveToFile : string read Ffile write Ffile;
@@ -263,12 +264,10 @@ end;
 end;
 
 procedure TDownloadDialog.StartDownload;
-var ok: boolean;
-    buf,ftpdir,ftpfile: string;
+var buf,ftpdir,ftpfile: string;
     i: integer;
 begin
 FResponse:='';
-ok:=false;
 if copy(Furl,1,4)='http' then begin        // HTTP protocol
   http.Clear;
   if Fproxy<>'' then http.ProxyHost:=Fproxy;

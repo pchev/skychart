@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses cu_vocatalog, cu_vodetail, cu_vodata, 
-     httpsend, LibXmlParser, LibXmlComps,
+     LibXmlParser,
      LResources, Classes, SysUtils;
 
 procedure Register;

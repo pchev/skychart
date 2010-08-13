@@ -260,13 +260,13 @@ LazarusResources.Add('Tf_config','FORMDATA',[
   ,#9'nextClick'#8'TabOrder'#2#1#0#0#0#0#6'TPanel'#6'Panel4'#4'Left'#3#237#0#6
   +'Height'#3#243#1#3'Top'#2#0#5'Width'#3#237#1#5'Align'#7#8'alClient'#12'Clien'
   +'tHeight'#3#243#1#11'ClientWidth'#3#237#1#8'TabOrder'#2#2#0#9'TMultiDoc'#9'M'
-  +'ultiDoc1'#4'Left'#2#1#6'Height'#3#241#1#3'Top'#2#1#5'Width'#3#235#1#5'Align'
-  +#7#8'alClient'#10'BevelOuter'#7#6'bvNone'#11'BorderWidth'#2#3#5'Color'#7#7'c'
-  +'lBlack'#11'ParentColor'#8#8'TabOrder'#2#0#9'Maximized'#9#11'TitleHeight'#2
-  +#12#13'KeepLastChild'#8#19'WireframeMoveResize'#8#0#0#0#9'TSplitter'#9'Split'
-  +'ter1'#4'Left'#3#232#0#6'Height'#3#243#1#3'Top'#2#0#5'Width'#2#5#7'Beveled'#9
-  +#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#3
-  +'r'#2#3'top'#3#252#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer'
-  +'1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#160#2#3'top'#3#253
-  +#1#0#0#0
+  +'ultiDoc1'#4'Left'#2#1#6'Height'#3#241#1#3'Top'#2#1#5'Width'#3#235#1#9'Maxim'
+  +'ized'#9#11'BorderWidth'#2#3#11'TitleHeight'#2#12#13'KeepLastChild'#8#19'Wir'
+  +'eframeMoveResize'#8#5'Align'#7#8'alClient'#10'BevelOuter'#7#6'bvNone'#5'Col'
+  +'or'#7#7'clBlack'#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TSplitter'#9'Spl'
+  +'itter1'#4'Left'#3#232#0#6'Height'#3#243#1#3'Top'#2#0#5'Width'#2#5#7'Beveled'
+  +#9#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'
+  +#3'r'#2#3'top'#3#252#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpView'
+  +'er1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#160#2#3'top'#3
+  +#253#1#0#0#0
 ]);
