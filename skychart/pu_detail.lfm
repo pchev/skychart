@@ -1,15 +1,15 @@
 object f_detail: Tf_detail
   Left = 875
-  Height = 391
+  Height = 471
   Top = 124
   Width = 398
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
   Caption = 'Details'
-  ClientHeight = 391
+  ClientHeight = 471
   ClientWidth = 398
   OnCreate = FormCreate
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -54,7 +54,7 @@ object f_detail: Tf_detail
   end
   object IpHtmlPanel1: TIpHtmlPanel
     Left = 0
-    Height = 341
+    Height = 421
     Top = 50
     Width = 398
     Align = alClient
@@ -67,6 +67,7 @@ object f_detail: Tf_detail
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
+    TabOrder = 1
   end
   object ActionList1: TActionList
     left = 128
