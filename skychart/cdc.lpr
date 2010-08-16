@@ -39,7 +39,7 @@ uses
   radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
   series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
-  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LResources, LCLProc,
+  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc,
   pu_clock, pu_main, u_unzip;
   
 var i : integer;
@@ -47,8 +47,9 @@ var i : integer;
 
 {$IFDEF WINDOWS}{$R cdc.rc}{$ENDIF}
 
+{$R *.res}
+
 begin
-  {$I cdc.lrs}
 
   {$ifdef trace_debug}
   debugln('Read parameters');
