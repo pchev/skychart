@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_util,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
   Buttons, IpHtml, LazHelpHTML;
 
@@ -130,7 +130,7 @@ var
   NewHTML: TIpHtml;
 begin
   try
-    s:=TStringStream.Create(value);
+    s:=TStringStream.Create(UTF8FileHeader+value);
     try
       NewHTML:=TIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
       NewHTML.LoadFromStream(s);
