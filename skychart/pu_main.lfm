@@ -1,12 +1,12 @@
 object f_main: Tf_main
-  Left = 70
-  Height = 546
-  Top = 12
-  Width = 924
+  Left = 460
+  Height = 576
+  Top = 132
+  Width = 959
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 521
-  ClientWidth = 924
+  ClientHeight = 554
+  ClientWidth = 959
   Font.CharSet = ANSI_CHARSET
   KeyPreview = True
   Menu = MainMenu1
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 433
+    Height = 466
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 433
+    ClientHeight = 466
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 433
+      Height = 466
       Top = 0
       Width = 26
       Align = alClient
@@ -2769,19 +2769,19 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 896
-    Height = 433
+    Left = 931
+    Height = 466
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 433
+    ClientHeight = 466
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 183
+      Height = 216
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,12 +3020,12 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 487
-    Width = 924
+    Top = 520
+    Width = 959
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 924
+    ClientWidth = 959
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3075,30 +3075,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 702
+      Width = 737
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 702
+      ClientWidth = 737
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 702
+        Width = 737
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 702
+        ClientWidth = 737
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 702
+          Width = 737
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -3111,11 +3111,11 @@ object f_main: Tf_main
     Left = 0
     Height = 54
     Top = 0
-    Width = 924
+    Width = 959
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 54
-    ClientWidth = 924
+    ClientWidth = 959
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3123,7 +3123,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 924
+      Width = 959
       ButtonHeight = 23
       Images = ImageNormal
       ParentShowHint = False
@@ -3310,7 +3310,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 317
-        Height = 25
+        Height = 23
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3451,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeVal: TSpinEdit
         Left = 592
-        Height = 25
+        Height = 22
         Hint = 'Time'
         Top = 2
         Width = 56
@@ -3462,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 656
-        Height = 27
+        Height = 24
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3475,7 +3475,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 894
+        Left = 929
         Height = 23
         Top = 2
         Width = 30
@@ -3511,7 +3511,7 @@ object f_main: Tf_main
       Left = 0
       Height = 28
       Top = 26
-      Width = 924
+      Width = 959
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
