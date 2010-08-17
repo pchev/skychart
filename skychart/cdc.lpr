@@ -45,8 +45,6 @@ uses
 var i : integer;
     buf, p, step : string;
 
-{$IFDEF WINDOWS}{$R cdc.rc}{$ENDIF}
-
 {$R *.res}
 
 begin
