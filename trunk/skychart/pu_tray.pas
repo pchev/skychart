@@ -300,10 +300,7 @@ procedure Tf_tray.TrayMsg(txt1,txt2,hint1:string);
 begin
 if iconinfo<>5 then begin
   UpdBmp(txt1,txt2,icontype,icontextsize,iconbg,icontext,bmp);
-  Systray.Icon.FreeImage;
-  SysTray.Icon.Canvas.Draw(0,0,bmp);
-  Systray.Icon.FreeImage; // yep two time is better
-  SysTray.Icon.Canvas.Draw(0,0,bmp);
+  SysTray.Icon.Assign(bmp);
 end;
 Systray.Hint:=hint1;
 end;
@@ -340,7 +337,6 @@ end;
 
 procedure Tf_tray.LoadIcon;
 begin
-  SysTray.Icon.FreeImage;
   if iconinfo=5 then begin
      SysTray.Icon.LoadFromLazarusResource('cdcmain');
   end else begin
