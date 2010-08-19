@@ -199,6 +199,7 @@ end;
 function Tcatalog.CloseCat:boolean;
 begin
 lockcat:=false;
+CloseGCat;
 result:=true;
 end;
 
@@ -2402,7 +2403,6 @@ repeat
   end;
   break;
 until false ;
-CloseGCat;
 result:=ok;
 end;
 

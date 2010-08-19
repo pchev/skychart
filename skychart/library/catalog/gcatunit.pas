@@ -572,6 +572,10 @@ var n : integer;
 begin
 ok:=true;
 lin:=emptyrec;
+if not FileIsOpen then begin
+  ok:=false;
+  exit;
+end;
 case cattype of
 1 : begin  // binary catalog
   if eof(f) then NextGCat(ok);
