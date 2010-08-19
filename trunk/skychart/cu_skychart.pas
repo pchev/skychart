@@ -379,8 +379,13 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
 {$endif}
-if Fcatalog.cfgshr.AutoStarFilter then Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
-   else Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
+if Fcatalog.cfgshr.AutoStarFilter then begin
+   if cfgsc.fov>(0.5*deg2rad) then
+     Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
+   else
+     Fcatalog.cfgcat.StarMagMax:=99;
+ end else
+   Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum];
 if cfgsc.quick and FPlot.cfgplot.red_move then Fcatalog.cfgcat.StarMagMax:=Fcatalog.cfgcat.StarMagMax-2;
 Fcatalog.cfgcat.NebMagMax:=Fcatalog.cfgshr.NebMagFilter[cfgsc.FieldNum];
 Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
