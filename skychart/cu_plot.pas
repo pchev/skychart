@@ -1487,9 +1487,17 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    rbmp.Width:=imabmp.Width;
    rbmp.Height:=imabmp.Height;
    rbmp.Canvas.Draw(0,0,imabmp);
-   if iTransparent then
+   if iTransparent then begin
       if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,TransparentMode)
                         else rbmp.TransparentColor:=clBlack;
+   end else begin
+     {$IF DEFINED(LCLGTK2)}
+      rbmp.SaveToStream(memstream);
+      memstream.position := 0;
+      rbmp.LoadFromStream(memstream);
+      rbmp.Transparent:=false;
+      {$ENDIF}
+   end;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(DestX,DestY,rbmp);
 end else begin
@@ -1519,9 +1527,17 @@ end else begin
    imabmp.Width:=rbmp.Width;
    imabmp.Height:=rbmp.Height;
    imabmp.Canvas.Draw(0,0,rbmp);
-   if iTransparent then
+   if iTransparent then begin
       if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,TransparentMode)
                         else imabmp.TransparentColor:=clBlack;
+   end else begin
+     {$IF DEFINED(LCLGTK2)}
+      imabmp.SaveToStream(memstream);
+      memstream.position := 0;
+      imabmp.LoadFromStream(memstream);
+      imabmp.Transparent:=false;
+      {$ENDIF}
+   end;
    cnv.CopyMode:=cmSrcCopy;
    cnv.Draw(0,0,imabmp);
 end;
