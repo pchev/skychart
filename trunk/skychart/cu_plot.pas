@@ -415,7 +415,6 @@ end;
 
 //todo: check if gtk alpha transparency work
 {$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
-{$IFDEF LCLGTK2} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
 var
@@ -437,17 +436,21 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
           newalpha:=MaxIntValue([CurColor.red,CurColor.green,CurColor.blue]);
           case method of
           0: begin  // linear for nebulae
-             {$IFDEF OLD_MASK_TRANSPARENCY}
+             {$IF DEFINED(OLD_MASK_TRANSPARENCY)}
                 if newalpha<=(0) then
                     CurColor:=colTransparent
                 else
                     CurColor.alpha:=alphaOpaque;
              {$ELSE}
+                {$IFDEF LCLGTK2}
+                CurColor.alpha:=MinIntValue([alphaOpaque,newalpha * 3]);
+                {$ELSE}
                 CurColor.alpha:=newalpha;
+                {$ENDIF}
              {$ENDIF}
              end;
           1: begin  // hard contrast for bitmap stars
-             {$IFDEF OLD_MASK_TRANSPARENCY}
+             {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
                 if newalpha<(50*255) then
                     CurColor:=colTransparent
                 else
@@ -455,6 +458,7 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
              {$ELSE}
                 if (newalpha>200*255) then newalpha:=alphaOpaque;
                 if (newalpha<100*255) then newalpha:=newalpha div 2;
+                if (newalpha<500) then newalpha:=alphaTransparent;
                 CurColor.alpha:=newalpha;
              {$ENDIF}
              end;
@@ -470,24 +474,24 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
       end;
       IntfImage.CreateBitmaps(ImgHandle, ImgMaskHandle);
       bmp.SetHandles(ImgHandle, ImgMaskHandle);
-      {$IFDEF OLD_MASK_TRANSPARENCY}
-       memstream:=Tmemorystream.create;
-       bmp.SaveToStream(memstream);
-       memstream.position := 0;
-       bmp.LoadFromStream(memstream);
-       bmp.Transparent:=true;
+     {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
+      memstream:=Tmemorystream.create;
+      bmp.SaveToStream(memstream);
+      memstream.position := 0;
+      bmp.LoadFromStream(memstream);
+      bmp.Transparent:=true;
       {$ELSE}
        if isWin98 then begin
-       memstream:=Tmemorystream.create;
-       bmp.SaveToStream(memstream);
-       memstream.position := 0;
-       bmp.LoadFromStream(memstream);
-       memstream.free;
+         memstream:=Tmemorystream.create;
+         bmp.SaveToStream(memstream);
+         memstream.position := 0;
+         bmp.LoadFromStream(memstream);
+         memstream.free;
        end;
       {$ENDIF}
     finally
       IntfImage.Free;
-      {$IFDEF OLD_MASK_TRANSPARENCY}
+      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
       memstream.free;
       {$ENDIF}
     end;
