@@ -235,10 +235,10 @@ try
   {$endif}
   cfgsc.msg:='';
 {$ifdef LCLGTK2}
-if (Fplot.cfgplot.starplot=1) then begin
+{if (Fplot.cfgplot.starplot=1) then begin
    Fplot.cfgplot.starplot:=0;   //crash X after 32768 draw
    cfgsc.msg:='Cannot use this star drawing mode with Gtk2. Change star drawing mode to Line or Parametric.';
-end;
+end; }
 {$endif}
 {$ifdef mswindows}
 if isWin98 and (Fplot.cfgplot.starplot=1) then begin
