@@ -593,6 +593,9 @@ case cattype of
         if catheader.flen[11]>0 then lin.star.epoch:=GetRecSingle(11);
         if catheader.flen[12]>0 then lin.star.px:=GetRecSmallint(12)/10000;
         if catheader.flen[13]>0 then lin.star.comment:=GetRecString(13);
+        if lin.star.magv>99 then begin lin.star.magv:=lin.star.magb; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagb]; end;
+        if lin.star.magv>99 then begin lin.star.magv:=lin.star.magr; lin.options.flabel[lOffset+vsMagv]:=lin.options.flabel[lOffset+vsMagr]; end;
+        if lin.star.magv>99 then begin lin.options.flabel[lOffset+vsMagv]:=catheader.flabel[lOffset+vsMagv]; end;
         end;
     rtvar : begin  // variables stars 1
         if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
