@@ -910,6 +910,8 @@ try
  1: begin  // to postscript canvas
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
     ps:=TPostscriptCanvas.Create;
+    ps.XDPI := printresol;
+    ps.YDPI := printresol;
     if PrintLandscape then begin
        ps.paperwidth:=round(PaperHeight[cm.Paper]*printresol);
        ps.paperheight:=round(PaperWidth[cm.Paper]*printresol);
@@ -923,7 +925,7 @@ try
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
-    sc.plot.cfgchart.fontscale:=maxintvalue([1,printresol div 300]); // because we cannot set a dpi property for the bitmap
+    sc.plot.cfgchart.fontscale:=1;
     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);

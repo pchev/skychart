@@ -980,6 +980,7 @@ var
      cnv.Brush.Color := cnv.Pen.Color;
    end;
 begin
+showmessage('hello');
 xx:=round(x);
 yy:=round(y);
 with cnv do begin
@@ -2408,7 +2409,7 @@ begin
       if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillGxy then // line mode
         begin
           cnv.Brush.style:=bsClear;
-          if cfgplot.DSOColorFillGxy then
+          if cfgplot.DSOColorFillGxy and not cfgchart.onprinter then
             begin
               cnv.Brush.Style := bsSolid;
               cnv.Pen.Color := cfgplot.Color[31];
@@ -2496,7 +2497,7 @@ begin
 // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillOCl then
+      if cfgplot.DSOColorFillOCl and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[24];
@@ -2570,7 +2571,7 @@ begin
   if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillPNe then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillPNe then
+      if cfgplot.DSOColorFillPNe and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[26];
@@ -2649,7 +2650,7 @@ begin
     begin
       ds2:=round(ds*2/3);
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillGCl then
+      if cfgplot.DSOColorFillGCl and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[25];
@@ -2681,7 +2682,7 @@ Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Aty
 }
 var
   sz: Double;
-  ds,xx,yy : Integer;
+  ds,dsr,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
   ObjMorph:string;
@@ -2694,6 +2695,7 @@ begin
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
+  dsr:=ds div 4;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
 // emission of reflection nebula?
@@ -2701,11 +2703,11 @@ begin
   if ObjMorph = 'R'
   then begin
     cnv.Pen.Color := cfgplot.Color[29];
-    fill:=cfgplot.DSOColorFillRN;
+    fill:=cfgplot.DSOColorFillRN and not cfgchart.onprinter;
   end
   else begin
     cnv.Pen.Color := cfgplot.Color[28];
-    fill:=cfgplot.DSOColorFillEN;
+    fill:=cfgplot.DSOColorFillEN and not cfgchart.onprinter;
   end;
   cnv.Brush.Style := bsClear;
 
@@ -2727,7 +2729,7 @@ begin
       cnv.Brush.Style := bsSolid;
       cnv.Brush.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Pen.Color := cnv.Brush.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
   if (cfgplot.nebplot=0) or not fill then // line mode
@@ -2738,7 +2740,7 @@ begin
 
 //emission nebula?
   if ObjMorph = 'E' then
-      if cfgplot.DSOColorFillEN
+      if cfgplot.DSOColorFillEN and not cfgchart.onprinter
         then
           begin
             cnv.Brush.Style := bsSolid;
@@ -2747,7 +2749,7 @@ begin
 
 //reflection nebula?
   if ObjMorph = 'R' then
-      if cfgplot.DSOColorFillRN
+      if cfgplot.DSOColorFillRN and not cfgchart.onprinter
         then
           begin
             cnv.Brush.Style := bsSolid;
@@ -2755,7 +2757,7 @@ begin
           end;
 
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
 // reset brush and pen back to default ready for next object
@@ -2769,7 +2771,7 @@ Procedure TSplot.PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; A
 }
 var
   sz: Double;
-  ds,xx,yy : Integer;
+  ds,dsr,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -2780,6 +2782,7 @@ begin
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
+  dsr:=ds div 4;
 //  ds:=3*cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
@@ -2803,13 +2806,13 @@ begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
   if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillEN then
+      if cfgplot.DSOColorFillEN and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[29];
@@ -2822,7 +2825,7 @@ begin
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
 //    Ideally all extended nebulae should have an outline.
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
       cnv.MoveTo(xx-ds,yy);
       cnv.Pen.Color := cfgplot.Color[24];
       cnv.LineTo(xx+ds,yy);
@@ -2983,7 +2986,7 @@ begin
 // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillAst then
+      if cfgplot.DSOColorFillAst and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[23];
@@ -3013,7 +3016,7 @@ Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Doubl
 }
 var
   sz: Double;
-  ds,xx,yy : Integer;
+  ds,dsr,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -3024,6 +3027,7 @@ begin
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
+  dsr:=ds div 4;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[28];
@@ -3046,13 +3050,13 @@ begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
       cnv.Brush.Color := cnv.Pen.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
   if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillEN then
+      if cfgplot.DSOColorFillEN and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[28];
@@ -3064,7 +3068,7 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
       cnv.MoveTo(xx-ds,yy);
       cnv.LineTo(xx+ds,yy);
       cnv.MoveTo(xx,yy-ds);
@@ -3117,7 +3121,7 @@ Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Aty
 }
 var
   sz: Double;
-  ds,xx,yy : Integer;
+  ds,dsr,xx,yy : Integer;
   col,r,g,b : byte;
   nebcolor : Tcolor;
 begin
@@ -3128,6 +3132,7 @@ begin
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
+  dsr:=ds div 4;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[27];
@@ -3150,13 +3155,13 @@ begin
 //    do not fill the dark nebulae in graphic mode.
       cnv.Brush.Style := bsClear;
       cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
   if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillDN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillDN then
+      if cfgplot.DSOColorFillDN and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[27];
@@ -3168,7 +3173,7 @@ begin
           cnv.Pen.Style := psSolid;
         end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,ds,ds);
+      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
 // reset brush and pen back to default ready for next object
