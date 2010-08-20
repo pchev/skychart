@@ -728,6 +728,7 @@ Showlabel;
 ShowCircle;
 ShowRectangle;
 //Application.ProcessMessages;
+FileNameEdit1.InitialDir:=slash(appdir)+slash('data')+'stars';;
 LockChange:=false;
 end;
 

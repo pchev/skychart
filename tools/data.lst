@@ -289,6 +289,15 @@ data/sample/MPCsample.dat
 data/sample/us.dat
 data/sample/world.dat
 data/sample/aavsoeasy.dat
+data/stars
+data/stars/PhotoBW.bmp
+data/stars/PhotoColor.bmp
+data/stars/PhotoHighColor.bmp
+data/stars/PhotoPastel.bmp
+data/stars/StarsBW.bmp
+data/stars/StarsColor.bmp
+data/stars/StarsHighColor.bmp
+data/stars/StarsPastel.bmp
 data/Themes
 data/Themes/default
 data/Themes/default/arrow.bmp
