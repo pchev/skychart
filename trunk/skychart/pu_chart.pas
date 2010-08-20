@@ -884,6 +884,10 @@ try
  if (printcolor=2)and(sc.plot.cfgplot.starplot=2) then sc.plot.cfgplot.starplot:=1;
  Case PrintMethod of
  0: begin    // to printer
+{$ifdef  win64}
+{ TODO : Print on Win64 }
+showmessage('Cannot print directly with Win64. Make a bitmap or postscript to print later.');
+{$else}
     GetPrinterResolution(prtname,resol);
     if PrintLandscape then Printer.Orientation:=poLandscape
                    else Printer.Orientation:=poPortrait;
@@ -906,6 +910,7 @@ try
     sc.plot.init(w,h);
     sc.Refresh;
     Printer.EndDoc;
+{$endif}
     end;
  1: begin  // to postscript canvas
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);

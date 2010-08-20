@@ -3,7 +3,6 @@ object f_printsetup: Tf_printsetup
   Height = 245
   Top = 114
   Width = 443
-  ActiveControl = qtoption
   BorderStyle = bsSizeToolWin
   Caption = 'Printer Setup'
   ClientHeight = 245
@@ -12,7 +11,7 @@ object f_printsetup: Tf_printsetup
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object qtoption: TPanel
     Left = 10
     Height = 110
@@ -84,31 +83,31 @@ object f_printsetup: Tf_printsetup
     TabOrder = 2
     object Label1: TLabel
       Left = 206
-      Height = 19
+      Height = 14
       Top = 8
-      Width = 89
+      Width = 85
       Caption = 'Raster Resolution'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 6
-      Height = 19
+      Height = 14
       Top = 58
-      Width = 191
+      Width = 169
       Caption = 'Command to use to process the file.'
       ParentColor = False
     end
     object Label6: TLabel
       Left = 7
-      Height = 19
+      Height = 14
       Top = 8
-      Width = 115
+      Width = 101
       Caption = 'Path to save the file :'
       ParentColor = False
     end
     object Label5: TLabel
       Left = 310
-      Height = 19
+      Height = 14
       Top = 8
       Width = 21
       Caption = 'Size'
@@ -116,7 +115,7 @@ object f_printsetup: Tf_printsetup
     end
     object prtres: TLongEdit
       Left = 214
-      Height = 26
+      Height = 21
       Hint = '0..600'
       Top = 23
       Width = 41
@@ -129,7 +128,7 @@ object f_printsetup: Tf_printsetup
     end
     object cmdreport: TEdit
       Left = 6
-      Height = 26
+      Height = 21
       Top = 84
       Width = 345
       Color = clBtnFace
@@ -138,18 +137,19 @@ object f_printsetup: Tf_printsetup
     end
     object savepath: TDirectoryEdit
       Left = 6
-      Height = 26
+      Height = 21
       Top = 24
       Width = 168
       ShowHidden = False
       ButtonWidth = 23
       NumGlyphs = 1
+      MaxLength = 0
       TabOrder = 0
       OnChange = savepathChange
     end
     object printcmd: TFileNameEdit
       Left = 214
-      Height = 26
+      Height = 21
       Top = 54
       Width = 168
       DialogOptions = []
@@ -157,15 +157,16 @@ object f_printsetup: Tf_printsetup
       HideDirectories = False
       ButtonWidth = 23
       NumGlyphs = 1
+      MaxLength = 0
       TabOrder = 2
       OnChange = printcmdChange
     end
     object PaperSize: TComboBox
       Left = 310
-      Height = 27
+      Height = 21
       Top = 21
       Width = 96
-      ItemHeight = 0
+      ItemHeight = 13
       OnChange = PaperSizeChange
       Style = csDropDownList
       TabOrder = 4
@@ -186,7 +187,7 @@ object f_printsetup: Tf_printsetup
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 41
+    ClientHeight = 43
     ClientWidth = 418
     Columns = 3
     Items.Strings = (
