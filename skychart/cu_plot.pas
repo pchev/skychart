@@ -413,7 +413,7 @@ starbmp.Assign(Fstarshape);
 InitStarBmp;
 end;
 
-//todo: check if gtk alpha transparency work
+//todo: check if alpha transparency work
 {$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
@@ -450,17 +450,17 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
              {$ENDIF}
              end;
           1: begin  // hard contrast for bitmap stars
-             {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
+       //      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
                 if newalpha<(50*255) then
                     CurColor:=colTransparent
                 else
                     CurColor.alpha:=alphaOpaque;
-             {$ELSE}
-                if (newalpha>200*255) then newalpha:=alphaOpaque;
+    //         {$ELSE}
+     {           if (newalpha>200*255) then newalpha:=alphaOpaque;
                 if (newalpha<100*255) then newalpha:=newalpha div 2;
                 if (newalpha<500) then newalpha:=alphaTransparent;
-                CurColor.alpha:=newalpha;
-             {$ENDIF}
+                CurColor.alpha:=newalpha;  }
+     //        {$ENDIF}
              end;
           2: begin  // black transparent
                 if newalpha<=(0) then
@@ -474,26 +474,26 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
       end;
       IntfImage.CreateBitmaps(ImgHandle, ImgMaskHandle);
       bmp.SetHandles(ImgHandle, ImgMaskHandle);
-     {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
+//     {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
       memstream:=Tmemorystream.create;
       bmp.SaveToStream(memstream);
       memstream.position := 0;
       bmp.LoadFromStream(memstream);
       bmp.Transparent:=true;
-      {$ELSE}
-       if isWin98 then begin
+//      {$ELSE}
+ {      if isWin98 then begin
          memstream:=Tmemorystream.create;
          bmp.SaveToStream(memstream);
          memstream.position := 0;
          bmp.LoadFromStream(memstream);
          memstream.free;
-       end;
-      {$ENDIF}
+       end;   }
+//      {$ENDIF}
     finally
       IntfImage.Free;
-      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
+//      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
       memstream.free;
-      {$ENDIF}
+//      {$ENDIF}
     end;
 except
 end;
