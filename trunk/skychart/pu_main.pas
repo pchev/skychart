@@ -6702,7 +6702,11 @@ procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
 FullScreen1.Checked:=not FullScreen1.Checked;
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
-  SetWindowFullScreen(f_main,FullScreen1.Checked);
+{ TODO : fullscreen showmodal do not work with Gnome }
+//  SetWindowFullScreen(f_main,FullScreen1.Checked);
+WindowState:=wsMaximized;
+{$else}
+WindowState:=wsMaximized;
 {$endif}
 end;
 {$endif}
