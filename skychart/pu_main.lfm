@@ -19,7 +19,8 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  Position = poDefaultPosOnly
+  LCLVersion = '0.9.29'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
@@ -2706,37 +2707,37 @@ object f_main: Tf_main
         Hint = 'Configure the program'
         Top = 46
         ImageIndex = 10
+        OnClick = ToolButtonConfigClick
         PopupMenu = PopupConfig
         Wrap = True
-        OnClick = ToolButtonConfigClick
       end
       object ToolButtonEQ: TToolButton
         Left = 1
         Top = 69
         Action = EquatorialProjection
-        Wrap = True
         Style = tbsCheck
+        Wrap = True
       end
       object ToolButtonAZ: TToolButton
         Left = 1
         Top = 92
         Action = AltAzProjection
-        Wrap = True
         Style = tbsCheck
+        Wrap = True
       end
       object ToolButtonEC: TToolButton
         Left = 1
         Top = 115
         Action = EclipticProjection
-        Wrap = True
         Style = tbsCheck
+        Wrap = True
       end
       object ToolButtonGL: TToolButton
         Left = 1
         Top = 138
         Action = GalacticProjection
-        Wrap = True
         Style = tbsCheck
+        Wrap = True
       end
       object FlipButtonX: TToolButton
         Left = 1
@@ -2755,16 +2756,16 @@ object f_main: Tf_main
         Hint = 'Rotate Right'
         Top = 207
         ImageIndex = 21
-        Wrap = True
         OnMouseUp = ToolButtonRotPMouseUp
+        Wrap = True
       end
       object ToolButtonRotM: TToolButton
         Left = 1
         Hint = 'Rotate Left'
         Top = 230
         ImageIndex = 22
-        Wrap = True
         OnMouseUp = ToolButtonRotMMouseUp
+        Wrap = True
       end
     end
   end
@@ -3162,154 +3163,154 @@ object f_main: Tf_main
       object ToolButton3: TToolButton
         Left = 116
         Top = 2
-        Width = 8
+        Width = 4
         ImageIndex = 2
         Style = tbsDivider
       end
       object ToolButtonCascade: TToolButton
-        Left = 124
+        Left = 120
         Hint = 'Cascade'
         Top = 2
         ImageIndex = 4
         OnClick = WindowCascade1Execute
       end
       object ToolButtonTile: TToolButton
-        Left = 147
+        Left = 143
         Hint = 'Tile Vertically'
         Top = 2
         ImageIndex = 14
         OnClick = WindowTileVertical1Execute
       end
       object ToolButton5: TToolButton
-        Left = 170
+        Left = 166
         Top = 2
-        Width = 8
+        Width = 4
         ImageIndex = 17
         Style = tbsDivider
       end
       object ToolButtonUndo: TToolButton
-        Left = 178
+        Left = 170
         Top = 2
         Action = Undo
       end
       object ToolButtonRedo: TToolButton
-        Left = 201
+        Left = 193
         Top = 2
         Action = Redo
       end
       object ToolButtonZoom: TToolButton
-        Left = 224
+        Left = 216
         Top = 2
         Action = zoomplus
       end
       object ToolButtonUnZoom: TToolButton
-        Left = 247
+        Left = 239
         Top = 2
         Action = zoomminus
       end
       object ToolButton1: TToolButton
-        Left = 270
+        Left = 262
         Top = 2
         Action = ZoomBar
       end
       object ToolButtonSearch: TToolButton
-        Left = 415
+        Left = 403
         Hint = 'Advanced Search'
         Top = 2
         Action = Search1
       end
       object ToolButtonPosition: TToolButton
-        Left = 438
+        Left = 426
         Top = 2
         Action = Position
       end
       object ToolButtonListObj: TToolButton
-        Left = 461
+        Left = 449
         Top = 2
         Action = listobj
       end
       object ToolButtonCal: TToolButton
-        Left = 484
+        Left = 472
         Top = 2
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 507
+        Left = 495
         Top = 2
-        Width = 8
+        Width = 4
         ImageIndex = 8
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 515
+        Left = 499
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 538
+        Left = 522
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 561
+        Left = 545
         Top = 2
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 736
+        Left = 712
         Top = 2
-        Width = 8
+        Width = 4
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 744
+        Left = 716
         Top = 2
         Action = TelescopeConnect
       end
       object TSlew: TToolButton
-        Left = 790
+        Left = 762
         Top = 2
         Action = TelescopeSlew
       end
       object TSync: TToolButton
-        Left = 767
+        Left = 739
         Top = 2
         Action = TelescopeSync
       end
       object ToolButton6: TToolButton
-        Left = 813
+        Left = 785
         Top = 2
-        Width = 8
+        Width = 4
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 821
+        Left = 789
         Top = 2
         Width = 8
         AutoSize = True
         Style = tbsSeparator
       end
       object ToolButton10: TToolButton
-        Left = 407
+        Left = 399
         Top = 2
-        Width = 8
+        Width = 4
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 648
+        Left = 628
         Top = 2
-        Width = 8
+        Width = 4
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 584
+        Left = 568
         Top = 2
-        Width = 8
+        Width = 4
         Style = tbsDivider
       end
       object quicksearch: TComboBox
-        Left = 317
+        Left = 309
         Height = 23
         Hint = 'Search'
         Top = 2
@@ -3325,7 +3326,7 @@ object f_main: Tf_main
         TabOrder = 0
       end
       object MagPanel: TPanel
-        Left = 293
+        Left = 285
         Height = 23
         Top = 2
         Width = 24
@@ -3450,7 +3451,7 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TSpinEdit
-        Left = 592
+        Left = 572
         Height = 22
         Hint = 'Time'
         Top = 2
@@ -3461,7 +3462,7 @@ object f_main: Tf_main
         Value = 1
       end
       object TimeU: TComboBox
-        Left = 656
+        Left = 632
         Height = 24
         Hint = 'Time Units'
         Top = 2
@@ -3543,8 +3544,8 @@ object f_main: Tf_main
         Left = 70
         Top = 2
         Action = ShowPictures
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowPicturesMouseUp
+        Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
         Left = 93
@@ -3562,85 +3563,85 @@ object f_main: Tf_main
         Left = 162
         Top = 2
         Action = ShowPlanets
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowPlanetsMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
         Left = 185
         Top = 2
         Action = ShowAsteroids
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowAsteroidsMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
         Left = 208
         Top = 2
         Action = ShowComets
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowCometsMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
         Left = 231
         Top = 2
         Action = ShowMilkyWay
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
         Left = 254
         Top = 2
         Action = Grid
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
         Left = 277
         Top = 2
         Action = GridEQ
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
         Left = 300
         Top = 2
         Action = ShowConstellationLine
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
         Left = 323
         Top = 2
         Action = ShowConstellationLimit
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
         Left = 346
         Top = 2
         Action = ShowGalacticEquator
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
         Left = 369
         Top = 2
         Action = ShowEcliptic
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLineMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
         Left = 392
         Top = 2
         Action = ShowMark
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowMarkMouseUp
+        Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
         Left = 415
         Top = 2
         Action = ShowLabels
-        Style = tbsCheck
         OnMouseUp = ToolButtonShowLabelsMouseUp
+        Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
         Left = 438
@@ -3659,38 +3660,38 @@ object f_main: Tf_main
         Left = 484
         Top = 2
         Action = switchbackground
-        Style = tbsCheck
         OnMouseUp = ToolButtonswitchbackgroundMouseUp
+        Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 515
+        Left = 511
         Top = 2
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 538
+        Left = 534
         Top = 2
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 569
-        Top = 2
-        Action = switchstars
-        Style = tbsCheck
-        OnMouseUp = ToolButtonswitchstarsMouseUp
-      end
-      object ToolButton2: TToolButton
         Left = 561
         Top = 2
-        Width = 8
+        Action = switchstars
+        OnMouseUp = ToolButtonswitchstarsMouseUp
+        Style = tbsCheck
+      end
+      object ToolButton2: TToolButton
+        Left = 557
+        Top = 2
+        Width = 4
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
         Left = 507
         Top = 2
-        Width = 8
+        Width = 4
         Style = tbsDivider
       end
       object ToolButtonBlink: TToolButton
