@@ -2505,11 +2505,13 @@ begin
         end
       else
         begin
-          cnv.Pen.Style := psDot;
+          if cfgchart.onprinter and (ds<(10)) then
+            cnv.Pen.Style := psSolid
+          else
+            cnv.Pen.Style := psDot;
           {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
-//      cnv.MoveTo(xx-ds,yy);
     end;
 
 { and draw it... we're using an ellipse, in future we may adjust this for non-circular clusters
@@ -2587,8 +2589,8 @@ begin
 // and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
 
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-  cnv.MoveTo((xx-ds)-2,yy);
-  cnv.LineTo((xx+ds)+2,yy);
+  cnv.MoveTo((xx-round(ds*1.3)),yy);
+  cnv.LineTo((xx+round(ds*1.3)),yy);
 
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
@@ -2661,7 +2663,7 @@ begin
           cnv.Brush.Style := bsClear;
           cnv.Pen.Style := psSolid;
         end;
-//    and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
+//    and draw it... we're using an circle,
       cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
       cnv.MoveTo(xx-ds,yy);
       cnv.LineTo(xx+ds,yy);
