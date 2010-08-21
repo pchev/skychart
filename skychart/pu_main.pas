@@ -3444,10 +3444,10 @@ cfgm.PrinterResolution:=300;
 cfgm.PrintColor:=0;
 cfgm.PrintLandscape:=true;
 cfgm.PrintMethod:=0;
-{$ifdef  win64}
+(*{$ifdef  win64}
 { TODO : Print on Win64 }
 cfgm.PrintMethod:=2;
-{$endif}
+{$endif} *)
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);
@@ -4388,10 +4388,6 @@ cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterReso
 cfgm.PrintColor:=ReadInteger(section,'PrintColor',cfgm.PrintColor);
 cfgm.PrintLandscape:=ReadBool(section,'PrintLandscape',cfgm.PrintLandscape);
 cfgm.PrintMethod:=ReadInteger(section,'PrintMethod',cfgm.PrintMethod);
-{$ifdef  win64}
-{ TODO : Print on Win64 }
-if cfgm.PrintMethod=0 then cfgm.PrintMethod:=2;
-{$endif}
 cfgm.PrintCmd1:=ReadString(section,'PrintCmd1',cfgm.PrintCmd1);
 cfgm.PrintCmd2:=ReadString(section,'PrintCmd2',cfgm.PrintCmd2);
 cfgm.PrtLeftMargin:=ReadInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
