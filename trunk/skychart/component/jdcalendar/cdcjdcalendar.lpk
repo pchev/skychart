@@ -4,11 +4,16 @@
     <PathDelim Value="\"/>
     <Name Value="CDCjdcalendar"/>
     <CompilerOptions>
-      <Version Value="8"/>
+      <Version Value="9"/>
       <PathDelim Value="\"/>
       <SearchPaths>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
       <Other>
         <Verbosity>
           <ShowHints Value="False"/>
@@ -16,7 +21,7 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Version Minor="1"/>
+    <Version Minor="1" Release="1"/>
     <Files Count="2">
       <Item1>
         <Filename Value="jdcalendar.lrs"/>
