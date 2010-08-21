@@ -131,6 +131,7 @@ const cdcversion = 'Version 3.1 svn';
       f2='0.00';
       f5='0.00000';
       f6='0.000000';
+      f13='0.0000000000000';
       dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
       labspacing=10;
       numlabtype=8;
@@ -797,18 +798,20 @@ const
 
 // INDI Telescope driver
 const
-      NumIndiDriver=10;
+      NumIndiDriver=12;
       IndiDriverLst: array[0..NumIndiDriver,1..2] of string =(('Other',''),
-                  ('AstroPhysic','apmount'),
-                  ('Celestron GPS','celestrongps'),
-                  ('LX200 Basic','lx200basic'),
-                  ('LX200 Generic','lx200generic'),
-                  ('LX200 Classic','lx200classic'),
-                  ('LX200 GPS','lx200gps'),
-                  ('LX200 Autostar','lx200autostar'),
-                  ('LX200 16','lx200_16'),
-                  ('SkyCommander','skycommander'),
-                  ('Takahashi Temma','temma'));
+                  ('Astro-Physics','indi_lx200ap'),
+                  ('Celestron GPS','indi_celestron_gps'),
+                  ('Intelliscope','indi_intelliscope'),
+                  ('LX200 Basic','indi_lx200basic'),
+                  ('LX200 Generic','indi_lx200generic'),
+                  ('LX200 Classic','indi_lx200classic'),
+                  ('LX200 GPS','indi_lx200gps'),
+                  ('LX200 Autostar','indi_lx200autostar'),
+                  ('LX200 16','indi_lx200_16'),
+                  ('Orion Atlas','indi_orion_atlas'),
+                  ('Sky Commander','indi_skycommander'),
+                  ('Takahashi Temma','indi_temma'));
 
 // Database
 type TDBtype = (mysql,sqlite);

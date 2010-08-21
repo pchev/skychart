@@ -2928,8 +2928,8 @@ if Connect1.checked then begin
     dec:=sc.cfgsc.FindDec;
     if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
     if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-    indi1.RA:=formatfloat(f6,ra*rad2deg/15);
-    indi1.Dec:=formatfloat(f6,dec*rad2deg);
+    indi1.RA:=formatfloat(f13,ra*rad2deg/15);
+    indi1.Dec:=formatfloat(f13,dec*rad2deg);
     Indi1.Slew;
     Refresh;
   end;
@@ -2970,8 +2970,8 @@ begin
   dec:=sc.cfgsc.FindDec;
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
   if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-  indi1.RA:=formatfloat(f6,ra*rad2deg/15);
-  indi1.Dec:=formatfloat(f6,dec*rad2deg);
+  indi1.RA:=formatfloat(f13,ra*rad2deg/15);
+  indi1.Dec:=formatfloat(f13,dec*rad2deg);
   Indi1.Sync;
   Refresh;
 end;

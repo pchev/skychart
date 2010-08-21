@@ -205,14 +205,14 @@ try
          FIndiServer:='./'+FIndiServer;
          FIndiDriver:='./'+FIndiDriver;
       end;
-      FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
+      FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,FIndiDriver);
       {$endif}
       {$ifdef darwin}
-      FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,'-r','0',FIndiDriver);
+      FIndiServerPid:=ExecFork(FIndiServer,'-p',FTargetPort,FIndiDriver);
       {$endif}
       {$ifdef mswindows}
       if localplugin then chdir(plugin);
-      ExecNoWait(FIndiServer+' -p '+FTargetPort+' -r 0 '+FIndiDriver,'IndiServer');
+      ExecNoWait(FIndiServer+' -p '+FTargetPort+' '+FIndiDriver,'IndiServer');
       {$endif}
     finally
       chdir(buf);
@@ -280,8 +280,7 @@ end;
 procedure TIndiClient.DisplayMessage(msg:string);
 begin
 FErrorDesc:=msg;
-//if FErrorDesc='OK' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
-if FErrorDesc='' then tcpclient.Sock.SendString('<getProperties version="1.2"></getProperties>');
+if FErrorDesc='' then tcpclient.Sock.SendString('<getProperties version="1.7"></getProperties>');
 {$ifdef darwin}
 DisplayMessageSyn;
 {$else}
@@ -419,7 +418,7 @@ end;
 
 procedure TIndiClient.getProperties;
 begin
-Send('<getProperties version="1.2"></getProperties>');
+Send('<getProperties version="1.7"></getProperties>');
 end;
 
 procedure TIndiClient.Connect;
@@ -444,9 +443,9 @@ begin
 if FCurrentdevice='' then exit;
 Send('<newSwitchVector device="'+FCurrentdevice+'" name="ON_COORD_SET"><oneSwitch name="SLEW">Off</oneSwitch><oneSwitch name="TRACK">Off</oneSwitch><oneSwitch name="SYNC">On</oneSwitch></newSwitchVector>');
 if EOD then
-   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD_REQUEST"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
 else
-   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD_REQUEST"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
 end;
 
 procedure TIndiClient.Slew;
@@ -454,16 +453,21 @@ begin
 if FCurrentdevice='' then exit;
 Send('<newSwitchVector device="'+FCurrentdevice+'" name="ON_COORD_SET"><oneSwitch name="TRACK">Off</oneSwitch><oneSwitch name="SYNC">Off</oneSwitch><oneSwitch name="SLEW">On</oneSwitch></newSwitchVector>');
 if EOD then
-   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD_REQUEST"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>')
 else
-   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD_REQUEST"><oneNumber name="RA" >'+FWantRa+'</oneNumber><oneNumber name="DEC">'+FWantDec+'</oneNumber></newNumberVector>');
 if assigned(FonStatusChange) then FonStatusChange(self,coord,busy);
 end;
 
 procedure TIndiClient.AbortSlew;
 begin
 if FCurrentdevice='' then exit;
-Send('<newSwitchVector device="'+FCurrentdevice+'" name="ABORT_MOTION"><oneSwitch name="ABORT_MOTION">On</oneSwitch></newSwitchVector>');
+Send('<newSwitchVector device="'+FCurrentdevice+'" name="ON_COORD_SET"><oneSwitch name="TRACK">On</oneSwitch><oneSwitch name="SYNC">Off</oneSwitch><oneSwitch name="SLEW">Off</oneSwitch></newSwitchVector>');
+Send('<newSwitchVector device="'+FCurrentdevice+'" name="TELESCOPE_ABORT_MOTION"><oneSwitch name="ABORT">On</oneSwitch></newSwitchVector>');
+if EOD then
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_EOD_COORD_REQUEST"><oneNumber name="RA" >0.0</oneNumber><oneNumber name="DEC">0.0</oneNumber></newNumberVector>')
+else
+   Send('<newNumberVector device="'+FCurrentdevice+'" name="EQUATORIAL_COORD_REQUEST"><oneNumber name="RA" >0.0</oneNumber><oneNumber name="DEC">0.0</oneNumber></newNumberVector>');
 end;
 
 end.
