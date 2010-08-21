@@ -307,7 +307,7 @@ end;
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
-     DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
+     //DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
      cfgsc.ScopeMark:=true;
   end;
   // Draw the chart border

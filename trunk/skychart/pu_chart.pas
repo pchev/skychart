@@ -404,9 +404,15 @@ try
    indi1.onCoordChange:=nil;
    indi1.onStatusChange:=nil;
    indi1.onMessage:=nil;
+   indi1.exiting:=true;
    indi1.terminate;
+   Application.ProcessMessages;
+   sleep(500);
  end;
  for i:=1 to maxundo do undolist[i].Free;
+ {$ifdef trace_debug}
+  WriteTrace('End Destroy chart ');
+ {$endif}
 except
 writetrace('error destroy '+name);
 end;
@@ -2874,36 +2880,37 @@ if sc.cfgsc.ManualTelescope then begin
    sc.cfgsc.TelescopeJD:=0;
 end;
 if sc.cfgsc.IndiTelescope then begin
-if Connect1.checked then begin
-   indi1.terminate;
-   sc.cfgsc.ScopeMark:=false;
-   sc.cfgsc.TrackOn:=false;
-   Refresh;
-end else begin
-if (indi1=nil)or(indi1.Terminated) then begin
-   sc.cfgsc.TelescopeJD:=0;
-   indi1:=TIndiClient.Create;
-   indi1.TargetHost:=sc.cfgsc.IndiServerHost;
-   indi1.TargetPort:=sc.cfgsc.IndiServerPort;
-   indi1.Timeout := 500;
-   indi1.TelescopePort:=sc.cfgsc.IndiPort;
-   if sc.cfgsc.IndiDevice=rsOther then indi1.Device:=''
-      else indi1.Device:=sc.cfgsc.IndiDevice;
-   indi1.IndiServer:=sc.cfgsc.IndiServerCmd;
-   indi1.IndiDriver:=sc.cfgsc.IndiDriver;
-   indi1.AutoStart:=sc.cfgsc.IndiAutostart;
-   indi1.Autoconnect:=true;
-   indi1.onCoordChange:=TelescopeCoordChange;
-   indi1.onStatusChange:=TelescopeStatusChange;
-   indi1.onMessage:=TelescopeGetMessage;
-   indi1.Resume;
-   sc.cfgsc.TrackOn:=true;
-end else begin
-   sc.cfgsc.TelescopeJD:=0;
-   indi1.Connect;
-   sc.cfgsc.TrackOn:=true;
-end;
-end;
+  if Connect1.checked then begin
+     indi1.terminate;
+     sc.cfgsc.ScopeMark:=false;
+     sc.cfgsc.TrackOn:=false;
+     Refresh;
+  end else begin
+  if (indi1=nil)or(indi1.Terminated) then begin
+     sc.cfgsc.TelescopeJD:=0;
+     indi1:=TIndiClient.Create;
+     indi1.TargetHost:=sc.cfgsc.IndiServerHost;
+     indi1.TargetPort:=sc.cfgsc.IndiServerPort;
+     indi1.Timeout := 100;
+     indi1.TelescopePort:=sc.cfgsc.IndiPort;
+     if sc.cfgsc.IndiDevice=rsOther then indi1.Device:=''
+        else indi1.Device:=sc.cfgsc.IndiDevice;
+     indi1.IndiServer:=sc.cfgsc.IndiServerCmd;
+     indi1.IndiDriver:=sc.cfgsc.IndiDriver;
+     indi1.AutoStart:=sc.cfgsc.IndiAutostart;
+     indi1.Autoconnect:=true;
+     indi1.onCoordChange:=TelescopeCoordChange;
+     indi1.onStatusChange:=TelescopeStatusChange;
+     indi1.onMessage:=TelescopeGetMessage;
+     indi1.Resume;
+     sc.cfgsc.TrackOn:=true;
+  end else begin
+     sc.cfgsc.TelescopeJD:=0;
+     indi1.Connect;
+     sc.cfgsc.TrackOn:=true;
+  end;
+  end;
+  Refresh;
 end;
 end;
 
@@ -2911,20 +2918,21 @@ procedure Tf_chart.Slew1Click(Sender: TObject);
 var ra,dec:double;
 begin
 if Connect1.checked then begin
-{$ifdef mswindows}
-if not sc.cfgsc.IndiTelescope then begin
-   SlewPlugin(Sender);
-end else
-{$endif}
-begin
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-indi1.RA:=formatfloat(f6,ra*rad2deg/15);
-indi1.Dec:=formatfloat(f6,dec*rad2deg);
-Indi1.Slew;
-end;
+  {$ifdef mswindows}
+  if not sc.cfgsc.IndiTelescope then begin
+     SlewPlugin(Sender);
+  end else
+  {$endif}
+  begin
+    ra:=sc.cfgsc.FindRA;
+    dec:=sc.cfgsc.FindDec;
+    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+    if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
+    indi1.RA:=formatfloat(f6,ra*rad2deg/15);
+    indi1.Dec:=formatfloat(f6,dec*rad2deg);
+    Indi1.Slew;
+    Refresh;
+  end;
 end
 else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
 end;
@@ -2938,7 +2946,8 @@ if not sc.cfgsc.IndiTelescope then begin
 end else
 {$endif}
 begin
-Indi1.AbortSlew;
+  Indi1.AbortSlew;
+  Refresh;
 end;
 end;
 end;
@@ -2964,6 +2973,7 @@ begin
   indi1.RA:=formatfloat(f6,ra*rad2deg/15);
   indi1.Dec:=formatfloat(f6,dec*rad2deg);
   Indi1.Sync;
+  Refresh;
 end;
 end
 else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);

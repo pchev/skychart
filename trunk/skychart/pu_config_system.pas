@@ -325,6 +325,8 @@ dbchanged:=false;
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
   Indiport.Style:= csSimple;
   IndiPort.Items.Clear;
+  IndiPort.OnChange:=IndiPortChange;
+  IndiPort.OnSelect:=nil;
 {$endif}
 ShowLanguage;
 ShowSYS;

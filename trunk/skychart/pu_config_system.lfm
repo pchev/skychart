@@ -29,7 +29,7 @@ object f_config_system: Tf_config_system
       Top = 1
       Width = 521
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage

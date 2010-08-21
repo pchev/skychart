@@ -1721,6 +1721,9 @@ end;
 procedure Tf_main.FormDestroy(Sender: TObject);
 begin
 try
+{$ifdef trace_debug}
+ WriteTrace('Destroy Tf_main');
+{$endif}
 catalog.free;
 Fits.Free;
 planet.free;
@@ -1734,10 +1737,17 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
+{$ifdef trace_debug}
+ WriteTrace('Destroy Cursor');
+{$endif}
 if CursorImage1<>nil then begin
+  Screen.Cursors[crRetic]:=0;
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
+{$ifdef trace_debug}
+ WriteTrace('Destroy end');
+{$endif}
 except
 writetrace('error destroy '+name);
 end;
@@ -1761,7 +1771,6 @@ end else
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
       locked:=true;
-      if indi1<>nil then indi1.terminate;
    end;
 except
 end;
