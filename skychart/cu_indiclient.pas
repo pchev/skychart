@@ -64,7 +64,7 @@ type
     Fserverstatus,Ftelescopestatus,Fcoordstatus: TIndiStatus;
     FTag,FCurrentTag,FDevice,FCurrentDevice,FName,FCurrentName,FMessage,FDevicePort,FRa,FDec: string;
     FWantDevice,FWantDevicePort,FWantRA,FWantDec: string;
-    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD :boolean;
+    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD,Fexiting :boolean;
     XmlScanner: TEasyXmlScanner;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
@@ -111,6 +111,7 @@ type
     property Dec : string read FDec write FWantDec;
     property IndiServer : string read FIndiServer write FIndiServer;
     property IndiDriver : string read FIndiDriver write FIndiDriver;
+    property exiting : boolean read Fexiting write Fexiting;
     property onCoordChange: TNotifyEvent read FonCoordChange write FonCoordChange;
     property onStatusChange: TStatusInfo read FonStatusChange write FonStatusChange;
     property onMessage: TIndiDataEvent read FonMessage write FonMessage;
@@ -165,6 +166,7 @@ end;
 
 Constructor TIndiClient.Create ;
 begin
+Fexiting:=false;
 freeonterminate:=true;
 Ftrace:=false;
 FIndiServerPid:=0;
@@ -178,6 +180,7 @@ var buf,plugin:string;
     i : integer;
     connected,localplugin: boolean;
 begin
+try
 XmlScanner:=TEasyXmlScanner.Create(nil);
 XmlScanner.OnStartTag:=@XmlStartTag;
 XmlScanner.OnContent:=@XmlContent;
@@ -220,7 +223,7 @@ try
        sleep(1000);
        connected:=tcpclient.Connect;
     until connected or (i>=10);
-    FServerStartedByMe:=connected;
+    FServerStartedByMe:=true;
  end;
  if connected then begin
    DisplayMessage(tcpclient.GetErrorDesc);
@@ -248,24 +251,29 @@ try
 if FServerStartedByMe then begin
   {$ifdef mswindows}
     FIndiServerPid:=findwindow(nil,Pchar('IndiServer'));
-    writetrace('Kill '+inttostr(FIndiServerPid));
+    writetrace('Kill indi server '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then PostMessage(FIndiServerPid,WM_CLOSE,0,0);
   {$endif}
   {$ifdef darwin}
   // todo: darwin
   {$endif}
   {$ifdef linux}
-    writetrace('Kill '+inttostr(FIndiServerPid));
+    writetrace('Kill indi server '+inttostr(FIndiServerPid));
     if FIndiServerPid<>0 then fpKill(FIndiServerPid,SIGKILL);
   {$endif}
 end;
-if terminated then DisplayMessage(rsClosingConne)
-              else DisplayMessage(tcpclient.GetErrorDesc);
+if not Fexiting then begin
+  if terminated then DisplayMessage(rsClosingConne)
+                else DisplayMessage(tcpclient.GetErrorDesc);
+end;
 finally
 terminate;
 tcpclient.Disconnect;
 tcpclient.Free;
 XmlScanner.Free;
+writetrace('Indi client stoped');
+end;
+except
 end;
 end;
 
