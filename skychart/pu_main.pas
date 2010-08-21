@@ -83,6 +83,7 @@ type
 
   Tf_main = class(TForm)
     MenuItem31: TMenuItem;
+    TelescopeSetup1: TMenuItem;
     NextChild1: TMenuItem;
     ReloadLanguage1: TMenuItem;
     ResetDefaultChart: TAction;
@@ -480,6 +481,7 @@ type
     procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
     procedure Maillist1Click(Sender: TObject);
+    procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
     procedure ReleaseNotes1Click(Sender: TObject);
@@ -496,6 +498,8 @@ type
     procedure SetupSolSysExecute(Sender: TObject);
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
+    procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -2632,6 +2636,7 @@ begin
 SetupTimePage(0);
 end;
 
+
 procedure Tf_main.ToolButtonConfigClick(Sender: TObject);
 begin
   ToolButtonConfig.PopupMenu.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
@@ -2842,6 +2847,17 @@ end;
 procedure Tf_main.SetupSystemExecute(Sender: TObject);
 begin
  SetupSystemPage(0);
+end;
+
+procedure Tf_main.TConnectMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupSystemPage(2);
+end;
+
+procedure Tf_main.TelescopeSetup1Click(Sender: TObject);
+begin
+  SetupSystemPage(2);
 end;
 
 procedure Tf_main.SetupSystemPage(page:integer);
@@ -5339,6 +5355,7 @@ ShowEcliptic1.caption:='&'+rsShowEcliptic;
 ShowMark1.caption:='&'+rsShowMark;
 ShowLabels1.caption:='&'+rsShowLabels;
 ShowObjectbelowthehorizon1.caption:='&'+rsBelowTheHori;
+TelescopeSetup1.Caption:='&'+rsTelescopeSet;
 telescope1.caption:='&'+rsTelescope;
 ControlPanel1.caption:='&'+rsControlPanel;
 telescopeSlew1.caption:='&'+rsSlew;

@@ -3268,16 +3268,19 @@ object f_main: Tf_main
         Left = 716
         Top = 2
         Action = TelescopeConnect
+        OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
         Left = 762
         Top = 2
         Action = TelescopeSlew
+        OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
         Left = 739
         Top = 2
         Action = TelescopeSync
+        OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
         Left = 785
@@ -4228,6 +4231,10 @@ object f_main: Tf_main
     object telescope1: TMenuItem
       Caption = '&Telescope'
       GroupIndex = 2
+      object TelescopeSetup1: TMenuItem
+        Caption = 'Telescope Setup'
+        OnClick = TelescopeSetup1Click
+      end
       object telescopeConnect1: TMenuItem
         Action = TelescopeConnect
         ShowAlwaysCheckable = True
