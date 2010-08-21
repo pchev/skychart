@@ -1,176 +1,48 @@
 object f_config_system: Tf_config_system
-  Left = 730
+  Left = 409
   Height = 532
-  Top = 124
-  Width = 550
+  Top = 126
+  Width = 523
   ActiveControl = MainPanel
   Caption = 'System'
   ClientHeight = 532
-  ClientWidth = 550
+  ClientWidth = 523
+  Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object MainPanel: TPanel
     Left = 0
     Height = 482
     Top = 0
-    Width = 550
+    Width = 523
     Align = alClient
     ClientHeight = 482
-    ClientWidth = 550
+    ClientWidth = 523
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
       Height = 480
       Top = 1
-      Width = 548
+      Width = 521
       Align = alClient
       PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 542
-        ClientHeight = 474
+        ClientWidth = 517
+        ClientHeight = 476
         object Label153: TLabel
           Left = 0
-          Height = 15
+          Height = 14
           Top = 0
-          Width = 83
+          Width = 73
           Caption = 'System Setting'
           ParentColor = False
-        end
-        object MysqlBox: TGroupBox
-          Left = 17
-          Height = 97
-          Top = 59
-          Width = 492
-          Caption = 'MySQL  Database'
-          ClientHeight = 82
-          ClientWidth = 490
-          TabOrder = 5
-          object Label77: TLabel
-            Left = 16
-            Height = 15
-            Top = 12
-            Width = 58
-            Caption = 'DB Name:'
-            ParentColor = False
-          end
-          object Label84: TLabel
-            Left = 178
-            Height = 15
-            Top = 12
-            Width = 67
-            Caption = 'Host Name:'
-            ParentColor = False
-          end
-          object Label85: TLabel
-            Left = 362
-            Height = 15
-            Top = 12
-            Width = 26
-            Caption = 'Port:'
-            ParentColor = False
-          end
-          object Label86: TLabel
-            Left = 16
-            Height = 15
-            Top = 52
-            Width = 106
-            AutoSize = False
-            Caption = 'Userid:'
-            ParentColor = False
-          end
-          object Label133: TLabel
-            Left = 274
-            Height = 15
-            Top = 52
-            Width = 81
-            AutoSize = False
-            Caption = 'Password'
-            ParentColor = False
-          end
-          object dbname: TEdit
-            Left = 80
-            Height = 20
-            Top = 8
-            Width = 65
-            OnChange = dbnameChange
-            TabOrder = 0
-          end
-          object dbport: TLongEdit
-            Left = 397
-            Height = 20
-            Top = 8
-            Width = 57
-            TabOrder = 1
-            OnChange = dbportChange
-            Value = 0
-          end
-          object dbhost: TEdit
-            Left = 250
-            Height = 20
-            Top = 8
-            Width = 65
-            OnChange = dbhostChange
-            TabOrder = 2
-            Text = 'dbhost'
-          end
-          object dbuser: TEdit
-            Left = 125
-            Height = 20
-            Top = 48
-            Width = 100
-            OnChange = dbuserChange
-            TabOrder = 3
-            Text = 'dbuser'
-          end
-          object dbpass: TEdit
-            Left = 354
-            Height = 20
-            Top = 48
-            Width = 100
-            EchoMode = emPassword
-            OnChange = dbpassChange
-            PasswordChar = '*'
-            TabOrder = 4
-            Text = 'dbpass'
-          end
-        end
-        object SqliteBox: TGroupBox
-          Left = 17
-          Height = 97
-          Top = 59
-          Width = 492
-          Caption = 'Sqlite Database'
-          ClientHeight = 82
-          ClientWidth = 490
-          TabOrder = 1
-          Visible = False
-          object Label1: TLabel
-            Left = 13
-            Height = 15
-            Top = 36
-            Width = 109
-            AutoSize = False
-            Caption = 'Database file: '
-            ParentColor = False
-          end
-          object dbnamesqlite: TEdit
-            Left = 125
-            Height = 20
-            Top = 32
-            Width = 281
-            Color = clBtnFace
-            OnChange = dbnamesqliteChange
-            ReadOnly = True
-            TabOrder = 0
-            Text = 'dbnamesqlite'
-          end
         end
         object GroupBoxDir: TGroupBox
           Left = 16
@@ -179,8 +51,8 @@ object f_config_system: Tf_config_system
           Width = 493
           Caption = 'Directory'
           ClientHeight = 76
-          ClientWidth = 491
-          TabOrder = 3
+          ClientWidth = 489
+          TabOrder = 2
           object Label156: TLabel
             Left = 13
             Height = 15
@@ -201,23 +73,25 @@ object f_config_system: Tf_config_system
           end
           object prgdir: TDirectoryEdit
             Left = 179
-            Height = 20
+            Height = 21
             Top = 3
             Width = 250
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
+            MaxLength = 0
             TabOrder = 0
             OnChange = prgdirChange
           end
           object persdir: TDirectoryEdit
             Left = 179
-            Height = 20
+            Height = 21
             Top = 42
             Width = 250
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
+            MaxLength = 0
             TabOrder = 1
             OnChange = persdirChange
           end
@@ -227,9 +101,9 @@ object f_config_system: Tf_config_system
           Height = 98
           Top = 155
           Width = 493
-          ClientHeight = 96
-          ClientWidth = 491
-          TabOrder = 2
+          ClientHeight = 94
+          ClientWidth = 489
+          TabOrder = 1
           object chkdb: TButton
             Left = 16
             Height = 25
@@ -300,7 +174,7 @@ object f_config_system: Tf_config_system
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
           ClientHeight = 33
-          ClientWidth = 333
+          ClientWidth = 331
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -319,19 +193,19 @@ object f_config_system: Tf_config_system
           Width = 492
           Caption = 'Desktop environment'
           ClientHeight = 77
-          ClientWidth = 490
-          TabOrder = 4
+          ClientWidth = 488
+          TabOrder = 3
           object Label12: TLabel
             Left = 203
-            Height = 15
+            Height = 14
             Top = 8
-            Width = 125
+            Width = 105
             Caption = 'URL launch command'
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 27
+            Height = 23
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -349,7 +223,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxCmd: TEdit
             Left = 204
-            Height = 20
+            Height = 21
             Top = 33
             Width = 194
             OnChange = LinuxCmdChange
@@ -357,33 +231,175 @@ object f_config_system: Tf_config_system
             Text = 'LinuxCmd'
           end
         end
+        object MysqlBox: TPanel
+          Left = 17
+          Height = 97
+          Top = 53
+          Width = 492
+          ClientHeight = 97
+          ClientWidth = 492
+          TabOrder = 5
+          object dbpass: TEdit
+            Left = 354
+            Height = 21
+            Top = 64
+            Width = 100
+            EchoMode = emPassword
+            OnChange = dbpassChange
+            PasswordChar = '*'
+            TabOrder = 0
+            Text = 'dbpass'
+          end
+          object dbuser: TEdit
+            Left = 125
+            Height = 21
+            Top = 64
+            Width = 100
+            OnChange = dbuserChange
+            TabOrder = 1
+            Text = 'dbuser'
+          end
+          object dbhost: TEdit
+            Left = 250
+            Height = 21
+            Top = 24
+            Width = 65
+            OnChange = dbhostChange
+            TabOrder = 2
+            Text = 'dbhost'
+          end
+          object dbport: TLongEdit
+            Left = 397
+            Height = 21
+            Top = 24
+            Width = 57
+            TabOrder = 3
+            OnChange = dbportChange
+            Value = 0
+          end
+          object dbname: TEdit
+            Left = 80
+            Height = 21
+            Top = 24
+            Width = 65
+            OnChange = dbnameChange
+            TabOrder = 4
+          end
+          object Label133: TLabel
+            Left = 274
+            Height = 15
+            Top = 68
+            Width = 81
+            AutoSize = False
+            Caption = 'Password'
+            ParentColor = False
+          end
+          object Label86: TLabel
+            Left = 16
+            Height = 15
+            Top = 68
+            Width = 106
+            AutoSize = False
+            Caption = 'Userid:'
+            ParentColor = False
+          end
+          object Label85: TLabel
+            Left = 362
+            Height = 14
+            Top = 28
+            Width = 23
+            Caption = 'Port:'
+            ParentColor = False
+          end
+          object Label84: TLabel
+            Left = 178
+            Height = 14
+            Top = 28
+            Width = 56
+            Caption = 'Host Name:'
+            ParentColor = False
+          end
+          object Label77: TLabel
+            Left = 16
+            Height = 14
+            Top = 28
+            Width = 48
+            Caption = 'DB Name:'
+            ParentColor = False
+          end
+          object MysqlBoxLabel: TLabel
+            Left = 16
+            Height = 14
+            Top = 3
+            Width = 74
+            Caption = 'MysqlBoxLabel'
+            ParentColor = False
+          end
+        end
+        object SqliteBox: TPanel
+          Left = 17
+          Height = 97
+          Top = 53
+          Width = 492
+          ClientHeight = 97
+          ClientWidth = 492
+          TabOrder = 4
+          object dbnamesqlite: TEdit
+            Left = 125
+            Height = 21
+            Top = 32
+            Width = 281
+            Color = clBtnFace
+            OnChange = dbnamesqliteChange
+            ReadOnly = True
+            TabOrder = 0
+            Text = 'dbnamesqlite'
+          end
+          object Label1: TLabel
+            Left = 13
+            Height = 15
+            Top = 36
+            Width = 109
+            AutoSize = False
+            Caption = 'Database file: '
+            ParentColor = False
+          end
+          object SqliteBoxLabel: TLabel
+            Left = 13
+            Height = 14
+            Top = 12
+            Width = 72
+            Caption = 'SqliteBoxLabel'
+            ParentColor = False
+          end
+        end
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 476
-        ClientHeight = 448
+        ClientWidth = 517
+        ClientHeight = 476
         object GroupBox3: TGroupBox
           Left = 16
-          Height = 247
+          Height = 249
           Top = 8
           Width = 393
           Caption = 'TCP/IP Server'
-          ClientHeight = 232
-          ClientWidth = 391
+          ClientHeight = 234
+          ClientWidth = 389
           TabOrder = 0
           object Label54: TLabel
             Left = 16
-            Height = 20
+            Height = 14
             Top = 124
-            Width = 115
+            Width = 97
             Caption = 'Server IP Interface :'
             ParentColor = False
           end
           object Label55: TLabel
             Left = 16
-            Height = 20
+            Height = 14
             Top = 168
-            Width = 88
+            Width = 73
             Caption = 'Server IP Port :'
             ParentColor = False
           end
@@ -391,7 +407,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 21
             Top = 32
-            Width = 126
+            Width = 111
             Caption = 'Use TCP/IP Server'
             OnClick = UseIPserverClick
             TabOrder = 0
@@ -418,7 +434,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 21
             Top = 72
-            Width = 183
+            Width = 160
             Caption = 'Client Connection Keep Alive'
             OnClick = keepaliveClick
             TabOrder = 1
@@ -427,132 +443,89 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 476
-        ClientHeight = 448
-        object Label13: TLabel
-          Left = 0
-          Height = 14
-          Top = 0
-          Width = 101
-          Caption = 'Telescope Setting'
-          ParentColor = False
-        end
-        object TelescopeManual: TGroupBox
-          Left = 9
-          Height = 297
-          Top = 112
-          Width = 449
-          Caption = 'Manual Mount'
-          ClientHeight = 282
-          ClientWidth = 447
+        ClientWidth = 517
+        ClientHeight = 476
+        object TelescopePlugin: TPanel
+          Left = 8
+          Height = 328
+          Top = 101
+          Width = 450
+          ClientHeight = 328
+          ClientWidth = 450
           TabOrder = 3
-          Visible = False
-          object Label7: TLabel
-            Left = 24
-            Height = 62
-            Top = 3
-            Width = 361
-            AutoSize = False
-            Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
-            ParentColor = False
-            WordWrap = True
+          object telescopepluginlist: TComboBox
+            Left = 144
+            Height = 24
+            Top = 42
+            Width = 145
+            AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 0
+            OnChange = telescopepluginlistChange
+            Style = csDropDownList
+            TabOrder = 0
           end
-          object AltAzMount: TPanel
+          object Label155: TLabel
             Left = 24
-            Height = 161
-            Top = 119
+            Height = 14
+            Top = 46
+            Width = 84
+            Caption = 'Telescope Plugin '
+            ParentColor = False
+          end
+          object TelescopePluginLabel: TLabel
+            Left = 25
+            Height = 14
+            Top = 11
+            Width = 104
+            Caption = 'TelescopePluginLabel'
+            ParentColor = False
+          end
+        end
+        object TelescopeManual: TPanel
+          Left = 8
+          Height = 330
+          Top = 101
+          Width = 450
+          ClientHeight = 330
+          ClientWidth = 450
+          TabOrder = 1
+          object ManualMountType: TRadioGroup
+            Left = 24
+            Height = 41
+            Top = 93
             Width = 361
-            ClientHeight = 161
-            ClientWidth = 361
-            TabOrder = 1
-            object Label8: TLabel
-              Left = 16
-              Height = 14
-              Top = 16
-              Width = 45
-              Caption = 'Azimuth'
-              ParentColor = False
-            end
-            object Label9: TLabel
-              Left = 16
-              Height = 14
-              Top = 93
-              Width = 43
-              Caption = 'Altitude'
-              ParentColor = False
-            end
-            object Label10: TLabel
-              Left = 240
-              Height = 14
-              Top = 16
-              Width = 83
-              Caption = 'turns / degree'
-              ParentColor = False
-            end
-            object Label11: TLabel
-              Left = 240
-              Height = 14
-              Top = 93
-              Width = 83
-              Caption = 'turns / degree'
-              ParentColor = False
-            end
-            object TurnsAz: TFloatEdit
-              Left = 128
-              Height = 22
-              Top = 11
-              Width = 81
-              ParentShowHint = False
-              TabOrder = 0
-              OnChange = TurnsAzChange
-              Value = 0
-              MinValue = 0
-              MaxValue = 0
-            end
-            object TurnsAlt: TFloatEdit
-              Left = 128
-              Height = 22
-              Top = 88
-              Width = 81
-              ParentShowHint = False
-              TabOrder = 2
-              OnChange = TurnsAltChange
-              Value = 0
-              MinValue = 0
-              MaxValue = 0
-            end
-            object RevertTurnsAz: TCheckBox
-              Left = 128
-              Height = 21
-              Top = 40
-              Width = 106
-              Caption = 'Revert Az knob'
-              OnClick = TurnsAzChange
-              TabOrder = 1
-            end
-            object RevertTurnsAlt: TCheckBox
-              Left = 128
-              Height = 21
-              Top = 120
-              Width = 108
-              Caption = 'Revert Alt knob'
-              OnClick = TurnsAltChange
-              TabOrder = 3
-            end
+            AutoFill = True
+            ChildSizing.LeftRightSpacing = 6
+            ChildSizing.TopBottomSpacing = 6
+            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+            ChildSizing.EnlargeVertical = crsHomogenousChildResize
+            ChildSizing.ShrinkHorizontal = crsScaleChilds
+            ChildSizing.ShrinkVertical = crsScaleChilds
+            ChildSizing.Layout = cclLeftToRightThenTopToBottom
+            ChildSizing.ControlsPerLine = 2
+            ClientHeight = 37
+            ClientWidth = 357
+            Columns = 2
+            Items.Strings = (
+              'Equatorial'
+              'Alt / Az'
+            )
+            OnClick = ManualMountTypeClick
+            TabOrder = 0
           end
           object EquatorialMount: TPanel
             Left = 24
             Height = 161
-            Top = 119
+            Top = 148
             Width = 361
             ClientHeight = 161
             ClientWidth = 361
-            TabOrder = 2
+            TabOrder = 1
             object Label3: TLabel
               Left = 16
               Height = 14
               Top = 16
-              Width = 91
+              Width = 79
               Caption = 'Right Ascension'
               ParentColor = False
             end
@@ -560,7 +533,7 @@ object f_config_system: Tf_config_system
               Left = 16
               Height = 14
               Top = 93
-              Width = 63
+              Width = 53
               Caption = 'Declination'
               ParentColor = False
             end
@@ -568,7 +541,7 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 16
-              Width = 69
+              Width = 57
               Caption = 'turns / hour'
               ParentColor = False
             end
@@ -576,13 +549,13 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 93
-              Width = 83
+              Width = 69
               Caption = 'turns / degree'
               ParentColor = False
             end
             object TurnsRa: TFloatEdit
               Left = 128
-              Height = 22
+              Height = 21
               Top = 11
               Width = 81
               ParentShowHint = False
@@ -594,7 +567,7 @@ object f_config_system: Tf_config_system
             end
             object TurnsDec: TFloatEdit
               Left = 128
-              Height = 22
+              Height = 21
               Top = 88
               Width = 81
               ParentShowHint = False
@@ -608,7 +581,7 @@ object f_config_system: Tf_config_system
               Left = 128
               Height = 21
               Top = 40
-              Width = 108
+              Width = 98
               Caption = 'Revert RA knob'
               OnClick = TurnsRaChange
               TabOrder = 2
@@ -617,158 +590,133 @@ object f_config_system: Tf_config_system
               Left = 128
               Height = 21
               Top = 120
-              Width = 117
+              Width = 104
               Caption = 'Revert DEC knob'
               OnClick = TurnsDecChange
               TabOrder = 3
             end
           end
-          object ManualMountType: TRadioGroup
+          object AltAzMount: TPanel
             Left = 24
-            Height = 41
-            Top = 64
+            Height = 161
+            Top = 148
             Width = 361
-            AutoFill = True
-            ChildSizing.LeftRightSpacing = 6
-            ChildSizing.TopBottomSpacing = 6
-            ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-            ChildSizing.EnlargeVertical = crsHomogenousChildResize
-            ChildSizing.ShrinkHorizontal = crsScaleChilds
-            ChildSizing.ShrinkVertical = crsScaleChilds
-            ChildSizing.Layout = cclLeftToRightThenTopToBottom
-            ChildSizing.ControlsPerLine = 2
-            ClientHeight = 39
-            ClientWidth = 359
-            Columns = 2
-            Items.Strings = (
-              'Equatorial'
-              'Alt / Az'
-            )
-            OnClick = ManualMountTypeClick
-            TabOrder = 0
+            ClientHeight = 161
+            ClientWidth = 361
+            TabOrder = 2
+            object Label8: TLabel
+              Left = 16
+              Height = 14
+              Top = 16
+              Width = 40
+              Caption = 'Azimuth'
+              ParentColor = False
+            end
+            object Label9: TLabel
+              Left = 16
+              Height = 14
+              Top = 93
+              Width = 37
+              Caption = 'Altitude'
+              ParentColor = False
+            end
+            object Label10: TLabel
+              Left = 240
+              Height = 14
+              Top = 16
+              Width = 69
+              Caption = 'turns / degree'
+              ParentColor = False
+            end
+            object Label11: TLabel
+              Left = 240
+              Height = 14
+              Top = 93
+              Width = 69
+              Caption = 'turns / degree'
+              ParentColor = False
+            end
+            object TurnsAz: TFloatEdit
+              Left = 128
+              Height = 21
+              Top = 11
+              Width = 81
+              ParentShowHint = False
+              TabOrder = 0
+              OnChange = TurnsAzChange
+              Value = 0
+              MinValue = 0
+              MaxValue = 0
+            end
+            object TurnsAlt: TFloatEdit
+              Left = 128
+              Height = 21
+              Top = 88
+              Width = 81
+              ParentShowHint = False
+              TabOrder = 2
+              OnChange = TurnsAltChange
+              Value = 0
+              MinValue = 0
+              MaxValue = 0
+            end
+            object RevertTurnsAz: TCheckBox
+              Left = 128
+              Height = 21
+              Top = 40
+              Width = 97
+              Caption = 'Revert Az knob'
+              OnClick = TurnsAzChange
+              TabOrder = 1
+            end
+            object RevertTurnsAlt: TCheckBox
+              Left = 128
+              Height = 21
+              Top = 120
+              Width = 96
+              Caption = 'Revert Alt knob'
+              OnClick = TurnsAltChange
+              TabOrder = 3
+            end
+          end
+          object Label7: TLabel
+            Left = 24
+            Height = 62
+            Top = 32
+            Width = 361
+            AutoSize = False
+            Caption = 'Set how the mount move on each axis when you turn the driving knob.'#13#10'Then the Telescope button show you the turns you must do to go from one object to another.'
+            ParentColor = False
+            WordWrap = True
+          end
+          object TelescopeManualLabel: TLabel
+            Left = 24
+            Height = 14
+            Top = 6
+            Width = 110
+            Caption = 'TelescopeManualLabel'
+            ParentColor = False
           end
         end
-        object INDI: TGroupBox
+        object INDI: TPanel
           Left = 8
-          Height = 297
-          Top = 112
+          Height = 328
+          Top = 101
           Width = 450
-          Caption = 'INDI Driver setting'
-          ClientHeight = 282
-          ClientWidth = 448
-          TabOrder = 1
-          object Label75: TLabel
-            Left = 8
-            Height = 14
-            Top = 28
-            Width = 99
-            Caption = 'INDI Server Host '
-            ParentColor = False
-          end
-          object Label130: TLabel
-            Left = 231
-            Height = 14
-            Top = 28
-            Width = 91
-            Caption = 'INDI server Port'
-            ParentColor = False
-          end
-          object Label258: TLabel
-            Left = 8
-            Height = 14
-            Top = 104
-            Width = 103
-            Caption = 'Server command '
-            ParentColor = False
-          end
-          object Label259: TLabel
-            Left = 231
-            Height = 14
-            Top = 136
-            Width = 71
-            Caption = 'Driver name'
-            ParentColor = False
-          end
-          object Label260: TLabel
-            Left = 231
-            Height = 14
-            Top = 104
-            Width = 85
-            Caption = 'Telescope type'
-            ParentColor = False
-          end
-          object Label261: TLabel
-            Left = 8
-            Height = 14
-            Top = 180
-            Width = 69
-            Caption = 'Device Port '
-            ParentColor = False
-          end
-          object Label2: TLabel
-            Left = 8
-            Height = 14
-            Top = 224
-            Width = 141
-            Caption = 'Control Panel command '
-            ParentColor = False
-          end
-          object IndiServerHost: TEdit
-            Left = 120
+          ClientHeight = 328
+          ClientWidth = 450
+          TabOrder = 2
+          object PanelCmd: TEdit
+            Left = 176
             Height = 21
-            Top = 24
-            Width = 100
-            OnChange = IndiServerHostChange
+            Top = 220
+            Width = 257
+            OnChange = PanelCmdChange
             TabOrder = 0
-          end
-          object IndiServerPort: TEdit
-            Left = 336
-            Height = 21
-            Top = 24
-            Width = 97
-            OnChange = IndiServerPortChange
-            TabOrder = 1
-          end
-          object IndiAutostart: TCheckBox
-            Left = 8
-            Height = 21
-            Top = 64
-            Width = 337
-            Caption = 'Automatically start a local server if not already running'
-            OnClick = IndiAutostartClick
-            TabOrder = 2
-          end
-          object IndiServerCmd: TEdit
-            Left = 120
-            Height = 21
-            Top = 100
-            Width = 100
-            OnChange = IndiServerCmdChange
-            TabOrder = 3
-          end
-          object IndiDriver: TEdit
-            Left = 336
-            Height = 21
-            Top = 132
-            Width = 100
-            Enabled = False
-            OnChange = IndiDriverChange
-            TabOrder = 5
-          end
-          object IndiDev: TComboBox
-            Left = 336
-            Height = 23
-            Top = 100
-            Width = 100
-            AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 0
-            OnSelect = IndiDevChange
-            Style = csDropDownList
-            TabOrder = 4
           end
           object IndiPort: TComboBox
             Left = 120
-            Height = 23
+            Height = 24
             Top = 176
             Width = 185
             AutoCompleteText = [cbactSearchAscending]
@@ -785,16 +733,133 @@ object f_config_system: Tf_config_system
             )
             OnSelect = IndiPortChange
             Style = csDropDownList
+            TabOrder = 1
+          end
+          object IndiDev: TComboBox
+            Left = 336
+            Height = 24
+            Top = 100
+            Width = 100
+            AutoCompleteText = [cbactSearchAscending]
+            ItemHeight = 0
+            OnSelect = IndiDevChange
+            Style = csDropDownList
+            TabOrder = 2
+          end
+          object IndiDriver: TEdit
+            Left = 336
+            Height = 21
+            Top = 132
+            Width = 100
+            Enabled = False
+            OnChange = IndiDriverChange
+            TabOrder = 3
+          end
+          object IndiServerCmd: TEdit
+            Left = 120
+            Height = 21
+            Top = 100
+            Width = 100
+            OnChange = IndiServerCmdChange
+            TabOrder = 4
+          end
+          object IndiAutostart: TCheckBox
+            Left = 8
+            Height = 21
+            Top = 64
+            Width = 286
+            Caption = 'Automatically start a local server if not already running'
+            OnClick = IndiAutostartClick
+            TabOrder = 5
+          end
+          object IndiServerPort: TEdit
+            Left = 336
+            Height = 21
+            Top = 24
+            Width = 97
+            OnChange = IndiServerPortChange
             TabOrder = 6
           end
-          object PanelCmd: TEdit
-            Left = 176
+          object IndiServerHost: TEdit
+            Left = 120
             Height = 21
-            Top = 220
-            Width = 257
-            OnChange = PanelCmdChange
+            Top = 24
+            Width = 100
+            OnChange = IndiServerHostChange
             TabOrder = 7
           end
+          object Label2: TLabel
+            Left = 8
+            Height = 14
+            Top = 224
+            Width = 116
+            Caption = 'Control Panel command '
+            ParentColor = False
+          end
+          object Label261: TLabel
+            Left = 8
+            Height = 14
+            Top = 180
+            Width = 59
+            Caption = 'Device Port '
+            ParentColor = False
+          end
+          object Label260: TLabel
+            Left = 231
+            Height = 14
+            Top = 104
+            Width = 74
+            Caption = 'Telescope type'
+            ParentColor = False
+          end
+          object Label259: TLabel
+            Left = 231
+            Height = 14
+            Top = 136
+            Width = 59
+            Caption = 'Driver name'
+            ParentColor = False
+          end
+          object Label258: TLabel
+            Left = 8
+            Height = 14
+            Top = 104
+            Width = 86
+            Caption = 'Server command '
+            ParentColor = False
+          end
+          object Label130: TLabel
+            Left = 231
+            Height = 14
+            Top = 28
+            Width = 76
+            Caption = 'INDI server Port'
+            ParentColor = False
+          end
+          object Label75: TLabel
+            Left = 8
+            Height = 14
+            Top = 28
+            Width = 83
+            Caption = 'INDI Server Host '
+            ParentColor = False
+          end
+          object INDILabel: TLabel
+            Left = 8
+            Height = 14
+            Top = 7
+            Width = 45
+            Caption = 'INDILabel'
+            ParentColor = False
+          end
+        end
+        object Label13: TLabel
+          Left = 0
+          Height = 14
+          Top = 0
+          Width = 86
+          Caption = 'Telescope Setting'
+          ParentColor = False
         end
         object TelescopeSelect: TRadioGroup
           Left = 8
@@ -812,7 +877,7 @@ object f_config_system: Tf_config_system
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
           ClientHeight = 50
-          ClientWidth = 448
+          ClientWidth = 446
           Columns = 3
           Items.Strings = (
             'INDI'
@@ -822,46 +887,16 @@ object f_config_system: Tf_config_system
           OnClick = TelescopeSelectClick
           TabOrder = 0
         end
-        object TelescopePlugin: TGroupBox
-          Left = 8
-          Height = 105
-          Top = 112
-          Width = 450
-          Caption = 'CDC plugin setting'
-          ClientHeight = 90
-          ClientWidth = 448
-          TabOrder = 2
-          Visible = False
-          object Label155: TLabel
-            Left = 24
-            Height = 14
-            Top = 46
-            Width = 99
-            Caption = 'Telescope Plugin '
-            ParentColor = False
-          end
-          object telescopepluginlist: TComboBox
-            Left = 144
-            Height = 23
-            Top = 42
-            Width = 145
-            AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 0
-            OnChange = telescopepluginlistChange
-            Style = csDropDownList
-            TabOrder = 0
-          end
-        end
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 476
-        ClientHeight = 448
+        ClientWidth = 517
+        ClientHeight = 476
         object Label14: TLabel
           Left = 19
-          Height = 20
+          Height = 14
           Top = 24
-          Width = 111
+          Width = 95
           Caption = 'Language selection'
           ParentColor = False
         end
@@ -882,13 +917,13 @@ object f_config_system: Tf_config_system
     Left = 0
     Height = 50
     Top = 482
-    Width = 550
+    Width = 523
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 550
+    ClientWidth = 523
     TabOrder = 1
     object Button1: TButton
-      Left = 266
+      Left = 239
       Height = 25
       Top = 12
       Width = 75
@@ -900,7 +935,7 @@ object f_config_system: Tf_config_system
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 362
+      Left = 335
       Height = 25
       Top = 12
       Width = 75
@@ -911,7 +946,7 @@ object f_config_system: Tf_config_system
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 452
+      Left = 425
       Height = 25
       Top = 12
       Width = 75
@@ -923,10 +958,11 @@ object f_config_system: Tf_config_system
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 104
+      Left = 150
       Height = 25
       Top = 12
       Width = 75
+      Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
       TabOrder = 3

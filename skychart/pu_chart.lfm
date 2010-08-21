@@ -3,9 +3,11 @@ object f_chart: Tf_chart
   Height = 338
   Top = 123
   Width = 508
+  ActiveControl = Panel1
   Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
+  Font.Height = -11
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
@@ -30,7 +32,7 @@ object f_chart: Tf_chart
       Left = 136
       Height = 16
       Top = 120
-      Width = 58
+      Width = 67
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4

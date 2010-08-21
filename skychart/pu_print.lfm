@@ -3,18 +3,19 @@ object f_print: Tf_print
   Height = 293
   Top = 402
   Width = 403
-  ActiveControl = prtcolor.RadioButton0
+  ActiveControl = Setup
   Caption = 'Print Chart'
   ClientHeight = 293
   ClientWidth = 403
+  Font.Height = -11
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 16
+    Height = 14
     Top = 14
-    Width = 57
+    Width = 50
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -33,7 +34,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 64
+    ClientHeight = 67
     ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
@@ -59,7 +60,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 64
+    ClientHeight = 67
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -106,44 +107,44 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 64
+    ClientHeight = 67
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
       Left = 23
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 21
+      Width = 20
       Caption = 'Left'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 89
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 29
+      Width = 25
       Caption = 'Right'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 153
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 22
+      Width = 18
       Caption = 'Top'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 216
-      Height = 16
+      Height = 14
       Top = 14
-      Width = 41
+      Width = 34
       Caption = 'Bottom'
       ParentColor = False
     end
     object LongEdit1: TLongEdit
       Left = 21
-      Height = 23
+      Height = 21
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -156,7 +157,7 @@ object f_print: Tf_print
     end
     object LongEdit2: TLongEdit
       Left = 86
-      Height = 23
+      Height = 21
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -169,7 +170,7 @@ object f_print: Tf_print
     end
     object LongEdit3: TLongEdit
       Left = 151
-      Height = 23
+      Height = 21
       Hint = '0..100'
       Top = 35
       Width = 40
@@ -182,7 +183,7 @@ object f_print: Tf_print
     end
     object LongEdit4: TLongEdit
       Left = 216
-      Height = 23
+      Height = 21
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -234,4 +235,4 @@ object f_print: Tf_print
     left = 56
     top = 252
   end
-end
+end

@@ -3,17 +3,16 @@ object f_about: Tf_about
   Height = 263
   Top = 105
   Width = 534
-  ActiveControl = Notebook1
+  ActiveControl = Panel2
   BorderStyle = bsSizeToolWin
   Caption = 'About'
   ClientHeight = 263
   ClientWidth = 534
   Font.Color = clBlack
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   Position = poMainFormCenter
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object Panel2: TPanel
     Left = 0
     Height = 263
@@ -2387,13 +2386,13 @@ object f_about: Tf_about
         TabOrder = 1
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 444
-          ClientHeight = 196
+          ClientWidth = 448
+          ClientHeight = 194
           object Label5: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 30
-            Width = 59
+            Width = 63
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2401,9 +2400,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 6
-            Width = 76
+            Width = 80
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2423,7 +2422,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 78
-            Width = 45
+            Width = 47
             Caption = 'Copyright'
             ParentColor = False
           end
@@ -2431,7 +2430,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 54
-            Width = 36
+            Width = 38
             Caption = 'Version'
             ParentColor = False
           end
@@ -2439,7 +2438,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 158
-            Width = 41
+            Width = 42
             Caption = 'Compiler'
             ParentColor = False
           end
@@ -2460,8 +2459,8 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 444
-          ClientHeight = 196
+          ClientWidth = 448
+          ClientHeight = 194
           object Label3: TLabel
             Left = 11
             Height = 20
@@ -2497,8 +2496,8 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 444
-          ClientHeight = 196
+          ClientWidth = 448
+          ClientHeight = 194
           object Memo2: TMemo
             Left = 0
             Height = 196

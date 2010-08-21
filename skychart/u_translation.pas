@@ -553,7 +553,6 @@ resourcestring
   rsDefault = 'Default';
   rsCDCObsoleteC = 'Obsolete CdC catalogs and settings (you can still use them)';
   rsReplacedBy = 'Replaced by';
-  rsCdCFormatPre = 'CdC format, prefere the compact version';
   rsNotAvailable = 'Not available';
   rsFovNumber = 'FOV number:';
   rsApply = 'Apply';

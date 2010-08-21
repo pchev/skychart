@@ -9,12 +9,11 @@ object f_search: Tf_search
   ClientHeight = 326
   ClientWidth = 433
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object CometPanel: TPanel
     Left = 7
     Height = 41
@@ -25,7 +24,7 @@ object f_search: Tf_search
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
-      Height = 26
+      Height = 21
       Top = 10
       Width = 99
       TabOrder = 0
@@ -42,7 +41,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 26
+      Height = 23
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -59,7 +58,7 @@ object f_search: Tf_search
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 26
+      Height = 21
       Top = 10
       Width = 99
       TabOrder = 0
@@ -76,7 +75,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 26
+      Height = 23
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -95,15 +94,15 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 19
+      Height = 14
       Top = 14
-      Width = 35
+      Width = 34
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 26
+      Height = 23
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -122,7 +121,7 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 19
+      Height = 14
       Top = 14
       Width = 21
       Caption = 'Star'
@@ -130,7 +129,7 @@ object f_search: Tf_search
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 26
+      Height = 23
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -149,7 +148,7 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 19
+      Height = 14
       Top = 14
       Width = 62
       Caption = 'Constellation'
@@ -157,7 +156,7 @@ object f_search: Tf_search
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 26
+      Height = 23
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -176,9 +175,9 @@ object f_search: Tf_search
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 21
+      Height = 14
       Top = 14
-      Width = 68
+      Width = 62
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -347,7 +346,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 26
+      Height = 21
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -567,15 +566,15 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 19
+      Height = 14
       Top = 14
-      Width = 37
+      Width = 33
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 26
+      Height = 23
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -598,7 +597,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 197
+    ClientHeight = 202
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0
