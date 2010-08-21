@@ -22,6 +22,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 {$mode objfpc}{$H+}
 
+{ TODO : Print and debug on Win64, remove that in the future }
+{$ifdef  win64}
+  {$IMAGEBASE $400000}
+{$endif}
+
 uses
   {$IFDEF UNIX}{$IFDEF UseCThreads}
   cthreads,

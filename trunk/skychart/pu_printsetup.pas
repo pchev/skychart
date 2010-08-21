@@ -220,13 +220,13 @@ end;
 
 procedure Tf_printsetup.printmodeClick(Sender: TObject);
 begin
-{$ifdef  win64}
+(*{$ifdef  win64}
 { TODO : Print on Win64 }
 if printmode.ItemIndex=0 then begin
   showmessage('Cannot print directly with Win64. Make a bitmap or postscript to print later.');
   printmode.ItemIndex:=2;
 end;
-{$endif}
+{$endif} *)
 cm.PrintMethod:=printmode.ItemIndex;
 updprtsetup;
 end;
