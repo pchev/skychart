@@ -63,13 +63,13 @@ type
     AsteroidUrlList: TMemo;
     Page3: TPage;
     Panel1: TPanel;
+    Panel2: TPanel;
     proxyhost: TEdit;
     proxyport: TEdit;
     proxyuser: TEdit;
     proxypass: TEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
-    GroupBox3: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -191,7 +191,7 @@ proxypass.Text:=cmain.ProxyPass;
 ftppassive.Checked:=cmain.FtpPassive;
 CheckBox1.Checked:=cmain.ConfirmDownload;
 anonpass.Text:=cmain.AnonPass;
-GroupBox3.Visible:=cmain.HttpProxy;
+panel2.Visible:=cmain.HttpProxy;
 end;
 
 procedure Tf_config_internet.ShowOrbitalElements;
@@ -223,7 +223,7 @@ procedure Tf_config_internet.httpproxyClick(Sender: TObject);
 begin
 if lockchange then exit;
 cmain.HttpProxy:=httpproxy.Checked;
-GroupBox3.Visible:=cmain.HttpProxy;
+panel2.Visible:=cmain.HttpProxy;
 end;
 
 procedure Tf_config_internet.proxyhostChange(Sender: TObject);

@@ -9,12 +9,11 @@ object f_info: Tf_info
   ClientHeight = 464
   ClientWidth = 719
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poScreenCenter
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 0
     Height = 27
@@ -86,10 +85,10 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 1
       object serverinfo: TLabel
-        Left = 535
-        Height = 15
+        Left = 536
+        Height = 1
         Top = 6
-        Width = 2
+        Width = 1
         Alignment = taRightJustify
         Anchors = [akTop, akRight]
         ParentColor = False
@@ -106,9 +105,9 @@ object f_info: Tf_info
       end
       object CheckBox1: TCheckBox
         Left = 104
-        Height = 22
+        Height = 21
         Top = 2
-        Width = 84
+        Width = 85
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -126,7 +125,7 @@ object f_info: Tf_info
     ClientWidth = 554
     TabOrder = 2
     Visible = False
-    object Memo1: TSynEdit
+    inline Memo1: TSynEdit
       Left = 1
       Height = 314
       Top = 1
@@ -143,10 +142,33 @@ object f_info: Tf_info
       TabOrder = 1
       OnDblClick = Memo1DblClick
       BookMarkOptions.Xoffset = -18
-      BookMarkOptions.OnChange = nil
       Gutter.Visible = False
-      Gutter.Width = 0
+      Gutter.Width = 57
       Gutter.MouseActions = <      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbLeft
+          ClickCount = ccAny
+          ClickDir = cdDown
+          Command = 13
+          MoveCaret = False
+          Option = 0
+          Priority = 0
+        end      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbRight
+          ClickCount = ccSingle
+          ClickDir = cdUp
+          Command = 12
+          MoveCaret = False
+          Option = 0
+          Priority = 0
+        end>
+      RightGutter.Width = 0
+      RightGutter.MouseActions = <      
         item
           Shift = []
           ShiftMask = []
@@ -634,6 +656,17 @@ object f_info: Tf_info
           MoveCaret = False
           Option = 0
           Priority = 0
+        end      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbLeft
+          ClickCount = ccSingle
+          ClickDir = cdDown
+          Command = 9
+          MoveCaret = False
+          Option = 0
+          Priority = 0
         end>
       Lines.Strings = (
         'Memo1'
@@ -643,12 +676,12 @@ object f_info: Tf_info
       RightEdge = 0
       BracketHighlightStyle = sbhsBoth
       TabWidth = 10
-      object TSynGutterPartList
+      inline TSynGutterPartList
         object TSynGutterMarks
-          Width = 23
+          Width = 24
         end
         object TSynGutterLineNumber
-          Width = 25
+          Width = 17
           MouseActions = <>
           MarkupInfo.Background = clBtnFace
           MarkupInfo.Foreground = clNone
@@ -750,6 +783,8 @@ object f_info: Tf_info
             end>
         end
       end
+      inline SynRightGutterPartList1: TSynRightGutterPartList
+      end
     end
     object Panel3: TPanel
       Left = 1
@@ -774,7 +809,7 @@ object f_info: Tf_info
       end
       object Edit1: TEdit
         Left = 124
-        Height = 24
+        Height = 21
         Top = 3
         Width = 85
         Anchors = [akTop, akRight]

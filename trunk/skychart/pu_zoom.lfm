@@ -9,11 +9,10 @@ object f_zoom: Tf_zoom
   ClientHeight = 142
   ClientWidth = 308
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 16
     Height = 14

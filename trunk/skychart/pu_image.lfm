@@ -14,12 +14,11 @@ object f_image: Tf_image
   ClientHeight = 407
   ClientWidth = 615
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   Position = poScreenCenter
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object Image1: TZoomImage
     Left = 0
     Height = 265
@@ -28,7 +27,6 @@ object f_image: Tf_image
     Canvas.AutoRedraw = False
     Canvas.Brush.Color = clBlack
     Canvas.Font.Height = -11
-    Canvas.Font.Name = 'MS Sans Serif'
     Zoom = 1
     ZoomMin = 1
     ZoomMax = 4
@@ -37,19 +35,19 @@ object f_image: Tf_image
   end
   object Panel1: TPanel
     Left = 0
-    Height = 27
+    Height = 28
     Top = 0
     Width = 615
     Align = alTop
     AutoSize = True
-    ClientHeight = 27
+    ClientHeight = 28
     ClientWidth = 615
     FullRepaint = False
     TabOrder = 0
     TabStop = True
     object Label1: TLabel
       Left = 241
-      Height = 19
+      Height = 14
       Top = 7
       Width = 33
       Caption = 'Label1'
@@ -88,8 +86,8 @@ object f_image: Tf_image
   end
   object VScrollBar: TScrollBar
     Left = 600
-    Height = 365
-    Top = 27
+    Height = 364
+    Top = 28
     Width = 15
     Align = alRight
     Kind = sbVertical

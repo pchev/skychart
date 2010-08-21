@@ -1,7 +1,7 @@
 object f_getdss: Tf_getdss
-  Left = 290
+  Left = 320
   Height = 308
-  Top = 144
+  Top = 136
   Width = 420
   ActiveControl = ListBox1
   Caption = 'List of available plates'
@@ -12,12 +12,12 @@ object f_getdss: Tf_getdss
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 13
     Top = 8
-    Width = 43
+    Width = 37
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11
@@ -39,6 +39,7 @@ object f_getdss: Tf_getdss
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
+    TabOrder = 3
     Visible = False
   end
   object ListBox1: TListBox
@@ -79,6 +80,17 @@ object f_getdss: Tf_getdss
     ModalResult = 2
     NumGlyphs = 0
     TabOrder = 2
+  end
+  object ListBox2: TListBox
+    Left = 42
+    Height = 80
+    Top = 293
+    Width = 100
+    Font.Height = -11
+    ItemHeight = 0
+    ParentFont = False
+    TabOrder = 4
+    TopIndex = -1
   end
   object DownloadDialog1: TDownloadDialog
     FtpFwMode = 0

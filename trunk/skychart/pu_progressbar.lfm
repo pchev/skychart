@@ -9,26 +9,24 @@ object f_progress: Tf_progress
   ClientHeight = 162
   ClientWidth = 422
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   Position = poDefaultPosOnly
+  LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 16
-    Height = 15
+    Height = 14
     Top = 4
-    Width = 43
+    Width = 33
     Caption = 'Label1'
-    Color = clNone
     ParentColor = False
   end
   object Label2: TLabel
     Left = 16
-    Height = 15
+    Height = 14
     Top = 56
-    Width = 43
+    Width = 33
     Caption = 'Label2'
-    Color = clNone
     ParentColor = False
   end
   object SpeedButton2: TSpeedButton
@@ -59,4 +57,4 @@ object f_progress: Tf_progress
     Step = 1
     TabOrder = 1
   end
-end
+end

@@ -83,6 +83,7 @@ type
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    ListBox2: TListBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
