@@ -32,6 +32,12 @@ do
  fi
 done
 
+if [ ! -d doc/wiki_doc ]; then
+  cd wiki_doc
+  ./getdoc.sh
+  ./copydoc.sh
+fi
+
 for f in $(find doc/wiki_doc/|grep -v .svn)
 do
  if [ ! -d $f ]
