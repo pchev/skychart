@@ -456,7 +456,7 @@ type
                 PMon,DrawPMon,ApparentPos,CoordExpertMode : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
+                IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
                 // working variable
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
@@ -1228,6 +1228,7 @@ ScopePlugin:=Source.ScopePlugin ;
 IndiAutostart:=Source.IndiAutostart ;
 ShowCircle:=Source.ShowCircle ;
 IndiTelescope:=Source.IndiTelescope ;
+ASCOMTelescope:=Source.ASCOMTelescope ;
 PluginTelescope:=Source.PluginTelescope ;
 ManualTelescope:=Source.ManualTelescope ;
 ShowImages:=Source.ShowImages ;
