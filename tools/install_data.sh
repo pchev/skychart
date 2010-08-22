@@ -36,6 +36,7 @@ if [ ! -d doc/wiki_doc ]; then
   cd wiki_doc
   ./getdoc.sh
   ./copydoc.sh
+  cd ..
 fi
 
 for f in $(find doc/wiki_doc/|grep -v .svn)
