@@ -1,6 +1,6 @@
-echo delete doc_en, doc_fr, ... ?
-echo ready ?
-read
+#!/bin/bash
+
+rm -rf doc_ca doc_en doc_es doc_fr doc_it doc_nl doc_ru doc_tr doc_uk 
 
 wget -E -r -p -np -nH --cut-dirs=2 -X */*detail,*/*export,*/playground -R *do=index* -P doc_ca --cache=off --restrict-file-names=windows -k  http://ap-i.net/static/skychart/ca/documentation/start http://ap-i.net/static/skychart/ca/news/start
 
