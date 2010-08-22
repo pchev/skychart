@@ -3,5 +3,5 @@
 
 mkdir ../doc/wiki_doc
 rm doc_*/robots.txt
-cp -a doc_*/* ../doc/wiki_doc/
+cp -R -p doc_*/* ../doc/wiki_doc/
 
