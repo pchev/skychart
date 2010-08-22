@@ -3,6 +3,7 @@ object f_config_system: Tf_config_system
   Height = 532
   Top = 126
   Width = 523
+  ActiveControl = MainPanel
   Caption = 'System'
   ClientHeight = 532
   ClientWidth = 523
@@ -49,7 +50,7 @@ object f_config_system: Tf_config_system
           Top = 267
           Width = 493
           Caption = 'Directory'
-          ClientHeight = 73
+          ClientHeight = 76
           ClientWidth = 489
           TabOrder = 2
           object Label156: TLabel
@@ -100,7 +101,7 @@ object f_config_system: Tf_config_system
           Height = 98
           Top = 155
           Width = 493
-          ClientHeight = 80
+          ClientHeight = 94
           ClientWidth = 489
           TabOrder = 1
           object chkdb: TButton
@@ -172,7 +173,7 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 30
+          ClientHeight = 33
           ClientWidth = 331
           Columns = 2
           ItemIndex = 0
@@ -191,7 +192,7 @@ object f_config_system: Tf_config_system
           Top = 367
           Width = 492
           Caption = 'Desktop environment'
-          ClientHeight = 74
+          ClientHeight = 77
           ClientWidth = 488
           TabOrder = 3
           object Label12: TLabel
@@ -208,7 +209,7 @@ object f_config_system: Tf_config_system
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
+            ItemHeight = 0
             ItemIndex = 1
             Items.Strings = (
               'FreeDesktop'
@@ -383,7 +384,7 @@ object f_config_system: Tf_config_system
           Top = 8
           Width = 393
           Caption = 'TCP/IP Server'
-          ClientHeight = 231
+          ClientHeight = 234
           ClientWidth = 389
           TabOrder = 0
           object Label54: TLabel
@@ -442,8 +443,8 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 513
-        ClientHeight = 472
+        ClientWidth = 517
+        ClientHeight = 476
         object TelescopePlugin: TPanel
           Left = 8
           Height = 328
@@ -454,11 +455,11 @@ object f_config_system: Tf_config_system
           TabOrder = 3
           object telescopepluginlist: TComboBox
             Left = 144
-            Height = 21
+            Height = 24
             Top = 42
             Width = 145
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
+            ItemHeight = 0
             OnChange = telescopepluginlistChange
             Style = csDropDownList
             TabOrder = 0
@@ -467,7 +468,7 @@ object f_config_system: Tf_config_system
             Left = 24
             Height = 14
             Top = 46
-            Width = 90
+            Width = 84
             Caption = 'Telescope Plugin '
             ParentColor = False
           end
@@ -475,7 +476,7 @@ object f_config_system: Tf_config_system
             Left = 25
             Height = 14
             Top = 11
-            Width = 111
+            Width = 104
             Caption = 'TelescopePluginLabel'
             ParentColor = False
           end
@@ -502,7 +503,7 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 23
+            ClientHeight = 37
             ClientWidth = 357
             Columns = 2
             Items.Strings = (
@@ -524,7 +525,7 @@ object f_config_system: Tf_config_system
               Left = 16
               Height = 14
               Top = 16
-              Width = 84
+              Width = 79
               Caption = 'Right Ascension'
               ParentColor = False
             end
@@ -532,7 +533,7 @@ object f_config_system: Tf_config_system
               Left = 16
               Height = 14
               Top = 93
-              Width = 60
+              Width = 53
               Caption = 'Declination'
               ParentColor = False
             end
@@ -540,7 +541,7 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 16
-              Width = 63
+              Width = 57
               Caption = 'turns / hour'
               ParentColor = False
             end
@@ -548,7 +549,7 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 93
-              Width = 74
+              Width = 69
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -578,18 +579,18 @@ object f_config_system: Tf_config_system
             end
             object RevertTurnsRa: TCheckBox
               Left = 128
-              Height = 19
+              Height = 21
               Top = 40
-              Width = 99
+              Width = 98
               Caption = 'Revert RA knob'
               OnClick = TurnsRaChange
               TabOrder = 2
             end
             object RevertTurnDec: TCheckBox
               Left = 128
-              Height = 19
+              Height = 21
               Top = 120
-              Width = 106
+              Width = 104
               Caption = 'Revert DEC knob'
               OnClick = TurnsDecChange
               TabOrder = 3
@@ -607,7 +608,7 @@ object f_config_system: Tf_config_system
               Left = 16
               Height = 14
               Top = 16
-              Width = 43
+              Width = 40
               Caption = 'Azimuth'
               ParentColor = False
             end
@@ -615,7 +616,7 @@ object f_config_system: Tf_config_system
               Left = 16
               Height = 14
               Top = 93
-              Width = 42
+              Width = 37
               Caption = 'Altitude'
               ParentColor = False
             end
@@ -623,7 +624,7 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 16
-              Width = 74
+              Width = 69
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -631,7 +632,7 @@ object f_config_system: Tf_config_system
               Left = 240
               Height = 14
               Top = 93
-              Width = 74
+              Width = 69
               Caption = 'turns / degree'
               ParentColor = False
             end
@@ -661,7 +662,7 @@ object f_config_system: Tf_config_system
             end
             object RevertTurnsAz: TCheckBox
               Left = 128
-              Height = 19
+              Height = 21
               Top = 40
               Width = 97
               Caption = 'Revert Az knob'
@@ -670,9 +671,9 @@ object f_config_system: Tf_config_system
             end
             object RevertTurnsAlt: TCheckBox
               Left = 128
-              Height = 19
+              Height = 21
               Top = 120
-              Width = 99
+              Width = 96
               Caption = 'Revert Alt knob'
               OnClick = TurnsAltChange
               TabOrder = 3
@@ -692,7 +693,7 @@ object f_config_system: Tf_config_system
             Left = 24
             Height = 14
             Top = 6
-            Width = 117
+            Width = 110
             Caption = 'TelescopeManualLabel'
             ParentColor = False
           end
@@ -715,11 +716,11 @@ object f_config_system: Tf_config_system
           end
           object IndiPort: TComboBox
             Left = 120
-            Height = 21
+            Height = 24
             Top = 176
             Width = 185
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
+            ItemHeight = 0
             Items.Strings = (
               'COM1'
               'COM2'
@@ -736,11 +737,11 @@ object f_config_system: Tf_config_system
           end
           object IndiDev: TComboBox
             Left = 336
-            Height = 21
+            Height = 24
             Top = 100
             Width = 100
             AutoCompleteText = [cbactSearchAscending]
-            ItemHeight = 13
+            ItemHeight = 0
             OnSelect = IndiDevChange
             Style = csDropDownList
             TabOrder = 2
@@ -764,9 +765,9 @@ object f_config_system: Tf_config_system
           end
           object IndiAutostart: TCheckBox
             Left = 8
-            Height = 19
+            Height = 21
             Top = 64
-            Width = 300
+            Width = 286
             Caption = 'Automatically start a local server if not already running'
             OnClick = IndiAutostartClick
             TabOrder = 5
@@ -791,7 +792,7 @@ object f_config_system: Tf_config_system
             Left = 8
             Height = 14
             Top = 224
-            Width = 127
+            Width = 116
             Caption = 'Control Panel command '
             ParentColor = False
           end
@@ -799,7 +800,7 @@ object f_config_system: Tf_config_system
             Left = 8
             Height = 14
             Top = 180
-            Width = 61
+            Width = 59
             Caption = 'Device Port '
             ParentColor = False
           end
@@ -807,7 +808,7 @@ object f_config_system: Tf_config_system
             Left = 231
             Height = 14
             Top = 104
-            Width = 76
+            Width = 74
             Caption = 'Telescope type'
             ParentColor = False
           end
@@ -815,7 +816,7 @@ object f_config_system: Tf_config_system
             Left = 231
             Height = 14
             Top = 136
-            Width = 62
+            Width = 59
             Caption = 'Driver name'
             ParentColor = False
           end
@@ -823,7 +824,7 @@ object f_config_system: Tf_config_system
             Left = 8
             Height = 14
             Top = 104
-            Width = 88
+            Width = 86
             Caption = 'Server command '
             ParentColor = False
           end
@@ -831,7 +832,7 @@ object f_config_system: Tf_config_system
             Left = 231
             Height = 14
             Top = 28
-            Width = 80
+            Width = 76
             Caption = 'INDI server Port'
             ParentColor = False
           end
@@ -839,7 +840,7 @@ object f_config_system: Tf_config_system
             Left = 8
             Height = 14
             Top = 28
-            Width = 87
+            Width = 83
             Caption = 'INDI Server Host '
             ParentColor = False
           end
@@ -847,7 +848,7 @@ object f_config_system: Tf_config_system
             Left = 8
             Height = 14
             Top = 7
-            Width = 50
+            Width = 45
             Caption = 'INDILabel'
             ParentColor = False
           end
@@ -856,7 +857,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 14
           Top = 0
-          Width = 91
+          Width = 86
           Caption = 'Telescope Setting'
           ParentColor = False
         end
@@ -875,7 +876,7 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 4
-          ClientHeight = 47
+          ClientHeight = 50
           ClientWidth = 446
           Columns = 4
           Items.Strings = (
@@ -899,7 +900,7 @@ object f_config_system: Tf_config_system
             Left = 13
             Height = 14
             Top = 6
-            Width = 67
+            Width = 65
             Caption = 'ASCOMLabel'
             ParentColor = False
           end
@@ -922,7 +923,7 @@ object f_config_system: Tf_config_system
           Height = 21
           Top = 82
           Width = 260
-          ItemHeight = 13
+          ItemHeight = 0
           OnSelect = LanguageListSelect
           Style = csDropDownList
           TabOrder = 0
