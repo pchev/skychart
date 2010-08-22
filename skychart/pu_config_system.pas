@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_database,
+uses pu_ascomclient, u_help, u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
@@ -42,8 +42,10 @@ type
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     INDILabel: TLabel;
+    ASCOMLabel: TLabel;
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
+    ASCOMPanel: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
     TelescopeManualLabel: TLabel;
@@ -322,6 +324,7 @@ dbchanged:=false;
 {$ifdef mswindows}
   GroupBoxLinux.Visible:=false;
 {$else}
+  if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
   Indiport.Style:= csSimple;
   IndiPort.Items.Clear;
@@ -437,6 +440,7 @@ ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
    {$ifdef mswindows}
+   else if csc.ASCOMTelescope then Telescopeselect.itemindex:=3
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
    {$endif}
    else Telescopeselect.itemindex:=1;
@@ -706,9 +710,11 @@ begin
 csc.IndiTelescope:=Telescopeselect.itemindex=0;
 csc.ManualTelescope:=Telescopeselect.itemindex=1;
 csc.PluginTelescope:=Telescopeselect.itemindex=2;
+csc.ASCOMTelescope:=Telescopeselect.itemindex=3;
 INDI.visible:=csc.IndiTelescope;
 TelescopePlugin.visible:=csc.PluginTelescope;
 TelescopeManual.visible:=csc.ManualTelescope;
+ASCOMPanel.visible:=csc.ASCOMTelescope;
 end;
 
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);
