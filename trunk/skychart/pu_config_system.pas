@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses pu_ascomclient, u_help, u_translation, u_constant, u_util, cu_database,
+uses u_help, u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
   LCLIntf, SysUtils, Graphics, Forms, FileUtil,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;

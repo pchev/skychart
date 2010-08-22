@@ -3328,6 +3328,7 @@ if sc.cfgsc.PluginTelescope then begin
     end;
 end;
 if sc.cfgsc.ASCOMTelescope then begin
+  {$ifdef mswindows}
      Connect1.checked:=pu_ascomclient.ScopeConnected;
      if Connect1.checked then begin
       pu_ascomclient.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
@@ -3355,6 +3356,7 @@ if sc.cfgsc.ASCOMTelescope then begin
          Refresh;
       end;
      end;
+   {$endif}
  end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 except
