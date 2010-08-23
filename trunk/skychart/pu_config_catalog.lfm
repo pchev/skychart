@@ -28,7 +28,7 @@ object f_config_catalog: Tf_config_catalog
       Top = 1
       Width = 498
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 1
       object Page1: TPage
@@ -739,7 +739,7 @@ object f_config_catalog: Tf_config_catalog
             Tag = 1
             Left = 92
             Height = 21
-            Hint = 'Saguaro Astronomy Club Database  7.2'
+            Hint = 'Saguaro Astronomy Club Database  8.1'
             Top = 16
             Width = 48
             HelpContext = 107
