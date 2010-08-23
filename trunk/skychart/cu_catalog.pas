@@ -1721,6 +1721,12 @@ if result then begin
    else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
    if (rec.neb.mag>70)or(rec.neb.mag<-70) then rec.neb.mag:=99.9;    // undefined magnitude
    rec.neb.dim2:=lin.s2;
+   if rec.neb.nebtype=4 then begin // arc second units for PN
+      rec.neb.dim1:=rec.neb.dim1*60;
+      rec.neb.dim2:=rec.neb.dim2*60;
+      rec.neb.valid[vnNebunit]:=true;
+      rec.neb.nebunit:=3600;
+   end;
    if lin.pa=255 then rec.neb.pa:=90
                  else rec.neb.pa:=lin.pa;
    rec.neb.sbr:=lin.sbr;
