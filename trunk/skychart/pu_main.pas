@@ -5746,7 +5746,7 @@ end;
 end;
 
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
-var i,n : integer;
+var i,n,w,h : integer;
     cmd:string;
     chart:TForm;
     child:TChildDoc;
@@ -5791,8 +5791,16 @@ else begin
  if chart is Tf_chart then with chart as Tf_chart do begin
     if cmd='RESIZE' then begin // special case with action on main and on the chart
        Multidoc1.Maximized:=false;
-       child.width:=StrToIntDef(arg[1],child.width);
-       child.height:=StrToIntDef(arg[2],child.height);
+       w:=StrToIntDef(arg[1],child.Width);
+       h:=StrToIntDef(arg[2],child.Height);
+       if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
+       if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
+       h:=h+child.TopBar.Height+child.BotBar.Height+child.MenuBar.Height;
+       w:=w+child.LeftBar.Width+child.RightBar.width;
+       child.width:=w;
+       child.height:=h;
+       arg[1]:=inttostr(w);
+       arg[2]:=inttostr(h);
     end;
     result:=(chart as Tf_chart).ExecuteCmd(arg);
  end;
@@ -6183,6 +6191,14 @@ for i:=0 to Params.Count-1 do begin
       pp.Add(parm);
       ExecuteCmd('',pp);
       chartchanged:=true;
+   end else if cmd='--saveimg' then begin
+      parm:='SAVEIMG '+parm;
+      splitarg(parm,blank,pp);
+      ExecuteCmd('',pp);
+   end else if cmd='--resize' then begin
+      parm:='RESIZE '+parm;
+      splitarg(parm,blank,pp);
+      ExecuteCmd('',pp);
    end else if cmd='--test2' then begin
       pp.Add('NEWCHART');
       pp.Add('test');
