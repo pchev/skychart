@@ -6076,9 +6076,16 @@ end;
 
 procedure Tf_main.InstanceRunning(Sender : TObject);
 var i : integer;
+    parms : string;
 begin
-if Params.Find('--unique',i) then
-   UniqueInstance1.RetryOrHalt;
+for i:=0 to Params.Count-1 do begin
+   parms:= Params[i];
+   if parms='--unique' then begin
+      debugln('Other instance running, exit now.');
+      UniqueInstance1.RetryOrHalt;
+      debugln('... maybe not, try to continue ...');
+   end;
+end;
 end;
 
 // Parameters that need to be set before program initialisation
@@ -6115,7 +6122,9 @@ procedure Tf_main.ProcessParams2;
 var i,p: integer;
     cmd, parm, parms : string;
     pp: TStringList;
+    chartchanged: boolean;
 begin
+chartchanged:=false;
 pp:=TStringList.Create;
 try
 for i:=0 to Params.Count-1 do begin
@@ -6133,43 +6142,58 @@ for i:=0 to Params.Count-1 do begin
       pp.Add('SEARCH');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setproj' then begin
       pp.Add('SETPROJ');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setfov' then begin
       pp.Add('SETFOV');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setra' then begin
       pp.Add('SETRA');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setdec' then begin
       pp.Add('SETDEC');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--load' then begin
       pp.Add('LOAD');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setobs' then begin
       pp.Add('SETOBS');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--settz' then begin
       pp.Add('SETTZ');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--setdate' then begin
       pp.Add('SETDATE');
       pp.Add(parm);
       ExecuteCmd('',pp);
+      chartchanged:=true;
    end else if cmd='--test2' then begin
       pp.Add('NEWCHART');
       pp.Add('test');
       ExecuteCmd('test',pp);
+      chartchanged:=true;
    end;
+end;
+if chartchanged then begin
+  pp.Clear;
+  pp.Add('REDRAW');
+  ExecuteCmd('',pp);
 end;
 finally
   pp.free;
