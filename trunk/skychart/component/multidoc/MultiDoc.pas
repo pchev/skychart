@@ -452,6 +452,7 @@ procedure TMultiDoc.SetActiveChild(n:integer);
 var i:integer;
 begin
 try
+if (n<0)or(n>FChildIndex) then exit;
 if (parent<>nil) and parent.visible and (n>=0) then begin
   FChild[n].BringToFront;
 end;
