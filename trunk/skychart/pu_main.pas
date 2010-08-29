@@ -6346,14 +6346,13 @@ end;
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
 // to restore focus to the chart that as no text control
+{$ifdef trace_debug}
+ WriteTrace('ImageSetFocus');
+{$endif}
   ActiveControl:=nil;
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
-  {$ifdef trace_debug}
-   WriteTrace('ImageSetFocus '+tf_chart(Multidoc1.ActiveChild.DockedObject).Caption);
-  {$endif}
-  ActiveControl:=Multidoc1.ActiveChild.DockedPanel;
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
