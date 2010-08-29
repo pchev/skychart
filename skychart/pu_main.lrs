@@ -2971,7 +2971,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'pen a chart'#10'ImageIndex'#2#1#9'OnExecute'#7#16'FileOpen1Execute'#8'Short'
   +'Cut'#3'O@'#0#0#7'TAction'#11'FileSaveAs1'#8'Category'#6#4'File'#7'Caption'#6
   +#11'FileSaveAs1'#4'Hint'#6#22'Save the current chart'#10'ImageIndex'#2#2#9'O'
-  +'nExecute'#7#18'FileSaveAs1Execute'#8'ShortCut'#3'S@'#0#0#7'TAction'#9'FileE'
+  +'nExecute'#7#18'FileSaveAs1Execute'#8'ShortCut'#3'S`'#0#0#7'TAction'#9'FileE'
   +'xit1'#8'Category'#6#4'File'#7'Caption'#6#9'FileExit1'#4'Hint'#6#21'Exit|Exi'
   +'t application'#10'ImageIndex'#2#11#9'OnExecute'#7#16'FileExit1Execute'#0#0#7
   +'TAction'#6'Print1'#8'Category'#6#4'File'#7'Caption'#6#6'Print1'#4'Hint'#6#15
@@ -3017,7 +3017,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'ction'#16'switchbackground'#8'Category'#6#5'chart'#4'Hint'#6#20'Sky Backgro'
   +'und Color'#10'ImageIndex'#2'#'#9'OnExecute'#7#23'switchbackgroundExecute'#0
   +#0#7'TAction'#9'SaveImage'#8'Category'#6#4'File'#7'Caption'#6#9'SaveImage'#10
-  +'ImageIndex'#2'$'#9'OnExecute'#7#16'SaveImageExecute'#8'ShortCut'#3'S`'#0#0#7
+  +'ImageIndex'#2'$'#9'OnExecute'#7#16'SaveImageExecute'#8'ShortCut'#3'P`'#0#0#7
   +'TAction'#8'ViewInfo'#8'Category'#6#4'View'#9'OnExecute'#7#15'ViewInfoExecut'
   +'e'#0#0#7'TAction'#3'toN'#8'Category'#6#5'chart'#4'Hint'#6#5'North'#10'Image'
   +'Index'#2'&'#9'OnExecute'#7#10'toNExecute'#0#0#7'TAction'#3'toE'#8'Category'

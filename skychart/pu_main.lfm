@@ -4378,7 +4378,7 @@ object f_main: Tf_main
       Hint = 'Save the current chart'
       ImageIndex = 2
       OnExecute = FileSaveAs1Execute
-      ShortCut = 16467
+      ShortCut = 24659
     end
     object FileExit1: TAction
       Category = 'File'
@@ -4527,7 +4527,7 @@ object f_main: Tf_main
       Caption = 'SaveImage'
       ImageIndex = 36
       OnExecute = SaveImageExecute
-      ShortCut = 24659
+      ShortCut = 24656
     end
     object ViewInfo: TAction
       Category = 'View'
