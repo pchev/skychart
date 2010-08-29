@@ -382,7 +382,7 @@ begin
  WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
 {$endif}
 if Fcatalog.cfgshr.AutoStarFilter then begin
-   if cfgsc.fov>(0.5*deg2rad) then
+   if (cfgsc.fov>(0.5*deg2rad)) or cfgsc.Quick then
      Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
    else
      Fcatalog.cfgcat.StarMagMax:=99;
