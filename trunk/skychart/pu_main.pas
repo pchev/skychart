@@ -860,8 +860,8 @@ begin
      Child.sc.cfgsc.TrackType:=4;
   end;
   if not maxi then begin
-     cp.width:=min(w,multidoc1.ClientWidth-PanelRight.Width);
-     cp.height:=min(h,multidoc1.ClientHeight-PanelBottom.Height);
+     cp.width:=w;
+     cp.height:=h;
      if t>=0 then cp.top:=t;
      if l>=0 then cp.left:=l;
   end;
