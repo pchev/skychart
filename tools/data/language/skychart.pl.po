@@ -425,6 +425,10 @@ msgstr "Anuluj, może błędny plik zip ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNie można otworzyć bazy danych %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Kaskada"
@@ -456,10 +460,6 @@ msgstr "Typ katalogu"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%srektascensja (CCW)"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "format CdC, najlepiej wersja kompaktowa"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

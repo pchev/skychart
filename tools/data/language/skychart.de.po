@@ -485,6 +485,10 @@ msgstr ""
 msgid "%sCannot open database %s! %s"
 msgstr "%sKann Datenbank %s nicht öffnen! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Kaskadieren"
@@ -516,10 +520,6 @@ msgstr "Katalogart"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr ""
 
 #: u_translation.rscdcnebulae
 #, fuzzy

@@ -420,6 +420,10 @@ msgstr "Anul·la, arxiu zip dolent ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNo puc obrir la base de dades %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascada"
@@ -451,10 +455,6 @@ msgstr "Tipus del catàleg"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sa l'esquerra"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "Format CdC, utilitzeu millor el compacte"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

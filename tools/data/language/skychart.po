@@ -2158,10 +2158,6 @@ msgstr ""
 msgid "Replaced by"
 msgstr ""
 
-#: u_translation:rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr ""
-
 #: u_translation:rsnotavailable
 msgid "Not available"
 msgstr ""
@@ -4332,5 +4328,9 @@ msgstr ""
 
 #: u_translation:rspastel
 msgid "Pastel"
+msgstr ""
+
+#: u_translation:rscannotwritet
+msgid "Cannot write to"
 msgstr ""
 

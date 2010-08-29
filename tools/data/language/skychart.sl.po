@@ -420,6 +420,10 @@ msgstr "Prekliči, napačna zip datoteka ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNe morem odpreti podatkovne zbirke %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Kaskadno"
@@ -451,10 +455,6 @@ msgstr "Tip kataloga"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr ""
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "CdC oblika, prednost zgoščeni različici"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

@@ -421,6 +421,10 @@ msgstr "取消，错误 zip 文件？ %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%s不能打开数据库 %s！%s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "层叠"
@@ -452,10 +456,6 @@ msgstr "星表类型"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%s反转"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "CdC 格式，优先选择压缩版本"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

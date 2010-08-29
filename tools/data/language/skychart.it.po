@@ -420,6 +420,10 @@ msgstr "Annulla, file zip errato ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sImpossibile aprire il database %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Elenco"
@@ -451,10 +455,6 @@ msgstr "Tipo di catalogo"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sAntiorario"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "Formato CdC, preferibilmente la versione compatta"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

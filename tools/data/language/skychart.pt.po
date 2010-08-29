@@ -421,6 +421,10 @@ msgstr "Cancelar, arquivo compactado inválido ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNão pode abrir o banco de dados %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascata"
@@ -452,10 +456,6 @@ msgstr "Tipo de catálogo"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "Formato CdC, preferir a versão compacta"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

@@ -495,6 +495,10 @@ msgstr "Hætta, röng zip skrá ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sGet ekki opnað gagnagrunn %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Raða"
@@ -526,10 +530,6 @@ msgstr "Skráargerð"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "CdC snið, velja frekar stuttu útg."
 
 #: u_translation.rscdcnebulae
 #, fuzzy
