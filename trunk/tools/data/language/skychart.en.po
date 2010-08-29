@@ -3765,10 +3765,6 @@ msgstr ""
 msgid "Star display"
 msgstr ""
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr ""
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr ""

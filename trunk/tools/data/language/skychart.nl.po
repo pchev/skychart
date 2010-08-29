@@ -3765,10 +3765,6 @@ msgstr "Ster triviale naam"
 msgid "Star display"
 msgstr "Ster weergave"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Ster eigenschappen weergave"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Ster label"

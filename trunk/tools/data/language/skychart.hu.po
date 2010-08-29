@@ -4549,12 +4549,6 @@ msgstr "Csillag szokásos neve"
 msgid "Star display"
 msgstr "Csillagok megjelenítése"
 
-#: u_translation.rsstardisplayp
-#, fuzzy
-#| msgid "Star Display  Properties"
-msgid "Star display properties"
-msgstr "Csillagok megjelenítésének tulajdonságai"
-
 #: u_translation.rsstarlabel
 #, fuzzy
 #| msgid "Star Label"

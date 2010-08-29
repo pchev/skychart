@@ -3769,10 +3769,6 @@ msgstr "Nom commun d'étoile"
 msgid "Star display"
 msgstr "Affichage des étoiles"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Paramètres d'affichage des étoiles"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Label des étoiles"
@@ -4356,5 +4352,4 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
-
 

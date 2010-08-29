@@ -4569,12 +4569,6 @@ msgstr "Algengt nafn stjörnu"
 msgid "Star display"
 msgstr "Útlit stjarna"
 
-#: u_translation.rsstardisplayp
-#, fuzzy
-#| msgid "Star Display  Properties"
-msgid "Star display properties"
-msgstr "Útlitsstillingar stjarna"
-
 #: u_translation.rsstarlabel
 #, fuzzy
 #| msgid "Star Label"

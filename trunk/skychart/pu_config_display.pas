@@ -65,7 +65,6 @@ type
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
     GroupBox8: TGroupBox;
-    GroupBox9: TGroupBox;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     Label258: TLabel;
@@ -78,6 +77,7 @@ type
     Panel3: TPanel;
     Panel4: TPanel;
     Panel5: TPanel;
+    Panel7: TPanel;
     red_moveBox: TCheckBox;
     Shape8: TShape;
     StarButton5: TButton;
@@ -100,7 +100,6 @@ type
     StandardButton: TRadioGroup;
     stardisplay: TRadioGroup;
     nebuladisplay: TRadioGroup;
-    starvisual: TGroupBox;
     Label256: TLabel;
     Label262: TLabel;
     Label263: TLabel;
@@ -487,8 +486,6 @@ stardisplay.Items[2]:=rsParametric;
 nebuladisplay.caption:=rsNebulaDispla;
 nebuladisplay.Items[0]:=rsLineMode;
 nebuladisplay.Items[1]:=rsGraphic;
-starvisual.caption:=rsStarDisplayP;
-groupbox9.Caption:=rsStarDisplayP;
 Label256.caption:=rsFaintStarsSi;
 Label262.caption:=rsContrast;
 Label263.caption:=rsColorSaturat;
@@ -500,7 +497,6 @@ StarButton4.caption:=rsBlackWhite;
 StarButton5.caption:=rsDefault;
 StarButton6.caption:=rsSmallStars;
 StarButton7.caption:=rsBigStars;
-groupbox9.Caption:=rsStarDisplayP;
 Label258.caption:=rsBrightStarsS;
 Label259.caption:=rsContrast;
 label9.Caption:=rsStarsBitmapF;
@@ -948,7 +944,7 @@ begin
  StarSizeBar.position:=round(cplot.partsize*10);
  StarContrastBar.position:=cplot.contrast;
  SaturationBar.position:=cplot.saturation;
- starvisual.visible:= (cplot.starplot=2);
+ panel7.visible:= (cplot.starplot=2);
  panel4.visible:= (cplot.starplot=0);
  panel5.visible:= (cplot.starplot=1);
  SizeContrastBar.position:=round(cplot.magsize*10);
@@ -1292,7 +1288,7 @@ procedure Tf_config_display.stardisplayClick(Sender: TObject);
 begin
 if LockChange then exit;
 cplot.starplot:=stardisplay.itemindex;
-starvisual.visible:= (cplot.starplot=2);
+panel7.visible:= (cplot.starplot=2);
 panel4.visible:= (cplot.starplot=0);
 panel5.visible:= (cplot.starplot=1);
 end;

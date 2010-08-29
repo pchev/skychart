@@ -3767,10 +3767,6 @@ msgstr "Принятое название звезды"
 msgid "Star display"
 msgstr "Отображение звезды"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Установки отображения звезды"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Метка звезды"

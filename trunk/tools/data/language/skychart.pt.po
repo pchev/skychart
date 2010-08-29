@@ -3767,10 +3767,6 @@ msgstr "Nome Popular da Estrela"
 msgid "Star display"
 msgstr "Mostrar Estrela"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Mostrar Propriedades da Estrela"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Etiqueta da Estrela"

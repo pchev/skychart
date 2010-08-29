@@ -1,12 +1,12 @@
 object f_config_display: Tf_config_display
-  Left = 468
+  Left = 455
   Height = 572
-  Top = 19
-  Width = 550
+  Top = 27
+  Width = 465
   ActiveControl = MainPanel
   Caption = 'Display'
   ClientHeight = 572
-  ClientWidth = 550
+  ClientWidth = 465
   Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
@@ -17,291 +17,25 @@ object f_config_display: Tf_config_display
     Left = 0
     Height = 522
     Top = 0
-    Width = 550
+    Width = 465
     Align = alClient
     ClientHeight = 522
-    ClientWidth = 550
+    ClientWidth = 465
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
       Height = 520
       Top = 1
-      Width = 548
+      Width = 463
       Align = alClient
-      PageIndex = 2
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Display'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
-        object Panel5: TPanel
-          Left = 8
-          Height = 242
-          Top = 172
-          Width = 441
-          ClientHeight = 242
-          ClientWidth = 441
-          TabOrder = 5
-          object Label9: TLabel
-            Left = 38
-            Height = 14
-            Top = 48
-            Width = 78
-            Caption = 'Stars bitmap file'
-            ParentColor = False
-          end
-          object FileNameEdit1: TFileNameEdit
-            Left = 37
-            Height = 21
-            Top = 84
-            Width = 332
-            DialogOptions = []
-            FilterIndex = 0
-            HideDirectories = False
-            ButtonWidth = 23
-            NumGlyphs = 0
-            MaxLength = 0
-            TabOrder = 0
-            OnChange = FileNameEdit1Change
-          end
-          object Button7: TButton
-            Left = 38
-            Height = 25
-            Top = 145
-            Width = 99
-            Caption = 'Default'
-            OnClick = Button7Click
-            TabOrder = 1
-          end
-        end
-        object starvisual: TGroupBox
-          Left = 8
-          Height = 242
-          Top = 172
-          Width = 441
-          Caption = 'Star Display  Properties'
-          ClientHeight = 227
-          ClientWidth = 437
-          TabOrder = 2
-          Visible = False
-          object Label256: TLabel
-            Left = 24
-            Height = 14
-            Top = 38
-            Width = 80
-            Caption = 'Faint Stars Size '
-            ParentColor = False
-          end
-          object Label262: TLabel
-            Left = 24
-            Height = 14
-            Top = 112
-            Width = 42
-            Caption = 'Contrast'
-            ParentColor = False
-          end
-          object Label263: TLabel
-            Left = 24
-            Height = 14
-            Top = 150
-            Width = 77
-            Caption = 'Color saturation'
-            ParentColor = False
-          end
-          object Label257: TLabel
-            Left = 24
-            Height = 14
-            Top = 75
-            Width = 125
-            Caption = 'Increment for Bright Stars'
-            ParentColor = False
-          end
-          object StarSizeBar: TTrackBar
-            Left = 99
-            Height = 36
-            Top = 8
-            Width = 225
-            Frequency = 5
-            Max = 50
-            Min = 1
-            OnChange = StarSizeBarChange
-            PageSize = 5
-            Position = 1
-            TabOrder = 0
-          end
-          object StarContrastBar: TTrackBar
-            Left = 193
-            Height = 31
-            Top = 104
-            Width = 225
-            Frequency = 100
-            Max = 1000
-            Min = 100
-            OnChange = StarContrastBarChange
-            PageSize = 100
-            Position = 100
-            TabOrder = 2
-          end
-          object SaturationBar: TTrackBar
-            Left = 193
-            Height = 31
-            Top = 142
-            Width = 225
-            Frequency = 28
-            Max = 255
-            OnChange = SaturationBarChange
-            PageSize = 28
-            Position = 0
-            TabOrder = 3
-          end
-          object SizeContrastBar: TTrackBar
-            Left = 193
-            Height = 31
-            Top = 67
-            Width = 225
-            Frequency = 10
-            Max = 100
-            Min = 10
-            OnChange = SizeContrastBarChange
-            PageSize = 10
-            Position = 10
-            TabOrder = 1
-          end
-          object StarButton1: TButton
-            Left = 16
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Default'
-            OnClick = StarButton1Click
-            TabOrder = 4
-          end
-          object StarButton2: TButton
-            Left = 120
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Naked Eye'
-            OnClick = StarButton2Click
-            TabOrder = 5
-          end
-          object StarButton3: TButton
-            Left = 224
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'High Color'
-            OnClick = StarButton3Click
-            TabOrder = 6
-          end
-          object StarButton4: TButton
-            Left = 336
-            Height = 25
-            Top = 192
-            Width = 95
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Black/White'
-            OnClick = StarButton4Click
-            TabOrder = 7
-          end
-        end
-        object Panel4: TPanel
-          Left = 8
-          Height = 242
-          Top = 172
-          Width = 441
-          ClientHeight = 242
-          ClientWidth = 441
-          TabOrder = 4
-          object GroupBox9: TGroupBox
-            Left = 1
-            Height = 240
-            Top = 1
-            Width = 439
-            Align = alClient
-            Caption = 'Star Display  Properties'
-            ClientHeight = 225
-            ClientWidth = 435
-            TabOrder = 0
-            object Label258: TLabel
-              Left = 24
-              Height = 14
-              Top = 38
-              Width = 85
-              Caption = 'Bright Stars Size '
-              ParentColor = False
-            end
-            object Label259: TLabel
-              Left = 24
-              Height = 14
-              Top = 75
-              Width = 42
-              Caption = 'Contrast'
-              ParentColor = False
-            end
-            object StarSizeBar1: TTrackBar
-              Left = 192
-              Height = 35
-              Top = 30
-              Width = 225
-              Frequency = 5
-              Max = 50
-              Min = 1
-              OnChange = StarSizeBar1Change
-              PageSize = 5
-              Position = 1
-              TabOrder = 0
-            end
-            object StarDynBar1: TTrackBar
-              Left = 192
-              Height = 35
-              Top = 67
-              Width = 225
-              Frequency = 10
-              Max = 150
-              Min = 50
-              OnChange = StarDynBar1Change
-              PageSize = 10
-              Position = 50
-              TabOrder = 1
-            end
-            object StarButton5: TButton
-              Left = 16
-              Height = 25
-              Top = 192
-              Width = 95
-              BorderSpacing.InnerBorder = 4
-              Caption = 'Default'
-              OnClick = StarButton5Click
-              TabOrder = 2
-            end
-            object StarButton6: TButton
-              Left = 120
-              Height = 25
-              Top = 192
-              Width = 95
-              BorderSpacing.InnerBorder = 4
-              Caption = 'Small stars'
-              OnClick = StarButton6Click
-              TabOrder = 3
-            end
-            object StarButton7: TButton
-              Left = 224
-              Height = 25
-              Top = 192
-              Width = 95
-              BorderSpacing.InnerBorder = 4
-              Caption = 'Big stars'
-              OnClick = StarButton7Click
-              TabOrder = 4
-            end
-          end
-        end
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -360,12 +94,265 @@ object f_config_display: Tf_config_display
           Width = 202
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
+          TabOrder = 2
+        end
+        object Panel5: TPanel
+          Left = 8
+          Height = 242
+          Top = 173
+          Width = 441
+          ClientHeight = 242
+          ClientWidth = 441
+          TabOrder = 4
+          object Label9: TLabel
+            Left = 38
+            Height = 14
+            Top = 48
+            Width = 78
+            Caption = 'Stars bitmap file'
+            ParentColor = False
+          end
+          object FileNameEdit1: TFileNameEdit
+            Left = 37
+            Height = 21
+            Top = 84
+            Width = 332
+            DialogOptions = []
+            FilterIndex = 0
+            HideDirectories = False
+            ButtonWidth = 23
+            NumGlyphs = 0
+            MaxLength = 0
+            TabOrder = 0
+            OnChange = FileNameEdit1Change
+          end
+          object Button7: TButton
+            Left = 38
+            Height = 25
+            Top = 145
+            Width = 99
+            Caption = 'Default'
+            OnClick = Button7Click
+            TabOrder = 1
+          end
+        end
+        object Panel4: TPanel
+          Left = 8
+          Height = 242
+          Top = 172
+          Width = 441
+          ClientHeight = 242
+          ClientWidth = 441
           TabOrder = 3
+          object StarButton7: TButton
+            Left = 224
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Big stars'
+            OnClick = StarButton7Click
+            TabOrder = 0
+          end
+          object StarButton6: TButton
+            Left = 120
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Small stars'
+            OnClick = StarButton6Click
+            TabOrder = 1
+          end
+          object StarButton5: TButton
+            Left = 16
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Default'
+            OnClick = StarButton5Click
+            TabOrder = 2
+          end
+          object StarDynBar1: TTrackBar
+            Left = 192
+            Height = 35
+            Top = 67
+            Width = 225
+            Frequency = 10
+            Max = 150
+            Min = 50
+            OnChange = StarDynBar1Change
+            PageSize = 10
+            Position = 50
+            TabOrder = 3
+          end
+          object StarSizeBar1: TTrackBar
+            Left = 192
+            Height = 35
+            Top = 30
+            Width = 225
+            Frequency = 5
+            Max = 50
+            Min = 1
+            OnChange = StarSizeBar1Change
+            PageSize = 5
+            Position = 1
+            TabOrder = 4
+          end
+          object Label259: TLabel
+            Left = 24
+            Height = 14
+            Top = 75
+            Width = 42
+            Caption = 'Contrast'
+            ParentColor = False
+          end
+          object Label258: TLabel
+            Left = 24
+            Height = 14
+            Top = 38
+            Width = 85
+            Caption = 'Bright Stars Size '
+            ParentColor = False
+          end
+        end
+        object Panel7: TPanel
+          Left = 8
+          Height = 242
+          Top = 172
+          Width = 441
+          ClientHeight = 242
+          ClientWidth = 441
+          TabOrder = 5
+          object StarButton4: TButton
+            Left = 336
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Black/White'
+            OnClick = StarButton4Click
+            TabOrder = 0
+          end
+          object StarButton3: TButton
+            Left = 224
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'High Color'
+            OnClick = StarButton3Click
+            TabOrder = 1
+          end
+          object StarButton2: TButton
+            Left = 120
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Naked Eye'
+            OnClick = StarButton2Click
+            TabOrder = 2
+          end
+          object StarButton1: TButton
+            Left = 16
+            Height = 25
+            Top = 192
+            Width = 95
+            BorderSpacing.InnerBorder = 4
+            Caption = 'Default'
+            OnClick = StarButton1Click
+            TabOrder = 3
+          end
+          object SizeContrastBar: TTrackBar
+            Left = 193
+            Height = 33
+            Top = 60
+            Width = 225
+            Frequency = 10
+            Max = 100
+            Min = 10
+            OnChange = SizeContrastBarChange
+            PageSize = 10
+            Position = 10
+            TabOrder = 4
+          end
+          object SaturationBar: TTrackBar
+            Left = 193
+            Height = 33
+            Top = 142
+            Width = 225
+            Frequency = 28
+            Max = 255
+            OnChange = SaturationBarChange
+            PageSize = 28
+            Position = 0
+            TabOrder = 5
+          end
+          object StarContrastBar: TTrackBar
+            Left = 193
+            Height = 33
+            Top = 101
+            Width = 225
+            Frequency = 100
+            Max = 1000
+            Min = 100
+            OnChange = StarContrastBarChange
+            PageSize = 100
+            Position = 100
+            TabOrder = 6
+          end
+          object StarSizeBar: TTrackBar
+            Left = 193
+            Height = 36
+            Top = 16
+            Width = 225
+            Frequency = 5
+            Max = 50
+            Min = 1
+            OnChange = StarSizeBarChange
+            PageSize = 5
+            Position = 1
+            TabOrder = 7
+          end
+          object Label257: TLabel
+            Left = 24
+            Height = 14
+            Top = 79
+            Width = 125
+            Caption = 'Increment for Bright Stars'
+            ParentColor = False
+          end
+          object Label263: TLabel
+            Left = 24
+            Height = 14
+            Top = 161
+            Width = 77
+            Caption = 'Color saturation'
+            ParentColor = False
+          end
+          object Label262: TLabel
+            Left = 24
+            Height = 14
+            Top = 120
+            Width = 42
+            Caption = 'Contrast'
+            ParentColor = False
+          end
+          object Label256: TLabel
+            Left = 24
+            Height = 14
+            Top = 38
+            Width = 80
+            Caption = 'Faint Stars Size '
+            ParentColor = False
+          end
         end
       end
       object Page2: TPage
         Caption = 'Colour'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object Label181: TLabel
           Left = 86
@@ -883,7 +870,7 @@ object f_config_display: Tf_config_display
       end
       object Page3: TPage
         Caption = 'Deep-sky colour'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object lblDSOCScheme: TLabel
           Left = 13
@@ -1407,7 +1394,7 @@ object f_config_display: Tf_config_display
       end
       object Page4: TPage
         Caption = 'Sky colour'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object Panel2: TPanel
           Left = 24
@@ -1585,7 +1572,7 @@ object f_config_display: Tf_config_display
       end
       object Page5: TPage
         Caption = 'Lines'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object EqGrid: TCheckBox
           Left = 16
@@ -1917,7 +1904,7 @@ object f_config_display: Tf_config_display
       end
       object Page6: TPage
         Caption = 'Labels'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object MagLabel: TRadioGroup
           Left = 16
@@ -2342,7 +2329,7 @@ object f_config_display: Tf_config_display
       end
       object Page7: TPage
         Caption = 'Fonts'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object Bevel10: TBevel
           Left = 8
@@ -2878,7 +2865,7 @@ object f_config_display: Tf_config_display
       end
       object Page8: TPage
         Caption = 'Finder circle'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object Label307: TLabel
           Left = 80
@@ -3025,7 +3012,7 @@ object f_config_display: Tf_config_display
       end
       object Page9: TPage
         Caption = 'Finder rectangle'
-        ClientWidth = 544
+        ClientWidth = 459
         ClientHeight = 516
         object Label308: TLabel
           Left = 80
@@ -3175,13 +3162,13 @@ object f_config_display: Tf_config_display
     Left = 0
     Height = 50
     Top = 522
-    Width = 550
+    Width = 465
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 550
+    ClientWidth = 465
     TabOrder = 1
     object Button2: TButton
-      Left = 230
+      Left = 145
       Height = 25
       Top = 10
       Width = 77
@@ -3193,7 +3180,7 @@ object f_config_display: Tf_config_display
       TabOrder = 0
     end
     object Button4: TButton
-      Left = 334
+      Left = 249
       Height = 25
       Top = 10
       Width = 77
@@ -3204,7 +3191,7 @@ object f_config_display: Tf_config_display
       TabOrder = 1
     end
     object Button5: TButton
-      Left = 443
+      Left = 358
       Height = 25
       Top = 10
       Width = 77
@@ -3216,7 +3203,7 @@ object f_config_display: Tf_config_display
       TabOrder = 2
     end
     object Button6: TButton
-      Left = 128
+      Left = 43
       Height = 25
       Top = 10
       Width = 75

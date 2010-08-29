@@ -3766,10 +3766,6 @@ msgstr "Běžný název hvězdy"
 msgid "Star display"
 msgstr "Zobrazení hvězd"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Vlastnosti zobrazení hvězd"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Popisky hvězd"
