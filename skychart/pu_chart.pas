@@ -346,7 +346,6 @@ begin
  IdentLabel.Parent:=Image1;
  Image1.Align:=alClient;
  Image1.DoubleBuffered := true;
- Image1.PopupMenu:=popupmenu1;
  Image1.OnClick:=Image1Click;
  Image1.OnMouseDown:=Image1MouseDown;
  Image1.OnMouseMove:=Image1MouseMove;
@@ -1464,6 +1463,7 @@ end;
 
 procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
+var scp: TPoint;
 begin
 {$ifdef trace_debug}
  WriteTrace('MouseDown');
@@ -1472,12 +1472,15 @@ lastx:=x;
 lasty:=y;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
+scp:=Image1.ControlToScreen(point(x,y));
 case Button of
    mbLeft  : ZoomBox(1,X,Y);
+   mbRight : PopupMenu1.PopUp(scp.x,scp.y);
    mbMiddle: image1.cursor:=crHandPoint;
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
+FShowInfo('image1 mousedown');
 end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
