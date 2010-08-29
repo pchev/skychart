@@ -1327,6 +1327,7 @@ if not cfgplot.Invisible then begin
          cnv.Brush.Color:=outlinecol;
          outlinemax:=outlinenum+1;
          if (cfgplot.nebplot=0) and (outlinetype=2) then outlinetype:=0;
+         if (cfgchart.onprinter) and (outlinetype=1) then outlinetype:=0;
          case outlinetype of
          0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
          1 : Bezierspline(outlinepts,outlinenum+1);
