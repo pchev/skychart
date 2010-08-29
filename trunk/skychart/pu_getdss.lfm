@@ -4,6 +4,7 @@ object f_getdss: Tf_getdss
   Top = 136
   Width = 420
   ActiveControl = ListBox1
+  BorderStyle = bsToolWindow
   Caption = 'List of available plates'
   ClientHeight = 308
   ClientWidth = 420

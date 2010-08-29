@@ -4,6 +4,7 @@ object f_config_pictures: Tf_config_pictures
   Top = 156
   Width = 513
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'Pictures'
   ClientHeight = 535
   ClientWidth = 513

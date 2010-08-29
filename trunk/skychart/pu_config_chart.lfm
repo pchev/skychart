@@ -4,6 +4,7 @@ object f_config_chart: Tf_config_chart
   Top = 88
   Width = 510
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'Charts'
   ClientHeight = 567
   ClientWidth = 510

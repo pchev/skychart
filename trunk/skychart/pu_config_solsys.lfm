@@ -4,6 +4,7 @@ object f_config_solsys: Tf_config_solsys
   Top = 72
   Width = 515
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'Solar System'
   ClientHeight = 536
   ClientWidth = 515

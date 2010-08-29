@@ -4,7 +4,7 @@ object f_printsetup: Tf_printsetup
   Top = 114
   Width = 443
   ActiveControl = qtoption
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'Printer Setup'
   ClientHeight = 245
   ClientWidth = 443

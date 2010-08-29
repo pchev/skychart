@@ -4,6 +4,7 @@ object f_config_display: Tf_config_display
   Top = 27
   Width = 465
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'Display'
   ClientHeight = 572
   ClientWidth = 465

@@ -4,6 +4,7 @@ object f_config_catalog: Tf_config_catalog
   Top = 110
   Width = 523
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'Catalog'
   ClientHeight = 573
   ClientWidth = 523

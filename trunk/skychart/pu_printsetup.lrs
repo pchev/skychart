@@ -3,7 +3,7 @@
 LazarusResources.Add('Tf_printsetup','FORMDATA',[
   'TPF0'#13'Tf_printsetup'#12'f_printsetup'#4'Left'#3'<'#2#6'Height'#3#245#0#3
   +'Top'#2'r'#5'Width'#3#187#1#13'ActiveControl'#7#8'qtoption'#11'BorderStyle'#7
-  +#13'bsSizeToolWin'#7'Caption'#6#13'Printer Setup'#12'ClientHeight'#3#245#0#11
+  +#12'bsToolWindow'#7'Caption'#6#13'Printer Setup'#12'ClientHeight'#3#245#0#11
   +'ClientWidth'#3#187#1#11'Font.Height'#2#245#8'OnCreate'#7#10'FormCreate'#6'O'
   +'nShow'#7#8'FormShow'#10'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#8'qtoption'#4'L'
   +'eft'#2#10#6'Height'#2'n'#3'Top'#2'S'#5'Width'#3#167#1#12'ClientHeight'#2'n'

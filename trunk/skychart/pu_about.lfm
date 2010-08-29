@@ -1,13 +1,13 @@
 object f_about: Tf_about
   Left = 395
-  Height = 263
+  Height = 305
   Top = 105
-  Width = 534
+  Width = 581
   ActiveControl = Panel2
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'About'
-  ClientHeight = 263
-  ClientWidth = 534
+  ClientHeight = 305
+  ClientWidth = 581
   Font.Color = clBlack
   Font.Height = -11
   OnCreate = FormCreate
@@ -15,27 +15,27 @@ object f_about: Tf_about
   LCLVersion = '0.9.29'
   object Panel2: TPanel
     Left = 0
-    Height = 263
+    Height = 305
     Top = 0
-    Width = 534
+    Width = 581
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 263
-    ClientWidth = 534
+    ClientHeight = 305
+    ClientWidth = 581
     TabOrder = 0
     object Panel0: TPanel
       Left = 0
-      Height = 263
+      Height = 305
       Top = 0
       Width = 80
       Align = alLeft
       BevelOuter = bvNone
-      ClientHeight = 263
+      ClientHeight = 305
       ClientWidth = 80
       TabOrder = 0
       object Image2: TImage
         Left = 0
-        Height = 263
+        Height = 305
         Top = 0
         Width = 80
         Align = alClient
@@ -2348,21 +2348,21 @@ object f_about: Tf_about
     end
     object Panel4: TPanel
       Left = 80
-      Height = 263
+      Height = 305
       Top = 0
-      Width = 454
+      Width = 501
       Align = alClient
-      ClientHeight = 263
-      ClientWidth = 454
+      ClientHeight = 305
+      ClientWidth = 501
       TabOrder = 1
       object Panel3: TPanel
         Left = 1
         Height = 39
-        Top = 223
-        Width = 452
+        Top = 265
+        Width = 499
         Align = alBottom
         ClientHeight = 39
-        ClientWidth = 452
+        ClientWidth = 499
         TabOrder = 0
         object Button1: TButton
           Left = 151
@@ -2378,16 +2378,16 @@ object f_about: Tf_about
       end
       object Notebook1: TNotebook
         Left = 1
-        Height = 222
+        Height = 264
         Top = 1
-        Width = 452
+        Width = 499
         Align = alClient
         PageIndex = 0
         TabOrder = 1
         object Page1: TPage
           Caption = 'About'
-          ClientWidth = 448
-          ClientHeight = 194
+          ClientWidth = 495
+          ClientHeight = 236
           object Label5: TLabel
             Left = 20
             Height = 15
@@ -2459,8 +2459,8 @@ object f_about: Tf_about
         end
         object Page2: TPage
           Caption = 'Authors'
-          ClientWidth = 448
-          ClientHeight = 194
+          ClientWidth = 495
+          ClientHeight = 236
           object Label3: TLabel
             Left = 11
             Height = 20
@@ -2496,8 +2496,8 @@ object f_about: Tf_about
         end
         object Page3: TPage
           Caption = 'License Agreement'
-          ClientWidth = 448
-          ClientHeight = 194
+          ClientWidth = 495
+          ClientHeight = 236
           object Memo2: TMemo
             Left = 0
             Height = 196
