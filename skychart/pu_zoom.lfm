@@ -4,7 +4,7 @@ object f_zoom: Tf_zoom
   Top = 181
   Width = 308
   ActiveControl = TrackBar1
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'Set FOV'
   ClientHeight = 142
   ClientWidth = 308

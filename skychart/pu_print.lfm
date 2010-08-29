@@ -4,6 +4,7 @@ object f_print: Tf_print
   Top = 402
   Width = 403
   ActiveControl = Setup
+  BorderStyle = bsToolWindow
   Caption = 'Print Chart'
   ClientHeight = 293
   ClientWidth = 403

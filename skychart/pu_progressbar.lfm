@@ -5,6 +5,7 @@ object f_progress: Tf_progress
   Width = 422
   HorzScrollBar.Page = 421
   VertScrollBar.Page = 161
+  BorderStyle = bsToolWindow
   Caption = 'Progress'
   ClientHeight = 162
   ClientWidth = 422

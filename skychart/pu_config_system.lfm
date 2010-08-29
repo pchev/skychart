@@ -4,6 +4,7 @@ object f_config_system: Tf_config_system
   Top = 126
   Width = 523
   ActiveControl = MainPanel
+  BorderStyle = bsToolWindow
   Caption = 'System'
   ClientHeight = 532
   ClientWidth = 523

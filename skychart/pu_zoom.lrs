@@ -1,11 +1,13 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_zoom','FORMDATA',[
   'TPF0'#7'Tf_zoom'#6'f_zoom'#4'Left'#3#197#1#6'Height'#3#142#0#3'Top'#3#181#0#5
-  +'Width'#3'4'#1#13'ActiveControl'#7#9'TrackBar1'#11'BorderStyle'#7#13'bsSizeT'
-  +'oolWin'#7'Caption'#6#7'Set FOV'#12'ClientHeight'#3#142#0#11'ClientWidth'#3
-  +'4'#1#11'Font.Height'#2#245#9'FormStyle'#7#11'fsStayOnTop'#8'OnCreate'#7#10
-  +'FormCreate'#6'OnShow'#7#8'FormShow'#10'LCLVersion'#6#6'0.9.29'#0#6'TLabel'#6
-  +'Label1'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#8#5'Width'#2#9#7'Caption'#6#2
-  +'1'''#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2'x'#6'Height'#2#14#3
+  +'Width'#3'4'#1#13'ActiveControl'#7#9'TrackBar1'#11'BorderStyle'#7#12'bsToolW'
+  +'indow'#7'Caption'#6#7'Set FOV'#12'ClientHeight'#3#142#0#11'ClientWidth'#3'4'
+  +#1#11'Font.Height'#2#245#9'FormStyle'#7#11'fsStayOnTop'#8'OnCreate'#7#10'For'
+  +'mCreate'#6'OnShow'#7#8'FormShow'#10'LCLVersion'#6#6'0.9.29'#0#6'TLabel'#6'L'
+  +'abel1'#4'Left'#2#16#6'Height'#2#14#3'Top'#2#8#5'Width'#2#9#7'Caption'#6#2'1'
+  +''''#11'ParentColor'#8#0#0#6'TLabel'#6'Label2'#4'Left'#2'x'#6'Height'#2#14#3
   +'Top'#2#8#5'Width'#2#7#7'Caption'#6#1'1'#11'ParentColor'#8#0#0#6'TLabel'#6'L'
   +'abel3'#4'Left'#3#172#0#6'Height'#2#14#3'Top'#2#8#5'Width'#2#13#7'Caption'#6
   +#2'10'#11'ParentColor'#8#0#0#6'TLabel'#6'Label4'#4'Left'#3#225#0#6'Height'#2

@@ -4,6 +4,7 @@ object f_catgen: Tf_catgen
   Top = 93
   Width = 503
   ActiveControl = RadioGroup1.RadioButton0
+  BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
   ClientWidth = 503
