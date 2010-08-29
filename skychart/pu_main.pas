@@ -1002,15 +1002,19 @@ end;
 function Tf_main.OpenChart(fn: string): string;
 var nam: string;
     p: integer;
+    maxi: boolean;
 begin
 if FileExists(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
- ReadChartConfig(SafeUTF8ToSys(fn),true,false,cfgp,cfgs);
+ ReadChartConfig(SafeUTF8ToSys(fn),true,MultiDoc1.Maximized,cfgp,cfgs);
  nam:=stringreplace(extractfilename(fn),blank,'_',[rfReplaceAll]);
  p:=pos('.',nam);
  if p>0 then nam:=copy(nam,1,p-1);
+ maxi:=cfgm.maximized;
+ cfgm.maximized:=MultiDoc1.Maximized;
  CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
+ cfgm.maximized:=maxi;
  result:=msgOK;
 end else
  result:=msgNotFound;
