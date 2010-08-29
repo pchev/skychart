@@ -3,7 +3,7 @@ object f_catgen: Tf_catgen
   Height = 479
   Top = 93
   Width = 503
-  ActiveControl = RadioGroup1.RadioButton0
+  ActiveControl = RadioGroup4.RadioButton0
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
   ClientWidth = 503
@@ -2902,7 +2902,7 @@ object f_catgen: Tf_catgen
     Width = 389
     Align = alClient
     OnPageChanged = PageControl1PageChanged
-    PageIndex = 0
+    PageIndex = 3
     ShowTabs = False
     TabOrder = 0
     object TabSheet1: TPage
@@ -3494,7 +3494,7 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 13
+        ItemHeight = 0
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
@@ -4176,9 +4176,9 @@ object f_catgen: Tf_catgen
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
-        Height = 16
+        Height = 14
         Top = 16
-        Width = 146
+        Width = 109
         Caption = 'Output catalog options'
         ParentColor = False
       end
@@ -4219,7 +4219,7 @@ object f_catgen: Tf_catgen
         TabOrder = 0
         object DirectoryEdit1: TDirectoryEdit
           Left = 16
-          Height = 25
+          Height = 21
           Top = 16
           Width = 240
           Directory = 'C:\testcat'
@@ -4232,9 +4232,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox6: TCheckBox
           Left = 16
-          Height = 22
+          Height = 21
           Top = 48
-          Width = 216
+          Width = 169
           Caption = 'Append to an existing catalog '
           TabOrder = 1
         end
@@ -4250,9 +4250,9 @@ object f_catgen: Tf_catgen
         TabOrder = 1
         object CheckBox3: TCheckBox
           Left = 16
-          Height = 22
+          Height = 21
           Top = 12
-          Width = 184
+          Width = 147
           Caption = 'Create a search index file'
           Checked = True
           State = cbChecked
@@ -4260,17 +4260,17 @@ object f_catgen: Tf_catgen
         end
         object CheckBox4: TCheckBox
           Left = 16
-          Height = 22
+          Height = 21
           Top = 60
-          Width = 260
+          Width = 200
           Caption = 'Add the alternate names to the index'
           TabOrder = 1
         end
         object CheckBox5: TCheckBox
           Left = 16
-          Height = 22
+          Height = 21
           Top = 84
-          Width = 287
+          Width = 222
           Caption = 'Prefix the alternate names with their label'
           Checked = True
           State = cbChecked
@@ -4278,9 +4278,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox8: TCheckBox
           Left = 16
-          Height = 22
+          Height = 21
           Top = 36
-          Width = 253
+          Width = 199
           Caption = 'Prefix name with catalog short name'
           TabOrder = 3
         end
@@ -4293,9 +4293,9 @@ object f_catgen: Tf_catgen
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
-        Height = 16
+        Height = 14
         Top = 24
-        Width = 329
+        Width = 249
         Caption = 'Indicate the string identifier for each type of object :'
         ParentColor = False
       end
@@ -4335,9 +4335,9 @@ object f_catgen: Tf_catgen
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
-        Height = 16
+        Height = 14
         Top = 40
-        Width = 292
+        Width = 225
         Caption = 'Indicate how to recognize the object size unit :'
         ParentColor = False
       end

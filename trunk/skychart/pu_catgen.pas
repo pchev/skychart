@@ -1922,10 +1922,16 @@ end;
 procedure Tf_catgen.EndbtClick(Sender: TObject);
 var i:integer;
 begin
+try
 abort:=false;
 chdir(appdir);
-if directoryedit1.Text='' then begin
+if not DirectoryExists(directoryedit1.Text) then begin
   Showmessage(rsPleaseIndica3);
+  directoryedit1.SetFocus;
+  exit;
+end;
+if  FileIsReadOnly(directoryedit1.Text) then begin
+  Showmessage(rsCannotWriteT+' '+directoryedit1.Text);
   directoryedit1.SetFocus;
   exit;
 end;
@@ -1948,6 +1954,12 @@ try
 finally
   Fprogress.hide;
   panel1.enabled:=true;
+end;
+except
+  on E: Exception do begin
+   WriteTrace('Catgen error: '+E.Message);
+   MessageDlg('Error: '+E.Message, mtError, [mbClose], 0);
+  end;
 end;
 end;
 

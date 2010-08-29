@@ -419,6 +419,10 @@ msgstr ""
 msgid "%sCannot open database %s! %s"
 msgstr ""
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr ""
@@ -449,10 +453,6 @@ msgstr ""
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr ""
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
 msgstr ""
 
 #: u_translation.rscdcnebulae

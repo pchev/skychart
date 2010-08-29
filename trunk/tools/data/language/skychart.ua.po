@@ -422,6 +422,10 @@ msgstr "Скасувати, бо неправильний zip файл ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sНеможливо відкрити базу даних %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Каскад"
@@ -453,10 +457,6 @@ msgstr "Тип каталогу"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "CdC формат, перевага стислій версії"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

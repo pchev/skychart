@@ -419,6 +419,10 @@ msgstr "Cancelar, archivo zip equivocado ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNo puedo abrir la base de datos %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascada"
@@ -450,10 +454,6 @@ msgstr "Tipo de Catálogo"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "Formato CdC, prefiere la versión compacta"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

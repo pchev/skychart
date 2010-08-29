@@ -1,9 +1,10 @@
 # translation of skychart.fr.po
 # Patrick Chevalley <pch@ap-i.net>, 2009, 2010.
+# pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-08-12 18:38+0200\n"
-"Last-Translator: pch\n"
+"PO-Revision-Date: 2010-08-29 10:31+0200\n"
+"Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -421,6 +422,10 @@ msgstr "Annuler, mauvais fichier zip ?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sNe peut pas ouvrir la base de donnée %s! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr "Ne peut pas écrire dans"
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascade"
@@ -452,10 +457,6 @@ msgstr "Type de catalogue"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sà gauche"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "Format CdC, utilisez plutôt le compacte"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"

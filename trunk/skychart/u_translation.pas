@@ -1097,6 +1097,7 @@ resourcestring
   rsPrintedChart = 'Printed chart';
   rsStarsBitmapF = 'Stars bitmap file';
   rsPastel = 'Pastel';
+  rsCannotWriteT = 'Cannot write to';
 
 implementation
 
