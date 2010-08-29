@@ -1986,6 +1986,7 @@ procedure Tskychart.DrawEqGrid;
 var ra1,de1,ac,dc,dra,dde:double;
     col,n:integer;
     ok,labelok:boolean;
+
 function DrawRAline(ra,de,dd:double):boolean;
 var  n: integer;
     x1,y1:double;
@@ -2018,6 +2019,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (de>(pid2-2*dd/3))or(de<(-pid2-2*dd/3));
 result:=(n>1);
 end;
+
 function DrawDEline(ra,de,da:double):boolean;
 var  n,w: integer;
     x1,y1:double;
@@ -2051,6 +2053,8 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (ra>ra1+pi)or(ra<ra1-pi);
 result:=(n>1);
 end;
+
+//Tskychart.DrawEqGrid
 begin
 DrawPole(Equat);
 if (cfgsc.projpole=Equat)and(not cfgsc.ShowEqGrid) then col:=Fplot.cfgplot.Color[12]
@@ -2107,6 +2111,7 @@ procedure Tskychart.DrawAzGrid;
 var a1,h1,ac,hc,dda,ddh:double;
     col,n:integer;
     ok,labelok:boolean;
+
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
     n,w: integer;
@@ -2120,7 +2125,6 @@ end else begin
    w:=0;
    col := Fplot.cfgplot.Color[12];
 end;
-
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -2149,6 +2153,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (h>(pid2-2*dd/3))or(h<(-pid2-2*dd/3));
 result:=(n>1);
 end;
+
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
     n,w: integer;
@@ -2182,6 +2187,8 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (a>a1+pi)or(a<a1-pi);
 result:=(n>1);
 end;
+
+//  Tskychart.DrawAzGrid
 begin
 DrawPole(Altaz);
 col:=Fplot.cfgplot.Color[12];
@@ -2207,6 +2214,7 @@ repeat
   ac:=ac-dda;
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
+col:=Fplot.cfgplot.Color[12];
 repeat
   if cfgsc.horizonopaque and (hc<-musec) then break;
   labelok:=false;
@@ -2336,6 +2344,7 @@ procedure Tskychart.DrawGalGrid;
 var a1,h1,ac,hc,dda,ddh:double;
     col,n:integer;
     ok,labelok:boolean;
+
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
     n: integer;
@@ -2368,6 +2377,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (h>(pid2-2*dd/3))or(h<(-pid2-2*dd/3));
 result:=(n>1);
 end;
+
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
     n,w: integer;
@@ -2401,6 +2411,8 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (a>a1+pi)or(a<a1-pi);
 result:=(n>1);
 end;
+
+// Tskychart.DrawGalGrid
 begin
 DrawPole(Gal);
 col:=Fplot.cfgplot.Color[12];
@@ -2436,6 +2448,7 @@ repeat
   ac:=ac-dda;
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
+col:=Fplot.cfgplot.Color[12];
 repeat
   labelok:=false;
   ok:=DrawHline(ac,hc,-dda);
@@ -2455,6 +2468,7 @@ procedure Tskychart.DrawEclGrid;
 var a1,h1,ac,hc,dda,ddh:double;
     col,n:integer;
     ok,labelok:boolean;
+
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1:double;
     n: integer;
@@ -2487,6 +2501,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (h>(pid2-2*dd/3))or(h<(-pid2-2*dd/3));
 result:=(n>1);
 end;
+
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
     n,w: integer;
@@ -2520,6 +2535,8 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
       (a>a1+pi)or(a<a1-pi);
 result:=(n>1);
 end;
+
+// Tskychart.DrawEclGrid
 begin
 DrawPole(Ecl);
 col:=Fplot.cfgplot.Color[12];
@@ -2555,6 +2572,7 @@ repeat
   ac:=ac-dda;
 until (not ok)or(ac<a1-pi);
 ac:=a1; hc:=h1;
+col:=Fplot.cfgplot.Color[12];
 repeat
   labelok:=false;
   ok:=DrawHline(ac,hc,-dda);
