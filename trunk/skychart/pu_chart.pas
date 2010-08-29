@@ -1480,7 +1480,6 @@ case Button of
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
-FShowInfo('image1 mousedown');
 end;
 
 procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
