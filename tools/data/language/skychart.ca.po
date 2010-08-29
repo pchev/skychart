@@ -3768,10 +3768,6 @@ msgstr "Nom comú d'estel"
 msgid "Star display"
 msgstr "Mostra els estels"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Paràmetres de presentació dels estels"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Etiquetes dels estels"

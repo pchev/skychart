@@ -3767,10 +3767,6 @@ msgstr "恒星普通名称"
 msgid "Star display"
 msgstr "恒星显示"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "恒星显示属性"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "恒星标签"

@@ -3766,10 +3766,6 @@ msgstr "Nome proprio della stella"
 msgid "Star display"
 msgstr "Rappresentazione Stelle"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Impostazioni Rappresentazione Stelle"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Etichette Stelle"

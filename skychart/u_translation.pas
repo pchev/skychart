@@ -588,7 +588,6 @@ resourcestring
   rsSolarSystemO = 'Solar system object';
   rsStarDisplay = 'Star display';
   rsNebulaDispla = 'Deep sky objects display';
-  rsStarDisplayP = 'Star display properties';
   rsFaintStarsSi = 'Faint Stars Size ';
   rsContrast = 'Contrast';
   rsColorSaturat = 'Colour saturation';

@@ -2298,10 +2298,6 @@ msgstr ""
 msgid "Deep sky objects display"
 msgstr ""
 
-#: u_translation:rsstardisplayp
-msgid "Star display properties"
-msgstr ""
-
 #: u_translation:rsfaintstarssi
 msgid "Faint Stars Size "
 msgstr ""

@@ -3975,12 +3975,6 @@ msgstr "Κοινό Όνομα Αστέρα"
 msgid "Star display"
 msgstr "Προβολή Αστέρων"
 
-#: u_translation.rsstardisplayp
-#, fuzzy
-#| msgid "Star Display  Properties"
-msgid "Star display properties"
-msgstr "Ιδιότητες Προβολής Αστέρων"
-
 #: u_translation.rsstarlabel
 #, fuzzy
 #| msgid "Star Label"

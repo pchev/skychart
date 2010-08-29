@@ -3771,10 +3771,6 @@ msgstr "Nazwy własne gwiazd"
 msgid "Star display"
 msgstr "Tryb wyświetlania gwiazd"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Ustawienia wyświetlania gwiazd"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Etykieta gwiazd"

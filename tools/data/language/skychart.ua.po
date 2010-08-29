@@ -3768,10 +3768,6 @@ msgstr "Прийнята назва зорі"
 msgid "Star display"
 msgstr "Відображення зірки"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Настанови відображення зірки"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Позначка зорі"

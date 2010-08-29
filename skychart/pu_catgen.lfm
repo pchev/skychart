@@ -3,7 +3,7 @@ object f_catgen: Tf_catgen
   Height = 479
   Top = 93
   Width = 503
-  ActiveControl = RadioGroup4.RadioButton0
+  ActiveControl = RadioGroup1.RadioButton0
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
   ClientWidth = 503
@@ -2902,7 +2902,7 @@ object f_catgen: Tf_catgen
     Width = 389
     Align = alClient
     OnPageChanged = PageControl1PageChanged
-    PageIndex = 3
+    PageIndex = 0
     ShowTabs = False
     TabOrder = 0
     object TabSheet1: TPage
@@ -2910,9 +2910,9 @@ object f_catgen: Tf_catgen
       ClientWidth = 385
       ClientHeight = 434
       object Label6: TLabel
-        Left = 14
+        Left = 20
         Height = 14
-        Top = 24
+        Top = 6
         Width = 192
         Caption = 'Select the type of object in your catalog'
         ParentColor = False
@@ -3013,9 +3013,9 @@ object f_catgen: Tf_catgen
         WordWrap = True
       end
       object RadioGroup1: TRadioGroup
-        Left = 134
+        Left = 132
         Height = 137
-        Top = 8
+        Top = 22
         Width = 227
         AutoFill = True
         Caption = 'Catalog type'

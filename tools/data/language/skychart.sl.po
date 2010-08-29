@@ -3766,10 +3766,6 @@ msgstr "Običajno ime zvezde"
 msgid "Star display"
 msgstr "Prikaz zvezd"
 
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Lastnosti prikaza zvezd"
-
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Oznaka zvezde"
