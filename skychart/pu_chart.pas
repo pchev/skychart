@@ -433,6 +433,9 @@ end;
 
 procedure Tf_chart.Image1Click(Sender: TObject);
 begin
+{$ifdef trace_debug}
+ WriteTrace(caption+' Image1Click');
+{$endif}
 // to restore focus to the chart that as no text control
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
@@ -443,7 +446,7 @@ procedure Tf_chart.AutoRefresh;
 begin
 if locked then exit;
 {$ifdef trace_debug}
- WriteTrace('AutoRefresh');
+ WriteTrace(caption+' AutoRefresh');
 {$endif}
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
@@ -536,7 +539,7 @@ var i,j : integer;
 begin
 if locked then exit;
 {$ifdef trace_debug}
- WriteTrace('UndoExecute');
+ WriteTrace(caption+' UndoExecute');
 {$endif}
 zoomstep:=0;
 i:=curundo-1;
@@ -561,7 +564,7 @@ var i,j : integer;
 begin
 if locked then exit;
 {$ifdef trace_debug}
- WriteTrace('RedoExecute');
+ WriteTrace(caption+' RedoExecute');
 {$endif}
 zoomstep:=0;
 i:=curundo+1;
@@ -585,7 +588,7 @@ procedure Tf_chart.ChartResize(Sender: TObject);
 begin
 if locked or (fsCreating in FormState) then exit;
 {$ifdef trace_debug}
- WriteTrace('ChartResize');
+ WriteTrace(caption+' ChartResize');
 {$endif}
 RefreshTimer.Enabled:=false;
 RefreshTimer.Enabled:=true;
@@ -644,7 +647,7 @@ procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
   var ScrollPos: Integer);
 begin
 {$ifdef trace_debug}
- WriteTrace('HorScrollBarScroll');
+ WriteTrace(caption+' HorScrollBarScroll');
 {$endif}
 {$ifdef mswindows}
 if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
@@ -691,7 +694,7 @@ procedure Tf_chart.VertScrollBarScroll(Sender: TObject;
   ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
 {$ifdef trace_debug}
- WriteTrace('VertScrollBarScroll');
+ WriteTrace(caption+' VertScrollBarScroll');
 {$endif}
 {$ifdef mswindows}
 if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
@@ -735,7 +738,7 @@ end;
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('Paint');
+ WriteTrace(caption+' Paint');
 {$endif}
 sc.plot.FlushCnv;
 {$ifndef ImageBuffered}
@@ -787,7 +790,7 @@ end;
 procedure Tf_chart.RemoveAllLabel1Click(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('RemoveAllLabel1Click');
+ WriteTrace(caption+' RemoveAllLabel1Click');
 {$endif}
 sc.cfgsc.poscustomlabels:=0;
 sc.cfgsc.numcustomlabels:=0;
@@ -798,7 +801,7 @@ procedure Tf_chart.RemoveLastLabel1Click(Sender: TObject);
 var j: integer;
 begin
 {$ifdef trace_debug}
- WriteTrace('RemoveLastLabel1Click');
+ WriteTrace(caption+' RemoveLastLabel1Click');
 {$endif}
 if sc.cfgsc.poscustomlabels>0 then begin
   for j:=sc.cfgsc.poscustomlabels+1 to sc.cfgsc.numcustomlabels do
@@ -864,7 +867,7 @@ var savecolor: Starcolarray;
     ps:TPostscriptCanvas;
   begin
 {$ifdef trace_debug}
- WriteTrace('PrintChart');
+ WriteTrace(caption+' PrintChart');
 {$endif}
  zoomstep:=0;
  // save current state
@@ -1027,6 +1030,9 @@ end;
 procedure Tf_chart.ChartActivate;
 begin
 // code to execute when the chart get focus.
+{$ifdef trace_debug}
+ WriteTrace(caption+' ChartActivate');
+{$endif}
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
 if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
@@ -1035,7 +1041,7 @@ end;
 procedure Tf_chart.FlipxExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('FlipxExecute');
+ WriteTrace(caption+' FlipxExecute');
 {$endif}
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -1045,7 +1051,7 @@ end;
 procedure Tf_chart.FlipyExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('FlipyExecute');
+ WriteTrace(caption+' FlipyExecute');
 {$endif}
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -1055,7 +1061,7 @@ end;
 procedure Tf_chart.rotation(rot:double);
 begin
 {$ifdef trace_debug}
- WriteTrace('rotation');
+ WriteTrace(caption+' rotation');
 {$endif}
  sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*rot;
  Refresh;
@@ -1074,7 +1080,7 @@ end;
 procedure Tf_chart.GridEQExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('GridEQExecute');
+ WriteTrace(caption+' GridEQExecute');
 {$endif}
  sc.cfgsc.ShowEqGrid := not sc.cfgsc.ShowEqGrid;
  Refresh;
@@ -1083,7 +1089,7 @@ end;
 procedure Tf_chart.GridExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('GridExecute');
+ WriteTrace(caption+' GridExecute');
 {$endif}
  sc.cfgsc.ShowGrid := not sc.cfgsc.ShowGrid;
  if sc.cfgsc.projpole=Equat then
@@ -1094,7 +1100,7 @@ end;
 procedure Tf_chart.zoomplusExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('zoomplusExecute');
+ WriteTrace(caption+' zoomplusExecute');
 {$endif}
 sc.zoom(zoomfactor);
 Refresh;
@@ -1103,7 +1109,7 @@ end;
 procedure Tf_chart.zoomminusExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('zoomminusExecute');
+ WriteTrace(caption+' zoomminusExecute');
 {$endif}
 sc.zoom(1/zoomfactor);
 Refresh;
@@ -1112,7 +1118,7 @@ end;
 procedure Tf_chart.zoomplusmoveExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('zoomplusmoveExecute');
+ WriteTrace(caption+' zoomplusmoveExecute');
 {$endif}
 sc.zoom(zoomfactor);
 sc.MovetoXY(xcursor,ycursor);
@@ -1123,7 +1129,7 @@ end;
 procedure Tf_chart.zoomminusmoveExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('zoomminusmoveExecute');
+ WriteTrace(caption+' zoomminusmoveExecute');
 {$endif}
 sc.zoom(1/zoomfactor);
 sc.MovetoXY(xcursor,ycursor);
@@ -1134,7 +1140,7 @@ end;
 procedure Tf_chart.MoveWestExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('MoveWestExecute');
+ WriteTrace(caption+' MoveWestExecute');
 {$endif}
  sc.MoveChart(0,-1,movefactor);
  Refresh;
@@ -1143,7 +1149,7 @@ end;
 procedure Tf_chart.MoveEastExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('MoveEastExecute');
+ WriteTrace(caption+' MoveEastExecute');
 {$endif}
  sc.MoveChart(0,1,movefactor);
  Refresh;
@@ -1152,7 +1158,7 @@ end;
 procedure Tf_chart.MoveNorthExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('MoveNorthExecute');
+ WriteTrace(caption+' MoveNorthExecute');
 {$endif}
  sc.MoveChart(1,0,movefactor);
  Refresh;
@@ -1162,7 +1168,7 @@ procedure Tf_chart.MoveSouthExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,0,movefactor);
 {$ifdef trace_debug}
- WriteTrace('MoveSouthExecute');
+ WriteTrace(caption+' MoveSouthExecute');
 {$endif}
  Refresh;
 end;
@@ -1171,7 +1177,7 @@ procedure Tf_chart.MoveNorthWestExecute(Sender: TObject);
 begin
  sc.MoveChart(1,-1,movefactor);
 {$ifdef trace_debug}
- WriteTrace('MoveNorthWestExecute');
+ WriteTrace(caption+' MoveNorthWestExecute');
 {$endif}
  Refresh;
 end;
@@ -1180,7 +1186,7 @@ procedure Tf_chart.MoveNorthEastExecute(Sender: TObject);
 begin
  sc.MoveChart(1,1,movefactor);
 {$ifdef trace_debug}
- WriteTrace('MoveNorthEastExecute');
+ WriteTrace(caption+' MoveNorthEastExecute');
 {$endif}
  Refresh;
 end;
@@ -1189,7 +1195,7 @@ procedure Tf_chart.MoveSouthWestExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,-1,movefactor);
 {$ifdef trace_debug}
- WriteTrace('MoveSouthWestExecute');
+ WriteTrace(caption+' MoveSouthWestExecute');
 {$endif}
  Refresh;
 end;
@@ -1198,7 +1204,7 @@ procedure Tf_chart.MoveSouthEastExecute(Sender: TObject);
 begin
  sc.MoveChart(-1,1,movefactor);
 {$ifdef trace_debug}
- WriteTrace('MoveSouthEastExecute');
+ WriteTrace(caption+' MoveSouthEastExecute');
 {$endif}
  Refresh;
 end;
@@ -1268,7 +1274,7 @@ procedure Tf_chart.TrackOn1Click(Sender: TObject);
 begin
   sc.cfgsc.TrackOn:=true;
 {$ifdef trace_debug}
- WriteTrace('TrackOn1Click');
+ WriteTrace(caption+' TrackOn1Click');
 {$endif}
   Refresh;
 end;
@@ -1278,7 +1284,7 @@ procedure Tf_chart.TrackOff1Click(Sender: TObject);
 begin
   sc.cfgsc.TrackOn:=false;
 {$ifdef trace_debug}
- WriteTrace('TrackOff1Click');
+ WriteTrace(caption+' TrackOff1Click');
 {$endif}
   Refresh;
 end;
@@ -1288,7 +1294,7 @@ begin
   sc.MovetoXY(xcursor,ycursor);
   sc.cfgsc.TrackOn:=false;
 {$ifdef trace_debug}
- WriteTrace('CentreExecute');
+ WriteTrace(caption+' CentreExecute');
 {$endif}
   Refresh;
 end;
@@ -1300,7 +1306,7 @@ handled:=true;
 if wheeldelta>0 then sc.Zoom(1.25)
                 else sc.Zoom(0.8);
 {$ifdef trace_debug}
- WriteTrace('Image1MouseWheel');
+ WriteTrace(caption+' Image1MouseWheel');
 {$endif}
 Refresh;
 end;
@@ -1425,7 +1431,7 @@ procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
 {$ifdef trace_debug}
- WriteTrace('MouseUp');
+ WriteTrace(caption+' MouseUp');
 {$endif}
 if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
@@ -1466,7 +1472,7 @@ procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
 var scp: TPoint;
 begin
 {$ifdef trace_debug}
- WriteTrace('MouseDown');
+ WriteTrace(caption+' MouseDown');
 {$endif}
 lastx:=x;
 lasty:=y;
@@ -1701,7 +1707,7 @@ begin
 if LockTrackCursor then exit;
 try
   {$ifdef trace_debug}
-   WriteTrace('TrackCursor');
+   WriteTrace(caption+' TrackCursor');
   {$endif}
    LockTrackCursor:=true;
    image1.cursor:=crHandPoint;
@@ -1728,7 +1734,7 @@ try
    if yy>FovMax then yy:=FovMax;
    sc.cfgsc.fov:=yy;
 {$ifdef trace_debug}
- WriteTrace('ZoomCursor');
+ WriteTrace(caption+' ZoomCursor');
 {$endif}
    Refresh;
    application.processmessages;
@@ -1754,7 +1760,7 @@ begin
   BlinkTimer.Enabled:=false;
   sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
 {$ifdef trace_debug}
- WriteTrace('BlinkTimerTimer');
+ WriteTrace(caption+' BlinkTimerTimer');
 {$endif}
   Refresh;
   BlinkTimer.Enabled:=true;
@@ -2102,7 +2108,7 @@ end;
 procedure Tf_chart.switchstarExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
- WriteTrace('switchstarExecute');
+ WriteTrace(caption+' switchstarExecute');
 {$endif}
 dec(sc.plot.cfgplot.starplot);
 if sc.plot.cfgplot.starplot<0 then sc.plot.cfgplot.starplot:=2;
@@ -2116,7 +2122,7 @@ procedure Tf_chart.switchbackgroundExecute(Sender: TObject);
 
 begin
 {$ifdef trace_debug}
- WriteTrace('switchbackgroundExecute');
+ WriteTrace(caption+' switchbackgroundExecute');
 {$endif}
 sc.plot.cfgplot.autoskycolor:=not sc.plot.cfgplot.autoskycolor;
 Refresh;
@@ -2299,7 +2305,7 @@ end;
 function Tf_chart.cmd_Resize(w,h:string):string;
 begin
 {$ifdef trace_debug}
- WriteTrace('cmd_Resize');
+ WriteTrace(caption+' cmd_Resize');
 {$endif}
 width:=StrToIntDef(w,width);
 height:=StrToIntDef(h,height);
@@ -2556,7 +2562,7 @@ end;
 procedure Tf_chart.cmd_MoreStar;
 begin
 {$ifdef trace_debug}
- WriteTrace('cmd_MoreStar');
+ WriteTrace(caption+' cmd_MoreStar');
 {$endif}
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=min(16,sc.catalog.cfgshr.AutoStarFilterMag+0.5)
@@ -2570,7 +2576,7 @@ end;
 procedure Tf_chart.cmd_LessStar;
 begin
 {$ifdef trace_debug}
- WriteTrace('cmd_LessStar');
+ WriteTrace(caption+' cmd_LessStar');
 {$endif}
 if sc.catalog.cfgshr.AutoStarFilter then
    sc.catalog.cfgshr.AutoStarFilterMag:=max(1,sc.catalog.cfgshr.AutoStarFilterMag-0.5)
@@ -2584,7 +2590,7 @@ end;
 procedure Tf_chart.cmd_MoreNeb;
 begin
 {$ifdef trace_debug}
- WriteTrace('cmd_MoreNeb');
+ WriteTrace(caption+' cmd_MoreNeb');
 {$endif}
 sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]+0.5;
 if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]>15 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=99;
@@ -2596,7 +2602,7 @@ end;
 procedure Tf_chart.cmd_LessNeb;
 begin
 {$ifdef trace_debug}
- WriteTrace('cmd_LessNeb');
+ WriteTrace(caption+' cmd_LessNeb');
 {$endif}
 if sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]>=99 then sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=20
    else sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]:=sc.catalog.cfgshr.NebMagFilter[sc.cfgsc.FieldNum]-0.5;
@@ -2613,7 +2619,7 @@ var i,n : integer;
 begin
 cmd:=trim(uppercase(arg[0]));
 {$ifdef trace_debug}
- WriteTrace('ExecuteCmd '+cmd);
+ WriteTrace(caption+' ExecuteCmd '+cmd);
 {$endif}
 n:=-1;
 for i:=1 to numcmd do
@@ -2706,7 +2712,7 @@ procedure Tf_chart.FormKeyPress(Sender: TObject; var Key: Char);
 begin
 if lockkey then exit;
 {$ifdef trace_debug}
- WriteTrace('FormKeyPress '+Key);
+ WriteTrace(caption+' FormKeyPress '+Key);
 {$endif}
 lockkey:=true;
 try
@@ -2783,7 +2789,7 @@ procedure Tf_chart.SetField(field : double);
 begin
 sc.setfov(field);
 {$ifdef trace_debug}
- WriteTrace('SetField');
+ WriteTrace(caption+' SetField');
 {$endif}
 Refresh;
 end;
@@ -2792,7 +2798,7 @@ procedure Tf_chart.SetZenit(field : double; redraw:boolean=true);
 var a,d,az : double;
 begin
 {$ifdef trace_debug}
- WriteTrace('SetZenit');
+ WriteTrace(caption+' SetZenit');
 {$endif}
 az:=sc.cfgsc.acentre;
 if field>0 then begin
@@ -2816,7 +2822,7 @@ procedure Tf_chart.SetAz(Az : double; redraw:boolean=true);
 var a,d : double;
 begin
 {$ifdef trace_debug}
- WriteTrace('SetAz');
+ WriteTrace(caption+' SetAz');
 {$endif}
 a := minvalue([sc.cfgsc.Fov,sc.cfgsc.Fov/sc.cfgsc.windowratio]);
 if sc.cfgsc.Fov<pi then Hz2Eq(Az,a/2.3,a,d,sc.cfgsc)
@@ -2855,7 +2861,7 @@ if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackType:=4;
 end;
 {$ifdef trace_debug}
- WriteTrace('SetJD');
+ WriteTrace(caption+' SetJD');
 {$endif}
 Refresh;
 end;
@@ -2879,7 +2885,7 @@ procedure Tf_chart.Connect1Click(Sender: TObject);
 
 begin
 {$ifdef trace_debug}
- WriteTrace('Connect1Click');
+ WriteTrace(caption+' Connect1Click');
 {$endif}
 {$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
@@ -3055,7 +3061,7 @@ procedure Tf_chart.RemoveLastCircle1Click(Sender: TObject);
 begin
 if sc.cfgsc.NumCircle>0 then dec(sc.cfgsc.NumCircle);
 {$ifdef trace_debug}
- WriteTrace('RemoveLastCircle1Click');
+ WriteTrace(caption+' RemoveLastCircle1Click');
 {$endif}
 Refresh;
 end;
@@ -3064,7 +3070,7 @@ procedure Tf_chart.RemoveAllCircles1Click(Sender: TObject);
 begin
 sc.cfgsc.NumCircle:=0;
 {$ifdef trace_debug}
- WriteTrace('RemoveAllCircles1Click');
+ WriteTrace(caption+' RemoveAllCircles1Click');
 {$endif}
 Refresh;
 end;
@@ -3109,7 +3115,7 @@ needrefresh:=false;
 savelabel:= sc.cfgsc.Editlabels;
 format:=uppercase(format);
 {$ifdef trace_debug}
- WriteTrace('SaveChartImage');
+ WriteTrace(caption+' SaveChartImage');
 {$endif}
 try
 if savelabel then begin
@@ -3288,7 +3294,7 @@ begin
 try
 TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
- WriteTrace('TelescopeTimerTimer');
+ WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
 if sc.cfgsc.PluginTelescope then begin
     if Ftelescope.scopelibok then begin

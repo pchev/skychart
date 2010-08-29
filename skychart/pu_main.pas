@@ -6350,6 +6350,9 @@ begin
   quicksearch.Enabled:=false;   // add all main form focusable control here
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
+  {$ifdef trace_debug}
+   WriteTrace('ImageSetFocus '+tf_chart(Multidoc1.ActiveChild.DockedObject).Caption);
+  {$endif}
   ActiveControl:=Multidoc1.ActiveChild.DockedPanel;
   quicksearch.Enabled:=true;
   TimeVal.Enabled:=true;
@@ -6613,8 +6616,12 @@ procedure Tf_main.SetChildFocus(Sender: TObject);
 var i:integer;
 begin
 for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject=Sender then
+   if MultiDoc1.Childs[i].DockedObject=Sender then begin
+     {$ifdef trace_debug}
+      WriteTrace('SetChildFocus '+tf_chart(MultiDoc1.Childs[i].DockedObject).Caption);
+     {$endif}
       MultiDoc1.setActiveChild(i);
+   end;
 end;
 
 
