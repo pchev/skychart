@@ -114,7 +114,6 @@ function CdcSigAction(const action: pointer):boolean;
 {$ifdef mswindows}
 procedure ScaleForm(form: TForm; scale: single);
 procedure SetFormNightVision(form: TForm; onoff:boolean);
-function FindWin98: boolean;
 function ScreenBPP: integer;
 {$endif}
 
@@ -1567,16 +1566,6 @@ Procedure PrtGrid(Grid:TStringGrid; PrtTitle, PrtText, PrtTextDate:string; orien
  end;
 
 {$ifdef mswindows}
-function FindWin98: boolean;
-var lpversioninfo: TOSVERSIONINFO;
-begin
-lpversioninfo.dwOSVersionInfoSize:=sizeof(TOSVERSIONINFO);
-if GetVersionEx(lpversioninfo) then begin
-   result:=lpversioninfo.dwMajorVersion<=4;
-end
-else
- result:=false;
-end;
 
 function ScreenBPP: integer;
 var screendc: HDC;

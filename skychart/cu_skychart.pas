@@ -240,12 +240,6 @@ if (Fplot.cfgplot.starplot=1) then begin
    cfgsc.msg:='Warning! This drawing mode may crash X after some time. Change star drawing mode to Line or Parametric.';
 end;
 {$endif}
-{$ifdef mswindows}
-if isWin98 and (Fplot.cfgplot.starplot=1) then begin
-   Fplot.cfgplot.starplot:=0;
-   cfgsc.msg:='Cannot use this star drawing mode with Win98. Change star drawing mode to Line or Parametric.';
-end;
-{$endif}
 
   InitObservatory;
   InitTime;
