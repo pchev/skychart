@@ -14,7 +14,6 @@ object f_main: Tf_main
   OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
-  OnDeactivate = FormDeactivate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
