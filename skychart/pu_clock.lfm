@@ -1,31 +1,88 @@
 object f_clock: Tf_clock
-  Left = 240
+  Left = 351
   Height = 198
-  Top = 234
+  Top = 137
   Width = 375
-  HelpContext = 0
-  Align = alNone
-  AllowDropFiles = False
-  AutoScroll = True
-  AutoSize = False
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Clock'
-  ChildSizing.LeftRightSpacing = 0
-  ChildSizing.TopBottomSpacing = 0
-  ChildSizing.HorizontalSpacing = 0
-  ChildSizing.VerticalSpacing = 0
-  ChildSizing.ControlsPerLine = 0
   ClientHeight = 198
   ClientWidth = 375
   Color = clBlack
-  DockSite = False
-  DragKind = dkDrag
-  DragMode = dmManual
-  Enabled = True
-  Font.Height = 0
-  Font.Style = []
   FormStyle = fsStayOnTop
+  Icon.Data = {
+    BE0800000000010001002020000001000800A808000016000000280000002000
+    0000400000000100080000000000000000000000000000000000000000000000
+    000000000000500019000E0E0E0010101000500032001A1A1A00262626003131
+    3100323232004A4229003E3E3E004A4A4A0052524A0056565600635A4A005A5A
+    5A008C6B210062626200636363009473210094733100A57B1800A57B2100AD7B
+    21005A735A006E6E6E00AD841800B5841800AD842100B5842100AD842900A584
+    4200BD8C2100B58C29007A7A7A00BD8C29007B7B7B009C845200B58C3100BD8C
+    31006B846B00C6942100CE94210080808000BD942900AD8C4A00C6942900BD94
+    3100AD8C5200A58C5A00BD94390084848400C6943900B5944200BD9442008686
+    8600CE9C2900B5945200CE9C3100428C9C00CE9C3900AD9463008C8C8C00AD94
+    6B00C69C4A00BD9C5200D6A53100A5947B004A949C00CEA53900D6A539009292
+    9200CEA54200B59C6B00D6A542009C949400CEA54A00A59C7B00C6A55200AD9C
+    7B00CEA55200D6AD3900C6A55A00AD9C84009C9C8C00D6AD4200C6A56300949C
+    9400D6AD4A00B5A573009C9C9C00CEAD5200BDA57300CEAD5A009E9E9E00D6AD
+    5A00ADA58400C6AD6300A4A0A000B5A58C00DEB54A00CEAD6B00C6AD7300B5AD
+    8400C6AD8400B5AD8C00B5AD9400BDAD9400D6B57300AAAAAA00DEBD5A00CEB5
+    7B00E7BD5A00D6B57B00C6B58400BDB5A500B5B5AD009CB5BD00B5B5B500E7C6
+    6B00B6B6B600DEC67300D6BD9400C6BD9C00E7C67300DEC68400C6BDAD00BDBD
+    BD00EFCE7300DEC69400E7CE7B00C0C0C000CEC6AD00E7CE8C00C2C2C200CEC6
+    B500C6C6BD00C6C6C600EFD68400EFD68C00CECEBD00E7D69C00D6CEBD00CECE
+    CE00DED6B500F7DE9400E7D6B500EFDE9C00DED6C600F7DEA500ADD6DE00EFDE
+    AD00D6D6D600DADADA00F7E7AD00F7E7B500DEDEDE00E6E6E600E7E7E70000FE
+    FE00F7EFE700FFF7D600F2F2F200FFF7E700F7F7F700FFFFFF00000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    0000000000000000000000000000000000000000000000000000000000000000
+    00000000000000000000000000000000000000007B3D14101431638E00000000
+    0000000000000000000000000000000000000049162020232F323630690B0B0B
+    0A0800000000000000000000000000000000392C382E20201B1D1D2F39531111
+    110D000000050D110D0A000000000000065C2E423C65920E8781321A342D7311
+    110D0B19477878786D6D470A0000020B47215148689EA50F98A4944115402511
+    110D787878786D6D6D62626247374762474A645688A49E0F76338F9227263957
+    750D6D6D6D6D6D62626262626262624747706E4F8FA49E0F0733A5A34C1C3528
+    440D6D6D6D626262626200626247474747807C095AA45A0322A49C12131B1C43
+    960D6262626262626262626247474747478A8B4D749EA4249C9E9EA050201718
+    3B0D6262626262626262624747474747378295724B8F9EA4A5A5A490482A1E7E
+    0D0B6262626262624747474747473737375F9B97605A7F899C9C8C653A291F0D
+    0D0B6262624747474747474762474737377193A38D67540C3E6A6145421D6B0D
+    0B0B47474747474747474762A5866247372B6C9BA18B795D5B585546233F0D0D
+    0B0B474747474747473737479DA2866D6237226C859A9B9177644532590D0D0B
+    0B0B47474737A2473737373762A2A599786237227A7D6F52404E66840D0D0B0B
+    0B0B003737373737372B2B374786A5A59D83004722191111110D0D0D0D0B0B0B
+    0B0A3737372B2B2B2B2B222B37629DA2A59D8F6D472219110D0D0D0D0B0B0B0B
+    0A0A2B2B2B2B2B2222222222222B629D9DA29D8F78622B19110D0D0D0B0B0B9F
+    0B0A2222222222222222221919222B86998F9D9D9986623719110D0B0B0B0B0B
+    0B0A222222222222191919191919192B8F998F9DA29D8F6D4719110B0B0B0A0A
+    0A0419191919191919191922191111196278868F9DA29D99784722110B0A0A0A
+    04041919191919191919229F191111111183786D8F9DA29D99836222110B0A04
+    040419191919191111111919191111110D226286628F9DA29D9983622B110B0A
+    04011111111111111111001111110D0D0D0D62376D6286999D9D00866237110B
+    0A011111111111111111110D0D0D0D0D0D0D115E623747788F99998F866D3719
+    0B0A111111111111110D0D0D0D0D0D0D0B0B0B3719621947788F99998F836D47
+    190D0D0D0D0D0D0D990D0D0D0D0D0B0B0B0B0B0B47113719376D838F8F86786D
+    47190D0D0D0D0D0D0D0D0D0B0B0B0B0B0B0B0B0A11192211112B627886838378
+    62470D0D0D0D0B0B0B0B0B0B0B0B0B0B0A0A0A0A0A370A370B0D225E6D787878
+    6D620B0B0B0B0B0B0B0B0B0B0B0B0A0A0A0A0A0A040B190B190A0D1947626D6D
+    62620B0B0B0B0B0B0B0B0B0A0A0A0A0A0A0A04040404190A190A080B19375E62
+    6262808080000000000000000000000000000000000000000000000000000000
+    0000008000000000000000000000000000000000000000000000000000000000
+    0000800080000000000000000000000000000000000000000000000000000000
+    0000008000800000000000000000000000000000000000000000000000000000
+    0000
+  }
   KeyPreview = True
   OnCreate = FormCreate
   OnDblClick = FormDblClick
@@ -34,444 +91,162 @@ object f_clock: Tf_clock
   OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
   OnShow = FormShow
-  ParentBiDiMode = True
-  ParentFont = False
-  Position = poDesigned
-  ShowInTaskBar = stDefault
-  UseDockManager = False
-  LCLVersion = '0.9.27'
-  WindowState = wsNormal
+  LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 16
-    Width = 72
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 61
     Caption = 'Legal :'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Label2: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 44
-    Width = 43
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 38
     Caption = 'UT :'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Label3: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 72
-    Width = 130
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 108
     Caption = 'Mean local :'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Label4: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 100
-    Width = 106
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 89
     Caption = 'True solar'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock1: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 16
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock2: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 44
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock3: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 72
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock4: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 100
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Label5: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 128
-    Width = 74
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 62
     Caption = 'Sideral'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock5: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 128
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Label6: TLabel
     Left = 16
-    Height = 27
+    Height = 25
     Top = 156
-    Width = 30
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 31
     Caption = 'JD:'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object clock6: TLabel
     Left = 168
-    Height = 27
+    Height = 25
     Top = 156
-    Width = 93
-    HelpContext = 0
-    Align = alNone
-    Alignment = taLeftJustify
-    AutoSize = True
-    BorderSpacing.Left = 0
-    BorderSpacing.Top = 0
-    BorderSpacing.Right = 0
-    BorderSpacing.Bottom = 0
-    BorderSpacing.Around = 0
-    BorderSpacing.CellAlignHorizontal = ccaFill
-    BorderSpacing.CellAlignVertical = ccaFill
+    Width = 79
     Caption = '00:00:00'
-    DragCursor = crDrag
-    DragMode = dmManual
-    Enabled = True
     Font.Color = clRed
     Font.Height = -20
-    Font.Style = []
-    Layout = tlTop
-    ParentBidiMode = True
     ParentColor = False
     ParentFont = False
-    ParentShowHint = True
-    ShowAccelChar = True
-    Transparent = True
-    Visible = True
-    WordWrap = False
     OnMouseDown = FormMouseDown
     OnMouseUp = FormMouseUp
-    OptimalFill = False
   end
   object Timer1: TTimer
     Enabled = False
@@ -479,4 +254,4 @@ object f_clock: Tf_clock
     left = 280
     top = 16
   end
-end
+end
