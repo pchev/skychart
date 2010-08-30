@@ -1160,7 +1160,7 @@ try
 {$ifdef trace_debug}
  WriteTrace('Cursor');
 {$endif}
- if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
+ if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur'));
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
@@ -1577,15 +1577,10 @@ NeedRestart:=false;
 showsplash:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
-isWin98:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
-  isWin98:=FindWin98;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
-  if isWin98 then begin
-   MenuItem6.Visible:=false;
-  end;
 {$endif}
 {$ifdef unix}
   step:='Unix specific';

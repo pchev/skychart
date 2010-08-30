@@ -480,15 +480,6 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
       memstream.position := 0;
       bmp.LoadFromStream(memstream);
       bmp.Transparent:=true;
-//      {$ELSE}
- {      if isWin98 then begin
-         memstream:=Tmemorystream.create;
-         bmp.SaveToStream(memstream);
-         memstream.position := 0;
-         bmp.LoadFromStream(memstream);
-         memstream.free;
-       end;   }
-//      {$ENDIF}
     finally
       IntfImage.Free;
 //      {$IF DEFINED(OLD_MASK_TRANSPARENCY) or DEFINED(LCLGTK2)}
