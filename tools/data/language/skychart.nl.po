@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2009-11-30 08:33+0100\n"
+"PO-Revision-Date: 2010-08-29 15:01+0100\n"
 "Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -419,10 +419,6 @@ msgstr "Annuleren, verkeerde zip bestand?? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sKan niet de database %s openen! %s"
 
-#: u_translation.rscannotwritet
-msgid "Cannot write to"
-msgstr ""
-
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascade"
@@ -454,6 +450,10 @@ msgstr "Catalogus type"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%stegen de klok in"
+
+#: u_translation.rscdcformatpre
+msgid "CdC format, prefere the compact version"
+msgstr "CdC format, verkies de compacte versie"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -2481,7 +2481,7 @@ msgstr "Volgende >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr ""
+msgstr "Volgende kaart"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
@@ -2777,7 +2777,7 @@ msgstr "Paswoord"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr ""
+msgstr "Pastel"
 
 #: u_translation.rspath
 msgid "Path"
@@ -2995,7 +2995,7 @@ msgstr "Afdrukken kaart"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr ""
+msgstr "Afgedrukte kaart"
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3765,6 +3765,10 @@ msgstr "Ster triviale naam"
 msgid "Star display"
 msgstr "Ster weergave"
 
+#: u_translation.rsstardisplayp
+msgid "Star display properties"
+msgstr "Ster eigenschappen weergave"
+
 #: u_translation.rsstarlabel
 msgid "Star label"
 msgstr "Ster label"
@@ -3779,7 +3783,7 @@ msgstr "Sterren - en deep sky catalogi gecreëerd met"
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr ""
+msgstr "Sterren bitmap bestand"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
