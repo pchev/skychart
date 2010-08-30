@@ -2655,6 +2655,10 @@ msgstr "Birtuborði"
 msgid "Magnitude difference"
 msgstr "Munur á birtustigi"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+
 #: u_translation.rsmagnitudeerr
 #, fuzzy
 #| msgid "Magnitude Error"

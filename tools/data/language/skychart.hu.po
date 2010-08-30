@@ -2651,6 +2651,10 @@ msgstr ""
 msgid "Magnitude difference"
 msgstr "Magnitúdó különbség"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+
 #: u_translation.rsmagnitudeerr
 #, fuzzy
 #| msgid "Magnitude Error"
