@@ -14,7 +14,6 @@ Ajout de raccourcis clavier.
 Un clic droit sur les boutons permet d'accéder directement au réglages correspondant.
 Plus de serveur d'images DSS.
 Mise à jour de la base de donnée SAC à la version 8.1.
-Fin du support pour Windows 95/98/Me/NT.
 Beaucoup de correction de bug.
 
 Le détail des changement est ici:

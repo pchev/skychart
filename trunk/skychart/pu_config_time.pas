@@ -488,12 +488,10 @@ procedure Tf_config_time.BitBtn4Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
 begin
  ADBC.itemindex:=0;
- if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
-   decodedate(csc.tz.NowLocalTime,y,m,d);
-   d_year.value:=y;
-   d_month.value:=m;
-   d_day.value:=d;
- end;
+ decodedate(csc.tz.NowLocalTime,y,m,d);
+ d_year.value:=y;
+ d_month.value:=m;
+ d_day.value:=d;
  decodeTime(csc.tz.NowLocalTime,h,n,s,ms);
  t_hour.value:=h;
  t_min.value:=n;
