@@ -1,53 +1,21 @@
-Version 3.0.1.6  Notes de la version
+Version 3.1  Notes de la version
 
-ATTENTION!
-Cette version change l'emplacement d'enregistrement des fichiers de configuration.
-Pour Windows c'est maintenant %LOCALAPPDATA%\Skychart et pour Linux ~/.skychart
-La configuration du programme est réinitialisée aux valeurs par défaut.
-Après la première exécution du programme vous pouvez recopier les fichiers que vous voulez
-conserver dans les nouveaux répertoires.
-Ne PAS recopier cartesduciel.ini car il contient des chemins non valide.
-Vous pouvez ensuite complètement effacer Mes Documents\Cartes du Ciel ou ~/cartes_du_ciel et ~/.cartesduciel.ini
-Pour Linux le répertoire d'installation par défaut des données du programme est maintenant 
-/usr/share/skychart, si vous aviez installé des catalogues supplémentaires déplacez les 
-depuis /usr/share/apps/skychart.
+Le but de cette version est principalement de corriger tout les bugs bloquant pour une première version stable.
+Mais il y a quand même quelques changements dans les fonctionnalités qui sont décrits ici:
 
-Nouvelle traduction en Slovène par Grofaty
-Correction de bug selon: http://www.ap-i.net/mantis/changelog_page.php
-Corrige l'interface avec Audela.
-Corrige divers problèmes si le répertoire utilisateur contient des accents.
-Mise à jour des zones horaires pour Windows. Utilise les zone horaires du système sous Linux 
-Tient compte du système de coordonnées du télescope.
-Nouvelles commandes serveur et options de ligne de commandes.
-Utilise FreeDesktop xdg-open par défaut pour ouvrir un fichier sous Linux.
-Nouveau programme cdcicon qui affiche l'horloge dans la barre de tâche. Il permet aussi d'ouvrir directement le calendrier ou Cartes du Ciel. Faire un clic droit pour le menu.
-Ajout de l'heure solaire vraie à l'horloge.
-Mise à jour de la documentation a partir du wiki grâce au travail de Marceau GUIHARD et des traducteurs.
-Toutes les fenêtres ont maintenant un bouton d'aide.
-La ligne du méridien utilise la couleur "autres lignes" pour plus de visibilité.
-Affichage de la version du compilateur utilisé dans la fenêtre A Propos.
-Nouveau menu Voir/Horloge 
-Il est maintenant possible de choisir la taille des étoiles en mode ligne pour l'affichage ou l'impression depuis le menu configuration/affichage.
-L'affichage et la recherche d'étoiles USNO-A est corrigée.
-Nouveau pilote ASCOM.
-Solution pour certain plantage du programme et correction d'autres bug.
-Amélioration de la recherche par nom commun de nébuleuse par Oleg Maliy.
-Traduction en chinois par Lam Xiang.
-Pour réduire le chevauchement des labels provenant de différentes sources sont écrit a différentes position autour de l'objet.
-Il est maintenant possible d'activer les labels pour les étoiles, les variables et les doubles sans chevauchement.
-Pour les nébuleuses le label SAC est écrit à droite et le label des autres catalogue à gauche.
-Il y a une option dans Configuration/Affichage/Label pour afficher les labels de tous les catalogues d'étoiles.
-Ajout de l'aide contextuelle, appuyez sur F1.
-Ajoute a nouveau la fenêtre principale de configuration.
-Corrige le choix du port du télescope sous Linux.
-Ajout de l'option de ligne de commande --config pour indiquer le fichier .ini à utiliser.
-Ajout de l'option de ligne de commande --unique pour n'avoir qu'une seule instance du programme.
-Module pour les étoiles variables VarObs:
-VarObs fait maintenant partie de Cartes du Ciel.
-Modifié pour les nouveaux format de fichiers de l'AAVSO.
-Les fichiers utilisateurs sont maintenant dans le même répertoire que Cartes du Ciel.
-Amélioration du dialogue de configuration.
-Possibilité d'utiliser l'heure locale pour les observations.
-Séparations des options de configuration dans le menu principal.
-Option pour ne pas simplifier la carte pendant le déplacement.
-Traduction en Islandais par Sverrir Gudmundsson.
+Interface ASCOM intégrée, peut être utilisée avec Windows x64. 
+Support pour INDI 0.6
+Plus d'options de la ligne de commande pour permettre des simples scripts d'automatisation.
+Ajout des symboles pour les objets du système solaire.
+Modification des couleurs par défaut et du réglage des étoiles.
+Permet de changer les images des étoiles en mode photographique.
+Permet de ne pas remplir le dessin des nébuleuses en mode graphique.
+Ajout de raccourcis clavier.
+Un clic droit sur les boutons permet d'accéder directement au réglages correspondant.
+Plus de serveur d'images DSS.
+Mise à jour de la base de donnée SAC à la version 8.1.
+Fin du support pour Windows 95/98/Me/NT.
+Beaucoup de correction de bug.
+
+Le détail des changement est ici:
+http://www.ap-i.net/mantis/changelog_page.php?project_id=1
