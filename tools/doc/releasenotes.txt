@@ -1,49 +1,21 @@
-Version 3.0.1.6  Release Notes
+Version 3.1 Release Notes
 
-WARNING!
-This version change the location of the configuration files.
-For Windows this is now %LOCALAPPDATA%\Skychart and for Linux ~/.skychart
-The program configuration is reset to the default values.
-After the first run you can copy the files you want to keep to the new folder.
-Do NOT copy cartesduciel.ini because it contain invalid file path.
-You can then totally remove the folders My Documents\Cartes du Ciel or ~/cartes_du_ciel and ~/.cartesduciel.ini
-For Linux the application data directory also change for /usr/share/skychart, if you 
-install additional catalogs you must move them from /usr/share/apps/skychart.
+This version is principally to fix all the blocking bug for a first stable release.
+But there is also a few functional change listed here.
 
-Fix the interface with Audela software.
-Fix various problem if the user directory contain national character in path name.
-Update the time zone information for Windows. On Unix use the system time zone.
-Take account for the telescope coordinates system.
-New server commands and command line options.
-Use FreeDesktop xdg-open by default to open a file on Linux.
-New program cdcicon that show the clock on the task bar. It can also start directly the Calendar or Skychat, do a rigth click on the icon to show the menu.
-Add True Solar Time to the clock
-Update the documentation from the wiki thank's to the great work from Marceau GUIHARD and the translators.
-All the windows have now a Help button.
-The meridian line is show with the "other line" color for more visibility.
-Show the compiler version in the About box.
-New Clock display from View/Clock menu.
-It is now possible to change the star size in line mode for display or printing from configuration/display.
-USNO-A display and search problem is fixed.
-New ASCOM driver.
-Solve for a few crash situation and other bug.
-Improved nebulae common name search by Oleg Maliy.
-Chinese translation by Lam Xiang.
-To reduce label overlap the label from diferent source are now draw at different position around an object. 
-It is now possible to activate the labels for stars, variables, and double without overlap.
-For the nebulae the SAC label is show on the right, label from other catalog is show on the left.
-There is a new option in Setup/Display/Labels to show the labels from all stars catalog.
-Add contextual help, press F1 key.
-Add main configuration window again.
-Fix telescope port selection on Linux.
-Add command line parameter --config to specify a configuration .ini file.
-Add command line parameter --unique to allow only one instance to run 
-Variable stars module VarObs:
-VarObs is now part of Skychart.
-Modified for new AAVSO files format.
-User files now in same directory as Skychart.
-Improved configuration dialog.
-Can use local time for the observations.
-Separate configuration panel form the main menu.
-Option to not simplify the chart when moving.
-New Icelandic translation by Sverrir Gudmundsson.
+Integrated ASCOM Interface, can be used on Windows x64. 
+Support for INDI 0.6
+More command line options to allow automation from simple script.
+Add Solar System symbols.
+Change default color and star setting.
+Allow to change bitmap stars image in photographic mode.
+Possibility to make DSO not filled in graphic mode.
+Add mode keyboard shortcut.
+Right click on many button to directly access the corresponding setup form.
+More DSS online server.
+Update SAC database to version 8.1.
+End of support for Windows 95/98/Me/NT.
+Many bug fix.
+
+The full change log is here:
+http://www.ap-i.net/mantis/changelog_page.php?project_id=1
