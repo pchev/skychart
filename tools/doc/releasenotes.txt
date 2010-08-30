@@ -14,7 +14,6 @@ Add mode keyboard shortcut.
 Right click on many button to directly access the corresponding setup form.
 More DSS online server.
 Update SAC database to version 8.1.
-End of support for Windows 95/98/Me/NT.
 Many bug fix.
 
 The full change log is here:
