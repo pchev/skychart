@@ -2197,6 +2197,10 @@ msgstr "星等波段"
 msgid "Magnitude difference"
 msgstr "星等差"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
 msgstr "星等错误"

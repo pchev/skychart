@@ -419,6 +419,10 @@ msgstr "Abbrechen, falsche zip-Datei? %s"
 msgid "%sCannot open database %s! %s"
 msgstr "%sKann Datenbank %s nicht öffnen! %s"
 
+#: u_translation.rscannotwritet
+msgid "Cannot write to"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Kaskadieren"
@@ -450,10 +454,6 @@ msgstr "Katalogart"
 #: u_translation.rsccw
 msgid "%sCCW"
 msgstr "%sCCW"
-
-#: u_translation.rscdcformatpre
-msgid "CdC format, prefere the compact version"
-msgstr "CdC Format, kompakte Version wird bevorzugt"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -577,7 +577,8 @@ msgstr "Klasse"
 msgid "Click to change the colour "
 msgstr "Klick zur Änderung der Farbe"
 
-#: u_translation.rsclientconnec"
+#: u_translation.rsclientconnec
+msgctxt "u_translation.rsclientconnec"
 msgid "Client connection keep alive"
 msgstr "Keep Alive für die Clientanwendung"
 
@@ -1750,7 +1751,6 @@ msgid "Hide label"
 msgstr "Beschriftung ausblenden"
 
 #: u_translation.rshideobjectwi
-
 msgid "Hide objects wider than"
 msgstr "Blende größere Objekte aus als"
 
@@ -2196,7 +2196,13 @@ msgstr "Farbband"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Helligkeits-\nunterschied"
+msgstr ""
+"Helligkeits-\n"
+"unterschied\n"
+
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -3240,7 +3246,8 @@ msgstr "(Benötigt Xplanet 1.2.0)"
 msgid "Reset"
 msgstr "Zurücksetzen"
 
-#: u_translation.rsresetalllab
+#: u_translation.rsresetalllabe
+msgctxt "u_translation.rsresetalllabe"
 msgid "Reset all labels"
 msgstr "Alle Beschriftungen zurücksetzen"
 
@@ -3767,10 +3774,6 @@ msgstr "Name des Sterns"
 #: u_translation.rsstardisplay
 msgid "Star display"
 msgstr "Sterndarstellung"
-
-#: u_translation.rsstardisplayp
-msgid "Star display properties"
-msgstr "Einstellungen zur Sterndarstellung"
 
 #: u_translation.rsstarlabel
 msgid "Star label"

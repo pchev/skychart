@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-08-29 10:31+0200\n"
+"PO-Revision-Date: 2010-08-30 18:51+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -2199,6 +2199,10 @@ msgstr "Bande de magnitude"
 msgid "Magnitude difference"
 msgstr "Différence magnitude"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr "Magnitude"
+
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
 msgstr "Erreur de magnitude"
@@ -4352,4 +4356,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

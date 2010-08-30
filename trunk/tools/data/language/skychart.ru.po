@@ -2197,6 +2197,10 @@ msgstr "Диапазон величины"
 msgid "Magnitude difference"
 msgstr "Разница величин"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
 msgstr "Ошибка величины"

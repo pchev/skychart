@@ -4330,3 +4330,7 @@ msgstr ""
 msgid "Cannot write to"
 msgstr ""
 
+#: u_translation:rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+

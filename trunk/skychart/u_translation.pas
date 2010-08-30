@@ -1097,6 +1097,7 @@ resourcestring
   rsStarsBitmapF = 'Stars bitmap file';
   rsPastel = 'Pastel';
   rsCannotWriteT = 'Cannot write to';
+  rsMagnitudeEcl = 'Eclipse magnitude';
 
 implementation
 

@@ -2196,6 +2196,10 @@ msgstr "Skupiny magnitudy:"
 msgid "Magnitude difference"
 msgstr "Rozdíl magnitudy"
 
+#: u_translation.rsmagnitudeecl
+msgid "Eclipse magnitude"
+msgstr ""
+
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
 msgstr "Chyba magnitudy:"
