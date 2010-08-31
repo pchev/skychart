@@ -107,7 +107,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="47">
+    <Units Count="48">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -431,6 +431,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="u_unzip"/>
       </Unit46>
+      <Unit47>
+        <Filename Value="cu_tcpserver.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_tcpserver"/>
+      </Unit47>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
