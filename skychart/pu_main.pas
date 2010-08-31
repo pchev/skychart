@@ -33,49 +33,13 @@ uses
     Windows, ShlObj,
   {$endif}
   u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
-  pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
+  cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
   LResources, uniqueinstance, LazHelpHTML;
-
-type
-  TTCPThrd = class(TThread)
-  private
-    FSock:TTCPBlockSocket;
-    CSock: TSocket;
-    cmd : TStringlist;
-    cmdresult : string;
-    FConnectTime : double;
-  public
-    id : integer;
-    keepalive,abort,lockexecutecmd,stoping : boolean;
-    active_chart,remoteip,remoteport : string;
-    Constructor Create (hsock:tSocket);
-    procedure Execute; override;
-    procedure SendData(str:string);
-    procedure ExecuteCmd;
-    property sock : TTCPBlockSocket read FSock;
-    property ConnectTime : double read FConnectTime;
-    property Terminated;
-  end;
-
-  TTCPDaemon = class(TThread)
-  private
-    Sock:TTCPBlockSocket;
-    active_chart : string;
-    procedure ShowError;
-  public
-    keepalive, stoping : boolean;
-    TCPThrd: array [1..Maxwindow] of TTCPThrd ;
-    ThrdActive: array [1..Maxwindow] of boolean ;
-    Constructor Create;
-    procedure Execute; override;
-    procedure ShowSocket;
-    procedure GetACtiveChart;
-  end;
 
 type
 
@@ -755,6 +719,9 @@ type
     procedure Init;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure ChartMove(Sender: TObject);
+    procedure GetActiveChart(var active_chart: string);
+    procedure TCPShowError(var msg: string);
+    procedure TCPShowSocket(var msg: string);
   end;
 
 var
@@ -5806,7 +5773,7 @@ for i:=1 to Maxwindow do
  if (TCPDaemon<>nil)
     and(TCPDaemon.ThrdActive[i])
     and (TCPDaemon.TCPThrd[i]<>nil)
-    and(TCPDaemon.TCPThrd[i].Fsock<>nil)
+    and(TCPDaemon.TCPThrd[i].sock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
 {$ifdef mswindows}
@@ -5827,201 +5794,17 @@ end; }
 {$endif}
 end;
 
-{ TCP/IP Connexion, based on Synapse Echo demo }
-
-Constructor TTCPDaemon.Create;
-begin
-  FreeOnTerminate:=true;
-  keepalive:=false;
-  inherited create(false);
-end;
-
-procedure TTCPDaemon.ShowError;
-begin
-f_main.SetLpanel1(Format(rsSocketError, [inttostr(sock.lasterror),
-  sock.GetErrorDesc(sock.lasterror)]));
-end;
-
-procedure TTCPDaemon.ShowSocket;
-var locport:string;
-begin
-sock.GetSins;
-locport:=inttostr(sock.GetLocalSinPort);
-if locport<>f_main.cfgm.ServerIPport then locport:=Format(rsDifferentTha, [
-  locport]);
-f_main.serverinfo:=Format(rsListenOnPort, [locport]);
-f_main.SetLpanel1(f_main.serverinfo);
-end;
-
-procedure TTCPDaemon.GetActiveChart;
-begin
-  if f_main.MultiDoc1.ActiveObject is Tf_chart then
-    active_chart:=f_main.MultiDoc1.ActiveChild.caption
-  else
-    active_chart:=f_main.newchart('');
-end;
-
-procedure TTCPDaemon.Execute;
-var
-  ClientSock:TSocket;
-  i,n : integer;
-begin
-stoping:=false;
-for i:=1 to MaxWindow do ThrdActive[i]:=false;
-sock:=TTCPBlockSocket.create;
-try
-  with sock do
-    begin
-      CreateSocket;
-      if lasterror<>0 then Synchronize(ShowError);
-      MaxLineLength:=1024;
-      setLinger(true,1000);
-      if lasterror<>0 then Synchronize(ShowError);
-      bind(f_main.cfgm.ServerIPaddr,f_main.cfgm.ServerIPport);
-      if lasterror<>0 then Synchronize(ShowError);
-      listen;
-      if lasterror<>0 then Synchronize(ShowError);
-      Synchronize(ShowSocket);
-      repeat
-        if stoping or terminated then break;
-        if canread(500) and (not terminated) then
-          begin
-            ClientSock:=accept;
-            if lastError=0 then begin
-              n:=-1;
-              for i:=1 to Maxwindow do
-                 if (not ThrdActive[i])
-                    or(TCPThrd[i]=nil)
-                    or(TCPThrd[i].Fsock=nil)
-                    or(TCPThrd[i].terminated)
-                    then begin
-                      n:=i;
-                      break;
-                    end;
-              if n>0 then begin
-                 TCPThrd[n]:=TTCPThrd.create(ClientSock);
-                 TCPThrd[n].keepalive:=keepalive;
-                 i:=0; while (TCPThrd[n].Fsock=nil)and(i<100) do begin sleep(100); inc(i); end;
-                 if not TCPThrd[n].terminated then begin
-                      TCPThrd[n].id:=n;
-                      ThrdActive[n]:=true;
-                      Synchronize(GetActiveChart);
-                      if active_chart=msgFailed then
-                        TCPThrd[n].senddata(msgFailed+' Cannot activate a chart.')
-                      else begin
-                        TCPThrd[n].active_chart:=active_chart;
-                        TCPThrd[n].senddata(msgOK+' id='+inttostr(n)+' chart='+active_chart);
-                      end;
-                 end;
-              end else
-                 with TTCPThrd.create(ClientSock) do begin
-                   i:=0; while (sock=nil)and(i<100) do begin sleep(100); inc(i); end;
-                   if not terminated then begin
-                      if Sock<>nil then Sock.SendString(msgFailed+' Maximum connection reach!'+CRLF);
-                      terminate;
-                   end;
-              end;
-            end
-            else Synchronize(ShowError);
-          end;
-      until false;
-    end;
-finally
-  suspend;
-  Sock.CloseSocket;
-  Sock.free;
-  terminate;
-end;
-end;
-
-Constructor TTCPThrd.Create(Hsock:TSocket);
-begin
-  Csock := Hsock;
-  FreeOnTerminate:=true;
-  cmd:=TStringlist.create;
-  keepalive:=false;
-  abort:=false;
-  lockexecutecmd:=false;
-  inherited create(false);
-end;
-
-procedure TTCPThrd.Execute;
-var
-  s: string;
-  i: integer;
-begin
-  Fsock:=TTCPBlockSocket.create;
-  FConnectTime:=now;
-  stoping:=false;
-  try
-    Fsock.socket:=CSock;
-    Fsock.GetSins;
-    Fsock.MaxLineLength:=1024;
-    remoteip:=Fsock.GetRemoteSinIP;
-    remoteport:=inttostr(Fsock.GetRemoteSinPort);
-    with Fsock do
-      begin
-        repeat
-          if stoping or terminated then break;
-          s := RecvString(500);
-          //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
-          if lastError=0 then begin
-             if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
-             splitarg(s,blank,cmd);
-             for i:=cmd.count to MaxCmdArg do cmd.add('');
-             Synchronize(ExecuteCmd);
-             SendString(cmdresult+crlf);
-             if lastError<>0 then break;
-             if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
-          end else
-             if keepalive then begin
-                SendString('.'+crlf);      // keepalive check
-                if lastError<>0 then break;  // if send failed we close the connection
-          end;
-        until false;
-      end;
-  finally
-    f_main.TCPDaemon.ThrdActive[id]:=false;
-    Fsock.SendString(msgBye+crlf);
-    Fsock.CloseSocket;
-    Fsock.Free;
-    cmd.free;
-    suspend;
-    terminate;
-  end;
-end;
-
-procedure TTCPThrd.Senddata(str:string);
-begin
-try
-if Fsock<>nil then
- with Fsock do begin
-   if terminated then exit;
-   SendString(UTF8ToSys(str)+CRLF);
-   if LastError<>0 then
-      terminate;
- end;
-except
-terminate;
-end;
-end;
-
-procedure TTCPThrd.ExecuteCmd;
-begin
-if lockexecutecmd then exit;
-lockexecutecmd:=true;
-try
-  cmdresult:=f_main.ExecuteCmd(active_chart,cmd);
-finally
-  lockexecutecmd:=false;
-end;
-end;
-
 procedure Tf_main.StartServer;
 begin
  try
  TCPDaemon:=TTCPDaemon.create;
  TCPDaemon.keepalive:=cfgm.keepalive;
+ TCPDaemon.onGetACtiveChart:=GetACtiveChart;
+ TCPDaemon.onErrorMsg:=TCPShowError;
+ TCPDaemon.onShowSocket:=TCPShowSocket;
+ TCPDaemon.onExecuteCmd:=ExecuteCmd;
+ TCPDaemon.IPaddr:=cfgm.ServerIPaddr;
+ TCPDaemon.IPport:=cfgm.ServerIPport;
  except
   SetLpanel1(rsTCPIPService);
  end;
@@ -6327,6 +6110,26 @@ for i:=0 to MultiDoc1.ChildCount-1 do
      ListXY(round(x),round(y));
      break;
 end;
+end;
+
+procedure Tf_main.GetActiveChart(var active_chart: string);
+begin
+  if MultiDoc1.ActiveObject is Tf_chart then
+    active_chart:=MultiDoc1.ActiveChild.caption
+  else
+    active_chart:=newchart('');
+end;
+
+procedure Tf_main.TCPShowError(var msg: string);
+begin
+SetLpanel1(Format(rsSocketError, [msg,'']));
+end;
+
+procedure Tf_main.TCPShowSocket(var msg: string);
+begin
+if msg<>cfgm.ServerIPport then msg:=Format(rsDifferentTha, [msg]);
+serverinfo:=Format(rsListenOnPort, [msg]);
+SetLpanel1(serverinfo);
 end;
 
 procedure Tf_main.ImageSetFocus(Sender: TObject);
