@@ -1663,6 +1663,7 @@ var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
 begin
 try
 while lockdb do application.ProcessMessages; lockdb:=true;
+cdb.AstMsg:='';
 cfgsc.ast_day:='cdc_ast_day_'+cfgsc.chartname;
 cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
 cfgsc.AsteroidNb:=0;
@@ -1725,6 +1726,7 @@ if db2.Rowcount>0 then begin
   end;
 end;
 cfgsc.AsteroidNb:=db2.Rowcount;
+cfgsc.msg:=cfgsc.msg+blank+cdb.AstMsg;
 finally
   lockdb:=false;
 end;
@@ -1738,6 +1740,7 @@ var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
 begin
 try
 while lockdb do application.ProcessMessages; lockdb:=true;
+cdb.ComMsg:='';
 cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
 cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
 cfgsc.CometNb:=0;
@@ -1809,6 +1812,7 @@ if db2.Rowcount>0 then begin
   end;
 end;
 cfgsc.CometNb:=db2.Rowcount;
+cfgsc.msg:=cfgsc.msg+blank+cdb.ComMsg;
 finally
   lockdb:=false;
 end;

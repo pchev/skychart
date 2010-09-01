@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-08-30 18:51+0200\n"
+"PO-Revision-Date: 2010-09-01 18:16+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -4264,6 +4264,14 @@ msgstr "Voulez-vous voir les objets avant leur lever ?"
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
 msgstr "Attention! le calcul pour"
+
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr "Attention! Les éléments des astéroïdes sont dépassés de plus de 3 ans. Essayez de trouver des éléments valables pour la date actuelle de la carte."
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr "Attention! Les éléments des comètes sont dépassés de plus de 3 ans. Essayez de trouver des éléments valables pour la date actuelle de la carte."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"

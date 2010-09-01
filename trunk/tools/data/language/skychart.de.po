@@ -4267,6 +4267,14 @@ msgstr "Möchten Sie das Objekt vor dem Aufgang nachführen?"
 msgid "Warning! Calculation of"
 msgstr "Warnung! Berechnung von"
 
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "Warnung! Das benutzte Datum oder der Beobachtungsort wurde im Vergleich zu den letzten Einstellungen geändert. Sie können jetzt \"Nein\" antworten und den %s-Knopf benutzen um zum ursprünglichen Datum/Zeit und Beobachtungsort zurückzukehren, ansonsten werden die Änderungen angewendet. Wollen Sie fortfahren?"

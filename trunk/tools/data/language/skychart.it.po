@@ -4262,6 +4262,14 @@ msgstr "Vuoi seguire un oggetto prima della sua levata ?"
 msgid "Warning! Calculation of"
 msgstr "Attenzione! Il calcolo di"
 
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "Attenzione! La data corrente e la località dell'osservatore potrebbero essere stati cambiati rispetto ai valori di default. Devi rispondere No e usare il pulsante %s ora per tornare ai valori di default, altrimenti questi saranno persi. Vuoi continuare?"

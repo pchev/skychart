@@ -4263,6 +4263,14 @@ msgstr "跟踪升起前天体？"
 msgid "Warning! Calculation of"
 msgstr "警告！计算"
 
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
 msgstr "警告！当前日期和观象台位置可能已从默认值更改。可以按 否 键和按 %s 键立即恢复默认值，否则默认值可能丢失。是否继续？"
