@@ -113,6 +113,7 @@ Procedure ScopeAlign(source : string; ra,dec : single);
 Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
 Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
 Procedure ScopeGoto(ar,de : single; var ok : boolean);
+Procedure ScopeAbortSlew;
 Procedure ScopeReset;
 Function  ScopeInitialized : boolean ;
 Function  ScopeConnected : boolean ;
@@ -146,6 +147,7 @@ const crlf=chr(10)+chr(13);
 --------------------------------------------------------------------------------}
 Procedure ShowCoordinates;
 begin
+{$ifdef mswindows}
 with pop_scope do begin
    if ScopeInitialized then begin
       try
@@ -179,10 +181,12 @@ with pop_scope do begin
       alt_y.text := '';
    end;
    end;
+{$endif}
 end;
 
 Procedure ScopeDisconnect(var ok : boolean);
 begin
+{$ifdef mswindows}
 Initialized:=false;
 pop_scope.pos_x.text:='';
 pop_scope.pos_y.text:='';
@@ -205,11 +209,13 @@ pop_scope.UpdTrackingButton;
 except
  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
+{$endif}
 end;
 
 Procedure ScopeConnect(var ok : boolean);
 var dis_ok : boolean;
 begin
+{$ifdef mswindows}
 pop_scope.led.color:=clRed;
 pop_scope.led.refresh;
 pop_scope.timer1.enabled:=false;
@@ -236,6 +242,7 @@ pop_scope.UpdTrackingButton;
 except
  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
+{$endif}
 end;
 
 Procedure ScopeClose;
@@ -245,6 +252,7 @@ end;
 
 Function  ScopeConnected : boolean ;
 begin
+{$ifdef mswindows}
 result:=false;
 if not initialized then exit;
 if VarIsEmpty(T) then exit;
@@ -253,6 +261,7 @@ result:=T.connected;
 except
  result:=false;
 end;
+{$endif}
 end;
 
 Function  ScopeInitialized : boolean ;
@@ -262,6 +271,7 @@ end;
 
 Procedure ScopeAlign(source : string; ra,dec : single);
 begin
+{$ifdef mswindows}
    if not ScopeConnected then exit;
    if T.CanSync then begin
       try                 
@@ -274,7 +284,7 @@ begin
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end
-
+{$endif}
 end;
 
 Procedure ScopeShowModal(var ok : boolean);
@@ -290,6 +300,7 @@ end;
 
 Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
 begin
+{$ifdef mswindows}
    if ScopeConnected then begin
       try
          ar:=Curdeg_x/15;
@@ -302,10 +313,12 @@ begin
          end;
       end;
    end else ok:=false;
+{$endif}
 end;
 
 Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
 begin
+{$ifdef mswindows}
    if ScopeConnected then begin
       try
          az:=cur_az;
@@ -318,10 +331,12 @@ begin
          end;
       end;
    end else ok:=false;
+{$endif}
 end;
 
 Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
+{$ifdef mswindows}
    if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
       Initialized := false;
       pop_scope:=Tpop_scope.Create(nil);
@@ -342,6 +357,7 @@ begin
       GotoOK:=false;
    end;
    refreshrate:=pop_scope.timer1.interval;
+{$endif}
 end;
 
 Procedure ScopeGetEqSys(var EqSys : double);
@@ -377,6 +393,7 @@ end;
 
 Procedure ScopeGoto(ar,de : single; var ok : boolean);
 begin
+{$ifdef mswindows}
    if not ScopeConnected then exit;
    try
       if not T.tracking then begin
@@ -388,11 +405,25 @@ begin
    except                                                                
       on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
    end;
+{$endif}
 end;
 
 Procedure ScopeReadConfig(ConfigPath : shortstring);
 begin
   pop_scope.ReadConfig(ConfigPath);
+end;
+
+Procedure ScopeAbortSlew;
+begin
+{$ifdef mswindows}
+if ScopeConnected then begin
+      try
+         T.AbortSlew;
+      except
+         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      end;
+   end;
+{$endif}
 end;
 
 {-------------------------------------------------------------------------------
@@ -412,6 +443,7 @@ else
   FConfig:=slash(extractfilepath(paramstr(0)))+'scope.ini';
 ini:=tinifile.create(FConfig);
 nom:= ini.readstring('Ascom','name','');
+if trim(nom)='' then nom:='POTH.Telescope';
 edit1.text:=nom;
 ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
 ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
@@ -483,6 +515,7 @@ begin
 pop_scope.Hide;
 end;
 
+{$ifdef mswindows}
 Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
 var
   zFileName, zParams, zDir: array[0..79] of Char;
@@ -490,28 +523,26 @@ begin
   Result := ShellExecute(pop_scope.Handle, nil, StrPCopy(zFileName, FileName),
                          StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
 end;
+{$endif}
 
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
+{$ifdef mswindows}
 ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+{$endif}
 end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
 begin
-   if ScopeConnected then begin
-      try
-         T.AbortSlew;
-      except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-      end;
-   end;
+ScopeAbortSlew;
 end;
 
 procedure Tpop_scope.SpeedButton3Click(Sender: TObject);
 var
   V: variant;
 begin
-  try
+{$ifdef mswindows}
+try
   initialized:=false;
   V := CreateOleObject('DriverHelper.Chooser');
   V.devicetype:='Telescope';
@@ -520,12 +551,18 @@ begin
   SaveConfig;
   UpdTrackingButton;
   except
+    {$ifdef  win64}
+    Showmessage('The ASCOM telescope chooser do not work correctly from a 64 bits application for now.'+crlf+'Use POTH.Telescope and then select your telescope from the POTH menu.'+crlf+'See http://ascom-standards.org for more information.');
+    {$else}
     Showmessage('Please ensure that ASCOM telescope drivers are installed properly.'+crlf+'See http://ascom-standards.org for more information.');
+    {$endif}
   end;
+{$endif}
 end;
 
 procedure Tpop_scope.SpeedButton7Click(Sender: TObject);
 begin
+{$ifdef mswindows}
 try
 if (edit1.text>'') and (not Scopeconnected) then begin
 if VarIsEmpty(T) then begin
@@ -540,11 +577,12 @@ end;
 except
   on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
-
+{$endif}
 end;
 
 procedure Tpop_scope.SpeedButton9Click(Sender: TObject);
 begin
+{$ifdef mswindows}
    if ScopeConnected then begin
       try
          T.SiteLongitude:=longitude;
@@ -553,11 +591,13 @@ begin
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
+{$endif}
 end;
 
 procedure Tpop_scope.SpeedButton8Click(Sender: TObject);
 var utc: Tsystemtime;
 begin
+{$ifdef mswindows}
    if ScopeConnected then begin
       try
          getsystemtime(utc);
@@ -567,6 +607,7 @@ begin
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
+{$endif}
 end;
 
 procedure Tpop_scope.FormDestroy(Sender: TObject);
@@ -576,6 +617,7 @@ end;
 
 procedure Tpop_scope.UpdTrackingButton;
 begin
+{$ifdef mswindows}
 try
    if not ScopeConnected then exit;
    if (not T.CanSetTracking)or(not T.connected) then begin
@@ -588,10 +630,12 @@ try
 except
   on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
+{$endif}
 end;
 
 procedure Tpop_scope.TrackingBtnClick(Sender: TObject);
 begin
+{$ifdef mswindows}
    if ScopeConnected then begin
       try
          T.Tracking:=not T.Tracking;
@@ -600,11 +644,13 @@ begin
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
+{$endif}
 end;
 
 procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
 var buf : string;
 begin
+{$ifdef mswindows}
 try
    if (edit1.text>'') then begin
       try
@@ -626,7 +672,8 @@ try
 except
   on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
+{$endif}
 end;
 
 
-end.
+end.

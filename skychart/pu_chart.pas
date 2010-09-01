@@ -900,10 +900,6 @@ try
  if (printcolor=2)and(sc.plot.cfgplot.starplot=2) then sc.plot.cfgplot.starplot:=1;
  Case PrintMethod of
  0: begin    // to printer
-(*{$ifdef  win64}
-{ TODO : Print on Win64 }
-showmessage('Cannot print directly with Win64. Make a bitmap or postscript to print later.');
-{$else}  *)
     GetPrinterResolution(prtname,resol);
     if PrintLandscape then Printer.Orientation:=poLandscape
                    else Printer.Orientation:=poPortrait;
@@ -3214,7 +3210,7 @@ end;
 procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
 begin
 {$ifdef mswindows}
-pu_ascomclient.ScopeShow;
+pu_ascomclient.ScopeAbortSlew;
 {$endif}
 end;
 
