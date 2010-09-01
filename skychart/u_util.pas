@@ -200,7 +200,7 @@ END  ;
 
 Function NormRA(ra : double):double;
 begin
-result:=rmod(ra+pi2,pi2);
+result:=rmod(ra+pi2+pi2,pi2);
 //if (ar2<ar1)and(ra<=arm) then NormRA:=ra+pi2
 //else NormRA:=ra;
 end;

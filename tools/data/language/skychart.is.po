@@ -5171,6 +5171,14 @@ msgstr "Viltu sjá fyrirbæri áður en það rís upp á himininn ?"
 msgid "Warning! Calculation of"
 msgstr "Aðvörun! Útreikningar á"
 
+#: u_translation.rswarningsomea
+msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
+#: u_translation.rswarningsomec
+msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
 #: u_translation.rswarningthecu
 #, fuzzy
 #| msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"

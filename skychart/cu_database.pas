@@ -25,9 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses u_translation,
-  passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
-  Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils;
+uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
+  Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils, u_translation;
 
 
 type
@@ -37,6 +36,7 @@ type
     db:TSqlDB;
     FFits: TFits;
     FInitializeDB: TNotifyEvent;
+    FAstmsg, FCommsg: string;
   public
     { Public declarations }
      constructor Create(AOwner:TComponent); override;
@@ -83,6 +83,8 @@ type
      function CountImages:integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
+     property AstMsg : string read FAstmsg write FAstmsg;
+     property ComMsg : string read FCommsg write FCommsg;
   end;
 
 implementation
@@ -1080,23 +1082,22 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  if dt<1000 then begin
-     h:=StrToFloatDef(db.Results[j][1],20);  // H and G not present in file for some poorly observed asteroids
-     g:=StrToFloatDef(db.Results[j][2],0.15);
-     ma:=strtofloat(db.Results[j][4]);
-     ap:=strtofloat(db.Results[j][5]);
-     an:=strtofloat(db.Results[j][6]);
-     ic:=strtofloat(db.Results[j][7]);
-     ec:=strtofloat(db.Results[j][8]);
-     sa:=strtofloat(db.Results[j][9]);
-     ref:=db.Results[j][10];
-     nam:=db.Results[j][11];
-     eq:=strtofloat(db.Results[j][12]);
-     elem_id:=db.Results[j][13];
-     result:=true;
-  end
-  else
-     result:=false;
+  if dt>1000 then begin
+     FAstmsg:=rsWarningSomeA;
+  end;
+  h:=StrToFloatDef(db.Results[j][1],20);  // H and G not present in file for some poorly observed asteroids
+  g:=StrToFloatDef(db.Results[j][2],0.15);
+  ma:=strtofloat(db.Results[j][4]);
+  ap:=strtofloat(db.Results[j][5]);
+  an:=strtofloat(db.Results[j][6]);
+  ic:=strtofloat(db.Results[j][7]);
+  ec:=strtofloat(db.Results[j][8]);
+  sa:=strtofloat(db.Results[j][9]);
+  ref:=db.Results[j][10];
+  nam:=db.Results[j][11];
+  eq:=strtofloat(db.Results[j][12]);
+  elem_id:=db.Results[j][13];
+  result:=true;
 end else begin
   result:=false;
 end;
@@ -1129,22 +1130,22 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  if dt<1000 then begin
-     tp:=strtofloat(db.Results[j][1]);
-     q:=strtofloat(db.Results[j][2]);
-     ec:=strtofloat(db.Results[j][3]);
-     ap:=strtofloat(db.Results[j][4]);
-     an:=strtofloat(db.Results[j][5]);
-     ic:=strtofloat(db.Results[j][6]);
-     h:=strtofloat(db.Results[j][8]);
-     g:=strtofloat(db.Results[j][9]);
-     nam:=db.Results[j][10];
-     eq:=strtofloat(db.Results[j][11]);
-     elem_id:=db.Results[j][12];
-     result:=true;
-  end
-  else
-    result:=false;
+
+  if dt>1000 then begin
+     FCommsg:=rsWarningSomeC;
+  end;
+  tp:=strtofloat(db.Results[j][1]);
+  q:=strtofloat(db.Results[j][2]);
+  ec:=strtofloat(db.Results[j][3]);
+  ap:=strtofloat(db.Results[j][4]);
+  an:=strtofloat(db.Results[j][5]);
+  ic:=strtofloat(db.Results[j][6]);
+  h:=strtofloat(db.Results[j][8]);
+  g:=strtofloat(db.Results[j][9]);
+  nam:=db.Results[j][10];
+  eq:=strtofloat(db.Results[j][11]);
+  elem_id:=db.Results[j][12];
+  result:=true;
 end else begin
   result:=false;
 end;
