@@ -107,7 +107,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="48">
+    <Units Count="49">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -436,6 +436,12 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_tcpserver"/>
       </Unit47>
+      <Unit48>
+        <Filename Value="pu_ascomclient.pas"/>
+        <IsPartOfProject Value="True"/>
+        <HasResources Value="True"/>
+        <UnitName Value="pu_ascomclient"/>
+      </Unit48>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

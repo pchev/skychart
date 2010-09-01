@@ -3426,10 +3426,6 @@ cfgm.PrinterResolution:=300;
 cfgm.PrintColor:=0;
 cfgm.PrintLandscape:=true;
 cfgm.PrintMethod:=0;
-(*{$ifdef  win64}
-{ TODO : Print on Win64 }
-cfgm.PrintMethod:=2;
-{$endif} *)
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);
