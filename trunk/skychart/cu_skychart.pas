@@ -23,6 +23,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Skychart computation component
 }
 {$mode objfpc}{$H+}
+
+{ TODO : look if we still need that }
+{$ifdef lclqt} {$define ImageBuffered} {$endif}
+{$ifdef lclcarbon} {$define ImageBuffered} {$endif}
+//{$ifdef lclgtk2} {$define ImageBuffered} {$endif}
+
 interface
 
 uses u_translation, gcatunit, {libcatalog,} // libcatalog statically linked
@@ -307,7 +313,7 @@ end;
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
   // refresh telescope mark
   if scopemark then begin
-    {$ifdef mswindows}
+    {$ifndef ImageBuffered}
      DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
     {$endif}
      cfgsc.ScopeMark:=true;
