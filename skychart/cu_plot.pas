@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  Bitmap skychart drawing component
 }
 {$mode delphi}{$H+}
+
 interface
 
 uses u_translation, FileUtil,
@@ -2292,7 +2293,7 @@ begin
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
-     Pen.Color:=cfgplot.color[11];
+     Pen.Color:=clWhite;
      Pen.Mode:=pmXor;
   end else begin
      Pen.Color:=lcolor;
