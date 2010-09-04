@@ -21,7 +21,7 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Version Minor="1" Release="1"/>
+    <Version Minor="1" Release="2"/>
     <Files Count="2">
       <Item1>
         <Filename Value="jdcalendar.lrs"/>
