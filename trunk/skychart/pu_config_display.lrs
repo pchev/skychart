@@ -1,8 +1,8 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_config_display','FORMDATA',[
-  'TPF0'#17'Tf_config_display'#16'f_config_display'#4'Left'#3'9'#2#6'Height'#3
-  +#27#2#3'Top'#2','#5'Width'#3#252#1#13'ActiveControl'#7#9'MainPanel'#11'Borde'
+  'TPF0'#17'Tf_config_display'#16'f_config_display'#4'Left'#3#147#1#6'Height'#3
+  +#27#2#3'Top'#2'o'#5'Width'#3#252#1#13'ActiveControl'#7#9'MainPanel'#11'Borde'
   +'rStyle'#7#12'bsToolWindow'#7'Caption'#6#7'Display'#12'ClientHeight'#3#27#2
   +#11'ClientWidth'#3#252#1#11'Font.Height'#2#245#7'OnClose'#7#9'FormClose'#8'O'
   +'nCreate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'Form'
