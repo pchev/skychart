@@ -3575,7 +3575,7 @@ msgid "Processing ended. Total number of asteroids: %s"
 msgstr ""
 
 #: u_translation:rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr ""
 
 #: u_translation:rsdeletefrommo2
@@ -4340,5 +4340,29 @@ msgstr ""
 
 #: u_translation:rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgstr ""
+
+#: u_translation:rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
+#: u_translation:rswarning
+msgid "Warning!"
+msgstr ""
+
+#: u_translation:rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
+#: u_translation:rsdownloadfile
+msgid "Download File"
+msgstr ""
+
+#: u_translation:rscopyfrom
+msgid "Copy from:"
+msgstr ""
+
+#: u_translation:rstofile
+msgid "to file:"
 msgstr ""
 

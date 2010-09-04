@@ -127,6 +127,11 @@ BitBtn1.caption:=rsOK;
 BitBtn2.caption:=rsCancel;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgPict);
+DownloadDialog1.msgDownloadFile:=rsDownloadFile;
+DownloadDialog1.msgCopyfrom:=rsCopyFrom;
+DownloadDialog1.msgtofile:=rsToFile;
+DownloadDialog1.msgDownloadBtn:=rsDownload;
+DownloadDialog1.msgCancelBtn:=rsCancel;
 end;
 
 procedure Tf_getdss.FormCreate(Sender: TObject);

@@ -173,7 +173,15 @@ if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
   cm.PrintMethod:=1;
 end;
 prtcolor.ItemIndex:=cm.PrintColor;
-if ((cm.PrintMethod=0)or(cm.PrintMethod=1))and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
+if ((cm.PrintMethod=0)or(cm.PrintMethod=1)) then begin
+  if prtcolor.ItemIndex=2 then prtcolor.ItemIndex:=0;
+    if prtcolor.Items.Count>=3 then prtcolor.Items.Delete(2);
+end else begin
+  if prtcolor.Items.Count<3 then
+     prtcolor.Items.Add(rsAsOnScreenBl)
+  else
+     prtcolor.Items[2]:=rsAsOnScreenBl;
+end;
 cm.PrintColor:=prtcolor.ItemIndex;
 case cm.PrintMethod of
 0 : begin
@@ -214,4 +222,4 @@ initialization
   {$I pu_print.lrs}
 
 end.
-
+

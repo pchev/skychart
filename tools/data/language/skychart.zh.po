@@ -521,6 +521,10 @@ msgstr "更改绘画模式"
 msgid "Change the displayed picture"
 msgstr "更改图片显示"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "星图"
@@ -788,6 +792,10 @@ msgstr "坐标网"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "复制"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1064,7 +1072,9 @@ msgid "Deleting from the element list..."
 msgstr "从根数列表删除..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "从每月表删除..."
 
 #: u_translation.rsdeletefrommo2
@@ -1155,6 +1165,10 @@ msgstr "目录"
 msgid "Directory not found %s"
 msgstr "目录找不到 %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "断开望远镜"
@@ -1230,6 +1244,10 @@ msgstr "下载 %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "下载国家详细资料"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3995,6 +4013,10 @@ msgstr "到"
 msgid "Today"
 msgstr "今日"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "工具栏"
@@ -4258,6 +4280,10 @@ msgstr "目视星等"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "跟踪升起前天体？"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

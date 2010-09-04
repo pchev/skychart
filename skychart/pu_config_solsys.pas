@@ -55,12 +55,14 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    LabelXplanetBox: TLabel;
     Loadcom: TButton;
     LoadMPC: TButton;
     mpcfile: TFileNameEdit;
     PageControl1: TPageControl;
     PageControl2: TPageControl;
     Panel1: TPanel;
+    XplanetBox: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
@@ -206,7 +208,6 @@ type
     Addast: TButton;
     OpenDialog1: TOpenDialog;
     Notebook1: TNotebook;
-    XplanetBox: TGroupBox;
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
@@ -316,7 +317,7 @@ PlanetMode.Items[3]:=rsSymbol;
 PlanetMode.Items[2]:=PlanetMode.Items[2]+blank+rsRequireXplan;
 {$endif}
 PlanetBox3.caption:=rsShowEarthSha;
-XplanetBox.caption:=rsImageOptions;
+LabelXplanetBox.caption:=rsImageOptions;
 UseXplanet.caption:=rsUseXplanet;
 TransparentPlanet.caption:=rsTransparentL;
 comsetting.caption:=rsGeneralSetti;
@@ -416,6 +417,11 @@ Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgSol);
+DownloadDialog1.msgDownloadFile:=rsDownloadFile;
+DownloadDialog1.msgCopyfrom:=rsCopyFrom;
+DownloadDialog1.msgtofile:=rsToFile;
+DownloadDialog1.msgDownloadBtn:=rsDownload;
+DownloadDialog1.msgCancelBtn:=rsCancel;
 end;
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);

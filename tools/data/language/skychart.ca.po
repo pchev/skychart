@@ -522,6 +522,10 @@ msgstr "Modifica el mode de dibuix"
 msgid "Change the displayed picture"
 msgstr "Modifica la presentació de la imatge"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Carta"
@@ -789,6 +793,10 @@ msgstr "Graelles de coordenades"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copia"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1065,7 +1073,9 @@ msgid "Deleting from the element list..."
 msgstr "Suprimeix de la llista d'elements..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Suprimeix de la taula mensual..."
 
 #: u_translation.rsdeletefrommo2
@@ -1156,6 +1166,10 @@ msgstr "Directori"
 msgid "Directory not found %s"
 msgstr "El directori %s no trobat"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Desconnecta el telescopi"
@@ -1231,6 +1245,10 @@ msgstr "Descarrega %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Descarrega els detalls del país"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3996,6 +4014,10 @@ msgstr "a"
 msgid "Today"
 msgstr "Avui"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Barres d'eines"
@@ -4259,6 +4281,10 @@ msgstr "Magnitud visual"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Voleu veure els objectes abans de llur sortida ?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

@@ -246,6 +246,7 @@ dropdb.caption:=rsDropDatabase;
 CometDB.caption:=rsCometSetting;
 AstDB.caption:=rsAsteroidSett;
 DBtypeGroup.caption:=rsDatabaseType;
+DBtypeGroup.Hint:=rsWarning+crlf+rsChangeToThis;
 GroupBoxLinux.caption:=rsDesktopEnvir;
 Label12.caption:=rsURLLaunchCom;
 LinuxDesktopBox.items[3]:=rsOther;

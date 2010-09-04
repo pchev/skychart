@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-01 18:16+0200\n"
+"PO-Revision-Date: 2010-09-04 12:24+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -523,6 +523,10 @@ msgstr "Modifie le mode de dessin"
 msgid "Change the displayed picture"
 msgstr "Modifie l'affichage de l'image"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr "Si vous modifier ce réglage le programme va redémarrer maintenant!"
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Carte"
@@ -790,6 +794,10 @@ msgstr "Grilles de coordonnées"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copie"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr "Copier de:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1066,7 +1074,8 @@ msgid "Deleting from the element list..."
 msgstr "Suppression depuis la liste des éléments..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Suppression de la table mensuelle..."
 
 #: u_translation.rsdeletefrommo2
@@ -1157,6 +1166,10 @@ msgstr "Répertoire"
 msgid "Directory not found %s"
 msgstr "Répertoire %s pas trouvé"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr "Répertoire introuvable! Veuillez installer le paquet Skychart Pictures."
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Déconnecte le télescope"
@@ -1232,6 +1245,10 @@ msgstr "Télécharge %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Télécharger les détails"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr "Télécharger le fichier"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3997,6 +4014,10 @@ msgstr "à"
 msgid "Today"
 msgstr "Aujourd'hui"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr "dans le fichier:"
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Barre d'outils"
@@ -4260,6 +4281,10 @@ msgstr "Magnitude visuelle"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Voulez-vous voir les objets avant leur lever ?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr "Attention!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
