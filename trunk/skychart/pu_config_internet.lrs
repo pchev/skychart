@@ -85,28 +85,28 @@ LazarusResources.Add('Tf_config_internet','FORMDATA',[
   +#2'r'#7'Caption'#6#23'Online pictures servers'#11'ParentColor'#8#0#0#11'TStr'
   +'ingGrid'#11'DSSpictures'#4'Left'#2#16#6'Height'#3'D'#1#3'Top'#2'0'#5'Width'
   +#3#198#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#0#8'ColCount'#2#2#15'De'
-  +'faultColWidth'#2'x'#9'FixedCols'#2#0#13'GridLineWidth'#2#0#7'Options'#11#15
-  +'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#13'goRan'
-  +'geSelect'#11'goColSizing'#9'goEditing'#18'goAlwaysShowEditor'#14'goSmoothSc'
-  +'roll'#0#8'RowCount'#2#11#8'TabOrder'#2#0#16'TitleFont.Height'#2#245#13'OnEd'
-  +'itingDone'#7#22'DSSpicturesEditingDone'#0#0#7'TButton'#10'DefaultDSS'#4'Lef'
-  +'t'#3#138#1#6'Height'#2#25#3'Top'#3'u'#1#5'Width'#2'K'#25'BorderSpacing.Inne'
-  +'rBorder'#2#4#7'Caption'#6#7'Default'#7'OnClick'#7#15'DefaultDSSClick'#8'Tab'
-  +'Order'#2#1#0#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'2'#3'Top'#3
-  +#178#1#5'Width'#3#226#1#5'Align'#7#8'alBottom'#12'ClientHeight'#2'2'#11'Clie'
-  +'ntWidth'#3#226#1#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4'Left'#3#187#0#6
-  +'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0
-  +#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalR'
-  +'esult'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3#29#1#6'Heigh'
-  +'t'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'Bo'
-  +'rderSpacing.InnerBorder'#2#4#7'Caption'#6#5'Apply'#7'OnClick'#7#12'Button2C'
-  +'lick'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button3'#4'Left'#3#127#1#6'Height'#2
-  +#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderS'
-  +'pacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2
-  +#2#8'TabOrder'#2#2#0#0#7'TButton'#7'Button6'#4'Left'#2'Y'#6'Height'#2#25#3'T'
-  +'op'#2#12#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#7'Caption'#6#4'H'
-  +'elp'#7'OnClick'#7#12'Button6Click'#8'TabOrder'#2#3#0#0#0#17'THTMLHelpDataba'
-  +'se'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2#16#3'top'#3#190#1#0#0
-  +#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2
-  +'%s'#12'AutoRegister'#9#4'left'#2'8'#3'top'#3#190#1#0#0#0
+  +'faultColWidth'#2'x'#9'FixedCols'#2#0#7'Options'#11#15'goFixedVertLine'#15'g'
+  +'oFixedHorzLine'#10'goVertLine'#10'goHorzLine'#13'goRangeSelect'#11'goColSiz'
+  +'ing'#9'goEditing'#18'goAlwaysShowEditor'#14'goSmoothScroll'#0#8'RowCount'#2
+  +#11#8'TabOrder'#2#0#16'TitleFont.Height'#2#245#13'OnEditingDone'#7#22'DSSpic'
+  +'turesEditingDone'#0#0#7'TButton'#10'DefaultDSS'#4'Left'#3#138#1#6'Height'#2
+  +#25#3'Top'#3'u'#1#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'
+  +#6#7'Default'#7'OnClick'#7#15'DefaultDSSClick'#8'TabOrder'#2#1#0#0#0#0#0#6'T'
+  +'Panel'#6'Panel1'#4'Left'#2#0#6'Height'#2'2'#3'Top'#3#178#1#5'Width'#3#226#1
+  +#5'Align'#7#8'alBottom'#12'ClientHeight'#2'2'#11'ClientWidth'#3#226#1#8'TabO'
+  +'rder'#2#1#0#7'TButton'#7'Button1'#4'Left'#3#187#0#6'Height'#2#25#3'Top'#2#12
+  +#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBor'
+  +'der'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'#2#1#8'TabOrder'#2#0
+  +#0#0#7'TButton'#7'Button2'#4'Left'#3#29#1#6'Height'#2#25#3'Top'#2#12#5'Width'
+  +#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#7
+  +'Caption'#6#5'Apply'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#1#0#0#7'TBu'
+  +'tton'#7'Button3'#4'Left'#3#127#1#6'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7
+  +'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#6'Cance'
+  +'l'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#7'TButt'
+  +'on'#7'Button6'#4'Left'#2'Y'#6'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anch'
+  +'ors'#11#5'akTop'#7'akRight'#0#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button6C'
+  +'lick'#8'TabOrder'#2#3#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12
+  +'AutoRegister'#9#4'left'#2#16#3'top'#3#190#1#0#0#22'THTMLBrowserHelpViewer'
+  +#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'l'
+  +'eft'#2'8'#3'top'#3#190#1#0#0#0
 ]);

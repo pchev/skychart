@@ -2,12 +2,12 @@ object f_config_system: Tf_config_system
   Left = 409
   Height = 532
   Top = 126
-  Width = 523
+  Width = 490
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
   Caption = 'System'
   ClientHeight = 532
-  ClientWidth = 523
+  ClientWidth = 490
   Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
@@ -18,25 +18,62 @@ object f_config_system: Tf_config_system
     Left = 0
     Height = 482
     Top = 0
-    Width = 523
+    Width = 490
     Align = alClient
     ClientHeight = 482
-    ClientWidth = 523
+    ClientWidth = 490
     ParentColor = False
     TabOrder = 0
     object Notebook1: TNotebook
       Left = 1
       Height = 480
       Top = 1
-      Width = 521
+      Width = 488
       Align = alClient
-      PageIndex = 2
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
         Caption = 'Page1'
-        ClientWidth = 517
+        ClientWidth = 484
         ClientHeight = 476
+        object SqliteBox: TPanel
+          Left = 17
+          Height = 97
+          Top = 53
+          Width = 452
+          ClientHeight = 97
+          ClientWidth = 452
+          TabOrder = 4
+          object dbnamesqlite: TEdit
+            Left = 125
+            Height = 21
+            Top = 32
+            Width = 281
+            Color = clBtnFace
+            OnChange = dbnamesqliteChange
+            ReadOnly = True
+            TabOrder = 0
+            Text = 'dbnamesqlite'
+          end
+          object Label1: TLabel
+            Left = 13
+            Height = 15
+            Top = 36
+            Width = 109
+            AutoSize = False
+            Caption = 'Database file: '
+            ParentColor = False
+          end
+          object SqliteBoxLabel: TLabel
+            Left = 13
+            Height = 14
+            Top = 12
+            Width = 72
+            Caption = 'SqliteBoxLabel'
+            ParentColor = False
+          end
+        end
         object Label153: TLabel
           Left = 0
           Height = 14
@@ -49,10 +86,10 @@ object f_config_system: Tf_config_system
           Left = 16
           Height = 91
           Top = 267
-          Width = 493
+          Width = 453
           Caption = 'Directory'
           ClientHeight = 76
-          ClientWidth = 489
+          ClientWidth = 449
           TabOrder = 2
           object Label156: TLabel
             Left = 13
@@ -76,7 +113,7 @@ object f_config_system: Tf_config_system
             Left = 179
             Height = 21
             Top = 3
-            Width = 250
+            Width = 240
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
@@ -88,7 +125,7 @@ object f_config_system: Tf_config_system
             Left = 179
             Height = 21
             Top = 42
-            Width = 250
+            Width = 240
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
@@ -101,9 +138,9 @@ object f_config_system: Tf_config_system
           Left = 16
           Height = 98
           Top = 155
-          Width = 493
+          Width = 453
           ClientHeight = 94
-          ClientWidth = 489
+          ClientWidth = 449
           TabOrder = 1
           object chkdb: TButton
             Left = 16
@@ -163,7 +200,7 @@ object f_config_system: Tf_config_system
           Height = 48
           Hint = 'Warning! '#13#10'Change to this setting will restart the program now!'
           Top = 3
-          Width = 335
+          Width = 295
           AutoFill = True
           Caption = 'Database Type'
           ChildSizing.LeftRightSpacing = 6
@@ -175,7 +212,7 @@ object f_config_system: Tf_config_system
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
           ClientHeight = 33
-          ClientWidth = 331
+          ClientWidth = 291
           Columns = 2
           ItemIndex = 0
           Items.Strings = (
@@ -191,10 +228,10 @@ object f_config_system: Tf_config_system
           Left = 17
           Height = 92
           Top = 367
-          Width = 492
+          Width = 452
           Caption = 'Desktop environment'
           ClientHeight = 77
-          ClientWidth = 488
+          ClientWidth = 448
           TabOrder = 3
           object Label12: TLabel
             Left = 203
@@ -206,7 +243,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 21
+            Height = 23
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -236,12 +273,12 @@ object f_config_system: Tf_config_system
           Left = 17
           Height = 97
           Top = 53
-          Width = 492
+          Width = 452
           ClientHeight = 97
-          ClientWidth = 492
+          ClientWidth = 452
           TabOrder = 5
           object dbpass: TEdit
-            Left = 354
+            Left = 348
             Height = 21
             Top = 64
             Width = 100
@@ -270,7 +307,7 @@ object f_config_system: Tf_config_system
             Text = 'dbhost'
           end
           object dbport: TLongEdit
-            Left = 397
+            Left = 391
             Height = 21
             Top = 24
             Width = 57
@@ -337,47 +374,10 @@ object f_config_system: Tf_config_system
             ParentColor = False
           end
         end
-        object SqliteBox: TPanel
-          Left = 17
-          Height = 97
-          Top = 53
-          Width = 492
-          ClientHeight = 97
-          ClientWidth = 492
-          TabOrder = 4
-          object dbnamesqlite: TEdit
-            Left = 125
-            Height = 21
-            Top = 32
-            Width = 281
-            Color = clBtnFace
-            OnChange = dbnamesqliteChange
-            ReadOnly = True
-            TabOrder = 0
-            Text = 'dbnamesqlite'
-          end
-          object Label1: TLabel
-            Left = 13
-            Height = 15
-            Top = 36
-            Width = 109
-            AutoSize = False
-            Caption = 'Database file: '
-            ParentColor = False
-          end
-          object SqliteBoxLabel: TLabel
-            Left = 13
-            Height = 14
-            Top = 12
-            Width = 72
-            Caption = 'SqliteBoxLabel'
-            ParentColor = False
-          end
-        end
       end
       object Page2: TPage
         Caption = 'Page2'
-        ClientWidth = 517
+        ClientWidth = 484
         ClientHeight = 476
         object GroupBox3: TGroupBox
           Left = 16
@@ -444,7 +444,7 @@ object f_config_system: Tf_config_system
       end
       object Page3: TPage
         Caption = 'Page3'
-        ClientWidth = 517
+        ClientWidth = 484
         ClientHeight = 476
         object TelescopePlugin: TPanel
           Left = 8
@@ -909,7 +909,7 @@ object f_config_system: Tf_config_system
       end
       object Page4: TPage
         Caption = 'Page4'
-        ClientWidth = 517
+        ClientWidth = 484
         ClientHeight = 476
         object Label14: TLabel
           Left = 19
@@ -921,7 +921,7 @@ object f_config_system: Tf_config_system
         end
         object LanguageList: TComboBox
           Left = 17
-          Height = 21
+          Height = 24
           Top = 82
           Width = 260
           ItemHeight = 0
@@ -936,13 +936,13 @@ object f_config_system: Tf_config_system
     Left = 0
     Height = 50
     Top = 482
-    Width = 523
+    Width = 490
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 523
+    ClientWidth = 490
     TabOrder = 1
     object Button1: TButton
-      Left = 239
+      Left = 206
       Height = 25
       Top = 12
       Width = 75
@@ -954,7 +954,7 @@ object f_config_system: Tf_config_system
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 335
+      Left = 302
       Height = 25
       Top = 12
       Width = 75
@@ -965,7 +965,7 @@ object f_config_system: Tf_config_system
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 425
+      Left = 392
       Height = 25
       Top = 12
       Width = 75
@@ -977,7 +977,7 @@ object f_config_system: Tf_config_system
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 150
+      Left = 117
       Height = 25
       Top = 12
       Width = 75

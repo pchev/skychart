@@ -31,7 +31,7 @@ object f_config_chart: Tf_config_chart
       Width = 508
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 3
+      PageIndex = 4
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -1803,9 +1803,9 @@ object f_config_chart: Tf_config_chart
         ClientHeight = 457
         object Label159: TLabel
           Left = 0
-          Height = 20
+          Height = 14
           Top = 0
-          Width = 69
+          Width = 57
           Caption = 'Grid Setting'
           ParentColor = False
         end
@@ -1841,89 +1841,89 @@ object f_config_chart: Tf_config_chart
         end
         object Label161: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 107
-          Width = 8
+          Width = 7
           Caption = '1'
           ParentColor = False
         end
         object Label162: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 132
-          Width = 8
+          Width = 7
           Caption = '2'
           ParentColor = False
         end
         object Label163: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 157
-          Width = 8
+          Width = 7
           Caption = '3'
           ParentColor = False
         end
         object Label164: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 182
-          Width = 8
+          Width = 7
           Caption = '4'
           ParentColor = False
         end
         object Label166: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 82
-          Width = 8
+          Width = 7
           Caption = '0'
           ParentColor = False
         end
         object Label167: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 207
-          Width = 8
+          Width = 7
           Caption = '5'
           ParentColor = False
         end
         object Label168: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 232
-          Width = 8
+          Width = 7
           Caption = '6'
           ParentColor = False
         end
         object Label169: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 257
-          Width = 8
+          Width = 7
           Caption = '7'
           ParentColor = False
         end
         object Label170: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 282
-          Width = 8
+          Width = 7
           Caption = '8'
           ParentColor = False
         end
         object Label174: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 307
-          Width = 8
+          Width = 7
           Caption = '9'
           ParentColor = False
         end
         object Label177: TLabel
           Left = 29
-          Height = 20
+          Height = 14
           Top = 332
-          Width = 15
+          Width = 13
           Caption = '10'
           ParentColor = False
         end
@@ -1939,9 +1939,9 @@ object f_config_chart: Tf_config_chart
         end
         object Label4: TLabel
           Left = 67
-          Height = 20
+          Height = 14
           Top = 365
-          Width = 111
+          Width = 94
           Caption = 'Compass rose size'
           ParentColor = False
         end
@@ -2028,8 +2028,8 @@ object f_config_chart: Tf_config_chart
         object CheckBox13: TCheckBox
           Left = 261
           Height = 21
-          Top = 363
-          Width = 182
+          Top = 387
+          Width = 164
           Caption = 'Always show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 23
@@ -2053,9 +2053,9 @@ object f_config_chart: Tf_config_chart
           TabOrder = 35
         end
         object Button2: TButton
-          Left = 389
+          Left = 261
           Height = 25
-          Top = 387
+          Top = 413
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'

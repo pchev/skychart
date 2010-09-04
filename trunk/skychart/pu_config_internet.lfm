@@ -334,7 +334,6 @@ object f_config_internet: Tf_config_internet
           ColCount = 2
           DefaultColWidth = 120
           FixedCols = 0
-          GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
           RowCount = 11
           TabOrder = 0

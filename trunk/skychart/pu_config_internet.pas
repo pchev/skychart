@@ -204,7 +204,7 @@ procedure Tf_config_internet.ShowDSS;
 var i:integer;
 begin
 DSSpictures.RowCount:=MaxDSSurl+1;
-DSSpictures.ColWidths[1]:=DSSpictures.ClientWidth-DSSpictures.ColWidths[0];
+DSSpictures.ColWidths[1]:=DSSpictures.ClientWidth-20;
 DSSpictures.Cells[0, 0]:=rsName;
 DSSpictures.Cells[1, 0]:=rsURL;
 for i:=1 to MaxDSSurl do begin
