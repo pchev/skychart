@@ -520,6 +520,10 @@ msgstr "Změnit způsob vykreslování"
 msgid "Change the displayed picture"
 msgstr "Změnit zobrazení obrázků"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Mapa"
@@ -787,6 +791,10 @@ msgstr "Souřadnice"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopírovat"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1063,7 +1071,9 @@ msgid "Deleting from the element list..."
 msgstr "Smazat ze seznamu prvků"
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Smazat z měsíční tabulky"
 
 #: u_translation.rsdeletefrommo2
@@ -1154,6 +1164,10 @@ msgstr "Adresář"
 msgid "Directory not found %s"
 msgstr "Adresář %s nebyl nalezen"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Odpojit dalekohled"
@@ -1229,6 +1243,10 @@ msgstr "Stádnout %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Stáhnout pozice"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3994,6 +4012,10 @@ msgstr "do"
 msgid "Today"
 msgstr "Dnes"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Nástrojové lišty"
@@ -4257,6 +4279,10 @@ msgstr "Vizuální magnituda"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Objekty pod horizontem"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

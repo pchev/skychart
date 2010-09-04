@@ -623,6 +623,10 @@ msgstr "Megjelenítés módja"
 msgid "Change the displayed picture"
 msgstr "Képek megjelenítésének megváltoztatása"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Térkép"
@@ -963,6 +967,10 @@ msgstr "Koordináta hálók"
 msgid "Copy"
 msgstr "Másolás"
 
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
+
 #: u_translation.rscoreradius
 #, fuzzy
 #| msgid "Core Radius"
@@ -1293,8 +1301,8 @@ msgstr "Törlés az alap listából..."
 
 #: u_translation.rsdeletefrommo
 #, fuzzy
-#| msgid "Delete from monthly table..."
-msgid "Deleting from the monthly table for jd<%s"
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Törlés a havi táblából..."
 
 #: u_translation.rsdeletefrommo2
@@ -1399,6 +1407,10 @@ msgstr "Könyvtár"
 msgid "Directory not found %s"
 msgstr "Nem található a könyvtár: %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 #, fuzzy
 #| msgid "Disconnect Telescope"
@@ -1486,6 +1498,10 @@ msgstr "Letöltés %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Ország adatok letöltése"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 #, fuzzy
@@ -4821,6 +4837,10 @@ msgstr "-ig:"
 msgid "Today"
 msgstr "Ma"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 #, fuzzy
 #| msgid "Tool Bar"
@@ -5144,6 +5164,10 @@ msgstr "Vizuális magnitúdó"
 #| msgid "Want to track an object before it rise ?"
 msgid "Do you want to track an object before it rises?"
 msgstr "Szeretnéd az objektumot kelése előtt is követni?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

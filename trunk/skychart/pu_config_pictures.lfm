@@ -31,7 +31,7 @@ object f_config_pictures: Tf_config_pictures
       Width = 511
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 1
+      PageIndex = 0
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -40,17 +40,17 @@ object f_config_pictures: Tf_config_pictures
         ClientHeight = 479
         object Label50: TLabel
           Left = 2
-          Height = 19
+          Height = 14
           Top = 2
-          Width = 254
+          Width = 168
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
         object Label264: TLabel
           Left = 15
-          Height = 19
+          Height = 14
           Top = 46
-          Width = 117
+          Width = 76
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -75,9 +75,9 @@ object f_config_pictures: Tf_config_pictures
           Visible = False
           object ProgressCat: TLabel
             Left = 187
-            Height = 19
+            Height = 14
             Top = 8
-            Width = 43
+            Width = 28
             Caption = 'Other'
             ParentColor = False
           end
@@ -109,17 +109,17 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 2
           object Label266: TLabel
             Left = 32
-            Height = 19
+            Height = 14
             Top = 32
-            Width = 79
+            Width = 52
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label268: TLabel
             Left = 40
-            Height = 19
+            Height = 14
             Top = 96
-            Width = 64
+            Width = 42
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -162,16 +162,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 22
+          Height = 21
           Top = 375
-          Width = 271
+          Width = 187
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 3
         end
         object imgpath: TDirectoryEdit
           Left = 150
-          Height = 24
+          Height = 21
           Top = 39
           Width = 264
           ShowHidden = False

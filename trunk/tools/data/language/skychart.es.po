@@ -519,6 +519,10 @@ msgstr "Cambiar Modo de Dibujo"
 msgid "Change the displayed picture"
 msgstr "Cambiar mostrado de Imágenes"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Carta"
@@ -786,6 +790,10 @@ msgstr "Coordenadas de Grila"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copiar"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1062,7 +1070,9 @@ msgid "Deleting from the element list..."
 msgstr "Borrar de lista de elementos..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Borrar de tabla mensual..."
 
 #: u_translation.rsdeletefrommo2
@@ -1153,6 +1163,10 @@ msgstr "Directorio"
 msgid "Directory not found %s"
 msgstr "Directorio no encontrado %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Desconectar Telescopio"
@@ -1228,6 +1242,10 @@ msgstr "Descargar %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Descargar detalles de país"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3993,6 +4011,10 @@ msgstr "a"
 msgid "Today"
 msgstr "Hoy"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Barra de Herramientas"
@@ -4256,6 +4278,10 @@ msgstr "Magnitud Visual"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Desea seguir un objeto antes de su salida ?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

@@ -521,6 +521,10 @@ msgstr "Anzeigemodus ändern"
 msgid "Change the displayed picture"
 msgstr "Angezeigtes Bild ändern"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Karte"
@@ -789,6 +793,10 @@ msgstr "Koordinatengitter"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopieren"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1065,7 +1073,9 @@ msgid "Deleting from the element list..."
 msgstr "Aus Elementenliste löschen ..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Aus Monatstabelle löschen, für JD< %s"
 
 #: u_translation.rsdeletefrommo2
@@ -1156,6 +1166,10 @@ msgstr "Verzeichnis"
 msgid "Directory not found %s"
 msgstr "Verzeichnis nicht gefunden %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Teleskop trennen"
@@ -1231,6 +1245,10 @@ msgstr "%s herunterladen"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Länderdetails herunterladen"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3999,6 +4017,10 @@ msgstr "bis"
 msgid "Today"
 msgstr "Heute"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Werkzeugleisten"
@@ -4262,6 +4284,10 @@ msgstr "Visuelle Helligkeit"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Möchten Sie das Objekt vor dem Aufgang nachführen?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

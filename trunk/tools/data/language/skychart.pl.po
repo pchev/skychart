@@ -525,6 +525,10 @@ msgstr "Zmień tryb rysowania"
 msgid "Change the displayed picture"
 msgstr "Zmień wyświetlany obraz"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Mapa"
@@ -792,6 +796,10 @@ msgstr "Siatka współrzędnych"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopiuj"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1068,7 +1076,9 @@ msgid "Deleting from the element list..."
 msgstr "Kasowanie z listy elementów..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Kasowanie z tabeli miesięcznej dla jd<%s"
 
 #: u_translation.rsdeletefrommo2
@@ -1159,6 +1169,10 @@ msgstr "Lokalizacja"
 msgid "Directory not found %s"
 msgstr "Folder nie znaleziony %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Odłącz teleskop"
@@ -1234,6 +1248,10 @@ msgstr "Pobierz %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Pobierz szczegóły kraju"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3999,6 +4017,10 @@ msgstr "do"
 msgid "Today"
 msgstr "Dziś"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Pasek narzędziowy"
@@ -4262,6 +4284,10 @@ msgstr "Wielkość gwiazd. obserwowana"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Czy chcesz śledzić obiekty przed wyniesieniem ponad horyzont?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"

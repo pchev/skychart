@@ -4,7 +4,7 @@ object f_catgenadv: Tf_catgenadv
   Top = 176
   Width = 224
   ActiveControl = Edit1
-  BorderStyle = bsDialog
+  BorderStyle = bsToolWindow
   Caption = 'Compute Field'
   ClientHeight = 263
   ClientWidth = 224
@@ -51,9 +51,10 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label4: TLabel
     Left = 8
-    Height = 14
+    Height = 56
     Top = 8
-    Width = 437
+    Width = 208
+    AutoSize = False
     Caption = 'Indicate here how to compute the require value from the data stored in the catalog text file.'
     ParentColor = False
     WordWrap = True

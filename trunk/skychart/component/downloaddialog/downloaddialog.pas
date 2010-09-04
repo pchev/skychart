@@ -65,6 +65,7 @@ type
     FFWMode : Integer;
     FFWpassive : Boolean;
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
+    FDownloadFile,FCopyfrom,Ftofile,FDownload,FCancel: String;
     FConfirmDownload: Boolean;
     DF:TForm;
     okButton,cancelButton:TButton;
@@ -84,6 +85,11 @@ type
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
     function Execute: Boolean; override;
+    property msgDownloadFile :String read FDownloadFile write FDownloadFile;
+    property msgCopyfrom :String read FCopyfrom write FCopyfrom;
+    property msgtofile :String read Ftofile write Ftofile;
+    property msgDownloadBtn :String read FDownload write FDownload;
+    property msgCancelBtn :String read FCancel write FCancel;
   published
     property URL : string read Furl write Furl;
     property SaveToFile : string read Ffile write Ffile;
@@ -135,6 +141,11 @@ begin
   FFWMode:=0;
   FFWpassive:=true;
   FConfirmDownload:=true;
+  FDownloadFile:='Download File';
+  FCopyfrom:='Copy from:';
+  Ftofile:='to file:';
+  FDownload:='Download';
+  FCancel:='Cancel';
 end;
 
 destructor TDownloadDialog.Destroy;
@@ -151,7 +162,7 @@ begin
   FResponse:='';
   Ffirsturl:=Furl;
   DF:=TForm.Create(Self);
-  DF.Caption:='Download File';
+  DF.Caption:=FDownloadFile;
   DF.FormStyle:=fsStayOnTop;
   DF.BorderStyle:=bsDialog;
   DF.AutoSize:=false;
@@ -164,7 +175,7 @@ begin
     Parent:=DF;
     width:=400;
     text:=Furl;
-    EditLabel.Caption:=' Copy from:';
+    EditLabel.Caption:=' '+FCopyfrom;
     top:=Editlabel.Height+4;
     left:=8;
     readonly:=true;
@@ -178,7 +189,7 @@ begin
     Parent:=DF;
     width:=400;
     text:=systoutf8(Ffile);
-    EditLabel.Caption:=' to file:';
+    EditLabel.Caption:=' '+Ftofile;
     top:=Editlabel.Height+urltxt.Top+urltxt.Height+4;
     left:=8;
     readonly:=true;
@@ -199,7 +210,7 @@ begin
   okButton:=TButton.Create(self);
   with okButton do begin
     Parent:=DF;
-    Caption:='Download';
+    Caption:=FDownload;
     onClick:=@BtnDownload;
     top:=progress.Top+progress.Height+4;
     left:=8;
@@ -209,7 +220,7 @@ begin
   cancelButton:=TButton.Create(self);
   with cancelButton do begin
     Parent:=DF;
-    Caption:='Cancel';
+    Caption:=FCancel;
     onClick:=@BtnCancel;
     top:=okButton.top;
     left:=progress.Width-cancelButton.Width-8;

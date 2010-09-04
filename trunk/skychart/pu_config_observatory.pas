@@ -228,6 +228,11 @@ Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
 SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgObs);
+DownloadDialog1.msgDownloadFile:=rsDownloadFile;
+DownloadDialog1.msgCopyfrom:=rsCopyFrom;
+DownloadDialog1.msgtofile:=rsToFile;
+DownloadDialog1.msgDownloadBtn:=rsDownload;
+DownloadDialog1.msgCancelBtn:=rsCancel;
 end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);

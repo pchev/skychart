@@ -325,7 +325,7 @@ screen.cursor:=crDefault;
 ProgressPanel.visible:=false;
 nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 end else begin
-  nimages.Caption:='Directory not found! Please install the Skychart Pictures package.';
+  nimages.Caption:=rsDirectoryNot2;
 end;
 end;
 

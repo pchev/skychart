@@ -907,7 +907,7 @@ resourcestring
   rsInvalidEpoch = 'invalid epoch on line%s: %s';
   rsMoreThan1000 = 'More than 1000 errors! The processing is aborted.';
   rsProcessingEn2 = 'Processing ended. Total number of asteroids: %s';
-  rsDeleteFromMo = 'Deleting from the monthly table for jd<%s';
+  rsDeleteFromMo = 'Deleting from the monthly table ...';
   rsDeleteFromMo2 = 'Delete from monthly table for jd<%s';
   rsDBInsertFail = 'DB insert failed for %s: %s';
   rsInvalidFITSF = 'Invalid FITS file: %s';
@@ -1102,6 +1102,13 @@ resourcestring
     +'years. Try to find element valid for the current map date.';
   rsWarningSomeA = 'Warning! Some asteroid elements are outdated by more '
     +'than 3 years. Try to find element valid for the current map date.';
+  rsDirectoryNot2 = 'Directory not found! Please install the Skychart '
+    +'Pictures package.';
+  rsWarning = 'Warning!';
+  rsChangeToThis = 'Change to this setting will restart the program now!';
+  rsDownloadFile = 'Download File';
+  rsCopyFrom = 'Copy from:';
+  rsToFile = 'to file:';
 
 implementation
 

@@ -522,6 +522,10 @@ msgstr "Зміна типу рисування"
 msgid "Change the displayed picture"
 msgstr "Зміна відображення картинок"
 
+#: u_translation.rschangetothis
+msgid "Change to this setting will restart the program now!"
+msgstr ""
+
 #: u_translation.rschart
 msgid "Chart"
 msgstr "Мапа"
@@ -789,6 +793,10 @@ msgstr "Координатна сітка"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Копія"
+
+#: u_translation.rscopyfrom
+msgid "Copy from:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1065,7 +1073,9 @@ msgid "Deleting from the element list..."
 msgstr "Видалити із переліку елементів..."
 
 #: u_translation.rsdeletefrommo
-msgid "Deleting from the monthly table for jd<%s"
+#, fuzzy
+#| msgid "Deleting from the monthly table for jd<%s"
+msgid "Deleting from the monthly table ..."
 msgstr "Видалити зі щомісячної таблиці..."
 
 #: u_translation.rsdeletefrommo2
@@ -1156,6 +1166,10 @@ msgstr "Директорія"
 msgid "Directory not found %s"
 msgstr "Директорія не знайдена %s"
 
+#: u_translation.rsdirectorynot2
+msgid "Directory not found! Please install the Skychart Pictures package."
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Відключення телескопу"
@@ -1231,6 +1245,10 @@ msgstr "Завантажено %s"
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Завантажити населені пункти"
+
+#: u_translation.rsdownloadfile
+msgid "Download File"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -3996,6 +4014,10 @@ msgstr "до"
 msgid "Today"
 msgstr "Сьогодні"
 
+#: u_translation.rstofile
+msgid "to file:"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Панель інструментів"
@@ -4259,6 +4281,10 @@ msgstr "Візуальна величина"
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
 msgstr "Бажаєте прослідкувати об'єкт до його сходу?"
+
+#: u_translation.rswarning
+msgid "Warning!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
