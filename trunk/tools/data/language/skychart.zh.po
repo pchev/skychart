@@ -197,6 +197,10 @@ msgstr "近日点幅角"
 msgid "Artificial satellites"
 msgstr "人造卫星"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr ""
@@ -4220,6 +4224,10 @@ msgstr "使用系统时间"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "使用 TCP/IP 服务器"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

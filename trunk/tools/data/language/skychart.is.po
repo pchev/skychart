@@ -233,6 +233,10 @@ msgstr "Stöðuhorn sólnándar"
 msgid "Artificial satellites"
 msgstr "Gervitungl"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Biðja um staðfestingu áður en nettengingu er komið á"
@@ -5110,6 +5114,10 @@ msgstr "Nota kerfistíma"
 #| msgid "Use TCP/IP Server"
 msgid "Use TCP/IP server"
 msgstr "Nota TCP/IP þjón"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

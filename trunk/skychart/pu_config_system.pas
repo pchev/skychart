@@ -290,6 +290,7 @@ TelescopeSelect.Items[1]:=rsManualMount;
 {$ifdef mswindows}
 TelescopeSelect.Items[2]:=rsCDCPlugin;
 {$endif}
+ASCOMLabel.Caption:=rsASCOMTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;

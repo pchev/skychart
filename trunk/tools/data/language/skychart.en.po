@@ -195,6 +195,10 @@ msgstr ""
 msgid "Artificial satellites"
 msgstr ""
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr ""
@@ -4215,6 +4219,10 @@ msgstr ""
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
+msgstr ""
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr ""
 
 #: u_translation.rsusetheproper
