@@ -196,6 +196,10 @@ msgstr ""
 msgid "Artificial satellites"
 msgstr "Umetni sateliti"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Zahtevaj potrditev pred dostopom do medmrežja"
@@ -4219,6 +4223,10 @@ msgstr "Uporabi sistemski čas"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Uporabni TCP/IP strežnik"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

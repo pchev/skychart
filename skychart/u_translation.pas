@@ -1109,6 +1109,8 @@ resourcestring
   rsDownloadFile = 'Download File';
   rsCopyFrom = 'Copy from:';
   rsToFile = 'to file:';
+  rsASCOMTelesco = 'ASCOM telescope driver';
+  rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
 
 implementation
 

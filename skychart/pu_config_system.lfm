@@ -30,7 +30,7 @@ object f_config_system: Tf_config_system
       Top = 1
       Width = 488
       Align = alClient
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -503,7 +503,7 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 25
+            ClientHeight = 37
             ClientWidth = 357
             Columns = 2
             Items.Strings = (
@@ -897,12 +897,14 @@ object f_config_system: Tf_config_system
           ClientWidth = 452
           TabOrder = 4
           object ASCOMLabel: TLabel
-            Left = 13
-            Height = 14
-            Top = 6
-            Width = 65
+            Left = 21
+            Height = 232
+            Top = 24
+            Width = 401
+            AutoSize = False
             Caption = 'ASCOMLabel'
             ParentColor = False
+            WordWrap = True
           end
         end
       end

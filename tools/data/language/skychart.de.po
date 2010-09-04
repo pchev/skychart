@@ -195,6 +195,10 @@ msgstr "Perihelwinkel"
 msgid "Artificial satellites"
 msgstr "Künstliche Satelliten"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Vor dem Herstellen einer Internetverbindung nachfragen"
@@ -4224,6 +4228,10 @@ msgstr "Systemzeit benutzen"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "TCP/IP Server benutzen"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

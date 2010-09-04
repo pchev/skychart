@@ -195,6 +195,10 @@ msgstr "Argument van het perihelium"
 msgid "Artificial satellites"
 msgstr "Kunstmatige satellieten"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Vraag bevestiging voor iedere Internet verbinding"
@@ -4218,6 +4222,10 @@ msgstr "Gebruik systeemtijd"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Gebruik TCP/IP server"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

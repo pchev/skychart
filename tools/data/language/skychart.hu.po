@@ -233,6 +233,10 @@ msgstr "Pericentrum argumentum-omega"
 msgid "Artificial satellites"
 msgstr "Műholdak"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Megerősítés kérése internet kapcsolat létesítése esetén"
@@ -5088,6 +5092,10 @@ msgstr "A rendszeridő használata"
 #| msgid "Use TCP/IP Server"
 msgid "Use TCP/IP server"
 msgstr "TCP/IP szerver használata"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

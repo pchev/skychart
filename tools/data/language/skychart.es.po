@@ -195,6 +195,10 @@ msgstr "Argumento de Perihelio"
 msgid "Artificial satellites"
 msgstr "Satélites Artificiales"
 
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr ""
@@ -4218,6 +4222,10 @@ msgstr "Usar Hora del Sistema"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Usar Servidor TCP/IP"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"

@@ -4366,3 +4366,11 @@ msgstr ""
 msgid "to file:"
 msgstr ""
 
+#: u_translation:rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr ""
+
+#: u_translation:rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr ""
+

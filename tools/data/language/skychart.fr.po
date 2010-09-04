@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-04 12:24+0200\n"
+"PO-Revision-Date: 2010-09-04 15:53+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -197,6 +197,10 @@ msgstr "Argument du périhélie"
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Satellites artificiels"
+
+#: u_translation.rsascomtelesco
+msgid "ASCOM telescope driver"
+msgstr "Pilote de télescope ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -4221,6 +4225,10 @@ msgstr "Utilise l'heure du système"
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
 msgstr "Utiliser le serveur"
+
+#: u_translation.rsusethemenuor
+msgid "Use the menu or button \"%s\" to configure this driver."
+msgstr "Utilisez le menu ou bouton \"%s\" pour configurer ce pilote."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
