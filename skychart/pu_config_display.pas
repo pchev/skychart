@@ -729,8 +729,11 @@ LockChange:=false;
 end;
 
 procedure Tf_config_display.GridStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleGrid:=TPenStyle(GridStyle.itemindex);
+i:=GridStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleGrid:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.StarButton5Click(Sender: TObject);
@@ -758,8 +761,11 @@ cplot.starsize:=StarSizeBar1.Position;
 end;
 
 procedure Tf_config_display.EqGridStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleEqGrid:=TPenStyle(EqGridStyle.itemindex);
+i:=EqGridStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleEqGrid:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.FileNameEdit1Change(Sender: TObject);
@@ -768,8 +774,11 @@ begin
 end;
 
 procedure Tf_config_display.CFStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleConstL:=TPenStyle(CFStyle.itemindex);
+i:=CFStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleConstL:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.CheckBox1Click(Sender: TObject);
@@ -788,18 +797,27 @@ csc.DrawAllStarLabel:=DrawAllStarLabel.Checked;
 end;
 
 procedure Tf_config_display.GalEqStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleGalEq:=TPenStyle(GalEqStyle.itemindex);
+i:=GalEqStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleGalEq:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.EclipticStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleEcliptic:=TPenStyle(EclipticStyle.itemindex);
+i:=EclipticStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleEcliptic:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.CBStyleChange(Sender: TObject);
+var i:integer;
 begin
-csc.StyleConstB:=TPenStyle(CBStyle.itemindex);
+i:=CBStyle.itemindex;
+if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
+   csc.StyleConstB:=TPenStyle(i);
 end;
 
 procedure Tf_config_display.StyleDrawItem(Control: TWinControl;
