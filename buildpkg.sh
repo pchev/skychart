@@ -6,6 +6,22 @@ builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is
 innosetup="C:\Program Files\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
 wine_build="Z:\tmp\skychart" # Change to match builddir, Z: is defined in ~/.wine/dosdevices
 
+arch=$(arch)
+
+# adjuste here the target you want to crossbuild
+# You MUST crosscompile Freepascal and Lazarus for this targets! 
+
+unset make_linux32
+make_linux32=1
+unset make_linux64
+if [[ $arch -eq x86_64 ]]; then make_linux64=1;fi
+unset make_linux_data
+make_linux_data=1
+unset make_win32
+make_win32=1
+unset make_win64
+make_win64=1
+
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
 fi
@@ -14,11 +30,6 @@ if [[ -n $2 ]]; then
 fi
 
 wd=`pwd`
-
-# update to last revision
-#svn up --force --non-interactive --accept theirs-full    # svn 1.5 only
-svn -R revert .
-svn up --non-interactive
 
 # check if new revision since last run
 read lastrev <last.build
@@ -40,6 +51,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   rm -rf $builddir
 
 # make Linux i386 version
+if [[ $make_linux32 ]]; then
   ./configure $configopt prefix=$builddir target=i386-linux,x86_64-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=i386 OS_TARGET=linux clean
@@ -95,8 +107,10 @@ if [[ $lastrev -ne $currentrev ]]; then
 
   cd $wd
   rm -rf $builddir
+fi
 
 # make Linux x86_64 version
+if [[ $make_linux64 ]]; then
   ./configure $configopt prefix=$builddir target=x86_64-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=x86_64 OS_TARGET=linux clean
@@ -155,8 +169,10 @@ if [[ $lastrev -ne $currentrev ]]; then
 
   cd $wd
   rm -rf $builddir
+fi
 
 # make Windows i386 version
+if [[ $make_win32 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
   ./configure $configopt prefix=$builddir/Data target=i386-win32,x86_64-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -195,8 +211,10 @@ if [[ $lastrev -ne $currentrev ]]; then
 
   cd $wd
   rm -rf $builddir
+fi
 
 # make Windows x86_64 version
+if [[ $make_win64 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
   ./configure $configopt prefix=$builddir/Data target=x86_64-win64,x86_64-linux
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -232,9 +250,10 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin-*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
+fi
 
-  cd $wd
-  rm -rf $builddir
+cd $wd
+rm -rf $builddir
 
 
 # store revision 
