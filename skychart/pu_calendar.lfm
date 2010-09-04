@@ -122,13 +122,14 @@ object f_calendar: Tf_calendar
     object step: TLongEdit
       Left = 216
       Height = 21
-      Hint = '0..9999'
+      Hint = '1..9999'
       Top = 41
       Width = 33
       ParentShowHint = False
       ShowHint = True
       TabOrder = 3
       Value = 1
+      MinValue = 1
       MaxValue = 9999
     end
     object Date1: TJDDatePicker
@@ -189,7 +190,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.08.21.01'
+      Text = '2010.09.04.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -251,7 +252,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.08.21.01'
+      Text = '2010.09.04.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end

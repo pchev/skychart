@@ -1124,8 +1124,11 @@ end;
 
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var z1,z2: string;
+    s: integer;
 begin
 chdir(appdir);
+s:=StrToIntDef(step.text,0);
+if s<=0 then exit;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
      1 : RefreshPlanet;

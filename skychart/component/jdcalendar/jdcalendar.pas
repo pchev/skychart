@@ -163,7 +163,7 @@ type
     // minimal DateTimePicker
   private
     { Private declarations }
-    EditH, EditM, EditS: TEdit;
+    EditH, EditM, EditS: TLongEdit;
     LabelH, LabelM: TLabel;
     lockchange: boolean;
     FOnChange: TNotifyEvent;
@@ -860,9 +860,9 @@ begin
   BevelOuter := bvNone;
   dsize := 25;
   lsize := 10;
-  EditH := TEdit.Create(self);
-  EditM := TEdit.Create(self);
-  EditS := TEdit.Create(self);
+  EditH := TLongEdit.Create(self);
+  EditM := TLongEdit.Create(self);
+  EditS := TLongEdit.Create(self);
   LabelH := TLabel.Create(self);
   LabelM := TLabel.Create(self);
   EditH.Parent := self;
@@ -875,21 +875,27 @@ begin
   EditS.ParentFont := True;
   LabelH.ParentFont := True;
   LabelM.ParentFont := True;
-  EditH.Text := '0';
+  EditH.Value := 0;
+  EditH.MinValue:=0;
+  EditH.MaxValue:=23;
   EditH.Top := 0;
   EditH.Left := 0;
   EditH.Width := dsize;
   LabelH.Caption := ':';
   LabelH.Top := (EditH.Height - LabelH.Height) div 2;
   LabelH.Left := EditH.Left + EditH.Width + 2;
-  EditM.Text := '0';
+  EditM.Value := 0;
+  EditM.MinValue:=0;
+  EditM.MaxValue:=59;
   EditM.Top := 0;
   EditM.Left := LabelH.Left + lsize;
   EditM.Width := dsize;
   LabelM.Caption := ':';
   LabelM.Top := LabelH.Top;
   LabelM.Left := EditM.Left + EditM.Width + 2;
-  EditS.Text := '0';
+  EditS.Value := 0;
+  EditS.MinValue:=0;
+  EditS.MaxValue:=59;
   EditS.Top := 0;
   EditS.Left := LabelM.Left + lsize;
   EditS.Width := dsize;
