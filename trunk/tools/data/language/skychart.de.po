@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-08-29 00:43+0100\n"
+"PO-Revision-Date: 2010-09-04 21:23+0100\n"
 "Last-Translator: Andreas Langbein <andreas.langbein@gmx.net>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -153,11 +153,11 @@ msgstr "Höhe"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt Drehung:"
+msgstr "%sAlt Umdrehungen:"
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
-msgstr "Kompaß immer anzeigen"
+msgstr "Kompass immer anzeigen"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -197,7 +197,7 @@ msgstr "Künstliche Satelliten"
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
-msgstr ""
+msgstr "ASCOM Teleskop-Treiber"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -285,7 +285,7 @@ msgstr "Azimutale Koordinaten"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz Drehung:"
+msgstr "%sAz Umdrehungen:"
 
 #: u_translation.rsb
 msgid "B"
@@ -337,11 +337,11 @@ msgstr "Bitmap-Datei"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
-msgstr "Schwarz auf Weiss"
+msgstr "Schwarz auf Weiß"
 
 #: u_translation.rsblackwhite
 msgid "Black/white"
-msgstr "Schwarz/Weiss"
+msgstr "Schwarz/Weiß"
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
@@ -425,7 +425,7 @@ msgstr "%sKann Datenbank %s nicht öffnen! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Keine Schreibberechtigung für"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -457,7 +457,7 @@ msgstr "Katalogart"
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%sCCW"
+msgstr "%snach links"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -527,7 +527,7 @@ msgstr "Angezeigtes Bild ändern"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "Nach der Änderung dieser Einstellung wird das Programm neu gestartet!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -571,7 +571,7 @@ msgstr "Farbe für die Objektklassen wählen"
 
 #: u_translation.rscircle
 msgid "Circle"
-msgstr "Aufsuchhilfen rund (Okular)"
+msgstr "Okular"
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
@@ -668,7 +668,7 @@ msgstr "Eigenname"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "Größe der Kompaßrose"
+msgstr "Größe der Kompassrose"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -708,7 +708,7 @@ msgstr "%s verbunden mit %s, benutze Karte %s, Zeit verbunden:%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr "Verbunden zur SQL Databank %s"
+msgstr "Verbunden zur SQL Datenbank %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -800,7 +800,7 @@ msgstr "Kopieren"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "Herunterladen von:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -840,7 +840,7 @@ msgstr "Erzeuge Header"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Erzeuge Postscript Karte. Bitte warten..."
+msgstr "Erzeuge PostScript Karte. Bitte warten..."
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
@@ -856,7 +856,7 @@ msgstr "Datum der Gültigkeit"
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%sCW"
+msgstr "%snach rechts"
 
 #: u_translation.rsdarknebula
 msgctxt "u_translation.rsdarknebula"
@@ -990,11 +990,11 @@ msgstr "- eine Zeiteinheit"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC Drehung:"
+msgstr "DEC Umdrehungen: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC Drehung:"
+msgstr "%sDEC Umdrehungen: "
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
@@ -1077,10 +1077,8 @@ msgid "Deleting from the element list..."
 msgstr "Aus Elementenliste löschen ..."
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
-#| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Aus Monatstabelle löschen, für JD< %s"
+msgstr "Aus Monatstabelle löschen ..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1172,7 +1170,7 @@ msgstr "Verzeichnis nicht gefunden %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr ""
+msgstr "Verzeichnis nicht gefunden! Bitte das Sternkarten Bilder Paket installieren."
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1252,7 +1250,7 @@ msgstr "Länderdetails herunterladen"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "Datei herunterladen"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1416,7 +1414,7 @@ msgstr "Äquinoktikum:"
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Äquinoktium"
+msgstr "Äquinoktikum"
 
 #: u_translation.rserror
 msgid "Error"
@@ -1866,7 +1864,7 @@ msgstr "Geben Sie an, wie die Einheiten erkannt werden sollen."
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Geben Sie die Kennzeichnung für jeden Objekt-Typ an."
+msgstr "Geben Sie die Kennzeichnung für jeden Objekttyp an."
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
@@ -2218,13 +2216,11 @@ msgstr "Farbband"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr ""
-"Helligkeits-\n"
-"unterschied\n"
+msgstr "Helligkeits- unterschied"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Größe"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -2532,7 +2528,7 @@ msgstr "Nr."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Keine Asteroiddaten gefunden! %sBitte zuerst eine MPC-Datei laden."
+msgstr "Keine Asteroidendaten gefunden! %sBitte zuerst eine MPC-Datei laden."
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -2672,7 +2668,7 @@ msgstr "Größeneinheit"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
-msgstr "Objekt-Typ"
+msgstr "Objekttyp"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
@@ -2716,7 +2712,7 @@ msgstr "Online Bilderserver"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "Nur numerierte Asteroiden"
+msgstr "Nur nummerierte Asteroiden"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -2760,7 +2756,7 @@ msgstr "Ausrichtung"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Oder lokale Datei nutzen:"
+msgstr "Oder lokale Datei benutzen"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3170,11 +3166,11 @@ msgstr "Auflösung"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA Drehung:"
+msgstr "RA Umdrehungen: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA Drehung:"
+msgstr "%sRA Umdrehungen:"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -3190,7 +3186,7 @@ msgstr "RealSky Süd"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr "Einheiten oder Objekt-Typen erkennen aus der Datei:"
+msgstr "Einheiten und Objekttypen erkennen in der Datei"
 
 #: u_translation.rsred
 msgid "Red"
@@ -3471,7 +3467,7 @@ msgstr "Karte zum Drucker senden"
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "Teilung"
+msgstr "Abstand"
 
 #: u_translation.rsserver
 msgid "Server"
@@ -3863,7 +3859,7 @@ msgstr "Supernova-Überrest"
 
 #: u_translation.rssurface
 msgid "Surface"
-msgstr "Oberfläche"
+msgstr "Fläche"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
@@ -3983,7 +3979,7 @@ msgstr "Diese Datei wurde nicht als MPCORB-Datei erkannt."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Dieses Programm ist freie Software. Sie können es weiterverteilen und/oder es unter den Bedingungen der GNU General Public Licence (GNU GPL) modifizieren."
+msgstr "Dieses Programm ist freie Software. Sie können es weitergeben und/oder es unter den Bedingungen der GNU General Public Licence (GNU GPL) modifizieren."
 
 #: u_translation.rsthursday
 msgid "Thu."
@@ -4023,7 +4019,7 @@ msgstr "Heute"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "in die Datei:"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4031,7 +4027,7 @@ msgstr "Werkzeugleisten"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr "Zu viele geöffnete fenster, bitte schließen Sie einige Karten"
+msgstr "Zu viele geöffnete Fenster, bitte schließen Sie einige Karten"
 
 #: u_translation.rstop
 msgid "Top"
@@ -4195,7 +4191,7 @@ msgstr "Ein vordefiniertes Farbschema benutzen:"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(nützlich um einen Fluß widerzugeben)"
+msgstr "(nützlich um einen Fluss wiederzugeben)"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
@@ -4231,7 +4227,7 @@ msgstr "TCP/IP Server benutzen"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "Verwenden Sie das Menü oder \"%s\" um den Treiber zu konfigurieren."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
@@ -4259,7 +4255,7 @@ msgstr "Veränderliche"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr "Veränderlichere Sterne"
+msgstr "Veränderliche Sterne"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
@@ -4295,35 +4291,35 @@ msgstr "Möchten Sie das Objekt vor dem Aufgang nachführen?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Achtung!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Warnung! Berechnung von"
+msgstr "Achtung! Berechnung von"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Achtung! Einige Asteroiden-Elemente sind mehr als 3 Jahre alt. Bitte verwenden Sie Elemente die für das Datum der Karte aktuell sind."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Achtung! Einige Kometen-Elemente sind mehr als 3 Jahre alt. Bitte verwenden Sie Elemente die für das Datum der Karte aktuell sind."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Warnung! Das benutzte Datum oder der Beobachtungsort wurde im Vergleich zu den letzten Einstellungen geändert. Sie können jetzt \"Nein\" antworten und den %s-Knopf benutzen um zum ursprünglichen Datum/Zeit und Beobachtungsort zurückzukehren, ansonsten werden die Änderungen angewendet. Wollen Sie fortfahren?"
+msgstr "Achtung! Das benutzte Datum oder der Beobachtungsort wurde im Vergleich zu den letzten Einstellungen geändert. Sie können jetzt \"Nein\" antworten und den %s-Knopf benutzen um zum ursprünglichen Datum/Zeit und Beobachtungsort zurückzukehren, ansonsten werden die Änderungen angewendet. Wollen Sie fortfahren?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Warnung!%sSie sind dabei die Datenbank %s und ihren gesamten Inhalt zu entfernen, auch wenn dieser nichts mit dem Programm zu tun hat.%sSind Sie sicher, dass Sie fortfahren wollen?"
+msgstr "Achtung!%sSie sind dabei die Datenbank %s und ihren gesamten Inhalt zu entfernen, auch wenn dieser nichts mit dem Programm zu tun hat.%sSind Sie sicher, dass Sie fortfahren wollen?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "Warnung! Verschiedene Kataloge werden als Quellen für die selben Objekte verwendet. Sie riskieren dass Objekte doppelt angezeigt werden. Stellen Sie sicher, dass Sie dies wollen."
+msgstr "Achtung! Verschiedene Kataloge werden als Quellen für die selben Objekte verwendet. Sie riskieren dass Objekte doppelt angezeigt werden. Stellen Sie sicher, dass Sie dies wollen."
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "WARNUNG!%sDie Daten sollen an einen existierenden Katalog angehängt werden.%sDieser Katalog und sein Index müssen das selbe Format haben, ansonsten wird der Katalog unbenutzbar.%sEs ist empfehlenswert, vorher ein Backup der Dateien zu erstellen.%sWollen Sie fortfahren?"
+msgstr "ACHTUNG!%sDie Daten sollen an einen existierenden Katalog angehängt werden.%sDieser Katalog und sein Index müssen das selbe Format haben, ansonsten wird der Katalog unbenutzbar.%sEs ist empfehlenswert, vorher ein Backup der Dateien zu erstellen.%sWollen Sie fortfahren?"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -4355,7 +4351,7 @@ msgstr "Xplanet ist wahrscheinlich nicht installiert!"
 
 #: u_translation.rsxplanetretur
 msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet gibt %s zurück"
+msgstr "%s, Xplanet gibt %s zurück"
 
 #: u_translation.rsyear
 msgid "Year"
