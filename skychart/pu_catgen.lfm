@@ -4633,6 +4633,7 @@ object f_catgen: Tf_catgen
   object SaveDialog1: TSaveDialog
     Filter = 'All files|*.*|Project files|*.prj'
     FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 144
     top = 8
   end

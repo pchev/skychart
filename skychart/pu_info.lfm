@@ -667,6 +667,17 @@ object f_info: Tf_info
           MoveCaret = False
           Option = 0
           Priority = 0
+        end      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbLeft
+          ClickCount = ccSingle
+          ClickDir = cdDown
+          Command = 9
+          MoveCaret = False
+          Option = 0
+          Priority = 0
         end>
       Lines.Strings = (
         'Memo1'
@@ -948,6 +959,7 @@ object f_info: Tf_info
   end
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 72
     top = 136
   end

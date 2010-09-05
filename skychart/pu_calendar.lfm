@@ -190,7 +190,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.09.04.01'
+      Text = '2010.09.05.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -252,7 +252,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.09.04.01'
+      Text = '2010.09.05.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -893,6 +893,7 @@ object f_calendar: Tf_calendar
   end
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 248
     top = 232
   end

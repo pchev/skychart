@@ -4943,7 +4943,7 @@ object f_main: Tf_main
   end
   object SaveDialog: TSaveDialog
     FilterIndex = 0
-    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
     left = 56
     top = 224
   end

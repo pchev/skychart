@@ -1744,15 +1744,17 @@ LazarusResources.Add('Tf_catgen','FORMDATA',[
   +#2#0#7'Options'#11#14'ofHideReadOnly'#18'ofAllowMultiSelect'#15'ofPathMustEx'
   +'ist'#15'ofFileMustExist'#14'ofEnableSizing'#0#4'left'#3#184#0#3'top'#2#8#0#0
   +#11'TSaveDialog'#11'SaveDialog1'#6'Filter'#6'!All files|*.*|Project files|*.'
-  +'prj'#11'FilterIndex'#2#0#4'left'#3#144#0#3'top'#2#8#0#0#12'TColorDialog'#12
-  +'ColorDialog1'#5'Color'#7#7'clBlack'#20'CustomColors.Strings'#1#6#13'ColorA='
-  +'000000'#6#13'ColorB=000080'#6#13'ColorC=008000'#6#13'ColorD=008080'#6#13'Co'
-  +'lorE=800000'#6#13'ColorF=800080'#6#13'ColorG=808000'#6#13'ColorH=808080'#6
-  +#13'ColorI=C0C0C0'#6#13'ColorJ=0000FF'#6#13'ColorK=00FF00'#6#13'ColorL=00FFF'
-  +'F'#6#13'ColorM=FF0000'#6#13'ColorN=FF00FF'#6#13'ColorO=FFFF00'#6#13'ColorP='
-  +'FFFFFF'#6#13'ColorQ=C0DCC0'#6#13'ColorR=F0CAA6'#6#13'ColorS=F0FBFF'#6#13'Co'
-  +'lorT=A4A0A0'#0#4'left'#3#224#0#3'top'#2#8#0#0#17'THTMLHelpDatabase'#17'HTML'
-  +'HelpDatabase1'#12'AutoRegister'#9#4'left'#3#138#0#3'top'#2'g'#0#0#22'THTMLB'
-  +'rowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'A'
-  +'utoRegister'#9#4'left'#3#183#0#3'top'#2'g'#0#0#0
+  +'prj'#11'FilterIndex'#2#0#7'Options'#11#17'ofOverwritePrompt'#14'ofHideReadO'
+  +'nly'#18'ofNoReadOnlyReturn'#14'ofEnableSizing'#12'ofViewDetail'#0#4'left'#3
+  +#144#0#3'top'#2#8#0#0#12'TColorDialog'#12'ColorDialog1'#5'Color'#7#7'clBlack'
+  +#20'CustomColors.Strings'#1#6#13'ColorA=000000'#6#13'ColorB=000080'#6#13'Col'
+  +'orC=008000'#6#13'ColorD=008080'#6#13'ColorE=800000'#6#13'ColorF=800080'#6#13
+  +'ColorG=808000'#6#13'ColorH=808080'#6#13'ColorI=C0C0C0'#6#13'ColorJ=0000FF'#6
+  +#13'ColorK=00FF00'#6#13'ColorL=00FFFF'#6#13'ColorM=FF0000'#6#13'ColorN=FF00F'
+  +'F'#6#13'ColorO=FFFF00'#6#13'ColorP=FFFFFF'#6#13'ColorQ=C0DCC0'#6#13'ColorR='
+  +'F0CAA6'#6#13'ColorS=F0FBFF'#6#13'ColorT=A4A0A0'#0#4'left'#3#224#0#3'top'#2#8
+  +#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#3
+  +#138#0#3'top'#2'g'#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'
+  +#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#183#0#3'top'#2'g'#0#0
+  +#0
 ]);
