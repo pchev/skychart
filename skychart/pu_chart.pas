@@ -2887,15 +2887,16 @@ begin
 {$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
    ConnectASCOM(Sender);
-end;
-if sc.cfgsc.PluginTelescope then begin
+end
+else if sc.cfgsc.PluginTelescope then begin
    ConnectPlugin(Sender);
-end;
+end
+else
 {$endif}
 if sc.cfgsc.ManualTelescope then begin
    sc.cfgsc.TelescopeJD:=0;
-end;
-if sc.cfgsc.IndiTelescope then begin
+end
+else if sc.cfgsc.IndiTelescope then begin
   if Connect1.checked then begin
      indi1.terminate;
      sc.cfgsc.ScopeMark:=false;
@@ -2937,11 +2938,11 @@ if Connect1.checked then begin
   {$ifdef mswindows}
   if sc.cfgsc.ASCOMTelescope then begin
      SlewASCOM(Sender);
-  end;
-  if sc.cfgsc.PluginTelescope then begin
+  end
+  else if sc.cfgsc.PluginTelescope then begin
      SlewPlugin(Sender);
-  end;
-  if sc.cfgsc.IndiTelescope then
+  end
+  else if sc.cfgsc.IndiTelescope then
   {$endif}
   begin
     ra:=sc.cfgsc.FindRA;
@@ -2963,11 +2964,11 @@ if Connect1.checked then begin
 {$ifdef mswindows}
   if sc.cfgsc.ASCOMTelescope then begin
      AbortSlewASCOM(Sender);
-  end;
-  if sc.cfgsc.PluginTelescope then begin
+  end
+  else if sc.cfgsc.PluginTelescope then begin
      AbortSlewPlugin(Sender);
-  end;
-if sc.cfgsc.IndiTelescope then
+  end
+else if sc.cfgsc.IndiTelescope then
 {$endif}
 begin
   Indi1.AbortSlew;
@@ -2987,11 +2988,11 @@ then begin
 {$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
    SyncASCOM(Sender);
-end;
-if sc.cfgsc.PluginTelescope then begin
+end
+else if sc.cfgsc.PluginTelescope then begin
    SyncPlugin(Sender);
-end;
-if sc.cfgsc.IndiTelescope then
+end
+else if sc.cfgsc.IndiTelescope then
 {$endif}
 begin
   ra:=sc.cfgsc.FindRA;
@@ -3331,8 +3332,8 @@ if sc.cfgsc.PluginTelescope then begin
         Refresh;
      end;
     end;
-end;
-if sc.cfgsc.ASCOMTelescope then begin
+end
+else if sc.cfgsc.ASCOMTelescope then begin
   {$ifdef mswindows}
      Connect1.checked:=pu_ascomclient.ScopeConnected;
      if Connect1.checked then begin
