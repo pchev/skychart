@@ -138,9 +138,6 @@ procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
 SetLang;
 cfgdss:=Tconf_dss.Create;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
   {$ifdef trace_debug}
    WriteTrace('Loadlibrary '+dsslibname);
   {$endif}

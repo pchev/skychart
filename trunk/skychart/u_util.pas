@@ -112,7 +112,6 @@ function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string=''
 function CdcSigAction(const action: pointer):boolean;
 {$endif}
 {$ifdef mswindows}
-procedure ScaleForm(form: TForm; scale: single);
 procedure SetFormNightVision(form: TForm; onoff:boolean);
 function FindWin98: boolean;
 function ScreenBPP: integer;
@@ -1584,26 +1583,6 @@ begin
 screendc:=GetDC(0);
 result:=GetDeviceCaps(screendc,BITSPIXEL);
 ReleaseDC(0,screendc);
-end;
-
-procedure ScaleForm(form: TForm; scale: single);
-var i: integer;
-begin
-if scale<=0 then exit; // must not arise but we don't know what a strange screen can do
-if scale>3 then exit; // >288 dpi! sure?
-if abs(1-scale)<=0.1 then exit; // do not scale for 10%
-with form do begin
-   width := round( width * scale );
-   height := round( height * scale );
-   for i := 0 to ComponentCount-1 do begin
-      if ( Components[i] is TControl ) then with (Components[i] as TControl) do begin
-         width := round( width * scale );
-         height := round( height * scale );
-         top := round( top * scale );
-         left := round( left * scale );
-      end;
-   end;
-end;
 end;
 
 procedure SetFormNightVision(form: TForm; onoff:boolean);

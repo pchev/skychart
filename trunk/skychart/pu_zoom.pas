@@ -91,9 +91,6 @@ procedure Tf_zoom.FormCreate(Sender: TObject);
 begin
 SetLang;
   Fnightvision:=false;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_zoom.Button1Click(Sender: TObject);

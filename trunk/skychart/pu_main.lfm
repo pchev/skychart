@@ -1,12 +1,11 @@
 object f_main: Tf_main
-  Left = 363
+  Left = 339
   Height = 576
-  Top = 157
-  Width = 845
-  ActiveControl = PanelTop
+  Top = 150
+  Width = 966
   Caption = 'Cartes du Ciel'
-  ClientHeight = 554
-  ClientWidth = 845
+  ClientHeight = 551
+  ClientWidth = 966
   Font.CharSet = ANSI_CHARSET
   Font.Height = -11
   KeyPreview = True
@@ -2667,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 466
+    Height = 463
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 463
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 466
+      Height = 463
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,19 +2769,19 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 817
-    Height = 466
+    Left = 938
+    Height = 463
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 463
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 216
+      Height = 213
       Top = 250
       Width = 28
       Align = alClient
@@ -3021,12 +3020,12 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 520
-    Width = 845
+    Top = 517
+    Width = 966
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 845
+    ClientWidth = 966
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3076,30 +3075,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 623
+      Width = 744
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 623
+      ClientWidth = 744
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 623
+        Width = 744
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 623
+        ClientWidth = 744
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 623
+          Width = 744
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -3112,11 +3111,11 @@ object f_main: Tf_main
     Left = 0
     Height = 54
     Top = 0
-    Width = 845
+    Width = 966
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 54
-    ClientWidth = 845
+    ClientWidth = 966
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3124,8 +3123,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 845
-      ButtonHeight = 23
+      Width = 966
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3257,38 +3255,38 @@ object f_main: Tf_main
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 712
+        Left = 703
         Top = 2
         Width = 4
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 716
+        Left = 707
         Top = 2
         Action = TelescopeConnect
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 762
+        Left = 753
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
-        Left = 739
+        Left = 730
         Top = 2
         Action = TelescopeSync
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 785
+        Left = 776
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 789
+        Left = 780
         Top = 2
         Width = 8
         AutoSize = True
@@ -3301,20 +3299,20 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 628
+        Left = 619
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 568
+        Left = 615
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 23
+        Height = 21
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3322,7 +3320,7 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        ItemHeight = 0
+        ItemHeight = 13
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3330,14 +3328,14 @@ object f_main: Tf_main
       end
       object MagPanel: TPanel
         Left = 285
-        Height = 23
+        Height = 22
         Top = 2
         Width = 24
         BevelOuter = bvNone
-        ClientHeight = 23
+        ClientHeight = 22
         ClientWidth = 24
         FullRepaint = False
-        TabOrder = 4
+        TabOrder = 1
         object ButtonMoreStar: TImage
           Left = 0
           Height = 11
@@ -3453,33 +3451,22 @@ object f_main: Tf_main
           Transparent = True
         end
       end
-      object TimeVal: TSpinEdit
-        Left = 572
-        Height = 21
-        Hint = 'Time'
-        Top = 2
-        Width = 56
-        MaxValue = 1000
-        MinValue = 1
-        TabOrder = 1
-        Value = 1
-      end
       object TimeU: TComboBox
-        Left = 632
-        Height = 24
+        Left = 623
+        Height = 28
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 0
+        ItemHeight = 20
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 815
+        Left = 936
         Height = 23
         Top = 2
         Width = 30
@@ -3510,12 +3497,31 @@ object f_main: Tf_main
           OnClick = BtnCloseChildClick
         end
       end
+      object TimeVal: TUpDown
+        Left = 598
+        Height = 22
+        Top = 2
+        Width = 17
+        Associate = EditTimeVal
+        Min = 1
+        Max = 999
+        Position = 1
+        TabOrder = 4
+        Wrap = False
+      end
+      object EditTimeVal: TEdit
+        Left = 568
+        Height = 21
+        Top = 2
+        Width = 30
+        TabOrder = 5
+      end
     end
     object ToolBar4: TToolBar
       Left = 0
       Height = 28
       Top = 26
-      Width = 845
+      Width = 966
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'

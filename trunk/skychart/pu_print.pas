@@ -141,9 +141,6 @@ end;
 procedure Tf_print.FormCreate(Sender: TObject);
 begin
   SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_print.LongEdit1Change(Sender: TObject);
@@ -222,4 +219,4 @@ initialization
   {$I pu_print.lrs}
 
 end.
-
+

@@ -198,9 +198,6 @@ begin
  page4.Align:=alClient;
  SetLang;
  Fnightvision:=false;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_info.Memo1DblClick(Sender: TObject);

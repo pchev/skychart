@@ -152,9 +152,6 @@ end;
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 Image1.Align:=alClient;
 titre:='';
 labeltext:='';

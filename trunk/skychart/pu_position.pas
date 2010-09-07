@@ -133,9 +133,6 @@ end;
 procedure Tf_position.FormCreate(Sender: TObject);
 begin
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_position.Button3Click(Sender: TObject);

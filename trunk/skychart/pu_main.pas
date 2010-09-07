@@ -39,13 +39,14 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance, LazHelpHTML;
+  LResources, uniqueinstance, enhedits, LazHelpHTML;
 
 type
 
   { Tf_main }
 
   Tf_main = class(TForm)
+    EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
     TelescopeSetup1: TMenuItem;
     NextChild1: TMenuItem;
@@ -57,6 +58,7 @@ type
     MenuItem27: TMenuItem;
     MenuItem29: TMenuItem;
     MenuItem30: TMenuItem;
+    TimeVal: TUpDown;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -252,7 +254,6 @@ type
     TimeReset: TAction;
     ToolButton35: TToolButton;
     ToolButtonTnow: TToolButton;
-    TimeVal: TSpinEdit;
     TimeU: TComboBox;
     ToolButtonTdec: TToolButton;
     ToolButtonTinc: TToolButton;
@@ -1010,7 +1011,6 @@ try
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
  InitFonts;
  SetLpanel1('');
- TimeVal.Width:= round( 60 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
  // ensure a first chart is draw, even if it usually result in a double refresh on launch
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
@@ -1615,7 +1615,6 @@ step:='Size control';
 {$endif}
 MultiDoc1.Align:=alClient;
 starshape.Picture.Bitmap.Transparent:=false;
-TimeVal.Width:= round( 60 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 quicksearch.Width:=round( 75 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 step:='Load zlib';
@@ -2016,7 +2015,7 @@ var hh : double;
     y,m,d,h,n,s,mult : integer;
 begin
 // tag is used for the sign
-mult:=TAction(sender).tag*TimeVal.value;
+mult:=TAction(sender).tag*TimeVal.Position;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    djd(sc.cfgsc.CurJD,y,m,d,hh);
    DtoS(hh,h,n,s);
@@ -2609,7 +2608,6 @@ procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
    ConfigTime:=Tf_config_time.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigTime,Screen.PixelsPerInch/96);{$endif}
    ConfigTime.Notebook1.ShowTabs:=true;
    ConfigTime.Notebook1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
@@ -2702,7 +2700,6 @@ procedure Tf_main.SetupChartPage(page:integer);
 begin
 if ConfigChart=nil then begin
    ConfigChart:=Tf_config_chart.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigChart,Screen.PixelsPerInch/96);{$endif}
    ConfigChart.Notebook1.ShowTabs:=true;
    ConfigChart.Notebook1.PageIndex:=0;
    ConfigChart.onApplyConfig:=ApplyConfigChart;
@@ -2767,7 +2764,6 @@ procedure Tf_main.SetupSolsysPage(page:integer);
 begin
 if ConfigSolsys=nil then begin
    ConfigSolsys:=Tf_config_solsys.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigSolsys,Screen.PixelsPerInch/96);{$endif}
    ConfigSolsys.Notebook1.ShowTabs:=true;
    ConfigSolsys.Notebook1.PageIndex:=0;
    ConfigSolsys.onApplyConfig:=ApplyConfigSolsys;
@@ -2821,7 +2817,6 @@ procedure Tf_main.SetupSystemPage(page:integer);
 begin
 if ConfigSystem=nil then begin
    ConfigSystem:=Tf_config_system.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigSystem,Screen.PixelsPerInch/96);{$endif}
    ConfigSystem.Notebook1.ShowTabs:=true;
    ConfigSystem.Notebook1.PageIndex:=0;
    ConfigSystem.onApplyConfig:=ApplyConfigSystem;
@@ -2866,7 +2861,6 @@ procedure Tf_main.SetupInternetPage(page:integer);
 begin
 if ConfigInternet=nil then begin
    ConfigInternet:=Tf_config_internet.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigInternet,Screen.PixelsPerInch/96);{$endif}
    ConfigInternet.Notebook1.ShowTabs:=true;
    ConfigInternet.Notebook1.PageIndex:=0;
    ConfigInternet.onApplyConfig:=ApplyConfigInternet;
@@ -2895,7 +2889,6 @@ procedure Tf_main.SetupPicturesPage(page:integer);
 begin
 if ConfigPictures=nil then begin
    ConfigPictures:=Tf_config_pictures.Create(self);
-   {$ifdef mswindows}ScaleForm(ConfigPictures,Screen.PixelsPerInch/96);{$endif}
    ConfigPictures.Notebook1.ShowTabs:=true;
    ConfigPictures.Notebook1.PageIndex:=0;
    ConfigPictures.onApplyConfig:=ApplyConfigPictures;
@@ -2943,7 +2936,6 @@ procedure Tf_main.SetupObservatoryPage(page:integer; posx:integer=0; posy:intege
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
-   {$ifdef mswindows} ScaleForm(ConfigObservatory,Screen.PixelsPerInch/96);{$endif}
    ConfigObservatory.Notebook1.ShowTabs:=true;
    ConfigObservatory.Notebook1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
@@ -2989,7 +2981,6 @@ procedure Tf_main.SetupCatalogPage(page:integer);
 begin
 if ConfigCatalog=nil then begin
    ConfigCatalog:=Tf_config_catalog.Create(self);
-   {$ifdef mswindows} ScaleForm(ConfigCatalog,Screen.PixelsPerInch/96);{$endif}
    ConfigCatalog.catalog:=catalog;
    ConfigCatalog.Notebook1.ShowTabs:=true;
    ConfigCatalog.Notebook1.PageIndex:=0;
@@ -3069,7 +3060,6 @@ procedure Tf_main.SetupDisplayPage(pagegroup:integer);
 begin
 if ConfigDisplay=nil then begin
    ConfigDisplay:=Tf_config_display.Create(self);
-   {$ifdef mswindows} ScaleForm(ConfigDisplay,Screen.PixelsPerInch/96);{$endif}
    ConfigDisplay.Notebook1.ShowTabs:=true;
    ConfigDisplay.Notebook1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
@@ -6137,9 +6127,11 @@ begin
 {$endif}
   ActiveControl:=nil;
   quicksearch.Enabled:=false;   // add all main form focusable control here
+  EditTimeVal.Enabled:=false;
   TimeVal.Enabled:=false;
   TimeU.Enabled:=false;
   quicksearch.Enabled:=true;
+  EditTimeVal.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
 end;
@@ -6458,8 +6450,8 @@ if night then begin
    quicksearch.Font.Color:=nv_middle;
    timeu.Color:=nv_dark;
    timeu.Font.Color:=nv_middle;
-   timeval.Color:=nv_dark;
-   timeval.Font.Color:=nv_middle;
+   edittimeval.Color:=nv_dark;
+   edittimeval.Font.Color:=nv_middle;
    Shape1.Pen.Color:=nv_black;
    Shape1.Brush.Color:=nv_black;
    f_zoom.Color:=nv_dark;
@@ -6490,8 +6482,8 @@ end else begin
    quicksearch.Font.Color:=clWindowText;
    timeu.Color:=clWindow;
    timeu.Font.Color:=clWindowText;
-   timeval.Color:=clWindow;
-   timeval.Font.Color:=clWindowText;
+   edittimeval.Color:=clWindow;
+   edittimeval.Font.Color:=clWindowText;
    Shape1.Pen.Color:=clBtnShadow;
    Shape1.Brush.Color:=clBtnShadow;
    f_zoom.Color:=clBtnFace;
