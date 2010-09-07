@@ -206,9 +206,6 @@ procedure Tf_search.FormCreate(Sender: TObject);
 begin
 SetLang;
   Fnightvision:=false;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 CometFilter.Text:='C/'+FormatDateTime('yyyy',now);
 RadioGroup1Click(Sender);
 end;

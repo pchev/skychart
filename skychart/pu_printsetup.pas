@@ -199,9 +199,6 @@ procedure Tf_printsetup.FormCreate(Sender: TObject);
 var i: integer;
 begin
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 PaperSize.Clear;
 for i:=1 to PaperNumber do begin
    PaperSize.Items.Add(Papername[i]);

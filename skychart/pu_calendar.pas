@@ -206,9 +206,6 @@ procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
 begin
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 config:=Tconf_skychart.Create;
 Fnightvision:=false;
 AzNorth:=true;

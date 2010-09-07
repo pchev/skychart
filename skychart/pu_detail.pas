@@ -119,9 +119,6 @@ end;
 procedure Tf_detail.FormCreate(Sender: TObject);
 begin
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);

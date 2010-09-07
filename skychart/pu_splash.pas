@@ -82,9 +82,6 @@ if pos('svn',cdcversion)>0 then begin
 end else
    LabelDate.Visible:=false;
 SetLang;
-{$ifdef mswindows}
- ScaleForm(self,Screen.PixelsPerInch/96);
-{$endif}
 end;
 
 procedure Tf_splash.FormShow(Sender: TObject);
