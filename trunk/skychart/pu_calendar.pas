@@ -873,7 +873,7 @@ dat11:=date1.JD;
 dat12:=date2.JD;
 dat13:=time.time;
 dat14:=step.text;
-s:=strtoint(step.text);
+s:=step.Value;
 djd(date1.JD,a,m,d,hh);
 config.tz.JD:=date1.JD;
 config.TimeZone:=config.tz.SecondsOffset/3600;;
@@ -1047,7 +1047,7 @@ dat21:=date1.JD;
 dat22:=date2.JD;
 dat23:=time.time;
 dat24:=step.text;
-s:=strtoint(step.text);
+s:=step.Value;
 djd(date1.JD,a,m,d,hh);
 config.tz.JD:=date1.JD;
 h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
@@ -1124,7 +1124,7 @@ var z1,z2: string;
     s: integer;
 begin
 chdir(appdir);
-s:=StrToIntDef(step.text,0);
+s:=step.Value;
 if s<=0 then exit;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
@@ -1467,7 +1467,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    dat32:=date2.jd;
    dat33:=time.time;
    dat34:=step.text;
-   s:=strtoint(step.text);
+   s:=step.Value;
    djd(date1.JD,a,m,d,hhh);
    config.tz.JD:=date1.JD;
    h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
@@ -1651,7 +1651,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    dat72:=date2.jd;
    dat73:=time.time;
    dat74:=step.text;
-   s:=strtoint(step.text);
+   s:=step.Value;
    djd(date1.JD,a,m,d,hhh);
    config.tz.JD:=date1.JD;
    h:=frac(Time.time)*24-config.tz.SecondsOffset/3600;
