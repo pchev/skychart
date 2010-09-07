@@ -406,11 +406,14 @@ begin
   L := StrToIntDef(Text,0);
   if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
   begin
+    if L>FMaxValue then Text:=inttostr(FMaxValue);
+    if L<FMinValue then Text:=inttostr(FMinValue);
     Beep;
     SelectAll;
     SetFocus;
   end else
   begin
+    Text:=inttostr(L);
     FValue := L;
 //    inherited;
     if Assigned(FOnExit) then  FOnExit(Sender);
