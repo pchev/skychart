@@ -1,8 +1,8 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-08-29 15:01+0100\n"
-"Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
+"PO-Revision-Date: 2010-09-06 15:12+0100\n"
+"Last-Translator: Marc Fokker <ptp@xs4all.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
@@ -197,7 +197,7 @@ msgstr "Kunstmatige satellieten"
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
-msgstr ""
+msgstr "ASCOM telescoop driver"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -425,7 +425,7 @@ msgstr "%sKan niet de database %s openen! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Kan niet schrijven naar"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -525,7 +525,7 @@ msgstr "Verander weergavemodus"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "Veranderen naar deze instelling zal het programma herstarten!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -797,7 +797,7 @@ msgstr "Kopiëer"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "Kopiëer van:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1074,7 +1074,6 @@ msgid "Deleting from the element list..."
 msgstr "Verwijderen van de elementenlijst..."
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
 #| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
 msgstr "Verwijderen van de maand tabel..."
@@ -1169,7 +1168,7 @@ msgstr "Map niet gevonden %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr ""
+msgstr "Directory niet gevonden! Installeer het Skychart Pictures pakket."
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1249,7 +1248,7 @@ msgstr "Download land-details"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "Download bestand"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -2219,7 +2218,7 @@ msgstr "Magnitude verschil"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Eclips magnitude"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -4017,7 +4016,7 @@ msgstr "Vandaag"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "naar bestand:"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4225,7 +4224,7 @@ msgstr "Gebruik TCP/IP server"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "Gebruik het menu of de knop \"%s\" om de driver in te stellen."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
@@ -4289,7 +4288,7 @@ msgstr "Wilt u een object volgen voor het boven de horizon komt?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Waarschuwing!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -4297,11 +4296,11 @@ msgstr "Waarschuwing! Berekening van"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Waarschuwing! Sommige planetoïde elementen zijn ouder dan 3 jaar. Probeer elementen te vinden voor de datum van de kaart."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Waarschuwing! Sommige komeet elementen zijn ouder dan 3 jaar. Probeer elementen te vinden voor de datum van de kaart."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
