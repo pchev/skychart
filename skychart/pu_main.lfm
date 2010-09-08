@@ -3,8 +3,9 @@ object f_main: Tf_main
   Height = 576
   Top = 150
   Width = 966
+  ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 551
+  ClientHeight = 554
   ClientWidth = 966
   Font.CharSet = ANSI_CHARSET
   Font.Height = -11
@@ -2666,18 +2667,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 463
+    Height = 466
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 463
+    ClientHeight = 466
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 463
+      Height = 466
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2771,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 938
-    Height = 463
+    Height = 466
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 463
+    ClientHeight = 466
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 213
+      Height = 216
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3021,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 517
+    Top = 520
     Width = 966
     Align = alBottom
     BevelOuter = bvNone
@@ -3255,38 +3256,38 @@ object f_main: Tf_main
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 703
+        Left = 708
         Top = 2
         Width = 4
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 707
+        Left = 712
         Top = 2
         Action = TelescopeConnect
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 753
+        Left = 758
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
-        Left = 730
+        Left = 735
         Top = 2
         Action = TelescopeSync
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 776
+        Left = 781
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 780
+        Left = 785
         Top = 2
         Width = 8
         AutoSize = True
@@ -3299,20 +3300,20 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 619
+        Left = 624
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 615
+        Left = 620
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 21
+        Height = 23
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3320,7 +3321,7 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        ItemHeight = 13
+        ItemHeight = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3452,15 +3453,15 @@ object f_main: Tf_main
         end
       end
       object TimeU: TComboBox
-        Left = 623
-        Height = 28
+        Left = 628
+        Height = 24
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 20
+        ItemHeight = 0
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
@@ -3498,7 +3499,7 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TUpDown
-        Left = 598
+        Left = 603
         Height = 22
         Top = 2
         Width = 17
@@ -3507,13 +3508,14 @@ object f_main: Tf_main
         Max = 999
         Position = 1
         TabOrder = 4
+        Thousands = False
         Wrap = False
       end
       object EditTimeVal: TEdit
         Left = 568
         Height = 21
         Top = 2
-        Width = 30
+        Width = 35
         TabOrder = 5
       end
     end

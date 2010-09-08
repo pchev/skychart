@@ -42,6 +42,8 @@ type
     Button3: TButton;
     Button4: TButton;
     CountryTZ: TCheckBox;
+    vicinityrange: TUpDown;
+    vicinityrangeEdit: TEdit;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     TZComboBox: TComboBox;
@@ -82,7 +84,6 @@ type
     Altitude: TGroupBox;
     Label70: TLabel;
     altmeter: TFloatEdit;
-    vicinityrange: TSpinEdit;
     timezone: TGroupBox;
     Obszp: TButton;
     Obszm: TButton;
@@ -533,7 +534,7 @@ lockChange:=true;
 citylist.Clear;
 citycode.Clear;
 country:=countrycode[countrylist.ItemIndex];
-dd:=vicinityrange.Value/kmperdegree;
+dd:=vicinityrange.position/kmperdegree;
 lat:=csc.ObsLatitude;
 lon:=-csc.ObsLongitude;
 cdb.GetCityRange(country,lat-dd,lat+dd,lon-dd,lon+dd, citycode,citylist.Items,MaxCityList);

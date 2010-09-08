@@ -193,7 +193,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Download country details'
             OnClick = downloadcityClick
-            TabOrder = 8
+            TabOrder = 7
           end
           object updcity: TButton
             Left = 93
@@ -203,7 +203,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Update'
             OnClick = updcityClick
-            TabOrder = 6
+            TabOrder = 5
           end
           object delcity: TButton
             Left = 169
@@ -213,7 +213,7 @@ object f_config_observatory: Tf_config_observatory
             BorderSpacing.InnerBorder = 4
             Caption = 'Delete'
             OnClick = delcityClick
-            TabOrder = 7
+            TabOrder = 6
           end
           object LocCode: TEdit
             Cursor = crHandPoint
@@ -227,26 +227,36 @@ object f_config_observatory: Tf_config_observatory
             ParentShowHint = False
             ReadOnly = True
             ShowHint = True
-            TabOrder = 9
+            TabOrder = 8
           end
           object vicinity: TButton
             Left = 248
             Height = 25
-            Top = 28
+            Top = 31
             Width = 60
             BorderSpacing.InnerBorder = 4
             Caption = 'Vicinity'
             OnClick = vicinityClick
             TabOrder = 4
           end
-          object vicinityrange: TSpinEdit
-            Left = 341
+          object vicinityrangeEdit: TEdit
+            Left = 339
             Height = 21
-            Top = 31
-            Width = 69
-            MaxValue = 500
-            TabOrder = 5
-            Value = 10
+            Top = 33
+            Width = 56
+            TabOrder = 9
+          end
+          object vicinityrange: TUpDown
+            Left = 395
+            Height = 21
+            Top = 33
+            Width = 17
+            Associate = vicinityrangeEdit
+            Min = 0
+            Max = 500
+            Position = 10
+            TabOrder = 10
+            Wrap = False
           end
         end
         object Latitude: TGroupBox
@@ -285,7 +295,7 @@ object f_config_observatory: Tf_config_observatory
           object hemis: TComboBox
             Left = 112
             Height = 23
-            Top = 20
+            Top = 19
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 0
@@ -377,7 +387,7 @@ object f_config_observatory: Tf_config_observatory
           object long: TComboBox
             Left = 112
             Height = 23
-            Top = 20
+            Top = 19
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 0

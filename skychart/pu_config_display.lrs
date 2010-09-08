@@ -540,7 +540,7 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +'TabOrder'#2#11#5'Value'#2#1#0#0#9'TSpinEdit'#11'labelmagSol'#3'Tag'#2#5#4'L'
   +'eft'#3#227#0#6'Height'#2#21#3'Top'#3#148#0#5'Width'#2'7'#8'MaxValue'#2#10#8
   +'OnChange'#7#15'labelmagChanged'#8'TabOrder'#2#12#5'Value'#2#1#0#0#9'TSpinEd'
-  +'it'#13'labelsizeStar'#3'Tag'#2#1#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'5'#5
+  +'it'#13'labelsizeStar'#3'Tag'#2#1#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'4'#5
   +'Width'#2'7'#8'MaxValue'#2'0'#8'MinValue'#2#2#8'OnChange'#7#16'labelsizeChan'
   +'ged'#8'TabOrder'#2#13#5'Value'#2#6#0#0#9'TSpinEdit'#18'labelsizechartinfo'#3
   +'Tag'#2#8#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#3#221#0#5'Width'#2'7'#8'MaxVa'
@@ -551,15 +551,15 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +'nEdit'#14'labelsizeConst'#3'Tag'#2#6#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#3
   +#173#0#5'Width'#2'7'#8'MaxValue'#2'0'#8'MinValue'#2#2#8'OnChange'#7#16'label'
   +'sizeChanged'#8'TabOrder'#2#18#5'Value'#2#6#0#0#9'TSpinEdit'#12'labelsizeSol'
-  +#3'Tag'#2#5#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#3#149#0#5'Width'#2'7'#8'Max'
+  +#3'Tag'#2#5#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#3#148#0#5'Width'#2'7'#8'Max'
   +'Value'#2'0'#8'MinValue'#2#2#8'OnChange'#7#16'labelsizeChanged'#8'TabOrder'#2
   +#17#5'Value'#2#6#0#0#9'TSpinEdit'#12'labelsizeNeb'#3'Tag'#2#4#4'Left'#3'n'#1
-  +#6'Height'#2#21#3'Top'#2'}'#5'Width'#2'7'#8'MaxValue'#2'0'#8'MinValue'#2#2#8
+  +#6'Height'#2#21#3'Top'#2'|'#5'Width'#2'7'#8'MaxValue'#2'0'#8'MinValue'#2#2#8
   +'OnChange'#7#16'labelsizeChanged'#8'TabOrder'#2#16#5'Value'#2#6#0#0#9'TSpinE'
-  +'dit'#13'labelsizeMult'#3'Tag'#2#3#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'e'
+  +'dit'#13'labelsizeMult'#3'Tag'#2#3#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'd'
   +#5'Width'#2'7'#8'MaxValue'#2'0'#8'MinValue'#2#2#8'OnChange'#7#16'labelsizeCh'
   +'anged'#8'TabOrder'#2#15#5'Value'#2#6#0#0#9'TSpinEdit'#12'labelsizeVar'#3'Ta'
-  +'g'#2#2#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'M'#5'Width'#2'7'#8'MaxValue'#2
+  +'g'#2#2#4'Left'#3'n'#1#6'Height'#2#21#3'Top'#2'L'#5'Width'#2'7'#8'MaxValue'#2
   +'0'#8'MinValue'#2#2#8'OnChange'#7#16'labelsizeChanged'#8'TabOrder'#2#14#5'Va'
   +'lue'#2#6#0#0#0#9'TCheckBox'#16'DrawAllStarLabel'#4'Left'#2#26#6'Height'#2#21
   +#3'Top'#3#173#1#5'Width'#3#179#0#7'Caption'#6'#Display labels for all star c'
