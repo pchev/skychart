@@ -147,8 +147,7 @@ var buf,buf1,buf2 : string;
 begin
 buf1:=words(id,'',1,1);
 buf2:=words(id,'',2,1);
-if buf1<>'u' then buf1:=uppercase(buf1)+blank
-             else buf1:=buf1+blank;
+buf1:=uppercase(buf1)+blank;
 if trim(buf1)='NSV' then buf2:=padzeros(buf2,5);
 if copy(buf1,1,1)='V' then begin
    buf:=trim(copy(buf1,2,99));
