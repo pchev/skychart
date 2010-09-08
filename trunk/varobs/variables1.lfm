@@ -5,7 +5,7 @@ object VarForm: TVarForm
   Width = 800
   ActiveControl = Panel1
   Caption = 'Variable stars observer'
-  ClientHeight = 475
+  ClientHeight = 478
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'Default'
@@ -119,10 +119,10 @@ object VarForm: TVarForm
   OnCreate = FormCreate
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object Grid1: TStringGrid
     Left = 0
-    Height = 403
+    Height = 406
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
@@ -254,6 +254,7 @@ object VarForm: TVarForm
       CancelCaption = 'Cancel'
       DateOrder = doNone
       ButtonWidth = 23
+      CharCase = ecNormal
       Glyph.Data = {
         D6020000424DD60200000000000036000000280000000E0000000C0000000100
         200000000000A002000064000000640000000000000000000000000000000000
@@ -280,6 +281,7 @@ object VarForm: TVarForm
         00FF000000FF000000FF000000FF000000FF0000000000000000
       }
       NumGlyphs = 1
+      MaxLength = 0
       OnChange = DateEdit1Change
       OnExit = DateEdit1Change
       TabOrder = 6
@@ -289,15 +291,15 @@ object VarForm: TVarForm
       Height = 23
       Top = 6
       Width = 101
-      Time = 0.39618055555555
+      Time = 0.39618055555556
       OnChange = DateEdit1Change
       Enabled = True
       TabOrder = 7
     end
   end
   object PrinterSetupDialog1: TPrinterSetupDialog
-    left = 192
-    top = 184
+    left = 232
+    top = 216
   end
   object MainMenu1: TMainMenu
     left = 112
@@ -337,6 +339,10 @@ object VarForm: TVarForm
       object MenuItem2: TMenuItem
         Caption = 'Show &Light curve'
         OnClick = Lightcurve1Click
+      end
+      object EditEph1: TMenuItem
+        Caption = 'Edit observation plan'
+        OnClick = Editeph1Click
       end
       object MenuItem3: TMenuItem
         Caption = 'Enter &observation'
@@ -381,12 +387,12 @@ object VarForm: TVarForm
   object OpenDialog1: TOpenDialog
     Title = 'Open variables stars parameter file'
     Filter = 'All files|*.*|.dat files|*.dat|.txt files|*.txt'
-    left = 192
+    left = 232
     top = 147
   end
   object PopupMenu1: TPopupMenu
     left = 112
-    top = 184
+    top = 216
     object Lightcurve1: TMenuItem
       Caption = 'Show Light curve'
       OnClick = Lightcurve1Click
