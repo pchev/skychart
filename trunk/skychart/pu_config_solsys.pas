@@ -50,6 +50,7 @@ type
     aststrtdate_m: TEdit;
     DownloadAsteroid: TButton;
     DownloadComet: TButton;
+    astnummonthEdit: TEdit;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
@@ -62,6 +63,7 @@ type
     PageControl1: TPageControl;
     PageControl2: TPageControl;
     Panel1: TPanel;
+    astnummonth: TUpDown;
     XplanetBox: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
@@ -163,7 +165,6 @@ type
     Label7: TLabel;
     Label207: TLabel;
     AstCompute: TButton;
-    astnummonth: TSpinEdit;
     prepastmemo: TMemo;
     astdelete: TTabSheet;
     Label211: TLabel;
@@ -863,7 +864,7 @@ prepastmemo.clear;
 if assigned(FPrepareAsteroid) then begin
 y:=strtoint(trim(aststrtdate_y.text));
 m:=strtoint(trim(aststrtdate_m.text));
-for i:=1 to astnummonth.value do begin
+for i:=1 to astnummonth.position do begin
   jdt:=jd(y,m,1,0);
   if not FPrepareAsteroid(jdt,prepastmemo.lines) then begin
      screen.cursor:=crDefault;

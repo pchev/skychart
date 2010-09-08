@@ -2225,7 +2225,7 @@ object f_config_display: Tf_config_display
             Tag = 1
             Left = 366
             Height = 21
-            Top = 53
+            Top = 52
             Width = 55
             MaxValue = 48
             MinValue = 2
@@ -2273,7 +2273,7 @@ object f_config_display: Tf_config_display
             Tag = 5
             Left = 366
             Height = 21
-            Top = 149
+            Top = 148
             Width = 55
             MaxValue = 48
             MinValue = 2
@@ -2285,7 +2285,7 @@ object f_config_display: Tf_config_display
             Tag = 4
             Left = 366
             Height = 21
-            Top = 125
+            Top = 124
             Width = 55
             MaxValue = 48
             MinValue = 2
@@ -2297,7 +2297,7 @@ object f_config_display: Tf_config_display
             Tag = 3
             Left = 366
             Height = 21
-            Top = 101
+            Top = 100
             Width = 55
             MaxValue = 48
             MinValue = 2
@@ -2309,7 +2309,7 @@ object f_config_display: Tf_config_display
             Tag = 2
             Left = 366
             Height = 21
-            Top = 77
+            Top = 76
             Width = 55
             MaxValue = 48
             MinValue = 2

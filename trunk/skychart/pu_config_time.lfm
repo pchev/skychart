@@ -148,7 +148,7 @@ object f_config_time: Tf_config_time
           object Label137: TLabel
             Left = 8
             Height = 14
-            Top = 70
+            Top = 68
             Width = 23
             Caption = 'Time'
             ParentColor = False
@@ -204,7 +204,7 @@ object f_config_time: Tf_config_time
           object Label140: TLabel
             Left = 8
             Height = 14
-            Top = 22
+            Top = 25
             Width = 23
             Caption = 'Date'
             ParentColor = False
@@ -212,7 +212,7 @@ object f_config_time: Tf_config_time
           object Label1: TLabel
             Left = 8
             Height = 14
-            Top = 108
+            Top = 111
             Width = 16
             Caption = 'JD:'
             ParentColor = False
@@ -247,76 +247,14 @@ object f_config_time: Tf_config_time
               'BC'
             )
             OnClick = DateChange
-            TabOrder = 3
-          end
-          object d_year: TSpinEdit
-            Left = 56
-            Height = 21
-            Top = 19
-            Width = 75
-            MaxValue = 20000
-            OnChange = DateChange
             TabOrder = 0
-            Value = 2003
-          end
-          object d_month: TSpinEdit
-            Left = 127
-            Height = 21
-            Top = 19
-            Width = 60
-            MaxValue = 12
-            MinValue = 1
-            OnChange = DateChange
-            TabOrder = 1
-            Value = 1
-          end
-          object d_day: TSpinEdit
-            Left = 195
-            Height = 21
-            Top = 19
-            Width = 60
-            MaxValue = 31
-            MinValue = 1
-            OnChange = DateChange
-            TabOrder = 2
-            Value = 1
-          end
-          object t_hour: TSpinEdit
-            Left = 56
-            Height = 21
-            Top = 65
-            Width = 60
-            MaxValue = 23
-            OnChange = TimeChange
-            TabOrder = 4
-            Value = 1
-          end
-          object t_min: TSpinEdit
-            Left = 127
-            Height = 21
-            Top = 65
-            Width = 60
-            MaxValue = 59
-            OnChange = TimeChange
-            TabOrder = 5
-            Value = 1
-          end
-          object t_sec: TSpinEdit
-            Left = 195
-            Height = 21
-            Top = 65
-            Width = 60
-            MaxValue = 59
-            OnChange = TimeChange
-            TabOrder = 6
-            Value = 1
           end
           object JDEdit: TFloatEdit
             Left = 56
             Height = 21
-            Top = 105
+            Top = 108
             Width = 131
-            TabOrder = 7
+            TabOrder = 1
             OnChange = JDEditChange
             Value = 0
             Decimals = 6
@@ -333,7 +271,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h'
             OnClick = Button5Click
-            TabOrder = 8
+            TabOrder = 2
           end
           object Button6: TButton
             Left = 343
@@ -343,7 +281,7 @@ object f_config_time: Tf_config_time
             BorderSpacing.InnerBorder = 4
             Caption = '0h UT'
             OnClick = Button6Click
-            TabOrder = 9
+            TabOrder = 3
           end
           object BitBtn4: TButton
             Left = 267
@@ -352,7 +290,7 @@ object f_config_time: Tf_config_time
             Width = 137
             Caption = 'Actual system time'
             OnClick = BitBtn4Click
-            TabOrder = 10
+            TabOrder = 4
           end
           object BitBtn1: TBitBtn
             Left = 190
@@ -407,7 +345,133 @@ object f_config_time: Tf_config_time
             }
             NumGlyphs = 0
             OnClick = BitBtn1Click
+            TabOrder = 5
+          end
+          object d_yearEdit: TEdit
+            Left = 56
+            Height = 21
+            Top = 22
+            Width = 47
+            OnChange = DateChange
+            TabOrder = 6
+          end
+          object d_year: TUpDown
+            Left = 103
+            Height = 21
+            Top = 22
+            Width = 13
+            Associate = d_yearEdit
+            Min = 0
+            Max = 20000
+            Position = 0
+            TabOrder = 7
+            Thousands = False
+            Wrap = False
+          end
+          object d_monthEdit: TEdit
+            Left = 127
+            Height = 21
+            Top = 22
+            Width = 47
+            OnChange = DateChange
+            TabOrder = 8
+          end
+          object d_month: TUpDown
+            Left = 174
+            Height = 21
+            Top = 22
+            Width = 13
+            Associate = d_monthEdit
+            Min = 1
+            Max = 12
+            Position = 1
+            TabOrder = 9
+            Thousands = False
+            Wrap = False
+          end
+          object d_dayEdit: TEdit
+            Left = 195
+            Height = 21
+            Top = 22
+            Width = 47
+            OnChange = DateChange
+            TabOrder = 10
+          end
+          object d_day: TUpDown
+            Left = 242
+            Height = 21
+            Top = 22
+            Width = 13
+            Associate = d_dayEdit
+            Min = 1
+            Max = 31
+            Position = 1
             TabOrder = 11
+            Thousands = False
+            Wrap = False
+          end
+          object t_hourEdit: TEdit
+            Left = 56
+            Height = 21
+            Top = 65
+            Width = 47
+            OnChange = TimeChange
+            TabOrder = 12
+          end
+          object t_hour: TUpDown
+            Left = 103
+            Height = 21
+            Top = 65
+            Width = 13
+            Associate = t_hourEdit
+            Min = 0
+            Max = 23
+            Position = 0
+            TabOrder = 13
+            Thousands = False
+            Wrap = False
+          end
+          object t_minEdit: TEdit
+            Left = 127
+            Height = 21
+            Top = 65
+            Width = 47
+            OnChange = TimeChange
+            TabOrder = 14
+          end
+          object t_min: TUpDown
+            Left = 174
+            Height = 21
+            Top = 65
+            Width = 13
+            Associate = t_minEdit
+            Min = 0
+            Max = 59
+            Position = 0
+            TabOrder = 15
+            Thousands = False
+            Wrap = False
+          end
+          object t_sec: TUpDown
+            Left = 242
+            Height = 21
+            Top = 65
+            Width = 13
+            Associate = t_secEdit
+            Min = 0
+            Max = 59
+            Position = 0
+            TabOrder = 16
+            Thousands = False
+            Wrap = False
+          end
+          object t_secEdit: TEdit
+            Left = 195
+            Height = 21
+            Top = 65
+            Width = 47
+            OnChange = TimeChange
+            TabOrder = 17
           end
         end
         object CheckBox1: TCheckBox
