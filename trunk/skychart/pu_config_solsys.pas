@@ -468,7 +468,7 @@ TransparentPlanet.Checked:=cplot.TransparentPlanet;
  XplanetBox.Visible:=false;
  use_xplanet:=true;
 {$endif}
-if visible then ActiveControl:=PlanetDir;
+if visible and (Notebook1.ActivePageComponent=page1) then ActiveControl:=PlanetDir;
 end;
 
 procedure Tf_config_solsys.ShowComet;
