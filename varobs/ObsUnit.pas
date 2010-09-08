@@ -35,6 +35,7 @@ type
 
   TObsForm = class(TForm)
     Button1: TButton;
+    Editbtn: TButton;
     DateEdit1: TDateEdit;
     Edit1: TEdit;
     Edit9: TEdit;
@@ -68,6 +69,7 @@ type
     MenuItem13: TMenuItem;
     MenuItem14: TMenuItem;
     MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
@@ -79,6 +81,7 @@ type
     PopupMenu1: TPopupMenu;
     TimePicker1: TTimePicker;
     procedure Button1Click(Sender: TObject);
+    procedure EditbtnClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure AddClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -199,6 +202,11 @@ end;
 procedure TObsForm.Button1Click(Sender: TObject);
 begin
   PopupMenu1.PopUp(mouse.cursorpos.x,mouse.cursorpos.y);
+end;
+
+procedure TObsForm.EditbtnClick(Sender: TObject);
+begin
+  ExecuteFile(FilenameEdit1.text);
 end;
 
 procedure TObsForm.AddClick(Sender: TObject);

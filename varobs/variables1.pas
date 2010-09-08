@@ -50,6 +50,7 @@ type
     MenuItem5: TMenuItem;
     MenuItem6: TMenuItem;
     MenuItem7: TMenuItem;
+    EditEph1: TMenuItem;
     PrinterSetupDialog1: TPrinterSetupDialog;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
@@ -86,6 +87,7 @@ type
     AAVSOChart1: TMenuItem;
     procedure BitBtn1Click(Sender: TObject);
     procedure DateEdit1Change(Sender: TObject);
+    procedure Editeph1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
@@ -568,6 +570,7 @@ ThousandSeparator:=',';
 DateSeparator:='-';
 TimeSeparator:=':';
 ShortdateFormat:='yyyy-mm-dd';
+OpenFileCmd:=DefaultOpenFileCMD;
 Grid1.ColWidths[0]:=60;
 Grid1.ColWidths[1]:=60;
 Grid1.ColWidths[2]:=45;
@@ -757,6 +760,7 @@ with inifile do begin
     Varform.left:=ReadInteger(section,'formleft',Varform.left);
     Varform.width:=ReadInteger(section,'formwidth',Varform.width);
     Varform.height:=ReadInteger(section,'formheight',Varform.height);
+    OpenFileCmd:=ReadString(section,'OpenFileCmd',OpenFileCmd);
 end;
 inifile.free;
 detail1.savecheckbox1:=Detailform.checkbox1.checked;
@@ -808,8 +812,10 @@ end;
 
 procedure TVarForm.Setting1Click(Sender: TObject);
 begin
+OptForm.opencmd.Text:=OpenFileCmd;
 FormPos(OptForm,mouse.cursorpos.x,mouse.cursorpos.y);
 OptForm.showmodal;
+OpenFileCmd:=OptForm.opencmd.Text;
 TZ:=OptForm.tz.Value;
 chdir(appdir);
 end;
@@ -871,6 +877,7 @@ with inifile do begin
     WriteInteger(section,'formleft',Varform.left);
     WriteInteger(section,'formwidth',Varform.width);
     WriteInteger(section,'formheight',Varform.Height);
+    WriteString(section,'OpenFileCmd',OpenFileCmd);
 end;
 inifile.free;
 if tcpclient<>nil then begin
@@ -1017,6 +1024,11 @@ edit1.color:=clWindow;
 edit2.color:=clWindow;
 Application.processmessages;
 lockdate:=false; locktime:=false;
+end;
+
+procedure TVarForm.Editeph1Click(Sender: TObject);
+begin
+  ExecuteFile(planname);
 end;
 
 procedure TVarForm.Lightcurve1Click(Sender: TObject);

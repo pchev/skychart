@@ -43,6 +43,7 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
+    opencmd: TEdit;
     FileNameEdit0: TFileNameEdit;
     FileNameEdit1: TFileNameEdit;
     FileNameEdit2: TFileNameEdit;
@@ -73,6 +74,7 @@ type
     Label21: TLabel;
     Label22: TLabel;
     Label23: TLabel;
+    Label24: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
@@ -181,6 +183,7 @@ qlurl.Text:=defqlurl;
 afoevurl.Text:=defafoevurl;
 charturl.Text:=defaavsocharturl;
 webobsurl.Text:=defwebobsurl;
+opencmd.Text:=DefaultOpenFileCMD;
 end;
 
 procedure TOptForm.RadioGroup3Click(Sender: TObject);
@@ -240,4 +243,4 @@ end;
 initialization
   {$i SettingUnit.lrs}
 
-end.
+end.

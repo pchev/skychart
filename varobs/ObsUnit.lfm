@@ -5,100 +5,102 @@ object ObsForm: TObsForm
   Width = 638
   HorzScrollBar.Page = 637
   VertScrollBar.Page = 371
-  ActiveControl = Edit3
+  ActiveControl = TimePicker1
   Caption = 'New visual observation'
-  ClientHeight = 372
+  ClientHeight = 369
   ClientWidth = 638
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Menu = MainMenu1
   OnCloseQuery = FormCloseQuery
   OnShow = FormShow
+  LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 8
-    Height = 20
+    Height = 19
     Top = 66
-    Width = 66
+    Width = 62
     Caption = 'Star Name '
     ParentColor = False
   end
   object Label2: TLabel
     Left = 422
-    Height = 20
+    Height = 19
     Top = 17
-    Width = 64
+    Width = 59
     Caption = 'UT decimal'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 200
-    Height = 20
+    Height = 19
     Top = 66
-    Width = 35
+    Width = 31
     Caption = 'Magn.'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 13
-    Height = 20
+    Height = 19
     Top = 17
-    Width = 54
+    Width = 46
     Caption = 'Observer'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 392
-    Height = 20
+    Height = 19
     Top = 66
-    Width = 56
+    Width = 48
     Caption = 'Comment'
     ParentColor = False
   end
   object Label6: TLabel
     Left = 162
-    Height = 20
+    Height = 19
     Top = 102
-    Width = 73
+    Width = 68
     Caption = 'Comp Star 1'
     ParentColor = False
   end
   object Label7: TLabel
     Left = 136
-    Height = 18
+    Height = 23
     Top = 16
-    Width = 34
+    Width = 28
     Caption = 'Date'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     ParentColor = False
+    ParentFont = False
   end
   object Label9: TLabel
     Left = 416
-    Height = 20
+    Height = 19
     Top = 102
-    Width = 32
+    Width = 28
     Caption = 'Chart'
     ParentColor = False
   end
   object Label10: TLabel
     Left = 8
-    Height = 20
+    Height = 19
     Top = 140
-    Width = 51
+    Width = 44
     Caption = 'Remarks'
     ParentColor = False
   end
   object Label11: TLabel
     Left = 288
-    Height = 20
+    Height = 19
     Top = 102
-    Width = 73
+    Width = 68
     Caption = 'Comp Star 2'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 72
-    Height = 21
+    Height = 26
     Top = 64
     Width = 113
     CharCase = ecUppercase
@@ -106,7 +108,7 @@ object ObsForm: TObsForm
   end
   object Edit2: TEdit
     Left = 488
-    Height = 21
+    Height = 26
     Top = 15
     Width = 121
     CharCase = ecUppercase
@@ -116,7 +118,7 @@ object ObsForm: TObsForm
   end
   object Edit3: TEdit
     Left = 240
-    Height = 21
+    Height = 26
     Top = 64
     Width = 41
     CharCase = ecUppercase
@@ -124,7 +126,7 @@ object ObsForm: TObsForm
   end
   object Edit4: TEdit
     Left = 72
-    Height = 21
+    Height = 26
     Top = 15
     Width = 47
     CharCase = ecUppercase
@@ -134,7 +136,7 @@ object ObsForm: TObsForm
   end
   object Edit5: TEdit
     Left = 456
-    Height = 21
+    Height = 26
     Top = 64
     Width = 88
     CharCase = ecUppercase
@@ -142,7 +144,7 @@ object ObsForm: TObsForm
   end
   object Edit6: TEdit
     Left = 240
-    Height = 21
+    Height = 26
     Top = 100
     Width = 41
     CharCase = ecUppercase
@@ -156,6 +158,7 @@ object ObsForm: TObsForm
     Font.Height = -11
     Font.Name = 'Courier New'
     Font.Pitch = fpFixed
+    ParentFont = False
     ScrollBars = ssBoth
     TabOrder = 12
     TabStop = False
@@ -171,10 +174,10 @@ object ObsForm: TObsForm
     TabOrder = 8
   end
   object BitBtn2: TBitBtn
-    Left = 548
+    Left = 422
     Height = 25
     Top = 334
-    Width = 75
+    Width = 87
     Caption = 'Save to File'
     NumGlyphs = 0
     OnClick = Button2Click
@@ -183,7 +186,7 @@ object ObsForm: TObsForm
   end
   object Edit7: TEdit
     Left = 456
-    Height = 21
+    Height = 26
     Top = 100
     Width = 88
     CharCase = ecUppercase
@@ -191,7 +194,7 @@ object ObsForm: TObsForm
   end
   object Edit8: TEdit
     Left = 64
-    Height = 21
+    Height = 26
     Top = 138
     Width = 397
     MaxLength = 100
@@ -199,9 +202,9 @@ object ObsForm: TObsForm
   end
   object CheckBox2: TCheckBox
     Left = 296
-    Height = 21
+    Height = 22
     Top = 64
-    Width = 90
+    Width = 84
     Caption = 'Fainter than'
     TabOrder = 11
     TabStop = False
@@ -218,42 +221,49 @@ object ObsForm: TObsForm
   end
   object DateEdit1: TDateEdit
     Left = 176
-    Height = 23
+    Height = 26
     Top = 14
     Width = 80
     CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
     OKCaption = 'OK'
     CancelCaption = 'Cancel'
-    ReadOnly = False
+    DateOrder = doNone
     ButtonWidth = 23
+    CharCase = ecNormal
     Glyph.Data = {
-      2F0200002F2A2058504D202A2F0A7374617469632063686172202A63616C656E
-      6461725B5D203D207B0A2F2A20636F6C756D6E7320726F777320636F6C6F7273
-      2063686172732D7065722D706978656C202A2F0A223134203132203137203122
-      2C0A2220206320626C61636B222C0A222E20632023383030303030222C0A2258
-      20632023303038303030222C0A226F20632023383038303030222C0A224F2063
-      206E617679222C0A222B20632023383030303830222C0A224020632023303038
-      303830222C0A222320632023383038303830222C0A2224206320234330433043
-      30222C0A2225206320726564222C0A2226206320677265656E222C0A222A2063
-      2079656C6C6F77222C0A223D206320626C7565222C0A222D2063206D6167656E
-      7461222C0A223B2063206379616E222C0A223A20632067726179313030222C0A
-      223E2063204E6F6E65222C0A2F2A20706978656C73202A2F0A223E3E20202020
-      2020202020203E3E222C0A223E3E3A24242424242424243A4F23222C0A223E3E
-      3A3A3A3A3A3A3A3A3A3A4F23222C0A223E3E3A3A203A3A202020203A4F23222C
-      0A223E3E3A20203A3A203A3A3A3A4F23222C0A223E3E3A3A203A3A202020243A
-      4F23222C0A223E3E3A3A203A3A3A3A3A203A4F23222C0A223E3E3A3A203A3A24
-      3A24203A4F23222C0A223E3E3A2020203A202020243A4F23222C0A223E3E3A3A
-      3A3A3A3A3A3A3A3A4F23222C0A223E3E20204F204F4F204F20204F23222C0A22
-      3E3E3E2323232323232323232323220A7D3B0A
+      D6020000424DD60200000000000036000000280000000E0000000C0000000100
+      200000000000A002000064000000640000000000000000000000000000000000
+      000000000000808080FF808080FF808080FF808080FF808080FF808080FF8080
+      80FF808080FF808080FF808080FF808080FF0000000000000000000000FF0000
+      00FF800000FF000000FF800000FF800000FF000000FF800000FF000000FF0000
+      00FF800000FF808080FF0000000000000000808080FF808080FF808080FF8080
+      80FF808080FF808080FF808080FF808080FF808080FF808080FF800000FF8080
+      80FF0000000000000000808080FF000000FF000000FF000000FF808080FF0000
+      00FF000000FF000000FFC0C0C0FF808080FF800000FF808080FF000000000000
+      0000808080FF808080FF000000FF808080FF808080FFC0C0C0FF808080FFC0C0
+      C0FF000000FF808080FF800000FF808080FF0000000000000000808080FF8080
+      80FF000000FF808080FF808080FF808080FF808080FF808080FF000000FF8080
+      80FF800000FF808080FF0000000000000000808080FF808080FF000000FF8080
+      80FF808080FF000000FF000000FF000000FFC0C0C0FF808080FF800000FF8080
+      80FF0000000000000000808080FF000000FF000000FF808080FF808080FF0000
+      00FF808080FF808080FF808080FF808080FF800000FF808080FF000000000000
+      0000808080FF808080FF000000FF808080FF808080FF000000FF000000FF0000
+      00FF000000FF808080FF800000FF808080FF0000000000000000808080FF8080
+      80FF808080FF808080FF808080FF808080FF808080FF808080FF808080FF8080
+      80FF800000FF808080FF0000000000000000808080FFC0C0C0FFC0C0C0FFC0C0
+      C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FFC0C0C0FF808080FF800000FF8080
+      80FF0000000000000000000000FF000000FF000000FF000000FF000000FF0000
+      00FF000000FF000000FF000000FF000000FF0000000000000000
     }
     NumGlyphs = 1
+    MaxLength = 0
     OnExit = DateEdit1Change
     TabStop = False
     TabOrder = 13
   end
   object Edit9: TEdit
     Left = 368
-    Height = 21
+    Height = 26
     Top = 100
     Width = 41
     CharCase = ecUppercase
@@ -261,12 +271,15 @@ object ObsForm: TObsForm
   end
   object FileNameEdit1: TFileNameEdit
     Left = 14
-    Height = 23
+    Height = 26
     Top = 335
-    Width = 486
+    Width = 378
+    DialogOptions = []
+    FilterIndex = 0
+    HideDirectories = False
     ButtonWidth = 23
     NumGlyphs = 1
-    ParentColor = False
+    MaxLength = 0
     TabOrder = 15
     TabStop = False
   end
@@ -279,6 +292,15 @@ object ObsForm: TObsForm
     OnClick = Button1Click
     TabOrder = 16
   end
+  object Editbtn: TButton
+    Left = 527
+    Height = 25
+    Top = 334
+    Width = 96
+    Caption = 'Edit File'
+    OnClick = EditbtnClick
+    TabOrder = 17
+  end
   object MainMenu1: TMainMenu
     left = 16
     top = 40
@@ -287,6 +309,10 @@ object ObsForm: TObsForm
       object MenuItem4: TMenuItem
         Caption = '&Save'
         OnClick = Button2Click
+      end
+      object MenuItem16: TMenuItem
+        Caption = 'Edit file'
+        OnClick = EditbtnClick
       end
       object MenuItem2: TMenuItem
         Caption = '&Reset input fields'
@@ -346,4 +372,4 @@ object ObsForm: TObsForm
       OnClick = CodeClick
     end
   end
-end
+end
