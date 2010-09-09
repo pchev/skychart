@@ -2,7 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-AppName=Cartes du Ciel Pictures
+ArchitecturesInstallIn64BitMode=x64
+AppName=Cartes du Ciel V3
 AppVerName=Cartes du Ciel Data
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
@@ -11,17 +12,17 @@ DefaultDirName={reg:HKCU\Software\Astro_PC\Ciel,Install_Dir|{pf}\Ciel}
 UsePreviousAppDir=no
 DefaultGroupName=Cartes du Ciel V3.0
 AllowNoIcons=yes
-InfoBeforeFile=main\Presetup\readme.txt
-OutputDir=output
-OutputBaseFilename=cdc_pictures_1.0.0.1
+InfoBeforeFile=Presetup\readme.txt
+OutputDir=.\
+OutputBaseFilename=skychart-data-pictures-windows
 Compression=lzma
-SolidCompression=no
-Uninstallable=no
-
-[Languages]
-Name: "eng"; MessagesFile: "compiler:Default.isl,compiler:Languages\cdc_catalog.isl"
+SolidCompression=true
+Uninstallable=true
+UninstallLogMode=append
+DirExistsWarning=no
+AppID={{A261F28E-6053-4414-9B84-AA8FE5F47AD4}
 
 [Files]
-Source: "main\Data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
