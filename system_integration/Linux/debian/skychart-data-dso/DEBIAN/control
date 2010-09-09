@@ -5,6 +5,6 @@ Priority: optional
 Maintainer: Patrick Chevalley <pch@freesurf.ch>
 Architecture: all
 Depends: skychart
-Suggests: skychart-data-stars
 Description: DSO catalog data for Skychart / Cartes du Ciel planetarium software
+ Contain the catalogs: NGC, PGC, GCM, GPN, LBN, OCL
  .
