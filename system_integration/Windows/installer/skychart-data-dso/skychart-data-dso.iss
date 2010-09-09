@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=Cartes du Ciel DSO catalog
-AppVerName=Cartes du Ciel DSO catalog v3
+AppVerName=Cartes du Ciel V3
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart

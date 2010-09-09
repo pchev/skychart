@@ -3,7 +3,7 @@
 
 [Setup]
 AppName=Cartes du Ciel Pictures
-AppVerName=Cartes du Ciel Pictures 1.0.0.1
+AppVerName=Cartes du Ciel V3
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart
