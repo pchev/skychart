@@ -52,7 +52,7 @@ Source: PrivateFiles\*; DestDir: {userappdata}\skychart\; Flags: onlyifdoesntexi
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
-Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}
+Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
 
 [Icons]
 Name: {group}\Cartes du Ciel V3.0; Filename: {app}\skychart.exe; WorkingDir: {app}
