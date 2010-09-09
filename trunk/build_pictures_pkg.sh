@@ -9,7 +9,7 @@ wine_build="Z:\tmp\skychart" # Change to match builddir, Z: is defined in ~/.win
 # adjuste here the target you want to crossbuild
 
 unset make_linux
-#make_linux=1
+make_linux=1
 unset make_win
 make_win=1
 
