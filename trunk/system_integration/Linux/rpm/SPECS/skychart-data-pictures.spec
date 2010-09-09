@@ -1,5 +1,5 @@
 Summary: Skychart / Cartes du Ciel Pictures of Deepsky objects
-Name: skychart_pictures
+Name: skychart-data-pictures
 Version: 1.0.0.1
 Release: 3
 Group: Sciences/Astronomy
@@ -8,7 +8,8 @@ URL: http://skychart.sourceforge.net
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: noarch
-Provides: skychart_pictures
+Provides: skychart-data-pictures
+Conflicts: skychart_pictures
 Requires: skychart
 AutoReqProv: no
 
@@ -16,6 +17,9 @@ AutoReqProv: no
 Pictures of Deepsky objects to use with Skychart planetarium software. 
 
 %changelog
+* Thu Sep 9 2009 Patrick Chevalley
+ - new package name
+
 * Wed Aug 26 2009 Patrick Chevalley
  - Change install directory
 
@@ -25,4 +29,4 @@ Pictures of Deepsky objects to use with Skychart planetarium software.
 %files
 %defattr(-,root,root)
 /usr/share/skychart
-/usr/share/doc/skychart-pictures/
+/usr/share/doc/skychart-data-pictures/

@@ -5,6 +5,6 @@ Priority: optional
 Maintainer: Patrick Chevalley <pch@freesurf.ch>
 Architecture: all
 Depends: skychart
-Suggests: skychart-data-dso
 Description: Star catalog data for Skychart / Cartes du Ciel planetarium software
+ Contain the catalogs: Sky2000, Tycho2, GCVS, WDS and search index for SAO, BD, HD, GC
  .
