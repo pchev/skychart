@@ -2,7 +2,8 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-AppName=Cartes du Ciel DSO catalog
+ArchitecturesInstallIn64BitMode=x64
+AppName=Cartes du Ciel V3
 AppVerName=Cartes du Ciel Data
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
