@@ -7,7 +7,7 @@ License: GPL
 URL: http://skychart.sourceforge.net
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
-BuildArch: i386
+BuildArch: noarch
 Provides: skychart_pictures
 Requires: skychart
 AutoReqProv: no

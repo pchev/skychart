@@ -1,0 +1,10 @@
+Package: skychart-data-dso
+Version: 3
+Section: science
+Priority: optional
+Maintainer: Patrick Chevalley <pch@freesurf.ch>
+Architecture: all
+Depends: skychart
+Suggests: skychart-data-stars
+Description: DSO catalog data for Skychart / Cartes du Ciel planetarium software
+ .

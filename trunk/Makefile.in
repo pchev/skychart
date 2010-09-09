@@ -54,6 +54,10 @@ data:
 	\$(MAKE) -C tools all
 install_data:
 	\$(MAKE) -C tools install 
+install_cat1:
+	./install_darwin_cat1.sh $(PREFIX) 
+install_cat2:
+	./install_darwin_cat2.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 else
@@ -65,18 +69,26 @@ install_win:
 	./install_win.sh win32 $(PREFIX)
 uninstall_win: 
 	./uninstall_win.sh $(PREFIX)
-install_win64: 
+install_win64:
 	./install_win.sh win64 $(PREFIX)
 uninstall_win64: 
 	./uninstall_win.sh $(PREFIX)
 install_win_data:
 	\$(MAKE) -C tools install_win 
+install_win_cat1:
+	./install_win_cat1.sh $(PREFIX) 
+install_win_cat2:
+	./install_win_cat2.sh $(PREFIX) 
 uninstall_win_data:
 	\$(MAKE) -C tools uninstall_win
 data:
 	\$(MAKE) -C tools all
 install_data:
-	\$(MAKE) -C tools install 
+	\$(MAKE) -C tools install
+install_cat1:
+	./install_cat1.sh $(PREFIX) 
+install_cat2:
+	./install_cat2.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 endif
