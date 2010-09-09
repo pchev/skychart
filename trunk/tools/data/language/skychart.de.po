@@ -2770,6 +2770,10 @@ msgstr "Sonstige Beschriftungen"
 msgid "Other line-catalogs"
 msgstr "Andere Kataloge"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "Katalogtyp"

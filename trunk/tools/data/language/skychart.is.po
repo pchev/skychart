@@ -3339,6 +3339,10 @@ msgstr "Annað merki"
 msgid "Other line-catalogs"
 msgstr "Aðrar línuskrár"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 #, fuzzy
 #| msgid "Output Catalog Type"

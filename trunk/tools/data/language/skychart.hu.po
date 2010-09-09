@@ -3331,6 +3331,10 @@ msgstr "Egyéb címke"
 msgid "Other line-catalogs"
 msgstr "Egyéb katalógus"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 #, fuzzy
 #| msgid "Output Catalog Type"

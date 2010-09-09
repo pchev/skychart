@@ -2770,6 +2770,10 @@ msgstr "Ostatní popisky"
 msgid "Other line-catalogs"
 msgstr "Ostatní katalogy"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "Typ výstupního katalogu"

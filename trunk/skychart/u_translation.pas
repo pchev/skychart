@@ -1111,6 +1111,7 @@ resourcestring
   rsToFile = 'to file:';
   rsASCOMTelesco = 'ASCOM telescope driver';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
+  rsOtherSoftwar = 'Other software data';
 
 implementation
 
