@@ -985,7 +985,7 @@ begin
              EmptyRec.options.ObjType:=1;
              Emptyrec.neb.valid[vnId]:=true;
              Emptyrec.neb.valid[vnMag]:=true;
-             Emptyrec.neb.valid[vnSbr]:=true;
+             Emptyrec.neb.valid[vnSbr]:=false;
              Emptyrec.neb.valid[vnDim1]:=true;
              Emptyrec.neb.valid[vnDim2]:=true;
              Emptyrec.neb.valid[vnPA]:=true;
@@ -1874,7 +1874,7 @@ result:=true;
 repeat
   ReadPGC(lin,result);
   if not result then break;
-  rec.neb.mag:=min(90,abs(lin.mb/100));
+  rec.neb.mag:=min(99,abs(lin.mb/100));
   if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   if lin.maj>=0 then rec.neb.dim1:=lin.maj/100
                 else rec.neb.dim1:=0;
