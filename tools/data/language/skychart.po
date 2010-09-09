@@ -4374,3 +4374,7 @@ msgstr ""
 msgid "Use the menu or button \"%s\" to configure this driver."
 msgstr ""
 
+#: u_translation:rsothersoftwar
+msgid "Other software data"
+msgstr ""
+

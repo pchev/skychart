@@ -2907,6 +2907,10 @@ msgstr ""
 msgid "Other line-catalogs"
 msgstr ""
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr ""

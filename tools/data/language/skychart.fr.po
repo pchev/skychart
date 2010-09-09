@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-04 15:53+0200\n"
+"PO-Revision-Date: 2010-09-09 11:23+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -2772,6 +2772,10 @@ msgstr "Autre label"
 msgid "Other line-catalogs"
 msgstr "Autre catalogue de ligne"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr "Données d'autres logiciels"
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "Type du catalogue de sortie "
@@ -4397,4 +4401,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

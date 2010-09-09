@@ -2772,6 +2772,10 @@ msgstr "Altra etiqueta"
 msgid "Other line-catalogs"
 msgstr "Altres catàlegs de línia"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "Tipus del catàleg de sortida "

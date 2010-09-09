@@ -2771,6 +2771,10 @@ msgstr "其他标签"
 msgid "Other line-catalogs"
 msgstr "其他线路星表"
 
+#: u_translation.rsothersoftwar
+msgid "Other software data"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "输出星表类型"
