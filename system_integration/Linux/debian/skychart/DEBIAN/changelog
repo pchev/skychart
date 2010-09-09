@@ -1,3 +1,11 @@
+skychart (3.1) experimental; urgency=low
+
+  * Unstable in progress version
+    For the full change log, see :
+    http://svn.origo.ethz.ch/wsvn/skychart/trunk/?op=log&isdir=1&
+
+ -- Patrick Chevalley <pch@freesurf.ch>  Thu, 25 Jan 2009 10:00:00 +0100
+
 skychart (3.0.1.6-1) experimental; urgency=low
 
   * New beta version

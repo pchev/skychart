@@ -4,7 +4,7 @@ Version: 3
 Release: 1
 Group: Sciences/Astronomy
 License: GPL
-URL: http://skychart.sourceforge.net
+URL: http://skychart.origo.ethz.ch
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
