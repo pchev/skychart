@@ -58,6 +58,8 @@ install_cat1:
 	./install_darwin_cat1.sh $(PREFIX) 
 install_cat2:
 	./install_darwin_cat2.sh $(PREFIX) 
+install_pict:
+	./install_darwin_pict.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 else
@@ -79,6 +81,8 @@ install_win_cat1:
 	./install_win_cat1.sh $(PREFIX) 
 install_win_cat2:
 	./install_win_cat2.sh $(PREFIX) 
+install_win_pict:
+	./install_win_pict.sh $(PREFIX) 
 uninstall_win_data:
 	\$(MAKE) -C tools uninstall_win
 data:
@@ -89,6 +93,8 @@ install_cat1:
 	./install_cat1.sh $(PREFIX) 
 install_cat2:
 	./install_cat2.sh $(PREFIX) 
+install_pict:
+	./install_pict.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
 endif
