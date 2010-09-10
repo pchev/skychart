@@ -46,6 +46,7 @@ type
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
+    Button9: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     FileNameEdit1: TFileNameEdit;
@@ -338,6 +339,7 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
     procedure CBStyleChange(Sender: TObject);
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
@@ -563,6 +565,7 @@ lstDSOCScheme.items[0]:='CdC v2 '+rsDefault;
 lstDSOCScheme.items[1]:='CdC v3 '+rsDefault;
 lstDSOCScheme.items[2]:=rsPrintedChart;
 lstDSOCScheme.items[3]:=rsGreen;
+
 Page4.caption:=rsSkyColour;
 skycolorbox.caption:=rsSkyColour;
 skycolorbox.items[0]:=rsFixedBlack;
@@ -572,6 +575,7 @@ Label202.caption:=rsDayTime;
 Label208.caption:=rsAstronomical2;
 Label5.Caption:=rsFixedSkyColo;
 Button3.caption:=rsDefaultColor;
+
 Page5.caption:=rsLines;
 EqGrid.caption:=rsAddEquatoria;
 CGrid.caption:=rsShowCoordina;
@@ -618,6 +622,7 @@ GalEqStyle.items[1]:=rsDash1;
 GalEqStyle.items[2]:=rsDot1;
 GalEqStyle.items[3]:=rsDashDot1;
 GalEqStyle.items[4]:=rsDashDotDot1;
+
 Page6.caption:=rsLabels;
 DrawAllStarLabel.Caption:=rsDisplayLabel;
 MagLabel.caption:=rsStarLabel;
@@ -643,6 +648,8 @@ showlabelSol.caption:=rsSolarSystem;
 showlabelConst.caption:=rsConstellatio7;
 showlabelMisc.caption:=rsOtherLabel;
 ShowLabelChartInfo.caption:=rsChartInforma;
+Button9.Caption:=rsDefault;
+
 Page7.caption:=rsFonts;
 Label121.caption:=rsCoordinatesG;
 Label122.caption:=rsObject;
@@ -1218,8 +1225,8 @@ begin
  if csc.ConstFullLabel then begin
     if csc.ConstLatinLabel then constlabel.ItemIndex:=2
                            else constlabel.ItemIndex:=0;
-                       end
-                       else constlabel.ItemIndex:=1;
+  end
+    else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
  ShowChartInfo.checked:=cmain.ShowChartInfo;
  DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
@@ -1721,6 +1728,31 @@ if sender is TShape then with sender as TShape do begin
       ShowLabelColor;
    end;
 end;
+end;
+
+procedure Tf_config_display.Button9Click(Sender: TObject);
+var i: integer;
+begin
+for i:=1 to numlabtype do begin
+   cplot.LabelColor[i]:=clWhite;
+   cplot.LabelSize[i]:=DefaultFontSize;
+   csc.LabelMagDiff[i]:=4;
+   csc.ShowLabel[i]:=true;
+end;
+csc.LabelMagDiff[1]:=3;
+csc.LabelMagDiff[5]:=2;
+cplot.LabelColor[6]:=clYellow;
+cplot.LabelColor[7]:=clSilver;
+cplot.LabelSize[6]:=cplot.LabelSize[6]+2;
+csc.Showlabelall:=true;
+cmain.ShowChartInfo:=false;
+csc.DrawAllStarLabel:=false;
+csc.NameLabel:=false;
+csc.MagLabel:=false;
+csc.ConstFullLabel:=true;
+csc.ConstLatinLabel:=false;
+ShowLabel;
+ShowLabelColor;
 end;
 
 procedure Tf_config_display.labelsizeChanged(Sender: TObject);
