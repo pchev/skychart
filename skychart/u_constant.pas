@@ -36,8 +36,8 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
      TSkycolor = array[0..7]of Tcolor;
 
 const cdcversion = 'Version 3.1 svn';
-      cdcver     = '3.1b';
-      cdccpy = 'Copyright (C) 2002-2009 Patrick Chevalley';
+      cdcver     = '3.1c';
+      cdccpy = 'Copyright (C) 2002-2010 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,' ;
       MaxSim = 100 ;
@@ -307,8 +307,8 @@ const cdcversion = 'Version 3.1 svn';
       DefaultFontFixed='Courier';
       DefaultFontSymbol='symbol';
       DefaultFontSize=12;
-      DefaultPrivateDir='~/.skychart';
-      Defaultconfigfile='~/.skychart/skychart.ini';
+      DefaultPrivateDir='~/Library/Application Support/skychart';
+      Defaultconfigfile='~/Library/Application Support/skychart/skychart.ini';
       SharedDir='/usr/share/skychart';
       DefaultPrintCmd1='open';
       DefaultPrintCmd2='open';
