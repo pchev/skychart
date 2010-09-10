@@ -5895,6 +5895,55 @@ begin
 chartchanged:=false;
 pp:=TStringList.Create;
 try
+// parameters that need to be processed very first
+for i:=0 to Params.Count-1 do begin
+   pp.Clear;
+   parms:= Params[i];
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
+      parm:='';
+   end;
+   if cmd='--load' then begin
+      pp.Add('LOAD');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+      chartchanged:=true;
+   end;
+end;
+// parameters that need to be processed first
+for i:=0 to Params.Count-1 do begin
+   pp.Clear;
+   parms:= Params[i];
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
+      parm:='';
+   end;
+   if cmd='--setobs' then begin
+      pp.Add('SETOBS');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+      chartchanged:=true;
+   end else if cmd='--settz' then begin
+      pp.Add('SETTZ');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+      chartchanged:=true;
+   end else if cmd='--setdate' then begin
+      pp.Add('SETDATE');
+      pp.Add(parm);
+      ExecuteCmd('',pp);
+      chartchanged:=true;
+   end;
+end;
+// parameters that need to be processed afterward
 for i:=0 to Params.Count-1 do begin
    pp.Clear;
    parms:= Params[i];
@@ -5931,45 +5980,34 @@ for i:=0 to Params.Count-1 do begin
       pp.Add(parm);
       ExecuteCmd('',pp);
       chartchanged:=true;
-   end else if cmd='--load' then begin
-      pp.Add('LOAD');
-      pp.Add(parm);
-      ExecuteCmd('',pp);
-      chartchanged:=true;
-   end else if cmd='--setobs' then begin
-      pp.Add('SETOBS');
-      pp.Add(parm);
-      ExecuteCmd('',pp);
-      chartchanged:=true;
-   end else if cmd='--settz' then begin
-      pp.Add('SETTZ');
-      pp.Add(parm);
-      ExecuteCmd('',pp);
-      chartchanged:=true;
-   end else if cmd='--setdate' then begin
-      pp.Add('SETDATE');
-      pp.Add(parm);
-      ExecuteCmd('',pp);
-      chartchanged:=true;
-   end else if cmd='--saveimg' then begin
-      parm:='SAVEIMG '+parm;
-      splitarg(parm,blank,pp);
-      ExecuteCmd('',pp);
    end else if cmd='--resize' then begin
       parm:='RESIZE '+parm;
       splitarg(parm,blank,pp);
       ExecuteCmd('',pp);
-   end else if cmd='--test2' then begin
-      pp.Add('NEWCHART');
-      pp.Add('test');
-      ExecuteCmd('test',pp);
-      chartchanged:=true;
    end;
 end;
 if chartchanged then begin
   pp.Clear;
   pp.Add('REDRAW');
   ExecuteCmd('',pp);
+end;
+// parameters that need to be processed after the chart is draw
+for i:=0 to Params.Count-1 do begin
+   pp.Clear;
+   parms:= Params[i];
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
+      parm:='';
+   end;
+   if cmd='--saveimg' then begin
+      parm:='SAVEIMG '+parm;
+      splitarg(parm,blank,pp);
+      ExecuteCmd('',pp);
+   end;
 end;
 finally
   pp.free;
