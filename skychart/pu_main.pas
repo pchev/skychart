@@ -3509,11 +3509,6 @@ for i:=1 to numfont do begin
    def_cfgplot.FontBold[i]:=false;
    def_cfgplot.FontItalic[i]:=false;
 end;
-{$ifdef mswindows}
-def_cfgplot.FontSize[4]:=8;
-{$else}
-def_cfgplot.FontSize[4]:=10;
-{$endif}
 def_cfgplot.FontName[5]:=DefaultFontFixed;
 def_cfgplot.FontName[7]:=DefaultFontSymbol;
 for i:=1 to numlabtype do begin
