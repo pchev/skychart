@@ -316,6 +316,7 @@ end;
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
 begin
+WriteTrace('Scan picture directory: '+cmain.ImagePath);
 if DirectoryExists(cmain.ImagePath) then begin
 screen.cursor:=crHourGlass;
 ProgressPanel.visible:=true;
@@ -327,6 +328,7 @@ nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 end else begin
   nimages.Caption:=rsDirectoryNot2;
 end;
+WriteTrace(nimages.Caption);
 end;
 
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
