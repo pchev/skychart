@@ -2677,8 +2677,8 @@ case n of
  49 : result:=cmd_GetDEC(arg[1]);
  50 : result:=cmd_GetDate;
  51 : result:=cmd_GetObs;
- 52 : result:=cmd_SetDate(arg[1]);
- 53 : result:=cmd_SetTZ(arg[1]);
+ 52 : begin result:=cmd_SetDate(arg[1]); Refresh; end;
+ 53 : begin result:=cmd_SetTZ(arg[1]); Refresh; end;
  54 : result:=cmd_GetTZ;
  55 : begin cmd_SetRa(arg[1]); cmd_SetDec(arg[2]); cmd_SetFov(arg[3]); Refresh; end;
  56 : result:='not implemented'; // dss
