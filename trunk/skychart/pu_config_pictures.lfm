@@ -90,7 +90,7 @@ object f_config_pictures: Tf_config_pictures
           end
         end
         object ScanImages: TButton
-          Left = 100
+          Left = 133
           Height = 25
           Top = 133
           Width = 156
