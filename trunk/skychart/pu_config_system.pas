@@ -323,9 +323,10 @@ procedure Tf_config_system.FormShow(Sender: TObject);
 begin
 LockChange:=true;
 dbchanged:=false;
-{$ifdef mswindows}
+{$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible:=false;
-{$else}
+{$endif}
+{$ifdef unix}
   if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
   Indiport.Style:= csSimple;
