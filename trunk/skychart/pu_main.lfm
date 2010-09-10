@@ -19,7 +19,6 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
-  Position = poDefaultPosOnly
   LCLVersion = '0.9.29'
   object MultiDoc1: TMultiDoc
     Left = 384
