@@ -23,6 +23,8 @@ install:
 	./install_data_darwin.sh $(PREFIX) 
 uninstall: 
 	./uninstall_data_darwin.sh $(PREFIX) 
+refresh_doc: 
+	./refresh_wiki_doc.sh 
 else
 install: 
 	./install_data.sh $(PREFIX) 
@@ -32,6 +34,8 @@ install_win:
 	./install_win_data.sh $(PREFIX)
 uninstall_win: 
 	./uninstall_win_data.sh $(PREFIX)
+refresh_doc: 
+	./refresh_wiki_doc.sh 
 endif
 endif
 endif
