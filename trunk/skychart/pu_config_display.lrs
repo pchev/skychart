@@ -10,7 +10,7 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +'ght'#3#233#1#3'Top'#2#0#5'Width'#3#252#1#5'Align'#7#8'alClient'#12'ClientHe'
   +'ight'#3#233#1#11'ClientWidth'#3#252#1#11'ParentColor'#8#8'TabOrder'#2#0#0#9
   +'TNotebook'#9'Notebook1'#4'Left'#2#1#6'Height'#3#231#1#3'Top'#2#1#5'Width'#3
-  +#250#1#5'Align'#7#8'alClient'#9'PageIndex'#2#0#8'ShowTabs'#8#8'TabOrder'#2#0
+  +#250#1#5'Align'#7#8'alClient'#9'PageIndex'#2#6#8'ShowTabs'#8#8'TabOrder'#2#0
   +#0#5'TPage'#5'Page1'#7'Caption'#6#7'Display'#11'ClientWidth'#3#246#1#12'Clie'
   +'ntHeight'#3#227#1#0#11'TRadioGroup'#11'stardisplay'#4'Left'#2#8#6'Height'#2
   +'A'#3'Top'#2'd'#5'Width'#3#185#1#8'AutoFill'#9#7'Caption'#6#12'Star Display'

@@ -1450,11 +1450,6 @@ for i:=1 to numfont do begin
     cplot.FontBold[i]:=false;
     cplot.FontItalic[i]:=false;
 end;
-{$ifdef mswindows}
-cplot.FontSize[4]:=8;
-{$else}
-cplot.FontSize[4]:=10;
-{$endif}
 cplot.FontName[5]:=DefaultFontFixed;
 cplot.FontName[7]:='Symbol';
 ShowFonts;
