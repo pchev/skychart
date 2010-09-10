@@ -14,6 +14,7 @@ Add mode keyboard shortcut.
 Right click on many button to directly access the corresponding setup form.
 More DSS online server.
 Update SAC database to version 8.1.
+On Mac OS X the user setting directory change from ~/.skychart to ~/Library/Application Support/skychart
 Many bug fix.
 
 The full change log is here:
