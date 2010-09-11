@@ -25,7 +25,7 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart*.dmg
+  rm skychart-3*.dmg
   rm bin-*.bz2
   rm -rf $basedir
 
@@ -41,6 +41,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   cp system_integration/MacOSX/skychart.packproj $basedir
+  cp system_integration/MacOSX/readme.txt $basedir
   cd $basedir
   mv Cartes "Cartes du Ciel"
   freeze -v skychart.packproj

@@ -31,6 +31,7 @@ LANG=$lang
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   cp system_integration/MacOSX/skychart-data-stars.packproj $basedir
+  cp system_integration/MacOSX/readme_stars.txt $basedir
   cd $basedir
   mv Cartes "Cartes du Ciel"
   freeze -v skychart-data-stars.packproj
