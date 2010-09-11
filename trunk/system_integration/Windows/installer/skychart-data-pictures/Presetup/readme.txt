@@ -1,13 +1,10 @@
 Skychart / Cartes du Ciel
-Stars Catalog
+DSO Pictures
 
-This file install all the standard stars catalog:
-
-- Sky2000
-- Tycho2
-- GCVS
-- WDS
-- Search index for SAO, BD, HD, GC
+This file install 9894 pictures for object of the SAC database.
 
 Be sure to install in the directory where you already install Skychart.
+
+After the installation open the menu Setup / Pictures / Objects
+and click the "Scan directory" button.
 
