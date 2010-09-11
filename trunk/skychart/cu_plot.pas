@@ -1329,6 +1329,9 @@ if not cfgplot.Invisible then begin
          outlinemax:=outlinenum+1;
          if (cfgplot.nebplot=0) and (outlinetype=2) then outlinetype:=0;
          if (cfgchart.onprinter) and (outlinetype=1) then outlinetype:=0;
+         {$ifdef darwin}
+         if (outlinetype=1) then outlinetype:=0; // TODO: spline wrongly implemented on Carbon
+         {$endif}
          case outlinetype of
          0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
          1 : Bezierspline(outlinepts,outlinenum+1);
