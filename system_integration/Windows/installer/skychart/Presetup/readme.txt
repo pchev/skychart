@@ -7,12 +7,14 @@ in the same folder you already install the V2.76
 This version include the SQLite library at version 3.
 If you prefere to use MySQL a simplified MySQL database server installation is available for Windows.
 
-If you already run a previous beta version, your preference are reset by this version.
+If you already run a previous beta version, your preference may be reset by this version.
 
-Copyright (C) 2008 Patrick Chevalley
+To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
+
+Copyright (C) 2010 Patrick Chevalley
 
 http://ap-i.net/skychart
-http://skychart.sourceforge.net
+http://skychart.origo.ethz.ch/
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

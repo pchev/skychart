@@ -11,3 +11,7 @@ This file install all the standard stars catalog:
 
 Be sure to install in the directory where you already install Skychart.
 
+After the installation open the menu Setup / Catalog / CdC stars
+to select the catalog you want on the chart.
+Just check SKY2000 and Tycho with the default value to add faint stars.
+
