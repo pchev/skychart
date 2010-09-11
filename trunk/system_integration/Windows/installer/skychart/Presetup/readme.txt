@@ -4,9 +4,6 @@ Version 3.1 SVN
 If you already have the version 2.76 installed you must install this file 
 in the same folder you already install the V2.76
 
-This version include the SQLite library at version 3.
-If you prefere to use MySQL a simplified MySQL database server installation is available for Windows.
-
 If you already run a previous beta version, your preference may be reset by this version.
 
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.

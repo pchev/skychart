@@ -2,7 +2,6 @@ Skychart / Cartes du Ciel
 DSO Catalog
 
 This file install all the standard nebulae catalog:
-
 - NGC
 - PGC
 - GCM

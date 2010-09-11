@@ -2,7 +2,6 @@ Skychart / Cartes du Ciel
 Stars Catalog
 
 This file install all the standard stars catalog:
-
 - Sky2000
 - Tycho2
 - GCVS
