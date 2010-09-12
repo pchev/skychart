@@ -4487,6 +4487,9 @@ for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
 end;
 f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
+{$ifdef CPU64}
+f_getdss.cfgdss.OnlineDSS:=true;  { TODO : Realsky libgetdss do not work on 64bit system }
+{$endif}
 f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 except
   ShowError('Error reading '+filename+' dss');
