@@ -83,7 +83,6 @@ type
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    ListBox2: TListBox;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -269,7 +268,8 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;
      s:=TMemoryStream.Create;
-     s.LoadFromFile(ExpandFileName(cfgdss.dssfile));
+     RenameFile(ExpandFileName(cfgdss.dssfile),ExpandFileName(cfgdss.dssfile)+'.txt');
+     s.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
      NewHTML:=TSimpleIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
      NewHTML.OnGetImageX:=HTMLGetImageX;
      NewHTML.LoadFromStream(s);
