@@ -1,7 +1,7 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-02 18:22+0200\n"
+"PO-Revision-Date: 2010-09-11 13:01+0200\n"
 "Last-Translator: Mattia\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -198,7 +198,7 @@ msgstr "Satelliti Artificiali"
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
-msgstr ""
+msgstr "Driver ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -426,7 +426,7 @@ msgstr "%sImpossibile aprire il database %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Impossibile scrivere su"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -526,7 +526,7 @@ msgstr "Cambia immagini visualizzate"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "Il cambio di questa impostazione riavvierà immediatamente il programma!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -798,7 +798,7 @@ msgstr "Copia"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "Copia da:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1075,10 +1075,9 @@ msgid "Deleting from the element list..."
 msgstr "Cancellazione dalla lista elementi..."
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
 #| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Cancella da tabella mensile..."
+msgstr "Cancellazione dalla tabella mensile..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1170,7 +1169,7 @@ msgstr "Cartella non trovata %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr ""
+msgstr "Cartella non trovata! Per favore installa il pacchetto Skychart Pictures"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1250,7 +1249,7 @@ msgstr "Scarica dettagli della nazione"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "Scarica file"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -2220,7 +2219,7 @@ msgstr "Differenza di magnitudine"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Magnitudine dell'eclisse"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -2772,7 +2771,7 @@ msgstr "Altro oggetto dai cataloghi"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Dati di altro software"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -4022,7 +4021,7 @@ msgstr "Oggi"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "al file:"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4230,7 +4229,7 @@ msgstr "Usa server TCP/IP"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "Usa il menu o il pulsante \"%s\" per configurare questo driver."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
@@ -4294,7 +4293,7 @@ msgstr "Vuoi seguire un oggetto prima della sua levata ?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Attenzione!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -4302,11 +4301,11 @@ msgstr "Attenzione! Il calcolo di"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Attenzione! Alcuni elementi asteroidali sono più vecchi di 3 anni. Cerca degli elementi validi per la data corrente della mappa."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Attenzione! Alcuni elementi cometari sono più vecchi di 3 anni. Cerca degli elementi validi per la data corrente della mappa."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
