@@ -265,6 +265,10 @@ begin
   Image1.canvas.brush.color:=clBlack;
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
+  {$ifdef CPU64}
+  GroupBox3.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
+  OnlineDSS.Enabled:=false;
+  {$endif}
 end;
 
 procedure Tf_config_pictures.Button2Click(Sender: TObject);

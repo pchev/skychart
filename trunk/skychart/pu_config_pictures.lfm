@@ -31,7 +31,7 @@ object f_config_pictures: Tf_config_pictures
       Width = 511
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 0
+      PageIndex = 2
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -310,7 +310,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 100
-            Width = 73
+            Width = 66
             Caption = 'Auxiliary files'
             ParentColor = False
           end
@@ -318,7 +318,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 152
-            Width = 102
+            Width = 86
             Caption = 'Data Files, CDrom'
             ParentColor = False
           end
@@ -326,7 +326,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 196
-            Width = 75
+            Width = 67
             Caption = 'temporary file'
             ParentColor = False
           end
@@ -334,7 +334,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 416
             Height = 14
             Top = 272
-            Width = 33
+            Width = 29
             Caption = 'pixels'
             ParentColor = False
           end
@@ -342,7 +342,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 416
             Height = 14
             Top = 308
-            Width = 41
+            Width = 37
             Caption = 'MBytes'
             ParentColor = False
           end
@@ -375,36 +375,36 @@ object f_config_pictures: Tf_config_pictures
           end
           object RealSkyNorth: TCheckBox
             Left = 8
-            Height = 22
+            Height = 21
             Top = 26
-            Width = 106
+            Width = 91
             Caption = 'RealSky North'
             OnClick = RealSkyNorthClick
             TabOrder = 0
           end
           object RealSkySouth: TCheckBox
             Left = 8
-            Height = 22
+            Height = 21
             Top = 62
-            Width = 108
+            Width = 93
             Caption = 'RealSky South'
             OnClick = RealSkySouthClick
             TabOrder = 1
           end
           object DSS102CD: TCheckBox
             Left = 184
-            Height = 22
+            Height = 21
             Top = 26
-            Width = 97
+            Width = 82
             Caption = '102 CD DSS'
             OnClick = DSS102CDClick
             TabOrder = 2
           end
           object usesubsample: TCheckBox
             Left = 8
-            Height = 22
+            Height = 21
             Top = 272
-            Width = 235
+            Width = 203
             Caption = 'Use subsampling to limit image size to'
             Checked = True
             OnClick = usesubsampleClick
@@ -413,9 +413,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object reallist: TCheckBox
             Left = 8
-            Height = 22
+            Height = 21
             Top = 240
-            Width = 136
+            Width = 120
             Caption = 'Select plate from list'
             Checked = True
             OnClick = reallistClick
@@ -424,7 +424,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object realskymax: TLongEdit
             Left = 336
-            Height = 22
+            Height = 21
             Top = 268
             Width = 65
             TabOrder = 8
@@ -433,7 +433,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object realskymb: TLongEdit
             Left = 336
-            Height = 22
+            Height = 21
             Top = 304
             Width = 65
             Color = clBtnFace
@@ -453,16 +453,16 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 22
+            Height = 21
             Top = 20
-            Width = 219
+            Width = 190
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
           end
           object OnlineDSSList: TComboBox
             Left = 292
-            Height = 21
+            Height = 23
             Top = 20
             Width = 176
             ItemHeight = 0
