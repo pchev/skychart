@@ -4,31 +4,32 @@ LazarusResources.Add('Tf_detail','FORMDATA',[
   'TPF0'#9'Tf_detail'#8'f_detail'#4'Left'#3'k'#3#6'Height'#3#215#1#3'Top'#2'|'#5
   +'Width'#3#142#1#13'ActiveControl'#7#6'Panel1'#11'BorderStyle'#7#13'bsSizeToo'
   +'lWin'#7'Caption'#6#7'Details'#12'ClientHeight'#3#215#1#11'ClientWidth'#3#142
-  +#1#8'OnCreate'#7#10'FormCreate'#10'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#6'Pan'
-  +'el1'#4'Left'#2#0#6'Height'#2'2'#3'Top'#2#0#5'Width'#3#142#1#5'Align'#7#5'al'
-  +'Top'#12'ClientHeight'#2'2'#11'ClientWidth'#3#142#1#11'FullRepaint'#8#8'TabO'
-  +'rder'#2#0#0#7'TButton'#7'Button1'#4'Left'#3#10#1#6'Height'#2#31#3'Top'#2#6#5
-  +'Width'#2'u'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#5'Cl'
-  +'ose'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#2#0#0#7'TButton'#7'Button2'
-  +#4'Left'#2#8#6'Height'#2#31#3'Top'#2#6#5'Width'#2'u'#25'BorderSpacing.InnerB'
-  +'order'#2#4#7'Caption'#6#13'Center Object'#7'OnClick'#7#12'Button2Click'#8'T'
-  +'abOrder'#2#0#0#0#7'TButton'#7'Button3'#4'Left'#3#138#0#6'Height'#2#31#3'Top'
-  +#2#6#5'Width'#2'u'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#8'Neighbor'
-  +#7'OnClick'#7#12'Button3Click'#8'TabOrder'#2#1#0#0#0#12'TIpHtmlPanel'#12'IpH'
-  +'tmlPanel1'#4'Left'#2#0#6'Height'#3#165#1#3'Top'#2'2'#5'Width'#3#142#1#5'Ali'
-  +'gn'#7#8'alClient'#13'FixedTypeface'#6#5'fixed'#15'DefaultTypeFace'#6#4'sans'
-  +#15'DefaultFontSize'#2#8#10'FlagErrors'#8#9'PopupMenu'#7#10'PopupMenu1'#24'P'
-  +'rintSettings.MarginLeft'#5#0#0#0#0#0#0#0#128#254'?'#23'PrintSettings.Margin'
-  +'Top'#5#0#0#0#0#0#0#0#128#254'?'#25'PrintSettings.MarginRight'#5#0#0#0#0#0#0
-  +#0#128#254'?'#26'PrintSettings.MarginBottom'#5#0#0#0#0#0#0#0#128#254'?'#8'Ta'
-  +'bOrder'#2#1#0#0#11'TActionList'#11'ActionList1'#4'left'#3#128#0#3'top'#3#144
-  +#0#0#7'TAction'#9'SelectAll'#7'Caption'#6#9'SelectAll'#9'OnExecute'#7#16'Sel'
-  +'ectAllExecute'#8'ShortCut'#3'A@'#0#0#7'TAction'#4'Copy'#7'Caption'#6#4'Copy'
-  +#9'OnExecute'#7#11'CopyExecute'#8'ShortCut'#3'C@'#0#0#0#10'TPopupMenu'#10'Po'
-  +'pupMenu1'#4'left'#2'H'#3'top'#3#144#0#0#9'TMenuItem'#10'SelectAll1'#6'Actio'
-  +'n'#7#9'SelectAll'#7'OnClick'#7#16'SelectAllExecute'#0#0#9'TMenuItem'#5'Copy'
-  +'1'#6'Action'#7#4'Copy'#7'OnClick'#7#11'CopyExecute'#0#0#0#17'THTMLHelpDatab'
-  +'ase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#3#185#0#3'top'#3#144#0
-  +#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'
-  +#6#2'%s'#12'AutoRegister'#9#4'left'#3#248#0#3'top'#3#144#0#0#0#0
+  +#1#11'Font.Height'#2#245#8'OnCreate'#7#10'FormCreate'#10'LCLVersion'#6#6'0.9'
+  +'.29'#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'2'#3'Top'#2#0#5'Width'#3
+  +#142#1#5'Align'#7#5'alTop'#12'ClientHeight'#2'2'#11'ClientWidth'#3#142#1#11
+  +'FullRepaint'#8#8'TabOrder'#2#0#0#7'TButton'#7'Button1'#4'Left'#3#10#1#6'Hei'
+  +'ght'#2#31#3'Top'#2#6#5'Width'#2'u'#25'BorderSpacing.InnerBorder'#2#4#6'Canc'
+  +'el'#9#7'Caption'#6#5'Close'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#2#0
+  +#0#7'TButton'#7'Button2'#4'Left'#2#8#6'Height'#2#31#3'Top'#2#6#5'Width'#2'u'
+  +#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#13'Center Object'#7'OnClick'
+  +#7#12'Button2Click'#8'TabOrder'#2#0#0#0#7'TButton'#7'Button3'#4'Left'#3#138#0
+  +#6'Height'#2#31#3'Top'#2#6#5'Width'#2'u'#25'BorderSpacing.InnerBorder'#2#4#7
+  +'Caption'#6#8'Neighbor'#7'OnClick'#7#12'Button3Click'#8'TabOrder'#2#1#0#0#0
+  +#12'TIpHtmlPanel'#12'IpHtmlPanel1'#4'Left'#2#0#6'Height'#3#165#1#3'Top'#2'2'
+  +#5'Width'#3#142#1#5'Align'#7#8'alClient'#13'FixedTypeface'#6#5'fixed'#15'Def'
+  +'aultTypeFace'#6#4'sans'#15'DefaultFontSize'#2#8#10'FlagErrors'#8#9'PopupMen'
+  +'u'#7#10'PopupMenu1'#24'PrintSettings.MarginLeft'#5#0#0#0#0#0#0#0#128#254'?'
+  +#23'PrintSettings.MarginTop'#5#0#0#0#0#0#0#0#128#254'?'#25'PrintSettings.Mar'
+  +'ginRight'#5#0#0#0#0#0#0#0#128#254'?'#26'PrintSettings.MarginBottom'#5#0#0#0
+  +#0#0#0#0#128#254'?'#8'TabOrder'#2#1#0#0#11'TActionList'#11'ActionList1'#4'le'
+  +'ft'#3#128#0#3'top'#3#144#0#0#7'TAction'#9'SelectAll'#7'Caption'#6#9'SelectA'
+  +'ll'#9'OnExecute'#7#16'SelectAllExecute'#8'ShortCut'#3'A@'#0#0#7'TAction'#4
+  +'Copy'#7'Caption'#6#4'Copy'#9'OnExecute'#7#11'CopyExecute'#8'ShortCut'#3'C@'
+  +#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#2'H'#3'top'#3#144#0#0#9'TMenuIt'
+  +'em'#10'SelectAll1'#6'Action'#7#9'SelectAll'#7'OnClick'#7#16'SelectAllExecut'
+  +'e'#0#0#9'TMenuItem'#5'Copy1'#6'Action'#7#4'Copy'#7'OnClick'#7#11'CopyExecut'
+  +'e'#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'l'
+  +'eft'#3#185#0#3'top'#3#144#0#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHe'
+  +'lpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#248#0#3't'
+  +'op'#3#144#0#0#0#0
 ]);
