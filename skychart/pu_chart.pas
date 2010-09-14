@@ -2283,8 +2283,8 @@ if p>0 then begin
 end else begin
   f:=strtofloat(fov);
 end;
-sc.setfov(deg2rad*f);
 result:=msgOK;
+if (f>0.0006)and(f<=360) then sc.setfov(deg2rad*f) else result:=msgFailed+' FOV out of range';
 except
 exit;
 end;
@@ -2331,8 +2331,8 @@ if p>0 then begin
 end else begin
  ar:=strtofloat(param1);
 end;
-sc.cfgsc.racentre:=rmod(deg2rad*ar*15+pi2,pi2);
 result:=msgOK;
+if (ar>=0)and(ar<24) then sc.cfgsc.racentre:=rmod(deg2rad*ar*15+pi2,pi2) else result:=msgFailed+' RA out of range';
 except
 exit;
 end;
@@ -2360,8 +2360,8 @@ if p>0 then begin
 end else begin
  de:=strtofloat(param1);
 end;
-sc.cfgsc.decentre:=deg2rad*de;
 result:=msgOK;
+if (de>=-90)and(de<=90) then sc.cfgsc.decentre:=deg2rad*de else result:=msgFailed+' DEC out of range';
 except
 exit;
 end;
@@ -2414,17 +2414,17 @@ n:=strtoint(trim(copy(dt,1,p-1)));
 dt:=copy(dt,p+1,999);
 s:=strtoint(trim(dt));
 sc.cfgsc.UseSystemTime:=false;
-sc.cfgsc.CurYear:=y;
-sc.cfgsc.CurMonth:=m;
-sc.cfgsc.CurDay:=d;
-sc.cfgsc.CurTime:=h+n/60+s/3600;
+result:=msgOK;
+if (y>=-20000)and(y<=20000) then sc.cfgsc.CurYear:=y else result:=msgFailed+' Year out of range';
+if (m>=1)and(m<=12) then sc.cfgsc.CurMonth:=m else result:=msgFailed+' Month out of range';
+if (d>=1)and(d<=31) then sc.cfgsc.CurDay:=d else result:=msgFailed+' Day out of range';
+if (h>=0)and(h<=23)and(n>=0)and(n<=59)and(s>=0)and(s<=59) then sc.cfgsc.CurTime:=h+n/60+s/3600 else result:=msgFailed+' Time out of range';
 sc.cfgsc.tz.JD:=jd(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay,sc.cfgsc.CurTime);
 sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
 if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
   sc.cfgsc.TrackOn:=true;
   sc.cfgsc.TrackType:=4;
 end;
-result:=msgOK;
 except
 exit;
 end;
@@ -2474,16 +2474,16 @@ al:=strtofloat(copy(buf,1,p-1));
 p:=pos('OBS:',obs);
 if p=0 then n:='obs?'
        else n:=trim(copy(obs,p+4,999));
-sc.cfgsc.ObsLatitude := la;
-sc.cfgsc.ObsLongitude := lo;
-sc.cfgsc.ObsAltitude := al;
+result:=msgOK;
+if (la>=-90)and(la<=90) then sc.cfgsc.ObsLatitude := la else result:=msgFailed+' Latitude out of range';
+if (lo>=-180)and(lo<=180) then sc.cfgsc.ObsLongitude := lo else result:=msgFailed+' Longitude out of range';
+if (al>=-500)and(al<=15000) then sc.cfgsc.ObsAltitude := al else result:=msgFailed+' Altitude out of range';
 p:=pos('/',n);
 if p>0 then begin
    sc.cfgsc.Obscountry:=trim(copy(n,1,p-1));
    delete(n,1,p);
 end else sc.cfgsc.Obscountry:='';
 sc.cfgsc.ObsName := n;
-result:=msgOK;
 except
 exit;
 end;
@@ -2495,12 +2495,17 @@ result:=msgOK+blank+'LAT:'+detostr3(sc.cfgsc.ObsLatitude)+'LON:'+detostr3(sc.cfg
 end;
 
 function Tf_chart.cmd_SetTZ(tz:string):string;
+var buf:string;
 begin
 try
-  sc.cfgsc.ObsTZ:=tz;
-  sc.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(sc.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
-  sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
-  result:=msgOK;
+  buf:=ZoneDir+StringReplace(sc.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+  if FileExists(buf) then begin
+    sc.cfgsc.ObsTZ:=tz;
+    sc.cfgsc.tz.TimeZoneFile:=buf;
+    sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
+    result:=msgOK;
+  end
+  else result:=msgFailed+' invalid timezone: '+tz;
 except
   result:=msgFailed;
 end
@@ -3108,7 +3113,10 @@ var
    JPG : TJpegImage;
    PNG : TPortableNetworkGraphic;
    savelabel,needrefresh:boolean;
+   curdir:string;
 begin
+result:=false;
+try
 needrefresh:=false;
 savelabel:= sc.cfgsc.Editlabels;
 format:=uppercase(format);
@@ -3128,7 +3136,10 @@ if identlabel.Visible then begin
 end;
  if fn='' then fn:='cdc.bmp';
  if format='' then format:='BMP';
- if ExtractFilePath(fn)='' then fn:=slash(TempDir)+fn ;
+ curdir:=getcurrentdir;
+ chdir(TempDir);
+ fn:=ExpandFileName(fn);
+ chdir(curdir);
  if format='PNG' then begin
     fn:=changefileext(fn,'.png');
     PNG := TPortableNetworkGraphic.Create;
@@ -3170,6 +3181,12 @@ if needrefresh then begin
    sc.Refresh;
    SetScrollBar;
 end;
+end;
+except
+  on E: Exception do begin
+   WriteTrace('Saveimg error: '+E.Message);
+   result:=false;
+  end;
 end;
 end;
 
