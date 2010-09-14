@@ -2850,6 +2850,7 @@ procedure Tf_chart.SetJD(njd:double);
 var y,m,d : integer;
     h : double;
 begin
+if (njd>maxjd)or(njd<minjd) then exit;
 sc.cfgsc.tz.JD:=njd;
 sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
 djd(njd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);

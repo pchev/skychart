@@ -537,12 +537,12 @@ const
   FMinVal: Double = -1.7E308;
 begin
   Result := NewValue;
-  if (FMaxVal <> FMinVal) then
+  if (FMaxValue <> FMinValue) then
   begin
-    if NewValue < FMinVal
-      then Result := FMinVal
+    if NewValue < FMinValue
+      then Result := FMinValue
     else
-      if NewValue > FMaxVal then Result := FMaxVal;
+      if NewValue > FMaxValue then Result := FMaxValue;
   end;
 end;
 
