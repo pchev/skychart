@@ -984,7 +984,7 @@ if FileExists(fn) then begin
  cfgm.maximized:=maxi;
  result:=msgOK;
 end else
- result:=msgNotFound;
+ result:=msgNotFound+' '+fn;
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -5733,17 +5733,22 @@ else begin
  end;
  if chart is Tf_chart then with chart as Tf_chart do begin
     if cmd='RESIZE' then begin // special case with action on main and on the chart
-       Multidoc1.Maximized:=false;
-       w:=StrToIntDef(arg[1],child.Width);
-       h:=StrToIntDef(arg[2],child.Height);
-       if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
-       if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
-       h:=h+child.TopBar.Height+child.BotBar.Height+child.MenuBar.Height;
-       w:=w+child.LeftBar.Width+child.RightBar.width;
-       child.width:=w;
-       child.height:=h;
-       arg[1]:=inttostr(w);
-       arg[2]:=inttostr(h);
+         w:=StrToIntDef(arg[1],child.Width);
+         h:=StrToIntDef(arg[2],child.Height);
+         if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
+           Multidoc1.Maximized:=false;
+           if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
+           if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
+           h:=h+child.TopBar.Height+child.BotBar.Height+child.MenuBar.Height;
+           w:=w+child.LeftBar.Width+child.RightBar.width;
+           child.width:=w;
+           child.height:=h;
+           arg[1]:=inttostr(w);
+           arg[2]:=inttostr(h);
+         end else begin
+           result:=msgFailed+' invalid window size';
+           exit;
+         end;
     end;
     result:=(chart as Tf_chart).ExecuteCmd(arg);
  end;
@@ -5887,7 +5892,7 @@ end;
 // Parameters that need to be set after a chart is available
 procedure Tf_main.ProcessParams2;
 var i,p: integer;
-    cmd, parm, parms : string;
+    cmd, parm, parms,resp : string;
     pp: TStringList;
     chartchanged: boolean;
 begin
@@ -5909,7 +5914,8 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--load' then begin
       pp.Add('LOAD');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end;
 end;
@@ -5928,17 +5934,20 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--setobs' then begin
       pp.Add('SETOBS');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--settz' then begin
       pp.Add('SETTZ');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setdate' then begin
       pp.Add('SETDATE');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end;
 end;
@@ -5957,32 +5966,39 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--search' then begin
       pp.Add('SEARCH');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setproj' then begin
       pp.Add('SETPROJ');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setfov' then begin
       pp.Add('SETFOV');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setra' then begin
       pp.Add('SETRA');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setdec' then begin
       pp.Add('SETDEC');
       pp.Add(parm);
-      ExecuteCmd('',pp);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--resize' then begin
       parm:='RESIZE '+parm;
       splitarg(parm,blank,pp);
-      ExecuteCmd('',pp);
+      for p:=pp.count to MaxCmdArg do pp.add('');
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
    end;
 end;
 if chartchanged then begin
@@ -6005,7 +6021,9 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--saveimg' then begin
       parm:='SAVEIMG '+parm;
       splitarg(parm,blank,pp);
-      ExecuteCmd('',pp);
+      for p:=pp.count to MaxCmdArg do pp.add('');
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
    end;
 end;
 finally
