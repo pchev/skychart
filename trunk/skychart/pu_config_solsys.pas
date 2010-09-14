@@ -51,8 +51,6 @@ type
     DownloadAsteroid: TButton;
     DownloadComet: TButton;
     astnummonthEdit: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -416,7 +414,6 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgSol);
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;

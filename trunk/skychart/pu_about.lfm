@@ -2905,15 +2905,4 @@ object f_about: Tf_about
       end
     end
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 107
-    top = 230
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 151
-    top = 232
-  end
 end

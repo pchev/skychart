@@ -6313,7 +6313,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'uration'#7'OnClick'#7#24'SaveConfigurationExecute'#0#0#9'TMenuItem'#10'Menu'
   +'Item23'#6'Action'#7#16'SaveConfigOnExit'#7'OnClick'#7#23'SaveConfigOnExitEx'
   +'ecute'#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9
-  +#4'left'#2'8'#3'top'#3'('#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHel'
-  +'pViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'8'#3'top'#3
-  +'`'#1#0#0#0
+  +#4'left'#2'P'#3'top'#3'('#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHel'
+  +'pViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'P'#3'top'#3
+  +'h'#1#0#0#0
 ]);

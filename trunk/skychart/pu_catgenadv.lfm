@@ -115,15 +115,4 @@ object f_catgenadv: Tf_catgenadv
     ReadOnly = True
     TabOrder = 5
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 184
-    top = 88
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 186
-    top = 129
-  end
 end

@@ -66,8 +66,6 @@ type
     GroupBox6: TGroupBox;
     GroupBox7: TGroupBox;
     GroupBox8: TGroupBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label258: TLabel;
     Label259: TLabel;
     Label5: TLabel;
@@ -697,7 +695,6 @@ Button6.caption:=rsHelp;
 label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgDispl);
 end;
 

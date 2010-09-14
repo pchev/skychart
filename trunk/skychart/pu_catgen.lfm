@@ -4664,15 +4664,4 @@ object f_catgen: Tf_catgen
     left = 224
     top = 8
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 138
-    top = 103
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 183
-    top = 103
-  end
 end

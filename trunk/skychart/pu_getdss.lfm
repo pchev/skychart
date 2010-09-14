@@ -89,15 +89,4 @@ object f_getdss: Tf_getdss
     left = 264
     top = 16
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 303
-    top = 275
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 352
-    top = 275
-  end
 end

@@ -225,15 +225,4 @@ object f_print: Tf_print
     OnClick = Button3Click
     TabOrder = 6
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 19
-    top = 252
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 56
-    top = 252
-  end
 end

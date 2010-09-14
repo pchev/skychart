@@ -2584,15 +2584,4 @@ object f_config_chart: Tf_config_chart
       TabOrder = 3
     end
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 35
-    top = 531
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 88
-    top = 531
-  end
 end

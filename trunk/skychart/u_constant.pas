@@ -331,6 +331,7 @@ const cdcversion = 'Version 3.1 svn';
       Default_dssdrive='D:\';
       DefaultVarObs='varobs.exe';
       DefaultCdC='skychart.exe';
+      Win98DefaultBrowser='C:\Program Files\Internet Explorer\Iexplore.exe';
 {$endif}
 
 type

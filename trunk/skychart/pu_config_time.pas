@@ -52,8 +52,6 @@ type
     d_dayEdit: TEdit;
     t_min: TUpDown;
     t_hourEdit: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     JDEdit: TFloatEdit;
     Label1: TLabel;
     tzLabel: TLabel;
@@ -242,7 +240,6 @@ ADBC.Items[0]:=rsAD;
 ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
 Button7.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgDate);
 end;
 

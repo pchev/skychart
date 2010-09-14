@@ -42,8 +42,6 @@ type
 
   Tf_info = class(TForm)
     Button4: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     InfoMemo: TMemo;
     Page1: TPanel;
     Page2: TPanel;
@@ -134,7 +132,6 @@ Button1.caption:=rsClose;
 closeconnection.caption:=rsCloseConnect;
 outslectionner1.caption:=rsSelectAll;
 Copier1.caption:=rsCopy;
-SetHelpDB(HTMLHelpDatabase1);
 end;
 
 procedure Tf_info.Button1Click(Sender: TObject);

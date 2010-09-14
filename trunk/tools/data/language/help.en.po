@@ -1,14 +1,16 @@
+# pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-09-06 10:44+0200\n"
-"Last-Translator: Patrick Chevalley <pch@freesurf.ch>\n"
+"PO-Revision-Date: 2010-09-14 20:19+0200\n"
+"Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Language-Team: Français <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_help.hlpbarleft
 msgid "left_bar.html"
@@ -196,7 +198,7 @@ msgstr ""
 
 #: u_help.hlpposition
 msgid "position.html"
-msgstr ""
+msgstr "position_and_field_of_vision.html"
 
 #: u_help.hlpqschart
 msgid "quick_start_chart.html"
@@ -241,4 +243,5 @@ msgstr ""
 #: u_help.hlpsrvinfo
 msgid "server_information.html"
 msgstr ""
+
 

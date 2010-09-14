@@ -7857,13 +7857,13 @@ object f_main: Tf_main
   end
   object HTMLHelpDatabase1: THTMLHelpDatabase
     AutoRegister = True
-    left = 56
+    left = 80
     top = 296
   end
   object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
     BrowserParams = '%s'
     AutoRegister = True
-    left = 56
-    top = 352
+    left = 80
+    top = 360
   end
 end

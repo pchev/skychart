@@ -780,15 +780,4 @@ object f_config_time: Tf_config_time
       TabOrder = 3
     end
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 15
-    top = 526
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 64
-    top = 526
-  end
 end

@@ -39,8 +39,6 @@ type
   Tf_about = class(TForm)
     Button1: TButton;
     Button2: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Image2: TImage;
     Label2: TLabel;
     Label3: TLabel;
@@ -88,7 +86,6 @@ page1.Caption:=rsAbout;
 page2.Caption:=rsAuthors;
 page3.Caption:=rsLicenseAgree;
 memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpIndex);
 end;
 

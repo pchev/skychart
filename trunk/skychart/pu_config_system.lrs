@@ -126,7 +126,7 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +'ldResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28
   +'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVer'
   +'tical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenT'
-  +'opToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2'%'#11'Cl'
+  +'opToBottom'#27'ChildSizing.ControlsPerLine'#2#2#12'ClientHeight'#2#25#11'Cl'
   +'ientWidth'#3'e'#1#7'Columns'#2#2#13'Items.Strings'#1#6#10'Equatorial'#6#8'A'
   +'lt / Az'#0#7'OnClick'#7#20'ManualMountTypeClick'#8'TabOrder'#2#0#0#0#6'TPan'
   ,'el'#15'EquatorialMount'#4'Left'#2#24#6'Height'#3#161#0#3'Top'#3#148#0#5'Wid'
@@ -245,8 +245,5 @@ LazarusResources.Add('Tf_config_system','FORMDATA',[
   +#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#7'TButton'
   +#7'Button4'#4'Left'#2'u'#6'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'
   +#11#5'akTop'#7'akRight'#0#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button4Click'
-  +#8'TabOrder'#2#3#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRe'
-  +'gister'#9#4'left'#2'"'#3'top'#3#237#1#0#0#22'THTMLBrowserHelpViewer'#22'HTM'
-  +'LBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2
-  +'X'#3'top'#3#237#1#0#0#0
+  +#8'TabOrder'#2#3#0#0#0#0
 ]);

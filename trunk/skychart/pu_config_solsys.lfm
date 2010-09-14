@@ -3,7 +3,7 @@ object f_config_solsys: Tf_config_solsys
   Height = 536
   Top = 72
   Width = 503
-  ActiveControl = planetdir
+  ActiveControl = MainPanel
   BorderStyle = bsToolWindow
   Caption = 'Solar System'
   ClientHeight = 536
@@ -938,7 +938,7 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 401
+            ClientHeight = 425
             ClientWidth = 477
             ImageIndex = 3
             object GroupBox9: TGroupBox
@@ -947,7 +947,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 301
+              ClientHeight = 300
               ClientWidth = 437
               TabOrder = 0
               object Label203: TLabel
@@ -1015,7 +1015,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 85
+                ClientHeight = 73
                 ClientWidth = 389
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1056,7 +1056,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 401
+            ClientHeight = 425
             ClientWidth = 477
             ImageIndex = 1
             object Label206: TLabel
@@ -1083,7 +1083,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 107
               Width = 441
               Caption = 'Options'
-              ClientHeight = 73
+              ClientHeight = 72
               ClientWidth = 437
               TabOrder = 0
               object Label215: TLabel
@@ -1143,7 +1143,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 2
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 68
+                ClientHeight = 92
                 ClientWidth = 437
                 object Label1: TLabel
                   Left = 22
@@ -1166,7 +1166,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 68
+                ClientHeight = 92
                 ClientWidth = 437
                 object mpcfile: TFileNameEdit
                   Left = 14
@@ -1197,7 +1197,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 401
+            ClientHeight = 425
             ClientWidth = 477
             ImageIndex = 2
             object Label210: TLabel
@@ -1214,7 +1214,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 7
               Width = 441
               Caption = 'Prepare data '
-              ClientHeight = 79
+              ClientHeight = 78
               ClientWidth = 437
               TabOrder = 0
               object Label7: TLabel
@@ -1290,7 +1290,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 401
+            ClientHeight = 425
             ClientWidth = 477
             ImageIndex = 3
             object Label211: TLabel
@@ -1307,7 +1307,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Delete MPC data selectively'
-              ClientHeight = 45
+              ClientHeight = 44
               ClientWidth = 437
               TabOrder = 0
               object astelemlist: TComboBox
@@ -1337,7 +1337,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 128
               Width = 441
               Caption = 'Quick Delete'
-              ClientHeight = 34
+              ClientHeight = 33
               ClientWidth = 437
               TabOrder = 3
               object Label209: TLabel
@@ -1375,7 +1375,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 72
               Width = 441
               Caption = 'Delete Monthly data '
-              ClientHeight = 42
+              ClientHeight = 41
               ClientWidth = 437
               TabOrder = 1
               object Label214: TLabel
@@ -1415,7 +1415,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 401
+            ClientHeight = 425
             ClientWidth = 477
             ImageIndex = 4
             object Label217: TLabel
@@ -1712,16 +1712,5 @@ object f_config_solsys: Tf_config_solsys
     ConfirmDownload = True
     left = 448
     top = 72
-  end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 41
-    top = 498
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 86
-    top = 497
   end
 end

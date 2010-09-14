@@ -105,8 +105,5 @@ LazarusResources.Add('Tf_config_internet','FORMDATA',[
   +'l'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#2#0#0#7'TButt'
   +'on'#7'Button6'#4'Left'#2'Y'#6'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anch'
   +'ors'#11#5'akTop'#7'akRight'#0#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button6C'
-  +'lick'#8'TabOrder'#2#3#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12
-  +'AutoRegister'#9#4'left'#2#16#3'top'#3#190#1#0#0#22'THTMLBrowserHelpViewer'
-  +#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'l'
-  +'eft'#2'8'#3'top'#3#190#1#0#0#0
+  +'lick'#8'TabOrder'#2#3#0#0#0#0
 ]);

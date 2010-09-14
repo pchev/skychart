@@ -51,8 +51,6 @@ type
     BtnSave: TButton;
     BtnPrint: TButton;
     BtnReset: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
@@ -400,7 +398,6 @@ Solartitle;
 LunarTitle;
 SatTitle; 
 if ShowImage<>nil then ShowImage.SetLang;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCalInput);
 SetHelp(twilight,hlpCalTw);
 SetHelp(planets,hlpCalPla);

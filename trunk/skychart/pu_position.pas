@@ -41,8 +41,6 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Panel1: TPanel;
     coord1: TLabel;
     coord2: TLabel;
@@ -92,7 +90,6 @@ eq1.caption:=rsRA;
 eq2.caption:=rsDE;
 Label3.caption:=rsFOV;
 Label4.caption:=rsRotation;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpPosition);
 end;
 

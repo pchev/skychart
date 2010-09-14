@@ -40,8 +40,6 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     ResetLum: TButton;
     OnlineDSS: TCheckBox;
     OnlineDSSList: TComboBox;
@@ -187,7 +185,6 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgPict);
 end;
 

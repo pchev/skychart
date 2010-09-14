@@ -648,15 +648,4 @@ object f_search: Tf_search
     OnClick = Button5Click
     TabOrder = 10
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 16
-    top = 288
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 64
-    top = 288
-  end
 end

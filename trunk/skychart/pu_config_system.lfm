@@ -503,7 +503,7 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 37
+            ClientHeight = 25
             ClientWidth = 357
             Columns = 2
             Items.Strings = (
@@ -987,16 +987,5 @@ object f_config_system: Tf_config_system
       OnClick = Button4Click
       TabOrder = 3
     end
-  end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 34
-    top = 493
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 88
-    top = 493
   end
 end

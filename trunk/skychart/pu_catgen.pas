@@ -39,8 +39,6 @@ type
 
   Tf_catgen = class(TForm)
     CheckBox8: TCheckBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label22: TLabel;
     ListBox1: TListBox;
     PageControl1: TNoteBook;
@@ -505,7 +503,6 @@ end;
 with stringgrid4 do begin
 cells[0, 0]:=rsCatalogStrin;
 end;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCatgen);
 end;
 

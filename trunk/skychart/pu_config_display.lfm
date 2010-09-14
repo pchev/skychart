@@ -3259,15 +3259,4 @@ object f_config_display: Tf_config_display
     left = 472
     top = 8
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 34
-    top = 496
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 80
-    top = 496
-  end
 end

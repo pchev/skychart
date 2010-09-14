@@ -46,8 +46,5 @@ LazarusResources.Add('Tf_position','FORMDATA',[
   +#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#180#6#192#8'MaxValue'#5#0
   +#0#0#0#0#0#0#180#6'@'#6'Digits'#2#5#0#0#0#7'TButton'#7'Button3'#4'Left'#3#208
   +#0#6'Height'#2#25#3'Top'#3#240#0#5'Width'#2'K'#7'Caption'#6#4'Help'#7'OnClic'
-  +'k'#7#12'Button3Click'#8'TabOrder'#2#5#0#0#17'THTMLHelpDatabase'#17'HTMLHelp'
-  +'Database1'#12'AutoRegister'#9#4'left'#2#31#3'top'#3#241#0#0#0#22'THTMLBrows'
-  +'erHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoR'
-  +'egister'#9#4'left'#2'P'#3'top'#3#241#0#0#0#0
+  +'k'#7#12'Button3Click'#8'TabOrder'#2#5#0#0#0
 ]);

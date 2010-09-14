@@ -76,8 +76,6 @@ type
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     IpHtmlPanel1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
@@ -124,7 +122,6 @@ begin
 Caption:=rsListOfAvaila;
 BitBtn1.caption:=rsOK;
 BitBtn2.caption:=rsCancel;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgPict);
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;
