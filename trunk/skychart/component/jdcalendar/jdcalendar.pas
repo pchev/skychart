@@ -325,6 +325,8 @@ begin
   Julian.Height := 21;
   Julian.Left := JDLabel.Left + JDLabel.Width + 12;
   Julian.BorderStyle := bsNone;
+  Julian.MinValue:=-5583575;
+  Julian.MaxValue:=9026275;
 
   jdt := CalendarGrid.JD;
   UpdVal;
