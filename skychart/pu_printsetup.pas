@@ -41,8 +41,6 @@ type
     Button1: TButton;
     Label5: TLabel;
     PaperSize: TComboBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     printcmd: TFileNameEdit;
     PrintDialog1: TPrintDialog;
     PrinterSetupDialog1: TPrinterSetupDialog;
@@ -105,7 +103,6 @@ printmode.Items[2]:=rsBitmapFile;
 Ok.Caption:=rsOK;
 Cancel.Caption:=rsCancel;
 Button1.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpMenuFile);
 end;
 

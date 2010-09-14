@@ -38,8 +38,6 @@ type
 
   Tf_zoom = class(TForm)
     Button1: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     TrackBar1: TTrackBar;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
@@ -74,7 +72,6 @@ Caption:=rsSetFOV;
 BitBtn1.caption:=rsOK;
 BitBtn2.caption:=rsCancel;
 Button1.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpSetFov);
 end;
 

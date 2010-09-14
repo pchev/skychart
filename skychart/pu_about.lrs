@@ -1486,8 +1486,5 @@ LazarusResources.Add('Tf_about','FORMDATA',[
   +' more useful to permit linking proprietary applications with the'#6'Elibrar'
   +'y.  If this is what you want to do, use the GNU Library General'#6'''Public'
   +' License instead of this License.'#0#8'ReadOnly'#9#10'ScrollBars'#7#6'ssBot'
-  +'h'#8'TabOrder'#2#0#0#0#0#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'
-  +#12'AutoRegister'#9#4'left'#2'k'#3'top'#3#230#0#0#0#22'THTMLBrowserHelpViewe'
-  +'r'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4
-  +'left'#3#151#0#3'top'#3#232#0#0#0#0
+  +'h'#8'TabOrder'#2#0#0#0#0#0#0#0#0
 ]);

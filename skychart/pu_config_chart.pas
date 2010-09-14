@@ -141,8 +141,6 @@ type
     GroupBox2: TGroupBox;
     GroupBox3: TGroupBox;
     GroupBox5: TGroupBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label101: TLabel;
     Label102: TLabel;
@@ -412,7 +410,6 @@ Button3.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
 Button6.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgChart);
 end;
 

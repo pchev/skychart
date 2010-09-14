@@ -28,8 +28,5 @@ LazarusResources.Add('Tf_detail','FORMDATA',[
   +#0#0#0#10'TPopupMenu'#10'PopupMenu1'#4'left'#2'H'#3'top'#3#144#0#0#9'TMenuIt'
   +'em'#10'SelectAll1'#6'Action'#7#9'SelectAll'#7'OnClick'#7#16'SelectAllExecut'
   +'e'#0#0#9'TMenuItem'#5'Copy1'#6'Action'#7#4'Copy'#7'OnClick'#7#11'CopyExecut'
-  +'e'#0#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'l'
-  +'eft'#3#185#0#3'top'#3#144#0#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHe'
-  +'lpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#248#0#3't'
-  +'op'#3#144#0#0#0#0
+  +'e'#0#0#0#0
 ]);

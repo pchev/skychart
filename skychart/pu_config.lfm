@@ -374,15 +374,4 @@ object f_config: Tf_config
     Width = 5
     Beveled = True
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 626
-    top = 508
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 672
-    top = 509
-  end
 end

@@ -37,8 +37,6 @@ type
     Button2: TButton;
     Button3: TButton;
     GroupBox1: TGroupBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -102,7 +100,6 @@ Button3.caption:=rsHelp;
 Setup.caption:=rsSetup;
 Print.caption:=rsPrint;
 Cancel.Caption:=rsCancel;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpMenuFile);
 end;
 
@@ -219,4 +216,4 @@ initialization
   {$I pu_print.lrs}
 
 end.
-
+

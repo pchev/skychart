@@ -41,8 +41,6 @@ type
   Tf_detail = class(TForm)
     Copy: TAction;
     SelectAll: TAction;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     IpHtmlPanel1: TIpHtmlPanel;
     Panel1: TPanel;
     Button1: TButton;
@@ -86,7 +84,6 @@ Button2.caption:=rsCenterObject;
 Button3.caption:=rsNeighbor;
 SelectAll1.caption:=rsSelectAll;
 Copy1.caption:=rsCopy;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpInfo);
 end;
 

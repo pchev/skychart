@@ -117,15 +117,4 @@ object f_addlabel: Tf_addlabel
     OnClick = Button3Click
     TabOrder = 5
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 8
-    top = 117
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 120
-    top = 120
-  end
 end

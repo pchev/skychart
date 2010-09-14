@@ -1924,17 +1924,4 @@ object f_config_catalog: Tf_config_catalog
     left = 494
     top = 24
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    BaseURL = 'file:///home/cdc/doc/wiki_doc/en/documentation'
-    AutoRegister = True
-    KeywordPrefix = 'help'
-    left = 48
-    top = 536
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 96
-    top = 536
-  end
 end

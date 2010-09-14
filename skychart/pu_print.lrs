@@ -61,8 +61,5 @@ LazarusResources.Add('Tf_print','FORMDATA',[
   +'ption'#6#14'Default Margin'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#5#0
   +#0#0#7'TButton'#7'Button3'#4'Left'#3#134#0#6'Height'#2#25#3'Top'#3#0#1#5'Wid'
   +'th'#2'K'#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button3Click'#8'TabOrder'#2#6
-  +#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2
-  +#19#3'top'#3#252#0#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'
-  +#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'8'#3'top'#3#252#0#0#0
-  +#0
+  +#0#0#0
 ]);

@@ -155,8 +155,5 @@ LazarusResources.Add('Tf_search','FORMDATA',[
   +'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11
   +'ModalResult'#2#2#8'TabOrder'#2#9#0#0#7'TButton'#7'Button5'#4'Left'#3#152#0#6
   +'Height'#2#25#3'Top'#3' '#1#5'Width'#2'K'#7'Caption'#6#4'Help'#7'OnClick'#7
-  +#12'Button5Click'#8'TabOrder'#2#10#0#0#17'THTMLHelpDatabase'#17'HTMLHelpData'
-  +'base1'#12'AutoRegister'#9#4'left'#2#16#3'top'#3' '#1#0#0#22'THTMLBrowserHel'
-  +'pViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegist'
-  +'er'#9#4'left'#2'@'#3'top'#3' '#1#0#0#0
+  +#12'Button5Click'#8'TabOrder'#2#10#0#0#0
 ]);

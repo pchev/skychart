@@ -1120,8 +1120,5 @@ LazarusResources.Add('Tf_config_display','FORMDATA',[
   +#13'ColorH=808080'#6#13'ColorI=C0C0C0'#6#13'ColorJ=0000FF'#6#13'ColorK=00FF0'
   +'0'#6#13'ColorL=00FFFF'#6#13'ColorM=FF0000'#6#13'ColorN=FF00FF'#6#13'ColorO='
   +'FFFF00'#6#13'ColorP=FFFFFF'#6#13'ColorQ=C0DCC0'#6#13'ColorR=F0CAA6'#6#13'Co'
-  +'lorS=F0FBFF'#6#13'ColorT=A4A0A0'#0#4'left'#3#216#1#3'top'#2#8#0#0#17'THTMLH'
-  +'elpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2'"'#3'top'#3
-  +#240#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserP'
-  +'arams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'P'#3'top'#3#240#1#0#0#0
+  +'lorS=F0FBFF'#6#13'ColorT=A4A0A0'#0#4'left'#3#216#1#3'top'#2#8#0#0#0
 ]);

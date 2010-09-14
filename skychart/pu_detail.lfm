@@ -96,15 +96,4 @@ object f_detail: Tf_detail
       OnClick = CopyExecute
     end
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 185
-    top = 144
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 248
-    top = 144
-  end
 end

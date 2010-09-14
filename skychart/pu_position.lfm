@@ -205,15 +205,4 @@ object f_position: Tf_position
     OnClick = Button3Click
     TabOrder = 5
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 31
-    top = 241
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 80
-    top = 241
-  end
 end

@@ -39,8 +39,6 @@ type
     Edit2: TEdit;
     Edit3: TEdit;
     Edit4: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -68,7 +66,6 @@ Caption:=rsComputeField;
 Label4.caption:=rsIndicateHere;
 Button1.caption:=rsOK;
 Button2.caption:=rsCancel;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCatgen);
 end;
 

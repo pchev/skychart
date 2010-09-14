@@ -18,8 +18,6 @@ type
     Button3: TButton;
     ComboBox1: TComboBox;
     Edit1: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label1: TLabel;
     Label2: TLabel;
     RadioGroup1: TRadioGroup;
@@ -67,7 +65,6 @@ RadioGroup1.items[2]:=rsRight;
 Button1.caption:=rsOk;
 Button2.caption:=rsCancel;
 Button3.Caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpLabel);
 end;
 

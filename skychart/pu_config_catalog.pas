@@ -74,8 +74,6 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label95: TLabel;
     LabelWarning: TLabel;
     Label119: TLabel;
@@ -318,7 +316,6 @@ Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
 LabelWarning.Caption:=rsWarningYouAr2;
 if Fcatgen<>nil then Fcatgen.SetLang;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCatalog);
 end;
 

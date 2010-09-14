@@ -27,8 +27,5 @@ LazarusResources.Add('Tf_zoom','FORMDATA',[
   +#2'x'#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'1'#5'Color'#7#9'clBtnFace'#8'Rea'
   +'dOnly'#9#7'TabStop'#8#8'TabOrder'#2#3#0#0#7'TButton'#7'Button1'#4'Left'#2#16
   +#6'Height'#2#25#3'Top'#2'g'#5'Width'#2'K'#7'Caption'#6#4'Help'#7'OnClick'#7
-  +#12'Button1Click'#8'TabOrder'#2#4#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatab'
-  +'ase1'#12'AutoRegister'#9#4'left'#3#204#0#3'top'#2'E'#0#0#22'THTMLBrowserHel'
-  +'pViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegist'
-  +'er'#9#4'left'#3#251#0#3'top'#2'E'#0#0#0
+  +#12'Button1Click'#8'TabOrder'#2#4#0#0#0
 ]);

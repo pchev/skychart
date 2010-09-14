@@ -408,15 +408,4 @@ object f_config_internet: Tf_config_internet
       TabOrder = 3
     end
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 16
-    top = 446
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 56
-    top = 446
-  end
 end

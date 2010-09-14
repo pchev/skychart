@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_addlabel','FORMDATA',[
   'TPF0'#11'Tf_addlabel'#10'f_addlabel'#4'Left'#3'@'#1#6'Height'#3#149#0#3'Top'
   +#3#208#0#5'Width'#3#8#1#13'ActiveControl'#7#5'Edit1'#11'BorderIcons'#11#12'b'
@@ -30,8 +32,5 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +#6#5'Right'#0#7'OnClick'#7#16'RadioGroup1Click'#8'TabOrder'#2#4#0#0#7'TButto'
   +'n'#7'Button3'#4'Left'#2#16#6'Height'#2#25#3'Top'#2'p'#5'Width'#2'A'#25'Bord'
   +'erSpacing.InnerBorder'#2#4#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button3Clic'
-  +'k'#8'TabOrder'#2#5#0#0#17'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoR'
-  +'egister'#9#4'left'#2#8#3'top'#2'u'#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBr'
-  +'owserHelpViewer1'#13'BrowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#2'x'
-  +#3'top'#2'x'#0#0#0
-]);
+  +'k'#8'TabOrder'#2#5#0#0#0
+]);

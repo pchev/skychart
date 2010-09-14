@@ -183,8 +183,5 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +'Caption'#6#4'Help'#7'OnClick'#7#12'Button4Click'#8'TabOrder'#2#3#0#0#0#15'T'
   +'DownloadDialog'#15'DownloadDialog1'#9'FtpFwMode'#2#0#12'FtpFwPassive'#9#15
   +'ConfirmDownload'#9#4'left'#3#128#0#3'top'#3'('#1#0#0#11'TOpenDialog'#11'Ope'
-  +'nDialog1'#11'FilterIndex'#2#0#4'left'#3#128#0#3'top'#3'h'#1#0#0#17'THTMLHel'
-  +'pDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2#26#3'top'#3#22
-  +#2#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParam'
-  +'s'#6#2'%s'#12'AutoRegister'#9#4'left'#2'H'#3'top'#3#22#2#0#0#0
+  +'nDialog1'#11'FilterIndex'#2#0#4'left'#3#128#0#3'top'#3'h'#1#0#0#0
 ]);

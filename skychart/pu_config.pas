@@ -42,8 +42,6 @@ type
   { Tf_config }
 
   Tf_config = class(TForm)
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     MultiDoc1: TMultiDoc;
     Panel1: TPanel;
     Panel3: TPanel;
@@ -199,7 +197,6 @@ if f_config_pictures1<>nil then f_config_pictures1.SetLang;
 if f_config_solsys1<>nil then f_config_solsys1.SetLang;
 if f_config_system1<>nil then f_config_system1.SetLang;
 if f_config_time1<>nil then f_config_time1.SetLang;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpMenuSetup);
 end;
 

@@ -264,9 +264,5 @@ LazarusResources.Add('Tf_config','FORMDATA',[
   +#11'BorderWidth'#2#3#11'TitleHeight'#2#12#13'KeepLastChild'#8#19'WireframeMo'
   +'veResize'#8#5'Align'#7#8'alClient'#10'BevelOuter'#7#6'bvNone'#5'Color'#7#7
   +'clBlack'#11'ParentColor'#8#8'TabOrder'#2#0#0#0#0#9'TSplitter'#9'Splitter1'#4
-  +'Left'#3#232#0#6'Height'#3#18#2#3'Top'#2#0#5'Width'#2#5#7'Beveled'#9#0#0#17
-  +'THTMLHelpDatabase'#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#3'r'#2#3
-  +'top'#3#252#1#0#0#22'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'B'
-  +'rowserParams'#6#2'%s'#12'AutoRegister'#9#4'left'#3#160#2#3'top'#3#253#1#0#0
-  +#0
+  +'Left'#3#232#0#6'Height'#3#18#2#3'Top'#2#0#5'Width'#2#5#7'Beveled'#9#0#0#0
 ]);

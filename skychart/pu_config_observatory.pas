@@ -44,8 +44,6 @@ type
     CountryTZ: TCheckBox;
     vicinityrange: TUpDown;
     vicinityrangeEdit: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
     DownloadDialog1: TDownloadDialog;
@@ -227,7 +225,6 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 Button4.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgObs);
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;

@@ -536,15 +536,4 @@ object f_config_pictures: Tf_config_pictures
     left = 464
     top = 24
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 39
-    top = 496
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 92
-    top = 496
-  end
 end

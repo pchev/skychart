@@ -739,15 +739,4 @@ object f_config_observatory: Tf_config_observatory
     left = 128
     top = 360
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 26
-    top = 534
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 72
-    top = 534
-  end
 end

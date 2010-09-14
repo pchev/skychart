@@ -48,8 +48,6 @@ type
     CometFilter: TEdit;
     AsteroidPanel: TPanel;
     AsteroidFilter: TEdit;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     RadioGroup1: TRadioGroup;
     IDPanel: TPanel;
     Button1: TButton;
@@ -172,7 +170,6 @@ RadioGroup1.Items[10]:=rsOtherLinesCa;
 Button1.caption:=rsFind;
 Button2.caption:=rsCancel;
 Button5.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpSearch);
 end;
 

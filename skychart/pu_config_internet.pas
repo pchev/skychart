@@ -50,8 +50,6 @@ type
     comdefault: TButton;
     astdefault: TButton;
     brightneo: TButton;
-    HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
-    HTMLHelpDatabase1: THTMLHelpDatabase;
     Label8: TLabel;
     mpcorb: TButton;
     ftppassive: TCheckBox;
@@ -159,7 +157,6 @@ Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
 Button6.caption:=rsHelp;
-SetHelpDB(HTMLHelpDatabase1);
 SetHelp(self,hlpCfgInt);
 end;
 

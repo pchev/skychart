@@ -1537,7 +1537,8 @@ isWin98:=false;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
   if isWin98 then begin
-   MenuItem6.Visible:=false;
+    MenuItem6.Visible:=false;
+    if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
   end;
 {$endif}
 {$ifdef unix}

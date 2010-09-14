@@ -118,15 +118,4 @@ object f_zoom: Tf_zoom
     OnClick = Button1Click
     TabOrder = 4
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 204
-    top = 69
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 251
-    top = 69
-  end
 end

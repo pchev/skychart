@@ -237,15 +237,4 @@ object f_printsetup: Tf_printsetup
     left = 216
     top = 64
   end
-  object HTMLHelpDatabase1: THTMLHelpDatabase
-    AutoRegister = True
-    left = 10
-    top = 219
-  end
-  object HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer
-    BrowserParams = '%s'
-    AutoRegister = True
-    left = 55
-    top = 219
-  end
 end

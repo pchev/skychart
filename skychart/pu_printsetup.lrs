@@ -60,8 +60,5 @@ LazarusResources.Add('Tf_printsetup','FORMDATA',[
   +'1'#4'Left'#3#160#0#6'Height'#2#25#3'Top'#3#216#0#5'Width'#2'K'#7'Caption'#6
   +#4'Help'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#5#0#0#19'TPrinterSetupD'
   +'ialog'#19'PrinterSetupDialog1'#4'left'#3#216#0#3'top'#2#24#0#0#12'TPrintDia'
-  +'log'#12'PrintDialog1'#4'left'#3#216#0#3'top'#2'@'#0#0#17'THTMLHelpDatabase'
-  +#17'HTMLHelpDatabase1'#12'AutoRegister'#9#4'left'#2#10#3'top'#3#219#0#0#0#22
-  +'THTMLBrowserHelpViewer'#22'HTMLBrowserHelpViewer1'#13'BrowserParams'#6#2'%s'
-  +#12'AutoRegister'#9#4'left'#2'7'#3'top'#3#219#0#0#0#0
+  +'log'#12'PrintDialog1'#4'left'#3#216#0#3'top'#2'@'#0#0#0
 ]);
