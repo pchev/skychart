@@ -1,13 +1,13 @@
 object f_info: Tf_info
   Left = 426
-  Height = 464
+  Height = 498
   Top = 101
-  Width = 719
+  Width = 718
   ActiveControl = TitlePanel
   BorderStyle = bsSizeToolWin
   Caption = 'Info'
-  ClientHeight = 464
-  ClientWidth = 719
+  ClientHeight = 498
+  ClientWidth = 718
   Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
@@ -17,15 +17,15 @@ object f_info: Tf_info
   object Panel1: TPanel
     Left = 0
     Height = 27
-    Top = 437
-    Width = 719
+    Top = 471
+    Width = 718
     Align = alBottom
     ClientHeight = 27
-    ClientWidth = 719
+    ClientWidth = 718
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
-      Left = 628
+      Left = 632
       Height = 25
       Top = 1
       Width = 75
@@ -37,13 +37,41 @@ object f_info: Tf_info
       TabOrder = 0
     end
     object Button4: TButton
-      Left = 528
+      Left = 544
       Height = 25
       Top = 1
-      Width = 75
+      Width = 77
+      Anchors = [akTop, akRight]
       Caption = 'Help'
       OnClick = Button4Click
       TabOrder = 1
+    end
+  end
+  object TitlePanel: TPanel
+    Left = 0
+    Height = 26
+    Top = 0
+    Width = 718
+    Align = alTop
+    Alignment = taLeftJustify
+    TabOrder = 5
+  end
+  object Page3: TPanel
+    Left = 110
+    Height = 343
+    Top = 70
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 3
+    Visible = False
+    object ProgressMemo: TMemo
+      Left = 1
+      Height = 341
+      Top = 1
+      Width = 552
+      Align = alClient
+      TabOrder = 0
     end
   end
   object Page1: TPanel
@@ -114,6 +142,28 @@ object f_info: Tf_info
         State = cbChecked
         TabOrder = 1
       end
+    end
+  end
+  object Page4: TPanel
+    Left = 150
+    Height = 343
+    Top = 80
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 4
+    Visible = False
+    object InfoMemo: TMemo
+      Left = 1
+      Height = 341
+      Top = 1
+      Width = 552
+      Align = alClient
+      Lines.Strings = (
+        ''
+      )
+      ScrollBars = ssAutoVertical
+      TabOrder = 0
     end
   end
   object Page2: TPanel
@@ -689,6 +739,17 @@ object f_info: Tf_info
           MoveCaret = False
           Option = 0
           Priority = 0
+        end      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbLeft
+          ClickCount = ccSingle
+          ClickDir = cdDown
+          Command = 9
+          MoveCaret = False
+          Option = 0
+          Priority = 0
         end>
       Lines.Strings = (
         'Memo1'
@@ -819,7 +880,7 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 0
       object Button3: TButton
-        Left = 214
+        Left = 204
         Height = 25
         Top = 1
         Width = 75
@@ -830,7 +891,7 @@ object f_info: Tf_info
         TabOrder = 0
       end
       object Edit1: TEdit
-        Left = 124
+        Left = 108
         Height = 21
         Top = 3
         Width = 85
@@ -839,7 +900,7 @@ object f_info: Tf_info
         TabOrder = 1
       end
       object Button5: TButton
-        Left = 300
+        Left = 292
         Height = 25
         Top = 1
         Width = 75
@@ -850,7 +911,7 @@ object f_info: Tf_info
         TabOrder = 2
       end
       object Button6: TButton
-        Left = 388
+        Left = 380
         Height = 25
         Top = 1
         Width = 75
@@ -861,7 +922,7 @@ object f_info: Tf_info
         TabOrder = 3
       end
       object Button7: TButton
-        Left = 476
+        Left = 468
         Height = 25
         Top = 0
         Width = 75
@@ -871,55 +932,6 @@ object f_info: Tf_info
         OnClick = Button7Click
         TabOrder = 4
       end
-    end
-  end
-  object TitlePanel: TPanel
-    Left = 0
-    Height = 26
-    Top = 0
-    Width = 719
-    Align = alTop
-    Alignment = taLeftJustify
-    TabOrder = 5
-  end
-  object Page3: TPanel
-    Left = 110
-    Height = 343
-    Top = 70
-    Width = 554
-    ClientHeight = 343
-    ClientWidth = 554
-    TabOrder = 3
-    Visible = False
-    object ProgressMemo: TMemo
-      Left = 1
-      Height = 341
-      Top = 1
-      Width = 552
-      Align = alClient
-      TabOrder = 0
-    end
-  end
-  object Page4: TPanel
-    Left = 150
-    Height = 343
-    Top = 80
-    Width = 554
-    ClientHeight = 343
-    ClientWidth = 554
-    TabOrder = 4
-    Visible = False
-    object InfoMemo: TMemo
-      Left = 1
-      Height = 341
-      Top = 1
-      Width = 552
-      Align = alClient
-      Lines.Strings = (
-        ''
-      )
-      ScrollBars = ssAutoVertical
-      TabOrder = 0
     end
   end
   object PopupMenu1: TPopupMenu

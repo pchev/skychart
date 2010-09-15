@@ -1809,7 +1809,7 @@ begin
 end;
 /////////////
 begin
-if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
+if ((abs(dec)+abs(dx))>pid2) or ((abs(dec)+abs(dy))>pid2) then begin
   x1:=0;
   x2:=pi2;
 end else begin
