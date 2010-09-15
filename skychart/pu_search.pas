@@ -32,7 +32,7 @@ uses u_help, u_translation, u_constant, u_util, cu_database,
   LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, Buttons, LResources, LazHelpHTML;
 
-const maxcombo = 50;
+const maxcombo = 500;
 
 type
 
