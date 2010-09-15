@@ -106,6 +106,7 @@ Tskychart = class (TComponent)
     function DrawEcliptic:boolean;
     function DrawGalactic:boolean;
     function DrawLabels:boolean;
+    Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
     procedure DrawFinderMark(ra,de :double; moving:boolean) ;
     procedure DrawCircle;
     Procedure DrawCompass;
@@ -3086,6 +3087,16 @@ for i:=1 to numlabels do begin
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
+end;
+
+Procedure Tskychart.DrawSearchMark(ra,de :double; moving:boolean) ;
+var x1,y1 : double;
+    xa,ya,sz:single;
+begin
+sz:=6;
+projection(ra,de,x1,y1,false,cfgsc) ;
+WindowXY(x1,y1,xa,ya,cfgsc);
+Fplot.PlotCircle(xa-sz,ya-sz,xa+sz,ya+sz,Fplot.cfgplot.Color[15],moving);
 end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;

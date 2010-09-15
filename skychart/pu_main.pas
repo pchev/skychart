@@ -2529,8 +2529,9 @@ if chart is Tf_chart then with chart as Tf_chart do begin
  WriteTrace('Search1Execute');
 {$endif}
         Refresh;
-        if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
-                             else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
+        ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
+        if not ok then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+        if not ok then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
         if not ok then begin  // object not visible with current chart setting
           sc.cfgsc.FindName:=Num;
           sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsNonVisibleSe+'';
@@ -5449,8 +5450,9 @@ Findit:
  WriteTrace('GenericSearch');
 {$endif}
       Refresh;
-      if sc.cfgsc.fov>0.17 then ok:=sc.FindatRaDec(ar1,de1,0.0005,true)
-                        else ok:=sc.FindatRaDec(ar1,de1,0.00005,true);
+      ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
+      if not ok then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+      if not ok then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
       if not ok then begin  // object not visible with current chart setting
         sc.cfgsc.FindName:=Num;
         sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsNonVisibleSe+'';
