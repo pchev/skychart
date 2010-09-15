@@ -748,7 +748,10 @@ if StartCircle then begin
   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
   StartCircle:=false;
   end
-  else MovingCircle := false;
+else MovingCircle := false;
+if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
+   sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
+end;
 {$endif}
 inherited Paint;
 {$ifdef ImageBuffered}
@@ -1317,6 +1320,7 @@ var x,y : integer;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK then begin
+   sc.plot.FlushCnv;
    identlabel.Visible:=false;
    identlabel.font.name:=sc.plot.cfgplot.fontname[2];
    identlabel.font.size:=sc.plot.cfgplot.fontSize[2];
@@ -1327,6 +1331,7 @@ if sc.cfgsc.FindOK then begin
    identlabel.Visible:=true;
    identlabel.Cursor:=crHandPoint;
    identlabel.bringtofront;
+   sc.DrawSearchMark(sc.cfgsc.FindRA,sc.cfgsc.FindDec,false);
 end
 else identlabel.Visible:=false;
 end;
