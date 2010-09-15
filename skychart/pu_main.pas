@@ -5796,6 +5796,7 @@ begin
  TCPDaemon.onExecuteCmd:=ExecuteCmd;
  TCPDaemon.IPaddr:=cfgm.ServerIPaddr;
  TCPDaemon.IPport:=cfgm.ServerIPport;
+ TCPDaemon.Resume;
  except
   SetLpanel1(rsTCPIPService);
  end;

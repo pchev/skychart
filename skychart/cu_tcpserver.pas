@@ -92,7 +92,7 @@ Constructor TTCPDaemon.Create;
 begin
   FreeOnTerminate:=true;
   keepalive:=false;
-  inherited create(false);
+  inherited create(true);
 end;
 
 procedure TTCPDaemon.ShowError;
@@ -125,22 +125,29 @@ var
   ClientSock:TSocket;
   i,n : integer;
 begin
+//writetrace('start tcp deamon');
 stoping:=false;
 for i:=1 to MaxWindow do ThrdActive[i]:=false;
 sock:=TTCPBlockSocket.create;
+//writetrace('blocksocked created');
 try
   with sock do
     begin
+      //writetrace('create socket');
       CreateSocket;
       if lasterror<>0 then Synchronize(ShowError);
       MaxLineLength:=1024;
+      //writetrace('setlinger');
       setLinger(true,1000);
       if lasterror<>0 then Synchronize(ShowError);
+      //writetrace('bind to '+fipaddr+' '+fipport);
       bind(FIPaddr,FIPport);
       if lasterror<>0 then Synchronize(ShowError);
+      //writetrace('listen');
       listen;
       if lasterror<>0 then Synchronize(ShowError);
       Synchronize(ShowSocket);
+      //writetrace('start main loop');
       repeat
         if stoping or terminated then break;
         if canread(500) and (not terminated) then
@@ -162,6 +169,7 @@ try
                  TCPThrd[n].onTerminate:=ThrdTerminate;
                  TCPThrd[n].onExecuteCmd:=FExecuteCmd;
                  TCPThrd[n].keepalive:=keepalive;
+                 TCPThrd[n].Resume;
                  i:=0; while (TCPThrd[n].Fsock=nil)and(i<100) do begin sleep(100); inc(i); end;
                  if not TCPThrd[n].terminated then begin
                       TCPThrd[n].id:=n;
@@ -203,17 +211,19 @@ begin
   keepalive:=false;
   abort:=false;
   lockexecutecmd:=false;
-  inherited create(false);
+  inherited create(true);
 end;
 
 procedure TTCPThrd.Execute;
 var
   s: string;
-  i: integer;
+  i,keepalivecount: integer;
 begin
+try
   Fsock:=TTCPBlockSocket.create;
   FConnectTime:=now;
   stoping:=false;
+  keepalivecount:=0;
   try
     Fsock.socket:=CSock;
     Fsock.GetSins;
@@ -234,10 +244,13 @@ begin
              SendString(cmdresult+crlf);
              if lastError<>0 then break;
              if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
-          end else
-             if keepalive then begin
-                SendString('.'+crlf);      // keepalive check
-                if lastError<>0 then break;  // if send failed we close the connection
+          end else begin
+            inc(keepalivecount);
+            if keepalive and ((keepalivecount mod 10)=0) then begin
+               keepalivecount:=0;
+               SendString('.'+crlf);      // keepalive check
+               if lastError<>0 then break;  // if send failed we close the connection
+            end;
           end;
         until false;
       end;
@@ -250,6 +263,8 @@ begin
     suspend;
     terminate;
   end;
+except
+end;
 end;
 
 procedure TTCPThrd.Senddata(str:string);
