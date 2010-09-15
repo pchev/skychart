@@ -103,7 +103,7 @@ type
     identlabel: TLabel;
     switchbackground: TAction;
     switchstar: TAction;
-    elescope1: TMenuItem;
+    Telescope1: TMenuItem;
     Connect1: TMenuItem;
     Slew1: TMenuItem;
     Sync1: TMenuItem;
@@ -310,7 +310,7 @@ RemoveAllCircles1.caption:=rsRemoveAllCir;
 AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
-elescope1.caption:=rsTelescope;
+Telescope1.caption:=rsTelescope;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
 if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
@@ -1264,6 +1264,10 @@ begin
    About1.visible:=false;
    About2.visible:=false;
  end;
+ if sc.cfgsc.ManualTelescope then
+    Telescope1.Visible:=false
+ else
+    Telescope1.Visible:=true;
 end;
 
 procedure Tf_chart.TrackOn1Click(Sender: TObject);
