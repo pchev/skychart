@@ -1,7 +1,7 @@
 object f_chart: Tf_chart
-  Left = 459
+  Left = 435
   Height = 338
-  Top = 123
+  Top = 128
   Width = 508
   ActiveControl = Panel1
   Caption = 'Chart'
@@ -266,7 +266,7 @@ object f_chart: Tf_chart
     object N2: TMenuItem
       Caption = '-'
     end
-    object elescope1: TMenuItem
+    object Telescope1: TMenuItem
       Caption = 'Telescope'
       object Slew1: TMenuItem
         Caption = 'Slew'

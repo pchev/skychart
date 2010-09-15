@@ -5494,6 +5494,19 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
   with MultiDoc1.ActiveObject as Tf_chart do begin
+    if sc.cfgsc.ManualTelescope then begin
+       ControlPanel1.Visible:=false;
+       telescopeSlew1.Visible:=false;
+       telescopeSync1.Visible:=false;
+       TSlew.Enabled:=false;
+       TSync.Enabled:=false;
+    end else begin
+       ControlPanel1.Visible:=true;
+       telescopeSlew1.Visible:=true;
+       telescopeSync1.Visible:=true;
+       TSlew.Enabled:=true;
+       TSync.Enabled:=true;
+    end;
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
     ShowStars1.checked:=sc.cfgsc.showstars;
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
