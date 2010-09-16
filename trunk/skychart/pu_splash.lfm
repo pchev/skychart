@@ -11,6 +11,7 @@ object f_splash: Tf_splash
   ClientWidth = 496
   Font.Color = clBlack
   Font.Height = -11
+  FormStyle = fsSplash
   OnCreate = FormCreate
   OnMouseUp = FormMouseUp
   OnShow = FormShow
@@ -8422,7 +8423,7 @@ object f_splash: Tf_splash
     object Label2: TLabel
       Left = 16
       Height = 25
-      Top = 155
+      Top = 151
       Width = 95
       Caption = 'Version 3 '
       Font.Color = clWhite
