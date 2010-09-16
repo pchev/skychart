@@ -749,7 +749,7 @@ if StartCircle then begin
   StartCircle:=false;
   end
 else MovingCircle := false;
-if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
+if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}

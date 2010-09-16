@@ -2529,9 +2529,10 @@ if chart is Tf_chart then with chart as Tf_chart do begin
  WriteTrace('Search1Execute');
 {$endif}
         Refresh;
+        sc.cfgsc.FindType:=ftInv;
         ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-        if not ok then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-        if not ok then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
+        if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+        if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
         if not ok then begin  // object not visible with current chart setting
           sc.cfgsc.FindName:=Num;
           sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsNonVisibleSe+'';
@@ -2540,6 +2541,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
           sc.cfgsc.FindSize:=0;
           sc.cfgsc.FindPM:=false;
           sc.cfgsc.FindOK:=true;
+          sc.cfgsc.FindType:=ftInv;
         end;
         ShowIdentLabel;
         f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
@@ -5450,9 +5452,10 @@ Findit:
  WriteTrace('GenericSearch');
 {$endif}
       Refresh;
+      sc.cfgsc.FindType:=ftInv;
       ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-      if not ok then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-      if not ok then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
+      if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+      if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
       if not ok then begin  // object not visible with current chart setting
         sc.cfgsc.FindName:=Num;
         sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsNonVisibleSe+'';
@@ -5461,6 +5464,7 @@ Findit:
         sc.cfgsc.FindSize:=0;
         sc.cfgsc.FindPM:=false;
         sc.cfgsc.FindOK:=true;
+        sc.cfgsc.FindType:=ftInv;
       end;
       ShowIdentLabel;
       f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);

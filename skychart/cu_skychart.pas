@@ -1512,6 +1512,7 @@ begin
  cfgsc.FindDec:=rec.dec;
  cfgsc.FindPM:=cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec];
  cfgsc.FindSize:=0;
+ cfgsc.FindType:=rec.options.rectype;
  desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+tab+DEpToStr(rad2deg*rec.dec)+tab;
  case rec.options.rectype of
  rtStar: begin   // stars
@@ -3096,7 +3097,8 @@ begin
 sz:=6;
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xa,ya,cfgsc);
-Fplot.PlotCircle(xa-sz,ya-sz,xa+sz,ya+sz,Fplot.cfgplot.Color[15],moving);
+Fplot.PlotCircle(xa-sz,ya-sz,xa+sz,ya+sz,Fplot.cfgplot.Color[11],moving);
+Fplot.PlotCircle(xa-sz-1,ya-sz-1,xa+sz+1,ya+sz+1,Fplot.cfgplot.Color[0],moving);
 end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;

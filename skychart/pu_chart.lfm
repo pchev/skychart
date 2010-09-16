@@ -32,13 +32,14 @@ object f_chart: Tf_chart
       Left = 136
       Height = 16
       Top = 120
-      Width = 67
+      Width = 77
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
       Font.Color = clWhite
       Font.Height = -12
       Font.Name = 'Sans'
+      Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
       ShowAccelChar = False

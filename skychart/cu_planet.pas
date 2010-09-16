@@ -1004,6 +1004,7 @@ if result then begin
   cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   cfgsc.FindDec:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
   cfgsc.FindPM:=false;
+  cfgsc.FindType:=ftPla;
   sar := ARpToStr(rad2deg*cfgsc.FindRA/15) ;
   sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
   jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
@@ -1927,6 +1928,7 @@ if result then begin
   cfgsc.FindRA:=tar;
   cfgsc.FindDec:=tde;
   cfgsc.FindPM:=false;
+  cfgsc.FindType:=ftAst;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,4];
@@ -2003,6 +2005,7 @@ if result then begin
   cfgsc.FindRA:=tar;
   cfgsc.FindDec:=tde;
   cfgsc.FindPM:=false;
+  cfgsc.FindType:=ftCom;
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.CometLst[CurrentComStep,CurrentComet,7];
