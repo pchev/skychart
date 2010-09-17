@@ -703,7 +703,7 @@ end;
   buf:=inttostr(textpos[ListIndex,2]);
   edit2.text:=buf;
   if (textpos[ListIndex,1]>0)and(textpos[ListIndex,2]>0) then begin
-    memo1.SelStart:=textpos[ListIndex,1];
+    memo1.SelStart:=textpos[ListIndex,1]-1;
     memo1.SelLength:=minintvalue([textpos[ListIndex,2],length(memo1.Lines.Strings[0])-memo1.SelStart]);
   end else begin
     memo1.SelStart:=0;
@@ -1989,8 +1989,8 @@ procedure Tf_catgen.Memo1MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var i,j,k,l : integer;
 begin
-i:=memo1.selstart-1;
-j:=memo1.SelLength-1;
+i:=memo1.selstart;
+j:=memo1.SelLength;
 if (i>=0) and (j>0) then begin
   k:=length(memo1.Lines.Strings[0]);
   l:=length(memo1.Lines.Strings[1]);
