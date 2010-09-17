@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-09 11:23+0200\n"
-"Last-Translator: pch <pch@ap-i.net>\n"
+"PO-Revision-Date: 2010-09-17 10:19+0200\n"
+"Last-Translator: \n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -2548,10 +2548,6 @@ msgstr "Non existant"
 msgid "Non-existent/unknown"
 msgstr "Non existent"
 
-#: u_translation.rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Résultat de recherche invisible, zoomer pour plus de détails"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Pas d'objet à bloquer"
@@ -2659,6 +2655,10 @@ msgstr "Paramètres des listes d'objets"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Nom de l'objet"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr "Position de l'objet trouvée dans l'index, mais aucun détail dans les catalogues actifs."
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -4401,4 +4401,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

@@ -4038,10 +4038,6 @@ msgstr ""
 msgid "CdC plugin"
 msgstr ""
 
-#: u_translation:rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr ""
-
 #: u_translation:rsnoprinterfou
 msgid "No printer found!"
 msgstr ""
@@ -4376,5 +4372,9 @@ msgstr ""
 
 #: u_translation:rsothersoftwar
 msgid "Other software data"
+msgstr ""
+
+#: u_translation:rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
 msgstr ""
 

@@ -3067,12 +3067,6 @@ msgstr "Nem létezik"
 msgid "Non-existent/unknown"
 msgstr "Ismeretlen"
 
-#: u_translation.rsnonvisiblese
-#, fuzzy
-#| msgid "Non visible search result, zoom for more details"
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "A keresés eredménye nem látható, nagyítsd a részletekért"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Nincs rögzített objektum"
@@ -3208,6 +3202,10 @@ msgstr "Objektum lista beállításai"
 #| msgid "Object Name"
 msgid "Object name"
 msgstr "Objektum neve"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"

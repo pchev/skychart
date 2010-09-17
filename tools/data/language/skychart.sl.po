@@ -2546,10 +2546,6 @@ msgstr "Neobstajoč"
 msgid "Non-existent/unknown"
 msgstr "Neobstoječ/neznan"
 
-#: u_translation.rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Iskalni izid ni viden, povečaj za več podrobnosti"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Ni predmeta za oklenjenje"
@@ -2657,6 +2653,10 @@ msgstr "Nastavitve seznama predmetov"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Ime predmeta"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"

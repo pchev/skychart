@@ -1024,7 +1024,6 @@ resourcestring
   rsSelectTheTel = 'Select the telescope interface';
   rsINDIDriver = 'INDI driver';
   rsCDCPlugin = 'CdC plugin';
-  rsNonVisibleSe = 'Non-visible search result. Zoom for more details, or check object filter settings.';
   rsNoPrinterFou = 'No printer found!';
   rsShowGrid = 'Show grid';
   rsCompassRoseS = 'Compass rose size';
@@ -1112,6 +1111,8 @@ resourcestring
   rsASCOMTelesco = 'ASCOM telescope driver';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
   rsOtherSoftwar = 'Other software data';
+  rsObjectPositi = 'Object position found in index, but no detail found in any '
+    +'active catalog';
 
 implementation
 

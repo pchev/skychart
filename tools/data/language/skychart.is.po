@@ -3075,12 +3075,6 @@ msgstr "Er ekki til"
 msgid "Non-existent/unknown"
 msgstr "Ekki til/óþekkt"
 
-#: u_translation.rsnonvisiblese
-#, fuzzy
-#| msgid "Non visible search result, zoom for more details"
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Niðurstaða leitar sést ekki, notið aðdrátt til þess að greina frekari smáatriði"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Ekkert fyrirbæri til þess að festa"
@@ -3216,6 +3210,10 @@ msgstr "Stillingar fyrir lista fyrirbæra"
 #| msgid "Object Name"
 msgid "Object name"
 msgstr "Nafn fyrirbæris"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"

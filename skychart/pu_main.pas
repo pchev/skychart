@@ -2488,7 +2488,7 @@ end;
 function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
 var ok: Boolean;
     ar1,de1 : Double;
-    i : integer;
+    i, itype : integer;
     chart:TForm;
 begin
 result:=msgFailed;
@@ -2500,23 +2500,25 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
       chart:=MultiDoc1.Childs[i].DockedObject;
       break;
    end;
+itype:=ftInv;
 if chart is Tf_chart then with chart as Tf_chart do begin
       case kind of
-      0  : ok:=catalog.SearchNebulae(num,ar1,de1) ;
+      0  : begin ok:=catalog.SearchNebulae(num,ar1,de1) ; itype:=ftNeb  ; end;
       1  : begin
            ar1:=def_ra;
            de1:=def_de;
+           itype:=ftNeb ;
            ok:=true;
            end;
-      2  : ok:=catalog.SearchStar(num,ar1,de1) ;
-      3  : ok:=catalog.SearchStar(num,ar1,de1) ;
-      4  : ok:=catalog.SearchVarStar(num,ar1,de1) ;
-      5  : ok:=catalog.SearchDblStar(num,ar1,de1) ;
-      6  : ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc);
-      7  : ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc);
-      8  : ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc);
-      9  : ok:=catalog.SearchConstellation(num,ar1,de1);
-      10 : ok:=catalog.SearchLines(num,ar1,de1) ;
+      2  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar  ; end;
+      3  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar  ; end;
+      4  : begin ok:=catalog.SearchVarStar(num,ar1,de1) ; itype:=ftVar  ; end;
+      5  : begin ok:=catalog.SearchDblStar(num,ar1,de1) ; itype:=ftDbl  ; end;
+      6  : begin ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc); itype:=ftCom  ; end;
+      7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc); itype:=ftAst  ; end;
+      8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla  ; end;
+      9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin  ; end;
+      10 : begin ok:=catalog.SearchLines(num,ar1,de1) ; itype:=ftlin  ; end;
       else ok:=false;
       end;
       if ok then begin
@@ -2529,21 +2531,40 @@ if chart is Tf_chart then with chart as Tf_chart do begin
  WriteTrace('Search1Execute');
 {$endif}
         Refresh;
-        sc.cfgsc.FindType:=ftInv;
-        ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-        if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-        if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
-        if not ok then begin  // object not visible with current chart setting
-          sc.cfgsc.FindName:=Num;
-          sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsNonVisibleSe+'';
-          sc.cfgsc.FindRA:=ar1;
-          sc.cfgsc.FindDec:=de1;
-          sc.cfgsc.FindSize:=0;
-          sc.cfgsc.FindPM:=false;
-          sc.cfgsc.FindOK:=true;
-          sc.cfgsc.FindType:=ftInv;
+        if itype=ftlin then begin
+            sc.cfgsc.FindName:=Num;
+            sc.cfgsc.FindDesc:='';
+            sc.cfgsc.FindRA:=ar1;
+            sc.cfgsc.FindDec:=de1;
+            sc.cfgsc.FindSize:=0;
+            sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindOK:=true;
+            sc.cfgsc.FindType:=itype;
+            sc.cfgsc.TrackOn:=False;
+            sc.cfgsc.TrackType:=0;
+        end else begin
+          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position error, search 3.5 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position error, search 10 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position error, search 20 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
+            sc.cfgsc.FindName:=Num;
+            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsObjectPositi+'';
+            sc.cfgsc.FindRA:=ar1;
+            sc.cfgsc.FindDec:=de1;
+            sc.cfgsc.FindSize:=0;
+            sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindOK:=true;
+            sc.cfgsc.FindType:=itype;
+            sc.cfgsc.TrackOn:=true;
+            sc.cfgsc.TrackType:=6;
+            sc.cfgsc.TrackRA:=ar1;
+            sc.cfgsc.TrackDec:=de1;
+            sc.cfgsc.TrackName:=Num;
+          end;
+          ShowIdentLabel;
         end;
-        ShowIdentLabel;
         f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
@@ -5398,6 +5419,7 @@ var ok : Boolean;
     i : integer;
     chart:TForm;
     stype: string;
+    itype:integer;
 label findit;
 begin
 result:=false;
@@ -5412,31 +5434,31 @@ end else begin
       if MultiDoc1.Childs[i].caption=cname then chart:=MultiDoc1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
-   stype:='N';
+   stype:='N';  itype:=ftNeb;
    ok:=catalog.SearchNebulae(Num,ar1,de1) ;
    if ok then goto findit;
-   stype:='V*';
+   stype:='V*'; itype:=ftVar;
    ok:=catalog.SearchVarStar(Num,ar1,de1) ;
    if ok then goto findit;
-   stype:='D*';
+   stype:='D*'; itype:=ftDbl;
    ok:=catalog.SearchDblStar(Num,ar1,de1) ;
    if ok then goto findit;
-   stype:='*';
+   stype:='*';  itype:=ftStar;
    ok:=catalog.SearchStar(Num,ar1,de1) ;
    if ok then goto findit;
-   stype:='P';
+   stype:='P';  itype:=ftPla;
    ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
-   stype:='As';
+   stype:='As';  itype:=ftAst;
    ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
-   stype:='Cm';
+   stype:='Cm'; itype:=ftCom;
    ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
    if ok then goto findit;
-   stype:='*';
+   stype:='*';  itype:=ftStar;
    ok:=catalog.SearchStarName(Num,ar1,de1) ;
    if ok then goto findit;
-   stype:='N';
+   stype:='N';  itype:=ftNeb;
    ok:=f_search.SearchNebName(Num,ar1,de1) ;
    if ok then goto findit;
 
@@ -5454,17 +5476,24 @@ Findit:
       Refresh;
       sc.cfgsc.FindType:=ftInv;
       ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-      if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-      if (not ok)or(sc.cfgsc.FindType=ftStar) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
-      if not ok then begin  // object not visible with current chart setting
+      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
+      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position, error search 10 min
+      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position, error search 20 min
+      if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
         sc.cfgsc.FindName:=Num;
-        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsNonVisibleSe+'';
+        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsObjectPositi+'';
         sc.cfgsc.FindRA:=ar1;
         sc.cfgsc.FindDec:=de1;
         sc.cfgsc.FindSize:=0;
         sc.cfgsc.FindPM:=false;
         sc.cfgsc.FindOK:=true;
         sc.cfgsc.FindType:=ftInv;
+        sc.cfgsc.TrackOn:=true;
+        sc.cfgsc.TrackType:=6;
+        sc.cfgsc.TrackRA:=ar1;
+        sc.cfgsc.TrackDec:=de1;
+        sc.cfgsc.TrackName:=Num;
       end;
       ShowIdentLabel;
       f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
