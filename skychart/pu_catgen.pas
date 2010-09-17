@@ -41,8 +41,8 @@ type
     CheckBox8: TCheckBox;
     Label22: TLabel;
     ListBox1: TListBox;
+    Memo1: TMemo;
     PageControl1: TNoteBook;
-    Memo1: TSynEdit;
     binarycat: TRadioGroup;
     TabSheet1: TPage;
     TabSheet2: TPage;
@@ -183,6 +183,7 @@ type
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
     Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
+    lockchange: boolean;
     catheader : TFileHeader;
     catinfo : TCatHdrInfo;
     datarec : array [0..4096] of byte;
@@ -512,6 +513,7 @@ begin
 Fcatgenadv:=Tf_catgenadv.Create(self);
 Fprogress:=Tf_progress.Create(self);
 rejectopen := false;
+lockchange:=false;
 for i:=1 to l_sup do altname[i]:=0;
 pagecontrol1.PageIndex:=pageFiles;
 nextbt.enabled:=true;
@@ -631,7 +633,7 @@ try
   for i:=1 to n do scal:=scal+copy('         ',1,9-trunc(log10(i)))+inttostr(i);
   memo1.Lines.add(scal);
   memo1.SelStart:=0;
-  memo1.SelEnd:=0;
+  memo1.SelLength:=0;
 finally
   CloseCatalog;
 end;
@@ -678,7 +680,9 @@ end;
 
 Procedure Tf_catgen.SetListIndex;
 var i : integer;
+    buf:string;
 begin
+lockchange:=true;
 case RadioGroup2.ItemIndex of
      0 : lra:=l_rahms;
      1 : lra:=l_rah;
@@ -691,30 +695,35 @@ case RadioGroup3.ItemIndex of
      2 : lde:=l_despd;
 end;
   i:=listindex+1;
-  if i<=lra then edit3.text:=flabel[1]
-  else if i<=lra+lde then edit3.text:=flabel[2]
+  if (i<=lra) then edit3.text:=flabel[1]
+  else if (i<=(lra+lde)) then edit3.text:=flabel[2]
   else edit3.text:=flabel[i-lra-lde+2];
-  edit1.text:=inttostr(textpos[ListIndex,1]);
-  edit2.text:=inttostr(textpos[ListIndex,2]);
+  buf:=inttostr(textpos[ListIndex,1]);
+  edit1.text:=buf;
+  buf:=inttostr(textpos[ListIndex,2]);
+  edit2.text:=buf;
   if (textpos[ListIndex,1]>0)and(textpos[ListIndex,2]>0) then begin
     memo1.SelStart:=textpos[ListIndex,1];
-    memo1.SelEnd:=memo1.SelStart+ minintvalue([textpos[ListIndex,2],length(memo1.Lines.Strings[0])-memo1.SelStart]);
+    memo1.SelLength:=minintvalue([textpos[ListIndex,2],length(memo1.Lines.Strings[0])-memo1.SelStart]);
   end else begin
     memo1.SelStart:=0;
-    memo1.SelEnd:=0;
+    memo1.SelLength:=0;
   end;;
   if (i>l_fixe)and(i<=l_fixe+l_sup) then begin
      checkbox2.visible:=true;
      checkbox2.checked:=AltName[i-l_fixe]=1;
   end else checkbox2.visible:=false;
+
+lockchange:=false;
 end;
 
 procedure Tf_catgen.Edit3Change(Sender: TObject);
 var i,j : integer;
 begin
+if lockchange then exit;
   i:=listindex+1;
   if i<=lra then j:=1
-  else if i<=lra+lde then j:=2
+  else if i<=(lra+lde) then j:=2
   else j:=i-lra-lde+2;
 flabel[j]:=edit3.text;
 end;
@@ -798,6 +807,7 @@ end;
 procedure Tf_catgen.Edit1Change(Sender: TObject);
 var i,n : integer;
 begin
+if lockchange then exit;
 val(edit1.text,i,n);
 if n=0 then begin
    textpos[ListIndex,1]:=i;
@@ -808,6 +818,7 @@ end;
 procedure Tf_catgen.Edit2Change(Sender: TObject);
 var i,n : integer;
 begin
+if lockchange then exit;
 val(edit2.text,i,n);
 if n=0 then begin
    textpos[ListIndex,2]:=i;
@@ -1979,7 +1990,7 @@ procedure Tf_catgen.Memo1MouseUp(Sender: TObject; Button: TMouseButton;
 var i,j,k,l : integer;
 begin
 i:=memo1.selstart-1;
-j:=memo1.selEnd-i-1;
+j:=memo1.SelLength-1;
 if (i>=0) and (j>0) then begin
   k:=length(memo1.Lines.Strings[0]);
   l:=length(memo1.Lines.Strings[1]);
