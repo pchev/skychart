@@ -3,7 +3,6 @@ object f_catgen: Tf_catgen
   Height = 479
   Top = 93
   Width = 503
-  ActiveControl = RadioGroup1.RadioButton0
   BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -2908,13 +2907,13 @@ object f_catgen: Tf_catgen
     TabOrder = 0
     object TabSheet1: TPage
       Caption = '1'
-      ClientWidth = 385
-      ClientHeight = 434
+      ClientWidth = 381
+      ClientHeight = 430
       object Label6: TLabel
         Left = 20
         Height = 14
         Top = 6
-        Width = 192
+        Width = 205
         Caption = 'Select the type of object in your catalog'
         ParentColor = False
         WordWrap = True
@@ -2923,7 +2922,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 14
         Top = 224
-        Width = 86
+        Width = 96
         Caption = 'Input Catalog files'
         ParentColor = False
       end
@@ -2931,7 +2930,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 14
         Top = 164
-        Width = 94
+        Width = 102
         Caption = 'Catalog short name'
         ParentColor = False
       end
@@ -2939,7 +2938,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 14
         Top = 192
-        Width = 89
+        Width = 99
         Caption = 'Catalog long name'
         ParentColor = False
       end
@@ -3028,7 +3027,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 122
+        ClientHeight = 119
         ClientWidth = 223
         ItemIndex = 0
         Items.Strings = (
@@ -3065,7 +3064,6 @@ object f_catgen: Tf_catgen
         ItemHeight = 0
         OnDblClick = SpeedButton1Click
         TabOrder = 3
-        TopIndex = -1
       end
       object binarycat: TRadioGroup
         Left = 14
@@ -3082,7 +3080,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 41
+        ClientHeight = 38
         ClientWidth = 343
         Columns = 2
         ItemIndex = 0
@@ -3096,14 +3094,14 @@ object f_catgen: Tf_catgen
     end
     object TabSheet2: TPage
       Caption = '2'
-      ClientWidth = 385
-      ClientHeight = 434
+      ClientWidth = 381
+      ClientHeight = 430
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
-        Height = 17
+        Height = 14
         Top = 8
-        Width = 135
+        Width = 125
         Caption = 'General catalog options'
         ParentColor = False
       end
@@ -3113,38 +3111,38 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Nebulae parameters'
-        ClientHeight = 177
+        ClientHeight = 174
         ClientWidth = 341
         TabOrder = 5
         object Label11: TLabel
           Left = 8
-          Height = 17
+          Height = 14
           Top = 17
-          Width = 117
+          Width = 109
           Caption = 'Dimension and Units'
           ParentColor = False
         end
         object Label12: TLabel
           Left = 8
-          Height = 17
+          Height = 14
           Top = 88
-          Width = 66
+          Width = 60
           Caption = 'Object type'
           ParentColor = False
         end
         object Label15: TLabel
           Left = 9
-          Height = 13
+          Height = 14
           Top = 120
-          Width = 246
+          Width = 229
           Caption = 'Recognize Units or Object type from the file:'
           ParentColor = False
         end
         object Label16: TLabel
           Left = 134
-          Height = 13
+          Height = 14
           Top = 48
-          Width = 146
+          Width = 136
           Caption = '(useful to represent a flux)'
           ParentColor = False
           WordWrap = True
@@ -3154,7 +3152,7 @@ object f_catgen: Tf_catgen
           Height = 21
           Top = 12
           Width = 89
-          ItemHeight = 0
+          ItemHeight = 13
           Items.Strings = (
             'Degree'
             'Minute'
@@ -3165,7 +3163,7 @@ object f_catgen: Tf_catgen
         end
         object LongEdit1: TLongEdit
           Left = 140
-          Height = 22
+          Height = 21
           Hint = '0..3600'
           Top = 12
           Width = 41
@@ -3177,9 +3175,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox1: TCheckBox
           Left = 4
-          Height = 28
+          Height = 19
           Top = 40
-          Width = 131
+          Width = 108
           Caption = 'Logarithmic scale'
           TabOrder = 2
         end
@@ -3188,7 +3186,7 @@ object f_catgen: Tf_catgen
           Height = 21
           Top = 80
           Width = 113
-          ItemHeight = 0
+          ItemHeight = 13
           ItemIndex = 14
           Items.Strings = (
             'Galaxy'
@@ -3240,22 +3238,22 @@ object f_catgen: Tf_catgen
         Top = 224
         Width = 345
         Caption = 'Default Outline parameters'
-        ClientHeight = 177
+        ClientHeight = 174
         ClientWidth = 341
         TabOrder = 6
         object Label18: TLabel
           Left = 148
-          Height = 17
+          Height = 14
           Top = 80
-          Width = 63
+          Width = 58
           Caption = 'Line width '
           ParentColor = False
         end
         object Label19: TLabel
           Left = 156
-          Height = 17
+          Height = 14
           Top = 152
-          Width = 35
+          Width = 32
           Caption = 'Color '
           ParentColor = False
         end
@@ -3278,7 +3276,7 @@ object f_catgen: Tf_catgen
         end
         object LongEdit2: TLongEdit
           Left = 220
-          Height = 22
+          Height = 21
           Hint = '0..99'
           Top = 75
           Width = 41
@@ -3313,7 +3311,7 @@ object f_catgen: Tf_catgen
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 42
+          ClientHeight = 39
           ClientWidth = 312
           Columns = 3
           ItemIndex = 0
@@ -3326,9 +3324,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox7: TCheckBox
           Left = 4
-          Height = 28
+          Height = 19
           Top = 72
-          Width = 118
+          Width = 99
           Caption = 'Closed contour'
           Checked = True
           State = cbChecked
@@ -3350,7 +3348,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 90
+        ClientHeight = 87
         ClientWidth = 176
         ItemIndex = 0
         Items.Strings = (
@@ -3377,7 +3375,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 90
+        ClientHeight = 87
         ClientWidth = 188
         ItemIndex = 0
         Items.Strings = (
@@ -3394,12 +3392,12 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 130
         Caption = 'Coordinates Equinox'
-        ClientHeight = 42
+        ClientHeight = 39
         ClientWidth = 126
         TabOrder = 2
         object FloatEdit1: TFloatEdit
           Left = 8
-          Height = 22
+          Height = 21
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3414,12 +3412,12 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 128
         Caption = 'Maximum magnitude'
-        ClientHeight = 42
+        ClientHeight = 39
         ClientWidth = 124
         TabOrder = 4
         object FloatEdit2: TFloatEdit
           Left = 12
-          Height = 22
+          Height = 21
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3434,12 +3432,12 @@ object f_catgen: Tf_catgen
         Top = 152
         Width = 107
         Caption = 'Position Epoch'
-        ClientHeight = 42
+        ClientHeight = 39
         ClientWidth = 103
         TabOrder = 3
         object FloatEdit3: TFloatEdit
           Left = 8
-          Height = 22
+          Height = 21
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3451,38 +3449,38 @@ object f_catgen: Tf_catgen
     end
     object TabSheet3: TPage
       Caption = '3'
-      ClientWidth = 385
-      ClientHeight = 434
+      ClientWidth = 381
+      ClientHeight = 430
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
-        Height = 17
+        Height = 14
         Top = 252
-        Width = 57
+        Width = 50
         Caption = 'First Char'
         ParentColor = False
       end
       object Label5: TLabel
         Left = 270
-        Height = 17
+        Height = 14
         Top = 252
-        Width = 39
+        Width = 37
         Caption = 'Length'
         ParentColor = False
       end
       object Label7: TLabel
         Left = 24
-        Height = 17
+        Height = 14
         Top = 16
-        Width = 316
+        Width = 287
         Caption = 'Select the fields to use and their position in the text file'
         ParentColor = False
       end
       object Label3: TLabel
         Left = 18
-        Height = 17
+        Height = 14
         Top = 252
-        Width = 31
+        Width = 28
         Caption = 'Label'
         ParentColor = False
       end
@@ -3495,11 +3493,10 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 0
+        ItemHeight = 17
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
-        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3509,6 +3506,7 @@ object f_catgen: Tf_catgen
         Height = 21
         Top = 248
         Width = 45
+        AutoSize = False
         OnChange = Edit1Change
         TabOrder = 2
       end
@@ -3517,6 +3515,7 @@ object f_catgen: Tf_catgen
         Height = 21
         Top = 248
         Width = 45
+        AutoSize = False
         OnChange = Edit2Change
         TabOrder = 3
       end
@@ -3525,15 +3524,16 @@ object f_catgen: Tf_catgen
         Height = 21
         Top = 248
         Width = 55
+        AutoSize = False
         MaxLength = 10
         OnChange = Edit3Change
         TabOrder = 1
       end
       object CheckBox2: TCheckBox
         Left = 18
-        Height = 28
+        Height = 19
         Top = 280
-        Width = 229
+        Width = 199
         Caption = 'Use this field as an Alternate Name'
         OnClick = CheckBox2Click
         TabOrder = 4
@@ -3549,637 +3549,28 @@ object f_catgen: Tf_catgen
         OnClick = Button7Click
         TabOrder = 5
       end
-      inline Memo1: TSynEdit
-        Left = 18
-        Height = 82
-        Top = 320
-        Width = 345
-        Font.Height = -11
-        Font.Name = 'Courier'
-        Font.Pitch = fpFixed
-        Font.Quality = fqNonAntialiased
-        ParentColor = False
-        ParentFont = False
-        TabOrder = 6
+      object Memo1: TMemo
+        Left = 11
+        Height = 90
+        Top = 318
+        Width = 351
+        HideSelection = False
         OnMouseUp = Memo1MouseUp
-        BookMarkOptions.Xoffset = -18
-        Gutter.Visible = False
-        Gutter.Width = 53
-        Gutter.MouseActions = <        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccAny
-            ClickDir = cdDown
-            Command = 13
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbRight
-            ClickCount = ccSingle
-            ClickDir = cdUp
-            Command = 12
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end>
-        RightGutter.Width = 0
-        RightGutter.MouseActions = <        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccAny
-            ClickDir = cdDown
-            Command = 13
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbRight
-            ClickCount = ccSingle
-            ClickDir = cdUp
-            Command = 12
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end>
-        Keystrokes = <        
-          item
-            Command = ecUp
-            ShortCut = 38
-          end        
-          item
-            Command = ecSelUp
-            ShortCut = 8230
-          end        
-          item
-            Command = ecScrollUp
-            ShortCut = 16422
-          end        
-          item
-            Command = ecDown
-            ShortCut = 40
-          end        
-          item
-            Command = ecSelDown
-            ShortCut = 8232
-          end        
-          item
-            Command = ecScrollDown
-            ShortCut = 16424
-          end        
-          item
-            Command = ecLeft
-            ShortCut = 37
-          end        
-          item
-            Command = ecSelLeft
-            ShortCut = 8229
-          end        
-          item
-            Command = ecWordLeft
-            ShortCut = 16421
-          end        
-          item
-            Command = ecSelWordLeft
-            ShortCut = 24613
-          end        
-          item
-            Command = ecRight
-            ShortCut = 39
-          end        
-          item
-            Command = ecSelRight
-            ShortCut = 8231
-          end        
-          item
-            Command = ecWordRight
-            ShortCut = 16423
-          end        
-          item
-            Command = ecSelWordRight
-            ShortCut = 24615
-          end        
-          item
-            Command = ecPageDown
-            ShortCut = 34
-          end        
-          item
-            Command = ecSelPageDown
-            ShortCut = 8226
-          end        
-          item
-            Command = ecPageBottom
-            ShortCut = 16418
-          end        
-          item
-            Command = ecSelPageBottom
-            ShortCut = 24610
-          end        
-          item
-            Command = ecPageUp
-            ShortCut = 33
-          end        
-          item
-            Command = ecSelPageUp
-            ShortCut = 8225
-          end        
-          item
-            Command = ecPageTop
-            ShortCut = 16417
-          end        
-          item
-            Command = ecSelPageTop
-            ShortCut = 24609
-          end        
-          item
-            Command = ecLineStart
-            ShortCut = 36
-          end        
-          item
-            Command = ecSelLineStart
-            ShortCut = 8228
-          end        
-          item
-            Command = ecEditorTop
-            ShortCut = 16420
-          end        
-          item
-            Command = ecSelEditorTop
-            ShortCut = 24612
-          end        
-          item
-            Command = ecLineEnd
-            ShortCut = 35
-          end        
-          item
-            Command = ecSelLineEnd
-            ShortCut = 8227
-          end        
-          item
-            Command = ecEditorBottom
-            ShortCut = 16419
-          end        
-          item
-            Command = ecSelEditorBottom
-            ShortCut = 24611
-          end        
-          item
-            Command = ecToggleMode
-            ShortCut = 45
-          end        
-          item
-            Command = ecCopy
-            ShortCut = 16429
-          end        
-          item
-            Command = ecPaste
-            ShortCut = 8237
-          end        
-          item
-            Command = ecDeleteChar
-            ShortCut = 46
-          end        
-          item
-            Command = ecCut
-            ShortCut = 8238
-          end        
-          item
-            Command = ecDeleteLastChar
-            ShortCut = 8
-          end        
-          item
-            Command = ecDeleteLastChar
-            ShortCut = 8200
-          end        
-          item
-            Command = ecDeleteLastWord
-            ShortCut = 16392
-          end        
-          item
-            Command = ecUndo
-            ShortCut = 32776
-          end        
-          item
-            Command = ecRedo
-            ShortCut = 40968
-          end        
-          item
-            Command = ecLineBreak
-            ShortCut = 13
-          end        
-          item
-            Command = ecSelectAll
-            ShortCut = 16449
-          end        
-          item
-            Command = ecCopy
-            ShortCut = 16451
-          end        
-          item
-            Command = ecBlockIndent
-            ShortCut = 24649
-          end        
-          item
-            Command = ecLineBreak
-            ShortCut = 16461
-          end        
-          item
-            Command = ecInsertLine
-            ShortCut = 16462
-          end        
-          item
-            Command = ecDeleteWord
-            ShortCut = 16468
-          end        
-          item
-            Command = ecBlockUnindent
-            ShortCut = 24661
-          end        
-          item
-            Command = ecPaste
-            ShortCut = 16470
-          end        
-          item
-            Command = ecCut
-            ShortCut = 16472
-          end        
-          item
-            Command = ecDeleteLine
-            ShortCut = 16473
-          end        
-          item
-            Command = ecDeleteEOL
-            ShortCut = 24665
-          end        
-          item
-            Command = ecUndo
-            ShortCut = 16474
-          end        
-          item
-            Command = ecRedo
-            ShortCut = 24666
-          end        
-          item
-            Command = ecGotoMarker0
-            ShortCut = 16432
-          end        
-          item
-            Command = ecGotoMarker1
-            ShortCut = 16433
-          end        
-          item
-            Command = ecGotoMarker2
-            ShortCut = 16434
-          end        
-          item
-            Command = ecGotoMarker3
-            ShortCut = 16435
-          end        
-          item
-            Command = ecGotoMarker4
-            ShortCut = 16436
-          end        
-          item
-            Command = ecGotoMarker5
-            ShortCut = 16437
-          end        
-          item
-            Command = ecGotoMarker6
-            ShortCut = 16438
-          end        
-          item
-            Command = ecGotoMarker7
-            ShortCut = 16439
-          end        
-          item
-            Command = ecGotoMarker8
-            ShortCut = 16440
-          end        
-          item
-            Command = ecGotoMarker9
-            ShortCut = 16441
-          end        
-          item
-            Command = ecSetMarker0
-            ShortCut = 24624
-          end        
-          item
-            Command = ecSetMarker1
-            ShortCut = 24625
-          end        
-          item
-            Command = ecSetMarker2
-            ShortCut = 24626
-          end        
-          item
-            Command = ecSetMarker3
-            ShortCut = 24627
-          end        
-          item
-            Command = ecSetMarker4
-            ShortCut = 24628
-          end        
-          item
-            Command = ecSetMarker5
-            ShortCut = 24629
-          end        
-          item
-            Command = ecSetMarker6
-            ShortCut = 24630
-          end        
-          item
-            Command = ecSetMarker7
-            ShortCut = 24631
-          end        
-          item
-            Command = ecSetMarker8
-            ShortCut = 24632
-          end        
-          item
-            Command = ecSetMarker9
-            ShortCut = 24633
-          end        
-          item
-            Command = ecNormalSelect
-            ShortCut = 24654
-          end        
-          item
-            Command = ecColumnSelect
-            ShortCut = 24643
-          end        
-          item
-            Command = ecLineSelect
-            ShortCut = 24652
-          end        
-          item
-            Command = ecTab
-            ShortCut = 9
-          end        
-          item
-            Command = ecShiftTab
-            ShortCut = 8201
-          end        
-          item
-            Command = ecMatchBracket
-            ShortCut = 24642
-          end>
-        MouseActions = <        
-          item
-            Shift = []
-            ShiftMask = [ssShift, ssAlt]
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 1
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = [ssShift]
-            ShiftMask = [ssShift, ssAlt]
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 1
-            MoveCaret = True
-            Option = 1
-            Priority = 0
-          end        
-          item
-            Shift = [ssAlt]
-            ShiftMask = [ssShift, ssAlt]
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 3
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = [ssShift, ssAlt]
-            ShiftMask = [ssShift, ssAlt]
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 3
-            MoveCaret = True
-            Option = 1
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbRight
-            ClickCount = ccSingle
-            ClickDir = cdUp
-            Command = 12
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccDouble
-            ClickDir = cdDown
-            Command = 6
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccTriple
-            ClickDir = cdDown
-            Command = 7
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccQuad
-            ClickDir = cdDown
-            Command = 8
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbMiddle
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 10
-            MoveCaret = True
-            Option = 0
-            Priority = 0
-          end        
-          item
-            Shift = [ssCtrl]
-            ShiftMask = [ssShift, ssAlt, ssCtrl]
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdUp
-            Command = 11
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end>
-        MouseSelActions = <        
-          item
-            Shift = []
-            ShiftMask = []
-            Button = mbLeft
-            ClickCount = ccSingle
-            ClickDir = cdDown
-            Command = 9
-            MoveCaret = False
-            Option = 0
-            Priority = 0
-          end>
-        ReadOnly = True
         ScrollBars = ssHorizontal
-        BracketHighlightStyle = sbhsBoth
-        inline TSynGutterPartList
-          object TSynGutterMarks
-            Width = 24
-          end
-          object TSynGutterLineNumber
-            Width = 13
-            MouseActions = <>
-            MarkupInfo.Background = clBtnFace
-            MarkupInfo.Foreground = clNone
-            DigitCount = 2
-            ShowOnlyLineNumbersMultiplesOf = 1
-            ZeroStart = False
-            LeadingZeros = False
-          end
-          object TSynGutterChanges
-            Width = 4
-            ModifiedColor = 59900
-            SavedColor = clGreen
-          end
-          object TSynGutterSeparator
-            Width = 2
-          end
-          object TSynGutterCodeFolding
-            MouseActions = <            
-              item
-                Shift = []
-                ShiftMask = []
-                Button = mbRight
-                ClickCount = ccSingle
-                ClickDir = cdUp
-                Command = 16
-                MoveCaret = False
-                Option = 0
-                Priority = 0
-              end            
-              item
-                Shift = []
-                ShiftMask = [ssShift]
-                Button = mbMiddle
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 14
-                MoveCaret = False
-                Option = 0
-                Priority = 0
-              end            
-              item
-                Shift = [ssShift]
-                ShiftMask = [ssShift]
-                Button = mbMiddle
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 14
-                MoveCaret = False
-                Option = 1
-                Priority = 0
-              end            
-              item
-                Shift = []
-                ShiftMask = []
-                Button = mbLeft
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 0
-                MoveCaret = False
-                Option = 0
-                Priority = 0
-              end>
-            MarkupInfo.Background = clNone
-            MarkupInfo.Foreground = clGray
-            MouseActionsExpanded = <            
-              item
-                Shift = []
-                ShiftMask = []
-                Button = mbLeft
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 14
-                MoveCaret = False
-                Option = 0
-                Priority = 0
-              end>
-            MouseActionsCollapsed = <            
-              item
-                Shift = [ssCtrl]
-                ShiftMask = [ssCtrl]
-                Button = mbLeft
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 15
-                MoveCaret = False
-                Option = 0
-                Priority = 0
-              end            
-              item
-                Shift = []
-                ShiftMask = [ssCtrl]
-                Button = mbLeft
-                ClickCount = ccAny
-                ClickDir = cdDown
-                Command = 15
-                MoveCaret = False
-                Option = 1
-                Priority = 0
-              end>
-          end
-        end
-        inline SynRightGutterPartList1: TSynRightGutterPartList
-        end
+        TabOrder = 6
+        WordWrap = False
       end
     end
     object TabSheet4: TPage
       Caption = '4'
-      ClientWidth = 385
-      ClientHeight = 434
+      ClientWidth = 381
+      ClientHeight = 430
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
         Height = 14
         Top = 16
-        Width = 109
+        Width = 123
         Caption = 'Output catalog options'
         ParentColor = False
       end
@@ -4198,7 +3589,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 106
+        ClientHeight = 103
         ClientWidth = 317
         ItemIndex = 0
         Items.Strings = (
@@ -4215,7 +3606,7 @@ object f_catgen: Tf_catgen
         Top = 317
         Width = 321
         Caption = 'Output Directory'
-        ClientHeight = 81
+        ClientHeight = 78
         ClientWidth = 317
         TabOrder = 0
         object DirectoryEdit1: TDirectoryEdit
@@ -4233,9 +3624,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox6: TCheckBox
           Left = 16
-          Height = 21
+          Height = 19
           Top = 48
-          Width = 169
+          Width = 178
           Caption = 'Append to an existing catalog '
           TabOrder = 1
         end
@@ -4246,14 +3637,14 @@ object f_catgen: Tf_catgen
         Top = 176
         Width = 321
         Caption = 'Search Index'
-        ClientHeight = 118
+        ClientHeight = 115
         ClientWidth = 317
         TabOrder = 1
         object CheckBox3: TCheckBox
           Left = 16
-          Height = 21
+          Height = 19
           Top = 12
-          Width = 147
+          Width = 148
           Caption = 'Create a search index file'
           Checked = True
           State = cbChecked
@@ -4261,17 +3652,17 @@ object f_catgen: Tf_catgen
         end
         object CheckBox4: TCheckBox
           Left = 16
-          Height = 21
+          Height = 19
           Top = 60
-          Width = 200
+          Width = 211
           Caption = 'Add the alternate names to the index'
           TabOrder = 1
         end
         object CheckBox5: TCheckBox
           Left = 16
-          Height = 21
+          Height = 19
           Top = 84
-          Width = 222
+          Width = 234
           Caption = 'Prefix the alternate names with their label'
           Checked = True
           State = cbChecked
@@ -4279,9 +3670,9 @@ object f_catgen: Tf_catgen
         end
         object CheckBox8: TCheckBox
           Left = 16
-          Height = 21
+          Height = 19
           Top = 36
-          Width = 199
+          Width = 207
           Caption = 'Prefix name with catalog short name'
           TabOrder = 3
         end
@@ -4289,14 +3680,14 @@ object f_catgen: Tf_catgen
     end
     object TabSheet5: TPage
       Caption = '5'
-      ClientWidth = 385
-      ClientHeight = 434
+      ClientWidth = 381
+      ClientHeight = 430
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
         Height = 14
         Top = 24
-        Width = 249
+        Width = 270
         Caption = 'Indicate the string identifier for each type of object :'
         ParentColor = False
       end
