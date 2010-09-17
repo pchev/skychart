@@ -31,18 +31,11 @@ uses
   { you can add units after this },
   variables1, aavsochart, detail1, uniqueinstance_package,
   ObsUnit, SettingUnit, splashunit, Printer4Lazarus, CDCjdcalendar, u_param,
-  downldialog, u_util2, LResources;
+  downldialog, u_util2;
 
-{$ifndef darwin}
-{$ifndef unix}
-{$R manifest.res}
-{$endif}
-{$endif}
-
-{$IFDEF WINDOWS}{$R varobs.rc}{$ENDIF}
+{$R *.res}
 
 begin
-  {$I varobs.lrs}
   Application.Initialize;
   Application.CreateForm(TVarForm, VarForm);
   Application.CreateForm(Tsplash, splash);

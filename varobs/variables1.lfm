@@ -1,7 +1,7 @@
 object VarForm: TVarForm
-  Left = 215
+  Left = 360
   Height = 500
-  Top = 0
+  Top = 125
   Width = 800
   ActiveControl = Panel1
   Caption = 'Variable stars observer'
@@ -252,7 +252,7 @@ object VarForm: TVarForm
       CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
       OKCaption = 'OK'
       CancelCaption = 'Cancel'
-      DateOrder = doNone
+      DateOrder = doYMd
       ButtonWidth = 23
       CharCase = ecNormal
       Glyph.Data = {
@@ -281,7 +281,7 @@ object VarForm: TVarForm
         00FF000000FF000000FF000000FF000000FF0000000000000000
       }
       NumGlyphs = 1
-      MaxLength = 0
+      MaxLength = 10
       OnChange = DateEdit1Change
       OnExit = DateEdit1Change
       TabOrder = 6
