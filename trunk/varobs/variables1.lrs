@@ -1,7 +1,7 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('TVarForm','FORMDATA',[
-  'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3#215#0#6'Height'#3#244#1#3'Top'#2#0#5
+  'TPF0'#8'TVarForm'#7'VarForm'#4'Left'#3'h'#1#6'Height'#3#244#1#3'Top'#2'}'#5
   +'Width'#3' '#3#13'ActiveControl'#7#6'Panel1'#7'Caption'#6#23'Variable stars '
   +'observer'#12'ClientHeight'#3#222#1#11'ClientWidth'#3' '#3#11'Font.Height'#2
   +#245#9'Font.Name'#6#7'Default'#9'Icon.Data'#10#194#12#0#0#190#12#0#0#0#0#1#0
@@ -152,10 +152,10 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +'OnClick'#7#12'BitBtn3Click'#8'TabOrder'#2#4#0#0#9'TDateEdit'#9'DateEdit1'#4
   +'Left'#2'0'#6'Height'#2#21#3'Top'#2#6#5'Width'#2'P'#23'CalendarDisplaySettin'
   +'gs'#11#14'dsShowHeadings'#14'dsShowDayNames'#0#9'OKCaption'#6#2'OK'#13'Canc'
-  +'elCaption'#6#6'Cancel'#9'DateOrder'#7#6'doNone'#11'ButtonWidth'#2#23#8'Char'
-  +'Case'#7#8'ecNormal'#10'Glyph.Data'#10#218#2#0#0#214#2#0#0'BM'#214#2#0#0#0#0
-  +#0#0'6'#0#0#0'('#0#0#0#14#0#0#0#12#0#0#0#1#0' '#0#0#0#0#0#160#2#0#0'd'#0#0#0
-  +'d'#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#128#128#128#255#128#128#128
+  +'elCaption'#6#6'Cancel'#9'DateOrder'#7#5'doYMd'#11'ButtonWidth'#2#23#8'CharC'
+  +'ase'#7#8'ecNormal'#10'Glyph.Data'#10#218#2#0#0#214#2#0#0'BM'#214#2#0#0#0#0#0
+  +#0'6'#0#0#0'('#0#0#0#14#0#0#0#12#0#0#0#1#0' '#0#0#0#0#0#160#2#0#0'd'#0#0#0'd'
+  +#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#0#128#128#128#255#128#128#128
   +#255#128#128#128#255#128#128#128#255#128#128#128#255#128#128#128#255#128#128
   +#128#255#128#128#128#255#128#128#128#255#128#128#128#255#128#128#128#255#0#0
   +#0#0#0#0#0#0#0#0#0#255#0#0#0#255#128#0#0#255#0#0#0#255#128#0#0#255#128#0#0
@@ -184,7 +184,7 @@ LazarusResources.Add('TVarForm','FORMDATA',[
   +#192#192#192#255#192#192#192#255#192#192#192#255#192#192#192#255#192#192#192
   +#255#128#128#128#255#128#0#0#255#128#128#128#255#0#0#0#0#0#0#0#0#0#0#0#255#0
   +#0#0#255#0#0#0#255#0#0#0#255#0#0#0#255#0#0#0#255#0#0#0#255#0#0#0#255#0#0#0
-  +#255#0#0#0#255#0#0#0#0#0#0#0#0#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'OnChange'
+  +#255#0#0#0#255#0#0#0#0#0#0#0#0#9'NumGlyphs'#2#1#9'MaxLength'#2#10#8'OnChange'
   +#7#15'DateEdit1Change'#6'OnExit'#7#15'DateEdit1Change'#8'TabOrder'#2#6#0#0#11
   +'TTimePicker'#11'TimePicker1'#4'Left'#3#176#0#6'Height'#2#23#3'Top'#2#6#5'Wi'
   +'dth'#2'e'#4'Time'#5#0#128'-'#216#130'-'#216#202#253'?'#8'OnChange'#7#15'Dat'
