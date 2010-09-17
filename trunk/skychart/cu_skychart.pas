@@ -3097,6 +3097,8 @@ begin
 sz:=6;
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xa,ya,cfgsc);
+xa:=round(xa);
+ya:=round(ya);
 Fplot.PlotCircle(xa-sz,ya-sz,xa+sz,ya+sz,Fplot.cfgplot.Color[11],moving);
 Fplot.PlotCircle(xa-sz-1,ya-sz-1,xa+sz+1,ya+sz+1,Fplot.cfgplot.Color[0],moving);
 end;

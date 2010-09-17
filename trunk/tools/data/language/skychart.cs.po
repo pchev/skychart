@@ -2546,10 +2546,6 @@ msgstr "Neexistující"
 msgid "Non-existent/unknown"
 msgstr "Neexistující/neznámý"
 
-#: u_translation.rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Výsledek hledání není viditelný, pro více detailů přibližte mapu"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Žádný objekt pro zamknutí"
@@ -2657,6 +2653,10 @@ msgstr "Nastavení seznamu objektů"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Název objektu"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"

@@ -2551,10 +2551,6 @@ msgstr "Nie istniejący"
 msgid "Non-existent/unknown"
 msgstr "Nieznane"
 
-#: u_translation.rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "Brak widzialnych rezultatów. Powiększ dla większej ilości detali lub sprawdź ustawienia filtra obiektów."
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "Nie ma obiektu do śledzenia"
@@ -2662,6 +2658,10 @@ msgstr "Ustawienia listy obiektów"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "Nazwa obiektu"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"

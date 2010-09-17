@@ -2547,10 +2547,6 @@ msgstr "不存在"
 msgid "Non-existent/unknown"
 msgstr "不存在/未知"
 
-#: u_translation.rsnonvisiblese
-msgid "Non-visible search result. Zoom for more details, or check object filter settings."
-msgstr "搜寻结果不可见，放大适于更多详细资料"
-
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
 msgstr "没有天体给锁定"
@@ -2658,6 +2654,10 @@ msgstr "天体列表设定"
 #: u_translation.rsobjectname
 msgid "Object name"
 msgstr "天体名称"
+
+#: u_translation.rsobjectpositi
+msgid "Object position found in index, but no detail found in any active catalog"
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"
