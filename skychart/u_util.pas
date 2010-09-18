@@ -1207,7 +1207,7 @@ begin
    FillChar(si,sizeof(si),0);
    FillChar(pi,sizeof(pi),0);
    si.dwFlags:=STARTF_USESHOWWINDOW;
-   if hide then si.wShowWindow:=SW_SHOWMINIMIZED
+   if hide then si.wShowWindow:=SW_HIDE
            else si.wShowWindow:=SW_SHOWNORMAL;
    si.cb := sizeof(si);
    try
