@@ -145,7 +145,7 @@ object f_printsetup: Tf_printsetup
       NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
-      OnChange = savepathChange
+      OnExit = savepathExit
     end
     object printcmd: TFileNameEdit
       Left = 214
