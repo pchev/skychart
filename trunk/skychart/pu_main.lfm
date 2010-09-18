@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 966
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 553
+  ClientHeight = 554
   ClientWidth = 966
   Font.CharSet = ANSI_CHARSET
   Font.Height = -11
@@ -29,7 +29,7 @@ object f_main: Tf_main
     BorderWidth = 3
     TitleHeight = 15
     KeepLastChild = False
-    WireframeMoveResize = True
+    WireframeMoveResize = False
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
     BevelOuter = bvNone
@@ -2666,18 +2666,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 465
+    Height = 466
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 465
+    ClientHeight = 466
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 465
+      Height = 466
       Top = 0
       Width = 26
       Align = alClient
@@ -2770,18 +2770,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 938
-    Height = 465
+    Height = 466
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 465
+    ClientHeight = 466
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 215
+      Height = 216
       Top = 250
       Width = 28
       Align = alClient
@@ -3020,7 +3020,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 519
+    Top = 520
     Width = 966
     Align = alBottom
     BevelOuter = bvNone
@@ -3453,7 +3453,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 628
-        Height = 25
+        Height = 24
         Hint = 'Time Units'
         Top = 2
         Width = 80
