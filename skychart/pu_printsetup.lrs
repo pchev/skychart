@@ -35,30 +35,30 @@ LazarusResources.Add('Tf_printsetup','FORMDATA',[
   +#4'Left'#2#6#6'Height'#2#21#3'Top'#2'T'#5'Width'#3'Y'#1#5'Color'#7#9'clBtnFa'
   +'ce'#8'ReadOnly'#9#8'TabOrder'#2#3#0#0#14'TDirectoryEdit'#8'savepath'#4'Left'
   +#2#6#6'Height'#2#21#3'Top'#2#24#5'Width'#3#168#0#10'ShowHidden'#8#11'ButtonW'
-  +'idth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'TabOrder'#2#0#8'OnChange'#7
-  +#14'savepathChange'#0#0#13'TFileNameEdit'#8'printcmd'#4'Left'#3#214#0#6'Heig'
-  +'ht'#2#21#3'Top'#2'6'#5'Width'#3#168#0#13'DialogOptions'#11#0#11'FilterIndex'
-  +#2#0#15'HideDirectories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'
-  +#2#0#8'TabOrder'#2#2#8'OnChange'#7#14'printcmdChange'#0#0#9'TComboBox'#9'Pap'
-  +'erSize'#4'Left'#3'6'#1#6'Height'#2#24#3'Top'#2#21#5'Width'#2'`'#10'ItemHeig'
-  +'ht'#2#0#8'OnChange'#7#15'PaperSizeChange'#5'Style'#7#14'csDropDownList'#8'T'
-  +'abOrder'#2#4#0#0#0#11'TRadioGroup'#9'printmode'#4'Left'#2#10#6'Height'#2'='
-  +#3'Top'#2#12#5'Width'#3#166#1#8'AutoFill'#9#7'Caption'#6#12'Print method'#28
-  +'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'C'
-  +'hildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing'
-  +'.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHoriz'
-  +'ontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChi'
-  +'lds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSiz'
-  +'ing.ControlsPerLine'#2#3#12'ClientHeight'#2'.'#11'ClientWidth'#3#162#1#7'Co'
-  +'lumns'#2#3#13'Items.Strings'#1#6#14'System Printer'#6#10'Postscript'#6#11'B'
-  +'itmap File'#0#7'OnClick'#7#14'printmodeClick'#8'TabOrder'#2#0#0#0#7'TButton'
-  +#2'Ok'#4'Left'#3#0#1#6'Height'#2#25#3'Top'#3#216#0#5'Width'#2'K'#25'BorderSp'
-  +'acing.InnerBorder'#2#4#7'Caption'#6#2'Ok'#7'Default'#9#11'ModalResult'#2#1#8
-  +'TabOrder'#2#3#0#0#7'TButton'#6'Cancel'#4'Left'#3'`'#1#6'Height'#2#25#3'Top'
-  +#3#216#0#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Capti'
-  +'on'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#4#0#0#7'TButton'#7'Button'
-  +'1'#4'Left'#3#160#0#6'Height'#2#25#3'Top'#3#216#0#5'Width'#2'K'#7'Caption'#6
-  +#4'Help'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#5#0#0#19'TPrinterSetupD'
-  +'ialog'#19'PrinterSetupDialog1'#4'left'#3#216#0#3'top'#2#24#0#0#12'TPrintDia'
-  +'log'#12'PrintDialog1'#4'left'#3#216#0#3'top'#2'@'#0#0#0
+  +'idth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'TabOrder'#2#0#6'OnExit'#7#12
+  +'savepathExit'#0#0#13'TFileNameEdit'#8'printcmd'#4'Left'#3#214#0#6'Height'#2
+  +#21#3'Top'#2'6'#5'Width'#3#168#0#13'DialogOptions'#11#0#11'FilterIndex'#2#0
+  +#15'HideDirectories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0
+  +#8'TabOrder'#2#2#8'OnChange'#7#14'printcmdChange'#0#0#9'TComboBox'#9'PaperSi'
+  +'ze'#4'Left'#3'6'#1#6'Height'#2#24#3'Top'#2#21#5'Width'#2'`'#10'ItemHeight'#2
+  +#0#8'OnChange'#7#15'PaperSizeChange'#5'Style'#7#14'csDropDownList'#8'TabOrde'
+  +'r'#2#4#0#0#0#11'TRadioGroup'#9'printmode'#4'Left'#2#10#6'Height'#2'='#3'Top'
+  +#2#12#5'Width'#3#166#1#8'AutoFill'#9#7'Caption'#6#12'Print method'#28'ChildS'
+  +'izing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSi'
+  +'zing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.Enlar'
+  +'geVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'
+  +#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18
+  +'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Cont'
+  +'rolsPerLine'#2#3#12'ClientHeight'#2'.'#11'ClientWidth'#3#162#1#7'Columns'#2
+  +#3#13'Items.Strings'#1#6#14'System Printer'#6#10'Postscript'#6#11'Bitmap Fil'
+  +'e'#0#7'OnClick'#7#14'printmodeClick'#8'TabOrder'#2#0#0#0#7'TButton'#2'Ok'#4
+  +'Left'#3#0#1#6'Height'#2#25#3'Top'#3#216#0#5'Width'#2'K'#25'BorderSpacing.In'
+  +'nerBorder'#2#4#7'Caption'#6#2'Ok'#7'Default'#9#11'ModalResult'#2#1#8'TabOrd'
+  +'er'#2#3#0#0#7'TButton'#6'Cancel'#4'Left'#3'`'#1#6'Height'#2#25#3'Top'#3#216
+  +#0#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6
+  +'Cancel'#11'ModalResult'#2#2#8'TabOrder'#2#4#0#0#7'TButton'#7'Button1'#4'Lef'
+  +'t'#3#160#0#6'Height'#2#25#3'Top'#3#216#0#5'Width'#2'K'#7'Caption'#6#4'Help'
+  +#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#5#0#0#19'TPrinterSetupDialog'#19
+  +'PrinterSetupDialog1'#4'left'#3#216#0#3'top'#2#24#0#0#12'TPrintDialog'#12'Pr'
+  +'intDialog1'#4'left'#3#216#0#3'top'#2'@'#0#0#0
 ]);

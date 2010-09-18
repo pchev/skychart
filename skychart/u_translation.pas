@@ -1113,6 +1113,7 @@ resourcestring
   rsOtherSoftwar = 'Other software data';
   rsObjectPositi = 'Object position found in index, but no detail found in any '
     +'active catalog';
+  rsInvalidPath = 'Invalid path: ';
 
 implementation
 

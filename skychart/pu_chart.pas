@@ -931,70 +931,76 @@ try
     end;
  1: begin  // to postscript canvas
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
-    ps:=TPostscriptCanvas.Create;
-    ps.XDPI := printresol;
-    ps.YDPI := printresol;
-    if PrintLandscape then begin
-       ps.paperwidth:=round(PaperHeight[cm.Paper]*printresol);
-       ps.paperheight:=round(PaperWidth[cm.Paper]*printresol);
-    end else begin
-       ps.paperwidth:=round(PaperWidth[cm.Paper]*printresol);
-       ps.paperheight:=round(PaperHeight[cm.Paper]*printresol);
-    end;
-   // draw the chart
-    ps.begindoc;
-    sc.plot.destcnv:=ps;
-    sc.plot.cfgchart.onprinter:=true;
-    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
-    sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
-    sc.plot.cfgchart.fontscale:=1;
-    sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-    sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
-    sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
-    sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
-    sc.plot.init(ps.pagewidth,ps.pageheight);
-    sc.Refresh;
-    ps.enddoc;
-    fname:=slash(printpath)+'cdcprint.ps';
-    ps.savetofile(SysToUTF8(fname));
-    chdir(appdir);
-    if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
-    execnowait(printcmd1+' "'+fname+'"');
+    if DirectoryIsWritable(printpath) then begin
+      ps:=TPostscriptCanvas.Create;
+      ps.XDPI := printresol;
+      ps.YDPI := printresol;
+      if PrintLandscape then begin
+         ps.paperwidth:=round(PaperHeight[cm.Paper]*printresol);
+         ps.paperheight:=round(PaperWidth[cm.Paper]*printresol);
+      end else begin
+         ps.paperwidth:=round(PaperWidth[cm.Paper]*printresol);
+         ps.paperheight:=round(PaperHeight[cm.Paper]*printresol);
+      end;
+     // draw the chart
+      ps.begindoc;
+      sc.plot.destcnv:=ps;
+      sc.plot.cfgchart.onprinter:=true;
+      sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
+      sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
+      sc.plot.cfgchart.fontscale:=1;
+      sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+      sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+      sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+      sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+      sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
+      sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
+      sc.plot.init(ps.pagewidth,ps.pageheight);
+      sc.Refresh;
+      ps.enddoc;
+      fname:=slash(printpath)+'cdcprint.ps';
+      ps.savetofile(SysToUTF8(fname));
+      ps.Free;
+      chdir(appdir);
+      if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
+      execnowait(printcmd1+' "'+fname+'"');
+    end
+      else if assigned(Fshowinfo) then Fshowinfo(rsInvalidPath+printpath , caption);
     end;
  2: begin  // to bitmap
-    if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(
-      printresol)]) , caption);
-    //prtbmp.pixelformat:=pf32bit;
-    if PrintLandscape then begin
-       prtbmp.width:=11*printresol;
-       prtbmp.height:=8*printresol;
-    end else begin
-       prtbmp.width:=8*printresol;
-       prtbmp.height:=11*printresol;
-    end;
-   // draw the chart to the bitmap
-    sc.plot.destcnv:=prtbmp.canvas;
-    sc.plot.cfgchart.onprinter:=true;
-    sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
-    sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
-    sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-    sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-    sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
-    sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
-    sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
-    sc.plot.init(prtbmp.width,prtbmp.height);
-    sc.Refresh;
-    // save the bitmap
-    fname:=slash(printpath)+'cdcprint.bmp';
-    prtbmp.savetofile(SysToUTF8(fname));
-    if printcmd2<>'' then begin
-       if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
-       execnowait(printcmd2+' "'+fname+'"','',false);
-    end;
+    if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(printresol)]) , caption);
+    if DirectoryIsWritable(printpath) then begin
+      //prtbmp.pixelformat:=pf32bit;
+      if PrintLandscape then begin
+         prtbmp.width:=11*printresol;
+         prtbmp.height:=8*printresol;
+      end else begin
+         prtbmp.width:=8*printresol;
+         prtbmp.height:=11*printresol;
+      end;
+     // draw the chart to the bitmap
+     sc.plot.destcnv:=prtbmp.canvas;
+     sc.plot.cfgchart.onprinter:=true;
+     sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
+     sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
+     sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
+     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+     sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+     sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
+     sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
+     sc.plot.init(prtbmp.width,prtbmp.height);
+     sc.Refresh;
+     // save the bitmap
+     fname:=slash(printpath)+'cdcprint.bmp';
+     prtbmp.savetofile(SysToUTF8(fname));
+     if printcmd2<>'' then begin
+        if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
+        execnowait(printcmd2+' "'+fname+'"','',false);
+     end;
+ end
+   else if assigned(Fshowinfo) then Fshowinfo(rsInvalidPath+printpath , caption);
  end;
 end;
 finally
