@@ -27,10 +27,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 //{$define showtime}
 
-{ TODO : look if we still need that }
+{ TODO : look if we still need that, (with moveable label)  }
 {$ifdef lclqt} {$define ImageBuffered} {$endif}
 {$ifdef lclcarbon} {$define ImageBuffered} {$endif}
-//{$ifdef lclgtk2} {$define ImageBuffered} {$endif}
+{$ifdef lclgtk2} {$define ImageBuffered} {$endif}
 
 interface
 
@@ -771,6 +771,9 @@ if Zoomstep>1 then begin
 end;
 if sc.cfgsc.scopemark then begin
    sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
+end;
+if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
+   sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
 end;
