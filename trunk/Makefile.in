@@ -64,7 +64,7 @@ uninstall_data:
 	\$(MAKE) -C tools uninstall
 else
 install: 
-	./install.sh $(PREFIX)
+	./install.sh $(PREFIX) $(CPU_TARGET)
 uninstall: 
 	./uninstall.sh $(PREFIX)
 install_win: 

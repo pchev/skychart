@@ -32,7 +32,6 @@ if [ $OS_TARGET = win64 ]; then
   x86_64-win64-strip -v -o $destdir/cdcicon.exe skychart/cdcicon.exe
   x86_64-win64-strip -v -o $destdir/varobs.exe varobs/varobs.exe
   x86_64-win64-strip -v -o $destdir/varobs_lpv_bulletin.exe varobs/varobs_lpv_bulletin.exe
-  install -v -m 644 skychart/library/getdss/libgetdss_x64.dll  $destdir/libgetdss.dll
   install -v -m 644 skychart/library/plan404/libplan404_x64.dll  $destdir/libplan404.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
   unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
