@@ -392,7 +392,7 @@ end else begin
     clockposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
     clockposy:=SysTray.GetPosition.Y;
   end;
-  FormPos(f_clock,clockposx,clockposy,false);
+  FormPos(f_clock,clockposx,clockposy);
   f_clock.Show;
 end;
 end;
@@ -461,7 +461,7 @@ end else begin
     calposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
     calposy:=SysTray.GetPosition.Y;
   end;
-  formpos(f_calendar,calposx,calposy,false);
+  formpos(f_calendar,calposx,calposy);
   f_calendar.show;
   f_calendar.bringtofront;
 end;
