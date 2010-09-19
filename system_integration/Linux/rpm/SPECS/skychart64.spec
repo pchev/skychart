@@ -22,6 +22,7 @@ Planetarium software for the advanced amateur astronomer.
 /usr/bin/varobs
 /usr/bin/varobs_lpv_bulletin
 /usr/lib64/libplan404.so
+/usr/lib/libgetdss.so
 /usr/share/applications/skychart.desktop
 /usr/share/pixmaps/skychart.xpm
 /usr/share/doc/skychart
