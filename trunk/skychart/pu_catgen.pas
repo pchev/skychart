@@ -2020,16 +2020,18 @@ end;
 procedure Tf_catgen.Button1Click(Sender: TObject);
 var ini : Tinifile;
     i : integer;
+    fn: string;
 begin
 chdir(appdir);
 savedialog1.filterindex:=2;
 savedialog1.DefaultExt:='.prj';
 if savedialog1.execute then begin
-  if fileexists(savedialog1.filename) then begin
-    deletefile(savedialog1.filename+'.old');
-    renamefile(savedialog1.filename,savedialog1.filename+'.old');
+  fn:=SafeUTF8ToSys(savedialog1.filename);
+  if fileexists(fn) then begin
+    deletefile(fn+'.old');
+    renamefile(fn,fn+'.old');
   end;
-  ini:=Tinifile.Create(savedialog1.filename);
+  ini:=Tinifile.Create(fn);
   ini.writeInteger('Page1','binarycat',binarycat.itemindex);
   ini.writeInteger('Page1','type',RadioGroup1.itemindex);
   ini.writeString('Page1','shortname',edit4.text);
@@ -2103,7 +2105,7 @@ opendialog1.filterindex:=2;
 opendialog1.DefaultExt:='.prj';
 opendialog1.filename:='';
 if opendialog1.execute then begin
-  ini:=Tinifile.Create(opendialog1.Files[0]);
+  ini:=Tinifile.Create(SafeUTF8ToSys(opendialog1.FileName));
   binarycat.itemindex:=ini.ReadInteger('Page1','binarycat',0);
   RadioGroup1.itemindex:=ini.ReadInteger('Page1','type',RadioGroup1.itemindex);
   edit4.text:=ini.readString('Page1','shortname',edit4.text);
