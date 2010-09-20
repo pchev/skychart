@@ -356,7 +356,7 @@ if not fileexists(comfile) then begin
 end;
 try
 if db.Active then begin
-  filedesc:=extractfilename(comfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile)));
+  filedesc:=extractfilename(comfile)+blank+FormatDateTime('yyyy-mm-dd hh:nn',FileDateToDateTime(FileAge(comfile)));
   Filemode:=0;
   assignfile(f,comfile);
   reset(f);
@@ -584,7 +584,7 @@ if not fileexists(astfile) then begin
 end;
 try
 if db.Active then begin
-  filedesc:=extractfilename(astfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(astfile)));
+  filedesc:=extractfilename(astfile)+blank+FormatDateTime('yyyy-mm-dd hh:nn',FileDateToDateTime(FileAge(astfile)));
   Filemode:=0;
   assignfile(f,astfile);
   reset(f);
