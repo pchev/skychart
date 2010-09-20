@@ -1207,7 +1207,7 @@ end;
 procedure Tf_main.ShowReleaseNotes(shownext:boolean);
 var buf: string;
 begin
- f_splash.Close;
+ if f_splash<>nil then f_splash.Close;
  application.ProcessMessages;
  buf:=slash(HelpDir)+'releasenotes_'+lang+'.txt';
  if not fileexists(buf) then
@@ -4425,15 +4425,18 @@ cfgm.ProxyUser:=ReadString(section,'ProxyUser',cfgm.ProxyUser);
 cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
 cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
 cfgm.starshape_file:=ReadString(section,'starshape_file',cfgm.starshape_file);
-j:=ReadInteger(section,'CometUrlCount',0);
-if j>0 then begin
-   cfgm.CometUrlList.Clear;
-   for i:=1 to j do cfgm.CometUrlList.Add(ReadString(section,'CometUrl'+inttostr(i),''));
-end;
-j:=ReadInteger(section,'AsteroidUrlCount',0);
-if j>0 then begin
-   cfgm.AsteroidUrlList.Clear;
-   for i:=1 to j do cfgm.AsteroidUrlList.Add(ReadString(section,'AsteroidUrl'+inttostr(i),''));
+buf:=ReadString(section,'CometUrl1','');
+if Pos('cfa-www.harvard.edu',buf)=0 then begin   // Old MPC URL, ignore saved configuration
+  j:=ReadInteger(section,'CometUrlCount',0);
+  if (j>0) then begin
+     cfgm.CometUrlList.Clear;
+     for i:=1 to j do cfgm.CometUrlList.Add(ReadString(section,'CometUrl'+inttostr(i),''));
+  end;
+  j:=ReadInteger(section,'AsteroidUrlCount',0);
+  if j>0 then begin
+     cfgm.AsteroidUrlList.Clear;
+     for i:=1 to j do cfgm.AsteroidUrlList.Add(ReadString(section,'AsteroidUrl'+inttostr(i),''));
+  end;
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
