@@ -214,6 +214,7 @@ type
     procedure AddCatClick(Sender: TObject);
     procedure DelCatClick(Sender: TObject);
     procedure CDCStarSelClick(Sender: TObject);
+    procedure CDCAcceptDirectory(Sender: TObject; var Value: String);
     procedure USNBrightClick(Sender: TObject);
     procedure CDCStarField1Change(Sender: TObject);
     procedure CDCStarField2Change(Sender: TObject);
@@ -237,7 +238,7 @@ type
 
   private
     { Private declarations }
-    catalogempty, LockChange,LockCatPath: boolean;
+    catalogempty, LockChange,LockCatPath,LockActivePath: boolean;
     FApplyConfig: TNotifyEvent;
     FCatGen: Tf_catgen;
     textcolor: TColor; // clWindow replacement hack
@@ -340,6 +341,7 @@ begin
 //textcolor:=clWindow;
 textcolor:=clWhite;
 LockCatPath:=false;
+LockActivePath:=false;
 LockChange:=true;
 ShowGCat;
 ShowCDCStar;
@@ -728,6 +730,18 @@ if sender is TCheckBox then with sender as TCheckBox do begin
   ccat.StarCatDef[tag]:=Checked;
   ShowCDCStar;
 end;
+end;
+
+procedure Tf_config_catalog.CDCAcceptDirectory(Sender: TObject;
+  var Value: String);
+begin
+{$ifdef darwin}    { TODO : Remove when onChange work correctly on Mac OS X }
+  if LockActivePath then exit;
+  LockActivePath:=true;
+  TDirectoryEdit(sender).Text:=value;
+  CDCStarPathChange(sender);
+  LockActivePath:=false;
+{$endif}
 end;
 
 procedure Tf_config_catalog.USNBrightClick(Sender: TObject);
