@@ -1930,6 +1930,10 @@ msgstr "neplatná epocha na řádce %s: %s"
 msgid "Invalid FITS file: %s"
 msgstr "Neplatný soubor FITS: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Neviditelný na aktuální zeměpisné šířce"

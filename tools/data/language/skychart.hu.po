@@ -2341,6 +2341,10 @@ msgstr "Hibás epocha a %s sorban: %s"
 msgid "Invalid FITS file: %s"
 msgstr "Hibás FITS fájl: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Ezen a szélességi körön nem megfigyelhető"

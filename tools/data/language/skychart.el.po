@@ -2053,6 +2053,10 @@ msgstr ""
 msgid "Invalid FITS file: %s"
 msgstr ""
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr ""

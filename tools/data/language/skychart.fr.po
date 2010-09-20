@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-17 10:19+0200\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2010-09-20 13:04+0200\n"
+"Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: Français <kde-i18n-doc@kde.org>\n"
@@ -1931,6 +1931,10 @@ msgstr "Epoque invalide à la ligne %s : %s"
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
 msgstr "Fichier FITS invalide: %s"
+
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr "Répertoire invalide:"
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"

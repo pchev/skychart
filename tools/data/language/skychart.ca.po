@@ -1934,6 +1934,10 @@ msgstr "Època invàlida a la línia %s : %s"
 msgid "Invalid FITS file: %s"
 msgstr "Fitxer FITS invàlid: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Invisible des d'aquesta latitud"
