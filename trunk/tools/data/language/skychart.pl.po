@@ -1935,6 +1935,10 @@ msgstr "błędna epoka w linii%s : %s"
 msgid "Invalid FITS file: %s"
 msgstr "Nieprawidłowy plik FITS"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Niewidoczne dla tej szerokości"

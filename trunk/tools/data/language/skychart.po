@@ -4378,3 +4378,7 @@ msgstr ""
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr ""
 
+#: u_translation:rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+

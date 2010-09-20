@@ -1931,6 +1931,10 @@ msgstr "época inválida na linha%s : %s"
 msgid "Invalid FITS file: %s"
 msgstr "Arquivo FITS inválido: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Invisível nesta latitude"

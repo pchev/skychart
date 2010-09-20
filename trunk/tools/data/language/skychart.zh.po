@@ -1931,6 +1931,10 @@ msgstr "无效历元在行%s：%s"
 msgid "Invalid FITS file: %s"
 msgstr "无效 FITS 文件：%s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "不可见在此纬度"

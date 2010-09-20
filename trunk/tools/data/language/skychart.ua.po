@@ -1932,6 +1932,10 @@ msgstr "недійсна епоха на лінії %s : %s"
 msgid "Invalid FITS file: %s"
 msgstr "Непридатний FITS файл: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Невидимо на цій широті"

@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-04 21:23+0100\n"
+"PO-Revision-Date: 2010-09-19 15:48+0100\n"
 "Last-Translator: Andreas Langbein <andreas.langbein@gmx.net>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -401,7 +401,7 @@ msgstr "Katalog erstellen"
 
 #: u_translation.rsby
 msgid "by"
-msgstr "für"
+msgstr "alle"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -1930,6 +1930,10 @@ msgstr "Ungültige Epoche für %s: %s"
 msgid "Invalid FITS file: %s"
 msgstr "Ungültige FITS-Datei: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Unsichtbar auf diesem Breitengrad"
@@ -2656,7 +2660,7 @@ msgstr "Objektname"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Position des Objekts im Index gefunden, aber keine Details in den aktiven Katalogen"
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -2772,7 +2776,7 @@ msgstr "Andere Kataloge"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Weitere"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"

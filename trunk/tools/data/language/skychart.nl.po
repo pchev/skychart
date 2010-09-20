@@ -1928,6 +1928,10 @@ msgstr "Ongeldige epoche op regel%s: %s"
 msgid "Invalid FITS file: %s"
 msgstr "Ongeldig FITS bestand: %s"
 
+#: u_translation.rsinvalidpath
+msgid "Invalid path: "
+msgstr ""
+
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
 msgstr "Onzichtbaar op deze geografische breedte"
