@@ -94,8 +94,8 @@ begin
   {$ifdef trace_debug}
    WriteTrace(step);
   {$endif}
-  Application.CreateForm(Tf_splash, f_splash);
   if f_main.showsplash then begin
+    Application.CreateForm(Tf_splash, f_splash);
     step:='Show splash';
     {$ifdef trace_debug}
      WriteTrace(step);
