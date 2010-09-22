@@ -50,12 +50,15 @@ type
     Copy1: TMenuItem;
     Button2: TButton;
     Button3: TButton;
+    Timer1: TTimer;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure CopyExecute(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure SelectAllExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
   private
     { Private declarations }
     FCenter : Tstr1func;
@@ -106,6 +109,19 @@ procedure Tf_detail.CopyExecute(Sender: TObject);
 begin
   if not IpHtmlPanel1.HaveSelection then IpHtmlPanel1.SelectAll;
   IpHtmlPanel1.CopyToClipboard;
+end;
+
+procedure Tf_detail.FormShow(Sender: TObject);
+begin
+  {$ifdef darwin}   { TODO : Check Mac OS X Bringtofront when called from popupmenu }
+  timer1.Enabled:=true;
+  {$endif}
+end;
+
+procedure Tf_detail.Timer1Timer(Sender: TObject);
+begin
+  timer1.Enabled:=false;
+  BringToFront;
 end;
 
 procedure Tf_detail.SelectAllExecute(Sender: TObject);

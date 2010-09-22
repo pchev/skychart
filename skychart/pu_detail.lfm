@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 875
+  Left = 666
   Height = 471
-  Top = 124
+  Top = 112
   Width = 398
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
@@ -10,6 +10,7 @@ object f_detail: Tf_detail
   ClientWidth = 398
   Font.Height = -11
   OnCreate = FormCreate
+  OnShow = FormShow
   LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 0
@@ -95,5 +96,12 @@ object f_detail: Tf_detail
       Action = Copy
       OnClick = CopyExecute
     end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    left = 207
+    top = 149
   end
 end
