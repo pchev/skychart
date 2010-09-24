@@ -23,9 +23,9 @@ LazarusResources.Add('Tf_zoom','FORMDATA',[
   +'OK'#7'Default'#9#11'ModalResult'#2#1#9'NumGlyphs'#2#0#8'TabOrder'#2#1#0#0#7
   +'TBitBtn'#7'BitBtn2'#4'Left'#3#206#0#6'Height'#2#25#3'Top'#2'h'#5'Width'#2'I'
   +#25'BorderSpacing.InnerBorder'#2#2#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'Mod'
-  +'alResult'#2#2#9'NumGlyphs'#2#0#8'TabOrder'#2#2#0#0#5'TEdit'#5'Edit1'#4'Left'
-  +#2'x'#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'1'#5'Color'#7#9'clBtnFace'#8'Rea'
-  +'dOnly'#9#7'TabStop'#8#8'TabOrder'#2#3#0#0#7'TButton'#7'Button1'#4'Left'#2#16
-  +#6'Height'#2#25#3'Top'#2'g'#5'Width'#2'K'#7'Caption'#6#4'Help'#7'OnClick'#7
-  +#12'Button1Click'#8'TabOrder'#2#4#0#0#0
+  +'alResult'#2#2#9'NumGlyphs'#2#0#8'TabOrder'#2#2#0#0#7'TButton'#7'Button1'#4
+  +'Left'#2#16#6'Height'#2#25#3'Top'#2'g'#5'Width'#2'K'#7'Caption'#6#4'Help'#7
+  +'OnClick'#7#12'Button1Click'#8'TabOrder'#2#3#0#0#11'TStaticText'#11'StaticTe'
+  +'xt1'#4'Left'#2'z'#6'Height'#2#17#3'Top'#2'@'#5'Width'#2'9'#9'Alignment'#7#8
+  +'taCenter'#8'AutoSize'#9#7'Caption'#6#11'StaticText1'#8'TabOrder'#2#4#0#0#0
 ]);

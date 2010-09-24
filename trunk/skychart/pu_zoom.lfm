@@ -99,16 +99,6 @@ object f_zoom: Tf_zoom
     NumGlyphs = 0
     TabOrder = 2
   end
-  object Edit1: TEdit
-    Left = 120
-    Height = 21
-    Top = 64
-    Width = 49
-    Color = clBtnFace
-    ReadOnly = True
-    TabStop = False
-    TabOrder = 3
-  end
   object Button1: TButton
     Left = 16
     Height = 25
@@ -116,6 +106,16 @@ object f_zoom: Tf_zoom
     Width = 75
     Caption = 'Help'
     OnClick = Button1Click
+    TabOrder = 3
+  end
+  object StaticText1: TStaticText
+    Left = 122
+    Height = 17
+    Top = 64
+    Width = 57
+    Alignment = taCenter
+    AutoSize = True
+    Caption = 'StaticText1'
     TabOrder = 4
   end
 end
