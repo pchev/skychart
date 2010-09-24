@@ -483,10 +483,14 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowMarkMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowNebulaeMouseUp(Sender: TObject;
+      Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowPicturesMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowPlanetsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowStarsMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonswitchbackgroundMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonswitchstarsMouseUp(Sender: TObject;
@@ -2762,6 +2766,12 @@ begin
 if Button=mbRight then SetupSolsysPage(1);
 end;
 
+procedure Tf_main.ToolButtonShowStarsMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if Button=mbRight then SetupCatalogPage(1);
+end;
+
 procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
@@ -3068,6 +3078,12 @@ procedure Tf_main.ToolButtonShowMarkMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 if Button=mbRight then SetupDisplayPage(7);
+end;
+
+procedure Tf_main.ToolButtonShowNebulaeMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if Button=mbRight then SetupCatalogPage(2);
 end;
 
 procedure Tf_main.ToolButtonShowPicturesMouseUp(Sender: TObject;
