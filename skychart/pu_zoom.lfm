@@ -17,7 +17,7 @@ object f_zoom: Tf_zoom
     Left = 16
     Height = 14
     Top = 8
-    Width = 9
+    Width = 10
     Caption = '1'''
     ParentColor = False
   end
@@ -25,7 +25,7 @@ object f_zoom: Tf_zoom
     Left = 120
     Height = 14
     Top = 8
-    Width = 7
+    Width = 8
     Caption = '1'
     ParentColor = False
   end
@@ -33,7 +33,7 @@ object f_zoom: Tf_zoom
     Left = 172
     Height = 14
     Top = 8
-    Width = 13
+    Width = 15
     Caption = '10'
     ParentColor = False
   end
@@ -41,7 +41,7 @@ object f_zoom: Tf_zoom
     Left = 225
     Height = 14
     Top = 8
-    Width = 19
+    Width = 22
     Caption = '100'
     ParentColor = False
   end
@@ -49,7 +49,7 @@ object f_zoom: Tf_zoom
     Left = 254
     Height = 14
     Top = 8
-    Width = 19
+    Width = 22
     Caption = '360'
     ParentColor = False
   end
@@ -57,7 +57,7 @@ object f_zoom: Tf_zoom
     Left = 70
     Height = 14
     Top = 8
-    Width = 15
+    Width = 17
     Caption = '10'''
     ParentColor = False
   end
@@ -76,7 +76,7 @@ object f_zoom: Tf_zoom
     TabOrder = 0
   end
   object BitBtn1: TBitBtn
-    Left = 112
+    Left = 118
     Height = 25
     Top = 104
     Width = 73
@@ -88,7 +88,7 @@ object f_zoom: Tf_zoom
     TabOrder = 1
   end
   object BitBtn2: TBitBtn
-    Left = 206
+    Left = 216
     Height = 25
     Top = 104
     Width = 73
@@ -109,12 +109,11 @@ object f_zoom: Tf_zoom
     TabOrder = 3
   end
   object StaticText1: TStaticText
-    Left = 122
-    Height = 17
+    Left = 74
+    Height = 24
     Top = 64
-    Width = 57
+    Width = 161
     Alignment = taCenter
-    AutoSize = True
     Caption = 'StaticText1'
     TabOrder = 4
   end
