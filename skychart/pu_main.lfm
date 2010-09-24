@@ -3536,12 +3536,14 @@ object f_main: Tf_main
         Left = 1
         Top = 2
         Action = ShowStars
+        OnMouseUp = ToolButtonShowStarsMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowNebulae: TToolButton
         Left = 24
         Top = 2
         Action = ShowNebulae
+        OnMouseUp = ToolButtonShowNebulaeMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowLines: TToolButton
