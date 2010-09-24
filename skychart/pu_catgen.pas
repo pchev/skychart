@@ -2008,6 +2008,7 @@ var i : integer;
 begin
 opendialog1.filterindex:=1;
 opendialog1.DefaultExt:='';
+OpenDialog1.Options:=OpenDialog1.Options+[ofAllowMultiSelect];
 opendialog1.filename:='';
 if opendialog1.execute then begin
    ListBox1.Items.clear;
@@ -2103,6 +2104,7 @@ begin
 chdir(appdir);
 opendialog1.filterindex:=2;
 opendialog1.DefaultExt:='.prj';
+OpenDialog1.Options:=OpenDialog1.Options-[ofAllowMultiSelect];
 opendialog1.filename:='';
 if opendialog1.execute then begin
   ini:=Tinifile.Create(SafeUTF8ToSys(opendialog1.FileName));
