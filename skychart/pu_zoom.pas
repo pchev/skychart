@@ -38,10 +38,10 @@ type
 
   Tf_zoom = class(TForm)
     Button1: TButton;
+    StaticText1: TStaticText;
     TrackBar1: TTrackBar;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    Edit1: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -81,7 +81,7 @@ logfov:=TrackBar1.Position;
 fov:=power(10,logfov/100);
 fov:=min(360,fov);
 if fov>3 then fov:=round(fov);
-Edit1.text:=DeMtoStr(fov);
+StaticText1.Caption:=DeMtoStr(fov);
 end;
 
 procedure Tf_zoom.FormCreate(Sender: TObject);
@@ -105,7 +105,7 @@ end;
 {$endif}
 logfov:=100*log10(fov);
 TrackBar1.Position := Round(logfov);
-Edit1.text:=DeMtoStr(fov);
+StaticText1.Caption:=DeMtoStr(fov);
 TrackBar1.SetTick(-78);
 TrackBar1.SetTick(0);
 TrackBar1.SetTick(100);
