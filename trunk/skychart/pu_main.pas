@@ -444,6 +444,8 @@ type
     procedure HelpFaq1Execute(Sender: TObject);
     procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
+    procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
@@ -463,6 +465,8 @@ type
     procedure SetupSystemExecute(Sender: TObject);
     procedure SetupTimeExecute(Sender: TObject);
     procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
@@ -1309,6 +1313,13 @@ end;
 procedure Tf_main.BugReport1Click(Sender: TObject);
 begin
    ExecuteFile(URL_BugTracker);
+end;
+
+
+procedure Tf_main.MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ if Button=mbRight then SetupChartPage(3);
 end;
 
 procedure Tf_main.FileExit1Execute(Sender: TObject);
@@ -2841,6 +2852,12 @@ procedure Tf_main.TConnectMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupSystemPage(2);
+end;
+
+procedure Tf_main.ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupChartPage(1);
 end;
 
 procedure Tf_main.TelescopeSetup1Click(Sender: TObject);

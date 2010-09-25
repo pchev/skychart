@@ -1,7 +1,7 @@
 object f_config_chart: Tf_config_chart
-  Left = 483
+  Left = 994
   Height = 567
-  Top = 88
+  Top = 111
   Width = 510
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -31,7 +31,7 @@ object f_config_chart: Tf_config_chart
       Width = 508
       Align = alClient
       OnPageChanged = Notebook1PageChanged
-      PageIndex = 4
+      PageIndex = 3
       ShowTabs = False
       TabOrder = 0
       object Page1: TPage
@@ -229,131 +229,131 @@ object f_config_chart: Tf_config_chart
         ClientHeight = 457
         object Label30: TLabel
           Left = 0
-          Height = 20
+          Height = 14
           Top = 0
-          Width = 123
+          Width = 105
           Caption = 'Field of Vision Setting'
           ParentColor = False
         end
         object Label96: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 131
-          Width = 8
+          Width = 7
           Caption = '1'
           ParentColor = False
         end
         object Label97: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 159
-          Width = 8
+          Width = 7
           Caption = '2'
           ParentColor = False
         end
         object Label98: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 187
-          Width = 8
+          Width = 7
           Caption = '3'
           ParentColor = False
         end
         object Label99: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 215
-          Width = 8
+          Width = 7
           Caption = '4'
           ParentColor = False
         end
         object Label101: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 271
-          Width = 8
+          Width = 7
           Caption = '6'
           ParentColor = False
         end
         object Label102: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 299
-          Width = 8
+          Width = 7
           Caption = '7'
           ParentColor = False
         end
         object Label103: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 327
-          Width = 8
+          Width = 7
           Caption = '8'
           ParentColor = False
         end
         object Label104: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 355
-          Width = 8
+          Width = 7
           Caption = '9'
           ParentColor = False
         end
         object Label105: TLabel
           Left = 80
-          Height = 20
+          Height = 14
           Top = 383
-          Width = 15
+          Width = 13
           Caption = '10'
           ParentColor = False
         end
         object Label106: TLabel
           Left = 47
-          Height = 20
+          Height = 14
           Top = 64
-          Width = 75
+          Width = 63
           Alignment = taRightJustify
           Caption = 'Field Number'
           ParentColor = False
         end
         object Label107: TLabel
           Left = 207
-          Height = 20
+          Height = 14
           Top = 39
-          Width = 81
+          Width = 71
           Caption = 'Field Of Vision'
           ParentColor = False
         end
         object Label114: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 103
-          Width = 8
+          Width = 7
           Caption = '0'
           ParentColor = False
         end
         object Label57: TLabel
           Left = 183
-          Height = 20
+          Height = 14
           Top = 64
-          Width = 29
+          Width = 25
           Alignment = taRightJustify
           Caption = 'From'
           ParentColor = False
         end
         object Label74: TLabel
           Left = 87
-          Height = 20
+          Height = 14
           Top = 243
-          Width = 8
+          Width = 7
           Caption = '5'
           ParentColor = False
         end
         object Label5: TLabel
           Left = 287
-          Height = 20
+          Height = 14
           Top = 64
-          Width = 13
+          Width = 12
           Caption = 'To'
           ParentColor = False
         end
@@ -689,121 +689,121 @@ object f_config_chart: Tf_config_chart
         end
         object Label158: TLabel
           Left = 0
-          Height = 15
+          Height = 14
           Top = 0
-          Width = 101
+          Width = 84
           Caption = 'Projection Setting'
           ParentColor = False
         end
         object Labelp1: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 104
-          Width = 12
+          Width = 10
           Caption = '1 '
           ParentColor = False
         end
         object Labelp2: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 132
-          Width = 8
+          Width = 7
           Caption = '2'
           ParentColor = False
         end
         object Labelp3: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 160
-          Width = 8
+          Width = 7
           Caption = '3'
           ParentColor = False
         end
         object Labelp4: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 188
-          Width = 8
+          Width = 7
           Caption = '4'
           ParentColor = False
         end
         object Label165: TLabel
           Left = 27
-          Height = 15
+          Height = 14
           Top = 43
-          Width = 75
+          Width = 63
           Alignment = taRightJustify
           Caption = 'Field Number'
           ParentColor = False
         end
         object Labelp0: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 76
-          Width = 8
+          Width = 7
           Caption = '0'
           ParentColor = False
         end
         object Labelp5: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 216
-          Width = 8
+          Width = 7
           Caption = '5'
           ParentColor = False
         end
         object Labelp6: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 244
-          Width = 8
+          Width = 7
           Caption = '6'
           ParentColor = False
         end
         object Labelp7: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 272
-          Width = 8
+          Width = 7
           Caption = '7'
           ParentColor = False
         end
         object Labelp8: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 300
-          Width = 8
+          Width = 7
           Caption = '8'
           ParentColor = False
         end
         object Labelp9: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 328
-          Width = 8
+          Width = 7
           Caption = '9'
           ParentColor = False
         end
         object Labelp10: TLabel
           Left = 62
-          Height = 15
+          Height = 14
           Top = 356
-          Width = 15
+          Width = 13
           Caption = '10'
           ParentColor = False
         end
         object Label172: TLabel
           Left = 195
-          Height = 15
+          Height = 14
           Top = 43
-          Width = 57
+          Width = 48
           Caption = 'Projection'
           ParentColor = False
         end
         object ComboBox2: TComboBox
           Tag = 1
           Left = 195
-          Height = 27
+          Height = 23
           Top = 99
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -820,7 +820,7 @@ object f_config_chart: Tf_config_chart
         end
         object ComboBox1: TComboBox
           Left = 195
-          Height = 27
+          Height = 23
           Top = 71
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -838,7 +838,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox3: TComboBox
           Tag = 2
           Left = 195
-          Height = 27
+          Height = 23
           Top = 127
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -856,7 +856,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox4: TComboBox
           Tag = 3
           Left = 195
-          Height = 27
+          Height = 23
           Top = 155
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -873,7 +873,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox5: TComboBox
           Tag = 4
           Left = 195
-          Height = 27
+          Height = 23
           Top = 183
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -890,7 +890,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox6: TComboBox
           Tag = 5
           Left = 195
-          Height = 27
+          Height = 23
           Top = 211
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -908,7 +908,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox7: TComboBox
           Tag = 6
           Left = 195
-          Height = 27
+          Height = 23
           Top = 239
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -926,7 +926,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox8: TComboBox
           Tag = 7
           Left = 195
-          Height = 27
+          Height = 23
           Top = 267
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -944,7 +944,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox9: TComboBox
           Tag = 8
           Left = 195
-          Height = 27
+          Height = 23
           Top = 295
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -962,7 +962,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox10: TComboBox
           Tag = 9
           Left = 195
-          Height = 27
+          Height = 23
           Top = 323
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -980,7 +980,7 @@ object f_config_chart: Tf_config_chart
         object ComboBox11: TComboBox
           Tag = 10
           Left = 195
-          Height = 27
+          Height = 23
           Top = 352
           Width = 73
           AutoCompleteText = [cbactSearchAscending]
@@ -994,6 +994,15 @@ object f_config_chart: Tf_config_chart
           OnSelect = ProjectionChange
           TabOrder = 10
           Text = 'ARC'
+        end
+        object Button7: TButton
+          Left = 195
+          Height = 25
+          Top = 405
+          Width = 73
+          Caption = 'Default'
+          OnClick = Button7Click
+          TabOrder = 11
         end
       end
       object Page4: TPage
@@ -1142,7 +1151,7 @@ object f_config_chart: Tf_config_chart
               end
               object fsmag0: TFloatEdit
                 Tag = 1
-                Left = 8
+                Left = 10
                 Height = 21
                 Hint = '0..99'
                 Top = 66
@@ -1333,11 +1342,20 @@ object f_config_chart: Tf_config_chart
               TabOrder = 0
             end
           end
+          object Button8: TButton
+            Left = 362
+            Height = 25
+            Top = 0
+            Width = 75
+            Caption = 'Default'
+            OnClick = Button8Click
+            TabOrder = 2
+          end
         end
         object GroupBox1: TGroupBox
           Left = 9
           Height = 200
-          Top = 221
+          Top = 213
           Width = 449
           Caption = 'Nebulae Filter'
           ClientHeight = 185

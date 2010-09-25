@@ -2,11 +2,11 @@ object f_main: Tf_main
   Left = 339
   Height = 576
   Top = 150
-  Width = 800
+  Width = 826
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
   ClientHeight = 554
-  ClientWidth = 800
+  ClientWidth = 826
   Font.CharSet = ANSI_CHARSET
   Font.Height = -11
   KeyPreview = True
@@ -2769,7 +2769,7 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 772
+    Left = 798
     Height = 466
     Top = 54
     Width = 28
@@ -3021,11 +3021,11 @@ object f_main: Tf_main
     Left = 0
     Height = 34
     Top = 520
-    Width = 800
+    Width = 826
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 800
+    ClientWidth = 826
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3075,30 +3075,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 578
+      Width = 604
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 578
+      ClientWidth = 604
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 578
+        Width = 604
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 578
+        ClientWidth = 604
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 578
+          Width = 604
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -3111,11 +3111,11 @@ object f_main: Tf_main
     Left = 0
     Height = 54
     Top = 0
-    Width = 800
+    Width = 826
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 54
-    ClientWidth = 800
+    ClientWidth = 826
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3123,7 +3123,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 800
+      Width = 826
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3210,6 +3210,7 @@ object f_main: Tf_main
         Left = 262
         Top = 2
         Action = ZoomBar
+        OnMouseUp = ToolButton1MouseUp
       end
       object ToolButtonSearch: TToolButton
         Left = 403
@@ -3268,7 +3269,7 @@ object f_main: Tf_main
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 800
+        Left = 758
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
@@ -3280,13 +3281,13 @@ object f_main: Tf_main
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 823
+        Left = 781
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 827
+        Left = 785
         Top = 2
         Width = 8
         AutoSize = True
@@ -3336,6 +3337,7 @@ object f_main: Tf_main
         ClientWidth = 24
         FullRepaint = False
         TabOrder = 1
+        OnMouseUp = MagPanelMouseUp
         object ButtonMoreStar: TImage
           Left = 0
           Height = 11
@@ -3343,6 +3345,7 @@ object f_main: Tf_main
           Top = 0
           Width = 11
           OnClick = MoreStarExecute
+          OnMouseUp = MagPanelMouseUp
           Picture.Data = {
             07544269746D617036050000424D360500000000000036040000280000001000
             000010000000010008000000000000000000120B0000120B0000000000000000
@@ -3397,6 +3400,7 @@ object f_main: Tf_main
           Top = 0
           Width = 11
           OnClick = LessStarExecute
+          OnMouseUp = MagPanelMouseUp
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3417,6 +3421,7 @@ object f_main: Tf_main
           Top = 12
           Width = 11
           OnClick = MoreNebExecute
+          OnMouseUp = MagPanelMouseUp
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3437,6 +3442,7 @@ object f_main: Tf_main
           Top = 12
           Width = 11
           OnClick = LessNebExecute
+          OnMouseUp = MagPanelMouseUp
           Picture.Data = {
             07544269746D6170F6000000424DF60000000000000076000000280000001000
             000010000000010004000000000000000000120B0000120B0000000000000000
@@ -3466,7 +3472,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 770
+        Left = 796
         Height = 23
         Top = 2
         Width = 30
@@ -3522,7 +3528,7 @@ object f_main: Tf_main
       Left = 0
       Height = 28
       Top = 26
-      Width = 800
+      Width = 826
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
