@@ -453,6 +453,7 @@ cfgsc.StarFilter:=Fcatalog.cfgshr.StarFilter;
 cfgsc.StarMagMax:=Fcatalog.cfgcat.StarMagMax;
 cfgsc.NebFilter:=Fcatalog.cfgshr.NebFilter;
 cfgsc.NebMagMax:=Fcatalog.cfgcat.NebMagMax;
+if cfgsc.quick and FPlot.cfgplot.red_move and (Fplot.cfgchart.min_ma=Fcatalog.cfgcat.StarMagMax) then  Fplot.cfgchart.min_ma:=Fplot.cfgchart.min_ma+2;
 result:=true;
 end;
 
