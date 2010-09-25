@@ -45,6 +45,8 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
     CheckBox1: TCheckBox;
     CheckBox10: TCheckBox;
     epoch2: TFloatEdit;
@@ -273,6 +275,8 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
@@ -364,6 +368,8 @@ Label5.caption:=rsTo;
 Button1.caption:=rsDefault;
 Label158.caption:=rsProjectionSe;
 Label165.caption:=rsFieldNumber;
+Button7.caption:=rsDefault;
+Button8.caption:=rsDefault;
 Label172.caption:=rsProjection;
 Label29.caption:=rsObjectFilter2;
 GroupBox2.caption:=rsStarsFilter;
@@ -935,6 +941,61 @@ end;
 procedure Tf_config_chart.Button6Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_config_chart.Button7Click(Sender: TObject);
+begin
+ComboBox1.ItemIndex:=0;
+ComboBox2.ItemIndex:=0;
+ComboBox3.ItemIndex:=0;
+ComboBox4.ItemIndex:=0;
+ComboBox5.ItemIndex:=0;
+ComboBox6.ItemIndex:=0;
+ComboBox7.ItemIndex:=0;
+ComboBox8.ItemIndex:=0;
+ComboBox9.ItemIndex:=0;
+ComboBox10.ItemIndex:=0;
+ComboBox11.ItemIndex:=0;
+end;
+
+procedure Tf_config_chart.Button8Click(Sender: TObject);
+begin
+fsmagvis.Value:=6.5;
+fsmag0.Value:=99;
+fsmag1.Value:=99;
+fsmag2.Value:=12;
+fsmag3.Value:=11;
+fsmag4.Value:=9;
+fsmag5.Value:=8;
+fsmag6.Value:=7;
+fsmag7.Value:=6;
+fsmag8.Value:=5;
+fsmag9.Value:=4;
+fBigNebLimit.Value:=211;
+fmag0.Value:=99;
+fmag1.Value:=25;
+fmag2.Value:=20;
+fmag3.Value:=20;
+fmag4.Value:=13;
+fmag5.Value:=11;
+fmag6.Value:=10;
+fmag7.Value:=9;
+fmag8.Value:=6;
+fmag9.Value:=6;
+fdim0.Value:=0;
+fdim1.Value:=0;
+fdim2.Value:=1;
+fdim3.Value:=2;
+fdim4.Value:=4;
+fdim5.Value:=6;
+fdim6.Value:=10;
+fdim7.Value:=20;
+fdim8.Value:=30;
+fdim9.Value:=60;
+StarBox.Checked:=true;
+StarAutoBox.Checked:=true;
+NebBox.Checked:=true;
+BigNebBox.Checked:=true;
 end;
 
 procedure Tf_config_chart.CheckBox13Click(Sender: TObject);
