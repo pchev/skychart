@@ -389,9 +389,9 @@ if db.Active then begin
     node:=copy(buf,61,9);
     i:=copy(buf,71,9);
     h:=copy(buf,92,4);
-    if trim(h)='' then h:='20';
+    if trim(h)='' then h:='15';
     g:=copy(buf,97,4);
-    if trim(g)='' then g:='0.15';
+    if trim(g)='' then g:='4.0';
     nam:=stringreplace(trim(copy(buf,103,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
     if nl=1 then begin
