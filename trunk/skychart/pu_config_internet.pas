@@ -59,7 +59,7 @@ type
     Label7: TLabel;
     CometUrlList: TMemo;
     AsteroidUrlList: TMemo;
-    Page3: TPage;
+    Page3: TTabSheet;
     Panel1: TPanel;
     Panel2: TPanel;
     proxyhost: TEdit;
@@ -74,9 +74,9 @@ type
     Label4: TLabel;
     Label5: TLabel;
     MainPanel: TPanel;
-    Page1: TPage;
-    Notebook1: TNotebook;
-    Page2: TPage;
+    Page1: TTabSheet;
+    PageControl1: TPageControl;
+    Page2: TTabSheet;
     DSSpictures: TStringGrid;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);

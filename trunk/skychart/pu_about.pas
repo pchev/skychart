@@ -30,7 +30,7 @@ interface
 
 uses u_help, u_translation, u_constant, u_util,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons, LazHelpHTML;
+  ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
 
 type
 
@@ -49,10 +49,10 @@ type
     Label8: TLabel;
     Memo1: TMemo;
     Memo2: TMemo;
-    Notebook1: TNotebook;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
+    PageControl1: TPageControl;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
@@ -60,6 +60,7 @@ type
     Panel4: TPanel;
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure Panell1Click(Sender: TObject);
   private
     { Private declarations }
@@ -96,6 +97,11 @@ SetLang;
  button2.caption:=URL_BugTracker;
  label2.caption:=cdcversion+blank+compile_time;
  label4.Caption:=rsCompiledWith+blank+compile_version;
+end;
+
+procedure Tf_about.PageControl1Change(Sender: TObject);
+begin
+
 end;
 
 procedure Tf_about.Button2Click(Sender: TObject);

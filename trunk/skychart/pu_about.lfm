@@ -1,9 +1,9 @@
 object f_about: Tf_about
-  Left = 395
+  Left = 433
   Height = 305
-  Top = 105
+  Top = 104
   Width = 581
-  ActiveControl = Panel2
+  ActiveControl = Panel1
   BorderStyle = bsToolWindow
   Caption = 'About'
   ClientHeight = 305
@@ -2376,23 +2376,25 @@ object f_about: Tf_about
           TabOrder = 0
         end
       end
-      object Notebook1: TNotebook
+      object PageControl1: TPageControl
         Left = 1
         Height = 264
         Top = 1
         Width = 499
+        ActivePage = Page1
         Align = alClient
-        PageIndex = 0
+        TabIndex = 0
         TabOrder = 1
-        object Page1: TPage
+        OnChange = PageControl1Change
+        object Page1: TTabSheet
           Caption = 'About'
+          ClientHeight = 235
           ClientWidth = 495
-          ClientHeight = 236
           object Label5: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 30
-            Width = 63
+            Width = 77
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2400,9 +2402,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 6
-            Width = 80
+            Width = 100
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2422,7 +2424,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 78
-            Width = 47
+            Width = 55
             Caption = 'Copyright'
             ParentColor = False
           end
@@ -2430,7 +2432,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 54
-            Width = 38
+            Width = 43
             Caption = 'Version'
             ParentColor = False
           end
@@ -2438,7 +2440,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 158
-            Width = 42
+            Width = 52
             Caption = 'Compiler'
             ParentColor = False
           end
@@ -2457,10 +2459,10 @@ object f_about: Tf_about
             OnClick = Panell1Click
           end
         end
-        object Page2: TPage
+        object Page2: TTabSheet
           Caption = 'Authors'
+          ClientHeight = 235
           ClientWidth = 495
-          ClientHeight = 236
           object Label3: TLabel
             Left = 11
             Height = 20
@@ -2494,15 +2496,15 @@ object f_about: Tf_about
             TabOrder = 1
           end
         end
-        object Page3: TPage
+        object Page3: TTabSheet
           Caption = 'License Agreement'
+          ClientHeight = 235
           ClientWidth = 495
-          ClientHeight = 236
           object Memo2: TMemo
             Left = 0
-            Height = 196
+            Height = 235
             Top = 0
-            Width = 444
+            Width = 495
             Align = alClient
             Color = clBtnFace
             Lines.Strings = (

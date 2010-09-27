@@ -1591,10 +1591,6 @@ with form do begin
      color:=nv_dark;
      font.Color:=nv_middle;
      for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
-           if color=clWindow   then  color:=nv_black;
-           if color=clBtnFace then  color:=nv_dark;
-        end;
         if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
            if color=clWindow   then  color:=nv_black;
            if color=clBtnFace then  color:=nv_dark;
@@ -1657,10 +1653,6 @@ with form do begin
      Color:=clBtnFace;
      font.Color:=clBtnText;
      for i := 0 to ComponentCount-1 do begin
-        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
-           if color=nv_black then color:=clWindow;
-           if color=nv_dark  then color:=clBtnFace;
-        end;
         if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
            if color=nv_black then color:=clWindow;
            if color=nv_dark  then color:=clBtnFace;
@@ -1733,22 +1725,12 @@ with form do begin
      writeln(f,'Form: '+name);
      for i := 0 to ComponentCount-1 do begin
         cname:=''; cprop:=''; ctext:='';
-        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
-           cname:=name;
-           cprop:='caption';
-           ctext:=caption;
-        end;
         if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
            cname:=name;
            cprop:='caption';
            ctext:=caption;
         end;
         if  ( Components[i] is TTabSheet ) then with (Components[i] as TTabSheet) do begin
-           cname:=name;
-           cprop:='caption';
-           ctext:=caption;
-        end;
-        if  ( Components[i] is TPage ) then with (Components[i] as TPage) do begin
            cname:=name;
            cprop:='caption';
            ctext:=caption;

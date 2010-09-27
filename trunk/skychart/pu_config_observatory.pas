@@ -61,8 +61,8 @@ type
     Label2: TLabel;
     Label3: TLabel;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
     Latitude: TGroupBox;
     Label58: TLabel;
     Label59: TLabel;
@@ -86,7 +86,7 @@ type
     Obszp: TButton;
     Obszm: TButton;
     Obsmap: TButton;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     ZoomImage1: TZoomImage;
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;

@@ -56,8 +56,8 @@ type
     Label1: TLabel;
     tzLabel: TLabel;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
     Label142: TLabel;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
@@ -92,7 +92,7 @@ type
     SimObj: TCheckListBox;
     AllSim: TButton;
     NoSim: TButton;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     d_year: TUpDown;
     d_month: TUpDown;
     d_day: TUpDown;

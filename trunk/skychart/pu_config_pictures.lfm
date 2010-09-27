@@ -1,7 +1,7 @@
 object f_config_pictures: Tf_config_pictures
-  Left = 372
+  Left = 732
   Height = 535
-  Top = 156
+  Top = 127
   Width = 513
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -24,25 +24,26 @@ object f_config_pictures: Tf_config_pictures
     ClientWidth = 513
     ParentColor = False
     TabOrder = 0
-    object Notebook1: TNotebook
+    object PageControl1: TPageControl
       Left = 1
       Height = 483
       Top = 1
       Width = 511
+      ActivePage = Page1
       Align = alClient
-      OnPageChanged = Notebook1PageChanged
-      PageIndex = 2
       ShowTabs = False
+      TabIndex = 0
       TabOrder = 0
-      object Page1: TPage
+      OnPageChanged = PageControl1PageChanged
+      object Page1: TTabSheet
         Caption = 'Objects'
-        ClientWidth = 507
         ClientHeight = 479
+        ClientWidth = 507
         object Label50: TLabel
           Left = 2
           Height = 14
           Top = 2
-          Width = 168
+          Width = 200
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
@@ -50,7 +51,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 15
           Height = 14
           Top = 46
-          Width = 76
+          Width = 91
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -77,7 +78,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 187
             Height = 14
             Top = 8
-            Width = 28
+            Width = 33
             Caption = 'Other'
             ParentColor = False
           end
@@ -111,7 +112,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 32
             Height = 14
             Top = 32
-            Width = 52
+            Width = 62
             Caption = 'Luminosity'
             ParentColor = False
           end
@@ -119,7 +120,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 40
             Height = 14
             Top = 96
-            Width = 42
+            Width = 50
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -164,7 +165,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 31
           Height = 21
           Top = 375
-          Width = 187
+          Width = 215
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 3
@@ -182,15 +183,15 @@ object f_config_pictures: Tf_config_pictures
           OnChange = imgpathChange
         end
       end
-      object Page2: TPage
+      object Page2: TTabSheet
         Caption = 'Background'
-        ClientWidth = 507
         ClientHeight = 479
+        ClientWidth = 507
         object Label270: TLabel
           Left = 0
           Height = 14
           Top = 0
-          Width = 95
+          Width = 111
           Caption = 'Background Picture'
           ParentColor = False
         end
@@ -198,7 +199,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 8
           Height = 14
           Top = 22
-          Width = 41
+          Width = 47
           Caption = 'FITS File'
           ParentColor = False
         end
@@ -206,7 +207,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 8
           Height = 14
           Top = 47
-          Width = 7
+          Width = 9
           Caption = '  '
           ParentColor = False
         end
@@ -221,7 +222,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 8
           Height = 21
           Top = 80
-          Width = 108
+          Width = 122
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -238,7 +239,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 54
             Height = 14
             Top = 6
-            Width = 52
+            Width = 62
             Caption = 'Luminosity'
             ParentColor = False
           end
@@ -246,7 +247,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 203
             Height = 14
             Top = 6
-            Width = 42
+            Width = 50
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -293,10 +294,10 @@ object f_config_pictures: Tf_config_pictures
           OnChange = backimgChange
         end
       end
-      object Page3: TPage
+      object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientWidth = 507
         ClientHeight = 479
+        ClientWidth = 507
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
@@ -310,7 +311,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 100
-            Width = 66
+            Width = 76
             Caption = 'Auxiliary files'
             ParentColor = False
           end
@@ -318,7 +319,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 152
-            Width = 86
+            Width = 103
             Caption = 'Data Files, CDrom'
             ParentColor = False
           end
@@ -326,7 +327,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 14
             Top = 196
-            Width = 67
+            Width = 81
             Caption = 'temporary file'
             ParentColor = False
           end
@@ -334,7 +335,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 416
             Height = 14
             Top = 272
-            Width = 29
+            Width = 34
             Caption = 'pixels'
             ParentColor = False
           end
@@ -342,7 +343,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 416
             Height = 14
             Top = 308
-            Width = 37
+            Width = 42
             Caption = 'MBytes'
             ParentColor = False
           end
@@ -377,7 +378,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 21
             Top = 26
-            Width = 91
+            Width = 102
             Caption = 'RealSky North'
             OnClick = RealSkyNorthClick
             TabOrder = 0
@@ -386,7 +387,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 21
             Top = 62
-            Width = 93
+            Width = 104
             Caption = 'RealSky South'
             OnClick = RealSkySouthClick
             TabOrder = 1
@@ -395,7 +396,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 184
             Height = 21
             Top = 26
-            Width = 82
+            Width = 92
             Caption = '102 CD DSS'
             OnClick = DSS102CDClick
             TabOrder = 2
@@ -404,7 +405,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 21
             Top = 272
-            Width = 203
+            Width = 245
             Caption = 'Use subsampling to limit image size to'
             Checked = True
             OnClick = usesubsampleClick
@@ -415,7 +416,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 21
             Top = 240
-            Width = 120
+            Width = 142
             Caption = 'Select plate from list'
             Checked = True
             OnClick = reallistClick
@@ -455,7 +456,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 8
             Height = 21
             Top = 20
-            Width = 190
+            Width = 220
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0

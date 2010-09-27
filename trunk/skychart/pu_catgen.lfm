@@ -1,9 +1,9 @@
 object f_catgen: Tf_catgen
-  Left = 359
+  Left = 381
   Height = 479
-  Top = 93
+  Top = 94
   Width = 503
-  ActiveControl = RadioGroup1.RadioButton0
+  ActiveControl = StringGrid4
   BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -2896,20 +2896,21 @@ object f_catgen: Tf_catgen
     }
     Stretch = True
   end
-  object PageControl1: TNotebook
+  object PageControl1: TPageControl
     Left = 114
     Height = 438
     Top = 0
     Width = 389
+    ActivePage = TabSheet8
     Align = alClient
-    OnPageChanged = PageControl1PageChanged
-    PageIndex = 0
     ShowTabs = False
+    TabIndex = 7
     TabOrder = 0
-    object TabSheet1: TPage
+    OnPageChanged = PageControl1PageChanged
+    object TabSheet1: TTabSheet
       Caption = '1'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       object Label6: TLabel
         Left = 20
         Height = 14
@@ -3094,10 +3095,10 @@ object f_catgen: Tf_catgen
         TabOrder = 4
       end
     end
-    object TabSheet2: TPage
+    object TabSheet2: TTabSheet
       Caption = '2'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
@@ -3449,10 +3450,10 @@ object f_catgen: Tf_catgen
         end
       end
     end
-    object TabSheet3: TPage
+    object TabSheet3: TTabSheet
       Caption = '3'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
@@ -3495,10 +3496,11 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 19
+        ItemHeight = 0
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
+        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3566,10 +3568,10 @@ object f_catgen: Tf_catgen
         WordWrap = False
       end
     end
-    object TabSheet4: TPage
+    object TabSheet4: TTabSheet
       Caption = '4'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -3683,10 +3685,10 @@ object f_catgen: Tf_catgen
         end
       end
     end
-    object TabSheet5: TPage
+    object TabSheet5: TTabSheet
       Caption = '5'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
@@ -3725,10 +3727,10 @@ object f_catgen: Tf_catgen
         TabOrder = 1
       end
     end
-    object TabSheet6: TPage
+    object TabSheet6: TTabSheet
       Caption = '6'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -3767,10 +3769,10 @@ object f_catgen: Tf_catgen
         TabOrder = 1
       end
     end
-    object TabSheet7: TPage
+    object TabSheet7: TTabSheet
       Caption = '7'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -3808,16 +3810,16 @@ object f_catgen: Tf_catgen
         TabOrder = 1
       end
     end
-    object TabSheet8: TPage
+    object TabSheet8: TTabSheet
       Caption = '8'
-      ClientWidth = 385
       ClientHeight = 434
+      ClientWidth = 385
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
-        Height = 16
+        Height = 14
         Top = 24
-        Width = 207
+        Width = 187
         Caption = 'Indicate the string for each color'
         ParentColor = False
       end
@@ -3902,9 +3904,9 @@ object f_catgen: Tf_catgen
       end
       object Label21: TLabel
         Left = 6
-        Height = 16
+        Height = 14
         Top = 64
-        Width = 161
+        Width = 145
         Caption = 'Click to change the color '
         ParentColor = False
       end

@@ -92,7 +92,7 @@ type
     FOVPanel: TPanel;
     ocl3: TDirectoryEdit;
     OCLbox: TCheckBox;
-    Page5: TPage;
+    Page5: TTabSheet;
     Panel1: TPanel;
     PanelDef: TPanel;
     PanelGen: TPanel;
@@ -119,10 +119,10 @@ type
     ty23: TDirectoryEdit;
     sky3: TDirectoryEdit;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
-    Page4: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
+    Page4: TTabSheet;
     Label37: TLabel;
     StringGrid3: TStringGrid;
     Label2: TLabel;
@@ -196,7 +196,7 @@ type
     fmct1: TLongEdit;
     fmct2: TLongEdit;
     OpenDialog1: TOpenDialog;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
@@ -333,7 +333,7 @@ begin
  cplot:=mycplot;
  cmain:=mycmain;
  inherited Create(AOwner);
- Notebook1.ShowTabs:=false;
+ PageControl1.ShowTabs:=false;
 end;
 
 procedure Tf_config_catalog.FormShow(Sender: TObject);

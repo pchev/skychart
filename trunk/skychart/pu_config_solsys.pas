@@ -58,8 +58,8 @@ type
     Loadcom: TButton;
     LoadMPC: TButton;
     mpcfile: TFileNameEdit;
-    PageControl1: TPageControl;
-    PageControl2: TPageControl;
+    ComPageControl1: TPageControl;
+    AstPageControl2: TPageControl;
     Panel1: TPanel;
     astnummonth: TUpDown;
     XplanetBox: TPanel;
@@ -73,10 +73,10 @@ type
     DownloadDialog1: TDownloadDialog;
     GroupBox1: TGroupBox;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
-    Page4: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
+    Page4: TTabSheet;
     Label12: TLabel;
     Label131: TLabel;
     PlaParalaxe: TRadioGroup;
@@ -206,7 +206,7 @@ type
     asteq: TEdit;
     Addast: TButton;
     OpenDialog1: TOpenDialog;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     UseXplanet: TCheckBox;
     XplanetDir: TEdit;
     XplanetBtn: TBitBtn;
@@ -444,7 +444,7 @@ ShowPlanet;
 ShowComet;
 ShowAsteroid;
 LockChange:=false;
-if Notebook1.ActivePageComponent=page2 then
+if PageControl1.ActivePage=page2 then
    PlanetModeClick(Sender);
 end;
 
@@ -466,7 +466,7 @@ TransparentPlanet.Checked:=cplot.TransparentPlanet;
  XplanetBox.Visible:=false;
  use_xplanet:=true;
 {$endif}
-if visible and (Notebook1.ActivePageComponent=page1) then ActiveControl:=PlanetDir;
+if visible and (PageControl1.ActivePage=page1) then ActiveControl:=PlanetDir;
 end;
 
 procedure Tf_config_solsys.ShowComet;
@@ -706,7 +706,7 @@ end;
 
 procedure Tf_config_solsys.PlanetModeClick(Sender: TObject);
 begin
-if LockChange and (Notebook1.ActivePageComponent<>Page2) then exit;
+if LockChange and (PageControl1.ActivePage<>Page2) then exit;
 if (PlanetMode.itemindex=2)and Use_Xplanet then begin
    if not CheckXplanet then
      PlanetMode.itemindex:=1;
@@ -1005,7 +1005,7 @@ end;
 
 procedure Tf_config_solsys.UseXplanetClick(Sender: TObject);
 begin
-if LockChange and (Notebook1.ActivePageComponent<>Page2) then exit;
+if LockChange and (PageControl1.ActivePage<>Page2) then exit;
 if UseXplanet.checked then begin
      UseXplanet.checked:=CheckXplanet;
 end;
