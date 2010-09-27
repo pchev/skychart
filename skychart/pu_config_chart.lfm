@@ -1,7 +1,7 @@
 object f_config_chart: Tf_config_chart
-  Left = 994
+  Left = 920
   Height = 567
-  Top = 111
+  Top = 104
   Width = 510
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -24,23 +24,24 @@ object f_config_chart: Tf_config_chart
     ClientWidth = 510
     ParentColor = False
     TabOrder = 0
-    object Notebook1: TNotebook
+    object PageControl1: TPageControl
       Left = 1
       Height = 461
       Top = 1
       Width = 508
+      ActivePage = Page1
       Align = alClient
-      OnPageChanged = Notebook1PageChanged
-      PageIndex = 3
       ShowTabs = False
+      TabIndex = 0
       TabOrder = 0
-      object Page1: TPage
+      OnPageChanged = PageControl1PageChanged
+      object Page1: TTabSheet
         Caption = 'Page1'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Label31: TLabel
           Left = 0
-          Height = 15
+          Height = 14
           Top = 0
           Width = 76
           Caption = 'Chart Setting'
@@ -57,17 +58,17 @@ object f_config_chart: Tf_config_chart
           Visible = False
           object EquinoxLabel: TLabel
             Left = 16
-            Height = 16
+            Height = 14
             Top = 20
-            Width = 46
+            Width = 49
             Caption = 'Equinox:'
             ParentColor = False
           end
           object Label1: TLabel
             Left = 248
-            Height = 16
+            Height = 14
             Top = 20
-            Width = 37
+            Width = 39
             Caption = 'Epoch:'
             ParentColor = False
           end
@@ -86,7 +87,7 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 41
+            ClientHeight = 42
             ClientWidth = 413
             Columns = 2
             ItemIndex = 0
@@ -119,14 +120,14 @@ object f_config_chart: Tf_config_chart
             Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 41
+            ClientHeight = 42
             ClientWidth = 413
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
-              Height = 22
+              Height = 21
               Top = 7
-              Width = 397
+              Width = 396
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               TabOrder = 0
@@ -179,9 +180,9 @@ object f_config_chart: Tf_config_chart
         end
         object ExpertMode: TCheckBox
           Left = 21
-          Height = 22
+          Height = 21
           Top = 357
-          Width = 96
+          Width = 95
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           TabOrder = 3
@@ -209,7 +210,7 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 123
+            ClientHeight = 124
             ClientWidth = 436
             ItemIndex = 0
             Items.Strings = (
@@ -223,10 +224,10 @@ object f_config_chart: Tf_config_chart
           end
         end
       end
-      object Page2: TPage
+      object Page2: TTabSheet
         Caption = 'Page2'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Label30: TLabel
           Left = 0
           Height = 14
@@ -676,10 +677,10 @@ object f_config_chart: Tf_config_chart
           TabOrder = 22
         end
       end
-      object Page3: TPage
+      object Page3: TTabSheet
         Caption = 'Page3'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -1005,10 +1006,10 @@ object f_config_chart: Tf_config_chart
           TabOrder = 11
         end
       end
-      object Page4: TPage
+      object Page4: TTabSheet
         Caption = 'Page4'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Label29: TLabel
           Left = 0
           Height = 14
@@ -1815,10 +1816,10 @@ object f_config_chart: Tf_config_chart
           end
         end
       end
-      object Page5: TPage
+      object Page5: TTabSheet
         Caption = 'Page5'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Label159: TLabel
           Left = 0
           Height = 14
@@ -2358,13 +2359,13 @@ object f_config_chart: Tf_config_chart
           TabOrder = 21
         end
       end
-      object Page6: TPage
+      object Page6: TTabSheet
         Caption = 'Page6'
-        ClientWidth = 504
         ClientHeight = 457
+        ClientWidth = 504
         object Label95: TLabel
           Left = 0
-          Height = 20
+          Height = 14
           Top = 0
           Width = 105
           Caption = 'Object List Setting'

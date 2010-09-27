@@ -2648,8 +2648,8 @@ procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
    ConfigTime:=Tf_config_time.Create(self);
-   ConfigTime.Notebook1.ShowTabs:=true;
-   ConfigTime.Notebook1.PageIndex:=0;
+   ConfigTime.PageControl1.ShowTabs:=true;
+   ConfigTime.PageControl1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigTime,nightvision);{$endif}
@@ -2665,7 +2665,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigTime.cmain.Assign(cfgm);
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigTime.Notebook1.PageIndex:=page;
+ConfigTime.PageControl1.PageIndex:=page;
 ConfigTime.showmodal;
 if ConfigTime.ModalResult=mrOK then begin
  activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
@@ -2740,8 +2740,8 @@ procedure Tf_main.SetupChartPage(page:integer);
 begin
 if ConfigChart=nil then begin
    ConfigChart:=Tf_config_chart.Create(self);
-   ConfigChart.Notebook1.ShowTabs:=true;
-   ConfigChart.Notebook1.PageIndex:=0;
+   ConfigChart.PageControl1.ShowTabs:=true;
+   ConfigChart.PageControl1.PageIndex:=0;
    ConfigChart.onApplyConfig:=ApplyConfigChart;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigChart,nightvision);{$endif}
@@ -2757,7 +2757,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigChart.cmain.Assign(cfgm);
 formpos(ConfigChart,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigChart.Notebook1.PageIndex:=page;
+ConfigChart.PageControl1.PageIndex:=page;
 ConfigChart.showmodal;
 if ConfigChart.ModalResult=mrOK then begin
  activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
@@ -2810,8 +2810,8 @@ procedure Tf_main.SetupSolsysPage(page:integer);
 begin
 if ConfigSolsys=nil then begin
    ConfigSolsys:=Tf_config_solsys.Create(self);
-   ConfigSolsys.Notebook1.ShowTabs:=true;
-   ConfigSolsys.Notebook1.PageIndex:=0;
+   ConfigSolsys.PageControl1.ShowTabs:=true;
+   ConfigSolsys.PageControl1.PageIndex:=0;
    ConfigSolsys.onApplyConfig:=ApplyConfigSolsys;
    ConfigSolsys.onPrepareAsteroid:=PrepareAsteroid;
 end;
@@ -2829,7 +2829,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigSolsys.cmain.Assign(cfgm);
 formpos(ConfigSolsys,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigSolsys.Notebook1.PageIndex:=page;
+ConfigSolsys.PageControl1.PageIndex:=page;
 ConfigSolsys.showmodal;
 if ConfigSolsys.ModalResult=mrOK then begin
  activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
@@ -2869,8 +2869,8 @@ procedure Tf_main.SetupSystemPage(page:integer);
 begin
 if ConfigSystem=nil then begin
    ConfigSystem:=Tf_config_system.Create(self);
-   ConfigSystem.Notebook1.ShowTabs:=true;
-   ConfigSystem.Notebook1.PageIndex:=0;
+   ConfigSystem.PageControl1.ShowTabs:=true;
+   ConfigSystem.PageControl1.PageIndex:=0;
    ConfigSystem.onApplyConfig:=ApplyConfigSystem;
    ConfigSystem.onDBChange:=ConfigDBChange;
    ConfigSystem.onSaveAndRestart:=SaveAndRestart;
@@ -2889,7 +2889,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigSystem.cmain.Assign(cfgm);
 formpos(ConfigSystem,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigSystem.Notebook1.PageIndex:=page;
+ConfigSystem.PageControl1.PageIndex:=page;
 ConfigSystem.showmodal;
 if ConfigSystem.ModalResult=mrOK then begin
  ConfigSystem.ActivateDBchange;
@@ -2913,8 +2913,8 @@ procedure Tf_main.SetupInternetPage(page:integer);
 begin
 if ConfigInternet=nil then begin
    ConfigInternet:=Tf_config_internet.Create(self);
-   ConfigInternet.Notebook1.ShowTabs:=true;
-   ConfigInternet.Notebook1.PageIndex:=0;
+   ConfigInternet.PageControl1.ShowTabs:=true;
+   ConfigInternet.PageControl1.PageIndex:=0;
    ConfigInternet.onApplyConfig:=ApplyConfigInternet;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigInternet,nightvision);{$endif}
@@ -2923,7 +2923,7 @@ cfgm.persdir:=privatedir;
 ConfigInternet.cmain.Assign(cfgm);
 ConfigInternet.cdss.Assign(f_getdss.cfgdss);
 formpos(ConfigInternet,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigInternet.Notebook1.PageIndex:=page;
+ConfigInternet.PageControl1.PageIndex:=page;
 ConfigInternet.showmodal;
 if ConfigInternet.ModalResult=mrOK then begin
  activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
@@ -2941,8 +2941,8 @@ procedure Tf_main.SetupPicturesPage(page:integer);
 begin
 if ConfigPictures=nil then begin
    ConfigPictures:=Tf_config_pictures.Create(self);
-   ConfigPictures.Notebook1.ShowTabs:=true;
-   ConfigPictures.Notebook1.PageIndex:=0;
+   ConfigPictures.PageControl1.ShowTabs:=true;
+   ConfigPictures.PageControl1.PageIndex:=0;
    ConfigPictures.onApplyConfig:=ApplyConfigPictures;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigPictures,nightvision);{$endif}
@@ -2961,7 +2961,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigPictures.cmain.Assign(cfgm);
 formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigPictures.Notebook1.PageIndex:=page;
+ConfigPictures.PageControl1.PageIndex:=page;
 //ConfigPictures.show;
 ConfigPictures.backimgChange(self);
 //ConfigPictures.hide;
@@ -2988,8 +2988,8 @@ procedure Tf_main.SetupObservatoryPage(page:integer; posx:integer=0; posy:intege
 begin
 if ConfigObservatory=nil then begin
    ConfigObservatory:=Tf_config_observatory.Create(self);
-   ConfigObservatory.Notebook1.ShowTabs:=true;
-   ConfigObservatory.Notebook1.PageIndex:=0;
+   ConfigObservatory.PageControl1.ShowTabs:=true;
+   ConfigObservatory.PageControl1.PageIndex:=0;
    ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
@@ -3010,7 +3010,7 @@ if (posx=0)and(posy=0) then
 else
   if (posx>0)and(posy>0) then
    formpos(ConfigObservatory,posx,posy);
-ConfigObservatory.Notebook1.PageIndex:=page;
+ConfigObservatory.PageControl1.PageIndex:=page;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
  activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
@@ -3034,8 +3034,8 @@ begin
 if ConfigCatalog=nil then begin
    ConfigCatalog:=Tf_config_catalog.Create(self);
    ConfigCatalog.catalog:=catalog;
-   ConfigCatalog.Notebook1.ShowTabs:=true;
-   ConfigCatalog.Notebook1.PageIndex:=0;
+   ConfigCatalog.PageControl1.ShowTabs:=true;
+   ConfigCatalog.PageControl1.PageIndex:=0;
    ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
@@ -3051,7 +3051,7 @@ cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
 ConfigCatalog.cmain.Assign(cfgm);
 formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigCatalog.Notebook1.PageIndex:=page;
+ConfigCatalog.PageControl1.PageIndex:=page;
 ConfigCatalog.showmodal;
 if ConfigCatalog.ModalResult=mrOK then begin
  ConfigCatalog.ActivateGCat;
@@ -3118,8 +3118,8 @@ procedure Tf_main.SetupDisplayPage(pagegroup:integer);
 begin
 if ConfigDisplay=nil then begin
    ConfigDisplay:=Tf_config_display.Create(self);
-   ConfigDisplay.Notebook1.ShowTabs:=true;
-   ConfigDisplay.Notebook1.PageIndex:=0;
+   ConfigDisplay.PageControl1.ShowTabs:=true;
+   ConfigDisplay.PageControl1.PageIndex:=0;
    ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
@@ -3136,7 +3136,7 @@ cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
 {$ifdef mswindows}
-// Problem with initialization
+// TODO: Problem with initialization
 ConfigDisplay.show;
 ConfigDisplay.hide;
 ConfigDisplay.ccat.Assign(catalog.cfgcat);
@@ -3152,7 +3152,7 @@ cfgm.persdir:=privatedir;
 ConfigDisplay.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
-ConfigDisplay.Notebook1.PageIndex:=pagegroup;
+ConfigDisplay.PageControl1.PageIndex:=pagegroup;
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
  activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);

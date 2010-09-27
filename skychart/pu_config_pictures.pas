@@ -46,9 +46,9 @@ type
     GroupBox1: TGroupBox;
     imgpath: TDirectoryEdit;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
     Label50: TLabel;
     Label264: TLabel;
     nimages: TLabel;
@@ -90,14 +90,14 @@ type
     reallist: TCheckBox;
     realskymax: TLongEdit;
     realskymb: TLongEdit;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ResetLumClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure Notebook1PageChanged(Sender: TObject);
+    procedure PageControl1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OnlineDSSChange(Sender: TObject);
@@ -310,9 +310,9 @@ begin
  LockChange:=true;
 end;
 
-procedure Tf_config_pictures.Notebook1PageChanged(Sender: TObject);
+procedure Tf_config_pictures.PageControl1PageChanged(Sender: TObject);
 begin
-if Notebook1.PageIndex=1 then backimgChange(Sender);
+if PageControl1.PageIndex=1 then backimgChange(Sender);
 end;
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);

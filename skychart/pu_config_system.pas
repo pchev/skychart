@@ -50,8 +50,8 @@ type
     TelescopePluginLabel: TLabel;
     LanguageList: TComboBox;
     Label14: TLabel;
-    Language: TPage;
-    Page4: TPage;
+    Language: TTabSheet;
+    Page4: TTabSheet;
     Panel1: TPanel;
     TelescopeManual: TPanel;
     INDI: TPanel;
@@ -63,9 +63,9 @@ type
     LinuxDesktopBox: TComboBox;
     GroupBoxLinux: TGroupBox;
     MainPanel: TPanel;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
     Label153: TLabel;
     Label77: TLabel;
     Label84: TLabel;
@@ -135,7 +135,7 @@ type
     TurnsAlt: TFloatEdit;
     RevertTurnsAz: TCheckBox;
     RevertTurnsAlt: TCheckBox;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);

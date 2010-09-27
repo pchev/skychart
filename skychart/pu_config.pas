@@ -327,25 +327,25 @@ var k: integer;
 begin
    // before the page change:
    if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-     if f_config_catalog1.Notebook1.ActivePageComponent=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
+     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
    end;
    if MultiDoc1.ActiveObject=f_config_system1 then begin
-     if f_config_system1.Notebook1.ActivePageComponent=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
+     if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
    end;
    // page change
    for k:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[k].Visible:=false;
    MultiDoc1.Childs[i].Visible:=true;
    MultiDoc1.SetActiveChild(i);
    case i of
-     0 : begin f_config_time1.Notebook1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
-     1 : begin f_config_observatory1.Notebook1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
-     2 : begin f_config_chart1.Notebook1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
-     3 : begin f_config_catalog1.Notebook1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
-     4 : begin f_config_solsys1.Notebook1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
-     5 : begin f_config_display1.Notebook1.PageIndex:=j;     f_config_display1.FormShow(self); end;
-     6 : begin f_config_pictures1.Notebook1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
-     7 : begin f_config_system1.Notebook1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
-     8 : begin f_config_internet1.Notebook1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
+     0 : begin f_config_time1.PageControl1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
+     1 : begin f_config_observatory1.PageControl1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
+     2 : begin f_config_chart1.PageControl1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
+     3 : begin f_config_catalog1.PageControl1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
+     4 : begin f_config_solsys1.PageControl1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
+     5 : begin f_config_display1.PageControl1.PageIndex:=j;     f_config_display1.FormShow(self); end;
+     6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
+     7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
+     8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -356,10 +356,10 @@ begin
   if Treeview1.selected<>nil then
      cmain.configpage:=Treeview1.selected.absoluteindex;
   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-    if f_config_catalog1.Notebook1.ActivePageComponent=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
+    if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
   end;
   if MultiDoc1.ActiveObject=f_config_system1 then begin
-    if f_config_system1.Notebook1.ActivePageComponent=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
+    if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
   end;
   Fcdss:=f_config_internet1.cdss;
 end;

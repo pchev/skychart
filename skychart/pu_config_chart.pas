@@ -228,12 +228,12 @@ type
     listvar: TCheckBox;
     MainPanel: TPanel;
     NebBox: TCheckBox;
-    Page1: TPage;
-    Page2: TPage;
-    Page3: TPage;
-    Page4: TPage;
-    Page5: TPage;
-    Page6: TPage;
+    Page1: TTabSheet;
+    Page2: TTabSheet;
+    Page3: TTabSheet;
+    Page4: TTabSheet;
+    Page5: TTabSheet;
+    Page6: TTabSheet;
     Panel1: TPanel;
     PanelExpert: TPanel;
     PanelCoord: TPanel;
@@ -269,7 +269,7 @@ type
     CoordType: TRadioGroup;
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
-    Notebook1: TNotebook;
+    PageControl1: TPageControl;
     TrackBar1: TTrackBar;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -283,7 +283,7 @@ type
     procedure ShowGridBoxClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
-    procedure Notebook1PageChanged(Sender: TObject);
+    procedure PageControl1PageChanged(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PMBoxClick(Sender: TObject);
@@ -690,11 +690,11 @@ mycplot.Free;
 mycmain.Free;
 end;
 
-procedure Tf_config_chart.Notebook1PageChanged(Sender: TObject);
+procedure Tf_config_chart.PageControl1PageChanged(Sender: TObject);
 begin
-if (Notebook1.ActivePage=rsProjection) or
-   (Notebook1.ActivePage=rsObjectFilter) or
-   (Notebook1.ActivePage=rsGridSpacing)
+if (PageControl1.ActivePage.Caption=rsProjection) or
+   (PageControl1.ActivePage.Caption=rsObjectFilter) or
+   (PageControl1.ActivePage.Caption=rsGridSpacing)
 then
    FOVPanel.Visible:=true
 else

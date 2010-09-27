@@ -1,7 +1,7 @@
 object f_config_display: Tf_config_display
-  Left = 917
+  Left = 851
   Height = 560
-  Top = 111
+  Top = 110
   Width = 515
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -24,19 +24,20 @@ object f_config_display: Tf_config_display
     ClientWidth = 515
     ParentColor = False
     TabOrder = 0
-    object Notebook1: TNotebook
+    object PageControl1: TPageControl
       Left = 1
       Height = 508
       Top = 1
       Width = 513
+      ActivePage = Page1
       Align = alClient
-      PageIndex = 0
       ShowTabs = False
+      TabIndex = 0
       TabOrder = 0
-      object Page1: TPage
+      object Page1: TTabSheet
         Caption = 'Display'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object stardisplay: TRadioGroup
           Left = 8
           Height = 65
@@ -351,10 +352,10 @@ object f_config_display: Tf_config_display
           end
         end
       end
-      object Page2: TPage
+      object Page2: TTabSheet
         Caption = 'Colour'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object Label181: TLabel
           Left = 86
           Height = 14
@@ -869,10 +870,10 @@ object f_config_display: Tf_config_display
           end
         end
       end
-      object Page3: TPage
+      object Page3: TTabSheet
         Caption = 'Deep-sky colour'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object lblDSOCScheme: TLabel
           Left = 13
           Height = 14
@@ -1393,10 +1394,10 @@ object f_config_display: Tf_config_display
           TabOrder = 2
         end
       end
-      object Page4: TPage
+      object Page4: TTabSheet
         Caption = 'Sky colour'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object Panel2: TPanel
           Left = 24
           Height = 147
@@ -1571,10 +1572,10 @@ object f_config_display: Tf_config_display
           TabOrder = 3
         end
       end
-      object Page5: TPage
+      object Page5: TTabSheet
         Caption = 'Lines'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object EqGrid: TCheckBox
           Left = 16
           Height = 21
@@ -1903,10 +1904,10 @@ object f_config_display: Tf_config_display
           end
         end
       end
-      object Page6: TPage
+      object Page6: TTabSheet
         Caption = 'Labels'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object MagLabel: TRadioGroup
           Left = 16
           Height = 81
@@ -2472,10 +2473,10 @@ object f_config_display: Tf_config_display
           TabOrder = 6
         end
       end
-      object Page7: TPage
+      object Page7: TTabSheet
         Caption = 'Fonts'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -3008,10 +3009,10 @@ object f_config_display: Tf_config_display
           TabOrder = 7
         end
       end
-      object Page8: TPage
+      object Page8: TTabSheet
         Caption = 'Finder circle'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object Label307: TLabel
           Left = 80
           Height = 14
@@ -3155,15 +3156,15 @@ object f_config_display: Tf_config_display
           TabOrder = 12
         end
       end
-      object Page9: TPage
+      object Page9: TTabSheet
         Caption = 'Finder rectangle'
-        ClientWidth = 509
         ClientHeight = 504
+        ClientWidth = 509
         object Label308: TLabel
           Left = 80
           Height = 14
           Top = 8
-          Width = 157
+          Width = 185
           Caption = 'Finder rectangle (CCD / Camera)'
           ParentColor = False
         end
@@ -3172,7 +3173,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 87
-          Width = 48
+          Width = 53
           Caption = 'No. 1'
           OnClick = rbClick
           TabOrder = 0
@@ -3182,7 +3183,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 117
-          Width = 48
+          Width = 53
           Caption = 'No. 2'
           OnClick = rbClick
           TabOrder = 1
@@ -3192,7 +3193,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 147
-          Width = 48
+          Width = 53
           Caption = 'No. 3'
           OnClick = rbClick
           TabOrder = 2
@@ -3202,7 +3203,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 177
-          Width = 48
+          Width = 53
           Caption = 'No. 4'
           OnClick = rbClick
           TabOrder = 3
@@ -3212,7 +3213,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 207
-          Width = 48
+          Width = 53
           Caption = 'No. 5'
           OnClick = rbClick
           TabOrder = 4
@@ -3222,7 +3223,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 237
-          Width = 48
+          Width = 53
           Caption = 'No. 6'
           OnClick = rbClick
           TabOrder = 5
@@ -3232,7 +3233,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 267
-          Width = 48
+          Width = 53
           Caption = 'No. 7'
           OnClick = rbClick
           TabOrder = 6
@@ -3242,7 +3243,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 297
-          Width = 48
+          Width = 53
           Caption = 'No. 8'
           OnClick = rbClick
           TabOrder = 7
@@ -3252,7 +3253,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 327
-          Width = 48
+          Width = 53
           Caption = 'No. 9'
           OnClick = rbClick
           TabOrder = 8
@@ -3262,7 +3263,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 357
-          Width = 48
+          Width = 52
           Caption = 'No10'
           OnClick = rbClick
           TabOrder = 9
@@ -3286,7 +3287,7 @@ object f_config_display: Tf_config_display
           Left = 24
           Height = 21
           Top = 413
-          Width = 129
+          Width = 149
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
           TabOrder = 11
@@ -3295,7 +3296,7 @@ object f_config_display: Tf_config_display
           Left = 301
           Height = 21
           Top = 413
-          Width = 77
+          Width = 85
           Caption = 'Show label'
           OnClick = CheckBox2Click
           TabOrder = 12

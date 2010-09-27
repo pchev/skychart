@@ -1285,22 +1285,12 @@ with form do begin
      writeln(f,'Form: '+name);
      for i := 0 to ComponentCount-1 do begin
         cname:=''; cprop:=''; ctext:='';
-        if  ( Components[i] is TNotebook ) then with (Components[i] as TNotebook) do begin
-           cname:=name;
-           cprop:='caption';
-           ctext:=caption;
-        end;
         if  ( Components[i] is TPageControl ) then with (Components[i] as TPageControl) do begin
            cname:=name;
            cprop:='caption';
            ctext:=caption;
         end;
         if  ( Components[i] is TTabSheet ) then with (Components[i] as TTabSheet) do begin
-           cname:=name;
-           cprop:='caption';
-           ctext:=caption;
-        end;
-        if  ( Components[i] is TPage ) then with (Components[i] as TPage) do begin
            cname:=name;
            cprop:='caption';
            ctext:=caption;
