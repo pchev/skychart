@@ -1721,7 +1721,6 @@ arrow.free;
  WriteTrace('Destroy Cursor');
 {$endif}
 if CursorImage1<>nil then begin
-  Screen.Cursors[crRetic]:=0;
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
@@ -6343,7 +6342,7 @@ begin
     SetButtonImage(cfgm.ButtonStandard);
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
-   CursorImage1.FreeImage;
+   if lclver<'0.9.29' then CursorImage1.FreeImage;
    CursorImage1.Free;
    CursorImage1:=TCursorImage.Create;
    CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur'));
