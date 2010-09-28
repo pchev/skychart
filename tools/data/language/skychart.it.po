@@ -3639,6 +3639,10 @@ msgstr "Mostra pianeti sulla cartina"
 msgid "Show planets"
 msgstr "Mostra pianeti"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Mostra stelle"

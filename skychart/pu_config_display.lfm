@@ -1,7 +1,7 @@
 object f_config_display: Tf_config_display
-  Left = 851
+  Left = 842
   Height = 560
-  Top = 110
+  Top = 111
   Width = 515
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -93,7 +93,7 @@ object f_config_display: Tf_config_display
           Left = 28
           Height = 21
           Top = 429
-          Width = 233
+          Width = 202
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           TabOrder = 2
@@ -110,7 +110,7 @@ object f_config_display: Tf_config_display
             Left = 38
             Height = 14
             Top = 48
-            Width = 96
+            Width = 78
             Caption = 'Stars bitmap file'
             ParentColor = False
           end
@@ -206,7 +206,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 75
-            Width = 50
+            Width = 42
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -214,7 +214,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 38
-            Width = 101
+            Width = 85
             Caption = 'Bright Stars Size '
             ParentColor = False
           end
@@ -322,7 +322,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 79
-            Width = 151
+            Width = 125
             Caption = 'Increment for Bright Stars'
             ParentColor = False
           end
@@ -330,7 +330,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 161
-            Width = 93
+            Width = 77
             Caption = 'Color saturation'
             ParentColor = False
           end
@@ -338,7 +338,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 120
-            Width = 50
+            Width = 42
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -346,7 +346,7 @@ object f_config_display: Tf_config_display
             Left = 24
             Height = 14
             Top = 38
-            Width = 93
+            Width = 80
             Caption = 'Faint Stars Size '
             ParentColor = False
           end
@@ -1911,7 +1911,7 @@ object f_config_display: Tf_config_display
         object MagLabel: TRadioGroup
           Left = 16
           Height = 81
-          Top = 344
+          Top = 349
           Width = 221
           AutoFill = True
           Caption = 'Star Label'
@@ -1938,7 +1938,7 @@ object f_config_display: Tf_config_display
         object constlabel: TRadioGroup
           Left = 245
           Height = 81
-          Top = 344
+          Top = 349
           Width = 220
           AutoFill = True
           Caption = 'Constellation Label'
@@ -1965,8 +1965,8 @@ object f_config_display: Tf_config_display
         object Showlabelall: TCheckBox
           Left = 16
           Height = 21
-          Top = 37
-          Width = 124
+          Top = 49
+          Width = 107
           Caption = 'Display the labels'
           OnClick = ShowlabelallClick
           TabOrder = 0
@@ -1975,18 +1975,18 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 21
           Top = 5
-          Width = 286
+          Width = 239
           Caption = 'Display the chart information in the menu bar.'
           OnClick = ShowChartInfoClick
           TabOrder = 1
         end
         object GroupBox5: TGroupBox
           Left = 16
-          Height = 273
-          Top = 64
+          Height = 265
+          Top = 77
           Width = 477
           Caption = 'Label Object'
-          ClientHeight = 258
+          ClientHeight = 250
           ClientWidth = 473
           TabOrder = 2
           object Label237: TLabel
@@ -2003,7 +2003,7 @@ object f_config_display: Tf_config_display
             Left = 314
             Height = 14
             Top = 32
-            Width = 31
+            Width = 26
             Caption = 'Color'
             ParentColor = False
           end
@@ -2011,7 +2011,7 @@ object f_config_display: Tf_config_display
             Left = 313
             Height = 14
             Top = 16
-            Width = 31
+            Width = 27
             Caption = 'Label'
             ParentColor = False
           end
@@ -2083,7 +2083,7 @@ object f_config_display: Tf_config_display
             Left = 366
             Height = 14
             Top = 32
-            Width = 24
+            Width = 22
             Caption = 'Size'
             ParentColor = False
           end
@@ -2092,7 +2092,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 56
-            Width = 54
+            Width = 49
             Caption = 'Stars'
             OnClick = showlabelClick
             TabOrder = 0
@@ -2102,7 +2102,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 80
-            Width = 103
+            Width = 91
             Caption = 'Variable Stars'
             OnClick = showlabelClick
             TabOrder = 1
@@ -2112,7 +2112,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 104
-            Width = 101
+            Width = 87
             Caption = 'Multiple Stars'
             OnClick = showlabelClick
             TabOrder = 2
@@ -2122,7 +2122,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 128
-            Width = 69
+            Width = 62
             Caption = 'Nebulae'
             OnClick = showlabelClick
             TabOrder = 3
@@ -2132,7 +2132,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 152
-            Width = 100
+            Width = 87
             Caption = 'Solar System'
             OnClick = showlabelClick
             TabOrder = 4
@@ -2142,7 +2142,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 176
-            Width = 133
+            Width = 113
             Caption = 'Constellation name'
             OnClick = showlabelClick
             TabOrder = 5
@@ -2152,7 +2152,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 200
-            Width = 93
+            Width = 81
             Caption = 'Other labels'
             OnClick = showlabelClick
             TabOrder = 6
@@ -2162,7 +2162,7 @@ object f_config_display: Tf_config_display
             Left = 16
             Height = 21
             Top = 224
-            Width = 123
+            Width = 105
             Caption = 'Chart Information'
             OnClick = showlabelClick
             TabOrder = 7
@@ -2457,8 +2457,8 @@ object f_config_display: Tf_config_display
         object DrawAllStarLabel: TCheckBox
           Left = 26
           Height = 21
-          Top = 429
-          Width = 211
+          Top = 437
+          Width = 179
           Caption = 'Display labels for all star catalog'
           OnClick = DrawAllStarLabelClick
           TabOrder = 5
@@ -2466,11 +2466,20 @@ object f_config_display: Tf_config_display
         object Button9: TButton
           Left = 357
           Height = 25
-          Top = 429
+          Top = 433
           Width = 99
           Caption = 'Default'
           OnClick = Button9Click
           TabOrder = 6
+        end
+        object ShowTitle: TCheckBox
+          Left = 16
+          Height = 21
+          Top = 27
+          Width = 141
+          Caption = 'Show position in title bar'
+          OnClick = ShowTitleClick
+          TabOrder = 7
         end
       end
       object Page7: TTabSheet

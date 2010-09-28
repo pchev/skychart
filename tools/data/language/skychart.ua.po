@@ -3642,6 +3642,10 @@ msgstr "Показати планети на мапі"
 msgid "Show planets"
 msgstr "Показати планети"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Показати зорі"

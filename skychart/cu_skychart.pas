@@ -125,6 +125,7 @@ Tskychart = class (TComponent)
     procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep:string=blank):string;
+    function GetChartPos:string;
     property Image: TCanvas write SetImage;
 end;
 
@@ -3281,6 +3282,12 @@ begin
     end;
     result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart.min_ma)+sep+rsFOV2+
       detostr(cfgsc.fov*rad2deg);
+end;
+
+function Tskychart.GetChartPos:string;
+begin
+result:='C:'+armtostr(cfgsc.racentre*rad2deg/15)+blank+demtostr(cfgsc.decentre*rad2deg);
+result:=result+' L:'+demtostr(cfgsc.fov*rad2deg)
 end;
 
 end.

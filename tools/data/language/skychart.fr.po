@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-20 13:04+0200\n"
+"PO-Revision-Date: 2010-09-28 18:29+0200\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3641,6 +3641,10 @@ msgstr "Voir les planètes sur la carte"
 #: u_translation.rsshowplanets
 msgid "Show planets"
 msgstr "Voir les planètes"
+
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr "Afficher la position dans la barre de titre"
 
 #: u_translation.rsshowstars
 msgid "Show stars"

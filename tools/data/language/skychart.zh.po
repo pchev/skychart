@@ -3641,6 +3641,10 @@ msgstr "显示行星在星图"
 msgid "Show planets"
 msgstr "显示行星"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "显示恒星"

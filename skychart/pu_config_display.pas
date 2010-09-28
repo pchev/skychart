@@ -49,6 +49,7 @@ type
     Button9: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    ShowTitle: TCheckBox;
     Edit1: TEdit;
     Edit10: TEdit;
     Edit11: TEdit;
@@ -368,6 +369,7 @@ type
     procedure GalEqStyleChange(Sender: TObject);
     procedure GridStyleChange(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
+    procedure ShowTitleClick(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
     procedure StarButton6Click(Sender: TObject);
     procedure StarButton7Click(Sender: TObject);
@@ -646,6 +648,7 @@ constlabel.Items[1]:=rsAbbreviation;
 constlabel.Items[2]:=rsLatinName;
 Showlabelall.caption:=rsDisplayTheLa;
 ShowChartInfo.caption:=rsDisplayTheCh;
+ShowTitle.Caption:=rsShowPosition;
 GroupBox5.caption:=rsLabelObject;
 Label237.caption:=rsMagnitudeDif;
 Label252.caption:=rsColor;
@@ -1239,6 +1242,7 @@ begin
     else constlabel.ItemIndex:=1;
  Showlabelall.checked:=csc.Showlabelall;
  ShowChartInfo.checked:=cmain.ShowChartInfo;
+ ShowTitle.Checked:=cmain.ShowTitlePos;
  DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
 end;
 
@@ -1722,6 +1726,11 @@ begin
 cmain.ShowChartInfo:=ShowChartInfo.checked;
 end;
 
+procedure Tf_config_display.ShowTitleClick(Sender: TObject);
+begin
+cmain.ShowTitlePos:=ShowTitle.Checked;
+end;
+
 procedure Tf_config_display.labelmagChanged(Sender: TObject);
 begin
 if LockChange then exit;
@@ -1756,6 +1765,7 @@ cplot.LabelColor[7]:=clSilver;
 cplot.LabelSize[6]:=cplot.LabelSize[6]+2;
 csc.Showlabelall:=true;
 cmain.ShowChartInfo:=false;
+cmain.ShowTitlePos:=false;
 csc.DrawAllStarLabel:=false;
 csc.NameLabel:=false;
 csc.MagLabel:=false;

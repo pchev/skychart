@@ -1114,6 +1114,7 @@ resourcestring
   rsObjectPositi = 'Object position found in index, but no detail found in any '
     +'active catalog';
   rsInvalidPath = 'Invalid path: ';
+  rsShowPosition = 'Show position in title bar';
 
 implementation
 

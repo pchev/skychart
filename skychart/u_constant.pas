@@ -552,7 +552,7 @@ type
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight: integer;
-                PrintLandscape, ShowChartInfo, SyncChart :boolean;
+                PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
                 ImageLuminosity, ImageContrast : double;
@@ -1547,6 +1547,7 @@ ButtonStandard:=Source.ButtonStandard;
 ButtonNight:=Source.ButtonNight;
 PrintLandscape:=Source.PrintLandscape;
 ShowChartInfo:=Source.ShowChartInfo;
+ShowTitlePos:=Source.ShowTitlePos;
 SyncChart:=Source.SyncChart;
 maximized:=Source.maximized;
 updall:=Source.updall;
