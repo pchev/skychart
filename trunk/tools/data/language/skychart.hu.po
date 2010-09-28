@@ -4381,6 +4381,10 @@ msgstr "Bolygók megjelenítése a térképen"
 msgid "Show planets"
 msgstr "Bolygók mutatása"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 #, fuzzy
 #| msgid "Show Stars"

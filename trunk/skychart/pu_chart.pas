@@ -174,6 +174,7 @@ type
     FImageSetFocus: TnotifyEvent;
     FSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr2func;
+    FShowTitleMessage: Tstr2func;
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
@@ -286,6 +287,7 @@ type
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnShowTopMessage: Tstr2func read FShowTopMessage write FShowTopMessage;
+    property OnShowTitleMessage: Tstr2func read FShowTitleMessage write FShowTitleMessage;
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
@@ -504,7 +506,8 @@ try
     Identlabel.color:=sc.plot.cfgplot.color[0];
     Identlabel.font.color:=sc.plot.cfgplot.color[11];
     if sc.cfgsc.FindOk then ShowIdentLabel;
-    if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
+    if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
+    if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
     Image1.Cursor:=ChartCursor;
 end;
 finally

@@ -3638,6 +3638,10 @@ msgstr "Toon planeet op de kaart"
 msgid "Show planets"
 msgstr "Toon planeten"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Toon sterren"

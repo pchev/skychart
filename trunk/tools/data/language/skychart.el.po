@@ -3823,6 +3823,10 @@ msgstr "Εμφάνιση Πλανήτη στο Χάρτη"
 msgid "Show planets"
 msgstr "Εμφάνιση Πλανητών"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 #, fuzzy
 #| msgid "Show Stars"

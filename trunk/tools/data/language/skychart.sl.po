@@ -3640,6 +3640,10 @@ msgstr "Prikaži planet na karti"
 msgid "Show planets"
 msgstr "Prikaži planete"
 
+#: u_translation.rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Prikaži zvezde"

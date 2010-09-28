@@ -4382,3 +4382,7 @@ msgstr ""
 msgid "Invalid path: "
 msgstr ""
 
+#: u_translation:rsshowposition
+msgid "Show position in title bar"
+msgstr ""
+

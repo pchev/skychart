@@ -699,6 +699,7 @@ type
     Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string;sender:TObject);
+    Procedure SetTitleMessage(txt:string;sender:TObject);
     procedure updatebtn(fx,fy:integer;tc:boolean;sender:TObject);
     Function NewChart(cname:string):string;
     Function CloseChart(cname:string):string;
@@ -825,6 +826,7 @@ begin
   Child.onImageSetFocus:=ImageSetFocus;
   Child.onSetFocus:=SetChildFocus;
   Child.onShowTopMessage:=SetTopMessage;
+  Child.onShowTitleMessage:=SetTitleMessage;
   Child.OnUpdateBtn:=UpdateBtn;
   Child.OnChartMove:=ChartMove;
   Child.onShowInfo:=SetLpanel1;
@@ -845,7 +847,6 @@ begin
   Child.locked:=false;
   Child.lock_refresh:=false;
   Child.Refresh;
-  caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption ;
 end;
 
 procedure Tf_main.RefreshAllChild(applydef:boolean);
@@ -3459,6 +3460,15 @@ if MultiDoc1.ActiveObject=sender then begin
 end;
 end;
 
+Procedure Tf_main.SetTitleMessage(txt:string;sender:TObject);
+begin
+// set the message that appear in the title bar
+if MultiDoc1.ActiveObject=sender then begin
+  if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption+blank+blank+txt
+     else caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption;
+end;
+end;
+
 procedure Tf_main.FormResize(Sender: TObject);
 begin
 end;
@@ -3501,6 +3511,7 @@ cfgm.ImagePath:=slash(appDir)+slash('data')+slash('pictures');
 cfgm.ImageLuminosity:=0;
 cfgm.ImageContrast:=0;
 cfgm.ShowChartInfo:=false;
+cfgm.ShowTitlePos:=false;
 cfgm.SyncChart:=false;
 cfgm.ThemeName:='default';
 cfgm.ButtonStandard:=1;
@@ -4449,6 +4460,7 @@ if DirectoryExists(buf) then cfgm.ImagePath:=buf;
 cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
 cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
+cfgm.ShowTitlePos:=ReadBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
 cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
@@ -5014,6 +5026,7 @@ WriteString(section,'ImagePath',cfgm.ImagePath);
 WriteFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
 WriteFloat(section,'ImageContrast',cfgm.ImageContrast);
 WriteBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
+WriteBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 WriteBool(section,'SyncChart',cfgm.SyncChart);
 WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
@@ -6476,8 +6489,9 @@ end;
 procedure Tf_main.MultiDoc1ActiveChildChange(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject<>nil then begin
-   caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption;
-   (MultiDoc1.ActiveObject as Tf_chart).ChartActivate;
+   if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption+blank+blank+Tf_chart(MultiDoc1.ActiveObject).sc.GetChartPos
+      else caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption;
+   Tf_chart(MultiDoc1.ActiveObject).ChartActivate;
 end
 else
    caption:=basecaption;
