@@ -242,8 +242,10 @@ case curcat of
              result:=GetGcatS(rec);
              if not result then begin
                 result:=NewGcat;
-                if result then OpenGCatWin(result);
-                if result then result:=ReadStar(rec);
+                if result then begin
+                   OpenGCatWin(result);
+                   result:=ReadStar(rec);
+                end;
              end;
              end;
 end;
@@ -282,7 +284,14 @@ case curcat of
    dsbase  : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDSbasewin(result); end;
    dstyc   : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDStycwin(result); end;
    dsgsc   : begin SetDSPath(PChar(cfgcat.starcatpath[dsbase-BaseStar]),PChar(cfgcat.starcatpath[dstyc-BaseStar]),PChar(cfgcat.starcatpath[dsgsc-BaseStar])); OpenDSgscwin(result); end;
-   gcstar  : begin VerGCat:=rtStar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result);end;
+   gcstar  : begin
+                   VerGCat:=rtStar;
+                   CurGCat:=0;
+                   while NewGCat do begin
+                      OpenGCatWin(result);
+                      if result then break;
+                   end;
+             end;
    else result:=false;
 end;
 end;
@@ -335,8 +344,10 @@ case curcat of
              result:=GetGcatV(rec);
              if not result then begin
                 result:=NewGcat;
-                if result then OpenGCatWin(result);
-                if result then result:=ReadVarStar(rec);
+                if result then begin
+                   OpenGCatWin(result);
+                   result:=ReadVarStar(rec);
+                end;
              end;
              end;
 end;
@@ -355,7 +366,14 @@ begin
 InitRec(curcat);
 case curcat of
    gcvs    : begin SetGCVPath(PChar(cfgcat.varstarcatpath[gcvs-BaseVar])); OpenGCVwin(result); end;
-   gcvar   : begin VerGCat:=rtVar; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
+   gcvar   : begin
+                   VerGCat:=rtVar;
+                   CurGCat:=0;
+                   while NewGCat do begin
+                      OpenGCatWin(result);
+                      if result then break;
+                   end;
+             end;
    else result:=false;
 end;
 end;
@@ -396,8 +414,10 @@ case curcat of
              result:=GetGcatD(rec);
              if not result then begin
                 result:=NewGcat;
-                if result then OpenGCatWin(result);
-                if result then result:=ReadDblStar(rec);
+                if result then begin
+                   OpenGCatWin(result);
+                   result:=ReadDblStar(rec);
+                end;
              end;
              end;
 end;
@@ -416,7 +436,14 @@ begin
 InitRec(curcat);
 case curcat of
    wds     : begin SetWDSPath(PChar(cfgcat.dblstarcatpath[wds-BaseDbl])); OpenWDSwin(result); end;
-   gcdbl   : begin VerGCat:=rtDbl; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
+   gcdbl   : begin
+                  VerGCat:=rtDbl;
+                  CurGCat:=0;
+                  while NewGCat do begin
+                     OpenGCatWin(result);
+                     if result then break;
+                  end;
+             end;
    else result:=false;
 end;
 end;
@@ -464,8 +491,10 @@ case curcat of
              result:=GetGcatN(rec);
              if not result then begin
                 result:=NewGcat;
-                if result then OpenGCatWin(result);
-                if result then result:=ReadNeb(rec);
+                if result then begin
+                   OpenGCatWin(result);
+                   result:=ReadNeb(rec);
+                end;
              end;
              end;
 end;
@@ -491,7 +520,14 @@ case curcat of
    ocl     : begin SetoclPath(PChar(cfgcat.nebcatpath[ocl-BaseNeb])); Openoclwin(result); end;
    gcm     : begin SetgcmPath(PChar(cfgcat.nebcatpath[gcm-BaseNeb])); Opengcmwin(result); end;
    gpn     : begin SetgpnPath(PChar(cfgcat.nebcatpath[gpn-BaseNeb])); Opengpnwin(result); end;
-   gcneb  : begin VerGCat:=rtNeb; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
+   gcneb  : begin
+                   VerGCat:=rtNeb;
+                   CurGCat:=0;
+                   while NewGCat do begin
+                      OpenGCatWin(result);
+                      if result then break;
+                   end;
+            end;
    else result:=false;
 end;
 end;
@@ -538,8 +574,10 @@ case curcat of
              result:=GetGcatL(rec);
              if not result then begin
                 result:=NewGcat;
-                if result then OpenGCatWin(result);
-                if result then result:=ReadLin(rec);
+                if result then begin
+                   OpenGCatWin(result);
+                   result:=ReadLin(rec);
+                end;
              end;
              end;
 end;
@@ -557,7 +595,14 @@ function Tcatalog.OpenLinCat:boolean;
 begin
 InitRec(curcat);
 case curcat of
-   gclin  : begin VerGCat:=rtLin; CurGCat:=0; result:=NewGCat; if result then OpenGCatWin(result); end;
+   gclin  : begin
+                 VerGCat:=rtLin;
+                 CurGCat:=0;
+                 while NewGCat do begin
+                    OpenGCatWin(result);
+                    if result then break;
+                 end;
+             end;
    else result:=false;
 end;
 end;
@@ -2292,10 +2337,38 @@ if not nextobj then begin
    ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
    gcm     : OpenGCM(xx1,xx2,yy1,yy2,ok);
    gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
-   gcstar  : begin VerGCat:=rtStar; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
-   gcvar   : begin VerGCat:=rtVar; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
-   gcdbl   : begin VerGCat:=rtDbl; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
-   gcneb   : begin VerGCat:=rtNeb; CurGCat:=0; ok:=NewGCat; if ok then OpenGCat(xx1,xx2,yy1,yy2,ok);end;
+   gcstar  : begin
+             VerGCat:=rtStar;
+             CurGCat:=0;
+             while NewGCat do begin
+                 OpenGCat(xx1,xx2,yy1,yy2,ok);
+                 if result then break;
+             end;
+             end;
+   gcvar   : begin
+             VerGCat:=rtVar;
+             CurGCat:=0;
+             while NewGCat do begin
+                 OpenGCat(xx1,xx2,yy1,yy2,ok);
+                 if result then break;
+             end;
+             end;
+   gcdbl   : begin
+             VerGCat:=rtDbl;
+             CurGCat:=0;
+             while NewGCat do begin
+                 OpenGCat(xx1,xx2,yy1,yy2,ok);
+                 if result then break;
+             end;
+             end;
+   gcneb   : begin
+             VerGCat:=rtNeb;
+             CurGCat:=0;
+             while NewGCat do begin
+                 OpenGCat(xx1,xx2,yy1,yy2,ok);
+                 if result then break;
+             end;
+             end;
    else ok:=false;
   end;
   if not ok then begin result:=false; exit; end;
@@ -2356,7 +2429,7 @@ repeat
                 ok:=NewGcat;
                 if not ok then break;
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
-                if ok then ok:=GetGcatS(rec);
+                ok:=GetGcatS(rec);
              end;
              end;
    gcvar   : begin
@@ -2365,7 +2438,7 @@ repeat
                 ok:=NewGcat;
                 if not ok then break;
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
-                if ok then ok:=GetGcatV(rec);
+                ok:=GetGcatV(rec);
              end;
              end;
    gcdbl   : begin
@@ -2374,7 +2447,7 @@ repeat
                 ok:=NewGcat;
                 if not ok then break;
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
-                if ok then ok:=GetGcatD(rec);
+                ok:=GetGcatD(rec);
              end;
              end;
    gcneb   : begin
@@ -2383,7 +2456,7 @@ repeat
                 ok:=NewGcat;
                 if not ok then break;
                 OpenGCat(xx1,xx2,yy1,yy2,ok);
-                if ok then ok:=GetGcatN(rec);
+                ok:=GetGcatN(rec);
              end;
              radius:=GetRadius(rec);
              end;
