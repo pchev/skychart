@@ -32,7 +32,7 @@ uses Math, SysUtils, Classes, LCLType,
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
-    Controls, Process,
+    Controls, Process, FileUtil,
     MaskEdit,Menus,Spin,CheckLst,Buttons, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids;
 
@@ -99,6 +99,7 @@ function hextostr(str:string):string;
 procedure GetTranslationString(form: TForm; var f: textfile);
 function CondUTF8Decode(v:string):string;
 function CondUTF8Encode(v:string):string;
+function SafeUTF8ToSys(v:string):string;
 Function SetDate(year,month,day : word) : Tdatetime;
 Procedure GetDate(d : TDatetime; var year,month,day : word);
 Function RemoveLastDot(value : string) : string;
@@ -147,6 +148,12 @@ result:=v;
 {$else}
 result:=UTF8Encode(v);
 {$endif}
+end;
+
+function SafeUTF8ToSys(v:string):string;
+begin
+result:=UTF8ToSys(v);
+if result='' then result:=v;
 end;
 
 function Jd(annee,mois,jour :integer; Heure:double):double;

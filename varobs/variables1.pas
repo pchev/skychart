@@ -248,7 +248,7 @@ var f : textfile;
   aavsodesign,uncertain : boolean;
   varinfo : Tvarinfo;
 begin
-if not fileexists(planname) then begin
+if not FileExistsUTF8(planname) then begin
    Showmessage('File not found : '+planname);
    exit;
 end;
@@ -269,7 +269,7 @@ VarForm.Grid1.Cells[10,0]:='Minima';
 aavsodesign:=false;
 try
 r:=1;
-assignfile(f,planname);
+assignfile(f,SafeUTF8ToSys(planname));
 reset(f);
 //decodetime(varform.timepicker1.time,hh,mi,ss,mss);
 getdate(varform.DateEdit1.date,y1,m1,d1);
@@ -697,7 +697,7 @@ var  inifile : Tinifile;
      i : integer;
 begin
 planname:=slash(privatedir)+'aavsoeasy.dat';
-if not fileexists(planname) then begin
+if not FileExistsUTF8(planname) then begin
   CopyFile(slash(appdir)+slash('data')+slash('sample')+'aavsoeasy.dat',planname,true);
 end;
 defqlurl:='http://www.aavso.org/cgi-bin/newql.pl?name=$star&output=votable';
@@ -1028,7 +1028,7 @@ end;
 
 procedure TVarForm.Editeph1Click(Sender: TObject);
 begin
-  ExecuteFile(planname);
+  ExecuteFile(SafeUTF8ToSys(planname));
 end;
 
 procedure TVarForm.Lightcurve1Click(Sender: TObject);
