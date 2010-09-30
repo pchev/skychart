@@ -206,7 +206,7 @@ end;
 
 procedure TObsForm.EditbtnClick(Sender: TObject);
 begin
-  ExecuteFile(FilenameEdit1.text);
+  ExecuteFile(SafeUTF8ToSys(FilenameEdit1.text));
 end;
 
 procedure TObsForm.AddClick(Sender: TObject);
@@ -266,7 +266,7 @@ var f : textfile;
     i : integer;
     fn,buf : string;
 begin
-fn:=FilenameEdit1.text;
+fn:=SafeUTF8ToSys(FilenameEdit1.text);
 if optform.RadioGroup7.ItemIndex=0 then begin
   try
   assignfile(f,fn);
