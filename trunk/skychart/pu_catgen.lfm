@@ -3,7 +3,7 @@ object f_catgen: Tf_catgen
   Height = 479
   Top = 94
   Width = 503
-  ActiveControl = StringGrid4
+  ActiveControl = CheckListBox1
   BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -2901,10 +2901,10 @@ object f_catgen: Tf_catgen
     Height = 438
     Top = 0
     Width = 389
-    ActivePage = TabSheet8
+    ActivePage = TabSheet3
     Align = alClient
     ShowTabs = False
-    TabIndex = 7
+    TabIndex = 2
     TabOrder = 0
     OnPageChanged = PageControl1PageChanged
     object TabSheet1: TTabSheet
@@ -3496,11 +3496,10 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 0
+        ItemHeight = 19
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
-        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3559,6 +3558,7 @@ object f_catgen: Tf_catgen
         Top = 318
         Width = 351
         Font.Height = -11
+        Font.Name = 'courier'
         Font.Pitch = fpFixed
         HideSelection = False
         OnMouseUp = Memo1MouseUp
@@ -3819,7 +3819,7 @@ object f_catgen: Tf_catgen
         Left = 70
         Height = 14
         Top = 24
-        Width = 187
+        Width = 157
         Caption = 'Indicate the string for each color'
         ParentColor = False
       end
@@ -3906,7 +3906,7 @@ object f_catgen: Tf_catgen
         Left = 6
         Height = 14
         Top = 64
-        Width = 145
+        Width = 122
         Caption = 'Click to change the color '
         ParentColor = False
       end
