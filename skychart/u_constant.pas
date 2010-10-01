@@ -249,7 +249,7 @@ const cdcversion = 'Version 3.1 svn';
       URL_HTTPAsteroidElements3 = '**http://www.minorplanetcenter.org/iau/Ephemerides/Distant/Soft00Distant.txt';
       URL_MPCORBAsteroidElements = 'http://www.minorplanetcenter.org/iau/MPCORB/MPCORB.DAT';
       URL_MPCORBAsteroidElements2 = 'http://www.astro.cz/mpcorb/MPCORB.DAT';
-      URL_CDCAsteroidElements = 'http://www.ap-i.net/skychart/data/mpc5000.dat';
+      URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
       
       URL_DSS_NAME1 = 'DSS 1';
       URL_DSS1 = 'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS1&mime-type=display/gz-fits';
