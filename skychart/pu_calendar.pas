@@ -216,6 +216,9 @@ date1.JD:=jdd(yy,mm,dd,0);
 date2.JD:=date1.JD+5;
 time.Time:=now;
 initial:=true;
+{$ifdef mswindows}
+SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
+{$endif}
 end;
 
 procedure Tf_calendar.FormCloseQuery(Sender: TObject; var CanClose: Boolean);

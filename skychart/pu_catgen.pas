@@ -570,6 +570,9 @@ cells[0,9]:='Magenta,M,9';
 cells[0,10]:='Turquoise,T,10';
 end;
 SetLang;
+{$ifdef mswindows}
+SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
+{$endif}
 end;
 
 

@@ -750,6 +750,17 @@ object f_info: Tf_info
           MoveCaret = False
           Option = 0
           Priority = 0
+        end      
+        item
+          Shift = []
+          ShiftMask = []
+          Button = mbLeft
+          ClickCount = ccSingle
+          ClickDir = cdDown
+          Command = 9
+          MoveCaret = False
+          Option = 0
+          Priority = 0
         end>
       Lines.Strings = (
         'Memo1'
