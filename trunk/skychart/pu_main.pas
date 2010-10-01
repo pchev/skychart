@@ -4483,8 +4483,12 @@ if Pos('cfa-www.harvard.edu',buf)=0 then begin   // Old MPC URL, ignore saved co
   end;
   j:=ReadInteger(section,'AsteroidUrlCount',0);
   if j>0 then begin
-     cfgm.AsteroidUrlList.Clear;
-     for i:=1 to j do cfgm.AsteroidUrlList.Add(ReadString(section,'AsteroidUrl'+inttostr(i),''));
+    cfgm.AsteroidUrlList.Clear;
+    for i:=1 to j do begin
+      buf:=ReadString(section,'AsteroidUrl'+inttostr(i),'');
+      if Pos('ap-i.net',buf)>0 then buf:=URL_CDCAsteroidElements; // change mpc5000 file location
+      cfgm.AsteroidUrlList.Add(buf);
+    end;
   end;
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
