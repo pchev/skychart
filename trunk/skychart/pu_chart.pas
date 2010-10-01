@@ -1381,7 +1381,7 @@ if showdist then begin
       dy:=rad2deg*(dec-lastdec);
       txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
-      buf:=rsFrom+' "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
+      buf:=rsFrom+':  "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
       txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
       if sc.cfgsc.ManualTelescope then begin
