@@ -195,6 +195,9 @@ begin
  page4.Align:=alClient;
  SetLang;
  Fnightvision:=false;
+ {$ifdef mswindows}
+ SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
+ {$endif}
 end;
 
 procedure Tf_info.Memo1DblClick(Sender: TObject);

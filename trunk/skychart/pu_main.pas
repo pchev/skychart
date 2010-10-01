@@ -1560,6 +1560,7 @@ isWin98:=false;
     MenuItem6.Visible:=false;
     if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
   end;
+  SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
 {$ifdef unix}
   step:='Unix specific';
