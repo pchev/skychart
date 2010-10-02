@@ -29,10 +29,10 @@ object f_config_system: Tf_config_system
       Height = 480
       Top = 1
       Width = 488
-      ActivePage = Page1
+      ActivePage = Page3
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
@@ -70,7 +70,7 @@ object f_config_system: Tf_config_system
             Left = 13
             Height = 14
             Top = 12
-            Width = 84
+            Width = 72
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
@@ -79,7 +79,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 14
           Top = 0
-          Width = 88
+          Width = 73
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -237,7 +237,7 @@ object f_config_system: Tf_config_system
             Left = 203
             Height = 14
             Top = 8
-            Width = 123
+            Width = 105
             Caption = 'URL launch command'
             ParentColor = False
           end
@@ -345,7 +345,7 @@ object f_config_system: Tf_config_system
             Left = 362
             Height = 14
             Top = 28
-            Width = 28
+            Width = 23
             Caption = 'Port:'
             ParentColor = False
           end
@@ -353,7 +353,7 @@ object f_config_system: Tf_config_system
             Left = 178
             Height = 14
             Top = 28
-            Width = 68
+            Width = 56
             Caption = 'Host Name:'
             ParentColor = False
           end
@@ -361,7 +361,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 14
             Top = 28
-            Width = 58
+            Width = 48
             Caption = 'DB Name:'
             ParentColor = False
           end
@@ -369,7 +369,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 14
             Top = 3
-            Width = 84
+            Width = 74
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end
@@ -446,6 +446,25 @@ object f_config_system: Tf_config_system
         Caption = 'Page3'
         ClientHeight = 476
         ClientWidth = 484
+        object ASCOMPanel: TPanel
+          Left = 8
+          Height = 328
+          Top = 101
+          Width = 452
+          ClientHeight = 328
+          ClientWidth = 452
+          TabOrder = 4
+          object ASCOMLabel: TLabel
+            Left = 21
+            Height = 232
+            Top = 24
+            Width = 401
+            AutoSize = False
+            Caption = 'ASCOMLabel'
+            ParentColor = False
+            WordWrap = True
+          end
+        end
         object TelescopePlugin: TPanel
           Left = 8
           Height = 328
@@ -504,7 +523,7 @@ object f_config_system: Tf_config_system
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 24
+            ClientHeight = 37
             ClientWidth = 357
             Columns = 2
             Items.Strings = (
@@ -888,25 +907,6 @@ object f_config_system: Tf_config_system
           )
           OnClick = TelescopeSelectClick
           TabOrder = 0
-        end
-        object ASCOMPanel: TPanel
-          Left = 8
-          Height = 328
-          Top = 101
-          Width = 452
-          ClientHeight = 328
-          ClientWidth = 452
-          TabOrder = 4
-          object ASCOMLabel: TLabel
-            Left = 21
-            Height = 232
-            Top = 24
-            Width = 401
-            AutoSize = False
-            Caption = 'ASCOMLabel'
-            ParentColor = False
-            WordWrap = True
-          end
         end
       end
       object Page4: TTabSheet
