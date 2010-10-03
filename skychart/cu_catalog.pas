@@ -1238,6 +1238,7 @@ repeat
              if result then continue;
   end;
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
+  if not rec.neb.valid[vnDim1] then rec.neb.dim1:=rec.options.Size;
   if cfgshr.NebFilter and
      rec.neb.valid[vnDim1] and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
