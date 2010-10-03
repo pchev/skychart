@@ -58,6 +58,7 @@ type
     MenuItem27: TMenuItem;
     MenuItem29: TMenuItem;
     MenuItem30: TMenuItem;
+    ThemeTimer: TTimer;
     TimeVal: TUpDown;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
@@ -466,6 +467,7 @@ type
     procedure SetupTimeExecute(Sender: TObject);
     procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ThemeTimerTimer(Sender: TObject);
     procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
@@ -1017,7 +1019,7 @@ try
 {$ifdef trace_debug}
  WriteTrace('Enter Tf_main.FormShow');
 {$endif}
- if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
+ if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then ThemeTimer.Enabled:=true;
  InitFonts;
  SetLpanel1('');
  // ensure a first chart is draw, even if it usually result in a double refresh on launch
@@ -1179,14 +1181,7 @@ end;
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
     end;
  end;
- if nightvision then begin
-    {$ifdef trace_debug}
-     WriteTrace('Night vision');
-    {$endif}
-    nightvision:=false;
-    ToolButtonNightVisionClick(self);
- end;
-{$ifdef trace_debug}
+ {$ifdef trace_debug}
  WriteTrace('Read params');
 {$endif}
  ProcessParams2;
@@ -2857,6 +2852,19 @@ procedure Tf_main.TConnectMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupSystemPage(2);
+end;
+
+procedure Tf_main.ThemeTimerTimer(Sender: TObject);
+begin
+ThemeTimer.Enabled:=false;
+  if nightvision then begin
+      {$ifdef trace_debug}
+       WriteTrace('Night vision');
+      {$endif}
+     ToolButtonNightVision.Down:=nightvision;
+     NightVision1.Checked:=nightvision;
+   end;
+   if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then SetTheme;
 end;
 
 procedure Tf_main.ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -6359,17 +6367,17 @@ begin
  else
     SetButtonImage(cfgm.ButtonStandard);
 
- if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
+(* if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur') then begin
    if lclver<'0.9.29' then CursorImage1.FreeImage;
    CursorImage1.Free;
    CursorImage1:=TCursorImage.Create;
    CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur'));
-   inc(crRetic);
+ //  inc(crRetic);
    Screen.Cursors[crRetic]:=CursorImage1.Handle;
    for i:=0 to MultiDoc1.ChildCount-1 do
         if MultiDoc1.Childs[i].DockedObject is Tf_chart then
            Tf_chart(MultiDoc1.Childs[i].DockedObject).ChartCursor:=crRetic;
- end;
+ end;  *)
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
     compass.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp'));
