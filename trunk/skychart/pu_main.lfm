@@ -7874,4 +7874,10 @@ object f_main: Tf_main
     left = 80
     top = 360
   end
+  object ThemeTimer: TTimer
+    Enabled = False
+    OnTimer = ThemeTimerTimer
+    left = 288
+    top = 360
+  end
 end
