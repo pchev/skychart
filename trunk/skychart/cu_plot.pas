@@ -131,6 +131,9 @@ type
       Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
       Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
       Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
 //---------------------------------------------
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
@@ -828,6 +831,10 @@ begin
   if not cfgplot.Invisible then  // if its above the horizon...
     begin
       case Atyp of
+         -1: // special case equating to catalog entry of '-' or 'PD'
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          0: // unknown - general case where catalog entry is '?' or spaces
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
 //        1:  // galaxy - not called from here, they are plotted back in cu_skychart.DrawDeepSkyObject
           2:  // open cluster
             PlotDSOOcl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
@@ -853,10 +860,13 @@ begin
             PlotDSOGxyCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
           13: // dark nebula
             PlotDSODN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
-          0: // unknown - general case where catalog entry is '?' or spaces
-            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
-         -1: // special case equating to catalog entry of '-' or 'PD'
-            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          14 : // Circle
+            PlotDSOCircle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          15 : // Rectangle
+            PlotDSORectangle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          16 : // lozenge
+            PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+         else PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
       end;
     end;
 end;
@@ -3222,6 +3232,103 @@ begin
   cnv.Pen.Style := psSolid;
 
 end;
+
+Procedure TSplot.PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+ Plot a circle
+}
+var
+  sz: Double;
+  ds,xx,yy : Integer;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(max(sz,4*cfgchart.drawpen));
+
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.Color[7];
+  cnv.Brush.Style := bsClear;
+
+// Plotted as a circle, so there's no difference between line and graphics mode
+
+  cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+Procedure TSplot.PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+ Plot a circle
+}
+var
+  sz: Double;
+  ds,xx,yy : Integer;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(max(sz,4*cfgchart.drawpen));
+
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.Color[7];
+  cnv.Brush.Style := bsClear;
+
+// Plotted as a circle, so there's no difference between line and graphics mode
+
+  cnv.Rectangle(xx-ds,yy-ds,xx+ds,yy+ds);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+Procedure TSplot.PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+{
+ Plot a circle
+}
+var
+  sz: Double;
+  ds,xx,yy : Integer;
+begin
+// set defaults
+  xx:=round(Ax);
+  yy:=round(Ay);
+
+  sz:=APixScale*Adim/2;                         // calc size
+  ds:=round(max(sz,4*cfgchart.drawpen));
+
+  cnv.Pen.Mode:=pmCopy;
+  cnv.Pen.Style := psSolid;
+  cnv.Pen.Color := cfgplot.Color[7];
+  cnv.Brush.Style := bsClear;
+
+// Plotted as a circle, so there's no difference between line and graphics mode
+
+  cnv.polygon([point(xx,yy-ds),
+         point(xx+ds,yy),
+         point(xx,yy+ds),
+         point(xx-ds,yy),
+         point(xx,yy-ds)]);
+
+// reset brush and pen back to default ready for next object
+  cnv.Brush.Style := bsClear;
+  cnv.Pen.Style := psSolid;
+
+end;
+
+
+
 
 end.
 
