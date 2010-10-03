@@ -2343,7 +2343,7 @@ if not nextobj then begin
              CurGCat:=0;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
-                 if result then break;
+                 if ok then break;
              end;
              end;
    gcvar   : begin
@@ -2351,7 +2351,7 @@ if not nextobj then begin
              CurGCat:=0;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
-                 if result then break;
+                 if ok then break;
              end;
              end;
    gcdbl   : begin
@@ -2359,7 +2359,7 @@ if not nextobj then begin
              CurGCat:=0;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
-                 if result then break;
+                 if ok then break;
              end;
              end;
    gcneb   : begin
@@ -2367,7 +2367,7 @@ if not nextobj then begin
              CurGCat:=0;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
-                 if result then break;
+                 if ok then break;
              end;
              end;
    else ok:=false;

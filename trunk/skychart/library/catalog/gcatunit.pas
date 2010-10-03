@@ -195,7 +195,8 @@ var
    SMname,NomFich,Catname : string;
    hemislst : array[1..9537] of char;
    zonelst,SMlst : array[1..9537] of integer;
-   FileIsOpen : Boolean = false;
+   FileBIsOpen : Boolean = false;
+   FileTIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
 Procedure InitRec;
@@ -496,10 +497,13 @@ Procedure CloseRegion;
 begin
 {$I-}
 try
-if fileisopen then begin
-FileisOpen:=false;
-if cattype=1 then closefile(f)
-             else closefile(ft);
+if FileBIsOpen then begin
+  FileBIsOpen:=false;
+  closefile(f);
+end;
+if FileTIsOpen then begin
+  FileTIsOpen:=false;
+  closefile(ft);
 end;
 except
 end;
@@ -513,13 +517,13 @@ if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
 FileMode:=0;
 if cattype=1 then begin
    AssignFile(f,nomfich);
-   FileisOpen:=true;
+   FileBIsOpen:=true;
    reset(f,1);
    ok:=true;
    if filesize(f)=0 then NextGCat(ok);
 end else begin
    AssignFile(ft,nomfich);
-   FileisOpen:=true;
+   FileTIsOpen:=true;
    reset(ft);
    ok:=true;
 end;
@@ -531,18 +535,20 @@ begin
 str(S:4,nomreg);
 str(abs(zone):4,nomzone);
 if cattype=1 then begin
-case catheader.filenum of
-    1      : nomfich:=GCatpath+slashchar+catname+'.dat';
-    50     : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,2)+'.dat';
-    184    : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,3)+'.dat';
-    732    : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,3)+'.dat';
-    9537   : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
-end;
+    case catheader.filenum of
+      1      : nomfich:=GCatpath+slashchar+catname+'.dat';
+      50     : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,2)+'.dat';
+      184    : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,3)+'.dat';
+      732    : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,3)+'.dat';
+      9537   : nomfich:=GCatpath+slashchar+hemis+padzeros(nomzone,4)+slashchar+catname+padzeros(nomreg,4)+'.dat';
+    end;
+    SMname:=nomreg;
+    if FileBIsOpen then CloseRegion;
 end else begin
-  nomfich:=GCatpath+slashchar+catheader.TxtFileName;
+    nomfich:=GCatpath+slashchar+catheader.TxtFileName;
+    SMname:=nomreg;
+    if FileTIsOpen then CloseRegion;
 end;
-SMname:=nomreg;
-if fileisopen then CloseRegion;
 OpenFile(nomfich,ok);
 end;
 
@@ -572,12 +578,12 @@ var n : integer;
 begin
 ok:=true;
 lin:=emptyrec;
-if not FileIsOpen then begin
-  ok:=false;
-  exit;
-end;
 case cattype of
 1 : begin  // binary catalog
+  if not FileBIsOpen then begin
+    ok:=false;
+    exit;
+  end;
   if eof(f) then NextGCat(ok);
   if ok then begin
    blockread(f,datarec,catheader.reclen,n);
@@ -671,6 +677,10 @@ case cattype of
   end;
   end;
 2: begin // text file, positional
+   if not FileTIsOpen then begin
+     ok:=false;
+     exit;
+   end;
   if eof(ft) then NextGCat(ok);
   if ok then begin
     readln(ft,dataline);
