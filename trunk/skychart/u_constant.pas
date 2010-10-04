@@ -71,7 +71,7 @@ const cdcversion = 'Version 3.1 svn';
       secarc = deg2rad/3600;
       musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test
       abek = secarc*20.49552;  // aberration constant
-      FovMin = 2*secarc;  // 2"
+      FovMin = 2*secarc;  // 2 seconds
       FovMax = pi2;
       DefaultPrtRes = 300;
       encryptpwd = 'zh6Tiq4h;90uA3.ert';
@@ -242,13 +242,13 @@ const cdcversion = 'Version 3.1 svn';
       URL_BugTracker = 'http://www.ap-i.net/mantis/';
       
       URL_HTTPCometElements = 'http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt';
-      URL_HTTPCometElements2 = 'http://www.astro.cz/mpcorb/COMET.DAT';
-      URL_FTPCometElements = '**ftp://cfa-ftp.harvard.edu/pub/MPCORB/COMET.DAT';
-      URL_HTTPAsteroidElements1 = '**http://www.minorplanetcenter.org/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
+      URL_HTTPCometElements2 = 'http://www.minorplanetcenter.org/iau/MPCORB/CometEls.txt';
+      URL_FTPCometElements = '**';
+      URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
       URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Unusual/Soft00Unusual.txt';
-      URL_HTTPAsteroidElements3 = '**http://www.minorplanetcenter.org/iau/Ephemerides/Distant/Soft00Distant.txt';
+      URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Distant/Soft00Distant.txt';
       URL_MPCORBAsteroidElements = 'http://www.minorplanetcenter.org/iau/MPCORB/MPCORB.DAT';
-      URL_MPCORBAsteroidElements2 = 'http://www.astro.cz/mpcorb/MPCORB.DAT';
+      URL_MPCORBAsteroidElements2 = '**';
       URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
       
       URL_DSS_NAME1 = 'DSS 1';
