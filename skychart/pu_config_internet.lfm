@@ -54,7 +54,7 @@ object f_config_internet: Tf_config_internet
             Left = 30
             Height = 21
             Top = 11
-            Width = 113
+            Width = 101
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -103,7 +103,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 14
               Top = 105
-              Width = 57
+              Width = 51
               Caption = 'Password'
               ParentColor = False
             end
@@ -111,7 +111,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 14
               Top = 61
-              Width = 65
+              Width = 54
               Caption = 'User Name'
               ParentColor = False
             end
@@ -119,7 +119,7 @@ object f_config_internet: Tf_config_internet
               Left = 227
               Height = 14
               Top = 17
-              Width = 59
+              Width = 51
               Caption = 'Proxy port'
               ParentColor = False
             end
@@ -127,7 +127,7 @@ object f_config_internet: Tf_config_internet
               Left = 22
               Height = 14
               Top = 17
-              Width = 61
+              Width = 53
               Caption = 'Proxy host'
               ParentColor = False
             end
@@ -146,7 +146,7 @@ object f_config_internet: Tf_config_internet
             Left = 39
             Height = 14
             Top = 60
-            Width = 127
+            Width = 112
             Caption = 'Anonymous password'
             ParentColor = False
           end
@@ -154,7 +154,7 @@ object f_config_internet: Tf_config_internet
             Left = 39
             Height = 21
             Top = 18
-            Width = 125
+            Width = 111
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
@@ -172,7 +172,7 @@ object f_config_internet: Tf_config_internet
           Left = 20
           Height = 21
           Top = 350
-          Width = 296
+          Width = 255
           Caption = 'Ask confirmation before any Internet connection'
           OnClick = CheckBox1Click
           TabOrder = 2
@@ -186,7 +186,7 @@ object f_config_internet: Tf_config_internet
           Left = 28
           Height = 14
           Top = 23
-          Width = 282
+          Width = 235
           Caption = 'Comet elements in MPC format (one URL by line) '
           ParentColor = False
         end
@@ -194,7 +194,7 @@ object f_config_internet: Tf_config_internet
           Left = 28
           Height = 14
           Top = 196
-          Width = 288
+          Width = 243
           Caption = 'Asteroid elements in MPC format (one URL by line)'
           ParentColor = False
         end
@@ -217,9 +217,9 @@ object f_config_internet: Tf_config_internet
           TabOrder = 4
         end
         object comdefault: TButton
-          Left = 393
+          Left = 371
           Height = 25
-          Top = 148
+          Top = 150
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
@@ -227,9 +227,9 @@ object f_config_internet: Tf_config_internet
           TabOrder = 3
         end
         object astdefault: TButton
-          Left = 393
+          Left = 371
           Height = 25
-          Top = 324
+          Top = 326
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
@@ -237,19 +237,19 @@ object f_config_internet: Tf_config_internet
           TabOrder = 8
         end
         object brightneo: TButton
-          Left = 254
+          Left = 151
           Height = 25
-          Top = 324
-          Width = 130
+          Top = 326
+          Width = 120
           BorderSpacing.InnerBorder = 4
           Caption = 'Bright + NEO + TNO'
           OnClick = brightneoClick
           TabOrder = 7
         end
         object mpcorb: TButton
-          Left = 16
+          Left = 151
           Height = 25
-          Top = 324
+          Top = 358
           Width = 120
           BorderSpacing.InnerBorder = 4
           Caption = 'MPCORB > 70Mb!'
@@ -257,9 +257,9 @@ object f_config_internet: Tf_config_internet
           TabOrder = 5
         end
         object comhttp: TButton
-          Left = 297
+          Left = 275
           Height = 25
-          Top = 148
+          Top = 150
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Http'
@@ -267,47 +267,50 @@ object f_config_internet: Tf_config_internet
           TabOrder = 2
         end
         object comftp: TButton
-          Left = 200
+          Left = 178
           Height = 25
-          Top = 148
+          Top = 150
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'MPC Ftp'
           OnClick = comftpClick
           TabOrder = 1
+          Visible = False
         end
         object astcdc: TButton
-          Left = 145
+          Left = 30
           Height = 25
-          Top = 324
-          Width = 100
+          Top = 326
+          Width = 106
           BorderSpacing.InnerBorder = 4
           Caption = 'First 5000'
           OnClick = astcdcClick
           TabOrder = 6
         end
         object Button4: TButton
-          Left = 84
+          Left = 62
           Height = 25
-          Top = 148
+          Top = 150
           Width = 91
           Caption = 'astro.cz HTTP'
           OnClick = Button4Click
           TabOrder = 9
+          Visible = False
         end
         object Button5: TButton
-          Left = 16
+          Left = 30
           Height = 25
           Top = 356
-          Width = 120
+          Width = 106
           Caption = 'astro.cz > 70MB!'
           OnClick = Button5Click
           TabOrder = 10
+          Visible = False
         end
         object astcdcneo: TButton
-          Left = 145
+          Left = 283
           Height = 25
-          Top = 356
+          Top = 358
           Width = 163
           Caption = 'First 5000 + NEO + TNO'
           OnClick = astcdcneoClick
