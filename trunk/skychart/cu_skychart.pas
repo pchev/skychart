@@ -325,6 +325,7 @@ end;
    WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
 {$endif}
 finally
+  Fcatalog.CloseCat;
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
      Fcatalog.cfgshr.StarFilter:=savfilter;
@@ -332,7 +333,6 @@ finally
   end;
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
-  Fcatalog.CloseCat;
 end;
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': end Refresh');

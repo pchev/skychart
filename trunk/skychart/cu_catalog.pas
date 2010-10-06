@@ -1136,15 +1136,16 @@ var GcatH : TCatHeader;
     v : integer;
 begin
 repeat
- inc(CurGCat);
- if CurGCat>cfgcat.GCatNum then begin
-    result:=false;
-    break;
- end;
- if cfgcat.GCatLst[CurGCat-1].CatOn then begin
-   SetGcatPath(PChar(cfgcat.GCatLst[CurGCat-1].path),PChar(cfgcat.GCatLst[CurGCat-1].shortname));
-   GetGCatInfo(GcatH,v,GCatFilter,result);
- end else result:=false;
+   inc(CurGCat);
+   if CurGCat>cfgcat.GCatNum then begin
+      result:=false;
+      exit;
+   end;
+   if cfgcat.GCatLst[CurGCat-1].CatOn then begin
+     SetGcatPath(PChar(cfgcat.GCatLst[CurGCat-1].path),PChar(cfgcat.GCatLst[CurGCat-1].shortname));
+     GetGCatInfo(GcatH,v,GCatFilter,result);
+   end else
+     result:=false;
 until result and (v=VerGCat);
 end;
 
