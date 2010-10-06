@@ -684,6 +684,7 @@ case cattype of
   if eof(ft) then NextGCat(ok);
   if ok then begin
     readln(ft,dataline);
+    dataline:=StringReplace(dataline,'°','d',[rfReplaceAll]);
     case catheader.RAmode of
     0 : begin
           lin.ra:=15*(Getfloat2(1,0)+Getfloat2(36,0)/60+Getfloat2(37,0)/3600);
