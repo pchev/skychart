@@ -5808,6 +5808,7 @@ var i,n,w,h : integer;
     child:TChildDoc;
 begin
 cmd:=trim(uppercase(arg[0]));
+for i:=1 to arg.Count-1 do arg[i]:=StringReplace(arg[i],'"','',[rfReplaceAll]);
 n:=-1;
 for i:=1 to numcmdmain do
    if cmd=maincmdlist[i,1] then begin

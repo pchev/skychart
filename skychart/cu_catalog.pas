@@ -2171,25 +2171,29 @@ begin
 end;
 
 function Tcatalog.SearchStarName(Num:string; var ar1,de1: double): boolean;
-var i,l,p: integer;
-    buf: string;
+var i,j,l,p: integer;
+    buf,sn: string;
+    snl: TStringList;
 begin
+snl:=TStringList.Create;
 buf:=uppercase(Num);
 result:=false;
 l:=MaxInt;
 for i:=0 to cfgshr.StarNameNum-1 do begin
-   p:=pos(buf,uppercase(cfgshr.StarName[i]));
-   if p=1 then begin
-      if p<=l then begin
-        Num:='HR'+inttostr(cfgshr.StarNameHR[i]);
-        result:=SearchStar(Num,ar1,de1);
-        if buf=uppercase(cfgshr.StarName[i]) then
-           break
-        else
-           l:=p;
-      end;
+   Splitarg(uppercase(cfgshr.StarName[i]),';',snl);
+   for j:=0 to snl.Count-1 do begin
+     sn:=trim(snl[j]);
+     p:=pos(buf,sn);
+     if p=1 then begin
+        if j<l then begin
+          Num:='HR'+inttostr(cfgshr.StarNameHR[i]);
+          result:=SearchStar(Num,ar1,de1);
+          if buf=sn then l:=j;
+        end;
+     end;
    end;
 end;
+snl.free;
 end;
 
 function Tcatalog.SearchStar(Num:string; var ar1,de1: double): boolean;
