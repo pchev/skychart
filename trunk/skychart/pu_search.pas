@@ -249,13 +249,14 @@ Id.text:='';
 end;
 
 function Tf_search.SearchNebName(Num:string; var ar1,de1: double): boolean;
-var i: integer;
+var i,p: integer;
     buf: string;
 begin
 buf:=uppercase(Num);
 result:=false;
 for i:=0 to NebNameBox.Items.Count-1 do begin
-   if pos(buf,uppercase(NebNameBox.Items[i]))>0 then begin
+   p:=pos(buf,uppercase(NebNameBox.Items[i]));
+   if p=1 then begin
       ar1:=NebNameAR[i];
       de1:=NebNameDE[i];
       result:=true;
