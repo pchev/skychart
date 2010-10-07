@@ -287,6 +287,7 @@ case curcat of
    gcstar  : begin
                    VerGCat:=rtStar;
                    CurGCat:=0;
+                   result:=false;
                    while NewGCat do begin
                       OpenGCatWin(result);
                       if result then break;
@@ -369,6 +370,7 @@ case curcat of
    gcvar   : begin
                    VerGCat:=rtVar;
                    CurGCat:=0;
+                   result:=false;
                    while NewGCat do begin
                       OpenGCatWin(result);
                       if result then break;
@@ -439,6 +441,7 @@ case curcat of
    gcdbl   : begin
                   VerGCat:=rtDbl;
                   CurGCat:=0;
+                  result:=false;
                   while NewGCat do begin
                      OpenGCatWin(result);
                      if result then break;
@@ -523,6 +526,7 @@ case curcat of
    gcneb  : begin
                    VerGCat:=rtNeb;
                    CurGCat:=0;
+                   result:=false;
                    while NewGCat do begin
                       OpenGCatWin(result);
                       if result then break;
@@ -598,6 +602,7 @@ case curcat of
    gclin  : begin
                  VerGCat:=rtLin;
                  CurGCat:=0;
+                 result:=false;
                  while NewGCat do begin
                     OpenGCatWin(result);
                     if result then break;
@@ -2353,6 +2358,7 @@ if not nextobj then begin
    gcstar  : begin
              VerGCat:=rtStar;
              CurGCat:=0;
+             ok:=false;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
                  if ok then break;
@@ -2361,6 +2367,7 @@ if not nextobj then begin
    gcvar   : begin
              VerGCat:=rtVar;
              CurGCat:=0;
+             ok:=false;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
                  if ok then break;
@@ -2369,6 +2376,7 @@ if not nextobj then begin
    gcdbl   : begin
              VerGCat:=rtDbl;
              CurGCat:=0;
+             ok:=false;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
                  if ok then break;
@@ -2377,6 +2385,7 @@ if not nextobj then begin
    gcneb   : begin
              VerGCat:=rtNeb;
              CurGCat:=0;
+             ok:=false;
              while NewGCat do begin
                  OpenGCat(xx1,xx2,yy1,yy2,ok);
                  if ok then break;
