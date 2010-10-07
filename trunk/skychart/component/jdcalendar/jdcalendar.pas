@@ -510,8 +510,13 @@ var
   yy, mm, dd: word;
 begin
   inherited Create(Aowner);
+{$ifdef lclwince}
+  Width := 240;
+  Height := 110;
+{$else}
   Width := 290;
   Height := 160;
+{$endif}
   ColCount := 7;
   RowCount := 7;
   //Ctl3D:=false;
