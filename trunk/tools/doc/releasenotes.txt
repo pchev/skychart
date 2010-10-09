@@ -1,7 +1,10 @@
-Version 3.1 Release Notes
+Version 3.2 Release Notes
 
-This version is principally to fix all the blocking bug for a first stable release.
-But there is also a few functional change listed here.
+This is the first stable version of the new version 3.
+
+If you just upgrade from the version 2.76 I suggest you take a few time to read the new documentation, localy using the menu Help content, or online from http://www.ap-i.net/skychart/en/documentation/start
+
+It include the following change since the previous beta version:
 
 Integrated ASCOM Interface, can be used on Windows x64. 
 Support for INDI 0.6
@@ -20,4 +23,5 @@ Draw a small circle to indicate the search result.
 Many bug fix.
 
 The full change log is here:
-http://www.ap-i.net/mantis/changelog_page.php?project_id=1
+http://www.ap-i.net/mantis/changelog_page.php?project_id=1&version_id=14
+

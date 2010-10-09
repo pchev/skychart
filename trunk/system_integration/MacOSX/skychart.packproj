@@ -481,13 +481,13 @@
 						<key>IFPkgDescriptionTitle</key>
 						<string>Skychart</string>
 						<key>IFPkgDescriptionVersion</key>
-						<string>3.1</string>
+						<string>3.2</string>
 					</dict>
 				</dict>
 				<key>Display Information</key>
 				<dict>
 					<key>CFBundleGetInfoString</key>
-					<string>skychart Copyrights © 2009 </string>
+					<string>skychart Copyrights © 2010 </string>
 					<key>CFBundleIconFile</key>
 					<string></string>
 					<key>CFBundleIconFile Path Type</key>
@@ -497,7 +497,7 @@
 					<key>CFBundleName</key>
 					<string>Cartes du Ciel</string>
 					<key>CFBundleShortVersionString</key>
-					<string>3.1</string>
+					<string>3.2</string>
 				</dict>
 				<key>Options</key>
 				<dict>

@@ -1,5 +1,5 @@
 Skychart / Cartes du Ciel
-Version 3.1 SVN
+Version 3.2
 
 If you already have the version 2.76 installed you must install this file 
 in the same folder you already install the V2.76

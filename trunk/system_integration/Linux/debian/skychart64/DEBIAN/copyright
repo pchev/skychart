@@ -3,12 +3,12 @@ Copyright: GPL
 
 Information :
 Name        : skychart
-Version     : 3.0.1.6
+Version     : 3.2
 Release     : 1
 Group       : Sciences/Astronomy
 License     : GPL
 Packager    : Patrick Chevalley
-URL         : http://skychart.sourceforge.net
+URL         : http://skychart.origo.ethz.ch
 Summary     : Skychart / Cartes du Ciel planetarium software
 Description :
 Planetarium software for the advanced amateur astronomer.

@@ -1,5 +1,5 @@
 Skychart / Cartes du Ciel
-Version 3.1 SVN
+Version 3.2
 
 if you already run a previous beta version, your preference may be reset by this version.
 The user setting directory change from ~/.skychart to ~/Library/Application Support/skychart
