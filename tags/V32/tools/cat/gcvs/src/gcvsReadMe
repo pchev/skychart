@@ -1,0 +1,460 @@
+B/gcvs              General Catalogue of Variable Stars   (Samus+ 2007-2010)
+================================================================================
+General Catalog of Variable Stars (GCVS database, Version 2010Jan)
+     Samus N.N., Durlevich O.V., et al.
+    <Institute of Astronomy of Russian Academy of Sciences and Sternberg
+     State Astronomical Institute of the Moscow State University >
+================================================================================
+ADC_Keywords: Stars, variable; Combined data;
+
+Description:
+    The GCVS is the  only reference  source on  all known  variable stars.
+    This  version  contains   the   electronically-readable   version   as
+    distributed  by the Sternberg Astronomical  Institute and Institute of
+    Astronomy (Russian Acad.Sci.),   Moscow.  It  includes the  catalog of
+    variable stars, updated and completed with the Name-Lists of Variables
+    Stars  Nos.  67-79,  the NSV (New catalog of Suspected Variable stars)
+    and Supplement to the NSV  stars,   and  a  catalog  of  extragalactic
+    variables.   A cross-index makes possible  to find out identifications
+    between the GCVS and the NSV catalogue.
+
+Introduction:
+    The present improved electronic version of the GCVS4 Volumes I-V,
+    combined with Name-Lists of Variable Stars Nos.67-79 and NSV catalogue
+    and supplement
+    is also available from Sternberg Institute of Moscow University,
+    at ftp://ftp.sai.msu.su/pub/groups/cluster/gcvs/gcvs
+    or http://www.sai.msu.su/gcvs/gcvs/
+
+    gcvs_cat.dat is the combined computer-readable version of the GCVS4.2
+    Vols. I-III (Kholopov et al. 1985-1988) and Name-Lists of Variable
+    Stars Nos.67-79 published in the system introduced during the
+    preparation of the 4th GCVS edition; the stars are arranged in the
+    order of their names inside constellations. The total number of
+    designated variable stars has now reached 41638. Errors detected in
+    the printed Volumes I-III and in the Name-Lists were corrected; the
+    file includes also improved positional information, light elements,
+    classifications etc.
+
+    crossid.dat corresponds to Vol. IV of the GCVS4, and contains all
+    variables, including extragalactic variables, stars from the
+    Name-Lists, and stars suspected of variability since the compilation
+    of the NSV catalog and its supplement. The authors tried to provide
+    as complete lists as possible for the stars identified with the
+    catalogues HD, BD, CoD, CPD, BS, ADS and for the stars with
+    preliminary HV (Harvard Variable) designations; a list of the
+    catalogues mentioned is included in the file "abbrev.txt".
+
+    The final, Volume V (extragalactic variable stars) contains 10979
+    variable stars in 35 stellar systems (including the Magellanic Clouds,
+    the large galaxies in Andromeda and Triangulum, etc., see evs*.dat).
+
+
+File Summary:
+--------------------------------------------------------------------------------
+ FileName    Lrecl    Records    Explanations
+--------------------------------------------------------------------------------
+ReadMe         80        .   This file
+gcvs_cat.dat  162    41639   The GCVS Catalog (Vol. I-III, version 2010-Jan)
+gcvs_rem.dat   94    12464   Remarks on GCVS stars
+vartype.txt   121     1037   Description of GCVS Variability Types
+constel.txt    72       32   Numerical Codes for Constellations and Letters
+crossid.dat    48   179173   Cross-identifications (Vol. IV)
+abbrev.txt     77      256   Abbreviations of catalogues used in crossid.dat
+nsv_cat.dat   132    26017   The Suspected Variable stars and Supplement (2010)
+nsv_rem.dat    80    10782   Remarks on NSV (and Supplement) stars
+evs_cat.dat   160    10979   Extragalactic Variable Stars. Catalogue (Vol. V)
+evs_rem.dat    80     1936   Extragalactic Variable Stars. Remarks
+refs.dat       80    21673   References for all variables (GCVS, NSV, EVS)
+ref_abbr.txt  264      318   Abbreviations used for references
+--------------------------------------------------------------------------------
+
+See also:
+   http://www.sai.msu.su/groups/cluster/gcvs/gcvs/ : the GCVS Group Home Page
+   B/sn   : Asiago Supernova Catalogue (Barbon et al., 1999-2008)
+   II/256 : Sternberg Supernova Catalogue, 2004 version (Tsvetkov+, 2004)
+
+Byte-by-byte Description of file: gcvs_cat.dat
+--------------------------------------------------------------------------------
+  Bytes Format  Units  Label     Explanations
+--------------------------------------------------------------------------------
+   1-  6  I06   ---    VarNum    Numeric designation, made from constellation
+                                 and star names (codes in file "constel.txt")
+       7  A1    ---  m_VarNum    Component identification (1)
+   9- 18  A10   ---    GCVS      Variable star designation (G1)
+      19  A1    ---  n_GCVS      [*] indicates a remark in "gcvs_rem.dat" file
+  21- 22  I2    h      RAh       ? Hours RA, equinox J2000.0 (2)
+  23- 24  I2    min    RAm       ? Minutes RA, equinox J2000.0 (2)
+  25- 28  F4.1  s      RAs       ? Seconds RA, equinox J2000.0 (2)
+      29  A1    ---    DE-       ? Sign Dec, equinox J2000.0 (2)
+  30- 31  I2    deg    DEd       ? Degrees Dec, equinox J2000.0 (2)
+  32- 33  I2    arcmin DEm       ? Minutes Dec, equinox J2000.0 (2)
+  34- 35  I2    arcsec DEs       ? Seconds Dec, equinox J2000.0 (2)
+      36  A1    ---  u_DEs       [:*] position accuracy flags (3)
+  38- 47  A10   ---    VarType   Type of variability (see file "vartype.txt")
+      49  A1    ---  l_magMax    [<>(] Limit or amplitude symbol on magMax (G3)
+  50- 55  F6.3  mag    magMax    ? Magnitude at maximum brightness
+      56  A1    ---  u_magMax    Uncertainty flag (:) on magMax
+      57  A1    ---    ---       [)] ")" if magMax is an amplitude
+      59  A1    ---  l_magMin    [<(] Limit or amplitude symbol on magMin (G3)
+  60- 65  F6.3  mag    magMin    ? Minimum magnitude or amplitude
+      66  A1    ---  u_magMin    Uncertainty flag (:) on magMin
+  67- 68  A2    ---  n_magMin    Alternative photometric system for magMin (G4)
+      69  A1    ---    ---       [)] ")" if magMin is an amplitude
+  71- 72  A2    ---    flt       The photometric system for magnitudes (G4)
+  74- 86  F13.5 d      Epoch     ? Epoch for maximum light, Julian days (G5)
+      87  A1    ---  u_Epoch     [:+-] Uncertainty flag on Epoch (4)
+  89- 92  A4    ---    Year      Year of outburst for nova or supernova
+      93  A1    ---  u_Year      [:] Uncertainty flag on Year of outburst
+      95  A1    ---  l_Period    [<>(] Code for upper or lower limits (5)
+  96-111 F16.10 d      Period    ? Period of the variable star
+ 112-114  A3    ---  u_Period    [*/N)2: ] Uncertainties on Period (6)
+ 116-118  A3    %      M-m/D     ? Rising time or duration of eclipse (G6)
+     119  A1    ---  u_M-m/D     Uncertainty flag (:) on M-m/D
+     120  A1    ---  n_M-m/D     [*:] Note for eclipsing variable (G6)
+ 122-138  A17   ---    SpType    MK Spectral type
+ 140-144  A5    ---    Ref1      Reference to a study of the star (G7)
+ 146-150  A5    ---    Ref2      Reference to a chart or photograph (G7)
+     152  A1    ---  f_GCVS      [=N+] "N" if the star does not exist (7)
+ 153-162  A10   ---    VarName   Alternative name of the variable (G8)
+--------------------------------------------------------------------------------
+
+Note (1): designations of components of double/multiple stars :
+   A,B; 1,2,3  ... (tau 1). Usually only one component of the binary
+   is variable, but there exist two cases (CE Cas A,B; EQ Peg A,B) when
+   both components are variable and enter the catalogue as separate lines.
+
+Note (2):
+    the position is not listed when the variable is equivalent to another
+    catalogued variable (see column VarName)
+
+Note (3):
+    the asterisk (*) means that the coordinates that could not be improved
+    were recalculated from old rough coordinates to the equinox J2000.0
+    with allowance for precession.
+
+Note (4): the following codes are used:
+    ":" are used if the epoch is uncertain;
+    "+" epoch may be later than that reported;
+    "-" epoch may be earlier than that reported.
+
+Note (5):
+    ">" or "<" if period is a lower or upper limit, respectively.
+    "(" indicates that the period is the mean cycle time of a U Gem
+        or recurrent nova (a closing bracket exists in u_Period)
+
+Note (6): the codes are:
+  "*N" if the period may be a multiple of the quoted value;
+  "/N" if the period may be a fraction of the quoted value;
+   ")" closing bracket of l_Period for U Gem-type or recurrent novae.
+
+Note (7): Besides "N", the codes are:
+   "=" if the star is also known under another variable name
+   "+" if the star is in other catalogues (e.g. Hipparcos or Name Lists)
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: gcvs_rem.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 10  A10   ---     GCVS      Variable star designation
+  14- 94  A81   ---     Text      Text of note.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: crossid.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 30  A30   ---     Name      Alternative name (catalog or list acronym is
+                                  detailed in the file "abbrev.txt")
+      33  A1    ---     ---       [=]
+  34- 46  A13   ---     VarName   Designation in GCVS or NSV (G8)
+      48  A1    ---   u_VarName   [:?] Flag for doubtful identifications
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: nsv_cat.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label    Explanations
+--------------------------------------------------------------------------------
+   1-  5  I05   ---     NSV      NSV number (above 15000 for the Supplement)
+       6  A1    ---   m_NSV      NSV letter suffix (1)
+       7  A1    ---   u_NSV      [-] Dubitancy flag if a star's variability
+                                 seems doubtful or erroneous to the compilers
+       8  A1    ---   n_NSV      [*] indicate a remark in file "nsv.rem.dat"
+  10- 11  I2    h       RA1950h  ? Hours RA, equinox B1950.0 (2)
+  12- 13  I2    min     RA1950m  ? Minutes RA, equinox B1950.0 (2)
+  14- 17  F4.1  s       RA1950s  ? Seconds RA, equinox B1950.0 (2)
+      18  A1    ---     DE1950-  ? Sign Dec, equinox B1950.0 (2)
+  19- 20  I2    deg     DE1950d  ? Degrees Dec, equinox B1950.0 (2)
+  21- 22  I2    arcmin  DE1950m  ? Minutes Dec, equinox B1950.0 (2)
+  23- 24  I2    arcsec  DE1950s  ? Seconds Dec, equinox B1950.0 (2)
+      25  A1    ---   u_DE1950s  [:*] accuracy flags (G2)
+  27- 28  I2    h       RAh      ? Hours RA, equinox J2000.0 (2)
+  29- 30  I2    min     RAm      ? Minutes RA, equinox J2000.0 (2)
+  31- 34  F4.1  s       RAs      ? Seconds RA, equinox J2000.0 (2)
+      35  A1    ---     DE-      ? Sign Dec, equinox J2000.0 (2)
+  36- 37  I2    deg     DEd      ? Degrees Dec, equinox J2000.0 (2)
+  38- 39  I2    arcmin  DEm      ? Minutes Dec, equinox J2000.0 (2)
+  40- 41  I2    arcsec  DEs      ? Seconds Dec, equinox J2000.0 (2)
+      42  A1    ---   u_DEs      [:*] accuracy flags (G2)
+  44- 49  A6    ---     VarType  Type of variability (see file "vartype.txt")
+      51  A1    ---   l_magMax   [><(] Limit or amplitude symbol on magMax (G3)
+  52- 56  F5.2  mag     magMax   ? Magnitude at maximum brightness (3)
+      57  A1    ---   u_magMax   [:] Uncertainty flag on magMax
+      59  A1    ---   f_magMin   [(] indicates that magMin is an amplitude
+      60  A1    ---   l_magMin   [><] Limit symbol on magMin (G3)
+  61- 66  F6.3  mag     magMin   ? Minimum magnitude or amplitude (3)
+      67  A1    ---   u_magMin   [st:*] Uncertainty or steps on magMin (4)
+      68  A1    ---   n_magMin   Photometric system for magMin (G4)
+      69  A1    ---     ---      [)] ")" if magMin is an amplitude
+  71- 72  A2    ---     flt      Photometric system for magnitudes (G4)
+  74- 78  A5    ---     Ref1     Reference to a study of the star (G7)
+  80- 84  A5    ---     Ref2     Chart reference (G7)
+  86-100  A15   ---     Desig    Designation in paper referenced by Ref1 (5)
+ 102-117  A16   ---     SpType   Spectral type (6)
+     118  A1    ---   f_NSV      [=|] '=' for named variables.
+ 119-132  A14   ---     VarName  Designation in GCVS (G8)
+--------------------------------------------------------------------------------
+
+Note (1):
+    The letter "A" is present for one star, NSV 10360A, which is a
+    completely different object from NSV 10360.
+
+Note (2):
+   The position is not listed when the variable is equivalent to a GCVS
+   star (see column VarName).
+
+Note (3):
+    Magnitudes are reported to hundredths if the observations are
+    photoelectric, to tenths or whole magnitudes if they are not.
+    If only an amplitude has been measured photoelectrically, then
+    the maximum magnitude is generally given to tenths only and the
+    minimum is reported to hundredths.
+
+Note (4):
+    "st" indicates that a light amplitude is reported for the minimum
+    and is given in steps (instrumental measure).
+
+Note (5): (empty in the NSV Supplement part):
+    identification of the suspected variable in the paper referenced in
+    Ref1. DM numbers are given without prefix, the standard naming
+    convention of "The Henry Draper Catalogue" being used (BD for zones
+    +89 to -22; CD for -23 to -51; CP for -52 to -89). Identifications
+    are sometimes made of coordinates, a 6-digit number consisting of
+    hours, minutes, and seconds (or tenths of a minute) of time and
+    degrees of declination with sign included. An asterisk (*) signifies
+    that a designation is given in the remarks to the published catalog.
+
+Note (6):
+  HD spectral types are generally in brackets, e.g. (A0).
+  Some special symbols are used:
+       AF  for  A-F stars
+       FG  for  F-G stars
+       KM  for  K-M stars
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: nsv_rem.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label    Explanations
+--------------------------------------------------------------------------------
+   1-  5  I05   ---     NSV      NSV number (above 15000 for the Supplement)
+   6- 80  A75   ---     Text     Text of remark
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: evs_cat.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1-  7  I07   ---     VarNum    [890001/1230042] Variable number (1)
+   9- 20  A12   ---     Name      Variable star designation (3)
+      21  A1    ---   n_Name      [*] indicates a remark in file evs_rem.dat
+  22- 23  I2    h       RAh       Right ascension, equinox B1950.0
+  24- 25  I2    min     RAm       (minutes)
+  26- 30  F5.2  s       RAs       (seconds)
+      31  A1    ---     DE-       sign of declination, B1950.0
+  32- 33  I2    deg     DEd       Declination, equinox B1950.0
+  34- 35  I2    arcmin  DEm       (arc minutes)
+  36- 39  F4.1  arcsec  DEs       (arc seconds)
+      40  A1    ---   u_DEs       [":*!] accuracy flags on position (G2)
+  41- 48  A8    ---     VarType   Type of variability (see file vartype.txt)
+  49- 53  F5.2  mag     magMax    ? Magnitude at maximum brightness
+      54  A1    ---   u_magMax    Uncertainty flag (:) on magMax
+      55  A1    ---   l_magMin    [<(] Limit or amplitude symbol on magMax (G3)
+  56- 61  F6.3  mag     magMin    ? Magnitude at minimum brightness or amplitude
+      62  A1    ---   u_magMin    Uncertainty flag (:) on magMin
+      63  A1    ---     ---       [)] ")" if magMin is an amplitude
+      64  A1    ---     flt       The photometric system for magnitudes (G4)
+  65- 78  F14.6 d       Epoch     ? Epoch for maximum light, Julian days (G5)
+      79  A1    ---   u_Epoch     Uncertainty flag on Epoch
+      80  A1    ---   l_P         [(] if mean cycle time of U Gem-type variable
+  81- 93  F13.8 d       P         ? Period (mean for U Gem-type)
+      94  A1    ---   u_P         Uncertainty flag (:) on P
+      95  A1    ---     ---       [)] for U Gem-type variable
+  96- 97  I2    %       M-m/D     ? Rising time or duration of eclipse (G6)
+      98  A1    ---   u_M-m/D     Uncertainty flag (:) on M-m/D
+      99  A1    ---   n_M-m/D     [*] Note for eclipsing variable (G6)
+ 100-105  A6    ---     SpType    Spectral type (4)
+ 107-111  A5    ---     Ref1      Reference for study of the star (G7)
+ 112-116  A5    ---     Ref2      Reference for chart or photograph (G7)
+ 118-131  A14   ---     Desig1    designation in paper Ref1
+ 132-143  A12   ---     Desig2    designation in paper Ref2
+ 144-152  A9    ---     VarName   Designation in GCVS (G8)
+ 154-155  A2    ---     Mm        [n: ] Non-member note (5)
+ 156-159  I4    yr      Year      ? Year of outburst for novae or supernovae
+     160  A1    ---   u_Year      [:] Uncertainty flag on YearNova
+--------------------------------------------------------------------------------
+
+Note (1): Number of the variable star.
+    This numbering system is made of a 3-digit number identifying the
+    galaxy, followed by a 4-digit number identifying the variable in the
+    galaxy. The numbering system for galaxies begins with 089, the first
+    88 codes being reserved for constellations (cf. column "VarNum" in
+    file "gcvs_cat.dat")
+
+    If in the literature for the considered galaxy there exist several
+    different variable star numbering systems, we have introduced new
+    numbers in the order of increasing right ascension for the equinox
+    1950.0. But if the variable star numbering system for the galaxy is
+    practically of general use, we have retained it - if necessary, with
+    additional numbers ordered by increasing right ascension.
+
+Note (3): Variable star Designation.
+    The name of the variable in the adopted system of variable star
+    designations: name of the galaxy + "V" + variable star No. within the
+    galaxy (see column VarNo)
+
+Note (4):
+    If there exist several spectral type determinations for a star, we
+    preferred more recent ones, taking into account reliability of each
+    determination. We converted symbols "d" (dwarfs) and "g" (giants) into
+    luminosity classes V and III. If a nova showed spectral features
+    typical of novae during or after the outburst, a symbol (NOVA) is
+    given in this column. If the spectrum shows features characteristic of
+    U Gem variables, this column contains the symbol (UG). Continuous
+    spectrum is designated "cont", the symbol "e" means emission spectrum,
+    lower case letters "ea", "eb" in this column stand for "e alpha", "e
+    beta". For RR Lyrae stars, spectral types from hydrogen lines are
+    given. A plus sign (+) between two spectral type values means that
+    spectra of two components of a spectroscopic binary are observed. Two
+    spectral type values separated with a minus sign (-) mean the range of
+    spectral type variations in the process of brightness changes.
+
+Note (5):
+    Symbols "n" or "n:" for "nonmembers" or "possible nonmembers" of the
+    galaxy in question. For the stars that enter the GCVS vols. I-III
+    (file gcvs_cat.dat) or the NSV catalogue (file "nsv_cat.dat") and are
+    not members of the corresponding galaxy, the present volume gives only
+    the running number, coordinates, the symbol "n", and the GCVS or NSV
+    name.
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: evs_rem.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label     Explanations
+--------------------------------------------------------------------------------
+   1- 12  A12   ---     Name      Variable star designation
+  14- 80  A67   ---     Text      Text of remark
+--------------------------------------------------------------------------------
+
+Byte-by-byte Description of file: refs.dat
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label   Explanations
+--------------------------------------------------------------------------------
+   1-  5  A5    ---     Ref     Reference number (G7)
+   7- 80  A74   ---     Text    Text of reference
+--------------------------------------------------------------------------------
+
+
+Global Notes:
+Note (G1): Designation of Variable stars (GCVS Name).
+    Traditional transliterations of Greek letters are used. Lower- and
+    upper-case latin letters must be distinguished (e.g. u Her and U Her).
+    See also the file "constel.txt" which gives details about GCVS names
+    and conversion to numeric values.
+
+Note (G2): Accuracy of positions use the following symbols:
+  "  = right ascensions accurate to one second of time and
+      declinations accurate to one arcsecond;
+  : = right ascensions accurate to one second of time and
+      declinations accurate to one tenth of an arcminute;
+  * = declinations accurate to one arcminute.
+  ' = right ascensions accurate to one minute of time and
+      declinations accurate to one arcminute.
+  ! = indicates that the listed coordinates refer to the galaxy's
+      center since the coordinates of the star itself are unknown
+      (concerns V0474 in the Sculptor system)
+
+Note (G3): The symbols are:
+  ">" to indicate a faint limit
+  "<" to indicate a bright limit
+  "(" to indicate a that the value represents an amplitude
+
+Note (G4): Code for photometric system.
+    The main codes are p (photographic magnitudes) and V (visual,
+    photovisual, or Johnson's V). Several stars from the 68th Name-List
+    have in these positions "1." designating the 1.04 {mu}m band of the
+    system introduced by G.W.Lockwood. The designations u,v,b,y refer to
+    the Stroemgren system. The symbols "Ic" and "Rc" mean magnitudes in
+    Cousins' I system. "g" designates magnitudes in the system of Thuan
+    and Gunn; "T" stands for broad-band Tycho magnitudes formed from B and
+    V measurements; "r" are red magnitudes not tied to a particular
+    system. An asterisk in the corresponding position means a measurement
+    in white light.
+
+Note (G5):
+    Epochs are given for minimum light for all eclipsing and ellipsoidal
+    variables, as well as for RV Tau and RS CVn types, and for maximum for
+    all other types. This rule may occasionally be broken as explained
+    only in the remarks to the catalog.
+
+Note (G6):
+    (M-m) or (D) values help to define the shape of the light curve,
+    expressed as a percentage of the period of the variable:
+    -- duration of the eclipse (D) for eclipsing binaries;
+    -- duration of the rising time (m-M) for intrinsic variables.
+    An asterisk (*) in the column "n_M-m/D" means, for an eclipsing
+    variable, that the duration of the constant brightness phase in
+    minimum (d) for this star is equal to zero.
+    A colon (:) denotes a poor precision.
+
+Note (G7):
+    All references are detailed in the file "refs.dat".
+    Numeric references are from Vol. I of GCVS (range 00002-09148),
+    Vol. II (range 09149-09558), Vol. III (range 09559-10200), or
+    from the Name-Lists (range 67001-77229). References from Vol. V
+    (extragalactic variables) start by the letter "V", and references to
+    the Suspected variables start by "n" (first part) or "s" (supplement).
+    References may also be abbreviation to catalogues (BD, CPD, CoD, GSC,
+    HIP, USNO).
+
+Note (G8): an alternative name may contain:
+  * a GCVS name (file "gcvs_dat.dat")
+  * a "Name-list" number if it starts by the two-digit number 67 to 77,
+    and is followed by the four-digit number of the star in the
+    corresponding Name-list.
+  * the designation of an extragalactic variable (GCVS Vol. V, see file
+    "evs_cat.dat"). The name may be followed by an asterisk (*) which
+    means the presence of remarks in Vol. V.
+--------------------------------------------------------------------------------
+
+
+History of the Catalogue:
+  * February 1992: first version of GCVS 4.0 catalogue (Cat. II/214)
+  * July 1996: Version 4.1 (Cat. II/214A)
+  * 30-Jan-2004: Version 4.2 prepared by
+    N.N. Samus [Moscow Inst. Astron.] and O.V. Durlevich [Sternberg]
+  * 29-Dec-2004: Version 4.2 prepared at CDS, with merged NSV
+    catalogues and references (Francois Ochsenbein [CDS], Cat. II/250)
+  * 26-Jun-2007: Prepared as a regularly updated data-base (B/gcvs)
+    from files at http://www.sai.msu.su/groups/cluster/gcvs/gcvs/
+  * 20-Dec-2008: Version 2008-Nov
+  * 18-Jan-2009: Version 2009-Jan
+  * 07-Jun-2009: Version 2009-Jun (41639 variables in gcvs_cat.dat)
+  * 12-Jul-2009: Version 2009-Jul (corrections in nsv_cat.dat)
+  * 13-Sep-2009: Version 2009-Sep (corrections in crossid.dat)
+  * 27-Sep-2009: Version 2009-Sep (corrections in gcvs_cat.dat crossid.dat)
+  * 22-Nov-2009: Version 2009-Sep (corrections in gcvs_cat.dat crossid.dat)
+  * 31-Jan-2010: Version 2010-Jan (corrections in gcvs, crossid and nsv)
+  * 25-Jul-2010: Version 2010-Jul (corrections in gcvs_cat, gcvs_rem and refs)
+================================================================================
+(End)  N.N. Samus [Moscow Inst. Astron.], Francois Ochsenbein [CDS]  18-Jan-2009
