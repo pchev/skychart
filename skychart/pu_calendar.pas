@@ -29,7 +29,7 @@ uses u_help, u_translation, Math, cu_database, Printers,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, IniFiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
-  ActnList, StdActns, LResources, LazHelpHTML;
+  ActnList, StdActns, LResources, LazHelpHTML, types;
 
 type
     TScFunc = procedure(csc:Tconf_skychart) of object;
@@ -45,15 +45,18 @@ type
   { Tf_calendar }
 
   Tf_calendar = class(TForm)
+    BtnCopyClip: TButton;
     BtnRefresh: TButton;
     BtnHelp: TButton;
     BtnClose: TButton;
     BtnSave: TButton;
     BtnPrint: TButton;
     BtnReset: TButton;
+    dgPlanet: TDrawGrid;
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
+    tsPGraphs: TTabSheet;
     Time: TTimePicker;
     TLEListBox:TFileListBox;
     maglimit:TFloatEdit;
@@ -119,6 +122,9 @@ type
     Asteroids: TTabSheet;
     AsteroidGrid: TStringGrid;
     SaveDialog1: TSaveDialog;
+    procedure BtnCopyClipClick(Sender: TObject);
+    procedure dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
@@ -157,6 +163,7 @@ type
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
     cometid, astid : array[0..maxcombo] of string;
+    PlanetGraphs: array[1..9] of TBitmap;
     procedure Sattitle;
     procedure Lunartitle;
     procedure Solartitle;
@@ -177,6 +184,7 @@ type
     procedure RefreshAsteroid;
     procedure RefreshLunarEclipse;
     procedure RefreshSolarEclipse;
+    procedure RefreshPlanetGraph;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -195,13 +203,14 @@ var
 implementation
 
 
-uses u_util, u_projection;
+uses u_util, u_projection, Clipbrd;
 
 const maxstep = 100;
       MonthLst : array [1..12] of string = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
 procedure Tf_calendar.FormCreate(Sender: TObject);
 var yy,mm,dd: word;
+  i: Integer;
 begin
 SetLang;
 config:=Tconf_skychart.Create;
@@ -216,6 +225,10 @@ date1.JD:=jdd(yy,mm,dd,0);
 date2.JD:=date1.JD+5;
 time.Time:=now;
 initial:=true;
+for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
+  PlanetGraphs[i] := TBitmap.Create;
+  PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
+ end;
 {$ifdef mswindows}
 SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
@@ -236,10 +249,14 @@ begin
 end;
 
 procedure Tf_calendar.FormDestroy(Sender: TObject);
+var
+  i: Integer;
 begin
 try
 ShowImage.Free;
 config.Free;
+for i := low(PlanetGraphs) to high(PlanetGraphs) do
+  PlanetGraphs[i].Free;
 except
 writetrace('error destroy '+name);
 end;
@@ -988,6 +1005,8 @@ with gr do begin
   end;
   ar:=rmod(ar+pi2,pi2);
   objects[0,i]:=SetObjCoord(jda,ar,de);
+  objects[3,i]:=SetObjCoord(magn,diam,illum);
+  objects[9,i]:=SetObjCoord(0,rad2deg*az,rad2deg*ha);
   Eq2Hz((st0-ar),de,az,ha,config);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
@@ -1104,6 +1123,7 @@ end;
 jda:=jda+s;
 i:=i+1;
 until jda>jd2;
+RefreshPlanetGraph;  {Kept separate for now}
 finally
 screen.cursor:=crDefault;
 {SoleilGrid.Visible:=true;
@@ -1119,6 +1139,304 @@ PlutonGrid.Visible:=true;}
 end;
 end;
 
+procedure Tf_calendar.RefreshPlanetGraph;
+procedure DrawGraph(bm: TBitmap; gr:TStringGrid; iPl: Integer); {of RefreshPlanetGraph}
+var
+  xts, xte: Integer;  {x pos of start and end of rise/set area}
+  xmidday: Integer;   { the x poisiton that midday would have if shown}
+  tFst, tLst: Double; {first and last times of Graph Axis}
+  ygtop, ygbtm: Integer; {y pos of top and bottom of graph area}
+  i, ix, iy: Integer;
+  x, y: double;
+  s: String;
+  txtsz: TSize;
+  ytick: Single;
+  xtick, xcnt, yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
+  xSStrt, xSInc, ySStrt, ySInc: Double;
+  tstrt, tsc: Double; {to get graph x, sub tstrt, * by tsc}
+function ScaledTime(grd: TStringGrid; C, R: Integer): Integer;
+begin {ScaledTime of DrawGraph of RefreshPlanetGraph}
+  if assigned(grd) and assigned(grd.Objects[c, r]) then begin
+   result:=trunc( ( (grd.Objects[c,r] as TObjCoord).jd
+                      - (date1.JD + (r - 2) * step.Value)
+                      + config.tz.SecondsOffset/(3600*24)
+                      - tstrt)
+                   * tsc);
+    {Is result back by a day ?}
+    if result < xmidday then
+      result := result + trunc(tsc);
+    end
+  else
+    result := -9999;
+end; {ScaledTime of of DrawGraph RefreshPlanetGraph}
+Procedure TimeLine(grd: TStringGrid; C: Integer; cv: TCanvas; s: string = '');
+var
+ lix, liy: Integer;
+ ir, lir: Boolean; {in range, last point in range}
+begin {TimeLine of DrawGraph of RefreshPlanetGraph}
+  i := 2;
+  repeat
+    lix := ScaledTime(Grd, C, i);
+    inc(i);
+  until lix > -9000;  {I it is < -9000, => bad value}
+  liy := ygtop;
+  lir := (lix >= xts) and (lix <= xte);
+  if lir then
+    cv.MoveTo(lix, liy);
+  y := liy;
+  repeat
+    y := y + ytick; iy := trunc(y);
+    ix := ScaledTime(Grd, C, i);
+    if  ix > -9000 then begin {otherwise no point - just skip completely}
+      ir := (ix >= xts) and (ix <= xte);
+      if ir then begin
+        if not lir then {interpolation}
+          if lix < xts then {from left}
+            cv.MoveTo(xts, liy + ((iy-liy)*(xts-lix))div(ix-lix))
+          else {must be from right}
+            cv.MoveTo(xte, liy + ((iy-liy)*(xte-lix))div(ix-lix));
+        cv.lineto(ix, iy);
+        end
+      else {NOW out of range}
+        if lir then {interpolate to edge of range from last point}
+          if ix < xts then {from left}
+            cv.LineTo(xts, liy + ((iy-liy)*(xts-lix))div(ix-lix))
+          else {must be from right}
+            cv.LineTo(xte, liy + ((iy-liy)*(xte-lix))div(ix-lix));
+      lix := ix;
+      liy := iy;
+      lir := ir;
+      end;
+    inc(i);
+  until i >= Grd.RowCount;
+  if ir then begin
+    cv.LineTo(ix, ygbtm);
+    if s <> '' then begin
+      txtsz := cv.TextExtent(s);
+      cv.TextOut(ix - (txtsz.cx div 2), ygbtm - txtsz.cy - 1, s);
+      end;
+    end;
+end; {TimeLine of of DrawGraph RefreshPlanetGraph}
+begin {DrawGraph of RefreshPlanetGraph}
+  with bm.Canvas do begin
+    Brush.Color:= clBlack;
+    Brush.Style:= bsSolid;
+    Pen.Color:= clYellow;
+    Pen.Style:= psSolid;
+    Pen.Width:= 1;
+    Pen.Mode:= pmCopy;
+    Font.Color:= clWhite;
+    Rectangle(2, 2, 3, 3); {Dummy - it seems the first command won't do anything}
+    FillRect(0, 0, Width-1, Height-1);
+    // y scale & axis - same for all graph segments
+    txtsz := TextExtent('22/22');
+    ygtop := txtsz.cy div 2;
+    ygBtm := Height - 3 - txtsz.cy;
+    ytick := (ygbtm - ygtop) / (gr.RowCount - 3); {rc-2 gives data rows, -1 for intervals}
+    {ytick needs to be float to adequately fill the range - calc float then trun}
+    ySkip := trunc(txtsz.cy / ytick) + 1;
+    i := 2; {first data cell}
+    iy := ygtop - txtsz.cy div 2; {very close to 0 !!!}
+    y := iy;
+    ix := 1;
+    repeat
+      s := gr.Cells[0,i]; {isodate}
+      TextOut(ix, iy, s[9]+s[10]+'/'+s[6]+s[7]);
+      inc(i, yskip);
+      y := y + ytick*yskip;
+      iy := trunc(y);
+    until i >= gr.RowCount;
+    // Set up constants for Rise/set
+    xte := ((width * 7) div 10) - 2; {-2 provides gutter to next}
+    xts   := txtsz.cx + 2;
+    Rectangle(xts, ygtop, xte, ygBtm);
+    {for now, take nominal graph time range as 5pm to 8 am}
+    xtick := (xte-xts) div 15;
+    ix    := (txtsz.cx div xtick + 1); {temp x skip}
+    xtick := xtick * ix;
+    xSInc := (1 / 24) * ix;
+    xSStrt:= 17/24;
+    tstrt := xSStrt;
+    tsc   := xtick / xSInc;
+    xmidday:= trunc((0.5 - tstrt) * tsc);
+    ix    := xts + xtick;
+    x     := xSStrt + xSInc;
+    iy    := Height-txtsz.cy;
+    repeat
+      s := FormatDateTime('h a/p', x);
+      txtsz := TextExtent(s);
+      TextOut(ix-(txtsz.cx div 2), iy, s);
+      inc(ix, xtick);
+      x := x + xSInc;
+    until (ix + txtsz.cx div 2) > xte;
+    {now put in sun rise and set}
+    Brush.Color:= dfskycolor[1];
+    TimeLine(SoleilGrid, 8, bm.Canvas);
+    FloodFill(ix-2, iy-2, pen.Color, fsBorder );
+    TimeLine(SoleilGrid, 6, bm.Canvas);
+    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
+    {Twilights}
+    Brush.Color:= dfskycolor[3];
+    TimeLine(TwilightGrid, 3, bm.Canvas);
+    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
+    TimeLine(TwilightGrid, 2, bm.Canvas);
+    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
+    Brush.Color:= dfskycolor[5];
+    TimeLine(TwilightGrid, 4, bm.Canvas);
+    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
+    TimeLine(TwilightGrid, 1, bm.Canvas);
+    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
+    Brush.Color:= dfskycolor[7];
+    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
+    {Now - finally - the planet times}
+    font.Color:= clWhite;
+    Brush.Style:= bsSolid;
+    Brush.Color:= clBlack;
+    pen.Width:=2;
+    TimeLine(gr, 6, bm.Canvas, 'Rise'); {leave yellow}
+    pen.Color:= clWhite;
+    TimeLine(gr, 7, bm.Canvas, 'Cul');
+    pen.Color:= clRed;
+    TimeLine(gr, 8, bm.Canvas, 'Set');
+
+    Brush.Style:= bsClear;
+    Font.Style:=Font.Style + [fsBold];
+    Font.Color:=clWhite;
+    TextOut(xts + 2, ygTop + 2, pla[iPl]);
+    Font.Style:=Font.Style - [fsBold];
+    pen.Width:= 1;
+    pen.Color:= clYellow;
+    brush.Color:= dfskycolor[4];
+    Brush.Style:= bsSolid;
+    {Planet Mag, Size, Illum}
+    { Set up constants for Mag - scale is fixed at 8 to -4, but allows
+      little room on either side.  Work out from 0 @ 2/3 scale }
+    xts := xte + 4;
+    xte := xts + (width div 10) - 4;
+    FillRect(xts, ygtop, xte, ygBtm);
+    Rectangle(xts, ygtop, xte, ygBtm);
+    Brush.Style:= bsClear;
+    xtick := (xte-xts) div 7;
+    xSInc := 2;
+    tsc   := xtick / xSInc;
+    if ipl > 0 {planet} then begin
+      xSStrt:= 8;
+      tstrt := (((xte - xts) * 2) / 3) / tsc; {now ix = (tstrt - x) * tsc + xts}
+      end
+    else begin {moon}
+      xSStrt := 0;
+      tstrt := 0; {now ix = (tstrt - x) * tsc + xts}
+      end;
+    ix    := trunc((tstrt - xSStrt) * tsc) + xts;
+    x     := xSStrt;
+    iy    := Height-txtsz.cy; {whatever was last done should do!}
+    repeat
+      s := FormatFloat('0;-0', x);
+      txtsz := TextExtent(s);
+      TextOut(ix-(txtsz.cx div 2), iy, s);
+      inc(ix, xtick*2);
+      x := x - xSInc*2;
+    until (ix + txtsz.cx div 2) > xte;
+    pen.Width:= 2;
+    ix := trunc((tstrt - (gr.Objects[3,2] as TObjCoord).jd) * tsc) + xts;
+    iy := ygtop; y := iy;
+    MoveTo(ix, iy);
+    i := 3;
+    repeat
+      y := y + ytick; iy := trunc(y);
+      ix := trunc((tstrt - (gr.Objects[3,i] as TObjCoord).jd) * tsc) + xts;
+      lineto(ix, iy);
+      inc(i);
+    until i >= Gr.RowCount;
+    LineTo(ix, ygbtm);
+    pen.Width:= 1;
+    TextOut(xts+2, ygtop+2, 'Mag');
+    // Size
+    xts := xte + 4;
+    xte := xts + (width div 10) - 4;
+    Brush.Style:=bsSolid;
+    FillRect(xts, ygtop, xte, ygBtm);
+    Rectangle(xts, ygtop, xte, ygBtm);
+    Brush.Style:=bsClear;
+    xtick := (xte-xts-10) div 3;
+    xSInc := 20;
+    xSStrt:= 0;
+    tsc   := xtick / xSInc;
+    ix    := xts;
+    x     := xSStrt;
+    iy    := Height-txtsz.cy; {whatever was last done should do!}
+    repeat
+      s := FormatFloat('0', x);
+      txtsz := TextExtent(s);
+      TextOut(ix-(txtsz.cx div 2), iy, s);
+      inc(ix, xtick);
+      x := x + xSInc;
+    until (ix + txtsz.cx div 2) > xte;
+    pen.Width:= 2;
+    ix := trunc(((gr.Objects[3,2] as TObjCoord).ra - xSStrt) * tsc) + xts;
+    iy := ygtop; y := iy;
+    MoveTo(ix, iy);
+    i := 3;
+    repeat
+      y := y + ytick; iy := trunc(y);
+      ix := trunc(((gr.Objects[3,i] as TObjCoord).ra - xSStrt) * tsc) + xts;
+      lineto(ix, iy);
+      inc(i);
+    until i >= Gr.RowCount;
+    LineTo(ix, ygbtm);
+    pen.Width:=1;
+    TextOut(xts+2, ygtop+2, 'Diam(")');
+    // Luumination
+    xts := xte + 4;
+    xte := xts + (width div 10) - 4;
+    Brush.Style:=bsSolid;
+    FillRect(xts, ygtop, xte, ygBtm);
+    Rectangle(xts, ygtop, xte, ygBtm);
+    Brush.Style:=bsClear;
+    xtick := (xte-xts) div 5;
+    xSInc := 20;
+    xSStrt:= 0;
+    tsc   := xtick / xSInc;
+    ix    := xts;
+    x     := xSStrt;
+    iy    := Height-txtsz.cy; {whatever was last done should do!}
+    repeat
+      s := FormatFloat('0', x);
+      txtsz := TextExtent(s);
+      TextOut(ix-(txtsz.cx div 2), iy, s);
+      inc(ix, xtick);
+      x := x + xSInc;
+    until (ix + txtsz.cx div 2) > xte;
+    pen.Width:=2;
+    ix := trunc(((gr.Objects[3,2] as TObjCoord).dec * 100 - xSStrt) * tsc) + xts;
+    iy := ygtop; y := iy;
+    MoveTo(ix, iy);
+    i := 3;
+    repeat
+      y := y + ytick; iy := trunc(y);
+      ix := trunc(((gr.Objects[3,i] as TObjCoord).dec * 100 - xSStrt) * tsc) + xts;
+      lineto(ix, iy);
+      inc(i);
+    until i >= Gr.RowCount;
+    LineTo(ix, ygbtm);
+    pen.Width:=1;
+    TextOut(xts+2, ygtop+2, 'Illum(%)');
+    end;
+end; {DrawGraph of RefreshPlanetGraph}
+begin {RefreshPlanetGraph}
+  // This does the messy bit of correlating bitmap, grid, etc
+  DrawGraph(PlanetGraphs[1], Mercuregrid, 1);
+  DrawGraph(PlanetGraphs[2], Venusgrid,   2);
+  DrawGraph(PlanetGraphs[3], Marsgrid,    4);
+  DrawGraph(PlanetGraphs[4], Jupitergrid, 5);
+  DrawGraph(PlanetGraphs[5], Saturnegrid, 6);
+  DrawGraph(PlanetGraphs[6], Uranusgrid,  7);
+  DrawGraph(PlanetGraphs[7], Neptunegrid, 8);
+  (*DrawGraph(PlanetGraphs[8], Plutongrid,  9);*)
+  DrawGraph(PlanetGraphs[9], Lunegrid,    0);
+  dgPlanet.Invalidate;
+end;
+
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
 var z1,z2: string;
     s: integer;
@@ -1128,7 +1446,7 @@ s:=step.Value;
 if s<=0 then exit;
 case pagecontrol1.ActivePage.TabIndex of
      0 : RefreshTwilight;
-     1 : RefreshPlanet;
+     1 : begin RefreshTwilight; RefreshPlanet; end;
      2 : RefreshComet;
      3 : RefreshAsteroid;
      4 : RefreshSolarEclipse;
@@ -1415,6 +1733,110 @@ case pagecontrol1.ActivePage.TabIndex of
  end;
 end;
 
+procedure Tf_calendar.BtnCopyClipClick(Sender: TObject);  // added js
+var
+  grid: TStringGrid;
+  buf,d,z1,z2 : string;
+  x : double;
+  i, j: Integer;
+procedure AddToBuff(vals: array of double); {of BtnCopyClipClick}
+var
+  k: integer;
+begin {AddToBuff of BtnCopyClipClick}
+  for k := Low(vals) to high(vals) do
+    buf := buf + FloatToStr(vals[k]) + tab;
+end;
+begin {BtnCopyClipClick}
+  {This routine is modelled on the print routine, but it uses tab format and
+   stores numbers such that they should become numbers when pasted into a
+   spreadsheet}
+  grid := nil;
+  case pagecontrol1.ActivePage.TabIndex of
+    0 : Grid:=TwilightGrid;
+    1 : case pagecontrol2.ActivePage.TabIndex of
+      0  : Grid:=SoleilGrid;
+      1  : Grid:=MercureGrid;
+      2  : Grid:=VenusGrid;
+      3  : Grid:=LuneGrid;
+      4  : Grid:=MarsGrid;
+      5  : Grid:=JupiterGrid;
+      6  : Grid:=SaturneGrid;
+      7  : Grid:=UranusGrid;
+      8  : Grid:=NeptuneGrid;
+      9  : Grid:=PlutonGrid;
+      10 : Clipboard.Assign(PlanetGraphs[dgPlanet.Selection.Top+1]);
+      end {case};
+  else
+    ShowMessage('Sorry, copy is not yet implemented for this page');
+  end {case};
+  if assigned(grid) then begin
+    buf:=config.ObsName;
+    x:=abs(config.ObsLongitude);
+    if config.ObsLongitude>0 then d:=west else d:=east;
+    buf:=buf+blank+appmsg[32]+'='+copy(detostr(x),2,99)+d+blank+appmsg[31]+'='+detostr(config.ObsLatitude);
+    config.tz.JD:=date1.JD;
+    z1:=config.tz.ZoneName;
+    config.tz.JD:=date2.JD;
+    z2:=config.tz.ZoneName;
+    if z1<>z2 then z1:=z1+'/'+z2;
+    buf:=buf+blank+rsTimeZone+'='+z1+LineEnding;
+    {At this stage we have something like
+     "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
+    for i := 0 to 1 do begin
+      for j := 0 to grid.ColCount - 1 do
+        buf := buf + grid.Cells[j,i]+tab; {it will have a spurious last cloumn, but too bad!}
+      buf := buf + LineEnding;
+      end;
+    {Now have added titles}
+    {Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST
+    Venus	Date Coord.
+    7h37m UT	RA	DE	Magn.	Diam.	Illum.	Rise	Culmination
+    }
+    for i := 2 to grid.RowCount - 1 do begin
+      buf := buf + grid.Cells[0,i] + tab;
+      if assigned(grid.Objects[0,i]) then
+        with grid.Objects[0,i] as TObjCoord do
+          AddToBuff([rad2deg*ra/15, rad2deg*dec])
+      else
+        buf := buf + tab + tab;
+      if assigned(grid.Objects[3,i]) then
+        with grid.Objects[3,i] as TObjCoord do
+          AddToBuff([jd, ra, dec])
+      else
+        buf := buf + tab + tab + tab;
+      if assigned(grid.Objects[6,i]) then
+        with grid.Objects[6,i] as TObjCoord do
+          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+      else
+        buf := buf + tab;
+      if assigned(grid.Objects[7,i]) then
+        with grid.Objects[7,i] as TObjCoord do
+          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+      else
+        buf := buf + tab;
+      if assigned(grid.Objects[8,i]) then
+        with grid.Objects[8,i] as TObjCoord do
+          AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
+      else
+        buf := buf + tab;
+      if assigned(grid.Objects[9,i]) then
+        with grid.Objects[9,i] as TObjCoord do
+          AddToBuff([ra, dec])
+      else
+        buf := buf + tab + tab;
+      buf := buf + LineEnding;
+      end;
+    buf := buf + 'Times are in days - format rise/transit.set columns as time' + LineEnding;
+    Clipboard.AsText:=buf;
+    end; {Grid => String Grid}
+end;
+
+procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
+  aRect: TRect; aState: TGridDrawState);
+begin
+  if (aCol = 0) and (aRow < high(PlanetGraphs)) then
+    dgPlanet.Canvas.Draw(aRect.Left, aRect.Top, PlanetGraphs[aRow+1]);
+end;
 
 procedure Tf_calendar.EcliPanelClick(Sender: TObject);
 begin
