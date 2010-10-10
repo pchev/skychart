@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.2
+version=3.3
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php

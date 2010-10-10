@@ -1,10 +1,5 @@
 Skychart / Cartes du Ciel
-Version 3.2
-
-If you already have the version 2.76 installed you must install this file 
-in the same folder you already install the V2.76
-
-If you already run a previous beta version, your preference may be reset by this version.
+Version 3.3
 
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
 

@@ -1,27 +1,2 @@
-Version 3.2  Notes de la version
-
-Il s'agit de la première version stable de la nouvelle version 3.
-
-Si vous venez de mettre a jour depuis la version 2.76 je vous suggère de prendre un peu de temps pour lire la nouvelle documentation, localement avec le menu Aide, ou en ligne à partir http://www.ap-i.net/skychart/fr/documentation/start
-
-Il y a les modifications suivantes depuis la version bêta précédente:
-
-Interface ASCOM intégrée, peut être utilisée avec Windows x64. 
-Support pour INDI 0.6
-Plus d'options de la ligne de commande pour permettre des simples scripts d'automatisation.
-Ajout des symboles pour les objets du système solaire.
-Modification des couleurs par défaut et du réglage des étoiles.
-Permet de changer les images des étoiles en mode photographique.
-Permet de ne pas remplir le dessin des nébuleuses en mode graphique.
-Ajout de raccourcis clavier.
-Un clic droit sur les boutons permet d'accéder directement au réglages correspondant.
-Plus de serveur d'images DSS.
-Mise à jour de la base de donnée SAC à la version 8.1.
-Sur Mac OS X le répertoire utilisateur change de ~/.skychart vers ~/Library/Application Support/skychart
-Correction du serveur tcp/ip sur Mac OS X.
-Dessine un petit cercle pour indiquer le résultat de recherche.
-Beaucoup de correction de bug.
-
-Le détail des changement est ici:
-http://www.ap-i.net/mantis/changelog_page.php?project_id=1&version_id=14
+Version 3.3svn  Notes de la version
 
