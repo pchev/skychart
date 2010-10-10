@@ -5601,7 +5601,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
        TSlew.Enabled:=false;
        TSync.Enabled:=false;
     end else begin
-       ControlPanel1.Visible:=true;
+       ControlPanel1.Visible:=sc.cfgsc.IndiTelescope;
        telescopeSlew1.Visible:=true;
        telescopeSync1.Visible:=true;
        TSlew.Enabled:=true;
