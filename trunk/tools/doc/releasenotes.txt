@@ -1,27 +1,3 @@
-Version 3.2 Release Notes
+Version 3.3svn release Notes
 
-This is the first stable version of the new version 3.
-
-If you just upgrade from the version 2.76 I suggest you take a few time to read the new documentation, localy using the menu Help content, or online from http://www.ap-i.net/skychart/en/documentation/start
-
-It include the following change since the previous beta version:
-
-Integrated ASCOM Interface, can be used on Windows x64. 
-Support for INDI 0.6
-More command line options to allow automation from simple script.
-Add Solar System symbols.
-Change default color and star setting.
-Allow to change bitmap stars image in photographic mode.
-Possibility to make DSO not filled in graphic mode.
-Add mode keyboard shortcut.
-Right click on many button to directly access the corresponding setup form.
-More DSS online server.
-Update SAC database to version 8.1.
-On Mac OS X the user setting directory change from ~/.skychart to ~/Library/Application Support/skychart
-Fix tcp/ip server on Mac OS X.
-Draw a small circle to indicate the search result.
-Many bug fix.
-
-The full change log is here:
-http://www.ap-i.net/mantis/changelog_page.php?project_id=1&version_id=14
 
