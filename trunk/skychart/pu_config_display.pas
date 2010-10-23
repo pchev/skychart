@@ -414,8 +414,8 @@ type
     procedure showlabelClick(Sender: TObject);
     procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure labelsizeChanged(Sender: TObject);
-    procedure labelmagChanged(Sender: TObject);
+    procedure labelsizeChanged(Sender: TObject; Button: TUDBtnType);
+    procedure labelmagChanged(Sender: TObject; Button: TUDBtnType);
     procedure MagLabelClick(Sender: TObject);
     procedure constlabelClick(Sender: TObject);
     procedure CirclegridSetEditText(Sender: TObject; ACol, ARow: Integer;
@@ -1731,10 +1731,16 @@ begin
 cmain.ShowTitlePos:=ShowTitle.Checked;
 end;
 
-procedure Tf_config_display.labelmagChanged(Sender: TObject);
+procedure Tf_config_display.labelmagChanged(Sender: TObject; Button: TUDBtnType);
 begin
 if LockChange then exit;
-with sender as TEdit do csc.LabelmagDiff[tag]:=strtointdef(text,1);
+with sender as TUpDown do csc.LabelmagDiff[tag]:=Position;
+end;
+
+procedure Tf_config_display.labelsizeChanged(Sender: TObject; Button: TUDBtnType);
+begin
+if LockChange then exit;
+with sender as TUpDown do cplot.LabelSize[tag]:=Position;
 end;
 
 procedure Tf_config_display.labelcolorMouseUp(Sender: TObject;
@@ -1773,12 +1779,6 @@ csc.ConstFullLabel:=true;
 csc.ConstLatinLabel:=false;
 ShowLabel;
 ShowLabelColor;
-end;
-
-procedure Tf_config_display.labelsizeChanged(Sender: TObject);
-begin
-if LockChange then exit;
-with sender as TEdit do cplot.LabelSize[tag]:=strtointdef(text,8);
 end;
 
 procedure Tf_config_display.MagLabelClick(Sender: TObject);

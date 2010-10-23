@@ -1,5 +1,5 @@
 object f_config_display: Tf_config_display
-  Left = 842
+  Left = 472
   Height = 560
   Top = 111
   Width = 515
@@ -2173,7 +2173,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 52
             Width = 38
-            OnChange = labelmagChanged
             TabOrder = 8
           end
           object labelmagStar: TUpDown
@@ -2188,6 +2187,7 @@ object f_config_display: Tf_config_display
             Position = 1
             TabOrder = 9
             Wrap = False
+            OnClick = labelmagChanged
           end
           object Edit2: TEdit
             Tag = 2
@@ -2195,7 +2195,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 76
             Width = 38
-            OnChange = labelmagChanged
             TabOrder = 10
           end
           object labelmagVar: TUpDown
@@ -2210,6 +2209,7 @@ object f_config_display: Tf_config_display
             Position = 1
             TabOrder = 11
             Wrap = False
+            OnClick = labelmagChanged
           end
           object labelmagMult: TUpDown
             Tag = 3
@@ -2223,6 +2223,7 @@ object f_config_display: Tf_config_display
             Position = 1
             TabOrder = 12
             Wrap = False
+            OnClick = labelmagChanged
           end
           object Edit3: TEdit
             Tag = 3
@@ -2230,7 +2231,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 100
             Width = 38
-            OnChange = labelmagChanged
             TabOrder = 13
           end
           object labelmagNeb: TUpDown
@@ -2245,6 +2245,7 @@ object f_config_display: Tf_config_display
             Position = 1
             TabOrder = 14
             Wrap = False
+            OnClick = labelmagChanged
           end
           object Edit4: TEdit
             Tag = 4
@@ -2252,7 +2253,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 124
             Width = 38
-            OnChange = labelmagChanged
             TabOrder = 15
           end
           object labelmagSol: TUpDown
@@ -2267,6 +2267,7 @@ object f_config_display: Tf_config_display
             Position = 1
             TabOrder = 16
             Wrap = False
+            OnClick = labelmagChanged
           end
           object Edit5: TEdit
             Tag = 5
@@ -2274,23 +2275,21 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 148
             Width = 38
-            OnChange = labelmagChanged
             TabOrder = 17
           end
           object Edit6: TEdit
             Tag = 1
             Left = 363
             Height = 21
-            Top = 52
+            Top = 54
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 18
           end
           object labelSizeStar: TUpDown
             Tag = 1
             Left = 401
             Height = 21
-            Top = 52
+            Top = 54
             Width = 17
             Associate = Edit6
             Min = 4
@@ -2298,6 +2297,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 19
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit7: TEdit
             Tag = 2
@@ -2305,7 +2305,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 76
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 20
           end
           object labelsizeVar: TUpDown
@@ -2320,6 +2319,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 21
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit8: TEdit
             Tag = 3
@@ -2327,7 +2327,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 100
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 22
           end
           object labelsizeMult: TUpDown
@@ -2342,6 +2341,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 23
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit9: TEdit
             Tag = 4
@@ -2349,7 +2349,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 124
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 24
           end
           object labelsizeNeb: TUpDown
@@ -2364,6 +2363,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 25
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit10: TEdit
             Tag = 5
@@ -2371,7 +2371,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 148
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 26
           end
           object labelsizeSol: TUpDown
@@ -2386,6 +2385,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 27
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit11: TEdit
             Tag = 6
@@ -2393,7 +2393,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 172
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 28
           end
           object labelsizeConst: TUpDown
@@ -2408,6 +2407,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 29
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit12: TEdit
             Tag = 7
@@ -2415,7 +2415,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 196
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 30
           end
           object labelsizeMisc: TUpDown
@@ -2430,6 +2429,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 31
             Wrap = False
+            OnClick = labelsizeChanged
           end
           object Edit13: TEdit
             Tag = 8
@@ -2437,7 +2437,6 @@ object f_config_display: Tf_config_display
             Height = 21
             Top = 220
             Width = 38
-            OnChange = labelsizeChanged
             TabOrder = 32
           end
           object labelsizeChartInfo: TUpDown
@@ -2452,6 +2451,7 @@ object f_config_display: Tf_config_display
             Position = 6
             TabOrder = 33
             Wrap = False
+            OnClick = labelsizeChanged
           end
         end
         object DrawAllStarLabel: TCheckBox
@@ -2571,7 +2571,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 69
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2623,7 +2622,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 110
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2675,7 +2673,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 152
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2727,7 +2724,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 193
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2779,7 +2775,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 235
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2831,7 +2826,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 277
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
@@ -2883,7 +2877,6 @@ object f_config_display: Tf_config_display
           Height = 22
           Top = 317
           Width = 23
-          Color = clBtnFace
           Glyph.Data = {
             E6040000424DE604000000000000360000002800000014000000140000000100
             180000000000B004000064000000640000000000000000000000000000000000
