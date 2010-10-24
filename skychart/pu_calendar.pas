@@ -1424,6 +1424,9 @@ begin {DrawGraph of RefreshPlanetGraph}
     end;
 end; {DrawGraph of RefreshPlanetGraph}
 begin {RefreshPlanetGraph}
+try
+  tsPGraphs.Visible:=true;
+  tsPGraphs.TabVisible:=true;
   // This does the messy bit of correlating bitmap, grid, etc
   DrawGraph(PlanetGraphs[1], Mercuregrid, 1);
   DrawGraph(PlanetGraphs[2], Venusgrid,   2);
@@ -1435,6 +1438,10 @@ begin {RefreshPlanetGraph}
   (*DrawGraph(PlanetGraphs[8], Plutongrid,  9);*)
   DrawGraph(PlanetGraphs[9], Lunegrid,    0);
   dgPlanet.Invalidate;
+except
+  tsPGraphs.TabVisible:=false;
+  tsPGraphs.Visible:=false;
+end;
 end;
 
 procedure Tf_calendar.BtnRefreshClick(Sender: TObject);
