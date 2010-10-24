@@ -1,3 +1,5 @@
 Version 3.3svn release Notes
 
+- Add Planet graph in calendar, contributed by John Sunderland.
+- Bug fix.
 

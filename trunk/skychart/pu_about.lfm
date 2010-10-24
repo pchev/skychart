@@ -2388,13 +2388,13 @@ object f_about: Tf_about
         OnChange = PageControl1Change
         object Page1: TTabSheet
           Caption = 'About'
-          ClientHeight = 235
+          ClientHeight = 236
           ClientWidth = 495
           object Label5: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 30
-            Width = 77
+            Width = 63
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2402,9 +2402,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 16
+            Height = 15
             Top = 6
-            Width = 100
+            Width = 80
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2424,7 +2424,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 78
-            Width = 55
+            Width = 47
             Caption = 'Copyright'
             ParentColor = False
           end
@@ -2432,7 +2432,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 54
-            Width = 43
+            Width = 38
             Caption = 'Version'
             ParentColor = False
           end
@@ -2440,7 +2440,7 @@ object f_about: Tf_about
             Left = 20
             Height = 14
             Top = 158
-            Width = 52
+            Width = 42
             Caption = 'Compiler'
             ParentColor = False
           end
@@ -2461,20 +2461,20 @@ object f_about: Tf_about
         end
         object Page2: TTabSheet
           Caption = 'Authors'
-          ClientHeight = 235
+          ClientHeight = 236
           ClientWidth = 495
           object Label3: TLabel
             Left = 11
-            Height = 20
+            Height = 14
             Top = 6
-            Width = 172
+            Width = 142
             Caption = 'Please report any problem to:'
             ParentColor = False
           end
           object Memo1: TMemo
             Cursor = crArrow
-            Left = 11
-            Height = 147
+            Left = 12
+            Height = 148
             Top = 50
             Width = 429
             Anchors = [akTop, akLeft, akRight, akBottom]
@@ -2498,7 +2498,7 @@ object f_about: Tf_about
         end
         object Page3: TTabSheet
           Caption = 'License Agreement'
-          ClientHeight = 235
+          ClientHeight = 236
           ClientWidth = 495
           object Memo2: TMemo
             Left = 0

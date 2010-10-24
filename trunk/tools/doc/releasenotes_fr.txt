@@ -1,2 +1,4 @@
 Version 3.3svn  Notes de la version
 
+- Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
+- Correction de bug.
