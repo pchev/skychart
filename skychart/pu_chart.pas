@@ -1305,7 +1305,10 @@ end;
 
 procedure Tf_chart.CentreExecute(Sender: TObject);
 begin
-  sc.MovetoXY(xcursor,ycursor);
+  if sc.cfgsc.FindName>'' then
+      sc.MovetoRaDec(sc.cfgsc.FindRA,sc.cfgsc.FindDec)
+  else
+      sc.MovetoXY(xcursor,ycursor);
   sc.cfgsc.TrackOn:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' CentreExecute');
