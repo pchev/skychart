@@ -3,7 +3,7 @@ object f_calendar: Tf_calendar
   Height = 388
   Top = 111
   Width = 838
-  ActiveControl = Pagecontrol2
+  ActiveControl = TwilightGrid
   Caption = 'f_calendar'
   ClientHeight = 388
   ClientWidth = 838
@@ -342,9 +342,9 @@ object f_calendar: Tf_calendar
     Height = 318
     Top = 70
     Width = 838
-    ActivePage = planets
+    ActivePage = twilight
     Align = alClient
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
     OnPageChanged = PageControl1Change
@@ -378,9 +378,9 @@ object f_calendar: Tf_calendar
         Height = 290
         Top = 0
         Width = 834
-        ActivePage = tsPGraphs
+        ActivePage = Psoleil
         Align = alClient
-        TabIndex = 10
+        TabIndex = 0
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'

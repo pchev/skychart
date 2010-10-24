@@ -621,6 +621,8 @@ end;
          // planet
          cfgsc.racentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,1];
          cfgsc.decentre:=cfgsc.PlanetLst[0,cfgsc.Trackobj,2];
+         cfgsc.TrackRA:=cfgsc.racentre;
+         cfgsc.TrackDec:=cfgsc.decentre;
          end;
      2 : begin
          // comet
@@ -633,6 +635,8 @@ end;
             if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
             cfgsc.racentre:=a;
             cfgsc.decentre:=d;
+            cfgsc.TrackRA:=cfgsc.racentre;
+            cfgsc.TrackDec:=cfgsc.decentre;
           end
           else cfgsc.TrackOn:=false;
          end;
@@ -647,6 +651,8 @@ end;
             if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
             cfgsc.racentre:=a;
             cfgsc.decentre:=d;
+            cfgsc.TrackRA:=cfgsc.racentre;
+            cfgsc.TrackDec:=cfgsc.decentre;
           end
           else cfgsc.TrackOn:=false;
          end;

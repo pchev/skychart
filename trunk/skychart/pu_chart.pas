@@ -750,7 +750,7 @@ if StartCircle then begin
   StartCircle:=false;
   end
 else MovingCircle := false;
-if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
+if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope) then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -773,7 +773,7 @@ end;
 if sc.cfgsc.scopemark then begin
    sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
 end;
-if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
+if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope) then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -1342,6 +1342,7 @@ if sc.cfgsc.FindOK then begin
    identlabel.Cursor:=crHandPoint;
    identlabel.bringtofront;
    sc.DrawSearchMark(sc.cfgsc.FindRA,sc.cfgsc.FindDec,false);
+   sc.cfgsc.FindJD:=sc.cfgsc.JDChart;
 end
 else identlabel.Visible:=false;
 end;
