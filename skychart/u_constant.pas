@@ -39,7 +39,8 @@ const cdcversion = 'Version 3.3 svn';
       cdcver     = '3.3';
       cdccpy = 'Copyright (C) 2002-2010 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
-                   'Peter Dean,' ;
+                   'Peter Dean,'+crlf+
+                   'John Sunderland';
       MaxSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 10000;
