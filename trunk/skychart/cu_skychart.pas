@@ -590,10 +590,12 @@ begin
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
 // clipping limit
-Fplot.cfgplot.outradius:=abs(round(min(10*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
-if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint;
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
+Fplot.cfgplot.outradius:=abs(round(min(10*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
+if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint;
+if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
+if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // ecliptic
 //cfgsc.e:=ecliptic(cfgsc.CurJd);
 cfgsc.e:=ecliptic(cfgsc.JdChart);
