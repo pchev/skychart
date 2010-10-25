@@ -353,6 +353,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 22
             Width = 47
+            OnChange = DateEditChange
             TabOrder = 6
           end
           object d_year: TUpDown
@@ -374,6 +375,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 22
             Width = 47
+            OnChange = DateEditChange
             TabOrder = 8
           end
           object d_month: TUpDown
@@ -395,6 +397,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 22
             Width = 47
+            OnChange = DateEditChange
             TabOrder = 10
           end
           object d_day: TUpDown
@@ -416,6 +419,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 65
             Width = 47
+            OnChange = TimeEditChange
             TabOrder = 12
           end
           object t_hour: TUpDown
@@ -437,6 +441,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 65
             Width = 47
+            OnChange = TimeEditChange
             TabOrder = 14
           end
           object t_min: TUpDown
@@ -472,6 +477,7 @@ object f_config_time: Tf_config_time
             Height = 21
             Top = 65
             Width = 47
+            OnChange = TimeEditChange
             TabOrder = 17
           end
         end
