@@ -109,6 +109,7 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
     procedure CheckGroup2ItemClick(Sender: TObject; Index: integer);
+    procedure DateEditChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -129,6 +130,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure AllSimClick(Sender: TObject);
     procedure NoSimClick(Sender: TObject);
+    procedure TimeEditChange(Sender: TObject);
   private
     { Private declarations }
     LockChange, LockJD: boolean;
@@ -456,7 +458,7 @@ if LockChange then exit;
 cmain.AutoRefreshDelay:=longedit2.value;
 end;
 
-procedure Tf_config_time.DateChange(Sender: TObject; Button: TUDBtnType);
+procedure Tf_config_time.DateEditChange(Sender: TObject);
 begin
 if LockChange then exit;
 if adbc.itemindex=0 then
@@ -477,13 +479,14 @@ JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
 end;
 
-procedure Tf_config_time.RadioGroup1Click(Sender: TObject);
+procedure Tf_config_time.DateChange(Sender: TObject; Button: TUDBtnType);
 begin
-if LockChange then exit;
-csc.SimLabel:=RadioGroup1.ItemIndex;
+{$ifdef darwin}
+DateEditChange(Sender);
+{$endif}
 end;
 
-procedure Tf_config_time.TimeChange(Sender: TObject; Button: TUDBtnType);
+procedure Tf_config_time.TimeEditChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.curtime:=t_hour.Position+t_min.Position/60+t_sec.Position/3600;
@@ -493,6 +496,19 @@ tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
+end;
+
+procedure Tf_config_time.TimeChange(Sender: TObject; Button: TUDBtnType);
+begin
+{$ifdef darwin}
+TimeEditChange(Sender);
+{$endif}
+end;
+
+procedure Tf_config_time.RadioGroup1Click(Sender: TObject);
+begin
+if LockChange then exit;
+csc.SimLabel:=RadioGroup1.ItemIndex;
 end;
 
 procedure Tf_config_time.BitBtn4Click(Sender: TObject);
@@ -507,8 +523,8 @@ begin
  t_hour.Position:=h;
  t_min.Position:=n;
  t_sec.Position:=s;
- DateChange(Sender,btNext);
- TimeChange(Sender,btNext);
+ DateEditChange(Sender);
+ TimeEditChange(Sender);
 end;
 
 procedure Tf_config_time.Button5Click(Sender: TObject);
@@ -525,8 +541,8 @@ begin
  t_hour.Position:=h;
  t_min.Position:=n;
  t_sec.Position:=s;
- DateChange(Sender,btNext);
- TimeChange(Sender,btNext);
+ DateEditChange(Sender);
+ TimeEditChange(Sender);
 end;
 
 procedure Tf_config_time.Button6Click(Sender: TObject);
@@ -543,8 +559,8 @@ begin
  t_hour.Position:=h;
  t_min.Position:=n;
  t_sec.Position:=s;
- DateChange(Sender,btNext);
- TimeChange(Sender,btNext);
+ DateEditChange(Sender);
+ TimeEditChange(Sender);
 end;
 
 procedure Tf_config_time.Button7Click(Sender: TObject);
