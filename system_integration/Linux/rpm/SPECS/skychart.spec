@@ -9,8 +9,6 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
 Provides: skychart libplan404.so libgetdss.so
-Requires: gtk2 glib2 pango libjpeg libpng libsqlite3.so.0
-AutoReqProv: no
 
 %description
 Planetarium software for the advanced amateur astronomer.
