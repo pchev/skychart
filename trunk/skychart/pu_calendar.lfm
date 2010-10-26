@@ -188,7 +188,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.10.24.01'
+      Text = '2010.10.26.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -250,7 +250,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.10.24.01'
+      Text = '2010.10.26.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -632,9 +632,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 2
       object CometGrid: TStringGrid
         Left = 0
-        Height = 249
+        Height = 247
         Top = 43
-        Width = 830
+        Width = 834
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 13
@@ -651,10 +651,10 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 43
         Top = 0
-        Width = 830
+        Width = 834
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 830
+        ClientWidth = 834
         TabOrder = 1
         object Button1: TButton
           Left = 134
@@ -675,7 +675,7 @@ object f_calendar: Tf_calendar
         end
         object ComboBox1: TComboBox
           Left = 216
-          Height = 21
+          Height = 24
           Top = 9
           Width = 169
           ItemHeight = 0

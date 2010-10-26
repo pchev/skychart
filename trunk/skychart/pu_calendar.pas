@@ -1910,7 +1910,6 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
    i:=2;
    Cometgrid.cells[0,0]:=trim(nam);
    Cometgrid.cells[1,0]:=trim(config.EquinoxName)+blank+appmsg[46];
-   Cometgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
@@ -1924,6 +1923,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
       ra:=rmod(ra+pi2,pi2);
       with Cometgrid do begin
          RowCount:=i+1;
+         cells[0,1]:=trim(armtostr(h))+' UT';
          cells[0,i]:=isodate(a,m,d);
          cells[1,i]:=artostr(rad2deg*ra/15);
          cells[2,i]:=detostr(rad2deg*dec);
@@ -2094,7 +2094,6 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    i:=2;
    Asteroidgrid.cells[0,0]:=trim(nam);
    Asteroidgrid.cells[1,0]:=trim(config.EquinoxName)+blank+appmsg[46];
-   Asteroidgrid.cells[0,1]:=trim(armtostr(h))+' UT';
    repeat
       djd(jda,a,m,d,h);
       jd0:=jd(a,m,d,0);
@@ -2108,6 +2107,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
       ra:=rmod(ra+pi2,pi2);
       with Asteroidgrid do begin
          RowCount:=i+1;
+         cells[0,1]:=trim(armtostr(h))+' UT';
          cells[0,i]:=isodate(a,m,d);
          cells[1,i]:=artostr(rad2deg*ra/15);
          cells[2,i]:=detostr(rad2deg*dec);
