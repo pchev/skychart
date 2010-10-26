@@ -105,7 +105,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#0#9'MaxLength'#2#0#9'NumGlyphs'#2#1#8'OnChange'#7#11'Da'
-  +'te1Change'#8'TabOrder'#2#0#4'Text'#6#13'2010.10.24.01'#7'Caption'#6#11'JD c'
+  +'te1Change'#8'TabOrder'#2#0#4'Text'#6#13'2010.10.26.01'#7'Caption'#6#11'JD c'
   +'alendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#13'TJDDatePicker'#5'Date2'#4
   +'Left'#3#205#0#6'Height'#2#21#3'Top'#2#8#5'Width'#2'P'#11'ButtonWidth'#2#23#8
   +'CharCase'#7#8'ecNormal'#5'Color'#7#9'clBtnFace'#10'Glyph.Data'#10'z'#5#0#0
@@ -177,7 +177,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#0#9'Max'
   +'Length'#2#0#9'NumGlyphs'#2#1#8'OnChange'#7#11'Date2Change'#8'TabOrder'#2#1#4
-  +'Text'#6#13'2010.10.24.01'#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30
+  +'Text'#6#13'2010.10.26.01'#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30
   +#196#149#20'@'#0#0#7'TButton'#10'BtnRefresh'#4'Left'#3':'#1#6'Height'#2#25#3
   +'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#7'Ref'
   +'resh'#7'OnClick'#7#15'BtnRefreshClick'#8'TabOrder'#2#4#0#0#7'TButton'#7'Btn'
@@ -284,18 +284,18 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#10#8'TabOrder'#2#0#16'TitleFont.Height'#2#245#10'OnDrawCell'#7#16'dgPlanetD'
   +'rawCell'#0#0#0#0#0#9'TTabSheet'#5'comet'#7'Caption'#6#6'Comets'#12'ClientHe'
   +'ight'#3'"'#1#11'ClientWidth'#3'B'#3#10'ImageIndex'#2#2#0#11'TStringGrid'#9
-  +'CometGrid'#4'Left'#2#0#6'Height'#3#249#0#3'Top'#2'+'#5'Width'#3'>'#3#5'Alig'
+  +'CometGrid'#4'Left'#2#0#6'Height'#3#247#0#3'Top'#2'+'#5'Width'#3'B'#3#5'Alig'
   +'n'#7#8'alClient'#7'Anchors'#11#6'akLeft'#7'akRight'#8'akBottom'#0#8'ColCoun'
   +'t'#2#13#15'DefaultColWidth'#2'd'#9'FixedRows'#2#2#7'Options'#11#10'goVertLi'
   +'ne'#10'goHorzLine'#11'goColSizing'#0#8'RowCount'#2#3#8'TabOrder'#2#0#16'Tit'
   +'leFont.Height'#2#245#10'OnDblClick'#7#12'GridDblClick'#9'OnMouseUp'#7#11'Gr'
   +'idMouseUp'#0#0#6'TPanel'#6'Panel2'#4'Left'#2#0#6'Height'#2'+'#3'Top'#2#0#5
-  +'Width'#3'>'#3#5'Align'#7#5'alTop'#12'ClientHeight'#2'+'#11'ClientWidth'#3'>'
+  +'Width'#3'B'#3#5'Align'#7#5'alTop'#12'ClientHeight'#2'+'#11'ClientWidth'#3'B'
   +#3#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4'Left'#3#134#0#6'Height'#2#24#3
   +'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#9'Fil'
   +'ter ->'#7'OnClick'#7#12'Button1Click'#8'TabOrder'#2#0#0#0#5'TEdit'#11'Comet'
   +'Filter'#4'Left'#2#8#6'Height'#2#21#3'Top'#2#9#5'Width'#2'y'#8'TabOrder'#2#1
-  +#0#0#9'TComboBox'#9'ComboBox1'#4'Left'#3#216#0#6'Height'#2#21#3'Top'#2#9#5'W'
+  +#0#0#9'TComboBox'#9'ComboBox1'#4'Left'#3#216#0#6'Height'#2#24#3'Top'#2#9#5'W'
   +'idth'#3#169#0#10'ItemHeight'#2#0#8'OnSelect'#7#15'ComboBox1Change'#5'Style'
   +#7#14'csDropDownList'#8'TabOrder'#2#2#0#0#0#0#9'TTabSheet'#9'Asteroids'#7'Ca'
   +'ption'#6#9'Asteroids'#12'ClientHeight'#3'"'#1#11'ClientWidth'#3'B'#3#10'Ima'
