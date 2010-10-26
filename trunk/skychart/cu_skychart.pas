@@ -706,9 +706,11 @@ if cfgsc.lastJDchart<>cfgsc.JDchart then
 cfgsc.lastJDchart:=cfgsc.JDchart;
 // get alt/az center
 saveaz:= cfgsc.acentre;
-Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,cfgsc.acentre,cfgsc.hcentre,cfgsc) ;
-if abs(cfgsc.hcentre-pid2)<2*minarc then begin
-   cfgsc.acentre:=saveaz;
+if cfgsc.TrackType<>4 then begin
+  Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,cfgsc.acentre,cfgsc.hcentre,cfgsc) ;
+  if abs(cfgsc.hcentre-pid2)<2*minarc then begin
+     cfgsc.acentre:=saveaz;
+  end;
 end;
 // compute refraction error at the chart center
 Hz2Eq(cfgsc.acentre,cfgsc.hcentre,a,d,cfgsc);
