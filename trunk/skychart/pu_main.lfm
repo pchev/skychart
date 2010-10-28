@@ -2852,7 +2852,6 @@ object f_main: Tf_main
         Top = 3
         Width = 28
         Caption = '10'''
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2869,7 +2868,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 27
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2886,7 +2884,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 50
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2903,7 +2900,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 75
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2920,7 +2916,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 100
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2937,7 +2932,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 125
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2954,7 +2948,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 150
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2971,7 +2964,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 175
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -2988,7 +2980,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 200
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -3005,7 +2996,6 @@ object f_main: Tf_main
         Hint = 'Set FOV to'
         Top = 227
         Width = 28
-        Color = clBtnFace
         Flat = True
         Font.Color = clNavy
         Font.Style = [fsBold]
@@ -3487,7 +3477,6 @@ object f_main: Tf_main
           Height = 15
           Top = 0
           Width = 15
-          Color = clBtnFace
           Flat = True
           NumGlyphs = 0
           OnClick = BtnRestoreChildClick
@@ -3497,7 +3486,6 @@ object f_main: Tf_main
           Height = 15
           Top = 0
           Width = 15
-          Color = clBtnFace
           Flat = True
           NumGlyphs = 0
           OnClick = BtnCloseChildClick

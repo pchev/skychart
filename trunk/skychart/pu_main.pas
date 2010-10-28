@@ -698,7 +698,7 @@ type
     procedure ChangeLanguage(newlang:string);
     Procedure InitFonts;
     Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
-    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
+    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string;sender:TObject);
     Procedure SetTitleMessage(txt:string;sender:TObject);
@@ -2580,7 +2580,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
           end;
           ShowIdentLabel;
         end;
-        f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
+        f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
@@ -3431,7 +3431,7 @@ begin
    Lpanels0.Caption:='';}
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
+Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil);
 begin
 if (trim(txt)>'') then writetrace(txt);
 P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
@@ -5561,7 +5561,7 @@ Findit:
         sc.cfgsc.TrackName:=Num;
       end;
       ShowIdentLabel;
-      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
+      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
    end;
 end;
 end;
