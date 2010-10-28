@@ -48,7 +48,7 @@ type
   Tstr2func = procedure(txt:string;sender:TObject) of object;
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
-  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil) of object;
 
 type
   TChartDrawingControl = class(TCustomControl)
