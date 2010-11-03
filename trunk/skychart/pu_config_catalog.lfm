@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 540
+  Left = 523
   Height = 573
-  Top = 102
+  Top = 111
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -38,10 +38,10 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 460
         ClientWidth = 494
         object Label37: TLabel
-          Left = 98
+          Left = 136
           Height = 14
           Top = 17
-          Width = 246
+          Width = 208
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
@@ -53,25 +53,68 @@ object f_config_catalog: Tf_config_catalog
           Top = 48
           Width = 482
           ColCount = 6
-          DefaultColWidth = 18
-          DefaultRowHeight = 18
+          Columns = <          
+            item
+              Title.Caption = 'Cat'
+              Width = 50
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                '0'
+                '1'
+                '2'
+                '3'
+                '4'
+                '5'
+                '6'
+                '7'
+                '8'
+                '9'
+                '10'
+              )
+              Title.Caption = 'Min'
+              Width = 50
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                '0'
+                '1'
+                '2'
+                '3'
+                '4'
+                '5'
+                '6'
+                '7'
+                '8'
+                '9'
+                '10'
+              )
+              Title.Caption = 'Max'
+              Width = 50
+            end          
+            item
+              Title.Caption = 'Path'
+              Width = 260
+            end          
+            item
+              ButtonStyle = cbsNone
+              Title.Caption = ' '
+              Width = 40
+            end>
+          DefaultColWidth = 24
+          DefaultRowHeight = 24
           GridLineWidth = 0
           Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
           RowCount = 2
           TabOrder = 1
           TitleFont.Height = -11
+          TitleStyle = tsStandard
           OnDrawCell = StringGrid3DrawCell
           OnMouseUp = StringGrid3MouseUp
           OnSelectCell = StringGrid3SelectCell
           OnSetEditText = StringGrid3SetEditText
-          ColWidths = (
-            18
-            54
-            54
-            54
-            260
-            18
-          )
         end
         object CatgenButton: TButton
           Left = 368

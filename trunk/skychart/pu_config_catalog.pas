@@ -396,10 +396,10 @@ var i,j:integer;
 begin
 stringgrid3.RowCount:=ccat.GCatnum+1;
 stringgrid3.cells[0,0]:='x';
-stringgrid3.cells[1, 0]:=rsCat;
-stringgrid3.cells[2, 0]:=rsMin2;
-stringgrid3.cells[3, 0]:=rsMax2;
-stringgrid3.cells[4, 0]:=rsPath;
+stringgrid3.Columns[0].Title.Caption:=rsCat;
+stringgrid3.Columns[1].Title.Caption:=rsMin2;
+stringgrid3.Columns[2].Title.Caption:=rsMax2;
+stringgrid3.Columns[3].Title.Caption:=rsPath;
 CatalogEmpty:=true;
 for j:=0 to ccat.GCatnum-1 do begin
   if catalogempty then catalogempty:=false;
@@ -554,7 +554,7 @@ if (Acol=0)and(Arow>0) then begin
     Canvas.Brush.Color := clRed;
     Canvas.FillRect(Rect);
   end;
-end else if (Acol=1)and(Arow>0) then begin
+end {else if (Acol=1)and(Arow>0) then begin
   if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
     Canvas.Pen.Color := clRed;
     Canvas.Brush.style := bsclear;
@@ -594,9 +594,9 @@ end else if (Acol=4)and(Arow>0) then begin
     Canvas.Brush.style := bsSolid;
     Canvas.rectangle(Rect);
   end;
-end else if (Acol=5)and(Arow>0) then begin
+end }else if (Acol=5)and(Arow>0) then begin
     Canvas.draw(Rect.left,Rect.top,DirOpenImg.Picture.Bitmap);
-end else if (Arow=0) then begin
+end {else if (Arow=0) then begin
     Canvas.Pen.Color := clBtnFace;
     Canvas.Brush.style := bsSolid;
     Canvas.rectangle(Rect);
@@ -604,7 +604,7 @@ end else begin
     Canvas.Pen.Color := clWindow;
     Canvas.Brush.style := bsSolid;
     Canvas.rectangle(Rect);
-end;
+end; }
 end;
 end;
 

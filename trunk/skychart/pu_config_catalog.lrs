@@ -1,8 +1,8 @@
 { This is an automatically generated lazarus resource file }
 
 LazarusResources.Add('Tf_config_catalog','FORMDATA',[
-  'TPF0'#17'Tf_config_catalog'#16'f_config_catalog'#4'Left'#3#28#2#6'Height'#3
-  +'='#2#3'Top'#2'f'#5'Width'#3#11#2#13'ActiveControl'#7#9'MainPanel'#11'Border'
+  'TPF0'#17'Tf_config_catalog'#16'f_config_catalog'#4'Left'#3#11#2#6'Height'#3
+  +'='#2#3'Top'#2'o'#5'Width'#3#11#2#13'ActiveControl'#7#9'MainPanel'#11'Border'
   +'Style'#7#12'bsToolWindow'#7'Caption'#6#7'Catalog'#12'ClientHeight'#3'='#2#11
   +'ClientWidth'#3#11#2#11'Font.Height'#2#245#7'OnClose'#7#9'FormClose'#8'OnCre'
   +'ate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'
@@ -12,18 +12,25 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'eft'#2#1#6'Height'#3#208#1#3'Top'#2#1#5'Width'#3#242#1#10'ActivePage'#7#5'P'
   +'age1'#5'Align'#7#8'alClient'#8'ShowTabs'#8#8'TabIndex'#2#0#8'TabOrder'#2#1#0
   +#9'TTabSheet'#5'Page1'#7'Caption'#6#7'Catalog'#12'ClientHeight'#3#204#1#11'C'
-  +'lientWidth'#3#238#1#0#6'TLabel'#7'Label37'#4'Left'#2'b'#6'Height'#2#14#3'To'
-  +'p'#2#17#5'Width'#3#246#0#9'Alignment'#7#14'taRightJustify'#7'Anchors'#11#5
+  +'lientWidth'#3#238#1#0#6'TLabel'#7'Label37'#4'Left'#3#136#0#6'Height'#2#14#3
+  +'Top'#2#17#5'Width'#3#208#0#9'Alignment'#7#14'taRightJustify'#7'Anchors'#11#5
   +'akTop'#7'akRight'#0#7'Caption'#6')Stars and Nebulae catalogs prepared with '
   +#11'ParentColor'#8#0#0#11'TStringGrid'#11'StringGrid3'#4'Left'#2#0#6'Height'
-  +#3'Y'#1#3'Top'#2'0'#5'Width'#3#226#1#8'ColCount'#2#6#15'DefaultColWidth'#2#18
-  +#16'DefaultRowHeight'#2#18#13'GridLineWidth'#2#0#7'Options'#11#15'goFixedVer'
-  +'tLine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#11'goRowMoving'#9
-  +'goEditing'#18'goAlwaysShowEditor'#0#8'RowCount'#2#2#8'TabOrder'#2#1#16'Titl'
-  +'eFont.Height'#2#245#10'OnDrawCell'#7#19'StringGrid3DrawCell'#9'OnMouseUp'#7
-  +#18'StringGrid3MouseUp'#12'OnSelectCell'#7#21'StringGrid3SelectCell'#13'OnSe'
-  +'tEditText'#7#22'StringGrid3SetEditText'#9'ColWidths'#1#2#18#2'6'#2'6'#2'6'#3
-  +#4#1#2#18#0#0#0#7'TButton'#12'CatgenButton'#4'Left'#3'p'#1#6'Height'#2#25#3
+  +#3'Y'#1#3'Top'#2'0'#5'Width'#3#226#1#8'ColCount'#2#6#7'Columns'#14#1#13'Titl'
+  +'e.Caption'#6#3'Cat'#5'Width'#2'2'#0#1#11'ButtonStyle'#7#11'cbsPickList'#16
+  +'PickList.Strings'#1#6#1'0'#6#1'1'#6#1'2'#6#1'3'#6#1'4'#6#1'5'#6#1'6'#6#1'7'
+  +#6#1'8'#6#1'9'#6#2'10'#0#13'Title.Caption'#6#3'Min'#5'Width'#2'2'#0#1#11'But'
+  +'tonStyle'#7#11'cbsPickList'#16'PickList.Strings'#1#6#1'0'#6#1'1'#6#1'2'#6#1
+  +'3'#6#1'4'#6#1'5'#6#1'6'#6#1'7'#6#1'8'#6#1'9'#6#2'10'#0#13'Title.Caption'#6#3
+  +'Max'#5'Width'#2'2'#0#1#13'Title.Caption'#6#4'Path'#5'Width'#3#4#1#0#1#11'Bu'
+  +'ttonStyle'#7#7'cbsNone'#13'Title.Caption'#6#1' '#5'Width'#2'('#0#0#15'Defau'
+  +'ltColWidth'#2#24#16'DefaultRowHeight'#2#24#13'GridLineWidth'#2#0#7'Options'
+  +#11#15'goFixedVertLine'#15'goFixedHorzLine'#10'goVertLine'#10'goHorzLine'#11
+  +'goRowMoving'#9'goEditing'#18'goAlwaysShowEditor'#0#8'RowCount'#2#2#8'TabOrd'
+  +'er'#2#1#16'TitleFont.Height'#2#245#10'TitleStyle'#7#10'tsStandard'#10'OnDra'
+  +'wCell'#7#19'StringGrid3DrawCell'#9'OnMouseUp'#7#18'StringGrid3MouseUp'#12'O'
+  +'nSelectCell'#7#21'StringGrid3SelectCell'#13'OnSetEditText'#7#22'StringGrid3'
+  +'SetEditText'#0#0#7'TButton'#12'CatgenButton'#4'Left'#3'p'#1#6'Height'#2#25#3
   +'Top'#2#12#5'Width'#2'`'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Ca'
   +'tGen'#7'OnClick'#7#11'CatgenClick'#8'TabOrder'#2#0#0#0#7'TButton'#6'addcat'
   +#4'Left'#3#144#0#6'Height'#2#25#3'Top'#3#149#1#5'Width'#2'K'#7'Caption'#6#3
@@ -58,14 +65,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'ShowHint'#9#8'TabOrder'#2#1#8'OnChange'#7#19'CDCStarField1Change'#5'Value'#2
   +#0#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Fbsc2'#3'Tag'#2#1#4'Left'#3'2'#1#6'He'
   +'ight'#2#21#4'Hint'#6#5'0..10'#3'Top'#2'='#5'Width'#2#30#14'ParentShowHint'#8
-  +#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#19'CDCStarField2Change'#5'Value'
+  ,#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#19'CDCStarField2Change'#5'Value'
   +#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'SKYbox'#3'Tag'#2#2#4'Left'#2'\'#6'H'
   +'eight'#2#18#4'Hint'#6',SKY2000 - Master Star Catalog  (Sande+ 1998)'#3'Top'
   +#2'e'#5'Width'#2'M'#11'HelpContext'#2'e'#7'Caption'#6#7'SKY2000'#7'OnClick'#7
   +#15'CDCStarSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#4#0#0#9
   +'TLongEdit'#5'Fsky1'#3'Tag'#2#2#4'Left'#3#10#1#6'Height'#2#21#4'Hint'#6#5'0.'
   +'.10'#3'Top'#2'e'#5'Width'#2#30#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrde'
-  ,'r'#2#5#8'OnChange'#7#19'CDCStarField1Change'#5'Value'#2#0#8'MaxValue'#2#10#0
+  +'r'#2#5#8'OnChange'#7#19'CDCStarField1Change'#5'Value'#2#0#8'MaxValue'#2#10#0
   +#0#9'TLongEdit'#5'Fsky2'#3'Tag'#2#2#4'Left'#3'2'#1#6'Height'#2#21#4'Hint'#6#5
   +'0..10'#3'Top'#2'e'#5'Width'#2#30#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOr'
   +'der'#2#6#8'OnChange'#7#19'CDCStarField2Change'#5'Value'#2#0#8'MaxValue'#2#10
@@ -122,14 +129,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'ientWidth'#3#238#1#0#6'TLabel'#6'Label3'#4'Left'#2#9#6'Height'#2#14#3'Top'#2
   +#7#5'Width'#3#156#0#7'Caption'#6#27'CDC Nebulae Catalog Setting'#11'ParentCo'
   +'lor'#8#0#0#6'TLabel'#7'Label15'#4'Left'#3#23#1#6'Height'#2#14#3'Top'#2#0#5
-  +'Width'#2'G'#9'Alignment'#7#14'taRightJustify'#7'Caption'#6#12'Field number'
+  ,'Width'#2'G'#9'Alignment'#7#14'taRightJustify'#7'Caption'#6#12'Field number'
   +#11'ParentColor'#8#0#0#6'TLabel'#8'Label116'#4'Left'#3#23#1#6'Height'#2#14#3
   +'Top'#2#16#5'Width'#2#25#7'Caption'#6#4' min'#11'ParentColor'#8#0#0#6'TLabel'
   +#8'Label117'#4'Left'#3'?'#1#6'Height'#2#14#3'Top'#2#16#5'Width'#2#28#7'Capti'
   +'on'#6#4' max'#11'ParentColor'#8#0#0#6'TLabel'#8'Label118'#4'Left'#3'i'#1#6
   +'Height'#2#14#3'Top'#2#16#5'Width'#2'4'#7'Caption'#6#10'Files Path'#11'Paren'
   +'tColor'#8#0#0#6'TLabel'#8'Label120'#4'Left'#2#9#6'Height'#2#14#3'Top'#3#133
-  ,#1#5'Width'#3'L'#1#9'Alignment'#7#8'taCenter'#7'Caption'#6'=Use only catalog'
+  +#1#5'Width'#3'L'#1#9'Alignment'#7#8'taCenter'#7'Caption'#6'=Use only catalog'
   +' from one of the three block at the same time'#11'ParentColor'#8#0#0#6'TLab'
   +'el'#12'LabelWarning'#4'Left'#2#9#6'Height'#2'&'#3'Top'#3#149#1#5'Width'#3
   +#225#1#8'AutoSize'#8#7'Caption'#6#7'Warning'#11'ParentColor'#8#7'Visible'#8#8
@@ -186,14 +193,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'howHint'#9#8'TabOrder'#2#0#0#0#9'TCheckBox'#6'GCMbox'#3'Tag'#2#7#4'Left'#2
   +']'#6'Height'#2#18#4'Hint'#6'1Globular Clusters in the Milky Way (Harris, 19'
   +'97)'#3'Top'#3#153#0#5'Width'#3#202#0#11'HelpContext'#2'o'#7'Caption'#6#29'G'
-  +'lobular Cl. in the Milky Way'#7'OnClick'#7#14'CDCNebSelClick'#14'ParentShow'
+  ,'lobular Cl. in the Milky Way'#7'OnClick'#7#14'CDCNebSelClick'#14'ParentShow'
   +'Hint'#8#8'ShowHint'#9#8'TabOrder'#2#1#0#0#9'TCheckBox'#6'GPNbox'#3'Tag'#2#8
   +#4'Left'#2']'#6'Height'#2#18#4'Hint'#6'EStrasbourg-ESO Catalogue of Galactic'
   +' Planetary Nebulae (Acker+, 1992)'#3'Top'#3#201#0#5'Width'#3#198#0#11'HelpC'
   +'ontext'#2'p'#7'Caption'#6#29'Cat, Galactic Planetary Neb. '#7'OnClick'#7#14
   +'CDCNebSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#0#0#9'TC'
   +'heckBox'#6'LBNbox'#3'Tag'#2#3#4'Left'#2']'#6'Height'#2#18#4'Hint'#6'2Lynds'
-  ,''' Catalogue of Bright Nebulae    (Lynds 1965)'#3'Top'#2#9#5'Width'#3#154#0
+  +''' Catalogue of Bright Nebulae    (Lynds 1965)'#3'Top'#2#9#5'Width'#3#154#0
   +#11'HelpContext'#2'l'#7'Caption'#6#20'Lynds Bright Nebulae'#7'OnClick'#7#14
   +'CDCNebSelClick'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#3#0#0#9'TC'
   +'heckBox'#6'PGCBox'#3'Tag'#2#5#4'Left'#2']'#6'Height'#2#18#4'Hint'#6#25'PGC/'
@@ -250,14 +257,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +#2#21#3'Top'#3#165#0#5'Width'#2'o'#17'OnAcceptDirectory'#7#18'CDCAcceptDirec'
   +'tory'#10'ShowHidden'#8#11'ButtonWidth'#2#21#9'NumGlyphs'#2#1#9'MaxLength'#2
   +#0#8'TabOrder'#2#0#8'OnChange'#7#17'CDCStarPathChange'#0#0#14'TDirectoryEdit'
-  +#6'dstyc3'#3'Tag'#2#12#4'Left'#3'E'#1#6'Height'#2#21#3'Top'#2'w'#5'Width'#2
+  ,#6'dstyc3'#3'Tag'#2#12#4'Left'#3'E'#1#6'Height'#2#21#3'Top'#2'w'#5'Width'#2
   +'o'#17'OnAcceptDirectory'#7#18'CDCAcceptDirectory'#10'ShowHidden'#8#11'Butto'
   +'nWidth'#2#21#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'TabOrder'#2#1#8'OnChange'#7
   +#17'CDCStarPathChange'#0#0#14'TDirectoryEdit'#7'dsbase3'#3'Tag'#2#11#4'Left'
   +#3'E'#1#6'Height'#2#21#3'Top'#2'M'#5'Width'#2'o'#17'OnAcceptDirectory'#7#18
   +'CDCAcceptDirectory'#10'ShowHidden'#8#11'ButtonWidth'#2#21#9'NumGlyphs'#2#1#9
   +'MaxLength'#2#0#8'TabOrder'#2#2#8'OnChange'#7#17'CDCStarPathChange'#0#0#9'TL'
-  ,'ongEdit'#7'dsbase2'#3'Tag'#2#11#4'Left'#3' '#1#6'Height'#2#21#4'Hint'#6#5'0'
+  +'ongEdit'#7'dsbase2'#3'Tag'#2#11#4'Left'#3' '#1#6'Height'#2#21#4'Hint'#6#5'0'
   +'..10'#3'Top'#2'M'#5'Width'#2#30#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrd'
   +'er'#2#3#8'OnChange'#7#19'CDCStarField2Change'#5'Value'#2#0#8'MaxValue'#2#10
   +#0#0#9'TLongEdit'#6'dstyc2'#3'Tag'#2#12#4'Left'#3' '#1#6'Height'#2#21#4'Hint'
@@ -314,14 +321,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'ld2Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'TICbox'#3'Tag'#2
   +#5#4'Left'#2'W'#6'Height'#2#21#4'Hint'#6'4Tycho Input Catalog  (Revised Vers'
   +'ion) (Egret+ 1992)'#3'Top'#2'e'#5'Width'#3#137#0#11'HelpContext'#2'g'#7'Cap'
-  +'tion'#6#20'Tycho  Input Catalog'#7'OnClick'#7#15'CDCStarSelClick'#14'Parent'
+  ,'tion'#6#20'Tycho  Input Catalog'#7'OnClick'#7#15'CDCStarSelClick'#14'Parent'
   +'ShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#4#0#0#9'TLongEdit'#5'Ftic1'#3'Tag'#2
   +#5#4'Left'#3#5#1#6'Height'#2#21#4'Hint'#6#5'0..10'#3'Top'#2'e'#5'Width'#2#30
   +#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#5#8'OnChange'#7#19'CDCStar'
   +'Field1Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'Ftic2'#3'Tag'
   +#2#5#4'Left'#3'-'#1#6'Height'#2#21#4'Hint'#6#5'0..10'#3'Top'#2'e'#5'Width'#2
   +#30#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#6#8'OnChange'#7#19'CDCS'
-  ,'tarField2Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'GSCbox'#3
+  +'tarField2Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#6'GSCbox'#3
   +'Tag'#2#8#4'Left'#2'W'#6'Height'#2#21#4'Hint'#6'=The Hubble Space Telescope '
   +'Guide Star Catalog  ( Lasker 1990)'#3'Top'#3#149#0#5'Width'#3#158#0#11'Help'
   +'Context'#2'h'#7'Caption'#6#22'HST Guide Star Catalog'#7'OnClick'#7#15'CDCSt'
@@ -378,14 +385,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +'owHint'#9#8'TabOrder'#2#21#8'OnChange'#7#19'CDCStarField2Change'#5'Value'#2
   +#0#8'MaxValue'#2#10#0#0#9'TLongEdit'#5'fusn1'#3'Tag'#2#9#4'Left'#3#5#1#6'Hei'
   +'ght'#2#21#4'Hint'#6#5'0..10'#3'Top'#3#13#1#5'Width'#2#30#14'ParentShowHint'
-  +#8#8'ShowHint'#9#8'TabOrder'#2#22#8'OnChange'#7#19'CDCStarField1Change'#5'Va'
+  ,#8#8'ShowHint'#9#8'TabOrder'#2#22#8'OnChange'#7#19'CDCStarField1Change'#5'Va'
   +'lue'#2#0#8'MaxValue'#2#10#0#0#9'TLongEdit'#6'fgscc1'#3'Tag'#2#7#4'Left'#3#5
   +#1#6'Height'#2#21#4'Hint'#6#5'0..10'#3'Top'#3#229#0#5'Width'#2#30#14'ParentS'
   +'howHint'#8#8'ShowHint'#9#8'TabOrder'#2#23#8'OnChange'#7#19'CDCStarField1Cha'
   +'nge'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TLongEdit'#6'fgscf1'#3'Tag'#2#6#4
   +'Left'#3#5#1#6'Height'#2#21#4'Hint'#6#5'0..10'#3'Top'#3#189#0#5'Width'#2#30
   +#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#24#8'OnChange'#7#19'CDCSta'
-  ,'rField1Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#9'USNBright'#3
+  +'rField1Change'#5'Value'#2#0#8'MaxValue'#2#10#0#0#9'TCheckBox'#9'USNBright'#3
   +'Tag'#2#9#4'Left'#3#170#0#6'Height'#2#21#3'Top'#3#13#1#5'Width'#2'['#7'Capti'
   +'on'#6#12'Bright stars'#7'OnClick'#7#14'USNBrightClick'#8'TabOrder'#2#25#0#0
   +#9'TCheckBox'#6'USNbox'#3'Tag'#2#9#4'Left'#2'W'#6'Height'#2#21#4'Hint'#6'J- '
@@ -442,14 +449,14 @@ LazarusResources.Add('Tf_config_catalog','FORMDATA',[
   +#3#155#1#6'Height'#2#17#3'Top'#2' '#5'Width'#2'N'#8'AutoSize'#8#7'Caption'#6
   +#4'fw10'#11'ParentColor'#8#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'
   +#2'2'#3'Top'#3#11#2#5'Width'#3#11#2#8'HelpType'#7#9'htKeyword'#11'HelpKeywor'
-  +'d'#6#17'help/catalog.html'#5'Align'#7#8'alBottom'#12'ClientHeight'#2'2'#11
+  ,'d'#6#17'help/catalog.html'#5'Align'#7#8'alBottom'#12'ClientHeight'#2'2'#11
   +'ClientWidth'#3#11#2#8'TabOrder'#2#1#0#6'TImage'#10'DirOpenImg'#4'Left'#2#8#6
   +'Height'#2#16#3'Top'#2#15#5'Width'#2#16#8'AutoSize'#9#12'Picture.Data'#10#198
   +#1#0#0#7'TPixmap'#186#1#0#0'/* XPM */'#10'static char *graphic[] = {'#10'"16'
   +' 16 5 1",'#10'". c None",'#10'", c #7F7F7F",'#10'"- c #FFFF00",'#10'"* c #F'
   +'FFFFF",'#10'"a c #000000",'#10'"................",'#10'"................",'
   +#10'"................",'#10'"................",'#10'"...,,,,.........",'#10
-  ,'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a..",'#10'"..'
+  +'"..,-*-*,........",'#10'"..,,,,,,,,,,a...",'#10'"..,*********,a..",'#10'"..'
   +',*-.-.-.-.,a..",'#10'"..,*.-.-.-.-,a..",'#10'"..,*-.-.-.-.,a..",'#10'"..,*.'
   +'-.-.-.-,a..",'#10'"..,,,,,,,,,,,a..",'#10'"..aaaaaaaaaaa...",'#10'"........'
   +'........",'#10'"................"}'#10#7'Visible'#8#0#0#7'TButton'#7'Button'
