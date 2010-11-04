@@ -211,7 +211,7 @@ type
     ChartCursor: TCursor;
     sc: Tskychart;
     indi1: TIndiClient;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb: double;
@@ -1481,6 +1481,7 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
+   if TrackCursorMove then TrackCursor(X,Y);
    Image1.Cursor:=ChartCursor;
    Refresh;
 end;
@@ -1496,6 +1497,7 @@ begin
 {$endif}
 lastx:=x;
 lasty:=y;
+TrackCursorMove:=false;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 scp:=Image1.ControlToScreen(point(x,y));
@@ -1724,6 +1726,7 @@ end;
 Procedure Tf_chart.TrackCursor(X,Y : integer);
 var newl,newb: double;
 begin
+TrackCursorMove:=true;
 if LockTrackCursor then exit;
 try
   {$ifdef trace_debug}
