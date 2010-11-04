@@ -1,12 +1,12 @@
 object f_detail: Tf_detail
   Left = 666
-  Height = 471
+  Height = 616
   Top = 112
   Width = 398
   ActiveControl = Panel1
-  BorderStyle = bsSizeToolWin
+  BorderStyle = bsToolWindow
   Caption = 'Details'
-  ClientHeight = 471
+  ClientHeight = 616
   ClientWidth = 398
   Font.Height = -11
   OnCreate = FormCreate
@@ -56,7 +56,7 @@ object f_detail: Tf_detail
   end
   object IpHtmlPanel1: TIpHtmlPanel
     Left = 0
-    Height = 421
+    Height = 566
     Top = 50
     Width = 398
     Align = alClient
