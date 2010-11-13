@@ -1427,6 +1427,9 @@ if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
+SatDir:=slash(privatedir)+'satellites';
+if not directoryexists(SatDir) then CreateDir(SatDir);
+if not directoryexists(SatDir) then forcedirectories(SatDir);
 {$ifdef trace_debug}
  debugln('appdir='+appdir);
 {$endif}

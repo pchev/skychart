@@ -283,6 +283,10 @@ data/planet/symbol8.png
 data/planet/symbol9.png
 data/planet/symbol10.png
 data/planet/symbol11.png
+data/quicksat/quicksat.txt
+data/quicksat/quicksat.exe
+data/quicksat/quicksat.mag
+data/quicksat/sample.tle
 data/sample
 data/sample/Cometsample.dat
 data/sample/country.dat
