@@ -575,6 +575,9 @@ if fileexists(configfile) then begin
   end;
 end;
 Tempdir:=slash(privatedir)+DefaultTmpDir;
+SatDir:=slash(privatedir)+'satellites';
+if not directoryexists(SatDir) then CreateDir(SatDir);
+if not directoryexists(SatDir) then forcedirectories(SatDir);
 {$ifdef trace_debug}
  debugln('appdir='+appdir);
 {$endif}

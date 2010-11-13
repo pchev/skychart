@@ -32,10 +32,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 551
       Top = 1
       Width = 480
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
@@ -87,7 +87,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 261
           Width = 400
           Canvas.AutoRedraw = False
-          Canvas.Brush.Color = clBtnFace
+          Canvas.Brush.Color = clBlack
           Canvas.Font.Height = -11
           Zoom = 25
           ZoomMin = 25
@@ -132,7 +132,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 314
             Height = 14
             Top = 35
-            Width = 18
+            Width = 14
             Caption = '+/-'
             ParentColor = False
           end
@@ -140,7 +140,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 422
             Height = 14
             Top = 35
-            Width = 23
+            Width = 19
             Caption = 'Km.'
             ParentColor = False
           end
@@ -169,7 +169,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object countrylist: TComboBox
             Left = 8
-            Height = 27
+            Height = 24
             Top = 1
             Width = 234
             DropDownCount = 10
@@ -273,7 +273,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 14
             Top = 4
-            Width = 42
+            Width = 36
             Caption = 'Degree'
             ParentColor = False
           end
@@ -281,7 +281,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 48
             Height = 14
             Top = 4
-            Width = 24
+            Width = 20
             Caption = 'Min.'
             ParentColor = False
           end
@@ -289,7 +289,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 80
             Height = 14
             Top = 4
-            Width = 26
+            Width = 23
             Caption = 'Sec.'
             ParentColor = False
           end
@@ -365,7 +365,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 14
             Top = 4
-            Width = 42
+            Width = 36
             Caption = 'Degree'
             ParentColor = False
           end
@@ -373,7 +373,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 48
             Height = 14
             Top = 4
-            Width = 24
+            Width = 20
             Caption = 'Min.'
             ParentColor = False
           end
@@ -381,7 +381,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 80
             Height = 14
             Top = 4
-            Width = 26
+            Width = 23
             Caption = 'Sec.'
             ParentColor = False
           end
@@ -457,7 +457,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 8
             Height = 14
             Top = 4
-            Width = 40
+            Width = 34
             Caption = 'Meters'
             ParentColor = False
           end
@@ -490,7 +490,7 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 4
           object TZComboBox: TComboBox
             Left = 8
-            Height = 27
+            Height = 24
             Top = 23
             Width = 433
             ItemHeight = 0
@@ -500,9 +500,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object CountryTZ: TCheckBox
             Left = 8
-            Height = 21
+            Height = 23
             Top = 1
-            Width = 125
+            Width = 112
             Caption = 'Country Timezone'
             Checked = True
             OnChange = CountryTZChange
@@ -573,7 +573,6 @@ object f_config_observatory: Tf_config_observatory
             MaxLength = 0
             TabOrder = 2
             OnChange = horizonfileChange
-            OnExit = horizonfileChange
           end
           object fillhorizon: TCheckBox
             Left = 221
