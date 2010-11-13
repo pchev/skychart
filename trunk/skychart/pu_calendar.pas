@@ -25,8 +25,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, Math, cu_database, Printers,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
+uses u_help, u_translation, Math, cu_database, u_satellite, Printers,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, FileCtrl, enhedits, Grids, ComCtrls, IniFiles,
   jdcalendar, cu_planet, u_constant, pu_image, Buttons, ExtCtrls,
   ActnList, StdActns, LResources, LazHelpHTML, types;
@@ -52,6 +52,7 @@ type
     BtnSave: TButton;
     BtnPrint: TButton;
     BtnReset: TButton;
+    Button3: TButton;
     dgPlanet: TDrawGrid;
     SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
@@ -123,6 +124,7 @@ type
     AsteroidGrid: TStringGrid;
     SaveDialog1: TSaveDialog;
     procedure BtnCopyClipClick(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -135,6 +137,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure FormDestroy(Sender: TObject);
     procedure GridDblClick(Sender: TObject);
+    procedure Label9Click(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure BtnSaveClick(Sender: TObject);
     procedure EcliPanelClick(Sender: TObject);
@@ -147,6 +150,8 @@ type
     procedure BtnPrintClick(Sender: TObject);
     procedure Date1Change(Sender: TObject);
     procedure Date2Change(Sender: TObject);
+    procedure SatPanelClick(Sender: TObject);
+    procedure TLEListBoxExit(Sender: TObject);
   private
     { Private declarations }
     initial, lockclick: boolean;
@@ -158,7 +163,7 @@ type
     Feclipsepath: string;
     deltajd: double;
     dat11,dat12,dat13,dat21,dat22,dat23,dat31,dat32,dat33 : double ;
-    dat41,dat51,{dat61,}dat71,dat72,dat73 : double ;
+    dat41,dat51,dat61,dat71,dat72,dat73 : double ;
     dat14,dat24,dat34,dat74,west,east,title : string;
     century_Solar, century_Lunar: string;
     appmsg: array[1..nummsg] of string;
@@ -185,6 +190,7 @@ type
     procedure RefreshLunarEclipse;
     procedure RefreshSolarEclipse;
     procedure RefreshPlanetGraph;
+    procedure RefreshSatellite;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -229,6 +235,10 @@ for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
   PlanetGraphs[i] := TBitmap.Create;
   PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
  end;
+SatGrid.ColWidths[0]:=120;
+SatGrid.ColWidths[1]:=120;
+TLEListBox.OnMouseLeave:=TLEListBoxExit;
+TLEListBox.Directory:=SatDir;
 {$ifdef mswindows}
 SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
@@ -272,7 +282,6 @@ if Fnightvision<>nightvision then begin
 end;
 {$endif}
 if initial then begin
-  Satellites.TabVisible:=false;
   date1.JD:=jd(config.CurYear,config.CurMonth,config.CurDay,0);
 //  date1.JD:=trunc(config.CurJD+(config.TimeZone-config.DT_UT)/24);
   date2.JD:=date1.JD+5;
@@ -303,6 +312,20 @@ if deltajd<=0 then exit;
 if date2.JD<=date1.JD then date1.JD:=date2.JD-deltajd;
 deltajd:=date2.JD-date1.JD;
 end;
+
+procedure Tf_calendar.TLEListBoxExit(Sender: TObject);
+var i : integer;
+    buf : string;
+begin
+with TLEListBox do begin
+ if selcount>0 then begin
+    buf:='';
+    for i:=0 to Items.Count-1 do if selected[i] then buf:=buf+','+Items.Strings[i];
+    tle1.text:=copy(buf,2,9999);
+ end;
+end;
+end;
+
 
 Procedure Tf_calendar.SetLang;
 var Alabels: TDatesLabelsArray;
@@ -339,7 +362,7 @@ Label2.caption:=rsTo;
 Label5.caption:=rsAt;
 Label3.caption:=rsBy;
 Label4.caption:=rsDays;
-Label9.caption:='Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson';
+Label9.caption:='Satellites calculation use QuickSat by Mike McCants,'+crlf+'Iridium flare prediction use Iridflar by Robert Matson';
 BtnRefresh.caption:=rsRefresh;
 BtnHelp.caption:=rsHelp;
 BtnClose.caption:=rsClose;
@@ -358,7 +381,7 @@ Satellites.caption:=rsArtificialSa;
 Label8.caption:=rsChart2;
 Label7.caption:=rsLimitingMagn;
 Label6.caption:='TLE';
-tle1.text:='Visual.tle';
+tle1.text:='visible.tle';
 fullday.caption:='Include day time pass';
 IridiumBox.caption:='Include Iridium flare';
 SatChartBox.caption:='For current chart only';
@@ -859,6 +882,118 @@ with lunargrid do begin
         break;
      end;
   end;
+end;
+end;
+
+Procedure Tf_calendar.RefreshSatellite;
+var f,fi : textfile;
+    buf,mm,y,d,ed,dt,hh,mi,ss,dat1,s1,s2 : string;
+    bufi,prgdir : string;
+    h,jda,ar,de,ma : double;
+    hi,jdi,ari,dei : double;
+    i,k,a,m,j : integer;
+    ai,mmi,ji : integer;
+const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
+begin
+prgdir:=slash(appdir)+slash('data')+slash('quicksat');
+dat61:=date1.jd;
+djd(dat61,j,m,a,h);
+FreeCoord(SatGrid);
+SatGrid.RowCount:=2;
+if j<1956 then exit;
+try
+screen.Cursor:=crHourGlass;
+Application.ProcessMessages;
+ed:=inttostr(a+round(date2.jd-date1.jd));
+DeleteFile(slash(SatDir)+'output.txt');
+DeleteFile(slash(SatDir)+'quicksat.ctl');
+if not fileexists(slash(SatDir)+'visible.tle') then CopyFile(slash(prgdir)+'sample.tle', slash(SatDir)+'visible.tle');
+if not fileexists(slash(SatDir)+'quicksat.mag') then CopyFile(slash(prgdir)+'quicksat.mag', slash(SatDir)+'quicksat.mag');
+SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,SatChartBox.Checked);
+if not Fileexists(slash(SatDir)+'output.txt') then begin
+  Showmessage('Cannot compute satellites.');
+  exit;
+end;
+Assignfile(f,slash(SatDir)+'output.txt');
+reset(f);
+jdi:=1;
+{if IridiumBox.Checked then begin
+  Assignfile(fi,slash(appdir)+satpath+'\iridflar.out');
+  reset(fi);
+  repeat
+    Readln(fi,bufi);
+    if eof(fi) then begin
+      jdi:=99999999;
+      Closefile(fi);
+      break;
+    end;
+  until copy(bufi,1,5)='-----';
+  if jdi<>99999999 then begin
+     Readln(fi,bufi);
+     ai:=strtoint(copy(bufi,7,4));
+     mmi:=strtoint(copy(bufi,12,2));
+     ji:=strtoint(copy(bufi,15,2));
+     hi:=strtoint(copy(bufi,18,2))+strtoint(copy(bufi,21,2))/60+strtoint(copy(bufi,24,2))/3600;
+     jdi:=jd(ai,mmi,ji,hi-timebias);
+  end;
+end;}
+i:=2;
+Readln(f,buf);
+Readln(f,buf);
+m:=1;a:=1;j:=1;
+repeat
+Readln(f,buf);
+if copy(buf,1,3)='***' then begin
+  SatGrid.RowCount:=i+1;
+  y:=copy(buf,6,4); a:=strtoint(y);
+  mm:=copy(buf,11,4); for k:=1 to 12 do if mm=mois[k] then m:=k;
+  d:=copy(buf,16,2); j:=strtoint(d);
+  dat1:=y+'-'+padzeros(inttostr(m),2)+'-'+padzeros(d,2);
+  Readln(f,buf);
+  Readln(f,buf);
+  continue;
+end;
+if trim(buf)='' then continue;
+hh:=padzeros(copy(buf,1,2),2);
+mi:=padzeros(copy(buf,4,2),2);
+ss:=padzeros(copy(buf,7,2),2);
+h:=strtoint(hh)+strtoint(mi)/60+strtoint(ss)/3600;
+jda:=jd(a,m,j,h-(config.tz.SecondsOffset/3600));
+with satgrid do begin
+  //if IridiumBox.Checked and(jdi<jda) then InsertIridium;
+  RowCount:=i+1;
+  cells[0,i]:=dat1+' '+hh+':'+mi+':'+ss;
+  cells[1,i]:=copy(buf,66,99);
+  ma:=strtofloat(copy(buf,26,4));
+  if ma>17.9 then begin
+     ma:=(ma-20+6);
+     str(ma:4:1,s1);
+     cells[2,i]:='('+s1+')';
+  end else cells[2,i]:=copy(buf,26,4);
+  cells[3,i]:=copy(buf,14,3);
+  cells[4,i]:=copy(buf,18,2);
+  cells[5,i]:=copy(buf,46,4);
+  s1:=padzeros(copy(buf,51,2),2);
+  s2:=padzeros(copy(buf,53,2),2);
+  ar:=strtoint(s1)+strtoint(s2)/60;
+  cells[6,i]:=s1+'h'+s2+'m';
+  cells[7,i]:=copy(buf,55,5);
+  de:=strtofloat(cells[7,i]);
+  cells[8,i]:=copy(buf,9,4);
+  cells[9,i]:=copy(buf,22,3);
+  objects[0,i]:=SetObjCoord(jda,ar,de);
+end;
+i:=i+1;
+until eof(f);
+jda:=99999999;
+//if IridiumBox.Checked and(jdi<>99999999) then InsertIridium; // ne pas oublier les derniers
+finally
+{$I-}
+screen.Cursor:=crDefault;
+Closefile(f);
+//if IridiumBox.Checked and (jdi<>99999999) then Closefile(fi);
+i:=ioresult;
+{$I+}
 end;
 end;
 
@@ -1458,7 +1593,7 @@ case pagecontrol1.ActivePage.TabIndex of
      3 : RefreshAsteroid;
      4 : RefreshSolarEclipse;
      5 : RefreshLunarEclipse;
-//     6 : RefreshSat;
+     6 : RefreshSatellite;
 end;
 config.tz.JD:=date1.JD;
 z1:=config.tz.ZoneName;
@@ -1476,6 +1611,16 @@ end;
 procedure Tf_calendar.GridDblClick(Sender: TObject);
 begin
 lockclick:=false;
+end;
+
+procedure Tf_calendar.SatPanelClick(Sender: TObject);
+begin
+ExecuteFile(URL_QUICKSAT);
+end;
+
+procedure Tf_calendar.Label9Click(Sender: TObject);
+begin
+ExecuteFile(URL_QUICKSAT);
 end;
 
 procedure Tf_calendar.GridMouseUp(Sender: TObject;
@@ -1629,6 +1774,8 @@ case pagecontrol1.ActivePage.TabIndex of
          Dategroup1(true);
          Dategroup2(false);
          SatPanel.Visible:=true;
+         if doscmd='wine' then CheckWine;
+         //if (dat61<>date1.jd) then RefreshSatellite;
          end;
 
 end;
@@ -1836,6 +1983,11 @@ begin {BtnCopyClipClick}
     buf := buf + 'Times are in days - format rise/transit.set columns as time' + LineEnding;
     Clipboard.AsText:=buf;
     end; {Grid => String Grid}
+end;
+
+procedure Tf_calendar.Button3Click(Sender: TObject);
+begin
+  ExecuteFile(URL_TLE);
 end;
 
 procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;

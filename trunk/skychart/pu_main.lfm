@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 339
+  Left = 411
   Height = 576
-  Top = 150
+  Top = 121
   Width = 826
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'

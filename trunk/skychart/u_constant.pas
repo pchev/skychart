@@ -241,6 +241,9 @@ const cdcversion = 'Version 3.3 svn';
       URL_WebHome = 'http://www.ap-i.net/skychart';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
       URL_BugTracker = 'http://www.ap-i.net/mantis/';
+
+      URL_TLE = 'http://www.space-track.org';
+      URL_QUICKSAT = 'http://www.io.com/~mmccants/programs/index.html';
       
       URL_HTTPCometElements = 'http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_HTTPCometElements2 = 'http://www.minorplanetcenter.org/iau/MPCORB/CometEls.txt';
@@ -638,7 +641,7 @@ var gzopen : Tgzopen;
 }
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
+Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
      compile_time,compile_version, lclver : string;

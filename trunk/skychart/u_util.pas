@@ -1181,8 +1181,12 @@ try
   P.Free;
   M.Free;
 except
-  P.Free;
-  M.Free;
+  on E: Exception do begin
+    result:=-1;
+    output.add(E.Message);
+    P.Free;
+    M.Free;
+  end;
 end;
 end;
 

@@ -110,7 +110,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="49">
+    <Units Count="50">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -445,6 +445,11 @@
         <HasResources Value="True"/>
         <UnitName Value="pu_ascomclient"/>
       </Unit48>
+      <Unit49>
+        <Filename Value="u_satellite.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u_satellite"/>
+      </Unit49>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -459,7 +464,6 @@
     <Parsing>
       <SyntaxOptions>
         <CStyleOperator Value="False"/>
-        <UseAnsiStrings Value="False"/>
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
