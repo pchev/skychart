@@ -135,7 +135,7 @@ object f_info: Tf_info
         Left = 104
         Height = 21
         Top = 2
-        Width = 85
+        Width = 92
         Caption = 'AutoRefresh'
         Checked = True
         OnClick = CheckBox1Click
@@ -175,711 +175,6 @@ object f_info: Tf_info
     ClientWidth = 554
     TabOrder = 2
     Visible = False
-    inline Memo1: TSynEdit
-      Left = 1
-      Height = 314
-      Top = 1
-      Width = 552
-      Align = alClient
-      Color = clBtnHighlight
-      Font.Height = -13
-      Font.Name = 'courier'
-      Font.Pitch = fpFixed
-      Font.Quality = fqNonAntialiased
-      ParentColor = False
-      ParentFont = False
-      PopupMenu = PopupMenu2
-      TabOrder = 1
-      OnDblClick = Memo1DblClick
-      BookMarkOptions.Xoffset = -18
-      Gutter.Visible = False
-      Gutter.Width = 57
-      Gutter.MouseActions = <      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccAny
-          ClickDir = cdDown
-          Command = 13
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbRight
-          ClickCount = ccSingle
-          ClickDir = cdUp
-          Command = 12
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end>
-      RightGutter.Width = 0
-      RightGutter.MouseActions = <      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccAny
-          ClickDir = cdDown
-          Command = 13
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbRight
-          ClickCount = ccSingle
-          ClickDir = cdUp
-          Command = 12
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end>
-      Keystrokes = <      
-        item
-          Command = ecUp
-          ShortCut = 38
-        end      
-        item
-          Command = ecSelUp
-          ShortCut = 8230
-        end      
-        item
-          Command = ecScrollUp
-          ShortCut = 16422
-        end      
-        item
-          Command = ecDown
-          ShortCut = 40
-        end      
-        item
-          Command = ecSelDown
-          ShortCut = 8232
-        end      
-        item
-          Command = ecScrollDown
-          ShortCut = 16424
-        end      
-        item
-          Command = ecLeft
-          ShortCut = 37
-        end      
-        item
-          Command = ecSelLeft
-          ShortCut = 8229
-        end      
-        item
-          Command = ecWordLeft
-          ShortCut = 16421
-        end      
-        item
-          Command = ecSelWordLeft
-          ShortCut = 24613
-        end      
-        item
-          Command = ecRight
-          ShortCut = 39
-        end      
-        item
-          Command = ecSelRight
-          ShortCut = 8231
-        end      
-        item
-          Command = ecWordRight
-          ShortCut = 16423
-        end      
-        item
-          Command = ecSelWordRight
-          ShortCut = 24615
-        end      
-        item
-          Command = ecPageDown
-          ShortCut = 34
-        end      
-        item
-          Command = ecSelPageDown
-          ShortCut = 8226
-        end      
-        item
-          Command = ecPageBottom
-          ShortCut = 16418
-        end      
-        item
-          Command = ecSelPageBottom
-          ShortCut = 24610
-        end      
-        item
-          Command = ecPageUp
-          ShortCut = 33
-        end      
-        item
-          Command = ecSelPageUp
-          ShortCut = 8225
-        end      
-        item
-          Command = ecPageTop
-          ShortCut = 16417
-        end      
-        item
-          Command = ecSelPageTop
-          ShortCut = 24609
-        end      
-        item
-          Command = ecLineStart
-          ShortCut = 36
-        end      
-        item
-          Command = ecSelLineStart
-          ShortCut = 8228
-        end      
-        item
-          Command = ecEditorTop
-          ShortCut = 16420
-        end      
-        item
-          Command = ecSelEditorTop
-          ShortCut = 24612
-        end      
-        item
-          Command = ecLineEnd
-          ShortCut = 35
-        end      
-        item
-          Command = ecSelLineEnd
-          ShortCut = 8227
-        end      
-        item
-          Command = ecEditorBottom
-          ShortCut = 16419
-        end      
-        item
-          Command = ecSelEditorBottom
-          ShortCut = 24611
-        end      
-        item
-          Command = ecToggleMode
-          ShortCut = 45
-        end      
-        item
-          Command = ecCopy
-          ShortCut = 16429
-        end      
-        item
-          Command = ecPaste
-          ShortCut = 8237
-        end      
-        item
-          Command = ecDeleteChar
-          ShortCut = 46
-        end      
-        item
-          Command = ecCut
-          ShortCut = 8238
-        end      
-        item
-          Command = ecDeleteLastChar
-          ShortCut = 8
-        end      
-        item
-          Command = ecDeleteLastChar
-          ShortCut = 8200
-        end      
-        item
-          Command = ecDeleteLastWord
-          ShortCut = 16392
-        end      
-        item
-          Command = ecUndo
-          ShortCut = 32776
-        end      
-        item
-          Command = ecRedo
-          ShortCut = 40968
-        end      
-        item
-          Command = ecLineBreak
-          ShortCut = 13
-        end      
-        item
-          Command = ecSelectAll
-          ShortCut = 16449
-        end      
-        item
-          Command = ecCopy
-          ShortCut = 16451
-        end      
-        item
-          Command = ecBlockIndent
-          ShortCut = 24649
-        end      
-        item
-          Command = ecLineBreak
-          ShortCut = 16461
-        end      
-        item
-          Command = ecInsertLine
-          ShortCut = 16462
-        end      
-        item
-          Command = ecDeleteWord
-          ShortCut = 16468
-        end      
-        item
-          Command = ecBlockUnindent
-          ShortCut = 24661
-        end      
-        item
-          Command = ecPaste
-          ShortCut = 16470
-        end      
-        item
-          Command = ecCut
-          ShortCut = 16472
-        end      
-        item
-          Command = ecDeleteLine
-          ShortCut = 16473
-        end      
-        item
-          Command = ecDeleteEOL
-          ShortCut = 24665
-        end      
-        item
-          Command = ecUndo
-          ShortCut = 16474
-        end      
-        item
-          Command = ecRedo
-          ShortCut = 24666
-        end      
-        item
-          Command = ecGotoMarker0
-          ShortCut = 16432
-        end      
-        item
-          Command = ecGotoMarker1
-          ShortCut = 16433
-        end      
-        item
-          Command = ecGotoMarker2
-          ShortCut = 16434
-        end      
-        item
-          Command = ecGotoMarker3
-          ShortCut = 16435
-        end      
-        item
-          Command = ecGotoMarker4
-          ShortCut = 16436
-        end      
-        item
-          Command = ecGotoMarker5
-          ShortCut = 16437
-        end      
-        item
-          Command = ecGotoMarker6
-          ShortCut = 16438
-        end      
-        item
-          Command = ecGotoMarker7
-          ShortCut = 16439
-        end      
-        item
-          Command = ecGotoMarker8
-          ShortCut = 16440
-        end      
-        item
-          Command = ecGotoMarker9
-          ShortCut = 16441
-        end      
-        item
-          Command = ecSetMarker0
-          ShortCut = 24624
-        end      
-        item
-          Command = ecSetMarker1
-          ShortCut = 24625
-        end      
-        item
-          Command = ecSetMarker2
-          ShortCut = 24626
-        end      
-        item
-          Command = ecSetMarker3
-          ShortCut = 24627
-        end      
-        item
-          Command = ecSetMarker4
-          ShortCut = 24628
-        end      
-        item
-          Command = ecSetMarker5
-          ShortCut = 24629
-        end      
-        item
-          Command = ecSetMarker6
-          ShortCut = 24630
-        end      
-        item
-          Command = ecSetMarker7
-          ShortCut = 24631
-        end      
-        item
-          Command = ecSetMarker8
-          ShortCut = 24632
-        end      
-        item
-          Command = ecSetMarker9
-          ShortCut = 24633
-        end      
-        item
-          Command = ecNormalSelect
-          ShortCut = 24654
-        end      
-        item
-          Command = ecColumnSelect
-          ShortCut = 24643
-        end      
-        item
-          Command = ecLineSelect
-          ShortCut = 24652
-        end      
-        item
-          Command = ecTab
-          ShortCut = 9
-        end      
-        item
-          Command = ecShiftTab
-          ShortCut = 8201
-        end      
-        item
-          Command = ecMatchBracket
-          ShortCut = 24642
-        end>
-      MouseActions = <      
-        item
-          Shift = []
-          ShiftMask = [ssShift, ssAlt]
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 1
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = [ssShift]
-          ShiftMask = [ssShift, ssAlt]
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 1
-          MoveCaret = True
-          Option = 1
-          Priority = 0
-        end      
-        item
-          Shift = [ssAlt]
-          ShiftMask = [ssShift, ssAlt]
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 3
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = [ssShift, ssAlt]
-          ShiftMask = [ssShift, ssAlt]
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 3
-          MoveCaret = True
-          Option = 1
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbRight
-          ClickCount = ccSingle
-          ClickDir = cdUp
-          Command = 12
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccDouble
-          ClickDir = cdDown
-          Command = 6
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccTriple
-          ClickDir = cdDown
-          Command = 7
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccQuad
-          ClickDir = cdDown
-          Command = 8
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbMiddle
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 10
-          MoveCaret = True
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = [ssCtrl]
-          ShiftMask = [ssShift, ssAlt, ssCtrl]
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdUp
-          Command = 11
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end>
-      MouseSelActions = <      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end      
-        item
-          Shift = []
-          ShiftMask = []
-          Button = mbLeft
-          ClickCount = ccSingle
-          ClickDir = cdDown
-          Command = 9
-          MoveCaret = False
-          Option = 0
-          Priority = 0
-        end>
-      Lines.Strings = (
-        'Memo1'
-      )
-      Options = [eoDragDropEditing, eoGroupUndo, eoScrollPastEol, eoTrimTrailingSpaces]
-      ReadOnly = True
-      RightEdge = 0
-      BracketHighlightStyle = sbhsBoth
-      TabWidth = 10
-      inline TSynGutterPartList
-        object TSynGutterMarks
-          Width = 24
-        end
-        object TSynGutterLineNumber
-          Width = 17
-          MouseActions = <>
-          MarkupInfo.Background = clBtnFace
-          MarkupInfo.Foreground = clNone
-          DigitCount = 2
-          ShowOnlyLineNumbersMultiplesOf = 1
-          ZeroStart = False
-          LeadingZeros = False
-        end
-        object TSynGutterChanges
-          Width = 4
-          ModifiedColor = 59900
-          SavedColor = clGreen
-        end
-        object TSynGutterSeparator
-          Width = 2
-        end
-        object TSynGutterCodeFolding
-          MouseActions = <          
-            item
-              Shift = []
-              ShiftMask = []
-              Button = mbRight
-              ClickCount = ccSingle
-              ClickDir = cdUp
-              Command = 16
-              MoveCaret = False
-              Option = 0
-              Priority = 0
-            end          
-            item
-              Shift = []
-              ShiftMask = [ssShift]
-              Button = mbMiddle
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 14
-              MoveCaret = False
-              Option = 0
-              Priority = 0
-            end          
-            item
-              Shift = [ssShift]
-              ShiftMask = [ssShift]
-              Button = mbMiddle
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 14
-              MoveCaret = False
-              Option = 1
-              Priority = 0
-            end          
-            item
-              Shift = []
-              ShiftMask = []
-              Button = mbLeft
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 0
-              MoveCaret = False
-              Option = 0
-              Priority = 0
-            end>
-          MarkupInfo.Background = clNone
-          MarkupInfo.Foreground = clGray
-          MouseActionsExpanded = <          
-            item
-              Shift = []
-              ShiftMask = []
-              Button = mbLeft
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 14
-              MoveCaret = False
-              Option = 0
-              Priority = 0
-            end>
-          MouseActionsCollapsed = <          
-            item
-              Shift = [ssCtrl]
-              ShiftMask = [ssCtrl]
-              Button = mbLeft
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 15
-              MoveCaret = False
-              Option = 0
-              Priority = 0
-            end          
-            item
-              Shift = []
-              ShiftMask = [ssCtrl]
-              Button = mbLeft
-              ClickCount = ccAny
-              ClickDir = cdDown
-              Command = 15
-              MoveCaret = False
-              Option = 1
-              Priority = 0
-            end>
-        end
-      end
-      inline SynRightGutterPartList1: TSynRightGutterPartList
-      end
-    end
     object Panel3: TPanel
       Left = 1
       Height = 27
@@ -891,7 +186,7 @@ object f_info: Tf_info
       FullRepaint = False
       TabOrder = 0
       object Button3: TButton
-        Left = 204
+        Left = 300
         Height = 25
         Top = 1
         Width = 75
@@ -902,24 +197,13 @@ object f_info: Tf_info
         TabOrder = 0
       end
       object Edit1: TEdit
-        Left = 108
+        Left = 212
         Height = 21
         Top = 3
         Width = 85
         Anchors = [akTop, akRight]
         OnKeyUp = Edit1KeyUp
         TabOrder = 1
-      end
-      object Button5: TButton
-        Left = 292
-        Height = 25
-        Top = 1
-        Width = 75
-        Anchors = [akTop, akRight]
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Sort by RA'
-        OnClick = Button5Click
-        TabOrder = 2
       end
       object Button6: TButton
         Left = 380
@@ -930,7 +214,7 @@ object f_info: Tf_info
         BorderSpacing.InnerBorder = 4
         Caption = 'Print'
         OnClick = Button6Click
-        TabOrder = 3
+        TabOrder = 2
       end
       object Button7: TButton
         Left = 468
@@ -941,13 +225,62 @@ object f_info: Tf_info
         BorderSpacing.InnerBorder = 4
         Caption = 'Save'
         OnClick = Button7Click
+        TabOrder = 3
+      end
+      object ComboBox1: TComboBox
+        Left = 108
+        Height = 27
+        Top = 0
+        Width = 96
+        Anchors = [akTop, akRight]
+        ItemHeight = 0
+        OnChange = ComboBox1Change
+        Style = csDropDownList
         TabOrder = 4
       end
+      object SortLabel: TLabel
+        Left = 44
+        Height = 14
+        Top = 6
+        Width = 55
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        Caption = 'SortLabel'
+        ParentColor = False
+      end
+    end
+    object StringGrid2: TStringGrid
+      Left = 1
+      Height = 314
+      Top = 1
+      Width = 552
+      Align = alClient
+      DefaultColWidth = 70
+      FixedCols = 0
+      FixedRows = 0
+      HeaderHotZones = [gzNormal, gzFixedCols]
+      HeaderPushZones = [gzNormal, gzFixedCols]
+      MouseWheelOption = mwGrid
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goRelaxedRowSelect, goSmoothScroll, goScrollKeepVisible]
+      PopupMenu = PopupMenu2
+      TabOrder = 1
+      TitleFont.Height = -11
+      OnCompareCells = StringGrid2CompareCells
+      OnDblClick = StringGrid2DblClick
+      OnMouseDown = StringGrid2MouseDown
+      OnMouseUp = StringGrid2MouseUp
+      ColWidths = (
+        109
+        109
+        109
+        109
+        112
+      )
     end
   end
   object PopupMenu1: TPopupMenu
-    left = 112
-    top = 64
+    left = 16
+    top = 272
     object closeconnection: TMenuItem
       Caption = 'Close Connection'
       OnClick = closeconnectionClick
@@ -957,44 +290,30 @@ object f_info: Tf_info
     Enabled = False
     Interval = 2000
     OnTimer = Timer1Timer
-    left = 64
-    top = 64
+    left = 16
+    top = 56
   end
   object PopupMenu2: TPopupMenu
-    left = 104
-    top = 176
+    left = 16
+    top = 344
     object outslectionner1: TMenuItem
-      Action = EditSelectAll1
+      Caption = '&Tout sélectionner'
+      Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
+      ShortCut = 16449
       OnClick = EditSelectAll1Execute
     end
     object Copier1: TMenuItem
-      Action = EditCopy1
-      OnClick = EditCopy1Execute
-    end
-  end
-  object ActionList1: TActionList
-    left = 72
-    top = 176
-    object EditSelectAll1: TEditSelectAll
-      Category = 'Edition'
-      Caption = '&Tout sélectionner'
-      Hint = 'Tout sélectionner|Sélectionner l''intégralité du document'
-      OnExecute = EditSelectAll1Execute
-      ShortCut = 16449
-    end
-    object EditCopy1: TEditCopy
-      Category = 'Edition'
       Caption = '&Copier'
       Hint = 'Copier|Copier la sélection et la mettre dans le Presse-papiers'
       ImageIndex = 1
-      OnExecute = EditCopy1Execute
       ShortCut = 16451
+      OnClick = EditCopy1Execute
     end
   end
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
-    Options = [ofOverwritePrompt, ofHideReadOnly, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
-    left = 72
-    top = 136
+    Options = [ofOverwritePrompt, ofHideReadOnly, ofExtensionDifferent, ofNoReadOnlyReturn, ofEnableSizing, ofViewDetail]
+    left = 24
+    top = 128
   end
 end

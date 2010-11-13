@@ -185,6 +185,10 @@ msgstr "Hæð"
 msgid "%sAlt turns:"
 msgstr "%sStjörnuhæð - snúningar:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 #, fuzzy
 #| msgid "Always show compass rose"
@@ -970,6 +974,10 @@ msgstr "Hnitakerfi"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Afrita"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -3059,6 +3067,10 @@ msgstr "Nr."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Engin gögn fyrir smástirni fundust!%sVinsamlegast hlaðið fyrst inn MPC skrá."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 #, fuzzy
 #| msgid "No Margin"
@@ -3953,6 +3965,14 @@ msgstr "Endurstilla kort"
 msgid "Reset chart and options"
 msgstr "Endurstilla kort og stillingar"
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Upplausn:"
@@ -4527,9 +4547,9 @@ msgstr "Sumum færslum var hafnað, upplýsingar eru í %sreject.txt"
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Eitthvað fór úrskeiðis við innsetningu forritsins. Það verður að hætta"
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "RA-röð"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4875,6 +4895,10 @@ msgstr "Í dag"
 msgid "to file:"
 msgstr ""
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 #, fuzzy
 #| msgid "Tool Bar"
@@ -5168,6 +5192,10 @@ msgstr "Breytistjarna"
 #| msgid "Variable Stars"
 msgid "Variable stars"
 msgstr "Breytistjörnur"
+
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"

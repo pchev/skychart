@@ -1438,6 +1438,9 @@ begin
     Font.Name:='courier';
     Font.Pitch:=fpFixed;
     Font.Size:=8;
+    {$ifdef unix}
+    Font.Size:=6;
+    {$endif}
     Font.Color:=clBlack;
     Pen.Color:=clBlack;
     TextDown:=TextHeight(StrDate)*3 div 2;

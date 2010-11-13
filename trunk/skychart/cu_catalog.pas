@@ -2781,6 +2781,7 @@ if i2<359 then begin
         cfgsc.HorizonMax:=max(cfgsc.HorizonMax,de);
     end;
 end;
+cfgshr.horizonlist[361]:=cfgshr.horizonlist[1];
 end;
 end;
 cfgsc.horizonlist:=@(cfgshr.horizonlist);  // require in cfgsc for horizon clipping in u_projection, this also let the door open for a specific horizon for each chart but this is not implemented at this time.

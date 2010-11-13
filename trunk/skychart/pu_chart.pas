@@ -37,7 +37,7 @@ uses
      pu_ascomclient,
      {$endif}
      u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas, FileUtil,
+     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas, FileUtil, Clipbrd,
      LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
      ActnList, SysUtils, LResources;
      
@@ -45,6 +45,7 @@ const maxundo=10;
 
 type
   Tstr1func = procedure(txt:string) of object;
+  Tstr12func = procedure(txt1,txt2:string) of object;
   Tstr2func = procedure(txt:string;sender:TObject) of object;
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
@@ -65,6 +66,7 @@ type
     About1: TMenuItem;
     AddLabel1: TMenuItem;
     MenuItem1: TMenuItem;
+    CopyCoord1: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
@@ -118,6 +120,7 @@ type
     procedure About1Click(Sender: TObject);
     procedure AddLabel1Click(Sender: TObject);
     procedure BlinkTimerTimer(Sender: TObject);
+    procedure CopyCoord1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -178,7 +181,7 @@ type
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
-    FListInfo: Tstr1func;
+    FListInfo: Tstr12func;
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
@@ -198,6 +201,7 @@ type
     procedure SyncPlugin(Sender: TObject);
     procedure SetNightVision(value:boolean);
     procedure Image1Click(Sender: TObject);
+    procedure Image1DblClick(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,Y: Integer);
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
@@ -211,7 +215,7 @@ type
     ChartCursor: TCursor;
     sc: Tskychart;
     indi1: TIndiClient;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb: double;
@@ -221,7 +225,7 @@ type
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
-    function  IdentXY(X, Y: Integer;searchcenter: boolean= true):boolean;
+    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
@@ -291,7 +295,7 @@ type
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
-    property OnListInfo: Tstr1func read FListInfo write FListInfo;
+    property OnListInfo: Tstr12func read FListInfo write FListInfo;
     property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
     property NightVision: Boolean read FNightVision write SetNightVision;
   end;
@@ -313,6 +317,7 @@ RemoveAllLabel1.caption:=rsRemoveAllLab;
 Telescope1.caption:=rsTelescope;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
+CopyCoord1.Caption:=rsCopyCoordina;
 if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
    Connect1.caption:=rsConnectTeles
 end else begin
@@ -339,6 +344,7 @@ begin
  WriteTrace('Create new chart');
 {$endif}
  locked:=true;
+ lockmove:=false;
  lockkey:=false;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
@@ -348,6 +354,7 @@ begin
  Image1.Align:=alClient;
  Image1.DoubleBuffered := true;
  Image1.OnClick:=Image1Click;
+ image1.OnDblClick:=Image1DblClick;
  Image1.OnMouseDown:=Image1MouseDown;
  Image1.OnMouseMove:=Image1MouseMove;
  Image1.OnMouseUp:=Image1MouseUp;
@@ -441,6 +448,14 @@ begin
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
 //setfocus;
+end;
+
+procedure Tf_chart.Image1DblClick(Sender: TObject);
+begin
+{$ifdef trace_debug}
+ WriteTrace(caption+' Image1DblClick');
+{$endif}
+if identlabel.Visible then identlabelClick(sender);
 end;
 
 procedure Tf_chart.AutoRefresh;
@@ -1316,6 +1331,20 @@ begin
   Refresh;
 end;
 
+procedure Tf_chart.CopyCoord1Click(Sender: TObject);
+var txt: string;
+    ra,dec,a,h,l,b,le,be:double;
+begin
+  if sc.cfgsc.FindName>'' then begin
+      ra:=sc.cfgsc.FindRA;
+      dec:=sc.cfgsc.FindDec;
+  end else begin
+      sc.GetCoord(xcursor,ycursor,ra,dec,a,h,l,b,le,be);
+  end;
+  txt:=ARtoStr(ra*rad2deg/15)+blank+DEToStr(dec*rad2deg);
+  Clipboard.AsText:=txt;
+end;
+
 procedure Tf_chart.Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
 handled:=true;
@@ -1350,11 +1379,11 @@ end
 else identlabel.Visible:=false;
 end;
 
-function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean=true):boolean;
-var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,dist:double;
+function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true):boolean;
+var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
-    showdist:boolean;
+    showdist,solsys,lastsolsys:boolean;
 begin
 result:=false;
 if locked then exit;
@@ -1367,15 +1396,20 @@ lasttrde:=sc.cfgsc.TrackDEC;
 lasttype:=sc.cfgsc.TrackType;
 lastobj:=sc.cfgsc.Trackobj;
 lasttrname:=sc.cfgsc.TrackName;
+lastX:=sc.cfgsc.FindX;
+lastY:=sc.cfgsc.FindY;
+lastZ:=sc.cfgsc.FindZ;
+lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Findtype=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx,searchcenter);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter);  //else 6 pixel
-ShowIdentLabel;
+if showlabel then ShowIdentLabel;
 if showdist then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDEC;
+   solsys:=((sc.cfgsc.FindType=ftAst)or(sc.cfgsc.FindType=ftCom)or(sc.cfgsc.FindType=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
    dist := rad2deg*angulardistance(ra,dec,lastra,lastdec);
    if dist>0 then begin
       pa:=round(rmod(rad2deg*PositionAngle(lastra,lastdec,ra,dec)+360,360));
@@ -1388,6 +1422,10 @@ if showdist then begin
       buf:=rsFrom+':  "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
       txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
+      if solsys and lastsolsys then begin
+         ds:=sqrt((lastX-sc.cfgsc.FindX)*(lastX-sc.cfgsc.FindX)+(lastY-sc.cfgsc.FindY)*(lastY-sc.cfgsc.FindY)+(lastZ-sc.cfgsc.FindZ)*(lastZ-sc.cfgsc.FindZ));
+         txt:=txt+tab+rsDistance+': '+FormatFloat(f5,ds)+'au';
+      end;
       if sc.cfgsc.ManualTelescope then begin
         case sc.cfgsc.ManualTelescopeType of
          0 : begin
@@ -1436,15 +1474,15 @@ end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
 var ra,dec,a,h,l,b,le,be,dx:double;
-    buf:widestring;
+    buf,msg:string;
 begin
 result:=false;
 if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(12/sc.cfgsc.BxGlb); // search a 12 pixel radius
-sc.Findlist(ra,dec,dx,dx,buf,false,true,true);
-if assigned(FListInfo) then FListInfo(buf);
+sc.Findlist(ra,dec,dx,dx,buf,msg,false,true,true);
+if assigned(FListInfo) then FListInfo(buf,msg);
 end;
 
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -1515,6 +1553,7 @@ procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
 var c:double;
 begin
 if locked then exit;
+if lockmove then exit;
 if skipmove>0 then begin
    system.dec(skipmove);
    exit;
@@ -1533,6 +1572,14 @@ if (ssLeft in shift)and(not(ssShift in shift)) then begin
    ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift)) then begin
      TrackCursor(X,Y);
+end else if Shift=[ssCtrl] then begin
+     try
+     lockmove:=true;
+     IdentXY(x,y,true,false);
+     Application.ProcessMessages;
+     finally
+     lockmove:=false;
+     end;
 end else if ((ssMiddle in shift)and(ssCtrl in Shift)) then begin
      c:=abs(y-lastyzoom)/200;
      if c>1 then c:=1;
@@ -1592,7 +1639,8 @@ case action of
      XZoom1:=X;
      YZoom1:=Y;
      Zoomstep:=1;
-   end else begin
+   end;
+   if Zoomstep=4 then begin
      // move box or confirm click
      DXzoom:=Xzoom1-X;
      DYzoom:=Yzoom1-Y;
@@ -2071,6 +2119,7 @@ if i>0 then begin
   else if key='TL' then result:=rsEstimatedTai+d+value
   else if key='EL' then result:=rsSolarElongat+d+value
   else if key='RSOL' then result:=rsSolarDistanc+d+value
+  else if key='VEL' then result:=rsVelocity+d+value
   else if key='D1' then result:=rsDescription+' 1'+d+value
   else if key='D2' then result:=rsDescription+' 2'+d+value
   else if key='D3' then result:=rsDescription+' 3'+d+value

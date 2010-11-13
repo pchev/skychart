@@ -122,7 +122,7 @@ Tskychart = class (TComponent)
     function FindatRaDec(ra,dec,dx: double; searchcenter: boolean; showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 //    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
-    procedure FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
+    procedure FindList(ra,dec,dx,dy: double;var text,msg:string;showall,allobject,trunc:boolean);
     property OnShowDetailXY: Tint2func read FShowDetailXY write FShowDetailXY;
     function GetChartInfo(sep:string=blank):string;
     function GetChartPos:string;
@@ -581,7 +581,7 @@ for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>fov then begin
 end;
 
 function Tskychart.InitCoordinates:boolean;
-var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,saveaz : double;
+var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
     s1,s2,s3: string;
     TrackAltAz: boolean;
 begin
@@ -632,7 +632,7 @@ end;
          // comet
          if cdb.GetComElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2) then begin
             Fplanet.InitComet(v1,v2,v3,v4,v5,v6,v7,v8,v9,s1);
-            Fplanet.Comet(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9);
+            Fplanet.Comet(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12);
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
@@ -648,7 +648,7 @@ end;
          // asteroid
          if cdb.GetAstElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2,s3) then begin
             Fplanet.InitAsteroid(cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s2);
-            Fplanet.Asteroid(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4);
+            Fplanet.Asteroid(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7);
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
@@ -1079,7 +1079,7 @@ if Fcatalog.OpenLin then
  while Fcatalog.readlin(rec) do begin
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
- projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
+ projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
  if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
@@ -1756,7 +1756,7 @@ end;
 end;
 end;
 
-procedure Tskychart.FindList(ra,dec,dx,dy: double;var text:widestring;showall,allobject,trunc:boolean);
+procedure Tskychart.FindList(ra,dec,dx,dy: double;var text,msg:string;showall,allobject,trunc:boolean);
 var x1,x2,y1,y2,xx1,yy1:double;
     rec: Gcatrec;
     desc,n,m,d: string;
@@ -1884,9 +1884,8 @@ try
      if Fcatalog.cfgcat.starcaton[usnoa-BaseStar] then FindAtPosCat(usnoa);
      if Fcatalog.cfgcat.starcaton[microcat-BaseStar] then FindAtPosCat(microcat);
   end;
-  if i>maxln then desc:=Format(rsMoreThanObje, [inttostr(maxln)])
-             else desc:=Format(rsThereAreObjec, [inttostr(i)]);
-  text:=text+desc+crlf;
+  if i>maxln then msg:=Format(rsMoreThanObje, [inttostr(maxln)])
+             else msg:=Format(rsThereAreObjec, [inttostr(i)]);
 finally
   Fcatalog.CloseCat;
   if showall then begin
@@ -2254,55 +2253,65 @@ until (not ok)or(hc<-pid2);
 end;
 
 function Tskychart.DrawHorizon:boolean;
-var az,h,x1,y1 : double;
-    i,xx,yy: integer;
-    x,y,xh,yh,xp,yp,x0,y0,xph,yph,x0h,y0h :single;
+const hdiv=10;
+var az,h,hstep,azp,hpstep,x1,y1 : double;
+    ps: array[0..1,0..2*hdiv+1] of single;
+    i,j,xx,yy: integer;
+    x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1 :single;
     first:boolean;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
 {$endif}
+fillx1:=0;
+filly1:=0;
 if cfgsc.ProjPole=Altaz then begin
-  if cfgsc.hcentre<-(cfgsc.fov/6) then
-     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)
-       div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter,
-       rsBelowTheHori);
+  if (cfgsc.hcentre<(-10))or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
+     fillx1:=(cfgsc.xmax-cfgsc.xmin)div 2;
+     filly1:=(cfgsc.ymax-cfgsc.ymin)div 2;
+  end;
   if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
-     first:=true; xp:=0;yp:=0;x0:=0;y0:=0; xph:=0;yph:=0;x0h:=0;y0h:=0;
-     for i:=1 to 360 do begin
+     for i:=1 to 361 do begin
        h:=cfgsc.horizonlist^[i];
        az:=deg2rad*rmod(360+i-1-180,360);
-       proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-       WindowXY(x1,y1,x,y,cfgsc);
-       proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-       WindowXY(x1,y1,xh,yh,cfgsc);
-       if first then begin
-          first:=false;
-          x0:=x; x0h:=xh;
-          y0:=y; y0h:=yh;
+       hstep:=h/hdiv;
+       if i=1 then begin
+         hpstep:=hstep;
+         azp:=az;
+         continue;
        end else begin
-          if cfgsc.FillHorizon then begin
-             Fplot.PlotOutline(xp,yp,0,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-             Fplot.PlotOutline(x,y,2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-             Fplot.PlotOutline(xh,yh,2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-             Fplot.PlotOutline(xph,yph,1,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-          end else begin
-             Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[19],1);
-          end;
-          Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+         if cfgsc.FillHorizon and ((abs(hpstep-hstep))>(0.35/hdiv)) then hpstep:=hstep;
+         for j:=0 to hdiv do begin
+           proj2(-azp,j*hpstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+           WindowXY(x1,y1,ps[0,j],ps[1,j],cfgsc);
+           proj2(-az,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+           WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
+         end;
+         if cfgsc.FillHorizon then begin
+           Fplot.PlotOutline(ps[0,0],ps[1,0],0,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
+           for j:=1 to 2*hdiv do begin
+              Fplot.PlotOutline(ps[0,j],ps[1,j],2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
+           end;
+           Fplot.PlotOutline(ps[0,2*hdiv+1],ps[1,2*hdiv+1],1,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
+         end else begin
+           Fplot.Plotline(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],Fplot.cfgplot.Color[19],1);
+         end;
+         Fplot.Plotline(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],Fplot.cfgplot.Color[12],2);
        end;
-       xp:=x; xph:=xh;
-       yp:=y; yph:=yh;
+       azp:=az;
+       hpstep:=hstep;
      end;
      if cfgsc.FillHorizon then begin
-        Fplot.PlotOutline(x,y,0,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-        Fplot.PlotOutline(x0,y0,2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-        Fplot.PlotOutline(x0h,y0h,2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-        Fplot.PlotOutline(xh,yh,1,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
-     end else begin
-        Fplot.Plotline(x,y,x0,y0,Fplot.cfgplot.Color[19],1);
+        if (fillx1>0)or(filly1>0) then fplot.cnv.FloodFill(round(fillx1),round(filly1),Fplot.cfgplot.Color[12],fsBorder);
+        GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
+        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,Fplot.cfgplot.Color[12],fsBorder);
+        GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
+        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,Fplot.cfgplot.Color[12],fsBorder);
+        GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
+        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,Fplot.cfgplot.Color[12],fsBorder);
+        GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
+        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,Fplot.cfgplot.Color[12],fsBorder);
      end;
-     Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
   end
   else begin
      first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
@@ -2357,6 +2366,10 @@ if cfgsc.ProjPole=Altaz then begin
        az:=az+45;
     end;
   end;
+  if (cfgsc.hcentre<(-10))or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
+     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori);
+  end;
+
 end;
 result:=true;
 end;
@@ -2704,7 +2717,7 @@ end;
 
 function Tskychart.DrawEcliptic:boolean;
 var l,b,e,ar,de,xx,yy : double;
-    i,color : integer;
+    i,color,mult : integer;
     x1,y1,x2,y2:single;
     first : boolean;
 begin
@@ -2718,8 +2731,14 @@ b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[14];
 x1:=0; y1:=0;
-for i:=0 to 360 do begin
-  l:=deg2rad*i;
+if (cfgsc.fov*rad2deg)>180 then mult:=15
+else if (cfgsc.fov*rad2deg)>90 then mult:=10
+else if (cfgsc.fov*rad2deg)>30 then mult:=5
+else if (cfgsc.fov*rad2deg)>10 then mult:=3
+else if (cfgsc.fov*rad2deg)>5 then mult:=2
+else mult:=1;
+for i:=0 to (360 div mult) do begin
+  l:=deg2rad*i*mult;
   ecl2eq(l,b,e,ar,de);
   if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
   projection(ar,de,xx,yy,true,cfgsc) ;
@@ -2736,7 +2755,7 @@ end;
 
 function Tskychart.DrawGalactic:boolean;
 var l,b,ar,de,xx,yy : double;
-    i,color : integer;
+    i,color,mult : integer;
     x1,y1,x2,y2:single;
     first : boolean;
 begin
@@ -2749,8 +2768,14 @@ b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[15];
 x1:=0; y1:=0;
-for i:=0 to 360 do begin
-  l:=deg2rad*i;
+if (cfgsc.fov*rad2deg)>180 then mult:=15
+else if (cfgsc.fov*rad2deg)>90 then mult:=10
+else if (cfgsc.fov*rad2deg)>30 then mult:=5
+else if (cfgsc.fov*rad2deg)>10 then mult:=3
+else if (cfgsc.fov*rad2deg)>5 then mult:=2
+else mult:=1;
+for i:=0 to (360 div mult) do begin
+  l:=deg2rad*i*mult;
   gal2eq(l,b,ar,de,cfgsc);
   if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
   projection(ar,de,xx,yy,true,cfgsc) ;

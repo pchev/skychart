@@ -1213,6 +1213,8 @@ begin
 with cnv do begin
   if lwidth=0 then Pen.width:=1
      else Pen.width:=lwidth*cfgchart.drawpen;
+  Brush.Style:=bsClear;
+  Brush.Color:=cfgplot.backgroundcolor;
   Pen.Mode:=pmCopy;
   Pen.Color:=lcolor;
   Pen.Style:=style;
@@ -1982,6 +1984,7 @@ end;
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
     ATextStyle: TTextStyle;
+    w,h: integer;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then begin
@@ -2000,6 +2003,7 @@ with cnv do begin
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
+ // Font.Orientation:=900;
   ts:=TextExtent(txt);
   if r>=0 then begin
   case Xalign of
@@ -2018,6 +2022,7 @@ with cnv do begin
   end else begin
     TextOut(xx,yy,txt);
   end;
+  Font.Orientation:=0;
 end;
 // If drawing to the screen use movable label 
 end else begin
@@ -2036,6 +2041,19 @@ with labels[i] do begin
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   caption:=txt;
+ {
+  visible:=true;
+  AutoSize:=true;
+  Font.Orientation:=0;
+  caption:=txt;
+  AdjustSize;
+  h:=height;
+  w:=width;
+  AutoSize:=false;
+  Font.Orientation:=600;
+  width:=h;
+  height:=w;
+ }
   //tag:=id;
   if r>=0 then begin
     case Xalign of
@@ -2342,12 +2360,19 @@ with cnv do begin
      Pen.Color:=cfgplot.Color[13];
      Ellipse(round(rosex-roserd),round(rosey-roserd),round(rosex+roserd),round(rosey+roserd));
      sincos(rot,c,s);
+     if not WhiteBg then Pen.Color:=clRed;
      moveto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
      lineto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
      moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
      lineto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
      moveto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
      lineto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     if not WhiteBg then Pen.Color:=clBlue;
+     moveto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
+     lineto(round(rosex+(roserd*c)),round(rosey+(roserd*s)));
+     moveto(round(rosex+(roserd*c)),round(rosey+(roserd*s)));
+     lineto(round(rosex-(roserd*s/8)),round(rosey+(roserd/8*c)));
+     Pen.Color:=cfgplot.Color[13];
      for i:=1 to 7 do begin
          sincos(rot+i*pi/4,c,s);
          moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));

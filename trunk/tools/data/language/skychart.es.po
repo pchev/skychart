@@ -155,6 +155,10 @@ msgstr "Altitud"
 msgid "%sAlt turns:"
 msgstr "%sgiros Alt:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr ""
@@ -794,6 +798,10 @@ msgstr "Coordenadas de Grila"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copiar"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2533,6 +2541,10 @@ msgstr "No."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "No se encontró datos de Asteroides!%sPor favor, cargue un archivo MPC primero."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Sin Margen"
@@ -3283,6 +3295,14 @@ msgstr "Reiniciar Carta"
 msgid "Reset chart and options"
 msgstr ""
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Resolución:"
@@ -3739,9 +3759,9 @@ msgstr "Algunos registros fueron rechazados, ver archivo %sreject.txt para detal
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr ""
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Orden por RA"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4031,6 +4051,10 @@ msgstr "Hoy"
 msgid "to file:"
 msgstr ""
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Barra de Herramientas"
@@ -4269,6 +4293,10 @@ msgstr "Estrella Variable"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
+msgstr ""
+
+#: u_translation.rsvelocity
+msgid "Velocity"
 msgstr ""
 
 #: u_translation.rsvenus

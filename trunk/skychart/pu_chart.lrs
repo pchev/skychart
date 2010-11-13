@@ -1,5 +1,3 @@
-{ This is an automatically generated lazarus resource file }
-
 LazarusResources.Add('Tf_chart','FORMDATA',[
   'TPF0'#8'Tf_chart'#7'f_chart'#4'Left'#3#179#1#6'Height'#3'R'#1#3'Top'#3#128#0
   +#5'Width'#3#252#1#13'ActiveControl'#7#6'Panel1'#7'Caption'#6#5'Chart'#12'Cli'
@@ -67,26 +65,27 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +#7#6'Centre'#7'OnClick'#7#13'CentreExecute'#0#0#9'TMenuItem'#5'Zoom1'#6'Acti'
   ,'on'#7#12'zoomplusmove'#7'OnClick'#7#19'zoomplusmoveExecute'#0#0#9'TMenuItem'
   +#5'Zoom2'#6'Action'#7#13'zoomminusmove'#7'OnClick'#7#20'zoomminusmoveExecute'
-  +#0#0#9'TMenuItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#16'NewFinderCircl'
-  +'e1'#7'Caption'#6#17'New Finder Circle'#7'OnClick'#7#21'NewFinderCircle1Clic'
-  +'k'#0#0#9'TMenuItem'#17'RemoveLastCircle1'#7'Caption'#6#18'Remove Last Circl'
-  +'e'#7'OnClick'#7#22'RemoveLastCircle1Click'#0#0#9'TMenuItem'#17'RemoveAllCir'
-  +'cles1'#7'Caption'#6#18'Remove All Circles'#7'OnClick'#7#22'RemoveAllCircles'
-  +'1Click'#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#9
-  +'AddLabel1'#7'Caption'#6#9'New Label'#7'OnClick'#7#14'AddLabel1Click'#0#0#9
-  +'TMenuItem'#16'RemoveLastLabel1'#7'Caption'#6#17'Remove Last Label'#7'OnClic'
-  +'k'#7#21'RemoveLastLabel1Click'#0#0#9'TMenuItem'#15'RemoveAllLabel1'#7'Capti'
-  +'on'#6#17'Remove All Labels'#7'OnClick'#7#20'RemoveAllLabel1Click'#0#0#9'TMe'
-  +'nuItem'#2'N2'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#10'Telescope1'#7'Caption'#6
-  +#9'Telescope'#0#9'TMenuItem'#5'Slew1'#7'Caption'#6#4'Slew'#7'OnClick'#7#10'S'
-  +'lew1Click'#0#0#9'TMenuItem'#5'Sync1'#7'Caption'#6#4'Sync'#7'OnClick'#7#10'S'
-  +'ync1Click'#0#0#9'TMenuItem'#8'Connect1'#7'Caption'#6#7'Connect'#7'OnClick'#7
-  +#13'Connect1Click'#0#0#9'TMenuItem'#10'AbortSlew1'#7'Caption'#6#10'Abort Sle'
-  +'w'#7'OnClick'#7#15'AbortSlew1Click'#0#0#0#9'TMenuItem'#2'N3'#7'Caption'#6#1
-  +'-'#0#0#9'TMenuItem'#8'TrackOn1'#7'Caption'#6#7'Lock on'#7'OnClick'#7#13'Tra'
-  +'ckOn1Click'#0#0#9'TMenuItem'#9'TrackOff1'#7'Caption'#6#12'Unlock Chart'#7'O'
-  +'nClick'#7#14'TrackOff1Click'#0#0#0#6'TTimer'#14'TelescopeTimer'#7'Enabled'#8
-  +#8'Interval'#3#244#1#7'OnTimer'#7#19'TelescopeTimerTimer'#4'left'#3'X'#1#3't'
-  +'op'#3#152#0#0#0#6'TTimer'#10'BlinkTimer'#7'Enabled'#8#7'OnTimer'#7#15'Blink'
-  +'TimerTimer'#4'left'#3'0'#1#3'top'#3#202#0#0#0#0
+  +#0#0#9'TMenuItem'#10'CopyCoord1'#7'Caption'#6#10'CopyCoord1'#7'OnClick'#7#15
+  +'CopyCoord1Click'#0#0#9'TMenuItem'#2'N1'#7'Caption'#6#1'-'#0#0#9'TMenuItem'
+  +#16'NewFinderCircle1'#7'Caption'#6#17'New Finder Circle'#7'OnClick'#7#21'New'
+  +'FinderCircle1Click'#0#0#9'TMenuItem'#17'RemoveLastCircle1'#7'Caption'#6#18
+  +'Remove Last Circle'#7'OnClick'#7#22'RemoveLastCircle1Click'#0#0#9'TMenuItem'
+  +#17'RemoveAllCircles1'#7'Caption'#6#18'Remove All Circles'#7'OnClick'#7#22'R'
+  +'emoveAllCircles1Click'#0#0#9'TMenuItem'#9'MenuItem1'#7'Caption'#6#1'-'#0#0#9
+  +'TMenuItem'#9'AddLabel1'#7'Caption'#6#9'New Label'#7'OnClick'#7#14'AddLabel1'
+  +'Click'#0#0#9'TMenuItem'#16'RemoveLastLabel1'#7'Caption'#6#17'Remove Last La'
+  +'bel'#7'OnClick'#7#21'RemoveLastLabel1Click'#0#0#9'TMenuItem'#15'RemoveAllLa'
+  +'bel1'#7'Caption'#6#17'Remove All Labels'#7'OnClick'#7#20'RemoveAllLabel1Cli'
+  +'ck'#0#0#9'TMenuItem'#2'N2'#7'Caption'#6#1'-'#0#0#9'TMenuItem'#10'Telescope1'
+  +#7'Caption'#6#9'Telescope'#0#9'TMenuItem'#5'Slew1'#7'Caption'#6#4'Slew'#7'On'
+  +'Click'#7#10'Slew1Click'#0#0#9'TMenuItem'#5'Sync1'#7'Caption'#6#4'Sync'#7'On'
+  +'Click'#7#10'Sync1Click'#0#0#9'TMenuItem'#8'Connect1'#7'Caption'#6#7'Connect'
+  +#7'OnClick'#7#13'Connect1Click'#0#0#9'TMenuItem'#10'AbortSlew1'#7'Caption'#6
+  +#10'Abort Slew'#7'OnClick'#7#15'AbortSlew1Click'#0#0#0#9'TMenuItem'#2'N3'#7
+  +'Caption'#6#1'-'#0#0#9'TMenuItem'#8'TrackOn1'#7'Caption'#6#7'Lock on'#7'OnCl'
+  +'ick'#7#13'TrackOn1Click'#0#0#9'TMenuItem'#9'TrackOff1'#7'Caption'#6#12'Unlo'
+  +'ck Chart'#7'OnClick'#7#14'TrackOff1Click'#0#0#0#6'TTimer'#14'TelescopeTimer'
+  +#7'Enabled'#8#8'Interval'#3#244#1#7'OnTimer'#7#19'TelescopeTimerTimer'#4'lef'
+  +'t'#3'X'#1#3'top'#3#152#0#0#0#6'TTimer'#10'BlinkTimer'#7'Enabled'#8#7'OnTime'
+  +'r'#7#15'BlinkTimerTimer'#4'left'#3'0'#1#3'top'#3#202#0#0#0#0
 ]);

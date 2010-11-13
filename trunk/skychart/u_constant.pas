@@ -350,7 +350,7 @@ type
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
      TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter,laTopLeft,laBottomLeft,laTopRight,laBottomRight);
-     Thorizonlist = array [0..360] of single;
+     Thorizonlist = array [0..361] of single;
      Phorizonlist = ^Thorizonlist;
 
      Tobjlabel = record
@@ -469,7 +469,7 @@ type
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
-                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
+                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,FindX,FindY,FindZ,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
                 DrawAllStarLabel,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote : string;
@@ -580,7 +580,8 @@ type
 
 type
   TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
-                  
+  TGetTwilight= procedure(jd0: double; out ht: double) of object;
+
 // external library
 const
 {$ifdef linux}

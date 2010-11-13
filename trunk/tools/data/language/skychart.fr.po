@@ -3,15 +3,15 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-28 18:29+0200\n"
+"PO-Revision-Date: 2010-11-13 12:35+0100\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
-"Language-Team: Français <kde-i18n-doc@kde.org>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_translation.rs102cddss
@@ -157,6 +157,10 @@ msgstr "Altitude"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%stours Alt:"
+
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr "Toujours enregistrer sans demander."
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
@@ -798,6 +802,10 @@ msgstr "Grilles de coordonnées"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copie"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr "Copie les coordonnées"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2536,6 +2544,10 @@ msgstr "No."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Pas de donnée pour les astéroïdes!%sVeuillez charger un fichier MPC."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr "Pas de crépuscule astronomique aujourd'hui!"
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Pas de marge"
@@ -3286,6 +3298,14 @@ msgstr "Restaure la carte"
 msgid "Reset chart and options"
 msgstr "Carte et options par défaut"
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr "Initialise les valeurs par défaut et redémarrer"
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr "Recharge la dernière carte sauvegardée"
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Résolution:"
@@ -3742,9 +3762,9 @@ msgstr "Certain enregistrement ont été refusé, voir le fichier %sreject.txt p
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Quelque chose n'a pas fonctionné lors de l'initialisation du programme. Il va maintenant être fermer."
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Tri par AR"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr "Trier par"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4034,6 +4054,10 @@ msgstr "Aujourd'hui"
 msgid "to file:"
 msgstr "dans le fichier:"
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr "Cette nuit"
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Barre d'outils"
@@ -4274,6 +4298,10 @@ msgstr "Etoile variable"
 msgid "Variable stars"
 msgstr "Etoiles variables"
 
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr "Vitesse "
+
 #: u_translation.rsvenus
 msgid "Venus"
 msgstr "Vénus"
@@ -4409,4 +4437,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

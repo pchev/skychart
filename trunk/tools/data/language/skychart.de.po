@@ -155,6 +155,10 @@ msgstr "Höhe"
 msgid "%sAlt turns:"
 msgstr "%sAlt Umdrehungen:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Kompass immer anzeigen"
@@ -797,6 +801,10 @@ msgstr "Koordinatengitter"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopieren"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2534,6 +2542,10 @@ msgstr "Nr."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Keine Asteroidendaten gefunden! %sBitte zuerst eine MPC-Datei laden."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Kein Seitenrand"
@@ -3285,6 +3297,14 @@ msgstr "Karte zurücksetzen"
 msgid "Reset chart and options"
 msgstr "Karten und Optionen zurücksetzen"
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Auflösung:"
@@ -3741,9 +3761,9 @@ msgstr "Einige Einträge wurden ausgelassen. Details befinden sich in der Datei 
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Etwas ist schief gelaufen während dem Programmstart. Das Programm muss geschlossen werden."
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Nach RA sort."
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4033,6 +4053,10 @@ msgstr "Heute"
 msgid "to file:"
 msgstr "in die Datei:"
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Werkzeugleisten"
@@ -4272,6 +4296,10 @@ msgstr "Veränderliche Sterne"
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
 msgstr "Veränderliche Sterne"
+
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"

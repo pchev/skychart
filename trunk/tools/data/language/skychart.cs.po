@@ -156,6 +156,10 @@ msgstr "Výška"
 msgid "%sAlt turns:"
 msgstr "%sAlt posun:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr ""
@@ -795,6 +799,10 @@ msgstr "Souřadnice"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopírovat"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2534,6 +2542,10 @@ msgstr "č."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Nebyla nalezena žádná data asteroidů!%sNejprve nahrajte soubor MPC."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Bez okrajů"
@@ -3284,6 +3296,14 @@ msgstr "Resetovat mapu"
 msgid "Reset chart and options"
 msgstr ""
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Rozlišení:"
@@ -3740,9 +3760,9 @@ msgstr "Některé záznamy byly zamítnuty, detaily naleznete v souboru %sreject
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr ""
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Řadit podle RA"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4032,6 +4052,10 @@ msgstr "Dnes"
 msgid "to file:"
 msgstr ""
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Nástrojové lišty"
@@ -4270,6 +4294,10 @@ msgstr "Proměnná hvězda"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
+msgstr ""
+
+#: u_translation.rsvelocity
+msgid "Velocity"
 msgstr ""
 
 #: u_translation.rsvenus
