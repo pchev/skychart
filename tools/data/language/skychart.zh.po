@@ -157,6 +157,10 @@ msgstr "地平纬度"
 msgid "%sAlt turns:"
 msgstr "%s地平纬度转动："
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "总是显示罗盘"
@@ -796,6 +800,10 @@ msgstr "坐标网"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "复制"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2535,6 +2543,10 @@ msgstr "编号"
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "小行星数据找不到！%s请先载入 MPC 文件。"
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "无边距"
@@ -3285,6 +3297,14 @@ msgstr "重置星图"
 msgid "Reset chart and options"
 msgstr ""
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "分辨率："
@@ -3741,9 +3761,9 @@ msgstr "若干记录被拒绝，见文件 %sreject.txt 详细资料"
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "程序初始化期间发生某些故障，现在必须关闭。"
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "排序按赤经"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4033,6 +4053,10 @@ msgstr "今日"
 msgid "to file:"
 msgstr ""
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "工具栏"
@@ -4271,6 +4295,10 @@ msgstr "变星"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
+msgstr ""
+
+#: u_translation.rsvelocity
+msgid "Velocity"
 msgstr ""
 
 #: u_translation.rsvenus

@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance, enhedits, LazHelpHTML;
+  LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
 
 type
 
@@ -615,7 +615,7 @@ type
     ConfigPictures: Tf_config_pictures;
     ConfigCatalog: Tf_config_catalog;
     cryptedpwd,basecaption :string;
-    NeedRestart,NeedToInitializeDB : Boolean;
+    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig : Boolean;
     InitialChartNum: integer;
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
@@ -719,7 +719,7 @@ type
     procedure NeighborObj(chart:string);
     procedure ConnectDB;
     procedure ImageSetFocus(Sender: TObject);
-    procedure ListInfo(buf:string);
+    procedure ListInfo(buf,msg:string);
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
@@ -727,6 +727,7 @@ type
     procedure DrawChart(csc:Tconf_skychart);
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
+    procedure ClearAndRestart;
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
@@ -734,6 +735,7 @@ type
     procedure GetActiveChart(var active_chart: string);
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
+    procedure GetTwilight(jd0: double; out ht: double);
   end;
 
 var
@@ -834,7 +836,7 @@ begin
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
-  if Child.sc.cfgsc.Projpole=Altaz then begin
+  if (not Child.sc.cfgsc.TrackOn)and(Child.sc.cfgsc.Projpole=Altaz) then begin
      Child.sc.cfgsc.TrackOn:=true;
      Child.sc.cfgsc.TrackType:=4;
   end;
@@ -1539,6 +1541,7 @@ DateSeparator:='/';
 TimeSeparator:=':';
 NeedRestart:=false;
 showsplash:=true;
+ConfirmSaveConfig:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
@@ -1706,7 +1709,6 @@ Fits.Free;
 planet.free;
 cdcdb.free;
 telescope.free;
-if NeedRestart then ExecNoWait(paramstr(0));
 def_cfgsc.Free;
 cfgs.Free;
 cfgm.Free;
@@ -1714,6 +1716,7 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
+if NeedRestart then ExecNoWait(paramstr(0));
 {$ifdef trace_debug}
  WriteTrace('Destroy Cursor');
 {$endif}
@@ -1730,7 +1733,11 @@ end;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
-var i:integer;
+var i,h,w,mresult:integer;
+    f1: TForm;
+    l1: TLabel;
+    c1: Tcheckbox;
+    btn: TButtonPanel;
 begin
 try
 {$ifdef mswindows}
@@ -1739,11 +1746,56 @@ if nightvision then ResetWinColor;
 StopServer;
 writetrace(rsExiting);
 Autorefresh.Enabled:=false;
-if SaveConfigOnExit.checked and
-   (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
-      SaveDefault;
-end else
-   SaveQuickSearch(configfile);
+if SaveConfigOnExit.checked then begin
+   if ConfirmSaveConfig then begin
+   try
+    f1:=TForm.Create(self);
+    f1.AutoSize:=false;
+    f1.Position:=poScreenCenter;
+    f1.Caption:=rsSaveConfigur;
+    l1:=TLabel.Create(f1);
+    l1.Caption:=rsDoYouWantToS;
+    l1.ParentFont:=true;
+    btn:= TButtonPanel.Create(f1);
+    btn.ShowButtons:=[pbOK,pbCancel];
+    btn.OKButton.Caption:='Yes';
+    btn.CancelButton.Caption:='No';
+    btn.ShowGlyphs:=[];
+    btn.AutoSize:=true;
+    btn.Align:=alBottom;
+    c1:=Tcheckbox.Create(f1);
+    c1.AutoSize:=true;
+    c1.Caption:=rsAlwaysSaveWi;
+    c1.Checked:=false;
+    l1.Parent:=f1;
+    c1.Parent:=f1;
+    btn.Parent:=f1;
+    l1.AdjustSize;
+    c1.AdjustSize;
+    btn.AdjustSize;
+    l1.top:=8;
+    l1.Left:=8;
+    c1.Left:=8;
+    c1.Top:=8+l1.Height+8;
+    h:=l1.height+c1.Height+btn.Height+20;
+    w:=f1.Canvas.TextWidth(l1.Caption)+16;
+    f1.Width:=w;
+    f1.Height:=h;
+    mresult:=f1.ShowModal;
+    ConfirmSaveConfig:=not c1.Checked;
+    if mresult=mrOK then
+       SaveDefault;
+   finally
+    btn.free;
+    l1.Free;
+    c1.Free;
+    f1.Free;
+   end;
+   end else
+     SaveDefault;
+end else begin
+   if not NeedRestart then SaveQuickSearch(configfile);
+end;
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
       locked:=true;
@@ -1920,21 +1972,25 @@ execnowait(cfgm.IndiPanelCmd);
 end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);
-var buf:widestring;
+var buf,msg:string;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
   if sc.cfgsc.windowratio=0 then sc.cfgsc.windowratio:=1;
-  sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,false,false,false);
-  f_info.Memo1.Font.Name:=def_cfgplot.FontName[5];
-  f_info.Memo1.Font.Size:=def_cfgplot.FontSize[5];
-  f_info.Memo1.text:=blank+wordspace(buf);
-  f_info.Memo1.selstart:=0;
-  f_info.Memo1.selend:=0;
-  f_info.setpage(1);
+  sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,msg,false,false,false);
+  ListInfo(buf,msg);
+end;
+end;
+
+procedure Tf_main.ListInfo(buf,msg:string);
+begin
   f_info.source_chart:=MultiDoc1.ActiveChild.Caption;
+  f_info.setpage(1);
+  f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+':   '+msg;
+  f_info.StringGrid2.Font.Name:=def_cfgplot.FontName[5];
+  f_info.StringGrid2.Font.Size:=def_cfgplot.FontSize[5];
+  f_info.setgrid(blank+wordspace(buf));
   f_info.show;
   f_info.BringToFront;
-end;
 end;
 
 procedure Tf_main.GridEQExecute(Sender: TObject);
@@ -2281,19 +2337,64 @@ if MultiDoc1.ActiveObject is Tf_chart then
 end;
 
 procedure Tf_main.ResetDefaultChartExecute(Sender: TObject);
-var i: integer;
+var i,w,h: integer;
+    f1: TForm;
+    r1: TRadioGroup;
+    btn: TButtonPanel;
 begin
-WriteTrace('Reload default configuration');
-for i:=1 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     MultiDoc1.Childs[i].close;
-Multidoc1.Maximized:=true;
-with MultiDoc1.ActiveObject as Tf_chart do begin
-  ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
 {$ifdef trace_debug}
  WriteTrace('ResetDefaultChartExecute');
 {$endif}
-  Refresh;
+f1:=TForm.Create(self);
+f1.AutoSize:=false;
+f1.Caption:=rsResetChartAn;
+r1:=TRadioGroup.Create(f1);
+r1.AutoSize:=true;
+r1.top:=8;
+r1.Left:=8;
+btn:= TButtonPanel.Create(f1);
+btn.ShowButtons:=[pbOK,pbCancel];
+btn.OKButton.Caption:=rsOK;
+btn.CancelButton.Caption:=rsCancel;
+btn.ShowGlyphs:=[];
+btn.AutoSize:=true;
+btn.Align:=alBottom;
+r1.Items.Add(rsResetInitial);
+r1.Items.Add(rsResetToLastT);
+r1.ItemIndex:=1;
+r1.Parent:=f1;
+btn.Parent:=f1;
+r1.AdjustSize;
+btn.AdjustSize;
+h:=r1.Height+btn.Height+16;
+w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
+f1.Height:=h;
+f1.Width:=w;
+try
+FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
+if f1.ShowModal=mrOK then begin
+  case r1.ItemIndex of
+    0: begin
+        WriteTrace('Reload default configuration');
+        ClearAndRestart;
+       end;
+    1: begin
+        WriteTrace('Reload last configuration');
+        for i:=1 to MultiDoc1.ChildCount-1 do
+          if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+             MultiDoc1.Childs[i].close;
+        Multidoc1.Maximized:=true;
+        with MultiDoc1.ActiveObject as Tf_chart do begin
+          ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
+          Refresh;
+        end;
+       end;
+  end;
+end;
+finally
+ btn.Free;
+ r1.Free;
+ f1.Free;
 end;
 end;
 
@@ -2651,6 +2752,7 @@ if ConfigTime=nil then begin
    ConfigTime.PageControl1.ShowTabs:=true;
    ConfigTime.PageControl1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
+   ConfigTime.onGetTwilight:=GetTwilight;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat.Assign(catalog.cfgcat);
@@ -2697,6 +2799,7 @@ if f_config=nil then begin
    f_config.onDBChange:=ConfigDBChange;
    f_config.onSaveAndRestart:=SaveAndRestart;
    f_config.onPrepareAsteroid:=PrepareAsteroid;
+   f_config.onGetTwilight:=GetTwilight;
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
    f_config.db:=cdcdb;
@@ -3209,6 +3312,14 @@ if ConfigSystem<>nil then begin
   NeedRestart:=true;
   Close;
 end;
+end;
+
+procedure Tf_main.ClearAndRestart;
+begin
+  SaveConfigOnExit.checked:=false;
+  DeleteFile(configfile);
+  NeedRestart:=true;
+  Close;
 end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
@@ -4290,6 +4401,13 @@ for i:=1 to numlabtype do begin
    csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
 end;
+csc.TrackOn:=ReadBool(section,'TrackOn',csc.TrackOn);
+csc.TrackType:=ReadInteger(section,'TrackType',csc.TrackType);
+csc.TrackObj:=ReadInteger(section,'TrackObj',csc.TrackObj);
+csc.TrackDec:=ReadFloat(section,'TrackDec',csc.TrackDec);
+csc.TrackRA:=ReadFloat(section,'TrackRA',csc.TrackRA);
+csc.TrackEpoch:=ReadFloat(section,'TrackEpoch',csc.TrackEpoch);
+csc.TrackName:=ReadString(section,'TrackName',csc.TrackName);
 except
   ShowError('Error reading '+filename+' default chart');
 end;
@@ -4418,6 +4536,7 @@ section:='main';
 try
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
+ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 {$ifdef linux}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
@@ -4918,6 +5037,13 @@ for i:=1 to numlabtype do begin
    WriteBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    WriteFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
 end;
+WriteBool(section,'TrackOn',csc.TrackOn);
+WriteInteger(section,'TrackType',csc.TrackType);
+WriteInteger(section,'TrackObj',csc.TrackObj);
+WriteFloat(section,'TrackDec',csc.TrackDec);
+WriteFloat(section,'TrackRA',csc.TrackRA);
+WriteFloat(section,'TrackEpoch',csc.TrackEpoch);
+WriteString(section,'TrackName',csc.TrackName);
 section:='observatory';
 WriteFloat(section,'ObsLatitude',csc.ObsLatitude );
 WriteFloat(section,'ObsLongitude',csc.ObsLongitude );
@@ -4996,6 +5122,7 @@ WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
+WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
@@ -5149,11 +5276,13 @@ var inif: TMemIniFile;
 begin
 try
 SaveConfigOnExit.Checked:=not SaveConfigOnExit.Checked;
+ConfirmSaveConfig:=true;
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
 section:='main';
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
+WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 Updatefile;
 end;
 finally
@@ -6306,17 +6435,6 @@ begin
   TimeU.Enabled:=true;
 end;
 
-procedure Tf_main.ListInfo(buf:string);
-begin
-f_info.Memo1.text:=buf;
-f_info.Memo1.selstart:=0;
-f_info.Memo1.selend:=0;
-f_info.setpage(1);
-f_info.source_chart:=MultiDoc1.ActiveChild.caption;
-f_info.show;
-f_info.bringtofront;
-end;
-
 procedure Tf_main.GetTCPInfo(i:integer; var buf:string);
 begin
 if (TCPDaemon<>nil) then
@@ -6425,8 +6543,6 @@ begin
        try
          btn:=TPortableNetworkGraphic.Create;
          btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
-//         btn.Transparent:=true;
-//         btn.TransparentColor:=clBlack;
          imagelist.Add(btn,nil);
          btn.Free;
        except
@@ -6437,6 +6553,7 @@ begin
    Toolbar2.Images:=imagelist;
    Toolbar3.Images:=imagelist;
    Toolbar4.Images:=imagelist;
+   MainMenu1.Images:=imagelist;
    btn:=TPortableNetworkGraphic.Create;
    btn.LoadFromFile(iconpath+'b1.png');
    BtnCloseChild.Glyph.Assign(btn);
@@ -6748,6 +6865,14 @@ FullScreen1.Checked:=not FullScreen1.Checked;
 {$endif}
 end;
 {$endif}
+
+procedure Tf_main.GetTwilight(jd0: double; out ht: double);
+var astrom,nautm,civm,cive,naute,astroe: double;
+begin
+  planet.Twilight(jd0,def_cfgsc.ObsLatitude,def_cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
+  def_cfgsc.tz.JD:=jd0;
+  ht:=astroe+def_cfgsc.tz.SecondsOffset/3600;
+end;
 
 // DDE server, windows only
 //todo: any DDE for Lazarus? if not create a separate app that relay to tcp/ip

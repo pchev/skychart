@@ -189,6 +189,7 @@ resourcestring
   rsEstimatedTai = 'Estimated tail length';
   rsSolarElongat = 'Solar elongation';
   rsSolarDistanc = 'Solar distance';
+  rsVelocity = 'Velocity';
   rsOpenCluster = 'Open cluster';
   rsGlobularClus = 'Globular cluster';
   rsGalaxy = 'Galaxy';
@@ -318,7 +319,7 @@ resourcestring
   rsRefresh = 'Refresh';
   rsAutoRefresh = 'Auto-refresh';
   rsSearch = 'Search';
-  rsSortByRA = 'Sort by RA';
+  rsSortBy = 'Sort by';
   rsSave = 'Save';
   rsProgressMess = 'Progress messages';
   rsCloseConnect = 'Close connection';
@@ -1115,6 +1116,12 @@ resourcestring
     +'active catalog';
   rsInvalidPath = 'Invalid path: ';
   rsShowPosition = 'Show position in title bar';
+  rsCopyCoordina = 'Copy coordinates';
+  rsResetInitial = 'Reset initial default and restart';
+  rsResetToLastT = 'Reset to last time the chart was saved';
+  rsNoAstronomic = 'No astronomical twilight today!';
+  rsTonight = 'Tonight';
+  rsAlwaysSaveWi = 'Always save without asking.';
 
 implementation
 

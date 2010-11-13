@@ -31,11 +31,11 @@ object f_config_time: Tf_config_time
       Height = 514
       Top = 0
       Width = 474
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -45,7 +45,7 @@ object f_config_time: Tf_config_time
           Left = 286
           Height = 14
           Top = 62
-          Width = 44
+          Width = 50
           Caption = 'Seconds'
           ParentColor = False
         end
@@ -53,7 +53,7 @@ object f_config_time: Tf_config_time
           Left = 40
           Height = 21
           Top = 56
-          Width = 120
+          Width = 133
           Caption = 'Auto-refresh every '
           OnClick = CheckBox2Click
           TabOrder = 1
@@ -71,7 +71,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 14
             Top = 41
-            Width = 49
+            Width = 59
             Caption = 'DT - UT  : '
             ParentColor = False
           end
@@ -79,7 +79,7 @@ object f_config_time: Tf_config_time
             Left = 85
             Height = 14
             Top = 41
-            Width = 25
+            Width = 29
             Caption = '0000'
             ParentColor = False
           end
@@ -87,7 +87,7 @@ object f_config_time: Tf_config_time
             Left = 142
             Height = 14
             Top = 41
-            Width = 44
+            Width = 50
             Caption = 'Seconds'
             ParentColor = False
           end
@@ -95,7 +95,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 14
             Top = 16
-            Width = 217
+            Width = 258
             Caption = 'Dynamic Time difference with Universal Time'
             ParentColor = False
           end
@@ -103,7 +103,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 21
             Top = 70
-            Width = 143
+            Width = 164
             Caption = 'Use another DT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 0
@@ -139,9 +139,9 @@ object f_config_time: Tf_config_time
           MaxValue = 86400
         end
         object Panel9: TPanel
-          Left = 32
+          Left = 54
           Height = 160
-          Top = 87
+          Top = 94
           Width = 417
           ClientHeight = 160
           ClientWidth = 417
@@ -150,7 +150,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 14
             Top = 68
-            Width = 23
+            Width = 29
             Caption = 'Time'
             ParentColor = False
           end
@@ -158,7 +158,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 14
             Top = 52
-            Width = 9
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
@@ -166,7 +166,7 @@ object f_config_time: Tf_config_time
             Left = 195
             Height = 14
             Top = 52
-            Width = 8
+            Width = 9
             Caption = 'S'
             ParentColor = False
           end
@@ -174,7 +174,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 14
             Top = 52
-            Width = 8
+            Width = 9
             Caption = 'H'
             ParentColor = False
           end
@@ -182,7 +182,7 @@ object f_config_time: Tf_config_time
             Left = 56
             Height = 14
             Top = 6
-            Width = 9
+            Width = 8
             Caption = 'Y'
             ParentColor = False
           end
@@ -190,7 +190,7 @@ object f_config_time: Tf_config_time
             Left = 127
             Height = 14
             Top = 6
-            Width = 9
+            Width = 10
             Caption = 'M'
             ParentColor = False
           end
@@ -198,7 +198,7 @@ object f_config_time: Tf_config_time
             Left = 196
             Height = 14
             Top = 6
-            Width = 8
+            Width = 9
             Caption = 'D'
             ParentColor = False
           end
@@ -206,7 +206,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 14
             Top = 25
-            Width = 23
+            Width = 27
             Caption = 'Date'
             ParentColor = False
           end
@@ -222,7 +222,7 @@ object f_config_time: Tf_config_time
             Left = 267
             Height = 14
             Top = 70
-            Width = 36
+            Width = 40
             Caption = 'tzLabel'
             ParentColor = False
           end
@@ -480,12 +480,21 @@ object f_config_time: Tf_config_time
             OnChange = TimeEditChange
             TabOrder = 17
           end
+          object Button8: TButton
+            Left = 320
+            Height = 25
+            Top = 61
+            Width = 83
+            Caption = 'Tonight'
+            OnClick = Button8Click
+            TabOrder = 18
+          end
         end
         object CheckBox1: TCheckBox
           Left = 40
           Height = 21
           Top = 24
-          Width = 102
+          Width = 120
           Caption = 'Use system time'
           OnClick = CheckBox1Click
           TabOrder = 0
@@ -614,10 +623,9 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 0
+          ItemHeight = 19
           OnItemClick = SimObjItemClick
           TabOrder = 0
-          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }

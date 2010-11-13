@@ -79,7 +79,7 @@ Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;
             irc = 2 invisible
           *)
 
-Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Tconf_skychart );
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongitude: double );
           (*
              Heure a laquel un astre est a un hauteur donnee sur l'horizon .
              jd       :  date julienne desiree a 0H TU
@@ -1212,13 +1212,13 @@ end else begin
 end;
 end;}
 
-Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Tconf_skychart );
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongitude: double);
 VAR hh,st,st0 : Double ;
 BEGIN
-hh := (sin(deg2rad*h)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
+hh := (sin(deg2rad*h)-sin(deg2rad*ObsLatitude)*sin(de))/(cos(deg2rad*ObsLatitude)*cos(de)) ;
 if abs(hh)<=1 then begin
      hh := double(arccos(hh)) ;
-     st0 := rad2deg*sidtim(jd,0.0,c.ObsLongitude)/15 ;
+     st0 := rad2deg*sidtim(jd,0.0,ObsLongitude)/15 ;
      st := rad2deg*(ar-hh)/15 ;
      hp1 := rmod((st-st0)/1.002737908+24,24) ;
      st := rad2deg*(ar+hh)/15 ;

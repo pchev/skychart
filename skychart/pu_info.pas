@@ -42,16 +42,18 @@ type
 
   Tf_info = class(TForm)
     Button4: TButton;
+    ComboBox1: TComboBox;
     InfoMemo: TMemo;
+    SortLabel: TLabel;
     Page1: TPanel;
     Page2: TPanel;
     Page3: TPanel;
     Page4: TPanel;
+    StringGrid2: TStringGrid;
     TitlePanel: TPanel;
     serverinfo: TLabel;
     Panel1: TPanel;
     Button1: TButton;
-    Memo1: TSynEdit;
     StringGrid1: TStringGrid;
     Panel2: TPanel;
     Button2: TButton;
@@ -62,11 +64,7 @@ type
     Panel3: TPanel;
     Button3: TButton;
     Edit1: TEdit;
-    Button5: TButton;
     PopupMenu2: TPopupMenu;
-    ActionList1: TActionList;
-    EditSelectAll1: TEditSelectAll;
-    EditCopy1: TEditCopy;
     outslectionner1: TMenuItem;
     Copier1: TMenuItem;
     Button6: TButton;
@@ -77,20 +75,26 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure closeconnectionClick(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure EditCopy1Execute(Sender: TObject);
     procedure EditSelectAll1Execute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Memo1DblClick(Sender: TObject);
     procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure StringGrid2CompareCells(Sender: TObject; ACol, ARow, BCol,
+      BRow: Integer; var Result: integer);
+    procedure StringGrid2DblClick(Sender: TObject);
+    procedure StringGrid2MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure StringGrid2MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure Timer1Timer(Sender: TObject);
     procedure Edit1KeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Button3Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
   private
@@ -102,10 +106,14 @@ type
     RowClick,ColClick :integer;
     Fnightvision:boolean;
     ActivePage:Integer;
+    MouseX, MouseY: Integer;
+    SearchStr: string;
+    SearchPos: integer;
   public
     { Public declarations }
     source_chart:string;
     procedure setpage(n:integer);
+    procedure setgrid(txt:string);
     procedure SetLang;
     property OnGetTCPinfo: Tistrfunc read FGetTCPinfo write FGetTCPinfo;
     property OnKillTCP: Tint1func read FKillTCP write FKillTCP;
@@ -125,13 +133,20 @@ Button2.caption:=rsRefresh;
 CheckBox1.caption:=rsAutoRefresh;
 Button3.caption:=rsSearch;
 Button4.caption:=rsHelp;
-Button5.caption:=rsSortByRA;
 Button6.caption:=rsPrint;
 Button7.caption:=rsSave;
 Button1.caption:=rsClose;
 closeconnection.caption:=rsCloseConnect;
 outslectionner1.caption:=rsSelectAll;
 Copier1.caption:=rsCopy;
+SortLabel.caption:=rsSortBy+':';
+ComboBox1.Clear;
+ComboBox1.Items.Add('');
+ComboBox1.Items.Add(rsRA);
+ComboBox1.Items.Add(rsDEC);
+ComboBox1.Items.Add(rsType);
+ComboBox1.Items.Add(rsName);
+ComboBox1.Items.Add(rsMagn);
 end;
 
 procedure Tf_info.Button1Click(Sender: TObject);
@@ -177,14 +192,57 @@ if (RowClick>=0) and assigned(FKillTCP) then
    FKillTCP(RowClick+1);
 end;
 
+procedure Tf_info.ComboBox1Change(Sender: TObject);
+begin
+if ComboBox1.ItemIndex>0 then begin
+  StringGrid2.SortOrder:=soAscending;
+  StringGrid2.SortColRow(true,ComboBox1.ItemIndex-1);
+  SearchPos:=0;
+  SearchStr:='';
+  StringGrid2.TopRow:=1;
+  StringGrid2.Selection:=rect(0,1,StringGrid2.ColCount-1,1);
+end;
+end;
+
+procedure Tf_info.StringGrid2CompareCells(Sender: TObject; ACol, ARow, BCol,
+  BRow: Integer; var Result: integer);
+var s1,s2,buf: string;
+    n1,n2: double;
+    p,i1,i2: integer;
+begin
+with sender as TStringGrid do begin
+   s1:=Cells[ACol,ARow];
+   s2:=Cells[BCol,BRow];
+end;
+i1:=1; i2:=1;
+if (ACol=4) and (BCol=4) then begin  //magnitude
+   p:=pos(':',s1);
+   if p>0 then buf:=copy(s1,p+1,999) else buf:=s1;
+   val(buf,n1,i1);
+   p:=pos(':',s2);
+   if p>0 then buf:=copy(s2,p+1,999) else buf:=s2;
+   val(buf,n2,i2);
+end;
+if (i1=0)and(i2=0) then begin
+   if n1=n2 then result:=0
+   else if n1>n2 then result:=1
+   else result:=-1;
+end else begin
+  if s1=s2 then result:=0
+  else if s1>s2 then result:=1
+  else result:=-1;
+end;
+end;
+
+
 procedure Tf_info.EditCopy1Execute(Sender: TObject);
 begin
- memo1.CopyToClipboard;
+ StringGrid2.CopyToClipboard(true);
 end;
 
 procedure Tf_info.EditSelectAll1Execute(Sender: TObject);
 begin
- memo1.SelectAll;
+StringGrid2.Selection:=rect(0,1,StringGrid2.ColCount-1,StringGrid2.RowCount-1);
 end;
 
 procedure Tf_info.FormCreate(Sender: TObject);
@@ -200,26 +258,41 @@ begin
  {$endif}
 end;
 
-procedure Tf_info.Memo1DblClick(Sender: TObject);
- var linnum,p : integer;
+procedure Tf_info.StringGrid2MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+MouseX:=X;
+MouseY:=Y;
+end;
+
+procedure Tf_info.StringGrid2MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+ MouseX:=X;
+ MouseY:=Y;
+end;
+
+procedure Tf_info.StringGrid2DblClick(Sender: TObject);
+var col,row,i:integer;
     ra,dec : double;
     buf,s,desc,nm : string;
 begin
-linnum:=memo1.CaretY-1;
-desc:=memo1.Lines[linnum];
-p:=pos(tab,desc);
-if p>0 then begin
-   buf:=copy(desc,2,9999);
-   ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
-   delete(buf,1,p-1);
-   s:=copy(buf,1,1);
-   dec:=strtofloat(s+copy(buf,2,2))+strtofloat(s+copy(buf,4+length(ldeg),2))/60+strtofloat(s+copy(buf,6+length(ldeg)+length(lmin),4))/3600;
-   p:=pos(tab,buf); delete(buf,1,p);
-   p:=pos(tab,buf); delete(buf,1,p);
-   p:=pos(tab,buf);
-   nm:=copy(buf,1,p-1);
-   if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,nm,desc);
+StringGrid2.MouseToCell(MouseX, MouseY, Col, Row);
+buf:=StringGrid2.Cells[0,Row];
+ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
+buf:=StringGrid2.Cells[1,Row];
+s:=copy(buf,1,1);
+dec:=strtofloat(s+copy(buf,2,2))+strtofloat(s+copy(buf,4+length(ldeg),2))/60+strtofloat(s+copy(buf,6+length(ldeg)+length(lmin),4))/3600;
+nm:=StringGrid2.Cells[3,Row];
+desc:='';
+for i:=0 to StringGrid2.ColCount-1 do begin
+  buf:=trim(StringGrid2.Cells[i,Row]);
+  if buf>'' then begin
+    if desc>'' then desc:=desc+tab;
+    desc:=desc+buf;
+  end;
 end;
+if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,nm,desc);
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
@@ -241,10 +314,9 @@ case Activepage of
    end;
 1: begin
    panel1.visible:=true;
-   for i:=memo1.Lines.Count to memo1.LinesInWindow do memo1.Lines.Add(' ');
-   memo1.setfocus;
-   memo1.SelStart:=0;
-   memo1.SelEnd:=0;
+   ComboBox1.ItemIndex:=0;
+   SearchStr:='';
+   SearchPos:=0;
    SetHelp(self,hlpObjList);
    end;
 2: begin
@@ -297,9 +369,31 @@ end;
 
 
 procedure Tf_info.Button3Click(Sender: TObject);
+var i,n:integer;
+    ok:boolean;
 begin
-if memo1.SearchReplace(Edit1.text,'',[])=0
-   then showmessage(Format(rsNotFound, [Edit1.text]));
+if UpperCase(Edit1.text)<>Searchstr then begin
+  SearchStr:=UpperCase(Edit1.Text);
+  SearchPos:=0;
+end;
+if SearchPos>=StringGrid2.RowCount-1 then SearchPos:=0;
+ok:=false;
+n:=0;
+repeat
+  repeat
+    inc(SearchPos);
+    if pos(SearchStr,UpperCase(StringGrid2.Cells[3,SearchPos]))>0 then begin
+      StringGrid2.TopRow:=SearchPos;
+      StringGrid2.Selection:=rect(0,SearchPos,StringGrid2.ColCount-1,SearchPos);
+      ok:=true;
+      break;
+    end;
+  until SearchPos>=StringGrid2.RowCount-1;
+  if ok then break;
+  inc(n);
+  SearchPos:=0;
+until n>1;
+if not ok then showmessage(Format(rsNotFound, [Edit1.text]));
 end;
 
 procedure Tf_info.Edit1KeyUp(Sender: TObject; var Key: Word;
@@ -308,53 +402,116 @@ begin
 if key=key_cr then Button3Click(sender);
 end;
 
-procedure Tf_info.Button5Click(Sender: TObject);
-var tmpstr:Tstringlist;
-begin
-tmpstr:=Tstringlist.Create;
-try
-screen.cursor:=crhourglass;
-tmpstr.assign(memo1.lines);
-tmpstr.Sort;
-memo1.Lines.clear;
-memo1.Lines.beginupdate;
-memo1.Lines.Assign(tmpstr);
-memo1.Lines.endupdate;
-finally
-screen.cursor:=crdefault;
-tmpstr.Free;
-end;
-end;
-
 procedure Tf_info.Button6Click(Sender: TObject);
-var i: integer;
+var i,r: integer;
     list:TStringList;
-    buf:string;
+    buf,desc:string;
 begin
+//PrtGrid(StringGrid2, 'CdC', rsObjectList, '', poLandscape);
 list:=TStringList.create;
-for i:=0 to memo1.Lines.count-1 do begin
-  buf:=memo1.Lines[i];
-  buf:=StringReplace(buf,tab,blank,[]); // remove first two tabs
-  buf:=StringReplace(buf,tab,blank,[]); // because coordinates are fixed column
-  buf:=ExpandTab(buf,memo1.TabWidth);
-  list.add(buf);
+for r:=0 to StringGrid2.RowCount-1 do begin
+  desc:='';
+  for i:=0 to StringGrid2.ColCount-1 do begin
+    buf:=trim(StringGrid2.Cells[i,r]);
+    if desc>'' then desc:=desc+tab;
+    desc:=desc+buf;
+  end;
+  desc:=ExpandTab(desc,6);
+  list.add(desc);
 end;
 PrintStrings(list, 'CdC', rsObjectList, '', poLandscape);
 list.free;
 end;
 
 procedure Tf_info.Button7Click(Sender: TObject);
+var fsep,desc,buf:string;
+    r,i: integer;
+    f:textfile;
 begin
 try
 Savedialog1.DefaultExt:='.csv';
-Savedialog1.filter:='Tab Separated File (*.csv)|*.csv';
+Savedialog1.filter:='Comma Separated File (*.csv)|*.csv|Tab Separated File (*.tsv)|*.tsv';
 Savedialog1.Title:=rsSaveToFile;
 Savedialog1.Initialdir:=privatedir;
-if SaveDialog1.Execute then
-   memo1.Lines.SavetoFile(savedialog1.Filename);
+if SaveDialog1.Execute then begin
+  if UpperCase(ExtractFileExt(Savedialog1.FileName))='.CSV' then fsep:=',' else fsep:=tab;
+  AssignFile(f,SafeUTF8ToSys(Savedialog1.FileName));
+  rewrite(f);
+  for r:=0 to StringGrid2.RowCount-1 do begin
+    desc:='';
+    for i:=0 to StringGrid2.ColCount-1 do begin
+      buf:=trim(StringGrid2.Cells[i,r]);
+      if fsep=',' then buf:=StringReplace(buf,',','.',[rfReplaceAll]);
+      if desc>'' then desc:=desc+fsep;
+      desc:=desc+buf;
+    end;
+    writeln(f,desc);
+  end;
+  CloseFile(f);
+end
 finally
 ChDir(appdir);
 end;
+end;
+
+procedure Tf_info.setgrid(txt:string);
+var i,j,l, rowc, colc: integer;
+    c: char;
+    buf:string;
+begin
+// find table size
+rowc:=0; colc:=0;
+i:=0;
+j:=0;
+repeat
+  c:=txt[i];
+  if c=chr(9) then begin // new col
+     inc(j);
+  end;
+  if c=chr(13) then begin // new row
+     inc(j);
+     inc(rowc);
+     if j>colc then colc:=j;
+     inc(i); // skip #10
+     j:=0;
+  end;
+  inc(i);
+until i>length(txt);
+// setup table
+StringGrid2.Clear;
+StringGrid2.ColCount:=colc;
+StringGrid2.RowCount:=rowc+1;
+StringGrid2.FixedRows:=1;
+StringGrid2.Cells[0,0]:=rsRA;
+StringGrid2.Cells[1,0]:=rsDEC;
+StringGrid2.Cells[2,0]:=rsType;
+StringGrid2.Cells[3,0]:=rsName;
+StringGrid2.Cells[4,0]:=rsMagn;
+// fill the table
+rowc:=1;
+colc:=0;
+i:=0;
+buf:='';
+repeat
+  c:=txt[i];
+  if c=chr(0) then begin // ?
+  end
+  else if c=chr(9) then begin // new col
+     StringGrid2.Cells[colc,rowc]:=trim(buf);
+     buf:='';
+     inc(colc);
+  end
+  else if c=chr(13) then begin // new row
+     StringGrid2.Cells[colc,rowc]:=trim(buf);
+     buf:='';
+     colc:=0;
+     inc(rowc);
+     inc(i); // skip #10
+  end
+  else buf:=buf+c;
+  inc(i);
+until i>length(txt);
+StringGrid2.AutoSizeColumns;
 end;
 
 initialization

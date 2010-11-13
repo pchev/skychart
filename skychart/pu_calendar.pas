@@ -917,7 +917,7 @@ with TwilightGrid do begin
   if (ars<0) then ars:=ars+pi2;
   objects[0,i]:=SetObjCoord(jda,-999,-999);
   // crepuscule nautique
-  Time_Alt(jd0,ars,des,-12,hp1,hp2,config);
+  Time_Alt(jd0,ars,des,-12,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
   if hp1>-99 then begin
      cells[2,i]:=armtostr(rmod(hp1+config.timezone+24,24));
      objects[2,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
@@ -933,7 +933,7 @@ with TwilightGrid do begin
      objects[3,i]:=nil;
   end;
   // crepuscule astro
-  Time_Alt(jd0,ars,des,-18,hp1,hp2,config);
+  Time_Alt(jd0,ars,des,-18,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
   if hp1>-99 then begin
      cells[1,i]:=armtostr(rmod(hp1+config.timezone+24,24));
      objects[1,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
@@ -959,7 +959,7 @@ end;
 end;
 
 procedure Tf_calendar.RefreshPlanet;
-var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp : double;
+var ar,de,dist,illum,phase,diam,jda,magn,dkm,q,az,ha,dp,xp,yp,zp,vel : double;
     i,ipla,nj: integer;
     s,a,m,d,irc : integer;
     jd1,jd2,jd0,h,jdr,jdt,jds,st0,hh: double;
@@ -974,7 +974,7 @@ with gr do begin
   RowCount:=i+1;
   case ipla of
   1..9: begin
-    planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp);
+    planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
     precession(jd2000,config.JDChart,ar,de);
     if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
     if config.ApparentPos then apparent_equatorial(ar,de,config);
@@ -1876,7 +1876,7 @@ var id,nam,elem_id : string;
     i,a,m,d,s,nj,irc,irc2: integer;
     cjd,epoch: double;
     ra,dec,dist,r,elong,phase,magn,st0,q : double;
-    hh,g,ap,an,ic,ec,eq,tp,diam,lc,car,cde,rc : double;
+    hh,g,ap,an,ic,ec,eq,tp,diam,lc,car,cde,rc,xc,yc,zc : double;
     hr,ht,hs,azr,azs,hp1,hp2,ars,des,ds,dds,az,ha :Double;
     jda,jd0,jd1,jd2,jdt,h,st,hhh : double;
     hr1,ht1,hs1,hr2,ht2,hs2 : double;
@@ -1916,7 +1916,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
       st0:=SidTim(jd0,h,config.ObsLongitude);
       config.tz.JD:=jda;
       config.TimeZone:=config.tz.SecondsOffset/3600;
-      Fplanet.Comet(jda,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+      Fplanet.Comet(jda,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
       if config.ApparentPos then apparent_equatorial(ra,dec,config);
@@ -1932,13 +1932,13 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
          RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
-         Fplanet.Comet(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         Fplanet.Comet(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra1,dec1);
          RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
-         Fplanet.Comet(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         Fplanet.Comet(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra2,dec2);
          RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
-         Fplanet.Comet(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+         Fplanet.Comet(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
          precession(jd2000,config.jdchart,ra3,dec3);
          RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of
@@ -1970,10 +1970,10 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          Fplanet.Sun(jda,ars,des,ds,dds);
          precession(jd2000,config.jdchart,ars,des);
          // crepuscule nautique
-         Time_Alt(jd0,ars,des,-12,hp1,hp2,config);
+         Time_Alt(jd0,ars,des,-12,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
          if hp1>-99 then begin
             jdt:=jd(a,m,d,hp1);
-            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
             st := Sidtim(jd0,hp1,config.ObsLongitude);
             Eq2Hz((st-ra),dec,az,ha,config);
@@ -1987,7 +1987,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          end;
          if hp2>-99 then begin
             jdt:=jd(a,m,d,hp2);
-            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
             st := Sidtim(jd0,hp2,config.ObsLongitude);
             Eq2Hz((st-ra),dec,az,ha,config);
@@ -2000,10 +2000,10 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
             objects[11,i]:=nil;
          end;
          // crepuscule astro
-         Time_Alt(jd0,ars,des,-18,hp1,hp2,config);
+         Time_Alt(jd0,ars,des,-18,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
          if hp1>-99 then begin
             jdt:=jd(a,m,d,hp1);
-            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
             st := Sidtim(jd0,hp1,config.ObsLongitude);
             Eq2Hz((st-ra),dec,az,ha,config);
@@ -2017,7 +2017,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          end;
          if hp2>-99 then begin
             jdt:=jd(a,m,d,hp2);
-            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc);
+            Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
             st := Sidtim(jd0,hp2,config.ObsLongitude);
             Eq2Hz((st-ra),dec,az,ha,config);
@@ -2060,7 +2060,7 @@ procedure Tf_calendar.RefreshAsteroid;
 var id,nam,elem_id,ref : string;
     i,a,m,d,s,nj,irc,irc2: integer;
     cjd,epoch: double;
-    ra,dec,dist,r,elong,phase,magn,st0,q : double;
+    ra,dec,dist,r,elong,phase,magn,xc,yc,zc,st0,q,xac,yac,zac : double;
     hh,g,ma,ap,an,ic,ec,sa,eq : double;
     hr,ht,hs,azr,azs: Double;
     jda,jd0,jd1,jd2,h,hhh : double;
@@ -2100,7 +2100,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
       st0:=SidTim(jd0,h,config.ObsLongitude);
       config.tz.JD:=jda;
       config.TimeZone:=config.tz.SecondsOffset/3600;
-      Fplanet.Asteroid(jda,true,ra,dec,dist,r,elong,phase,magn);
+      Fplanet.Asteroid(jda,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
       if config.ApparentPos then apparent_equatorial(ra,dec,config);
@@ -2116,13 +2116,13 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
          cells[5,i]:=demtostr(rad2deg*phase);
          objects[0,i]:=SetObjCoord(jda,ra,dec);
          RiseSet(1,jd0,ra,dec,hr1,ht1,hs1,azr,azs,irc,config);
-         Fplanet.Asteroid(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn);
+         Fplanet.Asteroid(jd0+rmod((hr1-config.TimeZone)+24,24)/24,false,ra1,dec1,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra1,dec1);
          RiseSet(1,jd0,ra1,dec1,hr,ht2,hs2,azr,azs,irc2,config);
-         Fplanet.Asteroid(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn);
+         Fplanet.Asteroid(jd0+rmod((ht1-config.TimeZone)+24,24)/24,false,ra2,dec2,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra2,dec2);
          RiseSet(1,jd0,ra2,dec2,hr2,ht,hs2,azr,azs,irc2,config);
-         Fplanet.Asteroid(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn);
+         Fplanet.Asteroid(jd0+rmod((hs1-config.TimeZone)+24,24)/24,false,ra3,dec3,dist,r,elong,phase,magn,xac,yac,zac);
          precession(jd2000,config.jdchart,ra3,dec3);
          RiseSet(1,jd0,ra3,dec3,hr2,ht2,hs,azr,azs,irc2,config);
          case irc of

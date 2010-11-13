@@ -81,6 +81,7 @@ type
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
+    FGetTwilight: TGetTwilight;
     f_config_observatory1: Tf_config_observatory;
     f_config_chart1: Tf_config_chart;
     f_config_catalog1: Tf_config_catalog;
@@ -109,6 +110,7 @@ type
     procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
     function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
+    procedure TimeGetTwilight(jd0: double; out ht: double);
     procedure ShowPage(i,j:Integer);
     procedure ActivateChanges;
   public
@@ -127,6 +129,7 @@ type
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
+    property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
   end;
 
 var
@@ -258,7 +261,7 @@ f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
 f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
-
+f_config_time1.onGetTwilight:=TimeGetTwilight;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
@@ -442,6 +445,12 @@ function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
 begin
  if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
    else result:=false;
+end;
+
+procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);
+begin
+ if assigned(FGetTwilight) then FGetTwilight(jd0,ht)
+   else ht:=-99;
 end;
 
 function Tf_config.GetFits: TFits;

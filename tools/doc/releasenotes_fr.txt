@@ -1,4 +1,17 @@
 Version 3.3svn  Notes de la version
 
 - Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
+- Ajout d'information sur la vitesse des objets du système solaire.
+- Copie les coordonnée depuis le menu clic droit.
+- Double clic sur un objet ouvre la fenêtre de détail.
+- Ctrl + déplacement de la souris montre les informations dans la barre d'état.
+- Remplit la zone sous l'horizon avec la couleur de l'horizon. (pas avec Linux)
+- Pas de confirmation pour enregistrer en quittant si c'est selectionné dans le menu.
+- La configuration de l'objet bloqué est maintenant sauvegardée, attention que vous pouvez obtenir "Sous l'horizon" la prochaine fois que vous lancez le programme.
+- Option pour réinitialiser les valeurs par défaut du programme.
+- Ajout du bouton "cette nuit" au réglage de l'heure, il ajuste l'heure du crépuscule astronomique du soir.
+- Meilleur rendu de la ligne d'horizon lorsqu'elle est remplie pour des changement important d'altitude.
+- Corrige l'affichage des lignes pointillées.
+- Change la présentation de la "Liste d'objet".
+- Enregistre la "Liste d'objet" avec une virgule comme séparateur si l'extension est .csv. Utilisez une autre extension pour le avoir une tabulation comme séparateur.
 - Correction de bug.

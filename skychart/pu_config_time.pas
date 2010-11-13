@@ -44,6 +44,7 @@ type
     Button6: TButton;
     BitBtn4: TButton;
     Button7: TButton;
+    Button8: TButton;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     t_hour: TUpDown;
@@ -105,6 +106,7 @@ type
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
@@ -136,6 +138,7 @@ type
     LockChange, LockJD: boolean;
     FApplyConfig: TNotifyEvent;
     JDCalendarDialog1: TJDCalendarDialog;
+    FGetTwilight: TGetTwilight;
     procedure ShowTime;
   public
     { Public declarations }
@@ -152,6 +155,7 @@ type
     procedure SetLang;
     constructor Create(AOwner:TComponent); override;
     destructor Destroy; override;
+    property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
@@ -177,6 +181,7 @@ Label144.caption:=rsSMonth;
 Label145.caption:=rsSDay;
 Label140.caption:=rsDate;
 Label1.caption:=rsJD;
+Button8.Caption:=rsTonight;
 BitBtn4.caption:=rsActualSystem;
 Button5.Caption:='0h';
 Button6.Caption:='0h '+rsUT;
@@ -270,8 +275,9 @@ procedure Tf_config_time.FormShow(Sender: TObject);
 begin
 LockJD:=false;
 LockChange:=true;
-if csc.ShowPluto then SimObj.items[9]:=rsPluto
-                 else SimObj.items[9]:='';
+if csc.ShowPluto and (SimObj.Items[9]<>rsPluto) then SimObj.Items.Insert(9,rsPluto);
+if (not csc.ShowPluto) and (SimObj.Items[9]=rsPluto) then SimObj.Items.Delete(9);
+if not csc.ShowPluto then csc.SimObject[9]:=false;
 ShowTime;
 LockChange:=false;
 end;
@@ -327,7 +333,8 @@ for i:=0 to SimObj.Items.Count-1 do begin
   case i of
   0 : j:=10;   // sun
   3 : j:=11;   // moon
-  10: j:=12;   // asteroid
+  9 : if  csc.ShowPluto then j:=9 else j:=12; // pluto / asteroid
+  10: if  csc.ShowPluto then j:=12 else j:=13;   // asteroid / comet
   11: j:=13;   // comet
   else j:=i;
   end;
@@ -368,6 +375,7 @@ JDedit.enabled:=d_year.enabled;
 BitBtn1.enabled:=d_year.enabled;
 Button5.enabled:=d_year.enabled;
 Button6.enabled:=d_year.enabled;
+Button8.enabled:=d_year.enabled;
 ShowTime;
 end;
 
@@ -568,6 +576,22 @@ begin
   ShowHelp;
 end;
 
+procedure Tf_config_time.Button8Click(Sender: TObject);
+var ht: double;
+    h,n,s: string;
+begin
+if assigned(FGetTwilight) then begin
+   FGetTwilight(jd(d_year.Position,d_month.Position,d_day.Position,0),ht);
+   if ht>0 then begin
+     artostr2(ht,h,n,s);
+     t_hour.Position:=strtoint(h);
+     t_min.Position:=strtoint(n);
+     t_sec.Position:=strtoint(s);
+   end else
+     ShowMessage(rsNoAstronomic);
+end;
+end;
+
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);
 begin
 csc.Force_DT_UT:=checkbox4.checked;
@@ -591,11 +615,11 @@ begin
   case index of
   0 : j:=10;   // sun
   3 : j:=11;   // moon
-  10: j:=12;   // asteroid
+  9 : if  csc.ShowPluto then j:=9 else j:=12; // pluto / asteroid
+  10: if  csc.ShowPluto then j:=12 else j:=13;   // asteroid / comet
   11: j:=13;   // comet
   else j:=index;
   end;
-  if (index=9) and (not csc.ShowPluto) then SimObj.checked[index]:=false;
   csc.SimObject[j]:=SimObj.checked[index];
 end;
 
@@ -603,8 +627,7 @@ procedure Tf_config_time.AllSimClick(Sender: TObject);
 var i:integer;
 begin
 for i:=0 to SimObj.Items.Count-1 do begin
-  if (i=9) and (not csc.ShowPluto) then SimObj.checked[i]:=false
-    else SimObj.checked[i]:=true;
+    SimObj.checked[i]:=true;
 end;
 {$IF DEFINED(mswindows) or DEFINED(LCLgtk2)}
  for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);

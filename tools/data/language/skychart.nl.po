@@ -155,6 +155,10 @@ msgstr "Hoogte"
 msgid "%sAlt turns:"
 msgstr "%sAlt as-omw.:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Altijd kompasroos tonen"
@@ -794,6 +798,10 @@ msgstr "Coördinaten rooster"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopiëer"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2532,6 +2540,10 @@ msgstr "Nr."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Geen planetoïde gegevens gevonden!%sLaad alstublieft eerst een MPC bestand."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Geen marge"
@@ -3282,6 +3294,14 @@ msgstr "Reset kaart"
 msgid "Reset chart and options"
 msgstr "Reset kaart en opties"
 
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
+
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Resolutie:"
@@ -3738,9 +3758,9 @@ msgstr "Sommige records zijn geweigerd, zie bestand %sreject.txt voor details."
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Iets is fout gegaan tijdens de programma-initialisatie. Het programma moet nu sluiten."
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Sorteer op RA"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4030,6 +4050,10 @@ msgstr "Vandaag"
 msgid "to file:"
 msgstr "naar bestand:"
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Gereedschapsbalk"
@@ -4269,6 +4293,10 @@ msgstr "Variabele ster"
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
 msgstr "Variabele sterren"
+
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"
