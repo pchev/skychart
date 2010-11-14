@@ -135,7 +135,7 @@ buf:='EOF'; //EOF               End of input file list
 writeln(satctl,buf);
 Closefile(satctl);
 chdir(slash(tmpdir));
-exec(dcmd +' "'+slash(prgdir)+'quicksat.exe'+'" '+slash('.')+'quicksat.ctl',false);
+exec(dcmd +' "'+slash(prgdir)+'quicksat.exe'+'" '+slash('.')+'quicksat.ctl',true);
 chdir(curdir);
 except
 {$I-}
@@ -256,7 +256,7 @@ buf:='EOF'; //EOF               End of input file list
 writeln(satctl,buf);
 Closefile(satctl);
 chdir(slash(tmpdir));
-exec(dcmd +' "'+slash(prgdir)+'quicksat.exe'+'" '+slash('.')+'quicksat.ctl',false);
+exec(dcmd +' "'+slash(prgdir)+'quicksat.exe'+'" '+slash('.')+'quicksat.ctl',true);
 chdir(curdir);
 except
 {$I-}
