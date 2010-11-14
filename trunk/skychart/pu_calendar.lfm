@@ -191,7 +191,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.11.13.01'
+      Text = '2010.11.14.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -253,7 +253,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.11.13.01'
+      Text = '2010.11.14.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -378,23 +378,23 @@ object f_calendar: Tf_calendar
       ImageIndex = 1
       object Pagecontrol2: TPageControl
         Left = 0
-        Height = 290
+        Height = 344
         Top = 0
-        Width = 834
+        Width = 753
         ActivePage = Psoleil
         Align = alClient
         TabIndex = 0
         TabOrder = 0
         object Psoleil: TTabSheet
           Caption = 'Sun'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 9
           object SoleilGrid: TStringGrid
             Left = 0
-            Height = 262
+            Height = 316
             Top = 0
-            Width = 830
+            Width = 749
             Align = alClient
             ColCount = 11
             DefaultColWidth = 100
@@ -409,8 +409,8 @@ object f_calendar: Tf_calendar
         end
         object Mercure: TTabSheet
           Caption = 'Mercury'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           object MercureGrid: TStringGrid
             Left = 0
             Height = 252
@@ -430,8 +430,8 @@ object f_calendar: Tf_calendar
         end
         object Venus: TTabSheet
           Caption = 'Venus'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 1
           object VenusGrid: TStringGrid
             Left = 0
@@ -452,8 +452,8 @@ object f_calendar: Tf_calendar
         end
         object PLune: TTabSheet
           Caption = 'Moon'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 2
           object LuneGrid: TStringGrid
             Left = 0
@@ -474,8 +474,8 @@ object f_calendar: Tf_calendar
         end
         object Mars: TTabSheet
           Caption = 'Mars'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 3
           object MarsGrid: TStringGrid
             Left = 0
@@ -496,8 +496,8 @@ object f_calendar: Tf_calendar
         end
         object Jupiter: TTabSheet
           Caption = 'Jupiter'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 4
           object JupiterGrid: TStringGrid
             Left = 0
@@ -518,8 +518,8 @@ object f_calendar: Tf_calendar
         end
         object Saturne: TTabSheet
           Caption = 'Saturn'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 5
           object SaturneGrid: TStringGrid
             Left = 0
@@ -540,8 +540,8 @@ object f_calendar: Tf_calendar
         end
         object Uranus: TTabSheet
           Caption = 'Uranus'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 6
           object UranusGrid: TStringGrid
             Left = 0
@@ -562,8 +562,8 @@ object f_calendar: Tf_calendar
         end
         object Neptune: TTabSheet
           Caption = 'Neptun'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 7
           object NeptuneGrid: TStringGrid
             Left = 0
@@ -584,8 +584,8 @@ object f_calendar: Tf_calendar
         end
         object Pluton: TTabSheet
           Caption = 'Pluto'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           ImageIndex = 8
           object PlutonGrid: TStringGrid
             Left = 0
@@ -606,8 +606,8 @@ object f_calendar: Tf_calendar
         end
         object tsPGraphs: TTabSheet
           Caption = 'Graphs'
-          ClientHeight = 286
-          ClientWidth = 830
+          ClientHeight = 340
+          ClientWidth = 749
           object dgPlanet: TDrawGrid
             Left = 0
             Height = 262
@@ -811,6 +811,8 @@ object f_calendar: Tf_calendar
         RowCount = 3
         TabOrder = 0
         TitleFont.Height = -11
+        OnDblClick = GridDblClick
+        OnMouseUp = GridMouseUp
       end
       object Panel4: TPanel
         Left = 0
@@ -863,11 +865,9 @@ object f_calendar: Tf_calendar
         end
         object TLEListBox: TFileListBox
           Left = 344
-          Height = 43
+          Height = 56
           Top = 6
           Width = 110
-          Directory = '/home/pch'
-          IntegralHeight = True
           ItemHeight = 0
           Mask = '*.tle'
           MultiSelect = True
@@ -880,9 +880,8 @@ object f_calendar: Tf_calendar
           Top = 24
           Width = 123
           Caption = 'Include Iridium flares'
-          Checked = True
-          State = cbChecked
           TabOrder = 5
+          Visible = False
         end
         object magchart: TFloatEdit
           Left = 232
@@ -904,6 +903,7 @@ object f_calendar: Tf_calendar
           Width = 122
           Caption = 'in current chart only'
           TabOrder = 3
+          Visible = False
         end
         object maglimit: TFloatEdit
           Left = 144

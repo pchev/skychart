@@ -2061,6 +2061,7 @@ else if txt='P' then txt:=rsPlanet
 else if txt='Ps' then txt:=rsPlanetarySat
 else if txt='As' then txt:=rsAsteroid
 else if txt='Cm' then txt:=rsComet
+else if txt='Sat' then txt:=rsArtificialSa2
 else if txt='C1' then txt:=rsExternalCata
 else if txt='C2' then txt:=rsExternalCata;
 result:=txt;

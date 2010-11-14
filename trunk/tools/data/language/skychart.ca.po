@@ -200,6 +200,10 @@ msgstr "Argument del periheli"
 msgid "Artificial satellites"
 msgstr "Satèl·lits artificials"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr "Driver del telescopi ASCOM"

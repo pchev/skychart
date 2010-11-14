@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_chart','FORMDATA',[
   'TPF0'#8'Tf_chart'#7'f_chart'#4'Left'#3#179#1#6'Height'#3'R'#1#3'Top'#3#128#0
   +#5'Width'#3#252#1#13'ActiveControl'#7#6'Panel1'#7'Caption'#6#5'Chart'#12'Cli'

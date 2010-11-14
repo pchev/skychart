@@ -4414,3 +4414,7 @@ msgstr ""
 msgid "Always save without asking."
 msgstr ""
 
+#: u_translation:rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+

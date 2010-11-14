@@ -218,6 +218,10 @@ msgstr "Pericentrum argumentum-omega"
 msgid "Artificial satellites"
 msgstr "Műholdak"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr "ASCOM telescope driver"

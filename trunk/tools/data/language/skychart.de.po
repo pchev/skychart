@@ -199,6 +199,10 @@ msgstr "Perihelwinkel"
 msgid "Artificial satellites"
 msgstr "Künstliche Satelliten"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr "ASCOM Teleskop-Treiber"

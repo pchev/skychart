@@ -451,7 +451,7 @@ type
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
                 SimNb,SimD,SimH,SimM,SimS,SimLabel : Integer;
                 SimObject: array[1..NumSimObject] of boolean;
-                SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
+                SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet,ShowArtSat,NewArtSat : Boolean;
                 SimDateYear,SimDateMonth,SimDateDay,SimDateHour,SimDateMinute,SimDateSecond: Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude : double; ObsTZ: string;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
@@ -1174,6 +1174,8 @@ PlanetParalaxe:=Source.PlanetParalaxe ;
 ShowEarthShadow:=Source.ShowEarthShadow ;
 ShowAsteroid:=Source.ShowAsteroid ;
 ShowComet:=Source.ShowComet ;
+ShowArtSat:=Source.ShowArtSat;
+NewArtSat:=Source.NewArtSat;
 ObsLatitude:=Source.ObsLatitude;
 ObsLongitude:=Source.ObsLongitude ;
 ObsAltitude:=Source.ObsAltitude ;

@@ -199,6 +199,10 @@ msgstr "Argumento de Perihelio"
 msgid "Artificial satellites"
 msgstr "Satélites Artificiales"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr ""
