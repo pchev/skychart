@@ -200,6 +200,10 @@ msgstr ""
 msgid "Artificial satellites"
 msgstr "Umetni sateliti"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr ""

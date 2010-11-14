@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-13 12:35+0100\n"
+"PO-Revision-Date: 2010-11-14 16:12+0100\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -201,6 +201,10 @@ msgstr "Argument du périhélie"
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Satellites artificiels"
+
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr "Satellite artificiel "
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"

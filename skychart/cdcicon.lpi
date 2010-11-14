@@ -77,11 +77,10 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="553"/>
-        <CursorPos X="66" Y="564"/>
+        <CursorPos X="89" Y="574"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
           <Item0 X="27" Y="388" ID="1"/>
@@ -143,7 +142,7 @@
       <Unit9>
         <Filename Value="u_constant.pas"/>
         <UnitName Value="u_constant"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="622"/>
         <CursorPos X="37" Y="644"/>
@@ -206,9 +205,14 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
-        <TopLine Value="19"/>
-        <CursorPos X="21" Y="32"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1681"/>
+        <CursorPos X="1" Y="1703"/>
         <UsageCount Value="25"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="pu_image.pas"/>
@@ -241,7 +245,7 @@
       </Unit21>
       <Unit22>
         <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <WindowIndex Value="0"/>
         <TopLine Value="152"/>
         <CursorPos X="1" Y="174"/>
@@ -251,7 +255,7 @@
       <Unit23>
         <Filename Value="../../../compiler/lazarus/lcl/extctrls.pp"/>
         <UnitName Value="ExtCtrls"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1245"/>
         <CursorPos X="21" Y="1259"/>
@@ -260,7 +264,7 @@
       </Unit23>
       <Unit24>
         <Filename Value="../../../compiler/lazarus/lcl/include/customtrayicon.inc"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="184"/>
         <CursorPos X="3" Y="201"/>
@@ -268,119 +272,127 @@
         <Loaded Value="True"/>
       </Unit24>
     </Units>
-    <JumpHistory Count="28" HistoryIndex="27">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="75" Column="19" TopLine="55"/>
+        <Caret Line="597" Column="75" TopLine="570"/>
       </Position1>
       <Position2>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="196" Column="9" TopLine="176"/>
+        <Caret Line="615" Column="38" TopLine="606"/>
       </Position2>
       <Position3>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="314" Column="11" TopLine="294"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position3>
       <Position4>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="349" Column="40" TopLine="314"/>
+        <Caret Line="589" Column="54" TopLine="567"/>
       </Position4>
       <Position5>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="350" Column="37" TopLine="314"/>
+        <Caret Line="596" Column="25" TopLine="567"/>
       </Position5>
       <Position6>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="597" Column="75" TopLine="570"/>
+        <Caret Line="597" Column="74" TopLine="567"/>
       </Position6>
       <Position7>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="615" Column="38" TopLine="606"/>
+        <Caret Line="545" Column="23" TopLine="523"/>
       </Position7>
       <Position8>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="468" Column="17" TopLine="439"/>
       </Position8>
       <Position9>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="589" Column="54" TopLine="567"/>
+        <Caret Line="80" Column="35" TopLine="70"/>
       </Position9>
       <Position10>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="596" Column="25" TopLine="567"/>
+        <Caret Line="695" Column="39" TopLine="669"/>
       </Position10>
       <Position11>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="597" Column="74" TopLine="567"/>
+        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
+        <Caret Line="174" Column="1" TopLine="152"/>
       </Position11>
       <Position12>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="545" Column="23" TopLine="523"/>
+        <Caret Line="306" Column="3" TopLine="283"/>
       </Position12>
       <Position13>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="468" Column="17" TopLine="439"/>
+        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
+        <Caret Line="174" Column="1" TopLine="152"/>
       </Position13>
       <Position14>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="80" Column="35" TopLine="70"/>
+        <Caret Line="303" Column="3" TopLine="283"/>
       </Position14>
       <Position15>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="695" Column="39" TopLine="669"/>
+        <Caret Line="301" Column="1" TopLine="283"/>
       </Position15>
       <Position16>
-        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
-        <Caret Line="174" Column="1" TopLine="152"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="302" Column="1" TopLine="283"/>
       </Position16>
       <Position17>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="306" Column="3" TopLine="283"/>
+        <Caret Line="304" Column="1" TopLine="283"/>
       </Position17>
       <Position18>
-        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
-        <Caret Line="174" Column="1" TopLine="152"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="308" Column="1" TopLine="283"/>
       </Position18>
       <Position19>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="303" Column="3" TopLine="283"/>
+        <Caret Line="303" Column="14" TopLine="283"/>
       </Position19>
       <Position20>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="301" Column="1" TopLine="283"/>
+        <Caret Line="304" Column="25" TopLine="283"/>
       </Position20>
       <Position21>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="302" Column="1" TopLine="283"/>
+        <Caret Line="307" Column="50" TopLine="283"/>
       </Position21>
       <Position22>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="304" Column="1" TopLine="283"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position22>
       <Position23>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="308" Column="1" TopLine="283"/>
+        <Caret Line="578" Column="4" TopLine="553"/>
       </Position23>
       <Position24>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="303" Column="14" TopLine="283"/>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="40" Column="53" TopLine="146"/>
       </Position24>
       <Position25>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="304" Column="25" TopLine="283"/>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1651" Column="55" TopLine="1686"/>
       </Position25>
       <Position26>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="307" Column="50" TopLine="283"/>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1703" Column="42" TopLine="1686"/>
       </Position26>
       <Position27>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1704" Column="1" TopLine="1686"/>
       </Position27>
       <Position28>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="578" Column="4" TopLine="553"/>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1712" Column="1" TopLine="1686"/>
       </Position28>
+      <Position29>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1732" Column="1" TopLine="1710"/>
+      </Position29>
+      <Position30>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1736" Column="1" TopLine="1710"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

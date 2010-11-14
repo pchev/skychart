@@ -200,6 +200,10 @@ msgstr "Perihélium"
 msgid "Artificial satellites"
 msgstr "Satelity"
 
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
+
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
 msgstr ""

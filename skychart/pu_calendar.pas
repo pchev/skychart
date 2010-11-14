@@ -905,16 +905,16 @@ try
 screen.Cursor:=crHourGlass;
 Application.ProcessMessages;
 ed:=inttostr(a+round(date2.jd-date1.jd));
-DeleteFile(slash(SatDir)+'output.txt');
+DeleteFile(slash(SatDir)+'satlist.txt');
 DeleteFile(slash(SatDir)+'quicksat.ctl');
 if not fileexists(slash(SatDir)+'visible.tle') then CopyFile(slash(prgdir)+'sample.tle', slash(SatDir)+'visible.tle');
 if not fileexists(slash(SatDir)+'quicksat.mag') then CopyFile(slash(prgdir)+'quicksat.mag', slash(SatDir)+'quicksat.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,SatChartBox.Checked);
-if not Fileexists(slash(SatDir)+'output.txt') then begin
+if not Fileexists(slash(SatDir)+'satlist.txt') then begin
   Showmessage('Cannot compute satellites.');
   exit;
 end;
-Assignfile(f,slash(SatDir)+'output.txt');
+Assignfile(f,slash(SatDir)+'satlist.txt');
 reset(f);
 jdi:=1;
 {if IridiumBox.Checked then begin
@@ -975,10 +975,10 @@ with satgrid do begin
   cells[5,i]:=copy(buf,46,4);
   s1:=padzeros(copy(buf,51,2),2);
   s2:=padzeros(copy(buf,53,2),2);
-  ar:=strtoint(s1)+strtoint(s2)/60;
+  ar:=(strtoint(s1)+strtoint(s2)/60)*15*deg2rad;
   cells[6,i]:=s1+'h'+s2+'m';
   cells[7,i]:=copy(buf,55,5);
-  de:=strtofloat(cells[7,i]);
+  de:=strtofloat(cells[7,i])*deg2rad;
   cells[8,i]:=copy(buf,9,4);
   cells[9,i]:=copy(buf,22,3);
   objects[0,i]:=SetObjCoord(jda,ar,de);
@@ -1693,7 +1693,27 @@ if (aRow>=0)and(aColumn>=0) then begin
           Fupdchart(csconfig);
        end;
     end else if sender = Satgrid then begin    // Satellites
-           // .....
+
+      DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,magchart.text,tle1.text,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,SatChartBox.Checked);
+      if not SatChartBox.checked then begin
+        csconfig.racentre:=p.ra;
+        csconfig.decentre:=p.dec;
+      end;
+//      csconfig.NewTime:=true;
+        csconfig.ShowArtSat:=true;
+        csconfig.NewArtSat:=true;
+    {  if copy(gr.cells[1,row],1,14)='Flare: Iridium' then begin
+         sky_p1.IridiumRA:=p.ra;
+         sky_p1.IridiumDE:=p.dec;
+         sky_p1.IridiumMA:=strtofloat(gr.cells[2,row]);
+         sky_p1.IridiumNom:=copy(gr.cells[1,row],8,99);
+         sky_p1.IridiumDist:=gr.cells[5,row];
+      end else sky_p1.IridiumMA:=99; }
+        if assigned(Fupdchart) then begin
+           BtnReset.visible:=true;
+           Fupdchart(csconfig);
+        end;
+
     end else begin  // other grid
        if p.ra>-900 then csconfig.racentre:=p.ra;
        if p.dec>-900 then csconfig.decentre:=p.dec

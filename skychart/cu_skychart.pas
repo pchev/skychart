@@ -44,6 +44,7 @@ Tskychart = class (TComponent)
     Fplanet : Tplanet;
     Fcdb: Tcdcdb;
     FShowDetailXY: Tint2func;
+    fsat: textfile;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
@@ -89,6 +90,8 @@ Tskychart = class (TComponent)
     procedure DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
     function DrawAsteroid :boolean;
     function DrawComet :boolean;
+    procedure DrawArtSat;
+    function  FindArtSat(x1,y1,x2,y2:double; nextobj:boolean;  var nom,ma,desc:string):boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
     Procedure DrawPole(pole: integer);
@@ -303,6 +306,8 @@ end;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanet then DrawPlanet;
+  // Artificials satellites
+  if cfgsc.ShowArtSat then DrawArtSat;
   // and the horizon line if not transparent
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
 
@@ -470,6 +475,7 @@ cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude);
 if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
    cfgsc.FindOk:=false;    // last search no longuer valid
+   if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid
 end;
 cfgsc.LastJD:=cfgsc.CurJD;
 if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
@@ -1365,6 +1371,175 @@ end else begin
 end;
 end;
 
+procedure Tskychart.DrawArtSat;
+var
+   ar,de,ma : double;
+   x1,y1 : double;
+   xx,yy,xp,yp:single;
+   line,showlabel : boolean;
+   nom,buf,mm,dat,last : string;
+   i,lid : integer;
+   f : textfile;
+const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
+begin
+if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
+  cfgsc.NewArtSat:=false;
+  Filemode:=0;
+  try
+  Assignfile(f,slash(SatDir)+'satdetail.txt');
+  reset(f);
+  Readln(f,buf);
+  Readln(f,buf);
+  last:='';
+  repeat
+    Readln(f,buf);
+    if copy(buf,1,3)='***' then begin
+      mm:=copy(buf,11,4); for i:=1 to 12 do if mm=mois[i] then mm:=inttostr(i);
+      dat:=copy(buf,6,4)+'-'+padzeros(mm,2)+'-'+padzeros(copy(buf,16,2),2);
+      Readln(f,buf);
+      Readln(f,buf);
+      continue;
+    end;
+    if trim(buf)='' then continue;
+    ar:=(strtoint(copy(buf,51,2))+strtoint(copy(buf,53,2))/60)*15*deg2rad;
+    de:=strtofloat(copy(buf,55,5))*deg2rad;
+    ma:=strtofloat(copy(buf,26,4));
+    if ma>17.9 then ma:=(ma-20+6);
+    nom:=trim(copy(buf,66,99));
+    if nom='' then begin
+       nom:=last;
+       line:=true;
+       showlabel:=false;
+    end else begin
+       last:=nom;
+       line:=false;
+       showlabel:=true;
+    end;
+    nom:=nom+' '+dat+' '+padzeros(copy(buf,1,2),2)+':'+padzeros(copy(buf,4,2),2)+':'+padzeros(copy(buf,7,2),2);
+    projection(ar,de,x1,y1,true,cfgsc) ;
+    windowxy(x1,y1,xx,yy,cfgsc);
+    if (xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax) then begin
+       if line then begin
+          Fplot.PlotLine(xp,yp,xx,yy,clGray,1);
+       end;
+       Fplot.PlotStar(xx,yy,ma,0);
+       if showlabel then begin
+         lid:=GetId(nom);
+         SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
+       end;
+    end;
+    xp:=xx;
+    yp:=yy;
+  until eof(f) ;
+  finally
+  Closefile(f);
+  end;
+end;
+//if IridiumMA<90 then DrawStarline(IridiumRA,IridiumDE,IridiumMA,IridiumNom,false,true,onprinter,out);
+end;
+
+function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,desc:string):boolean;
+  var
+     tar,tde,ra,de,m : double;
+     sar,sde : string;
+     buf,mm,dat,last,heure,dist : string;
+     i : integer;
+     first: boolean;
+  const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
+  Function CloseSat : integer;
+  begin
+    {$I-}
+    Closefile(fsat);
+    result:=ioresult;
+    {$I+}
+  end;
+
+  begin
+  first:=false;
+  if not nextobj then begin
+    if not Fileexists(slash(SatDir)+'satdetail.txt') then  begin result:=false; exit; end;
+    CloseSat;
+    Assignfile(fsat,slash(SatDir)+'satdetail.txt');
+    reset(fsat);
+    Readln(fsat,buf);
+    Readln(fsat,buf);
+    last:='';
+    first:=true;
+    if eof(fsat) then begin result:=false; exit; end;
+  end;
+  result := false;
+  desc:='';tar:=1;tde:=1;
+  repeat
+{    if first and (IridiumMA<90) then begin
+       tar:=IridiumRA;
+       tde:=IridiumDE;
+       tar:=NormAr(tar);
+       first:=false;
+       if (tar<x1) or (tar>x2) then continue;
+       if (tde<y1) or (tde>y2) then continue;
+       str(IridiumMA:3:1,ma);
+       last:='Flare '+IridiumNom;
+       dist:=IridiumDist;
+       heure:=artostr(currenttime);
+       ok := true;
+       break;
+    end; }
+    first:=false;
+    Readln(fsat,buf);
+    if eof(fsat) then break;
+    if copy(buf,1,3)='***' then begin
+      mm:=copy(buf,11,4); for i:=1 to 12 do if mm=mois[i] then mm:=inttostr(i);
+      dat:=copy(buf,6,4)+'-'+padzeros(mm,2)+'-'+padzeros(copy(buf,16,2),2);
+      Readln(fsat,buf);
+      Readln(fsat,buf);
+      continue;
+    end;
+    if trim(buf)='' then continue;
+    if trim(copy(buf,66,99))<>'' then last:=copy(buf,66,14);
+    tar:=(strtoint(copy(buf,51,2))+strtoint(copy(buf,53,2))/60)*15*deg2rad;
+    tde:=strtofloat(copy(buf,55,5))*deg2rad;
+    tar:=NormRA(tar);
+    if (tar<x1) or (tar>x2) then continue;
+    if (tde<y1) or (tde>y2) then continue;
+    heure:=padzeros(copy(buf,1,2),2)+'h'+padzeros(copy(buf,4,2),2)+'m'+padzeros(copy(buf,7,2),2)+'s';
+    ma:=copy(buf,26,4);
+    m:=strtofloat(ma);
+    if m>17.9 then begin
+       m:=(m-20+6);
+       str(m:4:1,ma);
+       ma:='('+ma+')';
+    end;
+    dist:=copy(buf,46,4);
+    result := true;
+  until result ;
+  if result then begin
+    nom:=trim(last)+' '+heure;
+    ra:=rmod(tar*rad2deg/15+24,24) ;
+    de:=tde*rad2deg;
+    sar := ARpToStr(ra) ;
+    sde := DEpToStr(de) ;
+    Desc := sar+tab+sde+tab
+            +'Sat'+tab+nom+tab
+            +'m:'+ma+tab
+            +'dist:'+dist+'km ';
+    cfgsc.FindOK:=true;
+    cfgsc.FindSize:=0;
+    cfgsc.FindRA:=tar;
+    cfgsc.FindDec:=tde;
+    cfgsc.FindPM:=false;
+    cfgsc.FindType:=ftlin;
+    cfgsc.FindName:=nom;
+    cfgsc.FindDesc:=Desc;
+    cfgsc.FindNote:='';
+    cfgsc.TrackRA:=cfgsc.FindRA;
+    cfgsc.TrackDec:=cfgsc.FindDec;
+    //cfgsc.TrackType:=6;
+    //cfgsc.TrackId:=nom;
+    //cfgsc.TrackEpoch:=;
+    //cfgsc.TrackName:=nom;
+  end;
+end;
+
 function Tskychart.DrawOrbitPath:boolean;
 var i,j,color : integer;
     x1,y1 : double;
@@ -1750,7 +1925,9 @@ end else begin
       if cfgsc.ShowComet then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
-      end;
+   end else begin
+      if cfgsc.ShowArtSat then result:=FindArtSat(x1,y1,x2,y2,false,n,m,desc);
+   end;
    end;
 end;
 end;

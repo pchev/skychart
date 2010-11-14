@@ -1122,6 +1122,7 @@ resourcestring
   rsNoAstronomic = 'No astronomical twilight today!';
   rsTonight = 'Tonight';
   rsAlwaysSaveWi = 'Always save without asking.';
+  rsArtificialSa2 = 'Artificial satellite';
 
 implementation
 
