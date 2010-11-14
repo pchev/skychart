@@ -1,6 +1,7 @@
 Version 3.3svn  Notes de la version
 
 - Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
+- Ajout des satellites artificiels au calendrier. Cliquez sur une ligne pour l'afficher sur la carte. Vous devez installer Wine si vous utilisez Linux ou Mac.
 - Ajout d'information sur la vitesse des objets du système solaire.
 - Copie les coordonnée depuis le menu clic droit.
 - Double clic sur un objet ouvre la fenêtre de détail.

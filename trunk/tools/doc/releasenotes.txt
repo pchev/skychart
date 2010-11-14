@@ -1,6 +1,7 @@
 Version 3.3svn release Notes
 
 - Add Planet graph in calendar, contributed by John Sunderland.
+- Add artificials satellites to the calendar. Click in a line to display the satellite pass on the map. You need to install Wine on Linux and Mac.
 - Add solar system objects velocity information.
 - Copy current coordinates from right click menu.
 - Double click and objet directl open the detail window.
