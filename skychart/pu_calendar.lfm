@@ -3,7 +3,7 @@ object f_calendar: Tf_calendar
   Height = 442
   Top = 111
   Width = 757
-  ActiveControl = TwilightGrid
+  ActiveControl = Panel4
   Caption = 'f_calendar'
   ClientHeight = 442
   ClientWidth = 757
@@ -191,7 +191,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.11.14.01'
+      Text = '2010.11.20.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -253,7 +253,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.11.14.01'
+      Text = '2010.11.20.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -345,9 +345,9 @@ object f_calendar: Tf_calendar
     Height = 372
     Top = 70
     Width = 757
-    ActivePage = twilight
+    ActivePage = Satellites
     Align = alClient
-    TabIndex = 0
+    TabIndex = 6
     TabOrder = 1
     OnChange = PageControl1Change
     OnPageChanged = PageControl1Change
@@ -868,6 +868,7 @@ object f_calendar: Tf_calendar
           Height = 56
           Top = 6
           Width = 110
+          Directory = '/home/compiler/lazarus'
           ItemHeight = 0
           Mask = '*.tle'
           MultiSelect = True
@@ -875,13 +876,13 @@ object f_calendar: Tf_calendar
           TopIndex = -1
         end
         object IridiumBox: TCheckBox
-          Left = 464
+          Left = 461
           Height = 23
-          Top = 24
+          Top = 4
           Width = 123
           Caption = 'Include Iridium flares'
+          OnChange = IridiumBoxChange
           TabOrder = 5
-          Visible = False
         end
         object magchart: TFloatEdit
           Left = 232
@@ -897,9 +898,9 @@ object f_calendar: Tf_calendar
           MaxValue = 99
         end
         object SatChartBox: TCheckBox
-          Left = 464
+          Left = 461
           Height = 23
-          Top = 0
+          Top = 32
           Width = 122
           Caption = 'in current chart only'
           TabOrder = 3

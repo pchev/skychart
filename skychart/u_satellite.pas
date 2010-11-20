@@ -9,13 +9,21 @@ uses u_util, u_projection, u_constant, math, FileUtil,
 
 Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
 Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; boxsearch:boolean=false);
+Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude: double);
 Function CheckWine: boolean;
+function CheckDosbox: boolean;
 
 const
   {$ifdef mswindows}
-  doscmd='cmd.exe /C';
+    doscmd='cmd.exe /C';
+    {$ifdef win64}
+      dosbox='dosbox -exit -conf dosbox.conf';
+    {$else}
+      dosbox=doscmd;
+    {$endif}
   {$else}
-  doscmd='wine';
+    doscmd='wine';
+    dosbox='dosbox -exit -conf dosbox.conf';
   {$endif}
 
 implementation
@@ -34,7 +42,26 @@ if not result then begin
      buf:='';
      for j:=0 to r.Count-1 do  buf:=buf+r[j];
    end else buf:='';
-   ShowMessage('Please install "wine" http://www.winehq.org/ to compute artificial satellites on your computer. wine return: '+buf);
+   ShowMessage('Please install "wine" http://www.winehq.org/ to compute artificial satellites on your computer.'+crlf+'wine return: '+buf);
+end;
+r.free;
+end;
+
+function CheckDosbox: boolean;
+var cmd,buf: string;
+    i,j: integer;
+    r: Tstringlist;
+begin
+r:=Tstringlist.Create;
+cmd:='dosbox --version';
+i:=execprocess(cmd,r);
+result:=(i=0);
+if not result then begin
+    if r.Count>0 then begin
+     buf:='';
+     for j:=0 to r.Count-1 do  buf:=buf+r[j];
+   end else buf:='';
+   ShowMessage('Please install "Dosbox" http://www.dosbox.com/ to compute Iridium flares on your computer.'+crlf+'dosbox return: '+buf);
 end;
 r.free;
 end;
@@ -261,6 +288,88 @@ chdir(curdir);
 except
 {$I-}
 Closefile(satctl);
+i1:=ioresult;
+{$I+}
+chdir(curdir);
+raise;
+end;
+end;
+
+Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude: double);
+var irictl : textfile;
+    buf : string;
+    curdir,dcmd : string;
+    i1: integer;
+{$ifdef unix}
+const doslf = chr(13);
+{$else}
+const doslf = '';
+{$endif}
+begin
+if isWin98 then dcmd:='command.com /C'
+   else dcmd:=dosbox;
+curdir:=GetCurrentDir;
+deletefile(slash(tmpdir)+'IRIDFLAR.OUT');
+try
+assignfile(irictl,slash(tmpdir)+'IRIDFLAR.CFG');
+rewrite(irictl);
+buf:='[IRIDFLAR]';
+writeln(irictl,buf+doslf);
+buf:='EphemFile=iridium.tle';
+writeln(irictl,buf+doslf);
+buf:='CityFile=skymap.cty';
+writeln(irictl,buf+doslf);
+buf:='SiteName='+Obsname;
+writeln(irictl,buf+doslf);
+buf:='ReportFile=iridflar.out';
+writeln(irictl,buf+doslf);
+buf:='StartDate='+y+'/'+mm+'/'+d;
+writeln(irictl,buf+doslf);
+buf:='StartTime=12:00:00';
+writeln(irictl,buf+doslf);
+buf:='Lat='+floattostr(Obslatitude);
+writeln(irictl,buf+doslf);
+buf:='Long='+floattostr(-Obslongitude);
+writeln(irictl,buf+doslf);
+buf:='Alt='+floattostr(Obsaltitude);
+writeln(irictl,buf+doslf);
+buf:='Zone='+timezone;
+writeln(irictl,buf+doslf);
+buf:='SearchDur='+dt;
+writeln(irictl,buf+doslf);
+buf:='SunAng= -6.00';
+writeln(irictl,buf+doslf);
+buf:='MinElev=10.00';
+writeln(irictl,buf+doslf);
+buf:='MaxMirror= 4.00';
+writeln(irictl,buf+doslf);
+buf:='DayMagLim=-6.0';
+writeln(irictl,buf+doslf);
+buf:='NightMagLim= 2.0';
+writeln(irictl,buf+doslf);
+buf:='Units=Metric';
+writeln(irictl,buf+doslf);
+buf:='Source=Sun';
+writeln(irictl,buf+doslf);
+buf:='Batch=Yes';
+writeln(irictl,buf+doslf);
+buf:='Brief=No';
+writeln(irictl,buf+doslf);
+buf:='LocalStart=Yes';
+writeln(irictl,buf+doslf);
+buf:='AutoDate=No';
+writeln(irictl,buf+doslf);
+buf:='ThreeLines=No';
+writeln(irictl,buf+doslf);
+buf:='Report=Yes';
+writeln(irictl,buf+doslf);
+Closefile(irictl);
+chdir(slash(tmpdir));
+exec(dcmd +' IRIDFLAR.EXE',false);
+chdir(curdir);
+except
+{$I-}
+Closefile(irictl);
 i1:=ioresult;
 {$I+}
 chdir(curdir);

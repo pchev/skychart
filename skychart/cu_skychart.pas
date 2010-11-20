@@ -1435,7 +1435,16 @@ if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
   Closefile(f);
   end;
 end;
-//if IridiumMA<90 then DrawStarline(IridiumRA,IridiumDE,IridiumMA,IridiumNom,false,true,onprinter,out);
+if cfgsc.IridiumMA<90 then begin
+  nom:=cfgsc.IridiumName;
+  projection(cfgsc.IridiumRA,cfgsc.IridiumDE,x1,y1,true,cfgsc) ;
+  windowxy(x1,y1,xx,yy,cfgsc);
+  if (xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax) then begin
+     Fplot.PlotStar(xx,yy,cfgsc.IridiumMA,0);
+     lid:=GetId(nom);
+     SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
+  end;
+end;
 end;
 
 function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,desc:string):boolean;
@@ -1470,20 +1479,20 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
   result := false;
   desc:='';tar:=1;tde:=1;
   repeat
-{    if first and (IridiumMA<90) then begin
-       tar:=IridiumRA;
-       tde:=IridiumDE;
-       tar:=NormAr(tar);
+    if first and (cfgsc.IridiumMA<90) then begin
+       tar:=cfgsc.IridiumRA;
+       tde:=cfgsc.IridiumDE;
+       tar:=NormRA(tar);
        first:=false;
        if (tar<x1) or (tar>x2) then continue;
        if (tde<y1) or (tde>y2) then continue;
-       str(IridiumMA:3:1,ma);
-       last:='Flare '+IridiumNom;
-       dist:=IridiumDist;
-       heure:=artostr(currenttime);
-       ok := true;
+       str(cfgsc.IridiumMA:3:1,ma);
+       last:='Flare '+cfgsc.IridiumName;
+       dist:=cfgsc.IridiumDist;
+       heure:=artostr(cfgsc.CurTime);
+       Result:=true;
        break;
-    end; }
+    end;
     first:=false;
     Readln(fsat,buf);
     if eof(fsat) then break;
@@ -1533,10 +1542,6 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     cfgsc.FindNote:='';
     cfgsc.TrackRA:=cfgsc.FindRA;
     cfgsc.TrackDec:=cfgsc.FindDec;
-    //cfgsc.TrackType:=6;
-    //cfgsc.TrackId:=nom;
-    //cfgsc.TrackEpoch:=;
-    //cfgsc.TrackName:=nom;
   end;
 end;
 

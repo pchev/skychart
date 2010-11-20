@@ -137,6 +137,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure FormDestroy(Sender: TObject);
     procedure GridDblClick(Sender: TObject);
+    procedure IridiumBoxChange(Sender: TObject);
     procedure Label9Click(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure BtnSaveClick(Sender: TObject);
@@ -888,14 +889,59 @@ end;
 Procedure Tf_calendar.RefreshSatellite;
 var f,fi : textfile;
     buf,mm,y,d,ed,dt,hh,mi,ss,dat1,s1,s2 : string;
-    bufi,prgdir : string;
+    bufi,prgdir,iridir : string;
     h,jda,ar,de,ma : double;
     hi,jdi,ari,dei : double;
     i,k,a,m,j : integer;
     ai,mmi,ji : integer;
 const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
+//
+Procedure InsertIridium;
+  begin
+  with SatGrid do
+  while jdi<jda do begin
+    RowCount:=i+1;
+    cells[0,i]:=inttostr(ai)+'-'+padzeros(inttostr(mmi),2)+'-'+padzeros(inttostr(ji),2)+' '+copy(bufi,18,8);
+    cells[1,i]:='Flare: Iridium '+copy(bufi,1,5);
+    cells[2,i]:=copy(bufi,79,4);
+    cells[3,i]:=copy(bufi,29,3);
+    cells[4,i]:=copy(bufi,33,2);
+    cells[5,i]:=copy(bufi,48,4);
+    s1:=padzeros(copy(bufi,36,2),2);
+    s2:=padzeros(copy(bufi,39,2),2);
+    ari:=(strtoint(s1)+strtoint(s2)/60)*15*deg2rad;
+    cells[6,i]:=s1+'h'+s2+'m';
+    cells[7,i]:=copy(bufi,42,5);
+    dei:=strtofloat(cells[7,i])*deg2rad;
+    cells[8,i]:=trim(copy(bufi,113,7));
+    cells[9,i]:='';
+    objects[0,i]:=SetObjCoord(jdi,ari,dei);
+    i:=i+1;
+    if eof(fi) then begin
+       jdi:=99999999;
+       Closefile(fi);
+       end
+    else begin
+      Readln(fi,bufi);
+      if trim(bufi)='' then Readln(fi,bufi);
+      if copy(bufi,1,5)='-----' then begin
+         jdi:=99999999;
+         Closefile(fi);
+         end
+      else begin
+      ai:=strtoint(copy(bufi,7,4));
+      mmi:=strtoint(copy(bufi,12,2));
+      ji:=strtoint(copy(bufi,15,2));
+      hi:=strtoint(copy(bufi,18,2))+strtoint(copy(bufi,21,2))/60+strtoint(copy(bufi,24,2))/3600;
+      jdi:=jd(ai,mmi,ji,hi-(config.tz.SecondsOffset/3600));
+      end;
+    end;
+  end;
+end;
+//
 begin
 prgdir:=slash(appdir)+slash('data')+slash('quicksat');
+iridir:=slash(appdir)+slash('data')+slash('iridflar');
 dat61:=date1.jd;
 djd(dat61,j,m,a,h);
 FreeCoord(SatGrid);
@@ -905,6 +951,7 @@ try
 screen.Cursor:=crHourGlass;
 Application.ProcessMessages;
 ed:=inttostr(a+round(date2.jd-date1.jd));
+dt:=inttostr(1+Trunc(date2.jd-date1.jd));
 DeleteFile(slash(SatDir)+'satlist.txt');
 DeleteFile(slash(SatDir)+'quicksat.ctl');
 if not fileexists(slash(SatDir)+'visible.tle') then CopyFile(slash(prgdir)+'sample.tle', slash(SatDir)+'visible.tle');
@@ -917,26 +964,40 @@ end;
 Assignfile(f,slash(SatDir)+'satlist.txt');
 reset(f);
 jdi:=1;
-{if IridiumBox.Checked then begin
-  Assignfile(fi,slash(appdir)+satpath+'\iridflar.out');
-  reset(fi);
-  repeat
-    Readln(fi,bufi);
-    if eof(fi) then begin
-      jdi:=99999999;
-      Closefile(fi);
-      break;
+if IridiumBox.Checked then begin
+  if not fileexists(slash(SatDir)+'iridium.tle') then CopyFile(slash(iridir)+'sample.tle', slash(SatDir)+'iridium.tle');
+  if not fileexists(slash(SatDir)+'F77L.EER') then CopyFile(slash(iridir)+'F77L.EER', slash(SatDir)+'F77L.EER');
+  if not fileexists(slash(SatDir)+'IRIDFLAR.EXE') then CopyFile(slash(iridir)+'IRIDFLAR.EXE', slash(SatDir)+'IRIDFLAR.EXE');
+  if not fileexists(slash(SatDir)+'SORT.COM') then CopyFile(slash(iridir)+'SORT.COM', slash(SatDir)+'SORT.COM');
+  if not fileexists(slash(SatDir)+'dosbox.conf') then CopyFile(slash(iridir)+'dosbox.conf', slash(SatDir)+'dosbox.conf');
+  {$ifdef win64}
+  if not fileexists(slash(SatDir)+'DOSBox.exe') then CopyFile(slash(iridir)+'DOSBox.exe', slash(SatDir)+'DOSBox.exe');
+  if not fileexists(slash(SatDir)+'SDL.dll') then CopyFile(slash(iridir)+'SDL.dll', slash(SatDir)+'SDL.dll');
+  if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(slash(iridir)+'SDL_net.dll', slash(SatDir)+'SDL_net.dll');
+  {$endif}
+  Iridium(inttostr(j),inttostr(m),inttostr(a),dt,formatfloat(f1,config.tz.SecondsOffset/3600),SatDir,config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude);
+  if FileExists(slash(SatDir)+'IRIDFLAR.OUT') then begin
+    Assignfile(fi,slash(SatDir)+'IRIDFLAR.OUT');
+    reset(fi);
+    repeat
+      Readln(fi,bufi);
+      if eof(fi) then begin
+        jdi:=99999999;
+        Closefile(fi);
+        break;
+      end;
+    until copy(bufi,1,5)='-----';
+    if jdi<>99999999 then begin
+       Readln(fi,bufi);
+       ai:=strtoint(copy(bufi,7,4));
+       mmi:=strtoint(copy(bufi,12,2));
+       ji:=strtoint(copy(bufi,15,2));
+       hi:=strtoint(copy(bufi,18,2))+strtoint(copy(bufi,21,2))/60+strtoint(copy(bufi,24,2))/3600;
+       jdi:=jd(ai,mmi,ji,hi-(config.tz.SecondsOffset/3600));
     end;
-  until copy(bufi,1,5)='-----';
-  if jdi<>99999999 then begin
-     Readln(fi,bufi);
-     ai:=strtoint(copy(bufi,7,4));
-     mmi:=strtoint(copy(bufi,12,2));
-     ji:=strtoint(copy(bufi,15,2));
-     hi:=strtoint(copy(bufi,18,2))+strtoint(copy(bufi,21,2))/60+strtoint(copy(bufi,24,2))/3600;
-     jdi:=jd(ai,mmi,ji,hi-timebias);
-  end;
-end;}
+  end
+  else IridiumBox.Checked:=false;
+end;
 i:=2;
 Readln(f,buf);
 Readln(f,buf);
@@ -960,7 +1021,7 @@ ss:=padzeros(copy(buf,7,2),2);
 h:=strtoint(hh)+strtoint(mi)/60+strtoint(ss)/3600;
 jda:=jd(a,m,j,h-(config.tz.SecondsOffset/3600));
 with satgrid do begin
-  //if IridiumBox.Checked and(jdi<jda) then InsertIridium;
+  if IridiumBox.Checked and(jdi<jda) then InsertIridium;
   RowCount:=i+1;
   cells[0,i]:=dat1+' '+hh+':'+mi+':'+ss;
   cells[1,i]:=copy(buf,66,99);
@@ -986,12 +1047,12 @@ end;
 i:=i+1;
 until eof(f);
 jda:=99999999;
-//if IridiumBox.Checked and(jdi<>99999999) then InsertIridium; // ne pas oublier les derniers
+if IridiumBox.Checked and(jdi<>99999999) then InsertIridium; // ne pas oublier les derniers
 finally
 {$I-}
 screen.Cursor:=crDefault;
 Closefile(f);
-//if IridiumBox.Checked and (jdi<>99999999) then Closefile(fi);
+if IridiumBox.Checked and (jdi<>99999999) then Closefile(fi);
 i:=ioresult;
 {$I+}
 end;
@@ -1570,8 +1631,8 @@ try
   DrawGraph(PlanetGraphs[5], Saturnegrid, 6);
   DrawGraph(PlanetGraphs[6], Uranusgrid,  7);
   DrawGraph(PlanetGraphs[7], Neptunegrid, 8);
-  (*DrawGraph(PlanetGraphs[8], Plutongrid,  9);*)
-  DrawGraph(PlanetGraphs[9], Lunegrid,    0);
+  (*DrawGraph(PlanetGraphs[8], Plutongrid,  9);
+  DrawGraph(PlanetGraphs[9], Lunegrid,    0);  *)
   dgPlanet.Invalidate;
 except
   tsPGraphs.TabVisible:=false;
@@ -1613,6 +1674,17 @@ begin
 lockclick:=false;
 end;
 
+procedure Tf_calendar.IridiumBoxChange(Sender: TObject);
+begin
+{$ifndef mswindows}
+  if IridiumBox.Checked and (words(dosbox,'',1,1)='dosbox') then begin
+     if not CheckDosbox then begin
+        IridiumBox.Checked:=false;
+     end;
+  end;
+{$endif}
+end;
+
 procedure Tf_calendar.SatPanelClick(Sender: TObject);
 begin
 ExecuteFile(URL_QUICKSAT);
@@ -1629,7 +1701,7 @@ var
   aColumn, aRow: Longint;
   csconfig: Tconf_skychart;
   p : TObjCoord;
-  pathimage: string;
+  pathimage,satmag,sattle: string;
   a,d: double;
 begin
 if lockclick then exit;
@@ -1693,27 +1765,31 @@ if (aRow>=0)and(aColumn>=0) then begin
           Fupdchart(csconfig);
        end;
     end else if sender = Satgrid then begin    // Satellites
-
-      DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,magchart.text,tle1.text,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,SatChartBox.Checked);
+      satmag:=magchart.text;
+      sattle:=tle1.text;
+      if IridiumBox.Checked then begin
+         if StrToFloatDef(satmag,6)<10 then satmag:='10';
+         if pos('iridium.tle',sattle)=0 then sattle:=sattle+',iridium.tle';
+      end;
+      DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,satmag,sattle,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,SatChartBox.Checked);
       if not SatChartBox.checked then begin
         csconfig.racentre:=p.ra;
         csconfig.decentre:=p.dec;
       end;
-//      csconfig.NewTime:=true;
         csconfig.ShowArtSat:=true;
         csconfig.NewArtSat:=true;
-    {  if copy(gr.cells[1,row],1,14)='Flare: Iridium' then begin
-         sky_p1.IridiumRA:=p.ra;
-         sky_p1.IridiumDE:=p.dec;
-         sky_p1.IridiumMA:=strtofloat(gr.cells[2,row]);
-         sky_p1.IridiumNom:=copy(gr.cells[1,row],8,99);
-         sky_p1.IridiumDist:=gr.cells[5,row];
-      end else sky_p1.IridiumMA:=99; }
+        if copy(cells[1,aRow],1,14)='Flare: Iridium' then begin
+           csconfig.IridiumRA:=p.ra;
+           csconfig.IridiumDE:=p.dec;
+           csconfig.IridiumMA:=strtofloat(cells[2,aRow]);
+           csconfig.IridiumName:=copy(cells[1,aRow],8,99);
+           csconfig.IridiumDist:=cells[5,aRow];
+        end else
+           csconfig.IridiumMA:=99;
         if assigned(Fupdchart) then begin
            BtnReset.visible:=true;
            Fupdchart(csconfig);
         end;
-
     end else begin  // other grid
        if p.ra>-900 then csconfig.racentre:=p.ra;
        if p.dec>-900 then csconfig.decentre:=p.dec
@@ -2006,7 +2082,13 @@ begin {BtnCopyClipClick}
 end;
 
 procedure Tf_calendar.Button3Click(Sender: TObject);
+var txt: string;
 begin
+  txt:=Format(rsPutTheFilesW, [satdir]);
+  {$ifdef unix}
+  txt:=txt+crlf+rsBeSureTheyUs;
+  {$endif}
+  ShowMessage(txt);
   ExecuteFile(URL_TLE);
 end;
 
