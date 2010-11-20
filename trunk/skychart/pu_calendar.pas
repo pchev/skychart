@@ -889,7 +889,7 @@ end;
 Procedure Tf_calendar.RefreshSatellite;
 var f,fi : textfile;
     buf,mm,y,d,ed,dt,hh,mi,ss,dat1,s1,s2 : string;
-    bufi,prgdir,iridir : string;
+    bufi,prgdir,iridir,srcdir,wrkdir : string;
     h,jda,ar,de,ma : double;
     hi,jdi,ari,dei : double;
     i,k,a,m,j : integer;
@@ -952,10 +952,12 @@ screen.Cursor:=crHourGlass;
 Application.ProcessMessages;
 ed:=inttostr(a+round(date2.jd-date1.jd));
 dt:=inttostr(1+Trunc(date2.jd-date1.jd));
-DeleteFile(slash(SatDir)+'satlist.txt');
-DeleteFile(slash(SatDir)+'quicksat.ctl');
-if not fileexists(slash(SatDir)+'visible.tle') then CopyFile(slash(prgdir)+'sample.tle', slash(SatDir)+'visible.tle');
-if not fileexists(slash(SatDir)+'quicksat.mag') then CopyFile(slash(prgdir)+'quicksat.mag', slash(SatDir)+'quicksat.mag');
+srcdir:=SysToUTF8(slash(prgdir));
+wrkdir:=SysToUTF8(slash(satdir));
+DeleteFile(slash(satdir)+'satlist.txt');
+DeleteFile(slash(satdir)+'quicksat.ctl');
+if not fileexists(slash(satdir)+'visible.tle') then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
+if not fileexists(slash(satdir)+'quicksat.mag') then CopyFile(srcdir+'quicksat.mag', wrkdir+'quicksat.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,SatChartBox.Checked);
 if not Fileexists(slash(SatDir)+'satlist.txt') then begin
   Showmessage('Cannot compute satellites.');
@@ -965,15 +967,16 @@ Assignfile(f,slash(SatDir)+'satlist.txt');
 reset(f);
 jdi:=1;
 if IridiumBox.Checked then begin
-  if not fileexists(slash(SatDir)+'iridium.tle') then CopyFile(slash(iridir)+'sample.tle', slash(SatDir)+'iridium.tle');
-  if not fileexists(slash(SatDir)+'F77L.EER') then CopyFile(slash(iridir)+'F77L.EER', slash(SatDir)+'F77L.EER');
-  if not fileexists(slash(SatDir)+'IRIDFLAR.EXE') then CopyFile(slash(iridir)+'IRIDFLAR.EXE', slash(SatDir)+'IRIDFLAR.EXE');
-  if not fileexists(slash(SatDir)+'SORT.COM') then CopyFile(slash(iridir)+'SORT.COM', slash(SatDir)+'SORT.COM');
-  if not fileexists(slash(SatDir)+'dosbox.conf') then CopyFile(slash(iridir)+'dosbox.conf', slash(SatDir)+'dosbox.conf');
+  srcdir:=SysToUTF8(slash(iridir));
+  if not fileexists(slash(SatDir)+'iridium.tle') then CopyFile(srcdir+'sample.tle', wrkdir+'iridium.tle');
+  if not fileexists(slash(SatDir)+'F77L.EER') then CopyFile(srcdir+'F77L.EER', wrkdir+'F77L.EER');
+  if not fileexists(slash(SatDir)+'IRIDFLAR.EXE') then CopyFile(srcdir+'IRIDFLAR.EXE', wrkdir+'IRIDFLAR.EXE');
+  if not fileexists(slash(SatDir)+'SORT.COM') then CopyFile(srcdir+'SORT.COM', wrkdir+'SORT.COM');
+  if not fileexists(slash(SatDir)+'dosbox.conf') then CopyFile(srcdir+'dosbox.conf', wrkdir+'dosbox.conf');
   {$ifdef win64}
-  if not fileexists(slash(SatDir)+'DOSBox.exe') then CopyFile(slash(iridir)+'DOSBox.exe', slash(SatDir)+'DOSBox.exe');
-  if not fileexists(slash(SatDir)+'SDL.dll') then CopyFile(slash(iridir)+'SDL.dll', slash(SatDir)+'SDL.dll');
-  if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(slash(iridir)+'SDL_net.dll', slash(SatDir)+'SDL_net.dll');
+  if not fileexists(slash(SatDir)+'DOSBox.exe') then CopyFile(srcdir+'DOSBox.exe', wrkdir+'DOSBox.exe');
+  if not fileexists(slash(SatDir)+'SDL.dll') then CopyFile(srcdir+'SDL.dll', wrkdir+'SDL.dll');
+  if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(srcdir+'SDL_net.dll', wrkdir+'SDL_net.dll');
   {$endif}
   Iridium(inttostr(j),inttostr(m),inttostr(a),dt,formatfloat(f1,config.tz.SecondsOffset/3600),SatDir,config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude);
   if FileExists(slash(SatDir)+'IRIDFLAR.OUT') then begin
