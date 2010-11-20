@@ -35,5 +35,9 @@ if [ $OS_TARGET = win64 ]; then
   install -v -m 644 skychart/library/plan404/libplan404_x64.dll  $destdir/libplan404.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
   unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
+  # win64 specific:
+  install -m 755 -d $destdir/data
+  install -m 755 -d $destdir/data/iridflar
+  unzip -d $destdir/data/iridflar system_integration/Windows/data/dosbox.zip
 fi
 
