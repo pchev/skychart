@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-14 16:12+0100\n"
+"PO-Revision-Date: 2010-11-20 20:30+0100\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -325,6 +325,10 @@ msgstr "Début du traitement pour jd=%s / %s"
 #: u_translation.rsbelowthehori
 msgid "Below the horizon"
 msgstr "Sous l'horizon"
+
+#: u_translation.rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr "Contrôler que la fin des lignes du fichier sont au format DOS."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -3149,6 +3153,10 @@ msgstr "Serveur proxy"
 #: u_translation.rsproxyport
 msgid "Proxy port"
 msgstr "Port"
+
+#: u_translation.rsputthefilesw
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr "Mettre les fichiers avec l'extension .tle dans le répertoire %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"

@@ -325,6 +325,10 @@ msgstr "Начало обработки для jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Ниже горизонта"
 
+#: u_translation.rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr ""
+
 #: u_translation.rsbigstars
 msgid "Big stars"
 msgstr "Большие размеры"
@@ -3148,6 +3152,10 @@ msgstr "Прокси хост"
 #: u_translation.rsproxyport
 msgid "Proxy port"
 msgstr "Прокси порт"
+
+#: u_translation.rsputthefilesw
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
