@@ -91,6 +91,7 @@ Tskychart = class (TComponent)
     function DrawAsteroid :boolean;
     function DrawComet :boolean;
     procedure DrawArtSat;
+    Function CloseSat : integer;
     function  FindArtSat(x1,y1,x2,y2:double; nextobj:boolean;  var nom,ma,desc:string):boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
@@ -1383,6 +1384,7 @@ var
 const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
 begin
 if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
+  CloseSat;
   cfgsc.NewArtSat:=false;
   Filemode:=0;
   try
@@ -1447,6 +1449,14 @@ if cfgsc.IridiumMA<90 then begin
 end;
 end;
 
+Function Tskychart.CloseSat : integer;
+begin
+  {$I-}
+  Closefile(fsat);
+  result:=ioresult;
+  {$I+}
+end;
+
 function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,desc:string):boolean;
   var
      tar,tde,ra,de,m : double;
@@ -1455,14 +1465,6 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
      i : integer;
      first: boolean;
   const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
-  Function CloseSat : integer;
-  begin
-    {$I-}
-    Closefile(fsat);
-    result:=ioresult;
-    {$I+}
-  end;
-
   begin
   first:=false;
   if not nextobj then begin
@@ -1931,7 +1933,11 @@ end else begin
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
    end else begin
-      if cfgsc.ShowArtSat then result:=FindArtSat(x1,y1,x2,y2,false,n,m,desc);
+// search artificial satellite
+      if cfgsc.ShowArtSat then begin
+        result:=FindArtSat(x1,y1,x2,y2,false,n,m,desc);
+        CloseSat;
+      end;
    end;
    end;
 end;
