@@ -4418,3 +4418,11 @@ msgstr ""
 msgid "Artificial satellite"
 msgstr ""
 
+#: u_translation:rsputthefilesw
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr ""
+
+#: u_translation:rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr ""
+

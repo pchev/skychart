@@ -325,6 +325,10 @@ msgstr "开始处理适于儒略日=%s / %s"
 msgid "Below the horizon"
 msgstr "地平以下"
 
+#: u_translation.rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr ""
+
 #: u_translation.rsbigstars
 msgid "Big stars"
 msgstr ""
@@ -3148,6 +3152,10 @@ msgstr "代理主机"
 #: u_translation.rsproxyport
 msgid "Proxy port"
 msgstr "代理端口"
+
+#: u_translation.rsputthefilesw
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
