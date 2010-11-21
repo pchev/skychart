@@ -2,16 +2,16 @@
 
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3#165#1#6'Height'#3#186#1#3'Top'
-  +#2'o'#5'Width'#3#245#2#13'ActiveControl'#7#6'Panel4'#7'Caption'#6#10'f_calen'
-  +'dar'#12'ClientHeight'#3#186#1#11'ClientWidth'#3#245#2#11'Font.Height'#2#245
-  +#7'OnClose'#7#9'FormClose'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnCreate'
-  +#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#10
-  +'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'F'#3
-  +'Top'#2#0#5'Width'#3#245#2#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11'Clie'
-  +'ntWidth'#3#245#2#11'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4
-  +'Left'#2#8#6'Height'#2#14#3'Top'#2#14#5'Width'#2#25#7'Caption'#6#4'From'#5'C'
-  +'olor'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLabel'#6'La'
-  +'bel2'#4'Left'#3#184#0#6'Height'#2#14#3'Top'#2#14#5'Width'#2#10#7'Caption'#6
+  +#2'o'#5'Width'#3#245#2#13'ActiveControl'#7#12'TwilightGrid'#7'Caption'#6#10
+  +'f_calendar'#12'ClientHeight'#3#186#1#11'ClientWidth'#3#245#2#11'Font.Height'
+  +#2#245#7'OnClose'#7#9'FormClose'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnC'
+  +'reate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormSh'
+  +'ow'#10'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2
+  +'F'#3'Top'#2#0#5'Width'#3#245#2#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11
+  +'ClientWidth'#3#245#2#11'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'
+  +#4'Left'#2#8#6'Height'#2#14#3'Top'#2#14#5'Width'#2#25#7'Caption'#6#4'From'#5
+  +'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLabel'#6'L'
+  +'abel2'#4'Left'#3#184#0#6'Height'#2#14#3'Top'#2#14#5'Width'#2#10#7'Caption'#6
   +#2'to'#5'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLa'
   +'bel'#6'Label5'#4'Left'#2#30#6'Height'#2#14#3'Top'#2'.'#5'Width'#2#10#7'Capt'
   +'ion'#6#2'at'#5'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0
@@ -106,7 +106,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#0#9'MaxLength'#2#0#9'NumGlyphs'#2#1#8'OnCha'
-  +'nge'#7#11'Date1Change'#8'TabOrder'#2#0#4'Text'#6#13'2010.11.20.01'#7'Captio'
+  +'nge'#7#11'Date1Change'#8'TabOrder'#2#0#4'Text'#6#13'2010.11.21.01'#7'Captio'
   +'n'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#13'TJDDatePicke'
   +'r'#5'Date2'#4'Left'#3#205#0#6'Height'#2#21#3'Top'#2#8#5'Width'#2'P'#11'Butt'
   +'onWidth'#2#23#8'CharCase'#7#8'ecNormal'#5'Color'#7#9'clBtnFace'#10'Glyph.Da'
@@ -178,7 +178,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#0#9'MaxLength'#2#0#9'NumGlyphs'#2#1#8'OnChange'#7#11'Da'
-  +'te2Change'#8'TabOrder'#2#1#4'Text'#6#13'2010.11.20.01'#7'Caption'#6#11'JD c'
+  +'te2Change'#8'TabOrder'#2#1#4'Text'#6#13'2010.11.21.01'#7'Caption'#6#11'JD c'
   +'alendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#7'TButton'#10'BtnRefresh'#4
   +'Left'#3':'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'i'#25'BorderSpacing.Inner'
   +'Border'#2#4#7'Caption'#6#7'Refresh'#7'OnClick'#7#15'BtnRefreshClick'#8'TabO'
@@ -201,12 +201,12 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +'dth'#2'g'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#4'Copy'#7'OnClick'
   +#7#16'BtnCopyClipClick'#8'TabOrder'#2#12#0#0#0#12'TPageControl'#12'PageContr'
   +'ol1'#4'Left'#2#0#6'Height'#3't'#1#3'Top'#2'F'#5'Width'#3#245#2#10'ActivePag'
-  +'e'#7#10'Satellites'#5'Align'#7#8'alClient'#8'TabIndex'#2#6#8'TabOrder'#2#1#8
-  +'OnChange'#7#18'PageControl1Change'#13'OnPageChanged'#7#18'PageControl1Chang'
-  +'e'#0#9'TTabSheet'#8'twilight'#7'Caption'#6#8'Twilight'#12'ClientHeight'#3'X'
-  +#1#11'ClientWidth'#3#241#2#0#11'TStringGrid'#12'TwilightGrid'#4'Left'#2#0#6
-  +'Height'#3'X'#1#3'Top'#2#0#5'Width'#3#241#2#5'Align'#7#8'alClient'#15'Defaul'
-  +'tColWidth'#2'd'#9'FixedRows'#2#2#7'Options'#11#10'goVertLine'#10'goHorzLine'
+  +'e'#7#8'twilight'#5'Align'#7#8'alClient'#8'TabIndex'#2#0#8'TabOrder'#2#1#8'O'
+  +'nChange'#7#18'PageControl1Change'#13'OnPageChanged'#7#18'PageControl1Change'
+  +#0#9'TTabSheet'#8'twilight'#7'Caption'#6#8'Twilight'#12'ClientHeight'#3'X'#1
+  +#11'ClientWidth'#3#241#2#0#11'TStringGrid'#12'TwilightGrid'#4'Left'#2#0#6'He'
+  +'ight'#3'X'#1#3'Top'#2#0#5'Width'#3#241#2#5'Align'#7#8'alClient'#15'DefaultC'
+  +'olWidth'#2'd'#9'FixedRows'#2#2#7'Options'#11#10'goVertLine'#10'goHorzLine'
   +#13'goRangeSelect'#11'goColSizing'#0#8'RowCount'#2#3#8'TabOrder'#2#0#16'Titl'
   +'eFont.Height'#2#245#10'OnDblClick'#7#12'GridDblClick'#9'OnMouseUp'#7#11'Gri'
   +'dMouseUp'#0#0#0#9'TTabSheet'#7'planets'#7'Caption'#6#7'Planets'#12'ClientHe'
