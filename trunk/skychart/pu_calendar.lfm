@@ -3,7 +3,7 @@ object f_calendar: Tf_calendar
   Height = 442
   Top = 111
   Width = 757
-  ActiveControl = Panel4
+  ActiveControl = TwilightGrid
   Caption = 'f_calendar'
   ClientHeight = 442
   ClientWidth = 757
@@ -191,7 +191,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.11.20.01'
+      Text = '2010.11.21.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -253,7 +253,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.11.20.01'
+      Text = '2010.11.21.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -345,9 +345,9 @@ object f_calendar: Tf_calendar
     Height = 372
     Top = 70
     Width = 757
-    ActivePage = Satellites
+    ActivePage = twilight
     Align = alClient
-    TabIndex = 6
+    TabIndex = 0
     TabOrder = 1
     OnChange = PageControl1Change
     OnPageChanged = PageControl1Change
