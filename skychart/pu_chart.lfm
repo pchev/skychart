@@ -238,6 +238,10 @@ object f_chart: Tf_chart
       Caption = 'CopyCoord1'
       OnClick = CopyCoord1Click
     end
+    object Cleanupmap1: TMenuItem
+      Caption = 'Cleanupmap1'
+      OnClick = Cleanupmap1Click
+    end
     object N1: TMenuItem
       Caption = '-'
     end

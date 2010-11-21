@@ -67,6 +67,7 @@ type
     AddLabel1: TMenuItem;
     MenuItem1: TMenuItem;
     CopyCoord1: TMenuItem;
+    Cleanupmap1: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
@@ -120,6 +121,7 @@ type
     procedure About1Click(Sender: TObject);
     procedure AddLabel1Click(Sender: TObject);
     procedure BlinkTimerTimer(Sender: TObject);
+    procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -318,6 +320,7 @@ Telescope1.caption:=rsTelescope;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
 CopyCoord1.Caption:=rsCopyCoordina;
+Cleanupmap1.Caption:=rsCleanupMap;
 if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
    Connect1.caption:=rsConnectTeles
 end else begin
@@ -765,7 +768,7 @@ if StartCircle then begin
   StartCircle:=false;
   end
 else MovingCircle := false;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope) then begin
+if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -788,7 +791,7 @@ end;
 if sc.cfgsc.scopemark then begin
    sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
 end;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope) then begin
+if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -1835,6 +1838,14 @@ begin
 {$endif}
   Refresh;
   BlinkTimer.Enabled:=true;
+end;
+
+procedure Tf_chart.Cleanupmap1Click(Sender: TObject);
+begin
+ZoomStep:=0;
+sc.cfgsc.Trackon:=false;
+sc.cfgsc.TrackName:='';
+Refresh;
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
