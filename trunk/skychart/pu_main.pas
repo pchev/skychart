@@ -1141,7 +1141,7 @@ try
 {$ifdef trace_debug}
  WriteTrace('Starshape file');
 {$endif}
-if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
+if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then begin
   starshape.Picture.LoadFromFile(cfgm.starshape_file);
 end;
 {$ifdef trace_debug}
@@ -6522,14 +6522,14 @@ procedure Tf_main.SetStarShape;
 var i : integer;
     defaultfile: string;
 begin
-  if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
+  if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then begin
      starshape.Picture.LoadFromFile(cfgm.starshape_file);
   end;
   if (cfgm.starshape_file='') then begin
      defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'starshape.bmp';
      if not FileExists(defaultfile) then
         defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash('default')+'starshape.bmp';
-     starshape.Picture.LoadFromFile(defaultfile);
+     starshape.Picture.LoadFromFile(systoutf8(defaultfile));
   end;
   for i:=0 to MultiDoc1.ChildCount-1 do
     if MultiDoc1.Childs[i].DockedObject is Tf_chart then
@@ -6580,22 +6580,22 @@ begin
 try
 case button of
  1:begin    // color
-   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
+   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color'));
    col:=clNavy;
    SetButtonImage1(ImageNormal);
    end;
  2:begin  // red
-   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red');
+   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red'));
    col:=$acb5f5;
    SetButtonImage1(ImageList2);
    end;
  3:begin   // blue
-   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue');
+   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue'));
    col:=clNavy;
    SetButtonImage1(ImageList2);
    end;
  4:begin   // Green
-   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green');
+   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green'));
    col:=clLime;
    SetButtonImage1(ImageList2);
    end;
