@@ -2551,7 +2551,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
  WriteTrace('TrackExecute 1');
 {$endif}
      Refresh;
-  end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6)
+  end else if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>'')
   then begin
      sc.cfgsc.TrackOn:=true;
 {$ifdef trace_debug}
