@@ -3,7 +3,7 @@ object f_calendar: Tf_calendar
   Height = 442
   Top = 111
   Width = 757
-  ActiveControl = TwilightGrid
+  ActiveControl = Panel1
   Caption = 'f_calendar'
   ClientHeight = 442
   ClientWidth = 757

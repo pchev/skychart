@@ -1634,8 +1634,8 @@ try
   DrawGraph(PlanetGraphs[5], Saturnegrid, 6);
   DrawGraph(PlanetGraphs[6], Uranusgrid,  7);
   DrawGraph(PlanetGraphs[7], Neptunegrid, 8);
-  (*DrawGraph(PlanetGraphs[8], Plutongrid,  9);
-  DrawGraph(PlanetGraphs[9], Lunegrid,    0);  *)
+  DrawGraph(PlanetGraphs[8], Plutongrid,  9);
+  DrawGraph(PlanetGraphs[9], Lunegrid,    11);
   dgPlanet.Invalidate;
 except
   tsPGraphs.TabVisible:=false;

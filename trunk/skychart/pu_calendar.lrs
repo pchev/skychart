@@ -2,16 +2,16 @@
 
 LazarusResources.Add('Tf_calendar','FORMDATA',[
   'TPF0'#11'Tf_calendar'#10'f_calendar'#4'Left'#3#165#1#6'Height'#3#186#1#3'Top'
-  +#2'o'#5'Width'#3#245#2#13'ActiveControl'#7#12'TwilightGrid'#7'Caption'#6#10
-  +'f_calendar'#12'ClientHeight'#3#186#1#11'ClientWidth'#3#245#2#11'Font.Height'
-  +#2#245#7'OnClose'#7#9'FormClose'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnC'
-  +'reate'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormSh'
-  +'ow'#10'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2
-  +'F'#3'Top'#2#0#5'Width'#3#245#2#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11
-  +'ClientWidth'#3#245#2#11'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'
-  +#4'Left'#2#8#6'Height'#2#14#3'Top'#2#14#5'Width'#2#25#7'Caption'#6#4'From'#5
-  +'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLabel'#6'L'
-  +'abel2'#4'Left'#3#184#0#6'Height'#2#14#3'Top'#2#14#5'Width'#2#10#7'Caption'#6
+  +#2'o'#5'Width'#3#245#2#13'ActiveControl'#7#6'Panel1'#7'Caption'#6#10'f_calen'
+  +'dar'#12'ClientHeight'#3#186#1#11'ClientWidth'#3#245#2#11'Font.Height'#2#245
+  +#7'OnClose'#7#9'FormClose'#12'OnCloseQuery'#7#14'FormCloseQuery'#8'OnCreate'
+  +#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#6'OnShow'#7#8'FormShow'#10
+  +'LCLVersion'#6#6'0.9.29'#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'F'#3
+  +'Top'#2#0#5'Width'#3#245#2#5'Align'#7#5'alTop'#12'ClientHeight'#2'F'#11'Clie'
+  +'ntWidth'#3#245#2#11'FullRepaint'#8#8'TabOrder'#2#0#0#6'TLabel'#6'Label1'#4
+  +'Left'#2#8#6'Height'#2#14#3'Top'#2#14#5'Width'#2#25#7'Caption'#6#4'From'#5'C'
+  +'olor'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLabel'#6'La'
+  +'bel2'#4'Left'#3#184#0#6'Height'#2#14#3'Top'#2#14#5'Width'#2#10#7'Caption'#6
   +#2'to'#5'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0#6'TLa'
   +'bel'#6'Label5'#4'Left'#2#30#6'Height'#2#14#3'Top'#2'.'#5'Width'#2#10#7'Capt'
   +'ion'#6#2'at'#5'Color'#7#9'clBtnFace'#11'ParentColor'#8#11'Transparent'#8#0#0
