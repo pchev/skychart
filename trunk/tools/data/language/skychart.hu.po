@@ -649,6 +649,10 @@ msgstr "Cirkumpoláris"
 msgid "Class"
 msgstr "Osztály"
 
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+
 #: u_translation.rsclicktochang
 #| msgid "Click to change the color "
 msgid "Click to change the colour "

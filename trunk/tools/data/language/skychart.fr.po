@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-20 20:30+0100\n"
+"PO-Revision-Date: 2010-11-21 14:22+0100\n"
 "Last-Translator: pch <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -594,6 +594,10 @@ msgstr "Circumpolaire"
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Classe"
+
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr "Nettoie la carte"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "

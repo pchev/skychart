@@ -619,6 +619,10 @@ msgstr "Αειφανής"
 msgid "Class"
 msgstr ""
 
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+
 #: u_translation.rsclicktochang
 #, fuzzy
 #| msgid "Click to change the color "
