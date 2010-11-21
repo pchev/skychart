@@ -4426,3 +4426,7 @@ msgstr ""
 msgid "Be sure they use a DOS line end format."
 msgstr ""
 
+#: u_translation:rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+

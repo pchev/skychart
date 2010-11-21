@@ -592,6 +592,10 @@ msgstr "Obtočnový"
 msgid "Class"
 msgstr "Třída"
 
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
 msgstr "Klikněte pro změnu barvy"

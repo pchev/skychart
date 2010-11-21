@@ -591,6 +591,10 @@ msgstr "Circumpolar"
 msgid "Class"
 msgstr "Clase"
 
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
 msgstr "Click para cambiar el color"
