@@ -1,15 +1,15 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-11 13:01+0200\n"
-"Last-Translator: Mattia\n"
+"PO-Revision-Date: 2010-11-23 09:42+0100\n"
+"Last-Translator: \n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: u_translation.rs102cddss
@@ -158,7 +158,7 @@ msgstr "%s rotazioni Alt"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr ""
+msgstr "Salva sempre senza chiedere."
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
@@ -198,11 +198,11 @@ msgstr "Argomento del perielio"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
-msgstr "Satelliti Artificiali"
+msgstr "Satelliti artificiali"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Satellite artificiale"
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
@@ -326,7 +326,7 @@ msgstr "Sotto l'orizzonte"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr ""
+msgstr "Assicurati che usino un formato fine linea DOS."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -594,7 +594,7 @@ msgstr "Classe"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr ""
+msgstr "Pulisci mappa"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -814,7 +814,7 @@ msgstr "Copia"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr ""
+msgstr "Copia coordinate"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -1951,7 +1951,7 @@ msgstr "File FITS non valido: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr ""
+msgstr "Percorso non valido: "
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
@@ -2555,7 +2555,7 @@ msgstr "Nessun dato asteroidale trovato!%sCarica un file MPC prima."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr ""
+msgstr "Nessun crepuscolo astronomico per oggi!"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -2683,7 +2683,7 @@ msgstr "Nome dell'oggetto"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Trovata posizione dell'oggetto nell'indice, ma nessun dettaglio in alcun catalogo attivo"
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -3157,7 +3157,7 @@ msgstr "Porta proxy"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr ""
+msgstr "Metti i files con estensione .tle nella cartella %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3313,11 +3313,11 @@ msgstr "Reset cartina e impostazioni"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Reimposta ai default iniziali e riavvia"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Reimposta all'ultimo salvataggio della cartina"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3677,7 +3677,7 @@ msgstr "Mostra pianeti"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "Mostra posizione nella barra del titolo"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
@@ -3777,7 +3777,7 @@ msgstr "Qualcosa di sbagliato è successo durante l'avvio. Il programma ora si c
 
 #: u_translation.rssortby
 msgid "Sort by"
-msgstr ""
+msgstr "Ordina per"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4069,7 +4069,7 @@ msgstr "al file:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr ""
+msgstr "Stanotte"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4313,7 +4313,7 @@ msgstr "Stelle Variabili"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Velocità"
 
 #: u_translation.rsvenus
 msgid "Venus"
