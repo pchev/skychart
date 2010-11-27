@@ -17,6 +17,6 @@ rm -fv $destdir/lib/libplan404.so
 rm -fv $destdir/share/applications/skychart.desktop
 rm -fv $destdir/share/doc/skychart/changelog
 rm -fv $destdir/share/doc/skychart/copyright
-rm -fv $destdir/share/pixmaps/skychart.xpm
+rm -fv $destdir/share/pixmaps/skychart.png
 
 rmdir -v $destdir/share/doc/skychart

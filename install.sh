@@ -28,5 +28,5 @@ install -v -m 644 -s skychart/library/plan404/libplan404.so  $destdir/lib/libpla
 install -v -m 644 system_integration/Linux/share/applications/skychart.desktop $destdir/share/applications/skychart.desktop
 install -v -m 644 system_integration/Linux/share/doc/skychart/changelog $destdir/share/doc/skychart/changelog
 install -v -m 644 system_integration/Linux/share/doc/skychart/copyright $destdir/share/doc/skychart/copyright
-install -v -m 644 system_integration/Linux/share/pixmaps/skychart.xpm $destdir/share/pixmaps/skychart.png
+install -v -m 644 system_integration/Linux/share/pixmaps/skychart.png $destdir/share/pixmaps/skychart.png
 
