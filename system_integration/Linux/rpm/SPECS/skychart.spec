@@ -24,7 +24,7 @@ Planetarium software for the advanced amateur astronomer.
 /usr/lib/libplan404.so
 /usr/lib/libgetdss.so
 /usr/share/applications/skychart.desktop
-/usr/share/pixmaps/skychart.xpm
+/usr/share/pixmaps/skychart.png
 /usr/share/doc/skychart
 /usr/share/skychart
 
