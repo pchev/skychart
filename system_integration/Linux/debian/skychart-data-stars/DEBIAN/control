@@ -1,6 +1,6 @@
 Package: skychart-data-stars
 Version: 3
-Section: science
+Section: education
 Priority: optional
 Maintainer: Patrick Chevalley <pch@freesurf.ch>
 Architecture: all
