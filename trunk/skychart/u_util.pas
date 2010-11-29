@@ -1346,7 +1346,7 @@ c:=s[5];
 if c<='9' then d:=strtoint(c)
           else d:=ord(c)-55;
 s:=trim(copy(s,6,999));
-if s>'' then hh:=strtofloat(s)
+if s>'' then hh:=strtofloat(trim(s))
         else hh:=0;
 result:=true;
 except

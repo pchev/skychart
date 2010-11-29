@@ -471,9 +471,9 @@ id:=citycode[citylist.ItemIndex];
 if cdb.GetCityLoc(id,loctype,latitude,longitude,elevation,timezone) then begin
    curobsid:=strtoint(citycode[citylist.ItemIndex]);
    LocCode.text:=loctype;
-   csc.ObsLatitude:=strtofloat(latitude);
-   csc.ObsLongitude:=-strtofloat(longitude);
-   csc.ObsAltitude:=strtofloat(elevation);
+   csc.ObsLatitude:=strtofloat(trim(latitude));
+   csc.ObsLongitude:=-strtofloat(trim(longitude));
+   csc.ObsAltitude:=strtofloat(trim(elevation));
    ShowObsCoord;
    SetObsPos;
    CenterObs;

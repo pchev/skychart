@@ -1499,11 +1499,11 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
      qry:='SELECT distinct(jd) from cdc_ast_mag where mag<110';
      db1.Query(qry);
      if db1.Rowcount>0 then begin
-        jd1:=strtofloat(db1.Results[0][0]);
+        jd1:=strtofloat(trim(db1.Results[0][0]));
         dt:=abs(newjd-jd1);
         i:=1;
         while i<db1.Rowcount do begin
-           t:=strtofloat(db1.Results[i][0]);
+           t:=strtofloat(trim(db1.Results[i][0]));
            if abs(newjd-t)<dt then begin
               jd1:=t;
               dt:=abs(newjd-t);
@@ -1559,18 +1559,18 @@ var qry,id : string;
     nam:string;
 begin
              id:=row[0];
-             h:=StrToFloatDef(row[1],20);
-             g:=StrToFloatDef(row[2],0.15);
-             epoch:=strtofloat(row[3]);
-             ma:=strtofloat(row[4]);
-             ap:=strtofloat(row[5]);
-             an:=strtofloat(row[6]);
-             ic:=strtofloat(row[7]);
-             ec:=strtofloat(row[8]);
-             sa:=strtofloat(row[9]);
+             h:=StrToFloatDef(trim(row[1]),20);
+             g:=StrToFloatDef(trim(row[2]),0.15);
+             epoch:=strtofloat(trim(row[3]));
+             ma:=strtofloat(trim(row[4]));
+             ap:=strtofloat(trim(row[5]));
+             an:=strtofloat(trim(row[6]));
+             ic:=strtofloat(trim(row[7]));
+             ec:=strtofloat(trim(row[8]));
+             sa:=strtofloat(trim(row[9]));
  //            ref:=row[10];
              nam:=row[11];
-             eq:=strtofloat(row[12]);
+             eq:=strtofloat(trim(row[12]));
              InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
              Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,mag,xc,yc,zc);
              precession(jd2000,jdchart,ra,dec);
@@ -1727,7 +1727,7 @@ if db2.Rowcount>0 then begin
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
-       epoch:=strtofloat(db2.Results[i][1]);
+       epoch:=strtofloat(trim(db2.Results[i][1]));
        if cdb.GetAstElem(id,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
           InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
           Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
@@ -1803,7 +1803,7 @@ if db2.Rowcount>0 then begin
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
-       epoch:=strtofloat(db2.Results[i][1]);
+       epoch:=strtofloat(trim(db2.Results[i][1]));
        if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
           InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
           Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
