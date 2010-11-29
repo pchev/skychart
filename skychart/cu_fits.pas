@@ -824,11 +824,11 @@ try
 if current_result < db1.RowCount then begin
   filename:=db1.Results[current_result][0];
   objname:=db1.Results[current_result][1];
-  ra:=strtofloat(db1.Results[current_result][2]);
-  de:=strtofloat(db1.Results[current_result][3]);
-  width:=strtofloat(db1.Results[current_result][4]);
-  height:=strtofloat(db1.Results[current_result][5]);
-  rot:=strtofloat(db1.Results[current_result][6]);
+  ra:=strtofloat(trim(db1.Results[current_result][2]));
+  de:=strtofloat(trim(db1.Results[current_result][3]));
+  width:=strtofloat(trim(db1.Results[current_result][4]));
+  height:=strtofloat(trim(db1.Results[current_result][5]));
+  rot:=strtofloat(trim(db1.Results[current_result][6]));
   result:=true;
 end
 else result:=false;

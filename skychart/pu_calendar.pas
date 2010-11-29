@@ -1771,7 +1771,7 @@ if (aRow>=0)and(aColumn>=0) then begin
       satmag:=magchart.text;
       sattle:=tle1.text;
       if IridiumBox.Checked then begin
-         if StrToFloatDef(satmag,6)<10 then satmag:='10';
+         if StrToFloatDef(trim(satmag),6)<10 then satmag:='10';
          if pos('iridium.tle',sattle)=0 then sattle:=sattle+',iridium.tle';
       end;
       DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,satmag,sattle,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,SatChartBox.Checked);

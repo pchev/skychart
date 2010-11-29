@@ -1404,8 +1404,8 @@ if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
     end;
     if trim(buf)='' then continue;
     ar:=(strtoint(copy(buf,51,2))+strtoint(copy(buf,53,2))/60)*15*deg2rad;
-    de:=strtofloat(copy(buf,55,5))*deg2rad;
-    ma:=strtofloat(copy(buf,26,4));
+    de:=strtofloat(trim(copy(buf,55,5)))*deg2rad;
+    ma:=strtofloat(trim(copy(buf,26,4)));
     if ma>17.9 then ma:=(ma-20+6);
     nom:=trim(copy(buf,66,99));
     if nom='' then begin
@@ -1508,13 +1508,13 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     if trim(buf)='' then continue;
     if trim(copy(buf,66,99))<>'' then last:=copy(buf,66,14);
     tar:=(strtoint(copy(buf,51,2))+strtoint(copy(buf,53,2))/60)*15*deg2rad;
-    tde:=strtofloat(copy(buf,55,5))*deg2rad;
+    tde:=strtofloat(trim(copy(buf,55,5)))*deg2rad;
     tar:=NormRA(tar);
     if (tar<x1) or (tar>x2) then continue;
     if (tde<y1) or (tde>y2) then continue;
     heure:=padzeros(copy(buf,1,2),2)+'h'+padzeros(copy(buf,4,2),2)+'m'+padzeros(copy(buf,7,2),2)+'s';
     ma:=copy(buf,26,4);
-    m:=strtofloat(ma);
+    m:=strtofloat(trim(ma));
     if m>17.9 then begin
        m:=(m-20+6);
        str(m:4:1,ma);
