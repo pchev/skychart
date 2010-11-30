@@ -10,11 +10,11 @@ object f_config_observatory: Tf_config_observatory
   ChildSizing.LeftRightSpacing = 525
   ClientHeight = 605
   ClientWidth = 481
-  Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = True
   Position = poScreenCenter
   LCLVersion = '0.9.29'
   object MainPanel: TPanel
@@ -125,22 +125,22 @@ object f_config_observatory: Tf_config_observatory
           Top = -1
           Width = 449
           Caption = 'Observatory Database'
-          ClientHeight = 90
+          ClientHeight = 93
           ClientWidth = 445
           TabOrder = 0
           object Label2: TLabel
             Left = 314
-            Height = 14
+            Height = 11
             Top = 35
-            Width = 14
+            Width = 11
             Caption = '+/-'
             ParentColor = False
           end
           object Label3: TLabel
             Left = 422
-            Height = 14
+            Height = 11
             Top = 35
-            Width = 19
+            Width = 14
             Caption = 'Km.'
             ParentColor = False
           end
@@ -180,7 +180,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object cityfilter: TEdit
             Left = 248
-            Height = 21
+            Height = 18
             Top = 1
             Width = 104
             OnKeyDown = cityfilterKeyDown
@@ -219,7 +219,7 @@ object f_config_observatory: Tf_config_observatory
           object LocCode: TEdit
             Cursor = crHandPoint
             Left = 8
-            Height = 21
+            Height = 18
             Hint = 'Designation Code'
             Top = 60
             Width = 80
@@ -242,14 +242,14 @@ object f_config_observatory: Tf_config_observatory
           end
           object vicinityrangeEdit: TEdit
             Left = 339
-            Height = 21
+            Height = 18
             Top = 33
             Width = 56
             TabOrder = 9
           end
           object vicinityrange: TUpDown
             Left = 395
-            Height = 21
+            Height = 18
             Top = 33
             Width = 17
             Associate = vicinityrangeEdit
@@ -266,30 +266,30 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 53
+          ClientHeight = 56
           ClientWidth = 181
           TabOrder = 1
           object Label58: TLabel
             Left = 4
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 36
+            Width = 27
             Caption = 'Degree'
             ParentColor = False
           end
           object Label59: TLabel
             Left = 48
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 20
+            Width = 16
             Caption = 'Min.'
             ParentColor = False
           end
           object Label60: TLabel
             Left = 80
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 23
+            Width = 16
             Caption = 'Sec.'
             ParentColor = False
           end
@@ -311,7 +311,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object latdeg: TLongEdit
             Left = 4
-            Height = 21
+            Height = 18
             Hint = '0..90'
             Top = 20
             Width = 33
@@ -325,7 +325,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object latmin: TLongEdit
             Left = 48
-            Height = 21
+            Height = 18
             Hint = '0..59'
             Top = 20
             Width = 25
@@ -339,7 +339,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object latsec: TLongEdit
             Left = 80
-            Height = 21
+            Height = 18
             Hint = '0..59'
             Top = 20
             Width = 25
@@ -358,30 +358,30 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 53
+          ClientHeight = 56
           ClientWidth = 181
           TabOrder = 2
           object Label61: TLabel
             Left = 4
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 36
+            Width = 27
             Caption = 'Degree'
             ParentColor = False
           end
           object Label62: TLabel
             Left = 48
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 20
+            Width = 16
             Caption = 'Min.'
             ParentColor = False
           end
           object Label63: TLabel
             Left = 80
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 23
+            Width = 16
             Caption = 'Sec.'
             ParentColor = False
           end
@@ -403,7 +403,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object longdeg: TLongEdit
             Left = 4
-            Height = 21
+            Height = 18
             Hint = '0..180'
             Top = 20
             Width = 33
@@ -417,7 +417,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object longmin: TLongEdit
             Left = 48
-            Height = 21
+            Height = 18
             Hint = '0..59'
             Top = 20
             Width = 25
@@ -431,7 +431,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object longsec: TLongEdit
             Left = 80
-            Height = 21
+            Height = 18
             Hint = '0..59'
             Top = 20
             Width = 25
@@ -450,20 +450,20 @@ object f_config_observatory: Tf_config_observatory
           Top = 109
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 53
+          ClientHeight = 56
           ClientWidth = 77
           TabOrder = 3
           object Label70: TLabel
             Left = 8
-            Height = 14
+            Height = 11
             Top = 4
-            Width = 34
+            Width = 25
             Caption = 'Meters'
             ParentColor = False
           end
           object altmeter: TFloatEdit
             Left = 4
-            Height = 21
+            Height = 18
             Hint = '-500..15000'
             Top = 20
             Width = 65
@@ -485,7 +485,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 181
           Width = 449
           Caption = 'Time Zone'
-          ClientHeight = 58
+          ClientHeight = 61
           ClientWidth = 445
           TabOrder = 4
           object TZComboBox: TComboBox
@@ -502,7 +502,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 8
             Height = 23
             Top = 1
-            Width = 112
+            Width = 86
             Caption = 'Country Timezone'
             Checked = True
             OnChange = CountryTZChange
@@ -521,7 +521,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 142
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 74
+          ClientHeight = 77
           ClientWidth = 453
           TabOrder = 1
           object horizonopaque: TCheckBox
@@ -540,7 +540,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 14
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 106
+          ClientHeight = 109
           ClientWidth = 453
           TabOrder = 0
           object hor_l1: TLabel
@@ -590,7 +590,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 238
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 106
+          ClientHeight = 109
           ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel
@@ -619,7 +619,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 366
           Width = 457
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 65
+          ClientHeight = 68
           ClientWidth = 453
           TabOrder = 3
           object Label82: TLabel

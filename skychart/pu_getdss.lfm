@@ -8,17 +8,16 @@ object f_getdss: Tf_getdss
   Caption = 'List of available plates'
   ClientHeight = 308
   ClientWidth = 420
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  ParentFont = True
   LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 12
-    Height = 13
+    Height = 11
     Top = 8
-    Width = 37
+    Width = 31
     Caption = 'Label1'
     Font.CharSet = ANSI_CHARSET
     Font.Height = -11

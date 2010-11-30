@@ -7,8 +7,6 @@ object f_main: Tf_main
   Caption = 'Cartes du Ciel'
   ClientHeight = 554
   ClientWidth = 826
-  Font.CharSet = ANSI_CHARSET
-  Font.Height = -11
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -19,6 +17,7 @@ object f_main: Tf_main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   OnShow = FormShow
+  ParentFont = True
   LCLVersion = '0.9.29'
   object MultiDoc1: TMultiDoc
     Left = 384
@@ -3506,7 +3505,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 568
-        Height = 21
+        Height = 18
         Top = 2
         Width = 35
         TabOrder = 5

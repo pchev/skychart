@@ -10,10 +10,9 @@ object pop_scope: Tpop_scope
   Caption = 'ASCOM Telescope Interface'
   ClientHeight = 419
   ClientWidth = 277
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
   OnCloseQuery = kill
   OnDestroy = FormDestroy
+  ParentFont = True
   Position = poDefault
   LCLVersion = '0.9.29'
   object GroupBox3: TGroupBox
@@ -30,7 +29,6 @@ object pop_scope: Tpop_scope
       Top = 11
       Width = 65
       Caption = 'Connect'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = setresClick
     end
@@ -40,7 +38,6 @@ object pop_scope: Tpop_scope
       Top = 11
       Width = 65
       Caption = 'Hide'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton2Click
     end
@@ -50,7 +47,6 @@ object pop_scope: Tpop_scope
       Top = 11
       Width = 65
       Caption = 'Disconnect'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton5Click
     end
@@ -72,22 +68,22 @@ object pop_scope: Tpop_scope
     Top = 120
     Width = 257
     Caption = 'Observatory '
-    ClientHeight = 84
+    ClientHeight = 92
     ClientWidth = 253
     TabOrder = 1
     object Label15: TLabel
       Left = 4
-      Height = 19
+      Height = 11
       Top = 20
-      Width = 54
+      Width = 42
       Caption = 'Latitude : '
       ParentColor = False
     end
     object Label16: TLabel
       Left = 124
-      Height = 19
+      Height = 11
       Top = 21
-      Width = 57
+      Width = 46
       Caption = 'Longitude :'
       ParentColor = False
     end
@@ -97,7 +93,6 @@ object pop_scope: Tpop_scope
       Top = 51
       Width = 105
       Caption = 'Set Time'
-      Color = clBtnFace
       Enabled = False
       NumGlyphs = 0
       OnClick = SpeedButton8Click
@@ -108,14 +103,13 @@ object pop_scope: Tpop_scope
       Top = 51
       Width = 105
       Caption = 'Set Location'
-      Color = clBtnFace
       Enabled = False
       NumGlyphs = 0
       OnClick = SpeedButton9Click
     end
     object lat: TEdit
       Left = 50
-      Height = 26
+      Height = 18
       Top = 16
       Width = 70
       Color = clBtnFace
@@ -126,7 +120,7 @@ object pop_scope: Tpop_scope
     end
     object long: TEdit
       Left = 180
-      Height = 26
+      Height = 18
       Top = 18
       Width = 70
       Color = clBtnFace
@@ -146,33 +140,33 @@ object pop_scope: Tpop_scope
     TabOrder = 2
     object LabelAlpha: TLabel
       Left = 26
-      Height = 19
+      Height = 11
       Top = 10
-      Width = 22
+      Width = 15
       Caption = 'RA '
       ParentColor = False
     end
     object LabelDelta: TLabel
       Left = 128
-      Height = 19
+      Height = 11
       Top = 10
-      Width = 24
+      Width = 18
       Caption = 'DEC'
       ParentColor = False
     end
     object Label11: TLabel
       Left = 26
-      Height = 19
+      Height = 11
       Top = 34
-      Width = 15
+      Width = 11
       Caption = 'AZ'
       ParentColor = False
     end
     object Label12: TLabel
       Left = 128
-      Height = 19
+      Height = 11
       Top = 34
-      Width = 20
+      Width = 14
       Caption = 'ALT'
       ParentColor = False
     end
@@ -182,7 +176,6 @@ object pop_scope: Tpop_scope
       Top = 63
       Width = 73
       Caption = 'Abort Slew'
-      Color = clBtnFace
       Font.Color = clRed
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
@@ -197,13 +190,12 @@ object pop_scope: Tpop_scope
       Top = 63
       Width = 65
       Caption = 'Help...'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton4Click
     end
     object pos_x: TEdit
       Left = 44
-      Height = 26
+      Height = 18
       Top = 6
       Width = 70
       ReadOnly = True
@@ -212,7 +204,7 @@ object pop_scope: Tpop_scope
     end
     object pos_y: TEdit
       Left = 160
-      Height = 26
+      Height = 18
       Top = 6
       Width = 70
       ReadOnly = True
@@ -221,7 +213,7 @@ object pop_scope: Tpop_scope
     end
     object az_x: TEdit
       Left = 44
-      Height = 26
+      Height = 18
       Top = 30
       Width = 70
       ReadOnly = True
@@ -230,7 +222,7 @@ object pop_scope: Tpop_scope
     end
     object alt_y: TEdit
       Left = 160
-      Height = 26
+      Height = 18
       Top = 30
       Width = 70
       ReadOnly = True
@@ -239,9 +231,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 22
+      Height = 23
       Top = 32
-      Width = 23
+      Width = 25
       TabOrder = 4
     end
     object TrackingBtn: TSpeedButton
@@ -250,7 +242,6 @@ object pop_scope: Tpop_scope
       Top = 63
       Width = 71
       Caption = 'Tracking'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = TrackingBtnClick
     end
@@ -272,7 +263,7 @@ object pop_scope: Tpop_scope
     Top = 0
     Width = 257
     Caption = 'Driver Selection'
-    ClientHeight = 85
+    ClientHeight = 93
     ClientWidth = 253
     TabOrder = 3
     object SpeedButton3: TSpeedButton
@@ -281,15 +272,14 @@ object pop_scope: Tpop_scope
       Top = 9
       Width = 65
       Caption = 'Select'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton3Click
     end
     object Label1: TLabel
       Left = 8
-      Height = 19
+      Height = 11
       Top = 56
-      Width = 73
+      Width = 57
       Caption = 'Refresh rate :'
       ParentColor = False
     end
@@ -299,7 +289,6 @@ object pop_scope: Tpop_scope
       Top = 32
       Width = 65
       Caption = 'Configure'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton7Click
     end
@@ -309,13 +298,12 @@ object pop_scope: Tpop_scope
       Top = 55
       Width = 65
       Caption = 'About'
-      Color = clBtnFace
       NumGlyphs = 0
       OnClick = SpeedButton11Click
     end
     object Edit1: TEdit
       Left = 8
-      Height = 26
+      Height = 18
       Top = 24
       Width = 153
       Color = clBtnFace
@@ -325,7 +313,7 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 88
-      Height = 26
+      Height = 23
       Top = 52
       Width = 73
       ItemHeight = 0
