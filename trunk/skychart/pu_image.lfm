@@ -13,10 +13,10 @@ object f_image: Tf_image
   Caption = 'f_image'
   ClientHeight = 407
   ClientWidth = 615
-  Font.Height = -11
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   OnResize = FormResize
+  ParentFont = True
   Position = poScreenCenter
   LCLVersion = '0.9.29'
   object Image1: TZoomImage
@@ -47,9 +47,9 @@ object f_image: Tf_image
     TabStop = True
     object Label1: TLabel
       Left = 241
-      Height = 14
+      Height = 11
       Top = 7
-      Width = 33
+      Width = 23
       Caption = 'Label1'
       ParentColor = False
     end

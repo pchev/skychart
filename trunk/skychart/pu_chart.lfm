@@ -7,13 +7,13 @@ object f_chart: Tf_chart
   Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
-  Font.Height = -11
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
+  ParentFont = True
   LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 8
@@ -30,9 +30,9 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 16
+      Height = 13
       Top = 120
-      Width = 77
+      Width = 53
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4

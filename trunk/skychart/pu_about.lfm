@@ -8,9 +8,8 @@ object f_about: Tf_about
   Caption = 'About'
   ClientHeight = 305
   ClientWidth = 581
-  Font.Color = clBlack
-  Font.Height = -11
   OnCreate = FormCreate
+  ParentFont = True
   Position = poMainFormCenter
   LCLVersion = '0.9.29'
   object Panel2: TPanel
@@ -2422,25 +2421,25 @@ object f_about: Tf_about
           end
           object Label8: TLabel
             Left = 20
-            Height = 14
+            Height = 11
             Top = 78
-            Width = 47
+            Width = 34
             Caption = 'Copyright'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 14
+            Height = 11
             Top = 54
-            Width = 38
+            Width = 27
             Caption = 'Version'
             ParentColor = False
           end
           object Label4: TLabel
             Left = 20
-            Height = 14
+            Height = 11
             Top = 158
-            Width = 42
+            Width = 32
             Caption = 'Compiler'
             ParentColor = False
           end

@@ -9,29 +9,29 @@ object f_addlabel: Tf_addlabel
   Caption = 'Add Label'
   ClientHeight = 149
   ClientWidth = 264
-  Font.Height = -11
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = True
   LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 12
-    Height = 14
+    Height = 11
     Top = 16
-    Width = 30
+    Width = 21
     Caption = 'Label:'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 12
-    Height = 14
+    Height = 11
     Top = 45
-    Width = 27
+    Width = 19
     Caption = 'Type:'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 56
-    Height = 21
+    Height = 18
     Top = 8
     Width = 192
     OnChange = Edit1Change
@@ -95,7 +95,7 @@ object f_addlabel: Tf_addlabel
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 29
+    ClientHeight = 32
     ClientWidth = 232
     Columns = 3
     ItemIndex = 0

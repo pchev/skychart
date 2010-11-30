@@ -8,11 +8,11 @@ object f_search: Tf_search
   Caption = 'Search'
   ClientHeight = 326
   ClientWidth = 433
-  Font.Height = -11
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = True
   LCLVersion = '0.9.29'
   object CometPanel: TPanel
     Left = 7
@@ -24,7 +24,7 @@ object f_search: Tf_search
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 18
       Top = 10
       Width = 99
       TabOrder = 0
@@ -58,7 +58,7 @@ object f_search: Tf_search
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 21
+      Height = 18
       Top = 10
       Width = 99
       TabOrder = 0
@@ -94,9 +94,9 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 14
+      Height = 11
       Top = 14
-      Width = 34
+      Width = 25
       Caption = 'Nebula'
       ParentColor = False
     end
@@ -121,9 +121,9 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 14
+      Height = 11
       Top = 14
-      Width = 21
+      Width = 15
       Caption = 'Star'
       ParentColor = False
     end
@@ -148,9 +148,9 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 14
+      Height = 11
       Top = 14
-      Width = 62
+      Width = 45
       Caption = 'Constellation'
       ParentColor = False
     end
@@ -175,9 +175,9 @@ object f_search: Tf_search
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 14
+      Height = 11
       Top = 14
-      Width = 62
+      Width = 45
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -197,7 +197,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'ADS'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -207,7 +206,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'STF'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -228,7 +226,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'R'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -238,7 +235,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'S'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -248,7 +244,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'V'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -258,7 +253,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'NSV'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -268,7 +262,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'T'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -278,7 +271,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'U'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -288,7 +280,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = 'W'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -309,7 +300,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'TYC'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -319,7 +309,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'GSC'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -329,7 +318,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'HD'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -339,14 +327,13 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'BD'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
     end
     object Id: TEdit
       Left = 105
-      Height = 21
+      Height = 18
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -368,7 +355,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '1'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -378,7 +364,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '2'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -388,7 +373,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '3'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -398,7 +382,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '4'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -408,7 +391,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '5'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -418,7 +400,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '6'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -428,7 +409,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '7'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -438,7 +418,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '8'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -448,7 +427,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '9'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -458,7 +436,6 @@ object f_search: Tf_search
         Top = 20
         Width = 18
         Caption = '0'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -468,7 +445,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = '<-'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton11Click
       end
@@ -478,7 +454,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = ' '
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = NumButtonClick
       end
@@ -488,7 +463,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'C'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = SpeedButton13Click
       end
@@ -508,7 +482,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'M'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -518,7 +491,6 @@ object f_search: Tf_search
         Top = 2
         Width = 36
         Caption = 'NGC'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -528,7 +500,6 @@ object f_search: Tf_search
         Top = 2
         Width = 18
         Caption = 'IC'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -538,7 +509,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PGC'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -548,7 +518,6 @@ object f_search: Tf_search
         Top = 20
         Width = 36
         Caption = 'PK'
-        Color = clBtnFace
         NumGlyphs = 0
         OnClick = CatButtonClick
       end
@@ -566,9 +535,9 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 14
+      Height = 11
       Top = 14
-      Width = 33
+      Width = 24
       Caption = 'Planet '
       ParentColor = False
     end
@@ -597,7 +566,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 202
+    ClientHeight = 205
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0

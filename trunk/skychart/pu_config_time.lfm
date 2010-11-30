@@ -9,11 +9,11 @@ object f_config_time: Tf_config_time
   Caption = 'Date / Time'
   ClientHeight = 564
   ClientWidth = 474
-  Font.Height = -11
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
+  ParentFont = True
   LCLVersion = '0.9.29'
   object MainPanel: TPanel
     Left = 0
@@ -240,7 +240,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
+            ClientHeight = 23
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
@@ -526,25 +526,25 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 358
-          Height = 14
+          Height = 11
           Top = 46
-          Width = 40
+          Width = 22
           Caption = 'every  '
           ParentColor = False
         end
         object Label179: TLabel
           Left = 220
-          Height = 14
+          Height = 11
           Top = 46
-          Width = 97
+          Width = 56
           Caption = 'Number of steps'
           ParentColor = False
         end
         object Label56: TLabel
           Left = 8
-          Height = 14
+          Height = 11
           Top = 6
-          Width = 195
+          Width = 112
           Caption = 'Plot the position of moving object.'
           ParentColor = False
         end
@@ -563,7 +563,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 121
+          ClientHeight = 124
           ClientWidth = 133
           Items.Strings = (
             'Days'
@@ -576,16 +576,16 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 21
+          Height = 23
           Top = 254
-          Width = 253
+          Width = 158
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6
         end
         object nbstep: TSpinEdit
           Left = 220
-          Height = 21
+          Height = 18
           Top = 70
           Width = 75
           MinValue = 1
@@ -595,7 +595,7 @@ object f_config_time: Tf_config_time
         end
         object stepsize: TSpinEdit
           Left = 358
-          Height = 21
+          Height = 18
           Top = 70
           Width = 75
           MaxValue = 999999
@@ -665,7 +665,7 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 57
+          ClientHeight = 60
           ClientWidth = 434
           Columns = 3
           Items.Strings = (

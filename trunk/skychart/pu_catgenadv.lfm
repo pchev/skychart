@@ -8,16 +8,16 @@ object f_catgenadv: Tf_catgenadv
   Caption = 'Compute Field'
   ClientHeight = 263
   ClientWidth = 224
-  Font.Height = -11
   OnCreate = FormCreate
   OnShow = FormShow
+  ParentFont = True
   Position = poMainFormCenter
   LCLVersion = '0.9.29'
   object Label1: TLabel
     Left = 72
-    Height = 23
+    Height = 14
     Top = 90
-    Width = 7
+    Width = 8
     Caption = 'x'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -27,7 +27,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label2: TLabel
     Left = 72
-    Height = 23
+    Height = 14
     Top = 126
     Width = 9
     Caption = '+'
@@ -39,9 +39,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label3: TLabel
     Left = 72
-    Height = 28
+    Height = 16
     Top = 160
-    Width = 10
+    Width = 11
     Caption = '='
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
@@ -81,7 +81,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit1: TEdit
     Left = 24
-    Height = 21
+    Height = 18
     Top = 72
     Width = 110
     OnChange = Edit1Change
@@ -90,7 +90,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit2: TEdit
     Left = 24
-    Height = 21
+    Height = 18
     Top = 106
     Width = 110
     Color = clBtnFace
@@ -99,7 +99,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit3: TEdit
     Left = 24
-    Height = 21
+    Height = 18
     Top = 140
     Width = 110
     OnChange = Edit3Change
@@ -108,7 +108,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit4: TEdit
     Left = 24
-    Height = 21
+    Height = 18
     Top = 176
     Width = 110
     Color = clBtnFace
