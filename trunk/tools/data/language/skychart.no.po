@@ -155,6 +155,10 @@ msgstr "Høyde"
 msgid "%sAlt turns:"
 msgstr "%sAlt omløp:"
 
+#: u_translation.rsalwayssavewi
+msgid "Always save without asking."
+msgstr ""
+
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Vis alltid kompassrosen"
@@ -194,6 +198,10 @@ msgstr "Perihelvinkel"
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Kunstige satellitter"
+
+#: u_translation.rsartificialsa2
+msgid "Artificial satellite"
+msgstr ""
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
@@ -314,6 +322,10 @@ msgstr "Begynn bearbeiding for jd=%s / %s"
 #: u_translation.rsbelowthehori
 msgid "Below the horizon"
 msgstr "Under horisonten"
+
+#: u_translation.rsbesuretheyus
+msgid "Be sure they use a DOS line end format."
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -579,6 +591,10 @@ msgstr "Sirkumpolar"
 msgid "Class"
 msgstr "Klasse"
 
+#: u_translation.rscleanupmap
+msgid "Cleanup map"
+msgstr ""
+
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
 msgstr "Klikk for å endre fargen"
@@ -794,6 +810,10 @@ msgstr "Koordinater-rutenett"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Kopier"
+
+#: u_translation.rscopycoordina
+msgid "Copy coordinates"
+msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -2531,6 +2551,10 @@ msgstr "Nr."
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Ingen asteroide-data funnet!%sLast en MPC fil først."
 
+#: u_translation.rsnoastronomic
+msgid "No astronomical twilight today!"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Ingen marg"
@@ -3129,6 +3153,10 @@ msgstr "Proxy vert"
 msgid "Proxy port"
 msgstr "Proxy port"
 
+#: u_translation.rsputthefilesw
+msgid "Put the files with a .tle extention to the %s folder"
+msgstr ""
+
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "Quasar"
@@ -3280,6 +3308,14 @@ msgstr "Tilbakestill kart"
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
 msgstr "Tilbakestill kart og alternativer"
+
+#: u_translation.rsresetinitial
+msgid "Reset initial default and restart"
+msgstr ""
+
+#: u_translation.rsresettolastt
+msgid "Reset to last time the chart was saved"
+msgstr ""
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3737,9 +3773,9 @@ msgstr "Noen oppføringer ble avvist, se filen %sreject.txt for detaljer."
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Noe gikk galt under initialiseringen av progammet. Programmet må lukkes."
 
-#: u_translation.rssortbyra
-msgid "Sort by RA"
-msgstr "Sort. etter RA"
+#: u_translation.rssortby
+msgid "Sort by"
+msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4029,6 +4065,10 @@ msgstr "I dag"
 msgid "to file:"
 msgstr "til fil:"
 
+#: u_translation.rstonight
+msgid "Tonight"
+msgstr ""
+
 #: u_translation.rstoolbar
 msgid "Tool bar"
 msgstr "Verktøylinje"
@@ -4268,6 +4308,10 @@ msgstr "Variabel stjerne"
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
 msgstr "Variable stjerner"
+
+#: u_translation.rsvelocity
+msgid "Velocity"
+msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"
