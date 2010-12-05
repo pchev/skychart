@@ -168,9 +168,10 @@ Constructor TIndiClient.Create ;
 begin
 Fexiting:=false;
 freeonterminate:=true;
-Ftrace:=false;
+Ftrace:=false;  // for debuging only
 FIndiServerPid:=0;
 FServerStartedByMe:=false;
+Ftelescopestatus:=Idle;
 // start suspended to let time to the main thread to set the parameters
 inherited create(true);
 end;
@@ -332,6 +333,7 @@ end;
 procedure TIndiClient.ProcessDataSyn;
 begin
 try
+//if Ftrace then  writetrace('Receive from telescope: '+FRecvData);;
 XmlScanner.LoadFromBuffer(pchar(FRecvData));
 XmlScanner.Execute;
 if assigned(onReceiveData) then onReceiveData(self,FRecvData);
@@ -425,8 +427,8 @@ procedure TIndiClient.Connect;
 begin
 if FCurrentdevice='' then exit;
 if assigned(FonStatusChange) then FonStatusChange(self,telescope,busy);
-if FWantDevicePort<>'' then SetPort(FWantDevicePort);
-Send('<newSwitchVector device="'+ FCurrentdevice+'" name="CONNECTION"><oneSwitch name="CONNECT">On</oneSwitch></newSwitchVector>');
+if trim(FWantDevicePort)<>'' then SetPort(FWantDevicePort);
+if Ftelescopestatus<>Ok then Send('<newSwitchVector device="'+ FCurrentdevice+'" name="CONNECTION"><oneSwitch name="CONNECT">On</oneSwitch></newSwitchVector>');
 getProperties;
 end;
 

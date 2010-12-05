@@ -39,12 +39,17 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    IndiDevOther: TEdit;
     IndiPort: TEdit;
     INDILabel: TLabel;
     ASCOMLabel: TLabel;
+    IndiServerCmd: TEdit;
+    Label258: TLabel;
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
     ASCOMPanel: TPanel;
+    Panel2: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
     TelescopeManualLabel: TLabel;
@@ -91,14 +96,12 @@ type
     Label13: TLabel;
     Label75: TLabel;
     Label130: TLabel;
-    Label258: TLabel;
     Label259: TLabel;
     Label260: TLabel;
     Label261: TLabel;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
     IndiAutostart: TCheckBox;
-    IndiServerCmd: TEdit;
     IndiDriver: TEdit;
     IndiDev: TComboBox;
     TelescopeSelect: TRadioGroup;
@@ -138,9 +141,11 @@ type
     PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure IndiDevOtherChange(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -271,6 +276,7 @@ RevertTurnsAlt.caption:=rsRevertAltKno;
 TelescopePluginLabel.caption:=rsCDCPluginSet;
 Label155.caption:=rsTelescopePlu;
 INDILabel.caption:=rsINDIDriverSe;
+Button5.Caption:=rsDefault;
 Label75.caption:=rsINDIServerHo;
 Label130.caption:=rsINDIServerPo;
 Label258.caption:=rsServerComman;
@@ -457,7 +463,12 @@ findclose(fs);
 {$endif}
 IndiDev.items.clear;
 for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,1]);
+IndiDev.itemindex:=0;
 for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.itemindex:=i;
+if IndiDev.itemindex=0 then begin
+  IndiDevOther.Text:=csc.IndiDevice;
+  IndiDevOther.visible:=true;
+end;
 end;
 
 procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
@@ -651,6 +662,12 @@ mycplot.Free;
 mycmain.Free;
 end;
 
+procedure Tf_config_system.IndiDevOtherChange(Sender: TObject);
+begin
+  if LockChange then exit;
+  csc.IndiDevice:=IndiDevOther.Text;
+end;
+
 procedure Tf_config_system.LanguageListSelect(Sender: TObject);
 begin
 if LockChange then exit;
@@ -672,6 +689,12 @@ end;
 procedure Tf_config_system.Button4Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_config_system.Button5Click(Sender: TObject);
+begin
+  IndiPort.Text:='/dev/ttyS0';
+  IndiServerCmd.Text:='indiserver';
 end;
 
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);
@@ -723,6 +746,11 @@ end;
 procedure Tf_config_system.IndiAutostartClick(Sender: TObject);
 begin
 csc.IndiAutostart:=IndiAutostart.checked;
+panel2.Visible:=IndiAutostart.checked;
+if IndiAutostart.checked then begin
+   if trim(IndiPort.Text)='' then IndiPort.Text:='/dev/ttyS0';
+end else
+   IndiPort.Text:=' ';
 end;
 
 procedure Tf_config_system.IndiServerCmdChange(Sender: TObject);
@@ -738,9 +766,11 @@ csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,1];
 IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,2];
 if IndiDev.itemindex=0 then begin
    IndiDriver.enabled:=true;
-   IndiDriver.setfocus;
+   IndiDevOther.Visible:=true;
+   IndiDevOther.setfocus;
 end else begin
    IndiDriver.enabled:=false;
+   IndiDevOther.Visible:=false;
 end;
 end;
 
@@ -765,6 +795,7 @@ if uppercase(copy(IndiPort.Text,1,3))='COM' then begin
 end else
    csc.IndiPort:=IndiPort.text;
 {$endif}
+if csc.IndiPort='' then csc.IndiPort:=' ';
 end;
 
 procedure Tf_config_system.PanelCmdChange(Sender: TObject);
