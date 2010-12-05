@@ -334,9 +334,7 @@ end;
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   RefreshTimer.Enabled:=false;
-{$ifdef mswindows}
   TelescopeTimer.Enabled:=false;
- {$endif}
   Action := caFree;
 end;
 
@@ -418,7 +416,7 @@ try
  locked:=true;
  if sc<>nil then sc.free;
  Image1.Free;
- if indi1<>nil then begin
+ if (indi1<>nil)and(Connect1.checked) then begin
    indi1.onCoordChange:=nil;
    indi1.onStatusChange:=nil;
    indi1.onMessage:=nil;
@@ -2991,12 +2989,12 @@ if sc.cfgsc.ManualTelescope then begin
 end
 else if sc.cfgsc.IndiTelescope then begin
   if Connect1.checked then begin
-     indi1.terminate;
+     TelescopeTimer.Enabled:=false;
+     indi1.Terminate;
      sc.cfgsc.ScopeMark:=false;
      sc.cfgsc.TrackOn:=false;
      Refresh;
   end else begin
-  if (indi1=nil)or(indi1.Terminated) then begin
      sc.cfgsc.TelescopeJD:=0;
      indi1:=TIndiClient.Create;
      indi1.TargetHost:=sc.cfgsc.IndiServerHost;
@@ -3014,11 +3012,8 @@ else if sc.cfgsc.IndiTelescope then begin
      indi1.onMessage:=TelescopeGetMessage;
      indi1.Resume;
      sc.cfgsc.TrackOn:=true;
-  end else begin
-     sc.cfgsc.TelescopeJD:=0;
-     indi1.Connect;
-     sc.cfgsc.TrackOn:=true;
-  end;
+     TelescopeTimer.Interval:=5000;
+     TelescopeTimer.Enabled:=true;
   end;
   Refresh;
 end;
@@ -3399,7 +3394,18 @@ TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
-if sc.cfgsc.PluginTelescope then begin
+if sc.cfgsc.IndiTelescope then begin
+   if (not Connect1.checked) and ((indi1.TelescopeStatus=cu_indiclient.Idle)or(indi1.TelescopeStatus=cu_indiclient.Alert)) then begin
+      indi1.Terminate;
+      sc.cfgsc.ScopeMark:=false;
+      sc.cfgsc.TrackOn:=false;
+      Refresh;
+      if assigned(Fshowinfo) then Fshowinfo('INDI server '+sc.cfgsc.IndiServerHost+':'+sc.cfgsc.IndiServerPort+' do not return information about device '+sc.cfgsc.IndiDevice);
+   end else begin
+     TelescopeTimer.Interval:=2000;
+     TelescopeTimer.Enabled:=true;
+   end;
+end else if sc.cfgsc.PluginTelescope then begin
     if Ftelescope.scopelibok then begin
     Connect1.checked:=Ftelescope.ScopeConnected;
     if Connect1.checked then begin

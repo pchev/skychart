@@ -3505,7 +3505,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 568
-        Height = 18
+        Height = 22
         Top = 2
         Width = 35
         TabOrder = 5
