@@ -39,6 +39,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    IndiPort: TEdit;
     INDILabel: TLabel;
     ASCOMLabel: TLabel;
     MysqlBoxLabel: TLabel;
@@ -100,7 +101,6 @@ type
     IndiServerCmd: TEdit;
     IndiDriver: TEdit;
     IndiDev: TComboBox;
-    IndiPort: TComboBox;
     TelescopeSelect: TRadioGroup;
     Label155: TLabel;
     telescopepluginlist: TComboBox;
@@ -326,10 +326,6 @@ dbchanged:=false;
 {$ifdef unix}
   if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
-  Indiport.Style:= csSimple;
-  IndiPort.Items.Clear;
-  IndiPort.OnChange:=IndiPortChange;
-  IndiPort.OnSelect:=nil;
 {$endif}
 ShowLanguage;
 ShowSYS;
@@ -445,13 +441,8 @@ if csc.IndiTelescope then Telescopeselect.itemindex:=0
    {$endif}
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
-{$ifdef unix}
 IndiPort.text:=csc.IndiPort;
-{$endif}
 {$ifdef mswindows}
-val(rightstr(csc.IndiPort,1),i,n);
-if n=0 then IndiPort.itemindex:=i
-       else IndiPort.itemindex:=0;
 i:=findfirst(slash(appdir)+slash('plugins')+slash('telescope')+'*.tid',0,fs);
 telescopepluginlist.clear;
 n:=0;
@@ -760,13 +751,19 @@ csc.IndiDriver:=IndiDriver.text;
 end;
 
 procedure Tf_config_system.IndiPortChange(Sender: TObject);
+var i,n: integer;
 begin
 if LockChange then exit;
 {$ifdef unix}
 csc.IndiPort:=IndiPort.text;
 {$endif}
 {$ifdef mswindows}
-csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
+if uppercase(copy(IndiPort.Text,1,3))='COM' then begin
+   val(trim(copy(IndiPort.text,4,2)),i,n);
+   if (n=0)and(i>=0) then csc.IndiPort:='/dev/ttyS'+inttostr(i-1)
+          else csc.IndiPort:=IndiPort.text;
+end else
+   csc.IndiPort:=IndiPort.text;
 {$endif}
 end;
 
