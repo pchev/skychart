@@ -1,0 +1,94 @@
+; Name of the constellation for Cartes du Ciel
+; Official Latin name
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+; Use UTF-8 for character encoding
+;
+00.567 ;  39.250 ; And ; Andromeda
+10.117 ; -33.350 ; Ant ; Luftpumpen
+16.133 ; -76.583 ; Aps ; Paradisfuglen
+22.700 ; -10.467 ; Aqr ; Vannmannen
+19.683 ;  03.367 ; Aql ; Ørnen
+17.233 ; -51.117 ; Ara ; Alteret
+02.683 ;  22.567 ; Ari ; Væren
+05.950 ;  42.817 ; Aur ; Kusken
+14.683 ;  32.333 ; Boo ; Bjørnevokteren
+04.717 ; -38.167 ; Cae ; Meiselen
+06.150 ;  71.967 ; Cam ; Giraffen
+08.667 ;  22.000 ; Cnc ; Krepsen
+13.017 ;  42.350 ; CVn ; Jakthundene
+06.833 ; -22.317 ; CMa ; Store hund
+07.617 ;  06.767 ; CMi ; Lille hund
+21.050 ; -19.350 ; Cap ; Steinbukken
+08.833 ; -60.500 ; Car ; Kjølen
+00.867 ;  60.300 ; Cas ; Kassiopeia
+12.950 ; -44.000 ; Cen ; Kentauren
+22.417 ;  72.567 ; Cep ; Kefeus
+01.717 ; -06.367 ; Cet ; Hvalfisken
+12.000 ; -81.017 ; Cha ; Kameleonen
+14.533 ; -67.300 ; Cir ; Passeren
+05.700 ; -37.917 ; Col ; Duen
+12.750 ;  22.650 ; Com ; Berenikes hår
+18.650 ; -41.750 ; CrA ; Sydlige krone 
+15.883 ;  32.633 ; CrB ; Nordlige krone
+12.383 ; -18.633 ; Crv ; Ravnen
+11.350 ; -13.750 ; Crt ; Begeret
+12.483 ; -60.300 ; Cru ; Sydkorset
+20.583 ;  44.000 ; Cyg ; Svanen
+20.667 ;  12.100 ; Del ; Delfinen
+05.333 ; -63.017 ; Dor ; Gullfisken
+17.950 ;  66.067 ; Dra ; Dragen
+21.250 ;  07.933 ; Equ ; Føllet 
+03.883 ; -17.983 ; Eri ; Floden
+02.767 ; -31.000 ; For ; Smelteovnen
+06.850 ;  24.817 ; Gem ; Tvillingene
+22.450 ; -45.133 ; Gru ; Tranen
+17.433 ;  31.233 ; Her ; Herkules
+03.217 ; -52.000 ; Hor ; Uret
+09.133 ; -11.683 ; Hya ; Vannslangen
+02.583 ; -72.917 ; Hyi ; Sydlige vannslange 
+21.133 ; -52.317 ; Ind ; Indianeren
+22.517 ;  46.667 ; Lac ; Firfislen
+10.667 ;  17.000 ; Leo ; Løven
+10.317 ;  33.233 ; LMi ; Lille løve 
+05.433 ; -19.650 ; Lep ; Haren
+15.183 ; -15.550 ; Lib ; Vekten
+15.383 ; -42.717 ; Lup ; Ulven
+07.733 ;  47.833 ; Lyn ; Gaupen
+18.900 ;  40.650 ; Lyr ; Lyren
+05.500 ; -79.017 ; Men ; Bordet
+20.950 ; -36.800 ; Mic ; Mikroskopet
+06.967 ; -03.267 ; Mon ; Enhjørningen
+12.467 ; -69.133 ; Mus ; Fluen
+16.050 ; -52.717 ; Nor ; Vinkelhaken
+22.167 ; -84.267 ; Oct ; Oktanten
+17.033 ; -02.350 ; Oph ; Slangebæreren
+05.567 ;  03.583 ; Ori ; Orion
+19.167 ; -65.867 ; Pav ; Påfuglen
+22.617 ;  19.650 ; Peg ; Pegasus
+03.517 ;  44.883 ; Per ; Persevs
+00.733 ; -48.767 ; Phe ; Føniks
+05.383 ; -51.367 ; Pic ; Maleren
+00.883 ;  15.483 ; Psc ; Fiskene
+22.417 ; -31.567 ; PsA ; Sydlige fisk 
+07.867 ; -32.617 ; Pup ; Akterstavnen
+08.883 ; -29.783 ; Pyx ; Kompasset
+03.900 ; -60.517 ; Ret ; Nettet
+19.667 ;  17.000 ; Sge ; Pilen
+19.383 ; -29.883 ; Sgr ; Skytten
+16.867 ; -35.333 ; Sco ; Skorpionen
+00.500 ; -31.000 ; Scl ; Billedhuggeren
+18.650 ; -10.883 ; Sct ; Skjoldet
+15.733 ;  10.850 ; Ser ; Slangens hode
+17.800 ; -13.483 ; Ser ; Slangens hale
+10.100 ; -01.133 ; Sex ; Sekstanten
+04.100 ;  17.333 ; Tau ; Tyren
+19.250 ; -51.467 ; Tel ; Teleskopet
+02.050 ;  32.333 ; Tri ; Triangelet
+16.117 ; -65.100 ; TrA ; Sydlige triangelet 
+23.833 ; -64.933 ; Tuc ; Tukanen
+11.333 ;  57.500 ; UMa ; Store bjørn
+14.967 ;  75.033 ; UMi ; Lille bjørn
+09.333 ; -48.483 ; Vel ; Seilet
+13.350 ; -03.517 ; Vir ; Jomfruen
+07.667 ; -69.617 ; Vol ; Flygefisken
+20.367 ;  25.033 ; Vul ; Reven
