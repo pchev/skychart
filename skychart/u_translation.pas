@@ -5,7 +5,7 @@ unit u_translation;
 interface
 
 uses gettext, translations, u_constant, u_util,
-  Classes, SysUtils;
+  fileutil, Classes, SysUtils;
 
 procedure GetDefaultLanguage(var buf1,buf2: string);
 function Translate(lang : string = ''):string;
@@ -1170,9 +1170,9 @@ begin
     end;
  end;
  // translate CDC messages
- TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',result,'');
+ TranslateUnitResourceStrings('u_translation',systoutf8(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po'),result,'');
  // translate LCL messages
- TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po',result,'');
+ TranslateUnitResourceStrings('LCLStrConsts',systoutf8(slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po'),result,'');
  writetrace('Language: '+result+' '+rsLanguage);
 end;
 
