@@ -579,9 +579,15 @@ end;
 procedure Tf_config_time.Button8Click(Sender: TObject);
 var ht: double;
     h,n,s: string;
+    y,m,d : word;
 begin
 if assigned(FGetTwilight) then begin
-   FGetTwilight(jd(d_year.Position,d_month.Position,d_day.Position,0),ht);
+   ADBC.itemindex:=0;
+   decodedate(csc.tz.NowLocalTime,y,m,d);
+   d_year.Position:=y;
+   d_month.Position:=m;
+   d_day.Position:=d;
+   FGetTwilight(jd(y,m,d,0),ht);
    if ht>0 then begin
      artostr2(ht,h,n,s);
      t_hour.Position:=strtoint(h);
