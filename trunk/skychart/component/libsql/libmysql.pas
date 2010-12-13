@@ -960,6 +960,16 @@ begin
          // try version specific library, some distribution do not provide the generic link
          {$IFDEF MYSQL4}
          if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.19')){$ELSE}LoadLibrary(DLL+'.19'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.18')){$ELSE}LoadLibrary(DLL+'.18'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.17')){$ELSE}LoadLibrary(DLL+'.17'){$ENDIF}; // future
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.16')){$ELSE}LoadLibrary(DLL+'.16'){$ENDIF}; // 5.1
+         if hDLL = 0 then
+            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.15')){$ELSE}LoadLibrary(DLL+'.15'){$ENDIF}; // 5.0
+         if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.14')){$ELSE}LoadLibrary(DLL+'.14'){$ENDIF}; // mysql 4.1, 5.0
          if hDLL = 0 then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.12')){$ELSE}LoadLibrary(DLL+'.12'){$ENDIF}; // mysql 4.0
