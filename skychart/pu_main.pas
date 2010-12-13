@@ -6306,8 +6306,8 @@ try
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);
     end;
-    if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
-       and cdcdb.CheckDB) then begin
+    cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
+    if cdcdb.CheckDB then begin
          {$ifdef trace_debug}
           WriteTrace('DB connected');
          {$endif}
