@@ -195,7 +195,9 @@ begin
         FActive := mf.mysql_thread_init = 0
       else
         begin
+          {$IFNDEF MSWINDOWS}
           mf.mysql_thread_init; //call anyway.
+          {$ENDIF}
           FActive := True;
         end;
     end
@@ -208,7 +210,7 @@ begin
 
   if Assigned (mf.mysql_get_client_info) then
     FClientVersion := mf.mysql_get_client_info;
-  FMyVersion := mvUnknown;
+  FMyVersion := mv5_0; // assume 5.0 for higher version
   if pos ('3.23.', FClientVersion)>0 then
     FMyVersion := mv3_23;
   if pos ('4.0.', FClientVersion)>0 then
