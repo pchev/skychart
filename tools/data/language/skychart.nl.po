@@ -1,8 +1,8 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-09-06 15:12+0100\n"
-"Last-Translator: Marc Fokker <ptp@xs4all.nl>\n"
+"PO-Revision-Date: 2010-12-13 20:43+0100\n"
+"Last-Translator: Marc Fokker <marc@cwnetwerk.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
@@ -157,7 +157,7 @@ msgstr "%sAlt as-omw.:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr ""
+msgstr "Automatisch opslaan zonder bevestiging."
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
@@ -201,7 +201,7 @@ msgstr "Kunstmatige satellieten"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Kunstmatige satelliet"
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
@@ -325,7 +325,7 @@ msgstr "Onder de horizon"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr ""
+msgstr "Vergewis je van het gebruik van DOS regel-einde formaat."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -593,7 +593,7 @@ msgstr "Klasse"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr ""
+msgstr "Ruim map op"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -813,7 +813,7 @@ msgstr "Kopiëer"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr ""
+msgstr "Kopiëer coördinaten"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -1950,7 +1950,7 @@ msgstr "Ongeldig FITS bestand: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr ""
+msgstr "Ongeldig pad:"
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
@@ -2554,7 +2554,7 @@ msgstr "Geen planetoïde gegevens gevonden!%sLaad alstublieft eerst een MPC best
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr ""
+msgstr "Vandaag geen astronomisch schemer!"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -2682,7 +2682,7 @@ msgstr "Objectnaam"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Objectpostitie gevonden in de index, maar geen details gevonden in de actieve catalogi."
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -2798,7 +2798,7 @@ msgstr "Andere lijnen-catalogi"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Overige programma-gegevens"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3156,7 +3156,7 @@ msgstr "Proxy port"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr ""
+msgstr "Plaats de bestanden met een .tle extensie in de %s map"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3312,11 +3312,11 @@ msgstr "Reset kaart en opties"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Terug naar standaardinstellingen en herstart"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Herstel de laatst opgeslagen kaart"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3676,7 +3676,7 @@ msgstr "Toon planeten"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "Toon de positie in de titelbalk"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
@@ -3776,7 +3776,7 @@ msgstr "Iets is fout gegaan tijdens de programma-initialisatie. Het programma mo
 
 #: u_translation.rssortby
 msgid "Sort by"
-msgstr ""
+msgstr "Sorteer op"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4068,7 +4068,7 @@ msgstr "naar bestand:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr ""
+msgstr "Vannacht"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4312,7 +4312,7 @@ msgstr "Variabele sterren"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Snelheid"
 
 #: u_translation.rsvenus
 msgid "Venus"
