@@ -5,7 +5,7 @@ unit u_help;
 interface
 
 uses gettext, translations, u_constant, u_util,
-  Classes, SysUtils, Controls, LazHelpHTML;
+  Classes, SysUtils, Controls, FileUtil, LazHelpHTML;
 
 procedure Translate(lang : string = '');
 procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
@@ -80,7 +80,7 @@ var buf:string;
 begin
 buf:=StringReplace(hlpBaseDir,'/',PathDelim,[rfReplaceAll]);
 buf:=StringReplace(buf,'\',PathDelim,[rfReplaceAll]);
-aHelpDB.BaseURL:='file://'+slash(helpdir)+slash('wiki_doc')+buf;
+aHelpDB.BaseURL:='file://'+SysToUTF8(slash(helpdir)+slash('wiki_doc')+buf);
 aHelpDB.KeywordPrefix:='H/';
 end;
 
