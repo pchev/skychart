@@ -437,6 +437,10 @@ msgstr "Anuluj %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Anuluj, może błędny plik zip ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNie można otworzyć bazy danych %s! %s"
@@ -1281,6 +1285,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "Pobierz najnowsze elementy orbit"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Czy chcesz zapisać ustawienia programu?"
@@ -1617,6 +1625,10 @@ msgstr "Wybierz kolor nieba"
 msgid "Flamsteed number"
 msgstr "Numer Flamsteeda"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Czcionka"
@@ -1624,6 +1636,10 @@ msgstr "Czcionka"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Dla dużego katalogu wybierz zawsze tryb binarny. Dla małego zestawu danych ulegających częstej modyfikacji wybierz tryb tekstowy. Pozwoli to na edytowanie pliku i natychmiastową obserwację wyników bez konieczności powtórnego uruchamiania tego narzędzia."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1730,6 +1746,10 @@ msgstr "Gromady kuliste"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Tryb graficzny"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1847,6 +1867,10 @@ msgstr "Rozmiar ikony"
 msgid "Icon time display"
 msgstr "Czas wyświetlania ikony"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Oświe."
@@ -1870,6 +1894,14 @@ msgstr "Nachylenie"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Nachylenie="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2961,6 +2993,14 @@ msgstr "Proszę wskazać długą nazwę katalogu"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Proszę wskazać folder gdzie katalog musi być utworzony"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Proszę włożyć płytkę RealSky CD numer"
@@ -3389,6 +3429,10 @@ msgstr "cykl Saros"
 msgid "Satellite"
 msgstr "Satelita"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Pierścień Sat."
@@ -3780,6 +3824,10 @@ msgstr "Niektóre rekordy zostały odrzucone, zobacz plik %sreject.txt w celu uz
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Coś poszło nie tak, podczas wczytywania programu. Program zostanie zamknięty."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

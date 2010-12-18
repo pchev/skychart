@@ -45,6 +45,7 @@ type
   { Tf_calendar }
 
   Tf_calendar = class(TForm)
+    Bevel1: TBevel;
     BtnCopyClip: TButton;
     BtnRefresh: TButton;
     BtnHelp: TButton;
@@ -358,17 +359,20 @@ neptune.caption:=pla[8];
 pluton.caption:=pla[9];
 psoleil.caption:=pla[10];
 plune.caption:=pla[11];
+tsPGraphs.Caption:=rsGraphs;
 Label1.caption:=rsDateFrom;
 Label2.caption:=rsTo;
 Label5.caption:=rsAt;
 Label3.caption:=rsBy;
 Label4.caption:=rsDays;
-Label9.caption:='Satellites calculation use QuickSat by Mike McCants,'+crlf+'Iridium flare prediction use Iridflar by Robert Matson';
+Label9.caption:=rsSatellitesCa+' QuickSat by Mike McCants,'+crlf+rsFlarePredict+' Iridflar by Robert Matson';
+label9.Hint:=URL_QUICKSAT;
 BtnRefresh.caption:=rsRefresh;
 BtnHelp.caption:=rsHelp;
 BtnClose.caption:=rsClose;
 BtnSave.caption:=rsSaveToFile;
 BtnPrint.caption:=rsPrint;
+BtnCopyClip.Caption:=rsCopy;
 BtnReset.caption:=rsResetChart;
 twilight.caption:=rsTwilight;
 planets.caption:=rsSolarSystem;
@@ -376,6 +380,7 @@ comet.caption:=rsComet;
 Asteroids.caption:=rsAsteroid;
 Button1.caption:=rsFilter;
 Button2.caption:=rsFilter;
+Button3.Caption:=rsDownloadTLE;
 Solar.caption:=rsSolarEclipse;
 Lunar.caption:=rsLunarEclipse;
 Satellites.caption:=rsArtificialSa;
@@ -383,9 +388,9 @@ Label8.caption:=rsChart2;
 Label7.caption:=rsLimitingMagn;
 Label6.caption:='TLE';
 tle1.text:='visible.tle';
-fullday.caption:='Include day time pass';
-IridiumBox.caption:='Include Iridium flare';
-SatChartBox.caption:='For current chart only';
+fullday.caption:=rsIncludeDayTi;
+IridiumBox.caption:=rsIncludeIridi;
+SatChartBox.caption:=rsForCurrentCh;
 appmsg[1]:=rsRA;
 appmsg[2]:=rsDE;
 appmsg[3]:=rsMagn;
@@ -960,7 +965,7 @@ if not fileexists(slash(satdir)+'visible.tle') then CopyFile(srcdir+'sample.tle'
 if not fileexists(slash(satdir)+'quicksat.mag') then CopyFile(srcdir+'quicksat.mag', wrkdir+'quicksat.mag');
 SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,SatChartBox.Checked);
 if not Fileexists(slash(SatDir)+'satlist.txt') then begin
-  Showmessage('Cannot compute satellites.');
+  Showmessage(rsCannotComput);
   exit;
 end;
 Assignfile(f,slash(SatDir)+'satlist.txt');
@@ -2005,7 +2010,7 @@ begin {BtnCopyClipClick}
    spreadsheet}
   grid := nil;
   case pagecontrol1.ActivePage.TabIndex of
-    0 : Grid:=TwilightGrid;
+//    0 : Grid:=TwilightGrid;
     1 : case pagecontrol2.ActivePage.TabIndex of
       0  : Grid:=SoleilGrid;
       1  : Grid:=MercureGrid;
@@ -2020,7 +2025,7 @@ begin {BtnCopyClipClick}
       10 : Clipboard.Assign(PlanetGraphs[dgPlanet.Selection.Top+1]);
       end {case};
   else
-    ShowMessage('Sorry, copy is not yet implemented for this page');
+    ShowMessage(rsSorryCopyIsN);
   end {case};
   if assigned(grid) then begin
     buf:=config.ObsName;
@@ -2052,27 +2057,27 @@ begin {BtnCopyClipClick}
           AddToBuff([rad2deg*ra/15, rad2deg*dec])
       else
         buf := buf + tab + tab;
-      if assigned(grid.Objects[3,i]) then
+      if (grid.ColCount>=4) and assigned(grid.Objects[3,i]) then
         with grid.Objects[3,i] as TObjCoord do
           AddToBuff([jd, ra, dec])
       else
         buf := buf + tab + tab + tab;
-      if assigned(grid.Objects[6,i]) then
+      if (grid.ColCount>=7) and assigned(grid.Objects[6,i]) then
         with grid.Objects[6,i] as TObjCoord do
           AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
       else
         buf := buf + tab;
-      if assigned(grid.Objects[7,i]) then
+      if (grid.ColCount>=8) and assigned(grid.Objects[7,i]) then
         with grid.Objects[7,i] as TObjCoord do
           AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
       else
         buf := buf + tab;
-      if assigned(grid.Objects[8,i]) then
+      if (grid.ColCount>=9) and assigned(grid.Objects[8,i]) then
         with grid.Objects[8,i] as TObjCoord do
           AddToBuff([frac(jd-0.5+config.tz.SecondsOffset/(3600*24))])
       else
         buf := buf + tab;
-      if assigned(grid.Objects[9,i]) then
+      if (grid.ColCount>=10) and assigned(grid.Objects[9,i]) then
         with grid.Objects[9,i] as TObjCoord do
           AddToBuff([ra, dec])
       else

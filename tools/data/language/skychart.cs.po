@@ -432,6 +432,10 @@ msgstr "Storno %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Storno, chybný soubor zip ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNelze otevřít databázi %s! %s"
@@ -1276,6 +1280,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "Stáhnout aktuální orbitální elementy"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Přejete si uložit nastavení programu?"
@@ -1612,6 +1620,10 @@ msgstr ""
 msgid "Flamsteed number"
 msgstr "Flamsteed číslo"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Písma"
@@ -1619,6 +1631,10 @@ msgstr "Písma"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Pro obsáhlé katalogy vyberte binární. Pro malé katalogy, které se často mění, vyberte textový (je možná přímá editace)."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1725,6 +1741,10 @@ msgstr "Kulová hvězdokupa"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Grafické"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1842,6 +1862,10 @@ msgstr ""
 msgid "Icon time display"
 msgstr ""
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Osvětl."
@@ -1865,6 +1889,14 @@ msgstr "Sklon"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Sklon="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2956,6 +2988,14 @@ msgstr "Zadejte prosím název katalogu"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Zadejte prosím adresář, kde má být katalog vytvořen"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Vložte prosím CD RealSky256"
@@ -3384,6 +3424,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satelit"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Prstence"
@@ -3774,6 +3818,10 @@ msgstr "Některé záznamy byly zamítnuty, detaily naleznete v souboru %sreject
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
+msgstr ""
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
 msgstr ""
 
 #: u_translation.rssortby

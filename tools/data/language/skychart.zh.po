@@ -433,6 +433,10 @@ msgstr "取消 %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "取消，错误 zip 文件？ %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%s不能打开数据库 %s！%s"
@@ -1277,6 +1281,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "下载最新轨道根数"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "现在保存程序设定？"
@@ -1613,6 +1621,10 @@ msgstr ""
 msgid "Flamsteed number"
 msgstr "佛氏星号"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "字体"
@@ -1620,6 +1632,10 @@ msgstr "字体"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "对于大星表总是选择二进制。对于小数据经常更改选择文本，编辑文件和看结果直接在星表上而不需要再运行此应用程序。"
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1726,6 +1742,10 @@ msgstr "球状星团"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "图形"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1843,6 +1863,10 @@ msgstr ""
 msgid "Icon time display"
 msgstr ""
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "照明率"
@@ -1866,6 +1890,14 @@ msgstr "倾角"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "倾角="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2957,6 +2989,14 @@ msgstr "请指出星表长名称"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "请指出可以建立星表的目录"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "请安放 RealSky256 光盘号"
@@ -3385,6 +3425,10 @@ msgstr "沙罗周期"
 msgid "Satellite"
 msgstr "卫星"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "土星环"
@@ -3776,6 +3820,10 @@ msgstr "若干记录被拒绝，见文件 %sreject.txt 详细资料"
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "程序初始化期间发生某些故障，现在必须关闭。"
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

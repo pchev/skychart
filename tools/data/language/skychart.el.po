@@ -449,6 +449,10 @@ msgstr "Ακύρωση %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr ""
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr ""
@@ -1351,6 +1355,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "Κατέβασμα στοιχείων τροχιών πλανητών"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr ""
@@ -1707,12 +1715,20 @@ msgstr ""
 msgid "Flamsteed number"
 msgstr "Αριθμός Flamsteed"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Γραμματοσειρές"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
+msgstr ""
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
 msgstr ""
 
 #: u_translation.rsfov
@@ -1837,6 +1853,10 @@ msgstr "Σφαιρωτό σμήνος"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
+msgstr ""
+
+#: u_translation.rsgraphs
+msgid "Graphs"
 msgstr ""
 
 #: u_translation.rsgravitationa
@@ -1965,6 +1985,10 @@ msgstr ""
 msgid "Icon time display"
 msgstr ""
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr ""
@@ -1987,6 +2011,14 @@ msgstr ""
 
 #: u_translation.rsinclination2
 msgid "Inclination="
+msgstr ""
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
 msgstr ""
 
 #: u_translation.rsincrementfor
@@ -3093,6 +3125,14 @@ msgstr ""
 msgid "Please indicate the directory where the catalog must be built"
 msgstr ""
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr ""
@@ -3520,6 +3560,10 @@ msgstr ""
 #: u_translation.rssatellite
 msgid "Satellite"
 msgstr "Δορυφόρος"
+
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -3971,6 +4015,10 @@ msgstr ""
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
+msgstr ""
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
 msgstr ""
 
 #: u_translation.rssortby

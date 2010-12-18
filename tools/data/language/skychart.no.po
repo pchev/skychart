@@ -431,6 +431,10 @@ msgstr "Avbrytl %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Avbryt, feil zip-fil ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sKan ikke åpne database %s! %s"
@@ -1273,6 +1277,10 @@ msgstr "Nedlastingsfil"
 msgid "Download the latest orbital elements"
 msgstr "Last ned de siste bane-elementer"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Vil du lagre programinnstillingene nå?"
@@ -1609,6 +1617,10 @@ msgstr "Fast himmelfarge"
 msgid "Flamsteed number"
 msgstr "Flamsteed nr."
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Skrifttyper"
@@ -1616,6 +1628,10 @@ msgstr "Skrifttyper"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "For en stor katalog, velg alltid binær. For et lite datasett som endres ofte, velg Tekst. Dette gjør det mulig å redigere filen og se resultatet umiddelbart på kartet uten å måtte kjøre verktøyet på nytt."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1722,6 +1738,10 @@ msgstr "Kulehoper"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Grafisk"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1839,6 +1859,10 @@ msgstr "Ikonstørrelse"
 msgid "Icon time display"
 msgstr "Ikon tid visning"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Belys."
@@ -1862,6 +1886,14 @@ msgstr "Inklinasjon"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Inklinasjon="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2953,6 +2985,14 @@ msgstr "Indiker en katalogs 'langt navn'"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Indiker mappen hvor katalogen må opprettes"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Monter RealSky CD nummer"
@@ -3381,6 +3421,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satellitt"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Sat. ring"
@@ -3772,6 +3816,10 @@ msgstr "Noen oppføringer ble avvist, se filen %sreject.txt for detaljer."
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Noe gikk galt under initialiseringen av progammet. Programmet må lukkes."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

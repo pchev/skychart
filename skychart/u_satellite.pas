@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_util, u_projection, u_constant, math, FileUtil,
+uses u_translation, u_util, u_projection, u_constant, math, FileUtil,
   Classes, SysUtils, Dialogs;
 
 Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
@@ -63,7 +63,8 @@ if not result then begin
      buf:='';
      for j:=0 to r.Count-1 do  buf:=buf+r[j];
    end else buf:='';
-   ShowMessage('Please install "wine" http://www.winehq.org/ to compute artificial satellites on your computer.'+crlf+'If it is not installed try the following depending on your system:'+crlf+'apt-get install wine'+crlf+'yum install wine'+crlf+'wine return: '+buf);
+   ShowMessage(rsPleaseInstWine+crlf+rsIfItIsNotIns+crlf+'apt-get install wine'+crlf
+     +'yum install wine'+crlf+'wine return: '+buf);
 end;
 r.free;
 end;
@@ -82,7 +83,9 @@ if not result then begin
      buf:='';
      for j:=0 to r.Count-1 do  buf:=buf+r[j];
    end else buf:='';
-   ShowMessage('Please install "Dosbox" http://www.dosbox.com/ to compute Iridium flares on your computer.'+crlf+'If it is not installed try the following depending on your system:'+crlf+'apt-get install dosbox'+crlf+'yum install dosbox'+crlf+'dosbox return: '+buf);
+   ShowMessage(rsPleaseInstDosbox+crlf+rsIfItIsNotIns+crlf+'apt-get install dosbox'
+     +crlf+'yum '
+       +'install dosbox'+crlf+'dosbox return: '+buf);
 end;
 r.free;
 end;

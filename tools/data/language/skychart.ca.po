@@ -432,6 +432,10 @@ msgstr "Anul·la %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Anul·la, arxiu zip dolent ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNo puc obrir la base de dades %s! %s"
@@ -1280,6 +1284,10 @@ msgstr "Descarrega el fitxer"
 msgid "Download the latest orbital elements"
 msgstr "Descarrega els elements orbitals"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Voleu desar ara les opcions del programa?"
@@ -1616,6 +1624,10 @@ msgstr "Color del cel fix"
 msgid "Flamsteed number"
 msgstr "Número de Flamsteed"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Tipus de lletres"
@@ -1623,6 +1635,10 @@ msgstr "Tipus de lletres"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Per a un catàleg gran escolliu sempre Binari. Per a un de petit amb canvis freqüents de dades, trieu Text; això permet modificar el fitxer i veure immediatement el resultat sense processar-lo de nou."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1729,6 +1745,10 @@ msgstr "Cúmuls globulars"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Gràfic"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1846,6 +1866,10 @@ msgstr "Mida de la icona"
 msgid "Icon time display"
 msgstr "Mostra la icona de l'hora"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Il·lum."
@@ -1869,6 +1893,14 @@ msgstr "Inclinació"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Inclinació="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2960,6 +2992,14 @@ msgstr "Si us plau, indiqueu un nom llarg del catàleg"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Indiqueu el directori on s'ha de construir el catàleg"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Si us plau, entreu el CD-ROM Realsky256 número"
@@ -3388,6 +3428,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satèl·lit"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Anells de Saturn"
@@ -3779,6 +3823,10 @@ msgstr "Alguns registres de gravació han estat rebutjats, vegeu el fitxer  %sre
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Alguna cosa ha anat malament en iniciar el programa. Cal tancar-lo ara"
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

@@ -431,6 +431,10 @@ msgstr "Annuleer %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Annuleren, verkeerde zip bestand?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sKan niet de database %s openen! %s"
@@ -1274,6 +1278,10 @@ msgstr "Download bestand"
 msgid "Download the latest orbital elements"
 msgstr "Download de laatste baanelementen"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Wilt u de programma-instellingen nu opslaan?"
@@ -1610,6 +1618,10 @@ msgstr "Vaste hemelkleur"
 msgid "Flamsteed number"
 msgstr "Flamsteed nummer"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Fonts"
@@ -1617,6 +1629,10 @@ msgstr "Fonts"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogus'. Voor een kleine dataset die frequent verandert, selecteer 'Tekstbestand catalogus'. Dit maakt het mogelijk het bestand te bewerken en het resultaat onmiddelijk op de kaart toonbaar te maken zonder de noodzaak deze utility nog eens te draaien."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1723,6 +1739,10 @@ msgstr "Bolvorm. sterrenhoop"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Grafisch"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1840,6 +1860,10 @@ msgstr "Icoon grootte"
 msgid "Icon time display"
 msgstr "Icoon tijdweergave"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Verlicht"
@@ -1863,6 +1887,14 @@ msgstr "Inclinatie"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Inclinatie="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2954,6 +2986,14 @@ msgstr "Geef alstublieft een catalogus 'long name'"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Geef alstublieft de map op waar de catalogus samengesteld moet worden"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Voer alstublieft RealSky256 CD in"
@@ -3382,6 +3422,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satelliet"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Sat. ring"
@@ -3773,6 +3817,10 @@ msgstr "Sommige records zijn geweigerd, zie bestand %sreject.txt voor details."
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Iets is fout gegaan tijdens de programma-initialisatie. Het programma moet nu sluiten."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"
