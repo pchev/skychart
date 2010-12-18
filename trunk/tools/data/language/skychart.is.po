@@ -507,6 +507,10 @@ msgstr "Hætta %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Hætta, röng zip skrá ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sGet ekki opnað gagnagrunn %s! %s"
@@ -1537,6 +1541,10 @@ msgstr ""
 msgid "Download the latest orbital elements"
 msgstr "Ná í síðustu brautarstika"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 #, fuzzy
 #| msgid "Do you want to save the program setting now?"
@@ -1941,6 +1949,10 @@ msgstr "Fastur litur himins"
 msgid "Flamsteed number"
 msgstr "Flamsteed númer"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Stafagerðir"
@@ -1950,6 +1962,10 @@ msgstr "Stafagerðir"
 #| msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Fyrir stóra skrá skal alltaf velja tvíundarkerfi. Fyrir litla töflu sem breytist ört skal velja texta svo að þú getir breytt skránni og séð samstundis hvað breytist á kortinu án þess að þurfa að fara í gegnum þetta ferli."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2080,6 +2096,10 @@ msgstr "Kúluþyrping"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Grafík"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -2221,6 +2241,10 @@ msgstr "Stærð táknmyndar"
 msgid "Icon time display"
 msgstr ""
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Uppl."
@@ -2250,6 +2274,14 @@ msgstr "Halli"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Halli="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 #, fuzzy
@@ -3549,6 +3581,14 @@ msgstr "Vinsamlegast settu inn allt heiti skrárinnar"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Vinsamlega skráðu inn möppuna þar sem skráin verður sett inn"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 #, fuzzy
 #| msgid "Please mount RealSky256 CD number"
@@ -4057,6 +4097,10 @@ msgstr "My.öld"
 msgid "Satellite"
 msgstr "Gervihnöttur"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 #, fuzzy
 #| msgid "Sat.Ring"
@@ -4562,6 +4606,10 @@ msgstr "Sumum færslum var hafnað, upplýsingar eru í %sreject.txt"
 #| msgid "Something go wrong during program initialization. We must now close"
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Eitthvað fór úrskeiðis við innsetningu forritsins. Það verður að hætta"
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

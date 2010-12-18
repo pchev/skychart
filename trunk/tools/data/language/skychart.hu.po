@@ -469,6 +469,10 @@ msgstr "Megszakít %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Megszakítás, hibás zip fájl? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
@@ -1403,6 +1407,10 @@ msgstr "File letöltése"
 msgid "Download the latest orbital elements"
 msgstr "A legutóbbi pályaelemek letöltése"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 #| msgid "Do you want to save the program setting now?"
 msgid "Do you want to save the program settings now?"
@@ -1773,6 +1781,10 @@ msgstr "Az ég beállított színe"
 msgid "Flamsteed number"
 msgstr "Flamsteed szám"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Betütípus"
@@ -1781,6 +1793,10 @@ msgstr "Betütípus"
 #| msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb, gyakran használt adatmennyiség esetén válszd a szövegfájl típust. Ez lehetőséget ad az eredmény azonnali ellenőrzésére a térképen. "
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1898,6 +1914,10 @@ msgstr "Gömbhalmaz"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Grafika"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -2029,6 +2049,10 @@ msgstr "Ikon mérete"
 msgid "Icon time display"
 msgstr "Idő megjelenítése a tálcán"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Megvil."
@@ -2055,6 +2079,14 @@ msgstr "Pályahajlás - i"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Pályahajlás="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 #| msgid "Increment for Bright Stars"
@@ -3244,6 +3276,14 @@ msgstr "Add meg a katalógus hosszú nevét"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Jelöld ki a könyvtárat ahol a katalógust fel kell építeni"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr ""
@@ -3711,6 +3751,10 @@ msgstr "Szárosz"
 msgid "Satellite"
 msgstr "Satellite"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 #| msgid "Sat.Ring"
 msgid "Sat. ring"
@@ -4157,6 +4201,10 @@ msgstr "Néhány record nem lett elfogadva, ellenőrizd a %s reject.txt fájlban
 #| msgid "Something go wrong during program initialization. We must now close"
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "A program betöltése során hiba történt. A program most bezár."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

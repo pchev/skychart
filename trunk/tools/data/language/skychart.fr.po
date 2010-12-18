@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-21 14:22+0100\n"
-"Last-Translator: pch <pch@ap-i.net>\n"
+"PO-Revision-Date: 2010-12-18 15:38+0100\n"
+"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -433,6 +433,10 @@ msgstr "Annuler %s"
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Annuler, mauvais fichier zip ?? %s"
+
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr "Ne peut pas calculer les satellites."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -1278,6 +1282,10 @@ msgstr "Télécharger le fichier"
 msgid "Download the latest orbital elements"
 msgstr "Télécharger les éléments orbitaux"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr "Télécharger TLE"
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Voulez-vous enregistrer les options du programme maintenant?"
@@ -1614,6 +1622,11 @@ msgstr "Couleur du ciel"
 msgid "Flamsteed number"
 msgstr "Numéro de Flamsteed"
 
+#: u_translation.rsflarepredict
+#| msgid "flare prediction:"
+msgid "Iridium flare prediction:"
+msgstr "Prévision des flash Iridium:"
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Police de caractères"
@@ -1621,6 +1634,10 @@ msgstr "Police de caractères"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Pour un gros catalogue toujours choisir Binaire. Pour un petit dont les données changent fréquement choisir Texte, cela permet de modifier le fichier et de voir immédiatement le résultat sans avoir à le retraiter."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr "Pour la carte courante"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1727,6 +1744,10 @@ msgstr "Amas globulaire"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Graphique"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr "Graphiques"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1844,6 +1865,10 @@ msgstr "Taille de l'icône"
 msgid "Icon time display"
 msgstr "Affichage de l'heure dans l'icône"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr "Si il n'est pas installé, essayez les commandes suivantes selon votre système:"
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -1867,6 +1892,14 @@ msgstr "Inclinaison"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Inclinaison="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr "Inclure les flash de jour"
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr "Inclure les flash Iridium"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2958,6 +2991,14 @@ msgstr "Veuillez indiquer un nom long du catalogue"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Veuillez indiquer le répertoire où construire le catalogue"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr "Veuillez installer \"Dosbox\" http://www.dosbox.com/  pour calculer les flash Iridium"
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr "Veuillez installer wine http://www.winehq.org/  pour calculer les satellites artificiels."
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Veuillez monter le CDrom Realsky256 numéro"
@@ -3386,6 +3427,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satellite"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr "Calcul des satellites:"
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Anneau de saturne"
@@ -3777,6 +3822,10 @@ msgstr "Certain enregistrement ont été refusé, voir le fichier %sreject.txt p
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Quelque chose n'a pas fonctionné lors de l'initialisation du programme. Il va maintenant être fermer."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr "Désolé mais la copie n'est pas encore implémentée pour cette page."
 
 #: u_translation.rssortby
 msgid "Sort by"
@@ -4453,4 +4502,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

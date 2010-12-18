@@ -117,12 +117,9 @@
         <UnitName Value="cdc"/>
       </Unit0>
       <Unit1>
-        <Filename Value="pu_main.pas"/>
+        <Filename Value="u_satellite.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_main"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_main"/>
+        <UnitName Value="u_satellite"/>
       </Unit1>
       <Unit2>
         <Filename Value="cu_telescope.pas"/>
@@ -448,9 +445,12 @@
         <UnitName Value="pu_ascomclient"/>
       </Unit48>
       <Unit49>
-        <Filename Value="u_satellite.pas"/>
+        <Filename Value="pu_main.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="u_satellite"/>
+        <ComponentName Value="f_main"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_main"/>
       </Unit49>
     </Units>
   </ProjectOptions>

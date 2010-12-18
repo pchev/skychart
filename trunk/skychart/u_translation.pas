@@ -1126,6 +1126,20 @@ resourcestring
   rsPutTheFilesW = 'Put the files with a .tle extention to the %s folder';
   rsBeSureTheyUs = 'Be sure they use a DOS line end format.';
   rsCleanupMap = 'Cleanup map';
+  rsGraphs = 'Graphs';
+  rsSatellitesCa = 'Satellites calculation:';
+  rsFlarePredict = 'Iridium flare prediction:';
+  rsIncludeDayTi = 'Include day time pass';
+  rsIncludeIridi = 'Include Iridium flare';
+  rsForCurrentCh = 'For current chart only';
+  rsCannotComput = 'Cannot compute satellites.';
+  rsPleaseInstWine = 'Please install wine http://www.winehq.org/ to compute artificial satellites on your computer.';
+  rsPleaseInstDosbox = 'Please install "Dosbox" http://www.dosbox.com/ to compute '
+    +'Iridium flares on your computer.';
+  rsIfItIsNotIns =  'If it is not installed try the following depending on '
+    +'your system:';
+  rsSorryCopyIsN = 'Sorry, copy is not yet implemented for this page';
+  rsDownloadTLE = 'Download TLE';
 
 implementation
 

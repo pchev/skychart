@@ -432,6 +432,10 @@ msgstr "Prekliči %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Prekliči, napačna zip datoteka ?? %s"
 
+#: u_translation.rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNe morem odpreti podatkovne zbirke %s! %s"
@@ -1276,6 +1280,10 @@ msgstr "Prenesite datoteko"
 msgid "Download the latest orbital elements"
 msgstr "Prenesi zadnje poti satelita"
 
+#: u_translation.rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Hočete sedaj shraniti nastavitve programa?"
@@ -1612,6 +1620,10 @@ msgstr "Stalna barva neba"
 msgid "Flamsteed number"
 msgstr "Flamsteedovo število"
 
+#: u_translation.rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Pisave"
@@ -1619,6 +1631,10 @@ msgstr "Pisave"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Za velik katalog, vedno izberi Binary. Za male podatkovne nize, ki se pogosto spreminjajo, izberi Text. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
+
+#: u_translation.rsforcurrentch
+msgid "For current chart only"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1725,6 +1741,10 @@ msgstr "Kroglaste kopice"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Slikovit"
+
+#: u_translation.rsgraphs
+msgid "Graphs"
+msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1842,6 +1862,10 @@ msgstr "Velikost ikone"
 msgid "Icon time display"
 msgstr "Prikaz časa ikone"
 
+#: u_translation.rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
 #: u_translation.rsillum
 msgid "Illum."
 msgstr "Illum."
@@ -1865,6 +1889,14 @@ msgstr "Nagib"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Nagib="
+
+#: u_translation.rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation.rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2956,6 +2988,14 @@ msgstr "Prosim navedi dolgo ime kataloga"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Prosim navedi imenik, kjer se naj ustvari katalog"
 
+#: u_translation.rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation.rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Prosim pridružite RealSky CD številko"
@@ -3384,6 +3424,10 @@ msgstr "Saros"
 msgid "Satellite"
 msgstr "Satelit"
 
+#: u_translation.rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
 #: u_translation.rssatring
 msgid "Sat. ring"
 msgstr "Sat. krog"
@@ -3775,6 +3819,10 @@ msgstr "Nekaz zapisov je bilo zvarjenih, za podrobnosti glej datoteko %sreject.t
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Nekaj je šlo narobe pri zagonu programa. Zapiram program."
+
+#: u_translation.rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"

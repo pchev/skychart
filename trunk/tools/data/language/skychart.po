@@ -4430,3 +4430,51 @@ msgstr ""
 msgid "Cleanup map"
 msgstr ""
 
+#: u_translation:rsgraphs
+msgid "Graphs"
+msgstr ""
+
+#: u_translation:rssatellitesca
+msgid "Satellites calculation:"
+msgstr ""
+
+#: u_translation:rsflarepredict
+msgid "Iridium flare prediction:"
+msgstr ""
+
+#: u_translation:rsincludedayti
+msgid "Include day time pass"
+msgstr ""
+
+#: u_translation:rsincludeiridi
+msgid "Include Iridium flare"
+msgstr ""
+
+#: u_translation:rsforcurrentch
+msgid "For current chart only"
+msgstr ""
+
+#: u_translation:rscannotcomput
+msgid "Cannot compute satellites."
+msgstr ""
+
+#: u_translation:rspleaseinstwine
+msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgstr ""
+
+#: u_translation:rspleaseinstdosbox
+msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgstr ""
+
+#: u_translation:rsifitisnotins
+msgid "If it is not installed try the following depending on your system:"
+msgstr ""
+
+#: u_translation:rssorrycopyisn
+msgid "Sorry, copy is not yet implemented for this page"
+msgstr ""
+
+#: u_translation:rsdownloadtle
+msgid "Download TLE"
+msgstr ""
+

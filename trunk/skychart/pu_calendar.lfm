@@ -26,9 +26,9 @@ object f_calendar: Tf_calendar
     TabOrder = 0
     object Label1: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 19
+      Width = 30
       Caption = 'From'
       Color = clBtnFace
       ParentColor = False
@@ -36,9 +36,9 @@ object f_calendar: Tf_calendar
     end
     object Label2: TLabel
       Left = 184
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 7
+      Width = 11
       Caption = 'to'
       Color = clBtnFace
       ParentColor = False
@@ -46,9 +46,9 @@ object f_calendar: Tf_calendar
     end
     object Label5: TLabel
       Left = 30
-      Height = 11
+      Height = 15
       Top = 46
-      Width = 7
+      Width = 11
       Caption = 'at'
       Color = clBtnFace
       ParentColor = False
@@ -56,9 +56,9 @@ object f_calendar: Tf_calendar
     end
     object Label3: TLabel
       Left = 185
-      Height = 11
+      Height = 15
       Top = 46
-      Width = 13
+      Width = 22
       Caption = 'pas'
       Color = clBtnFace
       ParentColor = False
@@ -66,9 +66,9 @@ object f_calendar: Tf_calendar
     end
     object Label4: TLabel
       Left = 256
-      Height = 11
+      Height = 15
       Top = 46
-      Width = 18
+      Width = 29
       Caption = 'jours'
       Color = clBtnFace
       ParentColor = False
@@ -79,22 +79,23 @@ object f_calendar: Tf_calendar
       Left = 8
       Height = 34
       Top = 32
-      Width = 273
+      Width = 305
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 273
+      ClientWidth = 305
       FullRepaint = False
       TabOrder = 10
       Visible = False
       OnClick = SatPanelClick
       object Label9: TLabel
         Cursor = crHandPoint
-        Left = 1
-        Height = 11
+        Left = 0
+        Height = 34
         Hint = 'http://users2.ev1.net/~mmccants/'
-        Top = 4
-        Width = 354
+        Top = 0
+        Width = 305
+        Align = alClient
         Caption = 'Satellites calculation use QuickSat by Mike McCants, Iridium flare prediction use Iridflar by Robert Matson'
         ParentColor = False
         ParentShowHint = False
@@ -109,7 +110,7 @@ object f_calendar: Tf_calendar
       Height = 34
       Hint = 'http://sunearth.gsfc.nasa.gov/eclipse/eclipse.html'
       Top = 32
-      Width = 273
+      Width = 305
       Alignment = taLeftJustify
       BevelOuter = bvNone
       Caption = 'Eclipse Predictions by Fred Espenak, NASA/GSFC'
@@ -122,7 +123,7 @@ object f_calendar: Tf_calendar
     end
     object step: TLongEdit
       Left = 216
-      Height = 18
+      Height = 22
       Hint = '1..9999'
       Top = 41
       Width = 33
@@ -135,7 +136,7 @@ object f_calendar: Tf_calendar
     end
     object Date1: TJDDatePicker
       Left = 72
-      Height = 18
+      Height = 22
       Top = 8
       Width = 80
       ButtonWidth = 23
@@ -191,13 +192,13 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2010.11.30.01'
+      Text = '2010.12.18.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
     object Date2: TJDDatePicker
       Left = 205
-      Height = 18
+      Height = 22
       Top = 8
       Width = 80
       ButtonWidth = 23
@@ -253,7 +254,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2010.11.30.01'
+      Text = '2010.12.18.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -610,9 +611,9 @@ object f_calendar: Tf_calendar
           ClientWidth = 749
           object dgPlanet: TDrawGrid
             Left = 0
-            Height = 262
+            Height = 316
             Top = 0
-            Width = 830
+            Width = 749
             Align = alClient
             ColCount = 1
             DefaultColWidth = 800
@@ -824,49 +825,51 @@ object f_calendar: Tf_calendar
         ClientWidth = 753
         TabOrder = 1
         object Label8: TLabel
-          Left = 192
-          Height = 14
-          Top = 4
-          Width = 27
+          Left = 124
+          Height = 15
+          Top = 32
+          Width = 32
+          Alignment = taRightJustify
           Caption = 'map :'
           ParentColor = False
         end
         object Label7: TLabel
-          Left = 0
-          Height = 14
+          Left = 30
+          Height = 15
           Top = 4
-          Width = 107
+          Width = 126
+          Alignment = taRightJustify
           Caption = 'Magnitude limite, liste :'
           ParentColor = False
         end
         object Label6: TLabel
-          Left = 288
-          Height = 14
-          Top = 6
-          Width = 25
+          Left = 232
+          Height = 15
+          Top = 4
+          Width = 29
           Caption = 'TLE :'
           ParentColor = False
         end
         object tle1: TEdit
-          Left = 232
-          Height = 21
-          Top = 28
+          Left = 230
+          Height = 22
+          Top = 29
           Width = 97
           TabOrder = 0
           Text = 'visible.tle'
         end
         object fullday: TCheckBox
-          Left = 8
+          Left = 462
           Height = 23
-          Top = 24
-          Width = 129
+          Top = 28
+          Width = 145
           Caption = 'Include day time pass'
           TabOrder = 2
         end
         object TLEListBox: TFileListBox
-          Left = 344
+          Left = 342
           Height = 56
-          Top = 6
+          Top = 4
           Width = 110
           Directory = '/home/compiler/lazarus'
           ItemHeight = 0
@@ -879,16 +882,16 @@ object f_calendar: Tf_calendar
           Left = 461
           Height = 23
           Top = 4
-          Width = 123
+          Width = 140
           Caption = 'Include Iridium flares'
           OnChange = IridiumBoxChange
           TabOrder = 5
         end
         object magchart: TFloatEdit
-          Left = 232
-          Height = 21
+          Left = 166
+          Height = 22
           Hint = '0..99'
-          Top = 0
+          Top = 29
           Width = 33
           ParentShowHint = False
           ShowHint = True
@@ -898,17 +901,17 @@ object f_calendar: Tf_calendar
           MaxValue = 99
         end
         object SatChartBox: TCheckBox
-          Left = 461
+          Left = 630
           Height = 23
-          Top = 32
-          Width = 122
+          Top = 28
+          Width = 131
           Caption = 'in current chart only'
           TabOrder = 3
           Visible = False
         end
         object maglimit: TFloatEdit
-          Left = 144
-          Height = 21
+          Left = 166
+          Height = 22
           Hint = '0..99'
           Top = 0
           Width = 33
@@ -921,13 +924,20 @@ object f_calendar: Tf_calendar
           MaxValue = 99
         end
         object Button3: TButton
-          Left = 614
+          Left = 630
           Height = 25
-          Top = 4
+          Top = 2
           Width = 115
           Caption = 'Download TLE'
           OnClick = Button3Click
           TabOrder = 7
+        end
+        object Bevel1: TBevel
+          Left = 221
+          Height = 62
+          Top = 2
+          Width = 233
+          Style = bsRaised
         end
       end
     end
