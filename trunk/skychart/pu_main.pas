@@ -59,7 +59,9 @@ type
     MenuItem29: TMenuItem;
     MenuItem30: TMenuItem;
     ThemeTimer: TTimer;
+    AnimationTimer: TTimer;
     TimeVal: TUpDown;
+    ToolButton13: TToolButton;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -431,6 +433,7 @@ type
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
+    procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
     procedure BugReport1Click(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
@@ -468,6 +471,9 @@ type
     procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ThemeTimerTimer(Sender: TObject);
+    procedure ToolButton13Click(Sender: TObject);
+    procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
@@ -616,7 +622,7 @@ type
     ConfigCatalog: Tf_config_catalog;
     cryptedpwd,basecaption :string;
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig : Boolean;
-    InitialChartNum: integer;
+    InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
@@ -2085,6 +2091,68 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_LessNeb;
 end;
 
+procedure Tf_main.ToolButton13Click(Sender: TObject);
+var fs : TSearchRec;
+    i: integer;
+    r: TStringList;
+    fn,cmd: string;
+begin
+if ToolButton13.Down then begin  // start animation
+   if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
+     r:=TStringList.Create;
+     cmd:='RESIZE '+inttostr(cfgm.AnimSx)+' '+inttostr(cfgm.AnimSy);
+     splitarg(cmd,blank,r);
+     for i:=r.count to MaxCmdArg do r.add('');
+     ExecuteCmd('',r);
+     r.free;
+   end;
+   Animcount:=0;
+   if cfgm.AnimRec then begin
+      i:=findfirst(slash(TempDir)+'*.jpg',0,fs);
+      while i=0 do begin
+        DeleteFile(slash(TempDir)+fs.name);
+        i:=findnext(fs);
+      end;
+      findclose(fs);
+   end;
+end else begin                   // end animation
+   if cfgm.AnimRec then begin
+      r:=TStringList.Create;
+      i:=0;
+      repeat
+        inc(i);
+        fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
+      until (not FileExists(fn))or(i>1000);
+      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i '+slash(TempDir)+'%06d.jpg '+fn;
+      ExecProcess(cmd,r,true);
+      r.free;
+   end;
+end;
+AnimationTimer.Enabled:=ToolButton13.Down;
+end;
+
+procedure Tf_main.ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupTimePage(2);
+end;
+
+procedure Tf_main.AnimationTimerTimer(Sender: TObject);
+var fn:string;
+begin
+  AnimationTimer.Enabled:=false;
+  TimeInc.Execute;
+  if cfgm.AnimRec then begin
+    if MultiDoc1.ActiveObject  is Tf_chart then
+     with MultiDoc1.ActiveObject as Tf_chart do begin
+         inc(Animcount);
+         fn:=Slash(TempDir)+FormatFloat('000000',Animcount)+'.jpg';
+         SaveChartImage('JPEG',fn,80);
+      end;
+  end;
+  AnimationTimer.Enabled:=true;
+end;
+
 procedure Tf_main.TimeIncExecute(Sender: TObject);
 var hh : double;
     y,m,d,h,n,s,mult : integer;
@@ -3342,6 +3410,7 @@ begin
       if cfgm.starshape_file<>cmain.starshape_file then
          starchange:=true;
       cfgm.Assign(cmain);
+      AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
     end;
     if themechange then SetTheme;
     if starchange then SetStarShape;
@@ -3639,6 +3708,17 @@ cfgm.SyncChart:=false;
 cfgm.ThemeName:='default';
 cfgm.ButtonStandard:=1;
 cfgm.ButtonNight:=2;
+cfgm.AnimDelay:=500;
+cfgm.AnimFps:=2.0;
+cfgm.AnimRec:=false;
+cfgm.AnimRecDir:=PrivateDir;
+cfgm.AnimRecPrefix:='skychart';
+cfgm.AnimRecExt:='.mp4';
+cfgm.Animffmpeg:=Defaultffmpeg;
+cfgm.AnimSx:=-1;
+cfgm.AnimSy:=-1;
+cfgm.AnimSize:=0;
+cfgm.AnimOpt:='-b 18000k -bt 10000k';
 cfgm.HttpProxy:=false;
 cfgm.FtpPassive:=true;
 cfgm.ConfirmDownload:=true;
@@ -4597,6 +4677,18 @@ cfgm.ShowTitlePos:=ReadBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
 cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
+cfgm.AnimDelay:=ReadInteger(section,'AnimDelay',cfgm.AnimDelay);
+AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
+cfgm.AnimFps:=ReadFloat(section,'AnimFps',cfgm.AnimFps);
+//cfgm.AnimRec:=ReadBool(section,'AnimRec',cfgm.AnimRec);
+cfgm.AnimRecDir:=ReadString(section,'AnimRecDir',cfgm.AnimRecDir);
+cfgm.AnimRecPrefix:=ReadString(section,'AnimRecPrefix',cfgm.AnimRecPrefix);
+cfgm.AnimRecExt:=ReadString(section,'AnimRecExt',cfgm.AnimRecExt);
+cfgm.Animffmpeg:=ReadString(section,'Animffmpeg',cfgm.Animffmpeg);
+cfgm.AnimSx:=ReadInteger(section,'AnimSx',cfgm.AnimSx);
+cfgm.AnimSy:=ReadInteger(section,'AnimSy',cfgm.AnimSy);
+cfgm.AnimSize:=ReadInteger(section,'AnimSize',cfgm.AnimSize);
+cfgm.AnimOpt:=ReadString(section,'AnimOpt',cfgm.AnimOpt);
 cfgm.HttpProxy:=ReadBool(section,'HttpProxy',cfgm.HttpProxy);
 cfgm.FtpPassive:=ReadBool(section,'FtpPassive',cfgm.FtpPassive);
 cfgm.ConfirmDownload:=ReadBool(section,'ConfirmDownload',cfgm.ConfirmDownload);
@@ -5175,6 +5267,17 @@ WriteBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 WriteBool(section,'SyncChart',cfgm.SyncChart);
 WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
+WriteInteger(section,'AnimDelay',cfgm.AnimDelay);
+WriteFloat(section,'AnimFps',cfgm.AnimFps);
+//WriteBool(section,'AnimRec',cfgm.AnimRec);
+WriteString(section,'AnimRecDir',cfgm.AnimRecDir);
+WriteString(section,'AnimRecPrefix',cfgm.AnimRecPrefix);
+WriteString(section,'AnimRecExt',cfgm.AnimRecExt);
+WriteString(section,'Animffmpeg',cfgm.Animffmpeg);
+WriteInteger(section,'AnimSx',cfgm.AnimSx);
+WriteInteger(section,'AnimSy',cfgm.AnimSy);
+WriteInteger(section,'AnimSize',cfgm.AnimSize);
+WriteString(section,'AnimOpt',cfgm.AnimOpt);
 WriteBool(section,'HttpProxy',cfgm.HttpProxy);
 WriteBool(section,'FtpPassive',cfgm.FtpPassive);
 WriteBool(section,'ConfirmDownload',cfgm.ConfirmDownload);
@@ -5983,7 +6086,8 @@ else begin
     if cmd='RESIZE' then begin // special case with action on main and on the chart
          w:=StrToIntDef(arg[1],child.Width);
          h:=StrToIntDef(arg[2],child.Height);
-         if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
+  //       if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
+         if (w>10)and(h>10) then begin
            Multidoc1.Maximized:=false;
            if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
            if HorScrollBar.Visible then h:=h+HorScrollBar.Height;

@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
-  ButtonPanel, jdcalendar, LazHelpHTML;
+  ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
 type
 
@@ -45,8 +45,32 @@ type
     BitBtn4: TButton;
     Button7: TButton;
     Button8: TButton;
+    Button9: TButton;
+    CheckBox3: TCheckBox;
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
+    ComboBox1: TComboBox;
+    DirectoryEdit1: TDirectoryEdit;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Edit5: TEdit;
+    FileNameEdit1: TFileNameEdit;
+    FloatSpinEdit1: TFloatSpinEdit;
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label10: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Page3: TTabSheet;
+    TrackBar1: TTrackBar;
     t_hour: TUpDown;
     d_yearEdit: TEdit;
     d_monthEdit: TEdit;
@@ -107,11 +131,22 @@ type
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure CheckBox3Change(Sender: TObject);
     procedure CheckGroup1ItemClick(Sender: TObject; Index: integer);
     procedure CheckGroup2ItemClick(Sender: TObject; Index: integer);
+    procedure ComboBox1Change(Sender: TObject);
     procedure DateEditChange(Sender: TObject);
+    procedure DirectoryEdit1Change(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure Edit2Change(Sender: TObject);
+    procedure Edit3Change(Sender: TObject);
+    procedure Edit4Change(Sender: TObject);
+    procedure Edit5Change(Sender: TObject);
+    procedure FileNameEdit1Change(Sender: TObject);
+    procedure FloatSpinEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -133,6 +168,7 @@ type
     procedure AllSimClick(Sender: TObject);
     procedure NoSimClick(Sender: TObject);
     procedure TimeEditChange(Sender: TObject);
+    procedure TrackBar1Change(Sender: TObject);
   private
     { Private declarations }
     LockChange, LockJD: boolean;
@@ -248,6 +284,7 @@ ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
 Button7.caption:=rsHelp;
 SetHelp(self,hlpCfgDate);
+Button9.Caption:=rsDefault;
 end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);
@@ -350,6 +387,18 @@ CheckGroup2.Checked[2]:=csc.SimDateDay;
 CheckGroup2.Checked[3]:=csc.SimDateHour;
 CheckGroup2.Checked[4]:=csc.SimDateMinute;
 CheckGroup2.Checked[5]:=csc.SimDateSecond;
+TrackBar1.Position:=cmain.AnimDelay;
+CheckBox3.Checked:=cmain.AnimRec;
+DirectoryEdit1.Directory:=cmain.AnimRecDir;
+Edit1.Text:=cmain.AnimRecPrefix;
+Edit5.Text:=cmain.AnimRecExt;
+FloatSpinEdit1.Value:=cmain.AnimFps;
+edit3.Text:=inttostr(cmain.AnimSx);
+edit4.Text:=inttostr(cmain.AnimSy);
+ComboBox1.ItemIndex:=cmain.AnimSize;
+ComboBox1Change(nil);
+edit2.Text := cmain.AnimOpt;
+FileNameEdit1.FileName:=cmain.Animffmpeg;
 end;
 
 procedure Tf_config_time.CheckBox1Click(Sender: TObject);
@@ -416,6 +465,11 @@ begin
 csc.AutoRefresh:=checkbox2.checked;
 end;
 
+procedure Tf_config_time.CheckBox3Change(Sender: TObject);
+begin
+  cmain.AnimRec := CheckBox3.Checked;
+end;
+
 procedure Tf_config_time.CheckGroup1ItemClick(Sender: TObject; Index: integer);
 begin
 if (not CheckGroup1.Checked[0])and(not CheckGroup1.Checked[1])and(not CheckGroup1.Checked[2])
@@ -433,6 +487,40 @@ csc.SimDateDay:=CheckGroup2.Checked[2];
 csc.SimDateHour:=CheckGroup2.Checked[3];
 csc.SimDateMinute:=CheckGroup2.Checked[4];
 csc.SimDateSecond:=CheckGroup2.Checked[5];
+end;
+
+procedure Tf_config_time.ComboBox1Change(Sender: TObject);
+begin
+cmain.AnimSize := ComboBox1.ItemIndex;
+if ComboBox1.ItemIndex=5 then begin
+   edit3.Enabled:=true;
+   edit4.Enabled:=true;
+end else begin
+  edit3.Enabled:=false;
+  edit4.Enabled:=false;
+end;
+case  ComboBox1.ItemIndex of
+  0: begin
+       edit3.text:='-1';
+       edit4.text:='-1';
+     end;
+  1: begin
+       edit3.text:='640';
+       edit4.text:='480';
+     end;
+  2: begin
+       edit3.text:='852';
+       edit4.text:='480';
+     end;
+  3: begin
+       edit3.text:='1280';
+       edit4.text:='720';
+     end;
+  4: begin
+       edit3.text:='1920';
+       edit4.text:='1080';
+     end;
+end;
 end;
 
 procedure Tf_config_time.FormClose(Sender: TObject;
@@ -487,6 +575,51 @@ JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
 end;
 
+procedure Tf_config_time.DirectoryEdit1Change(Sender: TObject);
+begin
+  cmain.AnimRecDir := DirectoryEdit1.Directory;
+end;
+
+procedure Tf_config_time.Edit1Change(Sender: TObject);
+begin
+  cmain.AnimRecPrefix := Edit1.Text;
+end;
+
+procedure Tf_config_time.Edit2Change(Sender: TObject);
+begin
+  cmain.AnimOpt:=edit2.Text;
+end;
+
+procedure Tf_config_time.Edit3Change(Sender: TObject);
+var i,n: integer;
+begin
+val(edit3.Text,i,n);
+if n=0 then cmain.AnimSx := i;
+end;
+
+procedure Tf_config_time.Edit4Change(Sender: TObject);
+var i,n: integer;
+begin
+val(edit4.Text,i,n);
+if n=0 then cmain.AnimSy := i;
+end;
+
+procedure Tf_config_time.Edit5Change(Sender: TObject);
+begin
+  cmain.AnimRecExt:=edit5.Text;
+  if copy(cmain.AnimRecExt,1,1)<>'.' then cmain.AnimRecExt:='.'+cmain.AnimRecExt
+end;
+
+procedure Tf_config_time.FileNameEdit1Change(Sender: TObject);
+begin
+  cmain.Animffmpeg:=FileNameEdit1.FileName;
+end;
+
+procedure Tf_config_time.FloatSpinEdit1Change(Sender: TObject);
+begin
+  cmain.AnimFps := FloatSpinEdit1.Value;
+end;
+
 procedure Tf_config_time.DateChange(Sender: TObject; Button: TUDBtnType);
 begin
 {$ifdef darwin}
@@ -504,6 +637,11 @@ tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
+end;
+
+procedure Tf_config_time.TrackBar1Change(Sender: TObject);
+begin
+  cmain.AnimDelay:=TrackBar1.Position;
 end;
 
 procedure Tf_config_time.TimeChange(Sender: TObject; Button: TUDBtnType);
@@ -596,6 +734,17 @@ if assigned(FGetTwilight) then begin
    end else
      ShowMessage(rsNoAstronomic);
 end;
+end;
+
+procedure Tf_config_time.Button9Click(Sender: TObject);
+begin
+  CheckBox3.Checked:=false;
+  DirectoryEdit1.Directory:=PrivateDir;
+  Edit1.Text:='skychart';
+  Edit5.Text:='.mp4';
+  FloatSpinEdit1.Value:=2.0;
+  ComboBox1.ItemIndex:=0;
+  Edit2.Text:='-b 1800k';
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);

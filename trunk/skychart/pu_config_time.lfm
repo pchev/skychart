@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 542
+  Left = 411
   Height = 564
-  Top = 0
+  Top = 168
   Width = 474
   ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
@@ -31,11 +31,11 @@ object f_config_time: Tf_config_time
       Height = 514
       Top = 0
       Width = 474
-      ActivePage = Page1
+      ActivePage = Page3
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -139,9 +139,9 @@ object f_config_time: Tf_config_time
           MaxValue = 86400
         end
         object Panel9: TPanel
-          Left = 54
+          Left = 32
           Height = 160
-          Top = 94
+          Top = 86
           Width = 417
           ClientHeight = 160
           ClientWidth = 417
@@ -240,7 +240,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
+            ClientHeight = 23
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
@@ -623,9 +623,10 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 20
+          ItemHeight = 0
           OnItemClick = SimObjItemClick
           TabOrder = 0
+          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }
@@ -735,6 +736,230 @@ object f_config_time: Tf_config_time
           Data = {
             06000000020202020202
           }
+        end
+      end
+      object Page3: TTabSheet
+        Caption = 'Animation'
+        ClientHeight = 510
+        ClientWidth = 470
+        object GroupBox1: TGroupBox
+          Left = 22
+          Height = 80
+          Top = 14
+          Width = 441
+          Caption = 'Real time options'
+          ClientHeight = 64
+          ClientWidth = 437
+          TabOrder = 0
+          object Label2: TLabel
+            Left = 3
+            Height = 15
+            Top = 34
+            Width = 117
+            Caption = 'Delay between frame'
+            ParentColor = False
+          end
+          object TrackBar1: TTrackBar
+            Left = 145
+            Height = 35
+            Top = 18
+            Width = 200
+            LineSize = 100
+            Max = 2000
+            OnChange = TrackBar1Change
+            PageSize = 500
+            Position = 100
+            TabOrder = 0
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 22
+          Height = 376
+          Top = 102
+          Width = 441
+          Caption = 'Recording options'
+          ClientHeight = 360
+          ClientWidth = 437
+          TabOrder = 1
+          object DirectoryEdit1: TDirectoryEdit
+            Left = 145
+            Height = 22
+            Top = 60
+            Width = 264
+            ShowHidden = False
+            ButtonWidth = 23
+            NumGlyphs = 0
+            MaxLength = 0
+            TabOrder = 0
+            OnChange = DirectoryEdit1Change
+          end
+          object Label3: TLabel
+            Left = 3
+            Height = 15
+            Top = 65
+            Width = 107
+            Caption = 'Recording directory'
+            ParentColor = False
+          end
+          object Label4: TLabel
+            Left = 3
+            Height = 15
+            Top = 111
+            Width = 90
+            Caption = 'Recording prefix'
+            ParentColor = False
+          end
+          object Edit1: TEdit
+            Left = 145
+            Height = 22
+            Top = 108
+            Width = 113
+            OnChange = Edit1Change
+            TabOrder = 1
+          end
+          object FloatSpinEdit1: TFloatSpinEdit
+            Left = 145
+            Height = 22
+            Top = 180
+            Width = 61
+            Increment = 1
+            MaxValue = 30
+            MinValue = 0.1
+            OnChange = FloatSpinEdit1Change
+            TabOrder = 2
+            Value = 1
+          end
+          object Label5: TLabel
+            Left = 3
+            Height = 15
+            Top = 185
+            Width = 109
+            Caption = 'Frames per second'
+            ParentColor = False
+          end
+          object Label6: TLabel
+            Left = 3
+            Height = 15
+            Top = 257
+            Width = 140
+            Caption = 'Additional ffmpeg options'
+            ParentColor = False
+          end
+          object Edit2: TEdit
+            Left = 145
+            Height = 22
+            Top = 252
+            Width = 264
+            OnChange = Edit2Change
+            TabOrder = 3
+          end
+          object Label7: TLabel
+            Left = 3
+            Height = 15
+            Top = 221
+            Width = 69
+            Caption = 'Frames size'
+            ParentColor = False
+          end
+          object Edit3: TEdit
+            Left = 275
+            Height = 22
+            Top = 217
+            Width = 50
+            OnChange = Edit3Change
+            TabOrder = 4
+          end
+          object Label8: TLabel
+            Left = 339
+            Height = 15
+            Top = 221
+            Width = 6
+            Caption = 'x'
+            ParentColor = False
+          end
+          object Edit4: TEdit
+            Left = 360
+            Height = 22
+            Top = 217
+            Width = 49
+            OnChange = Edit4Change
+            TabOrder = 5
+          end
+          object ComboBox1: TComboBox
+            Left = 145
+            Height = 23
+            Top = 216
+            Width = 113
+            ItemHeight = 0
+            Items.Strings = (
+              'No change'
+              'VGA'
+              'WVGA'
+              'HD720'
+              'HD1080'
+              'Free size'
+            )
+            OnChange = ComboBox1Change
+            TabOrder = 6
+            Text = 'ComboBox1'
+          end
+          object CheckBox3: TCheckBox
+            Left = 3
+            Height = 23
+            Top = 20
+            Width = 395
+            AutoSize = False
+            Caption = 'Record animation to file'
+            OnChange = CheckBox3Change
+            TabOrder = 7
+          end
+          object Label9: TLabel
+            Left = 3
+            Height = 15
+            Top = 143
+            Width = 110
+            Caption = 'Recording extention'
+            ParentColor = False
+          end
+          object Edit5: TEdit
+            Left = 145
+            Height = 22
+            Top = 140
+            Width = 113
+            OnChange = Edit5Change
+            TabOrder = 8
+          end
+          object Button9: TButton
+            Left = 145
+            Height = 25
+            Top = 322
+            Width = 85
+            Caption = 'Button9'
+            OnClick = Button9Click
+            TabOrder = 9
+          end
+          object Label10: TLabel
+            Left = 3
+            Height = 15
+            Top = 296
+            Width = 116
+            Caption = 'ffmpeg program path'
+            ParentColor = False
+          end
+          object FileNameEdit1: TFileNameEdit
+            Left = 145
+            Height = 22
+            Top = 290
+            Width = 264
+            DialogOptions = []
+            FilterIndex = 0
+            HideDirectories = False
+            ButtonWidth = 23
+            NumGlyphs = 0
+            MaxLength = 0
+            TabOrder = 10
+            OnChange = FileNameEdit1Change
+          end
         end
       end
     end

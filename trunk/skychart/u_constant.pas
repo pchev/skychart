@@ -308,6 +308,7 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='/mnt/cdrom';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
+      Defaultffmpeg='ffmpeg';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
@@ -323,6 +324,7 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='/Volumes';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
+      Defaultffmpeg='ffmpeg';
 {$endif}
 {$ifdef mswindows}
       DefaultFontName='Arial';
@@ -338,6 +340,7 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='D:\';
       DefaultVarObs='varobs.exe';
       DefaultCdC='skychart.exe';
+      Defaultffmpeg='ffmpeg.exe';
       Win98DefaultBrowser='C:\Program Files\Internet Explorer\Iexplore.exe';
 {$endif}
 
@@ -557,11 +560,11 @@ type
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
-                ButtonStandard,ButtonNight: integer;
-                PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart :boolean;
+                ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize: integer;
+                PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
-                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
-                ImageLuminosity, ImageContrast : double;
+                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
+                ImageLuminosity, ImageContrast, AnimFps : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
@@ -1560,6 +1563,17 @@ saveheight:=Source.saveheight;
 savewidth:=Source.savewidth;
 ButtonStandard:=Source.ButtonStandard;
 ButtonNight:=Source.ButtonNight;
+AnimDelay:=Source.AnimDelay;
+AnimOpt:=Source.AnimOpt;
+Animffmpeg:=Source.Animffmpeg;
+AnimFps:=Source.AnimFps;
+AnimSx:=Source.AnimSx;
+AnimSy:=Source.AnimSy;
+AnimSize:=Source.AnimSize;
+AnimRecPrefix:=Source.AnimRecPrefix;
+AnimRecExt:=Source.AnimRecExt;
+AnimRecDir:=Source.AnimRecDir;
+AnimRec:=Source.AnimRec;
 PrintLandscape:=Source.PrintLandscape;
 ShowChartInfo:=Source.ShowChartInfo;
 ShowTitlePos:=Source.ShowTitlePos;
