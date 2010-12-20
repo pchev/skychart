@@ -1,12 +1,12 @@
 object f_main: Tf_main
   Left = 411
   Height = 576
-  Top = 178
-  Width = 826
+  Top = 111
+  Width = 938
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
   ClientHeight = 554
-  ClientWidth = 826
+  ClientWidth = 938
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -2768,7 +2768,7 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 798
+    Left = 910
     Height = 466
     Top = 54
     Width = 28
@@ -3010,11 +3010,11 @@ object f_main: Tf_main
     Left = 0
     Height = 34
     Top = 520
-    Width = 826
+    Width = 938
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 826
+    ClientWidth = 938
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -3064,30 +3064,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 604
+      Width = 716
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 604
+      ClientWidth = 716
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 604
+        Width = 716
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 604
+        ClientWidth = 716
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 604
+          Width = 716
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -3100,11 +3100,11 @@ object f_main: Tf_main
     Left = 0
     Height = 54
     Top = 0
-    Width = 826
+    Width = 938
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 54
-    ClientWidth = 826
+    ClientWidth = 938
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -3112,7 +3112,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 826
+      Width = 938
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -3245,38 +3245,38 @@ object f_main: Tf_main
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 708
+        Left = 731
         Top = 2
         Width = 4
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 712
+        Left = 735
         Top = 2
         Action = TelescopeConnect
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 758
+        Left = 781
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
-        Left = 735
+        Left = 758
         Top = 2
         Action = TelescopeSync
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 781
+        Left = 804
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 785
+        Left = 808
         Top = 2
         Width = 8
         AutoSize = True
@@ -3289,13 +3289,13 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 624
+        Left = 647
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 620
+        Left = 643
         Top = 2
         Width = 4
         Style = tbsDivider
@@ -3447,7 +3447,7 @@ object f_main: Tf_main
         end
       end
       object TimeU: TComboBox
-        Left = 628
+        Left = 651
         Height = 24
         Hint = 'Time Units'
         Top = 2
@@ -3461,7 +3461,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 796
+        Left = 908
         Height = 23
         Top = 2
         Width = 30
@@ -3491,7 +3491,7 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TUpDown
-        Left = 603
+        Left = 626
         Height = 22
         Top = 2
         Width = 17
@@ -3504,18 +3504,27 @@ object f_main: Tf_main
         Wrap = False
       end
       object EditTimeVal: TEdit
-        Left = 568
+        Left = 591
         Height = 22
         Top = 2
         Width = 35
         TabOrder = 5
+      end
+      object ToolButton13: TToolButton
+        Left = 568
+        Top = 2
+        Caption = '>>'
+        ImageIndex = 88
+        OnClick = ToolButton13Click
+        OnMouseUp = ToolButton13MouseUp
+        Style = tbsCheck
       end
     end
     object ToolBar4: TToolBar
       Left = 0
       Height = 28
       Top = 26
-      Width = 826
+      Width = 938
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
@@ -7391,7 +7400,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695800000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
+      4C695900000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FF0000
       000000000000000000000000000000000000000000009C6B6BFF000000000000
       000000000000000000000000000000000000000000009C6B6BFF00000000945A
@@ -10207,6 +10216,38 @@ object f_main: Tf_main
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000CE6300FFCE6300FF00000000CE63
+      00FFCE6300FF0000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000CE6300FF00000000BD5200FFCE63
+      00FF00000000BD5200FF00000000000000000000000000000000000000000000
+      000000000000000000000000000000000000CE6300FF0000000000000000CE63
+      00FF0000000000000000B54A00FF000000000000000000000000000000000000
+      000000000000000000000000000000000000CE6300FF0000000000000000CE63
+      00FF000000000000000000000000A53900FF0000000000000000000000000000
+      000000000000000000000000000000000000CE6300FF0000000000000000CE63
+      00FF00000000000000000000000000000000A53900FF00000000000000000000
+      000000000000000000000000000000000000CE6300FF0000000000000000CE63
+      00FF0000000000000000000000000000000000000000A53900FF000000000000
+      000000000000000000000000000000000000CE6300FF0000000000000000CE63
+      00FF000000000000000000000000000000000000000000000000A53900FF0000
+      000000000000000000000000000000000000C65A00FF0000000000000000C65A
+      00FF00000000000000000000000000000000000000000000000000000000A539
+      00FF00000000000000000000000000000000C65A00FF0000000000000000C65A
+      00FF00000000000000000000000000000000000000000000000000000000A539
+      00FF00000000000000000000000000000000BD5200FF0000000000000000BD52
+      00FF000000000000000000000000000000000000000000000000A53900FF0000
+      000000000000000000000000000000000000BD4A00FF0000000000000000BD4A
+      00FF0000000000000000000000000000000000000000A53900FF000000000000
+      000000000000000000000000000000000000B54A00FF0000000000000000B54A
+      00FF00000000000000000000000000000000A53900FF00000000000000000000
+      000000000000000000000000000000000000AD4200FF0000000000000000AD42
+      00FF000000000000000000000000A53900FF0000000000000000000000000000
+      000000000000000000000000000000000000AD3900FF0000000000000000AD39
+      00FF0000000000000000A53900FF000000000000000000000000000000000000
+      000000000000000000000000000000000000A53900FF00000000A53900FFA539
+      00FF00000000A53900FF00000000000000000000000000000000000000000000
+      000000000000000000000000000000000000A53900FFA53900FF00000000A539
+      00FFA53900FF0000000000000000000000000000000000000000000000000000
       0000000000000000000000000000
     }
   end
@@ -10292,5 +10333,12 @@ object f_main: Tf_main
     OnTimer = ThemeTimerTimer
     left = 288
     top = 360
+  end
+  object AnimationTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = AnimationTimerTimer
+    left = 288
+    top = 424
   end
 end

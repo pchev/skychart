@@ -88,7 +88,7 @@ Function LONToStr(l: Double) : string;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 function DTminusUT(annee : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
-Function ExecProcess(cmd: string; output: TStringList): integer;
+Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
@@ -1143,13 +1143,14 @@ with Form do begin
 end;
 end;
 
-Function ExecProcess(cmd: string; output: TStringList): integer;
+Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 const READ_BYTES = 2048;
 var
   M: TMemoryStream;
   P: TProcess;
   n: LongInt;
   BytesRead: LongInt;
+  poCons: TProcessOption;
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);
@@ -1157,7 +1158,15 @@ result:=1;
 try
   BytesRead := 0;
   P.CommandLine := cmd;
-  P.Options := [poUsePipes, poStdErrToOutPut, poNoConsole];
+  if ShowConsole then begin
+     poCons:=poNewConsole;
+     P.ShowWindow:=swoShowNormal;
+     P.StartupOptions:=[suoUseShowWindow];
+  end else begin
+     poCons:=poNoConsole;
+     P.ShowWindow:=swoHIDE;
+  end;
+  P.Options := [poUsePipes, poStdErrToOutPut, poCons];
   P.Execute;
   while P.Running do begin
     Application.ProcessMessages;
