@@ -107,7 +107,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#0#9'MaxLength'#2#0#9'NumGly'
   +'phs'#2#1#8'OnChange'#7#11'Date1Change'#8'TabOrder'#2#0#4'Text'#6#13'2010.12'
-  +'.18.01'#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0
+  +'.23.01'#7'Caption'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0
   +#13'TJDDatePicker'#5'Date2'#4'Left'#3#205#0#6'Height'#2#22#3'Top'#2#8#5'Widt'
   +'h'#2'P'#11'ButtonWidth'#2#23#8'CharCase'#7#8'ecNormal'#5'Color'#7#9'clBtnFa'
   +'ce'#10'Glyph.Data'#10'z'#5#0#0'v'#5#0#0'BMv'#5#0#0#0#0#0#0'6'#0#0#0'('#0#0#0
@@ -178,7 +178,7 @@ LazarusResources.Add('Tf_calendar','FORMDATA',[
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192#192
   +#192#192#192#192#192#192#192#192#0#9'MaxLength'#2#0#9'NumGlyphs'#2#1#8'OnCha'
-  +'nge'#7#11'Date2Change'#8'TabOrder'#2#1#4'Text'#6#13'2010.12.18.01'#7'Captio'
+  +'nge'#7#11'Date2Change'#8'TabOrder'#2#1#4'Text'#6#13'2010.12.23.01'#7'Captio'
   +'n'#6#11'JD calendar'#2'JD'#5#0#0#0#0#0#30#196#149#20'@'#0#0#7'TButton'#10'B'
   +'tnRefresh'#4'Left'#3':'#1#6'Height'#2#25#3'Top'#2#8#5'Width'#2'i'#25'Border'
   +'Spacing.InnerBorder'#2#4#7'Caption'#6#7'Refresh'#7'OnClick'#7#15'BtnRefresh'

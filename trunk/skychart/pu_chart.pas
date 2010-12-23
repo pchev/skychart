@@ -492,7 +492,6 @@ try
 {$endif}
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
- if not lastquick then screen.cursor:=crHourGlass;
  zoomstep:=0;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
@@ -531,7 +530,6 @@ finally
  WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
 {$endif}
  lock_refresh:=false;
- screen.cursor:=crDefault;
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
