@@ -237,7 +237,7 @@ for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
   PlanetGraphs[i] := TBitmap.Create;
   PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
  end;
-SatGrid.ColWidths[0]:=120;
+SatGrid.ColWidths[0]:=130;
 SatGrid.ColWidths[1]:=120;
 TLEListBox.OnMouseLeave:=TLEListBoxExit;
 TLEListBox.Directory:=SatDir;

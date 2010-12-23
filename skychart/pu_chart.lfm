@@ -30,9 +30,9 @@ object f_chart: Tf_chart
     object identlabel: TLabel
       Cursor = crHandPoint
       Left = 136
-      Height = 13
+      Height = 16
       Top = 120
-      Width = 53
+      Width = 77
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
