@@ -284,7 +284,21 @@ ADBC.Items[1]:=rsBC;
 Button4.Caption:=rsMoreOptions;
 Button7.caption:=rsHelp;
 SetHelp(self,hlpCfgDate);
+Page3.Caption:=rsAnimation;
 Button9.Caption:=rsDefault;
+GroupBox1.Caption:=rsRealTimeOpti;
+Label2.Caption:=rsDelayBetween;
+GroupBox2.Caption:=rsRecordingOpt;
+CheckBox3.Caption:=rsRecordAnimat;
+Label3.Caption:=rsRecordingDir;
+Label4.Caption:=rsRecordingPre;
+Label9.Caption:=rsRecordingExt;
+Label5.Caption:=rsFramesPerSec;
+Label7.Caption:=rsFramesSize;
+Label6.Caption:=rsAdditionalFf;
+Label10.Caption:=rsFfmpegProgra;
+ComboBox1.Items[0]:=rsNoChange;
+ComboBox1.Items[5]:=rsFreeSize;
 end;
 
 constructor Tf_config_time.Create(AOwner:TComponent);
@@ -744,7 +758,7 @@ begin
   Edit5.Text:='.mp4';
   FloatSpinEdit1.Value:=2.0;
   ComboBox1.ItemIndex:=0;
-  Edit2.Text:='-b 1800k';
+  Edit2.Text:=DefaultffmpegOptions;
 end;
 
 procedure Tf_config_time.CheckBox4Click(Sender: TObject);

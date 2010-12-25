@@ -84,6 +84,10 @@ msgstr "Egy adatsor hozzáadása az adatbázishoz. Minden mező kitöltése köt
 msgid "Add equatorial grid"
 msgstr "Ekvatoriális háló mutatása"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 #| msgid "Add Label"
 msgid "Add label"
@@ -178,6 +182,10 @@ msgstr ""
 #| msgid "Always show compass rose"
 msgid "Always show the compass rose"
 msgstr "Iránytű állandó mutatása"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr ""
 
 #: u_translation.rsannualproper
 #| msgid "Annual Proper Motion"
@@ -1185,6 +1193,10 @@ msgstr "fokok"
 msgid "Degrees, minutes, secondes"
 msgstr "Fok, perc, másodperc"
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Töröl"
@@ -1677,6 +1689,10 @@ msgstr "Halvány csillagok mérete"
 msgid "FAQ"
 msgstr "GYIK"
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Mező szám"
@@ -1810,6 +1826,18 @@ msgstr "LM:"
 #| msgid "fov number:"
 msgid "FOV number:"
 msgstr "LM száma"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2847,6 +2875,10 @@ msgstr "Nincs kisbolygó adat! %s Töltsd be először az MPC táblázatot."
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 #| msgid "No Margin"
 msgid "No margin"
@@ -3571,10 +3603,34 @@ msgstr "RealSky North"
 msgid "RealSky South"
 msgstr "RealSky South"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 #| msgid "Recognize Units or Object type from the file:"
 msgid "Recognize units or object type from the file:"
 msgstr "Az objektum típusának és a méret egységének betöltése a fájlból:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"

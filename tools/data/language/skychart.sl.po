@@ -80,6 +80,10 @@ msgstr "Dodaj eden element v podatkovno zbirko. Vsa polja so obvezna."
 msgid "Add equatorial grid"
 msgstr "Dodaj ekvatorialno mrežo"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Dodaj oznako"
@@ -163,6 +167,10 @@ msgstr "Vedno shrani brez vprašanja."
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Vedno prikaži kompasovo vetrovnico"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -1074,6 +1082,10 @@ msgstr "stopinje"
 msgid "Degrees, minutes, secondes"
 msgstr "Stopinje, minute, sekunde"
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Izbriši"
@@ -1528,6 +1540,10 @@ msgstr "Velikost šibkoski zvezde"
 msgid "FAQ"
 msgstr "Pogosto zastavljena vprašanja"
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Številka polja"
@@ -1647,6 +1663,18 @@ msgstr "FOV:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "fov število:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2590,6 +2618,10 @@ msgstr "Ne najdem podatkov o asteroidu!%sProsim najprej naložte MPC datoteko."
 msgid "No astronomical twilight today!"
 msgstr "Danes ni astronomskega somraka!"
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Brez roba"
@@ -3260,9 +3292,33 @@ msgstr "RealSky sever"
 msgid "RealSky South"
 msgstr "RealSky jug"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Iz datoteke prepoznaj enote ali tip predmeta:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
