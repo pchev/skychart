@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-12-13 20:43+0100\n"
+"PO-Revision-Date: 2010-12-20 22:34+0100\n"
 "Last-Translator: Marc Fokker <marc@cwnetwerk.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -433,7 +433,7 @@ msgstr "Annuleren, verkeerde zip bestand?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
-msgstr ""
+msgstr "Kan de satellieten niet berekenen."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -1280,7 +1280,7 @@ msgstr "Download de laatste baanelementen"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr ""
+msgstr "Download TLE"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1620,7 +1620,7 @@ msgstr "Flamsteed nummer"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
-msgstr ""
+msgstr "Iridium flare voorspellingen:"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1632,7 +1632,7 @@ msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogu
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
-msgstr ""
+msgstr "Alleen voor de huidige kaart"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1742,7 +1742,7 @@ msgstr "Grafisch"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr ""
+msgstr "Grafieken"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1862,7 +1862,7 @@ msgstr "Icoon tijdweergave"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
-msgstr ""
+msgstr "Als het niet geïnstalleerd is, probeer het volgende afhankelijk van uw systeem:"
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -1890,11 +1890,11 @@ msgstr "Inclinatie="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "Inclusief dag tijd overgang"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
-msgstr ""
+msgstr "Inclusief Iridium flares"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2988,11 +2988,11 @@ msgstr "Geef alstublieft de map op waar de catalogus samengesteld moet worden"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
+msgstr "Installeer alstublieft  \"Dosbox\" http://www.dosbox.com/ om Iridium flares op uw computer te berekenen."
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
+msgstr "Installeer alstublieft http://www.winehq.org/ om kunstmatige satellieten op uw computer te berekenen."
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
@@ -3424,7 +3424,7 @@ msgstr "Satelliet"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr ""
+msgstr "Satellietenberekening:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -3820,7 +3820,7 @@ msgstr "Iets is fout gegaan tijdens de programma-initialisatie. Het programma mo
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
+msgstr "Sorry, kopiëren is nog niet mogelijk voor deze pagina"
 
 #: u_translation.rssortby
 msgid "Sort by"
