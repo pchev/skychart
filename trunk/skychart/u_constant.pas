@@ -294,6 +294,7 @@ const cdcversion = 'Version 3.3 svn';
       URL_DSS_NAME19='HST Phase2 (GSC2)';
       URL_DSS19='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
 
+      DefaultffmpegOptions='-b 18000k -bt 10000k';
 {$ifdef linux}
       DefaultFontName='Helvetica';
       DefaultFontFixed='Courier';

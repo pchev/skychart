@@ -82,6 +82,10 @@ msgstr "Додати елемент в базу даних. Всі поля об
 msgid "Add equatorial grid"
 msgstr "Додати екваторіальну сітку"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Додати мітку"
@@ -165,6 +169,10 @@ msgstr ""
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Завжди показувати компас"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -1076,6 +1084,10 @@ msgstr "градусів"
 msgid "Degrees, minutes, secondes"
 msgstr "Градуси, мінути, секунди"
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Видалити"
@@ -1530,6 +1542,10 @@ msgstr "Слабий розмір зірки"
 msgid "FAQ"
 msgstr "Найчастіші питання"
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Номер поля"
@@ -1649,6 +1665,18 @@ msgstr "ПЗ:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "Ном. поля зору:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2592,6 +2620,10 @@ msgstr "Не знайдено ніяких астероїдних даних!%s�
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Без поля"
@@ -3262,9 +3294,33 @@ msgstr "RealSky Північ"
 msgid "RealSky South"
 msgstr "RealSky Південь"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Розпізнання одиниць або типу об'єкту із файлу:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"

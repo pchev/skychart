@@ -83,6 +83,10 @@ msgstr "Dopisz pojedynczy element do bazy danych. Wszystkie pola są obowiązkow
 msgid "Add equatorial grid"
 msgstr "Pokaż siatkę równikową"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Dodaj etykietę"
@@ -168,6 +172,10 @@ msgstr ""
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Zawsze pokazuj Różę Wiatrów"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -1079,6 +1087,10 @@ msgstr "stopni"
 msgid "Degrees, minutes, secondes"
 msgstr "Stopnie, minuty, sekundy"
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Usuń"
@@ -1533,6 +1545,10 @@ msgstr "Siła rozmycia gwiazd"
 msgid "FAQ"
 msgstr "Często zadawane pytania: FAQ"
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Numer Pola"
@@ -1652,6 +1668,18 @@ msgstr "FOV:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "Numer FOV:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2595,6 +2623,10 @@ msgstr "Nie znaleziono danych planetoid!%sProszę najpierw wczytać plik MPC."
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Bez marginesu"
@@ -3265,9 +3297,33 @@ msgstr "RealSky North"
 msgid "RealSky South"
 msgstr "RealSky South"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Rozpoznaj jednostki bądź typy obiektów z pliku:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"

@@ -81,6 +81,10 @@ msgstr ""
 msgid "Add equatorial grid"
 msgstr "Προσθήκη ισημερινού πλέγματος"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 #, fuzzy
 #| msgid "Add Label"
@@ -167,6 +171,10 @@ msgstr ""
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
+msgstr ""
+
+#: u_translation.rsanimation
+msgid "Animation"
 msgstr ""
 
 #: u_translation.rsannualproper
@@ -1145,6 +1153,10 @@ msgstr "μοίρες"
 msgid "Degrees, minutes, secondes"
 msgstr ""
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Διαγραφή"
@@ -1619,6 +1631,10 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr ""
@@ -1741,6 +1757,18 @@ msgstr "Πεδίο:"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
+msgstr ""
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
 msgstr ""
 
 #: u_translation.rsfriday
@@ -2723,6 +2751,10 @@ msgstr ""
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr ""
@@ -3397,8 +3429,32 @@ msgstr ""
 msgid "RealSky South"
 msgstr ""
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
+msgstr ""
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
 msgstr ""
 
 #: u_translation.rsred

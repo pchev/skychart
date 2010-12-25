@@ -79,6 +79,10 @@ msgstr "Voeg een enkel element toe aan de database. Alle velden zijn verplicht."
 msgid "Add equatorial grid"
 msgstr "Voeg equatoriaal rooster toe"
 
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr ""
+
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Voeg label toe"
@@ -162,6 +166,10 @@ msgstr "Automatisch opslaan zonder bevestiging."
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Altijd kompasroos tonen"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -1073,6 +1081,10 @@ msgstr "graden"
 msgid "Degrees, minutes, secondes"
 msgstr "Graden, minuten, seconden"
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr ""
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Verwijder"
@@ -1526,6 +1538,10 @@ msgstr "Zwakke sterren grootte"
 msgid "FAQ"
 msgstr "FAQ"
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr ""
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Veldnummer"
@@ -1645,6 +1661,18 @@ msgstr "Beeldveld:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "beeldveld nr:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr ""
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2588,6 +2616,10 @@ msgstr "Geen planetoïde gegevens gevonden!%sLaad alstublieft eerst een MPC best
 msgid "No astronomical twilight today!"
 msgstr "Vandaag geen astronomisch schemer!"
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr ""
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Geen marge"
@@ -3258,9 +3290,33 @@ msgstr "RealSky noord"
 msgid "RealSky South"
 msgstr "RealSky zuid"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Herken eenheden of objecttype van het bestand"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr ""
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr ""
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr ""
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr ""
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr ""
 
 #: u_translation.rsred
 msgid "Red"

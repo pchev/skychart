@@ -3718,7 +3718,7 @@ cfgm.Animffmpeg:=Defaultffmpeg;
 cfgm.AnimSx:=-1;
 cfgm.AnimSy:=-1;
 cfgm.AnimSize:=0;
-cfgm.AnimOpt:='-b 18000k -bt 10000k';
+cfgm.AnimOpt:=DefaultffmpegOptions;
 cfgm.HttpProxy:=false;
 cfgm.FtpPassive:=true;
 cfgm.ConfirmDownload:=true;
@@ -5504,6 +5504,7 @@ ToolButtonCal.hint:=rsEphemerisCal;
 ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;
+ToolButton13.Hint:=rsAnimation;
 if def_cfgsc.PluginTelescope or def_cfgsc.ASCOMTelescope then begin
    TConnect.hint:=rsControlPanel;
 end else begin

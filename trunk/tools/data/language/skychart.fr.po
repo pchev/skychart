@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-12-18 15:38+0100\n"
+"PO-Revision-Date: 2010-12-25 12:24+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -81,6 +81,10 @@ msgstr "Ajout d'un élément à la base de donnée. Tout les champs sont requis.
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
 msgstr "Ajouter la grille équatoriale"
+
+#: u_translation.rsadditionalff
+msgid "Additional ffmpeg options"
+msgstr "Options supplémentaires ffmpeg"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
@@ -165,6 +169,10 @@ msgstr "Toujours enregistrer sans demander."
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Toujours voir la boussole"
+
+#: u_translation.rsanimation
+msgid "Animation"
+msgstr "Animation"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -1077,6 +1085,10 @@ msgstr "degrés"
 msgid "Degrees, minutes, secondes"
 msgstr "Degré, minute, seconde "
 
+#: u_translation.rsdelaybetween
+msgid "Delay between frame"
+msgstr "Délai entre les images"
+
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Supprimer"
@@ -1530,6 +1542,10 @@ msgstr "Taille des étoiles faibles"
 msgid "FAQ"
 msgstr "F.A.Q."
 
+#: u_translation.rsffmpegprogra
+msgid "ffmpeg program path"
+msgstr "répertoire du programme ffmpeg"
+
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Numéro de champ"
@@ -1650,6 +1666,18 @@ msgstr "Champ:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "champ:"
+
+#: u_translation.rsframespersec
+msgid "Frames per second"
+msgstr "Image par seconde"
+
+#: u_translation.rsframessize
+msgid "Frames size"
+msgstr "Taille d'image"
+
+#: u_translation.rsfreesize
+msgid "Free size"
+msgstr "Taille libre"
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -2593,6 +2621,10 @@ msgstr "Pas de donnée pour les astéroïdes!%sVeuillez charger un fichier MPC."
 msgid "No astronomical twilight today!"
 msgstr "Pas de crépuscule astronomique aujourd'hui!"
 
+#: u_translation.rsnochange
+msgid "No change"
+msgstr "Pas de changement"
+
 #: u_translation.rsnomargin
 msgid "No margin"
 msgstr "Pas de marge"
@@ -3263,9 +3295,33 @@ msgstr "Realsky nord"
 msgid "RealSky South"
 msgstr "Realsky sud"
 
+#: u_translation.rsrealtimeopti
+msgid "Real time options"
+msgstr "Options temps réels"
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Identifier les unités ou le type depuis le fichier:"
+
+#: u_translation.rsrecordanimat
+msgid "Record animation to file"
+msgstr "Enregistre l'animation"
+
+#: u_translation.rsrecordingdir
+msgid "Recording directory"
+msgstr "Répertoire d'enregistrement"
+
+#: u_translation.rsrecordingext
+msgid "Recording extension"
+msgstr "Extension d'enregistrement"
+
+#: u_translation.rsrecordingopt
+msgid "Recording options"
+msgstr "Options d'enregistrement"
+
+#: u_translation.rsrecordingpre
+msgid "Recording prefix"
+msgstr "Préfixe d'enregistrement"
 
 #: u_translation.rsred
 msgid "Red"

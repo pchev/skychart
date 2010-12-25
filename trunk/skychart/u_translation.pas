@@ -1140,6 +1140,20 @@ resourcestring
     +'your system:';
   rsSorryCopyIsN = 'Sorry, copy is not yet implemented for this page';
   rsDownloadTLE = 'Download TLE';
+  rsAnimation = 'Animation';
+  rsRealTimeOpti = 'Real time options';
+  rsDelayBetween = 'Delay between frame';
+  rsRecordingOpt = 'Recording options';
+  rsRecordAnimat = 'Record animation to file';
+  rsRecordingDir = 'Recording directory';
+  rsRecordingPre = 'Recording prefix';
+  rsRecordingExt = 'Recording extension';
+  rsFramesPerSec = 'Frames per second';
+  rsFramesSize = 'Frames size';
+  rsAdditionalFf = 'Additional ffmpeg options';
+  rsFfmpegProgra = 'ffmpeg program path';
+  rsNoChange = 'No change';
+  rsFreeSize = 'Free size';
 
 implementation
 
