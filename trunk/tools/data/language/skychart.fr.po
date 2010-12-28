@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-12-25 12:24+0100\n"
-"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
+"PO-Revision-Date: 2010-12-28 22:36+0100\n"
+"Last-Translator: pch\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_translation.rs102cddss
+#, fuzzy
 msgid "102 CD DSS"
 msgstr "102 CD DSS"
 
@@ -1413,6 +1414,10 @@ msgstr "Fin de l'objet"
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
 msgstr "Fin du traitement: %s astéroïdes"
+
+#: u_translation.rsephemeris
+msgid "Ephemeris"
+msgstr "Ephéméride"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
@@ -4558,4 +4563,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

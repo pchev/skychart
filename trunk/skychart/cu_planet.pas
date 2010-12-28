@@ -50,6 +50,7 @@ type
     SolT0,XSol,YSol,ZSol : double;
     jdnew,jdchart,com_limitmag:double;
     ast_daypos,com_daypos: string;
+    Feph_method: string;
     smsg:Tstrings;
     SolAstrometric : boolean;
     CurrentStep,CurrentPlanet,n_com,n_ast : integer;
@@ -109,6 +110,7 @@ type
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
      procedure Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
+     property eph_method: string read Feph_method;
   end;
 
 implementation
@@ -118,6 +120,7 @@ begin
  inherited Create(AOwner);
  lockpla:=false;
  lockdb:=false;
+ Feph_method:='';
 { satxyok:=true;
  satxylib:=LoadLibrary(libsatxy);
  if satxylib<>0 then begin
@@ -195,6 +198,7 @@ if load_de(t0) then begin    // use jpl DE-
          xp:=v2[0];
          yp:=v2[1];
          zp:=v2[2];
+         Feph_method:='DE'+inttostr(de_type);
 end else begin               // use Plan404
      // planet position with light time correction
      p.ipla:=ipla;
@@ -215,6 +219,7 @@ end else begin               // use Plan404
      se:=sin(degtorad(eps2000));
      alpha:=arctan2(sin(l)*ce-tan(b)*se , cos(l) );
      delta:=arcsin(sin(b)*ce+cos(b)*se*sin(l) );
+     Feph_method:='plan404';
 end;
 vel:=42.1219*sqrt(1/dp-1/(2*sa[ipla]));
 {
@@ -702,7 +707,7 @@ if load_de(t0) then begin
    pp:=sqrt(w[1]*w[1]+w[2]*w[2]);
    delta:=arctan(w[3]/pp);
    dist:=dkm/km_au;
-   // result:='DE'+inttostr(de_type);
+   Feph_method:='DE'+inttostr(de_type);
 end else begin  // use plan404
    p.JD:=t0;
    p.ipla:=11;
@@ -715,7 +720,7 @@ end else begin  // use plan404
    // plan404 give equinox of the date for the moon.
    precession(t0,jd2000,alpha,delta);
    dkm:=dist*km_au;
-   //result:='plan404';
+   Feph_method:='plan404';
 end;
 diam:=2*358482800/dkm;
 t:=(t0-2415020)/36525;  { meeus 15.1 }
@@ -1061,6 +1066,7 @@ if result and (currentplanet<10) then begin
   end else begin
      Desc:=Desc+'CM:'+formatfloat(d2,w1)+tab
   end;
+  Desc:=Desc+'ephemeris:'+eph_method+tab;
   Desc:=Desc+'date:'+date;
 end;
 if result and (currentplanet=10) then begin
@@ -1078,6 +1084,7 @@ if result and (currentplanet=10) then begin
   Desc:=Desc+'pa:'+formatfloat(d1,p)+tab
           +'PoleIncl:'+formatfloat(d1,pde)+tab
           +'CM:'+formatfloat(d1,w1)+tab
+          +'ephemeris:'+eph_method+tab
           +'date:'+date;
 end;
 if result and (currentplanet=11) then begin
@@ -1110,6 +1117,7 @@ if result and (currentplanet=11) then begin
           +'llat:'+formatfloat(d2,pde)+tab
           +'llon:'+formatfloat(d2,w1)+tab
           +'SunIncl:'+formatfloat(d2,pds)+tab
+          +'ephemeris:'+eph_method+tab
           +'date:'+date;
 end;
 if result and (currentplanet=32) then begin   // Earth umbra

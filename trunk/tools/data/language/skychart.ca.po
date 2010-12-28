@@ -1416,6 +1416,10 @@ msgstr "Fi de l'objecte"
 msgid "End of processing: %s asteroids"
 msgstr "Fi del processat: %s asteroides"
 
+#: u_translation.rsephemeris
+msgid "Ephemeris"
+msgstr ""
+
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
 msgstr "Calendari de les efemèrides"

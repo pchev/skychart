@@ -4534,3 +4534,7 @@ msgstr ""
 msgid "Free size"
 msgstr ""
 
+#: u_translation:rsephemeris
+msgid "Ephemeris"
+msgstr ""
+

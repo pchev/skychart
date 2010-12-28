@@ -5,7 +5,7 @@ function InstData {
   ddir=$2
   pkgz=BaseData/$pkg
   if [ ! -e $pkgz ]; then
-     curl -L -o $pkgz http://download.origo.ethz.ch/skychart/2075/$pkg
+     curl -L -o $pkgz http://download.origo.ethz.ch/skychart/2443/$pkg
   fi
   tar xvzf $pkgz -C $ddir
 }
