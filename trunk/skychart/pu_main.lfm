@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 411
-  Height = 576
-  Top = 111
+  Left = 82
+  Height = 373
+  Top = 0
   Width = 938
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 554
+  ClientHeight = 350
   ClientWidth = 938
   KeyPreview = True
   Menu = MainMenu1
@@ -18,7 +18,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.31'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
@@ -2665,18 +2665,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 466
+    Height = 262
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 262
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 466
+      Height = 262
       Top = 0
       Width = 26
       Align = alClient
@@ -2769,18 +2769,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 910
-    Height = 466
+    Height = 262
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 466
+    ClientHeight = 262
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 216
+      Height = 12
       Top = 250
       Width = 28
       Align = alClient
@@ -3009,7 +3009,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 520
+    Top = 316
     Width = 938
     Align = alBottom
     BevelOuter = bvNone
@@ -3448,7 +3448,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 24
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3505,7 +3505,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 22
+        Height = 23
         Top = 2
         Width = 35
         TabOrder = 5

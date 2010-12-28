@@ -41,8 +41,7 @@ uses
   TurboPowerIPro, enhedit, pu_config_catalog,
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_internet, libsql,
-  radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy,
-  series96, elp82, Printer4Lazarus, downldialog, synapse, pu_catgen,
+  radec, XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy, Printer4Lazarus, downldialog, synapse, pu_catgen,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc,
   pu_clock, u_unzip, cu_tcpserver, pu_ascomclient, u_satellite, pu_main;
