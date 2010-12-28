@@ -191,6 +191,12 @@ end;
 finally
 inif.Free;
 end;
+Plan404:=nil;
+Plan404lib:=LoadLibrary(lib404);
+if Plan404lib<>0 then begin
+  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
+end else
+  MenuItem4.Enabled:=false; // no calendar
 f_clock.cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 f_clock.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(f_clock.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
 ConnectDB;
@@ -198,12 +204,6 @@ LoadIcon;
 UpdateIcon(nil);
 Timer1.Enabled:=true;
 SysTray.Visible:=true;
-Plan404:=nil;
-Plan404lib:=LoadLibrary(lib404);
-if Plan404lib<>0 then begin
-  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
-end else
-  MenuItem4.Enabled:=false; // no calendar
 end;
 
 procedure Tf_tray.SaveConfig;
