@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function InstData {
+  pkg=$1.tgz
+  ddir=$2
+  pkgz=../BaseData/$pkg
+  if [ ! -e $pkgz ]; then
+     wget http://download.origo.ethz.ch/skychart/2075/$pkg -O $pkgz
+  fi
+  tar xvzf $pkgz -C $ddir
+}
+
 destdir=$1
 
 if [ -z "$destdir" ]; then
@@ -44,5 +54,6 @@ do
   install -v -D -m 644  $f $destdir/share/skychart/$f
 done
 
-#unzip -d $destdir/share/skychart/doc/ doc/wiki_doc.zip
+InstData data_jpleph $destdir/share/skychart
+
 
