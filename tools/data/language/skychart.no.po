@@ -1409,6 +1409,10 @@ msgstr "Objektende"
 msgid "End of processing: %s asteroids"
 msgstr "Bearbeidingsslutt: %s asteroider"
 
+#: u_translation.rsephemeris
+msgid "Ephemeris"
+msgstr ""
+
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
 msgstr "Efemeridekalender"

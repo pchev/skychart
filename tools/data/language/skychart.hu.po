@@ -1554,6 +1554,10 @@ msgstr "Objektum vége"
 msgid "End of processing: %s asteroids"
 msgstr "Feldolgozás vége: %s kisbolygó"
 
+#: u_translation.rsephemeris
+msgid "Ephemeris"
+msgstr ""
+
 #: u_translation.rsephemeriscal
 #| msgid "Ephemeris Calendar"
 msgid "Ephemeris calendar"

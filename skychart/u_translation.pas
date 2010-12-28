@@ -1154,6 +1154,7 @@ resourcestring
   rsFfmpegProgra = 'ffmpeg program path';
   rsNoChange = 'No change';
   rsFreeSize = 'Free size';
+  rsEphemeris = 'Ephemeris';
 
 implementation
 

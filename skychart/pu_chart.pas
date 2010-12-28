@@ -2154,6 +2154,7 @@ if i>0 then begin
   else if key='GRSTR' then result:=rsGRSTransit+d+value
   else if key='LLAT' then result:=rsLibrationInL+d+value
   else if key='LLON' then result:=rsLibrationInL2+d+value
+  else if key='EPHEMERIS' then result:=rsEphemeris+d+value
   else result:=txt;
 end
 else result:=txt;
