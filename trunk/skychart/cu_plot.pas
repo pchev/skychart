@@ -3036,7 +3036,7 @@ begin
         end
       else
         begin
-          cnv.Pen.Style := psDot;
+          cnv.Pen.Style := psDashDot;
           {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
