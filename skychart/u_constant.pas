@@ -660,6 +660,9 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
      LinuxDesktop: integer = 0;  // FreeDesktop=0, KDE=1, GNOME=2, Other=3
      crRetic: TCursor = 5;
      Params : TStringList;
+     de_folder: string;
+     de_type:integer;
+
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
 {$else}

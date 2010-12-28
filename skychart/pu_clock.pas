@@ -68,7 +68,7 @@ tz:=cfgsc.tz.SecondsOffset/3600;
 jd0:=jd(y,m,d,0);
 st:=Sidtim(jd0,t-tz,cfgsc.ObsLongitude)*rad2deg/15;
 jdt:=jd(y,m,d,t-tz);
-Fplanet.sun(jdt,ra,dec,dist,diam,true);
+Fplanet.sun(jdt,ra,dec,dist,diam);
 precession(jd2000,jdt,ra,dec);
 ra:=ra*rad2deg/15;
 clock1.Caption:=TimToStr(rmod(t+24,24))+blank+cfgsc.tz.ZoneName;

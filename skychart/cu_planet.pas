@@ -26,10 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-//  dynlibs,
   satxymain,    // satxy statically linked
-  series96main, // series 96 statically linked
-  elp82main,    // elp82 statically linked
+  uDE,
   u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, Sysutils, passql, pasmysql, passqlite, Forms, Math;
 
@@ -70,20 +68,22 @@ type
      cdb: TCdcDb;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
+     procedure SetDE(folder:string);
+     function load_de(t: double): boolean;
      Procedure ComputePlanet(cfgsc: Tconf_skychart);
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
      function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
-     Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double; highprec:boolean=true);
-     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double; highprec:boolean=true);
-     Procedure Sun(t0 : double; var alpha,delta,dist,diam : double;  highprec:boolean=true);
+     Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
+     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double);
+     Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
      Function MarSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Function JupSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Function SatSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Function UraSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
-     Procedure Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double; highprec:boolean=true);
+     Procedure Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double);
      Procedure MoonIncl(Lar,Lde,Sar,Sde : double; var incl : double);
      Function MoonMag(phase:double):double;
      Procedure PlanetOrientation(jde:double; ipla:integer; var P,De,Ds,w1,w2,w3 : double);
@@ -112,14 +112,6 @@ type
   end;
 
 implementation
-
-const
-//    Dates limits series96
-      series96t1 = 2415020.5;    // From : JD2415020.5d0 (1 Jan 1900 0h)
-      series96t2 = 2487980.5;    // To   : JD2487980.5d0 (4 Oct 2099 0h)
-//    Dates limits elp82
-      elp82t1 = 2415020.5;       // From : JD2415020.5d0 (1 Jan 1900 0h)
-      elp82t2 = 2487980.5;       // To   : JD2487980.5d0 (4 Oct 2099 0h)
 
 constructor TPlanet.Create(AOwner:TComponent);
 begin
@@ -153,18 +145,19 @@ writetrace('error destroy '+name);
 end;
 end;
 
-Procedure TPlanet.Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double; highprec:boolean=true);
+Procedure TPlanet.Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
 const
+      sa : array[1..9] of double =(0.38709893,0.72333199,1.00000011,1.52366231,5.20336301,9.53707032,19.19126393,30.06896348,39.48168677);
       s0 : array[1..9] of double =(3.34,8.41,0,4.68,98.47,83.33,34.28,36.56,1.57);
       V0 : array[1..9] of double =(-0.42,-4.40,0,-1.52,-9.40,-8.88,-7.19,-6.87,-1.0);
-//      A0 : array[1..9] of double =(0.11,0.65,0,0.15,0.52,0.47,0.51,0.41,0.3);
 
-var  v1,v2: double6;
+var  v1: double6;
+     v2: Array_5D;
      w : array[1..3] of double;
      tjd,t : double;
      i,ierr : integer;
      p :TPlanetData;
-     lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr : double;
+     lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr,xt,yt,zt : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
 // always do this computation for phase sign
@@ -173,6 +166,7 @@ if (ipla<1) or (ipla=3) or (ipla>9) then exit;
   p.JD:=t0-tlight;
   Plan404(addr(p));
   lt:=p.l; bt:=p.b; rt:=p.r;
+  xt:=p.x; yt:=p.y; zt:=p.z;
   dt:=rt;
   // planet position
   p.ipla:=ipla;
@@ -180,39 +174,28 @@ if (ipla<1) or (ipla=3) or (ipla>9) then exit;
   Plan404(addr(p));
   lp:=p.l; bp:=p.b; rp:=p.r;
   dp:=rp;
-//
-if highprec and (t0>series96t1) and (t0<series96t2) then begin   // use SERIES96
+ // get distance for light time correction
+ xt:=p.x-xt;
+ yt:=p.y-yt;
+ zt:=p.z-zt;
+ distance:=sqrt(xt*xt+yt*yt+zt*zt);
+if load_de(t0) then begin    // use jpl DE-
          tjd:=t0;
-         SunRect(tjd,false,v1[1],v1[2],v1[3],highprec);
+         SunRect(tjd,false,v1[1],v1[2],v1[3]);
          dt:=sqrt(v1[1]*v1[1]+v1[2]*v1[2]+v1[3]*v1[3]);
-         Plan96 (tjd,ipla,false,addr(v2),ierr);
-         if (ierr<>0) then exit;
-         for i:=1 to 3 do begin
-            w[i]:=v2[i]+v1[i];
-         end;
-         distance:=sqrt(w[1]*w[1]+w[2]*w[2]+w[3]*w[3]);
-         dp:=sqrt(v2[1]*v2[1]+v2[2]*v2[2]+v2[3]*v2[3]);
          t:=tjd-distance*tlight;
-         Plan96 (t,ipla,true,addr(v2),ierr);
-         if (ierr<>0) then exit;
+         Calc_Planet_de(t, ipla, v2,true,12,false);
          for i:=1 to 3 do begin
-            w[i]:=v2[i]+v1[i];
+            w[i]:=v2[i-1]+v1[i];
          end;
          alpha:=arctan2(w[2],w[1]);
          if (alpha<0) then alpha:=alpha+2*pi;
          qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
          if qr<>0 then delta:=arctan(w[3]/qr);
-         xp:=v2[1];
-         yp:=v2[2];
-         zp:=v2[3];
-         vel:=sqrt(v2[4]*v2[4]+v2[5]*v2[5]+v2[6]*v2[6])*km_au/secday;  // au/day -> km/s
+         xp:=v2[0];
+         yp:=v2[1];
+         zp:=v2[2];
 end else begin               // use Plan404
-// position without light time already computed above
-     // get distance for light time correction
-     x:=rp*cos(bp)*cos(lp) - rt*cos(bt)*cos(lt);
-     y:=rp*cos(bp)*sin(lp) - rt*cos(bt)*sin(lt);
-     z:=rp*sin(bp) - rt*sin(bt);
-     distance:=sqrt(x*x+y*y+z*z);
      // planet position with light time correction
      p.ipla:=ipla;
      p.JD:=t0-distance*tlight;
@@ -232,8 +215,8 @@ end else begin               // use Plan404
      se:=sin(degtorad(eps2000));
      alpha:=arctan2(sin(l)*ce-tan(b)*se , cos(l) );
      delta:=arcsin(sin(b)*ce+cos(b)*se*sin(l) );
-     vel:=0;
 end;
+vel:=42.1219*sqrt(1/dp-1/(2*sa[ipla]));
 {
   illuminated fraction
   correct the phase sign with the difference of longitude with the sun.
@@ -266,8 +249,9 @@ case ipla of
 end;
 end;
 
-Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double; highprec:boolean=true);
+Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double);
 var p :TPlanetData;
+    planet_arr: Array_5D;
     v,v2 : double6;
     tjd : double;
     i : integer;
@@ -280,16 +264,11 @@ if (t0=SolT0)and(astrometric=Solastrometric) then begin
 else begin
 if astrometric then tjd:=t0-tlight
                else tjd:=t0;
-if highprec and (t0>series96t1) and (t0<series96t2) then begin    // use SERIES96
-  Plan96 (tjd,3,false,addr(v),i);
-  if (i<>0) then exit;
-  Earth96 (tjd,addr(v2));
-  for i:=1 to 3 do begin
-    v[i]:=v2[i]-v[i];
-  end;
-  x:=v[1];
-  y:=v[2];
-  z:=v[3];
+if load_de(tjd) then begin    // use jpl DE-
+  Calc_Planet_de(tjd, 11, planet_arr,true,3,false);
+  x:=planet_arr[0];
+  y:=planet_arr[1];
+  z:=planet_arr[2];
 end else begin    // use Plan404
      p.ipla:=3;
      p.JD:=tjd;
@@ -308,10 +287,10 @@ ZSol:=z;
 end;
 end;
 
-Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double; highprec:boolean=true);
+Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double);
 var x,y,z,qr : double;
 begin
-  SunRect(t0,false,x,y,z,highprec);
+  SunRect(t0,false,x,y,z);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
@@ -693,7 +672,7 @@ j:=minintvalue([18,i+1]);
 result:=mma[i]+((mma[j]-mma[i])*k/10);
 end;
 
-Procedure TPlanet.Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double; highprec:boolean=true);
+Procedure TPlanet.Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double);
 {
 	t0      :  julian date DT
 	alpha   :  Moon RA J2000
@@ -709,18 +688,21 @@ var
    q : double;
    t,sm,mm,md : double;
    w : array[1..3] of double;
-   ierr : integer;
+   planet_arr: Array_5D;
+   i : integer;
    prec,pp : double;
 begin
-if highprec and (t0>elp82t1) and (t0<elp82t2) then begin   // use ELP82
-   prec:=0;
-   ELP82B(t0,prec,w,ierr);
+t0:=t0-(1.27/3600/24); // mean lighttime
+if load_de(t0) then begin
+   Calc_Planet_de(t0, 10, planet_arr,false,3,false);
+   for i:=0 to 2 do w[i+1]:=planet_arr[i];
    dkm:=sqrt(w[1]*w[1]+w[2]*w[2]+w[3]*w[3]);
    alpha:=arctan2(w[2],w[1]);
    if (alpha<0) then alpha:=alpha+2*pi;
    pp:=sqrt(w[1]*w[1]+w[2]*w[2]);
    delta:=arctan(w[3]/pp);
    dist:=dkm/km_au;
+   // result:='DE'+inttostr(de_type);
 end else begin  // use plan404
    p.JD:=t0;
    p.ipla:=11;
@@ -733,6 +715,7 @@ end else begin  // use plan404
    // plan404 give equinox of the date for the moon.
    precession(t0,jd2000,alpha,delta);
    dkm:=dist*km_au;
+   //result:='plan404';
 end;
 diam:=2*358482800/dkm;
 t:=(t0-2415020)/36525;  { meeus 15.1 }
@@ -2143,9 +2126,9 @@ var jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13: double;
 begin
 jdt:=jd0+(hh-cfgsc.TimeZone-cfgsc.DT_UT)/24;
 case pla of
-1..9: Planet(pla,jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13,false);
-10 :  Sun(jdt,ra,de,dm4,dm5,false);
-11 :  Moon(jdt,ra,de,dm4,dm5,dm6,dm7,dm8,false);
+1..9: Planet(pla,jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+10 :  Sun(jdt,ra,de,dm4,dm5);
+11 :  Moon(jdt,ra,de,dm4,dm5,dm6,dm7,dm8);
 end;
 precession(jd2000,jd0,ra,de);
 har:=rmod(sidtim(jd0, hh-cfgsc.TimeZone, cfgsc.Obslongitude) - ra + pi2, pi2);
@@ -2165,7 +2148,7 @@ case pla of
 1..9: ho:=-0.5667;
 10 : ho:=-0.8333;
 11: begin
-    Moon(jd0,ra,de,dist,dm5,diam,dm7,dm8,false);
+    Moon(jd0,ra,de,dist,dm5,diam,dm7,dm8);
     ho:=(8.794/dist/3600)-0.5748*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
     end;
 end;
@@ -2226,9 +2209,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         thr:=armtostr(hr);
         jdr:=jd0+(hr-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdr,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13,false);
-        10 :  Sun(jdr,ra,de,dist,dm5,false);
-        11 :  Moon(jdr,ra,de,dist,dm5,dm6,dm7,dm8,false);
+        1..9: Planet(pla,jdr,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdr,ra,de,dist,dm5);
+        11 :  Moon(jdr,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2249,9 +2232,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         ths:=armtostr(hs);
         jds:=jd0+(hs-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jds,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13,false);
-        10 :  Sun(jds,ra,de,dist,dm5,false);
-        11 :  Moon(jds,ra,de,dist,dm5,dm6,dm7,dm8,false);
+        1..9: Planet(pla,jds,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jds,ra,de,dist,dm5);
+        11 :  Moon(jds,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2272,9 +2255,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         tht:=armtostr(ht);
         jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13,false);
-        10 :  Sun(jdt,ra,de,dist,dm5,false);
-        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8,false);
+        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdt,ra,de,dist,dm5);
+        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2297,9 +2280,9 @@ end else begin
         tht:=armtostr(ht);
         jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13,false);
-        10 :  Sun(jdt,ra,de,dist,dm5,false);
-        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8,false);
+        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdt,ra,de,dist,dm5);
+        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2323,12 +2306,35 @@ end;
 procedure TPlanet.Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
 var ars,des,dist,diam: double;
 begin
-Sun(jd0+0.5,ars,des,dist,diam,false);
+Sun(jd0+0.5,ars,des,dist,diam);
 precession(jd2000,jd0,ars,des);
 if (ars<0) then ars:=ars+pi2;
 Time_Alt(jd0,ars,des,-18,astrom,astroe,obslat,obslon);
 Time_Alt(jd0,ars,des,-12,nautm,naute,obslat,obslon);
 Time_Alt(jd0,ars,des,-6,civm,cive,obslat,obslon);
+end;
+
+procedure TPlanet.SetDE(folder:string);
+begin
+   de_folder:=folder;
+end;
+
+function TPlanet.load_de(t: double): boolean;
+const
+  ndet=3;
+var
+  det:array [1..ndet] of integer = (421,405,406);
+  i: integer;
+begin
+result:=false;
+de_type:=0;
+for i:=1 to ndet do begin
+   if load_de_file(t,de_folder,det[i]) then begin
+     result:=true;
+     de_type:=det[i];
+     break;
+   end;
+end;
 end;
 
 end.

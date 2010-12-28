@@ -26,12 +26,12 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="--unique --nosplash"/>
+        <CommandLineParams Value="--nosplash"/>
         <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/usr/local/bin"/>
+        <WorkingDirectory Value="/usr/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="20">
+    <RequiredPackages Count="18">
       <Item1>
         <PackageName Value="uniqueinstance_package"/>
       </Item1>
@@ -48,67 +48,59 @@
         <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
       </Item4>
       <Item5>
-        <PackageName Value="elp82"/>
-        <DefaultFilename Value="library/elp82/elp82.lpk"/>
-      </Item5>
-      <Item6>
         <PackageName Value="enhedit"/>
         <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
+      </Item5>
+      <Item6>
+        <PackageName Value="FCL"/>
       </Item6>
       <Item7>
-        <PackageName Value="FCL"/>
+        <PackageName Value="LCL"/>
       </Item7>
       <Item8>
-        <PackageName Value="LCL"/>
-      </Item8>
-      <Item9>
         <PackageName Value="libsql"/>
         <DefaultFilename Value="component/libsql/libsql.lpk"/>
-      </Item9>
-      <Item10>
+      </Item8>
+      <Item9>
         <PackageName Value="mrecsort"/>
         <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
-      </Item10>
-      <Item11>
+      </Item9>
+      <Item10>
         <PackageName Value="MultiDocPackage"/>
         <MinVersion Valid="True"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Build="1" Valid="True"/>
-      </Item12>
-      <Item13>
+      </Item11>
+      <Item12>
         <PackageName Value="radec"/>
         <DefaultFilename Value="component/radec/radec.lpk"/>
-      </Item13>
-      <Item14>
+      </Item12>
+      <Item13>
         <PackageName Value="satxy"/>
         <DefaultFilename Value="library/satxy/satxy.lpk"/>
-      </Item14>
-      <Item15>
-        <PackageName Value="series96"/>
-        <DefaultFilename Value="library/series96/series96.lpk"/>
-      </Item15>
-      <Item16>
+      </Item13>
+      <Item14>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
-      </Item16>
-      <Item17>
+      </Item14>
+      <Item15>
         <PackageName Value="SynEdit"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item17>
-      <Item18>
+      </Item15>
+      <Item16>
         <PackageName Value="TurboPowerIPro"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item18>
-      <Item19>
+      </Item16>
+      <Item17>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
-      </Item19>
-      <Item20>
+      </Item17>
+      <Item18>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
-      </Item20>
+      </Item18>
     </RequiredPackages>
     <Units Count="50">
       <Unit0>

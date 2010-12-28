@@ -1094,6 +1094,7 @@ try
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
+ planet.SetDE(slash(Appdir)+slash('data')+'jpleph');
 {$ifdef trace_debug}
  WriteTrace('Telescope plugin');
 {$endif}
