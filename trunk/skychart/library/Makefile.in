@@ -8,14 +8,12 @@ version=0.0
 
 [target]
 dirs= catalog \
-     elp82 \
-     satxy \
-     series96 
+     satxy 
 
 [rules]
 .PHONY: all
 
-all: catalog_all elp82_all satxy_all series96_all
+all: catalog_all satxy_all
 ifeq ($(OS_TARGET),win32)
 else
 ifeq ($(CPU_TARGET),i386)
@@ -32,7 +30,7 @@ endif
 endif
 endif
 
-clean: catalog_clean elp82_clean satxy_clean series96_clean
+clean: catalog_clean satxy_clean
 ifeq ($(OS_TARGET),win32)
 else
 	$(MAKE) -C getdss clean
