@@ -1,5 +1,7 @@
 Version 3.3svn release Notes
 
+- New Animation and movie recording function.
+- Planet computation use JPL ephemeris.
 - Add Planet graph in calendar, contributed by John Sunderland.
 - Add artificials satellites to the calendar. Click in a line to display the satellite pass on the map. You need to install Wine on Linux and Mac.
 - Add solar system objects velocity information.
