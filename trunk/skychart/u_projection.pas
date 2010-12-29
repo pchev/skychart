@@ -61,7 +61,7 @@ PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skycha
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
 function ecliptic(j:double):double;
-procedure nutation(j:double; var nutl,nuto:double);
+procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
@@ -816,9 +816,10 @@ result:=eps2000 +(
 result:=deg2rad*result;
 end;
 
-procedure nutation(j:double; var nutl,nuto:double);
+procedure nutationme(j:double; var nutl,nuto:double);
 var t,om,me,mas,mam,al : double;
 begin
+// use this function only if cu_planet.nutation cannot get nutation from JPL ephemeris
 t:=(j-jd2000)/36525;
 // high precision. using meeus91 table 21.A
 //longitude of the asc.node of the Moon's mean orbit on the ecliptic

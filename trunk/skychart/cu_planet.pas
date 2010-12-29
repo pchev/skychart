@@ -110,6 +110,7 @@ type
      procedure PlanetRiseSet(pla:integer; jd0:double; AzNorth:boolean; var thr,tht,ths,tazr,tazs: string; var jdr,jdt,jds,rar,der,rat,det,ras,des:double ; var i: integer; cfgsc: Tconf_skychart);
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
      procedure Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
+     procedure nutation(j:double; var nutl,nuto:double);
      property eph_method: string read Feph_method;
   end;
 
@@ -584,9 +585,14 @@ Procedure TPlanet.MoonOrientation(jde,ra,dec,d:double; var P,llat,lats,llong : d
 var lp,l,b,f,om,w,T,a,i,lh,bh,e,v,x,y,l0 {,cel,sel,asol,dsol} : double;
     pl :TPlanetData;
 begin
+{ P: position angle  (degree)
+  llat: libration latitude (degree)
+  llong: libration longitude  (degree)
+  lats:  sun inclination (degree) }
 T := (jde-2451545)/36525;
 e:=deg2rad*23.4392911;
 eq2ecl(ra,dec,e,lp,b);
+// libration
 F:=93.2720993+483202.0175273*t-0.0034029*t*t-t*t*t/3526000+t*t*t*t/863310000;
 om:=125.0445550-1934.1361849*t+0.0020762*t*t+t*t*t/467410-t*t*t*t/60616000;
 w:=lp-deg2rad*om;
@@ -596,6 +602,7 @@ a:=rad2deg*(arctan2(sin(w)*cos(b)*cos(i)-sin(b)*sin(i),cos(w)*cos(b)));
 llong:=to360(a-F);
 if llong>180 then llong:=llong-360;
 llat:=arcsin(-sin(w)*cos(b)*sin(i)-sin(b)*cos(i));
+// position
 pl.ipla:=3;
 pl.JD:=jde-tlight;
 Plan404(addr(pl));
@@ -2343,6 +2350,22 @@ for i:=1 to ndet do begin
      break;
    end;
 end;
+end;
+
+procedure TPlanet.nutation(j:double; var nutl,nuto:double);
+var planet_arr: Array_5D;
+    ok:boolean;
+begin
+ok:=false;
+if load_de(j) then begin
+  ok:=Calc_Planet_de(j, 14, planet_arr,false,3,false);
+  if ok then begin
+    nutl:=planet_arr[0];
+    nuto:=planet_arr[1];
+  end;
+end;
+if not ok then
+  nutationMe(j,nutl,nuto);
 end;
 
 end.

@@ -609,7 +609,7 @@ if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot
 //cfgsc.e:=ecliptic(cfgsc.CurJd);
 cfgsc.e:=ecliptic(cfgsc.JdChart);
 // nutation constant
-nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
+Fplanet.nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
