@@ -71,14 +71,15 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="177"/>
-        <CursorPos X="22" Y="191"/>
+        <TopLine Value="425"/>
+        <CursorPos X="45" Y="443"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
-          <Item0 X="27" Y="388" ID="1"/>
-          <Item1 X="1" Y="465" ID="2"/>
+          <Item0 X="27" Y="389" ID="1"/>
+          <Item1 X="1" Y="467" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -174,11 +175,10 @@
       <Unit14>
         <Filename Value="cu_planet.pas"/>
         <UnitName Value="cu_planet"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="260"/>
-        <CursorPos X="34" Y="287"/>
+        <TopLine Value="2343"/>
+        <CursorPos X="29" Y="2357"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit14>
@@ -270,119 +270,119 @@
       </Position1>
       <Position2>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="589" Column="54" TopLine="567"/>
+        <Caret Line="11" Column="69" TopLine="1"/>
       </Position2>
       <Position3>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="596" Column="25" TopLine="567"/>
+        <Caret Line="157" Column="24" TopLine="142"/>
       </Position3>
       <Position4>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="597" Column="74" TopLine="567"/>
+        <Caret Line="377" Column="49" TopLine="353"/>
       </Position4>
       <Position5>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="545" Column="23" TopLine="523"/>
+        <Caret Line="426" Column="36" TopLine="411"/>
       </Position5>
       <Position6>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="468" Column="17" TopLine="439"/>
+        <Caret Line="444" Column="27" TopLine="420"/>
       </Position6>
       <Position7>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="80" Column="35" TopLine="70"/>
+        <Caret Line="447" Column="20" TopLine="423"/>
       </Position7>
       <Position8>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="695" Column="39" TopLine="669"/>
+        <Caret Line="448" Column="20" TopLine="424"/>
       </Position8>
       <Position9>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="306" Column="3" TopLine="283"/>
+        <Caret Line="533" Column="49" TopLine="511"/>
       </Position9>
       <Position10>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="303" Column="3" TopLine="283"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position10>
       <Position11>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="301" Column="1" TopLine="283"/>
+        <Caret Line="158" Column="60" TopLine="136"/>
       </Position11>
       <Position12>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="302" Column="1" TopLine="283"/>
+        <Caret Line="428" Column="13" TopLine="417"/>
       </Position12>
       <Position13>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="304" Column="1" TopLine="283"/>
+        <Caret Line="426" Column="48" TopLine="417"/>
       </Position13>
       <Position14>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="308" Column="1" TopLine="283"/>
+        <Caret Line="429" Column="1" TopLine="426"/>
       </Position14>
       <Position15>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="303" Column="14" TopLine="283"/>
+        <Caret Line="430" Column="1" TopLine="425"/>
       </Position15>
       <Position16>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="304" Column="25" TopLine="283"/>
+        <Caret Line="449" Column="1" TopLine="425"/>
       </Position16>
       <Position17>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="307" Column="50" TopLine="283"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2359" Column="1" TopLine="2344"/>
       </Position17>
       <Position18>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2360" Column="1" TopLine="2344"/>
       </Position18>
       <Position19>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="578" Column="4" TopLine="553"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2353" Column="1" TopLine="2344"/>
       </Position19>
       <Position20>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1703" Column="42" TopLine="1686"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2345" Column="1" TopLine="2340"/>
       </Position20>
       <Position21>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1704" Column="1" TopLine="1686"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2346" Column="1" TopLine="2340"/>
       </Position21>
       <Position22>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1712" Column="1" TopLine="1686"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2347" Column="1" TopLine="2340"/>
       </Position22>
       <Position23>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1732" Column="1" TopLine="1710"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2348" Column="1" TopLine="2340"/>
       </Position23>
       <Position24>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1736" Column="1" TopLine="1710"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2349" Column="1" TopLine="2340"/>
       </Position24>
       <Position25>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1698" Column="48" TopLine="1681"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2350" Column="1" TopLine="2340"/>
       </Position25>
       <Position26>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="498" Column="35" TopLine="490"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2353" Column="1" TopLine="2340"/>
       </Position26>
       <Position27>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2361" Column="1" TopLine="2340"/>
       </Position27>
       <Position28>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1698" Column="48" TopLine="1681"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2362" Column="1" TopLine="2340"/>
       </Position28>
       <Position29>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="205" Column="36" TopLine="186"/>
+        <Filename Value="cu_planet.pas"/>
+        <Caret Line="2363" Column="1" TopLine="2340"/>
       </Position29>
       <Position30>
         <Filename Value="cu_planet.pas"/>
-        <Caret Line="275" Column="1" TopLine="260"/>
+        <Caret Line="2364" Column="1" TopLine="2340"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

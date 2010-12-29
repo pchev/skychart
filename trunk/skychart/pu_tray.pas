@@ -155,6 +155,7 @@ iconinfo:=4;
 {$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
 f_clock.planet:=TPlanet.Create(self);
+f_clock.planet.SetDE(slash(appdir)+slash('data')+'jpleph');
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
@@ -424,6 +425,7 @@ begin
 if f_calendar=nil then begin
   f_calendar:=Tf_calendar.Create(self);
   f_calendar.planet:=f_clock.planet;
+  f_calendar.planet.SetDE(slash(appdir)+slash('data')+'jpleph');
   f_calendar.cdb:=cdcdb;
   f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
   f_calendar.AzNorth:=true;
@@ -444,7 +446,7 @@ end else begin
   f_calendar.config.PlanetParalaxe:=true;
   f_calendar.config.ApparentPos:=true;
   f_calendar.config.e:=ecliptic(f_calendar.config.JdChart);
-  nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
+  f_calendar.planet.nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
   f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   aberration(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
