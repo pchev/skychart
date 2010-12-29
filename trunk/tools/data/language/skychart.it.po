@@ -1,7 +1,7 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-23 09:42+0100\n"
+"PO-Revision-Date: 2010-12-27 11:14+0100\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -82,7 +82,7 @@ msgstr "Aggiungi Griglia Equatoriale"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr ""
+msgstr "Impostazioni ffmpeg"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
@@ -170,7 +170,7 @@ msgstr "Mostra sempre la bussola"
 
 #: u_translation.rsanimation
 msgid "Animation"
-msgstr ""
+msgstr "Animazione"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -442,7 +442,7 @@ msgstr "Annulla, file zip errato ?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
-msgstr ""
+msgstr "Impossibile calcolare satelliti."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -1084,7 +1084,7 @@ msgstr "Gradi, minuti, secondi"
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
-msgstr ""
+msgstr "Intervallo tra frame"
 
 #: u_translation.rsdelete
 msgid "Delete"
@@ -1293,7 +1293,7 @@ msgstr "Scarica elementi orbitali aggiornati"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr ""
+msgstr "Scarica TLE"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1537,7 +1537,7 @@ msgstr "Più debole"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Dimensione delle stelle deboli"
+msgstr "Dimensione stelle deboli"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -1545,7 +1545,7 @@ msgstr "FAQ"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr ""
+msgstr "Percorso ffmpeg "
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1641,7 +1641,7 @@ msgstr "Numero di Flamsteed"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
-msgstr ""
+msgstr "Previsione Iridium flare:"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1653,7 +1653,7 @@ msgstr "Per un grosso catalogo scegli Binario. Per uno piccolo che sarà modific
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
-msgstr ""
+msgstr "Solo per la cartina corrente"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1669,15 +1669,15 @@ msgstr "fov numero:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr ""
+msgstr "Frame al secondo"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr ""
+msgstr "Dimensioni frame"
 
 #: u_translation.rsfreesize
 msgid "Free size"
-msgstr ""
+msgstr "Spazio libero"
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -1775,7 +1775,7 @@ msgstr "Grafica"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr ""
+msgstr "Grafici"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1895,7 +1895,7 @@ msgstr "Icona Visualizza Orario"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
-msgstr ""
+msgstr "Se non è installato prova a seconda di qual'è il tuo sistema operativo:"
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -1923,15 +1923,15 @@ msgstr "Inclinazione="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "Includi passaggi diurni"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
-msgstr ""
+msgstr "Includi Iridium flare"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "Incremento per stelle brillanti"
+msgstr "Incremento stelle brillanti"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
@@ -2623,7 +2623,7 @@ msgstr "Nessun crepuscolo astronomico per oggi!"
 
 #: u_translation.rsnochange
 msgid "No change"
-msgstr ""
+msgstr "Nessun cambiamento"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3025,11 +3025,11 @@ msgstr "Per favore, indica la cartella dove creare il catalogo"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
+msgstr "Per favore, installa \"Dosbox\" http://www.dosbox.com/ per calcolare gli Iridium flare sul tuo computer."
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
+msgstr "Per favore, installa wine http://www.winehq.org/ per calcolare i satelliti artificiali sul tuo computer."
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
@@ -3297,7 +3297,7 @@ msgstr "RealSky Sud"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr ""
+msgstr "Opzioni real time"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -3305,23 +3305,23 @@ msgstr "Riconosci unità o tipo di oggetto dal file:"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
-msgstr ""
+msgstr "Registra animazione su file"
 
 #: u_translation.rsrecordingdir
 msgid "Recording directory"
-msgstr ""
+msgstr "Cartella di registrazione"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr ""
+msgstr "Estensione registrazione"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
-msgstr ""
+msgstr "Opzioni registrazione"
 
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
-msgstr ""
+msgstr "Prefisso registrazione"
 
 #: u_translation.rsred
 msgid "Red"
@@ -3485,7 +3485,7 @@ msgstr "Satellite"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr ""
+msgstr "Calcolo satelliti:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -3881,7 +3881,7 @@ msgstr "Qualcosa di sbagliato è successo durante l'avvio. Il programma ora si c
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
+msgstr "Mi dispiace, la funzione copia non è ancora attiva per questa pagina"
 
 #: u_translation.rssortby
 msgid "Sort by"
