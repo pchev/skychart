@@ -6780,6 +6780,7 @@ object f_main: Tf_main
     end
     object topmessage: TMenuItem
       Caption = ' '
+      Enabled = False
     end
   end
   object OpenDialog: TOpenDialog
