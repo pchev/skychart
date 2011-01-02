@@ -1,6 +1,6 @@
 Version 3.3svn  Notes de la version
 
-- Nouvelle fonction d'animation et d'enregistrement de film.
+- Nouvelle fonction d'animation et d'enregistrement de film. Voir la documentation pour l'installation du programme ffmpeg.
 - Calcul de la position des planètes avec les éphémérides JPL.
 - Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
 - Ajout des satellites artificiels au calendrier. Cliquez sur une ligne pour l'afficher sur la carte. Vous devez installer Wine si vous utilisez Linux ou Mac.
