@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <Name Value="HtmlComp"/>
+    <AddToProjectUsesSection Value="False"/>
+    <Author Value="L. David Baldwin's HTML Components for Delphi; ported to Lazarus by Phil Hess"/>
+    <CompilerOptions>
+      <Version Value="8"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Parsing>
+        <SyntaxOptions>
+          <SyntaxMode Value="Delphi"/>
+          <CStyleOperator Value="False"/>
+          <IncludeAssertionCode Value="True"/>
+          <AllowLabel Value="False"/>
+          <CPPInline Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
+      <Other>
+        <WriteFPCLogo Value="False"/>
+        <CustomOptions Value="-dDebugIt"/>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Description Value="HTML Components for Lazarus"/>
+    <License Value="MPL 1.1"/>
+    <Version Release="4"/>
+    <Files Count="1">
+      <Item1>
+        <Filename Value="htmlcompreg.pas"/>
+        <HasRegisterProc Value="True"/>
+        <UnitName Value="HtmlCompReg"/>
+      </Item1>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="IDEIntf"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)/"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
