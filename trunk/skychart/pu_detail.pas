@@ -28,10 +28,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_util,
+uses u_help, u_translation, u_util, u_constant, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, IpHtml, LazHelpHTML;
+  Buttons, LazHelpHTML, Htmlview;
 
 type
   Tstr1func = procedure(txt:string) of object;
@@ -40,8 +40,8 @@ type
 
   Tf_detail = class(TForm)
     Copy: TAction;
+    HTMLViewer1: THTMLViewer;
     SelectAll: TAction;
-    IpHtmlPanel1: TIpHtmlPanel;
     Panel1: TPanel;
     Button1: TButton;
     ActionList1: TActionList;
@@ -106,9 +106,11 @@ if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
 procedure Tf_detail.CopyExecute(Sender: TObject);
+var buf: string;
 begin
-  if not IpHtmlPanel1.HaveSelection then IpHtmlPanel1.SelectAll;
-  IpHtmlPanel1.CopyToClipboard;
+  if HTMLViewer1.SelLength=0 then HTMLViewer1.SelectAll;
+  buf:=HTMLViewer1.SelText;
+  Clipboard.AsText:=buf;
 end;
 
 procedure Tf_detail.FormShow(Sender: TObject);
@@ -126,7 +128,7 @@ end;
 
 procedure Tf_detail.SelectAllExecute(Sender: TObject);
 begin
-  IpHtmlPanel1.SelectAll;
+  HTMLViewer1.SelectAll;
 end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
@@ -135,22 +137,10 @@ SetLang;
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);
-var
-  s: TStringStream;
-  NewHTML: TIpHtml;
 begin
-  try
-    s:=TStringStream.Create(UTF8FileHeader+value);
-    try
-      NewHTML:=TIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
-      NewHTML.LoadFromStream(s);
-    finally
-      FHTMLText:=value;
-      s.Free;
-    end;
-    IpHtmlPanel1.SetHtml(NewHTML);
-  except
-  end;
+  HTMLViewer1.Clear;
+  HTMLViewer1.ClearHistory;
+  HTMLViewer1.LoadFromString(value);
 end;
 
 initialization

@@ -1848,8 +1848,8 @@ procedure Tf_chart.identlabelClick(Sender: TObject);
 begin
 if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
-f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
-f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
+f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
+f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
 f_detail.show;
 f_detail.text:=FormatDesc;
 f_detail.setfocus;
@@ -2040,7 +2040,7 @@ repeat
   txt:=txt+buf2+html_br;
 until buf='';
 //writetrace(txt);
-result:=txt+htms_f+html_br+htms_h;
+result:=txt+html_br+htms_h;
 end;
 
 function Tf_chart.LongLabelObj(txt:string):string;

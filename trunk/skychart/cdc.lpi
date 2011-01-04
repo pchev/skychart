@@ -33,64 +33,64 @@
     </RunParams>
     <RequiredPackages Count="18">
       <Item1>
-        <PackageName Value="uniqueinstance_package"/>
+        <PackageName Value="HtmlComp"/>
+        <MinVersion Release="4" Valid="True"/>
       </Item1>
       <Item2>
-        <PackageName Value="cdccatalog"/>
-        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
+        <PackageName Value="uniqueinstance_package"/>
       </Item2>
       <Item3>
-        <PackageName Value="CDCjdcalendar"/>
-        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
+        <PackageName Value="cdccatalog"/>
+        <DefaultFilename Value="library/catalog/cdccatalog.lpk"/>
       </Item3>
       <Item4>
-        <PackageName Value="downldialog"/>
-        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
+        <PackageName Value="CDCjdcalendar"/>
+        <DefaultFilename Value="component/jdcalendar/cdcjdcalendar.lpk"/>
       </Item4>
       <Item5>
-        <PackageName Value="enhedit"/>
-        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
+        <PackageName Value="downldialog"/>
+        <DefaultFilename Value="component/downloaddialog/downldialog.lpk"/>
       </Item5>
       <Item6>
-        <PackageName Value="FCL"/>
+        <PackageName Value="enhedit"/>
+        <DefaultFilename Value="component/enhedits/enhedit.lpk"/>
       </Item6>
       <Item7>
-        <PackageName Value="LCL"/>
+        <PackageName Value="FCL"/>
       </Item7>
       <Item8>
-        <PackageName Value="libsql"/>
-        <DefaultFilename Value="component/libsql/libsql.lpk"/>
+        <PackageName Value="LCL"/>
       </Item8>
       <Item9>
-        <PackageName Value="mrecsort"/>
-        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
+        <PackageName Value="libsql"/>
+        <DefaultFilename Value="component/libsql/libsql.lpk"/>
       </Item9>
       <Item10>
-        <PackageName Value="MultiDocPackage"/>
-        <MinVersion Valid="True"/>
+        <PackageName Value="mrecsort"/>
+        <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
       </Item10>
       <Item11>
-        <PackageName Value="Printer4Lazarus"/>
-        <MinVersion Build="1" Valid="True"/>
+        <PackageName Value="MultiDocPackage"/>
+        <MinVersion Valid="True"/>
       </Item11>
       <Item12>
-        <PackageName Value="radec"/>
-        <DefaultFilename Value="component/radec/radec.lpk"/>
+        <PackageName Value="Printer4Lazarus"/>
+        <MinVersion Build="1" Valid="True"/>
       </Item12>
       <Item13>
-        <PackageName Value="satxy"/>
-        <DefaultFilename Value="library/satxy/satxy.lpk"/>
+        <PackageName Value="radec"/>
+        <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item13>
       <Item14>
-        <PackageName Value="synapse"/>
-        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
+        <PackageName Value="satxy"/>
+        <DefaultFilename Value="library/satxy/satxy.lpk"/>
       </Item14>
       <Item15>
-        <PackageName Value="SynEdit"/>
-        <MinVersion Major="1" Valid="True"/>
+        <PackageName Value="synapse"/>
+        <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
       </Item15>
       <Item16>
-        <PackageName Value="TurboPowerIPro"/>
+        <PackageName Value="SynEdit"/>
         <MinVersion Major="1" Valid="True"/>
       </Item16>
       <Item17>
