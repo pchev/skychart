@@ -15,6 +15,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/libsql \
      skychart/component/mrecsort \
      skychart/component/uniqueinstance \
+     skychart/component/thtmlport/package \
      skychart/component/xmlparser \
      skychart/component/enhedits \
      skychart/component/radec \
@@ -25,9 +26,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/vo \
      skychart/component \
      skychart/library/catalog \
-     skychart/library/elp82 \
      skychart/library/satxy \
-     skychart/library/series96 \
      skychart/library \
      skychart \
      varobs \
