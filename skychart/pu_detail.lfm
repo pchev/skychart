@@ -1,32 +1,32 @@
 object f_detail: Tf_detail
   Left = 666
-  Height = 616
-  Top = 112
-  Width = 398
+  Height = 461
+  Top = 267
+  Width = 361
   ActiveControl = Panel1
-  BorderStyle = bsToolWindow
+  BorderStyle = bsSizeToolWin
   Caption = 'Details'
-  ClientHeight = 616
-  ClientWidth = 398
+  ClientHeight = 461
+  ClientWidth = 361
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.31'
   object Panel1: TPanel
     Left = 0
-    Height = 50
+    Height = 38
     Top = 0
-    Width = 398
+    Width = 361
     Align = alTop
-    ClientHeight = 50
-    ClientWidth = 398
+    ClientHeight = 38
+    ClientWidth = 361
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
       Left = 266
-      Height = 31
+      Height = 25
       Top = 6
-      Width = 117
+      Width = 86
       BorderSpacing.InnerBorder = 4
       Cancel = True
       Caption = 'Close'
@@ -35,7 +35,7 @@ object f_detail: Tf_detail
     end
     object Button2: TButton
       Left = 8
-      Height = 31
+      Height = 25
       Top = 6
       Width = 117
       BorderSpacing.InnerBorder = 4
@@ -45,7 +45,7 @@ object f_detail: Tf_detail
     end
     object Button3: TButton
       Left = 138
-      Height = 31
+      Height = 25
       Top = 6
       Width = 117
       BorderSpacing.InnerBorder = 4
@@ -54,22 +54,28 @@ object f_detail: Tf_detail
       TabOrder = 1
     end
   end
-  object IpHtmlPanel1: TIpHtmlPanel
+  object HTMLViewer1: THTMLViewer
     Left = 0
-    Height = 566
-    Top = 50
-    Width = 398
-    Align = alClient
-    FixedTypeface = 'fixed'
-    DefaultTypeFace = 'sans'
-    DefaultFontSize = 8
-    FlagErrors = False
-    PopupMenu = PopupMenu1
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
+    Height = 423
+    Top = 38
+    Width = 361
     TabOrder = 1
+    Align = alClient
+    PopupMenu = PopupMenu1
+    DefBackground = clWindow
+    BorderStyle = htNone
+    HistoryMaxCount = 0
+    DefFontName = 'Times New Roman'
+    DefPreFontName = 'Courier New'
+    DefFontSize = 10
+    DefFontColor = clWindowText
+    NoSelect = False
+    CharSet = DEFAULT_CHARSET
+    PrintMarginLeft = 2
+    PrintMarginRight = 2
+    PrintMarginTop = 2
+    PrintMarginBottom = 2
+    PrintScale = 1
   end
   object ActionList1: TActionList
     left = 128

@@ -686,8 +686,8 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
 
 // Text formating constant
 const
-     html_h        = '<HTML><body bgcolor="#FFFFFF" text="#000000">';
-     html_h_nv     = '<HTML><body bgcolor="#000000" text="#C03030">';
+     html_h        = '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body>';
+     html_h_nv     = '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030">';
      htms_h        = '</body></HTML>';
      html_ffx      = '<font face="fixed">';
      htms_f        = '</font>';

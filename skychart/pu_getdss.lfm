@@ -12,35 +12,26 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  LCLVersion = '0.9.29'
-  object Label1: TLabel
-    Left = 12
-    Height = 11
-    Top = 8
-    Width = 31
-    Caption = 'Label1'
-    Font.CharSet = ANSI_CHARSET
-    Font.Height = -11
-    Font.Name = 'courier'
-    Font.Pitch = fpFixed
-    ParentColor = False
-    ParentFont = False
-  end
-  object IpHtmlPanel1: TIpHtmlPanel
-    Left = 9
-    Height = 248
-    Top = 24
-    Width = 403
-    FixedTypeface = 'Courier New'
-    DefaultTypeFace = 'default'
-    DefaultFontSize = 12
-    FlagErrors = False
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
+  LCLVersion = '0.9.31'
+  object HTMLViewer1: THTMLViewer
+    Left = 8
+    Height = 232
+    Top = 32
+    Width = 401
     TabOrder = 3
-    Visible = False
+    DefBackground = clWindow
+    BorderStyle = htFocused
+    HistoryMaxCount = 0
+    DefFontName = 'Times New Roman'
+    DefPreFontName = 'Courier New'
+    DefFontColor = clWindowText
+    NoSelect = False
+    CharSet = DEFAULT_CHARSET
+    PrintMarginLeft = 2
+    PrintMarginRight = 2
+    PrintMarginTop = 2
+    PrintMarginBottom = 2
+    PrintScale = 1
   end
   object ListBox1: TListBox
     Left = 8
@@ -56,6 +47,19 @@ object f_getdss: Tf_getdss
     ParentFont = False
     TabOrder = 0
     TopIndex = -1
+  end
+  object Label1: TLabel
+    Left = 12
+    Height = 15
+    Top = 8
+    Width = 43
+    Caption = 'Label1'
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -11
+    Font.Name = 'courier'
+    Font.Pitch = fpFixed
+    ParentColor = False
+    ParentFont = False
   end
   object BitBtn1: TBitBtn
     Left = 96
