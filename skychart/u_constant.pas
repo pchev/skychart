@@ -124,6 +124,9 @@ const cdcversion = 'Version 3.3 svn';
       D0jup : array [1..4] of double = (1821,1565,2634,2403);
       D0sat : array [1..8] of double = (199,249,530,560,764,2575,143,718);
       D0ura : array [1..5] of double = (236,581,585,789,761);
+      nJPL_DE=6;
+      JPL_DE:array [1..nJPL_DE] of integer = (423,421,405,406,403,200);  // JPL ephemeris to try, order by preference
+
       blank15='               ';
       blank=' ';
       tab=#09;
@@ -661,7 +664,7 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
      crRetic: TCursor = 5;
      Params : TStringList;
      de_folder: string;
-     de_type:integer;
+     de_type, de_year:integer;
 
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
