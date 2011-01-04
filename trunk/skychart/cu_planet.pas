@@ -122,6 +122,8 @@ begin
  lockpla:=false;
  lockdb:=false;
  Feph_method:='';
+ de_type:=0;
+ de_year:=-999999;
 { satxyok:=true;
  satxylib:=LoadLibrary(libsatxy);
  if satxylib<>0 then begin
@@ -2335,20 +2337,25 @@ begin
 end;
 
 function TPlanet.load_de(t: double): boolean;
-const
-  ndet=3;
 var
-  det:array [1..ndet] of integer = (421,405,406);
   i: integer;
+  y,m,d : integer;
+  hour: double;
 begin
-result:=false;
-de_type:=0;
-for i:=1 to ndet do begin
-   if load_de_file(t,de_folder,det[i]) then begin
-     result:=true;
-     de_type:=det[i];
-     break;
-   end;
+djd(t,y,m,d,hour);
+if y=de_year then begin
+  result:=(de_type<>0);
+end else begin
+  result:=false;
+  de_type:=0;
+  for i:=1 to nJPL_DE do begin
+     if load_de_file(t,de_folder,JPL_DE[i]) then begin
+       result:=true;
+       de_type:=JPL_DE[i];
+       break;
+     end;
+  end;
+  de_year:=y;
 end;
 end;
 
@@ -2358,7 +2365,7 @@ var planet_arr: Array_5D;
 begin
 ok:=false;
 if load_de(j) then begin
-  ok:=Calc_Planet_de(j, 14, planet_arr,false,3,false);
+  ok:=Calc_Planet_de(j, 14, planet_arr,false,0,false);
   if ok then begin
     nutl:=planet_arr[0];
     nuto:=planet_arr[1];
