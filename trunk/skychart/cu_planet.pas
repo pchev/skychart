@@ -52,7 +52,7 @@ type
     ast_daypos,com_daypos: string;
     Feph_method: string;
     smsg:Tstrings;
-    SolAstrometric : boolean;
+    SolAstrometric, SolBarycenter : boolean;
     CurrentStep,CurrentPlanet,n_com,n_ast : integer;
     CurrentAstStep,CurrentAsteroid : integer;
     CurrentComStep,CurrentComet : integer;
@@ -75,8 +75,9 @@ type
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
      function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
+     Procedure Plan(ipla: integer; t: double ; var p: TPlanData);
      Procedure Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
-     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double);
+     Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
      Function MarSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
@@ -151,6 +152,41 @@ writetrace('error destroy '+name);
 end;
 end;
 
+Procedure TPlanet.Plan(ipla: integer; t: double ; var p: TPlanData);
+var v2: Array_5D;
+    pl :TPlanetData;
+    x,y,z,qr: double;
+begin
+if load_de(t) then begin    // use jpl DE-
+  Calc_Planet_de(t, ipla, v2,true,12,false);
+  p.x:=v2[0];
+  p.y:=v2[1];
+  p.z:=v2[2];
+  // rotate equatorial to ecliptic
+  x:=p.x;
+  y:= coseps2k*p.y + sineps2k*p.z;
+  z:= -sineps2k*p.y + coseps2k*p.z;
+  // convert to polar
+  p.r:=sqrt(x*x+y*y+z*z);
+  p.l:=arctan2(y,x);
+  if (p.l<0) then p.l:=p.l+2*pi;
+  qr:=sqrt(x*x+y*y);
+  if qr<>0 then p.b:=arctan(z/qr);
+  Feph_method:='DE'+inttostr(de_type);
+end else begin               // use Plan404
+  pl.ipla:=ipla;
+  pl.JD:=t;
+  Plan404(addr(pl));
+  p.x:=pl.x;
+  p.y:=pl.y;
+  p.z:=pl.z;
+  p.l:=pl.l;
+  p.b:=pl.b;
+  p.r:=pl.r;
+  Feph_method:='plan404';
+end;
+end;
+
 Procedure TPlanet.Planet(ipla : integer; t0 : double ; var alpha,delta,distance,illum,phase,diameter,magn,dp,xp,yp,zp,vel : double);
 const
       sa : array[1..9] of double =(0.38709893,0.72333199,1.00000011,1.52366231,5.20336301,9.53707032,19.19126393,30.06896348,39.48168677);
@@ -158,73 +194,46 @@ const
       V0 : array[1..9] of double =(-0.42,-4.40,0,-1.52,-9.40,-8.88,-7.19,-6.87,-1.0);
 
 var  v1: double6;
-     v2: Array_5D;
      w : array[1..3] of double;
      tjd,t : double;
-     i,ierr : integer;
-     p :TPlanetData;
+     i: integer;
+     pl :TPlanData;
      lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr,xt,yt,zt : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
 // always do this computation for phase sign
   // Earth position
-  p.ipla:=3;
-  p.JD:=t0-tlight;
-  Plan404(addr(p));
-  lt:=p.l; bt:=p.b; rt:=p.r;
-  xt:=p.x; yt:=p.y; zt:=p.z;
+  Plan(3,t0-tlight,pl);
+  lt:=pl.l; bt:=pl.b; rt:=pl.r;
+  xt:=pl.x; yt:=pl.y; zt:=pl.z;
   dt:=rt;
   // planet position
-  p.ipla:=ipla;
-  p.JD:=t0;
-  Plan404(addr(p));
-  lp:=p.l; bp:=p.b; rp:=p.r;
+  Plan(ipla,t0,pl);
+  lp:=pl.l; bp:=pl.b; rp:=pl.r;
   dp:=rp;
  // get distance for light time correction
- xt:=p.x-xt;
- yt:=p.y-yt;
- zt:=p.z-zt;
+ xt:=pl.x-xt;
+ yt:=pl.y-yt;
+ zt:=pl.z-zt;
  distance:=sqrt(xt*xt+yt*yt+zt*zt);
-if load_de(t0) then begin    // use jpl DE-
-         tjd:=t0;
-         SunRect(tjd,false,v1[1],v1[2],v1[3]);
-         dt:=sqrt(v1[1]*v1[1]+v1[2]*v1[2]+v1[3]*v1[3]);
-         t:=tjd-distance*tlight;
-         Calc_Planet_de(t, ipla, v2,true,12,false);
-         for i:=1 to 3 do begin
-            w[i]:=v2[i-1]+v1[i];
-         end;
-         alpha:=arctan2(w[2],w[1]);
-         if (alpha<0) then alpha:=alpha+2*pi;
-         qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
-         if qr<>0 then delta:=arctan(w[3]/qr);
-         xp:=v2[0];
-         yp:=v2[1];
-         zp:=v2[2];
-         Feph_method:='DE'+inttostr(de_type);
-end else begin               // use Plan404
-     // planet position with light time correction
-     p.ipla:=ipla;
-     p.JD:=t0-distance*tlight;
-     Plan404(addr(p));
-     xp:=p.x;
-     yp:=p.y;
-     zp:=p.z;
-     lp:=p.l; bp:=p.b; rp:=p.r;
-     x:=rp*cos(bp)*cos(lp) - rt*cos(bt)*cos(lt);
-     y:=rp*cos(bp)*sin(lp) - rt*cos(bt)*sin(lt);
-     z:=rp*sin(bp) - rt*sin(bt);
-     // J2000 geocentric coordinates
-     l:=arctan2(y,x);
-     qr:=sqrt(x*x+y*y);
-     if qr<>0 then b:=arctan(z/qr);
-     ce:=cos(degtorad(eps2000));
-     se:=sin(degtorad(eps2000));
-     alpha:=arctan2(sin(l)*ce-tan(b)*se , cos(l) );
-     delta:=arcsin(sin(b)*ce+cos(b)*se*sin(l) );
-     Feph_method:='plan404';
-end;
-vel:=42.1219*sqrt(1/dp-1/(2*sa[ipla]));
+ // planet using light correction
+ tjd:=t0;
+ SunRect(tjd,false,v1[1],v1[2],v1[3]);
+ dt:=sqrt(v1[1]*v1[1]+v1[2]*v1[2]+v1[3]*v1[3]);
+ t:=tjd-distance*tlight;
+ Plan(ipla,t,pl);
+ w[1]:=pl.x+v1[1];
+ w[2]:=pl.y+v1[2];
+ w[3]:=pl.z+v1[3];
+ alpha:=arctan2(w[2],w[1]);
+ if (alpha<0) then alpha:=alpha+2*pi;
+ qr:=sqrt(w[1]*w[1]+w[2]*w[2]);
+ if qr<>0 then delta:=arctan(w[3]/qr);
+ xp:=pl.x;
+ yp:=pl.y;
+ zp:=pl.z;
+ // velocity
+ vel:=42.1219*sqrt(1/dp-1/(2*sa[ipla]));
 {
   illuminated fraction
   correct the phase sign with the difference of longitude with the sun.
@@ -257,14 +266,14 @@ case ipla of
 end;
 end;
 
-Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double);
+Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
 var p :TPlanetData;
     planet_arr: Array_5D;
     v,v2 : double6;
     tjd : double;
-    i : integer;
+    i,sol : integer;
 begin
-if (t0=SolT0)and(astrometric=Solastrometric) then begin
+if (t0=SolT0)and(astrometric=Solastrometric)and(SolBarycenter=barycenter) then begin
    x:=XSol;
    y:=YSol;
    z:=ZSol;
@@ -273,7 +282,9 @@ else begin
 if astrometric then tjd:=t0-tlight
                else tjd:=t0;
 if load_de(tjd) then begin    // use jpl DE-
-  Calc_Planet_de(tjd, 11, planet_arr,true,3,false);
+  if barycenter then sol:=12
+     else sol:=11;
+  Calc_Planet_de(tjd, sol, planet_arr,true,3,false);
   x:=planet_arr[0];
   y:=planet_arr[1];
   z:=planet_arr[2];
@@ -287,6 +298,7 @@ end else begin    // use Plan404
      z:=-p.z;
 end;
 // save result for repetitive call
+SolBarycenter:=barycenter;
 Solastrometric:=astrometric;
 SolT0:=t0;
 XSol:=x;
@@ -298,7 +310,7 @@ end;
 Procedure TPlanet.Sun(t0 : double; var alpha,delta,dist,diam : double);
 var x,y,z,qr : double;
 begin
-  SunRect(t0,false,x,y,z);
+  SunRect(t0,false,x,y,z,true);
   dist:=sqrt(x*x+y*y+z*z);
   alpha:=arctan2(y,x);
   if (alpha<0) then alpha:=alpha+pi2;
@@ -309,12 +321,18 @@ end;
 
 Procedure TPlanet.SunEcl(t0 : double ; var l,b : double);
 var p :TPlanetData;
+    x1,y1,z1,x,y,z,qr : double;
 begin
-p.ipla:=3;
-p.JD:=t0;
-Plan404(addr(p));
-l:=rmod(pi+p.l,pi2);
-b:=-p.b;
+SunRect(t0,false,x1,y1,z1,true);
+// rotate equatorial to ecliptic
+x:=x1;
+y:= coseps2k*y1 + sineps2k*z1;
+z:= -sineps2k*y1 + coseps2k*z1;
+// convert to polar
+l:=arctan2(y,x);
+if (l<0) then l:=l+2*pi;
+qr:=sqrt(x*x+y*y);
+if qr<>0 then b:=arctan(z/qr);
 end;
 
 function to360(x:double):double;
@@ -323,7 +341,7 @@ result:=rmod(x+3600000000,360);
 end;
 
 Procedure TPlanet.JupSatInt(jde : double;var P : double; var xsat,ysat : array of double; var supconj : array of boolean);
-var pl :TPlanetData;
+var pl :TPlanData;
     d,V1,M1,N1,J1,A1,B1,K1,Re,Rj,pha : double;
     d2,T0,T1,A0,D0,l0,b0,r0,l,b,r,x,y,z,del,eps,ceps,seps,u,v,aa,dd,DE : double;
     u1,u2,u3,u4,G,H,r1,r2,r3,r4,sDe : double;
@@ -349,13 +367,9 @@ A0 := 268.00 + 0.1061 * T1;
 D0 := 64.50 - 0.0164 * T1;
 //WW1 := to360(17.710 + 877.90003539 * d2);
 //WW2 := to360(16.838 + 870.27003539 * d2);
-pl.ipla:=3;
-pl.JD:=jde;
-Plan404(addr(pl));
+Plan(3,jde,pl);
 l0:=pl.l; b0:=pl.b; r0:=pl.r;
-pl.ipla:=5;
-pl.JD:=jde;
-Plan404(addr(pl));
+Plan(5,jde,pl);
 l:=pl.l; b:=pl.b; r:=pl.r;
 x := r * cos(b) * cos(l) - r0 * cos(l0);
 y := r * cos(b) * sin(l) - r0 * sin(l0);
@@ -505,7 +519,7 @@ const VP : array[1..10,1..4] of double = (
           (236.77,-56.3623195),
           (84.10,14.1844000));
 var d,T,N,a0,d0,l0,b0,r0,l1,b1,r1,x,y,z,del,eps,als,des,u,v,al,dl,f,th,k,i : double;
-    pl :TPlanetData;
+    pl :TPlanData;
 begin
 d := (jde-jd2000);
 T := d/36525;
@@ -513,9 +527,7 @@ if ipla=10 then begin  // sun
   th:=(jde-2398220)*360/25.38;
   i:=deg2rad*7.25;
   k:=deg2rad*(73.6667+1.3958333*(jde-2396758)/36525);
-  pl.ipla:=3;
-  pl.JD:=jde;
-  Plan404(addr(pl));
+  Plan(3,jde,pl);
   PrecessionEcl(jd2000,jde,pl.l,pl.b);
   l0:=pl.l+pi;
   eps := deg2rad*(23.439291111 - 0.0130042 * T - 1.64e-7 * T*T + 5.036e-7 *T*T*T);
@@ -541,23 +553,17 @@ end else begin
    w2:=-999;
    w3:=-999;
 end;
-pl.ipla:=3;
-pl.JD:=jde;
-Plan404(addr(pl));
+Plan(3,jde,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l0:=pl.l; b0:=pl.b; r0:=pl.r;
-pl.ipla:=ipla;
-pl.JD:=jde;
-Plan404(addr(pl));
+Plan(ipla,jde,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l1:=pl.l; b1:=pl.b; r1:=pl.r;
 x := r1 * cos(b1) * cos(l1) - r0 * cos(l0);
 y := r1 * cos(b1) * sin(l1) - r0 * sin(l0);
 z := r1 * sin(b1) - r0 * sin(b0);
 del := sqrt( x*x + y*y + z*z);
-pl.ipla:=ipla;
-pl.JD:=jde-del*tlight;
-Plan404(addr(pl));
+Plan(ipla,jde-del*tlight,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l1:=pl.l; b1:=pl.b; r1:=pl.r;
 x := r1 * cos(b1) * cos(l1) - r0 * cos(l0);
@@ -585,7 +591,7 @@ end;
 
 Procedure TPlanet.MoonOrientation(jde,ra,dec,d:double; var P,llat,lats,llong : double);
 var lp,l,b,f,om,w,T,a,i,lh,bh,e,v,x,y,l0 {,cel,sel,asol,dsol} : double;
-    pl :TPlanetData;
+    pl :TPlanData;
 begin
 { P: position angle  (degree)
   llat: libration latitude (degree)
@@ -605,9 +611,7 @@ llong:=to360(a-F);
 if llong>180 then llong:=llong-360;
 llat:=arcsin(-sin(w)*cos(b)*sin(i)-sin(b)*cos(i));
 // position
-pl.ipla:=3;
-pl.JD:=jde-tlight;
-Plan404(addr(pl));
+Plan(3,jde-tlight,pl);
 PrecessionEcl(jd2000,jde,pl.l,pl.b);
 l0:=rad2deg*(pl.l)-180;
 lh:=l0+180+(d/pl.r)*rad2deg*cos(b)*sin(pl.l-pi-l);
@@ -623,20 +627,17 @@ llat:=rad2deg*(llat);
 end;
 
 Procedure TPlanet.SatRing(jde : double; var P,a,b,be : double);
-var T,i,om,l0,b0,r0,l1,b1,r1,x,y,z,del,lam,bet,sinB,eps,ceps,seps,lam0,bet0,al,de,al0,de0 : double;
-    pl :TPlanetData;
+var T,i,om,l0,b0,r0,l1,b1,r1,x,y,z,del,lam,bet,sinB,eps,ceps,seps,lam0,bet0,al,de,al0,de0,j : double;
+    pl :TPlanData;
 begin
 { meeus 44. }
 T := (jde-2451545)/36525;
 i := 28.075216 - 0.012998 * T + 0.000004 *T*T;
 om := 169.508470 + 1.394681 * T + 0.000412 *T*T;
-pl.ipla:=3;
-pl.JD:=jde-9*0.0057755183; // aprox. light time
-Plan404(addr(pl));
+j:=jde-9*0.0057755183; // aprox. light time
+Plan(3,j,pl);
 l0:=pl.l; b0:=pl.b; r0:=pl.r;
-pl.ipla:=6;
-pl.JD:=jde-9*0.0057755183; // aprox. light time
-Plan404(addr(pl));
+Plan(6,j,pl);
 l1:=pl.l; b1:=pl.b; r1:=pl.r;
 x := r1 * cos(b1) * cos(l1) - r0 * cos(l0);
 y := r1 * cos(b1) * sin(l1) - r0 * sin(l0);

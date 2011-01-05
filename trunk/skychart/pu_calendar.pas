@@ -213,7 +213,7 @@ implementation
 
 uses u_util, u_projection, Clipbrd;
 
-const maxstep = 100;
+const maxstep = 1000;
       MonthLst : array [1..12] of string = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
 procedure Tf_calendar.FormCreate(Sender: TObject);

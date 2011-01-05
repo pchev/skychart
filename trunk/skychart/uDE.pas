@@ -93,8 +93,6 @@ type  //use for data from file and process
 function Calc_Planet_de(julian_date: double; planet_id: integer; var planet_arr: Array_5D;
                         in_au: boolean; planet_center: integer; velocity: boolean): boolean;
 
-procedure de_rot_obliq(var Src_arr: Array_5D);
-
 //first must load the de file
 function load_de_file(jd: double; de_folder: string; de_type: integer): boolean;
 
@@ -130,36 +128,17 @@ begin
 
     //set if output in au or km
     if in_au then de_eph.auinkm := 149597870.691 else de_eph.auinkm := 1;
-    if planet_id = 11 then   //if it is then Sun, find Earth and flip the vector
-        rval := jpl_pleph( @de_eph, @de_iinfo, julian_date, 3, 12, planet_arr, velocity)
-    else
-        rval := jpl_pleph( @de_eph, @de_iinfo, julian_date, planet_id, planet_center, planet_arr, velocity);
+
+    rval := jpl_pleph( @de_eph, @de_iinfo, julian_date, planet_id, planet_center, planet_arr, velocity);
 
     {Results are transfered to vector in array 0..2 and velocity 3..5
      to find range do - val_range := sqrt(sqr(planet_arr[0]) +  sqr(planet_arr[1]) + sqr(planet_arr[2]))
-     if asking for '3' de-rotate_obliq the planet vector 0..2
-     planet 11 = Sun, it is better to ask for earth position, planet 3, and invert the result.
      Maintain result using barycenter
      }
     if rval = 1 then begin
         result:=true;
-        if planet_id = 3 then de_rot_obliq(planet_arr);
-        if planet_id = 11 then begin
-            planet_arr[0] := planet_arr[0] * -1;
-            planet_arr[1] := planet_arr[1] * -1;
-            planet_arr[2] := planet_arr[2] * -1;
-        end;
     end
     else result:=false;
-end;
-
-procedure de_rot_obliq(var Src_arr: Array_5D);
-    Const DeCosObliq : double = 0.91748206206925896486689181980932;
-    Const DeSinObliq : double = -0.39777715593173577845483447911125;
-begin
-  Src_arr[0] := Src_arr[0];
-  Src_arr[1] := Src_arr[1] * DeCosObliq - Src_arr[2] * DeSinObliq;
-  Src_arr[2] := Src_arr[1] * DeSinObliq + Src_arr[2] * DeCosObliq;
 end;
 
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
