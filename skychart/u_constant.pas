@@ -62,7 +62,9 @@ const cdcversion = 'Version 3.3 svn';
       footpermeter = 0.3048;
       kmperdegree=111.1111;
       secday=3600*24;
-      eps2000 = 23.439291111;
+      eps2000 = 23.43928111111111111111; // 23d 26m 21.412s
+      sineps2k = 0.39777699580107953216;
+      coseps2k = 0.917482131494378454;
       deg2rad = pi/180;
       rad2deg = 180/pi;
       pi2 = 2*pi;
@@ -593,6 +595,16 @@ type
 type
   TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
   TGetTwilight= procedure(jd0: double; out ht: double) of object;
+
+type
+     TPlanData = record
+         l : double ;
+         b : double ;
+         r : double ;
+         x : double ;
+         y : double ;
+         z : double ;
+     end;
 
 // external library
 const
