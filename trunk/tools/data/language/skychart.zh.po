@@ -445,6 +445,10 @@ msgstr "取消，错误 zip 文件？ %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%s不能打开数据库 %s！%s"
@@ -2246,6 +2250,10 @@ msgstr "本地地平文件名："
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "地方恒星时"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"

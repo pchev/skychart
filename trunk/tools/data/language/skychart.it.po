@@ -444,6 +444,10 @@ msgstr "Annulla, file zip errato ?? %s"
 msgid "Cannot compute satellites."
 msgstr "Impossibile calcolare satelliti."
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sImpossibile aprire il database %s! %s"
@@ -2244,6 +2248,10 @@ msgstr "Nome File dell'Orizzonte"
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Tempo Locale Siderale"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"

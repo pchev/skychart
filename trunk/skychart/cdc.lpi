@@ -102,7 +102,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item18>
     </RequiredPackages>
-    <Units Count="50">
+    <Units Count="51">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -444,6 +444,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_main"/>
       </Unit49>
+      <Unit50>
+        <Filename Value="pu_observatory_db.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_observatory_db"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_observatory_db"/>
+      </Unit50>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

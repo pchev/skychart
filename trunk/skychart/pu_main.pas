@@ -3728,6 +3728,7 @@ cfgm.ProxyPort:='';
 cfgm.ProxyUser:='';
 cfgm.ProxyPass:='';
 cfgm.AnonPass:='skychart@';
+cfgm.ObsNameList:=TStringList.Create;
 cfgm.CometUrlList:=TStringList.Create;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList:=TStringList.Create;
@@ -4611,9 +4612,10 @@ end;
 end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
-var i,j:integer;
+var i,j,k:integer;
     inif: TMemIniFile;
     section,buf : string;
+    obsdetail: TObsDetail;
 begin
 inif:=TMeminifile.create(filename);
 try
@@ -4715,6 +4717,15 @@ if Pos('cfa-www.harvard.edu',buf)=0 then begin   // Old MPC URL, ignore saved co
       cfgm.AsteroidUrlList.Add(buf);
     end;
   end;
+end;
+j:=ReadInteger(section,'ObsNameListCount',0);
+cfgm.ObsNameList.Clear;
+if j>0 then for i:=0 to j-1 do begin
+  obsdetail:=TObsDetail.Create;
+  obsdetail.country:=ReadString(section,'ObsCountry'+inttostr(i),'');
+  obsdetail.lat:=ReadFloat(section,'ObsLat'+inttostr(i),0);
+  obsdetail.lon:=ReadFloat(section,'ObsLon'+inttostr(i),0);
+  cfgm.ObsNameList.AddObject(ReadString(section,'ObsName'+inttostr(i),''),obsdetail);
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -5297,6 +5308,14 @@ j:=cfgm.AsteroidUrlList.Count;
 WriteInteger(section,'AsteroidUrlCount',j);
 if j>0 then begin
    for i:=1 to j do WriteString(section,'AsteroidUrl'+inttostr(i),cfgm.AsteroidUrlList[i-1]);
+end;
+j:=cfgm.ObsNameList.Count;
+WriteInteger(section,'ObsNameListCount',j);
+if j>0 then for i:=0 to j-1 do begin
+  WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
+  WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
+  WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
+  WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
 end;
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);

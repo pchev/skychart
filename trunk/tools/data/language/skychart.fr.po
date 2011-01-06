@@ -1,10 +1,10 @@
 # translation of skychart.fr.po
-# Patrick Chevalley <pch@ap-i.net>, 2009, 2010.
+# Patrick Chevalley <pch@ap-i.net>, 2009, 2010, 2011.
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-12-28 22:36+0100\n"
-"Last-Translator: pch\n"
+"PO-Revision-Date: 2011-01-06 20:13+0100\n"
+"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -446,6 +446,10 @@ msgstr "Annuler, mauvais fichier zip ?? %s"
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
 msgstr "Ne peut pas calculer les satellites."
+
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr "Ne peut pas trouver votre adresse IP, ou pas de lieu trouvé pour cette adresse."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -2249,6 +2253,10 @@ msgstr "Nom du fichier : "
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Heure sidérale locale"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr "Code du lieu"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -4563,4 +4571,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 
