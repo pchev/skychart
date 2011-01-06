@@ -445,6 +445,10 @@ msgstr "Cancelar, arquivo compactado inválido ?? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNão pode abrir o banco de dados %s! %s"
@@ -2246,6 +2250,10 @@ msgstr "Arquivo do Horizonte Local : "
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Tempo Sideral Local"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"

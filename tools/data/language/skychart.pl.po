@@ -449,6 +449,10 @@ msgstr "Anuluj, może błędny plik zip ?? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNie można otworzyć bazy danych %s! %s"
@@ -2250,6 +2254,10 @@ msgstr "Plik zarysu horyzontu lokalnego: "
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Lokalny czas gwiazdowy"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"

@@ -1,0 +1,196 @@
+object f_observatory_db: Tf_observatory_db
+  Left = 1037
+  Height = 239
+  Top = 252
+  Width = 488
+  BorderStyle = bsToolWindow
+  Caption = 'f_observatory_db'
+  ClientHeight = 239
+  ClientWidth = 488
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '0.9.31'
+  object obsname: TGroupBox
+    Left = 8
+    Height = 192
+    Top = 0
+    Width = 464
+    Caption = 'Observatory Database'
+    ClientHeight = 176
+    ClientWidth = 460
+    TabOrder = 0
+    object Label2: TLabel
+      Left = 320
+      Height = 15
+      Top = 85
+      Width = 15
+      Caption = '+/-'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 428
+      Height = 15
+      Top = 85
+      Width = 23
+      Caption = 'Km.'
+      ParentColor = False
+    end
+    object citylist: TComboBox
+      Left = 8
+      Height = 23
+      Top = 41
+      Width = 233
+      AutoComplete = True
+      AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+      ItemHeight = 0
+      OnChange = citylistChange
+      OnSelect = citylistChange
+      TabOrder = 3
+      Text = '...'
+    end
+    object citysearch: TButton
+      Left = 371
+      Height = 25
+      Top = 41
+      Width = 76
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Search'
+      OnClick = citysearchClick
+      TabOrder = 2
+    end
+    object countrylist: TComboBox
+      Left = 8
+      Height = 24
+      Top = 1
+      Width = 234
+      DropDownCount = 10
+      ItemHeight = 0
+      OnSelect = countrylistChange
+      Style = csDropDownList
+      TabOrder = 0
+    end
+    object cityfilter: TEdit
+      Left = 254
+      Height = 22
+      Top = 41
+      Width = 104
+      OnKeyDown = cityfilterKeyDown
+      TabOrder = 1
+    end
+    object downloadcity: TButton
+      Left = 166
+      Height = 25
+      Top = 129
+      Width = 192
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Download country details'
+      OnClick = downloadcityClick
+      TabOrder = 7
+    end
+    object updcity: TButton
+      Left = 10
+      Height = 25
+      Top = 129
+      Width = 72
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Update'
+      OnClick = updcityClick
+      TabOrder = 5
+    end
+    object delcity: TButton
+      Left = 86
+      Height = 25
+      Top = 129
+      Width = 72
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Delete'
+      OnClick = delcityClick
+      TabOrder = 6
+    end
+    object LocCode: TEdit
+      Cursor = crHandPoint
+      Left = 133
+      Height = 22
+      Top = 83
+      Width = 108
+      Color = clBtnFace
+      OnClick = LocCodeClick
+      ParentShowHint = False
+      ReadOnly = True
+      ShowHint = True
+      TabOrder = 8
+    end
+    object vicinity: TButton
+      Left = 254
+      Height = 25
+      Top = 81
+      Width = 60
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Vicinity'
+      OnClick = vicinityClick
+      TabOrder = 4
+    end
+    object vicinityrangeEdit: TEdit
+      Left = 345
+      Height = 22
+      Top = 83
+      Width = 56
+      TabOrder = 9
+    end
+    object vicinityrange: TUpDown
+      Left = 401
+      Height = 22
+      Top = 83
+      Width = 17
+      Associate = vicinityrangeEdit
+      Min = 0
+      Max = 500
+      Position = 10
+      TabOrder = 10
+      Wrap = False
+    end
+    object Memo1: TMemo
+      Left = 8
+      Height = 55
+      Top = 113
+      Width = 425
+      TabOrder = 11
+      TabStop = False
+      Visible = False
+    end
+    object Label1: TLabel
+      Left = 8
+      Height = 15
+      Top = 85
+      Width = 101
+      Caption = 'Designation Code'
+      ParentColor = False
+    end
+  end
+  object Button1: TButton
+    Left = 264
+    Height = 25
+    Top = 200
+    Width = 75
+    Caption = 'OK'
+    ModalResult = 1
+    TabOrder = 1
+  end
+  object Button2: TButton
+    Left = 384
+    Height = 25
+    Top = 200
+    Width = 75
+    Cancel = True
+    Caption = 'Cancel'
+    ModalResult = 2
+    TabOrder = 2
+  end
+  object DownloadDialog1: TDownloadDialog
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    left = 40
+    top = 144
+  end
+end

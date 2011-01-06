@@ -445,6 +445,10 @@ msgstr "Отменить, неправильный zip файл ??? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sНевозможно открыть базу данных %s! %s"
@@ -2246,6 +2250,10 @@ msgstr "Название файла горизонта:"
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Местное звёздное время"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"

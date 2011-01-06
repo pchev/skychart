@@ -1155,6 +1155,9 @@ resourcestring
   rsNoChange = 'No change';
   rsFreeSize = 'Free size';
   rsEphemeris = 'Ephemeris';
+  rsCannotGetYou = 'Cannot get your IP address, or no location found for this '
+    +'address.';
+  rsLocationCode = 'Location code';
 
 implementation
 

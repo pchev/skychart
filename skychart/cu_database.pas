@@ -52,6 +52,7 @@ type
      function LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = ''):boolean;
      procedure GetCountryList(codelist,countrylist:Tstrings);
      procedure GetCountryISOCode(countrycode:string; var isocode: string);
+     procedure GetCountryFromISO(isocode:string; var cname: string);
      procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
      procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
      function  GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
@@ -1455,6 +1456,11 @@ end;
 procedure TCDCdb.GetCountryISOCode(countrycode:string; var isocode: string);
 begin
 isocode:=db.QueryOne('select isocode from cdc_country where country = "'+countrycode+'"');
+end;
+
+procedure TCDCdb.GetCountryFromISO(isocode:string; var cname: string);
+begin
+cname:=db.QueryOne('select name from cdc_country where isocode = "'+isocode+'"');
 end;
 
 procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);

@@ -443,6 +443,10 @@ msgstr "Cancelar, archivo zip equivocado ?? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNo puedo abrir la base de datos %s! %s"
@@ -2243,6 +2247,10 @@ msgstr "Archivo de Horizonte Local : "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
+msgstr ""
+
+#: u_translation.rslocationcode
+msgid "Location code"
 msgstr ""
 
 #: u_translation.rslockon

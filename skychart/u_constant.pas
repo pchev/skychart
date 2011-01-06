@@ -241,6 +241,7 @@ const cdcversion = 'Version 3.3 svn';
       // Location database source url
       baseurl_us = 'http://www.ap-i.net/pub/skychart/gn/stategaz/';
       baseurl_world = 'http://www.ap-i.net/pub/skychart/gn/cntyfile/';
+      location_url = 'http://ap-i.net/geoip/iploc.php';
 
       //Default URL
       URL_WebHome = 'http://www.ap-i.net/skychart';
@@ -558,6 +559,10 @@ type
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_chart);
                 end;
+     TObsDetail = class(Tobject)
+                country: string;
+                lat,lon: double;
+                end;
      Tconf_main = class(TObject)    // main form setting
                 public
                 prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
@@ -574,6 +579,7 @@ type
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
+                ObsNameList: TStringList;
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_main);
@@ -1626,6 +1632,9 @@ for i:=0 to Source.CometUrlList.Count-1 do CometUrlList.Add(Source.CometUrlList.
 if AsteroidUrlList=nil then AsteroidUrlList:=TStringList.Create;
 AsteroidUrlList.Clear;
 for i:=0 to Source.AsteroidUrlList.Count-1 do AsteroidUrlList.Add(Source.AsteroidUrlList.Strings[i]);
+if ObsNameList=nil then ObsNameList:=TStringList.Create;
+ObsNameList.Clear;
+for i:=0 to Source.ObsNameList.Count-1 do ObsNameList.AddObject(Source.ObsNameList.Strings[i],Source.ObsNameList.Objects[i]);
 end;
 
 { Tconf_dss }

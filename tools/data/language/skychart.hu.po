@@ -481,6 +481,10 @@ msgstr "Megszakítás, hibás zip fájl? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotgetyou
+msgid "Cannot get your IP address, or no location found for this address."
+msgstr ""
+
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
@@ -2467,6 +2471,10 @@ msgstr "Helyi horizont fájlnév:"
 #| msgid "Local Sideral Time"
 msgid "Local sidereal time"
 msgstr "Helyi sziderikus idő"
+
+#: u_translation.rslocationcode
+msgid "Location code"
+msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
