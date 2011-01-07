@@ -1166,7 +1166,7 @@ try
      poCons:=poNoConsole;
      P.ShowWindow:=swoHIDE;
   end;
-  P.Options := [poUsePipes, poStdErrToOutPut, poCons];
+  P.Options := [poUsePipes, poStdErrToOutPut];
   P.Execute;
   while P.Running do begin
     Application.ProcessMessages;
