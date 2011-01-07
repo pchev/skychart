@@ -4405,6 +4405,10 @@ msgstr "Nap alt."
 msgid "Sun."
 msgstr "Vas."
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr ""
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Nap inklináció"
@@ -4795,6 +4799,10 @@ msgstr "HTTP proxy használata"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "DSS használata RealSky helyett"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 #| msgid "Use only the catalog from the same group"

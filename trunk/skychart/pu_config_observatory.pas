@@ -505,7 +505,8 @@ begin
      end
      else ShowMessage(rsCannotGetYou);
      loc.free;
-  end;
+  end
+  else ShowMessage(rsCannotGetYou+crlf+DownloadDialog1.ResponseText);
 end;
 
 procedure Tf_config_observatory.ComboBox1Select(Sender: TObject);

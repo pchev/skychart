@@ -4012,6 +4012,10 @@ msgstr "Slunce alt."
 msgid "Sun."
 msgstr "Ne"
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr ""
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Slunce - sklon"
@@ -4367,6 +4371,10 @@ msgstr "Použít HTTP proxy"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "Použít online DSS místo RealSky"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."

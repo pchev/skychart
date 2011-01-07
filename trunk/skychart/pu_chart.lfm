@@ -319,4 +319,11 @@ object f_chart: Tf_chart
     left = 304
     top = 202
   end
+  object DownloadDialog1: TDownloadDialog
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    left = 211
+    top = 205
+  end
 end

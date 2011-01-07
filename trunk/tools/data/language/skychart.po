@@ -4546,3 +4546,11 @@ msgstr ""
 msgid "Location code"
 msgstr ""
 
+#: u_translation:rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
+
+#: u_translation:rssunimagesour
+msgid "Sun image source"
+msgstr ""
+

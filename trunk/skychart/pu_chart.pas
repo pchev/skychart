@@ -36,10 +36,10 @@ uses
      {$ifdef mswindows}
      pu_ascomclient,
      {$endif}
-     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
-     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas, FileUtil, Clipbrd,
-     LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
-     ActnList, SysUtils, LResources;
+     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,
+     u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
+     PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs,
+     Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
      
 const maxundo=10;
 
@@ -65,6 +65,7 @@ type
     About2: TMenuItem;
     About1: TMenuItem;
     AddLabel1: TMenuItem;
+    DownloadDialog1: TDownloadDialog;
     MenuItem1: TMenuItem;
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
@@ -236,6 +237,7 @@ type
     Function  LongLabelConst(txt : string) : string;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
     procedure rotation(rot:double);
+    procedure GetSunImage;
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
     function cmd_SetGrid(onoff:string):string;
@@ -328,6 +330,11 @@ end else begin
 end;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
+DownloadDialog1.msgDownloadFile:=rsDownloadFile;
+DownloadDialog1.msgCopyfrom:=rsCopyFrom;
+DownloadDialog1.msgtofile:=rsToFile;
+DownloadDialog1.msgDownloadBtn:=rsDownload;
+DownloadDialog1.msgCancelBtn:=rsCancel;
 if sc<>nil then sc.SetLang;
 end;
 
@@ -459,6 +466,38 @@ begin
 if identlabel.Visible then identlabelClick(sender);
 end;
 
+procedure Tf_chart.GetSunImage;
+var fn:string;
+    a:TDateTime;
+begin
+{if cmain.HttpProxy then begin
+   DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+   DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+   DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+   DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+end else begin
+   DownloadDialog1.HttpProxy:='';
+   DownloadDialog1.HttpProxyPort:='';
+   DownloadDialog1.HttpProxyUser:='';
+   DownloadDialog1.HttpProxyPass:='';
+end;   }
+fn:=slash(TempDir)+'sun.jpg';
+if sc.cfgsc.SunOnline and (
+   ( not FileExists(fn) ) or
+   ( (now-FileDateToDateTime(FileAge(fn)))>1 )
+   ) then begin
+   DownloadDialog1.URL:=sc.cfgsc.sunurl;
+   DownloadDialog1.SaveToFile:=fn;
+   DownloadDialog1.ConfirmDownload:=false;
+   if DownloadDialog1.Execute and FileExists(fn) then begin
+
+   end
+   else begin
+     sc.cfgsc.SunOnline:=false;
+   end;
+end;
+end;
+
 procedure Tf_chart.AutoRefresh;
 begin
 if locked then exit;
@@ -507,6 +546,7 @@ try
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
 {$endif}
+ if sc.plot.cfgplot.plaplot=2 then GetSunImage;
  sc.Refresh;
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
