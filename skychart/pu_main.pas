@@ -990,7 +990,7 @@ var nam: string;
     p: integer;
     maxi: boolean;
 begin
-if FileExists(fn) then begin
+if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
  ReadChartConfig(SafeUTF8ToSys(fn),true,MultiDoc1.Maximized,cfgp,cfgs);
