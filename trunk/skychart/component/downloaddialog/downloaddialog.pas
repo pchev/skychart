@@ -72,10 +72,12 @@ type
     progress : Tedit;
     http: THTTPSend;
     ftp : TFTPSend;
+    Timer1: TTimer;
   protected
     procedure BtnDownload(Sender: TObject);
     procedure BtnCancel(Sender: TObject);
     procedure doCancel(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
     procedure StartDownload;
     procedure HTTPComplete;
     procedure FTPComplete;
@@ -137,6 +139,10 @@ begin
   inherited Create(AOwner);
   http:=THTTPSend.Create;
   ftp :=TFTPSend.Create;
+  Timer1:=TTimer.Create(self);
+  Timer1.Enabled:=false;
+  Timer1.Interval:=2000;
+  Timer1.OnTimer:=@Timer1Timer;
   HttpProxy:='';
   FFWMode:=0;
   FFWpassive:=true;
@@ -152,12 +158,14 @@ destructor TDownloadDialog.Destroy;
 begin
   http.Free;
   ftp.Free;
+  Timer1.Free;
   inherited Destroy;
 end;
 
 function TDownloadDialog.Execute:boolean;
 var urltxt,filetxt: TLabeledEdit;
     pos: TPoint;
+    i: integer;
 begin
   FResponse:='';
   Ffirsturl:=Furl;
@@ -230,9 +238,21 @@ begin
   DF.Width:=urltxt.Width+16;
   DF.Height:=okButton.Top+okButton.Height+8;
 
-  if not FConfirmDownload then DF.OnShow:=@BtnDownload;
-  
-  Result:=DF.ShowModal=mrOK;
+  if not FConfirmDownload then begin
+   //  DF.OnShow:=@BtnDownload;
+    DF.modalresult:=mrNone;
+    Timer1.Enabled:=true;
+    BtnDownload(nil);
+    repeat
+      i:=DF.modalresult;
+      application.ProcessMessages;
+    until i<>mrNone;
+    Timer1.Enabled:=false;
+    Result:=DF.modalresult=mrOK;
+  end
+  else begin
+    Result:=DF.ShowModal=mrOK;
+  end;
 
   FreeAndNil(urltxt);
   FreeAndNil(filetxt);
@@ -240,6 +260,12 @@ begin
   FreeAndNil(okButton);
   FreeAndNil(cancelButton);
   FreeAndNil(DF);
+end;
+
+procedure TDownloadDialog.Timer1Timer(Sender: TObject);
+begin
+  Timer1.Enabled:=false;
+  DF.ShowModal;
 end;
 
 procedure TDownloadDialog.FormClose(Sender: TObject; var CloseAction: TCloseAction);
