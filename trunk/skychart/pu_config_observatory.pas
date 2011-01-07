@@ -374,7 +374,7 @@ for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
      buf:=csc.tz.ZoneTabZone[i];
      if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
      TZComboBox.Items.Add(buf);
-     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ) then TZComboBox.ItemIndex:=j;
+     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ)or((isocode='ZZ')and(j=12)) then TZComboBox.ItemIndex:=j;
      inc(j);
   end;
 end;
