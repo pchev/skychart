@@ -4013,6 +4013,10 @@ msgstr "Выс. Сол."
 msgid "Sun."
 msgstr "Вс."
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr ""
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Наклон Солнца"
@@ -4368,6 +4372,10 @@ msgstr "Использовать HTTP прокси"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "Использовать online DSS вместо RealSky"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."

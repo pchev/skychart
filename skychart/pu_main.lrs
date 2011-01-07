@@ -7,7 +7,7 @@ LazarusResources.Add('Tf_main','FORMDATA',[
   +'MainMenu1'#10'OnActivate'#7#12'FormActivate'#7'OnClose'#7#9'FormClose'#8'On'
   +'Create'#7#10'FormCreate'#9'OnDestroy'#7#11'FormDestroy'#9'OnKeyDown'#7#11'F'
   +'ormKeyDown'#10'OnKeyPress'#7#12'FormKeyPress'#8'OnResize'#7#10'FormResize'#6
-  +'OnShow'#7#8'FormShow'#10'ParentFont'#9#10'LCLVersion'#6#6'0.9.31'#0#9'TMult'
+  +'OnShow'#7#8'FormShow'#10'ParentFont'#9#10'LCLVersion'#6#6'0.9.29'#0#9'TMult'
   +'iDoc'#9'MultiDoc1'#4'Left'#3#128#1#6'Height'#3#230#0#3'Top'#3#184#0#5'Width'
   +#3'0'#1#9'Maximized'#8#11'BorderWidth'#2#3#11'TitleHeight'#2#15#13'KeepLastC'
   +'hild'#8#19'WireframeMoveResize'#8#10'onMaximize'#7#17'MultiDoc1Maximize'#19

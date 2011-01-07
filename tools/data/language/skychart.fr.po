@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-06 20:13+0100\n"
+"PO-Revision-Date: 2011-01-07 19:26+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -4016,6 +4016,10 @@ msgstr "Alt. soleil"
 msgid "Sun."
 msgstr "Dim"
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr "Source de l'image"
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Inclinaison solaire"
@@ -4371,6 +4375,10 @@ msgstr "Utiliser le proxy HTTP"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "Utilise le DSS en ligne à la place de Realsky"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr "Affiche une image du soleil de SDO ou SOHO par Internet"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."

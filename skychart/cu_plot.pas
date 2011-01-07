@@ -75,6 +75,7 @@ type
      procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
      procedure PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
+     procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -138,7 +139,7 @@ type
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
      Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0);
-     procedure PlotPlanet(x,y:single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
+     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
@@ -1381,7 +1382,7 @@ p[m]:=pts[n-1];
 cnv.PolyBezier(p);
 end;
 
-procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean);
+procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
 var b_v:double;
     ds,n,xx,yy : integer;
 begin
@@ -1394,7 +1395,6 @@ if not cfgplot.Invisible then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
   if ((not planetrender)and(not use_xplanet)) and (n=2) then n:=1;
-  if use_Xplanet and (n=2)and(ipla=10) then n:=1; // xplanet Sun is not usable
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
@@ -1409,6 +1409,9 @@ if not cfgplot.Invisible then begin
       2 : begin // image
           if IntfImgReady then ClosePixelImg;
           rot:=rot*FlipX*FlipY;
+          if (ipla=10)and(size>0) then begin
+            PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
+          end else begin
           {$ifdef mswindows}
           if use_Xplanet then
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
@@ -1418,6 +1421,7 @@ if not cfgplot.Invisible then begin
           {$ifdef unix}
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg);
           {$endif}
+          end;
           end;
       3 : begin // symbol
           if IntfImgReady then ClosePixelImg;
@@ -1485,13 +1489,13 @@ memstream := TMemoryStream.create;
 try
 if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    // image smaller than chart, write in full
-   if zoom>1 then begin
-      BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
+  if (zoom>1)or((ibmp.Height<=1024)and(ibmp.Width<=1024)) then begin
+      BitmapRotation(ibmp,rbmp,Rotation,WhiteBg); // rotation first for best quality
       dsx:=(rbmp.Width/ibmp.Width)*iWidth/2;
       dsy:=(rbmp.Height/ibmp.Height)*iHeight/2;
       BitmapResize(rbmp,imabmp,zoom);
    end else begin
-      BitmapResize(ibmp,rbmp,zoom);
+      BitmapResize(ibmp,rbmp,zoom);               // resize first for best performance
       BitmapRotation(rbmp,imabmp,Rotation,WhiteBg);
       dsx:=(imabmp.Width/rbmp.Width)*iWidth/2;
       dsy:=(imabmp.Height/rbmp.Height)*iHeight/2;
@@ -1646,6 +1650,34 @@ end;
 if cfgplot.TransparentPlanet then mode:=0
    else mode:=2;
 if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
+end;
+
+procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
+var ds,i,mode : integer;
+    jpg:TJPEGImage;
+    fn:string;
+begin
+ if size=0 then exit;
+ fn:=slash(Tempdir)+'sun.jpg';
+ if not FileExists(fn) then begin  // use default image
+   fn:=slash(appdir)+slash('data')+slash('planet')+'sun-0.jpg';
+   size:=1024; margin:=107;
+ end;
+ if not FileExists(fn) then begin
+   PlotPlanet1(xx,yy,ipla,pixscale,diam);
+   exit;
+ end;
+ ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
+ jpg:=TJPEGImage.Create;
+ jpg.LoadFromFile(SysToUTF8(fn));
+ chdir(appdir);
+ planetbmp.Assign(jpg);
+ planetbmppla:=ipla;
+ planetbmpjd:=jdt;
+ planetbmprot:=0;
+ if cfgplot.TransparentPlanet then mode:=0
+    else mode:=2;
+ PlotImage(xx,yy,ds,ds,rot,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);

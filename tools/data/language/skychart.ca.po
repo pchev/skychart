@@ -4016,6 +4016,10 @@ msgstr "Altura Sol"
 msgid "Sun."
 msgstr "Diu."
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr ""
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Inclinació solar"
@@ -4371,6 +4375,10 @@ msgstr "Utilitza el proxy HTTP"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "Usa el DSS en línia en lloc de Realsky"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."

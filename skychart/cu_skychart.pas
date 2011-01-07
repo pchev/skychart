@@ -1151,7 +1151,7 @@ var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
   ppa,poleincl,sunincl,w1,w2,w3 : double;
   xx,yy:single;
-  i,j,n,ipla: integer;
+  i,j,n,ipla,sunsize: integer;
   draworder : array[1..11] of integer;
   ltxt: string;
 begin
@@ -1230,7 +1230,9 @@ for j:=0 to cfgsc.SimNb-1 do begin
             if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
            end;
       10 : begin
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg);
+            if cfgsc.SunOnline or use_xplanet then sunsize:=cfgsc.sunurlsize
+               else sunsize:=0;
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg,sunsize,cfgsc.sunurlmargin);
            end;
       11 : begin
             magn:=-10;  // better to alway show a bright dot for the Moon

@@ -299,6 +299,71 @@ const cdcversion = 'Version 3.3 svn';
       URL_DSS18='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
       URL_DSS_NAME19='HST Phase2 (GSC2)';
       URL_DSS19='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
+      URL_SUN_NUMBER=16;
+      URL_SUN_NAME: array[1..URL_SUN_NUMBER] of string=('SDO AIA 4500',
+                    'SDO AIA 304',
+                    'SDO AIA 193',
+                    'SDO AIA 171',
+                    'SDO AIA 211',
+                    'SDO AIA 131',
+                    'SDO AIA 335',
+                    'SDO AIA 094',
+                    'SDO AIA 1600',
+                    'SDO AIA 1700',
+                    'SOHO EIT 171',
+                    'SOHO EIT 195',
+                    'SOHO EIT 284',
+                    'SOHO EIT 304',
+                    'SOHO MDI Continuum',
+                    'SOHO MDI Magnetogram');
+      URL_SUN_SIZE: array[1..URL_SUN_NUMBER] of integer=(1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024,
+                    1024);
+      URL_SUN_MARGIN: array[1..URL_SUN_NUMBER] of integer=(107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    107,
+                    130,
+                    130,
+                    130,
+                    130,
+                    20,
+                    12);
+      URL_SUN: array[1..URL_SUN_NUMBER] of string=('http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_4500.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0193.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0171.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0211.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0131.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0335.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0094.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1600.jpg',
+                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1700.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_171/1024/latest.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_195/1024/latest.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_igr/1024/latest.jpg',
+                    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_mag/1024/latest.jpg');
 
       DefaultffmpegOptions='-b 18000k -bt 10000k';
 {$ifdef linux}
@@ -465,13 +530,13 @@ type
                 SimDateYear,SimDateMonth,SimDateDay,SimDateHour,SimDateMinute,SimDateSecond: Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude : double; ObsTZ: string;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
-                ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
-                CurYear,CurMonth,CurDay,DrawPMyear : integer;
+                ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos,sunurlname,sunurl : string;
+                CurYear,CurMonth,CurDay,DrawPMyear,sunurlsize,sunurlmargin : integer;
                 ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime,countrytz : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY,TelescopeJD: double;
-                PMon,DrawPMon,ApparentPos,CoordExpertMode : boolean;
+                PMon,DrawPMon,ApparentPos,CoordExpertMode,SunOnline : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
                 IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
@@ -1163,6 +1228,11 @@ nutl:=Source.nutl ;
 nuto:=Source.nuto ;
 sunl:=Source.sunl ;
 sunb:=Source.sunb ;
+sunurlname:=Source.sunurlname;
+sunurl:=Source.sunurl;
+sunurlsize:=Source.sunurlsize;
+sunurlmargin:=Source.sunurlmargin;
+SunOnline:=Source.SunOnline;
 abe:=Source.abe ;
 abp:=Source.abp ;
 raprev:=Source.raprev ;

@@ -1158,6 +1158,8 @@ resourcestring
   rsCannotGetYou = 'Cannot get your IP address, or no location found for this '
     +'address.';
   rsLocationCode = 'Location code';
+  rsUseOnlineSun = 'Use online Sun image from SDO or SOHO';
+  rsSunImageSour = 'Sun image source';
 
 implementation
 

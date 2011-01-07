@@ -4013,6 +4013,10 @@ msgstr "Sol alt."
 msgid "Sun."
 msgstr "Sol."
 
+#: u_translation.rssunimagesour
+msgid "Sun image source"
+msgstr ""
+
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
 msgstr "Inclinação do Sol"
@@ -4368,6 +4372,10 @@ msgstr "Usar HTTP Proxy"
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
 msgstr "Usar DSS online ao invés de RealSky"
+
+#: u_translation.rsuseonlinesun
+msgid "Use online Sun image from SDO or SOHO"
+msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
