@@ -225,6 +225,7 @@ end;
 function Tskychart.Refresh :boolean;
 var savmag: double;
     savfilter,saveautofilter,savfillmw,scopemark:boolean;
+    saveplaplot:integer;
 begin
 {$ifdef trace_debug}
   if cfgsc.quick and FPlot.cfgplot.red_move then
@@ -237,6 +238,7 @@ savfilter:=Fcatalog.cfgshr.StarFilter;
 saveautofilter:=Fcatalog.cfgshr.AutoStarFilter;
 savfillmw:=cfgsc.FillMilkyWay;
 scopemark:=cfgsc.ScopeMark;
+saveplaplot:=Fplot.cfgplot.plaplot;
 try
   chdir(appdir);
   // initialize chart value
@@ -263,6 +265,7 @@ end;
   InitCoordinates; // now include ComputePlanet
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
      Fcatalog.cfgshr.StarFilter:=true;
+     if Fplot.cfgplot.plaplot=2 then Fplot.cfgplot.plaplot := 1;
   end else begin
      InitLabels;
   end;
@@ -336,6 +339,7 @@ finally
      Fcatalog.cfgshr.StarMagFilter[cfgsc.FieldNum]:=savmag;
      Fcatalog.cfgshr.StarFilter:=savfilter;
      Fcatalog.cfgshr.AutoStarFilter:=saveautofilter;
+     Fplot.cfgplot.plaplot := saveplaplot;
   end;
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
