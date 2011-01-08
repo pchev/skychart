@@ -16,7 +16,7 @@ object f_config_observatory: Tf_config_observatory
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '0.9.31'
+  LCLVersion = '0.9.29'
   object MainPanel: TPanel
     Left = 0
     Height = 504
@@ -127,22 +127,6 @@ object f_config_observatory: Tf_config_observatory
             Caption = 'Degree'
             ParentColor = False
           end
-          object Label59: TLabel
-            Left = 48
-            Height = 15
-            Top = 4
-            Width = 23
-            Caption = 'Min.'
-            ParentColor = False
-          end
-          object Label60: TLabel
-            Left = 80
-            Height = 15
-            Top = 4
-            Width = 25
-            Caption = 'Sec.'
-            ParentColor = False
-          end
           object hemis: TComboBox
             Left = 112
             Height = 23
@@ -217,22 +201,6 @@ object f_config_observatory: Tf_config_observatory
             Top = 4
             Width = 42
             Caption = 'Degree'
-            ParentColor = False
-          end
-          object Label62: TLabel
-            Left = 48
-            Height = 15
-            Top = 4
-            Width = 23
-            Caption = 'Min.'
-            ParentColor = False
-          end
-          object Label63: TLabel
-            Left = 80
-            Height = 15
-            Top = 4
-            Width = 25
-            Caption = 'Sec.'
             ParentColor = False
           end
           object long: TComboBox
