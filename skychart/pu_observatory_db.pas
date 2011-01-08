@@ -4,9 +4,9 @@ unit pu_observatory_db;
 
 interface
 
-uses  u_help, u_unzip, u_translation, u_constant, u_util, cu_database, downloaddialog,
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, ComCtrls;
+uses  u_help, u_unzip, u_translation, u_constant, u_util, cu_database,
+  downloaddialog, enhedits, Classes, SysUtils, FileUtil, LResources, Forms,
+  Controls, Graphics, Dialogs, StdCtrls, ComCtrls;
 
 type
 
@@ -22,10 +22,22 @@ type
     delcity: TButton;
     downloadcity: TButton;
     DownloadDialog1: TDownloadDialog;
+    hemis: TComboBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    Label58: TLabel;
+    Label61: TLabel;
+    latdeg: TLongEdit;
+    Latitude: TGroupBox;
+    latmin: TLongEdit;
+    latsec: TLongEdit;
     LocCode: TEdit;
+    long: TComboBox;
+    longdeg: TLongEdit;
+    Longitude: TGroupBox;
+    longmin: TLongEdit;
+    longsec: TLongEdit;
     Memo1: TMemo;
     obsname: TGroupBox;
     updcity: TButton;
@@ -41,7 +53,9 @@ type
     procedure downloadcityClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure latdegChange(Sender: TObject);
     procedure LocCodeClick(Sender: TObject);
+    procedure longdegChange(Sender: TObject);
     procedure updcityClick(Sender: TObject);
     procedure vicinityClick(Sender: TObject);
   private
@@ -53,12 +67,13 @@ type
     { public declarations }
     countrycode: TStringList;
     citycode: TStringList;
-    LockChange:boolean;
+    LockChange,obslock:boolean;
     cdb: Tcdcdb;
     csc : Tconf_skychart;
     cmain : Tconf_main;
     procedure SetLang;
     procedure ShowObservatory;
+    Procedure ShowObsCoord;
     property onCountryChange: TNotifyEvent read FCountryChange write FCountryChange;
     property onObsChange: TNotifyEvent read FObsChange write FObsChange;
   end;
@@ -85,6 +100,15 @@ DownloadDialog1.msgtofile:=rsToFile;
 DownloadDialog1.msgDownloadBtn:=rsDownload;
 DownloadDialog1.msgCancelBtn:=rsCancel;
 Label1.Caption:=rsLocationCode;
+Latitude.Caption:=rsLatitude;
+Longitude.Caption:=rsLongitude;
+Label58.caption:=rsDegreesMinut;
+hemis.items[0]:=rsNorth;
+hemis.items[1]:=rsSouth;
+Label61.caption:=rsDegreesMinut;
+long.items[0]:=rsWest;
+long.items[1]:=rsEast;
+
 end;
 
 procedure Tf_observatory_db.ShowObservatory;
@@ -212,6 +236,7 @@ SetLang;
 countrycode:=TStringList.Create;
 citycode:=TStringList.Create;
 LockChange:=true;
+obslock:=false;
 end;
 
 procedure Tf_observatory_db.FormShow(Sender: TObject);
@@ -219,7 +244,17 @@ begin
   LockChange:=true;
   cityfilter.text:=copy(csc.obsname,1,3);
   ShowObservatory;
+  showobscoord;
   LockChange:=false;
+end;
+
+procedure Tf_observatory_db.latdegChange(Sender: TObject);
+begin
+if LockChange then exit;
+if obslock then exit;
+csc.ObsLatitude:=latdeg.value+latmin.value/60+latsec.value/3600;
+if hemis.Itemindex>0 then csc.ObsLatitude:=-csc.ObsLatitude;
+if assigned(FObsChange) then FObsChange(self);
 end;
 
 procedure Tf_observatory_db.LocCodeClick(Sender: TObject);
@@ -237,6 +272,37 @@ desigfile:=slash(helpdir)+slash('html_doc')+slash(lang)+country;
 if not FileExists(desigfile) then
    desigfile:=slash(helpdir)+slash('html_doc')+slash('en')+country;
 ExecuteFile(desigfile);
+end;
+
+Procedure Tf_observatory_db.ShowObsCoord;
+var d,m,s : string;
+begin
+try
+obslock:=true;
+ArToStr2(abs(csc.ObsLatitude),d,m,s);
+latdeg.Text:=d;
+latmin.Text:=m;
+latsec.Text:=s;
+ArToStr2(abs(csc.ObsLongitude),d,m,s);
+longdeg.Text:=d;
+longmin.Text:=m;
+longsec.Text:=s;
+if csc.ObsLatitude>=0 then hemis.Itemindex:=0
+                      else hemis.Itemindex:=1;
+if csc.ObsLongitude>=0 then long.Itemindex:=0
+                       else long.Itemindex:=1;
+finally
+obslock:=false;
+end;
+end;
+
+procedure Tf_observatory_db.longdegChange(Sender: TObject);
+begin
+if LockChange then exit;
+if obslock then exit;
+csc.ObsLongitude:=longdeg.value+longmin.value/60+longsec.value/3600;
+if long.Itemindex>0 then csc.ObsLongitude:=-csc.ObsLongitude;
+if assigned(FObsChange) then FObsChange(self);
 end;
 
 procedure Tf_observatory_db.updcityClick(Sender: TObject);
@@ -295,7 +361,7 @@ begin
 end;
 
 procedure Tf_observatory_db.citylistChange(Sender: TObject);
-var id,loctype,latitude,longitude,elevation,timezone:string;
+var id,loctype,lati,longi,elevation,timezone:string;
     p:integer;
 begin
 if LockChange then exit;
@@ -304,13 +370,14 @@ p:=pos(' -- ',csc.obsname);
 if p>0 then delete(csc.obsname,p,99);
 if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
 id:=citycode[citylist.ItemIndex];
-if cdb.GetCityLoc(id,loctype,latitude,longitude,elevation,timezone) then begin
+if cdb.GetCityLoc(id,loctype,lati,longi,elevation,timezone) then begin
    curobsid:=strtoint(citycode[citylist.ItemIndex]);
    LocCode.text:=loctype;
-   csc.ObsLatitude:=strtofloat(trim(latitude));
-   csc.ObsLongitude:=-strtofloat(trim(longitude));
+   csc.ObsLatitude:=strtofloat(trim(lati));
+   csc.ObsLongitude:=-strtofloat(trim(longi));
    csc.ObsAltitude:=strtofloat(trim(elevation));
    if assigned(FObsChange) then FObsChange(self);
+   ShowObsCoord;
 end
 else curobsid:=0;
 end;
