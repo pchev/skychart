@@ -1,5 +1,8 @@
 Version 3.3svn  Notes de la version
 
+- List des observatoires favoris, nouvelle fenêtre pour la base de donnée des observatoires.
+- Localisation par Internet de votre emplacement.
+- Affiche une image en ligne du soleil des satellites SDO ou SOHO.
 - Nouvelle fonction d'animation et d'enregistrement de film. Voir la documentation pour l'installation du programme ffmpeg.
 - Calcul de la position des planètes avec les éphémérides JPL.
 - Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
