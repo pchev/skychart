@@ -1,5 +1,8 @@
 Version 3.3svn release Notes
 
+- Observatory favorite list, new observatory database window.
+- Internet localization of your location.
+- Display an online image of the Sun from SDO or SOHO.
 - New Animation and movie recording function. See documentation for ffmpeg program installation.
 - Planet computation use JPL ephemeris.
 - Add Planet graph in calendar, contributed by John Sunderland.
