@@ -822,6 +822,7 @@ begin
   Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
   Child.sc.cdb:=cdcdb;
+  Child.cmain:=cfgm;
   {$ifdef mswindows}
   Child.telescopeplugin:=telescope;
   {$endif}
