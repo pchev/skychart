@@ -217,6 +217,7 @@ type
     Image1 : TChartDrawingControl;
     ChartCursor: TCursor;
     sc: Tskychart;
+    cmain: Tconf_main;
     indi1: TIndiClient;
     locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
@@ -470,22 +471,22 @@ procedure Tf_chart.GetSunImage;
 var fn:string;
     a:TDateTime;
 begin
-{if cmain.HttpProxy then begin
-   DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-   DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-   DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-   DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
-end else begin
-   DownloadDialog1.HttpProxy:='';
-   DownloadDialog1.HttpProxyPort:='';
-   DownloadDialog1.HttpProxyUser:='';
-   DownloadDialog1.HttpProxyPass:='';
-end;   }
 fn:=slash(TempDir)+'sun.jpg';
 if sc.cfgsc.SunOnline and (
    ( not FileExists(fn) ) or
    ( (now-FileDateToDateTime(FileAge(fn)))>1 )
    ) then begin
+   if cmain.HttpProxy then begin
+      DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+      DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+      DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+      DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+   end else begin
+      DownloadDialog1.HttpProxy:='';
+      DownloadDialog1.HttpProxyPort:='';
+      DownloadDialog1.HttpProxyUser:='';
+      DownloadDialog1.HttpProxyPass:='';
+   end;
    DownloadDialog1.URL:=sc.cfgsc.sunurl;
    DownloadDialog1.SaveToFile:=fn;
    DownloadDialog1.ConfirmDownload:=false;
