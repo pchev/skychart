@@ -356,11 +356,14 @@ type
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
+    procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
     procedure DrawAllStarLabelClick(Sender: TObject);
     procedure DrawPMyChange(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
     procedure EclipticStyleChange(Sender: TObject);
     procedure EqGridStyleChange(Sender: TObject);
+    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -788,6 +791,12 @@ if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
    csc.StyleEqGrid:=TPenStyle(i);
 end;
 
+procedure Tf_config_display.FileNameEdit1AcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+  cmain.starshape_file:=value;
+end;
+
 procedure Tf_config_display.FileNameEdit1Change(Sender: TObject);
 begin
   cmain.starshape_file:=FileNameEdit1.FileName;
@@ -809,6 +818,20 @@ end;
 procedure Tf_config_display.CheckBox2Click(Sender: TObject);
 begin
 csc.RectangleLabel:=CheckBox2.Checked
+end;
+
+procedure Tf_config_display.ConstbFileAcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+if LockChange then exit;
+  cmain.ConstBfile:=expandfilename(value);
+end;
+
+procedure Tf_config_display.ConstlFileAcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+if LockChange then exit;
+  cmain.ConstLfile:=expandfilename(value);
 end;
 
 procedure Tf_config_display.DrawAllStarLabelClick(Sender: TObject);
