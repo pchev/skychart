@@ -145,6 +145,7 @@ type
     procedure Edit3Change(Sender: TObject);
     procedure Edit4Change(Sender: TObject);
     procedure Edit5Change(Sender: TObject);
+    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FloatSpinEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -622,6 +623,12 @@ procedure Tf_config_time.Edit5Change(Sender: TObject);
 begin
   cmain.AnimRecExt:=edit5.Text;
   if copy(cmain.AnimRecExt,1,1)<>'.' then cmain.AnimRecExt:='.'+cmain.AnimRecExt
+end;
+
+procedure Tf_config_time.FileNameEdit1AcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+cmain.Animffmpeg:=value;
 end;
 
 procedure Tf_config_time.FileNameEdit1Change(Sender: TObject);

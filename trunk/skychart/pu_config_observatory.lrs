@@ -12,8 +12,8 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +#226#1#7'Anchors'#11#5'akTop'#6'akLeft'#7'akRight'#8'akBottom'#0#12'ClientHe'
   +'ight'#3#248#1#11'ClientWidth'#3#226#1#11'ParentColor'#8#8'TabOrder'#2#0#0#12
   +'TPageControl'#12'PageControl1'#4'Left'#2#1#6'Height'#3#246#1#3'Top'#2#1#5'W'
-  +'idth'#3#224#1#10'ActivePage'#7#5'Page1'#5'Align'#7#8'alClient'#8'ShowTabs'#8
-  +#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9'TTabSheet'#5'Page1'#7'Caption'#6#11'Obs'
+  +'idth'#3#224#1#10'ActivePage'#7#5'Page2'#5'Align'#7#8'alClient'#8'ShowTabs'#8
+  +#8'TabIndex'#2#1#8'TabOrder'#2#0#0#9'TTabSheet'#5'Page1'#7'Caption'#6#11'Obs'
   +'ervatory'#12'ClientHeight'#3#242#1#11'ClientWidth'#3#220#1#0#7'TButton'#5'O'
   +'bszp'#4'Left'#2#5#6'Height'#2#25#3'Top'#3#253#0#5'Width'#2')'#25'BorderSpac'
   +'ing.InnerBorder'#2#4#7'Caption'#6#1'+'#7'OnClick'#7#10'ObszpClick'#8'TabOrd'
@@ -112,50 +112,51 @@ LazarusResources.Add('Tf_config_observatory','FORMDATA',[
   +#13#6'Height'#2#23#3'Top'#2#16#5'Width'#3#181#0#7'Caption'#6#30'Display the '
   +'local horizon line'#7'OnClick'#7#19'displayhorizonClick'#8'TabOrder'#2#0#0#0
   +#13'TFileNameEdit'#11'horizonfile'#4'Left'#3#197#0#6'Height'#2#22#3'Top'#2'8'
-  +#5'Width'#3#208#0#13'DialogOptions'#11#0#11'FilterIndex'#2#0#15'HideDirector'
-  +'ies'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'TabOrder'#2
-  +#2#8'OnChange'#7#17'horizonfileChange'#0#0#9'TCheckBox'#11'fillhorizon'#4'Le'
-  +'ft'#3#221#0#6'Height'#2#23#3'Top'#2#16#5'Width'#3#139#0#7'Caption'#6#23'Fil'
-  +'l with horizon color'#7'OnClick'#7#16'fillhorizonClick'#8'TabOrder'#2#1#0#0
-  +#0#9'TGroupBox'#9'GroupBox3'#4'Left'#2#8#6'Height'#2'y'#3'Top'#3#238#0#5'Wid'
-  +'th'#3#201#1#7'Caption'#6'!Depression of the visible horizon'#12'ClientHeigh'
-  +'t'#2'i'#11'ClientWidth'#3#197#1#8'TabOrder'#2#2#0#6'TLabel'#6'Label1'#4'Lef'
-  +'t'#2#13#6'Height'#2'0'#3'Top'#2#16#5'Width'#3#159#1#8'AutoSize'#8#7'Caption'
-  +#6'|You live on a big mountain near the ocean shore and you like to observe '
-  +'the distorded image of the object below the horizon.'#11'ParentColor'#8#8'W'
-  +'ordWrap'#9#0#0#9'TCheckBox'#17'horizondepression'#4'Left'#2#13#6'Height'#2
-  +#23#3'Top'#2'H'#5'Width'#3#255#0#7'Caption'#6'(Draw the apparent depressed h'
-  +'orizon line'#7'OnClick'#7#22'horizondepressionClick'#8'TabOrder'#2#0#0#0#0#9
-  +'TGroupBox'#10'refraction'#4'Left'#2#8#6'Height'#2'P'#3'Top'#3'n'#1#5'Width'
-  +#3#201#1#7'Caption'#6#22'Atmospheric Refraction'#12'ClientHeight'#2'@'#11'Cl'
-  +'ientWidth'#3#197#1#8'TabOrder'#2#3#0#6'TLabel'#7'Label82'#4'Left'#2'-'#6'He'
-  ,'ight'#2#15#3'Top'#2#7#5'Width'#2'h'#7'Caption'#6#19'Pressure (millibar)'#11
-  +'ParentColor'#8#0#0#6'TLabel'#7'Label83'#4'Left'#3#245#0#6'Height'#2#15#3'To'
-  +'p'#2#7#5'Width'#2'}'#7'Caption'#6#21'Temperature (Celsius)'#11'ParentColor'
-  +#8#0#0#10'TFloatEdit'#8'pressure'#4'Left'#2'-'#6'Height'#2#22#4'Hint'#6#7'0.'
-  +'.1500'#3'Top'#2' '#5'Width'#2'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOr'
-  +'der'#2#0#8'OnChange'#7#14'pressureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8
-  +'Decimals'#2#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0
-  +#128#187#9'@'#11'NumericType'#7#7'ntFixed'#0#0#10'TFloatEdit'#11'temperature'
-  +#4'Left'#3#245#0#6'Height'#2#22#4'Hint'#6#9'-100..100'#3'Top'#2' '#5'Width'#2
-  +'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#1#8'OnChange'#7#17'temp'
-  +'eratureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0
-  +#200#5#192#8'MaxValue'#5#0#0#0#0#0#0#0#200#5'@'#11'NumericType'#7#7'ntFixed'
-  +#0#0#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#1#6'Height'#2'2'#3'Top'#3#0#2#5'W'
-  +'idth'#3#225#1#7'Anchors'#11#6'akLeft'#7'akRight'#8'akBottom'#0#12'ClientHei'
-  +'ght'#2'2'#11'ClientWidth'#3#225#1#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4
-  +'Left'#3#169#0#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTo'
-  +'p'#7'akRight'#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Defa'
-  +'ult'#9#11'ModalResult'#2#1#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'
-  +#3#17#1#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'ak'
-  +'Right'#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#5'Apply'#7'OnClick'
-  +#7#12'Button2Click'#8'TabOrder'#2#1#0#0#7'TButton'#7'Button3'#4'Left'#3'y'#1
-  +#6'Height'#2#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0
-  +#25'BorderSpacing.InnerBorder'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'Mod'
-  +'alResult'#2#2#8'TabOrder'#2#2#0#0#7'TButton'#7'Button4'#4'Left'#2'G'#6'Heig'
-  +'ht'#2#25#3'Top'#2#10#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#7'Ca'
-  +'ption'#6#4'Help'#7'OnClick'#7#12'Button4Click'#8'TabOrder'#2#3#0#0#0#11'TOp'
-  +'enDialog'#11'OpenDialog1'#11'FilterIndex'#2#0#4'left'#3'8'#1#3'top'#3'@'#1#0
-  +#0#15'TDownloadDialog'#15'DownloadDialog1'#9'FtpFwMode'#2#0#12'FtpFwPassive'
-  +#9#15'ConfirmDownload'#9#4'left'#3#144#1#3'top'#3'@'#1#0#0#0
+  +#5'Width'#3#208#0#16'OnAcceptFileName'#7#25'horizonfileAcceptFileName'#13'Di'
+  +'alogOptions'#11#0#11'FilterIndex'#2#0#15'HideDirectories'#8#11'ButtonWidth'
+  +#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'TabOrder'#2#2#8'OnChange'#7#17'hor'
+  +'izonfileChange'#0#0#9'TCheckBox'#11'fillhorizon'#4'Left'#3#221#0#6'Height'#2
+  +#23#3'Top'#2#16#5'Width'#3#139#0#7'Caption'#6#23'Fill with horizon color'#7
+  +'OnClick'#7#16'fillhorizonClick'#8'TabOrder'#2#1#0#0#0#9'TGroupBox'#9'GroupB'
+  +'ox3'#4'Left'#2#8#6'Height'#2'y'#3'Top'#3#238#0#5'Width'#3#201#1#7'Caption'#6
+  +'!Depression of the visible horizon'#12'ClientHeight'#2'i'#11'ClientWidth'#3
+  +#197#1#8'TabOrder'#2#2#0#6'TLabel'#6'Label1'#4'Left'#2#13#6'Height'#2'0'#3'T'
+  +'op'#2#16#5'Width'#3#159#1#8'AutoSize'#8#7'Caption'#6'|You live on a big mou'
+  +'ntain near the ocean shore and you like to observe the distorded image of t'
+  +'he object below the horizon.'#11'ParentColor'#8#8'WordWrap'#9#0#0#9'TCheckB'
+  +'ox'#17'horizondepression'#4'Left'#2#13#6'Height'#2#23#3'Top'#2'H'#5'Width'#3
+  +#255#0#7'Caption'#6'(Draw the apparent depressed horizon line'#7'OnClick'#7
+  +#22'horizondepressionClick'#8'TabOrder'#2#0#0#0#0#9'TGroupBox'#10'refraction'
+  +#4'Left'#2#8#6'Height'#2'P'#3'Top'#3'n'#1#5'Width'#3#201#1#7'Caption'#6#22'A'
+  +'tmospheric Refraction'#12'ClientHeight'#2'@'#11'ClientWidth'#3#197#1#8'TabO'
+  ,'rder'#2#3#0#6'TLabel'#7'Label82'#4'Left'#2'-'#6'Height'#2#15#3'Top'#2#7#5'W'
+  +'idth'#2'h'#7'Caption'#6#19'Pressure (millibar)'#11'ParentColor'#8#0#0#6'TLa'
+  +'bel'#7'Label83'#4'Left'#3#245#0#6'Height'#2#15#3'Top'#2#7#5'Width'#2'}'#7'C'
+  +'aption'#6#21'Temperature (Celsius)'#11'ParentColor'#8#0#0#10'TFloatEdit'#8
+  +'pressure'#4'Left'#2'-'#6'Height'#2#22#4'Hint'#6#7'0..1500'#3'Top'#2' '#5'Wi'
+  +'dth'#2'A'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#0#8'OnChange'#7
+  +#14'pressureChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'Decimals'#2#0#8'MinValu'
+  +'e'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0#128#187#9'@'#11'NumericT'
+  +'ype'#7#7'ntFixed'#0#0#10'TFloatEdit'#11'temperature'#4'Left'#3#245#0#6'Heig'
+  +'ht'#2#22#4'Hint'#6#9'-100..100'#3'Top'#2' '#5'Width'#2'A'#14'ParentShowHint'
+  +#8#8'ShowHint'#9#8'TabOrder'#2#1#8'OnChange'#7#17'temperatureChange'#5'Value'
+  +#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#200#5#192#8'MaxValue'#5#0
+  +#0#0#0#0#0#0#200#5'@'#11'NumericType'#7#7'ntFixed'#0#0#0#0#0#0#6'TPanel'#6'P'
+  +'anel1'#4'Left'#2#1#6'Height'#2'2'#3'Top'#3#0#2#5'Width'#3#225#1#7'Anchors'
+  +#11#6'akLeft'#7'akRight'#8'akBottom'#0#12'ClientHeight'#2'2'#11'ClientWidth'
+  +#3#225#1#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4'Left'#3#169#0#6'Height'#2
+  +#25#3'Top'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderS'
+  +'pacing.InnerBorder'#2#4#7'Caption'#6#2'OK'#7'Default'#9#11'ModalResult'#2#1
+  +#8'TabOrder'#2#0#0#0#7'TButton'#7'Button2'#4'Left'#3#17#1#6'Height'#2#25#3'T'
+  +'op'#2#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing'
+  +'.InnerBorder'#2#4#7'Caption'#6#5'Apply'#7'OnClick'#7#12'Button2Click'#8'Tab'
+  +'Order'#2#1#0#0#7'TButton'#7'Button3'#4'Left'#3'y'#1#6'Height'#2#25#3'Top'#2
+  +#10#5'Width'#2'S'#7'Anchors'#11#5'akTop'#7'akRight'#0#25'BorderSpacing.Inner'
+  +'Border'#2#4#6'Cancel'#9#7'Caption'#6#6'Cancel'#11'ModalResult'#2#2#8'TabOrd'
+  +'er'#2#2#0#0#7'TButton'#7'Button4'#4'Left'#2'G'#6'Height'#2#25#3'Top'#2#10#5
+  +'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0#7'Caption'#6#4'Help'#7'OnCl'
+  +'ick'#7#12'Button4Click'#8'TabOrder'#2#3#0#0#0#11'TOpenDialog'#11'OpenDialog'
+  +'1'#11'FilterIndex'#2#0#4'left'#3'8'#1#3'top'#3'@'#1#0#0#15'TDownloadDialog'
+  +#15'DownloadDialog1'#9'FtpFwMode'#2#0#12'FtpFwPassive'#9#15'ConfirmDownload'
+  +#9#4'left'#3#144#1#3'top'#3'@'#1#0#0#0
 ]);

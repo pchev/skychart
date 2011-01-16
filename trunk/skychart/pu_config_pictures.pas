@@ -91,6 +91,7 @@ type
     realskymax: TLongEdit;
     realskymb: TLongEdit;
     PageControl1: TPageControl;
+    procedure backimgAcceptFileName(Sender: TObject; var Value: String);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -372,6 +373,7 @@ ImageTimer1.Interval:=500;
 RefreshImage;
 end;
 
+////////// duplicate because of filenameedit onchange bug //////////////////////////
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
 if LockChange or (not Fileexists(backimg.text)) then exit;
@@ -394,6 +396,30 @@ else begin
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
 end;
+procedure Tf_config_pictures.backimgAcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+if LockChange or (not Fileexists(value)) then exit;
+csc.BackgroundImage:=value;
+Ffits.filename:=csc.BackgroundImage;
+if Ffits.header.coordinate_valid then begin
+  cmain.NewBackgroundImage:=true;
+  if Sender=backimg then ShowBackImg.checked:=true;
+  backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
+    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+DEtoStr(
+      Ffits.center_de*
+    rad2deg)+blank+rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
+  RefreshImage;
+end
+else begin
+  backimginfo.caption:=rsNoPicture;
+  ShowBackImg.checked:=false;
+  Image1.canvas.brush.color:=clBlack;
+  Image1.canvas.pen.color:=clBlack;
+  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
+end;
+end;
+//////////////////////////
 
 Procedure  Tf_config_pictures.RefreshImage;
 var bmp: TBitmap;

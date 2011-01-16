@@ -104,6 +104,7 @@ type
     procedure ComboBox1Select(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
+    procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
     procedure TZComboBoxChange(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -391,6 +392,13 @@ begin
  if LockChange then exit;
  csc.countrytz:=CountryTZ.checked;
  UpdTZList(Sender);
+end;
+
+procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+ if LockChange then exit;
+ cmain.horizonfile:=value;
 end;
 
 procedure Tf_config_observatory.Button2Click(Sender: TObject);

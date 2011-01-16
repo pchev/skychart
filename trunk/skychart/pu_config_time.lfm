@@ -240,7 +240,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
+            ClientHeight = 23
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
@@ -953,6 +953,7 @@ object f_config_time: Tf_config_time
             Height = 22
             Top = 290
             Width = 235
+            OnAcceptFileName = FileNameEdit1AcceptFileName
             DialogOptions = []
             FilterIndex = 0
             HideDirectories = False

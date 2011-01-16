@@ -32,10 +32,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 502
       Top = 1
       Width = 480
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
@@ -453,6 +453,7 @@ object f_config_observatory: Tf_config_observatory
             Height = 22
             Top = 56
             Width = 208
+            OnAcceptFileName = horizonfileAcceptFileName
             DialogOptions = []
             FilterIndex = 0
             HideDirectories = False
