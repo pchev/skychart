@@ -1552,6 +1552,10 @@ msgstr "Mida dels estels febles"
 msgid "FAQ"
 msgstr "FAQ (Preguntes freqüents)"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

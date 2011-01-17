@@ -1553,6 +1553,10 @@ msgstr "Siła rozmycia gwiazd"
 msgid "FAQ"
 msgstr "Często zadawane pytania: FAQ"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

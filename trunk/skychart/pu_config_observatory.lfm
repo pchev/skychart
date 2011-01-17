@@ -32,10 +32,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 502
       Top = 1
       Width = 480
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'

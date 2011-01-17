@@ -1546,6 +1546,10 @@ msgstr "Zwakke sterren grootte"
 msgid "FAQ"
 msgstr "FAQ"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "ffmpeg programma pad"

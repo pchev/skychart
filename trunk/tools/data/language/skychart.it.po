@@ -1547,6 +1547,10 @@ msgstr "Dimensione stelle deboli"
 msgid "FAQ"
 msgstr "FAQ"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "Percorso ffmpeg "
