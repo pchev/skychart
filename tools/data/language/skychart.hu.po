@@ -1697,6 +1697,10 @@ msgstr "Halvány csillagok mérete"
 msgid "FAQ"
 msgstr "GYIK"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

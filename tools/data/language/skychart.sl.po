@@ -1548,6 +1548,10 @@ msgstr "Velikost šibkoski zvezde"
 msgid "FAQ"
 msgstr "Pogosto zastavljena vprašanja"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

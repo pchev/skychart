@@ -87,7 +87,7 @@ implementation
 
 procedure Tf_observatory_db.SetLang;
 begin
-obsname.caption:=rsObservatoryD;
+Caption:=rsObservatoryD;
 Label3.caption:=rsKm;
 citysearch.caption:=rsSearch;
 downloadcity.caption:=rsDownloadCoun;

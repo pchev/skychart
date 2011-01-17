@@ -1549,6 +1549,10 @@ msgstr "Слабые размеры звёзд"
 msgid "FAQ"
 msgstr "ЧаВо"
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

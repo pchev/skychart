@@ -4554,3 +4554,7 @@ msgstr ""
 msgid "Sun image source"
 msgstr ""
 
+#: u_translation:rsfavorite
+msgid "Favorite"
+msgstr ""
+

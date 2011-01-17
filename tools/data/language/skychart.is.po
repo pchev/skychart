@@ -1853,6 +1853,10 @@ msgstr "Stærð daufra stjarna"
 msgid "FAQ"
 msgstr "Algengar spurn."
 
+#: u_translation.rsfavorite
+msgid "Favorite"
+msgstr ""
+
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr ""

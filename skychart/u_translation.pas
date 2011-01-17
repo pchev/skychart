@@ -1160,6 +1160,7 @@ resourcestring
   rsLocationCode = 'Location code';
   rsUseOnlineSun = 'Use online Sun image from SDO or SOHO';
   rsSunImageSour = 'Sun image source';
+  rsFavorite = 'Favorite';
 
 implementation
 

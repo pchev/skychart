@@ -205,6 +205,11 @@ DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
 DownloadDialog1.msgDownloadBtn:=rsDownload;
 DownloadDialog1.msgCancelBtn:=rsCancel;
+Button6.Caption:=rsAdd;
+Button7.Caption:=rsDelete;
+label2.Caption:=rsFavorite;
+Button5.Caption:=rsObservatoryD;
+
 end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);
