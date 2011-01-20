@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-17 13:15+0100\n"
+"PO-Revision-Date: 2011-01-18 17:54+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -2017,6 +2017,10 @@ msgstr "Erreur d'insertion! %s"
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Internet"
+
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr "Localisation par Internet"
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"

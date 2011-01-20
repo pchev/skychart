@@ -2014,6 +2014,10 @@ msgstr "Vstavi zavrnitev! %s"
 msgid "Internet"
 msgstr "Medmrežje"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "neveljaven doba v vrstici%s: %s"

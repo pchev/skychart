@@ -2016,6 +2016,10 @@ msgstr "Невдале включення! %s "
 msgid "Internet"
 msgstr "Інтернет"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "недійсна епоха на лінії %s : %s"

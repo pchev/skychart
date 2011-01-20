@@ -4558,3 +4558,7 @@ msgstr ""
 msgid "Favorite"
 msgstr ""
 
+#: u_translation:rsinternetloca
+msgid "Internet localization"
+msgstr ""
+

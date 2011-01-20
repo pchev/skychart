@@ -2015,6 +2015,10 @@ msgstr "插入失败！ %s"
 msgid "Internet"
 msgstr "因特网"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "无效历元在行%s：%s"

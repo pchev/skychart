@@ -2012,6 +2012,10 @@ msgstr "Sett inn feilet! %s"
 msgid "Internet"
 msgstr "Internett"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "ugyldig epoke på linje%s: %s"
