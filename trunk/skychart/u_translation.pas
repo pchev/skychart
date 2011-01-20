@@ -1161,6 +1161,7 @@ resourcestring
   rsUseOnlineSun = 'Use online Sun image from SDO or SOHO';
   rsSunImageSour = 'Sun image source';
   rsFavorite = 'Favorite';
+  rsInternetLoca = 'Internet localization';
 
 implementation
 

@@ -2019,6 +2019,10 @@ msgstr "Wstawianie nie powiodło się! %s"
 msgid "Internet"
 msgstr "Internet"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "błędna epoka w linii%s : %s"

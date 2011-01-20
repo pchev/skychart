@@ -209,7 +209,7 @@ Button6.Caption:=rsAdd;
 Button7.Caption:=rsDelete;
 label2.Caption:=rsFavorite;
 Button5.Caption:=rsObservatoryD;
-
+Button8.Caption:=rsInternetLoca;
 end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);

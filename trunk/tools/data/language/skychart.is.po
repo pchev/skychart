@@ -2425,6 +2425,10 @@ msgstr "Innsetning mistókst! %s"
 msgid "Internet"
 msgstr "Internetið"
 
+#: u_translation.rsinternetloca
+msgid "Internet localization"
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 #, fuzzy
 #| msgid "invalid epoch on line%s : %s"
