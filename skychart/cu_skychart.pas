@@ -2925,8 +2925,8 @@ b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[14];
 x1:=0; y1:=0;
-if (cfgsc.fov*rad2deg)>180 then mult:=15
-else if (cfgsc.fov*rad2deg)>90 then mult:=10
+if (cfgsc.fov*rad2deg)>180 then mult:=5
+else if (cfgsc.fov*rad2deg)>90 then mult:=5
 else if (cfgsc.fov*rad2deg)>30 then mult:=5
 else if (cfgsc.fov*rad2deg)>10 then mult:=3
 else if (cfgsc.fov*rad2deg)>5 then mult:=2
@@ -2962,8 +2962,8 @@ b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[15];
 x1:=0; y1:=0;
-if (cfgsc.fov*rad2deg)>180 then mult:=15
-else if (cfgsc.fov*rad2deg)>90 then mult:=10
+if (cfgsc.fov*rad2deg)>180 then mult:=5
+else if (cfgsc.fov*rad2deg)>90 then mult:=5
 else if (cfgsc.fov*rad2deg)>30 then mult:=5
 else if (cfgsc.fov*rad2deg)>10 then mult:=3
 else if (cfgsc.fov*rad2deg)>5 then mult:=2
