@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 666
+  Left = 455
   Height = 461
-  Top = 267
+  Top = 265
   Width = 361
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
@@ -11,7 +11,7 @@ object f_detail: Tf_detail
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.31'
+  LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 0
     Height = 38
@@ -62,7 +62,6 @@ object f_detail: Tf_detail
     TabOrder = 1
     Align = alClient
     PopupMenu = PopupMenu1
-    DefBackground = clWindow
     BorderStyle = htNone
     HistoryMaxCount = 0
     DefFontName = 'Times New Roman'
