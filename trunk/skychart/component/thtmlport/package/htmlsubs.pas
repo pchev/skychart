@@ -10888,7 +10888,11 @@ with LR do
       begin
       StartBI := StartB[I];
       EndBI := EndB[I];
+{$IFNDEF FPC}
       LineStart := StartCurs + Start-Buff;  {offset from Section start to Line start}
+{$ELSE}
+      LineStart := StartCurs + PtrUInt(Start)-PtrUInt(Buff);  {offset from Section start to Line start}
+{$ENDIF}
       if (EndBI > LineStart) and (StartBI < LineStart +Ln) then
         begin        {it's in this line}
         if not Assigned(BorderList) then
