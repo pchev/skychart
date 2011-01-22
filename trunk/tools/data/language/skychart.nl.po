@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-03 10:31+0100\n"
+"PO-Revision-Date: 2011-01-20 15:30+0100\n"
 "Last-Translator: Marc Fokker <marc@cwnetwerk.nl>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -445,7 +445,7 @@ msgstr "Kan de satellieten niet berekenen."
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Kan niet je IP-adres achterhalen, of geen locatie gevonden voor dit adres."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -1548,7 +1548,7 @@ msgstr "FAQ"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Favoriet"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -2258,7 +2258,7 @@ msgstr "Lokale Sterrentijd"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Locatie code"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -4020,7 +4020,7 @@ msgstr "Zo."
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Zon afbeeldingen bron"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4380,7 +4380,7 @@ msgstr "Gebruik online DSS in plaats van RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Gebruik online Zon afbeeldingen van SDO of SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
