@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-18 17:54+0100\n"
+"PO-Revision-Date: 2011-01-23 10:40+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -1886,6 +1886,10 @@ msgstr "Angle horaire"
 msgid "Right ascension grid"
 msgstr "Espacement en heures"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr "heures"
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Heure, minute, seconde"
@@ -3375,6 +3379,10 @@ msgstr "Nébuleuse de réflexion"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Rafraichir"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr "Rafraichit l'image toute les"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

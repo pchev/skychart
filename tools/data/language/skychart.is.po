@@ -2257,6 +2257,10 @@ msgstr "Tímahorn"
 msgid "Right ascension grid"
 msgstr "Möskvi tímahorns"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Klst., mínútur, sekúndur"
@@ -4020,6 +4024,10 @@ msgstr "Endurskinsþoka"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Glæða"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 #, fuzzy

@@ -1882,6 +1882,10 @@ msgstr "Urni kot"
 msgid "Right ascension grid"
 msgstr "Razmik urne mreže"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Ure, minute, sekunde"
@@ -3371,6 +3375,10 @@ msgstr "Odbojna meglica"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Osveži"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

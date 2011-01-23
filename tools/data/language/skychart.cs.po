@@ -1882,6 +1882,10 @@ msgstr "Hodinový úhel"
 msgid "Right ascension grid"
 msgstr "Jemnost sítě (hodiny)"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Hodiny, minuty, sekundy"
@@ -3371,6 +3375,10 @@ msgstr "Reflexní mlhovina"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Obnovit"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

@@ -4562,3 +4562,11 @@ msgstr ""
 msgid "Internet localization"
 msgstr ""
 
+#: u_translation:rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
+
+#: u_translation:rshours
+msgid "hours"
+msgstr ""
+

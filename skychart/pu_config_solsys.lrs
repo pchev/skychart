@@ -9,8 +9,8 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +'TPanel'#9'MainPanel'#4'Left'#2#0#6'Height'#3#230#1#3'Top'#2#0#5'Width'#3#247
   +#1#5'Align'#7#8'alClient'#12'ClientHeight'#3#230#1#11'ClientWidth'#3#247#1#11
   +'ParentColor'#8#8'TabOrder'#2#0#0#12'TPageControl'#12'PageControl1'#4'Left'#2
-  +#1#6'Height'#3#228#1#3'Top'#2#1#5'Width'#3#245#1#10'ActivePage'#7#5'Page1'#5
-  +'Align'#7#8'alClient'#8'ShowTabs'#8#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9'TTab'
+  +#1#6'Height'#3#228#1#3'Top'#2#1#5'Width'#3#245#1#10'ActivePage'#7#5'Page2'#5
+  +'Align'#7#8'alClient'#8'ShowTabs'#8#8'TabIndex'#2#1#8'TabOrder'#2#0#0#9'TTab'
   +'Sheet'#5'Page1'#7'Caption'#6#5'Page1'#12'ClientHeight'#3#224#1#11'ClientWid'
   +'th'#3#241#1#0#6'TLabel'#7'Label12'#4'Left'#2#7#6'Height'#2#15#3'Top'#2#17#5
   +'Width'#2's'#7'Caption'#6#20'Solar System Setting'#11'ParentColor'#8#0#0#6'T'
@@ -43,14 +43,14 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +'hapront+ 1996)'#3'Top'#2'0'#5'Width'#3#164#0#11'HelpContext'#2'k'#7'Caption'
   +#6#24'Show Planet on the Chart'#7'Checked'#9#7'OnClick'#7#14'PlanetBoxClick'
   +#14'ParentShowHint'#8#8'ShowHint'#9#5'State'#7#9'cbChecked'#8'TabOrder'#2#0#0
-  +#0#11'TRadioGroup'#10'PlanetMode'#4'Left'#2#18#6'Height'#3#133#0#3'Top'#2'P'
-  +#5'Width'#3'd'#1#8'AutoFill'#9#7'Caption'#6#14'Draw Planet As'#28'ChildSizin'
-  +'g.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing'
-  +'.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVe'
-  +'rtical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14
+  +#0#11'TRadioGroup'#10'PlanetMode'#4'Left'#2#18#6'Height'#2'u'#3'Top'#2'P'#5
+  +'Width'#3'd'#1#8'AutoFill'#9#7'Caption'#6#14'Draw Planet As'#28'ChildSizing.'
+  +'LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildSizing.E'
+  +'nlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.EnlargeVert'
+  +'ical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'#7#14
   +'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18'Chil'
   +'dSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Controls'
-  +'PerLine'#2#1#12'ClientHeight'#2'u'#11'ClientWidth'#3'`'#1#13'Items.Strings'
+  +'PerLine'#2#1#12'ClientHeight'#2'e'#11'ClientWidth'#3'`'#1#13'Items.Strings'
   +#1#6#4'Star'#6#17'Line mode drawing'#6#16'Realistics image'#6#6'Symbol'#0#7
   +'OnClick'#7#15'PlanetModeClick'#8'TabOrder'#2#1#0#0#9'TCheckBox'#10'PlanetBo'
   +'x3'#4'Left'#2#18#6'Height'#2#23#3'Top'#3#133#1#5'Width'#3#232#0#7'Caption'#6
@@ -160,7 +160,7 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#2#18#6'Height'#2#23#3'Top'#3#161#1#5'Width'#3#220#0#7'Caption'#6'#Transpare'
   +'nt line mode (occultation)'#7'OnClick'#7#22'TransparentPlanetClick'#8'TabOr'
   +'der'#2#5#0#0#6'TPanel'#10'XplanetBox'#4'Left'#2#18#6'Height'#2'0'#3'Top'#3
-  +'-'#1#5'Width'#3'd'#1#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#2'0'#11'Cl'
+  +'5'#1#5'Width'#3'd'#1#10'BevelOuter'#7#6'bvNone'#12'ClientHeight'#2'0'#11'Cl'
   +'ientWidth'#3'd'#1#8'TabOrder'#2#6#0#7'TBitBtn'#10'XplanetBtn'#4'Left'#3'+'#1
   +#6'Height'#2#26#3'Top'#2#16#5'Width'#2#26#25'BorderSpacing.InnerBorder'#2#2
   +#10'Glyph.Data'#10':'#4#0#0'6'#4#0#0'BM6'#4#0#0#0#0#0#0'6'#0#0#0'('#0#0#0#16
@@ -207,215 +207,222 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#5'Width'#2'\'#7'Caption'#6#11'Use Xplanet'#7'OnClick'#7#15'UseXplanetClick'
   +#8'TabOrder'#2#2#0#0#6'TLabel'#15'LabelXplanetBox'#4'Left'#2#13#6'Height'#2
   +#15#3'Top'#2#2#5'Width'#2']'#7'Caption'#6#15'LabelXplanetBox'#11'ParentColor'
-  +#8#0#0#0#6'TPanel'#8'SunPanel'#4'Left'#2#18#6'Height'#2'J'#3'Top'#3#221#0#5
-  +'Width'#3'd'#1#12'ClientHeight'#2'J'#11'ClientWidth'#3'd'#1#8'TabOrder'#2#7#0
+  +#8#0#0#0#6'TPanel'#8'SunPanel'#4'Left'#2#18#6'Height'#2'j'#3'Top'#3#200#0#5
+  +'Width'#3'd'#1#12'ClientHeight'#2'j'#11'ClientWidth'#3'd'#1#8'TabOrder'#2#7#0
   +#9'TCheckBox'#9'SunOnline'#4'Left'#2#13#6'Height'#2#23#3'Top'#2#8#5'Width'#2
   +'S'#7'Caption'#6#9'SunOnline'#7'OnClick'#7#14'SunOnlineClick'#8'TabOrder'#2#0
   +#0#0#6'TLabel'#6'Label4'#4'Left'#2#13#6'Height'#2#15#3'Top'#2','#5'Width'#2
   +'f'#7'Caption'#6#16'Sun image source'#11'ParentColor'#8#0#0#9'TComboBox'#9'C'
-  +'omboBox1'#4'Left'#3#131#0#6'Height'#2#23#3'Top'#2'('#5'Width'#3#176#0#10'It'
-  +'emHeight'#2#0#8'OnSelect'#7#15'ComboBox1Select'#8'TabOrder'#2#1#4'Text'#6#9
-  +'ComboBox1'#0#0#0#0#9'TTabSheet'#5'Page3'#7'Caption'#6#5'Page3'#12'ClientHei'
-  +'ght'#3#224#1#11'ClientWidth'#3#241#1#0#12'TPageControl'#14'ComPageControl'#4
-  +'Left'#2#253#6'Height'#3#173#1#3'Top'#2#4#5'Width'#3#225#1#10'ActivePage'#7
-  +#10'comsetting'#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9'TTabSheet'#10'comsetting'
-  +#7'Caption'#6#15'General Setting'#12'ClientHeight'#3#145#1#11'ClientWidth'#3
-  +#221#1#10'ImageIndex'#2#3#0#9'TGroupBox'#10'GroupBox13'#4'Left'#2#9#6'Height'
-  +#3'<'#1#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#13'Chart Setting'#12'Clien'
-  +'tHeight'#3','#1#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#8'Label'
-  +'154'#4'Left'#2' '#6'Height'#2'.'#3'Top'#3#162#0#5'Width'#3'.'#1#8'AutoSize'
-  +#8#7'Caption'#6'3Do not take account of comet fainter than magnitude'#11'Par'
-  +'entColor'#8#8'WordWrap'#9#0#0#6'TLabel'#8'Label216'#4'Left'#2' '#6'Height'#2
-  +#15#3'Top'#3#239#0#5'Width'#2'E'#7'Caption'#6#10'Show comet'#11'ParentColor'
-  +#8#0#0#6'TLabel'#8'Label231'#4'Left'#3#200#0#6'Height'#2'4'#3'Top'#3#239#0#5
-  +'Width'#3#191#0#8'AutoSize'#8#7'Caption'#6'!magnitude fainter than the stars'
-  +'.'#11'ParentColor'#8#8'WordWrap'#9#0#0#10'TFloatEdit'#11'comlimitmag'#4'Lef'
-  +'t'#3'^'#1#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#159#0#5'Width'#2')'#14
-  +'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#17'comlimitma'
-  +'gChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8
-  +'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#7'showcom'#4'Left'#2' '
-  +#6'Height'#2#23#3'Top'#2#14#5'Width'#3#167#0#7'Caption'#6#24'Show comets on '
-  +'the chart'#7'OnClick'#7#12'showcomClick'#8'TabOrder'#2#0#0#0#11'TRadioGroup'
-  +#9'comsymbol'#4'Left'#2#24#6'Height'#2'`'#3'Top'#2''''#5'Width'#3#137#1#8'Au'
-  +'toFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpac'
-  +'ing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27
-  +'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.'
-  +'ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14
-  +'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'
-  +#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'\'#11'ClientWidth'#3
-  +#133#1#5'Color'#7#9'clBtnFace'#9'ItemIndex'#2#1#13'Items.Strings'#1#6'<Displ'
-  +'ay as a symbol                                         '#6'>Proportional to'
-  +' the tail length                               '#0#7'OnClick'#7#14'comsymbo'
-  +'lClick'#11'ParentColor'#8#8'TabOrder'#2#1#0#0#10'TFloatEdit'#10'commagdiff'
-  +#4'Left'#3#140#0#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#234#0#5'Width'#2
-  +')'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#3#8'OnChange'#7#16'comm'
-  +'agdiffChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0
-  +#0#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#0#7'TButton'#8'comdbset'#4'Left'
-  +#2#17#6'Height'#2#25#3'Top'#3'f'#1#5'Width'#3#185#0#25'BorderSpacing.InnerBo'
-  +'rder'#2#4#7'Caption'#6#19'Database setting...'#7'OnClick'#7#13'comdbsetClic'
-  +'k'#8'TabOrder'#2#1#7'Visible'#8#0#0#0#9'TTabSheet'#7'comload'#7'Caption'#6
-  +#13'Load MPC File'#12'ClientHeight'#3#145#1#11'ClientWidth'#3#221#1#10'Image'
-  +'Index'#2#1#0#6'TLabel'#8'Label232'#4'Left'#2#15#6'Height'#2#15#3'Top'#2'{'#5
-  +'Width'#2'>'#7'Caption'#6#9'Messages:'#11'ParentColor'#8#0#0#5'TMemo'#7'Memo'
-  ,'Com'#4'Left'#2#8#6'Height'#3#242#0#3'Top'#3#143#0#5'Width'#3#185#1#5'Color'
-  +#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#0#7'TabStop'#8#0#0
-  +#12'TPageControl'#15'ComPageControl1'#4'Left'#2#13#6'Height'#2'h'#3'Top'#2#11
-  +#5'Width'#3#180#1#10'ActivePage'#7#9'TabSheet1'#8'TabIndex'#2#0#8'TabOrder'#2
-  +#1#0#9'TTabSheet'#9'TabSheet1'#7'Caption'#6#20'Load MPC format file'#12'Clie'
-  +'ntHeight'#2'L'#11'ClientWidth'#3#176#1#0#6'TLabel'#6'Label2'#4'Left'#2#13#6
-  +'Height'#2#15#3'Top'#2#27#5'Width'#3#182#0#7'Caption'#6' Download latest orb'
-  +'ital elements'#11'ParentColor'#8#0#0#7'TButton'#13'DownloadComet'#4'Left'#3
-  +'='#1#6'Height'#2#25#3'Top'#2#22#5'Width'#2'a'#25'BorderSpacing.InnerBorder'
-  +#2#4#7'Caption'#6#8'Download'#7'OnClick'#7#18'DownloadCometClick'#8'TabOrder'
-  +#2#0#0#0#0#9'TTabSheet'#9'TabSheet2'#7'Caption'#6#21'Or use a local file :'
-  +#12'ClientHeight'#2'L'#11'ClientWidth'#3#176#1#0#13'TFileNameEdit'#7'comfile'
-  +#4'Left'#2#13#6'Height'#2#22#3'Top'#2#24#5'Width'#3#9#1#13'DialogOptions'#11
-  +#0#6'Filter'#6'"Comet Files|COM*.DAT|All Files|*.*'#11'FilterIndex'#2#0#15'H'
-  +'ideDirectories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8
-  +'TabOrder'#2#0#0#0#7'TButton'#7'Loadcom'#4'Left'#3'E'#1#6'Height'#2#25#3'Top'
-  +#2#22#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#9'Load fi'
-  +'le'#7'OnClick'#7#12'LoadcomClick'#8'TabOrder'#2#1#0#0#0#0#0#9'TTabSheet'#9
-  +'comdelete'#7'Caption'#6#16'Data Maintenance'#12'ClientHeight'#3#145#1#11'Cl'
-  +'ientWidth'#3#221#1#10'ImageIndex'#2#3#0#6'TLabel'#8'Label238'#4'Left'#2#8#6
-  +'Height'#2#14#3'Top'#3#151#0#5'Width'#2'6'#7'Caption'#6#9'Messages:'#11'Pare'
-  +'ntColor'#8#0#0#9'TGroupBox'#10'GroupBox16'#4'Left'#2#8#6'Height'#2'<'#3'Top'
-  +#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data selectively'#12'Clien'
-  +'tHeight'#2','#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#9'TComboBox'#11'com'
-  +'elemlist'#4'Left'#2#16#6'Height'#2#24#3'Top'#2#6#5'Width'#3#25#1#16'AutoCom'
-  +'pleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#0#5'Style'#7#14'c'
-  +'sDropDownList'#8'TabOrder'#2#0#0#0#7'TButton'#6'DelCom'#4'Left'#3'H'#1#6'He'
-  +'ight'#2#25#3'Top'#2#6#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Cap'
-  +'tion'#6#6'Delete'#7'OnClick'#7#11'DelComClick'#8'TabOrder'#2#1#0#0#0#9'TGro'
-  +'upBox'#10'GroupBox17'#4'Left'#2#8#6'Height'#2'?'#3'Top'#2'P'#5'Width'#3#185
-  +#1#7'Caption'#6#12'Quick Delete'#12'ClientHeight'#2'/'#11'ClientWidth'#3#181
-  +#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label239'#4'Left'#2#12#6'Height'#2#14#3'Top'
-  +#2#16#5'Width'#3#173#0#7'Caption'#6'%Quickly delete all comet related data'
-  +#11'ParentColor'#8#0#0#7'TButton'#9'DelComAll'#4'Left'#3'H'#1#6'Height'#2#25
-  +#3'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#6'D'
-  +'elete'#7'OnClick'#7#14'DelComAllClick'#8'TabOrder'#2#0#0#0#0#5'TMemo'#10'De'
-  +'lComMemo'#4'Left'#2#8#6'Height'#3#209#0#3'Top'#3#176#0#5'Width'#3#185#1#5'C'
-  +'olor'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#2#7'TabStop'#8
-  +#0#0#0#9'TTabSheet'#12'Addsinglecom'#7'Caption'#6#3'Add'#12'ClientHeight'#3
-  +#145#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#4#0#6'TLabel'#8'Label241'#4
-  +'Left'#2#8#6'Height'#2#14#3'Top'#2#8#5'Width'#3'&'#1#7'Caption'#6'>Add a sin'
-  +'gle element to the database. All field are mandatory.'#11'ParentColor'#8#0#0
-  +#6'TLabel'#8'Label242'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'('#5'Width'#2'9'#7
-  +'Caption'#6#11'Designation'#11'ParentColor'#8#0#0#6'TLabel'#8'Label243'#4'Le'
-  +'ft'#2#8#6'Height'#2#14#3'Top'#3#232#0#5'Width'#2'h'#7'Caption'#6#20'H absol'
-  +'ute magnitude'#11'ParentColor'#8#0#0#6'TLabel'#8'Label244'#4'Left'#3#160#0#6
-  +'Height'#2#14#3'Top'#3#232#0#5'Width'#2'Z'#7'Caption'#6#17'G slope parameter'
-  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label245'#4'Left'#3#160#0#6'Height'#2#14#3
-  +'Top'#3#168#0#5'Width'#2'6'#7'Caption'#6#10'Epoch (JD)'#11'ParentColor'#8#0#0
-  +#6'TLabel'#8'Label246'#4'Left'#3#160#0#6'Height'#2#14#3'Top'#2'('#5'Width'#2
-  +'G'#7'Caption'#6#15'Perihelion date'#11'ParentColor'#8#0#0#6'TLabel'#8'Label'
-  +'247'#4'Left'#3#160#0#6'Height'#2#14#3'Top'#2'h'#5'Width'#2'n'#7'Caption'#6
-  +#22'Argument of perihelion'#11'ParentColor'#8#0#0#6'TLabel'#8'Label248'#4'Le'
-  +'ft'#3'8'#1#6'Height'#2#14#3'Top'#2'h'#5'Width'#3#129#0#7'Caption'#6#24'Long'
-  +'itude ascending Node'#11'ParentColor'#8#0#0#6'TLabel'#8'Label249'#4'Left'#2
-  +#8#6'Height'#2#14#3'Top'#3#168#0#5'Width'#2'0'#7'Caption'#6#11'Inclination'
-  +#11'ParentColor'#8#0#0#6'TLabel'#8'Label250'#4'Left'#2#8#6'Height'#2#14#3'To'
-  +'p'#2'h'#5'Width'#2'9'#7'Caption'#6#12'Eccentricity'#11'ParentColor'#8#0#0#6
-  +'TLabel'#8'Label251'#4'Left'#3'8'#1#6'Height'#2#14#3'Top'#2'('#5'Width'#2'['
-  +#7'Caption'#6#19'Perihelion distance'#11'ParentColor'#8#0#0#6'TLabel'#8'Labe'
-  +'l253'#4'Left'#3'8'#1#6'Height'#2#14#3'Top'#3#168#0#5'Width'#2''''#7'Caption'
-  +#6#7'Equinox'#11'ParentColor'#8#0#0#6'TLabel'#8'Label254'#4'Left'#2#8#6'Heig'
-  +'ht'#2#14#3'Top'#3'('#1#5'Width'#2#28#7'Caption'#6#4'Name'#11'ParentColor'#8
-  +#0#0#5'TEdit'#5'comid'#4'Left'#2#8#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8
-  ,'TabOrder'#2#0#0#0#5'TEdit'#4'comh'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#0#1#5
-  +'Width'#2'd'#8'TabOrder'#2#11#4'Text'#6#1'5'#0#0#5'TEdit'#4'comg'#4'Left'#3
-  +#160#0#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#12#4'Text'#6#2
-  +'10'#0#0#5'TEdit'#5'comep'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#192#0#5'W'
-  +'idth'#2'd'#8'TabOrder'#2#9#0#0#5'TEdit'#7'comperi'#4'Left'#3#160#0#6'Height'
-  +#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#6#4'Text'#6#3'0.0'#0#0#5'TE'
-  +'dit'#7'comnode'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8
-  +'TabOrder'#2#7#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comi'#4'Left'#2#8#6'Height'#2
-  +#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#8#4'Text'#6#3'0.0'#0#0#5'TEdi'
-  +'t'#5'comec'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOr'
-  +'der'#2#5#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comq'#4'Left'#3'8'#1#6'Height'#2#21
-  +#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#4#4'Text'#6#1'2'#0#0#5'TEdit'#6'com'
-  +'nam'#4'Left'#2#8#6'Height'#2#21#3'Top'#3'@'#1#5'Width'#3#1#1#8'TabOrder'#2
-  +#13#0#0#5'TEdit'#5'comeq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#192#0#5'Wid'
-  +'th'#2'd'#8'TabOrder'#2#10#4'Text'#6#4'2000'#0#0#7'TButton'#6'AddCom'#4'Left'
-  +#3'8'#1#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#25'BorderSpacing.InnerBor'
-  +'der'#2#4#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddComClick'#8'TabOrder'#2#14#0
-  +#0#5'TEdit'#6'comt_y'#4'Left'#3#139#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2
-  +'+'#8'TabOrder'#2#1#0#0#5'TEdit'#6'comt_m'#4'Left'#3#188#0#6'Height'#2#21#3
-  +'Top'#2'@'#5'Width'#2#27#8'TabOrder'#2#2#0#0#5'TEdit'#6'comt_d'#4'Left'#3#221
-  +#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'9'#8'TabOrder'#2#3#0#0#0#0#0#9'TTab'
-  +'Sheet'#5'Page4'#7'Caption'#6#5'Page4'#12'ClientHeight'#3#224#1#11'ClientWid'
-  +'th'#3#241#1#0#12'TPageControl'#14'AstPageControl'#4'Left'#2#0#6'Height'#3
-  +#173#1#3'Top'#2#4#5'Width'#3#225#1#10'ActivePage'#7#10'astsetting'#8'TabInde'
-  +'x'#2#0#8'TabOrder'#2#0#0#9'TTabSheet'#10'astsetting'#7'Caption'#6#15'Genera'
-  +'l Setting'#12'ClientHeight'#3#145#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2
-  +#3#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#9#6'Height'#3'<'#1#3'Top'#2#10#5'Wi'
-  +'dth'#3#185#1#7'Caption'#6#13'Chart Setting'#12'ClientHeight'#3','#1#11'Clie'
-  +'ntWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#8'Label203'#4'Left'#2#29#6'Hei'
-  +'ght'#2','#3'Top'#3#172#0#5'Width'#3':'#1#8'AutoSize'#8#7'Caption'#6'6Do not'
-  +' take account of asteroid fainter than magnitude'#11'ParentColor'#8#8'WordW'
-  +'rap'#9#0#0#6'TLabel'#8'Label212'#4'Left'#2#29#6'Height'#2#15#3'Top'#3#244#0
-  +#5'Width'#2'P'#7'Caption'#6#13'Show asteroid'#11'ParentColor'#8#0#0#6'TLabel'
-  +#8'Label213'#4'Left'#3#218#0#6'Height'#2','#3'Top'#3#244#0#5'Width'#3#191#0#8
-  +'AutoSize'#8#7'Caption'#6'!magnitude fainter than the stars.'#11'ParentColor'
-  +#8#8'WordWrap'#9#0#0#10'TFloatEdit'#11'astlimitmag'#4'Left'#3'm'#1#6'Height'
-  +#2#22#4'Hint'#6#5'0..99'#3'Top'#3#167#0#5'Width'#2')'#14'ParentShowHint'#8#8
-  +'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#17'astlimitmagChange'#5'Value'#5#0
-  +#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0
-  +#0#0#198#5'@'#0#0#9'TCheckBox'#7'showast'#4'Left'#2' '#6'Height'#2#23#3'Top'
-  +#2#22#5'Width'#3#178#0#7'Caption'#6#27'Show asteroids on the chart'#7'OnClic'
-  +'k'#7#12'showastClick'#8'TabOrder'#2#0#0#0#11'TRadioGroup'#9'astsymbol'#4'Le'
-  +'ft'#2#24#6'Height'#2'Y'#3'Top'#2'8'#5'Width'#3#137#1#8'AutoFill'#9#28'Child'
-  +'Sizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29'ChildS'
-  +'izing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizing.Enla'
-  +'rgeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHorizontal'
-  +#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleChilds'#18
-  +'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSizing.Cont'
-  +'rolsPerLine'#2#1#12'ClientHeight'#2'U'#11'ClientWidth'#3#133#1#5'Color'#7#9
-  +'clBtnFace'#9'ItemIndex'#2#1#13'Items.Strings'#1#6'<Display as a symbol     '
-  +'                                    '#6'9Proportional to the magnitude     '
-  +'                       '#0#7'OnClick'#7#14'astsymbolClick'#11'ParentColor'#8
-  +#8'TabOrder'#2#1#0#0#10'TFloatEdit'#10'astmagdiff'#4'Left'#3#161#0#6'Height'
-  +#2#22#4'Hint'#6#5'0..99'#3'Top'#3#239#0#5'Width'#2')'#14'ParentShowHint'#8#8
-  +'ShowHint'#9#8'TabOrder'#2#3#8'OnChange'#7#16'astmagdiffChange'#5'Value'#5#0
-  +#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0
-  +#0#0#198#5'@'#0#0#0#7'TButton'#8'astdbset'#4'Left'#2#17#6'Height'#2#25#3'Top'
-  +#3'^'#1#5'Width'#3#194#0#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#19'D'
-  +'atabase setting...'#7'OnClick'#7#13'astdbsetClick'#8'TabOrder'#2#1#7'Visibl'
-  +'e'#8#0#0#0#9'TTabSheet'#7'astload'#7'Caption'#6#13'Load MPC File'#12'Client'
-  +'Height'#3#145#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#1#0#6'TLabel'#8'La'
-  +'bel206'#4'Left'#2#8#6'Height'#2#15#3'Top'#3#203#0#5'Width'#2'>'#7'Caption'#6
-  +#9'Messages:'#11'ParentColor'#8#0#0#5'TMemo'#7'MemoMPC'#4'Left'#2#8#6'Height'
-  +#3#174#0#3'Top'#3#219#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBa'
-  ,'rs'#7#6'ssBoth'#8'TabOrder'#2#1#7'TabStop'#8#0#0#9'TGroupBox'#9'GroupBox1'#4
-  +'Left'#2#8#6'Height'#2'X'#3'Top'#2'k'#5'Width'#3#185#1#7'Caption'#6#7'Option'
-  +'s'#12'ClientHeight'#2'H'#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'
-  +#8'Label215'#4'Left'#3#2#1#6'Height'#2#15#3'Top'#2'-'#5'Width'#2'x'#7'Captio'
-  +'n'#6#23'Asteroids from the file'#11'ParentColor'#8#0#0#9'TCheckBox'#11'astn'
-  +'umbered'#4'Left'#2#20#6'Height'#2#23#3'Top'#2#6#5'Width'#3#164#0#7'Caption'
-  +#6#23'Only numbered asteroids'#8'TabOrder'#2#0#0#0#9'TCheckBox'#10'aststoper'
-  +'r'#4'Left'#3#241#0#6'Height'#2#23#3'Top'#2#6#5'Width'#3#141#0#7'Caption'#6
-  +#22'Halt after 1000 errors'#7'Checked'#9#5'State'#7#9'cbChecked'#8'TabOrder'
-  +#2#1#0#0#9'TCheckBox'#11'astlimitbox'#4'Left'#2#20#6'Height'#2#23#3'Top'#2
-  +''''#5'Width'#2'|'#7'Caption'#6#20'Load only the first '#8'TabOrder'#2#2#0#0
-  +#9'TLongEdit'#8'astlimit'#4'Left'#3#197#0#6'Height'#2#22#4'Hint'#6#9'0..9999'
-  +'99'#3'Top'#2''''#5'Width'#2'1'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrde'
-  +'r'#2#3#5'Value'#3#136#19#8'MaxValue'#4'?B'#15#0#0#0#0#12'TPageControl'#15'A'
-  +'stPageControl2'#4'Left'#2#8#6'Height'#2'`'#3'Top'#2#3#5'Width'#3#185#1#10'A'
-  +'ctivePage'#7#9'TabSheet3'#8'TabIndex'#2#0#8'TabOrder'#2#2#0#9'TTabSheet'#9
-  +'TabSheet3'#7'Caption'#6#20'Load MPC format file'#12'ClientHeight'#2'D'#11'C'
-  +'lientWidth'#3#181#1#0#6'TLabel'#6'Label1'#4'Left'#2#22#6'Height'#2#15#3'Top'
-  +#2#24#5'Width'#3#182#0#7'Caption'#6' Download latest orbital elements'#11'Pa'
-  +'rentColor'#8#0#0#7'TButton'#16'DownloadAsteroid'#4'Left'#3'.'#1#6'Height'#2
-  +#25#3'Top'#2#19#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6
-  +#8'Download'#7'OnClick'#7#21'DownloadAsteroidClick'#8'TabOrder'#2#0#0#0#0#9
+  +'omboBox1'#4'Left'#3#171#0#6'Height'#2#24#3'Top'#2'('#5'Width'#3#176#0#10'It'
+  +'emHeight'#2#0#8'OnSelect'#7#15'ComboBox1Select'#5'Style'#7#14'csDropDownLis'
+  +'t'#8'TabOrder'#2#1#0#0#6'TLabel'#6'Label6'#4'Left'#2#13#6'Height'#2#15#3'To'
+  +'p'#2'L'#5'Width'#2'r'#7'Caption'#6#19'Refresh image every'#11'ParentColor'#8
+  +#0#0#9'TComboBox'#9'ComboBox2'#4'Left'#3#171#0#6'Height'#2#24#3'Top'#2'H'#5
+  +'Width'#2'4'#10'ItemHeight'#2#0#9'ItemIndex'#2#0#13'Items.Strings'#1#6#1'1'#6
+  +#1'3'#6#1'6'#6#2'12'#6#2'24'#0#8'OnSelect'#7#15'ComboBox2Select'#5'Style'#7
+  +#14'csDropDownList'#8'TabOrder'#2#2#4'Text'#6#1'1'#0#0#6'TLabel'#6'Label8'#4
+  +'Left'#3#235#0#6'Height'#2#15#3'Top'#2'L'#5'Width'#2'!'#7'Caption'#6#5'hours'
+  +#11'ParentColor'#8#0#0#0#0#9'TTabSheet'#5'Page3'#7'Caption'#6#5'Page3'#12'Cl'
+  +'ientHeight'#3#224#1#11'ClientWidth'#3#241#1#0#12'TPageControl'#14'ComPageCo'
+  +'ntrol'#4'Left'#2#253#6'Height'#3#173#1#3'Top'#2#4#5'Width'#3#225#1#10'Activ'
+  +'ePage'#7#10'comsetting'#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9'TTabSheet'#10'c'
+  +'omsetting'#7'Caption'#6#15'General Setting'#12'ClientHeight'#3#169#1#11'Cli'
+  +'entWidth'#3#221#1#10'ImageIndex'#2#3#0#9'TGroupBox'#10'GroupBox13'#4'Left'#2
+  +#9#6'Height'#3'<'#1#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#13'Chart Setti'
+  +'ng'#12'ClientHeight'#3','#1#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLa'
+  +'bel'#8'Label154'#4'Left'#2' '#6'Height'#2'.'#3'Top'#3#162#0#5'Width'#3'.'#1
+  +#8'AutoSize'#8#7'Caption'#6'3Do not take account of comet fainter than magni'
+  +'tude'#11'ParentColor'#8#8'WordWrap'#9#0#0#6'TLabel'#8'Label216'#4'Left'#2' '
+  +#6'Height'#2#15#3'Top'#3#239#0#5'Width'#2'E'#7'Caption'#6#10'Show comet'#11
+  +'ParentColor'#8#0#0#6'TLabel'#8'Label231'#4'Left'#3#200#0#6'Height'#2'4'#3'T'
+  +'op'#3#239#0#5'Width'#3#191#0#8'AutoSize'#8#7'Caption'#6'!magnitude fainter '
+  +'than the stars.'#11'ParentColor'#8#8'WordWrap'#9#0#0#10'TFloatEdit'#11'coml'
+  +'imitmag'#4'Left'#3'^'#1#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#159#0#5
+  +'Width'#2')'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7
+  +#17'comlimitmagChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0
+  +#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#7'showcom'#4
+  +'Left'#2' '#6'Height'#2#23#3'Top'#2#14#5'Width'#3#167#0#7'Caption'#6#24'Show'
+  +' comets on the chart'#7'OnClick'#7#12'showcomClick'#8'TabOrder'#2#0#0#0#11
+  +'TRadioGroup'#9'comsymbol'#4'Left'#2#24#6'Height'#2'`'#3'Top'#2''''#5'Width'
+  +#3#137#1#8'AutoFill'#9#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.T'
+  +'opBottomSpacing'#2#6#29'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousCh'
+  +'ildResize'#27'ChildSizing.EnlargeVertical'#7#24'crsHomogenousChildResize'#28
+  +'ChildSizing.ShrinkHorizontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVer'
+  +'tical'#7#14'crsScaleChilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenT'
+  +'opToBottom'#27'ChildSizing.ControlsPerLine'#2#1#12'ClientHeight'#2'P'#11'Cl'
+  +'ientWidth'#3#133#1#5'Color'#7#9'clBtnFace'#9'ItemIndex'#2#1#13'Items.String'
+  +'s'#1#6'<Display as a symbol                                         '#6'>Pr'
+  +'oportional to the tail length                               '#0#7'OnClick'#7
+  +#14'comsymbolClick'#11'ParentColor'#8#8'TabOrder'#2#1#0#0#10'TFloatEdit'#10
+  +'commagdiff'#4'Left'#3#140#0#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#234#0
+  +#5'Width'#2')'#14'ParentShowHint'#8#8'ShowHint'#9#8'TabOrder'#2#3#8'OnChange'
+  +#7#16'commagdiffChange'#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0
+  ,#0#0#0#0#0#0#8'MaxValue'#5#0#0#0#0#0#0#0#198#5'@'#0#0#0#7'TButton'#8'comdbse'
+  +'t'#4'Left'#2#17#6'Height'#2#25#3'Top'#3'f'#1#5'Width'#3#185#0#25'BorderSpac'
+  +'ing.InnerBorder'#2#4#7'Caption'#6#19'Database setting...'#7'OnClick'#7#13'c'
+  +'omdbsetClick'#8'TabOrder'#2#1#7'Visible'#8#0#0#0#9'TTabSheet'#7'comload'#7
+  +'Caption'#6#13'Load MPC File'#12'ClientHeight'#3#169#1#11'ClientWidth'#3#221
+  +#1#10'ImageIndex'#2#1#0#6'TLabel'#8'Label232'#4'Left'#2#15#6'Height'#2#15#3
+  +'Top'#2'{'#5'Width'#2'>'#7'Caption'#6#9'Messages:'#11'ParentColor'#8#0#0#5'T'
+  +'Memo'#7'MemoCom'#4'Left'#2#8#6'Height'#3#242#0#3'Top'#3#143#0#5'Width'#3#185
+  +#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#0#7'TabS'
+  +'top'#8#0#0#12'TPageControl'#15'ComPageControl1'#4'Left'#2#13#6'Height'#2'h'
+  +#3'Top'#2#11#5'Width'#3#180#1#10'ActivePage'#7#9'TabSheet1'#8'TabIndex'#2#0#8
+  +'TabOrder'#2#1#0#9'TTabSheet'#9'TabSheet1'#7'Caption'#6#20'Load MPC format f'
+  +'ile'#12'ClientHeight'#2'd'#11'ClientWidth'#3#176#1#0#6'TLabel'#6'Label2'#4
+  +'Left'#2#13#6'Height'#2#15#3'Top'#2#27#5'Width'#3#182#0#7'Caption'#6' Downlo'
+  +'ad latest orbital elements'#11'ParentColor'#8#0#0#7'TButton'#13'DownloadCom'
+  +'et'#4'Left'#3'='#1#6'Height'#2#25#3'Top'#2#22#5'Width'#2'a'#25'BorderSpacin'
+  +'g.InnerBorder'#2#4#7'Caption'#6#8'Download'#7'OnClick'#7#18'DownloadCometCl'
+  +'ick'#8'TabOrder'#2#0#0#0#0#9'TTabSheet'#9'TabSheet2'#7'Caption'#6#21'Or use'
+  +' a local file :'#12'ClientHeight'#2'd'#11'ClientWidth'#3#176#1#0#13'TFileNa'
+  +'meEdit'#7'comfile'#4'Left'#2#13#6'Height'#2#22#3'Top'#2#24#5'Width'#3#9#1#13
+  +'DialogOptions'#11#0#6'Filter'#6'"Comet Files|COM*.DAT|All Files|*.*'#11'Fil'
+  +'terIndex'#2#0#15'HideDirectories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9
+  +'MaxLength'#2#0#8'TabOrder'#2#0#0#0#7'TButton'#7'Loadcom'#4'Left'#3'E'#1#6'H'
+  +'eight'#2#25#3'Top'#2#22#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#4#7'C'
+  +'aption'#6#9'Load file'#7'OnClick'#7#12'LoadcomClick'#8'TabOrder'#2#1#0#0#0#0
+  +#0#9'TTabSheet'#9'comdelete'#7'Caption'#6#16'Data Maintenance'#12'ClientHeig'
+  +'ht'#3#169#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#3#0#6'TLabel'#8'Label2'
+  +'38'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#151#0#5'Width'#2'6'#7'Caption'#6#9
+  +'Messages:'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox16'#4'Left'#2#8#6
+  +'Height'#2'<'#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27'Delete MPC data s'
+  +'electively'#12'ClientHeight'#2','#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0
+  +#9'TComboBox'#11'comelemlist'#4'Left'#2#16#6'Height'#2#24#3'Top'#2#6#5'Width'
+  +#3#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0#10'ItemHeight'#2#0
+  +#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#7'TButton'#6'DelCom'#4'Le'
+  +'ft'#3'H'#1#6'Height'#2#25#3'Top'#2#6#5'Width'#2'K'#25'BorderSpacing.InnerBo'
+  +'rder'#2#4#7'Caption'#6#6'Delete'#7'OnClick'#7#11'DelComClick'#8'TabOrder'#2
+  +#1#0#0#0#9'TGroupBox'#10'GroupBox17'#4'Left'#2#8#6'Height'#2'?'#3'Top'#2'P'#5
+  +'Width'#3#185#1#7'Caption'#6#12'Quick Delete'#12'ClientHeight'#2'/'#11'Clien'
+  +'tWidth'#3#181#1#8'TabOrder'#2#1#0#6'TLabel'#8'Label239'#4'Left'#2#12#6'Heig'
+  +'ht'#2#14#3'Top'#2#16#5'Width'#3#173#0#7'Caption'#6'%Quickly delete all come'
+  +'t related data'#11'ParentColor'#8#0#0#7'TButton'#9'DelComAll'#4'Left'#3'H'#1
+  +#6'Height'#2#25#3'Top'#2#8#5'Width'#2'K'#25'BorderSpacing.InnerBorder'#2#4#7
+  +'Caption'#6#6'Delete'#7'OnClick'#7#14'DelComAllClick'#8'TabOrder'#2#0#0#0#0#5
+  +'TMemo'#10'DelComMemo'#4'Left'#2#8#6'Height'#3#209#0#3'Top'#3#176#0#5'Width'
+  +#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#2#7
+  +'TabStop'#8#0#0#0#9'TTabSheet'#12'Addsinglecom'#7'Caption'#6#3'Add'#12'Clien'
+  +'tHeight'#3#169#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#4#0#6'TLabel'#8'L'
+  +'abel241'#4'Left'#2#8#6'Height'#2#14#3'Top'#2#8#5'Width'#3'&'#1#7'Caption'#6
+  +'>Add a single element to the database. All field are mandatory.'#11'ParentC'
+  +'olor'#8#0#0#6'TLabel'#8'Label242'#4'Left'#2#8#6'Height'#2#14#3'Top'#2'('#5
+  +'Width'#2'9'#7'Caption'#6#11'Designation'#11'ParentColor'#8#0#0#6'TLabel'#8
+  +'Label243'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#232#0#5'Width'#2'h'#7'Caption'
+  +#6#20'H absolute magnitude'#11'ParentColor'#8#0#0#6'TLabel'#8'Label244'#4'Le'
+  +'ft'#3#160#0#6'Height'#2#14#3'Top'#3#232#0#5'Width'#2'Z'#7'Caption'#6#17'G s'
+  +'lope parameter'#11'ParentColor'#8#0#0#6'TLabel'#8'Label245'#4'Left'#3#160#0
+  +#6'Height'#2#14#3'Top'#3#168#0#5'Width'#2'6'#7'Caption'#6#10'Epoch (JD)'#11
+  +'ParentColor'#8#0#0#6'TLabel'#8'Label246'#4'Left'#3#160#0#6'Height'#2#14#3'T'
+  +'op'#2'('#5'Width'#2'G'#7'Caption'#6#15'Perihelion date'#11'ParentColor'#8#0
+  +#0#6'TLabel'#8'Label247'#4'Left'#3#160#0#6'Height'#2#14#3'Top'#2'h'#5'Width'
+  +#2'n'#7'Caption'#6#22'Argument of perihelion'#11'ParentColor'#8#0#0#6'TLabel'
+  +#8'Label248'#4'Left'#3'8'#1#6'Height'#2#14#3'Top'#2'h'#5'Width'#3#129#0#7'Ca'
+  +'ption'#6#24'Longitude ascending Node'#11'ParentColor'#8#0#0#6'TLabel'#8'Lab'
+  +'el249'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#168#0#5'Width'#2'0'#7'Caption'#6
+  +#11'Inclination'#11'ParentColor'#8#0#0#6'TLabel'#8'Label250'#4'Left'#2#8#6'H'
+  ,'eight'#2#14#3'Top'#2'h'#5'Width'#2'9'#7'Caption'#6#12'Eccentricity'#11'Pare'
+  +'ntColor'#8#0#0#6'TLabel'#8'Label251'#4'Left'#3'8'#1#6'Height'#2#14#3'Top'#2
+  +'('#5'Width'#2'['#7'Caption'#6#19'Perihelion distance'#11'ParentColor'#8#0#0
+  +#6'TLabel'#8'Label253'#4'Left'#3'8'#1#6'Height'#2#14#3'Top'#3#168#0#5'Width'
+  +#2''''#7'Caption'#6#7'Equinox'#11'ParentColor'#8#0#0#6'TLabel'#8'Label254'#4
+  +'Left'#2#8#6'Height'#2#14#3'Top'#3'('#1#5'Width'#2#28#7'Caption'#6#4'Name'#11
+  +'ParentColor'#8#0#0#5'TEdit'#5'comid'#4'Left'#2#8#6'Height'#2#21#3'Top'#2'@'
+  +#5'Width'#2'd'#8'TabOrder'#2#0#0#0#5'TEdit'#4'comh'#4'Left'#2#8#6'Height'#2
+  +#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#11#4'Text'#6#1'5'#0#0#5'TEdit'#4
+  +'comg'#4'Left'#3#160#0#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'
+  +#2#12#4'Text'#6#2'10'#0#0#5'TEdit'#5'comep'#4'Left'#3#160#0#6'Height'#2#21#3
+  +'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#9#0#0#5'TEdit'#7'comperi'#4'Left'#3
+  +#160#0#6'Height'#2#21#3'Top'#3#128#0#5'Width'#2'd'#8'TabOrder'#2#6#4'Text'#6
+  +#3'0.0'#0#0#5'TEdit'#7'comnode'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#128#0
+  +#5'Width'#2'd'#8'TabOrder'#2#7#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comi'#4'Left'
+  +#2#8#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#8#4'Text'#6#3
+  +'0.0'#0#0#5'TEdit'#5'comec'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#128#0#5'Widt'
+  +'h'#2'd'#8'TabOrder'#2#5#4'Text'#6#3'0.0'#0#0#5'TEdit'#4'comq'#4'Left'#3'8'#1
+  +#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'd'#8'TabOrder'#2#4#4'Text'#6#1'2'#0#0
+  +#5'TEdit'#6'comnam'#4'Left'#2#8#6'Height'#2#21#3'Top'#3'@'#1#5'Width'#3#1#1#8
+  +'TabOrder'#2#13#0#0#5'TEdit'#5'comeq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3
+  +#192#0#5'Width'#2'd'#8'TabOrder'#2#10#4'Text'#6#4'2000'#0#0#7'TButton'#6'Add'
+  +'Com'#4'Left'#3'8'#1#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#25'BorderSpa'
+  +'cing.InnerBorder'#2#4#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddComClick'#8'Ta'
+  +'bOrder'#2#14#0#0#5'TEdit'#6'comt_y'#4'Left'#3#139#0#6'Height'#2#21#3'Top'#2
+  +'@'#5'Width'#2'+'#8'TabOrder'#2#1#0#0#5'TEdit'#6'comt_m'#4'Left'#3#188#0#6'H'
+  +'eight'#2#21#3'Top'#2'@'#5'Width'#2#27#8'TabOrder'#2#2#0#0#5'TEdit'#6'comt_d'
+  +#4'Left'#3#221#0#6'Height'#2#21#3'Top'#2'@'#5'Width'#2'9'#8'TabOrder'#2#3#0#0
+  +#0#0#0#9'TTabSheet'#5'Page4'#7'Caption'#6#5'Page4'#12'ClientHeight'#3#224#1
+  +#11'ClientWidth'#3#241#1#0#12'TPageControl'#14'AstPageControl'#4'Left'#2#0#6
+  +'Height'#3#173#1#3'Top'#2#4#5'Width'#3#225#1#10'ActivePage'#7#10'astsetting'
+  +#8'TabIndex'#2#0#8'TabOrder'#2#0#0#9'TTabSheet'#10'astsetting'#7'Caption'#6
+  +#15'General Setting'#12'ClientHeight'#3#169#1#11'ClientWidth'#3#221#1#10'Ima'
+  +'geIndex'#2#3#0#9'TGroupBox'#9'GroupBox9'#4'Left'#2#9#6'Height'#3'<'#1#3'Top'
+  +#2#10#5'Width'#3#185#1#7'Caption'#6#13'Chart Setting'#12'ClientHeight'#3','#1
+  +#11'ClientWidth'#3#181#1#8'TabOrder'#2#0#0#6'TLabel'#8'Label203'#4'Left'#2#29
+  +#6'Height'#2','#3'Top'#3#172#0#5'Width'#3':'#1#8'AutoSize'#8#7'Caption'#6'6D'
+  +'o not take account of asteroid fainter than magnitude'#11'ParentColor'#8#8
+  +'WordWrap'#9#0#0#6'TLabel'#8'Label212'#4'Left'#2#29#6'Height'#2#15#3'Top'#3
+  +#244#0#5'Width'#2'P'#7'Caption'#6#13'Show asteroid'#11'ParentColor'#8#0#0#6
+  +'TLabel'#8'Label213'#4'Left'#3#218#0#6'Height'#2','#3'Top'#3#244#0#5'Width'#3
+  +#191#0#8'AutoSize'#8#7'Caption'#6'!magnitude fainter than the stars.'#11'Par'
+  +'entColor'#8#8'WordWrap'#9#0#0#10'TFloatEdit'#11'astlimitmag'#4'Left'#3'm'#1
+  +#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#167#0#5'Width'#2')'#14'ParentSho'
+  +'wHint'#8#8'ShowHint'#9#8'TabOrder'#2#2#8'OnChange'#7#17'astlimitmagChange'#5
+  +'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'#5
+  +#0#0#0#0#0#0#0#198#5'@'#0#0#9'TCheckBox'#7'showast'#4'Left'#2' '#6'Height'#2
+  +#23#3'Top'#2#22#5'Width'#3#178#0#7'Caption'#6#27'Show asteroids on the chart'
+  +#7'OnClick'#7#12'showastClick'#8'TabOrder'#2#0#0#0#11'TRadioGroup'#9'astsymb'
+  +'ol'#4'Left'#2#24#6'Height'#2'Y'#3'Top'#2'8'#5'Width'#3#137#1#8'AutoFill'#9
+  +#28'ChildSizing.LeftRightSpacing'#2#6#28'ChildSizing.TopBottomSpacing'#2#6#29
+  +'ChildSizing.EnlargeHorizontal'#7#24'crsHomogenousChildResize'#27'ChildSizin'
+  +'g.EnlargeVertical'#7#24'crsHomogenousChildResize'#28'ChildSizing.ShrinkHori'
+  +'zontal'#7#14'crsScaleChilds'#26'ChildSizing.ShrinkVertical'#7#14'crsScaleCh'
+  +'ilds'#18'ChildSizing.Layout'#7#29'cclLeftToRightThenTopToBottom'#27'ChildSi'
+  +'zing.ControlsPerLine'#2#1#12'ClientHeight'#2'I'#11'ClientWidth'#3#133#1#5'C'
+  +'olor'#7#9'clBtnFace'#9'ItemIndex'#2#1#13'Items.Strings'#1#6'<Display as a s'
+  +'ymbol                                         '#6'9Proportional to the magn'
+  +'itude                            '#0#7'OnClick'#7#14'astsymbolClick'#11'Par'
+  +'entColor'#8#8'TabOrder'#2#1#0#0#10'TFloatEdit'#10'astmagdiff'#4'Left'#3#161
+  +#0#6'Height'#2#22#4'Hint'#6#5'0..99'#3'Top'#3#239#0#5'Width'#2')'#14'ParentS'
+  +'howHint'#8#8'ShowHint'#9#8'TabOrder'#2#3#8'OnChange'#7#16'astmagdiffChange'
+  +#5'Value'#5#0#0#0#0#0#0#0#0#0#0#8'MinValue'#5#0#0#0#0#0#0#0#0#0#0#8'MaxValue'
+  +#5#0#0#0#0#0#0#0#198#5'@'#0#0#0#7'TButton'#8'astdbset'#4'Left'#2#17#6'Height'
+  ,#2#25#3'Top'#3'^'#1#5'Width'#3#194#0#25'BorderSpacing.InnerBorder'#2#4#7'Cap'
+  +'tion'#6#19'Database setting...'#7'OnClick'#7#13'astdbsetClick'#8'TabOrder'#2
+  +#1#7'Visible'#8#0#0#0#9'TTabSheet'#7'astload'#7'Caption'#6#13'Load MPC File'
+  +#12'ClientHeight'#3#169#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#1#0#6'TLa'
+  +'bel'#8'Label206'#4'Left'#2#8#6'Height'#2#15#3'Top'#3#203#0#5'Width'#2'>'#7
+  +'Caption'#6#9'Messages:'#11'ParentColor'#8#0#0#5'TMemo'#7'MemoMPC'#4'Left'#2
+  +#8#6'Height'#3#174#0#3'Top'#3#219#0#5'Width'#3#185#1#5'Color'#7#9'clBtnFace'
+  +#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2#1#7'TabStop'#8#0#0#9'TGroupBox'#9
+  +'GroupBox1'#4'Left'#2#8#6'Height'#2'X'#3'Top'#2'k'#5'Width'#3#185#1#7'Captio'
+  +'n'#6#7'Options'#12'ClientHeight'#2'H'#11'ClientWidth'#3#181#1#8'TabOrder'#2
+  +#0#0#6'TLabel'#8'Label215'#4'Left'#3#2#1#6'Height'#2#15#3'Top'#2'-'#5'Width'
+  +#2'x'#7'Caption'#6#23'Asteroids from the file'#11'ParentColor'#8#0#0#9'TChec'
+  +'kBox'#11'astnumbered'#4'Left'#2#20#6'Height'#2#23#3'Top'#2#6#5'Width'#3#164
+  +#0#7'Caption'#6#23'Only numbered asteroids'#8'TabOrder'#2#0#0#0#9'TCheckBox'
+  +#10'aststoperr'#4'Left'#3#241#0#6'Height'#2#23#3'Top'#2#6#5'Width'#3#141#0#7
+  +'Caption'#6#22'Halt after 1000 errors'#7'Checked'#9#5'State'#7#9'cbChecked'#8
+  +'TabOrder'#2#1#0#0#9'TCheckBox'#11'astlimitbox'#4'Left'#2#20#6'Height'#2#23#3
+  +'Top'#2''''#5'Width'#2'|'#7'Caption'#6#20'Load only the first '#8'TabOrder'#2
+  +#2#0#0#9'TLongEdit'#8'astlimit'#4'Left'#3#197#0#6'Height'#2#22#4'Hint'#6#9'0'
+  +'..999999'#3'Top'#2''''#5'Width'#2'1'#14'ParentShowHint'#8#8'ShowHint'#9#8'T'
+  +'abOrder'#2#3#5'Value'#3#136#19#8'MaxValue'#4'?B'#15#0#0#0#0#12'TPageControl'
+  +#15'AstPageControl2'#4'Left'#2#8#6'Height'#2'`'#3'Top'#2#3#5'Width'#3#185#1
+  +#10'ActivePage'#7#9'TabSheet3'#8'TabIndex'#2#0#8'TabOrder'#2#2#0#9'TTabSheet'
+  +#9'TabSheet3'#7'Caption'#6#20'Load MPC format file'#12'ClientHeight'#2'\'#11
+  +'ClientWidth'#3#181#1#0#6'TLabel'#6'Label1'#4'Left'#2#22#6'Height'#2#15#3'To'
+  +'p'#2#24#5'Width'#3#182#0#7'Caption'#6' Download latest orbital elements'#11
+  +'ParentColor'#8#0#0#7'TButton'#16'DownloadAsteroid'#4'Left'#3'.'#1#6'Height'
+  +#2#25#3'Top'#2#19#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'
+  +#6#8'Download'#7'OnClick'#7#21'DownloadAsteroidClick'#8'TabOrder'#2#0#0#0#0#9
   +'TTabSheet'#9'TabSheet4'#7'Caption'#6#21'Or use a local file :'#12'ClientHei'
-  +'ght'#2'D'#11'ClientWidth'#3#181#1#0#13'TFileNameEdit'#7'mpcfile'#4'Left'#2
+  +'ght'#2'\'#11'ClientWidth'#3#181#1#0#13'TFileNameEdit'#7'mpcfile'#4'Left'#2
   +#14#6'Height'#2#22#3'Top'#2#21#5'Width'#3#232#0#13'DialogOptions'#11#0#6'Fil'
   +'ter'#6'&MPCORB Files|MPCORB*.DAT|All Files|*.*'#11'FilterIndex'#2#0#15'Hide'
   +'Directories'#8#11'ButtonWidth'#2#23#9'NumGlyphs'#2#1#9'MaxLength'#2#0#8'Tab'
   +'Order'#2#0#0#0#7'TButton'#7'LoadMPC'#4'Left'#3'.'#1#6'Height'#2#25#3'Top'#2
   +#19#5'Width'#2'a'#25'BorderSpacing.InnerBorder'#2#4#7'Caption'#6#9'Load file'
   +#7'OnClick'#7#12'LoadMPCClick'#8'TabOrder'#2#1#0#0#0#0#0#9'TTabSheet'#10'ast'
-  +'prepare'#7'Caption'#6#20'Prepare Monthly Data'#12'ClientHeight'#3#145#1#11
+  +'prepare'#7'Caption'#6#20'Prepare Monthly Data'#12'ClientHeight'#3#169#1#11
   +'ClientWidth'#3#221#1#10'ImageIndex'#2#2#0#6'TLabel'#8'Label210'#4'Left'#2#8
   +#6'Height'#2#14#3'Top'#2'm'#5'Width'#2'6'#7'Caption'#6#9'Messages:'#11'Paren'
   +'tColor'#8#0#0#9'TGroupBox'#9'GroupBox8'#4'Left'#2#8#6'Height'#2'^'#3'Top'#2
@@ -436,20 +443,20 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#5'TMemo'#11'prepastmemo'#4'Left'#2#8#6'Height'#3#244#0#3'Top'#3#133#0#5'Wid'
   +'th'#3#185#1#5'Color'#7#9'clBtnFace'#10'ScrollBars'#7#6'ssBoth'#8'TabOrder'#2
   +#1#7'TabStop'#8#0#0#0#9'TTabSheet'#9'astdelete'#7'Caption'#6#16'Data Mainten'
-  +'ance'#12'ClientHeight'#3#145#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#3#0
+  +'ance'#12'ClientHeight'#3#169#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#3#0
   +#6'TLabel'#8'Label211'#4'Left'#2#8#6'Height'#2#14#3'Top'#3#184#0#5'Width'#2
   +'6'#7'Caption'#6#9'Messages:'#11'ParentColor'#8#0#0#9'TGroupBox'#10'GroupBox'
   +'10'#4'Left'#2#8#6'Height'#2'<'#3'Top'#2#10#5'Width'#3#185#1#7'Caption'#6#27
   +'Delete MPC data selectively'#12'ClientHeight'#2','#11'ClientWidth'#3#181#1#8
   +'TabOrder'#2#0#0#9'TComboBox'#11'astelemlist'#4'Left'#2#16#6'Height'#2#24#3
-  +'Top'#2#14#5'Width'#3#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0
+  ,'Top'#2#14#5'Width'#3#25#1#16'AutoCompleteText'#11#20'cbactSearchAscending'#0
   +#10'ItemHeight'#2#0#5'Style'#7#14'csDropDownList'#8'TabOrder'#2#0#0#0#7'TBut'
   +'ton'#6'delast'#4'Left'#3'\'#1#6'Height'#2#25#3'Top'#2#14#5'Width'#2'K'#25'B'
   +'orderSpacing.InnerBorder'#2#4#7'Caption'#6#6'Delete'#7'OnClick'#7#11'delast'
   +'Click'#8'TabOrder'#2#1#0#0#0#9'TGroupBox'#10'GroupBox11'#4'Left'#2#8#6'Heig'
   +'ht'#2'1'#3'Top'#3#128#0#5'Width'#3#185#1#7'Caption'#6#12'Quick Delete'#12'C'
   +'lientHeight'#2'!'#11'ClientWidth'#3#181#1#8'TabOrder'#2#3#0#6'TLabel'#8'Lab'
-  ,'el209'#4'Left'#2#12#6'Height'#2#14#3'Top'#2#8#5'Width'#3#183#0#7'Caption'#6
+  +'el209'#4'Left'#2#12#6'Height'#2#14#3'Top'#2#8#5'Width'#3#183#0#7'Caption'#6
   +'(Quickly delete all asteroid related data'#11'ParentColor'#8#0#0#7'TButton'
   +#9'delallast'#4'Left'#3'\'#1#6'Height'#2#25#3'Top'#2#0#5'Width'#2'K'#25'Bord'
   +'erSpacing.InnerBorder'#2#4#7'Caption'#6#6'Delete'#7'OnClick'#7#14'delallast'
@@ -466,7 +473,7 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#1#1#6'Height'#2#21#3'Top'#2#8#5'Width'#2'0'#8'TabOrder'#2#0#4'Text'#6#4'200'
   +'7'#0#0#5'TEdit'#12'astdeldate_m'#4'Left'#3'9'#1#6'Height'#2#21#3'Top'#2#8#5
   +'Width'#2#24#8'TabOrder'#2#1#0#0#0#0#9'TTabSheet'#12'AddsingleAst'#7'Caption'
-  +#6#3'Add'#12'ClientHeight'#3#145#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#4
+  +#6#3'Add'#12'ClientHeight'#3#169#1#11'ClientWidth'#3#221#1#10'ImageIndex'#2#4
   +#0#6'TLabel'#8'Label217'#4'Left'#2#8#6'Height'#2#15#3'Top'#2#8#5'Width'#3#130
   +#1#7'Caption'#6'>Add a single element to the database. All field are mandato'
   +'ry.'#11'ParentColor'#8#0#0#6'TLabel'#8'Label218'#4'Left'#2#8#6'Height'#2#15
@@ -506,14 +513,14 @@ LazarusResources.Add('Tf_config_solsys','FORMDATA',[
   +#3#192#0#5'Width'#2'd'#8'TabOrder'#2#7#4'Text'#6#3'0.0'#0#0#5'TEdit'#5'astec'
   +#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#192#0#5'Width'#2'd'#8'TabOrder'#2#8#4
   +'Text'#6#3'0.0'#0#0#5'TEdit'#5'astax'#4'Left'#2#8#6'Height'#2#21#3'Top'#3#0#1
-  +#5'Width'#2'd'#8'TabOrder'#2#9#4'Text'#6#1'2'#0#0#5'TEdit'#6'astref'#4'Left'
+  ,#5'Width'#2'd'#8'TabOrder'#2#9#4'Text'#6#1'2'#0#0#5'TEdit'#6'astref'#4'Left'
   +#3#160#0#6'Height'#2#21#3'Top'#3#0#1#5'Width'#2'd'#8'TabOrder'#2#10#0#0#5'TE'
   +'dit'#6'astnam'#4'Left'#2#8#6'Height'#2#21#3'Top'#3'@'#1#5'Width'#3#1#1#8'Ta'
   +'bOrder'#2#12#0#0#5'TEdit'#5'asteq'#4'Left'#3'8'#1#6'Height'#2#21#3'Top'#3#0
   +#1#5'Width'#2'd'#8'TabOrder'#2#11#4'Text'#6#4'2000'#0#0#7'TButton'#6'Addast'
   +#4'Left'#3'8'#1#6'Height'#2#25#3'Top'#3'@'#1#5'Width'#2'K'#25'BorderSpacing.'
   +'InnerBorder'#2#4#7'Caption'#6#3'Add'#7'OnClick'#7#11'AddastClick'#8'TabOrde'
-  ,'r'#2#13#0#0#0#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'2'#3'Top'
+  +'r'#2#13#0#0#0#0#0#0#0#6'TPanel'#6'Panel1'#4'Left'#2#0#6'Height'#2'2'#3'Top'
   +#3#230#1#5'Width'#3#247#1#5'Align'#7#8'alBottom'#12'ClientHeight'#2'2'#11'Cl'
   +'ientWidth'#3#247#1#8'TabOrder'#2#1#0#7'TButton'#7'Button1'#4'Left'#3#212#0#6
   +'Height'#2#25#3'Top'#2#12#5'Width'#2'K'#7'Anchors'#11#5'akTop'#7'akRight'#0

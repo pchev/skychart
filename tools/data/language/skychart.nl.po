@@ -1880,6 +1880,10 @@ msgstr "Uurhoek"
 msgid "Right ascension grid"
 msgstr "Uren roosterverdeling"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "uren, minuten, seconden"
@@ -3369,6 +3373,10 @@ msgstr "Reflectienevel"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Vernieuw"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

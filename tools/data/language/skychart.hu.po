@@ -2065,6 +2065,10 @@ msgstr "Óraszög"
 msgid "Right ascension grid"
 msgstr "Órák beosztása"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Óra, perc, másodperc"
@@ -3686,6 +3690,10 @@ msgstr "Reflexiós köd"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Frissítés"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 #| msgid "Release Notes"

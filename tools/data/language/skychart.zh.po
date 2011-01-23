@@ -1883,6 +1883,10 @@ msgstr "时角"
 msgid "Right ascension grid"
 msgstr "网时间距"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "时，分，秒"
@@ -3372,6 +3376,10 @@ msgstr "反射星云"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "更新"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
