@@ -39,7 +39,10 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    ComboBox2: TComboBox;
     Label4: TLabel;
+    Label6: TLabel;
+    Label8: TLabel;
     SunPanel: TPanel;
     SunOnline: TCheckBox;
     CheckBoxPluto: TCheckBox;
@@ -216,6 +219,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
+    procedure ComboBox2Select(Sender: TObject);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -325,6 +329,8 @@ UseXplanet.caption:=rsUseXplanet;
 TransparentPlanet.caption:=rsTransparentL;
 SunOnline.Caption:=rsUseOnlineSun;
 Label4.Caption:=rsSunImageSour;
+Label6.Caption:=rsRefreshImage;
+Label8.Caption:=rsHours;
 comsetting.caption:=rsGeneralSetti;
 GroupBox13.caption:=rsChartSetting;
 Label154.caption:=rsDoNotTakeAcc;
@@ -472,6 +478,8 @@ TransparentPlanet.Checked:=cplot.TransparentPlanet;
 SunOnline.Checked:=csc.SunOnline;
 for i:=0 to URL_SUN_NUMBER-1 do
   if ComboBox1.Items[i]=csc.sunurlname then ComboBox1.ItemIndex:=i;
+for i:=0 to ComboBox2.Items.Count-1 do
+  if strtoint(ComboBox2.Items[i])=csc.sunrefreshtime then ComboBox2.ItemIndex:=i;
 {$ifndef mswindows}
  XplanetBox.Visible:=false;
  use_xplanet:=true;
@@ -613,6 +621,11 @@ begin
   csc.sunurl:=URL_SUN[i];
   csc.sunurlsize:=URL_SUN_SIZE[i];
   csc.sunurlmargin:=URL_SUN_MARGIN[i];
+end;
+
+procedure Tf_config_solsys.ComboBox2Select(Sender: TObject);
+begin
+  csc.sunrefreshtime:=StrToInt(ComboBox2.Text);
 end;
 
 procedure Tf_config_solsys.Button2Click(Sender: TObject);

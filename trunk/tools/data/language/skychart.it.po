@@ -1881,6 +1881,10 @@ msgstr "Angolo Orario"
 msgid "Right ascension grid"
 msgstr "Spaziatura Griglia Oraria"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Ore, minuti, secondi"
@@ -3370,6 +3374,10 @@ msgstr "Nebulosa a riflessione"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Aggiorna"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

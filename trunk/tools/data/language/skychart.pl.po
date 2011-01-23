@@ -1887,6 +1887,10 @@ msgstr "Kąt godzinny"
 msgid "Right ascension grid"
 msgstr "Siatka rektascensji"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Godziny, minuty, sekundy"
@@ -3376,6 +3380,10 @@ msgstr "Mgławice refleksyjne"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Odśwież"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

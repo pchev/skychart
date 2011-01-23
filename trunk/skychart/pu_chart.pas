@@ -474,7 +474,7 @@ begin
 fn:=slash(TempDir)+'sun.jpg';
 if sc.cfgsc.SunOnline and (
    ( not FileExists(fn) ) or
-   ( (now-FileDateToDateTime(FileAge(fn)))>1 )
+   ( (now-FileDateToDateTime(FileAge(fn)))>(sc.cfgsc.sunrefreshtime/24) )
    ) then begin
    if cmain.HttpProxy then begin
       DownloadDialog1.HttpProxy:=cmain.ProxyHost;

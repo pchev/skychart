@@ -1880,6 +1880,10 @@ msgstr "Timevinkel"
 msgid "Right ascension grid"
 msgstr "Rektascensjon-rutenett"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Timer, minutter, sekunder"
@@ -3371,6 +3375,10 @@ msgstr "Refleksjonståker"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Gjenoppfrisk"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"

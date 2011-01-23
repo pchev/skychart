@@ -1162,6 +1162,8 @@ resourcestring
   rsSunImageSour = 'Sun image source';
   rsFavorite = 'Favorite';
   rsInternetLoca = 'Internet localization';
+  rsRefreshImage = 'Refresh image every';
+  rsHours = 'hours';
 
 implementation
 

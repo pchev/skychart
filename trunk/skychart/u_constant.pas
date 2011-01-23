@@ -531,7 +531,7 @@ type
                 ObsLatitude,ObsLongitude,ObsAltitude : double; ObsTZ: string;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
                 ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos,sunurlname,sunurl : string;
-                CurYear,CurMonth,CurDay,DrawPMyear,sunurlsize,sunurlmargin : integer;
+                CurYear,CurMonth,CurDay,DrawPMyear,sunurlsize,sunurlmargin,sunrefreshtime : integer;
                 ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime,countrytz : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
@@ -1232,6 +1232,7 @@ sunurlname:=Source.sunurlname;
 sunurl:=Source.sunurl;
 sunurlsize:=Source.sunurlsize;
 sunurlmargin:=Source.sunurlmargin;
+sunrefreshtime:=Source.sunrefreshtime;
 SunOnline:=Source.SunOnline;
 abe:=Source.abe ;
 abp:=Source.abp ;

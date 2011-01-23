@@ -1884,6 +1884,10 @@ msgstr "Годинний кут"
 msgid "Right ascension grid"
 msgstr "Годинний крок сітки"
 
+#: u_translation.rshours
+msgid "hours"
+msgstr ""
+
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Години, хвилини, секунди"
@@ -3373,6 +3377,10 @@ msgstr "Рефлексійна туманність"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Обновити"
+
+#: u_translation.rsrefreshimage
+msgid "Refresh image every"
+msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
