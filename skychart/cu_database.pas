@@ -184,6 +184,21 @@ if db.Active then begin
      LoadCountryList(slash(sampledir)+'country.dat',memo);
      result:=true;
   end;
+  // Correct Japan code
+  if ((db.Query('select isocode from cdc_country where isocode="JA"'))
+      and (db.RowCount>=1) )
+   then begin
+     {$ifdef trace_debug}
+     WriteTrace('Upgrade DB for country change ');
+     {$endif}
+     db.Query('drop table cdc_country');
+     writetrace('Drop table cdc_country ... '+db.ErrorMessage);
+     db.Commit;
+     db.Query('CREATE TABLE '+sqltable[dbtype,9,1]+sqltable[dbtype,9,2]);
+     writetrace('Create table '+sqltable[dbtype,9,1]+' ...  '+db.ErrorMessage);
+     LoadCountryList(slash(sampledir)+'country.dat',memo);
+     result:=true;
+  end;
 end;
 end;
 
