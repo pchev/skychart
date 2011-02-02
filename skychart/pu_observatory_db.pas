@@ -245,6 +245,10 @@ begin
   cityfilter.text:=copy(csc.obsname,1,3);
   ShowObservatory;
   showobscoord;
+  if cityfilter.Text='-' then begin
+     cityfilter.Text:='';
+     citysearchClick(Sender);
+  end;
   LockChange:=false;
 end;
 

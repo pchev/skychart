@@ -1164,6 +1164,7 @@ resourcestring
   rsInternetLoca = 'Internet localization';
   rsRefreshImage = 'Refresh image every';
   rsHours = 'hours';
+  rsServerRespon = 'Server response: ';
 
 implementation
 
