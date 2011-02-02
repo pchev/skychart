@@ -487,7 +487,7 @@ begin
      DownloadDialog1.HttpProxyUser:='';
      DownloadDialog1.HttpProxyPass:='';
   end;
-  DownloadDialog1.URL:=location_url;
+  DownloadDialog1.URL:=location_url+'?ip=1.1.1.1';
   fn:=slash(TempDir)+'iploc.txt';
   DownloadDialog1.SaveToFile:=fn;
   DownloadDialog1.ConfirmDownload:=false;
@@ -498,7 +498,7 @@ begin
      closefile(f);
      loc:=TStringList.Create;
      Splitarg(buf,tab,loc);
-     if (trim(loc[1])>'')and(trim(loc[3])>'')and(trim(loc[4])>'')and(trim(loc[5])>'') then begin
+     if (loc.Count>=6)and(trim(loc[1])>'')and(trim(loc[3])>'')and(trim(loc[4])>'')and(trim(loc[5])>'') then begin
        cdb.GetCountryFromISO(trim(loc[1]),country);
        csc.ObsCountry:=country;
        csc.ObsName:=trim(loc[3]);
@@ -508,7 +508,7 @@ begin
        f_observatory_db.ShowObservatory;
        ShowObservatory;
      end
-     else ShowMessage(rsCannotGetYou);
+     else ShowMessage(rsCannotGetYou+crlf+rsServerRespon+buf);
      loc.free;
   end
   else ShowMessage(rsCannotGetYou+crlf+DownloadDialog1.ResponseText);

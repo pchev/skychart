@@ -166,27 +166,25 @@ if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
 end;
 
 function TCDCdb.CheckForUpgrade(memo:Tmemo):boolean;
+var updcountry:boolean;
+    i: integer;
 begin
 result:=false;
+updcountry:=false;
 if db.Active then begin
   // add isocode column to country table
   if ((not db.Query('select isocode from cdc_country where country="AF"'))
       or (db.RowCount<1) )
-   then begin
-     {$ifdef trace_debug}
-     WriteTrace('Upgrade DB for new country format ');
-     {$endif}
-     db.Query('drop table cdc_country');
-     writetrace('Drop table cdc_country ... '+db.ErrorMessage);
-     db.Commit;
-     db.Query('CREATE TABLE '+sqltable[dbtype,9,1]+sqltable[dbtype,9,2]);
-     writetrace('Create table '+sqltable[dbtype,9,1]+' ...  '+db.ErrorMessage);
-     LoadCountryList(slash(sampledir)+'country.dat',memo);
-     result:=true;
-  end;
+   then updcountry:=true;
   // Correct Japan code
   if ((db.Query('select isocode from cdc_country where isocode="JA"'))
       and (db.RowCount>=1) )
+   then updcountry:=true;
+  // Correct Australia code
+  i:=strtointdef(db.QueryOne('select count(*) from cdc_country where isocode="AU"'),0);
+  if (i>1)
+   then updcountry:=true;
+  if (updcountry)
    then begin
      {$ifdef trace_debug}
      WriteTrace('Upgrade DB for country change ');
