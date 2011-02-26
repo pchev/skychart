@@ -548,9 +548,6 @@ procedure Tf_config_time.FormCreate(Sender: TObject);
 begin
 LockChange:=true;
 JDCalendarDialog1:=TJDCalendarDialog.Create(nil);
-JDEdit.MaxValue:=maxJD;
-JDEdit.MinValue:=minJD;
-//BitBtn1.Glyph.LoadFromLazarusResource('BtnDatePicker');
 SetLang;
 end;
 

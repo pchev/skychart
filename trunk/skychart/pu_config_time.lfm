@@ -31,11 +31,11 @@ object f_config_time: Tf_config_time
       Height = 514
       Top = 0
       Width = 474
-      ActivePage = Page3
+      ActivePage = Page1
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -240,14 +240,14 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 23
+            ClientHeight = 35
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
               'AD'
               'BC'
             )
-            OnClick = DateChange
+            OnClick = DateEditChange
             TabOrder = 0
           end
           object JDEdit: TFloatEdit
