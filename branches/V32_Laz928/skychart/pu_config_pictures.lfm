@@ -1,5 +1,5 @@
 object f_config_pictures: Tf_config_pictures
-  Left = 732
+  Left = 483
   Height = 535
   Top = 127
   Width = 513
@@ -13,7 +13,7 @@ object f_config_pictures: Tf_config_pictures
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object MainPanel: TPanel
     Left = 0
     Height = 485
@@ -31,19 +31,18 @@ object f_config_pictures: Tf_config_pictures
       Width = 511
       ActivePage = Page1
       Align = alClient
-      ShowTabs = False
       TabIndex = 0
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 448
+        ClientWidth = 505
         object Label50: TLabel
           Left = 2
           Height = 14
           Top = 2
-          Width = 200
+          Width = 193
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
@@ -51,7 +50,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 15
           Height = 14
           Top = 46
-          Width = 91
+          Width = 87
           Caption = 'Image Directory'
           ParentColor = False
         end
@@ -163,30 +162,29 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 21
+          Height = 22
           Top = 375
-          Width = 215
+          Width = 207
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 3
         end
         object imgpath: TDirectoryEdit
           Left = 150
-          Height = 21
+          Height = 23
           Top = 39
           Width = 264
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 0
           OnChange = imgpathChange
         end
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 448
+        ClientWidth = 505
         object Label270: TLabel
           Left = 0
           Height = 14
@@ -289,15 +287,14 @@ object f_config_pictures: Tf_config_pictures
           HideDirectories = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 0
           OnChange = backimgChange
         end
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 448
+        ClientWidth = 505
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355

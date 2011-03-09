@@ -1,5 +1,5 @@
 object f_getdss: Tf_getdss
-  Left = 331
+  Left = 350
   Height = 308
   Top = 137
   Width = 420
@@ -13,10 +13,10 @@ object f_getdss: Tf_getdss
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object Label1: TLabel
     Left = 12
-    Height = 13
+    Height = 16
     Top = 8
     Width = 37
     Caption = 'Label1'
@@ -40,7 +40,6 @@ object f_getdss: Tf_getdss
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
-    TabOrder = 3
     Visible = False
   end
   object ListBox1: TListBox

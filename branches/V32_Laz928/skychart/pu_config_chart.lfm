@@ -1,7 +1,7 @@
 object f_config_chart: Tf_config_chart
-  Left = 920
+  Left = 504
   Height = 567
-  Top = 104
+  Top = 101
   Width = 510
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -13,7 +13,7 @@ object f_config_chart: Tf_config_chart
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object MainPanel: TPanel
     Left = 0
     Height = 517
@@ -31,19 +31,18 @@ object f_config_chart: Tf_config_chart
       Width = 508
       ActivePage = Page1
       Align = alClient
-      ShowTabs = False
       TabIndex = 0
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Label31: TLabel
           Left = 0
           Height = 14
           Top = 0
-          Width = 76
+          Width = 72
           Caption = 'Chart Setting'
           ParentColor = False
         end
@@ -100,7 +99,7 @@ object f_config_chart: Tf_config_chart
           end
           object equinox2: TFloatEdit
             Left = 104
-            Height = 21
+            Height = 23
             Hint = '-20000..20000'
             Top = 12
             Width = 89
@@ -125,9 +124,9 @@ object f_config_chart: Tf_config_chart
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
-              Height = 21
+              Height = 22
               Top = 7
-              Width = 396
+              Width = 378
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               TabOrder = 0
@@ -135,7 +134,7 @@ object f_config_chart: Tf_config_chart
           end
           object epoch2: TFloatEdit
             Left = 336
-            Height = 21
+            Height = 23
             Hint = '-20000..20000'
             Top = 12
             Width = 89
@@ -180,9 +179,9 @@ object f_config_chart: Tf_config_chart
         end
         object ExpertMode: TCheckBox
           Left = 21
-          Height = 21
+          Height = 22
           Top = 357
-          Width = 95
+          Width = 93
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           TabOrder = 3
@@ -226,8 +225,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Label30: TLabel
           Left = 0
           Height = 14
@@ -679,8 +678,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -1008,8 +1007,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Label29: TLabel
           Left = 0
           Height = 14
@@ -1818,8 +1817,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Label159: TLabel
           Left = 0
           Height = 14
@@ -2361,8 +2360,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TTabSheet
         Caption = 'Page6'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 426
+        ClientWidth = 502
         object Label95: TLabel
           Left = 0
           Height = 14

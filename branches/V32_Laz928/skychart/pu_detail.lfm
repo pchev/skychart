@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 666
+  Left = 618
   Height = 471
-  Top = 112
+  Top = 111
   Width = 398
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
@@ -11,7 +11,7 @@ object f_detail: Tf_detail
   Font.Height = -11
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -69,7 +69,6 @@ object f_detail: Tf_detail
     PrintSettings.MarginTop = 0.5
     PrintSettings.MarginRight = 0.5
     PrintSettings.MarginBottom = 0.5
-    TabOrder = 1
   end
   object ActionList1: TActionList
     left = 128

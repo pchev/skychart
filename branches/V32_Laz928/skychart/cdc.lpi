@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="9"/>
+    <Version Value="7"/>
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
@@ -11,9 +11,10 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
+      <TargetFileExt Value=""/>
       <Title Value="Cartes du Ciel"/>
-      <UseXPManifest Value="True"/>
       <Icon Value="0"/>
+      <UseXPManifest Value="True"/>
     </General>
     <PublishOptions>
       <Version Value="2"/>
@@ -439,13 +440,15 @@
       <Unit48>
         <Filename Value="pu_ascomclient.pas"/>
         <IsPartOfProject Value="True"/>
+        <ComponentName Value="pop_scope"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_ascomclient"/>
       </Unit48>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="9"/>
+    <Version Value="8"/>
     <Target>
       <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
     </Target>
@@ -456,7 +459,6 @@
     <Parsing>
       <SyntaxOptions>
         <CStyleOperator Value="False"/>
-        <UseAnsiStrings Value="False"/>
       </SyntaxOptions>
     </Parsing>
     <CodeGeneration>
@@ -485,14 +487,4 @@
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions Count="2">
-      <Item1>
-        <Name Value="Exception"/>
-      </Item1>
-      <Item2>
-        <Name Value="EInvalidArgument"/>
-      </Item2>
-    </Exceptions>
-  </Debugging>
 </CONFIG>
