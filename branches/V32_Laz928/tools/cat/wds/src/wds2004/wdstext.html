@@ -1,0 +1,877 @@
+<html><head><meta name="MSSmartTagsPreventParsing" content="TRUE">
+<title>Washington Double Star Catalog</title></head>
+
+<body background="wdstext_fichiers/56b.gif">
+
+<a name="intro"><br><br></a>
+
+<h1><center>
+The Washington Double Star Catalog
+</center></h1><br> 
+
+<h3><center>
+Brian D. Mason, Gary L. Wycoff, and William I. Hartkopf
+</center></h3>
+<h4>Astrometry Department, U.S. Naval Observatory<br>
+3450 Massachusetts Ave, NW, Washington, DC 20392<br>
+wds@ad.usno.navy.mil
+</h4><br>
+
+<h4><i></i><p><i>If we are free to wish, we ought to have two large reflectors, one in 
+the North and one in the South, devoted to discovery and measures of double 
+stars.
+
+</i></p><p><i>If we look back for a century or more and ask: What do we today appreciate 
+mostly of the observations made then? the general answer will be: observations
+bound to time. They can, if missed, never be recovered. Of these observations
+measures of double stars contribute a major part.
+
+</i></p><p><i>As far as we can judge today this will also be the case in the future.
+
+</i></p><p><i>The search for new double stars should be made with the largest instruments
+available in order to discover close and faint companions.</i>
+
+</p><p></p><center>--- Ejnar Hertzsprung to Charles Worley, April 2, 1965</center></h4>
+
+<br><br><h2>Introduction and Growth of the WDS</h2>
+
+<p>The Washington Double Star Catalog (WDS), maintained by the United States 
+Naval Observatory, is the world's principal database of astrometric double and 
+multiple star information. The WDS Catalog contains positions (J2000), 
+discoverer designations, epochs, position angles, separations, magnitudes, 
+spectral types, proper motions and when available, Durchmusterung numbers and 
+notes for the components of 100,626 systems based on 690,251 means. The current 
+version, <a href="http://ad.usno.navy.mil/wds/wdstext.html">available 
+online</a>, is updated nightly. This catalog is one of four USNO double star 
+catalogs to be included on a CD-ROM now in preparation. A brief summary and 
+statistical analysis of the contents of the catalog are presented.
+
+</p><p>The Washington Visual Double Star Catalog (WDS) is the successor to the Index
+Catalogue of Visual Double Stars, 1961.0 (IDS; Jeffers &amp; van den Bos, 1963).
+Three earlier double star catalogs in this century, those by Burnham (BDS; 
+1906), Innes (SDS; 1927), and Aitken (ADS; 1932), each covered only a portion of
+the sky. Both the IDS and the WDS cover the entire sky, and the WDS is intended 
+to contain all known visual double stars for which at least one differential 
+measure has been published. The WDS is continually updated as published data 
+become available. Prior to this, two major updates have been published (Worley
+&amp; Douglass 1984, 
+<a href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=1997A%26AS..125..523W&amp;db_key=AST&amp;high=39574b303c25125">
+1997</a>). The Washington Double Star Catalog (WDS) has seen numerous changes 
+since the last major release of the catalog. The application of many techniques 
+and considerable industry over the past few years has yielded unprecedented 
+gains in both the number of systems and the number of measures, as indicated 
+below.
+
+<br></p><center><h4>
+<a href="http://ad.usno.navy.mil/wds/misc/wdsgrowthstats.png" width="500" height="500">
+<img src="wdstext_fichiers/wdsgrowthstats.png" height="100" width="100"></a> 
+</h4></center>
+<p>Figure 1: Growth in the number of means in the WDS since its inception in the
+early 1960's. The 1984.0 and 1996.0 editions of the WDS are indicated and at the
+cutoff date for the CD-ROM production.<br>
+
+</p><p>The growth since the 1996.0 edition is due to many sources, however the most 
+significant additions are:
+
+</p><ul>
+<li> <a href="http://www.webbsociety.freeserve.co.uk/">Webb Society</a> (4,224)
+</li><li> <a href="http://www.chara.gsu.edu/CHARA/speckle.html">CHARA speckle</a> (7,122)
+</li><li> <a href="http://ad.usno.navy.mil/wds/ds_history.html#speckle">Washington speckle</a> (7,140)
+</li><li> <a href="http://www.astro.ku.dk/%7Eerik/Tycho-2">Tycho-2</a> (12,755)
+</li><li> <a href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2002A%26A...384..180F&amp;db_key=AST&amp;high=3c63bd902f15156">Tycho Double Star Catalogue</a> (25,232)
+</li><li> <a href="http://astro.estec.esa.nl/Hipparcos/hipparcos.html">Hipparcos</a> (13,141)
+</li><li> Washington Fundamental Catalog (36,207)
+</li></ul>
+
+<p>While many thousand new systems have been added, many of these observing 
+programs have resulted in a striking improvement in the number of observations 
+per system, as shown below with a specific example of USNO speckle 
+contributions. It is expected that with other large publications of data planned
+in the future [e.g., the 
+<a href="http://pegasus.astro.umass.edu/GradProg/2mass.html">
+Two Micron All Sky Survey</a>, as well as the 
+<a href="http://ad.usno.navy.mil/ucac/"> USNO CCD Astrograph Catalog</a> the 
+growth of the WDS will continue. 
+
+<br></p><center><h4>
+<a href="http://ad.usno.navy.mil/wds/misc/numstatold.png" width="500" height="500">
+<img src="wdstext_fichiers/numstatold.png" height="100" width="100"></a> 
+<a href="http://ad.usno.navy.mil/wds/misc/numstat.png" width="500" height="500">
+<img src="wdstext_fichiers/numstat.png" height="100" width="100"></a> 
+</h4></center>
+<p>Figure 2: The number of means per system in the WDS. The left figure is a
+histogram from late 1997 (the WDS 1996.0 with Hipparcos added) while the right
+figure illustrates the same information for the 2001.0 version of the WDS. Note 
+that while the total number of systems has increased by more than 6300, the 
+number of systems with only one mean has dropped by more than 1700.<br>
+
+<br></p><center><h4>
+<a href="http://ad.usno.navy.mil/wds/misc/sepstatold.png" width="500" height="500">
+<img src="wdstext_fichiers/sepstatold.png" height="100" width="100"></a> 
+<a href="http://ad.usno.navy.mil/wds/misc/sepstats.png" width="500" height="500">
+<img src="wdstext_fichiers/sepstats.png" height="100" width="100"></a> 
+</h4></center>
+<p>Figure 3: One source responsible for the increase in data is the prodigious
+publication of USNO speckle means. The left figure illustrates a histogram of
+USNO speckle means (also late 1997) binned vs. separation. The right figure
+indicates the same information for the 2001.0 version of the WDS. <br>
+
+</p><p>A comparison of the contributions of the different techniques, both in their
+total number and mean separation are given <a href="http://ad.usno.navy.mil/wds/misc/methvssep.txt"> 
+here</a>. Those techniques with no measures listed are unique to the Delta-m
+Catalog.
+
+</p><p>Primarily of historical interest, a list of the top 25 observers (based on
+the total number of measures and means) is presented 
+<a href="http://ad.usno.navy.mil/wds/misc/top_twentyfive.txt">here</a>. In this table, numbers are based
+on the WDS reference code. Totals are provided for the number of means (usually,
+as published --- a line of data in the WDS measurement database, each mean 
+position often comes from several measures, usually increasing their accuracy).
+To the extent that it is known, multiple authors participating in a distinct 
+group or project are counted together. 
+
+</p><p>One of the largest listings in both lists above is the Washington Fundamental
+Catalog (WFC; Wycoff &amp; Mason 2001). These double star measures were extracted 
+from the WFC, a collection of 144 astrographic and transit circle catalogs 
+covering a timebase of over one hundred years and most recently used in the 
+computation of proper motions for the Tycho-2 project. While not intended as a
+double star reference, the utility of transit circle and photographic measures
+were known early in the 20th century, and many of the doubles in the 
+<a href="http://ad.usno.navy.mil/proj/AC/home.html">Astrographic Catalogue</a>
+were previously gleaned by Barton (1926) and others. However, there remained a 
+plethora of double star measures in these catalogs which have now been 
+cross-referenced with the WDS to produce these totals. 
+
+<a name="bdsadswds"></a>
+
+</p><p><img src="wdstext_fichiers/new_tiny.html" border="0">The ADS cross-reference has now been
+expanded and includes the identifier from the earlier Burnham Double Star (BDS; 
+Burnham 1906) Catalogue as well as the later Aitken Double Star (ADS; Aitken 
+1932) Catalogue. BDS stars falling outside a criteria, based on magnitude and
+separation (and thus a likelyhood of physicality) were dropped from the ADS.
+Most of these stars were added back in the Index Catalogue of Visual Double Stars
+(IDS; Jeffers, van den Bos and Greeby 1963). Some of these stars were true binaries,
+and should be added back, others were added due to concerns due to common proper
+motion determinations or proximity. In the three cross-reference files below there
+are sorts based on BDS number (listing all BDS entries, even those not real though
+these have explanations for their removal), ADS number (again, bogus binaries carry
+a reason for their removal), and WDS coordinate. As before, all components associated
+with the BDS or ADS system are included even if they were not known at the time of the
+publication of those catalogs. As mentioned above, duplicate and bogus systems
+included in the BDS or ADS have been excised for one of the following reasons:
+
+</p><ol>
+<li>Not real. See Douglass, G.G. "The non-duplicity of 189 ADS stars,"
+    1978, Bull. Inf. Centre Donnees Stellaires, 14, 11
+</li><li>Not in WDS. Single according to IDS notes and also in McC1984.
+</li><li>Not in WDS. In a planetary or reflection nebula.
+</li><li>In a file of Charles Worley's called "horror.data." He said, "you're
+    going to have to deal with this, he he he." Very questionable, or would
+    not have been purged from WDS.
+</li><li>In WDS, 1984.0 but excised from WDS, 1996.0. I don't know why.
+    In a file of Charles Worley's called "suspect.data." I do not know 
+    what the material difference is between this and "horror.data," they
+    may just represent problem data done at different times.
+</li><li>In WDS, 1984.0, but excised from WDS, 1996.0. Not in horror or
+    suspect files. This could indicate its non-duplicity was certain.
+</li><li>In BDS but excised from ADS, IDS, WDS. Double not found. Purged.
+</li><li>In BDS. Removed from ADS, reinserted into IDS, removed from WDS. 
+    Apparently Aitken had it right. Purged.
+</li></ol>
+
+<ul><b>Cross-reference Files</b>
+<li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_bdsframe.html">BDS sort</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_adsframe.html">ADS sort</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_wdsframe.html">WDS sort</a>
+</li></ul>
+
+<p>Some detections are not included in the WDS. These include measures by long 
+baseline interferometry where only visibilities and baselines are published 
+(as opposed to a true separation and position angle) are not included. Also, 
+various <i>1-d</i> detection data (e.g., lunar occultation and some infrared 
+speckle interferometry) are not included, as the measured separation is only a 
+projection of the true separation. These data are available in the 
+<a href="http://ad.usno.navy.mil/wds/int4.html"> 4th Catalog of Interferometric Measurements of Binary 
+Stars</a> (Hartkopf, Mason, Wycoff, &amp; McAlister 2001; hereafter Speckle 
+Catalog). The absence of separation and position angle information for the 
+long-baseline interferometry data is perhaps most tragic as these data cannot be
+readily combined with other ``classical'' double star data for a true combined 
+solution.
+
+
+<a name="unpublished"></a>
+
+<br><br></p><h2>Unpublished Results</h2>
+
+<p>For a variety of reasons, there exist a large subset of measures contained in
+the WDS database which have not been published. To make these data available to 
+the astronomical community they are listed below. It is anticipated that this 
+section will expand substantially as the data contained in the WDS are collated.
+
+<br></p><h4><i>Nils Wieth-Knudsen measures:</i></h4> In late 2001, Inger 
+Wieth-Knudsen made available to the U.S. Naval Observatory the original 
+measurement cards Dr. Nils Wieth-Knudsen made towards the end of his 
+distinguished career. The original cards are cataloged in the 
+<a href="http://www.usno.navy.mil/library/index.html">James Melville Gillis 
+Library</a> of the U.S. Naval Observatory. The 471 measures recorded on these
+cards are grouped into 211 means of 59 systems, and include 33 measures of 
+differential magnitude. Made with both 10 and 30 inch telescopes, the 
+observation dates range from 1961.32 to 1989.34 and the measured separations 
+range from 0.46 to 28.97 arcseconds.
+
+<br><h4><i>Walt Sanders measures:</i></h4> Over the past years Walt Sanders has
+(and is) continuing his observing of primarily wide M dwarf stars with a filar
+micrometer on the Lick 36-inch refractor. This continues the work described in
+<i>The Astronomical Journal</i> (volume 71, page 1008; December 1966). As of
+January 1, 2002 it consisted of 219 measures averaged into 99 means of 69 pairs,
+with observation dates from 1996.32 to 1998.70 (thusfar, observations continue)
+and the measured separations range from 3.2 to 122.9. In three cases no 
+separation is measured, but the position angle is.
+
+<br><h4><i>Martin Nicholson measures:</i></h4> In late 2002 Martin Nicholson began
+a project of examining the Guide Star Catalog for close doubles. An explanation
+of his project, written by him, is provided 
+<a href="http://ad.usno.navy.mil/wds/unpublished/nicholson.html"> here</a>.
+
+<br><h4><i><img src="wdstext_fichiers/new_tiny.html" border="0">OAG General Catalogue of 
+10,000 visual double stars measurements 1970-2003 (J2000.0):</i></h4><i> Coordinated 
+by Tofol Tobal and Jaume Planas. Garraf Astronomical Observatory. Barcelona-Spain
+
+</i><p><i>In the last 40 years, a limited group of Spanish amateurs has been systematically 
+measuring visual double stars. Actually, they are preparing to publish all the 
+measurements made between 1970 and 2001 --- over 10,000. This massive work has been 
+presented at October, 2000, in the annual meeting of the Astronomic Society of France's 
+Double Stars Commission, celebrated  in Castelldefels, near Barcelona, Spain. 
+(Josefina Ling, Circular UAI Commission-26 was in the meeting).
+
+</i></p><p><i>The first measurement catalogue entirely produced in Spain by an amateur was the Jose Luis 
+Comellas (Doctor of Contemporaneous History, Sevilla University) one, published in 1973 
+(Catalogo de Estrellas Dobles Visuales 1973.0). It contained measurements from 1,200 double 
+stars, using a simple micrometer and a 75mm aperture Polarex-Unitron refractor. Twelve years 
+after, the same author published a second catalogue (Catalogo de Estrellas Dobles Visuales 
+1980.0) that included 5,104 doubles within reach of his new 102mm aperture Polarex-Unitron 
+refractor, with a Ron Darbinian Filar Micrometer, of which he had personally measured over 
+3,500. For the quality and quantity of his publications, that included his exceptional Guia del 
+Firmamento (1982) where he gathers together all his experience of more than thirty years of 
+visual observation, as well for his extraordinary human condition, he is one of the most loved 
+and admired authors in Spain and South America.
+
+</i></p><p><i>Since 1985 new observers have assured the continuity of J.L. Comellas work. Since 1976, I 
+regularly collaborated with him, and in the mid 80s I had a little observatory supplied with a 
+102mm Polarex Unitron refractor and a filar micrometre, that enabled me to start systematic 
+revision and update programs of the 1980.0 catalogue. In 1991, in conjunction with other 
+colleagues, we coordinated the measurements sent to us by isolated observers, and started to 
+publish a circular (RHO: Circular de Estrellas Dobles Visuales) for internal use, in order to 
+coordinate our work and to make known our results. 
+
+</i></p><p><i>Our equipment enhanced its measurement power with the purchase of new precision micrometers, 
+Double Image Lyot-Chamichel-like, and CCD devices. Between 1992 and 2003 more than 5,000 
+new observations and measurements has been collected, provided by Spain-wide amateurs, and 
+this has allowed to arrange a new catalogue suited to the 21st Century observers needs.
+
+</i></p><p><i>Given the huge bulk of filed data, it was necessary to develop our own database managing, 
+analysis and ephemeris calculation software (MAIA). This job has been carried on by my 
+colleague Jaume Planas, in collaboration with Jordi Cairol and Albert Sanchez, both members 
+of OAG.
+
+</i></p><p><i>The evolution and development of this process has been made known in the meetings of the 
+Astronomic Society of France's Double Stars Commission in Lyon (1995), Nice (1996), 
+Bordeaux (1997), Tolouse (1999). This has enabled the Spanish visual double stars observers 
+to break a certain isolation they were suffering since some decades ago.
+
+</i></p><p><i>Actually, the database and the different aplications it contains are for internal use only, 
+but we are preparing an interactive version for  Internet. In this way, our "OAG General Catalogue 
+of 10,000 visual double stars measurements 1970-2000 (J2000.0)" wll be easily available 
+to any worldwide observer.
+
+</i></p><center><i>Note about Garraf Astronomical Observatory</i></center>
+
+<p><i>Garraf Astronomical Observatory (OAG), founded in 1991 from private and public investments, 
+develops didactic and research programs. Our observatory (1992-1998) have a 3.5m diameter 
+dome with a 300mm aperture Newton-Cassegrain (F/3,5 and F/13,5) reflector, and 150mm F/8 
+refractor. Is  located 30km to the south of Barcelona, inside the Garraf Natural Park, 300m over 
+the sea. Our observatory is fully equipped for a double stars programs, with CCD, Professional 
+Double Image Lyot-Camichel Micrometer (made by MECAPRECIS-France) and various 
+Micrometer Reticle Eyepiece (MEADE).
+
+</i></p><p><i>OAG wishes to contact and to establish research programs specialized in visual double stars with 
+others observers and observation teams. It has accommodation facilities for up to 55 people.</i>
+
+</p><center><p>(text by : Tofol Tobal, Garraf Astronomical Observatory, e-mail: rho@arrakis.es, http:// www.oagarraf.org)</p></center>
+
+
+<ul>Available files:
+<li><a href="http://ad.usno.navy.mil/wds/unpublished/wieth-knudsen.html"> Wieth-Knudsen measures</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/unpublished/sanders.html">       Sanders measures</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/unpublished/nicholson.html">     Martin Nicholson description</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/unpublished/nicholson1.html">    Martin Nicholson measures, Set 1</a>
+</li><li>OAG Files:
+<ul><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag.html">       OAG Catalog</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag1.html">      OAG Supplement 1</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag2.html">      OAG Supplement 2</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag3.html">      OAG Supplement 3</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag4.html">      OAG Supplement 4</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag5.html">      OAG Supplement 5</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag6.html">      OAG Supplement 6</a>
+    </li><li><a href="http://ad.usno.navy.mil/wds/unpublished/oag7.html">      OAG Supplement 7</a></li></ul>
+</li></ul>
+
+<a name="neglected"></a>
+
+<br><br><h2>Neglected Doubles</h2>
+
+<p>A large number of systems in the WDS may be characterized as ``neglected.''
+These include unconfirmed binaries as well as systems which have not been 
+resolved for many years. The reasons for this neglect are varied: poor 
+coordinates or large proper motion (so the systems are ``lost''), erroneous 
+magnitude or delta-m estimates (so the systems are skipped over or 
+misidentified), or true neglect (too many binaries and too few observers). While
+the veracity of some of these systems is certainly suspect, many (if not most) 
+of these are <i>bona fide</i> double stars. Three sets of lists are provided in 
+observing list format. The first set was compiled using the following selection 
+parameters:
+
+</p><ul>
+<li>Separation greater than three arcseconds
+</li><li>Delta-m (V band) of less than three magnitudes
+</li><li>Both components brighter than 11th magnitude
+</li><li>and one of three possible parameters meriting inclusion<ul>
+    <li>Not observed in twenty years (an N code)
+    </li><li>Unconfirmed (a C code)
+    </li><li>Orbit system in the above parameter space, possibly useful for 
+        calibration (a * code)
+</li></ul></li></ul>
+
+<p>A total of 6442 objects meet these criteria.
+
+</p><ul>Neglected Doubles List Set I:
+<li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth1.html">  Northern List (Dec &gt; +20, num = 3072)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle1.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 2331)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth1.html">  Southern List (Dec &lt; -20, num = 1039)</a>
+</li></ul>
+
+<a href="http://ad.usno.navy.mil/wds/NEGLECTED/finder.html">Finder Charts for List Set I</a>
+
+<p>The second set of lists were compiled under the same criteria as above, but 
+for separations under 3 arcseconds. A total of of 6632 systems fit these 
+criteria.
+
+</p><ul>Neglected Doubles List Set II:
+<li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth2.html">  Northern List (Dec &gt; +20, num = 1860)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle2.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 2710)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth2.html">  Southern List (Dec &lt; -20, num = 2062)</a>
+</li></ul>
+
+<p>The third and final set of lists includes those neglected systems not covered
+by the previous lists. These include systems with large magnitude differences, 
+or fainter primary or secondary magnitudes, as well as systems whose magnitudes 
+or separations are either unknown or unpublished. A total of 45,768 systems fit 
+these criteria.
+
+</p><ul>Neglected Doubles List Set III:
+<li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth3.html">  Northern List (Dec &gt; +20, num = 21,061)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle3.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 11,491)</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth3.html">  Southern List (Dec &lt; -20, num = 13,216)</a>
+</li></ul>
+
+<p>Set three contains thirteen doubles since excised by the Tycho team. These
+have been marked on the observing lists.
+
+</p><p>These lists, especially the last, can be tailored to your specific observing
+needs. To have a custom-made observing list prepared with parameters different 
+than those above, please fill out an observing list request form:
+
+</p><ul>
+<li> <a href="http://ad.usno.navy.mil/wds/obslist_request.html">     Observing List Request</a> form
+</li></ul>
+
+<a name="hipparcos"></a>
+
+<br><br><h2>Hipparcos and Tycho-2</h2>
+
+<p>The current edition of the WDS contains the most recent, observational data 
+available and includes systems newly discovered by the 
+<a href="http://astro.estec.esa.nl/Hipparcos/hipparcos.html">Hipparcos 
+mission</a>. While Hipparcos did not provide discovery designations, these are 
+the primary system identifiers in visual double star astronomy. A 
+<a href="http://ad.usno.navy.mil/wds/misc/xrefhds.html"> cross reference</a> file of these 3,406 systems 
+first resolved by Hipparcos (HDS = Hipparcos Double Star) containing the 
+abbreviated coordinate, as well as the HDS and HIP numbers is provided as are 
+<a href="http://ad.usno.navy.mil/wds/misc/hipprobframe.html">cross references</a> of WDS entries which had 
+Hipparcos problem solutions (i.e., the G, X, O, V double star solutions as well 
+as those which were suspected non-single). Systems with only one measure in the 
+WDS which are Hipparcos problem stars (thus, providing a quasi-confirmation) are
+indicated in the notes file.
+
+</p><p>The current version of the WDS also contains measures of 12,770 systems from
+the <a href="http://www.astro.ku.dk/%7Eerik/Tycho-2">Tycho-2 Catalogue</a>. These
+include 11,536 known systems as well as 1,220 newly determined (TDS = Tycho
+Double Star) systems from the Tycho-2 database. The previous total of 1,234 new 
+systems, has been changed to 1,220 following retraction of some new double stars
+by the Tycho team. These numbers are presented as blank lines in the TDS cross
+reference file. Also, notes have been added for 1,130 systems of dubious 
+veracity (N &lt; 3) having a ``failed double'' or ``photocenter'' solution. Some of
+these are being reconsidered as further processing of the Tycho-2 data for 
+double stars continues (Fabricius et al. 2001). A cross-reference of double 
+stars measured by Tycho-2 is available <a href="http://ad.usno.navy.mil/wds/misc/xreftyc2.html"> here</a>. A
+cross-reference of new TDS systems is available <a href="http://ad.usno.navy.mil/wds/misc/xreftds.html"> 
+here</a>.
+
+</p><p>In 2001 an effort led by Claus 
+Fabricius was begun to extract from the Tycho pixel data as many double stars, 
+both new and known, as possible. This effort has resulted in the 
+<a href="http://adsabs.harvard.edu/cgi-bin/nph-bib_query?bibcode=2002A%26A...384..180F&amp;db_key=AST&amp;high=3c63bd902f15156">
+Tycho Double Star Catalogue</a>. A total of 25,232 additional double star 
+measures (in addition to those enumerated above) were found. The numbering of 
+new Tycho doubles (the TDS stars) includes the original set of 1,234 
+(subsequently reduced to 1,220) described above plus additional systems found in
+the Tycho Double Star Catalogue reduction. This second set of new doubles begins
+with TDS1235 (the retracted TDS numbers are not reused). A complication arose as
+a result of the magnitude of this work --- what to do when the number is 10,000 
+or more (i.e., after TDS9999, what next?). A makeshift strategy was employed by 
+taking the next available designation, TDT (Tycho Doubles, too?), thus the next 
+system after TDS9999 is TDT   1. The known and new doubles listings includes 
+both analyses of the Tycho data. In addition, precise coordinates (better than 
+arcsecond) are available for another subset of double stars seen as single by 
+Tycho (due to the magnitude of the secondary and/or separation of the system). 
+The improvements in the precision of the WDS is discussed below.
+
+</p><ul>Available files:
+<li><a href="http://ad.usno.navy.mil/wds/misc/xrefhds.html">        HDS vs. Hipparcos cross reference</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/hipprobframe.html">   Hipparcos Problem Star cross reference</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/xreftyc2.html">       Double stars measured by Tycho-2</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/xreftdsnew.html">     New Tycho-2 double star (TDS) measures</a>
+</li></ul>
+
+<a name="other"></a>
+
+<br><br><h2>Other Changes in the WDS</h2>
+
+<br><h4><i>Changes since the WDS, 2001.0:</i></h4> As the WDS is updated
+nightly, distinguishing the changes that have been made is not always a trivial 
+matter for the user. Output from the unix ``diff'' command (cf., GNU diffutils 
+version 2.7) is given below.
+
+<ul>Available files:
+<li><a href="http://ad.usno.navy.mil/wds/misc/currentvs2001_summ.txt">  Summary Catalog differences</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/currentvs2001_ref.txt">   Reference file differences</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/currentvs2001_note.txt">  Notes file differences</a>
+</li></ul>
+
+<br><h4><i>Changes in the reference file:</i></h4> The reference file appears in
+a different format than previously available. In the past, three characters 
+would specify to whom the reference belonged with a two digit number indicating 
+the specific reference. In the case of some observers, this was proving 
+inadequate. The problem was exacerbated by the fact that the WDS, the 
+<a href="http://ad.usno.navy.mil/wds/orb6.html">6th Catalog of Orbits of Visual Binary Stars</a> (Hartkopf &amp;
+Mason 2001; hereafter, Orbit Catalog), the <a href="http://ad.usno.navy.mil/wds/int4.html"> Speckle 
+Catalog</a>, and the <a href="http://ad.usno.navy.mil/wds/dm2.html"> Second Photometric Magnitude Difference
+Catalog</a> (Worley, Mason, &amp; Wycoff 2001; hereafter Delta-m Catalog) all used 
+different reference codes. A new reference file is therefore provided which 
+gives the new code as well as the WDS reference code, followed by the reference.
+This is expected to change over time as the WDS is reformatted and the old WDS 
+catalog code is replaced. The additional discoverer codes are included within 
+this file. 
+
+<br><h4><i>Changes in the data request software:</i></h4> The data request 
+software has been rewritten and the output is in a new format which is 
+(hopefully) more user-friendly. Also, the software now searches the Delta-m 
+Catalog and the Orbit Catalog in addition to the WDS. Over time we will be 
+adding other features in a data request package.
+
+<p>In addition, we now also provide custom-made observing lists. If the user 
+provides limitations as to RA, Dec, separation, magnitudes, number of 
+observations, and date of last observation, it is possible to prepare observing
+lists. Both data requests and observing list requests are available online.
+
+<br><a href="http://ad.usno.navy.mil/wds/dm2.html"><h4><i>The Second Delta-m Catalog:</i></h4></a> New to 
+the WDS is an additional indicator in columns 100-102. This ``D'' note code 
+indicates the system has additional Delta-m information tabulated in the Delta-m
+Catalog (in addition to those determined during astrometric measures). These 
+results will eventually be incorporated in a weighted scheme for the magnitude 
+listings of the WDS data line. 
+
+<br></p><h4><i>Discovery Designations Added:</i></h4> The coordinates provided for 
+entries in the WDS are neither unique nor constant, and are therefore, 
+unsuitable to identify a system. Following the assignment of HDS designations to
+systems first resolved by the Hipparcos satellite, an effort was made to assign 
+unique discovery codes to all other systems in the WDS. In some cases, two 
+different systems can have the same discovery code and number but different 
+components. Therefore, to uniquely identify a system it is necessary to include 
+the component field. Eight hundred twenty-two systems have had their discovery 
+number assigned by the USNO in this manner and are identified in the notes file.
+
+<br><h4><i>Systems Removed:</i></h4> Corrections have been made to many of the
+Luyten duplicate designations as well as the new discoveries, since disclaimed,
+of the Tycho-2 project. These and other errata are provided in an error 
+correction file which is <a href="http://ad.usno.navy.mil/wds/misc/wdserror.txt">available online</a>. 
+
+<br><h4><i>Future of Designations:</i></h4> On 11 August, 2000, during the 
+XXIVth General Assembly of the International Astronomical Union, a 
+Multi-Commission Meeting (MCM) on Stellar Designations was held. The purpose of 
+this meeting was to develop a simple, unambiguous, flexible, and 
+computer-friendly designation scheme for all stellar companions (including 
+planets). Members from nine supporting commissions participated and, as a 
+result, a C type IAU Resolution was drafted and adopted by Commissions 26 and 
+42, and later ratified by Commissions 5 and 8+24 at their respective business 
+meetings. Subsequent to the MCM on 24 October, Commission 45 SOC members 
+unanimously supported the resolution.
+
+<ul>Links:
+<li> <a href="http://ad.usno.navy.mil/wds/iaumcm.html">
+                                Home page of the Multi-Commission Meeting</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/newwds.html">
+                                WMC (Washington Multiplicity Catalog) nomenclature scheme</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/wmc/resolution.txt">
+                                Text of the approved resolution</a>
+</li></ul>
+
+<br><h4><i>Duplicate Discovery 
+Designations Removed:</i></h4> One of the more difficult issues in dealing with 
+the WDS as a database is the presence of duplicate discovery designations - that 
+is, different systems assigned the same 3-character + 4-digit designation. These 
+generally fall into one of two categories: systems given the same numbers but 
+published in different lists, and those given some additional designation 
+appended to the original one.
+
+<p>Examples of the first are the binaries first resolved by W. Herschel and 
+both F.G.W. Struve and O. Struve. William Herschel published seven lists (I - 
+VI, plus ``new'', or N), with stars of each list starting at number 1. In 
+addition to their original discovery lists, each of the Struve's published an 
+appendix, as well as a list of ``rejected'' doubles. These multiple lists were 
+completely spelled out in the Aitken Double Star Catalogue (e.g., H IV 48), 
+but when the Index (IDS) Catalogue was compiled at Lick all of these other 
+designators were dropped for lack of space. As a result there are, for example,
+five components with the designation H    48!  The source Herschel list was 
+given in the notes file to the IDS. Appended and rejected stars from the lists 
+of the Struve's were handled with an ``a'' or ``r'' towards the end of the WDS
+data line in most cases.
+
+</p><p>In the second (and fortunately rare) case, systems found quite near to known 
+ones were given the same designation plus trailing character(s) (e.g., ES 1293a
+or BU 885 1/2).  Sometimes both components were assigned these additional 
+characters, sometimes only one; occasionally two pairs in an entirely different
+section of the sky were given the same designation by the author (probably by 
+mistake).
+
+</p><p>Each of these cases is being handled in a different manner. For the William
+Herschel discoveries, a list identifier is added to column three of each 
+designation. For example:
+
+</p><pre>H    19 (at 16 hours) was originally H II 19 and is now known as H 2  19, 
+H     7 (at 18 hours) was originally H V 7   and is now known as H 5   7, and
+H   111 (at 06 hours) was originally H N 111 and is now known as H N 111.
+</pre>
+
+<p>In the case of the O. Struve appendix an A is added following STT in the 
+name. For F. Struve, he provided two appendices. Those from the shorter list 
+(Appendix II) are designated STFB. For example:
+
+</p><pre>STF  11 (appendix I)  is now STFA 11.
+STF  11 (appendix II) is now STFB 11.
+STT 252 (appendix)    is now STTA252.
+</pre>
+
+<p>Stars of the second type are given the same 3-letter discovery designation
+but a new number, starting with 9001, to indicate that they originally had a
+different designation. For example:
+
+</p><pre>BAL2356b    is now BAL9001.
+BU  885 1/2 is now BU 9001.
+</pre>
+
+A complete list of stars of the second type is provided in the 
+<a href="http://ad.usno.navy.mil/wds/misc/wdserror.txt"> error correction</a> file. All changes in 
+designation are described in the <a href="http://ad.usno.navy.mil/wds/wdsnewnotes_main.txt"> notes</a> file.
+In addition to these, designations for 271 W. Herschel (H  ), 110 F. Struve 
+(STF) and 227 O. Struve (STT) systems have been changed. Note that for some of 
+these systems, the former three character, four digit reference (a3i4) has been
+replaced by a four character, three digit reference (a4i3). Although, for all 
+USNO applications (e.g., data or observing list request) an a7 read will see no 
+difference.
+
+<br><h4><i>Arcsecond Precise 
+Coordinates:</i></h4> Coordinates which are sixty times more precise than the
+WDS identifier are now provided for the majority of WDS systems (i.e., tenths
+of a <b>second</b> of time and <b>seconds</b> of arc). Coordinates are 
+obtained from Hipparcos, Tycho-2, the Tycho Double Star Catalogue, or through
+manual inspection. It is expected that the next significant improvement in this
+area will be when either the 2MASS or UCAC data is cross-referenced with the WDS.
+Incremental changes will continue to be made as well. The ten-digit WDS identifier
+is retained and will continue to be the same for all components in hierarchical
+systems. However, the precise coordinate will be for the primary of the subsystem.
+For example, in the case of a system made up of A-BC and BC pairs, they will both
+have the same ten-digit WDS identifier, however, the fourteen digit precise
+coordinate would be of the A and B component, respectively. As of 14 December 2004
+arcsecond precise coordinates had been found for 92% of the systems in the WDS 
+(i.e., 93,073 systems).
+
+We give here grateful acknowledgement to all those who have assisted us in locating
+these many of the hardest to find pairs: Richard Jaworski and John Greaves.
+
+<br><h4><i>Secondary Proper 
+Motion:</i></h4> The most common note (N = 1421) in the WDS notes file was the 
+proper motion of the secondary, when known. The above matching with Tycho-2 has
+allowed the determination of secondary proper motion for 37% of the WDS (as of
+1 July 2002, matching continues; i.e., 36,042 systems). The secondary proper 
+motion is found following the precise position. This is expected to grow 
+considerably when the UCAC is complete.
+
+<a name="aa"></a>
+
+<br><h4><i>The Bright Star list (H2-H31)
+of the <b>Astronomical Almanac</b>:</i></h4> Stars found in the Bright Star list
+of the <i>Astronomical Almanac</i> have been cross-referenced with both the WDS
+and the single star list (described below). Those which have matches with the
+WDS have their most recent observables (position angle, separation, delta-m)
+along with other identifiers. All known resolved components of bright stars are
+listed. Stars found in the Bright Star list which match with the single star 
+list are listed by HR number only. These stars are indicated as single by 
+
+<ul>
+<li>large aperture speckle which resolves down to 60 milliarcseconds for 
+    components with delta-V less than 3, and
+</li><li>are not Hipparcos ``problem stars'' (G, X, V, or O codes in field H59 of the
+    main catalog or S code in field H61).
+</li><li>Further, they are not in the WDS, which has many binaries listed not 
+    detected by speckle interferometry according to the parameters listed above.
+</li></ul>
+
+<ul>Available files:
+<li><a href="http://ad.usno.navy.mil/wds/misc/aadoubleframe.html">  Double Stars in the Bright Star list</a>
+</li><li><a href="http://ad.usno.navy.mil/wds/misc/aasingle.txt">        Single Stars in the Bright Star list</a>
+</li></ul>
+
+For double stars in the above list, if the last measured separation is less than
+0.05 arcseconds, a separation of `&lt;0.1' is listed. If the magnitude of the 
+listed component is unknown, this is reflected in the delta-m column, which is
+also unknown.
+
+<a name="single"></a>
+
+<br><br><h2>Single Stars</h2>
+
+<p>For observations of double stars it is often necessary and beneficial to 
+observe single stars. These can serve as an idealized point-source-function 
+(psf) to determine the behavior of various elements in the optical chain, 
+characterize various reduction algorithms, or be used to generate artificial 
+double stars or other more complicated morphologies by use of calcite crystals, 
+slit masks, aperture masks, etc.
+
+</p><p>Unfortunately, finding a good list of these calibrator sources is more 
+difficult than it sounds. Generally speaking, the more that stars are studied 
+the higher their multiplicity fraction. Erroneously labeled ``single stars'' can
+render vital calibration data useless through the discovery of a previously 
+unknown companion or the slight modification of the psf by an unresolved 
+component.
+
+</p><p>The basic data for this list come from the <a href="http://ad.usno.navy.mil/wds/int3.html"> Speckle 
+Catalog</a>, which tabulates null detections from various duplicity surveys in 
+addition to double star measures obtained by speckle interferometry and other 
+high-resolution techniques. Stars from the 
+<a href="http://cdsweb.u-strasbg.fr/cgi-bin/Cat?V/50">Bright Star Catalog</a> 
+(Hoffleit &amp; Warren 1991) are checked against the WDS, the Speckle Catalog, and 
+the Hipparcos Catalog (ESA 1997) and only considered to be ``single'' stars if 
+all the following criteria are met:
+
+</p><ul>
+<li>the stars show no indication of duplicity in any of the three catalogs,
+</li><li>the stars have tabulated null detections in the Speckle Catalog, at least
+    one of which was obtained with a telescope of 2-m or greater aperture, and
+</li><li>the stars have no Hipparcos double-star solutions (C, G, X, V, or O codes
+    in field H59 of the main catalog) and no S (``suspected non-single'') code
+    in field H61.
+</li></ul>
+
+<p>The <a href="http://ad.usno.navy.mil/wds/single/singleframe.html">final all-sky list</a> contains 1,170 
+systems fulfilling these criteria. In the future, it is planned to update this 
+list to include systems which would be unresolved by optical interferometry.
+
+<br><br></p><h2>The Catalog</h2>
+
+<p>Measures in the Washington Double Star Catalog have been collected, collated,
+and maintained since the early 1960's when the original IDS (Jeffers &amp; van den 
+Bos, 1963) was transferred from Lick Observatory to the U.S. Naval Observatory. 
+Presented in order are the WDS J2000 coordinates, the discovery and component 
+designation, the first and last measured epoch, the number of means, the first 
+and last measured position angle (theta) in degrees, the first and last measured
+separation (rho) in arcseconds, the magnitudes of the primary and secondary, the
+spectral type of one or both components (if known), proper motion in RA and Dec 
+(milliarcseconds/yr), the Durchmusterung (DM) number (The DM of the 
+object in the system used by the Henry Draper Catalogue: Bonn from +89 to -22
+inclusive, Cordoba from -23 to -51 inclusive, Cape Photographic from -52 to -89
+inclusive), and a notes column. It should be noted that the WDS is not a 
+photometric or spectral type catalog, and while the catalogers strive to provide
+the most correct values for these parameters, they should not be considered 
+definitive. Some characters in the notes column indicate specific entries in 
+another file (i.e., an N indicates an entry in the notes file), catalog (an O in
+the Orbit Catalog, and a D in the Delta-m Catalog), or are referenced in the 
+format file. The full Catalog (8.7Mb) is available below as are format, note, 
+reference and other ancillary files. The WDS 2001.0 is also available on a 
+CD-ROM of USNO double star catalogs. Copies of this CD-ROM can be obtained from 
+the authors.
+
+<a name="files"></a>
+
+</p><h2>Available Files and Links</h2>
+
+<ul>
+<li> <a href="http://ad.usno.navy.mil/wds/wdsnewframe.html">             </a><h3><a href="http://ad.usno.navy.mil/wds/wdsnewframe.html">WDS Catalog</a> (~10.1Mb)</h3>
+<ul>
+<li> <a href="http://ad.usno.navy.mil/wds/wdsnewframe1.html">                00-06</a> hour section (~2.1Mb)
+</li><li> <a href="http://ad.usno.navy.mil/wds/wdsnewframe2.html">                06-12</a> hour section (~2.9Mb)
+</li><li> <a href="http://ad.usno.navy.mil/wds/wdsnewframe3.html">                12-18</a> hour section (~1.9Mb)
+</li><li> <a href="http://ad.usno.navy.mil/wds/wdsnewframe4.html">                18-24</a> hour section (~3.2Mb)
+</li></ul>
+<ul>
+    <li> <a href="http://ad.usno.navy.mil/wds/wdsweb_format.txt">            Format</a> of the current WDS
+    </li><li> <a href="http://ad.usno.navy.mil/wds/wdsnewnotes_main.txt">         Notes</a> file for the WDS (~1.1Mb)
+    </li><li> <a href="http://ad.usno.navy.mil/wds/wdsnewref.txt">                References and discoverer codes</a> (~0.7Mb)
+         <h4><ul>Supplemental Files:</ul></h4>
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/wds_synonyms.txt">   Synonyms</a> to the Notes file
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/wdserror.txt">       Error Correction</a> file
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/top_twentyfive.txt"> Top Twenty-five Observers</a> list
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/methvssep.txt">      Statistical comparison of different techniques</a>
+         </li></ul>
+         <h4><ul>Cross References:</ul></h4>
+         </li><li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_bdsframe.html"> BDS vs. ADS vs. WDS : BDS sort</a>
+         </li><li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_adsframe.html"> BDS vs. ADS vs. WDS : ADS sort</a>
+         </li><li><a href="http://ad.usno.navy.mil/wds/ads/bdsadswds_wdsframe.html"> BDS vs. ADS vs. WDS : WDS sort</a>
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/xrefhds.html">          HDS vs. Hipparcos</a> cross reference
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/hipprobframe.html">     Hipparcos Problem Star</a> cross reference
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/xreftyc2.html">         Double stars measured by Tycho-2</a>
+         </li><li> <a href="http://ad.usno.navy.mil/wds/misc/xreftds.html">          New Tycho-2 double star (TDS) measures</a>
+         </li></ul>
+         <h4><ul>Neglected Doubles</ul></h4>
+             List Set I:
+             <li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth1.html">  Northern List (Dec &gt; +20, num = 3072)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle1.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 2331)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth1.html">  Southern List (Dec &lt; -20, num = 1039)</a><br><br>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/finder.html">           Finder Charts for Lists I</a><br><br>
+             
+             <ul>List Set II:
+             <li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth2.html">  Northern List (Dec &gt; +20, num = 1860)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle2.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 2710)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth2.html">  Southern List (Dec &lt; -20, num = 2062)</a><br><br>
+             </li></ul>
+             <ul>List Set III:
+             <li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectednorth3.html">  Northern List (Dec &gt; +20, num = 21,061)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedmiddle3.html"> Equatorial List (-20 &lt; Dec &lt; +20, num = 11,491)</a>
+             </li><li><a href="http://ad.usno.navy.mil/wds/NEGLECTED/neglectedsouth3.html">  Southern List (Dec &lt; -20, num = 13,216)</a>
+             </li></ul>
+         
+<h4>Additional Files:</h4>
+     </li><li><a href="http://ad.usno.navy.mil/wds/misc/aadoubleframe.html">  Double Stars in the <i>Astronomical Almanac</i> Bright Star list</a>
+     </li><li><a href="http://ad.usno.navy.mil/wds/misc/aasingle.txt">        Single Stars in the <i>Astronomical Almanac</i> Bright Star list</a>
+     </li><li><a href="http://ad.usno.navy.mil/wds/single/singleframe.html">  Single Star</a> list
+
+<ul><h4>Links:</h4>
+<li> <a href="http://ad.usno.navy.mil/wds/iaumcm.html">
+                                        Home page of the Multi-Commission Meeting</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/newwds.html">
+                                        New WDS nomenclature scheme</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/dsl.html">
+                                        Double Star Library</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/ds_history.html">
+                                        Double Star Astronomy at the USNO</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/double_star_papers.html">
+                                        USNO Publication Page</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/wds1996.html">
+                                        WDS, 1996.0</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/wds2001.html">
+                                        WDS, 2001.0</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/wdstext.html">
+                                        Current WDS</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/orb6.html">
+                                        Sixth Orbit Catalog</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/orb6/orb6c.html">
+                                        Calibration Systems</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/int4.html">
+                                        Fourth Interferometric Catalog</a>
+</li><li> <a href="http://ad.usno.navy.mil/wds/dm2.html">
+                                        Second Photometric Magnitude Difference Catalog</a>
+</li></ul>
+
+<a name="thanks"></a>
+
+<h2>Requests and Acknowledgements</h2>
+
+<p>Addition of the delta-m information as well as other more significant changes
+to the WDS database is currently under consideration. The input from regular 
+users of the database and other interested parties is greatly appreciated in our
+efforts to make the WDS as helpful and user-friendly as possible. Please provide
+comments on the format of the WDS, missed references, or any other items of
+interest to you on our <a href="http://ad.usno.navy.mil/wds/wds_comment.html">Comment form</a>.
+
+</p><p>Information is being added to the database on a continuing basis, and this
+edition of the WDS will also be updated regularly. 
+
+</p><p>You may <a href="http://ad.usno.navy.mil/wds/data_request.html">request</a> a reasonable amount of 
+information from the double star catalog, a <a href="http://ad.usno.navy.mil/wds/obslist_request.html">
+custom observing list</a>, a <a href="http://ad.usno.navy.mil/wds/cd_request.html">copy of the Double Star 
+CD</a>, or make a <a href="http://ad.usno.navy.mil/wds/wds_comment.html">comment</a> by e-mail.
+
+</p><ul>
+<li> <a href="http://ad.usno.navy.mil/wds/data_request.html">        Data Request</a> form
+</li><li> <a href="http://ad.usno.navy.mil/wds/obslist_request.html">     Observing List Request</a> form
+</li><li> <a href="http://ad.usno.navy.mil/wds/cd_request.html">          Double Star CD Request</a> form
+</li><li> <a href="http://ad.usno.navy.mil/wds/wds_comment.html">         Comment</a> form
+</li></ul>
+
+<p>We are in debt to <a href="http://ad.usno.navy.mil/wds/history/douglass.html">Geoff Douglass</a> for his 
+work on the WDS database and his leadership in the speckle program at the USNO. 
+The Washington Double Star Catalogs and USNO speckle program were conceived and 
+nurtured by <a href="http://ad.usno.navy.mil/wds/history/worley.html">Charles Worley.</a> Providing data in WDS 
+format (or at least electronic format) has allowed the WDS to grow 
+significantly. We would here like to acknowledge the contributions of Bob 
+Argyle, Wulff Heintz, Elliott Horch, Josefina Ling, Francisco Manuel Rica 
+Romero, and Walt Sanders.
+
+<br><br></p><h2>Concluding Remarks</h2>
+
+<p></p><h4>If the WDS and associated databases were helpful for your research work, 
+the following acknowledgement would be appreciated:
+
+<p><i>``This research has made use of the Washington Double Star Catalog
+maintained at the U.S. Naval Observatory.''</i>
+
+</p><p>A notification of references to relevant papers is appreciated.</p></h4>
+
+<br><br><h2>References</h2>
+
+<ul>
+<li>Aitken, R.G. 1932, <i>New General Catalogue of Double Stars within 121 
+    degrees of the North Pole</i>, Carnegie Institution of Washington<br>
+</li><li>Barton, S.G. 1926, AJ 36, 155<br>
+</li><li>Burnham, S.W. 1906, <i>General Catalogue of Double Stars within 121 degrees 
+    of the North Pole</i>&gt;, Carnegie Institution of Washington<br>
+</li><li>ESA 1997, The Hipparcos and Tycho Catalogues (ESA SP-1200) (Noordwijk: ESA)<br>
+</li><li>Fabricius, C. &amp; Makarov, V.V. 2000, A&amp;AS, 144, 45<br>
+</li><li>Fabricius, C., Hoeg, E., Makarov, V.V., Mason, B.D., Wycoff, G.L., &amp; Urban,
+    S.E. 2002, A&amp;A, 384, 180<br>
+</li><li>Hartkopf, W.I., Mason, B.D., &amp; Worley, C.E. 2001, AJ, 122, 3472<br>
+</li><li>Hartkopf, W.I., McAlister, H.A., &amp; Mason, B.D. 2001, AJ, 122, 3480<br>
+</li><li>Hoffleit D., Warren, Jr., W.H. 1991, <i>The Bright Star Catalogue, 5th 
+    Revised Ed.</i>, (Preliminary Version)<br>
+</li><li>Innes, R.T.A. 1927, <i>Southern Double Star Catalogue, -19 to -90 
+    degrees</i>, Union Observatory, Johannesburg, South Africa<br>
+</li><li>Jeffers, H.M. &amp; van den Bos, W.H. 1963, <i>Index Catalogue of Visual Double
+    Stars, 1961.0</i>, Pub. of the Lick Observatory, 21<br>
+</li><li>Mason, B.D., Wycoff, G.L., Hartkopf, W.I., Douglass, G.G., &amp; Worley, C.E.
+    2001, AJ, 122, 3466<br>
+</li><li>Morlet, G., Salaman, M., &amp; Gili, R. 2000, A&amp;AS, 145, 67<br>
+</li><li>Worley, C.E., &amp; Douglass, G.G. 1984, <i>Washington Visual Double Star 
+    Catalog, 1984.0</i>, U.S. Naval Observatory, Washington<br>
+</li><li>Worley, C.E., &amp; Douglass, G.G. 1997, A&amp;AS, 125, 523 (<i>Washington Visual 
+    Double Star Catalog, 1996.0</i><br>
+</li><li>Worley, C.E., Mason, B.D., &amp; Wycoff, G.L. 2001, AJ, 122, 3482<br>
+</li><li>Wycoff, G.L., &amp; Mason, B.D. 2001, <i>(in preparation)</i><br>
+</li></ul>
+
+<p>This page is maintained by Brian Mason
+                  
+</p><p>Updated: 14 December 2004
+
+</p><p><a href="http://ad.usno.navy.mil/"><img src="wdstext_fichiers/back.gif"> Back to Astrometry 
+   Department Home Page</a>
+</p></li></body></html>

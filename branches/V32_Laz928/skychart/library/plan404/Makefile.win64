@@ -1,0 +1,25 @@
+# Common flags
+CFLAGS        = -O3 
+SO_Name       = libplan404_x64.dll
+LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
+
+.PHONY: clean
+
+# Source files
+SRC :=  plan404.c mer404.c ven404.c ear404.c mar404.c jup404.c sat404.c \
+ura404.c nep404.c plu404.c gplan.c cmoon.c precess.c epsiln.c nutate.c
+
+# Object files
+OBJ_DIR = ./obj
+OBJ := $(patsubst %.c,$(OBJ_DIR)/%.o,$(SRC))
+
+all: $(SO_Name)
+
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(SO_Name): $(OBJ)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJ)
+
+clean:
+	rm -f $(OBJ) $(SO_Name)

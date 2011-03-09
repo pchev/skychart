@@ -1,0 +1,11 @@
+Package: skychart-data-pictures
+Version: 3
+Section: science
+Priority: optional
+Maintainer: Patrick Chevalley <pch@freesurf.ch>
+Architecture: all
+Depends: skychart
+Replaces: skychart-pictures
+Description: DSO pictures for Skychart / Cartes du Ciel planetarium software
+ Contain 9000 pictures of deep sky objects to show on the maps.
+ .

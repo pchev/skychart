@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win95; I) [Netscape]">
+   <meta name="Author" content="Patrick Chevalley">
+   <title>Sky Charts Encoder telescope plugin</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#5F9EA0" alink="#FF0000">
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+  <tr> 
+    <td VALIGN=TOP BGCOLOR="#000080"> 
+      <center>
+        <h1> <font color="#FFFFFF">Sky Charts<font size=+4>&nbsp;</font></font></h1>
+      </center>
+      <center>
+        <h2><font color="#FFFFFF">Encoder telescope plugin</font></h2>
+      </center>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p><a NAME="encoder"></a> </p>
+      <p>This plugin can be used with encoder box using the Tangent protocol like 
+        the Ouranos , AAM or NGC-MAX box.<br>
+        It use a floating two stars alignment method based on the article by Toshimi 
+        Taki in February 1989 S&amp;T.</p>
+      <p>Please refer to the manufacturer information to connect the telescope 
+        to the computer and power on the telescope.<br>
+        Then use the main menu <a href="edoc1.html#telescope">Telescope</a> to 
+        select the encoder plugin and start the interface. If you are asked to 
+        change the program time to auto-refresh reply Yes. The following window 
+        is displayed :</p>
+      <p><img src="encoder1.gif" width="166" height="235"><br>
+        For the first time use you need to provide some <a href="#configuration">configuration</a> 
+        information.</p>
+      <p>Click the &quot;Connect button&quot;, the light must change to green 
+        and the encoder count are displayed at the top of the screen.</p>
+      <p>Perform the following alignment procedure : </p>
+      <ul>
+        <li>If you select 90 degree initialization : 
+          <ul>
+            <li>point the telescope vertically for an altaz mount or parallel 
+              to the polar axis for an equatorial mount. It is important to understand 
+              that you must not point to the real zenith or pole but to the direction 
+              of your mount axis. Use of a fixed graduated circle or a stop piece 
+              can be of great help, see also the discussion about the <a href="#z3">Z3</a> 
+              parameter below. </li>
+            <li>Click the &quot;Init 90&deg;&quot; button.</li>
+          </ul>
+        </li>
+        <li>If you select 0 degree initialization : 
+          <ul>
+            <li>point the telescope horizontally for an altaz mount or perpendicular 
+              to the polar axis for an equatorial mount. The above note also apply 
+              in this case.</li>
+            <li>Click the &quot;Init 0&deg;&quot; button.</li>
+          </ul>
+        </li>
+        <li>Point the telescope to a star, use a reticle eyepiece and enough power 
+          to precisely center the star. </li>
+        <li>Click the star on the chart.</li>
+        <li>Select &quot;Sync current object&quot; from the &quot;Telescope&quot; 
+          menu or the right mouse button menu.</li>
+        <li>Repeat the procedure for a second star. Beware to choice a star with 
+          enough difference along the two axis from the first star. </li>
+      </ul>
+      <p>The position of the telescope is now displayed using equatorial and azimuthal 
+        coordinates. </p>
+      <p>You can now close the interface window by clicking the &quot;Hide&quot; 
+        button.<br>
+        Refere to the main menu <a href="edoc1.html#telescope">Telescope</a> help 
+        to learn how to show the telescope position on the chart.</p>
+      <p>Remember you can refine the local precision by using &quot;Sync current 
+        object&quot; on a nearby star at any time, you are not limited with the 
+        number of initialization stars. <br>
+        The couple of star used for the part of the sky the telescope is actually 
+        pointed is marked by a '*'.</p>
+      <p>The Clear button delete all the stars in the initialization list and 
+        return the interface in unitialized mode.<br>
+        A mouse right click in the list allow to delete only one star from the 
+        list. </p>
+      <p>If your interface return status information this is indicated just below 
+        the coordinates. </p>
+      <p>You can also do the initialization without the chart by using a star 
+        list even this is probably less convenient. If you really like that check 
+        the &quot;Use&quot; box and select the star from the list, when this star 
+        is centered in the telescope click the Align button. </p>
+      <p><b>Main cause of error </b></p>
+      <p>Sometime the position show on the chart is not the one you observe in 
+        the telescope, there is many cause of possible error here is a short list 
+        : </p>
+      <ul>
+        <li>Configuration error : 
+          <ul>
+            <li>Encoder steps number incorrectly set, principally if you gear 
+              the encoder. Use a full mount rotation with a fixed remote reference 
+              to count the exact number.</li>
+            <li>Mount fabrication error not set. </li>
+            <li>Missmatch between azimuthal and equatorial mount.</li>
+          </ul>
+        </li>
+        <li>The precision for a two stars alignment is dependent of a precise 
+          first direction initialization, use the Z3 parameter to correct a systematic 
+          error. There is however no need for a precise polar alignment or mount 
+          leveling.</li>
+        <li>Unadapted reference stars, the first two alignment stars must have 
+          enough difference along the two axis and be far enough in the sky.</li>
+        <li>Also avoid to select an alignement star in the direction of the polar 
+          axis, Polaris is good for an azimuthal mount but not for an equatorial.</li>
+        <li>Missing encoder count in the interface box, this may occure if you 
+          move the mount too rapidly or if the battery are low.</li>
+        <li>Misidentification of a reference star.</li>
+      </ul>
+      <hr>
+      <p><a name="configuration"></a><br>
+        <b><font size="+1">Interface configuration</font></b></p>
+      <p><img src="encoder2.gif" width="166" height="235"><br>
+        Select the encoder type you use, if your model is not listed consult your 
+        documentation to find a compatible model, if you find none select the 
+        generic Tangent model.<br>
+        Set the encoder count for a full rotation for both axis.<br>
+        The read interval is the amount of time that elapse between two position 
+        query to the interface box. Use a smaller value for a smoother cursor 
+        movement if your box accept that and if your computer as enough power. 
+        Use a larger value to use less computer ressource or if your interface 
+        box as a limited output rate.<br>
+        Check the mount type (equatorial or Alt-Az) you use and if you prefere 
+        to do the first initialization vertically or horizontally.</p>
+      <p><a name="z3"></a>The mount fabrication error angle Z1, Z2, Z3 in degree 
+        are the one defined in Taki article :<br>
+        Z1 is the amount by which the elevation axis is offset from the perpendicular 
+        to the horizontal axis.<br>
+        Z2 is the pointing error of the telescope optical axis in the same plane.<br>
+        Z3 can be considered a correction to the zero setting of the elevation 
+        circle. </p>
+      <p>Mesuring Z1 and Z2 can be a difficult task, but Z3 can be of great interest 
+        to help to initialize the mount. <br>
+        As an example imagine your Dobson mount as a security stop 5 degrees above 
+        the horizon to avoid to flip the primary mirror. You can set Z3=5 and 
+        check the initialization at 0 degree. To initialize the mount simply put 
+        the telescope pipe horizontally to the security stop and click the &quot;Init 
+        0&deg;&quot; button, that's all.<br>
+        You can imagine the same if the stop is 15 degrees after the zenith but 
+        in this case use the &quot;Init 90&deg;&quot; button.</p>
+      <p>You don't need to set the observatory coordinates as this is automatically 
+        done from the location defined in Cartes du Ciel.</p>
+      <p>In the case of problem with the interface you can trace the protocol 
+        to a file by checking &quot;Record protocol to a trace file&quot;.</p>
+      <p>The last check box let you choice if you want this window always visible 
+        at the top of the other.</p>
+      <p><font size="+1"><b>Communication port configuration</b></font></p>
+      <p><img src="encoder3.gif" width="166" height="235"><br>
+        Select the serial port (COM1 to COM8) where the telescope is connected. 
+        <br>
+        Set other options (speed, data, parity and stop) according to the manufacturer 
+        informations.<br>
+        Change the timeout values only if you encounter communication problem 
+        and after identifying the problem with the trace file. Do not set the 
+        timeout to a value greater than the refresh rate in the preceding screen.</p>
+      <p>Click the Save Setting button to keep your configuration for the next 
+        run.<br>
+        Also save the default options in Cartes du Ciel menu to keep your interface 
+        choice.</p>
+      <hr>
+      <p><b><font size="+1">Intelliscope support</font></b> </p>
+      <p>Orion Intelliscope support was added by Gary Carpenter<br>&nbsp;<br>
+      Intelliscope  proceedure is :
+      <ol>
+  <li>Set up Port Configuration<br>
+    9600,8,N,1<br>
+  Timeout 1000 mS<br>
+  Interval Timeout 1000mS  </li>
+  <li>Set up encoder configuration<br>
+  Type Intelliscope <br>
+  Steps for Alpha          9216<br>
+  Steps for Delta           9216<br>
+  Read Interval              1000 ( other values may work too )<br>
+  Mount Type                Alt-Az<br>
+  Encoder Init  Angle        90<br>
+  </li>
+  <li>Turn on Intelliscope, and press enter atleast once.<br>
+  ( Note 1 : you can go through the alignment proceedure for the Intelliscope or not, the Cdc alignment is independent of the Intelliscope)<br>
+  Note 2: You must press a key on the Intelliscope once in every 15 mins or it will goto sleep, and you will have to reallign! )  </li>
+  <li>Press connect  and follow the nomal Cdc vertical and two star alignment. </li>
+</ol>
+</p>
+      <hr>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>

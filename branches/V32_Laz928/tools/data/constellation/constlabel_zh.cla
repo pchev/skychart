@@ -1,0 +1,94 @@
+﻿; Name of the constellation for Cartes du Ciel
+; Official Latin name
+; For a translation copy this file to constlabel_xx.cla where xx is the specific language code
+; Use UTF-8 for character encoding
+;
+00.567 ;  39.250 ; And仙女 ; Andromeda仙女座 
+10.117 ; -33.350 ; Ant唧筒 ; Antlia唧筒座 
+16.133 ; -76.583 ; Aps天燕 ; Apus天燕座 
+22.700 ; -10.467 ; Aqr宝瓶 ; Aquarius宝瓶座 
+19.683 ;  03.367 ; Aql天鹰 ; Aquila天鹰座 
+17.233 ; -51.117 ; Ara天坛 ; Ara天坛座 
+02.683 ;  22.567 ; Ari白羊 ; Aries白羊座 
+05.950 ;  42.817 ; Aur御夫 ; Auriga御夫座 
+14.683 ;  32.333 ; Boo牧夫 ; Bootes牧夫座 
+04.717 ; -38.167 ; Cae雕具 ; Caelum雕具座 
+06.150 ;  71.967 ; Cam鹿豹 ; Camelopardalis鹿豹座 
+08.667 ;  22.000 ; Cnc巨蟹 ; Cancer巨蟹座 
+13.017 ;  42.350 ; CVn猎犬 ; Canes Venatici猎犬座 
+06.833 ; -22.317 ; CMa大犬 ; Canis Major大犬座 
+07.617 ;  06.767 ; CMi小犬 ; Canis Minor小犬座 
+21.050 ; -19.350 ; Cap摩羯 ; Capricornus摩羯座 
+08.833 ; -60.500 ; Car船底 ; Carina船底座 
+00.867 ;  60.300 ; Cas仙后 ; Cassiopeia仙后座 
+12.950 ; -44.000 ; Cen半人马 ; Centaurus半人马座 
+22.417 ;  72.567 ; Cep仙王 ; Cepheus仙王座 
+01.717 ; -06.367 ; Cet鲸鱼 ; Cetus鲸鱼座 
+12.000 ; -81.017 ; Cha堰蜓 ; Chamaeleon堰蜓座 
+14.533 ; -67.300 ; Cir圆规 ; Circinus圆规座 
+05.700 ; -37.917 ; Col天鸽 ; Columba天鸽座 
+12.750 ;  22.650 ; Com后发 ; Coma Berenices后发座 
+18.650 ; -41.750 ; CrA南冕 ; Corona Australis南冕座 
+15.883 ;  32.633 ; CrB北冕 ; Corona Borealis北冕座 
+12.383 ; -18.633 ; Crv乌鸦 ; Corvus乌鸦座 
+11.350 ; -13.750 ; Crt巨爵 ; Crater巨爵座 
+12.483 ; -60.300 ; Cru南十字 ; Crux南十字座 
+20.583 ;  44.000 ; Cyg天鹅 ; Cygnus天鹅座 
+20.667 ;  12.100 ; Del海豚 ; Delphinus海豚座 
+05.333 ; -63.017 ; Dor箭鱼 ; Dorado箭鱼座 
+17.950 ;  66.067 ; Dra天龙 ; Draco天龙座 
+21.250 ;  07.933 ; Equ小马 ; Equuleus小马座 
+03.883 ; -17.983 ; Eri波江 ; Eridanus波江座 
+02.767 ; -31.000 ; For天炉 ; Fornax天炉座 
+06.850 ;  24.817 ; Gem双子 ; Gemini双子座 
+22.450 ; -45.133 ; Gru天鹤 ; Grus天鹤座 
+17.433 ;  31.233 ; Her武仙 ; Hercules武仙座 
+03.217 ; -52.000 ; Hor时钟 ; Horologium时钟座 
+09.133 ; -11.683 ; Hya长蛇 ; Hydra长蛇座 
+02.583 ; -72.917 ; Hyi水蛇 ; Hydrus水蛇座 
+21.133 ; -52.317 ; Ind印第安 ; Indus印第安座 
+22.517 ;  46.667 ; Lac蝎虎 ; Lacerta蝎虎座 
+10.667 ;  17.000 ; Leo狮子 ; Leo狮子座 
+10.317 ;  33.233 ; LMi小狮 ; Leo Minor小狮座 
+05.433 ; -19.650 ; Lep天兔 ; Lepus天兔座 
+15.183 ; -15.550 ; Lib天秤 ; Libra天秤座 
+15.383 ; -42.717 ; Lup豺狼 ; Lupus豺狼座 
+07.733 ;  47.833 ; Lyn天猫 ; Lynx天猫座 
+18.900 ;  40.650 ; Lyr天琴 ; Lyra天琴座 
+05.500 ; -79.017 ; Men山案 ; Mensa山案座 
+20.950 ; -36.800 ; Mic显微镜 ; Microscopium显微镜座 
+06.967 ; -03.267 ; Mon麒麟 ; Monoceros麒麟座 
+12.467 ; -69.133 ; Mus苍蝇 ; Musca苍蝇座 
+16.050 ; -52.717 ; Nor矩尺 ; Norma矩尺座 
+22.167 ; -84.267 ; Oct南极 ; Octans南极座 
+17.033 ; -02.350 ; Oph蛇夫 ; Ophiuchus蛇夫座 
+05.567 ;  03.583 ; Ori猎户 ; Orion猎户座 
+19.167 ; -65.867 ; Pav孔雀 ; Pavo孔雀座 
+22.617 ;  19.650 ; Peg飞马 ; Pegasus飞马座 
+03.517 ;  44.883 ; Per英仙 ; Perseus英仙座 
+00.733 ; -48.767 ; Phe凤凰 ; Phoenix凤凰座 
+05.383 ; -51.367 ; Pic绘架 ; Pictor绘架座 
+00.883 ;  15.483 ; Psc双鱼 ; Pisces双鱼座 
+22.417 ; -31.567 ; PsA南鱼 ; Piscis Australis南鱼座 
+07.867 ; -32.617 ; Pup船尾 ; Puppis船尾座 
+08.883 ; -29.783 ; Pyx罗盘 ; Pyxis罗盘座 
+03.900 ; -60.517 ; Ret网罟 ; Reticulum网罟座 
+19.667 ;  17.000 ; Sge天箭 ; Sagitta天箭座 
+19.383 ; -29.883 ; Sgr人马 ; Sagittarius人马座 
+16.867 ; -35.333 ; Sco天蝎 ; Scorpius天蝎座 
+00.500 ; -31.000 ; Scl玉夫 ; Sculptor玉夫座 
+18.650 ; -10.883 ; Sct盾牌 ; Scutum盾牌座 
+15.733 ;  10.850 ; Ser巨蛇 ; Serpens Caput巨蛇座头 
+17.800 ; -13.483 ; Ser巨蛇 ; Serpens Cauda巨蛇座尾 
+10.100 ; -01.133 ; Sex六分仪 ; Sextans六分仪座 
+04.100 ;  17.333 ; Tau金牛 ; Taurus金牛座 
+19.250 ; -51.467 ; Tel望远镜 ; Telescopium望远镜座 
+02.050 ;  32.333 ; Tri三角 ; Triangulum三角座 
+16.117 ; -65.100 ; TrA南三角 ; Triangulum Australe南三角座 
+23.833 ; -64.933 ; Tuc杜鹃 ; Tucana杜鹃座 
+11.333 ;  57.500 ; UMa大熊 ; Ursa Major大熊座 
+14.967 ;  75.033 ; UMi小熊 ; Ursa Minor小熊座 
+09.333 ; -48.483 ; Vel船帆 ; Vela船帆座 
+13.350 ; -03.517 ; Vir室女 ; Virgo室女座 
+07.667 ; -69.617 ; Vol飞鱼 ; Volans飞鱼座 
+20.367 ;  25.033 ; Vul狐狸 ; Vulpecula狐狸座 

@@ -1,0 +1,98 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win95; I) [Netscape]">
+   <meta name="Author" content="Patrick Chevalley">
+   <title>Sky Charts Meade telescope plugin</title>
+</head>
+<body text="#000000" bgcolor="#FFFFFF" link="#0000FF" vlink="#5F9EA0" alink="#FF0000">
+<table BORDER=0 CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+  <tr> 
+    <td VALIGN=TOP BGCOLOR="#000080"> 
+      <center>
+        <h1> <font color="#FFFFFF">Sky Charts<font size=+4>&nbsp;</font></font></h1>
+      </center>
+      <center>
+        <h2><font color="#FFFFFF">Meade telescope plugin</font></h2>
+      </center>
+    </td>
+  </tr>
+  <tr> 
+    <td> 
+      <p><a NAME="encoder"></a> This plugin can be used with LX200, Autostar, 
+        Magellan I/II and other systems using the LX200 protocol.<br>
+        Please refer to the manufacturer information to connect the telescope 
+        to the computer and power on the telescope. Also perform now the initialization 
+        procedure for your telescope, this must be done before to connect to the 
+        program. <br>
+        Then use the main menu <a href="edoc1.html#telescope">Telescope</a> to 
+        select the Meade plugin and start the interface. If you are asked to change 
+        the program time to auto-refresh reply Yes. If you observe by day time 
+        a warning is issued about accidentally pointing the telescope to the Sun, 
+        please be very careful with that. The following window is displayed : 
+      </p>
+      <p><img src="meade1.gif" width="137" height="193"></p>
+      <p>For the first time use you need to provide some <a href="#configuration">configuration</a> 
+        information.</p>
+      <p>Click the &quot;Connect button&quot;, the light must change to green 
+        and the telescope coordinates are displayed at the top of the screen.</p>
+      <p>You can now close the interface window by clicking the &quot;Hide&quot; 
+        button.<br>
+        Refere to the main menu <a href="edoc1.html#telescope">Telescope</a> help 
+        to learn how to show the telescope position on the chart or to use the 
+        Goto facility.</p>
+      <p>Remember you can refine the local precision by using &quot;Sync current 
+        object&quot; on a nearby star at any time.</p>
+      <p>You can also use the virtual pad to move the telescope around, be careful 
+        the select the right model in the configurtion before to use this function.</p>
+      <p>If you use a LX200 with the high precision pointing mode the button to 
+        continue the slew is also here.</p>
+      <hr>
+      <p><a name="configuration"></a><br>
+        <b><font size="+1">Interface configuration</font></b></p>
+      <p></p>
+      <p><img src="meade2.gif" width="137" height="193"></p>
+      <p>Select the telescope model you use, if your model is not listed consult 
+        your documentation to find a compatible model, if you find none select 
+        the LX200 model if slewing is supported or Magellan II if not.<br>
+        The Refresh Rate is the amount of time (in milisecond) that elapse between 
+        two position query to the interface. Use a smaller value for a smoother 
+        cursor movement if your telescope accept that and if your computer as 
+        enough power. Use a larger value to use less computer ressource or if 
+        your tescope as a limited output rate.<br>
+        Select the precision used to transfert the data between the telescope 
+        and the program, this may help to solve some communication problem.<br>
+        Select if you want to use the LX200 High Precision Pointing, this can 
+        be checked only after you connect to the telescope.<br>
+      </p>
+      <p> You don't need to set the observatory coordinates as this is automatically 
+        done from the location defined in Cartes du Ciel.</p>
+      <p>In the case of problem with the interface you can trace the protocol 
+        to a file by checking &quot;Record protocol to a trace file&quot;.</p>
+      <p>The last check box let you choice if you want this window always visible 
+        at the top of the other.</p>
+      <p><font size="+1"><b>Communication port configuration</b></font></p>
+      <p><img src="meade3.gif" width="137" height="193"> </p>
+      <p>Select the serial port (COM1 to COM8) where the telescope is connected. 
+        <br>
+        Set other options (speed, data, parity and stop) according to the manufacturer 
+        informations. Generally LX200, Autostar and Magelan II use 9600,8,N,1 
+        but you may change to 1200, 8, N,1 and Timeout: 500ms for the Magelan 
+        I.<br>
+        Change the timeout values only if you encounter communication problem 
+        and after identifying the problem with the trace file. Do not set the 
+        timeout to a value greater than the refresh rate in the preceding screen.</p>
+      <p>Click the Save Setting button to keep your configuration for the next 
+        run.<br>
+        Also save the default options in Cartes du Ciel menu to keep your interface 
+        choice.</p>
+      <hr>
+      <center>
+      </center>
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>
