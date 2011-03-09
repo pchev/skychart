@@ -356,14 +356,11 @@ type
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
-    procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
-    procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
     procedure DrawAllStarLabelClick(Sender: TObject);
     procedure DrawPMyChange(Sender: TObject);
     procedure DrawPmBoxClick(Sender: TObject);
     procedure EclipticStyleChange(Sender: TObject);
     procedure EqGridStyleChange(Sender: TObject);
-    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -417,8 +414,8 @@ type
     procedure showlabelClick(Sender: TObject);
     procedure labelcolorMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure labelsizeChanged(Sender: TObject; Button: TUDBtnType);
-    procedure labelmagChanged(Sender: TObject; Button: TUDBtnType);
+    procedure labelsizeChanged(Sender: TObject);
+    procedure labelmagChanged(Sender: TObject);
     procedure MagLabelClick(Sender: TObject);
     procedure constlabelClick(Sender: TObject);
     procedure CirclegridSetEditText(Sender: TObject; ACol, ARow: Integer;
@@ -791,12 +788,6 @@ if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
    csc.StyleEqGrid:=TPenStyle(i);
 end;
 
-procedure Tf_config_display.FileNameEdit1AcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-  cmain.starshape_file:=value;
-end;
-
 procedure Tf_config_display.FileNameEdit1Change(Sender: TObject);
 begin
   cmain.starshape_file:=FileNameEdit1.FileName;
@@ -818,20 +809,6 @@ end;
 procedure Tf_config_display.CheckBox2Click(Sender: TObject);
 begin
 csc.RectangleLabel:=CheckBox2.Checked
-end;
-
-procedure Tf_config_display.ConstbFileAcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-if LockChange then exit;
-  cmain.ConstBfile:=expandfilename(value);
-end;
-
-procedure Tf_config_display.ConstlFileAcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-if LockChange then exit;
-  cmain.ConstLfile:=expandfilename(value);
 end;
 
 procedure Tf_config_display.DrawAllStarLabelClick(Sender: TObject);
@@ -1754,16 +1731,10 @@ begin
 cmain.ShowTitlePos:=ShowTitle.Checked;
 end;
 
-procedure Tf_config_display.labelmagChanged(Sender: TObject; Button: TUDBtnType);
+procedure Tf_config_display.labelmagChanged(Sender: TObject);
 begin
 if LockChange then exit;
-with sender as TUpDown do csc.LabelmagDiff[tag]:=Position;
-end;
-
-procedure Tf_config_display.labelsizeChanged(Sender: TObject; Button: TUDBtnType);
-begin
-if LockChange then exit;
-with sender as TUpDown do cplot.LabelSize[tag]:=Position;
+with sender as TEdit do csc.LabelmagDiff[tag]:=strtointdef(text,1);
 end;
 
 procedure Tf_config_display.labelcolorMouseUp(Sender: TObject;
@@ -1802,6 +1773,12 @@ csc.ConstFullLabel:=true;
 csc.ConstLatinLabel:=false;
 ShowLabel;
 ShowLabelColor;
+end;
+
+procedure Tf_config_display.labelsizeChanged(Sender: TObject);
+begin
+if LockChange then exit;
+with sender as TEdit do cplot.LabelSize[tag]:=strtointdef(text,8);
 end;
 
 procedure Tf_config_display.MagLabelClick(Sender: TObject);

@@ -88,7 +88,7 @@ Function LONToStr(l: Double) : string;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
 function DTminusUT(annee : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
-Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
+Function ExecProcess(cmd: string; output: TStringList): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
@@ -1143,14 +1143,13 @@ with Form do begin
 end;
 end;
 
-Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
+Function ExecProcess(cmd: string; output: TStringList): integer;
 const READ_BYTES = 2048;
 var
   M: TMemoryStream;
   P: TProcess;
   n: LongInt;
   BytesRead: LongInt;
-  poCons: TProcessOption;
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);
@@ -1158,15 +1157,7 @@ result:=1;
 try
   BytesRead := 0;
   P.CommandLine := cmd;
-  if ShowConsole then begin
-     poCons:=poNewConsole;
-     P.ShowWindow:=swoShowNormal;
-     P.StartupOptions:=[suoUseShowWindow];
-  end else begin
-     poCons:=poNoConsole;
-     P.ShowWindow:=swoHIDE;
-  end;
-  P.Options := [poUsePipes, poStdErrToOutPut];
+  P.Options := [poUsePipes, poStdErrToOutPut, poNoConsole];
   P.Execute;
   while P.Running do begin
     Application.ProcessMessages;
@@ -1190,12 +1181,8 @@ try
   P.Free;
   M.Free;
 except
-  on E: Exception do begin
-    result:=-1;
-    output.add(E.Message);
-    P.Free;
-    M.Free;
-  end;
+  P.Free;
+  M.Free;
 end;
 end;
 
@@ -1355,7 +1342,7 @@ c:=s[5];
 if c<='9' then d:=strtoint(c)
           else d:=ord(c)-55;
 s:=trim(copy(s,6,999));
-if s>'' then hh:=strtofloat(trim(s))
+if s>'' then hh:=strtofloat(s)
         else hh:=0;
 result:=true;
 except
@@ -1451,9 +1438,6 @@ begin
     Font.Name:='courier';
     Font.Pitch:=fpFixed;
     Font.Size:=8;
-    {$ifdef unix}
-    Font.Size:=6;
-    {$endif}
     Font.Color:=clBlack;
     Pen.Color:=clBlack;
     TextDown:=TextHeight(StrDate)*3 div 2;

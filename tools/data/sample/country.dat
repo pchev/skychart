@@ -8,7 +8,7 @@ AC	AG	Antigua And Barbuda
 AR	AR	Argentina
 AM	AM	Armenia
 AA	AW	Aruba
-AT		Ashmore And Cartier Islands
+AT	AU	Ashmore And Cartier Islands
 AS	AU	Australia
 AU	AT	Austria
 AJ	AZ	Azerbaijan
@@ -52,7 +52,7 @@ CN	KM	Comoros
 CF	CG	Congo
 CG	CD	Congo, Democratic Republic Of The
 CW	CK	Cook Islands
-CR		Coral Sea Islands
+CR	AU	Coral Sea Islands
 CS	CR	Costa Rica
 IV	CI	Cote D'Ivoire
 HR	HR	Croatia
@@ -113,7 +113,7 @@ IS	IL	Israel
 IT	IT	Italy
 JM	JM	Jamaica
 JN	SJ	Jan Mayen
-JA	JP	Japan
+JA	JA	Japan
 JE	JE	Jersey
 JO	JO	Jordan
 JU	TF	Juan De Nova Island

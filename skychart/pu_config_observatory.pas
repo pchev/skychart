@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  u_unzip, pu_observatory_db,
+  u_unzip,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
@@ -41,37 +41,40 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    Button5: TButton;
-    Button6: TButton;
-    Button7: TButton;
-    Button8: TButton;
-    ComboBox1: TComboBox;
     CountryTZ: TCheckBox;
-    DownloadDialog1: TDownloadDialog;
-    Label2: TLabel;
-    Label3: TLabel;
-    ObsName: TEdit;
+    vicinityrange: TUpDown;
+    vicinityrangeEdit: TEdit;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
+    DownloadDialog1: TDownloadDialog;
     horizonfile: TFileNameEdit;
     Label82: TLabel;
     Label83: TLabel;
+    Memo1: TMemo;
     OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     pressure: TFloatEdit;
     refraction: TGroupBox;
     temperature: TFloatEdit;
+    vicinity: TButton;
+    LocCode: TEdit;
+    Label2: TLabel;
+    Label3: TLabel;
     MainPanel: TPanel;
     Page1: TTabSheet;
     Page2: TTabSheet;
     Latitude: TGroupBox;
     Label58: TLabel;
+    Label59: TLabel;
+    Label60: TLabel;
     hemis: TComboBox;
     latdeg: TLongEdit;
     latmin: TLongEdit;
     latsec: TLongEdit;
     Longitude: TGroupBox;
     Label61: TLabel;
+    Label62: TLabel;
+    Label63: TLabel;
     long: TComboBox;
     longdeg: TLongEdit;
     longmin: TLongEdit;
@@ -87,6 +90,14 @@ type
     ZoomImage1: TZoomImage;
     HScrollBar: TScrollBar;
     VScrollBar: TScrollBar;
+    obsname: TGroupBox;
+    citylist: TComboBox;
+    citysearch: TButton;
+    countrylist: TComboBox;
+    cityfilter: TEdit;
+    downloadcity: TButton;
+    updcity: TButton;
+    delcity: TButton;
     GroupBox2: TGroupBox;
     horizonopaque: TCheckBox;
     GroupBox1: TGroupBox;
@@ -97,21 +108,23 @@ type
     Label1: TLabel;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure Button6Click(Sender: TObject);
-    procedure Button7Click(Sender: TObject);
-    procedure Button8Click(Sender: TObject);
-    procedure ComboBox1Select(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
-    procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
     procedure TZComboBoxChange(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure cityfilterKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure countrylistChange(Sender: TObject);
+    procedure citysearchClick(Sender: TObject);
+    procedure citylistChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure delcityClick(Sender: TObject);
     procedure latdegChange(Sender: TObject);
+    procedure LocCodeClick(Sender: TObject);
     procedure longdegChange(Sender: TObject);
     procedure altmeterChange(Sender: TObject);
+    procedure downloadcityClick(Sender: TObject);
     procedure pressureChange(Sender: TObject);
     procedure temperatureChange(Sender: TObject);
     procedure ZoomImage1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -128,6 +141,8 @@ type
     procedure FormShow(Sender: TObject);
     procedure displayhorizonClick(Sender: TObject);
     procedure horizondepressionClick(Sender: TObject);
+    procedure updcityClick(Sender: TObject);
+    procedure vicinityClick(Sender: TObject);
   private
     { Private declarations }
     FApplyConfig: TNotifyEvent;
@@ -135,6 +150,9 @@ type
     Obsposx,Obsposy : integer;
     scrollw, scrollh : integer;
     ObsMapFile:string;
+    countrycode: TStringList;
+    citycode: TStringList;
+    CurObsId:integer;
     Procedure SetScrollBar;
     Procedure SetObsPos;
     Procedure ShowObsCoord;
@@ -142,9 +160,6 @@ type
     procedure ShowHorizon;
     procedure ShowObservatory;
     procedure UpdTZList(Sender: TObject);
-    procedure UpdFavList;
-    procedure CountryChange(Sender: TObject);
-    procedure ObsChange(Sender: TObject);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -172,16 +187,27 @@ Page1.caption:=rsObservatory;
 Latitude.Caption:=rsLatitude;
 Longitude.Caption:=rsLongitude;
 Altitude.Caption:=rsAltitude;
-Label58.caption:=rsDegreesMinut;
+Label58.caption:=rsDegree;
+Label59.caption:=rsMin3;
+Label60.caption:=rsSec2;
 hemis.items[0]:=rsNorth;
 hemis.items[1]:=rsSouth;
-Label61.caption:=rsDegreesMinut;
+Label61.caption:=rsDegree;
+Label62.caption:=rsMin3;
+Label63.caption:=rsSec2;
 long.items[0]:=rsWest;
 long.items[1]:=rsEast;
 Label70.caption:=rsMeters;
 timezone.caption:=rsTimeZone;
 CountryTZ.Caption:=rsCountryTimez;
 Obsmap.caption:=rsLoad;
+obsname.caption:=rsObservatoryD;
+Label3.caption:=rsKm;
+citysearch.caption:=rsSearch;
+downloadcity.caption:=rsDownloadCoun;
+updcity.caption:=rsUpdate1;
+delcity.caption:=rsDelete;
+vicinity.caption:=rsVicinity;
 refraction.caption:=rsAtmosphericR;
 Label82.caption:=rsPressureMill;
 Label83.caption:=rsTemperatureC;
@@ -205,11 +231,6 @@ DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
 DownloadDialog1.msgDownloadBtn:=rsDownload;
 DownloadDialog1.msgCancelBtn:=rsCancel;
-Button6.Caption:=rsAdd;
-Button7.Caption:=rsDelete;
-label2.Caption:=rsFavorite;
-Button5.Caption:=rsObservatoryD;
-Button8.Caption:=rsInternetLoca;
 end;
 
 constructor Tf_config_observatory.Create(AOwner:TComponent);
@@ -235,21 +256,18 @@ end;
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
 begin
 SetLang;
-LockChange:=true;
-f_observatory_db:=Tf_observatory_db.Create(self);
-f_observatory_db.onCountryChange:=CountryChange;
-f_observatory_db.onObsChange:=ObsChange;
+  countrycode:=TStringList.Create;
+  citycode:=TStringList.Create;
+  LockChange:=true;
 end;
 
 procedure Tf_config_observatory.FormShow(Sender: TObject);
 begin
 LockChange:=true;
-f_observatory_db.cdb:=cdb;
-f_observatory_db.cmain:=cmain;
-f_observatory_db.csc:=csc;
-f_observatory_db.ShowObservatory;
+if countrylist.Items.Count=0 then cdb.GetCountryList(countrycode,countrylist.Items);
 ShowHorizon;
 ShowObservatory;
+cityfilter.text:=copy(csc.obsname,1,3);
 LockChange:=false;
 VScrollBar.Top:=ZoomImage1.Top;
 VScrollBar.Left:=ZoomImage1.Left+ZoomImage1.Width;
@@ -307,10 +325,15 @@ try
 pressure.value:=csc.obspressure;
 temperature.value:=csc.obstemperature;
 ShowObsCoord;
+countrylist.itemindex:=0;
+for i:=0 to countrylist.items.count-1 do
+  if uppercase(trim(countrylist.Items[i]))=uppercase(trim(csc.obscountry)) then begin
+    countrylist.itemindex:=i;
+    break;
+  end;
 CountryTZ.checked:=csc.countrytz;
 UpdTZList(self);
-ObsName.text:=csc.obsname;
-UpdFavList;
+citylist.text:=csc.obsname;
 Obsposx:=0;
 Obsposy:=0;
 ZoomImage1.Xcentre:=Obsposx;
@@ -336,31 +359,26 @@ except
 end;
 end;
 
-procedure Tf_config_observatory.ObsChange(Sender: TObject);
+procedure Tf_config_observatory.countrylistChange(Sender: TObject);
 begin
-csc.ObsCountry:=f_observatory_db.csc.ObsCountry;
-csc.ObsName:=f_observatory_db.csc.ObsName;
-csc.ObsLatitude:=f_observatory_db.csc.ObsLatitude;
-csc.ObsLongitude:=f_observatory_db.csc.ObsLongitude;
-ObsName.Text:=csc.ObsName;
-ShowObsCoord;
-SetObsPos;
-CenterObs;
+if lockChange then exit;
+if countrylist.ItemIndex<0 then exit;
+try
+csc.obscountry:=countrylist.text;
+cityfilter.Text:='';
+citysearchClick(Sender);
+UpdTZList(Sender);
+except
 end;
-
-procedure Tf_config_observatory.CountryChange(Sender: TObject);
-begin
-  csc.ObsCountry:=f_observatory_db.csc.ObsCountry;
-  UpdTZList(Sender);
 end;
 
 procedure Tf_config_observatory.UpdTZList(Sender: TObject);
 var code, isocode,buf: string;
     i,j: integer;
 begin
-if f_observatory_db.countrylist.ItemIndex<0 then exit;
+if countrylist.ItemIndex<0 then exit;
 if CountryTZ.Checked then begin
-   code:=f_observatory_db.countrycode[f_observatory_db.countrylist.ItemIndex];
+   code:=countrycode[countrylist.ItemIndex];
    cdb.GetCountryISOCode(code,isocode);
 end else begin
    isocode:='ZZ';
@@ -372,7 +390,7 @@ for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
      buf:=csc.tz.ZoneTabZone[i];
      if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
      TZComboBox.Items.Add(buf);
-     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ)or((isocode='ZZ')and(j=12)) then TZComboBox.ItemIndex:=j;
+     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ) then TZComboBox.ItemIndex:=j;
      inc(j);
   end;
 end;
@@ -399,11 +417,10 @@ begin
  UpdTZList(Sender);
 end;
 
-procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
-  var Value: String);
+procedure Tf_config_observatory.cityfilterKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
 begin
- if LockChange then exit;
- cmain.horizonfile:=value;
+ if key=key_cr then citysearchClick(Sender);
 end;
 
 procedure Tf_config_observatory.Button2Click(Sender: TObject);
@@ -416,135 +433,183 @@ begin
   ShowHelp;
 end;
 
-procedure Tf_config_observatory.Button5Click(Sender: TObject);
-var savename,savecountry:string;
-    savelat,savelon:double;
-begin
-savecountry:=csc.ObsCountry;
-savename:=csc.ObsName;
-savelat:=csc.ObsLatitude;
-savelon:=csc.ObsLongitude;
-FormPos(f_observatory_db,Mouse.CursorPos.X,Mouse.CursorPos.Y);
-if f_observatory_db.ShowModal=mrOK then begin
-  csc.ObsCountry:=f_observatory_db.csc.ObsCountry;
-  csc.ObsName:=f_observatory_db.csc.ObsName;
-  csc.ObsLatitude:=f_observatory_db.csc.ObsLatitude;
-  csc.ObsLongitude:=f_observatory_db.csc.ObsLongitude;
-end else begin
-  csc.ObsCountry := savecountry;
-  csc.ObsName      := savename;
-  csc.ObsLatitude  := savelat;
-  csc.ObsLongitude := savelon;
-  f_observatory_db.csc.ObsCountry := csc.ObsCountry;
-  f_observatory_db.ShowObservatory;
-end;
-ObsName.Text:=csc.ObsName;
-UpdTZList(nil);
-ShowObsCoord;
-SetObsPos;
-CenterObs;
-end;
-
-procedure Tf_config_observatory.Button6Click(Sender: TObject);
-var obsdetail: TObsDetail;
-    i: integer;
-begin
-obsdetail:=TObsDetail.Create;
-obsdetail.country:=csc.ObsCountry;
-obsdetail.lat:=csc.ObsLatitude;
-obsdetail.lon:=csc.ObsLongitude;
-if cmain.ObsNameList.Find(csc.ObsName,i) then begin
-   cmain.ObsNameList.Objects[i].Free;
-   cmain.ObsNameList.Objects[i]:=obsdetail;
-end else begin
-  cmain.ObsNameList.AddObject(csc.ObsName,obsdetail);
-end;
-UpdFavList;
-end;
-
-procedure Tf_config_observatory.Button7Click(Sender: TObject);
-var i: integer;
-begin
-i:=ComboBox1.ItemIndex;
-cmain.ObsNameList.Objects[i].Free;
-cmain.ObsNameList.Delete(i);
-ComboBox1.Items.Delete(i);
-end;
-
-procedure Tf_config_observatory.Button8Click(Sender: TObject);
-var fn,buf,country: string;
-    loc:TStringList;
-    f: textfile;
-begin
-  if cmain.HttpProxy then begin
-     DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-     DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-     DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-     DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
-  end else begin
-     DownloadDialog1.HttpProxy:='';
-     DownloadDialog1.HttpProxyPort:='';
-     DownloadDialog1.HttpProxyUser:='';
-     DownloadDialog1.HttpProxyPass:='';
-  end;
-  DownloadDialog1.URL:=location_url+'?ip=1.1.1.1';
-  fn:=slash(TempDir)+'iploc.txt';
-  DownloadDialog1.SaveToFile:=fn;
-  DownloadDialog1.ConfirmDownload:=false;
-  if DownloadDialog1.Execute and FileExists(fn) then begin
-     AssignFile(f,fn);
-     reset(f);
-     read(f,buf);
-     closefile(f);
-     loc:=TStringList.Create;
-     Splitarg(buf,tab,loc);
-     if (loc.Count>=6)and(trim(loc[1])>'')and(trim(loc[3])>'')and(trim(loc[4])>'')and(trim(loc[5])>'') then begin
-       cdb.GetCountryFromISO(trim(loc[1]),country);
-       csc.ObsCountry:=country;
-       csc.ObsName:=trim(loc[3]);
-       csc.ObsLatitude:=StrToFloatDef(trim(loc[4]),csc.ObsLatitude);
-       csc.ObsLongitude:=-StrToFloatDef(trim(loc[5]),-csc.ObsLongitude);
-       f_observatory_db.csc.ObsCountry := csc.ObsCountry;
-       f_observatory_db.ShowObservatory;
-       ShowObservatory;
-     end
-     else ShowMessage(rsCannotGetYou+crlf+rsServerRespon+buf);
-     loc.free;
-  end
-  else ShowMessage(rsCannotGetYou+crlf+DownloadDialog1.ResponseText);
-end;
-
-procedure Tf_config_observatory.ComboBox1Select(Sender: TObject);
-var i: integer;
-begin
-  i:=ComboBox1.ItemIndex;
-  csc.ObsName:=cmain.ObsNameList[i];
-  csc.ObsCountry   := TObsDetail(cmain.ObsNameList.Objects[i]).country;
-  csc.ObsLatitude  := TObsDetail(cmain.ObsNameList.Objects[i]).lat;
-  csc.ObsLongitude := TObsDetail(cmain.ObsNameList.Objects[i]).lon;
-  f_observatory_db.csc.ObsCountry := csc.ObsCountry;
-  f_observatory_db.ShowObservatory;
-  ObsName.text:=csc.obsname;
-  ShowObsCoord;
-  SetObsPos;
-  CenterObs;
-  UpdTZList(sender);
-end;
-
-procedure Tf_config_observatory.UpdFavList;
-var i: integer;
-begin
-ComboBox1.Clear;
-if cmain.ObsNameList.Count>0 then for i:=0 to cmain.ObsNameList.Count-1 do begin
-  ComboBox1.Items.Add(cmain.ObsNameList[i]);
-  if cmain.ObsNameList[i]=ObsName.Text then ComboBox1.ItemIndex:=i;
-end;
-end;
-
 procedure Tf_config_observatory.FormClose(Sender: TObject;
   var CloseAction: TCloseAction);
 begin
   LockChange:=true;
+end;
+
+procedure Tf_config_observatory.citysearchClick(Sender: TObject);
+var code,filter: string;
+begin
+screen.Cursor:=crHourGlass;
+try
+if countrylist.ItemIndex<0 then exit;
+lockChange:=true;
+code:=countrycode[countrylist.ItemIndex];
+filter:=cityfilter.Text;
+if filter<>'' then filter:=filter+'%';
+cdb.GetCityList(code,filter,citycode,citylist.Items,MaxCityList);
+if citylist.Items.Count>0 then citylist.Text:=citylist.Items[0];
+lockChange:=false;
+citylistChange(self);
+finally
+screen.Cursor:=crDefault;
+end;
+end;
+
+procedure Tf_config_observatory.citylistChange(Sender: TObject);
+var id,loctype,latitude,longitude,elevation,timezone:string;
+    p:integer;
+begin
+if LockChange then exit;
+csc.obsname:=citylist.text;
+p:=pos(' -- ',csc.obsname);
+if p>0 then delete(csc.obsname,p,99);
+if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
+id:=citycode[citylist.ItemIndex];
+if cdb.GetCityLoc(id,loctype,latitude,longitude,elevation,timezone) then begin
+   curobsid:=strtoint(citycode[citylist.ItemIndex]);
+   LocCode.text:=loctype;
+   csc.ObsLatitude:=strtofloat(latitude);
+   csc.ObsLongitude:=-strtofloat(longitude);
+   csc.ObsAltitude:=strtofloat(elevation);
+   ShowObsCoord;
+   SetObsPos;
+   CenterObs;
+end
+else curobsid:=0;
+end;
+
+procedure Tf_config_observatory.updcityClick(Sender: TObject);
+var country,location,lat,lon,elev,ltz,buf: string;
+    p: integer;
+begin
+if countrylist.ItemIndex<0 then exit;
+if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
+  then begin
+    lat:=floattostr(csc.ObsLatitude);
+    lon:=floattostr(-csc.ObsLongitude);
+    elev:=floattostr(csc.ObsAltitude);
+    ltz:='0';
+    country:=countrycode[countrylist.ItemIndex];
+    location:=citylist.Text;
+    p:=pos(' -- ',location);
+    if p>0 then delete(location,p,99);
+    buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,ltz);
+    if buf='' then buf:=rsUpdatedSucce;
+    vicinityClick(Sender);
+    showmessage(buf);
+  end;
+end;
+
+procedure Tf_config_observatory.delcityClick(Sender: TObject);
+var buf: string;
+begin
+if curobsid=0 then exit;
+if MessageDlg(rsDeleteTheCur, mtWarning, [mbYes, mbNo], 0) = mrYes
+  then begin
+      buf:=cdb.DeleteCity(curobsid);
+      if buf='' then buf:=rsDeletedSucce;
+      vicinityClick(Sender);
+      if citylist.items.count=0 then citysearchClick(Sender);
+      showmessage(buf);
+  end;
+end;
+
+
+procedure Tf_config_observatory.vicinityClick(Sender: TObject);
+var lon,lat,dd:double;
+    country,oldcity:string;
+    i,p: integer;
+begin
+if countrylist.ItemIndex<0 then exit;
+oldcity:=trim(citylist.Text);
+p:=pos(' -- ',oldcity);
+if p>0 then delete(oldcity,p,99);
+lockChange:=true;
+citylist.Clear;
+citycode.Clear;
+country:=countrycode[countrylist.ItemIndex];
+dd:=vicinityrange.position/kmperdegree;
+lat:=csc.ObsLatitude;
+lon:=-csc.ObsLongitude;
+cdb.GetCityRange(country,lat-dd,lat+dd,lon-dd,lon+dd, citycode,citylist.Items,MaxCityList);
+citylist.itemindex:=0;
+for i:=0 to citylist.items.count-1 do
+  if trim(citylist.Items[i])=oldcity then begin
+    citylist.itemindex:=i;
+    break;
+  end;
+lockChange:=false;
+citylistChange(self);
+end;
+
+procedure Tf_config_observatory.downloadcityClick(Sender: TObject);
+var country,state,fn,fnzip,buf:string;
+begin
+if countrylist.ItemIndex<0 then exit;
+if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
+  mtWarning, [mbYes, mbNo], 0) = mrYes
+  then begin
+    country:=countrycode[countrylist.ItemIndex];
+    if copy(country,1,3)='US-' then begin // US States
+       state:=uppercase(copy(country,4,2));
+       fnzip:=state+'_DECI.zip';
+       fn:=ChangeFileExt(fnzip,'.txt');
+       DownloadDialog1.URL:=baseurl_us+fnzip;
+       fnzip:=slash(TempDir)+fnzip;
+       DownloadDialog1.SaveToFile:=fnzip;
+       if not FileExists(fnzip) then begin
+          if not DownloadDialog1.Execute then Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+       end else
+          ShowMessage(Format(rsUsingExistin, [fnzip]));
+       if FileExists(fnzip) then begin
+          if FileUnzip(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
+            memo1.Visible:=true;
+            memo1.BringToFront;
+            application.ProcessMessages;
+            fn:=slash(TempDir)+fn;
+            buf:=cdb.DeleteCountry(country,false);
+            memo1.Lines.Add(buf);
+            application.ProcessMessages;
+            cdb.LoadUSLocation(fn,false,memo1,state);
+            application.ProcessMessages;
+            sleep(2000);
+            memo1.Visible:=false;
+          end
+          else Showmessage(Format(rsCancelWrongZ, [fnzip]));
+       end else
+         ShowMessage(Format(rsNotFound, [fnzip]));
+    end else begin  // World
+       fnzip:=lowercase(country)+'.zip';
+       fn:=ChangeFileExt(fnzip,'.txt');
+       DownloadDialog1.URL:=baseurl_world+fnzip;
+       fnzip:=slash(TempDir)+fnzip;
+       DownloadDialog1.SaveToFile:=fnzip;
+       if not FileExists(fnzip) then begin
+          if not DownloadDialog1.Execute then Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
+       end else
+          ShowMessage(Format(rsUsingExistin, [fnzip]));
+       if FileExists(fnzip) then begin
+          if FileUnzip(pchar(fnzip), pchar(TempDir), pchar(fn)) then begin
+             memo1.Visible:=true;
+             memo1.BringToFront;
+             application.ProcessMessages;
+             fn:=slash(TempDir)+fn;
+             buf:=cdb.DeleteCountry(country,false);
+             memo1.Lines.Add(buf);
+             application.ProcessMessages;
+             cdb.LoadWorldLocation(fn,country,false,memo1);
+             application.ProcessMessages;
+             sleep(2000);
+             memo1.Visible:=false;
+          end
+          else Showmessage(Format(rsCancelWrongZ, [fnzip]));
+       end else
+         ShowMessage(Format(rsNotFound, [fnzip]));
+    end;
+end;
 end;
 
 procedure Tf_config_observatory.latdegChange(Sender: TObject);
@@ -555,6 +620,23 @@ csc.ObsLatitude:=latdeg.value+latmin.value/60+latsec.value/3600;
 if hemis.Itemindex>0 then csc.ObsLatitude:=-csc.ObsLatitude;
 SetObsPos;
 CenterObs;
+end;
+
+procedure Tf_config_observatory.LocCodeClick(Sender: TObject);
+var us: boolean;
+    country,desigfile: string;
+begin
+us:=false;
+if countrylist.ItemIndex>=0 then begin
+   country:=countrycode[countrylist.ItemIndex];
+   if copy(country,1,3)='US-' then us:=true;
+end;
+if us then country:='Location_US_Designations.html'
+      else country:='Location_World_Designations.html';
+desigfile:=slash(helpdir)+slash('html_doc')+slash(lang)+country;
+if not FileExists(desigfile) then
+   desigfile:=slash(helpdir)+slash('html_doc')+slash('en')+country;
+ExecuteFile(desigfile);
 end;
 
 procedure Tf_config_observatory.longdegChange(Sender: TObject);

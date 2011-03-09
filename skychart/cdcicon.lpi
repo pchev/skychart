@@ -14,9 +14,6 @@
     <VersionInfo>
       <StringTable ProductVersion=""/>
     </VersionInfo>
-    <BuildModes Count="1">
-      <Item1 Name="default" Default="True"/>
-    </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
@@ -30,7 +27,7 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="8">
+    <RequiredPackages Count="10">
       <Item1>
         <PackageName Value="zoomimage"/>
       </Item1>
@@ -41,20 +38,26 @@
         <PackageName Value="libsql"/>
       </Item3>
       <Item4>
-        <PackageName Value="satxy"/>
+        <PackageName Value="elp82"/>
       </Item4>
       <Item5>
-        <PackageName Value="Printer4Lazarus"/>
+        <PackageName Value="series96"/>
       </Item5>
       <Item6>
-        <PackageName Value="enhedit"/>
+        <PackageName Value="satxy"/>
       </Item6>
       <Item7>
-        <PackageName Value="cdccatalog"/>
+        <PackageName Value="Printer4Lazarus"/>
       </Item7>
       <Item8>
-        <PackageName Value="LCL"/>
+        <PackageName Value="enhedit"/>
       </Item8>
+      <Item9>
+        <PackageName Value="cdccatalog"/>
+      </Item9>
+      <Item10>
+        <PackageName Value="LCL"/>
+      </Item10>
     </RequiredPackages>
     <Units Count="25">
       <Unit0>
@@ -74,12 +77,12 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="425"/>
-        <CursorPos X="45" Y="443"/>
+        <TopLine Value="283"/>
+        <CursorPos X="3" Y="303"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
-          <Item0 X="27" Y="389" ID="1"/>
-          <Item1 X="1" Y="467" ID="2"/>
+          <Item0 X="27" Y="388" ID="1"/>
+          <Item1 X="1" Y="465" ID="2"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -137,12 +140,9 @@
       <Unit9>
         <Filename Value="u_constant.pas"/>
         <UnitName Value="u_constant"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="622"/>
-        <CursorPos X="37" Y="644"/>
+        <TopLine Value="252"/>
+        <CursorPos X="7" Y="273"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit9>
       <Unit10>
         <Filename Value="cu_tz.pas"/>
@@ -175,12 +175,9 @@
       <Unit14>
         <Filename Value="cu_planet.pas"/>
         <UnitName Value="cu_planet"/>
-        <EditorIndex Value="2"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="2343"/>
-        <CursorPos X="29" Y="2357"/>
+        <TopLine Value="2074"/>
+        <CursorPos X="34" Y="2130"/>
         <UsageCount Value="12"/>
-        <Loaded Value="True"/>
       </Unit14>
       <Unit15>
         <Filename Value="cu_database.pas"/>
@@ -203,13 +200,9 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
-        <EditorIndex Value="1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1681"/>
-        <CursorPos X="48" Y="1698"/>
+        <TopLine Value="19"/>
+        <CursorPos X="21" Y="32"/>
         <UsageCount Value="25"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit17>
       <Unit18>
         <Filename Value="pu_image.pas"/>
@@ -242,148 +235,134 @@
       </Unit21>
       <Unit22>
         <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="152"/>
         <CursorPos X="1" Y="174"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit22>
       <Unit23>
         <Filename Value="../../../compiler/lazarus/lcl/extctrls.pp"/>
         <UnitName Value="ExtCtrls"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1245"/>
         <CursorPos X="21" Y="1259"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit23>
       <Unit24>
         <Filename Value="../../../compiler/lazarus/lcl/include/customtrayicon.inc"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="184"/>
         <CursorPos X="3" Y="201"/>
         <UsageCount Value="10"/>
+        <Loaded Value="True"/>
       </Unit24>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="25" HistoryIndex="24">
       <Position1>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="75" Column="19" TopLine="55"/>
       </Position1>
       <Position2>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="11" Column="69" TopLine="1"/>
+        <Caret Line="196" Column="9" TopLine="176"/>
       </Position2>
       <Position3>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="157" Column="24" TopLine="142"/>
+        <Caret Line="314" Column="11" TopLine="294"/>
       </Position3>
       <Position4>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="377" Column="49" TopLine="353"/>
+        <Caret Line="349" Column="40" TopLine="314"/>
       </Position4>
       <Position5>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="426" Column="36" TopLine="411"/>
+        <Caret Line="350" Column="37" TopLine="314"/>
       </Position5>
       <Position6>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="444" Column="27" TopLine="420"/>
+        <Caret Line="597" Column="75" TopLine="570"/>
       </Position6>
       <Position7>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="447" Column="20" TopLine="423"/>
+        <Caret Line="615" Column="38" TopLine="606"/>
       </Position7>
       <Position8>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="448" Column="20" TopLine="424"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position8>
       <Position9>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="533" Column="49" TopLine="511"/>
+        <Caret Line="589" Column="54" TopLine="567"/>
       </Position9>
       <Position10>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="596" Column="25" TopLine="567"/>
       </Position10>
       <Position11>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="158" Column="60" TopLine="136"/>
+        <Caret Line="597" Column="74" TopLine="567"/>
       </Position11>
       <Position12>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="428" Column="13" TopLine="417"/>
+        <Caret Line="545" Column="23" TopLine="523"/>
       </Position12>
       <Position13>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="426" Column="48" TopLine="417"/>
+        <Caret Line="468" Column="17" TopLine="439"/>
       </Position13>
       <Position14>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="429" Column="1" TopLine="426"/>
+        <Caret Line="80" Column="35" TopLine="70"/>
       </Position14>
       <Position15>
         <Filename Value="pu_tray.pas"/>
-        <Caret Line="430" Column="1" TopLine="425"/>
+        <Caret Line="695" Column="39" TopLine="669"/>
       </Position15>
       <Position16>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="449" Column="1" TopLine="425"/>
+        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
+        <Caret Line="174" Column="1" TopLine="152"/>
       </Position16>
       <Position17>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2359" Column="1" TopLine="2344"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="306" Column="3" TopLine="283"/>
       </Position17>
       <Position18>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2360" Column="1" TopLine="2344"/>
+        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
+        <Caret Line="174" Column="1" TopLine="152"/>
       </Position18>
       <Position19>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2353" Column="1" TopLine="2344"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="303" Column="3" TopLine="283"/>
       </Position19>
       <Position20>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2345" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="301" Column="1" TopLine="283"/>
       </Position20>
       <Position21>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2346" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="302" Column="1" TopLine="283"/>
       </Position21>
       <Position22>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2347" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="304" Column="1" TopLine="283"/>
       </Position22>
       <Position23>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2348" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="308" Column="1" TopLine="283"/>
       </Position23>
       <Position24>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2349" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="303" Column="14" TopLine="283"/>
       </Position24>
       <Position25>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2350" Column="1" TopLine="2340"/>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="304" Column="25" TopLine="283"/>
       </Position25>
-      <Position26>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2353" Column="1" TopLine="2340"/>
-      </Position26>
-      <Position27>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2361" Column="1" TopLine="2340"/>
-      </Position27>
-      <Position28>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2362" Column="1" TopLine="2340"/>
-      </Position28>
-      <Position29>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2363" Column="1" TopLine="2340"/>
-      </Position29>
-      <Position30>
-        <Filename Value="cu_planet.pas"/>
-        <Caret Line="2364" Column="1" TopLine="2340"/>
-      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.3
+version=3.2
 
 builddir=/tmp/skychart  # Be sure this is set to a non existent directory, it is removed after the run!
 innosetup="C:\Program Files\Inno Setup 5\ISCC.exe"  # Install under Wine from http://www.jrsoftware.org/isinfo.php
@@ -15,6 +15,8 @@ unset make_linux32
 make_linux32=1
 unset make_linux64
 if [[ $arch -eq x86_64 ]]; then make_linux64=1;fi
+unset make_linux_data
+make_linux_data=1
 unset make_win32
 make_win32=1
 unset make_win64

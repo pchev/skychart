@@ -39,14 +39,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    ComboBox2: TComboBox;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label8: TLabel;
-    SunPanel: TPanel;
-    SunOnline: TCheckBox;
     CheckBoxPluto: TCheckBox;
-    ComboBox1: TComboBox;
     comfile: TFileNameEdit;
     comt_y: TEdit;
     comt_m: TEdit;
@@ -89,11 +82,13 @@ type
     PlaParalaxe: TRadioGroup;
     Label5: TLabel;
     Label89: TLabel;
+    Label53: TLabel;
     PlanetBox: TCheckBox;
     PlanetMode: TRadioGroup;
     PlanetBox3: TCheckBox;
     GRS: TFloatEdit;
     BitBtn37: TBitBtn;
+    Edit2: TEdit;
     ComPageControl: TPageControl;
     comsetting: TTabSheet;
     GroupBox13: TGroupBox;
@@ -218,8 +213,6 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
-    procedure ComboBox1Select(Sender: TObject);
-    procedure ComboBox2Select(Sender: TObject);
     procedure DownloadAsteroidClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -254,7 +247,6 @@ type
     procedure deldateastClick(Sender: TObject);
     procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
-    procedure SunOnlineClick(Sender: TObject);
     procedure XplanetBtnClick(Sender: TObject);
     procedure XplanetDirChange(Sender: TObject);
     procedure UseXplanetClick(Sender: TObject);
@@ -327,10 +319,6 @@ PlanetBox3.caption:=rsShowEarthSha;
 LabelXplanetBox.caption:=rsImageOptions;
 UseXplanet.caption:=rsUseXplanet;
 TransparentPlanet.caption:=rsTransparentL;
-SunOnline.Caption:=rsUseOnlineSun;
-Label4.Caption:=rsSunImageSour;
-Label6.Caption:=rsRefreshImage;
-Label8.Caption:=rsHours;
 comsetting.caption:=rsGeneralSetti;
 GroupBox13.caption:=rsChartSetting;
 Label154.caption:=rsDoNotTakeAcc;
@@ -461,7 +449,6 @@ if PageControl1.ActivePage=page2 then
 end;
 
 procedure Tf_config_solsys.ShowPlanet;
-var i:integer;
 begin
 if csc.PlanetParalaxe then PlaParalaxe.itemindex:=1
                       else PlaParalaxe.itemindex:=0;
@@ -475,24 +462,10 @@ XplanetMsg.Caption:=blank;
 XplanetDir.text:=xplanet_dir;
 UseXplanet.checked:=use_xplanet;
 TransparentPlanet.Checked:=cplot.TransparentPlanet;
-SunOnline.Checked:=csc.SunOnline;
-for i:=0 to URL_SUN_NUMBER-1 do
-  if ComboBox1.Items[i]=csc.sunurlname then ComboBox1.ItemIndex:=i;
-for i:=0 to ComboBox2.Items.Count-1 do
-  if strtoint(ComboBox2.Items[i])=csc.sunrefreshtime then ComboBox2.ItemIndex:=i;
 {$ifndef mswindows}
  XplanetBox.Visible:=false;
  use_xplanet:=true;
 {$endif}
-if PlanetMode.itemindex=2 then begin
-   SunPanel.Visible:=true;
-   {$ifdef mswindows}
-   XplanetBox.Visible:=true;
-  {$endif}
-end else begin
-   SunPanel.Visible:=false;
-   XplanetBox.Visible:=false;
-end;
 if visible and (PageControl1.ActivePage=page1) then ActiveControl:=PlanetDir;
 end;
 
@@ -532,12 +505,9 @@ begin
 end;
 
 procedure Tf_config_solsys.FormCreate(Sender: TObject);
-var i:integer;
 begin
 SetLang;
   LockChange:=true;
-  ComboBox1.Clear;
-  for i:=1 to URL_SUN_NUMBER do ComboBox1.Items.Add(URL_SUN_NAME[i]);
 end;
 
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
@@ -611,21 +581,6 @@ procedure Tf_config_solsys.CheckBoxPlutoChange(Sender: TObject);
 begin
 if LockChange then exit;
   csc.ShowPluto:=CheckBoxPluto.checked;
-end;
-
-procedure Tf_config_solsys.ComboBox1Select(Sender: TObject);
-var i: integer;
-begin
-  i:=ComboBox1.ItemIndex+1;
-  csc.sunurlname:=URL_SUN_NAME[i];
-  csc.sunurl:=URL_SUN[i];
-  csc.sunurlsize:=URL_SUN_SIZE[i];
-  csc.sunurlmargin:=URL_SUN_MARGIN[i];
-end;
-
-procedure Tf_config_solsys.ComboBox2Select(Sender: TObject);
-begin
-  csc.sunrefreshtime:=StrToInt(ComboBox2.Text);
 end;
 
 procedure Tf_config_solsys.Button2Click(Sender: TObject);
@@ -755,15 +710,6 @@ if LockChange and (PageControl1.ActivePage<>Page2) then exit;
 if (PlanetMode.itemindex=2)and Use_Xplanet then begin
    if not CheckXplanet then
      PlanetMode.itemindex:=1;
-end;
-if PlanetMode.itemindex=2 then begin
-   SunPanel.Visible:=true;
-   {$ifdef mswindows}
-   XplanetBox.Visible:=true;
-  {$endif}
-end else begin
-   SunPanel.Visible:=false;
-   XplanetBox.Visible:=false;
 end;
 cplot.plaplot:=PlanetMode.itemindex;
 end;
@@ -969,11 +915,6 @@ begin
 msg:=Cdb.AddAsteroid(astid.text,asth.text,astg.text,astep.text,astma.text,astperi.text,astnode.text,asti.text,astec.text,astax.text,astref.text,astnam.text,asteq.text);
 UpdAstList;
 if msg<>'' then showmessage(msg);
-end;
-
-procedure Tf_config_solsys.SunOnlineClick(Sender: TObject);
-begin
-  csc.SunOnline := SunOnline.Checked;
 end;
 
 procedure Tf_config_solsys.LoadSampleData;

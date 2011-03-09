@@ -1,80 +1,74 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="2">
     <Name Value="CDCcomponents"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="5"/>
       <SearchPaths>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       </SearchPaths>
-      <Parsing>
-        <SyntaxOptions>
-          <UseAnsiStrings Value="False"/>
-        </SyntaxOptions>
-      </Parsing>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
       <Other>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
     <Type Value="RunAndDesignTime"/>
-    <RequiredPkgs Count="14">
+    <RequiredPkgs Count="13">
       <Item1>
-        <PackageName Value="HtmlComp"/>
-        <DefaultFilename Value="thtmlport/package/htmlcomp.lpk"/>
-      </Item1>
-      <Item2>
         <PackageName Value="lazvo"/>
         <DefaultFilename Value="vo/lazvo.lpk"/>
-      </Item2>
-      <Item3>
+      </Item1>
+      <Item2>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="zoomimage/zoomimage.lpk"/>
-      </Item3>
-      <Item4>
+      </Item2>
+      <Item3>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="xmlparser/xmlparser.lpk"/>
-      </Item4>
-      <Item5>
+      </Item3>
+      <Item4>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="synapse/source/lib/synapse.lpk"/>
-      </Item5>
-      <Item6>
+      </Item4>
+      <Item5>
         <PackageName Value="radec"/>
         <DefaultFilename Value="radec/radec.lpk"/>
-      </Item6>
-      <Item7>
+      </Item5>
+      <Item6>
         <PackageName Value="MultiDocPackage"/>
         <DefaultFilename Value="multidoc/multidocpackage.lpk"/>
-      </Item7>
-      <Item8>
+      </Item6>
+      <Item7>
         <PackageName Value="mrecsort"/>
         <DefaultFilename Value="mrecsort/mrecsort.lpk"/>
-      </Item8>
-      <Item9>
+      </Item7>
+      <Item8>
         <PackageName Value="libsql"/>
         <DefaultFilename Value="libsql/libsql.lpk"/>
-      </Item9>
-      <Item10>
+      </Item8>
+      <Item9>
         <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item10>
-      <Item11>
+      </Item9>
+      <Item10>
         <PackageName Value="enhedit"/>
         <DefaultFilename Value="enhedits/enhedit.lpk"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="downldialog"/>
         <DefaultFilename Value="downloaddialog/downldialog.lpk"/>
-      </Item12>
-      <Item13>
+      </Item11>
+      <Item12>
         <PackageName Value="CDCjdcalendar"/>
         <DefaultFilename Value="jdcalendar/cdcjdcalendar.lpk"/>
-      </Item13>
-      <Item14>
+      </Item12>
+      <Item13>
         <PackageName Value="uniqueinstance_package"/>
         <DefaultFilename Value="uniqueinstance/uniqueinstance_package.lpk"/>
-      </Item14>
+      </Item13>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)/"/>

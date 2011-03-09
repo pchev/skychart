@@ -1,20 +1,20 @@
-# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009, 2010.
+# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-11-23 20:04+0100\n"
+"PO-Revision-Date: 2009-01-18 18:59+0100\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
-"Language-Team: American English <kde-i18n-doc@kde.org>\n"
+"Language-Team: en_US <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 0.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
-msgstr "102 CD DSS"
+msgstr ""
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
@@ -80,10 +80,6 @@ msgstr "Dodaj eden element v podatkovno zbirko. Vsa polja so obvezna."
 msgid "Add equatorial grid"
 msgstr "Dodaj ekvatorialno mrežo"
 
-#: u_translation.rsadditionalff
-msgid "Additional ffmpeg options"
-msgstr ""
-
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Dodaj oznako"
@@ -134,7 +130,7 @@ msgstr "%sPrav tako se prepričaj, da je zahtevano programje podatkovne zbirke n
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr "Alt"
+msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
@@ -150,7 +146,7 @@ msgstr "Alt-Az koordinata"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
-msgstr "Alt/Az priključek"
+msgstr ""
 
 #: u_translation.rsaltitude
 msgid "Altitude"
@@ -158,18 +154,10 @@ msgstr "Višina"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt obrati:"
-
-#: u_translation.rsalwayssavewi
-msgid "Always save without asking."
-msgstr "Vedno shrani brez vprašanja."
+msgstr ""
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
-msgstr "Vedno prikaži kompasovo vetrovnico"
-
-#: u_translation.rsanimation
-msgid "Animation"
 msgstr ""
 
 #: u_translation.rsannualproper
@@ -202,19 +190,15 @@ msgstr "Potrdi spremembe za vse karte"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "Argument prisončja"
+msgstr ""
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Umetni sateliti"
 
-#: u_translation.rsartificialsa2
-msgid "Artificial satellite"
-msgstr "Umetni satelit"
-
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
-msgstr "gonilnik za teleskop ASCOM"
+msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -246,7 +230,7 @@ msgstr "Asteroidov iz datoteke"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr "Astrometric J2000"
+msgstr ""
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
@@ -254,15 +238,15 @@ msgstr "Astronomski"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr "Astronomski somrak"
+msgstr ""
 
 #: u_translation.rsat
 msgid "at"
-msgstr "ob"
+msgstr ""
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
-msgstr "Atmosferski odboj"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -290,7 +274,7 @@ msgstr "Dodatne datoteke"
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr "Az"
+msgstr ""
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
@@ -302,11 +286,11 @@ msgstr "Azimutska koordinata"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz obrati:"
+msgstr ""
 
 #: u_translation.rsb
 msgid "B"
-msgstr "B"
+msgstr ""
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -318,7 +302,7 @@ msgstr "Slika ozadja"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr "Bayerjevo število"
+msgstr ""
 
 #: u_translation.rsbc
 msgid "BC"
@@ -332,17 +316,13 @@ msgstr "Začni obdelavo za jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Pod obzorjem"
 
-#: u_translation.rsbesuretheyus
-msgid "Be sure they use a DOS line end format."
-msgstr "Prepričaj se, da se uporablja konec vrstice DOS formata."
-
 #: u_translation.rsbigstars
 msgid "Big stars"
 msgstr "Velike zvezde"
 
 #: u_translation.rsbii
 msgid "BII"
-msgstr "BII"
+msgstr ""
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
@@ -350,11 +330,11 @@ msgstr "Binaredn indeksni katalog"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "Slika"
+msgstr ""
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr "Datoteka slike"
+msgstr ""
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
@@ -366,7 +346,7 @@ msgstr "Črno/Belo"
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
-msgstr "Črn/bel, vrstični način"
+msgstr ""
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
@@ -402,7 +382,7 @@ msgstr "Svetla meglica"
 
 #: u_translation.rsbrightneo
 msgid "Bright + NEO + TNO"
-msgstr "Svetel + NEO + TNO"
+msgstr ""
 
 #: u_translation.rsbrightness
 msgid "Brightness"
@@ -440,21 +420,13 @@ msgstr "Prekliči %s"
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Prekliči, napačna zip datoteka ?? %s"
 
-#: u_translation.rscannotcomput
-msgid "Cannot compute satellites."
-msgstr ""
-
-#: u_translation.rscannotgetyou
-msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
-
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
 msgstr "%sNe morem odpreti podatkovne zbirke %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr "Ne morem pisati v"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -478,7 +450,7 @@ msgstr "Kratko ime kataloga"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr "Niz kataloga"
+msgstr ""
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
@@ -486,7 +458,7 @@ msgstr "Tip kataloga"
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%sCCW"
+msgstr ""
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -530,15 +502,15 @@ msgstr "Usredišči predmet"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr "Središčni poldnevnik"
+msgstr ""
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr "Središčna zvezda B magnitude"
+msgstr ""
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr "Središčna zvezda V magnitude"
+msgstr ""
 
 #: u_translation.rscentre
 msgid "Centre on"
@@ -554,7 +526,7 @@ msgstr "Spremeni prikaz slik"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr "Sprememba te nastavitve, bo sedaj ponovno zagnala program!"
+msgstr ""
 
 #: u_translation.rschart
 msgid "Chart"
@@ -602,15 +574,11 @@ msgstr "Obroč"
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr "Obtečajen"
+msgstr ""
 
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Razred"
-
-#: u_translation.rscleanupmap
-msgid "Cleanup map"
-msgstr "Počisti karto"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -638,7 +606,7 @@ msgstr "Zapri povezavo"
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
-msgstr "Zaprt obris"
+msgstr ""
 
 #: u_translation.rsclosefiles
 msgid "Close files"
@@ -658,11 +626,11 @@ msgstr "Barva"
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr "Barvni indeks"
+msgstr ""
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr "Barva, vrstični način"
+msgstr ""
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
@@ -698,7 +666,7 @@ msgstr "Običajno ime"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "Velikost kompasove vetrovnice"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
@@ -706,11 +674,11 @@ msgstr "Prevedeno z:"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr "Enota 1 magnitude"
+msgstr ""
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr "Enota 2 magnitude"
+msgstr ""
 
 #: u_translation.rscompute
 msgid "Compute"
@@ -818,7 +786,7 @@ msgstr "Koordinate:"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "Koordinate enakonočja"
+msgstr ""
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
@@ -828,13 +796,9 @@ msgstr "Koordinatna mreža"
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: u_translation.rscopycoordina
-msgid "Copy coordinates"
-msgstr "Kopirajte koordinate"
-
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr "Kopirajte iz:"
+msgstr ""
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -890,7 +854,7 @@ msgstr "Današnji dan"
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%sCW"
+msgstr ""
 
 #: u_translation.rsdarknebula
 msgctxt "u_translation.rsdarknebula"
@@ -904,15 +868,15 @@ msgstr "Temna meglica"
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr "Črta"
+msgstr ""
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr "Črta pika"
+msgstr ""
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
-msgstr "Črta pika črta"
+msgstr ""
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
@@ -980,7 +944,7 @@ msgstr "dnevi"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Dnevni čas"
+msgstr ""
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
@@ -992,11 +956,11 @@ msgstr "DB ime"
 
 #: u_translation.rsde
 msgid "DE"
-msgstr "DE"
+msgstr ""
 
 #: u_translation.rsdec
 msgid "DEC"
-msgstr "DEC"
+msgstr ""
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1008,7 +972,7 @@ msgstr "Decimalne ure"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
-msgstr "Decimalna razdalja južnega pola"
+msgstr ""
 
 #: u_translation.rsdeclination
 msgid "Declination"
@@ -1024,11 +988,11 @@ msgstr "Pojemajoči čas"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC obrati: "
+msgstr ""
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC obrati:"
+msgstr ""
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
@@ -1064,7 +1028,7 @@ msgstr "Privzete nastavitve meglice"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr "Privzeti očrtani parametri"
+msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1085,10 +1049,6 @@ msgstr "stopinje"
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, secondes"
 msgstr "Stopinje, minute, sekunde"
-
-#: u_translation.rsdelaybetween
-msgid "Delay between frame"
-msgstr ""
 
 #: u_translation.rsdelete
 msgid "Delete"
@@ -1150,11 +1110,11 @@ msgstr "Izbrišem trenutno mesto iz podatkovne zbirke?"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "Zakritje vidnega obzorja"
+msgstr ""
 
 #: u_translation.rsdesc
 msgid "desc:"
-msgstr "opis:"
+msgstr ""
 
 #: u_translation.rsdescription
 msgid "Description"
@@ -1162,7 +1122,7 @@ msgstr "Opis"
 
 #: u_translation.rsdesignation
 msgid "Designation"
-msgstr "Označba"
+msgstr ""
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
@@ -1178,7 +1138,7 @@ msgstr "Vrata naprave"
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr "Diam."
+msgstr ""
 
 #: u_translation.rsdiameter
 msgid "Diameter"
@@ -1210,7 +1170,7 @@ msgstr "Imenik ni najden %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr "Mape ni mogoče najti! Prosim namestite SkyChart Picture paket."
+msgstr ""
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1290,15 +1250,11 @@ msgstr "Prenesi podrobnosti države"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr "Prenesite datoteko"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
 msgstr "Prenesi zadnje poti satelita"
-
-#: u_translation.rsdownloadtle
-msgid "Download TLE"
-msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1322,11 +1278,11 @@ msgstr "Prikaži planet kot"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Izriši navidezno oslabljeno vodoravno črto"
+msgstr ""
 
 #: u_translation.rsdrivername
 msgid "Driver name"
-msgstr "Ime gonilnika"
+msgstr ""
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
@@ -1334,11 +1290,11 @@ msgstr "Briši podatkovno zbirko"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
-msgstr "DSS RealSky"
+msgstr ""
 
 #: u_translation.rsdtut
 msgid "DT - UT: "
-msgstr "DT - UT: "
+msgstr ""
 
 #: u_translation.rsduration
 msgid "Duration"
@@ -1358,7 +1314,7 @@ msgstr "Vzhod"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "Ekscentričnost"
+msgstr ""
 
 #: u_translation.rseclipse
 msgid "Eclipse"
@@ -1390,7 +1346,7 @@ msgstr "Uredi oznako"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr "Uredi vrstično operacijo"
+msgstr ""
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
@@ -1402,11 +1358,11 @@ msgstr "Uredi enote mere"
 
 #: u_translation.rselong
 msgid "Elong."
-msgstr "Elong."
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Izžareča meglica"
+msgstr ""
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1416,13 +1372,9 @@ msgstr "Konec predmeta"
 msgid "End of processing: %s asteroids"
 msgstr "Konec obdelave: %s asteroidi"
 
-#: u_translation.rsephemeris
-msgid "Ephemeris"
-msgstr ""
-
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr "Astronomski koledar"
+msgstr ""
 
 #: u_translation.rsepoch
 msgid "Epoch"
@@ -1430,15 +1382,15 @@ msgstr "Doba"
 
 #: u_translation.rsepochjd
 msgid "Epoch (JD)"
-msgstr "Doba (JD)"
+msgstr ""
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "Maksimalna doba"
+msgstr ""
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr "Ek. mreža"
+msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -1454,15 +1406,15 @@ msgstr "Ekvatorska koor."
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr "Ekvatorialni priključek"
+msgstr ""
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "Enakonočje:"
+msgstr ""
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Enakonočje"
+msgstr ""
 
 #: u_translation.rserror
 msgid "Error"
@@ -1530,7 +1482,7 @@ msgstr "Zunanji predmet kataloga"
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
-msgstr "Okular"
+msgstr ""
 
 #: u_translation.rsfailed
 msgid "Failed: %s"
@@ -1547,14 +1499,6 @@ msgstr "Velikost šibkoski zvezde"
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "Pogosto zastavljena vprašanja"
-
-#: u_translation.rsfavorite
-msgid "Favorite"
-msgstr ""
-
-#: u_translation.rsffmpegprogra
-msgid "ffmpeg program path"
-msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1602,7 +1546,7 @@ msgstr "Zapolni z barvo obzorja"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr "Filter ->"
+msgstr ""
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
@@ -1618,11 +1562,11 @@ msgstr "Najdi"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr "Iskalni krog (okolar)"
+msgstr ""
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Iskalni pravokotnik (CCD)"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -1646,10 +1590,6 @@ msgstr "Stalna barva neba"
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed number"
-msgstr "Flamsteedovo število"
-
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
 msgstr ""
 
 #: u_translation.rsfonts
@@ -1658,39 +1598,23 @@ msgstr "Pisave"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Za velik katalog, vedno izberi Binary. Za male podatkovne nize, ki se pogosto spreminjajo, izberi Text. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
-
-#: u_translation.rsforcurrentch
-msgid "For current chart only"
 msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "FOV"
+msgstr ""
 
 #: u_translation.rsfov2
 msgid "FOV:"
-msgstr "FOV:"
+msgstr ""
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "fov število:"
 
-#: u_translation.rsframespersec
-msgid "Frames per second"
-msgstr ""
-
-#: u_translation.rsframessize
-msgid "Frames size"
-msgstr ""
-
-#: u_translation.rsfreesize
-msgid "Free size"
-msgstr ""
-
 #: u_translation.rsfriday
 msgid "Fri."
-msgstr "Fri."
+msgstr ""
 
 #: u_translation.rsfrom
 msgid "From"
@@ -1698,11 +1622,11 @@ msgstr "Od"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP "
+msgstr ""
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "FTP pasivni način"
+msgstr ""
 
 #: u_translation.rsfullname
 msgid "Full name"
@@ -1714,7 +1638,7 @@ msgstr "Celozaslonski način"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
-msgstr "Rimski"
+msgstr ""
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
@@ -1722,7 +1646,7 @@ msgstr "Rimska koordinata"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
-msgstr "Rimska koord."
+msgstr ""
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
@@ -1744,7 +1668,7 @@ msgstr "Kopica galaksij"
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr "Gamma"
+msgstr ""
 
 #: u_translation.rsgeneral
 msgid "General"
@@ -1782,10 +1706,6 @@ msgstr "Kroglaste kopice"
 msgid "Graphic"
 msgstr "Slikovit"
 
-#: u_translation.rsgraphs
-msgid "Graphs"
-msgstr ""
-
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
 msgstr "Privlačnostna leča"
@@ -1812,19 +1732,19 @@ msgstr "Razmik mreže"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "GRS prehod"
+msgstr ""
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
-msgstr "Parameter G nagiba"
+msgstr ""
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
-msgstr "Absolutna H magnituda"
+msgstr ""
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr "Polmasivni polmer"
+msgstr ""
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
@@ -1832,7 +1752,7 @@ msgstr "Zaustavi po 1000 napakah"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr "H-Beta magnituda"
+msgstr ""
 
 #: u_translation.rsheight
 msgid "Height"
@@ -1876,15 +1796,11 @@ msgstr "Ura"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr "Urni kot"
+msgstr ""
 
 #: u_translation.rshourgridspac
 msgid "Right ascension grid"
 msgstr "Razmik urne mreže"
-
-#: u_translation.rshours
-msgid "hours"
-msgstr ""
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
@@ -1892,11 +1808,11 @@ msgstr "Ure, minute, sekunde"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
-msgstr "HTTP posredniški strežnik"
+msgstr ""
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr "Akcija klika ikone"
+msgstr ""
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -1906,17 +1822,13 @@ msgstr "Velikost ikone"
 msgid "Icon time display"
 msgstr "Prikaz časa ikone"
 
-#: u_translation.rsifitisnotins
-msgid "If it is not installed try the following depending on your system:"
-msgstr ""
-
 #: u_translation.rsillum
 msgid "Illum."
-msgstr "Illum."
+msgstr ""
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr "Osvetljen delec"
+msgstr ""
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
@@ -1933,14 +1845,6 @@ msgstr "Nagib"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Nagib="
-
-#: u_translation.rsincludedayti
-msgid "Include day time pass"
-msgstr ""
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -1960,19 +1864,19 @@ msgstr "Navedi, kako se naj zazna mera velikosti predmeta:"
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Določi določilni niz za vsak tip predmeta:"
+msgstr ""
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Določi določilni niz za vsako izrisalno opravilo"
+msgstr ""
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "Določi niz za vsako barvo "
+msgstr " "
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr "INDI gonilnik"
+msgstr ""
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
@@ -2000,11 +1904,11 @@ msgstr "Podrobnosti informacije"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr "Inicializiraj podatkovno zbirko"
+msgstr ""
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Vhodne datoteke kataloga"
+msgstr ""
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
@@ -2018,21 +1922,17 @@ msgstr "Vstavi zavrnitev! %s"
 msgid "Internet"
 msgstr "Medmrežje"
 
-#: u_translation.rsinternetloca
-msgid "Internet localization"
-msgstr ""
-
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
-msgstr "neveljaven doba v vrstici%s: %s"
+msgstr ""
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
-msgstr "Neveljavna FITS datoteka: %s"
+msgstr ""
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "Neveljavna pot: "
+msgstr ""
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
@@ -2040,15 +1940,15 @@ msgstr "Nevidno pri tej zemljepisni širini."
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr "Je koordinatna epoha resnično %s?"
+msgstr ""
 
 #: u_translation.rsjd
 msgid "JD:"
-msgstr "JD:"
+msgstr ""
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr "JD"
+msgstr ""
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
@@ -2076,11 +1976,11 @@ msgstr "km"
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr "Vozel"
+msgstr ""
 
 #: u_translation.rsl
 msgid "L"
-msgstr "L"
+msgstr ""
 
 #: u_translation.rslabel
 msgid "Label:"
@@ -2104,7 +2004,7 @@ msgstr "Oznaka besedila"
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "Pokrajina"
+msgstr ""
 
 #: u_translation.rslanguage
 msgid "Internal language"
@@ -2172,7 +2072,7 @@ msgstr "svetlobna leta"
 
 #: u_translation.rslii
 msgid "LII"
-msgstr "LII"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2200,7 +2100,7 @@ msgstr "Prikaži črtni način"
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr "Opravilna vrstica"
+msgstr ""
 
 #: u_translation.rslines
 msgid "Lines"
@@ -2224,7 +2124,7 @@ msgstr "Poslušaj na vratih: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "Seznam veljavnih plošč"
+msgstr ""
 
 #: u_translation.rsload
 msgid "Load"
@@ -2262,10 +2162,6 @@ msgstr "Ime datoteke lokalnega obzorja :"
 msgid "Local sidereal time"
 msgstr "Lokalni zvezdni čas"
 
-#: u_translation.rslocationcode
-msgid "Location code"
-msgstr ""
-
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Okleni se %s"
@@ -2280,11 +2176,11 @@ msgstr "Zemljepisna dolžina"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr "Naraščujoče sečišče zemljepisne dolžine"
+msgstr ""
 
 #: u_translation.rslosange
 msgid "Lozenge"
-msgstr "Romb"
+msgstr ""
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -2300,11 +2196,11 @@ msgstr "Lunini mrki"
 
 #: u_translation.rsmag
 msgid "Mag:"
-msgstr "Mag:"
+msgstr ""
 
 #: u_translation.rsmagn
 msgid "Magn."
-msgstr "Magn."
+msgstr ""
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
@@ -2312,27 +2208,27 @@ msgstr "Magnituda"
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Maksimalna magnituda"
+msgstr ""
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr "Minimalna magnituda"
+msgstr ""
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
-msgstr "Trak magnitude"
+msgstr ""
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Razlika magnitude"
+msgstr ""
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr "Ekliptična magnituda"
+msgstr ""
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr "Napaka magnitude"
+msgstr ""
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
@@ -2340,11 +2236,11 @@ msgstr "magnitude šibkejše kot zvezde."
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr "Magnitude Tycho BT"
+msgstr ""
 
 #: u_translation.rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr "Magnitude Tycho VT"
+msgstr ""
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
@@ -2396,39 +2292,39 @@ msgstr "M bytov"
 
 #: u_translation.rsmean
 msgid "Mean"
-msgstr "Sredina"
+msgstr ""
 
 #: u_translation.rsmeananomaly
 msgid "Mean anomaly"
-msgstr "Središčna nepravilnost"
+msgstr ""
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "središčni ekvator, enakonočje in doba dneva"
+msgstr ""
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr "središče enakonočja in doba J2000"
+msgstr ""
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "središče enakonočja J2000, doba dneva"
+msgstr ""
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
-msgstr "Središče J2000"
+msgstr ""
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr "Krajevno središče"
+msgstr ""
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr "Središče dneva"
+msgstr ""
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
-msgstr "Položaj središča"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -2452,11 +2348,11 @@ msgstr "'"
 
 #: u_translation.rsmin2
 msgid "min"
-msgstr "min"
+msgstr ""
 
 #: u_translation.rsmin3
 msgid "Min."
-msgstr "Min."
+msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -2528,15 +2424,15 @@ msgstr "Premakni oznako"
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
-msgstr "MPC FTP"
+msgstr ""
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
-msgstr "MPC HTTP"
+msgstr ""
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr "Večkratna zastava"
+msgstr ""
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
@@ -2544,7 +2440,7 @@ msgstr "Večkratna zvezda"
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr "MySQL podatkovna zbirka"
+msgstr ""
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -2616,7 +2512,7 @@ msgstr "Naprej >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr "Naslednja karta"
+msgstr ""
 
 #: u_translation.rsnightvision
 msgid "Night vision"
@@ -2637,14 +2533,6 @@ msgstr "Št."
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "Ne najdem podatkov o asteroidu!%sProsim najprej naložte MPC datoteko."
-
-#: u_translation.rsnoastronomic
-msgid "No astronomical twilight today!"
-msgstr "Danes ni astronomskega somraka!"
-
-#: u_translation.rsnochange
-msgid "No change"
-msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -2676,7 +2564,7 @@ msgstr "Ne najdem tiskalnika!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr "(nepopravljen za pravilni premik, podatki ne vsebujejo pm podatka za ta katalog)"
+msgstr ""
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -2688,7 +2576,7 @@ msgstr "Sever"
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "Ni FITS datoteka, SIMPLE = T tipka manjka"
+msgstr ""
 
 #: u_translation.rsnotavailable
 msgid "Not available"
@@ -2712,7 +2600,7 @@ msgstr "%s Ne najdem v nobenem namaščenem indeksnem katalogu."
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s Ni mogoče najti!%sMogoče katalog ni nameščen ali pa je napačna pot v nastavitvah kataloga."
+msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
@@ -2740,7 +2628,7 @@ msgstr "Število korakov"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr "Nihanje zemeljske osi, korona okrog sonca"
+msgstr ""
 
 #: u_translation.rsobject
 msgid "Object"
@@ -2772,7 +2660,7 @@ msgstr "Ime predmeta"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Položaj predmeta najden v indeksu, vendar podrobnosti ni najti v enem izmed aktivnih katalogov."
+msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -2800,7 +2688,7 @@ msgstr "Zastarel"
 
 #: u_translation.rsoffset
 msgid "Offset"
-msgstr "Odtis"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -2816,11 +2704,11 @@ msgstr "Eden od dveh"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
-msgstr "V živo DSS"
+msgstr ""
 
 #: u_translation.rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "V živo DSS slike"
+msgstr ""
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
@@ -2860,11 +2748,11 @@ msgstr "Možnosti"
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "Orbita"
+msgstr ""
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr "Orbitalni predmeti"
+msgstr ""
 
 #: u_translation.rsorientation
 msgid "Orientation"
@@ -2888,23 +2776,23 @@ msgstr "Nastavitve programa"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Podatki drugega programja"
+msgstr ""
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "Tip izhoda kataloga"
+msgstr ""
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Možnost izhoda kataloga"
+msgstr ""
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr "Izhodna mapa"
+msgstr ""
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
-msgstr "Rob strani v milimetrih"
+msgstr ""
 
 #: u_translation.rsparallax
 msgid "Parallax"
@@ -2924,7 +2812,7 @@ msgstr "Geslo"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr "Pastel"
+msgstr ""
 
 #: u_translation.rspath
 msgid "Path"
@@ -2940,19 +2828,19 @@ msgstr "Širina poti"
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
-msgstr "Penumbra"
+msgstr ""
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "Datum prisončja"
+msgstr ""
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Razdalja prisončja"
+msgstr ""
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr "Obdobje"
+msgstr ""
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
@@ -2964,7 +2852,7 @@ msgstr "Mena"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr "Fotografijska plošča"
+msgstr ""
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -2976,7 +2864,7 @@ msgstr "Slike"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "piksli"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3006,11 +2894,11 @@ msgstr "Nastavitve planetov"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr "Napaka plošče"
+msgstr ""
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "Plošča id.   Pot. datum   Rob   CD  Opazovalnica"
+msgstr ""
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
@@ -3022,15 +2910,15 @@ msgstr "Prosim najprej nastavite vašo DSS pot datoteke."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "Prosim nastavitve URL elementa orbite!"
+msgstr ""
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr "Prosim potrdite, da je teleskop obrjen proti %s"
+msgstr ""
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Prosim vnesite enolično oznako predmeta."
+msgstr ""
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
@@ -3044,17 +2932,9 @@ msgstr "Prosim navedi dolgo ime kataloga"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Prosim navedi imenik, kjer se naj ustvari katalog"
 
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
-
-#: u_translation.rspleaseinstwine
-msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
-
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr "Prosim pridružite RealSky CD številko"
+msgstr ""
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -3082,11 +2962,11 @@ msgstr "Pluton je planet."
 
 #: u_translation.rspm
 msgid "pm"
-msgstr "pm"
+msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "Nagnjenost tečaja"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"
@@ -3094,7 +2974,7 @@ msgstr "Vrata:"
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "Ležeče"
+msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
@@ -3102,19 +2982,19 @@ msgstr "Položaj"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr "Kot položaja"
+msgstr ""
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr "Položaj dobe"
+msgstr ""
 
 #: u_translation.rspostscript
 msgid "PostScript"
-msgstr "PostScript"
+msgstr ""
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr "Dodajte pripono kratkega imena kataloga"
+msgstr ""
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
@@ -3150,7 +3030,7 @@ msgstr "Natisni karto"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr "Natisnjen znak"
+msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3190,7 +3070,7 @@ msgstr "Obdelava končana. Skupno število mest: %s"
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
-msgstr "Obdelujem vrstico %s"
+msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
@@ -3222,11 +3102,11 @@ msgstr "Nastavitve projekcije"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Pravilni premik  je desni dvig"
+msgstr ""
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "Pravilni premik je spuščanje"
+msgstr ""
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
@@ -3242,19 +3122,15 @@ msgstr "Sorazmeren z magnitudo"
 
 #: u_translation.rsproxy
 msgid "Proxy"
-msgstr "Posredniški strežnik"
+msgstr ""
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Gostitelj posredniškega strežnika"
+msgstr ""
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Vrata posredniškega strežnika"
-
-#: u_translation.rsputthefilesw
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Dajte datoteke s tle pipono v %s mapo"
+msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3278,11 +3154,11 @@ msgstr "Hitri vodič"
 
 #: u_translation.rsra
 msgid "RA"
-msgstr "RA"
+msgstr ""
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr "Polkrožna hitrost"
+msgstr ""
 
 #: u_translation.rsrange
 msgid "Range"
@@ -3290,19 +3166,19 @@ msgstr "Območje"
 
 #: u_translation.rsraoptions
 msgid "RA options"
-msgstr "RA možnosti"
+msgstr ""
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr "Raster resolucija"
+msgstr ""
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA obrati: "
+msgstr ""
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA obrati:"
+msgstr ""
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -3316,33 +3192,9 @@ msgstr "RealSky sever"
 msgid "RealSky South"
 msgstr "RealSky jug"
 
-#: u_translation.rsrealtimeopti
-msgid "Real time options"
-msgstr ""
-
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Iz datoteke prepoznaj enote ali tip predmeta:"
-
-#: u_translation.rsrecordanimat
-msgid "Record animation to file"
-msgstr ""
-
-#: u_translation.rsrecordingdir
-msgid "Recording directory"
-msgstr ""
-
-#: u_translation.rsrecordingext
-msgid "Recording extension"
-msgstr ""
-
-#: u_translation.rsrecordingopt
-msgid "Recording options"
-msgstr ""
-
-#: u_translation.rsrecordingpre
-msgid "Recording prefix"
-msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
@@ -3370,15 +3222,11 @@ msgstr "Sklic"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Odbojna meglica"
+msgstr ""
 
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Osveži"
-
-#: u_translation.rsrefreshimage
-msgid "Refresh image every"
-msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3436,14 +3284,6 @@ msgstr "Ponastavi karto"
 msgid "Reset chart and options"
 msgstr "Ponastavi karto in možnosti"
 
-#: u_translation.rsresetinitial
-msgid "Reset initial default and restart"
-msgstr "Ponastavi privzeto in znova zaženi"
-
-#: u_translation.rsresettolastt
-msgid "Reset to last time the chart was saved"
-msgstr "Ponastavi na stanje karte ob zadnjem shranjevanju"
-
 #: u_translation.rsresolution
 msgid "Resolution:"
 msgstr "Ločljivost:"
@@ -3454,19 +3294,19 @@ msgstr "Vrni"
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "Povrni Alt gumb"
+msgstr ""
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "Povrni Az gumb"
+msgstr ""
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "Povrni DEC gumb"
+msgstr ""
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "Povrni Ra gumb"
+msgstr ""
 
 #: u_translation.rsright
 msgid "Right"
@@ -3474,7 +3314,7 @@ msgstr "Desno"
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "Desni vzpon"
+msgstr ""
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
@@ -3502,23 +3342,19 @@ msgstr "Vrtenje"
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr "Saros"
+msgstr ""
 
 #: u_translation.rssatellite
 msgid "Satellite"
 msgstr "Satelit"
 
-#: u_translation.rssatellitesca
-msgid "Satellites calculation:"
-msgstr ""
-
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr "Sat. krog"
+msgstr ""
 
 #: u_translation.rssaturday
 msgid "Sat."
-msgstr "Sat."
+msgstr ""
 
 #: u_translation.rssaturn
 msgid "Saturn"
@@ -3570,7 +3406,7 @@ msgstr "Drsnik"
 
 #: u_translation.rssday
 msgid "D"
-msgstr "D"
+msgstr ""
 
 #: u_translation.rssearch
 msgid "Search"
@@ -3582,7 +3418,7 @@ msgstr "Išči po"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr "Iskalni indeks"
+msgstr ""
 
 #: u_translation.rssec
 msgid "s"
@@ -3606,7 +3442,7 @@ msgstr "Izberi vse"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "Izberi plošlo iz seznama"
+msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -3626,11 +3462,11 @@ msgstr "Izberi tip predmeta v tvojem katalogu"
 
 #: u_translation.rssemi
 msgid "Semi"
-msgstr "Pol"
+msgstr ""
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "Polovico velika os"
+msgstr ""
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
@@ -3678,7 +3514,7 @@ msgstr "Nastavi FOV na"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Nastavi kako se premika držalo za vsako os, ko zavrtiš vozeči gumb. Klik na 'Poveži teleskop' gumb bo pokazal, koliko obratom moraš narediti, da se prikaže drug predmet."
+msgstr ""
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -3690,7 +3526,7 @@ msgstr "Nastavitve"
 
 #: u_translation.rsshour
 msgid "H"
-msgstr "H"
+msgstr ""
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
@@ -3758,7 +3594,7 @@ msgstr "Prikaži/Skrij DSS sliko"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
-msgstr "Prikaži IR spremenljivke"
+msgstr ""
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
@@ -3806,7 +3642,7 @@ msgstr "Prikaži planete"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr "Prikaži položaj v naslovni vrstici"
+msgstr ""
 
 #: u_translation.rsshowstars
 msgid "Show stars"
@@ -3818,11 +3654,11 @@ msgstr "Prikaži to sliko"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Zvezden"
+msgstr ""
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr "Zvezdni dan"
+msgstr ""
 
 #: u_translation.rssimulation
 msgid "Simulation"
@@ -3862,7 +3698,7 @@ msgstr "Male zvezde"
 
 #: u_translation.rssminute
 msgid "M"
-msgstr "M"
+msgstr ""
 
 #: u_translation.rssmonth
 msgid "M."
@@ -3870,7 +3706,7 @@ msgstr "M"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr "Napaka vtiča %s. %s"
+msgstr ""
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
@@ -3882,7 +3718,7 @@ msgstr "Sončni mrk"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr "Sončni podaljšek"
+msgstr ""
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
@@ -3904,13 +3740,9 @@ msgstr "Nekaz zapisov je bilo zvarjenih, za podrobnosti glej datoteko %sreject.t
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Nekaj je šlo narobe pri zagonu programa. Zapiram program."
 
-#: u_translation.rssorrycopyisn
-msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
-
-#: u_translation.rssortby
-msgid "Sort by"
-msgstr "Razvrsti"
+#: u_translation.rssortbyra
+msgid "Sort by RA"
+msgstr "Razvrsti po RA"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -3926,11 +3758,11 @@ msgstr "Jug"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
-msgstr "Spektralni razred"
+msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"
-msgstr "Zatič"
+msgstr ""
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
@@ -3950,7 +3782,7 @@ msgstr "Kvadrat"
 
 #: u_translation.rsssecond
 msgid "S"
-msgstr "S"
+msgstr ""
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
@@ -3986,7 +3818,7 @@ msgstr "Katalogi zvezde in globokega vesolja pripravljeno z"
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr "Slikovna datoteka zvezd"
+msgstr ""
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
@@ -4022,14 +3854,10 @@ msgstr "Sonce"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr "Sončni alt."
+msgstr ""
 
 #: u_translation.rssunday
 msgid "Sun."
-msgstr "Sun."
-
-#: u_translation.rssunimagesour
-msgid "Sun image source"
 msgstr ""
 
 #: u_translation.rssuninclinati
@@ -4062,7 +3890,7 @@ msgstr "Uskladi"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
-msgstr "Sinodalni mesec"
+msgstr ""
 
 #: u_translation.rssystem
 msgid "System"
@@ -4110,7 +3938,7 @@ msgstr "Teleskop ni priključen"
 
 #: u_translation.rstelescopeplu
 msgid "Telescope plugin "
-msgstr "Vstavek teleskopa "
+msgstr ""
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
@@ -4154,7 +3982,7 @@ msgstr "V tem polju je %s predmetov."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Opravilo prepiče celotno vsebino podatkovne zbirke za državo %s, s svežimi podatko od NGA in GNIS. %sVsa urejanja za državo bodo izgubljena, samo lokacije. Ohranjene bodo samo lokacije, ki ste jih dodali z novim imeno. %sHočete nadaljevati?"
+msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4166,7 +3994,7 @@ msgstr "Ta program je svoboden program. Lahko ga podelite drugim in/ali ga sprem
 
 #: u_translation.rsthursday
 msgid "Thu."
-msgstr "Thu."
+msgstr ""
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
@@ -4202,11 +4030,7 @@ msgstr "Danes"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr "v datoteko:"
-
-#: u_translation.rstonight
-msgid "Tonight"
-msgstr "Drevi"
+msgstr ""
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4230,7 +4054,7 @@ msgstr "Skupno"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr "Celoten polmer"
+msgstr ""
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
@@ -4254,35 +4078,35 @@ msgstr "Trozvezdje"
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr "Tropsko leto"
+msgstr ""
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "resničen ekvator, enakonočje in dnevna doba"
+msgstr ""
 
 #: u_translation.rstrueposition
 msgid "True position"
-msgstr "Resnični položaj"
+msgstr ""
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr "Resnično sončen"
+msgstr ""
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr "Trumplerjev razred"
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
-msgstr "Tue."
+msgstr ""
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "obrati / stopinjo"
+msgstr ""
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "obrati / uro"
+msgstr ""
 
 #: u_translation.rstwilight
 msgid "Twilight"
@@ -4306,11 +4130,11 @@ msgstr "Tip predmeta vključen na seznam"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
-msgstr "Tip spremenljivosti"
+msgstr ""
 
 #: u_translation.rsumbra
 msgid "Umbra"
-msgstr "Senca"
+msgstr ""
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
@@ -4362,7 +4186,7 @@ msgstr "Uran"
 
 #: u_translation.rsurl
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
@@ -4378,7 +4202,7 @@ msgstr "Uporabi prednastavljen barvni seznam"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(koristno za predstavo plime)"
+msgstr ""
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
@@ -4386,10 +4210,6 @@ msgstr "Uporabi HTTP Proxy"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
-msgstr "Uporabi živi DSS namesto RealSky"
-
-#: u_translation.rsuseonlinesun
-msgid "Use online Sun image from SDO or SOHO"
 msgstr ""
 
 #: u_translation.rsuseonlycatal
@@ -4398,7 +4218,7 @@ msgstr "Izberi samo kataloge iz iste skupine"
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Uporabniško ime:"
+msgstr ""
 
 #: u_translation.rsusername
 msgid "User name"
@@ -4406,7 +4226,7 @@ msgstr "Uporabniško ime"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "Uporabi podvzorčenje za omejitev velikosti slike na"
+msgstr ""
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
@@ -4418,15 +4238,15 @@ msgstr "Uporabni TCP/IP strežnik"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr "Uporabi meni ali gumb \"%s\" za nastavitev tega gonilnika."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Uporabi pravilen premik za popravek položaja za določeno dobo"
+msgstr ""
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr "Uporabi to bolje kot drugo možnost imena"
+msgstr ""
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
@@ -4438,7 +4258,7 @@ msgstr "Uporabljam obstoječo datkoteko %s"
 
 #: u_translation.rsut
 msgid "UT"
-msgstr "UT"
+msgstr ""
 
 #: u_translation.rsvariables
 msgid "Variables"
@@ -4451,10 +4271,6 @@ msgstr "Spremenljiva zvezda"
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
 msgstr "Spremenljive zvezde"
-
-#: u_translation.rsvelocity
-msgid "Velocity"
-msgstr "Hitrost"
 
 #: u_translation.rsvenus
 msgid "Venus"
@@ -4486,7 +4302,7 @@ msgstr "Ali hočeš spremljati predmet pred vzhodom?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr "Opozorilo!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -4494,19 +4310,19 @@ msgstr "Opozorilo! Preračun "
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Opozorilo! Nekateri elementi asteroida so starejši od treh let. Poskušajte najti veljaven element za tekoči datum karte."
+msgstr ""
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Opozorilo! Nekateri kometi asteroida so starejši od treh let. Poskušajte najti veljaven element za tekoči datum karte."
+msgstr ""
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Opozorilo! Uporabljen datum ali položaj opazovalnice sta bila spremenjena od prejšnjih nastavitev. Sedaj lahko odgovorite z Ne in uporabite %s gumb za vrnitev na vaš prvoten datum/čas in položaj opazovalnice, sicer bodo spremembe uporabljene. Hočete nadaljevati?"
+msgstr ""
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Opozorilo!%sUničili boste podatkovno zbirko %s in celotno njeno vsebino, kljub temu da ta vsebina ni v povezavi s tem programom. %sSte prepričani, da želite nadaljevati?"
+msgstr ""
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
@@ -4514,11 +4330,11 @@ msgstr "Opozorilo! Uporabljaš več katalogov za isti predmet. Bodi prepričan, 
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "Opozorilož!%sIzbrali ste dodajanje podatkov obstoječemu katalogu.%sTa obstoječi katalog in indeks morata biti natanko enake oblike, sicer bo katalog pokvarjen.%sDobra ideja je, da naredite arhiv dejanskih datotek precen nadaljujete s tem opravilom. %sŽelite nadaljevati?"
+msgstr ""
 
 #: u_translation.rswednesday
 msgid "Wed."
-msgstr "Wed."
+msgstr ""
 
 #: u_translation.rswest
 msgid "West"
@@ -4562,7 +4378,7 @@ msgstr "Sedaj si pripravljen na prikaz asteroida za dano časovno obdobje."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Če opazuješ iz višje gore, je črta obzorja nižje kot na višini morja."
+msgstr " Če opazuješ iz višje gore, je črta obzorja nižje kot na višini morja."
 
 #: u_translation.rszenith
 msgid "Zenith"

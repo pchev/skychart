@@ -61,7 +61,7 @@ PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skycha
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
 function ecliptic(j:double):double;
-procedure nutationme(j:double; var nutl,nuto:double);
+procedure nutation(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
@@ -79,7 +79,7 @@ Procedure RiseSet(typobj:integer; jd0,ar,de:double; var hr,ht,hs,azr,azs:double;
             irc = 2 invisible
           *)
 
-Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongitude: double );
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Tconf_skychart );
           (*
              Heure a laquel un astre est a un hauteur donnee sur l'horizon .
              jd       :  date julienne desiree a 0H TU
@@ -816,10 +816,9 @@ result:=eps2000 +(
 result:=deg2rad*result;
 end;
 
-procedure nutationme(j:double; var nutl,nuto:double);
+procedure nutation(j:double; var nutl,nuto:double);
 var t,om,me,mas,mam,al : double;
 begin
-// use this function only if cu_planet.nutation cannot get nutation from JPL ephemeris
 t:=(j-jd2000)/36525;
 // high precision. using meeus91 table 21.A
 //longitude of the asc.node of the Moon's mean orbit on the ecliptic
@@ -1213,13 +1212,13 @@ end else begin
 end;
 end;}
 
-Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongitude: double);
+Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; c: Tconf_skychart );
 VAR hh,st,st0 : Double ;
 BEGIN
-hh := (sin(deg2rad*h)-sin(deg2rad*ObsLatitude)*sin(de))/(cos(deg2rad*ObsLatitude)*cos(de)) ;
+hh := (sin(deg2rad*h)-sin(deg2rad*c.ObsLatitude)*sin(de))/(cos(deg2rad*c.ObsLatitude)*cos(de)) ;
 if abs(hh)<=1 then begin
      hh := double(arccos(hh)) ;
-     st0 := rad2deg*sidtim(jd,0.0,ObsLongitude)/15 ;
+     st0 := rad2deg*sidtim(jd,0.0,c.ObsLongitude)/15 ;
      st := rad2deg*(ar-hh)/15 ;
      hp1 := rmod((st-st0)/1.002737908+24,24) ;
      st := rad2deg*(ar+hh)/15 ;

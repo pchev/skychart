@@ -1,24 +1,27 @@
-Version 3.3svn release Notes
+Version 3.2 Release Notes
 
-- Observatory favorite list, new observatory database window.
-- Internet localization of your location.
-- Display an online image of the Sun from SDO or SOHO.
-- New Animation and movie recording function. See documentation for ffmpeg program installation.
-- Planet computation use JPL ephemeris.
-- Add Planet graph in calendar, contributed by John Sunderland.
-- Add artificials satellites to the calendar. Click in a line to display the satellite pass on the map. You need to install Wine on Linux and Mac.
-- Add solar system objects velocity information.
-- Copy current coordinates from right click menu.
-- Double click and objet directl open the detail window.
-- Ctrl + mouse over an object show information in status bar.
-- Fill below horizon area with horizon color (not on Linux)
-- No confirmation to save on exit if this is selected in the menu.
-- Locked object setting is now saved with the configuration, beware you can get a "below the horizon" the next time you launch the program.
-- Option to reset initial program default.
-- Add "tonight" button in time setting, it set the time to evening astronomical twilight.
-- Better rendering of filled local horizon line for large altitude change.
-- Fix dotted line display.
-- Change "Object list" presentation.
-- Save "Object list" file with comma separator if extention is .csv. Use another extention for the tab separator used previously.
-- Bug fix.
+This is the first stable version of the new version 3.
+
+If you just upgrade from the version 2.76 I suggest you take a few time to read the new documentation, localy using the menu Help content, or online from http://www.ap-i.net/skychart/en/documentation/start
+
+It include the following change since the previous beta version:
+
+Integrated ASCOM Interface, can be used on Windows x64. 
+Support for INDI 0.6
+More command line options to allow automation from simple script.
+Add Solar System symbols.
+Change default color and star setting.
+Allow to change bitmap stars image in photographic mode.
+Possibility to make DSO not filled in graphic mode.
+Add mode keyboard shortcut.
+Right click on many button to directly access the corresponding setup form.
+More DSS online server.
+Update SAC database to version 8.1.
+On Mac OS X the user setting directory change from ~/.skychart to ~/Library/Application Support/skychart
+Fix tcp/ip server on Mac OS X.
+Draw a small circle to indicate the search result.
+Many bug fix.
+
+The full change log is here:
+http://www.ap-i.net/mantis/changelog_page.php?project_id=1&version_id=14
 

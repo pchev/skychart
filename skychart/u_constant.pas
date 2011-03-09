@@ -35,12 +35,11 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[0..7]of Tcolor;
 
-const cdcversion = 'Version 3.3 svn';
-      cdcver     = '3.3c';
+const cdcversion = 'Version 3.2';
+      cdcver     = '3.2';
       cdccpy = 'Copyright (C) 2002-2010 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
-                   'Peter Dean,'+crlf+
-                   'John Sunderland';
+                   'Peter Dean,' ;
       MaxSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 10000;
@@ -62,9 +61,7 @@ const cdcversion = 'Version 3.3 svn';
       footpermeter = 0.3048;
       kmperdegree=111.1111;
       secday=3600*24;
-      eps2000 = 23.43928111111111111111; // 23d 26m 21.412s
-      sineps2k = 0.39777699580107953216;
-      coseps2k = 0.917482131494378454;
+      eps2000 = 23.439291111;
       deg2rad = pi/180;
       rad2deg = 180/pi;
       pi2 = 2*pi;
@@ -126,9 +123,6 @@ const cdcversion = 'Version 3.3 svn';
       D0jup : array [1..4] of double = (1821,1565,2634,2403);
       D0sat : array [1..8] of double = (199,249,530,560,764,2575,143,718);
       D0ura : array [1..5] of double = (236,581,585,789,761);
-      nJPL_DE=6;
-      JPL_DE:array [1..nJPL_DE] of integer = (423,421,405,406,403,200);  // JPL ephemeris to try, order by preference
-
       blank15='               ';
       blank=' ';
       tab=#09;
@@ -241,15 +235,11 @@ const cdcversion = 'Version 3.3 svn';
       // Location database source url
       baseurl_us = 'http://www.ap-i.net/pub/skychart/gn/stategaz/';
       baseurl_world = 'http://www.ap-i.net/pub/skychart/gn/cntyfile/';
-      location_url = 'http://ap-i.net/geoip/iploc.php';
 
       //Default URL
       URL_WebHome = 'http://www.ap-i.net/skychart';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
       URL_BugTracker = 'http://www.ap-i.net/mantis/';
-
-      URL_TLE = 'http://www.space-track.org';
-      URL_QUICKSAT = 'http://www.io.com/~mmccants/programs/index.html';
       
       URL_HTTPCometElements = 'http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_HTTPCometElements2 = 'http://www.minorplanetcenter.org/iau/MPCORB/CometEls.txt';
@@ -299,73 +289,7 @@ const cdcversion = 'Version 3.3 svn';
       URL_DSS18='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc1&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
       URL_DSS_NAME19='HST Phase2 (GSC2)';
       URL_DSS19='http://archive.stsci.edu/cgi-bin/dss_search?v=phase2_gsc2&r=$RAH%3A$RAM%3A$RAS&d=$DED%3A$DEM%3A$DES&e=J2000&h=$XSZ&w=$YSZ&f=fits&c=none&fov=NONE&v3=';
-      URL_SUN_NUMBER=16;
-      URL_SUN_NAME: array[1..URL_SUN_NUMBER] of string=('SDO AIA 4500',
-                    'SDO AIA 304',
-                    'SDO AIA 193',
-                    'SDO AIA 171',
-                    'SDO AIA 211',
-                    'SDO AIA 131',
-                    'SDO AIA 335',
-                    'SDO AIA 094',
-                    'SDO AIA 1600',
-                    'SDO AIA 1700',
-                    'SOHO EIT 171',
-                    'SOHO EIT 195',
-                    'SOHO EIT 284',
-                    'SOHO EIT 304',
-                    'SOHO MDI Continuum',
-                    'SOHO MDI Magnetogram');
-      URL_SUN_SIZE: array[1..URL_SUN_NUMBER] of integer=(1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024,
-                    1024);
-      URL_SUN_MARGIN: array[1..URL_SUN_NUMBER] of integer=(107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    107,
-                    130,
-                    130,
-                    130,
-                    130,
-                    20,
-                    12);
-      URL_SUN: array[1..URL_SUN_NUMBER] of string=('http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_4500.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0193.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0171.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0211.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0131.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0335.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0094.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1600.jpg',
-                    'http://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_1700.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_171/1024/latest.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_195/1024/latest.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_284/1024/latest.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_igr/1024/latest.jpg',
-                    'http://sohowww.nascom.nasa.gov/data/realtime/mdi_mag/1024/latest.jpg');
 
-      DefaultffmpegOptions='-b 18000k -bt 10000k';
 {$ifdef linux}
       DefaultFontName='Helvetica';
       DefaultFontFixed='Courier';
@@ -380,7 +304,6 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='/mnt/cdrom';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
-      Defaultffmpeg='ffmpeg';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
@@ -396,7 +319,6 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='/Volumes';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
-      Defaultffmpeg='ffmpeg';
 {$endif}
 {$ifdef mswindows}
       DefaultFontName='Arial';
@@ -412,7 +334,6 @@ const cdcversion = 'Version 3.3 svn';
       Default_dssdrive='D:\';
       DefaultVarObs='varobs.exe';
       DefaultCdC='skychart.exe';
-      Defaultffmpeg='ffmpeg.exe';
       Win98DefaultBrowser='C:\Program Files\Internet Explorer\Iexplore.exe';
 {$endif}
 
@@ -428,7 +349,7 @@ type
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
      TLabelAlign = (laNone,laTop,laBottom,laLeft,laRight,laCenter,laTopLeft,laBottomLeft,laTopRight,laBottomRight);
-     Thorizonlist = array [0..361] of single;
+     Thorizonlist = array [0..360] of single;
      Phorizonlist = ^Thorizonlist;
 
      Tobjlabel = record
@@ -526,17 +447,17 @@ type
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
                 SimNb,SimD,SimH,SimM,SimS,SimLabel : Integer;
                 SimObject: array[1..NumSimObject] of boolean;
-                SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet,ShowArtSat,NewArtSat : Boolean;
+                SimLine,SimDateLabel,SimNameLabel,SimMagLabel,ShowPlanet,PlanetParalaxe,ShowEarthShadow,ShowAsteroid,ShowComet : Boolean;
                 SimDateYear,SimDateMonth,SimDateDay,SimDateHour,SimDateMinute,SimDateSecond: Boolean;
                 ObsLatitude,ObsLongitude,ObsAltitude : double; ObsTZ: string;
                 ObsTemperature,ObsPressure,ObsRefractionCor,ObsHorizonDepression : Double;
-                ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos,sunurlname,sunurl : string;
-                CurYear,CurMonth,CurDay,DrawPMyear,sunurlsize,sunurlmargin,sunrefreshtime : integer;
+                ObsName,ObsCountry,chartname,ast_day,ast_daypos,com_day,com_daypos : string;
+                CurYear,CurMonth,CurDay,DrawPMyear : integer;
                 ShowPluto, ShowConstl,ShowConstB,ShowEqGrid,ShowGrid,ShowGridNum,UseSystemTime,countrytz : boolean;
                 StyleGrid,StyleEqGrid,StyleConstL,StyleConstB,StyleEcliptic,StyleGalEq:TFPPenStyle;
                 ShowEcliptic,ShowGalactic,ShowMilkyWay,FillMilkyWay,ShowHorizon,FillHorizon,ShowHorizonDepression : boolean;
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY,TelescopeJD: double;
-                PMon,DrawPMon,ApparentPos,CoordExpertMode,SunOnline : boolean;
+                PMon,DrawPMon,ApparentPos,CoordExpertMode : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
                 IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
@@ -547,12 +468,10 @@ type
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
-                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,FindX,FindY,FindZ,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
+                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
                 DrawAllStarLabel,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote : string;
-                IridiumRA,IridiumDE,IridiumMA: double;
-                IridiumName,IridiumDist: string;
                 PlanetLst : Tplanetlst;
                 AsteroidNb,CometNb,AsteroidLstSize,CometLstSize,NumCircle: integer;
                 AsteroidLst: Tasteroidlst;
@@ -624,10 +543,6 @@ type
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_chart);
                 end;
-     TObsDetail = class(Tobject)
-                country: string;
-                lat,lon: double;
-                end;
      Tconf_main = class(TObject)    // main form setting
                 public
                 prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
@@ -636,15 +551,14 @@ type
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
-                ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize: integer;
-                PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
+                ButtonStandard,ButtonNight: integer;
+                PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
-                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
-                ImageLuminosity, ImageContrast, AnimFps : double;
+                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd : string;
+                ImageLuminosity, ImageContrast : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
-                ObsNameList: TStringList;
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_main);
@@ -665,18 +579,7 @@ type
 
 type
   TPrepareAsteroid = function (jdt:double; msg:Tstrings):boolean of object;
-  TGetTwilight= procedure(jd0: double; out ht: double) of object;
-
-type
-     TPlanData = record
-         l : double ;
-         b : double ;
-         r : double ;
-         x : double ;
-         y : double ;
-         z : double ;
-     end;
-
+                  
 // external library
 const
 {$ifdef linux}
@@ -733,7 +636,7 @@ var gzopen : Tgzopen;
 }
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
+Var  Appdir, PrivateDir, SampleDir, TempDir, ZoneDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
      compile_time,compile_version, lclver : string;
@@ -746,9 +649,6 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
      LinuxDesktop: integer = 0;  // FreeDesktop=0, KDE=1, GNOME=2, Other=3
      crRetic: TCursor = 5;
      Params : TStringList;
-     de_folder: string;
-     de_type, de_year:integer;
-
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
 {$else}
@@ -769,8 +669,8 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
 
 // Text formating constant
 const
-     html_h        = '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body>';
-     html_h_nv     = '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030">';
+     html_h        = '<HTML><body bgcolor="#FFFFFF" text="#000000">';
+     html_h_nv     = '<HTML><body bgcolor="#000000" text="#C03030">';
      htms_h        = '</body></HTML>';
      html_ffx      = '<font face="fixed">';
      htms_f        = '</font>';
@@ -1228,12 +1128,6 @@ nutl:=Source.nutl ;
 nuto:=Source.nuto ;
 sunl:=Source.sunl ;
 sunb:=Source.sunb ;
-sunurlname:=Source.sunurlname;
-sunurl:=Source.sunurl;
-sunurlsize:=Source.sunurlsize;
-sunurlmargin:=Source.sunurlmargin;
-sunrefreshtime:=Source.sunrefreshtime;
-SunOnline:=Source.SunOnline;
 abe:=Source.abe ;
 abp:=Source.abp ;
 raprev:=Source.raprev ;
@@ -1275,13 +1169,6 @@ PlanetParalaxe:=Source.PlanetParalaxe ;
 ShowEarthShadow:=Source.ShowEarthShadow ;
 ShowAsteroid:=Source.ShowAsteroid ;
 ShowComet:=Source.ShowComet ;
-ShowArtSat:=Source.ShowArtSat;
-NewArtSat:=Source.NewArtSat;
-IridiumRA:=Source.IridiumRA;
-IridiumDE:=Source.IridiumDE;
-IridiumMA:=Source.IridiumMA;
-IridiumName:=Source.IridiumName;
-IridiumDist:=Source.IridiumDist;
 ObsLatitude:=Source.ObsLatitude;
 ObsLongitude:=Source.ObsLongitude ;
 ObsAltitude:=Source.ObsAltitude ;
@@ -1411,7 +1298,6 @@ jd0:=Source.jd0 ;
 JDChart:=Source.JDChart ;
 YPmon:=Source.YPmon;
 LastJDChart:=Source.LastJDChart ;
-FindJD:=Source.FindJD;
 CurSunH:=Source.CurSunH ;
 CurMoonH:=Source.CurMoonH ;
 CurMoonIllum:=Source.CurMoonIllum ;
@@ -1659,17 +1545,6 @@ saveheight:=Source.saveheight;
 savewidth:=Source.savewidth;
 ButtonStandard:=Source.ButtonStandard;
 ButtonNight:=Source.ButtonNight;
-AnimDelay:=Source.AnimDelay;
-AnimOpt:=Source.AnimOpt;
-Animffmpeg:=Source.Animffmpeg;
-AnimFps:=Source.AnimFps;
-AnimSx:=Source.AnimSx;
-AnimSy:=Source.AnimSy;
-AnimSize:=Source.AnimSize;
-AnimRecPrefix:=Source.AnimRecPrefix;
-AnimRecExt:=Source.AnimRecExt;
-AnimRecDir:=Source.AnimRecDir;
-AnimRec:=Source.AnimRec;
 PrintLandscape:=Source.PrintLandscape;
 ShowChartInfo:=Source.ShowChartInfo;
 ShowTitlePos:=Source.ShowTitlePos;
@@ -1703,9 +1578,6 @@ for i:=0 to Source.CometUrlList.Count-1 do CometUrlList.Add(Source.CometUrlList.
 if AsteroidUrlList=nil then AsteroidUrlList:=TStringList.Create;
 AsteroidUrlList.Clear;
 for i:=0 to Source.AsteroidUrlList.Count-1 do AsteroidUrlList.Add(Source.AsteroidUrlList.Strings[i]);
-if ObsNameList=nil then ObsNameList:=TStringList.Create;
-ObsNameList.Clear;
-for i:=0 to Source.ObsNameList.Count-1 do ObsNameList.AddObject(Source.ObsNameList.Strings[i],Source.ObsNameList.Objects[i]);
 end;
 
 { Tconf_dss }

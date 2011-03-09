@@ -80,10 +80,6 @@ msgstr "Afegir un element a la base de dades. Tots els camps són necessaris."
 msgid "Add equatorial grid"
 msgstr "Afegeix la graella equatorial"
 
-#: u_translation.rsadditionalff
-msgid "Additional ffmpeg options"
-msgstr ""
-
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Afegeix etiqueta"
@@ -160,17 +156,9 @@ msgstr "Altura"
 msgid "%sAlt turns:"
 msgstr "%svoltes Alt:"
 
-#: u_translation.rsalwayssavewi
-msgid "Always save without asking."
-msgstr ""
-
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
 msgstr "Rosa dels vents sempre visible"
-
-#: u_translation.rsanimation
-msgid "Animation"
-msgstr ""
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -207,10 +195,6 @@ msgstr "Argument del periheli"
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Satèl·lits artificials"
-
-#: u_translation.rsartificialsa2
-msgid "Artificial satellite"
-msgstr ""
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
@@ -332,10 +316,6 @@ msgstr "Comença el procés per jd=%s / %s"
 msgid "Below the horizon"
 msgstr "Veure sota de l'horitzó"
 
-#: u_translation.rsbesuretheyus
-msgid "Be sure they use a DOS line end format."
-msgstr ""
-
 #: u_translation.rsbigstars
 msgid "Big stars"
 msgstr "Estels grans"
@@ -439,14 +419,6 @@ msgstr "Anul·la %s"
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
 msgstr "Anul·la, arxiu zip dolent ?? %s"
-
-#: u_translation.rscannotcomput
-msgid "Cannot compute satellites."
-msgstr ""
-
-#: u_translation.rscannotgetyou
-msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -610,10 +582,6 @@ msgstr "Circumpolar"
 #: u_translation.rsclass
 msgid "Class"
 msgstr "Classe"
-
-#: u_translation.rscleanupmap
-msgid "Cleanup map"
-msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -830,10 +798,6 @@ msgstr "Graelles de coordenades"
 #: u_translation.rscopy
 msgid "Copy"
 msgstr "Copia"
-
-#: u_translation.rscopycoordina
-msgid "Copy coordinates"
-msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -1091,10 +1055,6 @@ msgstr "graus"
 msgid "Degrees, minutes, secondes"
 msgstr "Graus, minuts, segons "
 
-#: u_translation.rsdelaybetween
-msgid "Delay between frame"
-msgstr ""
-
 #: u_translation.rsdelete
 msgid "Delete"
 msgstr "Suprimeix"
@@ -1300,10 +1260,6 @@ msgstr "Descarrega el fitxer"
 msgid "Download the latest orbital elements"
 msgstr "Descarrega els elements orbitals"
 
-#: u_translation.rsdownloadtle
-msgid "Download TLE"
-msgstr ""
-
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Voleu desar ara les opcions del programa?"
@@ -1419,10 +1375,6 @@ msgstr "Fi de l'objecte"
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
 msgstr "Fi del processat: %s asteroides"
-
-#: u_translation.rsephemeris
-msgid "Ephemeris"
-msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
@@ -1552,14 +1504,6 @@ msgstr "Mida dels estels febles"
 msgid "FAQ"
 msgstr "FAQ (Preguntes freqüents)"
 
-#: u_translation.rsfavorite
-msgid "Favorite"
-msgstr ""
-
-#: u_translation.rsffmpegprogra
-msgid "ffmpeg program path"
-msgstr ""
-
 #: u_translation.rsfieldnumber
 msgid "Field Number"
 msgstr "Número del camp"
@@ -1652,10 +1596,6 @@ msgstr "Color del cel fix"
 msgid "Flamsteed number"
 msgstr "Número de Flamsteed"
 
-#: u_translation.rsflarepredict
-msgid "Iridium flare prediction:"
-msgstr ""
-
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Tipus de lletres"
@@ -1663,10 +1603,6 @@ msgstr "Tipus de lletres"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Per a un catàleg gran escolliu sempre Binari. Per a un de petit amb canvis freqüents de dades, trieu Text; això permet modificar el fitxer i veure immediatement el resultat sense processar-lo de nou."
-
-#: u_translation.rsforcurrentch
-msgid "For current chart only"
-msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1679,18 +1615,6 @@ msgstr "Camp:"
 #: u_translation.rsfovnumber
 msgid "FOV number:"
 msgstr "Camp núm.:"
-
-#: u_translation.rsframespersec
-msgid "Frames per second"
-msgstr ""
-
-#: u_translation.rsframessize
-msgid "Frames size"
-msgstr ""
-
-#: u_translation.rsfreesize
-msgid "Free size"
-msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -1785,10 +1709,6 @@ msgstr "Cúmuls globulars"
 #: u_translation.rsgraphic
 msgid "Graphic"
 msgstr "Gràfic"
-
-#: u_translation.rsgraphs
-msgid "Graphs"
-msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -1886,10 +1806,6 @@ msgstr "Angle horari"
 msgid "Right ascension grid"
 msgstr "Espaiat en hores"
 
-#: u_translation.rshours
-msgid "hours"
-msgstr ""
-
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
 msgstr "Hores, minuts, segons"
@@ -1909,10 +1825,6 @@ msgstr "Mida de la icona"
 #: u_translation.rsicontime
 msgid "Icon time display"
 msgstr "Mostra la icona de l'hora"
-
-#: u_translation.rsifitisnotins
-msgid "If it is not installed try the following depending on your system:"
-msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -1937,14 +1849,6 @@ msgstr "Inclinació"
 #: u_translation.rsinclination2
 msgid "Inclination="
 msgstr "Inclinació="
-
-#: u_translation.rsincludedayti
-msgid "Include day time pass"
-msgstr ""
-
-#: u_translation.rsincludeiridi
-msgid "Include Iridium flare"
-msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2021,10 +1925,6 @@ msgstr "Error d'inserció! %s"
 #: u_translation.rsinternet
 msgid "Internet"
 msgstr "Internet"
-
-#: u_translation.rsinternetloca
-msgid "Internet localization"
-msgstr ""
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
@@ -2265,10 +2165,6 @@ msgstr "Nom del fitxer : "
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Hora sideral local"
-
-#: u_translation.rslocationcode
-msgid "Location code"
-msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2641,14 +2537,6 @@ msgstr "No."
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
 msgstr "No hi ha dades dels asteroides!%sCarregueu un arxiu MPC."
-
-#: u_translation.rsnoastronomic
-msgid "No astronomical twilight today!"
-msgstr ""
-
-#: u_translation.rsnochange
-msgid "No change"
-msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3048,14 +2936,6 @@ msgstr "Si us plau, indiqueu un nom llarg del catàleg"
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Indiqueu el directori on s'ha de construir el catàleg"
 
-#: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
-
-#: u_translation.rspleaseinstwine
-msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
-
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Si us plau, entreu el CD-ROM Realsky256 número"
@@ -3256,10 +3136,6 @@ msgstr "Servidor proxy"
 msgid "Proxy port"
 msgstr "Port proxy"
 
-#: u_translation.rsputthefilesw
-msgid "Put the files with a .tle extention to the %s folder"
-msgstr ""
-
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "Quasar"
@@ -3320,33 +3196,9 @@ msgstr "RealSky nord"
 msgid "RealSky South"
 msgstr "RealSky sud"
 
-#: u_translation.rsrealtimeopti
-msgid "Real time options"
-msgstr ""
-
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Identifica les unitats o el tipus des del fitxer:"
-
-#: u_translation.rsrecordanimat
-msgid "Record animation to file"
-msgstr ""
-
-#: u_translation.rsrecordingdir
-msgid "Recording directory"
-msgstr ""
-
-#: u_translation.rsrecordingext
-msgid "Recording extension"
-msgstr ""
-
-#: u_translation.rsrecordingopt
-msgid "Recording options"
-msgstr ""
-
-#: u_translation.rsrecordingpre
-msgid "Recording prefix"
-msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
@@ -3379,10 +3231,6 @@ msgstr "Nebulosa de reflexió"
 #: u_translation.rsrefresh
 msgid "Refresh"
 msgstr "Refresca"
-
-#: u_translation.rsrefreshimage
-msgid "Refresh image every"
-msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3439,14 +3287,6 @@ msgstr "Restaura la carta"
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
 msgstr "Reinicia el mapa i les opcions"
-
-#: u_translation.rsresetinitial
-msgid "Reset initial default and restart"
-msgstr ""
-
-#: u_translation.rsresettolastt
-msgid "Reset to last time the chart was saved"
-msgstr ""
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3511,10 +3351,6 @@ msgstr "Saros"
 #: u_translation.rssatellite
 msgid "Satellite"
 msgstr "Satèl·lit"
-
-#: u_translation.rssatellitesca
-msgid "Satellites calculation:"
-msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -3908,13 +3744,9 @@ msgstr "Alguns registres de gravació han estat rebutjats, vegeu el fitxer  %sre
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
 msgstr "Alguna cosa ha anat malament en iniciar el programa. Cal tancar-lo ara"
 
-#: u_translation.rssorrycopyisn
-msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
-
-#: u_translation.rssortby
-msgid "Sort by"
-msgstr ""
+#: u_translation.rssortbyra
+msgid "Sort by RA"
+msgstr "Ordena per AR"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4031,10 +3863,6 @@ msgstr "Altura Sol"
 #: u_translation.rssunday
 msgid "Sun."
 msgstr "Diu."
-
-#: u_translation.rssunimagesour
-msgid "Sun image source"
-msgstr ""
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4207,10 +4035,6 @@ msgstr "Avui"
 #: u_translation.rstofile
 msgid "to file:"
 msgstr "al fitxer:"
-
-#: u_translation.rstonight
-msgid "Tonight"
-msgstr ""
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4392,10 +4216,6 @@ msgstr "Utilitza el proxy HTTP"
 msgid "Use online DSS instead of RealSky"
 msgstr "Usa el DSS en línia en lloc de Realsky"
 
-#: u_translation.rsuseonlinesun
-msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
-
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Useu sols catàlegs d'un únic grup"
@@ -4455,10 +4275,6 @@ msgstr "Estel variable"
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
 msgstr "Estels variables"
-
-#: u_translation.rsvelocity
-msgid "Velocity"
-msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"

@@ -155,7 +155,6 @@ iconinfo:=4;
 {$endif}
 f_clock.cfgsc:=Tconf_skychart.Create;
 f_clock.planet:=TPlanet.Create(self);
-f_clock.planet.SetDE(slash(appdir)+slash('data')+'jpleph');
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
@@ -192,12 +191,6 @@ end;
 finally
 inif.Free;
 end;
-Plan404:=nil;
-Plan404lib:=LoadLibrary(lib404);
-if Plan404lib<>0 then begin
-  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
-end else
-  MenuItem4.Enabled:=false; // no calendar
 f_clock.cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 f_clock.cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(f_clock.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
 ConnectDB;
@@ -205,6 +198,12 @@ LoadIcon;
 UpdateIcon(nil);
 Timer1.Enabled:=true;
 SysTray.Visible:=true;
+Plan404:=nil;
+Plan404lib:=LoadLibrary(lib404);
+if Plan404lib<>0 then begin
+  Plan404:= TPlan404(GetProcAddress(Plan404lib,'Plan404'));
+end else
+  MenuItem4.Enabled:=false; // no calendar
 end;
 
 procedure Tf_tray.SaveConfig;
@@ -425,7 +424,6 @@ begin
 if f_calendar=nil then begin
   f_calendar:=Tf_calendar.Create(self);
   f_calendar.planet:=f_clock.planet;
-  f_calendar.planet.SetDE(slash(appdir)+slash('data')+'jpleph');
   f_calendar.cdb:=cdcdb;
   f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
   f_calendar.AzNorth:=true;
@@ -446,7 +444,7 @@ end else begin
   f_calendar.config.PlanetParalaxe:=true;
   f_calendar.config.ApparentPos:=true;
   f_calendar.config.e:=ecliptic(f_calendar.config.JdChart);
-  f_calendar.planet.nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
+  nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
   f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   aberration(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
@@ -577,9 +575,6 @@ if fileexists(configfile) then begin
   end;
 end;
 Tempdir:=slash(privatedir)+DefaultTmpDir;
-SatDir:=slash(privatedir)+'satellites';
-if not directoryexists(SatDir) then CreateDir(SatDir);
-if not directoryexists(SatDir) then forcedirectories(SatDir);
 {$ifdef trace_debug}
  debugln('appdir='+appdir);
 {$endif}

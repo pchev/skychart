@@ -1,15 +1,5 @@
 #!/bin/bash
 
-function InstData {
-  pkg=$1.tgz
-  ddir=$2
-  pkgz=../BaseData/$pkg
-  if [ ! -e $pkgz ]; then
-     wget http://download.origo.ethz.ch/skychart/2443/$pkg -O $pkgz
-  fi
-  tar xvzf $pkgz -C $ddir
-}
-
 destdir=$1
 
 if [ -z "$destdir" ]; then
@@ -48,6 +38,4 @@ for f in $(cat cat.lst)
 do
   install -v -m 644  $f $destdir/$f
 done
-
-InstData data_jpleph $destdir
 

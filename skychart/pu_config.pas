@@ -81,7 +81,6 @@ type
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
-    FGetTwilight: TGetTwilight;
     f_config_observatory1: Tf_config_observatory;
     f_config_chart1: Tf_config_chart;
     f_config_catalog1: Tf_config_catalog;
@@ -110,7 +109,6 @@ type
     procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
     function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
-    procedure TimeGetTwilight(jd0: double; out ht: double);
     procedure ShowPage(i,j:Integer);
     procedure ActivateChanges;
   public
@@ -129,7 +127,6 @@ type
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
-    property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
   end;
 
 var
@@ -143,51 +140,49 @@ Caption:=rsConfiguratio;
 TreeView1.items[0].text:='1- '+rsDateTime2;
 TreeView1.items[1].text:='1- '+rsDateTime2;
 TreeView1.items[2].text:='2- '+rsTimeSimulati;
-TreeView1.items[3].text:='3- '+rsAnimation;
-TreeView1.items[4].text:='2- '+rsObservatory;
-TreeView1.items[5].text:='1- '+rsObservatory;
-TreeView1.items[6].text:='2- '+rsHorizon;
-TreeView1.items[7].text:='3- '+rsChartCoordin;
-TreeView1.items[8].text:='1- '+rsChartCoordin;
-TreeView1.items[9].text:='2- '+rsFieldOfVisio;
-TreeView1.items[10].text:='3- '+rsProjection;
-TreeView1.items[11].text:='4- '+rsObjectFilter;
-TreeView1.items[12].text:='5- '+rsGridSpacing;
-TreeView1.items[13].text:='6- '+rsObjectList;
-TreeView1.items[14].text:='4- '+rsCatalog;
-TreeView1.items[15].text:='1- '+rsCatalog;
-TreeView1.items[16].text:='2- '+rsCdCStars;
-TreeView1.items[17].text:='3- '+rsCdCNebulae;
-TreeView1.items[18].text:='4- '+rsOtherSoftwar;
-TreeView1.items[19].text:='5- '+rsObsolete;
-TreeView1.items[20].text:='5- '+rsSolarSystem;
-TreeView1.items[21].text:='1- '+rsSolarSystem;
-TreeView1.items[22].text:='2- '+rsPlanet;
-TreeView1.items[23].text:='3- '+rsComet;
-TreeView1.items[24].text:='4- '+rsAsteroid;
-TreeView1.items[25].text:='6- '+rsDisplay;
-TreeView1.items[26].text:='1- '+rsDisplay;
-TreeView1.items[27].text:='2- '+rsDisplayColou;
-TreeView1.items[28].text:='3- '+rsDeepSkyObjec;
-TreeView1.items[29].text:='4- '+rsSkyBackgroun;
-TreeView1.items[30].text:='5- '+rsLines;
-TreeView1.items[31].text:='6- '+rsLabels;
-TreeView1.items[32].text:='7- '+rsFonts;
-TreeView1.items[33].text:='8- '+rsFinderCircle;
-TreeView1.items[34].text:='9- '+rsFinderRectan;
-TreeView1.items[35].text:='7- '+rsPictures;
-TreeView1.items[36].text:='1- '+rsObject;
-TreeView1.items[37].text:='2- '+rsBackground;
-TreeView1.items[38].text:='3- '+rsDSSRealSky;
-TreeView1.items[39].text:='8- '+rsSystem;
-TreeView1.items[40].text:='1- '+rsSystem;
-TreeView1.items[41].text:='2- '+rsServer;
-TreeView1.items[42].text:='3- '+rsTelescope;
-TreeView1.items[43].text:='4- '+rsLanguage2;
-TreeView1.items[44].text:='9- '+rsInternet;
-TreeView1.items[45].text:='1- '+rsProxy;
-TreeView1.items[46].text:='2- '+rsOrbitalEleme;
-TreeView1.items[47].text:='3- '+rsOnlineDSSPic;
+TreeView1.items[3].text:='2- '+rsObservatory;
+TreeView1.items[4].text:='1- '+rsObservatory;
+TreeView1.items[5].text:='2- '+rsHorizon;
+TreeView1.items[6].text:='3- '+rsChartCoordin;
+TreeView1.items[7].text:='1- '+rsChartCoordin;
+TreeView1.items[8].text:='2- '+rsFieldOfVisio;
+TreeView1.items[9].text:='3- '+rsProjection;
+TreeView1.items[10].text:='4- '+rsObjectFilter;
+TreeView1.items[11].text:='5- '+rsGridSpacing;
+TreeView1.items[12].text:='6- '+rsObjectList;
+TreeView1.items[13].text:='4- '+rsCatalog;
+TreeView1.items[14].text:='1- '+rsCatalog;
+TreeView1.items[15].text:='2- '+rsCdCStars;
+TreeView1.items[16].text:='3- '+rsCdCNebulae;
+TreeView1.items[17].text:='4- '+rsObsolete;
+TreeView1.items[18].text:='5- '+rsSolarSystem;
+TreeView1.items[19].text:='1- '+rsSolarSystem;
+TreeView1.items[20].text:='2- '+rsPlanet;
+TreeView1.items[21].text:='3- '+rsComet;
+TreeView1.items[22].text:='4- '+rsAsteroid;
+TreeView1.items[23].text:='6- '+rsDisplay;
+TreeView1.items[24].text:='1- '+rsDisplay;
+TreeView1.items[25].text:='2- '+rsDisplayColou;
+TreeView1.items[26].text:='3- '+rsDeepSkyObjec;
+TreeView1.items[27].text:='4- '+rsSkyBackgroun;
+TreeView1.items[28].text:='5- '+rsLines;
+TreeView1.items[29].text:='6- '+rsLabels;
+TreeView1.items[30].text:='7- '+rsFonts;
+TreeView1.items[31].text:='8- '+rsFinderCircle;
+TreeView1.items[32].text:='9- '+rsFinderRectan;
+TreeView1.items[33].text:='7- '+rsPictures;
+TreeView1.items[34].text:='1- '+rsObject;
+TreeView1.items[35].text:='2- '+rsBackground;
+TreeView1.items[36].text:='3- '+rsDSSRealSky;
+TreeView1.items[37].text:='8- '+rsSystem;
+TreeView1.items[38].text:='1- '+rsSystem;
+TreeView1.items[39].text:='2- '+rsServer;
+TreeView1.items[40].text:='3- '+rsTelescope;
+TreeView1.items[41].text:='4- '+rsLanguage2;
+TreeView1.items[42].text:='9- '+rsInternet;
+TreeView1.items[43].text:='1- '+rsProxy;
+TreeView1.items[44].text:='2- '+rsOrbitalEleme;
+TreeView1.items[45].text:='3- '+rsOnlineDSSPic;
 Applyall.caption:=rsApplyChangeT;
 Apply.Caption:=rsApply;
 OKBtn.caption:=rsOK;
@@ -263,7 +258,7 @@ f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
 f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
-f_config_time1.onGetTwilight:=TimeGetTwilight;
+
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
@@ -447,12 +442,6 @@ function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
 begin
  if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
    else result:=false;
-end;
-
-procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);
-begin
- if assigned(FGetTwilight) then FGetTwilight(jd0,ht)
-   else ht:=-99;
 end;
 
 function Tf_config.GetFits: TFits;

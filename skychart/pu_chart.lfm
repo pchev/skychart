@@ -7,13 +7,13 @@ object f_chart: Tf_chart
   Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
+  Font.Height = -11
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
-  ParentFont = True
   LCLVersion = '0.9.29'
   object Panel1: TPanel
     Left = 8
@@ -234,14 +234,6 @@ object f_chart: Tf_chart
       Action = zoomminusmove
       OnClick = zoomminusmoveExecute
     end
-    object CopyCoord1: TMenuItem
-      Caption = 'CopyCoord1'
-      OnClick = CopyCoord1Click
-    end
-    object Cleanupmap1: TMenuItem
-      Caption = 'Cleanupmap1'
-      OnClick = Cleanupmap1Click
-    end
     object N1: TMenuItem
       Caption = '-'
     end
@@ -318,12 +310,5 @@ object f_chart: Tf_chart
     OnTimer = BlinkTimerTimer
     left = 304
     top = 202
-  end
-  object DownloadDialog1: TDownloadDialog
-    FtpFwMode = 0
-    FtpFwPassive = True
-    ConfirmDownload = True
-    left = 211
-    top = 205
   end
 end

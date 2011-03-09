@@ -39,17 +39,11 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
-    Button5: TButton;
-    IndiDevOther: TEdit;
-    IndiPort: TEdit;
     INDILabel: TLabel;
     ASCOMLabel: TLabel;
-    IndiServerCmd: TEdit;
-    Label258: TLabel;
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
     ASCOMPanel: TPanel;
-    Panel2: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
     TelescopeManualLabel: TLabel;
@@ -96,14 +90,17 @@ type
     Label13: TLabel;
     Label75: TLabel;
     Label130: TLabel;
+    Label258: TLabel;
     Label259: TLabel;
     Label260: TLabel;
     Label261: TLabel;
     IndiServerHost: TEdit;
     IndiServerPort: TEdit;
     IndiAutostart: TCheckBox;
+    IndiServerCmd: TEdit;
     IndiDriver: TEdit;
     IndiDev: TComboBox;
+    IndiPort: TComboBox;
     TelescopeSelect: TRadioGroup;
     Label155: TLabel;
     telescopepluginlist: TComboBox;
@@ -141,11 +138,9 @@ type
     PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure IndiDevOtherChange(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -276,7 +271,6 @@ RevertTurnsAlt.caption:=rsRevertAltKno;
 TelescopePluginLabel.caption:=rsCDCPluginSet;
 Label155.caption:=rsTelescopePlu;
 INDILabel.caption:=rsINDIDriverSe;
-Button5.Caption:=rsDefault;
 Label75.caption:=rsINDIServerHo;
 Label130.caption:=rsINDIServerPo;
 Label258.caption:=rsServerComman;
@@ -332,6 +326,10 @@ dbchanged:=false;
 {$ifdef unix}
   if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
   if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
+  Indiport.Style:= csSimple;
+  IndiPort.Items.Clear;
+  IndiPort.OnChange:=IndiPortChange;
+  IndiPort.OnSelect:=nil;
 {$endif}
 ShowLanguage;
 ShowSYS;
@@ -447,8 +445,13 @@ if csc.IndiTelescope then Telescopeselect.itemindex:=0
    {$endif}
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
+{$ifdef unix}
 IndiPort.text:=csc.IndiPort;
+{$endif}
 {$ifdef mswindows}
+val(rightstr(csc.IndiPort,1),i,n);
+if n=0 then IndiPort.itemindex:=i
+       else IndiPort.itemindex:=0;
 i:=findfirst(slash(appdir)+slash('plugins')+slash('telescope')+'*.tid',0,fs);
 telescopepluginlist.clear;
 n:=0;
@@ -463,12 +466,7 @@ findclose(fs);
 {$endif}
 IndiDev.items.clear;
 for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,1]);
-IndiDev.itemindex:=0;
 for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.itemindex:=i;
-if IndiDev.itemindex=0 then begin
-  IndiDevOther.Text:=csc.IndiDevice;
-  IndiDevOther.visible:=true;
-end;
 end;
 
 procedure Tf_config_system.DBtypeGroupClick(Sender: TObject);
@@ -662,12 +660,6 @@ mycplot.Free;
 mycmain.Free;
 end;
 
-procedure Tf_config_system.IndiDevOtherChange(Sender: TObject);
-begin
-  if LockChange then exit;
-  csc.IndiDevice:=IndiDevOther.Text;
-end;
-
 procedure Tf_config_system.LanguageListSelect(Sender: TObject);
 begin
 if LockChange then exit;
@@ -689,12 +681,6 @@ end;
 procedure Tf_config_system.Button4Click(Sender: TObject);
 begin
   ShowHelp;
-end;
-
-procedure Tf_config_system.Button5Click(Sender: TObject);
-begin
-  IndiPort.Text:='/dev/ttyS0';
-  IndiServerCmd.Text:='indiserver';
 end;
 
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);
@@ -746,11 +732,6 @@ end;
 procedure Tf_config_system.IndiAutostartClick(Sender: TObject);
 begin
 csc.IndiAutostart:=IndiAutostart.checked;
-panel2.Visible:=IndiAutostart.checked;
-if IndiAutostart.checked then begin
-   if trim(IndiPort.Text)='' then IndiPort.Text:='/dev/ttyS0';
-end else
-   IndiPort.Text:=' ';
 end;
 
 procedure Tf_config_system.IndiServerCmdChange(Sender: TObject);
@@ -766,11 +747,9 @@ csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,1];
 IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,2];
 if IndiDev.itemindex=0 then begin
    IndiDriver.enabled:=true;
-   IndiDevOther.Visible:=true;
-   IndiDevOther.setfocus;
+   IndiDriver.setfocus;
 end else begin
    IndiDriver.enabled:=false;
-   IndiDevOther.Visible:=false;
 end;
 end;
 
@@ -781,21 +760,14 @@ csc.IndiDriver:=IndiDriver.text;
 end;
 
 procedure Tf_config_system.IndiPortChange(Sender: TObject);
-var i,n: integer;
 begin
 if LockChange then exit;
 {$ifdef unix}
 csc.IndiPort:=IndiPort.text;
 {$endif}
 {$ifdef mswindows}
-if uppercase(copy(IndiPort.Text,1,3))='COM' then begin
-   val(trim(copy(IndiPort.text,4,2)),i,n);
-   if (n=0)and(i>=0) then csc.IndiPort:='/dev/ttyS'+inttostr(i-1)
-          else csc.IndiPort:=IndiPort.text;
-end else
-   csc.IndiPort:=IndiPort.text;
+csc.IndiPort:='/dev/ttyS'+inttostr(IndiPort.itemindex);
 {$endif}
-if csc.IndiPort='' then csc.IndiPort:=' ';
 end;
 
 procedure Tf_config_system.PanelCmdChange(Sender: TObject);

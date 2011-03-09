@@ -5,7 +5,7 @@ unit u_translation;
 interface
 
 uses gettext, translations, u_constant, u_util,
-  fileutil, Classes, SysUtils;
+  Classes, SysUtils;
 
 procedure GetDefaultLanguage(var buf1,buf2: string);
 function Translate(lang : string = ''):string;
@@ -189,7 +189,6 @@ resourcestring
   rsEstimatedTai = 'Estimated tail length';
   rsSolarElongat = 'Solar elongation';
   rsSolarDistanc = 'Solar distance';
-  rsVelocity = 'Velocity';
   rsOpenCluster = 'Open cluster';
   rsGlobularClus = 'Globular cluster';
   rsGalaxy = 'Galaxy';
@@ -319,7 +318,7 @@ resourcestring
   rsRefresh = 'Refresh';
   rsAutoRefresh = 'Auto-refresh';
   rsSearch = 'Search';
-  rsSortBy = 'Sort by';
+  rsSortByRA = 'Sort by RA';
   rsSave = 'Save';
   rsProgressMess = 'Progress messages';
   rsCloseConnect = 'Close connection';
@@ -1116,55 +1115,6 @@ resourcestring
     +'active catalog';
   rsInvalidPath = 'Invalid path: ';
   rsShowPosition = 'Show position in title bar';
-  rsCopyCoordina = 'Copy coordinates';
-  rsResetInitial = 'Reset initial default and restart';
-  rsResetToLastT = 'Reset to last time the chart was saved';
-  rsNoAstronomic = 'No astronomical twilight today!';
-  rsTonight = 'Tonight';
-  rsAlwaysSaveWi = 'Always save without asking.';
-  rsArtificialSa2 = 'Artificial satellite';
-  rsPutTheFilesW = 'Put the files with a .tle extention to the %s folder';
-  rsBeSureTheyUs = 'Be sure they use a DOS line end format.';
-  rsCleanupMap = 'Cleanup map';
-  rsGraphs = 'Graphs';
-  rsSatellitesCa = 'Satellites calculation:';
-  rsFlarePredict = 'Iridium flare prediction:';
-  rsIncludeDayTi = 'Include day time pass';
-  rsIncludeIridi = 'Include Iridium flare';
-  rsForCurrentCh = 'For current chart only';
-  rsCannotComput = 'Cannot compute satellites.';
-  rsPleaseInstWine = 'Please install wine http://www.winehq.org/ to compute artificial satellites on your computer.';
-  rsPleaseInstDosbox = 'Please install "Dosbox" http://www.dosbox.com/ to compute '
-    +'Iridium flares on your computer.';
-  rsIfItIsNotIns =  'If it is not installed try the following depending on '
-    +'your system:';
-  rsSorryCopyIsN = 'Sorry, copy is not yet implemented for this page';
-  rsDownloadTLE = 'Download TLE';
-  rsAnimation = 'Animation';
-  rsRealTimeOpti = 'Real time options';
-  rsDelayBetween = 'Delay between frame';
-  rsRecordingOpt = 'Recording options';
-  rsRecordAnimat = 'Record animation to file';
-  rsRecordingDir = 'Recording directory';
-  rsRecordingPre = 'Recording prefix';
-  rsRecordingExt = 'Recording extension';
-  rsFramesPerSec = 'Frames per second';
-  rsFramesSize = 'Frames size';
-  rsAdditionalFf = 'Additional ffmpeg options';
-  rsFfmpegProgra = 'ffmpeg program path';
-  rsNoChange = 'No change';
-  rsFreeSize = 'Free size';
-  rsEphemeris = 'Ephemeris';
-  rsCannotGetYou = 'Cannot get your IP address, or no location found for this '
-    +'address.';
-  rsLocationCode = 'Location code';
-  rsUseOnlineSun = 'Use online Sun image from SDO or SOHO';
-  rsSunImageSour = 'Sun image source';
-  rsFavorite = 'Favorite';
-  rsInternetLoca = 'Internet localization';
-  rsRefreshImage = 'Refresh image every';
-  rsHours = 'hours';
-  rsServerRespon = 'Server response: ';
 
 implementation
 
@@ -1209,9 +1159,9 @@ begin
     end;
  end;
  // translate CDC messages
- TranslateUnitResourceStrings('u_translation',systoutf8(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po'),result,'');
+ TranslateUnitResourceStrings('u_translation',slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',result,'');
  // translate LCL messages
- TranslateUnitResourceStrings('LCLStrConsts',systoutf8(slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po'),result,'');
+ TranslateUnitResourceStrings('LCLStrConsts',slash(appdir)+slash('data')+slash('language')+'lclstrconsts.%s.po',result,'');
  writetrace('Language: '+result+' '+rsLanguage);
 end;
 

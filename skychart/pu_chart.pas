@@ -36,20 +36,19 @@ uses
      {$ifdef mswindows}
      pu_ascomclient,
      {$endif}
-     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,
-     u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
-     PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs,
-     Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
+     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util, u_projection,
+     Printers, Math, cu_telescope, IntfGraphics, PostscriptCanvas, FileUtil,
+     LCLIntf, Classes, Graphics, Dialogs, Forms, Controls, StdCtrls, ExtCtrls, Menus,
+     ActnList, SysUtils, LResources;
      
 const maxundo=10;
 
 type
   Tstr1func = procedure(txt:string) of object;
-  Tstr12func = procedure(txt1,txt2:string) of object;
   Tstr2func = procedure(txt:string;sender:TObject) of object;
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
-  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil) of object;
 
 type
   TChartDrawingControl = class(TCustomControl)
@@ -65,10 +64,7 @@ type
     About2: TMenuItem;
     About1: TMenuItem;
     AddLabel1: TMenuItem;
-    DownloadDialog1: TDownloadDialog;
     MenuItem1: TMenuItem;
-    CopyCoord1: TMenuItem;
-    Cleanupmap1: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
@@ -122,8 +118,6 @@ type
     procedure About1Click(Sender: TObject);
     procedure AddLabel1Click(Sender: TObject);
     procedure BlinkTimerTimer(Sender: TObject);
-    procedure Cleanupmap1Click(Sender: TObject);
-    procedure CopyCoord1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -184,7 +178,7 @@ type
     FUpdateBtn: Tbtnfunc;
     FShowInfo : Tshowinfo;
     FShowCoord: Tstr1func;
-    FListInfo: Tstr12func;
+    FListInfo: Tstr1func;
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove : integer;
@@ -204,7 +198,6 @@ type
     procedure SyncPlugin(Sender: TObject);
     procedure SetNightVision(value:boolean);
     procedure Image1Click(Sender: TObject);
-    procedure Image1DblClick(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X,Y: Integer);
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;Shift: TShiftState; X, Y: Integer);
@@ -217,9 +210,8 @@ type
     Image1 : TChartDrawingControl;
     ChartCursor: TCursor;
     sc: Tskychart;
-    cmain: Tconf_main;
     indi1: TIndiClient;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb: double;
@@ -229,7 +221,7 @@ type
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
-    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true):boolean;
+    function  IdentXY(X, Y: Integer;searchcenter: boolean= true):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     function  LongLabel(txt:string):string;
@@ -238,7 +230,6 @@ type
     Function  LongLabelConst(txt : string) : string;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
     procedure rotation(rot:double);
-    procedure GetSunImage;
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
     function cmd_SetGrid(onoff:string):string;
@@ -300,7 +291,7 @@ type
     property OnUpdateBtn: Tbtnfunc read FUpdateBtn write FUpdateBtn;
     property OnShowInfo: TShowinfo read FShowInfo write FShowInfo;
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
-    property OnListInfo: Tstr12func read FListInfo write FListInfo;
+    property OnListInfo: Tstr1func read FListInfo write FListInfo;
     property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
     property NightVision: Boolean read FNightVision write SetNightVision;
   end;
@@ -322,8 +313,6 @@ RemoveAllLabel1.caption:=rsRemoveAllLab;
 Telescope1.caption:=rsTelescope;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
-CopyCoord1.Caption:=rsCopyCoordina;
-Cleanupmap1.Caption:=rsCleanupMap;
 if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
    Connect1.caption:=rsConnectTeles
 end else begin
@@ -331,18 +320,15 @@ end else begin
 end;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
-DownloadDialog1.msgDownloadFile:=rsDownloadFile;
-DownloadDialog1.msgCopyfrom:=rsCopyFrom;
-DownloadDialog1.msgtofile:=rsToFile;
-DownloadDialog1.msgDownloadBtn:=rsDownload;
-DownloadDialog1.msgCancelBtn:=rsCancel;
 if sc<>nil then sc.SetLang;
 end;
 
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   RefreshTimer.Enabled:=false;
+{$ifdef mswindows}
   TelescopeTimer.Enabled:=false;
+ {$endif}
   Action := caFree;
 end;
 
@@ -353,7 +339,6 @@ begin
  WriteTrace('Create new chart');
 {$endif}
  locked:=true;
- lockmove:=false;
  lockkey:=false;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
@@ -363,7 +348,6 @@ begin
  Image1.Align:=alClient;
  Image1.DoubleBuffered := true;
  Image1.OnClick:=Image1Click;
- image1.OnDblClick:=Image1DblClick;
  Image1.OnMouseDown:=Image1MouseDown;
  Image1.OnMouseMove:=Image1MouseMove;
  Image1.OnMouseUp:=Image1MouseUp;
@@ -424,7 +408,7 @@ try
  locked:=true;
  if sc<>nil then sc.free;
  Image1.Free;
- if (indi1<>nil)and(Connect1.checked) then begin
+ if indi1<>nil then begin
    indi1.onCoordChange:=nil;
    indi1.onStatusChange:=nil;
    indi1.onMessage:=nil;
@@ -457,46 +441,6 @@ begin
 if assigned(FSetFocus) then FSetFocus(Self);
 if assigned(FImageSetFocus) then FImageSetFocus(Sender);
 //setfocus;
-end;
-
-procedure Tf_chart.Image1DblClick(Sender: TObject);
-begin
-{$ifdef trace_debug}
- WriteTrace(caption+' Image1DblClick');
-{$endif}
-if identlabel.Visible then identlabelClick(sender);
-end;
-
-procedure Tf_chart.GetSunImage;
-var fn:string;
-    a:TDateTime;
-begin
-fn:=slash(TempDir)+'sun.jpg';
-if sc.cfgsc.SunOnline and (
-   ( not FileExists(fn) ) or
-   ( (now-FileDateToDateTime(FileAge(fn)))>(sc.cfgsc.sunrefreshtime/24) )
-   ) then begin
-   if cmain.HttpProxy then begin
-      DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-      DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-      DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-      DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
-   end else begin
-      DownloadDialog1.HttpProxy:='';
-      DownloadDialog1.HttpProxyPort:='';
-      DownloadDialog1.HttpProxyUser:='';
-      DownloadDialog1.HttpProxyPass:='';
-   end;
-   DownloadDialog1.URL:=sc.cfgsc.sunurl;
-   DownloadDialog1.SaveToFile:=fn;
-   DownloadDialog1.ConfirmDownload:=false;
-   if DownloadDialog1.Execute and FileExists(fn) then begin
-
-   end
-   else begin
-     sc.cfgsc.SunOnline:=false;
-   end;
-end;
 end;
 
 procedure Tf_chart.AutoRefresh;
@@ -532,6 +476,7 @@ try
 {$endif}
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
+ if not lastquick then screen.cursor:=crHourGlass;
  zoomstep:=0;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
@@ -547,7 +492,6 @@ try
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
 {$endif}
- if sc.plot.cfgplot.plaplot=2 then GetSunImage;
  sc.Refresh;
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
@@ -571,6 +515,7 @@ finally
  WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
 {$endif}
  lock_refresh:=false;
+ screen.cursor:=crDefault;
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
@@ -805,7 +750,7 @@ if StartCircle then begin
   StartCircle:=false;
   end
 else MovingCircle := false;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
+if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -828,7 +773,7 @@ end;
 if sc.cfgsc.scopemark then begin
    sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
 end;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
+if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>rsTelescope) then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
 {$endif}
@@ -1360,29 +1305,12 @@ end;
 
 procedure Tf_chart.CentreExecute(Sender: TObject);
 begin
-  if sc.cfgsc.FindName>'' then
-      sc.MovetoRaDec(sc.cfgsc.FindRA,sc.cfgsc.FindDec)
-  else
-      sc.MovetoXY(xcursor,ycursor);
+  sc.MovetoXY(xcursor,ycursor);
   sc.cfgsc.TrackOn:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' CentreExecute');
 {$endif}
   Refresh;
-end;
-
-procedure Tf_chart.CopyCoord1Click(Sender: TObject);
-var txt: string;
-    ra,dec,a,h,l,b,le,be:double;
-begin
-  if sc.cfgsc.FindName>'' then begin
-      ra:=sc.cfgsc.FindRA;
-      dec:=sc.cfgsc.FindDec;
-  end else begin
-      sc.GetCoord(xcursor,ycursor,ra,dec,a,h,l,b,le,be);
-  end;
-  txt:=ARtoStr(ra*rad2deg/15)+blank+DEToStr(dec*rad2deg);
-  Clipboard.AsText:=txt;
 end;
 
 procedure Tf_chart.Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
@@ -1414,16 +1342,15 @@ if sc.cfgsc.FindOK then begin
    identlabel.Cursor:=crHandPoint;
    identlabel.bringtofront;
    sc.DrawSearchMark(sc.cfgsc.FindRA,sc.cfgsc.FindDec,false);
-   sc.cfgsc.FindJD:=sc.cfgsc.JDChart;
 end
 else identlabel.Visible:=false;
 end;
 
-function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true):boolean;
-var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds:double;
+function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean=true):boolean;
+var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,dist:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
-    showdist,solsys,lastsolsys:boolean;
+    showdist:boolean;
 begin
 result:=false;
 if locked then exit;
@@ -1436,20 +1363,15 @@ lasttrde:=sc.cfgsc.TrackDEC;
 lasttype:=sc.cfgsc.TrackType;
 lastobj:=sc.cfgsc.Trackobj;
 lasttrname:=sc.cfgsc.TrackName;
-lastX:=sc.cfgsc.FindX;
-lastY:=sc.cfgsc.FindY;
-lastZ:=sc.cfgsc.FindZ;
-lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Findtype=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx,searchcenter);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter);  //else 6 pixel
-if showlabel then ShowIdentLabel;
+ShowIdentLabel;
 if showdist then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDEC;
-   solsys:=((sc.cfgsc.FindType=ftAst)or(sc.cfgsc.FindType=ftCom)or(sc.cfgsc.FindType=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
    dist := rad2deg*angulardistance(ra,dec,lastra,lastdec);
    if dist>0 then begin
       pa:=round(rmod(rad2deg*PositionAngle(lastra,lastdec,ra,dec)+360,360));
@@ -1462,10 +1384,6 @@ if showdist then begin
       buf:=rsFrom+':  "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
       txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
       if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
-      if solsys and lastsolsys then begin
-         ds:=sqrt((lastX-sc.cfgsc.FindX)*(lastX-sc.cfgsc.FindX)+(lastY-sc.cfgsc.FindY)*(lastY-sc.cfgsc.FindY)+(lastZ-sc.cfgsc.FindZ)*(lastZ-sc.cfgsc.FindZ));
-         txt:=txt+tab+rsDistance+': '+FormatFloat(f5,ds)+'au';
-      end;
       if sc.cfgsc.ManualTelescope then begin
         case sc.cfgsc.ManualTelescopeType of
          0 : begin
@@ -1514,15 +1432,15 @@ end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
 var ra,dec,a,h,l,b,le,be,dx:double;
-    buf,msg:string;
+    buf:widestring;
 begin
 result:=false;
 if locked then exit;
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(12/sc.cfgsc.BxGlb); // search a 12 pixel radius
-sc.Findlist(ra,dec,dx,dx,buf,msg,false,true,true);
-if assigned(FListInfo) then FListInfo(buf,msg);
+sc.Findlist(ra,dec,dx,dx,buf,false,true,true);
+if assigned(FListInfo) then FListInfo(buf);
 end;
 
 procedure Tf_chart.Image1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -1559,7 +1477,6 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ListXY(x,y);
 end
 else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
-   if TrackCursorMove then TrackCursor(X,Y);
    Image1.Cursor:=ChartCursor;
    Refresh;
 end;
@@ -1575,7 +1492,6 @@ begin
 {$endif}
 lastx:=x;
 lasty:=y;
-TrackCursorMove:=false;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 scp:=Image1.ControlToScreen(point(x,y));
@@ -1593,7 +1509,6 @@ procedure Tf_chart.Image1MouseMove(Sender: TObject; Shift: TShiftState; X,
 var c:double;
 begin
 if locked then exit;
-if lockmove then exit;
 if skipmove>0 then begin
    system.dec(skipmove);
    exit;
@@ -1612,14 +1527,6 @@ if (ssLeft in shift)and(not(ssShift in shift)) then begin
    ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift)) then begin
      TrackCursor(X,Y);
-end else if Shift=[ssCtrl] then begin
-     try
-     lockmove:=true;
-     IdentXY(x,y,true,false);
-     Application.ProcessMessages;
-     finally
-     lockmove:=false;
-     end;
 end else if ((ssMiddle in shift)and(ssCtrl in Shift)) then begin
      c:=abs(y-lastyzoom)/200;
      if c>1 then c:=1;
@@ -1679,8 +1586,7 @@ case action of
      XZoom1:=X;
      YZoom1:=Y;
      Zoomstep:=1;
-   end;
-   if Zoomstep=4 then begin
+   end else begin
      // move box or confirm click
      DXzoom:=Xzoom1-X;
      DYzoom:=Yzoom1-Y;
@@ -1814,7 +1720,6 @@ end;
 Procedure Tf_chart.TrackCursor(X,Y : integer);
 var newl,newb: double;
 begin
-TrackCursorMove:=true;
 if LockTrackCursor then exit;
 try
   {$ifdef trace_debug}
@@ -1877,20 +1782,12 @@ begin
   BlinkTimer.Enabled:=true;
 end;
 
-procedure Tf_chart.Cleanupmap1Click(Sender: TObject);
-begin
-ZoomStep:=0;
-sc.cfgsc.Trackon:=false;
-sc.cfgsc.TrackName:='';
-Refresh;
-end;
-
 procedure Tf_chart.identlabelClick(Sender: TObject);
 begin
 if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
-f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
-f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
+f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
+f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
 f_detail.show;
 f_detail.text:=FormatDesc;
 f_detail.setfocus;
@@ -2081,7 +1978,7 @@ repeat
   txt:=txt+buf2+html_br;
 until buf='';
 //writetrace(txt);
-result:=txt+html_br+htms_h;
+result:=txt+htms_f+html_br+htms_h;
 end;
 
 function Tf_chart.LongLabelObj(txt:string):string;
@@ -2109,7 +2006,6 @@ else if txt='P' then txt:=rsPlanet
 else if txt='Ps' then txt:=rsPlanetarySat
 else if txt='As' then txt:=rsAsteroid
 else if txt='Cm' then txt:=rsComet
-else if txt='Sat' then txt:=rsArtificialSa2
 else if txt='C1' then txt:=rsExternalCata
 else if txt='C2' then txt:=rsExternalCata;
 result:=txt;
@@ -2168,7 +2064,6 @@ if i>0 then begin
   else if key='TL' then result:=rsEstimatedTai+d+value
   else if key='EL' then result:=rsSolarElongat+d+value
   else if key='RSOL' then result:=rsSolarDistanc+d+value
-  else if key='VEL' then result:=rsVelocity+d+value
   else if key='D1' then result:=rsDescription+' 1'+d+value
   else if key='D2' then result:=rsDescription+' 2'+d+value
   else if key='D3' then result:=rsDescription+' 3'+d+value
@@ -2195,7 +2090,6 @@ if i>0 then begin
   else if key='GRSTR' then result:=rsGRSTransit+d+value
   else if key='LLAT' then result:=rsLibrationInL+d+value
   else if key='LLON' then result:=rsLibrationInL2+d+value
-  else if key='EPHEMERIS' then result:=rsEphemeris+d+value
   else result:=txt;
 end
 else result:=txt;
@@ -3029,12 +2923,12 @@ if sc.cfgsc.ManualTelescope then begin
 end
 else if sc.cfgsc.IndiTelescope then begin
   if Connect1.checked then begin
-     TelescopeTimer.Enabled:=false;
-     indi1.Terminate;
+     indi1.terminate;
      sc.cfgsc.ScopeMark:=false;
      sc.cfgsc.TrackOn:=false;
      Refresh;
   end else begin
+  if (indi1=nil)or(indi1.Terminated) then begin
      sc.cfgsc.TelescopeJD:=0;
      indi1:=TIndiClient.Create;
      indi1.TargetHost:=sc.cfgsc.IndiServerHost;
@@ -3052,8 +2946,11 @@ else if sc.cfgsc.IndiTelescope then begin
      indi1.onMessage:=TelescopeGetMessage;
      indi1.Resume;
      sc.cfgsc.TrackOn:=true;
-     TelescopeTimer.Interval:=5000;
-     TelescopeTimer.Enabled:=true;
+  end else begin
+     sc.cfgsc.TelescopeJD:=0;
+     indi1.Connect;
+     sc.cfgsc.TrackOn:=true;
+  end;
   end;
   Refresh;
 end;
@@ -3434,18 +3331,7 @@ TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
-if sc.cfgsc.IndiTelescope then begin
-   if (not Connect1.checked) and ((indi1.TelescopeStatus=cu_indiclient.Idle)or(indi1.TelescopeStatus=cu_indiclient.Alert)) then begin
-      indi1.Terminate;
-      sc.cfgsc.ScopeMark:=false;
-      sc.cfgsc.TrackOn:=false;
-      Refresh;
-      if assigned(Fshowinfo) then Fshowinfo('INDI server '+sc.cfgsc.IndiServerHost+':'+sc.cfgsc.IndiServerPort+' do not return information about device '+sc.cfgsc.IndiDevice);
-   end else begin
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
-   end;
-end else if sc.cfgsc.PluginTelescope then begin
+if sc.cfgsc.PluginTelescope then begin
     if Ftelescope.scopelibok then begin
     Connect1.checked:=Ftelescope.ScopeConnected;
     if Connect1.checked then begin

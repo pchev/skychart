@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML, Htmlview;
+  StdCtrls, Buttons, LResources, downloaddialog, IpHtml, LazHelpHTML;
 
 // GetDss.dll interface
   type
@@ -65,12 +65,18 @@ uses u_help, u_translation,
   TImageExtractFromPlate=function( img : PImageConfig; ReqPlateName : Pchar): Integer; cdecl;
 
 type
+  TSimpleIpHtml = class(TIpHtml)
+  public
+    property OnGetImageX;
+  end;
+
+type
 
   { Tf_getdss }
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
-    HTMLViewer1: THTMLViewer;
+    IpHtmlPanel1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
     BitBtn1: TBitBtn;
@@ -84,6 +90,7 @@ type
     ImageExtract: TImageExtract;
     GetPlateList: TGetPlateList;
     ImageExtractFromPlate: TImageExtractFromPlate;
+    procedure HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
   public
     { Public declarations }
     cfgdss: Tconf_dss;
@@ -169,6 +176,8 @@ var i : SImageConfig;
     gzf:pointer;
     fitsfile:file;
     gzbuf : array[0..4095]of char;
+    NewHTML: TSimpleIpHtml;
+    s: TMemoryStream;
 begin
 try
 hide;
@@ -255,14 +264,19 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   if (DownloadDialog1.ResponseText<>'')and(not result) then begin
      caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;
+     s:=TMemoryStream.Create;
      RenameFile(ExpandFileName(cfgdss.dssfile),ExpandFileName(cfgdss.dssfile)+'.txt');
-     HTMLViewer1.visible:=true;
+     s.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
+     NewHTML:=TSimpleIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
+     NewHTML.OnGetImageX:=HTMLGetImageX;
+     NewHTML.LoadFromStream(s);
+     s.free;
+     IpHtmlPanel1.SetHtml(NewHTML);
+     IpHtmlPanel1.visible:=true;
      ListBox1.Visible:=false;
      BitBtn1.Visible:=false;
-     HTMLViewer1.Clear;
-     HTMLViewer1.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
      showmodal;
-     HTMLViewer1.visible:=false;
+     IpHtmlPanel1.visible:=false;
      ListBox1.Visible:=true;
      BitBtn1.Visible:=true;
   end;
@@ -376,6 +390,25 @@ finally
 end;
 end;
 
+procedure Tf_getdss.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
+var
+  PicCreated: boolean;
+begin
+  try
+    if FileExists(URL) then begin
+      PicCreated := False;
+      if Picture=nil then begin
+        Picture:=TPicture.Create;
+        PicCreated := True;
+      end;
+      Picture.LoadFromFile(URL);
+    end;
+  except
+    if PicCreated then
+      Picture.Free;
+    Picture := nil;
+  end;
+end;
 
 initialization
   {$i pu_getdss.lrs}

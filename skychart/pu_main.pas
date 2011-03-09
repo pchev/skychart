@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
+  LResources, uniqueinstance, enhedits, LazHelpHTML;
 
 type
 
@@ -59,9 +59,7 @@ type
     MenuItem29: TMenuItem;
     MenuItem30: TMenuItem;
     ThemeTimer: TTimer;
-    AnimationTimer: TTimer;
     TimeVal: TUpDown;
-    ToolButton13: TToolButton;
     ViewClock: TAction;
     HTMLBrowserHelpViewer1: THTMLBrowserHelpViewer;
     HTMLHelpDatabase1: THTMLHelpDatabase;
@@ -433,7 +431,6 @@ type
     TelescopePanel: TAction;
     ControlPanel1: TMenuItem;
     ViewFullScreen: TAction;
-    procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
     procedure BugReport1Click(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
@@ -471,9 +468,6 @@ type
     procedure TConnectMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ThemeTimerTimer(Sender: TObject);
-    procedure ToolButton13Click(Sender: TObject);
-    procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
     procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
@@ -621,8 +615,8 @@ type
     ConfigPictures: Tf_config_pictures;
     ConfigCatalog: Tf_config_catalog;
     cryptedpwd,basecaption :string;
-    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig : Boolean;
-    InitialChartNum, Animcount: integer;
+    NeedRestart,NeedToInitializeDB : Boolean;
+    InitialChartNum: integer;
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
@@ -704,7 +698,7 @@ type
     procedure ChangeLanguage(newlang:string);
     Procedure InitFonts;
     Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
-    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil);
+    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true; Sender: TObject=nil);
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string;sender:TObject);
     Procedure SetTitleMessage(txt:string;sender:TObject);
@@ -725,7 +719,7 @@ type
     procedure NeighborObj(chart:string);
     procedure ConnectDB;
     procedure ImageSetFocus(Sender: TObject);
-    procedure ListInfo(buf,msg:string);
+    procedure ListInfo(buf:string);
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
@@ -733,7 +727,6 @@ type
     procedure DrawChart(csc:Tconf_skychart);
     procedure ConfigDBChange(Sender: TObject);
     procedure SaveAndRestart(Sender: TObject);
-    procedure ClearAndRestart;
     procedure InitializeDB(Sender: TObject);
     procedure Init;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
@@ -741,7 +734,6 @@ type
     procedure GetActiveChart(var active_chart: string);
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
-    procedure GetTwilight(jd0: double; out ht: double);
   end;
 
 var
@@ -822,7 +814,6 @@ begin
   Child.sc.Fits:=Fits;
   Child.sc.planet:=planet;
   Child.sc.cdb:=cdcdb;
-  Child.cmain:=cfgm;
   {$ifdef mswindows}
   Child.telescopeplugin:=telescope;
   {$endif}
@@ -843,7 +834,7 @@ begin
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
-  if (not Child.sc.cfgsc.TrackOn)and(Child.sc.cfgsc.Projpole=Altaz) then begin
+  if Child.sc.cfgsc.Projpole=Altaz then begin
      Child.sc.cfgsc.TrackOn:=true;
      Child.sc.cfgsc.TrackType:=4;
   end;
@@ -991,7 +982,7 @@ var nam: string;
     p: integer;
     maxi: boolean;
 begin
-if FileExistsUTF8(fn) then begin
+if FileExists(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
  ReadChartConfig(SafeUTF8ToSys(fn),true,MultiDoc1.Maximized,cfgp,cfgs);
@@ -1095,7 +1086,6 @@ try
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
- planet.SetDE(slash(Appdir)+slash('data')+'jpleph');
 {$ifdef trace_debug}
  WriteTrace('Telescope plugin');
 {$endif}
@@ -1149,7 +1139,7 @@ try
 {$ifdef trace_debug}
  WriteTrace('Starshape file');
 {$endif}
-if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then begin
+if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
   starshape.Picture.LoadFromFile(cfgm.starshape_file);
 end;
 {$ifdef trace_debug}
@@ -1435,9 +1425,6 @@ if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash
 Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
-SatDir:=slash(privatedir)+'satellites';
-if not directoryexists(SatDir) then CreateDir(SatDir);
-if not directoryexists(SatDir) then forcedirectories(SatDir);
 {$ifdef trace_debug}
  debugln('appdir='+appdir);
 {$endif}
@@ -1552,7 +1539,6 @@ DateSeparator:='/';
 TimeSeparator:=':';
 NeedRestart:=false;
 showsplash:=true;
-ConfirmSaveConfig:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
@@ -1720,6 +1706,7 @@ Fits.Free;
 planet.free;
 cdcdb.free;
 telescope.free;
+if NeedRestart then ExecNoWait(paramstr(0));
 def_cfgsc.Free;
 cfgs.Free;
 cfgm.Free;
@@ -1727,7 +1714,6 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
-if NeedRestart then ExecNoWait(paramstr(0));
 {$ifdef trace_debug}
  WriteTrace('Destroy Cursor');
 {$endif}
@@ -1744,11 +1730,7 @@ end;
 end;
 
 procedure Tf_main.FormClose(Sender: TObject; var Action: TCloseAction);
-var i,h,w,mresult:integer;
-    f1: TForm;
-    l1: TLabel;
-    c1: Tcheckbox;
-    btn: TButtonPanel;
+var i:integer;
 begin
 try
 {$ifdef mswindows}
@@ -1757,56 +1739,11 @@ if nightvision then ResetWinColor;
 StopServer;
 writetrace(rsExiting);
 Autorefresh.Enabled:=false;
-if SaveConfigOnExit.checked then begin
-   if ConfirmSaveConfig then begin
-   try
-    f1:=TForm.Create(self);
-    f1.AutoSize:=false;
-    f1.Position:=poScreenCenter;
-    f1.Caption:=rsSaveConfigur;
-    l1:=TLabel.Create(f1);
-    l1.Caption:=rsDoYouWantToS;
-    l1.ParentFont:=true;
-    btn:= TButtonPanel.Create(f1);
-    btn.ShowButtons:=[pbOK,pbCancel];
-    btn.OKButton.Caption:='Yes';
-    btn.CancelButton.Caption:='No';
-    btn.ShowGlyphs:=[];
-    btn.AutoSize:=true;
-    btn.Align:=alBottom;
-    c1:=Tcheckbox.Create(f1);
-    c1.AutoSize:=true;
-    c1.Caption:=rsAlwaysSaveWi;
-    c1.Checked:=false;
-    l1.Parent:=f1;
-    c1.Parent:=f1;
-    btn.Parent:=f1;
-    l1.AdjustSize;
-    c1.AdjustSize;
-    btn.AdjustSize;
-    l1.top:=8;
-    l1.Left:=8;
-    c1.Left:=8;
-    c1.Top:=8+l1.Height+8;
-    h:=l1.height+c1.Height+btn.Height+20;
-    w:=f1.Canvas.TextWidth(l1.Caption)+16;
-    f1.Width:=w;
-    f1.Height:=h;
-    mresult:=f1.ShowModal;
-    ConfirmSaveConfig:=not c1.Checked;
-    if mresult=mrOK then
-       SaveDefault;
-   finally
-    btn.free;
-    l1.Free;
-    c1.Free;
-    f1.Free;
-   end;
-   end else
-     SaveDefault;
-end else begin
-   if not NeedRestart then SaveQuickSearch(configfile);
-end;
+if SaveConfigOnExit.checked and
+   (MessageDlg(rsDoYouWantToS, mtConfirmation, [mbYes, mbNo], 0)=mrYes) then begin
+      SaveDefault;
+end else
+   SaveQuickSearch(configfile);
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
       locked:=true;
@@ -1983,25 +1920,21 @@ execnowait(cfgm.IndiPanelCmd);
 end;
 
 procedure Tf_main.ListObjExecute(Sender: TObject);
-var buf,msg:string;
+var buf:widestring;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
   if sc.cfgsc.windowratio=0 then sc.cfgsc.windowratio:=1;
-  sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,msg,false,false,false);
-  ListInfo(buf,msg);
-end;
-end;
-
-procedure Tf_main.ListInfo(buf,msg:string);
-begin
-  f_info.source_chart:=MultiDoc1.ActiveChild.Caption;
+  sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,false,false,false);
+  f_info.Memo1.Font.Name:=def_cfgplot.FontName[5];
+  f_info.Memo1.Font.Size:=def_cfgplot.FontSize[5];
+  f_info.Memo1.text:=blank+wordspace(buf);
+  f_info.Memo1.selstart:=0;
+  f_info.Memo1.selend:=0;
   f_info.setpage(1);
-  f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+':   '+msg;
-  f_info.StringGrid2.Font.Name:=def_cfgplot.FontName[5];
-  f_info.StringGrid2.Font.Size:=def_cfgplot.FontSize[5];
-  f_info.setgrid(blank+wordspace(buf));
+  f_info.source_chart:=MultiDoc1.ActiveChild.Caption;
   f_info.show;
   f_info.BringToFront;
+end;
 end;
 
 procedure Tf_main.GridEQExecute(Sender: TObject);
@@ -2091,68 +2024,6 @@ end;
 procedure Tf_main.LessNebExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_LessNeb;
-end;
-
-procedure Tf_main.ToolButton13Click(Sender: TObject);
-var fs : TSearchRec;
-    i: integer;
-    r: TStringList;
-    fn,cmd: string;
-begin
-if ToolButton13.Down then begin  // start animation
-   if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
-     r:=TStringList.Create;
-     cmd:='RESIZE '+inttostr(cfgm.AnimSx)+' '+inttostr(cfgm.AnimSy);
-     splitarg(cmd,blank,r);
-     for i:=r.count to MaxCmdArg do r.add('');
-     ExecuteCmd('',r);
-     r.free;
-   end;
-   Animcount:=0;
-   if cfgm.AnimRec then begin
-      i:=findfirst(slash(TempDir)+'*.jpg',0,fs);
-      while i=0 do begin
-        DeleteFile(slash(TempDir)+fs.name);
-        i:=findnext(fs);
-      end;
-      findclose(fs);
-   end;
-end else begin                   // end animation
-   if cfgm.AnimRec then begin
-      r:=TStringList.Create;
-      i:=0;
-      repeat
-        inc(i);
-        fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
-      until (not FileExists(fn))or(i>1000);
-      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i '+slash(TempDir)+'%06d.jpg '+fn;
-      ExecProcess(cmd,r,true);
-      r.free;
-   end;
-end;
-AnimationTimer.Enabled:=ToolButton13.Down;
-end;
-
-procedure Tf_main.ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-begin
-  if Button=mbRight then SetupTimePage(2);
-end;
-
-procedure Tf_main.AnimationTimerTimer(Sender: TObject);
-var fn:string;
-begin
-  AnimationTimer.Enabled:=false;
-  TimeInc.Execute;
-  if cfgm.AnimRec then begin
-    if MultiDoc1.ActiveObject  is Tf_chart then
-     with MultiDoc1.ActiveObject as Tf_chart do begin
-         inc(Animcount);
-         fn:=Slash(TempDir)+FormatFloat('000000',Animcount)+'.jpg';
-         SaveChartImage('JPEG',fn,80);
-      end;
-  end;
-  AnimationTimer.Enabled:=true;
 end;
 
 procedure Tf_main.TimeIncExecute(Sender: TObject);
@@ -2410,64 +2281,19 @@ if MultiDoc1.ActiveObject is Tf_chart then
 end;
 
 procedure Tf_main.ResetDefaultChartExecute(Sender: TObject);
-var i,w,h: integer;
-    f1: TForm;
-    r1: TRadioGroup;
-    btn: TButtonPanel;
+var i: integer;
 begin
+WriteTrace('Reload default configuration');
+for i:=1 to MultiDoc1.ChildCount-1 do
+  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+     MultiDoc1.Childs[i].close;
+Multidoc1.Maximized:=true;
+with MultiDoc1.ActiveObject as Tf_chart do begin
+  ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
 {$ifdef trace_debug}
  WriteTrace('ResetDefaultChartExecute');
 {$endif}
-f1:=TForm.Create(self);
-f1.AutoSize:=false;
-f1.Caption:=rsResetChartAn;
-r1:=TRadioGroup.Create(f1);
-r1.AutoSize:=true;
-r1.top:=8;
-r1.Left:=8;
-btn:= TButtonPanel.Create(f1);
-btn.ShowButtons:=[pbOK,pbCancel];
-btn.OKButton.Caption:=rsOK;
-btn.CancelButton.Caption:=rsCancel;
-btn.ShowGlyphs:=[];
-btn.AutoSize:=true;
-btn.Align:=alBottom;
-r1.Items.Add(rsResetInitial);
-r1.Items.Add(rsResetToLastT);
-r1.ItemIndex:=1;
-r1.Parent:=f1;
-btn.Parent:=f1;
-r1.AdjustSize;
-btn.AdjustSize;
-h:=r1.Height+btn.Height+16;
-w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
-f1.Height:=h;
-f1.Width:=w;
-try
-FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
-if f1.ShowModal=mrOK then begin
-  case r1.ItemIndex of
-    0: begin
-        WriteTrace('Reload default configuration');
-        ClearAndRestart;
-       end;
-    1: begin
-        WriteTrace('Reload last configuration');
-        for i:=1 to MultiDoc1.ChildCount-1 do
-          if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-             MultiDoc1.Childs[i].close;
-        Multidoc1.Maximized:=true;
-        with MultiDoc1.ActiveObject as Tf_chart do begin
-          ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
-          Refresh;
-        end;
-       end;
-  end;
-end;
-finally
- btn.Free;
- r1.Free;
- f1.Free;
+  Refresh;
 end;
 end;
 
@@ -2621,7 +2447,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
  WriteTrace('TrackExecute 1');
 {$endif}
      Refresh;
-  end else if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>'')
+  end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6)
   then begin
      sc.cfgsc.TrackOn:=true;
 {$ifdef trace_debug}
@@ -2754,7 +2580,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
           end;
           ShowIdentLabel;
         end;
-        f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
+        f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
@@ -2825,7 +2651,6 @@ if ConfigTime=nil then begin
    ConfigTime.PageControl1.ShowTabs:=true;
    ConfigTime.PageControl1.PageIndex:=0;
    ConfigTime.onApplyConfig:=ApplyConfigTime;
-   ConfigTime.onGetTwilight:=GetTwilight;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigTime,nightvision);{$endif}
 ConfigTime.ccat.Assign(catalog.cfgcat);
@@ -2872,7 +2697,6 @@ if f_config=nil then begin
    f_config.onDBChange:=ConfigDBChange;
    f_config.onSaveAndRestart:=SaveAndRestart;
    f_config.onPrepareAsteroid:=PrepareAsteroid;
-   f_config.onGetTwilight:=GetTwilight;
    f_config.Fits:=fits;
    f_config.catalog:=catalog;
    f_config.db:=cdcdb;
@@ -3387,14 +3211,6 @@ if ConfigSystem<>nil then begin
 end;
 end;
 
-procedure Tf_main.ClearAndRestart;
-begin
-  SaveConfigOnExit.checked:=false;
-  DeleteFile(configfile);
-  NeedRestart:=true;
-  Close;
-end;
-
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
 var i:integer;
   themechange,langchange,starchange: Boolean;
@@ -3412,7 +3228,6 @@ begin
       if cfgm.starshape_file<>cmain.starshape_file then
          starchange:=true;
       cfgm.Assign(cmain);
-      AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
     end;
     if themechange then SetTheme;
     if starchange then SetStarShape;
@@ -3436,10 +3251,7 @@ begin
     end;
     if cdss<>nil then f_getdss.cfgdss.Assign(cdss);
     if cshr<>nil then catalog.cfgshr.Assign(cshr);
-    if csc<>nil  then begin
-       if (not csc.SunOnline)or(csc.sunurlname<>def_cfgsc.sunurlname) then DeleteFile(slash(Tempdir)+'sun.jpg');
-       def_cfgsc.Assign(csc);
-    end;
+    if csc<>nil  then def_cfgsc.Assign(csc);
     if cplot<>nil then def_cfgplot.Assign(cplot);
     def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
     def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
@@ -3619,7 +3431,7 @@ begin
    Lpanels0.Caption:='';}
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil);
+Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=true;Sender: TObject=nil);
 begin
 if (trim(txt)>'') then writetrace(txt);
 P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
@@ -3713,17 +3525,6 @@ cfgm.SyncChart:=false;
 cfgm.ThemeName:='default';
 cfgm.ButtonStandard:=1;
 cfgm.ButtonNight:=2;
-cfgm.AnimDelay:=500;
-cfgm.AnimFps:=2.0;
-cfgm.AnimRec:=false;
-cfgm.AnimRecDir:=PrivateDir;
-cfgm.AnimRecPrefix:='skychart';
-cfgm.AnimRecExt:='.mp4';
-cfgm.Animffmpeg:=Defaultffmpeg;
-cfgm.AnimSx:=-1;
-cfgm.AnimSy:=-1;
-cfgm.AnimSize:=0;
-cfgm.AnimOpt:=DefaultffmpegOptions;
 cfgm.HttpProxy:=false;
 cfgm.FtpPassive:=true;
 cfgm.ConfirmDownload:=true;
@@ -3732,7 +3533,6 @@ cfgm.ProxyPort:='';
 cfgm.ProxyUser:='';
 cfgm.ProxyPass:='';
 cfgm.AnonPass:='skychart@';
-cfgm.ObsNameList:=TStringList.Create;
 cfgm.CometUrlList:=TStringList.Create;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList:=TStringList.Create;
@@ -3923,12 +3723,6 @@ def_cfgsc.SimM:=0;
 def_cfgsc.SimS:=0;
 def_cfgsc.SimLine:=True;
 for i:=1 to NumSimObject do def_cfgsc.SimObject[i]:=true;
-def_cfgsc.sunurlname:=URL_SUN_NAME[1];
-def_cfgsc.sunurl:=URL_SUN[1];
-def_cfgsc.sunurlsize:=URL_SUN_SIZE[1];
-def_cfgsc.sunurlmargin:=URL_SUN_MARGIN[1];
-def_cfgsc.sunrefreshtime:=24;
-def_cfgsc.SunOnline:=false;
 def_cfgsc.ShowPlanet:=true;
 def_cfgsc.ShowPluto:=true;
 def_cfgsc.ShowAsteroid:=true;
@@ -3939,8 +3733,6 @@ def_cfgsc.AstSymbol:=0;
 def_cfgsc.AstmagMax:=18;
 def_cfgsc.AstmagDiff:=6;
 def_cfgsc.ShowComet:=true;
-def_cfgsc.ShowArtSat:=false;
-def_cfgsc.NewArtSat:=false;
 def_cfgsc.ComSymbol:=1;
 def_cfgsc.CommagMax:=18;
 def_cfgsc.CommagDiff:=4;
@@ -4447,12 +4239,6 @@ csc.ShowEcliptic:=ReadBool(section,'ShowEcliptic',csc.ShowEcliptic);
 csc.ShowGalactic:=ReadBool(section,'ShowGalactic',csc.ShowGalactic); 
 csc.ShowMilkyWay:=ReadBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 csc.FillMilkyWay:=ReadBool(section,'FillMilkyWay',csc.FillMilkyWay);
-csc.sunurlname:=ReadString(section,'URL_SUN_NAME',csc.sunurlname);
-csc.sunurl:=ReadString(section,'URL_SUN',csc.sunurl);
-csc.sunurlsize:=ReadInteger(section,'URL_SUN_SIZE',csc.sunurlsize);
-csc.sunurlmargin:=ReadInteger(section,'URL_SUN_MARGIN',csc.sunurlmargin);
-csc.sunrefreshtime:=ReadInteger(section,'SunRefreshTime',csc.sunrefreshtime);
-csc.SunOnline:=ReadBool(section,'SunOnline',csc.SunOnline);
 csc.ShowPluto:=ReadBool(section,'ShowPluto',csc.ShowPluto);
 csc.ShowPlanet:=ReadBool(section,'ShowPlanet',csc.ShowPlanet);
 csc.ShowAsteroid:=ReadBool(section,'ShowAsteroid',csc.ShowAsteroid);
@@ -4504,13 +4290,6 @@ for i:=1 to numlabtype do begin
    csc.ShowLabel[i]:=readBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    csc.LabelMagDiff[i]:=readFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
 end;
-csc.TrackOn:=ReadBool(section,'TrackOn',csc.TrackOn);
-csc.TrackType:=ReadInteger(section,'TrackType',csc.TrackType);
-csc.TrackObj:=ReadInteger(section,'TrackObj',csc.TrackObj);
-csc.TrackDec:=ReadFloat(section,'TrackDec',csc.TrackDec);
-csc.TrackRA:=ReadFloat(section,'TrackRA',csc.TrackRA);
-csc.TrackEpoch:=ReadFloat(section,'TrackEpoch',csc.TrackEpoch);
-csc.TrackName:=ReadString(section,'TrackName',csc.TrackName);
 except
   ShowError('Error reading '+filename+' default chart');
 end;
@@ -4628,10 +4407,9 @@ end;
 end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
-var i,j,k:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section,buf : string;
-    obsdetail: TObsDetail;
 begin
 inif:=TMeminifile.create(filename);
 try
@@ -4640,7 +4418,6 @@ section:='main';
 try
 Config_Version:=ReadString(section,'version','0');
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
-ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 {$ifdef linux}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
@@ -4696,18 +4473,6 @@ cfgm.ShowTitlePos:=ReadBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
 cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
-cfgm.AnimDelay:=ReadInteger(section,'AnimDelay',cfgm.AnimDelay);
-AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
-cfgm.AnimFps:=ReadFloat(section,'AnimFps',cfgm.AnimFps);
-//cfgm.AnimRec:=ReadBool(section,'AnimRec',cfgm.AnimRec);
-cfgm.AnimRecDir:=ReadString(section,'AnimRecDir',cfgm.AnimRecDir);
-cfgm.AnimRecPrefix:=ReadString(section,'AnimRecPrefix',cfgm.AnimRecPrefix);
-cfgm.AnimRecExt:=ReadString(section,'AnimRecExt',cfgm.AnimRecExt);
-cfgm.Animffmpeg:=ReadString(section,'Animffmpeg',cfgm.Animffmpeg);
-cfgm.AnimSx:=ReadInteger(section,'AnimSx',cfgm.AnimSx);
-cfgm.AnimSy:=ReadInteger(section,'AnimSy',cfgm.AnimSy);
-cfgm.AnimSize:=ReadInteger(section,'AnimSize',cfgm.AnimSize);
-cfgm.AnimOpt:=ReadString(section,'AnimOpt',cfgm.AnimOpt);
 cfgm.HttpProxy:=ReadBool(section,'HttpProxy',cfgm.HttpProxy);
 cfgm.FtpPassive:=ReadBool(section,'FtpPassive',cfgm.FtpPassive);
 cfgm.ConfirmDownload:=ReadBool(section,'ConfirmDownload',cfgm.ConfirmDownload);
@@ -4733,15 +4498,6 @@ if Pos('cfa-www.harvard.edu',buf)=0 then begin   // Old MPC URL, ignore saved co
       cfgm.AsteroidUrlList.Add(buf);
     end;
   end;
-end;
-j:=ReadInteger(section,'ObsNameListCount',0);
-cfgm.ObsNameList.Clear;
-if j>0 then for i:=0 to j-1 do begin
-  obsdetail:=TObsDetail.Create;
-  obsdetail.country:=ReadString(section,'ObsCountry'+inttostr(i),'');
-  obsdetail.lat:=ReadFloat(section,'ObsLat'+inttostr(i),0);
-  obsdetail.lon:=ReadFloat(section,'ObsLon'+inttostr(i),0);
-  cfgm.ObsNameList.AddObject(ReadString(section,'ObsName'+inttostr(i),''),obsdetail);
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
 catalog.cfgshr.ListStar:=ReadBool(section,'ListStar',catalog.cfgshr.ListStar);
@@ -5111,12 +4867,6 @@ WriteBool(section,'ShowEcliptic',csc.ShowEcliptic);
 WriteBool(section,'ShowGalactic',csc.ShowGalactic);
 WriteBool(section,'ShowMilkyWay',csc.ShowMilkyWay);
 WriteBool(section,'FillMilkyWay',csc.FillMilkyWay);
-WriteString(section,'URL_SUN_NAME',csc.sunurlname);
-WriteString(section,'URL_SUN',csc.sunurl);
-WriteInteger(section,'URL_SUN_SIZE',csc.sunurlsize);
-WriteInteger(section,'URL_SUN_MARGIN',csc.sunurlmargin);
-WriteInteger(section,'SunRefreshTime',csc.sunrefreshtime);
-WriteBool(section,'SunOnline',csc.SunOnline);
 WriteBool(section,'ShowPluto',csc.ShowPluto);
 WriteBool(section,'ShowPlanet',csc.ShowPlanet);
 WriteBool(section,'ShowAsteroid',csc.ShowAsteroid);
@@ -5168,13 +4918,6 @@ for i:=1 to numlabtype do begin
    WriteBool(section,'ShowLabel'+inttostr(i),csc.ShowLabel[i]);
    WriteFloat(section,'LabelMag'+inttostr(i),csc.LabelMagDiff[i]);
 end;
-WriteBool(section,'TrackOn',csc.TrackOn);
-WriteInteger(section,'TrackType',csc.TrackType);
-WriteInteger(section,'TrackObj',csc.TrackObj);
-WriteFloat(section,'TrackDec',csc.TrackDec);
-WriteFloat(section,'TrackRA',csc.TrackRA);
-WriteFloat(section,'TrackEpoch',csc.TrackEpoch);
-WriteString(section,'TrackName',csc.TrackName);
 section:='observatory';
 WriteFloat(section,'ObsLatitude',csc.ObsLatitude );
 WriteFloat(section,'ObsLongitude',csc.ObsLongitude );
@@ -5253,7 +4996,6 @@ WriteBool(section,'use_xplanet',use_xplanet);
 WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
-WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 WriteString(section,'prtname',cfgm.prtname);
@@ -5301,17 +5043,6 @@ WriteBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 WriteBool(section,'SyncChart',cfgm.SyncChart);
 WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
-WriteInteger(section,'AnimDelay',cfgm.AnimDelay);
-WriteFloat(section,'AnimFps',cfgm.AnimFps);
-//WriteBool(section,'AnimRec',cfgm.AnimRec);
-WriteString(section,'AnimRecDir',cfgm.AnimRecDir);
-WriteString(section,'AnimRecPrefix',cfgm.AnimRecPrefix);
-WriteString(section,'AnimRecExt',cfgm.AnimRecExt);
-WriteString(section,'Animffmpeg',cfgm.Animffmpeg);
-WriteInteger(section,'AnimSx',cfgm.AnimSx);
-WriteInteger(section,'AnimSy',cfgm.AnimSy);
-WriteInteger(section,'AnimSize',cfgm.AnimSize);
-WriteString(section,'AnimOpt',cfgm.AnimOpt);
 WriteBool(section,'HttpProxy',cfgm.HttpProxy);
 WriteBool(section,'FtpPassive',cfgm.FtpPassive);
 WriteBool(section,'ConfirmDownload',cfgm.ConfirmDownload);
@@ -5330,14 +5061,6 @@ j:=cfgm.AsteroidUrlList.Count;
 WriteInteger(section,'AsteroidUrlCount',j);
 if j>0 then begin
    for i:=1 to j do WriteString(section,'AsteroidUrl'+inttostr(i),cfgm.AsteroidUrlList[i-1]);
-end;
-j:=cfgm.ObsNameList.Count;
-WriteInteger(section,'ObsNameListCount',j);
-if j>0 then for i:=0 to j-1 do begin
-  WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
-  WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
-  WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
-  WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
 end;
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
@@ -5426,13 +5149,11 @@ var inif: TMemIniFile;
 begin
 try
 SaveConfigOnExit.Checked:=not SaveConfigOnExit.Checked;
-ConfirmSaveConfig:=true;
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
 section:='main';
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
-WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 Updatefile;
 end;
 finally
@@ -5546,7 +5267,6 @@ ToolButtonCal.hint:=rsEphemerisCal;
 ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;
-ToolButton13.Hint:=rsAnimation;
 if def_cfgsc.PluginTelescope or def_cfgsc.ASCOMTelescope then begin
    TConnect.hint:=rsControlPanel;
 end else begin
@@ -5841,7 +5561,7 @@ Findit:
         sc.cfgsc.TrackName:=Num;
       end;
       ShowIdentLabel;
-      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
+      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption);
    end;
 end;
 end;
@@ -5881,7 +5601,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
        TSlew.Enabled:=false;
        TSync.Enabled:=false;
     end else begin
-       ControlPanel1.Visible:=sc.cfgsc.IndiTelescope;
+       ControlPanel1.Visible:=true;
        telescopeSlew1.Visible:=true;
        telescopeSync1.Visible:=true;
        TSlew.Enabled:=true;
@@ -6129,8 +5849,7 @@ else begin
     if cmd='RESIZE' then begin // special case with action on main and on the chart
          w:=StrToIntDef(arg[1],child.Width);
          h:=StrToIntDef(arg[2],child.Height);
-  //       if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
-         if (w>10)and(h>10) then begin
+         if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
            Multidoc1.Maximized:=false;
            if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
            if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
@@ -6453,8 +6172,8 @@ try
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);
     end;
-    cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
-    if cdcdb.CheckDB then begin
+    if (cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport)
+       and cdcdb.CheckDB) then begin
          {$ifdef trace_debug}
           WriteTrace('DB connected');
          {$endif}
@@ -6587,6 +6306,17 @@ begin
   TimeU.Enabled:=true;
 end;
 
+procedure Tf_main.ListInfo(buf:string);
+begin
+f_info.Memo1.text:=buf;
+f_info.Memo1.selstart:=0;
+f_info.Memo1.selend:=0;
+f_info.setpage(1);
+f_info.source_chart:=MultiDoc1.ActiveChild.caption;
+f_info.show;
+f_info.bringtofront;
+end;
+
 procedure Tf_main.GetTCPInfo(i:integer; var buf:string);
 begin
 if (TCPDaemon<>nil) then
@@ -6669,14 +6399,14 @@ procedure Tf_main.SetStarShape;
 var i : integer;
     defaultfile: string;
 begin
-  if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then begin
+  if (cfgm.starshape_file<>'')and(FileExists(cfgm.starshape_file)) then begin
      starshape.Picture.LoadFromFile(cfgm.starshape_file);
   end;
   if (cfgm.starshape_file='') then begin
      defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'starshape.bmp';
      if not FileExists(defaultfile) then
         defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash('default')+'starshape.bmp';
-     starshape.Picture.LoadFromFile(systoutf8(defaultfile));
+     starshape.Picture.LoadFromFile(defaultfile);
   end;
   for i:=0 to MultiDoc1.ChildCount-1 do
     if MultiDoc1.Childs[i].DockedObject is Tf_chart then
@@ -6695,6 +6425,8 @@ begin
        try
          btn:=TPortableNetworkGraphic.Create;
          btn.LoadFromFile(iconpath+'i'+inttostr(i)+'.png');
+//         btn.Transparent:=true;
+//         btn.TransparentColor:=clBlack;
          imagelist.Add(btn,nil);
          btn.Free;
        except
@@ -6705,7 +6437,6 @@ begin
    Toolbar2.Images:=imagelist;
    Toolbar3.Images:=imagelist;
    Toolbar4.Images:=imagelist;
-   MainMenu1.Images:=imagelist;
    btn:=TPortableNetworkGraphic.Create;
    btn.LoadFromFile(iconpath+'b1.png');
    BtnCloseChild.Glyph.Assign(btn);
@@ -6727,22 +6458,22 @@ begin
 try
 case button of
  1:begin    // color
-   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color'));
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_color');
    col:=clNavy;
    SetButtonImage1(ImageNormal);
    end;
  2:begin  // red
-   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red'));
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_red');
    col:=$acb5f5;
    SetButtonImage1(ImageList2);
    end;
  3:begin   // blue
-   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue'));
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_blue');
    col:=clNavy;
    SetButtonImage1(ImageList2);
    end;
  4:begin   // Green
-   iconpath:=systoutf8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green'));
+   iconpath:=slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+slash('icon_green');
    col:=clLime;
    SetButtonImage1(ImageList2);
    end;
@@ -7017,14 +6748,6 @@ FullScreen1.Checked:=not FullScreen1.Checked;
 {$endif}
 end;
 {$endif}
-
-procedure Tf_main.GetTwilight(jd0: double; out ht: double);
-var astrom,nautm,civm,cive,naute,astroe: double;
-begin
-  planet.Twilight(jd0,def_cfgsc.ObsLatitude,def_cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
-  def_cfgsc.tz.JD:=jd0;
-  ht:=astroe+def_cfgsc.tz.SecondsOffset/3600;
-end;
 
 // DDE server, windows only
 //todo: any DDE for Lazarus? if not create a separate app that relay to tcp/ip

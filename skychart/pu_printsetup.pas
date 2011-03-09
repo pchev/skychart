@@ -64,7 +64,6 @@ type
     procedure Button1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure PaperSizeChange(Sender: TObject);
-    procedure printcmdAcceptFileName(Sender: TObject; var Value: String);
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -225,7 +224,6 @@ if lockupd then exit;
 cm.PrinterResolution:=prtres.value;
 end;
 
-////////// duplicate because of filenameedit onchange bug //////////////////////////
 procedure Tf_printsetup.printcmdChange(Sender: TObject);
 begin
 if lockupd then exit;
@@ -235,17 +233,6 @@ case cm.PrintMethod of
 end;
 updprtsetup;
 end;
-procedure Tf_printsetup.printcmdAcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-if lockupd then exit;
-case cm.PrintMethod of
-1: cm.PrintCmd1:=value;
-2: cm.PrintCmd2:=value;
-end;
-updprtsetup;
-end;
-//////////////////////////////////////////
 
 procedure Tf_printsetup.savepathExit(Sender: TObject);
 begin

@@ -1,23 +1,27 @@
-Version 3.3svn  Notes de la version
+Version 3.2  Notes de la version
 
-- List des observatoires favoris, nouvelle fenêtre pour la base de donnée des observatoires.
-- Localisation par Internet de votre emplacement.
-- Affiche une image en ligne du soleil des satellites SDO ou SOHO.
-- Nouvelle fonction d'animation et d'enregistrement de film. Voir la documentation pour l'installation du programme ffmpeg.
-- Calcul de la position des planètes avec les éphémérides JPL.
-- Ajout du graphique des planètes dans le calendrier, contribution de John Sunderland.
-- Ajout des satellites artificiels au calendrier. Cliquez sur une ligne pour l'afficher sur la carte. Vous devez installer Wine si vous utilisez Linux ou Mac.
-- Ajout d'information sur la vitesse des objets du système solaire.
-- Copie les coordonnée depuis le menu clic droit.
-- Double clic sur un objet ouvre la fenêtre de détail.
-- Ctrl + déplacement de la souris montre les informations dans la barre d'état.
-- Remplit la zone sous l'horizon avec la couleur de l'horizon. (pas avec Linux)
-- Pas de confirmation pour enregistrer en quittant si c'est selectionné dans le menu.
-- La configuration de l'objet bloqué est maintenant sauvegardée, attention que vous pouvez obtenir "Sous l'horizon" la prochaine fois que vous lancez le programme.
-- Option pour réinitialiser les valeurs par défaut du programme.
-- Ajout du bouton "cette nuit" au réglage de l'heure, il ajuste l'heure du crépuscule astronomique du soir.
-- Meilleur rendu de la ligne d'horizon lorsqu'elle est remplie pour des changement important d'altitude.
-- Corrige l'affichage des lignes pointillées.
-- Change la présentation de la "Liste d'objet".
-- Enregistre la "Liste d'objet" avec une virgule comme séparateur si l'extension est .csv. Utilisez une autre extension pour le avoir une tabulation comme séparateur.
-- Correction de bug.
+Il s'agit de la première version stable de la nouvelle version 3.
+
+Si vous venez de mettre a jour depuis la version 2.76 je vous suggère de prendre un peu de temps pour lire la nouvelle documentation, localement avec le menu Aide, ou en ligne à partir http://www.ap-i.net/skychart/fr/documentation/start
+
+Il y a les modifications suivantes depuis la version bêta précédente:
+
+Interface ASCOM intégrée, peut être utilisée avec Windows x64. 
+Support pour INDI 0.6
+Plus d'options de la ligne de commande pour permettre des simples scripts d'automatisation.
+Ajout des symboles pour les objets du système solaire.
+Modification des couleurs par défaut et du réglage des étoiles.
+Permet de changer les images des étoiles en mode photographique.
+Permet de ne pas remplir le dessin des nébuleuses en mode graphique.
+Ajout de raccourcis clavier.
+Un clic droit sur les boutons permet d'accéder directement au réglages correspondant.
+Plus de serveur d'images DSS.
+Mise à jour de la base de donnée SAC à la version 8.1.
+Sur Mac OS X le répertoire utilisateur change de ~/.skychart vers ~/Library/Application Support/skychart
+Correction du serveur tcp/ip sur Mac OS X.
+Dessine un petit cercle pour indiquer le résultat de recherche.
+Beaucoup de correction de bug.
+
+Le détail des changement est ici:
+http://www.ap-i.net/mantis/changelog_page.php?project_id=1&version_id=14
+
