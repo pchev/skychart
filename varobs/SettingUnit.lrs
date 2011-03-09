@@ -232,4 +232,4 @@ LazarusResources.Add('TOptForm','FORMDATA',[
   +'idth'#2#127#7'Caption'#6#22'Command to open a file'#11'ParentColor'#8#0#0#5
   +'TEdit'#7'opencmd'#4'Left'#3#158#0#6'Height'#2#26#3'Top'#3#214#0#5'Width'#3
   +#246#0#8'TabOrder'#2#5#0#0#0#0#0
-]);
+]);

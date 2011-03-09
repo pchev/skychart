@@ -372,4 +372,4 @@ object ObsForm: TObsForm
       OnClick = CodeClick
     end
   end
-end
+end
