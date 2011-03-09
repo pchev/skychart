@@ -254,4 +254,4 @@ object f_clock: Tf_clock
     left = 280
     top = 16
   end
-end
+end

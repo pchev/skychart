@@ -126,4 +126,4 @@ LazarusResources.Add('Tf_clock','FORMDATA',[
   +'ParentFont'#8#11'OnMouseDown'#7#13'FormMouseDown'#9'OnMouseUp'#7#11'FormMou'
   +'seUp'#0#0#6'TTimer'#6'Timer1'#7'Enabled'#8#7'OnTimer'#7#11'Timer1Timer'#4'l'
   +'eft'#3#24#1#3'top'#2#16#0#0#0
-]);
+]);

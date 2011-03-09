@@ -46,4 +46,4 @@ LazarusResources.Add('Tchartform','FORMDATA',[
   +#7'TButton'#7'Button2'#4'Left'#3#136#0#6'Height'#2#25#3'Top'#3#208#0#5'Width'
   +#2'K'#7'Caption'#6#9'Get Chart'#7'OnClick'#7#12'Button2Click'#8'TabOrder'#2#2
   +#0#0#0#0
-]);
+]);

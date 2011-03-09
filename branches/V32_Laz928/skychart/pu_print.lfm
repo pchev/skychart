@@ -225,4 +225,4 @@ object f_print: Tf_print
     OnClick = Button3Click
     TabOrder = 6
   end
-end
+end

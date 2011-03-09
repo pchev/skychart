@@ -115,4 +115,4 @@ object f_catgenadv: Tf_catgenadv
     ReadOnly = True
     TabOrder = 5
   end
-end
+end

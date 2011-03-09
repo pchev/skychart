@@ -201,4 +201,4 @@ object chartform: Tchartform
       TabOrder = 2
     end
   end
-end
+end
