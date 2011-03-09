@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 540
+  Left = 493
   Height = 573
-  Top = 102
+  Top = 97
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -13,7 +13,7 @@ object f_config_catalog: Tf_config_catalog
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object MainPanel: TPanel
     Left = 12
     Height = 520
@@ -30,15 +30,14 @@ object f_config_catalog: Tf_config_catalog
       Width = 498
       ActivePage = Page1
       Align = alClient
-      ShowTabs = False
       TabIndex = 0
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 429
+        ClientWidth = 492
         object Label37: TLabel
-          Left = 98
+          Left = 96
           Height = 14
           Top = 17
           Width = 246
@@ -104,8 +103,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 429
+        ClientWidth = 492
         object Label2: TLabel
           Left = 8
           Height = 14
@@ -425,7 +424,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 3
           OnChange = CDCStarPathChange
         end
@@ -439,7 +437,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 7
           OnChange = CDCStarPathChange
         end
@@ -453,7 +450,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 11
           OnChange = CDCStarPathChange
         end
@@ -466,7 +462,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 15
           OnChange = gcv3Change
         end
@@ -479,15 +474,14 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 20
           OnChange = wds3Change
         end
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 429
+        ClientWidth = 492
         object Label3: TLabel
           Left = 9
           Height = 14
@@ -617,7 +611,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 3
             OnChange = CDCNebPathChange
           end
@@ -690,7 +683,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 3
             OnChange = CDCNebPathChange
           end
@@ -973,7 +965,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 15
             OnChange = CDCNebPathChange
           end
@@ -986,7 +977,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 16
             OnChange = CDCNebPathChange
           end
@@ -999,7 +989,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 17
             OnChange = CDCNebPathChange
           end
@@ -1012,7 +1001,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 18
             OnChange = CDCNebPathChange
           end
@@ -1025,7 +1013,6 @@ object f_config_catalog: Tf_config_catalog
             ShowHidden = False
             ButtonWidth = 23
             NumGlyphs = 1
-            MaxLength = 0
             TabOrder = 19
             OnChange = CDCNebPathChange
           end
@@ -1033,8 +1020,17 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 429
+        ClientWidth = 492
+        object Label21: TLabel
+          Left = 17
+          Height = 14
+          Top = 37
+          Width = 78
+          Caption = 'Deepsky 2000'
+          ParentColor = False
+          WordWrap = True
+        end
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
@@ -1045,7 +1041,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 0
           OnChange = CDCStarPathChange
         end
@@ -1059,7 +1054,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 1
           OnChange = CDCStarPathChange
         end
@@ -1073,7 +1067,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 21
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 2
           OnChange = CDCStarPathChange
         end
@@ -1203,20 +1196,11 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 11
         end
-        object Label21: TLabel
-          Left = 17
-          Height = 14
-          Top = 37
-          Width = 78
-          Caption = 'Deepsky 2000'
-          ParentColor = False
-          WordWrap = True
-        end
       end
       object Page4: TTabSheet
         Caption = 'Obsolete'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 429
+        ClientWidth = 492
         object Label88: TLabel
           Left = 9
           Height = 14
@@ -1262,6 +1246,16 @@ object f_config_catalog: Tf_config_catalog
           Width = 70
           AutoSize = False
           Caption = 'Not available'
+          ParentColor = False
+          WordWrap = True
+        end
+        object Label95: TLabel
+          Left = 9
+          Height = 38
+          Top = 349
+          Width = 80
+          AutoSize = False
+          Caption = 'Replaced by PGC'
           ParentColor = False
           WordWrap = True
         end
@@ -1443,7 +1437,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 3
           OnChange = CDCStarPathChange
         end
@@ -1457,7 +1450,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 7
           OnChange = CDCStarPathChange
         end
@@ -1471,7 +1463,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 11
           OnChange = CDCStarPathChange
         end
@@ -1485,7 +1476,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 15
           OnChange = CDCStarPathChange
         end
@@ -1499,7 +1489,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 16
           OnChange = CDCStarPathChange
         end
@@ -1513,7 +1502,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 17
           OnChange = CDCStarPathChange
         end
@@ -1527,7 +1515,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 18
           OnChange = CDCStarPathChange
         end
@@ -1677,7 +1664,6 @@ object f_config_catalog: Tf_config_catalog
           ShowHidden = False
           ButtonWidth = 23
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 29
           OnChange = CDCNebPathChange
         end
@@ -1722,16 +1708,6 @@ object f_config_catalog: Tf_config_catalog
           ParentShowHint = False
           ShowHint = True
           TabOrder = 32
-        end
-        object Label95: TLabel
-          Left = 9
-          Height = 38
-          Top = 349
-          Width = 80
-          AutoSize = False
-          Caption = 'Replaced by PGC'
-          ParentColor = False
-          WordWrap = True
         end
       end
     end

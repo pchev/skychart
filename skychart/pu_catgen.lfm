@@ -1,9 +1,9 @@
 object f_catgen: Tf_catgen
-  Left = 381
+  Left = 388
   Height = 479
   Top = 94
   Width = 503
-  ActiveControl = CheckListBox1
+  ActiveControl = PageControl1
   BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
@@ -13,7 +13,7 @@ object f_catgen: Tf_catgen
   OnDestroy = FormDestroy
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object Image1: TImage
     Left = 0
     Height = 438
@@ -2903,14 +2903,13 @@ object f_catgen: Tf_catgen
     Width = 389
     ActivePage = TabSheet3
     Align = alClient
-    ShowTabs = False
     TabIndex = 2
     TabOrder = 0
     OnPageChanged = PageControl1PageChanged
     object TabSheet1: TTabSheet
       Caption = '1'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       object Label6: TLabel
         Left = 20
         Height = 14
@@ -3097,8 +3096,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet2: TTabSheet
       Caption = '2'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 4
       object Label2: TLabel
         Left = 16
@@ -3452,14 +3451,14 @@ object f_catgen: Tf_catgen
     end
     object TabSheet3: TTabSheet
       Caption = '3'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 1
       object Label4: TLabel
         Left = 134
         Height = 14
         Top = 252
-        Width = 48
+        Width = 51
         Caption = 'First Char'
         ParentColor = False
       end
@@ -3467,7 +3466,7 @@ object f_catgen: Tf_catgen
         Left = 270
         Height = 14
         Top = 252
-        Width = 34
+        Width = 39
         Caption = 'Length'
         ParentColor = False
       end
@@ -3475,7 +3474,7 @@ object f_catgen: Tf_catgen
         Left = 24
         Height = 14
         Top = 16
-        Width = 263
+        Width = 303
         Caption = 'Select the fields to use and their position in the text file'
         ParentColor = False
       end
@@ -3483,7 +3482,7 @@ object f_catgen: Tf_catgen
         Left = 18
         Height = 14
         Top = 252
-        Width = 27
+        Width = 31
         Caption = 'Label'
         ParentColor = False
       end
@@ -3534,9 +3533,9 @@ object f_catgen: Tf_catgen
       end
       object CheckBox2: TCheckBox
         Left = 18
-        Height = 21
+        Height = 22
         Top = 280
-        Width = 191
+        Width = 216
         Caption = 'Use this field as an Alternate Name'
         OnClick = CheckBox2Click
         TabOrder = 4
@@ -3560,7 +3559,6 @@ object f_catgen: Tf_catgen
         Font.Height = -11
         Font.Name = 'courier'
         Font.Pitch = fpFixed
-        HideSelection = False
         OnMouseUp = Memo1MouseUp
         ParentFont = False
         ScrollBars = ssHorizontal
@@ -3570,8 +3568,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet4: TTabSheet
       Caption = '4'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 2
       object Label1: TLabel
         Left = 24
@@ -3626,7 +3624,6 @@ object f_catgen: Tf_catgen
           ShowHidden = False
           ButtonWidth = 20
           NumGlyphs = 1
-          MaxLength = 0
           TabOrder = 0
         end
         object CheckBox6: TCheckBox
@@ -3687,8 +3684,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet5: TTabSheet
       Caption = '5'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 4
       object Label9: TLabel
         Left = 24
@@ -3729,8 +3726,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet6: TTabSheet
       Caption = '6'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
@@ -3771,8 +3768,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet7: TTabSheet
       Caption = '7'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 6
       object Label17: TLabel
         Left = 30
@@ -3812,8 +3809,8 @@ object f_catgen: Tf_catgen
     end
     object TabSheet8: TTabSheet
       Caption = '8'
-      ClientHeight = 434
-      ClientWidth = 385
+      ClientHeight = 403
+      ClientWidth = 383
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
