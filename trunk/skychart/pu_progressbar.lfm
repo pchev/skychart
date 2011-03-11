@@ -57,4 +57,4 @@ object f_progress: Tf_progress
     Step = 1
     TabOrder = 1
   end
-end
+end

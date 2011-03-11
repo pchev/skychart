@@ -3630,4 +3630,4 @@ LazarusResources.Add('Tf_splash','FORMDATA',[
   +#11'Font.Height'#2#241#11'ParentColor'#8#10'ParentFont'#8#7'Visible'#8#0#0#0
   +#6'TTimer'#6'Timer1'#7'Enabled'#8#8'Interval'#3#184#11#7'OnTimer'#7#11'Timer'
   +'1Timer'#4'left'#2#8#3'top'#2#16#0#0#0
-]);
+]);
