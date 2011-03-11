@@ -3050,7 +3050,7 @@ else if sc.cfgsc.IndiTelescope then begin
      indi1.onCoordChange:=TelescopeCoordChange;
      indi1.onStatusChange:=TelescopeStatusChange;
      indi1.onMessage:=TelescopeGetMessage;
-     indi1.Resume;
+     indi1.Start;
      sc.cfgsc.TrackOn:=true;
      TelescopeTimer.Interval:=5000;
      TelescopeTimer.Enabled:=true;
