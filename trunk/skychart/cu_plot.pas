@@ -1653,7 +1653,7 @@ if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
-var ds,i,mode : integer;
+var ds,mode : integer;
     jpg:TJPEGImage;
     fn:string;
 begin
@@ -2016,7 +2016,6 @@ end;
 function TSplot.PlotLabel(i,xx,yy,r,labelnum,fontnum:integer; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
     ATextStyle: TTextStyle;
-    w,h: integer;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then begin

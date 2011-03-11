@@ -1150,7 +1150,6 @@ var
   P: TProcess;
   n: LongInt;
   BytesRead: LongInt;
-  poCons: TProcessOption;
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);
@@ -1159,11 +1158,9 @@ try
   BytesRead := 0;
   P.CommandLine := cmd;
   if ShowConsole then begin
-     poCons:=poNewConsole;
      P.ShowWindow:=swoShowNormal;
      P.StartupOptions:=[suoUseShowWindow];
   end else begin
-     poCons:=poNoConsole;
      P.ShowWindow:=swoHIDE;
   end;
   P.Options := [poUsePipes, poStdErrToOutPut];

@@ -196,20 +196,19 @@ const
 var  v1: double6;
      w : array[1..3] of double;
      tjd,t : double;
-     i: integer;
      pl :TPlanData;
-     lt,bt,rt,dt,lp,bp,rp,l,b,x,y,z,ce,se,lsol,pha,qr,xt,yt,zt : double;
+     lt,rt,dt,lp,rp,lsol,pha,qr,xt,yt,zt : double;
 begin
 if (ipla<1) or (ipla=3) or (ipla>9) then exit;
 // always do this computation for phase sign
   // Earth position
   Plan(3,t0-tlight,pl);
-  lt:=pl.l; bt:=pl.b; rt:=pl.r;
+  lt:=pl.l; rt:=pl.r;
   xt:=pl.x; yt:=pl.y; zt:=pl.z;
   dt:=rt;
   // planet position
   Plan(ipla,t0,pl);
-  lp:=pl.l; bp:=pl.b; rp:=pl.r;
+  lp:=pl.l; rp:=pl.r;
   dp:=rp;
  // get distance for light time correction
  xt:=pl.x-xt;
@@ -269,7 +268,6 @@ end;
 Procedure TPlanet.SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
 var p :TPlanetData;
     planet_arr: Array_5D;
-    v,v2 : double6;
     tjd : double;
     i,sol : integer;
 begin
@@ -320,8 +318,7 @@ begin
 end;
 
 Procedure TPlanet.SunEcl(t0 : double ; var l,b : double);
-var p :TPlanetData;
-    x1,y1,z1,x,y,z,qr : double;
+var x1,y1,z1,x,y,z,qr : double;
 begin
 SunRect(t0,false,x1,y1,z1,true);
 // rotate equatorial to ecliptic
@@ -705,7 +702,7 @@ var
    w : array[1..3] of double;
    planet_arr: Array_5D;
    i : integer;
-   prec,pp : double;
+   pp : double;
 begin
 t0:=t0-(1.27/3600/24); // mean lighttime
 if load_de(t0) then begin

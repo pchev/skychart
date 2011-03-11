@@ -299,8 +299,7 @@ SetScrollBar;
 end;
 
 procedure Tf_config_observatory.ShowObservatory;
-var i:integer;
-    img:TJPEGImage;
+var img:TJPEGImage;
     pict:TPicture;
 begin
 try

@@ -4628,7 +4628,7 @@ end;
 end;
 
 procedure Tf_main.ReadPrivateConfig(filename:string);
-var i,j,k:integer;
+var i,j:integer;
     inif: TMemIniFile;
     section,buf : string;
     obsdetail: TObsDetail;

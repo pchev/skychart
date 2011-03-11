@@ -296,8 +296,6 @@ if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
-var
-  i: Integer;
 begin
 {$ifdef mswindows}
 if Fnightvision<>nightvision then begin
@@ -369,7 +367,7 @@ end;
 
 
 procedure Tf_info.Button3Click(Sender: TObject);
-var i,n:integer;
+var n:integer;
     ok:boolean;
 begin
 if UpperCase(Edit1.text)<>Searchstr then begin
@@ -455,7 +453,7 @@ end;
 end;
 
 procedure Tf_info.setgrid(txt:string);
-var i,j,l, rowc, colc: integer;
+var i,j,rowc, colc: integer;
     c: char;
     buf:string;
 begin

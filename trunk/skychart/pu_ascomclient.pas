@@ -129,15 +129,16 @@ implementation
 {$R *.lfm}
 
 var CoordLock : boolean = false;
-    Initialized : boolean = false;
-    Appdir : string;
-    T : Variant;
-  curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
-  cur_az,  cur_alt :double;           // current alt-az position in degrees
+   Initialized : boolean = false;
+  T : Variant;
   Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
   Latitude : single;                  // Observatory latitude
+  {$ifdef mswindows}
+    Appdir : string;
+  curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
+  cur_az,  cur_alt :double;           // current alt-az position in degrees
+  {$endif}
 
-    
 const crlf=chr(10)+chr(13);
 
 {-------------------------------------------------------------------------------
@@ -213,7 +214,9 @@ end;
 end;
 
 Procedure ScopeConnect(var ok : boolean);
+{$ifdef mswindows}
 var dis_ok : boolean;
+{$endif}
 begin
 {$ifdef mswindows}
 pop_scope.led.color:=clRed;
@@ -252,9 +255,10 @@ end;
 
 Function  ScopeConnected : boolean ;
 begin
-{$ifdef mswindows}
 result:=false;
 if not initialized then exit;
+{$ifdef mswindows}
+result:=false;
 if VarIsEmpty(T) then exit;
 try
 result:=T.connected;
@@ -538,8 +542,10 @@ ScopeAbortSlew;
 end;
 
 procedure Tpop_scope.SpeedButton3Click(Sender: TObject);
+{$ifdef mswindows}
 var
   V: variant;
+{$endif}
 begin
 {$ifdef mswindows}
 try
@@ -595,7 +601,9 @@ begin
 end;
 
 procedure Tpop_scope.SpeedButton8Click(Sender: TObject);
+{$ifdef mswindows}
 var utc: Tsystemtime;
+{$endif}
 begin
 {$ifdef mswindows}
    if ScopeConnected then begin
@@ -648,7 +656,9 @@ begin
 end;
 
 procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
+{$ifdef mswindows}
 var buf : string;
+{$endif}
 begin
 {$ifdef mswindows}
 try

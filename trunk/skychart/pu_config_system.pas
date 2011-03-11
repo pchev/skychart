@@ -781,7 +781,9 @@ csc.IndiDriver:=IndiDriver.text;
 end;
 
 procedure Tf_config_system.IndiPortChange(Sender: TObject);
+{$ifdef mswindows}
 var i,n: integer;
+{$endif}
 begin
 if LockChange then exit;
 {$ifdef unix}
