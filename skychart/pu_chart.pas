@@ -469,7 +469,6 @@ end;
 
 procedure Tf_chart.GetSunImage;
 var fn:string;
-    a:TDateTime;
 begin
 fn:=slash(TempDir)+'sun.jpg';
 if sc.cfgsc.SunOnline and (
@@ -3333,8 +3332,10 @@ if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.c
 end;
 
 procedure Tf_chart.SlewASCOM(Sender: TObject);
+{$ifdef mswindows}
 var ra,dec:double;
     ok:boolean;
+{$endif}
 begin
 {$ifdef mswindows}
 ra:=sc.cfgsc.FindRA;
@@ -3357,7 +3358,9 @@ pu_ascomclient.ScopeAbortSlew;
 end;
 
 procedure Tf_chart.SyncASCOM(Sender: TObject);
+{$ifdef mswindows}
 var ra,dec:double;
+{$endif}
 begin
 {$ifdef mswindows}
 ra:=sc.cfgsc.FindRA;

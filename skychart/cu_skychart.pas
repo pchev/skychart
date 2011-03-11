@@ -1399,6 +1399,8 @@ if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
   Readln(f,buf);
   Readln(f,buf);
   last:='';
+  xp:=0;
+  yp:=0;
   repeat
     Readln(f,buf);
     if copy(buf,1,3)='***' then begin
@@ -1467,7 +1469,7 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
   var
      tar,tde,ra,de,m : double;
      sar,sde : string;
-     buf,mm,dat,last,heure,dist : string;
+     buf,mm,last,heure,dist : string;
      i : integer;
      first: boolean;
   const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
@@ -1506,7 +1508,6 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     if eof(fsat) then break;
     if copy(buf,1,3)='***' then begin
       mm:=copy(buf,11,4); for i:=1 to 12 do if mm=mois[i] then mm:=inttostr(i);
-      dat:=copy(buf,6,4)+'-'+padzeros(mm,2)+'-'+padzeros(copy(buf,16,2),2);
       Readln(fsat,buf);
       Readln(fsat,buf);
       continue;

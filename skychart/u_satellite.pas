@@ -192,6 +192,9 @@ except
 {$I-}
 Closefile(satctl);
 dummy_double:=ioresult;
+{$ifdef trace_debug}
+ WriteTrace('ioerror '+FloatToStr(dummy_double));
+{$endif}
 {$I+}
 chdir(curdir);
 raise;
@@ -313,6 +316,9 @@ except
 {$I-}
 Closefile(satctl);
 i1:=ioresult;
+{$ifdef trace_debug}
+ WriteTrace('ioerror '+IntToStr(i1));
+{$endif}
 {$I+}
 chdir(curdir);
 raise;
@@ -395,6 +401,9 @@ except
 {$I-}
 Closefile(irictl);
 i1:=ioresult;
+{$ifdef trace_debug}
+ WriteTrace('ioerror '+IntToStr(i1));
+{$endif}
 {$I+}
 chdir(curdir);
 raise;
