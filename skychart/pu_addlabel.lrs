@@ -33,4 +33,4 @@ LazarusResources.Add('Tf_addlabel','FORMDATA',[
   +'Button3'#4'Left'#2#16#6'Height'#2#25#3'Top'#2'p'#5'Width'#2'A'#25'BorderSpa'
   +'cing.InnerBorder'#2#4#7'Caption'#6#4'Help'#7'OnClick'#7#12'Button3Click'#8
   +'TabOrder'#2#5#0#0#0
-]);
+]);

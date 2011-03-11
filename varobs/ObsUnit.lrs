@@ -119,4 +119,4 @@ LazarusResources.Add('TObsForm','FORMDATA',[
   +'cation of star uncertain. '#7'OnClick'#7#9'CodeClick'#0#0#9'TMenuItem'#10'M'
   +'enuItem15'#7'Caption'#6'4V: Faint star, near observing limit, only glimpsed'
   +'. '#7'OnClick'#7#9'CodeClick'#0#0#0#0
-]);
+]);
