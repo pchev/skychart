@@ -169,7 +169,7 @@ try
                  TCPThrd[n].onTerminate:=ThrdTerminate;
                  TCPThrd[n].onExecuteCmd:=FExecuteCmd;
                  TCPThrd[n].keepalive:=keepalive;
-                 TCPThrd[n].Resume;
+                 TCPThrd[n].Start;
                  i:=0; while (TCPThrd[n].Fsock=nil)and(i<100) do begin sleep(100); inc(i); end;
                  if not TCPThrd[n].terminated then begin
                       TCPThrd[n].id:=n;
@@ -196,7 +196,7 @@ try
       until false;
     end;
 finally
-  suspend;
+  Suspended:=true;
   Sock.CloseSocket;
   Sock.free;
   terminate;
@@ -260,7 +260,7 @@ try
     Fsock.CloseSocket;
     Fsock.Free;
     cmd.free;
-    suspend;
+    Suspended:=true;
     terminate;
   end;
 except
