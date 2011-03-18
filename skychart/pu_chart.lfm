@@ -14,7 +14,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.31'
   object Panel1: TPanel
     Left = 8
     Height = 272

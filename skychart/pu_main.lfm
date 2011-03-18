@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 578
+  ClientHeight = 577
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -18,7 +18,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.31'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
@@ -2665,18 +2665,18 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 490
+    Height = 489
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 490
+    ClientHeight = 489
     ClientWidth = 26
     FullRepaint = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 490
+      Height = 489
       Top = 0
       Width = 26
       Align = alClient
@@ -2769,18 +2769,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 490
+    Height = 489
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 490
+    ClientHeight = 489
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 240
+      Height = 239
       Top = 250
       Width = 28
       Align = alClient
@@ -3009,7 +3009,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 544
+    Top = 543
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -3448,7 +3448,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 24
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3505,7 +3505,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 22
+        Height = 23
         Top = 2
         Width = 35
         TabOrder = 5

@@ -97,6 +97,7 @@ type
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
     Astarbmp: array [0..6,0..10] of Tbitmap;
+    Bstarbmp: array [0..6,0..10] of TBGRABitmap;
     starbmpw:integer;
     IntfImg : TLazIntfImage;
     editlabelmenu: Tpopupmenu;
@@ -176,8 +177,10 @@ var i,j : integer;
 begin
  inherited Create(AOwner);
 for i:=0 to 6 do
-  for j:=0 to 10 do
-     Astarbmp[i,j]:=Tbitmap.create;
+  for j:=0 to 10 do begin
+    Astarbmp[i,j]:=Tbitmap.create;
+    Bstarbmp[i,j]:=TBGRABitmap.create;
+  end;
  starbmp:=Tbitmap.Create;
  cbmp:=TBGRABitmap.Create;
  cnv:=cbmp.canvas;
@@ -271,8 +274,10 @@ begin
 try
  for i:=1 to maxlabels do labels[i].Free;
 for i:=0 to 6 do
-  for j:=0 to 10 do
+  for j:=0 to 10 do begin
      Astarbmp[i,j].free;
+     Bstarbmp[i,j].free;
+  end;
  starbmp.Free;
  cbmp.Free;
  cfgplot.Free;
@@ -298,7 +303,9 @@ end;
 
 procedure TSplot.ClearImage;
 begin
-with cnv do begin
+if cfgplot.UseBMP then begin
+  cbmp.FillRect(0,0,cfgchart.Width,cfgchart.Height,BGRABlack,dmSet);
+end else with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
  Brush.style:=bsSolid;
@@ -315,8 +322,9 @@ cfgchart.Width:=w;
 cfgchart.Height:=h;
 if cfgchart.onprinter then cnv:=destcnv
       else begin
+        cfgplot.UseBMP:=true;
         cbmp.SetSize(w,h);
-        cnv:=cbmp.Canvas; // defered plot to bitmap
+        cnv:=cbmp.Canvas;
       end;  
 ClearImage;
 with cnv do begin
@@ -341,7 +349,7 @@ end;
 Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
 var xmin,xmax,ymin,ymax: integer;
 begin
-  if (LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0) then begin
+  if (not cfgplot.UseBMP)and((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
       with cnv do begin
         Pen.Color := clWhite;
         Pen.Width := 1;
@@ -396,9 +404,13 @@ end;
 
 Procedure TSplot.FlushCnv;
 begin
- destcnv.CopyMode:=cmSrcCopy;
+if cfgplot.UseBMP then begin
  cbmp.Draw(destcnv,0,0,true); // draw bitmap to screen
- cnv:=destcnv;           // direct plot to screen;
+end else begin
+ destcnv.CopyMode:=cmSrcCopy;
+ destcnv.Draw(0,0,cbmp.Bitmap);
+end;
+cnv:=destcnv;           // direct plot to screen;
 end;
 
 procedure TSplot.Setstarshape(value:Tbitmap);
@@ -513,6 +525,7 @@ for i:=0 to 6 do
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
    SetTransparencyFromLuminance(Astarbmp[i,j],1);
+   Bstarbmp[i,j].Assign(Astarbmp[i,j]);
   end;
 end;
 
@@ -524,73 +537,79 @@ for i:=1 to maxlabels do labels[i].visible:=false;
 result:=true;
 end;
 
-Procedure TSplot.PlotStar1(x,y: single; ma,b_v : Double);
+Procedure TSplot.PlotStar1(x,y: single; ma,b_v : Double);  // bitmap image
 var
   ds,Icol : Integer;
   ico,isz,xx,yy : integer;
 begin
 xx:=round(x);
 yy:=round(y);
-with cnv do begin
-   Icol:=Round(b_v*10);
-   case Icol of
-         -999..-3: ico := 0;
-           -2..-1: ico := 1;
-            0..2 : ico := 2;
-            3..5 : ico := 3;
-            6..8 : ico := 4;
-            9..13: ico := 5;
-          14..900: ico := 6;
-          else ico:=2;
-   end;
-   if ma<-5 then ma:=-5;
-   ds := round(max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)));
-   case ds of
-       1..2: isz:=10;
-       3: isz:=9;
-       4: isz:=8;
-       5: isz:=7;
-       6: isz:=6;
-       7: isz:=5;
-       8: isz:=4;
-       9: isz:=3;
-      10: isz:=2;
-      11: isz:=1;
-     else isz:=0;
-   end;
+ Icol:=Round(b_v*10);
+ case Icol of
+       -999..-3: ico := 0;
+         -2..-1: ico := 1;
+          0..2 : ico := 2;
+          3..5 : ico := 3;
+          6..8 : ico := 4;
+          9..13: ico := 5;
+        14..900: ico := 6;
+        else ico:=2;
+ end;
+ if ma<-5 then ma:=-5;
+ ds := round(max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)));
+ case ds of
+     1..2: isz:=10;
+     3: isz:=9;
+     4: isz:=8;
+     5: isz:=7;
+     6: isz:=6;
+     7: isz:=5;
+     8: isz:=4;
+     9: isz:=3;
+    10: isz:=2;
+    11: isz:=1;
+   else isz:=0;
+ end;
+ if cfgplot.UseBMP then begin
+   cbmp.PutImage(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Bstarbmp[ico,isz],dmSetExceptTransparent);
+ end else
+   with cnv do begin
    CopyMode:=cmSrcCopy;
    Draw(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Astarbmp[ico,isz]);
-end;
+   end;
 end;
 
-Procedure TSplot.PlotStar0(x,y: single; ma,b_v : Double);
+Procedure TSplot.PlotStar0(x,y: single; ma,b_v : Double);  // draw ellipse
 var
   ds,ds2,Icol,xx,yy : Integer;
   co : Tcolor;
 begin
 xx:=round(x);
 yy:=round(y);
-with cnv do begin
+if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]
+else begin
+ Icol:=Round(b_v*10);
+ case Icol of
+       -999..-3: co := cfgplot.Color[1];
+         -2..-1: co := cfgplot.Color[2];
+          0..2 : co := cfgplot.Color[3];
+          3..5 : co := cfgplot.Color[4];
+          6..8 : co := cfgplot.Color[5];
+          9..13: co := cfgplot.Color[6];
+        14..900: co := cfgplot.Color[7];
+        else co:=cfgplot.Color[11];
+   end;
+end;
+if ma<-5 then ma:=-5;
+ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+ds2:= round(ds/2);
+if cfgplot.UseBMP then begin
+  cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+  cbmp.FillEllipseAntialias(x,y,ds2,ds2,ColorToBGRA(co));
+end else with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
    Pen.Mode := pmCopy;
-   if b_v>1000 then co:=cfgplot.Color[trunc(b_v-1000)]
-   else begin
-   Icol:=Round(b_v*10);
-   case Icol of
-         -999..-3: co := cfgplot.Color[1];
-           -2..-1: co := cfgplot.Color[2];
-            0..2 : co := cfgplot.Color[3];
-            3..5 : co := cfgplot.Color[4];
-            6..8 : co := cfgplot.Color[5];
-            9..13: co := cfgplot.Color[6];
-          14..900: co := cfgplot.Color[7];
-          else co:=cfgplot.Color[11];
-     end;
-     end;
-     if ma<-5 then ma:=-5;
-     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
-     ds2:= round(ds/2);
      Brush.Color := co ;
      Brush.style:=bsSolid;
      case ds of
@@ -605,7 +624,7 @@ with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotStar2(x,y: single; ma,b_v : Double);
+Procedure TSplot.PlotStar2(x,y: single; ma,b_v : Double);  // antialias sprite
 type
   TPos=single;
 var
@@ -726,8 +745,23 @@ begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then begin
-  with cnv do begin
-     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmax*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize)-cfgchart.drawpen;
+  // maxima
+  ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmax*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize)-cfgchart.drawpen;
+  // minima
+  dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+  if (ds-dsm)<2*cfgchart.drawpen then dsm:=ds-2*cfgchart.drawpen;
+  if cfgplot.UseBMP then begin
+    // external ellipse
+    ds2:= trunc(ds/2)+cfgchart.drawpen;
+    cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+    // external ellipse outline
+    ds2:= trunc(ds/2);
+    cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[11]),cfgchart.DrawPen);
+    // internal ellipse
+    ds2:= trunc(dsm/2);
+    cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+  end else with cnv do begin
+     // external ellipse
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
      Brush.style:=bsSolid;
@@ -741,6 +775,7 @@ if not cfgplot.Invisible then begin
        7: Ellipse(xx-3-cfgchart.drawpen,yy-3-cfgchart.drawpen,xx+4+cfgchart.drawpen,yy+4+cfgchart.drawpen);
        else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
      end;
+     // external ellipse outline
      ds2:= trunc(ds/2);
      Pen.Color := cfgplot.Color[11];
      Pen.Width := 1;
@@ -751,13 +786,11 @@ if not cfgplot.Invisible then begin
        7: Ellipse(xx-3,yy-3,xx+4,yy+4);
        else Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
      end;
-     dsm := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-vmin*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
-     if (ds-dsm)<2*cfgchart.drawpen then ds:=ds-2*cfgchart.drawpen
-                   else ds:=dsm;
-     ds2 := trunc(ds/2);
+     // internal ellipse
+     ds2 := trunc(dsm/2);
      Pen.Color := cfgplot.Color[0];
      Brush.Color := cfgplot.Color[11];
-     case ds of
+     case dsm of
        1..2: ;
        3: Ellipse(xx-1,yy-1,xx+2,yy+2);
        4: Ellipse(xx-2,yy-2,xx+2,yy+2);
@@ -778,14 +811,18 @@ begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
- with cnv do begin
-   ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
-   ds2:= trunc(ds/2);
+ ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
+ ds2:= trunc(ds/2);
+ rd:=max(r,ds2 + cfgchart.drawsize*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
+ if cfgplot.UseBMP then begin
+   PlotStar(x,y,ma,b_v);
+   cbmp.DrawLineAntialias(x,y,x-round(rd*sin(pa)),y-round(rd*cos(pa)),ColorToBGRA(cfgplot.Color[15]),1,false);
+ end else with cnv do begin
+   PlotStar(x,y,ma,b_v);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
-   rd:=max(r,ds2 + cfgchart.drawsize*(2+2*(0.7+ln(min(50,max(0.5,sep))))));
    MoveTo(xx-round(rd*sin(pa)),yy-round(rd*cos(pa)));
    LineTo(xx,yy);
 end;
@@ -893,7 +930,7 @@ if not cfgplot.Invisible then begin
           else co:=cfgplot.color[11]
   end;
   end;
-  with cnv do begin
+  with cnv do begin  { TODO : change for usebmp }
    Pen.Width := cfgchart.drawpen;
    Brush.style:=bsSolid;
    Pen.Mode:=pmCopy;
@@ -967,7 +1004,7 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-Procedure TSplot.PlotNebula1(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);
+Procedure TSplot.PlotNebula1(x,y: single; dim,ma,sbr,pixscale : Double ; typ : Integer);  { TODO : Remove }
 var
   sz: Double;
   ds,ds2,xx,yy : Integer;
@@ -1093,7 +1130,7 @@ var
 begin
 xx:=round(x);
 yy:=round(y);
-with cnv do begin
+with cnv do begin   { TODO : change for usebmp }
    Pen.Width := cfgchart.drawpen;
    sz:=PixScale*dim/2;
    ds:=round(max(sz,2*cfgchart.drawpen));
@@ -1201,14 +1238,16 @@ begin
 end;
 
 Procedure TSplot.PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
-var col: TBGRAPixel;
 begin
-{col:=ColorToBGRA(lcolor);
-if lwidth<=0 then lwidth:=1;
-cbmp.DrawLineAntialias(x1,y1,x2,y2,col,lwidth,false);  }
-with cnv do begin
-  if lwidth=0 then Pen.width:=1
-     else Pen.width:=lwidth*cfgchart.drawpen;
+ if lwidth=0 then
+   lwidth:=1
+ else
+   lwidth:=lwidth*cfgchart.drawpen;
+if cfgplot.UseBMP then begin
+  { TODO : line style }
+  cbmp.DrawLineAntialias(x1,y1,x2,y2,ColorToBGRA(lcolor),lwidth,false);
+end else with cnv do begin
+  Pen.width:=lwidth;
   Brush.Style:=bsClear;
   Brush.Color:=cfgplot.backgroundcolor;
   Pen.Mode:=pmCopy;
@@ -1329,6 +1368,7 @@ if not cfgplot.Invisible then begin
          // object is to be draw
          dec(outlinenum);
          if outlinecol=cfgplot.bgColor then outlinecol:=outlinecol xor clWhite;
+         { TODO : change for usebmp }
          cnv.Pen.Mode:=pmCopy;
          cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
          cnv.Pen.Color:=outlinecol;
@@ -1374,7 +1414,7 @@ end;
 p[m-2]:=LC(pts[n-2],pts[n-1],1,1/3);
 p[m-1]:=LC(pts[n-1],pts[0],1,1/3);
 p[m]:=pts[n-1];
-cnv.PolyBezier(p);
+cnv.PolyBezier(p);    { TODO : change for usebmp }
 end;
 
 procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
@@ -1427,40 +1467,51 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-procedure TSplot.PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
+procedure TSplot.PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double); // ellipse
 var ds,ico : integer;
+    col:TBGRAPixel;
 begin
-with cnv do begin
- ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
- if cfgplot.Color[11]>cfgplot.BgColor then begin
-   case Ipla of
-    1: begin ico := 4; end;
-    2: begin ico := 2; end;
-    3: begin ico := 2; end;
-    4: begin ico := 6; end;
-    5: begin ico := 4; end;
-    6: begin ico := 4; end;
-    7: begin ico := 1; end;
-    8: begin ico := 1; end;
-    9: begin ico := 2; end;
-    10:begin ico := 4; end;
-    11:begin ico := 2; end;
-    else begin ico:=2; end;
-   end;
-   Brush.Color := cfgplot.Color[ico+1] ;
- end
- else if cfgchart.onprinter then Brush.Color := cfgplot.BgColor
-                            else Brush.Color := cfgplot.Color[11];
- if cfgplot.TransparentPlanet then Brush.style:=bsclear
-                              else Brush.style:=bssolid;
- Pen.Width := cfgchart.drawpen;
- Pen.Color := cfgplot.Color[11];
- Pen.Mode:=pmCopy;
- Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
- Pen.Color := cfgplot.Color[0];
- Brush.style:=bsclear;
- ds:=ds+cfgchart.drawpen;
- Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
+case Ipla of
+ 1: begin ico := 4; end;
+ 2: begin ico := 2; end;
+ 3: begin ico := 2; end;
+ 4: begin ico := 6; end;
+ 5: begin ico := 4; end;
+ 6: begin ico := 4; end;
+ 7: begin ico := 1; end;
+ 8: begin ico := 1; end;
+ 9: begin ico := 2; end;
+ 10:begin ico := 4; end;
+ 11:begin ico := 2; end;
+ else begin ico:=2; end;
+end;
+if cfgplot.UseBMP then begin
+   if cfgplot.Color[11]>cfgplot.BgColor then begin
+     col := ColorToBGRA(cfgplot.Color[ico+1]) ;
+   end
+   else if cfgchart.onprinter then col := ColorToBGRA(cfgplot.BgColor)
+                              else col := ColorToBGRA(cfgplot.Color[11]);
+   if cfgplot.TransparentPlanet then col.alpha:=128
+                                else col.alpha:=255;
+   cbmp.EllipseAntialias(xx,yy,ds/2,ds/2,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
+   cbmp.FillEllipseAntialias(xx,yy,ds/2,ds/2,col);
+end else with cnv do begin
+   if cfgplot.Color[11]>cfgplot.BgColor then begin
+     Brush.Color := cfgplot.Color[ico+1] ;
+   end
+   else if cfgchart.onprinter then Brush.Color := cfgplot.BgColor
+                              else Brush.Color := cfgplot.Color[11];
+   if cfgplot.TransparentPlanet then Brush.style:=bsclear
+                                else Brush.style:=bssolid;
+   Pen.Width := cfgchart.drawpen;
+   Pen.Color := cfgplot.Color[11];
+   Pen.Mode:=pmCopy;
+   Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+   Pen.Color := cfgplot.Color[0];
+   Brush.style:=bsclear;
+   ds:=ds+cfgchart.drawpen;
+   Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
 end;
 end;
 
@@ -1471,6 +1522,7 @@ var dsx,dsy,zoom : single;
     memstream: TMemoryStream;
     imabmp:Tbitmap;
     rbmp: Tbitmap;
+    outbmp:TBGRABitmap;
 begin
 if (iWidth<2)or(iHeight<2) then exit;
 zoom:=iWidth/ibmp.Width;
@@ -1515,8 +1567,14 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
       rbmp.Transparent:=false;
       {$ENDIF}
    end;
-   cnv.CopyMode:=cmSrcCopy;
-   cnv.Draw(DestX,DestY,rbmp);
+   if cfgplot.UseBMP then begin
+     outbmp:=TBGRABitmap.Create(rbmp);
+     cbmp.PutImage(DestX,DestY,outbmp,dmSetExceptTransparent);
+     outbmp.free;
+   end else begin
+     cnv.CopyMode:=cmSrcCopy;
+     cnv.Draw(DestX,DestY,rbmp);
+   end;
 end else begin
    // only a part of the image is displayed
    BitmapRotation(ibmp,rbmp,Rotation,WhiteBg);
@@ -1555,8 +1613,14 @@ end else begin
       imabmp.Transparent:=false;
       {$ENDIF}
    end;
-   cnv.CopyMode:=cmSrcCopy;
-   cnv.Draw(0,0,imabmp);
+   if cfgplot.UseBMP then begin
+     outbmp:=TBGRABitmap.Create(imabmp);
+     cbmp.PutImage(0,0,outbmp,dmSetExceptTransparent);
+     outbmp.free;
+   end else begin
+     cnv.CopyMode:=cmSrcCopy;
+     cnv.Draw(0,0,imabmp);
+   end;
 end;
 finally
   try
@@ -1712,7 +1776,7 @@ begin
 xx:=round(x);
 yy:=round(y);
 if not cfgplot.Invisible then
-with cnv do begin
+with cnv do begin      { TODO : change for usebmp }
  ds1:=round(max(r1*pixscale/2,2*cfgchart.drawpen));
  ds2:=round(max(r2*pixscale/2,2*cfgchart.drawpen));
  if ((xx+ds2)>0) and ((xx-ds2)<cfgchart.Width) and ((yy+ds2)>0) and ((yy-ds2)<cfgchart.Height) then begin
@@ -1772,6 +1836,7 @@ if not cfgplot.Invisible then
     ds2:=round(diam*pixscale);
     if ds2>ds then begin
       if IntfImgReady then ClosePixelImg;
+      { TODO : change for usebmp }
       with cnv do begin
         ds:=ds2;
         Pen.Color := cfgplot.Color[0];
@@ -1808,6 +1873,7 @@ var
   n,ex1,ey1,ir,R : integer;
 const fr : array [1..5] of double = (1,0.8801,0.8599,0.6650,0.5486);
 begin
+{ TODO : change for usebmp }
 with cnv do begin
   pa:=deg2rad*pa+rot-pid2;
   ds1:=round(max(pixscale*r1/2,cfgchart.drawpen))+cfgchart.drawpen;
@@ -1858,6 +1924,7 @@ var
 begin
 xx:=round(x);
 yy:=round(y);
+{ TODO : change for usebmp }
 with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
@@ -1891,6 +1958,7 @@ xx:=round(x);
 yy:=round(y);
 cxx:=round(cx);
 cyy:=round(cy);
+{ TODO : change for usebmp }
 with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
@@ -2017,6 +2085,7 @@ then begin
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
 if (cfgchart.onprinter or forcetextlabel) then begin
+{ TODO : change for usebmp }
 with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
@@ -2109,6 +2178,7 @@ var ts:TSize;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then
+{ TODO : change for usebmp }
 with cnv do begin
 ATextStyle := TextStyle;
 ATextStyle.Opaque:=opaque;
@@ -2159,6 +2229,7 @@ var ls,p:Integer;
 begin
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then
+{ TODO : change for usebmp }
 with cnv do begin
 ATextStyle := TextStyle;
 ATextStyle.Opaque:=opaque;
@@ -2347,6 +2418,7 @@ end;
 
 Procedure TSplot.PlotCircle(x1,y1,x2,y2:single;lcolor: integer;moving:boolean);
 begin
+{ TODO : change for usebmp }
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
@@ -2375,6 +2447,7 @@ if (cfgplot.nebplot>0)and(compassrose<>nil)and(compassrose.width>0)and(compassar
     2: PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassarrow,2);
    end;
 end else
+{ TODO : change for usebmp }
 with cnv do begin
   if FlipY<0 then rot:=pi-rot;
   if FlipX<0 then rot:=-rot;
@@ -2423,6 +2496,7 @@ end;
 
 Procedure TSplot.PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
 begin
+{ TODO : change for usebmp }
 with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
@@ -2462,6 +2536,7 @@ begin
   ----> This is unfortunatelly not possible as this greatly depend on each object
         Only solution is to use Arnuc but it is only available with old RC3 catalog
 }
+{ TODO : change for usebmp }
   xx:=round(Ax);
   yy:=round(Ay);
   if Ar2=0 then Ar2:=Ar1/2;
@@ -2530,7 +2605,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -2609,7 +2684,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -2679,7 +2754,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -2759,7 +2834,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -2846,7 +2921,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -2917,7 +2992,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
@@ -2953,7 +3028,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
@@ -2986,7 +3061,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
@@ -3022,7 +3097,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -3091,7 +3166,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -3161,7 +3236,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -3196,7 +3271,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
@@ -3261,7 +3336,7 @@ begin
 // set defaults
   xx:=round(Ax);
   yy:=round(Ay);
-
+  { TODO : change for usebmp }
   Adim:=0.5;
   cnv.Pen.Width := cfgchart.drawpen;
   sz:=APixScale*Adim/2;                         // calc size
@@ -3298,7 +3373,7 @@ begin
 
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
-
+  { TODO : change for usebmp }
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[7];
@@ -3328,7 +3403,7 @@ begin
 
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
-
+  { TODO : change for usebmp }
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[7];
@@ -3358,7 +3433,7 @@ begin
 
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
-
+  { TODO : change for usebmp }
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[7];
