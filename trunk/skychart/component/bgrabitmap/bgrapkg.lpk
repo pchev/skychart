@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <Package Version="3">
+    <Name Value="bgrapkg"/>
+    <CompilerOptions>
+      <Version Value="9"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+      <Other>
+        <CompilerPath Value="$(CompPath)"/>
+      </Other>
+    </CompilerOptions>
+    <Files Count="11">
+      <Item1>
+        <Filename Value="bgraanimatedgif.pas"/>
+        <UnitName Value="BGRAAnimatedGif"/>
+      </Item1>
+      <Item2>
+        <Filename Value="bgrabitmap.pas"/>
+        <UnitName Value="BGRABitmap"/>
+      </Item2>
+      <Item3>
+        <Filename Value="bgrabitmaptypes.pas"/>
+        <UnitName Value="BGRABitmapTypes"/>
+      </Item3>
+      <Item4>
+        <Filename Value="bgrablend.pas"/>
+        <UnitName Value="BGRABlend"/>
+      </Item4>
+      <Item5>
+        <Filename Value="bgracompressablebitmap.pas"/>
+        <UnitName Value="bgracompressablebitmap"/>
+      </Item5>
+      <Item6>
+        <Filename Value="bgradefaultbitmap.pas"/>
+        <UnitName Value="BGRADefaultBitmap"/>
+      </Item6>
+      <Item7>
+        <Filename Value="bgradnetdeserial.pas"/>
+        <UnitName Value="BGRADNetDeserial"/>
+      </Item7>
+      <Item8>
+        <Filename Value="bgrafilters.pas"/>
+        <UnitName Value="BGRAFilters"/>
+      </Item8>
+      <Item9>
+        <Filename Value="bgrapaintnet.pas"/>
+        <UnitName Value="BGRAPaintNet"/>
+      </Item9>
+      <Item10>
+        <Filename Value="bgrapolygon.pas"/>
+        <UnitName Value="BGRAPolygon"/>
+      </Item10>
+      <Item11>
+        <Filename Value="bgraresample.pas"/>
+        <UnitName Value="bgraresample"/>
+      </Item11>
+    </Files>
+    <Type Value="RunAndDesignTime"/>
+    <RequiredPkgs Count="2">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="FCL"/>
+        <MinVersion Major="1" Release="1"/>
+      </Item2>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>
