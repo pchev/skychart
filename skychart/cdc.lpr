@@ -44,7 +44,7 @@ uses
   downldialog, synapse, pu_catgen, pu_catgenadv, pu_progressbar, mrecsort,
   pu_addlabel, pu_print, u_translation, pu_splash, pu_about, cu_tz,
   uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
-  pu_ascomclient, u_satellite, pu_main, pu_observatory_db;
+  pu_ascomclient, u_satellite, pu_main, pu_observatory_db, bgrapkg;
   
 var i : integer;
     buf, p, step : string;
