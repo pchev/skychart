@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, FileUtil,
+uses u_translation, FileUtil, BGRABitmap, BGRABitmapTypes,
   u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
@@ -93,7 +93,7 @@ type
     { Public declarations }
     cfgplot : Tconf_plot;
     cfgchart: Tconf_chart;
-    cbmp : Tbitmap;
+    cbmp : TBGRABitmap;
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
     Astarbmp: array [0..6,0..10] of Tbitmap;
@@ -179,15 +179,14 @@ for i:=0 to 6 do
   for j:=0 to 10 do
      Astarbmp[i,j]:=Tbitmap.create;
  starbmp:=Tbitmap.Create;
- cbmp:=Tbitmap.Create;
+ cbmp:=TBGRABitmap.Create;
  cnv:=cbmp.canvas;
  cfgplot:=Tconf_plot.Create;
  cfgchart:=Tconf_chart.Create;
  // set safe value
  starbmpw:=1;
  editlabel:=-1;
- cbmp.width:=100;
- cbmp.height:=100;
+ cbmp.SetSize(100,100);
  cfgchart.width:=100;
  cfgchart.height:=100;
  cfgchart.min_ma:=6;
@@ -316,10 +315,7 @@ cfgchart.Width:=w;
 cfgchart.Height:=h;
 if cfgchart.onprinter then cnv:=destcnv
       else begin
-        cbmp.FreeImage;
-        cbmp.Transparent:=false;
-        cbmp.Width:=w;
-        cbmp.Height:=h;
+        cbmp.SetSize(w,h);
         cnv:=cbmp.Canvas; // defered plot to bitmap
       end;  
 ClearImage;
@@ -383,7 +379,6 @@ end;
 Procedure TSplot.InitPixelImg;
 begin
 if (cfgplot.starplot=2) then begin
-  IntfImg:=cbmp.CreateIntfImage;
   IntfImgReady:=true;
 end;
 end;
@@ -392,21 +387,17 @@ Procedure TSplot.ClosePixelImg;
 var  ImgHandle,ImgMaskHandle: HBitmap;
 begin
 if IntfImgReady then begin
-  IntfImgReady:=false;
-  cbmp.FreeImage;
-  IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-//  cbmp.SetHandles(ImgHandle,ImgMaskHandle);
-  cbmp.Handle:=ImgMaskHandle;
-  cbmp.FreeImage;
-  cbmp.Handle:=ImgHandle;
-  IntfImg.free;
-end;
+    if not cfgchart.onprinter then begin
+       cnv:=cbmp.Canvas;
+    end;
+  end;
+IntfImgReady:=false;
 end;
 
 Procedure TSplot.FlushCnv;
 begin
  destcnv.CopyMode:=cmSrcCopy;
- destcnv.Draw(0,0,cbmp); // draw bitmap to screen
+ cbmp.Draw(destcnv,0,0,true); // draw bitmap to screen
  cnv:=destcnv;           // direct plot to screen;
 end;
 
@@ -628,7 +619,7 @@ var
   NewPixelR, NewPixelG, NewPixelB : integer;
   Icol : Integer;
   co : Tcolor;
-  col: TFPColor;
+  col: TBGRAPixel;
 const
   PointAlpha : single = 0.15;  // Transparency at Solid;
 
@@ -671,7 +662,7 @@ begin
   MinY := round(Y - LineWidth - AAWidth - 0.5);
   MaxY := round(Y + LineWidth + AAWidth + 0.5);
 
-  with IntfImg do begin
+  with cbmp do begin
   bmWidth := Width;
 
   for YCount := MinY to MaxY do
@@ -690,27 +681,27 @@ begin
             Alpha := PointAlpha - PointAlpha * (Distance / (LineWidth+AAWidth+0.5))
         end;
 
-        col:=Colors[XCount,YCount];
-        ExistingPixelBlue  :=  col.blue;
-        ExistingPixelGreen :=  col.green;
-        ExistingPixelRed   :=  col.red;
+        col:=GetPixel(XCount,YCount);
+        ExistingPixelBlue  :=  col.blue*255;
+        ExistingPixelGreen :=  col.green*255;
+        ExistingPixelRed   :=  col.red*255;
 
         OutLevelR := ExistingPixelRed*(1-Alpha) + Lum*R*Alpha*UseContrast;
-        NewPixelR := trunc(OutLevelR);
-        if NewPixelR>65535 then NewPixelR := 65535;
+        NewPixelR := trunc(OutLevelR/255);
+        if NewPixelR>255 then NewPixelR := 255;
 
         OutLevelG := ExistingPixelGreen*(1-Alpha) + Lum*G*Alpha*UseContrast;
-        NewPixelG := trunc(OutLevelG);
-        if NewPixelG>65535 then NewPixelG := 65535;
+        NewPixelG := trunc(OutLevelG/255);
+        if NewPixelG>255 then NewPixelG := 255;
 
         OutLevelB := ExistingPixelBlue*(1-Alpha) + Lum*B*Alpha*UseContrast;
-        NewPixelB := trunc(OutLevelB);
-        if NewPixelB>65535 then NewPixelB := 65535;
+        NewPixelB := trunc(OutLevelB/255);
+        if NewPixelB>255 then NewPixelB := 255;
 
         col.red:=NewPixelR;
         col.green:=NewPixelG;
         col.blue:=NewPixelB;
-        Colors[XCount,YCount]:=col;
+        SetPixel(XCount,YCount,col);
       end;
     end;
   end;
@@ -1210,7 +1201,11 @@ begin
 end;
 
 Procedure TSplot.PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
+var col: TBGRAPixel;
 begin
+{col:=ColorToBGRA(lcolor);
+if lwidth<=0 then lwidth:=1;
+cbmp.DrawLineAntialias(x1,y1,x2,y2,col,lwidth,false);  }
 with cnv do begin
   if lwidth=0 then Pen.width:=1
      else Pen.width:=lwidth*cfgchart.drawpen;
