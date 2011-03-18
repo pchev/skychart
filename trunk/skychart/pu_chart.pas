@@ -969,6 +969,7 @@ try
     Printer.Title:='CdC';
     Printer.BeginDoc;
     sc.plot.destcnv:=Printer.canvas;
+    sc.plot.cfgplot.UseBMP:=false;
     sc.plot.cfgchart.onprinter:=true;
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
@@ -1002,6 +1003,7 @@ try
      // draw the chart
       ps.begindoc;
       sc.plot.destcnv:=ps;
+      sc.plot.cfgplot.UseBMP:=false;
       sc.plot.cfgchart.onprinter:=true;
       sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
       sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
@@ -1037,6 +1039,7 @@ try
       end;
      // draw the chart to the bitmap
      sc.plot.destcnv:=prtbmp.canvas;
+     sc.plot.cfgplot.UseBMP:=true;
      sc.plot.cfgchart.onprinter:=true;
      sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
@@ -1065,6 +1068,7 @@ finally
  screen.cursor:=crDefault;
  prtbmp.free;
  // restore state
+ sc.plot.cfgplot.UseBMP:=true;
  sc.plot.cfgplot.color:=savecolor;
  sc.plot.cfgplot.starplot:=savesplot;
  sc.plot.cfgplot.nebplot:=savenplot;
