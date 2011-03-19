@@ -433,7 +433,7 @@ type
 
      Tobjlabel = record
             id:integer;
-            x,y,r:smallint;
+            x,y,r:single;
             labelnum,fontnum:byte;
             align: TLabelAlign;
             txt:string;  //txt:shortstring
