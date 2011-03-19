@@ -928,7 +928,8 @@ end;
 end;
 
 procedure TSplot.PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
-var xx,yy:integer;
+var xx,yy,l:integer;
+    outlineptsf: array of TPointf;
 function SingularPolygon: boolean;
 var i,j,k: integer;
     newpoint: boolean;
@@ -1031,22 +1032,39 @@ if not cfgplot.Invisible then begin
          // object is to be draw
          dec(outlinenum);
          if outlinecol=cfgplot.bgColor then outlinecol:=outlinecol xor clWhite;
-         { TODO : change for usebmp }
-         cnv.Pen.Mode:=pmCopy;
-         cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
-         cnv.Pen.Color:=outlinecol;
-         cnv.Brush.Style:=bsSolid;
-         cnv.Brush.Color:=outlinecol;
          outlinemax:=outlinenum+1;
          if (cfgplot.nebplot=0) and (outlinetype=2) then outlinetype:=0;
          if (cfgchart.onprinter) and (outlinetype=1) then outlinetype:=0;
-         {$ifdef darwin}
-         if (outlinetype=1) then outlinetype:=0; // TODO: spline wrongly implemented on Carbon
-         {$endif}
-         case outlinetype of
-         0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
-         1 : Bezierspline(outlinepts,outlinenum+1);
-         2 : begin setlength(outlinepts,outlinenum+1); cnv.polygon(outlinepts);end;
+         if cfgplot.UseBMP then begin
+           case outlinetype of
+           0 : begin
+                 setlength(outlinepts,outlinenum+1);
+                 setlength(outlineptsf,outlinenum+1);
+                 for l:=0 to outlinenum do begin outlineptsf[l].x:=outlinepts[l].x;outlineptsf[l].y:=outlinepts[l].y;end;
+                 cbmp.DrawPolyLineAntialias(outlineptsf,ColorToBGRA(outlinecol),outlinelw*cfgchart.drawpen,true);
+               end;
+           1 : Bezierspline(outlinepts,outlinenum+1);
+           2 : begin
+                 setlength(outlinepts,outlinenum+1);
+                 setlength(outlineptsf,outlinenum+1);
+                 for l:=0 to outlinenum do begin outlineptsf[l].x:=outlinepts[l].x;outlineptsf[l].y:=outlinepts[l].y;end;
+                 cbmp.FillPolyAntialias(outlineptsf,ColorToBGRA(outlinecol));
+               end;
+           end;
+         end else begin
+           {$ifdef darwin}
+           if (outlinetype=1) then outlinetype:=0; // TODO: spline wrongly implemented on Carbon
+           {$endif}
+           cnv.Pen.Mode:=pmCopy;
+           cnv.Pen.Width:=outlinelw*cfgchart.drawpen;
+           cnv.Pen.Color:=outlinecol;
+           cnv.Brush.Style:=bsSolid;
+           cnv.Brush.Color:=outlinecol;
+           case outlinetype of
+           0 : begin setlength(outlinepts,outlinenum+1); cnv.polyline(outlinepts);end;
+           1 : Bezierspline(outlinepts,outlinenum+1);
+           2 : begin setlength(outlinepts,outlinenum+1); cnv.polygon(outlinepts);end;
+           end;
          end;
        end;
      end;
@@ -1059,6 +1077,7 @@ end;
 
 procedure TSplot.BezierSpline(pts : array of Tpoint;n : integer);
 var p : array of TPoint;
+    pf: array of TPointf;
     i,m : integer;
 function LC(Pt1,Pt2:TPoint; c1,c2:extended):TPoint;
 begin
@@ -1077,7 +1096,13 @@ end;
 p[m-2]:=LC(pts[n-2],pts[n-1],1,1/3);
 p[m-1]:=LC(pts[n-1],pts[0],1,1/3);
 p[m]:=pts[n-1];
-cnv.PolyBezier(p);    { TODO : change for usebmp }
+if cfgplot.UseBMP then begin
+  setlength(pf,1+m);
+  for i:=0 to m do begin pf[i].x:=p[i].x;pf[i].y:=p[i].y;end;
+  cbmp.DrawPolyLineAntialias(cbmp.ComputeClosedSpline(pf),ColorToBGRA(outlinecol),outlinelw*cfgchart.drawpen,true);
+end else begin
+  cnv.PolyBezier(p);
+end;
 end;
 
 procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
@@ -1435,14 +1460,34 @@ procedure TSplot.PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
 var
    ds1,ds2,xx,yy,xm,ym : Integer;
    mbmp,mask:tbitmap;
+   mc: TBGRABitmap;
 begin
 xx:=round(x);
 yy:=round(y);
-if not cfgplot.Invisible then
-with cnv do begin      { TODO : change for usebmp }
- ds1:=round(max(r1*pixscale/2,2*cfgchart.drawpen));
- ds2:=round(max(r2*pixscale/2,2*cfgchart.drawpen));
- if ((xx+ds2)>0) and ((xx-ds2)<cfgchart.Width) and ((yy+ds2)>0) and ((yy-ds2)<cfgchart.Height) then begin
+if not cfgplot.Invisible then begin
+ds1:=round(max(r1*pixscale/2,2*cfgchart.drawpen));
+ds2:=round(max(r2*pixscale/2,2*cfgchart.drawpen));
+if ((xx+ds2)>0) and ((xx-ds2)<cfgchart.Width) and ((yy+ds2)>0) and ((yy-ds2)<cfgchart.Height) then begin
+if cfgplot.UseBMP then begin
+  case  cfgplot.nebplot of
+   0: begin
+      cbmp.EllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
+      cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
+      end;
+   1: begin
+      mc:=TBGRABitmap.Create(2*ds2,2*ds2);
+      // mask=shadow to substract from the moon
+      xm:=ds2;
+      ym:=ds2;
+      mc.Fill(BGRAPixelTransparent);
+      mc.FillEllipseAntialias(xm,ym,ds2,ds2,ColorToBGRA(clRed,10));
+      mc.FillEllipseAntialias(xm,ym,ds1,ds1,ColorToBGRA(clRed,10));
+      // Apply the shadow
+      cbmp.PutImage(xx-xm,yy-xm,mc,dmDrawWithTransparency);
+      mc.Free;
+      end;  // 1
+    end; // case
+end else with cnv do begin
   case  cfgplot.nebplot of
    0: begin
       Pen.Width := cfgchart.drawpen;
@@ -1483,8 +1528,9 @@ with cnv do begin      { TODO : change for usebmp }
       mask.Free;
       end;  // 1
     end; // case
- end;  // if xx
 end; // with
+end;  // if xx
+end;
 end;
 
 Procedure TSplot.PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
@@ -1651,26 +1697,123 @@ end;
 Procedure TSplot.PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
 var ds,ds1,xx,yy,cxx,cyy,i,j,co:integer;
     cp1,cp2: array[0..3] of TPoint;
+    cpf1,cpf2: array[0..3] of TPointf;
     cr,cg,cb: byte;
     Col: Tcolor;
+    colb: TBGRAPixel;
     dx,dy,a,r,k : double;
 begin
 xx:=round(x);
 yy:=round(y);
 cxx:=round(cx);
 cyy:=round(cy);
-{ TODO : change for usebmp }
+dx:=cxx-xx;
+dy:=cyy-yy;
+if (symbol=1)and(cfgplot.nebplot=0) then symbol:=2;
 if cfgplot.UseBMP then begin
-
+   case symbol of
+   0: begin
+        colb:=ColorToBGRA(cfgplot.Color[21]);
+        ds:=2*cfgchart.drawsize;
+        cbmp.FillEllipseAntialias(x,y,ds,ds,colb);
+        cbmp.EllipseAntialias(x,y,ds,ds,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+        cbmp.DrawLineAntialias(x,y,x-4*ds,y-4*ds,colb,cfgchart.DrawPen,false);
+        cbmp.DrawLineAntialias(x,y,x-2*ds,y-4*ds,colb,cfgchart.DrawPen,false);
+        cbmp.DrawLineAntialias(x,y,x-4*ds,y-2*ds,colb,cfgchart.DrawPen,false);
+      end;
+   1: begin
+        r:=sqrt(dx*dx+dy*dy);
+        r:=max(r,12*cfgchart.drawpen);
+        a:=arctan2(dy,dx);
+        if ma<5 then k:=1
+        else if ma>18 then k:=0.5
+        else k:=1-(ma-5)*0.05;
+        cr:=round(k*(cfgplot.Color[21] and $FF));
+        cg:=round(k*((cfgplot.Color[21] shr 8) and $FF));
+        cb:=round(k*((cfgplot.Color[21] shr 16) and $FF));
+        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
+        for i:=19 downto 0 do begin  // coma
+          co:=max(0,255-i*13);
+          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+          Col:=Addcolor(Col,cfgplot.backgroundcolor);
+          colb:=ColorToBGRA(Col);
+          ds1:=round((i+1)*ds/20);
+          cbmp.FillEllipseAntialias(x,y,ds1,ds1,colb);
+        end;
+        if r>30 then begin  // tail
+        cr:=cr div 2;
+        cg:=cg div 2;
+        cb:=cb div 2;
+        if (dx<>0)or(dy<>0) then for i:=0 to 9 do begin
+         cpf1[2].X:=x;
+         cpf1[2].Y:=y;
+         cpf1[3].X:=x;
+         cpf1[3].Y:=y;
+         cpf2:=cpf1;
+         r:=0.99*r;
+         for j:=0 to 19 do begin
+          co:=max(0,255-i*20-j*13);
+          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+          Col:=Addcolor(Col,cfgplot.backgroundcolor);
+          colb:=ColorToBGRA(Col);
+          cpf1[0].X:=cpf1[3].X;
+          cpf1[0].Y:=cpf1[3].Y;
+          cpf1[1].X:=cpf1[2].X;
+          cpf1[1].Y:=cpf1[2].Y;
+          cpf1[2].X:=x+((j+1)*r/20*cos(a+0.015*(i)));
+          cpf1[2].Y:=y+((j+1)*r/20*sin(a+0.015*(i)));
+          cpf1[3].X:=x+((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
+          cpf1[3].Y:=y+((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
+          if (abs(cpf1[2].X-cpf1[3].X)>1)or(abs(cpf1[2].Y-cpf1[3].Y)>1) then cbmp.FillPolyAntialias(cpf1,colb)
+             else cbmp.DrawLineAntialias(cpf1[0].X,cpf1[0].Y,cpf1[2].X,cpf1[2].Y,colb,cfgchart.DrawPen,false);
+          cpf2[0].X:=cpf2[3].X;
+          cpf2[0].Y:=cpf2[3].Y;
+          cpf2[1].X:=cpf2[2].X;
+          cpf2[1].Y:=cpf2[2].Y;
+          cpf2[2].X:=x+((j+1)*r/20*cos(a-0.015*(i)));
+          cpf2[2].Y:=y+((j+1)*r/20*sin(a-0.015*(i)));
+          cpf2[3].X:=x+((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
+          cpf2[3].Y:=y+((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
+          if (abs(cpf2[2].X-cpf2[3].X)>1)or(abs(cpf2[2].Y-cpf2[3].Y)>1) then cbmp.FillPolyAntialias(cpf2,colb)
+             else cbmp.DrawLineAntialias(cpf2[0].X,cpf2[0].Y,cpf2[2].X,cpf2[2].Y,colb,cfgchart.DrawPen,false);
+         end;
+        end;
+        end;
+        PlotStar(x,y,ma+3,1021);
+      end;
+   2: begin
+        colb:=ColorToBGRA(cfgplot.Color[21]);
+        ds:=round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize/2);
+        cbmp.FillEllipseAntialias(x,y,ds,ds,colb);
+        cbmp.EllipseAntialias(x,y,ds,ds,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
+        cbmp.EllipseAntialias(x,y,ds,ds,colb,cfgchart.DrawPen);
+        ds:=ds+cfgchart.drawpen;
+        cbmp.EllipseAntialias(x,y,ds,ds,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+        r:=sqrt(dx*dx+dy*dy);
+        r:=max(r,12*cfgchart.drawpen);
+        a:=arctan2(dy,dx);
+        cxx:=xx+round(r*cos(a));
+        cyy:=yy+round(r*sin(a));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        r:=0.9*r;
+        cxx:=xx+round(r*cos(a+0.18));
+        cyy:=yy+round(r*sin(a+0.18));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+        cxx:=xx+round(r*cos(a-0.18));
+        cyy:=yy+round(r*sin(a-0.18));
+        PlotLine(xx+cfgchart.drawpen,yy+cfgchart.drawpen,cxx+cfgchart.drawpen,cyy+cfgchart.drawpen,cfgplot.Color[0],1);
+        PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
+      end;
+   end;
 end else with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
    Pen.Mode := pmCopy;
    Brush.Color := cfgplot.Color[21];
    Brush.style:=bsSolid;
-   dx:=cxx-xx;
-   dy:=cyy-yy;
-   if (symbol=1)and(cfgplot.nebplot=0) then symbol:=2;
    case symbol of
    0: begin
         ds:=2*cfgchart.drawsize;
