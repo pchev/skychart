@@ -3012,8 +3012,8 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   inc(numlabels);
   try
   labels[numlabels].id:=id;
-  labels[numlabels].x:=round(xx);
-  labels[numlabels].y:=round(yy);
+  labels[numlabels].x:=xx;
+  labels[numlabels].y:=yy;
   labels[numlabels].r:=radius;
   labels[numlabels].align:=align;
   labels[numlabels].labelnum:=labelnum;
@@ -3055,8 +3055,8 @@ if i<0 then begin
      cfgsc.posmodlabels:=1;
    i:=cfgsc.posmodlabels;
 end;
-cfgsc.modlabels[i].dx:=x-labels[lnum].x;
-cfgsc.modlabels[i].dy:=y-labels[lnum].y;
+cfgsc.modlabels[i].dx:=x-round(labels[lnum].x);
+cfgsc.modlabels[i].dy:=y-round(labels[lnum].y);
 cfgsc.modlabels[i].txt:=txt;
 cfgsc.modlabels[i].align:=Lalign;
 cfgsc.modlabels[i].labelnum:=labelnum;
@@ -3254,13 +3254,14 @@ end;
 procedure Tskychart.LabelClick(lnum: integer);
 var x,y: integer;
 begin
-x:=labels[lnum].x;
-y:=labels[lnum].y;
+x:=round(labels[lnum].x);
+y:=round(labels[lnum].y);
 if assigned(FShowDetailXY) then FShowDetailXY(x,y);
 end;
 
 function Tskychart.DrawLabels:boolean;
-var i,j,x,y,r: integer;
+var i,j: integer;
+    x,y,r: single;
     labelnum,fontnum:byte;
     txt:string;
     skiplabel:boolean;
@@ -3317,7 +3318,7 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,x,y,r,labelnum,fontnum,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+  if not skiplabel then Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
