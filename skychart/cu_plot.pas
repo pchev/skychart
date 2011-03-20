@@ -1285,7 +1285,7 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
    if cfgplot.UseBMP then begin
     outbmp:=TBGRABitmap.Create(imabmp);
-    SetBGRATransparencyFromLuminance(outbmp,0,trWhiteBg);
+    SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
     cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
     outbmp.free;
    end else begin
