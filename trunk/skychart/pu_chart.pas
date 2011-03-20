@@ -1039,7 +1039,7 @@ try
       end;
      // draw the chart to the bitmap
      sc.plot.destcnv:=prtbmp.canvas;
-     sc.plot.cfgplot.UseBMP:=true;
+     sc.plot.cfgplot.UseBMP:=false;
      sc.plot.cfgchart.onprinter:=true;
      sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);

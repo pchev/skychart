@@ -148,6 +148,7 @@ type
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
+     procedure FloodFill(X, Y: Integer; FillColor: TColor);
      property Starshape: TBitmap read Fstarshape write Setstarshape;
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
@@ -301,7 +302,7 @@ end;
 procedure TSplot.ClearImage;
 begin
 if cfgplot.UseBMP then begin
-  cbmp.FillRect(0,0,cfgchart.Width,cfgchart.Height,BGRABlack,dmSet);
+   cbmp.Fill(cfgplot.Color[0]);
 end else with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
@@ -317,13 +318,12 @@ var Rgn : HRGN;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
-if cfgchart.onprinter then cnv:=destcnv
-      else begin
-        cfgplot.UseBMP:=true;
-        cbmp.SetSize(w,h);
-        cnv:=cbmp.Canvas;
-       // cnv:=nil;
-      end;  
+if cfgplot.UseBMP then begin
+  cbmp.SetSize(w,h);
+  cnv:=nil; // to be sure we no more use it!
+end else begin
+  cnv:=destcnv
+end;
 ClearImage;
 if not cfgplot.UseBMP then
 with cnv do begin
@@ -385,25 +385,26 @@ end;
 
 Procedure TSplot.InitPixelImg;
 begin
-if (cfgplot.starplot=2) then begin
+{if (cfgplot.starplot=2) then begin
+  cbmp.LoadFromBitmapIfNeeded;
   IntfImgReady:=true;
-end;
+end;}
 end;
 
 Procedure TSplot.ClosePixelImg;
-var  ImgHandle,ImgMaskHandle: HBitmap;
 begin
-if IntfImgReady then begin
+{if IntfImgReady then begin
     if not cfgchart.onprinter then begin
-       cnv:=cbmp.Canvas;
+       cbmp.InvalidateBitmap;
     end;
   end;
-IntfImgReady:=false;
+IntfImgReady:=false; }
 end;
 
 Procedure TSplot.FlushCnv;
 begin
 if cfgplot.UseBMP then begin
+ cbmp.LoadFromBitmapIfNeeded;
  cbmp.Draw(destcnv,0,0,true); // draw bitmap to screen
 end else begin
  destcnv.CopyMode:=cmSrcCopy;
@@ -421,8 +422,8 @@ InitStarBmp;
 end;
 
 //todo: check if alpha transparency work
-//{$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
-//{$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
+{$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
+{$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
 var
   memstream:Tmemorystream;
@@ -506,6 +507,39 @@ except
 end;
 end;
 
+procedure SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false);
+var
+  i: Integer;
+  newalpha: byte;
+  p: PBGRAPixel;
+begin
+if (bmp.Width<2)or(bmp.Height<2) then exit;
+p := bmp.Data;
+for i := bmp.NbPixels-1 downto 0 do
+begin
+  newalpha:=MaxIntValue([p^.red,p^.green,p^.blue]);
+  case method of
+  0 : ;                      // 0: linear for nebulae
+  1 : if newalpha<50 then    // 1: hard contrast for stars  and planets
+         newalpha:=0
+      else
+         newalpha:=255;
+  2 : if newalpha<=0 then    // 2: black transparent
+         newalpha:=0
+      else
+         newalpha:=255;
+  end;
+  if whitebg then begin
+    p^.red:=255-p^.red;
+    p^.green:=255-p^.green;
+    p^.blue:=255-p^.blue;
+  end;
+  p^.alpha:=newalpha;
+  inc(p);
+end;
+bmp.InvalidateBitmap;
+end;
+
 procedure TSplot.InitStarBmp;
 var
     i,j,bw: integer;
@@ -523,8 +557,9 @@ for i:=0 to 6 do
 {$ENDIF}
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-   SetTransparencyFromLuminance(Astarbmp[i,j],1);
    Bstarbmp[i,j].Assign(Astarbmp[i,j]);
+   SetTransparencyFromLuminance(Astarbmp[i,j],1);
+   SetBGRATransparencyFromLuminance(Bstarbmp[i,j],1);
   end;
 end;
 
@@ -570,7 +605,7 @@ yy:=round(y);
    else isz:=0;
  end;
  if cfgplot.UseBMP then begin
-   cbmp.PutImage(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Bstarbmp[ico,isz],dmSetExceptTransparent);
+   cbmp.PutImage(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Bstarbmp[ico,isz],dmDrawWithTransparency);
  end else
    with cnv do begin
    CopyMode:=cmSrcCopy;
@@ -642,7 +677,7 @@ const
   PointAlpha : single = 0.15;  // Transparency at Solid;
 
 begin
-  if not IntfImgReady then exit;
+//  if not IntfImgReady then exit;
   LineWidth:=0;
   if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
   Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
@@ -732,8 +767,7 @@ begin
       case cfgplot.starplot of
       0 : PlotStar0(xx,yy,ma,b_v);
       1 : PlotStar1(xx,yy,ma,b_v);
-      2 : if IntfImgReady then PlotStar2(xx,yy,ma,b_v)
-             else PlotStar1(xx,yy,ma,b_v);
+      2 : PlotStar2(xx,yy,ma,b_v);
       end;
 end;
 
@@ -902,13 +936,22 @@ end;
 
 Procedure TSplot.PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
 begin
+if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
+   (abs(x2-cfgchart.hw)<cfgplot.outradius)and(abs(y2-cfgchart.hh)<cfgplot.outradius)
+then begin
  if lwidth=0 then
    lwidth:=1
  else
    lwidth:=lwidth*cfgchart.drawpen;
 if cfgplot.UseBMP then begin
-  { TODO : line style }
-  cbmp.DrawLineAntialias(x1,y1,x2,y2,ColorToBGRA(lcolor),lwidth,false);
+  case style of
+    psSolid: cbmp.DrawLineAntialias(x1,y1,x2,y2,ColorToBGRA(lcolor),lwidth,false);
+    psDash: cbmp.DrawLineAntialias(round(x1),round(y1),round(x2),round(y2),ColorToBGRA(lcolor),BGRAPixelTransparent,3,true);
+    psDot: cbmp.DrawLineAntialias(round(x1),round(y1),round(x2),round(y2),ColorToBGRA(lcolor),BGRAPixelTransparent,1,true);
+    psDashDot: cbmp.DrawLineAntialias(round(x1),round(y1),round(x2),round(y2),ColorToBGRA(lcolor),BGRAPixelTransparent,5,true);
+    psDashDotDot: cbmp.DrawLineAntialias(round(x1),round(y1),round(x2),round(y2),ColorToBGRA(lcolor),BGRAPixelTransparent,10,true);
+    else cbmp.DrawLineAntialias(x1,y1,x2,y2,ColorToBGRA(lcolor),lwidth,false);
+  end;
 end else with cnv do begin
   Pen.width:=lwidth;
   Brush.Style:=bsClear;
@@ -917,13 +960,10 @@ end else with cnv do begin
   Pen.Color:=lcolor;
   Pen.Style:=style;
   {$ifdef mswindows}if style<>psSolid then Pen.width:=1;{$endif}
-  if (abs(x1-cfgchart.hw)<cfgplot.outradius)and(abs(y1-cfgchart.hh)<cfgplot.outradius) and
-     (abs(x2-cfgchart.hw)<cfgplot.outradius)and(abs(y2-cfgchart.hh)<cfgplot.outradius)
-     then begin
-        MoveTo(round(x1),round(y1));
-        LineTo(round(x2),round(y2));
-  end;
+  MoveTo(round(x1),round(y1));
+  LineTo(round(x2),round(y2));
   Pen.Style:=psSolid;
+end;
 end;
 end;
 
@@ -1121,16 +1161,16 @@ if not cfgplot.Invisible then begin
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
-          if not IntfImgReady then InitPixelImg;
+          //if not IntfImgReady then InitPixelImg;
           PlotStar(x,y,magn,b_v);
           end;
       1 : begin // diam
-          if IntfImgReady then ClosePixelImg;
+          //if IntfImgReady then ClosePixelImg;
           PlotPlanet1(xx,yy,ipla,pixscale,diam);
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
-          if IntfImgReady then ClosePixelImg;
+          //if IntfImgReady then ClosePixelImg;
           rot:=rot*FlipX*FlipY;
           if (ipla=10)and(size>0) then begin
             PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
@@ -1147,7 +1187,7 @@ if not cfgplot.Invisible then begin
           end;
           end;
       3 : begin // symbol
-          if IntfImgReady then ClosePixelImg;
+          //if IntfImgReady then ClosePixelImg;
           PlotPlanet4(xx,yy,ipla,pixscale,WhiteBg);
           end;
   end;
@@ -1211,6 +1251,7 @@ var dsx,dsy,zoom : single;
     imabmp:Tbitmap;
     rbmp: Tbitmap;
     outbmp:TBGRABitmap;
+    trWhiteBg: boolean;
 begin
 if (iWidth<2)or(iHeight<2) then exit;
 zoom:=iWidth/ibmp.Width;
@@ -1222,6 +1263,10 @@ if not DisplayIs32bpp then begin
 end;
 memstream := TMemoryStream.create;
 try
+if cfgplot.UseBMP and WhiteBg then begin
+ WhiteBg:=false;
+ trWhiteBg:=true;
+end;
 if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    // image smaller than chart, write in full
   if (zoom>1)or((ibmp.Height<=1024)and(ibmp.Width<=1024)) then begin
@@ -1238,28 +1283,29 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    DestX:=round(xx-dsx);
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
-   {$IFNDEF OLD_MASK_TRANSPARENCY}
-   rbmp.PixelFormat:=pf32bit;
-   {$endif}
-   rbmp.Width:=imabmp.Width;
-   rbmp.Height:=imabmp.Height;
-   rbmp.Canvas.Draw(0,0,imabmp);
-   if iTransparent then begin
-      if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,TransparentMode)
-                        else rbmp.TransparentColor:=clBlack;
-   end else begin
-     {$IF DEFINED(LCLGTK2)}
-      rbmp.SaveToStream(memstream);
-      memstream.position := 0;
-      rbmp.LoadFromStream(memstream);
-      rbmp.Transparent:=false;
-      {$ENDIF}
-   end;
    if cfgplot.UseBMP then begin
-     outbmp:=TBGRABitmap.Create(rbmp);
-     cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
-     outbmp.free;
+    outbmp:=TBGRABitmap.Create(imabmp);
+    SetBGRATransparencyFromLuminance(outbmp,0,trWhiteBg);
+    cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
+    outbmp.free;
    end else begin
+     {$IFNDEF OLD_MASK_TRANSPARENCY}
+     rbmp.PixelFormat:=pf32bit;
+     {$endif}
+     rbmp.Width:=imabmp.Width;
+     rbmp.Height:=imabmp.Height;
+     rbmp.Canvas.Draw(0,0,imabmp);
+     if iTransparent then begin
+        if DisplayIs32bpp then SetTransparencyFromLuminance(rbmp,TransparentMode)
+                          else rbmp.TransparentColor:=clBlack;
+     end else begin
+       {$IF DEFINED(LCLGTK2)}
+        rbmp.SaveToStream(memstream);
+        memstream.position := 0;
+        rbmp.LoadFromStream(memstream);
+        rbmp.Transparent:=false;
+        {$ENDIF}
+     end;
      cnv.CopyMode:=cmSrcCopy;
      cnv.Draw(DestX,DestY,rbmp);
    end;
@@ -1284,28 +1330,29 @@ end else begin
    imabmp.Canvas.Rectangle(0,0,imabmp.Width,imabmp.Height);
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
-   {$IFNDEF OLD_MASK_TRANSPARENCY}
-   imabmp.PixelFormat:=pf32bit;
-   {$endif}
-   imabmp.Width:=rbmp.Width;
-   imabmp.Height:=rbmp.Height;
-   imabmp.Canvas.Draw(0,0,rbmp);
-   if iTransparent then begin
-      if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,TransparentMode)
-                        else imabmp.TransparentColor:=clBlack;
-   end else begin
-     {$IF DEFINED(LCLGTK2)}
-      imabmp.SaveToStream(memstream);
-      memstream.position := 0;
-      imabmp.LoadFromStream(memstream);
-      imabmp.Transparent:=false;
-      {$ENDIF}
-   end;
    if cfgplot.UseBMP then begin
-     outbmp:=TBGRABitmap.Create(imabmp);
+     outbmp:=TBGRABitmap.Create(rbmp);
+     SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
      cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
      outbmp.free;
    end else begin
+     {$IFNDEF OLD_MASK_TRANSPARENCY}
+     imabmp.PixelFormat:=pf32bit;
+     {$endif}
+     imabmp.Width:=rbmp.Width;
+     imabmp.Height:=rbmp.Height;
+     imabmp.Canvas.Draw(0,0,rbmp);
+     if iTransparent then begin
+        if DisplayIs32bpp then SetTransparencyFromLuminance(imabmp,TransparentMode)
+                          else imabmp.TransparentColor:=clBlack;
+     end else begin
+       {$IF DEFINED(LCLGTK2)}
+        imabmp.SaveToStream(memstream);
+        memstream.position := 0;
+        imabmp.LoadFromStream(memstream);
+        imabmp.Transparent:=false;
+        {$ENDIF}
+     end;
      cnv.CopyMode:=cmSrcCopy;
      cnv.Draw(0,0,imabmp);
    end;
@@ -1545,7 +1592,7 @@ if not cfgplot.Invisible then
     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
     ds2:=round(diam*pixscale);
     if ds2>ds then begin
-      if IntfImgReady then ClosePixelImg;
+      //if IntfImgReady then ClosePixelImg;
       ds1:=ds2/2;
       if cfgplot.UseBMP then begin
         cbmp.FillEllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[20]));
@@ -1571,7 +1618,7 @@ if not cfgplot.Invisible then
         end;
       end;
      end else begin
-        if not IntfImgReady then InitPixelImg;
+        //if not IntfImgReady then InitPixelImg;
         PlotStar(x,y,ma,1020)
      end;
    end;
@@ -2489,6 +2536,15 @@ end else with cnv do begin
   end;
   Polyline(p);
   Pen.Mode:=pmCopy;
+end;
+end;
+
+procedure TSplot.FloodFill(X, Y: Integer; FillColor: TColor);
+begin
+if cfgplot.UseBMP then begin
+  cbmp.FloodFill(x,y,ColorToBGRA(FillColor),fmSet);
+end else begin
+  cnv.FloodFill(x,y,FillColor,fsBorder);
 end;
 end;
 
