@@ -2496,16 +2496,17 @@ if cfgsc.ProjPole=Altaz then begin
        azp:=az;
        hpstep:=hstep;
      end;
+
      if cfgsc.FillHorizon then begin
-        if (fillx1>0)or(filly1>0) then fplot.cnv.FloodFill(round(fillx1),round(filly1),Fplot.cfgplot.Color[12],fsBorder);
+        if (fillx1>0)or(filly1>0) then fplot.FloodFill(round(fillx1),round(filly1),Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
-        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,Fplot.cfgplot.Color[12],fsBorder);
+        if h<0 then fplot.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
-        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,Fplot.cfgplot.Color[12],fsBorder);
+        if h<0 then fplot.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
-        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,Fplot.cfgplot.Color[12],fsBorder);
+        if h<0 then fplot.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
-        if h<0 then fplot.cnv.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,Fplot.cfgplot.Color[12],fsBorder);
+        if h<0 then fplot.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,Fplot.cfgplot.Color[19]);
      end;
   end
   else begin
