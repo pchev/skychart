@@ -21,12 +21,13 @@ dirs=synapse/source/lib \
      downloaddialog \
      jdcalendar \
      multidoc \
+     bgrabitmap \ 
      vo 
 units=cdccomponents.pas
 
 [compiler]
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
-unitdir=uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+unitdir=uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ bgrabitmap/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
 options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
 
@@ -60,5 +61,5 @@ export LCL_PLATFORM
 [rules]
 .PHONY: all
 
-all: synapse/source/lib_all libsql_all mrecsort_all thtmlport/package_all uniqueinstance_all xmlparser_all enhedits_all radec_all zoomimage_all downloaddialog_all jdcalendar_all multidoc_all vo_all cdccomponents$(PPUEXT)
+all: synapse/source/lib_all libsql_all mrecsort_all thtmlport/package_all uniqueinstance_all xmlparser_all bgrabitmap_all enhedits_all radec_all zoomimage_all downloaddialog_all jdcalendar_all multidoc_all vo_all cdccomponents$(PPUEXT)
 

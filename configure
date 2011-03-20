@@ -17,6 +17,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/uniqueinstance \
      skychart/component/thtmlport/package \
      skychart/component/xmlparser \
+     skychart/component/bgrabitmap \
      skychart/component/enhedits \
      skychart/component/radec \
      skychart/component/zoomimage \
