@@ -1068,7 +1068,11 @@ finally
  screen.cursor:=crDefault;
  prtbmp.free;
  // restore state
+ {$ifdef darwin}
+ sc.plot.cfgplot.UseBMP:=false;
+ {$else}
  sc.plot.cfgplot.UseBMP:=true;
+ {$endif}
  sc.plot.cfgplot.color:=savecolor;
  sc.plot.cfgplot.starplot:=savesplot;
  sc.plot.cfgplot.nebplot:=savenplot;

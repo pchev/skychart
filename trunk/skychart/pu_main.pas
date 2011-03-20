@@ -3814,7 +3814,11 @@ cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'const
 cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
 cfgm.PlanetDir:=slash(appdir)+'data'+Pathdelim+'planet';
 cfgm.horizonfile:='';
+{$ifdef darwin}
+def_cfgplot.UseBMP:=false;
+{$else}
 def_cfgplot.UseBMP:=true;
+{$endif}
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
 def_cfgplot.skycolor:=dfSkyColor;
