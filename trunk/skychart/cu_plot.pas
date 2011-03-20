@@ -150,6 +150,11 @@ type
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
      procedure FloodFill(X, Y: Integer; FillColor: TColor);
+     Procedure Movelabel(Sender: TObject);
+     Procedure EditlabelTxt(Sender: TObject);
+     Procedure DefaultLabel(Sender: TObject);
+     Procedure Deletelabel(Sender: TObject);
+     Procedure DeleteAlllabel(Sender: TObject);
      property Starshape: TBitmap read Fstarshape write Setstarshape;
      property OnEditLabelPos: TEditLabelPos read FEditLabelPos write FEditLabelPos;
      property OnEditLabelTxt: TEditLabelPos read FEditLabelTxt write FEditLabelTxt;
@@ -157,11 +162,6 @@ type
      property OnDeleteLabel: Tintfunc  read FDeleteLabel write FDeleteLabel;
      property OnDeleteAllLabel: Tvoidfunc read FDeleteAllLabel write FDeleteAllLabel;
      property OnLabelClick: Tintfunc read FLabelClick write FLabelClick;
-     Procedure Movelabel(Sender: TObject);
-     Procedure EditlabelTxt(Sender: TObject);
-     Procedure DefaultLabel(Sender: TObject);
-     Procedure Deletelabel(Sender: TObject);
-     Procedure DeleteAlllabel(Sender: TObject);
      property Image: TCanvas write SetImage;
 
   end;
@@ -569,6 +569,7 @@ for i:=0 to 6 do
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
    Bstarbmp[i,j].SetSize(bw,bw);
    Bstarbmp[i,j].canvas.Draw(0,0,Astarbmp[i,j]);
+   Bstarbmp[i,j].LoadFromBitmapIfNeeded;
    SetTransparencyFromLuminance(Astarbmp[i,j],1);
    SetBGRATransparencyFromLuminance(Bstarbmp[i,j],1);
   end;
