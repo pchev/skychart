@@ -1,5 +1,6 @@
 Version 3.3svn  Notes de la version
 
+- Dessin avec antialias de la carte à l'écran.
 - List des observatoires favoris, nouvelle fenêtre pour la base de donnée des observatoires.
 - Localisation par Internet de votre emplacement.
 - Affiche une image en ligne du soleil des satellites SDO ou SOHO.
