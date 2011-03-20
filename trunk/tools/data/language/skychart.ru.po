@@ -3661,6 +3661,10 @@ msgstr "IP интерфейс сервера:"
 msgid "Server IP port:"
 msgstr "IP порт сервера:"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Закат"

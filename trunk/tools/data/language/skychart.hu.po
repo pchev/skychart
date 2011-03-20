@@ -4005,6 +4005,10 @@ msgstr "Szerver IP cím:"
 msgid "Server IP port:"
 msgstr "Szerver IP port:"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Nyugszik"

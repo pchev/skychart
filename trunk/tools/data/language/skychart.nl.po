@@ -3658,6 +3658,10 @@ msgstr "Server IP interface:"
 msgid "Server IP port:"
 msgstr "Server IP port:"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Ondergang"

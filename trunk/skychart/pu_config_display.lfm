@@ -13,7 +13,7 @@ object f_config_display: Tf_config_display
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object MainPanel: TPanel
     Left = 0
     Height = 510

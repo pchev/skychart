@@ -518,6 +518,7 @@ StarButton7.caption:=rsBigStars;
 Label258.caption:=rsBrightStarsS;
 Label259.caption:=rsContrast;
 label9.Caption:=rsStarsBitmapF;
+Button7.Caption:=rsDefault;
 
 Page2.caption:=rsColor;
 Label189.caption:=rsStarColourBV;
