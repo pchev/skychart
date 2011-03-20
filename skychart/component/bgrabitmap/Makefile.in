@@ -2,17 +2,17 @@
 #
 #   Makefile.fpc for bgrapkg 0.0
 #
-#   This file was generated on 9-10-08
+#   This file was generated on 20. 03. 11
 
 [package]
 name=bgrapkg
 version=0.0
 
 [compiler]
-unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
-unitdir=$(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
+unitdir=$(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET) ./
 includedir=./
-options=-dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
+options= -MObjFPC -Scghi -O1 -gl -vewnhi -l -dLCL -dLCL$(LCL_PLATFORM)
 
 [target]
 units=bgrapkg.pas
@@ -21,7 +21,8 @@ units=bgrapkg.pas
 files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
       $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
-      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.lfm) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.res) \
       $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
 [prerules]
 LAZDIR=%LAZDIR%
@@ -49,4 +50,4 @@ export LCL_PLATFORM
 cleartarget:
         -$(DEL) $(COMPILER_UNITTARGETDIR)/bgrapkg$(PPUEXT)
 
-all: cleartarget $(COMPILER_UNITTARGETDIR) bgrapkg$(PPUEXT)
+all: cleartarget $(COMPILER_UNITTARGETDIR) bgrapkg$(PPUEXT) 

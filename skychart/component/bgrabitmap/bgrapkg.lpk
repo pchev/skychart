@@ -9,6 +9,7 @@
       </SearchPaths>
       <Other>
         <CompilerPath Value="$(CompPath)"/>
+        <CreateMakefileOnBuild Value="True"/>
       </Other>
     </CompilerOptions>
     <Files Count="11">
