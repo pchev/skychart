@@ -92,6 +92,7 @@ type
     cfgplot : Tconf_plot;
     cfgchart: Tconf_chart;
     cbmp : TBGRABitmap;
+    obmp : TBitmap;
     cnv, destcnv  : Tcanvas;
     Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
     Astarbmp: array [0..6,0..10] of Tbitmap;
@@ -181,7 +182,8 @@ for i:=0 to 6 do
   end;
  starbmp:=Tbitmap.Create;
  cbmp:=TBGRABitmap.Create;
- cnv:=cbmp.canvas;
+ obmp:= TBitmap.Create;
+ cnv:=obmp.canvas;
  cfgplot:=Tconf_plot.Create;
  cfgchart:=Tconf_chart.Create;
  // set safe value
@@ -276,8 +278,9 @@ for i:=0 to 6 do
      Astarbmp[i,j].free;
      Bstarbmp[i,j].free;
   end;
- starbmp.Free;
+// starbmp.Free;
  cbmp.Free;
+ obmp.free;
  cfgplot.Free;
  cfgchart.Free;
  if planetrender then begin
@@ -322,7 +325,14 @@ if cfgplot.UseBMP then begin
   cbmp.SetSize(w,h);
   cnv:=nil; // to be sure we no more use it!
 end else begin
-  cnv:=destcnv
+ if cfgchart.onprinter then cnv:=destcnv
+      else begin
+        obmp.FreeImage;
+        obmp.Transparent:=false;
+        obmp.Width:=w;
+        obmp.Height:=h;
+        cnv:=obmp.Canvas; // defered plot to bitmap
+      end;
 end;
 ClearImage;
 if not cfgplot.UseBMP then
@@ -408,7 +418,7 @@ if cfgplot.UseBMP then begin
  cbmp.Draw(destcnv,0,0,true); // draw bitmap to screen
 end else begin
  destcnv.CopyMode:=cmSrcCopy;
- destcnv.Draw(0,0,cbmp.Bitmap);
+ destcnv.Draw(0,0,obmp);
 end;
 cnv:=destcnv;           // direct plot to screen;
 end;
@@ -557,7 +567,8 @@ for i:=0 to 6 do
 {$ENDIF}
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-   Bstarbmp[i,j].Assign(Astarbmp[i,j]);
+   Bstarbmp[i,j].SetSize(bw,bw);
+   Bstarbmp[i,j].canvas.Draw(0,0,Astarbmp[i,j]);
    SetTransparencyFromLuminance(Astarbmp[i,j],1);
    SetBGRATransparencyFromLuminance(Bstarbmp[i,j],1);
   end;
@@ -677,7 +688,10 @@ const
   PointAlpha : single = 0.15;  // Transparency at Solid;
 
 begin
-//  if not IntfImgReady then exit;
+  if not cfgplot.Usebmp then begin
+    PlotStar1(x,y,ma,b_v);
+    exit;
+  end;
   LineWidth:=0;
   if ma<0 then ma:=ma/10;                               // avoid Moon and Sun be too big
   Lum := (1.1*cfgchart.min_ma-ma)/cfgchart.min_ma;      // logarithmic luminosity proportional to magnitude
