@@ -1298,7 +1298,8 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
    if cfgplot.UseBMP then begin
-    outbmp:=TBGRABitmap.Create(imabmp);
+    outbmp:=TBGRABitmap.Create(imabmp.Width,imabmp.Height);
+    outbmp.canvas.Draw(0,0,imabmp);
     SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
     cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
     outbmp.free;
@@ -1345,7 +1346,8 @@ end else begin
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
    if cfgplot.UseBMP then begin
-     outbmp:=TBGRABitmap.Create(rbmp);
+     outbmp:=TBGRABitmap.Create(rbmp.Width,rbmp.Height);
+     outbmp.canvas.Draw(0,0,rbmp);
      SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
      cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
      outbmp.free;
