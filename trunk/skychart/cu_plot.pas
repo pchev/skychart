@@ -278,7 +278,7 @@ for i:=0 to 6 do
      Astarbmp[i,j].free;
      Bstarbmp[i,j].free;
   end;
-// starbmp.Free;
+ starbmp.Free;
  cbmp.Free;
  obmp.free;
  cfgplot.Free;
