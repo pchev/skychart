@@ -7,7 +7,7 @@ name=skychart
 version=3
 
 [target]
-dirs=component library component/thtmlport/package
+dirs=component library component/thtmlport/package component/bgrabitmap
 programs=cdc cdcicon
 
 [require]
@@ -18,7 +18,7 @@ packages=rtl
 unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 includedir=./
 options= $(opt_target) -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -g -gl -WG -vewni -l
-unitdir=library/catalog/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/satxy/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ component/uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/components/synedit/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+unitdir=library/catalog/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/satxy/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ component/uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/bgrabitmap/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/components/synedit/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 
 [clean]
 files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
@@ -56,5 +56,5 @@ endif
 .PHONY: all
 
 #   thtmlport must be compiled two time! see http://wiki.lazarus.freepascal.org/THtmlPort#Installation 
-all: component_all library_all component/thtmlport/package_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+all: component_all library_all component/thtmlport/package_all component/bgrabitmap_all cdc$(EXEEXT) cdcicon$(EXEEXT)
 
