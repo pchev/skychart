@@ -181,12 +181,15 @@ case cm.PrintMethod of
 0 : begin
     GetPrinterResolution(cm.prtname,i);
     PrinterInfo.Caption:=rsprinter+blank+cm.prtname+' @ '+inttostr(i)+' DPI';
+    GroupBox1.Visible:=true;
     end;
 1 : begin
     PrinterInfo.Caption:=rsPostscript+' @ '+inttostr(cm.PrinterResolution)+' DPI';
+    GroupBox1.Visible:=true;
     end;
 2 : begin
     PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrinterResolution)+' DPI';
+    GroupBox1.Visible:=false;
     end;
 end;
 end;

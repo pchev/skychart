@@ -11,12 +11,12 @@ object f_print: Tf_print
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object PrinterInfo: TLabel
     Left = 27
-    Height = 11
+    Height = 15
     Top = 14
-    Width = 36
+    Width = 57
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -35,7 +35,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 70
+    ClientHeight = 66
     ClientWidth = 203
     ItemIndex = 0
     Items.Strings = (
@@ -61,7 +61,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 70
+    ClientHeight = 66
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -108,44 +108,44 @@ object f_print: Tf_print
     Top = 144
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 70
+    ClientHeight = 66
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
       Left = 23
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 13
+      Width = 21
       Caption = 'Left'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 89
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 20
+      Width = 30
       Caption = 'Right'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 153
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 13
+      Width = 21
       Caption = 'Top'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 216
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 24
+      Width = 40
       Caption = 'Bottom'
       ParentColor = False
     end
     object LongEdit1: TLongEdit
       Left = 21
-      Height = 18
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -158,7 +158,7 @@ object f_print: Tf_print
     end
     object LongEdit2: TLongEdit
       Left = 86
-      Height = 18
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -171,7 +171,7 @@ object f_print: Tf_print
     end
     object LongEdit3: TLongEdit
       Left = 151
-      Height = 18
+      Height = 22
       Hint = '0..100'
       Top = 35
       Width = 40
@@ -184,7 +184,7 @@ object f_print: Tf_print
     end
     object LongEdit4: TLongEdit
       Left = 216
-      Height = 18
+      Height = 22
       Hint = '0..100'
       Top = 34
       Width = 40

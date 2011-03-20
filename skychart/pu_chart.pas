@@ -923,7 +923,6 @@ var savecolor: Starcolarray;
     saveskycolor: boolean;
     saveLabelColor : array[1..numlabtype] of Tcolor;
     prtname:string;
-    prtbmp:Tbitmap;
     fname:WideString;
     i,w,h :integer;
     ps:TPostscriptCanvas;
@@ -940,7 +939,6 @@ var savecolor: Starcolarray;
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
  for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
- prtbmp:=Tbitmap.create;
 try
  screen.cursor:=crHourGlass;
  if printcolor<>2 then begin
@@ -959,7 +957,6 @@ try
    if printcolor<2 then for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=clBlack;
    sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
- if (printcolor=2)and(sc.plot.cfgplot.starplot=2) then sc.plot.cfgplot.starplot:=1;
  Case PrintMethod of
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
@@ -1029,32 +1026,30 @@ try
  2: begin  // to bitmap
     if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(printresol)]) , caption);
     if DirectoryIsWritable(printpath) then begin
-      //prtbmp.pixelformat:=pf32bit;
       if PrintLandscape then begin
-         prtbmp.width:=11*printresol;
-         prtbmp.height:=8*printresol;
+         w:=11*printresol;
+         h:=8*printresol;
       end else begin
-         prtbmp.width:=8*printresol;
-         prtbmp.height:=11*printresol;
+         w:=8*printresol;
+         h:=11*printresol;
       end;
      // draw the chart to the bitmap
-     sc.plot.destcnv:=prtbmp.canvas;
-     sc.plot.cfgplot.UseBMP:=false;
-     sc.plot.cfgchart.onprinter:=true;
+     sc.plot.cfgplot.UseBMP:=true;
+     sc.plot.cfgchart.onprinter:=(PrintColor<2);
      sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
      sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
-     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-     sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+     sc.cfgsc.LeftMargin:=0;
+     sc.cfgsc.RightMargin:=0;   // No margin on bitmap file
+     sc.cfgsc.TopMargin:=0;
+     sc.cfgsc.BottomMargin:=0;
      sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
      sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
-     sc.plot.init(prtbmp.width,prtbmp.height);
+     sc.plot.init(w,h);
      sc.Refresh;
      // save the bitmap
      fname:=slash(printpath)+'cdcprint.bmp';
-     prtbmp.savetofile(SysToUTF8(fname));
+     sc.plot.cbmp.savetofile(SysToUTF8(fname));
      if printcmd2<>'' then begin
         if assigned(Fshowinfo) then Fshowinfo(rsOpenTheBitma , caption);
         execnowait(printcmd2+' "'+fname+'"','',false);
@@ -1066,7 +1061,6 @@ end;
 finally
  chdir(appdir);
  screen.cursor:=crDefault;
- prtbmp.free;
  // restore state
  sc.plot.cfgplot.UseBMP:=true;
  sc.plot.cfgplot.color:=savecolor;
