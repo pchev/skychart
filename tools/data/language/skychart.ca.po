@@ -3664,6 +3664,10 @@ msgstr "Interfície IP de la xarxa:"
 msgid "Server IP port:"
 msgstr "Port del servidor IP:"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Posta"

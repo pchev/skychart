@@ -2,7 +2,7 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-05 20:45+0100\n"
+"PO-Revision-Date: 2011-03-01 21:38+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -18,15 +18,15 @@ msgstr "102 CD DSS"
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184 (anbefalt opp til 1,000,000 objekter)"
+msgstr "184 (anbefalt opp til 1 000 000 objekter)"
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50   (anbefalt opp til 100,000 objekter)"
+msgstr "50   (anbefalt opp til 100 000 objekter)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732 (anbefalt opp til 5,000,000 objekter)"
+msgstr "732 (anbefalt opp til 5 000 000 objekter)"
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
@@ -78,7 +78,7 @@ msgstr "Legg til et enkeltobjekt i databasen. Alle felter er obligatoriske."
 
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
-msgstr "Legg til ekvatorialt rutenett"
+msgstr "Legg til ekvatorialt nett"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -234,7 +234,7 @@ msgstr "Asteroide"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Kilder for asteroide-elementer i MPC-format (en URL pr. linje)"
+msgstr "Kilder for asteroide-elementer i MPC-format (en nettadresse pr. linje)"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -346,7 +346,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Binær indeksert katalog"
+msgstr "Binær-indeksert katalog"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -358,7 +358,7 @@ msgstr "Bitmap-fil"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
-msgstr "Svart på hvit"
+msgstr "Svart på hvitt"
 
 #: u_translation.rsblackwhite
 msgid "Black/white"
@@ -414,7 +414,7 @@ msgstr "Lyse stjerner"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr "Størrelse til lys stjerne"
+msgstr "Størrelse på lyse stjerner"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
@@ -446,7 +446,7 @@ msgstr "Kan ikke beregne satellitter."
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Kan ikke få tak i IP-adressen din, eller ikke noe sted funnet for denne adressen."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -466,15 +466,15 @@ msgstr "Kat."
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "Katalog"
+msgstr "Kataloger"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Katalog langt navn"
+msgstr "Katalog - langt navn"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Katalog kort navn"
+msgstr "Katalog - kort navn"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
@@ -498,7 +498,7 @@ msgstr "CdC deep sky kataloger og innstillinger"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Foreldede CdC kataloger og innstillinger (du kan fremdeles bruke dem)"
+msgstr "Foreldede CdC-kataloger og innstillinger (du kan fremdeles bruke dem)"
 
 #: u_translation.rscdcplugin
 msgid "CdC plugin"
@@ -550,7 +550,7 @@ msgstr "Endre tegne-modus"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
-msgstr "Endre det viste bilde"
+msgstr "Endre det viste bildet"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -650,7 +650,7 @@ msgstr "Lukker forbindelse"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr "Stjernehop og stjernetåke"
+msgstr "Stjernehop og tåke"
 
 #: u_translation.rscolor
 msgid "Colour"
@@ -674,7 +674,7 @@ msgstr "Komet"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Kilder for komet-elementer i MPC-format (en URL pr. linje)"
+msgstr "Kilder for komet-elementer i MPC-format (en nettadresse pr. linje)"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -730,7 +730,7 @@ msgstr "Innstillinger"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "Still inn programmet"
+msgstr "Programinnstillinger"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
@@ -750,7 +750,7 @@ msgstr "Koble til teleskop"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Forbindelse til %s, %s feilet! %sVerifiser om MySQL serveren kjører, og kontroller brukerid/passord."
+msgstr "Forbindelse til %s, %s feilet! %sVerifiser om MySQL-serveren kjører, og kontroller bruker-id/passord."
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -810,7 +810,7 @@ msgstr "Koord."
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
-msgstr "Koord. rutenett"
+msgstr "Koord.nett"
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
@@ -818,11 +818,11 @@ msgstr "Koordinater:"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "Koordinater jevndøgn"
+msgstr "Koordinater - jevndøgn"
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
-msgstr "Koordinatrutenett"
+msgstr "Koordinatnett"
 
 #: u_translation.rscopy
 msgid "Copy"
@@ -1004,7 +1004,7 @@ msgstr "Desimalgrader"
 
 #: u_translation.rsdecimalhours
 msgid "Decimal hours"
-msgstr "Desimal timer"
+msgstr "Desimaltimer"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
@@ -1048,7 +1048,7 @@ msgstr "Standard-knapp"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "Standard-farge"
+msgstr "Standardfarge"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
@@ -1056,7 +1056,7 @@ msgstr "Standard-påskrift"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "Standard-marg"
+msgstr "Standardmarg"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
@@ -1076,7 +1076,7 @@ msgstr "Grad"
 
 #: u_translation.rsdegreegridsp
 msgid "Declination grid"
-msgstr "Deklinasjonsrutenett"
+msgstr "Deklinasjonsnett"
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1192,7 +1192,7 @@ msgstr "Dimensjon"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
-msgstr "Dimensjoner og enheter"
+msgstr "Dimensjon og enheter"
 
 #: u_translation.rsdir
 msgid "Dir"
@@ -1308,7 +1308,7 @@ msgstr "Tegn en linje som viser egenbevegelse for neste"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
-msgstr "Tegnetype"
+msgstr "Tegningstype"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
@@ -1388,7 +1388,7 @@ msgstr "Rediger påskrift"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr "Rediger linje-operasjon"
+msgstr "Rediger linjeoperasjon"
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
@@ -1408,7 +1408,7 @@ msgstr "Emisjonståke"
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr "Objektende"
+msgstr "Objekt-ende"
 
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
@@ -1432,11 +1432,11 @@ msgstr "Epoke (JD)"
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "Epoke av maxima"
+msgstr "Epoke til maksima"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr "Ekv. rutenett"
+msgstr "Ekv. nett"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -1504,7 +1504,7 @@ msgstr "Kveldsskumring"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "intervall"
+msgstr "Intervall"
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1540,7 +1540,7 @@ msgstr "Svakere"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Størrelse til svake stjerner"
+msgstr "Størrelse på svake stjerner"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -1548,7 +1548,7 @@ msgstr "FAQ"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Favoritter"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -1648,7 +1648,7 @@ msgstr "Flamsteed nr."
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
-msgstr "Forutsigelse av Iridiumglimt:"
+msgstr "Iridiumglimtvarsel:"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1656,7 +1656,7 @@ msgstr "Skrifttyper"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "For en stor katalog, velg alltid binær. For et lite datasett som endres ofte, velg Tekst. Dette gjør det mulig å redigere filen og se resultatet umiddelbart på kartet uten å måtte kjøre verktøyet på nytt."
+msgstr "For en stor katalog, velg alltid binær. For et lite datasett som endres ofte, velg Tekst. Dette gjør det mulig å redigere filen og se resultatet umiddelbart på kartet uten å måtte kjøre dette verktøyet på nytt."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -1676,7 +1676,7 @@ msgstr "Synsfeltnummer:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr "Bilde pr. sekund"
+msgstr "Bilder pr. sekund"
 
 #: u_translation.rsframessize
 msgid "Frames size"
@@ -1878,11 +1878,11 @@ msgstr "Timevinkel"
 
 #: u_translation.rshourgridspac
 msgid "Right ascension grid"
-msgstr "Rektascensjon-rutenett"
+msgstr "Rektasensjonsnett"
 
 #: u_translation.rshours
 msgid "hours"
-msgstr ""
+msgstr "timer"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
@@ -1902,7 +1902,7 @@ msgstr "Ikonstørrelse"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr "Ikon tid visning"
+msgstr "Ikon tidsvisning"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -1950,23 +1950,23 @@ msgstr "Fram i tid"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Indiker her hvordan beregne nødvendige verdier fra dataene lagret i katalog-tekstfilen."
+msgstr "Angi her hvordan beregne nødvendige verdier fra dataene lagret i katalog-tekstfilen."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr "Indiker hvordan gjenkjenne objekt-størrelsesenhet:"
+msgstr "Angi hvordan gjenkjenne objektstørrelseenheten:"
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Indiker streng identifisereren for hver objekttype:"
+msgstr "Angi streng-identifisereren for hver objekttype:"
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Indiker strengen for hver tegneoperasjon"
+msgstr "Angi strengen for hver tegneoperasjon"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "Indiker strengen for hver farge"
+msgstr "Angi strengen for hver farge"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
@@ -2002,15 +2002,15 @@ msgstr "Initialiser database"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Inndata katalogfiler"
+msgstr "Inndata - katalogfiler"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
-msgstr "sett inn feilet linje %s: %s"
+msgstr "Innsetting feilet, linje %s: %s"
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
-msgstr "Sett inn feilet! %s"
+msgstr "Innsetting feilet! %s"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2018,15 +2018,15 @@ msgstr "Internett"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr ""
+msgstr "Internett-lokalisering"
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
-msgstr "ugyldig epoke på linje%s: %s"
+msgstr "Ugyldig epoke på linje %s: %s"
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
-msgstr "Ugyldig FITS fil: %s"
+msgstr "Ugyldig FITS-fil: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
@@ -2038,7 +2038,7 @@ msgstr "Usynlig på denne breddegrad"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr "Er koordinater epoke virkelige %s?"
+msgstr "Er koordinatepoken virkelig %s?"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2066,9 +2066,7 @@ msgstr "Jupiter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr ""
-"Lengdegrad til den røde flekk:\n"
-"(Jupiter)\n"
+msgstr "Jupiters røde flekk - lengdegrad:"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2256,7 +2254,7 @@ msgstr "Lokal horisont"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Lokal horisont filnavn:"
+msgstr "Filnavn:"
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2264,7 +2262,7 @@ msgstr "Lokal stjernetid"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Stedskode"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2296,7 +2294,7 @@ msgstr "Lysstyrke"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr "Måneformørkelse"
+msgstr "Måneformørkelser"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -2312,7 +2310,7 @@ msgstr "Magnitude"
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Magnitude ved maxima"
+msgstr "Magnitude ved maksima"
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
@@ -2328,7 +2326,7 @@ msgstr "Magnitude- forskjell"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr "Eklipse-magnitude"
+msgstr "Magnitude"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -2404,7 +2402,7 @@ msgstr "Middel anomali"
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "middel ekvator, jevndøgn og epoke til datoen"
+msgstr "middel ekvator, jevndøgn og datoens epoke"
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
@@ -2412,7 +2410,7 @@ msgstr "middel jevndøgn og epoke J2000"
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "middel jevndøgn J2000, epoke til datoen"
+msgstr "middel jevndøgn J2000, datoens epoke"
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
@@ -2492,7 +2490,7 @@ msgstr "Måned"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr "Måne"
+msgstr "Månen"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -2612,7 +2610,7 @@ msgstr "Ny påskrift"
 
 #: u_translation.rsnext
 msgid "Next   >>"
-msgstr "Neste   >>"
+msgstr "Neste >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -2780,7 +2778,7 @@ msgstr "Objekter"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr "Objektstørrelse-enhet"
+msgstr "Objektstørrelseenhet"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
@@ -2892,11 +2890,11 @@ msgstr "Andre programvare-data"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "Utdata katalogtype"
+msgstr "Utdata - katalogtype"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Utdata katalog-alternativer"
+msgstr "Utdata - katalogalternativer"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
@@ -2985,16 +2983,16 @@ msgstr "Planet"
 #: u_translation.rsplanetaryneb
 msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
-msgstr "Planetarisk stjernetåke"
+msgstr "Planetarisk tåke"
 
 #: u_translation.rsplanetaryneb2
 msgid "Planetary nebulae"
-msgstr "Planetariske stjernetåker"
+msgstr "Planetariske tåker"
 
 #: u_translation.rsplanetaryneb3
 msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
-msgstr "Planetarisk stjernetåke"
+msgstr "Planetarisk tåke"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
@@ -3010,11 +3008,11 @@ msgstr "Plate-defekt"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "Plate id.    Dato  exp.   Marg  CD  Observatorium"
+msgstr "Plate id.    Dato  Exp.   Marg  CD  Observatorium"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Sjekk din internett-forbindelse og URL definisjonen"
+msgstr "Sjekk din internettforbindelse og nettadresse-definisjonen"
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
@@ -3022,7 +3020,7 @@ msgstr "Still inn DSS-filbane."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "Still inn bane-elementenes URL!"
+msgstr "Sett opp bane-elementenes nettadresse!"
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
@@ -3034,15 +3032,15 @@ msgstr "Oppfør en objektidentifiserer"
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Indiker en katalogs 'kort navn'"
+msgstr "Angi et kort navn på katalogen"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "Indiker en katalogs 'langt navn'"
+msgstr "Angi et langt navn på katalogen"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "Indiker mappen hvor katalogen må opprettes"
+msgstr "Angi mappen hvor katalogen skal opprettes"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -3106,7 +3104,7 @@ msgstr "Posisjonsvinkel"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr "Posisjonsepoke"
+msgstr "Posisjon - epoke"
 
 #: u_translation.rspostscript
 msgid "PostScript"
@@ -3114,23 +3112,23 @@ msgstr "PostScript"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr "Prefiks navn med katalog 'kort navn'"
+msgstr "Sett navneprefiks med katalogens korte navn"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
-msgstr "Prefiks de alternative navnene med deres påskrift"
+msgstr "Sett prefiks på de alternative navnene med deres påskrift"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "Forbered en katalog med CatGen"
+msgstr "Lag en katalog med CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Forbered data"
+msgstr "Utarbeid data"
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
-msgstr "Forbered månedlige data"
+msgstr "Månedlige data"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -3138,7 +3136,7 @@ msgstr "Trykk  (millibar)"
 
 #: u_translation.rsprev
 msgid "<<   Prev"
-msgstr "<<   Forrige"
+msgstr "<<  Forrige"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3174,7 +3172,7 @@ msgstr "Skriv ut kartet"
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
-msgstr "Prosesserer... %s"
+msgstr "Bearbeider... %s"
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comets: %s"
@@ -3222,7 +3220,7 @@ msgstr "Projeksjonsinnstillinger"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Egenbevegelse i rektascensjon"
+msgstr "Egenbevegelse i rektasensjon"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
@@ -3246,11 +3244,11 @@ msgstr "Proxy"
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Proxy vert"
+msgstr "Proxy-vert"
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Proxy port"
+msgstr "Proxy-port"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -3258,7 +3256,7 @@ msgstr "Plasser filene med endelsen .tle i mappen %s "
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "Quasar"
+msgstr "Kvasar"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -3334,7 +3332,7 @@ msgstr "Opptaksmappe"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr "Opptaksendelse"
+msgstr "Opptak-filendelse"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
@@ -3378,7 +3376,7 @@ msgstr "Gjenoppfrisk"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr ""
+msgstr "Oppdateringsintervall for bilde"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3474,7 +3472,7 @@ msgstr "Høyre"
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "Rektascensjon "
+msgstr "Rektasensjon"
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
@@ -3510,7 +3508,7 @@ msgstr "Satellitt"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr "Beregning av satellitter:"
+msgstr "Satellittberegning:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -3654,11 +3652,15 @@ msgstr "Server-informasjon"
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
-msgstr "Server IP grensesnitt:"
+msgstr "Server - IP grensesnitt:"
 
 #: u_translation.rsserveripport
 msgid "Server IP port:"
-msgstr "Server IP port:"
+msgstr "Port:"
+
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
@@ -3666,7 +3668,7 @@ msgstr "Nedgang"
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr "Sett dato og tid"
+msgstr "Innstilling av dato og tid"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
@@ -3682,7 +3684,7 @@ msgstr "Still inn hvordan monteringen beveger seg når det blir dreid på dreiek
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "Still inn observasjonssted"
+msgstr "Innstilling av observasjonssted"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -3730,7 +3732,7 @@ msgstr "Vis stjernebildegrenser"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr "Vis koordinatrutenett"
+msgstr "Vis koordinatnett"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -3842,7 +3844,7 @@ msgstr "Cartes du Ciel hjemmeside"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
-msgstr "Skychart ikon oppsett"
+msgstr "Skychart ikon-oppsett"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
@@ -3878,7 +3880,7 @@ msgstr "Avstand til solen"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
-msgstr "Solformørkelse"
+msgstr "Solformørkelser"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
@@ -3898,7 +3900,7 @@ msgstr "Solsystem-innstillinger"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Noen oppføringer ble avvist, se filen %sreject.txt for detaljer."
+msgstr "Noen poster ble avvist, se filen %sreject.txt for detaljer."
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
@@ -3982,7 +3984,7 @@ msgstr "Stjerner"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Stjerner og deep sky kataloger forberedt med "
+msgstr "Stjerne- og deep sky kataloger lagd med "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -4002,7 +4004,7 @@ msgstr "Startmåned"
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr "Begynnelse av objekt"
+msgstr "Objekt-start"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -4014,11 +4016,11 @@ msgstr "Trinn-enhet"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr "Stopp TCP/IP server"
+msgstr "Stopp TCP/IP-server"
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr "Sol"
+msgstr "Solen"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
@@ -4030,7 +4032,7 @@ msgstr "Søn."
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Bildekilde"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4086,15 +4088,15 @@ msgstr "%sDenne tabell eksisterer: %s"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
-msgstr "TCP/IP forbindelse"
+msgstr "TCP/IP-forbindelse"
 
 #: u_translation.rstcpipserver
 msgid "TCP/IP server"
-msgstr "TCP/IP server"
+msgstr "TCP/IP-server"
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr "TCP/IP service ikke tilgjengelig."
+msgstr "TCP/IP-service ikke tilgjengelig."
 
 #: u_translation.rstelescope
 msgid "Telescope"
@@ -4154,7 +4156,7 @@ msgstr "Det er %s objekter i dette feltet"
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Denne handling overskriver hele database-innholdet for landet %s, ved å bruke friske data fra NGA og GNIS.%sAll din redigering for dette landet mistes, bare steder som du la til med et nytt navn beholdes.%sVil du fortsette?"
+msgstr "Denne handling overskriver hele database-innholdet for landet %s ved å bruke ferske data fra NGA og GNIS.%sAll din redigering for dette landet mistes, bare steder som du la til med et nytt navn beholdes.%sVil du fortsette?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4258,7 +4260,7 @@ msgstr "Tropisk år"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "sann ekvator, jevndøgn og epoke til datoen"
+msgstr "sann ekvator, jevndøgn og datoens epoke"
 
 #: u_translation.rstrueposition
 msgid "True position"
@@ -4334,7 +4336,7 @@ msgstr "Universaltid"
 
 #: u_translation.rsunknow
 msgid "unknown"
-msgstr "ukjent"
+msgstr "Ukjent"
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
@@ -4362,11 +4364,11 @@ msgstr "Uranus"
 
 #: u_translation.rsurl
 msgid "URL"
-msgstr "URL"
+msgstr "Nettadresse"
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
-msgstr "URL kjøre kommando"
+msgstr "Nettadresse - startkommando"
 
 #: u_translation.rsuseanotherdt
 msgid "Use another DT-UT value"
@@ -4378,11 +4380,11 @@ msgstr "Bruk et predefinert fargeskjema:"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(brukbar til å representere en flux)"
+msgstr "(brukbar til å representere en fluks)"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Bruk HTTP proxy"
+msgstr "Bruk HTTP-proxy"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
@@ -4390,7 +4392,7 @@ msgstr "Bruk nettbasert DSS istedenfor RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Bruk nettbasert bilde av solen fra SDO eller SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
@@ -4398,7 +4400,7 @@ msgstr "Bruk bare kataloger fra samme gruppe."
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Bruker id:"
+msgstr "Bruker-id:"
 
 #: u_translation.rsusername
 msgid "User name"
@@ -4414,7 +4416,7 @@ msgstr "Bruk systemtid"
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
-msgstr "Bruk TCP/IP server"
+msgstr "Bruk TCP/IP-server"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
@@ -4526,7 +4528,7 @@ msgstr "Vest"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
-msgstr "Hvit på svart"
+msgstr "Hvitt på svart"
 
 #: u_translation.rswidth
 msgid "Width"
@@ -4558,7 +4560,7 @@ msgstr "år"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "Du er nå klar til å vise asteroiden for denne tidsperioden."
+msgstr "Du er nå klar til å vise asteroidene for denne tidsperioden."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."

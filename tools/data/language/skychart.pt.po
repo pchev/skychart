@@ -3661,6 +3661,10 @@ msgstr "Servidor IP Interface :"
 msgid "Server IP port:"
 msgstr "Servidor IP Porta :"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Fixar"

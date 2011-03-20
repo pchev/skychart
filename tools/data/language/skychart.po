@@ -4570,3 +4570,7 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
+#: u_translation:rsserverrespon
+msgid "Server response: "
+msgstr ""
+

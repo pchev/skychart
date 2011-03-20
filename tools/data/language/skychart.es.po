@@ -3659,6 +3659,10 @@ msgstr "Interface IP de Servidor :"
 msgid "Server IP port:"
 msgstr "Puerto IP de Servidor :"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Ocaso"

@@ -3661,6 +3661,10 @@ msgstr "服务器 IP 接口："
 msgid "Server IP port:"
 msgstr "服务器 IP 端口："
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "落"

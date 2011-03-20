@@ -3659,6 +3659,10 @@ msgstr "Indirizzo IP server :"
 msgid "Server IP port:"
 msgstr "Porta del server :"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr ""
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Tramonta"

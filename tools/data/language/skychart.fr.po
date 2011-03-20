@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-01-23 10:40+0100\n"
+"PO-Revision-Date: 2011-03-20 18:06+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3664,6 +3664,10 @@ msgstr "Interface réseau:"
 msgid "Server IP port:"
 msgstr "Port :"
 
+#: u_translation.rsserverrespon
+msgid "Server response: "
+msgstr "Réponse du serveur:"
+
 #: u_translation.rsset
 msgid "Set"
 msgstr "Coucher"
@@ -4595,4 +4599,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 
