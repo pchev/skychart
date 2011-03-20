@@ -1277,6 +1277,7 @@ if not DisplayIs32bpp then begin
 end;
 memstream := TMemoryStream.create;
 try
+trWhiteBg:=false;
 if cfgplot.UseBMP and WhiteBg then begin
  WhiteBg:=false;
  trWhiteBg:=true;
@@ -1298,11 +1299,14 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
    if cfgplot.UseBMP then begin
-    outbmp:=TBGRABitmap.Create(imabmp.Width,imabmp.Height);
-    outbmp.canvas.Draw(0,0,imabmp);
-    SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
-    cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
-    outbmp.free;
+      outbmp:=TBGRABitmap.Create(imabmp.Width,imabmp.Height);
+      outbmp.canvas.Draw(0,0,imabmp);
+      if iTransparent then begin
+        SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
+        cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
+      end else
+        cbmp.PutImage(DestX,DestY,outbmp,dmSet);
+      outbmp.free;
    end else begin
      {$IFNDEF OLD_MASK_TRANSPARENCY}
      rbmp.PixelFormat:=pf32bit;
@@ -1346,11 +1350,14 @@ end else begin
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
    if cfgplot.UseBMP then begin
-     outbmp:=TBGRABitmap.Create(rbmp.Width,rbmp.Height);
-     outbmp.canvas.Draw(0,0,rbmp);
-     SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
-     cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
-     outbmp.free;
+       outbmp:=TBGRABitmap.Create(rbmp.Width,rbmp.Height);
+       outbmp.canvas.Draw(0,0,rbmp);
+       if iTransparent then begin
+         SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
+         cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
+       end else
+         cbmp.PutImage(0,0,outbmp,dmSet);
+       outbmp.free;
    end else begin
      {$IFNDEF OLD_MASK_TRANSPARENCY}
      imabmp.PixelFormat:=pf32bit;
