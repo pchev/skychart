@@ -541,16 +541,18 @@ SetLang;
 end;
 
 procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
-var fn,tmpfn,buf: string;
-    i,n: integer;
-    ok: boolean;
+var fn,tmpfn,tfn,ext,buf: string;
+    i,l,n: integer;
+    ok,gzfile: boolean;
     fi,fo: Textfile;
+    gzf:pointer;
+    ffile:file;
+    gzbuf : array[0..4095]of char;
 begin
  MemoMpc.Clear;
  n:=cmain.AsteroidUrlList.Count;
  if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
  fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
- tmpfn:=slash(TempDir)+'mpc.tmp';
  if cmain.HttpProxy then begin
     DownloadDialog1.HttpProxy:=cmain.ProxyHost;
     DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
@@ -566,20 +568,46 @@ begin
  DownloadDialog1.FtpPassword:=cmain.AnonPass;
  DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
  DownloadDialog1.onFeedback:=AsteroidFeedback;
- ok:=false;
+ ok:=false; gzfile:=false;
  for i:=1 to n do begin
     if copy(cmain.AsteroidUrlList[i-1],1,1)='*' then continue;
     DownloadDialog1.URL:=cmain.AsteroidUrlList[i-1];
+    ext:=ExtractFileExt(DownloadDialog1.URL);
+    gzfile:=(ext='.gz');
     MemoMpc.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
+    tmpfn:=slash(TempDir)+'mpc.tmp';
     if i=1 then begin
-       DownloadDialog1.SaveToFile:=fn;
+      tfn:=fn;
+       if gzfile then
+         DownloadDialog1.SaveToFile:=fn+'.gz'
+       else
+         DownloadDialog1.SaveToFile:=fn;
        DownloadDialog1.ConfirmDownload:=true;
     end else begin
-       DownloadDialog1.SaveToFile:=tmpfn;
+       tfn:=fn;
+       if gzfile then
+         DownloadDialog1.SaveToFile:=tmpfn+'.gz'
+       else
+         DownloadDialog1.SaveToFile:=tmpfn;
        DownloadDialog1.ConfirmDownload:=false;
     end;
     if DownloadDialog1.Execute then begin
        ok:=true;
+       if gzfile then begin
+         try
+         gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
+         Filemode:=2;
+         assignfile(ffile,tfn);
+         rewrite(ffile,1);
+         repeat
+           l:=gzread(gzf,@gzbuf,length(gzbuf));
+           blockwrite(ffile,gzbuf,l,n);
+         until gzeof(gzf);
+         finally
+         gzclose(gzf);
+         CloseFile(ffile);
+         end;
+       end;
        if i>1 then begin
           Filemode:=2;
           assignfile(fi,tmpfn);
