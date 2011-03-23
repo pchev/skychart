@@ -251,13 +251,13 @@ const cdcversion = 'Version 3.3 svn';
       URL_TLE = 'http://www.space-track.org';
       URL_QUICKSAT = 'http://www.io.com/~mmccants/programs/index.html';
       
-      URL_HTTPCometElements = 'http://www.minorplanetcenter.org/iau/Ephemerides/Comets/Soft00Cmt.txt';
-      URL_HTTPCometElements2 = 'http://www.minorplanetcenter.org/iau/MPCORB/CometEls.txt';
+      URL_HTTPCometElements = 'http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt';
+      URL_HTTPCometElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
       URL_FTPCometElements = '**';
-      URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
-      URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Unusual/Soft00Unusual.txt';
-      URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.org/iau/Ephemerides/Distant/Soft00Distant.txt';
-      URL_MPCORBAsteroidElements = 'http://www.minorplanetcenter.org/iau/MPCORB/MPCORB.DAT';
+      URL_HTTPAsteroidElements1 = 'http://www.minorplanetcenter.net/iau/Ephemerides/Bright/$YYYY/Soft00Bright.txt';
+      URL_HTTPAsteroidElements2 = 'http://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt';
+      URL_HTTPAsteroidElements3 = 'http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt';
+      URL_MPCORBAsteroidElements = 'http://www.minorplanetcenter.net/iau/MPCORB/MPCORB.DAT.gz';
       URL_MPCORBAsteroidElements2 = '**';
       URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
       

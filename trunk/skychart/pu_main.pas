@@ -4719,7 +4719,7 @@ cfgm.ProxyPass:=ReadString(section,'ProxyPass',cfgm.ProxyPass);
 cfgm.AnonPass:=ReadString(section,'AnonPass',cfgm.AnonPass);
 cfgm.starshape_file:=ReadString(section,'starshape_file',cfgm.starshape_file);
 buf:=ReadString(section,'CometUrl1','');
-if Pos('cfa-www.harvard.edu',buf)=0 then begin   // Old MPC URL, ignore saved configuration
+if (Pos('cfa-www.harvard.edu',buf)=0) and (Pos('www.minorplanetcenter.org',buf)=0) then begin   // Old MPC URL, ignore saved configuration
   j:=ReadInteger(section,'CometUrlCount',0);
   if (j>0) then begin
      cfgm.CometUrlList.Clear;
