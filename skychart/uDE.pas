@@ -212,7 +212,7 @@ begin
                   end else exit;
               end;
         421:  begin  //1900 to 2050 - 1 file
-                    if InRange(y, 1900, 2050) then begin
+                    if InRange(y, 1900, 2049) then begin
                       de_y := 1900;
                       de_file := 'linx' + floatToStr(de_y) + '.421';
                       if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
