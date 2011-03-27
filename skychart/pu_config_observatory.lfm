@@ -16,7 +16,7 @@ object f_config_observatory: Tf_config_observatory
   OnShow = FormShow
   ParentFont = True
   Position = poScreenCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object MainPanel: TPanel
     Left = 0
     Height = 504

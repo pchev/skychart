@@ -2,9 +2,9 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-03-01 21:38+0100\n"
+"PO-Revision-Date: 2011-03-22 18:23+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
-"Project-Id-Version: skychart.en\n"
+"Project-Id-Version: skychart.no\n"
 "POT-Creation-Date: \n"
 "Language-Team:  <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
@@ -222,7 +222,7 @@ msgstr "Spør om bekreftelse før noen internett-tilkobling"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "Som på skjerm (svart bakgrunn!)"
+msgstr "Som på skjermen (svart bakgrunn!)"
 
 #: u_translation.rsasterism
 msgid "Asterism"
@@ -522,7 +522,7 @@ msgstr "FreewareTips"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Sentrer"
+msgstr "Senter"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
@@ -546,7 +546,7 @@ msgstr "Sentrer"
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr "Endre tegne-modus"
+msgstr "Endre tegnemodus"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
@@ -690,7 +690,7 @@ msgstr "Kommando ikke funnet!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Kommando å bruke for å bearbeide filen."
+msgstr "Kommando for behandling: "
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -874,11 +874,11 @@ msgstr "Opprett header"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Oppretter postscript kart. Vent..."
+msgstr "Oppretter postscript-kart. Vent..."
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Oppretter raster kart med %s dpi. Vent..."
+msgstr "Oppretter raster-kart med %s dpi. Vent..."
 
 #: u_translation.rsculmination
 msgid "Culmination"
@@ -1544,7 +1544,7 @@ msgstr "Størrelse på svake stjerner"
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "FAQ"
+msgstr "Ofte stilte spørsmål"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1688,7 +1688,7 @@ msgstr "Fri størrelse"
 
 #: u_translation.rsfriday
 msgid "Fri."
-msgstr "Fre."
+msgstr "Fre"
 
 #: u_translation.rsfrom
 msgid "From"
@@ -2070,7 +2070,7 @@ msgstr "Jupiters røde flekk - lengdegrad:"
 
 #: u_translation.rskm
 msgid "Km."
-msgstr "Km."
+msgstr "km"
 
 #: u_translation.rsknot
 msgid "Knot"
@@ -2102,7 +2102,7 @@ msgstr "Påskrift"
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "Landskap"
+msgstr "Liggende"
 
 #: u_translation.rslanguage
 msgid "Internal language"
@@ -2482,7 +2482,7 @@ msgstr "Endre"
 
 #: u_translation.rsmonday
 msgid "Mon."
-msgstr "Man."
+msgstr "Man"
 
 #: u_translation.rsmonth
 msgid "Month"
@@ -2626,7 +2626,7 @@ msgstr "Nattmodus-knapp"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Nattmodus-farge"
+msgstr "Nattmodus"
 
 #: u_translation.rsno
 msgid "No."
@@ -2790,7 +2790,7 @@ msgstr "Observasjonssted"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "Observasjonssteds-database"
+msgstr "Stedsdatabase"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -2930,7 +2930,7 @@ msgstr "Bane"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Bane til å lagre filen:"
+msgstr "Mappebane for lagring:"
 
 #: u_translation.rspathwidth
 msgid "Path width"
@@ -3092,7 +3092,7 @@ msgstr "Port:"
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "Portrett"
+msgstr "Stående"
 
 #: u_translation.rsposition
 msgid "Position"
@@ -3108,7 +3108,7 @@ msgstr "Posisjon - epoke"
 
 #: u_translation.rspostscript
 msgid "PostScript"
-msgstr "PostScript"
+msgstr "PostScript-fil"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
@@ -3292,7 +3292,7 @@ msgstr "RA alternativer"
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr "Raster oppløsning"
+msgstr "Raster-oppløsning"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
@@ -3384,7 +3384,7 @@ msgstr "Utgivelsesnotater"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr "Fjerne alle sirkler"
+msgstr "Fjern alle okularer"
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
@@ -3392,7 +3392,7 @@ msgstr "Fjern alle påskrifter"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "Fjer siste sirkel"
+msgstr "Fjern siste okular"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
@@ -3516,7 +3516,7 @@ msgstr "Sat. ring"
 
 #: u_translation.rssaturday
 msgid "Sat."
-msgstr "Lør."
+msgstr "Lør"
 
 #: u_translation.rssaturn
 msgid "Saturn"
@@ -3612,7 +3612,7 @@ msgstr "Velg feltene å bruke og deres posisjon i tekstfilen"
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Velg system-skriveren og alternativer du vil bruke"
+msgstr "Velg systemskriveren og alternativer du vil bruke"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
@@ -3660,7 +3660,7 @@ msgstr "Port:"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr ""
+msgstr "Server-respons: "
 
 #: u_translation.rsset
 msgid "Set"
@@ -4028,7 +4028,7 @@ msgstr "Sol alt."
 
 #: u_translation.rssunday
 msgid "Sun."
-msgstr "Søn."
+msgstr "Søn"
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
@@ -4072,7 +4072,7 @@ msgstr "System"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
-msgstr "System-skriver"
+msgstr "Systemskriver"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
@@ -4168,7 +4168,7 @@ msgstr "Dette er et gratisprogram; du kan videredistribuere det og/eller endre d
 
 #: u_translation.rsthursday
 msgid "Thu."
-msgstr "Tor."
+msgstr "Tor"
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
@@ -4276,7 +4276,7 @@ msgstr "Trumpler klasse"
 
 #: u_translation.rstuesday
 msgid "Tue."
-msgstr "Tir."
+msgstr "Tir"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
@@ -4520,7 +4520,7 @@ msgstr "Advarsel!%sDu har valgt å legge ved dataene til en eksisterende katalog
 
 #: u_translation.rswednesday
 msgid "Wed."
-msgstr "Ons."
+msgstr "Ons"
 
 #: u_translation.rswest
 msgid "West"

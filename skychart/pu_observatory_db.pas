@@ -108,7 +108,8 @@ hemis.items[1]:=rsSouth;
 Label61.caption:=rsDegreesMinut;
 long.items[0]:=rsWest;
 long.items[1]:=rsEast;
-
+Button1.Caption:=rsOK;
+Button2.Caption:=rsCancel;
 end;
 
 procedure Tf_observatory_db.ShowObservatory;

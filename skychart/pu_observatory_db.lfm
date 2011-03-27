@@ -9,7 +9,7 @@ object f_observatory_db: Tf_observatory_db
   ClientWidth = 488
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object obsname: TGroupBox
     Left = 8
     Height = 248
