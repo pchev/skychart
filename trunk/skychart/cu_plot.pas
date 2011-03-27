@@ -2000,7 +2000,7 @@ var
   xx,yy: integer;
 begin
   size:=cbmp.TextSize(s);
-  temp := TBGRABitmap.Create(2*size.cx, 2*size.cy);
+  temp := TBGRABitmap.Create(round(2.1*size.cx), 2*size.cy);
   temp.FontHeight:=2*cbmp.FontHeight;
   temp.FontStyle:=cbmp.FontStyle;
   temp.FontName:=cbmp.FontName;
@@ -2242,7 +2242,7 @@ if cfgplot.UseBMP then begin;
          delete(txt,1,p+1);
      end;
      ts:=cbmp.TextSize(buf);
-     arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
+     arect:=Bounds(xx,yy,round(1.2*ts.cx),ts.cy+2);
      if opaque then cbmp.FillRect(arect,cfgplot.backgroundcolor);
      cbmp.TextRect(arect,xx,yy,buf,ATextStyle,ColorToBGRA(lcolor));
      yy:=yy+ls;
