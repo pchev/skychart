@@ -1,8 +1,8 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-10-25 09:00+0800\n"
-"Last-Translator: lam\n"
+"PO-Revision-Date: 2011-03-05 17:43+0800\n"
+"Last-Translator: philipTao <idpt441@seed.net.tw>\n"
 "Project-Id-Version: skychart.zh\n"
 "POT-Creation-Date: \n"
 "Language-Team: \n"
@@ -15,27 +15,27 @@ msgstr ""
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
-msgstr "102光盘 DSS"
+msgstr "102 光碟 DSS"
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184（建议最多1'000'000天体）"
+msgstr "184（建議最多1'000'000天體）"
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50（建议最多100'000天体）"
+msgstr "50（建議最多100'000天體）"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732（建议最多5'000'000天体）"
+msgstr "732（建議最多5'000'000天體）"
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
-msgstr "9537（大型数据）"
+msgstr "9537（更多資料）"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
-msgstr "缩写"
+msgstr "縮寫"
 
 #: u_translation.rsabort
 msgid "Abort"
@@ -47,23 +47,23 @@ msgstr "用户中止"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "中止回转"
+msgstr "中止回轉"
 
 #: u_translation.rsabout
 msgid "About"
-msgstr "关于"
+msgstr "關於"
 
 #: u_translation.rsabout2
 msgid "About %s"
-msgstr "关于 %s"
+msgstr "關於 %s"
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr ""
+msgstr "活動"
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr "目前系统时间"
+msgstr "目前系統時間"
 
 #: u_translation.rsad
 msgid "AD"
@@ -75,11 +75,11 @@ msgstr "增加"
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "增加一个根数到数据库，所有字段是必填。"
+msgstr "增加一個要素到資料庫，所有欄位都必須填寫。"
 
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
-msgstr "增加赤道网"
+msgstr "增加赤道網格"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -87,7 +87,7 @@ msgstr ""
 
 #: u_translation.rsaddlabel
 msgid "Add label"
-msgstr "增加标签"
+msgstr "增加標籤"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -95,23 +95,23 @@ msgstr "增加别名到索引"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "调整彩色亮度"
+msgstr "調整色彩亮度"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
-msgstr "高级"
+msgstr "進階"
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr "高级搜寻"
+msgstr "進階搜尋"
 
 #: u_translation.rsage
 msgid "Age"
-msgstr "年龄"
+msgstr "年齡"
 
 #: u_translation.rsalignment
 msgid "Alignment"
-msgstr "对齐"
+msgstr "對齊"
 
 #: u_translation.rsall
 msgid "All"
@@ -119,47 +119,47 @@ msgstr "所有"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr ""
+msgstr "配置所有指令"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
-msgstr "%s所有表结构存在。"
+msgstr "%s所有表結構存在。"
 
 #: u_translation.rsalltoolsbar
 msgid "All tool bars"
-msgstr "所有工具栏"
+msgstr "所有工具欄"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%s务必需要的数据库软件已安装。%s请查阅文件如果不确定。%s是否继续？"
+msgstr "%s務必確認已經安裝須要的資料庫軟體，如果不確定請查閱文件。%s是否繼續？"
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr "地平纬度"
+msgstr "地平緯度"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "地平坐标"
+msgstr "地平座標"
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
-msgstr "地平坐标"
+msgstr "地平座標"
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "地平坐标"
+msgstr "地平座標"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
-msgstr "地平装置"
+msgstr "地平裝置"
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "地平纬度"
+msgstr "高度角"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%s地平纬度转动："
+msgstr "%s地平緯度轉動："
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -167,7 +167,7 @@ msgstr ""
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
-msgstr "总是显示罗盘"
+msgstr "總是顯示羅盤"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -179,35 +179,35 @@ msgstr "周年自行"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
-msgstr "匿名密码"
+msgstr "匿名密碼"
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr "视在"
+msgstr "視時"
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "視"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "附加到现有星表"
+msgstr "附加到現有星表"
 
 #: u_translation.rsapply
 msgid "Apply"
-msgstr "应用"
+msgstr "應用"
 
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
-msgstr "将更改应用于所有星图"
+msgstr "將變更應用到所有星圖"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "近日点幅角"
+msgstr "近日點引數"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
-msgstr "人造卫星"
+msgstr "人造衛星"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
@@ -215,15 +215,15 @@ msgstr ""
 
 #: u_translation.rsascomtelesco
 msgid "ASCOM telescope driver"
-msgstr ""
+msgstr "ASCOM望遠鏡驅動"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "在連接網際網路前先詢問確認"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "象屏幕（黑背景）"
+msgstr "像螢幕（黑背景）"
 
 #: u_translation.rsasterism
 msgid "Asterism"
@@ -235,19 +235,19 @@ msgstr "小行星"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "小行星根数在 MPC 格式（一 URL 一行）"
+msgstr "小行星要數在 MPC 格式（一 URL 一行）"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
-msgstr "小行星设定"
+msgstr "小行星設定"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "小行星从文件"
+msgstr "小行星從檔案"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr "天体测量 J2000"
+msgstr "天體測量 J2000"
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
@@ -255,7 +255,7 @@ msgstr "天文"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr "天文晨昏蒙影"
+msgstr "天文晨昏濛影"
 
 #: u_translation.rsat
 msgid "at"
@@ -263,7 +263,7 @@ msgstr "在"
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
-msgstr "大气折射"
+msgstr "大氣折射"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -271,43 +271,43 @@ msgstr "作者"
 
 #: u_translation.rsautomatic
 msgid "Automatic"
-msgstr "自动"
+msgstr "自動"
 
 #: u_translation.rsautomaticall
 msgid "Automatically start a local server if not already running"
-msgstr "自动起动本地服务器如果未运行"
+msgstr "如果未運行自動啟動本地服務"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
-msgstr "自动更新"
+msgstr "自動更新"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "自动更新每隔"
+msgstr "每次自動更新"
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
-msgstr "辅助文件"
+msgstr "輔助文件"
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr "地平经度"
+msgstr "地平經度"
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
-msgstr "地平经度"
+msgstr "方位角"
 
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
-msgstr "地平坐标"
+msgstr "地平座標"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%s地平经度转动："
+msgstr "%s地平經度轉動："
 
 #: u_translation.rsb
 msgid "B"
-msgstr "纬度"
+msgstr "緯度"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -315,11 +315,11 @@ msgstr "背景"
 
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
-msgstr "背景图片"
+msgstr "背景圖片"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr "拜尔星名字母"
+msgstr "拜耳字母"
 
 #: u_translation.rsbc
 msgid "BC"
@@ -327,7 +327,7 @@ msgstr "公元前"
 
 #: u_translation.rsbeginprocess
 msgid "Begin processing for jd=%s / %s"
-msgstr "开始处理适于儒略日=%s / %s"
+msgstr "開始處理適當儒略日=%s / %s"
 
 #: u_translation.rsbelowthehori
 msgid "Below the horizon"
@@ -339,7 +339,7 @@ msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr ""
+msgstr "亮星"
 
 #: u_translation.rsbii
 msgid "BII"
@@ -347,15 +347,15 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "二进制索引星表"
+msgstr "二進制索引星表"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "位图"
+msgstr "位圖"
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr "位图文件"
+msgstr "位圖檔案"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
@@ -371,15 +371,15 @@ msgstr "黑白，行模式"
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
-msgstr "闪烁图片"
+msgstr "閃爍圖片"
 
 #: u_translation.rsblue
 msgid "Blue"
-msgstr "蓝色"
+msgstr "藍色"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
-msgstr "蓝星等"
+msgstr "藍星等"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -387,7 +387,7 @@ msgstr "下"
 
 #: u_translation.rsboundary
 msgid "Boundary"
-msgstr "边界"
+msgstr "邊界"
 
 #: u_translation.rsbrighter
 msgid "Brighter"
@@ -399,7 +399,7 @@ msgstr "最亮星星等"
 
 #: u_translation.rsbrightnebula
 msgid "Bright nebula"
-msgstr "亮星云"
+msgstr "亮星雲"
 
 #: u_translation.rsbrightneo
 msgid "Bright + NEO + TNO"
@@ -415,7 +415,7 @@ msgstr "亮星"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr ""
+msgstr "亮星大小"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
@@ -423,23 +423,23 @@ msgstr "建立星表"
 
 #: u_translation.rsby
 msgid "by"
-msgstr "间隔"
+msgstr "間隔"
 
 #: u_translation.rscalendar
 msgid "Calendar"
-msgstr "日历"
+msgstr "日曆"
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr "取消"
+msgstr "關閉"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
-msgstr "取消 %s"
+msgstr "刪除 %s"
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "取消，错误 zip 文件？ %s"
+msgstr "刪除，錯誤的zip檔案？ %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
@@ -451,15 +451,15 @@ msgstr ""
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
-msgstr "%s不能打开数据库 %s！%s"
+msgstr "%s資料庫無法開啟 %s！%s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "不能寫至"
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr "层叠"
+msgstr "層疊"
 
 #: u_translation.rscat
 msgid "Cat."
@@ -471,23 +471,23 @@ msgstr "星表"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "星表长名称"
+msgstr "星表長名稱"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "星表短名称"
+msgstr "星表短名稱"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr "星表行"
+msgstr "星表字串"
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
-msgstr "星表类型"
+msgstr "星表類型"
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%s反转"
+msgstr "%s反轉"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -495,107 +495,107 @@ msgstr "CdC 深空"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "CDC 深空星表设定"
+msgstr "CDC 深空星表設定"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "陈旧 CDC 星表（但仍可使用）"
+msgstr "老舊 CDC 星表（但仍可使用）"
 
 #: u_translation.rscdcplugin
 msgid "CdC plugin"
-msgstr "CDC 插件"
+msgstr "cdc 外掛"
 
 #: u_translation.rscdcpluginset
 msgid "Select the CdC plugin"
-msgstr "CDC 插件设定"
+msgstr "選擇 cdc 外掛"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
-msgstr "CdC 恒星"
+msgstr "CdC 恆星"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "CDC 恒星星表设定"
+msgstr "CDC 恆星星表和設定"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "Lam Xiang"
+msgstr "philip Tao"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "居中"
+msgstr "中心"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr "天体居中"
+msgstr "天體置中"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr "中央子午线"
+msgstr "中央子午線"
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr "中央星蓝星等"
+msgstr "中央星藍星等"
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr "中央星紫星等"
+msgstr "中央星視星等"
 
 #: u_translation.rscentre
 msgid "Centre on"
-msgstr "中心"
+msgstr "置中"
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr "更改绘画模式"
+msgstr "更改畫圖模式"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
-msgstr "更改图片显示"
+msgstr "更改圖片顯示"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "改變這項設定將立即重新啟動程式！"
 
 #: u_translation.rschart
 msgid "Chart"
-msgstr "星图"
+msgstr "星圖"
 
 #: u_translation.rschart2
 msgid "chart:"
-msgstr "星图："
+msgstr "星圖："
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
-msgstr "星图，坐标"
+msgstr "星圖，座標"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "星图坐标系统"
+msgstr "星圖座標系統"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
-msgstr "星图信息"
+msgstr "星圖訊息"
 
 #: u_translation.rscharts
 msgid "Charts"
-msgstr "星图"
+msgstr "星圖"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
-msgstr "星图设定"
+msgstr "星圖設定"
 
 #: u_translation.rschart_
 msgid "Chart_"
-msgstr "星图"
+msgstr "星圖_"
 
 #: u_translation.rscheck
 msgid "Check"
-msgstr "检查"
+msgstr "檢查"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
-msgstr "选择颜色适于天体类型"
+msgstr "選擇天體類型顏色"
 
 #: u_translation.rscircle
 msgid "Circle"
@@ -603,11 +603,11 @@ msgstr "圆形"
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr "拱极的"
+msgstr "拱極的"
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr "等级"
+msgstr "等級"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
@@ -615,59 +615,59 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "点击更改颜色"
+msgstr "點擊更改顏色"
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
-msgstr "客户连接继续"
+msgstr "客户端保持連結"
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr ""
+msgstr "時鐘"
 
 #: u_translation.rsclose
 msgid "Close"
-msgstr "关闭"
+msgstr "關閉"
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr "关闭星图"
+msgstr "關閉星圖"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
-msgstr "关闭连接"
+msgstr "關閉連接"
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
-msgstr "闭合轮廓"
+msgstr "關閉外觀"
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "关闭文件"
+msgstr "關閉檔案"
 
 #: u_translation.rsclosingconne
 msgid "Closing connection"
-msgstr "结束连接"
+msgstr "結束連接"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr "属团星云"
+msgstr "星團和星雲"
 
 #: u_translation.rscolor
 msgid "Colour"
-msgstr "颜色"
+msgstr "顏色"
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr "色指数"
+msgstr "色指數"
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr "颜色，行模式"
+msgstr "顏色，行模式"
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
-msgstr "色饱和度"
+msgstr "色飽和度"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -675,11 +675,11 @@ msgstr "彗星"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "彗星根数在 MPC 格式（一 URL 一行）"
+msgstr "彗星軌道要素來源在 MPC 格式（一 URL 一行）"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
-msgstr "彗星设定"
+msgstr "彗星設定"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -687,23 +687,23 @@ msgstr "找到命令。"
 
 #: u_translation.rscommandnotfo
 msgid "Command not found!"
-msgstr "命令找不到！"
+msgstr "找不到命令！"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "命令使用和处理的文件"
+msgstr "命令使用和處理的檔案"
 
 #: u_translation.rscommonname
 msgid "Common name"
-msgstr "普通名称"
+msgstr "固有名稱"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "罗盘大小"
+msgstr "羅盤大小"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "編譯用："
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
@@ -715,15 +715,15 @@ msgstr "子源2星等"
 
 #: u_translation.rscompute
 msgid "Compute"
-msgstr "计算"
+msgstr "計算"
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr "计算小行星数据适于此月"
+msgstr "計算這個月的小行星"
 
 #: u_translation.rscomputefield
 msgid "Compute field"
-msgstr "计算视场"
+msgstr "計算視場"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -731,31 +731,31 @@ msgstr "配置"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "配置程序"
+msgstr "配置程式"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s 连接从 %s，使用星图 %s，连接时间：%s"
+msgstr "%s 連接從 %s，使用星圖 %s，連接時間：%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr "连接到 SQL 数据库 %s"
+msgstr "連接到 SQL 資料庫 %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr "每个位置用线连接"
+msgstr "每個位置用線連接"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr "连接望远镜"
+msgstr "連接望遠鏡"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "连接到 %s，%s 已失败！%s检验如果 MySQL 服务器正在运行和核对用户身份/密码"
+msgstr "連接到 %s，%s 已失敗！%s檢驗如果 MySQL 伺服器正在運行和合對用戶身份/密碼"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
-msgstr "连接到 %s，%s 成功。%s"
+msgstr "連接到 %s，%s 成功。%s"
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
@@ -763,31 +763,31 @@ msgstr "星座"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr "星座图"
+msgstr "星座圖"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "星座图文件名："
+msgstr "星座檔案名稱："
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
-msgstr "星座边界"
+msgstr "星座邊界"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "星座边界文件名："
+msgstr "星座邊界檔案名稱："
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
-msgstr "星座标签"
+msgstr "星座標籤"
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
-msgstr "星座名称"
+msgstr "星座名稱"
 
 #: u_translation.rscontrast
 msgid "Contrast"
-msgstr "对比度"
+msgstr "對比度"
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
@@ -799,35 +799,35 @@ msgstr "控制面板命令"
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr "转换星表文件 %s"
+msgstr "轉換星表檔案 %s"
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "转换星表文件"
+msgstr "轉換星表檔案"
 
 #: u_translation.rscoord
 msgid "Coord."
-msgstr "坐标"
+msgstr "座標"
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
-msgstr "坐标网"
+msgstr "座標網格"
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
-msgstr "坐标："
+msgstr "座標："
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "春分点坐标"
+msgstr "春分點座標"
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
-msgstr "坐标网"
+msgstr "座標網格"
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr "复制"
+msgstr "複製"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
@@ -835,51 +835,51 @@ msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "複製自"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
-msgstr "核半径"
+msgstr "核半徑"
 
 #: u_translation.rscorrelated
 msgid "Correlated"
-msgstr "相关"
+msgstr "相關"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "无法下载程序库"
+msgstr "無法下載程序庫"
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
-msgstr "国家时区"
+msgstr "國家時區"
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
-msgstr "创建新星图"
+msgstr "創建新星圖"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "创建搜寻索引文件"
+msgstr "創建搜尋索引檔案"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
-msgstr "创建数据库"
+msgstr "創建資料庫"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr "创建文件"
+msgstr "創建檔案"
 
 #: u_translation.rscreateheader
 msgid "Create header"
-msgstr "创建标题"
+msgstr "創建標題"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "创建 postscript 星图。请稍候..."
+msgstr "創建 postscript 星圖，請稍候..."
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "创建光栅星图在 %s dpi。请稍候..."
+msgstr "在 %sdpi創建點線星圖，請稍候..."
 
 #: u_translation.rsculmination
 msgid "Culmination"
@@ -887,65 +887,65 @@ msgstr "中天"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
-msgstr "当前日期"
+msgstr "目前日期"
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%s正转"
+msgstr "%s正轉"
 
 #: u_translation.rsdarknebula
 msgctxt "u_translation.rsdarknebula"
 msgid "Dark nebula"
-msgstr "暗星云"
+msgstr "暗星雲"
 
 #: u_translation.rsdarknebula2
 msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
-msgstr "暗星云"
+msgstr "暗星雲"
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr "破折号"
+msgstr "破折號"
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr "破折号 点"
+msgstr "破折號點"
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
-msgstr "破折号 点 点"
+msgstr "破折號點點"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "数据库文件："
+msgstr "資料庫檔案："
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
-msgstr "%s数据库 %s 已打开。%s"
+msgstr "%s資料庫 %s 已開啟。%s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "数据库设定..."
+msgstr "資料庫設定..."
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
-msgstr "数据库类型"
+msgstr "資料庫類型"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
-msgstr "数据文件："
+msgstr "資料檔案："
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr "数据文件，只读光盘"
+msgstr "資料檔案，唯讀光碟"
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
-msgstr "数据维护"
+msgstr "資料維護"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
-msgstr "数据开始在行 %s"
+msgstr "資料開始在行 %s"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -953,23 +953,23 @@ msgstr "日期"
 
 #: u_translation.rsdateformat
 msgid "Date format"
-msgstr ""
+msgstr "日期格式"
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr "日期 从"
+msgstr "日期從"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr "日期可能很长时间。是否继续？"
+msgstr "日期時間可能很長，是否繼續？"
 
 #: u_translation.rsdatetime
 msgid "Date / time"
-msgstr "日期 / 时间"
+msgstr "日期 / 時間"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
-msgstr "日期/时间"
+msgstr "日期/時間"
 
 #: u_translation.rsday
 msgid "Day"
@@ -985,87 +985,87 @@ msgstr "白天"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
-msgstr "数据库插入失败适于 %s：%s"
+msgstr "資料庫嵌入失敗 %s：%s"
 
 #: u_translation.rsdbname
 msgid "DB Name:"
-msgstr "数据库名："
+msgstr "資料庫名稱："
 
 #: u_translation.rsde
 msgid "DE"
-msgstr "赤纬"
+msgstr "赤緯"
 
 #: u_translation.rsdec
 msgid "DEC"
-msgstr "赤纬"
+msgstr "赤緯"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
-msgstr "度十进制"
+msgstr "度十進制"
 
 #: u_translation.rsdecimalhours
 msgid "Decimal hours"
-msgstr "时十进制"
+msgstr "時十進制"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
-msgstr "南极距十进制"
+msgstr "南極距十進制"
 
 #: u_translation.rsdeclination
 msgid "Declination"
-msgstr "赤纬"
+msgstr "赤緯"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
-msgstr "赤纬选项"
+msgstr "赤緯選項"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr "减少时间"
+msgstr "减少時間"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "赤纬转动："
+msgstr "赤緯轉動："
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%s赤纬转动："
+msgstr "%s赤緯轉動："
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
-msgstr "深空颜色"
+msgstr "深空顏色"
 
 #: u_translation.rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "深空天体颜色"
+msgstr "深空天體顏色"
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "默认"
+msgstr "預設"
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "默认按钮"
+msgstr "預設按鈕"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "默认颜色"
+msgstr "預設顏色"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "默认标签"
+msgstr "愈攝標籤"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "默认边距"
+msgstr "預設邊距"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr "默认星云参数"
+msgstr "預設星雲參數"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr "默认轮廓参数"
+msgstr "預設外觀參數"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1077,7 +1077,7 @@ msgstr "度"
 
 #: u_translation.rsdegreegridsp
 msgid "Declination grid"
-msgstr "网度间距"
+msgstr "赤緯間距"
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1097,11 +1097,11 @@ msgstr "删除"
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
-msgstr "删除完成"
+msgstr "刪除完成"
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr "删除每日数据"
+msgstr "删除每日數據"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
@@ -1109,49 +1109,48 @@ msgstr "删除成功！"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
-msgstr "从根数表删除..."
+msgstr "從要素表刪除"
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr "从根数列表删除..."
+msgstr "從要素列表刪除"
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
 #| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "从每月表删除..."
+msgstr "從每月表中刪除..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
-msgstr "从每月表删除适于儒略日<%s"
+msgstr "從每月表中刪除儒略日<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr "从名称列表删除..."
+msgstr "從名稱列表刪除..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "删除每月数据"
+msgstr "刪除每月數據"
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "删除每月数据早于"
+msgstr "刪除每月數據早於"
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "删除选择 MPC 数据"
+msgstr "删除選擇 MPC 資料"
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "删除前数据适于此日期。"
+msgstr "删除此日期之前資料。"
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr "从数据库删除当前位置？"
+msgstr "從資料庫刪除目前位置？"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "降低可见地平"
+msgstr "降低可見地平"
 
 #: u_translation.rsdesc
 msgid "desc:"
@@ -1167,27 +1166,27 @@ msgstr "命名"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr "桌面环境"
+msgstr "桌面環境"
 
 #: u_translation.rsdetails
 msgid "Details"
-msgstr "详细资料"
+msgstr "詳細資料"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "设备端口"
+msgstr "設備端口"
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr "直径"
+msgstr "直徑"
 
 #: u_translation.rsdiameter
 msgid "Diameter"
-msgstr "直径"
+msgstr "直徑"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr "%s （与配置端口不同，可能繁忙或其他错误。）"
+msgstr "%s （與配置端口不同，可能繁忙或其他錯誤。）"
 
 #: u_translation.rsdimension
 msgid "Dimension"
@@ -1195,7 +1194,7 @@ msgstr "尺寸"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
-msgstr "尺寸和单位"
+msgstr "尺寸和單位"
 
 #: u_translation.rsdir
 msgid "Dir"
@@ -1203,99 +1202,99 @@ msgstr "方向"
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "目录"
+msgstr "目錄"
 
 #: u_translation.rsdirectorynot
 msgid "Directory not found %s"
-msgstr "目录找不到 %s"
+msgstr "找不到目錄 %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr ""
+msgstr "未發現目錄！請安裝星圖的圖片封包。"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
-msgstr "断开望远镜"
+msgstr "離開望遠鏡"
 
 #: u_translation.rsdisplay
 msgid "Display"
-msgstr "显示"
+msgstr "顯示"
 
 #: u_translation.rsdisplayasasy
 msgid "Display as a symbol"
-msgstr "显示为符号"
+msgstr "顯視為符號"
 
 #: u_translation.rsdisplaycolou
 msgid "Display colour"
-msgstr "显示颜色"
+msgstr "顯示顏色"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "显示星表天体图象"
+msgstr "顯示星表天體圖樣"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr ""
+msgstr "顯示所有星表目錄"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
-msgstr "菜单栏显示星图信息"
+msgstr "表單欄顯示星圖訊息"
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
-msgstr "显示标签"
+msgstr "顯示標籤"
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "显示本地地平线"
+msgstr "顯示本地地平線"
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr "距离"
+msgstr "距離"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
-msgstr "到上次天体距离"
+msgstr "到上一天體距離"
 
 #: u_translation.rsdonottakeacc
 msgid "Do not take into account comets fainter than magnitude"
-msgstr "不考虑彗星星等暗于"
+msgstr "不考慮彗星星等暗於"
 
 #: u_translation.rsdonottakeacc2
 msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "不考虑小行星星等暗于"
+msgstr "不考慮小行星星等暗於"
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr "点"
+msgstr "點"
 
 #: u_translation.rsdoubles
 msgid "Doubles"
-msgstr "双星"
+msgstr "雙星"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr "双星"
+msgstr "雙星"
 
 #: u_translation.rsdownload
 msgid "Download"
-msgstr "下载"
+msgstr "下載"
 
 #: u_translation.rsdownload2
 msgid "Download %s"
-msgstr "下载 %s"
+msgstr "下載 %s"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
-msgstr "下载国家详细资料"
+msgstr "下載國家詳細資料"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "下載檔案"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
-msgstr "下载最新轨道根数"
+msgstr "下載最新軌道要素"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1303,35 +1302,35 @@ msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr "现在保存程序设定？"
+msgstr "你要儲存現在的程式設定？"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "画线表现天体自行适于未来"
+msgstr "畫線表示天體未來的自行"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
-msgstr "绘画类型"
+msgstr "繪畫類型"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr "画线"
+msgstr "畫線"
 
 #: u_translation.rsdrawplanetas
 msgid "Draw planet as"
-msgstr "画行星为"
+msgstr "畫行星為"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "画降低视地平线"
+msgstr "畫降低視地平線"
 
 #: u_translation.rsdrivername
 msgid "Driver name"
-msgstr "驱动程序名"
+msgstr "驅動程式名稱"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
-msgstr "删除数据库"
+msgstr "删除資料庫"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1339,15 +1338,15 @@ msgstr "DSS RealSky"
 
 #: u_translation.rsdtut
 msgid "DT - UT: "
-msgstr "力学时-世界时"
+msgstr "力學時 - 世界時"
 
 #: u_translation.rsduration
 msgid "Duration"
-msgstr "持续时间"
+msgstr "持續時間"
 
 #: u_translation.rsdynamictimed
 msgid "Dynamic time difference with Universal Time"
-msgstr "力学时相差世界时"
+msgstr "力學時相差世界時"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -1355,11 +1354,11 @@ msgstr "地影"
 
 #: u_translation.rseast
 msgid "East"
-msgstr "东"
+msgstr "東"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "偏心率"
+msgstr "離心率"
 
 #: u_translation.rseclipse
 msgid "Eclipse"
@@ -1371,35 +1370,35 @@ msgstr "黄道"
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr "黄道坐标"
+msgstr "黃道座標"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
-msgstr "黄道坐标"
+msgstr "黃道座標"
 
 #: u_translation.rsedit
 msgid "Edit"
-msgstr "编辑"
+msgstr "編輯"
 
 #: u_translation.rseditcolor
 msgid "Edit colour"
-msgstr "编辑颜色"
+msgstr "編輯顏色"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
-msgstr "编辑标签"
+msgstr "編輯標籤"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr "编辑线操作"
+msgstr "編輯線操作"
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
-msgstr "编辑天体类型"
+msgstr "編輯天體類型"
 
 #: u_translation.rseditunits
 msgid "Edit units"
-msgstr "编辑单位"
+msgstr "編輯單位"
 
 #: u_translation.rselong
 msgid "Elong."
@@ -1407,15 +1406,15 @@ msgstr "距角"
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "发射星云"
+msgstr "發射星雲"
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr "天体结束"
+msgstr "天體結束"
 
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
-msgstr "处理结束：%s 小行星"
+msgstr "處理結束：%s 小行星"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
@@ -1423,79 +1422,79 @@ msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr "历表"
+msgstr "曆表"
 
 #: u_translation.rsepoch
 msgid "Epoch"
-msgstr "历元"
+msgstr "曆元"
 
 #: u_translation.rsepochjd
 msgid "Epoch (JD)"
-msgstr "历元（儒略日）"
+msgstr "曆元（儒略日）"
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "最大历元"
+msgstr "最大曆元"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr "赤道网"
+msgstr "赤道網格"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "赤道坐标"
+msgstr "赤道座標"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "赤道坐标，春分点：%s"
+msgstr "赤道座標，春分點：%s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr "赤道坐标"
+msgstr "赤道座標"
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr "赤道装置"
+msgstr "赤道裝置"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "春分点："
+msgstr "春分點："
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "春分点"
+msgstr "春分點"
 
 #: u_translation.rserror
 msgid "Error"
-msgstr "错误"
+msgstr "錯誤"
 
 #: u_translation.rserrorcreatin
 msgid "%sError creating table %s"
-msgstr "%s错误创建表 %s"
+msgstr "%s錯誤創見表 %s"
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
-msgstr "错误打开 %s"
+msgstr "開啟錯誤 %s"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr "错误！请检查数据库参数。"
+msgstr "錯誤！請檢查資料庫參數。"
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "错误！请检查数据库参数和下载彗星数据文件。"
+msgstr "錯誤！請檢查資料庫參數和下載彗星資料檔案。"
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "错误！请检查数据库参数和下载图片程序包。"
+msgstr "錯誤！請檢查資料庫參數和下載圖片封包。"
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "估计文件大小：%sMB %s是否继续？"
+msgstr "估計檔案大小：%sMB %s是否繼續？"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
-msgstr "估计彗尾长"
+msgstr "估計彗尾長"
 
 #: u_translation.rsevening
 msgid "Evening"
@@ -1511,7 +1510,7 @@ msgstr "每步"
 
 #: u_translation.rseverypositio
 msgid "Every position"
-msgstr "每个位置"
+msgstr "每個位置"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -1523,19 +1522,19 @@ msgstr "退出..."
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
-msgstr "专家模式"
+msgstr "專家模式"
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr "外部星表天体"
+msgstr "外部星表天體"
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
-msgstr "目镜"
+msgstr "目鏡"
 
 #: u_translation.rsfailed
 msgid "Failed: %s"
-msgstr "失败：%s"
+msgstr "失敗：%s"
 
 #: u_translation.rsfainter
 msgid "Fainter"
@@ -1547,7 +1546,7 @@ msgstr "暗星大小"
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr ""
+msgstr "問題與回答"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1559,83 +1558,83 @@ msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
-msgstr "视场编号"
+msgstr "視場編號"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr "视场"
+msgstr "視場"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr "视场设定"
+msgstr "視場設定"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "视场编号："
+msgstr "視場編號："
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
-msgstr "视场太宽！最大是 %s"
+msgstr "視場太寬！最大是 %s"
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "文件"
+msgstr "檔案"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr "文件找不到！"
+msgstr "找不到檔案！"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "文件路径"
+msgstr "檔案路徑"
 
 #: u_translation.rsfill
 msgid "Fill?"
-msgstr "填满？"
+msgstr "填滿？"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "填满银河"
+msgstr "填滿銀河"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "地平填满颜色"
+msgstr "地平填滿顏色"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr "筛选 ->"
+msgstr "篩選 ->"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr "过滤深空天体"
+msgstr "篩選深空天體"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "过滤恒星"
+msgstr "篩選恆星"
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "查找"
+msgstr "尋找"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr "寻星镜圆形（目镜）"
+msgstr "尋星鏡圓圈（目鏡）"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "寻星镜方形（CCD）"
+msgstr "尋星鏡方格（CCD）"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
-msgstr "开头 5000"
+msgstr "開頭 5000"
 
 #: u_translation.rsfirstchar
 msgid "First char"
-msgstr "开头字符"
+msgstr "開頭字符"
 
 #: u_translation.rsfitsfile
 msgid "FITS file"
-msgstr "FITS 文件"
+msgstr "FITS 檔案"
 
 #: u_translation.rsfixedblack
 msgid "Fixed black"
@@ -1643,11 +1642,11 @@ msgstr "固定黑色"
 
 #: u_translation.rsfixedskycolo
 msgid "Fixed sky colour"
-msgstr ""
+msgstr "固定天空顏色"
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed number"
-msgstr "佛氏星号"
+msgstr "佛氏星號"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
@@ -1655,11 +1654,11 @@ msgstr ""
 
 #: u_translation.rsfonts
 msgid "Fonts"
-msgstr "字体"
+msgstr "字體"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "对于大星表总是选择二进制。对于小数据经常更改选择文本，编辑文件和看结果直接在星表上而不需要再运行此应用程序。"
+msgstr "對於大星表總是選擇二進制。對於小資料庫經常更改選擇文本，直接在星表上編輯檔案和查看結果而不需要再執行此應用程式。"
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -1667,15 +1666,15 @@ msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "视场"
+msgstr "視場"
 
 #: u_translation.rsfov2
 msgid "FOV:"
-msgstr "视场："
+msgstr "視場："
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
-msgstr "视场编号："
+msgstr "視場編號："
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
@@ -1695,7 +1694,7 @@ msgstr "五"
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr "从"
+msgstr "從"
 
 #: u_translation.rsftp
 msgid "FTP "
@@ -1703,7 +1702,7 @@ msgstr "FTP"
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "FTP 被动模式"
+msgstr "FTP 被動模式"
 
 #: u_translation.rsfullname
 msgid "Full name"
@@ -1711,19 +1710,19 @@ msgstr "全名"
 
 #: u_translation.rsfullscreen
 msgid "Full screen"
-msgstr "全屏幕"
+msgstr "全螢幕"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
-msgstr "银道"
+msgstr "銀道"
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr "银道坐标"
+msgstr "銀道座標"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
-msgstr "银道坐标"
+msgstr "銀道座標"
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
@@ -1736,16 +1735,16 @@ msgstr "星系"
 #: u_translation.rsgalaxycluste
 msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
-msgstr "星系团"
+msgstr "星系團"
 
 #: u_translation.rsgalaxycluste2
 msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
-msgstr "星系团"
+msgstr "星系團"
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr "伽马"
+msgstr "伽瑪"
 
 #: u_translation.rsgeneral
 msgid "General"
@@ -1753,11 +1752,11 @@ msgstr "一般"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "一般星表选项"
+msgstr "一般星表選項"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
-msgstr "一般设定"
+msgstr "一般設定"
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
@@ -1769,19 +1768,19 @@ msgstr "取得小行星列表。"
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr "获取 DSS 图象"
+msgstr "獲取 DSS 圖像"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr ""
+msgstr "從 JUPOS 取得現有的GRS測量"
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
-msgstr "球状星团"
+msgstr "球狀星團"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
-msgstr "图形"
+msgstr "圖形"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
@@ -1797,43 +1796,43 @@ msgstr "最大"
 
 #: u_translation.rsgreeksymbol
 msgid "Greek symbols"
-msgstr "希腊符号"
+msgstr "希臘符號"
 
 #: u_translation.rsgreen
 msgid "Green"
-msgstr "绿色"
+msgstr "綠色"
 
 #: u_translation.rsgridsetting
 msgid "Grid settings"
-msgstr "网设定"
+msgstr "網格設定"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
-msgstr "网间距"
+msgstr "網格間距"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "大红斑凌"
+msgstr "大紅斑凌"
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
-msgstr "G 斜度参数"
+msgstr "G 斜率參數"
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
-msgstr "H 绝对星等"
+msgstr "H 絕對星等"
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr "半质量半径"
+msgstr "半質量半徑"
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
-msgstr "1000误差之后停止"
+msgstr "1000誤差之後停止"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr "氢测试星等"
+msgstr "氫Beta星等"
 
 #: u_translation.rsheight
 msgid "Height"
@@ -1841,19 +1840,19 @@ msgstr "高度"
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr "帮助"
+msgstr "幫助"
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr "帮助内容"
+msgstr "幫助內容"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
-msgstr "隐藏标签"
+msgstr "隱藏標籤"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr "隐藏天体宽于"
+msgstr "隱藏天體寬於"
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -1861,7 +1860,7 @@ msgstr "高彩"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "高面亮度"
+msgstr "高表面亮度"
 
 #: u_translation.rshorizon
 msgid "Horizon"
@@ -1869,19 +1868,19 @@ msgstr "地平"
 
 #: u_translation.rshostname
 msgid "Hostname:"
-msgstr "主机名："
+msgstr "主機名："
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr "时"
+msgstr "時"
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr "时角"
+msgstr "時角"
 
 #: u_translation.rshourgridspac
 msgid "Right ascension grid"
-msgstr "网时间距"
+msgstr "赤經網格"
 
 #: u_translation.rshours
 msgid "hours"
@@ -1889,7 +1888,7 @@ msgstr ""
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
-msgstr "时，分，秒"
+msgstr "時，分，秒"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
@@ -1897,15 +1896,15 @@ msgstr "HTTP 代理"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr ""
+msgstr "圖示點選動作"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
-msgstr ""
+msgstr "圖示大小"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr ""
+msgstr "圖示顯示時間"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -1921,11 +1920,11 @@ msgstr "照明率"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "图象目录"
+msgstr "圖像目錄"
 
 #: u_translation.rsimageoptions
 msgid "Image options"
-msgstr "图象选项"
+msgstr "圖像選項"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -1945,67 +1944,67 @@ msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "增量亮星"
+msgstr "增亮星等"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
-msgstr "增加时间"
+msgstr "增加時間"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "指出这里如何计算需求值从数据存储在星表文本文件。"
+msgstr "指出這裡如何從儲存在星表的檔案本文資料計算需求值。"
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr "指出如何确认天体大小单位："
+msgstr "指出如何確認天體大小單位："
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr "指出行标识符适于各天体类型："
+msgstr "指出適合各種類型天體的字串："
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "指出行适于各画操作"
+msgstr "指出適合各種圖形操作的字串"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "指出行适于各颜色"
+msgstr "指出各種顏色的字串"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr "INDI 驱动程序"
+msgstr "INDI 驅動程式"
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
-msgstr "INDI 驱动程序设定"
+msgstr "INDI 驅動程式設定"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "INDI 服务器主机"
+msgstr "INDI 伺服器主機"
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
-msgstr "INDI 服务器端口"
+msgstr "INDI 伺服器端口"
 
 #: u_translation.rsindrive
 msgid "in drive"
-msgstr "驱动器"
+msgstr "驅動器"
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr "信息"
+msgstr "訊息"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "詳細資料"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr "数据库初始化"
+msgstr "資料庫初始化"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "输入星表文件"
+msgstr "輸入星表檔案"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
@@ -2017,7 +2016,7 @@ msgstr "插入失败！ %s"
 
 #: u_translation.rsinternet
 msgid "Internet"
-msgstr "因特网"
+msgstr "網際網路"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
@@ -2025,23 +2024,23 @@ msgstr ""
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
-msgstr "无效历元在行%s：%s"
+msgstr "無效曆元行在%s：%s"
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
-msgstr "无效 FITS 文件：%s"
+msgstr "無效 FITS 檔案：%s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr ""
+msgstr "無效的路徑："
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
-msgstr "不可见在此纬度"
+msgstr "在此緯度不可見"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr "春分点坐标真是 %s ？"
+msgstr "座標曆元是真 %s ？"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2049,11 +2048,11 @@ msgstr "儒略日："
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr ""
+msgstr "儒略日"
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
-msgstr "儒略历"
+msgstr "儒略曆"
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
@@ -2069,11 +2068,11 @@ msgstr "木星"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "木星大红斑经度："
+msgstr "木星大紅斑經度："
 
 #: u_translation.rskm
 msgid "Km."
-msgstr "千米"
+msgstr "公里"
 
 #: u_translation.rsknot
 msgid "Knot"
@@ -2081,27 +2080,27 @@ msgstr "亮结"
 
 #: u_translation.rsl
 msgid "L"
-msgstr "经度"
+msgstr "經度"
 
 #: u_translation.rslabel
 msgid "Label:"
-msgstr "标签："
+msgstr "標籤："
 
 #: u_translation.rslabel2
 msgid "Label"
-msgstr "标签"
+msgstr "標籤"
 
 #: u_translation.rslabelobject
 msgid "Label object"
-msgstr "标签天体"
+msgstr "標籤天體"
 
 #: u_translation.rslabels
 msgid "Labels"
-msgstr "标签"
+msgstr "標籤"
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr "标签文本"
+msgstr "標籤本文"
 
 #: u_translation.rslandscape
 msgid "Landscape"
@@ -2113,19 +2112,19 @@ msgstr "English"
 
 #: u_translation.rslanguage2
 msgid "Language"
-msgstr "语言"
+msgstr "語言"
 
 #: u_translation.rslanguagesele
 msgid "Language selection"
-msgstr "语言选择"
+msgstr "語言選擇"
 
 #: u_translation.rslatinname
 msgid "Latin name"
-msgstr "拉丁名称"
+msgstr "拉丁名稱"
 
 #: u_translation.rslatitude
 msgid "Latitude"
-msgstr "纬度"
+msgstr "緯度"
 
 #: u_translation.rsleft
 msgid "Left"
@@ -2133,39 +2132,39 @@ msgstr "左"
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr "左边栏"
+msgstr "左邊欄"
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr ""
+msgstr "法定"
 
 #: u_translation.rslegend
 msgid "Legend"
-msgstr "图例"
+msgstr "圖例"
 
 #: u_translation.rslength
 msgid "Length"
-msgstr "长度"
+msgstr "長度"
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
-msgstr "更少深空"
+msgstr "減少深空"
 
 #: u_translation.rslessstars
 msgid "Less stars"
-msgstr "更少恒星"
+msgstr "減少恆星"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr "纬天平动"
+msgstr "緯天秤動"
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr "经天平动"
+msgstr "經天秤動"
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
-msgstr "许可协议"
+msgstr "許可協議"
 
 #: u_translation.rslightyears
 msgid "light years"
@@ -2177,19 +2176,19 @@ msgstr "LII"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "极限星等，列表："
+msgstr "極限星等，列表："
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "极限星等："
+msgstr "極限星等："
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
-msgstr "极限大小（弧分）："
+msgstr "極限大小（弧分）："
 
 #: u_translation.rsline1
 msgid "Line"
-msgstr "线"
+msgstr "線"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -2197,59 +2196,59 @@ msgstr "行模式"
 
 #: u_translation.rslinemodedraw
 msgid "Line mode drawing"
-msgstr "行模式绘画"
+msgstr "行模式繪畫"
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr "线操作"
+msgstr "線操作"
 
 #: u_translation.rslines
 msgid "Lines"
-msgstr "线"
+msgstr "線"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr "线 / 网"
+msgstr "線 / 網格"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "线宽"
+msgstr "線寬"
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr "连接所有星图"
+msgstr "連接所有星圖"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
-msgstr "监听端口：%s"
+msgstr "監聽端口：%s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "列表可用盘片"
+msgstr "列表可用光碟片"
 
 #: u_translation.rsload
 msgid "Load"
-msgstr "载入"
+msgstr "載入"
 
 #: u_translation.rsloadfile
 msgid "Load file"
-msgstr "载入文件"
+msgstr "載入檔案"
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
-msgstr "载入 MPC 文件"
+msgstr "載入 MPC 檔案"
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
-msgstr "载入 MPC 格式文件"
+msgstr "載入 MPC 格式檔案"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "载入只是开头"
+msgstr "只載表頭"
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr "载入计划"
+msgstr "再入計畫"
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
@@ -2257,11 +2256,11 @@ msgstr "本地地平"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "本地地平文件名："
+msgstr "本地地平檔案名："
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr "地方恒星时"
+msgstr "地方恆星時"
 
 #: u_translation.rslocationcode
 msgid "Location code"
@@ -2269,19 +2268,19 @@ msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
-msgstr "锁定 %s"
+msgstr "鎖定 %s"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
-msgstr "对数标尺"
+msgstr "對數標尺"
 
 #: u_translation.rslongitude
 msgid "Longitude"
-msgstr "经度"
+msgstr "經度"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr "升交点经度"
+msgstr "升交點經度"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -2289,7 +2288,7 @@ msgstr "菱形"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "低面亮度"
+msgstr "低表面亮度"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
@@ -2329,11 +2328,11 @@ msgstr "星等差"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "食分"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr "星等错误"
+msgstr "星等錯誤"
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
@@ -2349,27 +2348,27 @@ msgstr "星等 Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
-msgstr "用户论坛"
+msgstr "用户論壇 (Yahoo group)"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
-msgstr "主要栏"
+msgstr "主要欄"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
-msgstr "手动装置"
+msgstr "手動装置"
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr "手动望远镜"
+msgstr "手動望遠鏡"
 
 #: u_translation.rsmap
 msgid "Map"
-msgstr "图"
+msgstr "圖"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
-msgstr "标记星图中心"
+msgstr "標示星圖中心"
 
 #: u_translation.rsmars
 msgid "Mars"
@@ -2393,7 +2392,7 @@ msgstr "最大星等"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
-msgstr "兆字节"
+msgstr "兆字節"
 
 #: u_translation.rsmean
 msgid "Mean"
@@ -2405,15 +2404,15 @@ msgstr "平近点角"
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "平赤道，春分点和历元的日期"
+msgstr "平赤道，春分點和曆元的日期"
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr "平春分点和历元 J2000"
+msgstr "平春分點和曆元 J2000"
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "平春分点 J2000，历元的日期"
+msgstr "平春分点 J2000，曆元的日期"
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
@@ -2421,7 +2420,7 @@ msgstr "平均 J2000"
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "平均位置"
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
@@ -2437,15 +2436,15 @@ msgstr "水星"
 
 #: u_translation.rsmessages
 msgid "Messages:"
-msgstr "信息："
+msgstr "訊息："
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "米"
+msgstr "公尺"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
-msgstr "银河"
+msgstr "銀河"
 
 #: u_translation.rsmin
 msgid "m"
@@ -2457,7 +2456,7 @@ msgstr "最小"
 
 #: u_translation.rsmin3
 msgid "Min."
-msgstr "分|最小"
+msgstr "分最小"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -2469,15 +2468,15 @@ msgstr "分"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr "水平镜像"
+msgstr "水平鏡像"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "垂直镜像"
+msgstr "垂直鏡像"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr "杂项线"
+msgstr "雜項線"
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -2501,19 +2500,19 @@ msgstr "更多深空"
 
 #: u_translation.rsmoreoptions
 msgid "More options"
-msgstr "更多选项"
+msgstr "更多選項"
 
 #: u_translation.rsmorestars
 msgid "More stars"
-msgstr "更多恒星"
+msgstr "更多恆星"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "超过1000错误！进程中止。"
+msgstr "超過1000個錯誤！程序中止。"
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr "超过 %s 天体，结果截短。"
+msgstr "超過 %s 天體，結果截短。"
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -2525,7 +2524,7 @@ msgstr "曙光"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
-msgstr "移动标签"
+msgstr "移動標籤"
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
@@ -2537,7 +2536,7 @@ msgstr "MPC Http"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr "多标记"
+msgstr "多標記"
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
@@ -2545,7 +2544,7 @@ msgstr "聚星"
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr "MySQL 数据库"
+msgstr "MySQL 資料庫"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -2553,11 +2552,11 @@ msgstr "肉眼"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "肉眼基准"
+msgstr "肉眼基準"
 
 #: u_translation.rsname
 msgid "Name"
-msgstr "名称"
+msgstr "名稱"
 
 #: u_translation.rsnautical
 msgid "Nautical"
@@ -2565,35 +2564,35 @@ msgstr "航海"
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
-msgstr "深空天体"
+msgstr "深空天體"
 
 #: u_translation.rsnebulacommon
 msgid "Deep sky common name"
-msgstr "深空普通名称"
+msgstr "深空普通名稱"
 
 #: u_translation.rsnebuladispla
 msgid "Deep sky objects display"
-msgstr "深空天体显示"
+msgstr "深空天體顯示"
 
 #: u_translation.rsnebulae
 msgid "Deep sky objects"
-msgstr "深空天体"
+msgstr "深空天體"
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
-msgstr "深空过滤"
+msgstr "深空篩選"
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
-msgstr "深空或其他天体"
+msgstr "深空或其他天體"
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
-msgstr "星云轮廓"
+msgstr "星雲外觀"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr "邻近"
+msgstr "鄰近"
 
 #: u_translation.rsneptune
 msgid "Neptune"
@@ -2601,15 +2600,15 @@ msgstr "海王星"
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr "新建星图"
+msgstr "新建星圖"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
-msgstr "新建寻星镜圆形"
+msgstr "新建尋星鏡圓形"
 
 #: u_translation.rsnewlabel
 msgid "New label"
-msgstr "新建标签"
+msgstr "新建標籤"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -2617,27 +2616,27 @@ msgstr "下一步>>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr ""
+msgstr "下一張圖"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
-msgstr "夜视"
+msgstr "夜視"
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr "夜视按钮"
+msgstr "夜視按鈕"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "夜视颜色"
+msgstr "夜視顏色"
 
 #: u_translation.rsno
 msgid "No."
-msgstr "编号"
+msgstr "编號"
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "小行星数据找不到！%s请先载入 MPC 文件。"
+msgstr "找不到小行星資料！%s請先載入 MPC 檔案。"
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -2649,11 +2648,11 @@ msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
-msgstr "无边距"
+msgstr "無邊距"
 
 #: u_translation.rsnone1
 msgid "None"
-msgstr "无"
+msgstr "無"
 
 #: u_translation.rsnonexistant
 msgid "Non-existent"
@@ -2665,15 +2664,15 @@ msgstr "不存在/未知"
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr "没有天体给锁定"
+msgstr "沒有天體被鎖定"
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "没有图片"
+msgstr "沒有圖片"
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
-msgstr "打印机找不到！"
+msgstr "找不到印表機！"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
@@ -2689,7 +2688,7 @@ msgstr "北"
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "不是 FITS 文件，简单方法： T 字缺少"
+msgstr "不是 FITS 文件，只是缺少關鍵字：T"
 
 #: u_translation.rsnotavailable
 msgid "Not available"
@@ -2697,11 +2696,11 @@ msgstr "不可用"
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
-msgstr "%s 未连接。"
+msgstr "%s 未連接。"
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr "注解"
+msgstr "註解"
 
 #: u_translation.rsnotfound
 msgid "%s not found"
@@ -2713,27 +2712,27 @@ msgstr "%s 找不到在任何已安装星表索引。"
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s 找不到！%s可能星表未安装，或错误路径在星表设定。"
+msgstr "%s 找不到！%s星表可能未安装，或星表路徑設定錯誤。"
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr "现在"
+msgstr "現在"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr "文件数"
+msgstr "檔案數"
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
-msgstr "月数"
+msgstr "月數"
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
-msgstr ""
+msgstr "星雲數量"
 
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
-msgstr "恒星数"
+msgstr "恆星數"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
@@ -2745,59 +2744,59 @@ msgstr "章动，光行差"
 
 #: u_translation.rsobject
 msgid "Object"
-msgstr "天体"
+msgstr "天體"
 
 #: u_translation.rsobjectbar
 msgid "Object bar"
-msgstr "天体栏"
+msgstr "天體欄"
 
 #: u_translation.rsobjectfilter
 msgid "Object filter"
-msgstr "天体过滤"
+msgstr "天體篩選"
 
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
-msgstr "天体过滤设定"
+msgstr "天体篩選設定"
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr "天体列表"
+msgstr "天體表"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
-msgstr "天体列表设定"
+msgstr "天體表設定"
 
 #: u_translation.rsobjectname
 msgid "Object name"
-msgstr "天体名称"
+msgstr "天體名稱"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "在索引中找到天體位置，但在所有開啟的星表中都沒有找到詳細的資料"
 
 #: u_translation.rsobjects
 msgid "Objects"
-msgstr "天体"
+msgstr "天體"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr "天体大小单位"
+msgstr "天體大小單位"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
-msgstr "天体类型"
+msgstr "天體類型"
 
 #: u_translation.rsobservatory
 msgid "Observatory"
-msgstr "观象台"
+msgstr "天文台"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "观象台数据库"
+msgstr "天文台資料庫"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
-msgstr "陈旧"
+msgstr "老舊"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -2805,7 +2804,7 @@ msgstr "偏置"
 
 #: u_translation.rsok
 msgid "OK"
-msgstr "确定"
+msgstr "確定"
 
 #: u_translation.rsoneofthree
 msgid "One of three"
@@ -2817,55 +2816,55 @@ msgstr "每二个"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
-msgstr "在线 DSS"
+msgstr "在線 DSS"
 
 #: u_translation.rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "在线 DSS 图片"
+msgstr "在線 DSS 圖片"
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
-msgstr "在线图片服务器"
+msgstr "在線圖片伺服器"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "只是编号小行星"
+msgstr "只有编號的小行星"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
-msgstr "只是开头"
+msgstr "只是表頭"
 
 #: u_translation.rsonlythelast
 msgid "Only the last"
-msgstr "只是最后"
+msgstr "只是結尾"
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "打开"
+msgstr "開啟"
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
-msgstr "打开星图"
+msgstr "開啟星圖"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr "疏散星团"
+msgstr "疏散星團"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "打开位图"
+msgstr "開啟位圖"
 
 #: u_translation.rsoptions
 msgid "Options"
-msgstr "选项"
+msgstr "選項"
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "轨道"
+msgstr "軌道"
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr "轨道根数"
+msgstr "軌道要素"
 
 #: u_translation.rsorientation
 msgid "Orientation"
@@ -2873,7 +2872,7 @@ msgstr "方向"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "或使用本地文件："
+msgstr "或使用本地檔案："
 
 #: u_translation.rsother
 msgid "Other"
@@ -2881,35 +2880,35 @@ msgstr "其他"
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "其他标签"
+msgstr "其他標籤"
 
 #: u_translation.rsotherlinesca
 msgid "Other line-catalogs"
-msgstr "其他线路星表"
+msgstr "其他線上星表"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "其他軟體資料"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr "输出星表类型"
+msgstr "輸出星表類型"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "输出星表选项"
+msgstr "輸出星表選項"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr "输出目录"
+msgstr "輸出目錄"
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
-msgstr "页边距 毫米"
+msgstr "頁邊距 毫米"
 
 #: u_translation.rsparallax
 msgid "Parallax"
-msgstr "视差"
+msgstr "視差"
 
 #: u_translation.rsparametric
 msgid "Parametric"
@@ -2921,23 +2920,23 @@ msgstr "偏食"
 
 #: u_translation.rspassword
 msgid "Password"
-msgstr "密码"
+msgstr "密碼"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr ""
+msgstr "粉彩"
 
 #: u_translation.rspath
 msgid "Path"
-msgstr "路径"
+msgstr "路徑"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "保存文件到："
+msgstr "儲存檔案到："
 
 #: u_translation.rspathwidth
 msgid "Path width"
-msgstr "路径宽度"
+msgstr "路徑寬度"
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -2945,11 +2944,11 @@ msgstr "半影"
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "近日点日期"
+msgstr "近日點日期"
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "近日点距离"
+msgstr "近日點距離"
 
 #: u_translation.rsperiod
 msgid "Period"
@@ -2957,7 +2956,7 @@ msgstr "周期"
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
-msgstr "个人数据"
+msgstr "個人資料"
 
 #: u_translation.rsphase
 msgid "Phase"
@@ -2965,7 +2964,7 @@ msgstr "相位"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr "照片盘片"
+msgstr "照片光碟"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -2973,11 +2972,11 @@ msgstr "照片"
 
 #: u_translation.rspictures
 msgid "Pictures"
-msgstr "图片"
+msgstr "圖片"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "象素"
+msgstr "像素"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -2986,64 +2985,64 @@ msgstr "行星"
 #: u_translation.rsplanetaryneb
 msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
-msgstr "行星状星云"
+msgstr "行星狀星雲"
 
 #: u_translation.rsplanetaryneb2
 msgid "Planetary nebulae"
-msgstr "行星状星云"
+msgstr "行星狀星雲"
 
 #: u_translation.rsplanetaryneb3
 msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
-msgstr "行星状星云"
+msgstr "行星狀星雲"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
-msgstr "行星的卫星"
+msgstr "行星的衛星"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr "行星设定"
+msgstr "行星設定"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr "盘片缺陷"
+msgstr "盤面缺陷"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr "盘片 标识符 日期 说明 范围 光盘 观象台"
+msgstr "盤面標示 有效日期 範圍 光碟片 天文台"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "请检查因特网连接和 URL 定义"
+msgstr "請檢查察網際網路連結和 URL 定義"
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "请先配置 DSS 文件路径。"
+msgstr "請先配置 DSS 檔案路徑。"
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr "请配置轨道根数 URL ！"
+msgstr "請配置軌道要素 URL ！"
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr "请确定望远镜居中在 %s"
+msgstr "請確定望遠鏡指向在 %s"
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "请输入天体标识符。"
+msgstr "請輸入天體標示符號。"
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "请指出星表短名称"
+msgstr "請指出星表短名稱"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "请指出星表长名称"
+msgstr "請指出星表長名稱"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "请指出可以建立星表的目录"
+msgstr "請指出可以建立星表的目錄"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -3055,23 +3054,23 @@ msgstr ""
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr "请安放 RealSky256 光盘号"
+msgstr "請安放 RealSky 光碟序號"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "请提出任何改善："
+msgstr "請提報任何問題給："
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "请创建此目录和重启动程序。"
+msgstr "請建立此目錄和重新啟動程式。"
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "请重安装程序。"
+msgstr "請重新安裝程式。"
 
 #: u_translation.rsplottheposit
 msgid "Plot the position of the moving object."
-msgstr "标绘天体移动位置"
+msgstr "描繪天體移動位置"
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -3087,7 +3086,7 @@ msgstr "自行"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "极倾角"
+msgstr "極傾角"
 
 #: u_translation.rsport
 msgid "Port:"
@@ -3095,7 +3094,7 @@ msgstr "端口："
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "纵向"
+msgstr "縱向"
 
 #: u_translation.rsposition
 msgid "Position"
@@ -3107,7 +3106,7 @@ msgstr "位置角"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr "位置历元"
+msgstr "位置曆元"
 
 #: u_translation.rspostscript
 msgid "PostScript"
@@ -3115,27 +3114,27 @@ msgstr "Postscript 文件"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr ""
+msgstr "使用字首命名星表短名"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
-msgstr "别名前缀用他的标签"
+msgstr "别名前缀用他的標籤"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "编制星表 CatGen"
+msgstr "使用 CatGen 編製星表"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "编制数据"
+msgstr "编製資料"
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
-msgstr "编制每月数据"
+msgstr "编制每月資料"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
-msgstr "气压（毫巴）"
+msgstr "氣壓（毫巴）"
 
 #: u_translation.rsprev
 msgid "<<   Prev"
@@ -3143,75 +3142,75 @@ msgstr "<<上一步"
 
 #: u_translation.rsprint
 msgid "Print"
-msgstr "打印"
+msgstr "列印"
 
 #: u_translation.rsprintchart
 msgid "Print chart"
-msgstr "打印星图"
+msgstr "列印星圖"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr ""
+msgstr "列印星圖"
 
 #: u_translation.rsprinter
 msgid "Printer:"
-msgstr "打印机："
+msgstr "印表機："
 
 #: u_translation.rsprinterlegen
 msgid "Printer legend"
-msgstr "打印机图例"
+msgstr "印表機圖例"
 
 #: u_translation.rsprintersetup
 msgid "Printer setup"
-msgstr "打印机设置"
+msgstr "印表機設置"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
-msgstr "打印方法"
+msgstr "列印方法"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr "打印星图"
+msgstr "列印星圖"
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
-msgstr "处理... %s"
+msgstr "處理... %s"
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comets: %s"
-msgstr "处理结束。彗星总数：%s"
+msgstr "處理結束。彗星總數：%s"
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr "处理结束。小行星总数：%s"
+msgstr "處理結束。小行星總數：%s"
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
-msgstr "处理结束。位置总数：%s"
+msgstr "處理結束。位置總數：%s"
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
-msgstr "处理行 %s"
+msgstr "處理行 %s"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "程序数据"
+msgstr "程式資料"
 
 #: u_translation.rsprograminfor
 msgid "Program information"
-msgstr "程序信息"
+msgstr "程式訊息"
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "程序："
+msgstr "程式員："
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr "进度"
+msgstr "進度"
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
-msgstr "进度信息"
+msgstr "進度訊息"
 
 #: u_translation.rsprojection
 msgid "Projection"
@@ -3219,23 +3218,23 @@ msgstr "投影"
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
-msgstr "投影设定"
+msgstr "投影設定"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "赤经自行"
+msgstr "赤經自行"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "赤纬自行"
+msgstr "赤緯自行"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr ""
+msgstr "自行"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
-msgstr "比例的彗尾长"
+msgstr "比例的彗尾長"
 
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
@@ -3247,7 +3246,7 @@ msgstr "代理"
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "代理主机"
+msgstr "代理主機"
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
@@ -3259,7 +3258,7 @@ msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "类星体"
+msgstr "類星體"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -3267,31 +3266,31 @@ msgstr "快速删除"
 
 #: u_translation.rsquicklydelet
 msgid "Quickly delete all data related to comets"
-msgstr "快速删除所有彗星相关数据"
+msgstr "快速删除所有彗星相關資料"
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all data related to asteroids"
-msgstr "快速删除所有小行星相关数据"
+msgstr "快速删除所有小行星相關資料"
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "快速啟動指南"
 
 #: u_translation.rsra
 msgid "RA"
-msgstr "赤经"
+msgstr "赤經"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr "视向速度"
+msgstr "視向速度"
 
 #: u_translation.rsrange
 msgid "Range"
-msgstr "范围"
+msgstr "範圍"
 
 #: u_translation.rsraoptions
 msgid "RA options"
-msgstr "赤经选项"
+msgstr "赤精選項"
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
@@ -3299,15 +3298,15 @@ msgstr "光栅分辨率"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "赤经转动："
+msgstr "赤經轉動："
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%s赤经转动："
+msgstr "%s赤經轉動："
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "真实图象"
+msgstr "真實圖像"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -3323,7 +3322,7 @@ msgstr ""
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr "从文件确认单位或天体类型："
+msgstr "從檔案確認的單位或攤體類型"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
@@ -3347,23 +3346,23 @@ msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
-msgstr "红色"
+msgstr "紅色"
 
 #: u_translation.rsredmagnitude
 msgid "Red magnitude"
-msgstr "红星等"
+msgstr "紅星等"
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr "恢复"
+msgstr "恢復"
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr "恢复上次修改"
+msgstr "恢復上次修改"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
-msgstr ""
+msgstr "當移動星圖時縮減細節"
 
 #: u_translation.rsreference
 msgid "Reference"
@@ -3371,7 +3370,7 @@ msgstr "参考"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "反射星云"
+msgstr "反射星雲"
 
 #: u_translation.rsrefresh
 msgid "Refresh"
@@ -3383,23 +3382,23 @@ msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
-msgstr "发行说明"
+msgstr "發行說明"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr "移去所有寻星镜圆形"
+msgstr "移去所有尋星鏡圓形"
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
-msgstr "移去所有标签"
+msgstr "移去所有標籤"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "移去上次寻星镜圆形"
+msgstr "移去上次尋星鏡圓形"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
-msgstr "移去上次标签"
+msgstr "移去上次標籤"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -3411,11 +3410,11 @@ msgstr "提出改善"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "请求超时。可能要求范围太宽远程服务器请求更多处理时间。"
+msgstr "請求超過時間，可能要求範圍太寬，遠端伺服器需要更多處理時間 。"
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
-msgstr "缺少必需字段！"
+msgstr "缺少必需欄位！"
 
 #: u_translation.rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
@@ -3427,15 +3426,15 @@ msgstr "重置"
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr "重置所有标签"
+msgstr "重置所有標籤"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr "重置星图"
+msgstr "重置星圖"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "重設星圖和指令"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
@@ -3455,19 +3454,19 @@ msgstr "返回"
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "地平纬度反向钮"
+msgstr "地平高度反向鈕"
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "地平经度反向钮"
+msgstr "地平經度反向鈕"
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "赤纬反向钮"
+msgstr "赤緯反向鈕"
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "赤经反向钮"
+msgstr "赤經反向鈕"
 
 #: u_translation.rsright
 msgid "Right"
@@ -3475,11 +3474,11 @@ msgstr "右"
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "赤经"
+msgstr "赤經"
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "右边栏"
+msgstr "右邊欄"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -3487,27 +3486,27 @@ msgstr "升"
 
 #: u_translation.rsrisetime
 msgid "Rise time"
-msgstr "上升时间"
+msgstr "上升時間"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr "向左旋转"
+msgstr "向左旋轉"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr "向右旋转"
+msgstr "向右旋轉"
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr "自转"
+msgstr "自轉"
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr "沙罗周期"
+msgstr "沙羅周期"
 
 #: u_translation.rssatellite
 msgid "Satellite"
-msgstr "卫星"
+msgstr "衛星"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
@@ -3515,7 +3514,7 @@ msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr "土星环"
+msgstr "土星環"
 
 #: u_translation.rssaturday
 msgid "Sat."
@@ -3527,47 +3526,47 @@ msgstr "土星"
 
 #: u_translation.rssave
 msgid "Save"
-msgstr "保存"
+msgstr "儲存"
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr "另存为..."
+msgstr "另存為..."
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
-msgstr "现在保存配置"
+msgstr "現在儲存配置"
 
 #: u_translation.rssaveconfigur2
 msgid "Save configuration on exit"
-msgstr "退出时保存配置"
+msgstr "離開時儲存配置"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr "保存图象..."
+msgstr "儲存圖像..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr "保存计划"
+msgstr "儲存計畫"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr "保存当前星图"
+msgstr "儲存目前星圖"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr "保存文件"
+msgstr "儲存檔案"
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
-msgstr "扫描目录"
+msgstr "掃描目錄"
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
-msgstr "屏幕和状态栏"
+msgstr "螢幕和狀態欄"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
-msgstr "滚动条"
+msgstr "滾動條"
 
 #: u_translation.rssday
 msgid "D"
@@ -3575,15 +3574,15 @@ msgstr "日"
 
 #: u_translation.rssearch
 msgid "Search"
-msgstr "搜寻"
+msgstr "尋找"
 
 #: u_translation.rssearchfor
 msgid "Search for"
-msgstr "搜寻适于"
+msgstr "尋找適於"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr "搜寻索引"
+msgstr "尋找所引"
 
 #: u_translation.rssec
 msgid "s"
@@ -3603,27 +3602,27 @@ msgstr "秒"
 
 #: u_translation.rsselectall
 msgid "Select all"
-msgstr "选择所有"
+msgstr "選擇全部"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "从列表选择盘片"
+msgstr "從表單選擇光碟"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
-msgstr "选择字段使用和位置在文本文件"
+msgstr "在本文文件中選擇使用的欄位和位置"
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "选择系统打印机和选项"
+msgstr "選擇系統印表機和你選擇的指令"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
-msgstr "选择望远镜接口"
+msgstr "選擇望遠鏡介面"
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr "选择星表内天体类型"
+msgstr "選擇星表內的天體類型"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -3631,35 +3630,35 @@ msgstr "半"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "半长轴"
+msgstr "半長軸"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
-msgstr "发送星图到打印机。"
+msgstr "發送星圖到印表機。"
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "间距"
+msgstr "間距"
 
 #: u_translation.rsserver
 msgid "Server"
-msgstr "服务器"
+msgstr "伺服器"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "服务器命令"
+msgstr "伺服器指令"
 
 #: u_translation.rsserverinform
 msgid "Server information"
-msgstr "服务器信息"
+msgstr "伺服器訊息"
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
-msgstr "服务器 IP 接口："
+msgstr "伺服器 IP 介面："
 
 #: u_translation.rsserveripport
 msgid "Server IP port:"
-msgstr "服务器 IP 端口："
+msgstr "伺服器 IP 端口："
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
@@ -3667,171 +3666,171 @@ msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
-msgstr "落"
+msgstr "沒"
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr "设定日期和时间"
+msgstr "設定日期和時間"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr "设定视场"
+msgstr "設定視場"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
-msgstr "设定视场为"
+msgstr "設定視場為"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "设定装置各轴转数当转传动钮，然后望远镜按钮显示转动必须移动从一个天体到另一个。"
+msgstr "設定裝置的各軸轉動，當你轉動驅動按鈕，'連接的望遠鏡'鈕將顯示你從一個天體移動至另一個天體需要轉多少圈。"
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "设定观象台位置"
+msgstr "設定天文台位置"
 
 #: u_translation.rssetup
 msgid "Setup"
-msgstr "设置"
+msgstr "設置"
 
 #: u_translation.rsshour
 msgid "H"
-msgstr "时"
+msgstr "時"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr "显示全天空"
+msgstr "顯示全天空"
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr "显示小行星"
+msgstr "顯示'小行星"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
-msgstr "显示小行星在星图"
+msgstr "在星圖顯示小行星"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "显示彗星"
+msgstr "顯示彗星"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
-msgstr "显示彗星在星图"
+msgstr "在星圖顯示彗星"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
-msgstr "显示星座线"
+msgstr "顯示星座线"
 
 #: u_translation.rsshowconstell2
 msgid "Show constellation limits"
-msgstr "显示星座边界"
+msgstr "顯示星座邊界"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
-msgstr "显示星座图"
+msgstr "顯示星座圖"
 
 #: u_translation.rsshowconstell4
 msgid "Show constellation boundaries"
-msgstr "显示星座边界"
+msgstr "顯示星座邊界"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr "显示坐标网"
+msgstr "顯示座標網格"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr "显示地影（月食）"
+msgstr "顯示地影（月食）"
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr "显示黄道"
+msgstr "顯示黄道"
 
 #: u_translation.rsshowgalactic
 msgid "Show galactic equator"
-msgstr "显示银道"
+msgstr "顯示銀道"
 
 #: u_translation.rsshowgrid
 msgid "Show grid"
-msgstr "显示网"
+msgstr "顯示網格"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
-msgstr "显示网标签"
+msgstr "顯示網格標籤"
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
-msgstr "显示/隐藏 DSS 图象"
+msgstr "顯示/隐藏 DSS 圖像"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
-msgstr "显示 IR 变星"
+msgstr "顯示 IR 變星"
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr "显示标签"
+msgstr "顯示標籤"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
-msgstr "显示轮廓"
+msgstr "顯示外觀"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "显示标记"
+msgstr "顯示標記"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "显示银河"
+msgstr "顯示銀河"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr "显示深空天体"
+msgstr "顯示深空天體"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr "显示地平以下天体"
+msgstr "顯示地平以下天體"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
-msgstr "显示天体图片在星图"
+msgstr "在星圖顯示天體圖片"
 
 #: u_translation.rsshowobjects
 msgid "Show objects"
-msgstr "显示天体"
+msgstr "顯示天體"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr "显示图片"
+msgstr "顯示圖片"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
-msgstr "显示行星在星图"
+msgstr "在星圖顯示行星"
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr "显示行星"
+msgstr "顯示行星"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "在表頭顯示位置"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr "显示恒星"
+msgstr "顯示恆星"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "显示图片"
+msgstr "顯示圖片"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr ""
+msgstr "恆星的"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr "恒星日"
+msgstr "恆星日"
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr "模拟"
+msgstr "模擬"
 
 #: u_translation.rssize
 msgid "Size"
@@ -3839,47 +3838,47 @@ msgstr "大小"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr "天空背景颜色"
+msgstr "天空背景顏色"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
-msgstr "天空星图主页"
+msgstr "星圖首頁"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
-msgstr ""
+msgstr "星圖圖示設定"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
-msgstr "天空星图"
+msgstr "星圖"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
-msgstr "天空颜色"
+msgstr "天空顏色"
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "回转"
+msgstr "迴轉"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr ""
+msgstr "小星"
 
 #: u_translation.rssminute
 msgid "M"
-msgstr "月|分"
+msgstr "分"
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr ""
+msgstr "月"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr "套接字错误 %s。 %s"
+msgstr "套接字錯誤 %s。 %s"
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
-msgstr "太阳距离"
+msgstr "太陽距離"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
@@ -3887,27 +3886,27 @@ msgstr "日食"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr "太阳距角"
+msgstr "太陽距角"
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
-msgstr "太阳系"
+msgstr "太陽系"
 
 #: u_translation.rssolarsystemo
 msgid "Solar system object"
-msgstr "太阳系天体"
+msgstr "太陽系天體"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr "太阳系设定"
+msgstr "太陽系設定"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "若干记录被拒绝，见文件 %sreject.txt 详细资料"
+msgstr "有些記錄被拒絕，詳細檔案見 %sreject.txt"
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "程序初始化期间发生某些故障，现在必须关闭。"
+msgstr "程式初始化期間發生依些錯誤，現在必須關閉。"
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -3919,11 +3918,11 @@ msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "排序文件按星等"
+msgstr "檔案照星等排序案"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "排序索引文件"
+msgstr "索引檔排序"
 
 #: u_translation.rssouth
 msgid "South"
@@ -3931,23 +3930,23 @@ msgstr "南"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
-msgstr "光谱型"
+msgstr "光譜型"
 
 #: u_translation.rsspline
 msgid "Spline"
-msgstr "样条"
+msgstr "樣條"
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "SQL 数据库不可用。"
+msgstr "SQL 資料庫不能用。"
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "SQL 数据库软件可能未安装！"
+msgstr "SQL 資料庫軟體可能未安裝！"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr "Sqlite 数据库"
+msgstr "Sqlite 資料庫"
 
 #: u_translation.rssquare
 msgid "Square"
@@ -3959,75 +3958,75 @@ msgstr "秒"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
-msgstr "标准颜色"
+msgstr "標準顏色"
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr "恒星"
+msgstr "恆星"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
-msgstr "恒星颜色（B-V）："
+msgstr "恆星顏色（B-V）："
 
 #: u_translation.rsstarcommonna
 msgid "Star common name"
-msgstr "恒星普通名称"
+msgstr "恆星固有名稱"
 
 #: u_translation.rsstardisplay
 msgid "Star display"
-msgstr "恒星显示"
+msgstr "恆星顯示"
 
 #: u_translation.rsstarlabel
 msgid "Star label"
-msgstr "恒星标签"
+msgstr "恆星標籤"
 
 #: u_translation.rsstars
 msgid "Stars"
-msgstr "恒星"
+msgstr "恆星"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "恒星和深空星表编制使用"
+msgstr "恆星和深空星表编制使用"
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr ""
+msgstr "恆星點陣圖檔"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
-msgstr "恒星过滤"
+msgstr "恆星篩選"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "恒星自行选项（如果星表可用）"
+msgstr "恆星自行選項（如果星表可用）"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
-msgstr "开始月"
+msgstr "開始月"
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr "天体开始"
+msgstr "天體開始"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
-msgstr "状态栏"
+msgstr "狀態欄"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr "步单位"
+msgstr "步單位"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr "停止 TCP/IP 服务器"
+msgstr "停止 TCP/IP 伺服器"
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr "太阳"
+msgstr "太陽"
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr "太阳高度"
+msgstr "太陽高度"
 
 #: u_translation.rssunday
 msgid "Sun."
@@ -4039,11 +4038,11 @@ msgstr ""
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
-msgstr "太阳倾角"
+msgstr "太陽傾角"
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "超新星遗迹"
+msgstr "超新星殘骸"
 
 #: u_translation.rssurface
 msgid "Surface"
@@ -4051,7 +4050,7 @@ msgstr "表面"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr "面亮度"
+msgstr "表面亮度"
 
 #: u_translation.rssyear
 msgid "Y"
@@ -4075,15 +4074,15 @@ msgstr "系统"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
-msgstr "系统打印机"
+msgstr "系統印表機"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
-msgstr "系统设定"
+msgstr "系統設定"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%s表 %s 不存在！%s请改正错误和再试。"
+msgstr "%s表 %s 不存在！%s請改正錯誤後再試。"
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
@@ -4091,83 +4090,83 @@ msgstr "%s表存在 %s"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
-msgstr "TCP/IP 连接"
+msgstr "TCP/IP 連接"
 
 #: u_translation.rstcpipserver
 msgid "TCP/IP server"
-msgstr "TCP/IP 服务器"
+msgstr "TCP/IP 伺服器"
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr "TCP/IP 服务不可用"
+msgstr "TCP/IP 伺服器不能用"
 
 #: u_translation.rstelescope
 msgid "Telescope"
-msgstr "望远镜"
+msgstr "望遠鏡"
 
 #: u_translation.rstelescope2
 msgid "Telescope: %s"
-msgstr "望远镜：%s"
+msgstr "望遠鏡：%s"
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
-msgstr "望远镜未连接"
+msgstr "望遠鏡未連接"
 
 #: u_translation.rstelescopeplu
 msgid "Telescope plugin "
-msgstr "望远镜插件"
+msgstr "望遠鏡外掛"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
-msgstr "望远镜设定"
+msgstr "望遠鏡設定"
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
-msgstr "望远镜类型"
+msgstr "望遠鏡類型"
 
 #: u_translation.rstemperaturec
 msgid "Temperature (Celsius)"
-msgstr "温度（摄氏）"
+msgstr "溫度（攝氏）"
 
 #: u_translation.rstemporaryfil
 msgid "temporary file"
-msgstr "临时文件"
+msgstr "臨時檔案"
 
 #: u_translation.rstext
 msgid "Text"
-msgstr ""
+msgstr "本文"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "文本文件星表"
+msgstr "文本檔案星表"
 
 #: u_translation.rstextsize
 msgid "Text size"
-msgstr ""
+msgstr "本文大小"
 
 #: u_translation.rstheme
 msgid "Theme"
-msgstr "主题"
+msgstr "主題"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
-msgstr "有 %s 星表图象"
+msgstr "有 %s 星表圖像"
 
 #: u_translation.rsthereareobjec
 msgid "There are %s objects in this field."
-msgstr "此视场内有 %s 个天体。"
+msgstr "此視場內有 %s 個天體。"
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "替换国家 %s 所有数据库内容使用从 NGA 和 GNIS 最新数据。%s该国所有编辑数据将会丢失除非增加位置用新名将会保留。%s是否继续？"
+msgstr "這個動作從 NGA 和 GNIS 更新資料，復寫國家 %s 所有資料庫内容。你編輯的 %s該國所有資料將會遺失，只有用新名稱增加的位置用才能保留。%s是否繼續？"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "此文件确认为非 MPCORB 文件。"
+msgstr "此檔案確認非 MPCORB 檔案。"
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "本程序是免费软件，你可以再发布或修改根据 GNU 通用公共许可证条款。"
+msgstr "本程式是自由軟體，你可以根據 GNU 通用公共許可證條款修改和/或再發布。"
 
 #: u_translation.rsthursday
 msgid "Thu."
@@ -4183,19 +4182,19 @@ msgstr "垂直平铺"
 
 #: u_translation.rstime
 msgid "Time"
-msgstr "时间"
+msgstr "時間"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr "时间模拟"
+msgstr "時間模擬"
 
 #: u_translation.rstimeunits
 msgid "Time units"
-msgstr "时间单位"
+msgstr "時間單位"
 
 #: u_translation.rstimezone
 msgid "Time zone"
-msgstr "时区"
+msgstr "時區"
 
 #: u_translation.rsto
 msgid "to"
@@ -4203,11 +4202,11 @@ msgstr "到"
 
 #: u_translation.rstoday
 msgid "Today"
-msgstr "今日"
+msgstr "今天"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "至檔案："
 
 #: u_translation.rstonight
 msgid "Tonight"
@@ -4215,11 +4214,11 @@ msgstr ""
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
-msgstr "工具栏"
+msgstr "工具欄"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr "打开视窗太多，请关闭若干星图。"
+msgstr "開啟太多視窗，請關閉一些星圖。"
 
 #: u_translation.rstop
 msgid "Top"
@@ -4227,7 +4226,7 @@ msgstr "上"
 
 #: u_translation.rstopocentric
 msgid "Topocentric"
-msgstr "站心"
+msgstr "地表中心"
 
 #: u_translation.rstotal
 msgid "Totality"
@@ -4235,19 +4234,19 @@ msgstr "全食"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr "总半径"
+msgstr "總半徑"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "要使用新数据必须现在计算每月数据"
+msgstr "在使用新的給到要素之前，你必須計算這個月的資料。"
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr "转换"
+msgstr "轉換"
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "翻译："
+msgstr "翻譯："
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -4259,11 +4258,11 @@ msgstr "三合星"
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr "回归年"
+msgstr "回歸年"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "真赤道，春分点和历元的日期"
+msgstr "真赤道，春分點和曆元的日期"
 
 #: u_translation.rstrueposition
 msgid "True position"
@@ -4271,11 +4270,11 @@ msgstr "真位置"
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "真太陽"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr "特朗普勒分类"
+msgstr "特朗普勒分類"
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -4283,11 +4282,11 @@ msgstr "二"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "转/度"
+msgstr "轉/度"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "转/时"
+msgstr "轉/時"
 
 #: u_translation.rstwilight
 msgid "Twilight"
@@ -4295,23 +4294,23 @@ msgstr "曙暮光"
 
 #: u_translation.rstype
 msgid "Type"
-msgstr "类型"
+msgstr "類型"
 
 #: u_translation.rstype2
 msgid "Type:"
-msgstr "类型："
+msgstr "類型："
 
 #: u_translation.rstypeofcoordi
 msgid "Type of coordinates"
-msgstr "坐标类型"
+msgstr "座標類型"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr "增加天体类型到列表"
+msgstr "在表中增加天體類型"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
-msgstr "变异类型"
+msgstr "變異類型"
 
 #: u_translation.rsumbra
 msgid "Umbra"
@@ -4319,11 +4318,11 @@ msgstr "本影"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "无法创建目录"
+msgstr "無法創建目錄"
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "不选避免重复与小行星134340"
+msgstr "不勾選以避免與小行星134340號重複"
 
 #: u_translation.rsundo
 msgid "Undo"
@@ -4331,11 +4330,11 @@ msgstr "撤消"
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr "撤销上次修改"
+msgstr "撤消上次修改"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
-msgstr "世界时"
+msgstr "世界時"
 
 #: u_translation.rsunknow
 msgid "unknown"
@@ -4343,11 +4342,11 @@ msgstr "未知"
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
-msgstr "未知天体"
+msgstr "未知天體"
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr "放开锁定星图"
+msgstr "不鎖定星圖"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -4359,7 +4358,7 @@ msgstr "更新成功！"
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "更新或增加当前位置到数据库？"
+msgstr "更新或增加目前位置到資料庫？"
 
 #: u_translation.rsuranus
 msgid "Uranus"
@@ -4371,15 +4370,15 @@ msgstr "URL"
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
-msgstr "URL 发布命令"
+msgstr "URL 發布命令"
 
 #: u_translation.rsuseanotherdt
 msgid "Use another DT-UT value"
-msgstr "使用另一值 力学时-世界时"
+msgstr "使用另一力學時-世界時數值"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "使用预置颜色方案："
+msgstr "使用预設顏色方案："
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -4391,7 +4390,7 @@ msgstr "使用 HTTP 代理"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
-msgstr "使用在线 DSS 代替 RealSky"
+msgstr "使用線上 DSS 代替 RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
@@ -4399,7 +4398,7 @@ msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "使用合适星表来自同一组"
+msgstr "使用來自單一群組的單一星表"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -4411,27 +4410,27 @@ msgstr "用户名"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "使用二次抽样限制图象大小到"
+msgstr "使用次抽樣限制圖像大小到"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
-msgstr "使用系统时间"
+msgstr "使用系統時間"
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
-msgstr "使用 TCP/IP 服务器"
+msgstr "使用 TCP/IP 伺服器"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "使用選單或按鍵 \"%s\"確認這個driver。"
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "使用自行改正位置适于指定历元"
+msgstr "使用自行修正位置到指定的曆元"
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr "使用此字段为别名"
+msgstr "使用這個欄位的别名"
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
@@ -4439,23 +4438,23 @@ msgstr "使用 Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr ""
+msgstr "使用現存檔案%s"
 
 #: u_translation.rsut
 msgid "UT"
-msgstr "世界时"
+msgstr "世界時"
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr "变星"
+msgstr "變星"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr "变星"
+msgstr "變星"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
-msgstr ""
+msgstr "變星"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
@@ -4471,55 +4470,55 @@ msgstr "附近"
 
 #: u_translation.rsview
 msgid "View"
-msgstr "视图"
+msgstr "檢視"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr "观看地平"
+msgstr "視地平"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
-msgstr "观象台能见度"
+msgstr "在你的觀測位置所見"
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
-msgstr "目视星等"
+msgstr "視星等"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr "跟踪升起前天体？"
+msgstr "你要追蹤升起前的天體？"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "警告！"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "警告！计算"
+msgstr "警告！計算的"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "警告！有些小行星的軌道要素老舊超過3年，試著尋找適合星圖現在日期的軌道要素。"
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "警告！有些彗星的軌道要素老舊超過3年，試著尋找適合星圖現在日期的軌道要素"
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "警告！当前日期和观象台位置可能已从默认值更改。可以按 否 键和按 %s 键立即恢复默认值，否则默认值可能丢失。是否继续？"
+msgstr "警告！使用的日期或天文台位置可能會改變預設值，可以按 否 键和使用 %s 键立即恢復預設值，否则預設值可能丢失。是否繼續？"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "警告！%s将要破坏数据库 %s 和所有内容，即使内容不涉及本程序。%s是否继续？"
+msgstr "警告！%s將要破害資料庫 %s 和它的所有内容，即使内容不涉及本程式。%s是否繼續？"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "警告！使用多个星表适于同一天体，确定如此。"
+msgstr "警告！使用多個星的資料於同一個天體，確定是你需要的。"
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "警告！%s选择附加数据到现有星表。%s现有星表和索引必须正确同一格式，否则会破坏。%s建议此操作前备份现有文件。%s是否继续？"
+msgstr "警告！ %s選擇將資料加入現有的星表，选择附加数据到现有星表。%s現有星表和索引必須確實有相同的格式，否則會被破壞。%s建議先備份現有檔案再操作。%s是否繼續？"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -4535,15 +4534,15 @@ msgstr "白底黑"
 
 #: u_translation.rswidth
 msgid "Width"
-msgstr "宽度"
+msgstr "寬度"
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr "窗口"
+msgstr "視窗"
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplanet 不支持编译 JPEG 格式"
+msgstr "Xplanet 不支援 JPEG 格式的編輯"
 
 #: u_translation.rsxplanetispro
 msgid "Xplanet is probably not installed!"
@@ -4563,31 +4562,31 @@ msgstr "年"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "现在准备好显示小行星适于此期间。"
+msgstr "現在準備顯示適合此時段的小行星"
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "如果从大山观测，地平线比海平面低。"
+msgstr "如果從高山觀測，地平線會比從海平面觀測更遠。"
 
 #: u_translation.rszenith
 msgid "Zenith"
-msgstr "天顶"
+msgstr "天頂"
 
 #: u_translation.rszoom
 msgid "Zoom +"
-msgstr "放大 +"
+msgstr "放大"
 
 #: u_translation.rszoom2
 msgid "Zoom -"
-msgstr "缩小 -"
+msgstr "縮小"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"
-msgstr "放大 + 置中"
+msgstr "放大並置中"
 
 #: u_translation.rszoomcentre2
 msgid "Zoom - and centre on"
-msgstr "缩小 - 置中"
+msgstr "縮小並置中"
 
 #: u_translation.rszoomin
 msgid "Zoom in"
@@ -4595,5 +4594,5 @@ msgstr "放大"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr "缩小"
+msgstr "縮小"
 
