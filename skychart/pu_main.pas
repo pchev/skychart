@@ -7024,7 +7024,7 @@ var astrom,nautm,civm,cive,naute,astroe: double;
 begin
   planet.Twilight(jd0,def_cfgsc.ObsLatitude,def_cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
   def_cfgsc.tz.JD:=jd0;
-  ht:=astroe+def_cfgsc.tz.SecondsOffset/3600;
+  ht:=rmod(astroe+def_cfgsc.tz.SecondsOffset/3600+24,24);
 end;
 
 // DDE server, windows only
