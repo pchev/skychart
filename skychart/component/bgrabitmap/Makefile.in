@@ -5,7 +5,7 @@
 #   This file was generated on 20. 03. 11
 
 [package]
-name=bgrapkg
+name=bgrabitmappack
 version=0.0
 
 [compiler]
@@ -15,7 +15,7 @@ includedir=./
 options= -MObjFPC -Scghi -O1 -gl -vewnhi -l -dLCL -dLCL$(LCL_PLATFORM)
 
 [target]
-units=bgrapkg.pas
+units=bgrabitmappack.pas
 
 [clean]
 files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
@@ -48,6 +48,6 @@ export LCL_PLATFORM
 .PHONY: cleartarget all
 
 cleartarget:
-        -$(DEL) $(COMPILER_UNITTARGETDIR)/bgrapkg$(PPUEXT)
+        -$(DEL) $(COMPILER_UNITTARGETDIR)/bgrabitmappack$(PPUEXT)
 
-all: cleartarget $(COMPILER_UNITTARGETDIR) bgrapkg$(PPUEXT) 
+all: cleartarget $(COMPILER_UNITTARGETDIR) bgrabitmappack$(PPUEXT) 
