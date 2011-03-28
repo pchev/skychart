@@ -1,8 +1,6 @@
-unit bgraresample;
+unit BGRAResample;
 
 {$mode objfpc}{$H+}
-
-{ 6/2/2011 : fixed SimpleStretchSmaller }
 
 interface
 

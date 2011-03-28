@@ -801,7 +801,7 @@ end;
 function TDotNetDeserialization.LoadStringFromStream(Stream: TStream): string;
 var
   byteLength, shift: byte;
-  fullLength: longword;
+  fullLength: integer;
   utf8value:  string;
 begin
   fullLength := 0;

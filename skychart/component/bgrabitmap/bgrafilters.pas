@@ -35,7 +35,7 @@ function FilterPlane(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
 
 implementation
 
-uses Math;
+uses Math, GraphType, Dialogs;
 
 function FilterSmartZoom3(bmp: TBGRADefaultBitmap;
   Option: TMedianOption): TBGRADefaultBitmap;
@@ -289,14 +289,146 @@ begin
   blurShape.Free;
 end;
 
+function FilterBlurFast(bmp: TBGRADefaultBitmap;
+  radius: integer): TBGRADefaultBitmap;
+var
+  blurRow: array of integer;
+
+  procedure ComputeBlurRow;
+  var
+    i: Integer;
+  begin
+    SetLength(blurRow, 2*radius+1);
+    for i := 0 to radius do
+    begin
+      blurRow[i] := i+1;
+      blurRow[high(blurRow)-i] := blurRow[i];
+    end;
+  end;
+
+type
+  TRowSum = record
+    sumR,sumG,sumB,sumA,sumW: int64;
+  end;
+
+var
+  srcDelta: integer;
+
+  procedure ComputeVerticalRow(psrc: PBGRAPixel; var sums: TRowSum; ys1,ys2: integer); inline;
+  var ys: integer;
+      c: TBGRAPixel;
+      w,aw: integer;
+  begin
+    for ys := ys1 to ys2 do
+    with sums do
+    begin
+      c := psrc^;
+      w := blurRow[ys];
+      inc(sumW,w);
+      aw := c.alpha*w;
+      inc(sumA,aw);
+      {$hints off}
+      inc(sumR,c.red*aw);
+      inc(sumG,c.green*aw);
+      inc(sumB,c.blue*aw);
+      {$hints on}
+      inc(psrc,srcDelta);
+    end;
+  end;
+
+var
+  sums: array of TRowSum;
+  total: TRowSum;
+  yb,xb,xs,ys1,ys2,w,x: integer;
+  pdest: PBGRAPixel;
+  bmpWidth,bmpHeight : integer;
+  c: TBGRAPixel;
+
+begin
+  bmpWidth := bmp.Width;
+  bmpHeight := bmp.Height;
+  result := bmp.NewBitmap(bmpWidth,bmpHeight);
+  ComputeBlurRow;
+  setlength(sums, 2*radius+1);
+  if bmp.LineOrder = riloTopToBottom then
+    srcDelta := bmpWidth else
+      srcDelta := -bmpWidth;
+  for yb := 0 to bmpHeight-1 do
+  begin
+    if yb - radius < 0 then
+      ys1 := radius - yb
+    else
+      ys1 := 0;
+    if yb + radius >= bmpHeight then
+      ys2 := bmpHeight - yb + radius - 1
+    else
+      ys2 := high(sums);
+
+    //initial vertical rows
+    for xs := 0 to high(sums) do
+    begin
+      fillchar(sums[xs],sizeof(TRowSum),0);
+      x := xs-radius;
+      if (x >= 0) and (x < bmpWidth) then
+        ComputeVerticalRow(bmp.ScanLine[yb-radius+ys1]+x,sums[xs],ys1,ys2);
+    end;
+
+    pdest := result.scanline[yb];
+    for xb := 0 to bmpWidth-1 do
+    begin
+      //add vertical rows
+      {$hints off}
+      fillchar(total,sizeof(total),0);
+      {$hints on}
+      for xs := 0 to high(sums) do
+      with sums[xs] do
+      begin
+        w := blurRow[xs];
+        total.sumW += sumW*w;
+        total.sumA += sumA*w;
+        total.sumR += sumR*w;
+        total.sumG += sumG*w;
+        total.sumB += sumB*w;
+      end;
+      if (total.sumA > 0) and (total.sumW > 0) then
+      begin
+        c.alpha:= (total.sumA+total.sumW shr 1) div total.sumW;
+        c.red := (total.sumR+total.sumA shr 1) div total.sumA;
+        c.green := (total.sumG+total.sumA shr 1) div total.sumA;
+        c.blue := (total.sumB+total.sumA shr 1) div total.sumA;
+        pdest^:= c;
+      end else
+        pdest^:= BGRAPixelTransparent;
+      inc(pdest);
+      //shift vertical rows
+      for xs := 0 to high(sums)-1 do
+        sums[xs] := sums[xs+1];
+      fillchar(sums[high(sums)],sizeof(TRowSum),0);
+      x := xb+1-radius+high(sums);
+      if (x >= 0) and (x < bmpWidth) then
+        ComputeVerticalRow(bmp.ScanLine[yb-radius+ys1]+x,sums[high(sums)],ys1,ys2);
+    end;
+  end;
+end;
+
 function FilterBlurRadialNormal(bmp: TBGRADefaultBitmap;
   radius: integer): TBGRADefaultBitmap;
 var
   blurShape: TBGRADefaultBitmap;
+  n: Integer;
+  p: PBGRAPixel;
 begin
   blurShape := TBGRADefaultBitmap.Create(2 * radius + 1, 2 * radius + 1);
   blurShape.GradientFill(0, 0, blurShape.Width, blurShape.Height, BGRAWhite,
     BGRABlack, gtRadial, pointF(radius, radius), pointF(-0.5, radius), dmSet);
+  p := blurShape.Data;
+  for n := 0 to blurShape.NbPixels-1 do
+  begin
+    p^.red := p^.red and $F0;
+    p^.green := p^.red;
+    p^.blue := p^.red;
+    inc(p);
+  end;
   Result := FilterBlur(bmp, blurShape);
   blurShape.Free;
 end;
@@ -330,6 +462,7 @@ begin
     rbCorona: Result  := FilterBlurCorona(bmp, radius);
     rbDisk: Result    := FilterBlurDisk(bmp, radius);
     rbNormal: Result  := FilterBlurRadialNormal(bmp, radius);
+    rbFast: Result  := FilterBlurFast(bmp, radius);
     rbPrecise: Result := FilterBlurRadialPrecise(bmp, radius / 10);
     else
       Result := nil;
@@ -364,106 +497,246 @@ end;
 function FilterBlur(bmp: TBGRADefaultBitmap;
   blurMask: TBGRADefaultBitmap): TBGRADefaultBitmap;
 var
-  yb, xb:      integer;
-  dx, dy, mindx, maxdx, mindy, maxdy, n, j: integer;
-  a_pixels:    array of TBGRAPixel;
-  weights:     array of integer;
-  sumR, sumG, sumB, sumA, Adiv, RGBdiv: cardinal;
-  RGBweight:   byte;
-  tempPixel, refPixel: TBGRAPixel;
-  shapeMatrix: array of array of byte;
-  pdest, psrc: PBGRAPixel;
-  blurOfs:     TPoint;
-  bounds:      TRect;
-begin
-  blurOfs := point(blurMask.Width shr 1, blurMask.Height shr 1);
+  maskWidth,maskHeight: integer;
+  blurOfs:      TPoint;
+  PixelWeight:  array of integer;
+  PixelOfs:     array of TPoint;
+  PixelArrayLineStart: array of integer;
+  DiffPixelWeight:  array of integer;
+  DiffPixelOfs:     array of TPoint;
+  DiffPixelArrayLineStart: array of integer;
 
-  setlength(shapeMatrix, blurMask.Width, blurMask.Height);
-  n := 0;
-  for yb := 0 to blurMask.Height - 1 do
-    for xb := 0 to blurMask.Width - 1 do
+  procedure LoadMask;
+  var x,y,n: integer;
+      tempWeight: integer;
+      diffMask: array of array of integer;
+  begin
+    blurOfs := point(blurMask.Width shr 1, blurMask.Height shr 1);
+
+    maskWidth := blurMask.Width;
+    maskHeight := blurMask.Height;
+    n := 0;
+    for y := 0 to maskHeight - 1 do
+      for x := 0 to maskWidth - 1 do
+        if blurMask.GetPixel(x, y).red <> 0 then Inc(n);
+
+    setlength(diffMask, maskHeight, maskWidth+1);
+    for y := 0 to maskHeight - 1 do
+      for x := 0 to maskWidth do
+        diffMask[y,x] := 0;
+
+    setlength(PixelWeight, n);
+    setlength(PixelOfs, n);
+    setlength(PixelArrayLineStart, maskHeight+1);
+    n := 0;
+    for y := 0 to maskHeight - 1 do
     begin
-      shapeMatrix[yb, xb] := blurMask.GetPixel(xb, yb).red;
-      if shapeMatrix[yb, xb] <> 0 then
-        Inc(n);
-    end;
+      PixelArrayLineStart[y] := n;
+      for x := 0 to maskWidth - 1 do
+      begin
+        tempWeight := blurMask.GetPixel(x, y).red;
+        diffMask[y,x] -= tempWeight;
+        diffMask[y,x+1] += tempWeight;
 
-  setlength(a_pixels, n);
-  setlength(weights, n);
+        if tempWeight <> 0 then
+        begin
+          PixelWeight[n] := tempWeight;
+          PixelOfs[n] := Point(x,y);
+          Inc(n);
+        end;
+      end;
+    end;
+    PixelArrayLineStart[maskHeight] := n;
+
+    n := 0;
+    for y := 0 to maskHeight - 1 do
+      for x := 0 to maskWidth do
+        if diffMask[y,x] <> 0 then Inc(n);
+
+    setlength(DiffPixelWeight, n);
+    setlength(DiffPixelOfs, n);
+    setlength(DiffPixelArrayLineStart, maskHeight+1);
+    n := 0;
+    for y := 0 to maskHeight - 1 do
+    begin
+      DiffPixelArrayLineStart[y] := n;
+      for x := 0 to maskWidth do
+      begin
+        tempWeight := diffMask[y,x];
+        if tempWeight <> 0 then
+        begin
+          DiffPixelWeight[n] := tempWeight;
+          DiffPixelOfs[n] := Point(x-1,y);
+          Inc(n);
+        end;
+      end;
+    end;
+    DiffPixelArrayLineStart[maskHeight] := n;
+  end;
+
+var
+  curScans: array of PBGRAPixel;
+  bounds: TRect;
+
+  {procedure ShowCurScans;
+  var str: string;
+    i: Integer;
+  begin
+    str := '';
+    for i := 0 to high(curScans) do
+    begin
+      if i <> 0 then str += ', ';
+      if curScans[i]=nil then str += 'nil' else
+        str += 'bmp['+inttostr(curScans[i]-bmp.Data)+']';
+    end;
+    ShowMessage(str);
+  end;}
+
+  function PrepareScan: boolean;
+  var
+    bmpY: integer;
+    y   : Integer;
+  begin
+    //evaluate required bounds
+    bounds := bmp.GetImageBounds;
+    if (bounds.Right <= bounds.Left) or (bounds.Bottom <= Bounds.Top) then
+    begin
+      result := false;
+      exit;
+    end;
+    bounds.Left   := max(0, bounds.Left - blurOfs.X);
+    bounds.Top    := max(0, bounds.Top - blurOfs.Y);
+    bounds.Right  := min(bmp.Width, bounds.Right + maskWidth - 1 - blurOfs.X);
+    bounds.Bottom := min(bmp.Height, bounds.Bottom + maskHeight - 1 - blurOfs.Y);
+
+    setlength(curScans, maskHeight);
+    for y := 0 to maskHeight-1 do
+    begin
+      bmpY := y+bounds.Top-blurOfs.Y;
+      if (bmpY < 0) or (bmpY >= bmp.Height) then
+        curScans[y] := nil else
+          curScans[y] := bmp.ScanLine[bmpY];
+    end;
+    //ShowCurScans;
+    result := true;
+  end;
+
+  procedure ShiftScan(NewY: integer);
+  var y: integer;
+  begin
+    for y := 0 to maskHeight-2 do
+     curScans[y] := curScans[y+1];
+
+    if newY >= bmp.Height then
+      curScans[maskHeight-1] := nil
+    else
+      curScans[maskHeight-1] := bmp.ScanLine[newY];
+    //ShowCurScans;
+  end;
+
+var
+  yb, xb: integer;
+  mindy, maxdy, n: integer;
+  bmpWidth,bmpX: integer;
+  sumR, sumG, sumB, sumA, Adiv, RGBdiv : int64;
+  pixMaskAlpha, maskAlpha: integer;
+  tempPixel: TBGRAPixel;
+  pdest : PBGRAPixel;
+  pt: TPoint;
+
+  function clampByte(value: integer): byte; inline;
+  begin
+    if value < 0 then result := 0 else
+    if value > 255 then result := 255 else
+      result := value;
+  end;
+
+begin
+  LoadMask;
 
   Result := bmp.NewBitmap(bmp.Width, bmp.Height);
-  bounds := bmp.GetImageBounds;
-  if (bounds.Right <= bounds.Left) or (bounds.Bottom <= Bounds.Top) then
-    exit;
-  bounds.Left   := max(0, bounds.Left - blurOfs.X);
-  bounds.Top    := max(0, bounds.Top - blurOfs.Y);
-  bounds.Right  := min(bmp.Width, bounds.Right + blurMask.Width - 1 - blurOfs.X);
-  bounds.Bottom := min(bmp.Height, bounds.Bottom + blurMask.Height - 1 - blurOfs.Y);
+  if not PrepareScan then exit; //nothing to do
 
+  bmpWidth := bmp.Width;
   for yb := bounds.Top to bounds.Bottom - 1 do
   begin
     pdest := Result.ScanLine[yb] + bounds.Left;
+    mindy := max(-blurOfs.Y, -yb);
+    maxdy := min(blurMask.Height - 1 - blurOfs.Y, bmp.Height - 1 - yb);
+
     for xb := bounds.Left to Bounds.Right - 1 do
     begin
-      n     := 0;
-      mindx := max(-blurOfs.X, -xb);
-      mindy := max(-blurOfs.Y, -yb);
-      maxdx := min(blurMask.Width - 1 - blurOfs.X, bmp.Width - 1 - xb);
-      maxdy := min(blurMask.Height - 1 - blurOfs.Y, bmp.Height - 1 - yb);
-      for dy := mindy to maxdy do
+      if xb = bounds.Left then //normal sum
       begin
-        psrc := bmp.scanline[yb + dy] + (xb + mindx);
-        for dx := mindx to maxdx do
+        sumR   := 0;
+        sumG   := 0;
+        sumB   := 0;
+        sumA   := 0;
+        Adiv   := 0;
+        RGBdiv := 0;
+
+        for n := PixelArrayLineStart[mindy+blurOfs.Y] to PixelArrayLineStart[maxdy+blurOfs.Y+1]-1 do
         begin
-          j := shapeMatrix[dy + blurOfs.Y, dx + blurOfs.X];
-          if j <> 0 then
+          pt := PixelOfs[n];
+          bmpX := xb-blurOfs.X+pt.x;
+          if (bmpX >= 0) and (bmpX < bmpWidth) then
           begin
-            a_pixels[n] := psrc^;
-            weights[n]  := (a_pixels[n].alpha * j + 127) shr 8;
-            Inc(n);
+            tempPixel := (curScans[pt.y]+bmpX)^;
+            maskAlpha := PixelWeight[n];
+            pixMaskAlpha := maskAlpha * tempPixel.alpha;
+            {$hints off}
+            sumR    += tempPixel.red * pixMaskAlpha;
+            sumG    += tempPixel.green * pixMaskAlpha;
+            sumB    += tempPixel.blue * pixMaskAlpha;
+            {$hints on}
+            RGBdiv  += pixMaskAlpha;
+            sumA    += pixMaskAlpha;
+            Adiv    += maskAlpha;
           end;
-          Inc(psrc);
+        end;
+      end else  //diff
+      begin
+        for n := DiffPixelArrayLineStart[mindy+blurOfs.Y] to DiffPixelArrayLineStart[maxdy+blurOfs.Y+1]-1 do
+        begin
+          pt := DiffPixelOfs[n];
+          bmpX := xb-blurOfs.X+pt.x;
+          if (bmpX >= 0) and (bmpX < bmpWidth) then
+          begin
+            tempPixel := (curScans[pt.y]+bmpX)^;
+            maskAlpha := DiffPixelWeight[n];
+            pixMaskAlpha := maskAlpha * tempPixel.alpha;
+            {$hints off}
+            sumR    += tempPixel.red * pixMaskAlpha;
+            sumG    += tempPixel.green * pixMaskAlpha;
+            sumB    += tempPixel.blue * pixMaskAlpha;
+            {$hints on}
+            RGBdiv  += pixMaskAlpha;
+            sumA    += pixMaskAlpha;
+            Adiv    += maskAlpha;
+          end;
         end;
       end;
-      sumR   := 0;
-      sumG   := 0;
-      sumB   := 0;
-      sumA   := 0;
-      Adiv   := 0;
-      RGBdiv := 0;
 
-       {$hints off}
-      for j := 0 to n - 1 do
-      begin
-        tempPixel := a_pixels[j];
-        RGBweight := (weights[j] * tempPixel.alpha + 128) div 255;
-        sumR      += tempPixel.red * RGBweight;
-        sumG      += tempPixel.green * RGBweight;
-        sumB      += tempPixel.blue * RGBweight;
-        RGBdiv    += RGBweight;
-        sumA      += tempPixel.alpha;
-        Adiv      += 1;
-      end;
-       {$hints on}
-
-      if (Adiv = 0) or (RGBdiv = 0) then
-        refPixel := BGRAPixelTransparent
+      if (Adiv <= 0) or (RGBdiv <= 0) then
+        tempPixel := BGRAPixelTransparent
       else
       begin
-        refPixel.alpha := (sumA + Adiv shr 1) div Adiv;
-        if refPixel.alpha = 0 then
-          refPixel := BGRAPixelTransparent
+        tempPixel.alpha := (sumA + Adiv shr 1) div Adiv;
+        if tempPixel.alpha = 0 then
+          tempPixel := BGRAPixelTransparent
         else
         begin
-          refPixel.red   := (sumR + RGBdiv shr 1) div RGBdiv;
-          refPixel.green := (sumG + RGBdiv shr 1) div RGBdiv;
-          refPixel.blue  := (sumB + RGBdiv shr 1) div RGBdiv;
+          tempPixel.red   := clampByte((sumR + RGBdiv shr 1) div RGBdiv);
+          tempPixel.green := clampByte((sumG + RGBdiv shr 1) div RGBdiv);
+          tempPixel.blue  := clampByte((sumB + RGBdiv shr 1) div RGBdiv);
         end;
       end;
 
-      pdest^ := refPixel;
+      pdest^ := tempPixel;
       Inc(pdest);
     end;
+
+    ShiftScan(yb-blurOfs.Y+maskHeight);
   end;
   Result.InvalidateBitmap;
 end;
@@ -474,7 +747,7 @@ var
   dx, dy: single;
   idx1, idy1, idx2, idy2, idx3, idy3, idx4, idy4: integer;
   w:      array[1..4] of single;
-  iw:     integer;
+  iw:     cardinal;
   c:      array[0..4] of TBGRAPixel;
 
   i:     integer;

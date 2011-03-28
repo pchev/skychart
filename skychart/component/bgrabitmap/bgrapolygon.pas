@@ -9,6 +9,7 @@ uses
 
 type
   ArrayOfSingle = array of single;
+  ArrayOfInteger = array of integer;
 
   { TFillShapeInfo }
 
@@ -16,31 +17,43 @@ type
     function GetBounds: TRect; virtual;
     function NbMaxIntersection: integer; virtual;
     procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
-      var nbInter: integer); virtual;
+      var winding: arrayOfInteger; var nbInter: integer); virtual;
   end;
 
 procedure FillShapeAntialias(bmp: TBGRADefaultBitmap; shapeInfo: TFillShapeInfo;
-  c: TBGRAPixel; EraseMode: boolean);
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 
 type
+  TPolySlice = record
+    y1,y2: single;
+    segments: array of record
+                y1,x1: single;
+                slope: single;
+                winding: integer;
+              end;
+  end;
+
   { TFillPolyInfo }
 
   TFillPolyInfo = class(TFillShapeInfo)
   private
     FPoints:      array of TPointF;
     FSlopes:      array of single;
-    FEmptyPt, FChangedir: array of boolean;
+    FEmptyPt:     array of boolean;
     FNext, FPrev: array of integer;
+
+    FSlices:   array of TPolySlice;
+    FCurSlice: integer;
   public
     constructor Create(points: array of TPointF);
     function GetBounds: TRect; override;
     function NbMaxIntersection: integer; override;
     procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
-      var nbInter: integer); override;
+      var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
 procedure FillPolyAntialias(bmp: TBGRADefaultBitmap; points: array of TPointF;
-  c: TBGRAPixel; EraseMode: boolean);
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 
 type
   { TFillEllipseInfo }
@@ -49,11 +62,12 @@ type
   private
     FX, FY, FRX, FRY: single;
   public
+    WindingFactor: integer;
     constructor Create(x, y, rx, ry: single);
     function GetBounds: TRect; override;
     function NbMaxIntersection: integer; override;
     procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
-      var nbInter: integer); override;
+      var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
 procedure FillEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry: single;
@@ -70,30 +84,267 @@ type
     function GetBounds: TRect; override;
     function NbMaxIntersection: integer; override;
     procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
-      var nbInter: integer); override;
+      var winding: arrayOfInteger; var nbInter: integer); override;
     destructor Destroy; override;
   end;
 
 procedure BorderEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry, w: single;
   c: TBGRAPixel; EraseMode: boolean);
 
+type
+  { TFillRoundRectangleInfo }
+
+  TFillRoundRectangleInfo = class(TFillShapeInfo)
+  private
+    FX1, FY1, FX2, FY2, FRX, FRY: single;
+    FOptions: TRoundRectangleOptions;
+  public
+    WindingFactor: integer;
+    constructor Create(x1, y1, x2, y2, rx, ry: single; options: TRoundRectangleOptions);
+    function GetBounds: TRect; override;
+    function NbMaxIntersection: integer; override;
+    procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
+      var winding: arrayOfInteger; var nbInter: integer); override;
+  end;
+
+procedure FillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry: single;
+  options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
+
+type
+  { TFillBorderRoundRectInfo }
+
+  TFillBorderRoundRectInfo = class(TFillShapeInfo)
+    innerBorder, outerBorder: TFillRoundRectangleInfo;
+    constructor Create(x1, y1, x2, y2, rx, ry, w: single; options: TRoundRectangleOptions);
+    function GetBounds: TRect; override;
+    function NbMaxIntersection: integer; override;
+    procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
+      var winding: arrayOfInteger; var nbInter: integer); override;
+    destructor Destroy; override;
+  end;
+
+procedure BorderRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry, w: single;
+  options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
+
+procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry, w: single;
+  options: TRoundRectangleOptions; bordercolor,fillcolor: TBGRAPixel; EraseMode: boolean);
+
+{----------------------- Spline ------------------}
+
+function Spline(y0, y1, y2, y3: single; t: single): single;
+function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
+function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
+procedure BGRARoundRectAliased(dest: TBGRADefaultBitmap; X1, Y1, X2, Y2: integer;
+  RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
+
 implementation
 
 uses Math, bgrablend;
 
+procedure BGRARoundRectAliased(dest: TBGRADefaultBitmap; X1, Y1, X2, Y2: integer;
+  RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
+var
+  CX, CY, CX1, CY1, A, B, NX, NY: single;
+  X, Y, EX, EY: integer;
+  LX1, LY1: integer;
+  LX2, LY2: integer;
+  DivSqrA, DivSqrB: single;
+  I, J, S: integer;
+  EdgeList: array of TPoint;
+  temp:   integer;
+  LX, LY: integer;
+
+  procedure AddEdge(X, Y: integer);
+  begin
+    if (EdgeList[Y].X = -1) or (X < EdgeList[Y].X) then
+      EdgeList[Y].X := X;
+    if (EdgeList[Y].Y = -1) or (X > EdgeList[Y].Y) then
+      EdgeList[Y].Y := X;
+  end;
+
+begin
+  if (x1 > x2) then
+  begin
+    temp := x1;
+    x1   := x2;
+    x2   := temp;
+  end;
+  if (y1 > y2) then
+  begin
+    temp := y1;
+    y1   := y2;
+    y2   := temp;
+  end;
+  if (x2 - x1 <= 0) or (y2 - y1 <= 0) then
+    exit;
+  LX := x2 - x1 - RX;
+  LY := y2 - y1 - RY;
+  Dec(x2);
+  Dec(y2);
+
+  if (X1 = X2) and (Y1 = Y2) then
+  begin
+    dest.DrawPixel(X1, Y1, BorderColor);
+    Exit;
+  end;
+
+  if (X2 - X1 = 1) or (Y2 - Y1 = 1) then
+  begin
+    dest.FillRect(X1, Y1, X2 + 1, Y2 + 1, BorderColor, dmDrawWithTransparency);
+    Exit;
+  end;
+
+  if (LX > X2 - X1) or (LY > Y2 - Y1) then
+  begin
+    dest.Rectangle(X1, Y1, X2 + 1, Y2 + 1, BorderColor, dmDrawWithTransparency);
+    dest.FillRect(X1 + 1, Y1 + 1, X2, Y2, FillColor, dmDrawWithTransparency);
+    Exit;
+  end;
+
+  SetLength(EdgeList, Ceil((Y2 - Y1 + 1) / 2));
+  for I := 0 to Pred(High(EdgeList)) do
+    EdgeList[I] := Point(-1, -1);
+  EdgeList[High(EdgeList)] := Point(0, 0);
+
+  A  := (X2 - X1 + 1 - LX) / 2;
+  B  := (Y2 - Y1 + 1 - LY) / 2;
+  CX := (X2 + X1 + 1) / 2;
+  CY := (Y2 + Y1 + 1) / 2;
+
+  CX1 := X2 + 1 - A - Floor(CX);
+  CY1 := Y2 + 1 - B - Floor(CY);
+
+  EX := Floor(Sqr(A) / Sqrt(Sqr(A) + Sqr(B)) + Frac(A));
+  EY := Floor(Sqr(B) / Sqrt(Sqr(A) + Sqr(B)) + Frac(B));
+
+  DivSqrA := 1 / Sqr(A);
+  DivSqrB := 1 / Sqr(B);
+
+  NY := B;
+  AddEdge(Floor(CX1), Round(CY1 + B) - 1);
+  for X := 1 to Pred(EX) do
+  begin
+    NY := B * Sqrt(1 - Sqr(X + 0.5 - Frac(A)) * DivSqrA);
+
+    AddEdge(Floor(CX1) + X, Round(CY1 + NY) - 1);
+  end;
+
+  LX1 := Floor(CX1) + Pred(EX);
+  LY1 := Round(CY1 + NY) - 1;
+
+  NX := A;
+  AddEdge(Round(CX1 + A) - 1, Floor(CY1));
+  for Y := 1 to Pred(EY) do
+  begin
+    NX := A * Sqrt(1 - Sqr(Y + 0.5 - Frac(B)) * DivSqrB);
+
+    AddEdge(Round(CX1 + NX) - 1, Floor(CY1) + Y);
+  end;
+
+  LX2 := Round(CX1 + NX) - 1;
+  LY2 := Floor(CY1) + Pred(EY);
+
+  if Abs(LX1 - LX2) > 1 then
+  begin
+    if Abs(LY1 - LY2) > 1 then
+      AddEdge(LX1 + 1, LY1 - 1)
+    else
+      AddEdge(LX1 + 1, LY1);
+  end
+  else
+  if Abs(LY1 - LY2) > 1 then
+    AddEdge(LX2, LY1 - 1);
+
+  for I := 0 to High(EdgeList) do
+  begin
+    if EdgeList[I].X = -1 then
+      EdgeList[I] := Point(Round(CX1 + A) - 1, Round(CX1 + A) - 1)
+    else
+      Break;
+  end;
+
+  for J := 0 to High(EdgeList) do
+  begin
+    if (J = 0) and (Frac(CY) > 0) then
+    begin
+      for I := EdgeList[J].X to EdgeList[J].Y do
+      begin
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
+        dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
+      end;
+
+      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J, Floor(CX) +
+        Pred(EdgeList[J].X), FillColor);
+    end
+    else
+    if (J = High(EdgeList)) then
+    begin
+      if Frac(CX) > 0 then
+        S := -EdgeList[J].Y
+      else
+        S := -Succ(EdgeList[J].Y);
+
+      for I := S to EdgeList[J].Y do
+      begin
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
+        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
+      end;
+    end
+    else
+    begin
+      for I := EdgeList[J].X to EdgeList[J].Y do
+      begin
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
+        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
+        if Floor(CX) + I <> Ceil(CX) - Succ(I) then
+        begin
+          dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
+          dest.DrawPixel(Ceil(CX) - Succ(I), Ceil(CY) - Succ(J), BorderColor);
+        end;
+      end;
+
+      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J,
+        Floor(CX) + Pred(EdgeList[J].X), FillColor);
+      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Ceil(CY) - Succ(J),
+        Floor(CX) + Pred(EdgeList[J].X), FillColor);
+    end;
+  end;
+end;
+
 procedure FillShapeAntialias(bmp: TBGRADefaultBitmap; shapeInfo: TFillShapeInfo;
-  c: TBGRAPixel; EraseMode: boolean);
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 const
   precision = 11;
+var
+  inter:   array of single;
+  winding: array of integer;
+  nbInter: integer;
+
+  procedure ConvertFromNonZeroWinding; inline;
+  var windingSum,prevSum,i,nbAlternate: integer;
+  begin
+    windingSum := 0;
+    nbAlternate := 0;
+    for i := 0 to nbInter-1 do
+    begin
+      prevSum := windingSum;
+      windingSum += winding[i];
+      if (windingSum = 0) xor (prevSum = 0) then
+      begin
+        inter[nbAlternate] := inter[i];
+        inc(nbAlternate);
+      end;
+    end;
+    nbInter := nbAlternate;
+  end;
+
 var
   bounds: TRect;
   miny, maxy, minx, maxx: integer;
 
-  inter:   array of single;
-  nbInter: integer;
   density: packed array of single;
 
-  xb, yb, yc, i, j: integer;
+  xb, yb, yc, i, j, tempInt: integer;
 
   temp, cury, x1, x2: single;
   ix1, ix2: integer;
@@ -128,6 +379,7 @@ begin
     exit;
 
   setlength(inter, shapeInfo.NbMaxIntersection);
+  setlength(winding, length(inter));
   setlength(density, maxx - minx + 2); //one more for safety
 
   //vertical scan
@@ -144,7 +396,7 @@ begin
 
       //find intersections
       nbinter := 0;
-      shapeInfo.ComputeIntersection(cury, inter, nbInter);
+      shapeInfo.ComputeIntersection(cury, inter, winding, nbInter);
       if nbinter = 0 then
         continue;
 
@@ -157,9 +409,13 @@ begin
           temp     := inter[j - 1];
           inter[j - 1] := inter[j];
           inter[j] := temp;
+          tempInt    := winding[j - 1];
+          winding[j - 1] := winding[j];
+          winding[j] := tempInt;
           Dec(j);
         end;
       end;
+      if NonZeroWinding then ConvertFromNonZeroWinding;
 
       //fill density
       for i := 0 to nbinter div 2 - 1 do
@@ -224,7 +480,7 @@ begin
 end;
 
 procedure FillPolyAntialias(bmp: TBGRADefaultBitmap; points: array of TPointF;
-  c: TBGRAPixel; EraseMode: boolean);
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 var
   info: TFillPolyInfo;
 begin
@@ -232,7 +488,7 @@ begin
     exit;
 
   info := TFillPolyInfo.Create(points);
-  FillShapeAntialias(bmp, info, c, EraseMode);
+  FillShapeAntialias(bmp, info, c, EraseMode, NonZeroWinding);
   info.Free;
 end;
 
@@ -245,7 +501,7 @@ begin
     exit;
 
   info := TFillEllipseInfo.Create(x, y, rx, ry);
-  FillShapeAntialias(bmp, info, c, EraseMode);
+  FillShapeAntialias(bmp, info, c, EraseMode, False);
   info.Free;
 end;
 
@@ -257,7 +513,7 @@ begin
   if (rx = 0) or (ry = 0) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
-  FillShapeAntialias(bmp, info, c, EraseMode);
+  FillShapeAntialias(bmp, info, c, EraseMode, False);
   info.Free;
 end;
 
@@ -275,19 +531,29 @@ end;
 
 {$hints off}
 procedure TFillShapeInfo.ComputeIntersection(cury: single;
-  var inter: ArrayOfSingle; var nbInter: integer);
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
 begin
 
 end;
 
 {$hints on}
 
+function ComputeWinding(y1,y2: single): integer;
+begin
+    if y2 > y1 then result := 1 else
+    if y2 < y1 then result := -1 else
+      result := 0;
+end;
+
 { TFillPolyInfo }
 
 constructor TFillPolyInfo.Create(points: array of TPointF);
 var
-  i, j: integer;
+  i, j, k: integer;
   First, cur, nbP: integer;
+  yList: array of single;
+  nbYList,nbSeg: integer;
+  Temp: Single;
 begin
   setlength(FPoints, length(points));
   nbP := 0;
@@ -339,7 +605,6 @@ begin
       FPrev[FNext[i]] := i;
 
   setlength(FSlopes, length(FPoints));
-  setlength(FChangedir, length(FPoints));
 
   //compute slopes
   for i := 0 to high(FPoints) do
@@ -351,17 +616,89 @@ begin
         FSlopes[i] := (FPoints[j].x - FPoints[i].x) / (FPoints[j].y - FPoints[i].y)
       else
         FSlopes[i] := EmptySingle;
-
-      FChangedir[i] := ((FPoints[i].y - FPoints[j].y > 0) and
-        (FPoints[FPrev[i]].y - FPoints[i].y < 0)) or
-        ((FPoints[i].y - FPoints[j].y < 0) and (FPoints[FPrev[i]].y - FPoints[i].y > 0));
     end
     else
-    begin
       FSlopes[i]    := EmptySingle;
-      FChangedir[i] := False;
-    end;
 
+  //slice
+  nbYList:= length(FPoints);
+  setlength(YList, nbYList);
+  for i := 0 to high(FPoints) do
+    YList[i] := FPoints[i].y;
+
+  for i := 1 to nbYList-1 do
+  begin
+    j := i;
+    while (j>0) and (YList[j-1]> YList[j]) do
+    begin
+      Temp := YList[j];
+      YList[j] := YList[j-1];
+      YList[j-1] := Temp;
+      dec(j);
+    end;
+  end;
+
+  for i := nbYList-1 downto 1 do
+    if YList[i-1] = YList[i] then
+    begin
+      for j := i to nbYList-2 do
+        YList[j] := YList[j+1];
+      dec(nbYList);
+    end;
+  setlength(FSlices, nbYList-1);
+  for i := 0 to high(FSlices) do
+  begin
+    FSlices[i].y1 := YList[i];
+    FSlices[i].y2 := YList[i+1];
+    nbSeg := 0;
+    for j := 0 to high(FSlopes) do
+      if FSlopes[j]<>EmptySingle then
+      begin
+        k := FNext[j];
+        if ((FPoints[j].y < FSlices[i].y2) and
+           (FPoints[k].y > FSlices[i].y1)) or
+           ((FPoints[k].y < FSlices[i].y2) and
+           (FPoints[j].y > FSlices[i].y1)) then
+        begin
+          inc(NbSeg);
+        end;
+      end;
+    setlength(FSlices[i].segments, nbSeg);
+    nbSeg := 0;
+    for j := 0 to high(FSlopes) do
+      if FSlopes[j]<>EmptySingle then
+      begin
+        k := FNext[j];
+        if ((FPoints[j].y < FSlices[i].y2) and
+           (FPoints[k].y > FSlices[i].y1)) or
+           ((FPoints[k].y < FSlices[i].y2) and
+           (FPoints[j].y > FSlices[i].y1)) then
+        begin
+          with FSlices[i].segments[nbSeg] do
+          begin
+            x1 := (FSlices[i].y1 - FPoints[j].y) * FSlopes[j] + FPoints[j].x;
+            y1 := FSlices[i].y1;
+            slope := FSlopes[j];
+            winding := ComputeWinding(FPoints[j].y,FPoints[k].y);
+          end;
+          inc(NbSeg);
+        end else
+        if (FPoints[j].y=FPoints[k].y) and
+           (FPoints[j].y >= FSlices[i].y1) and
+           (FPoints[j].y <= FSlices[i].y2) then
+        begin
+          with FSlices[i].segments[nbSeg] do
+          begin
+            x1 := FPoints[j].x;
+            y1 := FPoints[j].y;
+            slope := 0;
+            winding := ComputeWinding(FPoints[FPrev[j]].y,FPoints[j].y);
+          end;
+          inc(NbSeg);
+        end;
+      end;
+  end;
+  FCurSlice := 0;
 end;
 
 function TFillPolyInfo.GetBounds: TRect;
@@ -396,33 +733,24 @@ begin
 end;
 
 procedure TFillPolyInfo.ComputeIntersection(cury: single;
-  var inter: ArrayOfSingle; var nbInter: integer);
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
 var
-  i, j: integer;
+  j: integer;
 begin
-  for i := 0 to high(FPoints) do
-    if not FEmptyPt[i] then
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to high(segments) do
     begin
-      if cury = FPoints[i].y then
-      begin
-        if not FChangedir[i] then
-        begin
-          inter[nbinter] := FPoints[i].x;
-          Inc(nbinter);
-        end;
-      end
-      else
-      if (FSlopes[i] <> EmptySingle) then
-      begin
-        j := FNext[i];
-        if (((cury >= FPoints[i].y) and (cury < FPoints[j].y)) or
-          ((cury > FPoints[j].y) and (cury <= FPoints[i].y))) then
-        begin
-          inter[nbinter] := (cury - FPoints[i].y) * FSlopes[i] + FPoints[i].x;
-          Inc(nbinter);
-        end;
-      end;
+      inter[nbinter] := (cury - segments[j].y1) * segments[j].slope + segments[j].x1;
+      winding[nbinter] := segments[j].winding;
+      Inc(nbinter);
     end;
+  end;
 end;
 
 { TFillEllipseInfo }
@@ -433,6 +761,7 @@ begin
   FY  := y + 0.5;
   FRX := abs(rx);
   FRY := abs(ry);
+  WindingFactor := 1;
 end;
 
 function TFillEllipseInfo.GetBounds: TRect;
@@ -446,7 +775,7 @@ begin
 end;
 
 procedure TFillEllipseInfo.ComputeIntersection(cury: single;
-  var inter: ArrayOfSingle; var nbInter: integer);
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
 var
   d: single;
 begin
@@ -455,8 +784,10 @@ begin
   begin
     d := sqrt(1 - d) * FRX;
     inter[nbinter] := FX - d;
+    winding[nbinter] := -windingFactor;
     Inc(nbinter);
     inter[nbinter] := FX + d;
+    winding[nbinter] := windingFactor;
     Inc(nbinter);
   end;
 end;
@@ -471,7 +802,10 @@ begin
     ry := -ry;
   outerBorder := TFillEllipseInfo.Create(x, y, rx + w / 2, ry + w / 2);
   if (rx > w / 2) and (ry > w / 2) then
-    innerBorder := TFillEllipseInfo.Create(x, y, rx - w / 2, ry - w / 2)
+  begin
+    innerBorder := TFillEllipseInfo.Create(x, y, rx - w / 2, ry - w / 2);
+    innerBorder.WindingFactor := -1;
+  end
   else
     innerBorder := nil;
 end;
@@ -487,11 +821,11 @@ begin
 end;
 
 procedure TFillBorderEllipseInfo.ComputeIntersection(cury: single;
-  var inter: ArrayOfSingle; var nbInter: integer);
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
 begin
-  outerBorder.ComputeIntersection(cury, inter, nbInter);
+  outerBorder.ComputeIntersection(cury, inter, winding, nbInter);
   if innerBorder <> nil then
-    innerBorder.ComputeIntersection(cury, inter, nbInter);
+    innerBorder.ComputeIntersection(cury, inter, winding, nbInter);
 end;
 
 destructor TFillBorderEllipseInfo.Destroy;
@@ -502,5 +836,323 @@ begin
   inherited Destroy;
 end;
 
-end.
+{----------- Spline ---------------------------}
 
+procedure FillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2,
+  rx, ry: single; options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
+var
+  info: TFillRoundRectangleInfo;
+begin
+  if (x1 = x2) or (y1 = y2) then exit;
+  info := TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry, options);
+  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  info.Free;
+end;
+
+procedure BorderRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2,
+  y2, rx, ry, w: single; options: TRoundRectangleOptions; c: TBGRAPixel;
+  EraseMode: boolean);
+var
+  info: TFillBorderRoundRectInfo;
+begin
+  if (rx = 0) or (ry = 0) then exit;
+  info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
+  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  info.Free;
+end;
+
+procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1,
+  x2, y2, rx, ry, w: single; options: TRoundRectangleOptions; bordercolor,
+  fillcolor: TBGRAPixel; EraseMode: boolean);
+var
+  info: TFillBorderRoundRectInfo;
+begin
+  if (rx = 0) or (ry = 0) then exit;
+  info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
+  FillShapeAntialias(bmp, info.innerBorder, fillcolor, EraseMode, False);
+  FillShapeAntialias(bmp, info, bordercolor, EraseMode, False);
+  info.Free;
+end;
+
+function Spline(y0, y1, y2, y3: single; t: single): single;
+var
+  a0, a1, a2, a3: single;
+  t2: single;
+begin
+  t2     := t * t;
+  a0     := y3 - y2 - y0 + y1;
+  a1     := y0 - y1 - a0;
+  a2     := y2 - y0;
+  a3     := y1;
+  Result := a0 * t * t2 + a1 * t2 + a2 * t + a3;
+end;
+
+function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
+
+  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
+  var
+    len: single;
+  begin
+    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
+    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
+    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
+    Result := round(sqrt(len) * 2);
+  end;
+
+var
+  i, j, nb, idx, pre: integer;
+  ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
+
+begin
+  if length(points) <= 2 then
+  begin
+    setlength(result,length(points));
+    for i := 0 to high(result) do
+      result[i] := points[i];
+    exit;
+  end;
+
+  nb := 1;
+  for i := 0 to high(points) do
+  begin
+    ptPrev2 := points[(i + length(points) - 1) mod length(points)];
+    ptPrev  := points[i];
+    ptNext  := points[(i + 1) mod length(points)];
+    ptNext2 := points[(i + 2) mod length(points)];
+    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+  end;
+
+  setlength(Result, nb);
+  Result[0] := points[0];
+  idx := 1;
+  for i := 0 to high(points) do
+  begin
+    ptPrev2 := points[(i + length(points) - 1) mod length(points)];
+    ptPrev  := points[i];
+    ptNext  := points[(i + 1) mod length(points)];
+    ptNext2 := points[(i + 2) mod length(points)];
+    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    for j := 1 to pre - 1 do
+    begin
+      Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
+        spline(ptPrev2.y, ptPrev.y, ptNext.y, ptNext2.y, j / pre));
+      Inc(idx);
+    end;
+    if pre <> 0 then
+    begin
+      Result[idx] := ptNext;
+      Inc(idx);
+    end;
+  end;
+end;
+
+function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
+
+  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
+  var
+    len: single;
+  begin
+    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
+    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
+    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
+    Result := round(sqrt(len) * 2);
+  end;
+
+var
+  i, j, nb, idx, pre: integer;
+  ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
+
+begin
+  if length(points) = 2 then
+  begin
+    setlength(Result, 2);
+    Result[0] := points[0];
+    Result[1] := points[1];
+    exit;
+  end;
+
+  nb := 1;
+  for i := 0 to high(points) - 1 do
+  begin
+    ptPrev2 := points[max(0, i - 1)];
+    ptPrev  := points[i];
+    ptNext  := points[i + 1];
+    ptNext2 := points[min(high(points), i + 2)];
+    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+  end;
+
+  setlength(Result, nb);
+  Result[0] := points[0];
+  idx := 1;
+  for i := 0 to high(points) - 1 do
+  begin
+    ptPrev2 := points[max(0, i - 1)];
+    ptPrev  := points[i];
+    ptNext  := points[i + 1];
+    ptNext2 := points[min(high(points), i + 2)];
+    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    for j := 1 to pre - 1 do
+    begin
+      Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
+        spline(ptPrev2.y, ptPrev.y, ptNext.y, ptNext2.y, j / pre));
+      Inc(idx);
+    end;
+    if pre <> 0 then
+    begin
+      Result[idx] := ptNext;
+      Inc(idx);
+    end;
+  end;
+end;
+
+{ TFillRoundRectangleInfo }
+
+constructor TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry: single; options: TRoundRectangleOptions);
+var
+  temp: Single;
+begin
+  if y1 > y2 then
+  begin
+    temp := y1;
+    y1 := y2;
+    y2 := temp;
+  end;
+  if x1 > x2 then
+  begin
+    temp := x1;
+    x1 := x2;
+    x2 := temp;
+  end;
+  FX1  := x1 + 0.5;
+  FY1  := y1 + 0.5;
+  FX2  := x2 + 0.5;
+  FY2  := y2 + 0.5;
+  FRX := abs(rx);
+  FRY := abs(ry);
+  FOptions:= options;
+  WindingFactor := 1;
+end;
+
+function TFillRoundRectangleInfo.GetBounds: TRect;
+begin
+  result := rect(floor(fx1),floor(fy1),floor(fx2)+1,floor(fy2)+1);
+end;
+
+function TFillRoundRectangleInfo.NbMaxIntersection: integer;
+begin
+  result := 2;
+end;
+
+procedure TFillRoundRectangleInfo.ComputeIntersection(cury: single;
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
+var
+  d,d2: single;
+begin
+  if (cury >= FY1) and (cury <= FY2) then
+  begin
+    if cury < FY1+FRY then
+    begin
+      d := abs((cury - (FY1+FRY)) / FRY);
+      d2 := sqrt(1 - sqr(d)) * FRX;
+
+      if rrTopLeftSquare in FOptions then
+        inter[nbinter] := FX1 else
+      if rrTopLeftBevel in FOptions then
+        inter[nbinter] := FX1 + d*FRX
+      else
+        inter[nbinter] := FX1 + FRX - d2;
+      winding[nbinter] := -windingFactor;
+      Inc(nbinter);
+
+      if rrTopRightSquare in FOptions then
+        inter[nbinter] := FX2 else
+      if rrTopRightBevel in FOptions then
+        inter[nbinter] := FX2 - d*FRX
+      else
+        inter[nbinter] := FX2 - FRX + d2;
+      winding[nbinter] := +windingFactor;
+      Inc(nbinter);
+    end else
+    if cury > FY2-FRY then
+    begin
+      d := abs((cury - (FY2-FRY)) / FRY);
+      d2 := sqrt(1 - sqr(d)) * FRX;
+
+      if rrBottomLeftSquare in FOptions then
+        inter[nbinter] := FX1 else
+      if rrBottomLeftBevel in FOptions then
+        inter[nbinter] := FX1 + d*FRX
+      else
+        inter[nbinter] := FX1 + FRX - d2;
+      winding[nbinter] := -windingFactor;
+      Inc(nbinter);
+
+      if rrBottomRightSquare in FOptions then
+        inter[nbinter] := FX2 else
+      if rrBottomRightBevel in FOptions then
+        inter[nbinter] := FX2 - d*FRX
+      else
+        inter[nbinter] := FX2 - FRX + d2;
+      winding[nbinter] := +windingFactor;
+      Inc(nbinter);
+    end else
+    begin
+      inter[nbinter] := FX1;
+      winding[nbinter] := -windingFactor;
+      Inc(nbinter);
+      inter[nbinter] := FX2;
+      winding[nbinter] := +windingFactor;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
+{ TFillBorderRoundRectInfo }
+
+constructor TFillBorderRoundRectInfo.Create(x1, y1, x2, y2, rx, ry, w: single; options: TRoundRectangleOptions);
+var rdiff: single;
+begin
+  if rx < 0 then
+    rx := -rx;
+  if ry < 0 then
+    ry := -ry;
+  rdiff := w*(sqrt(2)-1);
+  outerBorder := TFillRoundRectangleInfo.Create(x1-w/2,y1-w/2,x2+w/2,y2+w/2, rx+rdiff, ry+rdiff, options);
+  if (abs(x2-x1) > w) and (abs(y2-y1) > w) then
+  begin
+    if (rx-rdiff <= 0) or (ry-rdiff <= 0) then
+      innerBorder := TFillRoundRectangleInfo.Create(x1+w/2, y1+w/2, x2-w/2, y2-w/2, 0,0, options)
+    else
+      innerBorder := TFillRoundRectangleInfo.Create(x1+w/2, y1+w/2, x2-w/2, y2-w/2, rx-rdiff, ry-rdiff, options);
+    innerBorder.WindingFactor := -1;
+  end
+  else
+    innerBorder := nil;
+end;
+
+function TFillBorderRoundRectInfo.GetBounds: TRect;
+begin
+  result := outerBorder.GetBounds;
+end;
+
+function TFillBorderRoundRectInfo.NbMaxIntersection: integer;
+begin
+  Result := 4;
+end;
+
+procedure TFillBorderRoundRectInfo.ComputeIntersection(cury: single;
+  var inter: ArrayOfSingle; var winding: arrayOfInteger; var nbInter: integer);
+begin
+  outerBorder.ComputeIntersection(cury, inter, winding, nbInter);
+  if innerBorder <> nil then
+    innerBorder.ComputeIntersection(cury, inter, winding, nbInter);
+end;
+
+destructor TFillBorderRoundRectInfo.Destroy;
+begin
+  outerBorder.Free;
+  innerBorder.Free;
+  inherited Destroy;
+end;
+
+end.
