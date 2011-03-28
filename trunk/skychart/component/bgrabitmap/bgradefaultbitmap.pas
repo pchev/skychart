@@ -29,7 +29,7 @@ unit BGRADefaultBitmap;
 interface
 
 uses
-  Classes, SysUtils, Types, FPImage, Graphics, BGRABitmapTypes, GraphType;
+  Classes, SysUtils, Types, FPImage, Graphics, BGRABitmapTypes, GraphType, FPImgCanv;
 
 type
   TBGRADefaultBitmap = class;
@@ -45,13 +45,20 @@ type
     FFont: TFont;
     FFontHeight: integer;
     function GetCanvasAlphaCorrection: boolean;
+    function GetCustomPenStyle: TBGRAPenStyle;
     procedure SetCanvasAlphaCorrection(const AValue: boolean);
+    procedure SetCanvasDrawModeFP(const AValue: TDrawMode);
+    procedure SetCustomPenStyle(const AValue: TBGRAPenStyle);
+    procedure SetPenStyle(const AValue: TPenStyle);
     procedure UpdateFont;
     procedure SetFontHeight(AHeight: integer);
     function GetScanlineFast(y: integer): PBGRAPixel; inline;
   protected
     FBitmap:   TBitmap; //LCL bitmap object
     FRefCount: integer; //reference counter
+    FCanvasFP: TFPImageCanvas; //FreePascal drawing routines
+    FCustomPenStyle:  TBGRAPenStyle;
+    FPenStyle: TPenStyle;
 
     {Pixel data}
     FData:      PBGRAPixel;
@@ -59,12 +66,15 @@ type
     FDataModified: boolean; //if data image has changed
     FLineOrder: TRawImageLineOrder;
     FCanvasOpacity: byte;
+    FCanvasDrawModeFP: TDrawMode;
+    FCanvasPixelProcFP: procedure(x, y: integer; col: TBGRAPixel) of object;
     FAlphaCorrectionNeeded: boolean;
 
     function GetScanLine(y: integer): PBGRAPixel;
     //don't forget to call InvalidateBitmap after modifications
     function GetBitmap: TBitmap;
     function GetCanvas: TCanvas;
+    function GetCanvasFP: TFPImageCanvas;
     procedure DiscardBitmapChange; inline;
     procedure LoadFromRawImage(ARawImage: TRawImage; DefaultOpacity: byte;
       AlwaysReplaceAlpha: boolean = False);
@@ -86,6 +96,7 @@ type
     {resample}
     function FineResample(NewWidth, NewHeight: integer): TBGRADefaultBitmap;
     function SimpleStretch(NewWidth, NewHeight: integer): TBGRADefaultBitmap;
+    function OriginalTextSize(s: string): TSize;
 
     function CheckEmpty: boolean;
     function GetHasTransparentPixels: boolean;
@@ -103,6 +114,10 @@ type
     Caption:   string;
     FontName:  string;
     FontStyle: TFontStyles;
+    FontAntialias: Boolean;
+    LineCap:   TPenEndCap;
+    JoinStyle: TPenJoinStyle;
+    FillMode:  TFillMode;
 
     {Reference counter functions}
     function NewReference: TBGRADefaultBitmap;
@@ -124,6 +139,8 @@ type
 
     {Loading functions}
     procedure LoadFromFile(const filename: string);
+    procedure LoadFromStream(Str: TStream);
+    procedure LoadFromStream(Str: TStream; Handler: TFPCustomImageReader);
     procedure SaveToFile(const filename: string);
     constructor Create(AFilename: string);
     constructor Create(AStream: TStream);
@@ -155,22 +172,18 @@ type
 
     {Shapes}
     procedure DrawLine(x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean);
-    procedure DrawLineAntialias(x1, y1, x2, y2: integer; c: TBGRAPixel;
-      DrawLastPixel: boolean); overload;
-    procedure DrawPolyLineAntialias(points: array of TPoint; c: TBGRAPixel;
-      DrawLastPixel: boolean); overload;
-    procedure DrawLineAntialias(x1, y1, x2, y2: integer; c1, c2: TBGRAPixel;
-      dashLen: integer; DrawLastPixel: boolean); overload;
-    procedure DrawPolyLineAntialias(points: array of TPoint; c1, c2: TBGRAPixel;
-      dashLen: integer; DrawLastPixel: boolean); overload;
-    procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel;
-      w: single; Closed: boolean); overload;
-    procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel;
-      w: single; Closed: boolean); overload;
-    procedure DrawPolygonAntialias(points: array of TPointF; c: TBGRAPixel;
-      w: single); overload;
-    procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte;
-      w: single; Closed: boolean); overload;
+    procedure DrawLineAntialias(x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean); overload;
+    procedure DrawLineAntialias(x1, y1, x2, y2: integer; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean); overload;
+    procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single); overload;
+    procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single; Closed: boolean); overload;
+    procedure DrawPolyLineAntialias(points: array of TPoint; c: TBGRAPixel; DrawLastPixel: boolean); overload;
+    procedure DrawPolyLineAntialias(points: array of TPoint; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean); overload;
+    procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single); overload;
+    procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); overload;
+    procedure DrawPolygonAntialias(points: array of TPointF; c: TBGRAPixel; w: single); overload;
+    procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single); overload;
+    procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single; Closed: boolean); overload;
+    procedure ErasePolyLineAntialias(points: array of TPointF; alpha: byte; w: single); overload;
     procedure FillPolyAntialias(points: array of TPointF; c: TBGRAPixel);
     procedure ErasePolyAntialias(points: array of TPointF; alpha: byte);
     procedure EllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel; w: single);
@@ -188,11 +201,15 @@ type
       w: single); overload;
     procedure RectangleAntialias(x, y, x2, y2: single; c: TBGRAPixel;
       w: single; back: TBGRAPixel); overload;
+    procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; w: single; options: TRoundRectangleOptions = []);
+    procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; pencolor: TBGRAPixel; w: single; fillcolor: TBGRAPixel; options: TRoundRectangleOptions = []);
     procedure FillRect(r: TRect; c: TColor);
     procedure FillRect(r: TRect; c: TBGRAPixel; mode: TDrawMode);
     procedure FillRect(x, y, x2, y2: integer; c: TColor);
     procedure FillRect(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode);
     procedure FillRectAntialias(x, y, x2, y2: single; c: TBGRAPixel);
+    procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; options: TRoundRectangleOptions = []);
+    procedure EraseRoundRectAntialias(x,y,x2,y2,rx,ry: single; alpha: byte; options: TRoundRectangleOptions = []);
     procedure AlphaFillRect(x, y, x2, y2: integer; alpha: byte);
     procedure RoundRect(X1, Y1, X2, Y2: integer; RX, RY: integer;
       BorderColor, FillColor: TBGRAPixel);
@@ -205,8 +222,8 @@ type
     function TextSize(s: string): TSize;
 
     {Spline}
-    function ComputeClosedSpline(points: array of TPointF): ArrayOfTPointF;
-    function ComputeOpenedSpline(points: array of TPointF): ArrayOfTPointF;
+    function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
+    function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
 
     {Filling}
     procedure FillTransparent;
@@ -297,12 +314,16 @@ type
     property AverageColor: TColor Read GetAverageColor;
     property AveragePixel: TBGRAPixel Read GetAveragePixel;
     property LineOrder: TRawImageLineOrder Read FLineOrder;
+    property CanvasFP: TFPImageCanvas read GetCanvasFP;
+    property CanvasDrawModeFP: TDrawMode read FCanvasDrawModeFP write SetCanvasDrawModeFP;
     property Canvas: TCanvas Read GetCanvas;
     property CanvasOpacity: byte Read FCanvasOpacity Write SetCanvasOpacity;
     property CanvasAlphaCorrection: boolean
       Read GetCanvasAlphaCorrection Write SetCanvasAlphaCorrection;
 
     property FontHeight: integer Read FFontHeight Write SetFontHeight;
+    property PenStyle: TPenStyle read FPenStyle Write SetPenStyle;
+    property CustomPenStyle: TBGRAPenStyle read GetCustomPenStyle write SetCustomPenStyle;
   end;
 
 type
@@ -325,8 +346,10 @@ var
 implementation
 
 uses FPWritePng, Math, LCLIntf, LCLType, BGRAPolygon, BGRAResample,
-  BGRAFilters, BGRABlend, BGRAPaintNet,
+  BGRAFilters, BGRABlend, BGRAPaintNet, BGRAGradients, BGRAPen,
   FPReadPcx, FPWritePcx, FPReadXPM, FPWriteXPM;
+
+const FontAntialiasingLevel = 6;
 
 type
   TBitmapTracker = class(TBitmap)
@@ -374,6 +397,15 @@ begin
   Result := (FCanvasOpacity <> 0);
 end;
 
+function TBGRADefaultBitmap.GetCustomPenStyle: TBGRAPenStyle;
+var
+  i: Integer;
+begin
+  setlength(result,length(FCustomPenStyle));
+  for i := 0 to high(result) do
+    result[i] := FCustomPenStyle[i];
+end;
+
 procedure TBGRADefaultBitmap.SetCanvasAlphaCorrection(const AValue: boolean);
 begin
   if AValue then
@@ -385,14 +417,50 @@ begin
     FCanvasOpacity := 0;
 end;
 
+procedure TBGRADefaultBitmap.SetCanvasDrawModeFP(const AValue: TDrawMode);
+begin
+  FCanvasDrawModeFP := AValue;
+  Case AValue of
+  dmLinearBlend: FCanvasPixelProcFP := @FastBlendPixel;
+  dmDrawWithTransparency: FCanvasPixelProcFP := @DrawPixel;
+  else FCanvasPixelProcFP := @SetPixel;
+  end;
+end;
+
+procedure TBGRADefaultBitmap.SetCustomPenStyle(const AValue: TBGRAPenStyle);
+var
+  i: Integer;
+begin
+  setlength(FCustomPenStyle,length(AValue));
+  for i := 0 to high(FCustomPenStyle) do
+    FCustomPenStyle[i] := AValue[i];
+end;
+
+procedure TBGRADefaultBitmap.SetPenStyle(const AValue: TPenStyle);
+begin
+  Case AValue of
+  psSolid: CustomPenStyle := SolidPenStyle;
+  psDash: CustomPenStyle := DashPenStyle;
+  psDot: CustomPenStyle := DotPenStyle;
+  psDashDot: CustomPenStyle := DashDotPenStyle;
+  psDashDotDot: CustomPenStyle := DashDotDotPenStyle;
+  else CustomPenStyle := ClearPenStyle;
+  end;
+end;
+
 procedure TBGRADefaultBitmap.UpdateFont;
+var HeightFactor: integer;
 begin
   if FFont.Name <> FontName then
     FFont.Name := FontName;
   if FFont.Style <> FontStyle then
     FFont.Style := FontStyle;
-  if FFont.Height <> FFontHeight * FFontHeightSign then
-    FFont.Height := FFontHeight * FFontHeightSign;
+  if FontAntialias then
+    HeightFactor := FontAntialiasingLevel
+  else
+    HeightFactor := 1;
+  if FFont.Height <> FFontHeight * FFontHeightSign * HeightFactor then
+    FFont.Height := FFontHeight * FFontHeightSign * HeightFactor;
 end;
 
 procedure TBGRADefaultBitmap.SetFontHeight(AHeight: integer);
@@ -515,6 +583,7 @@ begin
   Init;
   inherited Create(ABitmap.Width, ABitmap.Height);
   LoadFromRawImage(ABitmap.RawImage,0);
+  If Empty then AlphaFill(255);
 end;
 
 constructor TBGRADefaultBitmap.Create(AWidth, AHeight: integer; Color: TColor);
@@ -534,7 +603,9 @@ end;
 destructor TBGRADefaultBitmap.Destroy;
 begin
   FreeData;
+  FFont.Free;
   FBitmap.Free;
+  FCanvasFP.Free;
   inherited Destroy;
 end;
 
@@ -556,7 +627,8 @@ procedure TBGRADefaultBitmap.Assign(Bitmap: TBitmap);
 begin
   DiscardBitmapChange;
   SetSize(Bitmap.Width, bitmap.Height);
-  GetImageFromCanvas(Bitmap.Canvas, 0, 0);
+  LoadFromRawImage(Bitmap.RawImage,0);
+  If Empty then AlphaFill(255);
 end;
 
 procedure TBGRADefaultBitmap.Assign(MemBitmap: TBGRADefaultBitmap);
@@ -569,6 +641,7 @@ end;
 procedure TBGRADefaultBitmap.LoadFromFile(const filename: string);
 var
   tempBitmap: TBGRADefaultBitmap;
+  OldDrawMode: TDrawMode;
 begin
   if IsPaintDotNetFile(filename) then
   begin
@@ -578,8 +651,41 @@ begin
   end
   else
   begin
-    inherited LoadFromfile(filename);
-    ClearTransparentPixels;
+    OldDrawMode := CanvasDrawModeFP;
+    CanvasDrawModeFP := dmSet;
+    try
+      inherited LoadFromfile(filename);
+    finally
+      CanvasDrawModeFP := OldDrawMode;
+      ClearTransparentPixels;
+    end;
+  end;
+end;
+
+procedure TBGRADefaultBitmap.LoadFromStream(Str: TStream);
+var
+  OldDrawMode: TDrawMode;
+begin
+  OldDrawMode := CanvasDrawModeFP;
+  CanvasDrawModeFP := dmSet;
+  try
+    inherited LoadFromStream(Str);
+  finally
+    CanvasDrawModeFP := OldDrawMode;
+  end;
+end;
+
+procedure TBGRADefaultBitmap.LoadFromStream(Str: TStream;
+  Handler: TFPCustomImageReader);
+var
+  OldDrawMode: TDrawMode;
+begin
+  OldDrawMode := CanvasDrawModeFP;
+  CanvasDrawModeFP := dmSet;
+  try
+    inherited LoadFromStream(Str, Handler);
+  finally
+    CanvasDrawModeFP := OldDrawMode;
   end;
 end;
 
@@ -685,7 +791,8 @@ end;
 {$hints off}
 function TBGRADefaultBitmap.GetPixel(x, y: single): TBGRAPixel;
 var
-  ix, iy, w: integer;
+  ix, iy: integer;
+  w: cardinal;
   rSum, gSum, bSum, rgbDiv: cardinal;
   aSum, aDiv: cardinal;
   c:    TBGRAPixel;
@@ -826,6 +933,15 @@ begin
   Result := Bitmap.Canvas;
 end;
 
+function TBGRADefaultBitmap.GetCanvasFP: TFPImageCanvas;
+begin
+  {$warnings off}
+  if FCanvasFP = nil then
+    FCanvasFP := TFPImageCanvas.Create(self);
+  {$warnings on}
+  result := FCanvasFP;
+end;
+
 procedure TBGRADefaultBitmap.LoadFromRawImage(ARawImage: TRawImage;
   DefaultOpacity: byte; AlwaysReplaceAlpha: boolean);
 var
@@ -943,6 +1059,8 @@ var
 begin
   FRefCount  := 1;
   FBitmap    := nil;
+  FCanvasFP  := nil;
+  CanvasDrawModeFP := dmDrawWithTransparency;
   FData      := nil;
   FWidth     := 0;
   FHeight    := 0;
@@ -950,10 +1068,12 @@ begin
   FCanvasOpacity := 255;
   FAlphaCorrectionNeeded := False;
   FEraseMode := False;
+  FillMode := fmWinding;
 
   FFont     := TFont.Create;
   FontName  := 'Arial';
   FontStyle := [];
+  FontAntialias := False;
   FFontHeight := 20;
   FFontHeightSign := 1;
   HeightP1  := TextSize('Hg').cy;
@@ -964,23 +1084,15 @@ begin
     FFontHeightSign := 1
   else
     FFontHeightSign := -1;
+
+  PenStyle := psSolid;
+  LineCap := pecRound;
+  JoinStyle := pjsBevel;
 end;
 
 procedure TBGRADefaultBitmap.SetInternalColor(x, y: integer; const Value: TFPColor);
-var
-  p: PByte;
 begin
-  if (x < 0) or (y < 0) or (x >= Width) or (y >= Height) then
-    exit;
-  p  := PByte(Scanline[y] + x);
-  p^ := Value.blue shr 8;
-  Inc(p);
-  p^ := Value.green shr 8;
-  Inc(p);
-  p^ := Value.red shr 8;
-  Inc(p);
-  p^ := Value.alpha shr 8;
-  InvalidateBitmap;
+  FCanvasPixelProcFP(x,y, BGRA(Value.red shr 8,Value.green shr 8,Value.blue shr 8,Value.alpha shr 8));
 end;
 
 {$hints off}
@@ -1320,159 +1432,14 @@ end;
 
 procedure TBGRADefaultBitmap.DrawLine(x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
-var
-  Y, X: integer;
-  DX, DY, SX, SY, E: integer;
 begin
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      DrawPixel(X1, Y1, c);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-  if DX > DY then
-  begin
-    E := DY - DX shr 1;
-
-    while X <> X2 do
-    begin
-      DrawPixel(X, Y, c);
-      if E >= 0 then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-      Inc(E, DY);
-    end;
-  end
-  else
-  begin
-    E := DX - DY shr 1;
-
-    while Y <> Y2 do
-    begin
-      DrawPixel(X, Y, c);
-      if E >= 0 then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-      Inc(E, DX);
-    end;
-  end;
-
-  if DrawLastPixel then
-    DrawPixel(X2, Y2, c);
+  BGRADrawLineAliased(self,x1,y1,x2,y2,c,DrawLastPixel);
 end;
 
 procedure TBGRADefaultBitmap.DrawLineAntialias(x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
-var
-  Y, X:  integer;
-  DX, DY, SX, SY, E: integer;
-  alpha: single;
 begin
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      DrawPixel(X1, Y1, c);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-
-  if DX > DY then
-  begin
-    E := 0;
-
-    while X <> X2 do
-    begin
-      alpha := 1 - E / DX;
-      DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, round(c.alpha * sqrt(alpha))));
-      DrawPixel(X, Y + SY, BGRA(c.red, c.green, c.blue,
-        round(c.alpha * sqrt(1 - alpha))));
-      Inc(E, DY);
-      if E >= DX then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-    end;
-  end
-  else
-  begin
-    E := 0;
-
-    while Y <> Y2 do
-    begin
-      alpha := 1 - E / DY;
-      DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, round(c.alpha * sqrt(alpha))));
-      DrawPixel(X + SX, Y, BGRA(c.red, c.green, c.blue,
-        round(c.alpha * sqrt(1 - alpha))));
-      Inc(E, DX);
-      if E >= DY then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-    end;
-  end;
-  if DrawLastPixel then
-    DrawPixel(X2, Y2, c);
+  BGRADrawLineAntialias(self,x1,y1,x2,y2,c,DrawLastPixel);
 end;
 
 procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPoint;
@@ -1490,109 +1457,8 @@ end;
 
 procedure TBGRADefaultBitmap.DrawLineAntialias(x1, y1, x2, y2: integer;
   c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
-var
-  Y, X:  integer;
-  DX, DY, SX, SY, E: integer;
-  alpha: single;
-  c:     TBGRAPixel;
-  DashPos: integer;
 begin
-
-  c := c1;
-  DashPos := 0;
-
-  if (Y1 = Y2) and (X1 = X2) then
-  begin
-    if DrawLastPixel then
-      DrawPixel(X1, Y1, c);
-    Exit;
-  end;
-
-  DX := X2 - X1;
-  DY := Y2 - Y1;
-
-  if DX < 0 then
-  begin
-    SX := -1;
-    DX := -DX;
-  end
-  else
-    SX := 1;
-
-  if DY < 0 then
-  begin
-    SY := -1;
-    DY := -DY;
-  end
-  else
-    SY := 1;
-
-  DX := DX shl 1;
-  DY := DY shl 1;
-
-  X := X1;
-  Y := Y1;
-
-  if DX > DY then
-  begin
-    E := 0;
-
-    while X <> X2 do
-    begin
-      alpha := 1 - E / DX;
-      DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, round(c.alpha * sqrt(alpha))));
-      DrawPixel(X, Y + SY, BGRA(c.red, c.green, c.blue,
-        round(c.alpha * sqrt(1 - alpha))));
-      Inc(E, DY);
-      if E >= DX then
-      begin
-        Inc(Y, SY);
-        Dec(E, DX);
-      end;
-      Inc(X, SX);
-
-      Inc(DashPos);
-      if DashPos = DashLen then
-        c := c2
-      else
-      if DashPos = DashLen + DashLen then
-      begin
-        c := c1;
-        DashPos := 0;
-      end;
-    end;
-  end
-  else
-  begin
-    E := 0;
-
-    while Y <> Y2 do
-    begin
-      alpha := 1 - E / DY;
-      DrawPixel(X, Y, BGRA(c.red, c.green, c.blue, round(c.alpha * sqrt(alpha))));
-      DrawPixel(X + SX, Y, BGRA(c.red, c.green, c.blue,
-        round(c.alpha * sqrt(1 - alpha))));
-      Inc(E, DX);
-      if E >= DY then
-      begin
-        Inc(X, SX);
-        Dec(E, DY);
-      end;
-      Inc(Y, SY);
-
-      Inc(DashPos);
-      if DashPos = DashLen then
-        c := c2
-      else
-      if DashPos = DashLen + DashLen then
-      begin
-        c := c1;
-        DashPos := 0;
-      end;
-    end;
-  end;
-  if DrawLastPixel then
-    DrawPixel(X2, Y2, c);
+  BGRADrawLineAntialias(self,x1,y1,x2,y2,c1,c2,dashLen,DrawLastPixel);
 end;
 
 procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPoint; c1,
@@ -1609,116 +1475,39 @@ begin
 end;
 
 procedure TBGRADefaultBitmap.DrawLineAntialias(x1, y1, x2, y2: single;
+  c: TBGRAPixel; w: single);
+begin
+  BGRAPolyLine(self,[PointF(x1,y1),PointF(x2,y2)],w,c,LineCap,JoinStyle,FCustomPenStyle,[]);
+end;
+
+procedure TBGRADefaultBitmap.DrawLineAntialias(x1, y1, x2, y2: single;
   c: TBGRAPixel; w: single; closed: boolean);
 var
-  dx, dy, d, hx, hy, wx, wy, t, t2, t3: single;
-  nbInter, i: integer;
-
-  poly: array of tpointf;
-  alphaFactor: single;
+  options: TBGRAPolyLineOptions;
 begin
-  if (w <= 0) then
-    exit;
-  if (w = 1) and (frac(x1) = 0) and (frac(y1) = 0) and (frac(x2) = 0) and
-    (frac(y2) = 0) then
-  begin
-    DrawLineAntialias(round(x1), round(y1), round(x2), round(y2), c, closed);
-    exit;
-  end;
+  if not closed then options := [plRoundCapOpen] else options := [];
+  BGRAPolyLine(self,[PointF(x1,y1),PointF(x2,y2)],w,c,pecRound,pjsRound,FCustomPenStyle,options);
+end;
 
-  dx := x2 - x1;
-  dy := y2 - y1;
-  if (dx = 0) and (dy = 0) then
-  begin
-    if closed then
-      FillEllipseAntialias(x1, y1, w / 2, w / 2, c);
-    exit;
-  end;
-
-  d  := sqrt(sqr(dx) + sqr(dy));
-  dx /= d;
-  dy /= d;
-  hx := dy * w / 2;
-  hy := -dx * w / 2;
-  wx := dx * w / 2;
-  wy := dy * w / 2;
-
-  nbInter := (ceil(w) + 1) * 2;
-  setlength(poly, 4 + nbInter * 2);
-  poly[0] := pointf(x1 + hx, y1 + hy);
-  poly[1] := pointf(x2 + hx, y2 + hy);
-
-  if closed then
-  begin
-    for i := 0 to nbInter - 1 do
-    begin
-      t  := 1 - (i + 1) / (nbInter + 1) * 2;
-      t2 := sqrt(1 - sqr(t));
-      poly[2 + i] := pointf(x2 + t * hx + t2 * wx, y2 + t * hy + t2 * wy);
-    end;
-  end
-  else
-  begin
-    if c.alpha=255 then alphaFactor := 1 else
-    begin
-      alphaFactor := sqr(c.alpha / 255) / 2.5;
-      if (c.alpha > 220) then
-      begin
-        t := sqr(sqr((c.alpha-220)/(255-220)));
-        alphaFactor := alphaFactor*(1-t)+0.8*t;
-      end;
-    end;
-    for i := 0 to nbInter - 1 do
-    begin
-      t  := 1 - (i + 1) / (nbInter + 1) * 2;
-      t2 := sqrt(1 - sqr(t));
-      t3 := (1 - t2) * 0.7;
-      poly[2 + i] := pointf(x2 + t * hx - t2 * wx + dx * (alphaFactor + t3),
-        y2 + t * hy - t2 * wy + dy * (alphaFactor + t3));
-    end;
-  end;
-
-  poly[2 + nbinter] := pointf(x2 - hx, y2 - hy);
-  poly[3 + nbinter] := pointf(x1 - hx, y1 - hy);
-
-  for i := 0 to nbInter - 1 do
-  begin
-    t  := (i + 1) / (nbInter + 1) * 2 - 1;
-    t2 := sqrt(1 - sqr(t));
-    poly[4 + nbinter + i] := pointf(x1 + t * hx - t2 * wx, y1 + t * hy - t2 * wy);
-  end;
-
-  FillPolyAntialias(poly, c);
+procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPointF;
+  c: TBGRAPixel; w: single);
+begin
+  BGRAPolyLine(self,points,w,c,LineCap,JoinStyle,FCustomPenStyle,[]);
 end;
 
 procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPointF;
   c: TBGRAPixel; w: single; Closed: boolean);
-var i: integer;
+var
+  options: TBGRAPolyLineOptions;
 begin
-   if length(points) = 1 then
-   begin
-     if Closed then DrawLineAntialias(points[0].x,points[0].y,points[0].x,points[0].y,c,w,true);
-   end
-   else
-     for i := 0 to high(points)-1 do
-       DrawLineAntialias(points[i].x,points[i].Y,points[i+1].x,points[i+1].y,c,w,Closed and (i=high(points)-1));
+  if not closed then options := [plRoundCapOpen] else options := [];
+  BGRAPolyLine(self,points,w,c,pecRound,JoinStyle,FCustomPenStyle,options);
 end;
 
 procedure TBGRADefaultBitmap.DrawPolygonAntialias(points: array of TPointF;
   c: TBGRAPixel; w: single);
-var i: integer;
 begin
-   if length(points) = 1 then
-   begin
-     DrawLineAntialias(points[0].x,points[0].y,points[0].x,points[0].y,c,w,true);
-   end
-   else
-   if length(points) > 1 then
-   begin
-     for i := 0 to high(points)-1 do
-       DrawLineAntialias(points[i].x,points[i].Y,points[i+1].x,points[i+1].y,c,w,False);
-     DrawLineAntialias(points[high(points)].x,points[high(points)].Y,points[0].x,points[0].y,c,w,False);
-   end;
+   BGRAPolyLine(self,points,w,c,LineCap,JoinStyle,FCustomPenStyle,[plCycle]);
 end;
 
 procedure TBGRADefaultBitmap.EraseLineAntialias(x1, y1, x2, y2: single;
@@ -1729,9 +1518,25 @@ begin
   FEraseMode := False;
 end;
 
+procedure TBGRADefaultBitmap.ErasePolyLineAntialias(points: array of TPointF;
+  alpha: byte; w: single);
+begin
+  FEraseMode := True;
+  DrawPolyLineAntialias(points, BGRA(0,0,0,alpha),w);
+  FEraseMode := False;
+end;
+
+procedure TBGRADefaultBitmap.EraseLineAntialias(x1, y1, x2, y2: single;
+  alpha: byte; w: single);
+begin
+  FEraseMode := True;
+  DrawLineAntialias(x1,y1,x2,y2, BGRA(0,0,0,alpha),w);
+  FEraseMode := False;
+end;
+
 procedure TBGRADefaultBitmap.FillPolyAntialias(points: array of TPointF; c: TBGRAPixel);
 begin
-  BGRAPolygon.FillPolyAntialias(self, points, c, FEraseMode);
+  BGRAPolygon.FillPolyAntialias(self, points, c, FEraseMode, FillMode = fmWinding);
 end;
 
 procedure TBGRADefaultBitmap.ErasePolyAntialias(points: array of TPointF; alpha: byte);
@@ -1793,7 +1598,10 @@ procedure TBGRADefaultBitmap.RectangleAntialias(x, y, x2, y2: single;
 var
   poly: array of TPointF;
   temp: single;
+  bevel: single;
 begin
+  if (length(FCustomPenStyle) = 1) and (FCustomPenStyle[0] = 0) then exit;
+
   if (x > x2) then
   begin
     temp := x;
@@ -1809,25 +1617,57 @@ begin
 
   if (x2 - x <= w) or (y2 - y <= w) then
   begin
-    FillRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, c);
+    if JoinStyle = pjsBevel then
+    begin
+      bevel := (2-sqrt(2))*w/2;
+      FillRoundRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, bevel,bevel, c, [rrTopLeftBevel, rrTopRightBevel, rrBottomLeftBevel, rrBottomRightBevel]);
+    end else
+    if JoinStyle = pjsRound then
+     FillRoundRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, w/2,w/2, c)
+    else
+     FillRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, c);
     exit;
   end;
-  w /= 2;
 
-  setlength(poly, 9);
-  poly[0] := pointf(x - w, y - w);
-  poly[1] := pointf(x2 + w, y - w);
-  poly[2] := pointf(x2 + w, y2 + w);
-  poly[3] := pointf(x - w, y2 + w);
-  poly[4] := EmptyPointF;
-  poly[5] := pointf(x + w, y + w);
-  poly[6] := pointf(x2 - w, y + w);
-  poly[7] := pointf(x2 - w, y2 - w);
-  poly[8] := pointf(x + w, y2 - w);
-  FillPolyAntialias(poly, c);
-
+  if (JoinStyle = pjsMiter) and (FCustomPenStyle = nil) then
+  begin
+    w /= 2;
+    setlength(poly, 9);
+    poly[0] := pointf(x - w, y - w);
+    poly[1] := pointf(x2 + w, y - w);
+    poly[2] := pointf(x2 + w, y2 + w);
+    poly[3] := pointf(x - w, y2 + w);
+    poly[4] := EmptyPointF;
+    poly[5] := pointf(x + w, y + w);
+    poly[6] := pointf(x2 - w, y + w);
+    poly[7] := pointf(x2 - w, y2 - w);
+    poly[8] := pointf(x + w, y2 - w);
+    BGRAPolygon.FillPolyAntialias(self,poly, c, False, False);
+  end else
+  begin
+    setlength(poly, 4);
+    poly[0] := Pointf(x,y);
+    poly[1] := Pointf(x2,y);
+    poly[2] := Pointf(x2,y2);
+    poly[3] := Pointf(x,y2);
+    DrawPolygonAntialias(poly,c,w);
+    w /= 2;
+  end;
   if back.alpha <> 0 then
     FillRectAntialias(x + w, y + w, x2 - w, y2 - w, back);
+end;
+
+procedure TBGRADefaultBitmap.RoundRectAntialias(x, y, x2, y2, rx, ry: single;
+   c: TBGRAPixel; w: single; options: TRoundRectangleOptions);
+begin
+  BGRAPolygon.BorderRoundRectangleAntialias(self,x,y,x2,y2,rx,ry,w,options,c,False);
+end;
+
+procedure TBGRADefaultBitmap.RoundRectAntialias(x, y, x2, y2, rx, ry: single;
+  pencolor: TBGRAPixel; w: single; fillcolor: TBGRAPixel;
+  options: TRoundRectangleOptions);
+begin
+  BGRAPolygon.BorderAndFillRoundRectangleAntialias(self,x,y,x2,y2,rx,ry,w,options,pencolor,fillcolor,False);
 end;
 
 procedure TBGRADefaultBitmap.FillRect(r: TRect; c: TColor);
@@ -2018,6 +1858,18 @@ begin
   FillPolyAntialias(poly, c);
 end;
 
+procedure TBGRADefaultBitmap.FillRoundRectAntialias(x, y, x2, y2, rx,ry: single;
+  c: TBGRAPixel; options: TRoundRectangleOptions);
+begin
+  BGRAPolygon.FillRoundRectangleAntialias(self,x,y,x2,y2,rx,ry,options,c,False);
+end;
+
+procedure TBGRADefaultBitmap.EraseRoundRectAntialias(x, y, x2, y2, rx,
+  ry: single; alpha: byte; options: TRoundRectangleOptions);
+begin
+  BGRAPolygon.FillRoundRectangleAntialias(self,x,y,x2,y2,rx,ry,options,BGRA(0,0,0,alpha),True);
+end;
+
 procedure TBGRADefaultBitmap.AlphaFillRect(x, y, x2, y2: integer; alpha: byte);
 var
   temp, yb, tx, delta: integer;
@@ -2072,172 +1924,8 @@ end;
 
 procedure TBGRADefaultBitmap.RoundRect(X1, Y1, X2, Y2: integer;
   RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
-var
-  CX, CY, CX1, CY1, A, B, NX, NY: single;
-  X, Y, EX, EY: integer;
-  LX1, LY1: integer;
-  LX2, LY2: integer;
-  DivSqrA, DivSqrB: single;
-  I, J, S: integer;
-  EdgeList: array of TPoint;
-  temp:   integer;
-  LX, LY: integer;
-
-  procedure AddEdge(X, Y: integer);
-  begin
-    if (EdgeList[Y].X = -1) or (X < EdgeList[Y].X) then
-      EdgeList[Y].X := X;
-    if (EdgeList[Y].Y = -1) or (X > EdgeList[Y].Y) then
-      EdgeList[Y].Y := X;
-  end;
-
 begin
-  if (x1 > x2) then
-  begin
-    temp := x1;
-    x1   := x2;
-    x2   := temp;
-  end;
-  if (y1 > y2) then
-  begin
-    temp := y1;
-    y1   := y2;
-    y2   := temp;
-  end;
-  if (x2 - x1 <= 0) or (y2 - y1 <= 0) then
-    exit;
-  LX := x2 - x1 - RX;
-  LY := y2 - y1 - RY;
-  Dec(x2);
-  Dec(y2);
-
-  if (X1 = X2) and (Y1 = Y2) then
-  begin
-    DrawPixel(X1, Y1, BorderColor);
-    Exit;
-  end;
-
-  if (X2 - X1 = 1) or (Y2 - Y1 = 1) then
-  begin
-    FillRect(X1, Y1, X2 + 1, Y2 + 1, BorderColor, dmDrawWithTransparency);
-    Exit;
-  end;
-
-  if (LX > X2 - X1) or (LY > Y2 - Y1) then
-  begin
-    Rectangle(X1, Y1, X2 + 1, Y2 + 1, BorderColor, dmDrawWithTransparency);
-    FillRect(X1 + 1, Y1 + 1, X2, Y2, FillColor, dmDrawWithTransparency);
-    Exit;
-  end;
-
-  SetLength(EdgeList, Ceil((Y2 - Y1 + 1) / 2));
-  for I := 0 to Pred(High(EdgeList)) do
-    EdgeList[I] := Point(-1, -1);
-  EdgeList[High(EdgeList)] := Point(0, 0);
-
-  A  := (X2 - X1 + 1 - LX) / 2;
-  B  := (Y2 - Y1 + 1 - LY) / 2;
-  CX := (X2 + X1 + 1) / 2;
-  CY := (Y2 + Y1 + 1) / 2;
-
-  CX1 := X2 + 1 - A - Floor(CX);
-  CY1 := Y2 + 1 - B - Floor(CY);
-
-  EX := Floor(Sqr(A) / Sqrt(Sqr(A) + Sqr(B)) + Frac(A));
-  EY := Floor(Sqr(B) / Sqrt(Sqr(A) + Sqr(B)) + Frac(B));
-
-  DivSqrA := 1 / Sqr(A);
-  DivSqrB := 1 / Sqr(B);
-
-  NY := B;
-  AddEdge(Floor(CX1), Round(CY1 + B) - 1);
-  for X := 1 to Pred(EX) do
-  begin
-    NY := B * Sqrt(1 - Sqr(X + 0.5 - Frac(A)) * DivSqrA);
-
-    AddEdge(Floor(CX1) + X, Round(CY1 + NY) - 1);
-  end;
-
-  LX1 := Floor(CX1) + Pred(EX);
-  LY1 := Round(CY1 + NY) - 1;
-
-  NX := A;
-  AddEdge(Round(CX1 + A) - 1, Floor(CY1));
-  for Y := 1 to Pred(EY) do
-  begin
-    NX := A * Sqrt(1 - Sqr(Y + 0.5 - Frac(B)) * DivSqrB);
-
-    AddEdge(Round(CX1 + NX) - 1, Floor(CY1) + Y);
-  end;
-
-  LX2 := Round(CX1 + NX) - 1;
-  LY2 := Floor(CY1) + Pred(EY);
-
-  if Abs(LX1 - LX2) > 1 then
-  begin
-    if Abs(LY1 - LY2) > 1 then
-      AddEdge(LX1 + 1, LY1 - 1)
-    else
-      AddEdge(LX1 + 1, LY1);
-  end
-  else
-  if Abs(LY1 - LY2) > 1 then
-    AddEdge(LX2, LY1 - 1);
-
-  for I := 0 to High(EdgeList) do
-  begin
-    if EdgeList[I].X = -1 then
-      EdgeList[I] := Point(Round(CX1 + A) - 1, Round(CX1 + A) - 1)
-    else
-      Break;
-  end;
-
-  for J := 0 to High(EdgeList) do
-  begin
-    if (J = 0) and (Frac(CY) > 0) then
-    begin
-      for I := EdgeList[J].X to EdgeList[J].Y do
-      begin
-        DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
-      end;
-
-      DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J, Floor(CX) +
-        Pred(EdgeList[J].X), FillColor);
-    end
-    else
-    if (J = High(EdgeList)) then
-    begin
-      if Frac(CX) > 0 then
-        S := -EdgeList[J].Y
-      else
-        S := -Succ(EdgeList[J].Y);
-
-      for I := S to EdgeList[J].Y do
-      begin
-        DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
-      end;
-    end
-    else
-    begin
-      for I := EdgeList[J].X to EdgeList[J].Y do
-      begin
-        DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
-        if Floor(CX) + I <> Ceil(CX) - Succ(I) then
-        begin
-          DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
-          DrawPixel(Ceil(CX) - Succ(I), Ceil(CY) - Succ(J), BorderColor);
-        end;
-      end;
-
-      DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J,
-        Floor(CX) + Pred(EdgeList[J].X), FillColor);
-      DrawHorizLine(Ceil(CX) - EdgeList[J].X, Ceil(CY) - Succ(J),
-        Floor(CX) + Pred(EdgeList[J].X), FillColor);
-    end;
-  end;
+  BGRARoundRectAliased(self,X1,Y1,X2,Y2,RX,RY,BorderColor,FillColor);
 end;
 
 procedure TBGRADefaultBitmap.TextOut(x, y: integer; s: string; c: TBGRAPixel);
@@ -2245,28 +1933,21 @@ begin
   TextOut(x, y, s, c, taLeftJustify);
 end;
 
-
 {$HINTS OFF}
 procedure TBGRADefaultBitmap.TextOut(x, y: integer; s: string;
   c: TBGRAPixel; align: TAlignment);
 var
   size:  TSize;
-  temp:  TBGRADefaultBitmap;
+  temp, resampled:  TBGRADefaultBitmap;
   P:     PBGRAPixel;
   n:     integer;
-  alpha: integer;
+  alpha, maxAlpha: integer;
 begin
   UpdateFont;
 
-  size := TextSize(s);
+  size := OriginalTextSize(s);
   if (size.cx = 0) or (size.cy = 0) then
     exit;
-
-  case align of
-    taLeftJustify: ;
-    taCenter: Dec(x, size.cx div 2);
-    taRightJustify: Dec(x, size.cx);
-  end;
 
   temp := NewBitmap(size.cx, size.cy);
   temp.Fill(clBlack);
@@ -2274,15 +1955,51 @@ begin
   temp.Canvas.Font.Color := clWhite;
   temp.Canvas.Brush.Style := bsClear;
   temp.Canvas.TextOut(0, 0, s);
-  p := temp.Data;
-  for n := temp.NbPixels - 1 downto 0 do
+
+  if FontAntialias then
   begin
-    alpha    := P^.green;
-    p^.red   := c.red;
-    p^.green := c.green;
-    p^.blue  := c.blue;
-    p^.alpha := (c.alpha * alpha) div 255;
-    Inc(p);
+    resampled := temp.Resample(round(temp.width/FontAntialiasingLevel+0.2),round(temp.Height/FontAntialiasingLevel+0.2),rmSimpleStretch);
+
+    p := resampled.Data;
+    maxAlpha := 0;
+    for n := resampled.NbPixels - 1 downto 0 do
+    begin
+      alpha    := P^.green;
+      if alpha > maxAlpha then maxAlpha := alpha;
+      p^.red   := c.red;
+      p^.green := c.green;
+      p^.blue  := c.blue;
+      p^.alpha := alpha;
+      Inc(p);
+    end;
+    if maxAlpha <> 0 then
+    begin
+      p := resampled.Data;
+      for n := resampled.NbPixels - 1 downto 0 do
+      begin
+        p^.alpha := integer(p^.alpha * c.alpha) div maxAlpha;
+        Inc(p);
+      end;
+    end;
+    temp.Free;
+    temp := resampled;
+  end else
+  begin
+    p := temp.Data;
+    for n := temp.NbPixels - 1 downto 0 do
+    begin
+      alpha    := P^.green;
+      p^.red   := c.red;
+      p^.green := c.green;
+      p^.blue  := c.blue;
+      p^.alpha := (c.alpha * alpha) div (255);
+      Inc(p);
+    end;
+  end;
+  case align of
+    taLeftJustify: ;
+    taCenter: Dec(x, temp.width div 2);
+    taRightJustify: Dec(x, temp.width);
   end;
   PutImage(x, y, temp, dmDrawWithTransparency);
   temp.Free;
@@ -2340,7 +2057,7 @@ begin
 end;
 
 {$hints off}
-function TBGRADefaultBitmap.TextSize(s: string): TSize;
+function TBGRADefaultBitmap.OriginalTextSize(s: string): TSize;
 var
   temp: TBitmap;
 begin
@@ -2352,142 +2069,29 @@ begin
   temp.Free;
 end;
 
+function TBGRADefaultBitmap.TextSize(s: string): TSize;
+begin
+  result := OriginalTextSize(s);
+  if FontAntialias then
+  begin
+    result.cx := ceil(Result.cx/FontAntialiasingLevel);
+    result.cy := ceil(Result.cy/FontAntialiasingLevel);
+  end;
+end;
+
+function TBGRADefaultBitmap.ComputeClosedSpline(const points: array of TPointF
+  ): ArrayOfTPointF;
+begin
+  result := BGRAPolygon.ComputeClosedSpline(points);
+end;
+
+function TBGRADefaultBitmap.ComputeOpenedSpline(const points: array of TPointF
+  ): ArrayOfTPointF;
+begin
+  result := BGRAPolygon.ComputeOpenedSpline(points);
+end;
+
 {$hints on}
-
-{----------------------- Spline ------------------}
-
-function TBGRADefaultBitmap.Spline(y0, y1, y2, y3: single; t: single): single;
-var
-  a0, a1, a2, a3: single;
-  t2: single;
-begin
-  t2     := t * t;
-  a0     := y3 - y2 - y0 + y1;
-  a1     := y0 - y1 - a0;
-  a2     := y2 - y0;
-  a3     := y1;
-  Result := a0 * t * t2 + a1 * t2 + a2 * t + a3;
-end;
-
-function TBGRADefaultBitmap.ComputeClosedSpline(points: array of TPointF):
-ArrayOfTPointF;
-
-  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
-  var
-    len: single;
-  begin
-    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
-    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
-    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
-    Result := round(sqrt(len) * 2);
-  end;
-
-var
-  i, j, nb, idx, pre: integer;
-  ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
-
-begin
-  if length(points) = 2 then
-  begin
-    setlength(Result, 2);
-    Result[0] := points[0];
-    Result[1] := points[1];
-    exit;
-  end;
-
-  nb := 1;
-  for i := 0 to high(points) do
-  begin
-    ptPrev2 := points[(i + length(points) - 1) mod length(points)];
-    ptPrev  := points[i];
-    ptNext  := points[(i + 1) mod length(points)];
-    ptNext2 := points[(i + 2) mod length(points)];
-    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
-  end;
-
-  setlength(Result, nb);
-  Result[0] := points[0];
-  idx := 1;
-  for i := 0 to high(points) do
-  begin
-    ptPrev2 := points[(i + length(points) - 1) mod length(points)];
-    ptPrev  := points[i];
-    ptNext  := points[(i + 1) mod length(points)];
-    ptNext2 := points[(i + 2) mod length(points)];
-    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
-    for j := 1 to pre - 1 do
-    begin
-      Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
-        spline(ptPrev2.y, ptPrev.y, ptNext.y, ptNext2.y, j / pre));
-      Inc(idx);
-    end;
-    if pre <> 0 then
-    begin
-      Result[idx] := ptNext;
-      Inc(idx);
-    end;
-  end;
-end;
-
-function TBGRADefaultBitmap.ComputeOpenedSpline(points: array of TPointF):
-ArrayOfTPointF;
-
-  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
-  var
-    len: single;
-  begin
-    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
-    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
-    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
-    Result := round(sqrt(len) * 2);
-  end;
-
-var
-  i, j, nb, idx, pre: integer;
-  ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
-
-begin
-  if length(points) = 2 then
-  begin
-    setlength(Result, 2);
-    Result[0] := points[0];
-    Result[1] := points[1];
-    exit;
-  end;
-
-  nb := 1;
-  for i := 0 to high(points) - 1 do
-  begin
-    ptPrev2 := points[max(0, i - 1)];
-    ptPrev  := points[i];
-    ptNext  := points[i + 1];
-    ptNext2 := points[min(high(points), i + 2)];
-    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
-  end;
-
-  setlength(Result, nb);
-  Result[0] := points[0];
-  idx := 1;
-  for i := 0 to high(points) - 1 do
-  begin
-    ptPrev2 := points[max(0, i - 1)];
-    ptPrev  := points[i];
-    ptNext  := points[i + 1];
-    ptNext2 := points[min(high(points), i + 2)];
-    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
-    for j := 1 to pre - 1 do
-    begin
-      Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
-        spline(ptPrev2.y, ptPrev.y, ptNext.y, ptNext2.y, j / pre));
-      Inc(idx);
-    end;
-    if pre <> 0 then
-    begin
-      Result[idx] := ptNext;
-      Inc(idx);
-    end;
-  end;
-end;
 
 {---------------------------------- Fill ---------------------------------}
 
@@ -2763,278 +2367,8 @@ end;
 procedure TBGRADefaultBitmap.GradientFill(x, y, x2, y2: integer;
   c1, c2: TBGRAPixel; gtype: TGradientType; o1, o2: TPointF; mode: TDrawMode;
   gammaColorCorrection: boolean = True; Sinus: Boolean=False);
-var
-  u, p:   TPointF;
-  len, a: single;
-  xb, yb, temp: integer;
-  b:      integer;
-  c:      TBGRAPixel;
-  ec, ec1, ec2: TExpandedPixel;
-  pixelProc: procedure(x, y: integer; col: TBGRAPixel) of object;
 begin
-  if (x > x2) then
-  begin
-    temp := x;
-    x    := x2;
-    x2   := temp;
-  end;
-  if (y > y2) then
-  begin
-    temp := y;
-    y    := y2;
-    y2   := temp;
-  end;
-  if x < 0 then x := 0;
-  if x2 > width then x2 := width;
-  if y < 0 then y := 0;
-  if y2 > height then y2 := height;
-  if (x2 <= x) or (y2 <= y) then exit;
-
-  case mode of
-    dmSet, dmSetExceptTransparent: pixelProc := @SetPixel;
-    dmDrawWithTransparency: pixelProc := @DrawPixel;
-    dmFastBlend: pixelProc := @FastBlendPixel;
-  end;
-  //handles transparency
-  if (c1.alpha = 0) and (c2.alpha = 0) then
-  begin
-    FillRect(x, y, x2, y2, BGRAPixelTransparent, mode);
-    exit;
-  end;
-  if c1.alpha = 0 then
-  begin
-    c1.red   := c2.red;
-    c1.green := c2.green;
-    c1.blue  := c2.blue;
-  end
-  else
-  if c2.alpha = 0 then
-  begin
-    c2.red   := c1.red;
-    c2.green := c1.green;
-    c2.blue  := c1.blue;
-  end;
-
-  //compute vector
-  u.x := o2.x - o1.x;
-  u.y := o2.y - o1.y;
-  len := sqrt(sqr(u.x) + sqr(u.y));
-  if len = 0 then
-  begin
-    FillRect(x, y, x2, y2, MergeBGRA(c1, c2), mode);
-    exit;
-  end;
-  u.x /= len;
-  u.y /= len;
-
-  ec1 := GammaExpansion(c1);
-  ec2 := GammaExpansion(c2);
-  if gammaColorCorrection then
-  begin
-    //render with gamma correction
-    case gtype of
-      gtLinear:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := p.x * u.x + p.y * u.y;
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              ec.red := (ec1.red * (256 - b) + ec2.red * b + 127) shr 8;
-              ec.green := (ec1.green * (256 - b) + ec2.green * b + 127) shr 8;
-              ec.blue := (ec1.blue * (256 - b) + ec2.blue * b + 127) shr 8;
-              ec.alpha := (ec1.alpha * (256 - b) + ec2.alpha * b + 127) shr 8;
-              c      := GammaCompression(ec);
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtReflected:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := abs(p.x * u.x + p.y * u.y);
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              ec.red := (ec1.red * (256 - b) + ec2.red * b + 127) shr 8;
-              ec.green := (ec1.green * (256 - b) + ec2.green * b + 127) shr 8;
-              ec.blue := (ec1.blue * (256 - b) + ec2.blue * b + 127) shr 8;
-              ec.alpha := (ec1.alpha * (256 - b) + ec2.alpha * b + 127) shr 8;
-              c      := GammaCompression(ec);
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtDiamond:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := max(abs(p.x * u.x + p.y * u.y), abs(p.x * u.y - p.y * u.x));
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              ec.red := (ec1.red * (256 - b) + ec2.red * b + 127) shr 8;
-              ec.green := (ec1.green * (256 - b) + ec2.green * b + 127) shr 8;
-              ec.blue := (ec1.blue * (256 - b) + ec2.blue * b + 127) shr 8;
-              ec.alpha := (ec1.alpha * (256 - b) + ec2.alpha * b + 127) shr 8;
-              c      := GammaCompression(ec);
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtRadial:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := sqrt(sqr(p.x * u.x + p.y * u.y) + sqr(p.x * u.y - p.y * u.x));
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              ec.red := (ec1.red * (256 - b) + ec2.red * b + 127) shr 8;
-              ec.green := (ec1.green * (256 - b) + ec2.green * b + 127) shr 8;
-              ec.blue := (ec1.blue * (256 - b) + ec2.blue * b + 127) shr 8;
-              ec.alpha := (ec1.alpha * (256 - b) + ec2.alpha * b + 127) shr 8;
-              c      := GammaCompression(ec);
-            end;
-            pixelProc(xb, yb, c);
-          end;
-    end;
-  end
-  else
-  begin
-    //render without gamma correction
-    case gtype of
-      gtLinear:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := p.x * u.x + p.y * u.y;
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              c.red  := (c1.red * (256 - b) + c2.red * b + 127) shr 8;
-              c.green := (c1.green * (256 - b) + c2.green * b + 127) shr 8;
-              c.blue := (c1.blue * (256 - b) + c2.blue * b + 127) shr 8;
-              c.alpha := (c1.alpha * (256 - b) + c2.alpha * b + 127) shr 8;
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtReflected:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := abs(p.x * u.x + p.y * u.y);
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              c.red  := (c1.red * (256 - b) + c2.red * b + 127) shr 8;
-              c.green := (c1.green * (256 - b) + c2.green * b + 127) shr 8;
-              c.blue := (c1.blue * (256 - b) + c2.blue * b + 127) shr 8;
-              c.alpha := (c1.alpha * (256 - b) + c2.alpha * b + 127) shr 8;
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtDiamond:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := max(abs(p.x * u.x + p.y * u.y), abs(p.x * u.y - p.y * u.x));
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              c.red  := (c1.red * (256 - b) + c2.red * b + 127) shr 8;
-              c.green := (c1.green * (256 - b) + c2.green * b + 127) shr 8;
-              c.blue := (c1.blue * (256 - b) + c2.blue * b + 127) shr 8;
-              c.alpha := (c1.alpha * (256 - b) + c2.alpha * b + 127) shr 8;
-            end;
-            pixelProc(xb, yb, c);
-          end;
-
-      gtRadial:
-        for yb := y to y2 - 1 do
-          for xb := x to x2 - 1 do
-          begin
-            p.x := xb - o1.x;
-            p.y := yb - o1.y;
-            a   := sqrt(sqr(p.x * u.x + p.y * u.y) + sqr(p.x * u.y - p.y * u.x));
-            if Sinus then a := (sin(a*2*Pi/len)+1)*len/2;
-            if a < 0 then
-              c := c1
-            else
-            if a > len then
-              c := c2
-            else
-            begin
-              b      := round(a / len * 256);
-              c.red  := (c1.red * (256 - b) + c2.red * b + 127) shr 8;
-              c.green := (c1.green * (256 - b) + c2.green * b + 127) shr 8;
-              c.blue := (c1.blue * (256 - b) + c2.blue * b + 127) shr 8;
-              c.alpha := (c1.alpha * (256 - b) + c2.alpha * b + 127) shr 8;
-            end;
-            pixelProc(xb, yb, c);
-          end;
-    end;
-  end;
+  BGRAGradientFill(self, x, y, x2, y2, c1, c2, gtype, o1, o2, mode, gammaColorCorrection, Sinus);
 end;
 
 procedure TBGRADefaultBitmap.DrawPixels(c: TBGRAPixel; start, Count: integer);
@@ -3098,6 +2432,11 @@ begin
     Inc(p);
   end;
   InvalidateBitmap;
+end;
+
+function TBGRADefaultBitmap.Spline(y0, y1, y2, y3: single; t: single): single;
+begin
+  result := BGRAPolygon.Spline(y0,y1,y2,y3,t);
 end;
 
 procedure TBGRADefaultBitmap.PutImage(x, y: integer; Source: TBGRADefaultBitmap;

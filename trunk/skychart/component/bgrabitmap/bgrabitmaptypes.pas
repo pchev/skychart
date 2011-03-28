@@ -51,13 +51,17 @@ type
   TResampleMode = (rmSimpleStretch, rmFineResample);
   TMedianOption = (moNone, moLowSmooth, moMediumSmooth, moHighSmooth);
   TGradientType = (gtLinear, gtReflected, gtDiamond, gtRadial);
+  TBGRAPenStyle = Array Of Single;
+  TRoundRectangleOption = (rrTopLeftSquare,rrTopRightSquare,rrBottomRightSquare,rrBottomLeftSquare,
+                               rrTopLeftBevel,rrTopRightBevel,rrBottomRightBevel,rrBottomLeftBevel);
+  TRoundRectangleOptions = set of TRoundRectangleOption;
 
 const
   GradientTypeStr : array[TGradientType] of string =
   ('Linear','Reflected','Diamond','Radial');
 
 type
-  TRadialBlurType = (rbNormal, rbDisk, rbCorona, rbPrecise);
+  TRadialBlurType = (rbNormal, rbDisk, rbCorona, rbPrecise, rbFast);
   TChannel = (cRed, cGreen, cBlue, cAlpha);
   TBlendOperation = (boLinearBlend, boTransparent, boMultiply,
     boLinearMultiply, boAdditive, boLinearAdd, boColorBurn, boColorDodge, boReflect,
@@ -91,6 +95,7 @@ const
   clBlackOpaque = TColor($010000);
 
 function isEmptyPointF(pt: TPointF): boolean;
+function BGRAPenStyle(dash1, space1: single; dash2: single=0; space2: single = 0; dash3: single=0; space3: single = 0; dash4 : single = 0; space4 : single = 0): TBGRAPenStyle;
 
 function GetIntensity(c: TExpandedPixel): word; inline;
 function SetIntensity(c: TExpandedPixel; intensity: word): TExpandedPixel;
@@ -129,6 +134,45 @@ uses Math, SysUtils;
 function isEmptyPointF(pt: TPointF): boolean;
 begin
   Result := (pt.x = EmptySingle) and (pt.y = EmptySingle);
+end;
+
+function BGRAPenStyle(dash1, space1: single; dash2: single; space2: single;
+  dash3: single; space3: single; dash4: single; space4: single): TBGRAPenStyle;
+var
+  i: Integer;
+begin
+  if dash4 <> 0 then
+  begin
+    setlength(result,8);
+    result[6] := dash4;
+    result[7] := space4;
+    result[4] := dash3;
+    result[5] := space3;
+    result[2] := dash2;
+    result[3] := space2;
+  end else
+  if dash3 <> 0 then
+  begin
+    setlength(result,6);
+    result[4] := dash3;
+    result[5] := space3;
+    result[2] := dash2;
+    result[3] := space2;
+  end else
+  if dash2 <> 0 then
+  begin
+    setlength(result,4);
+    result[2] := dash2;
+    result[3] := space2;
+  end else
+  begin
+    setlength(result,2);
+  end;
+  result[0] := dash1;
+  result[1] := space1;
+  for i := 0 to high(result) do
+    if result[i]=0 then
+      raise exception.Create('Zero is not a valid value');
 end;
 
 const
@@ -293,7 +337,7 @@ const
   deg360 = deg60 * 6;
 var
   ec: TExpandedPixel;
-  min, max, minMax: word;
+  min, max, minMax: integer;
   twiceLightness: integer;
 begin
   ec  := GammaExpansion(c);
@@ -328,9 +372,9 @@ begin
     Result.saturation := 0
   else
   if twiceLightness < 65536 then
-    Result.saturation := (minMax shl 16) div (twiceLightness + 1)
+    Result.saturation := (int64(minMax) shl 16) div (twiceLightness + 1)
   else
-    Result.saturation := (minMax shl 16) div (131072 - twiceLightness);
+    Result.saturation := (int64(minMax) shl 16) div (131072 - twiceLightness);
   Result.lightness := twiceLightness shr 1;
   Result.alpha := ec.alpha;
   Result.hue   := Result.hue * 65536 div deg360;
@@ -397,7 +441,7 @@ begin
   Result.red   := GammaExpansionTab[c.red];
   Result.green := GammaExpansionTab[c.green];
   Result.blue  := GammaExpansionTab[c.blue];
-  Result.alpha := c.alpha shl 8 + 128;
+  Result.alpha := c.alpha shl 8 + c.alpha;
 end;
 
 {$hints on}

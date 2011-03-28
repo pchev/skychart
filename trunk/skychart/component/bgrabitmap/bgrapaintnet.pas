@@ -162,7 +162,7 @@ end;
 procedure TPaintDotNetFile.LoadFromStream(stream: TStream);
 var
   header: packed array[0..3] of char;
-  XmlHeaderSize: longword;
+  XmlHeaderSize: integer;
   CompressionFormat: word;
   i:      integer;
 begin
