@@ -61,7 +61,6 @@ type
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    LabelXplanetBox: TLabel;
     Loadcom: TButton;
     LoadMPC: TButton;
     mpcfile: TFileNameEdit;
@@ -69,12 +68,10 @@ type
     AstPageControl2: TPageControl;
     Panel1: TPanel;
     astnummonth: TUpDown;
-    XplanetBox: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
-    XplanetMsg: TLabel;
     TransparentPlanet: TCheckBox;
     planetdir: TDirectoryEdit;
     DownloadDialog1: TDownloadDialog;
@@ -212,9 +209,6 @@ type
     Addast: TButton;
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
-    UseXplanet: TCheckBox;
-    XplanetDir: TEdit;
-    XplanetBtn: TBitBtn;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
@@ -255,9 +249,6 @@ type
     procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
     procedure SunOnlineClick(Sender: TObject);
-    procedure XplanetBtnClick(Sender: TObject);
-    procedure XplanetDirChange(Sender: TObject);
-    procedure UseXplanetClick(Sender: TObject);
     procedure TransparentPlanetClick(Sender: TObject);
   private
     { Private declarations }
@@ -272,7 +263,6 @@ type
     procedure UpdAstList;
     procedure AsteroidFeedback(txt:string);
     procedure CometFeedback(txt:string);
-    function CheckXplanet: boolean;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -324,8 +314,6 @@ PlanetMode.Items[3]:=rsSymbol;
 PlanetMode.Items[2]:=PlanetMode.Items[2]+blank+rsRequireXplan;
 {$endif}
 PlanetBox3.caption:=rsShowEarthSha;
-LabelXplanetBox.caption:=rsImageOptions;
-UseXplanet.caption:=rsUseXplanet;
 TransparentPlanet.caption:=rsTransparentL;
 SunOnline.Caption:=rsUseOnlineSun;
 Label4.Caption:=rsSunImageSour;
@@ -471,27 +459,16 @@ PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 Planetdir.Text:=cmain.planetdir;
-XplanetMsg.Caption:=blank;
-XplanetDir.text:=xplanet_dir;
-UseXplanet.checked:=use_xplanet;
 TransparentPlanet.Checked:=cplot.TransparentPlanet;
 SunOnline.Checked:=csc.SunOnline;
 for i:=0 to URL_SUN_NUMBER-1 do
   if ComboBox1.Items[i]=csc.sunurlname then ComboBox1.ItemIndex:=i;
 for i:=0 to ComboBox2.Items.Count-1 do
   if strtoint(ComboBox2.Items[i])=csc.sunrefreshtime then ComboBox2.ItemIndex:=i;
-{$ifndef mswindows}
- XplanetBox.Visible:=false;
- use_xplanet:=true;
-{$endif}
 if PlanetMode.itemindex=2 then begin
    SunPanel.Visible:=true;
-   {$ifdef mswindows}
-   XplanetBox.Visible:=true;
-  {$endif}
 end else begin
    SunPanel.Visible:=false;
-   XplanetBox.Visible:=false;
 end;
 if visible and (PageControl1.ActivePage=page1) then ActiveControl:=PlanetDir;
 end;
@@ -780,18 +757,10 @@ end;
 procedure Tf_config_solsys.PlanetModeClick(Sender: TObject);
 begin
 if LockChange and (PageControl1.ActivePage<>Page2) then exit;
-if (PlanetMode.itemindex=2)and Use_Xplanet then begin
-   if not CheckXplanet then
-     PlanetMode.itemindex:=1;
-end;
 if PlanetMode.itemindex=2 then begin
    SunPanel.Visible:=true;
-   {$ifdef mswindows}
-   XplanetBox.Visible:=true;
-  {$endif}
 end else begin
    SunPanel.Visible:=false;
-   XplanetBox.Visible:=false;
 end;
 cplot.plaplot:=PlanetMode.itemindex;
 end;
@@ -1018,85 +987,6 @@ begin
   comfile.text:='';
   csc.ShowComet:=true;
   csc.ShowAsteroid:=true;
-end;
-
-function Tf_config_solsys.CheckXplanet: boolean;
-var cmd,buf: string;
-    i,j: integer;
-    r: Tstringlist;
-begin
-result:=false;
-r:=TstringList.Create;
-try
- {$ifdef unix}
-    cmd:='xplanet';
- {$endif}
- {$ifdef mswindows}
-    if not DirectoryExists(xplanet_dir) then begin
-       XplanetMsg.Caption:=Format(rsDirectoryNot, [xplanet_dir]);
-       exit;
-    end;
-    chdir(xplanet_dir);
-    cmd:='xplanet.exe';
- {$endif}
- cmd:=cmd+' --version';
-
- i:=execprocess(cmd,r);
- if (i=0)and(r.Count>0) then begin
-   for j:=0 to r.Count-1 do begin
-     buf:=r[j];
-     if trim(buf)='JPEG' then begin
-       result:=true;
-       break;
-     end;
-   end;
-   if result then XplanetMsg.Caption:=blank
-             else XplanetMsg.Caption:=rsXplanetIsNot;
- end else begin
-   if r.Count>0 then begin
-     buf:='';
-     for j:=0 to r.Count-1 do  buf:=buf+r[j];
-   end else buf:='';
-   XplanetMsg.Caption:=Format(rsXplanetIsPro+blank+rsXplanetRetur, [buf, inttostr(i)]);
- end;
- 
-finally
- chdir(appdir);
- r.Free;
-end;
-end;
-
-// windows specific code:
-procedure Tf_config_solsys.XplanetBtnClick(Sender: TObject);
-var f : string;
-begin
-f:=slash(XplanetDir.text)+'xplanet.exe';
-opendialog1.InitialDir:=extractfilepath(f);
-opendialog1.filename:=extractfilename(f);
-opendialog1.Filter:='Exe Files|*.exe';
-opendialog1.DefaultExt:='';
-try
-if opendialog1.execute then begin
-   XplanetDir.text:=extractfilepath(opendialog1.FileName);
-end;
-finally
- chdir(appdir);
-end;
-end;
-
-procedure Tf_config_solsys.XplanetDirChange(Sender: TObject);
-begin
-if LockChange then exit;
-xplanet_dir:=XplanetDir.text;
-end;
-
-procedure Tf_config_solsys.UseXplanetClick(Sender: TObject);
-begin
-if LockChange and (PageControl1.ActivePage<>Page2) then exit;
-if UseXplanet.checked then begin
-     UseXplanet.checked:=CheckXplanet;
-end;
-use_xplanet:=UseXplanet.checked;
 end;
 
 initialization

@@ -4646,10 +4646,6 @@ ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
-{$ifdef mswindows}
-use_xplanet:=ReadBool(section,'use_xplanet',use_xplanet);
-xplanet_dir:=ReadString(section,'xplanet_dir',xplanet_dir);
-{$endif}
 NightVision:=ReadBool(section,'NightVision',NightVision);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.Paper:=ReadInteger(section,'Paper',cfgm.Paper);
@@ -5248,10 +5244,6 @@ WriteString(section,'PrivateDir',privatedir);
 {$ifdef linux}
 WriteInteger(section,'LinuxDesktop',LinuxDesktop);
 WriteString(section,'OpenFileCMD',OpenFileCMD);
-{$endif}
-{$ifdef mswindows}
-WriteBool(section,'use_xplanet',use_xplanet);
-WriteString(section,'xplanet_dir',xplanet_dir);
 {$endif}
 WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
