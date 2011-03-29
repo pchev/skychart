@@ -754,17 +754,23 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
 {$else}
      OpenFileCMD:string = 'xdg-open';   // default FreeDesktop.org
 {$endif}
-{$ifdef unix}
+{$ifdef linux}
      tracefile:string =''; // to stdout
      dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
      use_xplanet: boolean = true;
      xplanet_dir: string = '';
 {$endif}
+{$ifdef darwin}
+     tracefile:string =''; // to stdout
+     dcd_cmd: string = 'cd /usr/local/dcd ; python ./dcd.py';
+     use_xplanet: boolean = true;
+     xplanet_dir: string = 'data/planet';
+{$endif}
 {$ifdef mswindows}
      tracefile:string = 'cdc_trace.txt';
-     xplanet_dir: string = 'C:\Program Files\xplanet';
      dcd_cmd: string = 'cmd /c "C: && cd C:\Program Files\dcd && dcd.py"';
-     use_xplanet: boolean = false;
+     use_xplanet: boolean = true;
+     xplanet_dir: string = 'data\planet';
 {$endif}
 
 // Text formating constant

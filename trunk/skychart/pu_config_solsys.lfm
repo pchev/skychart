@@ -12,7 +12,7 @@ object f_config_solsys: Tf_config_solsys
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object MainPanel: TPanel
     Left = 0
     Height = 486
@@ -126,13 +126,6 @@ object f_config_solsys: Tf_config_solsys
           Top = 364
           Width = 127
           Caption = 'Jupiter GRS longitude :'
-          ParentColor = False
-        end
-        object XplanetMsg: TLabel
-          Left = 24
-          Height = 1
-          Top = 236
-          Width = 1
           ParentColor = False
         end
         object PlanetBox: TCheckBox
@@ -297,90 +290,6 @@ object f_config_solsys: Tf_config_solsys
           OnClick = TransparentPlanetClick
           TabOrder = 5
         end
-        object XplanetBox: TPanel
-          Left = 18
-          Height = 48
-          Top = 309
-          Width = 356
-          BevelOuter = bvNone
-          ClientHeight = 48
-          ClientWidth = 356
-          TabOrder = 6
-          object XplanetBtn: TBitBtn
-            Left = 299
-            Height = 26
-            Top = 16
-            Width = 26
-            BorderSpacing.InnerBorder = 2
-            Glyph.Data = {
-              36040000424D3604000000000000360000002800000010000000100000000100
-              2000000000000004000064000000640000000000000000000000010000000000
-              0000000000000000000000000000000000000000000000000000000000000100
-              00000100000003000000000000000000000000000000FFFFFF00000000000100
-              0000010000000000000001FFFF00080000001500000000000000000000000000
-              0000000000000100000000000000000000000000000004000000000000000000
-              0000000000FF000000FF000000FF000000FF000000FF000000FF000000FF0000
-              00FF000000FF000000FF000000FF000000000000000000000000000000000000
-              00007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
-              7FFF7F7F7FFF7F7F7FFF7F7F7FFF000000FF0000000000000000000000000000
-              00007F7F7FFFFFFFFFFF0000000000FFFFFF0000000000FFFFFF0000010000FF
-              FFFF0000000000FFFFFF7F7F7FFF000000FF0000000000000000000000000000
-              00007F7F7FFFFFFFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000
-              000000FFFFFF000000007F7F7FFF000000FF0000000000000000000000000000
-              00007F7F7FFFFFFFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FF
-              FFFF0000000000FFFFFF7F7F7FFF000000FF0000000000000000000001000000
-              00007F7F7FFFFFFFFFFF00FFFFFF0000000000FFFFFF0000000000FFFFFF0000
-              000000FFFFFF000000007F7F7FFF000000FF0000010000000000000000000000
-              00007F7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-              FFFFFFFFFFFFFFFFFFFF7F7F7FFF000000FF0000000000000000000000000000
-              00007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
-              7FFF7F7F7FFF7F7F7FFF000000FF000000000000000000000000000000000000
-              00007F7F7FFF00FFFFFFFFFFFFFF00FFFFFFFFFFFFFF7F7F7FFF000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000007F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF00000000000001000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000001000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000100000000000000000000000000000001000000
-              0000000000000000000000000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000010000000000000000000001
-              0000000001000100000001000000000000000000000000000000000000000000
-              0000000000000000000000000000000000000000000000000000
-            }
-            Layout = blGlyphTop
-            Margin = 0
-            NumGlyphs = 0
-            OnClick = XplanetBtnClick
-            TabOrder = 0
-            TabStop = False
-          end
-          object XplanetDir: TEdit
-            Left = 136
-            Height = 22
-            Top = 18
-            Width = 163
-            OnChange = XplanetDirChange
-            TabOrder = 1
-          end
-          object UseXplanet: TCheckBox
-            Left = 13
-            Height = 23
-            Top = 24
-            Width = 92
-            Caption = 'Use Xplanet'
-            OnClick = UseXplanetClick
-            TabOrder = 2
-          end
-          object LabelXplanetBox: TLabel
-            Left = 13
-            Height = 15
-            Top = 2
-            Width = 93
-            Caption = 'LabelXplanetBox'
-            ParentColor = False
-          end
-        end
         object SunPanel: TPanel
           Left = 18
           Height = 106
@@ -388,7 +297,7 @@ object f_config_solsys: Tf_config_solsys
           Width = 356
           ClientHeight = 106
           ClientWidth = 356
-          TabOrder = 7
+          TabOrder = 6
           object SunOnline: TCheckBox
             Left = 13
             Height = 23

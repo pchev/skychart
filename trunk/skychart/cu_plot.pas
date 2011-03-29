@@ -1433,13 +1433,15 @@ if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
           else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
- {$ifdef unix}
+ {$ifdef linux}
     cmd:='export LC_ALL=C; xplanet';
  {$endif}
+ {$ifdef darwin}
+    cmd:='export LC_ALL=C; '+'"'+slash(appdir)+slash(xplanet_dir)+'xplanet"';
+ {$endif}
  {$ifdef mswindows}
-    if not DirectoryExists(xplanet_dir) then exit;
-    chdir(xplanet_dir);
-    cmd:='xplanet.exe';
+//    chdir(xplanet_dir);
+    cmd:='"'+slash(appdir)+slash(xplanet_dir)+'xplanet.exe"';
  {$endif}
  cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate '+ formatfloat(f1,pa) +
       ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,jdt) +

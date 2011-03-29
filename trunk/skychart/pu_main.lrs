@@ -1,3 +1,5 @@
+{ This is an automatically generated lazarus resource file }
+
 LazarusResources.Add('Tf_main','FORMDATA',[
   'TPF0'#7'Tf_main'#6'f_main'#4'Left'#3#11#1#6'Height'#3'X'#2#3'Top'#2'o'#5'Wid'
   +'th'#3'i'#3#13'ActiveControl'#7#8'PanelTop'#7'Caption'#6#14'Cartes du Ciel'
