@@ -32,6 +32,7 @@ Name: startupicon; Description: {cm:CreateStartupIcon}; GroupDescription: {cm:Ad
 
 [InstallDelete]
 Name: {app}\cdc.exe; Type: files; Components: ; Tasks:
+Name: {app}\libFPlanetRender.dll; Type: files; Components: ; Tasks:
 Name: {app}\plugins\bmptopnm.exe; Type: files; Components: ; Tasks:
 Name: {app}\plugins\bmptops.bat; Type: files; Components: ; Tasks:
 Name: {app}\plugins\celestrongps.exe; Type: files; Components: ; Tasks:

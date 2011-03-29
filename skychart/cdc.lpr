@@ -36,7 +36,7 @@ uses
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
   cu_planet, cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info,
   pu_image, pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
-  pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_planetrender,
+  pu_printsetup, pu_position, pu_manualtelescope, u_projection,
   u_constant, u_util, MultiDocPackage, enhedit, pu_config_catalog,
   pu_config_system, pu_config_solsys, pu_config_pictures, pu_config_observatory,
   pu_config_display, pu_config_chart, pu_config_internet, libsql, radec,
