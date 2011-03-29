@@ -26,6 +26,9 @@ if [ $OS_TARGET = win32 ]; then
   unzip -d $destdir system_integration/Windows/data/plugins.zip
   unzip -d $destdir system_integration/Windows/data/planetrender.zip
   unzip -d $destdir system_integration/Windows/data/zlib.zip
+  install -m 755 -d $destdir/data
+  install -m 755 -d $destdir/data/planet
+  unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
 fi
 if [ $OS_TARGET = win64 ]; then
   x86_64-win64-strip -v -o $destdir/skychart.exe skychart/cdc.exe
@@ -35,6 +38,9 @@ if [ $OS_TARGET = win64 ]; then
   install -v -m 644 skychart/library/plan404/libplan404_x64.dll  $destdir/libplan404.dll
   unzip -d $destdir system_integration/Windows/data/sqlite3_x64.zip
   unzip -d $destdir system_integration/Windows/data/zlib_x64.zip
+  install -m 755 -d $destdir/data
+  install -m 755 -d $destdir/data/planet
+  unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
   # win64 specific:
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/iridflar
