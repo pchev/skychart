@@ -1,4 +1,5 @@
 # Common flags
+CC = amd64-mingw32msvc-gcc
 CFLAGS        = -O3 
 SO_Name       = libplan404_x64.dll
 LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
