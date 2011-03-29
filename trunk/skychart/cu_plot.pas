@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, FileUtil, BGRABitmap, BGRABitmapTypes,
-  u_constant, u_util, u_planetrender, u_bitmap, PostscriptCanvas,
+  u_constant, u_util, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
 
@@ -70,7 +70,6 @@ type
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
-     procedure PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
      procedure PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
      procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
@@ -202,10 +201,8 @@ for i:=0 to 6 do
  TransparentColor.blue:= 0;
  TransparentColor.alpha:=65535;
  IntfImgReady:=false;
- InitPlanetRender;
  InitXPlanetRender;
- try
- if planetrender or Xplanetrender then begin
+ if Xplanetrender then begin
     planetbmp:=Tbitmap.create;
     planetbmp.Width:=450;
     planetbmp.Height:=450;
@@ -213,17 +210,6 @@ for i:=0 to 6 do
     planetbmps.Width:=450;
     planetbmps.Height:=450;
     xplanetimg:=TPicture.create;
- end;
- if planetrender then begin
-    settexturepath(slash(appdir)+slash('data')+slash('planet'));
-    // try if it work
-    planetrender:=false;
-    RenderPluto(0,0,0,0,0,1,planetbmp.width,slash(Tempdir)+'planet.bmp');
-    // we are here! so it don't crash, reset the value.
-    planetrender:=true;
- end;
- except
-   planetrender:=false;
  end;
  for i:=1 to maxlabels do begin
     labels[i]:=Tlabel.Create(nil);
@@ -283,10 +269,7 @@ for i:=0 to 6 do
  obmp.free;
  cfgplot.Free;
  cfgchart.Free;
- if planetrender then begin
-    ClosePlanetRender;
- end;
- if planetrender or Xplanetrender then begin
+ if Xplanetrender then begin
     planetbmp.Free;
     planetbmps.Free;
     xplanetimg.Free;
@@ -1172,7 +1155,7 @@ if not cfgplot.Invisible then begin
  if ((xx+ds)>0) and ((xx-ds)<cfgchart.Width) and ((yy+ds)>0) and ((yy-ds)<cfgchart.Height) then begin
   if (n=2) and ((ds<5)or(ds>1500)) then n:=1;
   if (n=1) and (ds<5)  then n:=0;
-  if ((not planetrender)and(not use_xplanet)) and (n=2) then n:=1;
+  if ((not use_xplanet)) and (n=2) then n:=1;
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
@@ -1389,38 +1372,6 @@ finally
   except
   end;
 end;
-end;
-
-procedure TSplot.PlotPlanet2(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,phase,pa,poleincl,sunincl,w,gw:double;WhiteBg:boolean);
-var ds,mode : integer;
-    fn: shortstring;
-const planetsize=450;
-      moonsize=1000;
-begin
-fn:=slash(Tempdir)+'planet.bmp';
-if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
-          else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
-if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
- case ipla of
-  1 :  RenderMercury(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  2 :  RenderVenus(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  4 :  RenderMars(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  5 :  RenderJupiter(w-gw,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  6 :  RenderSaturn(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  7 :  RenderUranus(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  8 :  RenderNeptune(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  9 :  RenderPluto(w,phase,pa,poleincl,sunincl,1,planetsize, fn);
-  10 : RenderSun(w,pa,poleincl,1,planetsize, fn);
-  11 : RenderMoon(w,phase,pa,poleincl,sunincl,1,moonsize, fn);
- end;
- planetbmp.LoadFromFile(SysToUTF8(fn));
- planetbmppla:=ipla;
- planetbmpjd:=jdt;
- planetbmprot:=pa;
-end;
-if cfgplot.TransparentPlanet then mode:=0
-   else mode:=2;
-PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
