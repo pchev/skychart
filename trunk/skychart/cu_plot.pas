@@ -1173,15 +1173,7 @@ if not cfgplot.Invisible then begin
           if (ipla=10)and(size>0) then begin
             PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
           end else begin
-          {$ifdef mswindows}
-          if use_Xplanet then
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
-          else   
-             PlotPlanet2(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,phase,pa+rad2deg*rot,poleincl,sunincl,w,r1,WhiteBg);
-          {$endif}
-          {$ifdef unix}
-             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg);
-          {$endif}
           end;
           end;
       3 : begin // symbol
