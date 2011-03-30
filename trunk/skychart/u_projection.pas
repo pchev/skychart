@@ -799,7 +799,7 @@ END ;
 function ecliptic(j:double):double;
 var u : double;
 begin
-{meeus91 21.3}
+{meeus91 21.3}   { TODO : Check period of validity }
 u:=(j-jd2000)/3652500;
 result:=eps2000 +(
         -4680.93*u
@@ -819,6 +819,7 @@ end;
 procedure nutationme(j:double; var nutl,nuto:double);
 var t,om,me,mas,mam,al : double;
 begin
+if (j>minjdnut)and(j<maxjdnut) then begin
 // use this function only if cu_planet.nutation cannot get nutation from JPL ephemeris
 t:=(j-jd2000)/36525;
 // high precision. using meeus91 table 21.A
@@ -937,14 +938,23 @@ nuto:=secarc*((92025+8.9*t)*cos(1*om)
                  +3*cos(-2*me+1*om)
                  +3*cos(2*mam+2*al+1*om));
 nuto:=nuto*0.0001;
+end else begin
+   nutl:=0;
+   nuto:=0;
+end;
 end;
 
 procedure aberration(j:double; var abe,abp:double);
 var t : double;
 begin
-t:=(j-jd2000)/36525;
-abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
-abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
+if (j>minjdabe)and(j<maxjdabe) then begin
+  t:=(j-jd2000)/36525;
+  abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
+  abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
+end else begin
+  abe:=0;
+  abp:=0;
+end;
 end;
 
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
@@ -958,24 +968,26 @@ sincos(c.e,se,ce);
 sincos(c.sunl,sls,cls);
 sincos(c.abp,sp,cp);
 // nutation
-if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
-   da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
-   dd:=c.nutl*se*cra+c.nuto*sra;
-   ra:=ra+da;
-   de:=de+dd;
-end else begin
-   Eq2Ecl(ra,de,c.e,l,b);
-   l:=l+c.nutl;
-   b:=b+c.nuto;
-   Ecl2Eq(l,b,c.e,ra,de);
+if (c.nutl<>0)or(c.nuto<>0) then begin
+  if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
+     da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
+     dd:=c.nutl*se*cra+c.nuto*sra;
+     ra:=ra+da;
+     de:=de+dd;
+  end else begin
+     Eq2Ecl(ra,de,c.e,l,b);
+     l:=l+c.nutl;
+     b:=b+c.nuto;
+     Ecl2Eq(l,b,c.e,ra,de);
+  end;
 end;
-if aberration then begin
 //aberration
-//meeus91 22.3
-da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-dd:=-abek*(cls*ce*((se/ce)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*((se/ce)*cde-sra*sde)+cra*sde*sp);
-ra:=ra+da;
-de:=de+dd;
+if aberration and((c.abp<>0)or(c.abe<>0)) then begin
+  //meeus91 22.3
+  da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+  dd:=-abek*(cls*ce*((se/ce)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*((se/ce)*cde-sra*sde)+cra*sde*sp);
+  ra:=ra+da;
+  de:=de+dd;
 end;
 end;
 
@@ -990,23 +1002,27 @@ sincos(c.e,se,ce);
 sincos(c.sunl,sls,cls);
 sincos(c.abp,sp,cp);
 // nutation
-if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
-   da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
-   dd:=c.nutl*se*cra+c.nuto*sra;
-   ra:=ra-da;
-   de:=de-dd;
-end else begin
-   Eq2Ecl(ra,de,c.e,l,b);
-   l:=l-c.nutl;
-   b:=b-c.nuto;
-   Ecl2Eq(l,b,c.e,ra,de);
+if (c.nutl<>0)or(c.nuto<>0) then begin
+  if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
+     da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
+     dd:=c.nutl*se*cra+c.nuto*sra;
+     ra:=ra-da;
+     de:=de-dd;
+  end else begin
+     Eq2Ecl(ra,de,c.e,l,b);
+     l:=l-c.nutl;
+     b:=b-c.nuto;
+     Ecl2Eq(l,b,c.e,ra,de);
+  end;
 end;
 //aberration
-//meeus91 22.3
-da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
-ra:=ra-da;
-de:=de-dd;
+if (c.abp<>0)or(c.abe<>0) then begin
+  //meeus91 22.3
+  da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+  dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
+  ra:=ra-da;
+  de:=de-dd;
+end;
 end;
 
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);

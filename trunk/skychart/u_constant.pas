@@ -56,6 +56,10 @@ const cdcversion = 'Version 3.3 svn';
       jd1900 =2415020.3135;
       minjd=-5583575; //-20000 years
       maxjd=9026275; //+20000 years
+      minjdabe=2378496.5; // 1800   //limit for abberation calculation
+      maxjdabe=2524593.5; // 2200
+      minjdnut=2378496.5; // 1800   //limit for nutation calculation
+      maxjdnut=2524593.5; // 2200
       km_au = 149597870.691 ;
       clight = 299792.458 ;
       tlight = km_au/clight/3600/24;
@@ -542,6 +546,7 @@ type
                 IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
                 // working variable
+                ephvalid,ShowPlanetValid,ShowCometValid,ShowAsteroidValid,ShowEarthShadowValid,ShowEclipticValid:boolean;
                 HorizonMax,rap2000,dep2000,RefractionOffset : Double;
                 WindowRatio,BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta,x2: Double;
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
@@ -594,6 +599,7 @@ type
                 xmin,xmax,ymin,ymax: integer;
                 partsize,magsize:single;
                 red_move:boolean;
+                autoskycolorValid:boolean;
 
 //  deep-sky objects colour defaults filss are decalers as boolean - either fill or not
                 DSOColorFillAst: boolean;
@@ -679,6 +685,8 @@ type
 
 // external library
 const
+      jdmin404=625673.5;
+      jdmax404=2816787.5;
 {$ifdef linux}
       lib404   = 'libplan404.so';
       libz = 'libz.so.1';
@@ -1453,6 +1461,12 @@ posmodlabels:=Source.posmodlabels ;
 numcustomlabels:=Source.numcustomlabels ;
 poscustomlabels:=Source.poscustomlabels ;
 horizonlist:=Source.horizonlist ;
+ephvalid:=Source.ephvalid;
+ShowPlanetValid:=Source.ShowPlanetValid;
+ShowCometValid:=Source.ShowCometValid;
+ShowAsteroidValid:=Source.ShowAsteroidValid;
+ShowEarthShadowValid:=Source.ShowEarthShadowValid;
+ShowEclipticValid:=Source.ShowEclipticValid;
 
 for i:=0 to 10 do projname[i] := Source.projname[i];
 for i:=1 to numlabtype do begin
@@ -1549,6 +1563,7 @@ starshapesize:=Source.starshapesize;
 starshapew:=Source.starshapew;
 Invisible:=Source.Invisible;
 AutoSkycolor:=Source.AutoSkycolor;
+autoskycolorValid:=Source.autoskycolorValid;
 TransparentPlanet:=Source.TransparentPlanet;
 UseBMP:=Source.UseBMP;
 for i:=1 to numfont do begin

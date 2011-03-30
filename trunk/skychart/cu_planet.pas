@@ -173,7 +173,8 @@ if load_de(t) then begin    // use jpl DE-
   qr:=sqrt(x*x+y*y);
   if qr<>0 then p.b:=arctan(z/qr);
   Feph_method:='DE'+inttostr(de_type);
-end else begin               // use Plan404
+end
+else if (t>jdmin404)and(t<jdmax404) then begin               // use Plan404
   pl.ipla:=ipla;
   pl.JD:=t;
   Plan404(addr(pl));
@@ -184,6 +185,14 @@ end else begin               // use Plan404
   p.b:=pl.b;
   p.r:=pl.r;
   Feph_method:='plan404';
+end else begin
+  p.x:=0;
+  p.y:=0;
+  p.z:=0;
+  p.l:=0;
+  p.b:=0;
+  p.r:=0;
+  Feph_method:='';
 end;
 end;
 
@@ -286,7 +295,9 @@ if load_de(tjd) then begin    // use jpl DE-
   x:=planet_arr[0];
   y:=planet_arr[1];
   z:=planet_arr[2];
-end else begin    // use Plan404
+  Feph_method:='DE'+inttostr(de_type);
+end
+else if (t0>jdmin404)and(t0<jdmax404) then begin    // use Plan404
      p.ipla:=3;
      p.JD:=tjd;
      i:=Plan404(addr(p));
@@ -294,6 +305,12 @@ end else begin    // use Plan404
      x:=-p.x;
      y:=-p.y;
      z:=-p.z;
+     Feph_method:='plan404';
+end else begin
+  x:=0;
+  y:=0;
+  z:=0;
+  Feph_method:='';
 end;
 // save result for repetitive call
 SolBarycenter:=barycenter;
@@ -715,7 +732,8 @@ if load_de(t0) then begin
    delta:=arctan(w[3]/pp);
    dist:=dkm/km_au;
    Feph_method:='DE'+inttostr(de_type);
-end else begin  // use plan404
+end
+else  if (t0>jdmin404)and(t0<jdmax404) then  begin  // use plan404
    p.JD:=t0;
    p.ipla:=11;
    Plan404(addr(p));
@@ -728,6 +746,9 @@ end else begin  // use plan404
    precession(t0,jd2000,alpha,delta);
    dkm:=dist*km_au;
    Feph_method:='plan404';
+end else begin
+  Feph_method:='';
+  exit;
 end;
 diam:=2*358482800/dkm;
 t:=(t0-2415020)/36525;  { meeus 15.1 }
@@ -769,6 +790,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
  // Sun first
  ipla:=10;
  Sun(jdt,ar,de,dist,diam);
+ if eph_method='' then exit;
  precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
  cfgsc.PlanetLst[j,32,1]:=rmod(ar+pi,pi2);   // use geocentrique position for earth umbra
  cfgsc.PlanetLst[j,32,2]:=-de;
@@ -908,7 +930,7 @@ end;
 Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
 begin
 ok:=false;
-if (id<1) or (id>30) then exit;
+if (not cfgsc.ephvalid) or (id<1) or (id>30) then exit;
 ok:=true;
 ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
@@ -921,7 +943,7 @@ function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tco
 var i : integer;
 begin
 result:=false;
-   for i:=1 to 30 do begin
+if cfgsc.ephvalid then  for i:=1 to 30 do begin
      if (i=9) and (not cfgsc.ShowPluto) then continue;
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
          FindNumPla(i,ra,de,result,cfgsc);
@@ -950,13 +972,13 @@ end;
 result := false;
 directfind := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
-repeat
+if cfgsc.ephvalid then repeat
   inc(CurrentPlanet);
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then continue;    // skip Earth
   if (CurrentPlanet=9) and (not cfgsc.ShowPluto) then continue; // skip Pluto
   if CurrentPlanet=31 then continue;   // skip Saturn ring
-  if (CurrentPlanet=32)and not cfgsc.showearthshadow then continue;
+  if (CurrentPlanet=32)and not cfgsc.ShowEarthShadowValid then continue;
   if CurrentPlanet>32 then begin
      inc(CurrentStep);
      if nextobj or (CurrentStep>=cfgsc.SimNb) then begin
@@ -1686,7 +1708,7 @@ cfgsc.ast_day:='cdc_ast_day_'+cfgsc.chartname;
 cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
 cfgsc.AsteroidNb:=0;
 if not db1.Active then cfgsc.ShowAsteroid:=false;
-if not cfgsc.ShowAsteroid then exit;
+if not cfgsc.ShowAsteroidValid then exit;
 if not NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc) then begin
    cfgsc.ShowAsteroid:=false;
    exit;
@@ -1763,7 +1785,7 @@ cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
 cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
 cfgsc.CometNb:=0;
 if not db1.Active then cfgsc.ShowComet:=false;
-if not cfgsc.ShowComet then exit;
+if not cfgsc.ShowCometValid then exit;
 if not NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc) then begin
    cfgsc.ShowComet:=false;
    exit;
@@ -1843,7 +1865,7 @@ var dist,r,elong,phase,magn : double;
   ira,idec,imag: integer;
 begin
 result:=false;
-if not db1.Active then exit;
+if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 qry:='SELECT id FROM cdc_ast_name'
     +' where name like "%'+astname+'%"'
     +' limit 1';
@@ -1877,7 +1899,7 @@ var dist,r,elong,phase,magn : double;
   ira,idec,imag: integer;
 begin
 result:=false;
-if not db1.Active then exit;
+if (not db1.Active)or(not cfgsc.ephvalid) then exit;
 qry:='SELECT id FROM cdc_com_name'
     +' where name like "%'+comname+'%"'
     +' limit 1';
@@ -1917,7 +1939,7 @@ begin
 if not nextobj then begin CurrentAstStep:=0;CurrentAsteroid:=0; end;
 result := false;
 desc:='';tar:=1;tde:=1;
-if cfgsc.AsteroidNb>0 then repeat
+if cfgsc.ephvalid and (cfgsc.AsteroidNb>0) then repeat
   inc(CurrentAsteroid);
   if CurrentAsteroid>cfgsc.AsteroidNb then begin
      inc(CurrentAstStep);
@@ -2000,7 +2022,7 @@ begin
 if not nextobj then begin CurrentComStep:=0;CurrentComet:=0; end;
 result := false;
 desc:='';tar:=1;tde:=1;
-if cfgsc.CometNb>0 then repeat
+if cfgsc.ephvalid and (cfgsc.CometNb>0) then repeat
   inc(CurrentComet);
   if CurrentComet>cfgsc.CometNb then begin
      inc(CurrentComStep);
