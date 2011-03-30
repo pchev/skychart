@@ -466,9 +466,11 @@ procedure Tf_config_observatory.Button7Click(Sender: TObject);
 var i: integer;
 begin
 i:=ComboBox1.ItemIndex;
-cmain.ObsNameList.Objects[i].Free;
-cmain.ObsNameList.Delete(i);
-ComboBox1.Items.Delete(i);
+if i>=0 then begin
+  cmain.ObsNameList.Objects[i].Free;
+  cmain.ObsNameList.Delete(i);
+  ComboBox1.Items.Delete(i);
+end;
 end;
 
 procedure Tf_config_observatory.Button8Click(Sender: TObject);
