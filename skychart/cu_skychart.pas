@@ -303,7 +303,7 @@ end;
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
-  if cfgsc.ShowPlanet then DrawPlanet;
+  if cfgsc.ShowPlanetValid then DrawPlanet;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
   // and the horizon line if not transparent
@@ -535,12 +535,13 @@ begin
 {$endif}
 if Fplot.cfgplot.color[0]>Fplot.cfgplot.color[11] then begin // white background
    Fplot.cfgplot.AutoSkyColor:=false;
+   Fplot.cfgplot.autoskycolorValid:=false;
    Fplot.cfgplot.StarPlot:=0;
    Fplot.cfgplot.NebPlot:=0;
    cfgsc.FillMilkyWay:=false;
    cfgsc.WhiteBg:=true;
 end else cfgsc.WhiteBg:=false;
-if Fplot.cfgplot.AutoSkyColor and (cfgsc.Projpole=AltAz) then begin
+if Fplot.cfgplot.autoskycolorValid and (cfgsc.Projpole=AltAz) then begin
  if (cfgsc.fov>10*deg2rad) then begin
   if cfgsc.CurSunH>0 then i:=1
   else if cfgsc.CurSunH>-5*deg2rad then i:=2
@@ -610,6 +611,13 @@ cfgsc.e:=ecliptic(cfgsc.JdChart);
 Fplanet.nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
+cfgsc.ephvalid:=(Fplanet.eph_method>'');
+cfgsc.ShowPlanetValid:=cfgsc.ShowPlanet and cfgsc.ephvalid;
+cfgsc.ShowAsteroidValid:=cfgsc.ShowAsteroid and cfgsc.ephvalid;
+cfgsc.ShowCometValid:=cfgsc.ShowComet and cfgsc.ephvalid;
+cfgsc.ShowEarthShadowValid:=cfgsc.ShowEarthShadow and cfgsc.ephvalid;
+cfgsc.ShowEclipticValid:=cfgsc.ShowEcliptic and cfgsc.ephvalid;
+Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
 PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
@@ -1244,7 +1252,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     end;
   end;
   Fplot.ClosePixelImg;
-  if cfgsc.ShowEarthShadow then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
+  if cfgsc.ShowEarthShadowValid then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
 end;
 result:=true;
 end;
@@ -1282,7 +1290,7 @@ var
   i,j,lid: integer;
   ltxt:string;
 begin
-if cfgsc.ShowAsteroid then begin
+if cfgsc.ShowAsteroidValid then begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
 {$endif}
@@ -1331,7 +1339,7 @@ var
   i,j,lid,sz : integer;
   ltxt:string;
 begin
-if cfgsc.ShowComet then begin
+if cfgsc.ShowCometValid then begin
   {$ifdef trace_debug}
   WriteTrace('SkyChart '+cfgsc.chartname+': draw comets');
   {$endif}
@@ -1558,7 +1566,7 @@ begin
 {$endif}
 Color:=Fplot.cfgplot.Color[14];
 xp:=0;yp:=0;
-if cfgsc.ShowPlanet then for i:=1 to 11 do
+if cfgsc.ShowPlanetValid then for i:=1 to 11 do
   if (i<>3)and(cfgsc.SimObject[i]) then for j:=0 to cfgsc.SimNb-1 do begin
     projection(cfgsc.Planetlst[j,i,1],cfgsc.Planetlst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
@@ -1922,15 +1930,15 @@ if result then begin
    cfgsc.TrackDec:=rec.dec;
 end else begin
 // search solar system object
-   if cfgsc.ShowPlanet then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+   if cfgsc.ShowPlanetValid then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
       if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d; // add date to the name if simulation for more than one date
    end else begin
-      if cfgsc.ShowAsteroid then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc.ShowAsteroidValid then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
    end else begin
-      if cfgsc.ShowComet then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc.ShowCometValid then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
    end else begin
@@ -2912,7 +2920,7 @@ var l,b,e,ar,de,xx,yy : double;
     first : boolean;
 begin
 result:=false;
-if not cfgsc.ShowEcliptic then exit;
+if not cfgsc.ShowEclipticValid then exit;
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
 {$endif}
