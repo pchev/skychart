@@ -30,6 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, gcatunit, {libcatalog,} // libcatalog statically linked
+     BGRABitmap, BGRABitmapTypes,
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
@@ -277,7 +278,7 @@ end;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
-    if (not cfgsc.horizonopaque) then DrawHorizon;
+    if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP) then DrawHorizon;
     DrawComet;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
     if cfgsc.ShowBackgroundImage then DrawNebImages;
@@ -307,7 +308,7 @@ end;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
   // and the horizon line if not transparent
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque then DrawHorizon;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque and (not Fplot.cfgplot.UseBMP) then DrawHorizon;
 
   // the compass and scale
   DrawCompass;
@@ -2455,7 +2456,10 @@ var az,h,hstep,azp,hpstep,x1,y1 : double;
     ps: array[0..1,0..2*hdiv+1] of single;
     i,j,xx,yy: integer;
     x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1 :single;
-    first:boolean;
+    first,fill:boolean;
+    hbmp : TBGRABitmap;
+    col: TColor;
+    col1,col2: TBGRAPixel;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
@@ -2463,10 +2467,96 @@ begin
 fillx1:=0;
 filly1:=0;
 if cfgsc.ProjPole=Altaz then begin
-  if (cfgsc.hcentre<(-10))or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
+  if (cfgsc.hcentre<0)or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
      fillx1:=(cfgsc.xmax-cfgsc.xmin)div 2;
      filly1:=(cfgsc.ymax-cfgsc.ymin)div 2;
   end;
+  if Fplot.cfgplot.UseBMP then begin
+    fill:=cfgsc.FillHorizon;
+    hbmp:=TBGRABitmap.Create;
+    hbmp.SetSize(fplot.cbmp.Width,fplot.cbmp.Height);
+    hbmp.FillTransparent;
+    col:=FPlot.cfgplot.Color[19];
+    if col = FPlot.cfgplot.bgcolor then begin
+      fill:=false;
+      col:=col xor clWhite;
+    end;
+    col1:=ColorToBGRA(col);
+    if cfgsc.horizonopaque then col1.alpha:=255
+       else col1.alpha:=176;
+    col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
+    if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
+       for i:=1 to 361 do begin
+         h:=cfgsc.horizonlist^[i];
+         az:=deg2rad*rmod(360+i-1-180,360);
+         proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+         WindowXY(x1,y1,xh,yh,cfgsc);
+         if first then begin
+            first:=false;
+            x0h:=xh;
+            y0h:=yh;
+         end else begin
+            if (abs(xph-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yph-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius) and
+               (abs(xh-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yh-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius)
+               then begin
+                 hbmp.DrawLine(round(xph),round(yph),round(xh),round(yh),col1,true);
+               end;
+         end;
+         xph:=xh;
+         yph:=yh;
+       end;
+        if (abs(xh-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yh-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius) and
+           (abs(x0h-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(y0h-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius)
+           then begin
+             hbmp.DrawLine(round(xh),round(yh),round(x0h),round(y0h),col1,true);
+           end;
+
+       if fill and (not Fplot.cfgchart.onprinter) then begin
+          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet)
+          else begin
+          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
+          if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
+          if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
+          if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
+          if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+          end;
+       end;
+    end;
+    first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+    for i:=1 to 360 do begin
+         az:=deg2rad*rmod(360+i-1-180,360);
+         proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+         WindowXY(x1,y1,xh,yh,cfgsc);
+         if first then begin
+            first:=false;
+            x0h:=xh;
+            y0h:=yh;
+         end else begin
+            hbmp.DrawLineAntialias(xph,yph,xh,yh,col2,2);
+         end;
+         xph:=xh;
+         yph:=yh;
+    end;
+    hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
+    if (not cfgsc.ShowHorizon) or (cfgsc.HorizonMax<=0)or(cfgsc.horizonlist=nil) then begin
+      if fill and (not Fplot.cfgchart.onprinter) then begin
+         if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
+         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
+         if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
+         if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
+         if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
+         if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+      end;
+    end;
+    Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
+    hbmp.free;
+ end else begin
   if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
      for i:=1 to 361 do begin
        h:=cfgsc.horizonlist^[i];
@@ -2529,6 +2619,7 @@ if cfgsc.ProjPole=Altaz then begin
      end;
      Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
   end;
+ end;
   if cfgsc.ShowHorizonDepression then begin
      first:=true; xp:=0;yp:=0;
      h:=cfgsc.ObsHorizonDepression;
@@ -2564,7 +2655,7 @@ if cfgsc.ProjPole=Altaz then begin
        az:=az+45;
     end;
   end;
-  if (cfgsc.hcentre<(-10))or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
+  if (not(Fplot.cfgplot.UseBMP and fill))and(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
      Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori);
   end;
 
