@@ -30,15 +30,7 @@ function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyl
 
 implementation
 
-uses math, BGRABlend;
-
-procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
-  width: single; texture: TBGRACustomBitmap; linecap: TPenEndCap;
-  joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-  options: TBGRAPolyLineOptions);
-begin
-
-end;
+uses math;
 
 procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);

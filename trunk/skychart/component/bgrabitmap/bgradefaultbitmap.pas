@@ -130,8 +130,6 @@ type
     function OriginalTextSize(s: string): TSize;
     procedure FilterOriginalText(var temp: TBGRACustomBitmap; c: TBGRAPixel);
 
-    function Spline(y0, y1, y2, y3: single; t: single): single;
-
   public
     //drawing
     FontName:  string;
@@ -240,8 +238,13 @@ type
     function TextSize(s: string): TSize; override;
 
     {Spline}
-    function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF; override;
-    function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF; override;
+    function ComputeClosedSpline(const APoints: array of TPointF): ArrayOfTPointF; override;
+    function ComputeOpenedSpline(const APoints: array of TPointF): ArrayOfTPointF; override;
+
+    function ComputeBezierCurve(const ACurve: TCubicBezierCurve): ArrayOfTPointF; override;
+    function ComputeBezierCurve(const ACurve: TQuadraticBezierCurve): ArrayOfTPointF; override;
+    function ComputeBezierSpline(const ASpline: array of TCubicBezierCurve): ArrayOfTPointF; override;
+    function ComputeBezierSpline(const ASpline: array of TQuadraticBezierCurve): ArrayOfTPointF; override;
 
     {Filling}
     procedure ApplyGlobalOpacity(alpha: byte); override;
@@ -2088,16 +2091,40 @@ begin
   end;
 end;
 
-function TBGRADefaultBitmap.ComputeClosedSpline(const points: array of TPointF
+function TBGRADefaultBitmap.ComputeClosedSpline(const APoints: array of TPointF
   ): ArrayOfTPointF;
 begin
-  result := BGRAPolygon.ComputeClosedSpline(points);
+  result := BGRAPolygon.ComputeClosedSpline(APoints);
 end;
 
-function TBGRADefaultBitmap.ComputeOpenedSpline(const points: array of TPointF
+function TBGRADefaultBitmap.ComputeOpenedSpline(const APoints: array of TPointF
   ): ArrayOfTPointF;
 begin
-  result := BGRAPolygon.ComputeOpenedSpline(points);
+  result := BGRAPolygon.ComputeOpenedSpline(APoints);
+end;
+
+function TBGRADefaultBitmap.ComputeBezierCurve(const ACurve: TCubicBezierCurve
+  ): ArrayOfTPointF;
+begin
+  Result:= BGRAPolygon.ComputeBezierCurve(ACurve);
+end;
+
+function TBGRADefaultBitmap.ComputeBezierCurve(
+  const ACurve: TQuadraticBezierCurve): ArrayOfTPointF;
+begin
+  Result:= BGRAPolygon.ComputeBezierCurve(ACurve);
+end;
+
+function TBGRADefaultBitmap.ComputeBezierSpline(
+  const ASpline: array of TCubicBezierCurve): ArrayOfTPointF;
+begin
+  Result:= BGRAPolygon.ComputeBezierSpline(ASpline);
+end;
+
+function TBGRADefaultBitmap.ComputeBezierSpline(
+  const ASpline: array of TQuadraticBezierCurve): ArrayOfTPointF;
+begin
+  Result:= BGRAPolygon.ComputeBezierSpline(ASpline);
 end;
 
 {$hints on}
@@ -2426,11 +2453,6 @@ begin
     Inc(p);
   end;
   InvalidateBitmap;
-end;
-
-function TBGRADefaultBitmap.Spline(y0, y1, y2, y3: single; t: single): single;
-begin
-  result := BGRAPolygon.Spline(y0,y1,y2,y3,t);
 end;
 
 procedure TBGRADefaultBitmap.PutImage(x, y: integer; Source: TBGRACustomBitmap;

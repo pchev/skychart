@@ -87,7 +87,7 @@ procedure BGRAReplace(var Source: TBGRABitmap; Temp: TObject);
 
 implementation
 
-uses GraphType, BGRAAnimatedGif;
+uses GraphType;
 
 var
   bmp: TBGRABitmap;

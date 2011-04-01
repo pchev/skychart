@@ -144,6 +144,10 @@ procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x
 {----------------------- Spline ------------------}
 
 function Spline(y0, y1, y2, y3: single; t: single): single;
+function ComputeBezierCurve(const curve: TCubicBezierCurve): ArrayOfTPointF; overload;
+function ComputeBezierCurve(const curve: TQuadraticBezierCurve): ArrayOfTPointF; overload;
+function ComputeBezierSpline(const spline: array of TCubicBezierCurve): ArrayOfTPointF; overload;
+function ComputeBezierSpline(const spline: array of TQuadraticBezierCurve): ArrayOfTPointF; overload;
 function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
 function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
@@ -1123,18 +1127,167 @@ begin
   Result := a0 * t * t2 + a1 * t2 + a2 * t + a3;
 end;
 
-function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
+function ComputeCurvePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
+var
+  len: single;
+begin
+  len    := sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y);
+  len    := max(len, sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y));
+  len    := max(len, sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y));
+  Result := round(sqrt(sqrt(len)) * 2);
+end;
 
-  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
-  var
-    len: single;
+function ComputeBezierCurve(const curve: TCubicBezierCurve): ArrayOfTPointF; overload;
+var
+  t,f1,f2,f3,f4: single;
+  i,nb: Integer;
+begin
+  nb := ComputeCurvePrecision(curve.p1,curve.c1,curve.c2,curve.p2);
+  if nb <= 1 then nb := 2;
+  setlength(result,nb);
+  result[0] := curve.p1;
+  result[nb-1] := curve.p2;
+  for i := 1 to nb-2 do
   begin
-    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
-    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
-    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
-    Result := round(sqrt(len) * 2);
+    t := i/(nb-1);
+    f1 := (1-t);
+    f2 := f1*f1;
+    f1 *= f2;
+    f2 *= t*3;
+    f4 := t*t;
+    f3 := f4*(1-t)*3;
+    f4 *= t;
+
+    result[i] := PointF(f1*curve.p1.x + f2*curve.c1.x +
+                  f3*curve.c2.x + f4*curve.p2.x,
+                  f1*curve.p1.y + f2*curve.c1.y +
+                  f3*curve.c2.y + f4*curve.p2.y);
+  end;
+end;
+
+function ComputeBezierCurve(const curve: TQuadraticBezierCurve): ArrayOfTPointF; overload;
+var
+  t,f1,f2,f3: single;
+  i,nb: Integer;
+begin
+  nb := ComputeCurvePrecision(curve.p1,curve.c,curve.c,curve.p2);
+  if nb <= 1 then nb := 2;
+  setlength(result,nb);
+  result[0] := curve.p1;
+  result[nb-1] := curve.p2;
+  for i := 1 to nb-2 do
+  begin
+    t := i/(nb-1);
+    f1 := (1-t);
+    f3 := t;
+    f2 := f1*f3*2;
+    f1 *= f1;
+    f3 *= f3;
+    result[i] := PointF(f1*curve.p1.x + f2*curve.c.x + f3*curve.p2.x,
+                  f1*curve.p1.y + f2*curve.c.y + f3*curve.p2.y);
+  end;
+end;
+
+function ComputeBezierSpline(const spline: array of TCubicBezierCurve): ArrayOfTPointF;
+var
+  curves: array of array of TPointF;
+  nb: integer;
+  lastPt: TPointF;
+  i: Integer;
+  j: Integer;
+
+  procedure AddPt(pt: TPointF); inline;
+  begin
+    result[nb]:= pt;
+    inc(nb);
+    lastPt := pt;
   end;
 
+  function EqLast(pt: TPointF): boolean;
+  begin
+    result := (pt.x = lastPt.x) and (pt.y = lastPt.y);
+  end;
+
+begin
+  if length(spline)= 0 then
+  begin
+    setlength(result,0);
+    exit;
+  end;
+  setlength(curves, length(spline));
+  for i := 0 to high(spline) do
+    curves[i] := ComputeBezierCurve(spline[i]);
+  nb := length(curves[0]);
+  lastPt := curves[0][high(curves[0])];
+  for i := 1 to high(curves) do
+  begin
+    inc(nb,length(curves[i]));
+    if EqLast(curves[i][0]) then dec(nb);
+    lastPt := curves[i][high(curves[i])];
+  end;
+  setlength(result,nb);
+  nb := 0;
+  for j := 0 to high(curves[0]) do
+    AddPt(curves[0][j]);
+  for i := 1 to high(curves) do
+  begin
+    if not EqLast(curves[i][0]) then AddPt(curves[i][0]);
+    for j := 1 to high(curves[i]) do
+      AddPt(curves[i][j]);
+  end;
+end;
+
+function ComputeBezierSpline(const spline: array of TQuadraticBezierCurve
+  ): ArrayOfTPointF;
+var
+  curves: array of array of TPointF;
+  nb: integer;
+  lastPt: TPointF;
+  i: Integer;
+  j: Integer;
+
+  procedure AddPt(pt: TPointF); inline;
+  begin
+    result[nb]:= pt;
+    inc(nb);
+    lastPt := pt;
+  end;
+
+  function EqLast(pt: TPointF): boolean;
+  begin
+    result := (pt.x = lastPt.x) and (pt.y = lastPt.y);
+  end;
+
+begin
+  if length(spline)= 0 then
+  begin
+    setlength(result,0);
+    exit;
+  end;
+  setlength(curves, length(spline));
+  for i := 0 to high(spline) do
+    curves[i] := ComputeBezierCurve(spline[i]);
+  nb := length(curves[0]);
+  lastPt := curves[0][high(curves[0])];
+  for i := 1 to high(curves) do
+  begin
+    inc(nb,length(curves[i]));
+    if EqLast(curves[i][0]) then dec(nb);
+    lastPt := curves[i][high(curves[i])];
+  end;
+  setlength(result,nb);
+  nb := 0;
+  for j := 0 to high(curves[0]) do
+    AddPt(curves[0][j]);
+  for i := 1 to high(curves) do
+  begin
+    if not EqLast(curves[i][0]) then AddPt(curves[i][0]);
+    for j := 1 to high(curves[i]) do
+      AddPt(curves[i][j]);
+  end;
+end;
+
+function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
 var
   i, j, nb, idx, pre: integer;
   ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
@@ -1155,7 +1308,7 @@ begin
     ptPrev  := points[i];
     ptNext  := points[(i + 1) mod length(points)];
     ptNext2 := points[(i + 2) mod length(points)];
-    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    nb      += ComputeCurvePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
   end;
 
   setlength(Result, nb);
@@ -1167,7 +1320,7 @@ begin
     ptPrev  := points[i];
     ptNext  := points[(i + 1) mod length(points)];
     ptNext2 := points[(i + 2) mod length(points)];
-    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    pre     := ComputeCurvePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
     for j := 1 to pre - 1 do
     begin
       Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
@@ -1183,17 +1336,6 @@ begin
 end;
 
 function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
-
-  function computePrecision(pt1, pt2, pt3, pt4: TPointF): integer;
-  var
-    len: single;
-  begin
-    len    := sqrt(sqr(pt1.x - pt2.x) + sqr(pt1.y - pt2.y));
-    len    := max(len, sqrt(sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y)));
-    len    := max(len, sqrt(sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y)));
-    Result := round(sqrt(len) * 2);
-  end;
-
 var
   i, j, nb, idx, pre: integer;
   ptPrev, ptPrev2, ptNext, ptNext2: TPointF;
@@ -1214,7 +1356,7 @@ begin
     ptPrev  := points[i];
     ptNext  := points[i + 1];
     ptNext2 := points[min(high(points), i + 2)];
-    nb      += computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    nb      += ComputeCurvePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
   end;
 
   setlength(Result, nb);
@@ -1226,7 +1368,7 @@ begin
     ptPrev  := points[i];
     ptNext  := points[i + 1];
     ptNext2 := points[min(high(points), i + 2)];
-    pre     := computePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
+    pre     := ComputeCurvePrecision(ptPrev2, ptPrev, ptNext, ptNext2);
     for j := 1 to pre - 1 do
     begin
       Result[idx] := pointF(spline(ptPrev2.x, ptPrev.X, ptNext.X, ptNext2.X, j / pre),
