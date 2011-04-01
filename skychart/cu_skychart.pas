@@ -2452,11 +2452,12 @@ end;
 
 function Tskychart.DrawHorizon:boolean;
 const hdiv=10;
-var az,h,hstep,azp,hpstep,x1,y1 : double;
+var az,h,hstep,azp,hpstep,x1,y1,hlimit : double;
     ps: array[0..1,0..2*hdiv+1] of single;
+    psf: array of TPointF;
     i,j,xx,yy: integer;
     x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1 :single;
-    first,fill:boolean;
+    first,fill,ok:boolean;
     hbmp : TBGRABitmap;
     col: TColor;
     col1,col2: TBGRAPixel;
@@ -2466,8 +2467,9 @@ begin
 {$endif}
 fillx1:=0;
 filly1:=0;
+hlimit:=1*deg2rad;
 if cfgsc.ProjPole=Altaz then begin
-  if (cfgsc.hcentre<0)or(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
+  if (cfgsc.hcentre<-hlimit) then begin
      fillx1:=(cfgsc.xmax-cfgsc.xmin)div 2;
      filly1:=(cfgsc.ymax-cfgsc.ymin)div 2;
   end;
@@ -2486,42 +2488,60 @@ if cfgsc.ProjPole=Altaz then begin
        else col1.alpha:=176;
     col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
     if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
-       for i:=1 to 361 do begin
-         h:=cfgsc.horizonlist^[i];
-         az:=deg2rad*rmod(360+i-1-180,360);
-         proj2(-az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
-         WindowXY(x1,y1,xh,yh,cfgsc);
-         if first then begin
-            first:=false;
-            x0h:=xh;
-            y0h:=yh;
-         end else begin
-            if (abs(xph-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yph-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius) and
-               (abs(xh-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yh-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius)
-               then begin
-                 hbmp.DrawLine(round(xph),round(yph),round(xh),round(yh),col1,true);
-               end;
-         end;
-         xph:=xh;
-         yph:=yh;
-       end;
-        if (abs(xh-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(yh-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius) and
-           (abs(x0h-Fplot.cfgchart.hw)<Fplot.cfgplot.outradius)and(abs(y0h-Fplot.cfgchart.hh)<Fplot.cfgplot.outradius)
-           then begin
-             hbmp.DrawLine(round(xh),round(yh),round(x0h),round(y0h),col1,true);
-           end;
 
+      for i:=1 to 361 do begin
+        h:=cfgsc.horizonlist^[i];
+        az:=deg2rad*rmod(360+i-1-180,360);
+        hstep:=h/hdiv;
+        if i=1 then begin
+          hpstep:=hstep;
+          azp:=az;
+          continue;
+        end else begin
+          if cfgsc.FillHorizon and ((abs(hpstep-hstep))>(0.35/hdiv)) then hpstep:=hstep;
+          ok:=true;
+          for j:=0 to hdiv do begin
+            proj2(-azp,j*hpstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+            WindowXY(x1,y1,ps[0,j],ps[1,j],cfgsc);
+            proj2(-az-3*minarc,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+            WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
+              if (abs(ps[0,j]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+                 (abs(ps[1,j]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
+                 (abs(ps[0,j+hdiv+1]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+                 (abs(ps[1,j+hdiv+1]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
+                 then begin
+                   ok:=false;
+                   break;
+                 end;
+          end;
+          if ok then begin
+            if cfgsc.FillHorizon then begin
+              SetLength(psf,2*hdiv+2);
+              for j:=0 to 2*hdiv+1 do begin
+                 psf[j].x:=ps[0,j];
+                 psf[j].y:=ps[1,j];
+              end;
+              hbmp.FillPolyAntialias(psf,col1);
+            end else begin
+              hbmp.DrawLineAntialias(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],col1,1,false);
+            end;
+            hbmp.DrawLineAntialias(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],col2,2,false);
+          end;
+        end;
+        azp:=az;
+        hpstep:=hstep;
+      end;
        if fill and (not Fplot.cfgchart.onprinter) then begin
           if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet)
           else begin
           GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
-          if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+          if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
           GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
-          if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+          if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
           GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
-          if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
           GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
-          if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
           end;
        end;
     end;
@@ -2535,23 +2555,33 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-            hbmp.DrawLineAntialias(xph,yph,xh,yh,col2,2);
+             if (abs(xph-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+                (abs(yph-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
+                (abs(xh-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+                (abs(yh-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
+                then
+                  hbmp.DrawLineAntialias(xph,yph,xh,yh,col2,2);
          end;
          xph:=xh;
          yph:=yh;
     end;
-    hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
+    if (abs(xh-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+       (abs(yh-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
+       (abs(x0h-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
+       (abs(y0h-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
+       then
+        hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
     if (not cfgsc.ShowHorizon) or (cfgsc.HorizonMax<=0)or(cfgsc.horizonlist=nil) then begin
       if fill and (not Fplot.cfgchart.onprinter) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
-         if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+         if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
-         if h<0 then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+         if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
-         if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+         if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
-         if h<0 then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+         if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
       end;
     end;
     Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);

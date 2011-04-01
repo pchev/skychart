@@ -73,6 +73,16 @@ type
   end;
   ArrayOfTPointF = array of TPointF;
 
+  TCubicBezierCurve = record
+    p1,c1,c2,p2: TPointF;
+  end;
+  TQuadraticBezierCurve = record
+    p1,c,p2: TPointF;
+  end;
+
+function BezierCurve(origin, control1, control2, destination: TPointF) : TCubicBezierCurve; overload;
+function BezierCurve(origin, control, destination: TPointF) : TQuadraticBezierCurve; overload;
+
 const
   dmFastBlend = dmLinearBlend;
 
@@ -230,6 +240,10 @@ type
      {Spline}
      function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF; virtual; abstract;
      function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF; virtual; abstract;
+     function ComputeBezierCurve(const curve: TCubicBezierCurve): ArrayOfTPointF; virtual; abstract;
+     function ComputeBezierCurve(const curve: TQuadraticBezierCurve): ArrayOfTPointF; virtual; abstract;
+     function ComputeBezierSpline(const spline: array of TCubicBezierCurve): ArrayOfTPointF; virtual; abstract;
+     function ComputeBezierSpline(const spline: array of TQuadraticBezierCurve): ArrayOfTPointF; virtual; abstract;
 
      {Filling}
      procedure FillTransparent; virtual;
@@ -372,6 +386,23 @@ var
 implementation
 
 uses Math, SysUtils;
+
+function BezierCurve(origin, control1, control2, destination: TPointF
+  ): TCubicBezierCurve;
+begin
+  result.p1 := origin;
+  result.c1 := control1;
+  result.c2 := control2;
+  result.p2 := destination;
+end;
+
+function BezierCurve(origin, control, destination: TPointF
+  ): TQuadraticBezierCurve;
+begin
+  result.p1 := origin;
+  result.c := control;
+  result.p2 := destination;
+end;
 
 function isEmptyPointF(pt: TPointF): boolean;
 begin

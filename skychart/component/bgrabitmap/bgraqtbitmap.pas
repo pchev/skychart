@@ -59,7 +59,7 @@ uses BGRABitmapTypes, LCLType,
 procedure TBGRAQtBitmap.SlowDrawTransparent(ABitmap: TBGRADefaultBitmap;
   ACanvas: TCanvas; ARect: TRect);
 var
-  background, temp: TBGRADefaultBitmap;
+  background, temp: TBGRACustomBitmap;
   w, h: integer;
 
 begin
