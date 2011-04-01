@@ -5,19 +5,19 @@ unit BGRAResample;
 interface
 
 uses
-  Classes, SysUtils, BGRADefaultBitmap;
+  Classes, SysUtils, BGRABitmapTypes;
 
-function FineResample(bmp: TBGRADefaultBitmap;
-  NewWidth, NewHeight: integer): TBGRADefaultBitmap;
-function SimpleStretch(bmp: TBGRADefaultBitmap;
-  NewWidth, NewHeight: integer): TBGRADefaultBitmap;
+function FineResample(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer): TBGRACustomBitmap;
+function SimpleStretch(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer): TBGRACustomBitmap;
 
 implementation
 
-uses GraphType, BGRABitmapTypes, Math;
+uses GraphType, Math;
 
-function FineResampleLarger(bmp: TBGRADefaultBitmap;
-  newWidth, newHeight: integer): TBGRADefaultBitmap;
+function FineResampleLarger(bmp: TBGRACustomBitmap;
+  newWidth, newHeight: integer): TBGRACustomBitmap;
 var
   yb, xb: integer;
   pdest:  PBGRAPixel;
@@ -27,7 +27,7 @@ var
   factHoriz, factVert, factCorrX, factCorrY, Sum, fUpLeft, fUpRight,
   fLowLeft, fLowRight, faUpLeft, faUpRight, faLowLeft, faLowRight: single;
   rSum, gSum, bSum, aSum: single;
-  temp:   TBGRADefaultBitmap;
+  temp:   TBGRACustomBitmap;
 begin
   if (newWidth < bmp.Width) or (newHeight < bmp.Height) then
     raise ERangeError.Create('FineResampleLarger: New dimensions must be greater or equal ('+IntToStr(bmp.Width)+'x'+IntToStr(bmp.Height)+'->'+IntToStr(newWidth)+'x'+IntToStr(newHeight)+')');
@@ -130,8 +130,8 @@ begin
   end;
 end;
 
-function FastSimpleStretchLarger(bmp: TBGRADefaultBitmap;
-  xFactor, yFactor: integer): TBGRADefaultBitmap;
+function FastSimpleStretchLarger(bmp: TBGRACustomBitmap;
+  xFactor, yFactor: integer): TBGRACustomBitmap;
 var
   y_src, yb, y_dest: integer;
 
@@ -182,8 +182,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function SimpleStretchLarger(bmp: TBGRADefaultBitmap;
-  newWidth, newHeight: integer): TBGRADefaultBitmap;
+function SimpleStretchLarger(bmp: TBGRACustomBitmap;
+  newWidth, newHeight: integer): TBGRACustomBitmap;
 var
   x_src, y_src: integer;
   inc_x_dest, mod_x_dest, acc_x_dest, inc_y_dest, mod_y_dest, acc_y_dest: integer;
@@ -268,8 +268,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function SimpleStretchSmaller(bmp: TBGRADefaultBitmap;
-  newWidth, newHeight: integer): TBGRADefaultBitmap;
+function SimpleStretchSmaller(bmp: TBGRACustomBitmap;
+  newWidth, newHeight: integer): TBGRACustomBitmap;
 var
   x_dest, y_dest: integer;
   inc_x_src, mod_x_src, acc_x_src, inc_y_src, mod_y_src, acc_y_src: integer;
@@ -383,8 +383,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FineResampleSmaller(bmp: TBGRADefaultBitmap;
-  newWidth, newHeight: integer): TBGRADefaultBitmap;
+function FineResampleSmaller(bmp: TBGRACustomBitmap;
+  newWidth, newHeight: integer): TBGRACustomBitmap;
 var
   yb, xb, yb2, xb2: integer;
   pdest, psrc:      PBGRAPixel;
@@ -568,10 +568,10 @@ begin
   end;
 end;
 
-function FineResample(bmp: TBGRADefaultBitmap;
-  NewWidth, NewHeight: integer): TBGRADefaultBitmap;
+function FineResample(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer): TBGRACustomBitmap;
 var
-  temp, newtemp: TBGRADefaultBitmap;
+  temp, newtemp: TBGRACustomBitmap;
 begin
   if (NewWidth = bmp.Width) and (NewHeight = bmp.Height) then
     Result := bmp.Duplicate
@@ -624,10 +624,10 @@ begin
   end;
 end;
 
-function SimpleStretch(bmp: TBGRADefaultBitmap;
-  NewWidth, NewHeight: integer): TBGRADefaultBitmap;
+function SimpleStretch(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer): TBGRACustomBitmap;
 var
-  temp, newtemp: TBGRADefaultBitmap;
+  temp, newtemp: TBGRACustomBitmap;
 begin
   if (NewWidth = bmp.Width) and (NewHeight = bmp.Height) then
     Result := bmp.Duplicate

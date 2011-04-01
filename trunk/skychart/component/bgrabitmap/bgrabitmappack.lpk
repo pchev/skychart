@@ -5,10 +5,9 @@
     <Name Value="bgrabitmappack"/>
     <Author Value="Circular"/>
     <CompilerOptions>
-      <Version Value="10"/>
+      <Version Value="9"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="."/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <Parsing>
@@ -35,7 +34,7 @@
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
     <Version Major="2" Minor="4"/>
-    <Files Count="12">
+    <Files Count="13">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -82,8 +81,12 @@
       </Item11>
       <Item12>
         <Filename Value="bgraresample.pas"/>
-        <UnitName Value="BGRAResample"/>
+        <UnitName Value="bgraresample"/>
       </Item12>
+      <Item13>
+        <Filename Value="bgrapen.pas"/>
+        <UnitName Value="BGRAPen"/>
+      </Item13>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">
@@ -103,4 +106,4 @@
       <IgnoreBinaries Value="False"/>
     </PublishOptions>
   </Package>
-</CONFIG>
+</CONFIG>

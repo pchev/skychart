@@ -5,7 +5,7 @@ unit BGRAPaintNet;
 interface
 
 uses
-  Classes, SysUtils, BGRADNetDeserial, BGRABitmap, BGRABitmapTypes;
+  Classes, SysUtils, BGRADNetDeserial, BGRABitmap, BGRABitmapTypes, FPImage;
 
 type
 
@@ -16,7 +16,7 @@ type
     procedure LoadFromFile(filename: string);
     procedure LoadFromStream(stream: TStream);
     procedure Clear;
-    function ToString: string;
+    function ToString: ansistring; override;
     destructor Destroy; override;
     constructor Create;
     function Width: integer;
@@ -42,6 +42,14 @@ type
     function GetLayerOpacity(layer: PSerializedObject): byte;
     function LayerDataSize(numLayer: integer): int64;
     procedure LoadLayer(dest: TMemoryStream; src: TStream; uncompressedSize: int64);
+  end;
+
+  { TFPReaderPaintDotNet }
+
+  TFPReaderPaintDotNet = class(TFPCustomImageReader)
+    protected
+      function InternalCheck(Stream: TStream): boolean; override;
+      procedure InternalRead(Stream: TStream; Img: TFPCustomImage); override;
   end;
 
 function IsPaintDotNetFile(filename: string): boolean;
@@ -144,6 +152,42 @@ begin
 end;
 
 {$hints on}
+
+{ TFPReaderPaintDotNet }
+
+function TFPReaderPaintDotNet.InternalCheck(Stream: TStream): boolean;
+begin
+  result := IsPaintDotNetStream(stream);
+end;
+
+procedure TFPReaderPaintDotNet.InternalRead(Stream: TStream; Img: TFPCustomImage
+  );
+var
+  pdn: TPaintDotNetFile;
+  flat: TBGRABitmap;
+  x,y: integer;
+begin
+  pdn    := TPaintDotNetFile.Create;
+  try
+    pdn.LoadFromStream(Stream);
+    flat := pdn.ComputeFlatImage;
+    try
+      Img.SetSize(pdn.Width,pdn.Height);
+      for y := 0 to pdn.Height-1 do
+        for x := 0 to pdn.Width-1 do
+          Img.Colors[x,y] := BGRAToFPColor(flat.GetPixel(x,y));
+    finally
+      flat.free;
+    end;
+    pdn.Free;
+  except
+    on ex: Exception do
+    begin
+      pdn.Free;
+      raise Exception.Create('Error while loading Paint.NET file. ' + ex.Message);
+    end;
+  end;
+end;
 
 { TPaintDotNetFile }
 
@@ -314,7 +358,7 @@ begin
     raise Exception.Create('Index out of bounds');
 
   Result := TBGRABitmap.Create(Width, Height);
-  if Result.NbPixels * 4 <> LayerData[layer].Size then
+  if int64(Result.NbPixels) * 4 <> LayerData[layer].Size then
   begin
     Result.Free;
     raise Exception.Create('Inconsistent layer data size');
@@ -583,31 +627,9 @@ begin
   end;
 end;
 
-{var fout: TFileStream;
-    comp: Tcompressionstream;
-
-    gzipHeader: packed record
-       magicWord: word;
-       compMethod,flags: byte;
-       fileModif: Longword;
-       extraflag,os: byte;
-    end;                   }
-
 initialization
 
-{  gzipHeader.magicWord := $8b1F;
-  gzipHeader.compMethod := 8;
-  gzipHeader.flags := 0;
-  gzipHeader.fileModif := 0;
-  gzipHeader.extraflag := 0;
-  gzipHeader.os := $ff;
-
-  fout := TFileStream.Create('testcomp.gz', fmCreate);
-  fout.Write(gzipHeader,sizeof(gzipHeader));
-  comp := Tcompressionstream.Create(cldefault,fout,true);
-  comp.WriteAnsiString('Hello world');
-  comp.free;
-  fout.Free;  }
+  ImageHandlers.RegisterImageReader ('Paint.NET image', 'pdn', TFPReaderPaintDotNet);
 
 end.
 

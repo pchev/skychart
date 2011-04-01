@@ -5,7 +5,7 @@ unit BGRAPolygon;
 interface
 
 uses
-  Classes, SysUtils, BGRADefaultBitmap, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes;
 
 type
   ArrayOfSingle = array of single;
@@ -20,8 +20,10 @@ type
       var winding: arrayOfInteger; var nbInter: integer); virtual;
   end;
 
-procedure FillShapeAntialias(bmp: TBGRADefaultBitmap; shapeInfo: TFillShapeInfo;
+procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
   c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
+procedure FillShapeAntialiasWithTexture(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
+  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
 
 type
   TPolySlice = record
@@ -52,8 +54,10 @@ type
       var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
-procedure FillPolyAntialias(bmp: TBGRADefaultBitmap; points: array of TPointF;
+procedure FillPolyAntialias(bmp: TBGRACustomBitmap; points: array of TPointF;
   c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
+procedure FillPolyAntialiasWithTexture(bmp: TBGRACustomBitmap; points: array of TPointF;
+  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
 
 type
   { TFillEllipseInfo }
@@ -70,8 +74,10 @@ type
       var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
-procedure FillEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry: single;
+procedure FillEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
   c: TBGRAPixel; EraseMode: boolean);
+procedure FillEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
+  texture: TBGRACustomBitmap);
 
 type
   { TFillBorderEllipseInfo }
@@ -88,8 +94,10 @@ type
     destructor Destroy; override;
   end;
 
-procedure BorderEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry, w: single;
+procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
   c: TBGRAPixel; EraseMode: boolean);
+procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
+  texture: TBGRACustomBitmap);
 
 type
   { TFillRoundRectangleInfo }
@@ -107,8 +115,10 @@ type
       var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
-procedure FillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry: single;
+procedure FillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry: single;
   options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
+procedure FillRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry: single;
+  options: TRoundRectangleOptions; texture: TBGRACustomBitmap);
 
 type
   { TFillBorderRoundRectInfo }
@@ -123,10 +133,12 @@ type
     destructor Destroy; override;
   end;
 
-procedure BorderRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry, w: single;
+procedure BorderRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
   options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
+procedure BorderRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
+  options: TRoundRectangleOptions; texture: TBGRACustomBitmap);
 
-procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2, rx, ry, w: single;
+procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
   options: TRoundRectangleOptions; bordercolor,fillcolor: TBGRAPixel; EraseMode: boolean);
 
 {----------------------- Spline ------------------}
@@ -134,14 +146,14 @@ procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, 
 function Spline(y0, y1, y2, y3: single; t: single): single;
 function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF;
 function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF;
-procedure BGRARoundRectAliased(dest: TBGRADefaultBitmap; X1, Y1, X2, Y2: integer;
+procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
   RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
 
 implementation
 
 uses Math, bgrablend;
 
-procedure BGRARoundRectAliased(dest: TBGRADefaultBitmap; X1, Y1, X2, Y2: integer;
+procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
   RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
 var
   CX, CY, CX1, CY1, A, B, NX, NY: single;
@@ -311,7 +323,7 @@ begin
   end;
 end;
 
-procedure FillShapeAntialias(bmp: TBGRADefaultBitmap; shapeInfo: TFillShapeInfo;
+procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
   c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 const
   precision = 11;
@@ -380,7 +392,7 @@ begin
 
   setlength(inter, shapeInfo.NbMaxIntersection);
   setlength(winding, length(inter));
-  setlength(density, maxx - minx + 2); //one more for safety
+  setlength(density, maxx - minx + 2); //more for safety
 
   //vertical scan
   for yb := miny to maxy do
@@ -479,7 +491,168 @@ begin
   bmp.InvalidateBitmap;
 end;
 
-procedure FillPolyAntialias(bmp: TBGRADefaultBitmap; points: array of TPointF;
+procedure FillShapeAntialiasWithTexture(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
+  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
+const
+  precision = 11;
+var
+  inter:   array of single;
+  winding: array of integer;
+  nbInter: integer;
+
+  procedure ConvertFromNonZeroWinding; inline;
+  var windingSum,prevSum,i,nbAlternate: integer;
+  begin
+    windingSum := 0;
+    nbAlternate := 0;
+    for i := 0 to nbInter-1 do
+    begin
+      prevSum := windingSum;
+      windingSum += winding[i];
+      if (windingSum = 0) xor (prevSum = 0) then
+      begin
+        inter[nbAlternate] := inter[i];
+        inc(nbAlternate);
+      end;
+    end;
+    nbInter := nbAlternate;
+  end;
+
+var
+  bounds: TRect;
+  miny, maxy, minx, maxx: integer;
+
+  density: packed array of single;
+
+  xb, yb, yc, i, j, tempInt: integer;
+
+  temp, cury, x1, x2: single;
+  ix1, ix2: integer;
+  pdest:    PBGRAPixel;
+  pdens:    PSingle;
+  texScan:  TBGRABitmapScanner;
+  c: TBGRAPixel;
+
+begin
+  bounds := shapeInfo.GetBounds;
+  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
+    exit;
+
+  miny := bounds.top;
+  maxy := bounds.bottom - 1;
+  minx := bounds.left;
+  maxx := bounds.right - 1;
+
+  if minx < 0 then
+    minx := 0;
+  if maxx < 0 then
+    exit;
+  if maxx > bmp.Width - 1 then
+    maxx := bmp.Width - 1;
+  if minx > bmp.Width - 1 then
+    exit;
+  if miny < 0 then
+    miny := 0;
+  if miny > bmp.Height - 1 then
+    exit;
+  if maxy > bmp.Height - 1 then
+    maxy := bmp.Height - 1;
+  if maxy < 0 then
+    exit;
+
+  setlength(inter, shapeInfo.NbMaxIntersection);
+  setlength(winding, length(inter));
+  setlength(density, maxx - minx + 2); //more for safety
+
+  texScan := TBGRABitmapScanner.Create(texture);
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //mean density
+    for i := 0 to high(density) do
+      density[i] := 0;
+
+    //precision scan
+    for yc := 0 to precision - 1 do
+    begin
+      cury := yb + (yc * 2 + 1) / (precision * 2);
+
+      //find intersections
+      nbinter := 0;
+      shapeInfo.ComputeIntersection(cury, inter, winding, nbInter);
+      if nbinter = 0 then
+        continue;
+
+      //sort intersections
+      for i := 1 to nbinter - 1 do
+      begin
+        j := i;
+        while (j > 0) and (inter[j - 1] > inter[j]) do
+        begin
+          temp     := inter[j - 1];
+          inter[j - 1] := inter[j];
+          inter[j] := temp;
+          tempInt    := winding[j - 1];
+          winding[j - 1] := winding[j];
+          winding[j] := tempInt;
+          Dec(j);
+        end;
+      end;
+      if NonZeroWinding then ConvertFromNonZeroWinding;
+
+      //fill density
+      for i := 0 to nbinter div 2 - 1 do
+      begin
+        x1 := inter[i + i];
+        x2 := inter[i + i + 1];
+        if (x1 <> x2) and (x1 < maxx + 1) and (x2 >= minx) then
+        begin
+          if x1 < minx then
+            x1 := minx;
+          if x2 >= maxx + 1 then
+            x2 := maxx + 1;
+          ix1  := floor(x1);
+          ix2  := floor(x2);
+          if ix1 = ix2 then
+            density[ix1 - minx] += x2 - x1
+          else
+          begin
+            density[ix1 - minx] += 1 - (x1 - ix1);
+            if (ix2 <= maxx) then
+              density[ix2 - minx] += x2 - ix2;
+          end;
+          if ix2 > ix1 + 1 then
+          begin
+            for j := ix1 + 1 to ix2 - 1 do
+              density[j - minx] += 1;
+          end;
+        end;
+      end;
+
+    end;
+
+    pdest := bmp.ScanLine[yb] + minx;
+    pdens := @density[0];
+    //render scanline
+    texScan.MoveTo(minx,yb);
+    for xb := minx to maxx do
+    begin
+      temp := pdens^;
+      Inc(pdens);
+      c := texScan.GetNextPixel;
+      if temp <> 0 then
+        DrawPixelInline(pdest, BGRA(c.red, c.green, c.blue, round(
+          c.alpha * temp / precision)));
+      Inc(pdest);
+    end;
+  end;
+  texScan.Free;
+
+  bmp.InvalidateBitmap;
+end;
+
+procedure FillPolyAntialias(bmp: TBGRACustomBitmap; points: array of TPointF;
   c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 var
   info: TFillPolyInfo;
@@ -492,7 +665,21 @@ begin
   info.Free;
 end;
 
-procedure FillEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry: single;
+procedure FillPolyAntialiasWithTexture(bmp: TBGRACustomBitmap;
+  points: array of TPointF; texture: TBGRACustomBitmap; NonZeroWinding: boolean
+  );
+var
+  info: TFillPolyInfo;
+begin
+  if length(points) < 3 then
+    exit;
+
+  info := TFillPolyInfo.Create(points);
+  FillShapeAntialiasWithTexture(bmp, info, texture, NonZeroWinding);
+  info.Free;
+end;
+
+procedure FillEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
   c: TBGRAPixel; EraseMode: boolean);
 var
   info: TFillEllipseInfo;
@@ -505,7 +692,20 @@ begin
   info.Free;
 end;
 
-procedure BorderEllipseAntialias(bmp: TBGRADefaultBitmap; x, y, rx, ry, w: single;
+procedure FillEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
+  ry: single; texture: TBGRACustomBitmap);
+var
+  info: TFillEllipseInfo;
+begin
+  if (rx = 0) or (ry = 0) then
+    exit;
+
+  info := TFillEllipseInfo.Create(x, y, rx, ry);
+  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  info.Free;
+end;
+
+procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
   c: TBGRAPixel; EraseMode: boolean);
 var
   info: TFillBorderEllipseInfo;
@@ -514,6 +714,18 @@ begin
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
   FillShapeAntialias(bmp, info, c, EraseMode, False);
+  info.Free;
+end;
+
+procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
+  ry, w: single; texture: TBGRACustomBitmap);
+var
+  info: TFillBorderEllipseInfo;
+begin
+  if (rx = 0) or (ry = 0) then
+    exit;
+  info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
+  FillShapeAntialiasWithTexture(bmp, info, texture, False);
   info.Free;
 end;
 
@@ -838,7 +1050,7 @@ end;
 
 {----------- Spline ---------------------------}
 
-procedure FillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2, y2,
+procedure FillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2,
   rx, ry: single; options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
 var
   info: TFillRoundRectangleInfo;
@@ -849,7 +1061,19 @@ begin
   info.Free;
 end;
 
-procedure BorderRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1, x2,
+procedure FillRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1,
+  y1, x2, y2, rx, ry: single; options: TRoundRectangleOptions;
+  texture: TBGRACustomBitmap);
+var
+  info: TFillRoundRectangleInfo;
+begin
+  if (x1 = x2) or (y1 = y2) then exit;
+  info := TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry, options);
+  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  info.Free;
+end;
+
+procedure BorderRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2,
   y2, rx, ry, w: single; options: TRoundRectangleOptions; c: TBGRAPixel;
   EraseMode: boolean);
 var
@@ -861,7 +1085,19 @@ begin
   info.Free;
 end;
 
-procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRADefaultBitmap; x1, y1,
+procedure BorderRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1,
+  y1, x2, y2, rx, ry, w: single; options: TRoundRectangleOptions;
+  texture: TBGRACustomBitmap);
+var
+  info: TFillBorderRoundRectInfo;
+begin
+  if (rx = 0) or (ry = 0) then exit;
+  info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
+  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  info.Free;
+end;
+
+procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1,
   x2, y2, rx, ry, w: single; options: TRoundRectangleOptions; bordercolor,
   fillcolor: TBGRAPixel; EraseMode: boolean);
 var

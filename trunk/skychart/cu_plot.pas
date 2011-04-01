@@ -1115,7 +1115,7 @@ end;
 
 procedure TSplot.BezierSpline(pts : array of Tpoint;n : integer);
 var p : array of TPoint;
-    pf: array of TPointf;
+    pf: array of TPointF;
     i,m : integer;
 function LC(Pt1,Pt2:TPoint; c1,c2:extended):TPoint;
 begin
@@ -1994,7 +1994,7 @@ if cfgplot.UseBMP then begin;
    laCenter : yys:=yys-(ts.cy div 2);
   end;
   end;
-  if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),cfgplot.backgroundcolor);
+  if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   TextOutAntialias(xxs,yys,txt,ColorToBGRA(lcolor));
 end else with cnv do begin
   ATextStyle := TextStyle;
@@ -2111,7 +2111,7 @@ if cfgplot.UseBMP then begin;
     if (xx+ts.cx+marge)>cfgplot.xmax then xx:=cfgplot.xmax-ts.cx-marge;
   end;
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
-  if opaque then cbmp.FillRect(arect,cfgplot.backgroundcolor);
+  if opaque then cbmp.FillRect(xx,yy,xx+ts.cx,yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   cbmp.TextRect(arect,xx,yy,txt,ATextStyle,ColorToBGRA(lcolor));
 end else with cnv do begin
   ATextStyle := TextStyle;
@@ -2188,7 +2188,7 @@ if cfgplot.UseBMP then begin;
      end;
      ts:=cbmp.TextSize(buf);
      arect:=Bounds(xx,yy,round(1.2*ts.cx),ts.cy+2);
-     if opaque then cbmp.FillRect(arect,cfgplot.backgroundcolor);
+     if opaque then cbmp.FillRect(xx,yy,xx+round(1.2*ts.cx),yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
      cbmp.TextRect(arect,xx,yy,buf,ATextStyle,ColorToBGRA(lcolor));
      yy:=yy+ls;
    until p=0;

@@ -73,7 +73,7 @@ type TGtkDeviceContext = TGtk2DeviceContext;
 procedure TBGRAGtkBitmap.SlowDrawTransparent(ABitmap: TBGRADefaultBitmap;
   ACanvas: TCanvas; ARect: TRect);
 var
-  background, temp: TBGRADefaultBitmap;
+  background, temp: TBGRACustomBitmap;
   w, h: integer;
 
 begin
@@ -175,7 +175,7 @@ end;
 
 procedure TBGRAGtkBitmap.DataDrawOpaque(ACanvas: TCanvas; Rect: TRect;
   AData: Pointer; ALineOrder: TRawImageLineOrder; AWidth, AHeight: integer);
-var stretched: TBGRADefaultBitmap;
+var stretched: TBGRACustomBitmap;
 begin
   if (AHeight = 0) or (AWidth = 0) then
     exit;
@@ -199,7 +199,7 @@ end;
 
 procedure TBGRAGtkBitmap.GetImageFromCanvas(CanvasSource: TCanvas; x, y: integer);
 var
-  subBmp: TBGRADefaultBitmap;
+  subBmp: TBGRACustomBitmap;
   subRect: TRect;
   cw,ch: integer;
 begin
