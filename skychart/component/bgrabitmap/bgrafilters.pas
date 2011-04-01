@@ -5,40 +5,40 @@ unit BGRAFilters;
 interface
 
 uses
-  Classes, SysUtils, BGRADefaultBitmap, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes;
 
-function FilterMedian(bmp: TBGRADefaultBitmap;
-  Option: TMedianOption): TBGRADefaultBitmap;
-function FilterSmartZoom3(bmp: TBGRADefaultBitmap;
-  Option: TMedianOption): TBGRADefaultBitmap;
-function FilterSharpen(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterBlurRadialPrecise(bmp: TBGRADefaultBitmap;
-  radius: single): TBGRADefaultBitmap;
-function FilterBlurRadial(bmp: TBGRADefaultBitmap; radius: integer;
-  blurType: TRadialBlurType): TBGRADefaultBitmap;
-function FilterBlurMotion(bmp: TBGRADefaultBitmap; distance: single;
-  angle: single; oriented: boolean): TBGRADefaultBitmap;
-function FilterBlur(bmp: TBGRADefaultBitmap;
-  blurMask: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterEmboss(bmp: TBGRADefaultBitmap; angle: single): TBGRADefaultBitmap;
-function FilterEmbossHighlight(bmp: TBGRADefaultBitmap;
-  FillSelection: boolean): TBGRADefaultBitmap;
-function FilterNormalize(bmp: TBGRADefaultBitmap;
-  eachChannel: boolean = True): TBGRADefaultBitmap;
-function FilterRotate(bmp: TBGRADefaultBitmap; origin: TPointF;
-  angle: single): TBGRADefaultBitmap;
-function FilterGrayscale(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterContour(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterSphere(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterCylinder(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
-function FilterPlane(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterMedian(bmp: TBGRACustomBitmap;
+  Option: TMedianOption): TBGRACustomBitmap;
+function FilterSmartZoom3(bmp: TBGRACustomBitmap;
+  Option: TMedianOption): TBGRACustomBitmap;
+function FilterSharpen(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterBlurRadialPrecise(bmp: TBGRACustomBitmap;
+  radius: single): TBGRACustomBitmap;
+function FilterBlurRadial(bmp: TBGRACustomBitmap; radius: integer;
+  blurType: TRadialBlurType): TBGRACustomBitmap;
+function FilterBlurMotion(bmp: TBGRACustomBitmap; distance: single;
+  angle: single; oriented: boolean): TBGRACustomBitmap;
+function FilterBlur(bmp: TBGRACustomBitmap;
+  blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterEmboss(bmp: TBGRACustomBitmap; angle: single): TBGRACustomBitmap;
+function FilterEmbossHighlight(bmp: TBGRACustomBitmap;
+  FillSelection: boolean): TBGRACustomBitmap;
+function FilterNormalize(bmp: TBGRACustomBitmap;
+  eachChannel: boolean = True): TBGRACustomBitmap;
+function FilterRotate(bmp: TBGRACustomBitmap; origin: TPointF;
+  angle: single): TBGRACustomBitmap;
+function FilterGrayscale(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterContour(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterSphere(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterCylinder(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterPlane(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 
 implementation
 
 uses Math, GraphType, Dialogs;
 
-function FilterSmartZoom3(bmp: TBGRADefaultBitmap;
-  Option: TMedianOption): TBGRADefaultBitmap;
+function FilterSmartZoom3(bmp: TBGRACustomBitmap;
+  Option: TMedianOption): TBGRACustomBitmap;
 type
   TSmartDiff = record
     d, cd, sd, b, a: single;
@@ -48,7 +48,7 @@ var
   xb, yb: integer;
   diag1, diag2, h1, h2, v1, v2: TSmartDiff;
   c:      TBGRAPixel;
-  temp, median: TBGRADefaultBitmap;
+  temp, median: TBGRACustomBitmap;
 
   function ColorDiff(c1, c2: TBGRAPixel): single;
   var
@@ -189,7 +189,7 @@ begin
   median.Free;
 end;
 
-function FilterSharpen(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterSharpen(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 const
   nbpix = 8;
 var
@@ -274,14 +274,14 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterBlurRadialPrecise(bmp: TBGRADefaultBitmap;
-  radius: single): TBGRADefaultBitmap;
+function FilterBlurRadialPrecise(bmp: TBGRACustomBitmap;
+  radius: single): TBGRACustomBitmap;
 var
-  blurShape: TBGRADefaultBitmap;
+  blurShape: TBGRACustomBitmap;
   intRadius: integer;
 begin
   intRadius := ceil(radius);
-  blurShape := TBGRADefaultBitmap.Create(2 * intRadius + 1, 2 * intRadius + 1);
+  blurShape := bmp.NewBitmap(2 * intRadius + 1, 2 * intRadius + 1);
   blurShape.GradientFill(0, 0, blurShape.Width, blurShape.Height, BGRAWhite,
     BGRABlack, gtRadial, pointF(intRadius, intRadius), pointF(
     intRadius - radius - 1, intRadius), dmSet);
@@ -289,8 +289,8 @@ begin
   blurShape.Free;
 end;
 
-function FilterBlurFast(bmp: TBGRADefaultBitmap;
-  radius: integer): TBGRADefaultBitmap;
+function FilterBlurFast(bmp: TBGRACustomBitmap;
+  radius: integer): TBGRACustomBitmap;
 var
   blurRow: array of integer;
 
@@ -411,14 +411,14 @@ begin
   end;
 end;
 
-function FilterBlurRadialNormal(bmp: TBGRADefaultBitmap;
-  radius: integer): TBGRADefaultBitmap;
+function FilterBlurRadialNormal(bmp: TBGRACustomBitmap;
+  radius: integer): TBGRACustomBitmap;
 var
-  blurShape: TBGRADefaultBitmap;
+  blurShape: TBGRACustomBitmap;
   n: Integer;
   p: PBGRAPixel;
 begin
-  blurShape := TBGRADefaultBitmap.Create(2 * radius + 1, 2 * radius + 1);
+  blurShape := bmp.NewBitmap(2 * radius + 1, 2 * radius + 1);
   blurShape.GradientFill(0, 0, blurShape.Width, blurShape.Height, BGRAWhite,
     BGRABlack, gtRadial, pointF(radius, radius), pointF(-0.5, radius), dmSet);
   p := blurShape.Data;
@@ -433,30 +433,30 @@ begin
   blurShape.Free;
 end;
 
-function FilterBlurDisk(bmp: TBGRADefaultBitmap; radius: integer): TBGRADefaultBitmap;
+function FilterBlurDisk(bmp: TBGRACustomBitmap; radius: integer): TBGRACustomBitmap;
 var
-  blurShape: TBGRADefaultBitmap;
+  blurShape: TBGRACustomBitmap;
 begin
-  blurShape := TBGRADefaultBitmap.Create(2 * radius + 1, 2 * radius + 1);
+  blurShape := bmp.NewBitmap(2 * radius + 1, 2 * radius + 1);
   blurShape.Fill(BGRABlack);
   blurShape.FillEllipseAntialias(radius, radius, radius + 0.5, radius + 0.5, BGRAWhite);
   Result := FilterBlur(bmp, blurShape);
   blurShape.Free;
 end;
 
-function FilterBlurCorona(bmp: TBGRADefaultBitmap; radius: integer): TBGRADefaultBitmap;
+function FilterBlurCorona(bmp: TBGRACustomBitmap; radius: integer): TBGRACustomBitmap;
 var
-  blurShape: TBGRADefaultBitmap;
+  blurShape: TBGRACustomBitmap;
 begin
-  blurShape := TBGRADefaultBitmap.Create(2 * radius + 1, 2 * radius + 1);
+  blurShape := bmp.NewBitmap(2 * radius + 1, 2 * radius + 1);
   blurShape.Fill(BGRABlack);
   blurShape.EllipseAntialias(radius, radius, radius, radius, BGRAWhite, 1);
   Result := FilterBlur(bmp, blurShape);
   blurShape.Free;
 end;
 
-function FilterBlurRadial(bmp: TBGRADefaultBitmap; radius: integer;
-  blurType: TRadialBlurType): TBGRADefaultBitmap;
+function FilterBlurRadial(bmp: TBGRACustomBitmap; radius: integer;
+  blurType: TRadialBlurType): TBGRACustomBitmap;
 begin
   case blurType of
     rbCorona: Result  := FilterBlurCorona(bmp, radius);
@@ -469,15 +469,15 @@ begin
   end;
 end;
 
-function FilterBlurMotion(bmp: TBGRADefaultBitmap; distance: single;
-  angle: single; oriented: boolean): TBGRADefaultBitmap;
+function FilterBlurMotion(bmp: TBGRACustomBitmap; distance: single;
+  angle: single; oriented: boolean): TBGRACustomBitmap;
 var
-  blurShape: TBGRADefaultBitmap;
+  blurShape: TBGRACustomBitmap;
   intRadius: integer;
   dx, dy, d: single;
 begin
   intRadius := ceil(distance / 2);
-  blurShape := TBGRADefaultBitmap.Create(2 * intRadius + 1, 2 * intRadius + 1);
+  blurShape := bmp.NewBitmap(2 * intRadius + 1, 2 * intRadius + 1);
   d  := distance / 2;
   dx := cos(angle * Pi / 180);
   dy := sin(angle * Pi / 180);
@@ -494,8 +494,8 @@ begin
   blurShape.Free;
 end;
 
-function FilterBlur(bmp: TBGRADefaultBitmap;
-  blurMask: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterBlur(bmp: TBGRACustomBitmap;
+  blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
 var
   maskWidth,maskHeight: integer;
   blurOfs:      TPoint;
@@ -741,7 +741,7 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterEmboss(bmp: TBGRADefaultBitmap; angle: single): TBGRADefaultBitmap;
+function FilterEmboss(bmp: TBGRACustomBitmap; angle: single): TBGRACustomBitmap;
 var
   yb, xb: integer;
   dx, dy: single;
@@ -843,8 +843,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterEmbossHighlight(bmp: TBGRADefaultBitmap;
-  FillSelection: boolean): TBGRADefaultBitmap;
+function FilterEmbossHighlight(bmp: TBGRACustomBitmap;
+  FillSelection: boolean): TBGRACustomBitmap;
 var
   yb, xb: integer;
   w:      array[1..6] of integer;
@@ -982,8 +982,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterNormalize(bmp: TBGRADefaultBitmap;
-  eachChannel: boolean = True): TBGRADefaultBitmap;
+function FilterNormalize(bmp: TBGRACustomBitmap;
+  eachChannel: boolean = True): TBGRACustomBitmap;
 var
   psrc, pdest: PBGRAPixel;
   c: TExpandedPixel;
@@ -1103,8 +1103,8 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterRotate(bmp: TBGRADefaultBitmap; origin: TPointF;
-  angle: single): TBGRADefaultBitmap;
+function FilterRotate(bmp: TBGRACustomBitmap; origin: TPointF;
+  angle: single): TBGRACustomBitmap;
 var
   bounds:     TRect;
   pdest:      PBGRAPixel;
@@ -1198,7 +1198,7 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterGrayscale(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterGrayscale(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 var
   bounds:      TRect;
   pdest, psrc: PBGRAPixel;
@@ -1224,7 +1224,7 @@ begin
   Result.InvalidateBitmap;
 end;
 
-function FilterContour(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterContour(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 var
   yb, xb: integer;
   c:      array[0..8] of TBGRAPixel;
@@ -1236,7 +1236,7 @@ var
   pdest, psrcUp, psrc, psrcDown: PBGRAPixel;
 
   bounds: TRect;
-  gray:   TBGRADefaultBitmap;
+  gray:   TBGRACustomBitmap;
 begin
   bmpWidth  := bmp.Width;
   bmpHeight := bmp.Height;
@@ -1338,11 +1338,11 @@ begin
   gray.Free;
 end;
 
-function FilterSphere(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterSphere(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 var
   cx, cy, x, y, len, fact: single;
   xb, yb: integer;
-  mask:   TBGRADefaultBitmap;
+  mask:   TBGRACustomBitmap;
 begin
   Result := bmp.NewBitmap(bmp.Width, bmp.Height);
   cx     := bmp.Width / 2 - 0.5;
@@ -1371,7 +1371,7 @@ begin
   Mask.Free;
 end;
 
-function FilterCylinder(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterCylinder(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 var
   cx, cy, x, y, len, fact: single;
   xb, yb: integer;
@@ -1397,15 +1397,15 @@ begin
     end;
 end;
 
-function FilterPlane(bmp: TBGRADefaultBitmap): TBGRADefaultBitmap;
+function FilterPlane(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 const resampleGap=0.6;
 var
   cy, x1, x2, y1, y2, z1, z2, h: single;
   yb: integer;
-  resampledBmp: TBGRADefaultBitmap;
+  resampledBmp: TBGRACustomBitmap;
   resampledBmpWidth: integer;
   resampledFactor,newResampleFactor: single;
-  sub,resampledSub: TBGRADefaultBitmap;
+  sub,resampledSub: TBGRACustomBitmap;
   partRect: TRect;
   resampleSizeY : integer;
 begin
@@ -1463,8 +1463,8 @@ begin
   end;
 end;
 
-function FilterMedian(bmp: TBGRADefaultBitmap;
-  Option: TMedianOption): TBGRADefaultBitmap;
+function FilterMedian(bmp: TBGRACustomBitmap;
+  Option: TMedianOption): TBGRACustomBitmap;
 
   function ComparePixLt(p1, p2: TBGRAPixel): boolean;
   begin

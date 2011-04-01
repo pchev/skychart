@@ -5,7 +5,7 @@ unit BGRAPen;
 interface
 
 uses
-  Classes, SysUtils, Graphics, BGRADefaultBitmap, BGRABitmapTypes;
+  Classes, SysUtils, Graphics, BGRABitmapTypes;
 
 var
   SolidPenStyle, DashPenStyle, DotPenStyle, DashDotPenStyle, DashDotDotPenStyle, ClearPenStyle: TBGRAPenStyle;
@@ -14,21 +14,33 @@ type
   TBGRAPolyLineOption = (plRoundCapOpen, plCycle);
   TBGRAPolyLineOptions = set of TBGRAPolyLineOption;
 
-procedure BGRAPolyLine(bmp: TBGRADefaultBitmap; const linepts: array of TPointF;
+procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
      width: single; pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-     options: TBGRAPolyLineOptions);
-procedure BGRADrawLineAliased(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean);
-procedure BGRADrawLineAntialias(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer;
+     options: TBGRAPolyLineOptions; texture: TBGRACustomBitmap= nil);
+
+procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean);
+procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
-procedure BGRADrawLineAntialias(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer;
+procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
 function GetAlphaJoinFactor(alpha: byte): single;
 
+function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyle; PatternColor, BackgroundColor: TBGRAPixel;
+    width: integer = 8; height: integer = 8; penwidth: single = 1): TBGRACustomBitmap;
+
 implementation
 
-uses math;
+uses math, BGRABlend;
 
-procedure BGRADrawLineAliased(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer;
+procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
+  width: single; texture: TBGRACustomBitmap; linecap: TPenEndCap;
+  joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
+  options: TBGRAPolyLineOptions);
+begin
+
+end;
+
+procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
 var
   Y, X: integer;
@@ -103,7 +115,7 @@ begin
     dest.DrawPixel(X2, Y2, c);
 end;
 
-procedure BGRADrawLineAntialias(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer;
+procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
 var
   Y, X:  integer;
@@ -185,7 +197,7 @@ begin
     dest.DrawPixel(X2, Y2, c);
 end;
 
-procedure BGRADrawLineAntialias(dest: TBGRADefaultBitmap; x1, y1, x2, y2: integer;
+procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
 var
   Y, X:  integer;
@@ -300,6 +312,32 @@ begin
     result := (power(20,alpha/255)-1)/19*0.5;
     t := power(alpha/255,40);
     result := result*(1-t)+t*0.82;
+  end;
+end;
+
+function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyle;
+  PatternColor, BackgroundColor: TBGRAPixel; width: integer = 8; height: integer = 8; penwidth: single = 1): TBGRACustomBitmap;
+begin
+  result := prototype.NewBitmap(width,height);
+  if brushstyle <> bsClear then
+  begin
+    result.Fill(BackgroundColor);
+    if brushstyle in[bsDiagCross,bsBDiagonal] then
+    begin
+      result.DrawLineAntialias(-1,height,width,-1,PatternColor,penwidth);
+      result.DrawLineAntialias(-1-penwidth,0+penwidth,0+penwidth,-1-penwidth,PatternColor,penwidth);
+      result.DrawLineAntialias(width-1-penwidth,height+penwidth,width+penwidth,height-1-penwidth,PatternColor,penwidth);
+    end;
+    if brushstyle in[bsDiagCross,bsFDiagonal] then
+    begin
+      result.DrawLineAntialias(-1,-1,width,height,PatternColor,penwidth);
+      result.DrawLineAntialias(width-1-penwidth,-1-penwidth,width+penwidth,0+penwidth,PatternColor,penwidth);
+      result.DrawLineAntialias(-1-penwidth,height-1-penwidth,0+penwidth,height+penwidth,PatternColor,penwidth);
+    end;
+    if brushstyle in[bsHorizontal,bsCross] then
+      result.DrawLineAntialias(-1,height div 2,width,height div 2,PatternColor,penwidth);
+    if brushstyle in[bsVertical,bsCross] then
+      result.DrawLineAntialias(width div 2,-1,width div 2,height,PatternColor,penwidth);
   end;
 end;
 
@@ -497,9 +535,9 @@ begin
   end;
 end;
 
-procedure BGRAPolyLine(bmp: TBGRADefaultBitmap; const linepts: array of TPointF; width: single;
+procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions);
+          options: TBGRAPolyLineOptions; texture: TBGRACustomBitmap= nil);
 var
   borders : array of record
               leftSide,rightSide: TLineDef;
@@ -753,7 +791,7 @@ begin
   pjsMiter: maxMiter := hw*2;
   end;
 
-  roundPrecision := round(hw)+1;
+  roundPrecision := round(hw)+2;
 
   nbPts := 0;
   setlength(pts, length(linepts)+2);
@@ -1103,7 +1141,10 @@ begin
   else
     FlushLine(high(pts));
 
-  bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),pencolor);
+  if texture <> nil then
+    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),texture)
+  else
+    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),pencolor);
 end;
 
 initialization

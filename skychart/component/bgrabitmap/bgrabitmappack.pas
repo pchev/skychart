@@ -1,5 +1,5 @@
-{ Ce fichier a été automatiquement créé par Lazarus. Ne pas l'éditer !
-  Cette source est seulement employée pour compiler et installer le paquet.
+{ This file was automatically created by Lazarus. Do not edit!
+  This source is only used to compile and install the package.
  }
 
 unit bgrabitmappack; 
@@ -9,7 +9,8 @@ interface
 uses
     BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, 
   bgracompressablebitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
-  BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, LazarusPackageIntf;
+  BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
+  LazarusPackageIntf;
 
 implementation
 

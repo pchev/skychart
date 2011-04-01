@@ -71,7 +71,7 @@ type
     function IsReferenceType(numType: integer; index: integer): boolean;
     procedure LoadFromStream(Stream: TStream);
     procedure LoadFromFile(filename: string);
-    function ToString: string;
+    function ToString: ansistring; override;
     constructor Create;
   private
     EndOfStream:      boolean;
