@@ -2468,11 +2468,13 @@ begin
 fillx1:=0;
 filly1:=0;
 hlimit:=1*deg2rad;
+// Only with Alt/Az display
 if cfgsc.ProjPole=Altaz then begin
   if (cfgsc.hcentre<-hlimit) then begin
      fillx1:=(cfgsc.xmax-cfgsc.xmin)div 2;
      filly1:=(cfgsc.ymax-cfgsc.ymin)div 2;
   end;
+///// Draw to bgra bitmap
   if Fplot.cfgplot.UseBMP then begin
     fill:=cfgsc.FillHorizon;
     hbmp:=TBGRABitmap.Create;
@@ -2488,7 +2490,7 @@ if cfgsc.ProjPole=Altaz then begin
        else col1.alpha:=176;
     col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
     if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
-
+      // Use horizon file data
       for i:=1 to 361 do begin
         h:=cfgsc.horizonlist^[i];
         az:=deg2rad*rmod(360+i-1-180,360);
@@ -2498,7 +2500,7 @@ if cfgsc.ProjPole=Altaz then begin
           azp:=az;
           continue;
         end else begin
-          if cfgsc.FillHorizon and ((abs(hpstep-hstep))>(0.35/hdiv)) then hpstep:=hstep;
+          if fill and ((abs(hpstep-hstep))>(0.35/hdiv)) then hpstep:=hstep;
           ok:=true;
           for j:=0 to hdiv do begin
             proj2(-azp,j*hpstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
@@ -2515,36 +2517,25 @@ if cfgsc.ProjPole=Altaz then begin
                  end;
           end;
           if ok then begin
-            if cfgsc.FillHorizon then begin
+            if fill then begin
               SetLength(psf,2*hdiv+2);
               for j:=0 to 2*hdiv+1 do begin
                  psf[j].x:=ps[0,j];
                  psf[j].y:=ps[1,j];
               end;
+              // draw filled polygon
               hbmp.FillPolyAntialias(psf,col1);
             end else begin
+              // draw line
               hbmp.DrawLineAntialias(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],col1,1,false);
             end;
-            hbmp.DrawLineAntialias(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],col2,2,false);
           end;
         end;
         azp:=az;
         hpstep:=hstep;
       end;
-       if fill and (not Fplot.cfgchart.onprinter) then begin
-          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet)
-          else begin
-          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
-          if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
-          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
-          if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
-          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
-          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
-          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
-          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
-          end;
-       end;
     end;
+    // Horizon line
     first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
     for i:=1 to 360 do begin
          az:=deg2rad*rmod(360+i-1-180,360);
@@ -2555,24 +2546,14 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-             if (abs(xph-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-                (abs(yph-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
-                (abs(xh-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-                (abs(yh-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
-                then
                   hbmp.DrawLineAntialias(xph,yph,xh,yh,col2,2);
          end;
          xph:=xh;
          yph:=yh;
     end;
-    if (abs(xh-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-       (abs(yh-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
-       (abs(x0h-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-       (abs(y0h-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
-       then
-        hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
-    if (not cfgsc.ShowHorizon) or (cfgsc.HorizonMax<=0)or(cfgsc.horizonlist=nil) then begin
-      if fill and (not Fplot.cfgchart.onprinter) then begin
+    hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
+    // Fill below horizon
+    if fill and (not Fplot.cfgchart.onprinter) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
          GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
          if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
@@ -2582,12 +2563,14 @@ if cfgsc.ProjPole=Altaz then begin
          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
          GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
          if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
-      end;
     end;
+    // Render bitmap
     Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
     hbmp.free;
+///// Draw to canvas
  end else begin
   if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
+    // Use horizon file data
      for i:=1 to 361 do begin
        h:=cfgsc.horizonlist^[i];
        az:=deg2rad*rmod(360+i-1-180,360);
@@ -2609,8 +2592,10 @@ if cfgsc.ProjPole=Altaz then begin
            for j:=1 to 2*hdiv do begin
               Fplot.PlotOutline(ps[0,j],ps[1,j],2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
            end;
+           // draw filled polygon
            Fplot.PlotOutline(ps[0,2*hdiv+1],ps[1,2*hdiv+1],1,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
          end else begin
+           // draw line
            Fplot.Plotline(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],Fplot.cfgplot.Color[19],1);
          end;
          Fplot.Plotline(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],Fplot.cfgplot.Color[12],2);
@@ -2618,7 +2603,7 @@ if cfgsc.ProjPole=Altaz then begin
        azp:=az;
        hpstep:=hstep;
      end;
-
+     // Fill below horizon
      if cfgsc.horizonopaque and cfgsc.FillHorizon and (not Fplot.cfgchart.onprinter) then begin
         if (fillx1>0)or(filly1>0) then fplot.FloodFill(round(fillx1),round(filly1),Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
@@ -2632,6 +2617,7 @@ if cfgsc.ProjPole=Altaz then begin
      end;
   end
   else begin
+     // Horizon line
      first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
      for i:=1 to 360 do begin
        az:=deg2rad*rmod(360+i-1-180,360);
@@ -2650,7 +2636,9 @@ if cfgsc.ProjPole=Altaz then begin
      Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
   end;
  end;
+ ////// End of horizon drawing
   if cfgsc.ShowHorizonDepression then begin
+     // Horizon depression line
      first:=true; xp:=0;yp:=0;
      h:=cfgsc.ObsHorizonDepression;
      if h<0 then for i:=1 to 360 do begin
@@ -2666,6 +2654,7 @@ if cfgsc.ProjPole=Altaz then begin
        yp:=y;
      end;
   end;
+ // cardinal point label
   if (cfgsc.ShowLabel[7]) then begin
     az:=0; h:=0;
     for i:=1 to 8 do begin
@@ -2685,10 +2674,10 @@ if cfgsc.ProjPole=Altaz then begin
        az:=az+45;
     end;
   end;
+ // below horizon warning
   if (not(Fplot.cfgplot.UseBMP and fill))and(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
      Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori);
   end;
-
 end;
 result:=true;
 end;
