@@ -7,6 +7,9 @@ interface
 uses
   Graphics, Classes, BGRABitmap, BGRABitmapTypes;
 
+function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
+  AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
+
 type
   TnGradientInfo = record
     StartColor,StopColor: TBGRAPixel;
@@ -38,7 +41,7 @@ type
 
   TPhongShading = class
     LightSourceIntensity : Double;
-    LightSourceDistanceTerm : Double;
+    LightSourceDistanceTerm,LightSourceDistanceFactor,LightDestFactor : Double;
     LightColor: TBGRAPixel;
     AmbientFactor, DiffusionFactor, NegativeDiffusionFactor : Double;
     SpecularFactor, SpecularIndex : Double;
@@ -64,10 +67,43 @@ function CreateRectangleMap(width,height,border: integer; options: TRectangleMap
 function CreateRoundRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
 function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
   VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
+function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
+  VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
 
 implementation
 
-uses BGRABlend;
+uses BGRABlend, Types;
+
+function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
+  AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
+var
+  bmpOut,bmpSdw: TBGRABitmap; OutTxtSize: TSize; OutX,OutY: Integer;
+begin
+  bmpOut:= TBGRABitmap.Create(AWidth,AHeight);
+  bmpOut.FontAntialias:= True;
+  bmpOut.FontHeight:= AFontHeight;
+  bmpOut.FontStyle:= AFontStyle;
+  bmpOut.FontName:= AFontName;
+
+  OutTxtSize:= bmpOut.TextSize(AText);
+  OutX:= Round(AWidth/2) - Round(OutTxtSize.cx/2);
+  OutY:= Round(AHeight/2) - Round(OutTxtSize.cy/2);
+
+  bmpSdw:= TBGRABitmap.Create(OutTxtSize.cx+2*ARadius,OutTxtSize.cy+2*ARadius);
+  bmpSdw.FontAntialias:= True;
+  bmpSdw.FontHeight:= AFontHeight;
+  bmpSdw.FontStyle:= AFontStyle;
+  bmpSdw.FontName:= AFontName;
+
+  bmpSdw.TextOut(ARadius,ARadius,AText,AShadowColor);
+  BGRAReplace(bmpSdw,bmpSdw.FilterBlurRadial(ARadius,rbFast));
+  bmpOut.PutImage(OutX+AOffSetX-ARadius,OutY+AOffSetY-ARadius,bmpSdw,dmDrawWithTransparency);
+  bmpSdw.Free;
+
+  if AShowText = True then bmpOut.TextOut(OutX,OutY,AText,ATextColor);
+
+  Result:= bmpOut;
+end;
 
 function nGradientInfo(StartColor, StopColor: TBGRAPixel;
   Direction: TGradientDirection; EndPercent: Single): TnGradientInfo;
@@ -236,6 +272,8 @@ constructor TPhongShading.Create;
 begin
   LightSourceIntensity := 500;
   LightSourceDistanceTerm := 150;
+  LightSourceDistanceFactor := 1;
+  LightDestFactor := 1;
   LightColor := BGRAWhite;
   AmbientFactor := 0.3;
   DiffusionFactor := 0.9;
@@ -401,9 +439,9 @@ begin
             v2z := (mcBottom.red-mcTop.red)*mapAltitude;
         end;
 
-        Lx := dx-x;
-        Ly := dy-y;
-        Lz := dz-z;
+        Lx := dx-x*LightDestFactor;
+        Ly := dy-y*LightDestFactor;
+        Lz := dz-z*LightDestFactor;
         normalize(Lx,Ly,Lz);
 
         Hx := Lx + 0;
@@ -415,7 +453,7 @@ begin
         vectproduct(v1x,v1y,v1z,v2x,v2y,v2z,xn,yn,zn);
         normalize(xn,yn,zn);
         CalculateLNandNnH(x, y, z, xn, yn, zn, LdotN, dist, NnH);
-        distfactor := LightSourceIntensity / (dist + LightSourceDistanceTerm);
+        distfactor := LightSourceIntensity / (dist*LightSourceDistanceFactor + LightSourceDistanceTerm);
         if (LdotN <= 0) then
         begin
           //Point is not illuminated by light source.
@@ -573,9 +611,9 @@ begin
             v2z := (mcBottom.red-mcTop.red)*mapAltitude;
         end;
 
-        Lx := dx-x;
-        Ly := dy-y;
-        Lz := dz-z;
+        Lx := dx-x*LightDestFactor;
+        Ly := dy-y*LightDestFactor;
+        Lz := dz-z*LightDestFactor;
         normalize(Lx,Ly,Lz);
 
         Hx := Lx + 0;
@@ -587,7 +625,7 @@ begin
         vectproduct(v1x,v1y,v1z,v2x,v2y,v2z,xn,yn,zn);
         normalize(xn,yn,zn);
         CalculateLNandNnH(x, y, z, xn, yn, zn, LdotN, dist, NnH);
-        distfactor := LightSourceIntensity / (dist + LightSourceDistanceTerm);
+        distfactor := LightSourceIntensity / (dist*LightSourceDistanceFactor + LightSourceDistanceTerm);
         if (LdotN <= 0) then
         begin
           //Point is not illuminated by light source.
@@ -872,6 +910,54 @@ function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single
       inc(p);
     end;
     resampled := small.Resample(dest.Width,dest.Height) as TBGRABitmap;
+    dest.BlendImage(0,0,resampled,boAdditive);
+    resampled.Free;
+    small.Free;
+  end;
+
+var
+  i: Integer;
+  temp: TBGRABitmap;
+
+begin
+  result := TBGRABitmap.Create(AWidth,AHeight);
+  for i := 0 to 5 do
+    AddNoise(round(AWidth / HorizontalPeriod / (32 shr i)),round(AHeight / VerticalPeriod / (32 shr i)), round(exp(ln((128 shr i)/128)*Exponent)*128),result);
+
+  temp := result.FilterNormalize(False) as TBGRABitmap;
+  result.Free;
+  result := temp;
+
+  temp := result.FilterBlurRadial(1,rbNormal) as TBGRABitmap;
+  result.Free;
+  result := temp;
+end;
+
+function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
+  VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
+
+  procedure AddNoise(frequencyH, frequencyV: integer; amplitude: byte; dest: TBGRABitmap);
+  var small,resampled: TBGRABitmap;
+      p: PBGRAPixel;
+      i: Integer;
+  begin
+    if (frequencyH = 0) or (frequencyV = 0) then exit;
+    small := TBGRABitmap.Create(frequencyH+1,frequencyV+1);
+    p := small.data;
+    for i := 0 to small.NbPixels-1 do
+    begin
+      p^.red := random(amplitude);
+      p^.green := p^.red;
+      p^.blue := p^.green;
+      p^.alpha := 255;
+      inc(p);
+    end;
+    for i := 0 to small.Height-2 do
+      small.SetPixel(small.Width-1,i,small.GetPixel(0,i));
+    for i := 0 to small.Width-2 do
+      small.SetPixel(i,small.Height-1,small.GetPixel(i,0));
+    small.SetPixel(small.Width-1,small.Height-1,small.GetPixel(0,0));
+    resampled := small.Resample(dest.Width+1,dest.Height+1) as TBGRABitmap;
     dest.BlendImage(0,0,resampled,boAdditive);
     resampled.Free;
     small.Free;

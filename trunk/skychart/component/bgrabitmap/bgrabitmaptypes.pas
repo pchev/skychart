@@ -181,18 +181,20 @@ type
      procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: single; texture: TBGRACustomBitmap; w: single); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single; Closed: boolean); virtual; abstract; overload;
-     procedure DrawPolyLineAntialias(points: array of TPoint; c: TBGRAPixel; DrawLastPixel: boolean); virtual; overload;
-     procedure DrawPolyLineAntialias(points: array of TPoint; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean); virtual; overload;
-     procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single); virtual; abstract; overload;
-     procedure DrawPolyLineAntialias(points: array of TPointF; texture: TBGRACustomBitmap; w: single); virtual; abstract; overload;
-     procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); virtual; abstract; overload;
-     procedure DrawPolygonAntialias(points: array of TPointF; c: TBGRAPixel; w: single); virtual; abstract; overload;
+     procedure DrawLineAntialias(x1, y1, x2, y2: single; texture: TBGRACustomBitmap; w: single; Closed: boolean); virtual; abstract; overload;
+     procedure DrawPolyLineAntialias(const points: array of TPoint; c: TBGRAPixel; DrawLastPixel: boolean); virtual; overload;
+     procedure DrawPolyLineAntialias(const points: array of TPoint; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean); virtual; overload;
+     procedure DrawPolyLineAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); virtual; abstract; overload;
+     procedure DrawPolyLineAntialias(const points: array of TPointF; texture: TBGRACustomBitmap; w: single); virtual; abstract; overload;
+     procedure DrawPolyLineAntialias(const points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); virtual; abstract; overload;
+     procedure DrawPolygonAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); virtual; abstract; overload;
+     procedure DrawPolygonAntialias(const points: array of TPointF; texture: TBGRACustomBitmap; w: single); virtual; abstract; overload;
      procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single); virtual; abstract; overload;
      procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single; Closed: boolean); virtual; abstract; overload;
-     procedure ErasePolyLineAntialias(points: array of TPointF; alpha: byte; w: single); virtual; abstract; overload;
-     procedure FillPolyAntialias(points: array of TPointF; c: TBGRAPixel); virtual; abstract;
-     procedure FillPolyAntialias(points: array of TPointF; texture: TBGRACustomBitmap); virtual; abstract;
-     procedure ErasePolyAntialias(points: array of TPointF; alpha: byte); virtual; abstract;
+     procedure ErasePolyLineAntialias(const points: array of TPointF; alpha: byte; w: single); virtual; abstract; overload;
+     procedure FillPolyAntialias(const points: array of TPointF; c: TBGRAPixel); virtual; abstract;
+     procedure FillPolyAntialias(const points: array of TPointF; texture: TBGRACustomBitmap); virtual; abstract;
+     procedure ErasePolyAntialias(const points: array of TPointF; alpha: byte); virtual; abstract;
      procedure EllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel; w: single); virtual; abstract;
      procedure EllipseAntialias(x, y, rx, ry: single; texture: TBGRACustomBitmap; w: single); virtual; abstract;
      procedure FillEllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel); virtual; abstract;
@@ -210,6 +212,8 @@ type
        w: single); virtual; overload;
      procedure RectangleAntialias(x, y, x2, y2: single; c: TBGRAPixel;
        w: single; back: TBGRAPixel); virtual; abstract; overload;
+     procedure RectangleAntialias(x, y, x2, y2: single; texture: TBGRACustomBitmap;
+       w: single); virtual; abstract; overload;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; w: single; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; pencolor: TBGRAPixel; w: single; fillcolor: TBGRAPixel; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; texture: TBGRACustomBitmap; w: single; options: TRoundRectangleOptions = []); virtual; abstract;
@@ -219,6 +223,7 @@ type
      procedure FillRect(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode); virtual; abstract;
      procedure FillRect(x, y, x2, y2: integer; texture: TBGRACustomBitmap; mode: TDrawMode); virtual; abstract;
      procedure FillRectAntialias(x, y, x2, y2: single; c: TBGRAPixel); virtual; abstract;
+     procedure FillRectAntialias(x, y, x2, y2: single; texture: TBGRACustomBitmap); virtual; abstract;
      procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; texture: TBGRACustomBitmap; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure EraseRoundRectAntialias(x,y,x2,y2,rx,ry: single; alpha: byte; options: TRoundRectangleOptions = []); virtual; abstract;
@@ -285,7 +290,7 @@ type
      procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode); virtual; abstract;
      procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap;
        operation: TBlendOperation); virtual; abstract;
-     function Duplicate: TBGRACustomBitmap; virtual; abstract;
+     function Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap; virtual; abstract;
      function Equals(comp: TBGRACustomBitmap): boolean; virtual; abstract;
      function Equals(comp: TBGRAPixel): boolean; virtual; abstract;
      function Resample(newWidth, newHeight: integer;
@@ -985,7 +990,7 @@ begin
   end;
 end;
 
-procedure TBGRACustomBitmap.DrawPolyLineAntialias(points: array of TPoint;
+procedure TBGRACustomBitmap.DrawPolyLineAntialias(const points: array of TPoint;
   c: TBGRAPixel; DrawLastPixel: boolean);
 var i: integer;
 begin
@@ -998,7 +1003,7 @@ begin
        DrawLineAntialias(points[i].x,points[i].Y,points[i+1].x,points[i+1].y,c,DrawLastPixel and (i=high(points)-1));
 end;
 
-procedure TBGRACustomBitmap.DrawPolyLineAntialias(points: array of TPoint; c1,
+procedure TBGRACustomBitmap.DrawPolyLineAntialias(const points: array of TPoint; c1,
   c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
 var i: integer;
 begin
