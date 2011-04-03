@@ -2452,7 +2452,7 @@ end;
 
 function Tskychart.DrawHorizon:boolean;
 const hdiv=10;
-var az,h,hstep,azp,hpstep,x1,y1,hlimit : double;
+var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz : double;
     ps: array[0..1,0..2*hdiv+1] of single;
     psf: array of TPointF;
     i,j,xx,yy: integer;
@@ -2489,6 +2489,7 @@ if cfgsc.ProjPole=Altaz then begin
     if cfgsc.horizonopaque then col1.alpha:=255
        else col1.alpha:=176;
     col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
+    daz:=abs(0.5/cfgsc.BxGlb); // 0.5 pixel polygon overlap to avoid banding
     if cfgsc.ShowHorizon and (cfgsc.HorizonMax>0)and(cfgsc.horizonlist<>nil) then begin
       // Use horizon file data
       for i:=1 to 361 do begin
@@ -2505,7 +2506,7 @@ if cfgsc.ProjPole=Altaz then begin
           for j:=0 to hdiv do begin
             proj2(-azp,j*hpstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
             WindowXY(x1,y1,ps[0,j],ps[1,j],cfgsc);
-            proj2(-az-3*minarc,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+            proj2(-az-daz,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
             WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
               if (abs(ps[0,j]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
                  (abs(ps[1,j]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or

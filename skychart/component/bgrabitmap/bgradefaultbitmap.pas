@@ -196,16 +196,18 @@ type
     procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single); override;
     procedure DrawLineAntialias(x1, y1, x2, y2: single; texture: TBGRACustomBitmap; w: single); override;
     procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single; Closed: boolean); override;
-    procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single); override;
-    procedure DrawPolyLineAntialias(points: array of TPointF; texture: TBGRACustomBitmap; w: single); override;
-    procedure DrawPolyLineAntialias(points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); override;
-    procedure DrawPolygonAntialias(points: array of TPointF; c: TBGRAPixel; w: single); override;
+    procedure DrawLineAntialias(x1, y1, x2, y2: single; texture: TBGRACustomBitmap; w: single; Closed: boolean); override;
+    procedure DrawPolyLineAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); override;
+    procedure DrawPolyLineAntialias(const points: array of TPointF; texture: TBGRACustomBitmap; w: single); override;
+    procedure DrawPolyLineAntialias(const points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); override;
+    procedure DrawPolygonAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); override;
+    procedure DrawPolygonAntialias(const points: array of TPointF; texture: TBGRACustomBitmap; w: single); override;
     procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single); override;
     procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single; Closed: boolean); override;
-    procedure ErasePolyLineAntialias(points: array of TPointF; alpha: byte; w: single); override;
-    procedure FillPolyAntialias(points: array of TPointF; c: TBGRAPixel); override;
-    procedure FillPolyAntialias(points: array of TPointF; texture: TBGRACustomBitmap); override;
-    procedure ErasePolyAntialias(points: array of TPointF; alpha: byte); override;
+    procedure ErasePolyLineAntialias(const points: array of TPointF; alpha: byte; w: single); override;
+    procedure FillPolyAntialias(const points: array of TPointF; c: TBGRAPixel); override;
+    procedure FillPolyAntialias(const points: array of TPointF; texture: TBGRACustomBitmap); override;
+    procedure ErasePolyAntialias(const points: array of TPointF; alpha: byte); override;
     procedure EllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel; w: single); override;
     procedure EllipseAntialias(x, y, rx, ry: single; texture: TBGRACustomBitmap; w: single); override;
     procedure FillEllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel); override;
@@ -216,12 +218,15 @@ type
       mode: TDrawMode); override;
     procedure RectangleAntialias(x, y, x2, y2: single; c: TBGRAPixel;
       w: single; back: TBGRAPixel); override;
+    procedure RectangleAntialias(x, y, x2, y2: single; texture: TBGRACustomBitmap;
+      w: single); override;
     procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; w: single; options: TRoundRectangleOptions = []); override;
     procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; pencolor: TBGRAPixel; w: single; fillcolor: TBGRAPixel; options: TRoundRectangleOptions = []); override;
     procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; texture: TBGRACustomBitmap; w: single; options: TRoundRectangleOptions = []); override;
     procedure FillRect(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode); override;
     procedure FillRect(x, y, x2, y2: integer; texture: TBGRACustomBitmap; mode: TDrawMode); override;
     procedure FillRectAntialias(x, y, x2, y2: single; c: TBGRAPixel); override;
+    procedure FillRectAntialias(x, y, x2, y2: single; texture: TBGRACustomBitmap); override;
     procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; options: TRoundRectangleOptions = []); override;
     procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; texture: TBGRACustomBitmap; options: TRoundRectangleOptions = []); override;
     procedure EraseRoundRectAntialias(x,y,x2,y2,rx,ry: single; alpha: byte; options: TRoundRectangleOptions = []); override;
@@ -279,7 +284,8 @@ type
     procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap;
       operation: TBlendOperation); override;
     function GetPart(ARect: TRect): TBGRACustomBitmap; override;
-    function Duplicate: TBGRACustomBitmap; override;
+    function Duplicate(DuplicateProperties: Boolean = False) : TBGRACustomBitmap; override;
+    procedure CopyPropertiesTo(ABitmap: TBGRADefaultBitmap);
     function Equals(comp: TBGRACustomBitmap): boolean; override;
     function Equals(comp: TBGRAPixel): boolean; override;
     function Resample(newWidth, newHeight: integer;
@@ -327,7 +333,7 @@ type
     procedure FreeData; override;
   public
     constructor Create(AWidth, AHeight: integer; AData: Pointer); overload;
-    function Duplicate: TBGRACustomBitmap; override;
+    function Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap; override;
     procedure SetDataPtr(AData: Pointer);
     property LineOrder: TRawImageLineOrder Read FLineOrder Write FLineOrder;
   end;
@@ -1388,19 +1394,37 @@ begin
   BGRAPolyLine(self,[PointF(x1,y1),PointF(x2,y2)],w,c,pecRound,pjsRound,FCustomPenStyle,options);
 end;
 
-procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.DrawLineAntialias(x1, y1, x2, y2: single;
+  texture: TBGRACustomBitmap; w: single; Closed: boolean);
+var
+  options: TBGRAPolyLineOptions;
+  c: TBGRAPixel;
+begin
+  if not closed then
+  begin
+    options := [plRoundCapOpen];
+    c := texture.AveragePixel; //needed for alpha junction
+  end else
+  begin
+    options := [];
+    c := BGRAPixelTransparent;
+  end;
+  BGRAPolyLine(self,[PointF(x1,y1),PointF(x2,y2)],w,c,pecRound,pjsRound,FCustomPenStyle,options,texture);
+end;
+
+procedure TBGRADefaultBitmap.DrawPolyLineAntialias(const points: array of TPointF;
   c: TBGRAPixel; w: single);
 begin
   BGRAPolyLine(self,points,w,c,LineCap,JoinStyle,FCustomPenStyle,[]);
 end;
 
-procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.DrawPolyLineAntialias(const points: array of TPointF;
   texture: TBGRACustomBitmap; w: single);
 begin
   BGRAPolyLine(self,points,w,BGRAPixelTransparent,LineCap,JoinStyle,FCustomPenStyle,[],texture);
 end;
 
-procedure TBGRADefaultBitmap.DrawPolyLineAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.DrawPolyLineAntialias(const points: array of TPointF;
   c: TBGRAPixel; w: single; Closed: boolean);
 var
   options: TBGRAPolyLineOptions;
@@ -1409,10 +1433,16 @@ begin
   BGRAPolyLine(self,points,w,c,pecRound,JoinStyle,FCustomPenStyle,options);
 end;
 
-procedure TBGRADefaultBitmap.DrawPolygonAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.DrawPolygonAntialias(const points: array of TPointF;
   c: TBGRAPixel; w: single);
 begin
    BGRAPolyLine(self,points,w,c,LineCap,JoinStyle,FCustomPenStyle,[plCycle]);
+end;
+
+procedure TBGRADefaultBitmap.DrawPolygonAntialias(
+  const points: array of TPointF; texture: TBGRACustomBitmap; w: single);
+begin
+   BGRAPolyLine(self,points,w,BGRAPixelTransparent,LineCap,JoinStyle,FCustomPenStyle,[plCycle],texture);
 end;
 
 procedure TBGRADefaultBitmap.EraseLineAntialias(x1, y1, x2, y2: single;
@@ -1423,7 +1453,7 @@ begin
   FEraseMode := False;
 end;
 
-procedure TBGRADefaultBitmap.ErasePolyLineAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.ErasePolyLineAntialias(const points: array of TPointF;
   alpha: byte; w: single);
 begin
   FEraseMode := True;
@@ -1439,18 +1469,18 @@ begin
   FEraseMode := False;
 end;
 
-procedure TBGRADefaultBitmap.FillPolyAntialias(points: array of TPointF; c: TBGRAPixel);
+procedure TBGRADefaultBitmap.FillPolyAntialias(const points: array of TPointF; c: TBGRAPixel);
 begin
   BGRAPolygon.FillPolyAntialias(self, points, c, FEraseMode, FillMode = fmWinding);
 end;
 
-procedure TBGRADefaultBitmap.FillPolyAntialias(points: array of TPointF;
+procedure TBGRADefaultBitmap.FillPolyAntialias(const points: array of TPointF;
   texture: TBGRACustomBitmap);
 begin
   BGRAPolygon.FillPolyAntialiasWithTexture(self, points, texture, FillMode = fmWinding);
 end;
 
-procedure TBGRADefaultBitmap.ErasePolyAntialias(points: array of TPointF; alpha: byte);
+procedure TBGRADefaultBitmap.ErasePolyAntialias(const points: array of TPointF; alpha: byte);
 begin
   FEraseMode := True;
   FillPolyAntialias(points, BGRA(0, 0, 0, alpha));
@@ -1551,6 +1581,68 @@ begin
   end;
   if back.alpha <> 0 then
     FillRectAntialias(x + w, y + w, x2 - w, y2 - w, back);
+end;
+
+procedure TBGRADefaultBitmap.RectangleAntialias(x, y, x2, y2: single;
+  texture: TBGRACustomBitmap; w: single);
+var
+  poly: array of TPointF;
+  temp: single;
+  bevel: single;
+begin
+  if (length(FCustomPenStyle) = 1) and (FCustomPenStyle[0] = 0) then exit;
+
+  if (x > x2) then
+  begin
+    temp := x;
+    x    := x2;
+    x2   := temp;
+  end;
+  if (y > y2) then
+  begin
+    temp := y;
+    y    := y2;
+    y2   := temp;
+  end;
+
+  if (x2 - x <= w) or (y2 - y <= w) then
+  begin
+    if JoinStyle = pjsBevel then
+    begin
+      bevel := (2-sqrt(2))*w/2;
+      FillRoundRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, bevel,bevel, texture, [rrTopLeftBevel, rrTopRightBevel, rrBottomLeftBevel, rrBottomRightBevel]);
+    end else
+    if JoinStyle = pjsRound then
+     FillRoundRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, w/2,w/2, texture)
+    else
+     FillRectAntialias(x - w / 2, y - w / 2, x2 + w / 2, y2 + w / 2, texture);
+    exit;
+  end;
+
+  if (JoinStyle = pjsMiter) and (FCustomPenStyle = nil) then
+  begin
+    w /= 2;
+    setlength(poly, 9);
+    poly[0] := pointf(x - w, y - w);
+    poly[1] := pointf(x2 + w, y - w);
+    poly[2] := pointf(x2 + w, y2 + w);
+    poly[3] := pointf(x - w, y2 + w);
+    poly[4] := EmptyPointF;
+    poly[5] := pointf(x + w, y + w);
+    poly[6] := pointf(x2 - w, y + w);
+    poly[7] := pointf(x2 - w, y2 - w);
+    poly[8] := pointf(x + w, y2 - w);
+    BGRAPolygon.FillPolyAntialiasWithTexture(self,poly, texture, False);
+  end else
+  begin
+    setlength(poly, 4);
+    poly[0] := Pointf(x,y);
+    poly[1] := Pointf(x2,y);
+    poly[2] := Pointf(x2,y2);
+    poly[3] := Pointf(x,y2);
+    DrawPolygonAntialias(poly,texture,w);
+    w /= 2;
+  end;
 end;
 
 procedure TBGRADefaultBitmap.RoundRectAntialias(x, y, x2, y2, rx, ry: single;
@@ -1784,6 +1876,19 @@ begin
   poly[2] := pointf(x2, y2);
   poly[3] := pointf(x, y2);
   FillPolyAntialias(poly, c);
+end;
+
+procedure TBGRADefaultBitmap.FillRectAntialias(x, y, x2, y2: single;
+  texture: TBGRACustomBitmap);
+var
+  poly: array of TPointF;
+begin
+  setlength(poly, 4);
+  poly[0] := pointf(x, y);
+  poly[1] := pointf(x2, y);
+  poly[2] := pointf(x2, y2);
+  poly[3] := pointf(x, y2);
+  FillPolyAntialias(poly, texture);
 end;
 
 procedure TBGRADefaultBitmap.FillRoundRectAntialias(x, y, x2, y2, rx,ry: single;
@@ -2636,12 +2741,32 @@ begin
   InvalidateBitmap;
 end;
 
-function TBGRADefaultBitmap.Duplicate: TBGRACustomBitmap;
+function TBGRADefaultBitmap.Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap;
+var Temp: TBGRADefaultBitmap;
 begin
   LoadFromBitmapIfNeeded;
-  Result := NewBitmap(Width, Height);
-  Result.PutImage(0, 0, self, dmSet);
-  Result.Caption := self.Caption;
+  Temp := NewBitmap(Width, Height) as TBGRADefaultBitmap;
+  Temp.PutImage(0, 0, self, dmSet);
+  Temp.Caption := self.Caption;
+  if DuplicateProperties then
+    CopyPropertiesTo(Temp);
+  Result := Temp;
+end;
+
+procedure TBGRADefaultBitmap.CopyPropertiesTo(ABitmap: TBGRADefaultBitmap);
+begin
+  ABitmap.CanvasOpacity := CanvasOpacity;
+  ABitmap.CanvasDrawModeFP := CanvasDrawModeFP;
+  ABitmap.PenStyle := PenStyle;
+  ABitmap.CustomPenStyle := CustomPenStyle;
+  ABitmap.FontHeight := FontHeight;
+  ABitmap.FontName := FontName;
+  ABitmap.FontStyle := FontStyle;
+  ABitmap.FontAntialias := FontAntialias;
+  ABitmap.FontOrientation := FontOrientation;
+  ABitmap.LineCap := LineCap;
+  ABitmap.JoinStyle := JoinStyle;
+  ABitmap.FillMode := FillMode;
 end;
 
 function TBGRADefaultBitmap.Equals(comp: TBGRACustomBitmap): boolean;
@@ -3486,10 +3611,11 @@ begin
   SetDataPtr(AData);
 end;
 
-function TBGRAPtrBitmap.Duplicate: TBGRACustomBitmap;
+function TBGRAPtrBitmap.Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap;
 begin
   Result := NewBitmap(Width, Height);
   TBGRAPtrBitmap(Result).SetDataPtr(FData);
+  CopyPropertiesTo(TBGRAPtrBitmap(Result));
 end;
 
 procedure TBGRAPtrBitmap.SetDataPtr(AData: Pointer);
