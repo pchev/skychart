@@ -2509,9 +2509,9 @@ if cfgsc.ProjPole=Altaz then begin
             proj2(-az-daz,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
             WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
               if (abs(ps[0,j]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-                 (abs(ps[1,j]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)or
+                 ((abs(ps[1,j]-Fplot.cfgchart.hh)>20*Fplot.cfgchart.hh)and(abs(cfgsc.hcentre)<0.05))or
                  (abs(ps[0,j+hdiv+1]-Fplot.cfgchart.hw)>2*Fplot.cfgchart.hw)or
-                 (abs(ps[1,j+hdiv+1]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)
+                 ((abs(ps[1,j+hdiv+1]-Fplot.cfgchart.hh)>2*Fplot.cfgchart.hh)and(abs(cfgsc.hcentre)<0.05))
                  then begin
                    ok:=false;
                    break;
