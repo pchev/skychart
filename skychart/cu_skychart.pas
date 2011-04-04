@@ -2461,6 +2461,23 @@ var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz : double;
     hbmp : TBGRABitmap;
     col: TColor;
     col1,col2: TBGRAPixel;
+
+function CheckBelowHorizon(x,y:integer):boolean;
+var xx2,yy2 :single;
+    x2,y2,hh,de : double;
+begin
+GetAHxy(x,y,az,h,cfgsc);
+if h>0 then
+  result:=false
+else begin
+  // check for reversability, otherwise we are out of the world.
+  Hz2Eq(az,h,hh,de,cfgsc);
+  projection(cfgsc.CurST-hh,de,x2,y2,false,cfgsc);
+  WindowXY(x2,y2,xx2,yy2,cfgsc);
+  result:=((h<hlimit)and(round(xx2)=x)and(round(yy2)=y));
+end;
+end;
+
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
@@ -2556,14 +2573,10 @@ if cfgsc.ProjPole=Altaz then begin
     // Fill below horizon
     if fill and (not Fplot.cfgchart.onprinter) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
-         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
-         if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
-         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
-         if h<hlimit then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
-         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymin+1,az,h,cfgsc);
-         if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
-         GetAHxy(cfgsc.Xmax-1,cfgsc.Ymax-1,az,h,cfgsc);
-         if h<hlimit then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymax-1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymin+1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymax-1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
     end;
     // Render bitmap
     Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
