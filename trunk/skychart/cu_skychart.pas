@@ -2545,7 +2545,7 @@ if cfgsc.ProjPole=Altaz then begin
               hbmp.FillPolyAntialias(psf,col1);
             end else begin
               // draw line
-              hbmp.DrawLineAntialias(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],col1,1,false);
+              Fplot.BGRADrawLine(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],col1,1,hbmp);
             end;
           end;
         end;
@@ -2564,19 +2564,19 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-                  hbmp.DrawLineAntialias(xph,yph,xh,yh,col2,2);
+            Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
          end;
          xph:=xh;
          yph:=yh;
     end;
-    hbmp.DrawLineAntialias(xh,yh,x0h,y0h,col2,2);
+    Fplot.BGRADrawLine(xh,yh,x0h,y0h,col2,2,hbmp);
     // Fill below horizon
     if fill and (not Fplot.cfgchart.onprinter) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
-         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
-         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymax-1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
-         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymin+1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
-         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymax-1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) and (hbmp.GetPixel(cfgsc.Xmin+1,cfgsc.Ymin+1)<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymax-1) and (hbmp.GetPixel(cfgsc.Xmin+1,cfgsc.Ymax-1)<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymin+1) and (hbmp.GetPixel(cfgsc.Xmax-1,cfgsc.Ymin+1)<>col1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
+         if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymax-1) and (hbmp.GetPixel(cfgsc.Xmax-1,cfgsc.Ymax-1)<>col1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymax-1,col1,fmSet);
     end;
     // Render bitmap
     Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);

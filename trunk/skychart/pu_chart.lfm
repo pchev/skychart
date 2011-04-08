@@ -83,7 +83,7 @@ object f_chart: Tf_chart
     top = 24
   end
   object ActionList1: TActionList
-    left = 304
+    left = 192
     top = 64
     object zoomplus: TAction
       Category = 'zoom'

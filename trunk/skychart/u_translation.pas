@@ -1165,6 +1165,7 @@ resourcestring
   rsRefreshImage = 'Refresh image every';
   rsHours = 'hours';
   rsServerRespon = 'Server response: ';
+  rsAntiAliasDra = 'Anti Alias drawing';
 
 implementation
 

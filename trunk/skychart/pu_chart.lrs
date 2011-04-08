@@ -23,7 +23,7 @@ LazarusResources.Add('Tf_chart','FORMDATA',[
   +'rgeChange'#2#10#3'Max'#2'2'#3'Min'#2#206#8'PageSize'#2#10#8'TabOrder'#2#1#0
   +#0#0#6'TTimer'#12'RefreshTimer'#7'Enabled'#8#8'Interval'#3','#1#7'OnTimer'#7
   +#17'RefreshTimerTimer'#4'left'#3'0'#1#3'top'#2#24#0#0#11'TActionList'#11'Act'
-  +'ionList1'#4'left'#3'0'#1#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8'Category'#6
+  +'ionList1'#4'left'#3#192#0#3'top'#2'@'#0#7'TAction'#8'zoomplus'#8'Category'#6
   +#4'zoom'#7'Caption'#6#6'Zoom +'#10'ImageIndex'#2#6#9'OnExecute'#7#15'zoomplu'
   +'sExecute'#0#0#7'TAction'#9'zoomminus'#8'Category'#6#4'zoom'#7'Caption'#6#6
   +'Zoom -'#10'ImageIndex'#2#7#9'OnExecute'#7#16'zoomminusExecute'#0#0#7'TActio'
