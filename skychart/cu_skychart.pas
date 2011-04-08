@@ -1082,6 +1082,7 @@ function Tskychart.DrawOutline :boolean;
 var rec:GcatRec;
   x1,y1: Double;
   xx,yy: single;
+  saveusebmp:boolean;
   op,lw,col,fs: integer;
 begin
 {$ifdef trace_debug}
@@ -1089,6 +1090,11 @@ begin
 {$endif}
 fillchar(rec,sizeof(rec),0);
 try
+saveusebmp:=Fplot.cfgplot.UseBMP;
+if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+   Fplot.cfgplot.UseBMP:=false;
+   FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
 if Fcatalog.OpenLin then
  while Fcatalog.readlin(rec) do begin
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
@@ -1106,6 +1112,10 @@ if Fcatalog.OpenLin then
 end;
 result:=true;
 finally
+ if saveusebmp then begin
+   FPlot.cnv:=nil;
+ end;
+ Fplot.cfgplot.UseBMP := saveusebmp;
  Fcatalog.CloseLin;
 end;
 end;
@@ -1115,7 +1125,7 @@ var rec:GcatRec;
   x1,y1: Double;
   xx,yy:single;
   op,lw,col,fs: integer;
-  first:boolean;
+  first,saveusebmp:boolean;
 begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
@@ -1132,6 +1142,11 @@ else begin
 end;
 if col = FPlot.cfgplot.bgcolor then cfgsc.FillMilkyWay:=false;
 try
+saveusebmp:=Fplot.cfgplot.UseBMP;
+if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+   Fplot.cfgplot.UseBMP:=false;
+   FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
 if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
  while Fcatalog.readMilkyway(rec) do begin
  if first then begin
@@ -1149,6 +1164,10 @@ if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
 end;
 result:=true;
 finally
+ if saveusebmp then begin
+   FPlot.cnv:=nil;
+ end;
+ Fplot.cfgplot.UseBMP := saveusebmp;
  Fcatalog.CloseMilkyway;
 end;
 end;
