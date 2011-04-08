@@ -588,7 +588,7 @@ type
                 backgroundcolor,bgcolor : Tcolor;
                 stardyn,starsize,prtres,starplot,nebplot,plaplot : integer;
                 Nebgray,NebBright,starshapesize,starshapew : integer;
-                Invisible,AutoSkycolor,TransparentPlanet, UseBMP : boolean;
+                Invisible,AutoSkycolor,TransparentPlanet, UseBMP, AntiAlias : boolean;
                 FontName : array [1..numfont] of string;    // 1=grid 2=label 3=legend 4=status 5=list 6=prt 7=symbol
                 FontSize : array [1..numfont] of integer;
                 FontBold : array [1..numfont] of boolean;
@@ -1566,6 +1566,7 @@ AutoSkycolor:=Source.AutoSkycolor;
 autoskycolorValid:=Source.autoskycolorValid;
 TransparentPlanet:=Source.TransparentPlanet;
 UseBMP:=Source.UseBMP;
+AntiAlias:=Source.AntiAlias;
 for i:=1 to numfont do begin
   FontName[i]:=Source.FontName[i];
   FontSize[i]:=Source.FontSize[i];

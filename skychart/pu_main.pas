@@ -3815,6 +3815,7 @@ cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap
 cfgm.PlanetDir:=slash(appdir)+'data'+Pathdelim+'planet';
 cfgm.horizonfile:='';
 def_cfgplot.UseBMP:=true;
+def_cfgplot.AntiAlias:=false;
 def_cfgplot.invisible:=false;
 def_cfgplot.color:=dfColor;
 def_cfgplot.skycolor:=dfSkyColor;
@@ -4333,6 +4334,7 @@ end;
 end;
 try
 section:='display';
+cplot.AntiAlias:=ReadBool(section,'AntiAlias',cplot.AntiAlias);
 cplot.starplot:=ReadInteger(section,'starplot',cplot.starplot);
 cplot.nebplot:=ReadInteger(section,'nebplot',cplot.nebplot);
 cplot.TransparentPlanet:=ReadBool(section,'TransparentPlanet',cplot.TransparentPlanet);
@@ -5003,6 +5005,7 @@ for i:=1 to maxnebcatalog do begin
    WriteInteger(section,'nebcatfield2'+inttostr(i),catalog.cfgcat.nebcatfield[i,2]);
 end;
 section:='display';
+WriteBool(section,'AntiAlias',cplot.AntiAlias);
 WriteInteger(section,'starplot',cplot.starplot);
 WriteInteger(section,'nebplot',cplot.nebplot);
 WriteInteger(section,'plaplot',cplot.plaplot);

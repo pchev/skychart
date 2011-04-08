@@ -352,6 +352,15 @@ object f_config_display: Tf_config_display
             TabOrder = 1
           end
         end
+        object antialias: TCheckBox
+          Left = 28
+          Height = 23
+          Top = 458
+          Width = 80
+          Caption = 'Anti Alias  '
+          OnClick = antialiasClick
+          TabOrder = 6
+        end
       end
       object Page2: TTabSheet
         Caption = 'Colour'

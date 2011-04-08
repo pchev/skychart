@@ -49,6 +49,7 @@ type
     Button9: TButton;
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
+    antialias: TCheckBox;
     ShowTitle: TCheckBox;
     Edit1: TEdit;
     Edit10: TEdit;
@@ -343,6 +344,7 @@ type
     Shape11: TShape;
     PageControl1: TPageControl;
     labelmagStar: TUpDown;
+    procedure antialiasClick(Sender: TObject);
     procedure BtnBWColorClick(Sender: TObject);
     procedure BtnDefaultColorClick(Sender: TObject);
     procedure BtnRedColorClick(Sender: TObject);
@@ -715,6 +717,7 @@ Button6.caption:=rsHelp;
 label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
+antialias.Caption:=rsAntiAliasDra;
 SetHelp(self,hlpCfgDispl);
 end;
 
@@ -1011,6 +1014,7 @@ begin
  panel5.visible:= (cplot.starplot=1);
  SizeContrastBar.position:=round(cplot.magsize*10);
  red_moveBox.Checked:=cplot.red_move;
+ antialias.Checked:=cplot.AntiAlias;
  StarSizeBar1.position:=cplot.starsize;
  StarDynBar1.position:=cplot.stardyn;
  FileNameEdit1.FileName:=cmain.starshape_file;
@@ -1345,6 +1349,11 @@ end;
 procedure Tf_config_display.red_moveBoxClick(Sender: TObject);
 begin
   cplot.red_move:=red_moveBox.Checked;
+end;
+
+procedure Tf_config_display.antialiasClick(Sender: TObject);
+begin
+   cplot.AntiAlias := antialias.Checked;
 end;
 
 procedure Tf_config_display.stardisplayClick(Sender: TObject);
