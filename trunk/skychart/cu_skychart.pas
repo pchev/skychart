@@ -3507,14 +3507,21 @@ end;
 Procedure Tskychart.DrawSearchMark(ra,de :double; moving:boolean) ;
 var x1,y1 : double;
     xa,ya,sz:single;
+    saveusebmp:boolean;
 begin
+saveusebmp:=Fplot.cfgplot.UseBMP;
 sz:=6;
 projection(ra,de,x1,y1,false,cfgsc) ;
 WindowXY(x1,y1,xa,ya,cfgsc);
 xa:=round(xa);
 ya:=round(ya);
+try
+Fplot.cfgplot.UseBMP:=false;  // always to screen canvas
 Fplot.PlotCircle(xa-sz,ya-sz,xa+sz,ya+sz,Fplot.cfgplot.Color[11],moving);
 Fplot.PlotCircle(xa-sz-1,ya-sz-1,xa+sz+1,ya+sz+1,Fplot.cfgplot.Color[0],moving);
+finally
+Fplot.cfgplot.UseBMP:=saveusebmp;
+end;
 end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;
