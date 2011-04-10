@@ -112,8 +112,6 @@ type
      //--------------------------------------------
      procedure ClearImage;
      Procedure FlushCnv;
-     Procedure InitPixelImg;
-     Procedure ClosePixelImg;
      Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
@@ -380,24 +378,6 @@ begin
  Xplanetrender:=true;
 end;
 
-Procedure TSplot.InitPixelImg;
-begin
-{if (cfgplot.starplot=2) then begin
-  cbmp.LoadFromBitmapIfNeeded;
-  IntfImgReady:=true;
-end;}
-end;
-
-Procedure TSplot.ClosePixelImg;
-begin
-{if IntfImgReady then begin
-    if not cfgchart.onprinter then begin
-       cbmp.InvalidateBitmap;
-    end;
-  end;
-IntfImgReady:=false; }
-end;
-
 Procedure TSplot.FlushCnv;
 begin
 if cfgplot.UseBMP then begin
@@ -637,8 +617,8 @@ if ma<-5 then ma:=-5;
 ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
 ds2:= round(ds/2);
 if cfgplot.UseBMP then begin
-  cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
-  cbmp.FillEllipseAntialias(x,y,ds2,ds2,ColorToBGRA(co));
+  cbmp.EllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
+  cbmp.FillEllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(co));
 end else with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
