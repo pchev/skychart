@@ -4574,3 +4574,7 @@ msgstr ""
 msgid "Server response: "
 msgstr ""
 
+#: u_translation:rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+

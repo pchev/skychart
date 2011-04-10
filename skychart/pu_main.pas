@@ -6581,6 +6581,7 @@ begin
   EditTimeVal.Enabled:=true;
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
+  if sender is Tf_chart then ActiveControl:=Tf_chart(sender).Image1;
 end;
 
 procedure Tf_main.GetTCPInfo(i:integer; var buf:string);

@@ -196,6 +196,10 @@ msgstr "Éves sajátmozgás"
 msgid "Anonymous password"
 msgstr "Anonymous jelszó"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Apparent"

@@ -179,6 +179,10 @@ msgstr "Movimiento Propio Anual"
 msgid "Anonymous password"
 msgstr "Clave anónima"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr ""

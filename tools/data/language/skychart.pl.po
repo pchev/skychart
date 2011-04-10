@@ -185,6 +185,10 @@ msgstr "Roczny ruch własny"
 msgid "Anonymous password"
 msgstr "Hasło anonimowego użytkownika"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Pozorne"

@@ -179,6 +179,10 @@ msgstr ""
 msgid "Anonymous password"
 msgstr ""
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr ""
