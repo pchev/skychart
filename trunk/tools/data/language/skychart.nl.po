@@ -179,6 +179,10 @@ msgstr "Jaarlijkse eigenbeweging"
 msgid "Anonymous password"
 msgstr "Anoniem password"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Van de datum"

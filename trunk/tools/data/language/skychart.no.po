@@ -180,6 +180,10 @@ msgstr "Årlig egenbevegelse"
 msgid "Anonymous password"
 msgstr "Anonymt passord"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Tilsynelat. posisjon"

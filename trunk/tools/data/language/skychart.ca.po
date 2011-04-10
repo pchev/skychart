@@ -180,6 +180,10 @@ msgstr "Moviment propi anual"
 msgid "Anonymous password"
 msgstr "Contrasenya anònima"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Aparents"

@@ -1,6 +1,6 @@
 Version 3.3svn release Notes
 
-- Antialias drawing of the map on the screen.
+- Add option in Setup/Display for antialias drawing of the map on the screen, this can slowdown the display.
 - Observatory favorite list, new observatory database window.
 - Internet localization of your location.
 - Display an online image of the Sun from SDO or SOHO.

@@ -180,6 +180,10 @@ msgstr "Pravilno letno gibanje"
 msgid "Anonymous password"
 msgstr "Anonimno geslo"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "Navidezen"

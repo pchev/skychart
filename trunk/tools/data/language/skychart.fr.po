@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-03-20 18:06+0100\n"
+"PO-Revision-Date: 2011-04-10 11:20+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -182,6 +182,10 @@ msgstr "Mouvement propre annuel"
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
 msgstr "Mot de passe anonyme"
+
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr "Dessin avec anti-alias"
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -4599,4 +4603,5 @@ msgstr "Zoom avant"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Zoom arrière"
+
 

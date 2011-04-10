@@ -213,6 +213,10 @@ msgstr "Árleg eiginhreyfing"
 msgid "Anonymous password"
 msgstr "Nafnlaust lykilorð"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "M.v.athuganda"

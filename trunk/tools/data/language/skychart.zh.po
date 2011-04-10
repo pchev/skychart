@@ -181,6 +181,10 @@ msgstr "周年自行"
 msgid "Anonymous password"
 msgstr "匿名密碼"
 
+#: u_translation.rsantialiasdra
+msgid "Anti Alias drawing"
+msgstr ""
+
 #: u_translation.rsapparent
 msgid "Apparent"
 msgstr "視時"
