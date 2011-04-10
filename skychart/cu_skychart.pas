@@ -774,7 +774,7 @@ var rec:GcatRec;
   x1,y1,cyear,dyear: Double;
   xx,yy,xxp,yyp : single;
   lid,saveplot : integer;
-  first:boolean;
+  first,saveusebmp: boolean;
   firstcat:TSname;
   gk: string;
   al: TLabelAlign;
@@ -788,9 +788,13 @@ if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
 dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot.starplot;
-if cfgsc.DrawPMon and (Fplot.cfgplot.starplot=2) then Fplot.cfgplot.starplot:=1;
+if (not Fplot.cfgplot.UseBMP) and cfgsc.DrawPMon and (Fplot.cfgplot.starplot=2) then Fplot.cfgplot.starplot:=1;
+saveusebmp:=Fplot.cfgplot.UseBMP;
 try
-Fplot.InitPixelImg;
+if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+  Fplot.cfgplot.UseBMP:=false;
+  FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
  if first then begin
@@ -833,9 +837,12 @@ if Fcatalog.OpenStar then
 end;
 result:=true;
 finally
-Fcatalog.CloseStar;
-Fplot.ClosePixelImg;
-Fplot.cfgplot.starplot:=saveplot;
+  if saveusebmp then begin
+    FPlot.cnv:=nil;
+  end;
+  Fplot.cfgplot.UseBMP := saveusebmp;
+  Fcatalog.CloseStar;
+  Fplot.cfgplot.starplot:=saveplot;
 end;
 end;
 
@@ -844,12 +851,18 @@ var rec:GcatRec;
   x1,y1: Double;
   xx,yy:single;
   lid: integer;
+  saveusebmp: boolean;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
 {$endif}
 fillchar(rec,sizeof(rec),0);
+saveusebmp:=Fplot.cfgplot.UseBMP;
 try
+if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+  Fplot.cfgplot.UseBMP:=false;
+  FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
@@ -866,7 +879,11 @@ if Fcatalog.OpenVarStar then
 end;
 result:=true;
 finally
- Fcatalog.CloseVarStar;
+    if saveusebmp then begin
+    FPlot.cnv:=nil;
+  end;
+  Fplot.cfgplot.UseBMP := saveusebmp;
+  Fcatalog.CloseVarStar;
 end;
 end;
 
@@ -875,12 +892,18 @@ var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
   xx,yy:single;
   lid: integer;
+  saveusebmp: boolean;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
 {$endif}
 fillchar(rec,sizeof(rec),0);
+saveusebmp:=Fplot.cfgplot.UseBMP;
 try
+if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+  Fplot.cfgplot.UseBMP:=false;
+  FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
@@ -904,6 +927,10 @@ if Fcatalog.OpenDblStar then
 end;
 result:=true;
 finally
+  if saveusebmp then begin
+    FPlot.cnv:=nil;
+  end;
+  Fplot.cfgplot.UseBMP := saveusebmp;
   Fcatalog.CloseDblStar;
 end;
 end;
@@ -927,6 +954,7 @@ var rec:GcatRec;
   bmp:Tbitmap;
   save_col: Starcolarray;
   al: TLabelAlign;
+  saveusebmp: boolean;
 
   Procedure Drawing;
     begin
@@ -963,7 +991,12 @@ var rec:GcatRec;
     {$endif}
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
+    saveusebmp:=Fplot.cfgplot.UseBMP;
     try
+    if (not cfgsc.ShowImages) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+      Fplot.cfgplot.UseBMP:=false;
+      FPlot.cnv:=Fplot.cbmp.Canvas;
+    end;
     if Fcatalog.OpenNeb then
       while Fcatalog.readneb(rec) do
         begin
@@ -1022,6 +1055,10 @@ var rec:GcatRec;
         end;
       result:=true;
     finally
+      if saveusebmp then begin
+        FPlot.cnv:=nil;
+      end;
+      Fplot.cfgplot.UseBMP := saveusebmp;
       Fcatalog.CloseNeb;
       bmp.Free;
     end;
@@ -1271,7 +1308,6 @@ for j:=0 to cfgsc.SimNb-1 do begin
            end;
     end;
   end;
-  Fplot.ClosePixelImg;
   if cfgsc.ShowEarthShadowValid then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
 end;
 result:=true;
@@ -1315,7 +1351,6 @@ if cfgsc.ShowAsteroidValid then begin
  WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
 {$endif}
   Fplanet.ComputeAsteroid(cfgsc);
-  if (cfgsc.AstSymbol=1) then Fplot.InitPixelImg;
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
     for i:=1 to cfgsc.AsteroidNb do begin
@@ -1344,7 +1379,6 @@ if cfgsc.ShowAsteroidValid then begin
       end;
     end;
   end;
-  Fplot.ClosePixelImg;
   result:=true;
 end else begin
   cfgsc.AsteroidNb:=0;
