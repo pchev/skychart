@@ -6810,19 +6810,21 @@ end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart) and
-   ((Activecontrol=nil)or(Activecontrol=Multidoc1)or
-   (Activecontrol=MultiDoc1.ActiveChild)or(Activecontrol=MultiDoc1.ActiveChild.DockedPanel))
-   then
-      (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
+if (Activecontrol=quicksearch) or
+   (Activecontrol=EditTimeVal) or
+   (Activecontrol=TimeVal) or
+   (Activecontrol=TimeU) then exit
+else
+   (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
 end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart) and
-   ((Activecontrol=nil)or(Activecontrol=Multidoc1)or
-   (Activecontrol=MultiDoc1.ActiveChild)or(Activecontrol=MultiDoc1.ActiveChild.DockedPanel))
-   then
+if (Activecontrol=quicksearch) or
+   (Activecontrol=EditTimeVal) or
+   (Activecontrol=TimeVal) or
+   (Activecontrol=TimeU) then exit
+else
    (MultiDoc1.ActiveObject as Tf_chart).FormKeyPress(Sender,Key);
 end;
 
