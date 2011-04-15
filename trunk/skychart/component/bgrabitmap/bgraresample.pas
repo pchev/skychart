@@ -12,6 +12,8 @@ function FineResample(bmp: TBGRACustomBitmap;
 function SimpleStretch(bmp: TBGRACustomBitmap;
   NewWidth, NewHeight: integer): TBGRACustomBitmap;
 
+function FineInterpolation(t: single): single;
+
 implementation
 
 uses GraphType, Math;
@@ -82,7 +84,7 @@ begin
       iysrc2 := iysrc1
     else
       iysrc2 := ceil(ysrc);
-    factCorrY := 0.5 - cos(factVert * Pi) / 2;
+    factCorrY := FineInterpolation(factVert);
     for xb := 0 to newWidth - 1 do
     begin
       xsrc      := xb * xfactor;
@@ -92,7 +94,7 @@ begin
         ixsrc2 := ixsrc1
       else
         ixsrc2 := ceil(xsrc);
-      factCorrX := 0.5 - cos(factHoriz * Pi) / 2;
+      factCorrX := FineInterpolation(factHoriz);
 
       cUpLeft   := bmp.GetPixel(ixsrc1, iysrc1);
       cUpRight  := bmp.GetPixel(ixsrc2, iysrc1);
@@ -678,6 +680,14 @@ begin
     else
       Result := bmp.Duplicate;
   end;
+end;
+
+function FineInterpolation(t: single): single;
+begin
+  if t <= 0.5 then
+    result := t*t*2 else
+    result := 1-(1-t)*(1-t)*2;
+  result := (result+t)*0.5;
 end;
 
 end.

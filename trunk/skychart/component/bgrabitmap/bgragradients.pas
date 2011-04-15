@@ -5,7 +5,7 @@ unit BGRAGradients;
 interface
 
 uses
-  Graphics, Classes, BGRABitmap, BGRABitmapTypes;
+  Graphics, Classes, BGRABitmap, BGRABitmapTypes, BGRABlend;
 
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
   AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
@@ -34,7 +34,7 @@ procedure DoubleGradientAlphaFill(ABitmap: TBGRABitmap; ARect: TRect; AStart1,AS
                                  ADirection1,ADirection2,ADir: TGradientDirection; AValue: Single);
 
 type
-  TRectangleMapOption = (rmoNoLeftBorder,rmoNoTopBorder,rmoNoRightBorder,rmoNoBottomBorder);
+  TRectangleMapOption = (rmoNoLeftBorder,rmoNoTopBorder,rmoNoRightBorder,rmoNoBottomBorder,rmoLinearBorder);
   TRectangleMapOptions = set of TRectangleMapOption;
 
   { TPhongShading }
@@ -46,6 +46,7 @@ type
     AmbientFactor, DiffusionFactor, NegativeDiffusionFactor : Double;
     SpecularFactor, SpecularIndex : Double;
     LightPosition : TPoint;
+    DiffuseSaturation: Boolean;
     LightPositionZ : Integer;
     constructor Create;
     procedure Draw(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
@@ -63,16 +64,19 @@ type
 
 function CreateConeMap(size: integer): TBGRABitmap;
 function CreateSphereMap(width,height: integer): TBGRABitmap;
+function CreateSpherePreciseMap(width,height: integer): TBGRABitmap;
 function CreateRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
 function CreateRoundRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
 function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
   VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
 function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
   VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
+function MapHeight(Color: TBGRAPixel): Single;
+function MapHeightToBGRA(Height: Single; Alpha: Byte): TBGRAPixel;
 
 implementation
 
-uses BGRABlend, Types;
+uses Types;
 
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
   AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
@@ -277,6 +281,7 @@ begin
   LightColor := BGRAWhite;
   AmbientFactor := 0.3;
   DiffusionFactor := 0.9;
+  DiffuseSaturation:= False;
   NegativeDiffusionFactor := 0.1;
   SpecularFactor := 0.6;
   SpecularIndex := 10;
@@ -352,7 +357,7 @@ var
   dist, distfactor, diffuseterm, specularterm: double;
   eColor,eLight,ec: TExpandedPixel;
   mc,mcLeft,mcRight,mcTop,mcBottom: TBGRAPixel;
-  v1x,v1y,v1z,v2x,v2y,v2z: integer;
+  v1x,v1y,v1z,v2x,v2y,v2z: single;
 
   minx,miny,maxx,maxy: integer;
   pmap: PBGRAPixel;
@@ -382,11 +387,11 @@ begin
   eColor := GammaExpansion(color);
   ec.alpha := eColor.alpha;
 
-  v1x := 510;
+  v1x := 1;
   v1y := 0;
 
   v2x := 0;
-  v2y := 510;
+  v2y := 1;
 
   dist := 0;
   LdotN := 0;
@@ -411,32 +416,32 @@ begin
       begin
         mcTop := map.GetPixel(x,y-1);
         mcBottom := map.GetPixel(x,y+1);
-        z := mc.red/255*mapAltitude;
+        z := MapHeight(mc)*mapAltitude;
         if mcLeft.alpha = 0 then
         begin
           if mcRight.alpha = 0 then
             v1z := 0
           else
-            v1z := (mcRight.red-mc.red)*mapAltitude*2;
+            v1z := (MapHeight(mcRight)-MapHeight(mc))*mapAltitude*2;
         end else
         begin
           if mcRight.alpha = 0 then
-            v1z := (mc.red-mcLeft.red)*mapAltitude*2
+            v1z := (MapHeight(mc)-MapHeight(mcLeft))*mapAltitude*2
           else
-            v1z := (mcRight.red-mcLeft.red)*mapAltitude;
+            v1z := (MapHeight(mcRight)-MapHeight(mcLeft))*mapAltitude;
         end;
         if mcTop.alpha = 0 then
         begin
           if mcBottom.alpha = 0 then
             v2z := 0
           else
-            v2z := (mcBottom.red-mc.red)*mapAltitude*2;
+            v2z := (MapHeight(mcBottom)-MapHeight(mc))*mapAltitude*2;
         end else
         begin
           if mcBottom.alpha = 0 then
-            v2z := (mc.red-mcTop.red)*mapAltitude*2
+            v2z := (MapHeight(mc)-MapHeight(mcTop))*mapAltitude*2
           else
-            v2z := (mcBottom.red-mcTop.red)*mapAltitude;
+            v2z := (MapHeight(mcBottom)-MapHeight(mcTop))*mapAltitude;
         end;
 
         Lx := dx-x*LightDestFactor;
@@ -469,7 +474,11 @@ begin
           Iw := round(specularterm*256);
         end;
         If Ic < 0 then Ic := 0;
-        If Ic > 256 then Ic := 256;
+        If Ic > 256 then
+        begin
+          If DiffuseSaturation then Iw := Iw+(Ic-256);
+          Ic := 256;
+        end;
         if Iw > 256 then Iw := 256;
         Ic := Ic*(256-Iw) shr 8;
 
@@ -526,7 +535,7 @@ var
   dist, distfactor, diffuseterm, specularterm: double;
   eColor,eLight,ec: TExpandedPixel;
   mc,mcLeft,mcRight,mcTop,mcBottom: TBGRAPixel;
-  v1x,v1y,v1z,v2x,v2y,v2z: integer;
+  v1x,v1y,v1z,v2x,v2y,v2z: single;
 
   minx,miny,maxx,maxy: integer;
   pmap: PBGRAPixel;
@@ -554,11 +563,11 @@ begin
 
   eLight := GammaExpansion(LightColor);
 
-  v1x := 510;
+  v1x := 1;
   v1y := 0;
 
   v2x := 0;
-  v2y := 510;
+  v2y := 1;
 
   dist := 0;
   LdotN := 0;
@@ -583,32 +592,32 @@ begin
       begin
         mcTop := map.GetPixel(x,y-1);
         mcBottom := map.GetPixel(x,y+1);
-        z := mc.red/255*mapAltitude;
+        z := MapHeight(mc)*mapAltitude;
         if mcLeft.alpha = 0 then
         begin
           if mcRight.alpha = 0 then
             v1z := 0
           else
-            v1z := (mcRight.red-mc.red)*mapAltitude*2;
+            v1z := (MapHeight(mcRight)-MapHeight(mc))*mapAltitude*2;
         end else
         begin
           if mcRight.alpha = 0 then
-            v1z := (mc.red-mcLeft.red)*mapAltitude*2
+            v1z := (MapHeight(mc)-MapHeight(mcLeft))*mapAltitude*2
           else
-            v1z := (mcRight.red-mcLeft.red)*mapAltitude;
+            v1z := (MapHeight(mcRight)-MapHeight(mcLeft))*mapAltitude;
         end;
         if mcTop.alpha = 0 then
         begin
           if mcBottom.alpha = 0 then
             v2z := 0
           else
-            v2z := (mcBottom.red-mc.red)*mapAltitude*2;
+            v2z := (MapHeight(mcBottom)-MapHeight(mc))*mapAltitude*2;
         end else
         begin
           if mcBottom.alpha = 0 then
-            v2z := (mc.red-mcTop.red)*mapAltitude*2
+            v2z := (MapHeight(mc)-MapHeight(mcTop))*mapAltitude*2
           else
-            v2z := (mcBottom.red-mcTop.red)*mapAltitude;
+            v2z := (MapHeight(mcBottom)-MapHeight(mcTop))*mapAltitude;
         end;
 
         Lx := dx-x*LightDestFactor;
@@ -684,7 +693,7 @@ begin
     bounds.Bottom := bounds.Top;
     Bounds.Top := temp;
   end;
-  map := CreateSphereMap(Bounds.Right-Bounds.Left,Bounds.Bottom-Bounds.Top);
+  map := CreateSpherePreciseMap(Bounds.Right-Bounds.Left,Bounds.Bottom-Bounds.Top);
   Draw(dest,map,Altitude,bounds.Left,bounds.Top,Color);
   map.Free;
 end;
@@ -782,6 +791,35 @@ begin
   if border > maxVert then border := maxVert;
 end;
 
+function CreateSpherePreciseMap(width, height: integer): TBGRABitmap;
+var cx,cy,rx,ry,d: single;
+    xb,yb: integer;
+    p: PBGRAPixel;
+    mask: TBGRABitmap;
+begin
+  result := TBGRABitmap.Create(width,height);
+  cx := (width-1)/2;
+  cy := (height-1)/2;
+  rx := (width-1)/2;
+  ry := (height-1)/2;
+  for yb := 0 to height-1 do
+  begin
+   p := result.scanline[yb];
+   for xb := 0 to width-1 do
+   begin
+     d := sqr((xb-cx)/(rx+1))+sqr((yb-cy)/(ry+1));
+     if d >= 1 then
+       p^ := BGRAPixelTransparent else
+       p^ := MapHeightToBGRA(sqrt(1-d),255);
+     inc(p);
+   end;
+  end;
+  mask := TBGRABitmap.Create(width,height,BGRABlack);
+  mask.FillEllipseAntialias(cx,cy,rx,ry,BGRAWhite);
+  result.ApplyMask(mask);
+  mask.Free;
+end;
+
 function CreateRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
 var xb,yb: integer;
     p: PBGRAPixel;
@@ -809,7 +847,8 @@ begin
        Continue;
      end;
 
-     h := round(sin((h+1/2)/border*Pi/2)*255);
+     if rmoLinearBorder in options then h := h*256 div border else
+       h := round(sin((h+1/2)/border*Pi/2)*255);
      p^.red := h;
      p^.green := h;
      p^.blue := h;
@@ -878,7 +917,9 @@ begin
      if d < 0 then
        p^ := BGRAPixelTransparent else
      begin
-       h := round(sin((d+1/2)/border*Pi/2)*255);
+       if rmoLinearBorder in options then h := trunc(d*256/border) else
+         h := round(sin((d+1/2)/border*Pi/2)*255);
+
        p^.red := h;
        p^.green := h;
        p^.blue := h;
@@ -979,6 +1020,24 @@ begin
   temp := result.FilterBlurRadial(1,rbNormal) as TBGRABitmap;
   result.Free;
   result := temp;
+end;
+
+function MapHeight(Color: TBGRAPixel): Single;
+var intval: integer;
+begin
+  intval := color.Green shl 16 + color.red shl 8 + color.blue;
+  result := intval/16777215;
+end;
+
+function MapHeightToBGRA(Height: Single; Alpha: Byte): TBGRAPixel;
+var intval: integer;
+begin
+  if Height >= 1 then result := BGRA(255,255,255,alpha) else
+  if Height <= 0 then result := BGRA(0,0,0,alpha) else
+  begin
+    intval := round(Height*16777215);
+    result := BGRA(intval shr 8,intval shr 16,intval,alpha);
+  end;
 end;
 
 end.

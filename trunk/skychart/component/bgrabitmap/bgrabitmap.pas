@@ -83,7 +83,7 @@ type
 
 procedure BGRABitmapDraw(ACanvas: TCanvas; Rect: TRect; AData: Pointer;
   VerticalFlip: boolean; AWidth, AHeight: integer; Opaque: boolean);
-procedure BGRAReplace(var Source: TBGRABitmap; Temp: TObject);
+procedure BGRAReplace(var Destination: TBGRABitmap; Temp: TObject);
 
 implementation
 
@@ -107,10 +107,10 @@ begin
     bmp.DataDrawTransparent(ACanvas, Rect, AData, LineOrder, AWidth, AHeight);
 end;
 
-procedure BGRAReplace(var Source: TBGRABitmap; Temp: TObject);
+procedure BGRAReplace(var Destination: TBGRABitmap; Temp: TObject);
 begin
-  Source.Free;
-  Source := Temp as TBGRABitmap;
+  Destination.Free;
+  Destination := Temp as TBGRABitmap;
 end;
 
 initialization

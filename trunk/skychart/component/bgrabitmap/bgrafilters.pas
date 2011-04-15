@@ -30,12 +30,13 @@ function FilterRotate(bmp: TBGRACustomBitmap; origin: TPointF;
 function FilterGrayscale(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 function FilterContour(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 function FilterSphere(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
+function FilterTwirl(bmp: TBGRACustomBitmap; ACenter: TPoint; ARadius: Single; ATurn: Single=1; AExponent: Single=3): TBGRACustomBitmap;
 function FilterCylinder(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 function FilterPlane(bmp: TBGRACustomBitmap): TBGRACustomBitmap;
 
 implementation
 
-uses Math, GraphType, Dialogs;
+uses Math, GraphType, Dialogs, BGRATransform;
 
 function FilterSmartZoom3(bmp: TBGRACustomBitmap;
   Option: TMedianOption): TBGRACustomBitmap;
@@ -1369,6 +1370,15 @@ begin
   Mask.FillEllipseAntialias(cx, cy, cx, cy, BGRAWhite);
   Result.ApplyMask(mask);
   Mask.Free;
+end;
+
+function FilterTwirl(bmp: TBGRACustomBitmap; ACenter: TPoint; ARadius: Single; ATurn: Single=1; AExponent: Single=3): TBGRACustomBitmap;
+var twirl: TBGRATwirlScanner;
+begin
+  twirl := TBGRATwirlScanner.Create(bmp,ACenter,ARadius,ATurn,AExponent);
+  Result := bmp.NewBitmap(bmp.Width, bmp.Height);
+  result.Fill(twirl);
+  twirl.free;
 end;
 
 function FilterCylinder(bmp: TBGRACustomBitmap): TBGRACustomBitmap;

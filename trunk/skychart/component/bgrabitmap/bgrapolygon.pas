@@ -21,9 +21,14 @@ type
   end;
 
 procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
-  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
+  c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean);
 procedure FillShapeAntialiasWithTexture(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
-  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
+  scan: IBGRAScanner; NonZeroWinding: boolean);
+procedure FillShapeAliased(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
+  c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean; drawmode: TDrawMode);
+
+function ComputeMinMax(out minx,miny,maxx,maxy: integer; bounds: TRect; bmpDest: TBGRACustomBitmap): boolean;
+procedure ComputeAliasedRowBounds(x1,x2: single; minx,maxx: integer; out ix1,ix2: integer);
 
 type
   TPolySlice = record
@@ -32,13 +37,15 @@ type
                 y1,x1: single;
                 slope: single;
                 winding: integer;
+                data: pointer;
               end;
+    nbSegments: integer;
   end;
 
   { TFillPolyInfo }
 
   TFillPolyInfo = class(TFillShapeInfo)
-  private
+  protected
     FPoints:      array of TPointF;
     FSlopes:      array of single;
     FEmptyPt:     array of boolean;
@@ -47,17 +54,24 @@ type
     FSlices:   array of TPolySlice;
     FCurSlice: integer;
   public
-    constructor Create(points: array of TPointF);
+    constructor Create(const points: array of TPointF);
+    destructor Destroy; override;
+    function CreateData(numPt,nextPt: integer; x,y: single): pointer; virtual;
+    procedure FreeData(data: pointer); virtual;
     function GetBounds: TRect; override;
     function NbMaxIntersection: integer; override;
     procedure ComputeIntersection(cury: single; var inter: ArrayOfSingle;
       var winding: arrayOfInteger; var nbInter: integer); override;
   end;
 
+procedure FillPolyAliased(bmp: TBGRACustomBitmap; points: array of TPointF;
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean; drawmode: TDrawMode);
+procedure FillPolyAliasedWithTexture(bmp: TBGRACustomBitmap; points: array of TPointF;
+  scan: IBGRAScanner; NonZeroWinding: boolean; drawmode: TDrawMode);
 procedure FillPolyAntialias(bmp: TBGRACustomBitmap; points: array of TPointF;
   c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
 procedure FillPolyAntialiasWithTexture(bmp: TBGRACustomBitmap; points: array of TPointF;
-  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
+  scan: IBGRAScanner; NonZeroWinding: boolean);
 
 type
   { TFillEllipseInfo }
@@ -77,7 +91,7 @@ type
 procedure FillEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
   c: TBGRAPixel; EraseMode: boolean);
 procedure FillEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
-  texture: TBGRACustomBitmap);
+  scan: IBGRAScanner);
 
 type
   { TFillBorderEllipseInfo }
@@ -97,7 +111,7 @@ type
 procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
   c: TBGRAPixel; EraseMode: boolean);
 procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single;
-  texture: TBGRACustomBitmap);
+  scan: IBGRAScanner);
 
 type
   { TFillRoundRectangleInfo }
@@ -118,7 +132,7 @@ type
 procedure FillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry: single;
   options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
 procedure FillRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry: single;
-  options: TRoundRectangleOptions; texture: TBGRACustomBitmap);
+  options: TRoundRectangleOptions; scan: IBGRAScanner);
 
 type
   { TFillBorderRoundRectInfo }
@@ -136,7 +150,7 @@ type
 procedure BorderRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
   options: TRoundRectangleOptions; c: TBGRAPixel; EraseMode: boolean);
 procedure BorderRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
-  options: TRoundRectangleOptions; texture: TBGRACustomBitmap);
+  options: TRoundRectangleOptions; scan: IBGRAScanner);
 
 procedure BorderAndFillRoundRectangleAntialias(bmp: TBGRACustomBitmap; x1, y1, x2, y2, rx, ry, w: single;
   options: TRoundRectangleOptions; bordercolor,fillcolor: TBGRAPixel; EraseMode: boolean);
@@ -327,8 +341,60 @@ begin
   end;
 end;
 
+function ComputeMinMax(out minx,miny,maxx,maxy: integer; bounds: TRect; bmpDest: TBGRACustomBitmap): boolean;
+var clip: TRect;
+begin
+  result := true;
+
+  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
+  begin
+    result := false;
+    exit;
+  end;
+
+  miny := bounds.top;
+  maxy := bounds.bottom - 1;
+  minx := bounds.left;
+  maxx := bounds.right - 1;
+
+  clip := bmpDest.ClipRect;
+
+  if minx < clip.Left then
+    minx := clip.Left;
+  if maxx < clip.Left then
+    result := false;
+
+  if maxx > clip.Right - 1 then
+    maxx := clip.Right- 1;
+  if minx > clip.Right - 1 then
+    result := false;
+
+  if miny < clip.Top then
+    miny := clip.Top;
+  if maxy < clip.Top then
+    result := false;
+
+  if maxy > clip.Bottom - 1 then
+    maxy := clip.Bottom - 1;
+  if miny > clip.Bottom - 1 then
+    result := false;
+end;
+
+procedure ComputeAliasedRowBounds(x1,x2: single; minx,maxx: integer; out ix1,ix2: integer);
+begin
+  if frac(x1)=0.5 then
+    ix1 := trunc(x1) else
+    ix1 := round(x1);
+  ix2 := round(x2)-1;
+
+  if ix1 < minx then
+    ix1 := minx;
+  if ix2 >= maxx then
+    ix2 := maxx;
+end;
+
 procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
-  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean);
+  c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean);
 const
   precision = 11;
 var
@@ -356,54 +422,36 @@ var
 
 var
   bounds: TRect;
-  miny, maxy, minx, maxx: integer;
+  miny, maxy, minx, maxx,
+  rowminx, rowmaxx: integer;
 
-  density: packed array of single;
+  density: array of integer;
+  density256: integer;
 
   xb, yb, yc, i, j, tempInt: integer;
 
-  temp, cury, x1, x2: single;
+  tempSng,cury, x1, x2: single;
   ix1, ix2: integer;
   pdest:    PBGRAPixel;
-  pdens:    PSingle;
+  pdens:    PInteger;
 
 begin
   bounds := shapeInfo.GetBounds;
-  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
-    exit;
-
-  miny := bounds.top;
-  maxy := bounds.bottom - 1;
-  minx := bounds.left;
-  maxx := bounds.right - 1;
-
-  if minx < 0 then
-    minx := 0;
-  if maxx < 0 then
-    exit;
-  if maxx > bmp.Width - 1 then
-    maxx := bmp.Width - 1;
-  if minx > bmp.Width - 1 then
-    exit;
-  if miny < 0 then
-    miny := 0;
-  if miny > bmp.Height - 1 then
-    exit;
-  if maxy > bmp.Height - 1 then
-    maxy := bmp.Height - 1;
-  if maxy < 0 then
-    exit;
+  If not ComputeMinMax(minx,miny,maxx,maxy,bounds,bmp) then exit;
 
   setlength(inter, shapeInfo.NbMaxIntersection);
   setlength(winding, length(inter));
   setlength(density, maxx - minx + 2); //more for safety
+  density256 := precision*256;
 
   //vertical scan
   for yb := miny to maxy do
   begin
     //mean density
-    for i := 0 to high(density) do
-      density[i] := 0;
+    fillchar(density[0],length(density)*sizeof(integer),0);
+
+    rowminx := maxx+1;
+    rowmaxx := minx-1;
 
     //precision scan
     for yc := 0 to precision - 1 do
@@ -422,72 +470,204 @@ begin
         j := i;
         while (j > 0) and (inter[j - 1] > inter[j]) do
         begin
-          temp     := inter[j - 1];
+          tempSng      := inter[j - 1];
           inter[j - 1] := inter[j];
-          inter[j] := temp;
-          tempInt    := winding[j - 1];
+          inter[j]     := tempSng;
+          tempInt        := winding[j - 1];
           winding[j - 1] := winding[j];
-          winding[j] := tempInt;
+          winding[j]     := tempInt;
           Dec(j);
         end;
       end;
       if NonZeroWinding then ConvertFromNonZeroWinding;
 
-      //fill density
-      for i := 0 to nbinter div 2 - 1 do
+      if nbinter > 1 then
       begin
-        x1 := inter[i + i];
-        x2 := inter[i + i + 1];
-        if (x1 <> x2) and (x1 < maxx + 1) and (x2 >= minx) then
+        //fill density
+        for i := 0 to nbinter div 2 - 1 do
         begin
-          if x1 < minx then
-            x1 := minx;
-          if x2 >= maxx + 1 then
-            x2 := maxx + 1;
-          ix1  := floor(x1);
-          ix2  := floor(x2);
-          if ix1 = ix2 then
-            density[ix1 - minx] += x2 - x1
-          else
+          x1 := inter[i + i];
+          x2 := inter[i + i + 1];
+          if (x1 <> x2) and (x1 < maxx + 1) and (x2 >= minx) then
           begin
-            density[ix1 - minx] += 1 - (x1 - ix1);
-            if (ix2 <= maxx) then
-              density[ix2 - minx] += x2 - ix2;
-          end;
-          if ix2 > ix1 + 1 then
-          begin
-            for j := ix1 + 1 to ix2 - 1 do
-              density[j - minx] += 1;
+            if x1 < minx then
+              x1 := minx;
+            if x2 >= maxx + 1 then
+              x2 := maxx + 1;
+            ix1  := floor(x1);
+            ix2  := floor(x2);
+
+            if ix1 < rowminx then rowminx := ix1;
+            if ix2 > rowmaxx then rowmaxx := ix2;
+
+            if ix1 = ix2 then
+              density[ix1 - minx] += round((x2 - x1)*256)
+            else
+            begin
+              density[ix1 - minx] += round((1 - (x1 - ix1))*256);
+              if (ix2 <= maxx) then
+                density[ix2 - minx] += round((x2 - ix2)*256);
+            end;
+            if ix2 > ix1 + 1 then
+            begin
+              for j := ix1 + 1 to ix2 - 1 do
+                density[j - minx] += 256;
+            end;
           end;
         end;
       end;
 
     end;
 
-    pdest := bmp.ScanLine[yb] + minx;
-    pdens := @density[0];
-    //render scanline
-    if EraseMode then
+    rowminx := minx;
+    rowmaxx := maxx;
+    if rowminx <= rowmaxx then
     begin
-      for xb := minx to maxx do
+      if rowminx < minx then rowminx := minx;
+      if rowmaxx > maxx then rowmaxx := maxx;
+
+      pdest := bmp.ScanLine[yb] + rowminx;
+      pdens := @density[0];
+      //render scanline
+      if scan <> nil then //with texture scan
       begin
-        temp := pdens^;
-        Inc(pdens);
-        if temp <> 0 then
-          ErasePixelInline(pdest, round(c.alpha * temp / precision));
-        Inc(pdest);
+        scan.ScanMoveTo(rowminx,yb);
+        for xb := rowminx to rowmaxx do
+        begin
+          j := pdens^;
+          Inc(pdens);
+          c := scan.ScanNextPixel;
+          if j <> 0 then
+            DrawPixelInline(pdest, BGRA(c.red, c.green, c.blue, c.alpha * j div density256));
+          Inc(pdest);
+        end;
+      end else
+      if EraseMode then //erase with alpha
+      begin
+        for xb := rowminx to rowmaxx do
+        begin
+          j := pdens^;
+          Inc(pdens);
+          if j <> 0 then
+            ErasePixelInline(pdest, c.alpha * j div density256);
+          Inc(pdest);
+        end;
+      end
+      else
+      begin  //solid color
+        for xb := rowminx to rowmaxx do
+        begin
+          j := pdens^;
+          Inc(pdens);
+          if j <> 0 then
+            DrawPixelInline(pdest, BGRA(c.red, c.green, c.blue, c.alpha * j div density256));
+          Inc(pdest);
+        end;
       end;
-    end
-    else
+    end;
+
+  end;
+
+  bmp.InvalidateBitmap;
+end;
+
+procedure FillShapeAliased(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
+  c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean; drawmode: TDrawMode);
+var
+  inter:    array of single;
+  winding:  array of integer;
+  nbInter:  integer;
+
+  procedure ConvertFromNonZeroWinding; inline;
+  var windingSum,prevSum,i,nbAlternate: integer;
+  begin
+    windingSum := 0;
+    nbAlternate := 0;
+    for i := 0 to nbInter-1 do
     begin
-      for xb := minx to maxx do
+      prevSum := windingSum;
+      windingSum += winding[i];
+      if (windingSum = 0) xor (prevSum = 0) then
       begin
-        temp := pdens^;
-        Inc(pdens);
-        if temp <> 0 then
-          DrawPixelInline(pdest, BGRA(c.red, c.green, c.blue, round(
-            c.alpha * temp / precision)));
-        Inc(pdest);
+        inter[nbAlternate] := inter[i];
+        inc(nbAlternate);
+      end;
+    end;
+    nbInter := nbAlternate;
+  end;
+
+var
+  bounds: TRect;
+  miny, maxy, minx, maxx: integer;
+
+  xb,yb, i, j, tempInt: integer;
+  temp, x1, x2: single;
+
+  ix1, ix2: integer;
+  pdest: PBGRAPixel;
+
+begin
+  bounds := shapeInfo.GetBounds;
+  If not ComputeMinMax(minx,miny,maxx,maxy,bounds,bmp) then exit;
+
+  setlength(inter, shapeInfo.NbMaxIntersection);
+  setlength(winding, length(inter));
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //find intersections
+    nbinter := 0;
+    shapeInfo.ComputeIntersection(yb+0.5001, inter, winding, nbInter);
+    if nbinter = 0 then
+      continue;
+
+    //sort intersections
+    for i := 1 to nbinter - 1 do
+    begin
+      j := i;
+      while (j > 0) and (inter[j - 1] > inter[j]) do
+      begin
+        temp     := inter[j - 1];
+        inter[j - 1] := inter[j];
+        inter[j] := temp;
+        tempInt    := winding[j - 1];
+        winding[j - 1] := winding[j];
+        winding[j] := tempInt;
+        Dec(j);
+      end;
+    end;
+    if NonZeroWinding then ConvertFromNonZeroWinding;
+
+    for i := 0 to nbinter div 2 - 1 do
+    begin
+      x1 := inter[i + i];
+      x2 := inter[i + i+ 1];
+
+      if x1 <> x2 then
+      begin
+        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
+        if ix1 <= ix2 then
+        begin
+          //render scanline
+          if scan <> nil then //with texture scan
+          begin
+            pdest := bmp.ScanLine[yb] + ix1;
+            scan.ScanMoveTo(ix1,yb);
+            PutPixels(scan,pdest,ix2-ix1+1,drawmode);
+          end else
+          if EraseMode then //erase with alpha
+          begin
+            pdest := bmp.ScanLine[yb] + ix1;
+            for xb := ix1 to ix2 do
+            begin
+              ErasePixelInline(pdest, c.alpha);
+              Inc(pdest);
+            end;
+          end
+          else
+            bmp.SetHorizLine(ix1,yb,ix2, c);
+        end;
       end;
     end;
   end;
@@ -495,165 +675,36 @@ begin
   bmp.InvalidateBitmap;
 end;
 
-procedure FillShapeAntialiasWithTexture(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
-  texture: TBGRACustomBitmap; NonZeroWinding: boolean);
-const
-  precision = 11;
-var
-  inter:   array of single;
-  winding: array of integer;
-  nbInter: integer;
-
-  procedure ConvertFromNonZeroWinding; inline;
-  var windingSum,prevSum,i,nbAlternate: integer;
-  begin
-    windingSum := 0;
-    nbAlternate := 0;
-    for i := 0 to nbInter-1 do
-    begin
-      prevSum := windingSum;
-      windingSum += winding[i];
-      if (windingSum = 0) xor (prevSum = 0) then
-      begin
-        inter[nbAlternate] := inter[i];
-        inc(nbAlternate);
-      end;
-    end;
-    nbInter := nbAlternate;
-  end;
-
-var
-  bounds: TRect;
-  miny, maxy, minx, maxx: integer;
-
-  density: packed array of single;
-
-  xb, yb, yc, i, j, tempInt: integer;
-
-  temp, cury, x1, x2: single;
-  ix1, ix2: integer;
-  pdest:    PBGRAPixel;
-  pdens:    PSingle;
-  texScan:  TBGRABitmapScanner;
-  c: TBGRAPixel;
-
+procedure FillShapeAntialiasWithTexture(bmp: TBGRACustomBitmap;
+  shapeInfo: TFillShapeInfo; scan: IBGRAScanner; NonZeroWinding: boolean);
 begin
-  bounds := shapeInfo.GetBounds;
-  if (bounds.Right <= bounds.left) or (bounds.bottom <= bounds.top) then
+  FillShapeAntialias(bmp,shapeInfo,BGRAPixelTransparent,False,scan,NonZeroWinding);
+end;
+
+procedure FillPolyAliased(bmp: TBGRACustomBitmap; points: array of TPointF;
+  c: TBGRAPixel; EraseMode: boolean; NonZeroWinding: boolean; drawmode: TDrawMode);
+var
+  info: TFillPolyInfo;
+begin
+  if length(points) < 3 then
     exit;
 
-  miny := bounds.top;
-  maxy := bounds.bottom - 1;
-  minx := bounds.left;
-  maxx := bounds.right - 1;
+  info := TFillPolyInfo.Create(points);
+  FillShapeAliased(bmp, info, c, EraseMode, nil, NonZeroWinding, drawmode);
+  info.Free;
+end;
 
-  if minx < 0 then
-    minx := 0;
-  if maxx < 0 then
-    exit;
-  if maxx > bmp.Width - 1 then
-    maxx := bmp.Width - 1;
-  if minx > bmp.Width - 1 then
-    exit;
-  if miny < 0 then
-    miny := 0;
-  if miny > bmp.Height - 1 then
-    exit;
-  if maxy > bmp.Height - 1 then
-    maxy := bmp.Height - 1;
-  if maxy < 0 then
+procedure FillPolyAliasedWithTexture(bmp: TBGRACustomBitmap;
+  points: array of TPointF; scan: IBGRAScanner; NonZeroWinding: boolean; drawmode: TDrawMode);
+var
+  info: TFillPolyInfo;
+begin
+  if length(points) < 3 then
     exit;
 
-  setlength(inter, shapeInfo.NbMaxIntersection);
-  setlength(winding, length(inter));
-  setlength(density, maxx - minx + 2); //more for safety
-
-  texScan := TBGRABitmapScanner.Create(texture);
-
-  //vertical scan
-  for yb := miny to maxy do
-  begin
-    //mean density
-    for i := 0 to high(density) do
-      density[i] := 0;
-
-    //precision scan
-    for yc := 0 to precision - 1 do
-    begin
-      cury := yb + (yc * 2 + 1) / (precision * 2);
-
-      //find intersections
-      nbinter := 0;
-      shapeInfo.ComputeIntersection(cury, inter, winding, nbInter);
-      if nbinter = 0 then
-        continue;
-
-      //sort intersections
-      for i := 1 to nbinter - 1 do
-      begin
-        j := i;
-        while (j > 0) and (inter[j - 1] > inter[j]) do
-        begin
-          temp     := inter[j - 1];
-          inter[j - 1] := inter[j];
-          inter[j] := temp;
-          tempInt    := winding[j - 1];
-          winding[j - 1] := winding[j];
-          winding[j] := tempInt;
-          Dec(j);
-        end;
-      end;
-      if NonZeroWinding then ConvertFromNonZeroWinding;
-
-      //fill density
-      for i := 0 to nbinter div 2 - 1 do
-      begin
-        x1 := inter[i + i];
-        x2 := inter[i + i + 1];
-        if (x1 <> x2) and (x1 < maxx + 1) and (x2 >= minx) then
-        begin
-          if x1 < minx then
-            x1 := minx;
-          if x2 >= maxx + 1 then
-            x2 := maxx + 1;
-          ix1  := floor(x1);
-          ix2  := floor(x2);
-          if ix1 = ix2 then
-            density[ix1 - minx] += x2 - x1
-          else
-          begin
-            density[ix1 - minx] += 1 - (x1 - ix1);
-            if (ix2 <= maxx) then
-              density[ix2 - minx] += x2 - ix2;
-          end;
-          if ix2 > ix1 + 1 then
-          begin
-            for j := ix1 + 1 to ix2 - 1 do
-              density[j - minx] += 1;
-          end;
-        end;
-      end;
-
-    end;
-
-    pdest := bmp.ScanLine[yb] + minx;
-    pdens := @density[0];
-    //render scanline
-    texScan.MoveTo(minx,yb);
-    for xb := minx to maxx do
-    begin
-      temp := pdens^;
-      Inc(pdens);
-      c := texScan.GetNextPixel;
-      if temp <> 0 then
-        DrawPixelInline(pdest, BGRA(c.red, c.green, c.blue, round(
-          c.alpha * temp / precision)));
-      Inc(pdest);
-    end;
-  end;
-  texScan.Free;
-
-  bmp.InvalidateBitmap;
+  info := TFillPolyInfo.Create(points);
+  FillShapeAliased(bmp, info, BGRAPixelTransparent,False,scan, NonZeroWinding, drawmode);
+  info.Free;
 end;
 
 procedure FillPolyAntialias(bmp: TBGRACustomBitmap; points: array of TPointF;
@@ -665,12 +716,12 @@ begin
     exit;
 
   info := TFillPolyInfo.Create(points);
-  FillShapeAntialias(bmp, info, c, EraseMode, NonZeroWinding);
+  FillShapeAntialias(bmp, info, c, EraseMode, nil, NonZeroWinding);
   info.Free;
 end;
 
 procedure FillPolyAntialiasWithTexture(bmp: TBGRACustomBitmap;
-  points: array of TPointF; texture: TBGRACustomBitmap; NonZeroWinding: boolean
+  points: array of TPointF; scan: IBGRAScanner; NonZeroWinding: boolean
   );
 var
   info: TFillPolyInfo;
@@ -679,7 +730,7 @@ begin
     exit;
 
   info := TFillPolyInfo.Create(points);
-  FillShapeAntialiasWithTexture(bmp, info, texture, NonZeroWinding);
+  FillShapeAntialiasWithTexture(bmp, info, scan, NonZeroWinding);
   info.Free;
 end;
 
@@ -692,12 +743,12 @@ begin
     exit;
 
   info := TFillEllipseInfo.Create(x, y, rx, ry);
-  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  FillShapeAntialias(bmp, info, c, EraseMode, nil, False);
   info.Free;
 end;
 
 procedure FillEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
-  ry: single; texture: TBGRACustomBitmap);
+  ry: single; scan: IBGRAScanner);
 var
   info: TFillEllipseInfo;
 begin
@@ -705,7 +756,7 @@ begin
     exit;
 
   info := TFillEllipseInfo.Create(x, y, rx, ry);
-  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  FillShapeAntialiasWithTexture(bmp, info, scan, False);
   info.Free;
 end;
 
@@ -717,19 +768,19 @@ begin
   if (rx = 0) or (ry = 0) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
-  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  FillShapeAntialias(bmp, info, c, EraseMode, nil, False);
   info.Free;
 end;
 
 procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
-  ry, w: single; texture: TBGRACustomBitmap);
+  ry, w: single; scan: IBGRAScanner);
 var
   info: TFillBorderEllipseInfo;
 begin
   if (rx = 0) or (ry = 0) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
-  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  FillShapeAntialiasWithTexture(bmp, info, scan, False);
   info.Free;
 end;
 
@@ -761,25 +812,136 @@ begin
       result := 0;
 end;
 
+procedure InsertionSortSingles(var a: arrayOfSingle);
+var i,j: integer;
+    temp: single;
+begin
+  for i := 1 to high(a) do
+  begin
+    Temp := a[i];
+    j := i;
+    while (j>0) and (a[j-1]> Temp) do
+    begin
+      a[j] := a[j-1];
+      dec(j);
+    end;
+    a[j] := Temp;
+  end;
+end;
+
+function PartitionSingles(var a: arrayOfSingle; left,right: integer): integer;
+
+  procedure Swap(idx1,idx2: integer); inline;
+  var temp: single;
+  begin
+    temp := a[idx1];
+    a[idx1] := a[idx2];
+    a[idx2] := temp;
+  end;
+
+var pivotIndex: integer;
+    pivotValue: single;
+    storeIndex: integer;
+    i: integer;
+
+begin
+  pivotIndex := left + random(right-left+1);
+  pivotValue := a[pivotIndex];
+  swap(pivotIndex,right);
+  storeIndex := left;
+  for i := left to right-1 do
+    if a[i] <= pivotValue then
+    begin
+      swap(i,storeIndex);
+      inc(storeIndex);
+    end;
+  swap(storeIndex,right);
+  result := storeIndex;
+end;
+
+procedure QuickSortSingles(var a: arrayOfSingle; left,right: integer);
+var pivotNewIndex: integer;
+begin
+  if right > left+9 then
+  begin
+    pivotNewIndex := PartitionSingles(a,left,right);
+    QuickSortSingles(a,left,pivotNewIndex-1);
+    QuickSortSingles(a,pivotNewIndex+1,right);
+  end;
+end;
+
+procedure SortSingles(var a: arrayOfSingle);
+begin
+  if length(a) < 10 then InsertionSortSingles(a) else
+  begin
+    QuickSortSingles(a,0,high(a));
+    InsertionSortSingles(a);
+  end;
+end;
+
+procedure RemoveSingleDuplicates(var a: arrayOfSingle; var nb: integer);
+var i,idx: integer;
+begin
+  idx := 0;
+  for i := 1 to nb-1 do
+  begin
+    if a[i] <> a[idx] then
+    begin
+      inc(idx);
+      a[idx] := a[i];
+    end;
+  end;
+  nb := idx+1;
+end;
+
+function BinarySearchSingle(value: single; var a: arrayOfSingle; left,right: integer): integer;
+var pivotIndex: integer;
+    pivotValue: single;
+begin
+  pivotIndex := (left+right) div 2;
+  pivotValue := a[pivotIndex];
+  if value = pivotValue then
+    result := pivotIndex else
+  if value < pivotValue then
+  begin
+    if pivotIndex = left then result := left else
+      result := BinarySearchSingle(value, a, left,pivotIndex-1);
+  end else
+  begin
+    if pivotIndex = right then result := right+1 else
+      result := BinarySearchSingle(value, a, pivotIndex+1, right);
+  end;
+end;
+
 { TFillPolyInfo }
 
-constructor TFillPolyInfo.Create(points: array of TPointF);
+constructor TFillPolyInfo.Create(const points: array of TPointF);
+function AddSeg(numSlice: integer): integer;
+begin
+  result := FSlices[numSlice].nbSegments;
+  if length(FSlices[numSlice].segments)=FSlices[numSlice].nbSegments then
+    setlength(FSlices[numSlice].segments,FSlices[numSlice].nbSegments*2+2);
+  inc(FSlices[numSlice].nbSegments);
+end;
+
 var
   i, j, k: integer;
   First, cur, nbP: integer;
   yList: array of single;
-  nbYList,nbSeg: integer;
-  Temp: Single;
+  nbYList: integer;
+  ya,yb,temp: single;
+  sliceStart,sliceEnd,idxSeg: integer;
+
 begin
   setlength(FPoints, length(points));
   nbP := 0;
   for i := 0 to high(points) do
-  if (i=0) or (points[i].x<>points[i-1].X) or (points[i].y<>points[i-1].y) then
+  if (i=0) or (points[i]<>points[i-1]) then
   begin
     FPoints[nbP] := points[i];
     inc(nbP);
   end;
-  if (nbP>0) and (FPoints[nbP-1].X = FPoints[0].X) and (FPoints[nbP-1].Y = FPoints[0].Y) then dec(NbP);
+  if (nbP>0) and (FPoints[nbP-1] = FPoints[0]) then dec(NbP);
   setlength(FPoints, nbP);
 
   //look for empty points, correct coordinate and successors
@@ -842,79 +1004,79 @@ begin
   for i := 0 to high(FPoints) do
     YList[i] := FPoints[i].y;
 
-  for i := 1 to nbYList-1 do
-  begin
-    j := i;
-    while (j>0) and (YList[j-1]> YList[j]) do
-    begin
-      Temp := YList[j];
-      YList[j] := YList[j-1];
-      YList[j-1] := Temp;
-      dec(j);
-    end;
-  end;
+  SortSingles(YList);
+  RemoveSingleDuplicates(YList, nbYList);
 
-  for i := nbYList-1 downto 1 do
-    if YList[i-1] = YList[i] then
-    begin
-      for j := i to nbYList-2 do
-        YList[j] := YList[j+1];
-      dec(nbYList);
-    end;
   setlength(FSlices, nbYList-1);
   for i := 0 to high(FSlices) do
   begin
     FSlices[i].y1 := YList[i];
     FSlices[i].y2 := YList[i+1];
-    nbSeg := 0;
-    for j := 0 to high(FSlopes) do
-      if FSlopes[j]<>EmptySingle then
+    FSlices[i].nbSegments := 0;
+  end;
+
+  for j := 0 to high(FSlopes) do
+  begin
+    if FSlopes[j]<>EmptySingle then
+    begin
+      k := FNext[j];
+
+      ya := FPoints[j].y;
+      yb := FPoints[k].y;
+      if yb < ya then
       begin
-        k := FNext[j];
-        if ((FPoints[j].y < FSlices[i].y2) and
-           (FPoints[k].y > FSlices[i].y1)) or
-           ((FPoints[k].y < FSlices[i].y2) and
-           (FPoints[j].y > FSlices[i].y1)) then
-        begin
-          inc(NbSeg);
-        end;
+        temp := ya;
+        ya := yb;
+        yb := temp;
       end;
-    setlength(FSlices[i].segments, nbSeg);
-    nbSeg := 0;
-    for j := 0 to high(FSlopes) do
-      if FSlopes[j]<>EmptySingle then
+      sliceStart := BinarySearchSingle(ya,YList,0,nbYList-1);
+      sliceEnd := BinarySearchSingle(yb,YList,0,nbYList-1);
+      if sliceEnd > high(FSlices) then sliceEnd := high(FSlices);
+      for i := sliceStart to sliceEnd do
       begin
-        k := FNext[j];
         if ((FPoints[j].y < FSlices[i].y2) and
            (FPoints[k].y > FSlices[i].y1)) or
            ((FPoints[k].y < FSlices[i].y2) and
            (FPoints[j].y > FSlices[i].y1)) then
         begin
-          with FSlices[i].segments[nbSeg] do
+          idxSeg := AddSeg(i);
+          with FSlices[i].segments[idxSeg] do
           begin
             x1 := (FSlices[i].y1 - FPoints[j].y) * FSlopes[j] + FPoints[j].x;
             y1 := FSlices[i].y1;
             slope := FSlopes[j];
             winding := ComputeWinding(FPoints[j].y,FPoints[k].y);
+            data := CreateData(j,k,x1,y1);
           end;
-          inc(NbSeg);
-        end else
-        if (FPoints[j].y=FPoints[k].y) and
-           (FPoints[j].y >= FSlices[i].y1) and
-           (FPoints[j].y <= FSlices[i].y2) then
-        begin
-          with FSlices[i].segments[nbSeg] do
-          begin
-            x1 := FPoints[j].x;
-            y1 := FPoints[j].y;
-            slope := 0;
-            winding := ComputeWinding(FPoints[FPrev[j]].y,FPoints[j].y);
-          end;
-          inc(NbSeg);
         end;
       end;
+    end;
   end;
+
   FCurSlice := 0;
+end;
+
+destructor TFillPolyInfo.Destroy;
+var i,j: integer;
+begin
+  for i := 0 to high(FSlices) do
+    with FSlices[i] do
+      for j := 0 to nbSegments-1 do
+        if segments[j].data <> nil then FreeData(segments[j].data);
+  inherited Destroy;
+end;
+
+{$hints off}
+function TFillPolyInfo.CreateData(numPt,nextPt: integer; x, y: single
+  ): pointer;
+begin
+  result := nil;
+end;
+{$hints on}
+
+procedure TFillPolyInfo.FreeData(data: pointer);
+begin
+  freemem(data);
 end;
 
 function TFillPolyInfo.GetBounds: TRect;
@@ -960,7 +1122,7 @@ begin
   with FSlices[FCurSlice] do
   if (cury >= y1) and (cury <= y2) then
   begin
-    for j := 0 to high(segments) do
+    for j := 0 to nbSegments-1 do
     begin
       inter[nbinter] := (cury - segments[j].y1) * segments[j].slope + segments[j].x1;
       winding[nbinter] := segments[j].winding;
@@ -1061,19 +1223,19 @@ var
 begin
   if (x1 = x2) or (y1 = y2) then exit;
   info := TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry, options);
-  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  FillShapeAntialias(bmp, info, c, EraseMode,nil, False);
   info.Free;
 end;
 
 procedure FillRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1,
   y1, x2, y2, rx, ry: single; options: TRoundRectangleOptions;
-  texture: TBGRACustomBitmap);
+  scan: IBGRAScanner);
 var
   info: TFillRoundRectangleInfo;
 begin
   if (x1 = x2) or (y1 = y2) then exit;
   info := TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry, options);
-  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  FillShapeAntialiasWithTexture(bmp, info, scan, False);
   info.Free;
 end;
 
@@ -1085,19 +1247,19 @@ var
 begin
   if (rx = 0) or (ry = 0) then exit;
   info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
-  FillShapeAntialias(bmp, info, c, EraseMode, False);
+  FillShapeAntialias(bmp, info, c, EraseMode, nil, False);
   info.Free;
 end;
 
 procedure BorderRoundRectangleAntialiasWithTexture(bmp: TBGRACustomBitmap; x1,
   y1, x2, y2, rx, ry, w: single; options: TRoundRectangleOptions;
-  texture: TBGRACustomBitmap);
+  scan: IBGRAScanner);
 var
   info: TFillBorderRoundRectInfo;
 begin
   if (rx = 0) or (ry = 0) then exit;
   info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
-  FillShapeAntialiasWithTexture(bmp, info, texture, False);
+  FillShapeAntialiasWithTexture(bmp, info, scan, False);
   info.Free;
 end;
 
@@ -1109,8 +1271,8 @@ var
 begin
   if (rx = 0) or (ry = 0) then exit;
   info := TFillBorderRoundRectInfo.Create(x1, y1, x2,y2, rx, ry, w, options);
-  FillShapeAntialias(bmp, info.innerBorder, fillcolor, EraseMode, False);
-  FillShapeAntialias(bmp, info, bordercolor, EraseMode, False);
+  FillShapeAntialias(bmp, info.innerBorder, fillcolor, EraseMode, nil, False);
+  FillShapeAntialias(bmp, info, bordercolor, EraseMode, nil, False);
   info.Free;
 end;
 
@@ -1489,7 +1651,21 @@ end;
 
 constructor TFillBorderRoundRectInfo.Create(x1, y1, x2, y2, rx, ry, w: single; options: TRoundRectangleOptions);
 var rdiff: single;
+  temp: Single;
 begin
+  if y1 > y2 then
+  begin
+    temp := y1;
+    y1 := y2;
+    y2 := temp;
+  end;
+  if x1 > x2 then
+  begin
+    temp := x1;
+    x1 := x2;
+    x2 := temp;
+  end;
+
   if rx < 0 then
     rx := -rx;
   if ry < 0 then
@@ -1532,5 +1708,9 @@ begin
   innerBorder.Free;
   inherited Destroy;
 end;
+
+initialization
+
+  Randomize;
 
 end.
