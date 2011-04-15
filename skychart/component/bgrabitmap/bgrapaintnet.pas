@@ -16,7 +16,7 @@ type
     procedure LoadFromFile(filename: string);
     procedure LoadFromStream(stream: TStream);
     procedure Clear;
-    function ToString: ansistring; override;
+    function ToString: ansistring; 
     destructor Destroy; override;
     constructor Create;
     function Width: integer;

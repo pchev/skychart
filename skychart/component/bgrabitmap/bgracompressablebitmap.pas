@@ -24,7 +24,12 @@ type
      constructor Create;
      constructor Create(Source: TBGRABitmap);
      function GetBitmap: TBGRABitmap;
-     function Compress: boolean;
+     
+     //call Compress as many times as necessary
+     //when it returns false, it means that
+     //the image compression is finished
+     function Compress: boolean; 
+     
      function UsedMemory: Int64;
      procedure Assign(Source: TBGRABitmap);
      destructor Destroy; override;

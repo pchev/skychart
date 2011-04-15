@@ -10,6 +10,8 @@ uses
 procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
   blendOp: TBlendOperation; Count: integer);
 
+procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+
 procedure DrawPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure DrawPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
@@ -44,23 +46,40 @@ procedure DarkenPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure ScreenPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure XorPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 
-type
-
-  { TBGRABitmapScanner }
-
-  TBGRABitmapScanner = class
-  protected
-    FBitmap: TBGRACustomBitmap;
-    FScan: PBGRAPixel;
-    FCurX,FCurY: integer;
-  public
-    constructor Create(ABitmap: TBGRACustomBitmap);
-    procedure MoveTo(X,Y: Integer);
-    function GetNextPixel: TBGRAPixel;
-    procedure PutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode);
-  end;
-
 implementation
+
+procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+var c : TBGRAPixel;
+  i: Integer;
+begin
+  case mode of
+  dmLinearBlend:
+    for i := 0 to count-1 do
+    begin
+      FastBlendPixelInline(pdest, scan.ScanNextPixel);
+      inc(pdest);
+    end;
+  dmDrawWithTransparency:
+    for i := 0 to count-1 do
+    begin
+      DrawPixelInline(pdest, scan.ScanNextPixel);
+      inc(pdest);
+    end;
+  dmSet:
+    for i := 0 to count-1 do
+    begin
+      pdest^ := scan.ScanNextPixel;
+      inc(pdest);
+    end;
+  dmSetExceptTransparent:
+    for i := 0 to count-1 do
+    begin
+      c := scan.ScanNextPixel;
+      if c.alpha = 255 then pdest^ := c;
+      inc(pdest);
+    end;
+  end;
+end;
 
 procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
   blendOp: TBlendOperation; Count: integer);
@@ -471,6 +490,7 @@ begin
   dest^.alpha := c.alpha;
 end;
 
+{$hints off}
 function ByteDodgeInline(a, b: byte): byte; inline;
 var
   temp: integer;
@@ -486,6 +506,7 @@ begin
       Result := temp;
   end;
 end;
+{$hints on}
 
 procedure ColorDodgePixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 var
@@ -501,6 +522,7 @@ begin
   dest^.alpha := c.alpha;
 end;
 
+{$hints off}
 function ByteReflectInline(a, b: byte): byte; inline;
 var
   temp: integer;
@@ -516,6 +538,7 @@ begin
       Result := temp;
   end;
 end;
+{$hints on}
 
 procedure ReflectPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 var
@@ -734,66 +757,6 @@ begin
     (not destalpha)) shr 8;
   dest^.blue  := ((dest^.blue xor c.blue) * destalpha + c.blue * (not destalpha)) shr 8;
   dest^.alpha := c.alpha;
-end;
-
-{ TBGRABitmapScanner }
-
-constructor TBGRABitmapScanner.Create(ABitmap: TBGRACustomBitmap);
-begin
-  if (ABitmap = nil) or (ABitmap.Width = 0) or (ABitmap.Height = 0) then
-    raise Exception.Create('Cannot scan an empty bitmap');
-  ABitmap.LoadFromBitmapIfNeeded;
-  FBitmap := ABitmap;
-  MoveTo(0,0);
-end;
-
-procedure TBGRABitmapScanner.MoveTo(X, Y: Integer);
-begin
-  FCurX := X mod FBitmap.Width;
-  FCurY := Y mod FBitmap.Height;
-  FScan := FBitmap.ScanLine[FCurY];
-end;
-
-function TBGRABitmapScanner.GetNextPixel: TBGRAPixel;
-begin
-  result := (FScan+FCurX)^;
-  inc(FCurX);
-  if FCurX = FBitmap.Width then
-    FCurX := 0;
-end;
-
-procedure TBGRABitmapScanner.PutPixels(pdest: PBGRAPixel; count: integer;
-  mode: TDrawMode);
-var c : TBGRAPixel;
-  i: Integer;
-begin
-  case mode of
-  dmLinearBlend:
-    for i := 0 to count-1 do
-    begin
-      FastBlendPixelInline(pdest, GetNextPixel);
-      inc(pdest);
-    end;
-  dmDrawWithTransparency:
-    for i := 0 to count-1 do
-    begin
-      DrawPixelInline(pdest, GetNextPixel);
-      inc(pdest);
-    end;
-  dmSet:
-    for i := 0 to count-1 do
-    begin
-      pdest^ := GetNextPixel;
-      inc(pdest);
-    end;
-  dmSetExceptTransparent:
-    for i := 0 to count-1 do
-    begin
-      c := GetNextPixel;
-      if c.alpha = 255 then pdest^ := c;
-      inc(pdest);
-    end;
-  end;
 end;
 
 end.

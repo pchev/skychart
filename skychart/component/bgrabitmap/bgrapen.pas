@@ -16,7 +16,7 @@ type
 
 procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
      width: single; pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-     options: TBGRAPolyLineOptions; texture: TBGRACustomBitmap= nil);
+     options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
 
 procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean);
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
@@ -27,6 +27,9 @@ function GetAlphaJoinFactor(alpha: byte): single;
 
 function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyle; PatternColor, BackgroundColor: TBGRAPixel;
     width: integer = 8; height: integer = 8; penwidth: single = 1): TBGRACustomBitmap;
+
+function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
+function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 
 implementation
 
@@ -333,6 +336,19 @@ begin
   end;
 end;
 
+function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
+begin
+  result := ACustomPenStyle = nil;
+end;
+
+function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
+begin
+  if (length(ACustomPenStyle)=1) and (ACustomPenStyle[0]=0) then
+    result := true
+  else
+    result := false;
+end;
+
 procedure ApplyPenStyle(const leftPts, rightPts: array of TPointF; const penstyle: TBGRAPenStyle;
     width: single; var posstyle: single; out styledPts: ArrayOfTPointF);
 var
@@ -355,10 +371,8 @@ var
   procedure StartDash(index: integer; t: single);
   begin
     dashStartIndex := index;
-    dashLeftStartPos.x := leftPts[index].x + (leftPts[index+1].x-leftPts[index].x)*t;
-    dashLeftStartPos.y := leftPts[index].y + (leftPts[index+1].y-leftPts[index].y)*t;
-    dashRightStartPos.x := rightPts[index].x + (rightPts[index+1].x-rightPts[index].x)*t;
-    dashRightStartPos.y := rightPts[index].y + (rightPts[index+1].y-rightPts[index].y)*t;
+    dashLeftStartPos := leftPts[index] + (leftPts[index+1]-leftPts[index])*t;
+    dashRightStartPos := rightPts[index] + (rightPts[index+1]-rightPts[index])*t;
     betweenDash := false;
   end;
 
@@ -388,10 +402,8 @@ var
       dashRightEndPos := rightPts[index];
     end else
     begin
-      dashLeftEndPos.x := leftPts[index].x + (leftPts[index+1].x-leftPts[index].x)*t;
-      dashLeftEndPos.y := leftPts[index].y + (leftPts[index+1].y-leftPts[index].y)*t;
-      dashRightEndPos.x := rightPts[index].x + (rightPts[index+1].x-rightPts[index].x)*t;
-      dashRightEndPos.y := rightPts[index].y + (rightPts[index+1].y-rightPts[index].y)*t;
+      dashLeftEndPos := leftPts[index] + (leftPts[index+1]-leftPts[index])*t;
+      dashRightEndPos := rightPts[index] + (rightPts[index+1]-rightPts[index])*t;
     end;
     StartPolygon;
     AddPt(dashLeftStartPos);
@@ -413,8 +425,8 @@ var
 begin
   nbStyled := 0;
   styledPts := nil;
-  if (length(penstyle) = 1) and (penstyle[0]=0) then exit; //psClear
-  if (penstyle = nil) or (length(penstyle)=1) then //psSolid
+  if IsClearPenStyle(penstyle) then exit;
+  if IsSolidPenStyle(penstyle) then
   begin
     for i := 0 to high(leftPts) do AddPt(leftPts[i]);
     for i := high(rightPts) downto 0 do AddPt(rightPts[i]);
@@ -483,53 +495,9 @@ begin
   setlength(styledPts,nbStyled);
 end;
 
-type
-    TLineDef = record
-       origin, dir: TPointF;
-    end;
-
-function Intersect(ligne1, ligne2: TLineDef): TPointF;
-var divFactor: double;
-begin
-  if ((ligne1.dir.x = ligne2.dir.x) and (ligne1.dir.y = ligne2.dir.y)) or
-     ((ligne1.dir.y=0) and (ligne2.dir.y=0)) then
-  begin
-       result.x := (ligne1.origin.x+ligne2.origin.x)/2;
-       result.y := (ligne1.origin.y+ligne2.origin.y)/2;
-  end else
-  if ligne1.dir.y=0 then
-  begin
-       result.y := ligne1.origin.y;
-       result.x := ligne2.origin.x + (result.y - ligne2.origin.y)
-               /ligne2.dir.y*ligne2.dir.x;
-  end else
-  if ligne2.dir.y=0 then
-  begin
-       result.y := ligne2.origin.y;
-       result.x := ligne1.origin.x + (result.y - ligne1.origin.y)
-               /ligne1.dir.y*ligne1.dir.x;
-  end else
-  begin
-       divFactor := ligne1.dir.x/ligne1.dir.y - ligne2.dir.x/ligne2.dir.y;
-       if abs(divFactor) < 1e-6 then
-       begin
-            result.x := (ligne1.origin.x+ligne2.origin.x)/2;
-            result.y := (ligne1.origin.y+ligne2.origin.y)/2;
-       end else
-       begin
-         result.y := (ligne2.origin.x - ligne1.origin.x +
-                  ligne1.origin.y*ligne1.dir.x/ligne1.dir.y -
-                  ligne2.origin.y*ligne2.dir.x/ligne2.dir.y)
-                  / divFactor;
-         result.x := ligne1.origin.x + (result.y - ligne1.origin.y)
-                 /ligne1.dir.y*ligne1.dir.x;
-       end;
-  end;
-end;
-
 procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions; texture: TBGRACustomBitmap= nil);
+          options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
 var
   borders : array of record
               leftSide,rightSide: TLineDef;
@@ -546,10 +514,8 @@ var
 
   procedure AddPt(normal,rev: TPointF); overload;
   begin
-    if (nbCompPts > 0) and (compPts[nbCompPts-1].x=normal.x) and
-                           (compPts[nbCompPts-1].y=normal.y) and
-       (nbRevCompPts > 0) and (revCompPts[nbRevCompPts-1].x=rev.x) and
-                              (revCompPts[nbRevCompPts-1].y=rev.y) then exit;
+    if (nbCompPts > 0) and (compPts[nbCompPts-1]=normal) and
+       (nbRevCompPts > 0) and (revCompPts[nbRevCompPts-1]=rev) then exit;
 
     if nbCompPts = length(compPts) then
      setlength(compPts, length(compPts)*2);
@@ -600,7 +566,7 @@ var
       a := i/(RoundPrecision+1)*Pi/2 + offset;
       s := sin(a)*hw*flipvalue;
       c := cos(a);
-      t := (1 - c) * 0.7 + alphaFactor;
+      t := (1 - c) * (0.2 + alphaFactor*0.3) + alphaFactor;
       c *= hw;
       AddPt( PointF(origin.x+ dir.x*(c-t) - dir.y*s, origin.y + dir.y*(c-t) + dir.x*s),
              PointF(origin.x+ dir.x*(c-t) + dir.y*s, origin.y + dir.y*(c-t) - dir.x*s) );
@@ -626,10 +592,8 @@ var
     precision := round( sqrt( sqr(pt2.x-pt1.x)+sqr(pt2.y-pt1.y) ) ) +2;
     setlength(result,precision);
     for i := 0 to precision-1 do
-    begin
-      result[i].x := origin.x+cos(a1+i/(precision-1)*da)*hw;
-      result[i].y := origin.y+sin(a1+i/(precision-1)*da)*hw;
-    end;
+      result[i] := origin + PointF( cos(a1+i/(precision-1)*da)*hw,
+                                    sin(a1+i/(precision-1)*da)*hw );
   end;
 
 var
@@ -664,11 +628,9 @@ var
     if (len > 1) and (index <> -1) then
     begin
       if nbJoinLeft=1 then
-        AddPt(joinLeft[0], PointF(joinLeft[0].x-2*borders[index].leftDir.x,
-                                  joinLeft[0].y-2*borders[index].leftDir.y)) else
+        AddPt(joinLeft[0], joinLeft[0] - 2*borders[Index].leftDir) else
       if nbJoinRight=1 then
-        AddPt(PointF(joinRight[0].x+2*borders[index].leftDir.x,
-                     joinRight[0].y+2*borders[index].leftDir.y), joinRight[0]);
+        AddPt( joinRight[0] + 2* borders[index].leftDir, joinRight[0]);
     end;
     for i := 0 to len-1 do
     begin
@@ -678,11 +640,9 @@ var
     if (len > 1) and (index <> -1) then
     begin
       if nbJoinLeft=1 then
-        AddPt(joinLeft[0], PointF(joinLeft[0].x-2*borders[index+1].leftDir.x,
-                                  joinLeft[0].y-2*borders[index+1].leftDir.y)) else
+        AddPt(joinLeft[0], joinLeft[0] - 2*borders[index+1].leftDir) else
       if nbJoinRight=1 then
-        AddPt(PointF(joinRight[0].x+2*borders[index+1].leftDir.x,
-                     joinRight[0].y+2*borders[index+1].leftDir.y), joinRight[0]);
+        AddPt(joinRight[0]+2*borders[index+1].leftDir, joinRight[0]);
     end;
   end;
 
@@ -697,21 +657,16 @@ var
     i,idxInsert: Integer;
   begin
     if lastPointIndex <> -1 then
-    begin
-      AddPt( pts[lastPointIndex].x+borders[lastPointIndex-1].leftDir.x,
-             pts[lastPointIndex].y+borders[lastPointIndex-1].leftDir.y,
+       AddPt( pts[lastPointIndex] + borders[lastPointIndex-1].leftDir,
+              pts[lastPointIndex] - borders[lastPointIndex-1].leftDir);
 
-             pts[lastPointIndex].x-borders[lastPointIndex-1].leftDir.x,
-             pts[lastPointIndex].y-borders[lastPointIndex-1].leftDir.y);
-    end;
     if (lastPointIndex = high(pts)) and (linecap = pecRound) then
     begin
       if not (plRoundCapOpen in options) then
         AddRoundCap(pts[high(pts)],borders[high(pts)-1].leftSide.dir,false)
       else
        AddRoundCapAlphaJoin(pts[high(pts)],
-         PointF(-borders[high(pts)-1].leftSide.dir.x,
-                -borders[high(pts)-1].leftSide.dir.y),false,true);
+            -borders[high(pts)-1].leftSide.dir, false,true);
     end;
     posstyle := 0;
     ApplyPenStyle(slice(compPts,nbCompPts),slice(revCompPts,nbRevCompPts),penstyle,width,posstyle,enveloppe);
@@ -775,7 +730,7 @@ var
 
 begin
   if length(linepts)=0 then exit;
-  if (length(penstyle)=1) and (penstyle[0]=0) then exit;
+  if IsClearPenStyle(penstyle) then exit;
 
   hw := width / 2;
   case joinstyle of
@@ -788,13 +743,13 @@ begin
   nbPts := 0;
   setlength(pts, length(linepts)+2);
   for i := 0 to high(linepts) do
-    if (nbPts = 0) or (linepts[i].x <> pts[nbPts-1].x) or
-      (linepts[i].y <> pts[nbPts-1].y) then
+    if (nbPts = 0) or (linepts[i] <> pts[nbPts-1]) then
     begin
       pts[nbPts]:= linePts[i];
       inc(nbPts);
     end;
-  if (nbPts > 1) and (pts[nbPts-1].x = pts[0].x) and (pts[nbPts-1].y = pts[0].y) then dec(nbPts);
+  if (nbPts > 1) and
+      (pts[nbPts-1] = pts[0]) then dec(nbPts);
   if (plCycle in options) and (nbPts > 2) then
   begin
     pts[nbPts] := pts[0];
@@ -826,48 +781,37 @@ begin
   setlength(borders, length(pts)-1);
   for i := 0 to high(pts)-1 do
   begin
-    dir.x := pts[i+1].x-pts[i].x;
-    dir.y := pts[i+1].y-pts[i].y;
-    len := sqrt(sqr(dir.x)+sqr(dir.y));
-    dir.x /= len;
-    dir.y /= len;
+    dir := pts[i+1]-pts[i];
+    len := sqrt(dir*dir);
+    dir *= 1/len;
 
     if (linecap = pecSquare) and ((i=0) or (i=high(pts)-1)) then //for square cap, just start and end further
     begin
       if i=0 then
-      begin
-        pts[0].x -= dir.x*hw;
-        pts[0].y -= dir.y*hw;
-      end;
+        pts[0] -= dir*hw;
+
       if (i=high(pts)-1) then
-      begin
-        pts[high(pts)].x += dir.x*hw;
-        pts[high(pts)].y += dir.y*hw;
-      end;
+        pts[high(pts)] += dir*hw;
+
       //length changed
-      dir.x := pts[i+1].x-pts[i].x;
-      dir.y := pts[i+1].y-pts[i].y;
-      len := sqrt(sqr(dir.x)+sqr(dir.y));
-      dir.x /= len;
-      dir.y /= len;
+      dir := pts[i+1]-pts[i];
+      len := sqrt(dir*dir);
+      dir *= 1/len;
     end else
     if (linecap = pecRound) and (i=0) and not (plCycle in options) then
-      AddRoundCap(pts[0], PointF(-dir.x,-dir.y),true);
+      AddRoundCap(pts[0], -dir ,true);
 
     borders[i].len := len;
     borders[i].leftDir := PointF(dir.y*hw,-dir.x*hw);
-    borders[i].leftSide.origin := PointF(pts[i].x+borders[i].leftDir.X, pts[i].y+borders[i].leftDir.y);
+    borders[i].leftSide.origin := pts[i] + borders[i].leftDir;
     borders[i].leftSide.dir := dir;
-    borders[i].rightSide.origin := PointF(pts[i].x-borders[i].leftDir.X, pts[i].y-borders[i].leftDir.y);
+    borders[i].rightSide.origin := pts[i] - borders[i].leftDir;
     borders[i].rightSide.dir := dir;
   end;
 
   //first points
-  AddPt( pts[0].x+borders[0].leftDir.x,
-         pts[0].y+borders[0].leftDir.y,
-
-         pts[0].x-borders[0].leftDir.x,
-         pts[0].y-borders[0].leftDir.y);
+  AddPt( pts[0] + borders[0].leftDir,
+         pts[0] - borders[0].leftDir );
 
   setlength(joinLeft,1);
   setlength(joinRight,1);
@@ -878,13 +822,12 @@ begin
     HasLittleBorder := false;
 
     //determine u-turn
-    turn := borders[i].leftSide.dir.x*borders[i+1].leftSide.dir.x + borders[i].leftSide.dir.y*borders[i+1].leftSide.dir.y;
+    turn := borders[i].leftSide.dir * borders[i+1].leftSide.dir;
     if turn < -0.99999 then
     begin
       if joinstyle <> pjsRound then
       begin
-        littleBorder.origin.x := pts[i+1].x+borders[i].leftSide.dir.x*maxMiter;
-        littleBorder.origin.y := pts[i+1].y+borders[i].leftSide.dir.y*maxMiter;
+        littleBorder.origin := pts[i+1] + borders[i].leftSide.dir*maxMiter;
         littleBorder.dir := borders[i].leftDir;
         HasLittleBorder := true;
       end;
@@ -894,19 +837,15 @@ begin
 
       ShouldFlushLine := True;
     end else
-    if turn > 0.99999 then
+    if turn > 0.99999 then //straight line
     begin
-      pt1.x := pts[i+1].x + borders[i].leftDir.x;
-      pt1.y := pts[i+1].y + borders[i].leftDir.y;
-      pt2.x := pts[i+2].x + borders[i+1].leftDir.x;
-      pt2.y := pts[i+2].y + borders[i+1].leftDir.y;
-      SetJoinLeft([pt1,PointF((pt1.x+pt2.x)/2,(pt1.y+pt2.y)/2),pt2]);
+      pt1 := pts[i+1] + borders[i].leftDir;
+      pt2 := pts[i+2] + borders[i+1].leftDir;
+      SetJoinLeft([pt1, (pt1+pt2)*(1/2),pt2]);
 
-      pt1.x := pts[i+1].x - borders[i].leftDir.x;
-      pt1.y := pts[i+1].y - borders[i].leftDir.y;
-      pt2.x := pts[i+2].x - borders[i+1].leftDir.x;
-      pt2.y := pts[i+2].y - borders[i+1].leftDir.y;
-      SetJoinRight([pt1,PointF((pt1.x+pt2.x)/2,(pt1.y+pt2.y)/2),pt2]);
+      pt1 := pts[i+1] - borders[i].leftDir;
+      pt2 := pts[i+2] - borders[i+1].leftDir;
+      SetJoinRight([pt1,(pt1+pt2)*(1/2),pt2]);
     end else
     begin
       //determine turning left or right
@@ -920,10 +859,9 @@ begin
       maxDiff := sqrt(sqr(maxDiff)+sqr(hw));
 
       //leftside join
-      leftInter := Intersect( borders[i].leftSide, borders[i+1].leftSide );
-      diff.x := leftInter.x-pts[i+1].x;
-      diff.y := leftInter.y-pts[i+1].y;
-      len := sqrt(diff.x*diff.x+diff.y*diff.y);
+      leftInter := IntersectLine( borders[i].leftSide, borders[i+1].leftSide );
+      diff := leftInter-pts[i+1];
+      len := sqrt(diff*diff);
       if (len > maxMiter) and (turn >= 0) then //if miter too far
       begin
         diff.x /= len;
@@ -931,15 +869,13 @@ begin
         if joinstyle <> pjsRound then
         begin
           //compute little border
-          littleBorder.origin.x := pts[i+1].x+diff.x*maxMiter;
-          littleBorder.origin.y := pts[i+1].y+diff.y*maxMiter;
-          littleBorder.dir.x := diff.y;
-          littleBorder.dir.y := -diff.x;
+          littleBorder.origin := pts[i+1]+diff*maxMiter;
+          littleBorder.dir := PointF(diff.y,-diff.x);
           HasLittleBorder := true;
 
           //intersect with each border
-          pt1 := Intersect(borders[i].leftSide, littleBorder);
-          pt2 := Intersect(borders[i+1].leftSide, littleBorder);
+          pt1 := IntersectLine(borders[i].leftSide, littleBorder);
+          pt2 := IntersectLine(borders[i+1].leftSide, littleBorder);
           SetJoinLeft( [pt1, pt2] );
         end else
         begin
@@ -966,27 +902,23 @@ begin
       end;
 
       //rightside join
-      rightInter := Intersect( borders[i].rightSide, borders[i+1].rightSide );
-      diff.x := rightInter.x-pts[i+1].x;
-      diff.y := rightInter.y-pts[i+1].y;
-      len := sqrt(diff.x*diff.x+diff.y*diff.y);
+      rightInter := IntersectLine( borders[i].rightSide, borders[i+1].rightSide );
+      diff := rightInter-pts[i+1];
+      len := sqrt(diff*diff);
       if (len > maxMiter) and (turn <= 0) then //if miter too far
       begin
-        diff.x /= len;
-        diff.y /= len;
+        diff *= 1/len;
 
         if joinstyle <> pjsRound then
         begin
           //compute little border
-          littleBorder.origin.x := pts[i+1].x+diff.x*maxMiter;
-          littleBorder.origin.y := pts[i+1].y+diff.y*maxMiter;
-          littleBorder.dir.x := diff.y;
-          littleBorder.dir.y := -diff.x;
+          littleBorder.origin := pts[i+1] + diff*maxMiter;
+          littleBorder.dir := PointF(diff.y, -diff.x);
           HasLittleBorder := true;
 
           //intersect with each border
-          pt1 := Intersect(borders[i].rightSide, littleBorder);
-          pt2 := Intersect(borders[i+1].rightSide, littleBorder);
+          pt1 := IntersectLine(borders[i].rightSide, littleBorder);
+          pt2 := IntersectLine(borders[i+1].rightSide, littleBorder);
           SetJoinRight( [pt1, pt2] );
         end else
         begin
@@ -1021,24 +953,20 @@ begin
         if turn >= 0 then
         begin
           //intersect with each border
-          pt1 := Intersect(borders[i].leftSide, littleBorder);
-          pt2 := Intersect(borders[i+1].leftSide, littleBorder);
-          pt3 := PointF( pts[i+1].x-borders[i].leftDir.x,
-                         pts[i+1].y-borders[i].leftDir.y );
-          pt4 := PointF( pts[i+1].x+borders[i].leftDir.x,
-                         pts[i+1].y+borders[i].leftDir.y );
+          pt1 := IntersectLine(borders[i].leftSide, littleBorder);
+          pt2 := IntersectLine(borders[i+1].leftSide, littleBorder);
+          pt3 := pts[i+1] - borders[i].leftDir;
+          pt4 := pts[i+1] + borders[i].leftDir;
 
           AddPt(pt4,pt3);
           AddPt(pt1,pt2);
         end else
         begin
           //intersect with each border
-          pt1 := Intersect(borders[i+1].rightSide, littleBorder);
-          pt2 := Intersect(borders[i].rightSide, littleBorder);
-          pt3 := PointF( pts[i+1].x+borders[i].leftDir.x,
-                         pts[i+1].y+borders[i].leftDir.y);
-          pt4 := PointF( pts[i+1].x-borders[i].leftDir.x,
-                         pts[i+1].y-borders[i].leftDir.y );
+          pt1 := IntersectLine(borders[i+1].rightSide, littleBorder);
+          pt2 := IntersectLine(borders[i].rightSide, littleBorder);
+          pt3 := pts[i+1] + borders[i].leftDir;
+          pt4 := pts[i+1] - borders[i].leftDir;
 
           AddPt(pt3,pt4);
           AddPt(pt1,pt2);
@@ -1053,75 +981,46 @@ begin
 
         if (penstyle= nil) and (turn > 0) then
         begin
-          pt1 := PointF(pts[i+1].x+ borders[i].leftDir.x,
-                       pts[i+1].y+ borders[i].leftDir.y);
-          pt2 := PointF(pts[i+1].x+ borders[i+1].leftDir.x,
-                       pts[i+1].y+ borders[i+1].leftDir.y);
+          pt1 := pts[i+1] + borders[i].leftDir;
+          pt2 := pts[i+1] + borders[i+1].leftDir;
           SetJoinLeft(ComputeRoundJoin(pts[i+1],pt1,pt2));
           nbJoinRight := 1;
-          JoinRight[0]:= PointF(pts[i+1].x- borders[i].leftDir.x,
-                          pts[i+1].y- borders[i].leftDir.y);
+          joinRight[0] := pts[i+1] - borders[i].leftDir;
           AddJoin(-1);
           FlushLine(-1);
         end else
         if (penstyle= nil) and (turn < 0) then
         begin
-          pt1 := PointF(pts[i+1].x- borders[i].leftDir.x,
-                       pts[i+1].y- borders[i].leftDir.y);
-          pt2 := PointF(pts[i+1].x- borders[i+1].leftDir.x,
-                       pts[i+1].y- borders[i+1].leftDir.y);
+          pt1 := pts[i+1] - borders[i].leftDir;
+          pt2 := pts[i+1] - borders[i+1].leftDir;
           SetJoinRight(ComputeRoundJoin(pts[i+1],pt1,pt2));
           nbJoinLeft := 1;
-          JoinLeft[0]:= PointF(pts[i+1].x+ borders[i].leftDir.x,
-                          pts[i+1].y+ borders[i].leftDir.y);
+          joinLeft[0] := pts[i+1] + borders[i].leftDir;
           AddJoin(-1);
           FlushLine(-1);
         end else
         if (nbCompPts > 1) and (nbRevCompPts > 1) then
         begin
-          pt1 := PointF(pts[i+1].x+ borders[i].leftDir.x,
-                       pts[i+1].y+ borders[i].leftDir.y);
-          pt2 := PointF(pts[i+1].x- borders[i].leftDir.x,
-                       pts[i+1].y- borders[i].leftDir.y);
+          pt1 := pts[i+1]+borders[i].leftDir;
+          pt2 := pts[i+1]-borders[i].leftDir;
           AddPt( pt1, pt2 );
           FlushLine(-1);
         end else
         begin
-          nbCompPts := 0;
-          nbRevCompPts := 0;
+          FlushLine(i+1);
         end;
-
-
-        //AddRoundCap(pts[i+1], borders[i].leftSide.dir,false);
-
-
-        //NormalRestart := false;
-
-        {if linecap = pecRound then //if linecap is round, we can use opened line
-          AddRoundCap(pts[i+1], borders[i+1].leftSide.dir,true,true)
-        else}
-        {AddRoundCap(pts[i+1], PointF(-borders[i+1].leftSide.dir.x,
-                                       -borders[i+1].leftSide.dir.y)
-                                          ,true,false);   }
       end else
       begin
         FlushLine(i+1);
         if turn > 0 then
-          AddPt( leftInter, PointF(pts[i+1].x+borders[i].leftDir.x,
-                                   pts[i+1].y+borders[i].leftDir.y ) ) else
+          AddPt( leftInter, pts[i+1]+borders[i].leftDir ) else
         if turn < 0 then
-          AddPt(  PointF(pts[i+1].x-borders[i].leftDir.x,
-                         pts[i+1].y-borders[i].leftDir.y ), rightInter );
+          AddPt( pts[i+1] - borders[i].leftDir, rightInter );
       end;
 
       If NormalRestart then
-      begin
-        AddPt( pts[i+1].x+borders[i+1].leftDir.x,
-               pts[i+1].y+borders[i+1].leftDir.y,
-
-               pts[i+1].x-borders[i+1].leftDir.x,
-               pts[i+1].y-borders[i+1].leftDir.y);
-      end;
+        AddPt(pts[i+1]+borders[i+1].leftDir,
+              pts[i+1]-borders[i+1].leftDir);
 
       ShouldFlushLine := false;
     end else
@@ -1133,17 +1032,20 @@ begin
   else
     FlushLine(high(pts));
 
-  if texture <> nil then
-    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),texture)
+  if scan <> nil then
+    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),scan)
   else
     bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),pencolor);
 end;
 
 initialization
 
+  //special pen styles
   SolidPenStyle := nil;
+
   setlength(ClearPenStyle,1);
   ClearPenStyle[0] := 0;
+
   DashPenStyle := BGRAPenStyle(3,1);
   DotPenStyle := BGRAPenStyle(1,1);
   DashDotPenStyle := BGRAPenStyle(3,1,1,1);
