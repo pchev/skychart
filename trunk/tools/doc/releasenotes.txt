@@ -1,5 +1,12 @@
 Version 3.3svn release Notes
 
+- Rotate camera or guider with arrow keys. Activate with Shift+C, Shift+G or Shift+S
+- "Move label" now set new RA/DEC for the label. Use "Offset Label" to get the old behavior.
+- Add line from moved labels, setup option is in display/labels.
+- Add pictures of DSO and planet in the information detail window.
+- Add catalog source in object list and detail information.
+- Add print description and number of copies.
+- Add print preview.
 - Add option in Setup/Display for antialias drawing of the map on the screen, this can slowdown the display.
 - Observatory favorite list, new observatory database window.
 - Internet localization of your location.
