@@ -228,6 +228,7 @@ AzNorth:=true;
 WriteTrace('Create Tf_image');
 {$endif}
 ShowImage:=Tf_image.Create(self);
+ShowImage.Position:=poScreenCenter;
 decodedate(now,yy,mm,dd);
 date1.JD:=jdd(yy,mm,dd,0);
 date2.JD:=date1.JD+5;
@@ -1732,6 +1733,7 @@ if (aRow>=0)and(aColumn>=0) then begin
        if (aColumn=1) then begin   // image map
          pathimage:=slash(Feclipsepath)+'SE'+stringreplace(cells[0,aRow],blank,'',[rfReplaceAll])+copy(cells[3,aRow],1,1)+'.png';
          if fileexists(pathimage) then begin
+            ShowImage.ButtonPrint.Visible:=false;
             ShowImage.labeltext:=eclipanel.caption;
             ShowImage.titre:=solar.Caption+blank+inttostr(csconfig.CurMonth)+'/'+inttostr(csconfig.CurYear);
             ShowImage.LoadImage(pathimage);

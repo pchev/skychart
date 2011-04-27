@@ -36,9 +36,9 @@ uses
      {$ifdef mswindows}
      pu_ascomclient,
      {$endif}
-     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,
+     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,pu_image,
      u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
-     PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs,
+     PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
      
 const maxundo=10;
@@ -187,10 +187,11 @@ type
     FListInfo: Tstr12func;
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
-    xcursor,ycursor,skipmove : integer;
-    MovingCircle,FNightVision,StartCircle,lockkey: Boolean;
+    xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
+    MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam: Boolean;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
+    PrintPreview: Tf_image;
     procedure TelescopeCoordChange(Sender: TObject);
     procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
     procedure TelescopeGetMessage(Sender : TObject; const msg : string);
@@ -226,7 +227,7 @@ type
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     procedure Refresh;
     procedure AutoRefresh;
-    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
+    procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true):boolean;
@@ -292,6 +293,8 @@ type
     function cmd_SwitchConstB:string;
     procedure SetLang;
     procedure ChartActivate;
+    procedure SetCameraRotation(cam:integer);
+    procedure MoveCamera(angle:single);
     property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
@@ -355,6 +358,9 @@ begin
  locked:=true;
  lockmove:=false;
  lockkey:=false;
+ movecam:=false;
+ moveguide:=false;
+ frommovecam:=false;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
  Image1:= TChartDrawingControl.Create(Self);
@@ -513,6 +519,7 @@ end;
 
 procedure Tf_chart.Refresh;
 var  savebg:Tcolor;
+     i: integer;
 {$ifdef showtime}
      starttime:TDateTime;
 {$endif}
@@ -532,6 +539,13 @@ try
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
  zoomstep:=0;
+ if (not frommovecam)and(movecam or moveguide) then begin
+   movecam:=false;
+   moveguide:=false;
+   for i:=1 to 10 do sc.cfgsc.circle[i,4]:=0;
+   for i:=1 to 10 do sc.cfgsc.rectangle[i,5]:=0;
+ end;
+ frommovecam:=false;
  identlabel.visible:=false;
  Image1.width:=clientwidth;
  Image1.height:=clientheight;
@@ -917,15 +931,19 @@ end;
 buf.SaveToFile(fn);
 end;
 
-procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main);
+procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
 var savecolor: Starcolarray;
-    savesplot,savenplot,savepplot,savebgcolor,resol: integer;
-    saveskycolor: boolean;
+    savesplot,savenplot,savepplot,savebgcolor,resol,rp: integer;
+    rs: single;
+    saveskycolor,printok: boolean;
     saveLabelColor : array[1..numlabtype] of Tcolor;
     prtname:string;
     fname:WideString;
-    i,w,h :integer;
+    i,w,h,x,y,wh :integer;
+    ts:TSize;
+    pt:TPoint;
     ps:TPostscriptCanvas;
+    previewbmp:Tbitmap;
   begin
 {$ifdef trace_debug}
  WriteTrace(caption+' PrintChart');
@@ -961,9 +979,65 @@ try
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
     if PrintLandscape then Printer.Orientation:=poLandscape
-                   else Printer.Orientation:=poPortrait;
+                      else Printer.Orientation:=poPortrait;
+    if preview then begin
+      rp:=resol;
+      printok:=false;
+      PrintPreview:=Tf_image.Create(self);
+      previewbmp:=Tbitmap.Create;
+      try
+        PrintPreview.ButtonPrint.Visible:=true;
+        PrintPreview.Image1.BGcolor:=clBtnFace;
+        w:=Printer.PageWidth;
+        h:=Printer.PageHeight;
+        wh:=max(w,h);
+        if wh>1024 then begin
+           rs:=1024/wh;
+           w:=round(w*rs);
+           h:=round(h*rs);
+           rp:=round(rp*rs);
+        end;
+        sc.plot.destcnv:=previewbmp.Canvas;
+        sc.plot.cfgplot.UseBMP:=false;
+        sc.plot.cfgchart.onprinter:=true;
+        sc.plot.cfgchart.drawpen:=maxintvalue([1,rp div 150]);
+        sc.plot.cfgchart.drawsize:=maxintvalue([1,rp div 100]);
+        sc.plot.cfgchart.fontscale:=1;
+        sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,rp);
+        sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,rp);
+        sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,rp);
+        sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,rp);
+        sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
+        sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
+        previewbmp.Width:=w;
+        previewbmp.Height:=h;
+        sc.plot.init(w,h);
+        sc.Refresh;
+        if trim(cm.PrintDesc)>'' then begin
+         x:=w div 2;
+         y:=h-10-sc.cfgsc.BottomMargin;
+         sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+        end;
+        previewbmp.SaveToFile(slash(TempDir)+'preview.bmp');
+        PrintPreview.LoadImage(slash(TempDir)+'preview.bmp');
+        PrintPreview.ClientHeight:=Image1.Height;
+        PrintPreview.ClientWidth:=Image1.Width;
+        PrintPreview.image1.ZoomMin:=0.5;
+        PrintPreview.labeltext:=rsPrintPreview;
+        PrintPreview.Init;
+        pt:=Image1.ClientToScreen(point(0,0));
+        FormPos(PrintPreview,pt.x,pt.y);
+        PrintPreview.ShowModal;
+        printok:=(PrintPreview.ModalResult=mrYes);
+      finally
+        PrintPreview.Free;
+        previewbmp.Free;
+      end;
+      if not printok then exit;
+    end;
     // print
     Printer.Title:='CdC';
+    Printer.Copies:=cm.PrintCopies;
     Printer.BeginDoc;
     sc.plot.destcnv:=Printer.canvas;
     sc.plot.cfgplot.UseBMP:=false;
@@ -981,6 +1055,11 @@ try
     h:=Printer.PageHeight;
     sc.plot.init(w,h);
     sc.Refresh;
+    if trim(cm.PrintDesc)>'' then begin
+     x:=w div 2;
+     y:=h-10-sc.cfgsc.BottomMargin;
+     sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+    end;
     Printer.EndDoc;
 //{$endif}
     end;
@@ -1013,6 +1092,11 @@ try
       sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
       sc.plot.init(ps.pagewidth,ps.pageheight);
       sc.Refresh;
+      if trim(cm.PrintDesc)>'' then begin
+        x:=ps.pagewidth div 2;
+        y:=ps.pageheight-10-sc.cfgsc.BottomMargin;
+        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+      end;
       ps.enddoc;
       fname:=slash(printpath)+'cdcprint.ps';
       ps.savetofile(SysToUTF8(fname));
@@ -1047,6 +1131,11 @@ try
      sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
      sc.plot.init(w,h);
      sc.Refresh;
+      if trim(cm.PrintDesc)>'' then begin
+        x:=w div 2;
+        y:=h-10-sc.cfgsc.BottomMargin;
+        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+      end;
      // save the bitmap
      fname:=slash(printpath)+'cdcprint.bmp';
      sc.plot.cbmp.savetofile(SysToUTF8(fname));
@@ -1118,6 +1207,91 @@ begin
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
+end;
+
+procedure Tf_chart.MoveCamera(angle:single);
+var rot: single;
+begin
+if movecam then begin
+  sc.cfgsc.rectangle[movecamnum,3]:=sc.cfgsc.rectangle[movecamnum,3]+angle;
+  sc.cfgsc.rectangle[movecamnum,3]:=rmod(sc.cfgsc.rectangle[movecamnum,3]+360,360);
+  rot:=sc.cfgsc.rectangle[movecamnum,3];
+end;
+if moveguide then begin
+  case moveguidetype of
+    0:begin
+       sc.cfgsc.circle[moveguidenum,2]:=sc.cfgsc.circle[moveguidenum,2]+angle;
+       sc.cfgsc.circle[moveguidenum,2]:=rmod(sc.cfgsc.circle[moveguidenum,2]+360,360);
+       rot:=sc.cfgsc.circle[moveguidenum,2];
+      end;
+    1:begin
+       sc.cfgsc.rectangle[moveguidenum,3]:=sc.cfgsc.rectangle[moveguidenum,3]+angle;
+       sc.cfgsc.rectangle[moveguidenum,3]:=rmod(sc.cfgsc.rectangle[moveguidenum,3]+360,360);
+       rot:=sc.cfgsc.rectangle[moveguidenum,3];
+      end;
+  end;
+end;
+frommovecam:=true;
+Refresh;
+if assigned(Fshowinfo) then Fshowinfo(rsRotation+': '+formatfloat(f1,rot));
+end;
+
+procedure Tf_chart.SetCameraRotation(cam:integer);
+var size,maxsize:double;
+    guiderfound:boolean;
+    i: integer;
+begin
+if movecam or moveguide  then begin
+  movecam:=false;
+  moveguide:=false;
+  for i:=1 to 10 do sc.cfgsc.circle[i,4]:=0;
+  for i:=1 to 10 do sc.cfgsc.rectangle[i,5]:=0;
+end
+else begin
+  case cam of
+    0: begin
+        movecam:=true;
+        moveguide:=true;
+       end;
+    1: movecam:=true;
+    2: moveguide:=true;
+  end;
+  if movecam then begin // find main camera (max rectangle size with null offset)
+     maxsize:=0;
+     for i:=1 to 10 do
+        if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
+          size:=sc.cfgsc.rectangle[i,1]*sc.cfgsc.rectangle[i,2];
+          if size>maxsize then begin
+             maxsize:=size;
+             movecamnum:=i;
+          end;
+        end;
+     if maxsize=0 then movecam:=false
+        else sc.cfgsc.rectangle[movecamnum,5]:=1;
+  end;
+  if moveguide then begin // find first guider (first circle or rectangle with offset > 0)
+     guiderfound:=false;
+     for i:=1 to 10 do
+        if sc.cfgsc.circleok[i] and (sc.cfgsc.circle[i,3]>0) then begin
+           guiderfound:=true;
+           moveguidenum:=i;
+           moveguidetype:=0;
+           sc.cfgsc.circle[i,4]:=1;
+           break;
+        end;
+     if not guiderfound then for i:=1 to 10 do
+        if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]>0) then begin
+           guiderfound:=true;
+           moveguidenum:=i;
+           moveguidetype:=1;
+           sc.cfgsc.rectangle[i,5]:=1;
+           break;
+        end;
+     if not guiderfound then moveguide:=false;
+  end;
+end;
+frommovecam:=true;
+Refresh;
 end;
 
 procedure Tf_chart.rotation(rot:double);
@@ -1291,9 +1465,9 @@ key_upright   : MoveNorthWest.execute;
 key_downright : MoveSouthWest.execute;
 key_downleft  : MoveSouthEast.execute;
 key_upleft    : MoveNorthEast.execute;
-key_left      : MoveEast.execute;
+key_left      : if (movecam or moveguide) then MoveCamera(5) else MoveEast.execute;
 key_up        : MoveNorth.execute;
-key_right     : MoveWest.execute;
+key_right     : if (movecam or moveguide) then MoveCamera(-5) else MoveWest.execute;
 key_down      : MoveSouth.execute;
 end;
 movefactor:=4;
@@ -1897,6 +2071,9 @@ end;
 function Tf_chart.FormatDesc:string;
 var desc,buf,buf2,otype,oname,txt: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
+    searchdir,cmd,fn: string;
+    bmp: Tbitmap;
+    ipla:integer;
     i,p,l,y,m,d,precision : integer;
     isStar, isSolarSystem: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
@@ -1937,7 +2114,65 @@ i:=pos(tab,buf);
 oname:=trim(copy(buf,1,i-1));
 delete(buf,1,i);
 txt:=txt+html_b+oname+htms_b+html_br;
+// Planet picture
+if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
+  for i:=1 to 11 do if pla[i]=oname then ipla:=i;
+  { TODO : make a global function with almost the same code in cu_plot }
+  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
+ {$ifdef linux}
+    cmd:='export LC_ALL=C; xplanet';
+ {$endif}
+ {$ifdef darwin}
+    cmd:='export LC_ALL=C; '+'"'+slash(appdir)+slash(xplanet_dir)+'xplanet"';
+ {$endif}
+ {$ifdef mswindows}
+//    chdir(xplanet_dir);
+    cmd:='"'+slash(appdir)+slash(xplanet_dir)+'xplanet.exe"';
+ {$endif}
+ cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate 0'+
+      ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,sc.cfgsc.CurJD) +
+      ' -searchdir '+searchdir+
+      ' -config xplanet.config -verbosity -1'+
+      ' -radius 50'+
+      ' -geometry 200x200 -output "'+slash(Tempdir)+'info.png'+'"';
+ if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.cfgsc.GRSlongitude);
+ DeleteFile(slash(Tempdir)+'info.png');
+ i:=exec(cmd);
+ if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;
+end;
+// Sun picture
+if (otype='S*')and(oname=pla[10]) then begin
+  fn:=slash(Tempdir)+'sun.jpg';
+  if not FileExists(fn) then begin  // use default image
+    fn:=slash(appdir)+slash('data')+slash('planet')+'sun-0.jpg';
+  end;
+  if FileExists(fn) then txt:=txt+'<img src="'+fn+'" alt="'+oname+'" border="0" width="200">'+html_br;
+end;
+// DSO picture
+if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
+  if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
+  if (ExtractFileExt(fn)<>'.nil') then begin
+       sc.Fits.FileName:=fn;
+       if sc.Fits.Header.valid then begin
+         bmp:=Tbitmap.Create;
+         try
+         sc.Fits.GetBitmap(bmp);
+         fn:=slash(TempDir)+'info.bmp';
+         DeleteFile(fn);
+         bmp.SaveToFile(fn);
+         if FileExists(fn) then txt:=txt+'<img src="'+fn+'" alt="'+oname+'" border="0" width="200">'+html_br;
+         finally
+         bmp.Free;
+         end;
+        end;
+  end;
+  end;
+end;
+// source catalog
+if sc.cfgsc.FindCat<>'' then txt:=txt+html_b+rsInformationF+blank+
+  sc.cfgsc.FindCat+':'+htms_b+html_br;
 // other attribute
+
 repeat
   i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
@@ -2887,21 +3122,13 @@ case key of
 '0' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
 'a' : SetZenit(deg2rad*200);
 'e' : SetAz(deg2rad*270);
-//'f' : SpeedButton17Click(Sender);  // find
-//'h' : SpeedButton24Click(Sender);  // horizon
-//'l' : ToolbarButtonLabelClick(Sender);  // label
-//'m' : Coordone1Click(Sender);     // entree des coordonnees
 'n' : SetAz(deg2rad*180);
-//'p' : popupmenu2.popup(mouse.cursorpos.x,mouse.cursorpos.y);
-//'q' : SwitchProj;
-//'r' : SetRot(15);
 's' : SetAz(0);
-//'t' : Heure1Click(Sender);         // date time
 'w' : SetAz(deg2rad*90);
 'z' : SetZenit(0);
-//'P' : SetRecording;
-//'R' : SetRot(-15);
-//' ' : HideMenu(not menu_on);
+'C' : SetCameraRotation(1);
+'G' : SetCameraRotation(2);
+'S' : SetCameraRotation(0);
 end;
 Application.ProcessMessages;
 finally

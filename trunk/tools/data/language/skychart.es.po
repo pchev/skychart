@@ -2001,6 +2001,10 @@ msgstr "Información"
 msgid "Information detail"
 msgstr ""
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Inicializar Base de Datos"
@@ -2721,6 +2725,10 @@ msgstr "%s No encontrado!%sO el catálogo no está instalado, o hay un path err�
 msgid "Now"
 msgstr "Ahora"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Número de Archivos"
@@ -2804,6 +2812,10 @@ msgstr "Obsoleto"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Diferencia"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3143,6 +3155,10 @@ msgstr "Presión (milibar)"
 msgid "<<   Prev"
 msgstr "<<   Ant."
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Imprimir"
@@ -3170,6 +3186,10 @@ msgstr "Conf. Impresora"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Método de Impresión"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3770,6 +3790,10 @@ msgstr "Mostrar variables IR"
 #: u_translation.rsshowlabels
 msgid "Show labels"
 msgstr "Mostrar Etiquetas"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 msgid "Show lines"

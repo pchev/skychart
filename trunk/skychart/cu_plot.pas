@@ -26,17 +26,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, FileUtil, BGRABitmap, BGRABitmapTypes,
+uses  FileUtil, BGRABitmap, BGRABitmapTypes,
   u_constant, u_util, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
-  Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics;
+  Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation;
 
 
 type
 
   TSide   = (U,D,L,R);  // Up, Down, Left, Right
   TSideSet = set of TSide;
-  TEditLabelPos = procedure(lnum,left,top: integer) of object;
+  TEditLabelPos = procedure(lnum,left,top: integer;moderadec:boolean) of object;
   Tintfunc = procedure(i: integer) of object;
   Tvoidfunc = procedure of object;
 
@@ -51,6 +51,7 @@ type
      labels: array [1..maxlabels] of Tlabel;
      editlabel,editlabelx,editlabely,selectedlabel : integer;
      editlabelmod: boolean;
+     FlabelRaDec: boolean;
      FEditLabelPos: TEditLabelPos;
      FEditLabelTxt: TEditLabelPos;
      FDefaultLabel: Tintfunc;
@@ -152,6 +153,7 @@ type
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
      procedure FloodFill(X, Y: Integer; FillColor: TColor);
      Procedure Movelabel(Sender: TObject);
+     Procedure MovelabelRaDec(Sender: TObject);
      Procedure EditlabelTxt(Sender: TObject);
      Procedure DefaultLabel(Sender: TObject);
      Procedure Deletelabel(Sender: TObject);
@@ -237,7 +239,11 @@ for i:=0 to 6 do
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
  MenuItem.Caption := rsMoveLabel;
- MenuItem.OnClick := MoveLabel;
+ MenuItem.OnClick := MovelabelRaDec;
+ MenuItem := TMenuItem.Create(editlabelmenu);
+ editlabelmenu.Items.Add(MenuItem);
+ MenuItem.Caption := rsOffsetLabel;
+ MenuItem.OnClick := Movelabel;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
  MenuItem.Caption := rsEditLabel;
@@ -1063,7 +1069,7 @@ if not cfgplot.Invisible then begin
                  setlength(outlinepts,outlinenum+1);
                  setlength(outlineptsf,outlinenum+1);
                  for l:=0 to outlinenum do begin outlineptsf[l].x:=outlinepts[l].x;outlineptsf[l].y:=outlinepts[l].y;end;
-                 cbmp.FillPolyAntialias(outlineptsf,ColorToBGRA(outlinecol));
+                 cbmp.FillPoly(outlineptsf,ColorToBGRA(outlinecol),dmset);
                end;
            end;
          end else begin
@@ -1148,7 +1154,7 @@ if not cfgplot.Invisible then begin
           //if IntfImgReady then ClosePixelImg;
           rot:=rot*FlipX*FlipY;
           if (ipla=10)and(size>0) then begin
-            PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
+             PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
           end else begin
              PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
           end;
@@ -1757,7 +1763,7 @@ if cfgplot.UseBMP then begin
           cpf1[2].Y:=y+((j+1)*r/20*sin(a+0.015*(i)));
           cpf1[3].X:=x+((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
           cpf1[3].Y:=y+((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
-          if (abs(cpf1[2].X-cpf1[3].X)>1)or(abs(cpf1[2].Y-cpf1[3].Y)>1) then cbmp.FillPolyAntialias(cpf1,colb)
+          if (abs(cpf1[2].X-cpf1[3].X)>1)or(abs(cpf1[2].Y-cpf1[3].Y)>1) then cbmp.FillPoly(cpf1,colb,dmset)
              else BGRADrawLine(cpf1[0].X,cpf1[0].Y,cpf1[2].X,cpf1[2].Y,colb,cfgchart.DrawPen,cbmp);
           cpf2[0].X:=cpf2[3].X;
           cpf2[0].Y:=cpf2[3].Y;
@@ -1767,7 +1773,7 @@ if cfgplot.UseBMP then begin
           cpf2[2].Y:=y+((j+1)*r/20*sin(a-0.015*(i)));
           cpf2[3].X:=x+((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
           cpf2[3].Y:=y+((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
-          if (abs(cpf2[2].X-cpf2[3].X)>1)or(abs(cpf2[2].Y-cpf2[3].Y)>1) then cbmp.FillPolyAntialias(cpf2,colb)
+          if (abs(cpf2[2].X-cpf2[3].X)>1)or(abs(cpf2[2].Y-cpf2[3].Y)>1) then cbmp.FillPoly(cpf2,colb,dmset)
              else BGRADrawLine(cpf2[0].X,cpf2[0].Y,cpf2[2].X,cpf2[2].Y,colb,cfgchart.DrawPen,cbmp);
          end;
         end;
@@ -2290,7 +2296,7 @@ if editlabel>0 then begin
 //  labels[editlabel].Transparent:=true;
   labels[editlabel].color:=clNone;
   labels[editlabel].Cursor:=crDefault;
-  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,labels[editlabel].left,labels[editlabel].top);
+  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,labels[editlabel].left,labels[editlabel].top,FlabelRaDec);
 end;
 editlabel:=-1;
 end;
@@ -2308,6 +2314,17 @@ end;
 
 Procedure TSplot.Movelabel(Sender: TObject);
 begin
+FlabelRaDec:=false;
+mouse.CursorPos:=point(editlabelx,editlabely);
+editlabel:=selectedlabel;
+//labels[editlabel].Transparent:=false;
+labels[editlabel].Color:=cfgplot.Color[0];
+labels[editlabel].Cursor:=crSizeAll;
+end;
+
+Procedure TSplot.MovelabelRaDec(Sender: TObject);
+begin
+FlabelRaDec:=true;
 mouse.CursorPos:=point(editlabelx,editlabely);
 editlabel:=selectedlabel;
 //labels[editlabel].Transparent:=false;
@@ -2317,7 +2334,7 @@ end;
 
 Procedure TSplot.EditlabelTxt(Sender: TObject);
 begin
-if (selectedlabel>0)and assigned(FEditLabelTxt) then FEditLabelTxt(selectedlabel,editlabelx,editlabely);
+if (selectedlabel>0)and assigned(FEditLabelTxt) then FEditLabelTxt(selectedlabel,editlabelx,editlabely,false);
 end;
 
 Procedure TSplot.DefaultLabel(Sender: TObject);
@@ -2599,8 +2616,11 @@ begin
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.usebmp then begin
-    if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillOCl then // line mode
-      cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen)
+    if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillOCl then begin// line mode
+      cbmp.PenStyle:=psDash;
+      cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen);
+      cbmp.PenStyle:=psSolid;
+    end
     else
       cbmp.FillEllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor));
 end else begin
@@ -2631,8 +2651,8 @@ end else begin
           if cfgchart.onprinter and (ds<(10)) then
             cnv.Pen.Style := psSolid
           else
-            cnv.Pen.Style := psDot;
-          {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
+            cnv.Pen.Style := psDash;
+          //{$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
     end;
@@ -3197,7 +3217,7 @@ end else begin
       else
         begin
           cnv.Pen.Style := psDashDot;
-          {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
+          //{$ifdef mswindows}cnv.Pen.width:=1;{$endif}
           cnv.Brush.Style := bsClear;
         end;
 //      cnv.MoveTo(xx-ds,yy);
@@ -3591,6 +3611,7 @@ if cfgplot.AntiAlias or(w>1)or(ps<>psSolid) then
   abmp.DrawLineAntialias(x1,y1,x2,y2,c,w,false)
 else
   abmp.DrawLine(round(x1),round(y1),round(x2),round(y2),c,true);
+abmp.PenStyle:=psSolid;
 end;
 
 Procedure TSplot.BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);

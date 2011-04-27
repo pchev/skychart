@@ -1166,6 +1166,12 @@ resourcestring
   rsHours = 'hours';
   rsServerRespon = 'Server response: ';
   rsAntiAliasDra = 'Anti Alias drawing';
+  rsOffsetLabel = 'Offset label';
+  rsShowLineFrom = 'Show line from moved label to object';
+  rsInformationF = 'Information from catalog';
+  rsNumberOfCopi = 'Number of copies';
+  rsPreview = 'Preview';
+  rsPrintPreview = 'Print Preview';
 
 implementation
 

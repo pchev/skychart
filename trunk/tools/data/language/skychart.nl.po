@@ -2000,6 +2000,10 @@ msgstr "Informatie"
 msgid "Information detail"
 msgstr "Gedetaileerde informatie"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Initialiseer database"
@@ -2720,6 +2724,10 @@ msgstr "%s Niet gevonden!%sMisschien is de catalogus niet geïnstalleerd, of is 
 msgid "Now"
 msgstr "Nu"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Aantal bestanden"
@@ -2803,6 +2811,10 @@ msgstr "Verouderd"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Offset"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3142,6 +3154,10 @@ msgstr "Luchtdruk"
 msgid "<<   Prev"
 msgstr "<< Vorig"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Afdrukken"
@@ -3169,6 +3185,10 @@ msgstr "Printerinstellingen"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Afdrukmethode"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3769,6 +3789,10 @@ msgstr "Toon IR variabelen"
 #: u_translation.rsshowlabels
 msgid "Show labels"
 msgstr "Toon labels"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 msgid "Show lines"

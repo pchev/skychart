@@ -2125,6 +2125,10 @@ msgstr "Πληροφορίες"
 msgid "Information detail"
 msgstr ""
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr ""
@@ -2859,6 +2863,10 @@ msgstr "%s Δε βρέθηκε!%sΊσως ο κατάλογος δεν είνα�
 msgid "Now"
 msgstr ""
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr ""
@@ -2941,6 +2949,10 @@ msgstr ""
 
 #: u_translation.rsoffset
 msgid "Offset"
+msgstr ""
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
 msgstr ""
 
 #: u_translation.rsok
@@ -3281,6 +3293,10 @@ msgstr ""
 msgid "<<   Prev"
 msgstr ""
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr ""
@@ -3307,6 +3323,10 @@ msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
+msgstr ""
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
 msgstr ""
 
 #: u_translation.rsprintthechar
@@ -3942,6 +3962,10 @@ msgstr ""
 #| msgid "Show Labels"
 msgid "Show labels"
 msgstr "Εμφάνιση Ετικετών"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 #, fuzzy

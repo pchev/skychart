@@ -50,6 +50,7 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     antialias: TCheckBox;
+    LabelLine: TCheckBox;
     ShowTitle: TCheckBox;
     Edit1: TEdit;
     Edit10: TEdit;
@@ -373,6 +374,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure GalEqStyleChange(Sender: TObject);
     procedure GridStyleChange(Sender: TObject);
+    procedure LabelLineClick(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
     procedure ShowTitleClick(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
@@ -644,6 +646,7 @@ GalEqStyle.items[4]:=rsDashDotDot1;
 
 Page6.caption:=rsLabels;
 DrawAllStarLabel.Caption:=rsDisplayLabel;
+LabelLine.Caption:=rsShowLineFrom;
 MagLabel.caption:=rsStarLabel;
 MagLabel.Items[0]:=rsName;
 MagLabel.Items[1]:=rsCommonName;
@@ -761,6 +764,11 @@ begin
 i:=GridStyle.itemindex;
 if (i>=Ord(Low(TPenStyle)))and(i<=Ord(High(TPenStyle))) then
    csc.StyleGrid:=TPenStyle(i);
+end;
+
+procedure Tf_config_display.LabelLineClick(Sender: TObject);
+begin
+  csc.MovedLabelLine:=LabelLine.Checked;
 end;
 
 procedure Tf_config_display.StarButton5Click(Sender: TObject);
@@ -1272,6 +1280,7 @@ begin
  ShowChartInfo.checked:=cmain.ShowChartInfo;
  ShowTitle.Checked:=cmain.ShowTitlePos;
  DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
+ LabelLine.Checked := csc.MovedLabelLine;
 end;
 
 procedure Tf_config_display.ShowCircle;
@@ -1806,6 +1815,7 @@ csc.Showlabelall:=true;
 cmain.ShowChartInfo:=false;
 cmain.ShowTitlePos:=false;
 csc.DrawAllStarLabel:=false;
+csc.MovedLabelLine:=true;
 csc.NameLabel:=false;
 csc.MagLabel:=false;
 csc.ConstFullLabel:=true;
@@ -2044,8 +2054,8 @@ i:=lstDSOCScheme.ItemIndex;
               shpNE.Brush.Color:=16777215;
              end;
           1: begin //CdC v3.nn
-              shpAst.Brush.Color:=8454143;
-              shpOCl.Brush.Color:=8454143;
+              shpAst.Brush.Color:=45311;
+              shpOCl.Brush.Color:=45311;
               shpGCl.Brush.Color:=16777088;
               shpPNe.Brush.Color:=8453888;
               shpDN.Brush.Color:=4210752;
@@ -2059,9 +2069,9 @@ i:=lstDSOCScheme.ItemIndex;
               shpNE.Brush.Color:=16777215;
              end;
           2: begin //Tirion Sky Atlas 2000
-              shpAst.Brush.Color:=8454143;
-              shpOCl.Brush.Color:=8454143;
-              shpGCl.Brush.Color:=65535;
+              shpAst.Brush.Color:=45311;
+              shpOCl.Brush.Color:=45311;
+              shpGCl.Brush.Color:=32696;
               shpPNe.Brush.Color:=4259584;
               shpDN.Brush.Color:=8421504;
               shpEN.Brush.Color:=16711935;

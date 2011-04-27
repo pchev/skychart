@@ -2002,6 +2002,10 @@ msgstr "Informacija"
 msgid "Information detail"
 msgstr "Podrobnosti informacije"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Inicializiraj podatkovno zbirko"
@@ -2722,6 +2726,10 @@ msgstr "%s Ni mogoče najti!%sMogoče katalog ni nameščen ali pa je napačna p
 msgid "Now"
 msgstr "Sedaj"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Število datotek"
@@ -2805,6 +2813,10 @@ msgstr "Zastarel"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Odtis"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3144,6 +3156,10 @@ msgstr "Tlak (milibari)"
 msgid "<<   Prev"
 msgstr "<< Prejšnje"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Natisni"
@@ -3171,6 +3187,10 @@ msgstr "Nastavitve tiskalnika"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Način tiskanja"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3771,6 +3791,10 @@ msgstr "Prikaži IR spremenljivke"
 #: u_translation.rsshowlabels
 msgid "Show labels"
 msgstr "Prikaži oznake"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 msgid "Show lines"

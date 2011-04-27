@@ -84,7 +84,7 @@ const cdcversion = 'Version 3.3 svn';
       encryptpwd = 'zh6Tiq4h;90uA3.ert';
       //                          0         1                                       5                                                 10                                                15                                                20                            23        24        25        26        27        28        29        30        31        32        33        34        35
       //                          sky       -0.3      -0.1      0.2       0.5       0.8       1.3       1.3+      galaxy    cluster   neb       -white-   az grid   eq grid   orbit     const     boundary  eyepiece  misc      horizon   asteroid  comet     milkyway  ColorAst  ColorOCl  ColorGCl  ColorPNe  ColorDN   ColorEN   ColorRN   ColorSN   ColorGxy  ColorGxyCl ColorQ   ColorGL   ColorNE
-      DfColor : Starcolarray =   (clBlack,  $00FF0000,$00FF8000,$00ffffff,$0080FFFF,$0000FFFF,$000080FF,$000000FF,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,$0080FFFF,$0080FFFF,$00FFFF80,$0080FF00,$00404040,$000000FF,$00FF8000,$00000000,$000000FF,$000000FF,$008080FF,$00FF0080,$00FFFFFF);
+      DfColor : Starcolarray =   (clBlack,  $00FF0000,$00FF8000,$00ffffff,$0080FFFF,$0000FFFF,$000080FF,$000000FF,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,$0000B0FF,$0000B0FF,$00FFFF80,$0080FF00,$00404040,$000000FF,$00FF8000,$00000000,$000000FF,$000000FF,$008080FF,$00FF0080,$00FFFFFF);
       DfPastelColor : Starcolarray =   (clBlack,  $00EF9883,$00EBDF74,$00ffffff,$00CAF9F9,$008AF2EB,$008EBBF2,$006271FB,$000000ff,$00ffff00,$0000ff00,clWhite,  $00404040,$00404040,$00008080,clGray,   $00800000,$00800080,clRed,    $00202030,clYellow, $00FFC000,$00202020,$0080FFFF,$0080FFFF,$00FFFF80,$0080FF00,$00404040,$000000FF,$00FF8000,$00000000,$000000FF,$000000FF,$008080FF,$00FF0080,$00FFFFFF);
       DfGray : Starcolarray =    (clBlack,  clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clWhite,  clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver, clSilver);
       DfBWColor : Starcolarray = (clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clGray,   clWhite,  clWhite,  clBlack,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite,  clWhite);
@@ -444,9 +444,11 @@ type
             end;
      Tmodlabel = record
             id,dx,dy:integer;
+            ra,dec: double;
             labelnum,fontnum:byte;
             align: TLabelAlign;
             txt: string;
+            useradec: boolean;
             hiden: boolean;
             end;
      Tcustomlabel = record
@@ -554,8 +556,8 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,FindX,FindY,FindZ,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
-                DrawAllStarLabel,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
-                EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote : string;
+                DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
+                EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat : string;
                 IridiumRA,IridiumDE,IridiumMA: double;
                 IridiumName,IridiumDist: string;
                 PlanetLst : Tplanetlst;
@@ -570,9 +572,9 @@ type
                 customlabels: array[1..maxmodlabels] of Tcustomlabel;
                 LabelMagDiff : array[1..numlabtype] of double;
                 ShowLabel : array[1..numlabtype] of boolean;
-                circle : array [1..10,1..3] of single; // radius, rotation, offset
+                circle : array [1..10,1..4] of single; // radius, rotation, offset, mode
                 circleok : array [1..10] of boolean; circlelbl : array [1..10] of string;
-                rectangle : array [1..10,1..4] of single; // width, height, rotation, offset
+                rectangle : array [1..10,1..5] of single; // width, height, rotation, offset, mode
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double;
                 CircleLabel,RectangleLabel:boolean;
@@ -640,12 +642,12 @@ type
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
                 starshape_file: string;
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
-                PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin: integer;
+                PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin,PrintCopies: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize: integer;
                 PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
-                ServerIPaddr,ServerIPport,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
+                ServerIPaddr,ServerIPport,PrintDesc,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
                 ImageLuminosity, ImageContrast, AnimFps : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
@@ -1442,6 +1444,7 @@ MagLabel:=Source.MagLabel ;
 NameLabel:=Source.NameLabel ;
 ConstFullLabel:=Source.ConstFullLabel ;
 DrawAllStarLabel:=Source.DrawAllStarLabel;
+MovedLabelLine:=Source.MovedLabelLine;
 ConstLatinLabel:=Source.ConstLatinLabel;
 ScopeMark:=Source.ScopeMark ;
 ScopeLock:=Source.ScopeLock ;
@@ -1451,6 +1454,7 @@ TrackId:=Source.TrackId ;
 FindName:=Source.FindName ;
 FindDesc:=Source.FindDesc ;
 FindNote:=Source.FindNote ;
+FindCat:=Source.FindCat;
 AsteroidNb:=Source.AsteroidNb ;
 CometNb:=Source.CometNb ;
 AsteroidLstSize:=Source.AsteroidLstSize ;
@@ -1493,9 +1497,12 @@ for i:=1 to Source.nummodlabels do begin
    modlabels[i].id:=Source.modlabels[i].id;
    modlabels[i].dx:=Source.modlabels[i].dx;
    modlabels[i].dy:=Source.modlabels[i].dy;
+   modlabels[i].ra:=Source.modlabels[i].ra;
+   modlabels[i].dec:=Source.modlabels[i].dec;
    modlabels[i].labelnum:=Source.modlabels[i].labelnum;
    modlabels[i].fontnum:=Source.modlabels[i].fontnum;
    modlabels[i].txt:=Source.modlabels[i].txt;
+   modlabels[i].useradec:=Source.modlabels[i].useradec;
    modlabels[i].hiden:=Source.modlabels[i].hiden;
 end;
 for i:=1 to Source.numcustomlabels do begin
@@ -1707,6 +1714,8 @@ ServerIPport:=Source.ServerIPport;
 PrintCmd1:=Source.PrintCmd1;
 PrintCmd2:=Source.PrintCmd2;
 PrintTmpPath:=Source.PrintTmpPath;
+PrintDesc:=Source.PrintDesc;
+PrintCopies:=Source.PrintCopies;
 ThemeName:=Source.ThemeName;
 IndiPanelCmd:=Source.IndiPanelCmd;
 ImageLuminosity:=Source.ImageLuminosity;

@@ -4578,3 +4578,27 @@ msgstr ""
 msgid "Anti Alias drawing"
 msgstr ""
 
+#: u_translation:rsoffsetlabel
+msgid "Offset label"
+msgstr ""
+
+#: u_translation:rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
+
+#: u_translation:rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
+#: u_translation:rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
+#: u_translation:rspreview
+msgid "Preview"
+msgstr ""
+
+#: u_translation:rsprintpreview
+msgid "Print Preview"
+msgstr ""
+

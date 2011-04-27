@@ -3,15 +3,15 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-04-10 11:20+0200\n"
-"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
+"PO-Revision-Date: 2011-04-25 17:49+0200\n"
+"Last-Translator: \n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
-"Language-Team: French <kde-i18n-doc@kde.org>\n"
+"Language-Team: Français <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_translation.rs102cddss
@@ -2006,6 +2006,10 @@ msgstr "Information"
 msgid "Information detail"
 msgstr "Information détaillée"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr "Information du catalogue"
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Initialise la base de donnée"
@@ -2726,6 +2730,10 @@ msgstr "%s non trouvé!%sPeut-être que le catalogue n'est pas installé, ou le 
 msgid "Now"
 msgstr "Maintenant"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr "Nombre de copies"
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Nombre de fichiers"
@@ -2809,6 +2817,10 @@ msgstr "Obsolète"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Décalage"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr "Décalage du label"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3148,6 +3160,10 @@ msgstr "Pression (millibar)"
 msgid "<<   Prev"
 msgstr "Précédent"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr "Prévisualiser"
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Imprimer"
@@ -3175,6 +3191,10 @@ msgstr "Options imprimante"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Méthode d'impression"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr "Prévisualiser l'impression"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3775,6 +3795,10 @@ msgstr "Voir les variables IR"
 #: u_translation.rsshowlabels
 msgid "Show labels"
 msgstr "Voir les labels"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr "Dessine une ligne depuis un label déplacé"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
