@@ -2004,6 +2004,10 @@ msgstr "Інформація"
 msgid "Information detail"
 msgstr "Інформаційна деталь"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Ініціалізація бази даних"
@@ -2724,6 +2728,10 @@ msgstr "%s Не знайдено!%sМожливо каталог не встан
 msgid "Now"
 msgstr "Зараз"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Кількість файлів"
@@ -2807,6 +2815,10 @@ msgstr "Застарілий"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Компенсація"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3146,6 +3158,10 @@ msgstr "Тиск (мілібар)"
 msgid "<<   Prev"
 msgstr "<<   Назад"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Друк"
@@ -3173,6 +3189,10 @@ msgstr "Опції принтеру"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Друкувати мапу"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3773,6 +3793,10 @@ msgstr "Показати ІЧ змінні"
 #: u_translation.rsshowlabels
 msgid "Show labels"
 msgstr "Показати назви"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 msgid "Show lines"

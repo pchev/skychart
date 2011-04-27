@@ -36,15 +36,21 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Preview: TButton;
+    Edit1: TEdit;
     GroupBox1: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
     LongEdit1: TLongEdit;
     LongEdit2: TLongEdit;
     LongEdit3: TLongEdit;
     LongEdit4: TLongEdit;
+    CopyPanel: TPanel;
+    copies: TLongEdit;
     PrinterInfo: TLabel;
     Setup: TButton;
     Print: TButton;
@@ -54,6 +60,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure copiesChange(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure LongEdit1Change(Sender: TObject);
@@ -94,11 +102,14 @@ Label1.caption:=rsLeft;
 Label2.caption:=rsRight;
 Label3.caption:=rsTop;
 Label4.caption:=rsBottom;
+Label5.Caption:=rsDescription;
+Label6.Caption:=rsNumberOfCopi;
 Button1.caption:=rsNoMargin;
 Button2.caption:=rsDefaultMargi;
 Button3.caption:=rsHelp;
 Setup.caption:=rsSetup;
 Print.caption:=rsPrint;
+Preview.Caption:=rsPreview;
 Cancel.Caption:=rsCancel;
 SetHelp(self,hlpMenuFile);
 end;
@@ -111,6 +122,8 @@ LongEdit1.Value:=cm.PrtLeftMargin;
 LongEdit2.Value:=cm.PrtRightMargin;
 LongEdit3.Value:=cm.PrtTopMargin;
 LongEdit4.Value:=cm.PrtBottomMargin;
+edit1.Text:=cm.PrintDesc;
+copies.Value:=cm.PrintCopies;
 ShowPrtInfo;
 end;
 
@@ -133,6 +146,16 @@ end;
 procedure Tf_print.Button3Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_print.copiesChange(Sender: TObject);
+begin
+  cm.PrintCopies := copies.Value;
+end;
+
+procedure Tf_print.Edit1Change(Sender: TObject);
+begin
+  cm.PrintDesc:=Edit1.Text;
 end;
 
 procedure Tf_print.FormCreate(Sender: TObject);
@@ -182,14 +205,20 @@ case cm.PrintMethod of
     GetPrinterResolution(cm.prtname,i);
     PrinterInfo.Caption:=rsprinter+blank+cm.prtname+' @ '+inttostr(i)+' DPI';
     GroupBox1.Visible:=true;
+    CopyPanel.Visible:=true;
+    Preview.Visible:=true;
     end;
 1 : begin
     PrinterInfo.Caption:=rsPostscript+' @ '+inttostr(cm.PrinterResolution)+' DPI';
     GroupBox1.Visible:=true;
+    CopyPanel.Visible:=false;
+    Preview.Visible:=false;
     end;
 2 : begin
     PrinterInfo.Caption:=rsBitmap+'  @ '+inttostr(cm.PrinterResolution)+' DPI';
     GroupBox1.Visible:=false;
+    CopyPanel.Visible:=false;
+    Preview.Visible:=false;
     end;
 end;
 end;

@@ -720,7 +720,7 @@ type
     procedure StartServer;
     procedure StopServer;
     function GetUniqueName(cname:string; forcenumeric:boolean):string;
-    procedure showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
+    procedure showdetailinfo(chart:string;ra,dec:double;cat,nm,desc:string);
     procedure CenterFindObj(chart:string);
     procedure NeighborObj(chart:string);
     procedure ConnectDB;
@@ -1822,6 +1822,7 @@ end;
 
 procedure Tf_main.EditCopy1Execute(Sender: TObject);
 var savelabel:boolean;
+    bmp:TBitmap;
 begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with Tf_chart(MultiDoc1.ActiveObject) do begin
@@ -1829,13 +1830,16 @@ if MultiDoc1.ActiveObject is Tf_chart then
 {$ifdef trace_debug}
  WriteTrace('EditCopy1Execute');
 {$endif}
+    bmp:=TBitmap.Create;
     try
       if savelabel then begin
          sc.cfgsc.Editlabels:=false;
          sc.Refresh;
       end;
-      Clipboard.Assign(sc.plot.cbmp);
+      bmp.Assign(sc.plot.cbmp);
+      Clipboard.Assign(bmp);
     finally
+      bmp.free;
       if savelabel then begin
          sc.cfgsc.Editlabels:=true;
          sc.Refresh;
@@ -1848,11 +1852,12 @@ procedure Tf_main.Print1Execute(Sender: TObject);
 begin
 f_print.cm:=cfgm;
 formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
-if f_print.showmodal=mrOK then begin
+f_print.showmodal;
+if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
  cfgm:=f_print.cm;
  if MultiDoc1.ActiveObject is Tf_chart then
    with MultiDoc1.ActiveObject as Tf_chart do
-      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm);
+      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
 end;
 end;
 
@@ -2721,6 +2726,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 {$endif}
         Refresh;
         if itype=ftlin then begin
+            sc.cfgsc.FindCat:='';
             sc.cfgsc.FindName:=Num;
             sc.cfgsc.FindDesc:='';
             sc.cfgsc.FindRA:=ar1;
@@ -3687,6 +3693,8 @@ cfgm.PrintMethod:=0;
 cfgm.PrintCmd1:=DefaultPrintCmd1;
 cfgm.PrintCmd2:=DefaultPrintCmd2;
 cfgm.PrintTmpPath:=expandfilename(TempDir);
+cfgm.PrintDesc:='';
+cfgm.PrintCopies:=1;
 cfgm.PrtLeftMargin:=15;
 cfgm.PrtRightMargin:=15;
 cfgm.PrtTopMargin:=10;
@@ -3950,6 +3958,7 @@ def_cfgsc.MagLabel:=false;
 def_cfgsc.NameLabel:=false;
 def_cfgsc.ConstFullLabel:=true;
 def_cfgsc.DrawAllStarLabel:=false;
+def_cfgsc.MovedLabelLine:=true;
 def_cfgsc.ConstLatinLabel:=false;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
@@ -3963,12 +3972,14 @@ def_cfgsc.poscustomlabels:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,1]:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,2]:=0;
 for i:=1 to 10 do def_cfgsc.circle[i,3]:=0;
+for i:=1 to 10 do def_cfgsc.circle[i,4]:=0;
 for i:=1 to 10 do def_cfgsc.circleok[i]:=false;
 for i:=1 to 10 do def_cfgsc.circlelbl[i]:='';
 for i:=1 to 10 do def_cfgsc.rectangle[i,1]:=0;
 for i:=1 to 10 do def_cfgsc.rectangle[i,2]:=0;
 for i:=1 to 10 do def_cfgsc.rectangle[i,3]:=0;
 for i:=1 to 10 do def_cfgsc.rectangle[i,4]:=0;
+for i:=1 to 10 do def_cfgsc.rectangle[i,5]:=0;
 for i:=1 to 10 do def_cfgsc.rectangleok[i]:=false;
 for i:=1 to 10 do def_cfgsc.rectanglelbl[i]:='';
 def_cfgsc.CircleLabel:=true;
@@ -4475,6 +4486,7 @@ csc.CommagDiff:=ReadFloat(section,'CommagDiff',csc.CommagDiff);
 csc.MagLabel:=ReadBool(section,'MagLabel',csc.MagLabel);
 csc.NameLabel:=ReadBool(section,'NameLabel',csc.NameLabel);
 csc.DrawAllStarLabel:=ReadBool(section,'DrawAllStarLabel',csc.DrawAllStarLabel);
+csc.MovedLabelLine:=ReadBool(section,'MovedLabelLine',csc.MovedLabelLine);
 csc.ConstFullLabel:=ReadBool(section,'ConstFullLabel',csc.ConstFullLabel);
 csc.ConstLatinLabel:=ReadBool(section,'ConstLatinLabel',csc.ConstLatinLabel);
 csc.PlanetParalaxe:=ReadBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
@@ -4558,10 +4570,13 @@ for i:=1 to csc.nummodlabels do begin
    csc.modlabels[i].id:=ReadInteger(section,'labelid'+inttostr(i),0);
    csc.modlabels[i].dx:=ReadInteger(section,'labeldx'+inttostr(i),0);
    csc.modlabels[i].dy:=ReadInteger(section,'labeldy'+inttostr(i),0);
+   csc.modlabels[i].ra:=ReadFloat(section,'labelra'+inttostr(i),0);
+   csc.modlabels[i].dec:=ReadFloat(section,'labeldec'+inttostr(i),0);
    csc.modlabels[i].labelnum:=ReadInteger(section,'labelnum'+inttostr(i),1);
    csc.modlabels[i].fontnum:=ReadInteger(section,'labelfont'+inttostr(i),2);
    csc.modlabels[i].txt:=ReadString(section,'labeltxt'+inttostr(i),'');
    csc.modlabels[i].align:=TLabelAlign(ReadInteger(section,'labelalign'+inttostr(i),ord(laLeft)));
+   csc.modlabels[i].useradec:=ReadBool(section,'labeluseradec'+inttostr(i),false);
    csc.modlabels[i].hiden:=ReadBool(section,'labelhiden'+inttostr(i),false);
 end;
 except
@@ -5136,6 +5151,7 @@ WriteFloat(section,'CommagDiff',csc.CommagDiff);
 WriteBool(section,'MagLabel',csc.MagLabel);
 WriteBool(section,'NameLabel',csc.NameLabel);
 WriteBool(section,'DrawAllStarLabel',csc.DrawAllStarLabel);
+WriteBool(section,'MovedLabelLine',csc.MovedLabelLine);
 WriteBool(section,'ConstFullLabel',csc.ConstFullLabel);
 WriteBool(section,'ConstLatinLabel',csc.ConstLatinLabel);
 WriteBool(section,'PlanetParalaxe',csc.PlanetParalaxe);
@@ -5204,10 +5220,13 @@ for i:=1 to csc.nummodlabels do begin
    WriteInteger(section,'labelid'+inttostr(i),csc.modlabels[i].id);
    WriteInteger(section,'labeldx'+inttostr(i),csc.modlabels[i].dx);
    WriteInteger(section,'labeldy'+inttostr(i),csc.modlabels[i].dy);
+   WriteFloat(section,'labelra'+inttostr(i),csc.modlabels[i].ra);
+   WriteFloat(section,'labeldec'+inttostr(i),csc.modlabels[i].dec);
    WriteInteger(section,'labelnum'+inttostr(i),csc.modlabels[i].labelnum);
    WriteInteger(section,'labelfont'+inttostr(i),csc.modlabels[i].fontnum);
    WriteString(section,'labeltxt'+inttostr(i),csc.modlabels[i].txt);
    WriteInteger(section,'labelalign'+inttostr(i),ord(csc.modlabels[i].align));
+   WriteBool(section,'labeluseradec'+inttostr(i),csc.modlabels[i].useradec);
    WriteBool(section,'labelhiden'+inttostr(i),csc.modlabels[i].hiden);
 end;
 section:='custom_labels';
@@ -6494,12 +6513,13 @@ f_info.show;
 f_info.bringtofront;
 end;
 
-procedure Tf_main.showdetailinfo(chart:string;ra,dec:double;nm,desc:string);
+procedure Tf_main.showdetailinfo(chart:string;ra,dec:double;cat,nm,desc:string);
 var i : integer;
 begin
 for i:=0 to MultiDoc1.ChildCount-1 do
  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
    if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+      sc.cfgsc.FindCat:=trim(cat);
       sc.cfgsc.FindRa:=ra;
       sc.cfgsc.FindDec:=dec;
       sc.cfgsc.FindDesc:=desc;

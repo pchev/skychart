@@ -1,7 +1,7 @@
 object f_image: Tf_image
-  Left = 393
+  Left = 50
   Height = 407
-  Top = 106
+  Top = 101
   Width = 615
   HorzScrollBar.Increment = 61
   HorzScrollBar.Page = 614
@@ -17,8 +17,7 @@ object f_image: Tf_image
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   ParentFont = True
-  Position = poScreenCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Image1: TZoomImage
     Left = 0
     Height = 265
@@ -35,28 +34,29 @@ object f_image: Tf_image
   end
   object Panel1: TPanel
     Left = 0
-    Height = 28
+    Height = 27
     Top = 0
     Width = 615
     Align = alTop
+    Alignment = taLeftJustify
     AutoSize = True
-    ClientHeight = 28
+    ClientHeight = 27
     ClientWidth = 615
     FullRepaint = False
     TabOrder = 0
     TabStop = True
     object Label1: TLabel
-      Left = 241
-      Height = 11
+      Left = 320
+      Height = 18
       Top = 7
-      Width = 23
+      Width = 43
       Caption = 'Label1'
       ParentColor = False
     end
     object Button1: TButton
       Left = 1
       Height = 25
-      Top = 2
+      Top = 1
       Width = 75
       BorderSpacing.InnerBorder = 4
       Caption = 'Close'
@@ -64,7 +64,7 @@ object f_image: Tf_image
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 81
+      Left = 160
       Height = 25
       Top = 1
       Width = 75
@@ -74,20 +74,29 @@ object f_image: Tf_image
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 161
+      Left = 240
       Height = 25
-      Top = 2
+      Top = 1
       Width = 75
       BorderSpacing.InnerBorder = 4
       Caption = 'Zoom -'
       OnClick = Button3Click
       TabOrder = 2
     end
+    object ButtonPrint: TButton
+      Left = 80
+      Height = 25
+      Top = 1
+      Width = 75
+      Caption = 'Print'
+      ModalResult = 6
+      TabOrder = 3
+    end
   end
   object VScrollBar: TScrollBar
     Left = 600
-    Height = 364
-    Top = 28
+    Height = 365
+    Top = 27
     Width = 15
     Align = alRight
     Kind = sbVertical

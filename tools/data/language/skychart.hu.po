@@ -2202,6 +2202,10 @@ msgstr "Információ"
 msgid "Information detail"
 msgstr "Információs ablak"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 #| msgid "Initialize Database"
 msgid "Initialize database"
@@ -2986,6 +2990,10 @@ msgstr "%s Nem található!%sA katalógus nincs installálva, vagy rossz az elé
 msgid "Now"
 msgstr "Most"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Fájlok száma"
@@ -3079,6 +3087,10 @@ msgstr "Kifutó katalógusok"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Eltolás"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3439,6 +3451,10 @@ msgstr "Nyomás (milibár)"
 msgid "<<   Prev"
 msgstr "<< Előző"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Nyomtatás"
@@ -3468,6 +3484,10 @@ msgstr "Nyomtató beállítás"
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Nyomtatás módja"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -4132,6 +4152,10 @@ msgstr "IR változók mutatása"
 #| msgid "Show Labels"
 msgid "Show labels"
 msgstr "Címkék mutatása"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 #| msgid "Show Lines"

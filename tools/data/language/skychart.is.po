@@ -2407,6 +2407,10 @@ msgstr "Upplýsingar"
 msgid "Information detail"
 msgstr "Nákæmar upplýsingar"
 
+#: u_translation.rsinformationf
+msgid "Information from catalog"
+msgstr ""
+
 #: u_translation.rsinitializeda
 #, fuzzy
 #| msgid "Initialize Database"
@@ -3261,6 +3265,10 @@ msgstr "%s Finnst ekki!%sEf til vill er skráin ekki innsett eða röng slóð �
 msgid "Now"
 msgstr "Núna"
 
+#: u_translation.rsnumberofcopi
+msgid "Number of copies"
+msgstr ""
+
 #: u_translation.rsnumberoffile
 msgid "Number of files"
 msgstr "Fjöldi skráa"
@@ -3364,6 +3372,10 @@ msgstr "Úrelt"
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Hliðrun"
+
+#: u_translation.rsoffsetlabel
+msgid "Offset label"
+msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
@@ -3753,6 +3765,10 @@ msgstr "Þrýstingur (millibör)"
 msgid "<<   Prev"
 msgstr "<<   Fyrra"
 
+#: u_translation.rspreview
+msgid "Preview"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "Prenta"
@@ -3784,6 +3800,10 @@ msgstr "Upps. prent."
 #: u_translation.rsprintmethod
 msgid "Print method"
 msgstr "Aðferð við prentun"
+
+#: u_translation.rsprintpreview
+msgid "Print Preview"
+msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -4514,6 +4534,10 @@ msgstr "Birta óreglul. br.stj."
 #| msgid "Show Labels"
 msgid "Show labels"
 msgstr "Birta tákn"
+
+#: u_translation.rsshowlinefrom
+msgid "Show line from moved label to object"
+msgstr ""
 
 #: u_translation.rsshowlines
 #, fuzzy

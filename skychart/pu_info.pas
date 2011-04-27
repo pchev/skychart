@@ -36,7 +36,7 @@ uses u_help, u_translation, u_constant, u_util,
 type
   Tistrfunc = procedure(i:integer; var txt:string) of object;
   Tint1func = procedure(i:integer) of object;
-  Tdetinfo  = procedure(chart:string;ra,dec:double;nm,desc:string) of object;
+  Tdetinfo  = procedure(chart:string;ra,dec:double;cat,nm,desc:string) of object;
 
   { Tf_info }
 
@@ -196,7 +196,7 @@ procedure Tf_info.ComboBox1Change(Sender: TObject);
 begin
 if ComboBox1.ItemIndex>0 then begin
   StringGrid2.SortOrder:=soAscending;
-  StringGrid2.SortColRow(true,ComboBox1.ItemIndex-1);
+  StringGrid2.SortColRow(true,ComboBox1.ItemIndex);
   SearchPos:=0;
   SearchStr:='';
   StringGrid2.TopRow:=1;
@@ -215,7 +215,7 @@ with sender as TStringGrid do begin
    s2:=Cells[BCol,BRow];
 end;
 i1:=1; i2:=1;
-if (ACol=4) and (BCol=4) then begin  //magnitude
+if (ACol=5) and (BCol=5) then begin  //magnitude
    p:=pos(':',s1);
    if p>0 then buf:=copy(s1,p+1,999) else buf:=s1;
    val(buf,n1,i1);
@@ -275,24 +275,25 @@ end;
 procedure Tf_info.StringGrid2DblClick(Sender: TObject);
 var col,row,i:integer;
     ra,dec : double;
-    buf,s,desc,nm : string;
+    buf,s,desc,nm,cat : string;
 begin
 StringGrid2.MouseToCell(MouseX, MouseY, Col, Row);
-buf:=StringGrid2.Cells[0,Row];
-ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
 buf:=StringGrid2.Cells[1,Row];
+ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
+buf:=StringGrid2.Cells[2,Row];
 s:=copy(buf,1,1);
 dec:=strtofloat(s+copy(buf,2,2))+strtofloat(s+copy(buf,4+length(ldeg),2))/60+strtofloat(s+copy(buf,6+length(ldeg)+length(lmin),4))/3600;
-nm:=StringGrid2.Cells[3,Row];
+nm:=StringGrid2.Cells[4,Row];
+cat:=StringGrid2.Cells[0,Row];
 desc:='';
-for i:=0 to StringGrid2.ColCount-1 do begin
+for i:=1 to StringGrid2.ColCount-1 do begin
   buf:=trim(StringGrid2.Cells[i,Row]);
   if buf>'' then begin
     if desc>'' then desc:=desc+tab;
     desc:=desc+buf;
   end;
 end;
-if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,nm,desc);
+if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,cat,nm,desc);
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
@@ -380,7 +381,7 @@ n:=0;
 repeat
   repeat
     inc(SearchPos);
-    if pos(SearchStr,UpperCase(StringGrid2.Cells[3,SearchPos]))>0 then begin
+    if pos(SearchStr,UpperCase(StringGrid2.Cells[4,SearchPos]))>0 then begin
       StringGrid2.TopRow:=SearchPos;
       StringGrid2.Selection:=rect(0,SearchPos,StringGrid2.ColCount-1,SearchPos);
       ok:=true;
@@ -480,11 +481,12 @@ StringGrid2.Clear;
 StringGrid2.ColCount:=colc;
 StringGrid2.RowCount:=rowc+1;
 StringGrid2.FixedRows:=1;
-StringGrid2.Cells[0,0]:=rsRA;
-StringGrid2.Cells[1,0]:=rsDEC;
-StringGrid2.Cells[2,0]:=rsType;
-StringGrid2.Cells[3,0]:=rsName;
-StringGrid2.Cells[4,0]:=rsMagn;
+StringGrid2.Cells[0,0]:=rsCatalog;
+StringGrid2.Cells[1,0]:=rsRA;
+StringGrid2.Cells[2,0]:=rsDEC;
+StringGrid2.Cells[3,0]:=rsType;
+StringGrid2.Cells[4,0]:=rsName;
+StringGrid2.Cells[5,0]:=rsMagn;
 // fill the table
 rowc:=1;
 colc:=0;

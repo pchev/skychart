@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation, u_util, u_constant, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, LazHelpHTML, Htmlview;
+  Buttons, LazHelpHTML, Htmlview, Htmlsubs;
 
 type
   Tstr1func = procedure(txt:string) of object;
@@ -56,6 +56,8 @@ type
     procedure Button3Click(Sender: TObject);
     procedure CopyExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure HTMLViewer1ImageRequest(Sender: TObject; const SRC: string;
+      var Stream: TMemoryStream);
     procedure SelectAllExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -118,6 +120,24 @@ begin
   {$ifdef darwin}   { TODO : Check Mac OS X Bringtofront when called from popupmenu }
   timer1.Enabled:=true;
   {$endif}
+end;
+
+procedure Tf_detail.HTMLViewer1ImageRequest(Sender: TObject; const SRC: string; var Stream: TMemoryStream);
+var png: TPortableNetworkGraphic;
+    bmp: TBitmap;
+begin
+  // bmp and jpg load nativelly.
+  if LowerCase(ExtractFileExt(src))='.png' then begin
+    Stream:=TMemoryStream.Create;
+    bmp:=TBitmap.Create;
+    png:=TPortableNetworkGraphic.Create;
+    png.LoadFromFile(src);
+    bmp.Assign(png);
+    bmp.SaveToStream(Stream);
+    Stream.position:=0;
+    bmp.free;
+    png.free;
+  end;
 end;
 
 procedure Tf_detail.Timer1Timer(Sender: TObject);

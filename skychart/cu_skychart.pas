@@ -46,11 +46,12 @@ Tskychart = class (TComponent)
     Fcdb: Tcdcdb;
     FShowDetailXY: Tint2func;
     fsat: textfile;
+    constlabelindex:integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
-    procedure EditLabelPos(lnum,x,y: integer);
-    procedure EditLabelTxt(lnum,x,y: integer);
+    procedure EditLabelPos(lnum,x,y: integer;moderadec:boolean);
+    procedure EditLabelTxt(lnum,x,y: integer;mode:boolean);
     procedure DefaultLabel(lnum: integer);
     procedure DeleteLabel(lnum: integer);
     procedure LabelClick(lnum: integer);
@@ -725,7 +726,7 @@ cfgsc.lastJDchart:=cfgsc.JDchart;
 saveaz:= cfgsc.acentre;
 if not TrackAltAz then begin
   Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,cfgsc.acentre,cfgsc.hcentre,cfgsc) ;
-  if abs(cfgsc.hcentre-pid2)<2*minarc then begin
+  if abs(cfgsc.hcentre-pid2)<max(10*minarc,(4/cfgsc.BxGlb)) then begin
      cfgsc.acentre:=saveaz;
   end;
 end;
@@ -1046,7 +1047,7 @@ var rec:GcatRec;
                   begin
                     Drawing;
                   end;
-              if rec.neb.messierobject or (rec.neb.mag<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
+              if rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
                  if rec.options.ShortName='SAC' then al:=laLeft
                                                 else al:=laRight;
                  SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al);
@@ -1771,6 +1772,7 @@ begin
  cfgsc.FindPM:=cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec];
  cfgsc.FindSize:=0;
  cfgsc.FindType:=rec.options.rectype;
+ cfgsc.FindCat:=rec.options.ShortName;
  desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+tab+DEpToStr(rad2deg*rec.dec)+tab;
  case rec.options.rectype of
  rtStar: begin   // stars
@@ -1983,6 +1985,7 @@ if result then begin
    cfgsc.TrackRA:=rec.ra;
    cfgsc.TrackDec:=rec.dec;
 end else begin
+   cfgsc.FindCat:='';
 // search solar system object
    if cfgsc.ShowPlanetValid then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
@@ -2024,7 +2027,7 @@ begin
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
       FormatCatRec(rec,desc);
-      text:=text+desc+crlf;
+      text:=text+cfgsc.FindCat+tab+desc+crlf;
       inc(i);
    end;   
    ok:=fcatalog.FindatPos(cat,x1,y1,x2,y2,true,trunc,true,cfgsc,rec);
@@ -2039,7 +2042,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+desc+crlf;
+      text:=text+' '+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findplanet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
@@ -2053,7 +2056,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+desc+crlf;
+      text:=text+' '+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findasteroid(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
@@ -2067,7 +2070,7 @@ begin
    projection(cfgsc.findra,cfgsc.finddec,xx1,yy1,true,cfgsc) ;
    windowxy(xx1,yy1,xx,yy,cfgsc);
    if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-      text:=text+desc+crlf;
+      text:=text+' '+tab+desc+crlf;
       inc(i);
    end;
    ok:=fplanet.findcomet(x1,y1,x2,y2,true,cfgsc,n,m,d,desc,trunc);
@@ -2595,7 +2598,7 @@ if cfgsc.ProjPole=Altaz then begin
                  psf[j].y:=ps[1,j];
               end;
               // draw filled polygon
-              hbmp.FillPolyAntialias(psf,col1);
+              hbmp.FillPoly(psf,col1,dmset);
             end else begin
               // draw line
               Fplot.BGRADrawLine(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],col1,1,hbmp);
@@ -3184,6 +3187,7 @@ begin
       if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter)
                               else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter);
   end;
+  constlabelindex:=numlabels;
 end;
 
 procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
@@ -3205,12 +3209,13 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
 end;
 end;
 
-procedure Tskychart.EditLabelPos(lnum,x,y: integer);
+procedure Tskychart.EditLabelPos(lnum,x,y: integer;moderadec:boolean);
 var
     i,j,id: integer;
     labelnum,fontnum:byte;
     Lalign: TLabelAlign;
     txt: string;
+    ra,dec:double;
 begin
 i:=-1;
 txt:=labels[lnum].txt;
@@ -3235,17 +3240,25 @@ if i<0 then begin
      cfgsc.posmodlabels:=1;
    i:=cfgsc.posmodlabels;
 end;
-cfgsc.modlabels[i].dx:=x-round(labels[lnum].x);
-cfgsc.modlabels[i].dy:=y-round(labels[lnum].y);
+cfgsc.modlabels[i].useradec:=moderadec;
+if moderadec then begin
+  GetADxy(x,y,ra,dec,cfgsc);
+  cfgsc.modlabels[i].ra:=ra;
+  cfgsc.modlabels[i].dec:=dec;
+end else begin
+  cfgsc.modlabels[i].dx:=x-round(labels[lnum].x);
+  cfgsc.modlabels[i].dy:=y-round(labels[lnum].y);
+end;
 cfgsc.modlabels[i].txt:=txt;
 cfgsc.modlabels[i].align:=Lalign;
 cfgsc.modlabels[i].labelnum:=labelnum;
 cfgsc.modlabels[i].fontnum:=fontnum;
 cfgsc.modlabels[i].id:=id;
 cfgsc.modlabels[i].hiden:=false;
+Refresh;
 end;
 
-procedure Tskychart.EditLabelTxt(lnum,x,y: integer);
+procedure Tskychart.EditLabelTxt(lnum,x,y: integer;mode:boolean);
 var i,j,id: integer;
     labelnum,fontnum:byte;
     Lalign: TLabelAlign;
@@ -3308,6 +3321,7 @@ if f1.ShowModal=mrOK then begin
      else
        cfgsc.posmodlabels:=1;
      i:=cfgsc.posmodlabels;
+     cfgsc.modlabels[i].useradec:=False;
      cfgsc.modlabels[i].dx:=0;
      cfgsc.modlabels[i].dy:=0;
    end;
@@ -3396,6 +3410,7 @@ if i<0 then begin
      cfgsc.posmodlabels:=1;
    i:=cfgsc.posmodlabels;
 end;
+cfgsc.modlabels[i].useradec:=false;
 cfgsc.modlabels[i].dx:=0;
 cfgsc.modlabels[i].dy:=0;
 cfgsc.modlabels[i].txt:=txt;
@@ -3441,11 +3456,13 @@ end;
 
 function Tskychart.DrawLabels:boolean;
 var i,j: integer;
-    x,y,r: single;
+    x,y,r,x0,y0: single;
+    x1,y1: double;
     labelnum,fontnum:byte;
     txt:string;
     skiplabel:boolean;
     al,av: TLabelAlign;
+    ts:TSize;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
@@ -3456,6 +3473,8 @@ for i:=1 to numlabels do begin
   skiplabel:=false;
   x:=labels[i].x;
   y:=labels[i].y;
+  x0:=x;
+  y0:=y;
   r:=labels[i].r;
   al:=labels[i].align;
   av:=laCenter;
@@ -3490,15 +3509,28 @@ for i:=1 to numlabels do begin
   for j:=1 to cfgsc.nummodlabels do
      if labels[i].id=cfgsc.modlabels[j].id then begin
         skiplabel:=cfgsc.modlabels[j].hiden;
-        txt:=cfgsc.modlabels[j].txt;
+        if i>constlabelindex then txt:=cfgsc.modlabels[j].txt;
         labelnum:=cfgsc.modlabels[j].labelnum;
         fontnum:=cfgsc.modlabels[j].fontnum;
-        x:=x+cfgsc.modlabels[j].dx*Fplot.cfgchart.drawsize;
-        y:=y+cfgsc.modlabels[j].dy*Fplot.cfgchart.drawsize;
+        if cfgsc.modlabels[j].useradec then begin
+          projection(cfgsc.modlabels[j].ra,cfgsc.modlabels[j].dec,x1,y1,false,cfgsc) ;
+          WindowXY(x1,y1,x,y,cfgsc);
+          r:=-1;
+        end else begin
+          x:=x+cfgsc.modlabels[j].dx*Fplot.cfgchart.drawsize;
+          y:=y+cfgsc.modlabels[j].dy*Fplot.cfgchart.drawsize;
+        end;
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+  if not skiplabel then begin
+      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+      if cfgsc.MovedLabelLine and (i>constlabelindex)and(sqrt((x-x0)*(x-x0)+(y-y0)*(y-y0))>30) then begin
+        if Fplot.cfgplot.UseBMP then ts:=Fplot.cbmp.TextSize(txt)
+           else ts:=Fplot.cnv.TextExtent(txt);
+        Fplot.PlotLine(x0,y0,x+ts.cx/2,y+ts.cy/2,Fplot.cfgplot.color[15],1,psdot);
+      end;
+  end;
 end;
 if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
@@ -3531,11 +3563,20 @@ var x1,y1,x2,y2,r : double;
     pa,xx1,xx2,yy1,yy2,rot,o : single;
     spa,cpa:extended;
     p : array [0..4] of Tpoint;
+    col: TColor;
+    lbl: string;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
 rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
 for i:=1 to 10 do if cfgsc.circleok[i] then begin
+    if cfgsc.circle[i,4]=0 then begin
+      col:=Fplot.cfgplot.Color[18];
+      lbl:=cfgsc.circlelbl[i];
+    end else begin
+      col:=AddColor($ffffff,-Fplot.cfgplot.Color[18]);
+      lbl:=cfgsc.circlelbl[i]+blank+formatfloat(f1,cfgsc.circle[i,2]);
+    end;
     pa:=deg2rad*cfgsc.circle[i,2]*cfgsc.FlipX;
     if cfgsc.FlipY<0 then pa:=pi-pa;
     sincos(pa+rot,spa,cpa);
@@ -3545,16 +3586,23 @@ for i:=1 to 10 do if cfgsc.circleok[i] then begin
     r:=deg2rad*cfgsc.circle[i,1]/120;
     WindowXY(x2-r,y2-r,xa,ya,cfgsc);
     WindowXY(x2+r,y2+r,xb,yb,cfgsc);
-    Fplot.PlotCircle(xa,ya,xb,yb,Fplot.cfgplot.Color[18],moving);
+    Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
     if cfgsc.CircleLabel then begin
       sz:=trunc(abs(cfgsc.BxGlb*r));
       xla:=abs(xa+xb)/2;
       yla:=abs(ya+yb)/2;
       lid:=GetId(cfgsc.circlelbl[i]);
-      if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,cfgsc.circlelbl[i],laBottom);
+      if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom);
     end;
 end;
 for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
+    if cfgsc.rectangle[i,5]=0 then begin
+      col:=Fplot.cfgplot.Color[18];
+      lbl:=cfgsc.rectanglelbl[i];
+    end else begin
+      col:=$ffffff xor Fplot.cfgplot.Color[0];
+      lbl:=cfgsc.rectanglelbl[i]+blank+formatfloat(f1,cfgsc.rectangle[i,3]);
+     end;
     pa:=deg2rad*cfgsc.rectangle[i,3]*cfgsc.FlipX;
     if cfgsc.FlipY<0 then pa:=pi-pa;
     sincos(pa+rot,spa,cpa);
@@ -3574,13 +3622,13 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
     WindowXY(x2-xx2,y2+yy2,xa,ya,cfgsc);
     p[3]:=Point(round(xa),round(ya));
     p[4]:=p[0];
-    Fplot.PlotPolyline(p,Fplot.cfgplot.Color[18],moving);
+    Fplot.PlotPolyline(p,col,moving);
     if cfgsc.RectangleLabel then begin
       xla:=abs(p[0].X+p[1].X)/2;
       yla:=abs(p[0].Y+p[1].Y)/2;
       sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
       lid:=GetId(cfgsc.rectanglelbl[i]);
-      if sz>=20 then SetLabel(lid,xla,yla,0,2,7,cfgsc.rectanglelbl[i],laBottom);
+      if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom);
     end;
   end;
 end;

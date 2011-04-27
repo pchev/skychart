@@ -30,7 +30,11 @@ uses Math, u_util, u_translation,
   LResources;
 
 type
+
+  { Tf_image }
+
   Tf_image = class(TForm)
+    ButtonPrint: TButton;
     Image1: TZoomImage;
     Panel1: TPanel;
     VScrollBar: TScrollBar;
@@ -76,6 +80,7 @@ begin
 Button1.caption:=rsClose;
 Button2.caption:=rsZoom;
 Button3.caption:=rsZoom2;
+ButtonPrint.Caption:=rsPrint;
 end;
 
 Procedure Tf_image.LoadImage(f : string);
@@ -96,7 +101,7 @@ end;
 
 Procedure Tf_image.Zoomplus;
 begin
-   Image1.Zoom:=1.5*Image1.Zoom;
+   Image1.Zoom:=sqrt(2)*Image1.Zoom;
    Image1.Draw;
    SetScrollBar;
    Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
@@ -104,7 +109,7 @@ end;
 
 Procedure Tf_image.Zoommoins;
 begin
-   Image1.Zoom:=Image1.Zoom/1.5;
+   Image1.Zoom:=Image1.Zoom/sqrt(2);
    if abs(Image1.Zoom-1)<0.2 then Image1.Zoom:=1;
    Image1.Draw;
    SetScrollBar;
