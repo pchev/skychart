@@ -1,5 +1,12 @@
 Version 3.3svn  Notes de la version
 
+- Rotation de la camera ou du guideur avec les flèches gauche ou droite. Activation avec les touches Shift+C, Shift+G ou Shift+S
+- "Déplacer le label" modifie les coordonnées du label. Utiliser "Décalage du label" pour obtenir l'ancien fonctionnement.
+- Ajout d'une ligne depuis les labels déplacés. Option de configuration dans Affichage/Labels.
+- Ajout d'image des nébuleuses et des planètes dans la fenêtre d'information détaillée.
+- Ajout du nom du catalogue source dans la liste d'objets et la fenêtre d'information détaillée.
+- Ajout d'une description d'impression et du nombre de copies.
+- Ajout de la prévisualisation d'impression.
 - Option dans Configuration/Affichage pour le dessin avec antialias de la carte à l'écran, peut ralentir l'affichage.
 - List des observatoires favoris, nouvelle fenêtre pour la base de donnée des observatoires.
 - Localisation par Internet de votre emplacement.
