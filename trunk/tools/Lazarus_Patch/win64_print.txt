@@ -1,0 +1,6 @@
+Fix printer setup dialog on Win64 
+see http://www.ap-i.net/mantis/view.php?id=805
+
+Get Lazarus trunk or apply this three patches to Lazarus 0.9.30 
+
+
