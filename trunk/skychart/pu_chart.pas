@@ -2254,9 +2254,9 @@ precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
 txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
-txt:=txt+html_b+rsHourAngle+':'+htms_b+armtostr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24))+html_br;
-txt:=txt+html_b+rsAzimuth+':'+htms_b+demtostr(rad2deg*a)+html_br;
-txt:=txt+html_b+rsAltitude+':'+htms_b+demtostr(rad2deg*h)+html_br;
+txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24),-1)+html_br;
+txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
+txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
 // rise/set time
 if (otype='P') then begin // planet
    sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
