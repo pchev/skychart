@@ -17,9 +17,9 @@ Version 3.3svn release Notes
 - Add artificials satellites to the calendar. Click in a line to display the satellite pass on the map. You need to install Wine on Linux and Mac.
 - Add solar system objects velocity information.
 - Copy current coordinates from right click menu.
-- Double click and objet directl open the detail window.
+- Double click and objet directly open the detail window.
 - Ctrl + mouse over an object show information in status bar.
-- Fill below horizon area with horizon color (not on Linux)
+- Fill below horizon area with horizon color.
 - No confirmation to save on exit if this is selected in the menu.
 - Locked object setting is now saved with the configuration, beware you can get a "below the horizon" the next time you launch the program.
 - Option to reset initial program default.

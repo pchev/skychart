@@ -19,7 +19,7 @@ Version 3.3svn  Notes de la version
 - Copie les coordonnée depuis le menu clic droit.
 - Double clic sur un objet ouvre la fenêtre de détail.
 - Ctrl + déplacement de la souris montre les informations dans la barre d'état.
-- Remplit la zone sous l'horizon avec la couleur de l'horizon. (pas avec Linux)
+- Remplit la zone sous l'horizon avec la couleur de l'horizon.
 - Pas de confirmation pour enregistrer en quittant si c'est selectionné dans le menu.
 - La configuration de l'objet bloqué est maintenant sauvegardée, attention que vous pouvez obtenir "Sous l'horizon" la prochaine fois que vous lancez le programme.
 - Option pour réinitialiser les valeurs par défaut du programme.
