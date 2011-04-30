@@ -4,12 +4,18 @@ unit BGRAGradients;
 
 interface
 
+{ Here are various functions that draw gradients, shadow and lighting }
+
 uses
   Graphics, Classes, BGRABitmap, BGRABitmapTypes, BGRABlend;
 
+{ Creates a bitmap with the specified text horizontally centered and with a shadow }
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
   AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
 
+{----------------------------------------------------------------------}
+{ Functions to draw multiple gradients.
+  See : http://wiki.lazarus.freepascal.org/Double_Gradient#nGradient }
 type
   TnGradientInfo = record
     StartColor,StopColor: TBGRAPixel;
@@ -33,6 +39,13 @@ procedure DoubleGradientAlphaFill(ACanvas: TCanvas; ARect: TRect; AStart1,AStop1
 procedure DoubleGradientAlphaFill(ABitmap: TBGRABitmap; ARect: TRect; AStart1,AStop1,AStart2,AStop2: TBGRAPixel;
                                  ADirection1,ADirection2,ADir: TGradientDirection; AValue: Single);
 
+{----------------------------------------------------------------------}
+{ Phong shading functions. Use a height map (grayscale image or a precise map filled with MapHeightToBGRA)
+  to determine orientation and position of the surface.
+
+  Phong shading consist in adding an ambiant light, a diffuse light (angle between light and object),
+  and a specular light (angle between light, object and observer, i.e. reflected light) }
+
 type
   TRectangleMapOption = (rmoNoLeftBorder,rmoNoTopBorder,rmoNoRightBorder,rmoNoBottomBorder,rmoLinearBorder);
   TRectangleMapOptions = set of TRectangleMapOption;
@@ -40,39 +53,85 @@ type
   { TPhongShading }
 
   TPhongShading = class
-    LightSourceIntensity : Double;
-    LightSourceDistanceTerm,LightSourceDistanceFactor,LightDestFactor : Double;
-    LightColor: TBGRAPixel;
-    AmbientFactor, DiffusionFactor, NegativeDiffusionFactor : Double;
-    SpecularFactor, SpecularIndex : Double;
+    LightSourceIntensity : Double; //global intensity of the light
+
+    LightSourceDistanceTerm,       //minimum distance always added (positive value)
+    LightSourceDistanceFactor,     //how much actual distance is taken into account (usually 0 or 1)
+    LightDestFactor : Double;      //how much the location of the lightened pixel is taken into account (usually 0 or 1)
+
     LightPosition : TPoint;
-    DiffuseSaturation: Boolean;
     LightPositionZ : Integer;
+    LightColor: TBGRAPixel;        //color of the light reflection
+
+    SpecularFactor,                //how much light is reflected (0..1)
+    SpecularIndex : Double;        //how concentrated reflected light is (positive value)
+
+    AmbientFactor,                 //ambiant lighting whereever the point is (0..1)
+    DiffusionFactor,               //diffusion, i.e. how much pixels are lightened by light source (0..1)
+    NegativeDiffusionFactor : Double; //how much hidden surface are darkened (0..1)
+    DiffuseSaturation: Boolean;    //when diffusion saturates, use light color to show it
+
     constructor Create;
+
+    { Render the specified map on the destination bitmap with one solid color. Map altitude
+      indicate the global height of the map. }
     procedure Draw(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
                    Color : TBGRAPixel);
+
+    { Render with a color map of the same size as the height map. Map altitude
+      indicate the global height of the map. }
     procedure Draw(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
                    ColorMap : TBGRABitmap);
+
+    { Draw a cone of the specified color }
     procedure DrawCone(dest: TBGRABitmap; X,Y,Size,Altitude: Integer; Color: TBGRAPixel);
+
+    { Draw a hemisphere of the specified color }
     procedure DrawSphere(dest: TBGRABitmap; bounds: TRect; Altitude: Integer; Color: TBGRAPixel);
+
+    { Draw a rectangle of the specified color }
     procedure DrawRectangle(dest: TBGRABitmap; bounds: TRect; Border,Altitude: Integer; Color: TBGRAPixel; RoundCorners: Boolean; Options: TRectangleMapOptions);
   private
+    { Normalize a vector }
     procedure normalize(var x, y, z: double);
+    { Compute vectorial product }
     procedure vectproduct(u1, u2, u3, v1, v2, v3: integer; out w1, w2, w3: double); overload;
     procedure vectproduct(u1, u2, u3, v1, v2, v3: double; out w1, w2, w3: double); overload;
   end;
 
+{ Create a grayscale height map for a cone }
 function CreateConeMap(size: integer): TBGRABitmap;
+
+{ Create a grayscale height map for a sphere (may not be precise enough) }
 function CreateSphereMap(width,height: integer): TBGRABitmap;
+
+{ Create a precise height map for a sphere (not grayscale anymore but more precise) }
 function CreateSpherePreciseMap(width,height: integer): TBGRABitmap;
+
+{ Create a rectangle height map with a border }
 function CreateRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
+
+{ Create a round rectangle height map with a border }
 function CreateRoundRectangleMap(width,height,border: integer; options: TRectangleMapOptions = []): TBGRABitmap;
-function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
-  VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
-function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
-  VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
+
+{ Get height [0..1] stored in a TBGRAPixel }
 function MapHeight(Color: TBGRAPixel): Single;
+
+{ Get TBGRAPixel to store height [0..1] }
 function MapHeightToBGRA(Height: Single; Alpha: Byte): TBGRAPixel;
+
+{---------- Perlin Noise -------------}
+{ Random image using a superposition of interpolated random values.
+  See : http://wiki.lazarus.freepascal.org/Perlin_Noise
+        http://freespace.virgin.net/hugo.elias/models/m_perlin.htm }
+
+{ Creates a non-tilable random grayscale image }
+function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
+  VerticalPeriod: Single = 1; Exponent: Double = 1; ResampleFilter: TResampleFilter = rfCosine): TBGRABitmap;
+
+{ Creates a tilable random grayscale image }
+function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
+  VerticalPeriod: Single = 1; Exponent: Double = 1; ResampleFilter: TResampleFilter = rfCosine): TBGRABitmap;
 
 implementation
 
@@ -274,6 +333,7 @@ end;
 
 constructor TPhongShading.Create;
 begin
+  //set default values
   LightSourceIntensity := 500;
   LightSourceDistanceTerm := 150;
   LightSourceDistanceFactor := 1;
@@ -315,357 +375,53 @@ begin
   w3 := u1*v2-u2*v1;
 end;
 
+{------------------ Phong drawing ----------------}
+{ Both procedures use the same include }
 procedure TPhongShading.Draw(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
                              Color : TBGRAPixel);
-var
-  //Light source normal.
-  Lx,Ly,Lz: double;
-  //Light source position.
-  dx,dy,dz: integer;
-  //Vector H is the unit normal to the hypothetical surface oriented
-  //halfway between the light direction vector (L) and the viewing vector (V).
-  Hx,Hy,Hz: double;
-
-  procedure CalculateLNandNnH( x,y: integer; z: double;
-                        xn,yn,zn: double; out LdotN, dist, NnH: double); inline;
   var
-    NH: Double;
-  begin
-    LdotN := xn*Lx + yn*Ly + zn*Lz;
-    dist := sqrt((dx - x)*(dx - x) + (dy - y)*(dy - y) + (dz - z)*(dz - z));
+    eColor: TExpandedPixel;
 
-    if LdotN > 0 then
-    begin
-      NH := Hx*xn + Hy*yn + Hz*zn;
-      if NH < 0 then
-      begin
-        NH := 0;
-        NnH := 0;
-      end else
-        NnH := exp(SpecularIndex*ln(NH));
-    end else
-    begin
-      NH := 0;
-      NnH := 0;
-    end;
+  procedure Init;
+  begin
+    eColor := GammaExpansion(color);
   end;
 
-var
-  Iw, Ic: integer; // Ir = intensity of Red, Igb = intensity of green/blue.
-  x,y : integer;  // Coordinates of point on sphere surface.
-  z, xn, yn, zn, LdotN, NnH,
-  dist, distfactor, diffuseterm, specularterm: double;
-  eColor,eLight,ec: TExpandedPixel;
-  mc,mcLeft,mcRight,mcTop,mcBottom: TBGRAPixel;
-  v1x,v1y,v1z,v2x,v2y,v2z: single;
-
-  minx,miny,maxx,maxy: integer;
-  pmap: PBGRAPixel;
-  pdest: PBGRAPixel;
-
-begin
-  if ofsX >= dest.Width then exit;
-  if ofsY >= dest.Height then exit;
-  if ofsX <= -map.Width then exit;
-  if ofsY <= -map.Height then exit;
-  if (map.width = 0) or (map.Height = 0) then exit;
-
-  minx := 0;
-  miny := 0;
-  maxx := map.Width-1;
-  maxy := map.Height-1;
-  if ofsX < 0 then minx := -ofsX;
-  if ofsY < 0 then miny := -ofsY;
-  if OfsX+maxx > dest.width-1 then maxx := dest.width-1-ofsX;
-  if OfsY+maxy > dest.height-1 then maxy := dest.height-1-ofsY;
-
-  dx := LightPosition.X-ofsX;
-  dy := LightPosition.Y-ofsY;
-  dz := LightPositionZ;
-
-  eLight := GammaExpansion(LightColor);
-  eColor := GammaExpansion(color);
-  ec.alpha := eColor.alpha;
-
-  v1x := 1;
-  v1y := 0;
-
-  v2x := 0;
-  v2y := 1;
-
-  dist := 0;
-  LdotN := 0;
-  NnH := 0;
-
-  for y := miny to maxy do
+  {$hints off}
+  function ComputePixel(x,y: integer; ExpandedLightColor: TExpandedPixel; DiffuseLight, SpecularLight: integer; Alpha: Byte): TBGRAPixel; inline;
+  var ec: TExpandedPixel;
   begin
-    pmap := map.ScanLine[y]+minx;
-    mc := BGRAPixelTransparent;
-    mcRight := pmap^;
-    pdest := dest.ScanLine[y+ofsY]+ofsX+minx;
-    for x := minx to maxx do
-    begin
-      mcLeft := mc;
-      mc := mcRight;
-      inc(pmap);
-      if x < map.width-1 then
-        mcRight := pmap^ else
-        mcRight := BGRAPixelTransparent;
-
-      if mc.alpha <> 0 then
-      begin
-        mcTop := map.GetPixel(x,y-1);
-        mcBottom := map.GetPixel(x,y+1);
-        z := MapHeight(mc)*mapAltitude;
-        if mcLeft.alpha = 0 then
-        begin
-          if mcRight.alpha = 0 then
-            v1z := 0
-          else
-            v1z := (MapHeight(mcRight)-MapHeight(mc))*mapAltitude*2;
-        end else
-        begin
-          if mcRight.alpha = 0 then
-            v1z := (MapHeight(mc)-MapHeight(mcLeft))*mapAltitude*2
-          else
-            v1z := (MapHeight(mcRight)-MapHeight(mcLeft))*mapAltitude;
-        end;
-        if mcTop.alpha = 0 then
-        begin
-          if mcBottom.alpha = 0 then
-            v2z := 0
-          else
-            v2z := (MapHeight(mcBottom)-MapHeight(mc))*mapAltitude*2;
-        end else
-        begin
-          if mcBottom.alpha = 0 then
-            v2z := (MapHeight(mc)-MapHeight(mcTop))*mapAltitude*2
-          else
-            v2z := (MapHeight(mcBottom)-MapHeight(mcTop))*mapAltitude;
-        end;
-
-        Lx := dx-x*LightDestFactor;
-        Ly := dy-y*LightDestFactor;
-        Lz := dz-z*LightDestFactor;
-        normalize(Lx,Ly,Lz);
-
-        Hx := Lx + 0;
-        Hy := Ly + 0;
-        Hz := Lz + 1;
-        normalize(Hx,Hy,Hz);
-
-        // xn, yn, and zn are unit normals from the surface.
-        vectproduct(v1x,v1y,v1z,v2x,v2y,v2z,xn,yn,zn);
-        normalize(xn,yn,zn);
-        CalculateLNandNnH(x, y, z, xn, yn, zn, LdotN, dist, NnH);
-        distfactor := LightSourceIntensity / (dist*LightSourceDistanceFactor + LightSourceDistanceTerm);
-        if (LdotN <= 0) then
-        begin
-          //Point is not illuminated by light source.
-          //Use only ambient component and negative diffuse for contrast
-          diffuseterm := distfactor * NegativeDiffusionFactor * LdotN;
-          Ic := round((AmbientFactor + diffuseterm)*256);
-          Iw := 0;
-        end else
-        begin
-          diffuseterm := distfactor * DiffusionFactor * LdotN;
-          specularterm := distfactor * SpecularFactor * NnH;
-          Ic := round((AmbientFactor + diffuseterm)*256);
-          Iw := round(specularterm*256);
-        end;
-        If Ic < 0 then Ic := 0;
-        If Ic > 256 then
-        begin
-          If DiffuseSaturation then Iw := Iw+(Ic-256);
-          Ic := 256;
-        end;
-        if Iw > 256 then Iw := 256;
-        Ic := Ic*(256-Iw) shr 8;
-
-        ec.red := (eColor.Red*Ic+eLight.Red*Iw+128) shr 8;
-        ec.green := (eColor.Green*Ic+eLight.Green*Iw+128) shr 8;
-        ec.blue := (eColor.Blue*Ic+eLight.Blue*Iw+128) shr 8;
-        ec.alpha := mc.alpha shl 8+mc.alpha;
-        DrawPixelInline(pdest, GammaCompression(ec));
-      end;
-      inc(pdest);
-    end;
+    ec.red := (eColor.Red*DiffuseLight+ExpandedLightColor.Red*SpecularLight+128) shr 8;
+    ec.green := (eColor.Green*DiffuseLight+ExpandedLightColor.Green*SpecularLight+128) shr 8;
+    ec.blue := (eColor.Blue*DiffuseLight+ExpandedLightColor.Blue*SpecularLight+128) shr 8;
+    ec.alpha := Alpha shl 8+Alpha;
+    result := GammaCompression(ec);
   end;
-end;
+  {$hints on}
+
+  {$I phongdraw.inc }
 
 procedure TPhongShading.Draw(dest: TBGRABitmap; map: TBGRABitmap;
-  mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRABitmap);
-var
-  //Light source normal.
-  Lx,Ly,Lz: double;
-  //Light source position.
-  dx,dy,dz: integer;
-  //Vector H is the unit normal to the hypothetical surface oriented
-  //halfway between the light direction vector (L) and the viewing vector (V).
-  Hx,Hy,Hz: double;
+            mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRABitmap);
 
-  procedure CalculateLNandNnH( x,y: integer; z: double;
-                        xn,yn,zn: double; out LdotN, dist, NnH: double); inline;
-  var
-    NH: Double;
+  procedure Init;
   begin
-    LdotN := xn*Lx + yn*Ly + zn*Lz;
-    dist := sqrt((dx - x)*(dx - x) + (dy - y)*(dy - y) + (dz - z)*(dz - z));
-
-    if LdotN > 0 then
-    begin
-      NH := Hx*xn + Hy*yn + Hz*zn;
-      if NH < 0 then
-      begin
-        NH := 0;
-        NnH := 0;
-      end else
-        NnH := exp(SpecularIndex*ln(NH));
-    end else
-    begin
-      NH := 0;
-      NnH := 0;
-    end;
   end;
 
-var
-  Iw, Ic: integer; // Ir = intensity of Red, Igb = intensity of green/blue.
-  x,y : integer;  // Coordinates of point on sphere surface.
-  z, xn, yn, zn, LdotN, NnH,
-  dist, distfactor, diffuseterm, specularterm: double;
-  eColor,eLight,ec: TExpandedPixel;
-  mc,mcLeft,mcRight,mcTop,mcBottom: TBGRAPixel;
-  v1x,v1y,v1z,v2x,v2y,v2z: single;
-
-  minx,miny,maxx,maxy: integer;
-  pmap: PBGRAPixel;
-  pdest: PBGRAPixel;
-
-begin
-  if ofsX >= dest.Width then exit;
-  if ofsY >= dest.Height then exit;
-  if ofsX <= -map.Width then exit;
-  if ofsY <= -map.Height then exit;
-  if (map.width = 0) or (map.Height = 0) then exit;
-
-  minx := 0;
-  miny := 0;
-  maxx := map.Width-1;
-  maxy := map.Height-1;
-  if ofsX < 0 then minx := -ofsX;
-  if ofsY < 0 then miny := -ofsY;
-  if OfsX+maxx > dest.width-1 then maxx := dest.width-1-ofsX;
-  if OfsY+maxy > dest.height-1 then maxy := dest.height-1-ofsY;
-
-  dx := LightPosition.X-ofsX;
-  dy := LightPosition.Y-ofsY;
-  dz := LightPositionZ;
-
-  eLight := GammaExpansion(LightColor);
-
-  v1x := 1;
-  v1y := 0;
-
-  v2x := 0;
-  v2y := 1;
-
-  dist := 0;
-  LdotN := 0;
-  NnH := 0;
-
-  for y := miny to maxy do
+  function ComputePixel(x,y: integer; ExpandedLightColor: TExpandedPixel; DiffuseLight, SpecularLight: integer; Alpha: Byte): TBGRAPixel; inline;
+  var ec: TExpandedPixel; eColor: TExpandedPixel;
   begin
-    pmap := map.ScanLine[y]+minx;
-    mc := BGRAPixelTransparent;
-    mcRight := pmap^;
-    pdest := dest.ScanLine[y+ofsY]+ofsX+minx;
-    for x := minx to maxx do
-    begin
-      mcLeft := mc;
-      mc := mcRight;
-      inc(pmap);
-      if x < map.width-1 then
-        mcRight := pmap^ else
-        mcRight := BGRAPixelTransparent;
-
-      if mc.alpha <> 0 then
-      begin
-        mcTop := map.GetPixel(x,y-1);
-        mcBottom := map.GetPixel(x,y+1);
-        z := MapHeight(mc)*mapAltitude;
-        if mcLeft.alpha = 0 then
-        begin
-          if mcRight.alpha = 0 then
-            v1z := 0
-          else
-            v1z := (MapHeight(mcRight)-MapHeight(mc))*mapAltitude*2;
-        end else
-        begin
-          if mcRight.alpha = 0 then
-            v1z := (MapHeight(mc)-MapHeight(mcLeft))*mapAltitude*2
-          else
-            v1z := (MapHeight(mcRight)-MapHeight(mcLeft))*mapAltitude;
-        end;
-        if mcTop.alpha = 0 then
-        begin
-          if mcBottom.alpha = 0 then
-            v2z := 0
-          else
-            v2z := (MapHeight(mcBottom)-MapHeight(mc))*mapAltitude*2;
-        end else
-        begin
-          if mcBottom.alpha = 0 then
-            v2z := (MapHeight(mc)-MapHeight(mcTop))*mapAltitude*2
-          else
-            v2z := (MapHeight(mcBottom)-MapHeight(mcTop))*mapAltitude;
-        end;
-
-        Lx := dx-x*LightDestFactor;
-        Ly := dy-y*LightDestFactor;
-        Lz := dz-z*LightDestFactor;
-        normalize(Lx,Ly,Lz);
-
-        Hx := Lx + 0;
-        Hy := Ly + 0;
-        Hz := Lz + 1;
-        normalize(Hx,Hy,Hz);
-
-        // xn, yn, and zn are unit normals from the surface.
-        vectproduct(v1x,v1y,v1z,v2x,v2y,v2z,xn,yn,zn);
-        normalize(xn,yn,zn);
-        CalculateLNandNnH(x, y, z, xn, yn, zn, LdotN, dist, NnH);
-        distfactor := LightSourceIntensity / (dist*LightSourceDistanceFactor + LightSourceDistanceTerm);
-        if (LdotN <= 0) then
-        begin
-          //Point is not illuminated by light source.
-          //Use only ambient component and negative diffuse for contrast
-          diffuseterm := distfactor * NegativeDiffusionFactor * LdotN;
-          Ic := round((AmbientFactor + diffuseterm)*256);
-          Iw := 0;
-        end else
-        begin
-          diffuseterm := distfactor * DiffusionFactor * LdotN;
-          specularterm := distfactor * SpecularFactor * NnH;
-          Ic := round((AmbientFactor + diffuseterm)*256);
-          Iw := round(specularterm*256);
-        end;
-        If Ic < 0 then Ic := 0;
-        If Ic > 256 then Ic := 256;
-        if Iw > 256 then Iw := 256;
-        Ic := Ic*(256-Iw) shr 8;
-
-        eColor := GammaExpansion(colorMap.GetPixel(x,y));
-
-        ec.red := (eColor.Red*Ic+eLight.Red*Iw+128) shr 8;
-        ec.green := (eColor.Green*Ic+eLight.Green*Iw+128) shr 8;
-        ec.blue := (eColor.Blue*Ic+eLight.Blue*Iw+128) shr 8;
-        ec.alpha := mc.alpha shl 8+mc.alpha;
-        DrawPixelInline(pdest, GammaCompression(ec));
-      end;
-      inc(pdest);
-    end;
+    eColor := GammaExpansion(colorMap.GetPixel(x,y));
+    ec.red := (eColor.Red*DiffuseLight+ExpandedLightColor.Red*SpecularLight+128) shr 8;
+    ec.green := (eColor.Green*DiffuseLight+ExpandedLightColor.Green*SpecularLight+128) shr 8;
+    ec.blue := (eColor.Blue*DiffuseLight+ExpandedLightColor.Blue*SpecularLight+128) shr 8;
+    ec.alpha := Alpha shl 8+Alpha;
+    result := GammaCompression(ec);
   end;
-end;
+
+  {$I phongdraw.inc }
+
+  {------------------ End of phong drawing ----------------}
 
 procedure TPhongShading.DrawCone(dest: TBGRABitmap; X, Y, Size,
   Altitude: Integer; Color: TBGRAPixel);
@@ -771,6 +527,7 @@ begin
      inc(p);
    end;
   end;
+  //antialiased border
   mask := TBGRABitmap.Create(width,height,BGRABlack);
   mask.FillEllipseAntialias(cx,cy,rx,ry,BGRAWhite);
   result.ApplyMask(mask);
@@ -814,6 +571,7 @@ begin
      inc(p);
    end;
   end;
+  //antialiased border
   mask := TBGRABitmap.Create(width,height,BGRABlack);
   mask.FillEllipseAntialias(cx,cy,rx,ry,BGRAWhite);
   result.ApplyMask(mask);
@@ -932,7 +690,7 @@ begin
 end;
 
 function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single;
-  VerticalPeriod: Single; Exponent: Double = 1): TBGRABitmap;
+  VerticalPeriod: Single; Exponent: Double = 1; ResampleFilter: TResampleFilter = rfCosine): TBGRABitmap;
 
   procedure AddNoise(frequencyH, frequencyV: integer; amplitude: byte; dest: TBGRABitmap);
   var small,resampled: TBGRABitmap;
@@ -950,6 +708,7 @@ function CreatePerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single
       p^.alpha := 255;
       inc(p);
     end;
+    small.ResampleFilter := ResampleFilter;
     resampled := small.Resample(dest.Width,dest.Height) as TBGRABitmap;
     dest.BlendImage(0,0,resampled,boAdditive);
     resampled.Free;
@@ -975,15 +734,15 @@ begin
 end;
 
 function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: Single = 1;
-  VerticalPeriod: Single = 1; Exponent: Double = 1): TBGRABitmap;
+  VerticalPeriod: Single = 1; Exponent: Double = 1; ResampleFilter: TResampleFilter = rfCosine): TBGRABitmap;
 
   procedure AddNoise(frequencyH, frequencyV: integer; amplitude: byte; dest: TBGRABitmap);
-  var small,resampled: TBGRABitmap;
+  var small,cycled,resampled: TBGRABitmap;
       p: PBGRAPixel;
       i: Integer;
   begin
     if (frequencyH = 0) or (frequencyV = 0) then exit;
-    small := TBGRABitmap.Create(frequencyH+1,frequencyV+1);
+    small := TBGRABitmap.Create(frequencyH,frequencyV);
     p := small.data;
     for i := 0 to small.NbPixels-1 do
     begin
@@ -993,14 +752,12 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
       p^.alpha := 255;
       inc(p);
     end;
-    for i := 0 to small.Height-2 do
-      small.SetPixel(small.Width-1,i,small.GetPixel(0,i));
-    for i := 0 to small.Width-2 do
-      small.SetPixel(i,small.Height-1,small.GetPixel(i,0));
-    small.SetPixel(small.Width-1,small.Height-1,small.GetPixel(0,0));
-    resampled := small.Resample(dest.Width+1,dest.Height+1) as TBGRABitmap;
-    dest.BlendImage(0,0,resampled,boAdditive);
+    cycled := small.GetPart(rect(-2,-2,small.Width+2,small.Height+2)) as TBGRABitmap;
+    cycled.ResampleFilter := ResampleFilter;
+    resampled := cycled.Resample(round((cycled.Width-1)*(dest.Width/frequencyH)),round((cycled.Height-1)*(dest.Height/frequencyV))) as TBGRABitmap;
+    dest.BlendImage(round(-2*(dest.Width/frequencyH)),round(-2*(dest.Height/frequencyV)),resampled,boAdditive);
     resampled.Free;
+    cycled.Free;
     small.Free;
   end;
 

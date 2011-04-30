@@ -4,6 +4,18 @@ unit BGRAPaintNet;
 
 interface
 
+{ This unit reads Paint.NET files. It needs BGRADNetDeserial to deserialize binary .Net objects.
+
+  A Paint.NET image consists in three parts :
+  - Xml header
+  - Binary serialized information (contains layer information)
+  - Compressed data (pixel data)
+
+  The class TPaintDotNetFile do not read the Xml header. ComputeFlatImage builds the resulting image
+  by using blending operations to merge layers.
+
+  The unit registers a TFPCustomImageReader so that it can be read by any image reading function of FreePascal }
+
 uses
   Classes, SysUtils, BGRADNetDeserial, BGRABitmap, BGRABitmapTypes, FPImage;
 
@@ -16,7 +28,7 @@ type
     procedure LoadFromFile(filename: string);
     procedure LoadFromStream(stream: TStream);
     procedure Clear;
-    function ToString: ansistring; 
+    function ToString: ansistring;
     destructor Destroy; override;
     constructor Create;
     function Width: integer;

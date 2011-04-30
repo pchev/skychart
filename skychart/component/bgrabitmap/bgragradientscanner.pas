@@ -4,8 +4,10 @@ unit BGRAGradientScanner;
 
 interface
 
+{ This unit contains scanners that generate gradients }
+
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes, BGRATransform;
 
 type
 
@@ -30,7 +32,94 @@ type
     function ScanAt(X, Y: Single): TBGRAPixel; override;
   end;
 
+  { TBGRAGradientTriangleScanner }
+
+  TBGRAGradientTriangleScanner= class(TBGRACustomScanner)
+  protected
+    FMatrix: TAffineMatrix;
+    FColor1,FDiff2,FDiff3,FStep: TColorF;
+    FCurColor: TColorF;
+  public
+    constructor Create(pt1,pt2,pt3: TPointF; c1,c2,c3: TBGRAPixel);
+    procedure ScanMoveTo(X,Y: Integer); override;
+    procedure ScanMoveToF(X,Y: Single);
+    function ScanAt(X,Y: Single): TBGRAPixel; override;
+    function ScanNextPixel: TBGRAPixel; override;
+  end;
+
 implementation
+
+{ TBGRAGradientTriangleScanner }
+
+constructor TBGRAGradientTriangleScanner.Create(pt1, pt2, pt3: TPointF; c1, c2,
+  c3: TBGRAPixel);
+var ec1,ec2,ec3: TExpandedPixel;
+begin
+  FMatrix := AffineMatrix(pt2.X-pt1.X, pt3.X-pt1.X, 0,
+                          pt2.Y-pt1.Y, pt3.Y-pt1.Y, 0);
+  if not IsAffineMatrixInversible(FMatrix) then
+    FMatrix := AffineMatrix(0,0,0,0,0,0)
+  else
+    FMatrix := AffineMatrixInverse(FMatrix) * AffineMatrixTranslation(-pt1.x,-pt1.y);
+
+  ec1 := GammaExpansion(c1);
+  ec2 := GammaExpansion(c2);
+  ec3 := GammaExpansion(c3);
+  FColor1[1] := ec1.red;
+  FColor1[2] := ec1.green;
+  FColor1[3] := ec1.blue;
+  FColor1[4] := ec1.alpha;
+  FDiff2[1] := ec2.red - ec1.red;
+  FDiff2[2] := ec2.green - ec1.green;
+  FDiff2[3] := ec2.blue - ec1.blue;
+  FDiff2[4] := ec2.alpha - ec1.alpha;
+  FDiff3[1] := ec3.red - ec1.red;
+  FDiff3[2] := ec3.green - ec1.green;
+  FDiff3[3] := ec3.blue - ec1.blue;
+  FDiff3[4] := ec3.alpha - ec1.alpha;
+  FStep := FDiff2*FMatrix[1,1]+FDiff3*FMatrix[2,1];
+end;
+
+procedure TBGRAGradientTriangleScanner.ScanMoveTo(X, Y: Integer);
+begin
+  ScanMoveToF(X, Y);
+end;
+
+procedure TBGRAGradientTriangleScanner.ScanMoveToF(X, Y: Single);
+var
+  Cur: TPointF;
+begin
+  Cur := FMatrix*PointF(X,Y);
+  FCurColor := FColor1+FDiff2*Cur.X+FDiff3*Cur.Y;
+end;
+
+function TBGRAGradientTriangleScanner.ScanAt(X, Y: Single): TBGRAPixel;
+begin
+  ScanMoveToF(X,Y);
+  result := ScanNextPixel;
+end;
+
+function TBGRAGradientTriangleScanner.ScanNextPixel: TBGRAPixel;
+var r,g,b,a: int64;
+begin
+  r := round(FCurColor[1]);
+  g := round(FCurColor[2]);
+  b := round(FCurColor[3]);
+  a := round(FCurColor[4]);
+  if r > 65535 then r := 65535 else
+  if r < 0 then r := 0;
+  if g > 65535 then g := 65535 else
+  if g < 0 then g := 0;
+  if b > 65535 then b := 65535 else
+  if b < 0 then b := 0;
+  if a > 65535 then a := 65535 else
+  if a < 0 then a := 0;
+  result.red := GammaCompressionTab[r];
+  result.green := GammaCompressionTab[g];
+  result.blue := GammaCompressionTab[b];
+  result.alpha := a shr 8;
+  FCurColor += FStep;
+end;
 
 { TBGRAGradientScanner }
 

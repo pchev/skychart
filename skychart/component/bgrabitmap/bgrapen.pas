@@ -4,30 +4,67 @@ unit BGRAPen;
 
 interface
 
+{ This unit handles pen style and width, as well as line caps and join styles.
+
+  A line consists in two points.
+  A polyline consists in one or more lines, defined by two points or more than two points
+  A poly-polyline consists in a series of polylines, defined by polyline points separated by empty points (see EmptyPointF) }
+
 uses
   Classes, SysUtils, Graphics, BGRABitmapTypes;
 
-var
+var   //predefined pen styles
   SolidPenStyle, DashPenStyle, DotPenStyle, DashDotPenStyle, DashDotDotPenStyle, ClearPenStyle: TBGRAPenStyle;
 
 type
-  TBGRAPolyLineOption = (plRoundCapOpen, plCycle);
+  TBGRAPolyLineOption = (plRoundCapOpen, //specifies that the line ending is opened
+                         plCycle);       //specifies that it is a polygon
   TBGRAPolyLineOptions = set of TBGRAPolyLineOption;
 
+{ Draw a polyline with specified parameters. If a scanner is specified, it is used as a texture.
+  Else the pencolor parameter is used as a solid color. }
 procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
      width: single; pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
      options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
 
+{ Compute the path for a polyline }
+function ComputeWidePolylinePoints(const linepts: array of TPointF; width: single;
+          pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
+          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+
+{ Compute the path for a poly-polyline }
+function ComputeWidePolyPolylinePoints(const linepts: array of TPointF; width: single;
+          pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
+          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+
+{ Compute points to draw an antialiased ellipse }
+function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF;
+function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
+
+{--------------------- Pixel line procedures --------------------------}
+{ These procedures take integer coordinates as parameters and do not handle pen styles and width.
+  They are faster and can be useful for drawing a simple frame }
+
+//aliased version
 procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean);
+
+//antialiased version
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
+
+//antialiased version with bicolor dashes (to draw a frame)
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
+
+//length added to ensure accepable alpha join (using TBGRAMultishapeFiller is still better)
 function GetAlphaJoinFactor(alpha: byte): single;
 
+//create standard brush texture
 function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyle; PatternColor, BackgroundColor: TBGRAPixel;
     width: integer = 8; height: integer = 8; penwidth: single = 1): TBGRACustomBitmap;
 
+//check special pen styles
 function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 
@@ -499,6 +536,19 @@ procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF; 
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
           options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
 var
+  widePolylinePoints: ArrayOfTPointF;
+begin
+  widePolylinePoints := ComputeWidePolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options);
+  if scan <> nil then
+    bmp.FillPolyAntialias(widePolylinePoints,scan)
+  else
+    bmp.FillPolyAntialias(widePolylinePoints,pencolor);
+end;
+
+function ComputeWidePolylinePoints(const linepts: array of TPointF; width: single;
+          pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
+          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+var
   borders : array of record
               leftSide,rightSide: TLineDef;
               len: single;
@@ -647,7 +697,6 @@ var
   end;
 
 var
-  PolyAcc: arrayOfTPointF;
   NbPolyAcc: integer;
 
   procedure FlushLine(lastPointIndex: integer);
@@ -671,21 +720,21 @@ var
     posstyle := 0;
     ApplyPenStyle(slice(compPts,nbCompPts),slice(revCompPts,nbRevCompPts),penstyle,width,posstyle,enveloppe);
 
-    if PolyAcc=nil then
+    if Result=nil then
     begin
-      polyAcc := enveloppe;
+      Result := enveloppe;
       NbPolyAcc := length(enveloppe);
     end
       else
     if enveloppe <> nil then
     begin
-      if NbPolyAcc +1+length(enveloppe) > length(PolyAcc) then
-        setlength(PolyAcc, length(PolyAcc)*2+1+length(enveloppe));
+      if NbPolyAcc +1+length(enveloppe) > length(Result) then
+        setlength(Result, length(Result)*2+1+length(enveloppe));
 
       idxInsert := NbPolyAcc+1;
-      PolyAcc[idxInsert-1] := EmptyPointF;
+      Result[idxInsert-1] := EmptyPointF;
       for i := 0 to high(enveloppe) do
-        PolyAcc[idxInsert+i]:= enveloppe[i];
+        Result[idxInsert+i]:= enveloppe[i];
       inc(NbPolyAcc, length(enveloppe)+1);
     end;
 
@@ -696,7 +745,7 @@ var
   procedure CycleFlush;
   var idx: integer;
   begin
-    if PolyAcc = nil then
+    if Result = nil then
     begin
       if (nbCompPts > 1) and (nbRevCompPts > 1) then
       begin
@@ -708,10 +757,10 @@ var
     begin
       if (nbCompPts >= 1) and (nbRevCompPts >= 1) and (NbPolyAcc >= 2) then
       begin
-        PolyAcc[0] := compPts[nbCompPts-1];
+        Result[0] := compPts[nbCompPts-1];
         idx := 0;
-        while (idx < high(PolyAcc)) and (not isEmptyPointF(PolyAcc[idx+1])) do inc(idx);
-        PolyAcc[idx] := revCompPts[nbRevCompPts-1];
+        while (idx < high(Result)) and (not isEmptyPointF(Result[idx+1])) do inc(idx);
+        Result[idx] := revCompPts[nbRevCompPts-1];
       end;
       FlushLine(-1);
     end;
@@ -729,8 +778,16 @@ var
   pt1,pt2,pt3,pt4: TPointF;
 
 begin
+  Result := nil;
+
   if length(linepts)=0 then exit;
   if IsClearPenStyle(penstyle) then exit;
+  for i := 0 to high(linepts) do
+    if isEmptyPointF(linepts[i]) then
+    begin
+      result := ComputeWidePolyPolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options);
+      exit;
+    end;
 
   hw := width / 2;
   case joinstyle of
@@ -765,7 +822,7 @@ begin
   if nbPts = 1 then
   begin
     if (linecap <> pecFlat) and ((linecap <> pecRound) or not (plRoundCapOpen in options)) then
-      bmp.FillEllipseAntialias(pts[0].x,pts[0].y,hw,hw, pencolor); //orientation unknown
+      result := ComputeEllipse(pts[0].x,pts[0].y,hw,hw);
     exit;
   end;
 
@@ -774,7 +831,6 @@ begin
   setlength(revCompPts, length(pts)*2+4); //reverse order array
   nbCompPts := 0;
   nbRevCompPts := 0;
-  PolyAcc := nil;
   NbPolyAcc := 0;
 
   //compute borders
@@ -1032,10 +1088,127 @@ begin
   else
     FlushLine(high(pts));
 
-  if scan <> nil then
-    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),scan)
-  else
-    bmp.FillPolyAntialias(Slice(PolyAcc,NbPolyAcc),pencolor);
+  SetLength(Result, NbPolyAcc);
+end;
+
+function ComputeWidePolyPolylinePoints(const linepts: array of TPointF;
+  width: single; pencolor: TBGRAPixel; linecap: TPenEndCap;
+  joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
+  options: TBGRAPolyLineOptions): ArrayOfTPointF;
+
+var
+  results: array of array of TPointF;
+  nbResults,nbTotalPts: integer;
+
+  procedure AddWidePolyline(startIndex,endIndexP1: integer);
+  var
+    tempWidePolyline: array of TPointF;
+    subPts: array of TPointF;
+    j : integer;
+  begin
+    if endIndexP1 > startIndex then
+    begin
+      setlength(subPts,endIndexP1-startIndex);
+      for j := startIndex to endIndexP1-1 do
+        subPts[j-startIndex] := linepts[j];
+      tempWidePolyline := ComputeWidePolylinePoints(subPts,width,pencolor,linecap,joinstyle,penstyle,options);
+      if length(results) = nbresults then
+        setlength(results,(nbresults+1)*2);
+      results[nbResults] := tempWidePolyline;
+      if nbResults <> 0 then inc(nbTotalPts);
+      inc(nbResults);
+      inc(nbTotalPts,length(tempWidePolyline));
+    end;
+  end;
+
+var
+  start,i,j: integer;
+
+begin
+  start := 0;
+  nbResults := 0;
+  nbTotalPts := 0;
+  for i := 0 to high(linepts) do
+    if isEmptyPointF(linepts[i]) then
+    begin
+      AddWidePolyline(start,i);
+      start := i+1;
+    end;
+  AddWidePolyline(start,length(linepts));
+
+  setlength(result, nbTotalPts);
+  start := 0;
+  for i := 0 to nbResults-1 do
+  begin
+    if i <> 0 then
+    begin
+      result[start] := EmptyPointF;
+      inc(start);
+    end;
+    for j := 0 to high(results[i]) do
+    begin
+      result[start] := results[i][j];
+      inc(start);
+    end;
+  end;
+end;
+
+{$PUSH}{$R-}
+function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
+var i,nb: integer;
+    arclen: integer;
+    pos: word;
+begin
+  if end65536 > start65536 then
+    arclen := end65536-start65536 else
+    arclen := 65536-(start65536-end65536);
+
+  nb := round(((rx+ry)*2+8)*arclen/65536) and not 3;
+  if nb < 2 then nb := 2;
+  if nb > arclen+1 then nb := arclen+1;
+
+  setlength(result,nb);
+  for i := 0 to nb-1 do
+  begin
+    pos := start65536+int64(i)*arclen div (nb-1);
+    result[i] := PointF(x+rx*(Cos65536(pos)-32768)/32768,
+                        y-ry*(Sin65536(pos)-32768)/32768);
+  end;
+end;
+{$R+}
+
+function ComputeEllipse(x, y, rx, ry: single): ArrayOfTPointF;
+begin
+  result := ComputeArc65536(x,y,rx,ry,0,0);
+end;
+
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
+var q1,q2,q3,q4: array of TPointF;
+  temp: Single;
+begin
+  if x1 > x2 then
+  begin
+    temp := x1;
+    x1 := x2;
+    x2 := temp;
+  end;
+  if y1 > y2 then
+  begin
+    temp := y1;
+    y1 := y2;
+    y2 := temp;
+  end;
+  rx := abs(rx);
+  ry := abs(ry);
+  if 2*rx > x2-x1 then
+    rx := (x2-x1)/2;
+  if 2*ry > y2-y1 then
+    ry := (y2-y1)/2;
+  q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384);
+  q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768);
+  q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384);
+  q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0);
+  result := ConcatPointsF([q1,q2,q3,q4]);
 end;
 
 initialization
