@@ -4,6 +4,14 @@ unit BGRADNetDeserial;
 
 interface
 
+{ This unit allow to read .Net serialized classes with BinaryFormatter of
+  namespace System.Runtime.Serialization.Formatters.Binary.
+
+  Serialization is a process by which objects in memory are saved according
+  to their structure.
+
+  This unit is used by BGRAPaintNet to read Paint.NET images. }
+
 uses
   Classes, SysUtils;
 
@@ -71,7 +79,7 @@ type
     function IsReferenceType(numType: integer; index: integer): boolean;
     procedure LoadFromStream(Stream: TStream);
     procedure LoadFromFile(filename: string);
-    function ToString: ansistring; override;
+    function ToString: ansistring;
     constructor Create;
   private
     EndOfStream:      boolean;

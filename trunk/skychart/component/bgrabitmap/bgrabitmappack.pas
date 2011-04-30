@@ -10,7 +10,8 @@ uses
     BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, 
   bgracompressablebitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
   BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
-  BGRATransform, BGRAGradientScanner, LazarusPackageIntf;
+  BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
+  BGRACanvas, LazarusPackageIntf;
 
 implementation
 

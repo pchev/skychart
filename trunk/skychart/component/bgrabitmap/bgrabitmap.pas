@@ -40,6 +40,9 @@ unit BGRABitmap;
 
 interface
 
+{ Compiler directives are used to include the best version according
+  to the platform }
+
 uses
   Classes, SysUtils,
 {$IFDEF LCLwin32}
@@ -80,9 +83,31 @@ type
   {$ENDIF}
 {$ENDIF}
 
-
+// draw a bitmap from pure data
 procedure BGRABitmapDraw(ACanvas: TCanvas; Rect: TRect; AData: Pointer;
   VerticalFlip: boolean; AWidth, AHeight: integer; Opaque: boolean);
+  
+{ Replace the content of the variable Destination with the variable
+  Temp and frees previous object contained in Destination.
+  
+  This function is useful as a shortcut for :
+ 
+  var
+    temp: TBGRABitmap;
+  begin
+    ...
+    temp := someBmp.Filter... as TBGRABitmap;
+    someBmp.Free;
+    someBmp := temp;
+  end;
+  
+  which becomes :
+  
+  begin
+    ...
+    BGRAReplace(temp, someBmp.Filter... );
+  end;
+}
 procedure BGRAReplace(var Destination: TBGRABitmap; Temp: TObject);
 
 implementation
@@ -115,6 +140,8 @@ end;
 
 initialization
 
+  //this variable is created to access appropriate functions
+  //depending on the platform
   bmp := TBGRABitmap.Create(0, 0);
 
 finalization

@@ -4,133 +4,64 @@ unit BGRAResample;
 
 interface
 
+{ This unit provides resampling functions, i.e. resizing of bitmaps with or
+  without interpolation filters.
+
+  SimpleStretch does a fast stretch by splitting the image into zones defined
+  by integers. This can be quite ugly.
+
+  FineResample uses floating point coordinates to get an antialiased resample.
+  It can use minimal interpolation (4 pixels when upsizing) for simple interpolation
+  filters (linear and cosine-like) or wide kernel resample for complex interpolation.
+  In this cas, it calls WideKernelResample.
+
+  WideKernelResample can be called by custom filter kernel, derived
+  from TWideKernelFilter. It is slower of course than simple interpolation. }
+
 uses
   Classes, SysUtils, BGRABitmapTypes;
 
-function FineResample(bmp: TBGRACustomBitmap;
-  NewWidth, NewHeight: integer): TBGRACustomBitmap;
+{------------------------------- Simple stretch ------------------------------------}
+
 function SimpleStretch(bmp: TBGRACustomBitmap;
   NewWidth, NewHeight: integer): TBGRACustomBitmap;
 
-function FineInterpolation(t: single): single;
+{---------------------------- Interpolation filters --------------------------------}
+
+function FineInterpolation(t: single; ResampleFilter: TResampleFilter): single;
+
+type
+  TWideKernelFilter = class
+    function Interpolation(t: single): single; virtual; abstract;
+    function ShouldCheckRange: boolean; virtual; abstract;
+    function KernelWidth: single; virtual; abstract;
+  end;
+
+  TMitchellKernel = class(TWideKernelFilter)
+    function Interpolation(t: single): single; override;
+    function ShouldCheckRange: boolean; override;
+    function KernelWidth: single; override;
+  end;
+
+  TSplineKernel = class(TWideKernelFilter)
+    function Interpolation(t: single): single; override;
+    function ShouldCheckRange: boolean; override;
+    function KernelWidth: single; override;
+  end;
+
+{-------------------------------- Fine resample ------------------------------------}
+
+function FineResample(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer; ResampleFilter: TResampleFilter): TBGRACustomBitmap;
+
+function WideKernelResample(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer; ResampleFilterSmaller, ResampleFilterLarger: TWideKernelFilter): TBGRACustomBitmap;
 
 implementation
 
 uses GraphType, Math;
 
-function FineResampleLarger(bmp: TBGRACustomBitmap;
-  newWidth, newHeight: integer): TBGRACustomBitmap;
-var
-  yb, xb: integer;
-  pdest:  PBGRAPixel;
-  xsrc, ysrc, xfactor, yfactor: double;
-  ixsrc1, ixsrc2, iysrc1, iysrc2: integer;
-  cUpLeft, cUpRight, cLowLeft, cLowRight: TBGRAPixel;
-  factHoriz, factVert, factCorrX, factCorrY, Sum, fUpLeft, fUpRight,
-  fLowLeft, fLowRight, faUpLeft, faUpRight, faLowLeft, faLowRight: single;
-  rSum, gSum, bSum, aSum: single;
-  temp:   TBGRACustomBitmap;
-begin
-  if (newWidth < bmp.Width) or (newHeight < bmp.Height) then
-    raise ERangeError.Create('FineResampleLarger: New dimensions must be greater or equal ('+IntToStr(bmp.Width)+'x'+IntToStr(bmp.Height)+'->'+IntToStr(newWidth)+'x'+IntToStr(newHeight)+')');
-
-  Result := bmp.NewBitmap(NewWidth, NewHeight);
-  if (newWidth = 0) or (newHeight = 0) then
-    exit;
-
-  bmp.LoadFromBitmapIfNeeded;
-
-  if (bmp.Width = 1) and (bmp.Height = 1) then
-  begin
-    Result.Fill(bmp.GetPixel(0, 0));
-    exit;
-  end
-  else
-  if bmp.Width = 1 then
-  begin
-    temp := bmp.NewBitmap(2, bmp.Height);
-    temp.PutImage(0, 0, bmp, dmSet);
-    temp.PutImage(1, 0, bmp, dmSet);
-    Result := FineResampleLarger(temp, 2, newHeight);
-    temp.Free;
-    temp := Result;
-    Result := SimpleStretch(temp, 1,temp.Height);
-    temp.Free;
-    exit;
-  end
-  else
-  if bmp.Height = 1 then
-  begin
-    temp := bmp.NewBitmap(bmp.Width, 2);
-    temp.PutImage(0, 0, bmp, dmSet);
-    temp.PutImage(0, 1, bmp, dmSet);
-    Result := FineResampleLarger(temp, newWidth, 2);
-    temp.Free;
-    temp := Result;
-    Result := SimpleStretch(temp, temp.Width,1);
-    temp.Free;
-    exit;
-  end;
-
-  yfactor := (bmp.Height - 1) / (newHeight - 1);
-  xfactor := (bmp.Width - 1) / (newWidth - 1);
-  for yb := 0 to newHeight - 1 do
-  begin
-    pdest    := Result.Scanline[yb];
-    ysrc     := yb * yfactor;
-    iysrc1   := floor(ysrc);
-    factVert := frac(ysrc);
-    if (factVert = 0) then
-      iysrc2 := iysrc1
-    else
-      iysrc2 := ceil(ysrc);
-    factCorrY := FineInterpolation(factVert);
-    for xb := 0 to newWidth - 1 do
-    begin
-      xsrc      := xb * xfactor;
-      ixsrc1    := floor(xsrc);
-      factHoriz := frac(xsrc);
-      if (factHoriz = 0) then
-        ixsrc2 := ixsrc1
-      else
-        ixsrc2 := ceil(xsrc);
-      factCorrX := FineInterpolation(factHoriz);
-
-      cUpLeft   := bmp.GetPixel(ixsrc1, iysrc1);
-      cUpRight  := bmp.GetPixel(ixsrc2, iysrc1);
-      cLowLeft  := bmp.GetPixel(ixsrc1, iysrc2);
-      cLowRight := bmp.GetPixel(ixsrc2, iysrc2);
-
-      fUpLeft   := (1 - factCorrX) * (1 - factCorrY);
-      fUpRight  := factCorrX * (1 - factCorrY);
-      fLowLeft  := (1 - factCorrX) * factCorrY;
-      fLowRight := factCorrX * factCorrY;
-
-      faUpLeft   := fUpLeft * cUpLeft.alpha;
-      faUpRight  := fUpRight * cUpRight.alpha;
-      faLowLeft  := fLowLeft * cLowLeft.alpha;
-      faLowRight := fLowRight * cLowRight.alpha;
-
-      Sum  := fUpLeft + fUpRight + fLowLeft + fLowRight;
-      rSum := cUpLeft.red * faUpLeft + cUpRight.red * faUpRight +
-        cLowLeft.red * faLowLeft + cLowRight.red * faLowRight;
-      gSum := cUpLeft.green * faUpLeft + cUpRight.green * faUpRight +
-        cLowLeft.green * faLowLeft + cLowRight.green * faLowRight;
-      bSum := cUpLeft.blue * faUpLeft + cUpRight.blue * faUpRight +
-        cLowLeft.blue * faLowLeft + cLowRight.blue * faLowRight;
-      aSum := cUpLeft.alpha * fUpLeft + cUpRight.alpha * fUpRight +
-        cLowLeft.alpha * fLowLeft + cLowRight.alpha * fLowRight;
-
-      if aSum = 0 then
-        pdest^ := BGRAPixelTransparent
-      else
-        pdest^ := BGRA(round(rSum / aSum), round(gSum / aSum),
-          round(bSum / aSum), round(aSum / Sum));
-      Inc(pdest);
-
-    end;
-  end;
-end;
+{-------------------------------- Simple stretch ------------------------------------}
 
 function FastSimpleStretchLarger(bmp: TBGRACustomBitmap;
   xFactor, yFactor: integer): TBGRACustomBitmap;
@@ -385,6 +316,259 @@ begin
   Result.InvalidateBitmap;
 end;
 
+function SimpleStretch(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer): TBGRACustomBitmap;
+var
+  temp, newtemp: TBGRACustomBitmap;
+begin
+  if (NewWidth = bmp.Width) and (NewHeight = bmp.Height) then
+    Result := bmp.Duplicate
+  else
+  if (NewWidth >= bmp.Width) and (NewHeight >= bmp.Height) then
+    Result := SimpleStretchLarger(bmp, NewWidth, NewHeight)
+  else
+  if (NewWidth <= bmp.Width) and (NewHeight <= bmp.Height) then
+    Result := SimpleStretchSmaller(bmp, NewWidth, NewHeight)
+  else
+  begin
+    temp := bmp;
+
+    if NewWidth < bmp.Width then
+    begin
+      newtemp := SimpleStretchSmaller(temp, NewWidth, temp.Height);
+      if (temp <> bmp) then
+        temp.Free;
+      temp := newtemp;
+    end;
+
+    if NewHeight < bmp.Height then
+    begin
+      newtemp := SimpleStretchSmaller(temp, temp.Width, NewHeight);
+      if (temp <> bmp) then
+        temp.Free;
+      temp := newtemp;
+    end;
+
+    if NewWidth > bmp.Width then
+    begin
+      newtemp := SimpleStretchLarger(temp, NewWidth, temp.Height);
+      if (temp <> bmp) then
+        temp.Free;
+      temp := newtemp;
+    end;
+
+    if NewHeight > bmp.Height then
+    begin
+      newtemp := SimpleStretchLarger(temp, temp.Width, NewHeight);
+      if (temp <> bmp) then
+        temp.Free;
+      temp := newtemp;
+    end;
+
+    if temp <> bmp then
+      Result := temp
+    else
+      Result := bmp.Duplicate;
+  end;
+end;
+
+{---------------------------- Interpolation filters ----------------------------------------}
+
+function FineInterpolation(t: single; ResampleFilter: TResampleFilter): single;
+begin
+  if ResampleFilter = rfLinear then
+    result := t else
+  begin
+    if t <= 0.5 then
+      result := t*t*2 else
+      result := 1-(1-t)*(1-t)*2;
+    if ResampleFilter <> rfCosine then result := (result+t)*0.5;
+  end;
+end;
+
+{ TMitchellKernel }
+
+function TMitchellKernel.Interpolation(t: single): single;
+var
+  tt, ttt: single;
+const OneEighteenth = 1 / 18;
+begin
+  t := Abs(t);
+  tt := Sqr(t);
+  ttt := tt * t;
+  if t < 1 then Result := (21 * ttt - 36 * tt + 16 ) * OneEighteenth
+  else if t < 2 then Result := (- 7 * ttt + 36 * tt - 60 * t + 32) * OneEighteenth
+  else Result := 0;
+end;
+
+function TMitchellKernel.ShouldCheckRange: Boolean;
+begin
+  Result := True;
+end;
+
+function TMitchellKernel.KernelWidth: single;
+begin
+  Result := 2;
+end;
+
+{ TSplineKernel }
+
+function TSplineKernel.Interpolation(t: single): single;
+Const Coeff = -0.5;
+var
+  tt, ttt: single;
+begin
+  t := Abs(t);
+  tt := Sqr(t);
+  ttt := tt * t;
+  if t < 1 then
+    Result := (Coeff + 2) * ttt - (Coeff + 3) * tt + 1
+  else if t < 2 then
+    Result := Coeff * (ttt - 5 * tt + 8 * t - 4)
+  else
+    Result := 0;
+end;
+
+function TSplineKernel.ShouldCheckRange: Boolean;
+begin
+  Result := True;
+end;
+
+function TSplineKernel.KernelWidth: single;
+begin
+  Result := 2;
+end;
+
+{--------------------------------------------- Fine resample ------------------------------------------------}
+
+function FineResampleLarger(bmp: TBGRACustomBitmap;
+  newWidth, newHeight: integer; ResampleFilter: TResampleFilter): TBGRACustomBitmap;
+type
+  TInterpolationEntry = record
+    isrc1,isrc2,factCorr: integer;
+  end;
+var
+  yb, xb: integer;
+  pdest,psrc1,psrc2:  PBGRAPixel;
+  xsrc, ysrc, xfactor, yfactor: double;
+  xTab,yTab: array of TInterpolationEntry;
+  xInfo,yInfo: TInterpolationEntry;
+  cUpLeft, cUpRight, cLowLeft, cLowRight: TBGRAPixel;
+  factHoriz, factVert: single;
+  fUpLeft, fUpRight, fLowLeft, fLowRight: integer;
+  faUpLeft, faUpRight, faLowLeft, faLowRight: integer;
+  Sum, rSum, gSum, bSum, aSum: integer;
+  temp:   TBGRACustomBitmap;
+begin
+  if (newWidth < bmp.Width) or (newHeight < bmp.Height) then
+    raise ERangeError.Create('FineResampleLarger: New dimensions must be greater or equal ('+IntToStr(bmp.Width)+'x'+IntToStr(bmp.Height)+'->'+IntToStr(newWidth)+'x'+IntToStr(newHeight)+')');
+
+  Result := bmp.NewBitmap(NewWidth, NewHeight);
+  if (newWidth = 0) or (newHeight = 0) then
+    exit;
+
+  bmp.LoadFromBitmapIfNeeded;
+
+  if (bmp.Width = 1) and (bmp.Height = 1) then
+  begin
+    Result.Fill(bmp.GetPixel(0, 0));
+    exit;
+  end
+  else
+  if bmp.Width = 1 then
+  begin
+    temp := bmp.NewBitmap(2, bmp.Height);
+    temp.PutImage(0, 0, bmp, dmSet);
+    temp.PutImage(1, 0, bmp, dmSet);
+    Result := FineResampleLarger(temp, 2, newHeight, ResampleFilter);
+    temp.Free;
+    temp := Result;
+    Result := SimpleStretch(temp, 1,temp.Height);
+    temp.Free;
+    exit;
+  end
+  else
+  if bmp.Height = 1 then
+  begin
+    temp := bmp.NewBitmap(bmp.Width, 2);
+    temp.PutImage(0, 0, bmp, dmSet);
+    temp.PutImage(0, 1, bmp, dmSet);
+    Result := FineResampleLarger(temp, newWidth, 2, ResampleFilter);
+    temp.Free;
+    temp := Result;
+    Result := SimpleStretch(temp, temp.Width,1);
+    temp.Free;
+    exit;
+  end;
+
+  yfactor := (bmp.Height - 1) / (newHeight - 1);
+  xfactor := (bmp.Width - 1) / (newWidth - 1);
+
+  setlength(yTab, newHeight);
+  for yb := 0 to newHeight - 1 do
+  begin
+    ysrc     := yb * yfactor;
+    factVert := frac(ysrc);
+    yTab[yb].isrc1   := floor(ysrc);
+    yTab[yb].isrc2 := min(bmp.Height-1, ceil(ysrc));
+    yTab[yb].factCorr := round(FineInterpolation(factVert,ResampleFilter)*256);
+  end;
+  setlength(xTab, newWidth);
+  for xb := 0 to newWidth - 1 do
+  begin
+    xsrc     := xb * xfactor;
+    factHoriz := frac(xsrc);
+    xTab[xb].isrc1   := floor(xsrc);
+    xTab[xb].isrc2 := min(bmp.Width-1,ceil(xsrc));
+    xTab[xb].factCorr := round(FineInterpolation(factHoriz,ResampleFilter)*256);
+  end;
+
+  for yb := 0 to newHeight - 1 do
+  begin
+    pdest    := Result.Scanline[yb];
+    yInfo    := yTab[yb];
+    psrc1    := bmp.scanline[yInfo.isrc1];
+    psrc2    := bmp.scanline[yInfo.isrc2];
+    for xb := 0 to newWidth - 1 do
+    begin
+      xInfo  := xTab[xb];
+
+      cUpLeft   := (psrc1 + xInfo.isrc1)^;
+      cUpRight  := (psrc1 + xInfo.isrc2)^;
+      cLowLeft  := (psrc2 + xInfo.isrc1)^;
+      cLowRight := (psrc2 + xInfo.isrc2)^;
+
+      fUpLeft   := (256 - xInfo.factCorr) * (256 - yInfo.factCorr) shr 8;
+      fUpRight  := xInfo.factCorr * (256 - yInfo.factCorr) shr 8;
+      fLowLeft  := (256 - xInfo.factCorr) * yInfo.factCorr shr 8;
+      fLowRight := xInfo.factCorr * yInfo.factCorr shr 8;
+
+      faUpLeft   := fUpLeft * cUpLeft.alpha;
+      faUpRight  := fUpRight * cUpRight.alpha;
+      faLowLeft  := fLowLeft * cLowLeft.alpha;
+      faLowRight := fLowRight * cLowRight.alpha;
+
+      Sum  := fUpLeft + fUpRight + fLowLeft + fLowRight;
+      rSum := cUpLeft.red * faUpLeft + cUpRight.red * faUpRight +
+        cLowLeft.red * faLowLeft + cLowRight.red * faLowRight;
+      gSum := cUpLeft.green * faUpLeft + cUpRight.green * faUpRight +
+        cLowLeft.green * faLowLeft + cLowRight.green * faLowRight;
+      bSum := cUpLeft.blue * faUpLeft + cUpRight.blue * faUpRight +
+        cLowLeft.blue * faLowLeft + cLowRight.blue * faLowRight;
+      aSum := cUpLeft.alpha * fUpLeft + cUpRight.alpha * fUpRight +
+        cLowLeft.alpha * fLowLeft + cLowRight.alpha * fLowRight;
+
+      if aSum = 0 then
+        pdest^ := BGRAPixelTransparent
+      else
+        pdest^ := BGRA((rSum + aSum shr 1) div aSum, (gSum + aSum shr 1) div aSum,
+          (bSum + aSum shr 1) div aSum, (aSum + Sum shr 1) div Sum);
+      Inc(pdest);
+
+    end;
+  end;
+end;
+
 function FineResampleSmaller(bmp: TBGRACustomBitmap;
   newWidth, newHeight: integer): TBGRACustomBitmap;
 var
@@ -571,15 +755,42 @@ begin
 end;
 
 function FineResample(bmp: TBGRACustomBitmap;
-  NewWidth, NewHeight: integer): TBGRACustomBitmap;
+  NewWidth, NewHeight: integer; ResampleFilter: TResampleFilter): TBGRACustomBitmap;
 var
   temp, newtemp: TBGRACustomBitmap;
+  tempFilter1,tempFilter2: TWideKernelFilter;
 begin
+  case ResampleFilter of
+    rfMitchell:
+    begin
+      tempFilter1 := TMitchellKernel.Create;
+      result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter1,tempFilter1);
+      tempFilter1.Free;
+      exit;
+    end;
+    rfSpline:
+    begin
+      tempFilter1 := TSplineKernel.Create;
+      result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter1,tempFilter1);
+      tempFilter1.Free;
+      exit;
+    end;
+    rfBestQuality:
+    begin
+      tempFilter1 := TSplineKernel.Create;
+      tempFilter2 := TMitchellKernel.Create;
+      result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter2,tempFilter1);
+      tempFilter1.Free;
+      tempFilter2.Free;
+      exit;
+    end;
+  end;
+
   if (NewWidth = bmp.Width) and (NewHeight = bmp.Height) then
     Result := bmp.Duplicate
   else
   if (NewWidth >= bmp.Width) and (NewHeight >= bmp.Height) then
-    Result := FineResampleLarger(bmp, NewWidth, NewHeight)
+    Result := FineResampleLarger(bmp, NewWidth, NewHeight, ResampleFilter)
   else
   if (NewWidth <= bmp.Width) and (NewHeight <= bmp.Height) then
     Result := FineResampleSmaller(bmp, NewWidth, NewHeight)
@@ -605,7 +816,7 @@ begin
 
     if NewWidth > bmp.Width then
     begin
-      newtemp := FineResampleLarger(temp, NewWidth, temp.Height);
+      newtemp := FineResampleLarger(temp, NewWidth, temp.Height, ResampleFilter);
       if (temp <> bmp) then
         temp.Free;
       temp := newtemp;
@@ -613,7 +824,7 @@ begin
 
     if NewHeight > bmp.Height then
     begin
-      newtemp := FineResampleLarger(temp, temp.Width, NewHeight);
+      newtemp := FineResampleLarger(temp, temp.Width, NewHeight, ResampleFilter);
       if (temp <> bmp) then
         temp.Free;
       temp := newtemp;
@@ -626,68 +837,224 @@ begin
   end;
 end;
 
-function SimpleStretch(bmp: TBGRACustomBitmap;
-  NewWidth, NewHeight: integer): TBGRACustomBitmap;
+{------------------------ Wide kernel filtering adapted from Graphics32 ---------------------------}
+
+function Constrain(const Value, Lo, Hi: Integer): Integer;
+begin
+  if Value < Lo then
+  	Result := Lo
+  else if Value > Hi then
+  	Result := Hi
+  else
+  	Result := Value;
+end;
+
+type
+  TPointRec = record
+    Pos: Integer;
+    Weight: Single;
+  end;
+
+  TCluster = array of TPointRec;
+  TMappingTable = array of TCluster;
+
+{$warnings off}
+function BuildMappingTable(
+  DstLo, DstHi: Integer;
+  ClipLo, ClipHi: Integer;
+  SrcLo, SrcHi: Integer;
+  KernelSmaller,KernelLarger: TWideKernelFilter): TMappingTable;
+Const FullEdge = false;
 var
-  temp, newtemp: TBGRACustomBitmap;
+  SrcW, DstW, ClipW: Integer;
+  FilterWidth: Single;
+  Scale, OldScale: Single;
+  Center: Single;
+  Left, Right: Integer;
+  I, J, K: Integer;
+  Weight: Single;
 begin
-  if (NewWidth = bmp.Width) and (NewHeight = bmp.Height) then
-    Result := bmp.Duplicate
-  else
-  if (NewWidth >= bmp.Width) and (NewHeight >= bmp.Height) then
-    Result := SimpleStretchLarger(bmp, NewWidth, NewHeight)
-  else
-  if (NewWidth <= bmp.Width) and (NewHeight <= bmp.Height) then
-    Result := SimpleStretchSmaller(bmp, NewWidth, NewHeight)
-  else
+  SrcW := SrcHi - SrcLo;
+  DstW := DstHi - DstLo;
+  ClipW := ClipHi - ClipLo;
+  if SrcW = 0 then
   begin
-    temp := bmp;
-
-    if NewWidth < bmp.Width then
+    Result := nil;
+    Exit;
+  end
+  else if SrcW = 1 then
+  begin
+    SetLength(Result, ClipW);
+    for I := 0 to ClipW - 1 do
     begin
-      newtemp := SimpleStretchSmaller(temp, NewWidth, temp.Height);
-      if (temp <> bmp) then
-        temp.Free;
-      temp := newtemp;
+      SetLength(Result[I], 1);
+      Result[I][0].Pos := 0;
+      Result[I][0].Weight := 1;
     end;
+    Exit;
+  end;
+  SetLength(Result, ClipW);
+  if ClipW = 0 then Exit;
 
-    if NewHeight < bmp.Height then
+  if FullEdge then Scale := DstW / SrcW
+  else Scale := (DstW - 1) / (SrcW - 1);
+
+  K := 0;
+
+  if Scale = 0 then
+  begin
+    SetLength(Result[0], 1);
+    Result[0][0].Pos := (SrcLo + SrcHi) div 2;
+    Result[0][0].Weight := 1;
+  end
+  else if Scale < 1 then
+  begin
+    FilterWidth := KernelSmaller.KernelWidth;
+    OldScale := Scale;
+    Scale := 1 / Scale;
+    FilterWidth := FilterWidth * Scale;
+    for I := 0 to ClipW - 1 do
     begin
-      newtemp := SimpleStretchSmaller(temp, temp.Width, NewHeight);
-      if (temp <> bmp) then
-        temp.Free;
-      temp := newtemp;
+      if FullEdge then
+        Center := SrcLo - 0.5 + (I - DstLo + ClipLo + 0.5) * Scale
+      else
+        Center := SrcLo + (I - DstLo + ClipLo) * Scale;
+      Left := Floor(Center - FilterWidth);
+      Right := Ceil(Center + FilterWidth);
+      for J := Left to Right do
+      begin
+        Weight := KernelSmaller.Interpolation((Center - J) * OldScale) * OldScale;
+        if Weight <> 0 then
+        begin
+          K := Length(Result[I]);
+          SetLength(Result[I], K + 1);
+          Result[I][K].Pos := Constrain(J, SrcLo, SrcHi - 1);
+          Result[I][K].Weight := Weight;
+        end;
+      end;
+      if Length(Result[I]) = 0 then
+      begin
+        SetLength(Result[I], 1);
+        Result[I][0].Pos := Floor(Center);
+        Result[I][0].Weight := 1;
+      end;
     end;
-
-    if NewWidth > bmp.Width then
+  end
+  else // scale > 1
+  begin
+    FilterWidth := KernelLarger.KernelWidth;
+    Scale := 1 / Scale;
+    for I := 0 to ClipW - 1 do
     begin
-      newtemp := SimpleStretchLarger(temp, NewWidth, temp.Height);
-      if (temp <> bmp) then
-        temp.Free;
-      temp := newtemp;
+      if FullEdge then
+        Center := SrcLo - 0.5 + (I - DstLo + ClipLo + 0.5) * Scale
+      else
+        Center := SrcLo + (I - DstLo + ClipLo) * Scale;
+      Left := Floor(Center - FilterWidth);
+      Right := Ceil(Center + FilterWidth);
+      for J := Left to Right do
+      begin
+        Weight := KernelLarger.Interpolation(Center - j);
+        if Weight <> 0 then
+        begin
+          K := Length(Result[I]);
+          SetLength(Result[I], k + 1);
+          Result[I][K].Pos := Constrain(j, SrcLo, SrcHi - 1);
+          Result[I][K].Weight := Weight;
+        end;
+      end;
     end;
-
-    if NewHeight > bmp.Height then
-    begin
-      newtemp := SimpleStretchLarger(temp, temp.Width, NewHeight);
-      if (temp <> bmp) then
-        temp.Free;
-      temp := newtemp;
-    end;
-
-    if temp <> bmp then
-      Result := temp
-    else
-      Result := bmp.Duplicate;
   end;
 end;
+{$warnings on}
 
-function FineInterpolation(t: single): single;
+function WideKernelResample(bmp: TBGRACustomBitmap;
+  NewWidth, NewHeight: integer; ResampleFilterSmaller, ResampleFilterLarger: TWideKernelFilter): TBGRACustomBitmap;
+type
+  TSum = record
+    sumR,sumG,sumB,sumA: single;
+  end;
+
+var
+  mapX,mapY: TMappingTable;
+  xb,yb,xc,yc,MapXLoPos,MapXHiPos: integer;
+  clusterX,clusterY: TCluster;
+  verticalSum: array of TSum;
+  scanlinesSrc: array of PBGRAPixel;
+  sum: TSum;
+  c: TBGRAPixel;
+  w,wa: single;
+  pdest: PBGRAPixel;
 begin
-  if t <= 0.5 then
-    result := t*t*2 else
-    result := 1-(1-t)*(1-t)*2;
-  result := (result+t)*0.5;
+  result := bmp.NewBitmap(NewWidth,NewHeight);
+  if (NewWidth=0) or (NewHeight=0) then exit;
+  mapX := BuildMappingTable(0,NewWidth,0,NewWidth,0,bmp.Width,ResampleFilterSmaller,ResampleFilterLarger);
+  mapY := BuildMappingTable(0,NewHeight,0,NewHeight,0,bmp.Height,ResampleFilterSmaller,ResampleFilterLarger);
+
+  MapXLoPos := MapX[0][0].Pos;
+  MapXHiPos := MapX[NewWidth - 1][High(MapX[NewWidth - 1])].Pos;
+
+  setlength(verticalSum, MapXHiPos-MapXLoPos+1);
+
+  setlength(scanlinesSrc, bmp.Height);
+  for yb := 0 to bmp.Height-1 do
+    scanlinesSrc[yb] := bmp.ScanLine[yb];
+
+  for yb := 0 to NewHeight-1 do
+  begin
+    clusterY := mapY[yb];
+
+    for xb := MapXLoPos to MapXHiPos do
+    begin
+      fillchar(verticalSum[xb - MapXLoPos],sizeof(verticalSum[xb - MapXLoPos]),0);
+      for yc := 0 to high(clusterY) do
+      with verticalSum[xb - MapXLoPos] do
+      begin
+        c := (scanlinesSrc[clusterY[yc].Pos]+xb)^;
+        w := clusterY[yc].Weight;
+        wa := w * c.alpha;
+        sumA += wa;
+        sumR += c.red * wa;
+        sumG += c.green * wa;
+        sumB += c.blue * wa;
+      end;
+    end;
+
+    pdest := result.Scanline[yb];
+
+    for xb := 0 to NewWidth-1 do
+    begin
+      clusterX := mapX[xb];
+      {$hints off}
+      fillchar(sum,sizeof(sum),0);
+      {$hints on}
+      for xc := 0 to high(clusterX) do
+      begin
+        w := clusterX[xc].Weight;
+        with verticalSum[ClusterX[xc].Pos - MapXLoPos] do
+        begin
+          sum.sumA += sumA*w;
+          sum.sumR += sumR*w;
+          sum.sumG += sumG*w;
+          sum.sumB += sumB*w;
+        end;
+      end;
+
+      if sum.sumA < 0.5 then
+        pdest^ := BGRAPixelTransparent else
+      begin
+        c.red := constrain(round(sum.sumR/sum.sumA),0,255);
+        c.green := constrain(round(sum.sumG/sum.sumA),0,255);
+        c.blue := constrain(round(sum.sumB/sum.sumA),0,255);
+        if sum.sumA > 255 then
+          c.alpha := 255 else
+          c.alpha := round(sum.sumA);
+        pdest^ := c;
+      end;
+      inc(pdest);
+    end;
+  end;
+
 end;
 
 end.

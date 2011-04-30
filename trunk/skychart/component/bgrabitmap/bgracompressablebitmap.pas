@@ -4,6 +4,27 @@ unit bgracompressablebitmap;
 
 interface
 
+{ This unit contains the TBGRACompressableBitmap class, which
+  can be used to temporarily compress bitmaps in memory.
+  To use it, create an instance with the bitmap you want
+  to compress. You can then free the original bitmap because
+  TBGRACompressableBitmap contains all information necessary
+  to build it again. To construct again your bitmap, call
+  the GetBitmap function.
+
+  When you have your bitmap in TBGRACompressableBitmap,
+  you can call Compress function as many times as necessary
+  until all data is compressed. It does only a part of the
+  work at each call, so you can put it in a loop or in
+  a timer. When it's done, Compress returns false to
+  notify that it did nothing, which means you can
+  stop calling Compress.
+
+  In this implementation, the memory usage grows during
+  the compression process and is lower only after it is
+  finished. So it is recommended to compress one bitmap
+  at a time. }
+
 uses
   Classes, SysUtils, BGRABitmap;
 
@@ -15,6 +36,7 @@ type
    private
      FWidth,FHeight: integer;
      FCaption: String;
+     FBounds: TRect;
      FCompressedDataArray: array of TMemoryStream;
      FUncompressedData: TMemoryStream;
      FCompressionProgress: Int64;
@@ -42,7 +64,8 @@ implementation
 
 uses zstream, BGRABitmapTypes;
 
-const maxPartSize = 1048576;
+// size of each chunk treated by Compress function
+const maxPartSize = 524288;
 
 { TBGRACompressedBitmap }
 
@@ -67,7 +90,13 @@ begin
   Assign(Source);
 end;
 
+{ Constructs the bitmap again, decompressing if necessary.
+  After this, the image is not compressed anymore so the
+  memoy usage grows again and the access becomes fast
+  because there is no need to decompress anymore. }
 function TBGRACompressableBitmap.GetBitmap: TBGRABitmap;
+var UsedPart: TBGRABitmap;
+    UsedNbPixels: Integer;
 begin
   Decompress;
   if FUncompressedData = nil then
@@ -78,9 +107,22 @@ begin
   result := TBGRABitmap.Create(FWidth,FHeight);
   result.Caption := FCaption;
   FUncompressedData.Position := 0;
-  FUncompressedData.Read(result.Data^,result.NbPixels*Sizeof(TBGRAPixel));
+  if (FBounds.Left <> 0) or (FBounds.Top <> 0)
+    or (FBounds.Right <> FWidth) or (FBounds.Bottom <> FHeight) then
+  begin
+    UsedNbPixels := (FBounds.Right-FBounds.Left)*(FBounds.Bottom-FBounds.Top);
+    if UsedNbPixels > 0 then
+    begin
+      UsedPart := TBGRABitmap.Create(FBounds.Right-FBounds.Left,FBounds.Bottom-FBounds.Top);
+      FUncompressedData.Read(UsedPart.Data^,UsedPart.NbPixels*Sizeof(TBGRAPixel));
+      result.PutImage(FBounds.Left,FBounds.Top,UsedPart,dmSet);
+      UsedPart.Free;
+    end;
+  end else
+    FUncompressedData.Read(result.Data^,result.NbPixels*Sizeof(TBGRAPixel));
 end;
 
+{ Returns the total memory used by this object for storing bitmap data }
 function TBGRACompressableBitmap.UsedMemory: Int64;
 var i: integer;
 begin
@@ -90,12 +132,13 @@ begin
   if FUncompressedData <> nil then result += FUncompressedData.Size;
 end;
 
+{ Do one compress step or return false }
 function TBGRACompressableBitmap.Compress: boolean;
 var comp: Tcompressionstream;
     partSize: integer;
 begin
   if FCompressedDataArray = nil then FCompressionProgress := 0;
-  if FUncompressedData = nil then
+  if (FUncompressedData = nil) or (FUncompressedData.Size = 0) then
   begin
     result := false;
     exit;
@@ -108,6 +151,8 @@ begin
     if FUncompressedData.Size - FCompressionProgress > maxPartSize then
       partSize := maxPartSize else
         partSize := integer(FUncompressedData.Size - FCompressionProgress);
+
+    //use fast compression to avoid slowing down the application
     comp := Tcompressionstream.Create(clfastest,FCompressedDataArray[high(FCompressedDataArray)]);
     comp.write(partSize,sizeof(partSize));
     comp.CopyFrom(FUncompressedData,partSize);
@@ -140,6 +185,7 @@ begin
   FCompressedDataArray := nil;
 end;
 
+{ Free all data }
 procedure TBGRACompressableBitmap.FreeData;
 var i: integer;
 begin
@@ -152,7 +198,12 @@ begin
   if FUncompressedData <> nil then FreeAndNil(FUncompressedData);
 end;
 
+{ Copy a bitmap into this object. As it is copied, you need not
+  keep a copy of the source }
 procedure TBGRACompressableBitmap.Assign(Source: TBGRABitmap);
+var
+  UsedPart: TBGRABitmap;
+  NbUsedPixels: integer;
 begin
   FreeData;
   if Source = nil then
@@ -165,8 +216,19 @@ begin
   FWidth := Source.Width;
   FHeight := Source.Height;
   FCaption := Source.Caption;
+  FBounds := Source.GetImageBounds;
+  NbUsedPixels := (FBounds.Right-FBounds.Left)*(FBounds.Bottom-FBounds.Top);
   FUncompressedData := TMemoryStream.Create;
-  FUncompressedData.Write(Source.Data^,Source.NbPixels*Sizeof(TBGRAPixel));
+  if NbUsedPixels = 0 then exit;
+
+  if (FBounds.Left <> 0) or (FBounds.Top <> 0)
+    or (FBounds.Right <> Source.Width) or (FBounds.Bottom <> Source.Height) then
+  begin
+    UsedPart := Source.GetPart(FBounds) as TBGRABitmap;
+    FUncompressedData.Write(UsedPart.Data^,NbUsedPixels*Sizeof(TBGRAPixel));
+    UsedPart.Free;
+  end else
+    FUncompressedData.Write(Source.Data^,Source.NbPixels*Sizeof(TBGRAPixel));
 end;
 
 destructor TBGRACompressableBitmap.Destroy;

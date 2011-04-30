@@ -1,5 +1,9 @@
 unit BGRABlend;
 
+{ This unit contains pixel blending functions. They take a destination adress as parameter,
+  and draw pixels at this address with different blending modes. These functions are used
+  by many functions in BGRABitmap library to do the low level drawing. }
+
 {$mode objfpc}{$H+}
 
 interface
@@ -7,25 +11,41 @@ interface
 uses
   Classes, SysUtils, BGRABitmapTypes;
 
-procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
-  blendOp: TBlendOperation; Count: integer);
-
-procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
-
+{ Draw one pixel with alpha blending }
 procedure DrawPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+
+{ Draw a series of pixels with alpha blending }
 procedure DrawPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
-procedure FillInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
-procedure AlphaFillInline(dest: PBGRAPixel; alpha: byte; Count: integer); inline;
-procedure ErasePixelInline(dest: PBGRAPixel; alpha: byte); inline;
-
+{ Draw one pixel with linear alpha blending }
 procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+
+{ Draw a series of pixels with linear alpha blending }
 procedure FastBlendPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
+{ Replace a series of pixels }
+procedure FillInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
+
+{ Set alpha value for a series of pixels }
+procedure AlphaFillInline(dest: PBGRAPixel; alpha: byte; Count: integer); inline;
+
+{ Erase a series of pixels, i.e. decrease alpha value }
+procedure ErasePixelInline(dest: PBGRAPixel; alpha: byte); inline;
+
+{ Draw a pixel to the extent the current pixel is close enough to compare value.
+  It should not be called on pixels that have not been checked to be close enough }
 procedure DrawPixelInlineDiff(dest: PBGRAPixel; c, compare: TBGRAPixel;
   maxDiff: byte); inline;
+{ Draw a series of pixel to the extent the current pixel is close enough to compare value }
 procedure DrawPixelsInlineDiff(dest: PBGRAPixel; c: TBGRAPixel;
   Count: integer; compare: TBGRAPixel; maxDiff: byte); inline;
+
+{ Blend pixels with scanner content }
+procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+
+{ Perform advanced blending operation }
+procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
+  blendOp: TBlendOperation; Count: integer);
 
 //layer blend modes ( http://www.pegtop.net/delphi/articles/blendmodes/ )
 procedure MultiplyPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
