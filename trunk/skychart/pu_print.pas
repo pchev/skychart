@@ -235,12 +235,21 @@ cm.PrintLandscape:=(prtorient.ItemIndex=1);
 end;
 
 procedure Tf_print.SetupClick(Sender: TObject);
+var savecfgm:Tconf_main;
 begin
+savecfgm:=Tconf_main.Create;
+try
+savecfgm.Assign(cm);
 f_printsetup.cm:=cm;
 formpos(f_printsetup,mouse.cursorpos.x,mouse.cursorpos.y);
 if f_printsetup.showmodal=mrOK then begin
  cm:=f_printsetup.cm;
  ShowPrtInfo;
+end else begin
+ cm.Assign(savecfgm);
+end;
+finally
+savecfgm.Free;
 end;
 end;
 
