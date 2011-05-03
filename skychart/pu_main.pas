@@ -48,6 +48,7 @@ type
   Tf_main = class(TForm)
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
+    PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
     NextChild1: TMenuItem;
     ReloadLanguage1: TMenuItem;
@@ -451,6 +452,7 @@ type
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
+    procedure PrintPreview1Click(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -1859,8 +1861,15 @@ if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
    with MultiDoc1.ActiveObject as Tf_chart do
       PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
 end;
+PrintPreview1.Visible:=(cfgm.PrintMethod=0);
 end;
 
+procedure Tf_main.PrintPreview1Click(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then
+  with MultiDoc1.ActiveObject as Tf_chart do
+     PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,true);
+end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
 begin
@@ -5614,6 +5623,7 @@ Calendar1.caption:='&'+rsCalendar;
 VariableStar1.Caption:='&'+rsVariableStar2;
 Print2.caption:='&'+rsPrint;
 PrintSetup2.caption:='&'+rsPrinterSetup;
+PrintPreview1.Caption:='&'+rsPrintPreview;
 FileExitItem.caption:='&'+rsExit;
 Edit1.caption:='&'+rsEdit;
 CopyItem.caption:='&'+rsCopy;
@@ -5888,6 +5898,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
+  PrintPreview1.Visible:=(cfgm.PrintMethod=0);
   with MultiDoc1.ActiveObject as Tf_chart do begin
     if sc.cfgsc.ManualTelescope then begin
        ControlPanel1.Visible:=false;
@@ -6639,11 +6650,21 @@ FilePrintSetup1.Execute;
 end;                                              
 
 procedure Tf_main.FilePrintSetup1Execute(Sender: TObject);
+var savecfgm:Tconf_main;
 begin
+savecfgm:=Tconf_main.Create;
+try
+savecfgm.Assign(cfgm);
 f_printsetup.cm:=cfgm;
 formpos(f_printsetup,mouse.cursorpos.x,mouse.cursorpos.y);
 if f_printsetup.showmodal=mrOK then begin
  cfgm:=f_printsetup.cm;
+end else begin
+ cfgm.Assign(savecfgm);
+end;
+PrintPreview1.Visible:=(cfgm.PrintMethod=0);
+finally
+savecfgm.Free;
 end;
 end;
 

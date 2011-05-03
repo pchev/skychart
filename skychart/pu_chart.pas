@@ -188,7 +188,7 @@ type
     FChartMove: TnotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
-    MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam: Boolean;
+    MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam,printing: Boolean;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
@@ -361,6 +361,7 @@ begin
  movecam:=false;
  moveguide:=false;
  frommovecam:=false;
+ printing:=false;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
  Image1:= TChartDrawingControl.Create(Self);
@@ -807,6 +808,7 @@ end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
+if printing then exit;
 {$ifdef trace_debug}
  WriteTrace(caption+' Paint');
 {$endif}
@@ -944,21 +946,9 @@ var savecolor: Starcolarray;
     pt:TPoint;
     ps:TPostscriptCanvas;
     previewbmp:Tbitmap;
-  begin
-{$ifdef trace_debug}
- WriteTrace(caption+' PrintChart');
-{$endif}
- zoomstep:=0;
- // save current state
- savecolor:=sc.plot.cfgplot.color;
- savesplot:=sc.plot.cfgplot.starplot;
- savenplot:=sc.plot.cfgplot.nebplot;
- savepplot:=sc.plot.cfgplot.plaplot;
- saveskycolor:=sc.plot.cfgplot.autoskycolor;
- savebgcolor:=sc.plot.cfgplot.bgColor;
- for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
-try
- screen.cursor:=crHourGlass;
+Procedure InitPrintColor;
+var i:integer;
+begin
  if printcolor<>2 then begin
    // force line drawing
    sc.plot.cfgplot.starplot:=0;
@@ -975,6 +965,23 @@ try
    if printcolor<2 then for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=clBlack;
    sc.plot.cfgplot.bgColor:=sc.plot.cfgplot.color[0];
  end;
+end;
+begin
+{$ifdef trace_debug}
+ WriteTrace(caption+' PrintChart');
+{$endif}
+ zoomstep:=0;
+ // save current state
+ savecolor:=sc.plot.cfgplot.color;
+ savesplot:=sc.plot.cfgplot.starplot;
+ savenplot:=sc.plot.cfgplot.nebplot;
+ savepplot:=sc.plot.cfgplot.plaplot;
+ saveskycolor:=sc.plot.cfgplot.autoskycolor;
+ savebgcolor:=sc.plot.cfgplot.bgColor;
+ for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
+try
+ printing:=true;
+ screen.cursor:=crHourGlass;
  Case PrintMethod of
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
@@ -986,6 +993,7 @@ try
       PrintPreview:=Tf_image.Create(self);
       previewbmp:=Tbitmap.Create;
       try
+        InitPrintColor;
         PrintPreview.ButtonPrint.Visible:=true;
         PrintPreview.Image1.BGcolor:=clBtnFace;
         w:=Printer.PageWidth;
@@ -1027,6 +1035,7 @@ try
         PrintPreview.Init;
         pt:=Image1.ClientToScreen(point(0,0));
         FormPos(PrintPreview,pt.x,pt.y);
+        screen.cursor:=crDefault;
         PrintPreview.ShowModal;
         printok:=(PrintPreview.ModalResult=mrYes);
       finally
@@ -1036,6 +1045,8 @@ try
       if not printok then exit;
     end;
     // print
+    screen.cursor:=crHourGlass;
+    InitPrintColor;
     Printer.Title:='CdC';
     Printer.Copies:=cm.PrintCopies;
     Printer.BeginDoc;
@@ -1064,6 +1075,7 @@ try
 //{$endif}
     end;
  1: begin  // to postscript canvas
+    InitPrintColor;
     if assigned(Fshowinfo) then Fshowinfo(rsCreatePostsc , caption);
     if DirectoryIsWritable(printpath) then begin
       ps:=TPostscriptCanvas.Create;
@@ -1108,6 +1120,7 @@ try
       else if assigned(Fshowinfo) then Fshowinfo(rsInvalidPath+printpath , caption);
     end;
  2: begin  // to bitmap
+    InitPrintColor;
     if assigned(Fshowinfo) then Fshowinfo(Format(rsCreateRaster, [inttostr(printresol)]) , caption);
     if DirectoryIsWritable(printpath) then begin
       if PrintLandscape then begin
@@ -1148,6 +1161,7 @@ try
  end;
 end;
 finally
+ printing:=false;
  chdir(appdir);
  screen.cursor:=crDefault;
  // restore state
