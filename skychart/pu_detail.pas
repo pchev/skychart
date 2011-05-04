@@ -131,7 +131,7 @@ begin
     Stream:=TMemoryStream.Create;
     bmp:=TBitmap.Create;
     png:=TPortableNetworkGraphic.Create;
-    png.LoadFromFile(src);
+    png.LoadFromFile(systoutf8(src));
     bmp.Assign(png);
     bmp.SaveToStream(Stream);
     Stream.position:=0;
