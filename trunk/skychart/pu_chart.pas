@@ -2156,11 +2156,11 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
 end;
 // Sun picture
 if (otype='S*')and(oname=pla[10]) then begin
-  fn:=slash(Tempdir)+'sun.jpg';
-  if not FileExists(fn) then begin  // use default image
-    fn:=slash(appdir)+slash('data')+slash('planet')+'sun-0.jpg';
+  fn:=slash(systoutf8(Tempdir))+'sun.jpg';
+  if not FileExistsutf8(fn) then begin  // use default image
+    fn:=slash(systoutf8(appdir))+slash('data')+slash('planet')+'sun-0.jpg';
   end;
-  if FileExists(fn) then txt:=txt+'<img src="'+fn+'" alt="'+oname+'" border="0" width="200">'+html_br;
+  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
 end;
 // DSO picture
 if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
@@ -2171,10 +2171,10 @@ if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
          bmp:=Tbitmap.Create;
          try
          sc.Fits.GetBitmap(bmp);
-         fn:=slash(TempDir)+'info.bmp';
-         DeleteFile(fn);
+         fn:=slash(systoutf8(TempDir))+'info.bmp';
+         DeleteFileutf8(fn);
          bmp.SaveToFile(fn);
-         if FileExists(fn) then txt:=txt+'<img src="'+fn+'" alt="'+oname+'" border="0" width="200">'+html_br;
+         if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
          finally
          bmp.Free;
          end;

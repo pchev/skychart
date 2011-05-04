@@ -612,8 +612,8 @@ end;
 procedure Tf_config_system.persdirChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.persdir:=persdir.text;
-dbnamesqlite.Text:=slash(cmain.persdir)+slash('database')+'cdc.db';
+cmain.persdir:=utf8tosys(persdir.text);
+dbnamesqlite.Text:=systoutf8(slash(cmain.persdir)+slash('database')+'cdc.db');
 dbchanged:=true;
 end;
 
