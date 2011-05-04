@@ -511,7 +511,7 @@ end;
 procedure Tf_config_system.dbnamesqliteChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.db:=dbnamesqlite.text;
+cmain.db:=utf8tosys(dbnamesqlite.text);
 end;
 
 procedure Tf_config_system.dbnameChange(Sender: TObject);

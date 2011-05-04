@@ -2162,7 +2162,7 @@ begin
     if MultiDoc1.ActiveObject  is Tf_chart then
      with MultiDoc1.ActiveObject as Tf_chart do begin
          inc(Animcount);
-         fn:=Slash(TempDir)+FormatFloat('000000',Animcount)+'.jpg';
+         fn:=Slash(systoutf8(TempDir))+FormatFloat('000000',Animcount)+'.jpg';
          SaveChartImage('JPEG',fn,80);
       end;
   end;
