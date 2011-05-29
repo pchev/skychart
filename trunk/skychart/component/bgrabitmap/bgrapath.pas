@@ -47,6 +47,7 @@ begin
   len    := max(len, sqr(pt3.x - pt2.x) + sqr(pt3.y - pt2.y));
   len    := max(len, sqr(pt3.x - pt4.x) + sqr(pt3.y - pt4.y));
   Result := round(sqrt(sqrt(len)) * 2);
+  if Result<=0 then Result:=1;
 end;
 
 function ComputeBezierCurve(const curve: TCubicBezierCurve): ArrayOfTPointF; overload;
@@ -387,4 +388,4 @@ end;
 
 
 end.
-
+
