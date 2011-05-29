@@ -1026,8 +1026,8 @@ try
          y:=h-10-sc.cfgsc.BottomMargin;
          sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
         end;
-        previewbmp.SaveToFile(slash(TempDir)+'preview.bmp');
-        PrintPreview.LoadImage(slash(TempDir)+'preview.bmp');
+        previewbmp.SaveToFile(SysToUTF8(slash(TempDir))+'preview.bmp');
+        PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.ClientHeight:=Image1.Height;
         PrintPreview.ClientWidth:=Image1.Width;
         PrintPreview.image1.ZoomMin:=0.5;
