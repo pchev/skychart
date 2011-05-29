@@ -5,7 +5,7 @@ unit BGRACanvas;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, Graphics, GraphType, FPImage, Types;
+  Classes, SysUtils, BGRABitmapTypes, Graphics, GraphType, FPImage, Types, FPCanvas;
 
 type
 
@@ -125,6 +125,7 @@ type
     AntialiasingMode: TAntialiasingMode;
     FillMode : TFillMode;
     TextStyle : TTextStyle;
+    DrawFontBackground : boolean;
     constructor Create(ABitmap: TBGRACustomBitmap);
     destructor Destroy; override;
     procedure MoveTo(x,y: integer);
@@ -145,14 +146,15 @@ type
     procedure Rectangle(const bounds: TRect; Filled: Boolean = True);
     procedure Frame(x1,y1,x2,y2: integer);
     procedure Frame(const bounds: TRect);
-    procedure RoundRect(x1,y1,x2,y2: integer; rx,ry: integer);
-    procedure RoundRect(const bounds: TRect; rx,ry: integer);
+    procedure RoundRect(x1,y1,x2,y2: integer; dx,dy: integer);
+    procedure RoundRect(const bounds: TRect; dx,dy: integer);
     procedure EllipseC(x,y,rx,ry: integer);
     procedure FillRect(x1,y1,x2,y2: integer);
     procedure FillRect(const bounds: TRect);
     procedure FrameRect(x1,y1,x2,y2: integer; width: integer = 1);
     procedure FrameRect(const bounds: TRect; width: integer = 1);
-    procedure Frame3D(const bounds: TRect; width: integer; Style: TGraphicsBevelCut);
+    procedure Frame3D(var bounds: TRect; width: integer; Style: TGraphicsBevelCut); overload;
+    procedure Frame3D(var bounds: TRect; width: integer; Style: TGraphicsBevelCut; LightColor: TBGRAPixel; ShadowColor: TBGRAPixel); overload;
     procedure GradientFill(ARect: TRect; AStart, AStop: TColor;
       ADirection: TGradientDirection; GammaCorrection: Boolean = false);
     procedure FloodFill(X, Y: Integer; FillColor: TColor; FillStyle: TFillStyle);
@@ -194,6 +196,7 @@ type
     function TextWidth(const Text: string): Integer;
 
     property Pen: TBGRAPen read FPen write SetPen;
+    property PenPos : TPoint read FPenPos write FPenPos;
     property Brush: TBGRABrush read FBrush write SetBrush;
     property Font: TBGRAFont read FFont write SetFont;
     property Pixels[X,Y: Integer]: TColor read GetPixelColor write SetPixelColor;
@@ -207,7 +210,7 @@ type
 
 implementation
 
-uses BGRAPen, BGRAPolygon, Math;
+uses BGRAPen, BGRAPath, BGRAPolygon, BGRAPolygonAliased, Math;
 
 { TBGRAFont }
 
@@ -224,7 +227,21 @@ end;
 
 procedure TBGRAFont.Assign(Source: TObject);
 var sf: TBGRAFont;
+    f: TFont;
+    cf: TFPCustomFont;
 begin
+  if Source is TFont then
+  begin
+    f := TFont(Source);
+    Color := f.Color;
+    Opacity := 255;
+    Style := f.Style;
+    Name := f.Name;
+    Orientation := f.Orientation;
+    if f.Height= 0 then
+      Height := 16 else
+       Height := f.Height;
+  end else
   if Source is TBGRAFont then
   begin
     sf := Source as TBGRAFont;
@@ -234,6 +251,21 @@ begin
     Antialiasing := sf.Antialiasing;
     Orientation := sf.Orientation;
     Texture := sf.Texture;
+  end else
+  if Source is TFPCustomFont then
+  begin
+    cf := Source as TFPCustomFont;
+    Color := FPColorToTColor(cf.FPColor);
+    Style := [];
+    if cf.Bold then Style += [fsBold];
+    if cf.Italic then Style += [fsItalic];
+    if cf.Underline then Style += [fsUnderline];
+    if cf.StrikeTrough then Style += [fsStrikeOut];
+    Name := cf.Name;
+    //Orientation := cf.Orientation;
+    if cf.Size = 0 then
+      Height := 16 else
+       Height := round(cf.Size*1.8);
   end;
   inherited Assign(Source);
 end;
@@ -287,6 +319,7 @@ end;
 
 procedure TBGRABrush.Assign(Source: TObject);
 var sb: TBGRABrush;
+    b: TBrush;
 begin
   if Source is TBGRABrush then
   begin
@@ -294,6 +327,13 @@ begin
     Texture := sb.Texture;
     BackColor := sb.BackColor;
     Style := sb.Style;
+  end else
+  if Source is TBrush then
+  begin
+    b := Source as TBrush;
+    Color := b.Color;
+    Opacity := 255;
+    Style := b.Style;
   end;
   inherited Assign(Source);
 end;
@@ -393,6 +433,7 @@ end;
 
 procedure TBGRAPen.Assign(Source: TObject);
 var sp: TBGRAPen;
+    p: TPen;
 begin
   if Source is TBGRAPen then
   begin
@@ -402,6 +443,16 @@ begin
     JoinStyle := sp.JoinStyle;
     Style := sp.Style;
     CustomStyle := sp.CustomStyle;
+  end else
+  if Source is TPen then
+  begin
+    p := Source as TPen;
+    Width := p.Width;
+    EndCap := p.EndCap;
+    JoinStyle := p.JoinStyle;
+    Style := p.Style;
+    Color := p.Color;
+    Opacity := 255;
   end;
   inherited Assign(Source);
 end;
@@ -420,7 +471,7 @@ end;
 
 procedure TBGRAColoredObject.SetColor(const AValue: TColor);
 begin
-  BGRAColor := ColorToBGRA(AValue,BGRAColor.alpha);
+  BGRAColor := ColorToBGRA(ColorToRGB(AValue),BGRAColor.alpha);
 end;
 
 procedure TBGRAColoredObject.SetOpacity(const AValue: Byte);
@@ -607,6 +658,7 @@ begin
   FClippingOn := False;
   FInactiveClipRect := FBitmap.ClipRect;
   FillMode := fmWinding;
+  DrawFontBackground := True;
 end;
 
 destructor TBGRACanvas.Destroy;
@@ -675,15 +727,26 @@ begin
 end;
 
 procedure TBGRACanvas.Arc65536(x1, y1, x2, y2: integer; start65536, end65536: word; Options: TArcOptions);
-var cx,cy,rx,ry: single;
+var cx,cy,rx,ry,w: single;
     arcPts,penPts: array of TPointF;
     multi: TBGRAMultishapeFiller;
     tex: IBGRAScanner;
 begin
   if NoPen and NoBrush then exit;
   if not ComputeEllipseC(x1,y1,x2,y2,cx,cy,rx,ry) then exit;
-  rx -=0.5;
-  ry -=0.5;
+
+  rx -=0.50;
+  ry -=0.50;
+  w := Pen.ActualWidth;
+
+  if AntialiasingMode = amOff then
+  begin
+    if not NoPen and not Odd(Pen.ActualWidth) then
+    begin
+      rx -= 0.01;
+      ry -= 0.01;
+    end;
+  end;
 
   if NoPen then
   begin
@@ -716,9 +779,9 @@ begin
   begin
     ApplyPenStyle;
     if (aoClosePath in Options) or (aoPie in Options) then
-      penPts := FBitmap.ComputeWidePolygon(arcPts,Pen.ActualWidth)
+      penPts := FBitmap.ComputeWidePolygon(arcPts,w)
     else
-      penPts := FBitmap.ComputeWidePolyline(arcPts,Pen.ActualWidth);
+      penPts := FBitmap.ComputeWidePolyline(arcPts,w);
     multi.AddPolygon( penPts, Pen.ActualColor );
   end;
   multi.Draw(FBitmap);
@@ -766,15 +829,32 @@ begin
 end;
 
 procedure TBGRACanvas.Ellipse(x1, y1, x2, y2: integer);
-var cx,cy,rx,ry,hw: single;
+var cx,cy,rx,ry,w: single;
     tex: IBGRAScanner;
     multi: TBGRAMultishapeFiller;
 begin
   if NoPen and NoBrush then exit;
+  tex := Brush.BuildTexture(FBitmap);
+  if (AntialiasingMode = amOff) and not NoPen and (Pen.Style = psSolid) and (Pen.ActualWidth = 1) then
+  begin
+    BGRARoundRectAliased(FBitmap,x1,y1,x2,y2,abs(x2-x1),abs(y2-y1),Pen.ActualColor,Brush.ActualColor,tex);
+    exit;
+  end;
   if not ComputeEllipseC(x1,y1,x2,y2,cx,cy,rx,ry) then exit;
   tex := Brush.BuildTexture(FBitmap);
-  rx -=0.5;
-  ry -=0.5;
+  w := Pen.ActualWidth;
+  rx -=0.50;
+  ry -=0.50;
+
+  if AntialiasingMode = amOff then
+  begin
+    if not NoPen and not Odd(Pen.ActualWidth) then
+    begin
+      rx -= 0.01;
+      ry -= 0.01;
+    end;
+  end;
+
   if NoPen then
   begin
     cx -=0.5;
@@ -783,7 +863,6 @@ begin
     ry -=0.2;
     if (rx<0) or (ry<0) then exit;
   end;
-  hw := Pen.ActualWidth/2;
   multi := TBGRAMultishapeFiller.Create;
   multi.Antialiasing := AntialiasingMode <> amOff;
   multi.PolygonOrder := poLastOnTop;
@@ -798,10 +877,10 @@ begin
   if not NoPen then
   begin
     ApplyPenStyle;
-    if Pen.Style = psSolid then
-      multi.AddEllipseBorder(cx,cy,rx,ry,2*hw,Pen.ActualColor)
+    if (Pen.Style = psSolid) and multi.Antialiasing then
+      multi.AddEllipseBorder(cx,cy,rx,ry,w,Pen.ActualColor)
     else
-      multi.AddPolygon(FBitmap.ComputeWidePolygon(ComputeEllipse(cx,cy,rx,ry),2*hw),Pen.ActualColor);
+      multi.AddPolygon(FBitmap.ComputeWidePolygon(ComputeEllipse(cx,cy,rx,ry),w),Pen.ActualColor);
   end;
   multi.Draw(FBitmap);
   multi.Free;
@@ -827,13 +906,21 @@ begin
   begin
     dec(x2);
     dec(y2);
+    tex := Brush.BuildTexture(FBitmap);
+
+    if (Pen.Style = psSolid) and (tex=nil) then
+    begin
+      ApplyPenStyle;
+      FBitmap.RectangleAntialias(x1,y1,x2,y2,Pen.ActualColor,Pen.ActualWidth,Brush.ActualColor);
+      exit;
+    end;
+
     w := Pen.ActualWidth;
     multi := TBGRAMultishapeFiller.Create;
     multi.Antialiasing := AntialiasingMode <> amOff;
     multi.PolygonOrder := poLastOnTop;
     if not NoBrush and Filled then
     begin
-      tex := Brush.BuildTexture(FBitmap);
       if tex <> nil then
         multi.AddRectangle(x1,y1,x2,y2,tex)
       else
@@ -868,7 +955,7 @@ begin
   Rectangle(bounds,False);
 end;
 
-procedure TBGRACanvas.RoundRect(x1, y1, x2, y2: integer; rx,ry: integer);
+procedure TBGRACanvas.RoundRect(x1, y1, x2, y2: integer; dx,dy: integer);
 var tx,ty: integer;
     w: single;
     tex: IBGRAScanner;
@@ -876,6 +963,12 @@ var tx,ty: integer;
     x1f,y1f,x2f,y2f: single;
 begin
   if NoPen and NoBrush then exit;
+  tex := Brush.BuildTexture(FBitmap);
+  if (AntialiasingMode = amOff) and not NoPen and (Pen.Style = psSolid) and (Pen.ActualWidth = 1) then
+  begin
+    BGRARoundRectAliased(FBitmap,x1,y1,x2,y2,dx,dy,Pen.ActualColor,Brush.ActualColor,tex);
+    exit;
+  end;
   if not CheckRectangle(x1,y1,x2,y2,tx,ty) then exit;
 
   dec(x2);
@@ -886,7 +979,6 @@ begin
   multi.PolygonOrder := poLastOnTop;
   if not NoBrush then
   begin
-    tex := Brush.BuildTexture(FBitmap);
     if NoPen then
     begin
       x1f := x1-0.5;
@@ -901,25 +993,25 @@ begin
       y2f := y2;
     end;
     if tex <> nil then
-      multi.AddRoundRectangle(x1f,y1f,x2f,y2f,rx/2,ry/2,tex)
+      multi.AddRoundRectangle(x1f,y1f,x2f,y2f,dx/2,dy/2,tex)
     else
-      multi.AddRoundRectangle(x1f,y1f,x2f,y2f,rx/2,ry/2,Brush.ActualColor);
+      multi.AddRoundRectangle(x1f,y1f,x2f,y2f,dx/2,dy/2,Brush.ActualColor);
   end;
   if not NoPen then
   begin
     ApplyPenStyle;
     if (Pen.Style = psSolid) and (Pen.JoinStyle = pjsMiter) then
-      multi.AddRoundRectangleBorder(x1,y1,x2,y2,rx/2,ry/2,w,Pen.ActualColor)
+      multi.AddRoundRectangleBorder(x1,y1,x2,y2,dx/2,dy/2,w,Pen.ActualColor)
     else
-      multi.AddPolygon(FBitmap.ComputeWidePolygon(ComputeRoundRect(x1,y1,x2,y2,rx/2,ry/2),w),Pen.ActualColor);
+      multi.AddPolygon(FBitmap.ComputeWidePolygon(ComputeRoundRect(x1,y1,x2,y2,dx/2,dy/2),w),Pen.ActualColor);
   end;
   multi.Draw(FBitmap);
   multi.Free;
 end;
 
-procedure TBGRACanvas.RoundRect(const bounds: TRect; rx,ry: integer);
+procedure TBGRACanvas.RoundRect(const bounds: TRect; dx,dy: integer);
 begin
-  RoundRect(bounds.left,bounds.top,bounds.right,bounds.Bottom,rx,ry);
+  RoundRect(bounds.left,bounds.top,bounds.right,bounds.Bottom,dx,dy);
 end;
 
 procedure TBGRACanvas.EllipseC(x, y, rx, ry: integer);
@@ -979,14 +1071,21 @@ begin
   FrameRect(bounds.left,bounds.top,bounds.right,bounds.Bottom,width);
 end;
 
-procedure TBGRACanvas.Frame3D(const bounds: TRect; width: integer;
+procedure TBGRACanvas.Frame3D(var bounds: TRect; width: integer;
   Style: TGraphicsBevelCut);
-var color1,color2,temp: TBGRAPixel;
+begin
+  Frame3D(bounds,width,style,ColorToBGRA(ColorToRGB(clBtnHighlight)),ColorToBGRA(ColorToRGB(clBtnShadow)));
+end;
+
+procedure TBGRACanvas.Frame3D(var bounds: TRect; width: integer;
+  Style: TGraphicsBevelCut; LightColor: TBGRAPixel; ShadowColor: TBGRAPixel);
+var temp: TBGRAPixel;
     multi: TBGRAMultishapeFiller;
+    color1,color2: TBGRAPixel;
 begin
   if width <= 0 then exit;
-  color1 := ColorToBGRA(ColorToRGB(clBtnHighlight));
-  color2 := ColorToBGRA(ColorToRGB(clBtnShadow));
+  color1 := LightColor;
+  color2 := ShadowColor;
   if Style = bvLowered then
   begin
     temp := color1;
@@ -1009,6 +1108,7 @@ begin
     multi.Draw(FBitmap);
     multi.Free;
   end;
+  InflateRect(bounds,-width,-width);
 end;
 
 procedure TBGRACanvas.GradientFill(ARect: TRect; AStart, AStop: TColor;
@@ -1420,12 +1520,15 @@ var size: TSize;
     c,s: single;
 begin
   ApplyFont;
-  size := TextExtent(Text);
-  c := cos(Font.Orientation*Pi/1800);
-  s := -sin(Font.Orientation*Pi/1800);
-  PolygonF([PointF(X,Y),PointF(X+c*size.cx,Y+s*size.cx),
-            PointF(X+c*size.cx-s*size.cy,Y+s*size.cx+c*size.cy),
-            PointF(X-s*size.cy,Y+c*size.cy)],False,True);
+  if DrawFontBackground then
+  begin
+    size := TextExtent(Text);
+    c := cos(Font.Orientation*Pi/1800);
+    s := -sin(Font.Orientation*Pi/1800);
+    PolygonF([PointF(X,Y),PointF(X+c*size.cx,Y+s*size.cx),
+              PointF(X+c*size.cx-s*size.cy,Y+s*size.cx+c*size.cy),
+              PointF(X-s*size.cy,Y+c*size.cy)],False,True);
+  end;
   if Font.Texture <> nil then
     FBitmap.TextOut(x,y,Text,Font.Texture) else
     FBitmap.TextOut(x,y,Text,Font.BGRAColor);

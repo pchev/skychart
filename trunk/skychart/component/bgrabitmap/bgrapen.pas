@@ -37,11 +37,6 @@ function ComputeWidePolyPolylinePoints(const linepts: array of TPointF; width: s
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
           options: TBGRAPolyLineOptions): ArrayOfTPointF;
 
-{ Compute points to draw an antialiased ellipse }
-function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF;
-function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
-
 {--------------------- Pixel line procedures --------------------------}
 { These procedures take integer coordinates as parameters and do not handle pen styles and width.
   They are faster and can be useful for drawing a simple frame }
@@ -70,7 +65,7 @@ function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 
 implementation
 
-uses math;
+uses math, BGRAPath;
 
 procedure BGRADrawLineAliased(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
   c: TBGRAPixel; DrawLastPixel: boolean);
@@ -238,6 +233,7 @@ var
   c:     TBGRAPixel;
   DashPos: integer;
 begin
+  if (c1.alpha=0) and (c2.alpha=0) then exit;
 
   c := c1;
   DashPos := 0;
@@ -1035,23 +1031,37 @@ begin
       if joinstyle = pjsRound then
       begin
 
-        if (penstyle= nil) and (turn > 0) then
+        if {(penstyle= nil) and} (turn > 0) then
         begin
           pt1 := pts[i+1] + borders[i].leftDir;
           pt2 := pts[i+1] + borders[i+1].leftDir;
+          pt3 := pts[i+1] - borders[i].leftDir;
+          pt4 := pts[i+1];
+
+          SetJoinLeft([pt1,pt1]);
+          SetJoinRight([pt3,pt4]);
+          AddJoin(-1);
+
           SetJoinLeft(ComputeRoundJoin(pts[i+1],pt1,pt2));
           nbJoinRight := 1;
-          joinRight[0] := pts[i+1] - borders[i].leftDir;
+          joinRight[0] := pt4;
           AddJoin(-1);
           FlushLine(-1);
         end else
-        if (penstyle= nil) and (turn < 0) then
+        if {(penstyle= nil) and} (turn < 0) then
         begin
           pt1 := pts[i+1] - borders[i].leftDir;
           pt2 := pts[i+1] - borders[i+1].leftDir;
+          pt3 := pts[i+1] + borders[i].leftDir;
+          pt4 := pts[i+1];
+
+          SetJoinRight([pt1,pt1]);
+          SetJoinLeft([pt3,pt4]);
+          AddJoin(-1);
+
           SetJoinRight(ComputeRoundJoin(pts[i+1],pt1,pt2));
           nbJoinLeft := 1;
-          joinLeft[0] := pts[i+1] + borders[i].leftDir;
+          joinLeft[0] := pt4;
           AddJoin(-1);
           FlushLine(-1);
         end else
@@ -1151,64 +1161,6 @@ begin
       inc(start);
     end;
   end;
-end;
-
-{$PUSH}{$R-}
-function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
-var i,nb: integer;
-    arclen: integer;
-    pos: word;
-begin
-  if end65536 > start65536 then
-    arclen := end65536-start65536 else
-    arclen := 65536-(start65536-end65536);
-
-  nb := round(((rx+ry)*2+8)*arclen/65536) and not 3;
-  if nb < 2 then nb := 2;
-  if nb > arclen+1 then nb := arclen+1;
-
-  setlength(result,nb);
-  for i := 0 to nb-1 do
-  begin
-    pos := start65536+int64(i)*arclen div (nb-1);
-    result[i] := PointF(x+rx*(Cos65536(pos)-32768)/32768,
-                        y-ry*(Sin65536(pos)-32768)/32768);
-  end;
-end;
-{$R+}
-
-function ComputeEllipse(x, y, rx, ry: single): ArrayOfTPointF;
-begin
-  result := ComputeArc65536(x,y,rx,ry,0,0);
-end;
-
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
-var q1,q2,q3,q4: array of TPointF;
-  temp: Single;
-begin
-  if x1 > x2 then
-  begin
-    temp := x1;
-    x1 := x2;
-    x2 := temp;
-  end;
-  if y1 > y2 then
-  begin
-    temp := y1;
-    y1 := y2;
-    y2 := temp;
-  end;
-  rx := abs(rx);
-  ry := abs(ry);
-  if 2*rx > x2-x1 then
-    rx := (x2-x1)/2;
-  if 2*ry > y2-y1 then
-    ry := (y2-y1)/2;
-  q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384);
-  q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768);
-  q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384);
-  q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0);
-  result := ConcatPointsF([q1,q2,q3,q4]);
 end;
 
 initialization

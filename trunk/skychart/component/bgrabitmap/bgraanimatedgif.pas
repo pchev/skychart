@@ -1004,7 +1004,7 @@ begin
             else if newpix and AlphaMask > 0 then
             begin
               PChangePix^ := PBackground^;
-              DrawPixelInline(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
+              DrawPixelInlineNoAlphaCheck(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
             end
             else if PChangePix^ and AlphaMask <> 0 then
               PChangePix^ := PBackground^; //efface précédent
@@ -1044,7 +1044,7 @@ begin
               else if newpix and AlphaMask > 0 then
               begin
                 PChangePix^ := PBackground^;
-                DrawPixelInline(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
+                DrawPixelInlineNoAlphaCheck(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
               end
               else if PChangePix^ and AlphaMask <> 0 then
                 PChangePix^ := PBackground^; //efface précédent
@@ -1175,7 +1175,7 @@ begin
         else if newpix and AlphaMask > 0 then
         begin
           PChangePix^ := MemPixEraseColor;
-          DrawPixelInline(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
+          DrawPixelInlineNoAlphaCheck(PBGRAPixel(PChangePix), PBGRAPixel(@newpix)^);
         end
         else if PChangePix^ and AlphaMask <> 0 then
           PChangePix^ := MemPixEraseColor; //efface précédent

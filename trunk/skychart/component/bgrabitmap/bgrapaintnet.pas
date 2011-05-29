@@ -44,14 +44,14 @@ type
     XmlHeader: string;
     ThumbNail: TBGRABitmap;
     Content:   TDotNetDeserialization;
-    Document:  PSerializedObject;
-    Layers:    PSerializedObject;
+    Document:  TSerializedClass;
+    Layers:    TSerializedClass;
     LayerData: array of TMemoryStream;
-    function GetLayer(num: integer): PSerializedObject;
-    function GetBlendOperation(layer: PSerializedObject): TBlendOperation;
-    function GetLayerName(layer: PSerializedObject): string;
-    function GetLayerVisible(layer: PSerializedObject): boolean;
-    function GetLayerOpacity(layer: PSerializedObject): byte;
+    function GetLayer(num: integer): TSerializedClass;
+    function GetBlendOperation(layer: TSerializedClass): TBlendOperation;
+    function GetLayerName(layer: TSerializedClass): string;
+    function GetLayerVisible(layer: TSerializedClass): boolean;
+    function GetLayerOpacity(layer: TSerializedClass): byte;
     function LayerDataSize(numLayer: integer): int64;
     procedure LoadLayer(dest: TMemoryStream; src: TStream; uncompressedSize: int64);
   end;
@@ -247,9 +247,9 @@ begin
       raise Exception.Create('Unknown compression format (' +
         IntToStr(Compressionformat) + ')');
   end;
-  Document := Content.FindObject('Document');
+  Document := Content.FindClass('Document');
   if Document <> nil then
-    Layers := Content.GetObjectField(Document^, 'layers');
+    Layers := Content.GetObjectField(Document, 'layers') as TSerializedClass;
   SetLength(LayerData, NbLayers);
   for i := 0 to NbLayers - 1 do
   begin
@@ -325,7 +325,7 @@ begin
   if Document = nil then
     Result := 0
   else
-    Result := StrToInt(Content.GetSimpleField(Document^, 'width'));
+    Result := StrToInt(Content.GetSimpleField(Document, 'width'));
 end;
 
 function TPaintDotNetFile.Height: integer;
@@ -333,7 +333,7 @@ begin
   if Document = nil then
     Result := 0
   else
-    Result := StrToInt(Content.GetSimpleField(Document^, 'height'));
+    Result := StrToInt(Content.GetSimpleField(Document, 'height'));
 end;
 
 function TPaintDotNetFile.NbLayers: integer;
@@ -341,7 +341,7 @@ begin
   if Layers = nil then
     Result := 0
   else
-    Result := StrToInt(Content.GetSimpleField(Layers^, '_size'));
+    Result := StrToInt(Content.GetSimpleField(Layers, '_size'));
 end;
 
 function TPaintDotNetFile.BlendOperation(Layer: integer): TBlendOperation;
@@ -421,40 +421,40 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.GetLayerName(layer: PSerializedObject): string;
+function TPaintDotNetFile.GetLayerName(layer: TSerializedClass): string;
 var
-  prop: PSerializedObject;
+  prop: TCustomSerializedObject;
 begin
   if layer = nil then
     Result := ''
   else
   begin
-    prop := Content.GetObjectField(layer^, 'Layer+properties');
+    prop := Content.GetObjectField(layer, 'Layer+properties');
     if prop = nil then
       Result := ''
     else
     begin
-      Result := Content.GetSimpleField(prop^, 'name');
+      Result := Content.GetSimpleField(prop, 'name');
     end;
   end;
 end;
 
 function TPaintDotNetFile.LayerDataSize(numLayer: integer): int64;
 var
-  layer, surface, scan0: PSerializedObject;
+  layer, surface, scan0: TCustomSerializedObject;
 begin
   layer := GetLayer(numLayer);
   if layer = nil then
     Result := 0
   else
   begin
-    surface := Content.GetObjectField(layer^, 'surface');
+    surface := Content.GetObjectField(layer, 'surface');
     if surface = nil then
       Result := 0
     else
     begin
-      scan0  := Content.GetObjectField(surface^, 'scan0');
-      Result := StrToInt64(Content.GetSimpleField(scan0^, 'length64'));
+      scan0  := Content.GetObjectField(surface, 'scan0');
+      Result := StrToInt64(Content.GetSimpleField(scan0, 'length64'));
     end;
   end;
 end;
@@ -512,9 +512,9 @@ begin
     raise Exception('Unknown compression flag (' + IntToStr(CompressionFlag) + ')');
 end;
 
-function TPaintDotNetFile.GetLayer(num: integer): PSerializedObject;
+function TPaintDotNetFile.GetLayer(num: integer): TSerializedClass;
 var
-  layerList: PSerializedObject;
+  layerList: TCustomSerializedObject;
 begin
   if Layers = nil then
     raise Exception.Create('No layers available')
@@ -523,31 +523,31 @@ begin
     raise Exception.Create('Layer index out of bounds')
   else
   begin
-    layerList := Content.GetObjectField(Layers^, '_items');
-    Result    := Content.GetObject(layerList^.fields[num].Value);
+    layerList := Content.GetObjectField(Layers, '_items');
+    Result    := Content.GetObject(layerList.FieldAsString[num]) as TSerializedClass;
   end;
 end;
 
-function TPaintDotNetFile.GetBlendOperation(layer: PSerializedObject): TBlendOperation;
+function TPaintDotNetFile.GetBlendOperation(layer: TSerializedClass): TBlendOperation;
 var
-  prop, blendOp: PSerializedObject;
+  prop, blendOp: TCustomSerializedObject;
   blendName:     string;
 begin
   if layer = nil then
     Result := boTransparent
   else
   begin
-    prop := Content.GetObjectField(layer^, 'properties');
+    prop := Content.GetObjectField(layer, 'properties');
     if prop = nil then
       Result := boTransparent
     else
     begin
-      blendOp := Content.GetObjectField(prop^, 'blendOp');
+      blendOp := Content.GetObjectField(prop, 'blendOp');
       if blendOp = nil then
         Result := boTransparent
       else
       begin
-        blendName := Content.GetObjectType(blendOp);
+        blendName := blendOp.TypeAsString;
         if (pos('+', blendName) <> 0) then
           Delete(blendName, 1, pos('+', blendName));
         if copy(blendName, length(blendName) - length('BlendOp') +
@@ -603,38 +603,38 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.GetLayerVisible(layer: PSerializedObject): boolean;
+function TPaintDotNetFile.GetLayerVisible(layer: TSerializedClass): boolean;
 var
-  prop: PSerializedObject;
+  prop: TCustomSerializedObject;
 begin
   if layer = nil then
     Result := False
   else
   begin
-    prop := Content.GetObjectField(layer^, 'Layer+properties');
+    prop := Content.GetObjectField(layer, 'Layer+properties');
     if prop = nil then
       Result := False
     else
     begin
-      Result := (Content.GetSimpleField(prop^, 'visible') = 'True');
+      Result := (Content.GetSimpleField(prop, 'visible') = 'True');
     end;
   end;
 end;
 
-function TPaintDotNetFile.GetLayerOpacity(layer: PSerializedObject): byte;
+function TPaintDotNetFile.GetLayerOpacity(layer: TSerializedClass): byte;
 var
-  prop: PSerializedObject;
+  prop: TCustomSerializedObject;
 begin
   if layer = nil then
     Result := 0
   else
   begin
-    prop := Content.GetObjectField(layer^, 'Layer+properties');
+    prop := Content.GetObjectField(layer, 'Layer+properties');
     if prop = nil then
       Result := 0
     else
     begin
-      Result := StrToInt(Content.GetSimpleField(prop^, 'opacity'));
+      Result := StrToInt(Content.GetSimpleField(prop, 'opacity'));
     end;
   end;
 end;

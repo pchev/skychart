@@ -1120,7 +1120,7 @@ p[m]:=pts[n-1];
 if cfgplot.UseBMP then begin
   setlength(pf,1+m);
   for i:=0 to m do begin pf[i].x:=p[i].x;pf[i].y:=p[i].y;end;
-  cbmp.DrawPolyLineAntialias(cbmp.ComputeClosedSpline(pf),ColorToBGRA(outlinecol),outlinelw*cfgchart.drawpen,true);
+  cbmp.DrawPolyLineAntialias(cbmp.ComputeClosedSpline(pf,ssCrossing),ColorToBGRA(outlinecol),outlinelw*cfgchart.drawpen,true);
 end else begin
   cnv.PolyBezier(p);
 end;

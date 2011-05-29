@@ -43,11 +43,28 @@ type
     function KernelWidth: single; override;
   end;
 
+  { TSplineKernel }
+
   TSplineKernel = class(TWideKernelFilter)
+  public
+    Coeff: single;
+    constructor Create;
+    constructor Create(ACoeff: single);
     function Interpolation(t: single): single; override;
     function ShouldCheckRange: boolean; override;
     function KernelWidth: single; override;
   end;
+
+  { TCubicKernel }
+
+  TCubicKernel = class(TWideKernelFilter)
+    function pow3(x: single): single; inline;
+    function Interpolation(t: single): single; override;
+    function ShouldCheckRange: boolean; override;
+    function KernelWidth: single; override;
+  end;
+
+function CreateInterpolator(style: TSplineStyle): TWideKernelFilter;
 
 {-------------------------------- Fine resample ------------------------------------}
 
@@ -386,6 +403,36 @@ begin
   end;
 end;
 
+{ TCubicKernel }
+
+function TCubicKernel.pow3(x: single): single;
+begin
+  if x <= 0.0 then
+   result:=0.0
+  else
+   result:=x * x * x;
+end;
+
+function TCubicKernel.Interpolation(t: single): single;
+const globalfactor = 1/6;
+begin
+   if t > 2 then
+     result := 0
+   else
+     result:= globalfactor *
+       (pow3(t + 2 ) - 4 * pow3(t + 1 ) + 6 * pow3(t ) - 4 * pow3(t - 1 ) );
+end;
+
+function TCubicKernel.ShouldCheckRange: boolean;
+begin
+  Result:= false;
+end;
+
+function TCubicKernel.KernelWidth: single;
+begin
+  Result:= 2;
+end;
+
 { TMitchellKernel }
 
 function TMitchellKernel.Interpolation(t: single): single;
@@ -413,8 +460,17 @@ end;
 
 { TSplineKernel }
 
+constructor TSplineKernel.Create;
+begin
+  coeff := 0.5;
+end;
+
+constructor TSplineKernel.Create(ACoeff: single);
+begin
+  Coeff := ACoeff;
+end;
+
 function TSplineKernel.Interpolation(t: single): single;
-Const Coeff = -0.5;
 var
   tt, ttt: single;
 begin
@@ -422,9 +478,9 @@ begin
   tt := Sqr(t);
   ttt := tt * t;
   if t < 1 then
-    Result := (Coeff + 2) * ttt - (Coeff + 3) * tt + 1
+    Result := (2 - Coeff) * ttt - (3 - Coeff) * tt + 1
   else if t < 2 then
-    Result := Coeff * (ttt - 5 * tt + 8 * t - 4)
+    Result := -Coeff * (ttt - 5 * tt + 8 * t - 4)
   else
     Result := 0;
 end;
@@ -457,7 +513,7 @@ var
   factHoriz, factVert: single;
   fUpLeft, fUpRight, fLowLeft, fLowRight: integer;
   faUpLeft, faUpRight, faLowLeft, faLowRight: integer;
-  Sum, rSum, gSum, bSum, aSum: integer;
+  rSum, gSum, bSum, aSum: integer;
   temp:   TBGRACustomBitmap;
 begin
   if (newWidth < bmp.Width) or (newHeight < bmp.Height) then
@@ -538,17 +594,16 @@ begin
       cLowLeft  := (psrc2 + xInfo.isrc1)^;
       cLowRight := (psrc2 + xInfo.isrc2)^;
 
-      fUpLeft   := (256 - xInfo.factCorr) * (256 - yInfo.factCorr) shr 8;
-      fUpRight  := xInfo.factCorr * (256 - yInfo.factCorr) shr 8;
-      fLowLeft  := (256 - xInfo.factCorr) * yInfo.factCorr shr 8;
-      fLowRight := xInfo.factCorr * yInfo.factCorr shr 8;
+      fLowRight := (xInfo.factCorr * yInfo.factCorr + 128) shr 8;
+      fLowLeft := yInfo.factCorr - fLowRight;
+      fUpRight := xInfo.factCorr - fLowRight;
+      fUpLeft := (256 - xInfo.factCorr) - fLowLeft;
 
       faUpLeft   := fUpLeft * cUpLeft.alpha;
       faUpRight  := fUpRight * cUpRight.alpha;
       faLowLeft  := fLowLeft * cLowLeft.alpha;
       faLowRight := fLowRight * cLowRight.alpha;
 
-      Sum  := fUpLeft + fUpRight + fLowLeft + fLowRight;
       rSum := cUpLeft.red * faUpLeft + cUpRight.red * faUpRight +
         cLowLeft.red * faLowLeft + cLowRight.red * faLowRight;
       gSum := cUpLeft.green * faUpLeft + cUpRight.green * faUpRight +
@@ -562,7 +617,7 @@ begin
         pdest^ := BGRAPixelTransparent
       else
         pdest^ := BGRA((rSum + aSum shr 1) div aSum, (gSum + aSum shr 1) div aSum,
-          (bSum + aSum shr 1) div aSum, (aSum + Sum shr 1) div Sum);
+          (bSum + aSum shr 1) div aSum, (aSum + 128) shr 8);
       Inc(pdest);
 
     end;
@@ -754,6 +809,19 @@ begin
   end;
 end;
 
+function CreateInterpolator(style: TSplineStyle): TWideKernelFilter;
+begin
+  case Style of
+    ssInside, ssInsideWithEnds: result := TCubicKernel.Create;
+    ssCrossing, ssCrossingWithEnds: result := TMitchellKernel.Create;
+    ssOutside: result := TSplineKernel.Create(0.5);
+    ssRoundOutside: result := TSplineKernel.Create(0.75);
+    ssVertexToSide: result := TSplineKernel.Create(1);
+  else
+    raise Exception.Create('Unknown spline style');
+  end;
+end;
+
 function FineResample(bmp: TBGRACustomBitmap;
   NewWidth, NewHeight: integer; ResampleFilter: TResampleFilter): TBGRACustomBitmap;
 var
@@ -761,6 +829,13 @@ var
   tempFilter1,tempFilter2: TWideKernelFilter;
 begin
   case ResampleFilter of
+    rfBicubic: //blur
+    begin
+      tempFilter1 := TCubicKernel.Create;
+      result := WideKernelResample(bmp,NewWidth,NewHeight,tempFilter1,tempFilter1);
+      tempFilter1.Free;
+      exit;
+    end;
     rfMitchell:
     begin
       tempFilter1 := TMitchellKernel.Create;

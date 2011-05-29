@@ -11,7 +11,7 @@ interface
   linear interpolation. Inverse values are used for projective transform. }
 
 uses
-  Classes, SysUtils, BGRAPolygon, BGRABitmapTypes;
+  Classes, SysUtils, BGRAPolygon, BGRAFillInfo, BGRABitmapTypes;
 
 type
   //segment information for linear color
@@ -77,6 +77,7 @@ type
 
 procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonLinearTextureMappingInfo;
   texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
+
 procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; texture: IBGRAScanner;
   const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
 procedure PolygonLinearTextureMappingAliasedWithLightness(bmp: TBGRACustomBitmap; const points: array of TPointF; texture: IBGRAScanner;
@@ -126,14 +127,15 @@ procedure PolygonPerspectiveTextureMappingAliasedWithLightness(bmp: TBGRACustomB
 
 { Aliased round rectangle }
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
-  RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
+  DX, DY: integer; BorderColor, FillColor: TBGRAPixel; FillTexture: IBGRAScanner = nil);
 
 implementation
 
 uses Math, BGRABlend;
 
+{From LazRGBGraphics}
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
-  RX, RY: integer; BorderColor, FillColor: TBGRAPixel);
+  DX, DY: integer; BorderColor, FillColor: TBGRAPixel; FillTexture: IBGRAScanner = nil);
 var
   CX, CY, CX1, CY1, A, B, NX, NY: single;
   X, Y, EX, EY: integer;
@@ -144,6 +146,8 @@ var
   EdgeList: array of TPoint;
   temp:   integer;
   LX, LY: integer;
+  RowStart,RowEnd: integer;
+  eBorderColor,eFillColor: TExpandedPixel;
 
   procedure AddEdge(X, Y: integer);
   begin
@@ -168,14 +172,19 @@ begin
   end;
   if (x2 - x1 <= 0) or (y2 - y1 <= 0) then
     exit;
-  LX := x2 - x1 - RX;
-  LY := y2 - y1 - RY;
+  LX := x2 - x1 - DX;
+  LY := y2 - y1 - DY;
+  if LX < 0 then LX := 0;
+  if LY < 0 then LY := 0;
   Dec(x2);
   Dec(y2);
 
+  eBorderColor := GammaExpansion(BorderColor);
+  eFillColor := GammaExpansion(FillColor);
+
   if (X1 = X2) and (Y1 = Y2) then
   begin
-    dest.DrawPixel(X1, Y1, BorderColor);
+    dest.DrawPixel(X1, Y1, eBorderColor);
     Exit;
   end;
 
@@ -188,7 +197,9 @@ begin
   if (LX > X2 - X1) or (LY > Y2 - Y1) then
   begin
     dest.Rectangle(X1, Y1, X2 + 1, Y2 + 1, BorderColor, dmDrawWithTransparency);
-    dest.FillRect(X1 + 1, Y1 + 1, X2, Y2, FillColor, dmDrawWithTransparency);
+    if FillTexture <> nil then
+      dest.FillRect(X1 + 1, Y1 + 1, X2, Y2, FillTexture, dmDrawWithTransparency) else
+      dest.FillRect(X1 + 1, Y1 + 1, X2, Y2, FillColor, dmDrawWithTransparency);
     Exit;
   end;
 
@@ -260,12 +271,15 @@ begin
     begin
       for I := EdgeList[J].X to EdgeList[J].Y do
       begin
-        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, eBorderColor);
+        dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, eBorderColor);
       end;
 
-      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J, Floor(CX) +
-        Pred(EdgeList[J].X), FillColor);
+      if FillTexture <> nil then
+        dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J, Floor(CX) +
+          Pred(EdgeList[J].X), FillTexture) else
+        dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J, Floor(CX) +
+          Pred(EdgeList[J].X), eFillColor);
     end
     else
     if (J = High(EdgeList)) then
@@ -277,27 +291,41 @@ begin
 
       for I := S to EdgeList[J].Y do
       begin
-        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, eBorderColor);
+        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), eBorderColor);
       end;
     end
     else
     begin
       for I := EdgeList[J].X to EdgeList[J].Y do
       begin
-        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, BorderColor);
-        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), BorderColor);
+        dest.DrawPixel(Floor(CX) + I, Floor(CY) + J, eBorderColor);
+        dest.DrawPixel(Floor(CX) + I, Ceil(CY) - Succ(J), eBorderColor);
         if Floor(CX) + I <> Ceil(CX) - Succ(I) then
         begin
-          dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, BorderColor);
-          dest.DrawPixel(Ceil(CX) - Succ(I), Ceil(CY) - Succ(J), BorderColor);
+          dest.DrawPixel(Ceil(CX) - Succ(I), Floor(CY) + J, eBorderColor);
+          dest.DrawPixel(Ceil(CX) - Succ(I), Ceil(CY) - Succ(J), eBorderColor);
         end;
       end;
 
-      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Floor(CY) + J,
-        Floor(CX) + Pred(EdgeList[J].X), FillColor);
-      dest.DrawHorizLine(Ceil(CX) - EdgeList[J].X, Ceil(CY) - Succ(J),
-        Floor(CX) + Pred(EdgeList[J].X), FillColor);
+      RowStart := Ceil(CX) - EdgeList[J].X;
+      RowEnd := Floor(CX) + Pred(EdgeList[J].X);
+      if RowEnd >= RowStart then
+      begin
+        if FillTexture <> nil then
+        begin
+          dest.DrawHorizLine(RowStart, Floor(CY) + J,
+            RowEnd, FillTexture);
+          dest.DrawHorizLine(RowStart, Ceil(CY) - Succ(J),
+            RowEnd, FillTexture);
+        end else
+        begin
+          dest.DrawHorizLine(RowStart, Floor(CY) + J,
+            RowEnd, eFillColor);
+          dest.DrawHorizLine(RowStart, Ceil(CY) - Succ(J),
+            RowEnd, eFillColor);
+        end;
+      end;
     end;
   end;
 end;
@@ -406,14 +434,13 @@ var
       ec.green := round(colorPos[2]);
       ec.blue := round(colorPos[3]);
       ec.alpha := round(colorPos[4]);
-      DrawPixelInline(pdest, GammaCompression(ec));
+      DrawPixelInlineWithAlphaCheck(pdest, GammaCompression(ec));
       colorPos += colorStep;
       inc(pdest);
     end;
   end;
 
 var
-  bounds: TRect;
   miny, maxy, minx, maxx: integer;
 
   yb, i: integer;
@@ -422,24 +449,14 @@ var
   ix1, ix2: integer;
 
 begin
-  bounds := polyInfo.GetBounds;
-  If not ComputeMinMax(minx,miny,maxx,maxy,bounds,bmp) then exit;
-
-  setlength(inter, polyInfo.NbMaxIntersection);
-  for i := 0 to high(inter) do
-    inter[i] := polyInfo.CreateIntersectionInfo;
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
+  inter := polyInfo.CreateIntersectionArray;
 
   //vertical scan
   for yb := miny to maxy do
   begin
     //find intersections
-    nbinter := 0;
-    polyInfo.ComputeIntersection(yb+0.5001, inter, nbInter);
-    if nbinter = 0 then
-      continue;
-
-    polyInfo.SortIntersection(inter,nbInter);
-    if NonZeroWinding then polyInfo.ConvertFromNonZeroWinding(inter,nbInter);
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
 
     for i := 0 to nbinter div 2 - 1 do
     begin
@@ -593,100 +610,26 @@ begin
   end;
 end;
 
+{$hints off}
 procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonLinearTextureMappingInfo;
   texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean);
 var
   inter:    array of TIntersectionInfo;
   nbInter:  integer;
+  scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
 
-  procedure DrawTextureLine(yb: integer; ix1: integer; ix2: integer;
-    x1: Single; t1: TPointF; light1: word; x2: Single; t2: TPointF; light2: word; WithInterpolation: boolean);
-  var
-    texPos: TPointF;
-    texStep: TPointF;
-    t: single;
-    pdest: PBGRAPixel;
-    i: LongInt;
+  procedure DrawTextureLineWithoutLight(yb: integer; ix1: integer; ix2: integer;
+    info1,info2: TLinearTextureMappingIntersectionInfo;
+    WithInterpolation: boolean);
+    {$i lineartexscan.inc}
 
-    light,lightStep,lightAcc,lightDiff,lightMod: word;
-
-    procedure NextLight; inline;
-    begin
-      inc(light,lightStep);
-      inc(lightAcc,lightDiff);
-      if lightAcc >= lightMod then
-      begin
-        dec(lightAcc,lightMod);
-        inc(light);
-      end;
-    end;
-
-  begin
-    t := ((ix1+0.5)-x1)/(x2-x1);
-    texPos := t1 + (t2-t1)*t;
-    texStep := (t2-t1)*(1/(x2-x1));
-    pdest := bmp.ScanLine[yb]+ix1;
-    if (light1 = 32768) and (light2 = 32768) then
-    begin
-      if WithInterpolation then
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, texture.ScanAt(texPos.x,texPos.y));
-          texPos += texStep;
-          inc(pdest);
-        end;
-      end else
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, texture.ScanAt(round(texPos.x),round(texPos.y)));
-          texPos += texStep;
-          inc(pdest);
-        end;
-      end;
-    end else
-    begin
-      if ix2 = ix1 then
-      begin
-        light := (light1+light2) div 2;
-        lightStep := 0;
-        lightDiff := 0;
-        lightMod := 1;
-      end
-      else
-      begin
-        light := light1;
-        lightStep := (light2-light1) div (ix2-ix1);
-        lightMod := ix2-ix1;
-        lightDiff := (light2-light1) - lightStep*(ix2-ix1);
-      end;
-
-      lightAcc := lightDiff div 2;
-      if WithInterpolation then
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, ApplyLightnessFast(texture.ScanAt(texPos.x,texPos.y),light));
-          texPos += texStep;
-          NextLight;
-          inc(pdest);
-        end;
-      end else
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, ApplyLightnessFast(texture.ScanAt(round(texPos.x),round(texPos.y)),light));
-          texPos += texStep;
-          NextLight;
-          inc(pdest);
-        end;
-      end;
-    end;
-  end;
+  procedure DrawTextureLineWithLight(yb: integer; ix1: integer; ix2: integer;
+    info1,info2: TLinearTextureMappingIntersectionInfo;
+    WithInterpolation: boolean);
+    {$define PARAM_USELIGHTING}
+    {$i lineartexscan.inc}
 
 var
-  bounds: TRect;
   miny, maxy, minx, maxx: integer;
 
   yb, i: integer;
@@ -695,25 +638,17 @@ var
   ix1, ix2: integer;
 
 begin
-  bounds := polyInfo.GetBounds;
-  If not ComputeMinMax(minx,miny,maxx,maxy,bounds,bmp) then exit;
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
 
-  setlength(inter, polyInfo.NbMaxIntersection);
-  for i := 0 to high(inter) do
-    inter[i] := polyInfo.CreateIntersectionInfo;
+  scanAtFunc := @texture.ScanAt;
+
+  inter := polyInfo.CreateIntersectionArray;
 
   //vertical scan
   for yb := miny to maxy do
   begin
     //find intersections
-    nbinter := 0;
-    polyInfo.ComputeIntersection(yb+0.5001, inter, nbInter);
-    if nbinter = 0 then
-      continue;
-
-    polyInfo.SortIntersection(inter,nbInter);
-    if NonZeroWinding then polyInfo.ConvertFromNonZeroWinding(inter,nbInter);
-
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
     for i := 0 to nbinter div 2 - 1 do
     begin
       x1 := inter[i + i].interX;
@@ -723,10 +658,19 @@ begin
       begin
         ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
         if ix1 <= ix2 then
-          DrawTextureLine(yb,ix1,ix2,
-             x1,TLinearTextureMappingIntersectionInfo(inter[i+i]).texCoord,TLinearTextureMappingIntersectionInfo(inter[i+i]).lightness,
-             x2,TLinearTextureMappingIntersectionInfo(inter[i+i+1]).texCoord,TLinearTextureMappingIntersectionInfo(inter[i+i+1]).lightness,
-             TextureInterpolation);
+        begin
+          if (TLinearTextureMappingIntersectionInfo(inter[i+i]).lightness = 32768) and
+             (TLinearTextureMappingIntersectionInfo(inter[i+i+1]).lightness = 32768) then
+            DrawTextureLineWithoutLight(yb,ix1,ix2,
+               TLinearTextureMappingIntersectionInfo(inter[i+i]),
+               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
+               TextureInterpolation)
+          else
+            DrawTextureLineWithLight(yb,ix1,ix2,
+               TLinearTextureMappingIntersectionInfo(inter[i+i]),
+               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
+               TextureInterpolation);
+        end;
       end;
     end;
   end;
@@ -736,6 +680,7 @@ begin
 
   bmp.InvalidateBitmap;
 end;
+{$hints on}
 
 procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap;
   const points: array of TPointF; texture: IBGRAScanner;
@@ -897,6 +842,7 @@ begin
   end;
 end;
 
+{$hints off}
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap;
   polyInfo: TPolygonPerspectiveTextureMappingInfo; texture: IBGRAScanner;
   TextureInterpolation: Boolean; NonZeroWinding: boolean);
@@ -904,105 +850,18 @@ var
   inter:    array of TIntersectionInfo;
   nbInter:  integer;
 
-  procedure DrawTextureLine(yb: integer; ix1: integer; ix2: integer;
-    x1,invZ1: Single; tDivByZ1: TPointF; light1: word; x2,invZ2: Single; tDivByZ2: TPointF; light2: word; WithInterpolation: boolean);
-  var
-    texPos: TPointF;
-    texStep: TPointF;
-    zPos: single;
-    zStep: single;
-    t: single;
-    pdest: PBGRAPixel;
-    i: LongInt;
+  scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
 
-    light,lightStep,lightDiff,lightAcc,lightMod: word;
+  procedure DrawTextureLineWithoutLight(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$i perspectivescan.inc}
 
-    procedure NextLight; inline;
-    begin
-      inc(light,lightStep);
-      inc(lightAcc,lightDiff);
-      if lightAcc >= lightMod then
-      begin
-        dec(lightAcc,lightMod);
-        inc(light);
-      end;
-    end;
-
-  begin
-    t := ((ix1+0.5)-x1)/(x2-x1);
-    texPos := tDivByZ1 + (tDivByZ2-tDivByZ1)*t;
-    texStep := (tDivByZ2-tDivByZ1)*(1/(x2-x1));
-    zPos := invZ1+t*(invZ2-invZ1);
-    zStep := (invZ2-invZ1)/(x2-x1);
-    pdest := bmp.ScanLine[yb]+ix1;
-
-    if (light1=32768) and (light2=32768) then
-    begin
-      if WithInterpolation then
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, texture.ScanAt(texPos.x/zPos,texPos.y/zPos));
-          texPos += texStep;
-          zPos += zStep;
-          inc(pdest);
-        end;
-      end else
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, texture.ScanAt(round(texPos.x/zPos),round(texPos.y/zPos)));
-          texPos += texStep;
-          zPos += zStep;
-          inc(pdest);
-        end;
-      end;
-    end else
-    begin
-      if ix2 = ix1 then
-      begin
-        light := (light1+light2) div 2;
-        lightStep := 0;
-        lightDiff := 0;
-        lightMod := 1;
-      end
-      else
-      begin
-        light := light1;
-        lightStep := (light2-light1) div (ix2-ix1);
-        lightMod := ix2-ix1;
-        lightDiff := (light2-light1) - lightStep*(ix2-ix1);
-      end;
-
-      lightAcc := lightDiff div 2;
-      if WithInterpolation then
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, ApplyLightnessFast(texture.ScanAt(texPos.x/zPos,texPos.y/zPos),light));
-          texPos += texStep;
-          zPos += zStep;
-          NextLight;
-          inc(pdest);
-        end;
-      end else
-      begin
-        for i := ix1 to ix2 do
-        begin
-          DrawPixelInline(pdest, ApplyLightnessFast(texture.ScanAt(round(texPos.x/zPos),round(texPos.y/zPos)),light));
-          texPos += texStep;
-          zPos += zStep;
-          NextLight;
-          inc(pdest);
-        end;
-      end;
-    end;
-
-
-  end;
+  procedure DrawTextureLineWithLight(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USELIGHTING}
+    {$i perspectivescan.inc}
 
 var
-  bounds: TRect;
   miny, maxy, minx, maxx: integer;
 
   yb, i : integer;
@@ -1011,24 +870,16 @@ var
   ix1, ix2: integer;
 
 begin
-  bounds := polyInfo.GetBounds;
-  If not ComputeMinMax(minx,miny,maxx,maxy,bounds,bmp) then exit;
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
 
-  setlength(inter, polyInfo.NbMaxIntersection);
-  for i := 0 to high(inter) do
-    inter[i] := polyInfo.CreateIntersectionInfo;
+  inter := polyInfo.CreateIntersectionArray;
+  scanAtFunc := @texture.ScanAt;
 
   //vertical scan
   for yb := miny to maxy do
   begin
     //find intersections
-    nbinter := 0;
-    polyInfo.ComputeIntersection(yb+0.5001, inter, nbInter);
-    if nbinter = 0 then continue;
-
-    //sort intersections
-    polyInfo.SortIntersection(inter,nbinter);
-    if NonZeroWinding then polyInfo.ConvertFromNonZeroWinding(inter,nbinter);
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
 
     for i := 0 to nbinter div 2 - 1 do
     begin
@@ -1039,10 +890,19 @@ begin
       begin
         ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
         if ix1 <= ix2 then
-          DrawTextureLine(yb,ix1,ix2,
-            x1,TPerspectiveTextureMappingIntersectionInfo(inter[i+i]).coordInvZ,TPerspectiveTextureMappingIntersectionInfo(inter[i+i]).texCoordDivByZ,TPerspectiveTextureMappingIntersectionInfo(inter[i+i]).lightness,
-            x2,TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]).coordInvZ,TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]).texCoordDivByZ,TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]).lightness,
-            TextureInterpolation);
+        begin
+          if (TPerspectiveTextureMappingIntersectionInfo(inter[i+i]).lightness = 32768) and
+             (TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]).lightness = 32768) then
+            DrawTextureLineWithoutLight(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation)
+          else
+            DrawTextureLineWithLight(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+        end;
       end;
     end;
   end;
@@ -1052,6 +912,7 @@ begin
 
   bmp.InvalidateBitmap;
 end;
+{$hints on}
 
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap;
   const points: array of TPointF; const pointsZ: array of single;
