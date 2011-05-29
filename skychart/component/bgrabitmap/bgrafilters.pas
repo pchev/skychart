@@ -341,6 +341,11 @@ var
   blurShape: TBGRACustomBitmap;
   intRadius: integer;
 begin
+  if radius = 0 then
+  begin
+    result := bmp.Duplicate;
+    exit;
+  end;
   intRadius := ceil(radius);
   blurShape := bmp.NewBitmap(2 * intRadius + 1, 2 * intRadius + 1);
   blurShape.GradientFill(0, 0, blurShape.Width, blurShape.Height, BGRAWhite,
@@ -355,55 +360,20 @@ end;
   around the pixel which moves with it. For each new pixel,
   the vertical sums are kept except for the last column of
   the square }
-function FilterBlurFastSmallRadius(bmp: TBGRACustomBitmap;
-  radius: integer): TBGRACustomBitmap; forward;
-
-function FilterBlurFastBigRadius(bmp: TBGRACustomBitmap;
-  radius: integer): TBGRACustomBitmap; forward;
-
 function FilterBlurFast(bmp: TBGRACustomBitmap;
   radius: integer): TBGRACustomBitmap;
-begin
-  //if radius is small enough, can compute with 32-bit integers
-  if radius < 16 then
-    result := FilterBlurFastSmallRadius(bmp,radius) else
-    result := FilterBlurFastBigRadius(bmp,radius);
-end;
-
-function FilterBlurFastBigRadius(bmp: TBGRACustomBitmap;
-  radius: integer): TBGRACustomBitmap;
 
   type
     TRowSum = record
-      sumR,sumG,sumB,sumA,sumW: single;
+      sumR,sumG,sumB,rgbDiv,sumA,aDiv: cardinal;
     end;
 
-  function ComputeAverage(sum: TRowSum): TBGRAPixel; inline;
+  function ComputeAverage(sum: TRowSum): TBGRAPixel;
   begin
-    result.alpha:= round(sum.sumA/sum.sumW);
-    result.red := round(sum.sumR/sum.sumA);
-    result.green := round(sum.sumG/sum.sumA);
-    result.blue := round(sum.sumB/sum.sumA);
-  end;
-
-  {$I blurfast.inc}
-
-{ This is the same as the previous procedure, except that
-  it uses 32-bit integers instead }
-function FilterBlurFastSmallRadius(bmp: TBGRACustomBitmap;
-  radius: integer): TBGRACustomBitmap;
-
-  type
-    TRowSum = record
-      sumR,sumG,sumB,sumA,sumW: cardinal;
-    end;
-
-  function ComputeAverage(sum: TRowSum): TBGRAPixel; inline;
-  begin
-    result.alpha:= (sum.sumA+sum.sumW shr 1) div sum.sumW;
-    result.red := (sum.sumR+sum.sumA shr 1) div sum.sumA;
-    result.green := (sum.sumG+sum.sumA shr 1) div sum.sumA;
-    result.blue := (sum.sumB+sum.sumA shr 1) div sum.sumA;
+    result.alpha:= (sum.sumA+sum.aDiv shr 1) div sum.aDiv;
+    result.red := (sum.sumR+sum.rgbDiv shr 1) div sum.rgbDiv;
+    result.green := (sum.sumG+sum.rgbDiv shr 1) div sum.rgbDiv;
+    result.blue := (sum.sumB+sum.rgbDiv shr 1) div sum.rgbDiv;
   end;
 
   {$I blurfast.inc}
@@ -459,6 +429,11 @@ end;
 function FilterBlurRadial(bmp: TBGRACustomBitmap; radius: integer;
   blurType: TRadialBlurType): TBGRACustomBitmap;
 begin
+  if radius = 0 then
+  begin
+    result := bmp.Duplicate;
+    exit;
+  end;
   case blurType of
     rbCorona: Result  := FilterBlurCorona(bmp, radius);
     rbDisk: Result    := FilterBlurDisk(bmp, radius);
@@ -479,6 +454,11 @@ var
   intRadius: integer;
   dx, dy, d: single;
 begin
+  if distance = 0 then
+  begin
+    result := bmp.Duplicate;
+    exit;
+  end;
   intRadius := ceil(distance / 2);
   blurShape := bmp.NewBitmap(2 * intRadius + 1, 2 * intRadius + 1);
   d  := distance / 2;
@@ -501,7 +481,8 @@ end;
   compute only difference while scanning from the left to the right }
 function FilterBlurSmallMask(bmp: TBGRACustomBitmap;
   blurMask: TBGRACustomBitmap): TBGRACustomBitmap; forward;
-
+function FilterBlurSmallMaskWithShift(bmp: TBGRACustomBitmap;
+  blurMask: TBGRACustomBitmap; maskShift: integer): TBGRACustomBitmap; forward;
 function FilterBlurBigMask(bmp: TBGRACustomBitmap;
   blurMask: TBGRACustomBitmap): TBGRACustomBitmap; forward;
 
@@ -519,6 +500,7 @@ var
   maskSum: int64;
   i: Integer;
   p: PBGRAPixel;
+  maskShift: integer;
 begin
   maskSum := 0;
   p := blurMask.data;
@@ -527,15 +509,23 @@ begin
     inc(maskSum,p^.red);
     inc(p);
   end;
+  maskShift := 0;
+  while maskSum > 32768 do
+  begin
+    inc(maskShift);
+    maskSum := maskSum shr 1;
+  end;
   //check if sum can be stored in a 32-bit signed integer
-  if maskSum > 32768 then
-    result := FilterBlurBigMask(bmp,blurMask) else
-    result := FilterBlurSmallMask(bmp,blurMask);
+  if maskShift = 0 then
+    result := FilterBlurSmallMask(bmp,blurMask) else
+  if maskShift < 8 then
+    result := FilterBlurSmallMaskWithShift(bmp,blurMask,maskShift) else
+    result := FilterBlurBigMask(bmp,blurMask);
 end;
 
-//32-bit blur
-function FilterBlurSmallMask(bmp: TBGRACustomBitmap;
-  blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
+//32-bit blur with shift
+function FilterBlurSmallMaskWithShift(bmp: TBGRACustomBitmap;
+  blurMask: TBGRACustomBitmap; maskShift: integer): TBGRACustomBitmap;
 
   var
     sumR, sumG, sumB, sumA, Adiv, RGBdiv : integer;
@@ -553,6 +543,29 @@ function FilterBlurSmallMask(bmp: TBGRACustomBitmap;
     end;
   end;
 
+  {$define PARAM_MASKSHIFT}
+  {$I blurnormal.inc}
+
+//32-bit blur
+function FilterBlurSmallMask(bmp: TBGRACustomBitmap;
+  blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
+
+  var
+    sumR, sumG, sumB, sumA, Adiv : integer;
+
+  function ComputeAverage: TBGRAPixel; inline;
+  begin
+    result.alpha := (sumA + Adiv shr 1) div Adiv;
+    if result.alpha = 0 then
+      result := BGRAPixelTransparent
+    else
+    begin
+      result.red   := clampByte((sumR + sumA shr 1) div sumA);
+      result.green := clampByte((sumG + sumA shr 1) div sumA);
+      result.blue  := clampByte((sumB + sumA shr 1) div sumA);
+    end;
+  end;
+
   {$I blurnormal.inc}
 
 //floating point blur
@@ -560,7 +573,7 @@ function FilterBlurBigMask(bmp: TBGRACustomBitmap;
   blurMask: TBGRACustomBitmap): TBGRACustomBitmap;
 
   var
-    sumR, sumG, sumB, sumA, Adiv, RGBdiv : single;
+    sumR, sumG, sumB, sumA, Adiv : single;
 
   function ComputeAverage: TBGRAPixel; inline;
   begin
@@ -569,9 +582,9 @@ function FilterBlurBigMask(bmp: TBGRACustomBitmap;
       result := BGRAPixelTransparent
     else
     begin
-      result.red   := clampByte(round(sumR/RGBdiv));
-      result.green := clampByte(round(sumG/RGBdiv));
-      result.blue  := clampByte(round(sumB/RGBdiv));
+      result.red   := clampByte(round(sumR/sumA));
+      result.green := clampByte(round(sumG/sumA));
+      result.blue  := clampByte(round(sumB/sumA));
     end;
   end;
 

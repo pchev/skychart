@@ -173,7 +173,9 @@ begin
     sumB   := 0;
     sumA   := 0;
     Adiv   := 0;
+    {$ifdef PARAM_MASKSHIFT}
     RGBdiv := 0;
+    {$endif}
 
     //go through pixel list of the current vertical range
     for n := PixelArrayLineStart[mindy+blurOfs.Y] to PixelArrayLineStart[maxdy+blurOfs.Y+1]-1 do
@@ -186,14 +188,17 @@ begin
         tempPixel := (curScans[pt.y]+bmpX)^;
         maskAlpha := PixelWeight[n];
         pixMaskAlpha := maskAlpha * tempPixel.alpha;
+        sumA    += pixMaskAlpha;
+        Adiv    += maskAlpha;
+        {$ifdef PARAM_MASKSHIFT}
+        pixMaskAlpha := pixMaskAlpha shr maskShift;
+        RGBdiv  += pixMaskAlpha;
+        {$endif}
         {$hints off}
         sumR    += tempPixel.red * pixMaskAlpha;
         sumG    += tempPixel.green * pixMaskAlpha;
         sumB    += tempPixel.blue * pixMaskAlpha;
         {$hints on}
-        RGBdiv  += pixMaskAlpha;
-        sumA    += pixMaskAlpha;
-        Adiv    += maskAlpha;
       end;
     end;
 
@@ -210,20 +215,23 @@ begin
             tempPixel := (curScans[pt.y]+bmpX)^;
             maskAlpha := DiffPixelWeight[n];
             pixMaskAlpha := maskAlpha * tempPixel.alpha;
+            sumA    += pixMaskAlpha;
+            Adiv    += maskAlpha;
+            {$ifdef PARAM_MASKSHIFT}
+            pixMaskAlpha := (cardinal(pixMaskAlpha)+$80000000) shr maskShift - ($80000000 shr maskShift);
+            RGBdiv  += pixMaskAlpha;
+            {$endif}
             {$hints off}
             sumR    += tempPixel.red * pixMaskAlpha;
             sumG    += tempPixel.green * pixMaskAlpha;
             sumB    += tempPixel.blue * pixMaskAlpha;
             {$hints on}
-            RGBdiv  += pixMaskAlpha;
-            sumA    += pixMaskAlpha;
-            Adiv    += maskAlpha;
           end;
         end;
       end;
 
       //compute average
-      if (Adiv <= 0) or (RGBdiv <= 0) then
+      if (Adiv <= 0) {$ifdef PARAM_MASKSHIFT} or (RGBdiv <= 0) {$endif} then
         pdest^ := BGRAPixelTransparent
       else
         pdest^ := computeAverage;
@@ -235,3 +243,5 @@ begin
   end;
   Result.InvalidateBitmap;
 end;
+{$undef PARAM_MASKSHIFT}
+

@@ -11,7 +11,7 @@ uses
   bgracompressablebitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
   BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
   BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
-  BGRACanvas, LazarusPackageIntf;
+  BGRACanvas, BGRAFillInfo, BGRAPath, LazarusPackageIntf;
 
 implementation
 

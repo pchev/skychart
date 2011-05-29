@@ -17,7 +17,8 @@ var
 
 
 var
-  srcDelta: integer;
+  srcDelta,
+  weightShift: integer;
 
   { Compute blur result in a vertical direction }
   procedure ComputeVerticalRow(psrc: PBGRAPixel; var sums: TRowSum; ys1,ys2: integer); inline;
@@ -30,13 +31,16 @@ var
     begin
       c := psrc^;
       w := blurRow[ys]; //apply pixel weight
-      sumW += w;
       aw := c.alpha*w;
       sumA += aw;
+      aDiv += w;
+
+      aw := aw shr weightShift;
       {$hints off}
       sumR += c.red*aw;
       sumG += c.green*aw;
       sumB += c.blue*aw;
+      rgbDiv += aw;
       {$hints on}
       inc(psrc,srcDelta);
     end;
@@ -50,12 +54,20 @@ var
   w: cardinal;
   pdest: PBGRAPixel;
   bmpWidth,bmpHeight : integer;
+  radiusSquare: integer;
 
 begin
   bmpWidth := bmp.Width;
   bmpHeight := bmp.Height;
   //create output
   result := bmp.NewBitmap(bmpWidth,bmpHeight);
+  radiusSquare := sqr((radius+1)*(radius+2) div 2);
+  weightShift := 0;
+  while radiusSquare > 16384 do //18496 do
+  begin
+    radiusSquare := radiusSquare shr 1;
+    inc(weightShift);
+  end;
   ComputeBlurRow;
   //current vertical sums
   setlength(sums, 2*radius+1);
@@ -99,15 +111,16 @@ begin
       with sums[curIndex] do
       begin
         w := blurRow[xs];
-        total.sumW += sumW*w;
         total.sumA += sumA*w;
+        total.aDiv += aDiv*w;
         total.sumR += sumR*w;
         total.sumG += sumG*w;
         total.sumB += sumB*w;
+        total.rgbDiv += rgbDiv*w;
         inc(curIndex);
         if curIndex = length(sums) then curIndex := 0;
       end;
-      if (total.sumA > 0) and (total.sumW > 0) then
+      if (total.aDiv > 0) and (total.rgbDiv > 0) then
         pdest^:= ComputeAverage(total)
       else
         pdest^:= BGRAPixelTransparent;

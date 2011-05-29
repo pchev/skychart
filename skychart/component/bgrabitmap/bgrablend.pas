@@ -12,10 +12,18 @@ uses
   Classes, SysUtils, BGRABitmapTypes;
 
 { Draw one pixel with alpha blending }
-procedure DrawPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel); inline; overload;
+procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel); inline; overload;
+procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel); inline; overload;  //alpha in 'c' parameter
+procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel); inline; overload;
+procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; calpha: byte); inline; overload;
+
+function FastRoundDiv255(value: cardinal): cardinal; inline;
 
 { Draw a series of pixels with alpha blending }
-procedure DrawPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
+procedure DrawPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline; overload;
+procedure DrawExpandedPixelsInline(dest: PBGRAPixel; ec: TExpandedPixel; Count: integer); inline; overload;
+procedure DrawPixelsInlineExpandedOrNot(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel; Count: integer); inline; overload;  //alpha in 'c' parameter
 
 { Draw one pixel with linear alpha blending }
 procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -41,7 +49,7 @@ procedure DrawPixelsInlineDiff(dest: PBGRAPixel; c: TBGRAPixel;
   Count: integer; compare: TBGRAPixel; maxDiff: byte); inline;
 
 { Blend pixels with scanner content }
-procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+procedure ScannerPutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
 
 { Perform advanced blending operation }
 procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
@@ -68,35 +76,41 @@ procedure XorPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 
 implementation
 
-procedure PutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+procedure ScannerPutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
 var c : TBGRAPixel;
   i: Integer;
+  scanNextFunc: function(): TBGRAPixel of object;
 begin
-  case mode of
-  dmLinearBlend:
-    for i := 0 to count-1 do
-    begin
-      FastBlendPixelInline(pdest, scan.ScanNextPixel);
-      inc(pdest);
-    end;
-  dmDrawWithTransparency:
-    for i := 0 to count-1 do
-    begin
-      DrawPixelInline(pdest, scan.ScanNextPixel);
-      inc(pdest);
-    end;
-  dmSet:
-    for i := 0 to count-1 do
-    begin
-      pdest^ := scan.ScanNextPixel;
-      inc(pdest);
-    end;
-  dmSetExceptTransparent:
-    for i := 0 to count-1 do
-    begin
-      c := scan.ScanNextPixel;
-      if c.alpha = 255 then pdest^ := c;
-      inc(pdest);
+  if scan.IsScanPutPixelsDefined then
+    scan.ScanPutPixels(pdest,count,mode) else
+  begin
+    scanNextFunc := @scan.ScanNextPixel;
+    case mode of
+      dmLinearBlend:
+        for i := 0 to count-1 do
+        begin
+          FastBlendPixelInline(pdest, scanNextFunc());
+          inc(pdest);
+        end;
+      dmDrawWithTransparency:
+        for i := 0 to count-1 do
+        begin
+          DrawPixelInlineWithAlphaCheck(pdest, scanNextFunc());
+          inc(pdest);
+        end;
+      dmSet:
+        for i := 0 to count-1 do
+        begin
+          pdest^ := scanNextFunc();
+          inc(pdest);
+        end;
+      dmSetExceptTransparent:
+        for i := 0 to count-1 do
+        begin
+          c := scanNextFunc();
+          if c.alpha = 255 then pdest^ := c;
+          inc(pdest);
+        end;
     end;
   end;
 end;
@@ -115,7 +129,7 @@ begin
 
     boTransparent: while Count > 0 do
       begin
-        DrawPixelInline(pdest, psrc^);
+        DrawPixelInlineWithAlphaCheck(pdest, psrc^);
         Inc(pdest);
         Inc(psrc);
         Dec(Count);
@@ -278,6 +292,7 @@ procedure FastBlendPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer)
 var
   n: integer;
 begin
+  if c.alpha = 0 then exit;
   for n := Count - 1 downto 0 do
   begin
     FastBlendPixelInline(dest, c);
@@ -288,10 +303,56 @@ end;
 procedure DrawPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer);
 var
   n: integer;
+  ec: TExpandedPixel;
 begin
+  if c.alpha = 0 then exit;
+  if c.alpha = 255 then
+  begin
+    filldword(dest^,count,longword(c));
+    exit;
+  end;
+  ec := GammaExpansion(c);
   for n := Count - 1 downto 0 do
   begin
-    DrawPixelInline(dest, c);
+    DrawExpandedPixelInlineNoAlphaCheck(dest, ec,c.alpha);
+    Inc(dest);
+  end;
+end;
+
+procedure DrawExpandedPixelsInline(dest: PBGRAPixel; ec: TExpandedPixel;
+  Count: integer);
+var
+  n: integer;
+  c: TBGRAPixel;
+begin
+  if ec.alpha < $0100 then exit;
+  if ec.alpha >= $FF00 then
+  begin
+    c := GammaCompression(ec);
+    filldword(dest^,count,longword(c));
+    exit;
+  end;
+  for n := Count - 1 downto 0 do
+  begin
+    DrawExpandedPixelInlineNoAlphaCheck(dest, ec, ec.alpha shr 8);
+    Inc(dest);
+  end;
+end;
+
+procedure DrawPixelsInlineExpandedOrNot(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel; Count: integer
+  );
+var
+  n: integer;
+begin
+  if c.alpha = 0 then exit;
+  if c.alpha = 255 then
+  begin
+    filldword(dest^,count,longword(c));
+    exit;
+  end;
+  for n := Count - 1 downto 0 do
+  begin
+    DrawExpandedPixelInlineNoAlphaCheck(dest, ec, c.alpha);
     Inc(dest);
   end;
 end;
@@ -309,10 +370,7 @@ begin
 end;
 
 {$hints off}
-procedure DrawPixelInline(dest: PBGRAPixel; c: TBGRAPixel);
-var
-  p: PByte;
-  a1f, a2f, a12, a12m: cardinal;
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel);
 begin
   if c.alpha = 0 then
     exit;
@@ -321,7 +379,46 @@ begin
     dest^ := c;
     exit;
   end;
+  DrawPixelInlineNoAlphaCheck(dest,c);
+end;
 
+function FastRoundDiv255(value: cardinal): cardinal; inline;
+begin
+  result := (value + (value shr 7)) shr 8;
+end;
+
+procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel);
+var
+  calpha: byte;
+begin
+  calpha := ec.alpha shr 8;
+  if calpha = 0 then
+    exit;
+  if calpha = 255 then
+  begin
+    dest^ := GammaCompression(ec);
+    exit;
+  end;
+  DrawExpandedPixelInlineNoAlphaCheck(dest,ec,calpha);
+end;
+
+procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel);
+begin
+  if c.alpha = 0 then
+    exit;
+  if c.alpha = 255 then
+  begin
+    dest^ := c;
+    exit;
+  end;
+  DrawExpandedPixelInlineNoAlphaCheck(dest,ec,c.alpha);
+end;
+
+procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel);
+var
+  p: PByte;
+  a1f, a2f, a12, a12m: cardinal;
+begin
   a12  := 65025 - (not dest^.alpha) * (not c.alpha);
   a12m := a12 shr 1;
 
@@ -338,6 +435,33 @@ begin
   Inc(p);
   p^ := GammaCompressionTab[(GammaExpansionTab[dest^.red] * a1f +
     GammaExpansionTab[c.red] * a2f + a12m) div a12];
+  Inc(p);
+
+  p^ := (a12 + a12 shr 7) shr 8;
+end;
+
+procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel;
+  ec: TExpandedPixel; calpha: byte);
+var
+  p: PByte;
+  a1f, a2f, a12, a12m: cardinal;
+begin
+  a12  := 65025 - (not dest^.alpha) * (not calpha);
+  a12m := a12 shr 1;
+
+  a1f := dest^.alpha * (not calpha);
+  a2f := (calpha shl 8) - calpha;
+
+  p := PByte(dest);
+
+  p^ := GammaCompressionTab[(GammaExpansionTab[dest^.blue] * a1f +
+    ec.blue * a2f + a12m) div a12];
+  Inc(p);
+  p^ := GammaCompressionTab[(GammaExpansionTab[dest^.green] * a1f +
+    ec.green * a2f + a12m) div a12];
+  Inc(p);
+  p^ := GammaCompressionTab[(GammaExpansionTab[dest^.red] * a1f +
+    ec.red * a2f + a12m) div a12];
   Inc(p);
 
   p^ := (a12 + a12 shr 7) shr 8;
@@ -377,7 +501,7 @@ end;
 procedure DrawPixelInlineDiff(dest: PBGRAPixel; c, compare: TBGRAPixel;
   maxDiff: byte); inline;
 begin
-  DrawPixelInline(dest, BGRA(c.red, c.green, c.blue,
+  DrawPixelInlineWithAlphaCheck(dest, BGRA(c.red, c.green, c.blue,
     (c.alpha * (maxDiff + 1 - BGRADiff(dest^, compare)) + (maxDiff + 1) shr 1) div
     (maxDiff + 1)));
 end;
@@ -386,7 +510,7 @@ procedure ErasePixelInline(dest: PBGRAPixel; alpha: byte); inline;
 var
   newAlpha: byte;
 begin
-  newAlpha := dest^.alpha * (255 - alpha) div 255;
+  newAlpha := FastRoundDiv255(dest^.alpha * (not alpha));
   if newAlpha = 0 then
     dest^ := BGRAPixelTransparent
   else
@@ -519,7 +643,7 @@ begin
     Result := 255
   else
   begin
-    temp := (a shl 8) div (255 - b);
+    temp := (a shl 8) div (not b);
     if temp > 255 then
       Result := 255
     else
@@ -551,7 +675,7 @@ begin
     Result := 255
   else
   begin
-    temp := a * a div (255 - b);
+    temp := a * a div (not b);
     if temp > 255 then
       Result := 255
     else

@@ -7,7 +7,8 @@ interface
 { Here are various functions that draw gradients, shadow and lighting }
 
 uses
-  Graphics, Classes, BGRABitmap, BGRABitmapTypes, BGRABlend;
+  Graphics, Classes, BGRABitmap, BGRABitmapTypes, BGRABlend
+  {$ifdef CPUI386},mmx{$endif};
 
 { Creates a bitmap with the specified text horizontally centered and with a shadow }
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
@@ -53,22 +54,22 @@ type
   { TPhongShading }
 
   TPhongShading = class
-    LightSourceIntensity : Double; //global intensity of the light
+    LightSourceIntensity : Single; //global intensity of the light
 
     LightSourceDistanceTerm,       //minimum distance always added (positive value)
     LightSourceDistanceFactor,     //how much actual distance is taken into account (usually 0 or 1)
-    LightDestFactor : Double;      //how much the location of the lightened pixel is taken into account (usually 0 or 1)
+    LightDestFactor : Single;      //how much the location of the lightened pixel is taken into account (usually 0 or 1)
 
     LightPosition : TPoint;
     LightPositionZ : Integer;
     LightColor: TBGRAPixel;        //color of the light reflection
 
     SpecularFactor,                //how much light is reflected (0..1)
-    SpecularIndex : Double;        //how concentrated reflected light is (positive value)
+    SpecularIndex : Single;        //how concentrated reflected light is (positive value)
 
     AmbientFactor,                 //ambiant lighting whereever the point is (0..1)
     DiffusionFactor,               //diffusion, i.e. how much pixels are lightened by light source (0..1)
-    NegativeDiffusionFactor : Double; //how much hidden surface are darkened (0..1)
+    NegativeDiffusionFactor : Single; //how much hidden surface are darkened (0..1)
     DiffuseSaturation: Boolean;    //when diffusion saturates, use light color to show it
 
     constructor Create;
@@ -91,12 +92,20 @@ type
 
     { Draw a rectangle of the specified color }
     procedure DrawRectangle(dest: TBGRABitmap; bounds: TRect; Border,Altitude: Integer; Color: TBGRAPixel; RoundCorners: Boolean; Options: TRectangleMapOptions);
-  private
-    { Normalize a vector }
-    procedure normalize(var x, y, z: double);
-    { Compute vectorial product }
-    procedure vectproduct(u1, u2, u3, v1, v2, v3: integer; out w1, w2, w3: double); overload;
-    procedure vectproduct(u1, u2, u3, v1, v2, v3: double; out w1, w2, w3: double); overload;
+  protected
+
+    procedure DrawMapNormal(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
+                   ColorMap : TBGRABitmap);
+    procedure DrawColorNormal(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
+                   Color : TBGRAPixel);
+
+    {$ifdef CPUI386}
+    procedure DrawMapSSE(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
+                   ColorMap : TBGRABitmap);
+    procedure DrawColorSSE(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
+                   Color : TBGRAPixel);
+    {$endif}
+
   end;
 
 { Create a grayscale height map for a cone }
@@ -135,7 +144,7 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
 
 implementation
 
-uses Types;
+uses Types, SysUtils;
 
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
   AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
@@ -346,80 +355,104 @@ begin
   SpecularFactor := 0.6;
   SpecularIndex := 10;
   LightPosition := Point(-100,-100);
-  LightPositionZ := -100;
+  LightPositionZ := 100;
 end;
 
-procedure TPhongShading.normalize(var x,y,z: double);
+type
+  TVector3D = record x,y,z,t: single; end;
+
+function Vector3D(x,y,z: single): TVector3D; inline;
+begin
+  result.x := x;
+  result.y := y;
+  result.z := z;
+  result.t := 0;
+end;
+
+function Vector3D(x,y,z,t: single): TVector3D; inline; overload;
+begin
+  result.x := x;
+  result.y := y;
+  result.z := z;
+  result.t := t;
+end;
+
+operator + (const v1,v2: TVector3D): TVector3D; inline;
+begin
+  result.x := v1.x+v2.x;
+  result.y := v1.y+v2.y;
+  result.z := v1.z+v2.z;
+end;
+
+operator - (const v1,v2: TVector3D): TVector3D; inline;
+begin
+  result.x := v1.x-v2.x;
+  result.y := v1.y-v2.y;
+  result.z := v1.z-v2.z;
+end;
+
+operator * (const v1: TVector3D; const factor: single): TVector3D; inline;
+begin
+  result.x := v1.x*factor;
+  result.y := v1.y*factor;
+  result.z := v1.z*factor;
+end;
+
+operator * (const v1,v2: TVector3D): single; inline;
+begin
+  result := v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
+end;
+
+procedure normalize(var v: TVector3D); inline;
 var len: double;
 begin
-  len := x*x+y*y+z*z;
+  len := v*v;
   if len = 0 then exit;
   len := sqrt(len);
-  x /= len;
-  y /= len;
-  z /= len;
+  v.x /= len;
+  v.y /= len;
+  v.z /= len;
 end;
 
-procedure TPhongShading.vectproduct(u1,u2,u3,v1,v2,v3: integer; out w1,w2,w3: double);
+procedure vectproduct(u,v: TVector3D; out w: TVector3D); overload;
 begin
-  w1 := u2*v3-u3*v2;
-  w2 := u3*v1-u1*v3;
-  w3 := u1*v2-u2*v1;
+  w.x := u.y*v.z-u.z*v.y;
+  w.y := u.z*v.x-u.x*v.z;
+  w.z := u.x*v.Y-u.y*v.x;
 end;
 
-procedure TPhongShading.vectproduct(u1, u2, u3, v1, v2, v3: double; out w1, w2,
-  w3: double);
-begin
-  w1 := u2*v3-u3*v2;
-  w2 := u3*v1-u1*v3;
-  w3 := u1*v2-u2*v1;
-end;
+Const
+  PhongLightPrecisionSh = 12;
+  PhongLightPrecision = 1 shl PhongLightPrecisionSh;
+  PhongLightPrecisionDiv2 = PhongLightPrecision shr 1;
 
 {------------------ Phong drawing ----------------}
-{ Both procedures use the same include }
+{ Look for the fastest method available }
 procedure TPhongShading.Draw(dest: TBGRABitmap; map: TBGRABitmap; mapAltitude: integer; ofsX,ofsY: integer;
                              Color : TBGRAPixel);
-  var
-    eColor: TExpandedPixel;
-
-  procedure Init;
-  begin
-    eColor := GammaExpansion(color);
-  end;
-
-  {$hints off}
-  function ComputePixel(x,y: integer; ExpandedLightColor: TExpandedPixel; DiffuseLight, SpecularLight: integer; Alpha: Byte): TBGRAPixel; inline;
-  var ec: TExpandedPixel;
-  begin
-    ec.red := (eColor.Red*DiffuseLight+ExpandedLightColor.Red*SpecularLight+128) shr 8;
-    ec.green := (eColor.Green*DiffuseLight+ExpandedLightColor.Green*SpecularLight+128) shr 8;
-    ec.blue := (eColor.Blue*DiffuseLight+ExpandedLightColor.Blue*SpecularLight+128) shr 8;
-    ec.alpha := Alpha shl 8+Alpha;
-    result := GammaCompression(ec);
-  end;
-  {$hints on}
-
-  {$I phongdraw.inc }
+begin
+  {$ifdef CPUI386}
+    if is_sse_cpu then
+      DrawColorSSE(dest,map,mapAltitude,ofsX,ofsY,Color)
+    else
+      DrawColorNormal(dest,map,mapAltitude,ofsX,ofsY,Color);
+  {$else}
+    DrawColorNormal(dest,map,mapAltitude,ofsX,ofsY,Color);
+  {$endif}
+end;
 
 procedure TPhongShading.Draw(dest: TBGRABitmap; map: TBGRABitmap;
             mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRABitmap);
-
-  procedure Init;
-  begin
-  end;
-
-  function ComputePixel(x,y: integer; ExpandedLightColor: TExpandedPixel; DiffuseLight, SpecularLight: integer; Alpha: Byte): TBGRAPixel; inline;
-  var ec: TExpandedPixel; eColor: TExpandedPixel;
-  begin
-    eColor := GammaExpansion(colorMap.GetPixel(x,y));
-    ec.red := (eColor.Red*DiffuseLight+ExpandedLightColor.Red*SpecularLight+128) shr 8;
-    ec.green := (eColor.Green*DiffuseLight+ExpandedLightColor.Green*SpecularLight+128) shr 8;
-    ec.blue := (eColor.Blue*DiffuseLight+ExpandedLightColor.Blue*SpecularLight+128) shr 8;
-    ec.alpha := Alpha shl 8+Alpha;
-    result := GammaCompression(ec);
-  end;
-
-  {$I phongdraw.inc }
+begin
+  {$ifdef CPUI386}
+    if is_sse_cpu then
+      DrawMapSSE(dest,map,mapAltitude,ofsX,ofsY,ColorMap)
+    else
+      DrawMapNormal(dest,map,mapAltitude,ofsX,ofsY,ColorMap);
+  {$else}
+    DrawMapNormal(dest,map,mapAltitude,ofsX,ofsY,ColorMap);
+  {$endif}
+end;
 
   {------------------ End of phong drawing ----------------}
 
@@ -478,6 +511,29 @@ begin
   Draw(dest,map,Altitude,bounds.Left,bounds.Top,Color);
   map.Free;
 end;
+
+procedure TPhongShading.DrawMapNormal(dest: TBGRABitmap; map: TBGRABitmap;
+  mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRABitmap);
+  {$I phongdraw.inc }
+
+procedure TPhongShading.DrawColorNormal(dest: TBGRABitmap; map: TBGRABitmap;
+  mapAltitude: integer; ofsX, ofsY: integer; Color: TBGRAPixel);
+  {$define PARAM_SIMPLECOLOR}
+  {$I phongdraw.inc }
+
+{$ifdef CPUI386}
+procedure TPhongShading.DrawMapSSE(dest: TBGRABitmap; map: TBGRABitmap;
+  mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRABitmap);
+  {$define PARAM_PHONGSSE}
+  {$I phongdraw.inc }
+
+procedure TPhongShading.DrawColorSSE(dest: TBGRABitmap; map: TBGRABitmap;
+  mapAltitude: integer; ofsX, ofsY: integer; Color: TBGRAPixel);
+  {$define PARAM_PHONGSSE}
+  {$define PARAM_SIMPLECOLOR}
+  {$I phongdraw.inc }
+
+{$endif}
 
 {************************ maps ***********************************}
 

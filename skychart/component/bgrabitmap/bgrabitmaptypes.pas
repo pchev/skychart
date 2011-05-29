@@ -71,12 +71,14 @@ type
   TResampleFilter = (rfLinear,        //linear interpolation
                      rfHalfCosine,    //mix of rfLinear and rfCosine
                      rfCosine,        //cosine-like interpolation
+                     rfBicubic,       //simple bi-cubic filter (blur)
                      rfMitchell,      //downsizing interpolation
                      rfSpline,        //upsizing interpolation
                      rfBestQuality);  //mix of rfMitchell and rfSpline
 
   TMedianOption = (moNone, moLowSmooth, moMediumSmooth, moHighSmooth);
   TRadialBlurType = (rbNormal, rbDisk, rbCorona, rbPrecise, rbFast);
+  TSplineStyle = (ssInside, ssInsideWithEnds, ssCrossing, ssCrossingWithEnds, ssOutside, ssRoundOutside, ssVertexToSide);
   
   //Advanced blending modes
   //see : http://www.brighthub.com/multimedia/photography/articles/18301.aspx
@@ -148,7 +150,13 @@ type
     procedure ScanMoveTo(X,Y: Integer);
     function ScanNextPixel: TBGRAPixel;
     function ScanAt(X,Y: Single): TBGRAPixel;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode);
+    function IsScanPutPixelsDefined: boolean;
   end;
+
+  TScanAtFunction = function (X,Y: Single): TBGRAPixel of object;
+  TScanNextPixelFunction = function: TBGRAPixel of object;
+  TBGRACustomGradient = class;
 
   { TBGRACustomBitmap }
 
@@ -221,7 +229,8 @@ type
      procedure SetPixel(x, y: integer; c: TColor); virtual; abstract; overload;
      procedure XorPixel(x, y: integer; c: TBGRAPixel); virtual; abstract; overload;
      procedure SetPixel(x, y: integer; c: TBGRAPixel); virtual; abstract; overload;
-     procedure DrawPixel(x, y: integer; c: TBGRAPixel); virtual; abstract;
+     procedure DrawPixel(x, y: integer; c: TBGRAPixel); virtual; abstract; overload;
+     procedure DrawPixel(x, y: integer; ec: TExpandedPixel); virtual; abstract; overload;
      procedure FastBlendPixel(x, y: integer; c: TBGRAPixel); virtual; abstract;
      procedure ErasePixel(x, y: integer; alpha: byte); virtual; abstract;
      procedure AlphaPixel(x, y: integer; alpha: byte); virtual; abstract;
@@ -232,7 +241,9 @@ type
 
      {Line primitives}
      procedure SetHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
-     procedure DrawHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
+     procedure DrawHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract; overload;
+     procedure DrawHorizLine(x, y, x2: integer; ec: TExpandedPixel); virtual; abstract; overload;
+     procedure DrawHorizLine(x, y, x2: integer; texture: IBGRAScanner); virtual; abstract; overload;
      procedure FastBlendHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
      procedure AlphaHorizLine(x, y, x2: integer; alpha: byte); virtual; abstract;
      procedure SetVertLine(x, y, y2: integer; c: TBGRAPixel); virtual; abstract;
@@ -273,6 +284,8 @@ type
      procedure FillQuadLinearMapping(pt1,pt2,pt3,pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF; TextureInterpolation: Boolean= True);  virtual; abstract; overload;
      procedure FillQuadLinearMappingLightness(pt1,pt2,pt3,pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF; light1,light2,light3,light4: word; TextureInterpolation: Boolean= True); virtual; abstract; overload;
      procedure FillQuadLinearMappingAntialias(pt1,pt2,pt3,pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF); virtual; abstract; overload;
+     procedure FillQuadPerspectiveMapping(pt1,pt2,pt3,pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF); virtual; abstract; overload;
+     procedure FillQuadPerspectiveMappingAntialias(pt1,pt2,pt3,pt4: TPointF; texture: IBGRAScanner; tex1, tex2, tex3, tex4: TPointF); virtual; abstract; overload;
 
      procedure FillPolyLinearColor(const points: array of TPointF; AColors: array of TBGRAPixel);  virtual; abstract; overload;
      procedure FillPolyLinearMapping(const points: array of TPointF; texture: IBGRAScanner; texCoords: array of TPointF; TextureInterpolation: Boolean); virtual; abstract; overload;
@@ -292,6 +305,7 @@ type
      procedure EllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel; w: single; back: TBGRAPixel); virtual; abstract;
      procedure FillEllipseAntialias(x, y, rx, ry: single; c: TBGRAPixel); virtual; abstract;
      procedure FillEllipseAntialias(x, y, rx, ry: single; texture: IBGRAScanner); virtual; abstract;
+     procedure FillEllipseLinearColorAntialias(x, y, rx, ry: single; outercolor, innercolor: TBGRAPixel); virtual; abstract;
      procedure EraseEllipseAntialias(x, y, rx, ry: single; alpha: byte); virtual; abstract;
 
      procedure Rectangle(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode); virtual; abstract; overload;
@@ -304,7 +318,7 @@ type
      procedure RectangleAntialias(x, y, x2, y2: single; c: TBGRAPixel; w: single; back: TBGRAPixel); virtual; abstract; overload;
      procedure RectangleAntialias(x, y, x2, y2: single; texture: IBGRAScanner; w: single); virtual; abstract; overload;
 
-     procedure RoundRect(X1, Y1, X2, Y2: integer; RX, RY: integer; BorderColor, FillColor: TBGRAPixel); virtual; abstract;
+     procedure RoundRect(X1, Y1, X2, Y2: integer; DX, DY: integer; BorderColor, FillColor: TBGRAPixel); virtual; abstract;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; c: TBGRAPixel; w: single; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; pencolor: TBGRAPixel; w: single; fillcolor: TBGRAPixel; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure RoundRectAntialias(x,y,x2,y2,rx,ry: single; penTexture: IBGRAScanner; w: single; fillTexture: IBGRAScanner; options: TRoundRectangleOptions = []); virtual; abstract;
@@ -313,10 +327,10 @@ type
      procedure FillRoundRectAntialias(x,y,x2,y2,rx,ry: single; texture: IBGRAScanner; options: TRoundRectangleOptions = []); virtual; abstract;
      procedure EraseRoundRectAntialias(x,y,x2,y2,rx,ry: single; alpha: byte; options: TRoundRectangleOptions = []); virtual; abstract;
 
-     procedure FillRect(r: TRect; c: TColor); virtual;
-     procedure FillRect(r: TRect; c: TBGRAPixel; mode: TDrawMode); virtual;
-     procedure FillRect(x, y, x2, y2: integer; c: TColor); virtual;
-     procedure FillRect(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode); virtual; abstract;
+     procedure FillRect(r: TRect; c: TColor); virtual; overload;
+     procedure FillRect(r: TRect; c: TBGRAPixel; mode: TDrawMode); virtual; overload;
+     procedure FillRect(x, y, x2, y2: integer; c: TColor); virtual; overload;
+     procedure FillRect(x, y, x2, y2: integer; c: TBGRAPixel; mode: TDrawMode); virtual; abstract; overload;
      procedure FillRect(x, y, x2, y2: integer; texture: IBGRAScanner; mode: TDrawMode); virtual; abstract;
      procedure FillRectAntialias(x, y, x2, y2: single; c: TBGRAPixel); virtual; abstract;
      procedure FillRectAntialias(x, y, x2, y2: single; texture: IBGRAScanner); virtual; abstract;
@@ -337,8 +351,8 @@ type
      function TextSize(s: string): TSize; virtual; abstract;
 
      {Spline}
-     function ComputeClosedSpline(const points: array of TPointF): ArrayOfTPointF; virtual; abstract;
-     function ComputeOpenedSpline(const points: array of TPointF): ArrayOfTPointF; virtual; abstract;
+     function ComputeClosedSpline(const APoints: array of TPointF; AStyle: TSplineStyle): ArrayOfTPointF; virtual; abstract;
+     function ComputeOpenedSpline(const APoints: array of TPointF; AStyle: TSplineStyle): ArrayOfTPointF; virtual; abstract;
      function ComputeBezierCurve(const curve: TCubicBezierCurve): ArrayOfTPointF; virtual; abstract;
      function ComputeBezierCurve(const curve: TQuadraticBezierCurve): ArrayOfTPointF; virtual; abstract;
      function ComputeBezierSpline(const spline: array of TCubicBezierCurve): ArrayOfTPointF; virtual; abstract;
@@ -347,6 +361,14 @@ type
      function ComputeWidePolyline(const points: array of TPointF; w: single): ArrayOfTPointF; virtual; abstract;
      function ComputeWidePolyline(const points: array of TPointF; w: single; Closed: boolean): ArrayOfTPointF; virtual; abstract;
      function ComputeWidePolygon(const points: array of TPointF; w: single): ArrayOfTPointF; virtual; abstract;
+
+     function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF; virtual; abstract;
+     function ComputeEllipse(x,y,rx,ry,w: single): ArrayOfTPointF; virtual; abstract;
+     function ComputeArc65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
+     function ComputeArcRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
+     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF; virtual; abstract;
+     function ComputePie65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
+     function ComputePieRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
 
      {Filling}
      procedure FillTransparent; virtual;
@@ -369,6 +391,9 @@ type
      procedure GradientFill(x, y, x2, y2: integer; c1, c2: TBGRAPixel;
        gtype: TGradientType; o1, o2: TPointF; mode: TDrawMode;
        gammaColorCorrection: boolean = True; Sinus: Boolean=False); virtual; abstract;
+     procedure GradientFill(x, y, x2, y2: integer; gradient: TBGRACustomGradient;
+       gtype: TGradientType; o1, o2: TPointF; mode: TDrawMode;
+       Sinus: Boolean=False); virtual; abstract;
      function CreateBrushTexture(ABrushStyle: TBrushStyle; APatternColor, ABackgroundColor: TBGRAPixel;
                 AWidth: integer = 8; AHeight: integer = 8; APenWidth: single = 1): TBGRACustomBitmap; virtual; abstract;
 
@@ -465,6 +490,8 @@ type
      procedure ScanMoveTo(X,Y: Integer); virtual; abstract;
      function ScanNextPixel: TBGRAPixel; virtual; abstract;
      function ScanAt(X,Y: Single): TBGRAPixel; virtual; abstract;
+     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); virtual;
+     function IsScanPutPixelsDefined: boolean; virtual;
   end;
 
   { TBGRACustomScanner }
@@ -476,10 +503,18 @@ type
     procedure ScanMoveTo(X,Y: Integer); virtual;
     function ScanNextPixel: TBGRAPixel; virtual;
     function ScanAt(X,Y: Single): TBGRAPixel; virtual; abstract;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); virtual;
+    function IsScanPutPixelsDefined: boolean; virtual;
     function QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): HResult; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
     function _AddRef: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
     function _Release: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
-  end;  
+  end;
+
+  TBGRACustomGradient = class
+  public
+    function GetColorAt(position: integer): TBGRAPixel; virtual; abstract;
+    function GetAverageColor: TBGRAPixel; virtual; abstract;
+  end;
 
 { Color functions }
 function GetIntensity(c: TExpandedPixel): word; inline;
@@ -491,6 +526,7 @@ function BGRAToHSLA(c: TBGRAPixel): THSLAPixel;
 function HSLAToBGRA(c: THSLAPixel): TBGRAPixel;
 function GammaExpansion(c: TBGRAPixel): TExpandedPixel; inline;
 function GammaCompression(ec: TExpandedPixel): TBGRAPixel; inline;
+function GammaCompression(red,green,blue,alpha: word): TBGRAPixel; inline;
 function BGRAToGrayscale(c: TBGRAPixel): TBGRAPixel;
 function MergeBGRA(c1, c2: TBGRAPixel): TBGRAPixel; overload;
 function MergeBGRA(ec1, ec2: TExpandedPixel): TExpandedPixel; overload;
@@ -520,6 +556,7 @@ var
 
 { Point functions }
 function PointF(x, y: single): TPointF;
+function PointsF(const pts: array of TPointF): ArrayOfTPointF;
 operator = (const pt1, pt2: TPointF): boolean; inline;
 operator - (const pt1, pt2: TPointF): TPointF; inline;
 operator - (const pt2: TPointF): TPointF; inline;
@@ -537,7 +574,7 @@ type
 
 function IntersectLine(line1, line2: TLineDef): TPointF;
 function IntersectLine(line1, line2: TLineDef; out parallel: boolean): TPointF;
-function IsConvex(const pts: array of TPointF): boolean;
+function IsConvex(const pts: array of TPointF; IgnoreAlign: boolean = true): boolean;
 function DoesQuadIntersect(pt1,pt2,pt3,pt4: TPointF): boolean;
 function DoesSegmentIntersect(pt1,pt2,pt3,pt4: TPointF): boolean;
 
@@ -898,6 +935,19 @@ begin
   result := 0;
 end;
 
+{$hints off}
+procedure TBGRACustomBitmap.ScanPutPixels(pdest: PBGRAPixel; count: integer;
+  mode: TDrawMode);
+begin
+  //do nothing
+end;
+{$hints on}
+
+function TBGRACustomBitmap.IsScanPutPixelsDefined: boolean;
+begin
+  result := False;
+end;
+
 {********************** End of TBGRACustomBitmap **************************}
 
 { TBGRACustomScanner }
@@ -915,6 +965,19 @@ function TBGRACustomScanner.ScanNextPixel: TBGRAPixel;
 begin
   result := ScanAt(FCurX,FCurY);
   Inc(FCurX);
+end;
+
+{$hints off}
+procedure TBGRACustomScanner.ScanPutPixels(pdest: PBGRAPixel; count: integer;
+  mode: TDrawMode);
+begin
+  //do nothing
+end;
+{$hints on}
+
+function TBGRACustomScanner.IsScanPutPixelsDefined: boolean;
+begin
+  result := false;
 end;
 
 { Interface gateway }
@@ -1245,6 +1308,14 @@ begin
   Result.alpha := ec.alpha shr 8;
 end;
 
+function GammaCompression(red, green, blue, alpha: word): TBGRAPixel;
+begin
+  Result.red   := GammaCompressionTab[red];
+  Result.green := GammaCompressionTab[green];
+  Result.blue  := GammaCompressionTab[blue];
+  Result.alpha := alpha shr 8;
+end;
+
 // Conversion to grayscale by taking into account
 // different color weights
 function BGRAToGrayscale(c: TBGRAPixel): TBGRAPixel;
@@ -1466,6 +1537,14 @@ begin
   Result.y := y;
 end;
 
+function PointsF(const pts: array of TPointF): ArrayOfTPointF;
+var
+  i: Integer;
+begin
+  setlength(result, length(pts));
+  for i := 0 to high(pts) do result[i] := pts[i];
+end;
+
 operator =(const pt1, pt2: TPointF): boolean;
 begin
   result := (pt1.x = pt2.x) and (pt1.y = pt2.y);
@@ -1578,14 +1657,15 @@ begin
 end;
 
 { Check if a polygon is convex, i.e. it always turns in the same direction }
-function IsConvex(const pts: array of TPointF): boolean;
+function IsConvex(const pts: array of TPointF; IgnoreAlign: boolean = true): boolean;
 var
-  positive,negative: boolean;
+  positive,negative,zero: boolean;
   product: single;
   i: Integer;
 begin
   positive := false;
   negative := false;
+  zero := false;
   for i := 0 to high(pts) do
   begin
     product := (pts[(i+1) mod length(pts)].x-pts[i].x)*(pts[(i+2) mod length(pts)].y-pts[i].y) -
@@ -1607,9 +1687,13 @@ begin
         exit;
       end;
       negative := true;
-    end;
+    end else
+      zero := true;
   end;
-  result := true;
+  if not IgnoreAlign and zero then
+    result := false
+  else
+    result := true;
 end;
 
 { Check if two segments intersect }
