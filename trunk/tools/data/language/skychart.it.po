@@ -1,7 +1,7 @@
-# translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010.
+# translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-12-27 11:14+0100\n"
+"PO-Revision-Date: 2011-05-13 19:02+0200\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
@@ -9,8 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.1\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -182,7 +183,7 @@ msgstr "Password utente anonimo"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr ""
+msgstr "Applica Anti-Alias"
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -450,7 +451,7 @@ msgstr "Impossibile calcolare satelliti."
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Impossibile rilevare l'indirizzo IP, oppure destinazione non trovata."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -1421,7 +1422,7 @@ msgstr "Fine calcolo: %s asteroidi"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
-msgstr ""
+msgstr "Effemeridi"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
@@ -1553,7 +1554,7 @@ msgstr "FAQ"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Preferito"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -1887,7 +1888,7 @@ msgstr "Spaziatura Griglia Oraria"
 
 #: u_translation.rshours
 msgid "hours"
-msgstr ""
+msgstr "ore"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
@@ -2003,7 +2004,7 @@ msgstr "Dettaglio Informazioni"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Informazioni dal catalogo"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2027,7 +2028,7 @@ msgstr "Internet"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr ""
+msgstr "Localizzazione Internet"
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
@@ -2271,7 +2272,7 @@ msgstr "Tempo Locale Siderale"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Codice località"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2727,7 +2728,7 @@ msgstr "Adesso"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr ""
+msgstr "Numero di copie"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -2815,7 +2816,7 @@ msgstr "Spostamento"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "Scostamento etichetta"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3157,7 +3158,7 @@ msgstr "<< Prec"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Anteprima"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3189,7 +3190,7 @@ msgstr "Metodo di stampa"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Anteprima di stampa"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3401,7 +3402,7 @@ msgstr "Aggiorna"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr ""
+msgstr "Aggiorna immagine ogni"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3685,7 +3686,7 @@ msgstr "Porta del server :"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr ""
+msgstr "Risposta del server: "
 
 #: u_translation.rsset
 msgid "Set"
@@ -3793,7 +3794,7 @@ msgstr "Mostra etichette"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Mostra linea da etichetta a oggetto"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
@@ -4061,7 +4062,7 @@ msgstr "Dom"
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Sorgente immagine del Sole"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4421,7 +4422,7 @@ msgstr "Usa DSS online invece di RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Usa foto del Sole online da SDO o SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
