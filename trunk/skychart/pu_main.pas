@@ -2113,6 +2113,7 @@ var fs : TSearchRec;
     r: TStringList;
     fn,cmd: string;
 begin
+AnimationTimer.Enabled:=ToolButton13.Down;
 if ToolButton13.Down then begin  // start animation
    if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
      r:=TStringList.Create;
@@ -2139,12 +2140,12 @@ end else begin                   // end animation
         inc(i);
         fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
       until (not FileExists(fn))or(i>1000);
-      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i '+slash(TempDir)+'%06d.jpg '+fn;
+      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i '+slash(TempDir)+'%06d.jpg '+utf8tosys(fn);
       ExecProcess(cmd,r,true);
+      r.SaveToFile(slash(TempDir)+'ffmpeg.log');
       r.free;
    end;
 end;
-AnimationTimer.Enabled:=ToolButton13.Down;
 end;
 
 procedure Tf_main.ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
