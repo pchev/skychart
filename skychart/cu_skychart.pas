@@ -2417,8 +2417,8 @@ repeat
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
     if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),true,true,5);
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),false,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),false,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2451,8 +2451,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),false,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),false,true,5);
     labelok:=true;
  end;
  xxp:=xx;

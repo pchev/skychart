@@ -2074,7 +2074,7 @@ if cfgplot.UseBMP then begin;
   end;
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   if opaque then cbmp.FillRect(xx,yy,xx+ts.cx,yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
-  cbmp.TextRect(arect,xx,yy,txt,ATextStyle,ColorToBGRA(lcolor));
+  BGRATextOut(xx,yy,txt,ColorToBGRA(lcolor),cbmp);
 end else with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
@@ -2151,7 +2151,7 @@ if cfgplot.UseBMP then begin;
      ts:=cbmp.TextSize(buf);
      arect:=Bounds(xx,yy,round(1.2*ts.cx),ts.cy+2);
      if opaque then cbmp.FillRect(xx,yy,xx+round(1.2*ts.cx),yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
-     cbmp.TextRect(arect,xx,yy,buf,ATextStyle,ColorToBGRA(lcolor));
+     BGRATextOut(xx,yy,buf,ColorToBGRA(lcolor),cbmp);
      yy:=yy+ls;
    until p=0;
 end else with cnv do begin
