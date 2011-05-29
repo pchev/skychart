@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-05-01 17:14+0100\n"
+"PO-Revision-Date: 2011-05-21 08:56+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -2006,7 +2006,7 @@ msgstr "Informació detallada"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Informació de catàleg"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2730,7 +2730,7 @@ msgstr "Ara"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr ""
+msgstr "Nombre de còpies"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -2818,7 +2818,7 @@ msgstr "Decalatge"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "Desplaçament etiqueta"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3160,7 +3160,7 @@ msgstr "Precedent"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Vista prèvia"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3192,7 +3192,7 @@ msgstr "Mètode d'impressió"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Vista prèvia impressió"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3796,7 +3796,7 @@ msgstr "Mostra les etiquetes"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Mostra línia des de l'etiqueta moguda a l'objecte"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
@@ -4064,7 +4064,7 @@ msgstr "Diu."
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr "Font de la imatge del Sol"
+msgstr "Origen de la imatge del Sol"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
