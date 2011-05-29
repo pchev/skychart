@@ -234,7 +234,8 @@ h:= radtodeg(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ))  ;
 A:= radtodeg(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+360,360);
 { refraction meeus91 15.4 }
-h:=minvalue([90.0,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60]);
+if h>-1 then h:=minvalue([90.0,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60])
+        else h:=h+0.64658062088*(h+90)/89;
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double);
@@ -243,7 +244,8 @@ BEGIN
 l1:=degtorad(ObsLatitude);
 a1:=degtorad(A);
 { refraction meeus91 15.3 }
-h:=minvalue([90.0,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60]);
+if h>-0.3534193791 then h:=minvalue([90.0,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60])
+        else h:=h-0.65705159*(h+90)/89.64658;
 h1:=degtorad(h);
 de:= radtodeg(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ))  ;
 hh:= radtodeg(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
