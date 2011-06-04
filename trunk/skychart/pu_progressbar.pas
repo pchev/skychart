@@ -50,6 +50,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_progress.SetLang;
 begin
@@ -66,9 +67,5 @@ procedure Tf_progress.FormCreate(Sender: TObject);
 begin
   SetLang;
 end;
-
-initialization
-  {$i pu_progressbar.lrs}
-
 
 end.

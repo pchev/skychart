@@ -11,7 +11,7 @@ object f_printsetup: Tf_printsetup
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object qtoption: TPanel
     Left = 10
     Height = 110
@@ -164,7 +164,7 @@ object f_printsetup: Tf_printsetup
     end
     object PaperSize: TComboBox
       Left = 310
-      Height = 24
+      Height = 25
       Top = 21
       Width = 96
       ItemHeight = 0

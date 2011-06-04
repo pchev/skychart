@@ -223,6 +223,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_system.SetLang;
 begin
@@ -920,9 +921,6 @@ begin
 if LockChange then exit;
 csc.ScopePlugin:=telescopepluginlist.text;
 end;
-
-initialization
-  {$i pu_config_system.lrs}
 
 end.
 

@@ -57,6 +57,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 const fformat = '0.###############';
 
@@ -119,8 +120,5 @@ if i=0 then begin
   RefreshCalc;
 end else edit3.setfocus;
 end;
-
-initialization
-  {$i pu_catgenadv.lrs}
 
 end.

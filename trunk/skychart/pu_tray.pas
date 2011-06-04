@@ -83,6 +83,7 @@ var
   f_tray: Tf_tray;
 
 implementation
+{$R *.lfm}
 
 uses pu_clock, pu_calendar;
 
@@ -710,7 +711,6 @@ end;
 end;
 
 initialization
-  {$I pu_tray.lrs}
   {$I blankicon.lrs}
   {$I cdcmain.lrs}
 end.

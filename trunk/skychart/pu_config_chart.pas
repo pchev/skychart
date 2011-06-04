@@ -341,7 +341,7 @@ type
   end;
   
 implementation
-
+{$R *.lfm}
 
 procedure Tf_config_chart.SetLang;
 begin
@@ -1065,8 +1065,5 @@ procedure Tf_config_chart.listdblClick(Sender: TObject);
 begin
 cshr.listdbl:=listdbl.checked;
 end;
-
-initialization
-  {$i pu_config_chart.lrs}
 
 end.

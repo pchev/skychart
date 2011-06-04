@@ -197,6 +197,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_time.SetLang;
 var Alabels: TDatesLabelsArray;
@@ -869,8 +870,5 @@ begin
 if LockChange then exit;
 stepunitClick(Sender);
 end;
-
-initialization
-  {$i pu_config_time.lrs}
 
 end.

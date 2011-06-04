@@ -85,6 +85,7 @@ var
   f_printsetup: Tf_printsetup;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_printsetup.SetLang;
 begin
@@ -255,8 +256,5 @@ if DirectoryIsWritable(savepath.Text) then
 else
    ShowMessage(rsInvalidPath+savepath.Text);
 end;
-
-initialization
-  {$i pu_printsetup.lrs}
 
 end.

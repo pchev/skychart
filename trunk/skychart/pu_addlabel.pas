@@ -42,6 +42,7 @@ var
   f_addlabel: Tf_addlabel;
 
 implementation
+{$R *.lfm}
 
 { Tf_addlabel }
 
@@ -110,9 +111,6 @@ procedure Tf_addlabel.Button3Click(Sender: TObject);
 begin
   ShowHelp;
 end;
-
-initialization
-  {$I pu_addlabel.lrs}
 
 end.
 

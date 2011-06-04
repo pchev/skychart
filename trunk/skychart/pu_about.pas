@@ -73,6 +73,7 @@ var
   f_about: Tf_about;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_about.SetLang;
 begin
@@ -113,9 +114,6 @@ procedure Tf_about.Panell1Click(Sender: TObject);
 begin
   ExecuteFile(URL_WebHome);
 end;
-
-initialization
-  {$i pu_about.lrs}
 
 end.
  

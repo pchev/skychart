@@ -62,6 +62,7 @@ var
   f_splash: Tf_splash;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_splash.SetLang;
 begin
@@ -105,9 +106,6 @@ procedure Tf_splash.FormMouseUp(Sender: TOBject; Button: TMouseButton;
 begin
 logoDblClick(Sender);
 end;
-
-initialization
-  {$i pu_splash.lrs}
 
 end.
  

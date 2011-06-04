@@ -262,6 +262,7 @@ Var
   keypos,ixlen : integer; // not thread safe but cannot define the sort exit otherwise
 
 implementation
+{$R *.lfm}
 
 const
   zone_lst : array [0..23] of integer = (   593 ,  1177 ,  1728 , 2258  ,  2780 ,  3245 ,  3651 , 4013  , 4293  ,  4491 ,  4614 , 4662  ,  5259 ,  5837 ,  6411 ,  6988 ,  7522 ,  8021 ,  8463 ,  8839 ,  9133 ,  9345 ,  9489 ,  9537 );
@@ -2285,9 +2286,5 @@ procedure Tf_catgen.ProgressAbort(Sender: TObject);
 begin
 abort:=true;
 end;
-
-
-initialization
-  {$i pu_catgen.lrs}
 
 end.

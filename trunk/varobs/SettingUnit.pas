@@ -122,7 +122,7 @@ var
   OptForm: TOptForm;
 
 implementation
-
+{$R *.lfm}
 
 Uses variables1;
 
@@ -239,8 +239,5 @@ case radiogroup8.ItemIndex of
       end;
 end;
 end;
-
-initialization
-  {$i SettingUnit.lrs}
 
 end.

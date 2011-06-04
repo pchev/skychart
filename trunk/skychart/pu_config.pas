@@ -136,6 +136,7 @@ var
   f_config: Tf_config;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config.SetLang;
 begin
@@ -566,9 +567,6 @@ begin
 ActivateChanges;
 if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
-
-initialization
-  {$i pu_config.lrs}
 
 end.
 

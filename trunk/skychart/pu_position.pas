@@ -77,6 +77,7 @@ var
   f_position: Tf_position;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_position.SetLang;
 begin
@@ -184,8 +185,5 @@ de.value:=rad2deg*d;
 application.ProcessMessages;
 lock:=false;
 end;
-
-initialization
-  {$i pu_position.lrs}
 
 end.

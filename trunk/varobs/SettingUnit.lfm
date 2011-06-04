@@ -13,7 +13,7 @@ object OptForm: TOptForm
   Font.Name = 'MS Sans Serif'
   OnCreate = FormCreate
   OnShow = FormShow
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object BitBtn1: TBitBtn
     Left = 176
     Height = 25
@@ -43,30 +43,30 @@ object OptForm: TOptForm
         Top = 10
         Width = 385
         Caption = 'Observation Entry'
-        ClientHeight = 212
+        ClientHeight = 216
         ClientWidth = 381
         TabOrder = 0
         object Label16: TLabel
           Left = 6
-          Height = 42
+          Height = 32
           Top = 112
-          Width = 46
+          Width = 54
           Caption = 'Observer'#13#10'Initials :'
           ParentColor = False
         end
         object Label8: TLabel
           Left = 6
-          Height = 19
+          Height = 15
           Top = 152
-          Width = 56
+          Width = 63
           Caption = 'Time Zone'
           ParentColor = False
         end
         object Label17: TLabel
           Left = 6
-          Height = 42
+          Height = 32
           Top = 168
-          Width = 77
+          Width = 83
           Caption = 'negative West '#13#10'of Greenwich'
           ParentColor = False
         end
@@ -80,23 +80,23 @@ object OptForm: TOptForm
           TabOrder = 2
           object Label22: TLabel
             Left = 16
-            Height = 19
+            Height = 15
             Top = 82
-            Width = 135
+            Width = 148
             Caption = 'PCObs program location :'
             ParentColor = False
           end
           object Label23: TLabel
             Left = 8
-            Height = 65
+            Height = 49
             Top = 18
-            Width = 214
+            Width = 234
             Caption = 'Launch AAVSO PCObs for data entry'#13#10'This option is recommended if you want '#13#10'to submit your data to the AAVSO'
             ParentColor = False
           end
           object FileNameEdit8: TFileNameEdit
             Left = 16
-            Height = 26
+            Height = 22
             Top = 109
             Width = 169
             DialogOptions = []
@@ -118,9 +118,9 @@ object OptForm: TOptForm
           TabOrder = 1
           object Label15: TLabel
             Left = 6
-            Height = 19
+            Height = 15
             Top = 58
-            Width = 87
+            Width = 99
             Caption = 'Observation file :'
             ParentColor = False
           end
@@ -162,7 +162,7 @@ object OptForm: TOptForm
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 36
+            ClientHeight = 40
             ClientWidth = 200
             Columns = 2
             ItemIndex = 0
@@ -174,7 +174,7 @@ object OptForm: TOptForm
           end
           object FileNameEdit3: TFileNameEdit
             Left = 6
-            Height = 26
+            Height = 22
             Top = 73
             Width = 176
             DialogOptions = []
@@ -213,14 +213,14 @@ object OptForm: TOptForm
         end
         object Edit4: TEdit
           Left = 89
-          Height = 26
+          Height = 22
           Top = 112
           Width = 53
           TabOrder = 3
         end
         object tz: TSpinEdit
           Left = 90
-          Height = 26
+          Height = 22
           Top = 152
           Width = 52
           MaxValue = 12
@@ -239,7 +239,7 @@ object OptForm: TOptForm
         Top = 10
         Width = 249
         Caption = 'VSNET format'
-        ClientHeight = 188
+        ClientHeight = 192
         ClientWidth = 245
         TabOrder = 0
         Visible = False
@@ -281,7 +281,7 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'AFOEV base folder'
-        ClientHeight = 189
+        ClientHeight = 193
         ClientWidth = 245
         TabOrder = 1
         Visible = False
@@ -313,7 +313,7 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'Other format fields description'
-        ClientHeight = 187
+        ClientHeight = 191
         ClientWidth = 245
         TabOrder = 2
         Visible = False
@@ -466,7 +466,7 @@ object OptForm: TOptForm
         Top = 10
         Width = 249
         Caption = 'AAVSO SUM format'
-        ClientHeight = 189
+        ClientHeight = 193
         ClientWidth = 245
         TabOrder = 3
         Visible = False
@@ -507,7 +507,7 @@ object OptForm: TOptForm
         Top = 11
         Width = 249
         Caption = 'AAVSO Visual'
-        ClientHeight = 189
+        ClientHeight = 193
         ClientWidth = 245
         TabOrder = 5
         Visible = False
@@ -557,7 +557,7 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 189
+        ClientHeight = 193
         ClientWidth = 133
         ItemIndex = 0
         Items.Strings = (
@@ -590,7 +590,7 @@ object OptForm: TOptForm
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 108
+        ClientHeight = 112
         ClientWidth = 285
         ItemIndex = 0
         Items.Strings = (
@@ -610,7 +610,7 @@ object OptForm: TOptForm
         Top = 122
         Width = 385
         Caption = 'Cartes du Ciel / Sky Charts interface'
-        ClientHeight = 92
+        ClientHeight = 96
         ClientWidth = 381
         TabOrder = 0
         object Label5: TLabel
@@ -662,7 +662,7 @@ object OptForm: TOptForm
         Top = 10
         Width = 385
         Caption = 'AAVSO Chart'
-        ClientHeight = 86
+        ClientHeight = 90
         ClientWidth = 381
         TabOrder = 1
         object DirectoryEdit2: TDirectoryEdit

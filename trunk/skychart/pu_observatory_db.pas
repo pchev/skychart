@@ -82,6 +82,7 @@ var
   f_observatory_db: Tf_observatory_db;
 
 implementation
+{$R *.lfm}
 
 { Tf_observatory_db }
 
@@ -405,9 +406,6 @@ finally
 screen.Cursor:=crDefault;
 end;
 end;
-
-initialization
-  {$I pu_observatory_db.lrs}
 
 end.
 

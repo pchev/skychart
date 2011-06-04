@@ -125,6 +125,7 @@ var
   f_info: Tf_info;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_info.SetLang;
 begin
@@ -513,8 +514,5 @@ repeat
 until i>length(txt);
 StringGrid2.AutoSizeColumns;
 end;
-
-initialization
-  {$i pu_info.lrs}
 
 end.

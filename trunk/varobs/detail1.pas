@@ -164,6 +164,7 @@ var
   vorow: TStringList;
 
 implementation
+{$R *.lfm}
 
 Uses variables1,SettingUnit;
 
@@ -1335,8 +1336,5 @@ procedure TDetailForm.CheckBox5Click(Sender: TObject);
 begin
 if started then DrawGraph(current);
 end;
-
-initialization
-  {$i detail1.lrs}
 
 end.

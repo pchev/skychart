@@ -286,6 +286,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_solsys.SetLang;
 begin
@@ -988,8 +989,5 @@ begin
   csc.ShowComet:=true;
   csc.ShowAsteroid:=true;
 end;
-
-initialization
-  {$i pu_config_solsys.lrs}
 
 end.

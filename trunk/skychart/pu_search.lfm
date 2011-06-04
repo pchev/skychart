@@ -13,7 +13,7 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object CometPanel: TPanel
     Left = 7
     Height = 41
@@ -24,7 +24,7 @@ object f_search: Tf_search
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
-      Height = 18
+      Height = 22
       Top = 10
       Width = 99
       TabOrder = 0
@@ -58,7 +58,7 @@ object f_search: Tf_search
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 18
+      Height = 22
       Top = 10
       Width = 99
       TabOrder = 0
@@ -94,9 +94,9 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 25
+      Width = 41
       Caption = 'Nebula'
       ParentColor = False
     end
@@ -121,9 +121,9 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 15
+      Width = 23
       Caption = 'Star'
       ParentColor = False
     end
@@ -148,9 +148,9 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 45
+      Width = 74
       Caption = 'Constellation'
       ParentColor = False
     end
@@ -175,9 +175,9 @@ object f_search: Tf_search
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 45
+      Width = 73
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -333,7 +333,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 18
+      Height = 22
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -535,9 +535,9 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 24
+      Width = 39
       Caption = 'Planet '
       ParentColor = False
     end
@@ -566,7 +566,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 205
+    ClientHeight = 201
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0

@@ -60,6 +60,7 @@ var
   f_manualtelescope: Tf_manualtelescope;
 
 implementation
+{$R *.lfm}
 
 uses u_constant;
 
@@ -141,8 +142,5 @@ procedure Tf_manualtelescope.FormMouseUp(Sender: TObject;
 begin
 moving:=false;
 end;
-
-initialization
-  {$i pu_manualtelescope.lrs}
 
 end.

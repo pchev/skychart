@@ -124,8 +124,6 @@ var
   pop_scope: Tpop_scope;
 
 implementation
-
-
 {$R *.lfm}
 
 var CoordLock : boolean = false;

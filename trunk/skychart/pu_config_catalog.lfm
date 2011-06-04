@@ -13,7 +13,7 @@ object f_config_catalog: Tf_config_catalog
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object MainPanel: TPanel
     Left = 12
     Height = 520
@@ -38,10 +38,10 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 460
         ClientWidth = 494
         object Label37: TLabel
-          Left = 201
-          Height = 11
+          Left = 109
+          Height = 15
           Top = 17
-          Width = 143
+          Width = 235
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '

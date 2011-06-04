@@ -751,6 +751,8 @@ var
 
 implementation
 
+{$R *.lfm}
+
 uses
 {$if (lcl_major=0) and (lcl_minor=9) and (lcl_release<29) }
     {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
@@ -7144,8 +7146,5 @@ GetTranslationString(Tf_image.Create(self),f);
 GetTranslationString(Tf_progress.Create(self),f);
 closefile(f);
 end;}
-
-initialization
-  {$i pu_main.lrs}
 
 end.

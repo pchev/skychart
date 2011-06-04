@@ -12,12 +12,12 @@ object f_catgenadv: Tf_catgenadv
   OnShow = FormShow
   ParentFont = True
   Position = poMainFormCenter
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Label1: TLabel
     Left = 72
-    Height = 14
+    Height = 18
     Top = 90
-    Width = 8
+    Width = 9
     Caption = 'x'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -27,9 +27,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label2: TLabel
     Left = 72
-    Height = 14
+    Height = 18
     Top = 126
-    Width = 9
+    Width = 12
     Caption = '+'
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
@@ -39,9 +39,9 @@ object f_catgenadv: Tf_catgenadv
   end
   object Label3: TLabel
     Left = 72
-    Height = 16
+    Height = 20
     Top = 160
-    Width = 11
+    Width = 14
     Caption = '='
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
@@ -81,7 +81,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit1: TEdit
     Left = 24
-    Height = 18
+    Height = 22
     Top = 72
     Width = 110
     OnChange = Edit1Change
@@ -90,7 +90,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit2: TEdit
     Left = 24
-    Height = 18
+    Height = 22
     Top = 106
     Width = 110
     Color = clBtnFace
@@ -99,7 +99,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit3: TEdit
     Left = 24
-    Height = 18
+    Height = 22
     Top = 140
     Width = 110
     OnChange = Edit3Change
@@ -108,7 +108,7 @@ object f_catgenadv: Tf_catgenadv
   end
   object Edit4: TEdit
     Left = 24
-    Height = 18
+    Height = 22
     Top = 176
     Width = 110
     Color = clBtnFace

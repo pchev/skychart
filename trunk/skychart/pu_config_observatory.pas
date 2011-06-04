@@ -164,6 +164,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_observatory.SetLang;
 begin
@@ -735,8 +736,5 @@ begin
 if LockChange then exit;
 cmain.horizonfile:=horizonfile.text;
 end;
-
-initialization
-  {$i pu_config_observatory.lrs}
 
 end.

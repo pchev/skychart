@@ -11,7 +11,7 @@ object f_position: Tf_position
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Button1: TButton
     Left = 304
     Height = 25
@@ -45,25 +45,25 @@ object f_position: Tf_position
     TabOrder = 1
     object coord1: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 36
-      Width = 10
+      Width = 13
       Caption = 'Az'
       ParentColor = False
     end
     object coord2: TLabel
       Left = 248
-      Height = 11
+      Height = 15
       Top = 36
-      Width = 10
+      Width = 14
       Caption = 'Alt'
       ParentColor = False
     end
     object coord: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 8
-      Width = 20
+      Width = 32
       Caption = 'coord'
       ParentColor = False
     end
@@ -101,25 +101,25 @@ object f_position: Tf_position
     TabOrder = 0
     object eq1: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 36
-      Width = 12
+      Width = 17
       Caption = 'RA'
       ParentColor = False
     end
     object eq2: TLabel
       Left = 248
-      Height = 11
+      Height = 15
       Top = 36
-      Width = 12
+      Width = 18
       Caption = 'DE'
       ParentColor = False
     end
     object Equinox: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 8
-      Width = 28
+      Width = 45
       Caption = 'Equinox'
       ParentColor = False
     end
@@ -157,17 +157,17 @@ object f_position: Tf_position
     TabOrder = 2
     object Label3: TLabel
       Left = 8
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 17
+      Width = 24
       Caption = 'FOV'
       ParentColor = False
     end
     object Label4: TLabel
       Left = 248
-      Height = 11
+      Height = 15
       Top = 14
-      Width = 29
+      Width = 47
       Caption = 'Rotation'
       ParentColor = False
     end
@@ -183,7 +183,7 @@ object f_position: Tf_position
     end
     object rot: TFloatEdit
       Left = 336
-      Height = 18
+      Height = 22
       Hint = '-180..180'
       Top = 9
       Width = 73

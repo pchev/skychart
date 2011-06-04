@@ -496,6 +496,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_display.SetLang;
 begin
@@ -2113,8 +2114,5 @@ i:=lstDSOCScheme.ItemIndex;
           cplot.Color[34]:=shpGL.Brush.Color;
           cplot.Color[35]:=shpNE.Brush.Color;
 end;
-
-initialization
-  {$i pu_config_display.lrs}
 
 end.
