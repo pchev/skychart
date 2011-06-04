@@ -80,6 +80,7 @@ var
   f_detail: Tf_detail;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_detail.SetLang;
 begin
@@ -162,8 +163,5 @@ begin
   HTMLViewer1.ClearHistory;
   HTMLViewer1.LoadFromString(value);
 end;
-
-initialization
-  {$i pu_detail.lrs}
 
 end.

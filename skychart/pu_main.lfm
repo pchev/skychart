@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 278
+  Left = 321
   Height = 600
   Top = 67
   Width = 873

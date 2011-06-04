@@ -13,20 +13,20 @@ object f_progress: Tf_progress
   OnCreate = FormCreate
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Label1: TLabel
     Left = 16
-    Height = 11
+    Height = 15
     Top = 4
-    Width = 23
+    Width = 39
     Caption = 'Label1'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 16
-    Height = 11
+    Height = 15
     Top = 56
-    Width = 23
+    Width = 39
     Caption = 'Label2'
     ParentColor = False
   end

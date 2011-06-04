@@ -150,6 +150,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_pictures.SetLang;
 begin
@@ -535,8 +536,5 @@ begin
 if LockChange then exit;
 cdss.OnlineDSSid:=OnlineDSSList.ItemIndex+1;
 end;
-
-initialization
-  {$i pu_config_pictures.lrs}
 
 end.

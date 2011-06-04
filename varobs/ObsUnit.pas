@@ -103,7 +103,7 @@ var
   current : integer;
 
 implementation
-
+{$R *.lfm}
 
 uses variables1,SettingUnit;
 
@@ -395,8 +395,5 @@ if memo1.Lines.Count>0 then begin
 end
 else canclose:=true;
 end;
-
-initialization
-  {$i ObsUnit.lrs}
 
 end.

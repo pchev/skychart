@@ -109,6 +109,7 @@ type
 {$endif}
 
 implementation
+{$R *.lfm}
 
 procedure Tf_getdss.SetLang;
 begin
@@ -375,9 +376,5 @@ finally
   chdir(appdir);
 end;
 end;
-
-
-initialization
-  {$i pu_getdss.lrs}
 
 end.

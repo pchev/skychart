@@ -53,6 +53,7 @@ var
   f_clock: Tf_clock;
 
 implementation
+{$R *.lfm}
 
 { Tf_clock }
 
@@ -148,9 +149,6 @@ procedure Tf_clock.Timer1Timer(Sender: TObject);
 begin
   UpdateClock;
 end;
-
-initialization
-  {$I pu_clock.lrs}
 
 end.
 

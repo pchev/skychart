@@ -309,6 +309,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_chart.SetLang;
 begin
@@ -3763,10 +3764,6 @@ except
  Connect1.checked:=false;
 end;
 end;
-
-
-initialization
-  {$i pu_chart.lrs}
 
 end.
 

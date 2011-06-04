@@ -85,6 +85,7 @@ object f_config_observatory: Tf_config_observatory
           ZoomMax = 26
           Xcentre = 0
           Ycentre = 0
+          BGcolor = clBlack
           OnMouseUp = ZoomImage1MouseUp
           OnPaint = ZoomImage1Paint
           OnPosChange = ZoomImage1PosChange
@@ -308,7 +309,7 @@ object f_config_observatory: Tf_config_observatory
           TabOrder = 3
           object TZComboBox: TComboBox
             Left = 8
-            Height = 24
+            Height = 25
             Top = 23
             Width = 433
             ItemHeight = 0
@@ -338,7 +339,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object ComboBox1: TComboBox
           Left = 93
-          Height = 24
+          Height = 25
           Top = 35
           Width = 192
           ItemHeight = 0

@@ -266,6 +266,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_catalog.SetLang;
 begin
@@ -927,9 +928,5 @@ for i:=0 to ccat.GCatNum-1 do begin
    ccat.GCatLst[i].cattype:=0;
 end;
 end;
-
-
-initialization
-  {$i pu_config_catalog.lrs}
 
 end.

@@ -317,7 +317,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object ComboBox1: TComboBox
             Left = 171
-            Height = 24
+            Height = 25
             Top = 40
             Width = 176
             ItemHeight = 0
@@ -335,7 +335,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object ComboBox2: TComboBox
             Left = 171
-            Height = 24
+            Height = 25
             Top = 72
             Width = 52
             ItemHeight = 0

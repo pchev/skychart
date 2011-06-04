@@ -12,52 +12,52 @@ object f_zoom: Tf_zoom
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Label1: TLabel
     Left = 16
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 7
+    Width = 10
     Caption = '1'''
     ParentColor = False
   end
   object Label2: TLabel
     Left = 120
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 5
+    Width = 8
     Caption = '1'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 172
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 9
+    Width = 15
     Caption = '10'
     ParentColor = False
   end
   object Label4: TLabel
     Left = 225
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 13
+    Width = 22
     Caption = '100'
     ParentColor = False
   end
   object Label5: TLabel
     Left = 254
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 13
+    Width = 22
     Caption = '360'
     ParentColor = False
   end
   object Label6: TLabel
     Left = 70
-    Height = 11
+    Height = 15
     Top = 8
-    Width = 11
+    Width = 17
     Caption = '10'''
     ParentColor = False
   end

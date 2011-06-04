@@ -125,6 +125,7 @@ type
   end;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_config_internet.SetLang;
 begin
@@ -430,8 +431,5 @@ begin
 if lockchange then exit;
 cmain.AsteroidUrlList.Assign(AsteroidUrlList.Lines);
 end;
-
-initialization
-  {$i pu_config_internet.lrs}
 
 end.

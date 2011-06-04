@@ -138,6 +138,7 @@ var
   VarForm: TVarForm;
 
 implementation
+{$R *.lfm}
 
 Uses detail1,SettingUnit,ObsUnit, splashunit, aavsochart ;
 
@@ -1243,8 +1244,5 @@ procedure TVarForm.InstanceRunning(Sender : TObject);
 begin
   UniqueInstance1.RetryOrHalt;
 end;
-
-initialization
-  {$i variables1.lrs}
 
 end.

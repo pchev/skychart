@@ -18,8 +18,11 @@ object splash: Tsplash
   OnClick = Image1Click
   OnShow = FormShow
   Position = poScreenCenter
+  LCLVersion = '0.9.30.1'
   object BitBtn1: TBitBtn
+    Left = 0
     Height = 1
+    Top = 0
     Width = 1
     Cancel = True
     Default = True
@@ -28,7 +31,9 @@ object splash: Tsplash
     TabOrder = 0
   end
   object Panel1: TPanel
+    Left = 0
     Height = 294
+    Top = 0
     Width = 361
     Align = alClient
     AutoSize = True
@@ -39,8 +44,9 @@ object splash: Tsplash
     TabOrder = 1
     OnClick = Image1Click
     object Image1: TImage
-      Left = 32
+      Left = 0
       Height = 150
+      Top = 0
       Width = 300
       AutoSize = True
       Center = True
@@ -173,12 +179,12 @@ object splash: Tsplash
         E53FFC9162CC316D57000000000049454E44AE426082
       }
       Stretch = True
-      Transparent = False
     end
     object Label2: TLabel
+      Left = -32
       Height = 17
       Top = 153
-      Width = 382
+      Width = 414
       Alignment = taCenter
       Anchors = [akTop, akLeft, akRight]
       AutoSize = False
@@ -186,19 +192,22 @@ object splash: Tsplash
       Color = clBlack
       Font.Color = clYellow
       ParentColor = False
+      ParentFont = False
       Transparent = False
       OnClick = Image1Click
     end
     object Label3: TLabel
-      Height = 66
+      Left = -32
+      Height = 83
       Top = 182
-      Width = 381
+      Width = 413
       Alignment = taCenter
       Anchors = [akTop, akLeft, akRight]
       Caption = 'Copyright  2008  Patrick Chevalley Tous droits reservé.'#10'http://www.astrosurf.com/astropc'#10'This program is free software; you can redistribute it '#10'and/or modify it under the terms of the '#10'GNU General Public License'
       Color = clBlack
       Font.Color = clYellow
       ParentColor = False
+      ParentFont = False
       Transparent = False
       OnClick = Image1Click
     end

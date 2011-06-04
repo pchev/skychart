@@ -209,7 +209,7 @@ var
   f_calendar: Tf_calendar;
 
 implementation
-
+{$R *.lfm}
 
 uses u_util, u_projection, Clipbrd;
 
@@ -2431,8 +2431,5 @@ begin
 pagecontrol1.ActivePage.ShowHelp;
 //ExecuteFile(slash(helpdir)+slash('wiki_doc')+stringreplace(rsDocumentatio,'/',PathDelim,[rfReplaceAll]));
 end;
-
-initialization
-  {$i pu_calendar.lrs}
 
 end.

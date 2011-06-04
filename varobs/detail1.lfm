@@ -7,7 +7,7 @@ object DetailForm: TDetailForm
   VertScrollBar.Page = 463
   ActiveControl = BitBtn1
   Caption = 'DetailForm'
-  ClientHeight = 464
+  ClientHeight = 461
   ClientWidth = 728
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
@@ -15,18 +15,21 @@ object DetailForm: TDetailForm
   OnResize = FormResize
   OnShow = FormShow
   ShowHint = True
+  LCLVersion = '0.9.30.1'
   object Image1: TImage
-    Height = 336
+    Left = 0
+    Height = 333
+    Top = 0
     Width = 728
     Align = alClient
     OnMouseDown = Image1MouseDown
     OnMouseMove = Image1MouseMove
     OnMouseUp = Image1MouseUp
-    Transparent = False
   end
   object Panel2: TPanel
+    Left = 0
     Height = 90
-    Top = 374
+    Top = 371
     Width = 728
     Align = alBottom
     ClientHeight = 90
@@ -34,7 +37,7 @@ object DetailForm: TDetailForm
     TabOrder = 0
     object Label7: TLabel
       Left = 8
-      Height = 20
+      Height = 15
       Top = 36
       Width = 31
       Caption = 'Date:'
@@ -42,7 +45,7 @@ object DetailForm: TDetailForm
     end
     object Label8: TLabel
       Left = 136
-      Height = 20
+      Height = 15
       Top = 36
       Width = 28
       Caption = 'Mag:'
@@ -50,7 +53,7 @@ object DetailForm: TDetailForm
     end
     object Label1: TLabel
       Left = 228
-      Height = 20
+      Height = 15
       Top = 10
       Width = 60
       Caption = 'Mag. max:'
@@ -58,7 +61,7 @@ object DetailForm: TDetailForm
     end
     object Label2: TLabel
       Left = 333
-      Height = 20
+      Height = 15
       Top = 10
       Width = 53
       Caption = 'Mag min:'
@@ -66,7 +69,7 @@ object DetailForm: TDetailForm
     end
     object Label3: TLabel
       Left = 429
-      Height = 20
+      Height = 15
       Top = 10
       Width = 41
       Caption = 'Period:'
@@ -74,7 +77,7 @@ object DetailForm: TDetailForm
     end
     object Label4: TLabel
       Left = 541
-      Height = 20
+      Height = 15
       Top = 10
       Width = 58
       Caption = 'Rise time:'
@@ -82,7 +85,7 @@ object DetailForm: TDetailForm
     end
     object Label5: TLabel
       Left = 136
-      Height = 20
+      Height = 15
       Top = 10
       Width = 30
       Caption = 'Type:'
@@ -90,7 +93,7 @@ object DetailForm: TDetailForm
     end
     object Label6: TLabel
       Left = 8
-      Height = 20
+      Height = 15
       Top = 10
       Width = 29
       Caption = 'Star:'
@@ -109,7 +112,7 @@ object DetailForm: TDetailForm
     end
     object Edit12: TEdit
       Left = 36
-      Height = 21
+      Height = 22
       Top = 32
       Width = 97
       Color = clBtnFace
@@ -119,7 +122,7 @@ object DetailForm: TDetailForm
     end
     object Edit13: TEdit
       Left = 166
-      Height = 21
+      Height = 22
       Top = 32
       Width = 41
       Color = clBtnFace
@@ -129,10 +132,10 @@ object DetailForm: TDetailForm
     end
     object CheckBox1: TCheckBox
       Left = 256
-      Height = 21
+      Height = 23
       Hint = 'Cursor follow light curve on graph'
       Top = 56
-      Width = 121
+      Width = 123
       Caption = 'Follow light curve'
       Checked = True
       OnClick = CheckBox1Click
@@ -141,10 +144,10 @@ object DetailForm: TDetailForm
     end
     object CheckBox2: TCheckBox
       Left = 399
-      Height = 21
+      Height = 23
       Hint = 'Plot observation data from file defined on setting'
       Top = 56
-      Width = 148
+      Width = 150
       Caption = 'Plot observation data '
       Checked = True
       OnClick = CheckBox2Click
@@ -213,7 +216,7 @@ object DetailForm: TDetailForm
     end
     object Edit1: TEdit
       Left = 36
-      Height = 21
+      Height = 22
       Top = 6
       Width = 97
       Color = clBtnFace
@@ -223,7 +226,7 @@ object DetailForm: TDetailForm
     end
     object Edit2: TEdit
       Left = 166
-      Height = 21
+      Height = 22
       Top = 6
       Width = 57
       Color = clBtnFace
@@ -233,7 +236,7 @@ object DetailForm: TDetailForm
     end
     object Edit3: TEdit
       Left = 288
-      Height = 21
+      Height = 22
       Top = 6
       Width = 41
       Color = clBtnFace
@@ -243,7 +246,7 @@ object DetailForm: TDetailForm
     end
     object Edit4: TEdit
       Left = 383
-      Height = 21
+      Height = 22
       Top = 6
       Width = 41
       Color = clBtnFace
@@ -253,7 +256,7 @@ object DetailForm: TDetailForm
     end
     object Edit5: TEdit
       Left = 469
-      Height = 21
+      Height = 22
       Top = 6
       Width = 65
       Color = clBtnFace
@@ -263,7 +266,7 @@ object DetailForm: TDetailForm
     end
     object Edit6: TEdit
       Left = 597
-      Height = 21
+      Height = 22
       Top = 6
       Width = 41
       Color = clBtnFace
@@ -273,9 +276,9 @@ object DetailForm: TDetailForm
     end
     object CheckBox4: TCheckBox
       Left = 399
-      Height = 21
+      Height = 23
       Top = 34
-      Width = 105
+      Width = 107
       Caption = 'Plot QuickLook'
       OnClick = CheckBox4Click
       TabOrder = 14
@@ -292,18 +295,19 @@ object DetailForm: TDetailForm
     end
     object CheckBox5: TCheckBox
       Left = 8
-      Height = 21
+      Height = 23
       Top = 56
-      Width = 228
+      Width = 230
       Caption = 'Group observation to current phase'
       OnClick = CheckBox5Click
       TabOrder = 16
     end
   end
   object Panel3: TPanel
+    Left = 0
     Height = 38
     Hint = 'Click on the box to change color'
-    Top = 336
+    Top = 333
     Width = 728
     Align = alBottom
     ClientHeight = 38
@@ -318,7 +322,7 @@ object DetailForm: TDetailForm
     end
     object Label9: TLabel
       Left = 25
-      Height = 20
+      Height = 15
       Top = 5
       Width = 68
       Caption = 'Background'
@@ -334,7 +338,7 @@ object DetailForm: TDetailForm
     end
     object Label10: TLabel
       Left = 158
-      Height = 20
+      Height = 15
       Top = 5
       Width = 24
       Caption = 'Axis'
@@ -350,7 +354,7 @@ object DetailForm: TDetailForm
     end
     object Label13: TLabel
       Left = 558
-      Height = 20
+      Height = 15
       Top = 5
       Width = 73
       Caption = 'Out of range'
@@ -366,7 +370,7 @@ object DetailForm: TDetailForm
     end
     object Label11: TLabel
       Left = 304
-      Height = 20
+      Height = 15
       Top = 5
       Width = 73
       Caption = 'Current date'
@@ -382,7 +386,7 @@ object DetailForm: TDetailForm
     end
     object Label12: TLabel
       Left = 408
-      Height = 20
+      Height = 15
       Top = 5
       Width = 121
       Caption = 'Estimated light curve'
@@ -398,7 +402,7 @@ object DetailForm: TDetailForm
     end
     object Label14: TLabel
       Left = 25
-      Height = 20
+      Height = 15
       Top = 21
       Width = 102
       Caption = 'Observation point'
@@ -422,7 +426,7 @@ object DetailForm: TDetailForm
     end
     object Label16: TLabel
       Left = 304
-      Height = 20
+      Height = 15
       Top = 21
       Width = 68
       Caption = 'Fainter than'
@@ -438,7 +442,7 @@ object DetailForm: TDetailForm
     end
     object Label17: TLabel
       Left = 408
-      Height = 20
+      Height = 15
       Top = 21
       Width = 55
       Caption = 'Uncertain'
@@ -454,7 +458,7 @@ object DetailForm: TDetailForm
     end
     object Label18: TLabel
       Left = 558
-      Height = 20
+      Height = 15
       Top = 21
       Width = 131
       Caption = 'Non visual observation'
@@ -462,10 +466,10 @@ object DetailForm: TDetailForm
     end
     object CheckBox3: TCheckBox
       Left = 158
-      Height = 21
+      Height = 23
       Hint = 'Show your own observation on another color'
       Top = 16
-      Width = 119
+      Width = 121
       Caption = 'Own observation'
       Checked = True
       OnClick = CheckBox3Click
@@ -485,7 +489,29 @@ object DetailForm: TDetailForm
     end
   end
   object ColorDialog1: TColorDialog
-    Title = 'Select color'
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
     left = 64
     top = 16
   end
@@ -522,13 +548,13 @@ object DetailForm: TDetailForm
     end
   end
   object SaveDialog1: TSaveDialog
-    Title = 'Save file as'
     DefaultExt = '.bmp'
     Filter = 'Bitmap files|*.bmp'
     left = 112
     top = 16
   end
   object DownloadDialog1: TDownloadDialog
+    FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True
     left = 28

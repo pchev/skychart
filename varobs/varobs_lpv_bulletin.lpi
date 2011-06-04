@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
 <CONFIG>
   <ProjectOptions>
-    <Version Value="7"/>
+    <Version Value="9"/>
     <General>
       <Flags>
         <LRSInOutputDirectory Value="False"/>
       </Flags>
       <MainUnit Value="0"/>
-      <TargetFileExt Value=".exe"/>
       <Title Value="lpv_bulletin"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
-      <ProjectVersion Value=""/>
+      <StringTable ProductVersion=""/>
     </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
@@ -38,8 +40,8 @@
         <Filename Value="varobs_lpv_bulletin.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="varobs_lpv_bulletin"/>
-        <CursorPos X="58" Y="19"/>
         <TopLine Value="1"/>
+        <CursorPos X="58" Y="19"/>
         <UsageCount Value="26"/>
       </Unit0>
       <Unit1>
@@ -49,26 +51,29 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="aavsob1"/>
-        <CursorPos X="43" Y="283"/>
-        <TopLine Value="280"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="29"/>
         <UsageCount Value="26"/>
         <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
         <Filename Value="copyplan1.pas"/>
         <ComponentName Value="Form1"/>
         <HasResources Value="True"/>
         <UnitName Value="copyplan1"/>
-        <CursorPos X="29" Y="4"/>
         <TopLine Value="1"/>
+        <CursorPos X="29" Y="4"/>
         <UsageCount Value="10"/>
       </Unit2>
       <Unit3>
         <Filename Value="u_util2.pas"/>
         <UnitName Value="u_util2"/>
-        <CursorPos X="78" Y="1165"/>
         <TopLine Value="1151"/>
+        <CursorPos X="78" Y="1165"/>
         <UsageCount Value="12"/>
       </Unit3>
       <Unit4>
@@ -77,25 +82,25 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="variables1"/>
-        <CursorPos X="40" Y="540"/>
         <TopLine Value="505"/>
+        <CursorPos X="40" Y="540"/>
         <UsageCount Value="10"/>
       </Unit4>
       <Unit5>
         <Filename Value="u_param.pas"/>
         <UnitName Value="u_param"/>
-        <CursorPos X="7" Y="59"/>
         <TopLine Value="38"/>
+        <CursorPos X="7" Y="59"/>
         <UsageCount Value="10"/>
       </Unit5>
       <Unit6>
         <Filename Value="../../../pch/lazarus/lcl/include/control.inc"/>
-        <CursorPos X="1" Y="2526"/>
         <TopLine Value="2505"/>
+        <CursorPos X="1" Y="2526"/>
         <UsageCount Value="10"/>
       </Unit6>
     </Units>
-    <JumpHistory Count="19" HistoryIndex="18">
+    <JumpHistory Count="23" HistoryIndex="22">
       <Position1>
         <Filename Value="aavsob1.pas"/>
         <Caret Line="107" Column="1" TopLine="86"/>
@@ -172,13 +177,34 @@
         <Filename Value="aavsob1.pas"/>
         <Caret Line="309" Column="27" TopLine="280"/>
       </Position19>
+      <Position20>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="298" Column="43" TopLine="280"/>
+      </Position20>
+      <Position21>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position21>
+      <Position22>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="70" Column="1" TopLine="32"/>
+      </Position22>
+      <Position23>
+        <Filename Value="aavsob1.pas"/>
+        <Caret Line="328" Column="1" TopLine="285"/>
+      </Position23>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="8"/>
+    <Version Value="9"/>
     <SearchPaths>
       <UnitOutputDirectory Value="units"/>
     </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
     <CodeGeneration>
       <Optimizations>
         <OptimizationLevel Value="0"/>

@@ -84,6 +84,7 @@ var
   f_print: Tf_print;
 
 implementation
+{$R *.lfm}
 
 uses pu_printsetup;
 
@@ -252,8 +253,5 @@ finally
 savecfgm.Free;
 end;
 end;
-
-initialization
-  {$I pu_print.lrs}
 
 end.

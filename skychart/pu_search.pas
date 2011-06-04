@@ -144,6 +144,7 @@ var
   f_search: Tf_search;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_search.SetLang;
 begin
@@ -514,8 +515,5 @@ end;
 NebNameBox.ItemIndex:=0;
 end;
 end;
-
-initialization
-  {$i pu_search.lrs}
 
 end.

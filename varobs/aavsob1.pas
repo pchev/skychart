@@ -26,7 +26,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-//Shellapi,
 {$ifdef mswindows}
   Windows,
 {$endif}
@@ -66,6 +65,7 @@ var
   nLPV,curvar : integer;
 
 implementation
+{$R *.lfm}
 
 Procedure TForm1.GetAppDir;
 var buf: string;
@@ -323,8 +323,5 @@ procedure TForm1.SpinEdit1Change(Sender: TObject);
 begin
 FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+copy(SpinEdit1.text,3,2)+'.TXT';
 end;
-
-initialization
-  {$i aavsob1.lrs}
 
 end.

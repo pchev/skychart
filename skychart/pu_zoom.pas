@@ -65,6 +65,7 @@ var
   f_zoom: Tf_zoom;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_zoom.SetLang;
 begin
@@ -111,8 +112,5 @@ TrackBar1.SetTick(0);
 TrackBar1.SetTick(100);
 TrackBar1.SetTick(200);
 end;
-
-initialization
-  {$i pu_zoom.lrs}
 
 end.

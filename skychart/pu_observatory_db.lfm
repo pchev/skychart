@@ -59,7 +59,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object countrylist: TComboBox
       Left = 8
-      Height = 24
+      Height = 25
       Top = 1
       Width = 234
       DropDownCount = 10

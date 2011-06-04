@@ -54,7 +54,7 @@ var
   splash: Tsplash;
 
 implementation
-
+{$R *.lfm}
 
 procedure Tsplash.Timer1Timer(Sender: TObject);
 begin
@@ -72,8 +72,5 @@ procedure Tsplash.Image1Click(Sender: TObject);
 begin
 modalresult:=mrCancel;
 end;
-
-initialization
-  {$i splashunit.lrs}
 
 end.

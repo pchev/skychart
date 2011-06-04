@@ -74,6 +74,7 @@ var
   f_image: Tf_image;
 
 implementation
+{$R *.lfm}
 
 procedure Tf_image.SetLang;
 begin
@@ -201,8 +202,5 @@ if scrolllock then exit;
 Image1.Ycentre:=VScrollBar.Position;
 Image1.Draw;
 end;
-
-initialization
-  {$i pu_image.lrs}
 
 end.

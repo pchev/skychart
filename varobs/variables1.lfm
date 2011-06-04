@@ -119,7 +119,7 @@ object VarForm: TVarForm
   OnCreate = FormCreate
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.30.1'
   object Grid1: TStringGrid
     Left = 0
     Height = 406
@@ -150,7 +150,7 @@ object VarForm: TVarForm
     TabOrder = 1
     object Label2: TLabel
       Left = 11
-      Height = 14
+      Height = 15
       Top = 10
       Width = 27
       Caption = 'Date'
@@ -158,7 +158,7 @@ object VarForm: TVarForm
     end
     object Label3: TLabel
       Left = 22
-      Height = 14
+      Height = 15
       Top = 44
       Width = 12
       Caption = 'JD'
@@ -166,7 +166,7 @@ object VarForm: TVarForm
     end
     object Label4: TLabel
       Left = 147
-      Height = 14
+      Height = 15
       Top = 44
       Width = 26
       Caption = 'Dec.'
@@ -185,7 +185,7 @@ object VarForm: TVarForm
     end
     object Edit1: TEdit
       Left = 48
-      Height = 21
+      Height = 22
       Top = 42
       Width = 89
       OnExit = Edit1Change
@@ -194,7 +194,7 @@ object VarForm: TVarForm
     end
     object Edit2: TEdit
       Left = 176
-      Height = 21
+      Height = 22
       Top = 42
       Width = 97
       OnExit = Edit2Change
@@ -216,7 +216,7 @@ object VarForm: TVarForm
       ChildSizing.ShrinkVertical = crsScaleChilds
       ChildSizing.Layout = cclLeftToRightThenTopToBottom
       ChildSizing.ControlsPerLine = 3
-      ClientHeight = 23
+      ClientHeight = 22
       ClientWidth = 325
       Columns = 3
       ItemIndex = 0
@@ -229,7 +229,7 @@ object VarForm: TVarForm
     end
     object Edit4: TEdit
       Left = 376
-      Height = 21
+      Height = 22
       Top = 3
       Width = 121
       TabOrder = 5
@@ -246,7 +246,7 @@ object VarForm: TVarForm
     end
     object DateEdit1: TDateEdit
       Left = 48
-      Height = 21
+      Height = 22
       Top = 6
       Width = 80
       CalendarDisplaySettings = [dsShowHeadings, dsShowDayNames]
@@ -291,7 +291,7 @@ object VarForm: TVarForm
       Height = 23
       Top = 6
       Width = 101
-      Time = 0.39618055555556
+      Time = 0.39618055555555
       OnChange = DateEdit1Change
       Enabled = True
       TabOrder = 7

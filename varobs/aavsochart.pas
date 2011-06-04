@@ -70,6 +70,7 @@ var
   chartform: Tchartform;
 
 implementation
+{$R *.lfm}
 
 Uses Variables1, settingUnit;
 
@@ -124,8 +125,5 @@ procedure Tchartform.ListBox1Click(Sender: TObject);
 begin
 ExecuteFile(chartdir+ListBox1.Items[ListBox1.ItemIndex]);
 end;
-
-initialization
-  {$i aavsochart.lrs}
 
 end.

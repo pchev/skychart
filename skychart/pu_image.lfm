@@ -1,5 +1,5 @@
 object f_image: Tf_image
-  Left = 50
+  Left = 62
   Height = 407
   Top = 101
   Width = 615
@@ -31,6 +31,7 @@ object f_image: Tf_image
     ZoomMax = 4
     Xcentre = 0
     Ycentre = 0
+    BGcolor = clBlack
   end
   object Panel1: TPanel
     Left = 0
@@ -47,9 +48,9 @@ object f_image: Tf_image
     TabStop = True
     object Label1: TLabel
       Left = 320
-      Height = 18
+      Height = 15
       Top = 7
-      Width = 43
+      Width = 39
       Caption = 'Label1'
       ParentColor = False
     end
