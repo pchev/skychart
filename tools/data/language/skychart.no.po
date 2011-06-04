@@ -2,7 +2,7 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-03-22 18:23+0100\n"
+"PO-Revision-Date: 2011-05-30 17:34+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.no\n"
 "POT-Creation-Date: \n"
@@ -138,7 +138,7 @@ msgstr "Alt"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Alt/Az koord."
+msgstr "Alt/Az koord. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -146,7 +146,7 @@ msgstr "Alt/Az koord."
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "Alt/Az koordinater"
+msgstr "Alt-Az koordinater"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
@@ -158,7 +158,7 @@ msgstr "Høyde"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt omløp:"
+msgstr "%sAlt omdreininger:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -182,7 +182,7 @@ msgstr "Anonymt passord"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr ""
+msgstr "Tegning med kantutjevning"
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -306,7 +306,7 @@ msgstr "Asimut-koordinater"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz omløp:"
+msgstr "%sAz omdreininger:"
 
 #: u_translation.rsb
 msgid "B"
@@ -322,7 +322,7 @@ msgstr "Bakgrunnsbilde"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr "Bayer bokstav"
+msgstr "Bayer-bokstav"
 
 #: u_translation.rsbc
 msgid "BC"
@@ -354,11 +354,11 @@ msgstr "Binær-indeksert katalog"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "Bitmap"
+msgstr "Bildefil (bitmap)"
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr "Bitmap-fil"
+msgstr "Bildefil (bitmap)"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
@@ -738,11 +738,11 @@ msgstr "Programinnstillinger"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s forbundet med %s, bruker kart %s, forbundet tid:%s"
+msgstr "%s tilkoblet %s, bruker kart %s, tilkoblingstid:%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr "Forbundet til SQL databasen %s"
+msgstr "Koblet til SQL-databasen %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -1028,11 +1028,11 @@ msgstr "Tilbake i tid"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC omløp: "
+msgstr "DEC omdreininger:"
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC omløp:"
+msgstr "%sDEC omdreininger:"
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
@@ -1304,7 +1304,7 @@ msgstr "Last ned TLE"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr "Vil du lagre programinnstillingene nå?"
+msgstr "--   Vil du lagre programinnstillingene nå?   --"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -1906,7 +1906,7 @@ msgstr "Ikonstørrelse"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr "Ikon tidsvisning"
+msgstr "Ikontidsvisning"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -1918,7 +1918,7 @@ msgstr "Belys."
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr "Belyst fraksjon"
+msgstr "Belyst del"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
@@ -2002,7 +2002,7 @@ msgstr "Detaljert informasjon"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Informasjon fra katalog"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2114,7 +2114,7 @@ msgstr "Liggende"
 
 #: u_translation.rslanguage
 msgid "Internal language"
-msgstr "Engelsk"
+msgstr "Norsk"
 
 #: u_translation.rslanguage2
 msgid "Language"
@@ -2182,11 +2182,11 @@ msgstr "LII"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "Grense-magnitude, liste:"
+msgstr "Grensemagnitude, liste:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "Grense-magnitude:"
+msgstr "Grensemagnitude:"
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
@@ -2514,7 +2514,7 @@ msgstr "Flere stjerner"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Mer en 1000 feil! Bearbeidingen avbrytes."
+msgstr "Mer enn 1000 feil! Bearbeidingen avbrytes."
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
@@ -2542,7 +2542,7 @@ msgstr "MPC Http"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr "Multiple flag"
+msgstr "Multi-flagg"
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
@@ -2550,7 +2550,7 @@ msgstr "Fler-stjerne"
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr "MySQL database"
+msgstr "MySQL-database"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
@@ -2682,7 +2682,7 @@ msgstr "Ingen skriver funnet!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr "(ukorrigert for egenbevegelse, ingen pm data tilgjengelig fra denne katalog)"
+msgstr "(ukorrigert for egenbevegelse, ingen data tilgjengelig fra denne katalogen)"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -2726,7 +2726,7 @@ msgstr "Nå"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr ""
+msgstr "Antall kopier"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -2814,7 +2814,7 @@ msgstr "Offset"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "Offset påskrift"
 
 #: u_translation.rsok
 msgid "OK"
@@ -2866,7 +2866,7 @@ msgstr "Åpen stjernehop"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Åpne bitmap"
+msgstr "Åpne bildefil."
 
 #: u_translation.rsoptions
 msgid "Options"
@@ -2894,15 +2894,15 @@ msgstr "Andre"
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "Annen påskrift"
+msgstr "Andre påskrifter"
 
 #: u_translation.rsotherlinesca
 msgid "Other line-catalogs"
-msgstr "Annen linje-katalog"
+msgstr "Andre linje-kataloger"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Andre programvare-data"
+msgstr "Andre programvaredata"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3076,11 +3076,11 @@ msgstr "Vennligst rapporter problemer til:"
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Vennligst prøv å opprette denne mappe selv og start programmet på nytt."
+msgstr "Prøv å opprette denne mappen selv og start programmet på nytt."
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "Vennligst prøv å gjeninstallere programmet."
+msgstr "Prøv å gjeninstallere programmet."
 
 #: u_translation.rsplottheposit
 msgid "Plot the position of the moving object."
@@ -3156,7 +3156,7 @@ msgstr "<<  Forrige"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Forhåndsvis"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3188,7 +3188,7 @@ msgstr "Skrivemetode"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Forhåndsvisning"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3320,11 +3320,11 @@ msgstr "Raster-oppløsning"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA omløp: "
+msgstr "RA omdreininger:"
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA omløp:"
+msgstr "%sRA omdreininger:"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -3704,7 +3704,7 @@ msgstr "Still inn synsfelt til"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Still inn hvordan monteringen beveger seg når det blir dreid på dreieknappen. Fra da av vil et klikk på 'Koble til teleskop'-knappen vise deg hvor mange omdreininger du må gjøre for å gå fra et objekt til et annet."
+msgstr "Still inn hvordan monteringen beveger seg når det blir dreid på dreieknappen. Fra da av vil et klikk på teleskopknappen vise deg hvor mange omdreininger du må gjøre for å gå fra et objekt til et annet."
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -3792,7 +3792,7 @@ msgstr "Vis påskrifter"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Vis linje fra flyttet påskrift til objekt"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
@@ -3864,7 +3864,7 @@ msgstr "Størrelse"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr "Himmel-bakgrunnsfarge"
+msgstr "Himmelbakgrunnsfarge"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
@@ -3900,7 +3900,7 @@ msgstr "M"
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr "Socket feil %s.  %s"
+msgstr "Socket-feil %s.  %s"
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
@@ -3964,15 +3964,15 @@ msgstr "Spline"
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "SQL database ikke tilgjengelig."
+msgstr "SQL-database ikke tilgjengelig."
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "SQL database-program er trolig ikke installert!"
+msgstr "SQL-databaseprogram er trolig ikke installert!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr "SQLite database"
+msgstr "SQLite-database"
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4300,7 +4300,7 @@ msgstr "Sann soltid"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr "Trumpler klasse"
+msgstr "Trumpler-klasse"
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -4308,11 +4308,11 @@ msgstr "Tir"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "omdreining / grad"
+msgstr "omdreininger / grad"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "omdreining / time"
+msgstr "omdreininger / time"
 
 #: u_translation.rstwilight
 msgid "Twilight"
@@ -4524,15 +4524,15 @@ msgstr "Advarsel! Beregning av"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Advarsel! Noen asteroide-elementer er utdatert med mer enn 3 år. Prøv å finn element gyldig for gjeldende kart-dato."
+msgstr "Advarsel! Noen asteroide-elementer er utdaterte med mer enn 3 år. Prøv å finn elementer gyldig for gjeldende kart-dato."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Advarsel! Noen komet-elementer er utdatert med mer enn 3 år. Prøv å finn element gyldig for gjeldende kart-dato."
+msgstr "Advarsel! Noen komet-elementer er utdaterte med mer enn 3 år. Prøv å finn elementer gyldig for gjeldende kart-dato."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Advarsel! Den benyttede dato eller ditt observasjonssted er endret fra den forrige innstillingen. Du kan svare Nei nå, og bruke %s knapp til å returnere til din originale dato/tid og observasjonssted, ellers blir endringene brukt. Vil du fortsette?"
+msgstr "Advarsel! Den benyttede dato eller ditt observasjonssted er endret fra den forrige innstillingen. Du kan svare Nei nå, og bruke %s-knappen for å returnere til opprinnelig dato/tid og observasjonssted, ellers blir endringene brukt. Vil du fortsette?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
