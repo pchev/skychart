@@ -417,11 +417,12 @@ keepalive.checked:=cmain.keepalive;
 end;
 
 procedure Tf_config_system.ShowTelescope;
-var i:integer;
+var i,j,n: integer;
+    buf,fn,val : string;
+    f: textfile;
+    telescopegroup, newtelescope: boolean;
 {$ifdef mswindows}
-    n:integer;
     fs : TSearchRec;
-    buf : string;
 {$endif}
 begin
 IndiServerHost.text:=csc.IndiServerHost;
@@ -461,10 +462,71 @@ while i=0 do begin
 end;
 findclose(fs);
 {$endif}
+NumIndiDriver:=0;
+SetLength(IndiDriverLst,NumIndiDriver+1,2);
+IndiDriverLst[0,0]:='Other';
+IndiDriverLst[0,1]:='';
+{$ifdef unix}
+fn:='/usr/share/indi/drivers.xml';
+if not FileExists(fn) then begin
+ fn:='/usr/local/share/indi/drivers.xml';
+ if not FileExists(fn) then begin
+   fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
+ end;
+end;
+{$else}
+fn:=slash(appdir)+slash('data')+slash('indi')+'drivers.xml';
+{$endif}
+// drivers.xml contain multiple root elements (<devGroup>),
+// so it is not valid for parsing with ReadXMLFile.
+// Using a plain file read instead, with the hope it is always formated by line.
+if FileExists(fn) then begin
+  AssignFile(f,fn);
+  reset(f);
+  telescopegroup:=false;
+  repeat
+    readln(f,buf);
+    if (pos('<devGroup',buf)>0)and(pos('group="Telescopes"',buf)>0) then begin
+      telescopegroup:=true;
+      Continue;
+    end;
+    if (pos('</devGroup',buf)>0) then begin
+     telescopegroup:=false;
+     Continue;
+   end;
+   if telescopegroup and (pos('<driver',buf)>0)and(pos('name="',buf)>0) then begin
+     i:=pos('name="',buf)+6;
+     j:=pos('">',buf)-i;
+     val:=copy(buf,i,j);
+     newtelescope:=true;
+     for n:=0 to NumIndiDriver do if IndiDriverLst[n,0]=val then newtelescope:=false;
+     if newtelescope then begin
+       inc(NumIndiDriver);
+       SetLength(IndiDriverLst,NumIndiDriver+1,2);
+       IndiDriverLst[NumIndiDriver,0]:=val;
+       buf:=copy(buf,i+j+2,9999);
+       i:=0;
+       j:=pos('<',buf)-1;
+       val:=copy(buf,i,j);
+       IndiDriverLst[NumIndiDriver,1]:=val;
+     end;
+   end;
+  until eof(f);
+  CloseFile(f);
+end;
+// Fallback to internal driver list
+if NumIndiDriver=0 then begin
+  NumIndiDriver:=DefaultNumIndiDriver;
+  SetLength(IndiDriverLst,NumIndiDriver+1,2);
+  for i:=0 to NumIndiDriver do begin
+    IndiDriverLst[i,0]:=DefaultIndiDriverLst[i,0];
+    IndiDriverLst[i,1]:=DefaultIndiDriverLst[i,1];
+  end;
+end;
 IndiDev.items.clear;
-for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,1]);
+for i:=0 to NumIndiDriver do IndiDev.items.add(IndiDriverLst[i,0]);
 IndiDev.itemindex:=0;
-for i:=0 to NumIndiDriver do if IndiDriverLst[i,1]=csc.IndiDevice then IndiDev.itemindex:=i;
+for i:=0 to NumIndiDriver do if IndiDriverLst[i,0]=csc.IndiDevice then IndiDev.itemindex:=i;
 if IndiDev.itemindex=0 then begin
   IndiDevOther.Text:=csc.IndiDevice;
   IndiDevOther.visible:=true;
@@ -762,8 +824,8 @@ end;
 procedure Tf_config_system.IndiDevChange(Sender: TObject);
 begin
 if LockChange then exit;
-csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,1];
-IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,2];
+csc.IndiDevice:=IndiDriverLst[IndiDev.itemindex,0];
+IndiDriver.text:=IndiDriverLst[IndiDev.itemindex,1];
 if IndiDev.itemindex=0 then begin
    IndiDriver.enabled:=true;
    IndiDevOther.Visible:=true;

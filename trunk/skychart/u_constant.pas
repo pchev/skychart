@@ -758,6 +758,8 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
      Params : TStringList;
      de_folder: string;
      de_type, de_year:integer;
+     NumIndiDriver:integer;
+     IndiDriverLst: array of array of string;
 
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
@@ -918,8 +920,8 @@ const
 
 // INDI Telescope driver
 const
-      NumIndiDriver=12;
-      IndiDriverLst: array[0..NumIndiDriver,1..2] of string =(('Other',''),
+      DefaultNumIndiDriver=12;
+      DefaultIndiDriverLst: array[0..DefaultNumIndiDriver,0..1] of string =(('Other',''),
                   ('Astro-Physics','indi_lx200ap'),
                   ('Celestron GPS','indi_celestron_gps'),
                   ('Intelliscope','indi_intelliscope'),
