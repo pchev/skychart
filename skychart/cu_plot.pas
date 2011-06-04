@@ -3490,7 +3490,7 @@ begin
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    cbmp.EllipseAntialias(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(cfgplot.Color[7]),cfgchart.drawpen);
+    cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(cfgplot.Color[7]),cfgchart.drawpen);
   end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
