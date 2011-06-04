@@ -25,11 +25,9 @@ msgstr "Feil ved kjøring av %s%s%s:%s%s"
 msgid "Unable to find a HTML browser."
 msgstr "Ikke istand til å finne en HTML-leser."
 
-#: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineoneinhelpconfigurehe
-#, fuzzy
-#| msgid "No HTML Browser found.%sPlease define one in Help -> Configure Help -> Viewers"
-msgid "No HTML Browser found.%sPlease define one in Environment -> Options -> Help -> Help Options"
-msgstr "Ingen HTML-leser funnet.%sdefiner en i Hjelp -> Konfigurer Hjelp -> Visere"
+#: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
+msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
+msgstr ""
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 msgid "The help database %s%s%s was unable to find file %s%s%s."
@@ -651,11 +649,15 @@ msgid "%s: Already registered"
 msgstr "%s: Allerede registrert"
 
 #: lclstrconsts.rshelpcontextnotfound
-msgid "Help Context not found"
+#, fuzzy
+#| msgid "Help Context not found"
+msgid "A help database was found for this topic, but this topic was not found"
 msgstr "Hjelp kontekst ikke funnet"
 
 #: lclstrconsts.rshelpdatabasenotfound
-msgid "Help Database not found"
+#, fuzzy
+#| msgid "Help Database not found"
+msgid "There is no help database installed for this topic"
 msgstr "Hjelp-database ikke funnet"
 
 #: lclstrconsts.rshelperror
@@ -695,11 +697,15 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "Ingen hjelp funnet for linje %d, kolonne %d av %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-msgid "No help nodes available"
+#, fuzzy
+#| msgid "No help nodes available"
+msgid "No help entries available for this topic"
 msgstr "Ingen hjelp-noder tilgjengelig"
 
 #: lclstrconsts.rshelpnotfound
-msgid "Help not found"
+#, fuzzy
+#| msgid "Help not found"
+msgid "No help found for this topic"
 msgstr "Hjelp ikke funnet"
 
 #: lclstrconsts.rshelpnotregistered
@@ -719,7 +725,9 @@ msgid "Help Viewer Error"
 msgstr "Hjelpeviser-feil"
 
 #: lclstrconsts.rshelpviewernotfound
-msgid "Help Viewer not found"
+#, fuzzy
+#| msgid "Help Viewer not found"
+msgid "No viewer was found for this type of help content"
 msgstr "Hjelp-viser ikke funnet"
 
 #: lclstrconsts.rshighlightcolorcaption

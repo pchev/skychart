@@ -1,29 +1,34 @@
+# translation of lclstrconsts.po to Slovenský
+# Slavko <slavino@slavino.sk>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2007-10-03 22:04+0100\n"
-"Last-Translator: Marc Fokker <ptp@extel.xs4all.nl>\n"
-"Language-Team: \n"
+"Project-Id-Version: lclstrconsts\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-02-02 16:22+0100\n"
+"PO-Revision-Date: 2008-11-16 19:50+0100\n"
+"Last-Translator: Slavko <slavino@slavino.sk>\n"
+"Language-Team: Slovenský <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: lclstrconsts.hhshelpbrowsernotexecutable
 msgid "Browser %s%s%s not executable."
-msgstr "Browser %s%s%s niet uitvoerbaar"
+msgstr "Prehliadač %s%s%s nie je spustiteľný."
 
 #: lclstrconsts.hhshelpbrowsernotfound
 msgid "Browser %s%s%s not found."
-msgstr "Browser %s%s%s niet gevonden"
+msgstr "Prehliadač %s%s%s nenájdený."
 
 #: lclstrconsts.hhshelperrorwhileexecuting
 msgid "Error while executing %s%s%s:%s%s"
-msgstr "Fout tijdens uitvoeren van %s%s%s:%s%s"
+msgstr "Chyba·pri·vykonávaní·%s%s%s:%s%s"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfound
 msgid "Unable to find a HTML browser."
-msgstr "Geen HTML browser kunnen vinden."
+msgstr "nemožno nájsť prehliadač HTML."
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
@@ -31,11 +36,11 @@ msgstr ""
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 msgid "The help database %s%s%s was unable to find file %s%s%s."
-msgstr "De help database %s%s%s heeft bestand %s%s%s niet kunnen vinden."
+msgstr "Databáza pomocníka %s%s%s nemohla nájsť súbor %s%s%s."
 
 #: lclstrconsts.hhshelpthemacrosinbrowserparamswillbereplacedbytheurl
 msgid "The macro %s in BrowserParams will be replaced by the URL."
-msgstr "De macro %s in BrowserParams zal worden vervangen door de URL."
+msgstr "Makro %s v BrowserParams bude nahradené URL."
 
 #: lclstrconsts.ifsalt
 msgid "Alt"
@@ -47,11 +52,11 @@ msgstr "Ctrl"
 
 #: lclstrconsts.ifsvk_accept
 msgid "Accept"
-msgstr "Accepteer"
+msgstr ""
 
 #: lclstrconsts.ifsvk_apps
 msgid "application key"
-msgstr "toepassing sleutel"
+msgstr ""
 
 #: lclstrconsts.ifsvk_back
 msgid "Backspace"
@@ -60,38 +65,38 @@ msgstr "Backspace"
 #: lclstrconsts.ifsvk_cancel
 msgctxt "lclstrconsts.ifsvk_cancel"
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
 #: lclstrconsts.ifsvk_capital
 msgid "Capital"
-msgstr "Hoofdletter"
+msgstr "Veľkým"
 
 #: lclstrconsts.ifsvk_clear
 msgid "Clear"
-msgstr "Wissen"
+msgstr "Vyčistiť"
 
 #: lclstrconsts.ifsvk_control
 msgid "Control"
-msgstr "Controleer"
+msgstr "Prvok"
 
 #: lclstrconsts.ifsvk_convert
 msgid "Convert"
-msgstr "Converteer"
+msgstr "Konvertovať"
 
 #: lclstrconsts.ifsvk_delete
 msgctxt "lclstrconsts.ifsvk_delete"
 msgid "Delete"
-msgstr ""
+msgstr "Zmazať"
 
 #: lclstrconsts.ifsvk_down
 msgctxt "lclstrconsts.ifsvk_down"
 msgid "Down"
-msgstr "Neer"
+msgstr "Dole"
 
 #: lclstrconsts.ifsvk_end
 msgctxt "lclstrconsts.ifsvk_end"
 msgid "End"
-msgstr "Eind"
+msgstr "End"
 
 #: lclstrconsts.ifsvk_escape
 msgid "Escape"
@@ -99,11 +104,11 @@ msgstr "Escape"
 
 #: lclstrconsts.ifsvk_execute
 msgid "Execute"
-msgstr "Uitvoeren"
+msgstr "Spustiť"
 
 #: lclstrconsts.ifsvk_final
 msgid "Final"
-msgstr "Laatste"
+msgstr ""
 
 #: lclstrconsts.ifsvk_hanja
 msgid "Hanja"
@@ -111,7 +116,7 @@ msgstr "Hanja"
 
 #: lclstrconsts.ifsvk_help
 msgid "Help"
-msgstr "Help"
+msgstr "Pomoc"
 
 #: lclstrconsts.ifsvk_home
 msgctxt "lclstrconsts.ifsvk_home"
@@ -121,7 +126,7 @@ msgstr "Home"
 #: lclstrconsts.ifsvk_insert
 msgctxt "lclstrconsts.ifsvk_insert"
 msgid "Insert"
-msgstr ""
+msgstr "Insert"
 
 #: lclstrconsts.ifsvk_junja
 msgid "Junja"
@@ -133,20 +138,20 @@ msgstr "Kana"
 
 #: lclstrconsts.ifsvk_lbutton
 msgid "Mouse Button Left"
-msgstr "Muisknop Links"
+msgstr "Ľavé tlačítko myši"
 
 #: lclstrconsts.ifsvk_left
 msgctxt "lclstrconsts.ifsvk_left"
 msgid "Left"
-msgstr "Links"
+msgstr ""
 
 #: lclstrconsts.ifsvk_lwin
 msgid "left windows key"
-msgstr "linker windows toets"
+msgstr "ľavý Win kláves"
 
 #: lclstrconsts.ifsvk_mbutton
 msgid "Mouse Button Middle"
-msgstr "Muisknop Midden"
+msgstr "Stredné tlačítko·myši"
 
 #: lclstrconsts.ifsvk_menu
 msgctxt "lclstrconsts.ifsvk_menu"
@@ -155,16 +160,16 @@ msgstr "Menu"
 
 #: lclstrconsts.ifsvk_modechange
 msgid "Mode Change"
-msgstr "Mode wijziging"
+msgstr ""
 
 #: lclstrconsts.ifsvk_next
 msgctxt "lclstrconsts.ifsvk_next"
 msgid "Next"
-msgstr ""
+msgstr "Ďalej"
 
 #: lclstrconsts.ifsvk_nonconvert
 msgid "Nonconvert"
-msgstr "Niet converteren"
+msgstr ""
 
 #: lclstrconsts.ifsvk_numlock
 msgid "Numlock"
@@ -172,45 +177,45 @@ msgstr "Numlock"
 
 #: lclstrconsts.ifsvk_numpad
 msgid "Numpad %d"
-msgstr "Nummeriek deel %d"
+msgstr "Numerická klávesnica %d"
 
 #: lclstrconsts.ifsvk_pause
 msgid "Pause key"
-msgstr "Pause toets"
+msgstr "Kláves Pause"
 
 #: lclstrconsts.ifsvk_print
 msgid "Print"
-msgstr "Druk af"
+msgstr "Tlačiť"
 
 #: lclstrconsts.ifsvk_prior
 msgctxt "lclstrconsts.ifsvk_prior"
 msgid "Prior"
-msgstr ""
+msgstr "Pred"
 
 #: lclstrconsts.ifsvk_rbutton
 msgid "Mouse Button Right"
-msgstr "Muisknop Rechts"
+msgstr "Pravé tlačítko·myši"
 
 #: lclstrconsts.ifsvk_return
 msgid "Return"
-msgstr "Return"
+msgstr ""
 
 #: lclstrconsts.ifsvk_right
 msgctxt "lclstrconsts.ifsvk_right"
 msgid "Right"
-msgstr "Rechts"
+msgstr ""
 
 #: lclstrconsts.ifsvk_rwin
 msgid "right windows key"
-msgstr "rechter windows toets"
+msgstr "pravý Win kláves"
 
 #: lclstrconsts.ifsvk_scroll
 msgid "Scroll"
-msgstr "Schuif"
+msgstr ""
 
 #: lclstrconsts.ifsvk_select
 msgid "Select"
-msgstr "Selecteer"
+msgstr "Vybrať"
 
 #: lclstrconsts.ifsvk_shift
 msgid "Shift"
@@ -218,11 +223,11 @@ msgstr "Shift"
 
 #: lclstrconsts.ifsvk_snapshot
 msgid "Snapshot"
-msgstr "Snapshot"
+msgstr "Snímka"
 
 #: lclstrconsts.ifsvk_space
 msgid "Space key"
-msgstr "Spatiebar"
+msgstr "Medzerník"
 
 #: lclstrconsts.ifsvk_tab
 msgctxt "lclstrconsts.ifsvk_tab"
@@ -231,12 +236,12 @@ msgstr "Tab"
 
 #: lclstrconsts.ifsvk_unknown
 msgid "Unknown"
-msgstr "Onbekend"
+msgstr "Neznámy"
 
 #: lclstrconsts.ifsvk_up
 msgctxt "lclstrconsts.ifsvk_up"
 msgid "Up"
-msgstr "Omhoog"
+msgstr ""
 
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
@@ -245,7 +250,7 @@ msgstr ""
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
 msgid "Resource %s not found"
-msgstr "Resource %s is niet gevonden"
+msgstr "Zdroj %s nenájdený"
 
 #: lclstrconsts.lisprogramfilenotfound
 msgid "program file not found %s"
@@ -263,7 +268,7 @@ msgstr ""
 #, fuzzy
 #| msgid "A control can't have itself as parent"
 msgid "A control can't have itself as a parent"
-msgstr "Een control kan niet zijn eigen ouder zijn"
+msgstr "Prvok nemôže mať sám seba za rodiča"
 
 #: lclstrconsts.rsactivebordercolorcaption
 msgid "Active Border"
@@ -275,7 +280,7 @@ msgstr ""
 
 #: lclstrconsts.rsallfiles
 msgid "All files (%s)|%s|%s"
-msgstr "Alle bestanden (%s)|%s|%s"
+msgstr "Všetky súbory (%s)|%s|%s"
 
 #: lclstrconsts.rsappworkspacecolorcaption
 msgid "Application Workspace"
@@ -291,11 +296,11 @@ msgstr ""
 
 #: lclstrconsts.rsbackward
 msgid "Backward"
-msgstr "Achteruit"
+msgstr "Spätný"
 
 #: lclstrconsts.rsbitmaps
 msgid "Bitmaps"
-msgstr "Bitmaps"
+msgstr "Bitmapy"
 
 #: lclstrconsts.rsblackcolorcaption
 msgid "Black"
@@ -303,7 +308,7 @@ msgstr ""
 
 #: lclstrconsts.rsblank
 msgid "Blank"
-msgstr "Spatie"
+msgstr "Prázdne"
 
 #: lclstrconsts.rsbluecolorcaption
 msgid "Blue"
@@ -327,20 +332,20 @@ msgstr ""
 
 #: lclstrconsts.rscalculator
 msgid "Calculator"
-msgstr "Rekenmachine"
+msgstr "Kalkulačka"
 
 #: lclstrconsts.rscancelrecordhint
 msgctxt "lclstrconsts.rscancelrecordhint"
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušiť"
 
 #: lclstrconsts.rscannotfocus
 msgid "Can not focus"
-msgstr "Kan geen focus geven"
+msgstr "Nemožno zamerať"
 
 #: lclstrconsts.rscanvasdoesnotallowdrawing
 msgid "Canvas does not allow drawing"
-msgstr "Er kan op het canvas niet getekend worden"
+msgstr "Plátno nedovoľuje kreslenie"
 
 #: lclstrconsts.rscaptiontextcolorcaption
 msgid "Caption Text"
@@ -348,7 +353,7 @@ msgstr ""
 
 #: lclstrconsts.rscasesensitive
 msgid "Case sensitive"
-msgstr "Hoofdletter gevoelig"
+msgstr "Citlivé na veľkosť"
 
 #: lclstrconsts.rscontrolclasscantcontainchildclass
 msgid "Control of class '%s' can't have control of class '%s' as a child"
@@ -364,15 +369,15 @@ msgstr ""
 
 #: lclstrconsts.rscreatinggdbcatchableerror
 msgid "Creating gdb catchable error:"
-msgstr "Maak een fout die door gdb opgevangen kan worden"
+msgstr ""
 
 #: lclstrconsts.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Kurzor"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
-msgstr ""
+msgstr "Vlastné ..."
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
@@ -380,36 +385,36 @@ msgstr ""
 
 #: lclstrconsts.rsdefaultfileinfovalue
 msgid "permissions user group size date time"
-msgstr "permissies gebruiker groep grootte datum tijd"
+msgstr "povolenia používateľ skupina veľkosť dátum čas"
 
 #: lclstrconsts.rsdeleterecord
 msgid "Delete record?"
-msgstr ""
+msgstr "Zmazať záznam?"
 
 #: lclstrconsts.rsdeleterecordhint
 msgctxt "lclstrconsts.rsdeleterecordhint"
 msgid "Delete"
-msgstr "Verwijder"
+msgstr "Delete"
 
 #: lclstrconsts.rsdirection
 msgid "Direction"
-msgstr "Richting"
+msgstr "Smer"
 
 #: lclstrconsts.rsdirectory
 msgid "&Directory"
-msgstr "&Map"
+msgstr "A&dresár"
 
 #: lclstrconsts.rsdocking
 msgid "Docking"
-msgstr "Docking"
+msgstr "Dokovanie"
 
 #: lclstrconsts.rsduplicateiconformat
 msgid "Duplicate icon format."
-msgstr ""
+msgstr "Zdvojený formát ikony."
 
 #: lclstrconsts.rseditrecordhint
 msgid "Edit"
-msgstr ""
+msgstr "Upraviť"
 
 #: lclstrconsts.rsentirescope
 msgid "Search entire file"
@@ -418,111 +423,111 @@ msgstr ""
 #: lclstrconsts.rserror
 msgctxt "lclstrconsts.rserror"
 msgid "Error"
-msgstr ""
+msgstr "Chyba"
 
 #: lclstrconsts.rserrorcreatingdevicecontext
 msgid "Error creating device context for %s.%s"
-msgstr "Fout tijdens het maken van een DC voor %s.%s"
+msgstr "Chyba vytvárania kontextu zariadenie pre %s.%s"
 
 #: lclstrconsts.rserrorinlcl
 msgid "ERROR in LCL: "
-msgstr "FOUT in LCL"
+msgstr "Chyba v LCL:"
 
 #: lclstrconsts.rserroroccurredinataddressframe
 msgid "Error occurred in %s at %sAddress %s%s Frame %s"
-msgstr "Er is een fout opgetreden in %s op %sAdres %s%s Frame %s"
+msgstr "Nastala chyba v %s na %sAdresa %s%s Rámec %s"
 
 #: lclstrconsts.rserrorreadingproperty
 msgid "Error reading %s%s%s: %s"
-msgstr "Fout tijdens het lezen %s%s%s: %s"
+msgstr "Chyba čítania %s%s%s: %s"
 
 #: lclstrconsts.rserrorwhilesavingbitmap
 msgid "Error while saving bitmap."
-msgstr "Fout tijdens opslaan van bitmap."
+msgstr "Chyba pri ukladaní bitmapy."
 
 #: lclstrconsts.rsexception
 msgid "Exception"
-msgstr "Fout"
+msgstr "Výnimka"
 
 #: lclstrconsts.rsfddirectorymustexist
 msgid "Directory must exist"
-msgstr "Directory moet bestaan"
+msgstr "Adresár musí existovať"
 
 #: lclstrconsts.rsfddirectorynotexist
 msgid "The directory \"%s\" does not exist."
-msgstr "De map \"%s\" bestaat niet."
+msgstr "Adresár \"%s\" neexistuje."
 
 #: lclstrconsts.rsfdfilealreadyexists
 msgid "The file \"%s\" already exists. Overwrite ?"
-msgstr "Het bestand \"%s\" bestaat al. Overschrijven?"
+msgstr "Súbor \"%s\" už existuje. Prepísať?"
 
 #: lclstrconsts.rsfdfilemustexist
 msgid "File must exist"
-msgstr "Bestand moet bestaan"
+msgstr "Súbor musí existovať"
 
 #: lclstrconsts.rsfdfilenotexist
 msgid "The file \"%s\" does not exist."
-msgstr "Het bestand  \"%s\" bestaat niet."
+msgstr "Súbor \"%s\" neexistuje."
 
 #: lclstrconsts.rsfdfilereadonly
 msgid "The file \"%s\" is not writable."
-msgstr "Het bestand \"%s\" kan niet geschreven worden."
+msgstr "Súbor \"%s\" nie·je·zapisovateľný."
 
 #: lclstrconsts.rsfdfilereadonlytitle
 msgid "File is not writable"
-msgstr "Kan bestand niet schrijven"
+msgstr "Súbor nie je zapisovateľný"
 
 #: lclstrconsts.rsfdfilesaveas
 msgid "Save file as"
-msgstr "Bestand opslaan als"
+msgstr "Uložiť súbor ako"
 
 #: lclstrconsts.rsfdopenfile
 msgid "Open existing file"
-msgstr "Open een bestaand bestand"
+msgstr "Otvoriť existujúci súbor"
 
 #: lclstrconsts.rsfdoverwritefile
 msgid "Overwrite file ?"
-msgstr "Bestand overschrijven?"
+msgstr "Prepísať súbor?"
 
 #: lclstrconsts.rsfdpathmustexist
 msgid "Path must exist"
-msgstr "Het pad moet bestaan"
+msgstr "Cesta musí existovať"
 
 #: lclstrconsts.rsfdpathnoexist
 msgid "The path \"%s\" does not exist."
-msgstr "Het pad \"%s\" bestaat niet."
+msgstr "Cesta \"%s\" neexistuje."
 
 #: lclstrconsts.rsfdselectdirectory
 msgid "Select Directory"
-msgstr "Kies map"
+msgstr "Výber adresára"
 
 #: lclstrconsts.rsfileinfofilenotfound
 msgid "(file not found: \"%s\")"
-msgstr "(bestand niet gevonden: \"%s\")"
+msgstr "(súbor nenájdený: \"%s\")"
 
 #: lclstrconsts.rsfileinformation
 msgid "File information"
-msgstr "Bestandsinformatie"
+msgstr "Súborové informácie"
 
 #: lclstrconsts.rsfind
 msgid "Find"
-msgstr "Zoek"
+msgstr "Hľadať"
 
 #: lclstrconsts.rsfindmore
 msgid "Find more"
-msgstr "Zoek meer"
+msgstr "Hľadať ďalej"
 
 #: lclstrconsts.rsfirstrecordhint
 msgid "First"
-msgstr ""
+msgstr "Prvý"
 
 #: lclstrconsts.rsfixedcolstoobig
 msgid "FixedCols can't be >= ColCount"
-msgstr "FixedCols kan niet >= ColCount"
+msgstr "FixedCols nemôže byť >= ColCount"
 
 #: lclstrconsts.rsfixedrowstoobig
 msgid "FixedRows can't be >= RowCount"
-msgstr "FixedRows kan niet >= RowCount"
+msgstr "FixedRows nemôže byť >= RowCount"
 
 #: lclstrconsts.rsformcolorcaption
 msgid "Form"
@@ -534,11 +539,11 @@ msgstr ""
 
 #: lclstrconsts.rsformstreamingerror
 msgid "Form streaming \"%s\" error: %s"
-msgstr "\"%s\" fout: %s bij het streamen van form."
+msgstr "Chyba streamovania formulára \"%s\": %s"
 
 #: lclstrconsts.rsforward
 msgid "Forward"
-msgstr "Vooruit"
+msgstr ""
 
 #: lclstrconsts.rsfuchsiacolorcaption
 msgid "Fuchsia"
@@ -546,11 +551,11 @@ msgstr ""
 
 #: lclstrconsts.rsgdkoptiondebug
 msgid "--gdk-debug flags     Turn on specific GDK trace/debug messages."
-msgstr "--gdk-debug flags     Zet bepaalde GDK trace/debug berichten aan."
+msgstr ""
 
 #: lclstrconsts.rsgdkoptionnodebug
 msgid "--gdk-no-debug flags  Turn off specific GDK trace/debug messages."
-msgstr "--gdk-no-debug flags     Zet bepaalde GDK trace/debug berichten uit."
+msgstr ""
 
 #: lclstrconsts.rsgif
 msgid "Graphics Interchange Format"
@@ -558,7 +563,7 @@ msgstr ""
 
 #: lclstrconsts.rsgoptionfatalwarnings
 msgid "--g-fatal-warnings    Warnings and errors generated by Gtk+/GDK will halt the application."
-msgstr "--g-fatal-warnings    De applicatie stop bij waarschuwingen en fouten gegenereerd door GtK+/GDK."
+msgstr ""
 
 #: lclstrconsts.rsgradientactivecaptioncolorcaption
 msgid "Gradient Active Caption"
@@ -586,15 +591,15 @@ msgstr ""
 
 #: lclstrconsts.rsgridfiledoesnotexists
 msgid "Grid file doesn't exists"
-msgstr "Grid bestand bestaat niet"
+msgstr "Súbor mriežky neexistuje"
 
 #: lclstrconsts.rsgridindexoutofrange
 msgid "Grid index out of range."
-msgstr "Rooster index buiten bereik"
+msgstr "Index mriežky mimo rozsahu."
 
 #: lclstrconsts.rsgroupindexcannotbelessthanprevious
 msgid "GroupIndex cannot be less than a previous menu item's GroupIndex"
-msgstr "De GroupIndex kan niet minder zijn dan de GroupIndex van een vorig item."
+msgstr "GroupIndex nemmôže byť menší ako GroupIndex predchádzajúcej položky menu"
 
 #: lclstrconsts.rsgtkfilter
 msgid "Filter:"
@@ -602,23 +607,23 @@ msgstr "Filter:"
 
 #: lclstrconsts.rsgtkhistory
 msgid "History:"
-msgstr "Historie:"
+msgstr "História:"
 
 #: lclstrconsts.rsgtkoptionclass
 msgid "--class classname     Following Xt conventions, the class of a program is the program name with the initial character capitalized. For example, the classname for gimp is \"Gimp\". If --class is specified, the class of the program will be set to \"classname\"."
-msgstr "--class klassenaam    Volgens de Xt conventies, is de klasse van een prograam de naam van dat programma met de eerste letter als kapitaal. Bijv. the klassenaam voor gimp is \"Gimp\". Als de --class optie is meegegeven, wordt de klasse van het programma gezet op \"klassenaam\"."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptiondebug
 msgid "--gtk-debug flags     Turn on specific Gtk+ trace/debug messages."
-msgstr "--gtk-debug flags     Zet bepaalde GtK+ trace/debug berichten aan."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptiondisplay
 msgid "--display h:s:d       Connect to the specified X server, where \"h\" is the hostname, \"s\" is the server number (usually 0), and \"d\" is the display number (typically omitted). If --display is not specified, the DISPLAY environment variable is used."
-msgstr "--display h:s:d       Start het programma op de genoemde X server, waarbij \"h\" de hostnaam is, \"s\" het nummer van de server (meestal 0), en \"d\" is het display nummer (vaak weggelaten). Als --display niet is meegegeven, wordt de DISPLAY omgevings variabele gebruikt."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionmodule
 msgid "--gtk-module module   Load the specified module at startup."
-msgstr "--gtk-module module   Laad de betreffende module tijdens het starten."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionname
 msgid "--name programe       Set program name to \"progname\". If not specified, program name will be set to ParamStrUTF8(0)."
@@ -626,107 +631,105 @@ msgstr ""
 
 #: lclstrconsts.rsgtkoptionnodebug
 msgid "--gtk-no-debug flags  Turn off specific Gtk+ trace/debug messages."
-msgstr "--gtk-no-debug flags     Zet bepaalde GtK+ trace/debug berichten uit."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionnotransient
 msgid "--lcl-no-transient    Do not set transient order for modal forms"
-msgstr "--lcl-no-transient    Zet geen overdraagbare volgorde voor modale schermen"
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionnoxshm
 msgid "--no-xshm             Disable use of the X Shared Memory Extension."
-msgstr "--no-xshm             Maak geen gebruik van de X Shared Memory Extensie."
+msgstr ""
 
 #: lclstrconsts.rsgtkoptionsync
-#, fuzzy
-#| msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediatey after the protocol request that generated the error has been processed by the X server."
 msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
-msgstr "--sync                Roep XSynchronize (display, True) aan na verbinding met de Xserver. Dit maakt het debuggen van X protocol fouten eenvoudiger, doordat X aanvragen buffering uitstaat en X fouten direct ontvangen worden nadat de aanvraag door de Xserver is behandeld."
+msgstr ""
 
 #: lclstrconsts.rshelpalreadyregistered
 msgid "%s: Already registered"
-msgstr "%s: Al vastgelegd"
+msgstr "%s: Už je registrovaný"
 
 #: lclstrconsts.rshelpcontextnotfound
 #, fuzzy
 #| msgid "Help Context not found"
 msgid "A help database was found for this topic, but this topic was not found"
-msgstr "Help Context niet gevonden"
+msgstr "Kontextová pomoc nenájdená"
 
 #: lclstrconsts.rshelpdatabasenotfound
 #, fuzzy
 #| msgid "Help Database not found"
 msgid "There is no help database installed for this topic"
-msgstr "Help Database niet gevonden"
+msgstr "Databáza·pomoci nenájdená"
 
 #: lclstrconsts.rshelperror
 msgid "Help Error"
-msgstr "Help Fout"
+msgstr "Chyba pomoci"
 
 #: lclstrconsts.rshelphelpcontextnotfound
 msgid "Help context %s not found."
-msgstr "Help context %s niet gevonden."
+msgstr "Kontextová pomoc %s nenájdená."
 
 #: lclstrconsts.rshelphelpcontextnotfoundindatabase
 msgid "Help context %s not found in Database %s%s%s."
-msgstr "Help context %s niet gevonden in Database %s%s%s."
+msgstr "Kontextová pomoc %s nenájdená v databáze %s%s%s."
 
 #: lclstrconsts.rshelphelpdatabasedidnotfoundaviewerforahelppageoftype
 msgid "Help Database %s%s%s did not found a viewer for a help page of type %s"
-msgstr "Help Database %s%s%s heeft geen viewer gevonden voor help pagina van type %s"
+msgstr "Databáza pomoci %s%s%s nenašla zobrazovač pre stránku pomocníka typu %s"
 
 #: lclstrconsts.rshelphelpdatabasenotfound
 msgid "Help Database %s%s%s not found"
-msgstr "Help Database %s%s%s niet gevonden"
+msgstr "Databáza pomoci %s%s%s nenájdená"
 
 #: lclstrconsts.rshelphelpkeywordnotfound
 msgid "Help keyword %s%s%s not found."
-msgstr "Help sleutelwoord %s%s%s niet gevonden."
+msgstr "Kľúčové slovo pomoci %s%s%s nenájdené."
 
 #: lclstrconsts.rshelphelpkeywordnotfoundindatabase
 msgid "Help keyword %s%s%s not found in Database %s%s%s."
-msgstr "Help sleutelwoord %s%s%s niet gevonden in Database %s%s%s."
+msgstr "Kľúčové·slovo·pomoci·%s%s%s nenájdené v databáze %s%s%s."
 
 #: lclstrconsts.rshelphelpnodehasnohelpdatabase
 msgid "Help node %s%s%s has no Help Database"
-msgstr "Help node %s%s%s heeft geen Help Database"
+msgstr "Uzol pomocníka %s%s%s nemá databázu pomocníka"
 
 #: lclstrconsts.rshelpnohelpfoundforsource
 msgid "No help found for line %d, column %d of %s."
-msgstr "Geen help gevonden voor regel %d, kolom %d van %s. "
+msgstr "Nenájdený pomocník pre riadok %d, stĺpec %d %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
 #, fuzzy
 #| msgid "No help nodes available"
 msgid "No help entries available for this topic"
-msgstr "Geen help nodes beschikbaar"
+msgstr "Nie sú dostupné žiadne uzly pomoci"
 
 #: lclstrconsts.rshelpnotfound
 #, fuzzy
 #| msgid "Help not found"
 msgid "No help found for this topic"
-msgstr "Help niet gevonden"
+msgstr "Pomoc nenájdená"
 
 #: lclstrconsts.rshelpnotregistered
 msgid "%s: Not registered"
-msgstr "%s: Niet vastgelegd"
+msgstr "%s: Neregistrovaný"
 
 #: lclstrconsts.rshelpselectorerror
 msgid "Help Selector Error"
-msgstr "Help Selectie fout"
+msgstr "Chyba selektora pomoci"
 
 #: lclstrconsts.rshelpthereisnoviewerforhelptype
 msgid "There is no viewer for help type %s%s%s"
-msgstr "Er is geen viewer voor help type %s%s%s"
+msgstr "Nie je zobrazovač pre pomoc typu %s%s%s"
 
 #: lclstrconsts.rshelpviewererror
 msgid "Help Viewer Error"
-msgstr "Help Viewer Fout"
+msgstr "Chyba zobrazovača pomoci"
 
 #: lclstrconsts.rshelpviewernotfound
 #, fuzzy
 #| msgid "Help Viewer not found"
 msgid "No viewer was found for this type of help content"
-msgstr "Help Viewer niet gevonden"
+msgstr "Zobrazovač pomoci nenájdený"
 
 #: lclstrconsts.rshighlightcolorcaption
 msgid "Highlight"
@@ -746,31 +749,31 @@ msgstr ""
 
 #: lclstrconsts.rsicon
 msgid "Icon"
-msgstr "Icon"
+msgstr "Ikona"
 
 #: lclstrconsts.rsiconimageempty
 msgid "Icon image cannot be empty"
-msgstr ""
+msgstr "Obrázok ikony nemôže byť prázdny"
 
 #: lclstrconsts.rsiconimageformat
 msgid "Icon image must have the same format"
-msgstr ""
+msgstr "Obrázok ikony musí mať rovnaký formát"
 
 #: lclstrconsts.rsiconimageformatchange
 msgid "Cannot change format of icon image"
-msgstr ""
+msgstr "Nemožno zmeniť formát obrázka ikony"
 
 #: lclstrconsts.rsiconimagesize
 msgid "Icon image must have the same size"
-msgstr ""
+msgstr "Obrázok ikony musí mať rovnakú veľkosť"
 
 #: lclstrconsts.rsiconimagesizechange
 msgid "Cannot change size of icon image"
-msgstr ""
+msgstr "Nemožno zmeniť veľkosť obrázka ikony"
 
 #: lclstrconsts.rsiconnocurrent
 msgid "Icon has no current image"
-msgstr ""
+msgstr "Ikona nemá aktuálny obrázok"
 
 #: lclstrconsts.rsinactivebordercolorcaption
 msgid "Inactive Border"
@@ -788,11 +791,11 @@ msgstr ""
 
 #: lclstrconsts.rsindexoutofbounds
 msgid "%s Index %d out of bounds 0 .. %d"
-msgstr "%s Index %d valt buiten de grenzen 0 .. %d"
+msgstr "%s Index %d presahuje hranicu 0 .. %d"
 
 #: lclstrconsts.rsindexoutofrange
 msgid "Index Out of range Cell[Col=%d Row=%d]"
-msgstr "Index buiten de grenzen Cell[Col=%d Ro=%d]"
+msgstr "Index mimo rozsahu Bunka[Col=%d Row=%d]"
 
 #: lclstrconsts.rsinfobkcolorcaption
 msgid "Info Background"
@@ -805,31 +808,31 @@ msgstr ""
 #: lclstrconsts.rsinsertrecordhint
 msgctxt "lclstrconsts.rsinsertrecordhint"
 msgid "Insert"
-msgstr "Invoegen"
+msgstr "Insert"
 
 #: lclstrconsts.rsinvaliddate
 msgid "Invalid Date : %s"
-msgstr "Ongeldige datum: %s"
+msgstr "Neplatný dátum: %s"
 
 #: lclstrconsts.rsinvaliddaterangehint
 msgid "Invalid Date: %s. Must be between %s and %s"
-msgstr "Ongeldige datum: %s. Het moet liggen tussen %s en %s"
+msgstr "Neplatný dátum: %s. Musí byť medzi %s a %s"
 
 #: lclstrconsts.rsinvalidformobjectstream
 msgid "invalid Form object stream"
-msgstr "Ongeldige form objectstream"
+msgstr "neplatný prúd objektu Form"
 
 #: lclstrconsts.rsinvalidpropertyvalue
 msgid "Invalid property value"
-msgstr "Ongeldige eigenschap waarde"
+msgstr "Neplatná hodnota vlastnosti"
 
 #: lclstrconsts.rsinvalidstreamformat
 msgid "Invalid stream format"
-msgstr "Omgeldig stream format"
+msgstr "Neplatný formát streamu"
 
 #: lclstrconsts.rsisalreadyassociatedwith
 msgid "%s is already associated with %s"
-msgstr "%s is al verbonden met %s"
+msgstr "%s už je priradený k %s"
 
 #: lclstrconsts.rsjpeg
 msgid "Joint Picture Expert Group"
@@ -837,7 +840,7 @@ msgstr ""
 
 #: lclstrconsts.rslastrecordhint
 msgid "Last"
-msgstr ""
+msgstr "Posledný"
 
 #: lclstrconsts.rslimecolorcaption
 msgid "Lime"
@@ -845,11 +848,11 @@ msgstr ""
 
 #: lclstrconsts.rslistindexexceedsbounds
 msgid "List index exceeds bounds (%d)"
-msgstr "Lijst index overschreidt grenzen (%d)"
+msgstr "Index zoznamu prekračuje hranice (%d)"
 
 #: lclstrconsts.rslistmustbeempty
 msgid "List must be empty"
-msgstr "Lijst moet leeg zijn"
+msgstr "Zoznam musí byť prázdny"
 
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
@@ -857,36 +860,36 @@ msgstr ""
 
 #: lclstrconsts.rsmbabort
 msgid "Abort"
-msgstr "Afbreken"
+msgstr "Prerušiť"
 
 #: lclstrconsts.rsmball
 msgid "&All"
-msgstr "&Alles"
+msgstr "&Všetko"
 
 #: lclstrconsts.rsmbcancel
 msgctxt "lclstrconsts.rsmbcancel"
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr "Zrušiť"
 
 #: lclstrconsts.rsmbclose
 msgid "&Close"
-msgstr "&Sluiten"
+msgstr "&Zatvoriť"
 
 #: lclstrconsts.rsmbhelp
 msgid "&Help"
-msgstr "&Help"
+msgstr "&Pomoc"
 
 #: lclstrconsts.rsmbignore
 msgid "&Ignore"
-msgstr "&Negeer"
+msgstr "&Ignorovať"
 
 #: lclstrconsts.rsmbno
 msgid "&No"
-msgstr "&Nee"
+msgstr "&Nie"
 
 #: lclstrconsts.rsmbnotoall
 msgid "No to all"
-msgstr "Nee op alles"
+msgstr "Nie pre všetky"
 
 #: lclstrconsts.rsmbok
 msgid "&OK"
@@ -898,7 +901,7 @@ msgstr ""
 
 #: lclstrconsts.rsmbretry
 msgid "&Retry"
-msgstr "&Opnieuw"
+msgstr "&Opakovať"
 
 #: lclstrconsts.rsmbsave
 msgid "&Save"
@@ -910,11 +913,11 @@ msgstr ""
 
 #: lclstrconsts.rsmbyes
 msgid "&Yes"
-msgstr "&Ja"
+msgstr "Án&o"
 
 #: lclstrconsts.rsmbyestoall
 msgid "Yes to &All"
-msgstr "Ja op &Alles"
+msgstr "Án&o pre všetky"
 
 #: lclstrconsts.rsmedgraycolorcaption
 msgid "Medium Gray"
@@ -939,7 +942,7 @@ msgstr ""
 
 #: lclstrconsts.rsmodified
 msgid "  modified "
-msgstr "  gewijzigd "
+msgstr ".. zmenené"
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
@@ -951,24 +954,24 @@ msgstr ""
 
 #: lclstrconsts.rsmtconfirmation
 msgid "Confirmation"
-msgstr "Bevestiging"
+msgstr "Potvrdenie"
 
 #: lclstrconsts.rsmtcustom
 msgid "Custom"
-msgstr "Eigen"
+msgstr "Vlastné"
 
 #: lclstrconsts.rsmterror
 msgctxt "lclstrconsts.rsmterror"
 msgid "Error"
-msgstr "Fout"
+msgstr "Chyba"
 
 #: lclstrconsts.rsmtinformation
 msgid "Information"
-msgstr "Informatie"
+msgstr "Informácia"
 
 #: lclstrconsts.rsmtwarning
 msgid "Warning"
-msgstr "Waarschuwing"
+msgstr "Upozornenie"
 
 #: lclstrconsts.rsnavycolorcaption
 msgid "Navy"
@@ -977,7 +980,7 @@ msgstr ""
 #: lclstrconsts.rsnextrecordhint
 msgctxt "lclstrconsts.rsnextrecordhint"
 msgid "Next"
-msgstr "Volgende"
+msgstr "Ďalší"
 
 #: lclstrconsts.rsnonecolorcaption
 msgid "None"
@@ -985,11 +988,11 @@ msgstr ""
 
 #: lclstrconsts.rsnotavalidgridfile
 msgid "Not a valid grid file"
-msgstr "Geen geldig grid bestand"
+msgstr "Neplatný súbor mriežky"
 
 #: lclstrconsts.rsnowidgetset
 msgid "No widgetset object. Please check if the unit \"interfaces\" was added to the programs uses clause."
-msgstr "Geen widgetset object. Controleer of the unit \"interface\" is toegevoegd aan de \"uses\" van het programma."
+msgstr "Neexistuje objekt widgetsetu. Prosím skontrolujte, či je jednotka \"interfaces\" pridaná do klauzuly uses programu."
 
 #: lclstrconsts.rsolivecolorcaption
 msgid "Olive"
@@ -997,7 +1000,7 @@ msgstr ""
 
 #: lclstrconsts.rspickdate
 msgid "Select a date"
-msgstr "Kies een datum"
+msgstr "Výber dátumu"
 
 #: lclstrconsts.rspixmap
 msgid "Pixmap"
@@ -1005,11 +1008,11 @@ msgstr "Pixmap"
 
 #: lclstrconsts.rsportablebitmap
 msgid "Portable BitMap"
-msgstr ""
+msgstr "Portable BitMap"
 
 #: lclstrconsts.rsportablegraymap
 msgid "Portable GrayMap"
-msgstr ""
+msgstr "Portable GrayMap"
 
 #: lclstrconsts.rsportablenetworkgraphic
 msgid "Portable Network Graphic"
@@ -1017,26 +1020,26 @@ msgstr "Portable Network Graphic"
 
 #: lclstrconsts.rsportablepixmap
 msgid "Portable PixMap"
-msgstr ""
+msgstr "Portable PixMap"
 
 #: lclstrconsts.rspostrecordhint
 msgid "Post"
-msgstr ""
+msgstr "za"
 
 #: lclstrconsts.rspressoktoignoreandriskdatacorruptionpresscanceltok
 #, fuzzy
 #| msgid "%s%sPress Ok to ignore and risk data corruption.%sPress Cancel to kill the program."
 msgid "%s%sPress OK to ignore and risk data corruption.%sPress Cancel to kill the program."
-msgstr "%s%sDruk op Ok om te negeren, hierbij kunnen gegevens verloren gaan.%sDruk op Cancel om het programma te annuleren."
+msgstr "%s%sStlačte OK pre ignorovanie a risk porušenia dát.%sStlačte Zrušiť pre zabitie programu."
 
 #: lclstrconsts.rspriorrecordhint
 msgctxt "lclstrconsts.rspriorrecordhint"
 msgid "Prior"
-msgstr "Vorige"
+msgstr "Pred"
 
 #: lclstrconsts.rspropertydoesnotexist
 msgid "Property %s does not exist"
-msgstr "Eigenschap %s bestaat niet"
+msgstr "Vlastnosť %s neexistuje"
 
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
@@ -1132,15 +1135,15 @@ msgstr ""
 
 #: lclstrconsts.rsrasterimageendupdate
 msgid "Endupdate while no update in progress"
-msgstr ""
+msgstr "Koniec aktualizácie, ale aktualizácia nie je vykonávaná"
 
 #: lclstrconsts.rsrasterimagesaveinupdate
 msgid "Cannot save image while update in progress"
-msgstr ""
+msgstr "Nemožno uložiť obrázok počas aktualizácie"
 
 #: lclstrconsts.rsrasterimageupdateall
 msgid "Cannot begin update all when canvas only update in progress"
-msgstr ""
+msgstr "Nemožno začať aktualizáciu všetkého, počas aktualizácie len plátna"
 
 #: lclstrconsts.rsredcolorcaption
 msgid "Red"
@@ -1148,20 +1151,20 @@ msgstr ""
 
 #: lclstrconsts.rsrefreshrecordshint
 msgid "Refresh"
-msgstr ""
+msgstr "Obnoviť"
 
 #: lclstrconsts.rsreplace
 msgid "Replace"
-msgstr "Vervang"
+msgstr "Nahradiť"
 
 #: lclstrconsts.rsreplaceall
 msgid "Replace all"
-msgstr "Vervang alles"
+msgstr "Nahradiť všetko"
 
 #: lclstrconsts.rsresourcenotfound
 msgctxt "lclstrconsts.rsresourcenotfound"
 msgid "Resource %s not found"
-msgstr "Resource %s is niet gevonden"
+msgstr "Zdroj %s nenájdený"
 
 #: lclstrconsts.rsscrollbarcolorcaption
 msgid "ScrollBar"
@@ -1169,15 +1172,15 @@ msgstr ""
 
 #: lclstrconsts.rsscrollbaroutofrange
 msgid "ScrollBar property out of range"
-msgstr "Schuifbalk eigenschap buiten bereik"
+msgstr "Vlastnosť ScrollBar mimo rozsahu"
 
 #: lclstrconsts.rsselectcolortitle
 msgid "Select color"
-msgstr "Kies een kleur"
+msgstr "Výber farby"
 
 #: lclstrconsts.rsselectfonttitle
 msgid "Select a font"
-msgstr "Kies een font"
+msgstr "Výber fontu"
 
 #: lclstrconsts.rssilvercolorcaption
 msgid "Silver"
@@ -1185,7 +1188,7 @@ msgstr ""
 
 #: lclstrconsts.rssize
 msgid "  size "
-msgstr "  afmeting "
+msgstr "..veľkosť "
 
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
@@ -1197,7 +1200,7 @@ msgstr ""
 
 #: lclstrconsts.rstext
 msgid "Text"
-msgstr "Tekst"
+msgstr "Text"
 
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
@@ -1205,15 +1208,15 @@ msgstr ""
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
-msgstr "Kan het standaard font niet laden"
+msgstr "Nemožno načítať predvolený font"
 
 #: lclstrconsts.rsunknownerrorpleasereportthisbug
 msgid "Unknown Error, please report this bug"
-msgstr "Onbekende Fout, rapporteer alstublieft deze fout"
+msgstr "Neznáma chyba, prosím ohláste túto chybu"
 
 #: lclstrconsts.rsunknownpictureextension
 msgid "Unknown picture extension"
-msgstr "Onbekende extensie voor plaatje"
+msgstr "Neznáma prípona obrázku"
 
 #: lclstrconsts.rsunknownpictureformat
 msgid "Unknown picture format"
@@ -1221,31 +1224,31 @@ msgstr ""
 
 #: lclstrconsts.rsunsupportedbitmapformat
 msgid "Unsupported bitmap format."
-msgstr "Niet ondersteund bitmap formaat."
+msgstr "Nepodporovaný formát bitmapy"
 
 #: lclstrconsts.rsunsupportedclipboardformat
 msgid "Unsupported clipboard format: %s"
-msgstr "Niet ondersteund klembord formaat: %s"
+msgstr "Nepodporovaný formát schránky: %s"
 
 #: lclstrconsts.rswarningunreleaseddcsdump
 msgid " WARNING: There are %d unreleased DCs, a detailed dump follows:"
-msgstr " WAARSCHUWING: Er zijn nog %d DCs niet vrijgegeven, een gedetailleerde dump volgt:"
+msgstr " UPOZORNENIE: Existuje %d neuvoľnených DCs, detailný výpis nasleduje:"
 
 #: lclstrconsts.rswarningunreleasedgdiobjectsdump
 msgid " WARNING: There are %d unreleased GDIObjects, a detailed dump follows:"
-msgstr " WAARSCHUWING: Er zijn nog %d GDIObject niet vrijgegeven, een gedetailleerde dump volgt:"
+msgstr " UPOZORNENIE: Existuje %d neuvoľnených GDIObjects, detailný výpis nasleduje:"
 
 #: lclstrconsts.rswarningunreleasedmessagesinqueue
 msgid " WARNING: There are %d messages left in the queue! I'll free them"
-msgstr " WAARSCHUWING: Er staan nog %d berichten in de queue! Deze worden nu vrijgegeven"
+msgstr " UPOZORNENIE: Vo fronte ostáva %d správ! Uvoľním ich"
 
 #: lclstrconsts.rswarningunreleasedtimerinfos
 msgid " WARNING: There are %d TimerInfo structures left, I'll free them"
-msgstr " WAARSCHUWING: Er zijn %d TimerInfo structuren overgebleven. Deze worden nu vrijgegeven"
+msgstr " UPOZORNENIE: Ostáva %d štruktúr TimerInfo, uvoľním ich"
 
 #: lclstrconsts.rswarningunremovedpaintmessages
 msgid " WARNING: There are %s unremoved LM_PAINT/LM_GtkPAINT message links left."
-msgstr " WAARSCHUWING: Er zijn %s LM_PAINT/LM_GtkPAINT berichten niet verwijderd."
+msgstr " UPOZORNENIE: Ostáva %s neodstránených správ LM_PAINT/LM_GtkPAINT."
 
 #: lclstrconsts.rswhitecolorcaption
 msgid "White"
@@ -1253,15 +1256,15 @@ msgstr ""
 
 #: lclstrconsts.rswholewordsonly
 msgid "Whole words only"
-msgstr "Alleen hele woorden"
+msgstr "Len celé slová"
 
 #: lclstrconsts.rswin32error
 msgid "Error:"
-msgstr "Fout:"
+msgstr "Chyba:"
 
 #: lclstrconsts.rswin32warning
 msgid "Warning:"
-msgstr "Waarschuwing:"
+msgstr "Upozornenie:"
 
 #: lclstrconsts.rswindowcolorcaption
 msgid "Window"
@@ -1281,51 +1284,51 @@ msgstr ""
 
 #: lclstrconsts.scannotfocus
 msgid "Cannot focus a disabled or invisible window"
-msgstr "Kan geen focus geven aan een onzichtbaar of disabled scherm"
+msgstr "Nemôžem zamerať vypnuté alebo neviditeľné okno"
 
 #: lclstrconsts.sduplicatemenus
 msgid "Duplicate menus"
-msgstr "Dubbele menus"
+msgstr "Duplikované menu"
 
 #: lclstrconsts.sinvalidactioncreation
 msgid "Invalid action creation"
-msgstr "Ongeldige aktie aangemaakt"
+msgstr "Neplatné akcia vytvorenia"
 
 #: lclstrconsts.sinvalidactionenumeration
 msgid "Invalid action enumeration"
-msgstr "Ongeldige aktie opsomming"
+msgstr "Neplatné·akcia vymenovania"
 
 #: lclstrconsts.sinvalidactionregistration
 msgid "Invalid action registration"
-msgstr "Ongeldige aktie registratie"
+msgstr "Neplatné·akcia registrácie"
 
 #: lclstrconsts.sinvalidactionunregistration
 msgid "Invalid action unregistration"
-msgstr "Ongeldige aktie de-registratie"
+msgstr "Neplatné·akcia odregistrovania"
 
 #: lclstrconsts.sinvalidcharset
 msgid "The char set in mask \"%s\" is not valid!"
-msgstr "De characterset in mask \"%s\" is niet geldig!"
+msgstr "Množina znakov v maske \"%s\" nei je platná!"
 
 #: lclstrconsts.sinvalidimagesize
 msgid "Invalid image size"
-msgstr "Ongeldig formaat voor afbeelding "
+msgstr "Neplatná veľkosť obrázku"
 
 #: lclstrconsts.sinvalidindex
 msgid "Invalid ImageList Index"
-msgstr "Ongeldige index van ImageList"
+msgstr "Neplatný index ImageList"
 
 #: lclstrconsts.smenuindexerror
 msgid "Menu index out of range"
-msgstr "Index van menu buiten de grenzen"
+msgstr "Index menu mimo rozsahu"
 
 #: lclstrconsts.smenuitemisnil
 msgid "MenuItem is nil"
-msgstr "MenuItem is nil"
+msgstr "MenuItem je nil"
 
 #: lclstrconsts.smenunotfound
 msgid "Sub-menu is not in menu"
-msgstr "Submenu niet in menu"
+msgstr "Podmenu nie je v menu"
 
 #: lclstrconsts.smkcalt
 msgid "Alt+"
@@ -1346,12 +1349,12 @@ msgstr ""
 #: lclstrconsts.smkcdown
 msgctxt "lclstrconsts.smkcdown"
 msgid "Down"
-msgstr "Neer"
+msgstr "Dole"
 
 #: lclstrconsts.smkcend
 msgctxt "lclstrconsts.smkcend"
 msgid "End"
-msgstr "Eind"
+msgstr "End"
 
 #: lclstrconsts.smkcenter
 msgid "Enter"
@@ -1373,7 +1376,7 @@ msgstr ""
 #: lclstrconsts.smkcleft
 msgctxt "lclstrconsts.smkcleft"
 msgid "Left"
-msgstr "Links"
+msgstr ""
 
 #: lclstrconsts.smkcmeta
 msgid "Meta+"
@@ -1390,7 +1393,7 @@ msgstr ""
 #: lclstrconsts.smkcright
 msgctxt "lclstrconsts.smkcright"
 msgid "Right"
-msgstr "Rechts"
+msgstr ""
 
 #: lclstrconsts.smkcshift
 msgid "Shift+"
@@ -1408,27 +1411,27 @@ msgstr "Tab"
 #: lclstrconsts.smkcup
 msgctxt "lclstrconsts.smkcup"
 msgid "Up"
-msgstr "Omhoog"
+msgstr ""
 
 #: lclstrconsts.snomdiform
 msgid "No MDI form present."
-msgstr "Geen MDI formulier aanwezig"
+msgstr "Nie je MIDI formulár"
 
 #: lclstrconsts.snotimers
 msgid "No timers available"
-msgstr "Geen timers beschikbaar"
+msgstr "Nie sú dostupné žiadne časovače"
 
 #: lclstrconsts.sparexpected
 msgid "Wrong token type: %s expected"
-msgstr ""
+msgstr "Zlý typ tokenu: očakávaný %s"
 
 #: lclstrconsts.sparinvalidfloat
 msgid "Invalid floating point number: %s"
-msgstr ""
+msgstr "Neplatné číslo s pohyblivou rádovou čiarkou: %s"
 
 #: lclstrconsts.sparinvalidinteger
 msgid "Invalid integer number: %s"
-msgstr ""
+msgstr "Neplatné celé číslo: %s"
 
 #: lclstrconsts.sparlocinfo
 msgid " (at %d,%d, stream offset %.8x)"
@@ -1436,17 +1439,17 @@ msgstr ""
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"
-msgstr ""
+msgstr "Neukončená bytová hodnota"
 
 #: lclstrconsts.sparunterminatedstring
 msgid "Unterminated string"
-msgstr ""
+msgstr "Neukončený reťazec"
 
 #: lclstrconsts.sparwrongtokensymbol
 msgid "Wrong token symbol: %s expected but %s found"
-msgstr ""
+msgstr "Zlý symbol tokenu: očakávaný bol %s, ale nájdený bol %s"
 
 #: lclstrconsts.sparwrongtokentype
 msgid "Wrong token type: %s expected but %s found"
-msgstr ""
+msgstr "Zlý typ tokenu: očakávaný bol %s , ale nájdený bol %s"
 
