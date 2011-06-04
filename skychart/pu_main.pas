@@ -764,7 +764,7 @@ uses
      gtk2proc,
     {$endif}
 {$endif}
-     LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
+     LCLProc,lclstrconsts,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
@@ -1771,8 +1771,8 @@ if SaveConfigOnExit.checked then begin
     l1.ParentFont:=true;
     btn:= TButtonPanel.Create(f1);
     btn.ShowButtons:=[pbOK,pbCancel];
-    btn.OKButton.Caption:='Yes';
-    btn.CancelButton.Caption:='No';
+    btn.OKButton.Caption:=rsmbYes;
+    btn.CancelButton.Caption:=rsmbNo;
     btn.ShowGlyphs:=[];
     btn.AutoSize:=true;
     btn.Align:=alBottom;
