@@ -1,5 +1,5 @@
 { This file was automatically created by Lazarus. Do not edit!
-This source is only used to compile and install the package.
+  This source is only used to compile and install the package.
  }
 
 unit synapse; 
@@ -7,7 +7,7 @@ unit synapse;
 interface
 
 uses
-  blcksock, ftpsend, httpsend, LazarusPackageIntf; 
+  blcksock, ftpsend, httpsend, synaser, LazarusPackageIntf;
 
 implementation
 

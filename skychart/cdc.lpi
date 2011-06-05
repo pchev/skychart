@@ -11,8 +11,7 @@
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <Title Value="Cartes du Ciel"/>
-      <UseXPManifest Value="True"/>
-      <Icon Value="0"/>
+      <UseAppBundle Value="False"/>
     </General>
     <BuildModes Count="1">
       <Item1 Name="default" Default="True"/>
@@ -104,7 +103,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="50">
+    <Units Count="53">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -449,6 +448,24 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_observatory_db"/>
       </Unit49>
+      <Unit50>
+        <Filename Value="pu_lx200client.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pop_lx200"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_lx200client"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="cu_lx200protocol.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_lx200protocol"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="cu_serial.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_serial"/>
+      </Unit52>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

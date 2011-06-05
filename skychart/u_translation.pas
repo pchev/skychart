@@ -1109,7 +1109,7 @@ resourcestring
   rsDownloadFile = 'Download File';
   rsCopyFrom = 'Copy from:';
   rsToFile = 'to file:';
-  rsASCOMTelesco = 'ASCOM telescope driver';
+  rsASCOMTelesco = 'Integrated telescope driver';
   rsUseTheMenuOr = 'Use the menu or button "%s" to configure this driver.';
   rsOtherSoftwar = 'Other software data';
   rsObjectPositi = 'Object position found in index, but no detail found in any '
@@ -1172,6 +1172,7 @@ resourcestring
   rsNumberOfCopi = 'Number of copies';
   rsPreview = 'Preview';
   rsPrintPreview = 'Print Preview';
+  rsEncoders = 'Encoders';
 
 implementation
 

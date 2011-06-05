@@ -218,7 +218,9 @@ msgid "Artificial satellite"
 msgstr "Satellite artificiale"
 
 #: u_translation.rsascomtelesco
-msgid "ASCOM telescope driver"
+#, fuzzy
+#| msgid "ASCOM telescope driver"
+msgid "Integrated telescope driver"
 msgstr "Driver ASCOM"
 
 #: u_translation.rsaskconfirmat
@@ -1411,6 +1413,10 @@ msgstr "Elong."
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
 msgstr "Nebulosa a emissione"
+
+#: u_translation.rsencoders
+msgid "Encoders"
+msgstr ""
 
 #: u_translation.rsendofobject
 msgid "End of object"
