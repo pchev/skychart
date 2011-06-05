@@ -4031,6 +4031,8 @@ def_cfgsc.IndiDevice:='LX200 Basic';
 def_cfgsc.IndiTelescope:=false;
 def_cfgsc.PluginTelescope:=false;
 def_cfgsc.ASCOMTelescope:=false;
+def_cfgsc.LX200Telescope:=false;
+def_cfgsc.EncoderTelescope:=false;
 def_cfgsc.ManualTelescope:=false;
 {$ifdef unix}
    def_cfgsc.ManualTelescope:=true;
@@ -4784,6 +4786,8 @@ def_cfgsc.IndiPort:=ReadString(section,'IndiPort',def_cfgsc.IndiPort);
 def_cfgsc.IndiDevice:=ReadString(section,'IndiDevice',def_cfgsc.IndiDevice);
 def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 def_cfgsc.ASCOMTelescope:=ReadBool(section,'ASCOMTelescope',def_cfgsc.ASCOMTelescope);
+def_cfgsc.LX200Telescope:=ReadBool(section,'LX200Telescope',def_cfgsc.LX200Telescope);
+def_cfgsc.EncoderTelescope:=ReadBool(section,'EncoderTelescope',def_cfgsc.EncoderTelescope);
 def_cfgsc.PluginTelescope:=ReadBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
 if  def_cfgsc.ASCOMTelescope and def_cfgsc.PluginTelescope then def_cfgsc.PluginTelescope:=false;
 def_cfgsc.ManualTelescope:=ReadBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
@@ -5375,6 +5379,8 @@ WriteString(section,'IndiPort',def_cfgsc.IndiPort);
 WriteString(section,'IndiDevice',def_cfgsc.IndiDevice);
 WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 WriteBool(section,'ASCOMTelescope',def_cfgsc.ASCOMTelescope);
+WriteBool(section,'LX200Telescope',def_cfgsc.LX200Telescope);
+WriteBool(section,'EncoderTelescope',def_cfgsc.EncoderTelescope);
 WriteBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
 WriteBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
 WriteInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
@@ -5574,7 +5580,7 @@ ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;
 ToolButton13.Hint:=rsAnimation;
-if def_cfgsc.PluginTelescope or def_cfgsc.ASCOMTelescope then begin
+if def_cfgsc.PluginTelescope or def_cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then begin
    TConnect.hint:=rsControlPanel;
 end else begin
    TConnect.hint:=rsConnectTeles
@@ -5883,7 +5889,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
           else begin FlipButtonY.ImageIndex:=18 ; Flipy1.checked:=true; end;
   if tc   then begin
                TConnect.ImageIndex:=49;
-               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope then
+               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then
                   TConnect.Hint:=rsControlPanel
                else
                   TConnect.Hint:=rsDisconnectTe;
@@ -5892,7 +5898,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end else begin
                TConnect.ImageIndex:=48;
-               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope then
+               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then
                   TConnect.Hint:=rsControlPanel
                else
                   TConnect.Hint:=rsConnectTeles;

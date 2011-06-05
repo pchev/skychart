@@ -292,9 +292,8 @@ ManualMountType.Items[1]:=rsAltAzMount;
 TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
-{$ifdef mswindows}
 TelescopeSelect.Items[2]:=rsCDCPlugin;
-{$endif}
+TelescopeSelect.Items[5]:=rsEncoders;
 ASCOMLabel.Caption:=rsASCOMTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
@@ -331,8 +330,9 @@ dbchanged:=false;
   GroupBoxLinux.Visible:=false;
 {$endif}
 {$ifdef unix}
-  if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
-  if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
+//  if TelescopeSelect.Items.Count=6 then TelescopeSelect.Items.Delete(3);
+//  if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
+//  if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
 {$endif}
 ShowLanguage;
 ShowSYS;
@@ -443,10 +443,10 @@ RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   {$ifdef mswindows}
+   else if csc.LX200Telescope then Telescopeselect.itemindex:=5
+   else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
    else if csc.ASCOMTelescope then Telescopeselect.itemindex:=3
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
-   {$endif}
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
 IndiPort.text:=csc.IndiPort;
@@ -784,14 +784,24 @@ end;
 
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
 begin
+{$ifndef mswindows}
+if (Telescopeselect.itemindex=2)or(Telescopeselect.itemindex=3) then begin
+ if csc.IndiTelescope then Telescopeselect.itemindex:=0
+   else if csc.LX200Telescope then Telescopeselect.itemindex:=5
+   else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
+   else Telescopeselect.itemindex:=1;
+end;
+{$endif}
 csc.IndiTelescope:=Telescopeselect.itemindex=0;
 csc.ManualTelescope:=Telescopeselect.itemindex=1;
 csc.PluginTelescope:=Telescopeselect.itemindex=2;
 csc.ASCOMTelescope:=Telescopeselect.itemindex=3;
+csc.LX200Telescope:=Telescopeselect.itemindex=4;
+csc.EncoderTelescope:=Telescopeselect.itemindex=5;
 INDI.visible:=csc.IndiTelescope;
 TelescopePlugin.visible:=csc.PluginTelescope;
 TelescopeManual.visible:=csc.ManualTelescope;
-ASCOMPanel.visible:=csc.ASCOMTelescope;
+ASCOMPanel.visible:=csc.ASCOMTelescope or csc.LX200Telescope or csc.EncoderTelescope;
 end;
 
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);

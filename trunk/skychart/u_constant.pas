@@ -36,7 +36,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
      TSkycolor = array[0..7]of Tcolor;
 
 const cdcversion = 'Version 3.3 svn';
-      cdcver     = '3.3f';
+      cdcver     = '3.3g';
       cdccpy = 'Copyright (C) 2002-2010 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,'+crlf+
@@ -545,7 +545,7 @@ type
                 PMon,DrawPMon,ApparentPos,CoordExpertMode,SunOnline : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
                 IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
+                IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, LX200Telescope, EncoderTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
                 // working variable
                 ephvalid,ShowPlanetValid,ShowCometValid,ShowAsteroidValid,ShowEarthShadowValid,ShowEclipticValid:boolean;
@@ -1364,6 +1364,8 @@ IndiAutostart:=Source.IndiAutostart ;
 ShowCircle:=Source.ShowCircle ;
 IndiTelescope:=Source.IndiTelescope ;
 ASCOMTelescope:=Source.ASCOMTelescope ;
+LX200Telescope:=Source.LX200Telescope;
+EncoderTelescope:=Source.EncoderTelescope;
 PluginTelescope:=Source.PluginTelescope ;
 ManualTelescope:=Source.ManualTelescope ;
 ShowImages:=Source.ShowImages ;

@@ -1,20 +1,22 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="2">
+  <Package Version="3">
     <Name Value="synapse"/>
     <CompilerOptions>
-      <Version Value="5"/>
+      <Version Value="9"/>
       <SearchPaths>
         <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       </SearchPaths>
-      <CodeGeneration>
-        <Generate Value="Faster"/>
-      </CodeGeneration>
+      <Parsing>
+        <SyntaxOptions>
+          <UseAnsiStrings Value="False"/>
+        </SyntaxOptions>
+      </Parsing>
       <Other>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="3">
+    <Files Count="4">
       <Item1>
         <Filename Value="blcksock.pas"/>
         <UnitName Value="blcksock"/>
@@ -27,6 +29,10 @@
         <Filename Value="httpsend.pas"/>
         <UnitName Value="httpsend"/>
       </Item3>
+      <Item4>
+        <Filename Value="synaser.pas"/>
+        <UnitName Value="synaser"/>
+      </Item4>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="1">

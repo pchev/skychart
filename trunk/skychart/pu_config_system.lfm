@@ -449,7 +449,7 @@ object f_config_system: Tf_config_system
         object ASCOMPanel: TPanel
           Left = 8
           Height = 328
-          Top = 101
+          Top = 117
           Width = 452
           ClientHeight = 328
           ClientWidth = 452
@@ -468,7 +468,7 @@ object f_config_system: Tf_config_system
         object TelescopePlugin: TPanel
           Left = 8
           Height = 328
-          Top = 101
+          Top = 119
           Width = 450
           ClientHeight = 328
           ClientWidth = 450
@@ -504,7 +504,7 @@ object f_config_system: Tf_config_system
         object TelescopeManual: TPanel
           Left = 8
           Height = 330
-          Top = 101
+          Top = 117
           Width = 450
           ClientHeight = 330
           ClientWidth = 450
@@ -719,9 +719,9 @@ object f_config_system: Tf_config_system
           end
         end
         object INDI: TPanel
-          Left = 8
+          Left = 10
           Height = 328
-          Top = 101
+          Top = 117
           Width = 450
           ClientHeight = 328
           ClientWidth = 450
@@ -898,7 +898,7 @@ object f_config_system: Tf_config_system
         end
         object TelescopeSelect: TRadioGroup
           Left = 8
-          Height = 65
+          Height = 77
           Top = 32
           Width = 450
           AutoFill = True
@@ -910,15 +910,17 @@ object f_config_system: Tf_config_system
           ChildSizing.ShrinkHorizontal = crsScaleChilds
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 4
-          ClientHeight = 49
+          ChildSizing.ControlsPerLine = 3
+          ClientHeight = 61
           ClientWidth = 446
-          Columns = 4
+          Columns = 3
           Items.Strings = (
             'INDI'
             'Manual'
             'CDC plugin'
             'ASCOM'
+            'LX200'
+            'Encoders'
           )
           OnClick = TelescopeSelectClick
           TabOrder = 0
