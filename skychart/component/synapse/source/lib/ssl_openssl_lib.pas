@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.006.001 |
+| Project : Ararat Synapse                                       | 003.006.003 |
 |==============================================================================|
 | Content: SSL support by OpenSSL                                              |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2011, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2002-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2002-2011.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -85,7 +85,11 @@ uses
   Classes,
   synafpc,
 {$IFNDEF MSWINDOWS}
-  Libc, SysUtils;
+  {$IFDEF FPC}
+  BaseUnix, SysUtils;
+  {$ELSE}
+   Libc, SysUtils;
+  {$ENDIF}
 {$ELSE}
   Windows;
 {$ENDIF}
@@ -103,8 +107,13 @@ const
 {$ELSE}
 var
   {$IFNDEF MSWINDOWS}
-  DLLSSLName: string = 'libssl.so';
-  DLLUtilName: string = 'libcrypto.so';
+    {$IFDEF DARWIN}
+    DLLSSLName: string = 'libssl.dylib';
+    DLLUtilName: string = 'libcrypto.dylib';
+    {$ELSE}
+    DLLSSLName: string = 'libssl.so';
+    DLLUtilName: string = 'libcrypto.so';
+    {$ENDIF}
   {$ELSE}
   DLLSSLName: string = 'ssleay32.dll';
   DLLSSLName2: string = 'libssl32.dll';
@@ -208,6 +217,9 @@ const
   SSL_FILETYPE_ASN1	= 2;
   SSL_FILETYPE_PEM = 1;
   EVP_PKEY_RSA = 6;
+
+  SSL_CTRL_SET_TLSEXT_HOSTNAME = 55;
+  TLSEXT_NAMETYPE_host_name = 0;
 
 var
   SSLLibHandle: TLibHandle = 0;
@@ -410,6 +422,11 @@ var
     SetLastError = False, CallingConvention= CallingConvention.cdecl,
     EntryPoint = 'SSL_get_verify_result')]
     function SSLGetVerifyResult(ssl: PSSL):Integer;external;
+
+  [DllImport(DLLSSLName, CharSet = CharSet.Ansi,
+    SetLastError = False, CallingConvention= CallingConvention.cdecl,
+    EntryPoint = 'SSL_ctrl')]
+    function SslCtrl(ssl: PSSL; cmd: integer; larg: integer; parg: IntPtr): integer; external;
 
   [DllImport(DLLUtilName, CharSet = CharSet.Ansi,
     SetLastError = False, CallingConvention= CallingConvention.cdecl,
@@ -703,6 +720,7 @@ var
   function SSLCipherGetName(c: SslPtr): AnsiString;
   function SSLCipherGetBits(c: SslPtr; var alg_bits: Integer):Integer;
   function SSLGetVerifyResult(ssl: PSSL):Integer;
+  function SSLCtrl(ssl: PSSL; cmd: integer; larg: integer; parg: SslPtr):Integer;
 
 // libeay.dll
   function X509New: PX509;
@@ -812,6 +830,9 @@ type
   TSSLCipherGetName = function(c: Sslptr):PAnsiChar; cdecl;
   TSSLCipherGetBits = function(c: SslPtr; alg_bits: PInteger):Integer; cdecl;
   TSSLGetVerifyResult = function(ssl: PSSL):Integer; cdecl;
+  TSSLCtrl = function(ssl: PSSL; cmd: integer; larg: integer; parg: SslPtr):Integer; cdecl;
+
+  TSSLSetTlsextHostName = function(ssl: PSSL; buf: PAnsiChar):Integer; cdecl;
 
 // libeay.dll
   TX509New = function: PX509; cdecl;
@@ -911,6 +932,7 @@ var
   _SSLCipherGetName: TSSLCipherGetName = nil;
   _SSLCipherGetBits: TSSLCipherGetBits = nil;
   _SSLGetVerifyResult: TSSLGetVerifyResult = nil;
+  _SSLCtrl: TSSLCtrl = nil;
 
 // libeay.dll
   _X509New: TX509New = nil;
@@ -1288,6 +1310,15 @@ function SSLGetVerifyResult(ssl: PSSL):Integer;
 begin
   if InitSSLInterface and Assigned(_SSLGetVerifyResult) then
     Result := _SSLGetVerifyResult(ssl)
+  else
+    Result := X509_V_ERR_APPLICATION_VERIFICATION;
+end;
+
+
+function SSLCtrl(ssl: PSSL; cmd: integer; larg: integer; parg: SslPtr):Integer;
+begin
+  if InitSSLInterface and Assigned(_SSLCtrl) then
+    Result := _SSLCtrl(ssl, cmd, larg, parg)
   else
     Result := X509_V_ERR_APPLICATION_VERIFICATION;
 end;
@@ -1727,7 +1758,7 @@ begin
 {$ELSE}
       SSLLibHandle := LoadLib(DLLSSLName);
       SSLUtilHandle := LoadLib(DLLUtilName);
-  {$IFNDEF LINUX}
+  {$IFDEF MSWINDOWS}
       if (SSLLibHandle = 0) then
         SSLLibHandle := LoadLib(DLLSSLName2);
   {$ENDIF}
@@ -1776,6 +1807,7 @@ begin
         _SslCipherGetName := GetProcAddr(SSLLibHandle, 'SSL_CIPHER_get_name');
         _SslCipherGetBits := GetProcAddr(SSLLibHandle, 'SSL_CIPHER_get_bits');
         _SslGetVerifyResult := GetProcAddr(SSLLibHandle, 'SSL_get_verify_result');
+        _SslCtrl := GetProcAddr(SSLLibHandle, 'SSL_ctrl');
 
         _X509New := GetProcAddr(SSLUtilHandle, 'X509_new');
         _X509Free := GetProcAddr(SSLUtilHandle, 'X509_free');
@@ -1960,6 +1992,7 @@ begin
     _SslCipherGetName := nil;
     _SslCipherGetBits := nil;
     _SslGetVerifyResult := nil;
+    _SslCtrl := nil;
 
     _X509New := nil;
     _X509Free := nil;

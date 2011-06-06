@@ -443,8 +443,8 @@ RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   else if csc.LX200Telescope then Telescopeselect.itemindex:=5
-   else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
+   else if csc.EncoderTelescope then Telescopeselect.itemindex:=5
+   else if csc.LX200Telescope then Telescopeselect.itemindex:=4
    else if csc.ASCOMTelescope then Telescopeselect.itemindex:=3
    else if csc.PluginTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
