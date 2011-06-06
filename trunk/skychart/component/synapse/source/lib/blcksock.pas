@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 009.008.002 |
+| Project : Ararat Synapse                                       | 009.008.004 |
 |==============================================================================|
 | Content: Library base                                                        |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2011, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)1999-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)1999-2011.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -204,7 +204,13 @@ type
    insert your code after TCP socket has been sucessfully connected.}
   THookAfterConnect = procedure(Sender: TObject) of object;
 
-  {:This procedural type is used for hook OnHeartbeat. By this hook you can
+  {:This procedural type is used for hook OnVerifyCert. By this hook you can
+   insert your additional certificate verification code. Usefull to verify server
+   CN against URL. }
+
+  THookVerifyCert = function(Sender: TObject):boolean of object;
+
+ {:This procedural type is used for hook OnHeartbeat. By this hook you can
    call your code repeately during long socket operations.
    You must enable heartbeats by @Link(HeartbeatRate) property!}
   THookHeartbeat = procedure(Sender: TObject) of object;
@@ -306,6 +312,9 @@ type
     FStopFlag: Boolean;
     FNonblockSendTimeout: Integer;
     FHeartbeatRate: integer;
+    {$IFNDEF ONCEWINSOCK}
+    FWsaDataOnce: TWSADATA;
+    {$ENDIF}
     function GetSizeRecvBuffer: Integer;
     procedure SetSizeRecvBuffer(Size: Integer);
     function GetSizeSendBuffer: Integer;
@@ -1196,7 +1205,9 @@ type
    Warning: not all methods and propertis can work in all existing SSL plugins!
    Please, read documentation of used SSL plugin.}
   TCustomSSL = class(TObject)
+  private
   protected
+    FOnVerifyCert: THookVerifyCert;
     FSocket: TTCPBlockSocket;
     FSSLEnabled: Boolean;
     FLastError: integer;
@@ -1220,7 +1231,11 @@ type
     FSSHChannelType: string;
     FSSHChannelArg1: string;
     FSSHChannelArg2: string;
+    FCertComplianceLevel: integer;
+    FSNIHost: string;
     procedure ReturnError;
+    procedure SetCertCAFile(const Value: string); virtual;
+    function DoVerifyCert:boolean;
     function CreateSelfSignedCert(Host: string): Boolean; virtual;
   public
     {: Create plugin class. it is called internally from @link(TTCPBlockSocket)}
@@ -1375,7 +1390,7 @@ type
 
     {:Used for loading CA certificates from disk file. See to plugin documentation
      if this method is supported and how!}
-    property CertCAFile: string read FCertCAFile write FCertCAFile;
+    property CertCAFile: string read FCertCAFile write SetCertCAFile;
 
     {:If @true, then is verified client certificate. (it is good for writing
      SSL/TLS servers.) When you are not server, but you are client, then if this
@@ -1390,6 +1405,20 @@ type
 
     {:Second argument of channel type for possible SSH connections}
     property SSHChannelArg2: string read FSSHChannelArg2 write FSSHChannelArg2;
+
+    {: Level of standards compliance level
+      (CryptLib: values in cryptlib.pas, -1: use default value )  }
+    property CertComplianceLevel:integer read FCertComplianceLevel write FCertComplianceLevel;
+
+    {:This event is called when verifying the server certificate immediatally after
+     a successfull verification in the ssl library.}
+    property OnVerifyCert: THookVerifyCert read FOnVerifyCert write FOnVerifyCert;
+
+    {: Server Name Identification. Host name to send to server. If empty the host name
+       found in URL will be used, which should be the normal use (http Header Host = SNI Host).
+       The value is cleared after the connection is established.
+      (SNI support requires OpenSSL 0.9.8k or later. Cryptlib not supported, yet )  }
+    property SNIHost:string read FSNIHost write FSNIHost;
   end;
 
   {:@abstract(Default SSL plugin with no SSL support.)
@@ -2087,8 +2116,8 @@ begin
   if WithSize then
   begin
     l := Stream.Size - Stream.Position;;
-    if Indy then
-      l := SwapBytes(l);
+    if not Indy then
+      l := synsock.HToNL(l);
   end;
   repeat
     {$IFDEF CIL}
@@ -2996,7 +3025,11 @@ end;
 
 function TBlockSocket.GetWsaData: TWSAData;
 begin
+  {$IFDEF ONCEWINSOCK}
   Result := WsaDataOnce;
+  {$ELSE}
+  Result := FWsaDataOnce;
+  {$ENDIF}
 end;
 
 function TBlockSocket.GetSocketType: integer;
@@ -4087,6 +4120,8 @@ begin
   FSSHChannelType := '';
   FSSHChannelArg1 := '';
   FSSHChannelArg2 := '';
+  FCertComplianceLevel := -1; //default
+  FSNIHost := '';
 end;
 
 procedure TCustomSSL.Assign(const Value: TCustomSSL);
@@ -4107,6 +4142,8 @@ begin
   FPrivateKey := Value.PrivateKey;
   FPFX := Value.PFX;
   FPFXfile := Value.PFXfile;
+  FCertComplianceLevel := Value.CertComplianceLevel;
+  FSNIHost := Value.FSNIHost;
 end;
 
 procedure TCustomSSL.ReturnError;
@@ -4158,6 +4195,11 @@ function TCustomSSL.SendBuffer(Buffer: TMemory; Len: Integer): Integer;
 begin
   ReturnError;
   Result := integer(SOCKET_ERROR);
+end;
+
+procedure TCustomSSL.SetCertCAFile(const Value: string);
+begin
+  FCertCAFile := Value;
 end;
 
 function TCustomSSL.RecvBuffer(Buffer: TMemory; Len: Integer): Integer;
@@ -4222,6 +4264,17 @@ begin
   Result := 1;
 end;
 
+function TCustomSSL.DoVerifyCert:boolean;
+begin
+  if assigned(OnVerifyCert) then
+  begin
+    result:=OnVerifyCert(Self);
+  end
+  else
+    result:=true;
+end;
+
+
 {======================================================================}
 
 function TSSLNone.LibVersion: String;
@@ -4236,9 +4289,9 @@ end;
 
 {======================================================================}
 
-{$IFDEF ONCEWINSOCK}
 initialization
 begin
+{$IFDEF ONCEWINSOCK}
   if not InitSocketInterface(DLLStackName) then
   begin
     e := ESynapseError.Create('Error loading Socket interface (' + DLLStackName + ')!');
@@ -4247,8 +4300,8 @@ begin
     raise e;
   end;
   synsock.WSAStartup(WinsockLevel, WsaDataOnce);
-end;
 {$ENDIF}
+end;
 
 finalization
 begin
