@@ -50,6 +50,8 @@ uses
 var i : integer;
     buf, p, step : string;
 
+{$R *.res}
+
 begin
 
   {$ifdef trace_debug}
