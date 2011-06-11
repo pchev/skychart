@@ -3,7 +3,7 @@
 
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
-AppName=Cartes du Ciel V3
+AppName=Cartes du Ciel
 AppVerName=Cartes du Ciel Data
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
@@ -12,7 +12,7 @@ DefaultDirName={reg:HKCU\Software\Astro_PC\Ciel,Install_Dir|{pf}\Ciel}
 UsePreviousAppDir=yes
 CreateUninstallRegKey=no
 UpdateUninstallLogAppName=no
-DefaultGroupName=Cartes du Ciel V3.0
+DefaultGroupName=Cartes du Ciel
 AllowNoIcons=yes
 InfoBeforeFile=Presetup\readme.txt
 OutputDir=.\
