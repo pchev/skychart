@@ -39,6 +39,7 @@ Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
 procedure CloseUSNOA ; stdcall;
 procedure SetUSNOApath(path : PChar); stdcall;
+Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean); stdcall;
 
 var USNOApath : string;
 
@@ -234,6 +235,36 @@ procedure CloseUSNOA ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
+end;
+
+Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean); stdcall;
+var nomfich: string;
+    lin : USNOArec;
+begin
+ok:=false;
+if num<1 then exit;
+nomfich:=USNOApath+slashchar+'zone'+PadZeros(inttostr(zone),4)+'.cat';
+if not FileExists(nomfich) then exit;
+AssignFile(fcat,nomfich);
+FileisOpen:=true;
+FileMode:=0;
+reset(fcat);
+rec1:=0;
+nrec:=MaxInt;
+curSM:=1;
+nSM:=1;
+armin:=-1E99;
+armax:=1E99;
+demin:=-1E99;
+demax:=1E99;
+currec:=num-1;
+seek(fcat,currec);
+if not eof(fcat) then begin
+  ReadUSNOA(lin,ok);
+  ar:=lin.ar;
+  de:=lin.de;
+end;
+CloseUSNOA;
 end;
 
 Procedure FindRegionU(ar,de : double; var lg : integer);
