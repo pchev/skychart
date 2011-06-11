@@ -2132,6 +2132,10 @@ try
                      SetTY2Path(PChar(cfgcat.StarCatPath[tyc2-BaseStar]));
                      FindNumTYC2(PChar(id),ra,dec,result) ;
                      end;
+        S_UNA      : if IsUSNOApath(PChar(cfgcat.StarCatPath[usnoa-BaseStar])) then begin
+                     SetUSNOApath(PChar(cfgcat.StarCatPath[usnoa-BaseStar]));
+                     FindNumUSNOA(PChar(id),ra,dec,result) ;
+                     end;
 {       S_Common   : begin
                      FindNumObjectName(strtointdef(id,0),ra,dec,result);
                      end; }
@@ -2213,6 +2217,11 @@ begin
    if uppercase(copy(Num,1,3))='GSC' then begin
       buf:=StringReplace(Num,'gsc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_GSC,buf,ar1,de1) ;
+      if result then exit;
+   end;
+   if uppercase(copy(Num,1,3))='UNA' then begin
+      buf:=StringReplace(Num,'una','',[rfReplaceAll,rfIgnoreCase]);
+      result:=FindNum(S_UNA,buf,ar1,de1) ;
       if result then exit;
    end;
    if uppercase(copy(Num,1,3))='TYC' then begin

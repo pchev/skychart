@@ -21,7 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
 interface
-Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,bscunit,pgcunit,sacunit,tyc2unit;
+Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,bscunit,pgcunit,sacunit,tyc2unit,usnoaunit;
 
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
 Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
@@ -44,6 +44,7 @@ Procedure FindNumSAC(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
 Procedure FindNumWDS(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
 Procedure FindNumGcat(path,catshortname,id : PChar ; keylen : integer; var ar,de:double; var ok:boolean); stdcall;
 Procedure FindNumTYC2(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumUSNOA(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
 
 implementation                          
 
@@ -220,6 +221,21 @@ if p>0 then begin
    if p>0 then delete(buf,p,5);
    num:=strtoint(buf);
    FindTYC2num(smnum,num,ar,de,ok);
+end;
+end;
+
+Procedure FindNumUSNOA(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+var smnum,num : integer;
+    p : integer;
+    buf:string;
+begin
+ok:=false;
+buf:=trim(id);
+p:=pos('-',buf);
+if p>0 then begin
+   smnum:=strtoint(copy(buf,1,p-1));
+   num:=strtoint(copy(buf,p+1,99));
+   FindUSNOAnum(smnum,num,ar,de,ok);
 end;
 end;
 
