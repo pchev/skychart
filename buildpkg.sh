@@ -61,7 +61,8 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
-  tar cvjf skychart-$version-$currentrev-linux_i386.tar.bz2 *
+  cd ..
+  tar cvjf skychart-$version-$currentrev-linux_i386.tar.bz2 skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -97,8 +98,8 @@ if [[ $make_linux32 ]]; then
   cp skychart/cdcicon $builddir/debug/
   cp varobs/varobs $builddir/debug/
   cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir/debug/
-  tar cvjf bin-linux_i386-debug-$currentrev.tar.bz2 *
+  cd $builddir
+  tar cvjf bin-linux_i386-debug-$currentrev.tar.bz2 debug
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin-*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -120,7 +121,8 @@ if [[ $make_linux64 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
-  tar cvjf skychart-$version-$currentrev-linux_x86_64.tar.bz2 *
+  cd ..
+  tar cvjf skychart-$version-$currentrev-linux_x86_64.tar.bz2 skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -159,8 +161,8 @@ if [[ $make_linux64 ]]; then
   cp skychart/cdcicon $builddir/debug/
   cp varobs/varobs $builddir/debug/
   cp varobs/varobs_lpv_bulletin $builddir/debug/
-  cd $builddir/debug/
-  tar cvjf bin-linux_x86_64-debug-$currentrev.tar.bz2 *
+  cd $builddir
+  tar cvjf bin-linux_x86_64-debug-$currentrev.tar.bz2 debug
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv bin-*.tar.bz2 $wd
   if [[ $? -ne 0 ]]; then exit 1;fi

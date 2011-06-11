@@ -4,14 +4,14 @@
 [Setup]
 ArchitecturesInstallIn64BitMode=x64
 ArchitecturesAllowed=x64
-AppName=Cartes du Ciel V3.0
+AppName=Cartes du Ciel
 AppVerName=Cartes du Ciel V3
 AppPublisherURL=http://www.ap-i.net/skychart
 AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart
 DefaultDirName={reg:HKCU\Software\Astro_PC\Ciel,Install_Dir|{pf64}\Ciel}
 UsePreviousAppDir=false
-DefaultGroupName=Cartes du Ciel V3.0
+DefaultGroupName=Cartes du Ciel
 AllowNoIcons=true
 InfoBeforeFile=Presetup\readme.txt
 OutputDir=.\
@@ -55,9 +55,9 @@ Source: PrivateFiles\*; DestDir: {userappdata}\skychart\; Flags: onlyifdoesntexi
 Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
 
 [Icons]
-Name: {group}\Cartes du Ciel V3.0; Filename: {app}\skychart.exe; WorkingDir: {app}
+Name: {group}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}
 Name: {group}\Variables Stars; Filename: {app}\varobs.exe; WorkingDir: {app}
 Name: {group}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}
-Name: {userdesktop}\Cartes du Ciel V3.0; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: desktopicon
-Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Cartes du Ciel V3.0; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: quicklaunchicon
+Name: {userdesktop}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: desktopicon
+Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: quicklaunchicon
 Name: {userstartup}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; Tasks: startupicon
