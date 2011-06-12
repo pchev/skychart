@@ -104,7 +104,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="53">
+    <Units Count="56">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -467,6 +467,24 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="cu_serial"/>
       </Unit52>
+      <Unit53>
+        <Filename Value="pu_encoderclient.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="pop_encoder"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_encoderclient"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="cu_encoderprotocol.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_encoderprotocol"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="cu_taki.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_taki"/>
+      </Unit55>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
