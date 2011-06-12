@@ -2970,7 +2970,7 @@ begin
   ds:=round(max(sz,2*cfgchart.drawpen));
   dsr:=ds div 4;
   nebcolor:=cfgplot.Color[29];                           // Fix color
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // SBR color
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillRN then // SBR color
     begin
       if Asbr<=0 then
         begin
@@ -2987,7 +2987,7 @@ begin
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.UseBMP then begin
-  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillEN then begin// line mode
+  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillRN then begin// line mode
     cbmp.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr,ColorToBGRA(nebcolor),BGRAPixelTransparent);
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(nebcolor));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(nebcolor));
@@ -3001,7 +3001,7 @@ end else begin
   cnv.Pen.Color := nebcolor;
   cnv.Brush.Style := bsSolid;
 
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // graphic mode
+  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillRN then // graphic mode
     begin
 //    in graphic mode, the obect is ALWAYS shown as filled.
       cnv.Pen.Color := nebcolor;
@@ -3009,10 +3009,10 @@ end else begin
       cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
     end;
 
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
+  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillRN then // line mode
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillEN and not cfgchart.onprinter then
+      if cfgplot.DSOColorFillRN and not cfgchart.onprinter then
         begin
           cnv.Brush.Style := bsSolid;
           cnv.Pen.Color := cfgplot.Color[29];
