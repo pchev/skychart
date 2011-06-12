@@ -952,11 +952,11 @@ const
 create_table_ast_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
 create_table_ast_day_pos='( id varchar(7) NOT NULL default "", epoch double NOT NULL default "0",'+
                          'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
-                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
+                         'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
 create_table_com_day=' ( jd int(11) NOT NULL default "0", limit_mag smallint(6) NOT NULL default "0")';
 create_table_com_day_pos='( id varchar(12) NOT NULL default "", epoch double NOT NULL default "0",'+
-                         'ra smallint(6) NOT NULL default "0",  de smallint(6) NOT NULL default "0",'+
-                         'mag smallint(6) NOT NULL default "0",  PRIMARY KEY  (ra,de,mag))';
+                         'ra smallint(6) NOT NULL default "0", de smallint(6) NOT NULL default "0",'+
+                         'mag smallint(6) NOT NULL default "0", near_earth smallint(1) NOT NULL default "0", PRIMARY KEY (ra,de,mag))';
 numsqltable=10;
 sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
            (  // mysql tables
