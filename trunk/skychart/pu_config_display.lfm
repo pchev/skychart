@@ -1,7 +1,7 @@
 object f_config_display: Tf_config_display
-  Left = 690
+  Left = 675
   Height = 582
-  Top = 14
+  Top = 19
   Width = 515
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -29,10 +29,10 @@ object f_config_display: Tf_config_display
       Height = 530
       Top = 1
       Width = 513
-      ActivePage = Page3
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -104,17 +104,17 @@ object f_config_display: Tf_config_display
           end
           object Label259: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 75
-            Width = 56
+            Width = 48
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label258: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 38
-            Width = 112
+            Width = 94
             Caption = 'Bright Stars Size '
             ParentColor = False
           end
@@ -220,33 +220,33 @@ object f_config_display: Tf_config_display
           end
           object Label257: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 79
-            Width = 167
+            Width = 140
             Caption = 'Increment for Bright Stars'
             ParentColor = False
           end
           object Label263: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 161
-            Width = 103
+            Width = 89
             Caption = 'Color saturation'
             ParentColor = False
           end
           object Label262: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 120
-            Width = 56
+            Width = 48
             Caption = 'Contrast'
             ParentColor = False
           end
           object Label256: TLabel
             Left = 24
-            Height = 18
+            Height = 15
             Top = 38
-            Width = 104
+            Width = 89
             Caption = 'Faint Stars Size '
             ParentColor = False
           end
@@ -304,9 +304,9 @@ object f_config_display: Tf_config_display
         end
         object red_moveBox: TCheckBox
           Left = 28
-          Height = 21
+          Height = 23
           Top = 429
-          Width = 258
+          Width = 227
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           TabOrder = 2
@@ -321,15 +321,15 @@ object f_config_display: Tf_config_display
           TabOrder = 4
           object Label9: TLabel
             Left = 38
-            Height = 18
+            Height = 15
             Top = 48
-            Width = 106
+            Width = 90
             Caption = 'Stars bitmap file'
             ParentColor = False
           end
           object FileNameEdit1: TFileNameEdit
             Left = 37
-            Height = 25
+            Height = 22
             Top = 84
             Width = 332
             OnAcceptFileName = FileNameEdit1AcceptFileName
@@ -354,9 +354,9 @@ object f_config_display: Tf_config_display
         end
         object antialias: TCheckBox
           Left = 28
-          Height = 21
+          Height = 23
           Top = 458
-          Width = 90
+          Width = 80
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           TabOrder = 6
@@ -1603,7 +1603,7 @@ object f_config_display: Tf_config_display
           TabOrder = 0
         end
         object ecliptic: TCheckBox
-          Left = 210
+          Left = 277
           Height = 23
           Top = 32
           Width = 98
@@ -1612,7 +1612,7 @@ object f_config_display: Tf_config_display
           TabOrder = 2
         end
         object galactic: TCheckBox
-          Left = 210
+          Left = 277
           Height = 23
           Top = 101
           Width = 149
@@ -1804,7 +1804,7 @@ object f_config_display: Tf_config_display
           Text = 'Line'
         end
         object EclipticStyle: TComboBox
-          Left = 230
+          Left = 297
           Height = 23
           Top = 53
           Width = 100
@@ -1844,7 +1844,7 @@ object f_config_display: Tf_config_display
           Text = 'Line'
         end
         object GalEqStyle: TComboBox
-          Left = 230
+          Left = 297
           Height = 23
           Top = 125
           Width = 100

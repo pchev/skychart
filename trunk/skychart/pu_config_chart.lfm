@@ -29,10 +29,10 @@ object f_config_chart: Tf_config_chart
       Height = 461
       Top = 1
       Width = 508
-      ActivePage = Page1
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 4
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
@@ -197,7 +197,7 @@ object f_config_chart: Tf_config_chart
           TabOrder = 0
           object CoordType: TRadioGroup
             Left = 3
-            Height = 139
+            Height = 176
             Top = 16
             Width = 440
             AutoFill = True
@@ -210,7 +210,7 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 123
+            ClientHeight = 160
             ClientWidth = 436
             ItemIndex = 0
             Items.Strings = (
@@ -1822,9 +1822,9 @@ object f_config_chart: Tf_config_chart
         ClientWidth = 504
         object Label159: TLabel
           Left = 0
-          Height = 14
+          Height = 15
           Top = 0
-          Width = 57
+          Width = 65
           Caption = 'Grid Setting'
           ParentColor = False
         end
@@ -1860,89 +1860,89 @@ object f_config_chart: Tf_config_chart
         end
         object Label161: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 107
-          Width = 7
+          Width = 8
           Caption = '1'
           ParentColor = False
         end
         object Label162: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 132
-          Width = 7
+          Width = 8
           Caption = '2'
           ParentColor = False
         end
         object Label163: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 157
-          Width = 7
+          Width = 8
           Caption = '3'
           ParentColor = False
         end
         object Label164: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 182
-          Width = 7
+          Width = 8
           Caption = '4'
           ParentColor = False
         end
         object Label166: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 82
-          Width = 7
+          Width = 8
           Caption = '0'
           ParentColor = False
         end
         object Label167: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 207
-          Width = 7
+          Width = 8
           Caption = '5'
           ParentColor = False
         end
         object Label168: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 232
-          Width = 7
+          Width = 8
           Caption = '6'
           ParentColor = False
         end
         object Label169: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 257
-          Width = 7
+          Width = 8
           Caption = '7'
           ParentColor = False
         end
         object Label170: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 282
-          Width = 7
+          Width = 8
           Caption = '8'
           ParentColor = False
         end
         object Label174: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 307
-          Width = 7
+          Width = 8
           Caption = '9'
           ParentColor = False
         end
         object Label177: TLabel
           Left = 29
-          Height = 14
+          Height = 15
           Top = 332
-          Width = 13
+          Width = 15
           Caption = '10'
           ParentColor = False
         end
@@ -1958,97 +1958,97 @@ object f_config_chart: Tf_config_chart
         end
         object Label4: TLabel
           Left = 67
-          Height = 14
-          Top = 365
-          Width = 94
+          Height = 15
+          Top = 361
+          Width = 109
           Caption = 'Compass rose size'
           ParentColor = False
         end
         object CheckBox1: TCheckBox
           Left = 453
-          Height = 21
+          Height = 23
           Top = 76
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 25
         end
         object CheckBox2: TCheckBox
           Tag = 1
           Left = 453
-          Height = 21
+          Height = 23
           Top = 101
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 26
         end
         object CheckBox4: TCheckBox
           Tag = 3
           Left = 453
-          Height = 21
+          Height = 23
           Top = 151
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 27
         end
         object CheckBox5: TCheckBox
           Tag = 4
           Left = 453
-          Height = 21
+          Height = 23
           Top = 176
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 28
         end
         object CheckBox6: TCheckBox
           Tag = 5
           Left = 453
-          Height = 21
+          Height = 23
           Top = 201
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 29
         end
         object CheckBox7: TCheckBox
           Tag = 6
           Left = 453
-          Height = 21
+          Height = 23
           Top = 226
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 30
         end
         object CheckBox8: TCheckBox
           Tag = 7
           Left = 453
-          Height = 21
+          Height = 23
           Top = 251
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 31
         end
         object CheckBox9: TCheckBox
           Tag = 8
           Left = 453
-          Height = 21
+          Height = 23
           Top = 276
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 32
         end
         object CheckBox10: TCheckBox
           Tag = 9
           Left = 453
-          Height = 21
+          Height = 23
           Top = 301
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 33
         end
         object CheckBox13: TCheckBox
-          Left = 261
-          Height = 21
-          Top = 387
-          Width = 164
+          Left = 253
+          Height = 23
+          Top = 357
+          Width = 179
           Caption = 'Always show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 23
@@ -2056,25 +2056,25 @@ object f_config_chart: Tf_config_chart
         object CheckBox3: TCheckBox
           Tag = 2
           Left = 453
-          Height = 21
+          Height = 23
           Top = 126
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 34
         end
         object CheckBox11: TCheckBox
           Tag = 10
           Left = 453
-          Height = 21
+          Height = 23
           Top = 326
-          Width = 23
+          Width = 25
           OnClick = ShowGridBoxClick
           TabOrder = 35
         end
         object Button2: TButton
-          Left = 261
+          Left = 253
           Height = 25
-          Top = 413
+          Top = 387
           Width = 75
           BorderSpacing.InnerBorder = 4
           Caption = 'Default'
