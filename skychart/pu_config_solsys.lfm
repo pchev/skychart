@@ -179,7 +179,7 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 4
         end
         object GRS: TFloatEdit
-          Left = 178
+          Left = 253
           Height = 22
           Hint = '0..360'
           Top = 360
@@ -193,7 +193,7 @@ object f_config_solsys: Tf_config_solsys
           MaxValue = 360
         end
         object BitBtn37: TBitBtn
-          Left = 221
+          Left = 296
           Height = 28
           Hint = 'Get recent measurement from JUPOS'
           Top = 357
@@ -300,9 +300,10 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 6
           object SunOnline: TCheckBox
             Left = 13
-            Height = 23
-            Top = 8
-            Width = 83
+            Height = 34
+            Top = 5
+            Width = 334
+            AutoSize = False
             Caption = 'SunOnline'
             OnClick = SunOnlineClick
             TabOrder = 0

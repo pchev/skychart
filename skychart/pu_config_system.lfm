@@ -1,7 +1,7 @@
 object f_config_system: Tf_config_system
-  Left = 534
+  Left = 539
   Height = 532
-  Top = 127
+  Top = 111
   Width = 490
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
