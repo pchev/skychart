@@ -1498,6 +1498,16 @@ var qry : string;
     i: integer;
 begin
 try
+// check for old table version
+qry:='select distinct(near_earth) from '+cfgsc.ast_daypos;
+db1.Query(qry);
+if db1.Rowcount=0 then begin
+  qry:='drop table '+cfgsc.ast_daypos;
+  db1.Query(qry);
+  qry:='drop table '+cfgsc.ast_day;
+  db1.Query(qry);
+end;
+/////
 lmag:=round(limitmag*10);
 qry:='SELECT jd,limit_mag from '+cfgsc.ast_day;
 db1.Query(qry);
@@ -1515,6 +1525,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
      if cfgsc.ast_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.ast_daypos+'"') then begin
         db1.Query('CREATE TABLE '+cfgsc.ast_daypos+create_table_ast_day_pos);
         db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (id,epoch)');
+        db1.Query('CREATE INDEX IDX2_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (near_earth)');
      end;
      qry:='SELECT distinct(jd) from cdc_ast_mag where mag<110';
      db1.Query(qry);
@@ -1574,7 +1585,7 @@ end;
 
 Procedure TPlanet.NewAstDayCallback(Sender:TObject; Row:TResultRow);
 var qry,id : string;
-    imag,ira,idec:integer;
+    imag,ira,idec,nea:integer;
     dist,r,elong,phase,h,g,ma,ap,an,ic,ec,sa,eq,epoch,ra,dec,mag,xc,yc,zc: double;
     nam:string;
 begin
@@ -1597,12 +1608,14 @@ begin
              ira:=round(ra*1000);
              idec:=round(dec*1000);
              imag:=round(mag*10);
-             qry:='INSERT INTO '+ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
+             if dist<0.3 then nea:=1 else nea:=0;
+             qry:='INSERT INTO '+ast_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                  +'"'+id+'"'
                  +',"'+formatfloat(f1,epoch)+'"'
                  +',"'+inttostr(ira)+'"'
                  +',"'+inttostr(idec)+'"'
-                 +',"'+inttostr(imag)+'")';
+                 +',"'+inttostr(imag)+'"'
+                 +',"'+inttostr(nea)+'")';
              db2.Query(qry);
 end;
 
@@ -1612,6 +1625,16 @@ var qry : string;
     currentmag,lmag:integer;
 begin
 try
+// check for old table version
+qry:='select distinct(near_earth) from '+cfgsc.com_daypos;
+db1.Query(qry);
+if db1.Rowcount=0 then begin
+  qry:='drop table '+cfgsc.com_daypos;
+  db1.Query(qry);
+  qry:='drop table '+cfgsc.com_day;
+  db1.Query(qry);
+end;
+/////
 lmag:=round(limitmag*10);
 qry:='SELECT jd,limit_mag from '+cfgsc.com_day;
 db1.Query(qry);
@@ -1629,6 +1652,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
      if cfgsc.com_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_daypos+'"') then begin
         db1.Query('CREATE TABLE '+cfgsc.com_daypos+create_table_com_day_pos);
         db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.com_daypos+' ON '+cfgsc.com_daypos+' (id,epoch)');
+        db1.Query('CREATE INDEX IDX2_'+cfgsc.com_daypos+' ON '+cfgsc.com_daypos+' (near_earth)');
      end;
      db1.UnLockTables;
      db1.StartTransaction;
@@ -1670,7 +1694,7 @@ end;
 
 Procedure TPlanet.NewComDayCallback(Sender:TObject; Row:TResultRow);
 var qry,id,elem_id : string;
-    imag,ira,idec:integer;
+    imag,ira,idec,neo:integer;
     dist,r,elong,phase,h,g,ap,an,ic,ec,eq,epoch,ra,dec,mag,tp,q,diam,lc,car,cde,rc,xc,yc,zc: double;
     nam:string;
 begin
@@ -1684,12 +1708,14 @@ begin
             ira:=round(ra*1000);
             idec:=round(dec*1000);
             imag:=round(mag*10);
-            qry:='INSERT INTO '+com_daypos+' (id,epoch,ra,de,mag) VALUES ('
+            if dist<0.3 then neo:=1 else neo:=0;
+            qry:='INSERT INTO '+com_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                 +'"'+id+'"'
                 +',"'+formatfloat(f1,epoch)+'"'
                 +',"'+inttostr(ira)+'"'
                 +',"'+inttostr(idec)+'"'
-                +',"'+inttostr(imag)+'")';
+                +',"'+inttostr(imag)+'"'
+                +',"'+inttostr(neo)+'")';
             db1.Query(qry);
          end;
        end;
@@ -1716,7 +1742,7 @@ end;
 d:=maxvalue([0.6*cfgsc.fov,0.09]);
 da:=d/cos(cfgsc.decentre);
 qry:='SELECT id,epoch from '+cfgsc.ast_daypos+' where';
-qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.AstMagDiff)*10))+' and';
+qry:=qry+' (mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.AstMagDiff)*10))+' and';
 if cfgsc.NP or cfgsc.SP then
    qry:=qry+' (ra>0 and ra<'+inttostr(round(1000*(pi2)))+')'
 else if (cfgsc.racentre+da)>pi2 then
@@ -1730,7 +1756,7 @@ else
            +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
 qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')'
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')) or (near_earth=1)'
     +' limit '+inttostr(MaxAsteroid) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
@@ -1793,7 +1819,7 @@ end;
 d:=maxvalue([0.6*cfgsc.fov,0.09]);
 da:=d/cos(cfgsc.decentre);
 qry:='SELECT id,epoch from '+cfgsc.com_daypos+' where';
-if cfgsc.StarFilter then qry:=qry+' mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.ComMagDiff)*10))+' and';
+if cfgsc.StarFilter then qry:=qry+' (mag<='+inttostr(round((cfgsc.StarMagMax+cfgsc.ComMagDiff)*10))+' and';
 if cfgsc.NP or cfgsc.SP then
    qry:=qry+' (ra>0 and ra<'+inttostr(round(1000*(pi2)))+')'
 else if (cfgsc.racentre+da)>pi2 then
@@ -1807,7 +1833,7 @@ else
            +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
 qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')'
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')) or (near_earth=1)'
     +' limit '+inttostr(MaxComet) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
