@@ -113,9 +113,6 @@ Function Encoder_Open(model,commport,baud,parity,data,stop,timeout,inttimeout : 
 var i,typ : integer;
 begin
 result:=false;
-if (length(CommPort)<>4)or
-   (pos(CommPort,ValidPort)=0)
-   then begin {ShowMessage('Invalid communication port : '+commport);} exit; end;
 typ:=0;
 for i:=1 to NumModel do if (pos(Model,ValidModel[i])>0) then typ:=i;
 if typ=0 then begin {ShowMessage('Unsupported encoder model : '+model);} exit; end;

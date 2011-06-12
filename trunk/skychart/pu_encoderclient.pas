@@ -101,12 +101,7 @@ type
     PopupMenu1: TPopupMenu;
     Delete1: TMenuItem;
     Timer1: TTimer;
-    GroupBox6: TGroupBox;
-    cbo_source: TComboBox;
-    cbo_starname: TComboBox;
-    SpeedButton3: TSpeedButton;
     Panel3: TPanel;
-    CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -131,7 +126,6 @@ type
     SpeedButton6: TSpeedButton;
     CheckBox4: TCheckBox;
     {Ouranos compatible IO}
-    procedure INITClick(Sender: TObject);
     procedure query_encoder;
     {Utility and form functions}
     procedure formcreate(Sender: TObject);
@@ -144,7 +138,6 @@ type
     procedure Encoder_Error;
     procedure statusClick(Sender: TObject);
     procedure SpeedButton4Click(Sender: TObject);
-    procedure cbo_sourceChange(Sender: TObject);
     procedure SaveButton1Click(Sender: TObject);
     procedure ReadIntBoxChange(Sender: TObject);
     procedure latChange(Sender: TObject);
@@ -156,7 +149,6 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure Delete1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure CheckBox1Click(Sender: TObject);
     procedure init90Click(Sender: TObject);
     procedure InitTypeClick(Sender: TObject);
     procedure CheckBox3Click(Sender: TObject);
@@ -384,13 +376,15 @@ end;
 --------------------------------------------------------------------------------}
 
 Procedure GetSideralTime;
-var jd0,ut : double;
-    st : TSystemTime;
+var y,m,d:word;
+    jd0,ut : double;
+    n: TDateTime;
 begin
-//GetSystemTime(st);   lazarus
-{jd0:=jd(st.wYear,st.wMonth,st.wDay,0.0);
-ut:=st.wHour+st.wMinute/60+st.wSecond/3600;
-Sideral_Time:=15*SidTim(jd0,ut,Longitude); // in degree }
+n:=pop_encoder.csc.tz.NowUTC;
+decodedate(n,y,m,d);
+ut:=frac(n)*24;
+jd0:=jd(y,m,d,0);
+Sideral_Time:=SidTim(jd0,ut,pop_encoder.csc.ObsLongitude);   // in radian
 end;
 
 Procedure ComputeCoord(p1,p2 : PInit_object; x,y : integer; var alpha,delta : double);
@@ -450,7 +444,7 @@ dista:=High(Integer);
 disti:=0;
 for j := 0 to init_objects.count-1 do begin
   p1:=init_objects[j];
-  d:=angulardistance(alpha,delta,p1.alpha,p1.delta);
+  d:=rad2deg*angulardistance(deg2rad*alpha,deg2rad*delta,deg2rad*p1.alpha,deg2rad*p1.delta);
   if d<dista then begin
      n:=j;
      dista:=d;
@@ -488,7 +482,8 @@ pos:=list_init.Items.Item[n].Position;
 py:=pos.y;
 pos:=list_init.TopItem.Position;
 py:=py-pos.y;
-///list_init.Scroll(0,py);  lazarus
+//list_init.Scroll(0,py); // lazarus
+
 {compute instrumental coordinates}
 p1:=init_objects[n];
 p2:=init_objects[m];
@@ -497,8 +492,9 @@ Last_p2:=p2;
 ComputeCoord(p1, p2, curstep_x, curstep_y, curdeg_x, curdeg_y);
   {convert to alt-az pos}
   GetSideralTime;
-  Eq2Hz(sideral_time-curdeg_x,curdeg_y,cur_az,cur_alt,csc);
-  cur_az:=rmod(cur_az+180,360);
+  Eq2Hz(sideral_time-deg2rad*curdeg_x,deg2rad*curdeg_y,cur_az,cur_alt,csc);
+  cur_az:=rmod(rad2deg*cur_az+180,360);
+  cur_alt:=rad2deg*cur_alt;
   { clean RA }
   curdeg_x:=rmod(curdeg_x+720,360);
 if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+
@@ -553,21 +549,6 @@ init_objects.Clear;
 end;
 end;
 
-Procedure Load_Init_Objects;
-var fn : string;
-begin
-fn:='';
-with pop_encoder do begin
-if cbo_source.text='Not used' then fn:=''
-else if cbo_source.text='Star Name' then fn:='star.txt'
-else if cbo_source.text='Messier' then fn:='messier.txt'
-else if cbo_source.text='NGC' then fn:='ngc.txt'
-else if cbo_source.text='IC' then fn:='ic.txt';
-cbo_starname.clear;
-if fn>'' then cbo_starname.Items.LoadFromFile(fn);
-cbo_starname.Itemindex:=0;
-end;
-end;
 
 {-------------------------------------------------------------------------------
 
@@ -587,9 +568,6 @@ end;
 
 procedure Tpop_encoder.formcreate(Sender: TObject);
 begin
-     GetDir(0,appdir);
-//     Application.UpdateFormatSettings:=false; lazarus
-     decimalseparator:='.';
      init_objects:=tlist.create;
      wait_create := false;
 end;
@@ -611,7 +589,6 @@ ini:=tinifile.create(FConfig);
      cbo_type.text:=nom;
      ReadIntBox.text:=ini.readstring('encoders','read_interval','1000');
      cbo_port.text:=ini.readstring('encoders','comport','COM1');
-     if strtointdef(copy(cbo_port.text,4,1),9)>4 then cbo_port.text:='COM1';
      PortSpeedbox.text:=ini.readstring('encoders','baud','9600');
      DatabitBox.text:=ini.readstring('encoders','databits','8');
      Paritybox.text:=ini.readstring('encoders','parity','N');
@@ -630,15 +607,15 @@ ini:=tinifile.create(FConfig);
      with list_init do
      begin
           newcolumn:=columns.add; newcolumn.caption:='Name';
-          newcolumn.width:=-1;
+          newcolumn.width:=70;
           newcolumn:=columns.add; newcolumn.caption:='Alpha';
-          newcolumn.width:=-1;
+          newcolumn.width:=60;
           newcolumn:=columns.add; newcolumn.caption:='Delta';
-          newcolumn.width:=-1;
+          newcolumn.width:=60;
           newcolumn:=columns.add; newcolumn.caption:='Time';
-          newcolumn.width:=-1;
+          newcolumn.width:=40;
           newcolumn:=columns.add; newcolumn.caption:='Sel';
-          newcolumn.width:=-1;
+          newcolumn.width:=30;
      end;
      Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
      ReadIntBox.text:=inttostr(Timer1.Interval);
@@ -843,9 +820,9 @@ with pop_encoder do begin
          p.theta:=p.steps_y*scaling_y+180;
          p.phi:=p.steps_x*scaling_x+180;
          GetSideralTime;
-         Eq2Hz(sideral_time-p.alpha,p.delta,a1,d1,csc);
-         p.az:=360-rmod(a1+180,360);
-         p.alt:=d1;
+         Eq2Hz(sideral_time-deg2rad*p.alpha,deg2rad*p.delta,a1,d1,csc);
+         p.az:=360-rmod(rad2deg*a1+180,360);
+         p.alt:=rad2deg*d1;
 
          if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+
                   ' Align : '+inttostr(init_objects.Count)+' '+p.name+' RA:'+floattostr(p.alpha)+' DEC:'+floattostr(p.delta)+' T:'+floattostr(p.time)+
@@ -919,22 +896,6 @@ with pop_encoder do begin
 end;
 end;
 
-procedure Tpop_encoder.INITClick(Sender: TObject);
-var source : string;
-    alpha,delta:double;
-begin
-{First get coordinates of the init point}
-if (cbo_source.text='Star Name')or
-            (cbo_source.text='Messier')or
-            (cbo_source.text='NGC')or
-            (cbo_source.text='IC')
-         then begin
-             alpha :=str2ra(cbo_starname.text);
-             delta:=str2dec(cbo_starname.text);
-             source:=copy(cbo_starname.text,1,9);
-             InitObject(source,alpha,delta);
-end;
-end;
 
 Procedure QueryStatus;
 var ex,ey : integer;
@@ -967,11 +928,6 @@ then
          ShowCoordinates;
          if CheckBox2.Checked then QueryStatus;
      end;
-end;
-
-procedure Tpop_encoder.cbo_sourceChange(Sender: TObject);
-begin
-Load_Init_Objects;
 end;
 
 procedure Tpop_encoder.SaveButton1Click(Sender: TObject);
@@ -1069,17 +1025,8 @@ end;
 
 procedure Tpop_encoder.FormShow(Sender: TObject);
 begin
-Load_Init_Objects;
-end;
+InitTypeClick(Sender);
 
-procedure Tpop_encoder.CheckBox1Click(Sender: TObject);
-begin
-cbo_source.Enabled := Checkbox1.Checked;
-SpeedButton3.Enabled := Checkbox1.Checked;
-cbo_starname.Enabled := Checkbox1.Checked;
-if Checkbox1.Checked then cbo_source.ItemIndex:=1
-                     else cbo_source.ItemIndex:=0;
-Load_Init_Objects;                     
 end;
 
 procedure Tpop_encoder.init90Click(Sender: TObject);

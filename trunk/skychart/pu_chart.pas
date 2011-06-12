@@ -3837,9 +3837,9 @@ end else if sc.cfgsc.PluginTelescope then begin
            Image1.Invalidate;
            if assigned(FChartMove) then FChartMove(self);
         end;
-        TelescopeTimer.Interval:=500;
-        TelescopeTimer.Enabled:=true;
      end;
+     TelescopeTimer.Interval:=500;
+     TelescopeTimer.Enabled:=true;
     end else begin
      TelescopeTimer.Interval:=2000;
      TelescopeTimer.Enabled:=true;
@@ -3876,9 +3876,9 @@ else if sc.cfgsc.ASCOMTelescope then begin
             Image1.Invalidate;
             if assigned(FChartMove) then FChartMove(self);
          end;
-         TelescopeTimer.Interval:=500;
-         TelescopeTimer.Enabled:=true;
       end;
+      TelescopeTimer.Interval:=500;
+      TelescopeTimer.Enabled:=true;
      end else begin
       TelescopeTimer.Interval:=2000;
       TelescopeTimer.Enabled:=true;
@@ -3906,9 +3906,9 @@ else if sc.cfgsc.LX200Telescope then begin
             Image1.Invalidate;
             if assigned(FChartMove) then FChartMove(self);
          end;
-         TelescopeTimer.Interval:=500;
-         TelescopeTimer.Enabled:=true;
       end;
+      TelescopeTimer.Interval:=500;
+      TelescopeTimer.Enabled:=true;
      end else begin
       TelescopeTimer.Interval:=2000;
       TelescopeTimer.Enabled:=true;
@@ -3935,9 +3935,9 @@ else if sc.cfgsc.EncoderTelescope then begin
             Image1.Invalidate;
             if assigned(FChartMove) then FChartMove(self);
          end;
-         TelescopeTimer.Interval:=500;
-         TelescopeTimer.Enabled:=true;
       end;
+      TelescopeTimer.Interval:=500;
+      TelescopeTimer.Enabled:=true;
      end else begin
       TelescopeTimer.Interval:=2000;
       TelescopeTimer.Enabled:=true;
