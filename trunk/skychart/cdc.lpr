@@ -45,7 +45,8 @@ uses
   pu_addlabel, pu_print, u_translation, pu_splash, pu_about, cu_tz,
   uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
   pu_ascomclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
-  cu_lx200protocol, cu_serial, bgrabitmappack;
+  cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki, cu_encoderprotocol,
+  bgrabitmappack;
   
 var i : integer;
     buf, p, step : string;

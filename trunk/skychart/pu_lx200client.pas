@@ -287,6 +287,7 @@ type
     FConfig: string;
   public
     { Public declarations }
+    csc: Tconf_skychart;
     function  ReadConfig(ConfigPath : shortstring):boolean;
   end;
 
@@ -583,9 +584,9 @@ begin
 pop_lx200.lat.text:=floattostr(la);
 pop_lx200.long.text:=floattostr(lo);
 latitude:=la;
-//ObsLatitude:=la;
+pop_lx200.csc.ObsLatitude:=la;
 longitude:=lo;
-//ObsLongitude:=lo;
+pop_lx200.csc.ObsLongitude:=lo;
 LX200_SetObs( La,Lo,1,now);
 end;
 
@@ -836,7 +837,7 @@ var x : double;
 begin
 val(lat.text,x,i);
 if i=0 then latitude:=x;
-//ObsLatitude:=latitude;
+csc.ObsLatitude:=latitude;
 end;
 
 procedure Tpop_lx200.longChange(Sender: TObject);
@@ -845,7 +846,7 @@ var x : double;
 begin
 val(long.text,x,i);
 if i=0 then longitude:=x;
-//ObsLongitude:=longitude;
+csc.ObsLongitude:=longitude;
 end;
 
 procedure Tpop_lx200.SpeedButton5Click(Sender: TObject);
@@ -1392,8 +1393,5 @@ procedure Tpop_lx200.SlewSpeedBarChange(Sender: TObject);
 begin
 LX200_SlewSpeed(pop_lx200.SlewSpeedBar.Position);
 end;
-
-initialization
-pop_lx200:=Tpop_lx200.Create(nil);
 
 end.

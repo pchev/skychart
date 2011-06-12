@@ -36,7 +36,7 @@ uses
      {$ifdef mswindows}
      pu_ascomclient,
      {$endif}
-     pu_lx200client,
+     pu_lx200client, pu_encoderclient,
      u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,pu_image,
      u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
@@ -204,6 +204,8 @@ type
     procedure SlewLX200(Sender: TObject);
     procedure SyncLX200(Sender: TObject);
     procedure AbortSlewLX200(Sender: TObject);
+    procedure ConnectEncoder(Sender: TObject);
+    procedure SyncEncoder(Sender: TObject);
     procedure ConnectPlugin(Sender: TObject);
     procedure SlewPlugin(Sender: TObject);
     procedure AbortSlewPlugin(Sender: TObject);
@@ -450,6 +452,10 @@ try
  if pop_lx200<>nil then begin
    if Connect1.Checked then pu_lx200client.ScopeDisconnect(ok);
    pop_lx200.Free;
+ end;
+ if pop_encoder<>nil then begin
+   if Connect1.Checked then pu_encoderclient.ScopeDisconnect(ok);
+   pop_encoder.Free;
  end;
  for i:=1 to maxundo do undolist[i].Free;
  {$ifdef trace_debug}
@@ -3276,6 +3282,9 @@ else
 if sc.cfgsc.LX200Telescope then begin
    ConnectLX200(Sender);
 end
+else if sc.cfgsc.EncoderTelescope then begin
+   ConnectEncoder(Sender);
+end
 else if sc.cfgsc.ManualTelescope then begin
    sc.cfgsc.TelescopeJD:=0;
 end
@@ -3327,6 +3336,9 @@ if Connect1.checked then begin
   if sc.cfgsc.LX200Telescope then begin
    SlewLX200(Sender);
   end
+  else if sc.cfgsc.EncoderTelescope then begin
+   // no slew
+  end
   else if sc.cfgsc.IndiTelescope then
   begin
     ra:=sc.cfgsc.FindRA;
@@ -3357,6 +3369,9 @@ else
 if sc.cfgsc.LX200Telescope then begin
  AbortSlewLX200(Sender);
 end
+else if sc.cfgsc.EncoderTelescope then begin
+   // no slew
+  end
 else if sc.cfgsc.IndiTelescope then
 begin
   Indi1.AbortSlew;
@@ -3384,6 +3399,9 @@ else
 {$endif}
 if sc.cfgsc.LX200Telescope then begin
  SyncLX200(Sender);
+end
+else if sc.cfgsc.EncoderTelescope then begin
+   SyncEncoder(Sender);
 end
 else if sc.cfgsc.IndiTelescope then
 begin
@@ -3581,7 +3599,10 @@ end;
 
 procedure Tf_chart.ConnectLX200(Sender: TObject);
 begin
-if pop_lx200=nil then pop_lx200:=Tpop_lx200.Create(self);
+if pop_lx200=nil then begin
+  pop_lx200:=Tpop_lx200.Create(self);
+  pop_lx200.csc:=sc.cfgsc;
+end;
 if Connect1.checked then begin
    pu_lx200client.ScopeShow;
 end else begin
@@ -3626,6 +3647,40 @@ end else begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 pu_lx200client.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+end;
+
+// Encoder interface
+
+procedure Tf_chart.ConnectEncoder(Sender: TObject);
+begin
+if pop_encoder=nil then begin
+  pop_encoder:=Tpop_encoder.Create(self);
+  pop_encoder.csc:=sc.cfgsc;
+end;
+if Connect1.checked then begin
+   pu_encoderclient.ScopeShow;
+end else begin
+     pu_encoderclient.ScopeReadConfig(ExtractFilePath(Configfile));
+     pu_encoderclient.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+     pu_encoderclient.ScopeShow;
+     TelescopeTimer.Enabled:=true;
+     sc.cfgsc.TrackOn:=true;
+end;
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+end;
+
+procedure Tf_chart.SyncEncoder(Sender: TObject);
+var ra,dec:double;
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.TelescopeJD=0 then begin
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+end else begin
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+end;
+pu_encoderclient.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
 
@@ -3841,6 +3896,35 @@ else if sc.cfgsc.LX200Telescope then begin
       pu_lx200client.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
       pu_lx200client.ScopeGetRaDec(ra,dec,ok);
+      if ok then begin
+         ra:=ra*15*deg2rad;
+         dec:=dec*deg2rad;
+         if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
+            else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
+         if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
+         if sc.cfgsc.moved then begin
+            Image1.Invalidate;
+            if assigned(FChartMove) then FChartMove(self);
+         end;
+         TelescopeTimer.Interval:=500;
+         TelescopeTimer.Enabled:=true;
+      end;
+     end else begin
+      TelescopeTimer.Interval:=2000;
+      TelescopeTimer.Enabled:=true;
+      if sc.cfgsc.ScopeMark then begin
+         sc.cfgsc.ScopeMark:=false;
+         sc.cfgsc.TrackOn:=false;
+         Refresh;
+      end;
+     end;
+ end
+else if sc.cfgsc.EncoderTelescope then begin
+     Connect1.checked:=pu_encoderclient.ScopeConnected;
+     if Connect1.checked then begin
+      pu_encoderclient.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      pu_encoderclient.ScopeGetRaDec(ra,dec,ok);
       if ok then begin
          ra:=ra*15*deg2rad;
          dec:=dec*deg2rad;
