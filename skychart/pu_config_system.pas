@@ -11,7 +11,6 @@ pch@freesurf.ch
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -49,9 +48,17 @@ type
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
     ASCOMPanel: TPanel;
+    PageControl2: TPageControl;
+    PageControl3: TPageControl;
     Panel2: TPanel;
     SqliteBoxLabel: TLabel;
     SqliteBox: TPanel;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
     TelescopeManualLabel: TLabel;
     TelescopePluginLabel: TLabel;
     LanguageList: TComboBox;
@@ -798,10 +805,12 @@ csc.PluginTelescope:=Telescopeselect.itemindex=2;
 csc.ASCOMTelescope:=Telescopeselect.itemindex=3;
 csc.LX200Telescope:=Telescopeselect.itemindex=4;
 csc.EncoderTelescope:=Telescopeselect.itemindex=5;
-INDI.visible:=csc.IndiTelescope;
-TelescopePlugin.visible:=csc.PluginTelescope;
-TelescopeManual.visible:=csc.ManualTelescope;
-ASCOMPanel.visible:=csc.ASCOMTelescope or csc.LX200Telescope or csc.EncoderTelescope;
+if csc.IndiTelescope then PageControl2.ActivePage:=TabSheet1;
+if csc.ManualTelescope then PageControl2.ActivePage:=TabSheet2;
+if csc.PluginTelescope then PageControl2.ActivePage:=TabSheet3;
+if csc.ASCOMTelescope then PageControl2.ActivePage:=TabSheet4;
+if csc.LX200Telescope then PageControl2.ActivePage:=TabSheet4;
+if csc.EncoderTelescope then PageControl2.ActivePage:=TabSheet4;
 end;
 
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);
@@ -912,14 +921,12 @@ begin
 csc.ManualTelescopeType:=ManualMountType.ItemIndex;
 case csc.ManualTelescopeType of
   0 : begin
-        AltAzMount.Visible:=false;
-        EquatorialMount.Visible:=true;
+        PageControl3.ActivePage:=TabSheet5;
         TurnsDecChange(Sender);
         TurnsRaChange(Sender);
       end;
   1 : begin
-        AltAzMount.Visible:=true;
-        EquatorialMount.Visible:=false;
+        PageControl3.ActivePage:=TabSheet6;
         TurnsAzChange(Sender);
         TurnsAltChange(Sender);
       end;
