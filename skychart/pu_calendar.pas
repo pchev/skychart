@@ -673,7 +673,7 @@ cells[5,0]:=appmsg[36];
 cells[5,1]:=appmsg[28];
 cells[6,0]:=appmsg[37];
 cells[6,1]:=appmsg[28];
-cells[7,0]:=appmsg[38];
+cells[7,0]:=appmsg[39];
 cells[7,1]:=appmsg[40];
 cells[8,0]:=appmsg[39];
 cells[8,1]:=appmsg[41];
@@ -815,9 +815,9 @@ end;
 
 procedure Tf_calendar.RefreshLunarEclipse;
 var f : textfile;
-    buf,mm,century : string;
+    buf,mm,century,dbuf : string;
     h,jda : double;
-    i,n,a,m,j : integer;
+    i,n,a,m,j,d : integer;
 begin
 dat51:=date1.jd;
 djd(dat51,j,m,a,h);
@@ -851,8 +851,22 @@ with lunargrid do begin
   cells[4,i]:=copy(buf,30,6);
   cells[5,i]:=copy(buf,38,5);
   cells[6,i]:=copy(buf,44,6);
-  cells[7,i]:=copy(buf,51,4);
-  cells[8,i]:=copy(buf,56,4);
+  dbuf:=copy(buf,51,4);
+  if pos('m',dbuf)>0 then begin
+    d:=strtointdef(trim(StringReplace(dbuf,'m','',[rfReplaceAll])),-1);
+    if d>0 then begin
+      dbuf:=inttostr(2*d)+'m';
+    end;
+  end;
+  cells[7,i]:=dbuf;
+  dbuf:=copy(buf,56,4);
+  if pos('m',dbuf)>0 then begin
+    d:=strtointdef(trim(StringReplace(dbuf,'m','',[rfReplaceAll])),-1);
+    if d>0 then begin
+      dbuf:=inttostr(2*d)+'m';
+    end;
+  end;
+  cells[8,i]:=dbuf;
   a:=strtointdef(copy(cells[0,i],1,5),-9999);
   mm:=copy(cells[0,i],7,3);
   m:=0;
