@@ -1,12 +1,12 @@
 object pop_encoder: Tpop_encoder
   Left = 253
-  Height = 448
+  Height = 457
   Top = 111
-  Width = 326
+  Width = 334
   BorderStyle = bsToolWindow
   Caption = 'Digital encoders'
-  ClientHeight = 448
-  ClientWidth = 326
+  ClientHeight = 457
+  ClientWidth = 334
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
@@ -21,7 +21,7 @@ object pop_encoder: Tpop_encoder
     Left = 296
     Height = 22
     Hint = 'Help...'
-    Top = 426
+    Top = 432
     Width = 23
     Glyph.Data = {
       4E010000424D4E01000000000000760000002800000012000000120000000100
@@ -41,23 +41,23 @@ object pop_encoder: Tpop_encoder
   end
   object PageControl1: TPageControl
     Left = 0
-    Height = 421
+    Height = 428
     Top = 4
-    Width = 321
+    Width = 330
     ActivePage = TabSheet1
     TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 393
-      ClientWidth = 317
+      ClientHeight = 400
+      ClientWidth = 326
       object Panel1: TPanel
         Left = 8
         Height = 61
         Top = 4
-        Width = 297
+        Width = 310
         ClientHeight = 61
-        ClientWidth = 297
+        ClientWidth = 310
         TabOrder = 0
         object LabelAlpha: TLabel
           Left = 6
@@ -128,9 +128,9 @@ object pop_encoder: Tpop_encoder
         Left = 8
         Height = 202
         Top = 130
-        Width = 297
+        Width = 310
         ClientHeight = 198
-        ClientWidth = 293
+        ClientWidth = 306
         TabOrder = 1
         object SpeedButton4: TSpeedButton
           Left = 222
@@ -162,7 +162,7 @@ object pop_encoder: Tpop_encoder
           Left = 4
           Height = 142
           Top = 46
-          Width = 289
+          Width = 296
           Columns = <>
           Font.Color = clWindowText
           ParentFont = False
@@ -176,9 +176,9 @@ object pop_encoder: Tpop_encoder
         Left = 8
         Height = 41
         Top = 344
-        Width = 297
+        Width = 310
         ClientHeight = 37
-        ClientWidth = 293
+        ClientWidth = 306
         TabOrder = 2
         object SpeedButton1: TSpeedButton
           Left = 2
@@ -190,7 +190,7 @@ object pop_encoder: Tpop_encoder
           OnClick = setresClick
         end
         object SpeedButton2: TSpeedButton
-          Left = 226
+          Left = 239
           Height = 22
           Top = 0
           Width = 61
@@ -202,7 +202,7 @@ object pop_encoder: Tpop_encoder
           Left = 160
           Height = 22
           Top = 0
-          Width = 61
+          Width = 77
           Caption = 'Disconnect'
           NumGlyphs = 0
           OnClick = SpeedButton5Click
@@ -232,9 +232,9 @@ object pop_encoder: Tpop_encoder
         Height = 44
         Hint = 'This require your device understand the "P" command'
         Top = 74
-        Width = 297
+        Width = 310
         ClientHeight = 44
-        ClientWidth = 297
+        ClientWidth = 310
         ParentShowHint = False
         ShowHint = True
         TabOrder = 3
@@ -298,17 +298,17 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet2: TTabSheet
       Caption = 'Encoder Configuration'
-      ClientHeight = 393
-      ClientWidth = 317
+      ClientHeight = 400
+      ClientWidth = 326
       ImageIndex = 1
       object GroupBox2: TGroupBox
         Left = 8
         Height = 157
         Top = 12
-        Width = 297
+        Width = 310
         Caption = 'Encoder Configuration'
         ClientHeight = 141
-        ClientWidth = 293
+        ClientWidth = 306
         TabOrder = 0
         object Label2: TLabel
           Left = 22
@@ -414,9 +414,9 @@ object pop_encoder: Tpop_encoder
         end
       end
       object SaveButton1: TButton
-        Left = 204
+        Left = 214
         Height = 25
-        Top = 360
+        Top = 370
         Width = 89
         Caption = 'Save Setting'
         OnClick = SaveButton1Click
@@ -426,7 +426,7 @@ object pop_encoder: Tpop_encoder
         Left = 8
         Height = 41
         Top = 168
-        Width = 147
+        Width = 158
         AutoFill = True
         Caption = 'Mount type'
         ChildSizing.LeftRightSpacing = 6
@@ -438,7 +438,7 @@ object pop_encoder: Tpop_encoder
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 25
-        ClientWidth = 143
+        ClientWidth = 154
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
@@ -450,12 +450,12 @@ object pop_encoder: Tpop_encoder
       end
       object GroupBox5: TGroupBox
         Left = 8
-        Height = 97
-        Top = 256
-        Width = 297
+        Height = 90
+        Top = 266
+        Width = 312
         Caption = 'Observatory '
-        ClientHeight = 81
-        ClientWidth = 293
+        ClientHeight = 74
+        ClientWidth = 308
         TabOrder = 3
         object Label15: TLabel
           Left = 22
@@ -467,10 +467,10 @@ object pop_encoder: Tpop_encoder
         end
         object Label16: TLabel
           Left = 22
-          Height = 49
+          Height = 32
           Top = 37
           Width = 86
-          Caption = 'Longitude :'#13#10'(negative east '#13#10'of Greenwich)'
+          Caption = 'Longitude :'#13#10'(negative east)'
           ParentColor = False
         end
         object lat: TEdit
@@ -493,14 +493,14 @@ object pop_encoder: Tpop_encoder
         end
       end
       object GroupBox7: TGroupBox
-        Left = 8
+        Left = 10
         Height = 49
         Hint = 'Mount fabrication error as defined by Toshimi Taki (S&T Feb 1989)'
-        Top = 208
-        Width = 297
+        Top = 218
+        Width = 310
         Caption = 'Mount fabrication error'
         ClientHeight = 33
-        ClientWidth = 293
+        ClientWidth = 306
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
@@ -531,24 +531,20 @@ object pop_encoder: Tpop_encoder
         object Z1T: TFloatEdit
           Left = 40
           Height = 22
-          Hint = 'Elevation axis offset from the perpendicular to the horizontal axis.'
-          Top = 19
+          Top = 4
           Width = 49
           ParentShowHint = False
-          ShowHint = True
           TabOrder = 0
           Value = 0
           MinValue = 0
           MaxValue = 0
         end
         object Z2T: TFloatEdit
-          Left = 136
+          Left = 140
           Height = 22
-          Hint = 'Optical axis offset'
-          Top = 19
+          Top = 4
           Width = 49
           ParentShowHint = False
-          ShowHint = True
           TabOrder = 1
           Value = 0
           MinValue = 0
@@ -557,11 +553,9 @@ object pop_encoder: Tpop_encoder
         object Z3T: TFloatEdit
           Left = 232
           Height = 22
-          Hint = 'Elevation axis zero shifting'
-          Top = 19
+          Top = 4
           Width = 49
           ParentShowHint = False
-          ShowHint = True
           TabOrder = 2
           Value = 0
           MinValue = 0
@@ -569,10 +563,10 @@ object pop_encoder: Tpop_encoder
         end
       end
       object InitType: TRadioGroup
-        Left = 158
+        Left = 166
         Height = 41
         Top = 168
-        Width = 147
+        Width = 155
         AutoFill = True
         Caption = 'Encoder initialization angle'
         ChildSizing.LeftRightSpacing = 6
@@ -584,12 +578,12 @@ object pop_encoder: Tpop_encoder
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 25
-        ClientWidth = 143
+        ClientWidth = 151
         Columns = 2
         ItemIndex = 1
         Items.Strings = (
-          '0 degree'
-          '90 degree'
+          '0 deg.'
+          '90 deg.'
         )
         OnClick = InitTypeClick
         TabOrder = 5
@@ -615,8 +609,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet3: TTabSheet
       Caption = 'Port Configuration'
-      ClientHeight = 393
-      ClientWidth = 317
+      ClientHeight = 400
+      ClientWidth = 326
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
@@ -825,7 +819,7 @@ object pop_encoder: Tpop_encoder
           Top = 10
           Width = 268
           Alignment = taCenter
-          Caption = 'Interface for Tangent like system.'#13#10'Will work with all systems using same protocol'#13#10'(Ouranos, NGC MAX,MicroGuider,..)'#13#10'PJ Pallez Nov 1999'#13#10'P. Chevalley Nov 2001'#13#10'Version 2.0'
+          Caption = 'Interface for Tangent like system.'#13#10'Will work with all systems using same protocol'#13#10'(Ouranos, NGC MAX,MicroGuider,..)'#13#10'PJ Pallez Nov 1999'#13#10'P. Chevalley 2001, 2011'#13#10'Version 3.0'
           ParentColor = False
         end
       end
@@ -834,13 +828,13 @@ object pop_encoder: Tpop_encoder
   object StatusBar1: TStatusBar
     Left = 0
     Height = 18
-    Top = 429
+    Top = 432
     Width = 289
     Align = alNone
     Panels = <>
   end
   object PopupMenu1: TPopupMenu
-    left = 260
+    left = 232
     top = 4
     object Delete1: TMenuItem
       Caption = 'Delete'
@@ -850,7 +844,6 @@ object pop_encoder: Tpop_encoder
   object Timer1: TTimer
     Interval = 500
     OnTimer = Timer1Timer
-    left = 292
-    top = 4
+    left = 264
   end
 end
