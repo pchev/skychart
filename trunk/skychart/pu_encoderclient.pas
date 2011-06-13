@@ -347,9 +347,7 @@ if pop_encoder<>nil then begin
 pop_encoder.lat.text:=floattostr(la);
 pop_encoder.long.text:=floattostr(lo);
 latitude:=la;
-pop_encoder.csc.ObsLatitude:=la;
 longitude:=lo;
-pop_encoder.csc.ObsLongitude:=lo;
 end;
 end;
 
@@ -968,7 +966,6 @@ var x : double;
 begin
 val(lat.text,x,i);
 if i=0 then latitude:=x;
-csc.ObsLatitude:=latitude;
 end;
 
 procedure Tpop_encoder.longChange(Sender: TObject);
@@ -977,7 +974,6 @@ var x : double;
 begin
 val(long.text,x,i);
 if i=0 then longitude:=x;
-csc.ObsLongitude:=longitude;
 end;
 
 procedure Tpop_encoder.MounttypeClick(Sender: TObject);
