@@ -1414,7 +1414,7 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
       end;
     inc(i);
   until i >= Grd.RowCount;
-  if ir then begin
+  if ir and (ix > -9000) then begin
     cv.LineTo(ix, ygbtm);
     if s <> '' then begin
       txtsz := cv.TextExtent(s);
