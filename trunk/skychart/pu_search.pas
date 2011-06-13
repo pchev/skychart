@@ -182,6 +182,42 @@ if Fnightvision<>nightvision then begin
    Fnightvision:=nightvision;
 end;
 {$endif}
+// return cursor to corresponding input box
+case RadioGroup1.itemindex of
+  0 : begin                      //neb
+      ActiveControl:=Id;
+      end;
+  1 : begin                      //neb name
+      ActiveControl:=NebNameBox;
+      end;
+  2 : begin                      //star
+      ActiveControl:=Id;
+      end;
+  3 : begin                      //star name
+      ActiveControl:=StarNameBox;
+      end;
+  4 : begin                      //var
+      ActiveControl:=Id;
+      end;
+  5 : begin                      //dbl
+      ActiveControl:=Id;
+      end;
+  6 : begin                      //comet
+      ActiveControl:=CometList;
+      end;
+  7 : begin                      //asteroid
+      ActiveControl:=AsteroidList;
+      end;
+  8 : begin                      //planet
+      ActiveControl:=PlanetBox;
+      end;
+  9 : begin                      //const
+      ActiveControl:=ConstBox;
+      end;
+  10 : begin                      //Other Line Catalog , not active at the moment as Catgen do not allow to create the index for line cat.
+      ActiveControl:=Id;
+      end;
+end;
 end;
 
 procedure Tf_search.CatButtonClick(Sender: TObject);
