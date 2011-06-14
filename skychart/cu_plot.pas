@@ -297,7 +297,7 @@ procedure TSplot.ClearImage;
 begin
 if cfgplot.UseBMP then begin
    cbmp.Fill(cfgplot.Color[0]);
-end else with cnv do begin
+end else  if cnv<>nil then with cnv do begin
  Brush.Color:=cfgplot.Color[0];
  Pen.Color:=cfgplot.Color[0];
  Brush.style:=bsSolid;
@@ -327,7 +327,7 @@ end else begin
 end;
 ClearImage;
 if not cfgplot.UseBMP then
-with cnv do begin
+ if cnv<>nil then with cnv do begin
  Font.CharSet:=FCS_ISO_10646_1;
 {$ifndef lclqt}      // problem with QT clipping
  if cfgchart.onprinter then begin
@@ -350,7 +350,7 @@ Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integ
 var xmin,xmax,ymin,ymax: integer;
 begin
   if (not cfgplot.UseBMP)and((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
-      with cnv do begin
+       if cnv<>nil then with cnv do begin
         Pen.Color := clWhite;
         Pen.Width := 1;
         Pen.Mode := pmCopy;
@@ -592,7 +592,7 @@ yy:=round(y);
  if cfgplot.UseBMP then begin
    cbmp.PutImage(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Bstarbmp[ico,isz],dmDrawWithTransparency);
  end else
-   with cnv do begin
+   if cnv<>nil then with cnv do begin
    CopyMode:=cmSrcCopy;
    Draw(xx-cfgplot.starshapew*starbmpw,yy-cfgplot.starshapew*starbmpw,Astarbmp[ico,isz]);
    end;
@@ -625,7 +625,7 @@ ds2:= round(ds/2);
 if cfgplot.UseBMP then begin
   cbmp.EllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
   cbmp.FillEllipseAntialias(x,y,ds/2,ds/2,ColorToBGRA(co));
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
    Pen.Mode := pmCopy;
@@ -781,7 +781,7 @@ if not cfgplot.Invisible then begin
     // internal ellipse
     ds2:= trunc(dsm/2);
     cbmp.EllipseAntialias(x,y,ds2,ds2,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
-  end else with cnv do begin
+  end else if cnv<>nil then with cnv do begin
      // external ellipse
      ds2:= trunc(ds/2)+cfgchart.drawpen;
      Brush.Color := cfgplot.Color[0];
@@ -838,7 +838,7 @@ if not cfgplot.Invisible then
  if cfgplot.UseBMP then begin
    PlotStar(x,y,ma,b_v);
    BGRADrawLine(x,y,x-round(rd*sin(pa)),y-round(rd*cos(pa)),ColorToBGRA(cfgplot.Color[15]),1,cbmp);
- end else with cnv do begin
+ end else if cnv<>nil then with cnv do begin
    PlotStar(x,y,ma,b_v);
    Pen.Width := 1;
    Pen.Color := cfgplot.Color[15];
@@ -933,7 +933,7 @@ then begin
    lwidth:=lwidth*cfgchart.drawpen;
 if cfgplot.UseBMP then begin
     BGRADrawLine(x1,y1,x2,y2,ColorToBGRA(lcolor),lwidth,cbmp,style);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   Pen.width:=lwidth;
   Brush.Style:=bsClear;
   Brush.Color:=cfgplot.backgroundcolor;
@@ -1197,7 +1197,7 @@ if cfgplot.UseBMP then begin
                                 else col.alpha:=255;
    cbmp.EllipseAntialias(xx,yy,ds,ds,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
    cbmp.FillEllipseAntialias(xx,yy,ds,ds,col);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
    if cfgplot.Color[11]>cfgplot.BgColor then begin
      Brush.Color := cfgplot.Color[ico+1] ;
    end
@@ -1486,7 +1486,7 @@ if cfgplot.UseBMP then begin
       mc.Free;
       end;  // 1
     end; // case
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   case  cfgplot.nebplot of
    0: begin
       Pen.Width := cfgchart.drawpen;
@@ -1549,7 +1549,7 @@ if not cfgplot.Invisible then
       if cfgplot.UseBMP then begin
         cbmp.FillEllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[20]));
         cbmp.EllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[0]),cfgchart.drawpen);
-      end else with cnv do begin
+      end else if cnv<>nil then with cnv do begin
         Pen.Color := cfgplot.Color[0];
         Pen.Width := cfgchart.drawpen;
         Brush.style:=bsSolid;
@@ -1618,7 +1618,7 @@ if cfgplot.UseBMP then begin
        th:=th+step;
      end;
    end;
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   Pen.Width := cfgchart.drawpen;
   Brush.Color := cfgplot.Color[0];
   Pen.Color := cfgplot.Color[5];
@@ -1672,7 +1672,7 @@ case symbol of
         diamondf[3]:=pointf(x-ds,y);
         cbmp.FillPolyAntialias(diamondf,ColorToBGRA(cfgplot.Color[20]));
         cbmp.DrawPolygonAntialias(diamondf,ColorToBGRA(cfgplot.Color[0]),cfgchart.DrawPen);
-      end else with cnv do begin
+      end else if cnv<>nil then with cnv do begin
          xx:=round(x);
          yy:=round(y);
          Pen.Color := cfgplot.Color[0];
@@ -1807,7 +1807,7 @@ if cfgplot.UseBMP then begin
         PlotLine(xx,yy,cxx,cyy,cfgplot.Color[21],1);
       end;
    end;
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
    Pen.Color := cfgplot.Color[0];
    Pen.Width := cfgchart.DrawPen;
    Pen.Mode := pmCopy;
@@ -1958,7 +1958,7 @@ if cfgplot.UseBMP then begin;
   end;
   if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   BGRATextOut(xxs,yys,txt,ColorToBGRA(lcolor),cbmp);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
   TextStyle:=ATextStyle;
@@ -2075,7 +2075,7 @@ if cfgplot.UseBMP then begin;
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   if opaque then cbmp.FillRect(xx,yy,xx+ts.cx,yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   BGRATextOut(xx,yy,txt,ColorToBGRA(lcolor),cbmp);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
   TextStyle:=ATextStyle;
@@ -2154,7 +2154,7 @@ if cfgplot.UseBMP then begin;
      BGRATextOut(xx,yy,buf,ColorToBGRA(lcolor),cbmp);
      yy:=yy+ls;
    until p=0;
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
     ATextStyle := TextStyle;
     ATextStyle.Opaque:=opaque;
     TextStyle:=ATextStyle;
@@ -2360,7 +2360,7 @@ if cfgplot.UseBMP and (not moving) then begin
  y:=(y1+y2)/2;
  r:=abs(x1-x2)/2;
  cbmp.EllipseAntialias(x,y,r,r,ColorToBGRA(lcolor),cfgchart.drawpen);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
      Pen.Color:=clWhite;
@@ -2418,7 +2418,7 @@ end else begin
        BGRADrawLine(rosex-(roserd*s/8),rosey+(roserd/8*c),rosex+(roserd*s/8),rosey-(roserd/8*c),col,cfgchart.drawpen,cbmp);
        end;
     end;
-  end else with cnv do begin
+  end else if cnv<>nil then with cnv do begin
     Pen.Width:=cfgchart.drawpen;
     Pen.Mode:=pmCopy;
     Brush.Style:=bsClear;
@@ -2467,7 +2467,7 @@ Procedure TSplot.PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean)
 begin
 if cfgplot.UseBMP and (not moving) then begin
  cbmp.DrawPolyLineAntialias(p,ColorToBGRA(lcolor),true);
-end else with cnv do begin
+end else if cnv<>nil then with cnv do begin
   Pen.Width:=cfgchart.drawpen;
   if moving then begin
      Pen.Color:=clWhite;
