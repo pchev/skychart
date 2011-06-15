@@ -277,6 +277,10 @@ object f_chart: Tf_chart
     end
     object Telescope1: TMenuItem
       Caption = 'Telescope'
+      object SlewCursor: TMenuItem
+        Caption = 'Slew to cursor position'
+        OnClick = SlewCursorClick
+      end
       object Slew1: TMenuItem
         Caption = 'Slew'
         OnClick = Slew1Click
@@ -292,6 +296,10 @@ object f_chart: Tf_chart
       object AbortSlew1: TMenuItem
         Caption = 'Abort Slew'
         OnClick = AbortSlew1Click
+      end
+      object TrackTelescope: TMenuItem
+        Caption = 'TrackTelescope'
+        OnClick = TrackTelescopeClick
       end
     end
     object N3: TMenuItem

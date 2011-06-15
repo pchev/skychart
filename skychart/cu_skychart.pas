@@ -3701,10 +3701,10 @@ begin
 result:=false;
 cfgsc.moved:=false;
 if (ra<>cfgsc.ScopeRa)or(dec<>cfgsc.ScopeDec) then begin
-cfgsc.TrackType:=6;
+{cfgsc.TrackType:=6;
 cfgsc.TrackName:=rsTelescope;
 cfgsc.TrackRA:=ra;
-cfgsc.TrackDec:=dec;
+cfgsc.TrackDec:=dec;    }
 if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
 DrawFinderMark(ra,dec,true);
 cfgsc.ScopeRa:=ra;
@@ -3715,6 +3715,11 @@ if (dist>cfgsc.fov/4)and(cfgsc.TrackOn) then begin
    if not cfgsc.scopelock then begin
       result:=true;
       cfgsc.scopelock:=true;
+      if cfgsc.TrackOn and (cfgsc.TrackName=rsTelescope) then begin
+        cfgsc.TrackType:=6;
+        cfgsc.TrackRA:=ra;
+        cfgsc.TrackDec:=dec;
+      end;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
 {$ifdef trace_debug}
  WriteTrace('TelescopeMove');

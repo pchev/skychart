@@ -32,7 +32,7 @@ uses
   {$ifdef mswindows}
     Windows, ShlObj,
   {$endif}
-  u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
+  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
@@ -48,6 +48,7 @@ type
   Tf_main = class(TForm)
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
+    TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
     NextChild1: TMenuItem;
@@ -509,6 +510,7 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonswitchstarsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure TrackTelescope1Click(Sender: TObject);
     procedure VariableStar1Click(Sender: TObject);
     procedure View1Click(Sender: TObject);
     procedure ViewBarExecute(Sender: TObject);
@@ -766,7 +768,7 @@ uses
      gtk2proc,
     {$endif}
 {$endif}
-     LCLProc,lclstrconsts,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
+     LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print, pu_clock;
 
@@ -2648,7 +2650,14 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
   end;
 end;
 end;
-        
+
+procedure Tf_main.TrackTelescope1Click(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
+  TrackTelescopeClick(Sender);
+end;
+end;
+
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
@@ -5587,6 +5596,7 @@ end else begin
 end;
 telescopeConnect1.caption:='&'+TConnect.hint;
 telescopeConnect.caption:='&'+TConnect.hint;
+TrackTelescope1.Caption:=rsTrackTelesco;
 TSlew.hint:=rsSlew;
 TSync.hint:=rsSync;
 ToolButtonShowStars.hint:=rsShowStars;
@@ -5895,7 +5905,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                   TConnect.Hint:=rsDisconnectTe;
                telescopeConnect1.caption:='&'+TConnect.hint;
                telescopeConnect1.Checked:=true;
-               Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
+               //Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end else begin
                TConnect.ImageIndex:=48;
                if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then
@@ -5904,7 +5914,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
                   TConnect.Hint:=rsConnectTeles;
                telescopeConnect1.caption:='&'+TConnect.hint;
                telescopeConnect1.Checked:=false;
-               Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
+               //Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
   PrintPreview1.Visible:=(cfgm.PrintMethod=0);
@@ -5922,6 +5932,8 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
        TSlew.Enabled:=true;
        TSync.Enabled:=true;
     end;
+    TrackTelescope1.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
+    Tf_chart(sender).TrackTelescope.Checked:=TrackTelescope1.Checked;
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
     ShowStars1.checked:=sc.cfgsc.showstars;
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;

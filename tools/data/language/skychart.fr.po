@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-06-05 19:24+0200\n"
+"PO-Revision-Date: 2011-06-15 13:42+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3949,6 +3949,10 @@ msgstr "Couleur du ciel"
 msgid "Slew"
 msgstr "Goto"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr "Goto position du curseur"
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Petite étoiles"
@@ -4348,6 +4352,10 @@ msgid ""
 "Before you can use the new orbital elements, you must compute the monthly "
 "data."
 msgstr "Pour utiliser ces données vous devez calculer les données mensuelles"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr "Suit le télescope"
 
 #: u_translation.rstransformati
 msgid "Transformation"

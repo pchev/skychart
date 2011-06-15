@@ -1,7 +1,7 @@
 object f_main: Tf_main
-  Left = 217
+  Left = 165
   Height = 600
-  Top = 138
+  Top = 111
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
@@ -6477,6 +6477,12 @@ object f_main: Tf_main
           E7FF949797FF1E2325FFCFCECEFF000000000000000000000000
         }
         OnClick = TelescopeSyncExecute
+      end
+      object TrackTelescope1: TMenuItem
+        AutoCheck = True
+        Caption = 'Track Telescope'
+        ShowAlwaysCheckable = True
+        OnClick = TrackTelescope1Click
       end
     end
     object Window1: TMenuItem

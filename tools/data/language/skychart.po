@@ -4606,3 +4606,11 @@ msgstr ""
 msgid "Encoders"
 msgstr ""
 
+#: u_translation:rstracktelesco
+msgid "Track telescope"
+msgstr ""
+
+#: u_translation:rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+

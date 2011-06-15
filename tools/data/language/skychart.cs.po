@@ -3892,6 +3892,10 @@ msgstr "Barva oblohy"
 msgid "Slew"
 msgstr "Sledovat"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr ""
@@ -4271,6 +4275,10 @@ msgstr "Celkový poloměr"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Aby bylo možné tato nová data použít, musíte nejprve spočítat měsíční data"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

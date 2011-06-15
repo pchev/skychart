@@ -3895,6 +3895,10 @@ msgstr "Himmelsfarbe"
 msgid "Slew"
 msgstr "Gehe zu Objekt"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Kleine Sterne"
@@ -4274,6 +4278,10 @@ msgstr "Gesamtradius"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Bevor die neuen Orbitalelemente benutzt werden können, müssen die monatlichen Daten berechnet werden."
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

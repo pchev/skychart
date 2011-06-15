@@ -3894,6 +3894,10 @@ msgstr "Колір неба"
 msgid "Slew"
 msgstr "Поворот"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Малі розміри"
@@ -4273,6 +4277,10 @@ msgstr "Повний радіус"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Щоб використовувати ці нові дані далі, ви повинні зараз обчислити Щомісячні Дані"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

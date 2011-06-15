@@ -3894,6 +3894,10 @@ msgstr "天空顏色"
 msgid "Slew"
 msgstr "迴轉"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "小星"
@@ -4273,6 +4277,10 @@ msgstr "總半徑"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "在使用新的給到要素之前，你必須計算這個月的資料。"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

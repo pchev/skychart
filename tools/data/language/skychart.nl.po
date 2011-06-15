@@ -3892,6 +3892,10 @@ msgstr "Hemelkleur"
 msgid "Slew"
 msgstr "Beweeg telescoop naar object"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Kleine sterren"
@@ -4271,6 +4275,10 @@ msgstr "Totale straal"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Om deze nieuwe gegevens te gebruiken moet u de maandelijkse gegevens berekenen."
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
