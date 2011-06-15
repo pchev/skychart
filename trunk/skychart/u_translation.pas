@@ -1173,6 +1173,8 @@ resourcestring
   rsPreview = 'Preview';
   rsPrintPreview = 'Print Preview';
   rsEncoders = 'Encoders';
+  rsTrackTelesco = 'Track telescope';
+  rsSlewToCursor = 'Slew to cursor position';
 
 implementation
 

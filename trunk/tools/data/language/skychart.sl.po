@@ -3894,6 +3894,10 @@ msgstr "Barva neba"
 msgid "Slew"
 msgstr "Zavrti"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Male zvezde"
@@ -4273,6 +4277,10 @@ msgstr "Celoten polmer"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Da lahko uporabljaš te podatke, moraš izračunati mesečne podatke"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

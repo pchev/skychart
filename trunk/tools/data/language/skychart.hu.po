@@ -4270,6 +4270,10 @@ msgstr "Ég színe"
 msgid "Slew"
 msgstr "Mozgatás"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Kis csillagok"
@@ -4688,6 +4692,10 @@ msgstr "Teljes sugár"
 #| msgid "To use this new data you must now compute the Monthly Data"
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Ezen adatok használatához most a havi adatokat kell előkészítened"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

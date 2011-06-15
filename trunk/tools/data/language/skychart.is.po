@@ -4665,6 +4665,10 @@ msgstr "Litur himins"
 msgid "Slew"
 msgstr "Snúa"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Litlar stjö."
@@ -5124,6 +5128,10 @@ msgstr "Heildarradíus"
 #| msgid "To use this new data you must now compute the Monthly Data"
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Til þess að nota þessi nýju gögn verðurðu núna að reikna mánaðarlegar upplýsingar"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

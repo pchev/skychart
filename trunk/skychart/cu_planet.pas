@@ -1527,7 +1527,7 @@ if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
         db1.Query('CREATE UNIQUE INDEX IDX_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (id,epoch)');
         db1.Query('CREATE INDEX IDX2_'+cfgsc.ast_daypos+' ON '+cfgsc.ast_daypos+' (near_earth)');
      end;
-     qry:='SELECT distinct(jd) from cdc_ast_mag where mag<110';
+     qry:='SELECT distinct(jd) from cdc_ast_mag';
      db1.Query(qry);
      if db1.Rowcount>0 then begin
         jd1:=strtofloat(trim(db1.Results[0][0]));

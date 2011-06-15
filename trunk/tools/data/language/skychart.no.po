@@ -3892,6 +3892,10 @@ msgstr "Himmelfarge"
 msgid "Slew"
 msgstr "Beveg til objekt"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Små stjerner"
@@ -4271,6 +4275,10 @@ msgstr "Total radius"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Før du kan bruke de nye bane-elementene, må du beregne de månedlige dataene."
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"

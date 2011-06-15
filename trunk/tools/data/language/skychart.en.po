@@ -3889,6 +3889,10 @@ msgstr ""
 msgid "Slew"
 msgstr ""
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr ""
@@ -4267,6 +4271,10 @@ msgstr ""
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
+msgstr ""
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
 msgstr ""
 
 #: u_translation.rstransformati

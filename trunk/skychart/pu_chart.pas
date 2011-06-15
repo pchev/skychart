@@ -70,6 +70,8 @@ type
     MenuItem1: TMenuItem;
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
+    SlewCursor: TMenuItem;
+    TrackTelescope: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
     RemoveAllLabel1: TMenuItem;
@@ -135,6 +137,8 @@ type
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
+    procedure SlewCursorClick(Sender: TObject);
+    procedure TrackTelescopeClick(Sender: TObject);
     procedure VertScrollBarChange(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
@@ -331,15 +335,13 @@ AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
 Telescope1.caption:=rsTelescope;
+TrackTelescope.Caption:=rsTrackTelesco;
+SlewCursor.Caption:=rsSlewToCursor;
 Slew1.caption:=rsSlew;
 Sync1.caption:=rsSync;
 CopyCoord1.Caption:=rsCopyCoordina;
 Cleanupmap1.Caption:=rsCleanupMap;
-if (sc<>nil)and sc.cfgsc.PluginTelescope then begin
-   Connect1.caption:=rsConnectTeles
-end else begin
-   Connect1.caption:=rsControlPanel;
-end;
+Connect1.caption:=rsConnectTeles;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
@@ -905,6 +907,40 @@ if sc.cfgsc.poscustomlabels>0 then begin
   sc.cfgsc.poscustomlabels:=sc.cfgsc.numcustomlabels;
 end;
 Refresh;
+end;
+
+procedure Tf_chart.SlewCursorClick(Sender: TObject);
+var ra,dec,a,h,l,b,le,be:double;
+begin
+  sc.GetCoord(xcursor,ycursor,ra,dec,a,h,l,b,le,be);
+  sc.cfgsc.FindRA:=ra;
+  sc.cfgsc.FindDEC:=dec;
+  sc.cfgsc.FindName:='cursor';
+  Slew1Click(sender);
+end;
+
+procedure Tf_chart.TrackTelescopeClick(Sender: TObject);
+begin
+if sc.cfgsc.TrackOn and(sc.cfgsc.TrackName=rsTelescope) then begin
+   sc.cfgsc.TrackOn:=false;
+{$ifdef trace_debug}
+WriteTrace('Track Telescope 1');
+{$endif}
+   Refresh;
+end else if Connect1.Checked then begin
+{$ifdef trace_debug}
+ WriteTrace('Track Telescope 2');
+{$endif}
+   sc.cfgsc.TrackOn:=true;
+   sc.cfgsc.TrackType:=6;
+   sc.cfgsc.TrackName:=rsTelescope;
+   sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
+   sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+   sc.cfgsc.scopemark:=true;
+   sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
+   Refresh;
+end;
+if Sender is TMenuItem then TMenuItem(Sender).Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
 end;
 
 Procedure FixPostscript(fn: string; printlandscape:boolean; pw,ph:integer);
@@ -3293,7 +3329,7 @@ else if sc.cfgsc.IndiTelescope then begin
      TelescopeTimer.Enabled:=false;
      indi1.Terminate;
      sc.cfgsc.ScopeMark:=false;
-     sc.cfgsc.TrackOn:=false;
+     if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
      Refresh;
   end else begin
      sc.cfgsc.TelescopeJD:=0;
@@ -3312,7 +3348,6 @@ else if sc.cfgsc.IndiTelescope then begin
      indi1.onStatusChange:=TelescopeStatusChange;
      indi1.onMessage:=TelescopeGetMessage;
      indi1.Start;
-     sc.cfgsc.TrackOn:=true;
      TelescopeTimer.Interval:=5000;
      TelescopeTimer.Enabled:=true;
   end;
@@ -3432,9 +3467,11 @@ ra:=ra*15*deg2rad;
 dec:=dec*deg2rad;
 if not indi1.EquatorialOfDay then precession(jd2000,sc.cfgsc.JDChart,ra,dec);
 if sc.cfgsc.ApparentPos then apparent_equatorial(ra,dec,sc.cfgsc);
-identlabel.Visible:=false;
-sc.TelescopeMove(ra,dec);
-if sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
+if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
+if sc.cfgsc.moved then begin
+   Image1.Invalidate;
+   if assigned(FChartMove) then FChartMove(self);
+end;
 except
 end;
 end;
@@ -3610,7 +3647,6 @@ end else begin
      pu_lx200client.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pu_lx200client.ScopeShow;
      TelescopeTimer.Enabled:=true;
-     sc.cfgsc.TrackOn:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
@@ -3664,7 +3700,6 @@ end else begin
      pu_encoderclient.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pu_encoderclient.ScopeShow;
      TelescopeTimer.Enabled:=true;
-     sc.cfgsc.TrackOn:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 end;
@@ -3697,7 +3732,6 @@ end else begin
      pu_ascomclient.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pu_ascomclient.ScopeShow;
      TelescopeTimer.Enabled:=true;
-     sc.cfgsc.TrackOn:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 {$endif}
@@ -3760,7 +3794,6 @@ end else begin
      Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      Ftelescope.ScopeShow;
      TelescopeTimer.Enabled:=true;
-     sc.cfgsc.TrackOn:=true;
    end;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -3813,7 +3846,7 @@ if sc.cfgsc.IndiTelescope then begin
    if (not Connect1.checked) and ((indi1.TelescopeStatus=cu_indiclient.Idle)or(indi1.TelescopeStatus=cu_indiclient.Alert)) then begin
       indi1.Terminate;
       sc.cfgsc.ScopeMark:=false;
-      sc.cfgsc.TrackOn:=false;
+      if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
       Refresh;
       if assigned(Fshowinfo) then Fshowinfo('INDI server '+sc.cfgsc.IndiServerHost+':'+sc.cfgsc.IndiServerPort+' do not return information about device '+sc.cfgsc.IndiDevice);
    end else begin
@@ -3845,7 +3878,7 @@ end else if sc.cfgsc.PluginTelescope then begin
      TelescopeTimer.Enabled:=true;
      if sc.cfgsc.ScopeMark then begin
         sc.cfgsc.ScopeMark:=false;
-        sc.cfgsc.TrackOn:=false;
+        if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
         Refresh;
      end;
     end;
@@ -3854,7 +3887,7 @@ end else if sc.cfgsc.PluginTelescope then begin
      TelescopeTimer.Enabled:=false;
      if sc.cfgsc.ScopeMark then begin
         sc.cfgsc.ScopeMark:=false;
-        sc.cfgsc.TrackOn:=false;
+        if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
         Refresh;
      end;
     end;
@@ -3884,7 +3917,7 @@ else if sc.cfgsc.ASCOMTelescope then begin
       TelescopeTimer.Enabled:=true;
       if sc.cfgsc.ScopeMark then begin
          sc.cfgsc.ScopeMark:=false;
-         sc.cfgsc.TrackOn:=false;
+         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
          Refresh;
       end;
      end;
@@ -3914,7 +3947,7 @@ else if sc.cfgsc.LX200Telescope then begin
       TelescopeTimer.Enabled:=true;
       if sc.cfgsc.ScopeMark then begin
          sc.cfgsc.ScopeMark:=false;
-         sc.cfgsc.TrackOn:=false;
+         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
          Refresh;
       end;
      end;
@@ -3943,7 +3976,7 @@ else if sc.cfgsc.EncoderTelescope then begin
       TelescopeTimer.Enabled:=true;
       if sc.cfgsc.ScopeMark then begin
          sc.cfgsc.ScopeMark:=false;
-         sc.cfgsc.TrackOn:=false;
+         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
          Refresh;
       end;
      end;

@@ -3896,6 +3896,10 @@ msgstr "Color del cel"
 msgid "Slew"
 msgstr "Ves a (Goto)"
 
+#: u_translation.rsslewtocursor
+msgid "Slew to cursor position"
+msgstr ""
+
 #: u_translation.rssmallstars
 msgid "Small stars"
 msgstr "Estels petits"
@@ -4275,6 +4279,10 @@ msgstr "Radi total"
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Per usar els nous elements orbitals heu de calcular les dades mensuals"
+
+#: u_translation.rstracktelesco
+msgid "Track telescope"
+msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
