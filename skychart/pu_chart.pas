@@ -36,8 +36,8 @@ uses
      {$ifdef mswindows}
      pu_ascomclient,
      {$endif}
-     pu_lx200client, pu_encoderclient,
-     u_translation, pu_detail, cu_skychart, pu_indiclient, u_constant, u_util,pu_image,
+     pu_lx200client, pu_encoderclient, pu_indiclient,
+     u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image,
      u_projection, Printers, Math, downloaddialog, IntfGraphics,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
@@ -989,7 +989,6 @@ var savecolor: Starcolarray;
     prtname:string;
     fname:WideString;
     i,w,h,x,y,wh :integer;
-    ts:TSize;
     pt:TPoint;
     ps:TPostscriptCanvas;
     previewbmp:Tbitmap;
@@ -3318,10 +3317,10 @@ end
 else if sc.cfgsc.IndiTelescope then begin
    ConnectINDI(Sender);
 end;
+if (not sc.cfgsc.TrackOn) then sc.cfgsc.TrackName:=rsTelescope;
 end;
 
 procedure Tf_chart.Slew1Click(Sender: TObject);
-var ra,dec:double;
 begin
 if Connect1.checked then begin
   {$ifdef mswindows}
@@ -3366,8 +3365,6 @@ end;
 end;
 
 procedure Tf_chart.Sync1Click(Sender: TObject);
-
-var ra,dec:double;
 begin
 if Connect1.checked and
    (mrYes=MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
@@ -3741,13 +3738,14 @@ end;
 
 procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
 var ra,dec:double;
-    ok: boolean;
+    ok, newconnection: boolean;
 begin
 try
 TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
+newconnection:=Connect1.checked;
 if sc.cfgsc.ASCOMTelescope then begin
   {$ifdef mswindows}
      Connect1.checked:=pop_scope.ScopeConnected;
@@ -3782,6 +3780,8 @@ else if sc.cfgsc.EncoderTelescope then begin
       pop_encoder.ScopeGetRaDec(ra,dec,ok);
      end;
 end;
+newconnection:=(not newconnection) and Connect1.checked;
+if newconnection and (not sc.cfgsc.TrackOn) then sc.cfgsc.TrackName:=rsTelescope;
 if Connect1.checked then begin
  if ok then begin
     ra:=ra*15*deg2rad;
@@ -3792,6 +3792,12 @@ if Connect1.checked then begin
     if sc.cfgsc.moved then begin
        Image1.Invalidate;
        if assigned(FChartMove) then FChartMove(self);
+    end;
+    if (sc.cfgsc.TrackName=rsTelescope)and (not sc.cfgsc.TrackOn) then begin
+      sc.cfgsc.TrackType:=6;
+      sc.cfgsc.TrackName:=rsTelescope;
+      sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
+      sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
     end;
  end;
  TelescopeTimer.Interval:=500;
