@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
 Provides: skychart libplan404.so libgetdss.so
-Requires: gtk2 glib2 pango libjpeg libpng sqlite
+Requires: gtk2 glib2 pango libjpeg libpng sqlite xplanet
 AutoReqProv: no
 
 %description

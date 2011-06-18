@@ -9,7 +9,7 @@ Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: x86_64
 Provides: skychart libplan404.so
-Requires: gtk2 glib2 pango libjpeg libpng sqlite
+Requires: gtk2 glib2 pango libjpeg libpng sqlite xplanet
 AutoReqProv: no
 
 %description
