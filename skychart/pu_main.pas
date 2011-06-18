@@ -2129,7 +2129,7 @@ end else begin                   // end animation
         inc(i);
         fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
       until (not FileExists(fn))or(i>1000);
-      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i '+slash(TempDir)+'%06d.jpg '+utf8tosys(fn);
+      cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i "'+slash(TempDir)+'%06d.jpg" "'+utf8tosys(fn)+'"';
       ExecProcess(cmd,r,true);
       r.SaveToFile(slash(TempDir)+'ffmpeg.log');
       r.free;
