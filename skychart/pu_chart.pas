@@ -3546,6 +3546,7 @@ end else begin
      pop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
      pop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pop_indi.ScopeShow;
+     TelescopeTimer.Interval:=2000;
      TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -3599,6 +3600,7 @@ end else begin
      pop_lx200.ScopeReadConfig(ExtractFilePath(Configfile));
      pop_lx200.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pop_lx200.ScopeShow;
+     TelescopeTimer.Interval:=2000;
      TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -3652,6 +3654,7 @@ end else begin
      pop_encoder.ScopeReadConfig(ExtractFilePath(Configfile));
      pop_encoder.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
      pop_encoder.ScopeShow;
+     TelescopeTimer.Interval:=2000;
      TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -3679,11 +3682,13 @@ begin
 {$ifdef mswindows}
 if pop_scope=nil then pop_scope:=Tpop_scope.Create(self);
 if Connect1.checked then begin
-   pu_ascomclient.ScopeShow;
+   pop_scope.ScopeShow;
 end else begin
-     pu_ascomclient.ScopeReadConfig(ExtractFilePath(Configfile));
-     pu_ascomclient.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
-     pu_ascomclient.ScopeShow;
+     pop_scope.ScopeReadConfig(ExtractFilePath(Configfile));
+     pop_scope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+     pop_scope.ScopeShow;
+     pop_scope.Enabled:=true;
+     TelescopeTimer.Interval:=2000;
      TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
@@ -3705,14 +3710,14 @@ end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
-pu_ascomclient.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+pop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
 {$endif}
 end;
 
 procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
 begin
 {$ifdef mswindows}
-pu_ascomclient.ScopeAbortSlew;
+pop_scope.ScopeAbortSlew;
 {$endif}
 end;
 
@@ -3730,7 +3735,7 @@ end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
-pu_ascomclient.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
+pop_scope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 {$endif}
 end;
 
@@ -3745,11 +3750,11 @@ TelescopeTimer.Enabled:=false;
 {$endif}
 if sc.cfgsc.ASCOMTelescope then begin
   {$ifdef mswindows}
-     Connect1.checked:=pu_ascomclient.ScopeConnected;
+     Connect1.checked:=pop_scope.ScopeConnected;
      if Connect1.checked then begin
-      pu_ascomclient.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      pop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
-      pu_ascomclient.ScopeGetRaDec(ra,dec,ok);
+      pop_scope.ScopeGetRaDec(ra,dec,ok);
      end;
    {$endif}
  end

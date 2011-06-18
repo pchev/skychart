@@ -31,7 +31,7 @@ uses
   {$ifdef mswindows}
     Variants, comobj, Windows, ShlObj, ShellAPI,
   {$endif}
-  LCLIntf, u_util,
+  LCLIntf, u_util, u_constant,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
@@ -76,6 +76,7 @@ type
     SpeedButton4: TSpeedButton;
     SpeedButton11: TSpeedButton;
     {Utility and form functions}
+    procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
     procedure Timer1Timer(Sender: TObject);
     procedure setresClick(Sender: TObject);
@@ -96,29 +97,35 @@ type
   private
     { Private declarations }
     FConfig: string;
+    CoordLock : boolean;
+    Initialized : boolean;
+    T : Variant;
+    Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
+    Latitude : single;                  // Observatory latitude
+    curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
+    cur_az,  cur_alt :double;           // current alt-az position in degrees
   public
     { Public declarations }
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    Procedure ShowCoordinates;
+    Procedure ScopeShow;
+    Procedure ScopeShowModal(var ok : boolean);
+    Procedure ScopeConnect(var ok : boolean);
+    Procedure ScopeDisconnect(var ok : boolean);
+    Procedure ScopeGetInfo(var scName : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+    Procedure ScopeGetEqSys(var EqSys : double);
+    Procedure ScopeSetObs(la,lo : double);
+    Procedure ScopeAlign(source : string; ra,dec : single);
+    Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
+    Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
+    Procedure ScopeGoto(ar,de : single; var ok : boolean);
+    Procedure ScopeAbortSlew;
+    Procedure ScopeReset;
+    Function  ScopeInitialized : boolean ;
+    Function  ScopeConnected : boolean ;
+    Procedure ScopeClose;
+    Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
-
-
-Procedure ScopeShow;
-Procedure ScopeShowModal(var ok : boolean);
-Procedure ScopeConnect(var ok : boolean);
-Procedure ScopeDisconnect(var ok : boolean);
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
-Procedure ScopeGetEqSys(var EqSys : double);
-Procedure ScopeSetObs(la,lo : double);
-Procedure ScopeAlign(source : string; ra,dec : single);
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
-Procedure ScopeGoto(ar,de : single; var ok : boolean);
-Procedure ScopeAbortSlew;
-Procedure ScopeReset;
-Function  ScopeInitialized : boolean ;
-Function  ScopeConnected : boolean ;
-Procedure ScopeClose;
-Procedure ScopeReadConfig(ConfigPath : shortstring);
 
 var
   pop_scope: Tpop_scope;
@@ -126,28 +133,14 @@ var
 implementation
 {$R *.lfm}
 
-var CoordLock : boolean = false;
-   Initialized : boolean = false;
-  T : Variant;
-  Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
-  Latitude : single;                  // Observatory latitude
-  {$ifdef mswindows}
-    Appdir : string;
-  curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
-  cur_az,  cur_alt :double;           // current alt-az position in degrees
-  {$endif}
-
-const crlf=chr(10)+chr(13);
-
 {-------------------------------------------------------------------------------
 
            Cartes du Ciel Dll compatibility functions
 
 --------------------------------------------------------------------------------}
-Procedure ShowCoordinates;
+Procedure Tpop_scope.ShowCoordinates;
 begin
 {$ifdef mswindows}
-with pop_scope do begin
    if ScopeInitialized then begin
       try
          Curdeg_x:=T.RightAscension*15;
@@ -179,79 +172,78 @@ with pop_scope do begin
       az_x.text  := '';
       alt_y.text := '';
    end;
-   end;
 {$endif}
 end;
 
-Procedure ScopeDisconnect(var ok : boolean);
+Procedure Tpop_scope.ScopeDisconnect(var ok : boolean);
 begin
 {$ifdef mswindows}
 Initialized:=false;
-pop_scope.pos_x.text:='';
-pop_scope.pos_y.text:='';
-pop_scope.az_x.text:='';
-pop_scope.alt_y.text:='';
-if trim(pop_scope.edit1.text)='' then exit;
+pos_x.text:='';
+pos_y.text:='';
+az_x.text:='';
+alt_y.text:='';
+if trim(edit1.text)='' then exit;
 try
 if not VarIsEmpty(T) then begin
   T.connected:=false;
   T:=Unassigned;
 end;
 ok:=true;
-pop_scope.led.color:=clRed;
-pop_scope.speedbutton1.enabled:=true;
-pop_scope.speedbutton3.enabled:=true;
-pop_scope.speedbutton7.enabled:=true;
-pop_scope.speedbutton8.enabled:=false;
-pop_scope.speedbutton9.enabled:=false;
-pop_scope.UpdTrackingButton;
+led.color:=clRed;
+speedbutton1.enabled:=true;
+speedbutton3.enabled:=true;
+speedbutton7.enabled:=true;
+speedbutton8.enabled:=false;
+speedbutton9.enabled:=false;
+UpdTrackingButton;
 except
  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
 
-Procedure ScopeConnect(var ok : boolean);
+Procedure Tpop_scope.ScopeConnect(var ok : boolean);
 {$ifdef mswindows}
 var dis_ok : boolean;
 {$endif}
 begin
 {$ifdef mswindows}
-pop_scope.led.color:=clRed;
-pop_scope.led.refresh;
-pop_scope.timer1.enabled:=false;
-pop_scope.speedbutton3.enabled:=true;
+led.color:=clRed;
+led.refresh;
+timer1.enabled:=false;
+speedbutton3.enabled:=true;
 ok:=false;
-if trim(pop_scope.edit1.text)='' then exit;
+if trim(edit1.text)='' then exit;
 try
 T:=Unassigned;
-T := CreateOleObject(pop_scope.edit1.text);
+T := CreateOleObject(edit1.text);
 T.connected:=true;
 if T.connected then begin
    Initialized:=true;
    ShowCoordinates;
-   pop_scope.led.color:=clLime;
+   led.color:=clLime;
    ok:=true;
-   pop_scope.timer1.enabled:=true;
-   pop_scope.speedbutton1.enabled:=false;
-   pop_scope.speedbutton3.enabled:=false;
-   pop_scope.speedbutton7.enabled:=false;
-   pop_scope.speedbutton8.enabled:=true;
-   pop_scope.speedbutton9.enabled:=true;
+   timer1.enabled:=true;
+   speedbutton1.enabled:=false;
+   speedbutton3.enabled:=false;
+   speedbutton7.enabled:=false;
+   speedbutton8.enabled:=true;
+   speedbutton9.enabled:=true;
 end else scopedisconnect(dis_ok);
-pop_scope.UpdTrackingButton;
+UpdTrackingButton;
 except
  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
 
-Procedure ScopeClose;
+Procedure Tpop_scope.ScopeClose;
 begin
-pop_scope.release;
+release;
 end;
 
-Function  ScopeConnected : boolean ;
+Function  Tpop_scope.ScopeConnected : boolean ;
 begin
 result:=false;
 if not initialized then exit;
@@ -266,12 +258,12 @@ end;
 {$endif}
 end;
 
-Function  ScopeInitialized : boolean ;
+Function  Tpop_scope.ScopeInitialized : boolean ;
 begin
 result:= ScopeConnected;
 end;
 
-Procedure ScopeAlign(source : string; ra,dec : single);
+Procedure Tpop_scope.ScopeAlign(source : string; ra,dec : single);
 begin
 {$ifdef mswindows}
    if not ScopeConnected then exit;
@@ -279,7 +271,7 @@ begin
       try                 
          if not T.tracking then begin
             T.tracking:=true;
-            pop_scope.UpdTrackingButton;
+            UpdTrackingButton;
          end;
          T.SyncToCoordinates(Ra,Dec);
       except
@@ -289,18 +281,18 @@ begin
 {$endif}
 end;
 
-Procedure ScopeShowModal(var ok : boolean);
+Procedure Tpop_scope.ScopeShowModal(var ok : boolean);
 begin
-pop_scope.showmodal;
-ok:=(pop_scope.modalresult=mrOK);
+showmodal;
+ok:=(modalresult=mrOK);
 end;
 
-Procedure ScopeShow;
+Procedure Tpop_scope.ScopeShow;
 begin
-pop_scope.show
+show
 end;
 
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
+Procedure Tpop_scope.ScopeGetRaDec(var ar,de : double; var ok : boolean);
 begin
 {$ifdef mswindows}
    if ScopeConnected then begin
@@ -318,7 +310,7 @@ begin
 {$endif}
 end;
 
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
+Procedure Tpop_scope.ScopeGetAltAz(var alt,az : double; var ok : boolean);
 begin
 {$ifdef mswindows}
    if ScopeConnected then begin
@@ -336,16 +328,12 @@ begin
 {$endif}
 end;
 
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+Procedure Tpop_scope.ScopeGetInfo(var scName : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
 {$ifdef mswindows}
-   if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
-      Initialized := false;
-      pop_scope:=Tpop_scope.Create(nil);
-   end;
    if ScopeConnected  then begin
       try
-         name:=T.name;
+         scname:=T.name;
          QueryOK:=true;
          SyncOK:=T.CanSync;
          GotoOK:=T.CanSlew;
@@ -353,16 +341,16 @@ begin
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end else begin
-      name:='';
+      scname:='';
       QueryOK:=false;
       SyncOK:=false;
       GotoOK:=false;
    end;
-   refreshrate:=pop_scope.timer1.interval;
+   refreshrate:=timer1.interval;
 {$endif}
 end;
 
-Procedure ScopeGetEqSys(var EqSys : double);
+Procedure Tpop_scope.ScopeGetEqSys(var EqSys : double);
 var i: integer;
 begin
    if ScopeConnected then begin
@@ -381,26 +369,26 @@ begin
    end;
 end;
 
-Procedure ScopeReset;
+Procedure Tpop_scope.ScopeReset;
 begin
 end;
 
-Procedure ScopeSetObs(la,lo : double);
+Procedure Tpop_scope.ScopeSetObs(la,lo : double);
 begin
 latitude:=la;
 longitude:=-lo;
-pop_scope.lat.text:=detostr(latitude);
-pop_scope.long.text:=detostr(longitude);
+lat.text:=detostr(latitude);
+long.text:=detostr(longitude);
 end;
 
-Procedure ScopeGoto(ar,de : single; var ok : boolean);
+Procedure Tpop_scope.ScopeGoto(ar,de : single; var ok : boolean);
 begin
 {$ifdef mswindows}
    if not ScopeConnected then exit;
    try
       if not T.tracking then begin
          T.tracking:=true;
-         pop_scope.UpdTrackingButton;
+         UpdTrackingButton;
       end;
       if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
       else T.SlewToCoordinates(ar,de);
@@ -410,12 +398,12 @@ begin
 {$endif}
 end;
 
-Procedure ScopeReadConfig(ConfigPath : shortstring);
+Procedure Tpop_scope.ScopeReadConfig(ConfigPath : shortstring);
 begin
-  pop_scope.ReadConfig(ConfigPath);
+  ReadConfig(ConfigPath);
 end;
 
-Procedure ScopeAbortSlew;
+Procedure Tpop_scope.ScopeAbortSlew;
 begin
 {$ifdef mswindows}
 if ScopeConnected then begin
@@ -461,8 +449,14 @@ begin
 Saveconfig;
 if ScopeConnected then begin
    canclose:=false;
-   pop_scope.hide;
+   hide;
 end;
+end;
+
+procedure Tpop_scope.FormCreate(Sender: TObject);
+begin
+    CoordLock := false;
+    Initialized := false;
 end;
 
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
@@ -514,9 +508,10 @@ end;
 
 procedure Tpop_scope.SpeedButton2Click(Sender: TObject);
 begin
-pop_scope.Hide;
+Hide;
 end;
 
+ {TODO: change help}
 {$ifdef mswindows}
 Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
 var
