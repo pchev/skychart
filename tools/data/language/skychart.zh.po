@@ -507,14 +507,6 @@ msgstr "CDC 深空星表設定"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "老舊 CDC 星表（但仍可使用）"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "cdc 外掛"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "選擇 cdc 外掛"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "CdC 恆星"
@@ -4149,10 +4141,6 @@ msgstr "望遠鏡：%s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "望遠鏡未連接"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "望遠鏡外掛"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

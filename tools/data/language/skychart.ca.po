@@ -506,14 +506,6 @@ msgstr "Catàlegs de cel profund CdC"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Catàlegs obsolets (però encara podeu utilitzar-los)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "Connector CdC (plugin)"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Config. del connector CdC"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "Estels CdC"
@@ -4151,10 +4143,6 @@ msgstr "Telescopi: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "El telescopi no està connectat"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Connector (plugin) telesc."
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

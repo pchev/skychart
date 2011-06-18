@@ -506,14 +506,6 @@ msgstr "CDC nastavitve kataloga globokega vesolja"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Zastarel CDC katalog (še vedno ga lahko uporabljaš)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "CDC vtikač"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Nastavitve CDC vtikača"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "CdC zvezde"
@@ -4149,10 +4141,6 @@ msgstr "Teleskop: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Teleskop ni priključen"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Vstavek teleskopa "
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

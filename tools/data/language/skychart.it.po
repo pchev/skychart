@@ -507,14 +507,6 @@ msgstr "Impostazioni Cataloghi Profondo Cielo"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Cataloghi CDC obsoleti (ma puoi ancora usarli)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "Plugin CdC"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Impostazioni plugin CDC"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "CdC Stelle"
@@ -4149,10 +4141,6 @@ msgstr "Telescopio: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Telescopio non connesso"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Plugin Telescopio"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

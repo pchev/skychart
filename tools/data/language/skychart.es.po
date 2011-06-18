@@ -1,15 +1,18 @@
 # translation of skychart.es.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+# Patrick Chevalley <pch@ap-i.net>, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-02-19 10:42-0300\n"
-"Last-Translator: Mario Nicotra <mnicotraar@yahoo.com.ar>\n"
+"PO-Revision-Date: 2011-06-18 18:08+0200\n"
+"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.es\n"
 "POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Generator: Lokalize 1.2\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -73,7 +76,8 @@ msgstr "Agregar"
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "Agregar un elemento a la base de datos. Todos los campos son obligatorios."
+msgstr ""
+"Agregar un elemento a la base de datos. Todos los campos son obligatorios."
 
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
@@ -128,8 +132,13 @@ msgid "All tool bars"
 msgstr "Todas las Barras de Herramientas"
 
 #: u_translation.rsalsobesureth
-msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sTambién asegúrese de que el software de base de datos necesario está instalado.%sPor favor, consulte la documentación si no está seguro.%sDesea continuar?"
+msgid ""
+"%sAlso be sure the required database software is installed.%sPlease consult "
+"the documentation if you are unsure.%sDo you want to continue?"
+msgstr ""
+"%sTambién asegúrese de que el software de base de datos necesario está "
+"instalado.%sPor favor, consulte la documentación si no está seguro.%sDesea "
+"continuar?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -503,14 +512,6 @@ msgstr "Seteo de Catálogo de Nebulosas de CDC"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Catálogo CDC obsoleto (pero aún puede utilizalo)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "Plugin CDC"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Seteo de plugin de CDC"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "Estrellas CdC"
@@ -752,8 +753,12 @@ msgid "Connect telescope"
 msgstr "Conectar Telescopio"
 
 #: u_translation.rsconnecttofai
-msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Conexión a %s, %s falló! %sVerifique si el Server MySQL está ejecutando y controle Usuario/Contraseña"
+msgid ""
+"Connection to %s, %s failed! %sVerify if the MySQL server is running, and "
+"control the userid/password."
+msgstr ""
+"Conexión a %s, %s falló! %sVerifique si el Server MySQL está ejecutando y "
+"controle Usuario/Contraseña"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1488,12 +1493,18 @@ msgid "Error! Please check the database parameters."
 msgstr "Error! Por favor, revise los parámetros de Base de Datos."
 
 #: u_translation.rserrorpleasec2
-msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Error! Por favor, revise los parámetros de Base de Datos y cargue el archivo de cometas."
+msgid ""
+"Error! Please check the database parameters and load the comete data file."
+msgstr ""
+"Error! Por favor, revise los parámetros de Base de Datos y cargue el archivo "
+"de cometas."
 
 #: u_translation.rserrorpleasec3
-msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Error! Por favor, revise los parámetros de Base de Datos y cargue el paquete de imágenes."
+msgid ""
+"Error! Please check the database parameters and load the picture package."
+msgstr ""
+"Error! Por favor, revise los parámetros de Base de Datos y cargue el paquete "
+"de imágenes."
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
@@ -1664,8 +1675,15 @@ msgid "Fonts"
 msgstr "Fuentes"
 
 #: u_translation.rsforalargecat
-msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Para catálogos grandes siempre seleccione Binario. Para un conjunto de datos pequeño que cambia frecuentemente seleccione Texto, esto le permitirá editar el archivo y ver el resultado inmediatamente en la carta sin la necesidad de reejecutar esta utilidad."
+msgid ""
+"For a large catalog, always select Binary. For a small dataset that changes "
+"frequently, select Text. This enables you to edit the file and see the result "
+"immediately on the chart without the need to rerun this utility."
+msgstr ""
+"Para catálogos grandes siempre seleccione Binario. Para un conjunto de datos "
+"pequeño que cambia frecuentemente seleccione Texto, esto le permitirá editar "
+"el archivo y ver el resultado inmediatamente en la carta sin la necesidad de "
+"reejecutar esta utilidad."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -1958,8 +1976,12 @@ msgid "Increment time"
 msgstr "Incrementar Tiempo"
 
 #: u_translation.rsindicatehere
-msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Indique aquí como calcular el valor requerido desde los datos almacenados en el archivo de texto de catálogo."
+msgid ""
+"Indicate here how to compute the required values from the data stored in the "
+"catalog text file."
+msgstr ""
+"Indique aquí como calcular el valor requerido desde los datos almacenados en "
+"el archivo de texto de catálogo."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
@@ -2647,7 +2669,8 @@ msgstr "No."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "No se encontró datos de Asteroides!%sPor favor, cargue un archivo MPC primero."
+msgstr ""
+"No se encontró datos de Asteroides!%sPor favor, cargue un archivo MPC primero."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -2722,8 +2745,12 @@ msgid "%s  Not found in any of the installed catalog indices."
 msgstr "%s  No se encuentra en ningún índice de catálogo instalado."
 
 #: u_translation.rsnotfoundmayb
-msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s No encontrado!%sO el catálogo no está instalado, o hay un path erróneo en la configuración del catálogo."
+msgid ""
+"%s Not found!%sMaybe the catalog is not installed, or there is a wrong path "
+"in catalog setting."
+msgstr ""
+"%s No encontrado!%sO el catálogo no está instalado, o hay un path erróneo en "
+"la configuración del catálogo."
 
 #: u_translation.rsnow
 msgid "Now"
@@ -2786,7 +2813,8 @@ msgid "Object name"
 msgstr "Nombre de Objeto"
 
 #: u_translation.rsobjectpositi
-msgid "Object position found in index, but no detail found in any active catalog"
+msgid ""
+"Object position found in index, but no detail found in any active catalog"
 msgstr ""
 
 #: u_translation.rsobjects
@@ -3064,11 +3092,15 @@ msgid "Please indicate the directory where the catalog must be built"
 msgstr "Por favor indique el directorio donde se debe hacer el catálogo"
 
 #: u_translation.rspleaseinstdosbox
-msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
+msgid ""
+"Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on "
+"your computer."
 msgstr ""
 
 #: u_translation.rspleaseinstwine
-msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
+msgid ""
+"Please install wine http://www.winehq.org/ to compute artificial satellites "
+"on your computer."
 msgstr ""
 
 #: u_translation.rspleasemountr
@@ -3333,7 +3365,7 @@ msgstr "%sVueltas RA:"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Imágenes realísticas"
+msgstr "Imágenes reales"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -3436,7 +3468,9 @@ msgid "Report a problem"
 msgstr "Reporte un problema"
 
 #: u_translation.rsrequesttimeo
-msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
+msgid ""
+"Request timeout. You probably asked a too wide area which demanded too much "
+"processing time on the remote server."
 msgstr ""
 
 #: u_translation.rsrequiredfiel
@@ -3708,8 +3742,14 @@ msgid "Set FOV to"
 msgstr "FOV igual a"
 
 #: u_translation.rssethowthemou
-msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Configurar como se mueve la montura en ambos ejes cuand mueve el mando. Entonces el boton Telescopio le mostrará las vueltas que debe dar para ir de un objeto a otro."
+msgid ""
+"Set how the mount moves for each axis when you turn the driving knob. From "
+"then on, a click on the 'Connect telescope' button will show you how many "
+"turns you must make to go from one object to another."
+msgstr ""
+"Configurar como se mueve la montura en ambos ejes cuand mueve el mando. "
+"Entonces el boton Telescopio le mostrará las vueltas que debe dar para ir de "
+"un objeto a otro."
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -3937,10 +3977,13 @@ msgstr "Configuración de Sistema Solar"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Algunos registros fueron rechazados, ver archivo %sreject.txt para detalles"
+msgstr ""
+"Algunos registros fueron rechazados, ver archivo %sreject.txt para detalles"
 
 #: u_translation.rssomethinggow
-msgid "Something went wrong during the initialization of the program. The program needs to be closed."
+msgid ""
+"Something went wrong during the initialization of the program. The program "
+"needs to be closed."
 msgstr ""
 
 #: u_translation.rssorrycopyisn
@@ -4033,7 +4076,8 @@ msgstr "Filtro de Estrellas"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Opciones de movimiento propio de estrellas (si está disponible en el catálogo)"
+msgstr ""
+"Opciones de movimiento propio de estrellas (si está disponible en el catálogo)"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -4147,10 +4191,6 @@ msgstr "Telescopio: %s"
 msgid "Telescope not connected"
 msgstr "Telescopio no conectado"
 
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Plugin de Telescopio"
-
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
 msgstr "Configuración de Telescopio"
@@ -4192,16 +4232,28 @@ msgid "There are %s objects in this field."
 msgstr "Hay %s objetos en este campo."
 
 #: u_translation.rsthisactionre
-msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Esta acción reemplaza los contenidos de la base de datos para el país %s utilizando datos nuevos de NGA y GNIS. %sLas modificaciones realizadas para este país se perderán, excepto la ubicación agregadas con un nuevo nombre que se mantendrá. %sDesea continuar?"
+msgid ""
+"This action overwrites all the database content for the country %s, using "
+"fresh data from NGA and GNIS.%sAll your editing for this country will be "
+"lost, only locations that you added with a new name will be kept.%sDo you "
+"want to continue?"
+msgstr ""
+"Esta acción reemplaza los contenidos de la base de datos para el país %s "
+"utilizando datos nuevos de NGA y GNIS. %sLas modificaciones realizadas para "
+"este país se perderán, excepto la ubicación agregadas con un nuevo nombre que "
+"se mantendrá. %sDesea continuar?"
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
 msgstr "El archivo no se reconoce como un archivo MPCORB."
 
 #: u_translation.rsthisprogrami
-msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Este programa es freeware; lo puedes distribuir y/o modificar bajo los términos de la Licencia GNU (General Public License)"
+msgid ""
+"This program is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License"
+msgstr ""
+"Este programa es freeware; lo puedes distribuir y/o modificar bajo los "
+"términos de la Licencia GNU (General Public License)"
 
 #: u_translation.rsthursday
 msgid "Thu."
@@ -4272,8 +4324,11 @@ msgid "Total radius"
 msgstr "Radio Total"
 
 #: u_translation.rstousethisnew
-msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Para utilizar estos datos nuevos, ahora debe calcular los Datos Mensuales"
+msgid ""
+"Before you can use the new orbital elements, you must compute the monthly "
+"data."
+msgstr ""
+"Para utilizar estos datos nuevos, ahora debe calcular los Datos Mensuales"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
@@ -4536,28 +4591,55 @@ msgid "Warning! Calculation of"
 msgstr "Atención"
 
 #: u_translation.rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid ""
+"Warning! Some asteroid elements are outdated by more than 3 years. Try to "
+"find element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid ""
+"Warning! Some comet elements are outdated by more than 3 years. Try to find "
+"element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningthecu
-msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Atención! La fecha y ubicación de observatorio actual pueden haber cambiado del valor incial. Debe responder No y utilizar el botón %s para regresar a los valores iniciales, o éstos se perderán. Desea continuar ?"
+msgid ""
+"Warning! The used date or your observatory location have been changed from "
+"the previous settings. You can reply No now, and use the %s button to return "
+"to your original date/time and observation location, otherwise the changes "
+"will be applied. Do you want to continue?"
+msgstr ""
+"Atención! La fecha y ubicación de observatorio actual pueden haber cambiado "
+"del valor incial. Debe responder No y utilizar el botón %s para regresar a "
+"los valores iniciales, o éstos se perderán. Desea continuar ?"
 
 #: u_translation.rswarningyouar
-msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Atención!%sEstá por borrar la base de datos %s y todo su contenido, incluso si el contenido no está relacionado a este programa.%s Está seguro que desea continuar?"
+msgid ""
+"Warning!%sYou are about to destroy the database %s and all its content, even "
+"if this content is not related to this program.%sAre you sure you want to "
+"continue?"
+msgstr ""
+"Atención!%sEstá por borrar la base de datos %s y todo su contenido, incluso "
+"si el contenido no está relacionado a este programa.%s Está seguro que desea "
+"continuar?"
 
 #: u_translation.rswarningyouar2
-msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
+msgid ""
+"Warning! you are using multiple catalogs as sources for identical objects. "
+"You risk the display of duplicates. Be sure that this is what you want."
 msgstr ""
 
 #: u_translation.rswarningyouha
-msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "ATENCION !%sEligió agregar los datos a un catálogo existente.%sEl catalogo e índice existente deben tener el mismo formato, o se corromperá.%s Es una buena idea hacer una copia de los archivos antes de esta operación.%s¿ Desea continuar ?"
+msgid ""
+"WARNING !%sYou have chosen to append the data to an existing catalog.%sThis "
+"existing catalog and index must be exactly of the same format, otherwise the "
+"catalog will be corrupted.%sIt is a good idea to backup the actual files "
+"before proceeding this operation.%sDo you want to continue?"
+msgstr ""
+"ATENCION !%sEligió agregar los datos a un catálogo existente.%sEl catalogo e "
+"índice existente deben tener el mismo formato, o se corromperá.%s Es una "
+"buena idea hacer una copia de los archivos antes de esta operación.%s¿ Desea "
+"continuar ?"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -4601,11 +4683,16 @@ msgstr "años"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "Ahora está listo para mostrar el asteroide para este período de tiempo."
+msgstr ""
+"Ahora está listo para mostrar el asteroide para este período de tiempo."
 
 #: u_translation.rsyouliveonabi
-msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Vives en una gran montaña cerca de la costa y quieres observar la imagen distorsionada del objeto bajo el horizonte."
+msgid ""
+"If you observe high on a mountain, the horizon line will be lower than it "
+"would be at sea level."
+msgstr ""
+"Vives en una gran montaña cerca de la costa y quieres observar la imagen "
+"distorsionada del objeto bajo el horizonte."
 
 #: u_translation.rszenith
 msgid "Zenith"
@@ -4634,4 +4721,5 @@ msgstr "Acercar"
 #: u_translation.rszoomout
 msgid "Zoom out"
 msgstr "Alejar"
+
 
