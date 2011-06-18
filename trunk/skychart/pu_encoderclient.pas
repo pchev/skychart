@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {------------- interface for ouranos like system. ----------------------------
 
 PJ Pallez Nov 1999
-Patrick Chevalley Aug 2000
+Patrick Chevalley Aug 2000, 2011
 
 will work with all systems using same protocol
 (Ouranos, NGC MAX,MicroGuider,..)
@@ -158,35 +158,44 @@ type
   private
     { Private declarations }
     FConfig: string;
+    Procedure InitObject(source : string; alpha,delta:double);
+    Procedure SetRes;
+    Procedure Clear_Init_List;
+    Procedure AffMsg(msgtxt : string);
+    Procedure GetSideralTime;
+    Procedure ComputeCoord(p1,p2 : PInit_object; x,y : integer; var alpha,delta : double);
+    Procedure GetCoordinates;
+    Procedure ShowCoordinates;
+    Procedure QueryStatus;
+
   public
     { Public declarations }
     csc: Tconf_skychart;
+    X_List, Y_List, Istatus : integer;
+    theta0, phi0 : double;
+    g_ok : boolean;
+    wait_create : boolean;
+    first_show : boolean;
+    Init90Y : integer;
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    Procedure ScopeShow;
+    Procedure ScopeShowModal(var ok : boolean);
+    Procedure ScopeConnect(var ok : boolean);
+    Procedure ScopeDisconnect(var ok : boolean);
+    Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean ; var refreshrate : integer);
+    Procedure ScopeSetObs(la,lo : double);
+    Procedure ScopeAlign(source : string; ra,dec : double);
+    Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
+    Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
+    Procedure ScopeGoto(ar,de : double; var ok : boolean);
+    Procedure ScopeReset;
+    Function  ScopeInitialized : boolean ;
+    Function  ScopeConnected : boolean ;
+    Procedure ScopeClose;
+    Procedure ScopeGetEqSys(var EqSys : double);
+    Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-{ Cartes du Ciel Dll export }
-Procedure ScopeShow; stdcall;
-Procedure ScopeShowModal(var ok : boolean);
-Procedure ScopeConnect(var ok : boolean);
-Procedure ScopeDisconnect(var ok : boolean);
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean ; var refreshrate : integer);
-Procedure ScopeSetObs(la,lo : double);
-Procedure ScopeAlign(source : string; ra,dec : double);
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
-Procedure ScopeGoto(ar,de : double; var ok : boolean);
-Procedure ScopeReset;
-Function  ScopeInitialized : boolean ;
-Function  ScopeConnected : boolean ;
-Procedure ScopeClose;
-Procedure ScopeGetEqSys(var EqSys : double);
-Procedure ScopeReadConfig(ConfigPath : shortstring);
-
-{ internal function }
-Procedure InitObject(source : string; alpha,delta:double);
-Procedure SetRes;
-Procedure Clear_Init_List;
-Procedure AffMsg(msgtxt : string);
 
 var
   pop_encoder: Tpop_encoder;
@@ -199,21 +208,9 @@ implementation
     cu_serial,
     cu_taki;
 
-var X_List, Y_List, Istatus : integer;
-    theta0, phi0 : double;
-    g_ok : boolean;
-    wait_create : boolean = true;
-    first_show : boolean = true;
-    Init90Y : integer = 999999;
 
 const crlf=chr(10)+chr(13);
 
-
-procedure InitLib;
-begin
-     decimalseparator:='.';
-     Getdir(0,appdir);
-end;
 
 Function Slash(nom : string) : string;
 begin
@@ -221,77 +218,66 @@ result:=trim(nom);
 if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
-{-------------------------------------------------------------------------------
-
-                       Cartes du Ciel Dll functions
-
---------------------------------------------------------------------------------}
-
-Procedure ScopeConnect(var ok : boolean);
+Procedure Tpop_encoder.ScopeConnect(var ok : boolean);
 begin
 SetRes;
-ok:=(pop_encoder.led.color=clLime);
+ok:=(led.color=clLime);
 end;
 
-Procedure ScopeDisconnect(var ok : boolean);
+Procedure Tpop_encoder.ScopeDisconnect(var ok : boolean);
 begin
-pop_encoder.timer1.enabled:=false;
+timer1.enabled:=false;
 ok:=Encoder_Close;
 if ok then begin
-   pop_encoder.led.color:=clRed;
-   pop_encoder.led1.color:=clRed;
+   led.color:=clRed;
+   led1.color:=clRed;
 end;
 Clear_Init_List;
-pop_encoder.pos_x.text:='';
-pop_encoder.pos_y.text:='';
-pop_encoder.az_x.text:='';
-pop_encoder.alt_y.text:='';
+pos_x.text:='';
+pos_y.text:='';
+az_x.text:='';
+alt_y.text:='';
 Alpha_Inversion:=false;
 Delta_Inversion:=false;
 Init90Y := 999999;
-pop_encoder.init90.font.color:=clWindowText;
+init90.font.color:=clWindowText;
 end;
 
-Procedure ScopeClose;
+Procedure Tpop_encoder.ScopeClose;
 begin
-pop_encoder.release;
+release;
 end;
 
-Function  ScopeConnected : boolean ;
-begin
-while wait_create do Application.processmessages;
-if pop_encoder<>nil then result:=(pop_encoder.led.color=clLime)
-                  else result:=false;
-end;
-
-Function  ScopeInitialized : boolean ;
+Function  Tpop_encoder.ScopeConnected : boolean ;
 begin
 while wait_create do Application.processmessages;
-if pop_encoder<>nil then result:= (init_objects.count>=2)
-                  else result:=false;
+result:=(led.color=clLime);
 end;
 
-Procedure ScopeAlign(source : string; ra,dec : double);
+Function  Tpop_encoder.ScopeInitialized : boolean ;
+begin
+while wait_create do Application.processmessages;
+result:= (init_objects.count>=2)
+end;
+
+Procedure Tpop_encoder.ScopeAlign(source : string; ra,dec : double);
 begin
 InitObject(copy(source,1,9),15*ra,dec);
 end;
 
-Procedure ScopeShowModal(var ok : boolean);
+Procedure Tpop_encoder.ScopeShowModal(var ok : boolean);
 begin
-if pop_encoder<>nil then begin
-pop_encoder.showmodal;
-ok:=(pop_encoder.modalresult=mrOK);
-end
-else ok:=false;
+showmodal;
+ok:=(modalresult=mrOK);
 end;
 
-Procedure ScopeShow;
+Procedure Tpop_encoder.ScopeShow;
 begin
 while wait_create do Application.processmessages;
-if pop_encoder<>nil then pop_encoder.show;
+show;
 end;
 
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
+Procedure Tpop_encoder.ScopeGetRaDec(var ar,de : double; var ok : boolean);
 begin
 if (init_objects.Count>=2) then begin
    ar:=curdeg_x/15;
@@ -304,7 +290,7 @@ end else begin
 end;
 end;
 
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
+Procedure Tpop_encoder.ScopeGetAltAz(var alt,az : double; var ok : boolean);
 begin
 if (init_objects.Count>=2) then begin
    alt:=cur_alt;
@@ -317,54 +303,43 @@ end else begin
 end;
 end;
 
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean ; var refreshrate : integer);
+Procedure Tpop_encoder.ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean ; var refreshrate : integer);
 begin
-if (pop_encoder=nil)or(pop_encoder.pos_x=nil) then begin
-   decimalseparator:='.';
-   wait_create:=true;
-   First_Show:=true;
-   pop_encoder:=Tpop_encoder.Create(nil);
-   Initlib;
-end;
 while wait_create do Application.processmessages;
-if pop_encoder<>nil then begin
-name:=pop_encoder.cbo_type.text;
+name:=cbo_type.text;
 QueryOK:=true;
 SyncOK:=true;
 GotoOK:=false;
-refreshrate:=pop_encoder.Timer1.Interval;
-end;
+refreshrate:=Timer1.Interval;
 end;
 
-Procedure ScopeReset;
+Procedure Tpop_encoder.ScopeReset;
 begin
 Clear_Init_List;
 end;
 
-Procedure ScopeSetObs(la,lo : double);
+Procedure Tpop_encoder.ScopeSetObs(la,lo : double);
 begin
-if pop_encoder<>nil then begin
-pop_encoder.lat.text:=floattostr(la);
-pop_encoder.long.text:=floattostr(lo);
+lat.text:=floattostr(la);
+long.text:=floattostr(lo);
 latitude:=la;
 longitude:=lo;
 end;
-end;
 
-Procedure ScopeGoto(ar,de : double; var ok : boolean);
+Procedure Tpop_encoder.ScopeGoto(ar,de : double; var ok : boolean);
 begin
 ok:=false;
 end;
 
-Procedure ScopeGetEqSys(var EqSys : double); stdcall;
+Procedure Tpop_encoder.ScopeGetEqSys(var EqSys : double);
 begin
  // always current date
  EqSys:=0;
 end;
 
-Procedure ScopeReadConfig(ConfigPath : shortstring);
+Procedure Tpop_encoder.ScopeReadConfig(ConfigPath : shortstring);
 begin
-  pop_encoder.ReadConfig(ConfigPath);
+  ReadConfig(ConfigPath);
 end;
 
 {-------------------------------------------------------------------------------
@@ -373,19 +348,19 @@ end;
 
 --------------------------------------------------------------------------------}
 
-Procedure GetSideralTime;
+Procedure Tpop_encoder.GetSideralTime;
 var y,m,d:word;
     jd0,ut : double;
     n: TDateTime;
 begin
-n:=pop_encoder.csc.tz.NowUTC;
+n:=csc.tz.NowUTC;
 decodedate(n,y,m,d);
 ut:=frac(n)*24;
 jd0:=jd(y,m,d,0);
-Sideral_Time:=SidTim(jd0,ut,pop_encoder.csc.ObsLongitude);   // in radian
+Sideral_Time:=SidTim(jd0,ut,csc.ObsLongitude);   // in radian
 end;
 
-Procedure ComputeCoord(p1,p2 : PInit_object; x,y : integer; var alpha,delta : double);
+Procedure Tpop_encoder.ComputeCoord(p1,p2 : PInit_object; x,y : integer; var alpha,delta : double);
 var theta,phi,tim,tim0,tim1,tim2 : double;
 begin
 if p2.time>p1.time then begin
@@ -398,7 +373,7 @@ end else begin
    tim2:=0;
 end;
 
-cu_taki.Reset(pop_encoder.Z1T.value,pop_encoder.Z2T.value,pop_encoder.Z3T.value);
+cu_taki.Reset(Z1T.value,Z2T.value,Z3T.value);
 if Delta_Inversion then theta:=theta0-p1.theta
                    else theta:=p1.theta-theta0;
 if Alpha_Inversion then phi:=phi0-p1.phi
@@ -420,19 +395,19 @@ if Alpha_Inversion then phi:=phi0-phi
 cu_taki.Tel2Equ(phi,theta,tim,alpha,delta);
 end;
 
-Procedure GetCoordinates;
+Procedure Tpop_encoder.GetCoordinates;
 var j,n,m,py : integer;
     p1,p2 : PInit_object;
     pos : Tpoint;
     alpha,delta,dista,disti,d : double;
+    msg:string;
 begin
 try
-with pop_encoder do begin
 if init_objects.count<2 then begin
    AffMsg('TWO stars must be used for initialisation.');
    exit;
 end;
-if not Encoder_query(curstep_x,curstep_y) then begin Encoder_Error; exit; end;
+if not Encoder_query(curstep_x,curstep_y,msg) then begin AffMsg(msg); Encoder_Error; exit; end;
 { approx. coordinates using last init. star}
 ComputeCoord(Last_p1,Last_p2, curstep_x,curstep_y,alpha,delta);
 { search nearest and farest init star }
@@ -453,21 +428,6 @@ for j := 0 to init_objects.count-1 do begin
   end;
   list_init.Items.Item[j].SubItems.Strings[3]:='   ';
 end;
-{p1:=init_objects[n];
-case MountType.ItemIndex of
-0 : begin
-    if Delta_Inversion then theta0:=p1.theta+p1.delta
-                       else theta0:=p1.theta-p1.delta;
-    if Alpha_Inversion then phi0:=p1.phi+p1.alpha
-                       else phi0:=p1.phi-p1.alpha;
-    end;
-1 : begin
-    if Delta_Inversion then theta0:=p1.theta+p1.alt
-                       else theta0:=p1.theta-p1.alt;
-    if Alpha_Inversion then phi0:=p1.phi+p1.az
-                       else phi0:=p1.phi-p1.az;
-    end;
-end;}
 if n>m then begin   // respect time order
    j:=m;
    m:=n;
@@ -500,7 +460,6 @@ if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+
              ' X:'+inttostr(curstep_x)+' Y:'+inttostr(curstep_y)+' T:'+floattostr(now)+
              ' RA:'+floattostr(curdeg_x)+' DEC:'+floattostr(curdeg_y)+
              ' AZ:'+floattostr(cur_az)+' ALT:'+floattostr(cur_alt) );
-end;
 except
 curdeg_x:=0; curdeg_y:=0;
 cur_az:=0; cur_alt:=0;
@@ -538,13 +497,11 @@ begin
      result:=sgn*(abs(d)+(m/60));
 end;
 
-Procedure Clear_Init_List;
+Procedure Tpop_encoder.Clear_Init_List;
 begin
 initialised:=false;
-with pop_encoder do begin
 list_init.items.clear;
 init_objects.Clear;
-end;
 end;
 
 
@@ -554,20 +511,23 @@ end;
 
 --------------------------------------------------------------------------------}
 
-Procedure AffMsg(msgtxt : string);
+Procedure Tpop_encoder.AffMsg(msgtxt : string);
 begin
 if msgtxt<>'' then begin
-   Istatus:=10000 div pop_encoder.Timer1.Interval;
+   Istatus:=10000 div Timer1.Interval;
    Beep;
 end;
-pop_encoder.statusbar1.SimpleText:=msgtxt;
-pop_encoder.statusbar1.Refresh;
+statusbar1.SimpleText:=msgtxt;
+statusbar1.Refresh;
 end;
 
 procedure Tpop_encoder.formcreate(Sender: TObject);
 begin
-     init_objects:=tlist.create;
-     wait_create := false;
+wait_create := true;
+first_show := true;
+Init90Y := 999999;
+init_objects:=tlist.create;
+wait_create := false;
 end;
 
 function Tpop_encoder.ReadConfig(ConfigPath : shortstring):boolean;
@@ -625,7 +585,7 @@ procedure Tpop_encoder.kill(Sender: TObject; var CanClose: Boolean);
 begin
 if port_opened then begin
    canclose:=false;
-   pop_encoder.hide;
+   hide;
 end;
 end;
 
@@ -665,15 +625,15 @@ Affmsg('');
            s3:='Initialised at '+last_init+#13#10+' using : '+#13#10+
            last_init_target+' (RA: '+artostr(b+a)+' DEC:'+detostr(last_init_delta)+')'
      end else begin s3:='Not initialised'; end;
-     if checkbox4.checked then pop_encoder.formstyle:=fsNormal;
+     if checkbox4.checked then formstyle:=fsNormal;
      messagedlg('Sytem status:'+#13#10#13#10+cbo_port.text+s1+
                  #13#10+s2+#13#10+s3+#13#10+s4+#13#10+s5+#13#10,mtinformation,[mbok],0);
-     if checkbox4.checked then pop_encoder.formstyle:=fsStayOnTop;
+     if checkbox4.checked then formstyle:=fsStayOnTop;
 end;
 
-Procedure ShowCoordinates;
+Procedure Tpop_encoder.ShowCoordinates;
+var msg: string;
 begin
-with pop_encoder do begin
    if (init_objects.Count>=2) then begin
       GetCoordinates;
       pos_x.text := armtostr(Curdeg_x/15);
@@ -682,19 +642,18 @@ with pop_encoder do begin
       alt_y.text := demtostr(Cur_alt);
       if Cur_alt<0 then alt_y.Color:=clRed else alt_y.Color:=clWindow;
    end else if MountType.ItemIndex=0 then  begin
-      if not Encoder_query(curstep_x,curstep_y) then begin Encoder_Error; exit; end;
+      if not Encoder_query(curstep_x,curstep_y,msg) then begin AffMsg(msg); Encoder_Error; exit; end;
       pos_x.text := Inttostr(curstep_x);
       pos_y.text := Inttostr(curstep_y);
       az_x.text  := '';
       alt_y.text := '';
    end else begin
-      if not Encoder_query(curstep_x,curstep_y) then begin Encoder_Error; exit; end;
+      if not Encoder_query(curstep_x,curstep_y,msg) then begin AffMsg(msg); Encoder_Error; exit; end;
       pos_x.text := '';
       pos_y.text := '';
       az_x.text  := Inttostr(curstep_x);
       alt_y.text := Inttostr(curstep_y);
    end;
-end;
 end;
 
 procedure Tpop_encoder.SpeedButton4Click(Sender: TObject);
@@ -712,12 +671,12 @@ Alpha_Inversion:=false;
 Delta_Inversion:=false;
 end;
 
-Procedure SetRes;
+Procedure Tpop_encoder.SetRes;
 var i,x,y : integer;
+    msg: string;
 begin
 Affmsg('');
 {Connect and Sets the Resolution.}
-with pop_encoder do begin
 led.color:=clRed;
 led.refresh;
 led1.color:=clRed;
@@ -725,7 +684,7 @@ led1.refresh;
 timer1.enabled:=false;
 Clear_Init_List;
 Init90Y := 999999;
-pop_encoder.init90.font.color:=clWindowText;
+init90.font.color:=clWindowText;
 if debug then begin
    writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+
              ' ObsLat:'+floattostr(csc.ObsLatitude)+' ObsLong:'+floattostr(csc.ObsLongitude));
@@ -734,14 +693,14 @@ if debug then begin
              ' Z1:'+z1t.text+' Z2:'+z2t.text+' Z3:'+z3t.text);
 end;
 try
-if Encoder_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text) and Encoder_Query(x,y) then begin
+if Encoder_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text) and Encoder_Query(x,y,msg) then begin
    reso_x:=strtoint(res_x.text);
    reso_y:=strtoint(res_y.text);
    i:=0;
    repeat
      Encoder_Set_Resolution(reso_x,reso_y);
      Encoder_Init(reso_x div 2,reso_y div 2);
-     Encoder_Query(x,y);
+     Encoder_Query(x,y,msg);
      inc(i);
      sleep(100);
    until ((x=0)and(y=0))or(i>3);
@@ -754,6 +713,7 @@ if Encoder_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Parity
    led1.color:=clLime;
    timer1.enabled:=true;
 end else begin
+    AffMsg(msg);
     Encoder_Close;
     Affmsg('Error opening '+cbo_type.text+' on port '+cbo_port.text);
 end;
@@ -761,9 +721,8 @@ finally
 
 end;
 end;
-end;
 
-Procedure InitObject(source : string; alpha,delta:double);
+Procedure Tpop_encoder.InitObject(source : string; alpha,delta:double);
 {Add a point to the initialisation list.}
 var
 p,q:Pinit_object;
@@ -771,8 +730,8 @@ listitem:tlistitem;
 s1,s2 : integer;
 a1,d1 : double;
 inittime : Tdatetime;
+msg:string;
 begin
-with pop_encoder do begin
      {Check if Resolution has been set}
      if port_opened and resolution_sent then
      begin
@@ -782,8 +741,9 @@ with pop_encoder do begin
               exit;
          end;;
          {be sure we have the current steps}
-         if not pop_encoder.timer1.enabled then
-            if not Encoder_query(curstep_x,curstep_y) then begin
+         if not timer1.enabled then
+            if not Encoder_query(curstep_x,curstep_y,msg) then begin
+               AffMsg(msg);
                Encoder_Error;
                exit;
             end;
@@ -892,18 +852,17 @@ with pop_encoder do begin
           Affmsg('The interface is either not connected or not initialized');
      end;
 end;
-end;
 
 
-Procedure QueryStatus;
+Procedure Tpop_encoder.QueryStatus;
 var ex,ey : integer;
     batteryOK : boolean;
 begin
 if GetDeviceStatus(ex,ey,batteryOK) then begin
-   pop_encoder.edit1.text:=inttostr(ex);
-   pop_encoder.edit2.text:=inttostr(ey);
-   if batteryOK then pop_encoder.edit3.color:=clLime else pop_encoder.edit3.color:=clRed;
-   pop_encoder.Panel3.refresh;
+   edit1.text:=inttostr(ex);
+   edit2.text:=inttostr(ey);
+   if batteryOK then edit3.color:=clLime else edit3.color:=clRed;
+   Panel3.refresh;
 end;   
 end;
 
@@ -990,7 +949,7 @@ end;
 
 procedure Tpop_encoder.SpeedButton2Click(Sender: TObject);
 begin
-pop_encoder.Hide;
+Hide;
 end;
 
 procedure Tpop_encoder.list_initMouseDown(Sender: TObject;
@@ -1026,10 +985,12 @@ InitTypeClick(Sender);
 end;
 
 procedure Tpop_encoder.init90Click(Sender: TObject);
+var msg:string;
 begin
 {be sure we have the current steps}
-if not pop_encoder.timer1.enabled then
-   if not Encoder_query(curstep_x,curstep_y) then begin
+if not timer1.enabled then
+   if not Encoder_query(curstep_x,curstep_y,msg) then begin
+      AffMsg(msg);
       Encoder_Error;
       exit;
    end;
@@ -1071,8 +1032,8 @@ end;
 procedure Tpop_encoder.CheckBox4Click(Sender: TObject);
 begin
 if first_show then exit;
-if checkbox4.checked then pop_encoder.FormStyle:=fsStayOnTop
-                     else pop_encoder.FormStyle:=fsNormal;
+if checkbox4.checked then FormStyle:=fsStayOnTop
+                     else FormStyle:=fsNormal;
 end;
 
 end.

@@ -119,12 +119,6 @@ var
   LX200_mode : string;                // alignement mode
   LX200_format : integer;             // 0 : short , 1 : long
   LX200_opened,LX200_UseHPP : boolean;
-{Current values}
-  curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
-  cur_az,  cur_alt :double;           // current alt-az position in degrees
-  Sideral_Time : Double;              // Current sideral time
-  Longitude : Double;                 // Observatory longitude (Negative East of Greenwich}
-  Latitude : Double;                  // Observatory latitude
 
 const north=0; south=1; east=2; west=3;
 

@@ -288,26 +288,34 @@ type
   public
     { Public declarations }
     csc: Tconf_skychart;
+    {Current values}
+    curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
+    cur_az,  cur_alt :double;           // current alt-az position in degrees
+    Sideral_Time : Double;              // Current sideral time
+    Longitude : Double;                 // Observatory longitude (Negative East of Greenwich}
+    Latitude : Double;                  // Observatory latitude
     function  ReadConfig(ConfigPath : shortstring):boolean;
+    Procedure ShowCoordinates;
+    procedure ChangeButton(onoff : boolean);
+    procedure ScopeChangeButton(onoff : boolean);
+    Procedure ScopeShow;
+    Procedure ScopeShowModal(var ok : boolean);
+    Procedure ScopeConnect(var ok : boolean);
+    Procedure ScopeDisconnect(var ok : boolean);
+    Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+    Procedure ScopeSetObs(la,lo : double);
+    Procedure ScopeAlign(source : string; ra,dec : double);
+    Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
+    Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
+    Procedure ScopeGoto(ar,de : double; var ok : boolean);
+    Procedure ScopeAbortSlew;
+    Procedure ScopeReset;
+    Function  ScopeInitialized : boolean ;
+    Function  ScopeConnected : boolean ;
+    Procedure ScopeClose;
+    Procedure ScopeGetEqSys(var EqSys : double);
+    Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
-
-Procedure ScopeShow;
-Procedure ScopeShowModal(var ok : boolean);
-Procedure ScopeConnect(var ok : boolean);
-Procedure ScopeDisconnect(var ok : boolean);
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
-Procedure ScopeSetObs(la,lo : double);
-Procedure ScopeAlign(source : string; ra,dec : double);
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean);
-Procedure ScopeGoto(ar,de : double; var ok : boolean);
-Procedure ScopeAbortSlew;
-Procedure ScopeReset;
-Function  ScopeInitialized : boolean ;
-Function  ScopeConnected : boolean ;
-Procedure ScopeClose;
-Procedure ScopeGetEqSys(var EqSys : double);
-Procedure ScopeReadConfig(ConfigPath : shortstring);
 
 var
   pop_lx200: Tpop_lx200;
@@ -336,10 +344,9 @@ result:=trim(nom);
 if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
-Procedure ShowCoordinates;
+Procedure Tpop_lx200.ShowCoordinates;
 var s1,s2,s3 : string;
 begin
-with pop_lx200 do begin
    if ScopeInitialized then begin
       LX200_QueryEQ(Curdeg_x,Curdeg_y);
       if ShowAltAz.checked then LX200_QueryAz(Cur_az,Cur_alt);
@@ -374,16 +381,10 @@ with pop_lx200 do begin
       az_x.text  := '';
       alt_y.text := '';
    end;
-{   pos_x.refresh;
-   pos_y.refresh;
-   az_x.refresh;
-   alt_y.refresh;}
-end;
 end;
 
-procedure ChangeButton(onoff : boolean);
+procedure Tpop_lx200.ChangeButton(onoff : boolean);
 begin
-with pop_lx200 do begin
 CheckBox1.enabled:=onoff;
 Button3.enabled:=onoff;
 SpeedButton3.enabled:=onoff;
@@ -417,11 +418,9 @@ RASlewRateSet.Enabled:=onoff;
 SlewSpeedGroup.Enabled:=onoff;
 SlewSpeedBar.Enabled:=onoff;
 end;
-end;
 
-procedure ScopeChangeButton(onoff : boolean);
+procedure Tpop_lx200.ScopeChangeButton(onoff : boolean);
 begin
-with pop_lx200 do begin
 // Virthp
 HandPadModeSelection.Enabled:=onoff;
 LRModeGroup.Enabled:=onoff;
@@ -441,112 +440,107 @@ FieldRotationGroup.Enabled:=onoff;
 FieldRotation.Enabled:=onoff;
 FRQuery.Enabled:=onoff;
 end;
-end;
 
-Procedure ScopeConnect(var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeConnect(var ok : boolean);
 begin
-pop_lx200.led.color:=clRed;
-pop_lx200.led.refresh;
-pop_lx200.timer1.enabled:=false;
+led.color:=clRed;
+led.refresh;
+timer1.enabled:=false;
 ok:=false;
-if LX200_Open(trim(pop_lx200.cbo_type.text),trim(pop_lx200.cbo_port.text),pop_lx200.PortSpeedbox.text,pop_lx200.Paritybox.text,pop_lx200.DatabitBox.text,pop_lx200.StopbitBox.text,pop_lx200.TimeOutBox.text,pop_lx200.IntTimeOutBox.text) then begin
-   LX200_SetFormat(pop_lx200.radiogroup2.ItemIndex);
+if LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text) then begin
+   LX200_SetFormat(radiogroup2.ItemIndex);
    ShowCoordinates;
-   pop_lx200.led.color:=clLime;
+   led.color:=clLime;
    ok:=true;
-   pop_lx200.timer1.enabled:=true;
+   timer1.enabled:=true;
    ChangeButton(true);
-   pop_lx200.cbo_type.enabled:=false;
-   if pop_lx200.checkBox1.Checked then pop_lx200.HPP.text:=LX200_QueryHighPrecision;
+   cbo_type.enabled:=false;
+   if checkBox1.Checked then HPP.text:=LX200_QueryHighPrecision;
    if LX200_UseHPP then begin
-     pop_lx200.GroupBox6.visible:=true;
+     GroupBox6.visible:=true;
    end else begin
-     pop_lx200.GroupBox6.visible:=false;
+     GroupBox6.visible:=false;
    end;
    // Renato Bonomini:
-   if pop_lx200.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(true);
+   if cbo_type.Text = 'Scope.exe' then ScopeChangeButton(true);
 end else begin
     LX200_Close;
-    pop_lx200.formstyle:=fsNormal;
-    ShowMessage('Error opening '+pop_lx200.cbo_type.text+' on port '+pop_lx200.cbo_port.text+crlf+'Check if device is connected and power on');
-    pop_lx200.formstyle:=fsStayOnTop;
+    formstyle:=fsNormal;
+    ShowMessage('Error opening '+cbo_type.text+' on port '+cbo_port.text+crlf+'Check if device is connected and power on');
+    formstyle:=fsStayOnTop;
     ChangeButton(false);
     // Renato Bonomini:
-    if pop_lx200.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
-    pop_lx200.cbo_type.enabled:=true;
+    if cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
+    cbo_type.enabled:=true;
 end;
 end;
 
-Procedure ScopeDisconnect(var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeDisconnect(var ok : boolean);
 begin
-pop_lx200.pos_x.text:='';
-pop_lx200.pos_y.text:='';
-pop_lx200.az_x.text:='';
-pop_lx200.alt_y.text:='';
+pos_x.text:='';
+pos_y.text:='';
+az_x.text:='';
+alt_y.text:='';
 ok:=LX200_Close;
-pop_lx200.led.color:=clRed;
+led.color:=clRed;
 ChangeButton(false);
-pop_lx200.cbo_type.enabled:=true;
+cbo_type.enabled:=true;
 // Renato Bonomini:
-if pop_lx200.cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
+if cbo_type.Text = 'Scope.exe' then ScopeChangeButton(false);
 end;
 
-Procedure ScopeClose; stdcall;
+Procedure Tpop_lx200.ScopeClose;
 begin
-//pop_lx200.close;
-pop_lx200.release;
+release;
 end;
 
-Function  ScopeConnected : boolean ; stdcall;
+Function  Tpop_lx200.ScopeConnected : boolean ;
 begin
 result:=LX200_opened;
 end;
 
-Function  ScopeInitialized : boolean ; stdcall;
+Function  Tpop_lx200.ScopeInitialized : boolean ;
 begin
 result:= ScopeConnected;
 end;
 
-Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
+Procedure Tpop_lx200.ScopeAlign(source : string; ra,dec : double);
 begin
 LX200_SyncPos(RA*15,DEC);
 end;
 
-Procedure ScopeShowModal(var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeShowModal(var ok : boolean);
 begin
-pop_lx200.showmodal;
-ok:=(pop_lx200.modalresult=mrOK);
+showmodal;
+ok:=(modalresult=mrOK);
 end;
 
-Procedure ScopeShow; stdcall;
+Procedure Tpop_lx200.ScopeShow;
 begin
-pop_lx200.show
+show
 end;
 
-Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeGetRaDec(var ar,de : double; var ok : boolean);
 begin
 if ScopeConnected then begin
    ar:=Curdeg_x/15;
    de:=Curdeg_y;
    ok:=true;
-//      ok:=LX200_QueryEQ(ar,de);
-//      ar:=ar/15;
 end else ok:=false;
 end;
 
-Procedure ScopeGetAltAz(var alt,az : double; var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeGetAltAz(var alt,az : double; var ok : boolean);
 begin
 if ScopeConnected then begin
    az:=cur_az;
    alt:=cur_alt;
    ok:=true;
-//   ok:=LX200_QueryAZ(az,alt);
 end else ok:=false;
 end;
 
-Procedure ScopeGetEqSys(var EqSys : double); stdcall;
+Procedure Tpop_lx200.ScopeGetEqSys(var EqSys : double);
 begin
-case pop_lx200.EqSys1.ItemIndex of
+case EqSys1.ItemIndex of
   0: EqSys:=0;
   1: EqSys:=1950;
   2: EqSys:=2000;
@@ -554,46 +548,42 @@ case pop_lx200.EqSys1.ItemIndex of
 end;
 end;
 
-Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer); stdcall;
+Procedure Tpop_lx200.ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
-if (pop_lx200=nil)or(pop_lx200.pos_x=nil) then begin
-   decimalseparator:='.';
-   pop_lx200:=Tpop_lx200.Create(nil);
-end;
 // Renato added model 5
-if (pop_lx200.cbo_type.text=validModel[1])or(pop_lx200.cbo_type.text=validModel[2])or(pop_lx200.cbo_type.text=validModel[5]) then begin // lx200, autostar, scope.exe
-       name:=pop_lx200.cbo_type.text;
+if (cbo_type.text=validModel[1])or(cbo_type.text=validModel[2])or(cbo_type.text=validModel[5]) then begin // lx200, autostar, scope.exe
+       name:=cbo_type.text;
        QueryOK:=true;
        SyncOK:=true;
        GotoOK:=true;
-end else if (pop_lx200.cbo_type.text=validModel[3])or(pop_lx200.cbo_type.text=validModel[4]) then begin  // magellan
-       name:=pop_lx200.cbo_type.text;
+end else if (cbo_type.text=validModel[3])or(cbo_type.text=validModel[4]) then begin  // magellan
+       name:=cbo_type.text;
        QueryOK:=true;
        SyncOK:=false;
        GotoOK:=false;
 end;
-refreshrate:=pop_lx200.timer1.interval;
+refreshrate:=timer1.interval;
 end;
 
-Procedure ScopeReset; stdcall;
+Procedure Tpop_lx200.ScopeReset;
 begin
 end;
 
-Procedure ScopeSetObs(la,lo : double); stdcall;
+Procedure Tpop_lx200.ScopeSetObs(la,lo : double);
 begin
-pop_lx200.lat.text:=floattostr(la);
-pop_lx200.long.text:=floattostr(lo);
+lat.text:=floattostr(la);
+long.text:=floattostr(lo);
 latitude:=la;
 longitude:=lo;
 LX200_SetObs( La,Lo,1,now);
 end;
 
-Procedure ScopeGoto(ar,de : double; var ok : boolean); stdcall;
+Procedure Tpop_lx200.ScopeGoto(ar,de : double; var ok : boolean);
 begin
 ok:=LX200_Goto(ar*15,de);
 end;
 
-Procedure ScopeAbortSlew;
+Procedure Tpop_lx200.ScopeAbortSlew;
 begin
 LX200_StopMove;
 end;
@@ -623,9 +613,9 @@ begin
      result:=sgn*(abs(d)+(m/60));
 end;
 
-Procedure ScopeReadConfig(ConfigPath : shortstring); stdcall;
+Procedure Tpop_lx200.ScopeReadConfig(ConfigPath : shortstring);
 begin
-  pop_lx200.ReadConfig(ConfigPath);
+  ReadConfig(ConfigPath);
 end;
 
 {-------------------------------------------------------------------------------
@@ -770,7 +760,7 @@ procedure Tpop_lx200.kill(Sender: TObject; var CanClose: Boolean);
 begin
 if port_opened then begin
    canclose:=false;
-   pop_lx200.hide;
+   hide;
 end;
 end;
 
@@ -1069,7 +1059,7 @@ end;
 
 procedure Tpop_lx200.FormShow(Sender: TObject);
 begin
-pop_lx200.Caption:=cbo_type.text;
+Caption:=cbo_type.text;
 end;
 
 procedure Tpop_lx200.CheckBox3Click(Sender: TObject);
@@ -1258,19 +1248,19 @@ end;
 
 Procedure Tpop_lx200.ScopeFieldRotationClick(Sender: TObject);
 begin
-if pop_lx200.cbo_type.text='Scope.exe' then pop_lx200.FRAngle.Value:=LX200_Scope_GetFRAngle;
-if pop_lx200.FieldRotation.State=cbUnchecked then LX200_FieldRotationOff else LX200_FieldRotationOn;
+if cbo_type.text='Scope.exe' then FRAngle.Value:=LX200_Scope_GetFRAngle;
+if FieldRotation.State=cbUnchecked then LX200_FieldRotationOff else LX200_FieldRotationOn;
 end;
 
 procedure Tpop_lx200.SetGuideArcSecClick(Sender: TObject);
 begin
-LX200_Scope_SetGuideArcSec(pop_lx200.GuideArcSec.Value);
+LX200_Scope_SetGuideArcSec(GuideArcSec.Value);
 GuideArcSec.Value:=LX200_Scope_GetGuideArcSec;
 end;
 
 procedure Tpop_lx200.SetMsArcSecClick(Sender: TObject);
 begin
-LX200_Scope_SetMsArcSec(pop_lx200.MsArcSec.Value);
+LX200_Scope_SetMsArcSec(MsArcSec.Value);
 MsArcSec.Value:=LX200_Scope_GetMsArcSec;
 end;
 
@@ -1328,13 +1318,13 @@ end;
 procedure Tpop_lx200.TrackingSetRateButtonClick(Sender: TObject);
 var rate : Single;
 begin
-rate:=pop_lx200.TrackingRateEdit.Value;
+rate:=TrackingRateEdit.Value;
 if LX200_SetTrackingRateT(rate) = false then LX200_SetTrackingRateS(rate);
 end;
 
 procedure Tpop_lx200.TrackingGetButtonClick(Sender: TObject);
 begin
-pop_lx200.TrackingRateEdit.Value:=LX200_GetTrackingRate;
+TrackingRateEdit.Value:=LX200_GetTrackingRate;
 end;
 
 procedure Tpop_lx200.TrackingRateDecreaseClick(Sender: TObject);
@@ -1351,33 +1341,33 @@ procedure Tpop_lx200.LX200GPSRateClick(Sender: TObject);
 begin
 if not LX200GPSRate.Checked then
 begin
-pop_lx200.Lx200GPSMotorSpeeds.Visible:=False;
-pop_lx200.PEC.TabVisible:=False;
-pop_lx200.LxPecToggle.Visible:=True;
-pop_lx200.FanControl.Visible:=False;
+Lx200GPSMotorSpeeds.Visible:=False;
+PEC.TabVisible:=False;
+LxPecToggle.Visible:=True;
+FanControl.Visible:=False;
 end;
 if LX200GPSRate.Checked then
 begin
-pop_lx200.Lx200GPSMotorSpeeds.Visible:=True;
-pop_lx200.PEC.TabVisible:=True;
-pop_lx200.LxPecToggle.Visible:=False;
-pop_lx200.FanControl.Visible:=True;
+Lx200GPSMotorSpeeds.Visible:=True;
+PEC.TabVisible:=True;
+LxPecToggle.Visible:=False;
+FanControl.Visible:=True;
 end;
 end;
 
 procedure Tpop_lx200.LxGuideRateSetClick(Sender: TObject);
 begin
-LX200_GPS_SetGuideRate(pop_lx200.LxGuideRate.Value);
+LX200_GPS_SetGuideRate(LxGuideRate.Value);
 end;
 
 procedure Tpop_lx200.RASlewRateSetClick(Sender: TObject);
 begin
-LX200_GPS_RASlewRate(pop_lx200.RASlewRate.Value);
+LX200_GPS_RASlewRate(RASlewRate.Value);
 end;
 
 procedure Tpop_lx200.DECSlewRateSetClick(Sender: TObject);
 begin
-LX200_GPS_DECSlewRate(pop_lx200.DECSlewRate.Value);
+LX200_GPS_DECSlewRate(DECSlewRate.Value);
 end;
 
 procedure Tpop_lx200.FanControlClick(Sender: TObject);
@@ -1387,7 +1377,7 @@ end;
 
 procedure Tpop_lx200.SlewSpeedBarChange(Sender: TObject);
 begin
-LX200_SlewSpeed(pop_lx200.SlewSpeedBar.Position);
+LX200_SlewSpeed(SlewSpeedBar.Position);
 end;
 
 end.
