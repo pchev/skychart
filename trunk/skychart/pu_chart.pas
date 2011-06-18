@@ -37,7 +37,7 @@ uses
      pu_ascomclient,
      {$endif}
      pu_lx200client, pu_encoderclient,
-     u_translation, pu_detail, cu_skychart, cu_indiclient, u_constant, u_util,pu_image,
+     u_translation, pu_detail, cu_skychart, pu_indiclient, u_constant, u_util,pu_image,
      u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
@@ -197,9 +197,10 @@ type
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
-    procedure TelescopeCoordChange(Sender: TObject);
-    procedure TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
-    procedure TelescopeGetMessage(Sender : TObject; const msg : string);
+    procedure ConnectINDI(Sender: TObject);
+    procedure SlewINDI(Sender: TObject);
+    procedure SyncINDI(Sender: TObject);
+    procedure AbortSlewINDI(Sender: TObject);
     procedure ConnectASCOM(Sender: TObject);
     procedure SlewASCOM(Sender: TObject);
     procedure SyncASCOM(Sender: TObject);
@@ -230,7 +231,6 @@ type
     ChartCursor: TCursor;
     sc: Tskychart;
     cmain: Tconf_main;
-    indi1: TIndiClient;
     locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
@@ -442,14 +442,13 @@ try
  locked:=true;
  if sc<>nil then sc.free;
  Image1.Free;
- if (indi1<>nil)and(Connect1.checked) then begin
-   indi1.onCoordChange:=nil;
-   indi1.onStatusChange:=nil;
-   indi1.onMessage:=nil;
-   indi1.exiting:=true;
-   indi1.terminate;
-   Application.ProcessMessages;
-   sleep(500);
+ if pop_indi<>nil then begin
+   if Connect1.Checked then begin
+     pop_indi.ScopeDisconnect(ok);
+     Application.ProcessMessages;
+     sleep(500);
+   end;
+   pop_indi.Free;
  end;
  if pop_lx200<>nil then begin
    if Connect1.Checked then pu_lx200client.ScopeDisconnect(ok);
@@ -3325,33 +3324,7 @@ else if sc.cfgsc.ManualTelescope then begin
    sc.cfgsc.TelescopeJD:=0;
 end
 else if sc.cfgsc.IndiTelescope then begin
-  if Connect1.checked then begin
-     TelescopeTimer.Enabled:=false;
-     indi1.Terminate;
-     sc.cfgsc.ScopeMark:=false;
-     if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-     Refresh;
-  end else begin
-     sc.cfgsc.TelescopeJD:=0;
-     indi1:=TIndiClient.Create;
-     indi1.TargetHost:=sc.cfgsc.IndiServerHost;
-     indi1.TargetPort:=sc.cfgsc.IndiServerPort;
-     indi1.Timeout := 100;
-     indi1.TelescopePort:=sc.cfgsc.IndiPort;
-     if sc.cfgsc.IndiDevice=rsOther then indi1.Device:=''
-        else indi1.Device:=sc.cfgsc.IndiDevice;
-     indi1.IndiServer:=sc.cfgsc.IndiServerCmd;
-     indi1.IndiDriver:=sc.cfgsc.IndiDriver;
-     indi1.AutoStart:=sc.cfgsc.IndiAutostart;
-     indi1.Autoconnect:=true;
-     indi1.onCoordChange:=TelescopeCoordChange;
-     indi1.onStatusChange:=TelescopeStatusChange;
-     indi1.onMessage:=TelescopeGetMessage;
-     indi1.Start;
-     TelescopeTimer.Interval:=5000;
-     TelescopeTimer.Enabled:=true;
-  end;
-  Refresh;
+   ConnectINDI(Sender);
 end;
 end;
 
@@ -3374,16 +3347,8 @@ if Connect1.checked then begin
   else if sc.cfgsc.EncoderTelescope then begin
    // no slew
   end
-  else if sc.cfgsc.IndiTelescope then
-  begin
-    ra:=sc.cfgsc.FindRA;
-    dec:=sc.cfgsc.FindDec;
-    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-    if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-    indi1.RA:=formatfloat(f13,ra*rad2deg/15);
-    indi1.Dec:=formatfloat(f13,dec*rad2deg);
-    Indi1.Slew;
-    Refresh;
+  else if sc.cfgsc.IndiTelescope then begin
+    SlewINDI(Sender);
   end;
 end
 else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
@@ -3409,8 +3374,7 @@ else if sc.cfgsc.EncoderTelescope then begin
   end
 else if sc.cfgsc.IndiTelescope then
 begin
-  Indi1.AbortSlew;
-  Refresh;
+  AbortSlewINDI(Sender);
 end;
 end;
 end;
@@ -3438,69 +3402,22 @@ end
 else if sc.cfgsc.EncoderTelescope then begin
    SyncEncoder(Sender);
 end
-else if sc.cfgsc.IndiTelescope then
-begin
-  ra:=sc.cfgsc.FindRA;
-  dec:=sc.cfgsc.FindDec;
-  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-  if not indi1.EquatorialOfDay then precession(sc.cfgsc.JDChart,jd2000,ra,dec);
-  indi1.RA:=formatfloat(f13,ra*rad2deg/15);
-  indi1.Dec:=formatfloat(f13,dec*rad2deg);
-  Indi1.Sync;
-  Refresh;
+else if sc.cfgsc.IndiTelescope then begin
+   SyncINDI(Sender);
 end;
 end
 else if assigned(Fshowinfo) then Fshowinfo(rsTelescopeNot);
 end;
 
-procedure Tf_chart.TelescopeCoordChange(Sender: TObject);
-var ra,dec:double;
-    i:integer;
-begin
-//if (indi1.RA='0')and(indi1.Dec='0') then exit;
-try
-val(indi1.RA,ra,i);
-if i<>0 then exit;
-val(indi1.Dec,Dec,i);
-if i<>0 then exit;
-ra:=ra*15*deg2rad;
-dec:=dec*deg2rad;
-if not indi1.EquatorialOfDay then precession(jd2000,sc.cfgsc.JDChart,ra,dec);
-if sc.cfgsc.ApparentPos then apparent_equatorial(ra,dec,sc.cfgsc);
-if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-if sc.cfgsc.moved then begin
-   Image1.Invalidate;
-   if assigned(FChartMove) then FChartMove(self);
-end;
-except
-end;
-end;
-
-
-procedure Tf_chart.TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
-begin
-if source=Telescope then begin
-   if (status=Ok)or(status=Busy) then Connect1.checked:=true
-                                 else Connect1.checked:=false;
-if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-end;
-end;
-
-procedure Tf_chart.TelescopeGetMessage(Sender : TObject; const msg : string);
-begin
-if assigned(Fshowinfo) then Fshowinfo(Format(rsTelescope2, [msg]));
-end;
-
 procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
-begin
-if MovingCircle or (sc.cfgsc.NumCircle>=MaxCircle) then exit;
-mouse.CursorPos:=point(xcursor+Image1.ClientOrigin.x,ycursor+Image1.ClientOrigin.y);
-GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
-sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
-MovingCircle := true;
-StartCircle:=true;
+  begin
+  if MovingCircle or (sc.cfgsc.NumCircle>=MaxCircle) then exit;
+  mouse.CursorPos:=point(xcursor+Image1.ClientOrigin.x,ycursor+Image1.ClientOrigin.y);
+  GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
+  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+  MovingCircle := true;
+  StartCircle:=true;
 end;
-
 
 procedure Tf_chart.RemoveLastCircle1Click(Sender: TObject);
 begin
@@ -3630,6 +3547,59 @@ except
    result:=false;
   end;
 end;
+end;
+
+// INDI interface
+
+procedure Tf_chart.ConnectINDI(Sender: TObject);
+begin
+if pop_indi=nil then begin
+  pop_indi:=Tpop_indi.Create(self);
+  pop_indi.csc:=sc.cfgsc;
+end;
+if Connect1.checked then begin
+   pop_indi.ScopeShow;
+end else begin
+     pop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
+     pop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+     pop_indi.ScopeShow;
+     TelescopeTimer.Enabled:=true;
+end;
+if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
+end;
+
+procedure Tf_chart.SlewINDI(Sender: TObject);
+var ra,dec:double;
+    ok:boolean;
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.TelescopeJD=0 then begin
+  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+end else begin
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+end;
+pop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+end;
+
+procedure Tf_chart.AbortSlewINDI(Sender: TObject);
+begin
+pop_indi.ScopeAbortSlew;
+end;
+
+procedure Tf_chart.SyncINDI(Sender: TObject);
+var ra,dec:double;
+begin
+ra:=sc.cfgsc.FindRA;
+dec:=sc.cfgsc.FindDec;
+if sc.cfgsc.TelescopeJD=0 then begin
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+end else begin
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+end;
+pop_indi.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
 // LX200 interface
@@ -3842,18 +3812,7 @@ TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
-if sc.cfgsc.IndiTelescope then begin
-   if (not Connect1.checked) and ((indi1.TelescopeStatus=cu_indiclient.Idle)or(indi1.TelescopeStatus=cu_indiclient.Alert)) then begin
-      indi1.Terminate;
-      sc.cfgsc.ScopeMark:=false;
-      if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-      Refresh;
-      if assigned(Fshowinfo) then Fshowinfo('INDI server '+sc.cfgsc.IndiServerHost+':'+sc.cfgsc.IndiServerPort+' do not return information about device '+sc.cfgsc.IndiDevice);
-   end else begin
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
-   end;
-end else if sc.cfgsc.PluginTelescope then begin
+if sc.cfgsc.PluginTelescope then begin
     if Ftelescope.scopelibok then begin
     Connect1.checked:=Ftelescope.ScopeConnected;
     if Connect1.checked then begin
@@ -3899,29 +3858,16 @@ else if sc.cfgsc.ASCOMTelescope then begin
       pu_ascomclient.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
       pu_ascomclient.ScopeGetRaDec(ra,dec,ok);
-      if ok then begin
-         ra:=ra*15*deg2rad;
-         dec:=dec*deg2rad;
-         if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
-            else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
-         if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-         if sc.cfgsc.moved then begin
-            Image1.Invalidate;
-            if assigned(FChartMove) then FChartMove(self);
-         end;
-      end;
-      TelescopeTimer.Interval:=500;
-      TelescopeTimer.Enabled:=true;
-     end else begin
-      TelescopeTimer.Interval:=2000;
-      TelescopeTimer.Enabled:=true;
-      if sc.cfgsc.ScopeMark then begin
-         sc.cfgsc.ScopeMark:=false;
-         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-         Refresh;
-      end;
      end;
    {$endif}
+ end
+else if sc.cfgsc.IndiTelescope then begin
+     Connect1.checked:=pop_indi.ScopeConnected;
+     if Connect1.checked then begin
+      pop_indi.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      pop_indi.ScopeGetRaDec(ra,dec,ok);
+     end;
  end
 else if sc.cfgsc.LX200Telescope then begin
      Connect1.checked:=pu_lx200client.ScopeConnected;
@@ -3929,27 +3875,6 @@ else if sc.cfgsc.LX200Telescope then begin
       pu_lx200client.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
       pu_lx200client.ScopeGetRaDec(ra,dec,ok);
-      if ok then begin
-         ra:=ra*15*deg2rad;
-         dec:=dec*deg2rad;
-         if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
-            else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
-         if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-         if sc.cfgsc.moved then begin
-            Image1.Invalidate;
-            if assigned(FChartMove) then FChartMove(self);
-         end;
-      end;
-      TelescopeTimer.Interval:=500;
-      TelescopeTimer.Enabled:=true;
-     end else begin
-      TelescopeTimer.Interval:=2000;
-      TelescopeTimer.Enabled:=true;
-      if sc.cfgsc.ScopeMark then begin
-         sc.cfgsc.ScopeMark:=false;
-         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-         Refresh;
-      end;
      end;
  end
 else if sc.cfgsc.EncoderTelescope then begin
@@ -3958,29 +3883,31 @@ else if sc.cfgsc.EncoderTelescope then begin
       pu_encoderclient.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
       pu_encoderclient.ScopeGetRaDec(ra,dec,ok);
-      if ok then begin
-         ra:=ra*15*deg2rad;
-         dec:=dec*deg2rad;
-         if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
-            else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
-         if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-         if sc.cfgsc.moved then begin
-            Image1.Invalidate;
-            if assigned(FChartMove) then FChartMove(self);
-         end;
-      end;
-      TelescopeTimer.Interval:=500;
-      TelescopeTimer.Enabled:=true;
-     end else begin
-      TelescopeTimer.Interval:=2000;
-      TelescopeTimer.Enabled:=true;
-      if sc.cfgsc.ScopeMark then begin
-         sc.cfgsc.ScopeMark:=false;
-         if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-         Refresh;
-      end;
      end;
+end;
+if Connect1.checked then begin
+ if ok then begin
+    ra:=ra*15*deg2rad;
+    dec:=dec*deg2rad;
+    if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
+       else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
+    if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
+    if sc.cfgsc.moved then begin
+       Image1.Invalidate;
+       if assigned(FChartMove) then FChartMove(self);
+    end;
  end;
+ TelescopeTimer.Interval:=500;
+ TelescopeTimer.Enabled:=true;
+ end else begin
+  TelescopeTimer.Interval:=2000;
+  TelescopeTimer.Enabled:=true;
+  if sc.cfgsc.ScopeMark then begin
+     sc.cfgsc.ScopeMark:=false;
+     if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
+     Refresh;
+  end;
+end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 except
  TelescopeTimer.Enabled:=false;

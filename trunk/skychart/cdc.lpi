@@ -131,9 +131,9 @@
         <UnitName Value="cu_fits"/>
       </Unit4>
       <Unit5>
-        <Filename Value="cu_indiclient.pas"/>
+        <Filename Value="cu_indiprotocol.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="cu_indiclient"/>
+        <UnitName Value="cu_indiprotocol"/>
       </Unit5>
       <Unit6>
         <Filename Value="cu_planet.pas"/>
@@ -426,12 +426,12 @@
         <UnitName Value="cu_tcpserver"/>
       </Unit46>
       <Unit47>
-        <Filename Value="pu_ascomclient.pas"/>
+        <Filename Value="pu_indiclient.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="pop_scope"/>
+        <ComponentName Value="pop_indi"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_ascomclient"/>
+        <UnitName Value="pu_indiclient"/>
       </Unit47>
       <Unit48>
         <Filename Value="pu_main.pas"/>

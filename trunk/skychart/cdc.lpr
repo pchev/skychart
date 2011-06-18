@@ -34,7 +34,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
-  cu_planet, cu_indiclient, cu_fits, cu_database, cu_telescope, pu_info,
+  cu_planet, cu_indiprotocol, cu_fits, cu_database, cu_telescope, pu_info,
   pu_image, pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
   u_util, MultiDocPackage, enhedit, pu_config_catalog, pu_config_system,
@@ -44,7 +44,7 @@ uses
   downldialog, synapse, pu_catgen, pu_catgenadv, pu_progressbar, mrecsort,
   pu_addlabel, pu_print, u_translation, pu_splash, pu_about, cu_tz,
   uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
-  pu_ascomclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
+  pu_indiclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
   cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki, cu_encoderprotocol,
   bgrabitmappack;
   
