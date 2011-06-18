@@ -107,8 +107,6 @@ var
 implementation
 {$R *.lfm}
 
-const crlf=chr(10)+chr(13);
-
 procedure Tpop_indi.TelescopeCoordChange(Sender: TObject);
 var ra,dec:double;
     i:integer;

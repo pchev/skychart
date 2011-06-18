@@ -40,11 +40,14 @@ interface
 
 uses
   Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, u_constant,
+  Forms, Dialogs, u_constant, u_util,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls,
   enhedits;
 
 type
+
+  { Tpop_lx200 }
+
   Tpop_lx200 = class(TForm)
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
@@ -202,6 +205,7 @@ type
     EqSys1: TComboBox;
     Label21: TLabel;
      {Utility and form functions}
+     procedure FormCreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
      procedure Timer1Timer(Sender: TObject);
      procedure setresClick(Sender: TObject);
@@ -285,6 +289,8 @@ type
   private
     { Private declarations }
     FConfig: string;
+    CoordLock : boolean;
+    Initial : boolean;
   public
     { Public declarations }
     csc: Tconf_skychart;
@@ -326,23 +332,12 @@ implementation
  uses
     cu_lx200protocol,
     cu_serial;
-//    skylib;
-
-var CoordLock : boolean = false;
-    Initial : boolean = true;
-
-const crlf=chr(10)+chr(13);
 
 {-------------------------------------------------------------------------------
 
                        Cartes du Ciel Dll functions
 
 --------------------------------------------------------------------------------}
-Function Slash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
-end;
 
 Procedure Tpop_lx200.ShowCoordinates;
 var s1,s2,s3 : string;
@@ -762,6 +757,12 @@ if port_opened then begin
    canclose:=false;
    hide;
 end;
+end;
+
+procedure Tpop_lx200.FormCreate(Sender: TObject);
+begin
+    CoordLock := false;
+    Initial := true;
 end;
 
 procedure Tpop_lx200.Timer1Timer(Sender: TObject);

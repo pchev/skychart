@@ -15,6 +15,7 @@ object pop_lx200: Tpop_lx200
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   OnCloseQuery = kill
+  OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefault
   LCLVersion = '0.9.30.1'

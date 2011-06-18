@@ -208,16 +208,6 @@ implementation
     cu_serial,
     cu_taki;
 
-
-const crlf=chr(10)+chr(13);
-
-
-Function Slash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
-end;
-
 Procedure Tpop_encoder.ScopeConnect(var ok : boolean);
 begin
 SetRes;
