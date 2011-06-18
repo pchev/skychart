@@ -38,7 +38,7 @@ uses
      {$endif}
      pu_lx200client, pu_encoderclient,
      u_translation, pu_detail, cu_skychart, pu_indiclient, u_constant, u_util,pu_image,
-     u_projection, Printers, Math, cu_telescope, downloaddialog, IntfGraphics,
+     u_projection, Printers, Math, downloaddialog, IntfGraphics,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
      
@@ -181,7 +181,6 @@ type
     procedure TrackOff1Click(Sender: TObject);
   private
     { Private declarations }
-    Ftelescope: Ttelescope;
     FImageSetFocus: TnotifyEvent;
     FSetFocus: TnotifyEvent;
     FShowTopMessage: Tstr2func;
@@ -211,10 +210,6 @@ type
     procedure AbortSlewLX200(Sender: TObject);
     procedure ConnectEncoder(Sender: TObject);
     procedure SyncEncoder(Sender: TObject);
-    procedure ConnectPlugin(Sender: TObject);
-    procedure SlewPlugin(Sender: TObject);
-    procedure AbortSlewPlugin(Sender: TObject);
-    procedure SyncPlugin(Sender: TObject);
     procedure SetNightVision(value:boolean);
     procedure Image1Click(Sender: TObject);
     procedure Image1DblClick(Sender: TObject);
@@ -306,7 +301,6 @@ type
     procedure ChartActivate;
     procedure SetCameraRotation(cam:integer);
     procedure MoveCamera(angle:single);
-    property telescopeplugin: Ttelescope read Ftelescope write Ftelescope;
     property OnImageSetFocus: TNotifyEvent read FImageSetFocus write FImageSetFocus;
     property OnSetFocus: TNotifyEvent read FSetFocus write FSetFocus;
     property OnShowTopMessage: Tstr2func read FShowTopMessage write FShowTopMessage;
@@ -3309,9 +3303,6 @@ begin
 if sc.cfgsc.ASCOMTelescope then begin
    ConnectASCOM(Sender);
 end
-else if sc.cfgsc.PluginTelescope then begin
-   ConnectPlugin(Sender);
-end
 else
 {$endif}
 if sc.cfgsc.LX200Telescope then begin
@@ -3336,9 +3327,6 @@ if Connect1.checked then begin
   if sc.cfgsc.ASCOMTelescope then begin
      SlewASCOM(Sender);
   end
-  else if sc.cfgsc.PluginTelescope then begin
-     SlewPlugin(Sender);
-  end
   else
   {$endif}
   if sc.cfgsc.LX200Telescope then begin
@@ -3360,9 +3348,6 @@ if Connect1.checked then begin
 {$ifdef mswindows}
   if sc.cfgsc.ASCOMTelescope then begin
      AbortSlewASCOM(Sender);
-  end
-  else if sc.cfgsc.PluginTelescope then begin
-     AbortSlewPlugin(Sender);
   end
 else
 {$endif}
@@ -3390,9 +3375,6 @@ then begin
 {$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
    SyncASCOM(Sender);
-end
-else if sc.cfgsc.PluginTelescope then begin
-   SyncPlugin(Sender);
 end
 else
 {$endif}
@@ -3751,58 +3733,6 @@ pu_ascomclient.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 {$endif}
 end;
 
-// Windows only telescope plugin 
-
-procedure Tf_chart.ConnectPlugin(Sender: TObject);
-begin
-if Connect1.checked then begin
-   Ftelescope.ScopeShow;
-end else begin
-   if not Ftelescope.scopelibok then Ftelescope.InitScopeLibrary;
-   if Ftelescope.scopelibok then begin
-     Ftelescope.ScopeReadConfig(ExtractFilePath(Configfile));
-     Ftelescope.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
-     Ftelescope.ScopeShow;
-     TelescopeTimer.Enabled:=true;
-   end;
-end;
-if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-end;
-
-procedure Tf_chart.SlewPlugin(Sender: TObject);
-var ra,dec:double;
-    ok:boolean;
-begin
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.TelescopeJD=0 then begin
-  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-end else begin
-  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-  precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
-end;
-Ftelescope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
-end;
-
-procedure Tf_chart.AbortSlewPlugin(Sender: TObject);
-begin
-Ftelescope.ScopeShow;
-end;
-
-procedure Tf_chart.SyncPlugin(Sender: TObject);
-var ra,dec:double;
-begin
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.TelescopeJD=0 then begin
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
-end else begin
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
-   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
-end;
-Ftelescope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
-end;
-
 procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
 var ra,dec:double;
     ok: boolean;
@@ -3812,46 +3742,7 @@ TelescopeTimer.Enabled:=false;
 {$ifdef trace_debug}
  WriteTrace(caption+' TelescopeTimerTimer');
 {$endif}
-if sc.cfgsc.PluginTelescope then begin
-    if Ftelescope.scopelibok then begin
-    Connect1.checked:=Ftelescope.ScopeConnected;
-    if Connect1.checked then begin
-     Ftelescope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
-     if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
-     Ftelescope.ScopeGetRaDec(ra,dec,ok);
-     if ok then begin
-        ra:=ra*15*deg2rad;
-        dec:=dec*deg2rad;
-        if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
-           else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
-        if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
-        if sc.cfgsc.moved then begin
-           Image1.Invalidate;
-           if assigned(FChartMove) then FChartMove(self);
-        end;
-     end;
-     TelescopeTimer.Interval:=500;
-     TelescopeTimer.Enabled:=true;
-    end else begin
-     TelescopeTimer.Interval:=2000;
-     TelescopeTimer.Enabled:=true;
-     if sc.cfgsc.ScopeMark then begin
-        sc.cfgsc.ScopeMark:=false;
-        if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-        Refresh;
-     end;
-    end;
-    end else begin
-     Connect1.checked:=false;
-     TelescopeTimer.Enabled:=false;
-     if sc.cfgsc.ScopeMark then begin
-        sc.cfgsc.ScopeMark:=false;
-        if sc.cfgsc.TrackName=rsTelescope then sc.cfgsc.TrackOn:=false;
-        Refresh;
-     end;
-    end;
-end
-else if sc.cfgsc.ASCOMTelescope then begin
+if sc.cfgsc.ASCOMTelescope then begin
   {$ifdef mswindows}
      Connect1.checked:=pu_ascomclient.ScopeConnected;
      if Connect1.checked then begin

@@ -32,7 +32,7 @@ uses
   {$ifdef mswindows}
     Windows, ShlObj,
   {$endif}
-  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_telescope, cu_fits, cu_database, pu_chart,
+  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, pu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
@@ -684,7 +684,6 @@ type
     catalog : Tcatalog;
     fits : TFits;
     planet  : Tplanet;
-    telescope: Ttelescope;
     cdcdb: TCDCdb;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
@@ -829,9 +828,6 @@ begin
   Child.sc.planet:=planet;
   Child.sc.cdb:=cdcdb;
   Child.cmain:=cfgm;
-  {$ifdef mswindows}
-  Child.telescopeplugin:=telescope;
-  {$endif}
   Child.sc.plot.cfgplot.Assign(cfgp);
   Child.sc.plot.cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
   Child.sc.plot.cfgplot.starshapew:=Child.sc.plot.cfgplot.starshapesize div 2;
@@ -1102,11 +1098,6 @@ try
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
  planet.SetDE(slash(Appdir)+slash('data')+'jpleph');
-{$ifdef trace_debug}
- WriteTrace('Telescope plugin');
-{$endif}
- telescope.pluginpath:=slash(appdir)+slash('plugins')+slash('telescope');
- telescope.plugin:=def_cfgsc.ScopePlugin;
 {$ifdef trace_debug}
  WriteTrace('Background Image');
 {$endif}
@@ -1631,11 +1622,6 @@ lang:=u_translation.translate(cfgm.language);
 u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
-step:='Telescope';
-{$ifdef trace_debug}
- WriteTrace(step);
-{$endif}
-telescope:=Ttelescope.Create(self);
 step:='Multidoc';
 {$ifdef trace_debug}
  WriteTrace(step);
@@ -1725,7 +1711,6 @@ catalog.free;
 Fits.Free;
 planet.free;
 cdcdb.free;
-telescope.free;
 def_cfgsc.Free;
 cfgs.Free;
 cfgm.Free;
@@ -3483,18 +3468,6 @@ begin
     ConnectDB;
     Fits.min_sigma:=cfgm.ImageLuminosity;
     Fits.max_sigma:=cfgm.ImageContrast;
-    TelescopePanel.visible:=def_cfgsc.IndiTelescope;
-    {$ifdef mswindows}
-    if (telescope.scopelibok)and(def_cfgsc.IndiTelescope) then begin
-       telescope.ScopeDisconnect;
-       telescope.UnloadScopeLibrary;
-    end;
-    if (telescope.scopelibok)and(def_cfgsc.PluginTelescope)and(def_cfgsc.ScopePlugin<>telescope.plugin) then begin
-       telescope.ScopeDisconnect;
-       telescope.UnloadScopeLibrary;
-    end;
-    telescope.plugin:=def_cfgsc.ScopePlugin;
-    {$endif}
     if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
        sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
@@ -4038,7 +4011,6 @@ def_cfgsc.IndiDriver:='indi_lx200basic';
 def_cfgsc.IndiPort:='/dev/ttyS0';
 def_cfgsc.IndiDevice:='LX200 Basic';
 def_cfgsc.IndiTelescope:=false;
-def_cfgsc.PluginTelescope:=false;
 def_cfgsc.ASCOMTelescope:=false;
 def_cfgsc.LX200Telescope:=false;
 def_cfgsc.EncoderTelescope:=false;
@@ -4053,7 +4025,6 @@ def_cfgsc.ManualTelescopeType:=0;
 def_cfgsc.TelescopeTurnsX:=6;    // Vixen GP
 def_cfgsc.TelescopeTurnsY:=0.4;
 def_cfgsc.TelescopeJD:=0;
-def_cfgsc.ScopePlugin:='Ascom.tid';
 catalog.cfgshr.ListStar:=false;
 catalog.cfgshr.ListNeb:=true;
 catalog.cfgshr.ListVar:=true;
@@ -4797,14 +4768,19 @@ def_cfgsc.IndiTelescope:=ReadBool(section,'IndiTelescope',def_cfgsc.IndiTelescop
 def_cfgsc.ASCOMTelescope:=ReadBool(section,'ASCOMTelescope',def_cfgsc.ASCOMTelescope);
 def_cfgsc.LX200Telescope:=ReadBool(section,'LX200Telescope',def_cfgsc.LX200Telescope);
 def_cfgsc.EncoderTelescope:=ReadBool(section,'EncoderTelescope',def_cfgsc.EncoderTelescope);
-def_cfgsc.PluginTelescope:=ReadBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
-if  def_cfgsc.ASCOMTelescope and def_cfgsc.PluginTelescope then def_cfgsc.PluginTelescope:=false;
 def_cfgsc.ManualTelescope:=ReadBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
 def_cfgsc.ManualTelescopeType:=ReadInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
 def_cfgsc.TelescopeTurnsX:=ReadFloat(section,'TelescopeTurnsX',def_cfgsc.TelescopeTurnsX);
 def_cfgsc.TelescopeTurnsY:=ReadFloat(section,'TelescopeTurnsY',def_cfgsc.TelescopeTurnsY);
+if not (def_cfgsc.IndiTelescope or def_cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope or def_cfgsc.ManualTelescope) then begin
+  {$ifdef unix}
+     def_cfgsc.ManualTelescope:=true;
+  {$endif}
+  {$ifdef mswindows}
+     def_cfgsc.ASCOMTelescope:=true;
+  {$endif}
+end;
 TelescopePanel.visible:=def_cfgsc.IndiTelescope;
-def_cfgsc.ScopePlugin:=ReadString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
@@ -5390,12 +5366,10 @@ WriteBool(section,'IndiTelescope',def_cfgsc.IndiTelescope);
 WriteBool(section,'ASCOMTelescope',def_cfgsc.ASCOMTelescope);
 WriteBool(section,'LX200Telescope',def_cfgsc.LX200Telescope);
 WriteBool(section,'EncoderTelescope',def_cfgsc.EncoderTelescope);
-WriteBool(section,'PluginTelescope',def_cfgsc.PluginTelescope);
 WriteBool(section,'ManualTelescope',def_cfgsc.ManualTelescope);
 WriteInteger(section,'ManualTelescopeType',def_cfgsc.ManualTelescopeType);
 WriteFloat(section,'TelescopeTurnsX',def_cfgsc.TelescopeTurnsX);
 WriteFloat(section,'TelescopeTurnsY',def_cfgsc.TelescopeTurnsY);
-WriteString(section,'ScopePlugin',def_cfgsc.ScopePlugin);
 WriteBool(section,'ViewMainBar',toolbar1.visible);
 WriteBool(section,'ViewLeftBar',PanelLeft.visible);
 WriteBool(section,'ViewRightBar',PanelRight.visible);
@@ -5589,11 +5563,7 @@ ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;
 ToolButton13.Hint:=rsAnimation;
-if def_cfgsc.PluginTelescope or def_cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then begin
-   TConnect.hint:=rsControlPanel;
-end else begin
-   TConnect.hint:=rsConnectTeles
-end;
+TConnect.hint:=rsControlPanel;
 telescopeConnect1.caption:='&'+TConnect.hint;
 telescopeConnect.caption:='&'+TConnect.hint;
 TrackTelescope1.Caption:=rsTrackTelesco;
@@ -5899,19 +5869,13 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
           else begin FlipButtonY.ImageIndex:=18 ; Flipy1.checked:=true; end;
   if tc   then begin
                TConnect.ImageIndex:=49;
-               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then
-                  TConnect.Hint:=rsControlPanel
-               else
-                  TConnect.Hint:=rsDisconnectTe;
+               TConnect.Hint:=rsControlPanel;
                telescopeConnect1.caption:='&'+TConnect.hint;
                telescopeConnect1.Checked:=true;
                //Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;
           end else begin
                TConnect.ImageIndex:=48;
-               if Tf_chart(sender).sc.cfgsc.PluginTelescope or Tf_chart(sender).sc.cfgsc.ASCOMTelescope or def_cfgsc.LX200Telescope or def_cfgsc.EncoderTelescope then
-                  TConnect.Hint:=rsControlPanel
-               else
-                  TConnect.Hint:=rsConnectTeles;
+               TConnect.Hint:=rsControlPanel;
                telescopeConnect1.caption:='&'+TConnect.hint;
                telescopeConnect1.Checked:=false;
                //Tf_chart(sender).Connect1.caption :='&'+TConnect.hint;

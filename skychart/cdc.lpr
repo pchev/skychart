@@ -34,7 +34,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
-  cu_planet, cu_indiprotocol, cu_fits, cu_database, cu_telescope, pu_info,
+  cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info,
   pu_image, pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
   u_util, MultiDocPackage, enhedit, pu_config_catalog, pu_config_system,

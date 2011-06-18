@@ -1,7 +1,7 @@
 object pop_indi: Tpop_indi
-  Left = 1308
+  Left = 220
   Height = 310
-  Top = 223
+  Top = 111
   Width = 277
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False

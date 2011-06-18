@@ -341,7 +341,8 @@ begin
 Hide;
 end;
 
-{$ifdef mswindows}
+{ TODO : Help file support }
+{
 Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
 var
   zFileName, zParams, zDir: array[0..79] of Char;
@@ -349,13 +350,10 @@ begin
   Result := ShellExecute(pop_indi.Handle, nil, StrPCopy(zFileName, FileName),
                          StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
 end;
-{$endif}
-
+}
 procedure Tpop_indi.SpeedButton4Click(Sender: TObject);
 begin
-{$ifdef mswindows}
-ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
-{$endif}
+//ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
 end;
 
 procedure Tpop_indi.SpeedButton6Click(Sender: TObject);
