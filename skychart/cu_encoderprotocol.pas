@@ -40,7 +40,7 @@ Uses u_constant, synaser, Dialogs,SysUtils,Classes ;
 {basic encoder functions}
 Function Encoder_Open(model,commport,baud,parity,data,stop,timeout,inttimeout : string) : boolean;
 Function Encoder_Close : boolean;
-Function Encoder_Query(var Xpos,Ypos : integer) : boolean;
+Function Encoder_Query(var Xpos,Ypos : integer;var msg: string) : boolean;
 Function Encoder_Set_Resolution(Xres,Yres : integer) : boolean;
 Function Encoder_Init(Xpos,Ypos : integer) : boolean;
 Function Encoder_Set_Init_Flag : boolean;
@@ -85,7 +85,7 @@ const tab=chr(9);
 
 implementation
 
-Uses cu_serial, pu_encoderclient;
+Uses cu_serial;
 
 var
   encoder_port  : Tblockserial;            // COM port file handle
@@ -138,10 +138,11 @@ encoder_type:=0;
 result:=true;
 end;
 
-Function Encoder_Query(var Xpos,Ypos : integer) : boolean;
+Function Encoder_Query(var Xpos,Ypos : integer;var msg: string) : boolean;
 var buf,a,b: string;						
     count,p : integer;
 begin
+msg:='';
 result:=false;
 PurgeBuffer(encoder_port);
 case encoder_type of
@@ -151,7 +152,7 @@ case encoder_type of
     count:=length(buf);
     if WriteCom(encoder_port,buf,count)= false then exit;
     count:=14;
-    if ReadCom(encoder_port,buf,count) = false then begin; Affmsg('Encoder_Query : Read error'); exit; end;
+    if ReadCom(encoder_port,buf,count) = false then begin; msg:='Encoder_Query : Read error'; exit; end;
 
     p:= pos('Q',buf);                                     // #### test is leading character is xmit character then intelliscope
     if p>0 then begin    // trim for intelliscope	      // #### HERE's the modifications for the intelliscope protocol
@@ -171,8 +172,8 @@ case encoder_type of
       a:=trim(copy(buf,1,6));
       b:=trim(copy(buf,8,6));
     end;
-    val(a,Xpos,p); if p>0 then begin; Affmsg('Encoder_Query : Alpha error "'+a+'"'); exit; end;
-    val(b,Ypos,p); if p>0 then begin; Affmsg('Encoder_Query : Delta error "'+b+'"'); exit; end;
+    val(a,Xpos,p); if p>0 then begin; msg:='Encoder_Query : Alpha error "'+a+'"'; exit; end;
+    val(b,Ypos,p); if p>0 then begin; msg:='Encoder_Query : Delta error "'+b+'"'; exit; end;
     result:=true;
     num_error:=0;
     end;
