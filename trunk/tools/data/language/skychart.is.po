@@ -585,18 +585,6 @@ msgstr "Stillingar CDC djúphiminsskrár"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Úrelt CDC skrá (en þú getur samt notað hana)"
 
-#: u_translation.rscdcplugin
-#, fuzzy
-#| msgid "CDC plugin"
-msgid "CdC plugin"
-msgstr "CDC tenging"
-
-#: u_translation.rscdcpluginset
-#, fuzzy
-#| msgid "CDC plugin setting"
-msgid "Select the CdC plugin"
-msgstr "Stillingar CDC tengingar"
-
 #: u_translation.rscdcstars
 #, fuzzy
 #| msgid "CdC Stars"
@@ -4972,12 +4960,6 @@ msgstr "Sjónauki: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Sjónauki ekki tengdur"
-
-#: u_translation.rstelescopeplu
-#, fuzzy
-#| msgid "Telescope Plugin "
-msgid "Telescope plugin "
-msgstr "Sjónaukatengi"
 
 #: u_translation.rstelescopeset
 #, fuzzy

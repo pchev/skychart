@@ -503,14 +503,6 @@ msgstr ""
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr ""
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr ""
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr ""
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr ""
@@ -4143,10 +4135,6 @@ msgstr ""
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
-msgstr ""
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
 msgstr ""
 
 #: u_translation.rstelescopeset

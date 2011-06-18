@@ -546,16 +546,6 @@ msgstr "CdC mélyég katalógusok beállítása"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Kifutó CdC katalógusok (még használható)"
 
-#: u_translation.rscdcplugin
-#| msgid "CDC plugin"
-msgid "CdC plugin"
-msgstr "CDC plugin"
-
-#: u_translation.rscdcpluginset
-#| msgid "CDC plugin setting"
-msgid "Select the CdC plugin"
-msgstr "CdC plugin beállítások"
-
 #: u_translation.rscdcstars
 #| msgid "CdC Stars"
 msgid "CdC stars"
@@ -4550,11 +4540,6 @@ msgstr "Távcső: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "A távcső nincs csatlakoztatva"
-
-#: u_translation.rstelescopeplu
-#| msgid "Telescope Plugin "
-msgid "Telescope plugin "
-msgstr "Távcső plugin"
 
 #: u_translation.rstelescopeset
 #| msgid "Telescope Setting"

@@ -3242,14 +3242,6 @@ msgstr ""
 msgid "Reverse Alt knob"
 msgstr ""
 
-#: u_translation:rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr ""
-
-#: u_translation:rstelescopeplu
-msgid "Telescope plugin "
-msgstr ""
-
 #: u_translation:rsindidriverse
 msgid "INDI driver settings"
 msgstr ""
@@ -4036,10 +4028,6 @@ msgstr ""
 
 #: u_translation:rsindidriver
 msgid "INDI driver"
-msgstr ""
-
-#: u_translation:rscdcplugin
-msgid "CdC plugin"
 msgstr ""
 
 #: u_translation:rsnoprinterfou

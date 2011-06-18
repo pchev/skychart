@@ -506,14 +506,6 @@ msgstr "Настанови CDC каталогу туманностей"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Застарілі CDC каталоги (але можете їх використовувати)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "CDC плагін"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Настанови CDC плагіну"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "CdC зорі"
@@ -4149,10 +4141,6 @@ msgstr "Телескоп: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Телескоп не під'єднано"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Плагін телескопу"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

@@ -504,14 +504,6 @@ msgstr "Nastavení katalogů deep sky"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Zastaralé katalogy (stále použitelné)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "Pluginy"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "Nastavení pluginů"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "Hvězda"
@@ -4147,10 +4139,6 @@ msgstr "Dalekohled: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Dalekohled není připojen"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Plugin dalekohledu"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"

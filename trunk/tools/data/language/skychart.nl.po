@@ -505,14 +505,6 @@ msgstr "CdC deep sky catalogi instellingen"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
 msgstr "Verouderde CdC catalogi (maar u kunt deze nog wel gebruiken)"
 
-#: u_translation.rscdcplugin
-msgid "CdC plugin"
-msgstr "CdC plugin"
-
-#: u_translation.rscdcpluginset
-msgid "Select the CdC plugin"
-msgstr "CdC plugin instelling"
-
 #: u_translation.rscdcstars
 msgid "CdC stars"
 msgstr "CdC Sterren"
@@ -4147,10 +4139,6 @@ msgstr "Telescoop: %s"
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Telescoop niet verbonden"
-
-#: u_translation.rstelescopeplu
-msgid "Telescope plugin "
-msgstr "Telescoop plugin "
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
