@@ -37,7 +37,7 @@ uses
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
-  StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns,
+  StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
   LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
 
@@ -3611,12 +3611,13 @@ FormResize(sender);
 end;
 
 Procedure Tf_main.InitFonts;
+var ts: Tsize;
 begin
-{   LPanels01.Caption:='Ra:222h22m22.22s +22°22''22"22';
-   PanelBottom.height:=2*LPanels01.Height+8;
-   PPanels0.Width:=LPanels01.width+8;
-   Lpanels01.Caption:='';
-   Lpanels0.Caption:='';}
+   P0L1.Caption:='';
+   ts:=P0L1.Canvas.TextExtent('Ra:222h22m22.22s +22d22m22s22');
+   PanelBottom.height:=2*ts.cy+4;
+   PPanels0.Width:=ts.cx+4;
+   P0L1.Align:=alClient;
 end;
 
 Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil);
