@@ -537,6 +537,7 @@ var  savebg:Tcolor;
      starttime:TDateTime;
 {$endif}
 begin
+if printing then exit;
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh');
 {$endif}
