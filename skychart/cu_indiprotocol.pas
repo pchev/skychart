@@ -1,4 +1,4 @@
-unit cu_indiclient;
+unit cu_indiprotocol;
 {                                        
 Copyright (C) 2004 Patrick Chevalley
 
@@ -64,7 +64,7 @@ type
     Fserverstatus,Ftelescopestatus,Fcoordstatus: TIndiStatus;
     FTag,FCurrentTag,FDevice,FCurrentDevice,FName,FPerm,FCurrentName,FMessage,FDevicePort,FRa,FDec,FCOORD_REQUEST: string;
     FWantDevice,FWantDevicePort,FWantRA,FWantDec: string;
-    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD,Fexiting,FDeviceFound :boolean;
+    FAutoconnect,FAutoStart,Ftrace,FServerStartedByMe,EOD,Fexiting,FDeviceFound,FCanSlew,FCanSync :boolean;
     XmlScanner: TEasyXmlScanner;
     procedure DisplayMessagesyn;
     procedure ProcessDataSyn;
@@ -103,6 +103,8 @@ type
     property Device : string read FWantDevice write FWantDevice;
     property AutoStart : boolean read FAutoStart write FAutoStart;
     property Autoconnect : boolean read FAutoconnect write FAutoconnect;
+    property CanSync : boolean read FCanSync write FCanSync;
+    property CanSlew : boolean read FCanSlew write FCanSlew;
     property ServerStatus: TIndiStatus read FServerstatus;
     property TelescopeStatus: TIndiStatus read Ftelescopestatus;
     property CoordStatus: TIndiStatus read FCoordstatus;
