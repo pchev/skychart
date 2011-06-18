@@ -1,5 +1,7 @@
 Version 3.3svn  Notes de la version
 
+- Suppression des anciens pilotes de télescope, vous devrez reconfigurer votre télescope.
+- Nouveau panneau de contrôle pour les télescope Indi.
 - Un nouveau pilote intégré pour LX200 et Encodeur remplace le plugin. Il marche sur toutes les platformes.
 - Rotation de la camera ou du guideur avec les flèches gauche ou droite. Activation avec les touches Shift+C, Shift+G ou Shift+S
 - "Déplacer le label" modifie les coordonnées du label. Utiliser "Décalage du label" pour obtenir l'ancien fonctionnement.
