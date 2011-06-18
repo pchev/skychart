@@ -197,8 +197,8 @@ type
   end;
 
 
-var
-  pop_encoder: Tpop_encoder;
+//var
+  //pop_encoder: Tpop_encoder;
 
 implementation
 

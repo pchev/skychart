@@ -127,8 +127,8 @@ type
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-var
-  pop_scope: Tpop_scope;
+//var
+  //pop_scope: Tpop_scope;
 
 implementation
 {$R *.lfm}
@@ -517,15 +517,15 @@ Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Intege
 var
   zFileName, zParams, zDir: array[0..79] of Char;
 begin
-  Result := ShellExecute(pop_scope.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
+//  Result := ShellExecute(Handle, nil, StrPCopy(zFileName, FileName),
+//                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
 end;
 {$endif}
 
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
 {$ifdef mswindows}
-ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+//ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
 {$endif}
 end;
 

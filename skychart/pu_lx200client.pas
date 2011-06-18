@@ -323,8 +323,8 @@ type
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-var
-  pop_lx200: Tpop_lx200;
+//var
+  //pop_lx200: Tpop_lx200;
 
 implementation
 
@@ -844,7 +844,7 @@ end;
 
 procedure Tpop_lx200.SpeedButton2Click(Sender: TObject);
 begin
-pop_lx200.Hide;
+Hide;
 end;
 
 procedure Tpop_lx200.TopBtnMouseDown(Sender: TObject; Button: TMouseButton;
@@ -915,7 +915,7 @@ end;
 
 procedure Tpop_lx200.RadioGroup2Click(Sender: TObject);
 begin
-   LX200_SetFormat(pop_lx200.radiogroup2.ItemIndex);
+   LX200_SetFormat(radiogroup2.ItemIndex);
 end;
 
 procedure Tpop_lx200.cbo_typeChange(Sender: TObject);
@@ -1021,7 +1021,7 @@ end else if cbo_type.text='Magellan-I' then begin
   SpeedButton8.visible:=false;
   SpeedButton9.visible:=false;
 end;
-pop_lx200.Caption:=cbo_type.text;
+Caption:=cbo_type.text;
 end;
 
 procedure Tpop_lx200.CheckBox1Click(Sender: TObject);
@@ -1054,8 +1054,8 @@ end;
 procedure Tpop_lx200.CheckBox2Click(Sender: TObject);
 begin
 if initial then exit;
-if checkbox2.checked then pop_lx200.FormStyle:=fsStayOnTop
-                     else pop_lx200.FormStyle:=fsNormal;
+if checkbox2.checked then FormStyle:=fsStayOnTop
+                     else FormStyle:=fsNormal;
 end;
 
 procedure Tpop_lx200.FormShow(Sender: TObject);

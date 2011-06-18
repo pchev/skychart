@@ -101,8 +101,8 @@ type
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-var
-  pop_indi: Tpop_indi;
+//var
+  //pop_indi: Tpop_indi;
 
 implementation
 {$R *.lfm}
