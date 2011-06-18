@@ -474,11 +474,11 @@ procedure TIndiClient.AbortSlew;
 begin
 if not FDeviceFound then exit;
 Send('<newSwitchVector device="'+FWantDevice+'" name="ON_COORD_SET"><oneSwitch name="TRACK">On</oneSwitch><oneSwitch name="SYNC">Off</oneSwitch><oneSwitch name="SLEW">Off</oneSwitch></newSwitchVector>');
-Send('<newSwitchVector device="'+FWantDevice+'" name="TELESCOPE_ABORT_MOTION"><oneSwitch name="ABORT">On</oneSwitch></newSwitchVector>');
 if EOD then
    Send('<newNumberVector device="'+FWantDevice+'" name="EQUATORIAL_EOD_COORD'+FCOORD_REQUEST+'"><oneNumber name="RA" >'+Fra+'</oneNumber><oneNumber name="DEC">'+Fdec+'</oneNumber></newNumberVector>')
 else
    Send('<newNumberVector device="'+FWantDevice+'" name="EQUATORIAL_COORD'+FCOORD_REQUEST+'"><oneNumber name="RA" >'+Fra+'</oneNumber><oneNumber name="DEC">'+Fdec+'</oneNumber></newNumberVector>');
+Send('<newSwitchVector device="'+FWantDevice+'" name="TELESCOPE_ABORT_MOTION"><oneSwitch name="ABORT">On</oneSwitch></newSwitchVector>');
 end;
 
 end.

@@ -1,15 +1,15 @@
 object pop_indi: Tpop_indi
   Left = 220
-  Height = 310
+  Height = 364
   Top = 111
-  Width = 277
+  Width = 279
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   ActiveControl = Edit1
   BorderStyle = bsToolWindow
   Caption = 'INDI Telescope Interface'
-  ClientHeight = 310
-  ClientWidth = 277
+  ClientHeight = 364
+  ClientWidth = 279
   OnCloseQuery = kill
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -147,13 +147,14 @@ object pop_indi: Tpop_indi
       TabOrder = 0
     end
   end
-  object LabelMsg: TLabel
-    Left = 14
-    Height = 15
-    Top = 272
-    Width = 55
-    Caption = 'LabelMsg'
-    ParentColor = False
+  object Memomsg: TMemo
+    Left = 8
+    Height = 85
+    Top = 267
+    Width = 257
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 3
   end
   object Timer1: TTimer
     Enabled = False

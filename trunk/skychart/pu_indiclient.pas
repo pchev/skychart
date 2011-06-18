@@ -39,8 +39,8 @@ type
 
   Tpop_indi = class(TForm)
     GroupBox3: TGroupBox;
-    LabelMsg: TLabel;
     Connect: TButton;
+    Memomsg: TMemo;
     SpeedButton2: TButton;
     Disconnect: TButton;
     led: TEdit;
@@ -148,7 +148,7 @@ var dis_ok : boolean;
 begin
 if not connected then begin
   led.color:=clRed;
-  LabelMsg.Caption:='';
+  Memomsg.Clear;
   led.refresh;
   TelescopeJD:=0;
   indi1:=TIndiClient.Create;
@@ -172,10 +172,17 @@ end;
 end;
 
 procedure Tpop_indi.TelescopeStatusChange(Sender : Tobject; source: TIndiSource; status: TIndistatus);
+var ok: boolean;
 begin
   if source=Telescope then begin
-     if (status=Ok)or(status=Busy) then connected:=true
-                                   else connected:=false;
+     ok:=(status=cu_indiprotocol.Ok)or(status=cu_indiprotocol.Busy);
+     if ok then begin
+        if ok<>connected then TelescopeGetMessage(Sender,'Connected');
+        connected:=true;
+     end else begin
+        if ok<>connected then TelescopeGetMessage(Sender,'Disconnected');
+        connected:=false;
+     end;
   end;
   if connected then led.color:=clLime
                else led.color:=clRed;
@@ -184,7 +191,8 @@ end;
 
 procedure Tpop_indi.TelescopeGetMessage(Sender : TObject; const msg : string);
 begin
-  LabelMsg.Caption:=msg;
+  if Memomsg.Lines.Count>4 then Memomsg.Lines.Delete(0);
+  Memomsg.Lines.Add(trim(msg));
 end;
 
 
