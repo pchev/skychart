@@ -1,5 +1,7 @@
 Version 3.3svn release Notes
 
+- Remove old telescope plugins, you may have to set your telescope again.
+- New INDI telescope control panel.
 - New integrated LX200 and Encoder driver replace the plugin. Work on all platform.
 - Rotate camera or guider with arrow keys. Activate with Shift+C, Shift+G or Shift+S
 - "Move label" now set new RA/DEC for the label. Use "Offset Label" to get the old behavior.
