@@ -435,7 +435,7 @@ object f_config_observatory: Tf_config_observatory
           object hor_l1: TLabel
             Left = 13
             Height = 15
-            Top = 64
+            Top = 45
             Width = 145
             Caption = 'Local Horizon File Name : '
             ParentColor = False
@@ -443,7 +443,7 @@ object f_config_observatory: Tf_config_observatory
           object displayhorizon: TCheckBox
             Left = 13
             Height = 23
-            Top = 16
+            Top = 73
             Width = 181
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
@@ -452,7 +452,7 @@ object f_config_observatory: Tf_config_observatory
           object horizonfile: TFileNameEdit
             Left = 197
             Height = 22
-            Top = 56
+            Top = 41
             Width = 208
             OnAcceptFileName = horizonfileAcceptFileName
             DialogOptions = []
@@ -465,9 +465,9 @@ object f_config_observatory: Tf_config_observatory
             OnChange = horizonfileChange
           end
           object fillhorizon: TCheckBox
-            Left = 221
+            Left = 13
             Height = 23
-            Top = 16
+            Top = 9
             Width = 139
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
