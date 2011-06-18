@@ -35,6 +35,5 @@ xcopy /Y /F skychart\library\getdss\libgetdss.dll  %destdir%\
 xcopy /Y /F skychart\library\plan404\libplan404.dll  %destdir%\
 
 unzip -o -d %destdir% system_integration\Windows\data\sqlite3.zip 
-unzip -o -d %destdir% system_integration\Windows\data\plugins.zip 
 unzip -o -d %destdir% system_integration\Windows\data\planetrender.zip
 unzip -o -d %destdir% system_integration\Windows\data\zlib.zip

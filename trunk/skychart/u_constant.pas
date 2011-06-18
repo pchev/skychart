@@ -545,8 +545,8 @@ type
                 CurTime,DT_UT_val,GRSlongitude,TelescopeTurnsX,TelescopeTurnsY,TelescopeJD: double;
                 PMon,DrawPMon,ApparentPos,CoordExpertMode,SunOnline : boolean;
                 LabelOrientation, ManualTelescopeType, CoordType : integer;
-                IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice, ScopePlugin : string;
-                IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, LX200Telescope, EncoderTelescope, PluginTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
+                IndiServerHost, IndiServerPort, IndiServerCmd, IndiDriver, IndiPort, IndiDevice: string;
+                IndiAutostart,ShowCircle,IndiTelescope, ASCOMTelescope, LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, ShowBackgroundImage, showstars, shownebulae, showline, showlabelall,Editlabels : boolean;
                 BackgroundImage: string;
                 // working variable
                 ephvalid,ShowPlanetValid,ShowCometValid,ShowAsteroidValid,ShowEarthShadowValid,ShowEclipticValid:boolean;
@@ -1377,14 +1377,12 @@ IndiServerCmd:=Source.IndiServerCmd ;
 IndiDriver:=Source.IndiDriver ;
 IndiPort:=Source.IndiPort ;
 IndiDevice:=Source.IndiDevice ;
-ScopePlugin:=Source.ScopePlugin ;
 IndiAutostart:=Source.IndiAutostart ;
 ShowCircle:=Source.ShowCircle ;
 IndiTelescope:=Source.IndiTelescope ;
 ASCOMTelescope:=Source.ASCOMTelescope ;
 LX200Telescope:=Source.LX200Telescope;
 EncoderTelescope:=Source.EncoderTelescope;
-PluginTelescope:=Source.PluginTelescope ;
 ManualTelescope:=Source.ManualTelescope ;
 ShowImages:=Source.ShowImages ;
 ShowBackgroundImage:=Source.ShowBackgroundImage ;

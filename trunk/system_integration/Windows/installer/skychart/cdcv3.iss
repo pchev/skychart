@@ -41,9 +41,13 @@ Name: {app}\plugins\indiserver.exe; Type: files; Components: ; Tasks:
 Name: {app}\plugins\libnetpbm10.dll; Type: files; Components: ; Tasks:
 Name: {app}\plugins\lx200generic.exe; Type: files; Components: ; Tasks:
 Name: {app}\plugins\pnmtops.exe; Type: files; Components: ; Tasks:
-Name: {app}\data\Themes\default\*; Type: filesandordirs ; Components: ; Tasks: 
-Name: {app}\data\zoneinfo\*; Type: filesandordirs ; Components: ; Tasks: 
-Name: {app}\doc\wiki_doc\*; Type: filesandordirs ; Components: ; Tasks: 
+Name: {app}\plugins\Ascom.tid; Type: files; Components: ; Tasks:
+Name: {app}\plugins\encoder.tid; Type: files; Components: ; Tasks:
+Name: {app}\plugins\Meade.tid; Type: files; Components: ; Tasks:
+Name: {app}\plugins; Type: dirifempty; Components: ; Tasks:
+Name: {app}\data\Themes\default\*; Type: filesandordirs; Components: ; Tasks: 
+Name: {app}\data\zoneinfo\*; Type: filesandordirs; Components: ; Tasks: 
+Name: {app}\doc\wiki_doc\*; Type: filesandordirs; Components: ; Tasks: 
 
 [Files]
 Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs restartreplace

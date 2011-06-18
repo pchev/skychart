@@ -23,5 +23,4 @@ del /F %destdir%\libplan404.dll
 del /F %destdir%\sqlite3.dll  
 del /F %destdir%\libFPlanetRender.dll
 del /F %destdir%\zlib1.dll
-del /F /S %destdir%\plugins
 

@@ -55,12 +55,10 @@ type
     SqliteBox: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
     TelescopeManualLabel: TLabel;
-    TelescopePluginLabel: TLabel;
     LanguageList: TComboBox;
     Label14: TLabel;
     Language: TTabSheet;
@@ -68,7 +66,6 @@ type
     Panel1: TPanel;
     TelescopeManual: TPanel;
     INDI: TPanel;
-    TelescopePlugin: TPanel;
     prgdir: TDirectoryEdit;
     persdir: TDirectoryEdit;
     Label12: TLabel;
@@ -112,8 +109,6 @@ type
     IndiDriver: TEdit;
     IndiDev: TComboBox;
     TelescopeSelect: TRadioGroup;
-    Label155: TLabel;
-    telescopepluginlist: TComboBox;
     GroupBox1: TGroupBox;
     chkdb: TButton;
     credb: TButton;
@@ -178,7 +173,6 @@ type
     procedure IndiDriverChange(Sender: TObject);
     procedure IndiPortChange(Sender: TObject);
     procedure TelescopeSelectClick(Sender: TObject);
-    procedure telescopepluginlistChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure prgdirChange(Sender: TObject);
     procedure persdirChange(Sender: TObject);
@@ -281,8 +275,6 @@ Label10.caption:=rsTurnsDegree;
 Label11.caption:=rsTurnsDegree;
 RevertTurnsAz.caption:=rsRevertAzKnob;
 RevertTurnsAlt.caption:=rsRevertAltKno;
-TelescopePluginLabel.caption:=rsCDCPluginSet;
-Label155.caption:=rsTelescopePlu;
 INDILabel.caption:=rsINDIDriverSe;
 Button5.Caption:=rsDefault;
 Label75.caption:=rsINDIServerHo;
@@ -299,8 +291,7 @@ ManualMountType.Items[1]:=rsAltAzMount;
 TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
-TelescopeSelect.Items[2]:=rsCDCPlugin;
-TelescopeSelect.Items[5]:=rsEncoders;
+TelescopeSelect.Items[4]:=rsEncoders;
 ASCOMLabel.Caption:=rsASCOMTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
@@ -429,9 +420,6 @@ var i,j,n: integer;
     buf,fn,val : string;
     f: textfile;
     telescopegroup, newtelescope: boolean;
-{$ifdef mswindows}
-    fs : TSearchRec;
-{$endif}
 begin
 IndiServerHost.text:=csc.IndiServerHost;
 IndiServerPort.text:=csc.IndiServerPort;
@@ -450,26 +438,12 @@ RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   else if csc.EncoderTelescope then Telescopeselect.itemindex:=5
-   else if csc.LX200Telescope then Telescopeselect.itemindex:=4
-   else if csc.ASCOMTelescope then Telescopeselect.itemindex:=3
-   else if csc.PluginTelescope then Telescopeselect.itemindex:=2
+   else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
+   else if csc.LX200Telescope then Telescopeselect.itemindex:=3
+   else if csc.ASCOMTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
 TelescopeselectClick(self);
 IndiPort.text:=csc.IndiPort;
-{$ifdef mswindows}
-i:=findfirst(slash(appdir)+slash('plugins')+slash('telescope')+'*.tid',0,fs);
-telescopepluginlist.clear;
-n:=0;
-while i=0 do begin
-  buf:=extractfilename(fs.name);
-  telescopepluginlist.items.Add(buf);
-  if csc.ScopePlugin=buf then telescopepluginlist.itemindex:=n;
-  inc(n);
-  i:=findnext(fs);
-end;
-findclose(fs);
-{$endif}
 NumIndiDriver:=0;
 SetLength(IndiDriverLst,NumIndiDriver+1,2);
 IndiDriverLst[0,0]:='Other';
@@ -792,22 +766,20 @@ end;
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
 begin
 {$ifndef mswindows}
-if (Telescopeselect.itemindex=2)or(Telescopeselect.itemindex=3) then begin
+if (Telescopeselect.itemindex=2) then begin   // no ascom
  if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   else if csc.LX200Telescope then Telescopeselect.itemindex:=5
+   else if csc.LX200Telescope then Telescopeselect.itemindex:=3
    else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
    else Telescopeselect.itemindex:=1;
 end;
 {$endif}
 csc.IndiTelescope:=Telescopeselect.itemindex=0;
 csc.ManualTelescope:=Telescopeselect.itemindex=1;
-csc.PluginTelescope:=Telescopeselect.itemindex=2;
-csc.ASCOMTelescope:=Telescopeselect.itemindex=3;
-csc.LX200Telescope:=Telescopeselect.itemindex=4;
-csc.EncoderTelescope:=Telescopeselect.itemindex=5;
+csc.ASCOMTelescope:=Telescopeselect.itemindex=2;
+csc.LX200Telescope:=Telescopeselect.itemindex=3;
+csc.EncoderTelescope:=Telescopeselect.itemindex=4;
 if csc.IndiTelescope then PageControl2.ActivePage:=TabSheet1;
 if csc.ManualTelescope then PageControl2.ActivePage:=TabSheet2;
-if csc.PluginTelescope then PageControl2.ActivePage:=TabSheet3;
 if csc.ASCOMTelescope then PageControl2.ActivePage:=TabSheet4;
 if csc.LX200Telescope then PageControl2.ActivePage:=TabSheet4;
 if csc.EncoderTelescope then PageControl2.ActivePage:=TabSheet4;
@@ -931,12 +903,6 @@ case csc.ManualTelescopeType of
         TurnsAltChange(Sender);
       end;
 end;
-end;
-
-procedure Tf_config_system.telescopepluginlistChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.ScopePlugin:=telescopepluginlist.text;
 end;
 
 end.

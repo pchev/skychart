@@ -824,8 +824,6 @@ resourcestring
   rsRevertDECKno = 'Reverse DEC knob';
   rsRevertAzKnob = 'Reverse Az knob';
   rsRevertAltKno = 'Reverse Alt knob';
-  rsCDCPluginSet = 'Select the CdC plugin';
-  rsTelescopePlu = 'Telescope plugin ';
   rsINDIDriverSe = 'INDI driver settings';
   rsINDIServerHo = 'INDI server host ';
   rsINDIServerPo = 'INDI server port';
@@ -1024,7 +1022,6 @@ resourcestring
   rsBC = 'BC';
   rsSelectTheTel = 'Select the telescope interface';
   rsINDIDriver = 'INDI driver';
-  rsCDCPlugin = 'CdC plugin';
   rsNoPrinterFou = 'No printer found!';
   rsShowGrid = 'Show grid';
   rsCompassRoseS = 'Compass rose size';
