@@ -239,6 +239,7 @@ const cdcversion = 'Version 3.3 svn';
       key_upright=33;
       key_downleft=35;
       key_downright =34;
+      key_del = 46;
 
       //Observatory database
       CdcMinLocid='99999999';
