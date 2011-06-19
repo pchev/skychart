@@ -1535,6 +1535,7 @@ key_left      : if (movecam or moveguide) then MoveCamera(5) else MoveEast.execu
 key_up        : MoveNorth.execute;
 key_right     : if (movecam or moveguide) then MoveCamera(-5) else MoveWest.execute;
 key_down      : MoveSouth.execute;
+key_del       : Cleanupmap1Click(nil);
 end;
 movefactor:=4;
 zoomfactor:=2;

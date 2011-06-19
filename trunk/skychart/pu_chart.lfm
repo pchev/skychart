@@ -240,6 +240,7 @@ object f_chart: Tf_chart
     end
     object Cleanupmap1: TMenuItem
       Caption = 'Cleanupmap1'
+      ShortCut = 46
       OnClick = Cleanupmap1Click
     end
     object N1: TMenuItem
