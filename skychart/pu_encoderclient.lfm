@@ -351,7 +351,7 @@ object pop_encoder: Tpop_encoder
           ParentColor = False
         end
         object cbo_type: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 6
           Width = 113
@@ -369,7 +369,7 @@ object pop_encoder: Tpop_encoder
           TabOrder = 0
         end
         object led: TEdit
-          Left = 118
+          Left = 164
           Height = 20
           Top = 114
           Width = 49
@@ -379,7 +379,7 @@ object pop_encoder: Tpop_encoder
           TabOrder = 1
         end
         object res_x: TEdit
-          Left = 118
+          Left = 164
           Height = 22
           Top = 33
           Width = 65
@@ -387,7 +387,7 @@ object pop_encoder: Tpop_encoder
           Text = '2000'
         end
         object res_y: TEdit
-          Left = 118
+          Left = 164
           Height = 22
           Top = 60
           Width = 65
@@ -395,7 +395,7 @@ object pop_encoder: Tpop_encoder
           Text = '2000'
         end
         object ReadIntBox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 87
           Width = 113
@@ -424,7 +424,7 @@ object pop_encoder: Tpop_encoder
       end
       object Mounttype: TRadioGroup
         Left = 8
-        Height = 41
+        Height = 50
         Top = 168
         Width = 158
         AutoFill = True
@@ -437,7 +437,7 @@ object pop_encoder: Tpop_encoder
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 25
+        ClientHeight = 34
         ClientWidth = 154
         Columns = 2
         ItemIndex = 0
@@ -564,7 +564,7 @@ object pop_encoder: Tpop_encoder
       end
       object InitType: TRadioGroup
         Left = 166
-        Height = 41
+        Height = 50
         Top = 168
         Width = 155
         AutoFill = True
@@ -577,7 +577,7 @@ object pop_encoder: Tpop_encoder
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 25
+        ClientHeight = 34
         ClientWidth = 151
         Columns = 2
         ItemIndex = 1
@@ -614,11 +614,11 @@ object pop_encoder: Tpop_encoder
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
-        Height = 213
+        Height = 222
         Top = 12
         Width = 297
         Caption = 'Port Configuration'
-        ClientHeight = 197
+        ClientHeight = 206
         ClientWidth = 293
         TabOrder = 0
         object Label5: TLabel
@@ -678,7 +678,7 @@ object pop_encoder: Tpop_encoder
           ParentColor = False
         end
         object PortSpeedbox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 33
           Width = 113
@@ -700,7 +700,7 @@ object pop_encoder: Tpop_encoder
           Text = 'PortSpeedbox'
         end
         object cbo_port: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 6
           Width = 113
@@ -719,7 +719,7 @@ object pop_encoder: Tpop_encoder
           Text = 'cbo_port'
         end
         object Paritybox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 87
           Width = 113
@@ -733,7 +733,7 @@ object pop_encoder: Tpop_encoder
           Text = 'Paritybox'
         end
         object DatabitBox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 60
           Width = 113
@@ -749,7 +749,7 @@ object pop_encoder: Tpop_encoder
           Text = 'DatabitBox'
         end
         object StopbitBox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 114
           Width = 113
@@ -762,7 +762,7 @@ object pop_encoder: Tpop_encoder
           Text = 'StopbitBox'
         end
         object TimeOutBox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 141
           Width = 113
@@ -779,7 +779,7 @@ object pop_encoder: Tpop_encoder
           Text = 'TimeOutBox'
         end
         object IntTimeOutBox: TComboBox
-          Left = 118
+          Left = 164
           Height = 23
           Top = 168
           Width = 113
@@ -808,15 +808,15 @@ object pop_encoder: Tpop_encoder
       object Panel2: TPanel
         Left = 8
         Height = 113
-        Top = 232
+        Top = 242
         Width = 297
         ClientHeight = 113
         ClientWidth = 297
         TabOrder = 2
         object Label17: TLabel
-          Left = 39
+          Left = 14
           Height = 100
-          Top = 10
+          Top = 2
           Width = 268
           Alignment = taCenter
           Caption = 'Interface for Tangent like system.'#13#10'Will work with all systems using same protocol'#13#10'(Ouranos, NGC MAX,MicroGuider,..)'#13#10'PJ Pallez Nov 1999'#13#10'P. Chevalley 2001, 2011'#13#10'Version 3.0'
