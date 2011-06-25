@@ -1622,6 +1622,10 @@ msgstr "Trova"
 msgid "Finder circle (eyepiece)"
 msgstr "Campi circolari (Oculari)"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Campi rettangolari (CCD)"
@@ -2239,6 +2243,10 @@ msgstr "Carica"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Carica file"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

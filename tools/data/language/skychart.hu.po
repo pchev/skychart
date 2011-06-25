@@ -1776,6 +1776,10 @@ msgstr "Keresés"
 msgid "Finder circle (eyepiece)"
 msgstr "Kereső kör (okulár)"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Kereső négyszög (CCD)"
@@ -2455,6 +2459,10 @@ msgstr "Betölt"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Fájl betöltés"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 #| msgid "Load MPC File"

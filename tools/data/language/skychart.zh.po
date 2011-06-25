@@ -1622,6 +1622,10 @@ msgstr "尋找"
 msgid "Finder circle (eyepiece)"
 msgstr "尋星鏡圓圈（目鏡）"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "尋星鏡方格（CCD）"
@@ -2239,6 +2243,10 @@ msgstr "載入"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "載入檔案"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

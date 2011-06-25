@@ -1620,6 +1620,10 @@ msgstr "Zoek"
 msgid "Finder circle (eyepiece)"
 msgstr "Beeldveld  zoeker/oculair"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Beeldveld camera"
@@ -2237,6 +2241,10 @@ msgstr "Laad"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Laad bestand"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

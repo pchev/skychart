@@ -1621,6 +1621,10 @@ msgstr "Найти"
 msgid "Finder circle (eyepiece)"
 msgstr "Поисковый круг (окуляр)"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Прямоугольное поле CCD"
@@ -2238,6 +2242,10 @@ msgstr "Карта"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Загрузить файл"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

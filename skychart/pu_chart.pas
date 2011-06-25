@@ -67,9 +67,14 @@ type
     About1: TMenuItem;
     AddLabel1: TMenuItem;
     DownloadDialog1: TDownloadDialog;
-    MenuItem1: TMenuItem;
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
+    MenuFinderCircle: TMenuItem;
+    MenuSaveCircle: TMenuItem;
+    MenuLoadCircle: TMenuItem;
+    MenuLabel: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    SaveDialog1: TSaveDialog;
     SlewCursor: TMenuItem;
     TrackTelescope: TMenuItem;
     Panel1: TPanel;
@@ -114,7 +119,6 @@ type
     Sync1: TMenuItem;
     NewFinderCircle1: TMenuItem;
     N1: TMenuItem;
-    N2: TMenuItem;
     RemoveLastCircle1: TMenuItem;
     RemoveAllCircles1: TMenuItem;
     AbortSlew1: TMenuItem;
@@ -134,6 +138,8 @@ type
     procedure HorScrollBarChange(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
+    procedure MenuLoadCircleClick(Sender: TObject);
+    procedure MenuSaveCircleClick(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
@@ -328,9 +334,13 @@ About1.caption:=rsAbout;
 Centre1.caption:=rsCentre;
 Zoom1.caption:=rsZoomCentre;
 Zoom2.caption:=rsZoomCentre2;
+MenuFinderCircle.Caption:=rsFinderCircle2;
 NewFinderCircle1.caption:=rsNewFinderCir;
 RemoveLastCircle1.caption:=rsRemoveLastCi;
 RemoveAllCircles1.caption:=rsRemoveAllCir;
+MenuSaveCircle.Caption:=rsSaveToFile;
+MenuLoadCircle.Caption:=rsLoadFromFile;
+MenuLabel.Caption:=rsLabels;
 AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
@@ -3422,6 +3432,55 @@ sc.cfgsc.NumCircle:=0;
  WriteTrace(caption+' RemoveAllCircles1Click');
 {$endif}
 Refresh;
+end;
+
+procedure Tf_chart.MenuSaveCircleClick(Sender: TObject);
+var f: textfile;
+    i: integer;
+begin
+if SaveDialog1.InitialDir='' then SaveDialog1.InitialDir:=HomeDir;
+if (sc.cfgsc.NumCircle>0) and SaveDialog1.Execute then begin
+  {$ifdef trace_debug}
+   WriteTrace(caption+' Save Circles to '+UTF8ToSys(SaveDialog1.FileName));
+  {$endif}
+   AssignFile(f,UTF8ToSys(SaveDialog1.FileName));
+   Rewrite(f);
+   for i:=1 to sc.cfgsc.NumCircle do begin
+     WriteLn(f,'Circle_'+FormatFloat('00',i)+blank+ARToStr3(rad2deg*sc.cfgsc.CircleLst[i,1]/15)+blank+DEToStr3(rad2deg*sc.cfgsc.CircleLst[i,2]));
+   end;
+   CloseFile(f);
+end;
+end;
+
+procedure Tf_chart.MenuLoadCircleClick(Sender: TObject);
+var f: textfile;
+    buf1,buf2: string;
+    x: double;
+begin
+if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
+if OpenDialog1.Execute then begin
+  {$ifdef trace_debug}
+   WriteTrace(caption+' Load Circles from '+UTF8ToSys(OpenDialog1.FileName));
+  {$endif}
+  AssignFile(f,UTF8ToSys(OpenDialog1.FileName));
+  reset(f);
+  sc.cfgsc.NumCircle:=0;
+  repeat
+     ReadLn(f,buf1);
+     inc(sc.cfgsc.NumCircle);
+     if sc.cfgsc.NumCircle>=MaxCircle then break;
+     buf2:=words(buf1,blank,2,1);
+     x:=deg2rad*15*Str3ToAR(trim(buf2));
+     if x=0 then begin dec(sc.cfgsc.NumCircle); continue; end;
+     sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,1]:=x;
+     buf2:=words(buf1,blank,3,1);
+     x:=deg2rad*Str3ToDE(trim(buf2));
+     if x=0 then begin dec(sc.cfgsc.NumCircle); continue; end;
+     sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,2]:=x;
+  until eof(f);
+  CloseFile(f);
+  Refresh;
+end;
 end;
 
 procedure Tf_chart.SetNightVision(value:boolean);

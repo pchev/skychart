@@ -246,35 +246,43 @@ object f_chart: Tf_chart
     object N1: TMenuItem
       Caption = '-'
     end
-    object NewFinderCircle1: TMenuItem
-      Caption = 'New Finder Circle'
-      OnClick = NewFinderCircle1Click
+    object MenuFinderCircle: TMenuItem
+      Caption = 'Finder Circle'
+      object NewFinderCircle1: TMenuItem
+        Caption = 'New Finder Circle'
+        OnClick = NewFinderCircle1Click
+      end
+      object RemoveLastCircle1: TMenuItem
+        Caption = 'Remove Last Circle'
+        OnClick = RemoveLastCircle1Click
+      end
+      object RemoveAllCircles1: TMenuItem
+        Caption = 'Remove All Circles'
+        OnClick = RemoveAllCircles1Click
+      end
+      object MenuSaveCircle: TMenuItem
+        Caption = 'Save Circle'
+        OnClick = MenuSaveCircleClick
+      end
+      object MenuLoadCircle: TMenuItem
+        Caption = 'Load Circle'
+        OnClick = MenuLoadCircleClick
+      end
     end
-    object RemoveLastCircle1: TMenuItem
-      Caption = 'Remove Last Circle'
-      OnClick = RemoveLastCircle1Click
-    end
-    object RemoveAllCircles1: TMenuItem
-      Caption = 'Remove All Circles'
-      OnClick = RemoveAllCircles1Click
-    end
-    object MenuItem1: TMenuItem
-      Caption = '-'
-    end
-    object AddLabel1: TMenuItem
-      Caption = 'New Label'
-      OnClick = AddLabel1Click
-    end
-    object RemoveLastLabel1: TMenuItem
-      Caption = 'Remove Last Label'
-      OnClick = RemoveLastLabel1Click
-    end
-    object RemoveAllLabel1: TMenuItem
-      Caption = 'Remove All Labels'
-      OnClick = RemoveAllLabel1Click
-    end
-    object N2: TMenuItem
-      Caption = '-'
+    object MenuLabel: TMenuItem
+      Caption = 'Labels'
+      object AddLabel1: TMenuItem
+        Caption = 'New Label'
+        OnClick = AddLabel1Click
+      end
+      object RemoveLastLabel1: TMenuItem
+        Caption = 'Remove Last Label'
+        OnClick = RemoveLastLabel1Click
+      end
+      object RemoveAllLabel1: TMenuItem
+        Caption = 'Remove All Labels'
+        OnClick = RemoveAllLabel1Click
+      end
     end
     object Telescope1: TMenuItem
       Caption = 'Telescope'
@@ -334,5 +342,24 @@ object f_chart: Tf_chart
     ConfirmDownload = True
     left = 211
     top = 205
+  end
+  object OpenDialog1: TOpenDialog
+    DefaultExt = '.cdcc'
+    FileName = 'circle'
+    Filter = 'Circle file|*.cdcc|All|*'
+    Options = [ofFileMustExist, ofEnableSizing, ofViewDetail]
+    left = 56
+    top = 55
+  end
+  object SaveDialog1: TSaveDialog
+    Width = 881
+    Height = 550
+    DefaultExt = '.cdcc'
+    FileName = '/home/compiler/lazarus/circle'
+    Filter = 'Circle file|*.cdcc|All|*'
+    InitialDir = '/home/compiler/lazarus/'
+    Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
+    left = 58
+    top = 118
   end
 end

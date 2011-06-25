@@ -4602,3 +4602,11 @@ msgstr ""
 msgid "Slew to cursor position"
 msgstr ""
 
+#: u_translation:rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
+#: u_translation:rsloadfromfile
+msgid "Load from file"
+msgstr ""
+
