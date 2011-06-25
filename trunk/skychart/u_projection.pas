@@ -501,6 +501,7 @@ begin
 x1:=0;y1:=0;
   XYwindow(x,y,x1,y1,c);
   InvProj (x1,y1,a,d,c);
+  a:=rmod(pi4+a,pi2);
 end;
 
 procedure GetAHxy(x,y:Integer ; var a,h : Double; c: Tconf_skychart);

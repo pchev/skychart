@@ -1624,6 +1624,10 @@ msgstr "Busca"
 msgid "Finder circle (eyepiece)"
 msgstr "Cercle del buscador (ocular)"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Rectangle del buscador (CCD)"
@@ -2241,6 +2245,10 @@ msgstr "Carrega"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Carrega fitxer"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

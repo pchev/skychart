@@ -1935,6 +1935,10 @@ msgstr "Finna"
 msgid "Finder circle (eyepiece)"
 msgstr "Hringur leitarsjónauka (augngler)"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Ferningur CCD vélar"
@@ -2674,6 +2678,10 @@ msgstr "Ný"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Hlaða inn skrá"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 #, fuzzy

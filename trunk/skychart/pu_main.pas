@@ -1370,10 +1370,12 @@ appdir:=getcurrentdir;
  debugln('appdir='+appdir);
 {$endif}
 {$endif}
-privatedir:=DefaultPrivateDir;
+PrivateDir:=DefaultPrivateDir;
+HomeDir:=DefaultHomeDir;
 {$ifdef unix}
-appdir:=expandfilename(appdir);
-privatedir:=expandfilename(PrivateDir);
+Appdir:=expandfilename(appdir);
+PrivateDir:=expandfilename(PrivateDir);
+HomeDir:=expandfilename(HomeDir);
 {$endif}
 {$ifdef mswindows}
 buf:=systoutf8(appdir);
@@ -1398,6 +1400,9 @@ if buf='' then begin
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;
+SHGetSpecialFolderLocation(0, CSIDL_PERSONAL, PIDL);
+SHGetPathFromIDList(PIDL, Folder);
+homedir:=trim(systoutf8(Folder));
 {$endif}
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
@@ -3719,7 +3724,7 @@ cfgm.ButtonNight:=2;
 cfgm.AnimDelay:=500;
 cfgm.AnimFps:=2.0;
 cfgm.AnimRec:=false;
-cfgm.AnimRecDir:=PrivateDir;
+cfgm.AnimRecDir:=HomeDir;
 cfgm.AnimRecPrefix:='skychart';
 cfgm.AnimRecExt:='.mp4';
 cfgm.Animffmpeg:=Defaultffmpeg;

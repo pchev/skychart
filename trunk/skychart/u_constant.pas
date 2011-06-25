@@ -377,6 +377,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultFontFixed='Courier';
       DefaultFontSymbol='adobe-symbol';   // available in core XFree86 75 and 100 dpi fonts
       DefaultFontSize=10;
+      DefaultHomeDir='~';
       DefaultPrivateDir='~/.skychart';
       Defaultconfigfile='~/.skychart/skychart.ini';
       SharedDir='../share/skychart';
@@ -393,6 +394,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultFontFixed='Courier';
       DefaultFontSymbol='symbol';
       DefaultFontSize=12;
+      DefaultHomeDir='~';
       DefaultPrivateDir='~/Library/Application Support/skychart';
       Defaultconfigfile='~/Library/Application Support/skychart/skychart.ini';
       SharedDir='/usr/share/skychart';
@@ -409,6 +411,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultFontFixed='Courier';
       DefaultFontSymbol='Symbol';
       DefaultFontSize=8;
+      DefaultHomeDir='';
       DefaultPrivateDir='Skychart';
       Defaultconfigfile='skychart.ini';
       SharedDir='.\';
@@ -762,7 +765,7 @@ type
        end;
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir : string;
+Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
      compile_time,compile_version, lclver : string;

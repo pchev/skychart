@@ -758,7 +758,7 @@ end;
 procedure Tf_config_time.Button9Click(Sender: TObject);
 begin
   CheckBox3.Checked:=false;
-  DirectoryEdit1.Directory:=PrivateDir;
+  DirectoryEdit1.Directory:=HomeDir;
   Edit1.Text:='skychart';
   Edit5.Text:='.mp4';
   FloatSpinEdit1.Value:=2.0;

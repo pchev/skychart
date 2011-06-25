@@ -1622,6 +1622,10 @@ msgstr "Suchen"
 msgid "Finder circle (eyepiece)"
 msgstr "Okulare"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Kamerafelder"
@@ -2239,6 +2243,10 @@ msgstr "Laden"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Datei laden"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

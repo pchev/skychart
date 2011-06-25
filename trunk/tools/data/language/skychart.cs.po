@@ -1620,6 +1620,10 @@ msgstr "Hledat"
 msgid "Finder circle (eyepiece)"
 msgstr "Zorná pole okulárů"
 
+#: u_translation.rsfindercircle2
+msgid "Finder Circle"
+msgstr ""
+
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Zorná pole CCD"
@@ -2237,6 +2241,10 @@ msgstr "Nahrát"
 #: u_translation.rsloadfile
 msgid "Load file"
 msgstr "Nahrát soubor"
+
+#: u_translation.rsloadfromfile
+msgid "Load from file"
+msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"

@@ -1172,6 +1172,8 @@ resourcestring
   rsEncoders = 'Encoders';
   rsTrackTelesco = 'Track telescope';
   rsSlewToCursor = 'Slew to cursor position';
+  rsFinderCircle2 = 'Finder Circle';
+  rsLoadFromFile = 'Load from file';
 
 implementation
 
