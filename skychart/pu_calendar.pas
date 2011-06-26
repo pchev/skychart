@@ -1930,7 +1930,7 @@ end;
 try
 Savedialog1.DefaultExt:='.csv';
 Savedialog1.filter:='Tab Separated File (*.csv)|*.csv';
-Savedialog1.Initialdir:=privatedir;
+Savedialog1.Initialdir:=HomeDir;
 if SaveDialog1.Execute then
    lst.SaveToFile(SafeUTF8ToSys(savedialog1.Filename));
 finally

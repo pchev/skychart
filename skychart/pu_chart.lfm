@@ -360,6 +360,6 @@ object f_chart: Tf_chart
     InitialDir = '/home/compiler/lazarus/'
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
     left = 58
-    top = 118
+    top = 120
   end
 end
