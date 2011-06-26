@@ -982,7 +982,7 @@ end;
 procedure Tf_main.FileSaveAs1Execute(Sender: TObject);
 begin
 Savedialog.DefaultExt:='cdc3';
-if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
+if Savedialog.InitialDir='' then Savedialog.InitialDir:=HomeDir;
 savedialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 savedialog.Title:=rsSaveTheCurre;
 if SaveDialog.Execute then SaveChart(SaveDialog.Filename);
@@ -1011,7 +1011,7 @@ end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
 begin
-if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=privatedir;
+if OpenDialog.InitialDir='' then OpenDialog.InitialDir:=HomeDir;
 OpenDialog.Filter:='Cartes du Ciel 3 File|*.cdc3|All Files|*.*';
 OpenDialog.Title:=rsOpenAChart;
 if OpenDialog.Execute then
@@ -1251,7 +1251,7 @@ procedure Tf_main.SaveImageExecute(Sender: TObject);
 var ext,format,fn:string;
 begin
 Savedialog.DefaultExt:='';
-if Savedialog.InitialDir='' then Savedialog.InitialDir:=privatedir;
+if Savedialog.InitialDir='' then Savedialog.InitialDir:=HomeDir;
 savedialog.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
 savedialog.Title:=rsSaveImage;
 if MultiDoc1.ActiveObject  is Tf_chart then

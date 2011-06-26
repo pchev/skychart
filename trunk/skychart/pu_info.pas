@@ -432,7 +432,7 @@ try
 Savedialog1.DefaultExt:='.csv';
 Savedialog1.filter:='Comma Separated File (*.csv)|*.csv|Tab Separated File (*.tsv)|*.tsv';
 Savedialog1.Title:=rsSaveToFile;
-Savedialog1.Initialdir:=privatedir;
+Savedialog1.Initialdir:=HomeDir;
 if SaveDialog1.Execute then begin
   if UpperCase(ExtractFileExt(Savedialog1.FileName))='.CSV' then fsep:=',' else fsep:=tab;
   AssignFile(f,SafeUTF8ToSys(Savedialog1.FileName));
