@@ -125,7 +125,7 @@ if OpenCom(encoder_port,commport,baud,parity,data,stop,timeout,inttimeout) then 
    result:=true;
    num_error:=0;
 end else begin
-   ShowMessage('Port '+commport+' cannot be opened!'+crlf+lx200_port.LastErrorDesc);
+   ShowMessage('Port '+commport+' cannot be opened!'+crlf+encoder_port.LastErrorDesc);
 end;
 end;
 
