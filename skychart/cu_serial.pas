@@ -81,6 +81,7 @@ end
 end;
 
 Function OpenCom(var ser:TBlockSerial; CommPort,baud,parity,data,stop,timeouts,inttimeout : string):boolean;
+var sb:integer;
 begin
   result:=false;
   if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Open  : '+CommPort+' '+baud+' '+parity+' '+data+' '+stop+' '+timeouts+' '+inttimeout);
@@ -90,10 +91,14 @@ begin
   ser:=TBlockSerial.Create;
   try
     ser.Connect(CommPort);
-    ser.config(strtoint(baud),strtoint(data),char(parity[1]),strtoint(stop),false,false);
+    if ser.LastError<>0 then exit;
+    sb:=0;
+    if stop='1.5' then sb:=1;
+    if stop='2' then sb:=2;
+    ser.config(strtoint(baud),strtoint(data),char(parity[1]),sb,false,false);
+    if ser.LastError<>0 then exit;
     Tot_timout:=strtointdef(timeouts,1000);
     Int_timout:=strtointdef(inttimeout,100);
-    if ser.LastError<>0 then exit;
     com_opened:=true;
     result:=true;
     if debug then  writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Open OK');

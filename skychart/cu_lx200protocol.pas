@@ -276,7 +276,7 @@ if OpenCom(LX200_port,commport,baud,parity,data,stop,timeout,inttimeout) then be
          end;
    end;
 end else begin
-   ShowMessage('Port '+commport+' cannot be opened!');
+   ShowMessage('Port '+commport+' cannot be opened!'+crlf+lx200_port.LastErrorDesc);
    LX200_opened:=false;
 end;
 end;
