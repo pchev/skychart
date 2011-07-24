@@ -412,6 +412,7 @@ var
     list_val : Smallint;
 begin
   result := 0;
+  try
     //zero result to avoid NAN
     for i := 0 to 5 do rrd[i] := 0;
     for i := 0 to 5 do for k:= 0 to 12 do pv[k,i] := 0;
@@ -474,6 +475,9 @@ begin
     for i := 0 to (list_val * 3) - 1 do
       rrd[i] := pv[ntarg-1,i] - pv[ncent-1,i];
     result := 1;
+  except
+    result := 0;
+  end;
 end;
 
 

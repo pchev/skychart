@@ -230,3 +230,19 @@ msgstr ""
 msgid "system.html"
 msgstr ""
 
+#: u_help:hlplx200
+msgid "telescope_lx200.html"
+msgstr ""
+
+#: u_help:hlpencoder
+msgid "telescope_encoder.html"
+msgstr ""
+
+#: u_help:hlpascom
+msgid "telescope_ascom.html"
+msgstr ""
+
+#: u_help:hlpindi
+msgid "telescope_indi.html"
+msgstr ""
+

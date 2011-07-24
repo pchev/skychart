@@ -1,0 +1,31 @@
+object Form1: TForm1
+  Left = 761
+  Height = 139
+  Top = 366
+  Width = 241
+  Caption = 'to '
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  LCLVersion = '0.9.30'
+  object ConnectTimer: TTimer
+    Enabled = False
+    OnTimer = ConnectTimerTimer
+    left = 144
+    top = 32
+  end
+  object DrawTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = DrawTimerTimer
+    left = 192
+    top = 32
+  end
+  object DSSTimer: TTimer
+    Enabled = False
+    OnTimer = DSSTimerTimer
+    left = 64
+    top = 32
+  end
+end

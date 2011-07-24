@@ -10,6 +10,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
+#: u_help.hlpascom
+msgid "telescope_ascom.html"
+msgstr ""
+
 #: u_help.hlpbarleft
 msgid "left_bar.html"
 msgstr ""
@@ -110,12 +114,20 @@ msgstr ""
 msgid "documentation_license.html"
 msgstr ""
 
+#: u_help.hlpencoder
+msgid "telescope_encoder.html"
+msgstr ""
+
 #: u_help.hlpfaq
 msgid "faq.html"
 msgstr ""
 
 #: u_help.hlpindex
 msgid "start.html"
+msgstr ""
+
+#: u_help.hlpindi
+msgid "telescope_indi.html"
 msgstr ""
 
 #: u_help.hlpinfo
@@ -152,6 +164,10 @@ msgstr ""
 
 #: u_help.hlplabel
 msgid "labels.html"
+msgstr ""
+
+#: u_help.hlplx200
+msgid "telescope_lx200.html"
 msgstr ""
 
 #: u_help.hlpmenuchart

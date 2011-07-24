@@ -33,10 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-     {$ifdef mswindows}
-     pu_ascomclient,
-     {$endif}
-     pu_lx200client, pu_encoderclient, pu_indiclient,
+     pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image,
      u_projection, Printers, Math, downloaddialog, IntfGraphics,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
@@ -70,6 +67,7 @@ type
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
     MenuFinderCircle: TMenuItem;
+    Target1: TMenuItem;
     MenuSaveCircle: TMenuItem;
     MenuLoadCircle: TMenuItem;
     MenuLabel: TMenuItem;
@@ -144,6 +142,7 @@ type
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
+    procedure Target1Click(Sender: TObject);
     procedure TrackTelescopeClick(Sender: TObject);
     procedure VertScrollBarChange(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
@@ -205,9 +204,7 @@ type
     Fpop_indi: Tpop_indi;
     Fpop_encoder: Tpop_encoder;
     Fpop_lx200: Tpop_lx200;
-    {$ifdef mswindows}
     Fpop_scope: Tpop_scope;
-    {$endif}
     procedure ConnectINDI(Sender: TObject);
     procedure SlewINDI(Sender: TObject);
     procedure SyncINDI(Sender: TObject);
@@ -297,6 +294,7 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
+    function cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
     procedure cmd_GoXY(xx,yy : string);
     function cmd_IdXY(xx,yy : string): string;
     procedure cmd_MoreStar;
@@ -360,6 +358,10 @@ DownloadDialog1.msgtofile:=rsToFile;
 DownloadDialog1.msgDownloadBtn:=rsDownload;
 DownloadDialog1.msgCancelBtn:=rsCancel;
 if sc<>nil then sc.SetLang;
+if Fpop_lx200<>nil then Fpop_lx200.SetLang;
+if Fpop_encoder<>nil then Fpop_encoder.SetLang;
+if Fpop_indi<>nil then Fpop_indi.SetLang;
+if Fpop_scope<>nil then Fpop_scope.SetLang;
 end;
 
 procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -927,6 +929,27 @@ begin
   sc.cfgsc.FindDEC:=dec;
   sc.cfgsc.FindName:='cursor';
   Slew1Click(sender);
+end;
+
+procedure Tf_chart.Target1Click(Sender: TObject);
+begin
+if sc.cfgsc.TargetOn then begin
+   {$ifdef trace_debug}
+    WriteTrace('Target click 1');
+   {$endif}
+   sc.cfgsc.TargetOn:=false;
+   Refresh;
+end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6)
+then begin
+   {$ifdef trace_debug}
+   WriteTrace('Target click 2');
+   {$endif}
+   sc.cfgsc.TargetOn:=true;
+   sc.cfgsc.TargetName:=sc.cfgsc.TrackName;
+   sc.cfgsc.TargetRA:=sc.cfgsc.TrackRA;
+   sc.cfgsc.TargetDec:=sc.cfgsc.TrackDec;
+   Refresh;
+end;
 end;
 
 procedure Tf_chart.TrackTelescopeClick(Sender: TObject);
@@ -1571,6 +1594,13 @@ begin
     end
     else TrackOn1.visible:=false;
  end;
+ if sc.cfgsc.TargetOn then begin
+    Target1.Caption:=rsClearTarget;
+  end else if ((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or(sc.cfgsc.TrackType=6) then begin
+    Target1.Caption:=Format(rsSetTargetTo, [sc.cfgsc.TrackName]);
+  end else begin
+    Target1.Caption:=rsNoTargetObje;
+ end;
  if sc.cfgsc.FindName>'' then begin
    About1.Caption:=Format(rsAbout2, [sc.cfgsc.FindName]);
    About1.visible:=true;
@@ -2128,8 +2158,10 @@ end;
 procedure Tf_chart.Cleanupmap1Click(Sender: TObject);
 begin
 ZoomStep:=0;
+sc.cfgsc.TargetOn:=false;
 sc.cfgsc.Trackon:=false;
 sc.cfgsc.TrackName:='';
+sc.cfgsc.TrackType:=0;
 Refresh;
 end;
 
@@ -2704,15 +2736,20 @@ var f : double;
 begin
 result:=msgFailed+' Bad format!';
 try
+fov:=StringReplace(fov,'FOV:','',[rfIgnoreCase]);
 fov:=trim(fov);
 p:=pos('d',fov);
+if p=0 then p:=pos(#176,fov); // °
 if p>0 then begin
   f:=strtofloat(copy(fov,1,p-1));
   fov:=copy(fov,p+1,999);
   p:=pos('m',fov);
+  if p=0 then p:=pos('''',fov);
   f:=f+strtofloat(copy(fov,1,p-1))/60;
   fov:=copy(fov,p+1,999);
   p:=pos('s',fov);
+  if p=0 then p:=pos('"',fov);
+  if p=0 then p:=99;
   f:=f+strtofloat(copy(fov,1,p-1))/3600;
 end else begin
   f:=strtofloat(fov);
@@ -2783,13 +2820,17 @@ p:=pos('DEC:',param1);
 if p>0 then begin
  buf:=copy(param1,p+4,999);
  p:=pos('d',buf);
+ if p=0 then p:=pos(#176,buf); // °
  de:=strtofloat(copy(buf,1,p-1));
  s:=sgn(de);
  buf:=copy(buf,p+1,999);
  p:=pos('m',buf);
+ if p=0 then p:=pos('''',buf);
  de:=de+s*strtofloat(copy(buf,1,p-1))/60;
  buf:=copy(buf,p+1,999);
  p:=pos('s',buf);
+ if p=0 then p:=pos('"',buf);
+ if p=0 then p:=99;
  de:=de+s*strtofloat(copy(buf,1,p-1))/3600;
 end else begin
  de:=strtofloat(param1);
@@ -2871,7 +2912,7 @@ end;
 
 function Tf_chart.cmd_SetObs(obs:string):string;
 var n,buf : string;
-    p : integer;
+    p,tz : integer;
     s,la,lo,al : double;
 begin
 result:=msgFailed+' Bad observatory format!';
@@ -2905,6 +2946,17 @@ if p=0 then exit;
 buf:=copy(obs,p+4,999);
 p:=pos('m',buf);
 al:=strtofloat(copy(buf,1,p-1));
+p:=pos('TZ:',obs);
+if p>0 then begin
+  buf:=copy(obs,p+3,999);
+  p:=pos('h',buf);
+  buf:=copy(buf,1,p-1);
+  tz:=-StrToInt(buf);
+  buf:=trim(inttostr(tz));
+  if tz>0 then buf:='+'+buf;
+  cmd_SetTZ('Etc/GMT'+buf);
+  sc.cfgsc.countrytz:=false;
+end;
 p:=pos('OBS:',obs);
 if p=0 then n:='obs?'
        else n:=trim(copy(obs,p+4,999));
@@ -2932,7 +2984,7 @@ function Tf_chart.cmd_SetTZ(tz:string):string;
 var buf:string;
 begin
 try
-  buf:=ZoneDir+StringReplace(sc.cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
+  buf:=ZoneDir+StringReplace(tz,'/',PathDelim,[rfReplaceAll]);
   if FileExists(buf) then begin
     sc.cfgsc.ObsTZ:=tz;
     sc.cfgsc.tz.TimeZoneFile:=buf;
@@ -2948,6 +3000,29 @@ end;
 function Tf_chart.cmd_GetTZ:string;
 begin
  result:=msgOK+blank+sc.cfgsc.ObsTZ;
+end;
+
+function Tf_chart.cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
+var ra2000,de2000: double;
+begin
+f_getdss.cmain:=cmain;
+ra2000:=sc.cfgsc.racentre;
+de2000:=sc.cfgsc.decentre;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
+if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
+   sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
+   if sc.Fits.Header.valid then begin
+      sc.Fits.DeleteDB('OTHER','BKG');
+      if not sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
+             sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
+      sc.cfgsc.TrackOn:=true;
+      sc.cfgsc.TrackType:=5;
+      sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
+      sc.cfgsc.ShowBackgroundImage:=true;
+      Refresh;
+   end;
+end;
 end;
 
 function Tf_chart.cmd_IdentCursor:string;
@@ -3094,7 +3169,7 @@ case n of
  27 : result:=cmd_SetFov(arg[1]);
  28 : result:=cmd_SetRa(arg[1]);
  29 : result:=cmd_SetDec(arg[1]);
- 30 : result:=cmd_SetObs(arg[1]);
+ 30 : result:=cmd_SetObs(arg[1]+arg[2]+arg[3]+arg[4]+arg[5]+arg[6]+arg[7]+arg[8]);
  31 : result:=cmd_IdentCursor;
  32 : result:=cmd_SaveImage(arg[1],arg[2],arg[3]);
  33 : SetAz(deg2rad*180,false);
@@ -3120,7 +3195,7 @@ case n of
  53 : begin result:=cmd_SetTZ(arg[1]); Refresh; end;
  54 : result:=cmd_GetTZ;
  55 : begin cmd_SetRa(arg[1]); cmd_SetDec(arg[2]); cmd_SetFov(arg[3]); Refresh; end;
- 56 : result:='not implemented'; // dss
+ 56 : result:=cmd_PDSS(arg[1],arg[2],arg[3],arg[4]);
  57 : result:=cmd_SaveImage('BMP',arg[1],'');
  58 : result:=cmd_SaveImage('GIF',arg[1],'');
  59 : result:=cmd_SaveImage('JPEG',arg[1],arg[2]);
@@ -3316,12 +3391,10 @@ begin
 {$ifdef trace_debug}
  WriteTrace(caption+' Connect Telescope');
 {$endif}
-{$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
    ConnectASCOM(Sender);
 end
 else
-{$endif}
 if sc.cfgsc.LX200Telescope then begin
    ConnectLX200(Sender);
 end
@@ -3340,12 +3413,10 @@ end;
 procedure Tf_chart.Slew1Click(Sender: TObject);
 begin
 if Connect1.checked then begin
-  {$ifdef mswindows}
   if sc.cfgsc.ASCOMTelescope then begin
      SlewASCOM(Sender);
   end
   else
-  {$endif}
   if sc.cfgsc.LX200Telescope then begin
    SlewLX200(Sender);
   end
@@ -3362,12 +3433,10 @@ end;
 procedure Tf_chart.AbortSlew1Click(Sender: TObject);
 begin
 if Connect1.checked then begin
-{$ifdef mswindows}
   if sc.cfgsc.ASCOMTelescope then begin
      AbortSlewASCOM(Sender);
   end
 else
-{$endif}
 if sc.cfgsc.LX200Telescope then begin
  AbortSlewLX200(Sender);
 end
@@ -3387,12 +3456,10 @@ if Connect1.checked and
    (mrYes=MessageDlg(Format(rsPleaseConfir, [sc.cfgsc.FindName]),
      mtConfirmation, [mbYes, mbNo], 0))
 then begin
-{$ifdef mswindows}
 if sc.cfgsc.ASCOMTelescope then begin
    SyncASCOM(Sender);
 end
 else
-{$endif}
 if sc.cfgsc.LX200Telescope then begin
  SyncLX200(Sender);
 end
@@ -3602,6 +3669,7 @@ begin
 if Fpop_indi=nil then begin
   Fpop_indi:=Tpop_indi.Create(self);
   Fpop_indi.csc:=sc.cfgsc;
+  Fpop_indi.SetLang;
 end;
 if Connect1.checked then begin
    Fpop_indi.ScopeShow;
@@ -3656,6 +3724,7 @@ begin
 if Fpop_lx200=nil then begin
   Fpop_lx200:=Tpop_lx200.Create(self);
   Fpop_lx200.csc:=sc.cfgsc;
+  Fpop_lx200.SetLang;
 end;
 if Connect1.checked then begin
    Fpop_lx200.ScopeShow;
@@ -3710,6 +3779,7 @@ begin
 if Fpop_encoder=nil then begin
   Fpop_encoder:=Tpop_encoder.Create(self);
   Fpop_encoder.csc:=sc.cfgsc;
+  Fpop_encoder.SetLang;
 end;
 if Connect1.checked then begin
    Fpop_encoder.ScopeShow;
@@ -3742,8 +3812,10 @@ end;
 
 procedure Tf_chart.ConnectASCOM(Sender: TObject);
 begin
-{$ifdef mswindows}
-if Fpop_scope=nil then Fpop_scope:=Tpop_scope.Create(self);
+if Fpop_scope=nil then begin
+  Fpop_scope:=Tpop_scope.Create(self);
+  Fpop_scope.SetLang;
+end;
 if Connect1.checked then begin
    Fpop_scope.ScopeShow;
 end else begin
@@ -3755,16 +3827,12 @@ end else begin
      TelescopeTimer.Enabled:=true;
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
-{$endif}
 end;
 
 procedure Tf_chart.SlewASCOM(Sender: TObject);
-{$ifdef mswindows}
 var ra,dec:double;
     ok:boolean;
-{$endif}
 begin
-{$ifdef mswindows}
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -3774,22 +3842,16 @@ end else begin
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
-{$endif}
 end;
 
 procedure Tf_chart.AbortSlewASCOM(Sender: TObject);
 begin
-{$ifdef mswindows}
 Fpop_scope.ScopeAbortSlew;
-{$endif}
 end;
 
 procedure Tf_chart.SyncASCOM(Sender: TObject);
-{$ifdef mswindows}
 var ra,dec:double;
-{$endif}
 begin
-{$ifdef mswindows}
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
@@ -3799,7 +3861,6 @@ end else begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_scope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
-{$endif}
 end;
 
 procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
@@ -3813,14 +3874,12 @@ TelescopeTimer.Enabled:=false;
 {$endif}
 newconnection:=Connect1.checked;
 if sc.cfgsc.ASCOMTelescope then begin
-  {$ifdef mswindows}
      Connect1.checked:=Fpop_scope.ScopeConnected;
      if Connect1.checked then begin
       Fpop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
       if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
       Fpop_scope.ScopeGetRaDec(ra,dec,ok);
      end;
-   {$endif}
  end
 else if sc.cfgsc.IndiTelescope then begin
      Connect1.checked:=Fpop_indi.ScopeConnected;

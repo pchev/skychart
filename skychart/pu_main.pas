@@ -30,7 +30,7 @@ interface
 
 uses
   {$ifdef mswindows}
-    Windows, ShlObj,
+    Windows, ShlObj, Registry,
   {$endif}
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, pu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
@@ -672,6 +672,8 @@ type
     function Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
     function SaveChart(fn: string): string;
     function OpenChart(fn: string): string;
+    function LoadDefaultChart(fn: string): string;
+    function SetGCat(path,shortname,active,min,max: string): string;
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -876,9 +878,9 @@ for i:=0 to MultiDoc1.ChildCount-1 do
         sc.cfgsc.FindOk:=false;
         sc.plot.cfgplot.Assign(def_cfgplot);
       end;
-{$ifdef trace_debug}
- WriteTrace('RefreshAllChild');
-{$endif}
+      {$ifdef trace_debug}
+       WriteTrace('RefreshAllChild');
+      {$endif}
       AutoRefresh;
      end;
 end;
@@ -1007,6 +1009,69 @@ if FileExistsUTF8(fn) then begin
  result:=msgOK;
 end else
  result:=msgNotFound+' '+fn;
+end;
+
+function Tf_main.LoadDefaultChart(fn: string): string;
+var nam: string;
+    p: integer;
+    maxi: boolean;
+begin
+if FileExistsUTF8(fn) then begin
+ cfgp.Assign(def_cfgplot);
+ cfgs.Assign(def_cfgsc);
+ ReadChartConfig(SafeUTF8ToSys(fn),true,true,def_cfgplot,def_cfgsc);
+ Tf_chart(multidoc1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
+ Tf_chart(multidoc1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
+ result:=msgOK;
+end else
+ result:=msgNotFound+' '+fn;
+end;
+
+function Tf_main.SetGCat(path,shortname,active,min,max: string): string;
+var i,j,x,v:integer;
+begin
+result:=msgFailed;
+val(min,x,v);
+if v<>0 then exit;
+val(max,x,v);
+if v<>0 then exit;
+if not fileexists(slash(path)+shortname+'.hdr') then exit;
+i:=-1;
+for j:=0 to catalog.cfgcat.GCatNum do
+   if catalog.cfgcat.GCatLst[j].shortname=trim(shortname) then i:=j;
+if i<0 then begin
+  catalog.cfgcat.GCatNum:=catalog.cfgcat.GCatNum+1;
+  SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
+  i:=catalog.cfgcat.GCatNum-1;
+end;
+catalog.cfgcat.GCatLst[i].shortname:=trim(shortname);
+catalog.cfgcat.GCatLst[i].path:=trim(path);
+val(min,x,v);
+if v=0 then catalog.cfgcat.GCatLst[i].min:=x
+       else catalog.cfgcat.GCatLst[i].min:=0;
+val(max,x,v);
+if v=0 then catalog.cfgcat.GCatLst[i].max:=x
+       else catalog.cfgcat.GCatLst[i].max:=0;
+catalog.cfgcat.GCatLst[i].Actif:=(active='1');
+catalog.cfgcat.GCatLst[i].magmax:=0;
+catalog.cfgcat.GCatLst[i].name:='';
+catalog.cfgcat.GCatLst[i].cattype:=0;
+if catalog.cfgcat.GCatLst[i].Actif then begin
+  if not
+  catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
+                  catalog.cfgcat.GCatLst[i].shortname,
+                  catalog.cfgcat.GCatLst[i].magmax,
+                  catalog.cfgcat.GCatLst[i].cattype,
+                  catalog.cfgcat.GCatLst[i].version,
+                  catalog.cfgcat.GCatLst[i].name)
+  then catalog.cfgcat.GCatLst[i].Actif:=false;
+end;
+if (active='1')and(not catalog.cfgcat.GCatLst[i].Actif) then begin
+  catalog.cfgcat.GCatNum:=catalog.cfgcat.GCatNum-1;
+  SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
+  exit;
+end;
+result:=msgOK;
 end;
 
 procedure Tf_main.FileOpen1Execute(Sender: TObject);
@@ -1174,9 +1239,6 @@ end;
  WriteTrace('Create default chart');
 {$endif}
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
- Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
- AutoRefreshLock:=false;
- Autorefresh.enabled:=true;
  if InitialChartNum>1 then begin
     {$ifdef trace_debug}
      WriteTrace('Load '+inttostr(InitialChartNum-1)+' supplementary charts');
@@ -1204,6 +1266,9 @@ end;
 {$endif}
 CdcSigAction(@RecvSignal);
 {$endif}
+Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
+AutoRefreshLock:=false;
+Autorefresh.enabled:=true;
 except
   on E: Exception do begin
    WriteTrace('Initialization error: '+E.Message);
@@ -2271,34 +2336,16 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
 end;
 end;
 
-
 procedure Tf_main.DSSImageExecute(Sender: TObject);
 var ra2000,de2000: double;
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
-   f_getdss.cmain:=cfgm;
-   ra2000:=sc.cfgsc.racentre;
-   de2000:=sc.cfgsc.decentre;
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
-   precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
-   if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
-      sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
-      if sc.Fits.Header.valid then begin
-         sc.Fits.DeleteDB('OTHER','BKG');
-         if not sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
-                sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
-         sc.cfgsc.TrackOn:=true;
-         sc.cfgsc.TrackType:=5;
-         sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
-         sc.cfgsc.ShowBackgroundImage:=true;
-{$ifdef trace_debug}
- WriteTrace('DSSImageExecute');
-{$endif}
-         Refresh;
-      end;
-   end;
-end;
+      {$ifdef trace_debug}
+       WriteTrace('DSSImageExecute');
+      {$endif}
+      cmd_PDSS('','','','');
+  end;
 end;
 
 procedure Tf_main.BlinkImageExecute(Sender: TObject);
@@ -2625,17 +2672,17 @@ procedure Tf_main.TrackExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
   if sc.cfgsc.TrackOn then begin
+     {$ifdef trace_debug}
+      WriteTrace('TrackExecute 1');
+     {$endif}
      sc.cfgsc.TrackOn:=false;
-{$ifdef trace_debug}
- WriteTrace('TrackExecute 1');
-{$endif}
      Refresh;
   end else if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>'')
   then begin
+     {$ifdef trace_debug}
+      WriteTrace('TrackExecute 2');
+     {$endif}
      sc.cfgsc.TrackOn:=true;
-{$ifdef trace_debug}
- WriteTrace('TrackExecute 2');
-{$endif}
      Refresh;
   end;
 end;
@@ -2724,6 +2771,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
       8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla  ; end;
       9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin  ; end;
       10 : begin ok:=catalog.SearchLines(num,ar1,de1) ; itype:=ftlin  ; end;
+      11 : begin ok:=catalog.SearchConstAbrev(num,ar1,de1); itype:=ftlin  ; end;
       else ok:=false;
       end;
       if ok then begin
@@ -5976,7 +6024,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
      end else begin
        ToolButtonTrack.Hint:=rsNoObjectToLo;
        MenuTrack.Caption:=rsNoObjectToLo;
-     end;
+    end;
     case sc.plot.cfgplot.starplot of
     0: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=true; end;
     1: begin ToolButtonswitchstars.down:=true; ToolButtonswitchstars.marked:=false; end;
@@ -6127,6 +6175,8 @@ case n of
  12 : result:=HelpCmd(trim(uppercase(arg[1])));
  13 : Close;
  14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;
+ 15 : result:=LoadDefaultChart(arg[1]);
+ 16 : result:=SetGCat(arg[1],arg[2],arg[3],arg[4],arg[5]);
 else begin
  result:='Bad chart name '+cname;
  if cname='' then begin
@@ -6217,7 +6267,27 @@ end;
 procedure Tf_main.StopServer;
 var i :integer;
     d :double;
+    {$ifdef mswindows}
+    Registry1: TRegistry;
+    {$else}
+    f: textfile;
+    fn: string;
+    {$endif}
 begin
+{$ifdef mswindows}
+  Registry1 := TRegistry.Create;
+  with Registry1 do begin
+    Openkey('Software\Astro_PC\Ciel\Status',true);
+    WriteString('TcpPort','0');
+    CloseKey;
+  end;
+  Registry1.Free;
+{$else}
+  AssignFile(f,slash(TempDir)+'tcpport');
+  Rewrite(f);
+  Write(f,'0');
+  CloseFile(f);
+{$endif}
 if TCPDaemon=nil then exit;
 SetLpanel1(rsStopTCPIPSer);
 try
@@ -6324,6 +6394,13 @@ for i:=0 to Params.Count-1 do begin
       cmd:=trim(parms);
       parm:='';
    end;
+   if cmd='--loaddef' then begin
+      pp.Add('LOADDEFAULT');
+      pp.Add(parm);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
+      chartchanged:=true;
+   end;
    if cmd='--load' then begin
       pp.Add('LOAD');
       pp.Add(parm);
@@ -6331,6 +6408,11 @@ for i:=0 to Params.Count-1 do begin
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end;
+end;
+if chartchanged then begin
+  pp.Clear;
+  pp.Add('REDRAW');
+  ExecuteCmd('',pp);
 end;
 // parameters that need to be processed first
 for i:=0 to Params.Count-1 do begin
@@ -6359,6 +6441,13 @@ for i:=0 to Params.Count-1 do begin
    end else if cmd='--setdate' then begin
       pp.Add('SETDATE');
       pp.Add(parm);
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
+      chartchanged:=true;
+   end else if cmd='--setcat' then begin
+      parm:='SETCAT '+parm;
+      splitarg(parm,blank,pp);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
@@ -6418,6 +6507,26 @@ if chartchanged then begin
   pp.Clear;
   pp.Add('REDRAW');
   ExecuteCmd('',pp);
+end;
+// parameters that need to be processed after the position is set
+for i:=0 to Params.Count-1 do begin
+   pp.Clear;
+   parms:= Params[i];
+   p:=pos('=',parms);
+   if p>0 then begin
+      cmd:=trim(copy(parms,1,p-1));
+      parm:=trim(copy(parms,p+1,999));
+   end else begin
+      cmd:=trim(parms);
+      parm:='';
+   end;
+   if cmd='--dss' then begin
+      parm:='PDSS '+parm;
+      splitarg(parm,blank,pp);
+      for p:=pp.count to MaxCmdArg do pp.add('');
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
+   end;
 end;
 // parameters that need to be processed after the chart is draw
 for i:=0 to Params.Count-1 do begin
@@ -6582,10 +6691,33 @@ SetLpanel1(Format(rsSocketError, [msg,'']));
 end;
 
 procedure Tf_main.TCPShowSocket(var msg: string);
+var
+tcpport: string;
+{$ifdef mswindows}
+ Registry1: TRegistry;
+{$else}
+ f: textfile;
+ fn: string;
+{$endif}
 begin
+tcpport:=msg;
 if msg<>cfgm.ServerIPport then msg:=Format(rsDifferentTha, [msg]);
 serverinfo:=Format(rsListenOnPort, [msg]);
 SetLpanel1(serverinfo);
+{$ifdef mswindows}
+  Registry1 := TRegistry.Create;
+  with Registry1 do begin
+    Openkey('Software\Astro_PC\Ciel\Status',true);
+    WriteString('TcpPort',tcpport);
+    CloseKey;
+  end;
+  Registry1.Free;
+{$else}
+  AssignFile(f,slash(TempDir)+'tcpport');
+  Rewrite(f);
+  Write(f,tcpport);
+  CloseFile(f);
+{$endif}
 end;
 
 procedure Tf_main.ImageSetFocus(Sender: TObject);

@@ -27,7 +27,7 @@ interface
 
 uses Math, SysUtils, Classes, u_constant, LCLType, FileUtil,
   {$ifdef mswindows}
-    Windows,
+    Windows, Registry,
   {$endif}
   {$ifdef unix}
     unix,baseunix,unixutil,
@@ -107,6 +107,7 @@ function CondUTF8Decode(v:string):string;
 function CondUTF8Encode(v:string):string;
 function GreekSymbolUtf8(v:string):string;
 function SafeUTF8ToSys(v:string):string;
+function GetSerialPorts(var c: TComboBox):boolean;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -176,6 +177,73 @@ function SafeUTF8ToSys(v:string):string;
 begin
 result:=UTF8ToSys(v);
 if result='' then result:=v;
+end;
+
+function GetSerialPorts(var c: TComboBox):boolean;
+var p: TStringList;
+    i: integer;
+    fs : TSearchRec;
+    buf: string;
+    {$ifdef mswindows}
+    reg: TRegistry;
+    l: TStringList;
+    n: integer;
+    {$endif}
+begin
+p:=TStringList.Create;
+p.clear;
+{$ifdef linux}
+  i:=findfirst('/dev/ttyS*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+  i:=findfirst('/dev/ttyUSB*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+{$endif}
+{$ifdef darwin}
+  i:=findfirst('/dev/tty.serial*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+  i:=findfirst('/dev/tty.usbserial*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+{$endif}
+{$ifdef mswindows}
+  l := TStringList.Create;
+  reg := TRegistry.Create;
+  reg.RootKey := HKEY_LOCAL_MACHINE;
+  reg.OpenKey('\HARDWARE\DEVICEMAP\SERIALCOMM', false);
+  reg.GetValueNames(l);
+  for n := 0 to l.Count - 1 do
+    p.Add(reg.ReadString(l[n]));
+  reg.Free;
+  l.Free;
+{$endif}
+p.Sort;
+buf := c.text;
+try
+if p.Count>0 then begin
+  c.Clear;
+  for i:=0 to p.count-1 do
+      c.Items.Add(p[i]);
+end;
+finally
+c.Text := buf;
+p.free;
+end;
+result:=true;
 end;
 
 Function mm2pi(l,PrinterResolution : single): integer;
