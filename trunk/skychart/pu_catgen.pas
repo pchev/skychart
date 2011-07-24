@@ -1183,26 +1183,32 @@ catheader.RAmode:=radiogroup2.itemindex;
 catheader.fpos[n]:=textpos[curpos,1]; // H
 catheader.flen[n]:=textpos[curpos,2];
 inc(curpos);inc(n);
-catheader.fpos[36]:=textpos[curpos,1]; // M
-catheader.flen[36]:=textpos[curpos,2];
-inc(curpos);
-catheader.fpos[37]:=textpos[curpos,1]; // S
-catheader.flen[37]:=textpos[curpos,2];
-inc(curpos);
+if (radiogroup2.itemindex=0)or(radiogroup2.itemindex=2) then begin
+  catheader.fpos[36]:=textpos[curpos,1]; // M
+  catheader.flen[36]:=textpos[curpos,2];
+  inc(curpos);
+  catheader.fpos[37]:=textpos[curpos,1]; // S
+  catheader.flen[37]:=textpos[curpos,2];
+  inc(curpos);
+end;
 //DEC
 catheader.DECmode:=radiogroup3.itemindex;
-catheader.fpos[40]:=textpos[curpos,1]; // sign
-catheader.flen[40]:=textpos[curpos,2];
-inc(curpos);
+if radiogroup3.itemindex=0 then begin
+  catheader.fpos[40]:=textpos[curpos,1]; // sign
+  catheader.flen[40]:=textpos[curpos,2];
+  inc(curpos);
+end;
 catheader.fpos[n]:=textpos[curpos,1]; // D
 catheader.flen[n]:=textpos[curpos,2];
 inc(curpos);inc(n);
-catheader.fpos[38]:=textpos[curpos,1]; // M
-catheader.flen[38]:=textpos[curpos,2];
-inc(curpos);
-catheader.fpos[39]:=textpos[curpos,1]; // S
-catheader.flen[39]:=textpos[curpos,2];
-inc(curpos);
+if radiogroup3.itemindex=0 then begin
+  catheader.fpos[38]:=textpos[curpos,1]; // M
+  catheader.flen[38]:=textpos[curpos,2];
+  inc(curpos);
+  catheader.fpos[39]:=textpos[curpos,1]; // S
+  catheader.flen[39]:=textpos[curpos,2];
+  inc(curpos);
+end;
 case radiogroup1.itemindex of
 //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','epoch','Parallax','Comments');
  0 : begin     // Stars
@@ -1253,6 +1259,7 @@ for i:=0 to 19 do begin
       catheader.flen[n]:=textpos[curpos,2];
    end;
    inc(curpos); inc(n);
+   if curpos>=CheckListBox1.Count then break;
 end;
 catheader.reclen:=0;
 catheader.IxKeylen:=0;

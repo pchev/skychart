@@ -34,8 +34,8 @@ uses
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
-  cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info,
-  pu_image, pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
+  cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
+  pu_getdss, pu_detail, pu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
   u_util, MultiDocPackage, enhedit, pu_config_catalog, pu_config_system,
   pu_config_solsys, pu_config_pictures, pu_config_observatory,
@@ -46,7 +46,7 @@ uses
   uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
   pu_indiclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
   cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki, cu_encoderprotocol,
-  bgrabitmappack;
+  pu_ascomclient, uDE, bgrabitmappack;
   
 var i : integer;
     buf, p, step : string;
@@ -75,12 +75,13 @@ begin
   lclver:=lcl_version;
   compile_time:={$I %DATE%}+' '+{$I %TIME%};
   compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
+  compile_system:={$I %FPCTARGETOS%};
   {$ifdef trace_debug}
   debugln('Program version : '+cdcversion);
   debugln('Program compiled: '+compile_time);
   debugln('Compiler version: '+compile_version);
   {$endif}
-  Application.Title:='Cartes du Ciel';
+  Application.Title:='Skychart';
   {$ifdef trace_debug}
   debugln('Initialize');
   {$endif}

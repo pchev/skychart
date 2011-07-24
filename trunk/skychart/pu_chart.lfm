@@ -314,6 +314,10 @@ object f_chart: Tf_chart
     object N3: TMenuItem
       Caption = '-'
     end
+    object Target1: TMenuItem
+      Caption = 'Target'
+      OnClick = Target1Click
+    end
     object TrackOn1: TMenuItem
       Caption = 'Lock on'
       OnClick = TrackOn1Click

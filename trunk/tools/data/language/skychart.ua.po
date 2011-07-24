@@ -106,6 +106,10 @@ msgstr "Підвищено"
 msgid "Advanced search"
 msgstr "Швидкий пошук"
 
+#: u_translation.rsadvancedsett
+msgid "Advanced Settings for Scope.exe"
+msgstr ""
+
 #: u_translation.rsage
 msgid "Age"
 msgstr "Вік"
@@ -137,6 +141,10 @@ msgstr "%sТакож пересвідчитися, що необхідне пр�
 #: u_translation.rsalt
 msgid "Alt"
 msgstr "Висота"
+
+#: u_translation.rsaltaz
+msgid "Alt-Az"
+msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
@@ -218,8 +226,8 @@ msgstr "Штучні супутники"
 msgid "Artificial satellite"
 msgstr ""
 
-#: u_translation.rsascomtelesco
-msgid "Integrated telescope driver"
+#: u_translation.rsascomtelesc
+msgid "ASCOM telescope interface"
 msgstr ""
 
 #: u_translation.rsaskconfirmat
@@ -321,6 +329,10 @@ msgstr "Тло"
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
 msgstr "Фонове зображення"
+
+#: u_translation.rsbattery
+msgid "Battery"
+msgstr ""
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
@@ -522,6 +534,10 @@ msgstr "Олег Малий, gemini@ua.fm  ( МГО Запорізький Ас�
 msgid "Center"
 msgstr "Центр"
 
+#: u_translation.rscentering
+msgid "Centering"
+msgstr ""
+
 #: u_translation.rscenterobject
 msgid "Centre on this object"
 msgstr "Центральний об'єкт"
@@ -608,6 +624,14 @@ msgstr "Клас"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
+msgstr ""
+
+#: u_translation.rsclear
+msgid "Clear"
+msgstr ""
+
+#: u_translation.rscleartarget
+msgid "Clear Target"
 msgstr ""
 
 #: u_translation.rsclicktochang
@@ -726,9 +750,21 @@ msgstr "Обчислити поле"
 msgid "Configuration"
 msgstr "Конфігурація"
 
+#: u_translation.rsconfigure
+msgid "Configure"
+msgstr ""
+
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
 msgstr "Конфігурація програми"
+
+#: u_translation.rsconnect
+msgid "Connect"
+msgstr ""
+
+#: u_translation.rsconnected
+msgid "Connected"
+msgstr ""
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
@@ -814,6 +850,10 @@ msgstr "Коорд. сітка"
 msgid "Coordinates:"
 msgstr "Координати:"
 
+#: u_translation.rscoordinates2
+msgid "Coordinates"
+msgstr ""
+
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
 msgstr "Рівнодення координат"
@@ -886,6 +926,14 @@ msgstr "Кульмінація"
 msgid "Date of validity"
 msgstr "Поточна дата"
 
+#: u_translation.rscurrentdrive
+msgid "Current driver"
+msgstr ""
+
+#: u_translation.rscustom
+msgid "Custom"
+msgstr ""
+
 #: u_translation.rscw
 msgid "%sCW"
 msgstr "%sCW"
@@ -928,6 +976,10 @@ msgstr "Настанови БД..."
 msgid "Database type"
 msgstr "Тип бази даних (БД)"
 
+#: u_translation.rsdatabits
+msgid "Data bits"
+msgstr ""
+
 #: u_translation.rsdatafiles
 msgid "Data files:"
 msgstr "Файли даних:"
@@ -947,6 +999,10 @@ msgstr "Інші каталоги абрисів"
 #: u_translation.rsdate
 msgid "Date"
 msgstr "Дата"
+
+#: u_translation.rsdateandortim
+msgid "Date and/or time cannot be changed"
+msgstr ""
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -996,6 +1052,14 @@ msgstr "DE"
 msgid "DEC"
 msgstr "DEC"
 
+#: u_translation.rsdecelpeccomp
+msgid "DEC/EL PEC Compensation"
+msgstr ""
+
+#: u_translation.rsdecelslewrat
+msgid "DEC/El Slew Rate"
+msgstr ""
+
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
 msgstr "Десяткові градуси"
@@ -1015,6 +1079,10 @@ msgstr "Схилення"
 #: u_translation.rsdecoptions
 msgid "DEC options"
 msgstr "DEC опції"
+
+#: u_translation.rsdecrease
+msgid "Decrease"
+msgstr ""
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1174,6 +1242,10 @@ msgstr "Докладніше"
 msgid "Device port "
 msgstr "Порт пристрою"
 
+#: u_translation.rsdevicestatus
+msgid "Device status"
+msgstr ""
+
 #: u_translation.rsdiam
 msgid "Diam."
 msgstr "Діам."
@@ -1181,6 +1253,10 @@ msgstr "Діам."
 #: u_translation.rsdiameter
 msgid "Diameter"
 msgstr "Діаметр"
+
+#: u_translation.rsdiconnected
+msgid "Diconnected"
+msgstr ""
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1210,6 +1286,10 @@ msgstr "Директорія не знайдена %s"
 msgid "Directory not found! Please install the Skychart Pictures package."
 msgstr ""
 
+#: u_translation.rsdisconnect
+msgid "Disconnect"
+msgstr ""
+
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
 msgstr "Відключення телескопу"
@@ -1233,6 +1313,10 @@ msgstr "Показ зображення із каталогу об'єктів"
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
 msgstr "Показати позначки всіх зоряних каталогів"
+
+#: u_translation.rsdisplaypreci
+msgid "Display Precision"
+msgstr ""
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1326,6 +1410,10 @@ msgstr "Нарисувати контур ослабленого обрію"
 msgid "Driver name"
 msgstr "Назва драйверу"
 
+#: u_translation.rsdriverselect
+msgid "Driver Selection"
+msgstr ""
+
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "Падіння бази даних"
@@ -1406,6 +1494,14 @@ msgstr "Елонг."
 msgid "Emission nebula"
 msgstr "Емісійна туманність"
 
+#: u_translation.rsencoderconfi
+msgid "Encoder Configuration"
+msgstr ""
+
+#: u_translation.rsencoderiniti
+msgid "Encoder initialization angle"
+msgstr ""
+
 #: u_translation.rsencoders
 msgid "Encoders"
 msgstr ""
@@ -1442,6 +1538,10 @@ msgstr "Епоха максимуму"
 msgid "Eq. grid"
 msgstr "Екв. сітка"
 
+#: u_translation.rsequatorial
+msgid "Equatorial"
+msgstr ""
+
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
 msgstr "Екваторіальні координати"
@@ -1457,6 +1557,10 @@ msgstr "Екваторіальні коорд."
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
 msgstr "Екваторіальне монтування"
+
+#: u_translation.rsequatorialsy
+msgid "Equatorial System"
+msgstr ""
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -1477,6 +1581,14 @@ msgstr "%sПомилка створення таблиці %s"
 #: u_translation.rserroropening
 msgid "Error opening %s"
 msgstr "Помилка відкриття %s"
+
+#: u_translation.rserroropening2
+msgid "Error opening %s on port %s"
+msgstr ""
+
+#: u_translation.rserroropening3
+msgid "Error opening %s on port %sCheck if device is connected and power on"
+msgstr ""
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1546,9 +1658,17 @@ msgstr "Слабіше"
 msgid "Faint Stars Size "
 msgstr "Слабий розмір зірки"
 
+#: u_translation.rsfan
+msgid "Fan"
+msgstr ""
+
 #: u_translation.rsfaq
 msgid "FAQ"
 msgstr "Найчастіші питання"
+
+#: u_translation.rsfast
+msgid "Fast"
+msgstr ""
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1573,6 +1693,10 @@ msgstr "Настанови поля зору"
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
 msgstr "Ном. поля зору:"
+
+#: u_translation.rsfieldrotatio
+msgid "Field Rotation"
+msgstr ""
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -1658,6 +1782,14 @@ msgstr "Позначення Флемстіда:"
 msgid "Iridium flare prediction:"
 msgstr ""
 
+#: u_translation.rsfocus
+msgid "Focus"
+msgstr ""
+
+#: u_translation.rsfocusspeed
+msgid "Focus Speed"
+msgstr ""
+
 #: u_translation.rsfonts
 msgid "Fonts"
 msgstr "Шрифти"
@@ -1668,6 +1800,10 @@ msgstr "Для великого каталогу, завжди вибирайт�
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
+msgstr ""
+
+#: u_translation.rsformalwaysvi
+msgid "Form always visible"
 msgstr ""
 
 #: u_translation.rsfov
@@ -1688,6 +1824,10 @@ msgstr ""
 
 #: u_translation.rsframessize
 msgid "Frames size"
+msgstr ""
+
+#: u_translation.rsfrangle
+msgid "FR Angle"
 msgstr ""
 
 #: u_translation.rsfreesize
@@ -1768,6 +1908,10 @@ msgstr "Головні настанови"
 msgid "Geocentric"
 msgstr "Геоцентрична"
 
+#: u_translation.rsget
+msgid "Get"
+msgstr ""
+
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
 msgstr "Одержання списку астероїдів"
@@ -1783,6 +1927,10 @@ msgstr "Добути останнє вимірювання від проекту
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
 msgstr "Кульове скупчення"
+
+#: u_translation.rsgps16advsett
+msgid "Gps-16\" Adv. Settings"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -1824,6 +1972,18 @@ msgstr "Кульмінація ВЧП"
 msgid "G slope parameter"
 msgstr "G спеціальний параметр"
 
+#: u_translation.rsguide
+msgid "Guide"
+msgstr ""
+
+#: u_translation.rsguidearcsec
+msgid "guide arcsec"
+msgstr ""
+
+#: u_translation.rsguiderate
+msgid "Guide Rate"
+msgstr ""
+
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
 msgstr "Н- абсолютна величина"
@@ -1835,6 +1995,10 @@ msgstr "Радіус півмаси"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Перервати після 1000 похибок"
+
+#: u_translation.rshandpadmodes
+msgid "HandPad Mode Selection"
+msgstr ""
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -1852,6 +2016,10 @@ msgstr "Допомога"
 msgid "Help contents"
 msgstr "Зміст допомоги"
 
+#: u_translation.rshide
+msgid "Hide"
+msgstr ""
+
 #: u_translation.rshidelabel
 msgid "Hide label"
 msgstr "Приховати мітку"
@@ -1860,9 +2028,21 @@ msgstr "Приховати мітку"
 msgid "Hide objects wider than"
 msgstr "Приховати об'єкт ширший, ніж"
 
+#: u_translation.rshigh
+msgid "High"
+msgstr ""
+
 #: u_translation.rshighcolor
 msgid "High colour"
 msgstr "Якісні кольори"
+
+#: u_translation.rshighest
+msgid "Highest"
+msgstr ""
+
+#: u_translation.rshighprecisio
+msgid "High Precision Pointing"
+msgstr ""
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -1948,6 +2128,10 @@ msgstr ""
 msgid "Include Iridium flare"
 msgstr ""
 
+#: u_translation.rsincrease
+msgid "Increase"
+msgstr ""
+
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
 msgstr "Приріст для яскравих зірок"
@@ -2008,6 +2192,18 @@ msgstr "Інформаційна деталь"
 msgid "Information from catalog"
 msgstr ""
 
+#: u_translation.rsinit
+msgid "Init"
+msgstr ""
+
+#: u_translation.rsinitialiseda
+msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
+msgstr ""
+
+#: u_translation.rsinitialize
+msgid "Initialize"
+msgstr ""
+
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Ініціалізація бази даних"
@@ -2032,6 +2228,14 @@ msgstr "Інтернет"
 msgid "Internet localization"
 msgstr ""
 
+#: u_translation.rsintervaltime
+msgid "Interval Timeout"
+msgstr ""
+
+#: u_translation.rsinttelesco
+msgid "Integrated telescope driver."
+msgstr ""
+
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
 msgstr "недійсна епоха на лінії %s : %s"
@@ -2042,6 +2246,14 @@ msgstr "Непридатний FITS файл: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
+msgstr ""
+
+#: u_translation.rsinversionalp
+msgid "Inversion Alpha ,"
+msgstr ""
+
+#: u_translation.rsinversiondel
+msgid "%s Inversion Delta"
 msgstr ""
 
 #: u_translation.rsinvisibleatt
@@ -2143,6 +2355,10 @@ msgstr "Лівий"
 #: u_translation.rsleftbar
 msgid "Left bar"
 msgstr "Ліва панель"
+
+#: u_translation.rsleftmode
+msgid "Left Mode"
+msgstr ""
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -2300,6 +2516,10 @@ msgstr "Довгота висхідного вузла"
 msgid "Lozenge"
 msgstr "Ромб"
 
+#: u_translation.rslow
+msgid "Low"
+msgstr ""
+
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
 msgstr "Низька поверхнева яскравість"
@@ -2307,6 +2527,10 @@ msgstr "Низька поверхнева яскравість"
 #: u_translation.rsluminosity
 msgid "Luminosity"
 msgstr "Яскравість"
+
+#: u_translation.rslunar
+msgid "Lunar"
+msgstr ""
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -2456,6 +2680,10 @@ msgstr "Повідомлення:"
 msgid "Meters"
 msgstr "Метрів"
 
+#: u_translation.rsmiddle
+msgid "Middle"
+msgstr ""
+
 #: u_translation.rsmilkyway
 msgid "Milky Way"
 msgstr "Чум.  Шлях"
@@ -2491,6 +2719,14 @@ msgstr "Дзеркально по вертикалі"
 #: u_translation.rsmisclines
 msgid "Misc. lines"
 msgstr "Різні лінії"
+
+#: u_translation.rsmodebuttonsi
+msgid "Mode Button Simulator"
+msgstr ""
+
+#: u_translation.rsmodel
+msgid "Model"
+msgstr ""
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -2535,6 +2771,26 @@ msgstr "Ранок"
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
 msgstr "Ранкові сутінки"
+
+#: u_translation.rsmotor
+msgid "Motor"
+msgstr ""
+
+#: u_translation.rsmotorspeeds
+msgid "Motor Speeds"
+msgstr ""
+
+#: u_translation.rsmountfabrica
+msgid "Mount fabrication error"
+msgstr ""
+
+#: u_translation.rsmounttype
+msgid "Mount type"
+msgstr ""
+
+#: u_translation.rsmove
+msgid "Move"
+msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -2603,6 +2859,10 @@ msgstr "Туманності або інші об'єкти"
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
 msgstr "Абриси туманностей"
+
+#: u_translation.rsnegativeeast
+msgid "(negative east of Greenwich)"
+msgstr ""
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
@@ -2704,9 +2964,17 @@ msgstr "Північ"
 msgid "Not a FITS file, SIMPLE = T keyword missing"
 msgstr "Нема FITS файлу, SIMPLE = T втрата ключового слова"
 
+#: u_translation.rsnotargetobje
+msgid "No target object"
+msgstr ""
+
 #: u_translation.rsnotavailable
 msgid "Not available"
 msgstr "Не досяжний"
+
+#: u_translation.rsnotavailon
+msgid "Not available on %s"
+msgstr ""
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
@@ -2727,6 +2995,10 @@ msgstr "%s  Не знайдено жодного встановленого ка
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
 msgstr "%s Не знайдено!%sМожливо каталог не встановлено, або невірний шлях до нього в настановах."
+
+#: u_translation.rsnotinitialis
+msgid "Not initialised"
+msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
@@ -2800,6 +3072,10 @@ msgstr "Об'єкти"
 msgid "Object size unit"
 msgstr "Одиниця розміру об'єкту"
 
+#: u_translation.rsobjectsusedf
+msgid "Objects used for Initialisation"
+msgstr ""
+
 #: u_translation.rsobjecttype
 msgid "Object type"
 msgstr "Тип об'єкту"
@@ -2816,6 +3092,10 @@ msgstr "Дані обсерваторії"
 msgid "Obsolete"
 msgstr "Застарілий"
 
+#: u_translation.rsoff
+msgid "Off"
+msgstr ""
+
 #: u_translation.rsoffset
 msgid "Offset"
 msgstr "Компенсація"
@@ -2827,6 +3107,10 @@ msgstr ""
 #: u_translation.rsok
 msgid "OK"
 msgstr "Гаразд"
+
+#: u_translation.rson
+msgid "On"
+msgstr ""
 
 #: u_translation.rsoneofthree
 msgid "One of three"
@@ -2936,6 +3220,18 @@ msgstr "Паралакс"
 msgid "Parametric"
 msgstr "Параметричне"
 
+#: u_translation.rsparity
+msgid "Parity"
+msgstr ""
+
+#: u_translation.rsparkinganddi
+msgid "Parking and Disconnecting telescope."
+msgstr ""
+
+#: u_translation.rsparktelescop
+msgid "Park Telescope"
+msgstr ""
+
 #: u_translation.rspartial
 msgid "Partial"
 msgstr "Частковий"
@@ -2959,6 +3255,14 @@ msgstr "Шлях збереження файлу:"
 #: u_translation.rspathwidth
 msgid "Path width"
 msgstr "Ширина шляху"
+
+#: u_translation.rspec
+msgid "PEC"
+msgstr ""
+
+#: u_translation.rspectoggle
+msgid "Pec Toggle"
+msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -3050,6 +3354,10 @@ msgstr "Будь ласка завдайтейте  URL орбітального
 msgid "Please confirm that the telescope is pointed at %s"
 msgstr "Будь ласка підтвердіть, що телескоп відцентровано по %s"
 
+#: u_translation.rspleaseensure
+msgid "Please ensure that ASCOM telescope drivers are installed properly."
+msgstr ""
+
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
 msgstr "Будь ласка введіть ідентифікатор об'єкту."
@@ -3066,6 +3374,10 @@ msgstr "Будь ласка вкажіть повну назву каталог�
 msgid "Please indicate the directory where the catalog must be built"
 msgstr "Будь ласка вкажіть директорію, в котрій каталог повинен створюватися"
 
+#: u_translation.rspleaseinitth
+msgid "Please init the 90 degree elevation first"
+msgstr ""
+
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
 msgstr ""
@@ -3077,6 +3389,10 @@ msgstr ""
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
 msgstr "Будь ласка встановіть число RealSky256 CD "
+
+#: u_translation.rspleasemoveth
+msgid "Please move the telescope along the two axis"
+msgstr ""
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -3113,6 +3429,10 @@ msgstr "Нахил полюсу"
 #: u_translation.rsport
 msgid "Port:"
 msgstr "Порт:"
+
+#: u_translation.rsportconfigur
+msgid "Port Configuration"
+msgstr ""
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -3222,6 +3542,10 @@ msgstr "Обробку закінчено. Загальна кількість �
 msgid "Processing line %s"
 msgstr "Обробка лінії %s"
 
+#: u_translation.rsproductinfo
+msgid "Product Info"
+msgstr ""
+
 #: u_translation.rsprogramdata
 msgid "Program data "
 msgstr "Програмні дані"
@@ -3282,6 +3606,14 @@ msgstr "Проксі хост"
 msgid "Proxy port"
 msgstr "Проксі порт"
 
+#: u_translation.rspulseduratio
+msgid "Pulse duration"
+msgstr ""
+
+#: u_translation.rspulsemode
+msgid "Pulse Mode"
+msgstr ""
+
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
 msgstr ""
@@ -3289,6 +3621,10 @@ msgstr ""
 #: u_translation.rsquasar
 msgid "Quasar"
 msgstr "Квазар"
+
+#: u_translation.rsquery
+msgid "Query"
+msgstr ""
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -3309,6 +3645,14 @@ msgstr "Порадник швидкого старту"
 #: u_translation.rsra
 msgid "RA"
 msgstr "RA"
+
+#: u_translation.rsraazpeccompe
+msgid "RA/AZ PEC Compensation"
+msgstr ""
+
+#: u_translation.rsraazslewrate
+msgid "RA/Az Slew Rate"
+msgstr ""
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -3334,9 +3678,17 @@ msgstr "Повороти по RA:"
 msgid "%sRA turns:"
 msgstr "%sRA повороти:"
 
+#: u_translation.rsreadinterval
+msgid "Read Interval [ms]"
+msgstr ""
+
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
 msgstr "Реальні зображення"
+
+#: u_translation.rsreallyparkan
+msgid "REALLY park and disconnect the telescope?"
+msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -3374,6 +3726,10 @@ msgstr ""
 msgid "Recording prefix"
 msgstr ""
 
+#: u_translation.rsrecordprotoc
+msgid "Record protocol to a trace file"
+msgstr ""
+
 #: u_translation.rsred
 msgid "Red"
 msgstr "Червоний"
@@ -3408,6 +3764,10 @@ msgstr "Обновити"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
+msgstr ""
+
+#: u_translation.rsrefreshrate
+msgid "Refresh rate"
 msgstr ""
 
 #: u_translation.rsreleasenotes
@@ -3478,6 +3838,14 @@ msgstr ""
 msgid "Resolution:"
 msgstr "Розділення:"
 
+#: u_translation.rsresolutionxy
+msgid "Resolution X: %s Y :%s steps"
+msgstr ""
+
+#: u_translation.rsresumegoto
+msgid "Resume GoTo"
+msgstr ""
+
 #: u_translation.rsreturn
 msgid "Return"
 msgstr "Назад"
@@ -3509,6 +3877,10 @@ msgstr "Пряме сходження"
 #: u_translation.rsrightbar
 msgid "Right Bar"
 msgstr "Права панель"
+
+#: u_translation.rsrightmode
+msgid "Right Mode"
+msgstr ""
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -3578,6 +3950,10 @@ msgstr "Зберегти зображення..."
 msgid "Save project"
 msgstr "Зберегти проект"
 
+#: u_translation.rssavesetting
+msgid "Save setting"
+msgstr ""
+
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
 msgstr "Зберегти поточну мапу"
@@ -3589,6 +3965,10 @@ msgstr "Зберегти в файл"
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "Сканувати директорію"
+
+#: u_translation.rsscopeadv
+msgid "Scope Adv"
+msgstr ""
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
@@ -3630,6 +4010,18 @@ msgstr "Секунд"
 msgid "Seconds"
 msgstr "Секунд"
 
+#: u_translation.rsseehttpascom
+msgid "See %s for more information."
+msgstr ""
+
+#: u_translation.rssel
+msgid "Sel."
+msgstr ""
+
+#: u_translation.rsselect
+msgid "Select"
+msgstr ""
+
 #: u_translation.rsselectall
 msgid "Select all"
 msgstr "Вибрати все"
@@ -3669,6 +4061,10 @@ msgstr "Послати мапу на принтер"
 #: u_translation.rsseparation
 msgid "Separation"
 msgstr "Розділення"
+
+#: u_translation.rsserialport
+msgid "Serial Port"
+msgstr ""
 
 #: u_translation.rsserver
 msgid "Server"
@@ -3714,9 +4110,29 @@ msgstr "Встановити ПЗ"
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
 msgstr "Перевірте, як коректно ходять осі монтування , коли ви натискаєте на кнопку запуску. Потім натискаючи кнопку показу об'єктів, повинен бути перебіг із об'єкту на об'єкт."
 
+#: u_translation.rssetlocation
+msgid "Set Location"
+msgstr ""
+
 #: u_translation.rssetobservato
 msgid "Set observatory location"
 msgstr "Настанова розташування обсерваторії"
+
+#: u_translation.rssetslewing
+msgid "Set Slewing"
+msgstr ""
+
+#: u_translation.rssettargetto
+msgid "Set target to %s"
+msgstr ""
+
+#: u_translation.rssettelescope
+msgid "Set TelescopeTime"
+msgstr ""
+
+#: u_translation.rssettime
+msgid "Set Time"
+msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -3894,8 +4310,20 @@ msgstr "Колір неба"
 msgid "Slew"
 msgstr "Поворот"
 
+#: u_translation.rsslewspeed
+msgid " Slew Speed"
+msgstr ""
+
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
+msgstr ""
+
+#: u_translation.rsslow
+msgid "Slow"
+msgstr ""
+
+#: u_translation.rsslowest
+msgid "Slowest"
 msgstr ""
 
 #: u_translation.rssmallstars
@@ -3969,6 +4397,18 @@ msgstr "Південь"
 #: u_translation.rsspectralclas
 msgid "Spectral class"
 msgstr "Спектральний клас"
+
+#: u_translation.rsspeed
+msgid "Speed"
+msgstr ""
+
+#: u_translation.rsspeedselecti
+msgid "Speed Selection"
+msgstr ""
+
+#: u_translation.rsspeedsetting
+msgid "Speed settings"
+msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -4046,13 +4486,33 @@ msgstr "Від місяця"
 msgid "Start of object"
 msgstr "Початок об'єкту"
 
+#: u_translation.rsstatus
+msgid "Status"
+msgstr ""
+
 #: u_translation.rsstatusbar
 msgid "Status bar"
 msgstr "Панель стану"
 
+#: u_translation.rsstepsalpha
+msgid "Steps (Alpha)"
+msgstr ""
+
+#: u_translation.rsstepsdelta
+msgid "Steps (Delta)"
+msgstr ""
+
 #: u_translation.rsstepunit
 msgid "Step unit"
 msgstr "Одиниця кроку"
+
+#: u_translation.rsstop
+msgid "Stop"
+msgstr ""
+
+#: u_translation.rsstopbits
+msgid "Stop bits"
+msgstr ""
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -4090,6 +4550,14 @@ msgstr "Поверхня"
 msgid "Surface brightness"
 msgstr "Поверхнева яскравість"
 
+#: u_translation.rsswapbutton
+msgid "Swap button"
+msgstr ""
+
+#: u_translation.rsswitchhpp
+msgid "Switch HPP"
+msgstr ""
+
 #: u_translation.rssyear
 msgid "Y"
 msgstr "Рік"
@@ -4117,6 +4585,10 @@ msgstr "Системний принтер"
 #: u_translation.rssystemsettin
 msgid "System settings"
 msgstr "Настанови системи"
+
+#: u_translation.rssytemstatus
+msgid "Sytem status:"
+msgstr ""
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -4178,6 +4650,10 @@ msgstr "Текстовий файл каталогу"
 msgid "Text size"
 msgstr "Розмір тексту іконки"
 
+#: u_translation.rstheinterface
+msgid "The interface is either not connected or not initialized"
+msgstr ""
+
 #: u_translation.rstheme
 msgid "Theme"
 msgstr "Тема"
@@ -4217,6 +4693,10 @@ msgstr "Розмістити вертикально"
 #: u_translation.rstime
 msgid "Time"
 msgstr "Час"
+
+#: u_translation.rstimeoutms
+msgid "Timeout [ms]"
+msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -4274,6 +4754,10 @@ msgstr "Повний радіус"
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
 msgstr "Щоб використовувати ці нові дані далі, ви повинні зараз обчислити Щомісячні Дані"
 
+#: u_translation.rstracking
+msgid "Tracking"
+msgstr ""
+
 #: u_translation.rstracktelesco
 msgid "Track telescope"
 msgstr ""
@@ -4329,6 +4813,10 @@ msgstr "повороти / година"
 #: u_translation.rstwilight
 msgid "Twilight"
 msgstr "Сутінки"
+
+#: u_translation.rstwostarsmust
+msgid "TWO stars must be used for initialisation."
+msgstr ""
 
 #: u_translation.rstype
 msgid "Type"
@@ -4422,6 +4910,10 @@ msgstr "Застосувати висхідну схему кольору:"
 msgid "(useful to represent a flux)"
 msgstr "(придатно зображувати потоки) "
 
+#: u_translation.rsusehpp
+msgid "Use HPP"
+msgstr ""
+
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
 msgstr "Використати HTTP проксі"
@@ -4502,6 +4994,14 @@ msgstr ""
 msgid "Venus"
 msgstr "Венера"
 
+#: u_translation.rsverticalaxis
+msgid "Vertical axis encoder origin : %s"
+msgstr ""
+
+#: u_translation.rsverticalaxis2
+msgid "Vertical axis 90 degree initialisation not done"
+msgstr ""
+
 #: u_translation.rsvicinity
 msgid "Vicinity"
 msgstr "Довкілля"
@@ -4513,6 +5013,10 @@ msgstr "Вид"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Показати обрій"
+
+#: u_translation.rsvirtualhandp
+msgid "Virtual HandPad for Scope.exe "
+msgstr ""
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -4578,6 +5082,10 @@ msgstr "Ширина"
 msgid "Window"
 msgstr "Вікно"
 
+#: u_translation.rsxerrors
+msgid "X Errors"
+msgstr ""
+
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
 msgstr "Xplane не компільовано для підтримки JPEG "
@@ -4597,6 +5105,10 @@ msgstr "Рік"
 #: u_translation.rsyears
 msgid "years"
 msgstr "років"
+
+#: u_translation.rsyerrors
+msgid "Y Errors"
+msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

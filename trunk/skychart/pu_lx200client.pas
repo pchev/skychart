@@ -1,6 +1,6 @@
 unit pu_lx200client;
 
-{$MODE Delphi}
+{$MODE Objfpc}{$H+}
 
 {
 Copyright (C) 2000 Patrick Chevalley
@@ -38,7 +38,7 @@ will work with all systems using same protocol
 
 interface
 
-uses
+uses  u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs, u_constant, u_util,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls,
@@ -136,6 +136,7 @@ type
      SpeedButton4: TSpeedButton;
      SpeedButton8: TSpeedButton;
      SpeedButton9: TSpeedButton;
+    ProductInfoBox: TGroupbox;
      QueryFirmwareButton: TButton;
      VirtHP: TTabSheet;
      LeftModeButton: TButton;
@@ -207,6 +208,7 @@ type
      {Utility and form functions}
      procedure FormCreate(Sender: TObject);
      procedure kill(Sender: TObject; var CanClose: Boolean);
+     procedure PageControl1Change(Sender: TObject);
      procedure Timer1Timer(Sender: TObject);
      procedure setresClick(Sender: TObject);
      function str2ra(s:string):double;
@@ -300,6 +302,7 @@ type
     Sideral_Time : Double;              // Current sideral time
     Longitude : Double;                 // Observatory longitude (Negative East of Greenwich}
     Latitude : Double;                  // Observatory latitude
+    procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
     Procedure ShowCoordinates;
     procedure ChangeButton(onoff : boolean);
@@ -308,7 +311,7 @@ type
     Procedure ScopeShowModal(var ok : boolean);
     Procedure ScopeConnect(var ok : boolean);
     Procedure ScopeDisconnect(var ok : boolean);
-    Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+    Procedure ScopeGetInfo(var Nam : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
     Procedure ScopeSetObs(la,lo : double);
     Procedure ScopeAlign(source : string; ra,dec : double);
     Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean);
@@ -322,9 +325,6 @@ type
     Procedure ScopeGetEqSys(var EqSys : double);
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
-
-//var
-  //pop_lx200: Tpop_lx200;
 
 implementation
 
@@ -461,7 +461,7 @@ if LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybo
 end else begin
     LX200_Close;
     formstyle:=fsNormal;
-    ShowMessage('Error opening '+cbo_type.text+' on port '+cbo_port.text+crlf+'Check if device is connected and power on');
+    ShowMessage(Format(rsErrorOpening3, [cbo_type.text, cbo_port.text+crlf]));
     formstyle:=fsStayOnTop;
     ChangeButton(false);
     // Renato Bonomini:
@@ -512,7 +512,9 @@ end;
 
 Procedure Tpop_lx200.ScopeShow;
 begin
-show
+show;
+PageControl1.ActivePageIndex:=0;
+PageControl1.Invalidate;
 end;
 
 Procedure Tpop_lx200.ScopeGetRaDec(var ar,de : double; var ok : boolean);
@@ -543,16 +545,16 @@ case EqSys1.ItemIndex of
 end;
 end;
 
-Procedure Tpop_lx200.ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
+Procedure Tpop_lx200.ScopeGetInfo(var Nam : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
 begin
 // Renato added model 5
 if (cbo_type.text=validModel[1])or(cbo_type.text=validModel[2])or(cbo_type.text=validModel[5]) then begin // lx200, autostar, scope.exe
-       name:=cbo_type.text;
+       nam:=cbo_type.text;
        QueryOK:=true;
        SyncOK:=true;
        GotoOK:=true;
 end else if (cbo_type.text=validModel[3])or(cbo_type.text=validModel[4]) then begin  // magellan
-       name:=cbo_type.text;
+       nam:=cbo_type.text;
        QueryOK:=true;
        SyncOK:=false;
        GotoOK:=false;
@@ -619,12 +621,115 @@ end;
 
 --------------------------------------------------------------------------------}
 
+procedure Tpop_lx200.SetLang;
+begin
+TabSheet1.Caption:=rsCoordinates2;
+GroupBox1.Caption:=rsMove;
+RadioGroup1.Caption:=rsSpeed;
+RadioGroup1.Items[0]:=rsSlew;
+RadioGroup1.Items[1]:=rsFind;
+RadioGroup1.Items[2]:=rsCentering;
+RadioGroup1.Items[3]:=rsGuide;
+GroupBox8.Caption:=rsSwapButton;
+GroupBox6.Caption:=rsHighPrecisio;
+SpeedButton3.Caption:=rsResumeGoTo;
+SpeedButton8.Caption:=rsSetTelescope;
+SpeedButton9.Caption:=rsParkTelescop;
+SpeedButton1.Caption:=rsConnect;
+SpeedButton5.Caption:=rsDisconnect;
+SpeedButton2.Caption:=rsHide;
+SpeedButton4.Caption:=rsHelp;
+StopBtn.Caption:=rsStop;
+MotorTab.Caption:=rsMotor;
+TrackingGroup.Caption:=rsTracking;
+TrackingDefaultButton.Caption:=rsDefault;
+TrackingLunarButton.Caption:=rsLunar;
+TrackingCustomButton.Caption:=rsCustom;
+TrackingGetButton.Caption:=rsGet;
+TrackingSetRateButton.Caption:=rsSet;
+TrackingDecreaseLabel.Caption:=rsDecrease+crlf+'0.1 Hz';
+TrackingIncreaseLabel.Caption:=rsIncrease+crlf+'0.1 Hz';
+FieldRotationGroup.Caption:=rsFieldRotatio;
+FieldRotation.Caption:=rsMotor;
+FRLabel.Caption:=rsFRAngle;
+FRQuery.Caption:=rsUpdate1;
+FanControl.Caption:=rsFan;
+LX200GPSRate.Caption:=rsGps16AdvSett;
+LxPecToggle.Caption:=rsPecToggle;
+SlewSpeedGroup.Caption:=rsSlewSpeed;
+LabelSetSlewSpeed.Caption:=rsSetSlewing+crlf+rsSpeed+' (2..4)';
+Lx200GPSMotorSpeeds.Caption:=rsMotorSpeeds;
+LabelGuideSpeed.Caption:=rsGuideRate+' [arc"/s]';
+LabelRaAzSpeed.Caption:=rsRAAzSlewRate+' [°/s]';
+LabelDecSlewRate.Caption:=rsDECElSlewRat+' [°/s]';
+Focus.Caption:=rsFocus;
+RadioGroup5.Caption:=rsSpeedSelecti;
+RadioGroup3.Caption:='Autostar '+rsFocusSpeed;
+RadioGroup4.Caption:='LX200 '+rsFocusSpeed;
+RadioGroup4.Items[0]:=rsSlow;
+RadioGroup4.Items[1]:=rsFast;
+CheckBox6.Caption:=rsPulseMode;
+Label19.Caption:=rsPulseDuratio;
+Button1.Caption:=rsSaveSetting;
+VirtHP.Caption:='VirtHP';
+VHPTitleLabel.Caption:=rsVirtualHandP;
+LRModeGroup.Caption:=rsModeButtonSi;
+LeftModeButton.Caption:=rsLeftMode;
+RightModeButton.Caption:=rsRightMode;
+HandPadModeSelection.Caption:=rsHandPadModeS;
+Adv.Caption:=rsScopeAdv;
+ADVTitleLabel.Caption:=rsAdvancedSett;
+ScopeSpeeds.Caption:=rsSpeedSetting;
+GetMsArcSec.Caption:=rsGet;
+SetMsArcSec.Caption:=rsSet;
+ScopeInit.Caption:=rsInitialize;
+GuideArcSecLabel.Caption:=rsGuideArcsec;
+GetGuideArcSec.Caption:=rsGet;
+SetGuideArcSec.Caption:=rsSet;
+PEC.Caption:=rsPEC;
+RAPEC.Caption:=rsRAAZPECCompe;
+RAPECOn.Caption:=rsOn;
+RAPECOff.Caption:=rsOff;
+DECPEC.Caption:=rsDECELPECComp;
+DECPECOn.Caption:=rsOn;
+DECPECOff.Caption:=rsOff;
+TabSheet2.Caption:=rsConfiguratio;
+Label1.Caption:=rsModel;
+Label2.Caption:=rsRefreshRate;
+Label21.Caption:=rsEquatorialSy;
+QueryFirmwareButton.Caption:=rsQuery;
+ProductInfoBox.Caption:=rsProductInfo;
+RadioGroup2.Caption:=rsDisplayPreci;
+RadioGroup2.Items[0]:=rsLow+'( ddd:mm )';
+RadioGroup2.Items[1]:=rsHigh+'( ddd:mm:ss )';
+GroupBox7.Caption:=rsHighPrecisio;
+CheckBox1.Caption:=rsUseHPP;
+Button3.Caption:=rsSwitchHPP;
+GroupBox5.Caption:=rsObservatory;
+Label15.Caption:=rsLatitude;
+Label16.Caption:=rsLongitude+crlf+rsNegativeEast;
+CheckBox5.Caption:=rsRecordProtoc;
+CheckBox2.Caption:=rsFormAlwaysVi;
+SaveButton1.Caption:=rsSaveSetting;
+TabSheet3.Caption:=rsPortConfigur;
+GroupBox4.Caption:=rsPortConfigur;
+Label5.Caption:=rsSerialPort;
+Label7.Caption:=rsSpeed;
+Label9.Caption:=rsDataBits;
+Label8.Caption:=rsParity;
+Label10.Caption:=rsStopBits;
+Label13.Caption:=rsTimeoutMs;
+Label18.Caption:=rsIntervalTime;
+Button2.Caption:=rsSaveSetting;
+SetHelp(self,hlpLX200);
+end;
+
 function Tpop_lx200.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
     nom : string;
     av : boolean;
 begin
-  result:=DirectoryExists(ConfigPath); { *Converted from DirectoryExists*  }
+  result:=DirectoryExists(ConfigPath);
   if Result then
     FConfig:=slash(ConfigPath)+'scope.ini'
   else
@@ -636,8 +741,7 @@ begin
   cbo_type.text:=nom;
   cbo_type.ItemIndex:=ini.readinteger('lx200','model',0);
   ReadIntBox.text:=ini.readstring('lx200','read_interval','1000');
-  cbo_port.text:=ini.readstring('lx200','comport','COM1');
-//  if strtoint(copy(cbo_port.text,4,1))>4 then cbo_port.text:='COM1';
+  cbo_port.text:=ini.readstring('lx200','comport',DefaultSerialPort);
   PortSpeedbox.text:=ini.readstring('lx200','baud','9600');
   DatabitBox.text:=ini.readstring('lx200','databits','8');
   Paritybox.text:=ini.readstring('lx200','parity','N');
@@ -678,10 +782,10 @@ if cbo_type.text='LX200' then begin
   SpeedButton8.visible:=true;
   SpeedButton9.visible:=true;
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Slew');
-  Radiogroup1.Items.Add('Find');
-  Radiogroup1.Items.Add('Centering');
-  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.Items.Add(rsSlew);
+  Radiogroup1.Items.Add(rsFind);
+  Radiogroup1.Items.Add(rsCentering);
+  Radiogroup1.Items.Add(rsGuide);
   Radiogroup1.ItemIndex:=1;
 // Renato Bonomini:
 end else if cbo_type.text='Scope.exe' then begin
@@ -694,10 +798,10 @@ end else if cbo_type.text='Scope.exe' then begin
   GroupBox7.visible:=false;
   // if LX200_UseHPP then GroupBox6.visible:=true; //
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Slew');
-  Radiogroup1.Items.Add('Find');
-  Radiogroup1.Items.Add('Centering');
-  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.Items.Add(rsSlew);
+  Radiogroup1.Items.Add(rsFind);
+  Radiogroup1.Items.Add(rsCentering);
+  Radiogroup1.Items.Add(rsGuide);
   Radiogroup1.ItemIndex:=1;
   VirtHP.TabVisible:=True;
   Adv.TabVisible:=True;
@@ -719,9 +823,9 @@ end else if cbo_type.text='AutoStar' then begin
   SpeedButton8.visible:=true;
   SpeedButton9.visible:=true;
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Highest');
-  Radiogroup1.Items.Add('Middle');
-  Radiogroup1.Items.Add('Slowest');
+  Radiogroup1.Items.Add(rsHighest);
+  Radiogroup1.Items.Add(rsMiddle);
+  Radiogroup1.Items.Add(rsSlowest);
   Radiogroup1.ItemIndex:=1;
 end else if cbo_type.text='Magellan-II' then begin
   PortSpeedbox.itemindex:=1;
@@ -757,6 +861,11 @@ if port_opened then begin
    canclose:=false;
    hide;
 end;
+end;
+
+procedure Tpop_lx200.PageControl1Change(Sender: TObject);
+begin
+
 end;
 
 procedure Tpop_lx200.FormCreate(Sender: TObject);
@@ -940,10 +1049,10 @@ if cbo_type.text='LX200' then begin
   SpeedButton9.visible:=false;
   if LX200_UseHPP then GroupBox6.visible:=true;
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Slew');
-  Radiogroup1.Items.Add('Find');
-  Radiogroup1.Items.Add('Centering');
-  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.Items.Add(rsSlew);
+  Radiogroup1.Items.Add(rsFind);
+  Radiogroup1.Items.Add(rsCentering);
+  Radiogroup1.Items.Add(rsGuide);
   Radiogroup1.ItemIndex:=1;
 // Renato Bonomini:
 end else if cbo_type.text='Scope.exe' then begin
@@ -956,10 +1065,10 @@ end else if cbo_type.text='Scope.exe' then begin
   GroupBox7.visible:=false;
   // if LX200_UseHPP then GroupBox6.visible:=true; //
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Slew');
-  Radiogroup1.Items.Add('Find');
-  Radiogroup1.Items.Add('Centering');
-  Radiogroup1.Items.Add('Guide');
+  Radiogroup1.Items.Add(rsSlew);
+  Radiogroup1.Items.Add(rsFind);
+  Radiogroup1.Items.Add(rsCentering);
+  Radiogroup1.Items.Add(rsGuide);
   Radiogroup1.ItemIndex:=1;
   VirtHP.TabVisible:=True;
   Adv.TabVisible:=True;
@@ -984,9 +1093,9 @@ end else if cbo_type.text='AutoStar' then begin
   GroupBox6.visible:=false;
   LX200_UseHPP:=false;
   Radiogroup1.Items.Clear;
-  Radiogroup1.Items.Add('Highest');
-  Radiogroup1.Items.Add('Middle');
-  Radiogroup1.Items.Add('Slowest');
+  Radiogroup1.Items.Add(rsHighest);
+  Radiogroup1.Items.Add(rsMiddle);
+  Radiogroup1.Items.Add(rsSlowest);
   Radiogroup1.ItemIndex:=1;
 end else if cbo_type.text='Magellan-II' then begin
   PortSpeedbox.itemindex:=1;
@@ -1061,6 +1170,7 @@ end;
 procedure Tpop_lx200.FormShow(Sender: TObject);
 begin
 Caption:=cbo_type.text;
+GetSerialPorts(cbo_port);
 end;
 
 procedure Tpop_lx200.CheckBox3Click(Sender: TObject);
@@ -1095,17 +1205,9 @@ end else begin
 end;
 end;
 
-{ TODO : Help file support }
-{Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
-var
-  zFileName, zParams, zDir: array[0..79] of Char;
-begin
-  Result := ShellExecute(pop_lx200.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
-end;}
 procedure Tpop_lx200.SpeedButton4Click(Sender: TObject);
 begin
-//ExecuteFile('meade.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+ShowHelp;
 end;
 
 procedure Tpop_lx200.RadioGroup5Click(Sender: TObject);
@@ -1171,7 +1273,7 @@ if not ScopeConnected then ScopeConnect(ok);
      CoordLock := true;
      try
      if not LX200_SetTimeDate then
-        ShowMessage('Date and/or time cannot be changed')
+        ShowMessage(rsDateAndOrTim)
      finally
      CoordLock := false;
      end;
@@ -1180,10 +1282,10 @@ end;
 procedure Tpop_lx200.SpeedButton9Click(Sender: TObject);
 var ok : boolean;
 begin
-if MessageDlg('REALLY park and disconnect the telescope?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+if MessageDlg(rsREALLYParkAn, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
    if LX200_ParkScope then begin
       ScopeDisconnect(ok);
-      ShowMessage('Parking and Disconnecting telescope.');
+      ShowMessage(rsParkingAndDi);
    end;
 end;
 

@@ -121,6 +121,7 @@ type
      function SearchVarStar(Num:string; var ar1,de1: double): boolean;
      function SearchLines(Num:string; var ar1,de1: double): boolean;
      function SearchConstellation(Num:string; var ar1,de1: double): boolean;
+     function SearchConstAbrev(Num:string; var ar1,de1: double): boolean;
      function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
      function FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
@@ -2315,6 +2316,19 @@ begin
    result:=false;
    for i:=0 to cfgshr.ConstelNum-1 do
      if trim(cfgshr.ConstelName[i,2])=trim(Num) then begin
+        result:=true;
+        ar1:=cfgshr.ConstelPos[i].ra;
+        de1:=cfgshr.ConstelPos[i].de;
+        break;
+     end;
+end;
+
+function Tcatalog.SearchConstAbrev(Num:string; var ar1,de1: double): boolean;
+var i : integer;
+begin
+   result:=false;
+   for i:=0 to cfgshr.ConstelNum-1 do
+     if uppercase(trim(cfgshr.ConstelName[i,1]))=uppercase(trim(Num)) then begin
         result:=true;
         ar1:=cfgshr.ConstelPos[i].ra;
         de1:=cfgshr.ConstelPos[i].de;

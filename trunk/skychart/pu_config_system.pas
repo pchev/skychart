@@ -34,6 +34,8 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TForm)
+    InterfaceLabel: TLabel;
+    InterfacePanel: TPanel;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
@@ -55,6 +57,7 @@ type
     SqliteBox: TPanel;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
@@ -292,7 +295,12 @@ TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
 TelescopeSelect.Items[4]:=rsEncoders;
-ASCOMLabel.Caption:=rsASCOMTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
+{$ifdef mswindows}
+ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
+{$else}
+ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsNotAvailon,[compile_system]);
+{$endif}
+InterfaceLabel.Caption:=rsIntTelesco+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
@@ -326,11 +334,6 @@ LockChange:=true;
 dbchanged:=false;
 {$if defined(mswindows) or defined(darwin)}
   GroupBoxLinux.Visible:=false;
-{$endif}
-{$ifdef unix}
-//  if TelescopeSelect.Items.Count=6 then TelescopeSelect.Items.Delete(3);
-//  if TelescopeSelect.Items.Count=4 then TelescopeSelect.Items.Delete(3);
-//  if TelescopeSelect.Items.Count=3 then TelescopeSelect.Items.Delete(2);
 {$endif}
 ShowLanguage;
 ShowSYS;
@@ -765,14 +768,6 @@ end;
 
 procedure Tf_config_system.TelescopeSelectClick(Sender: TObject);
 begin
-{$ifndef mswindows}
-if (Telescopeselect.itemindex=2) then begin   // no ascom
- if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   else if csc.LX200Telescope then Telescopeselect.itemindex:=3
-   else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
-   else Telescopeselect.itemindex:=1;
-end;
-{$endif}
 csc.IndiTelescope:=Telescopeselect.itemindex=0;
 csc.ManualTelescope:=Telescopeselect.itemindex=1;
 csc.ASCOMTelescope:=Telescopeselect.itemindex=2;
@@ -781,8 +776,8 @@ csc.EncoderTelescope:=Telescopeselect.itemindex=4;
 if csc.IndiTelescope then PageControl2.ActivePage:=TabSheet1;
 if csc.ManualTelescope then PageControl2.ActivePage:=TabSheet2;
 if csc.ASCOMTelescope then PageControl2.ActivePage:=TabSheet4;
-if csc.LX200Telescope then PageControl2.ActivePage:=TabSheet4;
-if csc.EncoderTelescope then PageControl2.ActivePage:=TabSheet4;
+if csc.LX200Telescope then PageControl2.ActivePage:=TabSheet3;
+if csc.EncoderTelescope then PageControl2.ActivePage:=TabSheet3;
 end;
 
 procedure Tf_config_system.IndiServerHostChange(Sender: TObject);

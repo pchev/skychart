@@ -1,15 +1,14 @@
 object pop_lx200: Tpop_lx200
-  Left = 286
-  Height = 486
-  Top = 95
-  Width = 357
+  Left = 473
+  Height = 521
+  Top = 75
+  Width = 374
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  AutoSize = True
   BorderStyle = bsToolWindow
   Caption = 'LX200'
-  ClientHeight = 486
-  ClientWidth = 357
+  ClientHeight = 521
+  ClientWidth = 374
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
@@ -21,33 +20,34 @@ object pop_lx200: Tpop_lx200
   LCLVersion = '0.9.30.1'
   object PageControl1: TPageControl
     Left = 0
-    Height = 486
+    Height = 521
     Top = 0
-    Width = 357
+    Width = 374
     ActivePage = TabSheet1
     Align = alClient
     MultiLine = True
     TabIndex = 0
     TabOrder = 0
+    OnChange = PageControl1Change
     Options = [nboMultiLine]
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       object SpeedButton8: TSpeedButton
-        Left = 214
-        Height = 22
+        Left = 206
+        Height = 25
         Top = 318
-        Width = 113
+        Width = 121
         Caption = 'Set TelescopeTime'
         NumGlyphs = 0
         OnClick = SpeedButton8Click
       end
       object SpeedButton9: TSpeedButton
-        Left = 214
-        Height = 22
-        Top = 346
-        Width = 113
+        Left = 206
+        Height = 25
+        Top = 355
+        Width = 121
         Caption = 'Park Telescope'
         NumGlyphs = 0
         OnClick = SpeedButton9Click
@@ -142,10 +142,10 @@ object pop_lx200: Tpop_lx200
         ClientWidth = 335
         TabOrder = 1
         object Shape1: TShape
-          Left = 156
-          Height = 150
-          Top = 23
-          Width = 150
+          Left = 147
+          Height = 166
+          Top = 15
+          Width = 165
           Brush.Style = bsClear
           Shape = stCircle
         end
@@ -242,10 +242,10 @@ object pop_lx200: Tpop_lx200
           OnMouseUp = BotBtnMouseUp
         end
         object StopBtn: TSpeedButton
-          Left = 211
-          Height = 37
-          Top = 81
-          Width = 37
+          Left = 207
+          Height = 39
+          Top = 80
+          Width = 46
           Caption = 'STOP'
           Enabled = False
           Font.Color = clRed
@@ -366,53 +366,53 @@ object pop_lx200: Tpop_lx200
       end
       object GroupBox3: TGroupBox
         Left = 3
-        Height = 49
-        Top = 390
-        Width = 339
-        ClientHeight = 45
-        ClientWidth = 335
+        Height = 82
+        Top = 382
+        Width = 347
+        ClientHeight = 78
+        ClientWidth = 343
         TabOrder = 2
         object SpeedButton1: TSpeedButton
           Left = 1
           Height = 25
           Top = 0
-          Width = 75
+          Width = 89
           Caption = 'Connect'
           NumGlyphs = 0
           OnClick = setresClick
         end
         object SpeedButton2: TSpeedButton
-          Left = 201
+          Left = 1
           Height = 25
-          Top = 0
-          Width = 65
+          Top = 35
+          Width = 89
           Caption = 'Hide'
           NumGlyphs = 0
           OnClick = SpeedButton2Click
         end
         object SpeedButton5: TSpeedButton
-          Left = 106
+          Left = 129
           Height = 25
           Top = 0
-          Width = 81
+          Width = 96
           Caption = 'Disconnect'
           NumGlyphs = 0
           OnClick = SpeedButton5Click
         end
         object SpeedButton4: TSpeedButton
-          Left = 273
+          Left = 233
           Height = 25
-          Top = 0
-          Width = 55
+          Top = 35
+          Width = 87
           Caption = 'Help'
           NumGlyphs = 0
           OnClick = SpeedButton4Click
         end
         object led: TEdit
-          Left = 82
+          Left = 97
           Height = 25
           Top = 0
-          Width = 15
+          Width = 23
           AutoSize = False
           Color = clRed
           ReadOnly = True
@@ -431,9 +431,9 @@ object pop_lx200: Tpop_lx200
         Visible = False
         object SpeedButton3: TSpeedButton
           Left = 10
-          Height = 22
+          Height = 25
           Top = 11
-          Width = 89
+          Width = 97
           Caption = 'Resume GoTo'
           NumGlyphs = 0
           OnClick = SpeedButton3Click
@@ -442,8 +442,8 @@ object pop_lx200: Tpop_lx200
     end
     object MotorTab: TTabSheet
       Caption = 'Motor'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 6
       object Lx200GPSMotorSpeeds: TGroupBox
         Left = 16
@@ -563,7 +563,7 @@ object pop_lx200: Tpop_lx200
         Left = 16
         Height = 25
         Top = 206
-        Width = 89
+        Width = 126
         Caption = 'Pec Toggle'
         Enabled = False
         OnClick = PecToggleClick
@@ -573,12 +573,12 @@ object pop_lx200: Tpop_lx200
       end
       object SlewSpeedGroup: TGroupBox
         Left = 16
-        Height = 150
+        Height = 161
         Top = 232
-        Width = 318
+        Width = 326
         Caption = ' Slew Speed '
-        ClientHeight = 134
-        ClientWidth = 314
+        ClientHeight = 145
+        ClientWidth = 322
         TabOrder = 6
         object LabelSetSlewSpeed: TLabel
           Left = 23
@@ -614,7 +614,7 @@ object pop_lx200: Tpop_lx200
         object TrackingRateLabel: TLabel
           Left = 134
           Height = 15
-          Top = 50
+          Top = 46
           Width = 22
           Caption = '[Hz]'
           ParentColor = False
@@ -803,8 +803,8 @@ object pop_lx200: Tpop_lx200
     end
     object Focus: TTabSheet
       Caption = 'Focus'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 3
       object Bevel1: TBevel
         Left = 24
@@ -1004,8 +1004,8 @@ object pop_lx200: Tpop_lx200
     end
     object VirtHP: TTabSheet
       Caption = 'VirtHP'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 4
       TabVisible = False
       object VHPTitleLabel: TLabel
@@ -1114,8 +1114,8 @@ object pop_lx200: Tpop_lx200
     end
     object Adv: TTabSheet
       Caption = 'Scope Adv'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 5
       TabVisible = False
       object ADVTitleLabel: TLabel
@@ -1275,8 +1275,8 @@ object pop_lx200: Tpop_lx200
     end
     object PEC: TTabSheet
       Caption = 'PEC'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 7
       TabVisible = False
       object RAPEC: TGroupBox
@@ -1338,8 +1338,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet2: TTabSheet
       Caption = 'Configuration'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 1
       object SaveButton1: TButton
         Left = 230
@@ -1587,8 +1587,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet3: TTabSheet
       Caption = 'Comm Settings'
-      ClientHeight = 458
-      ClientWidth = 353
+      ClientHeight = 493
+      ClientWidth = 370
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
@@ -1693,7 +1693,6 @@ object pop_lx200: Tpop_lx200
             'COM7'
             'COM8'
           )
-          Style = csSimple
           TabOrder = 1
         end
         object Paritybox: TComboBox

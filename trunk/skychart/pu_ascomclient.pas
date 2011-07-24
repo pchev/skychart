@@ -31,7 +31,7 @@ uses
   {$ifdef mswindows}
     Variants, comobj, Windows, ShlObj, ShellAPI,
   {$endif}
-  LCLIntf, u_util, u_constant,
+  LCLIntf, u_util, u_constant, u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
@@ -42,6 +42,7 @@ type
 
   Tpop_scope = class(TForm)
     GroupBox3: TGroupBox;
+    WarningLabel: TLabel;
     trackingled: TEdit;
     SpeedButton1: TSpeedButton;
     TrackingBtn: TSpeedButton;
@@ -106,6 +107,7 @@ type
     cur_az,  cur_alt :double;           // current alt-az position in degrees
   public
     { Public declarations }
+    procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
     Procedure ShowCoordinates;
     Procedure ScopeShow;
@@ -127,8 +129,6 @@ type
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-//var
-  //pop_scope: Tpop_scope;
 
 implementation
 {$R *.lfm}
@@ -146,7 +146,7 @@ begin
          Curdeg_x:=T.RightAscension*15;
          Curdeg_y:=T.Declination;
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
       if ShowAltAz.checked then begin
          try
@@ -198,7 +198,7 @@ speedbutton8.enabled:=false;
 speedbutton9.enabled:=false;
 UpdTrackingButton;
 except
- on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+ on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
@@ -233,7 +233,7 @@ if T.connected then begin
 end else scopedisconnect(dis_ok);
 UpdTrackingButton;
 except
- on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+ on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
@@ -275,7 +275,7 @@ begin
          end;
          T.SyncToCoordinates(Ra,Dec);
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end
 {$endif}
@@ -302,7 +302,7 @@ begin
          ok:=true;
       except
          on E: EOleException do begin
-            MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+            MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
             ok:=false;
          end;
       end;
@@ -320,7 +320,7 @@ begin
          ok:=true;
       except
          on E: EOleException do begin
-            MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+            MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
             ok:=false;
          end;
       end;
@@ -338,7 +338,7 @@ begin
          SyncOK:=T.CanSync;
          GotoOK:=T.CanSlew;
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end else begin
       scname:='';
@@ -393,7 +393,7 @@ begin
       if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
       else T.SlewToCoordinates(ar,de);
    except                                                                
-      on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+      on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
    end;
 {$endif}
 end;
@@ -410,7 +410,7 @@ if ScopeConnected then begin
       try
          T.AbortSlew;
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
 {$endif}
@@ -421,6 +421,33 @@ end;
                        Form functions
 
 --------------------------------------------------------------------------------}
+
+procedure Tpop_scope.SetLang;
+begin
+caption:=rsASCOMTelesc;
+GroupBox1.Caption:=rsDriverSelect;
+Label1.Caption:=rsRefreshRate;
+SpeedButton3.Caption:=rsSelect;
+SpeedButton7.Caption:=rsConfigure;
+SpeedButton11.Caption:=rsAbout;
+GroupBox5.Caption:=rsObservatory;
+Label15.Caption:=rsLatitude;
+Label16.Caption:=rsLongitude;
+SpeedButton9.Caption:=rsSetLocation;
+SpeedButton8.Caption:=rsSetTime;
+TrackingBtn.Caption:=rsTracking;
+SpeedButton6.Caption:=rsAbortSlew;
+SpeedButton4.Caption:=rsHelp;
+SpeedButton1.Caption:=rsConnect;
+SpeedButton5.Caption:=rsDisconnect;
+SpeedButton2.Caption:=rsHide;
+{$ifdef mswindows}
+   WarningLabel.Caption:='';
+{$else}
+    WarningLabel.Caption:=Format(rsNotAvailon,[compile_system]);
+{$endif}
+SetHelp(self,hlpASCOM);
+end;
 
 function Tpop_scope.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
@@ -511,22 +538,9 @@ begin
 Hide;
 end;
 
- {TODO: change help}
-{$ifdef mswindows}
-Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
-var
-  zFileName, zParams, zDir: array[0..79] of Char;
-begin
-//  Result := ShellExecute(Handle, nil, StrPCopy(zFileName, FileName),
-//                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
-end;
-{$endif}
-
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
-{$ifdef mswindows}
-//ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
-{$endif}
+ShowHelp;
 end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
@@ -553,7 +567,7 @@ try
     {$ifdef  win64}
     Showmessage('The ASCOM telescope chooser do not work correctly from a 64 bits application for now.'+crlf+'Use POTH.Telescope and then select your telescope from the POTH menu.'+crlf+'See http://ascom-standards.org for more information.');
     {$else}
-    Showmessage('Please ensure that ASCOM telescope drivers are installed properly.'+crlf+'See http://ascom-standards.org for more information.');
+    Showmessage(rsPleaseEnsure+crlf+Format(rsSeeHttpAscom,['http://ascom-standards.org']));
     {$endif}
   end;
 {$endif}
@@ -574,7 +588,7 @@ end;
 UpdTrackingButton;
 end;
 except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+  on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
@@ -587,7 +601,7 @@ begin
          T.SiteLongitude:=longitude;
          T.SiteLatitude:=latitude;
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
 {$endif}
@@ -605,7 +619,7 @@ begin
          // does not raise and error but may not be UTC
          T.UTCDate:=systemtimetodatetime(utc);
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
 {$endif}
@@ -629,7 +643,7 @@ try
       else Trackingled.color:=clRed;
    end;
 except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+  on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;
@@ -642,7 +656,7 @@ begin
          T.Tracking:=not T.Tracking;
          UpdTrackingButton;
       except
-         on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+         on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
       end;
    end;
 {$endif}
@@ -673,7 +687,7 @@ try
       end;
    end;
 except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
+  on E: EOleException do MessageDlg(rsError+': ' + E.Message, mtWarning, [mbOK], 0);
 end;
 {$endif}
 end;

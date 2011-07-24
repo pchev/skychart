@@ -113,6 +113,7 @@ Tskychart = class (TComponent)
     Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
     procedure DrawFinderMark(ra,de :double; moving:boolean) ;
     procedure DrawCircle;
+    Procedure DrawTarget;
     Procedure DrawCompass;
     procedure DrawCRose;
     function TelescopeMove(ra,dec:double):boolean;
@@ -314,6 +315,7 @@ end;
 
   // the compass and scale
   DrawCompass;
+  DrawTarget;
 
   // the labels
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
@@ -3646,6 +3648,72 @@ if cfgsc.ShowCircle then begin
 end;
 //listed mark
 for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleLst[i,2],false);
+end;
+
+Procedure Tskychart.DrawTarget;
+var r,d,phi,rot,x,y,xx,yy: double;
+    xc,yc,x1,y1,x2,y2,xi,yi : single;
+    a,b: single;
+    txt:string;
+begin
+if cfgsc.TargetOn then begin
+  d:=AngularDistance(cfgsc.racentre,cfgsc.decentre,cfgsc.TargetRA,cfgsc.TargetDec);
+  txt:=cfgsc.TargetName+' '+DEmToStr(rad2deg*d);
+  r:=cfgsc.fov/5;
+  if d>r then begin
+    x:=0; y:=0;
+    projection(cfgsc.racentre,cfgsc.decentre+0.001,xx,yy,false,cfgsc);
+    rot:=-arctan2((xx-x),(yy-y));
+    phi:=cfgsc.FlipX*(rot+PositionAngle(cfgsc.racentre,cfgsc.decentre,cfgsc.TargetRA,cfgsc.TargetDec));
+    if cfgsc.FlipY<0 then phi:=pi-phi;
+    phi:=rmod(pi4+phi,pi2);
+    WindowXY(0,0,xc,yc,cfgsc);
+    a:=tan(phi);
+    if a=0 then a:=MaxSingle
+           else a:=1/a;
+    b:=yc-(a*xc);
+    // intercect x=0
+    if phi<pi then begin
+      xi:=0;
+      yi:=b;
+      if (yi>0) and (yi< cfgsc.ymax) then begin
+        Fplot.PlotLine(xi,yi,xi+5,yi-3,clRed,2);
+        Fplot.PlotLine(xi,yi,xi+5,yi+3,clRed,2);
+        Fplot.PlotText(round(xi+7),round(yi),1,clRed,laLeft,laCenter,txt,false);
+      end;
+    end;
+    // intercect x=xmax
+    if phi>pi then begin
+      xi:=cfgsc.xmax;
+      yi:=a*xi+b;
+      if (yi>0) and (yi< cfgsc.ymax) then begin
+        Fplot.PlotLine(xi,yi,xi-5,yi-3,clRed,2);
+        Fplot.PlotLine(xi,yi,xi-5,yi+3,clRed,2);
+        Fplot.PlotText(round(xi-7),round(yi),1,clRed,laRight,laCenter,txt,false);
+      end;
+    end;
+    // intercect y=0
+    if (phi<pid2)or(phi>(3*pid2)) then begin
+      yi:=0;
+      xi:=-b/a;
+      if (xi>0) and (xi< cfgsc.xmax) then begin
+        Fplot.PlotLine(xi,yi,xi-3,yi+5,clRed,2);
+        Fplot.PlotLine(xi,yi,xi+3,yi+5,clRed,2);
+        Fplot.PlotText(round(xi),round(yi+7),1,clRed,laCenter,laTop,txt,false);
+      end;
+    end;
+    // intercect y=ymax
+    if (phi>pid2)and(phi<(3*pid2)) then begin
+      yi:=cfgsc.ymax;
+      xi:=(yi-b)/a;
+      if (xi>0) and (xi< cfgsc.xmax) then begin
+        Fplot.PlotLine(xi,yi,xi-3,yi-5,clRed,2);
+        Fplot.PlotLine(xi,yi,xi+3,yi-5,clRed,2);
+        Fplot.PlotText(round(xi),round(yi-7),1,clRed,laCenter,laBottom,txt,false);
+      end;
+    end;
+  end;
+end;
 end;
 
 //  compass rose

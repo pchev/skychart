@@ -30,8 +30,7 @@ interface
 
 uses  u_help, u_translation, u_constant, u_projection, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons,
-  LazHelpHTML;
+  Dialogs, StdCtrls, cu_radec, enhedits, ExtCtrls, LResources, Buttons;
 
 type
 
@@ -144,6 +143,10 @@ begin
 if lock then exit;
 lock:=true;
 case cfgsc.projpole of
+  Equat : begin
+          a:=ra.value*deg2rad;
+          h:=de.value*deg2rad;
+          end;
   AltAz : begin
           eq2hz(cfgsc.CurST-deg2rad*15*ra.value,deg2rad*de.value,a,h,cfgsc);
           if AzNorth then a:=Rmod(a+pi,pi2);

@@ -388,6 +388,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
       Defaultffmpeg='ffmpeg';
+      DefaultSerialPort='/dev/ttyS0';
 {$endif}
 {$ifdef darwin}
       DefaultFontName='Helvetica';
@@ -405,6 +406,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
       Defaultffmpeg='ffmpeg';
+      DefaultSerialPort='/dev/ttyS0';   { TODO : default serial port for Mac }
 {$endif}
 {$ifdef mswindows}
       DefaultFontName='Arial';
@@ -422,6 +424,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultVarObs='varobs.exe';
       DefaultCdC='skychart.exe';
       Defaultffmpeg='ffmpeg.exe';
+      DefaultSerialPort='COM1';
       Win98DefaultBrowser='C:\Program Files\Internet Explorer\Iexplore.exe';
 {$endif}
 
@@ -531,7 +534,7 @@ type
                 public
                 tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn,Quick,NP,SP,moved : Boolean;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
@@ -560,9 +563,9 @@ type
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,FindX,FindY,FindZ,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec : Double;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec : Double;
                 DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
-                EquinoxName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat : string;
+                EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat : string;
                 IridiumRA,IridiumDE,IridiumMA: double;
                 IridiumName,IridiumDist: string;
                 PlanetLst : Tplanetlst;
@@ -768,7 +771,7 @@ type
 Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
-     compile_time,compile_version, lclver : string;
+     compile_time,compile_version, compile_system, lclver : string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
      nightvision : Boolean;
@@ -835,7 +838,7 @@ const msgTimeout='Timeout!';
 const
      MaxCmdArg = 10;
 // Main Commands, excuted form main form
-     numcmdmain = 14;
+     numcmdmain = 16;
      maincmdlist: array[1..numcmdmain,1..3] of string=(
      ('NEWCHART','1','chart_name'),
      ('CLOSECHART','2','chart_name'),
@@ -845,12 +848,14 @@ const
      ('GETMSGBOX','6',''),
      ('GETCOORBOX','7',''),
      ('GETINFOBOX','8',''),
-     ('FIND' ,'9','object_class object_name'),  //class: 0=neb, 1=na, 2=star, 3=star,4=var,5=dbl,6=comet,7=ast,8=planet,9=constellation,10=linecat
+     ('FIND' ,'9','object_class object_name'),  //class: 0=neb, 1=na, 2=star, 3=star,4=var,5=dbl,6=comet,7=ast,8=planet,9=constellation,10=linecat,11=const.abrev.
      ('SAVE' ,'10','saved_file_name'),
      ('LOAD' ,'11','saved_file_name'),
      ('?' ,'12',''),
      ('SHUTDOWN' ,'13',''),
-     ('RESET' ,'14','')
+     ('RESET' ,'14',''),
+     ('LOADDEFAULT' ,'15','saved_file_name'),
+     ('SETCAT' ,'16','path name active min max')
      );
 
 // Chart Commands
@@ -1282,6 +1287,7 @@ Force_DT_UT:=Source.Force_DT_UT ;
 horizonopaque:=Source.horizonopaque ;
 autorefresh:=Source.autorefresh ;
 TrackOn:=Source.TrackOn ;
+TargetOn:=Source.TargetOn;
 Quick:=Source.Quick ;
 NP:=Source.NP ;
 SP:=Source.SP ;

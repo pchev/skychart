@@ -72,6 +72,10 @@ resourcestring
   hlpIndex = 'start.html';
   hlpBarStatus = 'status_bar.html';
   hlpCfgSys = 'system.html';
+  hlpLX200 = 'telescope_lx200.html';
+  hlpEncoder = 'telescope_encoder.html';
+  hlpASCOM =  'telescope_ascom.html';
+  hlpINDI =  'telescope_indi.html';
 
 implementation
 

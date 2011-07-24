@@ -35,7 +35,7 @@ will work with all systems using same protocol
 
 interface
 
-uses
+uses u_help, u_translation,
   Messages, SysUtils, Classes, Graphics, Controls, u_constant,
   Forms, Dialogs, u_projection, u_util,
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls, EnhEdits;
@@ -177,6 +177,7 @@ type
     wait_create : boolean;
     first_show : boolean;
     Init90Y : integer;
+    procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
@@ -196,9 +197,6 @@ type
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
 
-
-//var
-  //pop_encoder: Tpop_encoder;
 
 implementation
 
@@ -265,6 +263,8 @@ Procedure Tpop_encoder.ScopeShow;
 begin
 while wait_create do Application.processmessages;
 show;
+PageControl1.ActivePageIndex:=0;
+PageControl1.Invalidate;
 end;
 
 Procedure Tpop_encoder.ScopeGetRaDec(var ar,de : double; var ok : boolean);
@@ -394,7 +394,7 @@ var j,n,m,py : integer;
 begin
 try
 if init_objects.count<2 then begin
-   AffMsg('TWO stars must be used for initialisation.');
+   AffMsg(rsTWOStarsMust);
    exit;
 end;
 if not Encoder_query(curstep_x,curstep_y,msg) then begin AffMsg(msg); Encoder_Error; exit; end;
@@ -501,6 +501,55 @@ end;
 
 --------------------------------------------------------------------------------}
 
+procedure Tpop_encoder.SetLang;
+begin
+caption:=rsEncoders;
+TabSheet1.Caption:=rsCoordinates;
+Label11.Caption:=rsAzimuth;
+Label12.Caption:=rsAltitude;
+CheckBox2.Caption:=rsDeviceStatus;
+Label18.Caption:=rsXErrors;
+Label19.Caption:=rsYErrors;
+Label20.Caption:=rsBattery;
+status.Caption:=rsStatus;
+SpeedButton4.Caption:=rsClear;
+Label1.Caption:=rsObjectsUsedF;
+SpeedButton1.Caption:=rsConnect;
+SpeedButton5.Caption:=rsDisconnect;
+SpeedButton2.Caption:=rsHide;
+SpeedButton6.Caption:=rsHelp;
+TabSheet2.Caption:=rsEncoderConfi;
+GroupBox2.Caption:=rsEncoderConfi;
+Label2.Caption:=rsType2;
+Label3.Caption:=rsStepsAlpha;
+Label4.Caption:=rsStepsDelta;
+Label14.Caption:=rsReadInterval;
+Label6.Caption:=rsConnected;
+Mounttype.Caption:=rsMountType;
+Mounttype.Items[0]:=rsEquatorial;
+Mounttype.Items[1]:=rsAltAz;
+InitType.Caption:=rsEncoderIniti;
+GroupBox7.Caption:=rsMountFabrica;
+GroupBox5.Caption:=rsObservatory;
+Label15.Caption:=rsLatitude;
+Label16.Caption:=rsLongitude;
+CheckBox3.Caption:=rsRecordProtoc;
+CheckBox4.Caption:=rsFormAlwaysVi;
+SaveButton1.Caption:=rsSaveSetting;
+TabSheet3.Caption:=rsPortConfigur;
+GroupBox4.Caption:=rsPortConfigur;
+Label5.Caption:=rsSerialPort;
+Label7.Caption:=rsSpeed;
+Label9.Caption:=rsDataBits;
+Label8.Caption:=rsParity;
+Label10.Caption:=rsStopBits;
+Label13.Caption:=rsTimeoutMs;
+Label21.Caption:=rsIntervalTime;
+Button2.Caption:=rsSaveSetting;
+
+SetHelp(self,hlpEncoder);
+end;
+
 Procedure Tpop_encoder.AffMsg(msgtxt : string);
 begin
 if msgtxt<>'' then begin
@@ -525,7 +574,7 @@ var ini:tinifile;
     newcolumn:tlistcolumn;
     buf,nom : string;
 begin
-result:=DirectoryExists(ConfigPath); { *Converted from DirectoryExists*  }
+result:=DirectoryExists(ConfigPath);
 if Result then
   FConfig:=slash(ConfigPath)+'scope.ini'
 else
@@ -536,7 +585,7 @@ ini:=tinifile.create(FConfig);
      nom:= ini.readstring('encoders','name','Ouranos');
      cbo_type.text:=nom;
      ReadIntBox.text:=ini.readstring('encoders','read_interval','1000');
-     cbo_port.text:=ini.readstring('encoders','comport','COM1');
+     cbo_port.text:=ini.readstring('encoders','comport',DefaultSerialPort);
      PortSpeedbox.text:=ini.readstring('encoders','baud','9600');
      DatabitBox.text:=ini.readstring('encoders','databits','8');
      Paritybox.text:=ini.readstring('encoders','parity','N');
@@ -554,15 +603,15 @@ ini:=tinifile.create(FConfig);
      ini.free;
      with list_init do
      begin
-          newcolumn:=columns.add; newcolumn.caption:='Name';
+          newcolumn:=columns.add; newcolumn.caption:=rsName;
           newcolumn.width:=70;
           newcolumn:=columns.add; newcolumn.caption:='Alpha';
           newcolumn.width:=60;
           newcolumn:=columns.add; newcolumn.caption:='Delta';
           newcolumn.width:=60;
-          newcolumn:=columns.add; newcolumn.caption:='Time';
+          newcolumn:=columns.add; newcolumn.caption:=rsTime;
           newcolumn.width:=40;
-          newcolumn:=columns.add; newcolumn.caption:='Sel';
+          newcolumn:=columns.add; newcolumn.caption:=rsSel;
           newcolumn.width:=30;
      end;
      Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
@@ -602,21 +651,22 @@ a:double;
 b:integer;
 begin
 Affmsg('');
-     if port_opened then s1:= ' Connected' else s1:=' Diconnected';
-     if resolution_sent then s2:='Resolution X: '+inttostr(reso_x)+' Y :'+inttostr(reso_y)+' steps';
-     if alpha_inversion then s4:='Inversion Alpha ,' else s4:='';
-     if delta_inversion then s4:=s4+' Inversion Delta' ;
-     if init90y=999999 then s5:='Vertical axis 90° initialisation not done'
-                       else s5:='Vertical axis encoder origin : '+inttostr(init90y);
+     if port_opened then s1:= rsConnected else s1:=rsDiconnected;
+     if resolution_sent then s2:=Format(rsResolutionXY, [inttostr(reso_x),
+       inttostr(reso_y)]);
+     if alpha_inversion then s4:=rsInversionAlp else s4:='';
+     if delta_inversion then s4:=Format(rsInversionDel, [s4]) ;
+     if init90y=999999 then s5:=rsVerticalAxis2
+                       else s5:=Format(rsVerticalAxis, [inttostr(init90y)]);
      if initialised then
      begin
            a:=last_init_alpha-trunc(last_init_alpha);
            b:=trunc(last_init_alpha/15);
-           s3:='Initialised at '+last_init+#13#10+' using : '+#13#10+
-           last_init_target+' (RA: '+artostr(b+a)+' DEC:'+detostr(last_init_delta)+')'
-     end else begin s3:='Not initialised'; end;
+           s3:=Format(rsInitialisedA, [last_init, #13#10, #13#10,
+             last_init_target, artostr(b+a), detostr(last_init_delta)])
+     end else begin s3:=rsNotInitialis; end;
      if checkbox4.checked then formstyle:=fsNormal;
-     messagedlg('Sytem status:'+#13#10#13#10+cbo_port.text+s1+
+     messagedlg(rsSytemStatus+#13#10#13#10+cbo_port.text+s1+
                  #13#10+s2+#13#10+s3+#13#10+s4+#13#10+s5+#13#10,mtinformation,[mbok],0);
      if checkbox4.checked then formstyle:=fsStayOnTop;
 end;
@@ -705,7 +755,7 @@ if Encoder_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Parity
 end else begin
     AffMsg(msg);
     Encoder_Close;
-    Affmsg('Error opening '+cbo_type.text+' on port '+cbo_port.text);
+    Affmsg(Format(rsErrorOpening2, [cbo_type.text, cbo_port.text]));
 end;
 finally
 
@@ -727,7 +777,7 @@ begin
      begin
          {Check if scope level is set}
          if Init90Y=999999 then begin
-              Affmsg('Please init the 90° elevation first');
+              Affmsg(rsPleaseInitTh);
               exit;
          end;;
          {be sure we have the current steps}
@@ -741,7 +791,7 @@ begin
          if init_objects.Count=1 then begin
             q:=init_objects[0];
             if (abs(q.steps_x-curstep_x)<5)or(abs(q.steps_y-curstep_y)<5) then begin
-              Affmsg('Please move the telescope along the two axis');
+              Affmsg(rsPleaseMoveTh);
               exit;
             end;
          end;
@@ -839,7 +889,7 @@ begin
      end
      else
      begin
-          Affmsg('The interface is either not connected or not initialized');
+          Affmsg(rsTheInterface);
      end;
 end;
 
@@ -971,7 +1021,7 @@ end;
 procedure Tpop_encoder.FormShow(Sender: TObject);
 begin
 InitTypeClick(Sender);
-
+GetSerialPorts(cbo_port);
 end;
 
 procedure Tpop_encoder.init90Click(Sender: TObject);
@@ -991,8 +1041,8 @@ end;
 procedure Tpop_encoder.InitTypeClick(Sender: TObject);
 begin
 case inittype.ItemIndex of
-0 :  Init90.Caption:='Init 0°';
-1 :  Init90.Caption:='Init 90°';
+0 :   Init90.Caption:=Format(rsInit, ['0°']);
+1 :  Init90.Caption:=Format(rsInit, ['90°']);
 end;
 end;
 
@@ -1006,17 +1056,9 @@ end else begin
 end;
 end;
 
-Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
-var
-  zFileName, zParams, zDir: array[0..79] of Char;
-begin    //lazarus
-{  Result := ShellExecute(pop_encoder.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
-}end;
-
 procedure Tpop_encoder.SpeedButton6Click(Sender: TObject);
 begin
-//ExecuteFile('encoder.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+ShowHelp;
 end;
 
 procedure Tpop_encoder.CheckBox4Click(Sender: TObject);

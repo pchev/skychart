@@ -516,16 +516,26 @@ ok:=false;
 if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
 FileMode:=0;
 if cattype=1 then begin
+   try
    AssignFile(f,nomfich);
    FileBIsOpen:=true;
    reset(f,1);
    ok:=true;
    if filesize(f)=0 then NextGCat(ok);
+   except
+     ok:=false;            // catgen running?
+     FileBIsOpen:=false;
+   end;
 end else begin
+   try
    AssignFile(ft,nomfich);
    FileTIsOpen:=true;
    reset(ft);
    ok:=true;
+   except
+     ok:=false;            // file locked by external application?
+     FileTIsOpen:=false;
+   end;
 end;
 end;
 

@@ -1,12 +1,12 @@
 object pop_encoder: Tpop_encoder
-  Left = 253
-  Height = 457
-  Top = 111
-  Width = 334
+  Left = 908
+  Height = 489
+  Top = 83
+  Width = 352
   BorderStyle = bsToolWindow
   Caption = 'Digital encoders'
-  ClientHeight = 457
-  ClientWidth = 334
+  ClientHeight = 489
+  ClientWidth = 352
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
@@ -17,40 +17,19 @@ object pop_encoder: Tpop_encoder
   OnShow = FormShow
   Position = poDefault
   LCLVersion = '0.9.30.1'
-  object SpeedButton6: TSpeedButton
-    Left = 296
-    Height = 22
-    Hint = 'Help...'
-    Top = 432
-    Width = 23
-    Glyph.Data = {
-      4E010000424D4E01000000000000760000002800000012000000120000000100
-      040000000000D8000000130B0000130B00001000000000000000000000000000
-      8000008000000080800080000000800080008080000080808000C0C0C0000000
-      FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00888888888888
-      8888880000008888888888888888880000008888888800888888880000008888
-      8888008888888800000088888888888888888800000088888888008888888800
-      0000888888880088888888000000888888880008888888000000888888888000
-      8888880000008888888888000888880000008888888888800088880000008888
-      0008888000888800000088888008888008888800000088888000000008888800
-      0000888888800000888888000000888888888888888888000000888888888888
-      888888000000888888888888888888000000
-    }
-    NumGlyphs = 0
-    OnClick = SpeedButton6Click
-  end
   object PageControl1: TPageControl
     Left = 0
-    Height = 428
-    Top = 4
-    Width = 330
+    Height = 471
+    Top = 0
+    Width = 352
     ActivePage = TabSheet1
+    Align = alClient
     TabIndex = 0
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 400
-      ClientWidth = 326
+      ClientHeight = 443
+      ClientWidth = 348
       object Panel1: TPanel
         Left = 8
         Height = 61
@@ -174,42 +153,42 @@ object pop_encoder: Tpop_encoder
       end
       object GroupBox3: TGroupBox
         Left = 8
-        Height = 41
+        Height = 89
         Top = 344
         Width = 310
-        ClientHeight = 37
+        ClientHeight = 85
         ClientWidth = 306
         TabOrder = 2
         object SpeedButton1: TSpeedButton
           Left = 2
-          Height = 22
+          Height = 25
           Top = 0
-          Width = 61
+          Width = 82
           Caption = 'Connect'
           NumGlyphs = 0
           OnClick = setresClick
         end
         object SpeedButton2: TSpeedButton
-          Left = 239
-          Height = 22
-          Top = 0
-          Width = 61
+          Left = 4
+          Height = 25
+          Top = 37
+          Width = 80
           Caption = 'Hide'
           NumGlyphs = 0
           OnClick = SpeedButton2Click
         end
         object SpeedButton5: TSpeedButton
-          Left = 160
-          Height = 22
+          Left = 190
+          Height = 25
           Top = 0
-          Width = 77
+          Width = 109
           Caption = 'Disconnect'
           NumGlyphs = 0
           OnClick = SpeedButton5Click
         end
         object init90: TSpeedButton
-          Left = 92
-          Height = 22
+          Left = 95
+          Height = 25
           Top = 0
           Width = 61
           Caption = 'Init 90°'
@@ -217,14 +196,24 @@ object pop_encoder: Tpop_encoder
           OnClick = init90Click
         end
         object led1: TEdit
-          Left = 68
-          Height = 20
+          Left = 164
+          Height = 25
           Top = 0
           Width = 17
           AutoSize = False
           Color = clRed
           ReadOnly = True
           TabOrder = 0
+        end
+        object SpeedButton6: TSpeedButton
+          Left = 191
+          Height = 25
+          Hint = 'Help...'
+          Top = 37
+          Width = 109
+          Caption = 'Help'
+          NumGlyphs = 0
+          OnClick = SpeedButton6Click
         end
       end
       object Panel3: TPanel
@@ -298,8 +287,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet2: TTabSheet
       Caption = 'Encoder Configuration'
-      ClientHeight = 400
-      ClientWidth = 326
+      ClientHeight = 443
+      ClientWidth = 348
       ImageIndex = 1
       object GroupBox2: TGroupBox
         Left = 8
@@ -426,7 +415,7 @@ object pop_encoder: Tpop_encoder
         Left = 8
         Height = 50
         Top = 168
-        Width = 158
+        Width = 166
         AutoFill = True
         Caption = 'Mount type'
         ChildSizing.LeftRightSpacing = 6
@@ -438,7 +427,7 @@ object pop_encoder: Tpop_encoder
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 34
-        ClientWidth = 154
+        ClientWidth = 162
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
@@ -563,10 +552,10 @@ object pop_encoder: Tpop_encoder
         end
       end
       object InitType: TRadioGroup
-        Left = 166
+        Left = 174
         Height = 50
         Top = 168
-        Width = 155
+        Width = 169
         AutoFill = True
         Caption = 'Encoder initialization angle'
         ChildSizing.LeftRightSpacing = 6
@@ -578,12 +567,12 @@ object pop_encoder: Tpop_encoder
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
         ClientHeight = 34
-        ClientWidth = 151
+        ClientWidth = 165
         Columns = 2
         ItemIndex = 1
         Items.Strings = (
-          '0 deg.'
-          '90 deg.'
+          '0 °'
+          '90 °'
         )
         OnClick = InitTypeClick
         TabOrder = 5
@@ -609,8 +598,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet3: TTabSheet
       Caption = 'Port Configuration'
-      ClientHeight = 400
-      ClientWidth = 326
+      ClientHeight = 443
+      ClientWidth = 348
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
@@ -625,56 +614,56 @@ object pop_encoder: Tpop_encoder
           Left = 22
           Height = 15
           Top = 10
-          Width = 69
-          Caption = 'Serial Port :'
+          Width = 61
+          Caption = 'Serial Port'
           ParentColor = False
         end
         object Label7: TLabel
           Left = 22
           Height = 15
           Top = 37
-          Width = 45
-          Caption = 'Speed :'
+          Width = 37
+          Caption = 'Speed'
           ParentColor = False
         end
         object Label8: TLabel
           Left = 22
           Height = 15
           Top = 91
-          Width = 41
-          Caption = 'Parity :'
+          Width = 33
+          Caption = 'Parity'
           ParentColor = False
         end
         object Label9: TLabel
           Left = 22
           Height = 15
           Top = 64
-          Width = 61
-          Caption = 'Data Bits :'
+          Width = 53
+          Caption = 'Data Bits'
           ParentColor = False
         end
         object Label10: TLabel
           Left = 22
           Height = 15
           Top = 118
-          Width = 61
-          Caption = 'Stop Bits :'
+          Width = 53
+          Caption = 'Stop Bits'
           ParentColor = False
         end
         object Label13: TLabel
           Left = 22
           Height = 15
           Top = 145
-          Width = 85
-          Caption = 'Timeout [ms] :'
+          Width = 77
+          Caption = 'Timeout [ms]'
           ParentColor = False
         end
         object Label21: TLabel
           Left = 22
           Height = 15
           Top = 172
-          Width = 101
-          Caption = 'Interval Timeout :'
+          Width = 93
+          Caption = 'Interval Timeout'
           ParentColor = False
         end
         object PortSpeedbox: TComboBox
@@ -828,9 +817,8 @@ object pop_encoder: Tpop_encoder
   object StatusBar1: TStatusBar
     Left = 0
     Height = 18
-    Top = 432
-    Width = 289
-    Align = alNone
+    Top = 471
+    Width = 352
     Panels = <>
   end
   object PopupMenu1: TPopupMenu

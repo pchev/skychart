@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 165
+  Left = 475
   Height = 600
   Top = 111
   Width = 873
@@ -7242,24 +7242,6 @@ object f_main: Tf_main
       ImageIndex = 79
       OnExecute = SyncChartExecute
     end
-    object Track: TAction
-      Category = 'chart'
-      Hint = 'Track'
-      ImageIndex = 80
-      OnExecute = TrackExecute
-    end
-    object DSSImage: TAction
-      Category = 'chart'
-      Hint = 'Get DSS Image'
-      ImageIndex = 81
-      OnExecute = DSSImageExecute
-    end
-    object EditLabels: TAction
-      Category = 'chart'
-      Hint = 'Edit Labels'
-      ImageIndex = 83
-      OnExecute = EditLabelsExecute
-    end
     object Cascade1: TAction
       Category = 'Window'
       Hint = 'Cascade'
@@ -7333,12 +7315,6 @@ object f_main: Tf_main
       Hint = 'Setup Catalog'
       OnExecute = SetupCatalogExecute
     end
-    object BlinkImage: TAction
-      Category = 'chart'
-      Hint = 'Blinking Picture'
-      ImageIndex = 86
-      OnExecute = BlinkImageExecute
-    end
     object SetupChart: TAction
       Category = 'Setup'
       Caption = 'SetupChart'
@@ -7389,6 +7365,30 @@ object f_main: Tf_main
       Category = 'File'
       Caption = 'ResetDefaultChart'
       OnExecute = ResetDefaultChartExecute
+    end
+    object Track: TAction
+      Category = 'chart'
+      Hint = 'Track'
+      ImageIndex = 80
+      OnExecute = TrackExecute
+    end
+    object DSSImage: TAction
+      Category = 'chart'
+      Hint = 'Get DSS Image'
+      ImageIndex = 81
+      OnExecute = DSSImageExecute
+    end
+    object EditLabels: TAction
+      Category = 'chart'
+      Hint = 'Edit Labels'
+      ImageIndex = 83
+      OnExecute = EditLabelsExecute
+    end
+    object BlinkImage: TAction
+      Category = 'chart'
+      Hint = 'Blinking Picture'
+      ImageIndex = 86
+      OnExecute = BlinkImageExecute
     end
   end
   object SaveDialog: TSaveDialog

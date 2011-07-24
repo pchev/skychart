@@ -632,7 +632,7 @@ s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
     sincos(dc,s1,c1);
     sincos(de,s2,c2);
     sincos(hh,s3,c3);
-    result:= pi+arctan2((c2*s3) , (-c1*s2+s1*c2*c3) );
+    result:= rmod(pi2+pi+arctan2((c2*s3) , (-c1*s2+s1*c2*c3) ),pi2);
 end;
 
 function Jd(annee,mois,jour :INTEGER; Heure:double):double;

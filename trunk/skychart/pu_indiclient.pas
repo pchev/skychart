@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation,
+uses u_help, u_translation,
   LCLIntf, u_util, cu_indiprotocol, u_constant,
   Messages, SysUtils, Classes, Graphics, Controls,
   Forms, Dialogs,
@@ -81,6 +81,7 @@ type
   public
     { Public declarations }
     csc: Tconf_skychart;
+    procedure SetLang;
     function  ReadConfig(ConfigPath : shortstring):boolean;
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
@@ -100,9 +101,6 @@ type
     Procedure ScopeClose;
     Procedure ScopeReadConfig(ConfigPath : shortstring);
   end;
-
-//var
-  //pop_indi: Tpop_indi;
 
 implementation
 {$R *.lfm}
@@ -294,6 +292,18 @@ end;
 
 --------------------------------------------------------------------------------}
 
+procedure Tpop_indi.SetLang;
+begin
+caption:=rsINDIDriver;
+GroupBox1.Caption:=rsCurrentDrive;
+Connect.Caption:=rsConnect;
+Disconnect.Caption:=rsDisconnect;
+SpeedButton6.Caption:=rsAbortSlew;
+SpeedButton2.Caption:=rsHide;
+SpeedButton4.Caption:=rsHelp;
+SetHelp(self,hlpINDI);
+end;
+
 function Tpop_indi.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
     nom : string;
@@ -347,19 +357,9 @@ begin
 Hide;
 end;
 
-{ TODO : Help file support }
-{
-Function ExecuteFile(const FileName, Params, DefaultDir: string; ShowCmd: Integer): THandle;
-var
-  zFileName, zParams, zDir: array[0..79] of Char;
-begin
-  Result := ShellExecute(pop_indi.Handle, nil, StrPCopy(zFileName, FileName),
-                         StrPCopy(zParams, Params), StrPCopy(zDir, DefaultDir), ShowCmd);
-end;
-}
 procedure Tpop_indi.SpeedButton4Click(Sender: TObject);
 begin
-//ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+ShowHelp;
 end;
 
 procedure Tpop_indi.SpeedButton6Click(Sender: TObject);
