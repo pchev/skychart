@@ -41,6 +41,8 @@ function FilterBlurRadialPrecise(bmp: TBGRACustomBitmap;
 function FilterBlurMotion(bmp: TBGRACustomBitmap; distance: single;
   angle: single; oriented: boolean): TBGRACustomBitmap;
 
+function FilterPixelate(bmp: TBGRACustomBitmap; pixelSize: integer; useResample: boolean; filter: TResampleFilter = rfLinear): TBGRACustomBitmap;
+
 { General purpose blur filter, with a blur mask as parameter to describe
   how pixels influence each other }
 function FilterBlur(bmp: TBGRACustomBitmap;
@@ -95,7 +97,7 @@ type
 var
   xb, yb: integer;
   diag1, diag2, h1, h2, v1, v2: TSmartDiff;
-  c:      TBGRAPixel;
+  c,c1,c2:      TBGRAPixel;
   temp, median: TBGRACustomBitmap;
 
   function ColorDiff(c1, c2: TBGRAPixel): single;
@@ -203,7 +205,9 @@ begin
         //same color?
         if diag1.cd < 0.3 then
         begin
-          c := MergeBGRA(bmp.GetPixel(xb, yb), bmp.GetPixel(xb + 1, yb + 1));
+          c1 := bmp.GetPixel(xb, yb);
+          c2 := bmp.GetPixel(xb + 1, yb + 1);
+          c := MergeBGRA(c1, c2);
           //restore
           Result.SetPixel(xb * 3 + 2, yb * 3 + 2, bmp.GetPixel(xb, yb));
           Result.SetPixel(xb * 3 + 3, yb * 3 + 3, bmp.GetPixel(xb + 1, yb + 1));
@@ -220,7 +224,9 @@ begin
         //same color?
         if diag2.cd < 0.3 then
         begin
-          c := MergeBGRA(bmp.GetPixel(xb, yb + 1), bmp.GetPixel(xb + 1, yb));
+          c1 := bmp.GetPixel(xb, yb + 1);
+          c2 := bmp.GetPixel(xb + 1, yb);
+          c := MergeBGRA(c1, c2);
           //restore
           Result.SetPixel(xb * 3 + 3, yb * 3 + 2, bmp.GetPixel(xb + 1, yb));
           Result.SetPixel(xb * 3 + 2, yb * 3 + 3, bmp.GetPixel(xb, yb + 1));
@@ -492,6 +498,63 @@ begin
   if value < 0 then result := 0 else
   if value > 255 then result := 255 else
     result := value;
+end;
+
+function FilterPixelate(bmp: TBGRACustomBitmap; pixelSize: integer;
+  useResample: boolean; filter: TResampleFilter): TBGRACustomBitmap;
+var yb,xb, xs,ys, tx,ty: integer;
+    psrc,pdest: PBGRAPixel;
+    temp,stretched: TBGRACustomBitmap;
+    oldfilter: TResampleFilter;
+begin
+  if pixelSize < 1 then
+  begin
+    result := bmp.Duplicate;
+    exit;
+  end;
+  result := bmp.NewBitmap(bmp.Width,bmp.Height);
+
+  tx := (bmp.Width+pixelSize-1) div pixelSize;
+  ty := (bmp.Height+pixelSize-1) div pixelSize;
+  if not useResample then
+  begin
+    temp := bmp.NewBitmap(tx,ty);
+
+    xs := (bmp.Width mod pixelSize) div 2;
+    ys := (bmp.Height mod pixelSize) div 2;
+
+    for yb := 0 to temp.height-1 do
+    begin
+      pdest := temp.ScanLine[yb];
+      psrc := bmp.scanline[ys]+xs;
+      inc(ys,pixelSize);
+      for xb := 0 to temp.width-1 do
+      begin
+        pdest^ := psrc^;
+        inc(pdest);
+        inc(psrc,pixelSize);
+      end;
+    end;
+    temp.InvalidateBitmap;
+  end else
+  begin
+    oldfilter := bmp.ResampleFilter;
+    bmp.ResampleFilter := filter;
+    temp := bmp.Resample(tx,ty,rmFineResample);
+    bmp.ResampleFilter := oldfilter;
+  end;
+  stretched := temp.Resample(temp.Width*pixelSize,temp.Height*pixelSize,rmSimpleStretch);
+  temp.free;
+  if bmp.Width mod pixelSize = 0 then
+    xs := 0
+  else
+    xs := (-pixelSize+(bmp.Width mod pixelSize)) div 2;
+  if bmp.Height mod pixelSize = 0 then
+    ys := 0
+  else
+    ys := (-pixelSize+(bmp.Height mod pixelSize)) div 2;
+  result.PutImage(xs,ys,stretched,dmSet);
+  stretched.Free;
 end;
 
 function FilterBlur(bmp: TBGRACustomBitmap;

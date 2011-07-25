@@ -20,7 +20,8 @@ function ComputeOpenedSpline(const points: array of TPointF; Style: TSplineStyle
 { Compute points to draw an antialiased ellipse }
 function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF;
 function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF; overload;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions): ArrayOfTPointF; overload;
 
 implementation
 
@@ -358,7 +359,13 @@ begin
 end;
 
 function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
-var q1,q2,q3,q4: array of TPointF;
+begin
+  result := ComputeRoundRect(x1,y1,x2,y2,rx,ry,[]);
+end;
+
+function ComputeRoundRect(x1, y1, x2, y2, rx, ry: single;
+  options: TRoundRectangleOptions): ArrayOfTPointF;
+var q0,q1,q2,q3,q4: array of TPointF;
   temp: Single;
 begin
   if x1 > x2 then
@@ -379,13 +386,40 @@ begin
     rx := (x2-x1)/2;
   if 2*ry > y2-y1 then
     ry := (y2-y1)/2;
-  q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384);
-  q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768);
-  q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384);
-  q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0);
-  result := ConcatPointsF([q1,q2,q3,q4]);
+
+  q0 := PointsF([PointF(x2,(y1+y2)/2)]);
+
+  if rrTopRightBevel in options then
+    q1 := PointsF([PointF(x2,y1+ry),PointF(x2-rx,y1)]) else
+  if rrTopRightSquare in options then
+    q1 := PointsF([PointF(x2,y1)])
+  else
+    q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384);
+
+  if rrTopLeftBevel in options then
+    q2 := PointsF([PointF(x1+rx,y1),PointF(x1,y1+ry)]) else
+  if rrTopLeftSquare in options then
+    q2 := PointsF([PointF(x1,y1)])
+  else
+    q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768);
+
+  if rrBottomLeftBevel in options then
+    q3 := PointsF([PointF(x1,y2-ry),PointF(x1+rx,y2)]) else
+  if rrBottomLeftSquare in options then
+    q3 := PointsF([PointF(x1,y2)])
+  else
+    q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384);
+
+  if rrBottomRightBevel in options then
+    q4 := PointsF([PointF(x2-rx,y2),PointF(x2,y2-ry)]) else
+  if rrBottomRightSquare in options then
+    q4 := PointsF([PointF(x2,y2)])
+  else
+    q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0);
+
+  result := ConcatPointsF([q0,q1,q2,q3,q4]);
 end;
 
 
 end.
-
+

@@ -58,8 +58,10 @@ type
   TDrawMode = (dmSet,                   //replace pixels
                dmSetExceptTransparent,  //draw pixels with alpha=255
                dmLinearBlend,           //blend without gamma correction
-               dmDrawWithTransparency); //normal blending with gamma correction
+               dmDrawWithTransparency,  //normal blending with gamma correction
+               dmXor);                  //bitwise xor for all channels
   TChannel = (cRed, cGreen, cBlue, cAlpha);
+  TChannels = set of TChannel;
                
   //floodfill option
   TFloodfillMode = (fmSet,                   //set pixels
@@ -123,7 +125,21 @@ type
     p1,c,p2: TPointF;
   end;
 
+  TPoint3D = record
+    x,y,z: single;
+  end;
+
 function ConcatPointsF(const APolylines: array of ArrayOfTPointF): ArrayOfTPointF;
+
+function Point3D(x,y,z: single): TPoint3D;
+operator = (const v1,v2: TPoint3D): boolean; inline;
+operator * (const v1,v2: TPoint3D): single; inline;
+operator * (const v1: TPoint3D; const factor: single): TPoint3D; inline;
+operator - (const v1,v2: TPoint3D): TPoint3D; inline;
+operator - (const v: TPoint3D): TPoint3D; inline;
+operator + (const v1,v2: TPoint3D): TPoint3D; inline;
+procedure VectProduct3D(u,v: TPoint3D; out w: TPoint3D);
+procedure Normalize3D(var v: TPoint3D); inline;
 
 function BezierCurve(origin, control1, control2, destination: TPointF) : TCubicBezierCurve; overload;
 function BezierCurve(origin, control, destination: TPointF) : TQuadraticBezierCurve; overload;
@@ -204,6 +220,7 @@ type
      //line style
      LineCap:   TPenEndCap;
      JoinStyle: TPenJoinStyle;
+     JoinMiterLimit: single;
 
      FillMode:  TFillMode;  //winding or alternate
 
@@ -214,14 +231,16 @@ type
      ScanInterpolationFilter: TResampleFilter;
      ScanOffset: TPoint;
 
-     function NewBitmap(AWidth, AHeight: integer): TBGRACustomBitmap; virtual; abstract;
-     function NewBitmap(Filename: string): TBGRACustomBitmap; virtual; abstract;
+     function NewBitmap(AWidth, AHeight: integer): TBGRACustomBitmap; virtual; abstract; overload;
+     function NewBitmap(AWidth, AHeight: integer; Color: TBGRAPixel): TBGRACustomBitmap; virtual; abstract; overload;
+     function NewBitmap(Filename: string): TBGRACustomBitmap; virtual; abstract; overload;
 
      procedure LoadFromFile(const filename: string); virtual;
      procedure LoadFromStream(Str: TStream); virtual;
      procedure LoadFromStream(Str: TStream; Handler: TFPCustomImageReader); virtual;
      procedure SaveToFile(const filename: string); virtual;
      procedure SaveToFile(const filename: string; Handler:TFPCustomImageWriter); virtual;
+     procedure SaveToStreamAsPng(Str: TStream); virtual; abstract;
      procedure Assign(ABitmap: TBitmap); virtual; abstract; overload;
      procedure Assign(MemBitmap: TBGRACustomBitmap); virtual; abstract; overload;
 
@@ -234,19 +253,22 @@ type
      procedure FastBlendPixel(x, y: integer; c: TBGRAPixel); virtual; abstract;
      procedure ErasePixel(x, y: integer; alpha: byte); virtual; abstract;
      procedure AlphaPixel(x, y: integer; alpha: byte); virtual; abstract;
-     function GetPixel(x, y: integer): TBGRAPixel; virtual; abstract; overload;
+     function GetPixel(x, y: integer): TBGRAPixel; virtual; abstract;
      function GetPixel(x, y: single; AResampleFilter: TResampleFilter = rfLinear): TBGRAPixel; virtual; abstract; overload;
      function GetPixelCycle(x, y: integer): TBGRAPixel; virtual;
      function GetPixelCycle(x, y: single; AResampleFilter: TResampleFilter = rfLinear): TBGRAPixel; virtual; abstract; overload;
+     function GetPixelCycle(x, y: single; AResampleFilter: TResampleFilter; repeatX: boolean; repeatY: boolean): TBGRAPixel; virtual; abstract; overload;
 
      {Line primitives}
      procedure SetHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
+     procedure XorHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
      procedure DrawHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract; overload;
      procedure DrawHorizLine(x, y, x2: integer; ec: TExpandedPixel); virtual; abstract; overload;
      procedure DrawHorizLine(x, y, x2: integer; texture: IBGRAScanner); virtual; abstract; overload;
      procedure FastBlendHorizLine(x, y, x2: integer; c: TBGRAPixel); virtual; abstract;
      procedure AlphaHorizLine(x, y, x2: integer; alpha: byte); virtual; abstract;
      procedure SetVertLine(x, y, y2: integer; c: TBGRAPixel); virtual; abstract;
+     procedure XorVertLine(x, y, y2: integer; c: TBGRAPixel); virtual; abstract;
      procedure DrawVertLine(x, y, y2: integer; c: TBGRAPixel); virtual; abstract;
      procedure AlphaVertLine(x, y, y2: integer; alpha: byte); virtual; abstract;
      procedure FastBlendVertLine(x, y, y2: integer; c: TBGRAPixel); virtual; abstract;
@@ -367,6 +389,7 @@ type
      function ComputeArc65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
      function ComputeArcRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
      function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF; virtual; abstract;
+     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions): ArrayOfTPointF; virtual; abstract;
      function ComputePie65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
      function ComputePieRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
 
@@ -411,10 +434,10 @@ type
      procedure LoadFromBitmapIfNeeded; virtual; abstract;   //call to ensure that bitmap data is up to date
 
      {BGRA bitmap functions}
-     procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode); virtual; abstract;
+     procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); virtual; abstract;
      procedure PutImageSubpixel(x, y: single; Source: TBGRACustomBitmap);
-     procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap); virtual; abstract;
-     procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0); virtual; abstract;
+     procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOpacity: Byte=255); virtual; abstract;
+     procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0; AOpacity: Byte=255); virtual; abstract;
      procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap;
        operation: TBlendOperation); virtual; abstract;
      function Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap; virtual; abstract;
@@ -433,6 +456,7 @@ type
      procedure AlphaToGrayscale; virtual; abstract;
      procedure ApplyMask(mask: TBGRACustomBitmap); virtual; abstract;
      function GetImageBounds(Channel: TChannel = cAlpha): TRect; virtual; abstract;
+     function GetImageBounds(Channels: TChannels): TRect; virtual; abstract;
      function MakeBitmapCopy(BackgroundColor: TColor): TBitmap; virtual; abstract;
 
      {Filters}
@@ -443,6 +467,7 @@ type
      function FilterContour: TBGRACustomBitmap; virtual; abstract;
      function FilterBlurRadial(radius: integer;
        blurType: TRadialBlurType): TBGRACustomBitmap; virtual; abstract;
+     function FilterPixelate(pixelSize: integer; useResample: boolean; filter: TResampleFilter = rfLinear): TBGRACustomBitmap; virtual; abstract;
      function FilterBlurMotion(distance: integer; angle: single;
        oriented: boolean): TBGRACustomBitmap; virtual; abstract;
      function FilterCustomBlur(mask: TBGRACustomBitmap): TBGRACustomBitmap; virtual; abstract;
@@ -514,6 +539,8 @@ type
   public
     function GetColorAt(position: integer): TBGRAPixel; virtual; abstract;
     function GetAverageColor: TBGRAPixel; virtual; abstract;
+    function GetMonochrome: boolean; virtual; abstract;
+    property Monochrome: boolean read GetMonochrome;
   end;
 
 { Color functions }
@@ -541,6 +568,7 @@ operator = (const c1, c2: TBGRAPixel): boolean; inline;
 function BGRADiff(c1, c2: TBGRAPixel): byte;
 operator - (const c1, c2: TColorF): TColorF; inline;
 operator + (const c1, c2: TColorF): TColorF; inline;
+operator * (const c1, c2: TColorF): TColorF; inline;
 operator * (const c1: TColorF; factor: single): TColorF; inline;
 function ColorF(red,green,blue,alpha: single): TColorF;
 function BGRAToStr(c: TBGRAPixel): string;
@@ -565,6 +593,8 @@ operator * (const pt1, pt2: TPointF): single; inline; //scalar product
 operator * (const pt1: TPointF; factor: single): TPointF; inline;
 operator * (factor: single; const pt1: TPointF): TPointF; inline;
 function PtInRect(pt: TPoint; r: TRect): boolean;
+function VectLen(dx,dy: single): single; overload;
+function VectLen(v: TPointF): single; overload;
 
 { Line and polygon functions }
 type
@@ -666,6 +696,69 @@ begin
       result[pos] := APolylines[i][j];
       inc(pos);
     end;
+end;
+
+operator-(const v: TPoint3D): TPoint3D;
+begin
+  result.x := -v.x;
+  result.y := -v.y;
+  result.z := -v.z;
+end;
+
+operator + (const v1,v2: TPoint3D): TPoint3D; inline;
+begin
+  result.x := v1.x+v2.x;
+  result.y := v1.y+v2.y;
+  result.z := v1.z+v2.z;
+end;
+
+operator - (const v1,v2: TPoint3D): TPoint3D; inline;
+begin
+  result.x := v1.x-v2.x;
+  result.y := v1.y-v2.y;
+  result.z := v1.z-v2.z;
+end;
+
+operator * (const v1: TPoint3D; const factor: single): TPoint3D; inline;
+begin
+  result.x := v1.x*factor;
+  result.y := v1.y*factor;
+  result.z := v1.z*factor;
+end;
+
+function Point3D(x, y, z: single): TPoint3D;
+begin
+  result.x := x;
+  result.y := y;
+  result.z := z;
+end;
+
+operator=(const v1, v2: TPoint3D): boolean;
+begin
+  result := (v1.x=v2.x) and (v1.y=v2.y) and (v1.z=v2.z);
+end;
+
+operator * (const v1,v2: TPoint3D): single; inline;
+begin
+  result := v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
+end;
+
+procedure Normalize3D(var v: TPoint3D); inline;
+var len: double;
+begin
+  len := v*v;
+  if len = 0 then exit;
+  len := sqrt(len);
+  v.x /= len;
+  v.y /= len;
+  v.z /= len;
+end;
+
+procedure VectProduct3D(u,v: TPoint3D; out w: TPoint3D);
+begin
+  w.x := u.y*v.z-u.z*v.y;
+  w.y := u.z*v.x-u.x*v.z;
+  w.z := u.x*v.Y-u.y*v.x;
 end;
 
 // Define a Bézier curve with two control points.
@@ -1480,6 +1573,14 @@ begin
   result[4] := c1[4]+c2[4];
 end;
 
+operator*(const c1, c2: TColorF): TColorF;
+begin
+  result[1] := c1[1]*c2[1];
+  result[2] := c1[2]*c2[2];
+  result[3] := c1[3]*c2[3];
+  result[4] := c1[4]*c2[4];
+end;
+
 operator*(const c1: TColorF; factor: single): TColorF;
 begin
   result[1] := c1[1]*factor;
@@ -1502,31 +1603,132 @@ begin
   result := IntToHex(c.red,2)+IntToHex(c.green,2)+IntToHex(c.Blue,2)+IntToHex(c.Alpha,2);
 end;
 
+type
+    arrayOfString = array of string;
+
+function SimpleParseFuncParam(str: string): arrayOfString;
+var idxOpen,start,cur: integer;
+begin
+    result := nil;
+    idxOpen := pos('(',str);
+    if idxOpen = 0 then exit;
+    start := idxOpen+1;
+    cur := start;
+    while cur <= length(str) do
+    begin
+       if str[cur] in[',',')'] then
+       begin
+         setlength(result,length(result)+1);
+         result[high(result)] := copy(str,start,cur-start);
+         start := cur+1;
+       end;
+       inc(cur);
+    end;
+    if start <= length(str) then
+    begin
+      setlength(result,length(result)+1);
+      result[high(result)] := copy(str,start,length(str)-start+1);
+    end;
+end;
+
+function ParseColorValue(str: string): byte;
+var pourcent,unclipped,errPos: integer;
+begin
+  if str = '' then result := 0 else
+  begin
+    if str[length(str)]='%' then
+    begin
+      val(copy(str,1,length(str)-1),pourcent,errPos);
+      if pourcent < 0 then result := 0 else
+      if pourcent > 100 then result := 255 else
+        result := pourcent*255 div 100;
+    end else
+    begin
+      val(str,unclipped,errPos);
+      if unclipped < 0 then result := 0 else
+      if unclipped > 255 then result := 255 else
+        result := unclipped;
+    end;
+  end;
+end;
+
 { Read a color in hexadecimal format RRGGBB(AA) or RGB(A) }
 function StrToBGRA(str: string): TBGRAPixel;
 var errPos: integer;
+    values: array of string;
+    alphaF: single;
 begin
-  if length(str)=6 then str += 'FF';
-  if length(str)=3 then str += 'F';
-  if length(str)=8 then
+  if str = '' then
   begin
-    val('$'+copy(str,1,2),result.red,errPos);
-    val('$'+copy(str,3,2),result.green,errPos);
-    val('$'+copy(str,5,2),result.blue,errPos);
-    val('$'+copy(str,7,2),result.alpha,errPos);
-  end else
-  if length(str)=4 then
-  begin
-    val('$'+copy(str,1,1),result.red,errPos);
-    val('$'+copy(str,2,1),result.green,errPos);
-    val('$'+copy(str,3,1),result.blue,errPos);
-    val('$'+copy(str,4,1),result.alpha,errPos);
-    result.red *= $11;
-    result.green *= $11;
-    result.blue *= $11;
-    result.alpha *= $11;
-  end else
     result := BGRAPixelTransparent;
+    exit;
+  end;
+  str := lowerCase(str);
+  if str='black' then result := BGRA(0,0,0) else
+  if str='silver' then result := BGRA(192,192,192) else
+  if str='gray' then result := BGRA(128,128,128) else
+  if str='white' then result := BGRA(255,255,255) else
+  if str='maroon' then result := BGRA(128,0,0) else
+  if str='red' then result := BGRA(255,0,0) else
+  if str='purple' then result := BGRA(128,0,128) else
+  if str='fuchsia' then result := BGRA(255,0,255) else
+  if str='green' then result := BGRA(0,128,0) else
+  if str='lime' then result := BGRA(0,255,0) else
+  if str='olive' then result := BGRA(128,128,0) else
+  if str='yellow' then result := BGRA(255,255,0) else
+  if str='navy' then result := BGRA(0,0,128) else
+  if str='blue' then result := BGRA(0,0,255) else
+  if str='teal' then result := BGRA(0,128,128) else
+  if str='aqua' then result := BGRA(0,255,255) else
+  if str='transparent' then result := BGRAPixelTransparent else
+  begin
+    if (copy(str,1,4)='rgb(') or (copy(str,1,5)='rgba(') then
+    begin
+      values := SimpleParseFuncParam(str);
+      if (length(values)=3) or (length(values)=4) then
+      begin
+        result.red := ParseColorValue(values[0]);
+        result.green := ParseColorValue(values[1]);
+        result.blue := ParseColorValue(values[2]);
+        if length(values)=4 then
+        begin
+          val(values[3],alphaF,errPos);
+          if alphaF < 0 then
+            result.alpha := 0 else
+          if alphaF > 1 then
+            result.alpha := 255
+          else
+            result.alpha := round(alphaF*255);
+        end else
+          result.alpha := 255;
+      end else
+        result := BGRAPixelTransparent;
+      exit;
+    end;
+    if str[1]='#' then delete(str,1,1);
+    if length(str)=6 then str += 'FF';
+    if length(str)=3 then str += 'F';
+    if length(str)=8 then
+    begin
+      val('$'+copy(str,1,2),result.red,errPos);
+      val('$'+copy(str,3,2),result.green,errPos);
+      val('$'+copy(str,5,2),result.blue,errPos);
+      val('$'+copy(str,7,2),result.alpha,errPos);
+    end else
+    if length(str)=4 then
+    begin
+      val('$'+copy(str,1,1),result.red,errPos);
+      val('$'+copy(str,2,1),result.green,errPos);
+      val('$'+copy(str,3,1),result.blue,errPos);
+      val('$'+copy(str,4,1),result.alpha,errPos);
+      result.red *= $11;
+      result.green *= $11;
+      result.blue *= $11;
+      result.alpha *= $11;
+    end else
+      result := BGRAPixelTransparent;
+  end;
+
 end;
 
 {********************** Point functions **************************}
@@ -1605,6 +1807,16 @@ begin
     (pt.y < r.bottom);
 end;
 
+function VectLen(dx, dy: single): single;
+begin
+  result := sqrt(dx*dx+dy*dy);
+end;
+
+function VectLen(v: TPointF): single;
+begin
+  result := sqrt(v.x*v.x+v.y*v.y);
+end;
+
 function IntersectLine(line1, line2: TLineDef): TPointF;
 var parallel: boolean;
 begin
@@ -1617,20 +1829,20 @@ begin
   parallel := false;
   //if lines are parallel
   if ((line1.dir.x = line2.dir.x) and (line1.dir.y = line2.dir.y)) or
-     ((line1.dir.y=0) and (line2.dir.y=0)) then
+     ((abs(line1.dir.y) < 1e-6) and (abs(line2.dir.y) < 1e-6)) then
   begin
        parallel := true;
        //return the center of the segment between line origins
        result.x := (line1.origin.x+line2.origin.x)/2;
        result.y := (line1.origin.y+line2.origin.y)/2;
   end else
-  if line1.dir.y=0 then //line1 is horizontal
+  if abs(line1.dir.y) < 1e-6 then //line1 is horizontal
   begin
        result.y := line1.origin.y;
        result.x := line2.origin.x + (result.y - line2.origin.y)
                /line2.dir.y*line2.dir.x;
   end else
-  if line2.dir.y=0 then //line2 is horizontal
+  if abs(line2.dir.y) < 1e-6 then //line2 is horizontal
   begin
        result.y := line2.origin.y;
        result.x := line1.origin.x + (result.y - line1.origin.y)

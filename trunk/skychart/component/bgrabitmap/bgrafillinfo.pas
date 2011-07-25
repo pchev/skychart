@@ -51,10 +51,14 @@ type
       //there is nothing to draw
       function ComputeMinMax(out minx,miny,maxx,maxy: integer; bmpDest: TBGRACustomBitmap): boolean;
 
+      //check if the point is inside the filling zone
+      function IsPointInside(x,y: single; windingMode: boolean): boolean;
+
       //create an array that will contain computed intersections.
       //you may augment, in this case, use CreateIntersectionInfo for new items
       function CreateIntersectionArray: ArrayOfTIntersectionInfo;
       function CreateIntersectionInfo: TIntersectionInfo; virtual; //creates a single info
+      procedure FreeIntersectionArray(var inter: ArrayOfTIntersectionInfo);
 
       //fill a previously created array of intersections with actual intersections at the current y coordinate.
       //nbInter gets the number of computed intersections
@@ -184,6 +188,11 @@ function DivByAntialiasPrecision256(value: cardinal): cardinal; inline;
 function DivByAntialiasPrecision65536(value: cardinal): cardinal; inline;
 procedure ComputeAliasedRowBounds(x1,x2: single; minx,maxx: integer; out ix1,ix2: integer);
 
+function IsPointInPolygon(const points: ArrayOfTPointF; point: TPointF; windingMode: boolean): boolean;
+function IsPointInEllipse(x,y,rx,ry: single; point: TPointF): boolean;
+function IsPointInRoundRectangle(x1, y1, x2, y2, rx, ry: single; point: TPointF): boolean;
+function IsPointInRectangle(x1, y1, x2, y2: single; point: TPointF): boolean;
+
 implementation
 
 uses Math;
@@ -201,6 +210,39 @@ begin
     ix1 := minx;
   if ix2 >= maxx then
     ix2 := maxx;
+end;
+
+function IsPointInPolygon(const points: ArrayOfTPointF; point: TPointF
+  ; windingMode: boolean): boolean;
+var info: TFillShapeInfo;
+begin
+  info := TFillPolyInfo.Create(points);
+  result := info.IsPointInside(point.x+0.5,point.y+0.5,windingMode);
+  info.free;
+end;
+
+function IsPointInEllipse(x, y, rx, ry: single; point: TPointF): boolean;
+var info: TFillShapeInfo;
+begin
+  info := TFillEllipseInfo.Create(x,y,rx,ry);
+  result := info.IsPointInside(point.x+0.5,point.y+0.5,false);
+  info.free;
+end;
+
+function IsPointInRoundRectangle(x1, y1, x2, y2, rx, ry: single; point: TPointF
+  ): boolean;
+var info: TFillShapeInfo;
+begin
+  info := TFillRoundRectangleInfo.Create(x1, y1, x2, y2, rx, ry,[]);
+  result := info.IsPointInside(point.x+0.5,point.y+0.5,false);
+  info.free;
+end;
+
+function IsPointInRectangle(x1, y1, x2, y2: single; point: TPointF): boolean;
+begin
+  with point do
+    result := (((x1<x) and (x2>x)) or ((x1>x) and (x2<x))) and
+              (((y1<y) and (y2>y)) or ((y1>y) and (y2<y)));
 end;
 
 procedure AddDensity(dest: PDensity; start,count: integer; value: word);
@@ -303,6 +345,29 @@ begin
     result := false;
 end;
 
+function TFillShapeInfo.IsPointInside(x, y: single; windingMode: boolean
+  ): boolean;
+var
+    inter : ArrayOfTIntersectionInfo;
+    i,nbInter: integer;
+begin
+  inter := CreateIntersectionArray;
+  ComputeAndSort(y,inter,nbInter,windingMode);
+  i := 0;
+  while i+1 < nbInter do
+  begin
+    if (inter[i].interX < x) and (inter[i+1].interX > x) then
+    begin
+      result := true;
+      FreeIntersectionArray(inter);
+      exit;
+    end;
+    inc(i,2);
+  end;
+  result := false;
+  FreeIntersectionArray(inter);
+end;
+
 function TFillShapeInfo.NbMaxIntersection: integer;
 begin
   Result := 0;
@@ -316,6 +381,16 @@ end;
 function TFillShapeInfo.CreateIntersectionInfo: TIntersectionInfo;
 begin
   result := TIntersectionInfo.Create;
+end;
+
+procedure TFillShapeInfo.FreeIntersectionArray(
+  var inter: ArrayOfTIntersectionInfo);
+var
+  i: Integer;
+begin
+  for i := 0 to high(inter) do
+    inter[i].free;
+  inter := nil;
 end;
 
 {$hints off}
@@ -513,6 +588,7 @@ var
   nbYList: integer;
   ya,yb,temp: single;
   sliceStart,sliceEnd,idxSeg: integer;
+  idSeg: integer;
 
 begin
   setlength(FPoints, length(points));
@@ -597,6 +673,7 @@ begin
     FSlices[i].nbSegments := 0;
   end;
 
+  idSeg := 0;
   for j := 0 to high(FSlopes) do
   begin
     if FSlopes[j]<>EmptySingle then
@@ -629,7 +706,8 @@ begin
             slope := FSlopes[j];
             winding := ComputeWinding(FPoints[j].y,FPoints[k].y);
             data := CreateSegmentData(j,k,x1,y1);
-            id := j;
+            inc(idSeg);
+            id := idSeg;
           end;
         end;
       end;

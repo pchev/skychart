@@ -92,6 +92,8 @@ type
     TexCoordDivByZSlopes: TPointF;
     lightness: single;
     lightnessSlope: single;
+    Position3D, Normal3D: TPoint3D;
+    Position3DSlope, Normal3DSlope: TPoint3D;
   end;
   PPerspectiveTextureInfo = ^TPerspectiveTextureInfo;
 
@@ -100,6 +102,7 @@ type
     texCoordDivByZ: TPointF;
     coordInvZ: single;
     lightness: word;
+    Position3D, Normal3D: TPoint3D;
   end;
 
   { TPolygonPerspectiveTextureMappingInfo }
@@ -118,12 +121,36 @@ type
       var inter: ArrayOfTIntersectionInfo; var nbInter: integer); override;
   end;
 
+  { TPolygonPerspectiveMappingShaderInfo }
+
+  TPolygonPerspectiveMappingShaderInfo = class(TFillPolyInfo)
+  protected
+    FTexCoords: array of TPointF;
+    FPositions3D, FNormals3D: array of TPoint3D;
+  public
+    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D; const normals: array of TPoint3D; const texCoords: array of TPointF);
+    function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
+    function CreateIntersectionInfo: TIntersectionInfo; override;
+    procedure ComputeIntersection(cury: single;
+      var inter: ArrayOfTIntersectionInfo; var nbInter: integer); override;
+  end;
+
+  TShaderFunction3D = function (APosition,ANormal: TPoint3D; Color: TBGRAPixel): TBGRAPixel of object;
+
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonPerspectiveTextureMappingInfo;
          texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner;
            const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
 procedure PolygonPerspectiveTextureMappingAliasedWithLightness(bmp: TBGRACustomBitmap; const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner;
            const texCoords: array of TPointF; TextureInterpolation: Boolean; lightnesses: array of word; NonZeroWinding: boolean); overload;
+
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonPerspectiveMappingShaderInfo;
+         texture: IBGRAScanner; TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean;
+         solidColor: TBGRAPixel); overload;
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; const points3D: array of TPoint3D;
+           const normals: array of TPoint3D; texture: IBGRAScanner; const texCoords: array of TPointF;
+           TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean;
+           solidColor: TBGRAPixel); overload;
 
 { Aliased round rectangle }
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
@@ -132,6 +159,97 @@ procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
 implementation
 
 uses Math, BGRABlend;
+
+{$hints off}
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap;
+  polyInfo: TPolygonPerspectiveMappingShaderInfo; texture: IBGRAScanner;
+  TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D;
+  NonZeroWinding: boolean; solidColor: TBGRAPixel);
+var
+  inter:    array of TIntersectionInfo;
+  nbInter:  integer;
+
+  scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
+
+  procedure DrawTextureLine(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USESHADER}
+    {$i perspectivescan.inc}
+
+  procedure DrawTextureLineSolidColor(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USESOLIDCOLOR}
+    {$define PARAM_USESHADER}
+    {$i perspectivescan.inc}
+
+var
+  miny, maxy, minx, maxx: integer;
+
+  yb, i : integer;
+  x1, x2: single;
+
+  ix1, ix2: integer;
+
+begin
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
+
+  inter := polyInfo.CreateIntersectionArray;
+
+  if texture <> nil then
+    scanAtFunc := @texture.ScanAt
+  else
+    scanAtFunc:= nil;
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //find intersections
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
+
+    for i := 0 to nbinter div 2 - 1 do
+    begin
+      x1 := inter[i + i].interX;
+      x2 := inter[i + i+ 1].interX;
+
+      if x1 <> x2 then
+      begin
+        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
+        if ix1 <= ix2 then
+        begin
+          if texture <> nil then
+          begin
+            DrawTextureLine(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+          end else
+          begin
+            DrawTextureLineSolidColor(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+          end;
+        end;
+      end;
+    end;
+  end;
+
+  polyInfo.FreeIntersectionArray(inter);
+  bmp.InvalidateBitmap;
+end;
+{$hints on}
+
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap;
+  const points: array of TPointF; const points3D: array of TPoint3D;
+  const normals: array of TPoint3D; texture: IBGRAScanner;
+  const texCoords: array of TPointF; TextureInterpolation: Boolean;
+  ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean; solidColor: TBGRAPixel);
+var polyInfo: TPolygonPerspectiveMappingShaderInfo;
+begin
+  polyInfo := TPolygonPerspectiveMappingShaderInfo.Create(points,points3D,normals,texCoords);
+  PolygonPerspectiveMappingShaderAliased(bmp,polyInfo,texture,TextureInterpolation, ShaderFunction, NonZeroWinding, solidColor);
+  polyInfo.Free;
+end;
 
 {From LazRGBGraphics}
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
@@ -330,6 +448,114 @@ begin
   end;
 end;
 
+{ TPolygonPerspectiveMappingShaderInfo }
+
+constructor TPolygonPerspectiveMappingShaderInfo.Create(
+  const points: array of TPointF; const points3D: array of TPoint3D;
+  const normals: array of TPoint3D; const texCoords: array of TPointF);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if (length(texCoords) <> length(points)) or (length(points3D) <> length(points)) or (length(normals) <> length(points)) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  SetLength(FPositions3D, length(points));
+  SetLength(FNormals3D, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i].x<>points[i-1].X) or (points[i].y<>points[i-1].y) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    FPositions3D[nbP] := points3D[i];
+    FNormals3D[nbP] := normals[i];
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1].X = lPoints[0].X) and (lPoints[nbP-1].Y = lPoints[0].Y) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+  SetLength(FPositions3D, nbP);
+  SetLength(FNormals3D, nbP);
+
+  inherited Create(lPoints);
+end;
+
+{$hints off}
+function TPolygonPerspectiveMappingShaderInfo.CreateSegmentData(numPt,
+  nextPt: integer; x, y: single): pointer;
+var
+  info: PPerspectiveTextureInfo;
+  ty,dy: single;
+  CurInvZ,NextInvZ: single;
+  CurTexCoordDivByZ: TPointF;
+  NextTexCoordDivByZ: TPointF;
+
+  Cur3DDivByZ,Next3DDivByZ: TPoint3D;
+begin
+  New(info);
+  CurInvZ := 1/FPositions3D[numPt].z;
+  CurTexCoordDivByZ := FTexCoords[numPt]*CurInvZ;
+  NextInvZ := 1/FPositions3D[nextPt].z;
+  NextTexCoordDivByZ := FTexCoords[nextPt]*NextInvZ;
+  ty := FPoints[nextPt].y-FPoints[numPt].y;
+  info^.TexCoordDivByZSlopes := (NextTexCoordDivByZ - CurTexCoordDivByZ)*(1/ty);
+  dy := y-FPoints[numPt].y;
+  info^.TexCoordDivByZ := CurTexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+  info^.InvZSlope := (NextInvZ-CurInvZ)/ty;
+  info^.InvZ := CurInvZ+dy*info^.InvZSlope;
+
+  Cur3DDivByZ := FPositions3D[numPt]*CurInvZ;
+  Next3DDivByZ := FPositions3D[nextPt]*NextInvZ;
+  info^.Position3DSlope := (Next3DDivByZ - Cur3DDivByZ)*(1/ty);
+  info^.Position3D := Cur3DDivByZ + info^.Position3DSlope*dy;
+
+  Cur3DDivByZ := FNormals3D[numPt]*CurInvZ;
+  Next3DDivByZ := FNormals3D[nextPt]*NextInvZ;
+  info^.Normal3DSlope := (Next3DDivByZ - Cur3DDivByZ)*(1/ty);
+  info^.Normal3D := Cur3DDivByZ + info^.Normal3DSlope*dy;
+
+  Result:= info;
+end;
+{$hints on}
+
+function TPolygonPerspectiveMappingShaderInfo.CreateIntersectionInfo: TIntersectionInfo;
+begin
+  Result:= TPerspectiveTextureMappingIntersectionInfo.Create;
+end;
+
+procedure TPolygonPerspectiveMappingShaderInfo.ComputeIntersection(
+  cury: single; var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
+var
+  j: integer;
+  dy: single;
+  info: PPerspectiveTextureInfo;
+begin
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to nbSegments-1 do
+    begin
+      dy := cury - segments[j].y1;
+      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
+      inter[nbinter].winding := segments[j].winding;
+      info := PPerspectiveTextureInfo(segments[j].data);
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).coordInvZ := dy*info^.InvZSlope + info^.InvZ;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).texCoordDivByZ := info^.TexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).Position3D := info^.Position3D + info^.Position3DSlope*dy;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).Normal3D := info^.Normal3D + info^.Normal3DSlope*dy;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
 { TPolygonLinearColorGradientInfo }
 
 constructor TPolygonLinearColorGradientInfo.Create(
@@ -474,9 +700,7 @@ begin
     end;
   end;
 
-  for i := 0 to high(inter) do
-    inter[i].free;
-
+  polyInfo.FreeIntersectionArray(inter);
   bmp.InvalidateBitmap;
 end;
 
@@ -675,9 +899,7 @@ begin
     end;
   end;
 
-  for i := 0 to high(inter) do
-    inter[i].free;
-
+  polyInfo.FreeIntersectionArray(inter);
   bmp.InvalidateBitmap;
 end;
 {$hints on}
@@ -773,6 +995,7 @@ begin
 end;
 
 {$hints off}
+
 function TPolygonPerspectiveTextureMappingInfo.CreateSegmentData(numPt,
   nextPt: integer; x, y: single): pointer;
 var
@@ -907,9 +1130,7 @@ begin
     end;
   end;
 
-  for i := 0 to high(inter) do
-    inter[i].free;
-
+  polyInfo.FreeIntersectionArray(inter);
   bmp.InvalidateBitmap;
 end;
 {$hints on}

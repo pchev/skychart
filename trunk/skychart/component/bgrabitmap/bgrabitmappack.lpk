@@ -33,8 +33,8 @@
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="3" Minor="9"/>
-    <Files Count="29">
+    <Version Major="4" Minor="6" Release="1"/>
+    <Files Count="32">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -53,7 +53,7 @@
       </Item4>
       <Item5>
         <Filename Value="bgracompressablebitmap.pas"/>
-        <UnitName Value="bgracompressablebitmap"/>
+        <UnitName Value="BGRACompressableBitmap"/>
       </Item5>
       <Item6>
         <Filename Value="bgradefaultbitmap.pas"/>
@@ -151,6 +151,18 @@
         <Filename Value="bgrapath.pas"/>
         <UnitName Value="BGRAPath"/>
       </Item29>
+      <Item30>
+        <Filename Value="bgracanvas2d.pas"/>
+        <UnitName Value="BGRACanvas2D"/>
+      </Item30>
+      <Item31>
+        <Filename Value="bgrascene3d.pas"/>
+        <UnitName Value="BGRAScene3D"/>
+      </Item31>
+      <Item32>
+        <Filename Value="bgratextfx.pas"/>
+        <UnitName Value="bgratextfx"/>
+      </Item32>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">

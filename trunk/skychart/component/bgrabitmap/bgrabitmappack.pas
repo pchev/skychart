@@ -8,10 +8,11 @@ interface
 
 uses
     BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, 
-  bgracompressablebitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
+  BGRACompressableBitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
   BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
   BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
-  BGRACanvas, BGRAFillInfo, BGRAPath, LazarusPackageIntf;
+  BGRACanvas, BGRAFillInfo, BGRAPath, BGRACanvas2D, BGRAScene3D, BGRATextFX, 
+  LazarusPackageIntf;
 
 implementation
 

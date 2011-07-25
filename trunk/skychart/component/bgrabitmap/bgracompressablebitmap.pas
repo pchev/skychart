@@ -1,4 +1,4 @@
-unit bgracompressablebitmap;
+unit BGRACompressableBitmap;
 
 {$mode objfpc}{$H+}
 
@@ -216,7 +216,7 @@ begin
   FWidth := Source.Width;
   FHeight := Source.Height;
   FCaption := Source.Caption;
-  FBounds := Source.GetImageBounds;
+  FBounds := Source.GetImageBounds([cRed,cGreen,cBlue,cAlpha]);
   NbUsedPixels := (FBounds.Right-FBounds.Left)*(FBounds.Bottom-FBounds.Top);
   FUncompressedData := TMemoryStream.Create;
   if NbUsedPixels = 0 then exit;

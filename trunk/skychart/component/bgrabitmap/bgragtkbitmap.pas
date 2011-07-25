@@ -95,6 +95,12 @@ end;}
 
 procedure TBGRAGtkBitmap.ReallocData;
 begin
+  {$IFDEF LCLgtk2}
+  If FPixBuf <> nil then g_object_unref(FPixBuf);
+  {$ELSE}
+  If FPixBuf <> nil then gdk_pixbuf_unref(FPixBuf);
+  {$ENDIF}
+  FPixBuf := nil;  
   inherited ReallocData;
   FPixbuf := gdk_pixbuf_new_from_data(pguchar(FData),
     GDK_COLORSPACE_RGB, True, 8, Width, Height, Width*Sizeof(TBGRAPixel), nil, nil);

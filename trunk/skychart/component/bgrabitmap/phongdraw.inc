@@ -51,6 +51,7 @@ var
     {$ifndef PARAM_SIMPLECOLOR}
       eColor := GammaExpansion(pcolormap^);
     {$endif}
+    Alpha := ApplyOpacity(Alpha, eColor.alpha shr 8);
     ec.red := (eColor.Red*DiffuseLight+eLight.Red*SpecularLight+PhongLightPrecisionDiv2) shr PhongLightPrecisionSh;
     ec.green := (eColor.Green*DiffuseLight+eLight.Green*SpecularLight+PhongLightPrecisionDiv2) shr PhongLightPrecisionSh;
     ec.blue := (eColor.Blue*DiffuseLight+eLight.Blue*SpecularLight+PhongLightPrecisionDiv2) shr PhongLightPrecisionSh;
