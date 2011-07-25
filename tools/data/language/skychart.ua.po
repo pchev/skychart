@@ -1406,6 +1406,10 @@ msgstr "Відобразити планету як:"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Нарисувати контур ослабленого обрію"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Назва драйверу"

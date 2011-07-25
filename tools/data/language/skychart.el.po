@@ -1481,6 +1481,10 @@ msgstr "Σχεδιασμός πλανήτη ως"
 msgid "Draw the apparent depressed horizon line"
 msgstr ""
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr ""

@@ -1669,6 +1669,10 @@ msgstr "Teikna reikistjörnu sem"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Teikna lækkaðan sjóndeildarhring"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Heiti rekils"

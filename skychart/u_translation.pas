@@ -1304,6 +1304,7 @@ resourcestring
   rsClearTarget = 'Clear Target';
   rsSetTargetTo = 'Set target to %s';
   rsNoTargetObje = 'No target object';
+  rsDrift = 'Yearly drift';
 
 
 implementation

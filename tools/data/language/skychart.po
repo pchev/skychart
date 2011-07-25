@@ -5122,3 +5122,7 @@ msgstr ""
 msgid "No target object"
 msgstr ""
 
+#: u_translation:rsdrift
+msgid "Yearly drift"
+msgstr ""
+

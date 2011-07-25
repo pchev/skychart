@@ -1404,6 +1404,10 @@ msgstr "Prikaži planet kot"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Izriši navidezno oslabljeno vodoravno črto"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Ime gonilnika"

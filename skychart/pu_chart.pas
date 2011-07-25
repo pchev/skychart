@@ -2244,7 +2244,7 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
       ' -geometry 200x200 -output "'+slash(Tempdir)+'info.png'+'"';
- if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.cfgsc.GRSlongitude);
+ if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,sc.cfgsc.CurJD));
  DeleteFile(slash(Tempdir)+'info.png');
  i:=exec(cmd);
  if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;

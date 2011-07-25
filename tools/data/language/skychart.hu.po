@@ -1533,6 +1533,10 @@ msgstr "A bolygók rajza"
 msgid "Draw the apparent depressed horizon line"
 msgstr "A horizont látszólagos süllyedésének mutatása"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Driver név"
