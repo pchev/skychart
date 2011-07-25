@@ -10,7 +10,7 @@
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
-      <Title Value="Cartes du Ciel"/>
+      <Title Value="Skychart"/>
       <UseXPManifest Value="True"/>
       <Icon Value="0"/>
     </General>
