@@ -1674,9 +1674,14 @@ begin
 end;
 
 destructor Tconf_main.Destroy;
+var i:integer;
 begin
   if CometUrlList<>nil then CometUrlList.Free;
   if AsteroidUrlList<>nil then AsteroidUrlList.Free;
+  if ObsNameList<>nil then begin
+    for i:=0 to ObsNameList.Count-1 do ObsNameList.Objects[i].Free;
+    ObsNameList.Free;
+  end;
   Inherited Destroy;
 end;
 

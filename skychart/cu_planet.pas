@@ -146,6 +146,7 @@ try
 // if satxyok then dlclose(satxylib);
  db1.Free;
  db2.Free;
+ if de_created then close_de_file;
  inherited destroy;
 except
 writetrace('error destroy '+name);
