@@ -32,6 +32,7 @@ type
     procedure SetMatrix(AMatrix: TAffineMatrix);
     function InternalScanCurrentPixel: TBGRAPixel; virtual;
   public
+    GlobalOpacity: Byte;
     constructor Create(AScanner: IBGRAScanner);
     procedure Reset;
     procedure Invert;
@@ -58,13 +59,32 @@ type
   TBGRAAffineBitmapTransform = class(TBGRAAffineScannerTransform)
   protected
     FBitmap: TBGRACustomBitmap;
-    FRepeatImage: boolean;
+    FRepeatImageX,FRepeatImageY: boolean;
     FResampleFilter : TResampleFilter;
+    procedure Init(ABitmap: TBGRACustomBitmap; ARepeatImageX: Boolean= false; ARepeatImageY: Boolean= false; AResampleFilter: TResampleFilter = rfLinear);
   public
     constructor Create(ABitmap: TBGRACustomBitmap; ARepeatImage: Boolean= false; AResampleFilter: TResampleFilter = rfLinear);
+    constructor Create(ABitmap: TBGRACustomBitmap; ARepeatImageX: Boolean; ARepeatImageY: Boolean; AResampleFilter: TResampleFilter = rfLinear);
     function InternalScanCurrentPixel: TBGRAPixel; override;
     procedure Fit(Origin, HAxis, VAxis: TPointF); override;
   end;
+
+  { TBGRABitmapScanner }
+
+  TBGRABitmapScanner = class(TBGRACustomScanner)
+  protected
+    FSource: TBGRACustomBitmap;
+    FRepeatX,FRepeatY: boolean;
+    FScanline: PBGRAPixel;
+    FCurX: integer;
+    FOrigin: TPoint;
+  public
+    constructor Create(ASource: TBGRACustomBitmap; ARepeatX,ARepeatY: boolean; AOrigin: TPoint);
+    procedure ScanMoveTo(X, Y: Integer); override;
+    function ScanNextPixel: TBGRAPixel; override;
+    function ScanAt(X, Y: Single): TBGRAPixel; override;
+  end;
+
 
 {---------------------- Affine matrix functions -------------------}
 //fill a matrix
@@ -96,6 +116,8 @@ function AffineMatrixRotationDeg(Angle: Single): TAffineMatrix;
 
 //define the identity matrix (that do nothing)
 function AffineMatrixIdentity: TAffineMatrix;
+
+function IsAffineMatrixOrthogonal(M: TAffineMatrix): boolean;
 
 type
   { TBGRATriangleLinearMapping is a scanner that provides
@@ -190,6 +212,8 @@ type
 
 implementation
 
+uses BGRABlend;
+
 function AffineMatrix(m11, m12, m13, m21, m22, m23: single): TAffineMatrix;
 begin
   result[1,1] := m11;
@@ -264,6 +288,78 @@ begin
                          0, 1, 0);
 end;
 
+function IsAffineMatrixOrthogonal(M: TAffineMatrix): boolean;
+begin
+  result := PointF(M[1,1],M[2,1])*PointF(M[1,2],M[2,2]) = 0;
+end;
+
+{ TBGRABitmapScanner }
+
+constructor TBGRABitmapScanner.Create(ASource: TBGRACustomBitmap; ARepeatX,
+  ARepeatY: boolean; AOrigin: TPoint);
+begin
+  FSource := ASource;
+  FRepeatX := ARepeatX;
+  FRepeatY := ARepeatY;
+  FScanline := nil;
+  FOrigin := AOrigin;
+end;
+
+procedure TBGRABitmapScanner.ScanMoveTo(X, Y: Integer);
+begin
+  if (FSource.NbPixels = 0) then
+  begin
+    FScanline := nil;
+    exit;
+  end;
+  Inc(Y,FOrigin.Y);
+  if FRepeatY then
+  begin
+    Y := Y mod FSource.Height;
+    if Y < 0 then Y += FSource.Height;
+  end;
+  if (Y < 0) or (Y >= FSource.Height) then
+  begin
+    FScanline := nil;
+    exit;
+  end;
+  FScanline := FSource.Scanline[Y];
+  FCurX := X+FOrigin.X;
+  if FRepeatX then
+  begin
+    FCurX := FCurX mod FSource.Width;
+    if FCurX < 0 then FCurX += FSource.Width;
+  end;
+end;
+
+function TBGRABitmapScanner.ScanNextPixel: TBGRAPixel;
+begin
+  if (FScanline = nil) then
+  begin
+    result := BGRAPixelTransparent;
+    exit;
+  end;
+  if FRepeatX then
+  begin
+    result := (FScanline+FCurX)^;
+    inc(FCurX);
+    if FCurX = FSource.Width then FCurX := 0;
+  end else
+  begin
+    if (FCurX >= FSource.Width) then exit;
+    if FCurX < 0 then
+      result := BGRAPixelTransparent
+    else
+      result := (FScanline+FCurX)^;
+    inc(FCurX);
+  end;
+end;
+
+function TBGRABitmapScanner.ScanAt(X, Y: Single): TBGRAPixel;
+begin
+  Result := FSource.GetPixelCycle(X+FOrigin.X,Y+FOrigin.Y,rfLinear,FRepeatX,FRepeatY);
+end;
+
 { TBGRATriangleLinearMapping }
 
 constructor TBGRATriangleLinearMapping.Create(AScanner: IBGRAScanner; pt1, pt2,
@@ -316,6 +412,7 @@ constructor TBGRAAffineScannerTransform.Create(AScanner: IBGRAScanner);
 begin
   FScanner := AScanner;
   FScanAtFunc := @FScanner.ScanAt;
+  GlobalOpacity := 255;
   Reset;
 end;
 
@@ -410,31 +507,49 @@ begin
   result := InternalScanCurrentPixel;
   FCurX += FMatrix[1,1];
   FCurY += FMatrix[2,1];
+  if GlobalOpacity <> 255 then result.alpha := ApplyOpacity(result.alpha,GlobalOpacity);
 end;
 
 function TBGRAAffineScannerTransform.ScanAt(X, Y: Single): TBGRAPixel;
 begin
   ScanMoveToF(X,Y);
   result := InternalScanCurrentPixel;
+  if GlobalOpacity <> 255 then result.alpha := ApplyOpacity(result.alpha,GlobalOpacity);
 end;
 
 { TBGRAAffineBitmapTransform }
 
-constructor TBGRAAffineBitmapTransform.Create(ABitmap: TBGRACustomBitmap;
-  ARepeatImage: Boolean; AResampleFilter: TResampleFilter = rfLinear);
+procedure TBGRAAffineBitmapTransform.Init(ABitmap: TBGRACustomBitmap;
+  ARepeatImageX: Boolean; ARepeatImageY: Boolean;
+  AResampleFilter: TResampleFilter);
 begin
   if (ABitmap.Width = 0) or (ABitmap.Height = 0) then
     raise Exception.Create('Empty image');
   inherited Create(ABitmap);
   FBitmap := ABitmap;
-  FRepeatImage := ARepeatImage;
+  FRepeatImageX := ARepeatImageX;
+  FRepeatImageY := ARepeatImageY;
   FResampleFilter:= AResampleFilter;
+end;
+
+constructor TBGRAAffineBitmapTransform.Create(ABitmap: TBGRACustomBitmap;
+  ARepeatImage: Boolean; AResampleFilter: TResampleFilter = rfLinear);
+begin
+  Init(ABitmap,ARepeatImage,ARepeatImage,AResampleFilter);
+end;
+
+constructor TBGRAAffineBitmapTransform.Create(ABitmap: TBGRACustomBitmap;
+  ARepeatImageX: Boolean; ARepeatImageY: Boolean;
+  AResampleFilter: TResampleFilter);
+begin
+  Init(ABitmap,ARepeatImageX,ARepeatImageY,AResampleFilter);
 end;
 
 function TBGRAAffineBitmapTransform.InternalScanCurrentPixel: TBGRAPixel;
 begin
-  if FRepeatImage then
-    result := FBitmap.GetPixelCycle(FCurX,FCurY,FResampleFilter) else
+  if FRepeatImageX or FRepeatImageY then
+    result := FBitmap.GetPixelCycle(FCurX,FCurY,FResampleFilter,FRepeatImageX,FRepeatImageY)
+  else
     result := FBitmap.GetPixel(FCurX,FCurY,FResampleFilter);
 end;
 

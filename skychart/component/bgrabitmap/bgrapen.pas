@@ -18,24 +18,25 @@ var   //predefined pen styles
 
 type
   TBGRAPolyLineOption = (plRoundCapOpen, //specifies that the line ending is opened
-                         plCycle);       //specifies that it is a polygon
+                         plCycle,        //specifies that it is a polygon
+                         plAutoCycle);   //specifies that a cycle must be used if the last point is the first point
   TBGRAPolyLineOptions = set of TBGRAPolyLineOption;
 
 { Draw a polyline with specified parameters. If a scanner is specified, it is used as a texture.
   Else the pencolor parameter is used as a solid color. }
 procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF;
      width: single; pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-     options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
+     options: TBGRAPolyLineOptions; scan: IBGRAScanner = nil; miterLimit: single = 2);
 
 { Compute the path for a polyline }
 function ComputeWidePolylinePoints(const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+          options: TBGRAPolyLineOptions; miterLimit: single = 2): ArrayOfTPointF;
 
 { Compute the path for a poly-polyline }
 function ComputeWidePolyPolylinePoints(const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+          options: TBGRAPolyLineOptions; miterLimit: single = 2): ArrayOfTPointF;
 
 {--------------------- Pixel line procedures --------------------------}
 { These procedures take integer coordinates as parameters and do not handle pen styles and width.
@@ -62,6 +63,7 @@ function CreateBrushTexture(prototype: TBGRACustomBitmap; brushstyle: TBrushStyl
 //check special pen styles
 function IsSolidPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
 function IsClearPenStyle(ACustomPenStyle: TBGRAPenStyle): boolean;
+function DuplicatePenStyle(ACustomPenStyle: array of single): TBGRAPenStyle;
 
 implementation
 
@@ -382,6 +384,15 @@ begin
     result := false;
 end;
 
+function DuplicatePenStyle(ACustomPenStyle: array of single): TBGRAPenStyle;
+var
+  i: Integer;
+begin
+  setlength(result,length(ACustomPenStyle));
+  for i := 0 to high(result) do
+    result[i]:= ACustomPenStyle[i];
+end;
+
 procedure ApplyPenStyle(const leftPts, rightPts: array of TPointF; const penstyle: TBGRAPenStyle;
     width: single; var posstyle: single; out styledPts: ArrayOfTPointF);
 var
@@ -530,11 +541,11 @@ end;
 
 procedure BGRAPolyLine(bmp: TBGRACustomBitmap; const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions; scan: IBGRAScanner= nil);
+          options: TBGRAPolyLineOptions; scan: IBGRAScanner; miterLimit: single);
 var
   widePolylinePoints: ArrayOfTPointF;
 begin
-  widePolylinePoints := ComputeWidePolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options);
+  widePolylinePoints := ComputeWidePolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options,miterLimit);
   if scan <> nil then
     bmp.FillPolyAntialias(widePolylinePoints,scan)
   else
@@ -543,7 +554,7 @@ end;
 
 function ComputeWidePolylinePoints(const linepts: array of TPointF; width: single;
           pencolor: TBGRAPixel; linecap: TPenEndCap; joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-          options: TBGRAPolyLineOptions): ArrayOfTPointF;
+          options: TBGRAPolyLineOptions; miterLimit: single): ArrayOfTPointF;
 var
   borders : array of record
               leftSide,rightSide: TLineDef;
@@ -781,14 +792,18 @@ begin
   for i := 0 to high(linepts) do
     if isEmptyPointF(linepts[i]) then
     begin
-      result := ComputeWidePolyPolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options);
+      result := ComputeWidePolyPolylinePoints(linepts,width,pencolor,linecap,joinstyle,penstyle,options,miterLimit);
       exit;
     end;
+
+  if (plAutoCycle in options) and (length(linepts) >= 2) and (linepts[0]=linepts[high(linepts)]) then
+    options := options + [plCycle];
 
   hw := width / 2;
   case joinstyle of
   pjsBevel,pjsRound: maxMiter := hw*1.001;
-  pjsMiter: maxMiter := hw*2;
+  pjsMiter: if miterLimit < 1.001 then maxMiter := hw*1.001 else
+               maxMiter := hw*miterLimit;
   end;
 
   roundPrecision := round(hw)+2;
@@ -805,8 +820,11 @@ begin
       (pts[nbPts-1] = pts[0]) then dec(nbPts);
   if (plCycle in options) and (nbPts > 2) then
   begin
-    pts[nbPts] := pts[0];
-    inc(nbPts);
+    if (pts[nbPts-1] <> pts[0]) then
+    begin
+      pts[nbPts] := pts[0];
+      inc(nbPts);
+    end;
     pts[nbPts] := pts[1];
     inc(nbPts);
     linecap := pecRound;
@@ -1104,7 +1122,7 @@ end;
 function ComputeWidePolyPolylinePoints(const linepts: array of TPointF;
   width: single; pencolor: TBGRAPixel; linecap: TPenEndCap;
   joinstyle: TPenJoinStyle; const penstyle: TBGRAPenStyle;
-  options: TBGRAPolyLineOptions): ArrayOfTPointF;
+  options: TBGRAPolyLineOptions; miterLimit: single): ArrayOfTPointF;
 
 var
   results: array of array of TPointF;
@@ -1121,7 +1139,7 @@ var
       setlength(subPts,endIndexP1-startIndex);
       for j := startIndex to endIndexP1-1 do
         subPts[j-startIndex] := linepts[j];
-      tempWidePolyline := ComputeWidePolylinePoints(subPts,width,pencolor,linecap,joinstyle,penstyle,options);
+      tempWidePolyline := ComputeWidePolylinePoints(subPts,width,pencolor,linecap,joinstyle,penstyle,options,miterLimit);
       if length(results) = nbresults then
         setlength(results,(nbresults+1)*2);
       results[nbResults] := tempWidePolyline;

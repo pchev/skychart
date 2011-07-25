@@ -55,12 +55,26 @@ var
   pdest: PBGRAPixel;
   bmpWidth,bmpHeight : integer;
   radiusSquare: integer;
+  bounds: TRect;
 
 begin
+  if radius = 0 then
+  begin
+    result := bmp.Duplicate;
+    exit;
+  end;
   bmpWidth := bmp.Width;
   bmpHeight := bmp.Height;
   //create output
   result := bmp.NewBitmap(bmpWidth,bmpHeight);
+  bounds := bmp.GetImageBounds;
+  if (bounds.Right <= bounds.Left) or (bounds.Bottom <= Bounds.Top) then
+    exit;
+  bounds.Left   := max(0, bounds.Left - radius);
+  bounds.Top    := max(0, bounds.Top - radius);
+  bounds.Right  := min(bmp.Width, bounds.Right + radius);
+  bounds.Bottom := min(bmp.Height, bounds.Bottom + radius);
+
   radiusSquare := sqr((radius+1)*(radius+2) div 2);
   weightShift := 0;
   while radiusSquare > 16384 do //18496 do
@@ -75,7 +89,7 @@ begin
     srcDelta := bmpWidth else
       srcDelta := -bmpWidth;
   //loop through destination bitmap
-  for yb := 0 to bmpHeight-1 do
+  for yb := bounds.top to bounds.bottom-1 do
   begin
     //evalute available vertical range
     if yb - radius < 0 then
@@ -93,14 +107,14 @@ begin
     for xs := 0 to high(sums) do
     begin
       fillchar(sums[xs],sizeof(TRowSum),0);
-      x := xs-radius;
+      x := bounds.left-radius+xs;
       if (x >= 0) and (x < bmpWidth) then
         ComputeVerticalRow(bmp.ScanLine[yb-radius+ys1]+x,sums[xs],ys1,ys2);
     end;
     sumStartIndex := 0;
 
-    pdest := result.scanline[yb];
-    for xb := 0 to bmpWidth-1 do
+    pdest := result.scanline[yb]+bounds.left;
+    for xb := bounds.left to bounds.right-1 do
     begin
       //add vertical rows
       {$hints off}

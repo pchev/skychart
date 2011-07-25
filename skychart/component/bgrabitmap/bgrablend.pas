@@ -12,12 +12,15 @@ uses
   Classes, SysUtils, BGRABitmapTypes;
 
 { Draw one pixel with alpha blending }
-procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel); inline; overload;
-procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel); inline; overload;
-procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel); inline; overload;  //alpha in 'c' parameter
-procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel); inline; overload;
-procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; calpha: byte); inline; overload;
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel); inline; overload;
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel; appliedOpacity: byte); inline; overload;
+procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel); inline; overload;
+procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel; c: TBGRAPixel); inline; overload;  //alpha in 'c' parameter
+procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel); inline; overload;
+procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel; calpha: byte); inline; overload;
 
+procedure CopyPixelsWithOpacity(dest,src: PBGRAPixel; opacity: byte; Count: integer); inline;
+function ApplyOpacity(opacity1,opacity2: byte): byte; inline;
 function FastRoundDiv255(value: cardinal): cardinal; inline;
 
 { Draw a series of pixels with alpha blending }
@@ -26,13 +29,17 @@ procedure DrawExpandedPixelsInline(dest: PBGRAPixel; ec: TExpandedPixel; Count: 
 procedure DrawPixelsInlineExpandedOrNot(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel; Count: integer); inline; overload;  //alpha in 'c' parameter
 
 { Draw one pixel with linear alpha blending }
-procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+procedure FastBlendPixelInline(dest: PBGRAPixel; const c: TBGRAPixel); inline; overload;
+procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel; appliedOpacity: byte); inline; overload;
 
 { Draw a series of pixels with linear alpha blending }
 procedure FastBlendPixelsInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
 { Replace a series of pixels }
 procedure FillInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
+
+{ Xor a series of pixels }
+procedure XorInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
 { Set alpha value for a series of pixels }
 procedure AlphaFillInline(dest: PBGRAPixel; alpha: byte; Count: integer); inline;
@@ -102,6 +109,12 @@ begin
         for i := 0 to count-1 do
         begin
           pdest^ := scanNextFunc();
+          inc(pdest);
+        end;
+      dmXor:
+        for i := 0 to count-1 do
+        begin
+          PDWord(pdest)^ := PDWord(pdest)^ xor DWord(scanNextFunc());
           inc(pdest);
         end;
       dmSetExceptTransparent:
@@ -273,6 +286,16 @@ begin
   end;
 end;
 
+procedure XorInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer);
+begin
+  while Count > 0 do
+  begin
+    PDWord(dest)^ := PDWord(dest)^ xor DWord(c);
+    Inc(dest);
+    Dec(Count);
+  end;
+end;
+
 procedure AlphaFillInline(dest: PBGRAPixel; alpha: byte; Count: integer); inline;
 begin
   while Count > 0 do
@@ -370,7 +393,7 @@ begin
 end;
 
 {$hints off}
-procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel);
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel);
 begin
   if c.alpha = 0 then
     exit;
@@ -382,12 +405,45 @@ begin
   DrawPixelInlineNoAlphaCheck(dest,c);
 end;
 
+procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel; appliedOpacity: byte);
+begin
+  if c.alpha = 0 then
+    exit;
+  c.alpha := ApplyOpacity(c.alpha,appliedOpacity);
+  if c.alpha = 255 then
+  begin
+    dest^ := c;
+    exit;
+  end;
+  DrawPixelInlineNoAlphaCheck(dest,c);
+end;
+
+procedure CopyPixelsWithOpacity(dest, src: PBGRAPixel; opacity: byte;
+  Count: integer);
+var c: TBGRAPixel;
+begin
+  while count > 0 do
+  begin
+    c := src^;
+    c.alpha := ApplyOpacity(c.alpha,opacity);
+    dest^ := c;
+    inc(src);
+    inc(dest);
+    dec(count);
+  end;
+end;
+
+function ApplyOpacity(opacity1, opacity2: byte): byte;
+begin
+  result := opacity1*(opacity2+1) shr 8;
+end;
+
 function FastRoundDiv255(value: cardinal): cardinal; inline;
 begin
   result := (value + (value shr 7)) shr 8;
 end;
 
-procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel);
+procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel);
 var
   calpha: byte;
 begin
@@ -402,7 +458,7 @@ begin
   DrawExpandedPixelInlineNoAlphaCheck(dest,ec,calpha);
 end;
 
-procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; ec: TExpandedPixel; c: TBGRAPixel);
+procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel; c: TBGRAPixel);
 begin
   if c.alpha = 0 then
     exit;
@@ -414,7 +470,7 @@ begin
   DrawExpandedPixelInlineNoAlphaCheck(dest,ec,c.alpha);
 end;
 
-procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel);
+procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel);
 var
   p: PByte;
   a1f, a2f, a12, a12m: cardinal;
@@ -441,7 +497,7 @@ begin
 end;
 
 procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel;
-  ec: TExpandedPixel; calpha: byte);
+  const ec: TExpandedPixel; calpha: byte);
 var
   p: PByte;
   a1f, a2f, a12, a12m: cardinal;
@@ -467,7 +523,7 @@ begin
   p^ := (a12 + a12 shr 7) shr 8;
 end;
 
-procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel);
+procedure FastBlendPixelInline(dest: PBGRAPixel; const c: TBGRAPixel);
 var
   p: PByte;
   a1f, a2f, a12, a12m: cardinal;
@@ -498,6 +554,13 @@ begin
   p^ := (a12 + a12 shr 7) shr 8;
 end;
 
+procedure FastBlendPixelInline(dest: PBGRAPixel; c: TBGRAPixel;
+  appliedOpacity: byte);
+begin
+  c.alpha := ApplyOpacity(c.alpha,appliedOpacity);
+  FastBlendPixelInline(dest,c);
+end;
+
 procedure DrawPixelInlineDiff(dest: PBGRAPixel; c, compare: TBGRAPixel;
   maxDiff: byte); inline;
 begin
@@ -510,7 +573,7 @@ procedure ErasePixelInline(dest: PBGRAPixel; alpha: byte); inline;
 var
   newAlpha: byte;
 begin
-  newAlpha := FastRoundDiv255(dest^.alpha * (not alpha));
+  newAlpha := ApplyOpacity(dest^.alpha, not alpha);
   if newAlpha = 0 then
     dest^ := BGRAPixelTransparent
   else

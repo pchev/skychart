@@ -144,37 +144,14 @@ function CreateCyclicPerlinNoiseMap(AWidth, AHeight: integer; HorizontalPeriod: 
 
 implementation
 
-uses Types, SysUtils;
+uses Types, SysUtils, BGRATextFX;
 
-function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
-  AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True): TBGRABitmap;
-var
-  bmpOut,bmpSdw: TBGRABitmap; OutTxtSize: TSize; OutX,OutY: Integer;
+function TextShadow(AWidth, AHeight: Integer; AText: String;
+  AFontHeight: Integer; ATextColor, AShadowColor: TBGRAPixel; AOffSetX,
+  AOffSetY: Integer; ARadius: Integer; AFontStyle: TFontStyles;
+  AFontName: String; AShowText: Boolean): TBGRABitmap;
 begin
-  bmpOut:= TBGRABitmap.Create(AWidth,AHeight);
-  bmpOut.FontAntialias:= True;
-  bmpOut.FontHeight:= AFontHeight;
-  bmpOut.FontStyle:= AFontStyle;
-  bmpOut.FontName:= AFontName;
-
-  OutTxtSize:= bmpOut.TextSize(AText);
-  OutX:= Round(AWidth/2) - Round(OutTxtSize.cx/2);
-  OutY:= Round(AHeight/2) - Round(OutTxtSize.cy/2);
-
-  bmpSdw:= TBGRABitmap.Create(OutTxtSize.cx+2*ARadius,OutTxtSize.cy+2*ARadius);
-  bmpSdw.FontAntialias:= True;
-  bmpSdw.FontHeight:= AFontHeight;
-  bmpSdw.FontStyle:= AFontStyle;
-  bmpSdw.FontName:= AFontName;
-
-  bmpSdw.TextOut(ARadius,ARadius,AText,AShadowColor);
-  BGRAReplace(bmpSdw,bmpSdw.FilterBlurRadial(ARadius,rbFast));
-  bmpOut.PutImage(OutX+AOffSetX-ARadius,OutY+AOffSetY-ARadius,bmpSdw,dmDrawWithTransparency);
-  bmpSdw.Free;
-
-  if AShowText = True then bmpOut.TextOut(OutX,OutY,AText,ATextColor);
-
-  Result:= bmpOut;
+  result := BGRATextFX.TextShadow(AWidth,AHeight,AText,AFontHeight,ATextColor,AShadowColor,AOffsetX,AOffsetY,ARadius,AFontStyle,AFontName,AShowText);
 end;
 
 function nGradientInfo(StartColor, StopColor: TBGRAPixel;

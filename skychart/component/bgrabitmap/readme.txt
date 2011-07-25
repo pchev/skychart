@@ -1,4 +1,4 @@
-BGRABitmap v4.0 - Drawing routines with alpha blending and antialiasing with Lazarus.
+BGRABitmap v4.6.1 - Drawing routines with alpha blending and antialiasing with Lazarus.
 
 These routines allow to manipulate 32bit images in BGRA format.
 

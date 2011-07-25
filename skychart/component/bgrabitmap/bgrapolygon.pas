@@ -239,9 +239,9 @@ begin
         shapeInfo.ComputeAndSort(yb+1/256,inter,nbInter,NonZeroWinding);
       with lastScan do
         shapeInfo.ComputeAndSort(yb+255/256,inter,nbInter,NonZeroWinding);
-      if firstScan.nbInter = lastScan.nbInter then
+      if (firstScan.nbInter = lastScan.nbInter) and (firstScan.nbInter >= 2) then
       begin
-        optimised := firstScan.nbInter >= 2;
+        optimised := true;
         for i := 0 to firstScan.nbInter-1 do
           if firstScan.inter[i].numSegment <> lastScan.inter[i].numSegment then
           begin
@@ -305,8 +305,8 @@ begin
       {$i renderdensity256.inc}
   end;
 
-  for i := 0 to high(inter) do
-    inter[i].free;
+  shapeInfo.FreeIntersectionArray(inter);
+
   if not curvedSeg then
   begin
     with firstScan do
@@ -389,6 +389,7 @@ begin
               dmFastBlend: bmp.FastBlendHorizLine(ix1,yb,ix2, c);
               dmDrawWithTransparency: bmp.DrawHorizLine(ix1,yb,ix2, ec);
               dmSet: bmp.SetHorizLine(ix1,yb,ix2, c);
+              dmXor: bmp.XorHorizLine(ix1,yb,ix2, c);
             end;
           end;
         end;
@@ -396,9 +397,7 @@ begin
     end;
   end;
 
-  for i := 0 to high(inter) do
-    inter[i].free;
-
+  shapeInfo.FreeIntersectionArray(inter);
   bmp.InvalidateBitmap;
 end;
 
@@ -466,7 +465,7 @@ procedure FillEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry: single;
 var
   info: TFillEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) then
+  if (rx = 0) or (ry = 0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
 
   info := TFillEllipseInfo.Create(x, y, rx, ry);
@@ -479,7 +478,7 @@ procedure FillEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
 var
   info: TFillEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) then
+  if (rx = 0) or (ry = 0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
 
   info := TFillEllipseInfo.Create(x, y, rx, ry);
@@ -492,7 +491,7 @@ procedure BorderEllipseAntialias(bmp: TBGRACustomBitmap; x, y, rx, ry, w: single
 var
   info: TFillBorderEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) or (w=0) then
+  if (rx = 0) or (ry = 0) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
   FillShapeAntialias(bmp, info, c, EraseMode, nil, False);
@@ -504,7 +503,7 @@ procedure BorderEllipseAntialiasWithTexture(bmp: TBGRACustomBitmap; x, y, rx,
 var
   info: TFillBorderEllipseInfo;
 begin
-  if (rx = 0) or (ry = 0) or (w=0) then
+  if (rx = 0) or (ry = 0) or (w=0) or (x = EmptySingle) or (y = EmptySingle) then
     exit;
   info := TFillBorderEllipseInfo.Create(x, y, rx, ry, w);
   FillShapeAntialiasWithTexture(bmp, info, scan, False);
@@ -871,7 +870,7 @@ var
   MultiEmpty: boolean;
   bounds: TRect;
 
-  xb, yb, yc, i, j,k: integer;
+  xb, yb, yc, j,k: integer;
   pdest:    PBGRAPixel;
 
   curSum,nextSum: ^TCardinalSum;
@@ -1018,8 +1017,7 @@ begin
   for k := 0 to nbShapes-1 do
   begin
     freemem(shapeRow[k].density);
-    for i := 0 to high(shapeRow[k].inter) do
-      shapeRow[k].inter[i].Free;
+    shapes[k].info.FreeIntersectionArray(shapeRow[k].inter);
   end;
 
   dest.InvalidateBitmap;

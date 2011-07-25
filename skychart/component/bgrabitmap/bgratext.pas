@@ -23,6 +23,10 @@ procedure BGRATextRect(bmp: TBGRACustomBitmap; Font: TFont; Antialiasing: boolea
 
 function BGRATextSize(Font: TFont; Antialiasing: boolean; s: string): TSize;
 
+function BGRAOriginalTextSize(Font: TFont; Antialiasing: boolean; s: string): TSize;
+
+const FontAntialiasingLevel = 6;
+
 implementation
 
 uses Math;
@@ -30,9 +34,7 @@ uses Math;
 var
   TempBmp: TBitmap;
 
-const FontAntialiasingLevel = 6;
-
-function OriginalTextSize(Font: TFont; Antialiasing: boolean; s: string): TSize;
+function BGRAOriginalTextSize(Font: TFont; Antialiasing: boolean; s: string): TSize;
 begin
   if tempBmp = nil then tempBmp := TBitmap.Create;
   tempBmp.Canvas.Font := Font;
@@ -43,7 +45,7 @@ end;
 
 function BGRATextSize(Font: TFont; Antialiasing: boolean; s: string): TSize;
 begin
-  result := OriginalTextSize(Font, Antialiasing, s);
+  result := BGRAOriginalTextSize(Font, Antialiasing, s);
   if Antialiasing then
   begin
     result.cx := ceil(Result.cx/FontAntialiasingLevel);
@@ -170,7 +172,7 @@ begin
     exit;
   end;
 
-  size := OriginalTextSize(Font,Antialiasing,s);
+  size := BGRAOriginalTextSize(Font,Antialiasing,s);
   if (size.cx = 0) or (size.cy = 0) then
     exit;
 
@@ -218,7 +220,7 @@ begin
   TempFont.Assign(Font);
   TempFont.Orientation := orientation;
   TempFont.Height := Font.Height;
-  size := OriginalTextSize(TempFont,Antialiasing,s);
+  size := BGRAOriginalTextSize(TempFont,Antialiasing,s);
   if (size.cx = 0) or (size.cy = 0) then
   begin
     tempFont.Free;

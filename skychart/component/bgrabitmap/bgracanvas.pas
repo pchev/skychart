@@ -382,13 +382,8 @@ begin
 end;
 
 function TBGRAPen.GetCustomPenStyle: TBGRAPenStyle;
-var
-  i: Integer;
 begin
-  //copy array content
-  setlength(result,length(FCustomPenStyle));
-  for i := 0 to high(result) do
-    result[i] := FCustomPenStyle[i];
+  result := DuplicatePenStyle(FCustomPenStyle);
 end;
 
 function TBGRAPen.GetPenStyle: TPenStyle;
@@ -397,12 +392,8 @@ begin
 end;
 
 procedure TBGRAPen.SetCustomPenStyle(const AValue: TBGRAPenStyle);
-var
-  i: Integer;
 begin
-  setlength(FCustomPenStyle,length(AValue));
-  for i := 0 to high(FCustomPenStyle) do
-    FCustomPenStyle[i] := AValue[i];
+  FCustomPenStyle := DuplicatePenStyle(AValue);
 
   if IsSolidPenStyle(AValue) then FPenStyle := psSolid else
   if IsClearPenStyle(AValue) then FPenStyle := psClear else
