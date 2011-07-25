@@ -81,7 +81,7 @@ begin
   debugln('Program compiled: '+compile_time);
   debugln('Compiler version: '+compile_version);
   {$endif}
-  Application.Title:='Skychart';
+  Application.Title:='Cartes du Ciel';
   {$ifdef trace_debug}
   debugln('Initialize');
   {$endif}

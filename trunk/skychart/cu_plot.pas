@@ -3583,6 +3583,7 @@ procedure TSplot.BGRATextOut(x, y: single; s: string; c: TBGRAPixel; abmp:TBGRAB
 var
   size:  TSize;
   temp:  TBGRABitmap;
+  rsmp:  TBGRACustomBitmap;
   xx,yy: integer;
 begin
 if cfgplot.AntiAlias then begin
@@ -3596,7 +3597,9 @@ if cfgplot.AntiAlias then begin
   xx:=round(x-xx);
   yy:=round(y-yy);
   temp.TextOut(-xx,-yy,s,c);
-  temp.Assign(temp.Resample(size.cx,size.cy,rmFineResample));
+  rsmp:=temp.Resample(size.cx,size.cy,rmFineResample);
+  temp.Assign(rsmp);
+  rsmp.free;
   abmp.PutImage(round(x), round(y), temp, dmDrawWithTransparency);
   temp.Free;
 end else begin
