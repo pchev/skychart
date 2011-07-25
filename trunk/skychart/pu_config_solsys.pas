@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, EditBtn, Process, LazHelpHTML, FileUtil;
+  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
 
 type
 
@@ -40,9 +40,14 @@ type
     Button3: TButton;
     Button4: TButton;
     ComboBox2: TComboBox;
+    GRSdrift: TFloatEdit;
+    GRSJDDate: TJDDatePicker;
+    Label10: TLabel;
     Label4: TLabel;
     Label6: TLabel;
     Label8: TLabel;
+    GRSPanel: TPanel;
+    Label9: TLabel;
     SunPanel: TPanel;
     SunOnline: TCheckBox;
     CheckBoxPluto: TCheckBox;
@@ -219,6 +224,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure DownloadCometClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure GRSdriftChange(Sender: TObject);
+    procedure GRSJDDateChange(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -304,6 +311,9 @@ CheckBoxPluto.Caption:=rsPlutoIsAPlan;
 Label3.caption:=rsUncheckToAvo;
 Label5.caption:=rsPlanetsSetti;
 Label89.caption:=rsJupiterGRSLo;
+Label9.Caption:=rsDrift;
+Label10.Caption:=rsDate;
+BitBtn37.Caption:=rsGetRecentMea;
 BitBtn37.Hint:=rsGetRecentMea;
 PlanetBox.caption:=rsShowPlanetOn;
 PlanetMode.caption:=rsDrawPlanetAs;
@@ -458,6 +468,8 @@ CheckBoxPluto.checked:=csc.ShowPluto;
 PlanetBox.checked:=csc.ShowPlanet;
 PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
+GRSdrift.Value:=csc.GRSdrift*365.25;
+GRSJDDate.JD:=csc.GRSjd;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 Planetdir.Text:=cmain.planetdir;
 TransparentPlanet.Checked:=cplot.TransparentPlanet;
@@ -770,6 +782,18 @@ procedure Tf_config_solsys.GRSChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.GRSlongitude:=grs.value;
+end;
+
+procedure Tf_config_solsys.GRSdriftChange(Sender: TObject);
+begin
+if LockChange then exit;
+csc.GRSdrift := GRSdrift.Value/365.25;
+end;
+
+procedure Tf_config_solsys.GRSJDDateChange(Sender: TObject);
+begin
+if LockChange then exit;
+csc.GRSjd := GRSJDDate.JD;
 end;
 
 procedure Tf_config_solsys.PlanetBox3Click(Sender: TObject);

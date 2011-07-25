@@ -1402,6 +1402,10 @@ msgstr "Tegn planet som"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Tegn den tilsynelatende nedsenkede horisontlinje"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Driver-navn"

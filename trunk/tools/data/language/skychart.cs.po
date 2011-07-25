@@ -1404,6 +1404,10 @@ msgstr "Zobrazit planety jako"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Vykreslit hranici zdánlivého horizontu"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Ovladač"

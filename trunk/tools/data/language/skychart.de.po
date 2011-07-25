@@ -1404,6 +1404,10 @@ msgstr "Planeten darstellen als"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Zeige die scheinbare, abgesenkte Horizontlinie"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Treibername:"

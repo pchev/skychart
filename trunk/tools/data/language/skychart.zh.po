@@ -1404,6 +1404,10 @@ msgstr "畫行星為"
 msgid "Draw the apparent depressed horizon line"
 msgstr "畫降低視地平線"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "驅動程式名稱"

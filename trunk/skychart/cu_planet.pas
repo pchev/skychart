@@ -85,6 +85,7 @@ type
      Function SatSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Function UraSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
+     Function JupGRS(lon,drift,jdref,jdnow: double):double;
      Procedure Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double);
      Procedure MoonIncl(Lar,Lde,Sar,Sde : double; var incl : double);
      Function MoonMag(phase:double):double;
@@ -641,6 +642,11 @@ P:=rad2deg*(arcsin(sqrt(x*x+y*y)*cos(ra-w)/cos(llat)));
 llat:=rad2deg*(llat);
 end;
 
+Function TPlanet.JupGRS(lon,drift,jdref,jdnow: double):double;
+begin
+result:=rmod(360000+lon+(jdnow-jdref)*drift,360);
+end;
+
 Procedure TPlanet.SatRing(jde : double; var P,a,b,be : double);
 var T,i,om,l0,b0,r0,l1,b1,r1,x,y,z,del,lam,bet,sinB,eps,ceps,seps,lam0,bet0,al,de,al0,de0,j : double;
     pl :TPlanData;
@@ -1085,7 +1091,7 @@ if result and (currentplanet<10) then begin
           +'CMIII:'+formatfloat(d2,w3)+tab;
      jd0:=jd(yy,mm,dd,0-cfgsc.TimeZone+cfgsc.DT_UT);
      PlanetOrientation(jd0,CurrentPlanet,p,pde,pds,w1,w2,w3);
-     w1:=(cfgsc.GRSlongitude-w2)*24/870.27003539;
+     w1:=(JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJD)-w2)*24/870.27003539;
      shh:='';
      if w1>0 then shh:=ARmtoStr(w1);
      repeat
@@ -1093,6 +1099,7 @@ if result and (currentplanet<10) then begin
         if (w1>0)and(w1<24) then shh:=shh+blank+ARmtoStr(w1);
      until w1>24;
      Desc:=Desc+'GRStr:'+shh+tab;
+     Desc:=Desc+'GRSLon:'+FormatFloat(f1,JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJD))+tab;
   end else begin
      Desc:=Desc+'CM:'+formatfloat(d2,w1)+tab
   end;

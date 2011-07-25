@@ -1402,6 +1402,10 @@ msgstr "Toon planeet als"
 msgid "Draw the apparent depressed horizon line"
 msgstr "Beeld de verlaagde horizon af"
 
+#: u_translation.rsdrift
+msgid "Yearly drift"
+msgstr ""
+
 #: u_translation.rsdrivername
 msgid "Driver name"
 msgstr "Driver naam"
