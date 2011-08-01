@@ -4246,8 +4246,8 @@ catalog.cfgshr.StarMagFilter[9]:=5;
 catalog.cfgshr.StarMagFilter[10]:=4;
 catalog.cfgshr.NebMagFilter[0]:=99;
 catalog.cfgshr.NebMagFilter[1]:=99;
-catalog.cfgshr.NebMagFilter[2]:=25;
-catalog.cfgshr.NebMagFilter[3]:=20;
+catalog.cfgshr.NebMagFilter[2]:=99;
+catalog.cfgshr.NebMagFilter[3]:=99;
 catalog.cfgshr.NebMagFilter[4]:=20;
 catalog.cfgshr.NebMagFilter[5]:=13;
 catalog.cfgshr.NebMagFilter[6]:=11;
@@ -4708,7 +4708,7 @@ try
 with inif do begin
 section:='main';
 try
-Config_Version:=ReadString(section,'version','0');
+Config_Version:=ReadString(section,'version',cdcver);
 SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 {$ifdef linux}
@@ -4915,16 +4915,6 @@ end;
 
 procedure Tf_main.UpdateConfig;
 begin
-if Config_Version < '3.0.0.7' then begin
-   def_cfgplot.color[22]:=DFcolor[22];
-   catalog.cfgshr.BigNebLimit:=211;
-   catalog.cfgshr.NebMagFilter[4]:=99;
-   SaveDefault;
-end;
-if Config_Version < '3.0.0.8' then begin
-   cfgm.dbpass:=cryptedpwd;
-   SaveDefault;
-end;
 if Config_Version < '3.0.1.3d' then begin
   f_getdss.cfgdss.DSSurl[1,0]:=URL_DSS_NAME1;
   f_getdss.cfgdss.DSSurl[1,1]:=URL_DSS1;
@@ -4965,6 +4955,11 @@ if Config_Version < '3.3i' then begin
   def_cfgsc.GRSlongitude:=168.0;
   def_cfgsc.GRSjd:=jd(2011,7,15,0);
   def_cfgsc.GRSdrift:=15.2/365.25;
+  // incoherent object filter
+  catalog.cfgshr.NebMagFilter[0]:=99;
+  catalog.cfgshr.NebMagFilter[1]:=99;
+  catalog.cfgshr.NebMagFilter[2]:=99;
+  catalog.cfgshr.NebMagFilter[3]:=99;
 end;
 end;
 
