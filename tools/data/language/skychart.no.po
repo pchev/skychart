@@ -2,7 +2,7 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-05-30 17:34+0100\n"
+"PO-Revision-Date: 2011-07-06 21:49+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.no\n"
 "POT-Creation-Date: \n"
@@ -1504,7 +1504,7 @@ msgstr ""
 
 #: u_translation.rsencoders
 msgid "Encoders"
-msgstr ""
+msgstr "Encodere"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1748,7 +1748,7 @@ msgstr "Okular"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr ""
+msgstr "Okular"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -2462,7 +2462,7 @@ msgstr "Last fil"
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
-msgstr ""
+msgstr "Last fra fil"
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -3824,7 +3824,7 @@ msgstr "Tilbakestill kart"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr "Tilbakestill kart og alternativer"
+msgstr "Tilbakestill kart og innstillinger"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
@@ -4316,7 +4316,7 @@ msgstr ""
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr ""
+msgstr "Beveg til markørposisjon"
 
 #: u_translation.rsslow
 msgid "Slow"
@@ -4760,7 +4760,7 @@ msgstr ""
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
-msgstr ""
+msgstr "Følg teleskop"
 
 #: u_translation.rstransformati
 msgid "Transformation"
