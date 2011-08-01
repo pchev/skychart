@@ -4010,11 +4010,9 @@ def_cfgsc.MovedLabelLine:=true;
 def_cfgsc.ConstLatinLabel:=false;
 def_cfgsc.PlanetParalaxe:=true;
 def_cfgsc.ShowEarthShadow:=false;
-// update Jupiter GRS default values
 def_cfgsc.GRSlongitude:=168.0;
 def_cfgsc.GRSjd:=jd(2011,7,15,0);
 def_cfgsc.GRSdrift:=15.2/365.25;
-//
 def_cfgsc.LabelOrientation:=1;
 def_cfgsc.FindOk:=false;
 def_cfgsc.nummodlabels:=0;
@@ -4961,6 +4959,12 @@ end;
 if Config_Version < '3.1a' then begin
    if cfgm.PrinterResolution<300 then
       cfgm.PrinterResolution:=300;
+end;
+if Config_Version < '3.3i' then begin
+  // update Jupiter GRS default values
+  def_cfgsc.GRSlongitude:=168.0;
+  def_cfgsc.GRSjd:=jd(2011,7,15,0);
+  def_cfgsc.GRSdrift:=15.2/365.25;
 end;
 end;
 

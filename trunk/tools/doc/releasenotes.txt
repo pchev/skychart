@@ -1,5 +1,8 @@
 Version 3.3svn release Notes
 
+- Take account for Jupiter GRS drift.
+- New "Target" function in right click menu.
+- Save and load "Finder circle" from the right click menu.
 - Remove old telescope plugins, you may have to set your telescope again.
 - New INDI telescope control panel.
 - New integrated LX200 and Encoder driver replace the plugin. Work on all platform.
