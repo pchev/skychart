@@ -1,5 +1,8 @@
 Version 3.3svn  Notes de la version
 
+- Prise en compte de la dérive la la Tache Rouge de Jupiter.
+- Nouvelle fonction "Cible" dans le menu clic droit.
+- Enregistre les "Cercle du chercheur" dans un fichier depuis le menu clic droit.
 - Suppression des anciens pilotes de télescope, vous devrez reconfigurer votre télescope.
 - Nouveau panneau de contrôle pour les télescope Indi.
 - Un nouveau pilote intégré pour LX200 et Encodeur remplace le plugin. Il marche sur toutes les platformes.
