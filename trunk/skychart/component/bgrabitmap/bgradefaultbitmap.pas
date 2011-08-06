@@ -2471,7 +2471,7 @@ begin
     begin
       ty := -ty;
       y := y2;
-      y2 := y+tx;
+      y2 := y+ty;
     end;
     FillRectAntialias(x,y,x2,ceil(y)+0.5,c);
     FillRectAntialias(x,ceil(y)+0.5,ceil(x)+0.5,floor(y2)-0.5,c);
