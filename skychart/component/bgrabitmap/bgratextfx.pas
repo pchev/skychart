@@ -19,6 +19,8 @@ type
     FTextMask: TBGRABitmap;
     FShadowRadius: integer;
     FOutlineMask, FShadowMask : TBGRABitmap;
+    FWidth,FHeight: integer;
+    FOffset: TPoint;
     procedure DrawMaskMulticolored(ADest: TBGRABitmap; AMask: TBGRABitmap; X,Y: Integer; const AColors: array of TBGRAPixel);
     procedure DrawMask(ADest: TBGRABitmap; AMask: TBGRABitmap; X,Y: Integer; AColor: TBGRAPixel);
     procedure DrawMask(ADest: TBGRABitmap; AMask: TBGRABitmap; X,Y: Integer; ATexture: IBGRAScanner);
@@ -81,12 +83,12 @@ end;
 
 function TBGRATextEffect.GetHeight: integer;
 begin
-  result := FTextMask.Height;
+  result := FHeight;
 end;
 
 function TBGRATextEffect.GetWidth: integer;
 begin
-  result := FTextMask.Width;
+  result := FWidth;
 end;
 
 procedure TBGRATextEffect.DrawMaskMulticolored(ADest: TBGRABitmap;
@@ -172,27 +174,49 @@ var temp: TBGRABitmap;
     p: PBGRAPixel;
     n: integer;
     alpha: byte;
+    sizeX: integer;
 begin
   size := BGRAOriginalTextSize(Font,Antialiasing,AText);
   if (size.cx = 0) or (size.cy = 0) then
+  begin
+    size := BGRATextSize(Font,Antialiasing,'Hg');
+    FWidth := 0;
+    FHeight := size.cy;
+    FOffset := Point(0,0);
     exit;
+  end;
 
-  temp := TBGRABitmap.Create(size.cx, size.cy,clBlack);
+  sizeX := size.cx+size.cy;
+  if Antialiasing then
+  begin
+    sizeX := (sizeX + FontAntialiasingLevel-1);
+    sizeX -= sizeX mod FontAntialiasingLevel;
+  end;
+  FOffset := Point(-size.cy div 2,0); //include overhang
+
+  temp := TBGRABitmap.Create(sizeX, size.cy,clBlack);
   temp.Canvas.Font := Font;
   if Antialiasing then temp.Canvas.Font.Height := Font.Height*FontAntialiasingLevel
    else temp.Canvas.Font.Height := Font.Height;
   temp.Canvas.Font.Color := clWhite;
   temp.Canvas.Brush.Style := bsClear;
-  temp.Canvas.TextOut(0, 0, AText);
+  temp.Canvas.TextOut(-FOffset.X, -FOffset.Y, AText);
 
   if Antialiasing then
   begin
+    FWidth := round(size.cx/FontAntialiasingLevel);
+    FHeight := round(size.cy/FontAntialiasingLevel);
+    FOffset := Point(round(FOffset.X/FontAntialiasingLevel),round(FOffset.Y/FontAntialiasingLevel));
+
     FTextMask := temp.Resample(round(temp.width/FontAntialiasingLevel),round(temp.Height/FontAntialiasingLevel),rmSimpleStretch) as TBGRABitmap;
     BGRAReplace(FTextMask,FTextMask.FilterNormalize(False));
     temp.Free;
   end
   else
   begin
+    FWidth := size.cx;
+    FHeight := size.cy;
+
     FTextMask := temp;
     p := FTextMask.data;
     for n := FTextMask.NbPixels-1 downto 0 do
@@ -208,6 +232,7 @@ end;
 procedure TBGRATextEffect.ApplySphere;
 var sphere: TBGRABitmap;
 begin
+  if FTextMask = nil then exit;
   FreeAndNil(FOutlineMask);
   FreeAndNil(FShadowMask);
   FShadowRadius := 0;
@@ -219,6 +244,7 @@ end;
 
 procedure TBGRATextEffect.ApplyVerticalCylinder;
 begin
+  if FTextMask = nil then exit;
   FreeAndNil(FOutlineMask);
   FreeAndNil(FShadowMask);
   FShadowRadius := 0;
@@ -227,6 +253,7 @@ end;
 
 procedure TBGRATextEffect.ApplyHorizontalCylinder;
 begin
+  if FTextMask = nil then exit;
   FreeAndNil(FOutlineMask);
   FreeAndNil(FShadowMask);
   FShadowRadius := 0;
@@ -238,41 +265,46 @@ end;
 procedure TBGRATextEffect.Draw(ADest: TBGRABitmap; X, Y: integer;
   AColor: TBGRAPixel);
 begin
-  DrawMask(ADest,FTextMask,X,Y,AColor);
+  if FTextMask = nil then exit;
+  DrawMask(ADest,FTextMask,X+FOffset.X,Y+FOffset.Y,AColor);
 end;
 
 procedure TBGRATextEffect.Draw(ADest: TBGRABitmap; X, Y: integer;
   ATexture: IBGRAScanner);
 begin
-  DrawMask(ADest,FTextMask,X,Y,ATexture);
+  if FTextMask = nil then exit;
+  DrawMask(ADest,FTextMask,X+FOffset.X,Y+FOffset.Y,ATexture);
 end;
 
 procedure TBGRATextEffect.DrawMulticolored(ADest: TBGRABitmap; X, Y: integer;
   const AColors: array of TBGRAPixel);
 begin
-  DrawMaskMulticolored(ADest,FTextMask,X,Y,AColors);
+  if FTextMask = nil then exit;
+  DrawMaskMulticolored(ADest,FTextMask,X+FOffset.X,Y+FOffset.Y,AColors);
 end;
 
 procedure TBGRATextEffect.DrawOutline(ADest: TBGRABitmap; X, Y: integer;
   AColor: TBGRAPixel);
 begin
+  if FTextMask = nil then exit;
   if FOutlineMask = nil then
   begin
     FOutlineMask := FTextMask.FilterContour as TBGRABitmap;
     FOutlineMask.LinearNegative;
   end;
-  DrawMask(ADest,FOutlineMask,X,Y,AColor);
+  DrawMask(ADest,FOutlineMask,X+FOffset.X,Y+FOffset.Y,AColor);
 end;
 
 procedure TBGRATextEffect.DrawOutline(ADest: TBGRABitmap; X, Y: integer;
   ATexture: IBGRAScanner);
 begin
+  if FTextMask = nil then exit;
   if FOutlineMask = nil then
   begin
     FOutlineMask := FTextMask.FilterContour as TBGRABitmap;
     FOutlineMask.LinearNegative;
   end;
-  DrawMask(ADest,FOutlineMask,X,Y,ATexture);
+  DrawMask(ADest,FOutlineMask,X+FOffset.X,Y+FOffset.Y,ATexture);
 end;
 
 procedure TBGRATextEffect.DrawShadow(ADest: TBGRABitmap; X, Y,Radius: integer;
@@ -283,6 +315,7 @@ begin
     Draw(ADest,X,Y,AColor);
     exit;
   end;
+  if FTextMask = nil then exit;
   if FShadowRadius <> Radius then
   begin
     FShadowRadius := Radius;
@@ -291,7 +324,7 @@ begin
     FShadowMask.PutImage(Radius,Radius,FTextMask,dmSet);
     BGRAReplace(FShadowMask, FShadowMask.FilterBlurRadial(Radius,rbFast));
   end;
-  DrawMask(ADest,FShadowMask,X,Y,AColor)
+  DrawMask(ADest,FShadowMask,X-Radius+FOffset.X,Y-Radius+FOffset.Y,AColor)
 end;
 
 destructor TBGRATextEffect.Destroy;

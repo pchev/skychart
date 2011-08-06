@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="4">
     <PathDelim Value="\"/>
     <Name Value="bgrabitmappack"/>
+    <AddToProjectUsesSection Value="True"/>
     <Author Value="Circular"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="10"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\$(FPCVer)"/>
       </SearchPaths>
       <Parsing>
         <SyntaxOptions>
@@ -28,12 +29,15 @@
         </Debugging>
       </Linking>
       <Other>
+        <CompilerMessages>
+          <UseMsgFile Value="True"/>
+        </CompilerMessages>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="4" Minor="6" Release="1"/>
+    <Version Major="4" Minor="7"/>
     <Files Count="32">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
@@ -161,7 +165,7 @@
       </Item31>
       <Item32>
         <Filename Value="bgratextfx.pas"/>
-        <UnitName Value="bgratextfx"/>
+        <UnitName Value="BGRATextFX"/>
       </Item32>
     </Files>
     <Type Value="RunAndDesignTime"/>
