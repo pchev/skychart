@@ -406,7 +406,7 @@ const cdcversion = 'Version 3.3 svn';
       DefaultVarObs='varobs';
       DefaultCdC='skychart';
       Defaultffmpeg='ffmpeg';
-      DefaultSerialPort='/dev/ttyS0';   { TODO : default serial port for Mac }
+      DefaultSerialPort='/dev/tty.serial1';
 {$endif}
 {$ifdef mswindows}
       DefaultFontName='Arial';
