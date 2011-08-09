@@ -217,7 +217,7 @@ ok:=false;
 if trim(edit1.text)='' then exit;
 try
 T:=Unassigned;
-T := CreateOleObject(edit1.text);
+T := CreateOleObject(widestring(edit1.text));
 T.connected:=true;
 if T.connected then begin
    Initialized:=true;
@@ -557,9 +557,13 @@ begin
 {$ifdef mswindows}
 try
   initialized:=false;
-  V := CreateOleObject('DriverHelper.Chooser');
-  V.devicetype:='Telescope';
-  edit1.text:=V.Choose(edit1.text);
+  try
+    V := CreateOleObject('ASCOM.Utilities.Chooser');
+  except
+    V := CreateOleObject('DriverHelper.Chooser');
+  end;
+  V.DeviceType:=widestring('Telescope');
+  edit1.text:=V.Choose(widestring(edit1.text));
   V:=Unassigned;
   SaveConfig;
   UpdTrackingButton;
@@ -579,7 +583,7 @@ begin
 try
 if (edit1.text>'') and (not Scopeconnected) then begin
 if VarIsEmpty(T) then begin
-   T := CreateOleObject(edit1.text);
+   T := CreateOleObject(widestring(edit1.text));
    T.SetupDialog;
    T:=Unassigned;
 end else begin
@@ -672,7 +676,7 @@ try
    if (edit1.text>'') then begin
       try
          if VarIsEmpty(T) then begin
-            T := CreateOleObject(edit1.text);
+            T := CreateOleObject(widestring(edit1.text));
             buf:=T.Description;
             buf:=buf+crlf+T.DriverInfo;
             T:=Unassigned;
