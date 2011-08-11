@@ -7,9 +7,9 @@ unit HtmlComp;
 interface
 
 uses
-  HtmlCompReg, URLSubs, DitherUnit, FramBrwz, FramView, GDIPL2A,
-  HtmlGif1, HTMLGif2, HtmlMisc, Htmlsbs1, Htmlsubs, HTMLUn2, Htmlview, 
-  Readhtml, StylePars, StyleUn, LazarusPackageIntf;
+  HtmlCompReg, URLSubs, DitherUnit, FramBrwz, FramView, GDIPL2A, HtmlGif1, 
+  HTMLGif2, HtmlMisc, Htmlsbs1, Htmlsubs, htmlun2, htmlview, Readhtml, 
+  StylePars, StyleUn, LazarusPackageIntf;
 
 implementation
 

@@ -28,16 +28,17 @@ URLCON.PAS are covered by separate copyright notices located in those modules.
 
 {$i htmlcons.inc}
 
-unit HTMLUn2;
+unit htmlun2;
 
 interface
+
 uses
   SysUtils, Classes,
   {$IFNDEF LCL}
    Windows, Messages,
   {$ELSE}
    LclIntf, LMessages, Types, LclType, LResources, IntfGraphics, HtmlMisc,
-  {$ENDIF} 
+  {$ENDIF}
   Graphics, Controls, Forms, Dialogs, StdCtrls, ExtCtrls, Clipbrd,
   StyleUn, GDIPL2A; 
 
@@ -485,7 +486,7 @@ function GetImageWidth(Image: TGpObject): integer;
 implementation
 
 uses
-   {$IFNDEF LCL} jpeg, {$ENDIF} DitherUnit,
+  {$IFNDEF LCL} jpeg, {$ENDIF} DitherUnit,
   {$ifndef NoOldPng}
      PngImage1,   
   {$endif}

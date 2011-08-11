@@ -28,7 +28,7 @@ URLCON.PAS are covered by separate copyright notices located in those modules.
 
 {$i htmlcons.inc}
 
-unit Htmlview;
+unit htmlview;
 
 interface
 
@@ -43,7 +43,7 @@ uses
   {$IFNDEF LCL}
    vwPrint, MetafilePrinter, mmSystem,
   {$ENDIF}
-  HTMLUn2, Forms, Dialogs, ExtCtrls, ReadHTML, HTMLSubs, StyleUn, Printers, Menus,
+  htmlun2, Forms, Dialogs, ExtCtrls, ReadHTML, HTMLSubs, StyleUn, Printers, Menus,
   GDIPL2A;
 
 const

@@ -5,7 +5,7 @@
     <AddToProjectUsesSection Value="False"/>
     <Author Value="L. David Baldwin's HTML Components for Delphi; ported to Lazarus by Phil Hess"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="10"/>
       <SearchPaths>
         <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
@@ -21,13 +21,15 @@
       </Parsing>
       <Other>
         <WriteFPCLogo Value="False"/>
+        <CompilerMessages>
+          <UseMsgFile Value="True"/>
+        </CompilerMessages>
         <CustomOptions Value="-dDebugIt"/>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
     <Description Value="HTML Components for Lazarus"/>
     <License Value="MPL 1.1"/>
-    <Version Release="4"/>
     <Files Count="17">
       <Item1>
         <Filename Value="htmlcompreg.pas"/>
@@ -109,7 +111,7 @@
       </Item2>
     </RequiredPkgs>
     <UsageOptions>
-      <UnitPath Value="$(PkgOutDir)/"/>
+      <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>
     <PublishOptions>
       <Version Value="2"/>

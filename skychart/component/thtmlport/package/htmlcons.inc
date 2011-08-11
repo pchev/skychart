@@ -119,6 +119,7 @@
 {$ENDIF}        
 
 {$IFDEF MSWINDOWS}
+{$IFDEF LCL}{$Define NoGDIPlus}{$ENDIF}
 {.$Define NoGDIPlus} {The gdiplus.dll provides Alpha transparency support for
         PNG images.  If, for some reason the use of the gdiplus.dll is
         undesirable, define "NoGDIPlus" by removing the '.'.  Defining both
