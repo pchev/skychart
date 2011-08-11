@@ -32,11 +32,10 @@
     </RunParams>
     <RequiredPackages Count="19">
       <Item1>
-        <PackageName Value="bgrabitmappack"/>
+        <PackageName Value="HtmlComp"/>
       </Item1>
       <Item2>
-        <PackageName Value="HtmlComp"/>
-        <MinVersion Release="4" Valid="True"/>
+        <PackageName Value="bgrabitmappack"/>
       </Item2>
       <Item3>
         <PackageName Value="uniqueinstance_package"/>

@@ -16,7 +16,7 @@ uses
   Graphics;
 
 var
-  GDIPlusActive: boolean;
+  GDIPlusActive: boolean = False;
 
 type
   TGpImage = class(TObject)
