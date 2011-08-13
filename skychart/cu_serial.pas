@@ -110,8 +110,10 @@ Procedure PurgeBuffer(var ser:TBlockSerial);
 var count : integer;
     buf : string;
 begin
-if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Purge Buffer');
-ser.Purge;
+if com_opened then begin
+  if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Purge Buffer');
+  ser.Purge;
+end;
 end;
 
 Function ReadCom(var ser:TBlockSerial; var buf : string; var count : integer) : boolean;
@@ -119,34 +121,40 @@ var n : integer;
     tm:TDateTime;
 begin
 buf:='';
-tm:=now+(Tot_timout/1000/3600/24);
-repeat
-  n := ser.RecvByte(Int_timout);
-  if (ser.LastError=0) then
-      buf:=buf+char(n)
-  else
-      break;
-  Application.ProcessMessages;
-until (length(buf)>=count)or(now>tm)or(not com_opened);
-count:=length(buf);
-result:=(ser.LastError=0)or(ser.LastError=ErrTimeout);
-if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Read  : '+inttostr(count)+' *'+buf+'*');
+if com_opened then begin
+  tm:=now+(Tot_timout/1000/3600/24);
+  repeat
+    n := ser.RecvByte(Int_timout);
+    if (ser.LastError=0) then
+        buf:=buf+char(n)
+    else
+        break;
+    Application.ProcessMessages;
+  until (length(buf)>=count)or(now>tm)or(not com_opened);
+  count:=length(buf);
+  result:=(ser.LastError=0)or(ser.LastError=ErrTimeout);
+  if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Read  : '+inttostr(count)+' *'+buf+'*');
+end;
 end;
 
 Function WriteCom(var ser:TBlockSerial; var buf : string; var count : integer) : boolean;
 begin
-ser.SendString(buf);
-result:=(ser.LastError=0);
-if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Write : '+inttostr(count)+' *'+buf+'*');
+if com_opened then begin
+  ser.SendString(buf);
+  result:=(ser.LastError=0);
+  if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Write : '+inttostr(count)+' *'+buf+'*');
+end;
 end;
 
 Procedure CloseCom(var ser:TBlockSerial);
 begin
-com_opened:=false;
-try
-ser.Free;
-if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Close');
-except
+if com_opened then begin
+  com_opened:=false;
+  try
+  if ser<>Nil then ser.Free;
+  if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Close');
+  except
+  end;
 end;
 end;
 

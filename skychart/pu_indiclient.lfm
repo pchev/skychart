@@ -93,23 +93,23 @@ object pop_indi: Tpop_indi
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 18
+      Height = 15
       Top = 20
-      Width = 21
+      Width = 19
       Caption = 'RA '
       ParentColor = False
     end
     object LabelDelta: TLabel
       Left = 126
-      Height = 18
+      Height = 15
       Top = 20
-      Width = 28
+      Width = 27
       Caption = 'DEC'
       ParentColor = False
     end
     object pos_x: TEdit
       Left = 30
-      Height = 25
+      Height = 22
       Top = 16
       Width = 86
       ReadOnly = True
@@ -118,7 +118,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 25
+      Height = 22
       Top = 16
       Width = 86
       ReadOnly = True
@@ -132,12 +132,12 @@ object pop_indi: Tpop_indi
     Top = 8
     Width = 257
     Caption = 'Current driver'
-    ClientHeight = 62
+    ClientHeight = 65
     ClientWidth = 253
     TabOrder = 2
     object Edit1: TEdit
       Left = 8
-      Height = 25
+      Height = 22
       Top = 24
       Width = 153
       Color = clBtnFace

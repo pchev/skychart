@@ -1027,15 +1027,17 @@ end;
 procedure Tpop_encoder.init90Click(Sender: TObject);
 var msg:string;
 begin
-{be sure we have the current steps}
-if not timer1.enabled then
-   if not Encoder_query(curstep_x,curstep_y,msg) then begin
-      AffMsg(msg);
-      Encoder_Error;
-      exit;
-   end;
-Init90Y := curstep_y;
-init90.Font.Color:=clGreen;
+if led1.color=clLime then begin
+  {be sure we have the current steps}
+  if not timer1.enabled then
+     if not Encoder_query(curstep_x,curstep_y,msg) then begin
+        AffMsg(msg);
+        Encoder_Error;
+        exit;
+     end;
+  Init90Y := curstep_y;
+  init90.Font.Color:=clGreen;
+end;
 end;
 
 procedure Tpop_encoder.InitTypeClick(Sender: TObject);

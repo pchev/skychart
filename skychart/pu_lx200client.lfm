@@ -1,7 +1,7 @@
 object pop_lx200: Tpop_lx200
-  Left = 473
+  Left = 231
   Height = 521
-  Top = 75
+  Top = 139
   Width = 374
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -32,8 +32,8 @@ object pop_lx200: Tpop_lx200
     Options = [nboMultiLine]
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       object SpeedButton8: TSpeedButton
         Left = 206
         Height = 25
@@ -126,9 +126,9 @@ object pop_lx200: Tpop_lx200
         end
         object ShowAltAz: TCheckBox
           Left = 6
-          Height = 23
+          Height = 26
           Top = 30
-          Width = 25
+          Width = 28
           TabOrder = 4
         end
       end
@@ -346,18 +346,18 @@ object pop_lx200: Tpop_lx200
           TabOrder = 1
           object CheckBox3: TCheckBox
             Left = 6
-            Height = 23
+            Height = 26
             Top = 2
-            Width = 71
+            Width = 74
             Caption = 'N <-> S'
             OnClick = CheckBox3Click
             TabOrder = 0
           end
           object CheckBox4: TCheckBox
             Left = 6
-            Height = 23
+            Height = 26
             Top = 30
-            Width = 71
+            Width = 74
             Caption = 'E <-> W'
             OnClick = CheckBox4Click
             TabOrder = 1
@@ -442,8 +442,8 @@ object pop_lx200: Tpop_lx200
     end
     object MotorTab: TTabSheet
       Caption = 'Motor'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 6
       object Lx200GPSMotorSpeeds: TGroupBox
         Left = 16
@@ -803,8 +803,8 @@ object pop_lx200: Tpop_lx200
     end
     object Focus: TTabSheet
       Caption = 'Focus'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 3
       object Bevel1: TBevel
         Left = 24
@@ -1004,8 +1004,8 @@ object pop_lx200: Tpop_lx200
     end
     object VirtHP: TTabSheet
       Caption = 'VirtHP'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 4
       TabVisible = False
       object VHPTitleLabel: TLabel
@@ -1114,8 +1114,8 @@ object pop_lx200: Tpop_lx200
     end
     object Adv: TTabSheet
       Caption = 'Scope Adv'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 5
       TabVisible = False
       object ADVTitleLabel: TLabel
@@ -1275,8 +1275,8 @@ object pop_lx200: Tpop_lx200
     end
     object PEC: TTabSheet
       Caption = 'PEC'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 7
       TabVisible = False
       object RAPEC: TGroupBox
@@ -1338,8 +1338,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet2: TTabSheet
       Caption = 'Configuration'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 1
       object SaveButton1: TButton
         Left = 230
@@ -1587,8 +1587,8 @@ object pop_lx200: Tpop_lx200
     end
     object TabSheet3: TTabSheet
       Caption = 'Comm Settings'
-      ClientHeight = 493
-      ClientWidth = 370
+      ClientHeight = 485
+      ClientWidth = 366
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8

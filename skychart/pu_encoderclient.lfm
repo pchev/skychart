@@ -1,7 +1,7 @@
 object pop_encoder: Tpop_encoder
-  Left = 908
+  Left = 180
   Height = 489
-  Top = 83
+  Top = 132
   Width = 352
   BorderStyle = bsToolWindow
   Caption = 'Digital encoders'
@@ -28,8 +28,8 @@ object pop_encoder: Tpop_encoder
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 443
-      ClientWidth = 348
+      ClientHeight = 435
+      ClientWidth = 344
       object Panel1: TPanel
         Left = 8
         Height = 61
@@ -253,9 +253,9 @@ object pop_encoder: Tpop_encoder
         end
         object CheckBox2: TCheckBox
           Left = 6
-          Height = 23
+          Height = 26
           Top = 11
-          Width = 103
+          Width = 106
           Caption = 'Device Status'
           TabOrder = 0
         end
@@ -287,8 +287,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet2: TTabSheet
       Caption = 'Encoder Configuration'
-      ClientHeight = 443
-      ClientWidth = 348
+      ClientHeight = 435
+      ClientWidth = 344
       ImageIndex = 1
       object GroupBox2: TGroupBox
         Left = 8
@@ -341,7 +341,7 @@ object pop_encoder: Tpop_encoder
         end
         object cbo_type: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 6
           Width = 113
           ItemHeight = 0
@@ -385,7 +385,7 @@ object pop_encoder: Tpop_encoder
         end
         object ReadIntBox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 87
           Width = 113
           ItemHeight = 0
@@ -579,18 +579,18 @@ object pop_encoder: Tpop_encoder
       end
       object CheckBox3: TCheckBox
         Left = 10
-        Height = 23
+        Height = 26
         Top = 356
-        Width = 194
+        Width = 197
         Caption = 'Record protocol to a trace file'
         OnClick = CheckBox3Click
         TabOrder = 6
       end
       object CheckBox4: TCheckBox
         Left = 10
-        Height = 23
+        Height = 26
         Top = 376
-        Width = 137
+        Width = 140
         Caption = 'Form always visible'
         OnClick = CheckBox4Click
         TabOrder = 7
@@ -598,8 +598,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet3: TTabSheet
       Caption = 'Port Configuration'
-      ClientHeight = 443
-      ClientWidth = 348
+      ClientHeight = 435
+      ClientWidth = 344
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
