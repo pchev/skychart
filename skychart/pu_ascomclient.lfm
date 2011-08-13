@@ -90,7 +90,7 @@ object pop_scope: Tpop_scope
     ClientWidth = 284
     TabOrder = 1
     object Label15: TLabel
-      Left = -2
+      Left = 0
       Height = 15
       Top = 20
       Width = 54
@@ -106,10 +106,10 @@ object pop_scope: Tpop_scope
       ParentColor = False
     end
     object SpeedButton8: TSpeedButton
-      Left = 163
+      Left = 142
       Height = 22
       Top = 51
-      Width = 105
+      Width = 126
       Caption = 'Set Time'
       Enabled = False
       NumGlyphs = 0
@@ -119,7 +119,7 @@ object pop_scope: Tpop_scope
       Left = -2
       Height = 22
       Top = 51
-      Width = 105
+      Width = 129
       Caption = 'Set Location'
       Enabled = False
       NumGlyphs = 0
@@ -240,9 +240,9 @@ object pop_scope: Tpop_scope
     end
     object ShowAltAz: TCheckBox
       Left = 8
-      Height = 23
+      Height = 26
       Top = 32
-      Width = 25
+      Width = 28
       TabOrder = 4
     end
     object TrackingBtn: TSpeedButton
@@ -276,10 +276,10 @@ object pop_scope: Tpop_scope
     ClientWidth = 284
     TabOrder = 3
     object SpeedButton3: TSpeedButton
-      Left = 190
+      Left = 182
       Height = 22
       Top = 7
-      Width = 79
+      Width = 87
       Caption = 'Select'
       NumGlyphs = 0
       OnClick = SpeedButton3Click
@@ -293,19 +293,19 @@ object pop_scope: Tpop_scope
       ParentColor = False
     end
     object SpeedButton7: TSpeedButton
-      Left = 190
+      Left = 182
       Height = 22
       Top = 32
-      Width = 79
+      Width = 87
       Caption = 'Configure'
       NumGlyphs = 0
       OnClick = SpeedButton7Click
     end
     object SpeedButton11: TSpeedButton
-      Left = 190
+      Left = 182
       Height = 22
       Top = 56
-      Width = 79
+      Width = 87
       Caption = 'About'
       NumGlyphs = 0
       OnClick = SpeedButton11Click
@@ -322,7 +322,7 @@ object pop_scope: Tpop_scope
     end
     object ReadIntBox: TComboBox
       Left = 101
-      Height = 23
+      Height = 22
       Top = 52
       Width = 73
       ItemHeight = 0
