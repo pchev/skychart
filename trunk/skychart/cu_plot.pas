@@ -2546,28 +2546,14 @@ begin
       cbmp.FillPolyAntialias(elpf, ColorToBGRA(nebcolor));
   end else begin
       cnv.Pen.Width := cfgchart.drawpen;
-      cnv.Brush.style:=bsSolid;
       cnv.Pen.Mode:=pmCopy;
       cnv.Pen.Color:=nebcolor;
-
-      if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillGxy then // line mode
-        begin
-          cnv.Brush.style:=bsClear;
-          if cfgplot.DSOColorFillGxy and not cfgchart.onprinter then
-            begin
-              cnv.Brush.Style := bsSolid;
-              cnv.Pen.Color := nebcolor;
-              cnv.Brush.Color := cnv.Pen.Color;
-            end;
-        end;
-
-      if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGxy then // graphics mode
-        begin
-          cnv.Brush.Color := nebcolor;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Style := bsSolid;
-        end;
-
+      if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillGxy)or(cfgchart.onprinter) then begin// line mode
+         cnv.Brush.style:=bsClear;
+      end else begin
+         cnv.Brush.style:=bsSolid;
+         cnv.Brush.Color := nebcolor;
+      end;
       th:=0;
       for n:=1 to 44 do
         begin
@@ -2634,34 +2620,20 @@ end else begin
     begin
       cnv.Pen.Color := nebcolor;
       cnv.Brush.Color := nebcolor;
-    end;
-
-  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillOCl then // line mode
-// line mode
+    end
+  else
     begin
       ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillOCl and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
+      if cfgchart.onprinter and (ds<(10)) then
+        cnv.Pen.Style := psSolid
       else
-        begin
-          if cfgchart.onprinter and (ds<(10)) then
-            cnv.Pen.Style := psSolid
-          else
-            cnv.Pen.Style := psDash;
-          //{$ifdef mswindows}cnv.Pen.width:=1;{$endif}
-          cnv.Brush.Style := bsClear;
-        end;
+        cnv.Pen.Style := psDash;
+      cnv.Brush.Style := bsClear;
     end;
-
 { and draw it... we're using an ellipse, in future we may adjust this for non-circular clusters
   use the symbol set from Display>Options
 }
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -2716,44 +2688,21 @@ end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillPNe then // graphic mode
-    begin
-//    in graphic mode, the obect is ALWAYS shown as filled.
-      cnv.Pen.Color := nebcolor;
-      cnv.Brush.Color := nebcolor;
-    end;
-
-  if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillPNe then // line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillPNe and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Brush.Style := bsClear;
-          cnv.Pen.Style := psSolid;
-        end;
-    end;
-
+  if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillPNe)or(cfgchart.onprinter) then begin // line mode
+    cnv.Brush.Style := bsClear;
+  end else begin
+    cnv.Brush.Style := bsSolid;
+    cnv.Brush.Color := nebcolor;
+  end;
 // and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
-
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
   cnv.MoveTo((xx-round(ds*1.3)),yy);
   cnv.LineTo((xx+round(ds*1.3)),yy);
-
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
 end;
 end;
-
-
 
 Procedure TSplot.PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
 {
@@ -2787,7 +2736,7 @@ begin
       nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
-  if cfgplot.usebmp then begin
+if cfgplot.usebmp then begin
     if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillGCl then begin// line mode
       cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen);
       cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(nebcolor));
@@ -2798,52 +2747,32 @@ begin
       nebcolor := Addcolor(nebcolor,$00202020);
       cbmp.FillEllipseAntialias(Ax,Ay,ds2,ds2,ColorToBGRA(nebcolor));
     end;
-
 end else begin
-
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGCl then // graphic mode
-    begin
-//    in graphic mode, the obect is ALWAYS shown as filled.
-      cnv.Pen.Color := nebcolor;
-      cnv.Brush.Color := cnv.Pen.Color;
-//    draw outer limit
-      cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-      cnv.Brush.Color := Addcolor(cnv.Brush.Color,$00202020);
-      cnv.Pen.Color :=cnv.Brush.Color;
-      ds2:=ds div 3; // a third looks more realistic
-//    draw core
-      cnv.Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
-    end;
-
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillGCl then // line mode
-    begin
-      ds2:=round(ds*2/3);
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillGCl and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Brush.Style := bsClear;
-          cnv.Pen.Style := psSolid;
-        end;
+  if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillGCl)or(cfgchart.onprinter) then begin// line mode
+    cnv.Brush.Style := bsClear;
+    ds2:=round(ds*2/3);
+    ds:=ds+cfgchart.drawpen;
 //    and draw it... we're using an circle,
-      cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-      cnv.MoveTo(xx-ds,yy);
-      cnv.LineTo(xx+ds,yy);
-      cnv.MoveTo(xx,yy-ds);
-      cnv.LineTo(xx,yy+ds);
-    end;
-
+    cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+    cnv.MoveTo(xx-ds,yy);
+    cnv.LineTo(xx+ds,yy);
+    cnv.MoveTo(xx,yy-ds);
+    cnv.LineTo(xx,yy+ds);
+  end else begin
+    cnv.Brush.Style := bsSolid;
+    cnv.Brush.Color := nebcolor;
+    //    draw outer limit
+    cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+    cnv.Brush.Color := Addcolor(cnv.Brush.Color,$00202020);
+    cnv.Pen.Color :=cnv.Brush.Color;
+    ds2:=ds div 3; // a third looks more realistic
+    //    draw core
+    cnv.Ellipse(xx-ds2,yy-ds2,xx+ds2,yy+ds2);
+  end;
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -2908,45 +2837,14 @@ end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsClear;
-
-  if (cfgplot.nebplot=1) and fill then // graphic mode
-    begin
-//    in graphic mode, the obect is ALWAYS shown as filled.
-      cnv.Brush.Style := bsSolid;
-      cnv.Brush.Color := nebcolor;
-      cnv.Pen.Color := cnv.Brush.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
-  if (cfgplot.nebplot=0) or not fill then // line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      cnv.Brush.Style := bsClear;
-      cnv.Pen.Style := psSolid;
-
-//emission nebula?
-  if ObjMorph = 'E' then
-      if cfgplot.DSOColorFillEN and not cfgchart.onprinter
-        then
-          begin
-            cnv.Brush.Style := bsSolid;
-            cnv.Brush.Color := cnv.Pen.Color;
-          end;
-
-//reflection nebula?
-  if ObjMorph = 'R' then
-      if cfgplot.DSOColorFillRN and not cfgchart.onprinter
-        then
-          begin
-            cnv.Brush.Style := bsSolid;
-            cnv.Brush.Color := cnv.Pen.Color;
-          end;
-
+  if (cfgplot.nebplot=0)or(not fill)or(cfgchart.onprinter) then begin// line mode
+     cnv.Brush.Style := bsClear;
+  end else begin
+     cnv.Brush.Style := bsSolid;
+     cnv.Brush.Color := nebcolor;
+  end;
 //    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
+  cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -2999,40 +2897,20 @@ end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillRN then // graphic mode
-    begin
-//    in graphic mode, the obect is ALWAYS shown as filled.
-      cnv.Pen.Color := nebcolor;
-      cnv.Brush.Color := cnv.Pen.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillRN then // line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillRN and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.Color[29];
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Brush.Style := bsClear;
-          cnv.Pen.Style := psSolid;
-        end;
-//    and draw it... we're using an rectangle in the event that we don't have an outline
-//    Ideally all extended nebulae should have an outline.
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-      cnv.MoveTo(xx-ds,yy);
-      cnv.Pen.Color := cfgplot.Color[24];
-      cnv.LineTo(xx+ds,yy);
-      cnv.MoveTo(xx,yy-ds);
-      cnv.LineTo(xx,yy+ds);
-    end;
-
+  if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillRN)or(cfgchart.onprinter) then begin// line mode
+    cnv.Brush.Style := bsClear;
+    ds:=ds+cfgchart.drawpen;
+    cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
+    cnv.MoveTo(xx-ds,yy);
+    cnv.Pen.Color := cfgplot.Color[24];
+    cnv.LineTo(xx+ds,yy);
+    cnv.MoveTo(xx,yy-ds);
+    cnv.LineTo(xx,yy+ds);
+  end else begin
+    cnv.Brush.Style := bsSolid;
+    cnv.Brush.Color := nebcolor;
+    cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
+end;
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -3057,22 +2935,22 @@ begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
   end else begin
-  cnv.Pen.Width := cfgchart.drawpen;
-  cnv.Pen.Mode:=pmCopy;
-  cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Width := cfgchart.drawpen;
+    cnv.Pen.Mode:=pmCopy;
+    cnv.Pen.Style := psSolid;
+    cnv.Pen.Color := cfgplot.Color[24];
 
-// Plotted as an '+', so there's no difference between line and graphics mode
-// we use the same colour as for open clusters
+  // Plotted as an '+', so there's no difference between line and graphics mode
+  // we use the same colour as for open clusters
 
-  cnv.MoveTo(xx-ds,yy);
-  cnv.LineTo(xx+ds,yy);
-  cnv.MoveTo(xx,yy-ds);
-  cnv.LineTo(xx,yy+ds);
+    cnv.MoveTo(xx-ds,yy);
+    cnv.LineTo(xx+ds,yy);
+    cnv.MoveTo(xx,yy-ds);
+    cnv.LineTo(xx,yy+ds);
 
-// reset brush and pen back to default ready for next object
-  cnv.Brush.Style := bsClear;
-  cnv.Pen.Style := psSolid;
+  // reset brush and pen back to default ready for next object
+    cnv.Brush.Style := bsClear;
+    cnv.Pen.Style := psSolid;
 end;
 end;
 
@@ -3097,22 +2975,22 @@ begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
   end else begin
-  cnv.Pen.Width := cfgchart.drawpen;
-  cnv.Pen.Mode:=pmCopy;
-  cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Width := cfgchart.drawpen;
+    cnv.Pen.Mode:=pmCopy;
+    cnv.Pen.Style := psSolid;
+    cnv.Pen.Color := cfgplot.Color[24];
 
-// Plotted as a '+', so there's no difference between line and graphics mode
-// we use the same colour as for open clusters
+  // Plotted as a '+', so there's no difference between line and graphics mode
+  // we use the same colour as for open clusters
 
-  cnv.MoveTo(xx-ds,yy);
-  cnv.LineTo(xx+ds,yy);
-  cnv.MoveTo(xx,yy-ds);
-  cnv.LineTo(xx,yy+ds);
+    cnv.MoveTo(xx-ds,yy);
+    cnv.LineTo(xx+ds,yy);
+    cnv.MoveTo(xx,yy-ds);
+    cnv.LineTo(xx,yy+ds);
 
-// reset brush and pen back to default ready for next object
-  cnv.Brush.Style := bsClear;
-  cnv.Pen.Style := psSolid;
+  // reset brush and pen back to default ready for next object
+    cnv.Brush.Style := bsClear;
+    cnv.Pen.Style := psSolid;
 end;
 end;
 
@@ -3134,22 +3012,22 @@ begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
   end else begin
-  cnv.Pen.Width := cfgchart.drawpen;
-  cnv.Pen.Mode:=pmCopy;
-  cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Width := cfgchart.drawpen;
+    cnv.Pen.Mode:=pmCopy;
+    cnv.Pen.Style := psSolid;
+    cnv.Pen.Color := cfgplot.Color[24];
 
-// Plotted as a '+', so there's no difference between line and graphics mode
-// we use the same colour as for open clusters
+  // Plotted as a '+', so there's no difference between line and graphics mode
+  // we use the same colour as for open clusters
 
-  cnv.MoveTo(xx-ds,yy);
-  cnv.LineTo(xx+ds,yy);
-  cnv.MoveTo(xx,yy-ds);
-  cnv.LineTo(xx,yy+ds);
+    cnv.MoveTo(xx-ds,yy);
+    cnv.LineTo(xx+ds,yy);
+    cnv.MoveTo(xx,yy-ds);
+    cnv.LineTo(xx,yy+ds);
 
-// reset brush and pen back to default ready for next object
-  cnv.Brush.Style := bsClear;
-  cnv.Pen.Style := psSolid;
+  // reset brush and pen back to default ready for next object
+    cnv.Brush.Style := bsClear;
+    cnv.Pen.Style := psSolid;
 end;
 end;
 
@@ -3169,7 +3047,7 @@ begin
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
   nebcolor:=cfgplot.Color[23];                           // Fix color
-  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillOCl then // SBR color
+  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillAst then // SBR color
     begin
       if Asbr<=0 then
         begin
@@ -3187,45 +3065,27 @@ begin
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.usebmp then begin
-    if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillOCl then // line mode
-      cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen)
-    else
+    if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillAst then begin// line mode
+      cbmp.PenStyle:=psDash;
+      cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen);
+      cbmp.PenStyle:=psSolid;
+    end else
       cbmp.FillEllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor));
 end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillAst then // graphic mode
-    begin
-      cnv.Pen.Color := nebcolor;
-      cnv.Brush.Color := cnv.Pen.Color;
-    end;
-
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillAst then // line mode
-// line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillAst and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Pen.Style := psDashDot;
-          //{$ifdef mswindows}cnv.Pen.width:=1;{$endif}
-          cnv.Brush.Style := bsClear;
-        end;
-//      cnv.MoveTo(xx-ds,yy);
-    end;
-
+  if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillAst)or(cfgchart.onprinter)  then begin// line mode
+    cnv.Brush.Style := bsClear;
+    cnv.Pen.Style := psDashDot;
+    //{$ifdef mswindows}cnv.Pen.width:=1;{$endif}
+  end else begin
+    cnv.Brush.Style := bsSolid;
+    cnv.Brush.Color := nebcolor;
+  end;
 // and draw it... we're using an ellipse, in future we may adjust this for non-circular asterisms
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -3236,6 +3096,7 @@ Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Doubl
 {
   Plot HII regions. SAC has these catalogued as 'knots'. We plot them as if they
   are emission nebulae (bright nebulae)
+  // cannot found one in SAC 8.2 now ??
 }
 var
   sz: Double;
@@ -3269,8 +3130,6 @@ begin
 if cfgplot.UseBMP then begin
   if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillEN then begin// line mode
     cbmp.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr,ColorToBGRA(nebcolor),BGRAPixelTransparent);
-    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(nebcolor));
-    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(nebcolor));
   end else begin
     cbmp.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr,ColorToBGRA(nebcolor),ColorToBGRA(nebcolor));
   end;
@@ -3279,51 +3138,13 @@ end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := cfgplot.Color[28];
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // graphic mode
-    begin
-      if Asbr<=0 then
-        begin
-          if Adim<=+0 then
-            Adim:=1;
-          Asbr:= Ama + 5*log10(Adim) - 0.26;
-        end;
-//    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[28] and $FF;
-      g:=(cfgplot.Color[28] shr 8) and $FF;
-      b:=(cfgplot.Color[28] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
-//    in graphic mode, the obect is ALWAYS shown as filled.
-      cnv.Pen.Color := Addcolor(nebcolor,cfgplot.backgroundcolor);
-      cnv.Brush.Color := cnv.Pen.Color;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillEN then // line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillEN and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := cfgplot.Color[28];
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Brush.Style := bsClear;
-          cnv.Pen.Style := psSolid;
-        end;
-//    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-      cnv.MoveTo(xx-ds,yy);
-      cnv.LineTo(xx+ds,yy);
-      cnv.MoveTo(xx,yy-ds);
-      cnv.LineTo(xx,yy+ds);
-    end;
-
-// reset brush and pen back to default ready for next object
+  if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillEN)or(cfgchart.onprinter) then begin// line mode
+    cnv.Brush.Style := bsClear;
+  end else begin
+    cnv.Brush.Style := bsSolid;
+  end;
+  cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
+ // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
 end;
@@ -3352,13 +3173,11 @@ begin
   {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
   cnv.Pen.Color := cfgplot.Color[32];
   cnv.Brush.Style := bsClear;
-
 { Plotted as an open dashed circle, so there's no difference between line and
   graphics mode
 }
   ds:=ds+cfgchart.drawpen;
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -3399,40 +3218,15 @@ begin
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
   if cfgplot.UseBMP then begin
-     cbmp.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr,ColorToBGRA(nebcolor),BGRAPixelTransparent);
+     // never fill dark nebulae
+     cbmp.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr,ColorToBGRA(nebcolor),BGRAPixelTransparent)
   end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
   cnv.Pen.Color := nebcolor;
-  cnv.Brush.Style := bsSolid;
-
-  if (cfgplot.nebplot=1) and cfgplot.DSOColorFillDN then // graphic mode
-    begin
-//    do not fill the dark nebulae in graphic mode.
-      cnv.Brush.Style := bsClear;
-      cnv.Pen.Color := nebcolor;
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
-  if (cfgplot.nebplot=0) or not cfgplot.DSOColorFillDN then // line mode
-    begin
-      ds:=ds+cfgchart.drawpen;
-      if cfgplot.DSOColorFillDN and not cfgchart.onprinter then
-        begin
-          cnv.Brush.Style := bsSolid;
-          cnv.Pen.Color := nebcolor;
-          cnv.Brush.Color := cnv.Pen.Color;
-        end
-      else
-        begin
-          cnv.Brush.Style := bsClear;
-          cnv.Pen.Style := psSolid;
-        end;
-//    and draw it... we're using an rectangle in the event that we don't have an outline
-      cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
-    end;
-
+  cnv.Brush.Style := bsClear;
+  cnv.RoundRect(xx-ds,yy-ds,xx+ds,yy+ds,dsr,dsr);
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
@@ -3610,7 +3404,7 @@ end;
 procedure TSplot.BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
 begin
 abmp.PenStyle:=ps;
-if cfgplot.AntiAlias or(w>1)or(ps<>psSolid) then
+if cfgplot.AntiAlias then
   abmp.DrawLineAntialias(x1,y1,x2,y2,c,w,false)
 else
   abmp.DrawLine(round(x1),round(y1),round(x2),round(y2),c,true);

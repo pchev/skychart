@@ -51,6 +51,8 @@ type
     CheckBox2: TCheckBox;
     antialias: TCheckBox;
     LabelLine: TCheckBox;
+    FillPanel1: TPanel;
+    FillPanel2: TPanel;
     ShowTitle: TCheckBox;
     Edit1: TEdit;
     Edit10: TEdit;
@@ -376,6 +378,7 @@ type
     procedure GridStyleChange(Sender: TObject);
     procedure LabelLineClick(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
+    procedure Page3Show(Sender: TObject);
     procedure ShowTitleClick(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
     procedure StarButton6Click(Sender: TObject);
@@ -2113,6 +2116,17 @@ i:=lstDSOCScheme.ItemIndex;
           cplot.Color[33]:=shpQ.Brush.Color;
           cplot.Color[34]:=shpGL.Brush.Color;
           cplot.Color[35]:=shpNE.Brush.Color;
+end;
+
+procedure Tf_config_display.Page3Show(Sender: TObject);
+begin
+    if cplot.nebplot=0 then begin
+      FillPanel1.Visible:=false;
+      FillPanel2.Visible:=false;
+    end else begin
+      FillPanel1.Visible:=true;
+      FillPanel2.Visible:=true;
+    end;
 end;
 
 end.
