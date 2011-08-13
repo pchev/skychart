@@ -1268,8 +1268,7 @@ end;
 procedure Tpop_lx200.SpeedButton8Click(Sender: TObject);
 var ok : boolean;
 begin
-if not ScopeConnected then ScopeConnect(ok);
-  if ScopeConnected then
+ if ScopeConnected then begin
      CoordLock := true;
      try
      if not LX200_SetTimeDate then
@@ -1277,16 +1276,19 @@ if not ScopeConnected then ScopeConnect(ok);
      finally
      CoordLock := false;
      end;
+  end;
 end;
 
 procedure Tpop_lx200.SpeedButton9Click(Sender: TObject);
 var ok : boolean;
 begin
-if MessageDlg(rsREALLYParkAn, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+ if ScopeConnected then begin
+ if MessageDlg(rsREALLYParkAn, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
    if LX200_ParkScope then begin
       ScopeDisconnect(ok);
       ShowMessage(rsParkingAndDi);
    end;
+ end;
 end;
 
 

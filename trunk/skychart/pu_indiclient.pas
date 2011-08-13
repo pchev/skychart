@@ -364,7 +364,7 @@ end;
 
 procedure Tpop_indi.SpeedButton6Click(Sender: TObject);
 begin
-ScopeAbortSlew;
+if ScopeConnected then ScopeAbortSlew;
 end;
 
 procedure Tpop_indi.FormDestroy(Sender: TObject);
