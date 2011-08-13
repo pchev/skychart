@@ -477,6 +477,7 @@ repeat
   end;
   inc(i);
 until i>length(txt);
+if colc<6 then colc:=6;
 // setup table
 StringGrid2.Clear;
 StringGrid2.ColCount:=colc;

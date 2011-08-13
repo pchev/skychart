@@ -603,10 +603,10 @@ case cattype of
     case catversion of
     rtstar : begin  // Star 1
         if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
-        if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end;
-        if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end;
-        if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end;
-        if catheader.flen[7]>0 then begin lin.star.magr:=GetRecSmallint(7)/1000; if lin.star.magr>32 then lin.star.magr:=99;end;
+        if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99;end else lin.star.magv:=99;;
+        if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end else lin.star.b_v:=99.9;
+        if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99;end else lin.star.magb:=99;
+        if catheader.flen[7]>0 then begin lin.star.magr:=GetRecSmallint(7)/1000; if lin.star.magr>32 then lin.star.magr:=99;end else lin.star.magr:=99;
         if catheader.flen[8]>0 then lin.star.sp:=GetRecString(8);
         if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
         if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
