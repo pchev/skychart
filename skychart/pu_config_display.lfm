@@ -29,15 +29,15 @@ object f_config_display: Tf_config_display
       Height = 530
       Top = 1
       Width = 513
-      ActivePage = Page1
+      ActivePage = Page3
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Panel4: TPanel
           Left = 8
           Height = 242
@@ -304,9 +304,9 @@ object f_config_display: Tf_config_display
         end
         object red_moveBox: TCheckBox
           Left = 28
-          Height = 23
+          Height = 26
           Top = 429
-          Width = 227
+          Width = 230
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           TabOrder = 2
@@ -354,9 +354,9 @@ object f_config_display: Tf_config_display
         end
         object antialias: TCheckBox
           Left = 28
-          Height = 23
+          Height = 26
           Top = 458
-          Width = 80
+          Width = 83
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           TabOrder = 6
@@ -364,8 +364,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TTabSheet
         Caption = 'Colour'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Label181: TLabel
           Left = 86
           Height = 15
@@ -882,8 +882,9 @@ object f_config_display: Tf_config_display
       end
       object Page3: TTabSheet
         Caption = 'Deep-sky colour'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
+        OnShow = Page3Show
         object lblDSOCScheme: TLabel
           Left = 13
           Height = 15
@@ -901,8 +902,160 @@ object f_config_display: Tf_config_display
           ClientHeight = 193
           ClientWidth = 505
           TabOrder = 0
+          object FillPanel2: TPanel
+            Left = 420
+            Height = 162
+            Top = 10
+            Width = 66
+            BevelOuter = bvNone
+            ClientHeight = 162
+            ClientWidth = 66
+            TabOrder = 1
+            object chkFillNE: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 128
+              Width = 28
+              Enabled = False
+              OnClick = chkFillNEClick
+              TabOrder = 0
+              Visible = False
+            end
+            object chkFillGL: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 105
+              Width = 28
+              Enabled = False
+              OnClick = chkFillGLClick
+              TabOrder = 1
+              Visible = False
+            end
+            object chkFillQ: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 85
+              Width = 28
+              OnClick = chkFillQClick
+              TabOrder = 2
+            end
+            object chkFillGxyCl: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 65
+              Width = 28
+              OnClick = chkFillGxyClClick
+              TabOrder = 3
+              Visible = False
+            end
+            object chkFillGxy: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 45
+              Width = 28
+              OnClick = chkFillGxyClick
+              TabOrder = 4
+            end
+            object chkFillSN: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 25
+              Width = 28
+              OnClick = chkFillSNClick
+              TabOrder = 5
+            end
+            object lblDSOColourFill: TLabel
+              Left = 2
+              Height = 14
+              Top = 8
+              Width = 65
+              AutoSize = False
+              Caption = 'Fill?'
+              Color = clBtnFace
+              ParentColor = False
+              Transparent = False
+            end
+          end
+          object FillPanel1: TPanel
+            Left = 170
+            Height = 179
+            Top = 10
+            Width = 64
+            BevelOuter = bvNone
+            ClientHeight = 179
+            ClientWidth = 64
+            TabOrder = 0
+            object chkFillRN: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 148
+              Width = 28
+              OnClick = chkFillRNClick
+              TabOrder = 0
+            end
+            object chkFillEN: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 125
+              Width = 28
+              OnClick = chkFillENClick
+              TabOrder = 1
+            end
+            object chkFillDN: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 105
+              Width = 28
+              OnClick = chkFillDNClick
+              TabOrder = 2
+              Visible = False
+            end
+            object chkFillPNe: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 85
+              Width = 28
+              OnClick = chkFillPNeClick
+              TabOrder = 3
+            end
+            object chkFillGCl: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 65
+              Width = 28
+              OnClick = chkFillGClClick
+              TabOrder = 4
+            end
+            object chkFillOCl: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 45
+              Width = 28
+              OnClick = chkFillOClClick
+              TabOrder = 5
+            end
+            object chkFillAst: TCheckBox
+              Left = 2
+              Height = 26
+              Top = 25
+              Width = 28
+              OnClick = chkFillAstClick
+              TabOrder = 6
+            end
+            object Label13: TLabel
+              Left = 2
+              Height = 14
+              Top = 8
+              Width = 58
+              AutoSize = False
+              Caption = 'Fill?'
+              Color = clBtnFace
+              ParentColor = False
+              Transparent = False
+            end
+          end
           object lblAst: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 44
             Width = 123
@@ -911,7 +1064,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object shpAst: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 44
             Width = 33
@@ -934,7 +1087,7 @@ object f_config_display: Tf_config_display
             OnMouseUp = ShapeDSOMouseUp
           end
           object lblOCl: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 64
             Width = 123
@@ -943,7 +1096,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object lblGCl: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 84
             Width = 123
@@ -952,7 +1105,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object lblPNe: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 104
             Width = 123
@@ -961,7 +1114,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object lblDN: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 124
             Width = 123
@@ -970,7 +1123,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object lblEN: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 144
             Width = 123
@@ -979,7 +1132,7 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object lblRN: TLabel
-            Left = 16
+            Left = 4
             Height = 14
             Top = 164
             Width = 123
@@ -988,42 +1141,42 @@ object f_config_display: Tf_config_display
             ParentColor = False
           end
           object shpRN: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 164
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpEN: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 144
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpDN: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 124
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpPNe: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 104
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpGCl: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 84
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
           object shpOCl: TShape
-            Left = 139
+            Left = 127
             Height = 13
             Top = 64
             Width = 33
@@ -1110,21 +1263,10 @@ object f_config_display: Tf_config_display
             Width = 33
             OnMouseUp = ShapeDSOMouseUp
           end
-          object lblDSOType: TLabel
-            Left = 240
-            Height = 14
-            Top = 24
-            Width = 120
-            AutoSize = False
-            Caption = 'Object type'
-            Color = clBtnFace
-            ParentColor = False
-            Transparent = False
-          end
           object lblDSOColour: TLabel
             Left = 374
             Height = 14
-            Top = 24
+            Top = 18
             Width = 55
             AutoSize = False
             Caption = 'Colour'
@@ -1132,21 +1274,10 @@ object f_config_display: Tf_config_display
             ParentColor = False
             Transparent = False
           end
-          object lblDSOColourFill: TLabel
-            Left = 430
-            Height = 14
-            Top = 24
-            Width = 65
-            AutoSize = False
-            Caption = 'Fill?'
-            Color = clBtnFace
-            ParentColor = False
-            Transparent = False
-          end
           object Label7: TLabel
-            Left = 16
+            Left = 4
             Height = 14
-            Top = 24
+            Top = 18
             Width = 115
             AutoSize = False
             Caption = 'Object type'
@@ -1155,9 +1286,9 @@ object f_config_display: Tf_config_display
             Transparent = False
           end
           object Label12: TLabel
-            Left = 139
+            Left = 124
             Height = 14
-            Top = 24
+            Top = 18
             Width = 55
             AutoSize = False
             Caption = 'Colour'
@@ -1165,124 +1296,16 @@ object f_config_display: Tf_config_display
             ParentColor = False
             Transparent = False
           end
-          object Label13: TLabel
-            Left = 195
+          object lblDSOType: TLabel
+            Left = 240
             Height = 14
-            Top = 24
-            Width = 42
+            Top = 18
+            Width = 120
             AutoSize = False
-            Caption = 'Fill?'
+            Caption = 'Object type'
             Color = clBtnFace
             ParentColor = False
             Transparent = False
-          end
-          object chkFillAst: TCheckBox
-            Left = 194
-            Height = 23
-            Top = 41
-            Width = 25
-            OnClick = chkFillAstClick
-            TabOrder = 0
-          end
-          object chkFillOCl: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 61
-            Width = 25
-            OnClick = chkFillOClClick
-            TabOrder = 1
-          end
-          object chkFillGCl: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 81
-            Width = 25
-            OnClick = chkFillGClClick
-            TabOrder = 2
-          end
-          object chkFillPNe: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 101
-            Width = 25
-            OnClick = chkFillPNeClick
-            TabOrder = 3
-          end
-          object chkFillDN: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 121
-            Width = 25
-            OnClick = chkFillDNClick
-            TabOrder = 4
-          end
-          object chkFillEN: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 141
-            Width = 25
-            OnClick = chkFillENClick
-            TabOrder = 5
-          end
-          object chkFillRN: TCheckBox
-            Left = 195
-            Height = 23
-            Top = 161
-            Width = 25
-            OnClick = chkFillRNClick
-            TabOrder = 6
-          end
-          object chkFillSN: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 41
-            Width = 25
-            OnClick = chkFillSNClick
-            TabOrder = 7
-          end
-          object chkFillGxy: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 61
-            Width = 25
-            OnClick = chkFillGxyClick
-            TabOrder = 8
-          end
-          object chkFillGxyCl: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 81
-            Width = 25
-            OnClick = chkFillGxyClClick
-            TabOrder = 9
-          end
-          object chkFillQ: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 101
-            Width = 25
-            OnClick = chkFillQClick
-            TabOrder = 10
-          end
-          object chkFillGL: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 121
-            Width = 25
-            Enabled = False
-            OnClick = chkFillGLClick
-            TabOrder = 11
-            Visible = False
-          end
-          object chkFillNE: TCheckBox
-            Left = 430
-            Height = 23
-            Top = 141
-            Width = 25
-            Enabled = False
-            OnClick = chkFillNEClick
-            TabOrder = 12
-            Visible = False
           end
         end
         object GroupBox2: TGroupBox
@@ -1329,7 +1352,7 @@ object f_config_display: Tf_config_display
           end
           object NebBrightBar: TTrackBar
             Left = 232
-            Height = 36
+            Height = 45
             Top = 35
             Width = 217
             Frequency = 26
@@ -1341,7 +1364,7 @@ object f_config_display: Tf_config_display
           end
           object NebGrayBar: TTrackBar
             Left = 8
-            Height = 36
+            Height = 45
             Top = 35
             Width = 209
             Frequency = 26
@@ -1387,7 +1410,7 @@ object f_config_display: Tf_config_display
         end
         object lstDSOCScheme: TComboBox
           Left = 253
-          Height = 25
+          Height = 26
           Top = 21
           Width = 168
           ItemHeight = 0
@@ -1404,8 +1427,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TTabSheet
         Caption = 'Sky colour'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Panel2: TPanel
           Left = 24
           Height = 147
@@ -1582,8 +1605,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TTabSheet
         Caption = 'Lines'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object EqGrid: TCheckBox
           Left = 16
           Height = 23
@@ -1916,8 +1939,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TTabSheet
         Caption = 'Labels'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object MagLabel: TRadioGroup
           Left = 16
           Height = 81
@@ -2503,8 +2526,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TTabSheet
         Caption = 'Fonts'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -3032,8 +3055,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TTabSheet
         Caption = 'Finder circle'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Label307: TLabel
           Left = 80
           Height = 15
@@ -3179,8 +3202,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TTabSheet
         Caption = 'Finder rectangle'
-        ClientHeight = 526
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 505
         object Label308: TLabel
           Left = 80
           Height = 15
