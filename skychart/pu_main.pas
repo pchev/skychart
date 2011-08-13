@@ -482,6 +482,8 @@ type
     procedure ToolButtonConfigClick(Sender: TObject);
     procedure ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonListObjMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
@@ -2881,6 +2883,12 @@ procedure Tf_main.ToolButtonDSSMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupPicturesPage(2);
+end;
+
+procedure Tf_main.ToolButtonListObjMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupChartPage(5);
 end;
 
 procedure Tf_main.SetupTimePage(page:integer);
