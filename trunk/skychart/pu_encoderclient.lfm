@@ -47,7 +47,7 @@ object pop_encoder: Tpop_encoder
           ParentColor = False
         end
         object LabelDelta: TLabel
-          Left = 158
+          Left = 152
           Height = 15
           Top = 6
           Width = 24
@@ -63,7 +63,7 @@ object pop_encoder: Tpop_encoder
           ParentColor = False
         end
         object Label12: TLabel
-          Left = 158
+          Left = 152
           Height = 15
           Top = 34
           Width = 43
@@ -112,10 +112,10 @@ object pop_encoder: Tpop_encoder
         ClientWidth = 306
         TabOrder = 1
         object SpeedButton4: TSpeedButton
-          Left = 222
+          Left = 204
           Height = 22
           Top = 0
-          Width = 65
+          Width = 83
           Caption = 'Clear'
           NumGlyphs = 0
           OnClick = SpeedButton4Click
@@ -129,10 +129,10 @@ object pop_encoder: Tpop_encoder
           ParentColor = False
         end
         object status: TSpeedButton
-          Left = 150
+          Left = 108
           Height = 22
           Top = 0
-          Width = 65
+          Width = 85
           Caption = 'Status'
           NumGlyphs = 0
           OnClick = statusClick
@@ -190,13 +190,13 @@ object pop_encoder: Tpop_encoder
           Left = 95
           Height = 25
           Top = 0
-          Width = 61
+          Width = 69
           Caption = 'Init 90°'
           NumGlyphs = 0
           OnClick = init90Click
         end
         object led1: TEdit
-          Left = 164
+          Left = 170
           Height = 25
           Top = 0
           Width = 17
@@ -260,7 +260,7 @@ object pop_encoder: Tpop_encoder
           TabOrder = 0
         end
         object Edit1: TEdit
-          Left = 125
+          Left = 133
           Height = 22
           Top = 14
           Width = 25
@@ -268,7 +268,7 @@ object pop_encoder: Tpop_encoder
           TabOrder = 1
         end
         object Edit2: TEdit
-          Left = 189
+          Left = 197
           Height = 22
           Top = 14
           Width = 25
@@ -276,7 +276,7 @@ object pop_encoder: Tpop_encoder
           TabOrder = 2
         end
         object Edit3: TEdit
-          Left = 246
+          Left = 260
           Height = 22
           Top = 14
           Width = 25
@@ -403,10 +403,10 @@ object pop_encoder: Tpop_encoder
         end
       end
       object SaveButton1: TButton
-        Left = 214
+        Left = 195
         Height = 25
-        Top = 370
-        Width = 89
+        Top = 400
+        Width = 125
         Caption = 'Save Setting'
         OnClick = SaveButton1Click
         TabOrder = 1
@@ -668,7 +668,7 @@ object pop_encoder: Tpop_encoder
         end
         object PortSpeedbox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 33
           Width = 113
           ItemHeight = 0
@@ -690,7 +690,7 @@ object pop_encoder: Tpop_encoder
         end
         object cbo_port: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 6
           Width = 113
           ItemHeight = 0
@@ -709,7 +709,7 @@ object pop_encoder: Tpop_encoder
         end
         object Paritybox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 87
           Width = 113
           ItemHeight = 0
@@ -723,7 +723,7 @@ object pop_encoder: Tpop_encoder
         end
         object DatabitBox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 60
           Width = 113
           ItemHeight = 0
@@ -739,7 +739,7 @@ object pop_encoder: Tpop_encoder
         end
         object StopbitBox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 114
           Width = 113
           ItemHeight = 0
@@ -752,7 +752,7 @@ object pop_encoder: Tpop_encoder
         end
         object TimeOutBox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 141
           Width = 113
           ItemHeight = 0
@@ -769,7 +769,7 @@ object pop_encoder: Tpop_encoder
         end
         object IntTimeOutBox: TComboBox
           Left = 164
-          Height = 23
+          Height = 22
           Top = 168
           Width = 113
           ItemHeight = 0
@@ -786,10 +786,10 @@ object pop_encoder: Tpop_encoder
         end
       end
       object Button2: TButton
-        Left = 112
+        Left = 100
         Height = 25
         Top = 360
-        Width = 89
+        Width = 121
         Caption = 'Save Setting'
         OnClick = SaveButton1Click
         TabOrder = 1
