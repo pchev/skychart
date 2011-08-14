@@ -311,6 +311,10 @@ data/quicksat/quicksat.exe
 data/quicksat/quicksat.mag
 data/quicksat/sample.tle
 data/sample
+data/sample/d2k.hdr
+data/sample/d2k.info2
+data/sample/d2k.prj
+data/sample/ds2000.cdc3
 data/sample/Cometsample.dat
 data/sample/country.dat
 data/sample/MPCsample.dat

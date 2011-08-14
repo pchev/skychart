@@ -59,6 +59,7 @@ Source: PrivateFiles\*; DestDir: {userappdata}\skychart\; Flags: onlyifdoesntexi
 
 [Registry]
 Root: HKCU; Subkey: Software\Astro_PC\Ciel; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
+Root: HKCU; Subkey: Software\Astro_PC\VarObs; ValueType: string; ValueName: Install_Dir; ValueData: {app}; Flags: uninsdeletekey
 
 [Icons]
 Name: {group}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}
