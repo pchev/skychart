@@ -2129,7 +2129,7 @@ if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outrad
 then begin
 if cfgplot.UseBMP then begin;
    ATextStyle.Opaque:=opaque;
-   cbmp.FontHeight:=trunc(cfgplot.FontSize[fontnum]*cfgchart.fontscale*96/72);
+   cbmp.FontHeight:=trunc(cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
    if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
    if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
    cbmp.FontName:=cfgplot.FontName[fontnum];
