@@ -1147,6 +1147,7 @@ end;
 Procedure Tf_main.InitDS2000;
 var srcdir, dsdir: string;
 begin
+try
 srcdir:=slash(SampleDir);
 dsdir:=slash(PrivateDir)+slash('ds2000');
 if not DirectoryExists(dsdir) then ForceDirectories(dsdir);
@@ -1154,6 +1155,8 @@ if not fileexists(dsdir+'ds2000.cdc3') then CopyFile(srcdir+'ds2000.cdc3', dsdir
 if not fileexists(dsdir+'d2k.hdr') then CopyFile(srcdir+'d2k.hdr', dsdir+'d2k.hdr');
 if not fileexists(dsdir+'d2k.info2') then CopyFile(srcdir+'d2k.info2', dsdir+'d2k.info2');
 if not fileexists(dsdir+'d2k.prj') then CopyFile(srcdir+'d2k.prj', dsdir+'d2k.prj');
+except
+end;
 end;
 
 procedure Tf_main.Init;

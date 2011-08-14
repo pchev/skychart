@@ -25,9 +25,9 @@
     <RunParams>
       <local>
         <FormatVersion Value="1"/>
-        <CommandLineParams Value="--nosplash --loaddef=C:/Program Files/Ciel/data/sample/ds2000.cdc3"/>
+        <CommandLineParams Value="--nosplash"/>
         <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="C:/Program Files/Ciel"/>
+        <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="19">
