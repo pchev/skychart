@@ -1148,9 +1148,9 @@ Procedure Tf_main.InitDS2000;
 var srcdir, dsdir: string;
 begin
 try
-srcdir:=slash(SampleDir);
-dsdir:=slash(PrivateDir)+slash('ds2000');
-if not DirectoryExists(dsdir) then ForceDirectories(dsdir);
+srcdir:=systoutf8(slash(SampleDir));
+dsdir:=systoutf8(slash(PrivateDir)+slash('ds2000'));
+if not DirectoryExistsutf8(dsdir) then ForceDirectoriesutf8(dsdir);
 if not fileexists(dsdir+'ds2000.cdc3') then CopyFile(srcdir+'ds2000.cdc3', dsdir+'ds2000.cdc3');
 if not fileexists(dsdir+'d2k.hdr') then CopyFile(srcdir+'d2k.hdr', dsdir+'d2k.hdr');
 if not fileexists(dsdir+'d2k.info2') then CopyFile(srcdir+'d2k.info2', dsdir+'d2k.info2');
