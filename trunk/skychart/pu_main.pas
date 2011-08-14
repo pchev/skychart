@@ -1018,10 +1018,20 @@ var nam: string;
     p: integer;
     maxi: boolean;
 begin
+{$ifdef trace_debug}
+ WriteTrace('LoadDefaultChart '+fn);
+{$endif}
 if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
  ReadChartConfig(SafeUTF8ToSys(fn),true,true,def_cfgplot,def_cfgsc);
+ Tf_chart(multidoc1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
+ Tf_chart(multidoc1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
+ result:=msgOK;
+end else if FileExists(fn) then begin
+ cfgp.Assign(def_cfgplot);
+ cfgs.Assign(def_cfgsc);
+ ReadChartConfig(fn,true,true,def_cfgplot,def_cfgsc);
  Tf_chart(multidoc1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
  Tf_chart(multidoc1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
  result:=msgOK;
@@ -1032,6 +1042,9 @@ end;
 function Tf_main.SetGCat(path,shortname,active,min,max: string): string;
 var i,j,x,v:integer;
 begin
+{$ifdef trace_debug}
+ WriteTrace('SetGCat '+path+blank+shortname+blank+active+blank+min+blank+max);
+{$endif}
 result:=msgFailed;
 val(min,x,v);
 if v<>0 then exit;
@@ -1039,7 +1052,7 @@ val(max,x,v);
 if v<>0 then exit;
 if not fileexists(slash(path)+shortname+'.hdr') then exit;
 i:=-1;
-for j:=0 to catalog.cfgcat.GCatNum do
+for j:=0 to catalog.cfgcat.GCatNum-1 do
    if catalog.cfgcat.GCatLst[j].shortname=trim(shortname) then i:=j;
 if i<0 then begin
   catalog.cfgcat.GCatNum:=catalog.cfgcat.GCatNum+1;

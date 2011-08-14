@@ -1940,8 +1940,16 @@ begin
          if rec.neb.valid[vnComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vnComment])+dp+rec.neb.comment+tab;
          end;
  end;
- for i:=1 to 10 do begin
-   if rec.vstr[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+ if trim(rec.options.ShortName)='d2k' then begin
+   Desc:=Desc+'desc:'+tab;
+   for i:=1 to 10 do begin
+     if rec.vstr[i] then Desc:=Desc+rec.str[i];
+   end;
+   Desc:=Desc+tab;
+ end else begin
+   for i:=1 to 10 do begin
+     if rec.vstr[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+   end;
  end;
  for i:=1 to 10 do begin
    if rec.vnum[i] then Desc:=Desc+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i])+tab;

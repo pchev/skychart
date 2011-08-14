@@ -2,6 +2,8 @@ unit ds2cdc1;
 
 {$MODE Delphi}
 
+{$define trace_debug}
+
 {
    This software is free of any right.
    It can be used or modified as you want at your sole responsibility.
@@ -12,8 +14,8 @@ unit ds2cdc1;
 }
 interface
 
-uses Sky_DDE_util, cu_tcpclient, ExtCtrls, Registry,
-  Windows, Messages, SysUtils, Classes,  Dialogs;
+uses Sky_DDE_util, cu_tcpclient, ExtCtrls, Registry, fileutil,
+  Windows, Messages, SysUtils, Classes, Forms, Dialogs;
 
 Procedure DrawChart(rah,ram,Decd,decm : Double; FOV,Comport,LX200Delay : smallint;
                     TCaption,DSappname,HGCPath,STychoPath,ScopeType : ansistring; forceBW,MW : Byte) ;stdcall;
@@ -45,6 +47,7 @@ CielInstalled : boolean;
 VarInstalled : boolean;
 param,paramcmd : string;
 vparam : string;
+InitOK: boolean;
 FileIsOpen : boolean;
 VarIsOpen : boolean;
 SkyChartStarting : boolean;
@@ -52,6 +55,7 @@ CielHnd : Thandle;
 DSScmd : string;
 lastcmd : string;
 tcpport : string;
+blank256 : string;
 StartedByDS : Boolean;
 Constructor Create;
 Destructor Destroy;
@@ -88,13 +92,21 @@ end;
 
 const
       constel : array[1..89] of string = ('AND','ANT','APS','AQR','AQL','ARA','ARI','AUR','BOO','CAE','CAM','CNC','CVN','CMA','CMI','CAP','CAR','CAS','CEN','CEP','CET','CHA','CIR','COL','COM','CRA','CRB','CRV','CRT','CRU','CYG','DEL','DOR','DRA','EQU','ERI','FOR','GEM','GRU','HER','HOR','HYA','HYI','IND','LAC','LEO','LMI','LEP','LIB','LUP','LYN','LYR','MEN','MIC','MON','MUS','NOR','OCT','OPH','ORI','PAV','PEG','PER','PHE','PIC','PSC','PSA','PUP','PYX','RET','SGE','SGR','SCO','SCL','SCT','SER','SER','SEX','TAU','TEL','TRI','TRA','TUC','UMA','UMI','VEL','VIR','VOL','VUL');
+      tab : char = chr($9);
+      crlf : array[1..2] of char =(chr($D),chr($A));
+      blank20='                    ';
+      blank=' ';
 
 var ds2c : Tds2cdc;
 
 implementation
 
 constructor Tds2cdc.Create;
+var i: integer;
 begin
+{$ifdef trace_debug}
+writetrace('Enter ds2cdc');
+{$endif}
 inherited Create;
 arc := 0.0;
 dec := 0.0;
@@ -102,6 +114,7 @@ la := 35;
 param :='';
 vparam :='';
 tcpport:='0';
+InitOK:=false;
 FileIsOpen := false;
 VarIsOpen := false;
 SkyChartStarting := false;
@@ -122,10 +135,15 @@ DSSTimer:=TTimer.Create(nil);
 DSSTimer.Enabled:=false;
 DSSTimer.Interval:=1000;
 DSSTimer.OnTimer:=DSSTimerTimer;
+blank256:='';
+for i:=1 to 256 do blank256:=blank256+' ';
 end;
 
 destructor Tds2cdc.Destroy;
 begin
+{$ifdef trace_debug}
+writetrace('Exit ds2cdc');
+{$endif}
   ConnectTimer.Free;
   InitTimer.Free;
   DrawTimer.Free;
@@ -135,7 +153,12 @@ end;
 
 Procedure Tds2cdc.InitSkyChart;
 var Registry1: TRegistry;
+    timeout: TDateTime;
 begin
+{$ifdef trace_debug}
+writetrace('InitSkyChart');
+{$endif}
+InitOK:=false;
 Registry1 := TRegistry.Create;
 with Registry1 do begin
   if Openkey('Software\Astro_PC\Ciel\Status',false) then begin
@@ -154,11 +177,16 @@ end else begin
   StartedByDS:=true;
   ConnectTimer.Enabled:=true;  // wait app start
 end;
+timeout:=now+20/3600/24; // 20 seconds
+while (not initOK)and(now<timeout) do Application.processmessages;
 end;
 
 procedure Tds2cdc.InitTcpIp;
 begin
 if ((client=nil)or not((client.Initializing)or(client.Ready))  ) then begin
+  {$ifdef trace_debug}
+  writetrace('InitTcpIp');
+  {$endif}
   client:=TClientThrd.Create;
   client.TargetHost:='localhost';
   client.TargetPort:=tcpport;
@@ -174,16 +202,23 @@ end;
 
 procedure Tds2cdc.InitTimerTimer(Sender: TObject);
 begin
+{$ifdef trace_debug}
+writetrace('InitTimer '+lastcmd);
+{$endif}
   InitTimer.Enabled:=false;
   if lastcmd='' then lastcmd:='listchart';
   Executecmd(lastcmd);  // first command is expected to timeout
   sleep(100);
   Executecmd(lastcmd);
+  InitOK:=true;
 end;
 
 procedure Tds2cdc.ConnectTimerTimer(Sender: TObject);
 var Registry1: TRegistry;
 begin
+{$ifdef trace_debug}
+writetrace('ConnectTimer');
+{$endif}
 ConnectTimer.Enabled:=false;                            // stop timer to avoid multiple call
 Registry1 := TRegistry.Create;
 with Registry1 do begin
@@ -204,6 +239,9 @@ end;
 function Tds2cdc.Executecmd(cmd: string):string;
 // send command to skychart by tcp/ip
 begin
+{$ifdef trace_debug}
+writetrace('Executecmd '+cmd);
+{$endif}
 lastcmd:=cmd;
 if (skychartok)and(client<>nil){and(client.Ready)}and(not client.Terminated) then begin
    result:=client.Send(cmd);
@@ -295,10 +333,6 @@ end;
 
 Procedure Tds2cdc.FPlotDSO(rah,ram,Decd,decm : Double; DecSign,ObjType : byte; ObjSize : smallint;
                   DSOLabel,DSODesc,DSONotes,ChartImagePath : ansistring; Observed,LastObject : Byte);
-const tab : char = chr($9);
-      crlf : array[1..2] of char =(chr($D),chr($A));
-      blank20='                    ';
-      blank=' ';     
 var
 desc,notes,cmd : string;
 begin
@@ -306,26 +340,26 @@ DrawTimer.enabled:=false;
 if not CielInstalled then exit;
 desc:=DSODesc;
 desc:=stringreplace(desc,':',' ',[rfReplaceAll]);
-desc:=stringreplace(desc,crlf,' d:',[rfReplaceAll]);
+desc:=stringreplace(desc,crlf,tab+'d:',[rfReplaceAll]);
 desc:=stringreplace(desc,'\O','',[rfReplaceAll]);
 desc:=stringreplace(desc,'\D','',[rfReplaceAll]);
 desc:=stringreplace(desc,'\L','',[rfReplaceAll]);
 desc:=stringreplace(desc,'\U','',[rfReplaceAll]);
 notes:=DSONotes;
 notes:=stringreplace(notes,':',' ',[rfReplaceAll]);
-notes:=stringreplace(notes,crlf,' n:',[rfReplaceAll]);
+notes:=stringreplace(notes,crlf,tab+'n:',[rfReplaceAll]);
 if not FileIsOpen then OpenCatalogFile;
 writeln(c,copy(DSOLabel+blank20,1,20),blank,
           copy(floattostrf(rah+ram/60,fffixed,10,6)+blank20,1,20),blank,
           copy(floattostrf(decd+sgn(decd)*decm/60,fffixed,10,6)+blank20,1,20),blank,
           copy(inttostr(objtype)+blank20,1,20),blank,
           copy(inttostr(objsize)+blank20,1,20),blank,
-          copy(desc+blank20+blank20,1,40),blank,
-          copy(notes+blank20+blank20,1,40));
+          copy(desc+blank256,1,255),blank,
+          notes);
 if LastObject=1 then begin
   CloseCatalogFile;
-  cmd:='SETCAT '+workdir+' ds2 1 0 10';
-  paramcmd:='--setcat="'+workdir+' ds2 1 0 10"';
+  cmd:='SETCAT '+workdir+' d2k 1 0 10';
+  paramcmd:='--setcat="'+workdir+' d2k 1 0 10"';
   Executecmd(cmd);
   cmd := 'MOVE RA:'+trim(artostr(arc))+' DEC:'+trim(detostr(dec))+' FOV:'+trim(detostr(la));
   paramcmd :=' --setra='+floattostr(arc)+' --setdec='+floattostr(dec)+' --setfov='+floattostr(la);

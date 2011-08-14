@@ -10,11 +10,14 @@ unit Sky_DDE_Util;
 }
 
 {$mode objfpc}{$H+}
+{$define trace_debug}
 
 interface
 
 uses Windows,SysUtils,Registry,ShellApi, shlobj, shfolder, IniFiles;
 //
+Procedure InitTrace;
+Procedure WriteTrace(msg: string);
 Function GetSkyChartInfo : boolean;
 Procedure GetWorkDir;
 Function StartSkyChart(param : string) : boolean;
@@ -32,9 +35,32 @@ var
     ciellang : string = '';
     privatedir, workdir: string;
     skychartok : boolean;
+    tracefile: string ='C:\appli\ds2cdc_trace.txt';
+
+const
+    dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
 
 implementation
 
+Procedure InitTrace;
+var f: textfile;
+begin
+Filemode:=2;
+assignfile(f,tracefile);
+rewrite(f);
+writeln(f,FormatDateTime(dateiso,Now)+'  Start trace');
+closefile(f);
+end;
+
+Procedure WriteTrace(msg: string);
+var f: textfile;
+begin
+ Filemode:=2;
+ assignfile(f,tracefile);
+ append(f);
+ writeln(f,FormatDateTime(dateiso,Now)+'  '+msg);
+ closefile(f);
+end;
 
 function SkyChartRunning : boolean;
 begin
@@ -77,6 +103,9 @@ Function StartSkyChart(param : string) : boolean;
 begin
 result := cieldir>'';
 if result then begin
+   {$ifdef trace_debug}
+   writetrace('Exec '+cieldir+'\skychart.exe '+param);
+   {$endif}
    Exec(cieldir+'\skychart.exe',param,cieldir);        // execute command
 end;
 end;

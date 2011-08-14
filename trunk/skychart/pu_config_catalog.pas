@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar,
+  pu_catgenadv, pu_progressbar, FileUtil,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn, LazHelpHTML;
@@ -408,7 +408,7 @@ for j:=0 to ccat.GCatnum-1 do begin
   stringgrid3.cells[1,i]:=ccat.GCatLst[j].shortname;
   stringgrid3.cells[2,i]:=formatfloat(f0,ccat.GCatLst[j].min);
   stringgrid3.cells[3,i]:=formatfloat(f0,ccat.GCatLst[j].max);
-  stringgrid3.cells[4,i]:=ccat.GCatLst[j].path;
+  stringgrid3.cells[4,i]:=systoutf8(ccat.GCatLst[j].path);
   if ccat.GCatLst[j].actif then stringgrid3.cells[0,i]:='1'
                            else stringgrid3.cells[0,i]:='0';
 end;
@@ -447,14 +447,14 @@ fpgc2.Value:=ccat.NebCatField[pgc-BaseNeb,2];
 focl2.Value:=ccat.NebCatField[ocl-BaseNeb,2];
 fgcm2.Value:=ccat.NebCatField[gcm-BaseNeb,2];
 fgpn2.Value:=ccat.NebCatField[gpn-BaseNeb,2];
-sac3.Text:=changetext(ccat.NebCatPath[sac-BaseNeb],sac3.Text);
-ngc3.Text:=changetext(ccat.NebCatPath[ngc-BaseNeb],ngc3.Text);
-lbn3.Text:=changetext(ccat.NebCatPath[lbn-BaseNeb],lbn3.Text);
-rc33.Text:=changetext(ccat.NebCatPath[rc3-BaseNeb],rc33.Text);
-pgc3.Text:=changetext(ccat.NebCatPath[pgc-BaseNeb],pgc3.Text);
-ocl3.Text:=changetext(ccat.NebCatPath[ocl-BaseNeb],ocl3.Text);
-gcm3.Text:=changetext(ccat.NebCatPath[gcm-BaseNeb],gcm3.Text);
-gpn3.Text:=changetext(ccat.NebCatPath[gpn-BaseNeb],gpn3.Text);
+sac3.Text:=changetext(systoutf8(ccat.NebCatPath[sac-BaseNeb]),sac3.Text);
+ngc3.Text:=changetext(systoutf8(ccat.NebCatPath[ngc-BaseNeb]),ngc3.Text);
+lbn3.Text:=changetext(systoutf8(ccat.NebCatPath[lbn-BaseNeb]),lbn3.Text);
+rc33.Text:=changetext(systoutf8(ccat.NebCatPath[rc3-BaseNeb]),rc33.Text);
+pgc3.Text:=changetext(systoutf8(ccat.NebCatPath[pgc-BaseNeb]),pgc3.Text);
+ocl3.Text:=changetext(systoutf8(ccat.NebCatPath[ocl-BaseNeb]),ocl3.Text);
+gcm3.Text:=changetext(systoutf8(ccat.NebCatPath[gcm-BaseNeb]),gcm3.Text);
+gpn3.Text:=changetext(systoutf8(ccat.NebCatPath[gpn-BaseNeb]),gpn3.Text);
 def:= sacbox.Checked;
 gen:=ngcbox.Checked;
 spec:=lbnbox.Checked or rc3box.Checked or pgcbox.Checked or oclbox.Checked or gcmbox.Checked or gpnbox.Checked;
@@ -510,21 +510,21 @@ dstyc1.Value:=ccat.StarCatField[dstyc-BaseStar,1];
 dstyc2.Value:=ccat.StarCatField[dstyc-BaseStar,2];
 dsgsc1.Value:=ccat.StarCatField[dsgsc-BaseStar,1];
 dsgsc2.Value:=ccat.StarCatField[dsgsc-BaseStar,2];
-bsc3.Text:=changetext(ccat.StarCatPath[bsc-BaseStar],bsc3.Text);
-sky3.Text:=changetext(ccat.StarCatPath[sky2000-BaseStar],sky3.Text);
-tyc3.Text:=changetext(ccat.StarCatPath[tyc-BaseStar],tyc3.Text);
-ty23.Text:=changetext(ccat.StarCatPath[tyc2-BaseStar],ty23.Text);
-tic3.Text:=changetext(ccat.StarCatPath[tic-BaseStar],tic3.Text);
-gscf3.Text:=changetext(ccat.StarCatPath[gscf-BaseStar],gscf3.Text);
-gscc3.Text:=changetext(ccat.StarCatPath[gscc-BaseStar],gscc3.Text);
-gsc3.Text:=changetext(ccat.StarCatPath[gsc-BaseStar],gsc3.Text);
-usn3.Text:=changetext(ccat.StarCatPath[usnoa-BaseStar],usn3.Text);
-mct3.Text:=changetext(ccat.StarCatPath[microcat-BaseStar],mct3.Text);
-gcv3.Text:=changetext(ccat.VarStarCatPath[gcvs-BaseVar],gcv3.Text);
-wds3.Text:=changetext(ccat.DblStarCatPath[wds-BaseDbl],wds3.Text);
-dsbase3.Text:=changetext(ccat.StarCatPath[dsbase-BaseStar],dsbase3.Text);
-dstyc3.Text:=changetext(ccat.StarCatPath[dstyc-BaseStar],dstyc3.Text);
-dsgsc3.Text:=changetext(ccat.StarCatPath[dsgsc-BaseStar],dsgsc3.Text);
+bsc3.Text:=changetext(systoutf8(ccat.StarCatPath[bsc-BaseStar]),bsc3.Text);
+sky3.Text:=changetext(systoutf8(ccat.StarCatPath[sky2000-BaseStar]),sky3.Text);
+tyc3.Text:=changetext(systoutf8(ccat.StarCatPath[tyc-BaseStar]),tyc3.Text);
+ty23.Text:=changetext(systoutf8(ccat.StarCatPath[tyc2-BaseStar]),ty23.Text);
+tic3.Text:=changetext(systoutf8(ccat.StarCatPath[tic-BaseStar]),tic3.Text);
+gscf3.Text:=changetext(systoutf8(ccat.StarCatPath[gscf-BaseStar]),gscf3.Text);
+gscc3.Text:=changetext(systoutf8(ccat.StarCatPath[gscc-BaseStar]),gscc3.Text);
+gsc3.Text:=changetext(systoutf8(ccat.StarCatPath[gsc-BaseStar]),gsc3.Text);
+usn3.Text:=changetext(systoutf8(ccat.StarCatPath[usnoa-BaseStar]),usn3.Text);
+mct3.Text:=changetext(systoutf8(ccat.StarCatPath[microcat-BaseStar]),mct3.Text);
+gcv3.Text:=changetext(systoutf8(ccat.VarStarCatPath[gcvs-BaseVar]),gcv3.Text);
+wds3.Text:=changetext(systoutf8(ccat.DblStarCatPath[wds-BaseDbl]),wds3.Text);
+dsbase3.Text:=changetext(systoutf8(ccat.StarCatPath[dsbase-BaseStar]),dsbase3.Text);
+dstyc3.Text:=changetext(systoutf8(ccat.StarCatPath[dstyc-BaseStar]),dstyc3.Text);
+dsgsc3.Text:=changetext(systoutf8(ccat.StarCatPath[dsgsc-BaseStar]),dsgsc3.Text);
 end;
 
 procedure Tf_config_catalog.ShowFov;
@@ -619,7 +619,7 @@ case col of
 0 : begin
     if stringgrid3.Cells[col,row]='1' then stringgrid3.Cells[col,row]:='0'
        else
-       if fileexists(slash(stringgrid3.cells[4,row])+stringgrid3.cells[1,row]+'.hdr') then stringgrid3.Cells[col,row]:='1'
+       if fileexistsutf8(slash(stringgrid3.cells[4,row])+stringgrid3.cells[1,row]+'.hdr') then stringgrid3.Cells[col,row]:='1'
           else  stringgrid3.Cells[col,row]:='0';
     end;
 5 : begin
@@ -773,9 +773,9 @@ try
 LockCatPath:=true;
 if sender is TDirectoryEdit then with sender as TDirectoryEdit do begin
   Text:=trim(Text);
-  ccat.StarCatPath[tag]:=Text;
+  ccat.StarCatPath[tag]:=utf8tosys(Text);
   if ccat.StarCatDef[tag] then
-     if catalog.checkpath(tag+BaseStar,Text)
+     if catalog.checkpath(tag+BaseStar,utf8tosys(Text))
         then color:=textcolor
         else color:=clRed
      else color:=textcolor;
@@ -814,9 +814,9 @@ if LockCatPath then exit;
 try
 LockCatPath:=true;
   gcv3.Text:=trim(gcv3.Text);
-  ccat.VarStarCatPath[gcvs-BaseVar]:=gcv3.Text;
+  ccat.VarStarCatPath[gcvs-BaseVar]:=utf8tosys(gcv3.Text);
   if ccat.VarStarCatDef[gcvs-BaseVar] then
-     if catalog.checkpath(gcvs,gcv3.text)
+     if catalog.checkpath(gcvs,utf8tosys(gcv3.text))
         then gcv3.color:=textcolor
         else gcv3.color:=clRed
      else gcv3.color:=textcolor;
@@ -849,9 +849,9 @@ if LockCatPath then exit;
 try
 LockCatPath:=true;
   wds3.Text:=trim(wds3.Text);
-  ccat.DblStarCatPath[wds-BaseDbl]:=wds3.Text;
+  ccat.DblStarCatPath[wds-BaseDbl]:=utf8tosys(wds3.Text);
   if ccat.DblStarCatDef[wds-BaseDbl] then
-     if catalog.checkpath(wds,wds3.text)
+     if catalog.checkpath(wds,utf8tosys(wds3.text))
         then wds3.color:=textcolor
         else wds3.color:=clRed
      else wds3.color:=textcolor;
@@ -891,9 +891,9 @@ try
 LockCatPath:=true;
 if sender is TDirectoryEdit then with sender as TDirectoryEdit do begin
   Text:=trim(Text);
-  ccat.NebCatPath[tag]:=Text;
+  ccat.NebCatPath[tag]:=utf8tosys(Text);
   if ccat.NebCatDef[tag] then
-     if catalog.checkpath(tag+BaseNeb,text)
+     if catalog.checkpath(tag+BaseNeb,utf8tosys(text))
         then color:=textcolor
         else color:=clRed
      else color:=textcolor;
@@ -915,7 +915,7 @@ ccat.GCatNum:=stringgrid3.RowCount-1;
 SetLength(ccat.GCatLst,ccat.GCatNum);
 for i:=0 to ccat.GCatNum-1 do begin
    ccat.GCatLst[i].shortname:=stringgrid3.cells[1,i+1];
-   ccat.GCatLst[i].path:=stringgrid3.cells[4,i+1];
+   ccat.GCatLst[i].path:=utf8tosys(stringgrid3.cells[4,i+1]);
    val(stringgrid3.cells[2,i+1],x,v);
    if v=0 then ccat.GCatLst[i].min:=x
           else ccat.GCatLst[i].min:=0;
