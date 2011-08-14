@@ -35,7 +35,6 @@ exports
 
 begin
   decimalseparator:='.';
-  inittrace;
   ds2c:=Tds2cdc.Create;
   GetSkyChartInfo;
   GetWorkDir;

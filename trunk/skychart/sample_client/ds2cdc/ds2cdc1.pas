@@ -2,7 +2,7 @@ unit ds2cdc1;
 
 {$MODE Delphi}
 
-{$define trace_debug}
+//{$define trace_debug}
 
 {
    This software is free of any right.
@@ -105,6 +105,7 @@ constructor Tds2cdc.Create;
 var i: integer;
 begin
 {$ifdef trace_debug}
+inittrace;
 writetrace('Enter ds2cdc');
 {$endif}
 inherited Create;
@@ -144,11 +145,16 @@ begin
 {$ifdef trace_debug}
 writetrace('Exit ds2cdc');
 {$endif}
+try
   ConnectTimer.Free;
   InitTimer.Free;
   DrawTimer.Free;
   DSSTimer.Free;
+  FCloseChart;
+  FCDC_CloseVarObs;
   inherited Destroy;
+except
+end;
 end;
 
 Procedure Tds2cdc.InitSkyChart;
@@ -178,7 +184,9 @@ end else begin
   ConnectTimer.Enabled:=true;  // wait app start
 end;
 timeout:=now+20/3600/24; // 20 seconds
-while (not initOK)and(now<timeout) do Application.processmessages;
+repeat
+ Application.processmessages;
+until initOK or (now>timeout);
 end;
 
 procedure Tds2cdc.InitTcpIp;
@@ -229,7 +237,7 @@ with Registry1 do begin
 end;
 Registry1.Free;
 if SkyChartRunning and (tcpport<>'0') then begin       // is app running
-   sleep(2000);                                   // a litle more time to initialize
+   sleep(500);                                   // a litle more time to initialize
    InitTcpIp;                                     // start communication
    skychartok:=true;
 end
@@ -244,10 +252,15 @@ writetrace('Executecmd '+cmd);
 {$endif}
 lastcmd:=cmd;
 if (skychartok)and(client<>nil){and(client.Ready)}and(not client.Terminated) then begin
-   result:=client.Send(cmd);
+   if SkyChartRunning then
+      result:=client.Send(cmd)
+   else begin
+     param:='--unique --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
+     InitSkyChart;
+   end;
 end else begin
   if cmd<>'REDRAW' then begin
-    param:='--unique --loaddef="'+cieldir+'\data\sample\ds2000.cdc3" '+paramcmd;
+    param:='--unique --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
     InitSkyChart;
   end;
 end;
@@ -323,7 +336,7 @@ DrawTimer.enabled:=false;
 if not CielInstalled then exit;
 CloseCatalogFile;
 conname:=uppercase(conname);
-paramcmd:=' --loaddef='+cieldir+'\data\sample\ds2000.cdc3 --search='+conname;
+paramcmd:=' --loaddef='+workdir+'\ds2000.cdc3 --search='+conname;
 cmd := 'FIND 11 '+conname;
 Executecmd(cmd);
 cmd:='REDRAW';
@@ -377,7 +390,7 @@ Procedure Tds2cdc.FCloseChart;
 begin
 DrawTimer.enabled:=false;
 if not CielInstalled then exit;
-if StartedByDS then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_CLOSE,0,0);   // close skychart
+if StartedByDS then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0);   // close skychart
 end;
 
 Procedure Tds2cdc.FCDC_SetObservatory(Latitude,Longitude,TimeZone : Double; ObsName : AnsiString);

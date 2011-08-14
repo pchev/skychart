@@ -74,6 +74,7 @@ type
     OpenDialog1: TOpenDialog;
     SaveDialog1: TSaveDialog;
     SlewCursor: TMenuItem;
+    PDSSTimer: TTimer;
     TrackTelescope: TMenuItem;
     Panel1: TPanel;
     RemoveLastLabel1: TMenuItem;
@@ -138,6 +139,7 @@ type
       var ScrollPos: Integer);
     procedure MenuLoadCircleClick(Sender: TObject);
     procedure MenuSaveCircleClick(Sender: TObject);
+    procedure PDSSTimerTimer(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
@@ -3195,7 +3197,7 @@ case n of
  53 : begin result:=cmd_SetTZ(arg[1]); Refresh; end;
  54 : result:=cmd_GetTZ;
  55 : begin cmd_SetRa(arg[1]); cmd_SetDec(arg[2]); cmd_SetFov(arg[3]); Refresh; end;
- 56 : result:=cmd_PDSS(arg[1],arg[2],arg[3],arg[4]);
+ 56 : begin PDSSTimer.Enabled:=true; result:=msgOK;end;// result:=cmd_PDSS(arg[1],arg[2],arg[3],arg[4]);
  57 : result:=cmd_SaveImage('BMP',arg[1],'');
  58 : result:=cmd_SaveImage('GIF',arg[1],'');
  59 : result:=cmd_SaveImage('JPEG',arg[1],arg[2]);
@@ -3517,6 +3519,12 @@ if (sc.cfgsc.NumCircle>0) and SaveDialog1.Execute then begin
    end;
    CloseFile(f);
 end;
+end;
+
+procedure Tf_chart.PDSSTimerTimer(Sender: TObject);
+begin
+  PDSSTimer.Enabled:=false;
+  cmd_PDSS('','','','');
 end;
 
 procedure Tf_chart.MenuLoadCircleClick(Sender: TObject);

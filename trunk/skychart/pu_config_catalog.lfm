@@ -13,7 +13,7 @@ object f_config_catalog: Tf_config_catalog
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30'
   object MainPanel: TPanel
     Left = 12
     Height = 520
@@ -28,10 +28,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 464
       Top = 1
       Width = 498
-      ActivePage = Page1
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 3
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
@@ -1076,12 +1076,12 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 456
+        ClientWidth = 490
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
-          Height = 21
+          Height = 23
           Top = 165
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1095,7 +1095,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc3: TDirectoryEdit
           Tag = 12
           Left = 325
-          Height = 21
+          Height = 23
           Top = 119
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1108,8 +1108,8 @@ object f_config_catalog: Tf_config_catalog
         end
         object dsbase3: TDirectoryEdit
           Tag = 11
-          Left = 325
-          Height = 21
+          Left = 326
+          Height = 23
           Top = 77
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1123,7 +1123,7 @@ object f_config_catalog: Tf_config_catalog
         object dsbase2: TLongEdit
           Tag = 11
           Left = 288
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 77
           Width = 30
@@ -1137,7 +1137,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc2: TLongEdit
           Tag = 12
           Left = 288
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 119
           Width = 30
@@ -1151,7 +1151,7 @@ object f_config_catalog: Tf_config_catalog
         object dsgsc2: TLongEdit
           Tag = 13
           Left = 289
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 165
           Width = 30
@@ -1165,7 +1165,7 @@ object f_config_catalog: Tf_config_catalog
         object dsgsc1: TLongEdit
           Tag = 13
           Left = 249
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 165
           Width = 30
@@ -1179,7 +1179,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc1: TLongEdit
           Tag = 12
           Left = 249
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 119
           Width = 30
@@ -1193,7 +1193,7 @@ object f_config_catalog: Tf_config_catalog
         object dsbase1: TLongEdit
           Tag = 11
           Left = 249
-          Height = 21
+          Height = 23
           Hint = '0..10'
           Top = 77
           Width = 30
@@ -1207,10 +1207,10 @@ object f_config_catalog: Tf_config_catalog
         object dsgscBox: TCheckBox
           Tag = 13
           Left = 74
-          Height = 18
+          Height = 19
           Hint = 'The Hubble Space Telescope Guide Star Catalog from Deepsky 2000 CDROM'
           Top = 165
-          Width = 169
+          Width = 141
           HelpContext = 104
           Caption = 'Deepsky 2000 HST GSC'
           OnClick = CDCStarSelClick
@@ -1221,10 +1221,10 @@ object f_config_catalog: Tf_config_catalog
         object dstycBox: TCheckBox
           Tag = 12
           Left = 73
-          Height = 18
+          Height = 19
           Hint = 'Tycho Catalog from Deepsky 2000 CDROM'
           Top = 119
-          Width = 193
+          Width = 160
           HelpContext = 104
           Caption = 'Deepsky 2000 Super Tycho'
           OnClick = CDCStarSelClick
@@ -1235,10 +1235,10 @@ object f_config_catalog: Tf_config_catalog
         object dsbasebox: TCheckBox
           Tag = 11
           Left = 74
-          Height = 18
+          Height = 19
           Hint = 'Deepsky 2000 base directory with stars to magnitude 5.5'
           Top = 77
-          Width = 144
+          Width = 118
           HelpContext = 104
           Caption = 'Deepsky 2000 base'
           OnClick = CDCStarSelClick
@@ -1248,9 +1248,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label21: TLabel
           Left = 17
-          Height = 14
+          Height = 16
           Top = 37
-          Width = 78
+          Width = 72
           Caption = 'Deepsky 2000'
           ParentColor = False
           WordWrap = True
