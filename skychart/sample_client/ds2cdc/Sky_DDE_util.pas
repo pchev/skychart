@@ -10,7 +10,7 @@ unit Sky_DDE_Util;
 }
 
 {$mode objfpc}{$H+}
-{$define trace_debug}
+//{$define trace_debug}
 
 interface
 
@@ -35,7 +35,7 @@ var
     ciellang : string = '';
     privatedir, workdir: string;
     skychartok : boolean;
-    tracefile: string ='C:\appli\ds2cdc_trace.txt';
+    tracefile: string ='C:\ds2cdc_trace.txt';
 
 const
     dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';

@@ -14,7 +14,7 @@ object f_chart: Tf_chart
   OnKeyDown = FormKeyDown
   OnKeyPress = FormKeyPress
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30'
   object Panel1: TPanel
     Left = 8
     Height = 272
@@ -32,7 +32,7 @@ object f_chart: Tf_chart
       Left = 136
       Height = 16
       Top = 120
-      Width = 77
+      Width = 59
       Caption = 'identlabel '
       Color = clBlack
       Font.CharSet = 4
@@ -365,5 +365,12 @@ object f_chart: Tf_chart
     Options = [ofOverwritePrompt, ofPathMustExist, ofEnableSizing, ofViewDetail]
     left = 58
     top = 120
+  end
+  object PDSSTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = PDSSTimerTimer
+    left = 384
+    top = 205
   end
 end

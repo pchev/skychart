@@ -743,6 +743,7 @@ type
     procedure ClearAndRestart;
     procedure InitializeDB(Sender: TObject);
     procedure Init;
+    Procedure InitDS2000;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure ChartMove(Sender: TObject);
     procedure GetActiveChart(var active_chart: string);
@@ -1143,6 +1144,18 @@ end;
 end;
 {$endif}
 
+Procedure Tf_main.InitDS2000;
+var srcdir, dsdir: string;
+begin
+srcdir:=slash(SampleDir);
+dsdir:=slash(PrivateDir)+slash('ds2000');
+if not DirectoryExists(dsdir) then ForceDirectories(dsdir);
+if not fileexists(dsdir+'ds2000.cdc3') then CopyFile(srcdir+'ds2000.cdc3', dsdir+'ds2000.cdc3');
+if not fileexists(dsdir+'d2k.hdr') then CopyFile(srcdir+'d2k.hdr', dsdir+'d2k.hdr');
+if not fileexists(dsdir+'d2k.info2') then CopyFile(srcdir+'d2k.info2', dsdir+'d2k.info2');
+if not fileexists(dsdir+'d2k.prj') then CopyFile(srcdir+'d2k.prj', dsdir+'d2k.prj');
+end;
+
 procedure Tf_main.Init;
 var i: integer;
     firstuse: boolean;
@@ -1167,6 +1180,10 @@ try
  WriteTrace('ReadDefault');
 {$endif}
  ReadDefault;
+{$ifdef trace_debug}
+ WriteTrace('InitDS2000');
+{$endif}
+ InitDS2000;
  // must read db configuration before to create this one!
 {$ifdef trace_debug}
  WriteTrace('Create DB');
@@ -4155,13 +4172,13 @@ catalog.cfgcat.starcatfield[gscc-BaseStar,2]:=3;
 catalog.cfgcat.starcatpath[usnoa-BaseStar]:=catalog.cfgcat.starcatpath[usnoa-BaseStar]+PathDelim+'usnoa';
 catalog.cfgcat.starcatfield[usnoa-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[usnoa-BaseStar,2]:=1;
-catalog.cfgcat.starcatpath[dsbase-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatpath[dsbase-BaseStar]:='C:\Program Files\Deepsky Astronomy Software';
 catalog.cfgcat.starcatfield[dsbase-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[dsbase-BaseStar,2]:=10;
-catalog.cfgcat.starcatpath[dstyc-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatpath[dstyc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\SuperTycho';
 catalog.cfgcat.starcatfield[dstyc-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[dstyc-BaseStar,2]:=5;
-catalog.cfgcat.starcatpath[dsgsc-BaseStar]:=PathDelim+'Deepsky2000';
+catalog.cfgcat.starcatpath[dsgsc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\HGC';
 catalog.cfgcat.starcatfield[dsgsc-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[dsgsc-BaseStar,2]:=3;
 for i:=1 to maxvarstarcatalog do begin
@@ -4981,6 +4998,11 @@ if Config_Version < '3.3i' then begin
   catalog.cfgshr.NebMagFilter[1]:=99;
   catalog.cfgshr.NebMagFilter[2]:=99;
   catalog.cfgshr.NebMagFilter[3]:=99;
+end;
+if Config_Version < '3.3j' then begin
+  catalog.cfgcat.starcatpath[dsbase-BaseStar]:='C:\Program Files\Deepsky Astronomy Software';
+  catalog.cfgcat.starcatpath[dstyc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\SuperTycho';
+  catalog.cfgcat.starcatpath[dsgsc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\HGC';
 end;
 end;
 
