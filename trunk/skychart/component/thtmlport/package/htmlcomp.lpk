@@ -5,7 +5,7 @@
     <AddToProjectUsesSection Value="False"/>
     <Author Value="L. David Baldwin's HTML Components for Delphi; ported to Lazarus by Phil Hess"/>
     <CompilerOptions>
-      <Version Value="10"/>
+      <Version Value="9"/>
       <SearchPaths>
         <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
@@ -82,11 +82,11 @@
       </Item12>
       <Item13>
         <Filename Value="htmlun2.pas"/>
-        <UnitName Value="HTMLUn2"/>
+        <UnitName Value="htmlun2"/>
       </Item13>
       <Item14>
         <Filename Value="htmlview.pas"/>
-        <UnitName Value="Htmlview"/>
+        <UnitName Value="htmlview"/>
       </Item14>
       <Item15>
         <Filename Value="readhtml.pas"/>

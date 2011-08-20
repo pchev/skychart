@@ -3668,7 +3668,7 @@ if cfgsc.TargetOn then begin
   d:=AngularDistance(cfgsc.racentre,cfgsc.decentre,cfgsc.TargetRA,cfgsc.TargetDec);
   txt:=cfgsc.TargetName+' '+DEmToStr(rad2deg*d);
   r:=cfgsc.fov/5;
-  if d>r then begin
+  if (d>r) and (not ObjectInMap(cfgsc.TargetRA,cfgsc.TargetDec,cfgsc)) then begin
     x:=0; y:=0;
     projection(cfgsc.racentre,cfgsc.decentre+0.001,xx,yy,false,cfgsc);
     rot:=-arctan2((xx-x),(yy-y));

@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation, u_util, u_constant, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, LazHelpHTML, Htmlview, Htmlsubs;
+  Buttons, LazHelpHTML, Htmlview, Htmlsubs, types;
 
 type
   Tstr1func = procedure(txt:string) of object;
