@@ -42,6 +42,7 @@ procedure GetAHxy(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
 procedure GetAHxyF(x,y:Integer ; var a,h : Double; c: Tconf_skychart);
 procedure GetLBxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
 procedure GetLBExy(x,y:Integer ; var le,be : Double; c: Tconf_skychart);
+function ObjectInMap(ra,de:double; c: Tconf_skychart) : Boolean;
 function NorthPoleInMap(c:Tconf_skychart) : Boolean;
 function SouthPoleInMap(c:Tconf_skychart) : Boolean;
 function NorthPole2000InMap(c:Tconf_skychart) : Boolean;
@@ -544,34 +545,31 @@ x1:=0;y1:=0;
   le:=rmod(pi4+le,pi2);
 end;
 
+function ObjectInMap(ra,de:double; c: Tconf_skychart) : Boolean;
+var x1,y1: Double; xx,yy : single;
+begin
+x1:=0;y1:=0;xx:=0;yy:=0;
+projection(ra,de,x1,y1,false,c) ;
+windowxy(x1,y1,xx,yy,c);
+Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+end;
+
 function NorthPoleInMap(c: Tconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
-a:=0 ; d:=pid2;
-x1:=0;y1:=0;xx:=0;yy:=0;
-projection(a,d,x1,y1,false,c) ;
-windowxy(x1,y1,xx,yy,c);
-Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+result:=ObjectInMap(0,pid2,c);
 end;
 
 function SouthPoleInMap(c: Tconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
-a:=0 ; d:=-pid2;
-x1:=0;y1:=0;xx:=0;yy:=0;
-projection(a,d,x1,y1,false,c) ;
-windowxy(x1,y1,xx,yy,c);
-Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+result:=ObjectInMap(0,-pid2,c);
 end;
 
 function NorthPole2000InMap(c: Tconf_skychart) : Boolean;
 var a,d,x1,y1: Double; xx,yy : single;
 begin
-a:=c.rap2000 ; d:=c.dep2000;
-x1:=0;y1:=0;xx:=0;yy:=0;
-projection(a,d,x1,y1,false,c) ;
-windowxy(x1,y1,xx,yy,c);
-Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+result:=ObjectInMap(c.rap2000,c.dep2000,c);
 end;
 
 function SouthPole2000InMap(c: Tconf_skychart) : Boolean;
@@ -579,11 +577,8 @@ var a,d,x1,y1: Double; xx,yy : single;
 begin
 a:=0;
 d:=-pid2;
-x1:=0;y1:=0;xx:=0;yy:=0;
 precession(jd2000,c.JDChart,a,d);
-projection(a,d,x1,y1,false,c) ;
-windowxy(x1,y1,xx,yy,c);
-Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
+result:=ObjectInMap(a,d,c);
 end;
 
 function ZenithInMap(c: Tconf_skychart) : Boolean;
