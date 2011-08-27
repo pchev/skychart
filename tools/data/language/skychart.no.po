@@ -2,7 +2,7 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-07-06 21:49+0100\n"
+"PO-Revision-Date: 2011-08-23 21:52+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.no\n"
 "POT-Creation-Date: \n"
@@ -106,7 +106,7 @@ msgstr "Avansert søk"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
-msgstr ""
+msgstr "Avanserte innstillinger for Scope.exe"
 
 #: u_translation.rsage
 msgid "Age"
@@ -142,7 +142,7 @@ msgstr "Alt"
 
 #: u_translation.rsaltaz
 msgid "Alt-Az"
-msgstr ""
+msgstr "Alt-Az"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
@@ -226,7 +226,7 @@ msgstr "Kunstig satellitt"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
-msgstr ""
+msgstr "ASCOM - teleskopgrensesnitt"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -330,7 +330,7 @@ msgstr "Bakgrunnsbilde"
 
 #: u_translation.rsbattery
 msgid "Battery"
-msgstr ""
+msgstr "Batteri"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
@@ -534,7 +534,7 @@ msgstr "Senter"
 
 #: u_translation.rscentering
 msgid "Centering"
-msgstr ""
+msgstr "Sentrering"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
@@ -626,11 +626,11 @@ msgstr "Rydd kartet"
 
 #: u_translation.rsclear
 msgid "Clear"
-msgstr ""
+msgstr "Rydd"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
-msgstr ""
+msgstr "Rydd mål"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -750,7 +750,7 @@ msgstr "Innstillinger"
 
 #: u_translation.rsconfigure
 msgid "Configure"
-msgstr ""
+msgstr "Still inn"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
@@ -758,11 +758,11 @@ msgstr "Programinnstillinger"
 
 #: u_translation.rsconnect
 msgid "Connect"
-msgstr ""
+msgstr "Koble til"
 
 #: u_translation.rsconnected
 msgid "Connected"
-msgstr ""
+msgstr "Tilkoblet"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
@@ -850,7 +850,7 @@ msgstr "Koordinater:"
 
 #: u_translation.rscoordinates2
 msgid "Coordinates"
-msgstr ""
+msgstr "Koordinater"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
@@ -926,11 +926,11 @@ msgstr "Gjeldende dato"
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
-msgstr ""
+msgstr "Gjeldende driver"
 
 #: u_translation.rscustom
 msgid "Custom"
-msgstr ""
+msgstr "Tilpasset"
 
 #: u_translation.rscw
 msgid "%sCW"
@@ -976,7 +976,7 @@ msgstr "Databasetype"
 
 #: u_translation.rsdatabits
 msgid "Data bits"
-msgstr ""
+msgstr "Data-bits"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1000,7 +1000,7 @@ msgstr "Dato"
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
-msgstr ""
+msgstr "Dato og/eller tid kan ikke endres"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1052,7 +1052,7 @@ msgstr "DEC"
 
 #: u_translation.rsdecelpeccomp
 msgid "DEC/EL PEC Compensation"
-msgstr ""
+msgstr "DEC/EL PEC kompensering"
 
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
@@ -1080,7 +1080,7 @@ msgstr "DEC alternativer"
 
 #: u_translation.rsdecrease
 msgid "Decrease"
-msgstr ""
+msgstr "Reduser"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1240,7 +1240,7 @@ msgstr "Enhetsport "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
-msgstr ""
+msgstr "Enhetsstatus"
 
 #: u_translation.rsdiam
 msgid "Diam."
@@ -1252,7 +1252,7 @@ msgstr "Diameter"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr ""
+msgstr "Frakoblet"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1284,7 +1284,7 @@ msgstr "Mappe ikke funnet! Installer SkyChart-bildepakken."
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr ""
+msgstr "Koble fra"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1312,7 +1312,7 @@ msgstr "Vis påskrift for alle stjernekataloger"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
-msgstr ""
+msgstr "Visningspresisjon"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1404,7 +1404,7 @@ msgstr "Tegn den tilsynelatende nedsenkede horisontlinje"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
-msgstr ""
+msgstr "Årlig drift"
 
 #: u_translation.rsdrivername
 msgid "Driver name"
@@ -1412,7 +1412,7 @@ msgstr "Driver-navn"
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr ""
+msgstr "Driver-valg"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
@@ -1496,11 +1496,11 @@ msgstr "Emisjonståke"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
-msgstr ""
+msgstr "Encoder-innstilling"
 
 #: u_translation.rsencoderiniti
 msgid "Encoder initialization angle"
-msgstr ""
+msgstr "Initialiseringsvinkel"
 
 #: u_translation.rsencoders
 msgid "Encoders"
@@ -1540,7 +1540,7 @@ msgstr "Ekv. nett"
 
 #: u_translation.rsequatorial
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekvatorial"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
@@ -1560,7 +1560,7 @@ msgstr "Ekvatorial montering"
 
 #: u_translation.rsequatorialsy
 msgid "Equatorial System"
-msgstr ""
+msgstr "Ekv.-system"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -1584,11 +1584,11 @@ msgstr "Feil ved åpning av %s"
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
-msgstr ""
+msgstr "Feil ved åpning av %s på port %s"
 
 #: u_translation.rserroropening3
 msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr ""
+msgstr "Feil ved åpning av %s på port %sSjekk om enhet er tilkoblet og påslått"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1660,7 +1660,7 @@ msgstr "Størrelse på svake stjerner"
 
 #: u_translation.rsfan
 msgid "Fan"
-msgstr ""
+msgstr "Vifte"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -1668,7 +1668,7 @@ msgstr "Ofte stilte spørsmål"
 
 #: u_translation.rsfast
 msgid "Fast"
-msgstr ""
+msgstr "Rask"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1696,7 +1696,7 @@ msgstr "Synsfelt-nummer:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
-msgstr ""
+msgstr "Feltrotasjon"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -1784,11 +1784,11 @@ msgstr "Iridiumglimtvarsel:"
 
 #: u_translation.rsfocus
 msgid "Focus"
-msgstr ""
+msgstr "Fokus"
 
 #: u_translation.rsfocusspeed
 msgid "Focus Speed"
-msgstr ""
+msgstr "Fokus-hastighet"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1804,7 +1804,7 @@ msgstr "Bare for gjeldende kart"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
-msgstr ""
+msgstr "Alltid synlig"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1828,7 +1828,7 @@ msgstr "Bildestørrelse"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
-msgstr ""
+msgstr "FR vinkel"
 
 #: u_translation.rsfreesize
 msgid "Free size"
@@ -1910,7 +1910,7 @@ msgstr "Geosentrisk"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "Hent"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -1930,7 +1930,7 @@ msgstr "Kulehoper"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
-msgstr ""
+msgstr "Gps-16\" Avans. innstillinger"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -1974,7 +1974,7 @@ msgstr "G helling-parameter"
 
 #: u_translation.rsguide
 msgid "Guide"
-msgstr ""
+msgstr "Guide"
 
 #: u_translation.rsguidearcsec
 msgid "guide arcsec"
@@ -2018,7 +2018,7 @@ msgstr "Innhold"
 
 #: u_translation.rshide
 msgid "Hide"
-msgstr ""
+msgstr "Skjul"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
@@ -2030,7 +2030,7 @@ msgstr "Skjul objekter større enn"
 
 #: u_translation.rshigh
 msgid "High"
-msgstr ""
+msgstr "Høy "
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -2038,11 +2038,11 @@ msgstr "High colour"
 
 #: u_translation.rshighest
 msgid "Highest"
-msgstr ""
+msgstr "Høyest"
 
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
-msgstr ""
+msgstr "Høy presisjonspeking"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -2130,7 +2130,7 @@ msgstr "Inkluder Iridiumglimt"
 
 #: u_translation.rsincrease
 msgid "Increase"
-msgstr ""
+msgstr "Øk"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2198,11 +2198,11 @@ msgstr ""
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr ""
+msgstr "Initialisert ved %s%s bruker : %s%s (RA: %s DEC:%s)"
 
 #: u_translation.rsinitialize
 msgid "Initialize"
-msgstr ""
+msgstr "Initialisering"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2230,11 +2230,11 @@ msgstr "Internett-lokalisering"
 
 #: u_translation.rsintervaltime
 msgid "Interval Timeout"
-msgstr ""
+msgstr "Intervall-tidsavbrudd"
 
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
-msgstr ""
+msgstr "Integrert teleskopdriver."
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
@@ -2358,7 +2358,7 @@ msgstr "Venstre-linje"
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
-msgstr ""
+msgstr "Venstre modus"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -2518,7 +2518,7 @@ msgstr "Rombe"
 
 #: u_translation.rslow
 msgid "Low"
-msgstr ""
+msgstr "Lav "
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -2530,7 +2530,7 @@ msgstr "Lysstyrke"
 
 #: u_translation.rslunar
 msgid "Lunar"
-msgstr ""
+msgstr "Lunar"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -2598,7 +2598,7 @@ msgstr "Manuell montering"
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr "Manuellt teleskop"
+msgstr "Manuelt teleskop"
 
 #: u_translation.rsmap
 msgid "Map"
@@ -2682,7 +2682,7 @@ msgstr "Meter"
 
 #: u_translation.rsmiddle
 msgid "Middle"
-msgstr ""
+msgstr "Middel"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
@@ -2722,11 +2722,11 @@ msgstr "Div. linjer"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
-msgstr ""
+msgstr "Simulatormodusknappen"
 
 #: u_translation.rsmodel
 msgid "Model"
-msgstr ""
+msgstr "Modell"
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -2774,23 +2774,23 @@ msgstr "Morgenlysning"
 
 #: u_translation.rsmotor
 msgid "Motor"
-msgstr ""
+msgstr "Motor"
 
 #: u_translation.rsmotorspeeds
 msgid "Motor Speeds"
-msgstr ""
+msgstr "Motorhastighet"
 
 #: u_translation.rsmountfabrica
 msgid "Mount fabrication error"
-msgstr ""
+msgstr "Monteringsfeil"
 
 #: u_translation.rsmounttype
 msgid "Mount type"
-msgstr ""
+msgstr "Monteringstype"
 
 #: u_translation.rsmove
 msgid "Move"
-msgstr ""
+msgstr "Beveg"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -2862,7 +2862,7 @@ msgstr "Stjernetåkeomriss"
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
-msgstr ""
+msgstr "(negativ øst for Greenwich)"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
@@ -2966,7 +2966,7 @@ msgstr "Ikke en FITS fil, SIMPLE = T nøkkelord mangler"
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
-msgstr ""
+msgstr "Ingen målobjekt"
 
 #: u_translation.rsnotavailable
 msgid "Not available"
@@ -2974,7 +2974,7 @@ msgstr "Ikke tilgjengelig"
 
 #: u_translation.rsnotavailon
 msgid "Not available on %s"
-msgstr ""
+msgstr "Ikke tilgjengelig på %s"
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
@@ -2998,7 +2998,7 @@ msgstr "%s ikke funnet!%sKanskje katalogen ikke er installert, eller det er en f
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
-msgstr ""
+msgstr "Ikke initialisert"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3074,7 +3074,7 @@ msgstr "Objektstørrelseenhet"
 
 #: u_translation.rsobjectsusedf
 msgid "Objects used for Initialisation"
-msgstr ""
+msgstr "Objekter brukt for initialisering"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
@@ -3094,7 +3094,7 @@ msgstr "Foreldet"
 
 #: u_translation.rsoff
 msgid "Off"
-msgstr ""
+msgstr "Av"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -3110,7 +3110,7 @@ msgstr "OK"
 
 #: u_translation.rson
 msgid "On"
-msgstr ""
+msgstr "På"
 
 #: u_translation.rsoneofthree
 msgid "One of three"
@@ -3222,15 +3222,15 @@ msgstr "Parametrisk"
 
 #: u_translation.rsparity
 msgid "Parity"
-msgstr ""
+msgstr "Paritet"
 
 #: u_translation.rsparkinganddi
 msgid "Parking and Disconnecting telescope."
-msgstr ""
+msgstr "Parkerer og frakobler teleskop."
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
-msgstr ""
+msgstr "Parker teleskop"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -3356,7 +3356,7 @@ msgstr "Bekreft at teleskopet peker på %s"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
-msgstr ""
+msgstr "Forsikre om at ASCOM teleskopdrivere er skikkelig installert."
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
@@ -3392,7 +3392,7 @@ msgstr "Monter RealSky CD nummer"
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
-msgstr ""
+msgstr "Beveg teleskopet langs de to aksene"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -3432,7 +3432,7 @@ msgstr "Port:"
 
 #: u_translation.rsportconfigur
 msgid "Port Configuration"
-msgstr ""
+msgstr "Port-innstilling"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -3544,7 +3544,7 @@ msgstr "Bearbeider linje %s"
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
-msgstr ""
+msgstr "Produkt-info"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
@@ -3608,11 +3608,11 @@ msgstr "Proxy-port"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr ""
+msgstr "Pulsvarighet"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr ""
+msgstr "Pulsmodus"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -3624,7 +3624,7 @@ msgstr "Kvasar"
 
 #: u_translation.rsquery
 msgid "Query"
-msgstr ""
+msgstr "Forespørsel"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -3648,7 +3648,7 @@ msgstr "RA"
 
 #: u_translation.rsraazpeccompe
 msgid "RA/AZ PEC Compensation"
-msgstr ""
+msgstr "RA/AZ PEC kompensering"
 
 #: u_translation.rsraazslewrate
 msgid "RA/Az Slew Rate"
@@ -3680,7 +3680,7 @@ msgstr "%sRA omdreininger:"
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
-msgstr ""
+msgstr "Leseintervall [ms]"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -3688,7 +3688,7 @@ msgstr "Realistisk bilde"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
+msgstr "Parkere og frakoble teleskopet?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -3728,7 +3728,7 @@ msgstr "Opptaksprefiks"
 
 #: u_translation.rsrecordprotoc
 msgid "Record protocol to a trace file"
-msgstr ""
+msgstr "Registrer protokoll til en fil"
 
 #: u_translation.rsred
 msgid "Red"
@@ -3768,7 +3768,7 @@ msgstr "Oppdateringsintervall for bilde"
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
-msgstr ""
+msgstr "Oppdateringsrate"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3840,11 +3840,11 @@ msgstr "Oppløsning:"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
-msgstr ""
+msgstr "Oppløsning X: %s Y :%s trinn"
 
 #: u_translation.rsresumegoto
 msgid "Resume GoTo"
-msgstr ""
+msgstr "Gjenoppta GoTo"
 
 #: u_translation.rsreturn
 msgid "Return"
@@ -3880,7 +3880,7 @@ msgstr "Høyre-linje"
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
-msgstr ""
+msgstr "Høyremodus"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -3952,7 +3952,7 @@ msgstr "Lagre prosjekt"
 
 #: u_translation.rssavesetting
 msgid "Save setting"
-msgstr ""
+msgstr "Lagre innstillinger"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
@@ -4012,7 +4012,7 @@ msgstr "Sekunder"
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
-msgstr ""
+msgstr "Se %s for mer informasjon."
 
 #: u_translation.rssel
 msgid "Sel."
@@ -4020,7 +4020,7 @@ msgstr ""
 
 #: u_translation.rsselect
 msgid "Select"
-msgstr ""
+msgstr "Velg"
 
 #: u_translation.rsselectall
 msgid "Select all"
@@ -4064,7 +4064,7 @@ msgstr "Separasjon"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
-msgstr ""
+msgstr "Seriell port"
 
 #: u_translation.rsserver
 msgid "Server"
@@ -4112,7 +4112,7 @@ msgstr "Still inn hvordan monteringen beveger seg når det blir dreid på dreiek
 
 #: u_translation.rssetlocation
 msgid "Set Location"
-msgstr ""
+msgstr "Still inn sted"
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -4124,15 +4124,15 @@ msgstr ""
 
 #: u_translation.rssettargetto
 msgid "Set target to %s"
-msgstr ""
+msgstr "Sett mål til %s"
 
 #: u_translation.rssettelescope
 msgid "Set TelescopeTime"
-msgstr ""
+msgstr "Still inn teleskoptid"
 
 #: u_translation.rssettime
 msgid "Set Time"
-msgstr ""
+msgstr "Still inn tid"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -4320,11 +4320,11 @@ msgstr "Beveg til markørposisjon"
 
 #: u_translation.rsslow
 msgid "Slow"
-msgstr ""
+msgstr "Langsom"
 
 #: u_translation.rsslowest
 msgid "Slowest"
-msgstr ""
+msgstr "Langsomst"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
@@ -4400,15 +4400,15 @@ msgstr "Spektralklasse"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Hastighet"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
-msgstr ""
+msgstr "Hastighetsvalg"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
-msgstr ""
+msgstr "Hastighetsinnstillinger"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -4488,7 +4488,7 @@ msgstr "Objekt-start"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -4496,11 +4496,11 @@ msgstr "Statuslinje"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
-msgstr ""
+msgstr "Trinn (Alpha)"
 
 #: u_translation.rsstepsdelta
 msgid "Steps (Delta)"
-msgstr ""
+msgstr "Trinn (Delta)"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
@@ -4508,11 +4508,11 @@ msgstr "Trinn-enhet"
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
 #: u_translation.rsstopbits
 msgid "Stop bits"
-msgstr ""
+msgstr "Stopp-bits"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -4552,7 +4552,7 @@ msgstr "Overflatelysstyrke"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Bytte knapp"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
@@ -4588,7 +4588,7 @@ msgstr "Systeminnstillinger"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
-msgstr ""
+msgstr "Systemstatus:"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -4652,7 +4652,7 @@ msgstr "Tekststørrelse"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
-msgstr ""
+msgstr "Grensesnittet er enten ikke tilkoblet eller ikke initialisert"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -4696,7 +4696,7 @@ msgstr "Tid"
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
-msgstr ""
+msgstr "Tidsavbrudd [ms]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -4816,7 +4816,7 @@ msgstr "Tussmørke"
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
-msgstr ""
+msgstr "TO stjerner må brukes for initialisering."
 
 #: u_translation.rstype
 msgid "Type"
@@ -4912,7 +4912,7 @@ msgstr "(brukbar til å representere en fluks)"
 
 #: u_translation.rsusehpp
 msgid "Use HPP"
-msgstr ""
+msgstr "Bruk HPP"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
@@ -5084,7 +5084,7 @@ msgstr "Vindu"
 
 #: u_translation.rsxerrors
 msgid "X Errors"
-msgstr ""
+msgstr "X feil"
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
@@ -5108,7 +5108,7 @@ msgstr "år"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
-msgstr ""
+msgstr "Y feil"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
