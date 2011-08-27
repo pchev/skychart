@@ -3305,7 +3305,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 23
+        Height = 22
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3313,7 +3313,7 @@ object f_main: Tf_main
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         DropDownCount = 15
-        ItemHeight = 15
+        ItemHeight = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -3451,14 +3451,14 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 23
+        Height = 26
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 15
+        ItemHeight = 0
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2
@@ -3508,7 +3508,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 23
+        Height = 22
         Top = 2
         Width = 35
         TabOrder = 5

@@ -74,76 +74,6 @@ object f_info: Tf_info
       TabOrder = 0
     end
   end
-  object Page1: TPanel
-    Left = 56
-    Height = 343
-    Top = 30
-    Width = 554
-    ClientHeight = 343
-    ClientWidth = 554
-    TabOrder = 1
-    object StringGrid1: TStringGrid
-      Left = 1
-      Height = 313
-      Top = 1
-      Width = 552
-      Align = alClient
-      ColCount = 1
-      DefaultColWidth = 800
-      FixedCols = 0
-      FixedRows = 0
-      GridLineWidth = 0
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
-      PopupMenu = PopupMenu1
-      RowCount = 10
-      ScrollBars = ssVertical
-      TabOrder = 0
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      OnMouseDown = StringGrid1MouseDown
-    end
-    object Panel2: TPanel
-      Left = 1
-      Height = 28
-      Top = 314
-      Width = 552
-      Align = alBottom
-      ClientHeight = 28
-      ClientWidth = 552
-      FullRepaint = False
-      TabOrder = 1
-      object serverinfo: TLabel
-        Left = 536
-        Height = 1
-        Top = 6
-        Width = 1
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        ParentColor = False
-      end
-      object Button2: TButton
-        Left = 12
-        Height = 25
-        Top = 2
-        Width = 75
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Refresh'
-        OnClick = Button2Click
-        TabOrder = 0
-      end
-      object CheckBox1: TCheckBox
-        Left = 104
-        Height = 23
-        Top = 2
-        Width = 93
-        Caption = 'AutoRefresh'
-        Checked = True
-        OnClick = CheckBox1Click
-        State = cbChecked
-        TabOrder = 1
-      end
-    end
-  end
   object Page4: TPanel
     Left = 150
     Height = 343
@@ -175,6 +105,34 @@ object f_info: Tf_info
     ClientWidth = 554
     TabOrder = 2
     Visible = False
+    object StringGrid2: TStringGrid
+      Left = 1
+      Height = 314
+      Top = 1
+      Width = 552
+      Align = alClient
+      DefaultColWidth = 70
+      FixedCols = 0
+      FixedRows = 0
+      HeaderHotZones = [gzNormal, gzFixedCols]
+      HeaderPushZones = [gzNormal, gzFixedCols]
+      MouseWheelOption = mwGrid
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goRelaxedRowSelect, goSmoothScroll, goScrollKeepVisible]
+      PopupMenu = PopupMenu2
+      TabOrder = 1
+      TitleFont.Height = -11
+      OnCompareCells = StringGrid2CompareCells
+      OnDblClick = StringGrid2DblClick
+      OnMouseDown = StringGrid2MouseDown
+      OnMouseUp = StringGrid2MouseUp
+      ColWidths = (
+        109
+        109
+        109
+        109
+        112
+      )
+    end
     object Panel3: TPanel
       Left = 1
       Height = 27
@@ -229,7 +187,7 @@ object f_info: Tf_info
       end
       object ComboBox1: TComboBox
         Left = 108
-        Height = 25
+        Height = 26
         Top = 0
         Width = 96
         Anchors = [akTop, akRight]
@@ -249,33 +207,75 @@ object f_info: Tf_info
         ParentColor = False
       end
     end
-    object StringGrid2: TStringGrid
+  end
+  object Page1: TPanel
+    Left = 56
+    Height = 343
+    Top = 30
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 1
+    object Panel2: TPanel
       Left = 1
-      Height = 314
+      Height = 28
+      Top = 314
+      Width = 552
+      Align = alBottom
+      ClientHeight = 28
+      ClientWidth = 552
+      FullRepaint = False
+      TabOrder = 1
+      object serverinfo: TLabel
+        Left = 536
+        Height = 1
+        Top = 6
+        Width = 1
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        ParentColor = False
+      end
+      object Button2: TButton
+        Left = 12
+        Height = 25
+        Top = 2
+        Width = 75
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Refresh'
+        OnClick = Button2Click
+        TabOrder = 0
+      end
+      object CheckBox1: TCheckBox
+        Left = 104
+        Height = 26
+        Top = 2
+        Width = 96
+        Caption = 'AutoRefresh'
+        Checked = True
+        OnClick = CheckBox1Click
+        State = cbChecked
+        TabOrder = 1
+      end
+    end
+    object StringGrid1: TStringGrid
+      Left = 1
+      Height = 313
       Top = 1
       Width = 552
       Align = alClient
-      DefaultColWidth = 70
+      ColCount = 1
+      DefaultColWidth = 800
       FixedCols = 0
       FixedRows = 0
-      HeaderHotZones = [gzNormal, gzFixedCols]
-      HeaderPushZones = [gzNormal, gzFixedCols]
-      MouseWheelOption = mwGrid
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goRowSelect, goRelaxedRowSelect, goSmoothScroll, goScrollKeepVisible]
-      PopupMenu = PopupMenu2
-      TabOrder = 1
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
+      PopupMenu = PopupMenu1
+      RowCount = 10
+      ScrollBars = ssVertical
+      TabOrder = 0
       TitleFont.Height = -11
-      OnCompareCells = StringGrid2CompareCells
-      OnDblClick = StringGrid2DblClick
-      OnMouseDown = StringGrid2MouseDown
-      OnMouseUp = StringGrid2MouseUp
-      ColWidths = (
-        109
-        109
-        109
-        109
-        112
-      )
+      TitleFont.Name = 'MS Sans Serif'
+      OnMouseDown = StringGrid1MouseDown
     end
   end
   object PopupMenu1: TPopupMenu
