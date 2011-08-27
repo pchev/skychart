@@ -10,6 +10,7 @@ data/constellation
 data/constellation/constb.cby
 data/constellation/constlabel.cla
 data/constellation/constlabel_de.cla
+data/constellation/constlabel_es.cla
 data/constellation/constlabel_fr.cla
 data/constellation/constlabel_is.cla
 data/constellation/constlabel_it.cla
