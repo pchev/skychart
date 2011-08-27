@@ -35,7 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, pu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion,
+  u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
@@ -627,11 +627,12 @@ type
     ConfigPictures: Tf_config_pictures;
     ConfigCatalog: Tf_config_catalog;
     cryptedpwd,basecaption :string;
-    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig : Boolean;
+    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
+    SaveState: TWindowState;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -733,6 +734,7 @@ type
     procedure ConnectDB;
     procedure ImageSetFocus(Sender: TObject);
     procedure ListInfo(buf,msg:string);
+    function  TCPClientConnected: boolean;
     procedure GetTCPInfo(i:integer; var buf:string);
     procedure KillTCPClient(i:integer);
     procedure PrintSetup(Sender: TObject);
@@ -1128,6 +1130,7 @@ except
    MessageDlg('FormShow error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
+InitOK:=true;
 {$ifdef trace_debug}
  WriteTrace('Exit Tf_main.FormShow');
 {$endif}
@@ -1638,6 +1641,10 @@ try
 {$ifdef trace_debug}
  debugln('Enter f_main.formcreate');
 {$endif}
+InitOK:=false;
+ForceClose:=false;
+RestoreState:=false;
+SaveState:=wsNormal;
 UniqueInstance1:=TCdCUniqueInstance.Create(self);
 UniqueInstance1.Identifier:='skychart';
 UniqueInstance1.OnOtherInstance:=OtherInstance;
@@ -1846,68 +1853,75 @@ var i,h,w,mresult:integer;
     c1: Tcheckbox;
     btn: TButtonPanel;
 begin
-try
-{$ifdef mswindows}
-if nightvision then ResetWinColor;
-{$endif}
-StopServer;
-writetrace(rsExiting);
-Autorefresh.Enabled:=false;
-if SaveConfigOnExit.checked then begin
-   if ConfirmSaveConfig then begin
-   try
-    f1:=TForm.Create(self);
-    f1.AutoSize:=false;
-    f1.Position:=poScreenCenter;
-    f1.Caption:=rsSaveConfigur;
-    l1:=TLabel.Create(f1);
-    l1.Caption:=rsDoYouWantToS;
-    l1.ParentFont:=true;
-    btn:= TButtonPanel.Create(f1);
-    btn.ShowButtons:=[pbOK,pbCancel];
-    btn.OKButton.Caption:=rsmbYes;
-    btn.CancelButton.Caption:=rsmbNo;
-    btn.ShowGlyphs:=[];
-    btn.AutoSize:=true;
-    btn.Align:=alBottom;
-    c1:=Tcheckbox.Create(f1);
-    c1.AutoSize:=true;
-    c1.Caption:=rsAlwaysSaveWi;
-    c1.Checked:=false;
-    l1.Parent:=f1;
-    c1.Parent:=f1;
-    btn.Parent:=f1;
-    l1.AdjustSize;
-    c1.AdjustSize;
-    btn.AdjustSize;
-    l1.top:=8;
-    l1.Left:=8;
-    c1.Left:=8;
-    c1.Top:=8+l1.Height+8;
-    h:=l1.height+c1.Height+btn.Height+20;
-    w:=f1.Canvas.TextWidth(l1.Caption)+16;
-    f1.Width:=w;
-    f1.Height:=h;
-    mresult:=f1.ShowModal;
-    ConfirmSaveConfig:=not c1.Checked;
-    if mresult=mrOK then
-       SaveDefault;
-   finally
-    btn.free;
-    l1.Free;
-    c1.Free;
-    f1.Free;
-   end;
-   end else
-     SaveDefault;
+if (not ForceClose) and TCPClientConnected then begin  // do not close if client are connected
+   Action:=caMinimize;
+   SaveState:=WindowState;
+   RestoreState:=true;
+   writetrace('Client still connected, minimize instead of close.');
 end else begin
-   if not NeedRestart then SaveQuickSearch(configfile);
-end;
-for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
-      locked:=true;
-   end;
-except
+  try
+  {$ifdef mswindows}
+  if nightvision then ResetWinColor;
+  {$endif}
+  StopServer;
+  writetrace(rsExiting);
+  Autorefresh.Enabled:=false;
+  if SaveConfigOnExit.checked then begin
+     if ConfirmSaveConfig then begin
+     try
+      f1:=TForm.Create(self);
+      f1.AutoSize:=false;
+      f1.Position:=poScreenCenter;
+      f1.Caption:=rsSaveConfigur;
+      l1:=TLabel.Create(f1);
+      l1.Caption:=rsDoYouWantToS;
+      l1.ParentFont:=true;
+      btn:= TButtonPanel.Create(f1);
+      btn.ShowButtons:=[pbOK,pbCancel];
+      btn.OKButton.Caption:=rsmbYes;
+      btn.CancelButton.Caption:=rsmbNo;
+      btn.ShowGlyphs:=[];
+      btn.AutoSize:=true;
+      btn.Align:=alBottom;
+      c1:=Tcheckbox.Create(f1);
+      c1.AutoSize:=true;
+      c1.Caption:=rsAlwaysSaveWi;
+      c1.Checked:=false;
+      l1.Parent:=f1;
+      c1.Parent:=f1;
+      btn.Parent:=f1;
+      l1.AdjustSize;
+      c1.AdjustSize;
+      btn.AdjustSize;
+      l1.top:=8;
+      l1.Left:=8;
+      c1.Left:=8;
+      c1.Top:=8+l1.Height+8;
+      h:=l1.height+c1.Height+btn.Height+20;
+      w:=f1.Canvas.TextWidth(l1.Caption)+16;
+      f1.Width:=w;
+      f1.Height:=h;
+      mresult:=f1.ShowModal;
+      ConfirmSaveConfig:=not c1.Checked;
+      if mresult=mrOK then
+         SaveDefault;
+     finally
+      btn.free;
+      l1.Free;
+      c1.Free;
+      f1.Free;
+     end;
+     end else
+       SaveDefault;
+  end else begin
+     if not NeedRestart then SaveQuickSearch(configfile);
+  end;
+  for i:=0 to MultiDoc1.ChildCount-1 do
+     if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
+        locked:=true;
+     end;
+  except
+  end;
 end;
 end;
 
@@ -3763,6 +3777,7 @@ end;
 
 procedure Tf_main.FormResize(Sender: TObject);
 begin
+SaveState:=WindowState;
 end;
 
 procedure Tf_main.SetDefault;
@@ -6226,7 +6241,7 @@ case n of
  10 : result:=SaveChart(arg[1]);
  11 : result:=OpenChart(arg[1]);
  12 : result:=HelpCmd(trim(uppercase(arg[1])));
- 13 : Close;
+ 13 : begin ForceClose:=true; Close; end;
  14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;
  15 : result:=LoadDefaultChart(arg[1]);
  16 : result:=SetGCat(arg[1],arg[2],arg[3],arg[4],arg[5]);
@@ -6264,6 +6279,15 @@ else begin
            result:=msgFailed+' invalid window size';
            exit;
          end;
+    end;
+    if RestoreState and (cmd='REDRAW') then begin
+       WindowState:=SaveState;
+       RestoreState:=false;
+       {$ifdef mswindows}
+       ShowWindow(f_main.Handle, SW_RESTORE);
+       {$else}
+       f_main.show;
+       {$endif}
     end;
     result:=(chart as Tf_chart).ExecuteCmd(arg);
  end;
@@ -6363,6 +6387,7 @@ var i : integer;
     buf,p: string;
 begin
 // process param from new instance
+  if not InitOK then exit;  // ignore if not initialized
   buf:='';
   Params.Clear;
   for i:=0 to Paramcount-1 do begin
@@ -6432,6 +6457,7 @@ var i,p: integer;
     pp: TStringList;
     chartchanged: boolean;
 begin
+if MultiDoc1.ChildCount=0 then exit;
 chartchanged:=false;
 pp:=TStringList.Create;
 try
@@ -6460,6 +6486,9 @@ for i:=0 to Params.Count-1 do begin
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
+   end;
+   if cmd='--nosave' then begin
+      SaveConfigOnExit.checked:=false;
    end;
 end;
 if chartchanged then begin
@@ -6809,6 +6838,24 @@ if (TCPDaemon<>nil) then
      end;
  end
    else buf:='';    
+end;
+
+function Tf_main.TCPClientConnected: boolean;
+var i : integer;
+begin
+result:=false;
+if (TCPDaemon<>nil) then
+ with TCPDaemon do begin
+   for i:=1 to MaxWindow do begin
+     if (TCPDaemon.ThrdActive[i])
+       and(TCPThrd[i]<>nil)
+       and(TCPThrd[i].sock<>nil)
+       and(not TCPThrd[i].terminated)
+       then begin
+         result:=true;
+       end;
+ end;
+ end;
 end;
 
 procedure Tf_main.KillTCPClient(i:integer);

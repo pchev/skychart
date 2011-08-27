@@ -168,7 +168,8 @@ InitOK:=false;
 Registry1 := TRegistry.Create;
 with Registry1 do begin
   if Openkey('Software\Astro_PC\Ciel\Status',false) then begin
-    if ValueExists('TcpPort') then tcpport:=ReadString('TcpPort');
+    if ValueExists('TcpPort') then tcpport:=ReadString('TcpPort')
+       else tcpport:='0';
     CloseKey;
   end;
 end;
@@ -183,10 +184,13 @@ end else begin
   StartedByDS:=true;
   ConnectTimer.Enabled:=true;  // wait app start
 end;
-timeout:=now+20/3600/24; // 20 seconds
+timeout:=now+90/3600/24; // 90 seconds
 repeat
+ sleep(100);
  Application.processmessages;
 until initOK or (now>timeout);
+ConnectTimer.Enabled:=false;  // stop to try after timeout
+InitTimer.Enabled:=false;
 end;
 
 procedure Tds2cdc.InitTcpIp;
@@ -231,7 +235,8 @@ ConnectTimer.Enabled:=false;                            // stop timer to avoid m
 Registry1 := TRegistry.Create;
 with Registry1 do begin
   if Openkey('Software\Astro_PC\Ciel\Status',false) then begin
-    if ValueExists('TcpPort') then tcpport:=ReadString('TcpPort');
+    if ValueExists('TcpPort') then tcpport:=ReadString('TcpPort')
+       else tcpport:='0';
     CloseKey;
   end;
 end;
@@ -255,12 +260,12 @@ if (skychartok)and(client<>nil){and(client.Ready)}and(not client.Terminated) the
    if SkyChartRunning then
       result:=client.Send(cmd)
    else begin
-     param:='--unique --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
+     param:='--unique --nosave --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
      InitSkyChart;
    end;
 end else begin
   if cmd<>'REDRAW' then begin
-    param:='--unique --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
+    param:='--unique --nosave --loaddef="'+workdir+'\ds2000.cdc3" '+paramcmd;
     InitSkyChart;
   end;
 end;
@@ -269,8 +274,10 @@ end;
 procedure Tds2cdc.SetForground;
 begin
 CielHnd:=findwindow(nil,Pchar(skychartcaption));
-SendMessage(CielHnd, WM_SYSCOMMAND, SC_RESTORE, 0);
-SetForegroundWindow(CielHnd);
+if cielhnd<>0 then begin
+  SendMessage(CielHnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+  SetForegroundWindow(CielHnd);
+end;
 end;
 
 procedure Tds2cdc.ShowInfo(Sender: TObject; const messagetext:string);
@@ -336,7 +343,7 @@ DrawTimer.enabled:=false;
 if not CielInstalled then exit;
 CloseCatalogFile;
 conname:=uppercase(conname);
-paramcmd:=' --loaddef='+workdir+'\ds2000.cdc3 --search='+conname;
+paramcmd:=' --search='+conname;
 cmd := 'FIND 11 '+conname;
 Executecmd(cmd);
 cmd:='REDRAW';
@@ -380,17 +387,21 @@ if LastObject=1 then begin
   cmd:='REDRAW';
   Executecmd(cmd);
   Setforground;
-end else begin
+end;
+{else begin
   DrawTimer.interval:=2000;
   DrawTimer.enabled:=true;
-end;
+end; }
 end;
 
 Procedure Tds2cdc.FCloseChart;
 begin
 DrawTimer.enabled:=false;
 if not CielInstalled then exit;
-if StartedByDS then PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0);   // close skychart
+if StartedByDS then begin
+   if initok then executecmd('shutdown');
+   PostMessage(findwindow(nil,Pchar(skychartcaption)),WM_QUIT,0,0);   // close skychart
+end;
 end;
 
 Procedure Tds2cdc.FCDC_SetObservatory(Latitude,Longitude,TimeZone : Double; ObsName : AnsiString);
