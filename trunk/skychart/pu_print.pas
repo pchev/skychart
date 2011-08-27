@@ -94,7 +94,7 @@ Caption:=rsPrintChart;
 prtcolor.caption:=rsColor;
 prtcolor.Items[0]:=rsColorLineMod;
 prtcolor.Items[1]:=rsBlackWhiteLi;
-prtcolor.Items[2]:=rsAsOnScreenBl;
+if prtcolor.Items.Count>=3 then prtcolor.Items[2]:=rsAsOnScreenBl;
 prtorient.caption:=rsOrientation;
 prtorient.Items[0]:=rsPortrait;
 prtorient.Items[1]:=rsLandscape;
