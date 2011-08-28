@@ -455,6 +455,7 @@ SetHelp(comet,hlpCalCom);
 SetHelp(Asteroids,hlpCalAst);
 SetHelp(Solar,hlpCalSol);
 SetHelp(Lunar,hlpCalLuna);
+SetHelp(Satellites,hlpCalSat);
 end;
 
 Procedure Tf_calendar.cometetitle;

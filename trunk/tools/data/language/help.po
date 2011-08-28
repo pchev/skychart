@@ -34,6 +34,10 @@ msgstr ""
 msgid "calendar_twilight.html"
 msgstr ""
 
+#: u_help:hlpcalsat
+msgid "artificial_satellites.html"
+msgstr ""
+
 #: u_help:hlpcatalog
 msgid "catalog.html"
 msgstr ""

@@ -58,6 +58,10 @@ msgstr "kalender_maansverduisteringen.html"
 msgid "calendar_planet.html"
 msgstr "kalender_planeet.html"
 
+#: u_help.hlpcalsat
+msgid "artificial_satellites.html"
+msgstr ""
+
 #: u_help.hlpcalsol
 msgid "calendar_solar_eclipses.html"
 msgstr "kalender_zonsverduisteringen.html"
