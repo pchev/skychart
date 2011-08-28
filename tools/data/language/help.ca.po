@@ -58,6 +58,10 @@ msgstr "calendari_eclipsis_lunars.html"
 msgid "calendar_planet.html"
 msgstr "calendari_planetes.html"
 
+#: u_help.hlpcalsat
+msgid "artificial_satellites.html"
+msgstr ""
+
 #: u_help.hlpcalsol
 msgid "calendar_solar_eclipses.html"
 msgstr "calendari_eclipsis_solars.html"

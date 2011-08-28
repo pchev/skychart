@@ -61,6 +61,10 @@ msgstr "календар_місячні_затьмарення.html"
 msgid "calendar_planet.html"
 msgstr "календар_планета.html"
 
+#: u_help.hlpcalsat
+msgid "artificial_satellites.html"
+msgstr ""
+
 #: u_help.hlpcalsol
 msgid "calendar_solar_eclipses.html"
 msgstr "календар_сонячні_затьмарення.html"

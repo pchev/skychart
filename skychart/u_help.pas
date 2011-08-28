@@ -23,6 +23,7 @@ resourcestring
   hlpCalPla = 'calendar_planet.html';
   hlpCalSol = 'calendar_solar_eclipses.html';
   hlpCalTw = 'calendar_twilight.html';
+  hlpCalSat = 'artificial_satellites.html';
   hlpCatalog = 'catalog.html';
   hlpCatgen ='catgen.html';
   hlpCfgChart = 'chart_coordinates.html';
