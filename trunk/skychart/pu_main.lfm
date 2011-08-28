@@ -3854,6 +3854,10 @@ object f_main: Tf_main
         Action = ResetDefaultChart
         OnClick = ResetDefaultChartExecute
       end
+      object ResetLanguage: TMenuItem
+        Caption = 'Reset language'
+        OnClick = ResetLanguageClick
+      end
       object N6: TMenuItem
         Caption = '-'
       end

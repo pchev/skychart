@@ -49,6 +49,7 @@ type
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
     CloseTimer: TTimer;
+    ResetLanguage: TMenuItem;
     TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
@@ -456,6 +457,7 @@ type
       Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
+    procedure ResetLanguageClick(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -3159,11 +3161,6 @@ begin
  activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
 end;
 
-procedure Tf_main.SetupSystemExecute(Sender: TObject);
-begin
- SetupSystemPage(0);
-end;
-
 procedure Tf_main.TConnectMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -3192,6 +3189,11 @@ end;
 procedure Tf_main.TelescopeSetup1Click(Sender: TObject);
 begin
   SetupSystemPage(2);
+end;
+
+procedure Tf_main.SetupSystemExecute(Sender: TObject);
+begin
+ SetupSystemPage(0);
 end;
 
 procedure Tf_main.SetupSystemPage(page:integer);
@@ -3224,6 +3226,36 @@ if ConfigSystem.ModalResult=mrOK then begin
  ConfigSystem.ActivateDBchange;
  activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
 end;
+ConfigSystem.Free;
+ConfigSystem:=nil;
+end;
+
+procedure Tf_main.ResetLanguageClick(Sender: TObject);
+begin
+// Reset language to default using the same procedure as SetupSystemPage
+if ConfigSystem=nil then begin
+   ConfigSystem:=Tf_config_system.Create(self);
+   ConfigSystem.PageControl1.ShowTabs:=true;
+   ConfigSystem.PageControl1.PageIndex:=0;
+   ConfigSystem.onApplyConfig:=ApplyConfigSystem;
+   ConfigSystem.onDBChange:=ConfigDBChange;
+   ConfigSystem.onSaveAndRestart:=SaveAndRestart;
+end;
+ConfigSystem.cdb:=cdcdb;
+ConfigSystem.ccat.Assign(catalog.cfgcat);
+ConfigSystem.cshr.Assign(catalog.cfgshr);
+ConfigSystem.cplot.Assign(def_cfgplot);
+ConfigSystem.csc.Assign(def_cfgsc);
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   ConfigSystem.csc.Assign(sc.cfgsc);
+   ConfigSystem.cplot.Assign(sc.plot.cfgplot);
+end;
+cfgm.prgdir:=appdir;
+cfgm.persdir:=privatedir;
+ConfigSystem.cmain.Assign(cfgm);
+ConfigSystem.cmain.language:='';
+ConfigSystem.ActivateDBchange;
+activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
 ConfigSystem.Free;
 ConfigSystem:=nil;
 end;
