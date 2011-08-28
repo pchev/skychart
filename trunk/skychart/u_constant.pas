@@ -254,8 +254,8 @@ const cdcversion = 'Version 3.3 svn';
       URL_Maillist = 'http://groups.yahoo.com/group/skychart-discussion/';
       URL_BugTracker = 'http://www.ap-i.net/mantis/';
 
-      URL_TLE = 'http://www.space-track.org';
-      URL_QUICKSAT = 'http://www.io.com/~mmccants/programs/index.html';
+      URL_TLE = 'https://www.space-track.org';
+      URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
       
       URL_HTTPCometElements = 'http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_HTTPCometElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
