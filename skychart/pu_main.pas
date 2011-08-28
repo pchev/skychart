@@ -1149,15 +1149,27 @@ end;
 
 Procedure Tf_main.InitDS2000;
 var srcdir, dsdir: string;
+    i: integer;
+const
+    numfn = 4;
+    fn: array [1..numfn] of string = ('ds2000.cdc3','d2k.hdr','d2k.info2','d2k.prj');
 begin
 try
 srcdir:=systoutf8(slash(SampleDir));
 dsdir:=systoutf8(slash(PrivateDir)+slash('ds2000'));
 if not DirectoryExistsutf8(dsdir) then ForceDirectoriesutf8(dsdir);
-if not fileexists(dsdir+'ds2000.cdc3') then CopyFile(srcdir+'ds2000.cdc3', dsdir+'ds2000.cdc3');
-if not fileexists(dsdir+'d2k.hdr') then CopyFile(srcdir+'d2k.hdr', dsdir+'d2k.hdr');
-if not fileexists(dsdir+'d2k.info2') then CopyFile(srcdir+'d2k.info2', dsdir+'d2k.info2');
-if not fileexists(dsdir+'d2k.prj') then CopyFile(srcdir+'d2k.prj', dsdir+'d2k.prj');
+// Upgrade
+for i:=1 to numfn do begin
+  if fileexists(dsdir+fn[i])and(FileAge(srcdir+fn[i]) > FileAge(dsdir+fn[i])) then begin
+     DeleteFile(dsdir+fn[i]);
+     CopyFile(srcdir+fn[i], dsdir+fn[i], true);
+  end;
+end;
+// Initial copy
+for i:=1 to numfn do begin
+  if not fileexists(dsdir+fn[i]) then
+    CopyFile(srcdir+fn[i], dsdir+fn[i], true);
+end;
 except
 end;
 end;
