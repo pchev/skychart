@@ -48,6 +48,7 @@ type
   Tf_main = class(TForm)
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
+    CloseTimer: TTimer;
     TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
@@ -438,6 +439,7 @@ type
     procedure AnimationTimerTimer(Sender: TObject);
     procedure BlinkImageExecute(Sender: TObject);
     procedure BugReport1Click(Sender: TObject);
+    procedure CloseTimerTimer(Sender: TObject);
     procedure FileClose1Execute(Sender: TObject);
     procedure FileNew1Execute(Sender: TObject);
     procedure FileOpen1Execute(Sender: TObject);
@@ -1431,6 +1433,12 @@ end;
 procedure Tf_main.BugReport1Click(Sender: TObject);
 begin
    ExecuteFile(URL_BugTracker);
+end;
+
+procedure Tf_main.CloseTimerTimer(Sender: TObject);
+begin
+  CloseTimer.Enabled:=false;
+  Close;
 end;
 
 
@@ -6276,13 +6284,14 @@ else begin
     if cmd='RESIZE' then begin // special case with action on main and on the chart
          w:=StrToIntDef(arg[1],child.Width);
          h:=StrToIntDef(arg[2],child.Height);
-  //       if (w>10)and(w<=screen.Width)and(h>10)and(h<=screen.Height) then begin
          if (w>10)and(h>10) then begin
            Multidoc1.Maximized:=false;
-           if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
-           if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
-           h:=h+child.TopBar.Height+child.BotBar.Height+child.MenuBar.Height;
-           w:=w+child.LeftBar.Width+child.RightBar.width;
+           if InitOK then begin // only if form is show
+             if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
+             if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
+             h:=h+child.TopBar.Height+child.BotBar.Height+child.MenuBar.Height;
+             w:=w+child.LeftBar.Width+child.RightBar.width;
+           end;
            child.width:=w;
            child.height:=h;
            arg[1]:=inttostr(w);
@@ -6644,6 +6653,14 @@ for i:=0 to Params.Count-1 do begin
 end;
 finally
   pp.free;
+end;
+// --quit parameter
+for i:=0 to Params.Count-1 do begin
+   parms:= Params[i];
+   cmd:=words(parms,'',1,1);
+   if cmd='--quit' then begin
+       CloseTimer.Enabled:=true;
+   end;
 end;
 end;
 
