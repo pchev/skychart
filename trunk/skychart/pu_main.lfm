@@ -10355,4 +10355,11 @@ object f_main: Tf_main
     left = 288
     top = 424
   end
+  object CloseTimer: TTimer
+    Enabled = False
+    Interval = 500
+    OnTimer = CloseTimerTimer
+    left = 169
+    top = 428
+  end
 end
