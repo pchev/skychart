@@ -1,0 +1,248 @@
+/* ===OFFICIAL USGS STYLE SHEET===
+This CSS has been approved by all applicable parties and is subject to change...with prior notice. This CSS is meant to provide a consistent look and feel across all USGS Web pages and can be used in conjunction with the custom.css file and any additional style sheets of your own.
+
+DO NOT MODIFY THIS FILE IN ANY WAY.
+
+You can customize some areas of the header ONLY by making the changes in the custom.css file. Refer to the custom.css file for specific instructions.
+===END DISCLAIMER NOTICE===*/
+
+/* ===STANDARD HEADER===*/
+
+#usgscolorband {
+	font: 14px Verdana, Arial, Helvetica, sans-serif;
+	width: 100%;
+	height: 5.14em;
+	background: #006633 url(http://www.usgs.gov/images/headers/hazards.jpg) 178px 0px no-repeat; 
+	min-height: 72px;
+}
+#usgsbanner {
+	width: 100%;
+	height: 72px;	
+}
+#usgsidentifier {
+	background-color: black;
+	width: 178px;
+	height: 5.14em;
+	float: left;
+}
+#usgsidentifier img {
+	border: none;
+}
+#usgscoop { 
+	padding-left: 18px; 
+	position: relative; 
+	float: left;
+	height: 5.14em; 
+	background-color: black;
+	min-height: 72px;   
+} 
+#usgscoop img {
+	margin-right: 3px;
+	border: none;
+}
+#usgstitle { 
+	background-color: #006633; 
+	clear: both; 
+	width: 100%; 
+	border-bottom: 1px solid #ffffff; 
+	border-top: 1px solid #ffffff; 
+	font: 14px Verdana, Arial, Helvetica, sans-serif; 
+	color: #ffffff; 
+} 
+#usgstitle p { 
+	font: bold 1.2em Verdana, Arial, Helvetica, sans-serif; 
+	padding: 5px; 
+	margin: 0px; 
+} 
+/* ===STANDARD CUSTOMER SERVICE AREA===*/
+#usgsccsabox {
+	float: right;
+	background-color: #000000;
+	min-height: 72px;
+}
+#usgsccsa {
+	font:  1em/.5em Verdana, Arial, Helvetica, sans-serif;
+	height: 5.14em;
+	width: 10.5em;
+}
+#usgsccsa a:link, #usgsccsa a:visited { 
+	font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+	color: #ffffff; 
+	margin-left: 4px; 
+	text-decoration: none; 
+} 
+#usgsccsa a:hover { 
+	font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+	color: #ffffff; 
+	text-decoration: underline; 
+	margin-left: 4px; 
+} 
+#usgsccsa a:active { 
+	font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+	color: #ffffff; 
+	margin-left: 4px; 
+	text-decoration: none; 
+}
+/* ===STANDARD CONTENT===*/
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #000000;
+	background-color: #ffffff;
+}
+th, td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+}
+/* ===STANDARD FOOTER===*/
+#usgsfooter {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	margin-top: 20px;	
+	margin-bottom: 2px;
+}
+#usgsfooterbar {
+	background-color: #666666;
+	padding: 4px;
+	margin-bottom: -16px;
+}
+#usgsfooterbar a:link, #usgsfooterbar a:visited {
+	margin-right: 40px;
+	color: #ffffff;
+	text-decoration: none;
+}
+#usgsfooterbar a:hover {
+	margin-right: 40px;
+	color: #ffffff;
+	text-decoration: underline;
+}
+#usgsfooterbar a:active {
+	margin-right: 40px;
+	color: #ffffff;
+	text-decoration: none;
+}
+#usgsfootertext {
+	padding: 4px;
+}
+#usgsfootertext img {
+	border: none;
+	float: right;
+	margin-right: .3em;
+}
+			
+			
+		/* =============================================================================*/
+		/* === OLD TEMPLATES Version: FY 2006 (Deprecated but supported until further notice ===*/
+		/* =====These styles are only here to support older templates. DO NOT EDIT =====*/
+		
+		.bannerColorBand {
+			font: 14px Verdana, Arial, Helvetica, sans-serif;
+			width: 100%;
+			height: 5.14em;
+			background-color: #006633;
+		}
+		.banner {
+			background: url("http://www.usgs.gov/images/headers/hazards.jpg") #006633 178px 0px no-repeat;
+			width: 100%;
+			height: 72px;	
+		}
+		.identifier {
+			background-color: black;
+			width: 178px;
+			height: 5.14em;
+			float: left;
+		}
+		.coop { 
+				padding-left: 18px; 
+				position: absolute; 
+				height: 5.14em; 
+				background-color: black;   
+		} 
+		.siteTitle { 
+				background-color: #006633; 
+				clear: both; 
+				width: 100%; 
+				border-bottom: 1px solid #ffffff; 
+				border-top: 1px solid #ffffff; 
+				font: 14px Verdana, Arial, Helvetica, sans-serif; 
+				color: #ffffff; 
+		} 
+		#pTitle { 
+				font: bold 1.2em Verdana, Arial, Helvetica, sans-serif; 
+				padding: 5px; 
+				margin: 0px; 
+		} 
+		/* ===STANDARD CUSTOMER SERVICE AREA===*/
+		.ccsaBox {
+			float: right;
+			background-color: #000000;
+		}
+		.ccsa {
+			font:  1em/.5em Verdana, Arial, Helvetica, sans-serif;
+			height: 5.14em;
+			width: 10.5em;
+		}
+		.ccsa a:link { 
+			font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+			color: #ffffff; 
+			margin-left: 4px; 
+			text-decoration: none; 
+		} 
+		.ccsa a:visited { 
+			font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+			color: #ffffff; 
+			margin-left: 4px; 
+			text-decoration: none; 
+		} 
+		.ccsa a:hover { 
+			font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+			color: #ffffff; 
+			text-decoration: underline; 
+			margin-left: 4px; 
+		} 
+		.ccsa a:active { 
+			font: bold 1em/1.3em Verdana, Arial, Helvetica, sans-serif; 
+			color: #ffffff; 
+			margin-left: 4px; 
+			text-decoration: none; 
+		}
+		.footerBar {
+			background-color: #666666;
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 1em;
+			/*/*/padding: 4px; /*End hiding for this section in Netscape 4x*/
+			margin-top: 20px;
+			margin-bottom: -16px;
+		}		
+		.footerBar a:link { 
+		   margin-right: 40px;
+		   color: #ffffff; 
+		   text-decoration: none; 
+		} 
+		.footerBar a:visited { 
+		   margin-right: 40px;
+		   color: #ffffff; 
+		   text-decoration: none; 
+		} 
+		.footerBar a:hover { 
+		   margin-right: 40px;
+		   color: #ffffff; 
+		   text-decoration: underline; 
+		} 
+		.footerBar a:active { 
+		   margin-right: 40px;
+		   color: #ffffff; 
+		   text-decoration: none; 
+		} 
+		.footerText {
+			font-family: Verdana, Arial, Helvetica, sans-serif;
+			font-size: 1em;
+			margin-bottom: -2px;
+			/*/*/padding: 4px;/*End hiding for this section in Netscape 4x*/
+		}
+		.footerText img {
+			border: none;
+			float: right;
+		}
+		/* === End OLD TEMPLATES: FY 2006 ===*/
+		/* ===============================================================*/

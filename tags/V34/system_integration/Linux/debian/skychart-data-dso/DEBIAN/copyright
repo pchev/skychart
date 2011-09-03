@@ -1,0 +1,15 @@
+
+Copyright: GPL
+
+Information :
+Name        : skychart-data-dso
+Version     : 3.1
+Release     : 1
+Group       : Sciences/Astronomy
+License     : GPL
+Packager    : Patrick Chevalley
+URL         : http://skychart.origo.ethz.ch
+Summary     : Skychart / Cartes du Ciel planetarium software
+Description :
+Planetarium software for the advanced amateur astronomer.
+
