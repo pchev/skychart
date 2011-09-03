@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.4
+version=3.5
 
 basedir=/tmp/skychart   # Be sure this is set to a non existent directory, it is removed after the run!
 
