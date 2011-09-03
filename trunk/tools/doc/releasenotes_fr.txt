@@ -1,4 +1,4 @@
-Version 3.3svn  Notes de la version
+Version 3.4  Notes de la version
 
 - Prise en compte de la dérive la la Tache Rouge de Jupiter.
 - Nouvelle fonction "Cible" dans le menu clic droit.
