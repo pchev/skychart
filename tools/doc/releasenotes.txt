@@ -1,4 +1,4 @@
-Version 3.3svn release Notes
+Version 3.4 release Notes
 
 - Take account for Jupiter GRS drift.
 - New "Target" function in right click menu.
