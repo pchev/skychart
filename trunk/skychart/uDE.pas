@@ -125,7 +125,7 @@ function Calc_Planet_de(julian_date: double; planet_id: integer; var planet_arr:
 var
     rval : byte;
 begin
-
+try
     //set if output in au or km
     if in_au then de_eph.auinkm := 149597870.691 else de_eph.auinkm := 1;
 
@@ -139,6 +139,9 @@ begin
         result:=true;
     end
     else result:=false;
+except
+  result:=false;
+end;
 end;
 
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
@@ -202,6 +205,7 @@ begin
         406:  begin  // -3000 to 3000 - 1 file or 300 years step
                   if InRange(y, -3000, 3000) then begin
                       de_file := 'linxm3000p3000.406';
+                      if not fileexists(de_folder +DirectorySeparator+ de_file) then de_file := 'lnxm3000p3000.406';
                       if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
                         de_y := -3000 + floor((y - (-3000)) / 300) * 300;
                         if de_y < 0 then
@@ -215,8 +219,18 @@ begin
                     if InRange(y, 1900, 2049) then begin
                       de_y := 1900;
                       de_file := 'linx' + floatToStr(de_y) + '.421';
+                      if not fileexists(de_folder +DirectorySeparator+ de_file) then de_file:='lnxp1900p2053.421';
                       if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
                          de_file := 'unxp' + floatToStr(de_y) + '.421';
+                      end;
+                    end else exit;
+              end;
+        422:  begin  //-3000 to 3000 - 1 file
+                    if InRange(y, -3000, 3000) then begin
+                      de_y := -3000;
+                      de_file := 'lnxm3000p3000' + '.422';
+                      if not fileexists(de_folder +DirectorySeparator+ de_file) then begin
+                         de_file := 'unxm3000p3000' + '.422';
                       end;
                     end else exit;
               end;
