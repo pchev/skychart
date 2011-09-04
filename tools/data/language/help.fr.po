@@ -266,4 +266,3 @@ msgstr "commandes_du_serveur.html"
 msgid "server_information.html"
 msgstr "information_sur_le_serveur.html"
 
-
