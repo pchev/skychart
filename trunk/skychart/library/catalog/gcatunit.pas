@@ -33,6 +33,11 @@ const
  vnId=1; vnNebtype=2; vnMag=3; vnSbr=4; vnDim1=5; vnDim2=6; vnNebunit=7; vnPa=8; vnRv=9; vnMorph=10; vnComment=11;
  vlId=1; vlLinecolor=2; vlLineoperation=3; vlLinewidth=4; vlLinetype=5; vlComment=6;
  lOffset=2;
+
+{ deepsky2000 object type }
+const TypeDS : array[1..30] of integer = (1,2,3,5,4,114,8,-1,115,-1,101,102,-1,104,105,106,107,108,109,110,111,112,113,-1,-1,-1,-1,-1,-1,-1);
+// -1..8=drawneb ; 100+ipla = planet ; 112=ast ; 113=com; 114=var; 115=star
+
 Type
 TVstar = array[1..12] of boolean;
 TVvar  = array[1..10] of boolean;
@@ -427,19 +432,22 @@ end;
 
 Function GetNebType2(p : integer) : integer;
 var i : integer;
-    buf:string;
+    buf1,buf:string;
 begin
-buf:=trim(copy(dataline,catheader.fpos[p],catheader.flen[p]));
-if buf='' then result:=0
+buf1:=trim(copy(dataline,catheader.fpos[p],catheader.flen[p]));
+if buf1='' then result:=0
 else begin
-result:=0;
-buf:=buf+',';
-for i:=1 to 15 do begin
-  if pos(buf,catinfo.neblst[i])>0 then begin
-     result:=catinfo.nebtype[i];
-     break;
+  result:=-99;
+  buf:=buf1+',';
+  for i:=1 to 15 do begin
+    if pos(buf,catinfo.neblst[i])>0 then begin
+       result:=catinfo.nebtype[i];
+       break;
+    end;
   end;
-end;
+  if result=-99 then begin
+    result:=StrToIntDef(buf1,0);
+  end;
 end;
 end;
 
@@ -762,6 +770,9 @@ case cattype of
     rtneb : begin  // nebulae 2
         if catheader.flen[3]>0 then lin.neb.id:=GetString2(3);
         if catheader.flen[4]>0 then lin.neb.nebtype:=GetNebType2(4);
+        if trim(catheader.ShortName)='d2k' then begin
+           lin.neb.nebtype:=TypeDS[lin.neb.nebtype];
+        end;
         if catheader.flen[5]>0 then begin lin.neb.mag:=Getfloat2(5,99); if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
         if catheader.flen[6]>0 then begin lin.neb.sbr:=Getfloat2(6,99); if lin.neb.sbr>32 then lin.neb.sbr:=99.9;end;
         if catheader.flen[7]>0 then lin.neb.dim1:=Getfloat2(7,0);
