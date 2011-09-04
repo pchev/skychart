@@ -118,7 +118,7 @@ type
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
 //--------------------------------------------
-      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String);
+      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean);
       Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string);
       Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
       procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
@@ -849,7 +849,7 @@ if not cfgplot.Invisible then
 end;
 end;
 
-Procedure TSplot.PlotDeepSkyObject(Axx,Ayy: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; Amorph : String);
+Procedure TSplot.PlotDeepSkyObject(Axx,Ayy: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; Amorph : String;whitebg:boolean);
 begin
 {
   Here's where we break out the plot routines for each type of deep sky object
@@ -867,7 +867,7 @@ begin
 
 --------------------------------------------------------------------------------------------------------------------
  The SAC read routine loads in:
-      nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
+    nebtype: array[1..18] of string=(' - ',' ? ',' Gx',' OC',' Gb',' Pl',' Nb','C+N','  *',' D*','***','Ast',' Kt','Gcl','Drk','Cat','Cat','Cat');
    not found=-1,Gx=1,OC=2,Gb=3,Pl=4,Nb=5,C+N=6,*=7,D*=8,***=9,Ast=10,Kt=11,Gcl=12,Drk=13,'?'=0,spaces=0,'-'=-1,PD=-1;
    (PD = plate defect. where has this come from (it's the NGC)..?)
 
@@ -916,6 +916,16 @@ begin
             PlotDSORectangle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
           16 : // lozenge
             PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+          101..111: // Planet from ds2000
+            PlotPlanet4(round(Axx),round(Ayy),Atyp-100,Apixscale,WhiteBg);
+          112:  // Asteroid from ds2000
+            PlotAsteroid(Axx,Ayy,0,Ama);
+          113: // Comet from ds2000
+            PlotComet(Axx,Ayy,0,0,0,Ama,0,0);
+          114: // var star from ds2000
+            PlotVarStar(Axx,Ayy,Ama,Ama+1);
+          115: // star from ds2000
+            PlotStar(Axx,Ayy,Ama,0);
          else PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
       end;
     end;
