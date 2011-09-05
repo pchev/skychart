@@ -374,7 +374,7 @@ writeln(c,copy(DSOLabel+blank20,1,20),blank,
           copy(floattostrf(decd+sgn(decd)*decm/60,fffixed,10,6)+blank20,1,20),blank,
           copy(inttostr(objtype)+blank20,1,20),blank,
           copy(inttostr(objsize)+blank20,1,20),blank,
-          copy(desc+blank256,1,255),blank,
+          trim(desc),blank,
           notes);
 if LastObject=1 then begin
   CloseCatalogFile;
