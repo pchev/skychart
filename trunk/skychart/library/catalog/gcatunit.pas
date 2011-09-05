@@ -66,7 +66,8 @@ Tneb    = packed record
           mag,sbr,dim1,dim2,pa,rv : double;
           nebunit : Smallint;
           nebtype : ShortInt;
-          id,morph,comment : shortstring;
+          id,morph : shortstring;
+          comment : string;
           messierobject : boolean;
           valid : TVneb;
           end;
