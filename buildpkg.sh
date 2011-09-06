@@ -12,13 +12,13 @@ arch=$(arch)
 # You MUST crosscompile Freepascal and Lazarus for this targets! 
 
 unset make_linux32
-make_linux32=1
+#make_linux32=1
 unset make_linux64
-if [[ $arch -eq x86_64 ]]; then make_linux64=1;fi
+#if [[ $arch -eq x86_64 ]]; then make_linux64=1;fi
 unset make_win32
 make_win32=1
 unset make_win64
-make_win64=1
+#make_win64=1
 
 if [[ -n $1 ]]; then
   configopt="fpc=$1"
