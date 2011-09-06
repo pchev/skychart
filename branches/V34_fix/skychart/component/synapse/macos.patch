@@ -1,0 +1,16 @@
+Index: source/lib/ssfpc.pas
+===================================================================
+--- source/lib/ssfpc.pas	(revision 1309)
++++ source/lib/ssfpc.pas	(working copy)
+@@ -250,7 +250,11 @@
+ 
+   MSG_OOB       = sockets.MSG_OOB;      // Process out-of-band data.
+   MSG_PEEK      = sockets.MSG_PEEK;     // Peek at incoming messages.
++  {$ifdef darwin}
++  MSG_NOSIGNAL  = 0;  // do not exist on Mac OS
++  {$else}
+   MSG_NOSIGNAL  = sockets.MSG_NOSIGNAL; // Do not generate SIGPIPE.
++  {$endif}
+ 
+ const
+   WSAEINTR = ESysEINTR;

@@ -1,0 +1,23 @@
+****************************************************************
+
+	Cartes du Ciel, Sky Charts 
+
+	Patrick Chevalley 
+
+        http://www.astrosurf.org/astropc
+	pchev@geocities.com
+
+****************************************************************
+
+This program convert the Tycho Catalogue I/239 (ESA 1997)
+for use with "Cartes du Ciel" / "Sky Charts" program.
+In the first field enter the complete directory path where you put the file 
+tyc_main.dat of the original catalog ( keep this file in Unix fomat, 
+do NOT convert it in cr+lf format). 
+In the second field enter the path where to install the converted catalog, 
+I suggest you keep the default: <Sky Chart path>\cat\tycho
+You must have 25 MB free disk space on the destination directory.
+Press "Conversion" key and be patient... there are 732 files and 1'058'332 stars. 
+This may take from ten minutes to more than one hour, depending on your machine. 
+When it finish press *Exit" key.
+
