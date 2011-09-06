@@ -2186,7 +2186,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     bmp: Tbitmap;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
-    isStar, isSolarSystem: boolean;
+    isStar, isSolarSystem, isd2k: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp: double;
 function Bold(s:string):string;
@@ -2201,6 +2201,7 @@ begin
 end;
 begin
 desc:=sc.cfgsc.FindDesc;
+isd2k:=(trim(sc.cfgsc.FindCat)='d2k');
 // header
 if NightVision then txt:=html_h_nv
                else txt:=html_h;
@@ -2280,15 +2281,22 @@ if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
   end;
 end;
 // source catalog
-if sc.cfgsc.FindCat<>'' then txt:=txt+html_b+rsInformationF+blank+
-  sc.cfgsc.FindCat+':'+htms_b+html_br;
-// other attribute
+if isd2k then begin
+  txt:=txt+html_b+rsFrom+blank+'Deepsky software'+':'+htms_b+html_br;
+end else begin
+  if sc.cfgsc.FindCat<>'' then txt:=txt+html_b+rsInformationF+blank+
+    sc.cfgsc.FindCat+':'+htms_b+html_br;
+end;
 
+// other attribute
 repeat
   i:=pos(tab,buf);
   if i=0 then i:=length(buf)+1;
   buf2:=copy(buf,1,i-1);
   delete(buf,1,i);
+  if isd2k and(copy(buf2,1,4)='Dim:') then continue;
+  if isd2k and(copy(buf2,1,5)='desc:') then buf2:=copy(buf2,6,999);
+  if isd2k and(copy(buf2,1,2)='n:') then buf2:=copy(buf2,3,999);
   i:=pos(':',buf2);
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
@@ -2437,10 +2445,12 @@ else if txt='Pl' then txt:=rsPlanetaryNeb
 else if txt='C+N' then txt:=rsClusterAndNe
 else if txt='N' then txt:=rsNebula
 else if txt='*' then txt:=rsStar
+else if txt='DS*' then txt:=rsStar
 else if txt='**' then txt:=rsDoubleStar
 else if txt='***' then txt:=rsTripleStar
 else if txt='D*' then txt:=rsDoubleStar
 else if txt='V*' then txt:=rsVariableStar
+else if txt='DSV*' then txt:=rsVariableStar
 else if txt='Ast' then txt:=rsAsterism
 else if txt='Kt' then txt:=rsKnot
 else if txt='?' then txt:=rsUnknowObject
@@ -2449,9 +2459,12 @@ else if txt='-' then txt:=rsPlateDefect
 else if txt='PD' then txt:=rsPlateDefect
 else if txt='S*' then txt:=rsStar
 else if txt='P' then txt:=rsPlanet
+else if txt='DSP' then txt:=rsPlanet
 else if txt='Ps' then txt:=rsPlanetarySat
 else if txt='As' then txt:=rsAsteroid
+else if txt='DSAs' then txt:=rsAsteroid
 else if txt='Cm' then txt:=rsComet
+else if txt='DSCm' then txt:=rsComet
 else if txt='Sat' then txt:=rsArtificialSa2
 else if txt='C1' then txt:=rsExternalCata
 else if txt='C2' then txt:=rsExternalCata;
@@ -2539,6 +2552,7 @@ if i>0 then begin
   else if key='LLAT' then result:=rsLibrationInL+d+value
   else if key='LLON' then result:=rsLibrationInL2+d+value
   else if key='EPHEMERIS' then result:=rsEphemeris+d+value
+  else if key='D' then result:=value
   else result:=txt;
 end
 else result:=txt;

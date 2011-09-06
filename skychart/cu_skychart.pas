@@ -963,7 +963,7 @@ var rec:GcatRec;
   Procedure Drawing;
     begin
       if rec.neb.nebtype<>1 then
-        Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph)
+        Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg)
       else
         begin;    //   galaxies are the only rotatable objects, so rotate them and then plot...
           projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
@@ -1897,7 +1897,20 @@ begin
          cfgsc.FindName:=txt;
          if rec.neb.valid[vnNebtype] then i:=rec.neb.nebtype
                                         else i:=rec.options.ObjType;
-         Desc:=Desc+nebtype[i+2]+tab+txt+tab;
+         // 100+ipla = planet ; 112=ast ; 113=com; 114=var; 115=star
+         if i<=18 then
+            Desc:=Desc+nebtype[i+2]
+         else begin
+            case i of
+            101..111: Desc:=Desc+' DSP';
+            112     : Desc:=Desc+' DSAs';
+            113     : Desc:=Desc+' DSCm';
+            114     : Desc:=Desc+' DSV*';
+            115     : Desc:=Desc+' DS*';
+            else  Desc:=Desc+' ?';
+            end;
+         end;
+         Desc:=Desc+tab+txt+tab;
          if rec.neb.valid[vnMag] then begin
             if (rec.neb.mag<90) then str(rec.neb.mag:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
