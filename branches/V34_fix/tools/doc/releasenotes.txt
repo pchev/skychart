@@ -1,3 +1,7 @@
+Version 3.4.1 release Notes
+
+- Add support for Deepsky software interface.
+
 Version 3.4 release Notes
 
 - Take account for Jupiter GRS drift.
