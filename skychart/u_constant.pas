@@ -35,8 +35,8 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[0..7]of Tcolor;
 
-const cdcversion = 'Version 3.5';
-      cdcver     = '3.5';
+const cdcversion = 'Version 3.4';
+      cdcver     = '3.4';
       cdccpy = 'Copyright (C) 2002-2011 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,'+crlf+
@@ -130,8 +130,8 @@ const cdcversion = 'Version 3.5';
       D0jup : array [1..4] of double = (1821,1565,2634,2403);
       D0sat : array [1..8] of double = (199,249,530,560,764,2575,143,718);
       D0ura : array [1..5] of double = (236,581,585,789,761);
-      nJPL_DE=7;
-      JPL_DE:array [1..nJPL_DE] of integer = (423,421,422,405,406,403,200);  // JPL ephemeris to try, order by preference
+      nJPL_DE=6;
+      JPL_DE:array [1..nJPL_DE] of integer = (423,421,405,406,403,200);  // JPL ephemeris to try, order by preference
 
       blank15='               ';
       blank=' ';

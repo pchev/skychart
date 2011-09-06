@@ -374,15 +374,15 @@ writeln(c,copy(DSOLabel+blank20,1,20),blank,
           copy(floattostrf(decd+sgn(decd)*decm/60,fffixed,10,6)+blank20,1,20),blank,
           copy(inttostr(objtype)+blank20,1,20),blank,
           copy(inttostr(objsize)+blank20,1,20),blank,
-          trim(desc),blank,
+          copy(desc+blank256,1,255),blank,
           notes);
 if LastObject=1 then begin
   CloseCatalogFile;
+  cmd:='SETCAT '+workdir+' d2k 1 0 10';
+  paramcmd:='--setcat="'+workdir+' d2k 1 0 10"';
+  Executecmd(cmd);
   cmd := 'MOVE RA:'+trim(artostr(arc))+' DEC:'+trim(detostr(dec))+' FOV:'+trim(detostr(la));
   paramcmd :=' --setra='+floattostr(arc)+' --setdec='+floattostr(dec)+' --setfov='+floattostr(la);
-  Executecmd(cmd);
-  cmd:='SETCAT "'+workdir+'" d2k 1 0 10';
-  paramcmd:='--setcat="""'+workdir+'"" d2k 1 0 10"';
   Executecmd(cmd);
   cmd:='REDRAW';
   Executecmd(cmd);

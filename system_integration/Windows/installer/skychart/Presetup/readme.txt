@@ -1,5 +1,5 @@
 Skychart / Cartes du Ciel
-Version 3.5 beta
+Version 3.4
 
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
 
