@@ -1,3 +1,7 @@
+Version 3.4.1  Notes de la version
+
+- Ajout du support de l'interface pour le logiciel Deepsky
+
 Version 3.4  Notes de la version
 
 - Prise en compte de la dérive la la Tache Rouge de Jupiter.
