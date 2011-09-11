@@ -6529,6 +6529,7 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--loaddef' then begin
       pp.Add('LOADDEFAULT');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
@@ -6536,6 +6537,7 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--load' then begin
       pp.Add('LOAD');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
@@ -6564,18 +6566,21 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--setobs' then begin
       pp.Add('SETOBS');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--settz' then begin
       pp.Add('SETTZ');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setdate' then begin
       pp.Add('SETDATE');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
@@ -6603,30 +6608,35 @@ for i:=0 to Params.Count-1 do begin
    if cmd='--search' then begin
       pp.Add('SEARCH');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setproj' then begin
       pp.Add('SETPROJ');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setfov' then begin
       pp.Add('SETFOV');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setra' then begin
       pp.Add('SETRA');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
    end else if cmd='--setdec' then begin
       pp.Add('SETDEC');
       pp.Add(parm);
+      for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
       chartchanged:=true;
