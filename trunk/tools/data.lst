@@ -22,6 +22,7 @@ data/constellation/constlabel_ua.cla
 data/constellation/constlabel_zh.cla
 data/constellation/DefaultConstL.cln
 data/constellation/ReyConstL.cln
+data/constellation/Tirion-Constellations.cln
 data/earthmap
 data/earthmap/earthmap1k.jpg
 data/earthmap/earthmap4k.jpg
