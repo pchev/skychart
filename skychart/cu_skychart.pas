@@ -473,7 +473,7 @@ begin
  WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
 {$endif}
 if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
-cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc);
+cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
 cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude);
