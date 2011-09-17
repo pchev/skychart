@@ -86,7 +86,7 @@ function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
-function DTminusUT(annee : integer; c:Tconf_skychart) : double;
+function DTminusUT(year,month : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
 Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
@@ -1030,83 +1030,90 @@ cfgsc.TimeZone:=cfgsc.tz.SecondsOffset/3600;
 result:=true;
 end;
 
-function DTminusUT(annee : integer; c:Tconf_skychart) : double;
-var t : double;
+function DTminusUT(year,month : integer; c:Tconf_skychart) : double;
+var y,u,t : double;
 begin
-if c.Force_DT_UT then result:=c.DT_UT_val
+if c.Force_DT_UT then
+  result:=c.DT_UT_val
 else begin
-case annee of
-{ Atlas of Historical Eclipse Maps East Asia 1500 BC - AD 1900, Stephenson and Houlden (1986)
-     (1) prior to 948 AD
-         delta-T (seconds) = 1830 - 405*t + 46.5*t^2
-             (t = centuries since 948 AD)
-
-     (2) 948 AD to 1600 AD
-         delta-T (seconds) = 22.5*t^2
-             (t = centuries since 1850 AD)
-}
--99999..948 : begin
-              t:=(annee-2000)/100;
-              result:=(2715.6 + 573.36 * t + 46.5 * t*t) / 3600;
-              end;
-  949..1619 : begin
-              t:=(annee-1850)/100;
-              result:=(22.5*t*t)/3600;
-              end;
-  1620..1621 : result:=124/3600;
-  1622..1623 : result:=115/3600;
-  1624..1625 : result:=106/3600;
-  1626..1627 : result:= 98/3600;
-  1628..1629 : result:= 91/3600;
-  1630..1631 : result:= 85/3600;
-  1632..1633 : result:= 79/3600;
-  1634..1635 : result:= 74/3600;
-  1636..1637 : result:= 70/3600;
-  1638..1639 : result:= 65/3600;
-  1640..1645 : result:= 60/3600;
-  1646..1653 : result:= 50/3600;
-  1654..1661 : result:= 40/3600;
-  1662..1671 : result:= 30/3600;
-  1672..1681 : result:= 20/3600;
-  1682..1691 : result:= 10/3600;
-  1692..1707 : result:=  9/3600;
-  1708..1717 : result:= 10/3600;
-  1718..1733 : result:= 11/3600;
-  1734..1743 : result:= 12/3600;
-  1744..1751 : result:= 13/3600;
-  1752..1757 : result:= 14/3600;
-  1758..1765 : result:= 15/3600;
-  1766..1775 : result:= 16/3600;
-  1776..1791 : result:= 17/3600;
-  1792..1795 : result:= 16/3600;
-  1796..1797 : result:= 15/3600;
-  1798..1799 : result:= 14/3600;
- 1800..1899 : begin
-              t:=(annee-1900)/100;
-              result:=(-1.4e-5+t*(1.148e-3+t*(3.357e-3+t*(-1.2462e-2+t*(-2.2542e-2+t*(6.2971e-2+t*(7.9441e-2+t*(-0.146960+t*(-0.149279+t*(0.161416+t*(0.145932+t*(-6.7471e-2+t*(-5.8091e-2))))))))))))  )*24;
-              end;
- 1900..1987 : begin
-              t:=(annee-1900)/100;
-              result:=(-2e-5+t*(2.97e-4+t*(2.5184e-2+t*(-0.181133+t*(0.553040+t*(-0.861938+t*(0.677066+t*(-0.212591))))))))*24;
-              end;
- 1988..1996 : begin
-              t:=(annee-2000)/100;
-              result:=(67+123.5*t+32.5*t*t)/3600;
-              end;
-       1997 : result:=62/3600;
-       1998 : result:=63/3600;
- 1999..2005 : result:=64/3600;
- 2006..2007 : result:=65/3600;
- 2008..2020 : begin
-              t:=(annee-2007)/100;
-              result:=(65+50*t+32.5*t*t)/3600;
-              end;
- 2021..99999 : begin
-              t:=(annee-1875.1)/100;
-              result:=45.39*t*t/3600;
-              end;
- else result:=0;
- end;
+  { Reference  :
+  NASA/TP2006214141
+  Five Millennium Canon of Solar Eclipses: 1999 to +3000 (2000 BCE to 3000 CE)
+  Fred Espenak and Jean Meeus
+  }
+  y:=year+(month-0.5)/12;
+  case year of
+  -MaxInt..-501:begin
+                u:=(y-1820)/100;
+                result:=(-20+32*u*u)/3600;
+                end;
+  -500..499   : begin
+                u:=y/100;
+                result:=(10583.6+u*(-1014.41+u*(33.78311+u*(-5.952053+u*(-0.1798452+u*(0.022174192+u*(0.0090316521)))))))/3600;
+                end;
+  500..1599   : begin
+                u:=(y-1000)/100;
+                result:=(1574.2+u*(-556.01+u*(71.23472+u*(0.319781+u*(-0.8503463+u*(-0.005050998+u*(0.0083572073)))))))/3600;
+                end;
+  1600..1699  : begin
+                t:=y-1600;
+                result:=(120+t*(-0.9808+t*(-0.01532+t*(1/7129))))/3600;
+                end;
+  1700..1799  : begin
+                t:=y-1700;
+                result:=(8.83+t*(0.1603+t*(-0.0059285+t*(0.00013336+t*(-1/1174000)))))/3600;
+                end;
+  1800..1859  : begin
+                t:=y-1800;
+                result:=(13.72+t*(-0.332447+t*(0.0068612+t*(0.0041116+t*(-0.00037436+t*(0.0000121272+t*(-0.0000001699+t*(0.000000000875))))))))/3600;
+                end;
+  1860..1899  : begin
+                t:=y-1860;
+                result:=(7.62+t*(0.5737+t*(-0.251754+t*(0.01680668+t*(-0.0004473624+t*(1/233174))))))/3600;
+                end;
+  1900..1919  : begin
+                t:=y-1900;
+                result:=(-2.79+t*(1.494119+t*(-0.0598939+t*(0.0061966+t*(-0.000197)))))/3600;
+                end;
+  1920..1940  : begin
+                t:=y-1920;
+                result:=(21.20+t*(0.84493+t*(-0.076100+t*(0.0020936))))/3600;
+                end;
+  1941..1960  : begin
+                t:=y-1950;
+                result:=(29.07+t*(0.407+t*(-1/233+t*(1/2547))))/3600;
+                end;
+  1961..1985  : begin
+                t:=y-1975;
+                result:=(45.45+t*(1.067+t*(-1/260+t*(-1/718))))/3600;
+                end;
+  1986..2004  : begin
+                t:=y-2000;
+                result:=(63.86+t*(0.3345+t*(-0.060374+t*(0.0017275+t*(0.000651814+t*(0.00002373599))))))/3600;
+                end;
+  // adjustement for measured values after 2005 :
+  // linear adjustement from 2005.0 value to 67 sec. reached by 2014.0
+  // factor up to 2150 are adjusted to avoid a discontinuity.
+  2005..2013  : begin
+                t:=y-2005;
+                result:=(64.69+t*0.256667)/3600;
+                end;
+  2014..2049  : begin
+                t:=y-2000;
+                result:=(61.4+t*(0.32217+t*(0.005589)))/3600;
+                //result:=(62.92+t*(0.32217+t*(0.005589)))/3600;
+                end;
+  2050..2149  : begin
+                u:=(y-1820)/100;
+                t:=2150-y;
+                result:=(-20+32*u*u-0.5788*t)/3600;
+                //result:=(-20+32*u*u-0.5628*t)/3600;
+                end;
+  2150..MaxInt: begin
+                u:=(y-1820)/100;
+                result:=(-20+32*u*u)/3600;
+                end;
+  end;
 end;
 end;
 

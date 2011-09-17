@@ -1321,7 +1321,7 @@ FreeCoord(PlutonGrid);
 repeat
 djd(jda,a,m,d,h);
 jd0:=jd(a,m,d,0);
-jdt_ut:=DTminusUT(a,config)/24;
+jdt_ut:=DTminusUT(a,m,config)/24;
 st0:=SidTim(jd0,h,config.ObsLongitude);
 config.tz.JD:=jda;
 config.TimeZone:=config.tz.SecondsOffset/3600;
