@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <MainUnit Value="0"/>
+      <Title Value="convpgc"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <i18n>
+      <EnableI18N LFM="False"/>
+    </i18n>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1" Active="Default">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="6">
+      <Unit0>
+        <Filename Value="convpgc.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="convpgc"/>
+        <UsageCount Value="21"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="32" Y="20"/>
+        <UsageCount Value="20"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="convpgc1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="convpgc1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="64"/>
+        <CursorPos X="8" Y="76"/>
+        <UsageCount Value="21"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="/home/compiler/lazarus/lcl/interfaces/gtk2/gtk2winapi.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="5153"/>
+        <CursorPos X="1" Y="5176"/>
+        <UsageCount Value="10"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="/home/compiler/fpc/rtl/objpas/sysutils/sysutilh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="219"/>
+        <CursorPos X="35" Y="242"/>
+        <UsageCount Value="10"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="/home/compiler/fpc/rtl/unix/sysunixh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="7"/>
+        <CursorPos X="2" Y="30"/>
+        <UsageCount Value="10"/>
+      </Unit5>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="136" Column="1" TopLine="97"/>
+      </Position1>
+      <Position2>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="135" Column="1" TopLine="97"/>
+      </Position2>
+      <Position3>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="138" Column="1" TopLine="99"/>
+      </Position3>
+      <Position4>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="139" Column="1" TopLine="100"/>
+      </Position4>
+      <Position5>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="140" Column="1" TopLine="101"/>
+      </Position5>
+      <Position6>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="139" Column="1" TopLine="101"/>
+      </Position6>
+      <Position7>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="142" Column="1" TopLine="103"/>
+      </Position7>
+      <Position8>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="143" Column="1" TopLine="104"/>
+      </Position8>
+      <Position9>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="144" Column="1" TopLine="105"/>
+      </Position9>
+      <Position10>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="143" Column="1" TopLine="105"/>
+      </Position10>
+      <Position11>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="146" Column="1" TopLine="55"/>
+      </Position11>
+      <Position12>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="143" Column="21" TopLine="112"/>
+      </Position12>
+      <Position13>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="125" Column="38" TopLine="112"/>
+      </Position13>
+      <Position14>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="139" Column="22" TopLine="112"/>
+      </Position14>
+      <Position15>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="142" Column="1" TopLine="112"/>
+      </Position15>
+      <Position16>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="139" Column="47" TopLine="112"/>
+      </Position16>
+      <Position17>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="142" Column="1" TopLine="112"/>
+      </Position17>
+      <Position18>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="137" Column="39" TopLine="111"/>
+      </Position18>
+      <Position19>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="123" Column="41" TopLine="111"/>
+      </Position19>
+      <Position20>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="130" Column="37" TopLine="101"/>
+      </Position20>
+      <Position21>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="128" Column="7" TopLine="116"/>
+      </Position21>
+      <Position22>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="88" Column="23" TopLine="118"/>
+      </Position22>
+      <Position23>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="75" Column="5" TopLine="64"/>
+      </Position23>
+      <Position24>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="89" Column="1" TopLine="64"/>
+      </Position24>
+      <Position25>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="90" Column="1" TopLine="64"/>
+      </Position25>
+      <Position26>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="91" Column="1" TopLine="64"/>
+      </Position26>
+      <Position27>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="88" Column="1" TopLine="64"/>
+      </Position27>
+      <Position28>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="89" Column="1" TopLine="64"/>
+      </Position28>
+      <Position29>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="90" Column="1" TopLine="64"/>
+      </Position29>
+      <Position30>
+        <Filename Value="convpgc1.pas"/>
+        <Caret Line="91" Column="1" TopLine="64"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="9"/>
+    <Target>
+      <Filename Value="convpgc"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
