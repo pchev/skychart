@@ -80,6 +80,7 @@ Function DEToStr3(de: Double) : string;
 Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 function isodate(a,m,d : integer) : string;
+function LeapYear(Year: longint): boolean;
 function jddate(jd: double) : string;
 function jddatetime(jd: double;fy,fm,fd,fh,fn,fs:boolean) : string;
 function DateTimetoJD(Date: Tdatetime): double;
@@ -962,6 +963,11 @@ var a,m,d : integer;
 begin
 djd(jd,a,m,d,h);
 result:=isodate(a,m,d);
+end;
+
+function LeapYear(Year: longint): boolean;
+begin
+  Result := (Year mod 4 = 0) and ((Year mod 100 <> 0) or (Year mod 400 = 0));
 end;
 
 function DateTimetoJD(date: Tdatetime): double;

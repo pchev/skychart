@@ -348,38 +348,29 @@ object f_config_time: Tf_config_time
             OnClick = BitBtn1Click
             TabOrder = 5
           end
-          object d_yearEdit: TEdit
-            Left = 56
-            Height = 22
-            Top = 22
-            Width = 47
-            OnChange = DateEditChange
-            TabOrder = 6
-          end
           object d_year: TUpDown
-            Left = 103
+            Left = 124
             Height = 22
             Top = 22
             Width = 13
-            Associate = d_yearEdit
-            Min = 0
-            Max = 20000
+            Min = -1
+            Max = 1
             Position = 0
-            TabOrder = 7
+            TabOrder = 6
             Thousands = False
             Wrap = False
             OnClick = DateChange
           end
           object d_monthEdit: TEdit
-            Left = 127
+            Left = 136
             Height = 22
             Top = 22
             Width = 47
             OnChange = DateEditChange
-            TabOrder = 8
+            TabOrder = 7
           end
           object d_month: TUpDown
-            Left = 174
+            Left = 183
             Height = 22
             Top = 22
             Width = 13
@@ -387,7 +378,7 @@ object f_config_time: Tf_config_time
             Min = 1
             Max = 12
             Position = 1
-            TabOrder = 9
+            TabOrder = 8
             Thousands = False
             Wrap = False
             OnClick = DateChange
@@ -398,7 +389,7 @@ object f_config_time: Tf_config_time
             Top = 22
             Width = 47
             OnChange = DateEditChange
-            TabOrder = 10
+            TabOrder = 9
           end
           object d_day: TUpDown
             Left = 242
@@ -409,7 +400,7 @@ object f_config_time: Tf_config_time
             Min = 1
             Max = 31
             Position = 1
-            TabOrder = 11
+            TabOrder = 10
             Thousands = False
             Wrap = False
             OnClick = DateChange
@@ -420,7 +411,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 12
+            TabOrder = 11
           end
           object t_hour: TUpDown
             Left = 103
@@ -431,7 +422,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 23
             Position = 0
-            TabOrder = 13
+            TabOrder = 12
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -442,7 +433,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 14
+            TabOrder = 13
           end
           object t_min: TUpDown
             Left = 174
@@ -453,7 +444,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 59
             Position = 0
-            TabOrder = 15
+            TabOrder = 14
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -467,7 +458,7 @@ object f_config_time: Tf_config_time
             Min = 0
             Max = 59
             Position = 0
-            TabOrder = 16
+            TabOrder = 15
             Thousands = False
             Wrap = False
             OnClick = TimeChange
@@ -478,7 +469,7 @@ object f_config_time: Tf_config_time
             Top = 65
             Width = 47
             OnChange = TimeEditChange
-            TabOrder = 17
+            TabOrder = 16
           end
           object Button8: TButton
             Left = 320
@@ -487,7 +478,20 @@ object f_config_time: Tf_config_time
             Width = 83
             Caption = 'Tonight'
             OnClick = Button8Click
+            TabOrder = 17
+          end
+          object d_yearEdit: TLongEdit
+            Left = 56
+            Height = 22
+            Hint = '0..200000'
+            Top = 22
+            Width = 68
+            ParentShowHint = False
+            ShowHint = True
             TabOrder = 18
+            OnChange = DateEditChange
+            Value = 0
+            MaxValue = 200000
           end
         end
         object CheckBox1: TCheckBox
@@ -576,9 +580,9 @@ object f_config_time: Tf_config_time
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 23
+          Height = 26
           Top = 254
-          Width = 248
+          Width = 251
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
           TabOrder = 6

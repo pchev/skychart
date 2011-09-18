@@ -1372,9 +1372,10 @@ end;
 
 procedure ltp_cr(r:rotmatrix; var c: rotmatrix);
 // Copy an r-matrix.
-var i: integer;
+var i,j: integer;
 begin
-for i:=1 to 3 do ltp_cp(r[i],c[i]);
+for j:=1 to 3 do
+  for i:=1 to 3 do c[j,i]:=r[j,i];
 end;
 
 procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
