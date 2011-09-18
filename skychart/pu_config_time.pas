@@ -27,7 +27,7 @@ interface
 
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, CheckLst, Buttons, Spin, ExtCtrls, enhedits, ComCtrls, LResources,
+  StdCtrls, CheckLst, Buttons, ExtCtrls, Spin, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
 type
@@ -69,10 +69,10 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    d_yearEdit: TLongEdit;
     Page3: TTabSheet;
     TrackBar1: TTrackBar;
     t_hour: TUpDown;
-    d_yearEdit: TEdit;
     d_monthEdit: TEdit;
     d_dayEdit: TEdit;
     t_min: TUpDown;
@@ -347,10 +347,10 @@ checkbox1.checked:=csc.UseSystemTime;
 checkbox2.checked:=csc.AutoRefresh;
 longedit2.value:=cmain.AutoRefreshDelay;
 if y>0 then begin
-  d_year.Position:=y;
+  d_yearEdit.Value:=y;
   adbc.itemindex:=0;
 end else begin
-  d_year.Position:=1-y;
+  d_yearEdit.Value:=1-y;
   adbc.itemindex:=1;
 end;
 d_month.Position:=m;
@@ -567,27 +567,6 @@ if LockChange then exit;
 cmain.AutoRefreshDelay:=longedit2.value;
 end;
 
-procedure Tf_config_time.DateEditChange(Sender: TObject);
-begin
-if LockChange then exit;
-if adbc.itemindex=0 then
-  csc.curyear:=d_year.Position
-else
-  csc.curyear:=1-d_year.Position;
-csc.curmonth:=d_month.Position;
-d_day.max:=MonthDays[IsleapYear(csc.curyear),csc.curmonth];
-csc.curday:=d_day.Position;
-csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
-csc.TimeZone:=csc.tz.SecondsOffset/3600;
-tzlabel.caption:=csc.tz.ZoneName;
-csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
-Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
-dt_ut.text:=Tdt_Ut.caption;
-LockChange:=true;
-JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
-LockChange:=false;
-end;
-
 procedure Tf_config_time.DirectoryEdit1Change(Sender: TObject);
 begin
   cmain.AnimRecDir := DirectoryEdit1.Directory;
@@ -641,9 +620,31 @@ end;
 
 procedure Tf_config_time.DateChange(Sender: TObject; Button: TUDBtnType);
 begin
-{$ifdef darwin}
-DateEditChange(Sender);
-{$endif}
+  case button of
+    btNext : if d_yearEdit.Value<d_yearEdit.MaxValue then d_yearEdit.Value:=d_yearEdit.Value+1;
+    btPrev : if d_yearEdit.Value>d_yearEdit.MinValue then d_yearEdit.Value:=d_yearEdit.Value-1;
+  end;
+end;
+
+procedure Tf_config_time.DateEditChange(Sender: TObject);
+begin
+if LockChange then exit;
+if adbc.itemindex=0 then
+  csc.curyear:=d_yearEdit.Value
+else
+  csc.curyear:=1-d_yearEdit.Value;
+csc.curmonth:=d_month.Position;
+d_day.max:=MonthDays[leapYear(csc.curyear),csc.curmonth];
+csc.curday:=d_day.Position;
+csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
+csc.TimeZone:=csc.tz.SecondsOffset/3600;
+tzlabel.caption:=csc.tz.ZoneName;
+csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
+Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
+dt_ut.text:=Tdt_Ut.caption;
+LockChange:=true;
+JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
+LockChange:=false;
 end;
 
 procedure Tf_config_time.TimeEditChange(Sender: TObject);
@@ -681,7 +682,7 @@ var y,m,d,h,n,s,ms : word;
 begin
  ADBC.itemindex:=0;
  decodedate(csc.tz.NowLocalTime,y,m,d);
- d_year.Position:=y;
+ d_yearEdit.Value:=y;
  d_month.Position:=m;
  d_day.Position:=d;
  decodeTime(csc.tz.NowLocalTime,h,n,s,ms);
@@ -698,7 +699,7 @@ begin
  csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,0);
  if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
    decodedate(csc.tz.Date,y,m,d);
-   d_year.Position:=y;
+   d_yearEdit.Value:=y;
    d_month.Position:=m;
    d_day.Position:=d;
  end;
@@ -716,7 +717,7 @@ begin
  csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.timezone);
  if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
    decodedate(csc.tz.Date,y,m,d);
-   d_year.Position:=y;
+   d_yearEdit.Value:=y;
    d_month.Position:=m;
    d_day.Position:=d;
  end;
@@ -741,7 +742,7 @@ begin
 if assigned(FGetTwilight) then begin
    ADBC.itemindex:=0;
    decodedate(csc.tz.NowLocalTime,y,m,d);
-   d_year.Position:=y;
+   d_yearEdit.Value:=y;
    d_month.Position:=m;
    d_day.Position:=d;
    FGetTwilight(jd(y,m,d,0),ht);
