@@ -56,7 +56,8 @@ PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 function SidTim(jd0,ut,long : double): double;
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; c: Tconf_skychart);
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
-PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
+PROCEDURE PrecessionFK5(ti,tf : double; VAR ari,dei : double);
+PROCEDURE Precession(j0,j1 : double; VAR ra,de : double);
 procedure PrecessionEcl(ti,tf : double; VAR l,b : double);
 PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skychart);
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
@@ -95,7 +96,12 @@ Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongi
            *)
 
 //procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Tconf_skychart);
-
+Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
+procedure ltp_S2C(theta,phi: double; var c: coordvector);
+procedure ltp_c2s(p: coordvector; var theta,phi: double);
+procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
+procedure ltp_tr(r: rotmatrix; var rt: rotmatrix);
+procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
 
 implementation
 
@@ -715,7 +721,7 @@ var i1,i2,i3,i4,i5,i6,i7 : double ;
       ARI:=RMOD(ARI+pi2,pi2);
    END  ;
 
-PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);  // ICRS
+PROCEDURE PrecessionFK5(ti,tf : double; VAR ari,dei : double);  // Lieske 77
 var i1,i2,i3,i4,i5,i6,i7 : double ;
    BEGIN
    if abs(ti-tf)<0.01 then exit;
@@ -1260,6 +1266,335 @@ end else begin
 end;
 END;
 
+//////   New precession expressions, valid for long time intervals
+//////   J. Vondrak , N. Capitaine , and P. Wallace
+//////   A&A 2011
+
+////// Required functions adapted from the SOFA library
+
+Procedure ltp_PXP(a,b: coordvector; var axb: coordvector);
+// p-vector outer (=vector=cross) product.
+var xa,ya,za,xb,yb,zb: double;
+begin
+XA := A[1];
+YA := A[2];
+ZA := A[3];
+XB := B[1];
+YB := B[2];
+ZB := B[3];
+AXB[1] := YA*ZB - ZA*YB;
+AXB[2] := ZA*XB - XA*ZB;
+AXB[3] := XA*YB - YA*XB;
+end;
+
+procedure ltp_PM(p:coordvector; var r:double);
+// Modulus of p-vector.
+var i: integer;
+    w,c : double;
+begin
+W := 0;
+for i:=1 to 3 do begin
+   C := P[I];
+   W := W + C*C;
+end;
+R := SQRT(W);
+end;
+
+Procedure ltp_ZP(var p:coordvector);
+// Zero a p-vector.
+var i: integer;
+begin
+for i:=1 to 3 do p[i]:=0;
+end;
+
+Procedure ltp_SXP(s: double; p: coordvector;  var sp: coordvector);
+//  Multiply a p-vector by a scalar.
+var i: integer;
+begin
+for i:=1 to 3 do sp[i]:=s*p[i];
+end;
+
+Procedure ltp_PN(p:coordvector; var r:double; var u:coordvector);
+// Convert a p-vector into modulus and unit vector.
+var w: double;
+begin
+// Obtain the modulus and test for zero.
+ltp_PM ( P, W );
+IF ( W = 0 ) THEN
+//  Null vector.
+    ltp_ZP ( U )
+ELSE
+//  Unit vector.
+    ltp_SXP ( 1/W, P, U );
+//  Return the modulus.
+R := W;
+end;
+
+procedure ltp_S2C(theta,phi: double; var c: coordvector);
+// Convert spherical coordinates to Cartesian.
+// THETA    d         longitude angle (radians)
+// PHI      d         latitude angle (radians)
+var sa,ca,sd,cd: extended;
+begin
+sincos(theta,sa,ca);
+sincos(phi,sd,cd);
+c[1]:=ca*cd;
+c[2]:=sa*cd;
+c[3]:=sd;
+end;
+
+procedure ltp_c2s(p: coordvector; var theta,phi: double);
+// P-vector to spherical coordinates.
+// THETA    d         longitude angle (radians)
+// PHI      d         latitude angle (radians)
+var x,y,z,d2: double;
+begin
+X := P[1];
+Y := P[2];
+Z := P[3];
+D2 := X*X + Y*Y;
+IF ( D2 = 0 ) THEN
+   theta := 0
+ELSE
+   theta := arctan2(Y,X);
+IF ( Z = 0 ) THEN
+   phi := 0
+ELSE
+   phi := arctan2(Z,SQRT(D2));
+end;
+
+procedure ltp_cp(p: coordvector; var c: coordvector);
+// Copy a p-vector.
+var i: integer;
+begin
+for i:=1 to 3 do c[i]:=p[i];
+end;
+
+procedure ltp_cr(r:rotmatrix; var c: rotmatrix);
+// Copy an r-matrix.
+var i: integer;
+begin
+for i:=1 to 3 do ltp_cp(r[i],c[i]);
+end;
+
+procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
+// Multiply a p-vector by an r-matrix.
+var w: double;
+    wrp: coordvector;
+    i,j: integer;
+begin
+// Matrix R * vector P.
+for j:=1 to 3 do begin
+   W := 0;
+   for i:=1 to 3 do begin
+      W := W + R[J,I]*P[I];
+   end; //i
+   WRP[J] := W;
+end; //j
+// Return the result.
+ltp_CP ( WRP, RP );
+end;
+
+procedure ltp_tr(r: rotmatrix; var rt: rotmatrix);
+// Transpose an r-matrix.
+var wm: rotmatrix;
+    i,j: integer;
+begin
+for i:=1 to 3 do begin
+   for j:=1 to 3 do begin
+      wm[i,j] := r[j,i];
+   end;
+end;
+ltp_cr ( wm, rt );
+end;
+
+procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
+// Multiply two r-matrices.
+var i,j,k: integer;
+    w: double;
+    wm: rotmatrix;
+begin
+for i:=1 to 3 do begin
+   for j:=1 to 3 do begin
+      W := 0;
+      for k:=1 to 3 do begin
+         W := W + A[I,K]*B[K,J];
+      end; //k
+      WM[I,J] := W;
+   end; //j
+end; //i
+ltp_CR ( WM, ATB );
+end;
+
+/////// Precession expressions
+
+Procedure ltp_PECL(epj: double; var vec: coordvector);
+// Precession of the ecliptic
+// The Fortran subroutine ltp PECL generates the unit vector for the pole of the ecliptic, using the series for PA , QA (Eq. 8 and Tab. 1)
+const npol=4;
+      nper=8;
+      // Polynomials
+      pqpol: array[1..npol,1..2] of double = (
+             (+5851.607687,-1600.886300),
+             (-0.1189000,+1.1689818),
+             (-0.00028913,-0.00000020),
+             (+0.000000101,-0.000000437));
+      // Periodics
+      pqper: array[1..5,1..nper] of double = (
+             (708.15,2309,1620,492.2,1183,622,882,547),
+             (-5486.751211,-17.127623,-617.517403,413.44294,78.614193,-180.732815,-87.676083,46.140315),
+             (-684.66156,2446.28388,399.671049,-356.652376,-186.387003,-316.80007,198.296071,101.135679),
+             (667.66673,-2354.886252,-428.152441,376.202861,184.778874,335.321713,-185.138669,-120.97283),
+             (-5523.863691,-549.74745,-310.998056,421.535876,-36.776172,-145.278396,-34.74445,22.885731));
+var as2r, d2pi, eps0, t, p, q, w, a, s, c, z : extended;
+    i, j : integer;
+begin
+d2pi:=pi2;
+//Arcseconds to radians
+as2r:=secarc;
+//Obliquity at J2000.0 (radians).
+eps0 := 84381.406 * as2r;
+// Centuries since J2000.
+t:=(epj-jd2000)/36525;
+//Initialize P_A and Q_A accumulators.
+P := 0;
+Q := 0;
+// Periodic terms.
+for i:=1 to nper do begin
+  W := D2PI*T;
+  A := W/PQPER[1,I];
+  sincos(A,S,C);
+  P := P + C*PQPER[2,I] + S*PQPER[4,I];
+  Q := Q + C*PQPER[3,I] + S*PQPER[5,I];
+end;
+// Polynomial terms.
+W := 1;
+for i:=1 to npol do begin
+  P := P + PQPOL[I,1]*W;
+  Q := Q + PQPOL[I,2]*W;
+  W := W*T;
+end;
+// P_A and Q_A (radians).
+P := P*AS2R;
+Q := Q*AS2R;
+// Form the ecliptic pole vector.
+Z := SQRT(MAX(1-P*P-Q*Q,0));
+sincos(eps0,s,c);
+VEC[1] := P;
+VEC[2] := - Q*C - Z*S;
+VEC[3] := - Q*S + Z*C;
+end;
+
+Procedure ltp_PEQU(epj: double; var veq: coordvector);
+// Precession of the equator
+// The Fortran subroutine ltp PEQU generates the unit vector for the pole of the equator, using the series for XA , YA (Eq. 9 and Tab. 2)
+const npol=4;
+      nper=14;
+      // Polynomials
+      xypol: array[1..npol,1..2] of double = (
+             (+5453.282155,-73750.930350),
+             (+0.4252841,-0.7675452),
+             (-0.00037173,-0.00018725),
+             (-0.000000152,+0.000000231));
+      // Periodics
+      xyper: array[1..5,1..nper] of double = (
+             (256.75,708.15,274.2,241.45,2309,492.2,396.1,288.9,231.1,1610,620,157.87,220.3,1200),
+             (-819.940624,-8444.676815,2600.009459,2755.17563,-167.659835,871.855056,44.769698,-512.313065,-819.415595,-538.071099,-189.793622,-402.922932,179.516345,-9.814756),
+             (75004.344875,624.033993,1251.136893,-1102.212834,-2660.66498,699.291817,153.16722,-950.865637,499.754645,-145.18821,558.116553,-23.923029,-165.405086,9.344131),
+             (81491.287984,787.163481,1251.296102,-1257.950837,-2966.79973,639.744522,131.600209,-445.040117,584.522874,-89.756563,524.42963,-13.549067,-210.157124,-44.919798),
+             (1558.515853,7774.939698,-2219.534038,-2523.969396,247.850422,-846.485643,-1393.124055,368.526116,749.045012,444.704518,235.934465,374.049623,-171.33018,-22.899655));
+var as2r, d2pi, t, x, y, w, a, s, c : extended;
+    i, j : integer;
+begin
+d2pi:=pi2;
+//Arcseconds to radians
+as2r:=secarc;
+// Centuries since J2000.
+t:=(epj-jd2000)/36525;
+x:=0;
+y:=0;
+// Periodic terms.
+for i:=1 to nper do begin
+   W := D2PI*T;
+   A := W/XYPER[1,I];
+   sincos(A,S,C);
+   X := X + C*XYPER[2,I] + S*XYPER[4,I];
+   Y := Y + C*XYPER[3,I] + S*XYPER[5,I];
+end;
+//Polynomial terms.
+W := 1;
+for i:=1 to npol do begin
+  X := X + XYPOL[I,1]*W;
+  Y := Y + XYPOL[I,2]*W;
+  W := W*T;
+end;
+// X and Y (direction cosines).
+X := X*AS2R;
+Y := Y*AS2R;
+// Form the equator pole vector.
+VEQ[1] := X;
+VEQ[2] := Y;
+W := X*X + Y*Y;
+IF ( W < 1 ) THEN
+   VEQ[3] := SQRT(1-W)
+ELSE
+   VEQ[3] := 0;
+end;
+
+Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
+// Precession matrix, mean J2000.0
+// The Fortran subroutine ltp PMAT generates the 3 x 3 rotation matrix P, constructed using Fabri parameterization (i.e. directly from
+// the unit vectors for the ecliptic and equator poles  see Sect. 5.4). As well as calling the two previous subroutines, ltp PMAT calls
+// subroutines from the IAU SOFA library. The resulting matrix transforms vectors with respect to the mean equator and equinox of
+// epoch 2000.0 into mean place of date.
+var peqr, pecl, v, eqx : coordvector;
+    w :  double;
+begin
+ltp_PEQU(epj,peqr);
+ltp_PECL(epj,pecl);
+ltp_PXP(peqr,pecl,v);
+ltp_pn(v,w,eqx);
+ltp_PXP(peqr,eqx,v);
+RP[1,1]:= EQX[1];
+RP[1,2]:= EQX[2];
+RP[1,3]:= EQX[3];
+RP[2,1]:= V[1];
+RP[2,2]:= V[2];
+RP[2,3]:= V[3];
+RP[3,1]:= PEQR[1];
+RP[3,2]:= PEQR[2];
+RP[3,3]:= PEQR[3];
+end;
+
+////////////// Finally the precession function for CdC
+
+Procedure Precession(j0,j1: double; var ra,de: double);
+var p,rp: coordvector;
+    r,wm1,wm2: rotmatrix;
+begin
+{ TODO : Cache rotation matrix if called for same date }
+if abs(j0-j1)<0.01 then exit; // no change
+if j0=jd2000 then begin       // from j2000
+  ltp_PMAT(j1,r);
+end
+else if j1=jd2000 then begin  // to j2000
+  ltp_PMAT(j0,wm1);
+  ltp_tr(wm1,r);
+end
+else begin                    // from date0 to date1
+  ltp_PMAT(j0,r);
+  ltp_tr(r,wm1);
+  ltp_PMAT(j1,wm2);
+  ltp_rxr(wm1,wm2,r);
+end;
+ltp_S2C(ra,de,p);
+ltp_rxp(r,p,rp);
+ltp_c2s(rp,ra,de);
+ra:=rmod(ra+pi2,pi2);
+end;
+
+
+///////////////////////
 
 end.
 
