@@ -30,8 +30,8 @@ object f_tray: Tf_tray
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Appearance'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 212
+      ClientWidth = 376
       object Label1: TLabel
         Left = 15
         Height = 15
@@ -64,7 +64,7 @@ object f_tray: Tf_tray
       end
       object ColorBox1: TColorBox
         Left = 15
-        Height = 25
+        Height = 26
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -74,7 +74,7 @@ object f_tray: Tf_tray
       end
       object ColorBox2: TColorBox
         Left = 220
-        Height = 25
+        Height = 26
         Top = 111
         Width = 150
         Style = [cbStandardColors, cbExtendedColors, cbSystemColors, cbCustomColor, cbPrettyNames]
@@ -123,8 +123,8 @@ object f_tray: Tf_tray
     end
     object TabSheet2: TTabSheet
       Caption = 'Clock'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 212
+      ClientWidth = 376
       object RadioGroup1: TRadioGroup
         Left = 55
         Height = 184
@@ -156,8 +156,8 @@ object f_tray: Tf_tray
     end
     object TabSheet3: TTabSheet
       Caption = 'Action'
-      ClientHeight = 220
-      ClientWidth = 380
+      ClientHeight = 212
+      ClientWidth = 376
       object RadioGroup3: TRadioGroup
         Left = 55
         Height = 105
