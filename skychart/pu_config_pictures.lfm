@@ -37,8 +37,8 @@ object f_config_pictures: Tf_config_pictures
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 475
+        ClientWidth = 503
         object Label50: TLabel
           Left = 2
           Height = 15
@@ -185,8 +185,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 475
+        ClientWidth = 503
         object Label270: TLabel
           Left = 0
           Height = 15
@@ -220,9 +220,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 8
-          Height = 23
+          Height = 26
           Top = 80
-          Width = 119
+          Width = 122
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -285,7 +285,7 @@ object f_config_pictures: Tf_config_pictures
           Width = 360
           OnAcceptFileName = backimgAcceptFileName
           DialogOptions = []
-          Filter = 'FITS Files|*.fit'
+          Filter = 'FITS Files|*.fit *.fits *.fts|All|*'
           FilterIndex = 0
           HideDirectories = False
           ButtonWidth = 23
@@ -297,8 +297,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 479
-        ClientWidth = 507
+        ClientHeight = 475
+        ClientWidth = 503
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
@@ -536,6 +536,6 @@ object f_config_pictures: Tf_config_pictures
     Interval = 500
     OnTimer = ImageTimer1Timer
     left = 464
-    top = 24
+    top = 56
   end
 end
