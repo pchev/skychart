@@ -436,6 +436,8 @@ type
      TasteroidName = array of array[1..MaxAsteroid,1..2] of string[27]; // id, name
      double6 = array[1..6] of double;
      Pdouble6 = ^double6;
+     coordvector = array[1..3] of double;
+     rotmatrix = array[1..3,1..3] of double;
      Tconstpos  = record ra,de : single; end;
      Tconstb = record ra,de : single; newconst:boolean; end;
      Tconstl = record ra1,de1,ra2,de2 : single; end;
