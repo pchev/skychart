@@ -459,7 +459,7 @@ end else begin
   f_calendar.config.ObsRefractionCor:=1;
   f_calendar.config.EquinoxName:=rsDate;
   f_calendar.config.Force_DT_UT:=false;
-  f_calendar.config.DT_UT:=DTminusUT(y,f_calendar.config);
+  f_calendar.config.DT_UT:=DTminusUT(y,m,f_calendar.config);
   if (calposx<0)or(calposy<0) then begin
     calposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
     calposy:=SysTray.GetPosition.Y;

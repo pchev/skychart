@@ -74,8 +74,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="45"/>
-        <CursorPos X="1" Y="45"/>
+        <TopLine Value="426"/>
+        <CursorPos X="42" Y="462"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
           <Item0 X="27" Y="390" ID="1"/>
@@ -263,7 +263,7 @@
         <UsageCount Value="10"/>
       </Unit24>
     </Units>
-    <JumpHistory Count="16" HistoryIndex="15">
+    <JumpHistory Count="17" HistoryIndex="16">
       <Position1>
         <Filename Value="pu_tray.pas"/>
         <Caret Line="158" Column="60" TopLine="136"/>
@@ -328,6 +328,10 @@
         <Filename Value="pu_calendar.pas"/>
         <Caret Line="1" Column="1" TopLine="1"/>
       </Position16>
+      <Position17>
+        <Filename Value="pu_tray.pas"/>
+        <Caret Line="60" Column="73" TopLine="45"/>
+      </Position17>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
