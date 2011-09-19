@@ -139,6 +139,7 @@ type
     procedure CheckGroup2ItemClick(Sender: TObject; Index: integer);
     procedure ComboBox1Change(Sender: TObject);
     procedure DateEditChange(Sender: TObject);
+    procedure DateClick(Sender: TObject; Button: TUDBtnType);
     procedure DirectoryEdit1Change(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure Edit2Change(Sender: TObject);
@@ -153,7 +154,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
-    procedure DateChange(Sender: TObject; Button: TUDBtnType);
+    procedure DateChange(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
     procedure SimObjItemClick(Sender: TObject; Index: LongInt);
     procedure TimeChange(Sender: TObject; Button: TUDBtnType);
@@ -618,12 +619,19 @@ begin
   cmain.AnimFps := FloatSpinEdit1.Value;
 end;
 
-procedure Tf_config_time.DateChange(Sender: TObject; Button: TUDBtnType);
+procedure Tf_config_time.DateChange(Sender: TObject);
 begin
-  case button of
+{$ifdef darwin}
+DateEditChange(Sender);
+{$endif}
+end;
+
+procedure Tf_config_time.DateClick(Sender: TObject; Button: TUDBtnType);
+begin
+case button of
     btNext : if d_yearEdit.Value<d_yearEdit.MaxValue then d_yearEdit.Value:=d_yearEdit.Value+1;
     btPrev : if d_yearEdit.Value>d_yearEdit.MinValue then d_yearEdit.Value:=d_yearEdit.Value-1;
-  end;
+end;
 end;
 
 procedure Tf_config_time.DateEditChange(Sender: TObject);
