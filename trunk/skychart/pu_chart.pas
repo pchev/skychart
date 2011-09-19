@@ -2381,6 +2381,9 @@ if (otype='P') then begin // planet
    sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
 // todo: rise/set time comet, asteroid, satellites, ...
+else if (otype='Ps')and(ipla=11) then begin // Moon
+   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,sc.cfgsc.jd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+end
 else begin // fixed object
      RiseSet(1,sc.cfgsc.jd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
      if sc.catalog.cfgshr.AzNorth then begin
