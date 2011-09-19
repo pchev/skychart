@@ -2390,9 +2390,9 @@ else begin // fixed object
         Azr:=rmod(Azr+pi,pi2);
         Azs:=rmod(Azs+pi,pi2);
      end;
-     thr:=armtostr(hr);
-     tht:=armtostr(ht);
-     ths:=armtostr(hs);
+     thr:=armtostr(rmod(hr+24,24));
+     tht:=armtostr(rmod(ht+24,24));
+     ths:=armtostr(rmod(hs+24,24));
      tazr:=demtostr(rad2deg*Azr);
      tazs:=demtostr(rad2deg*Azs);
 end;
