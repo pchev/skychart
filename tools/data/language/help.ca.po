@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-11-26 11:41+0100\n"
+"PO-Revision-Date: 2011-09-05 22:32+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -12,7 +12,7 @@ msgstr ""
 
 #: u_help.hlpascom
 msgid "telescope_ascom.html"
-msgstr ""
+msgstr "telescopi_ascom.html"
 
 #: u_help.hlpbarleft
 msgid "left_bar.html"
@@ -60,7 +60,7 @@ msgstr "calendari_planetes.html"
 
 #: u_help.hlpcalsat
 msgid "artificial_satellites.html"
-msgstr ""
+msgstr "satel_lits_artificials.html"
 
 #: u_help.hlpcalsol
 msgid "calendar_solar_eclipses.html"
@@ -120,7 +120,7 @@ msgstr "llicencia_de_la_documentacio.html"
 
 #: u_help.hlpencoder
 msgid "telescope_encoder.html"
-msgstr ""
+msgstr "codificador_telescopi.html"
 
 #: u_help.hlpfaq
 msgid "faq.html"
@@ -132,7 +132,7 @@ msgstr "start.html"
 
 #: u_help.hlpindi
 msgid "telescope_indi.html"
-msgstr ""
+msgstr "telescopi_indi.html"
 
 #: u_help.hlpinfo
 msgid "detailed_information.html"
@@ -172,7 +172,7 @@ msgstr "etiquetes.html"
 
 #: u_help.hlplx200
 msgid "telescope_lx200.html"
-msgstr ""
+msgstr "telescopi_lx200.html"
 
 #: u_help.hlpmenuchart
 msgid "menuchart.html"
