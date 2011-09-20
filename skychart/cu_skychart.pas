@@ -111,7 +111,7 @@ Tskychart = class (TComponent)
     function DrawGalactic:boolean;
     function DrawLabels:boolean;
     Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
-    procedure DrawFinderMark(ra,de :double; moving:boolean) ;
+    procedure DrawFinderMark(ra,de :double; moving:boolean; num:integer) ;
     procedure DrawCircle;
     Procedure DrawTarget;
     Procedure DrawCompass;
@@ -3580,7 +3580,7 @@ Fplot.cfgplot.UseBMP:=saveusebmp;
 end;
 end;
 
-Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean) ;
+Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean; num:integer) ;
 var x1,y1,x2,y2,r : double;
     i,lid,sz : integer;
     xa,ya,xb,yb,xla,yla:single;
@@ -3611,12 +3611,16 @@ for i:=1 to 10 do if cfgsc.circleok[i] then begin
     WindowXY(x2-r,y2-r,xa,ya,cfgsc);
     WindowXY(x2+r,y2+r,xb,yb,cfgsc);
     Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
-    if cfgsc.CircleLabel then begin
-      sz:=trunc(abs(cfgsc.BxGlb*r));
-      xla:=abs(xa+xb)/2;
-      yla:=abs(ya+yb)/2;
-      lid:=GetId(cfgsc.circlelbl[i]);
-      if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom);
+    if cfgsc.CircleLabel or cfgsc.marknumlabel then begin
+      if not cfgsc.CircleLabel then lbl:='';
+      if cfgsc.marknumlabel and (num>0) then lbl:=trim(lbl+' '+inttostr(num));
+      if trim(lbl)>'' then begin
+        sz:=trunc(abs(cfgsc.BxGlb*r));
+        xla:=abs(xa+xb)/2;
+        yla:=abs(ya+yb)/2;
+        lid:=GetId(cfgsc.circlelbl[i]);
+        if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom);
+      end;
     end;
 end;
 for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
@@ -3647,12 +3651,16 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
     p[3]:=Point(round(xa),round(ya));
     p[4]:=p[0];
     Fplot.PlotPolyline(p,col,moving);
-    if cfgsc.RectangleLabel then begin
-      xla:=abs(p[0].X+p[1].X)/2;
-      yla:=abs(p[0].Y+p[1].Y)/2;
-      sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
-      lid:=GetId(cfgsc.rectanglelbl[i]);
-      if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom);
+    if cfgsc.RectangleLabel or cfgsc.marknumlabel then begin
+      if not cfgsc.RectangleLabel then lbl:='';
+      if cfgsc.marknumlabel and (num>0) then lbl:=trim(lbl+' '+inttostr(num));
+      if trim(lbl)>'' then begin
+        xla:=abs(p[0].X+p[1].X)/2;
+        yla:=abs(p[0].Y+p[1].Y)/2;
+        sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
+        lid:=GetId(cfgsc.rectanglelbl[i]);
+        if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom);
+      end;
     end;
   end;
 end;
@@ -3665,10 +3673,10 @@ if cfgsc.ShowCircle then begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw circle');
 {$endif}
- DrawFinderMark(cfgsc.racentre,cfgsc.decentre,false);
+ DrawFinderMark(cfgsc.racentre,cfgsc.decentre,false,-1);
 end;
 //listed mark
-for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleLst[i,2],false);
+for i:=1 to cfgsc.NumCircle do DrawFinderMark(cfgsc.CircleLst[i,1],cfgsc.CircleLst[i,2],false,i);
 end;
 
 Procedure Tskychart.DrawTarget;
@@ -3794,8 +3802,8 @@ if (ra<>cfgsc.ScopeRa)or(dec<>cfgsc.ScopeDec) then begin
 cfgsc.TrackName:=rsTelescope;
 cfgsc.TrackRA:=ra;
 cfgsc.TrackDec:=dec;    }
-if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
-DrawFinderMark(ra,dec,true);
+if cfgsc.scopemark then DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true,-1);
+DrawFinderMark(ra,dec,true,-1);
 cfgsc.ScopeRa:=ra;
 cfgsc.ScopeDec:=dec;
 cfgsc.scopemark:=true;

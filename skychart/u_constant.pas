@@ -589,7 +589,7 @@ type
                 rectangle : array [1..10,1..5] of single; // width, height, rotation, offset, mode
                 rectangleok : array [1..10] of boolean; rectanglelbl : array [1..10] of string;
                 CircleLst : array[0..MaxCircle,1..2] of double;
-                CircleLabel,RectangleLabel:boolean;
+                CircleLabel,RectangleLabel,marknumlabel:boolean;
                 msg: string;
                 constructor Create;
                 destructor Destroy; override;
@@ -1526,6 +1526,7 @@ for i:=1 to 10 do rectangleok[i]:=Source.rectangleok[i];
 for i:=1 to 10 do rectanglelbl[i]:=Source.rectanglelbl[i];
 CircleLabel:=Source.CircleLabel;
 RectangleLabel:=Source.RectangleLabel;
+marknumlabel:=Source.marknumlabel;
 for i:=0 to Source.NumCircle-1 do
   for j:=1 to 2 do
     CircleLst[i,j]:=Source.CircleLst[i,j];

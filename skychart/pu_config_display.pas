@@ -50,6 +50,8 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     antialias: TCheckBox;
+    CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
     LabelLine: TCheckBox;
     FillPanel1: TPanel;
     FillPanel2: TPanel;
@@ -361,6 +363,7 @@ type
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
     procedure DrawAllStarLabelClick(Sender: TObject);
@@ -834,6 +837,13 @@ end;
 procedure Tf_config_display.CheckBox2Click(Sender: TObject);
 begin
 csc.RectangleLabel:=CheckBox2.Checked
+end;
+
+procedure Tf_config_display.MarkNumberClick(Sender: TObject);
+begin
+csc.marknumlabel:=TCheckBox(sender).Checked;
+CheckBox3.Checked:=csc.marknumlabel;
+CheckBox4.Checked:=csc.marknumlabel;
 end;
 
 procedure Tf_config_display.ConstbFileAcceptFileName(Sender: TObject;
@@ -1317,6 +1327,8 @@ for i:=1 to 10 do begin
 end;
 CenterMark1.checked:=csc.ShowCircle;
 CheckBox1.Checked:=csc.CircleLabel;
+CheckBox3.Checked:=csc.marknumlabel;
+CheckBox4.Checked:=csc.marknumlabel;
 end;
 
 procedure Tf_config_display.ShowRectangle;
