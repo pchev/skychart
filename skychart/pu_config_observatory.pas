@@ -490,7 +490,7 @@ begin
      DownloadDialog1.HttpProxyUser:='';
      DownloadDialog1.HttpProxyPass:='';
   end;
-  DownloadDialog1.URL:=location_url+'?ip=1.1.1.1';
+  DownloadDialog1.URL:=location_url;
   fn:=slash(TempDir)+'iploc.txt';
   DownloadDialog1.SaveToFile:=fn;
   DownloadDialog1.ConfirmDownload:=false;
