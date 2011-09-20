@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-11-26 11:49+0100\n"
+"PO-Revision-Date: 2011-09-06 19:40+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,7 @@ msgstr "No puc trobar un navegador HTML"
 
 #: lclstrconsts.hhshelpnohtmlbrowserfoundpleasedefineone
 msgid "No HTML Browser found.%sPlease define one in Tools -> Options -> Help -> Help Options"
-msgstr ""
+msgstr "No s'ha trobat navegador HTML.%sSisplau, definiu-ne un a Eines ->Opcions -> Opcions d'ajuda"
 
 #: lclstrconsts.hhshelpthehelpdatabasewasunabletofindfile
 msgid "The help database %s%s%s was unable to find file %s%s%s."
@@ -60,7 +60,7 @@ msgstr "Espai enrere"
 #: lclstrconsts.ifsvk_cancel
 msgctxt "lclstrconsts.ifsvk_cancel"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·la"
 
 #: lclstrconsts.ifsvk_capital
 msgid "Capital"
@@ -240,7 +240,7 @@ msgstr "Amunt"
 
 #: lclstrconsts.liscannotexecute
 msgid "can not execute %s"
-msgstr ""
+msgstr "no puc executar %s"
 
 #: lclstrconsts.lislclresourcesnotfound
 msgctxt "lclstrconsts.lislclresourcesnotfound"
@@ -249,29 +249,28 @@ msgstr "Recurs %s no trobat"
 
 #: lclstrconsts.lisprogramfilenotfound
 msgid "program file not found %s"
-msgstr ""
+msgstr "fitxer de programa no trobat %s"
 
 #: lclstrconsts.rs3ddkshadowcolorcaption
 msgid "3D Dark Shadow"
-msgstr ""
+msgstr "Ombra fosca 3D"
 
 #: lclstrconsts.rs3dlightcolorcaption
 msgid "3D Light"
-msgstr ""
+msgstr "Llum 3D"
 
 #: lclstrconsts.rsacontrolcannothaveitselfasparent
-#, fuzzy
 #| msgid "A control can't have itself as parent"
 msgid "A control can't have itself as a parent"
-msgstr "Un control no pot cridar-se a ell mateix"
+msgstr "Un control no pot cridar-se a ell mateix com a pare"
 
 #: lclstrconsts.rsactivebordercolorcaption
 msgid "Active Border"
-msgstr ""
+msgstr "Vora activa"
 
 #: lclstrconsts.rsactivecaptioncolorcaption
 msgid "Active Caption"
-msgstr ""
+msgstr "Títol actiu"
 
 #: lclstrconsts.rsallfiles
 msgid "All files (%s)|%s|%s"
@@ -279,15 +278,15 @@ msgstr "Tots els fitxers (%s)|%s|%s"
 
 #: lclstrconsts.rsappworkspacecolorcaption
 msgid "Application Workspace"
-msgstr ""
+msgstr "Espai de treball de l'aplicació"
 
 #: lclstrconsts.rsaquacolorcaption
 msgid "Aqua"
-msgstr ""
+msgstr "Aigua"
 
 #: lclstrconsts.rsbackgroundcolorcaption
 msgid "Desktop"
-msgstr ""
+msgstr "Escriptori"
 
 #: lclstrconsts.rsbackward
 msgid "Backward"
@@ -299,7 +298,7 @@ msgstr "Mapes de bits"
 
 #: lclstrconsts.rsblackcolorcaption
 msgid "Black"
-msgstr ""
+msgstr "Negre"
 
 #: lclstrconsts.rsblank
 msgid "Blank"
@@ -307,23 +306,23 @@ msgstr "En blanc"
 
 #: lclstrconsts.rsbluecolorcaption
 msgid "Blue"
-msgstr ""
+msgstr "Blau"
 
 #: lclstrconsts.rsbtnfacecolorcaption
 msgid "Button Face"
-msgstr ""
+msgstr "Cara del botó"
 
 #: lclstrconsts.rsbtnhighlightcolorcaption
 msgid "Button Highlight"
-msgstr ""
+msgstr "Ressalt del botó"
 
 #: lclstrconsts.rsbtnshadowcolorcaption
 msgid "Button Shadow"
-msgstr ""
+msgstr "Ombra del botó"
 
 #: lclstrconsts.rsbtntextcolorcaption
 msgid "Button Text"
-msgstr ""
+msgstr "Text del botó"
 
 #: lclstrconsts.rscalculator
 msgid "Calculator"
@@ -332,7 +331,7 @@ msgstr "Calculadora"
 #: lclstrconsts.rscancelrecordhint
 msgctxt "lclstrconsts.rscancelrecordhint"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel·la"
 
 #: lclstrconsts.rscannotfocus
 msgid "Can not focus"
@@ -344,7 +343,7 @@ msgstr "El marc no permet el dibuix"
 
 #: lclstrconsts.rscaptiontextcolorcaption
 msgid "Caption Text"
-msgstr ""
+msgstr "Text del títol"
 
 #: lclstrconsts.rscasesensitive
 msgid "Case sensitive"
@@ -352,15 +351,15 @@ msgstr "Sensible a majúsc-minúsc."
 
 #: lclstrconsts.rscontrolclasscantcontainchildclass
 msgid "Control of class '%s' can't have control of class '%s' as a child"
-msgstr ""
+msgstr "El control de la classe '%s' no pot tenir control de la classe '%s' com a fill"
 
 #: lclstrconsts.rscontrolhasnoparentwindow
 msgid "Control '%s' has no parent window"
-msgstr ""
+msgstr "El control '%s' no té finestra pare"
 
 #: lclstrconsts.rscreamcolorcaption
 msgid "Cream"
-msgstr ""
+msgstr "Crema"
 
 #: lclstrconsts.rscreatinggdbcatchableerror
 msgid "Creating gdb catchable error:"
@@ -368,15 +367,15 @@ msgstr "Creant un error gdb capturable:"
 
 #: lclstrconsts.rscursor
 msgid "Cursor"
-msgstr ""
+msgstr "Cursor"
 
 #: lclstrconsts.rscustomcolorcaption
 msgid "Custom ..."
-msgstr ""
+msgstr "Personalitzat..."
 
 #: lclstrconsts.rsdefaultcolorcaption
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #: lclstrconsts.rsdefaultfileinfovalue
 msgid "permissions user group size date time"
@@ -384,7 +383,7 @@ msgstr "permisos usuari grup mida dia hora"
 
 #: lclstrconsts.rsdeleterecord
 msgid "Delete record?"
-msgstr ""
+msgstr "Esborro el registre?"
 
 #: lclstrconsts.rsdeleterecordhint
 msgctxt "lclstrconsts.rsdeleterecordhint"
@@ -405,20 +404,20 @@ msgstr "Fixa"
 
 #: lclstrconsts.rsduplicateiconformat
 msgid "Duplicate icon format."
-msgstr ""
+msgstr "Format d'icona duplicat"
 
 #: lclstrconsts.rseditrecordhint
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: lclstrconsts.rsentirescope
 msgid "Search entire file"
-msgstr ""
+msgstr "Cerca el fitxer complet"
 
 #: lclstrconsts.rserror
 msgctxt "lclstrconsts.rserror"
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: lclstrconsts.rserrorcreatingdevicecontext
 msgid "Error creating device context for %s.%s"
@@ -514,7 +513,7 @@ msgstr "Busca més"
 
 #: lclstrconsts.rsfirstrecordhint
 msgid "First"
-msgstr ""
+msgstr "Primer"
 
 #: lclstrconsts.rsfixedcolstoobig
 msgid "FixedCols can't be >= ColCount"
@@ -526,11 +525,11 @@ msgstr "FixedRows (files fixades) no poden ser >= RowCount (recompte de files)"
 
 #: lclstrconsts.rsformcolorcaption
 msgid "Form"
-msgstr ""
+msgstr "Forma"
 
 #: lclstrconsts.rsformresourcesnotfoundforresourcelessformscreatenew
 msgid "Form resource %s not found. For resourceless forms CreateNew constructor must be used. See the global variable RequireDerivedFormResource."
-msgstr ""
+msgstr "Recurs de la forma %s no trobat. Per a formes sense recurs cal usar el constructor CreateNew. Vegeu la variable global RequireDerivedFormResource."
 
 #: lclstrconsts.rsformstreamingerror
 msgid "Form streaming \"%s\" error: %s"
@@ -542,7 +541,7 @@ msgstr "Endavant"
 
 #: lclstrconsts.rsfuchsiacolorcaption
 msgid "Fuchsia"
-msgstr ""
+msgstr "Fúcsia"
 
 #: lclstrconsts.rsgdkoptiondebug
 msgid "--gdk-debug flags     Turn on specific GDK trace/debug messages."
@@ -554,7 +553,7 @@ msgstr "--gdk-no-debug flags  Tanca els missatges específics GDK de traça/depu
 
 #: lclstrconsts.rsgif
 msgid "Graphics Interchange Format"
-msgstr ""
+msgstr "Format d'intercanvi de gràfics"
 
 #: lclstrconsts.rsgoptionfatalwarnings
 msgid "--g-fatal-warnings    Warnings and errors generated by Gtk+/GDK will halt the application."
@@ -562,27 +561,27 @@ msgstr "--g-fatal-warnings    Els errors i advertències generats per Gtk+/GDK a
 
 #: lclstrconsts.rsgradientactivecaptioncolorcaption
 msgid "Gradient Active Caption"
-msgstr ""
+msgstr "Títol actiu del gradient"
 
 #: lclstrconsts.rsgradientinactivecaptioncolorcaption
 msgid "Gradient Inactive Caption"
-msgstr ""
+msgstr "Títol inactiu del gradient"
 
 #: lclstrconsts.rsgraphic
 msgid "Graphic"
-msgstr ""
+msgstr "Gràfic"
 
 #: lclstrconsts.rsgraycolorcaption
 msgid "Gray"
-msgstr ""
+msgstr "Gris"
 
 #: lclstrconsts.rsgraytextcolorcaption
 msgid "Gray Text"
-msgstr ""
+msgstr "Text gris"
 
 #: lclstrconsts.rsgreencolorcaption
 msgid "Green"
-msgstr ""
+msgstr "Verd"
 
 #: lclstrconsts.rsgridfiledoesnotexists
 msgid "Grid file doesn't exists"
@@ -637,26 +636,23 @@ msgid "--no-xshm             Disable use of the X Shared Memory Extension."
 msgstr "--no-xshm             Desactiva l'ús de l'extensió X de memòria compartida."
 
 #: lclstrconsts.rsgtkoptionsync
-#, fuzzy
 #| msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediatey after the protocol request that generated the error has been processed by the X server."
 msgid "--sync                Call XSynchronize (display, True) after the Xserver connection has been established. This makes debugging X protocol errors easier, because X request buffering will be disabled and X errors will be received immediately after the protocol request that generated the error has been processed by the X server."
-msgstr "--sync                Crida XSynchronize (display, True) un cop la connexió al Xserver ha estat establerta. Això facilita que la depuració d'errors del protocol X sigui més senzilla, perquè la demanda de memòria cau X serà desactivad i els errors X seran rebuts immediatament després que la demanda del protocol que ha generat l'error ha estat processat pel servidor X."
+msgstr "--sync                Crida XSynchronize (display, True) un cop la connexió al Xserver ha estat establerta. Això facilita que la depuració d'errors del protocol X sigui més senzilla, perquè la demanda de memòria cau X serà desactivada i els errors X seran rebuts immediatament després que la demanda del protocol que ha generat l'error ha estat processat pel servidor X."
 
 #: lclstrconsts.rshelpalreadyregistered
 msgid "%s: Already registered"
 msgstr "Ja enregistrat"
 
 #: lclstrconsts.rshelpcontextnotfound
-#, fuzzy
 #| msgid "Help Context not found"
 msgid "A help database was found for this topic, but this topic was not found"
-msgstr "No trobo ajuda contextual"
+msgstr "No trobo ajuda contextual per aquest tema"
 
 #: lclstrconsts.rshelpdatabasenotfound
-#, fuzzy
 #| msgid "Help Database not found"
 msgid "There is no help database installed for this topic"
-msgstr "Base de dades de l'ajuda no trobada"
+msgstr "Base de dades de l'ajuda no trobada per aquet tema"
 
 #: lclstrconsts.rshelperror
 msgid "Help Error"
@@ -695,16 +691,14 @@ msgid "No help found for line %d, column %d of %s."
 msgstr "No s'ha trobat cap ajuda per a la línia %d, columna %d de %s."
 
 #: lclstrconsts.rshelpnohelpnodesavailable
-#, fuzzy
 #| msgid "No help nodes available"
 msgid "No help entries available for this topic"
-msgstr "No hi ha nodes d'ajuda disponibles"
+msgstr "No hi ha nodes d'ajuda disponibles per aquest tema"
 
 #: lclstrconsts.rshelpnotfound
-#, fuzzy
 #| msgid "Help not found"
 msgid "No help found for this topic"
-msgstr "Ajuda no trobada"
+msgstr "Ajuda no trobada per aquest tema"
 
 #: lclstrconsts.rshelpnotregistered
 msgid "%s: Not registered"
@@ -723,26 +717,25 @@ msgid "Help Viewer Error"
 msgstr "Error del visor d'ajuda"
 
 #: lclstrconsts.rshelpviewernotfound
-#, fuzzy
 #| msgid "Help Viewer not found"
 msgid "No viewer was found for this type of help content"
-msgstr "Visor d'ajuda no trobat"
+msgstr "Visor no trobat per a aquest tipus d'ajuda"
 
 #: lclstrconsts.rshighlightcolorcaption
 msgid "Highlight"
-msgstr ""
+msgstr "Ressaltat"
 
 #: lclstrconsts.rshighlighttextcolorcaption
 msgid "Highlight Text"
-msgstr ""
+msgstr "Text ressaltat"
 
 #: lclstrconsts.rshotlightcolorcaption
 msgid "Hot Light"
-msgstr ""
+msgstr "Llum càlida"
 
 #: lclstrconsts.rsicns
 msgid "Mac OS X Icon"
-msgstr ""
+msgstr "Icona de Mac OS X"
 
 #: lclstrconsts.rsicon
 msgid "Icon"
@@ -750,41 +743,41 @@ msgstr "Icona"
 
 #: lclstrconsts.rsiconimageempty
 msgid "Icon image cannot be empty"
-msgstr ""
+msgstr "La imatge de la icona no pot estar buida"
 
 #: lclstrconsts.rsiconimageformat
 msgid "Icon image must have the same format"
-msgstr ""
+msgstr "La imatge de la icona ha de tenir el mateix format"
 
 #: lclstrconsts.rsiconimageformatchange
 msgid "Cannot change format of icon image"
-msgstr ""
+msgstr "No es pot canviar el format de la imatge de la icona"
 
 #: lclstrconsts.rsiconimagesize
 msgid "Icon image must have the same size"
-msgstr ""
+msgstr "La imatge de la icona ha de tenir la mateixa mida"
 
 #: lclstrconsts.rsiconimagesizechange
 msgid "Cannot change size of icon image"
-msgstr ""
+msgstr "No es pot canviar la mida de la imatge de la icona"
 
 #: lclstrconsts.rsiconnocurrent
 msgid "Icon has no current image"
-msgstr ""
+msgstr "La icona no té imatge actual"
 
 #: lclstrconsts.rsinactivebordercolorcaption
 msgid "Inactive Border"
-msgstr ""
+msgstr "Vora inactiva"
 
 #: lclstrconsts.rsinactivecaptioncolorcaption
 msgctxt "lclstrconsts.rsinactivecaptioncolorcaption"
 msgid "Inactive Caption"
-msgstr ""
+msgstr "Títol inactiu"
 
 #: lclstrconsts.rsinactivecaptiontext
 msgctxt "lclstrconsts.rsinactivecaptiontext"
 msgid "Inactive Caption"
-msgstr ""
+msgstr "Títol inactiu"
 
 #: lclstrconsts.rsindexoutofbounds
 msgid "%s Index %d out of bounds 0 .. %d"
@@ -796,11 +789,11 @@ msgstr "Índex fora de rang Cel·lal[Col=%d Fila=%d]"
 
 #: lclstrconsts.rsinfobkcolorcaption
 msgid "Info Background"
-msgstr ""
+msgstr "Fons d'informació"
 
 #: lclstrconsts.rsinfotextcolorcaption
 msgid "Info Text"
-msgstr ""
+msgstr "Text d'informació"
 
 #: lclstrconsts.rsinsertrecordhint
 msgctxt "lclstrconsts.rsinsertrecordhint"
@@ -833,15 +826,15 @@ msgstr "%s ja està associat amb %s"
 
 #: lclstrconsts.rsjpeg
 msgid "Joint Picture Expert Group"
-msgstr ""
+msgstr "Grup expert d'unió d'imatge"
 
 #: lclstrconsts.rslastrecordhint
 msgid "Last"
-msgstr ""
+msgstr "Darrer"
 
 #: lclstrconsts.rslimecolorcaption
 msgid "Lime"
-msgstr ""
+msgstr "verd llima"
 
 #: lclstrconsts.rslistindexexceedsbounds
 msgid "List index exceeds bounds (%d)"
@@ -853,7 +846,7 @@ msgstr "Cal que la llista sigui buida"
 
 #: lclstrconsts.rsmarooncolorcaption
 msgid "Maroon"
-msgstr ""
+msgstr "Castany"
 
 #: lclstrconsts.rsmbabort
 msgid "Abort"
@@ -894,7 +887,7 @@ msgstr "D'&acord"
 
 #: lclstrconsts.rsmbopen
 msgid "&Open"
-msgstr ""
+msgstr "&Obre"
 
 #: lclstrconsts.rsmbretry
 msgid "&Retry"
@@ -902,11 +895,11 @@ msgstr "&Torna-ho a provar"
 
 #: lclstrconsts.rsmbsave
 msgid "&Save"
-msgstr ""
+msgstr "&Desa"
 
 #: lclstrconsts.rsmbunlock
 msgid "&Unlock"
-msgstr ""
+msgstr "&Desbloca"
 
 #: lclstrconsts.rsmbyes
 msgid "&Yes"
@@ -918,11 +911,11 @@ msgstr "Sí a &tot"
 
 #: lclstrconsts.rsmedgraycolorcaption
 msgid "Medium Gray"
-msgstr ""
+msgstr "Gris mitjà"
 
 #: lclstrconsts.rsmenubarcolorcaption
 msgid "Menu Bar"
-msgstr ""
+msgstr "Barra menú"
 
 #: lclstrconsts.rsmenucolorcaption
 msgctxt "lclstrconsts.rsmenucolorcaption"
@@ -931,11 +924,11 @@ msgstr "Menú"
 
 #: lclstrconsts.rsmenuhighlightcolorcaption
 msgid "Menu Highlight"
-msgstr ""
+msgstr "Ressalt del menú"
 
 #: lclstrconsts.rsmenutextcolorcaption
 msgid "Menu Text"
-msgstr ""
+msgstr "Text del menú"
 
 #: lclstrconsts.rsmodified
 msgid "  modified "
@@ -943,11 +936,11 @@ msgstr " modificat "
 
 #: lclstrconsts.rsmoneygreencolorcaption
 msgid "Money Green"
-msgstr ""
+msgstr "Verd diners"
 
 #: lclstrconsts.rsmtauthentication
 msgid "Authentication"
-msgstr ""
+msgstr "Autentificació"
 
 #: lclstrconsts.rsmtconfirmation
 msgid "Confirmation"
@@ -972,7 +965,7 @@ msgstr "Avís"
 
 #: lclstrconsts.rsnavycolorcaption
 msgid "Navy"
-msgstr ""
+msgstr "Blau marí"
 
 #: lclstrconsts.rsnextrecordhint
 msgctxt "lclstrconsts.rsnextrecordhint"
@@ -981,7 +974,7 @@ msgstr "Pròxim"
 
 #: lclstrconsts.rsnonecolorcaption
 msgid "None"
-msgstr ""
+msgstr "Cap"
 
 #: lclstrconsts.rsnotavalidgridfile
 msgid "Not a valid grid file"
@@ -993,7 +986,7 @@ msgstr "No hi és com a objecte o dispositiu. Sisplau, comproveu si la unitat \"
 
 #: lclstrconsts.rsolivecolorcaption
 msgid "Olive"
-msgstr ""
+msgstr "Oliva"
 
 #: lclstrconsts.rspickdate
 msgid "Select a date"
@@ -1005,11 +998,11 @@ msgstr "Mapa de píxels"
 
 #: lclstrconsts.rsportablebitmap
 msgid "Portable BitMap"
-msgstr ""
+msgstr "Mapa de bits portàtil"
 
 #: lclstrconsts.rsportablegraymap
 msgid "Portable GrayMap"
-msgstr ""
+msgstr "Mapa de grisos portàtil"
 
 #: lclstrconsts.rsportablenetworkgraphic
 msgid "Portable Network Graphic"
@@ -1017,17 +1010,16 @@ msgstr "PNG (Portable Network Graphic)"
 
 #: lclstrconsts.rsportablepixmap
 msgid "Portable PixMap"
-msgstr ""
+msgstr "Mapa de píxels portàtil"
 
 #: lclstrconsts.rspostrecordhint
 msgid "Post"
-msgstr ""
+msgstr "Lloc"
 
 #: lclstrconsts.rspressoktoignoreandriskdatacorruptionpresscanceltok
-#, fuzzy
 #| msgid "%s%sPress Ok to ignore and risk data corruption.%sPress Cancel to kill the program."
 msgid "%s%sPress OK to ignore and risk data corruption.%sPress Cancel to kill the program."
-msgstr "%s%s%sPolseu Ok per ignorar, tot arriscant de corrompre les dades.%sPolseu Cancel per interrompre el programa"
+msgstr "%s%s%sPolseu Ok per ignorar, tot arriscant de corrompre les dades.%sPolseu Cancel·la per interrompre el programa"
 
 #: lclstrconsts.rspriorrecordhint
 msgctxt "lclstrconsts.rspriorrecordhint"
@@ -1040,7 +1032,7 @@ msgstr "La propietat %s  no existeix"
 
 #: lclstrconsts.rspurplecolorcaption
 msgid "Purple"
-msgstr ""
+msgstr "Púrpura"
 
 #: lclstrconsts.rsqtoptiondograb
 msgid "-dograb (only under X11), running under a debugger can cause an implicit -nograb, use -dograb to override. Need QT_DEBUG."
@@ -1144,11 +1136,11 @@ msgstr ""
 
 #: lclstrconsts.rsredcolorcaption
 msgid "Red"
-msgstr ""
+msgstr "Vermell"
 
 #: lclstrconsts.rsrefreshrecordshint
 msgid "Refresh"
-msgstr ""
+msgstr "Refresca"
 
 #: lclstrconsts.rsreplace
 msgid "Replace"
@@ -1165,7 +1157,7 @@ msgstr "Recurs %s no trobat"
 
 #: lclstrconsts.rsscrollbarcolorcaption
 msgid "ScrollBar"
-msgstr ""
+msgstr "Barra desplaçament"
 
 #: lclstrconsts.rsscrollbaroutofrange
 msgid "ScrollBar property out of range"
@@ -1181,7 +1173,7 @@ msgstr "Selecciona tipus de lletra"
 
 #: lclstrconsts.rssilvercolorcaption
 msgid "Silver"
-msgstr ""
+msgstr "Plata"
 
 #: lclstrconsts.rssize
 msgid "  size "
@@ -1189,11 +1181,11 @@ msgstr " mida "
 
 #: lclstrconsts.rsskybluecolorcaption
 msgid "Sky Blue"
-msgstr ""
+msgstr "Blau cel"
 
 #: lclstrconsts.rstealcolorcaption
 msgid "Teal"
-msgstr ""
+msgstr "Verd blavós"
 
 #: lclstrconsts.rstext
 msgid "Text"
@@ -1201,7 +1193,7 @@ msgstr "Text"
 
 #: lclstrconsts.rstiff
 msgid "Tagged Image File Format"
-msgstr ""
+msgstr "Format de fitxer d'imatge etiquetat"
 
 #: lclstrconsts.rsunabletoloaddefaultfont
 msgid "Unable to load default font"
@@ -1217,7 +1209,7 @@ msgstr "Extensió d'imatge desconeguda"
 
 #: lclstrconsts.rsunknownpictureformat
 msgid "Unknown picture format"
-msgstr ""
+msgstr "Format d'imatge desconegut"
 
 #: lclstrconsts.rsunsupportedbitmapformat
 msgid "Unsupported bitmap format."
@@ -1249,7 +1241,7 @@ msgstr "Avís: S'han deixat %s enllaços a missatge LM_PAINT/LM_GtkPAINT, sense 
 
 #: lclstrconsts.rswhitecolorcaption
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: lclstrconsts.rswholewordsonly
 msgid "Whole words only"
@@ -1265,19 +1257,19 @@ msgstr "Avís:"
 
 #: lclstrconsts.rswindowcolorcaption
 msgid "Window"
-msgstr ""
+msgstr "Finestra"
 
 #: lclstrconsts.rswindowframecolorcaption
 msgid "Window Frame"
-msgstr ""
+msgstr "Marc de finestra"
 
 #: lclstrconsts.rswindowtextcolorcaption
 msgid "Window Text"
-msgstr ""
+msgstr "Text de finestra"
 
 #: lclstrconsts.rsyellowcolorcaption
 msgid "Yellow"
-msgstr ""
+msgstr "Groc"
 
 #: lclstrconsts.scannotfocus
 msgid "Cannot focus a disabled or invisible window"
@@ -1329,19 +1321,19 @@ msgstr "El submenú no és al menú"
 
 #: lclstrconsts.smkcalt
 msgid "Alt+"
-msgstr ""
+msgstr "Alt+"
 
 #: lclstrconsts.smkcbksp
 msgid "BkSp"
-msgstr ""
+msgstr "Retro"
 
 #: lclstrconsts.smkcctrl
 msgid "Ctrl+"
-msgstr ""
+msgstr "Ctrl+"
 
 #: lclstrconsts.smkcdel
 msgid "Del"
-msgstr ""
+msgstr "Supr"
 
 #: lclstrconsts.smkcdown
 msgctxt "lclstrconsts.smkcdown"
@@ -1355,11 +1347,11 @@ msgstr "Fi"
 
 #: lclstrconsts.smkcenter
 msgid "Enter"
-msgstr ""
+msgstr "Intro"
 
 #: lclstrconsts.smkcesc
 msgid "Esc"
-msgstr ""
+msgstr "Esc"
 
 #: lclstrconsts.smkchome
 msgctxt "lclstrconsts.smkchome"
@@ -1368,7 +1360,7 @@ msgstr "Inici"
 
 #: lclstrconsts.smkcins
 msgid "Ins"
-msgstr ""
+msgstr "Ins"
 
 #: lclstrconsts.smkcleft
 msgctxt "lclstrconsts.smkcleft"
@@ -1377,15 +1369,15 @@ msgstr "Esquerra"
 
 #: lclstrconsts.smkcmeta
 msgid "Meta+"
-msgstr ""
+msgstr "Meta+"
 
 #: lclstrconsts.smkcpgdn
 msgid "PgDn"
-msgstr ""
+msgstr "AvPg"
 
 #: lclstrconsts.smkcpgup
 msgid "PgUp"
-msgstr ""
+msgstr "RePg"
 
 #: lclstrconsts.smkcright
 msgctxt "lclstrconsts.smkcright"
@@ -1394,11 +1386,11 @@ msgstr "Dreta"
 
 #: lclstrconsts.smkcshift
 msgid "Shift+"
-msgstr ""
+msgstr "Maj+"
 
 #: lclstrconsts.smkcspace
 msgid "Space"
-msgstr ""
+msgstr "Espai"
 
 #: lclstrconsts.smkctab
 msgctxt "lclstrconsts.smkctab"
@@ -1420,33 +1412,33 @@ msgstr "No hi ha rellotges disponibles"
 
 #: lclstrconsts.sparexpected
 msgid "Wrong token type: %s expected"
-msgstr ""
+msgstr "Tipus equivocat: s'esperava %s"
 
 #: lclstrconsts.sparinvalidfloat
 msgid "Invalid floating point number: %s"
-msgstr ""
+msgstr "Nombre decimal invàlid: %s"
 
 #: lclstrconsts.sparinvalidinteger
 msgid "Invalid integer number: %s"
-msgstr ""
+msgstr "Nombre enter invàlid: %s"
 
 #: lclstrconsts.sparlocinfo
 msgid " (at %d,%d, stream offset %.8x)"
-msgstr ""
+msgstr " (a %d,%d, flux desplaçat %.8x)"
 
 #: lclstrconsts.sparunterminatedbinvalue
 msgid "Unterminated byte value"
-msgstr ""
+msgstr "Valor del byte inacabat"
 
 #: lclstrconsts.sparunterminatedstring
 msgid "Unterminated string"
-msgstr ""
+msgstr "Cadena inacabada"
 
 #: lclstrconsts.sparwrongtokensymbol
 msgid "Wrong token symbol: %s expected but %s found"
-msgstr ""
+msgstr "Símbol equivocat: esperat %s però trobat %s"
 
 #: lclstrconsts.sparwrongtokentype
 msgid "Wrong token type: %s expected but %s found"
-msgstr ""
+msgstr "Tipus equivocat: esperat %s però trobat %s"
 
