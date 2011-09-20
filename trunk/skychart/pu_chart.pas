@@ -860,7 +860,7 @@ end;
 inherited Paint;
 {$ifdef ImageBuffered}
 if  MovingCircle then begin
-  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
 end;
 if Zoomstep>1 then begin
      with Image1.Canvas do begin
@@ -874,7 +874,7 @@ if Zoomstep>1 then begin
      end;
 end;
 if sc.cfgsc.scopemark then begin
-   sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true);
+   sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true,-1);
 end;
 if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
@@ -1812,7 +1812,7 @@ begin
  WriteTrace(caption+' MouseUp');
 {$endif}
 if MovingCircle then begin
-   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    MovingCircle := false;
    if button=mbLeft then begin
       inc(sc.cfgsc.NumCircle);
@@ -1881,9 +1881,9 @@ end;
 if MovingCircle then begin
    Xcursor:=x;
    Ycursor:=y;
-   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
-   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    {$ifdef ImageBuffered}
    Image1.Invalidate;
    {$endif}
@@ -3497,7 +3497,7 @@ procedure Tf_chart.NewFinderCircle1Click(Sender: TObject);
   if MovingCircle or (sc.cfgsc.NumCircle>=MaxCircle) then exit;
   mouse.CursorPos:=point(xcursor+Image1.ClientOrigin.x,ycursor+Image1.ClientOrigin.y);
   GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
-  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
+  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
   MovingCircle := true;
   StartCircle:=true;
 end;
