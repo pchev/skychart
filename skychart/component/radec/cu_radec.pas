@@ -44,6 +44,7 @@ type
     procedure Paint; override;
     procedure SetValue(Val: Double);
     function ReadValue: Double;
+    function ReadText: String;
     procedure SetKind(Val: Tradeckind);
     procedure EditChange(Sender: TObject);
     procedure SetEnabled(value:boolean); override;
@@ -56,6 +57,7 @@ type
     { Published declarations }
      property kind: Tradeckind read Fkind write SetKind;
      property value : double Read ReadValue write SetValue;
+     property text  : string Read ReadText;
      property Enabled: boolean Read GetEnabled Write SetEnabled;
      property OnChange: TNotifyEvent read FOnChange write FOnChange;
      property Font;
@@ -382,6 +384,40 @@ case Fkind of
      EditDeg.Text:=FixNum(EditDeg.Text,3);
      val:=trim(EditDeg.Text)+'d'+trim(EditMin.Text)+'m'+trim(EditSec.Text)+'s';
      result:=StrToDE(val);
+     end;
+end;
+except
+beep;
+end;
+finally
+lockchange:=false;
+end;
+end;
+
+function TRaDec.ReadText: string;
+begin
+try
+result:='';
+lockchange:=true;
+try
+EditMin.Text:=FixNum(EditMin.Text,2);
+EditSec.Text:=FixNum(EditSec.Text,2);
+case Fkind of
+ RA: begin
+     EditDeg.Text:=FixNum(EditDeg.Text,2);
+     result:=trim(EditDeg.Text)+'h'+trim(EditMin.Text)+'m'+trim(EditSec.Text)+'s';
+     end;
+ DE: begin
+     EditDeg.Text:=FixNum(EditDeg.Text,3);
+     result:=trim(EditDeg.Text)+'d'+trim(EditMin.Text)+'m'+trim(EditSec.Text)+'s';
+     end;
+ Az: begin
+     EditDeg.Text:=FixNum(EditDeg.Text,4);
+     result:=trim(EditDeg.Text)+'d'+trim(EditMin.Text)+'m'+trim(EditSec.Text)+'s';
+     end;
+ Alt:begin
+     EditDeg.Text:=FixNum(EditDeg.Text,3);
+     result:=trim(EditDeg.Text)+'d'+trim(EditMin.Text)+'m'+trim(EditSec.Text)+'s';
      end;
 end;
 except
