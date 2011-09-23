@@ -63,7 +63,7 @@ type
     Label7: TLabel;
     Label8: TLabel;
     FirstRow: TEdit;
-    procedure Button1Click(Sender: TObject);
+    procedure GetData(Sender: TObject);
     procedure coClick(Sender: TObject);
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -80,7 +80,7 @@ implementation
 
 
 
-procedure Tf_vodetail.Button1Click(Sender: TObject);
+procedure Tf_vodetail.GetData(Sender: TObject);
 begin
 if assigned(FGetData) then FGetData(self);
 end;

@@ -188,7 +188,8 @@ var url:string;
 begin
 FCatalogName:=trim(Catalog);
 case Fvo_type of
-  VizierMeta: url:=Fbaseurl+'-meta.all&-out.form=XML-VOTable(XSL)';
+  //  http://vizier.u-strasbg.fr/viz-bin/votable?-source=IV/24&-out.all&-oc.form=dec&-c=0%2b0&-c.rd=10&-out.max=1&-out.form=DTD
+  VizierMeta: url:=Fbaseurl+'-out.all&-oc.form=dec&-c=0%2b0&-c.rd=10&-out.max=1&-out.form=DTD';
   ConeSearch: url:=Fbaseurl+'RA=0&DEC=0&SR=0';
 end;
 http.Clear;
@@ -209,22 +210,22 @@ procedure TVO_Detail.XmlStartTag(Sender: TObject; TagName: String; Attributes: T
 begin
 if TagName='VOTABLE' then votable:=true
 else if resource and(TagName='TABLE') then begin
-        table:=true;
-        Fnrow[Nlist-1]:=strtointdef(Attributes.Value('nrows'),0);
+         NewList;
+         fieldnum:=-1;
+         Coord:=false;
+         Fcatalog[Nlist-1]:=Attributes.Value('name');
+         if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=Attributes.Value('ID');
+         if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=FCatalogName;
+         table:=true;
+         Fnrow[Nlist-1]:=strtointdef(Attributes.Value('nrows'),0);
      end
 else if resource and(TagName='DESCRIPTION') then descr:=true
 else if resource and(TagName='DEFINITIONS') then definition:=true
 else if resource and(TagName='PARAM') then param:=true
 else if votable and(TagName='RESOURCE') then begin
         resource:=true;
-        NewList;
-        fieldnum:=-1;
-        Coord:=false;
-        Fcatalog[Nlist-1]:=Attributes.Value('name');
-        if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=Attributes.Value('ID');
-        if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=FCatalogName;
      end
-else if resource and(TagName='FIELD') then begin
+else if table and(TagName='FIELD') then begin
         field:=true;
         XmlEmptyTag(Sender,TagName,Attributes);
 end;
@@ -232,7 +233,7 @@ end;
 
 procedure TVO_Detail.XmlContent(Sender: TObject; Content: String);
 begin
-if resource and descr then begin
+if table and descr then begin
    if field then FRecDescription[Nlist-1][fieldnum]:=Content
    else if param then param_desc:=Content
    else cat_desc[Nlist-1]:=Content;
@@ -244,16 +245,18 @@ begin
 if TagName='VOTABLE' then begin
         votable:=false;
      end
-else if resource and(TagName='TABLE') then table:=false
+else if resource and(TagName='TABLE') then begin
+       table:=false;
+       Fequinox[Nlist-1]:=Fequ;
+       Fepoch[Nlist-1]:=Fepo;
+       Fsystem[Nlist-1]:=Fsys;
+       FHasCoord[Nlist-1]:=Coord;
+    end
 else if resource and(TagName='DEFINITIONS') then definition:=false
 else if resource and(TagName='DESCRIPTION') then descr:=false
 else if resource and(TagName='PARAM') then param:=false
 else if votable and(TagName='RESOURCE') then begin
         resource:=false;
-        Fequinox[Nlist-1]:=Fequ;
-        Fepoch[Nlist-1]:=Fepo;
-        Fsystem[Nlist-1]:=Fsys;
-        FHasCoord[Nlist-1]:=Coord;
      end
 else if resource and(TagName='FIELD') then begin
         field:=false;
