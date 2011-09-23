@@ -1,17 +1,24 @@
 object f_vodetail: Tf_vodetail
-  Left = 836
+  Left = 738
   Height = 427
-  Top = 105
+  Top = 185
   Width = 759
   HorzScrollBar.Page = 758
   VertScrollBar.Page = 426
   ActiveControl = tn
   Align = alClient
   Caption = 'f_vodetail'
+  ClientHeight = 427
+  ClientWidth = 759
+  LCLVersion = '0.9.30.1'
   object MainPanel: TPanel
+    Left = 0
     Height = 427
+    Top = 0
     Width = 759
     Align = alClient
+    ClientHeight = 427
+    ClientWidth = 759
     TabOrder = 0
     object Panel1: TPanel
       Left = 1
@@ -19,100 +26,92 @@ object f_vodetail: Tf_vodetail
       Top = 320
       Width = 757
       Align = alBottom
+      ClientHeight = 106
+      ClientWidth = 757
       TabOrder = 0
       object Table: TLabel
-        Left = 151
-        Height = 14
+        Left = 215
+        Height = 15
         Top = 12
-        Width = 32
+        Width = 31
         Caption = 'Table'
-        Color = clNone
         ParentColor = False
       end
       object Rows: TLabel
-        Left = 151
-        Height = 14
+        Left = 215
+        Height = 15
         Top = 35
         Width = 33
         Caption = 'Rows'
-        Color = clNone
         ParentColor = False
       end
       object Label1: TLabel
-        Left = 544
-        Height = 14
+        Left = 583
+        Height = 15
         Top = 35
-        Width = 46
+        Width = 42
         Caption = 'System'
-        Color = clNone
         ParentColor = False
       end
       object Label2: TLabel
-        Left = 544
-        Height = 14
+        Left = 583
+        Height = 15
         Top = 12
-        Width = 38
+        Width = 36
         Caption = 'Epoch'
-        Color = clNone
         ParentColor = False
       end
       object Label3: TLabel
-        Left = 544
-        Height = 14
+        Left = 583
+        Height = 15
         Top = 58
-        Width = 48
+        Width = 45
         Caption = 'Equinox'
-        Color = clNone
         ParentColor = False
       end
       object Label4: TLabel
         Left = 7
-        Height = 14
+        Height = 15
         Top = 12
-        Width = 19
+        Width = 17
         Caption = 'RA'
-        Color = clNone
         ParentColor = False
       end
       object Label5: TLabel
         Left = 7
-        Height = 14
+        Height = 15
         Top = 35
-        Width = 28
+        Width = 27
         Caption = 'DEC'
-        Color = clNone
         ParentColor = False
       end
       object Label6: TLabel
         Left = 7
-        Height = 14
+        Height = 15
         Top = 58
-        Width = 28
+        Width = 24
         Caption = 'FOV'
-        Color = clNone
         ParentColor = False
       end
       object Label7: TLabel
-        Left = 151
-        Height = 14
+        Left = 215
+        Height = 15
         Top = 82
-        Width = 83
+        Width = 81
         Caption = 'Retrieve Rows'
-        Color = clNone
         ParentColor = False
       end
       object Label8: TLabel
-        Left = 151
-        Height = 14
+        Left = 215
+        Height = 15
         Top = 58
-        Width = 56
+        Width = 53
         Caption = 'First Row'
-        Color = clNone
         ParentColor = False
       end
       object tn: TEdit
-        Left = 200
-        Height = 21
+        Left = 264
+        Height = 22
         Top = 8
         Width = 97
         Color = clBtnFace
@@ -120,8 +119,8 @@ object f_vodetail: Tf_vodetail
         TabOrder = 0
       end
       object tr: TEdit
-        Left = 200
-        Height = 21
+        Left = 264
+        Height = 22
         Top = 31
         Width = 97
         Color = clBtnFace
@@ -129,10 +128,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 1
       end
       object desc: TMemo
-        Left = 304
+        Left = 367
         Height = 88
         Top = 8
-        Width = 233
+        Width = 209
         Color = clBtnFace
         Lines.Strings = (
           ''
@@ -140,8 +139,8 @@ object f_vodetail: Tf_vodetail
         TabOrder = 2
       end
       object ep: TEdit
-        Left = 607
-        Height = 21
+        Left = 646
+        Height = 22
         Top = 8
         Width = 73
         Color = clBtnFace
@@ -149,8 +148,8 @@ object f_vodetail: Tf_vodetail
         TabOrder = 3
       end
       object sys: TEdit
-        Left = 607
-        Height = 21
+        Left = 646
+        Height = 22
         Top = 31
         Width = 73
         Color = clBtnFace
@@ -158,8 +157,8 @@ object f_vodetail: Tf_vodetail
         TabOrder = 4
       end
       object eq: TEdit
-        Left = 607
-        Height = 21
+        Left = 646
+        Height = 22
         Top = 54
         Width = 73
         Color = clBtnFace
@@ -167,10 +166,10 @@ object f_vodetail: Tf_vodetail
         TabOrder = 5
       end
       object co: TCheckBox
-        Left = 544
-        Height = 21
+        Left = 583
+        Height = 26
         Top = 80
-        Width = 140
+        Width = 142
         Caption = 'Contain Coordinates'
         OnClick = coClick
         TabOrder = 6
@@ -182,61 +181,53 @@ object f_vodetail: Tf_vodetail
         Width = 121
         BorderSpacing.InnerBorder = 4
         Caption = 'Get Data'
-        OnClick = Button1Click
+        OnClick = GetData
         TabOrder = 7
       end
       object RaDec1: TRaDec
         Left = 55
         Height = 21
         Top = 8
-        Width = 74
+        Width = 160
+        kind = RA
+        value = 0.71166666666666
         Enabled = False
-        EditMask = '!99h99m99s;1; '
-        MaxLength = 9
         ParentColor = False
         TabOrder = 8
-        Text = '00h42m42s'
-        value = 0.711666666666667
       end
       object RaDec2: TRaDec
         Left = 55
         Height = 21
         Top = 31
-        Width = 71
+        Width = 160
+        kind = DE
+        value = 41.2641666666666
         Enabled = False
-        EditMask = '!##9d99m99s;1; '
-        MaxLength = 10
         ParentColor = False
         TabOrder = 9
-        Text = '+41d15m51s'
-        kind = DE
-        value = 41.264166666666668
       end
       object RaDec3: TRaDec
         Left = 55
         Height = 21
         Top = 54
-        Width = 71
-        Enabled = False
-        EditMask = '!999d99m99s;1; '
-        MaxLength = 10
-        ParentColor = False
-        TabOrder = 10
-        Text = '000d30m00s'
+        Width = 159
         kind = Az
         value = 0.5
+        Enabled = False
+        ParentColor = False
+        TabOrder = 10
       end
       object maxrow: TEdit
-        Left = 248
-        Height = 21
+        Left = 312
+        Height = 22
         Top = 78
         Width = 49
         TabOrder = 11
         Text = '50'
       end
       object FirstRow: TEdit
-        Left = 248
-        Height = 21
+        Left = 312
+        Height = 22
         Top = 54
         Width = 49
         TabOrder = 12
@@ -252,14 +243,11 @@ object f_vodetail: Tf_vodetail
       BorderStyle = bsNone
       ColCount = 6
       DefaultColWidth = 100
-      FixedColor = clBtnFace
       FixedCols = 0
       GridLineWidth = 0
       Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
       RowCount = 2
-      ScrollBars = ssAutoBoth
       TabOrder = 1
-      TabStop = True
       OnMouseUp = GridMouseUp
     end
   end

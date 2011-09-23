@@ -40,24 +40,25 @@ type
 
   const
   tab=#09;
-  vo_list: array [Tvo_source] of string = ('vo_vizier_list.xml','vo_nvo_list.xml');
+  vo_list: array [Tvo_source] of string = ('vo_vizier_list.xml','');
   vo_types: array [Tvo_source] of Tvo_type=(VizierMeta,ConeSearch);
   vo_meta = 'vo_meta.xml';
   vo_data = 'vo_data.xml';
   vo_maxurl=10;
+//      http://vizier.u-strasbg.fr/viz-bin/votable?-source=*&-meta&-meta.max=100000
   vo_url: array [Tvo_source,1..vo_maxurl,1..2] of string = ((
-  ('http://vizier.u-strasbg.fr/cgi-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at CDS - Strasbourg, France'),
-  ('http://vizier.nao.ac.jp/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at ADAC - Tokyo, Japan'),
-  ('http://vizier.hia.nrc.ca/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at CADC - Canada'),
-  ('http://archive.ast.cam.ac.uk/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at Cambridge - UK'),
-  ('http://urania.iucaa.ernet.in/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at IUCAA - Pune, India'),
-  ('http://data.bao.ac.cn/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at Bejing Obs. - China'),
-  ('http://vizier.cfa.harvard.edu/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at CFA Harvard - USA'),
-  ('http://www.ukirt.jach.hawaii.edu/viz-bin/votable?-source=*&-meta&-meta.max=100000&-out.form=XML-VOTable(XSL)','VizieR at JAC, Hawaii - USA'),
-  ('',''),
+  ('http://vizier.u-strasbg.fr/viz-bin/votable?','VizieR at CDS - Strasbourg, France'),
+  ('http://vizier.cfa.harvard.edu/viz-bin/votable?','VizieR at CFA Harvard - USA'),
+  ('http://vizier.hia.nrc.ca/viz-bin/votable?','VizieR at CADC - Canada'),
+  ('http://vizier.nao.ac.jp/viz-bin/votable?','VizieR at ADAC - Tokyo, Japan'),
+  ('http://urania.iucaa.ernet.in/viz-bin/votable?','VizieR at IUCAA - Pune, India'),
+  ('http://data.bao.ac.cn/viz-bin/votable?','VizieR at Bejing Obs. - China'),
+  ('http://archive.ast.cam.ac.uk/viz-bin/votable?','VizieR at Cambridge - UK'),
+  ('http://www.ukirt.jach.hawaii.edu/viz-bin/votable?','VizieR at JAC, Hawaii - USA'),
+  ('http://vizier.inasan.ru/viz-bin/votable?','VizieR at INASAN, Moscow, Russia'),
   ('','')
   ),(
-  ('http://nvo.stsci.edu/VORegistry/registry.asmx/QueryVOResource?predicate=ResourceType%20like%20''CONE''','NVO at STSCI'),
+  ('',''),
   ('',''),
   ('',''),
   ('',''),

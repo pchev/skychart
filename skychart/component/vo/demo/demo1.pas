@@ -33,7 +33,11 @@ uses Messages, SysUtils, Classes, Graphics, Controls, Forms,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
 type
+
+  { TForm1 }
+
   TForm1 = class(TForm)
+    CatFilter: TEdit;
     VO_Catalogs1: TVO_Catalogs;
     PageControl1: TPageControl;
     TabCat: TTabSheet;
@@ -65,18 +69,18 @@ type
     SaveDialog1: TSaveDialog;
     tn: TEdit;
     Button1: TButton;
-    TabSheet1: TTabSheet;
+    TabRegistry: TTabSheet;
     RadioGroup1: TRadioGroup;
     Button13: TButton;
     procedure ButtonFindClick(Sender: TObject);
     procedure ButtonNextClick(Sender: TObject);
-    procedure Button11Click(Sender: TObject);
+    procedure SearchCatalog(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure Button12Click(Sender: TObject);
+    procedure SelectCatalog(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
-    procedure Button13Click(Sender: TObject);
+    procedure ButtonSave(Sender: TObject);
+    procedure SelectRegistry(Sender: TObject);
   private
     { Private declarations }
     procedure SetServerList;
@@ -109,7 +113,10 @@ begin
   CatList.Cells[1,0]:='Description';
   CatList.Cells[2,0]:='Info';
   CatList.Cells[3,0]:='URL';
+  VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
   SetServerList;
+  VO_Catalogs1.ClearCatList;
+  PageControl1.ActivePage:=TabCat;
 end;
 
 procedure TForm1.SetServerList;
@@ -120,15 +127,6 @@ begin
     if vo_url[VO_Catalogs1.vo_source,i,2]<>'' then
       ServerList.Items.Add(vo_url[VO_Catalogs1.vo_source,i,2]);
   ServerList.ItemIndex:=0;
-end;
-
-procedure TForm1.Button13Click(Sender: TObject);
-begin
- VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
- SetServerList;
- VO_Catalogs1.ClearCatList;
- Timer1.Enabled:=true;
- Pagecontrol1.ActivePageIndex:=1;
 end;
 
 procedure TForm1.FillCatList;
@@ -159,26 +157,13 @@ begin
  Timer1.Enabled:=true;
 end;
 
-procedure TForm1.Timer1Timer(Sender: TObject);
-begin
-Timer1.Enabled:=false;
-screen.Cursor:=crHourGlass;
-try
- msg.Caption:='Loading catalog list. Please wait ...';
- msg.Refresh;
- VO_Catalogs1.ListUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
- FillCatList;
- msg.Caption:=VO_Catalogs1.LastErr;
- if msg.Caption='' then msg.Caption:=inttostr(CatList.RowCount)+' Catalogs availables.';
-finally
-screen.Cursor:=crDefault;
-end;
-end;
-
-procedure TForm1.Button11Click(Sender: TObject);
+procedure TForm1.SearchCatalog(Sender: TObject);
+var buf:string;
 begin
 screen.Cursor:=crHourGlass;
-VO_Catalogs1.ListUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
+buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
+buf:=buf+'-source='+trim(CatFilter.Text)+'&-meta&-meta.max=1000';
+VO_Catalogs1.ListUrl:=buf;
 try
  msg.Caption:='';
  if VO_Catalogs1.ForceUpdate then
@@ -219,7 +204,7 @@ if i>=0 then begin
 end;
 end;
 
-procedure TForm1.Button12Click(Sender: TObject);
+procedure TForm1.SelectCatalog(Sender: TObject);
 var i,n: integer;
     buf: string;
     tb:TTabsheet;
@@ -269,7 +254,8 @@ if CatList.Row>0 then begin
        SelectAll:=true;
        tn.Text:=VO_Detail1.TableName[n];
        tb.Caption:=VO_Detail1.TableName[n];
-       tr.Text:=inttostr(VO_Detail1.Rows[n]);
+       if VO_Detail1.Rows[n]=0 then tr.Text:='?'
+          else tr.Text:=inttostr(VO_Detail1.Rows[n]);
        desc.text:=VO_Detail1.description[n];
        ep.text:=VO_Detail1.epoch[n];
        sys.text:=VO_Detail1.system[n];
@@ -287,7 +273,7 @@ if CatList.Row>0 then begin
      end;
   end;
   if Pagecontrol2.PageCount=0 then ClearCatalog;
-  Pagecontrol1.ActivePageIndex:=2;
+  Pagecontrol1.ActivePage:=TabDetail;
   Pagecontrol2.ActivePageIndex:=0;
 end;
 finally
@@ -346,7 +332,7 @@ tn.Text:=VO_TableData1.TableName;
 ep.text:=VO_TableData1.epoch;
 sys.text:=VO_TableData1.system;
 eq.text:=VO_TableData1.equinox;
-Pagecontrol1.ActivePageIndex:=3;
+Pagecontrol1.ActivePage:=TabData;
 finally
 screen.Cursor:=crDefault;
 end;
@@ -415,10 +401,38 @@ Lines.free;
 end;
 end;
 
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.ButtonSave(Sender: TObject);
 begin
 SaveGrid;
 end;
+
+//////////////  Registry selection not used at the moment ////////////////////
+
+procedure TForm1.SelectRegistry(Sender: TObject);
+begin
+ VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
+ SetServerList;
+ VO_Catalogs1.ClearCatList;
+ Timer1.Enabled:=true;
+ Pagecontrol1.ActivePage:=TabCat;
+end;
+
+procedure TForm1.Timer1Timer(Sender: TObject);
+begin
+Timer1.Enabled:=false;
+screen.Cursor:=crHourGlass;
+try
+ msg.Caption:='Loading catalog list. Please wait ...';
+ msg.Refresh;
+ VO_Catalogs1.ListUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
+ FillCatList;
+ msg.Caption:=VO_Catalogs1.LastErr;
+ if msg.Caption='' then msg.Caption:=inttostr(CatList.RowCount)+' Catalogs availables.';
+finally
+screen.Cursor:=crDefault;
+end;
+end;
+
 
 
 initialization
