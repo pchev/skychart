@@ -48,7 +48,7 @@ type
     XmlScanner: TEasyXmlScanner;
     votable,table,param,descr,definition,resource,field,Coord : boolean;
     Fequinox,Fepoch,Fsystem,Fcatalog,cat_desc : TStringArray;
-    param_desc,Fequ,Fepo,Fsys: string;
+    param_desc,resdesc,Fequ,Fepo,Fsys,resourcename: string;
     fieldnum: integer;
     procedure XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
     procedure XmlContent(Sender: TObject; Content: String);
@@ -58,7 +58,7 @@ type
     procedure NewList;
     procedure ClearList;
     procedure LoadDetail;
-    procedure GetDetail(Catalog:string);
+    procedure GetDetail(Catalog:string; retry:integer=0);
   protected
   public
     constructor Create(AOwner:TComponent); override;
@@ -183,13 +183,15 @@ begin
    XmlScanner.Execute;
 end;
 
-procedure TVO_Detail.GetDetail(Catalog:string);
+procedure TVO_Detail.GetDetail(Catalog:string; retry:integer=0);
 var url:string;
 begin
 FCatalogName:=trim(Catalog);
 case Fvo_type of
-  //  http://vizier.u-strasbg.fr/viz-bin/votable?-source=IV/24&-out.all&-oc.form=dec&-c=0%2b0&-c.rd=10&-out.max=1&-out.form=DTD
-  VizierMeta: url:=Fbaseurl+'-out.all&-oc.form=dec&-c=0%2b0&-c.rd=10&-out.max=1&-out.form=DTD';
+  VizierMeta: begin
+                   if retry=0 then url:= Fbaseurl+'-source='+FCatalogName+'/*&-meta.all'    // tables description and row numbers
+                      else url:=Fbaseurl+'-source='+FCatalogName+'/*&-out.all&-oc.form=dec&-c=0%2b0&-c.rs=1&-out.max=1'; // table description from empty data search, because the previous form do not work for all the catalogs
+              end;
   ConeSearch: url:=Fbaseurl+'RA=0&DEC=0&SR=0';
 end;
 http.Clear;
@@ -201,6 +203,7 @@ if http.HTTPMethod('GET', url)
        http.Document.SaveToFile(slash(Fvopath)+vo_meta);
        FLastErr:='';
        LoadDetail;
+       if (Nlist=0)and(retry=0) then GetDetail(Catalog,1);
      end
      else FLastErr:='Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
 http.Clear;
@@ -214,6 +217,7 @@ else if resource and(TagName='TABLE') then begin
          fieldnum:=-1;
          Coord:=false;
          Fcatalog[Nlist-1]:=Attributes.Value('name');
+         if trim(Fcatalog[Nlist-1])='' then Fcatalog[Nlist-1]:=resourcename;
          if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=Attributes.Value('ID');
          if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=FCatalogName;
          table:=true;
@@ -224,6 +228,7 @@ else if resource and(TagName='DEFINITIONS') then definition:=true
 else if resource and(TagName='PARAM') then param:=true
 else if votable and(TagName='RESOURCE') then begin
         resource:=true;
+        resourcename:=Attributes.Value('name');
      end
 else if table and(TagName='FIELD') then begin
         field:=true;
@@ -233,6 +238,9 @@ end;
 
 procedure TVO_Detail.XmlContent(Sender: TObject; Content: String);
 begin
+if resource and (not table) and (not param) and (not definition) and descr then begin
+   resdesc:=Content;
+end;
 if table and descr then begin
    if field then FRecDescription[Nlist-1][fieldnum]:=Content
    else if param then param_desc:=Content
@@ -251,6 +259,7 @@ else if resource and(TagName='TABLE') then begin
        Fepoch[Nlist-1]:=Fepo;
        Fsystem[Nlist-1]:=Fsys;
        FHasCoord[Nlist-1]:=Coord;
+       if trim(cat_desc[Nlist-1])='' then cat_desc[Nlist-1]:=resdesc;
     end
 else if resource and(TagName='DEFINITIONS') then definition:=false
 else if resource and(TagName='DESCRIPTION') then descr:=false

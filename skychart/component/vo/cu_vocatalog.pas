@@ -208,7 +208,7 @@ else if TagName='INFO' then info:=true
 else if TagName='RESOURCE' then begin
         resource:=true;
         catalog:=Attributes.Value('name');
-        catalog_url:=base_url+catalog+'&';
+        catalog_url:=base_url+catalog;
         catalog_desc:='';
         catalog_info:='';
 end;

@@ -5,7 +5,6 @@ object f_vodetail: Tf_vodetail
   Width = 759
   HorzScrollBar.Page = 758
   VertScrollBar.Page = 426
-  ActiveControl = tn
   Align = alClient
   Caption = 'f_vodetail'
   ClientHeight = 427
@@ -97,8 +96,8 @@ object f_vodetail: Tf_vodetail
         Left = 215
         Height = 15
         Top = 82
-        Width = 81
-        Caption = 'Retrieve Rows'
+        Width = 60
+        Caption = 'Max. Rows'
         ParentColor = False
       end
       object Label8: TLabel
@@ -115,6 +114,7 @@ object f_vodetail: Tf_vodetail
         Top = 8
         Width = 97
         Color = clBtnFace
+        Enabled = False
         ReadOnly = True
         TabOrder = 0
       end
@@ -124,6 +124,7 @@ object f_vodetail: Tf_vodetail
         Top = 31
         Width = 97
         Color = clBtnFace
+        Enabled = False
         ReadOnly = True
         TabOrder = 1
       end
@@ -133,9 +134,11 @@ object f_vodetail: Tf_vodetail
         Top = 8
         Width = 209
         Color = clBtnFace
+        Enabled = False
         Lines.Strings = (
           ''
         )
+        ReadOnly = True
         TabOrder = 2
       end
       object ep: TEdit
@@ -144,6 +147,7 @@ object f_vodetail: Tf_vodetail
         Top = 8
         Width = 73
         Color = clBtnFace
+        Enabled = False
         ReadOnly = True
         TabOrder = 3
       end
@@ -153,6 +157,7 @@ object f_vodetail: Tf_vodetail
         Top = 31
         Width = 73
         Color = clBtnFace
+        Enabled = False
         ReadOnly = True
         TabOrder = 4
       end
@@ -162,6 +167,7 @@ object f_vodetail: Tf_vodetail
         Top = 54
         Width = 73
         Color = clBtnFace
+        Enabled = False
         ReadOnly = True
         TabOrder = 5
       end
@@ -218,18 +224,18 @@ object f_vodetail: Tf_vodetail
         TabOrder = 10
       end
       object maxrow: TEdit
-        Left = 312
+        Left = 287
         Height = 22
-        Top = 78
-        Width = 49
+        Top = 80
+        Width = 74
         TabOrder = 11
         Text = '50'
       end
       object FirstRow: TEdit
-        Left = 312
+        Left = 287
         Height = 22
         Top = 54
-        Width = 49
+        Width = 74
         TabOrder = 12
         Text = '1'
       end

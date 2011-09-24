@@ -38,7 +38,7 @@ type
   ///////////////////////////////////////////////////////////////
   TVO_TableData = class(TComponent)
   private
-    Fbaseurl,FLastErr,Fvopath,FTableName: string;
+    Fbaseurl,FLastErr,Fvopath,FTableName,Fvo_data: string;
     Fvo_type: Tvo_type;
     Fra,Fde,Ffov : double;
     FFirst,Fmax: integer;
@@ -80,6 +80,7 @@ type
     property BaseUrl: string read Fbaseurl write Fbaseurl;
     property vo_type: Tvo_type read Fvo_type write Fvo_type;
     property CachePath: string read Fvopath write Fvopath;
+    property Datafile: string read Fvo_data;
     property SelectCoord: boolean read FSelectCoord write FSelectCoord;
     property Ra: double read Fra write Fra;
     property Dec: double read Fde write Fde;
@@ -114,6 +115,7 @@ begin
  XmlScanner.OnEmptyTag:=XmlEmptyTag;
  XmlScanner.OnLoadExternal:=XmlLoadExternal;
  Fbaseurl:='';
+ Fvo_data:='';
  Fvopath:='.';
  Fncol:=0;
  Fmax:=50;
@@ -143,7 +145,7 @@ end;
 procedure TVO_TableData.LoadData;
 begin
    ClearData;
-   XmlScanner.LoadFromFile(slash(Fvopath)+vo_data);
+   XmlScanner.LoadFromFile(slash(Fvopath)+Fvo_data);
    XmlScanner.Execute;
 end;
 
@@ -156,8 +158,10 @@ begin
 FTableName:=trim(Table);
 Fcatalog:=FTableName;
 url:=Fbaseurl;
+Fvo_data:='vo_table_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
 case Fvo_type of
   VizierMeta: begin
+                url:=url+'-source='+FTableName;
                 if FSelectCoord then
                    url:=url+'&-c='+formatfloat(f6,(15*Fra))+'%20'+formatfloat(s6,Fde)+'&-c.r='+inttostr(round(60*Ffov))
                 else
@@ -168,7 +172,7 @@ case Fvo_type of
                    for i:=0 to FFieldList.Count-1 do begin
                       url:=url+'&-out='+FFieldList[i];
                    end;
-                if FSelectCoord then url:=url+'&-out=_RA&-out=_DE';
+                if FSelectCoord then url:=url+'&-out=_RAJ2000&-out=_DEJ2000';
                 url:=url+'&-oc.form=dec&-out.max='+inttostr(Fmax)+'&-out.form=XML-VOTable(XSL)';
               end;
   ConeSearch: begin
@@ -181,7 +185,7 @@ if http.HTTPMethod('GET', url)
    and ((http.ResultCode=200)
    or (http.ResultCode=0))
      then begin
-       http.Document.SaveToFile(slash(Fvopath)+vo_data);
+       http.Document.SaveToFile(slash(Fvopath)+Fvo_data);
        FLastErr:='';
        LoadData;
      end

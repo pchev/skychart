@@ -43,7 +43,6 @@ type
   vo_list: array [Tvo_source] of string = ('vo_vizier_list.xml','');
   vo_types: array [Tvo_source] of Tvo_type=(VizierMeta,ConeSearch);
   vo_meta = 'vo_meta.xml';
-  vo_data = 'vo_data.xml';
   vo_maxurl=10;
 //      http://vizier.u-strasbg.fr/viz-bin/votable?-source=*&-meta&-meta.max=100000
   vo_url: array [Tvo_source,1..vo_maxurl,1..2] of string = ((

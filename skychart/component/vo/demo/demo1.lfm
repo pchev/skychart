@@ -18,9 +18,9 @@ object Form1: TForm1
     Height = 516
     Top = 0
     Width = 783
-    ActivePage = TabCat
+    ActivePage = TabData
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
@@ -210,7 +210,7 @@ object Form1: TForm1
           ParentColor = False
         end
         object Label3: TLabel
-          Left = 280
+          Left = 268
           Height = 15
           Top = 12
           Width = 44
@@ -218,7 +218,7 @@ object Form1: TForm1
           ParentColor = False
         end
         object Label4: TLabel
-          Left = 432
+          Left = 428
           Height = 15
           Top = 12
           Width = 45
@@ -231,6 +231,7 @@ object Form1: TForm1
           Top = 8
           Width = 73
           Color = clBtnFace
+          Enabled = False
           ReadOnly = True
           TabOrder = 0
         end
@@ -240,6 +241,7 @@ object Form1: TForm1
           Top = 8
           Width = 73
           Color = clBtnFace
+          Enabled = False
           ReadOnly = True
           TabOrder = 1
         end
@@ -249,6 +251,7 @@ object Form1: TForm1
           Top = 8
           Width = 73
           Color = clBtnFace
+          Enabled = False
           ReadOnly = True
           TabOrder = 2
         end
@@ -258,6 +261,7 @@ object Form1: TForm1
           Top = 8
           Width = 105
           Color = clBtnFace
+          Enabled = False
           ReadOnly = True
           TabOrder = 3
         end
