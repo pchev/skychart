@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Messages, SysUtils, Classes, Graphics, Controls, Forms,
+uses Messages, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
@@ -83,6 +83,7 @@ type
     procedure SelectRegistry(Sender: TObject);
   private
     { Private declarations }
+    vopath : string;
     procedure SetServerList;
     procedure FillCatList;
     procedure ClearCatalog;
@@ -104,7 +105,11 @@ implementation
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   DecimalSeparator:='.';
-  VO_Catalogs1.CachePath:=getcurrentdir;
+  vopath:=ExpandFileName('~/.skychart/vo');
+  if not DirectoryExists(vopath) then CreateDir(vopath);
+  VO_Catalogs1.CachePath:=vopath;
+  VO_Detail1.CachePath:=vopath;
+  VO_TableData1.CachePath:=vopath;
   CatList.ColWidths[0]:=100;
   CatList.ColWidths[1]:=400;
   CatList.ColWidths[2]:=150;
@@ -204,9 +209,21 @@ if i>=0 then begin
 end;
 end;
 
+function dedupstr(txt:string):string;
+var i,p,l: integer;
+    buf1,buf2:string;
+begin
+l:=length(txt);
+p:=l div 2;
+buf1:=copy(txt,1,p);
+buf2:=copy(txt,p+2,9999);
+if buf1=buf2 then result:=buf1
+   else result:=txt;
+end;
+
 procedure TForm1.SelectCatalog(Sender: TObject);
 var i,n: integer;
-    buf: string;
+    buf,catname: string;
     tb:TTabsheet;
     fr:Tf_vodetail;
 begin
@@ -215,8 +232,9 @@ try
 if CatList.Row>0 then begin
   i:=CatList.Row;
   buf:=CatList.Cells[0,i];
+  catname:=CatList.Cells[1,i];
   VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
-  VO_Detail1.BaseUrl:=CatList.Cells[3,i];
+  VO_Detail1.BaseUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
   VO_Detail1.vo_type:=VO_Catalogs1.vo_type;
   VO_Detail1.Update(buf);
   for n:=0 to Pagecontrol2.PageCount-1 do
@@ -256,7 +274,8 @@ if CatList.Row>0 then begin
        tb.Caption:=VO_Detail1.TableName[n];
        if VO_Detail1.Rows[n]=0 then tr.Text:='?'
           else tr.Text:=inttostr(VO_Detail1.Rows[n]);
-       desc.text:=VO_Detail1.description[n];
+       if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
+          else desc.text:=Catname;
        ep.text:=VO_Detail1.epoch[n];
        sys.text:=VO_Detail1.system[n];
        eq.text:=VO_Detail1.equinox[n];
@@ -306,7 +325,7 @@ ClearDataGrid;
 if sender is Tf_vodetail then
    with sender as Tf_vodetail do begin
        VO_TableData1.vo_type:=VO_Detail1.vo_type;
-       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName,tn.Text,[]);
+       VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Text,[]);
        VO_TableData1.SelectCoord:=Radec1.Enabled;
        VO_TableData1.ra:=RaDec1.value;
        VO_TableData1.dec:=RaDec2.value;
