@@ -244,7 +244,10 @@ if Assigned(VoNode) then begin
             end;
             if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
               if (lin.star.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
-                  lin.star.id:=buf;
+                  if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+                      if lin.star.id='' then lin.star.id:=lin.star.id+buf
+                                        else lin.star.id:=lin.star.id+'-'+buf;
+                  end else lin.star.id:=buf;
             end;
             if pos('pos.pm',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
                if pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
@@ -261,7 +264,10 @@ if Assigned(VoNode) then begin
             if pos('phys.angSize',TFieldData(VOFields.Objects[i]).ucd)>0 then lin.neb.dim1:=StrToFloatDef(buf,99);
             if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
               if (lin.neb.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
-                  lin.neb.id:=buf;
+                  if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+                      if lin.neb.id='' then lin.neb.id:=lin.neb.id+buf
+                                        else lin.neb.id:=lin.neb.id+'-'+buf;
+                  end else lin.neb.id:=buf;
             end;
             end;
     end;
