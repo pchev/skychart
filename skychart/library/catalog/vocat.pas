@@ -4,7 +4,7 @@ unit vocat;
 
 interface
 
-uses  skylibcat, gcatunit, XMLRead, DOM,
+uses  skylibcat, gcatunit, XMLRead, DOM, math,
   Classes, SysUtils; 
 
 procedure SetVOCatpath(path:string);
@@ -15,7 +15,7 @@ Procedure NextVOCat( var ok : boolean);
 procedure CloseVOCat ;
 
 type TFieldData = class(Tobject)
-     name, ucd, datatype, units : string;
+     name, ucd, datatype, units, description : string;
      end;
 
 var
@@ -25,10 +25,11 @@ var
    Defsize: integer;
    Defmag: double;
    flabels: Tlabellst;
+   unitpmra, unitpmdec: double;
    catname:string;
    VOcatlist : TStringList;
    VOFields: TStringList;
-   NFields, Ncat, CurCat, catversion: integer;
+   Ncat, CurCat, catversion: integer;
    emptyrec : gcatrec;
    VODoc: TXMLDocument;
    VoNode: TDOMNode;
@@ -42,6 +43,7 @@ end;
 
 Procedure InitRec;
 var n : integer;
+    ucd: string;
 begin
   emptyrec.options.rectype:=catversion;
   emptyrec.options.Equinox:=2000;
@@ -57,56 +59,20 @@ begin
   for n:=1 to 10 do emptyrec.options.altname[n]:=false;
   emptyrec.options.flabel:=flabels;
   emptyrec.options.flabel[lOffset+vsComment]:='File';
-  emptyrec.options.ShortName:='';
-  emptyrec.star.magv:=-99;
-{  case emptyrec.options.rectype of
-  rtstar : begin  // Star 1
-      if catheader.flen[3]>0 then emptyrec.star.valid[vsId]:=true;
-      if catheader.flen[4]>0 then emptyrec.star.valid[vsMagV]:=true;
-      if catheader.flen[5]>0 then emptyrec.star.valid[vsB_V]:=true;
-      if catheader.flen[6]>0 then emptyrec.star.valid[vsMagB]:=true;
-      if catheader.flen[7]>0 then emptyrec.star.valid[vsMagR]:=true;
-      if catheader.flen[8]>0 then emptyrec.star.valid[vsSp]:=true;
-      if catheader.flen[9]>0 then emptyrec.star.valid[vsPmra]:=true;
-      if catheader.flen[10]>0 then emptyrec.star.valid[vsPmdec]:=true;
-      if catheader.flen[11]>0 then emptyrec.star.valid[vsEpoch]:=true;
-      if catheader.flen[12]>0 then emptyrec.star.valid[vsPx]:=true;
-      if catheader.flen[13]>0 then emptyrec.star.valid[vsComment]:=true;
+  emptyrec.options.ShortName:='VO';
+  case emptyrec.options.rectype of
+  rtstar : begin
+           emptyrec.star.magv:=-99;
+           emptyrec.star.valid[vsId]:=true;
+           emptyrec.star.valid[vsComment]:=true;
+           if unitpmra<>0 then emptyrec.star.valid[vsPmra]:=true;
+           if unitpmdec<>0 then emptyrec.star.valid[vsPmdec]:=true;
       end;
-  rtneb : begin  // nebulae 1
-      if catheader.flen[3]>0 then emptyrec.neb.valid[vnId]:=true;
-      if catheader.flen[4]>0 then emptyrec.neb.valid[vnNebtype]:=true;
-      if catheader.flen[5]>0 then emptyrec.neb.valid[vnMag]:=true;
-      if catheader.flen[6]>0 then emptyrec.neb.valid[vnSbr]:=true;
-      if catheader.flen[7]>0 then emptyrec.neb.valid[vnDim1]:=true;
-      if catheader.flen[8]>0 then emptyrec.neb.valid[vnDim2]:=true;
-      if catheader.flen[9]>0 then emptyrec.neb.valid[vnNebunit]:=true;
-      if catheader.flen[10]>0 then emptyrec.neb.valid[vnPa]:=true;
-      if catheader.flen[11]>0 then emptyrec.neb.valid[vnRv]:=true;
-      if catheader.flen[12]>0 then emptyrec.neb.valid[vnMorph]:=true;
-      if catheader.flen[13]>0 then emptyrec.neb.valid[vnComment]:=true;
+  rtneb : begin
+          emptyrec.neb.valid[vnId]:=true;
+          emptyrec.neb.valid[vnComment]:=true;
       end;
-  end; }
-{  if catheader.flen[16]>0 then emptyrec.vstr[1]:=true;
-  if catheader.flen[17]>0 then emptyrec.vstr[2]:=true;
-  if catheader.flen[18]>0 then emptyrec.vstr[3]:=true;
-  if catheader.flen[19]>0 then emptyrec.vstr[4]:=true;
-  if catheader.flen[20]>0 then emptyrec.vstr[5]:=true;
-  if catheader.flen[21]>0 then emptyrec.vstr[6]:=true;
-  if catheader.flen[22]>0 then emptyrec.vstr[7]:=true;
-  if catheader.flen[23]>0 then emptyrec.vstr[8]:=true;
-  if catheader.flen[24]>0 then emptyrec.vstr[9]:=true;
-  if catheader.flen[25]>0 then emptyrec.vstr[10]:=true;
-  if catheader.flen[26]>0 then emptyrec.vnum[1]:=true;
-  if catheader.flen[27]>0 then emptyrec.vnum[2]:=true;
-  if catheader.flen[28]>0 then emptyrec.vnum[3]:=true;
-  if catheader.flen[29]>0 then emptyrec.vnum[4]:=true;
-  if catheader.flen[30]>0 then emptyrec.vnum[5]:=true;
-  if catheader.flen[31]>0 then emptyrec.vnum[6]:=true;
-  if catheader.flen[32]>0 then emptyrec.vnum[7]:=true;
-  if catheader.flen[33]>0 then emptyrec.vnum[8]:=true;
-  if catheader.flen[34]>0 then emptyrec.vnum[9]:=true;
-  if catheader.flen[35]>0 then emptyrec.vnum[10]:=true;  }
+  end;
 end;
 
 Procedure Getkeyword(s: string; var k,v:string);
@@ -123,12 +89,16 @@ end;
 
 Function ReadVOHeader: boolean;
 var f: textfile;
-    buf,k,v:string;
+    buf,e,k,v:string;
+    u: double;
+    i,j: integer;
     fieldnode: TDOMNode;
     fielddata: TFieldData;
 begin
 result:=false;
 fillchar(EmptyRec,sizeof(GcatRec),0);
+unitpmra:=0;
+unitpmdec:=0;
 catname:=ExtractFileName(catfile);
 if FileExists(deffile) then begin
    AssignFile(f,deffile);
@@ -148,12 +118,15 @@ if FileExists(catfile) then begin
   VoNode:=VODoc.DocumentElement.FindNode('RESOURCE');
   VoNode:=VoNode.FindNode('TABLE');
   VoNode:=VoNode.FirstChild;
-  NFields:=0;
   VOFields.Clear;
   while Assigned(VoNode) do begin
     buf:=VoNode.NodeName;
     if buf='FIELD' then begin
       fielddata:=TFieldData.Create;
+      fieldnode:=VoNode.FindNode('DESCRIPTION');
+      if fieldnode<>nil then begin
+         fielddata.description:=fieldnode.TextContent;
+      end;
       fieldnode:=VoNode.Attributes.GetNamedItem('name');
       if fieldnode<>nil then k:=fieldnode.NodeValue;
       fielddata.name:=k;
@@ -164,6 +137,33 @@ if FileExists(catfile) then begin
       fieldnode:=VoNode.Attributes.GetNamedItem('unit');
       if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
       VOFields.AddObject(k,fielddata);
+      if pos('pos.pm',fielddata.ucd)>0 then begin
+        i:=pos('/',fielddata.units);
+        k:=copy(fielddata.units,1,i-1);
+        v:=copy(fielddata.units,i+1,99);
+        if copy(k,1,2)='10' then begin
+           e:=Copy(k,3,2);
+           k:=Copy(k,5,99);
+           u:=StrToFloatDef(e,-99999);
+           if u<>-99999 then u:=power(10,(u))
+              else u:=0;
+        end
+        else u:=1;
+        if k='mas' then u:=u/3600/1000
+        else if k='arcsec' then u:=u/3600
+        else if k='arcmin' then u:=u/60
+        else if k<>'deg' then u:=0;
+        if (v<>'a')and(v<>'yr') then u:=0;
+        if pos('pos.eq.ra',fielddata.ucd)>0 then begin
+            unitpmra:=deg2rad*u;
+            flabels[lOffset+vsPmra]:=fielddata.name;
+         end
+         else if pos('pos.eq.dec',fielddata.ucd)>0 then begin
+            unitpmdec:=deg2rad*u;
+            flabels[lOffset+vsPmdec]:=fielddata.name;
+         end;
+      end;
+
     end;
     if buf='DATA' then break;
     VoNode:=VoNode.NextSibling;
@@ -222,20 +222,19 @@ if Assigned(VoNode) then begin
   case catversion of
   rtStar: begin
           lin.star.comment:=catname+tab;
-          lin.star.valid[vsComment]:=true;
           end;
   rtNeb:  begin
           lin.neb.comment:=catname+tab;
-          lin.neb.valid[vsComment]:=true;
           end;
   end;
   while Assigned(row) do begin
     buf:=row.TextContent;
+    // always ask to add j2000 coordinates
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
     case catversion of
     rtStar: begin
-            lin.star.comment:=lin.star.comment+VOFields[i]+':'+buf+tab;
+            lin.star.comment:=lin.star.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
             if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
               lin.star.valid[vsMagv]:=true;
               if (lin.star.magv=-99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
@@ -244,17 +243,23 @@ if Assigned(VoNode) then begin
               end;
             end;
             if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
-              lin.star.valid[vsId]:=true;
               if (lin.star.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
                   lin.star.id:=buf;
             end;
+            if pos('pos.pm',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+               if pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+                  lin.star.pmra:=StrToFloatDef(buf,0)*unitpmra;
+               end
+               else if pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+                 lin.star.pmdec:=StrToFloatDef(buf,0)*unitpmdec;
+               end;
+            end;
             end;
     rtNeb:  begin
-            lin.neb.comment:=lin.neb.comment+VOFields[i]+':'+buf+tab;
+            lin.neb.comment:=lin.neb.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
             if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)>0 then lin.neb.mag:=StrToFloatDef(buf,99);;
             if pos('phys.angSize',TFieldData(VOFields.Objects[i]).ucd)>0 then lin.neb.dim1:=StrToFloatDef(buf,99);
             if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
-              lin.neb.valid[vsId]:=true;
               if (lin.neb.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
                   lin.neb.id:=buf;
             end;
@@ -279,6 +284,7 @@ inc(CurCat);
 if CurCat<Ncat then begin
    catfile:=slash(VOCatpath)+VOcatlist[CurCat];
    deffile:=ChangeFileExt(catfile,'.def');
+   if CurCat>0 then VODoc.Free;
    ok:=ReadVOHeader;
    if (not ok) then NextVOCat(ok);
 end;
