@@ -102,6 +102,12 @@ var
 
 implementation
 
+Function Slash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
+end;
+
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   DecimalSeparator:='.';
@@ -289,6 +295,12 @@ if CatList.Row>0 then begin
        end;
        firstrow.Enabled:=not radec1.Enabled;
        co.Checked:=VO_Detail1.HasCoord[n];
+       if not VO_Detail1.HasCoord[n] then
+          RadioGroup1.ItemIndex:=0
+       else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
+          RadioGroup1.ItemIndex:=2
+       else
+          RadioGroup1.ItemIndex:=1;
      end;
   end;
   if Pagecontrol2.PageCount=0 then ClearCatalog;
@@ -316,7 +328,8 @@ begin
 end;
 
 procedure TForm1.GetData(Sender: TObject);
-var coordselection: string;
+var coordselection, objtype, extfn: string;
+    f: textfile;
     i: integer;
 begin
 screen.Cursor:=crHourGlass;
@@ -345,7 +358,19 @@ if sender is Tf_vodetail then
        end;
        VO_TableData1.onColsDef:=DefColumns;
        VO_TableData1.onDataRow:=ReceiveData;
-       VO_TableData1.GetData(tn.Text);
+       case RadioGroup1.ItemIndex of
+         0: objtype:='na';
+         1: objtype:='star';
+         2: objtype:='dso';
+       end;
+       VO_TableData1.GetData(tn.Text,objtype);
+       extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.def');
+       AssignFile(f,extfn);
+       rewrite(f);
+       writeln(f,'objtype='+objtype);
+       writeln(f,'defsize='+DefSize.Text);
+       writeln(f,'defmag='+DefMag.Text);
+       CloseFile(f);
    end;
 tn.Text:=VO_TableData1.TableName;
 ep.text:=VO_TableData1.epoch;

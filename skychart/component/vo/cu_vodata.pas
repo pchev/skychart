@@ -65,7 +65,7 @@ type
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
-    procedure GetData(Table:string);
+    procedure GetData(Table,objtype:string);
     property Columns: TStringArray read FColumns;
     property Cols: Integer read Fncol;
     property DataRow: TStringArray read FData;
@@ -149,7 +149,7 @@ begin
    XmlScanner.Execute;
 end;
 
-procedure TVO_TableData.GetData(Table:string);
+procedure TVO_TableData.GetData(Table,objtype:string);
 var url:string;
     i: integer;
 const f6='0.000000';
@@ -158,7 +158,7 @@ begin
 FTableName:=trim(Table);
 Fcatalog:=FTableName;
 url:=Fbaseurl;
-Fvo_data:='vo_table_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
+Fvo_data:='vo_table_'+trim(objtype)+'_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
 case Fvo_type of
   VizierMeta: begin
                 url:=url+'-source='+FTableName;

@@ -37,9 +37,14 @@ type
   { Tf_vodetail }
 
   Tf_vodetail = class(TForm)
+    DefSize: TEdit;
+    DefMag: TEdit;
     Grid: TStringGrid;
+    Label10: TLabel;
+    Label9: TLabel;
     Panel1: TPanel;
     MainPanel: TPanel;
+    RadioGroup1: TRadioGroup;
     Table: TLabel;
     Rows: TLabel;
     tn: TEdit;

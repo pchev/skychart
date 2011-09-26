@@ -49,7 +49,8 @@ Tlabellst = array[1..35,0..15] of char;
 TSname = array[0..3] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
-          id,sp,comment,greeksymbol : shortstring;
+          id,sp,greeksymbol : shortstring;
+          comment: string;
           valid : TVstar;
           end;
 Tvariable=packed record

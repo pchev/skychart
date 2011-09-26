@@ -409,6 +409,7 @@ Fcatalog.cfgcat.NebSizeMin:=Fcatalog.cfgshr.NebSizeFilter[cfgsc.FieldNum];
 Fplot.cfgchart.min_ma:=1;
 magmax:=1;
 { activate the star catalog}
+Fcatalog.cfgcat.starcaton[vostar-BaseStar]:=true;
 InitStarC(dsbase,5.5);
 InitStarC(bsc,6.5);
 InitStarC(sky2000,9.5);
@@ -425,6 +426,7 @@ InitStarC(usnoa,18);
 { activate the other catalog }
 InitVarC(gcvs);
 InitDblC(wds);
+Fcatalog.cfgcat.nebcaton[voneb-Baseneb]:=true;
 InitNebC(sac);
 InitNebC(ngc);
 InitNebC(lbn);
