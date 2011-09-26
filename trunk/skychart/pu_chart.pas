@@ -2186,7 +2186,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     bmp: Tbitmap;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
-    isStar, isSolarSystem, isd2k: boolean;
+    isStar, isSolarSystem, isd2k, isvo: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp: double;
 function Bold(s:string):string;
@@ -2202,6 +2202,7 @@ end;
 begin
 desc:=sc.cfgsc.FindDesc;
 isd2k:=(trim(sc.cfgsc.FindCat)='d2k');
+isvo:=(trim(sc.cfgsc.FindCat)='VO');
 // header
 if NightVision then txt:=html_h_nv
                else txt:=html_h;
@@ -2283,6 +2284,8 @@ end;
 // source catalog
 if isd2k then begin
   txt:=txt+html_b+rsFrom+blank+'Deepsky software'+':'+htms_b+html_br;
+end else if isvo then begin
+  txt:=txt+html_b+rsFrom+blank+'Virtual Observatory table'+':'+htms_b+html_br;
 end else begin
   if sc.cfgsc.FindCat<>'' then txt:=txt+html_b+rsInformationF+blank+
     sc.cfgsc.FindCat+':'+htms_b+html_br;
@@ -2301,7 +2304,10 @@ repeat
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
      if copy(buf2, 1, 5)=rsDesc then buf2:=stringreplace(buf2, ';', html_br+html_sp+html_sp+html_sp, [rfReplaceAll]);
-     txt:=txt+bold(LongLabel(buf2));
+     if isvo then
+        txt:=txt+bold(buf2)
+     else
+        txt:=txt+bold(LongLabel(buf2));
   end
   else
      txt:=txt+buf2;
