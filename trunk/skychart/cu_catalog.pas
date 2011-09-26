@@ -29,7 +29,7 @@ interface
 
 uses  { libcatalog,}  // libcatalog statically linked
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
-    gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit,
+    gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit, vocat,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
     rc3unit,          // libcatalog statically linked
     u_translation, u_constant, u_util, u_projection,
@@ -50,6 +50,8 @@ type
      function OpenStarCat:boolean;
      function CloseStarCat:boolean;
      function NewGCat:boolean;
+     function GetVOCatS(var rec:GcatRec):boolean;
+     function GetVOCatN(var rec:GcatRec):boolean;
      function GetGCatS(var rec:GcatRec):boolean;
      function GetGCatV(var rec:GcatRec):boolean;
      function GetGCatD(var rec:GcatRec):boolean;
@@ -249,6 +251,9 @@ case curcat of
                 end;
              end;
              end;
+   vostar  : begin
+             result:=GetVOcatS(rec);
+             end;
 end;
 if (not result) and ((curcat-BaseStar)<numcat) then begin
   CloseStarCat;
@@ -294,6 +299,11 @@ case curcat of
                       if result then break;
                    end;
              end;
+   vostar  : begin
+                VOobject:='star';
+                SetVOCatpath(slash(PrivateDir)+'vo');
+                OpenVOCatwin(result);
+             end;
    else result:=false;
 end;
 end;
@@ -316,6 +326,7 @@ case curcat of
    dstyc   : CloseDStyc;
    dsgsc   : CloseDSgsc;
    gcstar  : CloseGcat;
+   vostar  : CloseVOCat;
    else result:=false;
 end;
 end;
@@ -501,6 +512,9 @@ case curcat of
                 end;
              end;
              end;
+   voneb   : begin
+             result:=GetVOcatN(rec);
+             end;
 end;
 if (not result) and ((curcat-BaseNeb)<numcat) then begin
   CloseNebCat;
@@ -533,6 +547,11 @@ case curcat of
                       if result then break;
                    end;
             end;
+   voneb  : begin
+                VOobject:='dso';
+                SetVOCatpath(slash(PrivateDir)+'vo');
+                OpenVOCatwin(result);
+             end;
    else result:=false;
 end;
 end;
@@ -550,6 +569,7 @@ case curcat of
    gcm     : CloseGCM;
    gpn     : CloseGPN;
    gcneb   : CloseGcat;
+   voneb   : CloseVOCat;
    else result:=false;
 end;
 end;
@@ -1180,6 +1200,16 @@ case GcatH.FileNum of
   9537 : result:='3';
   else   result:='7';
 end;
+end;
+
+function Tcatalog.GetVOCatS(var rec:GcatRec):boolean;
+begin
+ReadVOCat(rec,result);
+end;
+
+function Tcatalog.GetVOCatN(var rec:GcatRec):boolean;
+begin
+ReadVOCat(rec,result);
 end;
 
 function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
@@ -2378,6 +2408,16 @@ if not nextobj then begin
    ocl     : OpenOCL(xx1,xx2,yy1,yy2,ok);
    gcm     : OpenGCM(xx1,xx2,yy1,yy2,ok);
    gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
+   vostar  : begin
+                VOobject:='star';
+                SetVOCatpath(slash(PrivateDir)+'vo');
+                OpenVOCat(xx1,xx2,yy1,yy2,ok);
+             end;
+   voneb   : begin
+                VOobject:='dso';
+                SetVOCatpath(slash(PrivateDir)+'vo');
+                OpenVOCat(xx1,xx2,yy1,yy2,ok);
+             end;
    gcstar  : begin
              VerGCat:=rtStar;
              CurGCat:=0;
@@ -2468,6 +2508,12 @@ repeat
              ok:=GetGPN(rec);
              radius:=GetRadius(rec);
              end;
+   vostar  : begin
+             ok:=GetVOcatS(rec);
+             end;
+   voneb   : begin
+             ok:=GetVOcatN(rec);
+             end;
    gcstar  : begin
              ok:=GetGcatS(rec);
              while not ok do begin
@@ -2536,7 +2582,8 @@ var
 begin
 ok:=false;
 if cfgsc.shownebulae then begin
-  ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  if (not ok) then ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[lbn-BaseNeb] then ok:=FindAtPos(lbn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
@@ -2547,6 +2594,7 @@ if cfgsc.shownebulae then begin
   if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
 end;
 if cfgsc.showstars then begin
+  if (not ok) then ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) then ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) then ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);

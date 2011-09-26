@@ -114,6 +114,7 @@ const slashchar='\';
 {$endif}
 
 Const
+    tab=#09;
     deg2rad = pi/180;
     rad2deg = 180/pi;
     pi2 = 2*pi;

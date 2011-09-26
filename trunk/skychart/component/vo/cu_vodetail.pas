@@ -40,13 +40,13 @@ type
   private
     Fbaseurl,FLastErr,Fvopath,FCatalogName: string;
     FRecName,FRecUCD,FRecDataType,FRecUnits,FRecDescription: TStringListArray;
-    FHasCoord: TBoolArray;
+    FHasCoord, FHasMag, FHasSize : TBoolArray;
     Fvo_type: Tvo_type;
     Nlist: integer;
     Fnrow: TIntegerArray;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
-    votable,table,param,descr,definition,resource,field,Coord : boolean;
+    votable,table,param,descr,definition,resource,field,Coord,Magnitude,Size : boolean;
     Fequinox,Fepoch,Fsystem,Fcatalog,cat_desc : TStringArray;
     param_desc,resdesc,Fequ,Fepo,Fsys,resourcename: string;
     fieldnum: integer;
@@ -75,6 +75,8 @@ type
     property Description :TStringArray read cat_desc;
     property Rows: TIntegerArray read Fnrow;
     property HasCoord: TBoolArray read FHasCoord;
+    property HasMag: TBoolArray read FHasMag;
+    property HasSize: TBoolArray read FHasSize;
     property NumTables: integer read Nlist;
     property LastErr: string read FlastErr;
   published
@@ -134,6 +136,8 @@ begin
  setlength(Fepoch,i);
  setlength(Fsystem,i);
  setlength(FHasCoord,i);
+ setlength(FHasMag,i);
+ setlength(FHasSize,i);
  setlength(Fcatalog,i);
  setlength(cat_desc,i);
  setlength(Fnrow,i);
@@ -164,6 +168,8 @@ begin
  setlength(Fepoch,0);
  setlength(Fsystem,0);
  setlength(FHasCoord,0);
+ setlength(FHasMag,0);
+ setlength(FHasSize,0);
  setlength(Fcatalog,0);
  setlength(cat_desc,0);
  setlength(Fnrow,0);
@@ -216,6 +222,8 @@ else if resource and(TagName='TABLE') then begin
          NewList;
          fieldnum:=-1;
          Coord:=false;
+         Magnitude:=false;
+         Size:=false;
          Fcatalog[Nlist-1]:=Attributes.Value('name');
          if trim(Fcatalog[Nlist-1])='' then Fcatalog[Nlist-1]:=resourcename;
          if Fcatalog[Nlist-1]='' then Fcatalog[Nlist-1]:=Attributes.Value('ID');
@@ -259,6 +267,8 @@ else if resource and(TagName='TABLE') then begin
        Fepoch[Nlist-1]:=Fepo;
        Fsystem[Nlist-1]:=Fsys;
        FHasCoord[Nlist-1]:=Coord;
+       FHasMag[Nlist-1]:=Magnitude;
+       FHasSize[Nlist-1]:=Size;
        if trim(cat_desc[Nlist-1])='' then cat_desc[Nlist-1]:=resdesc;
     end
 else if resource and(TagName='DEFINITIONS') then definition:=false
@@ -297,6 +307,8 @@ else if resource and(TagName='FIELD') then begin
    FRecUnits[Nlist-1].Add(b4);
    FRecDescription[Nlist-1].Add('');
    if pos('pos.eq.ra',FRecUCD[Nlist-1][fieldnum])>0 then Coord:=true;
+   if pos('phot.mag',FRecUCD[Nlist-1][fieldnum])>0 then Magnitude:=true;
+   if pos('phys.angSize',FRecUCD[Nlist-1][fieldnum])>0 then Size:=true;
 end;
 end;
 
