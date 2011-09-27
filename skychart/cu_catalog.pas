@@ -1209,7 +1209,13 @@ end;
 
 function Tcatalog.GetVOCatN(var rec:GcatRec):boolean;
 begin
+repeat
 ReadVOCat(rec,result);
+ if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+ if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+ if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
+ break;
+until not result;
 end;
 
 function Tcatalog.GetGCatS(var rec:GcatRec):boolean;

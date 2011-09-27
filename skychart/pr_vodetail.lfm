@@ -1,0 +1,316 @@
+object f_vodetail: Tf_vodetail
+  Left = 738
+  Height = 458
+  Top = 185
+  Width = 759
+  HorzScrollBar.Page = 758
+  VertScrollBar.Page = 426
+  Align = alClient
+  Caption = 'f_vodetail'
+  ClientHeight = 458
+  ClientWidth = 759
+  LCLVersion = '0.9.30.1'
+  object MainPanel: TPanel
+    Left = 0
+    Height = 458
+    Top = 0
+    Width = 759
+    Align = alClient
+    ClientHeight = 458
+    ClientWidth = 759
+    TabOrder = 0
+    object Panel1: TPanel
+      Left = 1
+      Height = 169
+      Top = 288
+      Width = 757
+      Align = alBottom
+      ClientHeight = 169
+      ClientWidth = 757
+      TabOrder = 0
+      object Table: TLabel
+        Left = 215
+        Height = 15
+        Top = 12
+        Width = 31
+        Caption = 'Table'
+        ParentColor = False
+      end
+      object Rows: TLabel
+        Left = 215
+        Height = 15
+        Top = 38
+        Width = 33
+        Caption = 'Rows'
+        ParentColor = False
+      end
+      object Label1: TLabel
+        Left = 583
+        Height = 15
+        Top = 35
+        Width = 42
+        Caption = 'System'
+        ParentColor = False
+      end
+      object Label2: TLabel
+        Left = 583
+        Height = 15
+        Top = 12
+        Width = 36
+        Caption = 'Epoch'
+        ParentColor = False
+      end
+      object Label3: TLabel
+        Left = 583
+        Height = 15
+        Top = 58
+        Width = 45
+        Caption = 'Equinox'
+        ParentColor = False
+      end
+      object Label4: TLabel
+        Left = 7
+        Height = 15
+        Top = 12
+        Width = 17
+        Caption = 'RA'
+        ParentColor = False
+      end
+      object Label5: TLabel
+        Left = 7
+        Height = 15
+        Top = 35
+        Width = 27
+        Caption = 'DEC'
+        ParentColor = False
+      end
+      object Label6: TLabel
+        Left = 7
+        Height = 15
+        Top = 58
+        Width = 24
+        Caption = 'FOV'
+        ParentColor = False
+      end
+      object Label7: TLabel
+        Left = 215
+        Height = 15
+        Top = 100
+        Width = 60
+        Caption = 'Max. Rows'
+        ParentColor = False
+      end
+      object Label8: TLabel
+        Left = 215
+        Height = 15
+        Top = 76
+        Width = 53
+        Caption = 'First Row'
+        ParentColor = False
+      end
+      object tn: TEdit
+        Left = 264
+        Height = 22
+        Top = 8
+        Width = 97
+        Color = clBtnFace
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+      object tr: TEdit
+        Left = 264
+        Height = 22
+        Top = 35
+        Width = 97
+        Color = clBtnFace
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 1
+      end
+      object desc: TMemo
+        Left = 367
+        Height = 45
+        Top = 8
+        Width = 209
+        Color = clBtnFace
+        Enabled = False
+        Lines.Strings = (
+          ''
+        )
+        ReadOnly = True
+        ScrollBars = ssAutoVertical
+        TabOrder = 2
+      end
+      object ep: TEdit
+        Left = 646
+        Height = 22
+        Top = 8
+        Width = 73
+        Color = clBtnFace
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 3
+      end
+      object sys: TEdit
+        Left = 646
+        Height = 22
+        Top = 31
+        Width = 73
+        Color = clBtnFace
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 4
+      end
+      object eq: TEdit
+        Left = 646
+        Height = 22
+        Top = 54
+        Width = 73
+        Color = clBtnFace
+        Enabled = False
+        ReadOnly = True
+        TabOrder = 5
+      end
+      object co: TCheckBox
+        Left = 583
+        Height = 26
+        Top = 87
+        Width = 142
+        Caption = 'Contain Coordinates'
+        OnClick = coClick
+        TabOrder = 6
+      end
+      object Button1: TButton
+        Left = 55
+        Height = 25
+        Top = 88
+        Width = 121
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Get Data'
+        OnClick = GetData
+        TabOrder = 7
+      end
+      object RaDec1: TRaDec
+        Left = 55
+        Height = 21
+        Top = 8
+        Width = 160
+        kind = RA
+        value = 0.71166666666666
+        Enabled = False
+        ParentColor = False
+        TabOrder = 8
+      end
+      object RaDec2: TRaDec
+        Left = 55
+        Height = 21
+        Top = 31
+        Width = 160
+        kind = DE
+        value = 41.2641666666666
+        Enabled = False
+        ParentColor = False
+        TabOrder = 9
+      end
+      object RaDec3: TRaDec
+        Left = 55
+        Height = 21
+        Top = 54
+        Width = 159
+        kind = Az
+        value = 0.5
+        Enabled = False
+        ParentColor = False
+        TabOrder = 10
+      end
+      object maxrow: TEdit
+        Left = 287
+        Height = 22
+        Top = 98
+        Width = 74
+        TabOrder = 11
+        Text = '50'
+      end
+      object FirstRow: TEdit
+        Left = 287
+        Height = 22
+        Top = 72
+        Width = 74
+        TabOrder = 12
+        Text = '1'
+      end
+      object RadioGroup1: TRadioGroup
+        Left = 367
+        Height = 94
+        Top = 56
+        Width = 209
+        AutoFill = True
+        ChildSizing.LeftRightSpacing = 6
+        ChildSizing.TopBottomSpacing = 6
+        ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+        ChildSizing.EnlargeVertical = crsHomogenousChildResize
+        ChildSizing.ShrinkHorizontal = crsScaleChilds
+        ChildSizing.ShrinkVertical = crsScaleChilds
+        ChildSizing.Layout = cclLeftToRightThenTopToBottom
+        ChildSizing.ControlsPerLine = 1
+        ClientHeight = 90
+        ClientWidth = 205
+        Items.Strings = (
+          'Cannot draw'
+          'Draw as star'
+          'Draw as DSO'
+        )
+        TabOrder = 13
+      end
+      object DefSize: TEdit
+        Left = 87
+        Height = 22
+        Top = 128
+        Width = 72
+        TabOrder = 14
+        Text = '1'
+      end
+      object Label9: TLabel
+        Left = 15
+        Height = 15
+        Top = 132
+        Width = 70
+        Caption = 'Default size '''
+        ParentColor = False
+      end
+      object Label10: TLabel
+        Left = 175
+        Height = 15
+        Top = 132
+        Width = 102
+        Caption = 'Default magnitude'
+        ParentColor = False
+      end
+      object DefMag: TEdit
+        Left = 287
+        Height = 22
+        Top = 128
+        Width = 72
+        TabOrder = 15
+        Text = '10'
+      end
+    end
+    object Grid: TStringGrid
+      Left = 1
+      Height = 287
+      Top = 1
+      Width = 757
+      Align = alClient
+      BorderStyle = bsNone
+      ColCount = 6
+      DefaultColWidth = 100
+      FixedCols = 0
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing]
+      RowCount = 2
+      TabOrder = 1
+      OnMouseUp = GridMouseUp
+    end
+  end
+end
