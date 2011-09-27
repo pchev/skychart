@@ -3258,8 +3258,8 @@ begin
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    BGRADrawLine(Ax-ds,Ay-ds,Ax+ds+1,Ay+ds,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
-    BGRADrawLine(Ax+ds,Ay-ds,Ax-ds,Ay+ds+1,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
+    BGRADrawLine(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
+    BGRADrawLine(Ax+ds,Ay-ds,Ax-ds,Ay+ds,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
   end else begin
   cnv.Pen.Width := cfgchart.drawpen;
 

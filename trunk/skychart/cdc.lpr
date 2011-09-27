@@ -46,7 +46,7 @@ uses
   uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
   pu_indiclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
   cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki, cu_encoderprotocol,
-  pu_ascomclient, uDE, bgrabitmappack;
+  pu_ascomclient, uDE, pu_voconfig, pr_vodetail, bgrabitmappack, lazvo;
   
 var i : integer;
     buf, p, step : string;

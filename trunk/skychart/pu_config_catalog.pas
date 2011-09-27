@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, FileUtil,
+  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn, LazHelpHTML;
@@ -39,6 +39,8 @@ type
     bsc3: TDirectoryEdit;
     addcat: TButton;
     Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
     delcat: TButton;
     CatgenButton: TButton;
     Button1: TButton;
@@ -74,6 +76,7 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
+    Label1: TLabel;
     Label95: TLabel;
     LabelWarning: TLabel;
     Label119: TLabel;
@@ -103,6 +106,8 @@ type
     RC3box: TCheckBox;
     sac3: TDirectoryEdit;
     SACbox: TCheckBox;
+    Page1a: TTabSheet;
+    StringGrid4: TStringGrid;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -199,6 +204,8 @@ type
     PageControl1: TPageControl;
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -215,6 +222,12 @@ type
     procedure DelCatClick(Sender: TObject);
     procedure CDCStarSelClick(Sender: TObject);
     procedure CDCAcceptDirectory(Sender: TObject; var Value: String);
+    procedure StringGrid4DrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid4MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure StringGrid4SelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
     procedure USNBrightClick(Sender: TObject);
     procedure CDCStarField1Change(Sender: TObject);
     procedure CDCStarField2Change(Sender: TObject);
@@ -245,6 +258,7 @@ type
     procedure ShowGCat;
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
+    procedure ShowVO;
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
   public
@@ -345,6 +359,7 @@ LockCatPath:=false;
 LockActivePath:=false;
 LockChange:=true;
 ShowGCat;
+ShowVO;
 ShowCDCStar;
 ShowCDCNeb;
 ShowFov;
@@ -390,6 +405,27 @@ end;
 procedure Tf_config_catalog.Button4Click(Sender: TObject);
 begin
   ShowHelp;
+end;
+
+procedure Tf_config_catalog.Button5Click(Sender: TObject);
+begin
+  f_voconfig:=Tf_voconfig.Create(Self);
+  f_voconfig.ShowModal;
+  f_voconfig.Free;
+  ShowVO;
+end;
+
+procedure Tf_config_catalog.Button6Click(Sender: TObject);
+var p : integer;
+    fn: string;
+begin
+p:=stringgrid4.selection.top;
+fn:=slash(PrivateDir)+slash('vo')+stringgrid4.cells[1,p];
+if MessageDlg('Confirm file delete: '+fn,mtConfirmation,mbYesNo,0)=mrYes then begin
+  DeleteFile(fn);
+  DeleteFile(ChangeFileExt(fn,'.config'));
+end;
+
 end;
 
 procedure Tf_config_catalog.ShowGCat;
@@ -555,57 +591,9 @@ if (Acol=0)and(Arow>0) then begin
     Canvas.Brush.Color := clRed;
     Canvas.FillRect(Rect);
   end;
-end {else if (Acol=1)and(Arow>0) then begin
-  if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
-    Canvas.Pen.Color := clRed;
-    Canvas.Brush.style := bsclear;
-    Canvas.rectangle(Rect);
-  end else begin
-    Canvas.Pen.Color := clWindow;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-  end;
-end else if (Acol=2)and(Arow>0) then begin
-  if not IsNumber(cells[acol,arow]) then begin
-    Canvas.Pen.Color := clRed;
-    Canvas.Brush.style := bsclear;
-    Canvas.rectangle(Rect);
-  end else begin
-    Canvas.Pen.Color := clWindow;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-  end;
-end else if (Acol=3)and(Arow>0) then begin
-  if not IsNumber(cells[acol,arow]) then begin
-    Canvas.Pen.Color := clRed;
-    Canvas.Brush.style := bsclear;
-    Canvas.rectangle(Rect);
-  end else begin
-    Canvas.Pen.Color := clWindow;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-  end;
-end else if (Acol=4)and(Arow>0) then begin
-  if not fileexists(slash(cells[4,arow])+cells[1,arow]+'.hdr') then begin
-    Canvas.Pen.Color := clRed;
-    Canvas.Brush.style := bsclear;
-    Canvas.rectangle(Rect);
-  end else begin
-    Canvas.Pen.Color := clWindow;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-  end;
-end }else if (Acol=5)and(Arow>0) then begin
+end else if (Acol=5)and(Arow>0) then begin
     Canvas.draw(Rect.left,Rect.top,DirOpenImg.Picture.Bitmap);
-end {else if (Arow=0) then begin
-    Canvas.Pen.Color := clBtnFace;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-end else begin
-    Canvas.Pen.Color := clWindow;
-    Canvas.Brush.style := bsSolid;
-    Canvas.rectangle(Rect);
-end; }
+end;
 end;
 end;
 
@@ -743,6 +731,46 @@ begin
   CDCStarPathChange(sender);
   LockActivePath:=false;
 {$endif}
+end;
+
+procedure Tf_config_catalog.StringGrid4DrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+with Sender as TStringGrid do begin
+if (Acol=0)and(Arow>0) then begin
+  Canvas.Brush.style := bssolid;
+  if (cells[acol,arow]='1')then begin
+    Canvas.Brush.Color := clLime;
+    Canvas.FillRect(aRect);
+  end else begin
+    Canvas.Brush.Color := clRed;
+    Canvas.FillRect(aRect);
+  end;
+end;
+end;
+end;
+
+procedure Tf_config_catalog.StringGrid4MouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var col,row:integer;
+begin
+StringGrid4.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+0 : begin
+    if stringgrid4.Cells[col,row]='1' then stringgrid4.Cells[col,row]:='0'
+       else  stringgrid4.Cells[col,row]:='1';
+    end;
+2 : begin
+    // ReloadVO(row);
+    end;
+end;
+end;
+
+procedure Tf_config_catalog.StringGrid4SelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+begin
+  if Acol=1 then canselect:=true else canselect:=false;
 end;
 
 procedure Tf_config_catalog.USNBrightClick(Sender: TObject);
@@ -927,6 +955,43 @@ for i:=0 to ccat.GCatNum-1 do begin
    ccat.GCatLst[i].name:='';
    ccat.GCatLst[i].cattype:=0;
 end;
+end;
+
+procedure Tf_config_catalog.ShowVO;
+var i,r: integer;
+    fs: TSearchRec;
+    VOobject,configfile:string;
+begin
+StringGrid4.RowCount:=1;
+stringgrid4.cells[0,0]:='x';
+stringgrid4.Columns[0].Title.Caption:=rsFile;
+stringgrid4.Columns[1].Title.Caption:=rsRefresh;
+VOobject:='star';
+i:=findfirst(slash(PrivateDir)+slash('vo')+'vo_table_'+VOobject+'_*.xml',0,fs);
+while i=0 do begin
+  configfile:=slash(PrivateDir)+slash('vo')+ChangeFileExt(fs.Name,'.config');
+  if FileExists(configfile) then begin
+    StringGrid4.RowCount:=StringGrid4.RowCount+1;
+    r:=StringGrid4.RowCount-1;
+    StringGrid4.Cells[1,r]:=fs.Name;
+    StringGrid4.Cells[0,r]:='1';
+  end;
+  i:=findnext(fs);
+end;
+findclose(fs);
+VOobject:='dso';
+i:=findfirst(slash(PrivateDir)+slash('vo')+'vo_table_'+VOobject+'_*.xml',0,fs);
+while i=0 do begin
+  configfile:=slash(PrivateDir)+slash('vo')+ChangeFileExt(fs.Name,'.config');
+  if FileExists(configfile) then begin
+    StringGrid4.RowCount:=StringGrid4.RowCount+1;
+    r:=StringGrid4.RowCount-1;
+    StringGrid4.Cells[1,r]:=fs.Name;
+    StringGrid4.Cells[0,r]:='1';
+  end;
+  i:=findnext(fs);
+end;
+findclose(fs);
 end;
 
 end.
