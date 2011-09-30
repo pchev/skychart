@@ -80,6 +80,7 @@ Toutlines = packed record
           end;
 TCatOption = packed record
           ShortName: TSname;
+          LongName : String;
           rectype  : integer;
           Equinox  : double;
           EquinoxJD: double;
@@ -225,6 +226,7 @@ begin
   for n:=1 to 10 do emptyrec.options.altname[n]:=(catheader.altname[n]=1);
   emptyrec.options.flabel:=catheader.flabel;
   emptyrec.options.ShortName:=catheader.shortname;
+  emptyrec.options.LongName:=catheader.LongName;
   case catversion of
   rtstar : begin  // Star 1
       if catheader.flen[3]>0 then emptyrec.star.valid[vsId]:=true;

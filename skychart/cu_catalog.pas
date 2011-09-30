@@ -676,6 +676,7 @@ begin
    bsc     : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='BSC';
+             EmptyRec.options.LongName:='Bright Stars Catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -699,6 +700,7 @@ begin
    sky2000 : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='Sky';
+             EmptyRec.options.LongName:='Sky2000 catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -725,6 +727,7 @@ begin
    tyc     : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='TYC';
+             EmptyRec.options.LongName:='Tycho catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -741,6 +744,7 @@ begin
    tyc2    : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='TYC';
+             EmptyRec.options.LongName:='Tycho2 catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -757,6 +761,7 @@ begin
    tic     : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='TIC';
+             EmptyRec.options.LongName:='Tycho Input catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -772,6 +777,7 @@ begin
    gscf    : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='GSC';
+             EmptyRec.options.LongName:='HST Guide Star catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -795,6 +801,7 @@ begin
    gscc    : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='GSC';
+             EmptyRec.options.LongName:='HST Guide Star catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -818,6 +825,7 @@ begin
    gsc     : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='GSC';
+             EmptyRec.options.LongName:='HST Guide Star catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -839,6 +847,7 @@ begin
    usnoa   : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='UNA';
+             EmptyRec.options.LongName:='USNO-A catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -857,6 +866,7 @@ begin
    microcat: begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='MCT';
+             EmptyRec.options.LongName:='Microcat catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -869,6 +879,7 @@ begin
    dsbase  : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='BRS';
+             EmptyRec.options.LongName:='Deepsky2000 base star catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -879,6 +890,7 @@ begin
    dstyc   : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='TYC';
+             EmptyRec.options.LongName:='Deepsky2000 Tycho catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -889,6 +901,7 @@ begin
    dsgsc   : begin
              EmptyRec.options.flabel:=StarLabel;
              EmptyRec.options.ShortName:='GSC';
+             EmptyRec.options.LongName:='Deepsky2000 GSC catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -899,6 +912,7 @@ begin
    gcvs    : begin
              EmptyRec.options.flabel:=VarLabel;
              EmptyRec.options.ShortName:='GCV';
+             EmptyRec.options.LongName:='General Catalog of Variable stars';
              EmptyRec.options.rectype:=rtVar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -920,6 +934,7 @@ begin
    wds     : begin
              EmptyRec.options.flabel:=DblLabel;
              EmptyRec.options.ShortName:='WDS';
+             EmptyRec.options.LongName:='Washington Double Star catalog';
              EmptyRec.options.rectype:=rtDbl;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -939,6 +954,7 @@ begin
    sac     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='SAC';
+             EmptyRec.options.LongName:='Saguaro Astronomy Club Database';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -965,6 +981,7 @@ begin
    ngc     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='NGC';
+             EmptyRec.options.LongName:='New General Catalog';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -985,6 +1002,7 @@ begin
    lbn     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='LBN';
+             EmptyRec.options.LongName:='Lynds Catalogue of Bright Nebulae';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -1013,6 +1031,7 @@ begin
    rc3     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='RC3';
+             EmptyRec.options.LongName:='Third Reference Cat. of Bright Galaxies';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -1046,6 +1065,7 @@ begin
    pgc     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='PGC';
+             EmptyRec.options.LongName:='HyperLeda Database for physics of galaxies';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -1068,6 +1088,7 @@ begin
    ocl     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='OCL';
+             EmptyRec.options.LongName:='Open Cluster Data 5th Edition';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -1097,6 +1118,7 @@ begin
    gcm     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='GCM';
+             EmptyRec.options.LongName:='Globular Clusters in the Milky Way';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
@@ -1127,6 +1149,7 @@ begin
    gpn     : begin
              EmptyRec.options.flabel:=NebLabel;
              EmptyRec.options.ShortName:='GPN';
+             EmptyRec.options.LongName:='Strasbourg-ESO Catalogue of Galactic Planetary Nebulae';
              EmptyRec.options.rectype:=rtNeb;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
