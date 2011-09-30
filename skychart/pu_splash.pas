@@ -77,8 +77,8 @@ procedure Tf_splash.FormCreate(Sender: TObject);
 begin
 label2.caption:=cdcversion;
 if pos('svn',cdcversion)>0 then begin
+   label2.Caption:=label2.Caption+RevisionStr;
    LabelDate.caption:=compile_time;
-   LabelDate.Left:=label2.Left+label2.Canvas.TextWidth(cdcversion)+8;
    LabelDate.Visible:=true;
 end else
    LabelDate.Visible:=false;

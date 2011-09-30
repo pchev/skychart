@@ -35,7 +35,9 @@ const MaxColor = 35;
 type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
      TSkycolor = array[0..7]of Tcolor;
 
-const cdcversion = 'Version 3.5';
+{$i revision.inc}
+
+const cdcversion = 'Version 3.5-svn';
       cdcver     = '3.5b';
       cdccpy = 'Copyright (C) 2002-2011 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+

@@ -77,7 +77,7 @@ begin
   compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
   compile_system:={$I %FPCTARGETOS%};
   {$ifdef trace_debug}
-  debugln('Program version : '+cdcversion);
+  debugln('Program version : '+cdcversion+'-'+RevisionStr);
   debugln('Program compiled: '+compile_time);
   debugln('Compiler version: '+compile_version);
   {$endif}

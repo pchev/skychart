@@ -56,5 +56,8 @@ endif
 .PHONY: all
 
 #   thtmlport must be compiled two time! see http://wiki.lazarus.freepascal.org/THtmlPort#Installation 
-all: component_all library_all component/thtmlport/package_all component/bgrabitmap_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+all: revision component_all library_all component/thtmlport/package_all component/bgrabitmap_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+
+revision:
+	$(LAZDIR)/tools/svn2revisioninc . revision.inc
 
