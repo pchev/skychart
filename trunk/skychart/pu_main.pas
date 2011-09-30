@@ -1344,6 +1344,7 @@ begin
     buf:=slash(HelpDir)+'releasenotes.txt';
  if fileexists(buf) then begin
     f_info.setpage(3);
+    f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+', '+cdcversion+RevisionStr;
     if shownext then f_info.Button1.caption:=rsNext
                 else f_info.Button1.caption:=rsClose;
     f_info.InfoMemo.Lines.LoadFromFile(buf);
