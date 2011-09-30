@@ -19,7 +19,7 @@ type TFieldData = class(Tobject)
      end;
 
 var
-   VOobject : string;
+   VOobject, VOname : string;
    VOCatpath : string ='';
    deffile,catfile: string;
    Defsize: integer;
@@ -63,6 +63,7 @@ begin
   emptyrec.options.flabel:=flabels;
   emptyrec.options.flabel[lOffset+vsComment]:='File';
   emptyrec.options.ShortName:='VO';
+  emptyrec.options.LongName:=VOname;
   case emptyrec.options.rectype of
   rtstar : begin
            emptyrec.star.magv:=-99;
@@ -111,6 +112,7 @@ unitpmdec:=0;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 config.Filename:=deffile;
+VOName:=config.GetValue('name','');
 VOobject:=config.GetValue('objtype',VOobject);
 active:=config.GetValue('active',false);
 drawtype:=config.GetValue('drawtype',14);

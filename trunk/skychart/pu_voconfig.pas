@@ -83,7 +83,7 @@ type
     procedure SelectRegistry(Sender: TObject);
   private
     { Private declarations }
-    vopath : string;
+    vopath,catname : string;
     procedure SetServerList;
     procedure FillCatList;
     procedure ClearCatalog;
@@ -230,7 +230,7 @@ end;
 
 procedure Tf_voconfig.SelectCatalog(Sender: TObject);
 var i,n: integer;
-    buf,catname: string;
+    buf: string;
     tb:TTabsheet;
     fr:Tf_vodetail;
 begin
@@ -368,6 +368,7 @@ if sender is Tf_vodetail then
        extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.config');
        config:=TXMLConfig.Create(self);
        config.Filename:=extfn;
+       config.SetValue('name',catname);
        config.SetValue('objtype',objtype);
        config.SetValue('active',true);
        config.SetValue('drawtype',14);

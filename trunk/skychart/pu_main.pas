@@ -2857,6 +2857,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 {$endif}
         Refresh;
         if itype=ftlin then begin
+            sc.cfgsc.FindCatname:='';
             sc.cfgsc.FindCat:='';
             sc.cfgsc.FindName:=Num;
             sc.cfgsc.FindDesc:='';
@@ -6791,6 +6792,7 @@ begin
 for i:=0 to MultiDoc1.ChildCount-1 do
  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
    if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+      sc.cfgsc.FindCatname:=trim(cat);
       sc.cfgsc.FindCat:=trim(cat);
       sc.cfgsc.FindRa:=ra;
       sc.cfgsc.FindDec:=dec;

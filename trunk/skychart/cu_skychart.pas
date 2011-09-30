@@ -1778,6 +1778,7 @@ begin
  cfgsc.FindSize:=0;
  cfgsc.FindType:=rec.options.rectype;
  cfgsc.FindCat:=rec.options.ShortName;
+ cfgsc.FindCatname:=rec.options.LongName;
  desc:= ARpToStr(rmod(rad2deg*rec.ra/15+24,24))+tab+DEpToStr(rad2deg*rec.dec)+tab;
  case rec.options.rectype of
  rtStar: begin   // stars
@@ -2012,6 +2013,7 @@ if result then begin
    cfgsc.TrackDec:=rec.dec;
 end else begin
    cfgsc.FindCat:='';
+   cfgsc.FindCatname:='';
 // search solar system object
    if cfgsc.ShowPlanetValid then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
