@@ -87,6 +87,10 @@ msgstr "Extra ffmpeg opties"
 msgid "Add label"
 msgstr "Voeg label toe"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Voeg de extra namen toe aan de index"
@@ -3845,6 +3849,10 @@ msgstr ""
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Versie opmerkingen"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"

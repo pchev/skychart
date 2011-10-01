@@ -1338,6 +1338,8 @@ resourcestring
   rsCannotDraw = 'Cannot draw';
   rsDrawAsStar = 'Draw as star';
   rsDrawAsDSO = 'Draw as DSO';
+  rsReload = 'Reload';
+  rsAddOrUpdate = 'Add or update';
 
 
 implementation

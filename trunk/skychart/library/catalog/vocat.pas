@@ -208,7 +208,7 @@ VOcatlist:=TStringList.Create;
 VOFields:=TStringList.Create;
 Ncat:=0;
 VODocOK:=false;
-i:=findfirst(slash(VOCatpath)+'vo_table_'+VOobject+'_*.xml',0,fs);
+i:=findfirst(slash(VOCatpath)+'vo_'+VOobject+'_*.xml',0,fs);
 while i=0 do begin
   VOcatlist.Add(fs.Name);
   inc(Ncat);

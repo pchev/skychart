@@ -89,6 +89,10 @@ msgstr ""
 msgid "Add label"
 msgstr "Προσθήκη ετικέτας"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr ""
@@ -3913,6 +3917,10 @@ msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
+msgstr ""
+
+#: u_translation.rsreload
+msgid "Reload"
 msgstr ""
 
 #: u_translation.rsremoveallcir

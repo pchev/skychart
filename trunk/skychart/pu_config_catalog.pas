@@ -76,6 +76,8 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
+    LabelDownload: TLabel;
+    ReloadImg: TImage;
     Label1: TLabel;
     Label95: TLabel;
     LabelWarning: TLabel;
@@ -224,6 +226,8 @@ type
     procedure CDCAcceptDirectory(Sender: TObject; var Value: String);
     procedure StringGrid4DrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid4MouseMove(Sender: TObject; Shift: TShiftState; X,
+      Y: Integer);
     procedure StringGrid4MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure StringGrid4SelectCell(Sender: TObject; aCol, aRow: Integer;
@@ -251,6 +255,7 @@ type
 
   private
     { Private declarations }
+    HintX, HintY: integer;
     catalogempty, LockChange,LockCatPath,LockActivePath: boolean;
     FApplyConfig: TNotifyEvent;
     FCatGen: Tf_catgen;
@@ -259,8 +264,10 @@ type
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
     procedure ShowVO;
+    procedure ReloadVO(fn: string);
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
+    procedure ReloadFeedback(txt:string);
   public
     { Public declarations }
     catalog: Tcatalog;
@@ -292,7 +299,7 @@ addcat.caption:=rsAdd;
 delcat.caption:=rsDelete;
 Page1a.Caption:=rsVOCatalog;
 Label1.Caption:=rsVirtualObser;
-Button5.Caption:=rsAdd;
+Button5.Caption:=rsAddOrUpdate;
 Button6.Caption:=rsDelete;
 Page2.caption:=rsCdCStars;
 Label2.caption:=rsCDCStarsCata;
@@ -374,6 +381,7 @@ end;
 procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
   textcolor:=0;
+  LabelDownload.Caption:='';
   LockChange:=true;
   LockCatPath:=true;
   SetLang;
@@ -436,7 +444,7 @@ var p : integer;
     fn: string;
 begin
 p:=stringgrid4.selection.top;
-fn:=slash(VODir)+stringgrid4.cells[1,p];
+fn:=slash(VODir)+stringgrid4.cells[2,p];
 if MessageDlg(rsConfirmFileD+fn, mtConfirmation, mbYesNo, 0)=mrYes then begin
   DeleteFile(fn);
   DeleteFile(ChangeFileExt(fn,'.config'));
@@ -762,8 +770,35 @@ if (Acol=0)and(Arow>0) then begin
     Canvas.Brush.Color := clRed;
     Canvas.FillRect(aRect);
   end;
+end else if (Acol=3)and(Arow>0) then begin
+  if (cells[acol,arow]='1')then begin
+    Canvas.draw(aRect.left,aRect.top,ReloadImg.Picture.Bitmap);
+  end else begin
+    Canvas.Brush.Color := StringGrid4.Color;
+    Canvas.FillRect(aRect);
+  end;
 end;
 end;
+end;
+
+procedure Tf_config_catalog.StringGrid4MouseMove(Sender: TObject;
+  Shift: TShiftState; X, Y: Integer);
+var col,row:integer;
+begin
+ StringGrid4.MouseToCell(X, Y, Col, Row);
+ if (col>=0) and (row>=0) then begin
+   if (HintX<>row)or(HintY<>col) then begin
+      StringGrid4.Hint:='';
+      StringGrid4.ShowHint:=false;
+      HintX:=row;
+      HintY:=col;
+   end else begin
+      if (trim(StringGrid4.Cells[col,row])<>'')and(StringGrid4.Canvas.TextWidth(StringGrid4.Cells[col,row])>StringGrid4.ColWidths[col]) then begin
+         StringGrid4.Hint:=StringGrid4.Cells[col,row];
+         StringGrid4.ShowHint:=true;
+      end;
+   end;
+ end;
 end;
 
 procedure Tf_config_catalog.StringGrid4MouseUp(Sender: TObject;
@@ -778,13 +813,15 @@ case col of
     if stringgrid4.Cells[col,row]='1' then stringgrid4.Cells[col,row]:='0'
        else  stringgrid4.Cells[col,row]:='1';
     config:=TXMLConfig.Create(self);
-    config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[1,row],'.config');;
+    config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[2,row],'.config');;
     config.SetValue('active',stringgrid4.Cells[col,row]='1');
     config.Flush;
     config.free;
     end;
-2 : begin
-    // ReloadVO(row);
+3 : begin
+    if stringgrid4.Cells[col,row]='1' then begin
+       ReloadVO(stringgrid4.Cells[2,row]);
+    end;
     end;
 end;
 end;
@@ -792,7 +829,7 @@ end;
 procedure Tf_config_catalog.StringGrid4SelectCell(Sender: TObject; aCol,
   aRow: Integer; var CanSelect: Boolean);
 begin
-  if Acol=1 then canselect:=true else canselect:=false;
+  if (Acol=1)or(Acol=2) then canselect:=true else canselect:=false;
 end;
 
 procedure Tf_config_catalog.USNBrightClick(Sender: TObject);
@@ -979,33 +1016,69 @@ for i:=0 to ccat.GCatNum-1 do begin
 end;
 end;
 
+procedure Tf_config_catalog.ReloadVO(fn: string);
+begin
+try
+  screen.Cursor:=crHourGlass;
+  f_voconfig:=Tf_voconfig.Create(Self);
+  f_voconfig.onReloadFeedback:=ReloadFeedback;
+  f_voconfig.vopath:=VODir;
+  f_voconfig.Proxy:=cmain.HttpProxy;
+  f_voconfig.ProxyHost:=cmain.ProxyHost;
+  f_voconfig.ProxyPort:=cmain.ProxyPort;
+  f_voconfig.ProxyUser:=cmain.ProxyUser;
+  f_voconfig.ProxyPass:=cmain.ProxyPass;
+  f_voconfig.ra:=ra;
+  f_voconfig.dec:=dec;
+  f_voconfig.fov:=fov;
+  f_voconfig.vourlnum := cmain.VOurl;
+  f_voconfig.ReloadVO(fn);
+  f_voconfig.Free;
+finally
+  screen.Cursor:=crDefault;
+end;
+end;
+
+procedure Tf_config_catalog.ReloadFeedback(txt:string);
+begin
+  LabelDownload.Caption:=txt;
+  LabelDownload.Invalidate;
+  Application.ProcessMessages;
+end;
+
 procedure Tf_config_catalog.ShowVO;
 var i,j,r: integer;
     fs: TSearchRec;
-    VOobject,configfile: string;
+    VOobject,configfile,cname: string;
     config: TXMLConfig;
-    active: boolean;
+    active,fullcat: boolean;
 const VOo : array[1..2] of string = ('star','dso');
 begin
 StringGrid4.RowCount:=1;
 stringgrid4.cells[0,0]:='x';
-stringgrid4.Columns[0].Title.Caption:=rsFile;
-stringgrid4.Columns[1].Title.Caption:=rsRefresh;
+stringgrid4.Columns[0].Title.Caption:=rsName;
+stringgrid4.Columns[1].Title.Caption:=rsFile;
+stringgrid4.Columns[2].Title.Caption:=rsReload;
 for j in [1,2] do begin
   VOobject:=VOo[j];
-  i:=findfirst(slash(VODir)+'vo_table_'+VOobject+'_*.xml',0,fs);
+  i:=findfirst(slash(VODir)+'vo_'+VOobject+'_*.xml',0,fs);
   while i=0 do begin
     configfile:=slash(VODir)+ChangeFileExt(fs.Name,'.config');
     if FileExists(configfile) then begin
       config:=TXMLConfig.Create(self);
       config.Filename:=configfile;
+      cname:=config.GetValue('name','');
       active:=config.GetValue('active',true);
+      fullcat:=config.GetValue('fullcat',true);
       config.free;
       StringGrid4.RowCount:=StringGrid4.RowCount+1;
       r:=StringGrid4.RowCount-1;
-      StringGrid4.Cells[1,r]:=fs.Name;
+      StringGrid4.Cells[1,r]:=cname;
+      StringGrid4.Cells[2,r]:=fs.Name;
       if active then StringGrid4.Cells[0,r]:='1'
                 else StringGrid4.Cells[0,r]:='0';
+      if fullcat then StringGrid4.Cells[3,r]:='0'
+                else StringGrid4.Cells[3,r]:='1';
     end;
     i:=findnext(fs);
   end;

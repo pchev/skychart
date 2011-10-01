@@ -159,15 +159,21 @@ object f_config_catalog: Tf_config_catalog
         end
         object StringGrid4: TStringGrid
           Left = 0
-          Height = 345
+          Height = 323
           Top = 48
           Width = 482
-          ColCount = 3
+          ColCount = 4
           Columns = <          
             item
               ButtonStyle = cbsNone
+              MaxSize = 500
+              Title.Caption = 'Name'
+              Width = 200
+            end          
+            item
+              ButtonStyle = cbsNone
               Title.Caption = 'File'
-              Width = 350
+              Width = 200
             end          
             item
               ButtonStyle = cbsButton
@@ -183,26 +189,37 @@ object f_config_catalog: Tf_config_catalog
           TitleFont.Height = -11
           TitleStyle = tsStandard
           OnDrawCell = StringGrid4DrawCell
+          OnMouseMove = StringGrid4MouseMove
           OnMouseUp = StringGrid4MouseUp
           OnSelectCell = StringGrid4SelectCell
         end
         object Button5: TButton
-          Left = 144
+          Left = 87
           Height = 25
           Top = 400
-          Width = 75
-          Caption = 'Add'
+          Width = 204
+          Caption = 'Add or Update'
           OnClick = Button5Click
           TabOrder = 1
         end
         object Button6: TButton
-          Left = 248
+          Left = 320
           Height = 25
           Top = 400
           Width = 75
           Caption = 'Delete'
           OnClick = Button6Click
           TabOrder = 2
+        end
+        object LabelDownload: TLabel
+          Left = 15
+          Height = 15
+          Top = 376
+          Width = 464
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'LabelDownload'
+          ParentColor = False
         end
       end
       object Page2: TTabSheet
@@ -2035,6 +2052,40 @@ object f_config_catalog: Tf_config_catalog
       Caption = 'Help'
       OnClick = Button4Click
       TabOrder = 3
+    end
+    object ReloadImg: TImage
+      Left = 40
+      Height = 16
+      Top = 15
+      Width = 16
+      Picture.Data = {
+        1754506F727461626C654E6574776F726B47726170686963CF02000089504E47
+        0D0A1A0A0000000D494844520000001000000010080200000090916836000000
+        017352474200AECE1CE900000006624B474400FF00FF00FFA0BDA79300000009
+        7048597300000EC400000EC401952B0E1B0000000774494D4507DB0A0112061E
+        F5D6D4730000024F4944415428CF7D924D4F13611485CF7D3F3AD30E161604DB
+        264DBAE1232EAABF84854D4CFCF809FC0676C49D2C5510A928E8422389D11D31
+        A6AE5848538DC12A261AD9A858DB61DA99E9FBBED74511779EE5CD394FEECDB9
+        E4988D354A0A630D114921194CA038897DCF0744D48F825C00662266E7040183
+        A84F80964A1003166C094E4B450098C7724112C74404008060E67C7ECC393788
+        236B2D810409638D526AE4A8D7EBBEEF274902808814113B6B85947668566EDD
+        DEDB7B134551B95C9E9E9EA9D56A3B3B2F5F3C7F76EDEA65CFD3A33CA5C94067
+        D4EB46636DED8E10A25AAD8E8F8FC7717C70F05929E5FBB96EB77B637979E406
+        B3D2823A3F7E3E7DFC646A72727171516BA994125ADFAF6F0C0683CEAFDF180B
+        5C3A145A83004000D8DADA8AFAC70B0B0B417E4C6B2DB47EB4B91986A1EFFB13
+        1313D96CD63987BF5290B2D96C9EBF502D572A7114FA41B0B1BEBEBBBB5B2894
+        0E0F0FBD8C7F7474A43299133B11D8A6572ED5EEAEDC644E99539B8626E931C7
+        BDCE77E6944DC26EC8CEC6C721B365B60A424E150BBDE818CC2012DA1BB18233
+        798020A535462AE105B9931E00CCCD9D6B365BFBFB1FD8B1B3F674DD34490048
+        A5FA51743A1480B858AB9D2D14EA1BF7DA9F3E0AA9D2E1D058FBF6DDFB079B0F
+        3B9D2E20A4CA8CD000889901341AAF5657579516A552A952A9B4DBEDAF5FBE59
+        6B9796AECFCCCC0088E3D8F73300C831F707FD5CD6EFF6BADBDBDBAD562B0CC3
+        62B1383B3B3B3F3FAFB5E7653C639C56027000C81823A4B426954A5963A452EC
+        1C0931FA178248CD509290529E0498FF5DF97F8D107F0055B02E45153EE70E00
+        00000049454E44AE426082
+      }
+      Transparent = True
+      Visible = False
     end
   end
   object OpenDialog1: TOpenDialog
