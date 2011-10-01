@@ -776,7 +776,7 @@ type
        end;
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir : string;
+Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : string;
      VarObs,CdC : String;
      ForceConfig, Configfile, Lang : string;
      compile_time,compile_version, compile_system, lclver : string;

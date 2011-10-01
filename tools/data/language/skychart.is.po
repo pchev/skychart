@@ -897,6 +897,10 @@ msgstr ""
 msgid "Configure the program"
 msgstr "Stilla forritið"
 
+#: u_translation.rsconfirmfiled
+msgid "Confirm file delete: "
+msgstr ""
+
 #: u_translation.rsconnect
 msgid "Connect"
 msgstr ""
@@ -2586,6 +2590,10 @@ msgstr "í drifi"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Upplýsingar"
+
+#: u_translation.rsinfo2
+msgid "Info"
+msgstr ""
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -5029,6 +5037,10 @@ msgstr "Birta stjörnur"
 msgid "Show this picture"
 msgstr "Birta þessa mynd"
 
+#: u_translation.rsshowvirtualo
+msgid "Show Virtual Observatory data"
+msgstr ""
+
 #: u_translation.rssideral
 #, fuzzy
 #| msgid "Sideral"
@@ -5913,6 +5925,10 @@ msgstr "Sjóndeildarhringur"
 msgid "Virtual HandPad for Scope.exe "
 msgstr ""
 
+#: u_translation.rsvirtualobser
+msgid "Virtual Observatory Catalog"
+msgstr ""
+
 #: u_translation.rsvisibilityfo
 #, fuzzy
 #| msgid "Visibility for observatory"
@@ -5924,6 +5940,10 @@ msgstr "Það sem sést frá athugunarstaðnum"
 #| msgid "Visual Magnitude"
 msgid "Visual magnitude"
 msgstr "Sýndarbirtustig"
+
+#: u_translation.rsvocatalog
+msgid "VO Catalog"
+msgstr ""
 
 #: u_translation.rswanttotracka
 #, fuzzy

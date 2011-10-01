@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 404
+  Left = 353
   Height = 573
-  Top = 178
+  Top = 149
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow

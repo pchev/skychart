@@ -301,7 +301,7 @@ case curcat of
              end;
    vostar  : begin
                 VOobject:='star';
-                SetVOCatpath(slash(PrivateDir)+'vo');
+                SetVOCatpath(slash(VODir));
                 OpenVOCatwin(result);
              end;
    else result:=false;
@@ -549,7 +549,7 @@ case curcat of
             end;
    voneb  : begin
                 VOobject:='dso';
-                SetVOCatpath(slash(PrivateDir)+'vo');
+                SetVOCatpath(slash(VODir));
                 OpenVOCatwin(result);
              end;
    else result:=false;
@@ -2439,12 +2439,12 @@ if not nextobj then begin
    gpn     : OpenGPN(xx1,xx2,yy1,yy2,ok);
    vostar  : begin
                 VOobject:='star';
-                SetVOCatpath(slash(PrivateDir)+'vo');
+                SetVOCatpath(slash(VODir));
                 OpenVOCat(xx1,xx2,yy1,yy2,ok);
              end;
    voneb   : begin
                 VOobject:='dso';
-                SetVOCatpath(slash(PrivateDir)+'vo');
+                SetVOCatpath(slash(VODir));
                 OpenVOCat(xx1,xx2,yy1,yy2,ok);
              end;
    gcstar  : begin

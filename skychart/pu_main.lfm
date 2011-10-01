@@ -3565,156 +3565,165 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonDSS: TToolButton
-        Left = 93
+        Left = 116
         Top = 2
         Action = DSSImage
         OnMouseUp = ToolButtonDSSMouseUp
       end
       object ToolButtonShowBackgroundImage: TToolButton
-        Left = 116
+        Left = 139
         Top = 2
         Action = SetupPictures
         OnMouseUp = ToolButtonShowBackgroundImageMouseUp
       end
       object ToolButtonShowPlanets: TToolButton
-        Left = 162
+        Left = 185
         Top = 2
         Action = ShowPlanets
         OnMouseUp = ToolButtonShowPlanetsMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowAsteroids: TToolButton
-        Left = 185
+        Left = 208
         Top = 2
         Action = ShowAsteroids
         OnMouseUp = ToolButtonShowAsteroidsMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowComets: TToolButton
-        Left = 208
+        Left = 231
         Top = 2
         Action = ShowComets
         OnMouseUp = ToolButtonShowCometsMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowMilkyWay: TToolButton
-        Left = 231
+        Left = 254
         Top = 2
         Action = ShowMilkyWay
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonGrid: TToolButton
-        Left = 254
+        Left = 277
         Top = 2
         Action = Grid
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonGridEq: TToolButton
-        Left = 277
+        Left = 300
         Top = 2
         Action = GridEQ
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 300
+        Left = 323
         Top = 2
         Action = ShowConstellationLine
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 323
+        Left = 346
         Top = 2
         Action = ShowConstellationLimit
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 346
+        Left = 369
         Top = 2
         Action = ShowGalacticEquator
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 369
+        Left = 392
         Top = 2
         Action = ShowEcliptic
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
-        Left = 392
+        Left = 415
         Top = 2
         Action = ShowMark
         OnMouseUp = ToolButtonShowMarkMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 415
+        Left = 438
         Top = 2
         Action = ShowLabels
         OnMouseUp = ToolButtonShowLabelsMouseUp
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 438
+        Left = 461
         Top = 2
         Action = EditLabels
         PopupMenu = PopupMenu1
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 461
+        Left = 484
         Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 484
+        Left = 507
         Top = 2
         Action = switchbackground
         OnMouseUp = ToolButtonswitchbackgroundMouseUp
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 511
+        Left = 534
         Top = 2
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 534
+        Left = 557
         Top = 2
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 561
+        Left = 584
         Top = 2
         Action = switchstars
         OnMouseUp = ToolButtonswitchstarsMouseUp
         Style = tbsCheck
       end
       object ToolButton2: TToolButton
-        Left = 557
+        Left = 580
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
-        Left = 507
+        Left = 530
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButtonBlink: TToolButton
-        Left = 139
+        Left = 162
         Top = 2
         Action = BlinkImage
+        Style = tbsCheck
+      end
+      object ToolButtonVO: TToolButton
+        Left = 93
+        Top = 2
+        Caption = 'ToolButtonVO'
+        ImageIndex = 89
+        OnClick = ToolButtonVOClick
+        OnMouseUp = ToolButtonVOMouseUp
         Style = tbsCheck
       end
     end
@@ -7418,7 +7427,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695900000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
+      4C695A00000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FF0000
       000000000000000000000000000000000000000000009C6B6BFF000000000000
       000000000000000000000000000000000000000000009C6B6BFF00000000945A
@@ -10266,6 +10275,38 @@ object f_main: Tf_main
       00FF00000000A53900FF00000000000000000000000000000000000000000000
       000000000000000000000000000000000000A53900FFA53900FF00000000A539
       00FFA53900FF0000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000007437
+      000000000000000000000000000098450003D979000BAE5600139846001E9643
+      000E95430002D400000000000000000000000000000000000000763900000000
+      000000000000723600278641004CC66C0072B15F00BBA05000B59A4700619945
+      00399543001640CDB60922FFF80800000000A021000000000000000000007639
+      00037538007A7A3900D3C26F09E5AC5F06EF7B3C00F8733700DB7438009C6730
+      000A0000000006FFEB0124FEF573A02100020000000075380000763900017538
+      007D723600F8BE6700E1D98F2FE9783800F5743800F6753800F6763900F77538
+      00D10000000022FFFC2025FFF66C000000009923000000000000753800277437
+      00FE8D4300EFF7B24EE1D8933EE8B75F00E5A35200EB813D00F4753800F67638
+      00FA6C521E9F1CFFFF5C24FFF409000000009824000000000000753800A67437
+      00FEB15800E1FFE3BCF5FCBD62E9FDC46FE9FAB146E0CD7202DE873D00F36761
+      2CE1549769C14D9C792B00000000992400000000000000000000753800EE7637
+      00F8BB5F00DDFFE9CBF9FFF7ECFDFFFDF9FEFFF4E5FDF8B859E77A9E59C85F78
+      46D7734209E47930004500000000000000000000000000000000753900FD7437
+      00F7AD5600E3FCD396EFFFFFFFFFFFFEFFFFEDFFFFF67FF0CFC5B58A29D47A3D
+      01F4753800EE7539005000000000000000008C62000000000000763800E67438
+      00F88F4200F2EA9115D9F8F1DAF6B5FDF8DD8AE2B6CAFEEACEF6DC810FE07D3C
+      00F4753800E97639004100000000FF7100007A98110FFFFFFF007735008D7734
+      00FF754B13ED988E39CE8EB761C2C7B046CDF28E0EDCF8CE93EDCC7711E3793A
+      00F5753800D875380014000000006ACD3C085BCD652200000000559964395888
+      5BDC5B8450D2666431E0975106EBB15500E9A65100EBF7AF47E1A75801E87639
+      00FF75380075000000000000000029FAEA522AF8E49C30F4D19533F3CF636665
+      3265743D04F1763800F6773900F6723500F8AE5D00E4DE8816DE7E3C00FF7538
+      00A000000000000000007537000028FCE20847E4982100000000000000000000
+      00007538004D763800DD773900F59D5200E9DA7E01CF854000E17237007D0000
+      0000763900000000000000000000000000000000000000000000934200079844
+      0013A24800189D4800479D4C00B5BE650091883C004F5C2C0016000000000000
+      0000000000000000000000000000000000000000000000000000934200079945
+      0013974400219F4A0037AE56001F0000000000000000000000007A3D00007437
+      0000000000000000000000000000000000000000000093420000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000
     }
   end

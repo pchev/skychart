@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
+uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
   pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
@@ -289,6 +289,10 @@ Page1.caption:=rsCatalog;
 Label37.caption:=rsStarsAndNebu;
 addcat.caption:=rsAdd;
 delcat.caption:=rsDelete;
+Page1a.Caption:=rsVOCatalog;
+Label1.Caption:=rsVirtualObser;
+Button5.Caption:=rsAdd;
+Button6.Caption:=rsDelete;
 Page2.caption:=rsCdCStars;
 Label2.caption:=rsCDCStarsCata;
 Label65.caption:=rsPm;
@@ -410,6 +414,7 @@ end;
 procedure Tf_config_catalog.Button5Click(Sender: TObject);
 begin
   f_voconfig:=Tf_voconfig.Create(Self);
+  f_voconfig.vopath:=VODir;
   f_voconfig.ShowModal;
   f_voconfig.Free;
   ShowVO;
@@ -420,8 +425,8 @@ var p : integer;
     fn: string;
 begin
 p:=stringgrid4.selection.top;
-fn:=slash(PrivateDir)+slash('vo')+stringgrid4.cells[1,p];
-if MessageDlg('Confirm file delete: '+fn,mtConfirmation,mbYesNo,0)=mrYes then begin
+fn:=slash(VODir)+stringgrid4.cells[1,p];
+if MessageDlg(rsConfirmFileD+fn, mtConfirmation, mbYesNo, 0)=mrYes then begin
   DeleteFile(fn);
   DeleteFile(ChangeFileExt(fn,'.config'));
 end;
@@ -753,6 +758,7 @@ end;
 procedure Tf_config_catalog.StringGrid4MouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var col,row:integer;
+    config:TXMLConfig;
 begin
 StringGrid4.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;
@@ -760,6 +766,11 @@ case col of
 0 : begin
     if stringgrid4.Cells[col,row]='1' then stringgrid4.Cells[col,row]:='0'
        else  stringgrid4.Cells[col,row]:='1';
+    config:=TXMLConfig.Create(self);
+    config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[1,row],'.config');;
+    config.SetValue('active',stringgrid4.Cells[col,row]='1');
+    config.Flush;
+    config.free;
     end;
 2 : begin
     // ReloadVO(row);
@@ -958,40 +969,37 @@ end;
 end;
 
 procedure Tf_config_catalog.ShowVO;
-var i,r: integer;
+var i,j,r: integer;
     fs: TSearchRec;
-    VOobject,configfile:string;
+    VOobject,configfile: string;
+    config: TXMLConfig;
+    active: boolean;
+const VOo : array[1..2] of string = ('star','dso');
 begin
 StringGrid4.RowCount:=1;
 stringgrid4.cells[0,0]:='x';
 stringgrid4.Columns[0].Title.Caption:=rsFile;
 stringgrid4.Columns[1].Title.Caption:=rsRefresh;
-VOobject:='star';
-i:=findfirst(slash(PrivateDir)+slash('vo')+'vo_table_'+VOobject+'_*.xml',0,fs);
-while i=0 do begin
-  configfile:=slash(PrivateDir)+slash('vo')+ChangeFileExt(fs.Name,'.config');
-  if FileExists(configfile) then begin
-    StringGrid4.RowCount:=StringGrid4.RowCount+1;
-    r:=StringGrid4.RowCount-1;
-    StringGrid4.Cells[1,r]:=fs.Name;
-    StringGrid4.Cells[0,r]:='1';
+for j in [1,2] do begin
+  VOobject:=VOo[j];
+  i:=findfirst(slash(VODir)+'vo_table_'+VOobject+'_*.xml',0,fs);
+  while i=0 do begin
+    configfile:=slash(VODir)+ChangeFileExt(fs.Name,'.config');
+    if FileExists(configfile) then begin
+      config:=TXMLConfig.Create(self);
+      config.Filename:=configfile;
+      active:=config.GetValue('active',true);
+      config.free;
+      StringGrid4.RowCount:=StringGrid4.RowCount+1;
+      r:=StringGrid4.RowCount-1;
+      StringGrid4.Cells[1,r]:=fs.Name;
+      if active then StringGrid4.Cells[0,r]:='1'
+                else StringGrid4.Cells[0,r]:='0';
+    end;
+    i:=findnext(fs);
   end;
-  i:=findnext(fs);
+  findclose(fs);
 end;
-findclose(fs);
-VOobject:='dso';
-i:=findfirst(slash(PrivateDir)+slash('vo')+'vo_table_'+VOobject+'_*.xml',0,fs);
-while i=0 do begin
-  configfile:=slash(PrivateDir)+slash('vo')+ChangeFileExt(fs.Name,'.config');
-  if FileExists(configfile) then begin
-    StringGrid4.RowCount:=StringGrid4.RowCount+1;
-    r:=StringGrid4.RowCount-1;
-    StringGrid4.Cells[1,r]:=fs.Name;
-    StringGrid4.Cells[0,r]:='1';
-  end;
-  i:=findnext(fs);
-end;
-findclose(fs);
 end;
 
 end.

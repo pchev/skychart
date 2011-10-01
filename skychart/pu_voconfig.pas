@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses Messages, SysUtils, Classes, XMLConf, Graphics, Controls, Forms, FileUtil,
+uses XMLConf, u_translation, Messages, SysUtils, Classes,  Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, Menus, pr_vodetail, ComCtrls, Grids, ExtCtrls,
   LResources, Buttons, u_voconstant, cu_vocatalog, cu_vodetail, cu_vodata;
 
@@ -38,6 +38,7 @@ type
 
   Tf_voconfig = class(TForm)
     CatFilter: TEdit;
+    Label5: TLabel;
     VO_Catalogs1: TVO_Catalogs;
     PageControl1: TPageControl;
     TabCat: TTabSheet;
@@ -83,7 +84,7 @@ type
     procedure SelectRegistry(Sender: TObject);
   private
     { Private declarations }
-    vopath,catname : string;
+    Fvopath,catname : string;
     procedure SetServerList;
     procedure FillCatList;
     procedure ClearCatalog;
@@ -93,8 +94,11 @@ type
     procedure GetData(Sender: TObject);
     procedure ReceiveData(Sender: TObject);
     procedure DefColumns(Sender: TObject);
+    procedure Setvopath(value:string);
   public
     { Public declarations }
+    procedure Setlang;
+    property vopath: string read Fvopath write Setvopath;
   end;
 
 var
@@ -109,26 +113,30 @@ result:=trim(nom);
 if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
 end;
 
+procedure Tf_voconfig.Setlang;
+begin
+CatList.Cells[0, 0]:=rsName;
+CatList.Cells[1, 0]:=rsDescription;
+CatList.Cells[2, 0]:=rsInfo2;
+CatList.Cells[3, 0]:=rsURL;
+end;
+
+procedure Tf_voconfig.Setvopath(value:string);
+begin
+Fvopath:=value;
+VO_Catalogs1.CachePath:=Fvopath;
+VO_Detail1.CachePath:=Fvopath;
+VO_TableData1.CachePath:=Fvopath;
+end;
+
 procedure Tf_voconfig.FormCreate(Sender: TObject);
 begin
-  DecimalSeparator:='.';
-  vopath:=ExpandFileName('~/.skychart/vo');
-  if not DirectoryExists(vopath) then CreateDir(vopath);
-  VO_Catalogs1.CachePath:=vopath;
-  VO_Detail1.CachePath:=vopath;
-  VO_TableData1.CachePath:=vopath;
   CatList.ColWidths[0]:=100;
   CatList.ColWidths[1]:=400;
   CatList.ColWidths[2]:=150;
   CatList.ColWidths[3]:=400;
-  CatList.Cells[0,0]:='Name';
-  CatList.Cells[1,0]:='Description';
-  CatList.Cells[2,0]:='Info';
-  CatList.Cells[3,0]:='URL';
-  VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
-  SetServerList;
-  VO_Catalogs1.ClearCatList;
   PageControl1.ActivePage:=TabCat;
+  Setlang;
 end;
 
 procedure Tf_voconfig.SetServerList;
@@ -164,6 +172,9 @@ end;
 
 procedure Tf_voconfig.FormShow(Sender: TObject);
 begin
+ VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
+ SetServerList;
+ VO_Catalogs1.ClearCatList;
  ClearCatalog;
  ClearDataGrid;
  Timer1.Enabled:=true;
