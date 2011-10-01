@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_voconstant, httpsend, LibXmlParser, LibXmlComps,
+uses u_voconstant, httpsend, blcksock, LibXmlParser, LibXmlComps,
      Classes, SysUtils;
 
 
@@ -58,6 +58,11 @@ type
     function  GetCatList:TstringList;
     procedure Set_source(value: Tvo_source);
   protected
+     Fproxy: boolean;
+     Fproxyhost,Fproxyport,Fproxyuser,Fproxypass : string;
+     Sockreadcount, LastRead: integer;
+     FDownloadFeedback: TDownloadFeedback;
+     procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
@@ -72,6 +77,12 @@ type
     property vo_type: Tvo_type read Fvo_type;
     property ListUrl: string read FListUrl write FListUrl;
     property CachePath: string read Fvopath write Fvopath;
+    property onDownloadFeedback: TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
+    property Proxy : boolean read Fproxy  write Fproxy ;
+    property HttpProxyhost : string read Fproxyhost  write Fproxyhost ;
+    property HttpProxyPort : string read Fproxyport  write Fproxyport ;
+    property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
+    property HttpProxyPass : string read Fproxypass  write Fproxypass ;
   end;
 
 implementation
@@ -166,17 +177,54 @@ var url:string;
 begin
 url:=FListUrl;
 http.Clear;
+if Fproxy then begin
+   http.ProxyHost:=Fproxyhost;
+   http.ProxyPort:=Fproxyport;
+   http.ProxyUser :=Fproxyuser;
+   http.ProxyPass :=Fproxypass;
+end else begin
+  http.ProxyHost:='';
+  http.ProxyPort:='';
+  http.ProxyUser :='';
+  http.ProxyPass :='';
+end;
 http.Timeout:=10000;
+http.Sock.OnStatus:=httpstatus;
+Sockreadcount:=0;
 if http.HTTPMethod('GET', url)
    and ((http.ResultCode=200)
    or (http.ResultCode=0))
      then begin
        http.Document.SaveToFile(slash(Fvopath)+vo_list[Fvo_source]);
        FLastErr:='';
+       if Assigned(FDownloadFeedback) then FDownloadFeedback('Download completed.');
        LoadCats;
      end
-     else FLastErr:='Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+else begin
+   FLastErr:='Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+   if Assigned(FDownloadFeedback) then FDownloadFeedback(FLastErr);
+end;
 http.Clear;
+end;
+
+procedure TVO_Catalogs.httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+var txt: string;
+begin
+txt:='';
+case reason of
+  HR_ResolvingBegin : txt:='Resolving '+value;
+  HR_Connect        : txt:='Connect '+value;
+  HR_Accept         : txt:='Accept '+value;
+  HR_ReadCount      : begin
+                      Sockreadcount:=Sockreadcount+strtoint(value);
+                      if (Sockreadcount-LastRead)>100000 then begin
+                        txt:='Read data: '+inttostr(Sockreadcount div 1024)+' KB';
+                        LastRead:=Sockreadcount;
+                      end;
+                      end;
+  else txt:='';
+end;
+if (txt>'')and Assigned(FDownloadFeedback) then FDownloadFeedback(txt);
 end;
 
 function TVO_Catalogs.Search(txt: string; startpos:integer=0):integer;

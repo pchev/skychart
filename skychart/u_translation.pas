@@ -1310,6 +1310,34 @@ resourcestring
   rsVirtualObser = 'Virtual Observatory Catalog';
   rsVOCatalog = 'VO Catalog';
   rsInfo2 = 'Info';
+  rsCatalogsAvai = '%s Catalogs availables.';
+  rsVOCatalogBro = 'VO Catalog Browser';
+  rsSearchCatalo = 'Search Catalogs';
+  rsSelectCatalo = 'Select Catalog';
+  rsCannotConnec = 'Cannot connect to server. %s';
+  rsFieldName = 'Field Name';
+  rsDataType = 'Data Type';
+  rsUnits = 'Units';
+  rsNoCatalogSel = 'No catalog selected, or no table from the selected catalog '
+    +'contain coordinates information.';
+  rsNoData = 'No Data';
+  rsLoadingCatal = 'Loading catalog list. Please wait ...';
+  rsThisCatalogC = 'This catalog contain %s records. It is not possible to '
+    +'download in full for performance reason.';
+  rsTheNumberOfR = 'The number of records for this catalog is unknow. The '
+    +'download will be limited to %s records';
+  rsMakeSelectio = 'Make selection of the table and column you want to your '
+    +'catalog';
+  rsTable = 'Table';
+  rsRows = 'Rows';
+  rsDefaultMagni = 'Default magnitude';
+  rsDefaultSizeA = 'Default size (arcmin)';
+  rsDownloadFull = 'Download full catalog';
+  rsBack = 'Back';
+  rsDownloadCata = 'Download catalog';
+  rsCannotDraw = 'Cannot draw';
+  rsDrawAsStar = 'Draw as star';
+  rsDrawAsDSO = 'Draw as DSO';
 
 
 implementation

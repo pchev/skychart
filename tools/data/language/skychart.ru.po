@@ -321,6 +321,10 @@ msgstr "%sAz повороты:"
 msgid "B"
 msgstr "B"
 
+#: u_translation.rsback
+msgid "Back"
+msgstr ""
+
 #: u_translation.rsbackground
 msgid "Background"
 msgstr "Фон"
@@ -461,6 +465,14 @@ msgstr "Отменить, неправильный zip файл ??? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotconnec
+msgid "Cannot connect to server. %s"
+msgstr ""
+
+#: u_translation.rscannotdraw
+msgid "Cannot draw"
+msgstr ""
+
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
 msgstr ""
@@ -488,6 +500,10 @@ msgstr "Каталог"
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
 msgstr "Полное название каталога"
+
+#: u_translation.rscatalogsavai
+msgid "%s Catalogs availables."
+msgstr ""
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -999,6 +1015,10 @@ msgstr "Использование данных"
 msgid "Data starts on line %s"
 msgstr "Інші каталоги абрисів"
 
+#: u_translation.rsdatatype
+msgid "Data Type"
+msgstr ""
+
 #: u_translation.rsdate
 msgid "Date"
 msgstr "Дата"
@@ -1123,6 +1143,10 @@ msgstr "Встроенный цвет"
 msgid "Default label"
 msgstr "Встроенная метка"
 
+#: u_translation.rsdefaultmagni
+msgid "Default magnitude"
+msgstr ""
+
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
 msgstr "Устан. поля"
@@ -1134,6 +1158,10 @@ msgstr "Встроенные параметры туманностей"
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
 msgstr "Исходные параметры схемы"
+
+#: u_translation.rsdefaultsizea
+msgid "Default size (arcmin)"
+msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1369,12 +1397,20 @@ msgstr "Загрузить"
 msgid "Download %s"
 msgstr "Загружено %s"
 
+#: u_translation.rsdownloadcata
+msgid "Download catalog"
+msgstr ""
+
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Загрузить населённые пункты"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
+msgstr ""
+
+#: u_translation.rsdownloadfull
+msgid "Download full catalog"
 msgstr ""
 
 #: u_translation.rsdownloadlate
@@ -1392,6 +1428,14 @@ msgstr "Вы хотите сохранить настройки программ
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Нарисовать линию, показывающую собственное движение в течении"
+
+#: u_translation.rsdrawasdso
+msgid "Draw as DSO"
+msgstr ""
+
+#: u_translation.rsdrawasstar
+msgid "Draw as star"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1683,6 +1727,10 @@ msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
+msgstr ""
+
+#: u_translation.rsfieldname
+msgid "Field Name"
 msgstr ""
 
 #: u_translation.rsfieldnumber
@@ -2475,6 +2523,10 @@ msgstr "Загрузить файл"
 msgid "Load from file"
 msgstr ""
 
+#: u_translation.rsloadingcatal
+msgid "Loading catalog list. Please wait ..."
+msgstr ""
+
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
 msgstr "Загрузить MPC файл"
@@ -2602,6 +2654,10 @@ msgstr "MailList"
 #: u_translation.rsmainbar
 msgid "Main bar"
 msgstr "Главная панель"
+
+#: u_translation.rsmakeselectio
+msgid "Make selection of the table and column you want to your catalog"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -2927,8 +2983,16 @@ msgstr "Не найдено никаких астероидных данных!%
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnocatalogsel
+msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
+msgstr ""
+
 #: u_translation.rsnochange
 msgid "No change"
+msgstr ""
+
+#: u_translation.rsnodata
+msgid "No Data"
 msgstr ""
 
 #: u_translation.rsnomargin
@@ -3913,6 +3977,10 @@ msgstr "Повернуть вправо"
 msgid "Rotation"
 msgstr "Поворот"
 
+#: u_translation.rsrows
+msgid "Rows"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Сарос"
@@ -3997,6 +4065,10 @@ msgstr "Число"
 msgid "Search"
 msgstr "Поиск"
 
+#: u_translation.rssearchcatalo
+msgid "Search Catalogs"
+msgstr ""
+
 #: u_translation.rssearchfor
 msgid "Search for"
 msgstr "Найти для"
@@ -4036,6 +4108,10 @@ msgstr ""
 #: u_translation.rsselectall
 msgid "Select all"
 msgstr "Выбрать всё"
+
+#: u_translation.rsselectcatalo
+msgid "Select Catalog"
+msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4605,6 +4681,10 @@ msgstr "Установки системы"
 msgid "Sytem status:"
 msgstr ""
 
+#: u_translation.rstable
+msgid "Table"
+msgstr ""
+
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%sТаблица %s не существует! %sПожалуйста, исправьте ошибку и повторите"
@@ -4673,6 +4753,10 @@ msgstr ""
 msgid "Theme"
 msgstr "Тема"
 
+#: u_translation.rsthenumberofr
+msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Присутствуют %s каталогизированных изображений"
@@ -4684,6 +4768,10 @@ msgstr "Присутствуют %s объектов в данном поле."
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Данное действие заменяет всё содержание базы данных для страны %s, используя свежия данные от NGA и GNIS.%Все ваши редактирования по данной стране будут потерянными, за исключение того пункта, который вы добавили под новым названием, что и будет сохранено.%Хотите продолжить?"
+
+#: u_translation.rsthiscatalogc
+msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4873,6 +4961,10 @@ msgstr "Отменить"
 msgid "Undo last change"
 msgstr "Отменить последнее изменение"
 
+#: u_translation.rsunits
+msgid "Units"
+msgstr ""
+
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
 msgstr "Всемирное время"
@@ -5047,6 +5139,10 @@ msgstr "Визуальная величина"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
+msgstr ""
+
+#: u_translation.rsvocatalogbro
+msgid "VO Catalog Browser"
 msgstr ""
 
 #: u_translation.rswanttotracka

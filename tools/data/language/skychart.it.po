@@ -321,6 +321,10 @@ msgstr "%s rotazioni Az"
 msgid "B"
 msgstr "B"
 
+#: u_translation.rsback
+msgid "Back"
+msgstr ""
+
 #: u_translation.rsbackground
 msgid "Background"
 msgstr "Sfondo"
@@ -461,6 +465,14 @@ msgstr "Annulla, file zip errato ?? %s"
 msgid "Cannot compute satellites."
 msgstr "Impossibile calcolare satelliti."
 
+#: u_translation.rscannotconnec
+msgid "Cannot connect to server. %s"
+msgstr ""
+
+#: u_translation.rscannotdraw
+msgid "Cannot draw"
+msgstr ""
+
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
 msgstr "Impossibile rilevare l'indirizzo IP, oppure destinazione non trovata."
@@ -488,6 +500,10 @@ msgstr "Cataloghi"
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
 msgstr "Nome del catalogo"
+
+#: u_translation.rscatalogsavai
+msgid "%s Catalogs availables."
+msgstr ""
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -999,6 +1015,10 @@ msgstr "Gestione dati"
 msgid "Data starts on line %s"
 msgstr "Inizio dati su linea %s"
 
+#: u_translation.rsdatatype
+msgid "Data Type"
+msgstr ""
+
 #: u_translation.rsdate
 msgid "Date"
 msgstr "Data"
@@ -1123,6 +1143,10 @@ msgstr "Colore di default"
 msgid "Default label"
 msgstr "Etichetta di default"
 
+#: u_translation.rsdefaultmagni
+msgid "Default magnitude"
+msgstr ""
+
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
 msgstr "Default"
@@ -1134,6 +1158,10 @@ msgstr "Parametri nebulose di default"
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
 msgstr "Parametri dei contorni di default"
+
+#: u_translation.rsdefaultsizea
+msgid "Default size (arcmin)"
+msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1368,6 +1396,10 @@ msgstr "Scarica"
 msgid "Download %s"
 msgstr "Scarica %s"
 
+#: u_translation.rsdownloadcata
+msgid "Download catalog"
+msgstr ""
+
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Scarica dettagli della nazione"
@@ -1375,6 +1407,10 @@ msgstr "Scarica dettagli della nazione"
 #: u_translation.rsdownloadfile
 msgid "Download File"
 msgstr "Scarica file"
+
+#: u_translation.rsdownloadfull
+msgid "Download full catalog"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1391,6 +1427,14 @@ msgstr "Vuoi salvare le impostazioni?"
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Disegna una linea che rappresenti il moto proprio per i prossimi "
+
+#: u_translation.rsdrawasdso
+msgid "Draw as DSO"
+msgstr ""
+
+#: u_translation.rsdrawasstar
+msgid "Draw as star"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1683,6 +1727,10 @@ msgstr "Preferito"
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
 msgstr "Percorso ffmpeg "
+
+#: u_translation.rsfieldname
+msgid "Field Name"
+msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -2474,6 +2522,10 @@ msgstr "Carica file"
 msgid "Load from file"
 msgstr "Carica da file"
 
+#: u_translation.rsloadingcatal
+msgid "Loading catalog list. Please wait ..."
+msgstr ""
+
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
 msgstr "Carica file MPC"
@@ -2601,6 +2653,10 @@ msgstr "Mail list (Yahoo group)"
 #: u_translation.rsmainbar
 msgid "Main bar"
 msgstr "Pannello principale"
+
+#: u_translation.rsmakeselectio
+msgid "Make selection of the table and column you want to your catalog"
+msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -2926,9 +2982,17 @@ msgstr "Nessun dato asteroidale trovato!%sCarica un file MPC prima."
 msgid "No astronomical twilight today!"
 msgstr "Nessun crepuscolo astronomico per oggi!"
 
+#: u_translation.rsnocatalogsel
+msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
+msgstr ""
+
 #: u_translation.rsnochange
 msgid "No change"
 msgstr "Nessun cambiamento"
+
+#: u_translation.rsnodata
+msgid "No Data"
+msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3912,6 +3976,10 @@ msgstr "Rotazione destra"
 msgid "Rotation"
 msgstr "Rotazione"
 
+#: u_translation.rsrows
+msgid "Rows"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Saros"
@@ -3996,6 +4064,10 @@ msgstr "G"
 msgid "Search"
 msgstr "Cerca"
 
+#: u_translation.rssearchcatalo
+msgid "Search Catalogs"
+msgstr ""
+
 #: u_translation.rssearchfor
 msgid "Search for"
 msgstr "Cerca"
@@ -4035,6 +4107,10 @@ msgstr "Seleziona"
 #: u_translation.rsselectall
 msgid "Select all"
 msgstr "Seleziona tutto"
+
+#: u_translation.rsselectcatalo
+msgid "Select Catalog"
+msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4604,6 +4680,10 @@ msgstr "Impostazioni di sistema"
 msgid "Sytem status:"
 msgstr "Stato sistema:"
 
+#: u_translation.rstable
+msgid "Table"
+msgstr ""
+
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
 msgstr "%sLa tabella %s non esiste! %sPer favore, correggi l'errore e ritenta."
@@ -4672,6 +4752,10 @@ msgstr "L'interfaccia è non connessa o non inizializzata"
 msgid "Theme"
 msgstr "Tema"
 
+#: u_translation.rsthenumberofr
+msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Ci sono %s immagini catalogate"
@@ -4683,6 +4767,10 @@ msgstr "Ci sono %s oggetti nel campo."
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Questo riscriverà tutto il contenuto del database della nazione %s con nuovi dati dal NGA e GNIS.%sTutte le modifiche già apportate a questa nazione verranno perse, tranne le nuove località aggiunte con nuovi nomi che saranno invece mantenute.%sVuoi proseguire ?"
+
+#: u_translation.rsthiscatalogc
+msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4872,6 +4960,10 @@ msgstr "Annulla"
 msgid "Undo last change"
 msgstr "Annulla ultima modifica"
 
+#: u_translation.rsunits
+msgid "Units"
+msgstr ""
+
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
 msgstr "Tempo Universale"
@@ -5046,6 +5138,10 @@ msgstr "Magnitudine Visuale"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
+msgstr ""
+
+#: u_translation.rsvocatalogbro
+msgid "VO Catalog Browser"
 msgstr ""
 
 #: u_translation.rswanttotracka

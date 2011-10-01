@@ -117,7 +117,7 @@ VOobject:=config.GetValue('objtype',VOobject);
 active:=config.GetValue('active',false);
 drawtype:=config.GetValue('drawtype',14);
 drawcolor:=config.GetValue('drawcolor',$FF0000);
-DefSize:=config.GetValue('defsize',60);
+DefSize:=config.GetValue('defsize',1);
 Defmag:=config.GetValue('defmag',10);
 config.free;
 if FileExists(catfile) then begin

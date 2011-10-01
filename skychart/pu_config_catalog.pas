@@ -274,6 +274,7 @@ type
     cshr : Tconf_shared;
     cplot : Tconf_plot;
     cmain : Tconf_main;
+    ra,dec,fov: double;
     constructor Create(AOwner:TComponent); override;
     procedure SetLang;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
@@ -415,7 +416,17 @@ procedure Tf_config_catalog.Button5Click(Sender: TObject);
 begin
   f_voconfig:=Tf_voconfig.Create(Self);
   f_voconfig.vopath:=VODir;
+  f_voconfig.Proxy:=cmain.HttpProxy;
+  f_voconfig.ProxyHost:=cmain.ProxyHost;
+  f_voconfig.ProxyPort:=cmain.ProxyPort;
+  f_voconfig.ProxyUser:=cmain.ProxyUser;
+  f_voconfig.ProxyPass:=cmain.ProxyPass;
+  f_voconfig.ra:=ra;
+  f_voconfig.dec:=dec;
+  f_voconfig.fov:=fov;
+  f_voconfig.vourlnum := cmain.VOurl;
   f_voconfig.ShowModal;
+  cmain.VOurl:=f_voconfig.vourlnum;
   f_voconfig.Free;
   ShowVO;
 end;
@@ -429,8 +440,8 @@ fn:=slash(VODir)+stringgrid4.cells[1,p];
 if MessageDlg(rsConfirmFileD+fn, mtConfirmation, mbYesNo, 0)=mrYes then begin
   DeleteFile(fn);
   DeleteFile(ChangeFileExt(fn,'.config'));
+  ShowVO;
 end;
-
 end;
 
 procedure Tf_config_catalog.ShowGCat;

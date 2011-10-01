@@ -345,6 +345,10 @@ msgstr "%sforgatás vízszintesen:"
 msgid "B"
 msgstr "B"
 
+#: u_translation.rsback
+msgid "Back"
+msgstr ""
+
 #: u_translation.rsbackground
 msgid "Background"
 msgstr "Háttér"
@@ -497,6 +501,14 @@ msgstr "Megszakítás, hibás zip fájl? %s"
 msgid "Cannot compute satellites."
 msgstr ""
 
+#: u_translation.rscannotconnec
+msgid "Cannot connect to server. %s"
+msgstr ""
+
+#: u_translation.rscannotdraw
+msgid "Cannot draw"
+msgstr ""
+
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
 msgstr ""
@@ -524,6 +536,10 @@ msgstr "Katalógus"
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
 msgstr "Katalógus hoisszú név"
+
+#: u_translation.rscatalogsavai
+msgid "%s Catalogs availables."
+msgstr ""
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -1095,6 +1111,10 @@ msgstr "Adatok karbantartása"
 msgid "Data starts on line %s"
 msgstr "Adatok kezdete: %s sor"
 
+#: u_translation.rsdatatype
+msgid "Data Type"
+msgstr ""
+
 #: u_translation.rsdate
 msgid "Date"
 msgstr "Dátum"
@@ -1227,6 +1247,10 @@ msgstr "Alapértelmezett szín"
 msgid "Default label"
 msgstr "Alapértelmezett címke"
 
+#: u_translation.rsdefaultmagni
+msgid "Default magnitude"
+msgstr ""
+
 #: u_translation.rsdefaultmargi
 #| msgid "Default Margin"
 msgid "Default margin"
@@ -1241,6 +1265,10 @@ msgstr "Ködök alapértelmezett paraméterei"
 #| msgid "Default Outline parameters"
 msgid "Default outline parameters"
 msgstr "Körvonal alapértelmezett értékei"
+
+#: u_translation.rsdefaultsizea
+msgid "Default size (arcmin)"
+msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1492,6 +1520,10 @@ msgstr "Letöltés"
 msgid "Download %s"
 msgstr "Letöltés %s"
 
+#: u_translation.rsdownloadcata
+msgid "Download catalog"
+msgstr ""
+
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
 msgstr "Ország adatok letöltése"
@@ -1499,6 +1531,10 @@ msgstr "Ország adatok letöltése"
 #: u_translation.rsdownloadfile
 msgid "Download File"
 msgstr "File letöltése"
+
+#: u_translation.rsdownloadfull
+msgid "Download full catalog"
+msgstr ""
 
 #: u_translation.rsdownloadlate
 #| msgid "Download latest orbital elements"
@@ -1518,6 +1554,14 @@ msgstr "Akarod menteni a program beállításait?"
 #| msgid "Draw a line that represent the proper motion for the next "
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Vonal rajzolása amely megmutatja a csillag sajátmozgását a következő"
+
+#: u_translation.rsdrawasdso
+msgid "Draw as DSO"
+msgstr ""
+
+#: u_translation.rsdrawasstar
+msgid "Draw as star"
+msgstr ""
 
 #: u_translation.rsdrawingtype
 #| msgid "Drawing Type"
@@ -1829,6 +1873,10 @@ msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
+msgstr ""
+
+#: u_translation.rsfieldname
+msgid "Field Name"
 msgstr ""
 
 #: u_translation.rsfieldnumber
@@ -2690,6 +2738,10 @@ msgstr "Fájl betöltés"
 msgid "Load from file"
 msgstr ""
 
+#: u_translation.rsloadingcatal
+msgid "Loading catalog list. Please wait ..."
+msgstr ""
+
 #: u_translation.rsloadmpcfile
 #| msgid "Load MPC File"
 msgid "Load MPC file"
@@ -2828,6 +2880,10 @@ msgstr "LevList"
 #| msgid "Main Bar"
 msgid "Main bar"
 msgstr "Szokásás"
+
+#: u_translation.rsmakeselectio
+msgid "Make selection of the table and column you want to your catalog"
+msgstr ""
 
 #: u_translation.rsmanualmount
 #| msgid "Manual Mount"
@@ -3181,8 +3237,16 @@ msgstr "Nincs kisbolygó adat! %s Töltsd be először az MPC táblázatot."
 msgid "No astronomical twilight today!"
 msgstr ""
 
+#: u_translation.rsnocatalogsel
+msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
+msgstr ""
+
 #: u_translation.rsnochange
 msgid "No change"
+msgstr ""
+
+#: u_translation.rsnodata
+msgid "No Data"
 msgstr ""
 
 #: u_translation.rsnomargin
@@ -4237,6 +4301,10 @@ msgstr "Forgatás jobbra"
 msgid "Rotation"
 msgstr "Forgatás"
 
+#: u_translation.rsrows
+msgid "Rows"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Szárosz"
@@ -4331,6 +4399,10 @@ msgstr "n"
 msgid "Search"
 msgstr "Keresés"
 
+#: u_translation.rssearchcatalo
+msgid "Search Catalogs"
+msgstr ""
+
 #: u_translation.rssearchfor
 msgid "Search for"
 msgstr "Keresés"
@@ -4372,6 +4444,10 @@ msgstr ""
 #| msgid "Select All"
 msgid "Select all"
 msgstr "Mindent kiválaszt"
+
+#: u_translation.rsselectcatalo
+msgid "Select Catalog"
+msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4999,6 +5075,10 @@ msgstr "Rendszer beállítások"
 msgid "Sytem status:"
 msgstr ""
 
+#: u_translation.rstable
+msgid "Table"
+msgstr ""
+
 #: u_translation.rstabledonotex
 #| msgid "%sTable %s do not exist! %sPlease correct the error and retry."
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -5073,6 +5153,10 @@ msgstr ""
 msgid "Theme"
 msgstr "Téma"
 
+#: u_translation.rsthenumberofr
+msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "%s db katalogizált objektum"
@@ -5085,6 +5169,10 @@ msgstr "%s darab objektum a mezőben."
 #| msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
 msgstr "Ez a művelet felülírja az adatbázis tartalmát %s ország esetén, az NGA és GNIS %s használatával. Minden erre az országra vonatkozó előző módosítás elvész, kivéve ha új néven lett lementve az adat. %s Valóban folytatni akarod?"
+
+#: u_translation.rsthiscatalogc
+msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5291,6 +5379,10 @@ msgstr "Visszavonás"
 msgid "Undo last change"
 msgstr "Utolsó változtatás visszavonása"
 
+#: u_translation.rsunits
+msgid "Units"
+msgstr ""
+
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
 msgstr "Universal Time"
@@ -5482,6 +5574,10 @@ msgstr "Vizuális magnitúdó"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
+msgstr ""
+
+#: u_translation.rsvocatalogbro
+msgid "VO Catalog Browser"
 msgstr ""
 
 #: u_translation.rswanttotracka
