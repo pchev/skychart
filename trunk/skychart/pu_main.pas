@@ -50,6 +50,7 @@ type
     MenuItem31: TMenuItem;
     CloseTimer: TTimer;
     ResetLanguage: TMenuItem;
+    ToolButtonVO: TToolButton;
     TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
     TelescopeSetup1: TMenuItem;
@@ -516,6 +517,9 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonswitchstarsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonVOClick(Sender: TObject);
+    procedure ToolButtonVOMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure TrackTelescope1Click(Sender: TObject);
     procedure VariableStar1Click(Sender: TObject);
     procedure View1Click(Sender: TObject);
@@ -1560,7 +1564,10 @@ if not directoryexists(slash(privatedir)+'database') then CreateDir(slash(privat
 if not directoryexists(slash(privatedir)+'database') then forcedirectories(slash(privatedir)+'database');
 if not directoryexists(slash(privatedir)+'pictures') then CreateDir(slash(privatedir)+'pictures');
 if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash(privatedir)+'pictures');
+if not directoryexists(slash(privatedir)+'vo') then CreateDir(slash(privatedir)+'vo');
+if not directoryexists(slash(privatedir)+'vo') then forcedirectories(slash(privatedir)+'vo');
 Tempdir:=slash(privatedir)+DefaultTmpDir;
+VODir:=slash(privatedir)+'vo';
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
 SatDir:=slash(privatedir)+'satellites';
@@ -3446,6 +3453,21 @@ procedure Tf_main.ToolButtonswitchstarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupDisplayPage(0);
+end;
+
+procedure Tf_main.ToolButtonVOClick(Sender: TObject);
+begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=ToolButtonVO.Down;
+     sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ToolButtonVO.Down;
+     Refresh;
+  end;
+end;
+
+procedure Tf_main.ToolButtonVOMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupCatalogPage(1);
 end;
 
 procedure Tf_main.ToolButtonswitchbackgroundMouseUp(Sender: TObject;
@@ -5755,6 +5777,7 @@ TSync.hint:=rsSync;
 ToolButtonShowStars.hint:=rsShowStars;
 ToolButtonShowNebulae.hint:=rsShowNebulae;
 ToolButtonShowLines.hint:=rsShowLines;
+ToolButtonVO.Hint:=rsShowVirtualO;
 ToolButtonShowPictures.hint:=rsShowPictures;
 ToolButtonBlink.hint:=rsBlinkingPict;
 menublinkimage.Caption:='&'+rsBlinkingPict;
@@ -6085,6 +6108,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     ShowStars1.checked:=sc.cfgsc.showstars;
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
     ShowNebulae1.checked:=sc.cfgsc.shownebulae;
+    ToolButtonVO.Down:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;

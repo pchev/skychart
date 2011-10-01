@@ -5126,3 +5126,23 @@ msgstr ""
 msgid "Yearly drift"
 msgstr ""
 
+#: u_translation:rsshowvirtualo
+msgid "Show Virtual Observatory data"
+msgstr ""
+
+#: u_translation:rsconfirmfiled
+msgid "Confirm file delete: "
+msgstr ""
+
+#: u_translation:rsvirtualobser
+msgid "Virtual Observatory Catalog"
+msgstr ""
+
+#: u_translation:rsvocatalog
+msgid "VO Catalog"
+msgstr ""
+
+#: u_translation:rsinfo2
+msgid "Info"
+msgstr ""
+

@@ -1305,6 +1305,11 @@ resourcestring
   rsSetTargetTo = 'Set target to %s';
   rsNoTargetObje = 'No target object';
   rsDrift = 'Yearly drift';
+  rsShowVirtualO = 'Show Virtual Observatory data';
+  rsConfirmFileD = 'Confirm file delete: ';
+  rsVirtualObser = 'Virtual Observatory Catalog';
+  rsVOCatalog = 'VO Catalog';
+  rsInfo2 = 'Info';
 
 
 implementation

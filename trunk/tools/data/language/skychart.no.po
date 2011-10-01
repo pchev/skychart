@@ -756,6 +756,10 @@ msgstr "Still inn"
 msgid "Configure the program"
 msgstr "Programinnstillinger"
 
+#: u_translation.rsconfirmfiled
+msgid "Confirm file delete: "
+msgstr ""
+
 #: u_translation.rsconnect
 msgid "Connect"
 msgstr "Koble til"
@@ -2183,6 +2187,10 @@ msgstr "i enhet"
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Informasjon"
+
+#: u_translation.rsinfo2
+msgid "Info"
+msgstr ""
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -4270,6 +4278,10 @@ msgstr "Vis stjerner"
 msgid "Show this picture"
 msgstr "Vis dette bildet"
 
+#: u_translation.rsshowvirtualo
+msgid "Show Virtual Observatory data"
+msgstr ""
+
 #: u_translation.rssideral
 msgid "Sidereal"
 msgstr "Siderisk"
@@ -5018,6 +5030,10 @@ msgstr "Vis horisont"
 msgid "Virtual HandPad for Scope.exe "
 msgstr ""
 
+#: u_translation.rsvirtualobser
+msgid "Virtual Observatory Catalog"
+msgstr ""
+
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "Sikt for observasjonsstedet"
@@ -5025,6 +5041,10 @@ msgstr "Sikt for observasjonsstedet"
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
 msgstr "Visuell magnitude"
+
+#: u_translation.rsvocatalog
+msgid "VO Catalog"
+msgstr ""
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"

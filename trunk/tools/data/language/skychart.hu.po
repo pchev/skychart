@@ -826,6 +826,10 @@ msgstr ""
 msgid "Configure the program"
 msgstr "Program beállításai"
 
+#: u_translation.rsconfirmfiled
+msgid "Confirm file delete: "
+msgstr ""
+
 #: u_translation.rsconnect
 msgid "Connect"
 msgstr ""
@@ -2383,6 +2387,10 @@ msgstr ""
 #: u_translation.rsinfo
 msgid "Information"
 msgstr "Információ"
+
+#: u_translation.rsinfo2
+msgid "Info"
+msgstr ""
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -4640,6 +4648,10 @@ msgstr "Csillagok mutatása"
 msgid "Show this picture"
 msgstr "Mutatsd a képet"
 
+#: u_translation.rsshowvirtualo
+msgid "Show Virtual Observatory data"
+msgstr ""
+
 #: u_translation.rssideral
 #| msgid "Sideral"
 msgid "Sidereal"
@@ -5454,6 +5466,10 @@ msgstr "Égtályra ugrás"
 msgid "Virtual HandPad for Scope.exe "
 msgstr ""
 
+#: u_translation.rsvirtualobser
+msgid "Virtual Observatory Catalog"
+msgstr ""
+
 #: u_translation.rsvisibilityfo
 #| msgid "Visibility for observatory"
 msgid "Visibility for your observatory"
@@ -5463,6 +5479,10 @@ msgstr "Láthatósága a megfigyelés helyéről"
 #| msgid "Visual Magnitude"
 msgid "Visual magnitude"
 msgstr "Vizuális magnitúdó"
+
+#: u_translation.rsvocatalog
+msgid "VO Catalog"
+msgstr ""
 
 #: u_translation.rswanttotracka
 #| msgid "Want to track an object before it rise ?"
