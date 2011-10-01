@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_voconstant, httpsend, LibXmlParser, LibXmlComps,
+uses u_voconstant, httpsend, blcksock, LibXmlParser, LibXmlComps,
      Classes, SysUtils;
 
 type
@@ -51,7 +51,7 @@ type
     votable,table,description,definition,resource,field,data,tabledata,tr,td : boolean;
     Fequinox,Fepoch,Fsystem,Fcatalog : String;
     Fequ,Fepo,Fsys: string;
-    FSelectCoord,FAllFields: boolean;
+    FSelectCoord: boolean;
     fieldnum,currentfield: integer;
     FGetDataRow, FColsDef: TNotifyEvent;
     procedure XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
@@ -62,10 +62,15 @@ type
     procedure LoadData;
     procedure ClearData;
   protected
+    Fproxy : boolean;
+    Fproxyhost,Fproxyport,Fproxyuser,Fproxypass : string;
+    Sockreadcount, LastRead: integer;
+    FDownloadFeedback: TDownloadFeedback;
+    procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
-    procedure GetData(Table,objtype:string);
+    procedure GetData(Table,objtype:string; preview: boolean=false);
     property Columns: TStringArray read FColumns;
     property Cols: Integer read Fncol;
     property DataRow: TStringArray read FData;
@@ -85,10 +90,16 @@ type
     property Ra: double read Fra write Fra;
     property Dec: double read Fde write Fde;
     property FOV: double read Ffov write Ffov;
-    property SelectAllFields: boolean read FAllFields write FAllFields;
     property MaxData: integer read Fmax write Fmax;
     property onColsDef: TNotifyEvent read FColsDef write FColsDef;
     property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
+    property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
+    property onDownloadFeedback: TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
+    property Proxy : boolean read Fproxy  write Fproxy ;
+    property HttpProxyhost : string read Fproxyhost  write Fproxyhost ;
+    property HttpProxyPort : string read Fproxyport  write Fproxyport ;
+    property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
+    property HttpProxyPass : string read Fproxypass  write Fproxypass ;
   end;
 
 implementation
@@ -149,7 +160,7 @@ begin
    XmlScanner.Execute;
 end;
 
-procedure TVO_TableData.GetData(Table,objtype:string);
+procedure TVO_TableData.GetData(Table,objtype:string; preview: boolean=false);
 var url:string;
     i: integer;
 const f6='0.000000';
@@ -158,7 +169,8 @@ begin
 FTableName:=trim(Table);
 Fcatalog:=FTableName;
 url:=Fbaseurl;
-Fvo_data:='vo_table_'+trim(objtype)+'_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
+if preview then Fvo_data:='vo_preview.xml'
+   else Fvo_data:='vo_table_'+trim(objtype)+'_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
 case Fvo_type of
   VizierMeta: begin
                 url:=url+'-source='+FTableName;
@@ -166,13 +178,10 @@ case Fvo_type of
                    url:=url+'&-c='+formatfloat(f6,(15*Fra))+'%20'+formatfloat(s6,Fde)+'&-c.r='+inttostr(round(60*Ffov))
                 else
                    url:=url+'&recno=>='+inttostr(FFirst);
-                {if FAllFields then
-                   url:=url+'&-out.all'
-                else}
                    for i:=0 to FFieldList.Count-1 do begin
                       url:=url+'&-out='+FFieldList[i];
                    end;
-                if FSelectCoord then url:=url+'&-out=_RAJ2000&-out=_DEJ2000';
+                url:=url+'&-out=_RAJ2000&-out=_DEJ2000';
                 url:=url+'&-oc.form=dec&-out.max='+inttostr(Fmax)+'&-out.form=XML-VOTable(XSL)';
               end;
   ConeSearch: begin
@@ -180,17 +189,54 @@ case Fvo_type of
               end;
 end;
 http.Clear;
+if Fproxy then begin
+   http.ProxyHost:=Fproxyhost;
+   http.ProxyPort:=Fproxyport;
+   http.ProxyUser :=Fproxyuser;
+   http.ProxyPass :=Fproxypass;
+end else begin
+  http.ProxyHost:='';
+  http.ProxyPort:='';
+  http.ProxyUser :='';
+  http.ProxyPass :='';
+end;
 http.Timeout:=60000;
+http.Sock.OnStatus:=httpstatus;
+Sockreadcount:=0;
 if http.HTTPMethod('GET', url)
    and ((http.ResultCode=200)
    or (http.ResultCode=0))
      then begin
        http.Document.SaveToFile(slash(Fvopath)+Fvo_data);
        FLastErr:='';
-       LoadData;
+       if Assigned(FDownloadFeedback) then FDownloadFeedback('Download completed.');
+       if preview then LoadData;
      end
-     else FLastErr:='Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+     else begin
+        FLastErr:='Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+        if Assigned(FDownloadFeedback) then FDownloadFeedback(FLastErr);
+     end;
 http.Clear;
+end;
+
+procedure TVO_TableData.httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+var txt: string;
+begin
+txt:='';
+case reason of
+  HR_ResolvingBegin : txt:='Resolving '+value;
+  HR_Connect        : txt:='Connect '+value;
+  HR_Accept         : txt:='Accept '+value;
+  HR_ReadCount      : begin
+                      Sockreadcount:=Sockreadcount+strtoint(value);
+                      if (Sockreadcount-LastRead)>100000 then begin
+                        txt:='Read data: '+inttostr(Sockreadcount div 1024)+' KB';
+                        LastRead:=Sockreadcount;
+                      end;
+                      end;
+  else txt:='';
+end;
+if (txt>'')and Assigned(FDownloadFeedback) then FDownloadFeedback(txt);
 end;
 
 procedure TVO_TableData.XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);

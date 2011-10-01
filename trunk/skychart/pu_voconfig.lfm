@@ -1,7 +1,7 @@
 object f_voconfig: Tf_voconfig
-  Left = 348
+  Left = 395
   Height = 516
-  Top = 112
+  Top = 127
   Width = 783
   HorzScrollBar.Page = 713
   VertScrollBar.Page = 487
@@ -20,25 +20,26 @@ object f_voconfig: Tf_voconfig
     Width = 783
     ActivePage = TabCat
     Align = alClient
+    ShowTabs = False
     TabIndex = 0
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
-      ClientHeight = 480
+      ClientHeight = 508
       ClientWidth = 775
       object Panel1: TPanel
         Left = 0
         Height = 66
-        Top = 414
+        Top = 442
         Width = 775
         Align = alBottom
         ClientHeight = 66
         ClientWidth = 775
         TabOrder = 0
         object msg: TLabel
-          Left = 444
+          Left = 260
           Height = 18
-          Top = 36
+          Top = 7
           Width = 305
           AutoSize = False
           Color = clInfoBk
@@ -49,50 +50,15 @@ object f_voconfig: Tf_voconfig
           ParentFont = False
           Transparent = False
         end
-        object Label1: TLabel
-          Left = 276
-          Height = 15
-          Top = 10
-          Width = 76
-          Caption = 'Search in list'
-          ParentColor = False
-        end
         object Button11: TButton
           Left = 8
           Height = 25
           Top = 6
-          Width = 108
+          Width = 124
           BorderSpacing.InnerBorder = 4
           Caption = 'Search Catalogs'
           OnClick = SearchCatalog
           TabOrder = 0
-        end
-        object Edit1: TEdit
-          Left = 356
-          Height = 22
-          Top = 6
-          Width = 77
-          TabOrder = 1
-        end
-        object ButtonFind: TButton
-          Left = 436
-          Height = 25
-          Top = 6
-          Width = 49
-          BorderSpacing.InnerBorder = 4
-          Caption = 'First'
-          OnClick = ButtonFindClick
-          TabOrder = 2
-        end
-        object ButtonNext: TButton
-          Left = 484
-          Height = 25
-          Top = 6
-          Width = 49
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Next'
-          OnClick = ButtonNextClick
-          TabOrder = 3
         end
         object Button12: TButton
           Left = 596
@@ -102,39 +68,38 @@ object f_voconfig: Tf_voconfig
           BorderSpacing.InnerBorder = 4
           Caption = 'Select Catalog'
           OnClick = SelectCatalog
-          TabOrder = 4
-        end
-        object OnlyCoord: TCheckBox
-          Left = 244
-          Height = 26
-          Top = 32
-          Width = 183
-          Caption = 'Only table with coordinates'
-          Checked = True
-          State = cbChecked
-          TabOrder = 5
+          TabOrder = 1
         end
         object ServerList: TComboBox
-          Left = 8
+          Left = 140
           Height = 26
-          Top = 32
-          Width = 225
+          Top = 34
+          Width = 425
           ItemHeight = 0
+          OnChange = ServerListChange
           Style = csDropDownList
-          TabOrder = 6
+          TabOrder = 2
         end
         object CatFilter: TEdit
-          Left = 129
+          Left = 140
           Height = 22
-          Top = 6
+          Top = 7
           Width = 104
-          TabOrder = 7
+          TabOrder = 3
           Text = 'NGC'
+        end
+        object Label1: TLabel
+          Left = 8
+          Height = 15
+          Top = 42
+          Width = 101
+          Caption = 'Select mirror site'
+          ParentColor = False
         end
       end
       object CatList: TStringGrid
         Left = 0
-        Height = 414
+        Height = 442
         Top = 0
         Width = 775
         Align = alClient
@@ -155,26 +120,80 @@ object f_voconfig: Tf_voconfig
     end
     object TabDetail: TTabSheet
       Caption = 'Catalog Detail'
-      ClientHeight = 480
+      ClientHeight = 508
       ClientWidth = 775
       ImageIndex = 1
       object PageControl2: TPageControl
         Left = 0
-        Height = 480
-        Top = 0
+        Height = 443
+        Top = 31
         Width = 775
         Align = alClient
         TabOrder = 0
       end
+      object Panel3: TPanel
+        Left = 0
+        Height = 31
+        Top = 0
+        Width = 775
+        Align = alTop
+        ClientHeight = 31
+        ClientWidth = 775
+        TabOrder = 1
+        object Label6: TLabel
+          Left = 9
+          Height = 15
+          Top = 9
+          Width = 368
+          Caption = 'Make selection of the table and column you want to your catalog'
+          ParentColor = False
+        end
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 34
+        Top = 474
+        Width = 775
+        Align = alBottom
+        ClientHeight = 34
+        ClientWidth = 775
+        TabOrder = 2
+        object ButtonClose: TButton
+          Left = 676
+          Height = 25
+          Top = 4
+          Width = 75
+          Caption = 'Close'
+          OnClick = ButtonCloseClick
+          TabOrder = 0
+        end
+        object ButtonHelp: TButton
+          Left = 561
+          Height = 25
+          Top = 4
+          Width = 75
+          Caption = 'Help'
+          OnClick = ButtonHelpClick
+          TabOrder = 1
+        end
+        object LabelStatus: TLabel
+          Left = 12
+          Height = 15
+          Top = 10
+          Width = 68
+          Caption = 'LabelStatus'
+          ParentColor = False
+        end
+      end
     end
     object TabData: TTabSheet
       Caption = 'Catalog Data'
-      ClientHeight = 480
+      ClientHeight = 508
       ClientWidth = 775
       ImageIndex = 2
       object DataGrid: TStringGrid
         Left = 0
-        Height = 439
+        Height = 467
         Top = 0
         Width = 775
         Align = alClient
@@ -195,91 +214,36 @@ object f_voconfig: Tf_voconfig
       object Panel2: TPanel
         Left = 0
         Height = 41
-        Top = 439
+        Top = 467
         Width = 775
         Align = alBottom
         ClientHeight = 41
         ClientWidth = 775
         TabOrder = 1
-        object Label2: TLabel
-          Left = 128
-          Height = 15
-          Top = 12
-          Width = 35
-          Caption = 'Epoch'
-          ParentColor = False
-        end
-        object Label3: TLabel
-          Left = 268
-          Height = 15
-          Top = 12
-          Width = 44
-          Caption = 'System'
-          ParentColor = False
-        end
-        object Label4: TLabel
-          Left = 428
-          Height = 15
-          Top = 12
-          Width = 45
-          Caption = 'Equinox'
-          ParentColor = False
-        end
-        object ep: TEdit
-          Left = 168
+        object tn: TEdit
+          Left = 8
           Height = 22
           Top = 8
-          Width = 73
+          Width = 252
           Color = clBtnFace
           Enabled = False
           ReadOnly = True
           TabOrder = 0
         end
-        object sys: TEdit
-          Left = 320
-          Height = 22
-          Top = 8
-          Width = 73
-          Color = clBtnFace
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object eq: TEdit
-          Left = 480
-          Height = 22
-          Top = 8
-          Width = 73
-          Color = clBtnFace
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 2
-        end
-        object tn: TEdit
-          Left = 8
-          Height = 22
-          Top = 8
-          Width = 105
-          Color = clBtnFace
-          Enabled = False
-          ReadOnly = True
-          TabOrder = 3
-        end
-        object Button1: TButton
-          Left = 584
+        object ButtonBack: TButton
+          Left = 631
           Height = 25
-          Top = 6
-          Width = 81
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Save to file'
-          OnClick = ButtonSave
-          TabOrder = 4
+          Top = 5
+          Width = 93
+          Caption = '< Back'
+          OnClick = ButtonBackClick
+          TabOrder = 1
         end
       end
     end
     object TabRegistry: TTabSheet
       Caption = 'Registry'
-      ClientHeight = 480
+      ClientHeight = 508
       ClientWidth = 775
       ImageIndex = 3
       TabVisible = False
@@ -351,7 +315,6 @@ object f_voconfig: Tf_voconfig
     Ra = 0
     Dec = 0
     FOV = 0.1
-    SelectAllFields = False
     MaxData = 50
     left = 608
   end

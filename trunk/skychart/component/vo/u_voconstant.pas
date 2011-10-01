@@ -38,8 +38,12 @@ type
   Tvo_source=(Vizier,NVO);
   Tvo_type=(VizierMeta,ConeSearch);
 
+type
+  TDownloadFeedback = procedure (txt:string) of object;
+
   const
   tab=#09;
+  vo_maxrecord = 50000;
   vo_list: array [Tvo_source] of string = ('vo_vizier_list.xml','');
   vo_types: array [Tvo_source] of Tvo_type=(VizierMeta,ConeSearch);
   vo_meta = 'vo_meta.xml';

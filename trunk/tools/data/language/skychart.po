@@ -5146,3 +5146,99 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
+#: u_translation:rscatalogsavai
+msgid "%s Catalogs availables."
+msgstr ""
+
+#: u_translation:rsvocatalogbro
+msgid "VO Catalog Browser"
+msgstr ""
+
+#: u_translation:rssearchcatalo
+msgid "Search Catalogs"
+msgstr ""
+
+#: u_translation:rsselectcatalo
+msgid "Select Catalog"
+msgstr ""
+
+#: u_translation:rscannotconnec
+msgid "Cannot connect to server. %s"
+msgstr ""
+
+#: u_translation:rsfieldname
+msgid "Field Name"
+msgstr ""
+
+#: u_translation:rsdatatype
+msgid "Data Type"
+msgstr ""
+
+#: u_translation:rsunits
+msgid "Units"
+msgstr ""
+
+#: u_translation:rsnocatalogsel
+msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
+msgstr ""
+
+#: u_translation:rsnodata
+msgid "No Data"
+msgstr ""
+
+#: u_translation:rsloadingcatal
+msgid "Loading catalog list. Please wait ..."
+msgstr ""
+
+#: u_translation:rsthiscatalogc
+msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
+msgstr ""
+
+#: u_translation:rsthenumberofr
+msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
+msgstr ""
+
+#: u_translation:rsmakeselectio
+msgid "Make selection of the table and column you want to your catalog"
+msgstr ""
+
+#: u_translation:rstable
+msgid "Table"
+msgstr ""
+
+#: u_translation:rsrows
+msgid "Rows"
+msgstr ""
+
+#: u_translation:rsdefaultmagni
+msgid "Default magnitude"
+msgstr ""
+
+#: u_translation:rsdefaultsizea
+msgid "Default size (arcmin)"
+msgstr ""
+
+#: u_translation:rsdownloadfull
+msgid "Download full catalog"
+msgstr ""
+
+#: u_translation:rsback
+msgid "Back"
+msgstr ""
+
+#: u_translation:rsdownloadcata
+msgid "Download catalog"
+msgstr ""
+
+#: u_translation:rscannotdraw
+msgid "Cannot draw"
+msgstr ""
+
+#: u_translation:rsdrawasstar
+msgid "Draw as star"
+msgstr ""
+
+#: u_translation:rsdrawasdso
+msgid "Draw as DSO"
+msgstr ""
+
