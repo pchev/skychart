@@ -83,6 +83,7 @@ type
     { Private declarations }
     Fvopath,catname : string;
     Fvourlnum: integer;
+    FReloadFeedback: TDownloadFeedback;
     procedure SetServerList;
     procedure FillCatList;
     procedure ClearCatalog;
@@ -101,11 +102,13 @@ type
     procedure Setvourlnum(value: integer);
     procedure DownloadFeedback1(txt:string);
     procedure DownloadFeedback2(txt:string);
+    procedure DownloadFeedback3(txt:string);
   public
     { Public declarations }
     ra,dec,fov: double;
     OnlyCoord: boolean;
     procedure Setlang;
+    procedure ReloadVO(fn: string);
     property vopath: string read Fvopath write Setvopath;
     property Proxy: boolean  write SetProxy;
     property ProxyHost: string  write SetProxyHost;
@@ -113,6 +116,7 @@ type
     property ProxyUser: string  write SetProxyUser;
     property ProxyPass: string  write SetProxyPass;
     property vourlnum: integer read Fvourlnum write Setvourlnum;
+    property onReloadFeedback: TDownloadFeedback read FReloadFeedback write FReloadFeedback;
   end;
 
 var
@@ -444,12 +448,20 @@ if sender is Tf_vodetail then
        config:=TXMLConfig.Create(self);
        config.Filename:=extfn;
        config.SetValue('name',catname);
+       config.SetValue('table',tn.Text);
        config.SetValue('objtype',objtype);
        config.SetValue('active',true);
+       config.SetValue('fullcat',not VO_TableData1.SelectCoord);
        config.SetValue('drawtype',14);
        config.SetValue('drawcolor',$FF0000);
        config.SetValue('defsize',DefSize.Value);
        config.SetValue('defmag',DefMag.Value);
+       config.SetValue('baseurl',VO_TableData1.BaseUrl);
+       config.SetValue('votype',ord(VO_Detail1.vo_type));
+       config.SetValue('fieldcount',VO_TableData1.FieldList.Count);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+           config.SetValue('field_'+inttostr(i),VO_TableData1.FieldList[i]);
+
        config.Flush;
        config.free;
    end;
@@ -458,10 +470,43 @@ screen.Cursor:=crDefault;
 end;
 end;
 
+procedure Tf_voconfig.ReloadVO(fn: string);
+var coordselection, objtype, extfn, baseurl,table: string;
+    i, fieldcount: integer;
+    votype:Tvo_type;
+    config: TXMLConfig;
+begin
+try
+   extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(fn,'.config');
+   config:=TXMLConfig.Create(self);
+   config.Filename:=extfn;
+   catname:=config.GetValue('name','');
+   table:=config.GetValue('table','');
+   objtype:=config.GetValue('objtype','');
+   baseurl:=config.GetValue('baseurl','');
+   votype:=Tvo_type(config.GetValue('votype',0));
+   fieldcount:=config.GetValue('fieldcount',0);
+   VO_TableData1.FieldList.Clear;
+   for i:=0 to fieldcount do
+       VO_TableData1.FieldList.Add(config.GetValue('field_'+inttostr(i),''));
+   config.free;
+   VO_TableData1.vo_type:=votype;
+   VO_TableData1.BaseUrl:=baseurl;
+   VO_TableData1.SelectCoord:=true;
+   VO_TableData1.ra:=rad2deg*ra/15;
+   VO_TableData1.dec:=rad2deg*dec;
+   VO_TableData1.fov:=rad2deg*fov;
+   VO_TableData1.FirstRec:=1;
+   VO_TableData1.maxdata:=vo_maxrecord;
+   VO_TableData1.onDownloadFeedback:=DownloadFeedback3;
+   VO_TableData1.GetData(table,objtype,false);
+finally
+end;
+end;
+
 procedure Tf_voconfig.PreviewData(Sender: TObject);
 var coordselection, objtype, extfn: string;
     i: integer;
-    config: TXMLConfig;
 const previewmax=50;
 begin
 screen.Cursor:=crHourGlass;
@@ -567,6 +612,11 @@ begin
   LabelStatus.Caption:=txt;
   LabelStatus.Invalidate;
   Application.ProcessMessages;
+end;
+
+procedure Tf_voconfig.DownloadFeedback3(txt:string);
+begin
+  if Assigned(FReloadFeedback) then FReloadFeedback(txt);
 end;
 
 //////////////  Registry selection not used at the moment ////////////////////

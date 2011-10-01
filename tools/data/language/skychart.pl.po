@@ -91,6 +91,10 @@ msgstr ""
 msgid "Add label"
 msgstr "Dodaj etykietę"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Dodaj alternatywną nazwę do indeksu."
@@ -3852,6 +3856,10 @@ msgstr ""
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Informacje o wydaniu"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"

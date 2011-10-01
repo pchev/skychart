@@ -93,6 +93,10 @@ msgstr ""
 msgid "Add label"
 msgstr "Címke hozzáadása"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 #| msgid "Add the alternate names to the index"
 msgid "Add the alternative names to the index"
@@ -4161,6 +4165,10 @@ msgstr ""
 #| msgid "Release Notes"
 msgid "Release notes"
 msgstr "Verzió információk"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 #| msgid "Remove All Circles"

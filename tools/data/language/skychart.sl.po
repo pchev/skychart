@@ -88,6 +88,10 @@ msgstr ""
 msgid "Add label"
 msgstr "Dodaj oznako"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Dodaj nadomestno ime za indeks"
@@ -3847,6 +3851,10 @@ msgstr ""
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Opombe o izdaji"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"

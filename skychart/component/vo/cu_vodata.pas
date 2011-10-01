@@ -170,7 +170,7 @@ FTableName:=trim(Table);
 Fcatalog:=FTableName;
 url:=Fbaseurl;
 if preview then Fvo_data:='vo_preview.xml'
-   else Fvo_data:='vo_table_'+trim(objtype)+'_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
+   else Fvo_data:='vo_'+trim(objtype)+'_'+StringReplace(FTableName,'/','_',[rfReplaceAll])+'.xml';
 case Fvo_type of
   VizierMeta: begin
                 url:=url+'-source='+FTableName;

@@ -99,6 +99,10 @@ msgstr ""
 msgid "Add label"
 msgstr "Bæta við tákni"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 #, fuzzy
 #| msgid "Add the alternate names to the index"
@@ -4494,6 +4498,10 @@ msgstr ""
 #| msgid "Release Notes"
 msgid "Release notes"
 msgstr "Um útgáfuna"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 #, fuzzy

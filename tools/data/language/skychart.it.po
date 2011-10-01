@@ -89,6 +89,10 @@ msgstr "Impostazioni ffmpeg"
 msgid "Add label"
 msgstr "Aggiungi Etichetta"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Aggiungi i nomi alternativi all'indice"
@@ -3847,6 +3851,10 @@ msgstr "Intervallo di aggiornamento"
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Note di versione"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"

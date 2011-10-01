@@ -88,6 +88,10 @@ msgstr "Tilleggsalternativer for ffmpeg"
 msgid "Add label"
 msgstr "Legg til påskrift"
 
+#: u_translation.rsaddorupdate
+msgid "Add or update"
+msgstr ""
+
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Legg til de alternative navnene i indeksen"
@@ -3845,6 +3849,10 @@ msgstr "Oppdateringsrate"
 #: u_translation.rsreleasenotes
 msgid "Release notes"
 msgstr "Utgivelsesnotater"
+
+#: u_translation.rsreload
+msgid "Reload"
+msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
