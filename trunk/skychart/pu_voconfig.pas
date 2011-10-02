@@ -146,8 +146,7 @@ Button12.Caption:=rsSelectCatalo;
 ButtonBack.Caption:='< '+rsBack;
 CatList.Cells[0, 0]:=rsName;
 CatList.Cells[1, 0]:=rsDescription;
-CatList.Cells[2, 0]:=rsInfo2;
-CatList.Cells[3, 0]:=rsURL;
+CatList.Cells[2, 0]:=rsURL;
 end;
 
 procedure Tf_voconfig.Setvopath(value:string);
@@ -207,8 +206,7 @@ begin
   OnlyCoord:=true;
   CatList.ColWidths[0]:=100;
   CatList.ColWidths[1]:=400;
-  CatList.ColWidths[2]:=150;
-  CatList.ColWidths[3]:=400;
+  CatList.ColWidths[2]:=400;
   PageControl1.ActivePage:=TabCat;
   LabelStatus.Caption:='';
   Setlang;
@@ -238,10 +236,11 @@ for i:=0 to VO_Catalogs1.CatList.Count-1 do begin
   CatList.Cells[1,i+1]:=copy(buf,1,p-1);
   delete(buf,1,p);
   p:=pos(tab,buf);
-  CatList.Cells[2,i+1]:=copy(buf,1,p-1);
+  //CatList.Cells[2,i+1]:=copy(buf,1,p-1);
   delete(buf,1,p);
-  CatList.Cells[3,i+1]:=buf;
+  CatList.Cells[2,i+1]:=buf;
 end;
+CatList.SortColRow(true,0);
 msg.Caption:=Format(rsCatalogsAvai, [inttostr(CatList.RowCount-1)]);
 end;
 
@@ -260,7 +259,7 @@ var buf:string;
 begin
 screen.Cursor:=crHourGlass;
 buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
-buf:=buf+'-source='+trim(CatFilter.Text)+'&-meta&-meta.max=1000';
+buf:=buf+'-words='+trim(CatFilter.Text)+'&-meta&-meta.max=1000';
 VO_Catalogs1.ListUrl:=buf;
 VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
 try

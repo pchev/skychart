@@ -285,9 +285,9 @@ if Fvo_source=Vizier then
 if votable and resource and description then begin
    catalog_desc:=Content;
 end
-else if votable and resource and info then begin
+{else if votable and resource and info then begin
    catalog_info:=Content;
-end;
+end};
 // NVO
 if Fvo_source=NVO then
 if ArrayOfResource and resource and description then begin
@@ -302,9 +302,9 @@ end
 {else if ArrayOfResource and resource and surl and (catalog_url='') then begin
    catalog_url:=Content;
 end}
-else if ArrayOfResource and resource and info then begin
+{else if ArrayOfResource and resource and info then begin
    catalog_info:=Content;
-end;
+end};
 end;
 
 procedure TVO_Catalogs.XmlEndTag(Sender: TObject; TagName: String);
