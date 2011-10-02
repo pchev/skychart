@@ -18,10 +18,10 @@ object f_voconfig: Tf_voconfig
     Height = 516
     Top = 0
     Width = 783
-    ActivePage = TabData
+    ActivePage = TabCat
     Align = alClient
     ShowTabs = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
