@@ -148,6 +148,7 @@ const cdcversion = 'Version 3.5-svn';
       f5='0.00000';
       f6='0.000000';
       f13='0.0000000000000';
+      s6='+0.000000;-0.000000;+0.000000';
       dateiso='yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
       labspacing=10;
       numlabtype=8;

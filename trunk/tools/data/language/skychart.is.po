@@ -255,6 +255,10 @@ msgstr "Virkja breytingu fyrir öll kort"
 msgid "Argument of perihelion"
 msgstr "Stöðuhorn sólnándar"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 #, fuzzy
 #| msgid "Artificial Satellites"
@@ -522,6 +526,10 @@ msgstr "Byggja skrá"
 #: u_translation.rsby
 msgid "by"
 msgstr "með"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4811,6 +4819,10 @@ msgstr "Velja allt"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

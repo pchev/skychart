@@ -221,6 +221,10 @@ msgstr "Применить изменения ко всем картам"
 msgid "Argument of perihelion"
 msgstr "Аргумент перигелия"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "ИСЗ"
@@ -448,6 +452,10 @@ msgstr "Создать каталог"
 #: u_translation.rsby
 msgid "by"
 msgstr "через"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4119,6 +4127,10 @@ msgstr "Выбрать всё"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

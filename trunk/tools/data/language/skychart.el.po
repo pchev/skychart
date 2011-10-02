@@ -222,6 +222,10 @@ msgstr "Εφαρμογή αλλαγών σε όλους τους χάρτες"
 msgid "Argument of perihelion"
 msgstr "Όρισμα του περιηλίου"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 #| msgid "Artificial Satellites"
 msgid "Artificial satellites"
@@ -455,6 +459,10 @@ msgstr "Δημιουργία καταλόγου"
 #: u_translation.rsby
 msgid "by"
 msgstr "έως"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4190,6 +4198,10 @@ msgstr "Επιλογή όλων"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

@@ -3418,7 +3418,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    ConfigCatalog.cplot.Assign(sc.plot.cfgplot);
    ConfigCatalog.ra:=sc.cfgsc.racentre;
    ConfigCatalog.dec:=sc.cfgsc.decentre;
-   ConfigCatalog.fov:=sc.cfgsc.fov;
+   ConfigCatalog.fov:=sc.cfgsc.fov*0.75;
+   Precession(sc.cfgsc.JDChart,jd2000,ConfigCatalog.ra,ConfigCatalog.dec);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
