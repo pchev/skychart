@@ -28,7 +28,8 @@ var
    drawtype: integer;
    drawcolor: integer;
    flabels: Tlabellst;
-   unitpmra, unitpmdec: double;
+   unit_pmra, unit_pmdec, unit_size: double;
+   field_pmra, field_pmdec, field_size : integer;
    catname:string;
    VOcatlist : TStringList;
    VOFields: TStringList;
@@ -42,6 +43,51 @@ implementation
 procedure SetVOCatpath(path:string);
 begin
 VOCatpath:=noslash(path);
+end;
+
+function pmunits(units: string): double;
+var e,k,v:string;
+    u: double;
+    i: integer;
+begin
+  i:=pos('/',units);
+  k:=copy(units,1,i-1);
+  v:=copy(units,i+1,99);
+  if copy(k,1,2)='10' then begin
+     e:=Copy(k,3,2);
+     k:=Copy(k,5,99);
+     u:=StrToFloatDef(e,-99999);
+     if u<>-99999 then u:=power(10,(u))
+        else u:=0;
+  end
+  else u:=1;
+  if k='mas' then u:=u/3600/1000
+  else if k='arcsec' then u:=u/3600
+  else if k='arcmin' then u:=u/60
+  else if k<>'deg' then u:=0;
+  if (v<>'a')and(v<>'yr') then u:=0;
+  result:=deg2rad*u;
+end;
+
+function angleunits(units: string): double;
+var e,k,v:string;
+    u: double;
+    i: integer;
+begin
+  k:=trim(units);
+  if copy(k,1,2)='10' then begin
+     e:=Copy(k,3,2);
+     k:=Copy(k,5,99);
+     u:=StrToFloatDef(e,-99999);
+     if u<>-99999 then u:=power(10,(u))
+        else u:=0;
+  end
+  else u:=1;
+  if k='mas' then u:=u/3600/1000
+  else if k='arcsec' then u:=u/3600
+  else if k='arcmin' then u:=u/60
+  else if k<>'deg' then u:=0;
+  result:=deg2rad*u;
 end;
 
 Procedure InitRec;
@@ -66,11 +112,11 @@ begin
   emptyrec.options.LongName:=VOname;
   case emptyrec.options.rectype of
   rtstar : begin
-           emptyrec.star.magv:=-99;
+           emptyrec.star.magv:=99;
            emptyrec.star.valid[vsId]:=true;
            emptyrec.star.valid[vsComment]:=true;
-           if unitpmra<>0 then emptyrec.star.valid[vsPmra]:=true;
-           if unitpmdec<>0 then emptyrec.star.valid[vsPmdec]:=true;
+           if field_pmra>=0 then emptyrec.star.valid[vsPmra]:=true;
+           if field_pmdec>=0 then emptyrec.star.valid[vsPmdec]:=true;
       end;
   rtneb : begin
           emptyrec.neb.valid[vnId]:=true;
@@ -106,9 +152,10 @@ var buf,e,k,v:string;
     config: TXMLConfig;
 begin
 result:=false;
+VODocOK:=false;
 fillchar(EmptyRec,sizeof(GcatRec),0);
-unitpmra:=0;
-unitpmdec:=0;
+unit_pmra:=0;unit_pmdec:=0;
+field_pmra:=-1; field_pmdec:=-1;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 config.Filename:=deffile;
@@ -120,7 +167,7 @@ drawcolor:=config.GetValue('drawcolor',$FF0000);
 DefSize:=config.GetValue('defsize',1);
 Defmag:=config.GetValue('defmag',10);
 config.free;
-if FileExists(catfile) then begin
+if active and FileExists(catfile) then begin
 try
 ReadXMLFile( VODoc, catfile);
 VODocOK:=true;
@@ -145,34 +192,27 @@ while Assigned(VoNode) do begin
     if fieldnode<>nil then fielddata.datatype:=fieldnode.NodeValue;
     fieldnode:=VoNode.Attributes.GetNamedItem('unit');
     if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
-    VOFields.AddObject(k,fielddata);
-    if pos('pos.pm',fielddata.ucd)>0 then begin
-      i:=pos('/',fielddata.units);
-      k:=copy(fielddata.units,1,i-1);
-      v:=copy(fielddata.units,i+1,99);
-      if copy(k,1,2)='10' then begin
-         e:=Copy(k,3,2);
-         k:=Copy(k,5,99);
-         u:=StrToFloatDef(e,-99999);
-         if u<>-99999 then u:=power(10,(u))
-            else u:=0;
-      end
-      else u:=1;
-      if k='mas' then u:=u/3600/1000
-      else if k='arcsec' then u:=u/3600
-      else if k='arcmin' then u:=u/60
-      else if k<>'deg' then u:=0;
-      if (v<>'a')and(v<>'yr') then u:=0;
-      if pos('pos.eq.ra',fielddata.ucd)>0 then begin
-          unitpmra:=deg2rad*u;
+    j:=VOFields.AddObject(k,fielddata);
+    if pos('pos.pm',fielddata.ucd)=1 then begin
+      u:=pmunits(fielddata.units);
+      if (u>0) and (pos('pos.eq.ra',fielddata.ucd)>0) then begin
+          field_pmra:=j;
+          unit_pmra:=u;
           flabels[lOffset+vsPmra]:=fielddata.name;
        end
-       else if pos('pos.eq.dec',fielddata.ucd)>0 then begin
-          unitpmdec:=deg2rad*u;
+       else if (u>0) and (pos('pos.eq.dec',fielddata.ucd)>0) then begin
+          field_pmdec:=j;
+          unit_pmdec:=u;
           flabels[lOffset+vsPmdec]:=fielddata.name;
        end;
     end;
-
+    if pos('phys.angSize',fielddata.ucd)=1 then begin
+      u:=angleunits(fielddata.units);
+      if (u>0) then begin
+         field_size:=j;
+         unit_size:=u;
+      end;
+    end;
   end;
   if buf='DATA' then break;
   VoNode:=VoNode.NextSibling;
@@ -220,14 +260,14 @@ NextVOCat(ok);
 end;
 
 Procedure ReadVOCat(var lin : GCatrec; var ok : boolean);
-var row: TDOMNode;
+var cell: TDOMNode;
     buf: string;
     i: integer;
 begin
 ok:=false;
 lin:=emptyrec;
 if Assigned(VoNode) then begin
-  row:=VoNode.FirstChild;
+  cell:=VoNode.FirstChild;
   i:=0;
   case catversion of
   rtStar: begin
@@ -237,36 +277,30 @@ if Assigned(VoNode) then begin
           lin.neb.comment:=catname+tab;
           end;
   end;
-  while Assigned(row) do begin
-    buf:=row.TextContent;
-    // always ask to add j2000 coordinates
+  while Assigned(cell) do begin
+    buf:=cell.TextContent;
+    // always ask vizier to add j2000 coordinates.   TODO: process general case coordinates
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
     case catversion of
     rtStar: begin
             lin.star.comment:=lin.star.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
-            if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
+            if (buf<>'')and(pos('meta.id',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
               if (lin.star.id='')or(pos('meta.main',TFieldData(VOFields.Objects[i]).ucd)>0) then
                   if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
                       if lin.star.id='' then lin.star.id:=lin.star.id+buf
                                         else lin.star.id:=lin.star.id+'-'+buf;
                   end else lin.star.id:=buf;
             end;
-            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1 then begin
               lin.star.valid[vsMagv]:=true;
-              if (lin.star.magv=-99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
+              if (lin.star.magv=99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
                  lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
                  lin.star.magv:=StrToFloatDef(buf,99);
               end;
             end;
-            if pos('pos.pm',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
-               if pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
-                  lin.star.pmra:=StrToFloatDef(buf,0)*unitpmra;
-               end
-               else if pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
-                 lin.star.pmdec:=StrToFloatDef(buf,0)*unitpmdec;
-               end;
-            end;
+            if i=field_pmra then lin.star.pmra:=StrToFloatDef(buf,0)*unit_pmra;
+            if i=field_pmdec then lin.star.pmdec:=StrToFloatDef(buf,0)*unit_pmdec;
             end;
     rtNeb:  begin
             lin.neb.comment:=lin.neb.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
@@ -277,12 +311,12 @@ if Assigned(VoNode) then begin
                                         else lin.neb.id:=lin.neb.id+'-'+buf;
                   end else lin.neb.id:=buf;
             end;
-            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1 then begin
                lin.options.flabel[lOffset+vnMag]:=VOFields[i];
                lin.neb.mag:=StrToFloatDef(buf,Defmag);;
                lin.neb.valid[vnMag]:=true;
             end;
-            if pos('phys.angSize',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+            if i=field_size then begin
                lin.neb.dim1:=StrToFloatDef(buf,Defsize);
                lin.neb.valid[vnDim1]:=true;
             end;
@@ -305,7 +339,7 @@ if Assigned(VoNode) then begin
             end;
             end;
     end;
-    row:=row.NextSibling;
+    cell:=cell.NextSibling;
     inc(i);
   end;
   VoNode:=VoNode.NextSibling;
@@ -324,7 +358,7 @@ inc(CurCat);
 if CurCat<Ncat then begin
    catfile:=slash(VOCatpath)+VOcatlist[CurCat];
    deffile:=ChangeFileExt(catfile,'.config');
-   if CurCat>0 then VODoc.Free;
+   if (CurCat>0) and VODocOK then VODoc.Free;
    ok:=ReadVOHeader;
    if (not active)or(not ok) then NextVOCat(ok);
 end;
