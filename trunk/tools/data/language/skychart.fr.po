@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-02 11:09+0200\n"
+"PO-Revision-Date: 2011-10-02 14:08+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -16,7 +16,6 @@ msgstr ""
 "Language: fr\n"
 
 #: u_translation.rs102cddss
-#, fuzzy
 msgid "102 CD DSS"
 msgstr "102 CD DSS"
 
