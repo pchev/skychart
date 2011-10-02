@@ -5250,3 +5250,15 @@ msgstr ""
 msgid "Add or update"
 msgstr ""
 
+#: u_translation:rsbyname
+msgid "By name"
+msgstr ""
+
+#: u_translation:rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
+#: u_translation:rsselectmirror
+msgid "Select mirror site"
+msgstr ""
+

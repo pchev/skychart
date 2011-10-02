@@ -1340,6 +1340,9 @@ resourcestring
   rsDrawAsDSO = 'Draw as DSO';
   rsReload = 'Reload';
   rsAddOrUpdate = 'Add or update';
+  rsByName = 'By name';
+  rsAroundCurren = 'Around current position';
+  rsSelectMirror = 'Select mirror site';
 
 
 implementation

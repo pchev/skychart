@@ -219,6 +219,10 @@ msgstr "Pas wijziging toe op alle kaarten"
 msgid "Argument of perihelion"
 msgstr "Argument van het perihelium"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Kunstmatige satellieten"
@@ -446,6 +450,10 @@ msgstr "creëer catalogus"
 #: u_translation.rsby
 msgid "by"
 msgstr "over"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4116,6 +4124,10 @@ msgstr "Selecteer alles"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

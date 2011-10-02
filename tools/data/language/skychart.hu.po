@@ -237,6 +237,10 @@ msgstr "A változások alkalmazása minden térképre"
 msgid "Argument of perihelion"
 msgstr "Pericentrum argumentum-omega"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 #| msgid "Artificial Satellites"
 msgid "Artificial satellites"
@@ -484,6 +488,10 @@ msgstr "Kat.felépítése"
 #: u_translation.rsby
 msgid "by"
 msgstr " "
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4455,6 +4463,10 @@ msgstr "Mindent kiválaszt"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

@@ -221,6 +221,10 @@ msgstr "將變更應用到所有星圖"
 msgid "Argument of perihelion"
 msgstr "近日點引數"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "人造衛星"
@@ -448,6 +452,10 @@ msgstr "建立星表"
 #: u_translation.rsby
 msgid "by"
 msgstr "間隔"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4118,6 +4126,10 @@ msgstr "選擇全部"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

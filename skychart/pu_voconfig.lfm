@@ -18,10 +18,10 @@ object f_voconfig: Tf_voconfig
     Height = 516
     Top = 0
     Width = 783
-    ActivePage = TabCat
+    ActivePage = TabData
     Align = alClient
     ShowTabs = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
@@ -29,18 +29,18 @@ object f_voconfig: Tf_voconfig
       ClientWidth = 775
       object Panel1: TPanel
         Left = 0
-        Height = 66
-        Top = 442
+        Height = 96
+        Top = 412
         Width = 775
         Align = alBottom
-        ClientHeight = 66
+        ClientHeight = 96
         ClientWidth = 775
         TabOrder = 0
         object msg: TLabel
-          Left = 260
+          Left = 292
           Height = 18
-          Top = 7
-          Width = 305
+          Top = 59
+          Width = 473
           AutoSize = False
           Color = clInfoBk
           Font.Color = clRed
@@ -51,19 +51,19 @@ object f_voconfig: Tf_voconfig
           Transparent = False
         end
         object Button11: TButton
-          Left = 8
+          Left = 20
           Height = 25
-          Top = 6
+          Top = 24
           Width = 124
           BorderSpacing.InnerBorder = 4
-          Caption = 'Search Catalogs'
+          Caption = 'By name'
           OnClick = SearchCatalog
           TabOrder = 0
         end
         object Button12: TButton
-          Left = 596
+          Left = 612
           Height = 25
-          Top = 6
+          Top = 22
           Width = 153
           BorderSpacing.InnerBorder = 4
           Caption = 'Select Catalog'
@@ -71,35 +71,52 @@ object f_voconfig: Tf_voconfig
           TabOrder = 1
         end
         object ServerList: TComboBox
-          Left = 140
+          Left = 292
           Height = 26
-          Top = 34
-          Width = 425
+          Top = 23
+          Width = 305
           ItemHeight = 0
           OnChange = ServerListChange
           Style = csDropDownList
           TabOrder = 2
         end
         object CatFilter: TEdit
-          Left = 140
+          Left = 152
           Height = 22
-          Top = 7
+          Top = 25
           Width = 104
           TabOrder = 3
           Text = 'NGC'
         end
         object Label1: TLabel
-          Left = 8
+          Left = 292
           Height = 15
-          Top = 42
+          Top = 5
           Width = 101
           Caption = 'Select mirror site'
+          ParentColor = False
+        end
+        object Button1: TButton
+          Left = 20
+          Height = 25
+          Top = 56
+          Width = 236
+          Caption = 'Around current position'
+          OnClick = Searchbyposition
+          TabOrder = 4
+        end
+        object Label2: TLabel
+          Left = 20
+          Height = 15
+          Top = 5
+          Width = 95
+          Caption = 'Search Catalogs'
           ParentColor = False
         end
       end
       object CatList: TStringGrid
         Left = 0
-        Height = 442
+        Height = 412
         Top = 0
         Width = 775
         Align = alClient

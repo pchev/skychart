@@ -37,11 +37,13 @@ type
   { Tf_voconfig }
 
   Tf_voconfig = class(TForm)
+    Button1: TButton;
     ButtonClose: TButton;
     ButtonHelp: TButton;
     ButtonBack: TButton;
     CatFilter: TEdit;
     Label1: TLabel;
+    Label2: TLabel;
     LabelStatus: TLabel;
     Label5: TLabel;
     Label6: TLabel;
@@ -69,6 +71,7 @@ type
     TabRegistry: TTabSheet;
     RadioGroup1: TRadioGroup;
     Button13: TButton;
+    procedure Searchbyposition(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
@@ -135,8 +138,12 @@ procedure Tf_voconfig.Setlang;
 begin
 Caption:=rsVOCatalogBro;
 Label6.Caption:=rsMakeSelectio;
-Button11.Caption:=rsSearchCatalo;
+label2.Caption:=rsSearchCatalo;
+Button11.Caption:=rsByName;
+Button1.Caption:=rsAroundCurren;
+Label1.Caption:=rsSelectMirror;
 Button12.Caption:=rsSelectCatalo;
+ButtonBack.Caption:='< '+rsBack;
 CatList.Cells[0, 0]:=rsName;
 CatList.Cells[1, 0]:=rsDescription;
 CatList.Cells[2, 0]:=rsInfo2;
@@ -203,6 +210,7 @@ begin
   CatList.ColWidths[2]:=150;
   CatList.ColWidths[3]:=400;
   PageControl1.ActivePage:=TabCat;
+  LabelStatus.Caption:='';
   Setlang;
 end;
 
@@ -253,6 +261,25 @@ begin
 screen.Cursor:=crHourGlass;
 buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
 buf:=buf+'-source='+trim(CatFilter.Text)+'&-meta&-meta.max=1000';
+VO_Catalogs1.ListUrl:=buf;
+VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
+try
+ msg.Caption:='';
+ if VO_Catalogs1.ForceUpdate then
+    FillCatList
+ else
+    msg.Caption:=Format(rsCannotConnec, [VO_Catalogs1.LastErr]);
+finally
+screen.Cursor:=crDefault;
+end;
+end;
+
+procedure Tf_voconfig.Searchbyposition(Sender: TObject);
+var buf:string;
+begin
+screen.Cursor:=crHourGlass;
+buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
+buf:=buf+'-source='+'&-c='+formatfloat(f6,(rad2deg*ra))+'%20'+formatfloat(s6,rad2deg*dec)+'&-c.r=2'+'&-meta&-meta.max=500&-out.max=500';
 VO_Catalogs1.ListUrl:=buf;
 VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
 try

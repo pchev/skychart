@@ -222,6 +222,10 @@ msgstr ""
 msgid "Argument of perihelion"
 msgstr ""
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr ""
@@ -448,6 +452,10 @@ msgstr ""
 
 #: u_translation.rsby
 msgid "by"
+msgstr ""
+
+#: u_translation.rsbyname
+msgid "By name"
 msgstr ""
 
 #: u_translation.rscalendar
@@ -4118,6 +4126,10 @@ msgstr ""
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

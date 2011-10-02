@@ -220,6 +220,10 @@ msgstr "Bruk endringer på alle kart"
 msgid "Argument of perihelion"
 msgstr "Perihelvinkel"
 
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr ""
+
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
 msgstr "Kunstige satellitter"
@@ -447,6 +451,10 @@ msgstr "Opprett katalog"
 #: u_translation.rsby
 msgid "by"
 msgstr "etter"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4116,6 +4124,10 @@ msgstr "Velg alt"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
+msgstr ""
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
 msgstr ""
 
 #: u_translation.rsselectplatef

@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-01 21:58+0200\n"
+"PO-Revision-Date: 2011-10-02 11:09+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -227,6 +227,10 @@ msgstr "Appliquer à toutes les cartes"
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
 msgstr "Argument du périhélie"
+
+#: u_translation.rsaroundcurren
+msgid "Around current position"
+msgstr "Autour de la position"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -455,6 +459,10 @@ msgstr "Construire le catalogue"
 #: u_translation.rsby
 msgid "by"
 msgstr "par"
+
+#: u_translation.rsbyname
+msgid "By name"
+msgstr "Par nom"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -4132,7 +4140,7 @@ msgstr "Chercher"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr "Recherche"
+msgstr "Recherche de catalogues"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4177,6 +4185,10 @@ msgstr "Tout sélectionner"
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
 msgstr "Choisir le catalogue"
+
+#: u_translation.rsselectmirror
+msgid "Select mirror site"
+msgstr "Choix du site miroir"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
