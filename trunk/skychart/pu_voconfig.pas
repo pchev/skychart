@@ -482,6 +482,7 @@ if sender is Tf_vodetail then
        config.SetValue('drawcolor',$FF0000);
        config.SetValue('defsize',DefSize.Value);
        config.SetValue('defmag',DefMag.Value);
+       config.SetValue('maxmag',-99);
        config.SetValue('baseurl',VO_TableData1.BaseUrl);
        config.SetValue('votype',ord(VO_Detail1.vo_type));
        config.SetValue('fieldcount',VO_TableData1.FieldList.Count);
@@ -515,6 +516,8 @@ try
    VO_TableData1.FieldList.Clear;
    for i:=0 to fieldcount do
        VO_TableData1.FieldList.Add(config.GetValue('field_'+inttostr(i),''));
+   config.SetValue('maxmag',-99);
+   config.Flush;
    config.free;
    VO_TableData1.vo_type:=votype;
    VO_TableData1.BaseUrl:=baseurl;

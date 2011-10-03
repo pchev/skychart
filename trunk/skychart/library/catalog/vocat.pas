@@ -13,6 +13,7 @@ Procedure OpenVOCatwin(var ok : boolean);
 Procedure ReadVOCat(var lin : GCatrec; var ok : boolean);
 Procedure NextVOCat( var ok : boolean);
 procedure CloseVOCat ;
+function GetVOMagmax: double;
 
 type TFieldData = class(Tobject)
      name, ucd, datatype, units, description : string;
@@ -292,7 +293,7 @@ if Assigned(VoNode) then begin
                                         else lin.star.id:=lin.star.id+'-'+buf;
                   end else lin.star.id:=buf;
             end;
-            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1 then begin
+            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
               lin.star.valid[vsMagv]:=true;
               if (lin.star.magv=99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
                  lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
@@ -311,7 +312,7 @@ if Assigned(VoNode) then begin
                                         else lin.neb.id:=lin.neb.id+'-'+buf;
                   end else lin.neb.id:=buf;
             end;
-            if pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1 then begin
+            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
                lin.options.flabel[lOffset+vnMag]:=VOFields[i];
                lin.neb.mag:=StrToFloatDef(buf,Defmag);;
                lin.neb.valid[vnMag]:=true;
@@ -373,6 +374,60 @@ for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
 VOFields.Free;
 Ncat:=0;
 CurCat:=0;
+end;
+
+function GetVOMagmax: double;
+var fs: TSearchRec;
+    i: integer;
+    ok: boolean;
+    rec:GCatrec;
+    config: TXMLConfig;
+    magmax,defmag:double;
+begin
+result:=0;
+ok:=false;
+VOcatlist:=TStringList.Create;
+VOFields:=TStringList.Create;
+Ncat:=0;
+VODocOK:=false;
+i:=findfirst(slash(VOCatpath)+'vo_star_*.xml',0,fs);
+while i=0 do begin
+  VOcatlist.Add(fs.Name);
+  inc(Ncat);
+  i:=findnext(fs);
+end;
+findclose(fs);
+CurCat:=-1;
+ok:=false;
+inc(CurCat);
+if CurCat<Ncat then begin
+   catfile:=slash(VOCatpath)+VOcatlist[CurCat];
+   deffile:=ChangeFileExt(catfile,'.config');
+   if (CurCat>0) and VODocOK then VODoc.Free;
+   config:=TXMLConfig.Create(nil);
+   config.Filename:=deffile;
+   magmax:=config.GetValue('maxmag',-99);
+   defmag:=config.GetValue('defmag',10);
+   config.free;
+   if magmax=-99 then begin
+      if (CurCat>0) and VODocOK then VODoc.Free;
+      ok:=ReadVOHeader;
+      while ok do begin
+        ReadVOCat(rec,ok);
+        if rec.star.valid[vsMagv] then  magmax:=max(magmax,rec.star.magv);
+      end;
+      if magmax<defmag then magmax:=defmag;
+      config:=TXMLConfig.Create(nil);
+      config.Filename:=deffile;
+      config.SetValue('maxmag',trunc(magmax));
+      config.Flush;
+      config.Free;
+   end;
+   result:=max(result,magmax);
+end;
+CloseVOCat;
+result:=max(result,6);
+result:=min(result,20);
 end;
 
 end.

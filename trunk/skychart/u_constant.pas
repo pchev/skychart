@@ -794,6 +794,7 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : s
      de_type, de_year:integer;
      NumIndiDriver:integer;
      IndiDriverLst: array of array of string;
+     vostar_magmax: double;
 
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //

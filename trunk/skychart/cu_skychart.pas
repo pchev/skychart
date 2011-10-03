@@ -396,6 +396,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
 {$endif}
+vostar_magmax:=Fcatalog.GetVOstarmag;
 if Fcatalog.cfgshr.AutoStarFilter then begin
    if (cfgsc.fov>(0.5*deg2rad)) or cfgsc.Quick then
      Fcatalog.cfgcat.StarMagMax:=round(10*(Fcatalog.cfgshr.AutoStarFilterMag+2.4*log10(intpower(pid2/cfgsc.fov,2))))/10
@@ -422,7 +423,7 @@ InitStarC(gscc,14.5);
 InitStarC(dsgsc,14.5);
 InitStarC(microcat,16);
 InitStarC(usnoa,18);
-InitStarC(vostar-BaseStar,mag);  // last one to not change mag
+InitStarC(vostar,vostar_magmax);
 { activate the other catalog }
 InitVarC(gcvs);
 InitDblC(wds);
