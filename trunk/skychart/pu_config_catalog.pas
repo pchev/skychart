@@ -76,7 +76,9 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
+    Label4: TLabel;
     LabelDownload: TLabel;
+    maxrows: TLongEdit;
     ReloadImg: TImage;
     Label1: TLabel;
     Label95: TLabel;
@@ -213,6 +215,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure maxrowsChange(Sender: TObject);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
@@ -378,6 +381,11 @@ ShowFov;
 LockChange:=false;
 end;
 
+procedure Tf_config_catalog.maxrowsChange(Sender: TObject);
+begin
+  cmain.VOmaxrecord := maxrows.Value;
+end;
+
 procedure Tf_config_catalog.FormCreate(Sender: TObject);
 begin
   textcolor:=0;
@@ -433,8 +441,10 @@ begin
   f_voconfig.dec:=dec;
   f_voconfig.fov:=fov;
   f_voconfig.vourlnum := cmain.VOurl;
+  f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
   f_voconfig.ShowModal;
   cmain.VOurl:=f_voconfig.vourlnum;
+  cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
   f_voconfig.Free;
   ShowVO;
 end;
@@ -1032,6 +1042,7 @@ try
   f_voconfig.dec:=dec;
   f_voconfig.fov:=fov;
   f_voconfig.vourlnum := cmain.VOurl;
+  f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
   f_voconfig.ReloadVO(fn);
   f_voconfig.Free;
 finally
@@ -1054,6 +1065,7 @@ var i,j,r: integer;
     active,fullcat: boolean;
 const VOo : array[1..2] of string = ('star','dso');
 begin
+maxrows.Value:=cmain.VOmaxrecord;
 StringGrid4.RowCount:=1;
 stringgrid4.cells[0,0]:='x';
 stringgrid4.Columns[0].Title.Caption:=rsName;

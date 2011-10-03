@@ -155,8 +155,8 @@ begin
 result:=false;
 VODocOK:=false;
 fillchar(EmptyRec,sizeof(GcatRec),0);
-unit_pmra:=0;unit_pmdec:=0;
-field_pmra:=-1; field_pmdec:=-1;
+unit_pmra:=0;unit_pmdec:=0;unit_size:=0;
+field_pmra:=-1;field_pmdec:=-1;field_size:=-1;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 config.Filename:=deffile;

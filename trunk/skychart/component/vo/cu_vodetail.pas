@@ -203,10 +203,10 @@ end;
 procedure TVO_Detail.GetDetail(Catalog:string; retry:integer=0);
 var url:string;
 begin
-FCatalogName:=trim(Catalog);
+FCatalogName:=StringReplace(trim(Catalog),' ','%20',[rfReplaceAll]);
 case Fvo_type of
   VizierMeta: begin
-                   if retry=0 then url:= Fbaseurl+'-source='+FCatalogName+'/*&-meta.all'    // tables description and row numbers
+                   if retry=0 then url:= Fbaseurl+'-meta.all&-source='+FCatalogName+'/*'    // tables description and row numbers
                       else url:=Fbaseurl+'-source='+FCatalogName+'/*&-out.all&-oc.form=dec&-c=0%2b0&-c.rs=1&-out.max=1'; // table description from empty data search, because the previous form do not work for all the catalogs
               end;
   ConeSearch: url:=Fbaseurl+'RA=0&DEC=0&SR=0';
