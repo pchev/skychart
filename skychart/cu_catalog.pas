@@ -130,6 +130,7 @@ type
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
      function GetMaxField(path,cat: string):string;
+     function GetVOstarmag: double;
      Procedure LoadConstellation(fpath,lang:string);
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
@@ -1225,19 +1226,30 @@ case GcatH.FileNum of
 end;
 end;
 
+function Tcatalog.GetVOstarmag: double;
+begin
+SetVOCatpath(slash(VODir));
+result:=GetVOMagmax;
+end;
+
 function Tcatalog.GetVOCatS(var rec:GcatRec):boolean;
 begin
-ReadVOCat(rec,result);
+repeat
+  ReadVOCat(rec,result);
+  if not result then break;
+  if cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then continue;
+  break;
+until not result;
 end;
 
 function Tcatalog.GetVOCatN(var rec:GcatRec):boolean;
 begin
 repeat
-ReadVOCat(rec,result);
- if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
- if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
- if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
- break;
+  ReadVOCat(rec,result);
+  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
+  break;
 until not result;
 end;
 
