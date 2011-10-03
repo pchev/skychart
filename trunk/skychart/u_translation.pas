@@ -1343,6 +1343,7 @@ resourcestring
   rsByName = 'By name';
   rsAroundCurren = 'Around current position';
   rsSelectMirror = 'Select mirror site';
+  rsReloadForCur = 'Reload %s for current chart';
 
 
 implementation

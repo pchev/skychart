@@ -3866,6 +3866,10 @@ msgstr "Notes de l'edició"
 msgid "Reload"
 msgstr ""
 
+#: u_translation.rsreloadforcur
+msgid "Reload %s for current chart"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
 msgstr "Suprimeix tots els cercles"

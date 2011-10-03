@@ -4511,6 +4511,10 @@ msgstr "Um útgáfuna"
 msgid "Reload"
 msgstr ""
 
+#: u_translation.rsreloadforcur
+msgid "Reload %s for current chart"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 #, fuzzy
 #| msgid "Remove All Circles"

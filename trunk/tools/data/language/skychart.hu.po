@@ -4178,6 +4178,10 @@ msgstr "Verzió információk"
 msgid "Reload"
 msgstr ""
 
+#: u_translation.rsreloadforcur
+msgid "Reload %s for current chart"
+msgstr ""
+
 #: u_translation.rsremoveallcir
 #| msgid "Remove All Circles"
 msgid "Remove all circles"

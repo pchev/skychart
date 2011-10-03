@@ -803,7 +803,11 @@ begin
       HintX:=row;
       HintY:=col;
    end else begin
-      if (trim(StringGrid4.Cells[col,row])<>'')and(StringGrid4.Canvas.TextWidth(StringGrid4.Cells[col,row])>StringGrid4.ColWidths[col]) then begin
+      if col=3 then begin
+        StringGrid4.Hint:=Format(rsReloadForCur, ['"'+trim(StringGrid4.Cells[1, row])+'"']);
+        StringGrid4.ShowHint:=true;
+      end
+      else if (trim(StringGrid4.Cells[col,row])<>'')and(StringGrid4.Canvas.TextWidth(StringGrid4.Cells[col,row])>StringGrid4.ColWidths[col]) then begin
          StringGrid4.Hint:=StringGrid4.Cells[col,row];
          StringGrid4.ShowHint:=true;
       end;
