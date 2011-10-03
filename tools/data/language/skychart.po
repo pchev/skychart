@@ -5262,3 +5262,7 @@ msgstr ""
 msgid "Select mirror site"
 msgstr ""
 
+#: u_translation:rsreloadforcur
+msgid "Reload %s for current chart"
+msgstr ""
+
