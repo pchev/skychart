@@ -75,6 +75,7 @@ type
   public
     { Public declarations }
     SelectAll: boolean;
+    vo_maxrecord: integer;
     procedure Setlang;
     property onPreviewData: TNotifyEvent read FPreviewData write FPreviewData;
     property onGetData: TNotifyEvent read FGetData write FGetData;
@@ -127,12 +128,12 @@ end;
 
 procedure Tf_vodetail.FullDownloadChange(Sender: TObject);
 begin
-if FullDownload.Checked and (tr.Value>vo_maxrecord) then begin
+if FullDownload.Checked and (tr.Value>vo_fullmaxrecord) then begin
    ShowMessage(Format(rsThisCatalogC, [inttostr(tr.value)]));
    FullDownload.Checked:=false;
 end;
 if FullDownload.Checked and (tr.Value=0) then begin
-   ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_maxrecord)]));
+   ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_fullmaxrecord)]));
 end;
 if FullDownload.Checked then begin
    RaDec1.Enabled:=false;

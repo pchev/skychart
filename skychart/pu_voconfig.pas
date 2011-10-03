@@ -87,6 +87,7 @@ type
     Fvopath,catname : string;
     Fvourlnum: integer;
     FReloadFeedback: TDownloadFeedback;
+    Fvo_maxrecord: integer;
     procedure SetServerList;
     procedure FillCatList;
     procedure ClearCatalog;
@@ -119,6 +120,7 @@ type
     property ProxyUser: string  write SetProxyUser;
     property ProxyPass: string  write SetProxyPass;
     property vourlnum: integer read Fvourlnum write Setvourlnum;
+    property vo_maxrecord: integer read Fvo_maxrecord write Fvo_maxrecord;
     property onReloadFeedback: TDownloadFeedback read FReloadFeedback write FReloadFeedback;
   end;
 
@@ -259,7 +261,7 @@ var buf:string;
 begin
 screen.Cursor:=crHourGlass;
 buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
-buf:=buf+'-words='+trim(CatFilter.Text)+'&-meta&-meta.max=1000';
+buf:=buf+'-meta&-meta.max=1000&-words='+StringReplace(trim(CatFilter.Text),' ','%20',[rfReplaceAll]);
 VO_Catalogs1.ListUrl:=buf;
 VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
 try
@@ -278,7 +280,7 @@ var buf:string;
 begin
 screen.Cursor:=crHourGlass;
 buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
-buf:=buf+'-source='+'&-c='+formatfloat(f6,(rad2deg*ra))+'%20'+formatfloat(s6,rad2deg*dec)+'&-c.r=2'+'&-meta&-meta.max=500&-out.max=500';
+buf:=buf+'-meta&-meta.max=500&-out.max=500&-source=&-c='+formatfloat(f6,(rad2deg*ra))+'%20'+formatfloat(s6,rad2deg*dec)+'&-c.r=2';
 VO_Catalogs1.ListUrl:=buf;
 VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
 try
@@ -347,6 +349,7 @@ if CatList.Row>0 then begin
      fr.onGetData:=GetData;
      fr.onPreviewData:=PreviewData;
      fr.onGoback:=Goback;
+     fr.vo_maxrecord:=Fvo_maxrecord;
      with fr do begin
        Grid.ColCount:=6;
        Grid.ColWidths[0]:=20;
@@ -394,7 +397,7 @@ if CatList.Row>0 then begin
           RadioGroup1.ItemIndex:=2
        else
           RadioGroup1.ItemIndex:=1;
-       FullDownload.Checked:=(tr.Value<=vo_maxrecord);
+       FullDownload.Checked:=(tr.Value<=vo_fullmaxrecord);
      end;
   end;
   if Pagecontrol2.PageCount=0 then begin
@@ -457,7 +460,10 @@ if sender is Tf_vodetail then
            coordselection:='';
        DataGrid.cells[1,1]:=DataGrid.cells[1,1]+coordselection;
        VO_TableData1.FirstRec:=1;
-       VO_TableData1.maxdata:=vo_maxrecord;
+       if VO_TableData1.SelectCoord then
+          VO_TableData1.maxdata:=Fvo_maxrecord
+       else
+          VO_TableData1.maxdata:=vo_fullmaxrecord;
        VO_TableData1.FieldList.Clear;
        for i:=1 to grid.RowCount-1 do begin
           if grid.Cells[0,i]='x' then
@@ -526,7 +532,7 @@ try
    VO_TableData1.dec:=rad2deg*dec;
    VO_TableData1.fov:=rad2deg*fov;
    VO_TableData1.FirstRec:=1;
-   VO_TableData1.maxdata:=vo_maxrecord;
+   VO_TableData1.maxdata:=Fvo_maxrecord;
    VO_TableData1.onDownloadFeedback:=DownloadFeedback3;
    VO_TableData1.GetData(table,objtype,false);
 finally

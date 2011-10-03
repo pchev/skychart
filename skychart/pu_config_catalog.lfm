@@ -38,9 +38,9 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 456
         ClientWidth = 490
         object Label37: TLabel
-          Left = 105
+          Left = 7
           Height = 15
-          Top = 17
+          Top = 19
           Width = 235
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
@@ -150,9 +150,9 @@ object f_config_catalog: Tf_config_catalog
         ClientHeight = 456
         ClientWidth = 490
         object Label1: TLabel
-          Left = 105
+          Left = 7
           Height = 15
-          Top = 17
+          Top = 19
           Width = 149
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
@@ -219,6 +219,28 @@ object f_config_catalog: Tf_config_catalog
           Alignment = taCenter
           AutoSize = False
           Caption = 'LabelDownload'
+          ParentColor = False
+        end
+        object maxrows: TLongEdit
+          Left = 415
+          Height = 22
+          Hint = '100..50000'
+          Top = 15
+          Width = 64
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnChange = maxrowsChange
+          Value = 50000
+          MinValue = 100
+          MaxValue = 50000
+        end
+        object Label4: TLabel
+          Left = 323
+          Height = 15
+          Top = 19
+          Width = 52
+          Caption = 'Max rows'
           ParentColor = False
         end
       end

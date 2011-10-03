@@ -661,7 +661,7 @@ type
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin,PrintCopies: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
-                ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize, VOurl: integer;
+                ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize, VOurl, VOmaxrecord: integer;
                 PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintDesc,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
@@ -1739,6 +1739,7 @@ savewidth:=Source.savewidth;
 ButtonStandard:=Source.ButtonStandard;
 ButtonNight:=Source.ButtonNight;
 VOurl:=Source.VOurl;
+VOmaxrecord:=Source.VOmaxrecord;
 AnimDelay:=Source.AnimDelay;
 AnimOpt:=Source.AnimOpt;
 Animffmpeg:=Source.Animffmpeg;
