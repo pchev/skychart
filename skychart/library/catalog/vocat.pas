@@ -46,49 +46,65 @@ begin
 VOCatpath:=noslash(path);
 end;
 
-function pmunits(units: string): double;
-var e,k,v:string;
+function powerunit(units: string; var u:double): string;   //  power(10,x)
+var e,k:string;
+begin
+k:=trim(units);
+if copy(k,1,2)='10' then begin
+   e:=Copy(k,3,2);
+   k:=Copy(k,5,99);
+   u:=StrToFloatDef(e,-99999);
+   if u<>-99999 then u:=power(10,(u))
+      else u:=0;
+end
+else begin
+    u:=1;
+    k:=units;
+end;
+result:=k;
+end;
+
+function angleunits(units: string): double;  // result in radian
+var k:string;
     u: double;
+begin
+  k:=trim(units);
+  k:=powerunit(k,u);
+  if k='mas' then u:=u/3600/1000
+  else if k='arcsec' then u:=u/3600
+  else if k='arcmin' then u:=u/60
+  else if k='rad' then u:=u*rad2deg
+  else if k<>'deg' then u:=0;
+  result:=deg2rad*u;
+end;
+
+function timeunits(units: string): double;  // result in seconds
+var k:string;
+    u: double;
+begin
+k:=trim(units);
+k:=powerunit(k,u);
+if (k='a') or (k='yr') then u:=u*365.25*86400
+else if k='d' then u:=u*86400
+else if k='h' then u:=u*3600
+else if k='min' then u:=u*60
+else if k<>'s' then u:=0;
+result:=u;
+end;
+
+function pmunits(units: string): double;  // result in radian/year
+var e,k,v:string;
+    u,y: double;
     i: integer;
 begin
   i:=pos('/',units);
   k:=copy(units,1,i-1);
   v:=copy(units,i+1,99);
-  if copy(k,1,2)='10' then begin
-     e:=Copy(k,3,2);
-     k:=Copy(k,5,99);
-     u:=StrToFloatDef(e,-99999);
-     if u<>-99999 then u:=power(10,(u))
-        else u:=0;
-  end
-  else u:=1;
-  if k='mas' then u:=u/3600/1000
-  else if k='arcsec' then u:=u/3600
-  else if k='arcmin' then u:=u/60
-  else if k<>'deg' then u:=0;
-  if (v<>'a')and(v<>'yr') then u:=0;
-  result:=deg2rad*u;
-end;
-
-function angleunits(units: string): double;
-var e,k,v:string;
-    u: double;
-    i: integer;
-begin
-  k:=trim(units);
-  if copy(k,1,2)='10' then begin
-     e:=Copy(k,3,2);
-     k:=Copy(k,5,99);
-     u:=StrToFloatDef(e,-99999);
-     if u<>-99999 then u:=power(10,(u))
-        else u:=0;
-  end
-  else u:=1;
-  if k='mas' then u:=u/3600/1000
-  else if k='arcsec' then u:=u/3600
-  else if k='arcmin' then u:=u/60
-  else if k<>'deg' then u:=0;
-  result:=deg2rad*u;
+  u:=angleunits(k);
+  y:=timeunits(v)/(365.25*86400);
+  if (y=0) then u:=0
+     else u:=u/y;
+  result:=u;
 end;
 
 Procedure InitRec;
