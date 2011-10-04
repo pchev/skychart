@@ -30,6 +30,7 @@ var
    drawcolor: integer;
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
+   log_pmra, log_pmdec, log_size: boolean;
    field_pmra, field_pmdec, field_size : integer;
    catname:string;
    VOcatlist : TStringList;
@@ -46,30 +47,74 @@ begin
 VOCatpath:=noslash(path);
 end;
 
-function powerunit(units: string; var u:double): string;   //  power(10,x)
-var e,k:string;
+function numericunit(units: string; var u:double; var log:boolean): string;   //  numeric prefix
+var i,j,pe,s,ni: integer;
+    e,k,c,n:string;
+    ex: double;
 begin
+log:=false;
 k:=trim(units);
-if copy(k,1,2)='10' then begin
-   e:=Copy(k,3,2);
-   k:=Copy(k,5,99);
-   u:=StrToFloatDef(e,-99999);
-   if u<>-99999 then u:=power(10,(u))
-      else u:=0;
+i:=length(k);
+// log scale
+if (copy(k,1,1)='[')and(copy(k,i,1)=']') then begin
+  log:=true;
+  k:=copy(k,2,i-2);
+end;
+// sign
+s:=1;
+c:=copy(k,1,1);
+if c='+' then Delete(k,1,1);
+if c='-' then begin
+   Delete(k,1,1);
+   s:=-1;
+end;
+// exponent position
+pe:=pos('10-',k);
+if pe=0 then pe:=pos('10+',k);
+j:=pe;
+if j=0 then j:=length(k);
+// numeric factor
+n:='';
+ni:=0;
+for i:=1 to j-1 do begin
+   c:=copy(k,i,1);
+   if ((c>='0')and(c<='9'))or(c='.') then begin
+      n:=n+c;
+      inc(ni);
+   end
+   else break;
+end;
+if ni>0 then begin
+  u:=s*StrToFloatDef(n,0);
+  delete(k,1,ni);
 end
-else begin
-    u:=1;
-    k:=units;
+else u:=1;
+// exponent
+if pe>0 then begin
+   n:='';
+   ni:=0;
+   for i:=4 to length(k) do begin
+      if ((c>='0')and(c<='9')) then begin
+         n:=n+c;
+         inc(ni);
+      end
+      else break;
+   end;
+   e:=n;
+   delete(k,1,ni);
+   ex:=StrToFloatDef(e,-99999);
+   if ex<>-99999 then u:=u*power(10,(ex))
+      else u:=0;
 end;
 result:=k;
 end;
 
-function angleunits(units: string): double;  // result in radian
+function angleunits(units: string; var log: Boolean): double;  // result in radian
 var k:string;
     u: double;
 begin
   k:=trim(units);
-  k:=powerunit(k,u);
+  k:=numericunit(k,u,log);
   if k='mas' then u:=u/3600/1000
   else if k='arcsec' then u:=u/3600
   else if k='arcmin' then u:=u/60
@@ -78,12 +123,12 @@ begin
   result:=deg2rad*u;
 end;
 
-function timeunits(units: string): double;  // result in seconds
+function timeunits(units: string; var log: Boolean): double;  // result in seconds
 var k:string;
     u: double;
 begin
 k:=trim(units);
-k:=powerunit(k,u);
+k:=numericunit(k,u,log);
 if (k='a') or (k='yr') then u:=u*365.25*86400
 else if k='d' then u:=u*86400
 else if k='h' then u:=u*3600
@@ -92,16 +137,17 @@ else if k<>'s' then u:=0;
 result:=u;
 end;
 
-function pmunits(units: string): double;  // result in radian/year
+function pmunits(units: string; var log: Boolean): double;  // result in radian/year
 var e,k,v:string;
     u,y: double;
     i: integer;
+    ok: boolean;
 begin
   i:=pos('/',units);
   k:=copy(units,1,i-1);
   v:=copy(units,i+1,99);
-  u:=angleunits(k);
-  y:=timeunits(v)/(365.25*86400);
+  u:=angleunits(k,log);
+  y:=timeunits(v,ok)/(365.25*86400);
   if (y=0) then u:=0
      else u:=u/y;
   result:=u;
@@ -140,10 +186,8 @@ begin
           emptyrec.neb.valid[vnId]:=true;
           emptyrec.neb.valid[vnComment]:=true;
           emptyrec.neb.valid[vnNebtype]:=true;
-          emptyrec.neb.valid[vnMag]:=true;
-          emptyrec.neb.valid[vnDim1]:=true;
           emptyrec.neb.nebtype:=drawtype;
-          emptyrec.neb.mag:=Defmag;
+          emptyrec.neb.mag:=-99;
           emptyrec.neb.dim1:=Defsize;
           emptyrec.options.flabel[lOffset+vnMag]:='No mag';
           emptyrec.options.flabel[lOffset+vnDim1]:='No size';
@@ -170,11 +214,13 @@ var buf,e,k,v:string;
     fieldnode: TDOMNode;
     fielddata: TFieldData;
     config: TXMLConfig;
+    l: boolean;
 begin
 result:=false;
 VODocOK:=false;
 fillchar(EmptyRec,sizeof(GcatRec),0);
 unit_pmra:=0;unit_pmdec:=0;unit_size:=0;
+log_pmra:=false;log_pmdec:=false;log_size:=false;
 field_pmra:=-1;field_pmdec:=-1;field_size:=-1;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
@@ -214,23 +260,31 @@ while Assigned(VoNode) do begin
     if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
     j:=VOFields.AddObject(k,fielddata);
     if pos('pos.pm',fielddata.ucd)=1 then begin
-      u:=pmunits(fielddata.units);
-      if (u>0) and (pos('pos.eq.ra',fielddata.ucd)>0) then begin
-          field_pmra:=j;
-          unit_pmra:=u;
-          flabels[lOffset+vsPmra]:=fielddata.name;
+      if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
+          u:=pmunits(fielddata.units,l);
+          if (u>0) then begin
+            field_pmra:=j;
+            unit_pmra:=u;
+            log_pmra:=l;
+            flabels[lOffset+vsPmra]:=fielddata.name;
+          end;
        end
-       else if (u>0) and (pos('pos.eq.dec',fielddata.ucd)>0) then begin
-          field_pmdec:=j;
-          unit_pmdec:=u;
-          flabels[lOffset+vsPmdec]:=fielddata.name;
+       else if (pos('pos.eq.dec',fielddata.ucd)>0) then begin
+          u:=pmunits(fielddata.units,l);
+          if (u>0) then begin
+             field_pmdec:=j;
+             unit_pmdec:=u;
+             log_pmdec:=l;
+             flabels[lOffset+vsPmdec]:=fielddata.name;
+          end;
        end;
     end;
     if pos('phys.angSize',fielddata.ucd)=1 then begin
-      u:=angleunits(fielddata.units);
+      u:=angleunits(fielddata.units,l);
       if (u>0) then begin
          field_size:=j;
-         unit_size:=u;
+         unit_size:=u/secarc;
+         log_size:=l;
       end;
     end;
   end;
@@ -300,6 +354,9 @@ if Assigned(VoNode) then begin
   end;
   while Assigned(cell) do begin
     buf:=cell.TextContent;
+//    if buf='000.4083' then begin
+//       buf:='000.4083';
+//    end;
     // always ask vizier to add j2000 coordinates.   TODO: process general case coordinates
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
@@ -333,16 +390,18 @@ if Assigned(VoNode) then begin
                                         else lin.neb.id:=lin.neb.id+'-'+buf;
                   end else lin.neb.id:=buf;
             end;
-            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
+            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('phot.mag.',TFieldData(VOFields.Objects[i]).ucd)=0)and(lin.neb.mag=-99) then begin
                lin.options.flabel[lOffset+vnMag]:=VOFields[i];
                lin.neb.mag:=StrToFloatDef(buf,Defmag);;
                lin.neb.valid[vnMag]:=true;
             end;
             if i=field_size then begin
                lin.neb.dim1:=StrToFloatDef(buf,Defsize);
+               if log_size and (lin.neb.dim1<>Defsize) then lin.neb.dim1:=power(10,lin.neb.dim1);
+               lin.neb.dim1:=unit_size*lin.neb.dim1;
                lin.neb.valid[vnDim1]:=true;
             end;
-            if pos('src.class',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
+            if (pos('src.class',TFieldData(VOFields.Objects[i]).ucd)>0)and(pos('src.class.',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
                if trim(buf)='Gx'  then lin.neb.nebtype:=1
                else if trim(buf)='OC'  then lin.neb.nebtype:=2
                else if trim(buf)='Gb'  then lin.neb.nebtype:=3
