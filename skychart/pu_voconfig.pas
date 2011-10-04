@@ -41,7 +41,7 @@ type
     ButtonClose: TButton;
     ButtonHelp: TButton;
     ButtonBack: TButton;
-    CatFilter: TEdit;
+    CatDescEdit: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     LabelStatus: TLabel;
@@ -75,7 +75,7 @@ type
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
-    procedure SearchCatalog(Sender: TObject);
+    procedure SearchCatalogDesc(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SelectCatalog(Sender: TObject);
@@ -84,7 +84,7 @@ type
     procedure SelectRegistry(Sender: TObject);
   private
     { Private declarations }
-    Fvopath,catname : string;
+    Fvopath,CatName : string;
     Fvourlnum: integer;
     FReloadFeedback: TDownloadFeedback;
     Fvo_maxrecord: integer;
@@ -256,22 +256,24 @@ begin
  Timer1.Enabled:=true;
 end;
 
-procedure Tf_voconfig.SearchCatalog(Sender: TObject);
+procedure Tf_voconfig.SearchCatalogDesc(Sender: TObject);
 var buf:string;
 begin
-screen.Cursor:=crHourGlass;
-buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
-buf:=buf+'-meta&-meta.max=1000&-words='+StringReplace(trim(CatFilter.Text),' ','%20',[rfReplaceAll]);
-VO_Catalogs1.ListUrl:=buf;
-VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
-try
- msg.Caption:='';
- if VO_Catalogs1.ForceUpdate then
-    FillCatList
- else
-    msg.Caption:=Format(rsCannotConnec, [VO_Catalogs1.LastErr]);
-finally
-screen.Cursor:=crDefault;
+if trim(CatDescEdit.Text)>'' then begin
+  screen.Cursor:=crHourGlass;
+  buf:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
+  buf:=buf+'-meta&-meta.max=1000&-words='+StringReplace(trim(CatDescEdit.Text),' ','%20',[rfReplaceAll]);
+  VO_Catalogs1.ListUrl:=buf;
+  VO_Catalogs1.onDownloadFeedback:=DownloadFeedback1;
+  try
+   msg.Caption:='';
+   if VO_Catalogs1.ForceUpdate then
+      FillCatList
+   else
+      msg.Caption:=Format(rsCannotConnec, [VO_Catalogs1.LastErr]);
+  finally
+  screen.Cursor:=crDefault;
+  end;
 end;
 end;
 
@@ -323,7 +325,7 @@ end;
 
 procedure Tf_voconfig.SelectCatalog(Sender: TObject);
 var i,n: integer;
-    buf: string;
+    buf,ucd: string;
     tb:TTabsheet;
     fr:Tf_vodetail;
 begin
@@ -332,7 +334,7 @@ try
 if CatList.Row>0 then begin
   i:=CatList.Row;
   buf:=CatList.Cells[0,i];
-  catname:=CatList.Cells[1,i];
+  CatName:=CatList.Cells[1,i];
   VO_Detail1.onDownloadFeedback:=DownloadFeedback1;
   VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
   VO_Detail1.BaseUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
@@ -366,7 +368,10 @@ if CatList.Row>0 then begin
        Grid.Cells[5, 0]:=rsDescription;
        Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
        for i:=1 to VO_Detail1.RecName[n].Count do begin
-         Grid.Cells[0,i]:='x';
+         ucd:=VO_Detail1.RecUCD[n][i-1];
+         if (pos('meta.ref',ucd)=1)or(pos('stat.error',ucd)=1) then
+            Grid.Cells[0,i]:=''
+         else Grid.Cells[0,i]:='x';
          Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
          Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
          Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
@@ -378,7 +383,7 @@ if CatList.Row>0 then begin
        tb.Caption:=VO_Detail1.TableName[n];
        tr.value:=VO_Detail1.Rows[n];
        if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
-          else desc.text:=Catname;
+          else desc.text:=CatName;
        radec1.Enabled:=VO_Detail1.HasCoord[n];
        radec2.Enabled:=VO_Detail1.HasCoord[n];
        radec3.Enabled:=VO_Detail1.HasCoord[n];
@@ -479,7 +484,7 @@ if sender is Tf_vodetail then
        extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.config');
        config:=TXMLConfig.Create(self);
        config.Filename:=extfn;
-       config.SetValue('name',catname);
+       config.SetValue('name',CatName);
        config.SetValue('table',tn.Text);
        config.SetValue('objtype',objtype);
        config.SetValue('active',true);
@@ -513,7 +518,7 @@ try
    extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(fn,'.config');
    config:=TXMLConfig.Create(self);
    config.Filename:=extfn;
-   catname:=config.GetValue('name','');
+   CatName:=config.GetValue('name','');
    table:=config.GetValue('table','');
    objtype:=config.GetValue('objtype','');
    baseurl:=config.GetValue('baseurl','');

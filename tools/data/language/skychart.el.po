@@ -1206,7 +1206,7 @@ msgid "Default outline parameters"
 msgstr "Προεπιλεγμένες ρυθμίσεις περιγραμμάτων"
 
 #: u_translation.rsdefaultsizea
-msgid "Default size (arcmin)"
+msgid "Default size (arcsec)"
 msgstr ""
 
 #: u_translation.rsdeg

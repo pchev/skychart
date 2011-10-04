@@ -234,6 +234,9 @@ case reason of
                         LastRead:=Sockreadcount;
                       end;
                       end;
+  HR_WriteCount     : begin
+                      txt:='Request sent ...';
+                      end;
   else txt:='';
 end;
 if (txt>'')and Assigned(FDownloadFeedback) then FDownloadFeedback(txt);

@@ -118,7 +118,7 @@ begin
   emptyrec.options.Epoch:=2000;
   emptyrec.options.MagMax:=20;
   emptyrec.options.Size:=Defsize;
-  emptyrec.options.Units:=60;
+  emptyrec.options.Units:=3600;
   emptyrec.options.ObjType:=1;
   emptyrec.options.LogSize:=0;
   emptyrec.options.UsePrefix:=0;

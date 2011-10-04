@@ -53,11 +53,11 @@ object f_voconfig: Tf_voconfig
         object Button11: TButton
           Left = 20
           Height = 25
-          Top = 24
+          Top = 22
           Width = 124
           BorderSpacing.InnerBorder = 4
-          Caption = 'By name'
-          OnClick = SearchCatalog
+          Caption = 'By description'
+          OnClick = SearchCatalogDesc
           TabOrder = 0
         end
         object Button12: TButton
@@ -80,13 +80,12 @@ object f_voconfig: Tf_voconfig
           Style = csDropDownList
           TabOrder = 2
         end
-        object CatFilter: TEdit
+        object CatDescEdit: TEdit
           Left = 152
           Height = 22
-          Top = 25
+          Top = 24
           Width = 104
           TabOrder = 3
-          Text = 'NGC'
         end
         object Label1: TLabel
           Left = 292
@@ -108,7 +107,7 @@ object f_voconfig: Tf_voconfig
         object Label2: TLabel
           Left = 20
           Height = 15
-          Top = 5
+          Top = 3
           Width = 95
           Caption = 'Search Catalogs'
           ParentColor = False

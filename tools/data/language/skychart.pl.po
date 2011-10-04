@@ -1176,7 +1176,7 @@ msgid "Default outline parameters"
 msgstr "Domyślne parametry zarysu"
 
 #: u_translation.rsdefaultsizea
-msgid "Default size (arcmin)"
+msgid "Default size (arcsec)"
 msgstr ""
 
 #: u_translation.rsdeg
