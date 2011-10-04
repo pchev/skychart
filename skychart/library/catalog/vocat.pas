@@ -134,6 +134,7 @@ begin
            emptyrec.star.valid[vsComment]:=true;
            if field_pmra>=0 then emptyrec.star.valid[vsPmra]:=true;
            if field_pmdec>=0 then emptyrec.star.valid[vsPmdec]:=true;
+           emptyrec.options.flabel[lOffset+vsMagv]:='No mag';
       end;
   rtneb : begin
           emptyrec.neb.valid[vnId]:=true;
@@ -144,6 +145,8 @@ begin
           emptyrec.neb.nebtype:=drawtype;
           emptyrec.neb.mag:=Defmag;
           emptyrec.neb.dim1:=Defsize;
+          emptyrec.options.flabel[lOffset+vnMag]:='No mag';
+          emptyrec.options.flabel[lOffset+vnDim1]:='No size';
       end;
   end;
 end;
@@ -278,7 +281,7 @@ end;
 
 Procedure ReadVOCat(var lin : GCatrec; var ok : boolean);
 var cell: TDOMNode;
-    buf: string;
+    buf,recno: string;
     i: integer;
 begin
 ok:=false;
@@ -286,6 +289,7 @@ lin:=emptyrec;
 if Assigned(VoNode) then begin
   cell:=VoNode.FirstChild;
   i:=0;
+  recno:='*';
   case catversion of
   rtStar: begin
           lin.star.comment:=catname+tab;
@@ -299,6 +303,7 @@ if Assigned(VoNode) then begin
     // always ask vizier to add j2000 coordinates.   TODO: process general case coordinates
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
+    if (buf<>'')and(pos('meta.record',TFieldData(VOFields.Objects[i]).ucd)=1) then recno:=buf;
     case catversion of
     rtStar: begin
             lin.star.comment:=lin.star.comment+VOFields[i]+':'+buf+' '+TFieldData(VOFields.Objects[i]).units+tab;
@@ -358,6 +363,10 @@ if Assigned(VoNode) then begin
     end;
     cell:=cell.NextSibling;
     inc(i);
+  end;
+  case catversion of
+  rtStar: if lin.star.id='' then lin.star.id:=recno;
+  rtNeb : if lin.neb.id='' then lin.neb.id:=recno;
   end;
   VoNode:=VoNode.NextSibling;
   ok:=true;
