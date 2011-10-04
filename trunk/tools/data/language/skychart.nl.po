@@ -1170,7 +1170,7 @@ msgid "Default outline parameters"
 msgstr "Standaard omlijningsparameters"
 
 #: u_translation.rsdefaultsizea
-msgid "Default size (arcmin)"
+msgid "Default size (arcsec)"
 msgstr ""
 
 #: u_translation.rsdeg

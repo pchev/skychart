@@ -1331,7 +1331,7 @@ resourcestring
   rsTable = 'Table';
   rsRows = 'Rows';
   rsDefaultMagni = 'Default magnitude';
-  rsDefaultSizeA = 'Default size (arcmin)';
+  rsDefaultSizeA = 'Default size (arcsec)';
   rsDownloadFull = 'Download full catalog';
   rsBack = 'Back';
   rsDownloadCata = 'Download catalog';

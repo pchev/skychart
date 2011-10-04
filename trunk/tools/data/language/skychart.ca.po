@@ -1174,7 +1174,7 @@ msgid "Default outline parameters"
 msgstr "Paràmetres per defecte dels contorns"
 
 #: u_translation.rsdefaultsizea
-msgid "Default size (arcmin)"
+msgid "Default size (arcsec)"
 msgstr ""
 
 #: u_translation.rsdeg

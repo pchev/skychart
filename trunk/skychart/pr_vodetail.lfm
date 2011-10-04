@@ -250,10 +250,15 @@ object f_vodetail: Tf_vodetail
       object DefSize: TLongEdit
         Left = 159
         Height = 22
+        Hint = '1..36000'
         Top = 98
         Width = 80
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 12
-        Value = 1
+        Value = 60
+        MinValue = 1
+        MaxValue = 36000
       end
       object Button2: TButton
         Left = 56
