@@ -1666,7 +1666,7 @@ end;
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
-var step:string;
+var step,buf:string;
 begin
 try
 {$ifdef trace_debug}
@@ -1715,7 +1715,10 @@ CanShowScrollbar:=true;
 {$ifdef unix}
   step:='Unix specific';
   configfile:=expandfilename(Defaultconfigfile);
-  if DirectoryExists('/usr/share/doc/overlay-scrollbar') then CanShowScrollbar:=false;
+  if DirectoryExists('/usr/share/doc/overlay-scrollbar') then begin
+     buf:=GetEnvironmentVariable('LIBOVERLAY_SCROLLBAR');
+     if buf<>'0' then CanShowScrollbar:=false;
+  end;
 {$endif}
 {$ifdef darwin}
   step:='Darwin specific';
