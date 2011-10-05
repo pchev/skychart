@@ -704,6 +704,7 @@ type
     Dde_active_chart : string;
     DdeOpen : boolean;
     DdeEnqueue: boolean;
+    CanShowScrollbar: boolean;
     Config_Version : string;
     showsplash: boolean;
     procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
@@ -1710,9 +1711,11 @@ isWin98:=false;
   end;
   SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
 {$endif}
+CanShowScrollbar:=true;
 {$ifdef unix}
   step:='Unix specific';
   configfile:=expandfilename(Defaultconfigfile);
+  if DirectoryExists('/usr/share/doc/overlay-scrollbar') then CanShowScrollbar:=false;
 {$endif}
 {$ifdef darwin}
   step:='Darwin specific';
@@ -3741,7 +3744,7 @@ begin
  WriteTrace('ViewScrollBar1Click');
 {$endif}
 
-ViewScrollBar1.Checked:=not ViewScrollBar1.Checked;
+ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
     (MultiDoc1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
@@ -4989,7 +4992,7 @@ toolbar1.visible:=ReadBool(section,'ViewMainBar',true);
 PanelLeft.visible:=ReadBool(section,'ViewLeftBar',true);
 PanelRight.visible:=ReadBool(section,'ViewRightBar',true);
 toolbar4.visible:=ReadBool(section,'ViewObjectBar',true);
-ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true);
+ViewScrollBar1.Checked:=ReadBool(section,'ViewScrollBar',true) and CanShowScrollbar;
 PanelBottom.visible:=ReadBool(section,'ViewStatusBar',true);
 ViewStatusBar1.checked:=PanelBottom.visible;
 MainBar1.checked:=ToolBar1.visible;
