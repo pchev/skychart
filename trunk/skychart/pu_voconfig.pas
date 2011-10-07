@@ -71,6 +71,8 @@ type
     TabRegistry: TTabSheet;
     RadioGroup1: TRadioGroup;
     Button13: TButton;
+    procedure CatDescEditKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
     procedure Searchbyposition(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
@@ -296,6 +298,12 @@ screen.Cursor:=crDefault;
 end;
 end;
 
+procedure Tf_voconfig.CatDescEditKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if key=13 then  SearchCatalogDesc(Sender);
+end;
+
 procedure Tf_voconfig.ButtonBackClick(Sender: TObject);
 begin
 PageControl1.ActivePage:=TabDetail;
@@ -402,6 +410,7 @@ if CatList.Row>0 then begin
           RadioGroup1.ItemIndex:=2
        else
           RadioGroup1.ItemIndex:=1;
+       RadioGroup1Click(self);
        FullDownload.Checked:=(tr.Value<=vo_fullmaxrecord);
      end;
   end;
@@ -484,22 +493,22 @@ if sender is Tf_vodetail then
        extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(VO_TableData1.Datafile,'.config');
        config:=TXMLConfig.Create(self);
        config.Filename:=extfn;
-       config.SetValue('name',CatName);
-       config.SetValue('table',tn.Text);
-       config.SetValue('objtype',objtype);
-       config.SetValue('active',true);
-       config.SetValue('fullcat',not VO_TableData1.SelectCoord);
-       config.SetValue('drawtype',14);
-       config.SetValue('drawcolor',$FF0000);
-       config.SetValue('defsize',DefSize.Value);
-       config.SetValue('defmag',DefMag.Value);
-       config.SetValue('maxmag',-99);
-       config.SetValue('baseurl',VO_TableData1.BaseUrl);
-       config.SetValue('votype',ord(VO_Detail1.vo_type));
-       config.SetValue('fieldcount',VO_TableData1.FieldList.Count);
+       config.SetValue('VOcat/catalog/name',CatName);
+       config.SetValue('VOcat/catalog/table',tn.Text);
+       config.SetValue('VOcat/catalog/objtype',objtype);
+       config.SetValue('VOcat/update/fullcat',not VO_TableData1.SelectCoord);
+       config.SetValue('VOcat/update/baseurl',VO_TableData1.BaseUrl);
+       config.SetValue('VOcat/update/votype',ord(VO_Detail1.vo_type));
+       config.SetValue('VOcat/plot/active',true);
+       config.SetValue('VOcat/plot/maxmag',-99);
+       config.SetValue('VOcat/plot/drawtype',drawtype);
+       config.SetValue('VOcat/plot/drawcolor',drawcolor);
+       config.SetValue('VOcat/plot/forcecolor',forcecolor);
+       config.SetValue('VOcat/default/defsize',DefSize.Value);
+       config.SetValue('VOcat/default/defmag',DefMag.Value);
+       config.SetValue('VOcat/fields/fieldcount',VO_TableData1.FieldList.Count);
        for i:=0 to VO_TableData1.FieldList.Count-1 do
-           config.SetValue('field_'+inttostr(i),VO_TableData1.FieldList[i]);
-
+           config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData1.FieldList[i]);
        config.Flush;
        config.free;
    end;
@@ -518,16 +527,16 @@ try
    extfn:=slash(VO_TableData1.CachePath)+ChangeFileExt(fn,'.config');
    config:=TXMLConfig.Create(self);
    config.Filename:=extfn;
-   CatName:=config.GetValue('name','');
-   table:=config.GetValue('table','');
-   objtype:=config.GetValue('objtype','');
-   baseurl:=config.GetValue('baseurl','');
-   votype:=Tvo_type(config.GetValue('votype',0));
-   fieldcount:=config.GetValue('fieldcount',0);
+   CatName:=config.GetValue('VOcat/catalog/name','');
+   table:=config.GetValue('VOcat/catalog/table','');
+   objtype:=config.GetValue('VOcat/catalog/objtype','');
+   baseurl:=config.GetValue('VOcat/update/baseurl','');
+   votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
+   fieldcount:=config.GetValue('VOcat/fields/fieldcount',0);
    VO_TableData1.FieldList.Clear;
    for i:=0 to fieldcount do
-       VO_TableData1.FieldList.Add(config.GetValue('field_'+inttostr(i),''));
-   config.SetValue('maxmag',-99);
+       VO_TableData1.FieldList.Add(config.GetValue('VOcat/fields/field_'+inttostr(i),''));
+   config.SetValue('VOcat/plot/maxmag',-99);
    config.Flush;
    config.free;
    VO_TableData1.vo_type:=votype;

@@ -39,6 +39,8 @@ type
   Tf_vodetail = class(TForm)
     Button2: TButton;
     ButtonBack: TButton;
+    CheckBox1: TCheckBox;
+    ColorDialog1: TColorDialog;
     ComboBox1: TComboBox;
     FullDownload: TCheckBox;
     Grid: TStringGrid;
@@ -47,6 +49,7 @@ type
     Label9: TLabel;
     DefMag: TLongEdit;
     DefSize: TLongEdit;
+    Shape1: TShape;
     tr: TLongEdit;
     Panel1: TPanel;
     MainPanel: TPanel;
@@ -64,10 +67,15 @@ type
     Label6: TLabel;
     procedure Button2Click(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
+    procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FullDownloadChange(Sender: TObject);
     procedure GetData(Sender: TObject);
     procedure GridMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure RadioGroup1Click(Sender: TObject);
+    procedure Shape1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
@@ -76,6 +84,9 @@ type
     { Public declarations }
     SelectAll: boolean;
     vo_maxrecord: integer;
+    drawcolor: Tcolor;
+    forcecolor: integer;
+    drawtype: integer;
     procedure Setlang;
     property onPreviewData: TNotifyEvent read FPreviewData write FPreviewData;
     property onGetData: TNotifyEvent read FGetData write FGetData;
@@ -98,6 +109,7 @@ Label6.Caption:=rsFOV;
 FullDownload.Caption:=rsDownloadFull;
 ButtonBack.Caption:='< '+rsBack;
 Button1.Caption:=rsDownloadCata;
+Button2.Caption:=rsDataPreview;
 RadioGroup1.Items[0]:=rsCannotDraw;
 RadioGroup1.Items[1]:=rsDrawAsStar;
 RadioGroup1.Items[2]:=rsDrawAsDSO;
@@ -152,6 +164,17 @@ begin
   if assigned(FGoback) then FGoback(self);
 end;
 
+procedure Tf_vodetail.CheckBox1Change(Sender: TObject);
+begin
+if  CheckBox1.Checked then forcecolor:=1
+    else forcecolor:=0;
+end;
+
+procedure Tf_vodetail.ComboBox1Change(Sender: TObject);
+begin
+  drawtype:=ComboBox1.ItemIndex;
+end;
+
 procedure Tf_vodetail.Button2Click(Sender: TObject);
 begin
   if assigned(FPreviewData) then FPreviewData(self);
@@ -160,6 +183,13 @@ end;
 procedure Tf_vodetail.FormCreate(Sender: TObject);
 begin
   Setlang;
+  drawtype:=14;
+  ComboBox1.ItemIndex:=drawtype;
+  drawcolor:=clGray;
+  ColorDialog1.Color:=drawcolor;
+  shape1.Brush.Color:=drawcolor;
+  forcecolor:=0;
+  CheckBox1.Checked:=(forcecolor=1);
 end;
 
 procedure Tf_vodetail.GridMouseUp(Sender: TObject; Button: TMouseButton;
@@ -181,5 +211,52 @@ if (row=0)and(Column=0) then begin
       grid.Cells[0,i]:=mark;
 end;
 end;
+
+procedure Tf_vodetail.Shape1MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+if ColorDialog1.Execute then begin
+   drawcolor:=ColorDialog1.Color;
+   Shape1.Brush.Color:=drawcolor;
+end;
+end;
+
+procedure Tf_vodetail.RadioGroup1Click(Sender: TObject);
+begin
+case RadioGroup1.ItemIndex of
+0: begin
+   Button1.Enabled:=false;
+   FullDownload.Enabled:=false;
+   ComboBox1.Enabled:=false;
+   DefSize.Enabled:=false;
+   CheckBox1.Enabled:=false;
+   Shape1.Enabled:=false;
+   label1.Enabled:=false;
+   label9.Enabled:=false;
+   end;
+1: begin
+   Button1.Enabled:=true;
+   FullDownload.Enabled:=true;
+   ComboBox1.Enabled:=false;
+   DefSize.Enabled:=false;
+   CheckBox1.Enabled:=false;
+   Shape1.Enabled:=false;
+   label1.Enabled:=false;
+   label9.Enabled:=false;
+   end;
+2 : begin
+   Button1.Enabled:=true;
+   FullDownload.Enabled:=true;
+   ComboBox1.Enabled:=true;
+   DefSize.Enabled:=true;
+   CheckBox1.Enabled:=true;
+   Shape1.Enabled:=true;
+   label1.Enabled:=true;
+   label9.Enabled:=true;
+   end
+end;
+end;
+
+
 
 end.

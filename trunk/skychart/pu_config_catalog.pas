@@ -828,7 +828,7 @@ case col of
        else  stringgrid4.Cells[col,row]:='1';
     config:=TXMLConfig.Create(self);
     config.Filename:=slash(VODir)+ChangeFileExt(stringgrid4.Cells[2,row],'.config');;
-    config.SetValue('active',stringgrid4.Cells[col,row]='1');
+    config.SetValue('VOcat/plot/active',stringgrid4.Cells[col,row]='1');
     config.Flush;
     config.free;
     end;
@@ -1083,9 +1083,9 @@ for j in [1,2] do begin
     if FileExists(configfile) then begin
       config:=TXMLConfig.Create(self);
       config.Filename:=configfile;
-      cname:=config.GetValue('name','');
-      active:=config.GetValue('active',true);
-      fullcat:=config.GetValue('fullcat',true);
+      cname:=config.GetValue('VOcat/catalog/name','');
+      active:=config.GetValue('VOcat/plot/active',true);
+      fullcat:=config.GetValue('VOcat/update/fullcat',true);
       config.free;
       StringGrid4.RowCount:=StringGrid4.RowCount+1;
       r:=StringGrid4.RowCount-1;

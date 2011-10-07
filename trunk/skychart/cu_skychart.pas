@@ -965,8 +965,12 @@ var rec:GcatRec;
 
   Procedure Drawing;
     begin
-      if rec.neb.nebtype<>1 then
-        Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg)
+      if rec.neb.nebtype<>1 then begin
+        if rec.options.UseColor=1 then
+          Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg,true,rec.neb.color)
+        else
+          Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg,false);
+      end
       else
         begin;    //   galaxies are the only rotatable objects, so rotate them and then plot...
           projection(rec.ra,rec.dec+0.001,x2,y2,false,cfgsc) ;
@@ -977,7 +981,10 @@ var rec:GcatRec;
           rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
           if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
           rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
-          Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph);
+          if rec.options.UseColor=1 then
+             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,true,rec.neb.color)
+          else
+             Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,false,rec.neb.color);
         end;
       end;
 

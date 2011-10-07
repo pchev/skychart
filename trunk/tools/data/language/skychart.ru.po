@@ -1023,6 +1023,10 @@ msgstr "Файлы данных, CDrom"
 msgid "Data maintenance"
 msgstr "Использование данных"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr "Інші каталоги абрисів"

@@ -1344,6 +1344,7 @@ resourcestring
   rsAroundCurren = 'Around current position';
   rsSelectMirror = 'Select mirror site';
   rsReloadForCur = 'Reload %s for current chart';
+  rsDataPreview = 'Data preview';
 
 
 implementation

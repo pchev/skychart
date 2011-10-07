@@ -1055,6 +1055,10 @@ msgstr "Αρχεία δεδομένων, CD-ROM"
 msgid "Data maintenance"
 msgstr "Συντήρηση δεδομένων"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr "Τα δεδομένα αρχίζουν στη γραμμή %s"

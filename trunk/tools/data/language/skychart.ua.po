@@ -1024,6 +1024,10 @@ msgstr "Файли даних,  CDrom"
 msgid "Data maintenance"
 msgstr "Використання даних"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr "Інші каталоги абрисів"

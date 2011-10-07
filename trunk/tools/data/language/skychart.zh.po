@@ -1023,6 +1023,10 @@ msgstr "資料檔案，唯讀光碟"
 msgid "Data maintenance"
 msgstr "資料維護"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr "資料開始在行 %s"

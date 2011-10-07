@@ -1024,6 +1024,10 @@ msgstr ""
 msgid "Data maintenance"
 msgstr ""
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr ""

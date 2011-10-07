@@ -1024,6 +1024,10 @@ msgstr "Fitxers de dades, CD-Rom"
 msgid "Data maintenance"
 msgstr "Manteniment dades"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 #| msgid "Data start on line %s"
 msgid "Data starts on line %s"

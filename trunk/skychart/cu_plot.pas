@@ -118,24 +118,24 @@ type
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
 //--------------------------------------------
-      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean);
-      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string);
-      Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      procedure PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      Procedure PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      procedure PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      procedure PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      procedure PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      procedure PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      Procedure PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
-      Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      Procedure PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      Procedure PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
-      Procedure PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
+      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      procedure PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+      Procedure PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 //---------------------------------------------
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
@@ -849,7 +849,7 @@ if not cfgplot.Invisible then
 end;
 end;
 
-Procedure TSplot.PlotDeepSkyObject(Axx,Ayy: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; Amorph : String;whitebg:boolean);
+Procedure TSplot.PlotDeepSkyObject(Axx,Ayy: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; Amorph : String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
 begin
 {
   Here's where we break out the plot routines for each type of deep sky object
@@ -882,40 +882,40 @@ begin
     begin
       case Atyp of
          -1: // special case equating to catalog entry of '-' or 'PD'
-            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           0: // unknown - general case where catalog entry is '?' or spaces
-            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
 //        1:  // galaxy - not called from here, they are plotted back in cu_skychart.DrawDeepSkyObject
           2:  // open cluster
-            PlotDSOOcl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOOcl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           4:  // planetary
-            PlotDSOPNe(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOPNe(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           3:  // globular cluster
-            PlotDSOGCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOGCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           5:  // bright nebula (emission and reflection)
-            PlotDSOBN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOBN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           6:  // cluster with nebula
-            PlotDSOClNb(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOClNb(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           7:  // star
-            PlotDSOStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           8:  // double star
-            PlotDSODStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSODStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           9:  // triple star
-            PlotDSOTStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOTStar(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           10: // asterism
-            PlotDSOAst(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOAst(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           11: // Knot (more accurately as an HII region e.g. in M101, M33 and the LMC)
-            PlotDSOHIIRegion(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOHIIRegion(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           12: // galaxy cluster
-            PlotDSOGxyCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSOGxyCl(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           13: // dark nebula
-            PlotDSODN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph);
+            PlotDSODN(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,Amorph,forcecolor,col);
           14 : // Circle
-            PlotDSOCircle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOCircle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           15 : // Rectangle
-            PlotDSORectangle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSORectangle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           16 : // lozenge
-            PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+            PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           101..111: // Planet from ds2000
             PlotPlanet4(round(Axx),round(Ayy),Atyp-100,Apixscale,WhiteBg);
           112:  // Asteroid from ds2000
@@ -926,7 +926,7 @@ begin
             PlotVarStar(Axx,Ayy,Ama,Ama+1);
           115: // star from ds2000
             PlotStar(Axx,Ayy,Ama,0);
-         else PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp);
+         else PlotDSOUnknown(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
       end;
     end;
 end;
@@ -2500,7 +2500,7 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string);
+Procedure TSplot.PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
 Plots galaxies - Arnuc comes thru as 0, Ab_vt and Ab_ve come thru as 100
 }
@@ -2513,15 +2513,16 @@ var
   elp : array [1..44] of Tpoint;
   elpf : array [1..44] of Tpointf;
   nebcolor : Tcolor;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
 
 begin
+  if not forcecolor then col:=cfgplot.Color[31];
   xx:=round(Ax);
   yy:=round(Ay);
   if Ar2=0 then Ar2:=Ar1/2;
   ds1:=round(max(Apixscale*Ar1/2,cfgchart.drawpen))+cfgchart.drawpen;
   ds2:=round(max(Apixscale*Ar2/2,cfgchart.drawpen))+cfgchart.drawpen;
-  nebcolor:=cfgplot.Color[31];                           // Fix Color
+  nebcolor:=col;                           // Fix Color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGxy then // SBR Color
       begin
         if Asbr<0 then
@@ -2530,13 +2531,13 @@ begin
             if Ar2<=0 then Ar2:=Ar1;
             Asbr:= Ama + 2.5*log10(Ar1*Ar2) - 0.26;
           end;
-        col := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
+        icol := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
                       trunc(cfgplot.Nebbright-((Asbr-11)/4)*
                            (cfgplot.Nebbright-cfgplot.Nebgray))])]);
-        r:=cfgplot.Color[31] and $FF;
-        g:=(cfgplot.Color[31] shr 8) and $FF;
-        b:=(cfgplot.Color[31] shr 16) and $FF;
-        Nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+        r:=col and $FF;
+        g:=(col shr 8) and $FF;
+        b:=(col shr 16) and $FF;
+        Nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
         NebColor := Addcolor(Nebcolor,cfgplot.backgroundcolor);
       end;
   if cfgplot.UseBMP then begin
@@ -2578,22 +2579,23 @@ begin
   end;
 end;
 
-Procedure TSplot.PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot open clusters
 }
 var
   sz: Double;
   ds,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[24];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
-  nebcolor:=cfgplot.Color[24];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillOCl then // SBR color
     begin
       if Asbr<=0 then
@@ -2604,11 +2606,11 @@ begin
         end;
       if Asbr<10 then Asbr:=10;  //some very bright cluster make too bright surface
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[24] and $FF;
-      g:=(cfgplot.Color[24] shr 8) and $FF;
-      b:=(cfgplot.Color[24] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+      icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=col and $FF;
+      g:=(col shr 8) and $FF;
+      b:=(col shr 16) and $FF;
+      nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.usebmp then begin
@@ -2651,7 +2653,7 @@ end else begin
 end;
 
 
-Procedure TSplot.PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot planetary nebulae - currently these are shown as circular...
   todo: change so that we can plot non-circular ones
@@ -2663,15 +2665,16 @@ Procedure TSplot.PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; At
 var
   sz: Double;
   ds,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[26];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
-  nebcolor:=cfgplot.Color[26];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillPNe then // SBR color
   begin
     if Asbr<=0 then
@@ -2681,10 +2684,11 @@ begin
         Asbr:= Ama + 5*log10(Adim) - 0.26;
       end;
 //    adjust colour by using Asbr and UI options
-    col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);      r:=cfgplot.Color[26] and $FF;
-    g:=(cfgplot.Color[26] shr 8) and $FF;
-    b:=(cfgplot.Color[26] shr 16) and $FF;
-    nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+    icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+    r:=col and $FF;
+    g:=(col shr 8) and $FF;
+    b:=(col shr 16) and $FF;
+    nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
     nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
   end;
   if cfgplot.usebmp then begin
@@ -2714,22 +2718,23 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot globular clusters - currently these are shown as circular...
 }
 var
   sz: Double;
   ds,ds2,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[25];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
-  nebcolor:=cfgplot.Color[25];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGCl then // SBR color
     begin
       if Asbr<=0 then
@@ -2739,11 +2744,11 @@ begin
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[25] and $FF;
-      g:=(cfgplot.Color[25] shr 8) and $FF;
-      b:=(cfgplot.Color[25] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+      icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=col and $FF;
+      g:=(col shr 8) and $FF;
+      b:=(col shr 16) and $FF;
+      nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.usebmp then begin
@@ -2790,7 +2795,7 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot bright nebula - both emmission and reflection are plotted the same
   in the future, we'll separate these out, maybe even for Herbig-Haro and variable nebulae
@@ -2798,7 +2803,7 @@ Procedure TSplot.PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Aty
 var
   sz: Double;
   ds,dsr,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
   ObjMorph:string;
   fill: boolean;
@@ -2813,11 +2818,13 @@ begin
     ObjMorph:=LeftStr(Amorph, 1);
     if ObjMorph = 'R'
     then begin
-      nebcolor := cfgplot.Color[29];
+      if not forcecolor then col:=cfgplot.Color[29];
+      nebcolor := col;
       fill:=cfgplot.DSOColorFillRN and not cfgchart.onprinter;
     end
     else begin
-      nebcolor := cfgplot.Color[28];
+      if not forcecolor then col:=cfgplot.Color[28];
+      nebcolor := col;
       fill:=cfgplot.DSOColorFillEN and not cfgchart.onprinter;
     end;
     if (cfgplot.nebplot=1) and fill then // SBR color
@@ -2829,11 +2836,11 @@ begin
             Asbr:= Ama + 5*log10(Adim) - 0.26;
           end;
   //    adjust colour by using Asbr and UI options
-        col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+        icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
         r:=nebcolor and $FF;
         g:=(nebcolor shr 8) and $FF;
         b:=(nebcolor shr 16) and $FF;
-        nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+        nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
         nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
       end;
 if cfgplot.UseBMP then begin
@@ -2861,23 +2868,24 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot nebula and cluster associations - e.g. M8, M42...
 }
 var
   sz: Double;
   ds,dsr,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[29];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
   dsr:=ds div 4;
-  nebcolor:=cfgplot.Color[29];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillRN then // SBR color
     begin
       if Asbr<=0 then
@@ -2887,11 +2895,11 @@ begin
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
   //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[29] and $FF;
-      g:=(cfgplot.Color[29] shr 8) and $FF;
-      b:=(cfgplot.Color[29] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+      icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=col and $FF;
+      g:=(col shr 8) and $FF;
+      b:=(col shr 16) and $FF;
+      nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.UseBMP then begin
@@ -2927,7 +2935,7 @@ end;
 end;
 end;
 
-Procedure TSplot.PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
   Plot DSO that is actually a single star
 }
@@ -2936,19 +2944,20 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[24];
   xx:=round(Ax);
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
-    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
+    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
+    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
   end else begin
     cnv.Pen.Width := cfgchart.drawpen;
     cnv.Pen.Mode:=pmCopy;
     cnv.Pen.Style := psSolid;
-    cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Color := col;
 
   // Plotted as an '+', so there's no difference between line and graphics mode
   // we use the same colour as for open clusters
@@ -2964,7 +2973,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
   Plot DSO that is actually a double star
   DSO's as stars are slit into different routines as we may decide to use
@@ -2976,19 +2985,20 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[24];
   xx:=round(Ax);
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
-    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
+    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
+    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
   end else begin
     cnv.Pen.Width := cfgchart.drawpen;
     cnv.Pen.Mode:=pmCopy;
     cnv.Pen.Style := psSolid;
-    cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Color := col;
 
   // Plotted as a '+', so there's no difference between line and graphics mode
   // we use the same colour as for open clusters
@@ -3004,7 +3014,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
  Plot DSO that is actually a triple star
 }
@@ -3013,19 +3023,20 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[24];
   xx:=round(Ax);
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(cfgplot.Color[24]));
-    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(cfgplot.Color[24]));
+    cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
+    cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
   end else begin
     cnv.Pen.Width := cfgchart.drawpen;
     cnv.Pen.Mode:=pmCopy;
     cnv.Pen.Style := psSolid;
-    cnv.Pen.Color := cfgplot.Color[24];
+    cnv.Pen.Color := col;
 
   // Plotted as a '+', so there's no difference between line and graphics mode
   // we use the same colour as for open clusters
@@ -3041,22 +3052,23 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
   Asterisms are chance? groupings of stars so plot as for open clusters apart from colour
 }
 var
   sz: Double;
   ds,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[23];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
-  nebcolor:=cfgplot.Color[23];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillAst then // SBR color
     begin
       if Asbr<=0 then
@@ -3067,11 +3079,11 @@ begin
         end;
       if Asbr<10 then Asbr:=10;  //some very bright cluster make too bright surface
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[23] and $FF;
-      g:=(cfgplot.Color[23] shr 8) and $FF;
-      b:=(cfgplot.Color[23] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+      icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-6)/9)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=col and $FF;
+      g:=(col shr 8) and $FF;
+      b:=(col shr 16) and $FF;
+      nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
 if cfgplot.usebmp then begin
@@ -3102,25 +3114,26 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
-  Plot HII regions. SAC has these catalogued as 'knots'. We plot them as if they
+  Plot HII regions. NGC has these catalogued as 'knots'. We plot them as if they
   are emission nebulae (bright nebulae)
-  // cannot found one in SAC 8.2 now ??
+  Catalogued as Nebula in SAC 8.2.
 }
 var
   sz: Double;
   ds,dsr,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[28];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
   dsr:=ds div 4;
-  nebcolor:=cfgplot.Color[28];                           // Fix color
+  nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // SBR color
   begin
     if Asbr<=0 then
@@ -3130,11 +3143,11 @@ begin
         Asbr:= Ama + 5*log10(Adim) - 0.26;
       end;
 //    adjust colour by using Asbr and UI options
-    col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-    r:=cfgplot.Color[28] and $FF;
-    g:=(cfgplot.Color[28] shr 8) and $FF;
-    b:=(cfgplot.Color[28] shr 16) and $FF;
-    nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+    icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-((Asbr-11)/4)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+    r:=col and $FF;
+    g:=(col shr 8) and $FF;
+    b:=(col shr 16) and $FF;
+    nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
     nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
   end;
 if cfgplot.UseBMP then begin
@@ -3147,7 +3160,7 @@ end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[28];
+  cnv.Pen.Color := nebcolor;
   if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillEN)or(cfgchart.onprinter) then begin// line mode
     cnv.Brush.Style := bsClear;
   end else begin
@@ -3160,28 +3173,29 @@ end else begin
 end;
 end;
 
-Procedure TSplot.PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot galaxy cluster - in SAC they are the Abell clusters, the size is the Abell radius
-  confusingly, this is not the *angular* radius of the cluster
+  confusingly, this is not the *angular* radius of the cluster   (reference ???)
 }
 var
   sz: Double;
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[32];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-     cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(cfgplot.Color[32]),cfgchart.drawpen/2);
+     cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen/2);
   end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psDot;
   {$ifdef mswindows}cnv.Pen.width:=1;{$endif}
-  cnv.Pen.Color := cfgplot.Color[32];
+  cnv.Pen.Color := col;
   cnv.Brush.Style := bsClear;
 { Plotted as an open dashed circle, so there's no difference between line and
   graphics mode
@@ -3194,23 +3208,24 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string);
+Procedure TSplot.PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
 {
   Plot dark nebula
 }
 var
   sz: Double;
   ds,dsr,xx,yy : Integer;
-  col,r,g,b : byte;
+  icol,r,g,b : byte;
   nebcolor : Tcolor;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[27];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,2*cfgchart.drawpen));
   dsr:=ds div 4;
-  nebcolor:= cfgplot.Color[27];                          // Fix color
+  nebcolor:= col;                          // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillDN then // SBR color
     begin
       if Asbr<=0 then
@@ -3220,11 +3235,11 @@ begin
           Asbr:= Ama + 5*log10(Adim) - 0.26;
         end;
 //    adjust colour by using Asbr and UI options
-      col:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
-      r:=cfgplot.Color[27] and $FF;
-      g:=(cfgplot.Color[27] shr 8) and $FF;
-      b:=(cfgplot.Color[27] shr 16) and $FF;
-      nebcolor:=(r*col div 255)+256*(g*col div 255)+65536*(b*col div 255);
+      icol:=maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,trunc(cfgplot.Nebbright-(0.8)*(cfgplot.Nebbright-cfgplot.Nebgray))])]);
+      r:=col and $FF;
+      g:=(col shr 8) and $FF;
+      b:=(col shr 16) and $FF;
+      nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
       nebcolor := Addcolor(nebcolor,cfgplot.backgroundcolor);
     end;
   if cfgplot.UseBMP then begin
@@ -3243,7 +3258,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
  Plot unknown object?
 }
@@ -3252,20 +3267,21 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[35];
   xx:=round(Ax);
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    BGRADrawLine(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
-    BGRADrawLine(Ax+ds,Ay-ds,Ax-ds,Ay+ds,ColorToBGRA(cfgplot.Color[35]),1,cbmp);
+    BGRADrawLine(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(col),1,cbmp);
+    BGRADrawLine(Ax+ds,Ay-ds,Ax-ds,Ay+ds,ColorToBGRA(col),1,cbmp);
   end else begin
   cnv.Pen.Width := cfgchart.drawpen;
 
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[35];
+  cnv.Pen.Color := col;
 
 // Plotted as an 'X', so there's no difference between line and graphics mode
 
@@ -3280,7 +3296,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
  Plot a circle
 }
@@ -3289,16 +3305,17 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[7];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(cfgplot.Color[7]),cfgchart.drawpen);
+    cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen);
   end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[7];
+  cnv.Pen.Color := col;
   cnv.Brush.Style := bsClear;
 
 // Plotted as a circle, so there's no difference between line and graphics mode
@@ -3311,7 +3328,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
  Plot a rectangle
 }
@@ -3320,16 +3337,17 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[7];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,4*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-    BGRARectangle(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(cfgplot.Color[7]),cfgchart.drawpen,cbmp);
+    BGRARectangle(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(col),cfgchart.drawpen,cbmp);
   end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
-  cnv.Pen.Color := cfgplot.Color[7];
+  cnv.Pen.Color := col;
   cnv.Brush.Style := bsClear;
 
 // Plotted as a rectangle, so there's no difference between line and graphics mode
@@ -3342,7 +3360,7 @@ begin
 end;
 end;
 
-Procedure TSplot.PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer);
+Procedure TSplot.PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
 {
  Plot a lozenge
 }
@@ -3351,6 +3369,7 @@ var
   ds,xx,yy : Integer;
 begin
 // set defaults
+  if not forcecolor then col:=cfgplot.Color[7];
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
@@ -3361,7 +3380,7 @@ begin
          PointF(Ax,Ay+ds),
          PointF(Ax-ds,Ay),
          PointF(Ax,Ay-ds)],
-         ColorToBGRA(cfgplot.Color[7]),cfgchart.drawpen);
+         ColorToBGRA(col),cfgchart.drawpen);
   end else begin
   cnv.Pen.Mode:=pmCopy;
   cnv.Pen.Style := psSolid;
