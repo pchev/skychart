@@ -97,7 +97,7 @@ object f_vodetail: Tf_vodetail
         Left = 623
         Height = 25
         Top = 130
-        Width = 136
+        Width = 134
         BorderSpacing.InnerBorder = 4
         Caption = 'Download catalog'
         OnClick = GetData
@@ -157,6 +157,7 @@ object f_vodetail: Tf_vodetail
           'Draw as star'
           'Draw as DSO'
         )
+        OnClick = RadioGroup1Click
         TabOrder = 6
       end
       object Label9: TLabel
@@ -170,7 +171,7 @@ object f_vodetail: Tf_vodetail
       object Label10: TLabel
         Left = 7
         Height = 15
-        Top = 77
+        Top = 48
         Width = 102
         Caption = 'Default magnitude'
         ParentColor = False
@@ -178,24 +179,24 @@ object f_vodetail: Tf_vodetail
       object FullDownload: TCheckBox
         Left = 543
         Height = 26
-        Top = 88
+        Top = 80
         Width = 146
         Caption = 'Download full catalog'
         OnChange = FullDownloadChange
         TabOrder = 7
       end
       object Label1: TLabel
-        Left = 9
+        Left = 7
         Height = 15
-        Top = 135
+        Top = 77
         Width = 61
         Caption = 'Object type'
         ParentColor = False
       end
       object ComboBox1: TComboBox
-        Left = 159
+        Left = 157
         Height = 26
-        Top = 130
+        Top = 72
         Width = 164
         ItemHeight = 0
         ItemIndex = 14
@@ -218,6 +219,7 @@ object f_vodetail: Tf_vodetail
           'Rectangle'
           'Lozenge'
         )
+        OnChange = ComboBox1Change
         Style = csDropDownList
         TabOrder = 8
         Text = 'Circle'
@@ -242,7 +244,7 @@ object f_vodetail: Tf_vodetail
       object DefMag: TLongEdit
         Left = 159
         Height = 22
-        Top = 73
+        Top = 44
         Width = 80
         TabOrder = 11
         Value = 10
@@ -261,13 +263,30 @@ object f_vodetail: Tf_vodetail
         MaxValue = 36000
       end
       object Button2: TButton
-        Left = 56
+        Left = 623
         Height = 25
-        Top = 35
-        Width = 113
-        Caption = 'Preview'
+        Top = 104
+        Width = 134
+        Caption = 'Data preview'
         OnClick = Button2Click
         TabOrder = 13
+      end
+      object Shape1: TShape
+        Left = 159
+        Height = 24
+        Top = 125
+        Width = 24
+        OnMouseUp = Shape1MouseUp
+        Shape = stRoundSquare
+      end
+      object CheckBox1: TCheckBox
+        Left = 7
+        Height = 26
+        Top = 125
+        Width = 89
+        Caption = 'Force color'
+        OnChange = CheckBox1Change
+        TabOrder = 14
       end
     end
     object Grid: TStringGrid
@@ -286,5 +305,32 @@ object f_vodetail: Tf_vodetail
       TabOrder = 1
       OnMouseUp = GridMouseUp
     end
+  end
+  object ColorDialog1: TColorDialog
+    Color = clSilver
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 40
+    top = 48
   end
 end

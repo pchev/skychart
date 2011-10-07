@@ -70,6 +70,7 @@ Tneb    = packed record
           id,morph : shortstring;
           comment : string;
           messierobject : boolean;
+          color: integer;
           valid : TVneb;
           end;
 Toutlines = packed record
@@ -91,6 +92,7 @@ TCatOption = packed record
           ObjType  : Integer;
           LogSize  : Integer;
           UsePrefix: byte;
+          UseColor : byte;
           altname  : Tvalid;
           flabel   : Tlabellst;
           end;

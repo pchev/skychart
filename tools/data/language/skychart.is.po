@@ -1215,6 +1215,10 @@ msgstr "Gagnaskrár, geisladiskur"
 msgid "Data maintenance"
 msgstr "Viðhald gagna"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 #, fuzzy
 #| msgid "Data start on line %s"

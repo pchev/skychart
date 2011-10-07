@@ -85,6 +85,7 @@ object f_voconfig: Tf_voconfig
           Height = 22
           Top = 24
           Width = 104
+          OnKeyUp = CatDescEditKeyUp
           TabOrder = 3
         end
         object Label1: TLabel

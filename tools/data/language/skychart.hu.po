@@ -1118,6 +1118,10 @@ msgstr "Adatfájlok, CDRom"
 msgid "Data maintenance"
 msgstr "Adatok karbantartása"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 #| msgid "Data start on line %s"
 msgid "Data starts on line %s"

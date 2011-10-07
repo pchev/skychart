@@ -1023,6 +1023,10 @@ msgstr "Arquivos de dados, CDrom"
 msgid "Data maintenance"
 msgstr "Manutenção de dados"
 
+#: u_translation.rsdatapreview
+msgid "Data preview"
+msgstr ""
+
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
 msgstr "Dados iniciam na linha %s"

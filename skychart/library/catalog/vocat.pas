@@ -27,7 +27,7 @@ var
    Defmag: double;
    active,VODocOK: boolean;
    drawtype: integer;
-   drawcolor: integer;
+   drawcolor,forcecolor: integer;
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
    log_pmra, log_pmdec, log_size: boolean;
@@ -168,6 +168,7 @@ begin
   emptyrec.options.ObjType:=1;
   emptyrec.options.LogSize:=0;
   emptyrec.options.UsePrefix:=0;
+  emptyrec.options.UseColor:=forcecolor;
   for n:=1 to 10 do emptyrec.options.altname[n]:=false;
   emptyrec.options.flabel:=flabels;
   emptyrec.options.flabel[lOffset+vsComment]:='File';
@@ -191,6 +192,7 @@ begin
           emptyrec.neb.dim1:=Defsize;
           emptyrec.options.flabel[lOffset+vnMag]:='No mag';
           emptyrec.options.flabel[lOffset+vnDim1]:='No size';
+          emptyrec.neb.color:=drawcolor;
       end;
   end;
 end;
@@ -225,13 +227,14 @@ field_pmra:=-1;field_pmdec:=-1;field_size:=-1;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 config.Filename:=deffile;
-VOName:=config.GetValue('name','');
-VOobject:=config.GetValue('objtype',VOobject);
-active:=config.GetValue('active',false);
-drawtype:=config.GetValue('drawtype',14);
-drawcolor:=config.GetValue('drawcolor',$FF0000);
-DefSize:=config.GetValue('defsize',1);
-Defmag:=config.GetValue('defmag',10);
+VOName:=config.GetValue('VOcat/catalog/name','');
+VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
+active:=config.GetValue('VOcat/plot/active',false);
+drawtype:=config.GetValue('VOcat/plot/drawtype',14);
+drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);
+forcecolor:=config.GetValue('VOcat/plot/forcecolor',0);
+DefSize:=config.GetValue('VOcat/default/defsize',1);
+Defmag:=config.GetValue('VOcat/default/defmag',10);
 config.free;
 if active and FileExists(catfile) then begin
 try
@@ -354,9 +357,6 @@ if Assigned(VoNode) then begin
   end;
   while Assigned(cell) do begin
     buf:=cell.TextContent;
-//    if buf='000.4083' then begin
-//       buf:='000.4083';
-//    end;
     // always ask vizier to add j2000 coordinates.   TODO: process general case coordinates
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
@@ -490,8 +490,8 @@ if CurCat<Ncat then begin
    if (CurCat>0) and VODocOK then VODoc.Free;
    config:=TXMLConfig.Create(nil);
    config.Filename:=deffile;
-   magmax:=config.GetValue('maxmag',-99);
-   defmag:=config.GetValue('defmag',10);
+   magmax:=config.GetValue('VOcat/plot/maxmag',-99);
+   defmag:=config.GetValue('VOcat/default/defmag',10);
    config.free;
    if magmax=-99 then begin
       if (CurCat>0) and VODocOK then VODoc.Free;
@@ -503,7 +503,7 @@ if CurCat<Ncat then begin
       if magmax<defmag then magmax:=defmag;
       config:=TXMLConfig.Create(nil);
       config.Filename:=deffile;
-      config.SetValue('maxmag',trunc(magmax));
+      config.SetValue('VOcat/plot/maxmag',trunc(magmax));
       config.Flush;
       config.Free;
    end;
