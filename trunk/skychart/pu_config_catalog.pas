@@ -41,6 +41,7 @@ type
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
+    Button7: TButton;
     delcat: TButton;
     CatgenButton: TButton;
     Button1: TButton;
@@ -210,6 +211,7 @@ type
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -302,7 +304,8 @@ addcat.caption:=rsAdd;
 delcat.caption:=rsDelete;
 Page1a.Caption:=rsVOCatalog;
 Label1.Caption:=rsVirtualObser;
-Button5.Caption:=rsAddOrUpdate;
+Button5.Caption:=rsAdd;
+Button7.Caption:=rsUpdate1;
 Button6.Caption:=rsDelete;
 Page2.caption:=rsCdCStars;
 Label2.caption:=rsCDCStarsCata;
@@ -447,6 +450,33 @@ begin
   cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
   f_voconfig.Free;
   ShowVO;
+end;
+
+procedure Tf_config_catalog.Button7Click(Sender: TObject);
+var p : integer;
+    fn: string;
+begin
+p:=stringgrid4.selection.top;
+fn:=slash(VODir)+stringgrid4.cells[2,p];
+fn:=ChangeFileExt(fn,'.config');
+f_voconfig:=Tf_voconfig.Create(Self);
+f_voconfig.vopath:=VODir;
+f_voconfig.Proxy:=cmain.HttpProxy;
+f_voconfig.ProxyHost:=cmain.ProxyHost;
+f_voconfig.ProxyPort:=cmain.ProxyPort;
+f_voconfig.ProxyUser:=cmain.ProxyUser;
+f_voconfig.ProxyPass:=cmain.ProxyPass;
+f_voconfig.ra:=ra;
+f_voconfig.dec:=dec;
+f_voconfig.fov:=fov;
+f_voconfig.vourlnum := cmain.VOurl;
+f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
+f_voconfig.UpdateCatalog(fn);
+f_voconfig.ShowModal;
+cmain.VOurl:=f_voconfig.vourlnum;
+cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
+f_voconfig.Free;
+ShowVO;
 end;
 
 procedure Tf_config_catalog.Button6Click(Sender: TObject);
