@@ -3222,6 +3222,14 @@ msgstr "在線 DSS 圖片"
 msgid "Online pictures servers"
 msgstr "在線圖片伺服器"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "只有编號的小行星"
@@ -3277,10 +3285,6 @@ msgstr "其他"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "其他標籤"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "其他線上星表"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

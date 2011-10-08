@@ -134,7 +134,6 @@ resourcestring
   rsLinesGrid = 'Lines / grid';
   rsBelowTheHori = 'Below the horizon';
   rsTelescope = 'Telescope';
-  //rsConnect = 'Connect';
   rsControlPanel = 'Control panel';
   rsWindow = 'Window';
   rsTileHorizont = 'Tile horizontally';
@@ -931,7 +930,6 @@ resourcestring
   rsLessNebulae = 'Less deep sky';
   rsTimeUnits = 'Time units';
   rsSetFOVTo = 'Set FOV to';
-  rsOtherLinesCa = 'Other line-catalogs';
   rsNebulaCommon = 'Deep sky common name';
   rsStarCommonNa = 'Star common name';
   rsCommonName = 'Common name';
@@ -1345,6 +1343,8 @@ resourcestring
   rsSelectMirror = 'Select mirror site';
   rsReloadForCur = 'Reload %s for current chart';
   rsDataPreview = 'Data preview';
+  rsOnlineSearch = 'Online search failed!';
+  rsOnlineSearch2 = 'Online search result';
 
 
 implementation

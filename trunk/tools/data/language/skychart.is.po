@@ -3777,6 +3777,14 @@ msgstr "DSS myndir af netinu"
 msgid "Online pictures servers"
 msgstr "Myndaþjónar á netinu"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Aðeins númeruð smástirni"
@@ -3838,12 +3846,6 @@ msgstr "Annað"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Annað merki"
-
-#: u_translation.rsotherlinesca
-#, fuzzy
-#| msgid "Other Lines Catalogs"
-msgid "Other line-catalogs"
-msgstr "Aðrar línuskrár"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

@@ -3227,6 +3227,14 @@ msgstr "Obrazy Online DSS"
 msgid "Online pictures servers"
 msgstr "Serwery obrazów dostępnych online"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Tylko opisane planetoidy"
@@ -3282,10 +3290,6 @@ msgstr "Inne"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Inne etykiety"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "Inne katalogi liniowe"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

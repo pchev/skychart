@@ -3670,10 +3670,6 @@ msgstr ""
 msgid "Set FOV to"
 msgstr ""
 
-#: u_translation:rsotherlinesca
-msgid "Other line-catalogs"
-msgstr ""
-
 #: u_translation:rsnebulacommon
 msgid "Deep sky common name"
 msgstr ""
@@ -5268,5 +5264,13 @@ msgstr ""
 
 #: u_translation:rsdatapreview
 msgid "Data preview"
+msgstr ""
+
+#: u_translation:rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation:rsonlinesearch2
+msgid "Online search result"
 msgstr ""
 

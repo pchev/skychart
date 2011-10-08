@@ -159,7 +159,7 @@ const cdcversion = 'Version 3.5-svn';
       Altaz = 1;
       Gal = 2;
       Ecl = 3;
-      ftStar=1; ftVar=2; ftDbl=3; ftNeb=4; ftlin=5; ftPla=6; ftCom=7; ftAst=8; ftInv=9;
+      ftStar=1; ftVar=2; ftDbl=3; ftNeb=4; ftlin=5; ftPla=6; ftCom=7; ftAst=8; ftInv=9; ftOnline=10;
       BaseStar = 1000;
       MaxStarCatalog = 15;
       bsc     = 1001;
@@ -263,7 +263,7 @@ const cdcversion = 'Version 3.5-svn';
 
       URL_TLE = 'https://www.space-track.org';
       URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
-      
+
       URL_HTTPCometElements = 'http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt';
       URL_HTTPCometElements2 = 'http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt';
       URL_FTPCometElements = '**';
@@ -377,6 +377,13 @@ const cdcversion = 'Version 3.5-svn';
                     'http://sohowww.nascom.nasa.gov/data/realtime/eit_304/1024/latest.jpg',
                     'http://sohowww.nascom.nasa.gov/data/realtime/mdi_igr/1024/latest.jpg',
                     'http://sohowww.nascom.nasa.gov/data/realtime/mdi_mag/1024/latest.jpg');
+      sesame_maxurl=4;
+      sesame_url: array [1..sesame_maxurl,1..2] of string = (
+          ('http://cds.u-strasbg.fr/cgi-bin/nph-sesame','CDS - Strasbourg, France'),
+          ('http://vizier.cfa.harvard.edu/viz-bin/nph-sesame','CFA Harvard - USA'),
+          ('http://vizier.hia.nrc.ca/viz-bin/nph-sesame','CADC - Canada'),
+          ('http://vizier.u-strasbg.fr/cgi-bin/nph-sesame','VizieR - Strasbourg, France'));
+
 
       DefaultffmpegOptions='-b 18000k -bt 10000k';
 {$ifdef linux}
@@ -670,6 +677,7 @@ type
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
                 ObsNameList: TStringList;
+                SesameUrlNum,SesameCatNum: integer;
                 constructor Create;
                 destructor Destroy; override;
                 procedure Assign(Source: Tconf_main);
@@ -1703,6 +1711,8 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: Integer;
 begin
+SesameUrlNum:=Source.SesameUrlNum;
+SesameCatNum:=Source.SesameCatNum;
 prtname:=Source.prtname;
 language:=Source.language;
 Constellationpath:=Source.Constellationpath;
