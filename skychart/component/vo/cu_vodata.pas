@@ -175,7 +175,7 @@ case Fvo_type of
   VizierMeta: begin
                 url:=url+'-source='+FTableName;
                 if FSelectCoord then
-                   url:=url+'&-c='+formatfloat(f6,(15*Fra))+'%20'+formatfloat(s6,Fde)+'&-c.r='+inttostr(round(60*Ffov))
+                   url:=url+'&-c='+formatfloat(f6,(Fra))+'%20'+formatfloat(s6,Fde)+'&-c.r='+inttostr(round(60*Ffov))
                 else
                    url:=url+'&recno=>='+inttostr(FFirst);
                    for i:=0 to FFieldList.Count-1 do begin
@@ -185,7 +185,7 @@ case Fvo_type of
                 url:=url+'&-oc.form=dec&-out.max='+inttostr(Fmax)+'&-out.form=XML-VOTable(XSL)';
               end;
   ConeSearch: begin
-                url:=Fbaseurl+'RA='+formatfloat(f6,(15*Fra))+'&DEC='+formatfloat(s6,(Fde))+'&SR='+formatfloat(f6,(Ffov));
+                url:=Fbaseurl+'RA='+formatfloat(f6,(Fra))+'&DEC='+formatfloat(s6,(Fde))+'&SR='+formatfloat(f6,(Ffov));
               end;
 end;
 http.Clear;

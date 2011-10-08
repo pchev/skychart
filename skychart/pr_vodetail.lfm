@@ -45,30 +45,6 @@ object f_vodetail: Tf_vodetail
         Caption = 'Rows'
         ParentColor = False
       end
-      object Label4: TLabel
-        Left = 543
-        Height = 15
-        Top = 14
-        Width = 17
-        Caption = 'RA'
-        ParentColor = False
-      end
-      object Label5: TLabel
-        Left = 543
-        Height = 15
-        Top = 37
-        Width = 27
-        Caption = 'DEC'
-        ParentColor = False
-      end
-      object Label6: TLabel
-        Left = 543
-        Height = 15
-        Top = 60
-        Width = 24
-        Caption = 'FOV'
-        ParentColor = False
-      end
       object tn: TEdit
         Left = 56
         Height = 22
@@ -94,47 +70,14 @@ object f_vodetail: Tf_vodetail
         TabOrder = 1
       end
       object Button1: TButton
-        Left = 623
+        Left = 559
         Height = 25
-        Top = 130
+        Top = 96
         Width = 134
         BorderSpacing.InnerBorder = 4
         Caption = 'Download catalog'
         OnClick = GetData
         TabOrder = 2
-      end
-      object RaDec1: TRaDec
-        Left = 591
-        Height = 21
-        Top = 10
-        Width = 160
-        kind = RA
-        value = 0.71166666666666
-        Enabled = False
-        ParentColor = False
-        TabOrder = 3
-      end
-      object RaDec2: TRaDec
-        Left = 591
-        Height = 21
-        Top = 33
-        Width = 160
-        kind = DE
-        value = 41.2641666666666
-        Enabled = False
-        ParentColor = False
-        TabOrder = 4
-      end
-      object RaDec3: TRaDec
-        Left = 591
-        Height = 21
-        Top = 56
-        Width = 159
-        kind = Az
-        value = 0.5
-        Enabled = False
-        ParentColor = False
-        TabOrder = 5
       end
       object RadioGroup1: TRadioGroup
         Left = 327
@@ -158,7 +101,7 @@ object f_vodetail: Tf_vodetail
           'Draw as DSO'
         )
         OnClick = RadioGroup1Click
-        TabOrder = 6
+        TabOrder = 3
       end
       object Label9: TLabel
         Left = 7
@@ -177,13 +120,13 @@ object f_vodetail: Tf_vodetail
         ParentColor = False
       end
       object FullDownload: TCheckBox
-        Left = 543
+        Left = 559
         Height = 26
-        Top = 80
+        Top = 24
         Width = 146
         Caption = 'Download full catalog'
         OnChange = FullDownloadChange
-        TabOrder = 7
+        TabOrder = 4
       end
       object Label1: TLabel
         Left = 7
@@ -221,24 +164,24 @@ object f_vodetail: Tf_vodetail
         )
         OnChange = ComboBox1Change
         Style = csDropDownList
-        TabOrder = 8
+        TabOrder = 5
         Text = 'Circle'
       end
       object ButtonBack: TButton
-        Left = 543
+        Left = 618
         Height = 25
         Top = 130
         Width = 75
         Caption = '< Back'
         OnClick = ButtonBackClick
-        TabOrder = 9
+        TabOrder = 6
       end
       object tr: TLongEdit
         Left = 239
         Height = 22
         Top = 9
         Width = 80
-        TabOrder = 10
+        TabOrder = 7
         Value = 0
       end
       object DefMag: TLongEdit
@@ -246,7 +189,7 @@ object f_vodetail: Tf_vodetail
         Height = 22
         Top = 44
         Width = 80
-        TabOrder = 11
+        TabOrder = 8
         Value = 10
       end
       object DefSize: TLongEdit
@@ -257,19 +200,19 @@ object f_vodetail: Tf_vodetail
         Width = 80
         ParentShowHint = False
         ShowHint = True
-        TabOrder = 12
+        TabOrder = 9
         Value = 60
         MinValue = 1
         MaxValue = 36000
       end
       object Button2: TButton
-        Left = 623
+        Left = 559
         Height = 25
-        Top = 104
+        Top = 64
         Width = 134
         Caption = 'Data preview'
         OnClick = Button2Click
-        TabOrder = 13
+        TabOrder = 10
       end
       object Shape1: TShape
         Left = 159
@@ -286,7 +229,7 @@ object f_vodetail: Tf_vodetail
         Width = 89
         Caption = 'Force color'
         OnChange = CheckBox1Change
-        TabOrder = 14
+        TabOrder = 11
       end
     end
     object Grid: TStringGrid

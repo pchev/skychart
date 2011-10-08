@@ -1,2 +1,2 @@
 // Created by Svn2RevisionInc
-const RevisionStr = '1879:1881';
+const RevisionStr = '1882';

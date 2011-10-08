@@ -59,12 +59,6 @@ type
     tn: TEdit;
     desc: TMemo;
     Button1: TButton;
-    RaDec1: TRaDec;
-    RaDec2: TRaDec;
-    Label4: TLabel;
-    Label5: TLabel;
-    RaDec3: TRaDec;
-    Label6: TLabel;
     procedure Button2Click(Sender: TObject);
     procedure ButtonBackClick(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
@@ -103,9 +97,6 @@ Rows.Caption:=rsRows;
 Label10.Caption:=rsDefaultMagni;
 Label9.Caption:=rsDefaultSizeA;
 Label1.Caption:=rsObjectType;
-Label4.Caption:=rsRA;
-Label5.Caption:=rsDEC;
-Label6.Caption:=rsFOV;
 FullDownload.Caption:=rsDownloadFull;
 ButtonBack.Caption:='< '+rsBack;
 Button1.Caption:=rsDownloadCata;
@@ -147,16 +138,6 @@ end;
 if FullDownload.Checked and (tr.Value=0) then begin
    ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_fullmaxrecord)]));
 end;
-if FullDownload.Checked then begin
-   RaDec1.Enabled:=false;
-   RaDec2.Enabled:=false;
-   RaDec3.Enabled:=false;
-end else begin
-   RaDec1.Enabled:=true;
-   RaDec2.Enabled:=true;
-   RaDec3.Enabled:=true;
-end;
-
 end;
 
 procedure Tf_vodetail.ButtonBackClick(Sender: TObject);
