@@ -3224,6 +3224,14 @@ msgstr "Online DSS зображення"
 msgid "Online pictures servers"
 msgstr "Online сервери зображень"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Тільки пронумеровані астероїди"
@@ -3279,10 +3287,6 @@ msgstr "Інше"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Інші позначки"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "Інші каталоги абрисів"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

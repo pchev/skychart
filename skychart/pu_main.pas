@@ -1242,6 +1242,8 @@ try
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
  f_search.cfgshr:=catalog.cfgshr;
  f_search.showpluto:=def_cfgsc.ShowPluto;
+ f_search.SesameUrlNum:=cfgm.SesameUrlNum;
+ f_search.SesameCatNum:=cfgm.SesameCatNum;
  f_search.Init;
 {$ifdef trace_debug}
  WriteTrace('Connect DB');
@@ -2815,9 +2817,9 @@ begin
  repeat
    f_search.showmodal;
    if f_search.modalresult=mrOk then begin
-      ok:=Find(f_search.SearchKind,f_search.Num,f_search.ra,f_search.de);
-      if ok<>msgOK then
-        ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
+        ok:=Find(f_search.SearchKind,f_search.Num,f_search.ra,f_search.de);
+        if ok<>msgOK then
+          ShowError(Format(rsNotFoundMayb, [f_search.Num, crlf]) );
    end;
  until (ok=msgOK) or (f_search.ModalResult<>mrOk);
 end;
@@ -2855,7 +2857,12 @@ if chart is Tf_chart then with chart as Tf_chart do begin
       7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc); itype:=ftAst  ; end;
       8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla  ; end;
       9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin  ; end;
-      10 : begin ok:=catalog.SearchLines(num,ar1,de1) ; itype:=ftlin  ; end;
+      10 : begin
+            ar1:=def_ra;
+            de1:=def_de;
+            itype:=ftOnline ;
+            ok:=true;
+           end;
       11 : begin ok:=catalog.SearchConstAbrev(num,ar1,de1); itype:=ftlin  ; end;
       else ok:=false;
       end;
@@ -2882,6 +2889,20 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             sc.cfgsc.FindType:=itype;
             sc.cfgsc.TrackOn:=False;
             sc.cfgsc.TrackType:=0;
+        end else if itype=ftOnline then begin
+            sc.cfgsc.FindCatname:='';
+            sc.cfgsc.FindCat:=f_search.sesame_resolver;
+            sc.cfgsc.FindName:=f_search.sesame_name;
+            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+'OSR'+tab+f_search.sesame_name+tab+f_search.sesame_desc;
+            sc.cfgsc.FindRA:=ar1;
+            sc.cfgsc.FindDec:=de1;
+            sc.cfgsc.FindSize:=0;
+            sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindOK:=true;
+            sc.cfgsc.FindType:=itype;
+            sc.cfgsc.TrackOn:=False;
+            sc.cfgsc.TrackType:=0;
+            ShowIdentLabel;
         end else begin
           ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
           if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
@@ -3872,6 +3893,8 @@ begin
 nightvision:=false;
 cfgm.MaxChildID:=0;
 cfgm.prtname:='';
+cfgm.SesameUrlNum:=0;
+cfgm.SesameCatNum:=3;
 cfgm.configpage:=0;
 cfgm.configpage_i:=0;
 cfgm.configpage_j:=0;
@@ -4866,6 +4889,8 @@ LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
 NightVision:=ReadBool(section,'NightVision',NightVision);
+cfgm.SesameUrlNum:=ReadInteger(section,'SesameUrlNum',cfgm.SesameUrlNum);
+cfgm.SesameCatNum:=ReadInteger(section,'SesameCatNum',cfgm.SesameCatNum);
 cfgm.prtname:=ReadString(section,'prtname',cfgm.prtname);
 cfgm.Paper:=ReadInteger(section,'Paper',cfgm.Paper);
 cfgm.PrinterResolution:=ReadInteger(section,'PrinterResolution',cfgm.PrinterResolution);
@@ -5491,6 +5516,8 @@ WriteBool(section,'SaveConfigOnExit',SaveConfigOnExit.Checked);
 WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
+WriteInteger(section,'SesameUrlNum',f_search.SesameUrlNum);
+WriteInteger(section,'SesameCatNum',f_search.SesameCatNum);
 WriteString(section,'prtname',cfgm.prtname);
 WriteInteger(section,'Paper',cfgm.Paper);
 WriteInteger(section,'PrinterResolution',cfgm.PrinterResolution);

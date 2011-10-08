@@ -2186,7 +2186,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     bmp: Tbitmap;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
-    isStar, isSolarSystem, isd2k, isvo: boolean;
+    isStar, isSolarSystem, isd2k, isvo, isOsr: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp: double;
 function Bold(s:string):string;
@@ -2219,6 +2219,7 @@ else if otype='Ps' then precision:=1
 else precision:=0;
 isStar:=(otype='*');
 isSolarSystem:=((otype='P')or(otype='Ps')or(otype='S*')or(otype='As')or(otype='Cm'));
+isOsr:=(otype='OSR');
 buf:=LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
@@ -2307,7 +2308,7 @@ repeat
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
      if copy(buf2, 1, 5)=rsDesc then buf2:=stringreplace(buf2, ';', html_br+html_sp+html_sp+html_sp, [rfReplaceAll]);
-     if isvo then
+     if isvo or isOsr then
         txt:=txt+bold(buf2)
      else
         txt:=txt+bold(LongLabel(buf2));
@@ -2479,7 +2480,8 @@ else if txt='Cm' then txt:=rsComet
 else if txt='DSCm' then txt:=rsComet
 else if txt='Sat' then txt:=rsArtificialSa2
 else if txt='C1' then txt:=rsExternalCata
-else if txt='C2' then txt:=rsExternalCata;
+else if txt='C2' then txt:=rsExternalCata
+else if txt='OSR' then txt:=rsOnlineSearch2;
 result:=txt;
 end;
 

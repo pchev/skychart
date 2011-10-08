@@ -3220,6 +3220,14 @@ msgstr "Nettbaserte DSS-bilder"
 msgid "Online pictures servers"
 msgstr "Nettbaserte bildeservere"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Bare nummererte asteroider"
@@ -3275,10 +3283,6 @@ msgstr "Andre"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Andre påskrifter"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "Andre linje-kataloger"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

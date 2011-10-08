@@ -3222,6 +3222,14 @@ msgstr "V živo DSS slike"
 msgid "Online pictures servers"
 msgstr "V živo strežniki slik"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Samo oštevilčeni asteroidi"
@@ -3277,10 +3285,6 @@ msgstr "Drugi"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Druga oznaka"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "Nastavitve programa"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

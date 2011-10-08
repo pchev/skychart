@@ -3224,6 +3224,14 @@ msgstr "Imatges DSS"
 msgid "Online pictures servers"
 msgstr "Servidors d'imatges"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Solament els numerats"
@@ -3279,10 +3287,6 @@ msgstr "Altres"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Altra etiqueta"
-
-#: u_translation.rsotherlinesca
-msgid "Other line-catalogs"
-msgstr "Altres catàlegs de línia"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"

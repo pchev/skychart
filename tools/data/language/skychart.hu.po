@@ -3494,6 +3494,14 @@ msgstr "Online DSS képek"
 msgid "Online pictures servers"
 msgstr "Online képek szervere"
 
+#: u_translation.rsonlinesearch
+msgid "Online search failed!"
+msgstr ""
+
+#: u_translation.rsonlinesearch2
+msgid "Online search result"
+msgstr ""
+
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Csak számozott kisbolygók"
@@ -3552,11 +3560,6 @@ msgstr "Más"
 #: u_translation.rsotherlabel
 msgid "Other label"
 msgstr "Egyéb címke"
-
-#: u_translation.rsotherlinesca
-#| msgid "Other Lines Catalogs"
-msgid "Other line-catalogs"
-msgstr "Egyéb katalógus"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
