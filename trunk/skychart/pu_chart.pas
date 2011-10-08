@@ -2168,9 +2168,17 @@ Refresh;
 end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
+var ra2000,de2000: double;
 begin
 if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
+ra2000:=sc.cfgsc.FindRA;
+de2000:=sc.cfgsc.FindDec;
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+f_detail.ra:=ra2000;
+f_detail.de:=de2000;
+f_detail.objname:=sc.cfgsc.FindName;
 f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
 f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
 f_detail.show;
@@ -2288,9 +2296,11 @@ if isd2k then begin
 end else if isvo then begin
   txt:=txt+html_b+rsFrom+blank+'Virtual Observatory table'+':'+html_br+sc.cfgsc.FindCatname+htms_b+html_br;
 end else begin
-  if sc.cfgsc.FindCat<>'' then begin
+  if (sc.cfgsc.FindCat<>'')or(sc.cfgsc.FindCatname<>'') then begin
     txt:=txt+html_b+rsInformationF+blank+sc.cfgsc.FindCat+':';
-    if sc.cfgsc.FindCatname<>'' then txt:=txt+html_br+sc.cfgsc.FindCatname;
+  end;
+  if sc.cfgsc.FindCatname<>'' then begin
+    txt:=txt+html_br+sc.cfgsc.FindCatname;
     txt:=txt+htms_b+html_br;
   end;
 end;

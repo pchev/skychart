@@ -18,7 +18,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
+You should have received a EditCopy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
@@ -39,7 +39,9 @@ type
   { Tf_detail }
 
   Tf_detail = class(TForm)
-    Copy: TAction;
+    Button4: TButton;
+    ComboBox1: TComboBox;
+    EditCopy: TAction;
     HTMLViewer1: THTMLViewer;
     SelectAll: TAction;
     Panel1: TPanel;
@@ -54,7 +56,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure CopyExecute(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure EditCopyExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure HTMLViewer1ImageRequest(Sender: TObject; const SRC: string;
       var Stream: TMemoryStream);
@@ -68,8 +71,11 @@ type
     FHTMLText: String;
     procedure SetHTMLText(const value: string);
   public
-    source_chart:string;
     { Public declarations }
+    source_chart:string;
+    ra,de: double;
+    objname: string;
+    InfoUrlNum: integer;
     property text: string read FHTMLText write SetHTMLText;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
@@ -88,6 +94,7 @@ Caption:=rsDetails;
 Button1.caption:=rsClose;
 Button2.caption:=rsCenterObject;
 Button3.caption:=rsNeighbor;
+Button4.Caption:=rsSearch;
 SelectAll1.caption:=rsSelectAll;
 Copy1.caption:=rsCopy;
 SetHelp(self,hlpInfo);
@@ -108,7 +115,32 @@ begin
 if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
-procedure Tf_detail.CopyExecute(Sender: TObject);
+procedure Tf_detail.Button4Click(Sender: TObject);
+var i: integer;
+    url,sra,sde,n: string;
+begin
+  i:=ComboBox1.ItemIndex+1;
+  if i>infoname_maxurl then begin
+    i:=i-infoname_maxurl;
+    url:=infocoord_url[i,1];
+    sra:=trim(ARtoStr(rad2deg*ra/15));
+    sde:=trim(DEToStr3(rad2deg*de));
+    if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
+    case i of
+      1 : url:=url+sra+'%20'+sde;            // simbad
+      2 : url:=url+'&lon='+sra+'&lat='+sde;  // ned
+      3 : url:=url+sra+'%20'+sde;            // hyperleda
+    end;
+  end else begin
+    n:=StringReplace(objname,' ','%20',[rfReplaceAll]);
+    n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
+    n:=StringReplace(n,'.','%20',[rfReplaceAll]);
+    url:=infoname_url[i,1]+n;
+  end;
+  ExecuteFile(url);
+end;
+
+procedure Tf_detail.EditCopyExecute(Sender: TObject);
 var buf: string;
 begin
   if HTMLViewer1.SelLength=0 then HTMLViewer1.SelectAll;
@@ -153,8 +185,17 @@ begin
 end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
+var i: integer;
 begin
 SetLang;
+ComboBox1.Items.Clear;
+for i:=1 to infoname_maxurl do
+  if infoname_url[i,2]<>'' then
+    ComboBox1.Items.Add(infoname_url[i,2]);
+for i:=1 to infocoord_maxurl do
+  if infocoord_url[i,2]<>'' then
+    ComboBox1.Items.Add(infocoord_url[i,2]);
+ComboBox1.ItemIndex:=InfoUrlNum;
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);

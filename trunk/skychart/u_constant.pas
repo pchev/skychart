@@ -383,6 +383,16 @@ const cdcversion = 'Version 3.5-svn';
           ('http://vizier.cfa.harvard.edu/viz-bin/nph-sesame','CFA Harvard - USA'),
           ('http://vizier.hia.nrc.ca/viz-bin/nph-sesame','CADC - Canada'),
           ('http://vizier.u-strasbg.fr/cgi-bin/nph-sesame','VizieR - Strasbourg, France'));
+      infoname_maxurl=3;
+      infoname_url: array [1..infoname_maxurl,1..2] of string = (
+          ('http://simbad.u-strasbg.fr/simbad/sim-id?Ident=','Simbad by name'),
+          ('http://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?extend=no&out_csys=Equatorial&out_equinox=J2000.0&obj_sort=RA+or+Longitude&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&objname=','NED by name'),
+          ('http://leda.univ-lyon1.fr/ledacat.cgi?o=','HyperLeda by name'));
+      infocoord_maxurl=3;
+      infocoord_url: array [1..infocoord_maxurl,1..2] of string = (
+          ('http://simbad.u-strasbg.fr/simbad/sim-coo?Radius=5&Radius.unit=arcmin&Coord=','Simbad by coordinates'),
+          ('http://ned.ipac.caltech.edu/cgi-bin/nph-objsearch?search_type=Near+Position+Search&in_csys=Equatorial&out_csys=Equatorial&out_equinox=J2000.0&of=pre_text&zv_breaker=30000.0&list_limit=5&img_stamp=YES&in_equinox=J2000.0&radius=2.0','NED by coordinates'),
+          ('http://leda.univ-lyon1.fr/fG.cgi?n=0&c=o&ob=ra&f=5&p=J','HyperLeda by coordinates'));
 
 
       DefaultffmpegOptions='-b 18000k -bt 10000k';
