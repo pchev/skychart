@@ -676,7 +676,7 @@ begin
   case cat of
    bsc     : begin
              EmptyRec.options.flabel:=StarLabel;
-             EmptyRec.options.ShortName:='BSC';
+             EmptyRec.options.ShortName:='';
              EmptyRec.options.LongName:='Bright Stars Catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
@@ -689,6 +689,8 @@ begin
              EmptyRec.options.flabel[16]:='HR';
              EmptyRec.options.flabel[17]:='HD';
              EmptyRec.options.flabel[18]:=rsCommonName;
+             EmptyRec.options.flabel[19]:='Flamsteed';
+             EmptyRec.options.flabel[20]:='Bayer';
              Emptyrec.star.valid[vsId]:=true;
              Emptyrec.star.valid[vsMagv]:=true;
              Emptyrec.star.valid[vsB_v]:=true;
@@ -700,7 +702,7 @@ begin
              end;
    sky2000 : begin
              EmptyRec.options.flabel:=StarLabel;
-             EmptyRec.options.ShortName:='Sky';
+             EmptyRec.options.ShortName:='';
              EmptyRec.options.LongName:='Sky2000 catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
@@ -866,7 +868,7 @@ begin
              end;
    microcat: begin
              EmptyRec.options.flabel:=StarLabel;
-             EmptyRec.options.ShortName:='MCT';
+             EmptyRec.options.ShortName:='';
              EmptyRec.options.LongName:='Microcat catalog';
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
@@ -912,7 +914,7 @@ begin
              end;
    gcvs    : begin
              EmptyRec.options.flabel:=VarLabel;
-             EmptyRec.options.ShortName:='GCV';
+             EmptyRec.options.ShortName:='GCVS';
              EmptyRec.options.LongName:='General Catalog of Variable stars';
              EmptyRec.options.rectype:=rtVar;
              EmptyRec.options.Equinox:=2000;
@@ -1392,7 +1394,7 @@ if result then begin
    rec.star.pmra:=deg2rad*lin.pmar/1000/3600;  // mas -> rad
    rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
    rec.star.sp:=lin.sp;
-   if lin.flam>0 then rec.star.id:=copy(inttostr(lin.flam)+blank15,1,3) else rec.star.id:='';
+   if (lin.flam>0)and(trim(lin.bayer)='') then rec.star.id:=copy(inttostr(lin.flam)+blank15,1,3) else rec.star.id:='';
    rec.star.id:=rec.star.id+blank+ lin.bayer+blank+lin.cons;
    rec.str[1]:=inttostr(lin.bs);
    if lin.hd>0 then rec.str[2]:=inttostr(lin.hd) else rec.str[2]:='';
@@ -1409,6 +1411,8 @@ if result then begin
    end;
    i:=pos(';',rec.str[3]);
    if i>0 then rec.str[3]:=copy(rec.str[3],1,i-1);
+   if lin.flam>0 then begin rec.str[4]:=inttostr(lin.flam); rec.vstr[4]:=true; end;
+   if trim(lin.bayer)<>'' then begin rec.str[5]:=trim(lin.bayer); rec.vstr[5]:=true; end;
 end;
 end;
 
