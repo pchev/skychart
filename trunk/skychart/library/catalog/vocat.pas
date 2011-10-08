@@ -189,7 +189,7 @@ begin
           emptyrec.neb.valid[vnNebtype]:=true;
           emptyrec.neb.nebtype:=drawtype;
           emptyrec.neb.mag:=-99;
-          emptyrec.neb.dim1:=Defsize;
+ //         emptyrec.neb.dim1:=Defsize;
           emptyrec.options.flabel[lOffset+vnMag]:='No mag';
           emptyrec.options.flabel[lOffset+vnDim1]:='No size';
           emptyrec.neb.color:=drawcolor;
@@ -282,7 +282,7 @@ while Assigned(VoNode) do begin
           end;
        end;
     end;
-    if pos('phys.angSize',fielddata.ucd)=1 then begin
+    if (pos('phys.angSize',fielddata.ucd)=1)and(field_size=-1) then begin  //first dimmension
       u:=angleunits(fielddata.units,l);
       if (u>0) then begin
          field_size:=j;
@@ -395,13 +395,16 @@ if Assigned(VoNode) then begin
                lin.neb.mag:=StrToFloatDef(buf,Defmag);;
                lin.neb.valid[vnMag]:=true;
             end;
-            if i=field_size then begin
+            if (buf<>'')and(i=field_size) then begin
+               if lin.neb.id='MCG-06-29-008' then begin
+                 recno:=recno;
+               end;
                lin.neb.dim1:=StrToFloatDef(buf,Defsize);
                if log_size and (lin.neb.dim1<>Defsize) then lin.neb.dim1:=power(10,lin.neb.dim1);
                lin.neb.dim1:=unit_size*lin.neb.dim1;
                lin.neb.valid[vnDim1]:=true;
             end;
-            if (pos('src.class',TFieldData(VOFields.Objects[i]).ucd)>0)and(pos('src.class.',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
+            if (buf<>'')and(pos('src.class',TFieldData(VOFields.Objects[i]).ucd)>0)and(pos('src.class.',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
                if trim(buf)='Gx'  then lin.neb.nebtype:=1
                else if trim(buf)='OC'  then lin.neb.nebtype:=2
                else if trim(buf)='Gb'  then lin.neb.nebtype:=3
@@ -413,10 +416,9 @@ if Assigned(VoNode) then begin
                else if trim(buf)='***'  then lin.neb.nebtype:=9
                else if trim(buf)='Ast'  then lin.neb.nebtype:=10
                else if trim(buf)='Kt'  then lin.neb.nebtype:=11
-               else if trim(buf)='?'  then lin.neb.nebtype:=0
-               else if trim(buf)=''  then lin.neb.nebtype:=0
-               else if trim(buf)='-'  then lin.neb.nebtype:=-1
-               else if trim(buf)='PD'  then lin.neb.nebtype:=-1;
+               else if trim(buf)='?'  then lin.neb.nebtype:=lin.options.ObjType
+               else if trim(buf)='-'  then lin.neb.nebtype:=lin.options.ObjType
+               else if trim(buf)='PD'  then lin.neb.nebtype:=lin.options.ObjType;
             end;
             end;
     end;

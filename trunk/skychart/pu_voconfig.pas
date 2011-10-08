@@ -392,18 +392,6 @@ if CatList.Row>0 then begin
        tr.value:=VO_Detail1.Rows[n];
        if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
           else desc.text:=CatName;
-       radec1.Enabled:=VO_Detail1.HasCoord[n];
-       radec2.Enabled:=VO_Detail1.HasCoord[n];
-       radec3.Enabled:=VO_Detail1.HasCoord[n];
-       if radec1.Enabled then begin
-          radec1.value:=rad2deg*ra/15;
-          radec2.value:=rad2deg*dec;
-          radec3.value:=rad2deg*fov;
-       end else begin
-          radec1.value:=0;
-          radec2.value:=0;
-          radec3.value:=0;
-       end;
        if not VO_Detail1.HasCoord[n] then
           RadioGroup1.ItemIndex:=0
        else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
@@ -464,12 +452,12 @@ if sender is Tf_vodetail then
    with sender as Tf_vodetail do begin
        VO_TableData1.vo_type:=VO_Detail1.vo_type;
        VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Text,[]);
-       VO_TableData1.SelectCoord:=Radec1.Enabled;
-       VO_TableData1.ra:=RaDec1.value;
-       VO_TableData1.dec:=RaDec2.value;
-       VO_TableData1.fov:=RaDec3.value;
+       VO_TableData1.SelectCoord:=not FullDownload.Checked;
+       VO_TableData1.ra:=rad2deg*ra;
+       VO_TableData1.dec:=rad2deg*dec;
+       VO_TableData1.fov:=rad2deg*fov;
        if VO_TableData1.SelectCoord then
-           coordselection:='RA:'+RaDec1.text+' DEC:'+RaDec2.text+' FOV:'+RaDec3.text
+           coordselection:='RA:'+formatfloat(f2,ra/15)+' DEC:'+formatfloat(f2,dec)+' FOV:'+formatfloat(f2,fov)
        else
            coordselection:='';
        DataGrid.cells[1,1]:=DataGrid.cells[1,1]+coordselection;
@@ -542,7 +530,7 @@ try
    VO_TableData1.vo_type:=votype;
    VO_TableData1.BaseUrl:=baseurl;
    VO_TableData1.SelectCoord:=true;
-   VO_TableData1.ra:=rad2deg*ra/15;
+   VO_TableData1.ra:=rad2deg*ra;
    VO_TableData1.dec:=rad2deg*dec;
    VO_TableData1.fov:=rad2deg*fov;
    VO_TableData1.FirstRec:=1;
@@ -565,12 +553,12 @@ if sender is Tf_vodetail then
    with sender as Tf_vodetail do begin
        VO_TableData1.vo_type:=VO_Detail1.vo_type;
        VO_TableData1.BaseUrl:=stringreplace(VO_Detail1.BaseUrl,VO_Detail1.CatalogName+'/*',tn.Text,[]);
-       VO_TableData1.SelectCoord:=Radec1.Enabled;
-       VO_TableData1.ra:=RaDec1.value;
-       VO_TableData1.dec:=RaDec2.value;
-       VO_TableData1.fov:=RaDec3.value;
+       VO_TableData1.SelectCoord:=not FullDownload.Checked;
+       VO_TableData1.ra:=rad2deg*ra;
+       VO_TableData1.dec:=rad2deg*dec;
+       VO_TableData1.fov:=rad2deg*fov;
        if VO_TableData1.SelectCoord then
-           coordselection:='RA:'+RaDec1.text+' DEC:'+RaDec2.text+' FOV:'+RaDec3.text
+           coordselection:='RA:'+formatfloat(f2,ra/15)+' DEC:'+formatfloat(f2,dec)+' FOV:'+formatfloat(f2,fov)
        else
            coordselection:='';
        DataGrid.cells[1,1]:=DataGrid.cells[1,1]+coordselection;
