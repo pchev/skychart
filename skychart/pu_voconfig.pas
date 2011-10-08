@@ -49,6 +49,7 @@ type
     Label6: TLabel;
     Panel3: TPanel;
     Panel4: TPanel;
+    CloseTimer: TTimer;
     VO_Catalogs1: TVO_Catalogs;
     PageControl1: TPageControl;
     TabCat: TTabSheet;
@@ -73,6 +74,7 @@ type
     Button13: TButton;
     procedure CatDescEditKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure CloseTimerTimer(Sender: TObject);
     procedure Searchbyposition(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonHelpClick(Sender: TObject);
@@ -87,6 +89,7 @@ type
   private
     { Private declarations }
     Fvopath,CatName : string;
+    Fcurrentconfig: string;
     Fvourlnum: integer;
     FReloadFeedback: TDownloadFeedback;
     Fvo_maxrecord: integer;
@@ -96,6 +99,7 @@ type
     procedure ClearDataGrid;
     procedure PreviewData(Sender: TObject);
     procedure GetData(Sender: TObject);
+    procedure Updateconfig(Sender: TObject);
     procedure Goback(Sender: TObject);
     procedure ReceiveData(Sender: TObject);
     procedure DefColumns(Sender: TObject);
@@ -115,6 +119,7 @@ type
     OnlyCoord: boolean;
     procedure Setlang;
     procedure ReloadVO(fn: string);
+    procedure UpdateCatalog(cn: string);
     property vopath: string read Fvopath write Setvopath;
     property Proxy: boolean  write SetProxy;
     property ProxyHost: string  write SetProxyHost;
@@ -253,7 +258,6 @@ begin
  VO_Catalogs1.vo_source:=Tvo_source(RadioGroup1.itemindex);
  SetServerList;
  VO_Catalogs1.ClearCatList;
- ClearCatalog;
  ClearDataGrid;
  Timer1.Enabled:=true;
 end;
@@ -302,6 +306,13 @@ procedure Tf_voconfig.CatDescEditKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key=13 then  SearchCatalogDesc(Sender);
+end;
+
+procedure Tf_voconfig.CloseTimerTimer(Sender: TObject);
+begin
+  // to avoid to call Close from a child event
+  CloseTimer.Enabled:=false;
+  Close;
 end;
 
 procedure Tf_voconfig.ButtonBackClick(Sender: TObject);
@@ -410,6 +421,128 @@ if CatList.Row>0 then begin
 end;
 finally
 screen.Cursor:=crDefault;
+end;
+end;
+
+procedure Tf_voconfig.UpdateCatalog(cn: string);
+var i,j,n: integer;
+    buf,ucd,table,baseurl,objtype: string;
+    fullcat:boolean;
+    dt,dc,ds,dm,fc: integer;
+    tb:TTabsheet;
+    fr:Tf_vodetail;
+    votype:Tvo_type;
+    config: TXMLConfig;
+    ActiveFields: TStringList;
+    ActiveFieldNum: integer;
+begin
+screen.Cursor:=crHourGlass;
+try
+  Fcurrentconfig:=cn;
+  ActiveFields:=TStringList.Create;
+  config:=TXMLConfig.Create(self);
+  config.Filename:=cn;
+  CatName:=config.GetValue('VOcat/catalog/name','');
+  table:=config.GetValue('VOcat/catalog/table','');
+  objtype:=config.GetValue('VOcat/catalog/objtype','');
+  baseurl:=config.GetValue('VOcat/update/baseurl','');
+  votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
+  fullcat:=config.GetValue('VOcat/update/fullcat',false);
+  dt:=config.GetValue('VOcat/plot/drawtype',14);
+  dc:=config.GetValue('VOcat/plot/drawcolor',$808080);
+  fc:=config.GetValue('VOcat/plot/forcecolor',0);
+  ds:=config.GetValue('VOcat/default/defsize',60);
+  dm:=config.GetValue('VOcat/default/defmag',10);
+  ActiveFieldNum:=config.GetValue('VOcat/fields/fieldcount',0);
+  ActiveFields.Clear;
+  for i:=0 to ActiveFieldNum do begin
+      buf:=config.GetValue('VOcat/fields/field_'+inttostr(i),'');
+      ActiveFields.Add(buf);
+  end;
+  config.Flush;
+  config.free;
+  VO_Detail1.onDownloadFeedback:=DownloadFeedback1;
+  VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
+  VO_Detail1.BaseUrl:=baseurl;
+  VO_Detail1.vo_type:=votype;
+  VO_Detail1.Update(table);
+  for n:=0 to Pagecontrol2.PageCount-1 do
+      Pagecontrol2.Pages[0].Free;
+  n:=0;
+  tb:=TTabsheet.Create(PageControl2);
+  tb.PageControl:=Pagecontrol2;
+  fr:=Tf_vodetail.Create(tb);
+  fr.MainPanel.Parent:=tb;
+  fr.onGetData:=GetData;
+  fr.onUpdateconfig:=Updateconfig;
+  fr.onPreviewData:=PreviewData;
+  fr.onGoback:=Goback;
+  fr.vo_maxrecord:=Fvo_maxrecord;
+  with fr do begin
+     Grid.ColCount:=6;
+     Grid.ColWidths[0]:=20;
+     Grid.ColWidths[1]:=100;
+     Grid.ColWidths[2]:=120;
+     Grid.ColWidths[3]:=70;
+     Grid.ColWidths[4]:=70;
+     Grid.ColWidths[5]:=500;
+     Grid.Cells[0,0]:='x';
+     Grid.Cells[1, 0]:=rsFieldName;
+     Grid.Cells[2,0]:='UCD';
+     Grid.Cells[3, 0]:=rsDataType;
+     Grid.Cells[4, 0]:=rsUnits;
+     Grid.Cells[5, 0]:=rsDescription;
+     Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
+     for i:=1 to VO_Detail1.RecName[n].Count do begin
+       buf:=VO_Detail1.RecName[n][i-1];
+       Grid.Cells[0,i]:='';
+       for j:=0 to ActiveFields.Count-1 do begin
+         if ActiveFields[j]=buf then begin
+              Grid.Cells[0,i]:='x';
+              break;
+         end;
+       end;
+       Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
+       Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
+       Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
+       Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
+       Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
+     end;
+     SelectAll:=true;
+     tn.Text:=VO_Detail1.TableName[n];
+     tb.Caption:=VO_Detail1.TableName[n];
+     tr.value:=VO_Detail1.Rows[n];
+     if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
+        else desc.text:=CatName;
+     if not VO_Detail1.HasCoord[n] then
+        RadioGroup1.ItemIndex:=0
+     else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
+        RadioGroup1.ItemIndex:=2
+     else
+        RadioGroup1.ItemIndex:=1;
+     RadioGroup1Click(self);
+     FullDownload.Checked:=(tr.Value<=vo_fullmaxrecord);
+   end;
+   if Pagecontrol2.PageCount=0 then begin
+      ClearCatalog;
+   end;
+   fr.FullDownload.Checked:=fullcat;
+   fr.DefMag.Value:=dm;
+   fr.DefSize.Value:=ds;
+   fr.drawtype:=dt;
+   fr.ComboBox1.ItemIndex:=fr.drawtype;
+   fr.drawcolor:=dc;
+   fr.ColorDialog1.Color:=fr.drawcolor;
+   fr.shape1.Brush.Color:=fr.drawcolor;
+   fr.forcecolor:=fc;
+   fr.CheckBox1.Checked:=(fr.forcecolor=1);
+   fr.needdownload:=false;
+   fr.Button1.Caption:=rsUpdate1;
+   Pagecontrol1.ActivePage:=TabDetail;
+   Pagecontrol2.ActivePageIndex:=0;
+finally
+  ActiveFields.Free;
+  screen.Cursor:=crDefault;
 end;
 end;
 
@@ -538,6 +671,50 @@ try
    VO_TableData1.onDownloadFeedback:=DownloadFeedback3;
    VO_TableData1.GetData(table,objtype,false);
 finally
+end;
+end;
+
+procedure Tf_voconfig.Updateconfig(Sender: TObject);
+var coordselection, objtype, extfn: string;
+    i: integer;
+    config: TXMLConfig;
+begin
+screen.Cursor:=crHourGlass;
+try
+ClearDataGrid;
+if sender is Tf_vodetail then
+   with sender as Tf_vodetail do begin
+       VO_TableData1.vo_type:=VO_Detail1.vo_type;
+       VO_TableData1.FieldList.Clear;
+       for i:=1 to grid.RowCount-1 do begin
+          if grid.Cells[0,i]='x' then
+             VO_TableData1.FieldList.Add(grid.Cells[1,i]);
+       end;
+       case RadioGroup1.ItemIndex of
+         0: objtype:='na';
+         1: objtype:='star';
+         2: objtype:='dso';
+       end;
+       extfn:=Fcurrentconfig;
+       config:=TXMLConfig.Create(self);
+       config.Filename:=extfn;
+       config.SetValue('VOcat/catalog/objtype',objtype);
+       config.SetValue('VOcat/update/fullcat',FullDownload.Checked);
+       config.SetValue('VOcat/plot/maxmag',-99);
+       config.SetValue('VOcat/plot/drawtype',drawtype);
+       config.SetValue('VOcat/plot/drawcolor',drawcolor);
+       config.SetValue('VOcat/plot/forcecolor',forcecolor);
+       config.SetValue('VOcat/default/defsize',DefSize.Value);
+       config.SetValue('VOcat/default/defmag',DefMag.Value);
+       config.SetValue('VOcat/fields/fieldcount',VO_TableData1.FieldList.Count);
+       for i:=0 to VO_TableData1.FieldList.Count-1 do
+           config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData1.FieldList[i]);
+       config.Flush;
+       config.free;
+   end;
+finally
+screen.Cursor:=crDefault;
+CloseTimer.Enabled:=true;
 end;
 end;
 

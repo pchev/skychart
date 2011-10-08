@@ -73,9 +73,10 @@ type
       Shift: TShiftState; X, Y: Integer);
   private
     { Private declarations }
-    FPreviewData, FGetData, FGoback: TNotifyEvent ;
+    FPreviewData, FGetData, FUpdateconfig, FGoback: TNotifyEvent ;
   public
     { Public declarations }
+    needdownload: boolean;
     SelectAll: boolean;
     vo_maxrecord: integer;
     drawcolor: Tcolor;
@@ -84,6 +85,7 @@ type
     procedure Setlang;
     property onPreviewData: TNotifyEvent read FPreviewData write FPreviewData;
     property onGetData: TNotifyEvent read FGetData write FGetData;
+    property onUpdateconfig: TNotifyEvent read FUpdateconfig write FUpdateconfig;
     property onGoback: TNotifyEvent read FGoback write FGoback;
   end;
 
@@ -126,7 +128,11 @@ end;
 
 procedure Tf_vodetail.GetData(Sender: TObject);
 begin
-if assigned(FGetData) then FGetData(self);
+if needdownload then begin
+   if assigned(FGetData) then FGetData(self);
+end else begin
+   if assigned(FUpdateconfig) then FUpdateconfig(self);
+end;
 end;
 
 procedure Tf_vodetail.FullDownloadChange(Sender: TObject);
@@ -164,6 +170,7 @@ end;
 procedure Tf_vodetail.FormCreate(Sender: TObject);
 begin
   Setlang;
+  needdownload:=true;
   drawtype:=14;
   ComboBox1.ItemIndex:=drawtype;
   drawcolor:=clGray;
@@ -180,11 +187,15 @@ var Column,Row,i : integer;
 begin
 grid.MouseToCell(X, Y, Column, Row);
 if (row>0)and(Column=0) then begin
+   needdownload:=true;
+   button1.Caption:=rsDownloadCata;
    if grid.Cells[Column,Row]='' then mark:='x'
       else mark:='';
    grid.Cells[Column,Row]:=mark;
 end;
 if (row=0)and(Column=0) then begin
+   needdownload:=true;
+   button1.Caption:=rsDownloadCata;
    SelectAll:=not SelectAll;
    if SelectAll then mark:='x'
       else mark:='';

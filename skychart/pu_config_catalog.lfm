@@ -194,11 +194,11 @@ object f_config_catalog: Tf_config_catalog
           OnSelectCell = StringGrid4SelectCell
         end
         object Button5: TButton
-          Left = 87
+          Left = 80
           Height = 25
           Top = 400
-          Width = 204
-          Caption = 'Add or Update'
+          Width = 95
+          Caption = 'Add'
           OnClick = Button5Click
           TabOrder = 1
         end
@@ -206,7 +206,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 320
           Height = 25
           Top = 400
-          Width = 75
+          Width = 95
           Caption = 'Delete'
           OnClick = Button6Click
           TabOrder = 2
@@ -242,6 +242,15 @@ object f_config_catalog: Tf_config_catalog
           Width = 52
           Caption = 'Max rows'
           ParentColor = False
+        end
+        object Button7: TButton
+          Left = 199
+          Height = 25
+          Top = 400
+          Width = 95
+          Caption = 'Update'
+          OnClick = Button7Click
+          TabOrder = 4
         end
       end
       object Page2: TTabSheet

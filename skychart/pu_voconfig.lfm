@@ -18,10 +18,10 @@ object f_voconfig: Tf_voconfig
     Height = 516
     Top = 0
     Width = 783
-    ActivePage = TabCat
+    ActivePage = TabDetail
     Align = alClient
     ShowTabs = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object TabCat: TTabSheet
       Caption = 'Catalog List'
@@ -344,5 +344,11 @@ object f_voconfig: Tf_voconfig
   object SaveDialog1: TSaveDialog
     FilterIndex = 0
     left = 544
+  end
+  object CloseTimer: TTimer
+    Enabled = False
+    Interval = 200
+    OnTimer = CloseTimerTimer
+    left = 712
   end
 end
