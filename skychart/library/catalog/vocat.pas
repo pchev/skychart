@@ -307,6 +307,11 @@ if Assigned(VoNode) then begin
 end;
 except
   result:=false;
+  config:=TXMLConfig.Create(nil);
+  config.Filename:=deffile;
+  config.SetValue('VOcat/plot/active',false);
+  config.Flush;
+  config.free;
 end;
 end;
 end;

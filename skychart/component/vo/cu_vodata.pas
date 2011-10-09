@@ -178,9 +178,9 @@ case Fvo_type of
                    url:=url+'&-c='+formatfloat(f6,(Fra))+'%20'+formatfloat(s6,Fde)+'&-c.rm='+inttostr(round(60*Ffov))+'&-sort=_r'
                 else
                    url:=url+'&recno=>='+inttostr(FFirst);
-                   for i:=0 to FFieldList.Count-1 do begin
-                      url:=url+'&-out='+FFieldList[i];
-                   end;
+                for i:=0 to FFieldList.Count-1 do begin
+                  url:=url+'&-out='+FFieldList[i];
+                end;
                 url:=url+'&-out=_RAJ2000&-out=_DEJ2000';
                 url:=url+'&-oc.form=dec&-out.max='+inttostr(Fmax)+'&-out.form=XML-VOTable(XSL)';
               end;
