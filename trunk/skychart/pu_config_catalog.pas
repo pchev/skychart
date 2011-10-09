@@ -445,6 +445,7 @@ begin
   f_voconfig.fov:=fov;
   f_voconfig.vourlnum := cmain.VOurl;
   f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
+  formpos(f_voconfig,left,top);
   f_voconfig.ShowModal;
   cmain.VOurl:=f_voconfig.vourlnum;
   cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
@@ -472,6 +473,7 @@ f_voconfig.fov:=fov;
 f_voconfig.vourlnum := cmain.VOurl;
 f_voconfig.vo_maxrecord := cmain.VOmaxrecord;
 f_voconfig.UpdateCatalog(fn);
+formpos(f_voconfig,left,top);
 f_voconfig.ShowModal;
 cmain.VOurl:=f_voconfig.vourlnum;
 cmain.VOmaxrecord := f_voconfig.vo_maxrecord;
@@ -481,11 +483,12 @@ end;
 
 procedure Tf_config_catalog.Button6Click(Sender: TObject);
 var p : integer;
-    fn: string;
+    fn,fnu: string;
 begin
 p:=stringgrid4.selection.top;
 fn:=slash(VODir)+stringgrid4.cells[2,p];
-if MessageDlg(rsConfirmFileD+fn, mtConfirmation, mbYesNo, 0)=mrYes then begin
+fnu:=systoutf8(fn);
+if MessageDlg(rsConfirmFileD+fnu, mtConfirmation, mbYesNo, 0)=mrYes then begin
   DeleteFile(fn);
   DeleteFile(ChangeFileExt(fn,'.config'));
   ShowVO;

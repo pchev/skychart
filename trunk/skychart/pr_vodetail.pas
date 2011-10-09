@@ -137,12 +137,12 @@ end;
 
 procedure Tf_vodetail.FullDownloadChange(Sender: TObject);
 begin
-if FullDownload.Checked and (tr.Value>vo_fullmaxrecord) then begin
+if FullDownload.Checked and (tr.Value>vo_maxrecord) then begin
    ShowMessage(Format(rsThisCatalogC, [inttostr(tr.value)]));
    FullDownload.Checked:=false;
 end;
 if FullDownload.Checked and (tr.Value=0) then begin
-   ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_fullmaxrecord)]));
+   ShowMessage(Format(rsTheNumberOfR, [inttostr(vo_maxrecord)]));
 end;
 end;
 
