@@ -115,7 +115,7 @@ end;
 
 procedure Tf_detail.HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
   var Handled: boolean);
-var i: integer;
+var i,p: integer;
     url,sra,sde,n: string;
 begin
   i:=strtointdef(src,-1);
@@ -129,7 +129,10 @@ begin
       url:=StringReplace(url,'$RA',sra,[]);
       url:=StringReplace(url,'$DE',sde,[]);
     end else begin
-      n:=StringReplace(objname,' ','%20',[rfReplaceAll]);
+      n:=objname;
+      if pos('BSC',n)=1 then Delete(n,1,3);
+      if pos('Sky',n)=1 then Delete(n,1,3);
+      n:=StringReplace(n,' ','%20',[rfReplaceAll]);
       n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
       n:=StringReplace(n,'.','%20',[rfReplaceAll]);
       url:=infoname_url[i,1];
