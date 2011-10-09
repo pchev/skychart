@@ -14,11 +14,11 @@ object f_detail: Tf_detail
   LCLVersion = '0.9.30.1'
   object Panel1: TPanel
     Left = 0
-    Height = 64
+    Height = 36
     Top = 0
     Width = 361
     Align = alTop
-    ClientHeight = 64
+    ClientHeight = 36
     ClientWidth = 361
     FullRepaint = False
     TabOrder = 0
@@ -34,10 +34,10 @@ object f_detail: Tf_detail
       TabOrder = 2
     end
     object Button2: TButton
-      Left = 8
+      Left = 4
       Height = 25
       Top = 6
-      Width = 117
+      Width = 125
       BorderSpacing.InnerBorder = 4
       Caption = 'Center Object'
       OnClick = Button2Click
@@ -53,30 +53,13 @@ object f_detail: Tf_detail
       OnClick = Button3Click
       TabOrder = 1
     end
-    object ComboBox1: TComboBox
-      Left = 8
-      Height = 26
-      Top = 32
-      Width = 247
-      ItemHeight = 0
-      Style = csDropDownList
-      TabOrder = 3
-    end
-    object Button4: TButton
-      Left = 261
-      Height = 25
-      Top = 32
-      Width = 91
-      Caption = 'Search'
-      OnClick = Button4Click
-      TabOrder = 4
-    end
   end
   object HTMLViewer1: THTMLViewer
     Left = 0
-    Height = 397
-    Top = 64
+    Height = 425
+    Top = 36
     Width = 361
+    OnHotSpotClick = HTMLViewer1HotSpotClick
     OnImageRequest = HTMLViewer1ImageRequest
     TabOrder = 1
     Align = alClient

@@ -2813,6 +2813,11 @@ end;
 procedure Tf_main.Search1Execute(Sender: TObject);
 var ok: string;
 begin
+ f_search.Proxy:=cfgm.HttpProxy;
+ f_search.HttpProxyHost:=cfgm.ProxyHost;
+ f_search.HttpProxyPort:=cfgm.ProxyPort;
+ f_search.HttpProxyUser:=cfgm.ProxyUser;
+ f_search.HttpProxyPass:=cfgm.ProxyPass;
  formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
  repeat
    f_search.showmodal;

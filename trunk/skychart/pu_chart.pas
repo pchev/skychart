@@ -2441,19 +2441,33 @@ else begin
 end;
 // other notes
 buf:=sc.cfgsc.FindNote;
+if buf>'' then begin
+  txt:=txt+html_br;
+  repeat
+    i:=pos(tab,buf);
+    if i=0 then i:=length(buf)+1;
+    buf2:=copy(buf,1,i-1);
+    delete(buf,1,i);
+    i:=pos(':',buf2);
+    if i>0 then begin
+       txt:=txt+bold(copy(buf2,1,i));
+       delete(buf2,1,i);
+    end;
+    txt:=txt+buf2+html_br;
+  until buf='';
+end;
+// external links
+txt:=txt+html_br+html_b+rsMoreInformat+':'+htms_b+html_br;
+txt:=txt+rsSearchByName+':'+blank;
+for i:=1 to infoname_maxurl do begin
+  txt:=txt+'<a href="'+inttostr(i)+'">'+infoname_url[i,2]+'</a>,'+blank;
+end;
 txt:=txt+html_br;
-repeat
-  i:=pos(tab,buf);
-  if i=0 then i:=length(buf)+1;
-  buf2:=copy(buf,1,i-1);
-  delete(buf,1,i);
-  i:=pos(':',buf2);
-  if i>0 then begin
-     txt:=txt+bold(copy(buf2,1,i));
-     delete(buf2,1,i);
-  end;
-  txt:=txt+buf2+html_br;
-until buf='';
+txt:=txt+rsSearchByPosi+':'+blank;
+for i:=1 to infocoord_maxurl do begin
+  txt:=txt+'<a href="'+inttostr(i+infoname_maxurl)+'">'+infocoord_url[i,2]+'</a>,'+blank;
+end;
+txt:=txt+html_br;
 //writetrace(txt);
 result:=txt+html_br+htms_h;
 end;

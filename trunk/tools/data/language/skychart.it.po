@@ -89,10 +89,6 @@ msgstr "Impostazioni ffmpeg"
 msgid "Add label"
 msgstr "Aggiungi Etichetta"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Aggiungi i nomi alternativi all'indice"
@@ -2826,6 +2822,10 @@ msgstr "Mese"
 msgid "Moon"
 msgstr "Luna"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "Più profondo cielo"
@@ -4091,6 +4091,14 @@ msgstr "G"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Cerca"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

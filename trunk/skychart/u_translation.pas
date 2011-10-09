@@ -1344,6 +1344,9 @@ resourcestring
   rsDataPreview = 'Data preview';
   rsOnlineSearch = 'Online search failed!';
   rsOnlineSearch2 = 'Online search result';
+  rsMoreInformat = 'More informations';
+  rsSearchByName = 'Search by name';
+  rsSearchByPosi = 'Search by position';
 
 
 implementation

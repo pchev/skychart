@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation, u_util, u_constant, Clipbrd,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, LazHelpHTML, Htmlview, Htmlsubs, types;
+  Buttons, LazHelpHTML, Htmlview, Htmlsubs, types, Readhtml;
 
 type
   Tstr1func = procedure(txt:string) of object;
@@ -39,8 +39,6 @@ type
   { Tf_detail }
 
   Tf_detail = class(TForm)
-    Button4: TButton;
-    ComboBox1: TComboBox;
     EditCopy: TAction;
     HTMLViewer1: THTMLViewer;
     SelectAll: TAction;
@@ -56,9 +54,10 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
     procedure EditCopyExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
+      var Handled: boolean);
     procedure HTMLViewer1ImageRequest(Sender: TObject; const SRC: string;
       var Stream: TMemoryStream);
     procedure SelectAllExecute(Sender: TObject);
@@ -94,7 +93,6 @@ Caption:=rsDetails;
 Button1.caption:=rsClose;
 Button2.caption:=rsCenterObject;
 Button3.caption:=rsNeighbor;
-Button4.Caption:=rsSearch;
 SelectAll1.caption:=rsSelectAll;
 Copy1.caption:=rsCopy;
 SetHelp(self,hlpInfo);
@@ -115,29 +113,30 @@ begin
 if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
-procedure Tf_detail.Button4Click(Sender: TObject);
+procedure Tf_detail.HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
+  var Handled: boolean);
 var i: integer;
     url,sra,sde,n: string;
 begin
-  i:=ComboBox1.ItemIndex+1;
-  if i>infoname_maxurl then begin
-    i:=i-infoname_maxurl;
-    url:=infocoord_url[i,1];
-    sra:=trim(ARtoStr(rad2deg*ra/15));
-    sde:=trim(DEToStr3(rad2deg*de));
-    if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
-    case i of
-      1 : url:=url+sra+'%20'+sde;            // simbad
-      2 : url:=url+'&lon='+sra+'&lat='+sde;  // ned
-      3 : url:=url+sra+'%20'+sde;            // hyperleda
+  i:=strtointdef(src,-1);
+  if i>0 then begin
+    if i>infoname_maxurl then begin
+      i:=i-infoname_maxurl;
+      sra:=trim(ARtoStr(rad2deg*ra/15));
+      sde:=trim(DEToStr3(rad2deg*de));
+      if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
+      url:=infocoord_url[i,1];
+      url:=StringReplace(url,'$RA',sra,[]);
+      url:=StringReplace(url,'$DE',sde,[]);
+    end else begin
+      n:=StringReplace(objname,' ','%20',[rfReplaceAll]);
+      n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
+      n:=StringReplace(n,'.','%20',[rfReplaceAll]);
+      url:=infoname_url[i,1];
+      url:=StringReplace(url,'$ID',n,[]);
     end;
-  end else begin
-    n:=StringReplace(objname,' ','%20',[rfReplaceAll]);
-    n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
-    n:=StringReplace(n,'.','%20',[rfReplaceAll]);
-    url:=infoname_url[i,1]+n;
+    ExecuteFile(url);
   end;
-  ExecuteFile(url);
 end;
 
 procedure Tf_detail.EditCopyExecute(Sender: TObject);
@@ -188,14 +187,6 @@ procedure Tf_detail.FormCreate(Sender: TObject);
 var i: integer;
 begin
 SetLang;
-ComboBox1.Items.Clear;
-for i:=1 to infoname_maxurl do
-  if infoname_url[i,2]<>'' then
-    ComboBox1.Items.Add(infoname_url[i,2]);
-for i:=1 to infocoord_maxurl do
-  if infocoord_url[i,2]<>'' then
-    ComboBox1.Items.Add(infocoord_url[i,2]);
-ComboBox1.ItemIndex:=InfoUrlNum;
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);
