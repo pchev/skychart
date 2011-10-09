@@ -1,5 +1,9 @@
 Version 3.5 release Notes
 
+- New online Internet resources:
+  - Add any catalog from Vizier
+  - Search Simbad, NED, Vizier
+  - Link object detail to Simbad, NED, HyperLeda
 - Extend the allowed date to +/- 200'000 years
 - Compute the precession using "New precession expressions, valid for long time intervals, J. Vondrak, 2011"
 - Compute DeltaT values from "Five Millennium Canon of Solar Eclipses, Espenak & Meeus, 2006"
