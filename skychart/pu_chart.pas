@@ -1457,8 +1457,11 @@ begin
 {$ifdef trace_debug}
  WriteTrace(caption+' zoomplusmoveExecute');
 {$endif}
+if sc.cfgsc.FindName>'' then
+    sc.MovetoRaDec(sc.cfgsc.FindRA,sc.cfgsc.FindDec)
+else
+    sc.MovetoXY(xcursor,ycursor);
 sc.zoom(zoomfactor);
-sc.MovetoXY(xcursor,ycursor);
 sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
@@ -1468,8 +1471,11 @@ begin
 {$ifdef trace_debug}
  WriteTrace(caption+' zoomminusmoveExecute');
 {$endif}
+if sc.cfgsc.FindName>'' then
+    sc.MovetoRaDec(sc.cfgsc.FindRA,sc.cfgsc.FindDec)
+else
+    sc.MovetoXY(xcursor,ycursor);
 sc.zoom(1/zoomfactor);
-sc.MovetoXY(xcursor,ycursor);
 sc.cfgsc.TrackOn:=false;
 Refresh;
 end;
