@@ -1249,6 +1249,8 @@ begin
 repeat
   ReadVOCat(rec,result);
   if not result then break;
+  if not rec.neb.valid[vnMag] then rec.neb.mag:=rec.options.MagMax;
+
   if cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then continue;

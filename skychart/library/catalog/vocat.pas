@@ -187,9 +187,9 @@ begin
           emptyrec.neb.valid[vnId]:=true;
           emptyrec.neb.valid[vnComment]:=true;
           emptyrec.neb.valid[vnNebtype]:=true;
+          emptyrec.neb.valid[vnMag]:=true;
           emptyrec.neb.nebtype:=drawtype;
           emptyrec.neb.mag:=-99;
- //         emptyrec.neb.dim1:=Defsize;
           emptyrec.options.flabel[lOffset+vnMag]:='No mag';
           emptyrec.options.flabel[lOffset+vnDim1]:='No size';
           emptyrec.neb.color:=drawcolor;
@@ -401,13 +401,11 @@ if Assigned(VoNode) then begin
                lin.neb.valid[vnMag]:=true;
             end;
             if (buf<>'')and(i=field_size) then begin
-               if lin.neb.id='MCG-06-29-008' then begin
-                 recno:=recno;
-               end;
                lin.neb.dim1:=StrToFloatDef(buf,Defsize);
                if log_size and (lin.neb.dim1<>Defsize) then lin.neb.dim1:=power(10,lin.neb.dim1);
                lin.neb.dim1:=unit_size*lin.neb.dim1;
                lin.neb.valid[vnDim1]:=true;
+               lin.options.flabel[lOffset+vnDim1]:=VOFields[i];
             end;
             if (buf<>'')and(pos('src.class',TFieldData(VOFields.Objects[i]).ucd)>0)and(pos('src.class.',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
                if trim(buf)='Gx'  then lin.neb.nebtype:=1
@@ -432,7 +430,10 @@ if Assigned(VoNode) then begin
   end;
   case catversion of
   rtStar: if lin.star.id='' then lin.star.id:=recno;
-  rtNeb : if lin.neb.id='' then lin.neb.id:=recno;
+  rtNeb : begin
+          if lin.neb.id='' then lin.neb.id:=recno;
+          if lin.neb.mag=-99 then lin.neb.mag:=Defmag;
+          end;
   end;
   VoNode:=VoNode.NextSibling;
   ok:=true;
