@@ -1774,7 +1774,7 @@ begin
 end;
 
 Procedure Tskychart.FormatCatRec(rec:Gcatrec; var desc:string);
-var txt: string;
+var txt,buf: string;
     i : integer;
 const b=' ';
       b5='     ';
@@ -1934,7 +1934,9 @@ begin
             if rec.neb.valid[vnDim1] then cfgsc.FindSize:=rec.neb.dim1
                                      else cfgsc.FindSize:=rec.options.Size;
             str(cfgsc.FindSize:5:1,txt);
-            Desc:=Desc+'Dim'+dp+txt;
+            buf:=trim(rec.options.flabel[lOffset+vnDim1]);
+            if buf='' then buf:='Dim';
+            Desc:=Desc+buf+dp+txt;
             if rec.neb.valid[vnDim2] and (rec.neb.dim2>0) then str(rec.neb.dim2:5:1,txt);
             Desc:=Desc+' x'+txt+b;
             if rec.neb.valid[vnNebunit] then i:=rec.neb.nebunit
@@ -2141,6 +2143,7 @@ try
   if allobject or Fcatalog.cfgshr.ListPla then FindatPosAsteroid;
   if allobject or Fcatalog.cfgshr.ListNeb then begin
      FindAtPosCat(gcneb);
+     if Fcatalog.cfgcat.nebcaton[voneb-BaseNeb] then FindAtPosCat(voneb);
      if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
      if Fcatalog.cfgcat.nebcaton[ngc-BaseNeb] then FindAtPosCat(ngc);
      if Fcatalog.cfgcat.nebcaton[lbn-BaseNeb] then FindAtPosCat(lbn);
@@ -2160,6 +2163,7 @@ try
   end;
   if allobject or Fcatalog.cfgshr.ListStar then begin
      FindAtPosCat(gcstar);
+     if Fcatalog.cfgcat.starcaton[vostar-BaseStar] then FindAtPosCat(vostar);
      if Fcatalog.cfgcat.starcaton[bsc-BaseStar] then FindAtPosCat(bsc);
      if Fcatalog.cfgcat.starcaton[dsbase-BaseStar] then FindAtPosCat(dsbase);
      if Fcatalog.cfgcat.starcaton[sky2000-BaseStar] then FindAtPosCat(sky2000);

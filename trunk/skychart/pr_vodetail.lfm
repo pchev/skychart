@@ -190,7 +190,7 @@ object f_vodetail: Tf_vodetail
         Top = 44
         Width = 80
         TabOrder = 8
-        Value = 10
+        Value = 12
       end
       object DefSize: TLongEdit
         Left = 159

@@ -452,7 +452,7 @@ try
   dc:=config.GetValue('VOcat/plot/drawcolor',$808080);
   fc:=config.GetValue('VOcat/plot/forcecolor',0);
   ds:=config.GetValue('VOcat/default/defsize',60);
-  dm:=config.GetValue('VOcat/default/defmag',10);
+  dm:=config.GetValue('VOcat/default/defmag',12);
   ActiveFieldNum:=config.GetValue('VOcat/fields/fieldcount',0);
   ActiveFields.Clear;
   for i:=0 to ActiveFieldNum do begin
