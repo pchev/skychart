@@ -90,10 +90,6 @@ msgstr ""
 msgid "Add label"
 msgstr "Додати мітку"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Додати альтернативну назву в індекс"
@@ -2828,6 +2824,10 @@ msgstr "Місяць"
 msgid "Moon"
 msgstr "Місяць"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "Більше туманностей"
@@ -4093,6 +4093,14 @@ msgstr "Число"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Пошук"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

@@ -87,10 +87,6 @@ msgstr "Extra ffmpeg opties"
 msgid "Add label"
 msgstr "Voeg label toe"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Voeg de extra namen toe aan de index"
@@ -2824,6 +2820,10 @@ msgstr "Maand"
 msgid "Moon"
 msgstr "Maan"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "Meer deep sky"
@@ -4089,6 +4089,14 @@ msgstr "D"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Zoek"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

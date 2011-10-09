@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-08 17:19+0200\n"
+"PO-Revision-Date: 2011-10-09 11:03+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -90,10 +90,6 @@ msgstr "Options supplémentaires ffmpeg"
 #: u_translation.rsaddlabel
 msgid "Add label"
 msgstr "Ajout d'un label"
-
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr "Ajout ou modification"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
@@ -2831,6 +2827,10 @@ msgstr "Mois"
 msgid "Moon"
 msgstr "Lune"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr "Plus d'informations"
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "Plus de nébuleuses"
@@ -4097,6 +4097,14 @@ msgstr "J"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Chercher"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr "Recherche par nom"
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr "Recherche par position"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

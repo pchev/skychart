@@ -89,10 +89,6 @@ msgstr ""
 msgid "Add label"
 msgstr "增加標籤"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "增加别名到索引"
@@ -2826,6 +2822,10 @@ msgstr "月"
 msgid "Moon"
 msgstr "月球"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "更多深空"
@@ -4091,6 +4091,14 @@ msgstr "日"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "尋找"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

@@ -5242,10 +5242,6 @@ msgstr ""
 msgid "Reload"
 msgstr ""
 
-#: u_translation:rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation:rsbyname
 msgid "By name"
 msgstr ""
@@ -5272,5 +5268,17 @@ msgstr ""
 
 #: u_translation:rsonlinesearch2
 msgid "Online search result"
+msgstr ""
+
+#: u_translation:rsmoreinformat
+msgid "More informations"
+msgstr ""
+
+#: u_translation:rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation:rssearchbyposi
+msgid "Search by position"
 msgstr ""
 

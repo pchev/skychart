@@ -89,10 +89,6 @@ msgstr ""
 msgid "Add label"
 msgstr "Προσθήκη ετικέτας"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr ""
@@ -2889,6 +2885,10 @@ msgstr "Μήνας"
 msgid "Moon"
 msgstr "Σελήνη"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr ""
@@ -4162,6 +4162,14 @@ msgstr ""
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Αναζήτηση"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"

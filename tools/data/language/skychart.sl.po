@@ -88,10 +88,6 @@ msgstr ""
 msgid "Add label"
 msgstr "Dodaj oznako"
 
-#: u_translation.rsaddorupdate
-msgid "Add or update"
-msgstr ""
-
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
 msgstr "Dodaj nadomestno ime za indeks"
@@ -2826,6 +2822,10 @@ msgstr "Mesec"
 msgid "Moon"
 msgstr "Luna"
 
+#: u_translation.rsmoreinformat
+msgid "More informations"
+msgstr ""
+
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
 msgstr "Bolj globoko vesolje"
@@ -4091,6 +4091,14 @@ msgstr "D"
 #: u_translation.rssearch
 msgid "Search"
 msgstr "Išči"
+
+#: u_translation.rssearchbyname
+msgid "Search by name"
+msgstr ""
+
+#: u_translation.rssearchbyposi
+msgid "Search by position"
+msgstr ""
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
