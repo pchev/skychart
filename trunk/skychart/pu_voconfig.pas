@@ -358,7 +358,7 @@ if CatList.Row>0 then begin
   VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
   VO_Detail1.BaseUrl:=vo_url[VO_Catalogs1.vo_source, ServerList.ItemIndex+1,1];
   VO_Detail1.vo_type:=VO_Catalogs1.vo_type;
-  VO_Detail1.Update(buf);
+  VO_Detail1.Update(buf,true);
   for n:=0 to Pagecontrol2.PageCount-1 do
       Pagecontrol2.Pages[0].Free;
   for n:=0 to VO_Detail1.NumTables-1 do begin
@@ -465,7 +465,7 @@ try
   VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
   VO_Detail1.BaseUrl:=baseurl;
   VO_Detail1.vo_type:=votype;
-  VO_Detail1.Update(table);
+  VO_Detail1.Update(table,false);
   for n:=0 to Pagecontrol2.PageCount-1 do
       Pagecontrol2.Pages[0].Free;
   n:=0;
