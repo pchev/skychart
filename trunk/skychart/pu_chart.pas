@@ -67,6 +67,14 @@ type
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
     MenuFinderCircle: TMenuItem;
+    nsearch1: TMenuItem;
+    nsearch2: TMenuItem;
+    nsearch3: TMenuItem;
+    SearchName1: TMenuItem;
+    SearchMenu1: TMenuItem;
+    search1: TMenuItem;
+    search2: TMenuItem;
+    search3: TMenuItem;
     Target1: TMenuItem;
     MenuSaveCircle: TMenuItem;
     MenuLoadCircle: TMenuItem;
@@ -139,10 +147,12 @@ type
       var ScrollPos: Integer);
     procedure MenuLoadCircleClick(Sender: TObject);
     procedure MenuSaveCircleClick(Sender: TObject);
+    procedure nsearch1Click(Sender: TObject);
     procedure PDSSTimerTimer(Sender: TObject);
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
+    procedure search1Click(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
     procedure Target1Click(Sender: TObject);
     procedure TrackTelescopeClick(Sender: TObject);
@@ -344,6 +354,14 @@ MenuLabel.Caption:=rsLabels;
 AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
+SearchName1.Caption:=rsSearchByName;
+nsearch1.Caption:=infoname_url[1,2];
+nsearch2.Caption:=infoname_url[2,2];
+nsearch3.Caption:=infoname_url[3,2];
+SearchMenu1.Caption:=rsSearchByPosi;
+search1.Caption:=infocoord_url[1,2];
+search2.Caption:=infocoord_url[2,2];
+search3.Caption:=infocoord_url[3,2];
 Telescope1.caption:=rsTelescope;
 TrackTelescope.Caption:=rsTrackTelesco;
 SlewCursor.Caption:=rsSlewToCursor;
@@ -921,6 +939,44 @@ if sc.cfgsc.poscustomlabels>0 then begin
   sc.cfgsc.poscustomlabels:=sc.cfgsc.numcustomlabels;
 end;
 Refresh;
+end;
+
+procedure Tf_chart.search1Click(Sender: TObject);
+var ra,de,a,h,l,b,le,be:double;
+    i: integer;
+    sra,sde,url: string;
+begin
+ i:=TMenuItem(sender).tag;
+ if (i>0) and (i<=infocoord_maxurl) then begin
+    sc.GetCoord(xcursor,ycursor,ra,de,a,h,l,b,le,be);
+    if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc);
+    precession(sc.cfgsc.JDChart,jd2000,ra,de);
+    sra:=trim(ARtoStr(rad2deg*ra/15));
+    sde:=trim(DEToStr3(rad2deg*de));
+    if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
+    url:=infocoord_url[i,1];
+    url:=StringReplace(url,'$RA',sra,[]);
+    url:=StringReplace(url,'$DE',sde,[]);
+    ExecuteFile(url);
+ end;
+end;
+
+procedure Tf_chart.nsearch1Click(Sender: TObject);
+var i: integer;
+    url,n: string;
+begin
+i:=TMenuItem(sender).tag;
+if (i>0) and (i<=infoname_maxurl) then begin
+  n:=sc.cfgsc.FindName;
+  if pos('BSC',n)=1 then Delete(n,1,3);
+  if pos('Sky',n)=1 then Delete(n,1,3);
+  n:=StringReplace(n,' ','%20',[rfReplaceAll]);
+  n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
+  n:=StringReplace(n,'.','%20',[rfReplaceAll]);
+  url:=infoname_url[i,1];
+  url:=StringReplace(url,'$ID',n,[]);
+  ExecuteFile(url);
+end;
 end;
 
 procedure Tf_chart.SlewCursorClick(Sender: TObject);
@@ -1613,10 +1669,12 @@ begin
    About1.Caption:=Format(rsAbout2, [sc.cfgsc.FindName]);
    About1.visible:=true;
    About2.visible:=true;
+   SearchName1.Visible:=true;
  end
  else begin
    About1.visible:=false;
    About2.visible:=false;
+   SearchName1.Visible:=False;
  end;
  if sc.cfgsc.ManualTelescope then
     Telescope1.Visible:=false
