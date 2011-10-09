@@ -1,7 +1,7 @@
 object f_chart: Tf_chart
-  Left = 435
+  Left = 451
   Height = 338
-  Top = 128
+  Top = 127
   Width = 508
   ActiveControl = Panel1
   Caption = 'Chart'
@@ -217,6 +217,42 @@ object f_chart: Tf_chart
       Caption = 'About'
       Visible = False
       OnClick = About1Click
+    end
+    object SearchName1: TMenuItem
+      Caption = 'SearchName1'
+      object nsearch1: TMenuItem
+        Tag = 1
+        Caption = 'New Item35'
+        OnClick = nsearch1Click
+      end
+      object nsearch2: TMenuItem
+        Tag = 2
+        Caption = 'New Item37'
+        OnClick = nsearch1Click
+      end
+      object nsearch3: TMenuItem
+        Tag = 3
+        Caption = 'New Item38'
+        OnClick = nsearch1Click
+      end
+    end
+    object SearchMenu1: TMenuItem
+      Caption = 'SearchMenu1'
+      object search1: TMenuItem
+        Tag = 1
+        Caption = 'New Item31'
+        OnClick = search1Click
+      end
+      object search2: TMenuItem
+        Tag = 2
+        Caption = 'New Item32'
+        OnClick = search1Click
+      end
+      object search3: TMenuItem
+        Tag = 3
+        Caption = 'New Item33'
+        OnClick = search1Click
+      end
     end
     object About2: TMenuItem
       Caption = '-'
