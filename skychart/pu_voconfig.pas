@@ -410,7 +410,7 @@ if CatList.Row>0 then begin
        else
           RadioGroup1.ItemIndex:=1;
        RadioGroup1Click(self);
-       FullDownload.Checked:=(tr.Value<=vo_fullmaxrecord);
+       FullDownload.Checked:=(tr.Value<=vo_maxrecord);
      end;
   end;
   if Pagecontrol2.PageCount=0 then begin
@@ -521,7 +521,7 @@ try
      else
         RadioGroup1.ItemIndex:=1;
      RadioGroup1Click(self);
-     FullDownload.Checked:=(tr.Value<=vo_fullmaxrecord);
+     FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
    end;
    if Pagecontrol2.PageCount=0 then begin
       ClearCatalog;
@@ -595,10 +595,7 @@ if sender is Tf_vodetail then
            coordselection:='';
        DataGrid.cells[1,1]:=DataGrid.cells[1,1]+coordselection;
        VO_TableData1.FirstRec:=1;
-       if VO_TableData1.SelectCoord then
-          VO_TableData1.maxdata:=Fvo_maxrecord
-       else
-          VO_TableData1.maxdata:=vo_fullmaxrecord;
+       VO_TableData1.maxdata:=Fvo_maxrecord;
        VO_TableData1.FieldList.Clear;
        for i:=1 to grid.RowCount-1 do begin
           if grid.Cells[0,i]='x' then

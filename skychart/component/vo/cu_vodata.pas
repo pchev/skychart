@@ -175,7 +175,7 @@ case Fvo_type of
   VizierMeta: begin
                 url:=url+'-source='+FTableName;
                 if FSelectCoord then
-                   url:=url+'&-c='+formatfloat(f6,(Fra))+'%20'+formatfloat(s6,Fde)+'&-c.r='+inttostr(round(60*Ffov))
+                   url:=url+'&-c='+formatfloat(f6,(Fra))+'%20'+formatfloat(s6,Fde)+'&-c.rm='+inttostr(round(60*Ffov))+'&-sort=_r'
                 else
                    url:=url+'&recno=>='+inttostr(FFirst);
                    for i:=0 to FFieldList.Count-1 do begin
