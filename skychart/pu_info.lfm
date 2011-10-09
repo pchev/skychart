@@ -96,6 +96,76 @@ object f_info: Tf_info
       TabOrder = 0
     end
   end
+  object Page1: TPanel
+    Left = 56
+    Height = 343
+    Top = 30
+    Width = 554
+    ClientHeight = 343
+    ClientWidth = 554
+    TabOrder = 1
+    object Panel2: TPanel
+      Left = 1
+      Height = 28
+      Top = 314
+      Width = 552
+      Align = alBottom
+      ClientHeight = 28
+      ClientWidth = 552
+      FullRepaint = False
+      TabOrder = 1
+      object serverinfo: TLabel
+        Left = 536
+        Height = 1
+        Top = 6
+        Width = 1
+        Alignment = taRightJustify
+        Anchors = [akTop, akRight]
+        ParentColor = False
+      end
+      object Button2: TButton
+        Left = 12
+        Height = 25
+        Top = 2
+        Width = 75
+        BorderSpacing.InnerBorder = 4
+        Caption = 'Refresh'
+        OnClick = Button2Click
+        TabOrder = 0
+      end
+      object CheckBox1: TCheckBox
+        Left = 104
+        Height = 26
+        Top = 2
+        Width = 96
+        Caption = 'AutoRefresh'
+        Checked = True
+        OnClick = CheckBox1Click
+        State = cbChecked
+        TabOrder = 1
+      end
+    end
+    object StringGrid1: TStringGrid
+      Left = 1
+      Height = 313
+      Top = 1
+      Width = 552
+      Align = alClient
+      ColCount = 1
+      DefaultColWidth = 800
+      FixedCols = 0
+      FixedRows = 0
+      GridLineWidth = 0
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
+      PopupMenu = PopupMenu1
+      RowCount = 10
+      ScrollBars = ssVertical
+      TabOrder = 0
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      OnMouseDown = StringGrid1MouseDown
+    end
+  end
   object Page2: TPanel
     Left = 83
     Height = 343
@@ -206,76 +276,6 @@ object f_info: Tf_info
         Caption = 'SortLabel'
         ParentColor = False
       end
-    end
-  end
-  object Page1: TPanel
-    Left = 56
-    Height = 343
-    Top = 30
-    Width = 554
-    ClientHeight = 343
-    ClientWidth = 554
-    TabOrder = 1
-    object Panel2: TPanel
-      Left = 1
-      Height = 28
-      Top = 314
-      Width = 552
-      Align = alBottom
-      ClientHeight = 28
-      ClientWidth = 552
-      FullRepaint = False
-      TabOrder = 1
-      object serverinfo: TLabel
-        Left = 536
-        Height = 1
-        Top = 6
-        Width = 1
-        Alignment = taRightJustify
-        Anchors = [akTop, akRight]
-        ParentColor = False
-      end
-      object Button2: TButton
-        Left = 12
-        Height = 25
-        Top = 2
-        Width = 75
-        BorderSpacing.InnerBorder = 4
-        Caption = 'Refresh'
-        OnClick = Button2Click
-        TabOrder = 0
-      end
-      object CheckBox1: TCheckBox
-        Left = 104
-        Height = 26
-        Top = 2
-        Width = 96
-        Caption = 'AutoRefresh'
-        Checked = True
-        OnClick = CheckBox1Click
-        State = cbChecked
-        TabOrder = 1
-      end
-    end
-    object StringGrid1: TStringGrid
-      Left = 1
-      Height = 313
-      Top = 1
-      Width = 552
-      Align = alClient
-      ColCount = 1
-      DefaultColWidth = 800
-      FixedCols = 0
-      FixedRows = 0
-      GridLineWidth = 0
-      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goRowSelect]
-      PopupMenu = PopupMenu1
-      RowCount = 10
-      ScrollBars = ssVertical
-      TabOrder = 0
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      OnMouseDown = StringGrid1MouseDown
     end
   end
   object PopupMenu1: TPopupMenu

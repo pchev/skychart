@@ -279,22 +279,24 @@ var col,row,i:integer;
     buf,s,desc,nm,cat : string;
 begin
 StringGrid2.MouseToCell(MouseX, MouseY, Col, Row);
-buf:=StringGrid2.Cells[1,Row];
-ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
-buf:=StringGrid2.Cells[2,Row];
-s:=copy(buf,1,1);
-dec:=strtofloat(s+copy(buf,2,2))+strtofloat(s+copy(buf,4+length(ldeg),2))/60+strtofloat(s+copy(buf,6+length(ldeg)+length(lmin),4))/3600;
-nm:=StringGrid2.Cells[4,Row];
-cat:=StringGrid2.Cells[0,Row];
-desc:='';
-for i:=1 to StringGrid2.ColCount-1 do begin
-  buf:=trim(StringGrid2.Cells[i,Row]);
-  if buf>'' then begin
-    if desc>'' then desc:=desc+tab;
-    desc:=desc+buf;
+if row>0 then begin
+  buf:=StringGrid2.Cells[1,Row];
+  ra:=strtofloat(copy(buf,1,2))+strtofloat(copy(buf,4,2))/60+strtofloat(copy(buf,7,5))/3600;
+  buf:=StringGrid2.Cells[2,Row];
+  s:=copy(buf,1,1);
+  dec:=strtofloat(s+copy(buf,2,2))+strtofloat(s+copy(buf,4+length(ldeg),2))/60+strtofloat(s+copy(buf,6+length(ldeg)+length(lmin),4))/3600;
+  nm:=StringGrid2.Cells[4,Row];
+  cat:=StringGrid2.Cells[0,Row];
+  desc:='';
+  for i:=1 to StringGrid2.ColCount-1 do begin
+    buf:=trim(StringGrid2.Cells[i,Row]);
+    if buf>'' then begin
+      if desc>'' then desc:=desc+tab;
+      desc:=desc+buf;
+    end;
   end;
+  if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,cat,nm,desc);
 end;
-if assigned(Fdetailinfo) then Fdetailinfo(source_chart,deg2rad*ra*15,deg2rad*dec,cat,nm,desc);
 end;
 
 procedure Tf_info.FormShow(Sender: TObject);
