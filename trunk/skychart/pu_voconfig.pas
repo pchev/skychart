@@ -590,7 +590,7 @@ if sender is Tf_vodetail then
        VO_TableData1.dec:=rad2deg*dec;
        VO_TableData1.fov:=rad2deg*fov;
        if VO_TableData1.SelectCoord then
-           coordselection:='RA:'+formatfloat(f2,ra/15)+' DEC:'+formatfloat(f2,dec)+' FOV:'+formatfloat(f2,fov)
+           coordselection:='RA:'+formatfloat(f2,rad2deg*ra/15)+' DEC:'+formatfloat(f2,rad2deg*dec)+' FOV:'+formatfloat(f2,rad2deg*fov)
        else
            coordselection:='';
        DataGrid.cells[1,1]:=DataGrid.cells[1,1]+coordselection;
