@@ -4289,7 +4289,7 @@ for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatfield[i,1]:=0;
    catalog.cfgcat.starcatfield[i,2]:=0;
 end;
-catalog.cfgcat.starcatdef[vostar-BaseStar]:=true;
+catalog.cfgcat.starcatdef[vostar-BaseStar]:=false;
 catalog.cfgcat.starcatfield[vostar-BaseStar,2]:=10;
 catalog.cfgcat.starcatpath[bsc-BaseStar]:=catalog.cfgcat.starcatpath[bsc-BaseStar]+PathDelim+'bsc5';
 catalog.cfgcat.starcatdef[bsc-BaseStar]:=true;
@@ -4345,7 +4345,7 @@ for i:=1 to maxnebcatalog do begin
    catalog.cfgcat.nebcatfield[i,1]:=0;
    catalog.cfgcat.nebcatfield[i,2]:=0;
 end;
-catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=true;
+catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=false;
 catalog.cfgcat.nebcatfield[voneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[sac-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'sac';
 catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
