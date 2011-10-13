@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-09 11:03+0200\n"
+"PO-Revision-Date: 2011-10-13 17:39+0200\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -318,6 +318,10 @@ msgstr "Azimut"
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
 msgstr "Coordonnée azimutale"
+
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr "Origine des azimuts"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"

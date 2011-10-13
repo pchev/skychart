@@ -29,16 +29,16 @@ object f_config_chart: Tf_config_chart
       Height = 461
       Top = 1
       Width = 508
-      ActivePage = Page5
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 0
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Label31: TLabel
           Left = 0
           Height = 15
@@ -48,9 +48,9 @@ object f_config_chart: Tf_config_chart
           ParentColor = False
         end
         object PanelExpert: TPanel
-          Left = 10
+          Left = 13
           Height = 192
-          Top = 149
+          Top = 195
           Width = 453
           ClientHeight = 192
           ClientWidth = 453
@@ -125,9 +125,9 @@ object f_config_chart: Tf_config_chart
             TabOrder = 2
             object PMBox: TCheckBox
               Left = 6
-              Height = 23
+              Height = 26
               Top = 7
-              Width = 374
+              Width = 377
               Caption = 'Use the proper motion to correct the position for the given epoch'
               OnClick = PMBoxClick
               TabOrder = 0
@@ -179,26 +179,26 @@ object f_config_chart: Tf_config_chart
           TabOrder = 2
         end
         object ExpertMode: TCheckBox
-          Left = 21
-          Height = 23
-          Top = 357
-          Width = 94
+          Left = 22
+          Height = 26
+          Top = 387
+          Width = 97
           Caption = 'Expert mode'
           OnClick = ExpertModeClick
           TabOrder = 3
         end
         object PanelCoord: TPanel
-          Left = 10
+          Left = 13
           Height = 192
-          Top = 149
+          Top = 195
           Width = 453
           ClientHeight = 192
           ClientWidth = 453
           TabOrder = 0
           object CoordType: TRadioGroup
-            Left = 3
+            Left = 8
             Height = 176
-            Top = 16
+            Top = 6
             Width = 440
             AutoFill = True
             Caption = 'Type of coordinates'
@@ -223,11 +223,36 @@ object f_config_chart: Tf_config_chart
             TabOrder = 0
           end
         end
+        object AzimutOrigin: TRadioGroup
+          Left = 13
+          Height = 50
+          Top = 137
+          Width = 450
+          AutoFill = True
+          Caption = 'AzimutOrigin'
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 2
+          ClientHeight = 34
+          ClientWidth = 446
+          Columns = 2
+          Items.Strings = (
+            'North'
+            'South'
+          )
+          OnClick = AzimutOriginClick
+          TabOrder = 4
+        end
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Label30: TLabel
           Left = 0
           Height = 14
@@ -679,8 +704,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -1008,8 +1033,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Label29: TLabel
           Left = 0
           Height = 14
@@ -1818,8 +1843,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Label159: TLabel
           Left = 0
           Height = 15
@@ -1966,89 +1991,89 @@ object f_config_chart: Tf_config_chart
         end
         object CheckBox1: TCheckBox
           Left = 453
-          Height = 23
+          Height = 26
           Top = 76
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 25
         end
         object CheckBox2: TCheckBox
           Tag = 1
           Left = 453
-          Height = 23
+          Height = 26
           Top = 101
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 26
         end
         object CheckBox4: TCheckBox
           Tag = 3
           Left = 453
-          Height = 23
+          Height = 26
           Top = 151
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 27
         end
         object CheckBox5: TCheckBox
           Tag = 4
           Left = 453
-          Height = 23
+          Height = 26
           Top = 176
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 28
         end
         object CheckBox6: TCheckBox
           Tag = 5
           Left = 453
-          Height = 23
+          Height = 26
           Top = 201
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 29
         end
         object CheckBox7: TCheckBox
           Tag = 6
           Left = 453
-          Height = 23
+          Height = 26
           Top = 226
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 30
         end
         object CheckBox8: TCheckBox
           Tag = 7
           Left = 453
-          Height = 23
+          Height = 26
           Top = 251
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 31
         end
         object CheckBox9: TCheckBox
           Tag = 8
           Left = 453
-          Height = 23
+          Height = 26
           Top = 276
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 32
         end
         object CheckBox10: TCheckBox
           Tag = 9
           Left = 453
-          Height = 23
+          Height = 26
           Top = 301
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 33
         end
         object CheckBox13: TCheckBox
           Left = 253
-          Height = 23
+          Height = 26
           Top = 357
-          Width = 179
+          Width = 182
           Caption = 'Always show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 23
@@ -2056,18 +2081,18 @@ object f_config_chart: Tf_config_chart
         object CheckBox3: TCheckBox
           Tag = 2
           Left = 453
-          Height = 23
+          Height = 26
           Top = 126
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 34
         end
         object CheckBox11: TCheckBox
           Tag = 10
           Left = 453
-          Height = 23
+          Height = 26
           Top = 326
-          Width = 25
+          Width = 28
           OnClick = ShowGridBoxClick
           TabOrder = 35
         end
@@ -2361,8 +2386,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TTabSheet
         Caption = 'Page6'
-        ClientHeight = 457
-        ClientWidth = 504
+        ClientHeight = 453
+        ClientWidth = 500
         object Label95: TLabel
           Left = 0
           Height = 14

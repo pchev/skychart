@@ -317,6 +317,10 @@ msgstr "方位角"
 msgid "Azimuthal coordinates"
 msgstr "地平座標"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%s地平經度轉動："

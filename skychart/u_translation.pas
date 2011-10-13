@@ -1347,6 +1347,7 @@ resourcestring
   rsMoreInformat = 'More informations';
   rsSearchByName = 'Search by name';
   rsSearchByPosi = 'Search by position';
+  rsAzimuthOrigi = 'Azimuth origin';
 
 
 implementation

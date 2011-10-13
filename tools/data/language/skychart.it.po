@@ -317,6 +317,10 @@ msgstr "Azimuth"
 msgid "Azimuthal coordinates"
 msgstr "Coordinate Altazimutali"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%s rotazioni Az"

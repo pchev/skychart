@@ -321,6 +321,10 @@ msgstr "Αζιμούθιο"
 msgid "Azimuthal coordinates"
 msgstr "Αζιμουθιακές συντεταγμένες"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%sΑζ στροφές:"

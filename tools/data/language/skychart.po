@@ -5282,3 +5282,7 @@ msgstr ""
 msgid "Search by position"
 msgstr ""
 
+#: u_translation:rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
