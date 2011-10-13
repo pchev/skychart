@@ -267,10 +267,12 @@ type
     RaDec8: TRaDec;
     RaDec9: TRaDec;
     CoordType: TRadioGroup;
+    AzimutOrigin: TRadioGroup;
     StarAutoBox: TCheckBox;
     StarBox: TCheckBox;
     PageControl1: TPageControl;
     TrackBar1: TTrackBar;
+    procedure AzimutOriginClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
@@ -359,6 +361,9 @@ ExpertMode.Caption:=rsExpertMode;
 PMBox.caption:=rsUseTheProper;
 EquinoxLabel.caption:=rsEquinox;
 projectiontype.caption:=rsChartCoordin2;
+AzimutOrigin.Caption:=rsAzimuthOrigi;
+AzimutOrigin.Items[0]:=rsNorth;
+AzimutOrigin.Items[1]:=rsSouth;
 ApparentType.caption:=rsNutationAber;
 Label30.caption:=rsFieldOfVisio3;
 Label106.caption:=rsFieldNumber;
@@ -454,6 +459,8 @@ PMBox.checked:=csc.PMon;
 if csc.ApparentPos then ApparentType.ItemIndex:=1
                    else Apparenttype.itemindex:=0;
 projectiontype.itemindex:=csc.ProjPole;
+if cshr.AzNorth then AzimutOrigin.ItemIndex:=0
+                else AzimutOrigin.ItemIndex:=1;
 coordtype.ItemIndex:=csc.CoordType;
 ExpertMode.Checked:=csc.CoordExpertMode;
 end;
@@ -777,6 +784,11 @@ if LockChange then exit;
 csc.ProjPole:=projectiontype.itemindex;
 end;
 
+procedure Tf_config_chart.AzimutOriginClick(Sender: TObject);
+begin
+if LockChange then exit;
+cshr.AzNorth:=(AzimutOrigin.ItemIndex=0);
+end;
 
 procedure Tf_config_chart.CoordTypeClick(Sender: TObject);
 begin

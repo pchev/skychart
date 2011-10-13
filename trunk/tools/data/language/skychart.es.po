@@ -318,6 +318,10 @@ msgstr "Acimut"
 msgid "Azimuthal coordinates"
 msgstr "Coordenadas acimutales"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%sGiros Az:"

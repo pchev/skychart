@@ -341,6 +341,10 @@ msgstr "Azimut"
 msgid "Azimuthal coordinates"
 msgstr "Azimutális koordináta"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%sforgatás vízszintesen:"

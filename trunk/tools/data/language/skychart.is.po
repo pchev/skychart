@@ -367,6 +367,10 @@ msgstr "Áttarhorn"
 msgid "Azimuthal coordinates"
 msgstr "Hnit áttarhorns"
 
+#: u_translation.rsazimuthorigi
+msgid "Azimuth origin"
+msgstr ""
+
 #: u_translation.rsazturns
 msgid "%sAz turns:"
 msgstr "%sÁttarhorn snúningar:"
