@@ -3305,7 +3305,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 22
+        Height = 24
         Hint = 'Search'
         Top = 2
         Width = 90
