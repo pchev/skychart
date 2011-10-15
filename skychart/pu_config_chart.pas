@@ -617,7 +617,7 @@ procedure Tf_config_chart.ShowProjection;
    begin
      cb.items.clear;
      cb.items.add('ARC');
-     if cshr.fieldnum[n]<=140 then cb.items.add('TAN');
+     if cshr.fieldnum[n]<=180 then cb.items.add('TAN');
      if cshr.fieldnum[n]<=90 then cb.items.add('SIN');
      cb.items.add('CAR');
      cb.text:=csc.projname[n]
@@ -957,17 +957,18 @@ end;
 
 procedure Tf_config_chart.Button7Click(Sender: TObject);
 begin
-ComboBox1.ItemIndex:=0;
-ComboBox2.ItemIndex:=0;
-ComboBox3.ItemIndex:=0;
-ComboBox4.ItemIndex:=0;
-ComboBox5.ItemIndex:=0;
-ComboBox6.ItemIndex:=0;
-ComboBox7.ItemIndex:=0;
-ComboBox8.ItemIndex:=0;
-ComboBox9.ItemIndex:=0;
-ComboBox10.ItemIndex:=0;
-ComboBox11.ItemIndex:=0;
+csc.projname[0]:='TAN';
+csc.projname[1]:='TAN';
+csc.projname[2]:='TAN';
+csc.projname[3]:='TAN';
+csc.projname[4]:='TAN';
+csc.projname[5]:='TAN';
+csc.projname[6]:='TAN';
+csc.projname[7]:='TAN';
+csc.projname[8]:='ARC';
+csc.projname[9]:='ARC';
+csc.projname[10]:='ARC';
+ShowProjection;
 end;
 
 procedure Tf_config_chart.Button8Click(Sender: TObject);
