@@ -480,10 +480,10 @@ begin
         for i := 0 to 5 do pv[2,i] := 0
     else begin
         if lista[2] = 1 then    //calculate earth state from EMBary
-            for i := 0 to lista[2] * 3 do
+            for i := 0 to (lista[2] * 3)-1 do
               pv[2,i] := pv[2,i] - pv[9,i] / (1.0 + eph.emrat);
         if lista[9] = 1 then   //calculate Solar System barycentric moon state
-            for i := 0 to lista[9] * 3 do
+            for i := 0 to (lista[9] * 3)-1 do
               pv[9,i] := pv[9,i] + pv[2,i];
     end;
     for i := 0 to (list_val * 3) - 1 do
