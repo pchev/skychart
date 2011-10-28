@@ -19,6 +19,20 @@ type TFieldData = class(Tobject)
      name, ucd, datatype, units, description : string;
      end;
 
+type Tstarcache = record
+         star: Tstar;
+         ra,de: double;
+         lma: string;
+end;
+type Tnebcache = record
+         neb: Tneb;
+         ra,de: double;
+         lma,ldim: string;
+end;
+
+const CacheInc=1000;
+      MaxCache=10;
+
 var
    VOobject, VOname : string;
    VOCatpath : string ='';
@@ -39,6 +53,12 @@ var
    emptyrec : gcatrec;
    VODoc: TXMLDocument;
    VoNode: TDOMNode;
+   onCache,CacheAvailable: boolean;
+   CurNebCache, CurStarCache, CurCacheRec: integer;
+   NebCacheIndex, StarCacheIndex: array[0..maxcache-1] of string;
+   StarOptionCache, NebOptionCache: array[0..maxcache-1] of TCatoption;
+   NebCache: array[0..maxcache-1] of array of Tnebcache;
+   StarCache: array[0..maxcache-1] of array of Tstarcache;
 
 implementation
 
@@ -209,6 +229,97 @@ else begin
 end;
 end;
 
+function GetCache:boolean;
+var i: integer;
+begin
+result:=false;
+case catversion of
+rtStar: begin
+          CurStarCache:=-1;
+          for i:=0 to MaxCache-1 do begin
+            if StarCacheIndex[i]=catname then begin
+               CurStarCache:=i;
+               result:=true;
+               break;
+            end;
+          end;
+        end;
+rtNeb : begin
+          CurNebCache:=-1;
+          for i:=0 to MaxCache-1 do begin
+            if NebCacheIndex[i]=catname then begin
+              CurNebCache:=i;
+              result:=true;
+              break;
+            end;
+          end;
+        end;
+end;
+end;
+
+function NewCache:boolean;
+var i,n: integer;
+begin
+result:=false;
+case catversion of
+rtStar: begin
+          n:=-1;
+          for i:=0 to MaxCache-1 do begin
+            if StarCacheIndex[i]='' then begin
+              n:=i;
+              break;
+            end;
+          end;
+          if n>=0 then begin
+            StarCacheIndex[n]:=catname;
+            SetLength(StarCache[n],CacheInc);
+            CurStarCache:=n;
+            result:=true;
+          end;
+        end;
+rtNeb : begin
+          n:=-1;
+          for i:=0 to MaxCache-1 do begin
+            if NebCacheIndex[i]='' then begin
+              n:=i;
+              break;
+            end;
+          end;
+          if n>=0 then begin
+            NebCacheIndex[n]:=catname;
+            SetLength(NebCache[n],CacheInc);
+            CurNebCache:=n;
+            result:=true;
+          end;
+        end;
+end;
+end;
+
+Procedure DeleteCache;
+var i: integer;
+begin
+case catversion of
+rtStar: begin
+          for i:=0 to MaxCache-1 do begin
+            if StarCacheIndex[i]=catname then begin
+               StarCacheIndex[i]:='';
+               SetLength(StarCache[i],0);
+               break;
+            end;
+          end;
+        end;
+rtNeb : begin
+          for i:=0 to MaxCache-1 do begin
+            if NebCacheIndex[i]=catname then begin
+              NebCacheIndex[i]:='';
+              SetLength(NebCache[i],0);
+              break;
+            end;
+          end;
+        end;
+end;
+end;
+
 Function ReadVOHeader: boolean;
 var buf,e,k,v:string;
     u: double;
@@ -236,73 +347,90 @@ forcecolor:=config.GetValue('VOcat/plot/forcecolor',0);
 DefSize:=config.GetValue('VOcat/default/defsize',1);
 Defmag:=config.GetValue('VOcat/default/defmag',10);
 config.free;
+if VOobject='star' then catversion:=rtStar;
+if VOobject='dso'  then catversion:=rtNeb;
 if active and FileExists(catfile) then begin
 try
-ReadXMLFile( VODoc, catfile);
-VODocOK:=true;
-VoNode:=VODoc.DocumentElement.FindNode('RESOURCE');
-VoNode:=VoNode.FindNode('TABLE');
-VoNode:=VoNode.FirstChild;
-VOFields.Clear;
-while Assigned(VoNode) do begin
-  buf:=VoNode.NodeName;
-  if buf='FIELD' then begin
-    fielddata:=TFieldData.Create;
-    fieldnode:=VoNode.FindNode('DESCRIPTION');
-    if fieldnode<>nil then begin
-       fielddata.description:=fieldnode.TextContent;
-    end;
-    fieldnode:=VoNode.Attributes.GetNamedItem('name');
-    if fieldnode<>nil then k:=fieldnode.NodeValue;
-    fielddata.name:=k;
-    fieldnode:=VoNode.Attributes.GetNamedItem('ucd');
-    if fieldnode<>nil then fielddata.ucd:=fieldnode.NodeValue;
-    fieldnode:=VoNode.Attributes.GetNamedItem('datatype');
-    if fieldnode<>nil then fielddata.datatype:=fieldnode.NodeValue;
-    fieldnode:=VoNode.Attributes.GetNamedItem('unit');
-    if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
-    j:=VOFields.AddObject(k,fielddata);
-    if pos('pos.pm',fielddata.ucd)=1 then begin
-      if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
-          u:=pmunits(fielddata.units,l);
-          if (u>0) then begin
-            field_pmra:=j;
-            unit_pmra:=u;
-            log_pmra:=l;
-            flabels[lOffset+vsPmra]:=fielddata.name;
-          end;
-       end
-       else if (pos('pos.eq.dec',fielddata.ucd)>0) then begin
-          u:=pmunits(fielddata.units,l);
-          if (u>0) then begin
-             field_pmdec:=j;
-             unit_pmdec:=u;
-             log_pmdec:=l;
-             flabels[lOffset+vsPmdec]:=fielddata.name;
-          end;
-       end;
-    end;
-    if (pos('phys.angSize',fielddata.ucd)=1)and(field_size=-1) then begin  //first dimmension
-      u:=angleunits(fielddata.units,l);
-      if (u>0) then begin
-         field_size:=j;
-         unit_size:=u/secarc;
-         log_size:=l;
+onCache:=GetCache;
+CurCacheRec:=-1;
+if onCache then begin
+  case catversion of
+     rtStar: emptyrec.options:=StarOptionCache[CurStarCache];
+     rtNeb : emptyrec.options:=NebOptionCache[CurNebCache];
+  end;
+  result:=true;
+end else begin
+  CacheAvailable:=NewCache;
+  ReadXMLFile( VODoc, catfile);
+  VODocOK:=true;
+  VoNode:=VODoc.DocumentElement.FindNode('RESOURCE');
+  VoNode:=VoNode.FindNode('TABLE');
+  VoNode:=VoNode.FirstChild;
+  VOFields.Clear;
+  while Assigned(VoNode) do begin
+    buf:=VoNode.NodeName;
+    if buf='FIELD' then begin
+      fielddata:=TFieldData.Create;
+      fieldnode:=VoNode.FindNode('DESCRIPTION');
+      if fieldnode<>nil then begin
+         fielddata.description:=fieldnode.TextContent;
+      end;
+      fieldnode:=VoNode.Attributes.GetNamedItem('name');
+      if fieldnode<>nil then k:=fieldnode.NodeValue;
+      fielddata.name:=k;
+      fieldnode:=VoNode.Attributes.GetNamedItem('ucd');
+      if fieldnode<>nil then fielddata.ucd:=fieldnode.NodeValue;
+      fieldnode:=VoNode.Attributes.GetNamedItem('datatype');
+      if fieldnode<>nil then fielddata.datatype:=fieldnode.NodeValue;
+      fieldnode:=VoNode.Attributes.GetNamedItem('unit');
+      if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
+      j:=VOFields.AddObject(k,fielddata);
+      if pos('pos.pm',fielddata.ucd)=1 then begin
+        if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
+            u:=pmunits(fielddata.units,l);
+            if (u>0) then begin
+              field_pmra:=j;
+              unit_pmra:=u;
+              log_pmra:=l;
+              flabels[lOffset+vsPmra]:=fielddata.name;
+            end;
+         end
+         else if (pos('pos.eq.dec',fielddata.ucd)>0) then begin
+            u:=pmunits(fielddata.units,l);
+            if (u>0) then begin
+               field_pmdec:=j;
+               unit_pmdec:=u;
+               log_pmdec:=l;
+               flabels[lOffset+vsPmdec]:=fielddata.name;
+            end;
+         end;
+      end;
+      if (pos('phys.angSize',fielddata.ucd)=1)and(field_size=-1) then begin  //first dimmension
+        u:=angleunits(fielddata.units,l);
+        if (u>0) then begin
+           field_size:=j;
+           unit_size:=u/secarc;
+           log_size:=l;
+        end;
       end;
     end;
+    if buf='DATA' then break;
+    VoNode:=VoNode.NextSibling;
   end;
-  if buf='DATA' then break;
-  VoNode:=VoNode.NextSibling;
-end;
-VoNode:=VoNode.FirstChild;   // TABLEDATA
-VoNode:=VoNode.FirstChild;   // first TR
-if Assigned(VoNode) then begin
-  buf:=VoNode.NodeName;
-  if buf='TR' then begin
-    result:=true;
-    if VOobject='star' then catversion:=rtStar;
-    if VOobject='dso'  then catversion:=rtNeb;
-    InitRec;
+  VoNode:=VoNode.FirstChild;   // TABLEDATA
+  VoNode:=VoNode.FirstChild;   // first TR
+  if Assigned(VoNode) then begin
+    buf:=VoNode.NodeName;
+    if buf='TR' then begin
+      result:=true;
+      InitRec;
+      if CacheAvailable then begin
+        case catversion of
+           rtStar: StarOptionCache[CurStarCache]:=emptyrec.options;
+           rtNeb: NebOptionCache[CurNebCache]:=emptyrec.options;
+        end;
+      end;
+    end;
   end;
 end;
 except
@@ -313,6 +441,9 @@ except
   config.Flush;
   config.free;
 end;
+end
+else begin
+  DeleteCache;
 end;
 end;
 
@@ -348,6 +479,30 @@ var cell: TDOMNode;
 begin
 ok:=false;
 lin:=emptyrec;
+if OnCache then begin
+// read form cache
+inc(CurCacheRec);
+case catversion of
+  rtStar: if CurCacheRec<length(StarCache[CurStarCache]) then begin
+             lin.star:=StarCache[CurStarCache,CurCacheRec].star;
+             lin.ra:=StarCache[CurStarCache,CurCacheRec].ra;
+             lin.dec:=StarCache[CurStarCache,CurCacheRec].de;
+             if StarCache[CurStarCache,CurCacheRec].lma<>'' then
+                lin.options.flabel[lOffset+vsMagv]:=StarCache[CurStarCache,CurCacheRec].lma;
+             ok:=true;
+          end;
+  rtNeb:  if CurCacheRec<length(NebCache[CurNebCache]) then begin
+             lin.neb:=NebCache[CurNebCache,CurCacheRec].neb;
+             lin.ra:=NebCache[CurNebCache,CurCacheRec].ra;
+             lin.dec:=NebCache[CurNebCache,CurCacheRec].de;
+             if NebCache[CurNebCache,CurCacheRec].lma<>'' then
+                lin.options.flabel[lOffset+vnMag]:=NebCache[CurNebCache,CurCacheRec].lma;
+             if NebCache[CurNebCache,CurCacheRec].ldim<>'' then
+                lin.options.flabel[lOffset+vnDim1]:=NebCache[CurNebCache,CurCacheRec].ldim;
+             ok:=true;
+          end;
+  end;
+end else begin
 if Assigned(VoNode) then begin
   cell:=VoNode.FirstChild;
   i:=0;
@@ -429,14 +584,52 @@ if Assigned(VoNode) then begin
     inc(i);
   end;
   case catversion of
-  rtStar: if lin.star.id='' then lin.star.id:=recno;
-  rtNeb : begin
+  rtStar: begin
+          if lin.star.id='' then lin.star.id:=recno;
+          end;
+  rtNeb:  begin
           if lin.neb.id='' then lin.neb.id:=recno;
           if lin.neb.mag=-99 then lin.neb.mag:=Defmag;
           end;
   end;
+   // fill cache
+  if CacheAvailable then begin
+    case catversion of
+    rtStar: begin
+            inc(CurCacheRec);
+            if CurCacheRec>=Length(StarCache[CurStarCache]) then begin
+              SetLength(StarCache[CurStarCache],CurCacheRec+CacheInc);
+            end;
+            StarCache[CurStarCache,CurCacheRec].star:=lin.star;
+            StarCache[CurStarCache,CurCacheRec].ra:=lin.ra;
+            StarCache[CurStarCache,CurCacheRec].de:=lin.dec;
+            if lin.options.flabel[lOffset+vsMagv]=emptyrec.options.flabel[lOffset+vsMagv] then
+               StarCache[CurStarCache,CurCacheRec].lma:=''
+            else
+               StarCache[CurStarCache,CurCacheRec].lma:=lin.options.flabel[lOffset+vsMagv];
+            end;
+    rtNeb:  begin
+            inc(CurCacheRec);
+            if CurCacheRec>=Length(NebCache[CurNebCache]) then begin
+              SetLength(NebCache[CurNebCache],CurCacheRec+CacheInc);
+            end;
+            NebCache[CurNebCache,CurCacheRec].neb:=lin.neb;
+            NebCache[CurNebCache,CurCacheRec].ra:=lin.ra;
+            NebCache[CurNebCache,CurCacheRec].de:=lin.dec;
+            if lin.options.flabel[lOffset+vnMag]=emptyrec.options.flabel[lOffset+vnMag] then
+               NebCache[CurNebCache,CurCacheRec].lma:=''
+            else
+               NebCache[CurNebCache,CurCacheRec].lma:=lin.options.flabel[lOffset+vnMag];
+            if lin.options.flabel[lOffset+vnDim1]=emptyrec.options.flabel[lOffset+vnDim1] then
+               NebCache[CurNebCache,CurCacheRec].ldim:=''
+            else
+               NebCache[CurNebCache,CurCacheRec].ldim:=lin.options.flabel[lOffset+vnDim1];
+            end;
+    end;
+  end;
   VoNode:=VoNode.NextSibling;
   ok:=true;
+end;
 end;
 if not ok then begin
    NextVOCat(ok);
@@ -471,7 +664,7 @@ end;
 function GetVOMagmax: double;
 var fs: TSearchRec;
     i: integer;
-    ok: boolean;
+    ok,active: boolean;
     rec:GCatrec;
     config: TXMLConfig;
     magmax,defmag:double;
@@ -489,33 +682,36 @@ while i=0 do begin
   i:=findnext(fs);
 end;
 findclose(fs);
-CurCat:=-1;
+CurCat:=0;
 ok:=false;
-inc(CurCat);
-if CurCat<Ncat then begin
+while CurCat<Ncat do begin
    catfile:=slash(VOCatpath)+VOcatlist[CurCat];
    deffile:=ChangeFileExt(catfile,'.config');
    if (CurCat>0) and VODocOK then VODoc.Free;
    config:=TXMLConfig.Create(nil);
    config.Filename:=deffile;
+   active:=config.GetValue('VOcat/plot/active',false);
    magmax:=config.GetValue('VOcat/plot/maxmag',-99);
    defmag:=config.GetValue('VOcat/default/defmag',10);
    config.free;
-   if magmax=-99 then begin
-      if (CurCat>0) and VODocOK then VODoc.Free;
-      ok:=ReadVOHeader;
-      while ok do begin
-        ReadVOCat(rec,ok);
-        if rec.star.valid[vsMagv] then  magmax:=max(magmax,rec.star.magv);
-      end;
-      if magmax<defmag then magmax:=defmag;
-      config:=TXMLConfig.Create(nil);
-      config.Filename:=deffile;
-      config.SetValue('VOcat/plot/maxmag',trunc(magmax));
-      config.Flush;
-      config.Free;
+   if active then begin
+     if magmax=-99 then begin
+        if (CurCat>0) and VODocOK then VODoc.Free;
+        ok:=ReadVOHeader;
+        while ok do begin
+          ReadVOCat(rec,ok);
+          if rec.star.valid[vsMagv] then  magmax:=max(magmax,rec.star.magv);
+        end;
+        if magmax<defmag then magmax:=defmag;
+        config:=TXMLConfig.Create(nil);
+        config.Filename:=deffile;
+        config.SetValue('VOcat/plot/maxmag',trunc(magmax));
+        config.Flush;
+        config.Free;
+     end;
+     result:=max(result,magmax);
    end;
-   result:=max(result,magmax);
+   inc(CurCat);
 end;
 CloseVOCat;
 result:=max(result,6);

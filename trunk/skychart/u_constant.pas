@@ -51,6 +51,7 @@ const cdcversion = 'Version 3.5-svn';
       MaxWindow = 10;  // maximum number of chart window
       maxlabels = 1000; //maximum number of label to a chart
       maxmodlabels = 1000; //maximum number of modified labels before older one are replaced
+      MaxUserObjects = 100;
       MaxCircle = 100;
       MaxDSSurl = 50;
       jd2000 =2451545.0 ;
@@ -186,7 +187,7 @@ const cdcversion = 'Version 3.5-svn';
       wds     = 3001;
       gcdbl   = 3002;
       BaseNeb = 4000;
-      MaxNebCatalog = 10;
+      MaxNebCatalog = 11;
       sac     = 4001;
       ngc     = 4002;
       lbn     = 4003;
@@ -197,6 +198,7 @@ const cdcversion = 'Version 3.5-svn';
       gpn     = 4008;
       gcneb   = 4009;
       voneb   = 4010;
+      uneb    = 4011;
       BaseLin = 5000;
       MaxLinCatalog = 1;
       gclin   = 5001;
@@ -494,14 +496,22 @@ type
 
      TGCatLst =  record
                     min, max, magmax : single;
-                    cattype:integer;
-                    Actif,CatOn : boolean;
+                    cattype,col:integer;
+                    Actif,CatOn,ForceColor : boolean;
                     shortname, name, path, version : string;  //shortname, name, path, version : shortstring;
                  end;
+     TUserObjects = record
+                    active: boolean;
+                    otype,color: integer;
+                    ra,dec,mag,size: double;
+                    oname,comment: string;
+                 end;
+
      Tconf_catalog = class(TObject)    // catalog setting
                 public
                 GCatLst : array of TGCatLst;
                 GCatNum  : Integer;
+                UserObjects: array of TUserObjects;
                 StarmagMax,NebMagMax,NebSizeMin : double;            // limit to extract from catalog
                 StarCatPath : array [1..MaxStarCatalog] of string;   // path to each catalog
                 StarCatDef : array [1..MaxStarCatalog] of boolean;   // is the catalog defined
@@ -812,7 +822,6 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : s
      de_type, de_year:integer;
      NumIndiDriver:integer;
      IndiDriverLst: array of array of string;
-     vostar_magmax: double;
 
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //
@@ -1146,6 +1155,7 @@ end;
 destructor Tconf_catalog.Destroy;
 begin
   SetLength(GCatLst,0);
+  SetLength(UserObjects,0);
   Inherited Destroy;
 end;
 
@@ -1155,6 +1165,8 @@ begin
 GCatNum:=Source.GCatNum;
 SetLength(GCatLst,GCatNum);
 for i:=0 to GCatNum-1 do GCatLst[i]:=Source.GCatLst[i];
+SetLength(UserObjects,length(Source.UserObjects));
+for i:=0 to length(UserObjects)-1 do UserObjects[i]:=Source.UserObjects[i];
 StarmagMax:=Source.StarmagMax;
 NebMagMax:=Source.NebMagMax;
 NebSizeMin:=Source.NebSizeMin;

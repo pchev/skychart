@@ -146,7 +146,7 @@ type
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
-     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true; clip:boolean=false; marge: integer=5);
+     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
@@ -1949,7 +1949,9 @@ if cfgplot.UseBMP then begin;
   ATextStyle.Opaque:=opaque;
   cbmp.FontName:=cfgplot.FontName[fontnum];
   lcolor:=cfgplot.LabelColor[labelnum];
+  if WhiteBg then lcolor:=cfgplot.Color[11];
   if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
+  if WhiteBg then lcolor:=cfgplot.Color[11];
   if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
   if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
   cbmp.FontHeight:=trunc(cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
@@ -2053,7 +2055,7 @@ end;
 result:=0;
 end;
 
-procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; opaque:boolean=true; clip:boolean=false; marge: integer=5);
+procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5);
 var ts:TSize;
     arect: TRect;
     ATextStyle:TTextStyle;
@@ -2066,6 +2068,7 @@ if cfgplot.UseBMP then begin;
   if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
   if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
   cbmp.FontName:=cfgplot.FontName[fontnum];
+  if WhiteBg then lcolor:=cfgplot.Color[11];
   if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
   ts:=cbmp.TextSize(txt);
   case Xalign of
@@ -2144,6 +2147,7 @@ if cfgplot.UseBMP then begin;
    if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
    cbmp.FontName:=cfgplot.FontName[fontnum];
    lcolor:=cfgplot.LabelColor[labelnum];
+   if WhiteBg then lcolor:=cfgplot.Color[11];
    if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
    ts:=cbmp.TextSize('1');
    {$ifdef lclgtk}

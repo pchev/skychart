@@ -50,6 +50,7 @@ type
     MenuItem31: TMenuItem;
     CloseTimer: TTimer;
     ResetLanguage: TMenuItem;
+    ToolButtonUObj: TToolButton;
     ToolButtonVO: TToolButton;
     TrackTelescope1: TMenuItem;
     PrintPreview1: TMenuItem;
@@ -503,6 +504,8 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowLabelsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonShowLinesMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowMarkMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonShowNebulaeMouseUp(Sender: TObject;
@@ -517,6 +520,9 @@ type
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonswitchstarsMouseUp(Sender: TObject;
       Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonUObjClick(Sender: TObject);
+    procedure ToolButtonUObjMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonVOClick(Sender: TObject);
     procedure ToolButtonVOMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -1083,6 +1089,8 @@ catalog.cfgcat.GCatLst[i].Actif:=(active='1');
 catalog.cfgcat.GCatLst[i].magmax:=0;
 catalog.cfgcat.GCatLst[i].name:='';
 catalog.cfgcat.GCatLst[i].cattype:=0;
+catalog.cfgcat.GCatLst[i].ForceColor:=false;
+catalog.cfgcat.GCatLst[i].col:=0;
 if catalog.cfgcat.GCatLst[i].Actif then begin
   if not
   catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
@@ -3139,7 +3147,7 @@ end;
 procedure Tf_main.ToolButtonShowStarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(2);
+if Button=mbRight then SetupCatalogPage(3);
 end;
 
 procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
@@ -3461,6 +3469,7 @@ ConfigCatalog.PageControl1.PageIndex:=page;
 ConfigCatalog.showmodal;
 if ConfigCatalog.ModalResult=mrOK then begin
  ConfigCatalog.ActivateGCat;
+ ConfigCatalog.ActivateUserObjects;
  activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
 end;
 ConfigCatalog.Free;
@@ -3470,6 +3479,7 @@ end;
 procedure Tf_main.ApplyConfigCatalog(Sender: TObject);
 begin
  ConfigCatalog.ActivateGCat;
+ ConfigCatalog.ActivateUserObjects;
  activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
 end;
 
@@ -3489,6 +3499,20 @@ procedure Tf_main.ToolButtonswitchstarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupDisplayPage(0);
+end;
+
+procedure Tf_main.ToolButtonUObjClick(Sender: TObject);
+begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=ToolButtonUObj.Down;
+     Refresh;
+  end;
+end;
+
+procedure Tf_main.ToolButtonUObjMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  if Button=mbRight then SetupCatalogPage(2);
 end;
 
 procedure Tf_main.ToolButtonVOClick(Sender: TObject);
@@ -3521,7 +3545,13 @@ end;
 procedure Tf_main.ToolButtonShowNebulaeMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(3);
+if Button=mbRight then SetupCatalogPage(4);
+end;
+
+procedure Tf_main.ToolButtonShowLinesMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+begin
+if Button=mbRight then SetupCatalogPage(0);
 end;
 
 procedure Tf_main.ToolButtonShowPicturesMouseUp(Sender: TObject;
@@ -4274,6 +4304,16 @@ catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
 catalog.cfgcat.UseGSVSIr:=false;
+SetLength(catalog.cfgcat.UserObjects,1);
+catalog.cfgcat.UserObjects[0].active:=false;
+catalog.cfgcat.UserObjects[0].oname:='NGP';
+catalog.cfgcat.UserObjects[0].otype:=14;
+catalog.cfgcat.UserObjects[0].ra:=3.36601290658;
+catalog.cfgcat.UserObjects[0].dec:=0.473478737245;
+catalog.cfgcat.UserObjects[0].mag:=0;
+catalog.cfgcat.UserObjects[0].size:=30;
+catalog.cfgcat.UserObjects[0].color:=0;
+catalog.cfgcat.UserObjects[0].comment:='Example of user defined object: North galactic pole';
 catalog.cfgcat.GCatNum:=1;
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 catalog.cfgcat.GCatLst[0].shortname:='dsl';
@@ -4282,6 +4322,8 @@ catalog.cfgcat.GCatLst[0].path:='cat/DSoutlines/';
 catalog.cfgcat.GCatLst[0].min:=0;
 catalog.cfgcat.GCatLst[0].max:=10;
 catalog.cfgcat.GCatLst[0].Actif:=true;
+catalog.cfgcat.GCatLst[0].ForceColor:=false;
+catalog.cfgcat.GCatLst[0].col:=0;
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=slash(appdir)+'cat';
    catalog.cfgcat.starcatdef[i]:=false;
@@ -4345,6 +4387,8 @@ for i:=1 to maxnebcatalog do begin
    catalog.cfgcat.nebcatfield[i,1]:=0;
    catalog.cfgcat.nebcatfield[i,2]:=0;
 end;
+catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=false;
+catalog.cfgcat.nebcatfield[uneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=false;
 catalog.cfgcat.nebcatfield[voneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatpath[sac-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'sac';
@@ -4453,7 +4497,7 @@ if config_version<cdcver then UpdateConfig;
 end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
-var i,t,l,w,h:integer;
+var i,t,l,w,h,n:integer;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -4524,6 +4568,8 @@ for i:=0 to catalog.cfgcat.GCatNum-1 do begin
    catalog.cfgcat.GCatLst[i].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
    catalog.cfgcat.GCatLst[i].max:=ReadFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
    catalog.cfgcat.GCatLst[i].Actif:=ReadBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
+   catalog.cfgcat.GCatLst[i].ForceColor:=ReadBool(section,'CatForceColor'+inttostr(i),false);
+   catalog.cfgcat.GCatLst[i].Col:=ReadInteger(section,'CatColor'+inttostr(i),0);
    catalog.cfgcat.GCatLst[i].magmax:=0;
    catalog.cfgcat.GCatLst[i].cattype:=0;
    if catalog.cfgcat.GCatLst[i].Actif then begin
@@ -4536,6 +4582,20 @@ for i:=0 to catalog.cfgcat.GCatNum-1 do begin
                       catalog.cfgcat.GCatLst[i].name)
       then catalog.cfgcat.GCatLst[i].Actif:=false;
    end;
+end;
+n:=Length(catalog.cfgcat.UserObjects);
+n:=Readinteger(section,'UserObjectsNum',n);
+SetLength(catalog.cfgcat.UserObjects,n);
+for i:=0 to n-1 do begin
+   catalog.cfgcat.UserObjects[i].active:=ReadBool(section,'UObjActive'+inttostr(i),catalog.cfgcat.UserObjects[i].active);
+   catalog.cfgcat.UserObjects[i].otype:=ReadInteger(section,'UObjType'+inttostr(i),catalog.cfgcat.UserObjects[i].otype);
+   catalog.cfgcat.UserObjects[i].oname:=ReadString(section,'UObjName'+inttostr(i),catalog.cfgcat.UserObjects[i].oname);
+   catalog.cfgcat.UserObjects[i].ra:=ReadFloat(section,'UObjRA'+inttostr(i),catalog.cfgcat.UserObjects[i].ra);
+   catalog.cfgcat.UserObjects[i].dec:=ReadFloat(section,'UObjDEC'+inttostr(i),catalog.cfgcat.UserObjects[i].dec);
+   catalog.cfgcat.UserObjects[i].mag:=ReadFloat(section,'UObjMag'+inttostr(i),catalog.cfgcat.UserObjects[i].mag);
+   catalog.cfgcat.UserObjects[i].size:=ReadFloat(section,'UObjSize'+inttostr(i),catalog.cfgcat.UserObjects[i].size);
+   catalog.cfgcat.UserObjects[i].color:=ReadInteger(section,'UObjColor'+inttostr(i),catalog.cfgcat.UserObjects[i].color);
+   catalog.cfgcat.UserObjects[i].comment:=ReadString(section,'UObjComment'+inttostr(i),catalog.cfgcat.UserObjects[i].comment);
 end;
 catalog.cfgcat.StarmagMax:=ReadFloat(section,'StarmagMax',catalog.cfgcat.StarmagMax);
 catalog.cfgcat.NebmagMax:=ReadFloat(section,'NebmagMax',catalog.cfgcat.NebmagMax);
@@ -5189,7 +5249,7 @@ end;
 end;
 
 procedure Tf_main.SaveChartConfig(filename:string; child: TChildDoc);
-var i:integer;
+var i,n:integer;
     inif: TMemIniFile;
     section : string;
     cplot:Tconf_plot ;
@@ -5236,6 +5296,21 @@ for i:=0 to catalog.cfgcat.GCatNum-1 do begin
    WriteFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
    WriteFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
    WriteBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
+   WriteBool(section,'CatForceColor'+inttostr(i),catalog.cfgcat.GCatLst[i].ForceColor);
+   WriteInteger(section,'CatColor'+inttostr(i),catalog.cfgcat.GCatLst[i].Col);
+end;
+n:=Length(catalog.cfgcat.UserObjects);
+WriteInteger(section,'UserObjectsNum',n);
+for i:=0 to n-1 do begin
+   WriteBool(section,'UObjActive'+inttostr(i),catalog.cfgcat.UserObjects[i].active);
+   WriteInteger(section,'UObjType'+inttostr(i),catalog.cfgcat.UserObjects[i].otype);
+   WriteString(section,'UObjName'+inttostr(i),catalog.cfgcat.UserObjects[i].oname);
+   WriteFloat(section,'UObjRA'+inttostr(i),catalog.cfgcat.UserObjects[i].ra);
+   WriteFloat(section,'UObjDEC'+inttostr(i),catalog.cfgcat.UserObjects[i].dec);
+   WriteFloat(section,'UObjMag'+inttostr(i),catalog.cfgcat.UserObjects[i].mag);
+   WriteFloat(section,'UObjSize'+inttostr(i),catalog.cfgcat.UserObjects[i].size);
+   WriteInteger(section,'UObjColor'+inttostr(i),catalog.cfgcat.UserObjects[i].color);
+   WriteString(section,'UObjComment'+inttostr(i),catalog.cfgcat.UserObjects[i].comment);
 end;
 WriteFloat(section,'StarmagMax',catalog.cfgcat.StarmagMax);
 WriteFloat(section,'NebmagMax',catalog.cfgcat.NebmagMax);
@@ -5826,6 +5901,7 @@ ToolButtonShowStars.hint:=rsShowStars;
 ToolButtonShowNebulae.hint:=rsShowNebulae;
 ToolButtonShowLines.hint:=rsShowLines;
 ToolButtonVO.Hint:=rsShowVirtualO;
+ToolButtonUObj.Hint:=rsShowUserDefi;
 ToolButtonShowPictures.hint:=rsShowPictures;
 ToolButtonBlink.hint:=rsBlinkingPict;
 menublinkimage.Caption:='&'+rsBlinkingPict;
@@ -6157,6 +6233,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     toolbuttonshowNebulae.down:=sc.cfgsc.shownebulae;
     ShowNebulae1.checked:=sc.cfgsc.shownebulae;
     ToolButtonVO.Down:=(catalog.cfgcat.starcatdef[vostar-BaseStar] or catalog.cfgcat.nebcatdef[voneb-BaseNeb]);
+    ToolButtonUObj.Down:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;

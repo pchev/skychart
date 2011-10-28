@@ -1348,6 +1348,8 @@ resourcestring
   rsSearchByName = 'Search by name';
   rsSearchByPosi = 'Search by position';
   rsAzimuthOrigi = 'Azimuth origin';
+  rsUserDefinedO = 'User defined objects';
+  rsShowUserDefi = 'Show User defined objects';
 
 
 implementation

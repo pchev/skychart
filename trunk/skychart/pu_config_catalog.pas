@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig,
+  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
   EditBtn, LazHelpHTML;
@@ -36,17 +36,22 @@ type
   { Tf_config_catalog }
 
   Tf_config_catalog = class(TForm)
+    addobj: TButton;
     bsc3: TDirectoryEdit;
     addcat: TButton;
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
+    ColorDialog1: TColorDialog;
     delcat: TButton;
     CatgenButton: TButton;
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    delobj: TButton;
     fgcm1: TLongEdit;
     fgcm2: TLongEdit;
     fgpn1: TLongEdit;
@@ -77,10 +82,11 @@ type
     GCMbox: TCheckBox;
     gpn3: TDirectoryEdit;
     GPNbox: TCheckBox;
+    ImageList1: TImageList;
     Label4: TLabel;
+    Label6: TLabel;
     LabelDownload: TLabel;
     maxrows: TLongEdit;
-    ReloadImg: TImage;
     Label1: TLabel;
     Label95: TLabel;
     LabelWarning: TLabel;
@@ -100,6 +106,7 @@ type
     FOVPanel: TPanel;
     ocl3: TDirectoryEdit;
     OCLbox: TCheckBox;
+    OpenDialog2: TOpenDialog;
     Page5: TTabSheet;
     Panel1: TPanel;
     PanelDef: TPanel;
@@ -112,7 +119,10 @@ type
     sac3: TDirectoryEdit;
     SACbox: TCheckBox;
     Page1a: TTabSheet;
+    SaveDialog1: TSaveDialog;
+    StringGrid1: TStringGrid;
     StringGrid4: TStringGrid;
+    Page1b: TTabSheet;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -122,7 +132,6 @@ type
     dsgsc3: TDirectoryEdit;
     dstyc3: TDirectoryEdit;
     dsbase3: TDirectoryEdit;
-    DirOpenImg: TImage;
     usn3: TDirectoryEdit;
     gscc3: TDirectoryEdit;
     gscf3: TDirectoryEdit;
@@ -207,17 +216,27 @@ type
     fmct2: TLongEdit;
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
+    procedure addobjClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
     procedure CatgenClick(Sender: TObject);
+    procedure delobjClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure maxrowsChange(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
     procedure StringGrid3DrawCell(Sender: TObject; ACol, ARow: Integer;
       Rect: TRect; State: TGridDrawState);
     procedure StringGrid3MouseUp(Sender: TObject; Button: TMouseButton;
@@ -256,6 +275,7 @@ type
     procedure CDCNebPathChange(Sender: TObject);
     procedure CDCNebSelPathClick(Sender: TObject);
     procedure ActivateGCat;
+    procedure ActivateUserObjects;
     procedure ShowFov;
 
   private
@@ -269,9 +289,11 @@ type
     procedure ShowCDCStar;                                
     procedure ShowCDCNeb;
     procedure ShowVO;
+    procedure ShowUserObjects;
     procedure ReloadVO(fn: string);
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
+    Procedure DeleteObjRow(p : integer);
     procedure ReloadFeedback(txt:string);
   public
     { Public declarations }
@@ -302,6 +324,7 @@ Page1.caption:=rsCatalog;
 Label37.caption:=rsStarsAndNebu;
 addcat.caption:=rsAdd;
 delcat.caption:=rsDelete;
+ColorDialog1.Title:='Select color (black for catalog default)';
 Page1a.Caption:=rsVOCatalog;
 Label1.Caption:=rsVirtualObser;
 Button5.Caption:=rsAdd;
@@ -351,6 +374,24 @@ Button4.caption:=rsHelp;
 LabelWarning.Caption:=rsWarningYouAr2;
 if Fcatgen<>nil then Fcatgen.SetLang;
 SetHelp(self,hlpCatalog);
+StringGrid1.Columns[0].PickList.Clear;
+StringGrid1.Columns[0].PickList.Add(rsUnknowObject);
+StringGrid1.Columns[0].PickList.Add(rsGalaxy);
+StringGrid1.Columns[0].PickList.Add(rsOpenCluster);
+StringGrid1.Columns[0].PickList.Add(rsGlobularClus);
+StringGrid1.Columns[0].PickList.Add(rsPlanetaryNeb);
+StringGrid1.Columns[0].PickList.Add(rsBrightNebula);
+StringGrid1.Columns[0].PickList.Add(rsClusterAndNe);
+StringGrid1.Columns[0].PickList.Add(rsStar);
+StringGrid1.Columns[0].PickList.Add(rsDoubleStar);
+StringGrid1.Columns[0].PickList.Add(rsTripleStar);
+StringGrid1.Columns[0].PickList.Add(rsAsterism);
+StringGrid1.Columns[0].PickList.Add(rsKnot);
+StringGrid1.Columns[0].PickList.Add(rsGalaxyCluste);
+StringGrid1.Columns[0].PickList.Add(rsDarkNebula);
+StringGrid1.Columns[0].PickList.Add(rsCircle);
+StringGrid1.Columns[0].PickList.Add(rsSquare);
+StringGrid1.Columns[0].PickList.Add(rsLosange);
 end;
 
 constructor Tf_config_catalog.Create(AOwner:TComponent);
@@ -378,6 +419,7 @@ LockActivePath:=false;
 LockChange:=true;
 ShowGCat;
 ShowVO;
+ShowUserObjects;
 ShowCDCStar;
 ShowCDCNeb;
 ShowFov;
@@ -496,7 +538,7 @@ end;
 end;
 
 procedure Tf_config_catalog.ShowGCat;
-var i,j:integer;
+var i,j,n:integer;
 begin
 stringgrid3.RowCount:=ccat.GCatnum+1;
 stringgrid3.cells[0,0]:='x';
@@ -514,6 +556,14 @@ for j:=0 to ccat.GCatnum-1 do begin
   stringgrid3.cells[4,i]:=systoutf8(ccat.GCatLst[j].path);
   if ccat.GCatLst[j].actif then stringgrid3.cells[0,i]:='1'
                            else stringgrid3.cells[0,i]:='0';
+  n:=catalog.GetCatType(stringgrid3.Cells[4,i],stringgrid3.Cells[1,i]);
+  if (n=4) or (n=5) then begin  // rtneb, rtlin
+    if ccat.GCatLst[j].ForceColor and (ccat.GCatLst[j].col>0) then
+      stringgrid3.cells[6,i]:=inttostr(ccat.GCatLst[j].col)
+    else
+      stringgrid3.cells[6,i]:='';
+  end
+  else stringgrid3.cells[6,i]:='N';
 end;
 end;
 
@@ -652,21 +702,32 @@ with Sender as TStringGrid do begin
 if (Acol=0)and(Arow>0) then begin
   Canvas.Brush.style := bssolid;
   if (cells[acol,arow]='1')then begin
-    Canvas.Brush.Color := clLime;
+    Canvas.Brush.Color := clWindow;
     Canvas.FillRect(Rect);
+    ImageList1.Draw(Canvas,Rect.left+2,Rect.top+2,3);
   end else begin
-    Canvas.Brush.Color := clRed;
+    Canvas.Brush.Color := clWindow;
     Canvas.FillRect(Rect);
+    ImageList1.Draw(Canvas,Rect.left+2,Rect.top+2,2);
   end;
 end else if (Acol=5)and(Arow>0) then begin
-    Canvas.draw(Rect.left,Rect.top,DirOpenImg.Picture.Bitmap);
+    ImageList1.Draw(Canvas,Rect.left+2,Rect.top+2,0);
+end else if (Acol=6)and(Arow>0) then begin
+  Canvas.Brush.style := bssolid;
+  Canvas.Brush.Color := clWindow;
+  Canvas.FillRect(Rect);
+  if cells[acol,arow]<>'N' then begin
+    Canvas.Brush.Color := StrToIntDef(cells[acol,arow],clWhite);
+    Canvas.Pen.Color := clBtnShadow;
+    Canvas.EllipseC(Rect.Left+(abs(Rect.Right-Rect.Left) div 2), Rect.Top+(abs(Rect.Bottom-Rect.Top) div 2), 6, 6 );
+  end;
 end;
 end;
 end;
 
 procedure Tf_config_catalog.StringGrid3MouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var col,row:integer;
+var i,col,row:integer;
 begin
 StringGrid3.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;
@@ -680,12 +741,24 @@ case col of
 5 : begin
     EditGCatPath(row);
     end;
+6 : begin
+    i:=catalog.GetCatType(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
+    if (i=4) or (i=5) then begin  // rtneb, rtlin
+      ColorDialog1.Color:=StrToIntDef(stringgrid3.Cells[col,row],clBlack);
+      if ColorDialog1.Execute then begin
+         if ColorDialog1.Color=0 then
+            stringgrid3.Cells[col,row]:=''
+         else
+            stringgrid3.Cells[col,row]:=inttostr(ColorDialog1.Color);
+      end;
+    end;
+    end;
 end;
 end;
 
 Procedure Tf_config_catalog.EditGCatPath(row : integer);
 var buf : string;
-    p : integer;
+    p,i : integer;
 begin
     chdir(appdir);
     if trim(stringgrid3.Cells[4,row])<>'' then opendialog1.InitialDir:=ExpandFileName(stringgrid3.Cells[4,row])
@@ -702,6 +775,11 @@ begin
        stringgrid3.Cells[2,row]:='0';
        stringgrid3.Cells[3,row]:=catalog.GetMaxField(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
     end;
+    i:=catalog.GetCatType(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
+    if (i=4) or (i=5) then   // rtneb, rtlin
+       stringgrid3.Cells[6,row]:=''
+    else
+       stringgrid3.Cells[6,row]:='N';
     finally
     chdir(appdir);
     end;
@@ -710,11 +788,12 @@ end;
 procedure Tf_config_catalog.StringGrid3SelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-if Acol=5 then canselect:=false else canselect:=true;
+if (Acol=5)or(Acol=6) then canselect:=false else canselect:=true;
 end;
 
 procedure Tf_config_catalog.StringGrid3SetEditText(Sender: TObject; ACol,
   ARow: Integer; const Value: String);
+var i : integer;
 begin
 if (Acol=4)and(Arow>0) then
   if not fileexists(slash(value)+StringGrid3.cells[1,arow]+'.hdr') then begin
@@ -735,6 +814,13 @@ if ((Acol=2)or(Acol=3))and(Arow>0)and(value>'') then begin
     StringGrid3.cells[0,arow]:='0';
   end;
 end;
+if ((Acol=1)or(Acol=4))and(Arow>0) then begin
+  i:=catalog.GetCatType(stringgrid3.Cells[4,arow],stringgrid3.Cells[1,arow]);
+  if (i=4) or (i=5) then   // rtneb, rtlin
+     stringgrid3.Cells[6,arow]:=''
+  else
+     stringgrid3.Cells[6,arow]:='N';
+end
 end;
 
 procedure Tf_config_catalog.AddCatClick(Sender: TObject);
@@ -807,15 +893,17 @@ with Sender as TStringGrid do begin
 if (Acol=0)and(Arow>0) then begin
   Canvas.Brush.style := bssolid;
   if (cells[acol,arow]='1')then begin
-    Canvas.Brush.Color := clLime;
+    Canvas.Brush.Color := clWindow;
     Canvas.FillRect(aRect);
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,3);
   end else begin
-    Canvas.Brush.Color := clRed;
+    Canvas.Brush.Color := clWindow;
     Canvas.FillRect(aRect);
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
   end;
 end else if (Acol=3)and(Arow>0) then begin
   if (cells[acol,arow]='1')then begin
-    Canvas.draw(aRect.left,aRect.top,ReloadImg.Picture.Bitmap);
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,1);
   end else begin
     Canvas.Brush.Color := StringGrid4.Color;
     Canvas.FillRect(aRect);
@@ -1060,6 +1148,14 @@ for i:=0 to ccat.GCatNum-1 do begin
    ccat.GCatLst[i].magmax:=0;
    ccat.GCatLst[i].name:='';
    ccat.GCatLst[i].cattype:=0;
+   val(stringgrid3.cells[6,i+1],x,v);
+   if v=0 then begin
+      ccat.GCatLst[i].ForceColor:=true;
+      ccat.GCatLst[i].col:=x;
+   end else begin
+      ccat.GCatLst[i].ForceColor:=false;
+      ccat.GCatLst[i].col:=0;
+   end;
 end;
 end;
 
@@ -1134,5 +1230,259 @@ for j in [1,2] do begin
   findclose(fs);
 end;
 end;
+
+procedure Tf_config_catalog.StringGrid1DrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+var buf: string;
+begin
+with Sender as TStringGrid do begin
+if (Acol=0)and(Arow>0) then begin
+  Canvas.Brush.style := bssolid;
+  if (cells[acol,arow]='1')then begin
+    Canvas.Brush.Color := clWindow;
+    Canvas.FillRect(aRect);
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,3);
+  end else begin
+    Canvas.Brush.Color := clWindow;
+    Canvas.FillRect(aRect);
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
+  end;
+end else if (Acol=7)and(Arow>0) then begin
+  Canvas.Brush.style := bssolid;
+  Canvas.Brush.Color := clWindow;
+  Canvas.FillRect(aRect);
+  if cells[acol,arow]<>'N' then begin
+    buf:=trim(cells[acol,arow]);
+    if buf='0' then buf:='';
+    Canvas.Brush.Color := StrToIntDef(buf,clWhite);
+    Canvas.Pen.Color := clBtnShadow;
+    Canvas.EllipseC(aRect.Left+(abs(aRect.Right-aRect.Left) div 2), aRect.Top+(abs(aRect.Bottom-aRect.Top) div 2), 6, 6 );
+  end;
+end;
+end;
+end;
+
+procedure Tf_config_catalog.StringGrid1MouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var col,row:integer;
+    config:TXMLConfig;
+begin
+StringGrid1.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+0 : begin
+    if stringgrid1.Cells[col,row]='1' then stringgrid1.Cells[col,row]:='0'
+       else  stringgrid1.Cells[col,row]:='1';
+    end;
+7 : begin
+      ColorDialog1.Color:=StrToIntDef(stringgrid1.Cells[col,row],clBlack);
+      if ColorDialog1.Execute then begin
+         if ColorDialog1.Color=0 then
+            stringgrid1.Cells[col,row]:=''
+         else
+            stringgrid1.Cells[col,row]:=inttostr(ColorDialog1.Color);
+      end;
+    end;
+end;
+end;
+
+procedure Tf_config_catalog.StringGrid1SelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+begin
+  if (Acol=0)or(Acol=7) then canselect:=False else canselect:=True;
+end;
+
+
+procedure Tf_config_catalog.ShowUserObjects;
+var i,r: integer;
+begin
+StringGrid1.RowCount:=1;
+stringgrid1.cells[0,0]:='x';
+stringgrid1.Columns[0].Title.Caption:=rsType;
+stringgrid1.Columns[1].Title.Caption:=rsObject;
+stringgrid1.Columns[2].Title.Caption:=rsRA+'('+rsHour+')';
+stringgrid1.Columns[3].Title.Caption:=rsDEC+'('+rsDegree+')';
+stringgrid1.Columns[4].Title.Caption:=rsMagn;
+stringgrid1.Columns[5].Title.Caption:=rsSize+'('')';
+stringgrid1.Columns[6].Title.Caption:=rsColor;
+stringgrid1.Columns[7].Title.Caption:=rsDescription;
+for i:=0 to length(ccat.UserObjects)-1 do begin
+  StringGrid1.RowCount:=StringGrid1.RowCount+1;
+  r:=StringGrid1.RowCount-1;
+  if ccat.UserObjects[i].active then StringGrid1.Cells[0,r]:='1'
+                                else StringGrid1.Cells[0,r]:='0';
+  StringGrid1.Cells[1,r]:=StringGrid1.Columns[0].PickList[ccat.UserObjects[i].otype];
+  StringGrid1.Cells[2,r]:=ccat.UserObjects[i].oname;
+  StringGrid1.Cells[3,r]:=ARToStr3(rad2deg*ccat.UserObjects[i].ra/15);
+  StringGrid1.Cells[4,r]:=DEToStr3(rad2deg*ccat.UserObjects[i].dec);
+  StringGrid1.Cells[5,r]:=FormatFloat(f2,ccat.UserObjects[i].mag);
+  StringGrid1.Cells[6,r]:=FormatFloat(f2,ccat.UserObjects[i].size);
+  if ccat.UserObjects[i].color=0 then StringGrid1.Cells[7,r]:=''
+       else StringGrid1.Cells[7,r]:=inttostr(ccat.UserObjects[i].color);
+  StringGrid1.Cells[8,r]:=ccat.UserObjects[i].comment;
+end;
+end;
+
+procedure Tf_config_catalog.addobjClick(Sender: TObject);
+begin
+if stringgrid1.rowcount<MaxUserObjects then begin
+ stringgrid1.rowcount:=stringgrid1.rowcount+1;
+ stringgrid1.cells[0,stringgrid1.rowcount-1]:='0';
+ stringgrid1.cells[1,stringgrid1.rowcount-1]:=StringGrid1.Columns[0].PickList[0];
+end;
+end;
+
+procedure Tf_config_catalog.delobjClick(Sender: TObject);
+var p : integer;
+begin
+p:=stringgrid1.selection.top;
+stringgrid1.cells[0,p]:='';
+stringgrid1.cells[1,p]:='';
+stringgrid1.cells[2,p]:='';
+stringgrid1.cells[3,p]:='';
+stringgrid1.cells[4,p]:='';
+stringgrid1.cells[5,p]:='';
+stringgrid1.cells[6,p]:='';
+stringgrid1.cells[7,p]:='';
+stringgrid1.cells[8,p]:='';
+DeleteObjRow(p);
+end;
+
+Procedure Tf_config_catalog.DeleteObjRow(p : integer);
+var i : integer;
+begin
+if p<1 then exit;
+  for i:=p to stringgrid1.RowCount-2 do begin
+   stringgrid1.cells[0,i]:=stringgrid1.cells[0,i+1];
+   stringgrid1.cells[1,i]:=stringgrid1.cells[1,i+1];
+   stringgrid1.cells[2,i]:=stringgrid1.cells[2,i+1];
+   stringgrid1.cells[3,i]:=stringgrid1.cells[3,i+1];
+   stringgrid1.cells[4,i]:=stringgrid1.cells[4,i+1];
+   stringgrid1.cells[5,i]:=stringgrid1.cells[5,i+1];
+   stringgrid1.cells[6,i]:=stringgrid1.cells[6,i+1];
+   stringgrid1.cells[7,i]:=stringgrid1.cells[7,i+1];
+   stringgrid1.cells[8,i]:=stringgrid1.cells[8,i+1];
+  end;
+  stringgrid1.RowCount:=stringgrid1.RowCount-1;
+end;
+
+procedure Tf_config_catalog.ActivateUserObjects;
+var i,j,k,n: integer;
+begin
+n:=stringgrid1.RowCount-1;
+SetLength(ccat.UserObjects,n);
+for i:=0 to n-1 do begin
+   ccat.UserObjects[i].active:=(stringgrid1.cells[0,i+1]='1');
+   k:=0;
+   for j:=0 to StringGrid1.Columns[0].PickList.Count-1 do begin
+     if stringgrid1.cells[1,i+1]=StringGrid1.Columns[0].PickList[j] then begin
+       k:=j;
+       break;
+     end;
+   end;
+   ccat.UserObjects[i].otype:=k;
+   ccat.UserObjects[i].oname:=stringgrid1.cells[2,i+1];
+   ccat.UserObjects[i].ra:=deg2rad*15*Str3ToAR(stringgrid1.cells[3,i+1]);
+   ccat.UserObjects[i].dec:=deg2rad*Str3ToDE(stringgrid1.cells[4,i+1]);
+   ccat.UserObjects[i].mag:=StrToFloatDef(stringgrid1.cells[5,i+1],6);
+   ccat.UserObjects[i].size:=StrToFloatDef(stringgrid1.cells[6,i+1],60);
+   ccat.UserObjects[i].color:=StrToIntDef(stringgrid1.cells[7,i+1],0);
+   ccat.UserObjects[i].comment:=stringgrid1.cells[8,i+1];
+end;
+end;
+
+procedure Tf_config_catalog.Button8Click(Sender: TObject);
+var f: textfile;
+    i,n: integer;
+    ac: string;
+begin
+if stringgrid1.RowCount<=1 then exit;
+if SaveDialog1.InitialDir='' then SaveDialog1.InitialDir:=HomeDir;
+if SaveDialog1.Execute then begin
+  {$ifdef trace_debug}
+   WriteTrace(caption+' Save user objects to '+UTF8ToSys(SaveDialog1.FileName));
+  {$endif}
+   ActivateUserObjects;
+   AssignFile(f,UTF8ToSys(SaveDialog1.FileName));
+   Rewrite(f);
+   n:=length(ccat.UserObjects);
+   for i:=0 to n-1 do begin
+     if ccat.UserObjects[i].active then ac:='1' else ac:='0';
+     WriteLn(f,ccat.UserObjects[i].oname+blank+
+         ARToStr3(rad2deg*ccat.UserObjects[i].ra/15)+blank+
+         DEToStr3(rad2deg*ccat.UserObjects[i].dec)+blank+
+         ac+blank+
+         inttostr(ccat.UserObjects[i].otype)+blank+
+         FormatFloat(f2,ccat.UserObjects[i].mag)+blank+
+         FormatFloat(f2,ccat.UserObjects[i].size)+blank+
+         inttostr(ccat.UserObjects[i].color)+blank+
+         ccat.UserObjects[i].comment
+         );
+   end;
+   CloseFile(f);
+end;
+end;
+
+procedure Tf_config_catalog.Button9Click(Sender: TObject);
+var f: textfile;
+    i,n,p: integer;
+    buf1,buf2: string;
+begin
+if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
+if OpenDialog1.Execute then begin
+  {$ifdef trace_debug}
+   WriteTrace(caption+' Load user objects from '+UTF8ToSys(OpenDialog1.FileName));
+  {$endif}
+  AssignFile(f,UTF8ToSys(OpenDialog1.FileName));
+  reset(f);
+  n:=0;
+  while not eof(f) do begin
+     ReadLn(f,buf1);
+     inc(n);
+  end;
+  n:=min(n,MaxUserObjects);
+  setlength(ccat.UserObjects,n);
+  reset(f);
+  for i:=0 to n-1 do begin;
+     ReadLn(f,buf1);
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].oname:=buf2;
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].ra:=deg2rad*15*Str3ToAR(trim(buf2));
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].dec:=deg2rad*Str3ToDE(trim(buf2));
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].active:=(trim(buf2)='1');
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].otype:=strtointdef(buf2,0);
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].mag:=StrToFloatDef(buf2,6);
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].size:=StrToFloatDef(buf2,60);
+     p:=pos(blank,buf1);
+     buf2:=copy(buf1,1,p-1);
+     Delete(buf1,1,p);
+     ccat.UserObjects[i].color:=StrToIntDef(buf2,0);
+     ccat.UserObjects[i].comment:=buf1;
+  end;
+  CloseFile(f);
+  ShowUserObjects;
+end;
+end;
+
 
 end.

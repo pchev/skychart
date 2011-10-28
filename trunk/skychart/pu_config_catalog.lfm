@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 353
+  Left = 339
   Height = 573
-  Top = 149
+  Top = 14
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -28,31 +28,31 @@ object f_config_catalog: Tf_config_catalog
       Height = 464
       Top = 1
       Width = 498
-      ActivePage = Page1a
+      ActivePage = Page1b
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 2
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object Label37: TLabel
-          Left = 7
-          Height = 15
+          Left = 9
+          Height = 18
           Top = 19
-          Width = 235
+          Width = 273
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
           ParentColor = False
         end
         object StringGrid3: TStringGrid
-          Left = 0
+          Left = 9
           Height = 345
           Top = 48
           Width = 482
-          ColCount = 6
+          ColCount = 7
           Columns = <          
             item
               Title.Caption = 'Cat'
@@ -96,11 +96,15 @@ object f_config_catalog: Tf_config_catalog
             end          
             item
               Title.Caption = 'Path'
-              Width = 260
+              Width = 222
             end          
             item
               ButtonStyle = cbsNone
               Title.Caption = ' '
+              Width = 40
+            end          
+            item
+              Title.Caption = 'Color'
               Width = 40
             end>
           DefaultColWidth = 24
@@ -147,13 +151,13 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object Label1: TLabel
           Left = 7
-          Height = 15
+          Height = 18
           Top = 19
-          Width = 149
+          Width = 177
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
         end
@@ -223,7 +227,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object maxrows: TLongEdit
           Left = 415
-          Height = 22
+          Height = 25
           Hint = '100..50000'
           Top = 15
           Width = 64
@@ -237,9 +241,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label4: TLabel
           Left = 323
-          Height = 15
+          Height = 18
           Top = 19
-          Width = 52
+          Width = 60
           Caption = 'Max rows'
           ParentColor = False
         end
@@ -253,106 +257,208 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 4
         end
       end
+      object Page1b: TTabSheet
+        Caption = 'User defined objects'
+        ClientHeight = 460
+        ClientWidth = 494
+        object Label6: TLabel
+          Left = 7
+          Height = 18
+          Top = 19
+          Width = 132
+          Caption = 'User defined objects'
+          ParentColor = False
+        end
+        object addobj: TButton
+          Left = 17
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Add'
+          OnClick = addobjClick
+          TabOrder = 0
+        end
+        object delobj: TButton
+          Left = 121
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Delete'
+          OnClick = delobjClick
+          TabOrder = 1
+        end
+        object StringGrid1: TStringGrid
+          Left = 0
+          Height = 323
+          Top = 48
+          Width = 482
+          ColCount = 9
+          Columns = <          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                'Star'
+                'Open cluster'
+              )
+              Title.Caption = 'Type'
+              Width = 100
+            end          
+            item
+              Title.Caption = 'Object'
+              Width = 70
+            end          
+            item
+              Title.Caption = 'RA(h)'
+              Width = 90
+            end          
+            item
+              Title.Caption = 'DEC(d)'
+              Width = 94
+            end          
+            item
+              Title.Caption = 'Mag.'
+              Width = 50
+            end          
+            item
+              Title.Caption = 'Size(arcsec)'
+              Width = 60
+            end          
+            item
+              Title.Caption = 'Color'
+              Width = 60
+            end          
+            item
+              Title.Caption = 'Comment'
+              Width = 300
+            end>
+          DefaultColWidth = 24
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
+          TabOrder = 2
+          TitleStyle = tsStandard
+          OnDrawCell = StringGrid1DrawCell
+          OnMouseUp = StringGrid1MouseUp
+          OnSelectCell = StringGrid1SelectCell
+        end
+        object Button8: TButton
+          Left = 281
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Save as...'
+          OnClick = Button8Click
+          TabOrder = 3
+        end
+        object Button9: TButton
+          Left = 386
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Load'
+          OnClick = Button9Click
+          TabOrder = 4
+        end
+      end
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object Label2: TLabel
           Left = 8
-          Height = 15
+          Height = 18
           Top = 7
-          Width = 147
+          Width = 170
           Caption = 'CDC Stars Catalog Setting'
           ParentColor = False
         end
         object Label65: TLabel
           Left = 68
-          Height = 15
+          Height = 18
           Top = 64
-          Width = 19
+          Width = 22
           Caption = 'pm'
           ParentColor = False
         end
         object Label66: TLabel
           Left = 68
-          Height = 15
+          Height = 18
           Top = 104
-          Width = 19
+          Width = 22
           Caption = 'pm'
           ParentColor = False
         end
         object Label87: TLabel
           Left = 68
-          Height = 15
+          Height = 18
           Top = 147
-          Width = 19
+          Width = 22
           Caption = 'pm'
           ParentColor = False
         end
         object Label16: TLabel
           Left = 266
-          Height = 15
+          Height = 18
           Top = 23
-          Width = 25
+          Width = 29
           Caption = ' min'
           ParentColor = False
         end
         object Label28: TLabel
           Left = 267
-          Height = 15
+          Height = 18
           Top = 7
-          Width = 74
+          Width = 83
           Alignment = taRightJustify
           Caption = 'Field number'
           ParentColor = False
         end
         object Label17: TLabel
           Left = 303
-          Height = 15
+          Height = 18
           Top = 23
-          Width = 27
+          Width = 33
           Caption = ' max'
           ParentColor = False
         end
         object Label27: TLabel
           Left = 345
-          Height = 15
+          Height = 18
           Top = 23
-          Width = 56
+          Width = 60
           Caption = 'Files Path'
           ParentColor = False
         end
         object Label18: TLabel
           Left = 8
-          Height = 15
+          Height = 18
           Top = 64
-          Width = 30
+          Width = 35
           Caption = 'Stars'
           ParentColor = False
         end
         object Label19: TLabel
           Left = 8
-          Height = 15
+          Height = 18
           Top = 242
-          Width = 52
+          Width = 59
           Caption = 'Variables'
           ParentColor = False
         end
         object Label20: TLabel
           Left = 8
-          Height = 15
+          Height = 18
           Top = 329
-          Width = 48
+          Width = 53
           Caption = 'Doubles'
           ParentColor = False
         end
         object BSCbox: TCheckBox
           Tag = 1
           Left = 92
-          Height = 26
+          Height = 21
           Hint = 'Bright Stars Catalog 5th Edition  (Hoffleit 1991)'
           Top = 61
-          Width = 131
+          Width = 145
           HelpContext = 100
           Caption = 'Bright Star Catalog'
           OnClick = CDCStarSelClick
@@ -363,7 +469,7 @@ object f_config_catalog: Tf_config_catalog
         object Fbsc1: TLongEdit
           Tag = 1
           Left = 266
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 61
           Width = 30
@@ -377,7 +483,7 @@ object f_config_catalog: Tf_config_catalog
         object Fbsc2: TLongEdit
           Tag = 1
           Left = 306
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 61
           Width = 30
@@ -391,7 +497,7 @@ object f_config_catalog: Tf_config_catalog
         object SKYbox: TCheckBox
           Tag = 2
           Left = 92
-          Height = 26
+          Height = 21
           Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
           Top = 101
           Width = 79
@@ -405,7 +511,7 @@ object f_config_catalog: Tf_config_catalog
         object Fsky1: TLongEdit
           Tag = 2
           Left = 266
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 101
           Width = 30
@@ -419,7 +525,7 @@ object f_config_catalog: Tf_config_catalog
         object Fsky2: TLongEdit
           Tag = 2
           Left = 306
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 101
           Width = 30
@@ -433,10 +539,10 @@ object f_config_catalog: Tf_config_catalog
         object TY2Box: TCheckBox
           Tag = 4
           Left = 92
-          Height = 26
+          Height = 21
           Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
           Top = 144
-          Width = 115
+          Width = 123
           HelpContext = 102
           Caption = 'Tycho 2 Catalog'
           OnClick = CDCStarSelClick
@@ -447,7 +553,7 @@ object f_config_catalog: Tf_config_catalog
         object Fty21: TLongEdit
           Tag = 4
           Left = 266
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 144
           Width = 30
@@ -461,7 +567,7 @@ object f_config_catalog: Tf_config_catalog
         object Fty22: TLongEdit
           Tag = 4
           Left = 306
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 144
           Width = 30
@@ -475,7 +581,7 @@ object f_config_catalog: Tf_config_catalog
         object Fgcv2: TLongEdit
           Tag = 1
           Left = 307
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 239
           Width = 30
@@ -489,7 +595,7 @@ object f_config_catalog: Tf_config_catalog
         object Fwds2: TLongEdit
           Tag = 1
           Left = 307
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 326
           Width = 30
@@ -503,7 +609,7 @@ object f_config_catalog: Tf_config_catalog
         object Fwds1: TLongEdit
           Tag = 1
           Left = 267
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 326
           Width = 30
@@ -517,7 +623,7 @@ object f_config_catalog: Tf_config_catalog
         object Fgcv1: TLongEdit
           Tag = 1
           Left = 267
-          Height = 22
+          Height = 25
           Hint = '0..10'
           Top = 239
           Width = 30
@@ -531,10 +637,10 @@ object f_config_catalog: Tf_config_catalog
         object GCVBox: TCheckBox
           Tag = 1
           Left = 93
-          Height = 26
+          Height = 21
           Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
           Top = 239
-          Width = 151
+          Width = 169
           HelpContext = 105
           Caption = 'Gen. Cat. Variable Star'
           OnClick = GCVBoxClick
@@ -545,9 +651,9 @@ object f_config_catalog: Tf_config_catalog
         object IRVar: TCheckBox
           Tag = 1
           Left = 93
-          Height = 26
+          Height = 21
           Top = 261
-          Width = 127
+          Width = 133
           Caption = 'Show IR variables'
           OnClick = IRVarClick
           TabOrder = 16
@@ -555,10 +661,10 @@ object f_config_catalog: Tf_config_catalog
         object WDSbox: TCheckBox
           Tag = 1
           Left = 92
-          Height = 26
+          Height = 21
           Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
           Top = 326
-          Width = 162
+          Width = 176
           HelpContext = 106
           Caption = 'Washington Double Star'
           OnClick = WDSboxClick
@@ -569,7 +675,7 @@ object f_config_catalog: Tf_config_catalog
         object bsc3: TDirectoryEdit
           Tag = 1
           Left = 343
-          Height = 22
+          Height = 25
           Top = 61
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -583,7 +689,7 @@ object f_config_catalog: Tf_config_catalog
         object sky3: TDirectoryEdit
           Tag = 2
           Left = 343
-          Height = 22
+          Height = 25
           Top = 101
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -597,7 +703,7 @@ object f_config_catalog: Tf_config_catalog
         object ty23: TDirectoryEdit
           Tag = 4
           Left = 343
-          Height = 22
+          Height = 25
           Top = 144
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -611,7 +717,7 @@ object f_config_catalog: Tf_config_catalog
         object gcv3: TDirectoryEdit
           Tag = 1
           Left = 344
-          Height = 22
+          Height = 25
           Top = 239
           Width = 111
           ShowHidden = False
@@ -624,7 +730,7 @@ object f_config_catalog: Tf_config_catalog
         object wds3: TDirectoryEdit
           Tag = 1
           Left = 344
-          Height = 22
+          Height = 25
           Top = 326
           Width = 111
           ShowHidden = False
@@ -637,8 +743,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object Label3: TLabel
           Left = 9
           Height = 15
@@ -1184,8 +1290,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
@@ -1366,8 +1472,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TTabSheet
         Caption = 'Obsolete'
-        ClientHeight = 456
-        ClientWidth = 490
+        ClientHeight = 460
+        ClientWidth = 494
         object Label88: TLabel
           Left = 9
           Height = 15
@@ -2016,31 +2122,6 @@ object f_config_catalog: Tf_config_catalog
     ClientHeight = 50
     ClientWidth = 523
     TabOrder = 1
-    object DirOpenImg: TImage
-      Left = 8
-      Height = 16
-      Top = 15
-      Width = 16
-      AutoSize = True
-      Picture.Data = {
-        07545069786D6170BA0100002F2A2058504D202A2F0A73746174696320636861
-        72202A677261706869635B5D203D207B0A22313620313620352031222C0A222E
-        2063204E6F6E65222C0A222C20632023374637463746222C0A222D2063202346
-        4646463030222C0A222A20632023464646464646222C0A226120632023303030
-        303030222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
-        2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E22
-        2C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E
-        2E2E2E2E2E2E2E222C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E
-        2E2C2C2C2C2C2C2C2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C
-        612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
-        2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E22
-        2C0A222E2E2C2A2E2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C
-        2C2C2C2C612E2E222C0A222E2E61616161616161616161612E2E2E222C0A222E
-        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
-        2E2E2E227D0A
-      }
-      Visible = False
-    end
     object Button1: TButton
       Left = 240
       Height = 25
@@ -2084,44 +2165,180 @@ object f_config_catalog: Tf_config_catalog
       OnClick = Button4Click
       TabOrder = 3
     end
-    object ReloadImg: TImage
-      Left = 40
-      Height = 16
-      Top = 15
-      Width = 16
-      Picture.Data = {
-        1754506F727461626C654E6574776F726B47726170686963CF02000089504E47
-        0D0A1A0A0000000D494844520000001000000010080200000090916836000000
-        017352474200AECE1CE900000006624B474400FF00FF00FFA0BDA79300000009
-        7048597300000EC400000EC401952B0E1B0000000774494D4507DB0A0112061E
-        F5D6D4730000024F4944415428CF7D924D4F13611485CF7D3F3AD30E161604DB
-        264DBAE1232EAABF84854D4CFCF809FC0676C49D2C5510A928E8422389D11D31
-        A6AE5848538DC12A261AD9A858DB61DA99E9FBBED74511779EE5CD394FEECDB9
-        E4988D354A0A630D114921194CA038897DCF0744D48F825C00662266E7040183
-        A84F80964A1003166C094E4B450098C7724112C74404008060E67C7ECC393788
-        236B2D810409638D526AE4A8D7EBBEEF274902808814113B6B85947668566EDD
-        DEDB7B134551B95C9E9E9EA9D56A3B3B2F5F3C7F76EDEA65CFD3A33CA5C94067
-        D4EB46636DED8E10A25AAD8E8F8FC7717C70F05929E5FBB96EB77B637979E406
-        B3D2823A3F7E3E7DFC646A72727171516BA994125ADFAF6F0C0683CEAFDF180B
-        5C3A145A83004000D8DADA8AFAC70B0B0B417E4C6B2DB47EB4B91986A1EFFB13
-        1313D96CD63987BF5290B2D96C9EBF502D572A7114FA41B0B1BEBEBBBB5B2894
-        0E0F0FBD8C7F7474A43299133B11D8A6572ED5EEAEDC644E99539B8626E931C7
-        BDCE77E6944DC26EC8CEC6C721B365B60A424E150BBDE818CC2012DA1BB18233
-        798020A535462AE105B9931E00CCCD9D6B365BFBFB1FD8B1B3F674DD34490048
-        A5FA51743A1480B858AB9D2D14EA1BF7DA9F3E0AA9D2E1D058FBF6DDFB079B0F
-        3B9D2E20A4CA8CD000889901341AAF5657579516A552A952A9B4DBEDAF5FBE59
-        6B9796AECFCCCC0088E3D8F73300C831F707FD5CD6EFF6BADBDBDBAD562B0CC3
-        62B1383B3B3B3F3FAFB5E7653C639C56027000C81823A4B426954A5963A452EC
-        1C0931FA178248CD509290529E0498FF5DF97F8D107F0055B02E45153EE70E00
-        00000049454E44AE426082
-      }
-      Transparent = True
-      Visible = False
-    end
   end
   object OpenDialog1: TOpenDialog
     FilterIndex = 0
-    left = 494
-    top = 24
+    left = 112
+    top = 528
+  end
+  object ColorDialog1: TColorDialog
+    Color = clBlack
+    CustomColors.Strings = (
+      'ColorA=000000'
+      'ColorB=000080'
+      'ColorC=008000'
+      'ColorD=008080'
+      'ColorE=800000'
+      'ColorF=800080'
+      'ColorG=808000'
+      'ColorH=808080'
+      'ColorI=C0C0C0'
+      'ColorJ=0000FF'
+      'ColorK=00FF00'
+      'ColorL=00FFFF'
+      'ColorM=FF0000'
+      'ColorN=FF00FF'
+      'ColorO=FFFF00'
+      'ColorP=FFFFFF'
+      'ColorQ=C0DCC0'
+      'ColorR=F0CAA6'
+      'ColorS=F0FBFF'
+      'ColorT=A4A0A0'
+    )
+    left = 56
+    top = 528
+  end
+  object ImageList1: TImageList
+    left = 8
+    top = 528
+    Bitmap = {
+      4C69040000001000000010000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000007F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF00000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF00FFFFFFFFFF
+      FFFF00FFFFFFFFFFFFFF7F7F7FFF000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF0000
+      000000000000000000000000000000000000000000007F7F7FFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
+      7FFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FFFFFEFFFBFCFAFFFDFFFEFFF9FCFAFFFAFD
+      FBFFFDFFFEFFFCFFFDFFFDFFFEFFF5F8F6FFFDFFFEFFFFFFFEFFF4F5F3FFFFFF
+      FEFFFEFEFEFFFDFFFF00FBFDFEFFFFFFFFFFF1F1F1FFFDFFFF00FDFFFF00F9FE
+      FDFFFAFFFEFFF9FEFDFFFBFFFFFFF9FBFBFFFDFFFF00FEFEFEFFFFFFFFFFF7F7
+      F7FFFFFFFFFFFDFFFF00FBFDFEFFFEFEFEFFFDFFFF00FBFDFDFFF2F7F6FFF6FB
+      FAFFFBFFFFFFFBFFFFFFF7FCFBFFFDFFFF00FDFFFF00FEFEFEFF9F9F9FFFFFFF
+      FFFFF8F8F8FFFDFFFF00FCFEFFFFFDFFFF00FAFCFDFFFDFFFF00EEF2F3FF8B8F
+      90FF595E5FFF4E5354FF6B7071FF919596FFE4E8E9FFA3A5A6FF525455FFF8FA
+      FBFFFDFFFF00FDFFFF00FCFEFFFFF7F9FAFFFBFFFFFFBEC2C3FF5A5F60FF5C61
+      62FF8A8F90FF999E9FFF919697FF6F7374FF737778FF7D7F80FF6E7071FFFDFF
+      FF00FDFFFF00FDFFFF00FCFEFFFFF8FBFFFFE7EAEEFF6B6E72FF6E7376FFECF1
+      F4FFEFF6F9FFF3FAFDFFF8FFFFFF9A9FA2FF919699FF818488FF797C80FFF8F9
+      FDFFFDFEFFFFFDFFFF00FCFEFFFFF8FBFFFF8D9094FF5F6467FFDADFE2FFF8FF
+      FFFFF4FBFEFFF8FFFFFF9DA4A7FF8D9295FF999EA1FF919498FF828589FFF6F7
+      FBFFFDFEFFFFFDFFFF00FCFEFFFFFBFEFFFF5D6064FF8B9093FFFAFFFFFFEDF4
+      F7FFF8FFFFFF979EA1FF61686BFF7B8083FF72777AFF7A7D81FF676A6EFFFCFD
+      FFFFFDFEFFFFFDFFFF00FDFFFF00FAFDFFFF53565AFF979A9EFFFAFFFFFFFAFF
+      FFFFF3FAFDFFF2F9FCFFF8FFFFFFEAEFF2FFFAFFFFFFF9FCFFFFFBFEFFFFFDFE
+      FFFFF3F4F8FFFDFFFF00FDFFFF00FDFFFF006B6F70FF8B8F90FFF9FEFFFFFAFF
+      FFFFFAFFFFFFFAFFFFFFFAFFFFFFF8FCFDFFFBFFFFFFFDFFFF00F9FBFCFFFDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00959798FF5D5F60FFD2D6D7FFF9FD
+      FEFFF7FCFDFFFAFFFFFFFAFFFFFFF8FCFDFFF4F8F9FFFDFFFF00FDFFFF00F2F4
+      F5FFFDFFFF00FDFFFF00FDFFFF00FFFFFFFFE8EAEAFF757777FF737877FFD4D9
+      D8FFFBFFFFFFF5FAF9FFF7FCFBFFCED0D0FF9B9D9DFFEEEEEEFFFFFFFFFFF8F8
+      F8FFFFFFFFFFFDFFFF00FDFFFF00FFFFFFFFFFFFFFFFC0C2C2FF5B5D5DFF5D62
+      61FF777C7BFF979C9BFF717675FF555757FF525454FFD9D9D9FFFFFFFFFFFFFF
+      FFFFF7F7F7FFFDFFFF00FDFFFF00FFFFFEFFF5F6F4FFFDFFFEFFEEF1EFFF9EA1
+      9FFF707371FF636664FF7C7F7DFFA3A6A4FFF1F4F2FFF8F9F7FFFFFFFEFFFDFB
+      FAFFFFFFFFFFFDFFFF00FDFFFF00FCFCFCFFFFFFFEFFF9FBFBFFFDFFFEFFF9FB
+      FBFFFDFFFEFFFBFDFDFFFDFFFEFFFAFCFCFFFDFFFEFFFFFFFFFFFAFBF9FFFCFC
+      FCFFFFFFFFFFFDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FAFCFDFFFDFFFF00000000000000000000000000000000000000
+      CB0000000000000000000000000000000000000000004848EC00000000000000
+      0000000000000000000000000000000000000000000000000000000000001C1C
+      ED1B6161F39AADADFFE1CFCFFFFF9797FEE84242EEA00000E621000000000000
+      D0000000000000000000000000000000000000000000000000000000D2790B0B
+      D2FF7B7BDEFF9292DDFF8888D7FF8989D9FF6969D8FE0000D0FF0000D0880000
+      00000000BB00000000000000000000000000000000000000BF7B0D0DBEFF8D8D
+      D9FF8787D7FF8181D6FF7D7DD5FF7878D3FF7676D0FF7C7CD0FF1414BFFF0000
+      BD90000000000000000000000000000091000000A71D0000A5FF8181D4FF7A7A
+      D3FF7474D4FF7171D4FF6D6DD3FF6A6AD1FF6464CEFF6161CAFF6565C8FF0101
+      A6FF0000A72F0000920000000000000000000000919A3939AEFE7070CFFF6969
+      D1FF6666D2FF6262D2FF5E5ED2FF5A5AD1FF5555CEFF5050C9FF4B4BC3FF3535
+      ADFE000090AB000000000000000000000000000078E15252BCFF5E5ECCFF5959
+      CFFF5656D2FF5252D4FF4F4FD5FF4B4BD3FF4646CFFF4141C9FF3C3CC0FF4545
+      BAFF000078F1000000000000000000000000000060F94C4CBFFF4D4DC9FF4A4A
+      CFFF4747D4FF4444D8FF4040D9FF3C3CD7FF3737D2FF3131C9FF2929BDFF4C4C
+      C6FF000061FF00000000000000000000000000004DE21F1FA2FF2D2DC0FF3434
+      CDFF3737D7FF3B3BDDFF3636E0FF3131DDFF2D2DD6FF2828CBFF1D1DBCFF0707
+      9EFF00004DF800000000000000000000000000003BA000006DFE0101B3FF0505
+      C6FF0707D8FF0909E4FF0B0BE8FF0A0AE4FF0808D8FF0707C6FF0404B4FF0000
+      76FE00003AB300000000000000000000390000002B26000029FF0202A8FF0707
+      C2FF0B0BD9FF0F0FECFF1010F5FF0F0FECFF0B0BD9FF0707C2FF0202ADFF0000
+      2DFF00002B370000380000000000000000000000000000002B8C00003AFF0305
+      AEFF0807CBFF0E0DE6FF1111FAFF0E0DE5FF0806C9FF0406B3FF000241FF0000
+      2AA20000000000000000000000000000000000002C00000000000003308F0512
+      3FFF0E1B84FE131AB1FF191CC2FF151DB4FF121E89FE091645FF010634A10000
+      000000002C000000000000000000000000000000000000002C00000000000513
+      432B132452AB26385EF23C4E6EFF2F4265F3192B58B1091A4C36000000000005
+      3500000000000000000000000000000000000000000000000000000000000B15
+      430000000000000000000000000000000000000000001A102900000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002CE0
+      900000000000000000000000000000000000000000003AE29700000000000000
+      0000000000000000000000000000000000000000000000CA7000000000001BE2
+      893266EDB1B1AEFDD9F7D1FFEDFF93F9CBF740E79CAE00DD792D0000000000CA
+      70000000000000000000000000000000000000B966000000000000CB6F9A0DCD
+      77FF7ADCB3FE92DEC1FF88D9BBFF89DBBBFF5FD7A4FE00C96CFF00CC6F960000
+      000000B966000000000000000000000000000000000000BC679E0BBD6EFF8BD8
+      BCFF89D8BCFF81D7B9FF7ED5B6FF7AD3B4FF77D0B1FF77D0AFFF0ABD6EFF00BC
+      6796000000000000000000000000009A540000AD5E3500A85AFF80D4B6FF7BD3
+      B4FF76D4B3FF72D4B2FF6ED3B0FF6AD1ADFF65CEA9FF61CAA5FF61C6A1FF00A7
+      5BFF00AC5F2F009A54000000000000000000009953B337B27EFE70CFAEFF69D0
+      ADFF65D2AEFF62D2ADFF5ED2ACFF5AD1A9FF55CEA5FF50C89EFF4BC296FF2CAC
+      76FE009953AB000000000000000000000000008746F951BD94FF5ECCA5FF5AD0
+      A8FF56D2AAFF52D4ABFF4ED5ABFF4AD3A7FF46CFA1FF41C89AFF3BBF8FFF3CB3
+      85FF008746EE00000000000000000000000000753BFF4CBE93FF4DC99EFF4ACF
+      A3FF47D4A8FF44D8ABFF40D9AAFF3CD7A7FF37D1A0FF2FC894FF2ABC87FF47BC
+      8FFF00753BFF000000000000000000000000006535F51CA46CFF2CC08BFF34CD
+      9BFF36D7A7FF39DDADFF35E0ADFF30DCA9FF2DD7A1FF27CA93FF1BBB7FFF0495
+      57FF006637F000000000000000000000000000562DB1007943FE01B36EFF05C6
+      84FF08D898FF09E4A4FF0BE8A9FF0AE3A3FF08D796FF07C583FF03B26EFF0076
+      41FE00562EAC000000000000000000532C0000492634004222FF02A863FF07C2
+      7FFF0BDA99FF0FEDAEFF10F5B6FF0FEBACFF0BD797FF07C07DFF02A460FF0043
+      21FF0049262C00532D0000000000000000000000000000371B9C014021FF05AC
+      69FF06CA86FF0CE5A5FF0FF9B9FF0BE2A2FF06C884FF09AC6AFF024022FF0036
+      1B940000000000000000000000000000000000341A000000000004301A99133D
+      29FF1F7F57FE23AD78FF26BE84FF25AC77FF227F59FE143E2BFF07331E930000
+      000000341A0000000000000000000000000000000000002C1600000000001343
+      2D3020503BAC2C5945F2386451FF315E4AEE24543FA91848322D000000000D37
+      2200000000000000000000000000000000000000000000000000000000001542
+      2C00000000000000000000000000000000000000000026594100000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000
+    }
+  end
+  object SaveDialog1: TSaveDialog
+    left = 156
+    top = 528
+  end
+  object OpenDialog2: TOpenDialog
+    left = 205
+    top = 528
   end
 end

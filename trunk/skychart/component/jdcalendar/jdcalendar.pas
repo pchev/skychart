@@ -474,11 +474,17 @@ end;
 procedure TJDMonthlyCalendar.UpYearClick(Sender: TObject);
 begin
   FYear.Value := FYear.Value + 1;
+{$ifdef darwin}
+  DateChange(Sender);
+{$endif}
 end;
 
 procedure TJDMonthlyCalendar.DownYearClick(Sender: TObject);
 begin
   FYear.Value := FYear.Value - 1;
+  {$ifdef darwin}
+    DateChange(Sender);
+  {$endif}
 end;
 
 procedure TJDMonthlyCalendar.UpMonthClick(Sender: TObject);
@@ -490,6 +496,9 @@ begin
   end
   else
     FMonth.Value := FMonth.Value + 1;
+  {$ifdef darwin}
+    DateChange(Sender);
+  {$endif}
 end;
 
 procedure TJDMonthlyCalendar.DownMonthClick(Sender: TObject);
@@ -501,6 +510,9 @@ begin
   end
   else
     FMonth.Value := FMonth.Value - 1;
+  {$ifdef darwin}
+    DateChange(Sender);
+  {$endif}
 end;
 
 { TJDMonthlyCalendarGrid }
