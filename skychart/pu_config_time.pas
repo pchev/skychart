@@ -460,6 +460,9 @@ begin
 JDCalendarDialog1.JD:=JDEdit.Value;
 if JDCalendarDialog1.Execute then begin
    JDEdit.Value:=JDCalendarDialog1.JD+csc.CurTime/24-csc.timezone/24;
+   {$ifdef darwin}
+     JDEditChange(Sender);
+   {$endif}
 end;
 end;
 

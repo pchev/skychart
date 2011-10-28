@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation, gcatunit, {libcatalog,} // libcatalog statically linked
+uses u_translation, gcatunit,
      BGRABitmap, BGRABitmapTypes,
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
@@ -351,6 +351,8 @@ end;
 function Tskychart.InitCatalog:boolean;
 var i:integer;
     mag,magmax:double;
+    vostar_magmax: double;
+
   procedure InitStarC(cat:integer;defaultmag:double);
   { determine if the star catalog is active at this scale }
   begin
@@ -365,6 +367,7 @@ var i:integer;
   end
      else Fcatalog.cfgcat.starcaton[cat-BaseStar]:=false;
   end;
+
   procedure InitVarC(cat:integer);
   { determine if the variable star catalog is active at this scale }
   begin
@@ -383,6 +386,7 @@ var i:integer;
           Fcatalog.cfgcat.dblstarcaton[cat-BaseDbl]:=true
      else Fcatalog.cfgcat.dblstarcaton[cat-BaseDbl]:=false;
   end;
+
   procedure InitNebC(cat:integer);
   { determine if the nebulae catalog is active at this scale }
   begin
@@ -392,6 +396,7 @@ var i:integer;
           Fcatalog.cfgcat.nebcaton[cat-BaseNeb]:=true
      else Fcatalog.cfgcat.nebcaton[cat-BaseNeb]:=false;
   end;
+
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
@@ -427,6 +432,7 @@ InitStarC(vostar,vostar_magmax);
 { activate the other catalog }
 InitVarC(gcvs);
 InitDblC(wds);
+InitNebC(uneb);
 InitNebC(voneb);
 InitNebC(sac);
 InitNebC(ngc);
@@ -966,8 +972,10 @@ var rec:GcatRec;
   Procedure Drawing;
     begin
       if rec.neb.nebtype<>1 then begin
-        if rec.options.UseColor=1 then
+        if rec.options.UseColor=1 then begin
+          if cfgsc.WhiteBg then rec.neb.color:=FPlot.cfgplot.Color[11];
           Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg,true,rec.neb.color)
+        end
         else
           Fplot.PlotDeepSkyObject(xx,yy,rec.neb.dim1,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.nebtype,rec.neb.morph,cfgsc.WhiteBg,false);
       end
@@ -981,8 +989,10 @@ var rec:GcatRec;
           rec.neb.pa:=rec.neb.pa*cfgsc.FlipX;
           if cfgsc.FlipY<0 then rec.neb.pa:=180-rec.neb.pa;
           rec.neb.pa:=Deg2Rad*rec.neb.pa+rot;
-          if rec.options.UseColor=1 then
+          if rec.options.UseColor=1 then begin
+             if cfgsc.WhiteBg then rec.neb.color:=FPlot.cfgplot.Color[11];
              Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,true,rec.neb.color)
+          end
           else
              Fplot.PlotDSOGxy(xx,yy,rec.neb.dim1,rec.neb.dim2,rec.neb.pa,0,100,100,rec.neb.mag,rec.neb.sbr,abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit,rec.neb.morph,false,rec.neb.color);
         end;
@@ -1021,7 +1031,7 @@ var rec:GcatRec;
           WindowXY(x1,y1,xx,yy,cfgsc);
           if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
           if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
-          sz:=abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit*rec.neb.dim1/2;
+          sz:=(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit)*(rec.neb.dim1/2);
           if ((xx+sz)>cfgsc.Xmin) and
              ((xx-sz)<cfgsc.Xmax) and
              ((yy+sz)>cfgsc.Ymin) and
@@ -2143,6 +2153,7 @@ try
   if allobject or Fcatalog.cfgshr.ListPla then FindatPosAsteroid;
   if allobject or Fcatalog.cfgshr.ListNeb then begin
      FindAtPosCat(gcneb);
+     if Fcatalog.cfgcat.nebcaton[uneb-BaseNeb] then FindAtPosCat(uneb);
      if Fcatalog.cfgcat.nebcaton[voneb-BaseNeb] then FindAtPosCat(voneb);
      if Fcatalog.cfgcat.nebcaton[sac-BaseNeb] then FindAtPosCat(sac);
      if Fcatalog.cfgcat.nebcaton[ngc-BaseNeb] then FindAtPosCat(ngc);
@@ -2267,15 +2278,15 @@ if n<1 then n:=1;
 xp:=cfgsc.xmin+10+Fcatalog.cfgshr.CRoseSz+sticksize;
 y:=cfgsc.ymax-sticksize;
 FPlot.PlotLine(xp,y,xp,y-sticksize,Fplot.cfgplot.Color[12],1);
-FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'0');
+FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'0',cfgsc.WhiteBg);
 for i:=1 to n do begin
   x:=xp+round(s*u*cfgsc.bxglb);
   FPlot.PlotLine(xp,y,x,y,Fplot.cfgplot.Color[12],1);
   FPlot.PlotLine(x,y,x,y-sticksize,Fplot.cfgplot.Color[12],1);
-  if i=1 then FPlot.PlotText(x,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,l1);
+  if i=1 then FPlot.PlotText(x,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,l1,cfgsc.WhiteBg);
   xp:=x;
 end;
-if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,l2);
+if n>1 then FPlot.PlotText(xp,y-sticksize,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,l2,cfgsc.WhiteBg);
 end;
 
 Procedure Tskychart.DrawBorder;
@@ -2322,8 +2333,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if dra<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),true,true,5);
+    if dra<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,artostr3(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,armtostr(rmod(ra+pi2,pi2)*rad2deg/15),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2356,8 +2367,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if dde<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),true,true,5);
+    if dde<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(de*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(de*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2456,8 +2467,8 @@ repeat
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
     if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),false,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),false,true,5);
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),cfgsc.WhiteBg,false,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),cfgsc.WhiteBg,false,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2490,8 +2501,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),false,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),false,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,false,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,false,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2772,21 +2783,21 @@ if cfgsc.ProjPole=Altaz then begin
        WindowXY(x1,y1,x,y,cfgsc);
        xx:=round(x); yy:=round(y);
        case round(az) of
-         0  : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'S');
-         45 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SW');
-         90 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'W');
-         135: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NW');
-         180: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'N');
-         225: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NE');
-         270: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'E');
-         315: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SE');
+         0  : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'S',cfgsc.WhiteBg);
+         45 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SW',cfgsc.WhiteBg);
+         90 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'W',cfgsc.WhiteBg);
+         135: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NW',cfgsc.WhiteBg);
+         180: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'N',cfgsc.WhiteBg);
+         225: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NE',cfgsc.WhiteBg);
+         270: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'E',cfgsc.WhiteBg);
+         315: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SE',cfgsc.WhiteBg);
        end;
        az:=az+45;
     end;
   end;
  // below horizon warning
   if (not(Fplot.cfgplot.UseBMP and fill))and(cfgsc.hcentre<(-cfgsc.fov/6)) then begin
-     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori);
+     Fplot.PlotText((cfgsc.xmax-cfgsc.xmin)div 2, (cfgsc.ymax-cfgsc.ymin)div 2, 2, Fplot.cfgplot.LabelColor[7], laCenter, laCenter, rsBelowTheHori,cfgsc.WhiteBg);
   end;
 end;
 result:=true;
@@ -2818,8 +2829,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),true,true,5);
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2852,8 +2863,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2942,8 +2953,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),true,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),true,true,5);
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(rmod(a+pi2,pi2)*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -2976,8 +2987,8 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),true,true,5)
-                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),true,true,5);
+    if ddh<=5*minarc then Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,detostr(h*rad2deg),cfgsc.WhiteBg,true,true,5)
+                     else Fplot.PlotText(round(xx),round(yy),1,Fplot.cfgplot.LabelColor[7],laLeft,laBottom,demtostr(h*rad2deg),cfgsc.WhiteBg,true,true,5);
     labelok:=true;
  end;
  xxp:=xx;
@@ -3242,7 +3253,7 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   labels[numlabels].align:=align;
   labels[numlabels].labelnum:=labelnum;
   labels[numlabels].fontnum:=fontnum;
-  labels[numlabels].txt:=wordspace(txt);
+  labels[numlabels].txt:=trim(wordspace(txt));
   except
    dec(numlabels);
   end;

@@ -900,14 +900,18 @@ try
 dms:=StringReplace(dms,blank,'0',[rfReplaceAll]);
 if copy(dms,1,1)='-' then s:=-1 else s:=1;
 p:=pos('h',dms);
-t:=copy(dms,1,p-1); delete(dms,1,p);
-result:=strtoint(t);
-p:=pos('m',dms);
-t:=copy(dms,1,p-1); delete(dms,1,p);
-result:=result+ s * strtoint(t) / 60;
-p:=pos('s',dms);
-t:=copy(dms,1,p-1);
-result:=result+ s * strtoint(t) / 3600;
+if p=0 then
+  result:=StrToFloatDef(dms,0)
+else begin
+  t:=copy(dms,1,p-1); delete(dms,1,p);
+  result:=StrToIntDef(t,0);
+  p:=pos('m',dms);
+  t:=copy(dms,1,p-1); delete(dms,1,p);
+  result:=result+ s * StrToIntDef(t,0) / 60;
+  p:=pos('s',dms);
+  t:=copy(dms,1,p-1);
+  result:=result+ s * StrToIntDef(t,0) / 3600;
+end;
 except
 result:=0;
 end;
@@ -921,14 +925,18 @@ try
 dms:=StringReplace(dms,blank,'0',[rfReplaceAll]);
 if copy(dms,1,1)='-' then s:=-1 else s:=1;
 p:=pos('d',dms);
+if p=0 then
+  result:=StrToFloatDef(dms,0)
+else begin
 t:=copy(dms,1,p-1); delete(dms,1,p);
-result:=strtoint(t);
+result:=StrToIntDef(t,0);
 p:=pos('m',dms);
 t:=copy(dms,1,p-1); delete(dms,1,p);
-result:=result+ s * strtoint(t) / 60;
+result:=result+ s * StrToIntDef(t,0) / 60;
 p:=pos('s',dms);
 t:=copy(dms,1,p-1);
-result:=result+ s * strtoint(t) / 3600;
+result:=result+ s * StrToIntDef(t,0) / 3600;
+end;
 except
 result:=0;
 end;

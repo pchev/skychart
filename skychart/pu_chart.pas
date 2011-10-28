@@ -1167,7 +1167,7 @@ try
         if trim(cm.PrintDesc)>'' then begin
          x:=w div 2;
          y:=h-10-sc.cfgsc.BottomMargin;
-         sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+         sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
         end;
         previewbmp.SaveToFile(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
@@ -1212,7 +1212,7 @@ try
     if trim(cm.PrintDesc)>'' then begin
      x:=w div 2;
      y:=h-10-sc.cfgsc.BottomMargin;
-     sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+     sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
     end;
     Printer.EndDoc;
 //{$endif}
@@ -1250,7 +1250,7 @@ try
       if trim(cm.PrintDesc)>'' then begin
         x:=ps.pagewidth div 2;
         y:=ps.pageheight-10-sc.cfgsc.BottomMargin;
-        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
       end;
       ps.enddoc;
       fname:=slash(printpath)+'cdcprint.ps';
@@ -1290,7 +1290,7 @@ try
       if trim(cm.PrintDesc)>'' then begin
         x:=w div 2;
         y:=h-10-sc.cfgsc.BottomMargin;
-        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc);
+        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
       end;
      // save the bitmap
      fname:=slash(printpath)+'cdcprint.bmp';
@@ -3727,7 +3727,7 @@ if savelabel then begin
 end;
 if identlabel.Visible then begin
   sc.plot.cnv:=sc.plot.cbmp.Canvas;
-  sc.plot.PlotText(identlabel.Left,identlabel.Top,2,identlabel.Font.Color,laLeft,laTop,identlabel.Caption);
+  sc.plot.PlotText(identlabel.Left,identlabel.Top,2,identlabel.Font.Color,laLeft,laTop,identlabel.Caption,sc.cfgsc.WhiteBg);
   needrefresh:=true;
 end;
  if fn='' then fn:='cdc.bmp';

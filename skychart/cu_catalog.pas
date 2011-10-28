@@ -41,7 +41,7 @@ type
   private
     { Private declarations }
     LockCat : boolean;
-    NumCat,CurCat,CurGCat,VerGCat : integer;
+    NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj : integer;
     GcatFilter: boolean;
     EmptyRec : GCatRec;
   protected
@@ -52,6 +52,7 @@ type
      function NewGCat:boolean;
      function GetVOCatS(var rec:GcatRec):boolean;
      function GetVOCatN(var rec:GcatRec):boolean;
+     function GetUObjN(var rec:GcatRec):boolean;
      function GetGCatS(var rec:GcatRec):boolean;
      function GetGCatV(var rec:GcatRec):boolean;
      function GetGCatD(var rec:GcatRec):boolean;
@@ -130,6 +131,7 @@ type
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
      function GetMaxField(path,cat: string):string;
+     function GetCatType(path,cat: string):integer;
      function GetVOstarmag: double;
      Procedure LoadConstellation(fpath,lang:string);
      Procedure LoadConstL(fname:string);
@@ -516,6 +518,9 @@ case curcat of
    voneb   : begin
              result:=GetVOcatN(rec);
              end;
+   uneb   : begin
+             result:=GetUObjN(rec);
+             end;
 end;
 if (not result) and ((curcat-BaseNeb)<numcat) then begin
   CloseNebCat;
@@ -553,6 +558,10 @@ case curcat of
                 SetVOCatpath(slash(VODir));
                 OpenVOCatwin(result);
              end;
+   uneb   :  begin
+                CurrentUserObj:=-1;
+                result:=true;
+             end;
    else result:=false;
 end;
 end;
@@ -571,6 +580,7 @@ case curcat of
    gpn     : CloseGPN;
    gcneb   : CloseGcat;
    voneb   : CloseVOCat;
+   uneb    : CurrentUserObj:=MaxInt;
    else result:=false;
 end;
 end;
@@ -1228,6 +1238,17 @@ case GcatH.FileNum of
 end;
 end;
 
+function Tcatalog.GetCatType(path,cat: string):integer;
+var GCatH : TCatHeader;
+    v : integer;
+    ok : boolean;
+begin
+SetGcatPath(PChar(path),PChar(cat));
+GetGCatInfo(GcatH,v,GCatFilter,ok);
+if ok then result:=v
+   else result:=-1;
+end;
+
 function Tcatalog.GetVOstarmag: double;
 begin
 SetVOCatpath(slash(VODir));
@@ -1262,6 +1283,52 @@ repeat
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   break;
 until not result;
+end;
+
+function Tcatalog.GetUObjN(var rec:GcatRec):boolean;
+begin
+result:=false;
+inc(CurrentUserObj);
+fillchar(Rec,sizeof(GcatRec),0);
+if CurrentUserObj>=Length(cfgcat.UserObjects) then exit;
+if cfgcat.UserObjects[CurrentUserObj].active then begin
+rec.options.rectype:=rtneb;
+rec.options.Equinox:=2000;
+rec.options.EquinoxJD:=jd2000;
+JDCatalog:=rec.options.EquinoxJD;
+rec.options.Epoch:=2000;
+rec.options.MagMax:=20;
+rec.options.Size:=1;
+rec.options.Units:=60;
+rec.options.ObjType:=1;
+rec.options.LogSize:=0;
+rec.options.UsePrefix:=0;
+if cfgcat.UserObjects[CurrentUserObj].color>0 then
+   rec.options.UseColor:=1
+else
+   rec.options.UseColor:=0;
+rec.options.ShortName:='UDO';
+rec.options.LongName:=rsUserDefinedO;
+rec.options.flabel[lOffset+vnMag]:='Magn';
+rec.options.flabel[lOffset+vnDim1]:='Size';
+rec.options.flabel[lOffset+vsComment]:='Desc';
+rec.neb.valid[vnId]:=true;
+rec.neb.valid[vnNebtype]:=true;
+rec.neb.valid[vnMag]:=true;
+rec.neb.valid[vnDim1]:=true;
+rec.neb.valid[vnComment]:=true;
+rec.neb.id:=cfgcat.UserObjects[CurrentUserObj].oname;
+rec.neb.nebtype:=cfgcat.UserObjects[CurrentUserObj].otype;
+rec.neb.color:=cfgcat.UserObjects[CurrentUserObj].color;
+rec.neb.mag:=cfgcat.UserObjects[CurrentUserObj].mag;
+rec.neb.dim1:=cfgcat.UserObjects[CurrentUserObj].size;
+rec.neb.comment:=cfgcat.UserObjects[CurrentUserObj].comment;
+rec.ra:=cfgcat.UserObjects[CurrentUserObj].ra;
+rec.dec:=cfgcat.UserObjects[CurrentUserObj].dec;
+result:=true;
+end else begin
+   result:=GetUObjN(rec);
+end;
 end;
 
 function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
@@ -1335,6 +1402,10 @@ repeat
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   rec.ra:=deg2rad*rec.ra;
   rec.dec:=deg2rad*rec.dec;
+  if cfgcat.GCatLst[CurGCat-1].ForceColor then begin
+    rec.options.UseColor:=1;
+    rec.neb.color:=cfgcat.GCatLst[CurGCat-1].col;
+  end;
   break;
 until not result;
 end;
@@ -1348,6 +1419,10 @@ repeat
   // no line filter at the moment
   rec.ra:=deg2rad*rec.ra;
   rec.dec:=deg2rad*rec.dec;
+  if cfgcat.GCatLst[CurGCat-1].ForceColor then begin
+    rec.outlines.valid[vlLinecolor]:=true;
+    rec.outlines.linecolor:=cfgcat.GCatLst[CurGCat-1].col;
+  end;
   break;
 until not result;
 end;
@@ -2234,7 +2309,17 @@ end;
 
 function Tcatalog.SearchNebulae(Num:string; var ar1,de1: double): boolean;
 var buf : string;
+    i:integer;
 begin
+   buf:=uppercase(Num);
+   for i:=0 to Length(cfgcat.UserObjects) do begin
+     if cfgcat.UserObjects[i].active and (UpperCase(cfgcat.UserObjects[i].oname)=buf) then begin
+        ar1:= cfgcat.UserObjects[i].ra;
+        de1:= cfgcat.UserObjects[i].dec;
+        result:=true;
+        exit;
+     end;
+   end;
    if uppercase(copy(Num,1,1))='M' then begin
       buf:=StringReplace(Num,'m','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_messier,buf,ar1,de1) ;
@@ -2472,6 +2557,10 @@ if not nextobj then begin
                 SetVOCatpath(slash(VODir));
                 OpenVOCat(xx1,xx2,yy1,yy2,ok);
              end;
+   uneb    : begin
+                CurrentUserObj:=-1;
+                ok:=true;
+             end;
    gcstar  : begin
              VerGCat:=rtStar;
              CurGCat:=0;
@@ -2568,6 +2657,9 @@ repeat
    voneb   : begin
              ok:=GetVOcatN(rec);
              end;
+   uneb    : begin
+             ok:=GetUObjN(rec);
+             end;
    gcstar  : begin
              ok:=GetGcatS(rec);
              while not ok do begin
@@ -2636,7 +2728,8 @@ var
 begin
 ok:=false;
 if cfgsc.shownebulae then begin
-  ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  if (not ok) then ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) then ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
