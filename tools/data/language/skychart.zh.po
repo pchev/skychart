@@ -2710,6 +2710,10 @@ msgstr "最大化"
 msgid "Maximum magnitude"
 msgstr "最大星等"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "兆字節"
@@ -4152,6 +4156,10 @@ msgstr "選擇全部"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4399,6 +4407,10 @@ msgstr "顯示恆星"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "顯示圖片"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5079,6 +5091,10 @@ msgstr ""
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "使用來自單一群組的單一星表"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"

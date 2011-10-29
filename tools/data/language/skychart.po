@@ -5286,3 +5286,19 @@ msgstr ""
 msgid "Azimuth origin"
 msgstr ""
 
+#: u_translation:rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
+
+#: u_translation:rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
+
+#: u_translation:rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
+#: u_translation:rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+

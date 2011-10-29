@@ -2712,6 +2712,10 @@ msgstr "Максималізація"
 msgid "Maximum magnitude"
 msgstr "Максим. величина"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "Мегабайт"
@@ -4154,6 +4158,10 @@ msgstr "Вибрати все"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4401,6 +4409,10 @@ msgstr "Показати зорі"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Показати це зображення"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5081,6 +5093,10 @@ msgstr ""
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Використовуйте тільки каталог із тої самої групи"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"

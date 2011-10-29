@@ -2940,6 +2940,10 @@ msgstr "Teljes képernyő"
 msgid "Maximum magnitude"
 msgstr "Maximum magnitúdó"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "MBytes"
@@ -4488,6 +4492,10 @@ msgstr "Mindent kiválaszt"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4766,6 +4774,10 @@ msgstr "Csillagok mutatása"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Mutatsd a képet"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5504,6 +5516,10 @@ msgstr ""
 #| msgid "Use only the catalog from the same group"
 msgid "Use only catalogs from one single group."
 msgstr "Egy csoportból  egy katalógust válassz!"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 #| msgid "Userid:"

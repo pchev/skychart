@@ -1,12 +1,12 @@
 object f_config_catalog: Tf_config_catalog
   Left = 497
-  Height = 373
-  Top = 113
+  Height = 573
+  Top = 0
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
   Caption = 'Catalog'
-  ClientHeight = 373
+  ClientHeight = 573
   ClientWidth = 523
   OnClose = FormClose
   OnCreate = FormCreate
@@ -28,10 +28,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 464
       Top = 1
       Width = 498
-      ActivePage = Page1b
+      ActivePage = Page1a
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 3
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
@@ -245,10 +245,10 @@ object f_config_catalog: Tf_config_catalog
         object BSCbox: TCheckBox
           Tag = 1
           Left = 92
-          Height = 21
+          Height = 23
           Hint = 'Bright Stars Catalog 5th Edition  (Hoffleit 1991)'
           Top = 61
-          Width = 145
+          Width = 147
           HelpContext = 100
           Caption = 'Bright Star Catalog'
           OnClick = CDCStarSelClick
@@ -287,10 +287,10 @@ object f_config_catalog: Tf_config_catalog
         object SKYbox: TCheckBox
           Tag = 2
           Left = 92
-          Height = 21
+          Height = 23
           Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
           Top = 101
-          Width = 79
+          Width = 81
           HelpContext = 101
           Caption = 'SKY2000'
           OnClick = CDCStarSelClick
@@ -329,10 +329,10 @@ object f_config_catalog: Tf_config_catalog
         object TY2Box: TCheckBox
           Tag = 4
           Left = 92
-          Height = 21
+          Height = 23
           Hint = 'The Tycho-2 Catalogue (Hog+ 2000)'
           Top = 144
-          Width = 123
+          Width = 125
           HelpContext = 102
           Caption = 'Tycho 2 Catalog'
           OnClick = CDCStarSelClick
@@ -427,10 +427,10 @@ object f_config_catalog: Tf_config_catalog
         object GCVBox: TCheckBox
           Tag = 1
           Left = 93
-          Height = 21
+          Height = 23
           Hint = 'General Catalog of Variable Stars    (Kholopov+ 1998)'
           Top = 239
-          Width = 169
+          Width = 171
           HelpContext = 105
           Caption = 'Gen. Cat. Variable Star'
           OnClick = GCVBoxClick
@@ -441,9 +441,9 @@ object f_config_catalog: Tf_config_catalog
         object IRVar: TCheckBox
           Tag = 1
           Left = 93
-          Height = 21
+          Height = 23
           Top = 261
-          Width = 133
+          Width = 135
           Caption = 'Show IR variables'
           OnClick = IRVarClick
           TabOrder = 16
@@ -451,10 +451,10 @@ object f_config_catalog: Tf_config_catalog
         object WDSbox: TCheckBox
           Tag = 1
           Left = 92
-          Height = 21
+          Height = 23
           Hint = 'The Washington Visual Double Star Catalog    (USNO, 2000)'
           Top = 326
-          Width = 176
+          Width = 178
           HelpContext = 106
           Caption = 'Washington Double Star'
           OnClick = WDSboxClick
@@ -1169,7 +1169,7 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 50000
         end
         object Label4: TLabel
-          Left = 323
+          Left = 289
           Height = 18
           Top = 19
           Width = 60
@@ -2114,7 +2114,7 @@ object f_config_catalog: Tf_config_catalog
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 323
+    Top = 523
     Width = 523
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'

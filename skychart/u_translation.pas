@@ -1350,6 +1350,8 @@ resourcestring
   rsAzimuthOrigi = 'Azimuth origin';
   rsUserDefinedO = 'User defined objects';
   rsShowUserDefi = 'Show User defined objects';
+  rsMaximumRows = 'Maximum rows';
+  rsSelectColorB = 'Select color (black for catalog default)';
 
 
 implementation

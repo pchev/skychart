@@ -2708,6 +2708,10 @@ msgstr "Maksimer"
 msgid "Maximum magnitude"
 msgstr "Maksimum magnitude"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "MBytes"
@@ -4150,6 +4154,10 @@ msgstr "Velg alt"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4397,6 +4405,10 @@ msgstr "Vis stjerner"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Vis dette bildet"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5077,6 +5089,10 @@ msgstr "Bruk nettbasert bilde av solen fra SDO eller SOHO"
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Bruk bare kataloger fra samme gruppe."
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"

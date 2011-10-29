@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-13 17:39+0200\n"
-"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
+"PO-Revision-Date: 2011-10-29 15:34+0200\n"
+"Last-Translator: pch\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -2715,6 +2715,10 @@ msgstr "Agrandir"
 msgid "Maximum magnitude"
 msgstr "Magnitude maximum"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr "Enregistrements max."
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "Mbytes"
@@ -4158,6 +4162,10 @@ msgstr "Tout sélectionner"
 msgid "Select Catalog"
 msgstr "Choisir le catalogue"
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr "Choix de la couleur (noir pour la valeur par défaut)"
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr "Choix du site miroir"
@@ -4405,6 +4413,10 @@ msgstr "Voir les étoiles"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Voir l'image"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr "Voir les objets personnels"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5085,6 +5097,10 @@ msgstr "Affiche une image du soleil de SDO ou SOHO par Internet"
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Utilisez seulement les catalogues du même groupe"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr "Objets personnels"
 
 #: u_translation.rsuserid
 msgid "User id:"

@@ -2712,6 +2712,10 @@ msgstr "Maximitza"
 msgid "Maximum magnitude"
 msgstr "Magnitud màxima"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "Mbytes"
@@ -4154,6 +4158,10 @@ msgstr "Selecciona-ho tot"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4401,6 +4409,10 @@ msgstr "Mostra els estels"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Mostra aquesta imatge"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5081,6 +5093,10 @@ msgstr "Usa la imatge en línea des de SDO o SOHO"
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Useu sols catàlegs d'un únic grup"
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"

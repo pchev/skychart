@@ -2773,6 +2773,10 @@ msgstr ""
 msgid "Maximum magnitude"
 msgstr ""
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr ""
@@ -4224,6 +4228,10 @@ msgstr "Επιλογή όλων"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4490,6 +4498,10 @@ msgstr "Εμφάνιση Αστέρων"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Εμφάνιση αυτής της εικόνας"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5194,6 +5206,10 @@ msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
+msgstr ""
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
 msgstr ""
 
 #: u_translation.rsuserid
