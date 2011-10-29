@@ -1304,6 +1304,10 @@ msgstr ""
 msgid "Diconnected"
 msgstr "Disconnected"
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr ""
@@ -1488,16 +1492,8 @@ msgstr ""
 msgid "DSS RealSky"
 msgstr ""
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr ""
-
 #: u_translation.rsduration
 msgid "Duration"
-msgstr ""
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
 msgstr ""
 
 #: u_translation.rsearthshadow
@@ -4956,6 +4952,10 @@ msgstr ""
 msgid "Trumpler class"
 msgstr ""
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr ""
@@ -5060,8 +5060,8 @@ msgstr ""
 msgid "URL launch command"
 msgstr ""
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
 msgstr ""
 
 #: u_translation.rsuseapresetco

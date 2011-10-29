@@ -1304,6 +1304,10 @@ msgstr "Premer"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (različen kot nastavljena vrata, mogoče zaseden ali druga napaka.)"
@@ -1488,17 +1492,9 @@ msgstr "Briši podatkovno zbirko"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "DT - UT: "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Trajanje"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Aktivna časovna razlika med univerzalnim časom"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4956,6 +4952,10 @@ msgstr "Resnično sončen"
 msgid "Trumpler class"
 msgstr "Trumplerjev razred"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Tue."
@@ -5060,9 +5060,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "URL prožilni ukaz"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Uporabi drugo DT-UV vrednost"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

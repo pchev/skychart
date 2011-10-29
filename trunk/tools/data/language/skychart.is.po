@@ -1543,6 +1543,10 @@ msgstr "Þvermál"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 #, fuzzy
 #| msgid "%s (different than configured port, maybe busy or other error.)"
@@ -1755,21 +1759,9 @@ msgstr "Henda gagnagrunni"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-#, fuzzy
-#| msgid "DT - UT  : "
-msgid "DT - UT: "
-msgstr "DT - UT :"
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Lengd"
-
-#: u_translation.rsdynamictimed
-#, fuzzy
-#| msgid "Dynamic Time difference with Universal Time"
-msgid "Dynamic time difference with Universal Time"
-msgstr "Mismunur á tíma samanborið við UTC"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -5809,6 +5801,10 @@ msgstr "Rétt sólar"
 msgid "Trumpler class"
 msgstr "Trumpler flokkur"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Þri."
@@ -5927,9 +5923,9 @@ msgstr "Slóð"
 msgid "URL launch command"
 msgstr "Fara á vefslóð"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Nota annað DT-UT gildi"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 #, fuzzy

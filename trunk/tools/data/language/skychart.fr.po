@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-29 15:34+0200\n"
+"PO-Revision-Date: 2011-10-29 18:17+0200\n"
 "Last-Translator: pch\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -1308,6 +1308,10 @@ msgstr "Diamètre"
 msgid "Diconnected"
 msgstr "Déconnecte"
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr "Différence entre le Temps Terrestre et le Temps Universel"
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (différent que le port configuré, il est peut-être occupé."
@@ -1492,17 +1496,9 @@ msgstr "Détruire la base de donnée"
 msgid "DSS RealSky"
 msgstr "DSS Realsky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "TD - TU : "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Durée"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Différence du temps dynamique au temps universel"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4856,7 +4852,7 @@ msgstr "Arrange verticalement"
 
 #: u_translation.rstime
 msgid "Time"
-msgstr "Temps"
+msgstr "Heure"
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
@@ -4962,6 +4958,10 @@ msgstr "Solaire vrai"
 msgid "Trumpler class"
 msgstr "Classe de Trumpler"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr "TT-TU:"
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Mar."
@@ -5066,9 +5066,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "Lancement d'une URL"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Utilise une autre valeur"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr "Utilise une autre valeur de TT-TU"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

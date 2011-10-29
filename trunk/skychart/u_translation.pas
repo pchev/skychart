@@ -837,9 +837,9 @@ resourcestring
   rsTime = 'Time';
   rsSeconds = 'Seconds';
   rsAutoRefreshE = 'Auto-refresh every ';
-  rsDTUT = 'DT - UT: ';
-  rsDynamicTimeD = 'Dynamic time difference with Universal Time';
-  rsUseAnotherDT = 'Use another DT-UT value';
+  rsDifferenceBe = 'Difference between Terrestrial Time and Universal Time';
+  rsTTUT = 'TT - UT: ';
+  rsUseAnotherTT = 'Use another TT-UT value';
   rsSHour = 'H';
   rsSMinute = 'M';
   rsSSecond = 'S';
@@ -1352,7 +1352,6 @@ resourcestring
   rsShowUserDefi = 'Show User defined objects';
   rsMaximumRows = 'Maximum rows';
   rsSelectColorB = 'Select color (black for catalog default)';
-
 
 implementation
 

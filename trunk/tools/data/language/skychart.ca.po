@@ -1306,6 +1306,10 @@ msgstr "Diàmetre"
 msgid "Diconnected"
 msgstr "Desconnectat"
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (diferent del port configurat, potser està ocupat."
@@ -1490,17 +1494,9 @@ msgstr "Destrueix la base de dades"
 msgid "DSS RealSky"
 msgstr "DSS Realsky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "TD - TU : "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Durada"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Diferència del temps dinàmic al temps universal"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4958,6 +4954,10 @@ msgstr "Solar veritable"
 msgid "Trumpler class"
 msgstr "Classe de Trumpler"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Dma."
@@ -5062,9 +5062,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "Obre una URL"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Usa un altre valor TD-TU"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

@@ -1304,6 +1304,10 @@ msgstr "Průměr"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (nesprávný port nebo je práve používán)"
@@ -1488,17 +1492,9 @@ msgstr "Smazat databázi"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "DT - UT:"
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Trvání"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Rozdíl dynamického a světového času"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4956,6 +4952,10 @@ msgstr ""
 msgid "Trumpler class"
 msgstr "Trumpler třída"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Út"
@@ -5060,9 +5060,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "Spouštěcí příkaz URL"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Použít jinou hodnotu DT-UT"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
