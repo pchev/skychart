@@ -1,12 +1,12 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 339
-  Height = 573
-  Top = 14
+  Left = 497
+  Height = 373
+  Top = 113
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
   Caption = 'Catalog'
-  ClientHeight = 573
+  ClientHeight = 373
   ClientWidth = 523
   OnClose = FormClose
   OnCreate = FormCreate
@@ -31,7 +31,7 @@ object f_config_catalog: Tf_config_catalog
       ActivePage = Page1b
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 4
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
@@ -147,216 +147,6 @@ object f_config_catalog: Tf_config_catalog
           Caption = 'Delete'
           OnClick = DelCatClick
           TabOrder = 3
-        end
-      end
-      object Page1a: TTabSheet
-        Caption = 'VO Catalog'
-        ClientHeight = 460
-        ClientWidth = 494
-        object Label1: TLabel
-          Left = 7
-          Height = 18
-          Top = 19
-          Width = 177
-          Caption = 'Virtual Observatory Catalog'
-          ParentColor = False
-        end
-        object StringGrid4: TStringGrid
-          Left = 0
-          Height = 323
-          Top = 48
-          Width = 482
-          ColCount = 4
-          Columns = <          
-            item
-              ButtonStyle = cbsNone
-              MaxSize = 500
-              Title.Caption = 'Name'
-              Width = 200
-            end          
-            item
-              ButtonStyle = cbsNone
-              Title.Caption = 'File'
-              Width = 200
-            end          
-            item
-              ButtonStyle = cbsButton
-              Title.Caption = 'Refresh'
-              Width = 50
-            end>
-          DefaultColWidth = 24
-          DefaultRowHeight = 24
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
-          RowCount = 2
-          TabOrder = 0
-          TitleFont.Height = -11
-          TitleStyle = tsStandard
-          OnDrawCell = StringGrid4DrawCell
-          OnMouseMove = StringGrid4MouseMove
-          OnMouseUp = StringGrid4MouseUp
-          OnSelectCell = StringGrid4SelectCell
-        end
-        object Button5: TButton
-          Left = 80
-          Height = 25
-          Top = 400
-          Width = 95
-          Caption = 'Add'
-          OnClick = Button5Click
-          TabOrder = 1
-        end
-        object Button6: TButton
-          Left = 320
-          Height = 25
-          Top = 400
-          Width = 95
-          Caption = 'Delete'
-          OnClick = Button6Click
-          TabOrder = 2
-        end
-        object LabelDownload: TLabel
-          Left = 15
-          Height = 15
-          Top = 376
-          Width = 464
-          Alignment = taCenter
-          AutoSize = False
-          Caption = 'LabelDownload'
-          ParentColor = False
-        end
-        object maxrows: TLongEdit
-          Left = 415
-          Height = 25
-          Hint = '100..50000'
-          Top = 15
-          Width = 64
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          OnChange = maxrowsChange
-          Value = 50000
-          MinValue = 100
-          MaxValue = 50000
-        end
-        object Label4: TLabel
-          Left = 323
-          Height = 18
-          Top = 19
-          Width = 60
-          Caption = 'Max rows'
-          ParentColor = False
-        end
-        object Button7: TButton
-          Left = 199
-          Height = 25
-          Top = 400
-          Width = 95
-          Caption = 'Update'
-          OnClick = Button7Click
-          TabOrder = 4
-        end
-      end
-      object Page1b: TTabSheet
-        Caption = 'User defined objects'
-        ClientHeight = 460
-        ClientWidth = 494
-        object Label6: TLabel
-          Left = 7
-          Height = 18
-          Top = 19
-          Width = 132
-          Caption = 'User defined objects'
-          ParentColor = False
-        end
-        object addobj: TButton
-          Left = 17
-          Height = 25
-          Top = 401
-          Width = 75
-          Caption = 'Add'
-          OnClick = addobjClick
-          TabOrder = 0
-        end
-        object delobj: TButton
-          Left = 121
-          Height = 25
-          Top = 401
-          Width = 75
-          Caption = 'Delete'
-          OnClick = delobjClick
-          TabOrder = 1
-        end
-        object StringGrid1: TStringGrid
-          Left = 0
-          Height = 323
-          Top = 48
-          Width = 482
-          ColCount = 9
-          Columns = <          
-            item
-              ButtonStyle = cbsPickList
-              PickList.Strings = (
-                'Star'
-                'Open cluster'
-              )
-              Title.Caption = 'Type'
-              Width = 100
-            end          
-            item
-              Title.Caption = 'Object'
-              Width = 70
-            end          
-            item
-              Title.Caption = 'RA(h)'
-              Width = 90
-            end          
-            item
-              Title.Caption = 'DEC(d)'
-              Width = 94
-            end          
-            item
-              Title.Caption = 'Mag.'
-              Width = 50
-            end          
-            item
-              Title.Caption = 'Size(arcsec)'
-              Width = 60
-            end          
-            item
-              Title.Caption = 'Color'
-              Width = 60
-            end          
-            item
-              Title.Caption = 'Comment'
-              Width = 300
-            end>
-          DefaultColWidth = 24
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
-          TabOrder = 2
-          TitleStyle = tsStandard
-          OnDrawCell = StringGrid1DrawCell
-          OnMouseUp = StringGrid1MouseUp
-          OnSelectCell = StringGrid1SelectCell
-        end
-        object Button8: TButton
-          Left = 281
-          Height = 25
-          Top = 401
-          Width = 75
-          Caption = 'Save as...'
-          OnClick = Button8Click
-          TabOrder = 3
-        end
-        object Button9: TButton
-          Left = 386
-          Height = 25
-          Top = 401
-          Width = 75
-          Caption = 'Load'
-          OnClick = Button9Click
-          TabOrder = 4
         end
       end
       object Page2: TTabSheet
@@ -1288,6 +1078,216 @@ object f_config_catalog: Tf_config_catalog
           end
         end
       end
+      object Page1a: TTabSheet
+        Caption = 'VO Catalog'
+        ClientHeight = 460
+        ClientWidth = 494
+        object Label1: TLabel
+          Left = 7
+          Height = 18
+          Top = 19
+          Width = 177
+          Caption = 'Virtual Observatory Catalog'
+          ParentColor = False
+        end
+        object StringGrid4: TStringGrid
+          Left = 0
+          Height = 323
+          Top = 48
+          Width = 482
+          ColCount = 4
+          Columns = <          
+            item
+              ButtonStyle = cbsNone
+              MaxSize = 500
+              Title.Caption = 'Name'
+              Width = 200
+            end          
+            item
+              ButtonStyle = cbsNone
+              Title.Caption = 'File'
+              Width = 200
+            end          
+            item
+              ButtonStyle = cbsButton
+              Title.Caption = 'Refresh'
+              Width = 50
+            end>
+          DefaultColWidth = 24
+          DefaultRowHeight = 24
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+          RowCount = 2
+          TabOrder = 0
+          TitleFont.Height = -11
+          TitleStyle = tsStandard
+          OnDrawCell = StringGrid4DrawCell
+          OnMouseMove = StringGrid4MouseMove
+          OnMouseUp = StringGrid4MouseUp
+          OnSelectCell = StringGrid4SelectCell
+        end
+        object Button5: TButton
+          Left = 80
+          Height = 25
+          Top = 400
+          Width = 95
+          Caption = 'Add'
+          OnClick = Button5Click
+          TabOrder = 1
+        end
+        object Button6: TButton
+          Left = 320
+          Height = 25
+          Top = 400
+          Width = 95
+          Caption = 'Delete'
+          OnClick = Button6Click
+          TabOrder = 2
+        end
+        object LabelDownload: TLabel
+          Left = 15
+          Height = 15
+          Top = 376
+          Width = 464
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'LabelDownload'
+          ParentColor = False
+        end
+        object maxrows: TLongEdit
+          Left = 415
+          Height = 25
+          Hint = '100..50000'
+          Top = 15
+          Width = 64
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnChange = maxrowsChange
+          Value = 50000
+          MinValue = 100
+          MaxValue = 50000
+        end
+        object Label4: TLabel
+          Left = 323
+          Height = 18
+          Top = 19
+          Width = 60
+          Caption = 'Max rows'
+          ParentColor = False
+        end
+        object Button7: TButton
+          Left = 199
+          Height = 25
+          Top = 400
+          Width = 95
+          Caption = 'Update'
+          OnClick = Button7Click
+          TabOrder = 4
+        end
+      end
+      object Page1b: TTabSheet
+        Caption = 'User defined objects'
+        ClientHeight = 460
+        ClientWidth = 494
+        object Label6: TLabel
+          Left = 7
+          Height = 18
+          Top = 19
+          Width = 132
+          Caption = 'User defined objects'
+          ParentColor = False
+        end
+        object addobj: TButton
+          Left = 17
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Add'
+          OnClick = addobjClick
+          TabOrder = 0
+        end
+        object delobj: TButton
+          Left = 121
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Delete'
+          OnClick = delobjClick
+          TabOrder = 1
+        end
+        object StringGrid1: TStringGrid
+          Left = 0
+          Height = 323
+          Top = 48
+          Width = 482
+          ColCount = 9
+          Columns = <          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                'Star'
+                'Open cluster'
+              )
+              Title.Caption = 'Type'
+              Width = 100
+            end          
+            item
+              Title.Caption = 'Object'
+              Width = 70
+            end          
+            item
+              Title.Caption = 'RA(h)'
+              Width = 90
+            end          
+            item
+              Title.Caption = 'DEC(d)'
+              Width = 94
+            end          
+            item
+              Title.Caption = 'Mag.'
+              Width = 50
+            end          
+            item
+              Title.Caption = 'Size(arcsec)'
+              Width = 60
+            end          
+            item
+              Title.Caption = 'Color'
+              Width = 60
+            end          
+            item
+              Title.Caption = 'Comment'
+              Width = 300
+            end>
+          DefaultColWidth = 24
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
+          TabOrder = 2
+          TitleStyle = tsStandard
+          OnDrawCell = StringGrid1DrawCell
+          OnMouseUp = StringGrid1MouseUp
+          OnSelectCell = StringGrid1SelectCell
+        end
+        object Button8: TButton
+          Left = 281
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Save as...'
+          OnClick = Button8Click
+          TabOrder = 3
+        end
+        object Button9: TButton
+          Left = 386
+          Height = 25
+          Top = 401
+          Width = 75
+          Caption = 'Load'
+          OnClick = Button9Click
+          TabOrder = 4
+        end
+      end
       object Page5: TTabSheet
         Caption = 'Other software'
         ClientHeight = 460
@@ -2114,7 +2114,7 @@ object f_config_catalog: Tf_config_catalog
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 523
+    Top = 323
     Width = 523
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'
