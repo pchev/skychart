@@ -3147,7 +3147,7 @@ end;
 procedure Tf_main.ToolButtonShowStarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(3);
+if Button=mbRight then SetupCatalogPage(1);
 end;
 
 procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
@@ -3512,7 +3512,7 @@ end;
 procedure Tf_main.ToolButtonUObjMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if Button=mbRight then SetupCatalogPage(2);
+  if Button=mbRight then SetupCatalogPage(4);
 end;
 
 procedure Tf_main.ToolButtonVOClick(Sender: TObject);
@@ -3527,7 +3527,7 @@ end;
 procedure Tf_main.ToolButtonVOMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
-  if Button=mbRight then SetupCatalogPage(1);
+  if Button=mbRight then SetupCatalogPage(3);
 end;
 
 procedure Tf_main.ToolButtonswitchbackgroundMouseUp(Sender: TObject;
@@ -3545,7 +3545,7 @@ end;
 procedure Tf_main.ToolButtonShowNebulaeMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(4);
+if Button=mbRight then SetupCatalogPage(2);
 end;
 
 procedure Tf_main.ToolButtonShowLinesMouseUp(Sender: TObject;

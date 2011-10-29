@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 398
-  Height = 600
-  Top = 147
+  Left = 147
+  Height = 373
+  Top = 0
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 575
+  ClientHeight = 348
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -2665,12 +2665,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 487
+    Height = 260
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 487
+    ClientHeight = 260
     ClientWidth = 26
     Font.Height = 10
     FullRepaint = False
@@ -2678,7 +2678,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 487
+      Height = 260
       Top = 0
       Width = 26
       Align = alClient
@@ -2771,18 +2771,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 487
+    Height = 260
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 487
+    ClientHeight = 260
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 237
+      Height = 10
       Top = 250
       Width = 28
       Align = alClient
@@ -3011,7 +3011,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 541
+    Top = 314
     Width = 873
     Align = alBottom
     BevelOuter = bvNone

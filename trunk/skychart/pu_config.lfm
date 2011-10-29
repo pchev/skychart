@@ -1,7 +1,7 @@
 object f_config: Tf_config
-  Left = 372
+  Left = 244
   Height = 571
-  Top = 111
+  Top = 0
   Width = 740
   ActiveControl = Panel1
   BorderStyle = bsToolWindow
@@ -162,9 +162,9 @@ object f_config: Tf_config
     TabOrder = 0
     object Applyall: TCheckBox
       Left = 16
-      Height = 21
+      Height = 23
       Top = 12
-      Width = 186
+      Width = 188
       Caption = 'Apply Change To All Chart'
       Checked = True
       State = cbChecked
