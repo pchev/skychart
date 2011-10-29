@@ -9,7 +9,7 @@ rm -rf tzdata zoneinfo
 mkdir tzdata
 mkdir zoneinfo
 
-wget 'ftp://elsie.nci.nih.gov/pub/tz*.tar.gz'
+wget --retr-symlinks 'ftp://ftp.iana.org/tz/tz*.tar.gz'
 
 cd tzdata
 
