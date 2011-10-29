@@ -2711,6 +2711,10 @@ msgstr "Maximizar"
 msgid "Maximum magnitude"
 msgstr "Magnitud máxima"
 
+#: u_translation.rsmaximumrows
+msgid "Maximum rows"
+msgstr ""
+
 #: u_translation.rsmbytes
 msgid "MBytes"
 msgstr "Mbytes"
@@ -4153,6 +4157,10 @@ msgstr "Seleccionar todo"
 msgid "Select Catalog"
 msgstr ""
 
+#: u_translation.rsselectcolorb
+msgid "Select color (black for catalog default)"
+msgstr ""
+
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
 msgstr ""
@@ -4400,6 +4408,10 @@ msgstr "Mostrar estrellas"
 #: u_translation.rsshowthispict
 msgid "Show this picture"
 msgstr "Mostrar esta imagen"
+
+#: u_translation.rsshowuserdefi
+msgid "Show User defined objects"
+msgstr ""
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -5080,6 +5092,10 @@ msgstr "Usar imagen en línea del Sol de SDO o SOHO"
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
 msgstr "Utilizar sólo catálogos del mismo grupo."
+
+#: u_translation.rsuserdefinedo
+msgid "User defined objects"
+msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"
