@@ -1302,6 +1302,10 @@ msgstr "Diameter"
 msgid "Diconnected"
 msgstr "Frakoblet"
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (forskjellig fra innstillt port, kanskje opptatt eller en annen feil.)"
@@ -1486,17 +1490,9 @@ msgstr "Lukk database"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "DT - UT: "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Varighet"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Dynamisk tidsforskjell med universaltid"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4954,6 +4950,10 @@ msgstr "Sann soltid"
 msgid "Trumpler class"
 msgstr "Trumpler-klasse"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Tir"
@@ -5058,9 +5058,9 @@ msgstr "Nettadresse"
 msgid "URL launch command"
 msgstr "Nettadresse - startkommando"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Bruk annen DT-UT verdi"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

@@ -50,6 +50,8 @@ type
     CheckGroup1: TCheckGroup;
     CheckGroup2: TCheckGroup;
     ComboBox1: TComboBox;
+    Label11: TLabel;
+    TZComboBox: TComboBox;
     DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -61,6 +63,7 @@ type
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     Label10: TLabel;
+    UTLabel: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -171,6 +174,7 @@ type
     procedure NoSimClick(Sender: TObject);
     procedure TimeEditChange(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
+    procedure TZComboBoxChange(Sender: TObject);
   private
     { Private declarations }
     LockChange, LockJD: boolean;
@@ -178,6 +182,7 @@ type
     JDCalendarDialog1: TJDCalendarDialog;
     FGetTwilight: TGetTwilight;
     procedure ShowTime;
+    procedure ShowUTTime;
   public
     { Public declarations }
     mycsc : Tconf_skychart;
@@ -207,10 +212,10 @@ Caption:=rsDateTime;
 Page1.caption:=rsTime;
 Label142.caption:=rsSeconds;
 CheckBox2.caption:=rsAutoRefreshE;
-Label135.caption:=rsDTUT;
+Label135.caption:=rsTTUT;
 Label136.caption:=rsSeconds;
-Label150.caption:=rsDynamicTimeD;
-CheckBox4.caption:=rsUseAnotherDT;
+Label150.caption:=rsDifferenceBe;
+CheckBox4.caption:=rsUseAnotherTT;
 Label137.caption:=rsTime;
 Label138.caption:=rsSHour;
 Label139.caption:=rsSMinute;
@@ -220,11 +225,12 @@ Label144.caption:=rsSMonth;
 Label145.caption:=rsSDay;
 Label140.caption:=rsDate;
 Label1.caption:=rsJD;
+Label11.Caption:=rsTimeZone;
 Button8.Caption:=rsTonight;
 BitBtn4.caption:=rsActualSystem;
 Button5.Caption:='0h';
 Button6.Caption:='0h '+rsUT;
-CheckBox1.caption:=rsUseSystemTim;
+CheckBox1.caption:=rsUseSystemTim+blank+'('+rsUT+')';
 Page2.caption:=rsSimulation;
 stepreset.caption:=rsReset;
 Label178.caption:=rsEvery;
@@ -326,6 +332,8 @@ inherited Destroy;
 end;
 
 procedure Tf_config_time.FormShow(Sender: TObject);
+var i:integer;
+    buf: string;
 begin
 LockJD:=false;
 LockChange:=true;
@@ -333,12 +341,46 @@ if csc.ShowPluto and (SimObj.Items[9]<>rsPluto) then SimObj.Items.Insert(9,rsPlu
 if (not csc.ShowPluto) and (SimObj.Items[9]=rsPluto) then SimObj.Items.Delete(9);
 if not csc.ShowPluto then csc.SimObject[9]:=false;
 ShowTime;
+// fill time zone
+TZComboBox.Clear;
+TZComboBox.Sorted:=true;
+for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
+     buf:=csc.tz.ZoneTabZone[i];
+     if copy(buf,1,3)<>'Etc' then begin
+       if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+       TZComboBox.Items.Add(buf);
+     end;
+end;
+// Put Etc time zone at theend of the list
+TZComboBox.Sorted:=false;
+for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
+     buf:=csc.tz.ZoneTabZone[i];
+     if copy(buf,1,3)='Etc' then begin
+       if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+       TZComboBox.Items.Add(buf);
+     end;
+end;
+TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(csc.ObsTZ);
 LockChange:=false;
+end;
+
+procedure Tf_config_time.ShowUTTime;
+var y,m,d:integer;
+    h: double;
+    s:string;
+begin
+djd(JDEdit.Value,y,m,d,h);
+UTlabel.Caption:=date2str(y,m,d)+blank+timtostr(h)+blank+rsUT;
+h:=csc.tz.SecondsOffset/3600;
+if h=0 then s:=''
+else if h>0 then s:='+' else s:='-';
+tzlabel.caption:=csc.tz.ZoneName+blank+s+timtostr(abs(h));
 end;
 
 procedure Tf_config_time.ShowTime;
 var h,n,s:string;
     y,m,d,i,j:integer;
+    hh: double;
 begin
 if not lockJD then JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 y:=csc.curyear;
@@ -360,7 +402,6 @@ artostr2(csc.curtime,h,n,s);
 t_hour.Position:=strtoint(h);
 t_min.Position:=strtoint(n);
 t_sec.Position:=strtoint(s);
-tzlabel.caption:=csc.tz.ZoneName;
 Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
 checkbox4.checked:=csc.Force_DT_UT;
 if not csc.Force_DT_UT then csc.DT_UT_val:=csc.DT_UT;
@@ -416,6 +457,7 @@ ComboBox1.ItemIndex:=cmain.AnimSize;
 ComboBox1Change(nil);
 edit2.Text := cmain.AnimOpt;
 FileNameEdit1.FileName:=cmain.Animffmpeg;
+ShowUTTime;
 end;
 
 procedure Tf_config_time.CheckBox1Click(Sender: TObject);
@@ -471,13 +513,13 @@ begin
 if LockChange or LockJD then exit;
 csc.tz.JD:=JDEdit.Value;
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
-tzlabel.caption:=csc.tz.ZoneName;
 Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
 LockChange:=true;
 LockJD:=true;
 ShowTime;
 LockChange:=false;
 LockJD:=false;
+ShowUTTime;
 end;
 
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);
@@ -649,13 +691,13 @@ d_day.max:=MonthDays[leapYear(csc.curyear),csc.curmonth];
 csc.curday:=d_day.Position;
 csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
-tzlabel.caption:=csc.tz.ZoneName;
 csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
 Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
+ShowUTTime;
 end;
 
 procedure Tf_config_time.TimeEditChange(Sender: TObject);
@@ -664,15 +706,33 @@ if LockChange then exit;
 csc.curtime:=t_hour.Position+t_min.Position/60+t_sec.Position/3600;
 csc.tz.JD:=jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime/secday);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
-tzlabel.caption:=csc.tz.ZoneName;
 LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 LockChange:=false;
+ShowUTTime;
 end;
 
 procedure Tf_config_time.TrackBar1Change(Sender: TObject);
 begin
   cmain.AnimDelay:=TrackBar1.Position;
+end;
+
+procedure Tf_config_time.TZComboBoxChange(Sender: TObject);
+var buf: string;
+    i: integer;
+begin
+  buf:=trim(TZComboBox.Text);
+  if buf='' then exit;
+  i:=pos(' ',buf);
+  if i>0 then Delete(buf,i,9999);
+  csc.ObsTZ:=buf;
+  if copy(buf,1,3)='Etc' then
+     csc.countrytz:=false
+  else
+     csc.countrytz:=true;
+  csc.tz.TimeZoneFile:=ZoneDir+StringReplace(buf,'/',PathDelim,[rfReplaceAll]);
+  csc.timezone:=csc.tz.SecondsOffset/3600;
+  CheckBox1Click(Sender);
 end;
 
 procedure Tf_config_time.TimeChange(Sender: TObject; Button: TUDBtnType);

@@ -3298,16 +3298,16 @@ msgstr ""
 msgid "Auto-refresh every "
 msgstr ""
 
-#: u_translation:rsdtut
-msgid "DT - UT: "
+#: u_translation:rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
 msgstr ""
 
-#: u_translation:rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
+#: u_translation:rsttut
+msgid "TT - UT: "
 msgstr ""
 
-#: u_translation:rsuseanotherdt
-msgid "Use another DT-UT value"
+#: u_translation:rsuseanothertt
+msgid "Use another TT-UT value"
 msgstr ""
 
 #: u_translation:rsshour

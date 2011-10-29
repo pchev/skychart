@@ -1306,6 +1306,10 @@ msgstr "Діаметр"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (інший, ніж конфігурований порт; може бути зайнятим, або інша помилка)"
@@ -1490,17 +1494,9 @@ msgstr "Падіння бази даних"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "DT - UT  : "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Тривалість"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Різниця між динамічним часом та всесвітнім"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4958,6 +4954,10 @@ msgstr "Істин. сонячний"
 msgid "Trumpler class"
 msgstr "Клас Трамплера"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Вт."
@@ -5062,9 +5062,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "Команда запуску URL"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Використати іншу різницю DT-UT"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

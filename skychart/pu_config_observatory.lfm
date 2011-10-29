@@ -85,7 +85,6 @@ object f_config_observatory: Tf_config_observatory
           ZoomMax = 26
           Xcentre = 0
           Ycentre = 0
-          BGcolor = clBlack
           OnMouseUp = ZoomImage1MouseUp
           OnPaint = ZoomImage1Paint
           OnPosChange = ZoomImage1PosChange

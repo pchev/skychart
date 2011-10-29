@@ -1309,6 +1309,10 @@ msgstr "Średnica"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s (inny niż skonfigurowany port, może zajęty bądź inny błąd.)"
@@ -1493,17 +1497,9 @@ msgstr "Opuść bazę danych"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "DT - UT: "
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Czas trwania"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "Dynamiczna różnica czasu lokalnego i uniwersalnego (UT):"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4961,6 +4957,10 @@ msgstr "Słoneczny"
 msgid "Trumpler class"
 msgstr "Klasa Trumplera"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "Wt."
@@ -5065,9 +5065,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "Uruchaminanie polecenia URL"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "Użyj innej wartości DT-UT."
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

@@ -1304,6 +1304,10 @@ msgstr "直徑"
 msgid "Diconnected"
 msgstr ""
 
+#: u_translation.rsdifferencebe
+msgid "Difference between Terrestrial Time and Universal Time"
+msgstr ""
+
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
 msgstr "%s （與配置端口不同，可能繁忙或其他錯誤。）"
@@ -1488,17 +1492,9 @@ msgstr "删除資料庫"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
-#: u_translation.rsdtut
-msgid "DT - UT: "
-msgstr "力學時 - 世界時"
-
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "持續時間"
-
-#: u_translation.rsdynamictimed
-msgid "Dynamic time difference with Universal Time"
-msgstr "力學時相差世界時"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -4956,6 +4952,10 @@ msgstr "真太陽"
 msgid "Trumpler class"
 msgstr "特朗普勒分類"
 
+#: u_translation.rsttut
+msgid "TT - UT: "
+msgstr ""
+
 #: u_translation.rstuesday
 msgid "Tue."
 msgstr "二"
@@ -5060,9 +5060,9 @@ msgstr "URL"
 msgid "URL launch command"
 msgstr "URL 發布命令"
 
-#: u_translation.rsuseanotherdt
-msgid "Use another DT-UT value"
-msgstr "使用另一力學時-世界時數值"
+#: u_translation.rsuseanothertt
+msgid "Use another TT-UT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
