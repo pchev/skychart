@@ -1,5 +1,7 @@
 Version 3.5 release Notes
 
+- Add user defined objects in catalog setting.
+- Can change the color for lines and nebulae from the catalog setting.
 - New online Internet resources:
   - Add any catalog from Vizier
   - Search Simbad, NED, Vizier
