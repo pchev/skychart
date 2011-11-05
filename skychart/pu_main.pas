@@ -674,7 +674,7 @@ type
     procedure SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
     procedure SetupTimePage(page:integer);
     procedure SetupDisplayPage(pagegroup:integer);
-    procedure SetupPicturesPage(page:integer);
+    procedure SetupPicturesPage(page:integer; action:integer=0);
     procedure SetupCatalogPage(page:integer);
     procedure SetupChartPage(page:integer);
     procedure ApplyConfigChart(Sender: TObject);
@@ -1335,6 +1335,12 @@ end;
 {$endif}
 CdcSigAction(@RecvSignal);
 {$endif}
+if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages=0) then begin
+  {$ifdef trace_debug}
+   WriteTrace('Init picture DB');
+  {$endif}
+  SetupPicturesPage(0,1);
+end;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
@@ -2405,6 +2411,10 @@ procedure Tf_main.ShowPicturesExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
+   if sc.cfgsc.ShowImages then begin
+     sc.catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
+     sc.catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
+   end;
    if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowImages:=false;
       ShowError(rsErrorPleaseC3);
@@ -3347,7 +3357,7 @@ begin
  activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
 end;
 
-procedure Tf_main.SetupPicturesPage(page:integer);
+procedure Tf_main.SetupPicturesPage(page:integer; action:integer=0);
 begin
 if ConfigPictures=nil then begin
    ConfigPictures:=Tf_config_pictures.Create(self);
@@ -3375,7 +3385,14 @@ ConfigPictures.PageControl1.PageIndex:=page;
 //ConfigPictures.show;
 ConfigPictures.backimgChange(self);
 //ConfigPictures.hide;
-ConfigPictures.showmodal;
+case action of
+0 : ConfigPictures.showmodal;
+1 : begin
+    ConfigPictures.show;
+    ConfigPictures.ScanImagesClick(nil);
+    ConfigPictures.Close;
+    end;
+end;
 if ConfigPictures.ModalResult=mrOK then begin
  activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
 end;
