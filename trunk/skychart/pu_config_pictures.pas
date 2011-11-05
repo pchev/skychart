@@ -40,6 +40,7 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Panel3: TPanel;
     ResetLum: TButton;
     OnlineDSS: TCheckBox;
     OnlineDSSList: TComboBox;
@@ -420,6 +421,7 @@ else begin
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
 end;
+
 //////////////////////////
 
 Procedure  Tf_config_pictures.RefreshImage;
