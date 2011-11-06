@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
   StdCtrls, CheckLst, Buttons, ExtCtrls, Spin, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
@@ -436,6 +436,10 @@ for i:=0 to SimObj.Items.Count-1 do begin
   if (i=9) and (not csc.ShowPluto) then SimObj.checked[9]:=false
      else SimObj.checked[i]:=csc.SimObject[j];
 end;
+if csc.SimObject[12] or csc.SimObject[13] then begin
+  nbstep.MaxValue:=100;
+  nbstepChanged(nil);
+end else nbstep.MaxValue:=500;
 RadioGroup1.ItemIndex:=csc.SimLabel;
 CheckGroup1.Checked[0]:=csc.SimNameLabel;
 CheckGroup1.Checked[1]:=csc.SimDateLabel;
@@ -867,6 +871,10 @@ begin
   else j:=index;
   end;
   csc.SimObject[j]:=SimObj.checked[index];
+  if csc.SimObject[12] or csc.SimObject[13] then begin
+    nbstep.MaxValue:=MaxAstSim;
+    nbstepChanged(Sender);
+  end else nbstep.MaxValue:=MaxPlSim;
 end;
 
 procedure Tf_config_time.AllSimClick(Sender: TObject);
@@ -931,10 +939,22 @@ procedure Tf_config_time.nbstepChanged(Sender: TObject);
 begin
 if LockChange then exit;
 csc.Simnb:=nbstep.value;
-Setlength(csc.AsteroidLst,csc.Simnb);
-SetLength(csc.CometLst,csc.SimNb);
-SetLength(csc.AsteroidName,csc.SimNb);
-SetLength(csc.CometName,csc.SimNb);
+if csc.SimObject[12] then begin
+  csc.Simnb:=min(csc.Simnb,MaxAstSim);
+  Setlength(csc.AsteroidLst,csc.Simnb);
+  SetLength(csc.AsteroidName,csc.SimNb);
+end else begin
+  Setlength(csc.AsteroidLst,1);
+  SetLength(csc.AsteroidName,1);
+end;
+if csc.SimObject[13] then begin
+  csc.Simnb:=min(csc.Simnb,MaxAstSim);
+  SetLength(csc.CometLst,csc.SimNb);
+  SetLength(csc.CometName,csc.SimNb);
+end else begin
+  SetLength(csc.CometLst,csc.SimNb);
+  SetLength(csc.CometName,csc.SimNb);
+end;
 end;
 
 procedure Tf_config_time.stepsizeChanged(Sender: TObject);

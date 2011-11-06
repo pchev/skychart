@@ -43,7 +43,8 @@ const cdcversion = 'Version 3.5-svn';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,'+crlf+
                    'John Sunderland';
-      MaxSim = 100 ;
+      MaxPlSim = 500 ;
+      MaxAstSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 10000;
       MaxPla = 32;
@@ -455,7 +456,7 @@ const cdcversion = 'Version 3.5-svn';
 {$endif}
 
 type
-     Tplanetlst = array[0..MaxSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
+     Tplanetlst = array[0..MaxPlSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
      Tcometlst = array of array[1..MaxComet,1..8] of double;       // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch
      TcometName= array of array[1..MaxComet,1..2] of string[27];   // id, name
      Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;  // ra, dec, magn, jd, epoch
