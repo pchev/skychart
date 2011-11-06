@@ -52,6 +52,7 @@ type
     antialias: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    OnlyMeridian: TCheckBox;
     LabelLine: TCheckBox;
     FillPanel1: TPanel;
     FillPanel2: TPanel;
@@ -381,6 +382,7 @@ type
     procedure GridStyleChange(Sender: TObject);
     procedure LabelLineClick(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
+    procedure OnlyMeridianClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
     procedure ShowTitleClick(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
@@ -561,6 +563,7 @@ StandardButton.Items[0]:=rsNormalColor;
 StandardButton.Items[1]:=rsRed;
 StandardButton.Items[2]:=rsBlue;
 StandardButton.Items[3]:=rsGreen;
+
 Page3.caption:=rsDeepSkyColou;
 lblDSOCScheme.caption:=rsUseAPresetCo;
 gbDSOCOverrides.caption:=rsChooseColour;
@@ -607,6 +610,7 @@ Button3.caption:=rsDefaultColor;
 Page5.caption:=rsLines;
 EqGrid.caption:=rsAddEquatoria;
 CGrid.caption:=rsShowCoordina;
+OnlyMeridian.Caption:=rsShowOnlyMeri;
 ecliptic.caption:=rsShowEcliptic;
 galactic.caption:=rsShowGalactic;
 GridNum.caption:=rsShowGridLabe;
@@ -1226,6 +1230,7 @@ procedure Tf_config_display.ShowLine;
 begin
 EqGrid.Checked:=csc.ShowEqGrid;
 CGrid.Checked:=csc.ShowGrid;
+OnlyMeridian.Checked := csc.ShowOnlyMeridian;
 GridNum.Checked:=csc.ShowGridNum;
 Ecliptic.Checked:=csc.ShowEcliptic;
 Galactic.Checked:=csc.ShowGalactic;
@@ -1715,6 +1720,11 @@ end;
 procedure Tf_config_display.CGridClick(Sender: TObject);
 begin
   csc.ShowGrid:=CGrid.Checked;
+end;
+
+procedure Tf_config_display.OnlyMeridianClick(Sender: TObject);
+begin
+  csc.ShowOnlyMeridian:=OnlyMeridian.Checked;
 end;
 
 procedure Tf_config_display.EqGridClick(Sender: TObject);

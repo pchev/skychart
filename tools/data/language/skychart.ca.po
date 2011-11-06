@@ -4382,6 +4382,10 @@ msgstr "Mostra les imatges en el mapa"
 msgid "Show objects"
 msgstr "Mostra els objectes"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "Mostra les imatges"

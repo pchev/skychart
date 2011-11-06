@@ -4380,6 +4380,10 @@ msgstr "Mostrar figura de objetos na carta"
 msgid "Show objects"
 msgstr "Mostrar Objetos"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "Mostrar Figuras"

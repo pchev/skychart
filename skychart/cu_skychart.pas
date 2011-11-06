@@ -2202,7 +2202,7 @@ end;
 
 Procedure Tskychart.DrawGrid;
 begin
-if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
+if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
     {$ifdef trace_debug}
      WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
     {$endif}
@@ -2447,8 +2447,13 @@ if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then begin
    w:=2;
    col := Fplot.cfgplot.Color[15];
 end else begin
-   w:=0;
-   col := Fplot.cfgplot.Color[12];
+   if cfgsc.ShowOnlyMeridian then begin
+     result:=true;
+     exit;
+   end else begin
+     w:=0;
+     col := Fplot.cfgplot.Color[12];
+   end;
 end;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
@@ -2520,6 +2525,8 @@ col:=Fplot.cfgplot.Color[12];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
+if dda>(rad2deg*cfgsc.fov/2) then dda:=round(rad2deg*cfgsc.fov/2);
+if ddh>(rad2deg*cfgsc.fov/2) then ddh:=round(rad2deg*cfgsc.fov/2);
 a1:=deg2rad*round(rad2deg*cfgsc.acentre/dda)*dda;
 h1:=deg2rad*round(rad2deg*cfgsc.hcentre/ddh)*ddh;
 dda:=deg2rad*dda;
@@ -2538,23 +2545,25 @@ repeat
   ok:=DrawAline(ac,hc,ddh) or ok;
   ac:=ac-dda;
 until (not ok)or(ac<a1-pi);
-ac:=a1; hc:=h1;
-col:=Fplot.cfgplot.Color[12];
-repeat
-  if cfgsc.horizonopaque and (hc<-musec) then break;
-  labelok:=false;
-  ok:=DrawHline(ac,hc,dda);
-  ok:=DrawHline(ac,hc,-dda) or ok;
-  hc:=hc+ddh;
-until (not ok)or(hc>pid2);
-ac:=a1; hc:=h1;
-repeat
-  if cfgsc.horizonopaque and (hc<-musec) then break;
-  labelok:=false;
-  ok:=DrawHline(ac,hc,dda);
-  ok:=DrawHline(ac,hc,-dda) or ok;
-  hc:=hc-ddh;
-until (not ok)or(hc<-pid2);
+if not cfgsc.ShowOnlyMeridian then begin
+  ac:=a1; hc:=h1;
+  col:=Fplot.cfgplot.Color[12];
+  repeat
+    if cfgsc.horizonopaque and (hc<-musec) then break;
+    labelok:=false;
+    ok:=DrawHline(ac,hc,dda);
+    ok:=DrawHline(ac,hc,-dda) or ok;
+    hc:=hc+ddh;
+  until (not ok)or(hc>pid2);
+  ac:=a1; hc:=h1;
+  repeat
+    if cfgsc.horizonopaque and (hc<-musec) then break;
+    labelok:=false;
+    ok:=DrawHline(ac,hc,dda);
+    ok:=DrawHline(ac,hc,-dda) or ok;
+    hc:=hc-ddh;
+  until (not ok)or(hc<-pid2);
+end;
 end;
 
 function Tskychart.DrawHorizon:boolean;

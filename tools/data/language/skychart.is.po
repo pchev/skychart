@@ -5123,6 +5123,10 @@ msgstr "Birta myndir á kortinu"
 msgid "Show objects"
 msgstr "Birta fyrirbæri"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 #, fuzzy
 #| msgid "Show Pictures"

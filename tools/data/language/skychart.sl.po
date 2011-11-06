@@ -4380,6 +4380,10 @@ msgstr "Prikaži slike predmetov na karti"
 msgid "Show objects"
 msgstr "Prikaži predmete"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "Prikaži slike"
