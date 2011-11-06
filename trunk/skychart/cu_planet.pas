@@ -1912,6 +1912,7 @@ if cdb.GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,ele
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroid(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn,xc,yc,zc);
    precession(jd2000,cfgsc.jdchart,ra,de);
+   if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
    ira:=round(ra*1000);
    idec:=round(de*1000);
    imag:=round(magn*10);
