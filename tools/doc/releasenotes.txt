@@ -1,5 +1,7 @@
 Version 3.5 release Notes
 
+- Add option to only show the meridian lines
+- Increase planet simulation up to 500 positions, no change for comets and asteroids.
 - Add user defined objects in catalog setting.
 - Can change the color for lines and nebulae from the catalog setting.
 - New online Internet resources:

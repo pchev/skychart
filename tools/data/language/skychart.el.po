@@ -3273,13 +3273,9 @@ msgstr "ΟΚ"
 msgid "On"
 msgstr ""
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Ένα από τα τρία"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Ένα από τα δύο"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

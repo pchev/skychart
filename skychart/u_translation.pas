@@ -1009,8 +1009,6 @@ resourcestring
   rsRequireXplan = '(requires Xplanet 1.2.0)';
   rsXplanetIsPro = 'Xplanet is probably not installed!';
   rsEveryPositio = 'Every position';
-  rsOneOfTwo = 'One of two';
-  rsOneOfThree = 'One of three';
   rsOnlyTheFirst = 'Only the first';
   rsOnlyTheLast = 'Only the last';
   rsLabelText = 'Label text';
@@ -1353,6 +1351,7 @@ resourcestring
   rsMaximumRows = 'Maximum rows';
   rsSelectColorB = 'Select color (black for catalog default)';
   rsShowOnlyMeri = 'Show only meridian in Alt/Az';
+  rsOneEvery = 'One every';
 
 implementation
 

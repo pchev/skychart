@@ -3206,12 +3206,8 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr ""
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
+#: u_translation.rsoneevery
+msgid "One every"
 msgstr ""
 
 #: u_translation.rsonlinedss

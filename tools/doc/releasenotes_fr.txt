@@ -1,5 +1,7 @@
 Version 3.5  Notes de la version
 
+- Ajoute une option pour n'afficher que la ligne du méridien.
+- Augmentation de simulation des planètes jusqu'à 500 positions, pas de changement pour les comètes et astéroïdes.
 - Ajout d'objets personnels dans la configuration des catalogues.
 - Permet de modifier la couleur des lignes et nebuleuses depuis la configuration des catalogues.
 - Nouvelles resources Internet en ligne:

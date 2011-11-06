@@ -1293,8 +1293,7 @@ end;
      WriteTrace('First setup');
     {$endif}
     FirstSetup
- end else
-    if config_version<cdcver then ShowReleaseNotes(false);
+ end;
  application.ProcessMessages; // apply any resizing
 {$ifdef trace_debug}
  WriteTrace('Init calendar');
@@ -1341,6 +1340,8 @@ if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages=0) then begin
   {$endif}
   SetupPicturesPage(0,1);
 end;
+if (not firstuse)and(config_version<cdcver) then
+   ShowReleaseNotes(false);
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
@@ -1372,7 +1373,7 @@ begin
     f_info.InfoMemo.Text:=CondUTF8Decode(f_info.InfoMemo.Text);
     f_info.showmodal;
  end;
- SaveVersion;
+ SaveDefault;
 end;
 
 procedure Tf_main.FirstSetup;
@@ -4185,7 +4186,7 @@ def_cfgsc.StyleConstB:=psSolid;
 def_cfgsc.StyleEcliptic:=psSolid;
 def_cfgsc.StyleGalEq:=psSolid;
 def_cfgsc.Simnb:=1;
-def_cfgsc.SimLabel:=1;
+def_cfgsc.SimLabel:=3;
 def_cfgsc.SimNameLabel:=true;
 def_cfgsc.SimDateLabel:=true;
 def_cfgsc.SimDateYear:=true;
@@ -5175,6 +5176,7 @@ end;
 end;
 
 procedure Tf_main.UpdateConfig;
+var i: integer;
 begin
 if Config_Version < '3.0.1.3d' then begin
   f_getdss.cfgdss.DSSurl[1,0]:=URL_DSS_NAME1;
@@ -5226,6 +5228,17 @@ if Config_Version < '3.3j' then begin
   catalog.cfgcat.starcatpath[dsbase-BaseStar]:='C:\Program Files\Deepsky Astronomy Software';
   catalog.cfgcat.starcatpath[dstyc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\SuperTycho';
   catalog.cfgcat.starcatpath[dsgsc-BaseStar]:='C:\Program Files\Deepsky Astronomy Software\HGC';
+end;
+if Config_Version < '3.5e' then begin
+  i:=def_cfgsc.SimLabel;
+  case i of
+   0 : def_cfgsc.SimLabel:=3;
+   1 : def_cfgsc.SimLabel:=-2;
+   2 : def_cfgsc.SimLabel:=-3;
+   3 : def_cfgsc.SimLabel:=1;
+   4 : def_cfgsc.SimLabel:=2;
+   else  def_cfgsc.SimLabel:=0;
+  end;
 end;
 end;
 

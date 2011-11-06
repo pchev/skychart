@@ -143,12 +143,11 @@ function doSimLabel(simnb,step,simlabel:integer):boolean;
 begin
   result:=false;
   case simlabel of
-    0 : result:=true;            // every one
-    1 : result:=((step mod 2)=0);// one of two
-    2 : result:=((step mod 3)=0);// one of three
-    3 : result:=(step=0);        // first
-    4 : result:=(step=simnb-1);  // last
-    5 : result:=false;           // none
+  -1000..-1 : result:=((step mod abs(simlabel))=0); // one of ...
+    0 : result:=false;           // none
+    1 : result:=(step=0);        // first
+    2 : result:=(step=simnb-1);  // last
+    3 : result:=true;            // every
   end;
 end;
 

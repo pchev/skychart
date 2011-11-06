@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-11-06 11:17+0100\n"
+"PO-Revision-Date: 2011-11-06 13:41+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -3211,13 +3211,9 @@ msgstr "OK"
 msgid "On"
 msgstr "On"
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Un sur trois"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Un sur deux"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr "Un tout les"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

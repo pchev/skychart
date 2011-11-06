@@ -3204,13 +3204,9 @@ msgstr "OK"
 msgid "On"
 msgstr "Aan"
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Eén van drie"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Eén van twee"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

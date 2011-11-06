@@ -1,7 +1,7 @@
 object f_config_time: Tf_config_time
-  Left = 359
+  Left = 185
   Height = 564
-  Top = 9
+  Top = 87
   Width = 474
   ActiveControl = MainPanel
   BorderIcons = [biSystemMenu]
@@ -258,7 +258,7 @@ object f_config_time: Tf_config_time
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 35
+            ClientHeight = 23
             ClientWidth = 133
             Columns = 2
             Items.Strings = (
@@ -682,7 +682,7 @@ object f_config_time: Tf_config_time
         end
         object RadioGroup1: TRadioGroup
           Left = 8
-          Height = 72
+          Height = 78
           Top = 278
           Width = 438
           AutoFill = True
@@ -695,19 +695,32 @@ object f_config_time: Tf_config_time
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 3
-          ClientHeight = 42
+          ClientHeight = 48
           ClientWidth = 434
           Columns = 3
           Items.Strings = (
-            'Every position'
-            'One of two'
-            'One of three'
+            'None'
             'Only the first'
             'Only the last'
-            'None'
+            'Every position'
+            'One of'
           )
           OnClick = RadioGroup1Click
           TabOrder = 7
+          object LongEdit1: TLongEdit
+            Left = 291
+            Height = 18
+            Hint = '2..500'
+            Top = 24
+            Width = 137
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 6
+            OnChange = LongEdit1Change
+            Value = 2
+            MinValue = 2
+            MaxValue = 500
+          end
         end
         object CheckGroup1: TCheckGroup
           Left = 8

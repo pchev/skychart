@@ -3207,13 +3207,9 @@ msgstr "OK"
 msgid "On"
 msgstr "Encendido"
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Uno de tres"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Uno de dos"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
