@@ -3206,13 +3206,9 @@ msgstr "確定"
 msgid "On"
 msgstr ""
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "每三个"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "每二个"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

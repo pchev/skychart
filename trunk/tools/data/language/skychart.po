@@ -3982,14 +3982,6 @@ msgstr ""
 msgid "Every position"
 msgstr ""
 
-#: u_translation:rsoneoftwo
-msgid "One of two"
-msgstr ""
-
-#: u_translation:rsoneofthree
-msgid "One of three"
-msgstr ""
-
 #: u_translation:rsonlythefirst
 msgid "Only the first"
 msgstr ""
@@ -5304,5 +5296,9 @@ msgstr ""
 
 #: u_translation:rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
+msgstr ""
+
+#: u_translation:rsoneevery
+msgid "One every"
 msgstr ""
 

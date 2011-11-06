@@ -3206,13 +3206,9 @@ msgstr "OK"
 msgid "On"
 msgstr "Accendi"
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Una ogni tre"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Una ogni due"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

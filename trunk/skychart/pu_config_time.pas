@@ -51,6 +51,7 @@ type
     CheckGroup2: TCheckGroup;
     ComboBox1: TComboBox;
     Label11: TLabel;
+    LongEdit1: TLongEdit;
     TZComboBox: TComboBox;
     DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
@@ -156,6 +157,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
+    procedure LongEdit1Change(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
     procedure DateChange(Sender: TObject);
     procedure RadioGroup1Click(Sender: TObject);
@@ -271,12 +273,11 @@ Alabels.jd:=rsJulianDay;
 Alabels.today:=rsToday;
 JDCalendarDialog1.labels:=Alabels;
 RadioGroup1.Caption:=rsShowLabels;
-RadioGroup1.Items[0]:=rsEveryPositio;
-RadioGroup1.Items[1]:=rsOneOfTwo;
-RadioGroup1.Items[2]:=rsOneOfThree;
-RadioGroup1.Items[3]:=rsOnlyTheFirst;
-RadioGroup1.Items[4]:=rsOnlyTheLast;
-RadioGroup1.Items[5]:=rsNone1;
+RadioGroup1.Items[0]:=rsNone1;
+RadioGroup1.Items[1]:=rsOnlyTheFirst;
+RadioGroup1.Items[2]:=rsOnlyTheLast;
+RadioGroup1.Items[3]:=rsEveryPositio;
+RadioGroup1.Items[4]:=rsOneEvery+' :';
 CheckGroup1.Caption:=rsLabelText;
 CheckGroup1.Items[0]:=rsObjectName;
 CheckGroup1.Items[1]:=rsCurrentDate;
@@ -440,7 +441,14 @@ if csc.SimObject[12] or csc.SimObject[13] then begin
   nbstep.MaxValue:=100;
   nbstepChanged(nil);
 end else nbstep.MaxValue:=500;
-RadioGroup1.ItemIndex:=csc.SimLabel;
+if csc.SimLabel>=0 then begin
+   RadioGroup1.ItemIndex:=csc.SimLabel;
+   LongEdit1.Enabled:=false;
+end else begin
+   RadioGroup1.ItemIndex:=4;
+   LongEdit1.Value:=abs(csc.SimLabel);
+   LongEdit1.Enabled:=true;
+end;
 CheckGroup1.Checked[0]:=csc.SimNameLabel;
 CheckGroup1.Checked[1]:=csc.SimDateLabel;
 CheckGroup2.Checked[0]:=csc.SimDateYear;
@@ -749,7 +757,20 @@ end;
 procedure Tf_config_time.RadioGroup1Click(Sender: TObject);
 begin
 if LockChange then exit;
-csc.SimLabel:=RadioGroup1.ItemIndex;
+if RadioGroup1.ItemIndex < 4 then begin
+   csc.SimLabel:=RadioGroup1.ItemIndex;
+   LongEdit1.Enabled:=false;
+end
+else begin
+   csc.SimLabel:=-LongEdit1.Value;
+   LongEdit1.Enabled:=true;
+end;
+end;
+
+procedure Tf_config_time.LongEdit1Change(Sender: TObject);
+begin
+if LockChange then exit;
+csc.SimLabel:=-LongEdit1.Value;
 end;
 
 procedure Tf_config_time.BitBtn4Click(Sender: TObject);

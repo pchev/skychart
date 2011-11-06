@@ -3757,13 +3757,9 @@ msgstr "Í lagi"
 msgid "On"
 msgstr ""
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Eitt af þremur"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Eitt af tveimur"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"

@@ -3208,13 +3208,9 @@ msgstr "D'acord"
 msgid "On"
 msgstr "Engegat"
 
-#: u_translation.rsoneofthree
-msgid "One of three"
-msgstr "Una de cada tres"
-
-#: u_translation.rsoneoftwo
-msgid "One of two"
-msgstr "Una de cada dues"
+#: u_translation.rsoneevery
+msgid "One every"
+msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
