@@ -791,6 +791,7 @@ var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,v
 begin
 try
 while lockpla do application.ProcessMessages; lockpla:=true;
+cfgsc.SimNb:=min(cfgsc.SimNb,MaxPlSim);
 for j:=0 to cfgsc.SimNb-1 do begin
  jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
  st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
@@ -1769,6 +1770,7 @@ qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
 db2.Query(qry);
 if db2.Rowcount>0 then begin
   if db2.Rowcount=MaxAsteroid then cfgsc.msg:=cfgsc.msg+'More than '+inttostr(MaxAsteroid)+' asteroids, result truncated!';
+  cfgsc.Simnb:=min(cfgsc.Simnb,MaxAstSim);
   if cfgsc.SimObject[12] then SimNb:=cfgsc.SimNb
                          else SimNb:=1;
   if SimNb>cfgsc.AsteroidLstSize then begin
@@ -1845,6 +1847,7 @@ qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
     +' limit '+inttostr(MaxComet) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
+  cfgsc.Simnb:=min(cfgsc.Simnb,MaxAstSim);
   if cfgsc.SimObject[13] then SimNb:=cfgsc.SimNb
                          else SimNb:=1;
   if SimNb>cfgsc.CometLstSize then begin
