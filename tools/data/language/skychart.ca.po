@@ -1,7 +1,7 @@
 # translation of skychart.ca.po
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-09-05 20:58+0100\n"
+"PO-Revision-Date: 2011-11-05 09:57+0100\n"
 "Last-Translator: Antoni Clavell <antoni@clavell.org>\n"
 "Project-Id-Version: skychart.ca\n"
 "POT-Creation-Date: \n"
@@ -218,7 +218,7 @@ msgstr "Argument del periheli"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Al voltant de la posició actual"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -258,7 +258,7 @@ msgstr "Config. asteroides"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "Asteroides de l'arxiu"
+msgstr "Asteroides del fitxer"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -302,7 +302,7 @@ msgstr "Refresca cada"
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
-msgstr "Arxius auxiliars"
+msgstr "Fitxers auxiliars"
 
 #: u_translation.rsaz
 msgid "Az"
@@ -318,7 +318,7 @@ msgstr "Coordenades azimutals"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr ""
+msgstr "Origen d'azimut"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
@@ -330,7 +330,7 @@ msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr ""
+msgstr "Retorna"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -454,7 +454,7 @@ msgstr "per"
 
 #: u_translation.rsbyname
 msgid "By name"
-msgstr ""
+msgstr "Pel nom"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -478,11 +478,11 @@ msgstr "No puc calcular els satèl·lits"
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr ""
+msgstr "No puc connectar amb el servidor. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "No puc dibuixar-ho"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
@@ -514,7 +514,7 @@ msgstr "Nom llarg del catàleg"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
-msgstr ""
+msgstr "%s Catàlegs disponibles"
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -692,7 +692,7 @@ msgstr "Contorn tancat"
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "Tanca els arxius"
+msgstr "Tanca els fitxers"
 
 #: u_translation.rsclosingconne
 msgid "Closing connection"
@@ -740,7 +740,7 @@ msgstr "Comandament no trobat!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Comandament a usar per processar l'arxiu."
+msgstr "Comandament a usar per processar el fitxer."
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -788,7 +788,7 @@ msgstr "Configuració del programa"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Confirmeu la supressió del fitxer:"
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1026,7 +1026,7 @@ msgstr "Manteniment dades"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr ""
+msgstr "Previsualitza les dades"
 
 #: u_translation.rsdatastartonl
 #| msgid "Data start on line %s"
@@ -1035,7 +1035,7 @@ msgstr "Les dades comencen a la línia %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr ""
+msgstr "Tipus de dades"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -1163,7 +1163,7 @@ msgstr "Etiqueta per defecte"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Magnitud per defecte"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
@@ -1179,7 +1179,7 @@ msgstr "Paràmetres per defecte dels contorns"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr ""
+msgstr "Mida per defecte (segons d'arc)"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1308,7 +1308,7 @@ msgstr "Desconnectat"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Diferèncià entre Temps Terrestre i Temps Universal"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1420,7 +1420,7 @@ msgstr "Descarrega %s"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr ""
+msgstr "Descarrega catàleg"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
@@ -1432,7 +1432,7 @@ msgstr "Descarrega el fitxer"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr ""
+msgstr "Descarrega el catàleg complet"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1452,11 +1452,11 @@ msgstr " Dibuixa una línia mostrant el moviment propi per a "
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr ""
+msgstr "Dibuixa-ho com DSO"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "Dibuixa-ho com un estel"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1744,7 +1744,7 @@ msgstr "Camí del programa ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr ""
+msgstr "Nom del camp"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1772,7 +1772,7 @@ msgstr "Camp massa ample! El màxim és %s"
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "Arxiu"
+msgstr "Fitxer"
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2254,7 +2254,7 @@ msgstr "Informació"
 
 #: u_translation.rsinfo2
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -2538,7 +2538,7 @@ msgstr "Carrega des del fitxer"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr ""
+msgstr "Carregant la llista de càtalegs. Sisplau espereu..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -2670,7 +2670,7 @@ msgstr "Barra principal"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr ""
+msgstr "Feu selecció de la taula i columnes que voleu per al catàleg"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -2710,7 +2710,7 @@ msgstr "Magnitud màxima"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Màxim de registres"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -2830,7 +2830,7 @@ msgstr "Lluna"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr ""
+msgstr "Més informacions"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -2998,7 +2998,7 @@ msgstr "No."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "No hi ha dades dels asteroides!%sCarregueu un arxiu MPC."
+msgstr "No hi ha dades dels asteroides!%sCarregueu un fitxer MPC."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -3006,7 +3006,7 @@ msgstr "No hi ha crepuscle astronómic avui!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Cap catàleg triat,  o bé cap taula del triat té informació de coordenades"
 
 #: u_translation.rsnochange
 msgid "No change"
@@ -3014,7 +3014,7 @@ msgstr "Sense canvi"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr ""
+msgstr "Cap dada"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3226,11 +3226,11 @@ msgstr "Servidors d'imatges"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
-msgstr ""
+msgstr "Ha fallat la recerca en línea"
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr ""
+msgstr "Resultat de la recerca en línea"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
@@ -3258,7 +3258,7 @@ msgstr "Cúmuls oberts"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Obre l'arxiu bitmap."
+msgstr "Obre el fitxer bitmap."
 
 #: u_translation.rsoptions
 msgid "Options"
@@ -3872,11 +3872,11 @@ msgstr "Notes de l'edició"
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr ""
+msgstr "Recarrega"
 
 #: u_translation.rsreloadforcur
 msgid "Reload %s for current chart"
-msgstr ""
+msgstr "Recarrega %s per al mapa actual"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -4008,7 +4008,7 @@ msgstr "Rotació"
 
 #: u_translation.rsrows
 msgid "Rows"
-msgstr ""
+msgstr "Files"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4096,15 +4096,15 @@ msgstr "Busca"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr ""
+msgstr "Cerca pel nom"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
-msgstr ""
+msgstr "Cerca per la posició"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr ""
+msgstr "Cerca catàlegs"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4148,15 +4148,15 @@ msgstr "Selecciona-ho tot"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr ""
+msgstr "Tria un catàleg"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Trieu un color (negre per al catàleg per omissió)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr ""
+msgstr "Trieu el lloc de xarxa mirall"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4408,11 +4408,11 @@ msgstr "Mostra aquesta imatge"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Mostra els objectes definits per l'usuari"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr ""
+msgstr "Mostra les dades de l'observatori virtual"
 
 #: u_translation.rssideral
 msgid "Sidereal"
@@ -4736,7 +4736,7 @@ msgstr "Estat del sistema:"
 
 #: u_translation.rstable
 msgid "Table"
-msgstr ""
+msgstr "Taula"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -4808,7 +4808,7 @@ msgstr "Tema"
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr ""
+msgstr "El nombre de registres d'aquest catàleg és desconegut. La descàrrega serà limitada a %s registres"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -4824,11 +4824,11 @@ msgstr "Aquesta acció remplaça tota la base de dades del país %s amb dades fr
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr ""
+msgstr "Aquest catàleg té %s registres. No és possible descarregar-lo sencer per raons de rendiment."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "Aquest arxiu no es reconeix com un fitxer MPCORB."
+msgstr "Aquest fitxer no es reconeix com del tipus MPCORB."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
@@ -4956,7 +4956,7 @@ msgstr "Classe de Trumpler"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UT:"
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5020,7 +5020,7 @@ msgstr "Desfés el darrer canvi"
 
 #: u_translation.rsunits
 msgid "Units"
-msgstr ""
+msgstr "Unitats"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
@@ -5063,8 +5063,10 @@ msgid "URL launch command"
 msgstr "Obre una URL"
 
 #: u_translation.rsuseanothertt
+#, fuzzy
+#| msgid "Use another DT-UT value"
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Usa un altre valor TT-TU"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5096,7 +5098,7 @@ msgstr "Useu sols catàlegs d'un únic grup"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Objectes definits per l'usuari"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -5188,7 +5190,7 @@ msgstr "Coixí virtual per a Scope.exe"
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr ""
+msgstr "Catàleg de l'observatori virtual"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5200,11 +5202,11 @@ msgstr "Magnitud visual"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr ""
+msgstr "Catàleg OV"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr ""
+msgstr "Navegador del catàleg OV"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
