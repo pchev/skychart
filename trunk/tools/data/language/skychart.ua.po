@@ -4382,6 +4382,10 @@ msgstr "Показати зображення об'єктів на мапі"
 msgid "Show objects"
 msgstr "Показати об'єкти"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "Показати зображення"

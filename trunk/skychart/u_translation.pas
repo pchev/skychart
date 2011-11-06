@@ -1352,6 +1352,7 @@ resourcestring
   rsShowUserDefi = 'Show User defined objects';
   rsMaximumRows = 'Maximum rows';
   rsSelectColorB = 'Select color (black for catalog default)';
+  rsShowOnlyMeri = 'Show only meridian in Alt/Az';
 
 implementation
 

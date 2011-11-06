@@ -4380,6 +4380,10 @@ msgstr "在星圖顯示天體圖片"
 msgid "Show objects"
 msgstr "顯示天體"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "顯示圖片"

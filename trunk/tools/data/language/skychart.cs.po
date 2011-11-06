@@ -4380,6 +4380,10 @@ msgstr "Zobrazit obrázky objektů"
 msgid "Show objects"
 msgstr "Zobrazit objekty"
 
+#: u_translation.rsshowonlymeri
+msgid "Show only meridian in Alt/Az"
+msgstr ""
+
 #: u_translation.rsshowpictures
 msgid "Show pictures"
 msgstr "Zobrazit obrázky"
