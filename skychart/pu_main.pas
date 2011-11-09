@@ -4810,6 +4810,7 @@ csc.StyleEcliptic:=TPenStyle(ReadInteger(section,'StyleEcliptic',ord(csc.StyleEc
 csc.StyleGalEq:=TPenStyle(ReadInteger(section,'StyleGalEq',ord(csc.StyleGalEq)));
 csc.Simnb:=ReadInteger(section,'Simnb',csc.Simnb);
 csc.SimLabel:=ReadInteger(section,'SimLabel',csc.SimLabel);
+if csc.SimLabel>3 then csc.SimLabel:=3;
 csc.SimNameLabel:=ReadBool(section,'SimNameLabel',csc.SimNameLabel);
 csc.SimDateLabel:=ReadBool(section,'SimDateLabel',csc.SimDateLabel);
 csc.SimDateYear:=ReadBool(section,'SimDateYear',csc.SimDateYear);
