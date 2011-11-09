@@ -434,14 +434,14 @@ for i:=0 to SimObj.Items.Count-1 do begin
   11: j:=13;   // comet
   else j:=i;
   end;
-  if (i=9) and (not csc.ShowPluto) then SimObj.checked[9]:=false
-     else SimObj.checked[i]:=csc.SimObject[j];
+  SimObj.checked[i]:=csc.SimObject[j];
 end;
 if csc.SimObject[12] or csc.SimObject[13] then begin
   nbstep.MaxValue:=100;
   nbstepChanged(nil);
 end else nbstep.MaxValue:=500;
 if csc.SimLabel>=0 then begin
+   if csc.SimLabel>3 then csc.SimLabel:=3;
    RadioGroup1.ItemIndex:=csc.SimLabel;
    LongEdit1.Enabled:=false;
 end else begin
@@ -904,19 +904,16 @@ begin
 for i:=0 to SimObj.Items.Count-1 do begin
     SimObj.checked[i]:=true;
 end;
-{$IF DEFINED(mswindows) or DEFINED(LCLgtk2)}
- for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
-{$endif}
+for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
 end;
 
 procedure Tf_config_time.NoSimClick(Sender: TObject);
 var i:integer;
 begin
-for i:=0 to SimObj.Items.Count-1 do
+for i:=0 to SimObj.Items.Count-1 do begin
     SimObj.checked[i]:=false;
-{$IF DEFINED(mswindows) or DEFINED(LCLgtk2)}
- for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
-{$endif}
+end;
+for i:=0 to SimObj.Items.Count-1 do SimObjItemClick(Sender,i);
 end;
 
 procedure Tf_config_time.stepunitClick(Sender: TObject);
