@@ -29,6 +29,10 @@ type Tnebcache = record
          ra,de: double;
          lma,ldim: string;
 end;
+type TcacheOption = record
+     option: TCatoption;
+     vofiledate: longint;
+end;
 
 const CacheInc=1000;
       MaxCache=10;
@@ -44,7 +48,7 @@ var
    drawcolor,forcecolor: integer;
    flabels: Tlabellst;
    unit_pmra, unit_pmdec, unit_size: double;
-   log_pmra, log_pmdec, log_size: boolean;
+   log_pmra, log_pmdec, log_size, cosdec_pmra: boolean;
    field_pmra, field_pmdec, field_size : integer;
    catname:string;
    VOcatlist : TStringList;
@@ -56,7 +60,7 @@ var
    onCache,CacheAvailable: boolean;
    CurNebCache, CurStarCache, CurCacheRec: integer;
    NebCacheIndex, StarCacheIndex: array[0..maxcache-1] of string;
-   StarOptionCache, NebOptionCache: array[0..maxcache-1] of TCatoption;
+   StarOptionCache, NebOptionCache: array[0..maxcache-1] of TcacheOption;
    NebCache: array[0..maxcache-1] of array of Tnebcache;
    StarCache: array[0..maxcache-1] of array of Tstarcache;
 
@@ -157,16 +161,22 @@ else if k<>'s' then u:=0;
 result:=u;
 end;
 
-function pmunits(units: string; var log: Boolean): double;  // result in radian/year
+function pmunits(units: string; var log,cosdec: Boolean): double;  // result in radian/year
 var e,k,v:string;
-    u,y: double;
+    u,y,uu: double;
     i: integer;
     ok: boolean;
 begin
+  uu:=1; cosdec:=false;
   i:=pos('/',units);
   k:=copy(units,1,i-1);
   v:=copy(units,i+1,99);
-  u:=angleunits(k,log);
+  if k='s' then begin     // PPM give pmRa in second of time
+     k:='arcsec';
+     uu:=15;
+     cosdec:=true;
+  end;
+  u:=angleunits(k,log)*uu;
   y:=timeunits(v,ok)/(365.25*86400);
   if (y=0) then u:=0
      else u:=u/y;
@@ -238,9 +248,14 @@ rtStar: begin
           CurStarCache:=-1;
           for i:=0 to MaxCache-1 do begin
             if StarCacheIndex[i]=catname then begin
+              if StarOptionCache[i].vofiledate=FileAge(catfile)then begin
                CurStarCache:=i;
                result:=true;
                break;
+              end else begin
+               result:=false;
+               break;
+              end;
             end;
           end;
         end;
@@ -248,9 +263,14 @@ rtNeb : begin
           CurNebCache:=-1;
           for i:=0 to MaxCache-1 do begin
             if NebCacheIndex[i]=catname then begin
-              CurNebCache:=i;
-              result:=true;
-              break;
+              if NebOptionCache[i].vofiledate=FileAge(catfile)then begin
+               CurNebCache:=i;
+               result:=true;
+               break;
+              end else begin
+               result:=false;
+               break;
+              end;
             end;
           end;
         end;
@@ -327,7 +347,7 @@ var buf,e,k,v:string;
     fieldnode: TDOMNode;
     fielddata: TFieldData;
     config: TXMLConfig;
-    l: boolean;
+    l,c: boolean;
 begin
 result:=false;
 VODocOK:=false;
@@ -355,8 +375,8 @@ onCache:=GetCache;
 CurCacheRec:=-1;
 if onCache then begin
   case catversion of
-     rtStar: emptyrec.options:=StarOptionCache[CurStarCache];
-     rtNeb : emptyrec.options:=NebOptionCache[CurNebCache];
+     rtStar: emptyrec.options:=StarOptionCache[CurStarCache].option;
+     rtNeb : emptyrec.options:=NebOptionCache[CurNebCache].option;
   end;
   result:=true;
 end else begin
@@ -387,16 +407,17 @@ end else begin
       j:=VOFields.AddObject(k,fielddata);
       if pos('pos.pm',fielddata.ucd)=1 then begin
         if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
-            u:=pmunits(fielddata.units,l);
+            u:=pmunits(fielddata.units,l,c);
             if (u>0) then begin
               field_pmra:=j;
               unit_pmra:=u;
               log_pmra:=l;
+              cosdec_pmra:=c;
               flabels[lOffset+vsPmra]:=fielddata.name;
             end;
          end
          else if (pos('pos.eq.dec',fielddata.ucd)>0) then begin
-            u:=pmunits(fielddata.units,l);
+            u:=pmunits(fielddata.units,l,c);
             if (u>0) then begin
                field_pmdec:=j;
                unit_pmdec:=u;
@@ -426,8 +447,14 @@ end else begin
       InitRec;
       if CacheAvailable then begin
         case catversion of
-           rtStar: StarOptionCache[CurStarCache]:=emptyrec.options;
-           rtNeb: NebOptionCache[CurNebCache]:=emptyrec.options;
+           rtStar: begin
+                    StarOptionCache[CurStarCache].option:=emptyrec.options;
+                    StarOptionCache[CurStarCache].vofiledate:=FileAge(catfile);
+                   end;
+           rtNeb:  begin
+                    NebOptionCache[CurNebCache].option:=emptyrec.options;
+                    NebOptionCache[CurNebCache].vofiledate:=FileAge(catfile);
+                   end;
         end;
       end;
     end;
@@ -586,6 +613,7 @@ if Assigned(VoNode) then begin
   case catversion of
   rtStar: begin
           if lin.star.id='' then lin.star.id:=recno;
+          if cosdec_pmra then lin.star.pmra:=lin.star.pmra*cos(lin.dec);
           end;
   rtNeb:  begin
           if lin.neb.id='' then lin.neb.id:=recno;
