@@ -824,9 +824,7 @@ if ((Acol=2)or(Acol=3))and(Arow>0)and(value>'') then begin
 end;
 if ((Acol=1)or(Acol=4))and(Arow>0) then begin
   i:=catalog.GetCatType(stringgrid3.Cells[4,arow],stringgrid3.Cells[1,arow]);
-  if (i=4) or (i=5) then   // rtneb, rtlin
-     stringgrid3.Cells[6,arow]:=''
-  else
+  if not ((i=4) or (i=5)) then   // rtneb, rtlin
      stringgrid3.Cells[6,arow]:='N';
 end
 end;
@@ -1140,10 +1138,12 @@ end;
 
 procedure Tf_config_catalog.ActivateGCat;
 var i,x,v:integer;
+    buf: string;
 begin
 ccat.GCatNum:=stringgrid3.RowCount-1;
 SetLength(ccat.GCatLst,ccat.GCatNum);
 for i:=0 to ccat.GCatNum-1 do begin
+   buf:=stringgrid3.cells[1,i+1];
    ccat.GCatLst[i].shortname:=stringgrid3.cells[1,i+1];
    ccat.GCatLst[i].path:=utf8tosys(stringgrid3.cells[4,i+1]);
    val(stringgrid3.cells[2,i+1],x,v);
@@ -1156,7 +1156,8 @@ for i:=0 to ccat.GCatNum-1 do begin
    ccat.GCatLst[i].magmax:=0;
    ccat.GCatLst[i].name:='';
    ccat.GCatLst[i].cattype:=0;
-   val(stringgrid3.cells[6,i+1],x,v);
+   buf:=stringgrid3.cells[6,i+1];
+   val(buf,x,v);
    if v=0 then begin
       ccat.GCatLst[i].ForceColor:=true;
       ccat.GCatLst[i].col:=x;
