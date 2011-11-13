@@ -5,12 +5,12 @@
     <General>
       <Flags>
         <SaveClosedFiles Value="False"/>
-        <SaveOnlyProjectUnits Value="True"/>
         <LRSInOutputDirectory Value="False"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <Title Value="Skychart"/>
+      <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <Icon Value="0"/>
     </General>

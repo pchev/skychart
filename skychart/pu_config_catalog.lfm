@@ -28,20 +28,20 @@ object f_config_catalog: Tf_config_catalog
       Height = 464
       Top = 1
       Width = 498
-      ActivePage = Page1a
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 0
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label37: TLabel
-          Left = 9
-          Height = 18
+          Left = 51
+          Height = 15
           Top = 19
-          Width = 273
+          Width = 235
           Alignment = taRightJustify
           Anchors = [akTop, akRight]
           Caption = 'Stars and Nebulae catalogs prepared with '
@@ -151,8 +151,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label2: TLabel
           Left = 8
           Height = 18
@@ -533,8 +533,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label3: TLabel
           Left = 9
           Height = 15
@@ -1080,13 +1080,13 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label1: TLabel
           Left = 7
-          Height = 18
+          Height = 15
           Top = 19
-          Width = 177
+          Width = 149
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
         end
@@ -1156,7 +1156,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object maxrows: TLongEdit
           Left = 415
-          Height = 25
+          Height = 22
           Hint = '100..50000'
           Top = 15
           Width = 64
@@ -1170,9 +1170,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label4: TLabel
           Left = 289
-          Height = 18
+          Height = 15
           Top = 19
-          Width = 60
+          Width = 52
           Caption = 'Max rows'
           ParentColor = False
         end
@@ -1188,8 +1188,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1b: TTabSheet
         Caption = 'User defined objects'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label6: TLabel
           Left = 7
           Height = 18
@@ -1290,8 +1290,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
@@ -1472,8 +1472,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TTabSheet
         Caption = 'Obsolete'
-        ClientHeight = 460
-        ClientWidth = 494
+        ClientHeight = 464
+        ClientWidth = 498
         object Label88: TLabel
           Left = 9
           Height = 15
