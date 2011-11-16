@@ -875,6 +875,7 @@ try
   db.StartTransaction;
   while j<dailytable.Count do begin
      db.TruncateTable(dailytable[j]);
+     db.Query('drop table '+dailytable[j]);
      inc(j);
   end;
   db.Commit;
@@ -900,6 +901,7 @@ try
   db.StartTransaction;
   while j<dailytable.Count do begin
      db.TruncateTable(dailytable[j]);
+     db.Query('drop table '+dailytable[j]);
      inc(j);
   end;
   db.Commit;

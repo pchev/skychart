@@ -47,6 +47,7 @@ const cdcversion = 'Version 3.5-svn';
       MaxAstSim = 100 ;
       MaxComet = 500;
       MaxAsteroid = 10000;
+      NEO_dist = 0.1; // distance to always take account of NEO
       MaxPla = 32;
       MaxQuickSearch = 15;
       MaxWindow = 10;  // maximum number of chart window
