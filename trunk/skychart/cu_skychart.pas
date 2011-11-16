@@ -603,6 +603,7 @@ function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
     s1,s2,s3: string;
     TrackAltAz: boolean;
+    outr: integer;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init coordinates');
@@ -613,7 +614,12 @@ cfgsc.RefractionOffset:=0;
 // clipping limit
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
-Fplot.cfgplot.outradius:=abs(round(min(10*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
+case trunc(rad2deg*cfgsc.fov) of
+  0..1: outr:=100;
+  2..5: outr:=20;
+  6..999: outr:=10;
+end;
+Fplot.cfgplot.outradius:=abs(round(min(outr*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
@@ -1636,19 +1642,29 @@ end;
 function Tskychart.DrawOrbitPath:boolean;
 var i,j,color : integer;
     x1,y1 : double;
-    xx,yy,xp,yp:single;
+    xx,yy,xp,yp,dx,dy:single;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw orbit path');
 {$endif}
+case trunc(rad2deg*cfgsc.fov) of
+  0..1: begin dx:=100*cfgsc.xmax; dy:=100*cfgsc.ymax; end;
+  2..5: begin dx:=20*cfgsc.xmax; dy:=20*cfgsc.ymax; end;
+  6..9: begin dx:=10*cfgsc.xmax; dy:=10*cfgsc.ymax; end;
+  10..29: begin dx:=5*cfgsc.xmax; dy:=5*cfgsc.ymax; end;
+  30..89: begin dx:=3*cfgsc.xmax; dy:=3*cfgsc.ymax; end;
+  90..999: begin dx:=2*cfgsc.xmax; dy:=2*cfgsc.ymax; end;
+end;
+dx:=Min(dx,maxSmallint);
+dy:=Min(dy,maxSmallint);
 Color:=Fplot.cfgplot.Color[14];
 xp:=0;yp:=0;
 if cfgsc.ShowPlanetValid then for i:=1 to 11 do
   if (i<>3)and(cfgsc.SimObject[i]) then for j:=0 to cfgsc.SimNb-1 do begin
     projection(cfgsc.Planetlst[j,i,1],cfgsc.Planetlst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
-    if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
-       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
+    if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
        Fplot.PlotLine(xp,yp,xx,yy,color,1);
     xp:=xx;
     yp:=yy;
@@ -1658,8 +1674,8 @@ if cfgsc.SimObject[13] then for i:=1 to cfgsc.CometNb do
   for j:=0 to cfgsc.SimNb-1 do begin
     projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
-    if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
-       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
+    if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
        Fplot.PlotLine(xp,yp,xx,yy,color,1);
     xp:=xx;
     yp:=yy;
@@ -1669,8 +1685,8 @@ if cfgsc.SimObject[12] then for i:=1 to cfgsc.AsteroidNb do
   for j:=0 to cfgsc.SimNb-1 do begin
     projection(cfgsc.AsteroidLst[j,i,1],cfgsc.AsteroidLst[j,i,2],x1,y1,true,cfgsc) ;
     windowxy(x1,y1,xx,yy,cfgsc);
-    if (j<>0)and((xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax))
-       and ((xp>-2*cfgsc.xmax)and(yp>-2*cfgsc.ymax)and(xp<3*cfgsc.xmax)and(yp<3*cfgsc.ymax)) then
+    if (j<>0)and((xx>-dx)and(yy>-dy)and(xx<dx)and(yy<dy))
+       and ((xp>-dx)and(yp>-dy)and(xp<dx)and(yp<dy)) then
        Fplot.PlotLine(xp,yp,xx,yy,color,1);
     xp:=xx;
     yp:=yy;

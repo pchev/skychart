@@ -1617,7 +1617,7 @@ begin
              ira:=round(ra*1000);
              idec:=round(dec*1000);
              imag:=round(mag*10);
-             if dist<0.3 then nea:=1 else nea:=0;
+             if dist<NEO_dist then nea:=1 else nea:=0;
              qry:='INSERT INTO '+ast_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                  +'"'+id+'"'
                  +',"'+formatfloat(f1,epoch)+'"'
@@ -1717,7 +1717,7 @@ begin
             ira:=round(ra*1000);
             idec:=round(dec*1000);
             imag:=round(mag*10);
-            if dist<0.3 then neo:=1 else neo:=0;
+            if dist<NEO_dist then neo:=1 else neo:=0;
             qry:='INSERT INTO '+com_daypos+' (id,epoch,ra,de,mag,near_earth) VALUES ('
                 +'"'+id+'"'
                 +',"'+formatfloat(f1,epoch)+'"'
@@ -2184,6 +2184,7 @@ begin
          InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
          Asteroid(jdnew,false,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
          jds:=formatfloat(f1,jdnew);
+         if dist<NEO_dist then magn:=0;
          qry:='INSERT INTO cdc_ast_mag (id,jd,epoch,mag,elem_id) VALUES ('
              +'"'+id+'"'
              +',"'+jds+'"'
