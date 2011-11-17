@@ -10,19 +10,41 @@
       if scan <> nil then //with texture scan
       begin
         scan.ScanMoveTo(densMinX,yb);
-        for xb := densMinX to densMaxX do
+        if MemScanCopy <> nil then
         begin
-          j := pdens^;
-          Inc(pdens);
-          c := ScanNextFunc();
-          if j <> 0 then
-            DrawPixelInlineWithAlphaCheck(pdest, BGRA(c.red, c.green, c.blue,
-            {$ifdef PARAM_ANTIALIASINGFACTOR}DivByAntialiasPrecision256{$endif}
-            (c.alpha * j
-            {$ifdef PARAM_ANTIALIASINGFACTOR} ) {$else} +128) shr 8 {$endif}
-            ));
-          Inc(pdest);
+          scan.ScanPutPixels(MemScanCopy,densMaxX-densMinX+1,dmSet);
+          pscan := MemScanCopy;
+          for xb := densMinX to densMaxX do
+          begin
+            j := pdens^;
+            Inc(pdens);
+            c := pscan^;
+            inc(pscan);
+            if j <> 0 then
+              DrawPixelInlineWithAlphaCheck(pdest, BGRA(c.red, c.green, c.blue,
+              {$ifdef PARAM_ANTIALIASINGFACTOR}DivByAntialiasPrecision256{$endif}
+              (c.alpha * j
+              {$ifdef PARAM_ANTIALIASINGFACTOR} ) {$else} +128) shr 8 {$endif}
+              ));
+            Inc(pdest);
+          end;
+        end else
+        begin
+          for xb := densMinX to densMaxX do
+          begin
+            j := pdens^;
+            Inc(pdens);
+            c := ScanNextPixelProc();
+            if j <> 0 then
+              DrawPixelInlineWithAlphaCheck(pdest, BGRA(c.red, c.green, c.blue,
+              {$ifdef PARAM_ANTIALIASINGFACTOR}DivByAntialiasPrecision256{$endif}
+              (c.alpha * j
+              {$ifdef PARAM_ANTIALIASINGFACTOR} ) {$else} +128) shr 8 {$endif}
+              ));
+            Inc(pdest);
+          end;
         end;
+
       end else
       if EraseMode then //erase with alpha
       begin

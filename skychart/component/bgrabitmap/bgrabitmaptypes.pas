@@ -78,6 +78,8 @@ type
                      rfSpline,        //upsizing interpolation
                      rfBestQuality);  //mix of rfMitchell and rfSpline
 
+  TBGRAFontQuality = (fqSystem, fqSystemClearType, fqFineAntialiasing, fqFineClearTypeRGB, fqFineClearTypeBGR);
+
   TMedianOption = (moNone, moLowSmooth, moMediumSmooth, moHighSmooth);
   TRadialBlurType = (rbNormal, rbDisk, rbCorona, rbPrecise, rbFast);
   TSplineStyle = (ssInside, ssInsideWithEnds, ssCrossing, ssCrossingWithEnds, ssOutside, ssRoundOutside, ssVertexToSide);
@@ -161,7 +163,13 @@ const
 function isEmptyPointF(pt: TPointF): boolean;
 
 type
-  { A scanner is like an image, but its content has no limit and can be calculated on the fly }
+  TFontPixelMetric = record
+    Defined: boolean;
+    Baseline, xLine, CapLine, DescentLine, Lineheight: integer;
+  end;
+
+  { A scanner is like an image, but its content has no limit and can be calculated on the fly.
+    It must not implement reference counting. }
   IBGRAScanner = interface
     procedure ScanMoveTo(X,Y: Integer);
     function ScanNextPixel: TBGRAPixel;
@@ -177,6 +185,9 @@ type
   { TBGRACustomBitmap }
 
   TBGRACustomBitmap = class(TFPCustomImage,IBGRAScanner) // a bitmap can be used as a scanner
+  private
+    function GetFontAntialias: Boolean;
+    procedure SetFontAntialias(const AValue: Boolean);
   protected
      { accessors to properies }
      function GetHeight: integer; virtual; abstract;
@@ -201,12 +212,16 @@ type
      procedure SetCanvasAlphaCorrection(const AValue: boolean); virtual; abstract;
      function GetFontHeight: integer; virtual; abstract;
      procedure SetFontHeight(AHeight: integer); virtual; abstract;
+     function GetFontFullHeight: integer; virtual; abstract;
+     procedure SetFontFullHeight(AHeight: integer); virtual; abstract;
      function GetPenStyle: TPenStyle; virtual; abstract;
      procedure SetPenStyle(const AValue: TPenStyle); virtual; abstract;
      function GetCustomPenStyle: TBGRAPenStyle; virtual; abstract;
      procedure SetCustomPenStyle(const AValue: TBGRAPenStyle); virtual; abstract;
      function GetClipRect: TRect; virtual; abstract;
      procedure SetClipRect(const AValue: TRect); virtual; abstract;
+     function GetFontPixelMetric: TFontPixelMetric; virtual; abstract;
+     function LoadAsBmp32(Str: TStream): boolean; virtual; abstract;
 
   public
      Caption:   string;  //user defined caption
@@ -214,7 +229,7 @@ type
      //font style
      FontName:  string;
      FontStyle: TFontStyles;
-     FontAntialias:   Boolean; //antialiasing (it's different from TFont antialiasing mode)
+     FontQuality : TBGRAFontQuality;
      FontOrientation: integer;
 
      //line style
@@ -231,6 +246,13 @@ type
      ScanInterpolationFilter: TResampleFilter;
      ScanOffset: TPoint;
 
+     constructor Create; virtual; abstract; overload;
+     constructor Create(ABitmap: TBitmap); virtual; abstract; overload;
+     constructor Create(AWidth, AHeight: integer; Color: TColor); virtual; abstract; overload;
+     constructor Create(AWidth, AHeight: integer; Color: TBGRAPixel); virtual; abstract; overload;
+     constructor Create(AFilename: string); virtual; abstract; overload;
+     constructor Create(AStream: TStream); virtual; abstract; overload;
+
      function NewBitmap(AWidth, AHeight: integer): TBGRACustomBitmap; virtual; abstract; overload;
      function NewBitmap(AWidth, AHeight: integer; Color: TBGRAPixel): TBGRACustomBitmap; virtual; abstract; overload;
      function NewBitmap(Filename: string): TBGRACustomBitmap; virtual; abstract; overload;
@@ -243,6 +265,8 @@ type
      procedure SaveToStreamAsPng(Str: TStream); virtual; abstract;
      procedure Assign(ABitmap: TBitmap); virtual; abstract; overload;
      procedure Assign(MemBitmap: TBGRACustomBitmap); virtual; abstract; overload;
+     procedure Serialize(AStream: TStream); virtual; abstract;
+     procedure Deserialize(AStream: TStream); virtual; abstract;
 
      {Pixel functions}
      procedure SetPixel(x, y: integer; c: TColor); virtual; abstract; overload;
@@ -399,11 +423,16 @@ type
      procedure ApplyGlobalOpacity(alpha: byte); virtual; abstract;
      procedure Fill(c: TColor); virtual; overload;
      procedure Fill(c: TBGRAPixel); virtual; overload;
+     procedure Fill(texture: IBGRAScanner; mode: TDrawMode); virtual; abstract; overload;
      procedure Fill(texture: IBGRAScanner); virtual; abstract; overload;
      procedure Fill(c: TBGRAPixel; start, Count: integer); virtual; abstract; overload;
      procedure DrawPixels(c: TBGRAPixel; start, Count: integer); virtual; abstract;
      procedure AlphaFill(alpha: byte); virtual; overload;
      procedure AlphaFill(alpha: byte; start, Count: integer); virtual; abstract; overload;
+     procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel); virtual; abstract; overload;
+     procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner); virtual; abstract; overload;
+     procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel; ARGBOrder: boolean = true); virtual; abstract; overload;
+     procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner; ARGBOrder: boolean = true); virtual; abstract; overload;
      procedure ReplaceColor(before, after: TColor); virtual; abstract; overload;
      procedure ReplaceColor(before, after: TBGRAPixel); virtual; abstract; overload;
      procedure ReplaceTransparent(after: TBGRAPixel); virtual; abstract; overload;
@@ -430,6 +459,7 @@ type
      procedure Draw(ACanvas: TCanvas; Rect: TRect; Opaque: boolean = True); virtual; abstract;
      procedure DrawPart(ARect: TRect; Canvas: TCanvas; x, y: integer; Opaque: boolean); virtual;
      function GetPart(ARect: TRect): TBGRACustomBitmap; virtual; abstract;
+     function GetPtrBitmap(Top,Bottom: Integer): TBGRACustomBitmap; virtual; abstract;
      procedure InvalidateBitmap; virtual; abstract;         //call if you modify with Scanline
      procedure LoadFromBitmapIfNeeded; virtual; abstract;   //call to ensure that bitmap data is up to date
 
@@ -505,6 +535,9 @@ type
      property PenStyle: TPenStyle read GetPenStyle Write SetPenStyle;
      property CustomPenStyle: TBGRAPenStyle read GetCustomPenStyle write SetCustomPenStyle;
      property ClipRect: TRect read GetClipRect write SetClipRect;
+     property FontAntialias: Boolean read GetFontAntialias write SetFontAntialias; //antialiasing (it's different from TFont antialiasing mode)
+     property FontFullHeight: integer read GetFontFullHeight write SetFontFullHeight;
+     property FontPixelMetric: TFontPixelMetric read GetFontPixelMetric;
 
      //interface
      function QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): HResult; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
@@ -543,6 +576,12 @@ type
     property Monochrome: boolean read GetMonochrome;
   end;
 
+type
+  TBGRABitmapAny = class of TBGRACustomBitmap;  //used to create instances of the same type (see NewBitmap)
+
+var
+  BGRABitmapFactory : TBGRABitmapAny;
+
 { Color functions }
 function GetIntensity(c: TExpandedPixel): word; inline;
 function SetIntensity(c: TExpandedPixel; intensity: word): TExpandedPixel;
@@ -556,6 +595,7 @@ function GammaCompression(ec: TExpandedPixel): TBGRAPixel; inline;
 function GammaCompression(red,green,blue,alpha: word): TBGRAPixel; inline;
 function BGRAToGrayscale(c: TBGRAPixel): TBGRAPixel;
 function MergeBGRA(c1, c2: TBGRAPixel): TBGRAPixel; overload;
+function MergeBGRA(c1: TBGRAPixel; weight1: integer; c2: TBGRAPixel; weight2: integer): TBGRAPixel; overload;
 function MergeBGRA(ec1, ec2: TExpandedPixel): TExpandedPixel; overload;
 function BGRA(red, green, blue, alpha: byte): TBGRAPixel; overload; inline;
 function BGRA(red, green, blue: byte): TBGRAPixel; overload; inline;
@@ -573,6 +613,13 @@ operator * (const c1: TColorF; factor: single): TColorF; inline;
 function ColorF(red,green,blue,alpha: single): TColorF;
 function BGRAToStr(c: TBGRAPixel): string;
 function StrToBGRA(str: string): TBGRAPixel;
+
+{ Get height [0..1] stored in a TBGRAPixel }
+function MapHeight(Color: TBGRAPixel): Single;
+
+{ Get TBGRAPixel to store height [0..1] }
+function MapHeightToBGRA(Height: Single; Alpha: Byte): TBGRAPixel;
+
 
 { Gamma conversion arrays. Should be used as readonly }
 var
@@ -787,6 +834,19 @@ end;
 
 { TBGRACustomBitmap }
 
+function TBGRACustomBitmap.GetFontAntialias: Boolean;
+begin
+  result := FontQuality <> fqSystem;
+end;
+
+procedure TBGRACustomBitmap.SetFontAntialias(const AValue: Boolean);
+begin
+  if AValue and not FontAntialias then
+    FontQuality := fqFineAntialiasing
+  else if not AValue and (FontQuality <> fqSystem) then
+    FontQuality := fqSystem;
+end;
+
 { These declaration make sure that these methods are virtual }
 procedure TBGRACustomBitmap.LoadFromFile(const filename: string);
 begin
@@ -815,7 +875,8 @@ begin
   OldDrawMode := CanvasDrawModeFP;
   CanvasDrawModeFP := dmSet;
   try
-    inherited LoadFromStream(Str);
+    if not LoadAsBmp32(Str) then
+      inherited LoadFromStream(Str);
   finally
     CanvasDrawModeFP := OldDrawMode;
   end;
@@ -1108,9 +1169,30 @@ var
 procedure InitGamma;
 var
   i: integer;
+{$IFDEF WINCE}
+  j,prevpos,curpos,midpos: integer;
+{$ENDIF}
 begin
   //the linear factor is used to normalize expanded values in the range 0..65535
   GammaLinearFactor := 65535 / power(255, GammaExpFactor);
+
+{$IFDEF WINCE}
+  curpos := 0;
+  GammaExpansionTab[0] := 0;
+  GammaCompressionTab[0] := 0;
+  for i := 0 to 255 do
+  begin
+    prevpos := curpos;
+    curpos := round(power(i, GammaExpFactor) * GammaLinearFactor);
+    if i = 1 then curpos := 1; //to avoid information loss
+    GammaExpansionTab[i] := curpos;
+    midpos := (prevpos+1+curpos) div 2;
+    for j := prevpos+1 to midpos-1 do
+      GammaCompressionTab[j] := i-1;
+    for j := midpos to curpos do
+      GammaCompressionTab[j] := i;
+  end;
+{$ELSE}
   for i := 0 to 255 do
     GammaExpansionTab[i] := round(power(i, GammaExpFactor) * GammaLinearFactor);
 
@@ -1119,6 +1201,7 @@ begin
 
   GammaExpansionTab[1]   := 1; //to avoid information loss
   GammaCompressionTab[1] := 1;
+{$ENDIF}
 end;
 
 {************************** Color functions **************************}
@@ -1449,6 +1532,41 @@ begin
   end;
 end;
 
+function MergeBGRA(c1: TBGRAPixel; weight1: integer; c2: TBGRAPixel;
+  weight2: integer): TBGRAPixel;
+var
+    f1,f2,f12: integer;
+begin
+  f1 := c1.alpha*weight1;
+  f2 := c2.alpha*weight2;
+  if (f1 = 0) then
+  begin
+    if (f2 = 0) then
+      result := BGRAPixelTransparent
+    else
+      Result := c2
+  end
+  else
+  if (f2 = 0) then
+    Result := c1
+  else
+  if (weight1+weight2 = 0) then
+    Result := BGRAPixelTransparent
+  else
+  begin
+    f12 := f1+f2;
+    if f12 = 0 then
+      result := BGRAPixelTransparent
+    else
+    begin
+      Result.red   := (c1.red * f1 + c2.red * f2 + f12 shr 1) div f12;
+      Result.green := (c1.green * f1 + c2.green * f2 + f12 shr 1) div f12;
+      Result.blue  := (c1.blue * f1 + c2.blue * f2 + f12 shr 1) div f12;
+      Result.alpha := (f12 + ((weight1+weight2) shr 1)) div (weight1+weight2);
+    end;
+  end;
+end;
+
 { Merge two colors of same importance }
 function MergeBGRA(ec1, ec2: TExpandedPixel): TExpandedPixel;
 var c12: cardinal;
@@ -1729,6 +1847,25 @@ begin
       result := BGRAPixelTransparent;
   end;
 
+end;
+
+
+function MapHeight(Color: TBGRAPixel): Single;
+var intval: integer;
+begin
+  intval := color.Green shl 16 + color.red shl 8 + color.blue;
+  result := intval/16777215;
+end;
+
+function MapHeightToBGRA(Height: Single; Alpha: Byte): TBGRAPixel;
+var intval: integer;
+begin
+  if Height >= 1 then result := BGRA(255,255,255,alpha) else
+  if Height <= 0 then result := BGRA(0,0,0,alpha) else
+  begin
+    intval := round(Height*16777215);
+    result := BGRA(intval shr 8,intval shr 16,intval,alpha);
+  end;
 end;
 
 {********************** Point functions **************************}

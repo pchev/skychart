@@ -40,6 +40,7 @@ procedure FillInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
 
 { Xor a series of pixels }
 procedure XorInline(dest: PBGRAPixel; c: TBGRAPixel; Count: integer); inline;
+procedure XorPixels(pdest, psrc: PBGRAPixel; count: integer);
 
 { Set alpha value for a series of pixels }
 procedure AlphaFillInline(dest: PBGRAPixel; alpha: byte; Count: integer); inline;
@@ -292,6 +293,17 @@ begin
   begin
     PDWord(dest)^ := PDWord(dest)^ xor DWord(c);
     Inc(dest);
+    Dec(Count);
+  end;
+end;
+
+procedure XorPixels(pdest, psrc: PBGRAPixel; count: integer);
+begin
+  while Count > 0 do
+  begin
+    PDWord(pdest)^ := PDWord(psrc)^ xor PDWord(pdest)^;
+    Inc(pdest);
+    Inc(psrc);
     Dec(Count);
   end;
 end;

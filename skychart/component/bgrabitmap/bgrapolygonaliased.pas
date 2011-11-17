@@ -269,6 +269,7 @@ var
 
   procedure AddEdge(X, Y: integer);
   begin
+    If (Y > High(EdgeList)) or (Y < 0) then exit;
     if (EdgeList[Y].X = -1) or (X < EdgeList[Y].X) then
       EdgeList[Y].X := X;
     if (EdgeList[Y].Y = -1) or (X > EdgeList[Y].Y) then
@@ -383,7 +384,8 @@ begin
       Break;
   end;
 
-  for J := 0 to High(EdgeList) do
+  J := 0;
+  while J < Length(EdgeList) do
   begin
     if (J = 0) and (Frac(CY) > 0) then
     begin
@@ -445,6 +447,7 @@ begin
         end;
       end;
     end;
+    Inc(J);
   end;
 end;
 

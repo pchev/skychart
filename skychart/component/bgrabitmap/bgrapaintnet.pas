@@ -293,6 +293,7 @@ end;
 
 destructor TPaintDotNetFile.Destroy;
 begin
+  Clear;
   content.Free;
   Thumbnail.Free;
   inherited Destroy;

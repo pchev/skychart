@@ -102,10 +102,13 @@ begin
   {$ENDIF}
   FPixBuf := nil;  
   inherited ReallocData;
-  FPixbuf := gdk_pixbuf_new_from_data(pguchar(FData),
-    GDK_COLORSPACE_RGB, True, 8, Width, Height, Width*Sizeof(TBGRAPixel), nil, nil);
-  if FPixbuf = nil then
-    raise Exception.Create('Error initializing Pixbuf');
+  if (FWidth <> 0) and (FHeight <> 0) then
+  begin  
+    FPixbuf := gdk_pixbuf_new_from_data(pguchar(FData),
+      GDK_COLORSPACE_RGB, True, 8, Width, Height, Width*Sizeof(TBGRAPixel), nil, nil);
+    if FPixbuf = nil then
+      raise Exception.Create('Error initializing Pixbuf');
+  end;
 end;
 
 procedure TBGRAGtkBitmap.FreeData;

@@ -106,6 +106,8 @@ type
   public
     constructor Create(AMask: TBGRACustomBitmap; AOffset: TPoint; ASolidColor: TBGRAPixel);
     destructor Destroy; override;
+    function IsScanPutPixelsDefined: boolean; override;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -125,6 +127,8 @@ type
   public
     constructor Create(AMask: TBGRACustomBitmap; AOffset: TPoint; ATexture: IBGRAScanner; AGlobalOpacity: Byte = 255);
     destructor Destroy; override;
+    function IsScanPutPixelsDefined: boolean; override;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -141,6 +145,8 @@ type
   public
     constructor Create(ATexture: IBGRAScanner; AGlobalOpacity: Byte = 255);
     destructor Destroy; override;
+    function IsScanPutPixelsDefined: boolean; override;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
     procedure ScanMoveTo(X,Y: Integer); override;
     function ScanNextPixel: TBGRAPixel; override;
     function ScanAt(X,Y: Single): TBGRAPixel; override;
@@ -636,6 +642,130 @@ begin
   inherited Destroy;
 end;
 
+function TBGRATextureMaskScanner.IsScanPutPixelsDefined: boolean;
+begin
+  Result:= true;
+end;
+
+procedure TBGRATextureMaskScanner.ScanPutPixels(pdest: PBGRAPixel;
+  count: integer; mode: TDrawMode);
+var c: TBGRAPixel;
+    alpha: byte;
+    MemMask, pmask, MemTex, ptex: pbgrapixel;
+
+  function GetNext: TBGRAPixel; inline;
+  begin
+    alpha := pmask^.red;
+    inc(pmask);
+    result := ptex^;
+    inc(ptex);
+    result.alpha := ApplyOpacity(result.alpha,alpha);
+  end;
+
+  function GetNextWithGlobal: TBGRAPixel; inline;
+  begin
+    alpha := pmask^.red;
+    inc(pmask);
+    result := ptex^;
+    inc(ptex);
+    result.alpha := ApplyOpacity( ApplyOpacity(result.alpha,alpha), FGlobalOpacity );
+  end;
+
+begin
+  getmem(MemMask, count*sizeof(TBGRAPixel));
+  ScannerPutPixels(FMask,MemMask,count,dmSet);
+  getmem(MemTex, count*sizeof(TBGRAPixel));
+  ScannerPutPixels(FTexture,MemTex,count,dmSet);
+
+  pmask := MemMask;
+  ptex := MemTex;
+
+  if FGlobalOpacity <> 255 then
+  begin
+    case mode of
+      dmDrawWithTransparency:
+        while count > 0 do
+        begin
+          DrawPixelInlineWithAlphaCheck(pdest,GetNextWithGlobal);
+          inc(pdest);
+          dec(count);
+        end;
+      dmLinearBlend:
+        while count > 0 do
+        begin
+          FastBlendPixelInline(pdest,GetNextWithGlobal);
+          inc(pdest);
+          dec(count);
+        end;
+      dmXor:
+        while count > 0 do
+        begin
+          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNextWithGlobal);
+          inc(pdest);
+          dec(count);
+        end;
+      dmSet:
+        while count > 0 do
+        begin
+          pdest^ := GetNextWithGlobal;
+          inc(pdest);
+          dec(count);
+        end;
+      dmSetExceptTransparent:
+        while count > 0 do
+        begin
+          c := GetNextWithGlobal;
+          if c.alpha = 255 then pdest^ := c;
+          inc(pdest);
+          dec(count);
+        end;
+    end;
+  end else
+  begin
+    case mode of
+      dmDrawWithTransparency:
+        while count > 0 do
+        begin
+          DrawPixelInlineWithAlphaCheck(pdest,GetNext);
+          inc(pdest);
+          dec(count);
+        end;
+      dmLinearBlend:
+        while count > 0 do
+        begin
+          FastBlendPixelInline(pdest,GetNext);
+          inc(pdest);
+          dec(count);
+        end;
+      dmXor:
+        while count > 0 do
+        begin
+          PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+          inc(pdest);
+          dec(count);
+        end;
+      dmSet:
+        while count > 0 do
+        begin
+          pdest^ := GetNext;
+          inc(pdest);
+          dec(count);
+        end;
+      dmSetExceptTransparent:
+        while count > 0 do
+        begin
+          c := GetNext;
+          if c.alpha = 255 then pdest^ := c;
+          inc(pdest);
+          dec(count);
+        end;
+    end;
+  end;
+
+  freemem(MemMask);
+  freemem(MemTex);
+end;
+
 procedure TBGRATextureMaskScanner.ScanMoveTo(X, Y: Integer);
 begin
   FMask.ScanMoveTo(X+FOffset.X,Y+FOffset.Y);
@@ -676,6 +806,73 @@ begin
   inherited Destroy;
 end;
 
+function TBGRASolidColorMaskScanner.IsScanPutPixelsDefined: boolean;
+begin
+  Result:= true;
+end;
+
+procedure TBGRASolidColorMaskScanner.ScanPutPixels(pdest: PBGRAPixel;
+  count: integer; mode: TDrawMode);
+var c: TBGRAPixel;
+    alpha: byte;
+    MemMask, pmask: pbgrapixel;
+
+  function GetNext: TBGRAPixel; inline;
+  begin
+    alpha := pmask^.red;
+    inc(pmask);
+    result := FSolidColor;
+    result.alpha := ApplyOpacity(result.alpha,alpha);
+  end;
+
+begin
+  getmem(MemMask, count*sizeof(TBGRAPixel));
+  ScannerPutPixels(FMask,MemMask,count,dmSet);
+
+  pmask := MemMask;
+
+  case mode of
+    dmDrawWithTransparency:
+      while count > 0 do
+      begin
+        DrawPixelInlineWithAlphaCheck(pdest,GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmLinearBlend:
+      while count > 0 do
+      begin
+        FastBlendPixelInline(pdest,GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmXor:
+      while count > 0 do
+      begin
+        PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmSet:
+      while count > 0 do
+      begin
+        pdest^ := GetNext;
+        inc(pdest);
+        dec(count);
+      end;
+    dmSetExceptTransparent:
+      while count > 0 do
+      begin
+        c := GetNext;
+        if c.alpha = 255 then pdest^ := c;
+        inc(pdest);
+        dec(count);
+      end;
+  end;
+
+  freemem(MemMask);
+end;
+
 procedure TBGRASolidColorMaskScanner.ScanMoveTo(X, Y: Integer);
 begin
   FMask.ScanMoveTo(X+FOffset.X,Y+FOffset.Y);
@@ -712,6 +909,71 @@ destructor TBGRAOpacityScanner.Destroy;
 begin
   fillchar(FTexture,sizeof(FTexture),0);
   inherited Destroy;
+end;
+
+function TBGRAOpacityScanner.IsScanPutPixelsDefined: boolean;
+begin
+  Result:= true;
+end;
+
+procedure TBGRAOpacityScanner.ScanPutPixels(pdest: PBGRAPixel; count: integer;
+  mode: TDrawMode);
+var c: TBGRAPixel;
+    MemTex, ptex: pbgrapixel;
+
+  function GetNext: TBGRAPixel; inline;
+  begin
+    result := ptex^;
+    inc(ptex);
+    result.alpha := ApplyOpacity(result.alpha,FGlobalOpacity);
+  end;
+
+begin
+  getmem(MemTex, count*sizeof(TBGRAPixel));
+  ScannerPutPixels(FTexture,MemTex,count,dmSet);
+
+  ptex := MemTex;
+
+  case mode of
+    dmDrawWithTransparency:
+      while count > 0 do
+      begin
+        DrawPixelInlineWithAlphaCheck(pdest,GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmLinearBlend:
+      while count > 0 do
+      begin
+        FastBlendPixelInline(pdest,GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmXor:
+      while count > 0 do
+      begin
+        PDword(pdest)^ := PDword(pdest)^ xor DWord(GetNext);
+        inc(pdest);
+        dec(count);
+      end;
+    dmSet:
+      while count > 0 do
+      begin
+        pdest^ := GetNext;
+        inc(pdest);
+        dec(count);
+      end;
+    dmSetExceptTransparent:
+      while count > 0 do
+      begin
+        c := GetNext;
+        if c.alpha = 255 then pdest^ := c;
+        inc(pdest);
+        dec(count);
+      end;
+  end;
+
+  freemem(MemTex);
 end;
 
 procedure TBGRAOpacityScanner.ScanMoveTo(X, Y: Integer);

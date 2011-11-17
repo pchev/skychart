@@ -112,24 +112,26 @@ procedure BGRAReplace(var Destination: TBGRABitmap; Temp: TObject);
 
 implementation
 
-uses GraphType;
+uses GraphType, BGRABitmapTypes;
 
 var
-  bmp: TBGRABitmap;
+  tempBmp: TBGRABitmap;
 
 procedure BGRABitmapDraw(ACanvas: TCanvas; Rect: TRect; AData: Pointer;
   VerticalFlip: boolean; AWidth, AHeight: integer; Opaque: boolean);
 var
   LineOrder: TRawImageLineOrder;
 begin
+  if tempBmp = nil then
+    tempBmp := TBGRABitmap.Create;
   if VerticalFlip then
     LineOrder := riloBottomToTop
   else
     LineOrder := riloTopToBottom;
   if Opaque then
-    bmp.DataDrawOpaque(ACanvas, Rect, AData, LineOrder, AWidth, AHeight)
+    tempBmp.DataDrawOpaque(ACanvas, Rect, AData, LineOrder, AWidth, AHeight)
   else
-    bmp.DataDrawTransparent(ACanvas, Rect, AData, LineOrder, AWidth, AHeight);
+    tempBmp.DataDrawTransparent(ACanvas, Rect, AData, LineOrder, AWidth, AHeight);
 end;
 
 procedure BGRAReplace(var Destination: TBGRABitmap; Temp: TObject);
@@ -140,13 +142,13 @@ end;
 
 initialization
 
-  //this variable is created to access appropriate functions
+  //this variable is assigned to access appropriate functions
   //depending on the platform
-  bmp := TBGRABitmap.Create(0, 0);
+  BGRABitmapFactory := TBGRABitmap;
 
 finalization
 
-  bmp.Free;
+  tempBmp.Free;
 
 end.
 

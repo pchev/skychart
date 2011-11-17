@@ -150,7 +150,8 @@ var
   curvedSeg,optimised: boolean;
   ec: TExpandedPixel;
   c2:TBGRAPixel;
-  ScanNextFunc: function():TBGRAPixel of object;
+  MemScanCopy,pscan: pbgrapixel;
+  ScanNextPixelProc: TScanNextPixelFunction;
   temp: Single;
 
   function GetYScan(num: integer): single; inline;
@@ -216,7 +217,15 @@ begin
   ec := GammaExpansion(c);
   c2 := c;
 
-  if scan <> nil then ScanNextFunc := @scan.ScanNextPixel;
+  MemScanCopy := nil;
+  ScanNextPixelProc := nil;
+  if scan <> nil then
+  begin
+    if scan.IsScanPutPixelsDefined then
+      GetMem(MemScanCopy,(maxx-minx+1)*sizeof(TBGRAPixel));
+    ScanNextPixelProc := @scan.ScanNextPixel;
+  end;
+
   curvedSeg := shapeInfo.SegmentsCurved;
   if not curvedSeg then
   begin
@@ -305,6 +314,7 @@ begin
       {$i renderdensity256.inc}
   end;
 
+  freemem(MemScanCopy);
   shapeInfo.FreeIntersectionArray(inter);
 
   if not curvedSeg then
