@@ -1,12 +1,11 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="4">
+  <Package Version="3">
     <PathDelim Value="\"/>
     <Name Value="bgrabitmappack"/>
-    <AddToProjectUsesSection Value="True"/>
     <Author Value="Circular"/>
     <CompilerOptions>
-      <Version Value="10"/>
+      <Version Value="9"/>
       <PathDelim Value="\"/>
       <SearchPaths>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\$(FPCVer)"/>
@@ -18,9 +17,7 @@
       </Parsing>
       <CodeGeneration>
         <Optimizations>
-          <VariablesInRegisters Value="True"/>
-          <UncertainOptimizations Value="True"/>
-          <OptimizationLevel Value="3"/>
+          <OptimizationLevel Value="0"/>
         </Optimizations>
       </CodeGeneration>
       <Linking>
@@ -37,8 +34,8 @@
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="4" Minor="7"/>
-    <Files Count="32">
+    <Version Major="5" Minor="2"/>
+    <Files Count="33">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -167,6 +164,10 @@
         <Filename Value="bgratextfx.pas"/>
         <UnitName Value="BGRATextFX"/>
       </Item32>
+      <Item33>
+        <Filename Value="bgraphongtypes.pas"/>
+        <UnitName Value="BGRAPhongTypes"/>
+      </Item33>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">

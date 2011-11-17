@@ -85,6 +85,22 @@ type
     function ScanAt(X, Y: Single): TBGRAPixel; override;
   end;
 
+  { TBGRAScannerOffset }
+
+  TBGRAScannerOffset = class(TBGRACustomScanner)
+  protected
+    FSource: IBGRAScanner;
+    FOffset: TPoint;
+  public
+    constructor Create(ASource: IBGRAScanner; AOffset: TPoint);
+    destructor Destroy; override;
+    procedure ScanMoveTo(X, Y: Integer); override;
+    function ScanNextPixel: TBGRAPixel; override;
+    function ScanAt(X, Y: Single): TBGRAPixel; override;
+    function IsScanPutPixelsDefined: boolean; override;
+    procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode); override;
+  end;
+
 
 {---------------------- Affine matrix functions -------------------}
 //fill a matrix
@@ -293,6 +309,46 @@ begin
   result := PointF(M[1,1],M[2,1])*PointF(M[1,2],M[2,2]) = 0;
 end;
 
+{ TBGRAScannerOffset }
+
+constructor TBGRAScannerOffset.Create(ASource: IBGRAScanner; AOffset: TPoint);
+begin
+  FSource := ASource;
+  FOffset := AOffset;
+end;
+
+destructor TBGRAScannerOffset.Destroy;
+begin
+  fillchar(FSource,sizeof(FSource),0);
+  inherited Destroy;
+end;
+
+procedure TBGRAScannerOffset.ScanMoveTo(X, Y: Integer);
+begin
+  FSource.ScanMoveTo(X-FOffset.X,Y-FOffset.Y);
+end;
+
+function TBGRAScannerOffset.ScanNextPixel: TBGRAPixel;
+begin
+  Result:=FSource.ScanNextPixel;
+end;
+
+function TBGRAScannerOffset.ScanAt(X, Y: Single): TBGRAPixel;
+begin
+  Result:=FSource.ScanAt(X, Y);
+end;
+
+function TBGRAScannerOffset.IsScanPutPixelsDefined: boolean;
+begin
+  Result:=FSource.IsScanPutPixelsDefined;
+end;
+
+procedure TBGRAScannerOffset.ScanPutPixels(pdest: PBGRAPixel; count: integer;
+  mode: TDrawMode);
+begin
+  FSource.ScanPutPixels(pdest, count, mode);
+end;
+
 { TBGRABitmapScanner }
 
 constructor TBGRABitmapScanner.Create(ASource: TBGRACustomBitmap; ARepeatX,
@@ -346,7 +402,11 @@ begin
     if FCurX = FSource.Width then FCurX := 0;
   end else
   begin
-    if (FCurX >= FSource.Width) then exit;
+    if (FCurX >= FSource.Width) then
+    begin
+      result := BGRAPixelTransparent;
+      exit;
+    end;
     if FCurX < 0 then
       result := BGRAPixelTransparent
     else

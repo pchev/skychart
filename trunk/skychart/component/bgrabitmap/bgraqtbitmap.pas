@@ -58,25 +58,8 @@ uses BGRABitmapTypes, LCLType,
 
 procedure TBGRAQtBitmap.SlowDrawTransparent(ABitmap: TBGRADefaultBitmap;
   ACanvas: TCanvas; ARect: TRect);
-var
-  background, temp: TBGRACustomBitmap;
-  w, h: integer;
-
 begin
-  w := ARect.Right - ARect.Left;
-  h := ARect.Bottom - ARect.Top;
-  background := NewBitmap(w, h);
-  background.GetImageFromCanvas(ACanvas, ARect.Left, ARect.Top);
-  if (ABitmap.Width = w) and (ABitmap.Height = h) then
-    background.PutImage(0, 0, ABitmap, dmDrawWithTransparency)
-  else
-  begin
-    temp := ABitmap.Resample(w, h, rmSimpleStretch);
-    background.PutImage(0, 0, temp, dmDrawWithTransparency);
-    temp.Free;
-  end;
-  background.Draw(ACanvas, ARect.Left, ARect.Top, True);
-  background.Free;
+  ACanvas.Draw(0,0, ABitmap.Bitmap);
 end;
 
 procedure TBGRAQtBitmap.DataDrawTransparent(ACanvas: TCanvas; Rect: TRect;

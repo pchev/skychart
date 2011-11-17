@@ -247,6 +247,8 @@ type
   TBGRACanvasPattern2D = class(TBGRACanvasTextureProvider2D)
   protected
     scanner: TBGRACustomScanner;
+    foreignInterface: IBGRAScanner;
+    ownScanner: boolean;
   public
     function getTexture: IBGRAScanner; override;
     constructor Create(source: TBGRACustomBitmap; repeatX,repeatY: boolean; Origin, HAxis, VAxis: TPointF);
@@ -258,7 +260,10 @@ type
 
 function TBGRACanvasPattern2D.GetTexture: IBGRAScanner;
 begin
-  result := scanner;
+  if ownScanner then
+    result := scanner
+  else
+    result := foreignInterface;
 end;
 
 constructor TBGRACanvasPattern2D.Create(source: TBGRACustomBitmap; repeatX,
@@ -270,12 +275,23 @@ begin
      (abs(Origin.Y-round(Origin.Y)) < 1e-6) and
      (HAxis = Origin+PointF(1,0)) and
      (VAxis = Origin+PointF(0,1)) then
-    scanner := TBGRABitmapScanner.Create(source,repeatX,repeatY,Point(round(Origin.X),round(Origin.Y)))
+  begin
+    if (round(Origin.X)=0) and (round(Origin.Y)=0) and repeatX and repeatY then
+    begin
+      foreignInterface := source;
+      ownScanner:= false;
+    end else
+    begin
+      scanner := TBGRABitmapScanner.Create(source,repeatX,repeatY,Point(round(Origin.X),round(Origin.Y)));
+      ownScanner := true;
+    end;
+  end
   else
   begin
     affine := TBGRAAffineBitmapTransform.Create(source,repeatX,repeatY);
     affine.Fit(Origin,HAxis,VAxis);
     scanner := affine;
+    ownScanner:= true;
   end;
 end;
 
@@ -284,15 +300,37 @@ constructor TBGRACanvasPattern2D.Create(source: IBGRAScanner;
 var
   affine : TBGRAAffineScannerTransform;
 begin
-  affine := TBGRAAffineScannerTransform.Create(source);
-  affine.Matrix := transformation;
-  affine.Invert;
-  scanner := affine;
+  if (abs(transformation[1,1]-1) < 1e-6) and
+     (abs(transformation[2,2]-1) < 1e-6) and
+     (abs(transformation[1,2]) < 1e-6) and
+     (abs(transformation[2,1]) < 1e-6) and
+     (abs(transformation[1,3]-round(transformation[1,3])) < 1e-6) and
+     (abs(transformation[2,3]-round(transformation[2,3])) < 1e-6) then
+  begin
+    if (abs(transformation[1,3]) < 1e-6) and
+      (abs(transformation[2,3]) < 1e-6) then
+    begin
+      foreignInterface := source;
+      ownScanner := false;
+    end else
+    begin
+     scanner := TBGRAScannerOffset.Create(source,Point(round(transformation[1,3]),round(transformation[2,3])));
+     ownScanner := true;
+    end;
+  end else
+  begin
+    affine := TBGRAAffineScannerTransform.Create(source);
+    affine.Matrix := transformation;
+    affine.Invert;
+    scanner := affine;
+    ownScanner:= true;
+  end;
 end;
 
 destructor TBGRACanvasPattern2D.Destroy;
 begin
-  FreeAndNil(scanner);
+  fillchar(foreignInterface,sizeof(foreignInterface),0);
+  if ownScanner then FreeAndNil(scanner);
   inherited Destroy;
 end;
 
@@ -1001,8 +1039,11 @@ end;
 
 function TBGRACanvas2D.createPattern(texture: IBGRAScanner
   ): IBGRACanvasTextureProvider2D;
+var
+  tempTransform: TAffineMatrix;
 begin
-  result := TBGRACanvasPattern2D.Create(texture,currentState.matrix);
+  tempTransform := AffineMatrixTranslation(FCanvasOffset.X+0.5,FCanvasOffset.Y+0.5)*currentState.matrix;
+  result := TBGRACanvasPattern2D.Create(texture,tempTransform);
 end;
 
 procedure TBGRACanvas2D.fillRect(x, y, w, h: single);

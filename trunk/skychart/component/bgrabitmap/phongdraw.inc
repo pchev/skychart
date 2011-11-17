@@ -38,7 +38,9 @@ var
 {$ifdef PARAM_SIMPLECOLOR}
   eColor: TExpandedPixel;
 {$else}
-  pcolormap: PBGRAPixel;
+  {$ifndef PARAM_SCANNER}
+    pcolormap: PBGRAPixel;
+  {$endif}
 {$endif}
 
   {$hints off}
@@ -49,7 +51,11 @@ var
     {$endif}
   begin
     {$ifndef PARAM_SIMPLECOLOR}
-      eColor := GammaExpansion(pcolormap^);
+      {$ifdef PARAM_SCANNER}
+        eColor := GammaExpansion(ColorScan.ScanNextPixel);
+      {$else}
+        eColor := GammaExpansion(pcolormap^);
+      {$endif}
     {$endif}
     Alpha := ApplyOpacity(Alpha, eColor.alpha shr 8);
     ec.red := (eColor.Red*DiffuseLight+eLight.Red*SpecularLight+PhongLightPrecisionDiv2) shr PhongLightPrecisionSh;
@@ -69,8 +75,10 @@ var
 
 begin
   {$ifndef PARAM_SIMPLECOLOR}
-    if (colorMap.Width < map.width) or (colorMap.Height < map.height) then
-      raise Exception.Create('Dimension mismatch');
+    {$ifndef PARAM_SCANNER}
+      if (colorMap.Width < map.width) or (colorMap.Height < map.height) then
+        raise Exception.Create('Dimension mismatch');
+    {$endif}
   {$endif}
 
   if (map.width = 0) or (map.Height = 0) then exit;
@@ -123,7 +131,11 @@ begin
     mcRight := pmap^;
     pdest := dest.ScanLine[y+ofsY]+ofsX+minx;
     {$ifndef PARAM_SIMPLECOLOR}
-      pcolormap := ColorMap.ScanLine[y];
+      {$ifdef PARAM_SCANNER}
+        ColorScan.ScanMoveTo(OfsX+minx,OfsY+Y);
+      {$else}
+        pcolormap := ColorMap.ScanLine[y];
+      {$endif}
     {$endif}
     for x := minx to maxx do
     begin
@@ -136,7 +148,11 @@ begin
       if mc.alpha = 0 then
       begin
         {$ifndef PARAM_SIMPLECOLOR}
-        inc(pcolormap);
+          {$ifdef PARAM_SCANNER}
+            ColorScan.ScanNextPixel;
+          {$else}
+            inc(pcolormap);
+          {$endif}
         {$endif}
         inc(pdest);
         continue;
@@ -361,7 +377,9 @@ begin
 
       DrawPixelInlineWithAlphaCheck(pdest, ComputePixel(x,y,Ic,Iw,mc.alpha));
       {$ifndef PARAM_SIMPLECOLOR}
-        inc(pcolormap);
+        {$ifndef PARAM_SCANNER}
+          inc(pcolormap);
+        {$endif}
       {$endif}
       inc(pdest); //go to next pixel
     end;
@@ -370,4 +388,5 @@ end;
 
 {$undef PARAM_PHONGSSE}
 {$undef PARAM_SIMPLECOLOR}
+{$undef PARAM_SCANNER}
 

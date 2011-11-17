@@ -35,9 +35,6 @@ uses
   Classes, SysUtils, Types, FPImage, Graphics, BGRABitmapTypes, GraphType, FPImgCanv, BGRACanvas, BGRACanvas2D, FPWritePng;
 
 type
-  TBGRADefaultBitmap = class;
-  TBGRABitmapAny     = class of TBGRADefaultBitmap;  //used to create instances of the same type (see NewBitmap)
-
   { TBGRADefaultBitmap }
 
   TBGRADefaultBitmap = class(TBGRACustomBitmap)
@@ -146,6 +143,7 @@ type
     function GetAverageColor: TColor; override;
     function GetAveragePixel: TBGRAPixel; override;
     function CreateAdaptedPngWriter: TFPWriterPNG;
+    function LoadAsBmp32(Str: TStream): boolean; override;
 
     //drawing
     function GetCustomPenStyle: TBGRAPenStyle; override;
@@ -156,6 +154,9 @@ type
     procedure UpdateFont;
     function GetFontHeight: integer; override;
     procedure SetFontHeight(AHeight: integer); override;
+    function GetFontFullHeight: integer; override;
+    procedure SetFontFullHeight(AHeight: integer); override;
+    function GetFontPixelMetric: TFontPixelMetric; override;
 
     function GetClipRect: TRect; override;
     procedure SetClipRect(const AValue: TRect); override;
@@ -171,12 +172,12 @@ type
     procedure SetSize(AWidth, AHeight: integer); override;
 
     {Constructors}
-    constructor Create;
-    constructor Create(ABitmap: TBitmap);
-    constructor Create(AWidth, AHeight: integer; Color: TColor);
-    constructor Create(AWidth, AHeight: integer; Color: TBGRAPixel);
-    constructor Create(AFilename: string);
-    constructor Create(AStream: TStream);
+    constructor Create; override;
+    constructor Create(ABitmap: TBitmap); override;
+    constructor Create(AWidth, AHeight: integer; Color: TColor); override;
+    constructor Create(AWidth, AHeight: integer; Color: TBGRAPixel); override;
+    constructor Create(AFilename: string); override;
+    constructor Create(AStream: TStream); override;
     destructor Destroy; override;
 
     {Loading functions}
@@ -189,6 +190,9 @@ type
     procedure SaveToStreamAsPng(Str: TStream); override;
     procedure Assign(ABitmap: TBitmap); override; overload;
     procedure Assign(MemBitmap: TBGRACustomBitmap);override; overload;
+    procedure Serialize(AStream: TStream); override;
+    procedure Deserialize(AStream: TStream); override;
+    class procedure SerializeEmpty(AStream: TStream);
 
     {Pixel functions}
     function PtInClipRect(x, y: integer): boolean; inline;
@@ -329,10 +333,15 @@ type
 
     {Filling}
     procedure NoClip; override;
+    procedure Fill(texture: IBGRAScanner; mode: TDrawMode); override;
     procedure Fill(texture: IBGRAScanner); override;
     procedure Fill(c: TBGRAPixel; start, Count: integer); override;
     procedure DrawPixels(c: TBGRAPixel; start, Count: integer); override;
     procedure AlphaFill(alpha: byte; start, Count: integer); override;
+    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel); override;
+    procedure FillMask(x,y: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner); override;
+    procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; color: TBGRAPixel; ARGBOrder: boolean = true); override;
+    procedure FillClearTypeMask(x,y: integer; xThird: integer; AMask: TBGRACustomBitmap; texture: IBGRAScanner; ARGBOrder: boolean = true); override;
     procedure ReplaceColor(before, after: TColor); override;
     procedure ReplaceColor(before, after: TBGRAPixel); override;
     procedure ReplaceTransparent(after: TBGRAPixel); override;
@@ -370,6 +379,7 @@ type
     procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap; operation: TBlendOperation); override;
 
     function GetPart(ARect: TRect): TBGRACustomBitmap; override;
+    function GetPtrBitmap(Top,Bottom: Integer): TBGRACustomBitmap; override;
     function Duplicate(DuplicateProperties: Boolean = False) : TBGRACustomBitmap; override;
     procedure CopyPropertiesTo(ABitmap: TBGRADefaultBitmap);
     function Equals(comp: TBGRACustomBitmap): boolean; override;
@@ -418,7 +428,6 @@ type
     property Canvas2D: TBGRACanvas2D read GetCanvas2D;
   end;
 
-type
   { TBGRAPtrBitmap }
 
   TBGRAPtrBitmap = class(TBGRADefaultBitmap)
@@ -442,7 +451,7 @@ procedure BGRAGradientFill(bmp: TBGRACustomBitmap; x, y, x2, y2: integer;
 implementation
 
 uses Math, LCLIntf, LCLType,
-  BGRABlend, BGRAFilters, BGRAPen, BGRAText, BGRAGradientScanner,
+  BGRABlend, BGRAFilters, BGRAPen, BGRAText, BGRATextFX, BGRAGradientScanner,
   BGRAResample, BGRATransform, BGRAPolygon, BGRAPolygonAliased,
   BGRAPath, FPReadPcx, FPWritePcx, FPReadXPM, FPWriteXPM;
 
@@ -558,11 +567,51 @@ begin
     FFont.Height := FFontHeight * FFontHeightSign;
   if FFont.Orientation <> FontOrientation then
     FFont.Orientation := FontOrientation;
+  if FontQuality = fqSystemClearType then
+    FFont.Quality := fqCleartype
+  else
+    FFont.Quality := FontDefaultQuality;
 end;
 
 procedure TBGRADefaultBitmap.SetFontHeight(AHeight: integer);
 begin
   FFontHeight := AHeight;
+end;
+
+function TBGRADefaultBitmap.GetFontFullHeight: integer;
+begin
+  if FontHeight < 0 then
+    result := -FontHeight
+  else
+    result := TextSize('Hg').cy;
+end;
+
+procedure TBGRADefaultBitmap.SetFontFullHeight(AHeight: integer);
+begin
+  if AHeight > 0 then
+    FontHeight := -AHeight
+  else
+    FontHeight := 1;
+end;
+
+function TBGRADefaultBitmap.GetFontPixelMetric: TFontPixelMetric;
+var fxFont: TFont;
+begin
+  UpdateFont;
+  if FontQuality = fqSystem then
+    result := BGRAText.GetFontPixelMetric(FFont)
+  else
+  begin
+    FxFont := TFont.Create;
+    FxFont.Assign(FFont);
+    FxFont.Height := fxFont.Height*FontAntialiasingLevel;
+    Result:= BGRAText.GetFontPixelMetric(FxFont);
+    if Result.Baseline <> -1 then Result.Baseline:= round((Result.Baseline-1)/FontAntialiasingLevel);
+    if Result.CapLine <> -1 then Result.CapLine:= round(Result.CapLine/FontAntialiasingLevel);
+    if Result.DescentLine <> -1 then Result.DescentLine:= round((Result.DescentLine-1)/FontAntialiasingLevel);
+    if Result.Lineheight <> -1 then Result.Lineheight:= round(Result.Lineheight/FontAntialiasingLevel);
+    if Result.xLine <> -1 then Result.xLine:= round(Result.xLine/FontAntialiasingLevel);
+  end;
 end;
 
 { Get scanline without checking bounds nor updated from TBitmap }
@@ -771,6 +820,37 @@ begin
   PutImage(0, 0, MemBitmap, dmSet);
 end;
 
+procedure TBGRADefaultBitmap.Serialize(AStream: TStream);
+var lWidth,lHeight: integer;
+begin
+  lWidth := NtoLE(Width);
+  lHeight := NtoLE(Height);
+  AStream.Write(lWidth,sizeof(lWidth));
+  AStream.Write(lHeight,sizeof(lHeight));
+  AStream.Write(Data^, NbPixels*sizeof(TBGRAPixel));
+end;
+
+{$hints off}
+procedure TBGRADefaultBitmap.Deserialize(AStream: TStream);
+var lWidth,lHeight: integer;
+begin
+  AStream.Read(lWidth,sizeof(lWidth));
+  AStream.Read(lHeight,sizeof(lHeight));
+  lWidth := LEtoN(lWidth);
+  lHeight := LEtoN(lHeight);
+  SetSize(lWidth,lHeight);
+  AStream.Read(Data^, NbPixels*sizeof(TBGRAPixel));
+end;
+{$hints on}
+
+class procedure TBGRADefaultBitmap.SerializeEmpty(AStream: TStream);
+var zero: integer;
+begin
+  zero := 0;
+  AStream.Write(zero,sizeof(zero));
+  AStream.Write(zero,sizeof(zero));
+end;
+
 procedure TBGRADefaultBitmap.LoadFromFile(const filename: string);
 var
   OldDrawMode: TDrawMode;
@@ -830,6 +910,11 @@ end;
 procedure TBGRADefaultBitmap.NoClip;
 begin
   FClipRect := rect(0,0,FWidth,FHeight);
+end;
+
+procedure TBGRADefaultBitmap.Fill(texture: IBGRAScanner; mode: TDrawMode);
+begin
+  FillRect(FClipRect.Left,FClipRect.Top,FClipRect.Right,FClipRect.Bottom,texture,mode);
 end;
 
 function TBGRADefaultBitmap.GetClipRect: TRect;
@@ -1344,8 +1429,6 @@ end;
 
 { Initialize properties }
 procedure TBGRADefaultBitmap.Init;
-var
-  HeightP1, HeightM1: integer;
 begin
   FRefCount  := 1;
   FBitmap    := nil;
@@ -1366,15 +1449,7 @@ begin
   FontStyle := [];
   FontAntialias := False;
   FFontHeight := 20;
-  FFontHeightSign := 1;
-  HeightP1  := TextSize('Hg').cy;
-  FFontHeightSign := -1;
-  HeightM1  := TextSize('Hg').cy;
-
-  if HeightP1 > HeightM1 then
-    FFontHeightSign := 1
-  else
-    FFontHeightSign := -1;
+  FFontHeightSign := GetFontHeightSign(FFont);
 
   PenStyle := psSolid;
   LineCap := pecRound;
@@ -2524,48 +2599,60 @@ procedure TBGRADefaultBitmap.TextOutAngle(x, y, orientation: integer;
   s: string; c: TBGRAPixel; align: TAlignment);
 begin
   UpdateFont;
-  BGRAText.BGRATextOutAngle(self,FFont,FontAntialias,x,y,orientation,s,c,nil,align);
+  BGRAText.BGRATextOutAngle(self,FFont,FontQuality,x,y,orientation,s,c,nil,align);
 end;
 
 procedure TBGRADefaultBitmap.TextOutAngle(x, y, orientation: integer;
   s: string; texture: IBGRAScanner; align: TAlignment);
 begin
   UpdateFont;
-  BGRAText.BGRATextOutAngle(self,FFont,FontAntialias,x,y,orientation,s,BGRAPixelTransparent,texture,align);
+  BGRAText.BGRATextOutAngle(self,FFont,FontQuality,x,y,orientation,s,BGRAPixelTransparent,texture,align);
 end;
 
 procedure TBGRADefaultBitmap.TextOut(x, y: integer; s: string;
   texture: IBGRAScanner; align: TAlignment);
 begin
   UpdateFont;
-  BGRAText.BGRATextOut(self,FFont,FontAntialias,x,y,s,BGRAPixelTransparent,texture,align);
+
+  if (FontQuality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB]) and (FFont.Orientation mod 3600 = 0) then
+    BGRATextFX.BGRATextOutImproveReadability(self,FFont,x,y,s,BGRAPixelTransparent,texture,align,
+     FontQuality in[fqFineClearTypeRGB,fqFineClearTypeBGR], FontQuality = fqFineClearTypeRGB) else
+
+    BGRAText.BGRATextOut(self,FFont,FontQuality,x,y,s,BGRAPixelTransparent,texture,align);
 end;
 
 procedure TBGRADefaultBitmap.TextOut(x, y: integer; s: string;
   c: TBGRAPixel; align: TAlignment);
 begin
   UpdateFont;
-  BGRAText.BGRATextOut(self,FFont,FontAntialias,x,y,s,c,nil,align);
+
+  if (FontQuality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB]) and (FFont.Orientation mod 3600 = 0) then
+    BGRATextFX.BGRATextOutImproveReadability(self,FFont,x,y,s,c,nil,align,
+    FontQuality in[fqFineClearTypeRGB,fqFineClearTypeBGR], FontQuality = fqFineClearTypeRGB) else
+
+    BGRAText.BGRATextOut(self,FFont,FontQuality,x,y,s,c,nil,align);
 end;
 
 procedure TBGRADefaultBitmap.TextRect(ARect: TRect; x, y: integer;
   s: string; style: TTextStyle; c: TBGRAPixel);
 begin
   UpdateFont;
-  BGRAText.BGRATextRect(self,FFont,FontAntialias,ARect,x,y,s,style,c,nil);
+  BGRAText.BGRATextRect(self,FFont,FontQuality,ARect,x,y,s,style,c,nil);
 end;
 
 procedure TBGRADefaultBitmap.TextRect(ARect: TRect; x, y: integer; s: string;
   style: TTextStyle; texture: IBGRAScanner);
 begin
   UpdateFont;
-  BGRAText.BGRATextRect(self,FFont,FontAntialias,ARect,x,y,s,style,BGRAPixelTransparent,texture);
+  BGRAText.BGRATextRect(self,FFont,FontQuality,ARect,x,y,s,style,BGRAPixelTransparent,texture);
 end;
 
 function TBGRADefaultBitmap.TextSize(s: string): TSize;
 begin
   UpdateFont;
-  result := BGRAText.BGRATextSize(FFont,FontAntialias,s);
+  result := BGRAText.BGRATextSize(FFont,FontQuality,s,FontAntialiasingLevel);
+  if (result.cy >= 24) and FontAntialias then
+    result := BGRAText.BGRATextSize(FFont,FontQuality,s,4);
 end;
 
 {---------------------------- Curves ----------------------------------------}
@@ -2717,6 +2804,40 @@ begin
 
   AlphaFillInline(Data + start, alpha, Count);
   InvalidateBitmap;
+end;
+
+procedure TBGRADefaultBitmap.FillMask(x, y: integer; AMask: TBGRACustomBitmap;
+  color: TBGRAPixel);
+var
+  scan: TBGRACustomScanner;
+begin
+  if (AMask = nil) or (color.alpha = 0) then exit;
+  scan := TBGRASolidColorMaskScanner.Create(AMask,Point(-X,-Y),color);
+  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,dmDrawWithTransparency);
+  scan.Free;
+end;
+
+procedure TBGRADefaultBitmap.FillMask(x, y: integer; AMask: TBGRACustomBitmap;
+  texture: IBGRAScanner);
+var
+  scan: TBGRACustomScanner;
+begin
+  if AMask = nil then exit;
+  scan := TBGRATextureMaskScanner.Create(AMask,Point(-X,-Y),texture);
+  self.FillRect(X,Y,X+AMask.Width,Y+AMask.Height,scan,dmDrawWithTransparency);
+  scan.Free;
+end;
+
+procedure TBGRADefaultBitmap.FillClearTypeMask(x, y: integer; xThird: integer;
+  AMask: TBGRACustomBitmap; color: TBGRAPixel; ARGBOrder: boolean);
+begin
+  BGRAFillClearTypeMask(self,x, y, xThird, AMask, color, nil, ARGBOrder);
+end;
+
+procedure TBGRADefaultBitmap.FillClearTypeMask(x, y: integer; xThird: integer;
+  AMask: TBGRACustomBitmap; texture: IBGRAScanner; ARGBOrder: boolean);
+begin
+  BGRAFillClearTypeMask(self,x, y, xThird, AMask, BGRAPixelTransparent, texture, ARGBOrder);
 end;
 
 { Replace color without taking alpha channel into account }
@@ -3300,11 +3421,11 @@ begin
     end;
     dmXor:
     begin
-      Dec(delta_source, copycount);
-      Dec(delta_dest, copycount);
-      for yb := minyb to maxyb do
+      if AOpacity <> 255 then
       begin
-        if AOpacity <> 255 then
+        Dec(delta_source, copycount);
+        Dec(delta_dest, copycount);
+        for yb := minyb to maxyb do
         begin
           for i := copycount - 1 downto 0 do
           begin
@@ -3312,15 +3433,17 @@ begin
             Inc(pdest);
             Inc(psource);
           end;
-        end else
-          for i := copycount - 1 downto 0 do
-          begin
-            PDWord(pdest)^ := PDWord(pdest)^ xor PDword(psource)^;
-            Inc(pdest);
-            Inc(psource);
-          end;
-        Inc(psource, delta_source);
-        Inc(pdest, delta_dest);
+          Inc(psource, delta_source);
+          Inc(pdest, delta_dest);
+        end;
+      end else
+      begin
+        for yb := minyb to maxyb do
+        begin
+          XorPixels(pdest, psource, copycount);
+          Inc(psource, delta_source);
+          Inc(pdest, delta_dest);
+        end;
       end;
       InvalidateBitmap;
     end;
@@ -3675,6 +3798,48 @@ begin
   result.UseAlpha := HasTransparentPixels;
   result.WordSized := false;
 end;
+
+{$hints off}
+function TBGRADefaultBitmap.LoadAsBmp32(Str: TStream): boolean;
+var OldPos: int64;
+    fileHeader: TBitmapFileHeader;
+    infoHeader: TBitmapInfoHeader;
+    dataSize: integer;
+begin
+  OldPos := Str.Position;
+  result := false;
+  try
+    if Str.Read(fileHeader,sizeof(fileHeader)) <> sizeof(fileHeader) then
+      raise exception.Create('Inuable to read file header');
+    if fileHeader.bfType = $4D42 then
+    begin
+      if Str.Read(infoHeader,sizeof(infoHeader)) <> sizeof(infoHeader) then
+        raise exception.Create('Inuable to read info header');
+
+      if (infoHeader.biPlanes = 1) and (infoHeader.biBitCount = 32) and (infoHeader.biCompression = 0) then
+      begin
+        SetSize(infoHeader.biWidth,infoHeader.biHeight);
+        Str.Position := OldPos+fileHeader.bfOffBits;
+        dataSize := NbPixels*sizeof(TBGRAPixel);
+        if Str.Read(Data^, dataSize) <> dataSize then
+        Begin
+          SetSize(0,0);
+          raise exception.Create('Unable to read data');
+        end;
+        result := true;
+      end;
+    end;
+
+  except
+    on ex:exception do
+    begin
+
+    end;
+  end;
+  Str.Position := OldPos;
+
+end;
+{$hints on}
 
 procedure TBGRADefaultBitmap.SetCanvasOpacity(AValue: byte);
 begin
@@ -4138,6 +4303,31 @@ begin
     curyin := 0;
     Dec(heightleft, copyheight);
     Inc(ydest, Height);
+  end;
+end;
+
+function TBGRADefaultBitmap.GetPtrBitmap(Top, Bottom: Integer
+  ): TBGRACustomBitmap;
+var temp: integer;
+    ptrbmp: TBGRAPtrBitmap;
+begin
+  if Top > Bottom then
+  begin
+    temp := Top;
+    Top := Bottom;
+    Bottom := Temp;
+  end;
+  if Top < 0 then Top := 0;
+  if Bottom > Height then Bottom := Height;
+  if Top >= Bottom then
+    result := nil
+  else
+  begin
+    if LineOrder = riloTopToBottom then
+      ptrbmp := TBGRAPtrBitmap.Create(Width,Bottom-Top,ScanLine[Top]) else
+      ptrbmp := TBGRAPtrBitmap.Create(Width,Bottom-Top,ScanLine[Bottom-1]);
+    ptrbmp.LineOrder := LineOrder;
+    result := ptrbmp;
   end;
 end;
 

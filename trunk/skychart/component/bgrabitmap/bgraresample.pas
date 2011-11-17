@@ -218,6 +218,223 @@ begin
   Result.InvalidateBitmap;
 end;
 
+function SimpleStretchSmallerFactor2(source: TBGRACustomBitmap): TBGRACustomBitmap;
+var xb,yb: integer;
+    pdest: PBGRAPixel;
+    psrc1,psrc2: PBGRAPixel;
+    asum: integer;
+    a1,a2,a3,a4: integer;
+    newWidth,newHeight: integer;
+begin
+  newWidth := source.Width div 2;
+  newHeight := source.Height div 2;
+  result := source.NewBitmap(newWidth,newHeight);
+  for yb := 0 to newHeight-1 do
+  begin
+    pdest := result.ScanLine[yb];
+    psrc1 := source.Scanline[yb shl 1];
+    psrc2 := source.Scanline[yb shl 1+1];
+    for xb := newWidth-1 downto 0 do
+    begin
+      asum := psrc1^.alpha + (psrc1+1)^.alpha + psrc2^.alpha + (psrc2+1)^.alpha;
+      if asum = 0 then
+        pdest^ := BGRAPixelTransparent
+      else if asum = 1020 then
+      begin
+        pdest^.alpha := 255;
+        pdest^.red := (psrc1^.red + (psrc1+1)^.red + psrc2^.red + (psrc2+1)^.red + 2) shr 2;
+        pdest^.green := (psrc1^.green + (psrc1+1)^.green + psrc2^.green + (psrc2+1)^.green+ 2) shr 2;
+        pdest^.blue := (psrc1^.blue + (psrc1+1)^.blue + psrc2^.blue + (psrc2+1)^.blue+ 2) shr 2;
+      end else
+      begin
+        pdest^.alpha := asum shr 2;
+        a1 := psrc1^.alpha;
+        a2 := (psrc1+1)^.alpha;
+        a3 := psrc2^.alpha;
+        a4 := (psrc2+1)^.alpha;
+        pdest^.red := (psrc1^.red*a1 + (psrc1+1)^.red*a2 + psrc2^.red*a3 + (psrc2+1)^.red*a4 + (asum shr 1)) div asum;
+        pdest^.green := (psrc1^.green*a1 + (psrc1+1)^.green*a2 + psrc2^.green*a3 + (psrc2+1)^.green*a4+ (asum shr 1)) div asum;
+        pdest^.blue := (psrc1^.blue*a1 + (psrc1+1)^.blue*a2 + psrc2^.blue*a3 + (psrc2+1)^.blue*a4+ (asum shr 1)) div asum;
+      end;
+      inc(psrc1,2);
+      inc(psrc2,2);
+      inc(pdest);
+    end;
+  end;
+end;
+
+function SimpleStretchSmallerFactor4(source: TBGRACustomBitmap): TBGRACustomBitmap;
+var xb,yb: integer;
+    pdest: PBGRAPixel;
+    psrc1,psrc2,psrc3,psrc4: PBGRAPixel;
+    asum: integer;
+    a1,a2,a3,a4,
+    a5,a6,a7,a8,
+    a9,a10,a11,a12,
+    a13,a14,a15,a16: integer;
+    newWidth,newHeight: integer;
+begin
+  newWidth := source.Width div 4;
+  newHeight := source.Height div 4;
+  result := source.NewBitmap(newWidth,newHeight);
+  for yb := 0 to newHeight-1 do
+  begin
+    pdest := result.ScanLine[yb];
+    psrc1 := source.Scanline[yb shl 2];
+    psrc2 := source.Scanline[yb shl 2+1];
+    psrc3 := source.Scanline[yb shl 2+2];
+    psrc4 := source.Scanline[yb shl 2+3];
+    for xb := newWidth-1 downto 0 do
+    begin
+      asum := psrc1^.alpha + (psrc1+1)^.alpha + (psrc1+2)^.alpha + (psrc1+3)^.alpha +
+              psrc2^.alpha + (psrc2+1)^.alpha + (psrc2+2)^.alpha + (psrc2+3)^.alpha +
+              psrc3^.alpha + (psrc3+1)^.alpha + (psrc3+2)^.alpha + (psrc3+3)^.alpha +
+              psrc4^.alpha + (psrc4+1)^.alpha + (psrc4+2)^.alpha + (psrc4+3)^.alpha;
+      if asum = 0 then
+        pdest^ := BGRAPixelTransparent
+      else if asum = 4080 then
+      begin
+        pdest^.alpha := 255;
+        pdest^.red := (psrc1^.red + (psrc1+1)^.red + (psrc1+2)^.red + (psrc1+3)^.red +
+              psrc2^.red + (psrc2+1)^.red + (psrc2+2)^.red + (psrc2+3)^.red +
+              psrc3^.red + (psrc3+1)^.red + (psrc3+2)^.red + (psrc3+3)^.red +
+              psrc4^.red + (psrc4+1)^.red + (psrc4+2)^.red + (psrc4+3)^.red + 8) shr 4;
+        pdest^.green := (psrc1^.green + (psrc1+1)^.green + (psrc1+2)^.green + (psrc1+3)^.green +
+              psrc2^.green + (psrc2+1)^.green + (psrc2+2)^.green + (psrc2+3)^.green +
+              psrc3^.green + (psrc3+1)^.green + (psrc3+2)^.green + (psrc3+3)^.green +
+              psrc4^.green + (psrc4+1)^.green + (psrc4+2)^.green + (psrc4+3)^.green + 8) shr 4;
+        pdest^.blue := (psrc1^.blue + (psrc1+1)^.blue + (psrc1+2)^.blue + (psrc1+3)^.blue +
+              psrc2^.blue + (psrc2+1)^.blue + (psrc2+2)^.blue + (psrc2+3)^.blue +
+              psrc3^.blue + (psrc3+1)^.blue + (psrc3+2)^.blue + (psrc3+3)^.blue +
+              psrc4^.blue + (psrc4+1)^.blue + (psrc4+2)^.blue + (psrc4+3)^.blue + 8) shr 4;
+      end else
+      begin
+        pdest^.alpha := asum shr 4;
+        a1 := psrc1^.alpha;
+        a2 := (psrc1+1)^.alpha;
+        a3 := (psrc1+2)^.alpha;
+        a4 := (psrc1+3)^.alpha;
+        a5 := psrc2^.alpha;
+        a6 := (psrc2+1)^.alpha;
+        a7 := (psrc2+2)^.alpha;
+        a8 := (psrc2+3)^.alpha;
+        a9 := psrc3^.alpha;
+        a10 := (psrc3+1)^.alpha;
+        a11 := (psrc3+2)^.alpha;
+        a12 := (psrc3+3)^.alpha;
+        a13 := psrc4^.alpha;
+        a14 := (psrc4+1)^.alpha;
+        a15 := (psrc4+2)^.alpha;
+        a16 := (psrc4+3)^.alpha;
+        pdest^.red := (psrc1^.red*a1 + (psrc1+1)^.red*a2 + (psrc1+2)^.red*a3 + (psrc1+3)^.red*a4 +
+              psrc2^.red*a5 + (psrc2+1)^.red*a6 + (psrc2+2)^.red*a7 + (psrc2+3)^.red*a8 +
+              psrc3^.red*a9 + (psrc3+1)^.red*a10 + (psrc3+2)^.red*a11 + (psrc3+3)^.red*a12 +
+              psrc4^.red*a13 + (psrc4+1)^.red*a14 + (psrc4+2)^.red*a15 + (psrc4+3)^.red*a16 + (asum shr 1)) div asum;
+        pdest^.green := (psrc1^.green*a1 + (psrc1+1)^.green*a2 + (psrc1+2)^.green*a3 + (psrc1+3)^.green*a4 +
+              psrc2^.green*a5 + (psrc2+1)^.green*a6 + (psrc2+2)^.green*a7 + (psrc2+3)^.green*a8 +
+              psrc3^.green*a9 + (psrc3+1)^.green*a10 + (psrc3+2)^.green*a11 + (psrc3+3)^.green*a12 +
+              psrc4^.green*a13 + (psrc4+1)^.green*a14 + (psrc4+2)^.green*a15 + (psrc4+3)^.green*a16 + (asum shr 1)) div asum;
+        pdest^.blue := (psrc1^.blue*a1 + (psrc1+1)^.blue*a2 + (psrc1+2)^.blue*a3 + (psrc1+3)^.blue*a4 +
+              psrc2^.blue*a5 + (psrc2+1)^.blue*a6 + (psrc2+2)^.blue*a7 + (psrc2+3)^.blue*a8 +
+              psrc3^.blue*a9 + (psrc3+1)^.blue*a10 + (psrc3+2)^.blue*a11 + (psrc3+3)^.blue*a12 +
+              psrc4^.blue*a13 + (psrc4+1)^.blue*a14 + (psrc4+2)^.blue*a15 + (psrc4+3)^.blue*a16 + (asum shr 1)) div asum;
+      end;
+      inc(psrc1,4);
+      inc(psrc2,4);
+      inc(psrc3,4);
+      inc(psrc4,4);
+      inc(pdest);
+    end;
+  end;
+end;
+
+function SimpleStretchSmallerFactor(source: TBGRACustomBitmap; fx,fy: integer): TBGRACustomBitmap;
+var xb,yb,ys,iy,ix: integer;
+    pdest: PBGRAPixel;
+    psrc: array of PBGRAPixel;
+    psrci: PBGRAPixel;
+    asum,maxsum: integer;
+    newWidth,newHeight: integer;
+    r,g,b,nbi: integer;
+begin
+  newWidth := source.Width div fx;
+  newHeight := source.Height div fy;
+  result := source.NewBitmap(newWidth,newHeight);
+  ys := 0;
+  maxsum := 255*fx*fy;
+  nbi := fx*fy;
+  setlength(psrc, fy);
+  for yb := 0 to newHeight-1 do
+  begin
+    pdest := result.ScanLine[yb];
+    for iy := fy-1 downto 0 do
+    begin
+      psrc[iy] := source.Scanline[ys];
+      inc(ys);
+    end;
+    for xb := newWidth-1 downto 0 do
+    begin
+      asum := 0;
+      for iy := fy-1 downto 0 do
+      begin
+        psrci := psrc[iy];
+        for ix := fx-1 downto 0 do
+          asum += (psrci+ix)^.alpha;
+      end;
+      if asum = 0 then
+        pdest^ := BGRAPixelTransparent
+      else if asum = maxsum then
+      begin
+        pdest^.alpha := 255;
+        r := 0;
+        g := 0;
+        b := 0;
+        for iy := fy-1 downto 0 do
+        begin
+          psrci := psrc[iy];
+          for ix := fx-1 downto 0 do
+          begin
+            with (psrci+ix)^ do
+            begin
+              r += red;
+              g += green;
+              b += blue;
+            end;
+          end;
+        end;
+        pdest^.red := (r + (nbi shr 1)) div nbi;
+        pdest^.green := (g + (nbi shr 1)) div nbi;
+        pdest^.blue := (b + (nbi shr 1)) div nbi;
+      end else
+      begin
+        pdest^.alpha := (asum + (nbi shr 1)) div nbi;
+        r := 0;
+        g := 0;
+        b := 0;
+        for iy := fy-1 downto 0 do
+        begin
+          psrci := psrc[iy];
+          for ix := fx-1 downto 0 do
+          begin
+            with (psrci+ix)^ do
+            begin
+              r += integer(red)*integer(alpha);
+              g += integer(green)*integer(alpha);
+              b += integer(blue)*integer(alpha);
+            end;
+          end;
+        end;
+        pdest^.red := (r + (asum shr 1)) div asum;
+        pdest^.green := (g + (asum shr 1)) div asum;
+        pdest^.blue := (b + (asum shr 1)) div asum;
+      end;
+      for iy := fy-1 downto 0 do
+        inc(psrc[iy],fx);
+      inc(pdest);
+    end;
+  end;
+end;
+
 function SimpleStretchSmaller(bmp: TBGRACustomBitmap;
   newWidth, newHeight: integer): TBGRACustomBitmap;
 var
@@ -228,16 +445,40 @@ var
 
   xb, yb: integer;
   v1, v2, v3, v4, v4shr1: int64;
-  nb:     integer;
-  c:      TBGRAPixel;
-  pdest, psrc: PBGRAPixel;
+  nb,a:     integer;
+  pdest, psrc, psrcscan: PBGRAPixel;
   lineDelta, delta: integer;
+
 begin
   if (newWidth > bmp.Width) or (newHeight > bmp.Height) then
     raise ERangeError.Create('SimpleStretchSmaller: New dimensions must be smaller or equal ('+IntToStr(bmp.Width)+'x'+IntToStr(bmp.Height)+'->'+IntToStr(newWidth)+'x'+IntToStr(newHeight)+')');
-  Result := bmp.NewBitmap(NewWidth, NewHeight);
+
   if (newWidth = 0) or (newHeight = 0) or (bmp.Width = 0) or (bmp.Height = 0) then
+  begin
+    Result := bmp.NewBitmap(NewWidth, NewHeight);
     exit;
+  end;
+
+  if (newWidth*2 = bmp.Width) and (newHeight*2 = bmp.Height) then
+  begin
+    result := SimpleStretchSmallerFactor2(bmp);
+    exit
+  end
+  else
+  if (newWidth*4 = bmp.Width) and (newHeight*4 = bmp.Height) then
+  begin
+    result := SimpleStretchSmallerFactor4(bmp);
+    exit;
+  end
+  else
+  if (newWidth < bmp.Width) and (newHeight < bmp.Height) and
+     (bmp.Width mod newWidth = 0) and (bmp.Height mod newHeight = 0) then
+  begin
+    result := SimpleStretchSmallerFactor(bmp, bmp.Width div newWidth, bmp.Height div newHeight);
+    exit;
+  end;
+
+  Result := bmp.NewBitmap(NewWidth, NewHeight);
 
   bmp.LoadFromBitmapIfNeeded;
 
@@ -269,6 +510,7 @@ begin
       y_src2 := y_src - 1
     else
       y_src2 := y_src;
+    psrcscan := bmp.Scanline[prev_y_src];
 
     x_src     := 0;
     acc_x_src := 0;
@@ -293,19 +535,23 @@ begin
       v4    := 0;
       nb    := 0;
       delta := lineDelta - (x_src2 - prev_x_src + 1);
-      PSrc  := bmp.Scanline[prev_y_src] + prev_x_src;
+
+      PSrc  := psrcscan + prev_x_src;
       for yb := prev_y_src to y_src2 do
       begin
         for xb := prev_x_src to x_src2 do
         begin
-          c := PSrc^;
+          with PSrc^ do
+          begin
+            a := alpha;
+                    {$HINTS OFF}
+            v1 += integer(red) * a;
+            v2 += integer(green) * a;
+            v3 += integer(blue) * a;
+                    {$HINTS ON}
+          end;
+          v4 += a;
           Inc(PSrc);
-                  {$HINTS OFF}
-          v1 += integer(c.red) * integer(c.alpha);
-          v2 += integer(c.green) * integer(c.alpha);
-          v3 += integer(c.blue) * integer(c.alpha);
-                  {$HINTS ON}
-          v4 += c.alpha;
           Inc(nb);
         end;
         Inc(PSrc, delta);
@@ -314,19 +560,17 @@ begin
       if (v4 <> 0) and (nb <> 0) then
       begin
         v4shr1  := v4 shr 1;
-        c.red   := (v1 + v4shr1) div v4;
-        c.green := (v2 + v4shr1) div v4;
-        c.blue  := (v3 + v4shr1) div v4;
-        c.alpha := (v4 + (nb shr 1)) div nb;
+        with PDest^ do
+        begin
+          red   := (v1 + v4shr1) div v4;
+          green := (v2 + v4shr1) div v4;
+          blue  := (v3 + v4shr1) div v4;
+          alpha := (v4 + (nb shr 1)) div nb;
+        end;
       end
       else
-      begin
-        c.alpha := 0;
-        c.red   := 0;
-        c.green := 0;
-        c.blue  := 0;
-      end;
-      PDest^ := c;
+       PDest^ := BGRAPixelTransparent;
+
       Inc(PDest);
     end;
   end;
@@ -519,14 +763,17 @@ begin
   if (newWidth < bmp.Width) or (newHeight < bmp.Height) then
     raise ERangeError.Create('FineResampleLarger: New dimensions must be greater or equal ('+IntToStr(bmp.Width)+'x'+IntToStr(bmp.Height)+'->'+IntToStr(newWidth)+'x'+IntToStr(newHeight)+')');
 
-  Result := bmp.NewBitmap(NewWidth, NewHeight);
   if (newWidth = 0) or (newHeight = 0) then
+  begin
+    Result := bmp.NewBitmap(NewWidth, NewHeight);
     exit;
+  end;
 
   bmp.LoadFromBitmapIfNeeded;
 
   if (bmp.Width = 1) and (bmp.Height = 1) then
   begin
+    Result := bmp.NewBitmap(NewWidth, NewHeight);
     Result.Fill(bmp.GetPixel(0, 0));
     exit;
   end
@@ -539,7 +786,7 @@ begin
     Result := FineResampleLarger(temp, 2, newHeight, ResampleFilter);
     temp.Free;
     temp := Result;
-    Result := SimpleStretch(temp, 1,temp.Height);
+    Result := SimpleStretch(temp, newWidth,temp.Height);
     temp.Free;
     exit;
   end
@@ -552,11 +799,12 @@ begin
     Result := FineResampleLarger(temp, newWidth, 2, ResampleFilter);
     temp.Free;
     temp := Result;
-    Result := SimpleStretch(temp, temp.Width,1);
+    Result := SimpleStretch(temp, temp.Width,newHeight);
     temp.Free;
     exit;
   end;
 
+  Result := bmp.NewBitmap(NewWidth, NewHeight);
   yfactor := (bmp.Height - 1) / (newHeight - 1);
   xfactor := (bmp.Width - 1) / (newWidth - 1);
 

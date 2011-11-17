@@ -77,14 +77,20 @@ type
   { TBGRAFont }
 
   TBGRAFont = class(TBGRAColoredObject)
+  private
+    function GetAntialiasing: Boolean;
+    procedure SetAntialiasing(const AValue: Boolean);
+  public
     Name:   string;
     Height: Integer;
     Style:  TFontStyles;
-    Antialiasing: Boolean;
+    Quality : TBGRAFontQuality;
     Orientation:  integer;
     Texture:      IBGRAScanner;
     constructor Create;
     procedure Assign(Source: TObject); override;
+    property Antialiasing: Boolean read GetAntialiasing write SetAntialiasing;
+
   end;
 
   { TBGRACanvas }
@@ -214,6 +220,17 @@ uses BGRAPen, BGRAPath, BGRAPolygon, BGRAPolygonAliased, Math;
 
 { TBGRAFont }
 
+function TBGRAFont.GetAntialiasing: Boolean;
+begin
+  result := Quality <> fqSystem;
+end;
+
+procedure TBGRAFont.SetAntialiasing(const AValue: Boolean);
+begin
+  if AValue and not Antialiasing then
+    Quality := fqFineAntialiasing;
+end;
+
 constructor TBGRAFont.Create;
 begin
   Name := 'default';
@@ -248,7 +265,7 @@ begin
     Name := sf.Name;
     Height := sf.Height;
     Style := sf.Style;
-    Antialiasing := sf.Antialiasing;
+    Quality := sf.Quality;
     Orientation := sf.Orientation;
     Texture := sf.Texture;
   end else
@@ -624,7 +641,7 @@ begin
   FBitmap.FontName := Font.Name;
   FBitmap.FontHeight := -Font.Height;
   FBitmap.FontStyle := Font.Style;
-  FBitmap.FontAntialias := Font.Antialiasing;
+  FBitmap.FontQuality := Font.Quality;
   FBitmap.FontOrientation := Font.Orientation;
 end;
 
