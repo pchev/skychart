@@ -3410,24 +3410,19 @@ procedure TSplot.BGRATextOut(x, y: single; s: string; c: TBGRAPixel; abmp:TBGRAB
 var
   size:  TSize;
   temp:  TBGRABitmap;
-  rsmp:  TBGRACustomBitmap;
-  xx,yy: integer;
+const aafactor=4;
 begin
 if cfgplot.AntiAlias then begin
   size:=abmp.TextSize(s);
-  temp := TBGRABitmap.Create(round(2.1*size.cx), 2*size.cy);
-  temp.FontHeight:=2*abmp.FontHeight;
+  temp := TBGRABitmap.Create(round(aafactor*(size.cx+1)), aafactor*size.cy);
+  temp.FontHeight:=aafactor*abmp.FontHeight;
   temp.FontStyle:=abmp.FontStyle;
   temp.FontName:=abmp.FontName;
-  xx:=trunc(x);
-  yy:=trunc(y);
-  xx:=round(x-xx);
-  yy:=round(y-yy);
-  temp.TextOut(-xx,-yy,s,c);
-  rsmp:=temp.Resample(size.cx,size.cy,rmFineResample);
-  temp.Assign(rsmp);
-  rsmp.free;
-  abmp.PutImage(round(x), round(y), temp, dmDrawWithTransparency);
+  temp.TextOut(round(aafactor*frac(x)),round(aafactor*frac(y)),s,c);
+  abmp.ResampleFilter:=rfMitchell;
+  BGRAReplace(temp,temp.Resample(size.cx,size.cy,rmFineResample));
+  abmp.ResampleFilter:=rfLinear;
+  abmp.PutImage(trunc(x), trunc(y), temp, dmDrawWithTransparency);
   temp.Free;
 end else begin
   abmp.TextOut(round(x), round(y), s, c);
