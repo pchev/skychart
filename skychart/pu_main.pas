@@ -5241,6 +5241,17 @@ if Config_Version < '3.5e' then begin
    else  def_cfgsc.SimLabel:=0;
   end;
 end;
+{$ifdef mswindows}
+if Config_Version < '3.5f' then begin
+  for i:=1 to numfont do begin
+     if def_cfgplot.FontSize[i]=8 then def_cfgplot.FontSize[i]:=DefaultFontSize;
+  end;
+  for i:=1 to numlabtype do begin
+     if (i=6) and (def_cfgplot.LabelSize[6]=10) then def_cfgplot.LabelSize[6]:=12;
+     if def_cfgplot.LabelSize[i]=8 then def_cfgplot.LabelSize[i]:=DefaultFontSize;
+  end;
+end;
+{$endif}
 end;
 
 procedure Tf_main.SaveVersion;
