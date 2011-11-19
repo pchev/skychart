@@ -13,7 +13,7 @@ object f_config_display: Tf_config_display
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.3'
   object MainPanel: TPanel
     Left = 0
     Height = 532
@@ -29,10 +29,10 @@ object f_config_display: Tf_config_display
       Height = 530
       Top = 1
       Width = 513
-      ActivePage = Page5
+      ActivePage = Page7
       Align = alClient
       ShowTabs = False
-      TabIndex = 4
+      TabIndex = 6
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -1696,7 +1696,7 @@ object f_config_display: Tf_config_display
           end
           object CFStyle: TComboBox
             Left = 29
-            Height = 24
+            Height = 26
             Top = 32
             Width = 100
             ItemHeight = 16
@@ -1759,7 +1759,7 @@ object f_config_display: Tf_config_display
           end
           object CBStyle: TComboBox
             Left = 29
-            Height = 24
+            Height = 26
             Top = 32
             Width = 100
             ItemHeight = 16
@@ -1808,7 +1808,7 @@ object f_config_display: Tf_config_display
         end
         object GridStyle: TComboBox
           Left = 39
-          Height = 24
+          Height = 26
           Top = 53
           Width = 100
           ItemHeight = 16
@@ -1828,7 +1828,7 @@ object f_config_display: Tf_config_display
         end
         object EclipticStyle: TComboBox
           Left = 297
-          Height = 24
+          Height = 26
           Top = 53
           Width = 100
           ItemHeight = 16
@@ -1848,7 +1848,7 @@ object f_config_display: Tf_config_display
         end
         object EqGridStyle: TComboBox
           Left = 39
-          Height = 24
+          Height = 26
           Top = 125
           Width = 100
           ItemHeight = 16
@@ -1868,7 +1868,7 @@ object f_config_display: Tf_config_display
         end
         object GalEqStyle: TComboBox
           Left = 297
-          Height = 24
+          Height = 26
           Top = 125
           Width = 100
           ItemHeight = 16
@@ -1965,7 +1965,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 65
+          ClientHeight = 51
           ClientWidth = 217
           Columns = 2
           ItemIndex = 0
@@ -1992,7 +1992,7 @@ object f_config_display: Tf_config_display
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 65
+          ClientHeight = 51
           ClientWidth = 216
           Columns = 2
           ItemIndex = 0
@@ -2028,7 +2028,7 @@ object f_config_display: Tf_config_display
           Top = 77
           Width = 477
           Caption = 'Label Object'
-          ClientHeight = 249
+          ClientHeight = 235
           ClientWidth = 473
           TabOrder = 2
           object Label237: TLabel
@@ -2508,7 +2508,7 @@ object f_config_display: Tf_config_display
         object Button9: TButton
           Left = 357
           Height = 25
-          Top = 433
+          Top = 437
           Width = 99
           Caption = 'Default'
           OnClick = Button9Click

@@ -3410,11 +3410,13 @@ procedure TSplot.BGRATextOut(x, y: single; s: string; c: TBGRAPixel; abmp:TBGRAB
 var
   size:  TSize;
   temp:  TBGRABitmap;
+  aacx: integer;
 const aafactor=4;
 begin
 if cfgplot.AntiAlias then begin
   size:=abmp.TextSize(s);
-  temp := TBGRABitmap.Create(round(aafactor*(size.cx+1)), aafactor*size.cy);
+  aacx:=round(max((aafactor+0.1)*size.cx,aafactor*(size.cx+1)));
+  temp := TBGRABitmap.Create(aacx, aafactor*size.cy);
   temp.FontHeight:=aafactor*abmp.FontHeight;
   temp.FontStyle:=abmp.FontStyle;
   temp.FontName:=abmp.FontName;
