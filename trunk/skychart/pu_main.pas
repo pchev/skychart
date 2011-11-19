@@ -5252,6 +5252,17 @@ if Config_Version < '3.5f' then begin
   end;
 end;
 {$endif}
+{$ifdef darwin}
+if Config_Version < '3.5f' then begin
+  for i:=1 to numfont do begin
+     if def_cfgplot.FontSize[i]=12 then def_cfgplot.FontSize[i]:=DefaultFontSize;
+  end;
+  for i:=1 to numlabtype do begin
+     if def_cfgplot.LabelSize[i]=12 then def_cfgplot.LabelSize[i]:=DefaultFontSize;
+     if (i=6) and (def_cfgplot.LabelSize[6]=14) then def_cfgplot.LabelSize[6]:=12;
+  end;
+end;
+{$endif}
 end;
 
 procedure Tf_main.SaveVersion;
