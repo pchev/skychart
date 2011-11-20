@@ -2,8 +2,8 @@
 # Patrick Chevalley <pch@ap-i.net>, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-11-20 10:47+0100\n"
-"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
+"PO-Revision-Date: 2011-11-20 14:46+0100\n"
+"Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -376,7 +376,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Binarni indeks katalog"
+msgstr "Binarni"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -556,7 +556,7 @@ msgstr "CdC katalog zvijezda i postavke"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "Zoran Novak"
+msgstr "Patrick Chevalley"
 
 #: u_translation.rscenter
 msgid "Center"
@@ -808,7 +808,7 @@ msgstr "Spoji se na SQL bazu podataka %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr ""
+msgstr "Spojne crte između svake pozicije"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
@@ -1862,7 +1862,7 @@ msgstr "Fontovi"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr ""
+msgstr "Za veliki katalog uvijek odaberite Binarni. Za male skupove podataka koji se često mijenjaju, odaberite Tekst. To omogućuje promjenu podataka sa odmah vidljivim rezultatom, bez potrebe ponovnog pokretanja programa."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -2568,7 +2568,7 @@ msgstr "Lokalno zvijezdano vijeme"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Kod lokacije"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2608,7 +2608,7 @@ msgstr "Mjesečev"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr "Pomrčina Mjeseca"
+msgstr "Pomrčine Mjeseca"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -3180,7 +3180,7 @@ msgstr "Promatračnica"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "Baza podataka promatračnice"
+msgstr "Mjesto promatranja"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -3786,11 +3786,11 @@ msgstr "Želite li stvarno parkirati i isključiti teleskop?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
-msgstr ""
+msgstr "RealSky Sjever"
 
 #: u_translation.rsrealskysouth
 msgid "RealSky South"
-msgstr ""
+msgstr "RealSky Jug"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
@@ -3818,7 +3818,7 @@ msgstr "Mogućnosti snimanja"
 
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
-msgstr ""
+msgstr "Ime snimljene datoteke"
 
 #: u_translation.rsrecordprotoc
 msgid "Record protocol to a trace file"
@@ -4050,7 +4050,7 @@ msgstr "Spremi konfiguraciju na izlasku"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr "Spremi fotografiju..."
+msgstr "Spremi sliku..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
@@ -4158,7 +4158,7 @@ msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr ""
+msgstr "Odaberite sliku iz liste"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4166,7 +4166,7 @@ msgstr ""
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr ""
+msgstr "Odaberite sistemski pisač i opcije koje želite koristiti"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
@@ -4402,7 +4402,7 @@ msgstr "Prikaži zvijezde"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "Prikaži ovu fotografiju"
+msgstr "Prikaži ovu sliku"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
@@ -4618,7 +4618,7 @@ msgstr "Filter zvijezda"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr ""
+msgstr "Opcije točnog gibanja zvijezda (ako su dostupne u katalogu)"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -4722,7 +4722,7 @@ msgstr "Sistem"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
-msgstr "Sistemski printer"
+msgstr "Sistemski pisač"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
@@ -4790,7 +4790,7 @@ msgstr "Tekst"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Katalog tekst datoteke"
+msgstr "Tekst"
 
 #: u_translation.rstextsize
 msgid "Text size"
@@ -4810,15 +4810,15 @@ msgstr ""
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
-msgstr ""
+msgstr "Ima %s slika u katalogu"
 
 #: u_translation.rsthereareobjec
 msgid "There are %s objects in this field."
-msgstr ""
+msgstr "Ima %s objekata u polju."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr ""
+msgstr "Ova će akcija prebrisati sav sadržaj za zemlju %s, sa svježim podacima iz NGA i GNIS.%sSve promjene za tu zemlju biti će izgubljene, zadržat će se samo lokacije koje su dodane sa novim imenom.%sŽelite li nastaviti?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -4922,11 +4922,11 @@ msgstr "Transformacija"
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "Prijevod na Hrvatski:"
+msgstr "Prijevod na Hrvatski: Zoran Novak"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
-msgstr ""
+msgstr "Proziran linijski mod (pomrčine)"
 
 #: u_translation.rstriplestar
 msgid "Triple star"
@@ -4990,7 +4990,7 @@ msgstr "Vrsta koordinata"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr "Vrste objekta za dodati na listu"
+msgstr "Vrste objekata za dodati na listu"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
@@ -5006,7 +5006,7 @@ msgstr ""
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr ""
+msgstr "Isključite da bi izbjegli zamjenu sa malim planetom 134340"
 
 #: u_translation.rsundo
 msgid "Undo"
@@ -5106,7 +5106,7 @@ msgstr "Ime korisnika"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr ""
+msgstr "Upotijebi subsampling za ograničenje veličine slike na"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
@@ -5122,11 +5122,11 @@ msgstr "Koristi meni ili gumb \"%s\" za podešavanje drivera."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Koristi točno gibanje, za ispravljanje pozicije za danu epohu"
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr ""
+msgstr "Koristi ovo polje kao alternativno ime"
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
@@ -5134,7 +5134,7 @@ msgstr "Upotrijebi Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr ""
+msgstr "Koristi postojeću datoteku %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -5142,7 +5142,7 @@ msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr ""
+msgstr "Promjenjive"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
