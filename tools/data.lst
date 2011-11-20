@@ -12,6 +12,7 @@ data/constellation/constlabel.cla
 data/constellation/constlabel_de.cla
 data/constellation/constlabel_es.cla
 data/constellation/constlabel_fr.cla
+data/constellation/constlabel_hr.cla
 data/constellation/constlabel_is.cla
 data/constellation/constlabel_it.cla
 data/constellation/constlabel_nl.cla
@@ -270,6 +271,7 @@ data/language/skychart.el.po
 data/language/skychart.en.po
 data/language/skychart.es.po
 data/language/skychart.fr.po
+data/language/skychart.hr.po
 data/language/skychart.hu.po
 data/language/skychart.is.po
 data/language/skychart.it.po
