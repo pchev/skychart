@@ -1047,6 +1047,7 @@ if result then begin
   sar := ARpToStr(rad2deg*cfgsc.FindRA/15) ;
   sde := DEpToStr(rad2deg*cfgsc.FindDec) ;
   jdt:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,3];
+  cfgsc.FindSimjd:=jdt;
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
@@ -1160,6 +1161,7 @@ if result and (currentplanet=11) then begin
 end;
 if result and (currentplanet=32) then begin   // Earth umbra
   jdt:=cfgsc.PlanetLst[CurrentStep,10,3];  // date from the Sun
+  cfgsc.FindSimjd:=jdt;
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARmtoStr(rmod(hh,24));
@@ -2011,6 +2013,7 @@ if result then begin
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,4];
+  cfgsc.FindSimjd:=jdt;
 //  str(jdt:12:4,sjd);
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
@@ -2094,6 +2097,7 @@ if result then begin
   sar := ARpToStr(rad2deg*tar/15) ;
   sde := DEpToStr(rad2deg*tde) ;
   jdt:=cfgsc.CometLst[CurrentComStep,CurrentComet,7];
+  cfgsc.FindSimjd:=jdt;
   djd(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,yy,mm,dd,hh);
   shh := ARtoStr3(rmod(hh,24));
   date:=Date2Str(yy,mm,dd)+blank+shh;

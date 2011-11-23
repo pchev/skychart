@@ -2022,6 +2022,7 @@ if x2<x1 then x2:=x2+pi2;
 y1 := max(-pid2,dec-dx);
 y2 := min(pid2,dec+dx);
 desc:='';
+cfgsc.FindSimjd:=0;
 Fcatalog.OpenCat(cfgsc);
 InitCatalog;
 saveNebFilter:=Fcatalog.cfgshr.NebFilter;
