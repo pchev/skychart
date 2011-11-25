@@ -2260,7 +2260,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     i,p,l,y,m,d,precision : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
-    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0: double;
+    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst: double;
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -2294,11 +2294,13 @@ isSolarSystem:=((otype='P')or(otype='Ps')or(otype='S*')or(otype='As')or(otype='C
 isOsr:=(otype='OSR');
 if isSolarSystem and (sc.cfgsc.FindSimjd<>0) then begin
    cjd:=sc.cfgsc.FindSimjd;
-   Djd(cjd,y,m,d,h);
+   Djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
    cjd0:=jd(y,m,d,0);
+   cst:=Sidtim(cjd0,h-sc.cfgsc.TimeZone,sc.cfgsc.ObsLongitude);
 end else begin
    cjd:=sc.cfgsc.CurJD;
    cjd0:=sc.cfgsc.jd0;
+   cst:=sc.cfgsc.CurST;
 end;
 buf:=LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
@@ -2455,8 +2457,7 @@ txt:=txt+html_br;
 
 // local position
 txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
-djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
-h:=h+sc.cfgsc.TimeZone;
+djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
 txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
 djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
 txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
@@ -2464,19 +2465,19 @@ txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,cjd,ra,dec);
-Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
+Eq2Hz(cst-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*sc.cfgsc.CurSt/15+24,24))+html_br;
-txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(sc.cfgsc.CurSt-ra)/15+24,24),-1)+html_br;
+txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
+txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
 txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
 txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
 // rise/set time
 if (otype='P') then begin // planet
-   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+   sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
 // todo: rise/set time comet, asteroid, satellites, ...
 else if (otype='Ps')and(ipla=11) then begin // Moon
-   sc.planet.PlanetRiseSet(sc.cfgsc.TrackObj,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+   sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
 else begin // fixed object
      RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
