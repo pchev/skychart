@@ -1093,7 +1093,7 @@ if result and (currentplanet<10) then begin
           +'CMIII:'+formatfloat(d2,w3)+tab;
      jd0:=jd(yy,mm,dd,0-cfgsc.TimeZone+cfgsc.DT_UT);
      PlanetOrientation(jd0,CurrentPlanet,p,pde,pds,w1,w2,w3);
-     w1:=(JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJD)-w2)*24/870.27003539;
+     w1:=(JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,jdt)-w2)*24/870.27003539;
      shh:='';
      if w1>0 then shh:=ARmtoStr(w1);
      repeat
@@ -1101,7 +1101,7 @@ if result and (currentplanet<10) then begin
         if (w1>0)and(w1<24) then shh:=shh+blank+ARmtoStr(w1);
      until w1>24;
      Desc:=Desc+'GRStr:'+shh+tab;
-     Desc:=Desc+'GRSLon:'+FormatFloat(f1,JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJD))+tab;
+     Desc:=Desc+'GRSLon:'+FormatFloat(f1,JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,jdt))+tab;
   end else begin
      Desc:=Desc+'CM:'+formatfloat(d2,w1)+tab
   end;
