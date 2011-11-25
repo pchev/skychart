@@ -2312,7 +2312,7 @@ var buf : string;
     i:integer;
 begin
    buf:=uppercase(Num);
-   for i:=0 to Length(cfgcat.UserObjects) do begin
+   for i:=0 to Length(cfgcat.UserObjects)-1 do begin
      if cfgcat.UserObjects[i].active and (UpperCase(cfgcat.UserObjects[i].oname)=buf) then begin
         ar1:= cfgcat.UserObjects[i].ra;
         de1:= cfgcat.UserObjects[i].dec;
