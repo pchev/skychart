@@ -604,6 +604,8 @@ type
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec : Double;
                 DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat,FindCatname : string;
+                BGalpha: integer;
+                BGmin_sigma,BGmax_sigma,NEBmin_sigma,NEBmax_sigma: double;
                 IridiumRA,IridiumDE,IridiumMA: double;
                 IridiumName,IridiumDist: string;
                 PlanetLst : Tplanetlst;
@@ -694,7 +696,7 @@ type
                 PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
                 maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
                 ServerIPaddr,ServerIPport,PrintDesc,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
-                ImageLuminosity, ImageContrast, AnimFps : double;
+                AnimFps : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass: string;
                 FtpPassive, HttpProxy, ConfirmDownload : Boolean;
                 CometUrlList, AsteroidUrlList : TStringList;
@@ -738,16 +740,19 @@ const
       jdmax404=2816787.5;
 {$ifdef linux}
       lib404   = 'libplan404.so';
+      libcdcwcs = 'libcdcwcs.so';
       libz = 'libz.so.1';
 //      libsatxy = 'libsatxy.so';
 //      libsatxyfm='Satxyfm';
 {$endif}
 {$ifdef darwin}
       lib404   = 'libplan404.dylib';
+      libcdcwcs = 'libcdcwcs.dylib';
       libz = 'libz.dylib';
 {$endif}
 {$ifdef mswindows}
       lib404 = 'libplan404.dll';
+      libcdcwcs = 'libcdcwcs.dll';
       libz = 'zlib1.dll';
 //      libsatxy = 'libsatxy.dll';
 //      libsatxyfm='Satxyfm';
@@ -769,6 +774,28 @@ type
      TPlan404=Function( pla : PPlanetData):integer; cdecl;
 var Plan404 : TPlan404;
     Plan404lib: TLibHandle;
+
+// libcdcwcs
+type
+     TcdcWCScoord = record
+       ra,dec,x,y: double;
+       n: integer;
+     end;
+     PcdcWCScoord = ^TcdcWCScoord;
+     TcdcWCSinfo = record
+       cra,cdec,dra,ddec,secpix,eqout,rot : double;
+       wp,hp,sysout : integer;
+     end;
+     PcdcWCSinfo = ^TcdcWCSinfo;
+     Tcdcwcs_initfitsfile=Function(fn:pchar):integer; cdecl;
+     Tcdcwcs_release=Function():integer; cdecl;
+     Tcdcwcs_sky2xy=Function(p:PcdcWCScoord):integer; cdecl;
+     Tcdcwcs_getinfo=Function(p:PcdcWCSinfo):integer; cdecl;
+var cdcwcslib: TLibHandle;
+    cdcwcs_initfitsfile : Tcdcwcs_initfitsfile;
+    cdcwcs_release : Tcdcwcs_release;
+    cdcwcs_getinfo : Tcdcwcs_getinfo;
+    cdcwcs_sky2xy : Tcdcwcs_sky2xy;
 
 //  zlib
 type
@@ -1548,7 +1575,11 @@ ShowCometValid:=Source.ShowCometValid;
 ShowAsteroidValid:=Source.ShowAsteroidValid;
 ShowEarthShadowValid:=Source.ShowEarthShadowValid;
 ShowEclipticValid:=Source.ShowEclipticValid;
-
+BGalpha:=Source.BGalpha;
+BGmin_sigma:=Source.BGmin_sigma;
+BGmax_sigma:=Source.BGmax_sigma;
+NEBmin_sigma:=Source.NEBmin_sigma;
+NEBmax_sigma:=Source.NEBmax_sigma;
 for i:=0 to 10 do projname[i] := Source.projname[i];
 for i:=1 to numlabtype do begin
    ShowLabel[i]:=Source.ShowLabel[i];
@@ -1805,8 +1836,6 @@ PrintDesc:=Source.PrintDesc;
 PrintCopies:=Source.PrintCopies;
 ThemeName:=Source.ThemeName;
 IndiPanelCmd:=Source.IndiPanelCmd;
-ImageLuminosity:=Source.ImageLuminosity;
-ImageContrast:=Source.ImageContrast;
 ProxyHost:=Source.ProxyHost;
 ProxyPort:=Source.ProxyPort;
 ProxyUser:=Source.ProxyUser;

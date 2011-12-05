@@ -139,7 +139,8 @@ type
 //---------------------------------------------
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
-     Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0);
+     Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
+     Procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
      procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
@@ -490,7 +491,7 @@ except
 end;
 end;
 
-procedure SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false);
+procedure SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false; forcealpha:integer=0);
 var
   i: Integer;
   newalpha: byte;
@@ -511,6 +512,7 @@ begin
          newalpha:=0
       else
          newalpha:=255;
+  3 : if newalpha>0 then newalpha:=forcealpha; // 3: fixed transparency, except black transparent
   end;
   if whitebg then begin
     p^.red:=255-p^.red;
@@ -1226,7 +1228,7 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-Procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap; TransparentMode:integer=0);
+Procedure TSplot.PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean; var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
 var dsx,dsy,zoom : single;
     DestX,DestY :integer;
     SrcR: TRect;
@@ -1271,7 +1273,7 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
       outbmp:=TBGRABitmap.Create(imabmp.Width,imabmp.Height);
       outbmp.canvas.Draw(0,0,imabmp);
       if iTransparent then begin
-        SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
+        SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg,forcealpha);
         cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
       end else
         cbmp.PutImage(DestX,DestY,outbmp,dmSet);
@@ -1357,6 +1359,23 @@ finally
   except
   end;
 end;
+end;
+
+Procedure TSplot.PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
+var outbmp:TBGRABitmap;
+begin
+   if cfgplot.UseBMP then begin
+      outbmp:=TBGRABitmap.Create(ibmp.Width,ibmp.Height);
+      outbmp.canvas.Draw(0,0,ibmp);
+      SetBGRATransparencyFromLuminance(outbmp,3,WhiteBg,alpha);
+      cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
+      outbmp.free;
+   end else begin
+     if DisplayIs32bpp then SetTransparencyFromLuminance(ibmp,0)
+                       else ibmp.TransparentColor:=clBlack;
+     cnv.CopyMode:=cmSrcCopy;
+     cnv.Draw(0,0,ibmp);
+   end;
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);

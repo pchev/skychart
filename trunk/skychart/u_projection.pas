@@ -105,6 +105,8 @@ procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
 
 implementation
 
+var prec_r : rotmatrix;
+    prec_j0, prec_j1: double;
 
 Procedure ScaleWindow(c: Tconf_skychart);
 var X1,x2,Y1,Y2 : Integer;
@@ -1572,28 +1574,38 @@ end;
 Procedure Precession(j0,j1: double; var ra,de: double);
 var p,rp: coordvector;
     r,wm1,wm2: rotmatrix;
+    oncache: boolean;
 begin
-{ TODO : Cache rotation matrix if called for same date }
 if abs(j0-j1)<0.01 then exit; // no change
-if j0=jd2000 then begin       // from j2000
-  ltp_PMAT(j1,r);
-end
-else if j1=jd2000 then begin  // to j2000
-  ltp_PMAT(j0,wm1);
-  ltp_tr(wm1,r);
-end
-else begin                    // from date0 to date1
-  ltp_PMAT(j0,r);
-  ltp_tr(r,wm1);
-  ltp_PMAT(j1,wm2);
-  ltp_rxr(wm1,wm2,r);
+oncache:= (prec_j0=j0) and (prec_j1=j1);
+if oncache then begin
+  ltp_S2C(ra,de,p);
+  ltp_rxp(prec_r,p,rp);
+  ltp_c2s(rp,ra,de);
+  ra:=rmod(ra+pi2,pi2);
+end else begin
+  if j0=jd2000 then begin       // from j2000
+    ltp_PMAT(j1,r);
+  end
+  else if j1=jd2000 then begin  // to j2000
+    ltp_PMAT(j0,wm1);
+    ltp_tr(wm1,r);
+  end
+  else begin                    // from date0 to date1
+    ltp_PMAT(j0,r);
+    ltp_tr(r,wm1);
+    ltp_PMAT(j1,wm2);
+    ltp_rxr(wm1,wm2,r);
+  end;
+  ltp_S2C(ra,de,p);
+  ltp_rxp(r,p,rp);
+  ltp_c2s(rp,ra,de);
+  ra:=rmod(ra+pi2,pi2);
+  prec_r:=r;
+  prec_j0:=j0;
+  prec_j1:=j1;
 end;
-ltp_S2C(ra,de,p);
-ltp_rxp(r,p,rp);
-ltp_c2s(rp,ra,de);
-ra:=rmod(ra+pi2,pi2);
 end;
-
 
 ///////////////////////
 

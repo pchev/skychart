@@ -61,14 +61,17 @@ type
     FFileName : String;
     n_axis,cur_axis,Fwidth,Fheight,hdr_end,colormode,current_result : Integer;
     Fimg_width,Fimg_Height,Fra,Fde,Frotation : double;
+    FWCSvalid: boolean;
     Fprojection : string;
     Fmean,Fsigma,dmin,dmax,Fmin_sigma,Fmax_sigma : double;
     itt : array[0..255] of byte;
+    rwcs: rotmatrix;
     procedure SetFile(value:string);
     procedure Readfitsheader;
     Procedure FITSCoord ;
     Procedure ReadFitsImage;
     procedure SetITT;
+    procedure pixelatcoord(ra,de: double; var x,y: integer);
   protected
     { Protected declarations }
   public
@@ -86,12 +89,15 @@ type
      Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
      procedure GetIntfImg(var IntfImg: TLazIntfImage);
+     Procedure InfoWCScoord;
+     procedure GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
      Property Header : Tfitsheader read Fheader;
      Property FileName : string read FFileName write SetFile;
      Property Center_RA : double read Fra;
      Property Center_DE : double read Fde;
      Property Img_Width : double read Fimg_width;
      Property Img_Height : double read Fimg_Height;
+     Property WCSvalid : boolean read FWCSvalid;
      Property Rotation  : double read Frotation;
      Property Projection : string read Fprojection;
      Property min_sigma  : double read Fmin_sigma write Fmin_sigma;
@@ -132,6 +138,7 @@ try
 {$ifdef mswindows} // Win98 do not accept \\ as path delimiter
 value:=StringReplace(value,'\\','\',[rfReplaceAll]);
 {$endif}
+FWCSvalid:=false;
 Fheader.valid:=false;
 Fheader.coordinate_valid:=false;
 if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
@@ -190,6 +197,7 @@ begin
 filemode:=fmShareDenyNone;
 assignfile(f,FFileName);
 reset(f,1);
+try
 with FHeader do begin
 coordinate_valid:=false;
 valid:=false;eoh:=false; naxis1:=0 ; naxis2:=0 ; naxis3:=1; bitpix:=0 ; dmin:=0 ; dmax := 0; blank:=0;
@@ -277,7 +285,33 @@ if radecsys='' then radecsys:='''FK4''';
 if (equinox=0) then if (copy(radecsys,2,3)='FK4') then equinox:=1950
                                                   else equinox:=2000;
 end;
-Closefile(f);
+finally
+  Closefile(f);
+end;
+end;
+
+Procedure TFits.InfoWCScoord;
+var n,m: integer;
+    x0,x1,y0,y1: double;
+    i: TcdcWCSinfo;
+    p: TcdcWCScoord;
+begin
+try
+n:=cdcwcs_initfitsfile(pchar(FFileName));
+n:=cdcwcs_getinfo(addr(i));
+if n=0 then begin
+  Fra:=deg2rad*i.cra;
+  Fde:=deg2rad*i.cdec;
+  Fimg_width:=deg2rad*i.wp*i.secpix/3600;
+  Fimg_Height:=deg2rad*i.hp*i.secpix/3600;
+  Frotation:=deg2rad*i.rot;
+  FWCSvalid:=True;
+end else begin
+  FWCSvalid:=False;
+end;
+except
+ FWCSvalid:=False;
+end;
 end;
 
 Procedure TFits.FITSCoord ;
@@ -769,6 +803,73 @@ if Fheader.naxis1>0 then begin
   imabmp.freeimage;
   imabmp.SetHandles(ImgHandle,ImgMaskHandle);
   IntfImg.Free;
+end;
+end;
+
+procedure TFits.GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
+var IntfImg,ProjImg: TLazIntfImage;
+    ImgHandle,ImgMaskHandle: HBitmap;
+    i,j,x,y,n: integer;
+    ra,dec,ra_offset,de_offset: double;
+begin
+try
+imabmp.freeimage;
+imabmp.height:=1;
+imabmp.width:=1;
+InfoWCScoord;
+if FWCSvalid and(Fheader.naxis1>0) then begin
+  IntfImg:=TLazIntfImage.Create(0,0);
+  ProjImg:=TLazIntfImage.Create(0,0);
+  IntfImg.LoadFromBitmap(imabmp.Handle,0);
+  ProjImg.LoadFromBitmap(imabmp.Handle,0);
+  GetIntfImg(IntfImg);
+  ProjImg.SetSize(c.xmax,c.ymax);
+  ra_offset:=Fra;
+  de_offset:=Fde;
+  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c);
+  Precession(c.JDChart,jd2000,ra_offset,de_offset);
+  ra_offset:=ra_offset-Fra;
+  de_offset:=de_offset-Fde;
+  for i:=0 to c.ymax-1 do begin
+     for j:=0 to c.xmax-1 do begin
+        getadxy(j,i,ra,dec,c);
+        ra:=ra+ra_offset;
+        dec:=dec+de_offset;
+        pixelatcoord(ra,dec,x,y);
+        if (x>=0)and(x<Fwidth)and(y>=0)and(y<Fheight) then
+           ProjImg.Colors[j,i]:=IntfImg.Colors[x,Fheight-y]
+        else
+           ProjImg.Colors[j,i]:=colTransparent;
+     end;
+  end;
+  ProjImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+  imabmp.freeimage;
+  imabmp.SetHandles(ImgHandle,ImgMaskHandle);
+  IntfImg.Free;
+  ProjImg.Free;
+  cdcwcs_release();
+end;
+except
+end;
+end;
+
+procedure TFits.pixelatcoord(ra,de: double; var x,y: integer);
+var  p: TcdcWCScoord;
+begin
+try
+p.ra:=rad2deg*ra;
+p.dec:=rad2deg*de;
+cdcwcs_sky2xy(addr(p));
+if p.n=0 then begin
+  x:=round(p.x);
+  y:=round(p.y);
+end else begin
+  x:=-1;
+  y:=-1
+end;
+except
+  x:=-1;
+  y:=-1
 end;
 end;
 

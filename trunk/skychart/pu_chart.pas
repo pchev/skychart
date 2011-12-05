@@ -2352,6 +2352,8 @@ if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
        if sc.Fits.Header.valid then begin
          bmp:=Tbitmap.Create;
          try
+         sc.Fits.min_sigma:=sc.cfgsc.NEBmin_sigma;
+         sc.Fits.max_sigma:=sc.cfgsc.NEBmax_sigma;
          sc.Fits.GetBitmap(bmp);
          fn:=slash(systoutf8(TempDir))+'info.bmp';
          DeleteFileutf8(fn);
@@ -3141,6 +3143,7 @@ if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
 precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
 if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
    sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
+   sc.Fits.InfoWCScoord;
    if sc.Fits.Header.valid then begin
       sc.Fits.DeleteDB('OTHER','BKG');
       if not sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then

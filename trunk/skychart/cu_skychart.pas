@@ -47,6 +47,8 @@ Tskychart = class (TComponent)
     FShowDetailXY: Tint2func;
     fsat: textfile;
     constlabelindex:integer;
+    bgcra,bgcde,bgfov,bgmis,bgmas: double;
+    bgw,bgh: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
@@ -60,6 +62,7 @@ Tskychart = class (TComponent)
     cfgsc : Tconf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
     numlabels: integer;
+    bgbmp:Tbitmap;
     procedure ResetAllLabel;
     procedure AddNewLabel(ra,dec: double);
     procedure SetLang;
@@ -85,7 +88,7 @@ Tskychart = class (TComponent)
     function DrawDblStars :boolean;
     function DrawDeepSkyObject :boolean;
     //function DrawNebulae :boolean;
-    function DrawNebImages :boolean;
+    function DrawBgImages :boolean;
     function DrawOutline :boolean;
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
@@ -196,6 +199,7 @@ begin
  Fplot.OnDeleteLabel:=@DeleteLabel;
  Fplot.OnDeleteAllLabel:=@ResetAllLabel;
  Fplot.OnLabelClick:=@LabelClick;
+ bgbmp:=Tbitmap.Create;
 end;
 
 destructor Tskychart.Destroy;
@@ -203,6 +207,7 @@ begin
 try
  Fplot.free;
  cfgsc.free;
+ bgbmp.free;
  inherited destroy;
 except
 writetrace('error destroy '+name);
@@ -283,7 +288,6 @@ end;
     if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP) then DrawHorizon;
     DrawComet;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
-    if cfgsc.ShowBackgroundImage then DrawNebImages;
     if cfgsc.showline then DrawOutline;
   end;
   // then the lines
@@ -309,6 +313,8 @@ end;
   if cfgsc.ShowPlanetValid then DrawPlanet;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
+  // BG image
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.ShowBackgroundImage then DrawBgImages;
   // and the horizon line if not transparent
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque and (not Fplot.cfgplot.UseBMP) then DrawHorizon;
 
@@ -709,7 +715,8 @@ end;
             v1:=FFits.Center_RA;
             v2:=FFits.Center_DE;
             precession(jd2000,cfgsc.JDChart,v1,v2);
-            if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc);;
+            if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc);
+            cfgsc.projpole:=Equat;
             cfgsc.racentre:=v1;
             cfgsc.decentre:=v2;
             cfgsc.fov:=FFits.Img_Width;
@@ -1058,10 +1065,12 @@ var rec:GcatRec;
                             if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
                             projection(ra,de,x1,y1,true,cfgsc) ;
                             WindowXY(x1,y1,x,y,cfgsc);
-                            FFits.GetBitmap(bmp);
+                            FFits.min_sigma:=cfgsc.NEBmin_sigma;
+                            FFits.max_sigma:=cfgsc.NEBmax_sigma;
+                            FFits.GetBitmap(bmp);  // keep this method instead of GetProjBitmap for performance
                             projection(ra,de+0.001,x2,y2,false,cfgsc) ;
                             rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-                            Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp);
+                            Fplot.plotimage(x,y,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,true,bmp,0);
                           end
                         else Drawing_Gray;
                       end
@@ -1093,8 +1102,8 @@ var rec:GcatRec;
     end;
 end;
 
-function Tskychart.DrawNebImages :boolean;
-var bmp:Tbitmap;
+function Tskychart.DrawBgImages :boolean;
+var
   filename,objname : string;
   ra,de,width,height,dw,dh: double;
   cosr,sinr: extended;
@@ -1105,7 +1114,9 @@ begin
  WriteTrace('SkyChart '+cfgsc.chartname+': draw background image');
 {$endif}
 result:=false;
-bmp:=Tbitmap.Create;
+
+//cache bgbmp
+
 try
 if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
   x1:=0;
@@ -1119,28 +1130,40 @@ y2 := minvalue([pid2,cfgsc.decentre+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
 if FFits.OpenDB('other',x1,x2,y1,y2) then
   while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
     if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
-    sincos(rot,sinr,cosr);
-    precession(jd2000,cfgsc.JDChart,ra,de);
-    if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
-    projection(ra,de,x1,y1,true,cfgsc) ;
-    WindowXY(x1,y1,xx,yy,cfgsc);
-    dw:=(width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2;
-    dh:=(height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2;
-    if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
-        and (abs(max(width,height)*cfgsc.BxGlb)>10)
-    then begin
-       result:=true;
-       FFits.FileName:=filename;
-       if FFits.Header.valid then begin
-          FFits.GetBitmap(bmp);
-          projection(ra,de+0.001,x2,y2,false,cfgsc) ;
-          rot:=FFits.Rotation-arctan2((x2-x1),(y2-y1));
-          Fplot.plotimage(xx,yy,abs(FFits.Img_Width*cfgsc.BxGlb),abs(FFits.Img_Height*cfgsc.ByGlb),rot,cfgsc.FlipX,cfgsc.FlipY, cfgsc.WhiteBg,(objname<>'BKG'), bmp);
-       end;
+    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax) then begin
+      Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+    end else begin
+      sincos(rot,sinr,cosr);
+      precession(jd2000,cfgsc.JDChart,ra,de);
+      if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+      projection(ra,de,x1,y1,true,cfgsc) ;
+      WindowXY(x1,y1,xx,yy,cfgsc);
+      dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
+      dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
+      if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
+          and (abs(max(width,height)*cfgsc.BxGlb)>10)
+      then begin
+         result:=true;
+         FFits.FileName:=filename;
+         FFits.InfoWCScoord;
+         if FFits.Header.valid and FFits.WCSvalid then begin
+            FFits.min_sigma:=cfgsc.BGmin_sigma;
+            FFits.max_sigma:=cfgsc.BGmax_sigma;
+            FFits.GetProjBitmap(bgbmp,cfgsc);
+            Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+            bgcra:=cfgsc.racentre;
+            bgcde:=cfgsc.decentre;
+            bgfov:=cfgsc.fov;
+            bgmis:=cfgsc.BGmin_sigma;
+            bgmas:=cfgsc.BGmax_sigma;
+            bgw:=cfgsc.xmax;
+            bgh:=cfgsc.ymax;
+         end;
+      end;
     end;
   end;
 finally
- bmp.Free;
+
 end;
 end;
 

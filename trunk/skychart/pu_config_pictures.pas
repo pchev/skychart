@@ -40,6 +40,9 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
+    ImgTrBar2: TTrackBar;
+    Label4: TLabel;
     Panel3: TPanel;
     ResetLum: TButton;
     OnlineDSS: TCheckBox;
@@ -95,7 +98,9 @@ type
     procedure backimgAcceptFileName(Sender: TObject; var Value: String);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure ImgTrBar2Change(Sender: TObject);
     procedure ResetLumClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
@@ -127,6 +132,7 @@ type
     LockChange: boolean;
     FFits: TFits;
     FApplyConfig: TNotifyEvent;
+    InitialTimer: boolean;
     procedure ShowImages;
     procedure RefreshImage;
   public
@@ -213,6 +219,7 @@ begin
 LockChange:=true;
 ShowImages;
 LockChange:=false;
+InitialTimer:=true;
 ImageTimer1.Interval:=100;
 ImageTimer1.enabled:=true;
 end;
@@ -222,10 +229,10 @@ var save:boolean;
   i: Integer;
 begin
 imgpath.text:=cmain.ImagePath;
-ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
-ImgContrastBar.position:=round(10*cmain.ImageContrast);
-ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
-ImgContrastBar2.position:=round(10*cmain.ImageContrast);
+ImgLumBar.position:=-round(100*csc.NEBmin_sigma);
+ImgContrastBar.position:=round(100*csc.NEBmax_sigma);
+ImgLumBar2.position:=-round(10*csc.BGmin_sigma);
+ImgContrastBar2.position:=round(10*csc.BGmax_sigma);
 ShowImagesBox.checked:=csc.ShowImages;
 nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
 save:=csc.ShowBackgroundImage;
@@ -297,10 +304,23 @@ LockChange:=true;
 try
 ImgContrastBar.position:=0;
 ImgLumBar.position:=0;
-cmain.ImageContrast:=0;
-cmain.ImageLuminosity:=0;
-FFits.max_sigma:=0;
-FFits.min_sigma:=0;
+csc.NEBmin_sigma:=0;
+csc.NEBmax_sigma:=0;
+finally
+LockChange:=false;
+end;
+end;
+
+procedure Tf_config_pictures.Button5Click(Sender: TObject);
+begin
+LockChange:=true;
+try
+ImgContrastBar2.position:=0;
+ImgLumBar2.position:=0;
+ImgTrBar2.Position:=200;
+csc.BGmin_sigma:=0;
+csc.BGmax_sigma:=0;
+csc.BGalpha:=200;
 ImageTimer1.enabled:=true;
 finally
 LockChange:=false;
@@ -338,13 +358,13 @@ end;
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar.position/10;
+csc.NEBmin_sigma:=-ImgLumBar.position/100;
 end;
 
 procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar.position/10;
+csc.NEBmax_sigma:=ImgContrastBar.position/100;
 end;
 
 procedure Tf_config_pictures.ShowImagesBoxClick(Sender: TObject);
@@ -355,24 +375,35 @@ end;
 procedure Tf_config_pictures.ImgContrastBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageContrast:=ImgContrastBar2.position/10;
-FFits.max_sigma:=cmain.ImageContrast;
+csc.BGmax_sigma:=ImgContrastBar2.position/10;
+FFits.max_sigma:=csc.BGmax_sigma;
 ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ImgLumBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-cmain.ImageLuminosity:=-ImgLumBar2.position/10;
-FFits.min_sigma:=cmain.ImageLuminosity;
+csc.BGmin_sigma:=-ImgLumBar2.position/10;
+FFits.min_sigma:=csc.BGmin_sigma;
 ImageTimer1.enabled:=true;
+end;
+
+procedure Tf_config_pictures.ImgTrBar2Change(Sender: TObject);
+begin
+if LockChange then exit;
+csc.BGalpha:=ImgTrBar2.position;
+//ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);
 begin
 ImageTimer1.enabled:=false;
 ImageTimer1.Interval:=500;
-RefreshImage;
+if InitialTimer then  begin
+  InitialTimer:=false;
+  backimgChange(Sender);
+end
+  else RefreshImage;
 end;
 
 ////////// duplicate because of filenameedit onchange bug //////////////////////////
@@ -381,13 +412,16 @@ begin
 if LockChange or (not Fileexists(backimg.text)) then exit;
 csc.BackgroundImage:=backimg.text;
 Ffits.filename:=csc.BackgroundImage;
-if Ffits.header.coordinate_valid then begin
-  cmain.NewBackgroundImage:=true;
-  if Sender=backimg then ShowBackImg.checked:=true;
+FFits.InfoWCScoord;
+if Ffits.WCSvalid then begin
+  if Sender=backimg then begin
+     ShowBackImg.checked:=true;
+     cmain.NewBackgroundImage:=true;
+  end;
   backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
-    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+DEtoStr(
-      Ffits.center_de*
-    rad2deg)+blank+rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
+    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+
+    DEtoStr(Ffits.center_de*rad2deg)+blank+
+    rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
   RefreshImage;
 end
 else begin
@@ -404,13 +438,16 @@ begin
 if LockChange or (not Fileexists(value)) then exit;
 csc.BackgroundImage:=value;
 Ffits.filename:=csc.BackgroundImage;
-if Ffits.header.coordinate_valid then begin
-  cmain.NewBackgroundImage:=true;
-  if Sender=backimg then ShowBackImg.checked:=true;
+FFits.InfoWCScoord;
+if Ffits.WCSvalid then begin
+  if Sender=backimg then begin
+     ShowBackImg.checked:=true;
+     cmain.NewBackgroundImage:=true;
+  end;
   backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
-    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+DEtoStr(
-      Ffits.center_de*
-    rad2deg)+blank+rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
+    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+
+    DEtoStr(Ffits.center_de*rad2deg)+blank+
+    rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
   RefreshImage;
 end
 else begin
@@ -430,6 +467,8 @@ var bmp: TBitmap;
     x,y,dx,dy:integer;
 begin
 bmp:=Tbitmap.create;
+FFits.min_sigma:=csc.BGmin_sigma;
+FFits.max_sigma:=csc.BGmax_sigma;
 FFits.GetBitmap(bmp);
 if bmp.Width>1 then begin
   c1:=Image1.width/Image1.Height;
