@@ -1258,11 +1258,6 @@ try
 {$endif}
  ConnectDB;
 {$ifdef trace_debug}
- WriteTrace('FITS');
-{$endif}
- Fits.min_sigma:=cfgm.ImageLuminosity;
- Fits.max_sigma:=cfgm.ImageContrast;
-{$ifdef trace_debug}
  WriteTrace('Cursor');
 {$endif}
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
@@ -1828,6 +1823,26 @@ if Plan404lib<>0 then begin
 end;
 if @Plan404=nil then begin
    MessageDlg(rsCouldNotLoad+lib404+crlf
+             +rsPleaseTryToR,
+             mtError, [mbAbort], 0);
+   Halt;
+end;
+step:='Load cdcwcs';
+{$ifdef trace_debug}
+ WriteTrace(step);
+{$endif}
+cdcwcs_initfitsfile:=nil;
+cdcwcs_release:=nil;
+cdcwcs_sky2xy:=nil;
+cdcwcslib:=LoadLibrary(libcdcwcs);
+if cdcwcslib<>0 then begin
+  cdcwcs_initfitsfile:= Tcdcwcs_initfitsfile(GetProcedureAddress(cdcwcslib,'cdcwcs_initfitsfile'));
+  cdcwcs_release:= Tcdcwcs_release(GetProcedureAddress(cdcwcslib,'cdcwcs_release'));
+  cdcwcs_sky2xy:= Tcdcwcs_sky2xy(GetProcedureAddress(cdcwcslib,'cdcwcs_sky2xy'));
+  cdcwcs_getinfo:= Tcdcwcs_getinfo(GetProcedureAddress(cdcwcslib,'cdcwcs_getinfo'));
+end;
+if (@cdcwcs_initfitsfile=nil)or(@cdcwcs_release=nil)or(@cdcwcs_sky2xy=nil)or(@cdcwcs_getinfo=nil) then begin
+   MessageDlg(rsCouldNotLoad+libcdcwcs+crlf
              +rsPleaseTryToR,
              mtError, [mbAbort], 0);
    Halt;
@@ -3734,8 +3749,6 @@ begin
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     f_search.init;
     ConnectDB;
-    Fits.min_sigma:=cfgm.ImageLuminosity;
-    Fits.max_sigma:=cfgm.ImageContrast;
     if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
        sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
@@ -3745,6 +3758,7 @@ begin
        sc.plot.cfgplot.Assign(def_cfgplot);
        if cfgm.NewBackgroundImage then begin
           sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
+          sc.Fits.InfoWCScoord;
           if sc.Fits.Header.valid then begin
             sc.Fits.DeleteDB('OTHER','BKG');
             if not sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
@@ -3979,8 +3993,6 @@ cfgm.db:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplac
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
 cfgm.ImagePath:=slash(appDir)+slash('data')+slash('pictures');
-cfgm.ImageLuminosity:=0;
-cfgm.ImageContrast:=0;
 cfgm.ShowChartInfo:=false;
 cfgm.ShowTitlePos:=false;
 cfgm.SyncChart:=false;
@@ -4119,6 +4131,11 @@ def_cfgplot.DSOColorFillGxyCl:=true;
 def_cfgplot.DSOColorFillQ:=true;
 def_cfgplot.DSOColorFillGL:=true;
 def_cfgplot.DSOColorFillNE:=true;
+def_cfgsc.BGalpha:=200;
+def_cfgsc.BGmin_sigma:=0;
+def_cfgsc.BGmax_sigma:=0;
+def_cfgsc.NEBmin_sigma:=0;
+def_cfgsc.NEBmax_sigma:=0;
 def_cfgsc.winx:=clientwidth;
 def_cfgsc.winy:=clientheight;
 def_cfgsc.UseSystemTime:=true;
@@ -4808,6 +4825,11 @@ csc.StyleConstL:=TPenStyle(ReadInteger(section,'StyleConstL',ord(csc.StyleConstL
 csc.StyleConstB:=TPenStyle(ReadInteger(section,'StyleConstB',ord(csc.StyleConstB)));
 csc.StyleEcliptic:=TPenStyle(ReadInteger(section,'StyleEcliptic',ord(csc.StyleEcliptic)));
 csc.StyleGalEq:=TPenStyle(ReadInteger(section,'StyleGalEq',ord(csc.StyleGalEq)));
+csc.BGalpha:=ReadInteger(section,'BGalpha',csc.BGalpha);
+csc.BGmin_sigma:=ReadFloat(section,'BGmin_sigma',csc.BGmin_sigma);
+csc.BGmax_sigma:=ReadFloat(section,'BGmax_sigma',csc.BGmax_sigma);
+csc.NEBmin_sigma:=ReadFloat(section,'NEBmin_sigma',csc.NEBmin_sigma);
+csc.NEBmax_sigma:=ReadFloat(section,'NEBmax_sigma',csc.NEBmax_sigma);
 csc.Simnb:=ReadInteger(section,'Simnb',csc.Simnb);
 csc.SimLabel:=ReadInteger(section,'SimLabel',csc.SimLabel);
 if csc.SimLabel>3 then csc.SimLabel:=3;
@@ -5016,8 +5038,6 @@ cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
 buf:=ReadString(section,'ImagePath',cfgm.ImagePath);
 if DirectoryExists(buf) then cfgm.ImagePath:=buf;
-cfgm.ImageLuminosity:=ReadFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
-cfgm.ImageContrast:=ReadFloat(section,'ImageContrast',cfgm.ImageContrast);
 cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 cfgm.ShowTitlePos:=ReadBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 cfgm.SyncChart:=ReadBool(section,'SyncChart',cfgm.SyncChart);
@@ -5544,6 +5564,11 @@ WriteInteger(section,'StyleConstL',ord(csc.StyleConstL));
 WriteInteger(section,'StyleConstB',ord(csc.StyleConstB));
 WriteInteger(section,'StyleEcliptic',ord(csc.StyleEcliptic));
 WriteInteger(section,'StyleGalEq',ord(csc.StyleGalEq));
+WriteInteger(section,'BGalpha',csc.BGalpha);
+WriteFloat(section,'BGmin_sigma',csc.BGmin_sigma);
+WriteFloat(section,'BGmax_sigma',csc.BGmax_sigma);
+WriteFloat(section,'NEBmin_sigma',csc.NEBmin_sigma);
+WriteFloat(section,'NEBmax_sigma',csc.NEBmax_sigma);
 WriteInteger(section,'Simnb',csc.Simnb);
 WriteInteger(section,'SimLabel',csc.SimLabel);
 WriteBool(section,'SimNameLabel',csc.SimNameLabel);
@@ -5692,8 +5717,6 @@ WriteString(section,'db',cfgm.db);
 WriteString(section,'dbuser',cfgm.dbuser);
 WriteString(section,'dbpass',strtohex(encryptStr(cfgm.dbpass,encryptpwd)));
 WriteString(section,'ImagePath',cfgm.ImagePath);
-WriteFloat(section,'ImageLuminosity',cfgm.ImageLuminosity);
-WriteFloat(section,'ImageContrast',cfgm.ImageContrast);
 WriteBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 WriteBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
 WriteBool(section,'SyncChart',cfgm.SyncChart);

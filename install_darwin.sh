@@ -31,6 +31,7 @@ install -v -m 644 system_integration/MacOSX/pkg/varobs.app/Contents/Resources/va
 
 install -v -m 755 skychart/library/getdss/libgetdss.dylib  $destdir/libgetdss.dylib
 install -v -m 755 skychart/library/plan404/libplan404.dylib  $destdir/libplan404.dylib
+install -v -m 755 skychart/library/wcs/libcdcwcs.dylib  $destdir/libcdcwcs.dylib
 
 install -d -m 755 $destdir/data
 install -d -m 755 $destdir/data/planet
