@@ -865,7 +865,7 @@ extern int zpxpix();	/* Inverse transform (world to physical) gnomonic projectio
  * Jan 16 1998	Add Mark Calabretta's WCSLIB data structures
  * Jan 16 1998	Add LONGPOLE, LATPOLE, and PROJP constants for Calabretta
  * Jan 22 1998	Add ctype[], crpix[], crval[], and cdelt[] for Calabretta
- * Jan 23 1998	Change wcsset() to wcsxinit() and pcode to prjcode
+ * Jan 23 1998	Change wcsset1() to wcsxinit() and pcode to prjcode
  * Jan 23 1998	Define projection type flags
  * Jan 26 1998	Remove chip rotation
  * Jan 26 1998	Add chip correction polynomial
