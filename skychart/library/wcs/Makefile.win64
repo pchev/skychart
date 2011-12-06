@@ -1,6 +1,7 @@
+CC=x86_64-w64-mingw32-gcc
 CFLAGS= -g -w -fPIC $(arch_flags)
 
-SO_Name       = libcdcwcs_x64.dll
+SO_Name       = libcdcwcs.dll
 LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 
 OBJS =	cdcwcs.o imgetwcs.o daoread.o wcscon.o \
