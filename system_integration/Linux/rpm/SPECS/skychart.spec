@@ -8,7 +8,7 @@ URL: http://skychart.origo.ethz.ch
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
 BuildArch: i386
-Provides: skychart libplan404.so libgetdss.so
+Provides: skychart libplan404.so libgetdss.so libcdcwcs.so
 Requires: gtk2 glib2 pango libjpeg libpng sqlite xplanet
 AutoReqProv: no
 
@@ -23,6 +23,7 @@ Planetarium software for the advanced amateur astronomer.
 /usr/bin/varobs_lpv_bulletin
 /usr/lib/libplan404.so
 /usr/lib/libgetdss.so
+/usr/lib/libcdcwcs.so
 /usr/share/applications/skychart.desktop
 /usr/share/pixmaps/skychart.png
 /usr/share/doc/skychart
