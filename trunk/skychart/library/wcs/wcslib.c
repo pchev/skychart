@@ -32,7 +32,7 @@
 *
 *   Summary of routines
 *   -------------------
-*   wcsfwd() and wcsrev() are high level driver routines for the WCS linear
+*   wcsfwd() and wcsrev1() are high level driver routines for the WCS linear
 *   transformation, spherical coordinate transformation, and spherical
 *   projection routines.
 *
@@ -40,16 +40,16 @@
 *   pixel coordinate a hybrid routine, wcsmix(), iteratively solves for the
 *   unknown elements.
 *
-*   An initialization routine, wcsset(), computes indices from the ctype
+*   An initialization routine, wcsset1(), computes indices from the ctype
 *   array but need not be called explicitly - see the explanation of
 *   wcs.flag below.
 *
 *
-*   Initialization routine; wcsset()
+*   Initialization routine; wcsset1()
 *   --------------------------------
 *   Initializes elements of a wcsprm data structure which holds indices into
 *   the coordinate arrays.  Note that this routine need not be called directly;
-*   it will be invoked by wcsfwd() and wcsrev() if the "flag" structure member
+*   it will be invoked by wcsfwd() and wcsrev1() if the "flag" structure member
 *   is anything other than a predefined magic value.
 *
 *   Given:
@@ -131,7 +131,7 @@
 *                           4: Invalid linear transformation parameters.
 *
 *
-*   Reverse transformation; wcsrev()
+*   Reverse transformation; wcsrev1()
 *   --------------------------------
 *   Compute world coordinates for a given pixel coordinate.
 *
@@ -317,9 +317,9 @@
 *             three-dimensional structure using a "CUBEFACE" axis indexed from
 *             0 to 5 as above.
 *
-*       These routines support both methods; wcsset() determines which is
+*       These routines support both methods; wcsset1() determines which is
 *       being used by the presence or absence of a CUBEFACE axis in ctype[].
-*       wcsfwd() and wcsrev() translate the CUBEFACE axis representation to
+*       wcsfwd() and wcsrev1() translate the CUBEFACE axis representation to
 *       the single plane representation understood by the lower-level WCSLIB
 *       projection routines.
 *
@@ -332,7 +332,7 @@
 *         The wcsprm struct contains indexes and other information derived
 *         from the CTYPEn.  Whenever any of the ctype[] are set or changed
 *         this flag must be set to zero to signal the initialization routine,
-*         wcsset() to redetermine the indices.  The flag is set to 999 if
+*         wcsset1() to redetermine the indices.  The flag is set to 999 if
 *         there is no celestial axis pair in the CTYPEn.
 *
 *      char pcode[4]
@@ -392,7 +392,7 @@
 #include "wcslib.h"
 
 /* Map error number to error message for each function. */
-const char *wcsset_errmsg[] = {
+const char *wcsset1_errmsg[] = {
    0,
    "Inconsistent or unrecognized coordinate axis types"};
 
@@ -403,7 +403,7 @@ const char *wcsfwd_errmsg[] = {
    "Invalid world coordinate",
    "Invalid linear transformation parameters"};
 
-const char *wcsrev_errmsg[] = {
+const char *wcsrev1_errmsg[] = {
    0,
    "Invalid coordinate transformation parameters",
    "Invalid projection parameters",
@@ -421,7 +421,7 @@ const char *wcsmix_errmsg[] = {
 #define signb(X) ((X) < 0.0 ? 1 : 0)
 
 int
-wcsset (naxis, ctype, wcs)
+wcsset1 (naxis, ctype, wcs)
 
 const int naxis;
 const char ctype[][9];
@@ -570,7 +570,7 @@ double pixcrd[];
 
    /* Initialize if required. */
    if (wcs->flag != WCSSET) {
-      if (wcsset(lin->naxis, ctype, wcs)) return 1;
+      if (wcsset1(lin->naxis, ctype, wcs)) return 1;
    }
 
    /* Convert to relative physical coordinates. */
@@ -641,7 +641,7 @@ double pixcrd[];
 /*--------------------------------------------------------------------------*/
 
 int
-wcsrev(ctype, wcs, pixcrd, lin, imgcrd, prj, phi, theta, crval, cel, world)
+wcsrev1(ctype, wcs, pixcrd, lin, imgcrd, prj, phi, theta, crval, cel, world)
 
 const char ctype[][9];
 struct wcsprm *wcs;
@@ -660,7 +660,7 @@ double world[];
 
    /* Initialize if required. */
    if (wcs->flag != WCSSET) {
-      if (wcsset(lin->naxis, ctype, wcs)) return 1;
+      if (wcsset1(lin->naxis, ctype, wcs)) return 1;
    }
 
    /* Apply reverse linear transformation. */
@@ -774,7 +774,7 @@ double pixcrd[];
 
    /* Initialize if required. */
    if (wcs->flag != WCSSET) {
-      if (wcsset(lin->naxis, ctype, wcs)) return 1;
+      if (wcsset1(lin->naxis, ctype, wcs)) return 1;
    }
 
    /* Check vspan. */

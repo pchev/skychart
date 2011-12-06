@@ -1,8 +1,7 @@
 # Common flags
-CC = i586-mingw32msvc-gcc
 CFLAGS        = -O3 
 SO_Name       = libplan404.dll
-LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 
 .PHONY: clean
 
