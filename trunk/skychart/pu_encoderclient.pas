@@ -347,7 +347,7 @@ n:=csc.tz.NowUTC;
 decodedate(n,y,m,d);
 ut:=frac(n)*24;
 jd0:=jd(y,m,d,0);
-Sideral_Time:=SidTim(jd0,ut,csc.ObsLongitude);   // in radian
+Sideral_Time:=SidTim(jd0,ut,csc.ObsLongitude,csc,eqeq);   // in radian
 end;
 
 Procedure Tpop_encoder.ComputeCoord(p1,p2 : PInit_object; x,y : integer; var alpha,delta : double);

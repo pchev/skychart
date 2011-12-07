@@ -571,7 +571,7 @@ type
      Tconf_skychart = class(TObject)    // chart setting
                 public
                 tz: TCdCTimeZone;
-                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
@@ -1338,6 +1338,7 @@ bcentre:=Source.bcentre ;
 lecentre:=Source.lecentre ;
 becentre:=Source.becentre ;
 e:=Source.e ;
+eqeq:=Source.eqeq;
 nutl:=Source.nutl ;
 nuto:=Source.nuto ;
 sunl:=Source.sunl ;

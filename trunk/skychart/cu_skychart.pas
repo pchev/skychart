@@ -490,7 +490,6 @@ if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
 cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
-cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude);
 if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
    cfgsc.FindOk:=false;    // last search no longuer valid
    if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid
@@ -629,11 +628,13 @@ Fplot.cfgplot.outradius:=abs(round(min(outr*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
 if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
-// ecliptic
-//cfgsc.e:=ecliptic(cfgsc.CurJd);
-cfgsc.e:=ecliptic(cfgsc.JdChart);
 // nutation constant
 Fplanet.nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
+// ecliptic obliquity
+cfgsc.e:=ecliptic(cfgsc.JdChart,cfgsc.nuto);
+// Sidereal time
+cfgsc.eqeq:=cfgsc.nutl*cos(cfgsc.e);
+cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude,cfgsc.eqeq);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 cfgsc.ephvalid:=(Fplanet.eph_method>'');
@@ -3203,7 +3204,8 @@ if not cfgsc.ShowEclipticValid then exit;
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
 {$endif}
-e:=ecliptic(cfgsc.JDChart);
+//e:=ecliptic(cfgsc.JDChart);
+e:=cfgsc.e;
 b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[14];
