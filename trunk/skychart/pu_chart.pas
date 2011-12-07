@@ -2436,6 +2436,7 @@ if sc.cfgsc.ApparentPos then mean_equatorial(radate,dedate,sc.cfgsc);
 raapp:=sc.cfgsc.FindRA;
 deapp:=sc.cfgsc.FindDec;
 precession(sc.cfgsc.JDChart,cjd,raapp,deapp);
+StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
 if not sc.cfgsc.ApparentPos then apparent_equatorial(raapp,deapp,sc.cfgsc);
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
 if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;

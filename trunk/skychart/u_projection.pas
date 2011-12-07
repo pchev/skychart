@@ -68,6 +68,7 @@ procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
+Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
 Procedure Gal2Eq(l,b: double; var ar,de : double; c: Tconf_skychart);
@@ -97,11 +98,14 @@ Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongi
 
 //procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Tconf_skychart);
 Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
-procedure ltp_S2C(theta,phi: double; var c: coordvector);
-procedure ltp_c2s(p: coordvector; var theta,phi: double);
-procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
-procedure ltp_tr(r: rotmatrix; var rt: rotmatrix);
-procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
+procedure sofa_S2C(theta,phi: double; var c: coordvector);
+procedure sofa_C2S(p: coordvector; var theta,phi: double);
+Procedure sofa_SXP(s: double; p: coordvector;  var sp: coordvector);
+Procedure sofa_PN(p:coordvector; var r:double; var u:coordvector);
+Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
+procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
+procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
+procedure sofa_RXR(a,b: rotmatrix; var atb: rotmatrix);
 
 implementation
 
@@ -1055,6 +1059,29 @@ if (c.abp<>0)or(c.abe<>0) then begin
 end;
 end;
 
+Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
+//  star ra,de in radiant
+//  parallax px in arcsec
+//  Earth barycentric vector eb in parsec
+var x: double;
+    s,sp: coordvector;
+begin
+if px>(1/3600000) then begin  //milli-arcsec
+  // star barycentric unit vector
+  sofa_S2C(ra,de,s);
+  // divide by parallax to get in parsec
+  sofa_SXP(1/px,s,sp);
+  // substract Earth barycenter position in parsec
+  sofa_PMP(sp,eb,s);
+  // star unit vector from Earth
+  sofa_PN(s,x,sp);
+  // return spherical coord.
+  sofa_C2S(sp,ra,de);
+  // avoid negative RA
+  ra:=rmod(ra+pi2,pi2)
+end;
+end;
+
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 begin
 ar:=double(arctan2(sin(l)*cos(e)-tan(b)*sin(e),cos(l)));
@@ -1282,7 +1309,7 @@ END;
 
 ////// Required functions adapted from the SOFA library
 
-Procedure ltp_PXP(a,b: coordvector; var axb: coordvector);
+Procedure sofa_PXP(a,b: coordvector; var axb: coordvector);
 // p-vector outer (=vector=cross) product.
 var xa,ya,za,xb,yb,zb: double;
 begin
@@ -1297,7 +1324,7 @@ AXB[2] := ZA*XB - XA*ZB;
 AXB[3] := XA*YB - YA*XB;
 end;
 
-procedure ltp_PM(p:coordvector; var r:double);
+procedure sofa_PM(p:coordvector; var r:double);
 // Modulus of p-vector.
 var i: integer;
     w,c : double;
@@ -1310,37 +1337,51 @@ end;
 R := SQRT(W);
 end;
 
-Procedure ltp_ZP(var p:coordvector);
+Procedure sofa_ZP(var p:coordvector);
 // Zero a p-vector.
 var i: integer;
 begin
 for i:=1 to 3 do p[i]:=0;
 end;
 
-Procedure ltp_SXP(s: double; p: coordvector;  var sp: coordvector);
+Procedure sofa_SXP(s: double; p: coordvector;  var sp: coordvector);
 //  Multiply a p-vector by a scalar.
 var i: integer;
 begin
 for i:=1 to 3 do sp[i]:=s*p[i];
 end;
 
-Procedure ltp_PN(p:coordvector; var r:double; var u:coordvector);
+Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
+//  P-vector subtraction.
+var i: integer;
+begin
+for i:=1 to 3 do amb[i]:=a[i]-b[i];
+end;
+
+Procedure sofa_PPP(a,b:coordvector; var apb:coordvector);
+//  P-vector addition.
+var i: integer;
+begin
+for i:=1 to 3 do apb[i]:=a[i]+b[i];
+end;
+
+Procedure sofa_PN(p:coordvector; var r:double; var u:coordvector);
 // Convert a p-vector into modulus and unit vector.
 var w: double;
 begin
 // Obtain the modulus and test for zero.
-ltp_PM ( P, W );
+sofa_PM ( P, W );
 IF ( W = 0 ) THEN
 //  Null vector.
-    ltp_ZP ( U )
+    sofa_ZP ( U )
 ELSE
 //  Unit vector.
-    ltp_SXP ( 1/W, P, U );
+    sofa_SXP ( 1/W, P, U );
 //  Return the modulus.
 R := W;
 end;
 
-procedure ltp_S2C(theta,phi: double; var c: coordvector);
+procedure sofa_S2C(theta,phi: double; var c: coordvector);
 // Convert spherical coordinates to Cartesian.
 // THETA    d         longitude angle (radians)
 // PHI      d         latitude angle (radians)
@@ -1353,7 +1394,7 @@ c[2]:=sa*cd;
 c[3]:=sd;
 end;
 
-procedure ltp_c2s(p: coordvector; var theta,phi: double);
+procedure sofa_c2s(p: coordvector; var theta,phi: double);
 // P-vector to spherical coordinates.
 // THETA    d         longitude angle (radians)
 // PHI      d         latitude angle (radians)
@@ -1373,14 +1414,14 @@ ELSE
    phi := arctan2(Z,SQRT(D2));
 end;
 
-procedure ltp_cp(p: coordvector; var c: coordvector);
+procedure sofa_cp(p: coordvector; var c: coordvector);
 // Copy a p-vector.
 var i: integer;
 begin
 for i:=1 to 3 do c[i]:=p[i];
 end;
 
-procedure ltp_cr(r:rotmatrix; var c: rotmatrix);
+procedure sofa_cr(r:rotmatrix; var c: rotmatrix);
 // Copy an r-matrix.
 var i,j: integer;
 begin
@@ -1388,7 +1429,7 @@ for j:=1 to 3 do
   for i:=1 to 3 do c[j,i]:=r[j,i];
 end;
 
-procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
+procedure sofa_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
 // Multiply a p-vector by an r-matrix.
 var w: double;
     wrp: coordvector;
@@ -1403,10 +1444,10 @@ for j:=1 to 3 do begin
    WRP[J] := W;
 end; //j
 // Return the result.
-ltp_CP ( WRP, RP );
+sofa_CP ( WRP, RP );
 end;
 
-procedure ltp_tr(r: rotmatrix; var rt: rotmatrix);
+procedure sofa_tr(r: rotmatrix; var rt: rotmatrix);
 // Transpose an r-matrix.
 var wm: rotmatrix;
     i,j: integer;
@@ -1416,10 +1457,10 @@ for i:=1 to 3 do begin
       wm[i,j] := r[j,i];
    end;
 end;
-ltp_cr ( wm, rt );
+sofa_cr ( wm, rt );
 end;
 
-procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
+procedure sofa_rxr(a,b: rotmatrix; var atb: rotmatrix);
 // Multiply two r-matrices.
 var i,j,k: integer;
     w: double;
@@ -1434,7 +1475,7 @@ for i:=1 to 3 do begin
       WM[I,J] := W;
    end; //j
 end; //i
-ltp_CR ( WM, ATB );
+sofa_CR ( WM, ATB );
 end;
 
 /////// Precession expressions
@@ -1563,9 +1604,9 @@ var peqr, pecl, v, eqx : coordvector;
 begin
 ltp_PEQU(epj,peqr);
 ltp_PECL(epj,pecl);
-ltp_PXP(peqr,pecl,v);
-ltp_pn(v,w,eqx);
-ltp_PXP(peqr,eqx,v);
+sofa_PXP(peqr,pecl,v);
+sofa_pn(v,w,eqx);
+sofa_PXP(peqr,eqx,v);
 RP[1,1]:= EQX[1];
 RP[1,2]:= EQX[2];
 RP[1,3]:= EQX[3];
@@ -1587,9 +1628,9 @@ begin
 if abs(j0-j1)<0.01 then exit; // no change
 oncache:= (prec_j0=j0) and (prec_j1=j1);
 if oncache then begin
-  ltp_S2C(ra,de,p);
-  ltp_rxp(prec_r,p,rp);
-  ltp_c2s(rp,ra,de);
+  sofa_S2C(ra,de,p);
+  sofa_rxp(prec_r,p,rp);
+  sofa_c2s(rp,ra,de);
   ra:=rmod(ra+pi2,pi2);
 end else begin
   if j0=jd2000 then begin       // from j2000
@@ -1597,17 +1638,17 @@ end else begin
   end
   else if j1=jd2000 then begin  // to j2000
     ltp_PMAT(j0,wm1);
-    ltp_tr(wm1,r);
+    sofa_tr(wm1,r);
   end
   else begin                    // from date0 to date1
     ltp_PMAT(j0,r);
-    ltp_tr(r,wm1);
+    sofa_tr(r,wm1);
     ltp_PMAT(j1,wm2);
-    ltp_rxr(wm1,wm2,r);
+    sofa_rxr(wm1,wm2,r);
   end;
-  ltp_S2C(ra,de,p);
-  ltp_rxp(r,p,rp);
-  ltp_c2s(rp,ra,de);
+  sofa_S2C(ra,de,p);
+  sofa_rxp(r,p,rp);
+  sofa_c2s(rp,ra,de);
   ra:=rmod(ra+pi2,pi2);
   prec_r:=r;
   prec_j0:=j0;
