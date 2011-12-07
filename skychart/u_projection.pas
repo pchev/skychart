@@ -53,7 +53,7 @@ Function AngularDistance(ar1,de1,ar2,de2 : Double) : Double;
 function PositionAngle(ac,dc,ar,de:double):double;
 function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
-function SidTim(jd0,ut,long : double): double;
+function SidTim(jd0,ut,long : double; eqeq: double=0 ): double;
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; c: Tconf_skychart);
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
 PROCEDURE PrecessionFK5(ti,tf : double; VAR ari,dei : double);
@@ -63,7 +63,7 @@ PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skycha
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
 Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart);
-function ecliptic(j:double):double;
+function ecliptic(j:double; nuto:double=0):double;
 procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberration(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
@@ -679,11 +679,12 @@ annee:=round(u3+floor((u4-2)/12)-4800);
 heure:=(jd-floor(jd+0.5)+0.5)*24;
 end;
 
-function SidTim(jd0,ut,long : double): double;
+function SidTim(jd0,ut,long : double; eqeq: double=0): double;
  VAR t,te: double;
 BEGIN
  t:=(jd0-2451545.0)/36525;
  te:=100.46061837 + 36000.770053608*t + 0.000387933*t*t - t*t*t/38710000;
+ te:=te+rad2deg*eqeq;
  result := deg2rad*Rmod(te - long + 1.00273790935*ut*15,360) ;
 END ;
 
@@ -818,11 +819,15 @@ end else begin
 end;
 end;
 
-function ecliptic(j:double):double;
+function ecliptic(j:double; nuto:double=0):double;
 var u : double;
 begin
-{meeus91 21.3}   { TODO : Check period of validity }
+{meeus91 21.3
+  precision: 0.01" for 1000 years
+  max validity: 10000 years
+}
 u:=(j-jd2000)/3652500;
+if u<=1 then begin
 result:=eps2000 +(
         -4680.93*u
         -1.55*u*u
@@ -835,7 +840,10 @@ result:=eps2000 +(
         +5.79*intpower(u,9)
         +2.45*intpower(u,10)
         )/3600;
-result:=deg2rad*result;
+result:=deg2rad*result+nuto;
+end else begin
+  result:=eps2000;
+end;
 end;
 
 procedure nutationme(j:double; var nutl,nuto:double);
