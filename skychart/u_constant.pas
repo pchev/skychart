@@ -56,19 +56,17 @@ const cdcversion = 'Version 3.5-svn';
       MaxUserObjects = 100;
       MaxCircle = 100;
       MaxDSSurl = 50;
-      jd2000 =2451545.0 ;
-      jd1950 =2433282.4235;
-      jd1900 =2415020.3135;
+      jd2000 = 2451545.0 ;
+      jd1950 = 2433282.4235;
+      jd1900 = 2415020.3135;
       minjd=-71328942; //-200000 years
       maxjd=74769560; //+200000 years
-//      minjd=-5583575; //-20000 years
-//      maxjd=9026275; //+20000 years
       minjdabe=2378496.5; // 1800   //limit for abberation calculation
       maxjdabe=2524593.5; // 2200
       minjdnut=2378496.5; // 1800   //limit for nutation calculation
       maxjdnut=2524593.5; // 2200
       km_au = 149597870.691 ;
-      clight = 299792.458 ;
+      clight = 299792.458;
       tlight = km_au/clight/3600/24;
       footpermeter = 0.3048;
       kmperdegree=111.1111;
@@ -78,6 +76,7 @@ const cdcversion = 'Version 3.5-svn';
       coseps2k = 0.917482131494378454;
       deg2rad = pi/180;
       rad2deg = 180/pi;
+      au2parsec = deg2rad/3600;
       pi2 = 2*pi;
       pi4 = 4*pi;
       pid2 = pi/2;
@@ -572,6 +571,7 @@ type
                 public
                 tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
+                EarthB : coordvector;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
@@ -600,7 +600,7 @@ type
                 Xwrldmin,Xwrldmax,Ywrldmin,Ywrldmax: Double;
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
-                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
+                ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindPX,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec : Double;
                 DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat,FindCatname : string;
@@ -1338,6 +1338,7 @@ bcentre:=Source.bcentre ;
 lecentre:=Source.lecentre ;
 becentre:=Source.becentre ;
 e:=Source.e ;
+for i:=1 to 3 do EarthB[i]:=Source.EarthB[i];
 eqeq:=Source.eqeq;
 nutl:=Source.nutl ;
 nuto:=Source.nuto ;
@@ -1518,6 +1519,7 @@ FindDec:=Source.FindDec ;
 FindSize:=Source.FindSize ;
 FindType:=Source.FindType;
 FindSimjd:=Source.FindSimjd;
+FindPX:=Source.FindPX;
 AstmagMax:=Source.AstmagMax ;
 AstMagDiff:=Source.AstMagDiff ;
 CommagMax:=Source.CommagMax ;

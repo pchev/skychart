@@ -647,6 +647,11 @@ Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
 PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
+// Earth barycentric position in parsec for parallax
+fplanet.SunRect(cfgsc.CurJd,false,v1,v2,v3,true);
+cfgsc.EarthB[1]:=-v1*au2parsec;
+cfgsc.EarthB[2]:=-v2*au2parsec;
+cfgsc.EarthB[3]:=-v3*au2parsec;
 // Planet position
 if not cfgsc.quick then begin
   {$ifdef trace_debug}
@@ -1833,6 +1838,7 @@ begin
  cfgsc.FindDec:=rec.dec;
  cfgsc.FindPM:=cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec];
  cfgsc.FindSize:=0;
+ cfgsc.FindPX:=0;
  cfgsc.FindType:=rec.options.rectype;
  cfgsc.FindCat:=rec.options.ShortName;
  cfgsc.FindCatname:=rec.options.LongName;
@@ -1875,6 +1881,7 @@ begin
             Desc:=Desc+trim(rec.options.flabel[lOffset+vsEpoch])+dp+txt+tab;
          end;
          if rec.star.valid[vsPx] then begin
+            cfgsc.FindPX:=rec.star.px;
             str(rec.star.px:6:4,txt);
             Desc:=Desc+trim(rec.options.flabel[lOffset+vsPx])+dp+txt+tab;
             if rec.star.px>0 then begin
