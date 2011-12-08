@@ -572,6 +572,7 @@ type
                 tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
                 EarthB : coordvector;
+                NutMAT: rotmatrix;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
@@ -1339,6 +1340,9 @@ lecentre:=Source.lecentre ;
 becentre:=Source.becentre ;
 e:=Source.e ;
 for i:=1 to 3 do EarthB[i]:=Source.EarthB[i];
+for i:=1 to 3 do
+  for j:=1 to 3 do
+    NutMAT[i,j]:=Source.NutMAT[i,j];
 eqeq:=Source.eqeq;
 nutl:=Source.nutl ;
 nuto:=Source.nuto ;

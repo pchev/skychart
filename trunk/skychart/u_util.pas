@@ -81,6 +81,7 @@ Function Str3ToDE(dms : string) : double;
 Function DEToStr4(de: Double) : string;
 function isodate(a,m,d : integer) : string;
 function LeapYear(Year: longint): boolean;
+function DayofYear(y,m,d: integer):integer;
 function jddate(jd: double) : string;
 function jddatetime(jd: double;fy,fm,fd,fh,fn,fs:boolean) : string;
 function DateTimetoJD(Date: Tdatetime): double;
@@ -910,7 +911,7 @@ else begin
   result:=result+ s * StrToIntDef(t,0) / 60;
   p:=pos('s',dms);
   t:=copy(dms,1,p-1);
-  result:=result+ s * StrToIntDef(t,0) / 3600;
+  result:=result+ s * StrToFloatDef(t,0) / 3600;
 end;
 except
 result:=0;
@@ -935,7 +936,7 @@ t:=copy(dms,1,p-1); delete(dms,1,p);
 result:=result+ s * StrToIntDef(t,0) / 60;
 p:=pos('s',dms);
 t:=copy(dms,1,p-1);
-result:=result+ s * StrToIntDef(t,0) / 3600;
+result:=result+ s * StrToFloatDef(t,0) / 3600;
 end;
 except
 result:=0;
@@ -976,6 +977,13 @@ end;
 function LeapYear(Year: longint): boolean;
 begin
   Result := (Year mod 4 = 0) and ((Year mod 100 <> 0) or (Year mod 400 = 0));
+end;
+
+function DayofYear(y,m,d: integer):integer;
+var k: integer;
+begin
+if LeapYear(y) then k:=1 else k:=2;
+result:=floor(275*m/9)-k*floor((m+9)/12)+d-30;
 end;
 
 function DateTimetoJD(date: Tdatetime): double;

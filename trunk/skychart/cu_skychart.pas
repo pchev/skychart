@@ -496,7 +496,8 @@ if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
 end;
 cfgsc.LastJD:=cfgsc.CurJD;
 if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
-   cfgsc.JDChart:=cfgsc.CurJD;
+   // cfgsc.JDChart:=cfgsc.CurJD;
+   cfgsc.JDChart:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);
    cfgsc.EquinoxName:=rsDate;
 end else begin
    cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
@@ -606,6 +607,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
+    se,ce : extended;
     s1,s2,s3: string;
     TrackAltAz: boolean;
     outr: integer;
@@ -629,14 +631,27 @@ if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // nutation constant
-Fplanet.nutation(cfgsc.CurJd,cfgsc.nutl,cfgsc.nuto);
+Fplanet.nutation(cfgsc.JDChart,cfgsc.nutl,cfgsc.nuto);
 // ecliptic obliquity
 cfgsc.e:=ecliptic(cfgsc.JdChart,cfgsc.nuto);
+// nutation matrix
+sincos(cfgsc.e,se,ce);
+cfgsc.NutMAT[1,1]:= 1;
+cfgsc.NutMAT[1,2]:= -ce*cfgsc.nutl;
+cfgsc.NutMAT[1,3]:= -se*cfgsc.nutl;
+cfgsc.NutMAT[2,1]:= ce*cfgsc.nutl;
+cfgsc.NutMAT[2,2]:= 1;
+cfgsc.NutMAT[2,3]:= -cfgsc.nuto;
+cfgsc.NutMAT[3,1]:= se*cfgsc.nutl;
+cfgsc.NutMAT[3,2]:= cfgsc.nuto;
+cfgsc.NutMAT[3,3]:= 1;
 // Sidereal time
 cfgsc.eqeq:=cfgsc.nutl*cos(cfgsc.e);
 cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude,cfgsc.eqeq);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
+PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
+// Can compute planet?
 cfgsc.ephvalid:=(Fplanet.eph_method>'');
 cfgsc.ShowPlanetValid:=cfgsc.ShowPlanet and cfgsc.ephvalid;
 cfgsc.ShowAsteroidValid:=cfgsc.ShowAsteroid and cfgsc.ephvalid;
@@ -644,7 +659,6 @@ cfgsc.ShowCometValid:=cfgsc.ShowComet and cfgsc.ephvalid;
 cfgsc.ShowEarthShadowValid:=cfgsc.ShowEarthShadow and cfgsc.ephvalid;
 cfgsc.ShowEclipticValid:=cfgsc.ShowEcliptic and cfgsc.ephvalid;
 Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
-PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
 // aberration constant
 aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
 // Earth barycentric position in parsec for parallax
@@ -814,7 +828,7 @@ begin
  WriteTrace('SkyChart '+cfgsc.chartname+': draw stars');
 {$endif}
 fillchar(rec,sizeof(rec),0);
-if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
                  else cyear:=cfgsc.YPmon;
 dyear:=0;
 first:=true;

@@ -2519,7 +2519,7 @@ xx1:=rad2deg*xx1/15;
 xx2:=rad2deg*xx2/15;
 yy1:=rad2deg*yy1;
 yy2:=rad2deg*yy2;
-if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+cfgsc.CurMonth/12
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
                  else cyear:=cfgsc.YPmon;
 if not nextobj then begin
   InitRec(cat);
