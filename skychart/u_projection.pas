@@ -106,6 +106,8 @@ Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
 procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
 procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
 procedure sofa_RXR(a,b: rotmatrix; var atb: rotmatrix);
+procedure GCRS2J2000(var ra, de: double);
+procedure J20002GCRS(var ra, de: double);
 
 implementation
 
@@ -567,25 +569,22 @@ Result:=(xx>=c.xmin) and (xx<=c.xmax) and (yy>=c.ymin) and (yy<=c.ymax);
 end;
 
 function NorthPoleInMap(c: Tconf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : single;
 begin
 result:=ObjectInMap(0,pid2,c);
 end;
 
 function SouthPoleInMap(c: Tconf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : single;
 begin
 result:=ObjectInMap(0,-pid2,c);
 end;
 
 function NorthPole2000InMap(c: Tconf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : single;
 begin
 result:=ObjectInMap(c.rap2000,c.dep2000,c);
 end;
 
 function SouthPole2000InMap(c: Tconf_skychart) : Boolean;
-var a,d,x1,y1: Double; xx,yy : single;
+var a,d: Double;
 begin
 a:=0;
 d:=-pid2;
@@ -983,8 +982,10 @@ var t : double;
 begin
 if (j>minjdabe)and(j<maxjdabe) then begin
   t:=(j-jd2000)/36525;
-  abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
-  abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
+  abe:=0.016708634-4.2037e-5*t-1.267e-7*t*t;
+//  abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
+  abp:=deg2rad*(102.93735+1.71946*t+4.6e-4*t*t);
+//  abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
 end else begin
   abe:=0;
   abp:=0;
@@ -992,71 +993,60 @@ end;
 end;
 
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
-var da,dd,l,b: double;
-    cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
+var da,dd: double;
+    cra,sra,cde,sde,ce,se,te,cp,sp,cls,sls: extended;
+    p1,p2: coordvector;
 begin
-cra:=0;sra:=0;cde:=0;sde:=0;ce:=0;se:=0;cp:=0;sp:=0;cls:=0;sls:=0;l:=0;b:=0;
-sincos(ra,sra,cra);
-sincos(de,sde,cde);
-sincos(c.e,se,ce);
-sincos(c.sunl,sls,cls);
-sincos(c.abp,sp,cp);
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
-  if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
-     da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
-     dd:=c.nutl*se*cra+c.nuto*sra;
-     ra:=ra+da;
-     de:=de+dd;
-  end else begin
-     Eq2Ecl(ra,de,c.e,l,b);
-     l:=l+c.nutl;
-     b:=b+c.nuto;
-     Ecl2Eq(l,b,c.e,ra,de);
-  end;
+    sofa_S2C(ra,de,p1);
+    sofa_RXP(c.NutMAT,p1,p2);
+    sofa_C2S(p2,ra,de);
 end;
 //aberration
 if aberration and((c.abp<>0)or(c.abe<>0)) then begin
   //meeus91 22.3
+  sincos(ra,sra,cra);
+  sincos(de,sde,cde);
+  sincos(c.e,se,ce);
+  sincos(c.sunl,sls,cls);
+  sincos(c.abp,sp,cp);
+  te:=tan(c.e);
   da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-  dd:=-abek*(cls*ce*((se/ce)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*((se/ce)*cde-sra*sde)+cra*sde*sp);
+  dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
   ra:=ra+da;
   de:=de+dd;
 end;
+ra:=rmod(ra+pi2,pi2);
 end;
 
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
-var da,dd,l,b: double;
+var da,dd: double;
     cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
+    p1,p2: coordvector;
+    NutMATR : rotmatrix;
 begin
-cra:=0;sra:=0;cde:=0;sde:=0;ce:=0;se:=0;cp:=0;sp:=0;cls:=0;sls:=0;l:=0;b:=0;
-sincos(ra,sra,cra);
-sincos(de,sde,cde);
-sincos(c.e,se,ce);
-sincos(c.sunl,sls,cls);
-sincos(c.abp,sp,cp);
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
-  if abs(de)<(89.99*deg2rad) then begin    // meeus91 22.1
-     da:=c.nutl*(ce+se*sra*(sde/cde))-c.nuto*(cra*(sde/cde));
-     dd:=c.nutl*se*cra+c.nuto*sra;
-     ra:=ra-da;
-     de:=de-dd;
-  end else begin
-     Eq2Ecl(ra,de,c.e,l,b);
-     l:=l-c.nutl;
-     b:=b-c.nuto;
-     Ecl2Eq(l,b,c.e,ra,de);
-  end;
+  sofa_S2C(ra,de,p1);
+  sofa_TR(c.NutMAT,NutMATR);
+  sofa_RXP(NutMATR,p1,p2);
+  sofa_C2S(p2,ra,de);
 end;
 //aberration
 if (c.abp<>0)or(c.abe<>0) then begin
   //meeus91 22.3
+  sincos(ra,sra,cra);
+  sincos(de,sde,cde);
+  sincos(c.e,se,ce);
+  sincos(c.sunl,sls,cls);
+  sincos(c.abp,sp,cp);
   da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
   dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
   ra:=ra-da;
   de:=de-dd;
 end;
+ra:=rmod(ra+pi2,pi2);
 end;
 
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
@@ -1478,6 +1468,92 @@ end; //i
 sofa_CR ( WM, ATB );
 end;
 
+procedure sofa_Zr(var r: rotmatrix);
+// Initialize an r-matrix to the null matrix.
+var i,j: integer;
+begin
+for i:=1 to 3 do
+  for j:=1 to 3 do
+     r[i,j]:=0;
+end;
+
+procedure sofa_Ir(var r: rotmatrix);
+//   Initialize an r-matrix to the identity matrix.
+begin
+sofa_Zr(r);
+r[1,1] := 1.0;
+r[2,2] := 1.0;
+r[3,3] := 1.0;
+end;
+
+procedure sofa_Rz(psi: double; var r: rotmatrix);
+//  Rotate an r-matrix about the z-axis.
+var s,c : extended;
+    a,w : rotmatrix;
+begin
+// Matrix representing new rotation.
+   sincos(psi,s,c);
+   sofa_Ir(a);
+   a[1,1] :=  c;
+   a[2,1] := -s;
+   a[1,2] :=  s;
+   a[2,2] :=  c;
+// Rotate.
+   sofa_Rxr(a, r, w);
+// Return result.
+   sofa_Cr(w, r);
+end;
+
+procedure sofa_Ry(theta: double; var r: rotmatrix);
+//  Rotate an r-matrix about the y-axis.
+var s,c : extended;
+    a,w : rotmatrix;
+begin
+// Matrix representing new rotation.
+   sincos(theta,s,c);
+   sofa_Ir(a);
+   a[1,1] :=  c;
+   a[3,1] :=  s;
+   a[1,3] := -s;
+   a[3,3] :=  c;
+// Rotate.
+   sofa_Rxr(a, r, w);
+// Return result.
+   sofa_Cr(w, r);
+end;
+
+procedure sofa_Rx(phi: double; var r: rotmatrix);
+//  Rotate an r-matrix about the x-axis.
+var s,c : extended;
+    a,w : rotmatrix;
+begin
+// Matrix representing new rotation.
+   sincos(phi,s,c);
+   sofa_Ir(a);
+   a[2,2] :=  c;
+   a[3,2] := -s;
+   a[2,3] :=  s;
+   a[3,3] :=  c;
+// Rotate.
+   sofa_Rxr(a, r, w);
+// Return result.
+   sofa_Cr(w, r);
+end;
+
+procedure sofa_Bi00(var dpsibi, depsbi, dra: double);
+// Frame bias components of IAU 2000 precession-nutation models
+// The frame bias corrections in longitude and obliquity
+   const DPBIAS = -0.041775  * secarc;
+         DEBIAS = -0.0068192 * secarc;
+// The ICRS RA of the J2000.0 equinox (Chapront et al., 2002)
+   const DRA0 = -0.0146 * secarc;
+begin
+// Return the results (which are fixed).
+   dpsibi := DPBIAS;
+   depsbi := DEBIAS;
+   dra := DRA0;
+end;
+
 /////// Precession expressions
 
 Procedure ltp_PECL(epj: double; var vec: coordvector);
@@ -1499,7 +1575,7 @@ const npol=4;
              (667.66673,-2354.886252,-428.152441,376.202861,184.778874,335.321713,-185.138669,-120.97283),
              (-5523.863691,-549.74745,-310.998056,421.535876,-36.776172,-145.278396,-34.74445,22.885731));
 var as2r, d2pi, eps0, t, p, q, w, a, s, c, z : extended;
-    i, j : integer;
+    i : integer;
 begin
 d2pi:=pi2;
 //Arcseconds to radians
@@ -1556,7 +1632,7 @@ const npol=4;
              (81491.287984,787.163481,1251.296102,-1257.950837,-2966.79973,639.744522,131.600209,-445.040117,584.522874,-89.756563,524.42963,-13.549067,-210.157124,-44.919798),
              (1558.515853,7774.939698,-2219.534038,-2523.969396,247.850422,-846.485643,-1393.124055,368.526116,749.045012,444.704518,235.934465,374.049623,-171.33018,-22.899655));
 var as2r, d2pi, t, x, y, w, a, s, c : extended;
-    i, j : integer;
+    i : integer;
 begin
 d2pi:=pi2;
 //Arcseconds to radians
@@ -1657,6 +1733,43 @@ end;
 end;
 
 ///////////////////////
+
+procedure GCRS2J2000_MAT(var rb: rotmatrix);
+var rbw: rotmatrix;
+    dra0,dpsibi,depsbi,eps0: double;
+begin
+// Frame bias matrix: GCRS to J2000.0.
+   eps0:= 84381.448 * secarc;
+   sofa_Bi00(dpsibi,depsbi,dra0);
+   sofa_Ir(rbw);
+   sofa_Rz(dra0, rbw);
+   sofa_Ry(dpsibi * sin(EPS0), rbw);
+   sofa_Rx(-depsbi, rbw);
+   sofa_Cr(rbw, rb);
+end;
+
+procedure GCRS2J2000(var ra, de: double);
+var r : rotmatrix;
+    p,rp : coordvector;
+begin
+GCRS2J2000_MAT(r);
+sofa_S2C(ra,de,p);
+sofa_rxp(r,p,rp);
+sofa_c2s(rp,ra,de);
+ra:=rmod(ra+pi2,pi2);
+end;
+
+procedure J20002GCRS(var ra, de: double);
+var r,rt : rotmatrix;
+    p,rp : coordvector;
+begin
+GCRS2J2000_MAT(rt);
+sofa_tr(rt,r);
+sofa_S2C(ra,de,p);
+sofa_rxp(r,p,rp);
+sofa_c2s(rp,ra,de);
+ra:=rmod(ra+pi2,pi2);
+end;
 
 end.
 
