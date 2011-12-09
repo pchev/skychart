@@ -479,10 +479,10 @@ begin
     if (ntarg * ncent = 30) and (ntarg + ncent = 13) then
         for i := 0 to 5 do pv[2,i] := 0
     else begin
-        if lista[2] = 1 then    //calculate earth state from EMBary
+        if lista[2] >= 1 then    //calculate earth state from EMBary
             for i := 0 to (lista[2] * 3)-1 do
               pv[2,i] := pv[2,i] - pv[9,i] / (1.0 + eph.emrat);
-        if lista[9] = 1 then   //calculate Solar System barycentric moon state
+        if lista[9] >= 1 then   //calculate Solar System barycentric moon state
             for i := 0 to (lista[9] * 3)-1 do
               pv[9,i] := pv[9,i] + pv[2,i];
     end;
@@ -579,7 +579,7 @@ begin
     while n_intervals <= 8 do begin
         for i := 0 to 10 do begin
             if (n_intervals = ephs.ipt[i,2]) and
-            ((list[i] = 1) or (i = 10)) then begin
+            ((list[i] >= 1) or (i = 10)) then begin
                 if i = 10 then flag := 2 else flag := list[i];
                 interp(ephs, ephinfos, @ephs.cache[ephs.ipt[i,0]-1], t,
                 ephs.ipt[i,1], 3, n_intervals, flag, dest);
