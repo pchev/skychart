@@ -65,9 +65,9 @@ Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
 Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart);
 function ecliptic(j:double; nuto:double=0):double;
 procedure nutationme(j:double; var nutl,nuto:double);
-procedure aberration(j:double; var abe,abp:double);
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
-procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
+procedure aberrationme(j:double; var abe,abp:double);
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
+procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
@@ -98,11 +98,13 @@ Procedure Time_Alt(jd,ar,de,h :Double; VAR hp1,hp2 :Double; ObsLatitude,ObsLongi
 
 //procedure RiseSetInt(typobj:integer; jd0,ar1,de1,ar2,de2,ar3,de3:double; var hr,ht,hs,azr,azs,rar,der,rat,det,ras,des:double;var irc:integer; c: Tconf_skychart);
 Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
+procedure sofa_PM(p:coordvector; var r:double);
 procedure sofa_S2C(theta,phi: double; var c: coordvector);
 procedure sofa_C2S(p: coordvector; var theta,phi: double);
 Procedure sofa_SXP(s: double; p: coordvector;  var sp: coordvector);
 Procedure sofa_PN(p:coordvector; var r:double; var u:coordvector);
 Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
+function sofa_PDP(a,b: coordvector):double;
 procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
 procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
 procedure sofa_RXR(a,b: rotmatrix; var atb: rotmatrix);
@@ -977,7 +979,7 @@ end else begin
 end;
 end;
 
-procedure aberration(j:double; var abe,abp:double);
+procedure aberrationme(j:double; var abe,abp:double);
 var t : double;
 begin
 if (j>minjdabe)and(j<maxjdabe) then begin
@@ -992,59 +994,109 @@ end else begin
 end;
 end;
 
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true);
-var da,dd: double;
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
+var da,dd,p1dv,pde,pdep1,w: double;
     cra,sra,cde,sde,ce,se,te,cp,sp,cls,sls: extended;
     p1,p2: coordvector;
+    i: integer;
 begin
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
+    // rotate using nutation matrix
     sofa_S2C(ra,de,p1);
     sofa_RXP(c.NutMAT,p1,p2);
     sofa_C2S(p2,ra,de);
 end;
 //aberration
-if aberration and((c.abp<>0)or(c.abe<>0)) then begin
-  //meeus91 22.3
-  sincos(ra,sra,cra);
-  sincos(de,sde,cde);
-  sincos(c.e,se,ce);
-  sincos(c.sunl,sls,cls);
-  sincos(c.abp,sp,cp);
-  te:=tan(c.e);
-  da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-  dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
-  ra:=ra+da;
-  de:=de+dd;
+if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
+   if c.abm then begin
+     // geocentric unit vector to the star
+     sofa_S2C(ra,de,p1);
+     // relativistic term
+     p1dv := sofa_Pdp ( p1, c.abv );
+     w := 1.0 + p1dv / ( c.ab1 + 1.0 );
+     // add Earth velocity vector to star vector
+     for i:=1 to 3 do
+        p2[i] := c.ab1*p1[i] + w*c.abv[i];
+     sofa_C2S(p2,ra,de);
+   end else begin
+    //meeus91 22.3
+    sincos(ra,sra,cra);
+    sincos(de,sde,cde);
+    sincos(c.e,se,ce);
+    sincos(c.sunl,sls,cls);
+    sincos(c.abp,sp,cp);
+    te:=tan(c.e);
+    da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+    dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
+    ra:=ra+da;
+    de:=de+dd;
+  end;
+end;
+// Sun light deflection
+if lightdeflection and c.asl then begin
+  //geocentric unit vector to the star
+  sofa_S2C(ra,de,p1);
+  pde := sofa_Pdp( p1, c.ehn );
+  pdep1 := 1.0 + pde;
+  w := c.gr2e / max ( pdep1, 1.0e-5 );
+  for i:=1 to 3 do
+     p2[i] := p1[i] + ( w * ( c.ehn[i] - pde * p1[i] ) );
+  sofa_C2S(p2,ra,de);
 end;
 ra:=rmod(ra+pi2,pi2);
 end;
 
-procedure mean_equatorial(var ra,de:double; c: Tconf_skychart);
-var da,dd: double;
+procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
+var da,dd,p1dv,pde,pdep1,w: double;
     cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
     p1,p2: coordvector;
     NutMATR : rotmatrix;
+    i: integer;
 begin
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
+  // rotate using transposed nutation matrix
   sofa_S2C(ra,de,p1);
   sofa_TR(c.NutMAT,NutMATR);
   sofa_RXP(NutMATR,p1,p2);
   sofa_C2S(p2,ra,de);
 end;
 //aberration
-if (c.abp<>0)or(c.abe<>0) then begin
-  //meeus91 22.3
-  sincos(ra,sra,cra);
-  sincos(de,sde,cde);
-  sincos(c.e,se,ce);
-  sincos(c.sunl,sls,cls);
-  sincos(c.abp,sp,cp);
-  da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-  dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
-  ra:=ra-da;
-  de:=de-dd;
+if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
+   if c.abm then begin
+     // geocentric unit vector to the star
+     sofa_S2C(ra,de,p1);
+     // relativistic term
+     p1dv := sofa_Pdp ( p1, c.abv );
+     w := 1.0 + p1dv / ( c.ab1 + 1.0 );
+     // substract Earth velocity vector from star vector
+     for i:=1 to 3 do
+        p2[i] := p1[i]/c.ab1 - w*c.abv[i];
+     sofa_C2S(p2,ra,de);
+   end else begin
+      //meeus91 22.3
+      sincos(ra,sra,cra);
+      sincos(de,sde,cde);
+      sincos(c.e,se,ce);
+      sincos(c.sunl,sls,cls);
+      sincos(c.abp,sp,cp);
+      da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
+      dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
+      ra:=ra-da;
+      de:=de-dd;
+   end;
+end;
+// Sun light deflection
+if lightdeflection and c.asl then begin
+  //geocentric unit vector to the star
+  sofa_S2C(ra,de,p1);
+  pde := sofa_Pdp( p1, c.ehn );
+  pdep1 := 1.0 + pde;
+  w := c.gr2e / max ( pdep1, 1.0e-5 );
+  for i:=1 to 3 do
+     p2[i] := p1[i] - ( w * ( c.ehn[i] - pde * p1[i] ) );
+  sofa_C2S(p2,ra,de);
 end;
 ra:=rmod(ra+pi2,pi2);
 end;
@@ -1409,6 +1461,14 @@ procedure sofa_cp(p: coordvector; var c: coordvector);
 var i: integer;
 begin
 for i:=1 to 3 do c[i]:=p[i];
+end;
+
+function sofa_PDP(a,b: coordvector):double;
+// p-vector inner (=scalar=dot) product.
+begin
+result:= a[1]*b[1] +
+         a[2]*b[2] +
+         a[3]*b[3];
 end;
 
 procedure sofa_cr(r:rotmatrix; var c: rotmatrix);

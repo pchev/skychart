@@ -113,6 +113,7 @@ type
      procedure PlanetAltitude(pla: integer; jd0,hh:double; cfgsc: Tconf_skychart; var har,sina: double);
      procedure Twilight(jd0,obslat,obslon: double; out astrom,nautm,civm,cive,naute,astroe: double);
      procedure nutation(j:double; var nutl,nuto:double);
+     procedure aberration(j:double; var abv,ehn: coordvector; var ab1,abe,abp,gr2e: double; var abm,asl:boolean );
      property eph_method: string read Feph_method;
   end;
 
@@ -2437,6 +2438,45 @@ end;
 if not ok then
   nutationMe(j,nutl,nuto);
 end;
+
+procedure TPlanet.aberration(j:double; var abv,ehn: coordvector; var ab1,abe,abp,gr2e: double; var abm,asl:boolean );
+var planet_arr: Array_5D;
+    v,sx,sy,sz: double;
+    ps: coordvector;
+    ok:boolean;
+begin
+ok:=false;
+// annual aberration
+if load_de(j) then begin
+  ok:=Calc_Planet_de(j, 3, planet_arr,false,12,true);
+  if ok then begin
+    // Earth velocity vector divided by c
+    abv[1]:=planet_arr[3]/secday/clight;
+    abv[2]:=planet_arr[4]/secday/clight;
+    abv[3]:=planet_arr[5]/secday/clight;
+    sofa_PM(abv,v);
+    ab1:=sqrt(1-v*v);
+    abm:=true;
+  end;
+end;
+if not ok then begin
+  aberrationMe(j,abe,abp);
+  abm:=false;
+end;
+// Sun light deflection
+SunRect(j,false,sx,sy,sz,false);
+if  Feph_method<>'' then begin
+  // twice the gravitational radius of the Sun divided by the Sun-Earth distance
+  gr2e:=grsun/(sqr(sx*sx+sy*sy+sz*sz));
+  ps[1]:=-sx; ps[2]:=-sy; ps[3]:=-sz;
+  // unit vector from the Sun to the Earth
+  sofa_PN(ps,v,ehn);
+  asl:=true;
+end else begin
+  asl:=false;
+end;
+end;
+
 
 end.
 
