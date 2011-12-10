@@ -447,11 +447,10 @@ end else begin
   f_calendar.config.PlanetParalaxe:=true;
   f_calendar.config.ApparentPos:=true;
   f_calendar.config.e:=ecliptic(f_calendar.config.JdChart);
-  f_calendar.planet.nutation(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
+  nutationme(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
   f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
-  aberration(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
-
+  aberrationme(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
   p:=deg2rad*f_calendar.config.ObsLatitude;
   u:=arctan(ratio*tan(p));
   f_calendar.config.ObsRoSinPhi:=ratio*sin(u)+(f_calendar.config.ObsAltitude/H0)*sin(p);
