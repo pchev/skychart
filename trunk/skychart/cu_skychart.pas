@@ -659,8 +659,8 @@ cfgsc.ShowCometValid:=cfgsc.ShowComet and cfgsc.ephvalid;
 cfgsc.ShowEarthShadowValid:=cfgsc.ShowEarthShadow and cfgsc.ephvalid;
 cfgsc.ShowEclipticValid:=cfgsc.ShowEcliptic and cfgsc.ephvalid;
 Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
-// aberration constant
-aberration(cfgsc.CurJd,cfgsc.abe,cfgsc.abp);
+// aberration and light deflection constant
+Fplanet.aberration(cfgsc.CurJd,cfgsc.abv,cfgsc.ehn,cfgsc.ab1,cfgsc.abe,cfgsc.abp,cfgsc.gr2e,cfgsc.abm,cfgsc.asl);
 // Earth barycentric position in parsec for parallax
 fplanet.SunRect(cfgsc.CurJd,false,v1,v2,v3,true);
 cfgsc.EarthB[1]:=-v1*au2parsec;

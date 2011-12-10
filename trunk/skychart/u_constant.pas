@@ -67,6 +67,7 @@ const cdcversion = 'Version 3.5-svn';
       maxjdnut=2524593.5; // 2200
       km_au = 149597870.691 ;
       clight = 299792.458;
+      grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
       tlight = km_au/clight/3600/24;
       footpermeter = 0.3048;
       kmperdegree=111.1111;
@@ -570,10 +571,10 @@ type
      Tconf_skychart = class(TObject)    // chart setting
                 public
                 tz: TCdCTimeZone;
-                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,abe,abp,raprev,deprev : double;
-                EarthB : coordvector;
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,ab1,abe,abp,gr2e,raprev,deprev : double;
+                EarthB,abv,ehn : coordvector;
                 NutMAT: rotmatrix;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved : Boolean;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved,abm,asl : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
@@ -1339,6 +1340,8 @@ bcentre:=Source.bcentre ;
 lecentre:=Source.lecentre ;
 becentre:=Source.becentre ;
 e:=Source.e ;
+for i:=1 to 3 do abv[i]:=Source.abv[i];
+for i:=1 to 3 do ehn[i]:=Source.ehn[i];
 for i:=1 to 3 do EarthB[i]:=Source.EarthB[i];
 for i:=1 to 3 do
   for j:=1 to 3 do
@@ -1354,8 +1357,12 @@ sunurlsize:=Source.sunurlsize;
 sunurlmargin:=Source.sunurlmargin;
 sunrefreshtime:=Source.sunrefreshtime;
 SunOnline:=Source.SunOnline;
+ab1:=Source.ab1 ;
 abe:=Source.abe ;
 abp:=Source.abp ;
+abm:=Source.abm;
+asl:=Source.asl;
+gr2e:=Source.gr2e;
 raprev:=Source.raprev ;
 deprev:=Source.deprev ;
 Force_DT_UT:=Source.Force_DT_UT ;

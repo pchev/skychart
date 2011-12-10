@@ -2261,6 +2261,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     isStar, isSolarSystem, isd2k, isvo, isOsr: boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst: double;
+
 function Bold(s:string):string;
 var k:integer;
 begin
@@ -2425,18 +2426,25 @@ if isSolarSystem then
    if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
                               else txt:=txt+blank+rsGeocentric;
 txt:=txt+htms_b+html_br;
+// return to j2000 coord.
 ra2000:=sc.cfgsc.FindRA;
 de2000:=sc.cfgsc.FindDec;
 if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
 precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+// mean of date, apply only precession
 radate:=ra2000;
 dedate:=de2000;
 precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
+// apparent
 raapp:=ra2000;
 deapp:=de2000;
+// apply parallax
 if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
+// apply precession
 precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
+// apply nutation, aberration, light deflection
 apparent_equatorial(raapp,deapp,sc.cfgsc);
+// print coord.
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
 if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
 if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
