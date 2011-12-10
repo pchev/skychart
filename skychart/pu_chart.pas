@@ -2313,29 +2313,32 @@ delete(buf,1,i);
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
+  ipla:=0;
   for i:=1 to 11 do if pla[i]=oname then ipla:=i;
-  { TODO : make a global function with almost the same code in cu_plot }
-  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
- {$ifdef linux}
-    cmd:='export LC_ALL=C; xplanet';
- {$endif}
- {$ifdef darwin}
-    cmd:='export LC_ALL=C; '+'"'+slash(appdir)+slash(xplanet_dir)+'xplanet"';
- {$endif}
- {$ifdef mswindows}
-//    chdir(xplanet_dir);
-    cmd:='"'+slash(appdir)+slash(xplanet_dir)+'xplanet.exe"';
- {$endif}
- cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate 0'+
-      ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,cjd) +
-      ' -searchdir '+searchdir+
-      ' -config xplanet.config -verbosity -1'+
-      ' -radius 50'+
-      ' -geometry 200x200 -output "'+slash(Tempdir)+'info.png'+'"';
- if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd));
- DeleteFile(slash(Tempdir)+'info.png');
- i:=exec(cmd);
- if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;
+  if ipla>0 then begin
+    { TODO : make a global function with almost the same code in cu_plot }
+    searchdir:='"'+slash(appdir)+slash('data')+'planet"';
+   {$ifdef linux}
+      cmd:='export LC_ALL=C; xplanet';
+   {$endif}
+   {$ifdef darwin}
+      cmd:='export LC_ALL=C; '+'"'+slash(appdir)+slash(xplanet_dir)+'xplanet"';
+   {$endif}
+   {$ifdef mswindows}
+  //    chdir(xplanet_dir);
+      cmd:='"'+slash(appdir)+slash(xplanet_dir)+'xplanet.exe"';
+   {$endif}
+   cmd:=cmd+' -target '+epla[ipla]+' -origin earth -rotate 0'+
+        ' -light_time -tt -num_times 1 -jd '+ formatfloat(f5,cjd) +
+        ' -searchdir '+searchdir+
+        ' -config xplanet.config -verbosity -1'+
+        ' -radius 50'+
+        ' -geometry 200x200 -output "'+slash(Tempdir)+'info.png'+'"';
+   if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd));
+   DeleteFile(slash(Tempdir)+'info.png');
+   i:=exec(cmd);
+   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;
+ end;
 end;
 // Sun picture
 if (otype='S*')and(oname=pla[10]) then begin
