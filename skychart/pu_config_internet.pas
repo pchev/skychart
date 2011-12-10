@@ -44,6 +44,8 @@ type
     astcdcneo: TButton;
     Button6: TButton;
     CheckBox1: TCheckBox;
+    SocksProxy: TCheckBox;
+    SocksType: TComboBox;
     DefaultDSS: TButton;
     comhttp: TButton;
     comftp: TButton;
@@ -106,6 +108,8 @@ type
     procedure proxypassChange(Sender: TObject);
     procedure proxyportChange(Sender: TObject);
     procedure proxyuserChange(Sender: TObject);
+    procedure SocksProxyClick(Sender: TObject);
+    procedure SocksTypeChange(Sender: TObject);
   private
     { Private declarations }
     FApplyConfig: TNotifyEvent;
@@ -186,10 +190,13 @@ proxyhost.Text:=cmain.ProxyHost;
 proxyport.Text:=cmain.ProxyPort;
 proxyuser.Text:=cmain.ProxyUser;
 proxypass.Text:=cmain.ProxyPass;
+SocksProxy.Checked:=cmain.SocksProxy;
+if cmain.SocksType='Socks4' then SocksType.ItemIndex:=1 else SocksType.ItemIndex:=0;
 ftppassive.Checked:=cmain.FtpPassive;
 CheckBox1.Checked:=cmain.ConfirmDownload;
 anonpass.Text:=cmain.AnonPass;
-panel2.Visible:=cmain.HttpProxy;
+panel2.Visible:=cmain.HttpProxy or cmain.SocksProxy;
+SocksType.Visible:=SocksProxy.Checked;
 end;
 
 procedure Tf_config_internet.ShowOrbitalElements;
@@ -221,7 +228,24 @@ procedure Tf_config_internet.httpproxyClick(Sender: TObject);
 begin
 if lockchange then exit;
 cmain.HttpProxy:=httpproxy.Checked;
-panel2.Visible:=cmain.HttpProxy;
+if cmain.HttpProxy then SocksProxy.Checked:=false;
+panel2.Visible:=cmain.HttpProxy or cmain.SocksProxy;
+SocksType.Visible:=SocksProxy.Checked;
+end;
+
+procedure Tf_config_internet.SocksProxyClick(Sender: TObject);
+begin
+if lockchange then exit;
+cmain.SocksProxy:=SocksProxy.Checked;
+if cmain.SocksProxy then httpproxy.Checked:=false;
+panel2.Visible:=cmain.HttpProxy or cmain.SocksProxy;
+SocksType.Visible:=SocksProxy.Checked;
+end;
+
+procedure Tf_config_internet.SocksTypeChange(Sender: TObject);
+begin
+if lockchange then exit;
+cmain.SocksType:=SocksType.Text;
 end;
 
 procedure Tf_config_internet.proxyhostChange(Sender: TObject);

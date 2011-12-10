@@ -62,6 +62,7 @@ type
     Ffile: string;
     FResponse: string;
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
+    FSocksproxy,FSockstype : string;
     FFWMode : Integer;
     FFWpassive : Boolean;
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
@@ -100,6 +101,8 @@ type
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
     property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
     property HttpProxyPass : string read Fproxypass  write Fproxypass ;
+    property SocksProxy : string read FSocksproxy  write FSocksproxy ;
+    property SocksType : string read FSockstype  write FSockstype ;
     property FtpUserName : string read FUsername  write FUsername ;
     property FtpPassword : string read FPassword  write FPassword ;
     property FtpFwMode : integer read FFWMode write FFWMode ;
@@ -143,7 +146,8 @@ begin
   Timer1.Enabled:=false;
   Timer1.Interval:=2000;
   Timer1.OnTimer:=@Timer1Timer;
-  HttpProxy:='';
+  Fproxy:='';
+  FSocksproxy:='';
   FFWMode:=0;
   FFWpassive:=true;
   FConfirmDownload:=true;
@@ -307,10 +311,22 @@ begin
 FResponse:='';
 if copy(Furl,1,4)='http' then begin        // HTTP protocol
   http.Clear;
-  if Fproxy<>'' then http.ProxyHost:=Fproxy;
-  if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
-  if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
-  if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+  http.Sock.SocksIP:='';
+  http.ProxyHost:='';
+  if FSocksproxy<>'' then begin
+    http.Sock.SocksIP:=FSocksproxy;
+    if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
+    if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
+                           else http.Sock.SocksType:=ST_Socks5;
+    if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
+    if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+  end
+  else if Fproxy<>'' then  begin
+      http.ProxyHost:=Fproxy;
+      if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
+      if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
+      if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
+  end;
   okButton.Visible:=false;
   DownloadDaemon:=TDownloadDaemon.Create;
   DownloadDaemon.Phttp:=@http;

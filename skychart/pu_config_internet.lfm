@@ -14,7 +14,7 @@ object f_config_internet: Tf_config_internet
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.3'
   object MainPanel: TPanel
     Left = 0
     Height = 434
@@ -39,22 +39,22 @@ object f_config_internet: Tf_config_internet
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Proxy'
-        ClientHeight = 430
-        ClientWidth = 478
+        ClientHeight = 434
+        ClientWidth = 482
         object GroupBox1: TGroupBox
           Left = 20
           Height = 201
           Top = 12
           Width = 401
           Caption = 'HTTP Proxy'
-          ClientHeight = 185
+          ClientHeight = 171
           ClientWidth = 397
           TabOrder = 0
           object httpproxy: TCheckBox
             Left = 30
-            Height = 23
+            Height = 26
             Top = 11
-            Width = 114
+            Width = 117
             Caption = 'Use HTTP Proxy'
             OnClick = httpproxyClick
             TabOrder = 0
@@ -131,6 +131,31 @@ object f_config_internet: Tf_config_internet
               Caption = 'Proxy host'
               ParentColor = False
             end
+            object SocksType: TComboBox
+              Left = 247
+              Height = 24
+              Top = 52
+              Width = 100
+              ItemHeight = 0
+              ItemIndex = 0
+              Items.Strings = (
+                'Socks5'
+                'Socks4'
+              )
+              OnChange = SocksTypeChange
+              Style = csDropDownList
+              TabOrder = 4
+              Text = 'Socks5'
+            end
+          end
+          object SocksProxy: TCheckBox
+            Left = 202
+            Height = 26
+            Top = 11
+            Width = 93
+            Caption = 'Socks proxy'
+            OnClick = SocksProxyClick
+            TabOrder = 2
           end
         end
         object GroupBox2: TGroupBox
@@ -139,7 +164,7 @@ object f_config_internet: Tf_config_internet
           Top = 222
           Width = 401
           Caption = 'FTP '
-          ClientHeight = 104
+          ClientHeight = 90
           ClientWidth = 397
           TabOrder = 1
           object Label1: TLabel
@@ -152,9 +177,9 @@ object f_config_internet: Tf_config_internet
           end
           object ftppassive: TCheckBox
             Left = 39
-            Height = 23
+            Height = 26
             Top = 18
-            Width = 127
+            Width = 130
             Caption = 'FTP Passive Mode'
             OnClick = ftppassiveClick
             TabOrder = 0
@@ -170,9 +195,9 @@ object f_config_internet: Tf_config_internet
         end
         object CheckBox1: TCheckBox
           Left = 20
-          Height = 23
+          Height = 26
           Top = 350
-          Width = 283
+          Width = 286
           Caption = 'Ask confirmation before any Internet connection'
           OnClick = CheckBox1Click
           TabOrder = 2
@@ -180,8 +205,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TTabSheet
         Caption = 'Orbital Elements'
-        ClientHeight = 430
-        ClientWidth = 478
+        ClientHeight = 434
+        ClientWidth = 482
         object Label6: TLabel
           Left = 28
           Height = 14
@@ -319,8 +344,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page3: TTabSheet
         Caption = 'Online DSS'
-        ClientHeight = 430
-        ClientWidth = 478
+        ClientHeight = 434
+        ClientWidth = 482
         object Label8: TLabel
           Left = 20
           Height = 14
