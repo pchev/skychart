@@ -2703,8 +2703,7 @@ repeat
   if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
-    rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
-    rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
+    propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
   end;
   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
   if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);

@@ -54,6 +54,7 @@ function PositionAngle(ac,dc,ar,de:double):double;
 function Jd(annee,mois,jour :INTEGER; Heure:double):double;
 PROCEDURE Djd(jd:Double;VAR annee,mois,jour:INTEGER; VAR Heure:double);
 function SidTim(jd0,ut,long : double; eqeq: double=0 ): double;
+procedure ProperMotion(var r0,d0: double; t,pr,pd: double; fullmotion: boolean;px,rv:double);
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; c: Tconf_skychart);
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
 PROCEDURE PrecessionFK5(ti,tf : double; VAR ari,dei : double);
@@ -104,6 +105,7 @@ procedure sofa_C2S(p: coordvector; var theta,phi: double);
 Procedure sofa_SXP(s: double; p: coordvector;  var sp: coordvector);
 Procedure sofa_PN(p:coordvector; var r:double; var u:coordvector);
 Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
+Procedure sofa_PPP(a,b:coordvector; var apb:coordvector);
 function sofa_PDP(a,b: coordvector):double;
 procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
 procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
@@ -693,6 +695,32 @@ BEGIN
  result := deg2rad*Rmod(te - long + 1.00273790935*ut*15,360) ;
 END ;
 
+procedure ProperMotion(var r0,d0: double; t,pr,pd: double; fullmotion: boolean;px,rv:double);
+var w: extended;
+    cr0,sr0,cd0,sd0: extended;
+    i: integer;
+    p,em: coordvector;
+begin
+if fullmotion then begin
+  // "communicated by Patrick Wallace, RAL Space, UK"
+  sincos(r0,sr0,cr0);
+  sincos(d0,sd0,cd0);
+  pr:=pr/cd0;
+  sofa_S2C(r0,d0,p);
+  w := vfr*rv*px;
+  em[1] := - pr*p[2] - pd*cr0*sd0 + w*p[1];
+  em[2] :=   pr*p[1] - pd*sr0*sd0 + w*p[2];
+  em[3] :=             pd*cd0     + w*p[3];
+  for i:=1 to 3 do
+     p[i] := p[i]+t*em[i];
+  sofa_C2S(p,r0,d0);
+end else begin
+  r0:=r0+(pr/cos(d0))*t;
+  d0:=d0+(pd)*t;
+end;
+r0:=rmod(r0+pi2,pi2);
+end;
+
 procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; c: Tconf_skychart);
 var
    sinpi,H,a,b,d : double;
@@ -984,10 +1012,8 @@ var t : double;
 begin
 if (j>minjdabe)and(j<maxjdabe) then begin
   t:=(j-jd2000)/36525;
-  abe:=0.016708634-4.2037e-5*t-1.267e-7*t*t;
-//  abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
-  abp:=deg2rad*(102.93735+1.71946*t+4.6e-4*t*t);
-//  abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
+  abe:=0.016708617-4.2037e-5*t-1.236e-7*t*t;
+  abp:=deg2rad*(102.93735+1.71953*t+4.6e-4*t*t);
 end else begin
   abe:=0;
   abp:=0;
@@ -1010,6 +1036,7 @@ end;
 //aberration
 if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
    if c.abm then begin
+     // "communicated by Patrick Wallace, RAL Space, UK"
      // geocentric unit vector to the star
      sofa_S2C(ra,de,p1);
      // relativistic term
@@ -1035,7 +1062,7 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
 end;
 // Sun light deflection
 if lightdeflection and c.asl then begin
-  //geocentric unit vector to the star
+  // "communicated by Patrick Wallace, RAL Space, UK"
   sofa_S2C(ra,de,p1);
   pde := sofa_Pdp( p1, c.ehn );
   pdep1 := 1.0 + pde;
@@ -1065,6 +1092,7 @@ end;
 //aberration
 if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
    if c.abm then begin
+     // "communicated by Patrick Wallace, RAL Space, UK"
      // geocentric unit vector to the star
      sofa_S2C(ra,de,p1);
      // relativistic term
@@ -1089,7 +1117,7 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
 end;
 // Sun light deflection
 if lightdeflection and c.asl then begin
-  //geocentric unit vector to the star
+  // "communicated by Patrick Wallace, RAL Space, UK"
   sofa_S2C(ra,de,p1);
   pde := sofa_Pdp( p1, c.ehn );
   pdep1 := 1.0 + pde;
@@ -1102,6 +1130,7 @@ ra:=rmod(ra+pi2,pi2);
 end;
 
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
+// "communicated by Patrick Wallace, RAL Space, UK"
 //  star ra,de in radiant
 //  parallax px in arcsec
 //  Earth barycentric vector eb in parsec

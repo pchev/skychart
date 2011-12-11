@@ -13,6 +13,7 @@
         </SyntaxOptions>
       </Parsing>
       <Other>
+        <CustomOptions Value="-CF64"/>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
