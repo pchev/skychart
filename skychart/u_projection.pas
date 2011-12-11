@@ -66,8 +66,8 @@ Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart);
 function ecliptic(j:double; nuto:double=0):double;
 procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberrationme(j:double; var abe,abp:double);
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
-procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
+procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
@@ -994,7 +994,7 @@ end else begin
 end;
 end;
 
-procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
+procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
 var da,dd,p1dv,pde,pdep1,w: double;
     cra,sra,cde,sde,ce,se,te,cp,sp,cls,sls: extended;
     p1,p2: coordvector;

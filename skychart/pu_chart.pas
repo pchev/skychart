@@ -949,7 +949,7 @@ begin
  i:=TMenuItem(sender).tag;
  if (i>0) and (i<=infocoord_maxurl) then begin
     sc.GetCoord(xcursor,ycursor,ra,de,a,h,l,b,le,be);
-    if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc);
+    if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc,true,true);
     precession(sc.cfgsc.JDChart,jd2000,ra,de);
     sra:=trim(ARtoStr(rad2deg*ra/15));
     sde:=trim(DEToStr3(rad2deg*de));
@@ -2238,7 +2238,7 @@ if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
 de2000:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
 precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 f_detail.ra:=ra2000;
 f_detail.de:=de2000;
@@ -2312,8 +2312,8 @@ oname:=trim(copy(buf,1,i-1));
 delete(buf,1,i);
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
+ipla:=0;
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
-  ipla:=0;
   for i:=1 to 11 do if pla[i]=oname then ipla:=i;
   if ipla>0 then begin
     { TODO : make a global function with almost the same code in cu_plot }
@@ -2432,7 +2432,7 @@ txt:=txt+htms_b+html_br;
 // return to j2000 coord.
 ra2000:=sc.cfgsc.FindRA;
 de2000:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
 precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 // mean of date, apply only precession
 radate:=ra2000;
@@ -2446,7 +2446,7 @@ if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
 // apply precession
 precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
 // apply nutation, aberration, light deflection
-apparent_equatorial(raapp,deapp,sc.cfgsc);
+apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
 // print coord.
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
 if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
@@ -2462,7 +2462,7 @@ a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,ipla<>11,not isSolarSystem);
 Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
 a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
@@ -3150,7 +3150,7 @@ begin
 f_getdss.cmain:=cmain;
 ra2000:=sc.cfgsc.racentre;
 de2000:=sc.cfgsc.decentre;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,true,true);
 precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
 if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
    sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
@@ -3841,7 +3841,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
@@ -3860,7 +3860,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_indi.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
@@ -3896,7 +3896,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_lx200.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
@@ -3915,7 +3915,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_lx200.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
@@ -3950,7 +3950,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_encoder.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
@@ -3987,7 +3987,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
@@ -4006,7 +4006,7 @@ dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
    precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
 end else begin
-   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc);
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
 Fpop_scope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);

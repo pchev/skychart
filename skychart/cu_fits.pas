@@ -826,7 +826,7 @@ if FWCSvalid and(Fheader.naxis1>0) then begin
   ProjImg.SetSize(c.xmax,c.ymax);
   ra_offset:=Fra;
   de_offset:=Fde;
-  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c);
+  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c,true,true);
   Precession(c.JDChart,jd2000,ra_offset,de_offset);
   ra_offset:=ra_offset-Fra;
   de_offset:=de_offset-Fde;

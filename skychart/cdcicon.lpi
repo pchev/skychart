@@ -71,7 +71,6 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
         <TopLine Value="432"/>
@@ -203,10 +202,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="175"/>
-        <CursorPos X="40" Y="195"/>
+        <TopLine Value="1191"/>
+        <CursorPos X="91" Y="1212"/>
         <UsageCount Value="25"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -263,7 +263,7 @@
         <UsageCount Value="10"/>
       </Unit24>
     </Units>
-    <JumpHistory Count="18" HistoryIndex="17">
+    <JumpHistory Count="20" HistoryIndex="19">
       <Position1>
         <Filename Value="pu_tray.pas"/>
         <Caret Line="158" Column="60" TopLine="136"/>
@@ -336,6 +336,14 @@
         <Filename Value="pu_tray.pas"/>
         <Caret Line="447" Column="22" TopLine="426"/>
       </Position18>
+      <Position19>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="195" Column="40" TopLine="175"/>
+      </Position19>
+      <Position20>
+        <Filename Value="pu_calendar.pas"/>
+        <Caret Line="1200" Column="32" TopLine="1191"/>
+      </Position20>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
