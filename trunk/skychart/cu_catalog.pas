@@ -197,7 +197,7 @@ begin
           end;
   end;
   rac:=c.racentre; ddc:=c.decentre;
-  if c.ApparentPos then mean_equatorial(rac,ddc,c);
+  if c.ApparentPos then mean_equatorial(rac,ddc,c,true,true);
   InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*rac/15,rad2deg*ddc,ac,dc,c.CurJD,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
   result:=true;
 end;
@@ -2513,8 +2513,8 @@ begin
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
 xx1:=x1; xx2:=x2; yy1:=y1; yy2:=y2;
-if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc);
-if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc);
+if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc,true,true);
+if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc,true,true);
 xx1:=rad2deg*xx1/15;
 xx2:=rad2deg*xx2/15;
 yy1:=rad2deg*yy1;
@@ -2707,7 +2707,7 @@ repeat
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
   end;
   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
-  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
   found:=true;
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then found:=false;

@@ -694,7 +694,7 @@ end;
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
-            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
+            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc,true,false);
             cfgsc.racentre:=a;
             cfgsc.decentre:=d;
             cfgsc.TrackRA:=cfgsc.racentre;
@@ -710,7 +710,7 @@ end;
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
-            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc);
+            if cfgsc.ApparentPos then apparent_equatorial(a,d,cfgsc,true,false);
             cfgsc.racentre:=a;
             cfgsc.decentre:=d;
             cfgsc.TrackRA:=cfgsc.racentre;
@@ -735,7 +735,7 @@ end;
             v1:=FFits.Center_RA;
             v2:=FFits.Center_DE;
             precession(jd2000,cfgsc.JDChart,v1,v2);
-            if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc);
+            if cfgsc.ApparentPos then apparent_equatorial(v1,v2,cfgsc,true,true);
             cfgsc.projpole:=Equat;
             cfgsc.racentre:=v1;
             cfgsc.decentre:=v2;
@@ -856,7 +856,7 @@ if Fcatalog.OpenStar then
     rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
  end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -912,7 +912,7 @@ if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -953,7 +953,7 @@ if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -1058,7 +1058,7 @@ var rec:GcatRec;
         begin
           lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
           precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
-          if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+          if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
           projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
           WindowXY(x1,y1,xx,yy,cfgsc);
           if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
@@ -1082,7 +1082,7 @@ var rec:GcatRec;
                             ra:=FFits.Center_RA;
                             de:=FFits.Center_DE;
                             precession(jd2000,cfgsc.JDChart,ra,de);
-                            if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+                            if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
                             projection(ra,de,x1,y1,true,cfgsc) ;
                             WindowXY(x1,y1,x,y,cfgsc);
                             FFits.min_sigma:=cfgsc.NEBmin_sigma;
@@ -1155,7 +1155,7 @@ if FFits.OpenDB('other',x1,x2,y1,y2) then
     end else begin
       sincos(rot,sinr,cosr);
       precession(jd2000,cfgsc.JDChart,ra,de);
-      if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+      if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
       projection(ra,de,x1,y1,true,cfgsc) ;
       WindowXY(x1,y1,xx,yy,cfgsc);
       dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
@@ -1207,7 +1207,7 @@ end;
 if Fcatalog.OpenLin then
  while Fcatalog.readlin(rec) do begin
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
@@ -1265,7 +1265,7 @@ if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
     first:=false;
  end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc,true) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  op:=rec.outlines.lineoperation;
@@ -3166,10 +3166,10 @@ for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra2:=Fcatalog.cfgshr.ConstL[i].ra2;
   de2:=Fcatalog.cfgshr.ConstL[i].de2;
   precession(jd2000,cfgsc.JDChart,ra1,de1);
-  if cfgsc.ApparentPos then apparent_equatorial(ra1,de1,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ra1,de1,cfgsc,true,false);
   projection(ra1,de1,xx1,yy1,true,cfgsc) ;
   precession(jd2000,cfgsc.JDChart,ra2,de2);
-  if cfgsc.ApparentPos then apparent_equatorial(ra2,de2,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ra2,de2,cfgsc,true,false);
   projection(ra2,de2,xx2,yy2,true,cfgsc) ;
   if (xx1<199)and(xx2<199) then begin
      WindowXY(xx1,yy1,x1,y1,cfgsc);
@@ -3200,7 +3200,7 @@ for i:=0 to Fcatalog.cfgshr.ConstBnum-1 do begin
   de:=Fcatalog.cfgshr.ConstB[i].de;
   if Fcatalog.cfgshr.ConstB[i].newconst then x1:=maxint;
   precession(jd2000,cfgsc.JDChart,ra,de);
-  if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,false);
   projection(ra,de,xx,yy,true,cfgsc) ;
   if (xx<199) then begin
     WindowXY(xx,yy,x2,y2,cfgsc);
@@ -3240,7 +3240,7 @@ else mult:=1;
 for i:=0 to (360 div mult) do begin
   l:=deg2rad*i*mult;
   ecl2eq(l,b,e,ar,de);
-  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,false,false);
   projection(ar,de,xx,yy,true,cfgsc) ;
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then
@@ -3277,7 +3277,7 @@ else mult:=1;
 for i:=0 to (360 div mult) do begin
   l:=deg2rad*i*mult;
   gal2eq(l,b,ar,de,cfgsc);
-  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,false,false);
   projection(ar,de,xx,yy,true,cfgsc) ;
   WindowXY(xx,yy,x2,y2,cfgsc);
   if first then begin

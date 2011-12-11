@@ -805,7 +805,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
  cfgsc.PlanetLst[j,32,2]:=-de;
  cfgsc.PlanetLst[j,32,3]:=dist;
  if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
- if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+ if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,true,false);
  ar:=rmod(ar,pi2);
  cfgsc.PlanetLst[j,ipla,1]:=ar;
  cfgsc.PlanetLst[j,ipla,2]:=de;
@@ -822,7 +822,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
    Planet(ipla,jdt,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
    precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
    if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
-   if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc);
+   if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,true,false);
    ar:=rmod(ar,pi2);
    cfgsc.PlanetLst[j,ipla,1]:=ar;
    cfgsc.PlanetLst[j,ipla,2]:=de;
@@ -907,8 +907,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
  cfgsc.PlanetLst[j,32,4]:=dist;
  cfgsc.PlanetLst[j,32,5]:=dkm;
  // for the Moon always apply nutation but not aberration
- apparent_equatorial(ar,de,cfgsc,false);
- //if not cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc);
+ apparent_equatorial(ar,de,cfgsc,false,false);
  if cfgsc.PlanetParalaxe then begin
     Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
     diam:=diam/q;
@@ -944,7 +943,7 @@ ok:=true;
 ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
 // back to j2000
-if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc);
+if cfgsc.ApparentPos then mean_equatorial(ar,de,cfgsc,id<>11,false);
 precession(cfgsc.JDchart,jd2000,ar,de);
 end;
 
@@ -1792,7 +1791,7 @@ if db2.Rowcount>0 then begin
           Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
           precession(jd2000,cfgsc.jdchart,ra,dec);
           if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,cfgsc);
-          if cfgsc.ApparentPos then apparent_equatorial(ra,dec,cfgsc);
+          if cfgsc.ApparentPos then apparent_equatorial(ra,dec,cfgsc,true,false);
           cfgsc.AsteroidName[j,i+1,1]:=id;
           cfgsc.AsteroidName[j,i+1,2]:=nam;
           cfgsc.AsteroidLst[j,i+1,1]:=ra;
@@ -1874,8 +1873,8 @@ if db2.Rowcount>0 then begin
              Paralaxe(st0,rc,car,cde,car,cde,q,cfgsc);
           end;
           if cfgsc.ApparentPos then begin
-             apparent_equatorial(ra,dec,cfgsc);
-             apparent_equatorial(car,cde,cfgsc);
+             apparent_equatorial(ra,dec,cfgsc,true,false);
+             apparent_equatorial(car,cde,cfgsc,true,false);
           end;
           cfgsc.CometName[j,i+1,1]:=id;
           cfgsc.CometName[j,i+1,2]:=nam;

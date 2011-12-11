@@ -1197,7 +1197,7 @@ with gr do begin
     planet.Planet(ipla,jda+jdt_ut,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
     precession(jd2000,config.JDChart,ar,de);
     if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
-    if config.ApparentPos then apparent_equatorial(ar,de,config);
+    if config.ApparentPos then apparent_equatorial(ar,de,config,true,false);
     if ipla=6 then begin  // ring magn. correction
        planet.SatRing(jda+jdt_ut,PSat,aSat,bSat,beSat);
        sbSat:=sin(deg2rad*abs(beSat));
@@ -1208,7 +1208,7 @@ with gr do begin
     Planet.Sun(jda+jdt_ut,ar,de,dist,diam);
     precession(jd2000,config.jdchart,ar,de);
     if config.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,config);
-    if config.ApparentPos then apparent_equatorial(ar,de,config);
+    if config.ApparentPos then apparent_equatorial(ar,de,config,true,false);
     illum:=1;
     magn:=-26.7;
     end;
@@ -1219,7 +1219,7 @@ with gr do begin
        Paralaxe(st0,dist,ar,de,ar,de,q,config);
        diam:=diam/q;
     end;
-    if config.ApparentPos then apparent_equatorial(ar,de,config);
+    if config.ApparentPos then apparent_equatorial(ar,de,config,false,false);
     magn:=planet.MoonMag(phase);
     end;
   end;
@@ -2198,7 +2198,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
       Fplanet.Comet(jda,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
-      if config.ApparentPos then apparent_equatorial(ra,dec,config);
+      if config.ApparentPos then apparent_equatorial(ra,dec,config,true,false);
       ra:=rmod(ra+pi2,pi2);
       with Cometgrid do begin
          RowCount:=i+1;
@@ -2382,7 +2382,7 @@ if cdb.GetAstElem(id,epoch,hh,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
       Fplanet.Asteroid(jda,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
       precession(jd2000,config.jdchart,ra,dec);
       if config.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,config);
-      if config.ApparentPos then apparent_equatorial(ra,dec,config);
+      if config.ApparentPos then apparent_equatorial(ra,dec,config,true,false);
       ra:=rmod(ra+pi2,pi2);
       with Asteroidgrid do begin
          RowCount:=i+1;
