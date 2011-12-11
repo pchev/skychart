@@ -598,7 +598,8 @@
       <CompilerMessages>
         <UseMsgFile Value="True"/>
       </CompilerMessages>
-      <CustomOptions Value="-dtrace_debug"/>
+      <CustomOptions Value="-dtrace_debug
+-CF64"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

@@ -1,25 +1,25 @@
 object f_detail: Tf_detail
-  Left = 455
+  Left = 428
   Height = 461
-  Top = 265
-  Width = 361
+  Top = 257
+  Width = 393
   ActiveControl = Panel1
   BorderStyle = bsSizeToolWin
   Caption = 'Details'
   ClientHeight = 461
-  ClientWidth = 361
+  ClientWidth = 393
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.3'
   object Panel1: TPanel
     Left = 0
     Height = 36
     Top = 0
-    Width = 361
+    Width = 393
     Align = alTop
     ClientHeight = 36
-    ClientWidth = 361
+    ClientWidth = 393
     FullRepaint = False
     TabOrder = 0
     object Button1: TButton
@@ -58,7 +58,7 @@ object f_detail: Tf_detail
     Left = 0
     Height = 425
     Top = 36
-    Width = 361
+    Width = 393
     OnHotSpotClick = HTMLViewer1HotSpotClick
     OnImageRequest = HTMLViewer1ImageRequest
     TabOrder = 1

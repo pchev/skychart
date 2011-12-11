@@ -816,7 +816,7 @@ end;
 
 function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
-  x1,y1,cyear,dyear: Double;
+  x1,y1,cyear,dyear,pra,pdec: Double;
   xx,yy,xxp,yyp : single;
   lid,saveplot : integer;
   first,saveusebmp: boolean;
@@ -847,23 +847,25 @@ if Fcatalog.OpenStar then
     first:=false;
  end;
  lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+ pra:=rec.ra;
+ pdec:=rec.dec;
  if cfgsc.PMon or cfgsc.DrawPMon then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
  end;
  if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
-    rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*dyear;
-    rec.dec:=rec.dec+(rec.star.pmdec)*dyear;
+    propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
  end;
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    if cfgsc.DrawPMon then begin
-       rec.ra:=rec.ra+(rec.star.pmra/cos(rec.dec))*cfgsc.DrawPMyear;
-       rec.dec:=rec.dec+(rec.star.pmdec)*cfgsc.DrawPMyear;
-       projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
+    if cfgsc.DrawPMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+       propermotion(pra,pdec,cfgsc.DrawPMyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
+       precession(rec.options.EquinoxJD,cfgsc.JDChart,pra,pdec);
+       if cfgsc.ApparentPos then apparent_equatorial(pra,pdec,cfgsc,true,true);
+       projection(pra,pdec,x1,y1,true,cfgsc) ;
        WindowXY(x1,y1,xxp,yyp,cfgsc);
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
     end;

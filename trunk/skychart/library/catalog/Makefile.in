@@ -12,7 +12,7 @@ version=0.0
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
 unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options= -MObjFPC -Sgi
+options= -CF64 -MObjFPC -Sgi
 
 [target]
 units=cdccatalog.pas
