@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-11-06 13:41+0100\n"
+"PO-Revision-Date: 2011-12-12 22:27+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -755,6 +755,10 @@ msgstr "Taille de la boussole"
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
 msgstr "Compilé avec:"
+
+#: u_translation.rscomponent
+msgid "Component"
+msgstr "Composant"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"

@@ -818,7 +818,7 @@ function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
   x1,y1,cyear,dyear,pra,pdec: Double;
   xx,yy,xxp,yyp : single;
-  lid,saveplot : integer;
+  j,lid,saveplot : integer;
   first,saveusebmp: boolean;
   firstcat:TSname;
   gk: string;
@@ -839,6 +839,12 @@ try
 if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
   Fplot.cfgplot.UseBMP:=false;
   FPlot.cnv:=Fplot.cbmp.Canvas;
+end;
+for j:=0 to Fcatalog.cfgcat.GCatNum-1 do  begin
+   if Fcatalog.cfgcat.GCatLst[j].CatOn and (Fcatalog.cfgcat.GCatLst[j].shortname='star') then begin
+      firstcat:='Star';
+      first:=false;
+   end;
 end;
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
@@ -873,6 +879,9 @@ if Fcatalog.OpenStar then
     if (cfgsc.DrawAllStarLabel or(rec.options.ShortName=firstcat)) and (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
        if (rec.options.ShortName=firstcat) then al:=laBottomLeft
                                            else al:=laBottomRight;
+       if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
+          y1:=0;
+       end;
        if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al)
        else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al)
        else if rec.star.valid[vsGreekSymbol] then begin
@@ -1863,7 +1872,7 @@ begin
  rtStar: begin   // stars
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
-         txt:=rec.options.ShortName+b+txt;
+         if rec.options.ShortName<>'Star' then txt:=rec.options.ShortName+b+txt;
          if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then
                 cfgsc.FindName:=trim(rec.str[3])
             else

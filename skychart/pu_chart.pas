@@ -2610,6 +2610,10 @@ if i>0 then begin
   else if key='MV' then result:=rsVisualMagnit+d+value
   else if key='MR' then result:=rsRedMagnitude+d+value
   else if key='M' then result:=rsMagnitude+d+value
+  else if key='MI' then result:=rsMagnitude+' '+'I'+d+value
+  else if key='MJ' then result:=rsMagnitude+' '+'J'+d+value
+  else if key='MH' then result:=rsMagnitude+' '+'H'+d+value
+  else if key='MK' then result:=rsMagnitude+' '+'K'+d+value
   else if key='BT' then result:=rsMagnitudeTyc+d+value
   else if key='VT' then result:=rsMagnitudeTyc2+d+value
   else if key='B-V' then result:=rsColorIndex+d+value
@@ -2664,6 +2668,8 @@ if i>0 then begin
   else if key='MMIN' then result:=rsMagnitudeAtM2+d+value
   else if key='MEPOCH' then result:=rsEpochOfMaxim+d+value
   else if key='RISE' then result:=rsRiseTime+d+value
+  else if key='COMP' then result:=rsComponent+d+value
+  else if key='COMPID' then result:=rsDoubleStar+d+value
   else if key='M1' then result:=rsComponent1Ma+d+value
   else if key='M2' then result:=rsComponent2Ma+d+value
   else if key='SEP' then result:=rsSeparation+d+value

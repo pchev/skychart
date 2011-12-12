@@ -33,6 +33,8 @@ const
  vnId=1; vnNebtype=2; vnMag=3; vnSbr=4; vnDim1=5; vnDim2=6; vnNebunit=7; vnPa=8; vnRv=9; vnMorph=10; vnComment=11;
  vlId=1; vlLinecolor=2; vlLineoperation=3; vlLinewidth=4; vlLinetype=5; vlComment=6;
  lOffset=2;
+ lOffsetStr=15;
+ lOffsetNum=25;
 
 { deepsky2000 object type }
 const TypeDS : array[1..30] of integer = (1,2,3,5,4,114,8,-1,115,-1,101,102,-1,104,105,106,107,108,109,110,111,112,113,-1,-1,-1,-1,-1,-1,-1);

@@ -753,6 +753,10 @@ msgstr "羅盤大小"
 msgid "Compiled with:"
 msgstr "編譯用："
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "子源1星等"

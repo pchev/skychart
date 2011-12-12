@@ -1332,6 +1332,7 @@ end;
 end;
 
 function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
+var bsccat, flam, bayer : boolean;
 begin
 result:=true;
 repeat
@@ -1345,6 +1346,31 @@ repeat
   rec.dec:=deg2rad*rec.dec;
   rec.star.pmra:=deg2rad*rec.star.pmra/3600;
   rec.star.pmdec:=deg2rad*rec.star.pmdec/3600;
+  rec.star.valid[vsGreekSymbol]:=false;
+  bsccat:=(rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr+3])='CommonName'))and
+          (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr+4])='Fl'))and
+          (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr+5])='Bayer'))and
+          (rec.vstr[6] and (trim(rec.options.flabel[lOffsetStr+6])='Const'));
+  if bsccat then begin
+      flam:=(trim(rec.str[4])<>'');
+      rec.vstr[4]:=flam;
+      bayer:=(trim(rec.str[5])<>'');
+      rec.vstr[5]:=bayer;
+      if bayer then begin
+          rec.star.greeksymbol:=GreekLetter(rec.str[5]);
+          rec.star.valid[vsGreekSymbol]:=true;
+      end else if flam  then begin
+          rec.star.greeksymbol:=trim(rec.str[4]);
+          rec.star.valid[vsGreekSymbol]:=true;
+      end;
+      rec.options.flabel[lOffsetStr+3]:=rsCommonName;
+      rec.vstr[3]:=(trim(rec.str[3])<>'');
+      if flam and (not bayer) then rec.star.id:=copy(trim(rec.str[4])+blank15,1,3) else rec.star.id:='';
+      if bayer or flam  then begin
+        rec.star.id:=rec.star.id+blank+trim(rec.str[5])+blank+trim(rec.str[6]);
+        rec.star.valid[vsId]:=true;
+      end;
+  end;
   break;
 until not result;
 end;

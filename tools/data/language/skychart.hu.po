@@ -819,6 +819,10 @@ msgstr "Iránytű mérete"
 msgid "Compiled with:"
 msgstr "Program fordítása:"
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 #| msgid "Component 1 Magnitude"
 msgid "Component 1 magnitude"
