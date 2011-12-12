@@ -161,9 +161,9 @@ var c,n : string;
 {$endif}
 begin
 {$ifdef greekutf8}
-result:='';
 c:=lowercase(trim(copy(v,1,1)));
 n:=trim(copy(v,2,1));
+result:=v;
 for i:=1 to 24 do begin
   if c=greeksymbol[2,i] then begin
      result:=chr(hi(greekUTF8[i]))+chr(lo(greekUTF8[i]))+n;
@@ -1459,13 +1459,22 @@ end;
 
 Function GreekLetter(gr : shortstring) : shortstring;
 var i : integer;
-    buf:shortstring;
+    buf,num:shortstring;
 begin
 result:='';
-buf:=lowercase(trim(copy(gr,1,3)));
+i:=pos('0',gr);
+if i=0 then begin
+  buf:=copy(gr,1,3);
+  num:=copy(gr,4,1);
+end else begin
+   buf:=copy(gr,1,i-1);
+   num:=copy(gr,i+1,9);
+end;
+buf:=lowercase(trim(buf));
+buf:=StringReplace(buf,'.','',[]);
 for i:=1 to 24 do begin
   if buf=greeksymbol[1,i] then begin
-     result:=greeksymbol[2,i]+copy(gr,4,1); // ome2 -> w2
+     result:=greeksymbol[2,i]+num; // ome2 -> w2
      break;
    end;
 end;

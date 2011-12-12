@@ -753,6 +753,10 @@ msgstr "Размер компаса"
 msgid "Compiled with:"
 msgstr "Компиллировано:"
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "Блеск 1-го компонента"

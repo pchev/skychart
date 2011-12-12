@@ -754,6 +754,10 @@ msgstr "Tamaño de la rosa de la brújula"
 msgid "Compiled with:"
 msgstr "Compilado con:"
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "Magnitud del componente 1"

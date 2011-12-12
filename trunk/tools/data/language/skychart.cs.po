@@ -752,6 +752,10 @@ msgstr ""
 msgid "Compiled with:"
 msgstr ""
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "Magnituda 1. složky"

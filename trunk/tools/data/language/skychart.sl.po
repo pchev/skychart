@@ -752,6 +752,10 @@ msgstr "Velikost kompasove vetrovnice"
 msgid "Compiled with:"
 msgstr "Prevedeno z:"
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "Enota 1 magnitude"

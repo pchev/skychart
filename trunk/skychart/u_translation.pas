@@ -1352,6 +1352,7 @@ resourcestring
   rsSelectColorB = 'Select color (black for catalog default)';
   rsShowOnlyMeri = 'Show only meridian in Alt/Az';
   rsOneEvery = 'One every';
+  rsComponent = 'Component';
 
 implementation
 

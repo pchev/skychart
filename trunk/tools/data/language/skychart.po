@@ -5302,3 +5302,7 @@ msgstr ""
 msgid "One every"
 msgstr ""
 
+#: u_translation:rscomponent
+msgid "Component"
+msgstr ""
+

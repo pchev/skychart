@@ -754,6 +754,10 @@ msgstr "Größe der Kompassrose"
 msgid "Compiled with:"
 msgstr "Kompiliert mit:"
 
+#: u_translation.rscomponent
+msgid "Component"
+msgstr ""
+
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
 msgstr "Helligkeit der 1.Komponente"
