@@ -455,6 +455,7 @@ end else begin
                     NebOptionCache[CurNebCache].option:=emptyrec.options;
                     NebOptionCache[CurNebCache].vofiledate:=FileAge(catfile);
                    end;
+           else DeleteCache;
         end;
       end;
     end;
