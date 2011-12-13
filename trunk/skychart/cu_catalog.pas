@@ -1204,7 +1204,7 @@ repeat
       exit;
    end;
    if cfgcat.GCatLst[CurGCat-1].CatOn then begin
-     SetGcatPath(PChar(cfgcat.GCatLst[CurGCat-1].path),PChar(cfgcat.GCatLst[CurGCat-1].shortname));
+     SetGcatPath(cfgcat.GCatLst[CurGCat-1].path,cfgcat.GCatLst[CurGCat-1].shortname);
      GetGCatInfo(GcatH,v,GCatFilter,result);
    end else
      result:=false;
@@ -1214,7 +1214,7 @@ end;
 function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
 var GcatH : TCatHeader;
 begin
-SetGcatPath(PChar(path),PChar(shortname));
+SetGcatPath(path,shortname);
 GetGCatInfo(GcatH,v,GCatFilter,result);
 magmax:=GcatH.MagMax;
 version:=GcatH.version;

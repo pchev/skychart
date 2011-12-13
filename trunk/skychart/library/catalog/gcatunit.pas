@@ -20,6 +20,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
+
+{$define cache_gcat}
+
 interface
 
 uses
@@ -180,14 +183,35 @@ TCatHdrInfo = record
          calc : array[0..40,1..2] of double;
          end;
 
-procedure SetGCatpath(path,catshortname : PChar); stdcall;
-procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean); stdcall;
-Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenGCatwin(var ok : boolean); stdcall;
-Procedure ReadGCat(var lin : GCatrec; var ok : boolean); stdcall;
-//Procedure ReadGCat2(var lin : GCatrec; var ok : boolean); stdcall;
-Procedure NextGCat( var ok : boolean); stdcall;
-procedure CloseGCat ; stdcall;
+{$ifdef cache_gcat}
+type Tstarcache = record
+         star: Tstar;
+         str      : array[1..10] of shortstring;
+         num      : array[1..10] of double;
+         ra,de: double;
+         lma: string;
+end;
+type Tlinecache = record
+         outlines : Toutlines;
+         ra,de: double;
+end;
+type TcacheOption = record
+     baserec: gcatrec;
+     header: Tcatheader;
+end;
+const CacheInc=500;
+      MaxZone=50;
+      MaxCache=3;
+      CacheCat:array[1..MaxCache]of string=('star','mwf','mwl') ;
+{$endif}
+
+procedure SetGCatpath(path,catshortname : string);
+procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean);
+Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGCatwin(var ok : boolean);
+Procedure ReadGCat(var lin : GCatrec; var ok : boolean; MultiRegion: boolean=true);
+Procedure NextGCat( var ok : boolean);
+procedure CloseGCat ;
 
 
 implementation
@@ -210,6 +234,15 @@ var
    FileBIsOpen : Boolean = false;
    FileTIsOpen : Boolean = false;
    chkfile : Boolean = true;
+   {$ifdef cache_gcat}
+   onCache : boolean;
+   CurCache, CurCacheRec: integer;
+   CacheIndex: array[0..maxcache] of string;
+   CacheOption: array[0..maxcache] of TcacheOption;
+   CacheZone: array[0..maxcache,0..maxzone] of integer;
+   CacheStar: array[0..maxcache,0..maxzone] of array of Tstarcache;
+   CacheLine: array[0..maxcache,0..maxzone] of array of Tlinecache;
+   {$endif}
 
 Procedure InitRec;
 var n : integer;
@@ -313,19 +346,96 @@ begin
   if catheader.flen[35]>0 then emptyrec.vnum[10]:=true;
 end;
 
-procedure SetGCatpath(path,catshortname : PChar); stdcall;
+procedure SetGCatpath(path,catshortname : string);
 begin
 GCatpath:=noslash(path);
 CatName:=trim(catshortname);
 end;
 
-Function ReadCatHeader : boolean;
-var n : integer;
-    fh : file;
-    buf: string;
-    hdr: TFileHeader;
+{$ifdef cache_gcat}
+function GetCache:boolean;
+var i: integer;
 begin
 result:=false;
+CurCache:=-1;
+for i:=0 to MaxCache-1 do begin
+  if CacheIndex[i]=GCatpath+Catname then begin
+     CurCache:=i;
+     result:=true;
+     break;
+  end;
+end;
+end;
+
+function NewCache:boolean;
+var i,n: integer;
+    ok: boolean;
+begin
+result:=false;
+ok:=false;
+for i:=1 to MaxCache do begin
+   if catname=CacheCat[i] then begin
+      ok:=true;
+      break;
+   end;
+end;
+if ok and (cattype=1)and((catversion=rtStar)or(catversion=rtLin))and(catheader.filenum<=50) //  binary, star or line, 50 zones
+then begin
+    n:=-1;
+    for i:=0 to MaxCache-1 do begin
+      if CacheIndex[i]='' then begin
+        n:=i;
+        break;
+      end;
+    end;
+    if n>=0 then begin
+      CacheIndex[n]:=GCatpath+Catname;
+      for i:=0 to MaxZone-1 do CacheZone[n,i]:=0;
+      CurCache:=n;
+      result:=true;
+    end;
+end;
+end;
+
+Procedure DeleteCache;
+var i,j: integer;
+begin
+onCache:=false;
+case catversion of
+rtStar: begin
+          for i:=0 to MaxCache-1 do begin
+            if CacheIndex[i]=GCatpath+Catname then begin
+               CacheIndex[i]:='';
+               for j:=0 to MaxZone-1 do begin
+                  CacheZone[i,j]:=0;
+                  SetLength(CacheStar[i,j],0);
+               end;
+               break;
+            end;
+          end;
+        end;
+rtlin: begin
+          for i:=0 to MaxCache-1 do begin
+            if CacheIndex[i]=GCatpath+Catname then begin
+               CacheIndex[i]:='';
+               for j:=0 to MaxZone-1 do begin
+                  CacheZone[i,j]:=0;
+                  SetLength(CacheLine[i,j],0);
+               end;
+               break;
+            end;
+          end;
+        end;
+end;
+end;
+{$endif}
+
+Function ReadHeaderFile: boolean;
+var n : integer;
+    buf: string;
+    fh : file;
+    hdr: TFileHeader;
+begin
 fillchar(EmptyRec,sizeof(GcatRec),0);
 if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   filemode:=0;
@@ -370,21 +480,57 @@ if fileexists(Gcatpath+slashchar+catname+'.hdr') then begin
   if buf='CDCLINE' then catversion:=rtLin;
   buf:=copy(catheader.version,8,1);
   cattype:=strtointdef(buf,0);
-  if cattype=2 then begin
-     if fileexists(Gcatpath+slashchar+catname+'.info2') then begin
-        filemode:=0;
-        assignfile(fh,Gcatpath+slashchar+catname+'.info2');
-        reset(fh,1);
-        blockread(fh,catinfo,sizeof(catinfo),n);
-        result:=result and (n=sizeof(catinfo));
-        closefile(fh);
-     end;
-  end;
-  InitRec;
 end;
 end;
 
-procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean); stdcall;
+Function ReadCatHeader : boolean;
+var buf: string;
+    n : integer;
+    fh : file;
+begin
+{$ifdef cache_gcat}
+ result:=false;
+ onCache:=GetCache;
+ if onCache then begin
+    catheader:=CacheOption[CurCache].header;
+    emptyrec:=CacheOption[CurCache].baserec;
+    result:=true;
+ end else begin
+    result:=ReadHeaderFile;
+    if result then begin
+      InitRec;
+      onCache:=NewCache;
+      if onCache then begin
+         CacheOption[CurCache].header:=catheader;
+         CacheOption[CurCache].baserec:=emptyrec;
+      end;
+    end;
+  end;
+ {$else}
+ result:=ReadHeaderFile;
+ if result then InitRec;
+ {$endif}
+ buf:=copy(catheader.version,1,7);
+ if buf='CDCSTAR' then catversion:=rtStar;
+ if buf='CDCVAR ' then catversion:=rtVar;
+ if buf='CDCDBL ' then catversion:=rtDbl;
+ if buf='CDCNEB ' then catversion:=rtNeb;
+ if buf='CDCLINE' then catversion:=rtLin;
+ buf:=copy(catheader.version,8,1);
+ cattype:=strtointdef(buf,0);
+ if cattype=2 then begin
+    if fileexists(Gcatpath+slashchar+catname+'.info2') then begin
+       filemode:=0;
+       assignfile(fh,Gcatpath+slashchar+catname+'.info2');
+       reset(fh,1);
+       blockread(fh,catinfo,sizeof(catinfo),n);
+       result:=result and (n=sizeof(catinfo));
+       closefile(fh);
+    end;
+ end;
+end;
+
+procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean);
 begin
 ok:=ReadCatheader;
 h:=catheader;
@@ -555,6 +701,49 @@ end else begin
 end;
 end;
 
+{$ifdef cache_gcat}
+Procedure Fillcache;
+var lin : GCatrec;
+    ok : boolean;
+    n: integer;
+begin
+if onCache and (CacheZone[CurCache,sm]=0) then begin
+ n:=-1;
+ repeat
+   ReadGCat(lin,ok,false);
+   if ok then case catversion of
+   rtStar: begin
+           inc(n);
+           if n>=Length(CacheStar[CurCache,SM]) then begin
+             SetLength(CacheStar[CurCache,SM],n+CacheInc);
+           end;
+           CacheStar[CurCache,SM,n].star:=lin.star;
+           CacheStar[CurCache,SM,n].str:=lin.str;
+           CacheStar[CurCache,SM,n].num:=lin.num;
+           CacheStar[CurCache,SM,n].ra:=lin.ra;
+           CacheStar[CurCache,SM,n].de:=lin.dec;
+           if lin.options.flabel[lOffset+vsMagv]=emptyrec.options.flabel[lOffset+vsMagv] then
+              CacheStar[CurCache,SM,n].lma:=''
+           else
+              CacheStar[CurCache,SM,n].lma:=lin.options.flabel[lOffset+vsMagv];
+           end;
+   rtlin: begin
+           inc(n);
+           if n>=Length(CacheLine[CurCache,SM]) then begin
+             SetLength(CacheLine[CurCache,SM],n+CacheInc);
+           end;
+           CacheLine[CurCache,SM,n].outlines:=lin.outlines;
+           CacheLine[CurCache,SM,n].ra:=lin.ra;
+           CacheLine[CurCache,SM,n].de:=lin.dec;
+           end;
+   end;
+ until not ok;
+ CacheZone[CurCache,sm]:=n;
+ reset(f,1);
+end;
+end;
+{$endif}
+
 Procedure OpenRegion(hemis : char ;zone,S : integer ; var ok:boolean);
 var nomreg,nomzone :string;
 begin
@@ -576,9 +765,13 @@ end else begin
     if FileTIsOpen then CloseRegion;
 end;
 OpenFile(nomfich,ok);
+{$ifdef cache_gcat}
+if onCache and (CacheZone[CurCache,s]=0) then FillCache;
+CurCacheRec:=-1;
+{$endif}
 end;
 
-Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
@@ -598,7 +791,7 @@ OpenRegion(hemis,zone,Sm,ok);
 end;
 end;
 
-Procedure ReadGCat(var lin : GCatrec; var ok : boolean); stdcall;
+Procedure ReadGCat(var lin : GCatrec; var ok : boolean; MultiRegion: boolean=true);
 var n : integer;
     s: double;
 begin
@@ -606,11 +799,49 @@ ok:=true;
 lin:=emptyrec;
 case cattype of
 1 : begin  // binary catalog
+   {$ifdef cache_gcat}
+    if onCache and (CacheZone[CurCache,SM]>0) then begin
+    // read form cache
+    inc(CurCacheRec);
+    case catversion of
+      rtStar: if CurCacheRec<=CacheZone[CurCache,SM] then begin
+                 lin.star:=CacheStar[CurCache,SM,CurCacheRec].star;
+                 lin.str:= CacheStar[CurCache,SM,CurCacheRec].str;
+                 lin.num:= CacheStar[CurCache,SM,CurCacheRec].num;
+                 lin.ra:=CacheStar[CurCache,SM,CurCacheRec].ra;
+                 lin.dec:=CacheStar[CurCache,SM,CurCacheRec].de;
+                 if CacheStar[CurCache,SM,CurCacheRec].lma<>'' then
+                    lin.options.flabel[lOffset+vsMagv]:=CacheStar[CurCache,SM,CurCacheRec].lma;
+                 ok:=true;
+              end
+              else begin
+                 if MultiRegion then NextGCat(ok)
+                    else ok:=false;
+                 if ok then ReadGCat(lin,ok,MultiRegion);
+              end;
+      rtlin: if CurCacheRec<=CacheZone[CurCache,SM] then begin
+                 lin.outlines:=CacheLine[CurCache,SM,CurCacheRec].outlines;
+                 lin.ra:=CacheLine[CurCache,SM,CurCacheRec].ra;
+                 lin.dec:=CacheLine[CurCache,SM,CurCacheRec].de;
+                 ok:=true;
+              end
+              else begin
+                 if MultiRegion then NextGCat(ok)
+                    else ok:=false;
+                 if ok then ReadGCat(lin,ok,MultiRegion);
+              end;
+      end;
+  end else
+  {$endif}
+  begin
   if not FileBIsOpen then begin
     ok:=false;
     exit;
   end;
-  if eof(f) then NextGCat(ok);
+  if eof(f) then begin
+     if MultiRegion then NextGCat(ok)
+        else ok:=false;
+  end;
   if ok then begin
    blockread(f,datarec,catheader.reclen,n);
    if n=catheader.reclen then begin
@@ -699,7 +930,8 @@ case cattype of
     if catheader.flen[33]>0 then lin.num[8]:=GetRecSingle(33);
     if catheader.flen[34]>0 then lin.num[9]:=GetRecSingle(34);
     if catheader.flen[35]>0 then lin.num[10]:=GetRecSingle(35);
-   end else ok:=false;
+  end else ok:=false;
+  end;
   end;
   end;
 2: begin // text file, positional
@@ -827,74 +1059,7 @@ case cattype of
 end;
 end;
 
-{Procedure ReadGCat2(var lin : GCatrec; var ok : boolean); stdcall;
-// version plus rapide juste pour le dessin
-// no more used in V3.0
-var n : integer;
-begin
-ok:=true;
-//fillchar(lin,sizeof(lin),0);
-lin:=emptyrec;
-if eof(f) then NextGCat(ok);
-if ok then begin
- blockread(f,datarec,catheader.reclen,n);
- if n=catheader.reclen then begin
-  lin.ra:=GetRecCard(1)/3600000;
-  lin.dec:=GetRecCard(2)/3600000-90;
-  case catversion of
-  rtstar : begin  // Star 1
-      if catheader.flen[3]>0 then lin.star.id:=GetRecString(3);
-      if catheader.flen[4]>0 then begin lin.star.magv:=GetRecSmallint(4)/1000; if lin.star.magv>32 then lin.star.magv:=99.9;end;
-      if catheader.flen[5]>0 then begin lin.star.b_v:=GetRecSmallint(5)/1000;  if lin.star.b_v>32  then lin.star.b_v:=99.9;end;
-      if catheader.flen[6]>0 then begin lin.star.magb:=GetRecSmallint(6)/1000; if lin.star.magb>32 then lin.star.magb:=99.9;end;
-      if catheader.flen[9]>0 then lin.star.pmra:=GetRecSmallint(9)/1000;
-      if catheader.flen[10]>0 then lin.star.pmdec:=GetRecSmallint(10)/1000;
-      end;
-  rtvar : begin  // variables stars 1
-      if catheader.flen[3]>0 then lin.variable.id:=GetRecString(3);
-      if catheader.flen[4]>0 then begin lin.variable.magmax:=GetRecSmallint(4)/1000; if lin.variable.magmax>32 then lin.variable.magmax:=99.9;end;
-      if catheader.flen[5]>0 then begin lin.variable.magmin:=GetRecSmallint(5)/1000; if lin.variable.magmin>32 then lin.variable.magmin:=99.9;end;
-      end;
-  rtdbl : begin  // doubles stars 1
-      if catheader.flen[3]>0 then lin.double.id:=GetRecString(3);
-      if catheader.flen[4]>0 then begin lin.double.mag1:=GetRecSmallint(4)/1000; if lin.double.mag1>32 then lin.double.mag1:=99.9;end;
-      if catheader.flen[5]>0 then begin lin.double.mag2:=GetRecSmallint(5)/1000; if lin.double.mag2>32 then lin.double.mag2:=99.9;end;
-      if catheader.flen[6]>0 then lin.double.sep:=GetRecSmallint(6)/10;
-      if catheader.flen[7]>0 then begin lin.double.pa:=GetRecSmallint(7); if lin.double.pa=32767 then lin.double.pa:=-999;end;
-      end;
-  rtneb : begin  // nebulae 1
-      if catheader.flen[3]>0 then lin.neb.id:=GetRecString(3);
-      if catheader.flen[4]>0 then lin.neb.nebtype:=GetRecByte(4);
-      if catheader.flen[5]>0 then begin lin.neb.mag:=GetRecSmallint(5)/1000; if lin.neb.mag>32 then lin.neb.mag:=99.9;end;
-      if catheader.flen[6]>0 then begin lin.neb.sbr:=GetRecSmallint(6)/1000; if lin.neb.sbr>32 then lin.neb.sbr:=99.9;end;
-      if catheader.flen[7]>0 then lin.neb.dim1:=GetRecSingle(7);
-      if catheader.flen[8]>0 then lin.neb.dim2:=GetRecSingle(8);
-      if catheader.flen[9]>0 then lin.neb.nebunit:=GetRecSmallint(9);
-      if catheader.flen[10]>0 then begin lin.neb.pa:=GetRecSmallint(10); if lin.neb.pa=32767 then lin.neb.pa:=-999;end;
-      end;
-  rtlin : begin  // outlines
-      if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
-      if catheader.flen[4]>0 then lin.outlines.lineoperation:=GetRecByte(4);
-      if catheader.flen[5]>0 then lin.outlines.linewidth:=GetRecByte(5);
-      if catheader.flen[6]>0 then lin.outlines.linecolor:=GetRecCard(6);
-      if catheader.flen[7]>0 then lin.outlines.linetype:=GetRecByte(7);
-      end;
-  end;
-  if catheader.flen[16]>0 then lin.str[1]:=GetRecString(16);
-  if catheader.flen[17]>0 then lin.str[2]:=GetRecString(17);
-  if catheader.flen[18]>0 then lin.str[3]:=GetRecString(18);
-  if catheader.flen[19]>0 then lin.str[4]:=GetRecString(19);
-  if catheader.flen[20]>0 then lin.str[5]:=GetRecString(20);
-  if catheader.flen[21]>0 then lin.str[6]:=GetRecString(21);
-  if catheader.flen[22]>0 then lin.str[7]:=GetRecString(22);
-  if catheader.flen[23]>0 then lin.str[8]:=GetRecString(23);
-  if catheader.flen[24]>0 then lin.str[9]:=GetRecString(24);
-  if catheader.flen[25]>0 then lin.str[10]:=GetRecString(25);
- end else ok:=false;
-end;
-end;  }
-
-Procedure NextGCat( var ok : boolean); stdcall;
+Procedure NextGCat( var ok : boolean);
 begin
   CloseRegion;
   inc(curSM);
@@ -907,13 +1072,13 @@ begin
   end;
 end;
 
-procedure CloseGCat ; stdcall;
+procedure CloseGCat ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenGCatwin(var ok : boolean); stdcall;
+Procedure OpenGCatwin(var ok : boolean);
 begin
 curSM:=1;
 ok:=ReadCatHeader;
