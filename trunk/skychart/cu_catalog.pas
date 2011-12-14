@@ -678,7 +678,14 @@ end;
 
 function Tcatalog.ReadMilkyWay(var rec:GcatRec):boolean;
 begin
-result:=GetGcatL(rec);
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  break;
+until not result;
 end;
 
 function Tcatalog.OpenDSL(forcecolor: boolean; col:integer):boolean;
