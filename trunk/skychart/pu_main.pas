@@ -4364,10 +4364,12 @@ for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatfield[i,1]:=0;
    catalog.cfgcat.starcatfield[i,2]:=0;
 end;
+catalog.cfgcat.starcatpath[DefStar-BaseStar]:=catalog.cfgcat.starcatpath[DefStar-BaseStar]+PathDelim+'xhip';
+catalog.cfgcat.starcatdef[DefStar-BaseStar]:=true;
+catalog.cfgcat.starcatfield[DefStar-BaseStar,2]:=10;
 catalog.cfgcat.starcatdef[vostar-BaseStar]:=false;
 catalog.cfgcat.starcatfield[vostar-BaseStar,2]:=10;
 catalog.cfgcat.starcatpath[bsc-BaseStar]:=catalog.cfgcat.starcatpath[bsc-BaseStar]+PathDelim+'bsc5';
-catalog.cfgcat.starcatdef[bsc-BaseStar]:=true;
 catalog.cfgcat.starcatfield[bsc-BaseStar,2]:=10;
 catalog.cfgcat.starcatpath[sky2000-BaseStar]:=catalog.cfgcat.starcatpath[sky2000-BaseStar]+PathDelim+'sky2000';
 catalog.cfgcat.starcatfield[sky2000-BaseStar,1]:=6;
@@ -4648,6 +4650,9 @@ for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcaton[i]:=ReadBool(section,'starcaton'+inttostr(i),catalog.cfgcat.starcaton[i]);
    catalog.cfgcat.starcatfield[i,1]:=ReadInteger(section,'starcatfield1'+inttostr(i),catalog.cfgcat.starcatfield[i,1]);
    catalog.cfgcat.starcatfield[i,2]:=ReadInteger(section,'starcatfield2'+inttostr(i),catalog.cfgcat.starcatfield[i,2]);
+end;
+if pos('bsc5',catalog.cfgcat.starcatpath[DefStar-BaseStar])>0 then begin    // Upgrade to new default catalog
+  catalog.cfgcat.starcatpath[DefStar-BaseStar]:=slash(appdir)+slash('cat')+'xhip';
 end;
 for i:=1 to maxvarstarcatalog do begin
    catalog.cfgcat.varstarcatdef[i]:=ReadBool(section,'varstarcatdef'+inttostr(i),catalog.cfgcat.varstarcatdef[i]);

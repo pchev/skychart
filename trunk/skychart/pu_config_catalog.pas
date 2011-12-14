@@ -37,8 +37,9 @@ type
 
   Tf_config_catalog = class(TForm)
     addobj: TButton;
-    bsc3: TDirectoryEdit;
     addcat: TButton;
+    bsc3: TDirectoryEdit;
+    BSCbox: TCheckBox;
     Button4: TButton;
     Button5: TButton;
     Button6: TButton;
@@ -52,6 +53,8 @@ type
     Button2: TButton;
     Button3: TButton;
     delobj: TButton;
+    Fbsc1: TLongEdit;
+    Fbsc2: TLongEdit;
     fgcm1: TLongEdit;
     fgcm2: TLongEdit;
     fgpn1: TLongEdit;
@@ -68,6 +71,8 @@ type
     frc32: TLongEdit;
     fsac1: TLongEdit;
     fsac2: TLongEdit;
+    Fsky1: TLongEdit;
+    Fsky2: TLongEdit;
     fw4: TLabel;
     fw5: TLabel;
     fw6: TLabel;
@@ -85,6 +90,8 @@ type
     ImageList1: TImageList;
     Label4: TLabel;
     Label6: TLabel;
+    Label65: TLabel;
+    Label66: TLabel;
     LabelDownload: TLabel;
     maxrows: TLongEdit;
     Label1: TLabel;
@@ -120,6 +127,8 @@ type
     SACbox: TCheckBox;
     Page1a: TTabSheet;
     SaveDialog1: TSaveDialog;
+    sky3: TDirectoryEdit;
+    SKYbox: TCheckBox;
     StringGrid1: TStringGrid;
     StringGrid4: TStringGrid;
     Page1b: TTabSheet;
@@ -136,7 +145,6 @@ type
     gscc3: TDirectoryEdit;
     gscf3: TDirectoryEdit;
     ty23: TDirectoryEdit;
-    sky3: TDirectoryEdit;
     MainPanel: TPanel;
     Page1: TTabSheet;
     Page2: TTabSheet;
@@ -145,8 +153,6 @@ type
     Label37: TLabel;
     StringGrid3: TStringGrid;
     Label2: TLabel;
-    Label65: TLabel;
-    Label66: TLabel;
     Label87: TLabel;
     Label16: TLabel;
     Label28: TLabel;
@@ -156,12 +162,6 @@ type
     Label21: TLabel;
     Label19: TLabel;
     Label20: TLabel;
-    BSCbox: TCheckBox;
-    Fbsc1: TLongEdit;
-    Fbsc2: TLongEdit;
-    SKYbox: TCheckBox;
-    Fsky1: TLongEdit;
-    Fsky2: TLongEdit;
     TY2Box: TCheckBox;
     Fty21: TLongEdit;
     Fty22: TLongEdit;
