@@ -1255,7 +1255,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw nebula outlines');
 {$endif}
-if Fcatalog.OpenDSL then begin
+if Fcatalog.OpenDSL(cfgsc.DSLforcecolor,cfgsc.DSLcolor) then begin
    fillchar(rec,sizeof(rec),0);
    try
    saveusebmp:=Fplot.cfgplot.UseBMP;

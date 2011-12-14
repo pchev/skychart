@@ -52,6 +52,8 @@ type
     antialias: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    ShowLineShape: TShape;
+    ShowLines: TCheckBox;
     OnlyMeridian: TCheckBox;
     LabelLine: TCheckBox;
     FillPanel1: TPanel;
@@ -384,6 +386,9 @@ type
     procedure lstDSOCSchemeChange(Sender: TObject);
     procedure OnlyMeridianClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
+    procedure ShowLinesClick(Sender: TObject);
+    procedure ShowLineShapeMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
     procedure ShowTitleClick(Sender: TObject);
     procedure StarButton5Click(Sender: TObject);
     procedure StarButton6Click(Sender: TObject);
@@ -1232,6 +1237,9 @@ EqGrid.Checked:=csc.ShowEqGrid;
 CGrid.Checked:=csc.ShowGrid;
 OnlyMeridian.Checked := csc.ShowOnlyMeridian;
 GridNum.Checked:=csc.ShowGridNum;
+ShowLines.Checked := csc.showline;
+if csc.DSLforcecolor then ShowLineShape.Brush.Color:=csc.DSLcolor
+   else ShowLineShape.Brush.Color:=clWhite;
 Ecliptic.Checked:=csc.ShowEcliptic;
 Galactic.Checked:=csc.ShowGalactic;
 ConstlFile.Text:=cmain.ConstLfile;
@@ -2149,6 +2157,27 @@ begin
       FillPanel1.Visible:=true;
       FillPanel2.Visible:=true;
     end;
+end;
+
+procedure Tf_config_display.ShowLinesClick(Sender: TObject);
+begin
+  csc.showline:=ShowLines.Checked;
+end;
+
+procedure Tf_config_display.ShowLineShapeMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var buf: string;
+begin
+  buf:=ColorDialog1.Title;
+  ColorDialog1.Title:=rsSelectColorB;
+  ColorDialog1.Color:=csc.DSLcolor;
+  if ColorDialog1.Execute then begin
+     csc.DSLforcecolor:=(ColorDialog1.Color<>0);
+     csc.DSLcolor:=ColorDialog1.Color;
+     if csc.DSLforcecolor then ShowLineShape.Brush.Color:=csc.DSLcolor
+        else ShowLineShape.Brush.Color:=clWhite;
+  end;
+  ColorDialog1.Title := buf;
 end;
 
 end.

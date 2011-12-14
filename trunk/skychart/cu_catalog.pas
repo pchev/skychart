@@ -41,8 +41,8 @@ type
   private
     { Private declarations }
     LockCat : boolean;
-    NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj : integer;
-    GcatFilter: boolean;
+    NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor : integer;
+    GcatFilter, DSLForceColor: boolean;
     EmptyRec : GCatRec;
   protected
     { Protected declarations }
@@ -116,7 +116,7 @@ type
      function OpenMilkyWay(fill:boolean):boolean;
      function CloseMilkyWay:boolean;
      function ReadMilkyWay(var rec:GcatRec):boolean;
-     function OpenDSL:boolean;
+     function OpenDSL(forcecolor: boolean; col:integer):boolean;
      function CloseDSL:boolean;
      function ReadDSL(var rec:GcatRec):boolean;
      function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
@@ -681,10 +681,12 @@ begin
 result:=GetGcatL(rec);
 end;
 
-function Tcatalog.OpenDSL:boolean;
+function Tcatalog.OpenDSL(forcecolor: boolean; col:integer):boolean;
 var GcatH : TCatHeader;
     v : integer;
 begin
+ DSLForceColor:=forcecolor;
+ DSLcolor:=col;
  SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'DSoutlines'),'dsl');
  GetGCatInfo(GcatH,v,GCatFilter,result);
  if result then result:=(v=rtLin);
@@ -699,7 +701,18 @@ end;
 
 function Tcatalog.ReadDSL(var rec:GcatRec):boolean;
 begin
-result:=GetGcatL(rec);
+result:=true;
+repeat
+  ReadGCat(rec,result);
+  if not result then break;
+  rec.ra:=deg2rad*rec.ra;
+  rec.dec:=deg2rad*rec.dec;
+  if DSLForceColor then begin
+    rec.outlines.valid[vlLinecolor]:=true;
+    rec.outlines.linecolor:=DSLcolor;
+  end;
+  break;
+until not result;
 end;
 
 // CatGen header simulation for old catalog
