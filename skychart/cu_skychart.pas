@@ -90,6 +90,7 @@ Tskychart = class (TComponent)
     //function DrawNebulae :boolean;
     function DrawBgImages :boolean;
     function DrawOutline :boolean;
+    function DrawDSL :boolean;
     function DrawMilkyWay :boolean;
     function DrawPlanet :boolean;
     procedure DrawEarthShadow(AR,DE,SunDist,MoonDist,MoonDistTopo : double);
@@ -288,7 +289,10 @@ end;
     if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP) then DrawHorizon;
     DrawComet;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
-    if cfgsc.showline then DrawOutline;
+    if cfgsc.showline then begin
+       DrawOutline;
+       DrawDSL;
+    end;
   end;
   // then the lines
   DrawGrid;
@@ -1206,37 +1210,81 @@ var rec:GcatRec;
   op,lw,col,fs: integer;
 begin
 {$ifdef trace_debug}
+ WriteTrace('SkyChart '+cfgsc.chartname+': draw outlines');
+{$endif}
+if Fcatalog.OpenLin then begin
+    fillchar(rec,sizeof(rec),0);
+    try
+    saveusebmp:=Fplot.cfgplot.UseBMP;
+    if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+       Fplot.cfgplot.UseBMP:=false;
+       FPlot.cnv:=Fplot.cbmp.Canvas;
+    end;
+   while Fcatalog.readlin(rec) do begin
+   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+   if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
+   projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false) ;
+   WindowXY(x1,y1,xx,yy,cfgsc);
+   op:=rec.outlines.lineoperation;
+   if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+   if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+   if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+   else begin
+      if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+   end;
+   FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
+  end;
+  result:=true;
+  finally
+   if saveusebmp then begin
+     FPlot.cnv:=nil;
+   end;
+   Fplot.cfgplot.UseBMP := saveusebmp;
+   Fcatalog.CloseLin;
+  end;
+end;
+end;
+
+function Tskychart.DrawDSL :boolean;
+var rec:GcatRec;
+  x1,y1: Double;
+  xx,yy: single;
+  saveusebmp:boolean;
+  op,lw,col,fs: integer;
+begin
+{$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw nebula outlines');
 {$endif}
-fillchar(rec,sizeof(rec),0);
-try
-saveusebmp:=Fplot.cfgplot.UseBMP;
-if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-   Fplot.cfgplot.UseBMP:=false;
-   FPlot.cnv:=Fplot.cbmp.Canvas;
-end;
-if Fcatalog.OpenLin then
- while Fcatalog.readlin(rec) do begin
- precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
- projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false) ;
- WindowXY(x1,y1,xx,yy,cfgsc);
- op:=rec.outlines.lineoperation;
- if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
- if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
- if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
- else begin
-    if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
- end;
- FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
-end;
-result:=true;
-finally
- if saveusebmp then begin
-   FPlot.cnv:=nil;
- end;
- Fplot.cfgplot.UseBMP := saveusebmp;
- Fcatalog.CloseLin;
+if Fcatalog.OpenDSL then begin
+   fillchar(rec,sizeof(rec),0);
+   try
+   saveusebmp:=Fplot.cfgplot.UseBMP;
+   if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
+      Fplot.cfgplot.UseBMP:=false;
+      FPlot.cnv:=Fplot.cbmp.Canvas;
+   end;
+   while Fcatalog.ReadDSL(rec) do begin
+   precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
+   if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
+   projection(rec.ra,rec.dec,x1,y1,true,cfgsc,false) ;
+   WindowXY(x1,y1,xx,yy,cfgsc);
+   op:=rec.outlines.lineoperation;
+   if rec.outlines.valid[vlLinewidth] then lw:=rec.outlines.linewidth else lw:=rec.options.Size;
+   if rec.outlines.valid[vlLinetype] then fs:=rec.outlines.linetype else fs:=rec.options.LogSize;
+   if cfgsc.WhiteBg then col:=FPlot.cfgplot.Color[11]
+   else begin
+      if rec.outlines.valid[vlLinecolor] then col:=rec.outlines.linecolor else col:=rec.options.Units;
+   end;
+   FPlot.PlotOutline(xx,yy,op,lw,fs,rec.options.ObjType,cfgsc.x2,col);
+  end;
+  result:=true;
+  finally
+    if saveusebmp then begin
+      FPlot.cnv:=nil;
+    end;
+    Fplot.cfgplot.UseBMP := saveusebmp;
+    Fcatalog.CloseDSL;
+  end;
 end;
 end;
 
@@ -2089,7 +2137,7 @@ if showall then begin
 end;
 // search catalog object
 try
-  result:=fcatalog.Findobj(x1,y1,x2,y2,false,searchcenter,cfgsc,rec);
+  result:=fcatalog.Findobj(x1,y1,x2,y2,searchcenter,cfgsc,rec);
 finally
   Fcatalog.CloseCat;
   if showall then begin

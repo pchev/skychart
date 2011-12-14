@@ -201,8 +201,8 @@ type TcacheOption = record
 end;
 const CacheInc=500;
       MaxZone=50;
-      MaxCache=3;
-      CacheCat:array[1..MaxCache]of string=('star','mwf','mwl') ;
+      MaxCache=4;
+      CacheCat:array[1..MaxCache]of string=('star','mwf','mwl','dsl') ;
 {$endif}
 
 procedure SetGCatpath(path,catshortname : string);
@@ -212,6 +212,7 @@ Procedure OpenGCatwin(var ok : boolean);
 Procedure ReadGCat(var lin : GCatrec; var ok : boolean; MultiRegion: boolean=true);
 Procedure NextGCat( var ok : boolean);
 procedure CloseGCat ;
+procedure CleanCache;
 
 
 implementation
@@ -429,6 +430,21 @@ rtlin: begin
 end;
 end;
 {$endif}
+
+procedure CleanCache;
+var i,j:integer;
+begin
+{$ifdef cache_gcat}
+for i:=0 to MaxCache-1 do begin
+   CacheIndex[i]:='';
+   for j:=0 to MaxZone-1 do begin
+      CacheZone[i,j]:=0;
+      SetLength(CacheStar[i,j],0);
+      SetLength(CacheLine[i,j],0);
+   end;
+end;
+{$endif}
+end;
 
 Function ReadHeaderFile: boolean;
 var n : integer;

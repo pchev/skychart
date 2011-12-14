@@ -66,6 +66,8 @@ var
 
 implementation
 
+var VOopen: boolean=false;
+
 procedure SetVOCatpath(path:string);
 begin
 VOCatpath:=noslash(path);
@@ -357,6 +359,7 @@ log_pmra:=false;log_pmdec:=false;log_size:=false;
 field_pmra:=-1;field_pmdec:=-1;field_size:=-1;
 catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
+try
 config.Filename:=deffile;
 VOName:=config.GetValue('VOcat/catalog/name','');
 VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
@@ -366,7 +369,9 @@ drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);
 forcecolor:=config.GetValue('VOcat/plot/forcecolor',0);
 DefSize:=config.GetValue('VOcat/default/defsize',1);
 Defmag:=config.GetValue('VOcat/default/defmag',10);
+finally
 config.free;
+end;
 if VOobject='star' then catversion:=rtStar;
 if VOobject='dso'  then catversion:=rtNeb;
 if active and FileExists(catfile) then begin
@@ -386,6 +391,7 @@ end else begin
   VoNode:=VODoc.DocumentElement.FindNode('RESOURCE');
   VoNode:=VoNode.FindNode('TABLE');
   VoNode:=VoNode.FirstChild;
+  for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
   VOFields.Clear;
   while Assigned(VoNode) do begin
     buf:=VoNode.NodeName;
@@ -485,6 +491,7 @@ var fs: TSearchRec;
     i: integer;
 begin
 ok:=false;
+if VOopen then CloseVOCat;
 VOcatlist:=TStringList.Create;
 VOFields:=TStringList.Create;
 Ncat:=0;
@@ -497,6 +504,7 @@ while i=0 do begin
 end;
 findclose(fs);
 CurCat:=-1;
+VOopen:=true;
 NextVOCat(ok);
 end;
 
@@ -686,6 +694,7 @@ VOcatlist.Free;
 if VODocOK then VODoc.Free;
 for i:=0 to VOFields.Count-1 do VOFields.Objects[i].Free;
 VOFields.Free;
+VOopen:=false;
 Ncat:=0;
 CurCat:=0;
 end;
