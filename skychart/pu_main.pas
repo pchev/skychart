@@ -4355,7 +4355,7 @@ catalog.cfgcat.UserObjects[0].mag:=0;
 catalog.cfgcat.UserObjects[0].size:=30;
 catalog.cfgcat.UserObjects[0].color:=0;
 catalog.cfgcat.UserObjects[0].comment:='Example of user defined object: North galactic pole';
-catalog.cfgcat.GCatNum:=1;
+catalog.cfgcat.GCatNum:=0;
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatpath[i]:=slash(appdir)+'cat';
@@ -4530,7 +4530,7 @@ if config_version<cdcver then UpdateConfig;
 end;
 
 procedure Tf_main.ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
-var i,t,l,w,h,n:integer;
+var i,j,t,l,w,h,n:integer;
     inif: TMemIniFile;
     section,buf : string;
 begin
@@ -4592,30 +4592,38 @@ end;
 if usecatalog then begin
 try
 section:='catalog';
-catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',1);
+catalog.cfgcat.GCatNum:=Readinteger(section,'GCatNum',0);
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
+j:=-1;
 for i:=0 to catalog.cfgcat.GCatNum-1 do begin
-   catalog.cfgcat.GCatLst[i].shortname:=Readstring(section,'CatName'+inttostr(i),catalog.cfgcat.GCatLst[i].shortname);
-   catalog.cfgcat.GCatLst[i].name:=Readstring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
-   catalog.cfgcat.GCatLst[i].path:=Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path);
-   catalog.cfgcat.GCatLst[i].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
-   catalog.cfgcat.GCatLst[i].max:=ReadFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
-   catalog.cfgcat.GCatLst[i].Actif:=ReadBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
-   catalog.cfgcat.GCatLst[i].ForceColor:=ReadBool(section,'CatForceColor'+inttostr(i),false);
-   catalog.cfgcat.GCatLst[i].Col:=ReadInteger(section,'CatColor'+inttostr(i),0);
-   catalog.cfgcat.GCatLst[i].magmax:=0;
-   catalog.cfgcat.GCatLst[i].cattype:=0;
-   if catalog.cfgcat.GCatLst[i].Actif then begin
+   inc(j);
+   catalog.cfgcat.GCatLst[j].shortname:=Readstring(section,'CatName'+inttostr(i),catalog.cfgcat.GCatLst[i].shortname);
+   if catalog.cfgcat.GCatLst[j].shortname='dsl' then begin
+      dec(j);
+      continue;
+   end;
+   catalog.cfgcat.GCatLst[j].name:=Readstring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
+   catalog.cfgcat.GCatLst[j].path:=Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path);
+   catalog.cfgcat.GCatLst[j].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
+   catalog.cfgcat.GCatLst[j].max:=ReadFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
+   catalog.cfgcat.GCatLst[j].Actif:=ReadBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
+   catalog.cfgcat.GCatLst[j].ForceColor:=ReadBool(section,'CatForceColor'+inttostr(i),false);
+   catalog.cfgcat.GCatLst[j].Col:=ReadInteger(section,'CatColor'+inttostr(i),0);
+   catalog.cfgcat.GCatLst[j].magmax:=0;
+   catalog.cfgcat.GCatLst[j].cattype:=0;
+   if catalog.cfgcat.GCatLst[j].Actif then begin
       if not
-      catalog.GetInfo(catalog.cfgcat.GCatLst[i].path,
-                      catalog.cfgcat.GCatLst[i].shortname,
-                      catalog.cfgcat.GCatLst[i].magmax,
-                      catalog.cfgcat.GCatLst[i].cattype,
-                      catalog.cfgcat.GCatLst[i].version,
-                      catalog.cfgcat.GCatLst[i].name)
-      then catalog.cfgcat.GCatLst[i].Actif:=false;
+      catalog.GetInfo(catalog.cfgcat.GCatLst[j].path,
+                      catalog.cfgcat.GCatLst[j].shortname,
+                      catalog.cfgcat.GCatLst[j].magmax,
+                      catalog.cfgcat.GCatLst[j].cattype,
+                      catalog.cfgcat.GCatLst[j].version,
+                      catalog.cfgcat.GCatLst[j].name)
+      then catalog.cfgcat.GCatLst[j].Actif:=false;
    end;
 end;
+catalog.cfgcat.GCatNum:=j+1;
+SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 n:=Length(catalog.cfgcat.UserObjects);
 n:=Readinteger(section,'UserObjectsNum',n);
 SetLength(catalog.cfgcat.UserObjects,n);
