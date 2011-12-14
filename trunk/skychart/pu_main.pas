@@ -1906,6 +1906,7 @@ if CursorImage1<>nil then begin
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
+//if TCPDaemon<>nil then TCPDaemon.Free;
 {$ifdef trace_debug}
  WriteTrace('Destroy end');
 {$endif}

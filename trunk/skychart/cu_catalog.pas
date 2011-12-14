@@ -116,6 +116,9 @@ type
      function OpenMilkyWay(fill:boolean):boolean;
      function CloseMilkyWay:boolean;
      function ReadMilkyWay(var rec:GcatRec):boolean;
+     function OpenDSL:boolean;
+     function CloseDSL:boolean;
+     function ReadDSL(var rec:GcatRec):boolean;
      function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
      function SearchNebulae(Num:string; var ar1,de1: double): boolean;
      function SearchStar(Num:string; var ar1,de1: double): boolean;
@@ -126,7 +129,7 @@ type
      function SearchConstellation(Num:string; var ar1,de1: double): boolean;
      function SearchConstAbrev(Num:string; var ar1,de1: double): boolean;
      function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
-     function FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
+     function FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
@@ -167,6 +170,7 @@ end;
 
 destructor Tcatalog.Destroy;
 begin
+gcatunit.CleanCache;
 cfgcat.Free;
 cfgshr.Free;
 try
@@ -673,6 +677,27 @@ begin
 end;
 
 function Tcatalog.ReadMilkyWay(var rec:GcatRec):boolean;
+begin
+result:=GetGcatL(rec);
+end;
+
+function Tcatalog.OpenDSL:boolean;
+var GcatH : TCatHeader;
+    v : integer;
+begin
+ SetGcatPath(PChar(slash(appdir)+pathdelim+'cat'+pathdelim+'DSoutlines'),'dsl');
+ GetGCatInfo(GcatH,v,GCatFilter,result);
+ if result then result:=(v=rtLin);
+ if result then OpenGCatWin(result);
+end;
+
+function Tcatalog.CloseDSL:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.ReadDSL(var rec:GcatRec):boolean;
 begin
 result:=GetGcatL(rec);
 end;
@@ -2747,44 +2772,45 @@ until false ;
 result:=ok;
 end;
 
-function Tcatalog.FindObj(x1,y1,x2,y2:double; nextobj,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
-   ok : boolean;
+   ok,nextobj : boolean;
 begin
 ok:=false;
+nextobj:=false;
 if cfgsc.shownebulae then begin
   ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[lbn-BaseNeb] then ok:=FindAtPos(lbn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[rc3-BaseNeb] then ok:=FindAtPos(rc3,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[pgc-BaseNeb] then ok:=FindAtPos(pgc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[ocl-BaseNeb] then ok:=FindAtPos(ocl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  if (not ok) then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
+  if (not ok) then begin ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then begin ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSAC; end;
+  if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then begin ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseNGC; end;
+  if (not ok) and cfgcat.nebcaton[lbn-BaseNeb] then begin ok:=FindAtPos(lbn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseLBN; end;
+  if (not ok) and cfgcat.nebcaton[rc3-BaseNeb] then begin ok:=FindAtPos(rc3,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseRC3; end;
+  if (not ok) and cfgcat.nebcaton[pgc-BaseNeb] then begin ok:=FindAtPos(pgc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); ClosePGC; end;
+  if (not ok) and cfgcat.nebcaton[ocl-BaseNeb] then begin ok:=FindAtPos(ocl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseOCL; end;
+  if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then begin ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCM; end;
+  if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then begin ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGPN; end;
 end;
 if cfgsc.showstars then begin
-  if (not ok) then ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.dblstarcaton[wds-BaseDbl]  then ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[bsc-BaseStar] then ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[sky2000-BaseStar] then ok:=FindAtPos(sky2000,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[tyc-BaseStar] then ok:=FindAtPos(tyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[tyc2-BaseStar] then ok:=FindAtPos(tyc2,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[tic-BaseStar] then ok:=FindAtPos(tic,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[dstyc-BaseStar] then ok:=FindAtPos(dstyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[gsc-BaseStar] then ok:=FindAtPos(gsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[gscf-BaseStar] then ok:=FindAtPos(gscf,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[gscc-BaseStar] then ok:=FindAtPos(gscc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) and cfgcat.starcaton[microcat-BaseStar] then ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+  if (not ok) then begin ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
+  if (not ok) then begin ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then begin ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCV; end;
+  if (not ok) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and cfgcat.dblstarcaton[wds-BaseDbl]  then begin ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseWDS; end;
+  if (not ok) then begin ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and cfgcat.starcaton[bsc-BaseStar] then begin ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseBSC; end;
+  if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then begin ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSbase; end;
+  if (not ok) and cfgcat.starcaton[sky2000-BaseStar] then begin  ok:=FindAtPos(sky2000,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSky; end;
+  if (not ok) and cfgcat.starcaton[tyc-BaseStar] then begin ok:=FindAtPos(tyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseTYC; end;
+  if (not ok) and cfgcat.starcaton[tyc2-BaseStar] then begin ok:=FindAtPos(tyc2,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseTY2; end;
+  if (not ok) and cfgcat.starcaton[tic-BaseStar] then begin ok:=FindAtPos(tic,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseTIC; end;
+  if (not ok) and cfgcat.starcaton[dstyc-BaseStar] then begin ok:=FindAtPos(dstyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDStyc; end;
+  if (not ok) and cfgcat.starcaton[gsc-BaseStar] then begin ok:=FindAtPos(gsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGSC; end;
+  if (not ok) and cfgcat.starcaton[gscf-BaseStar] then begin ok:=FindAtPos(gscf,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGSCF; end;
+  if (not ok) and cfgcat.starcaton[gscc-BaseStar] then begin ok:=FindAtPos(gscc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGSCC; end;
+  if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then begin ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSgsc; end;
+  if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then begin ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseUSNOA; end;
+  if (not ok) and cfgcat.starcaton[microcat-BaseStar] then begin ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseMCT; end;
 end;
 { if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
