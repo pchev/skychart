@@ -427,6 +427,7 @@ magmax:=1;
 InitStarC(dsbase,5.5);
 InitStarC(bsc,6.5);
 InitStarC(sky2000,9.5);
+InitStarC(DefStar,10);
 InitStarC(tyc,11);
 InitStarC(tyc2,12);
 InitStarC(dstyc,12);
@@ -2295,6 +2296,7 @@ try
   if allobject or Fcatalog.cfgshr.ListStar then begin
      FindAtPosCat(gcstar);
      if Fcatalog.cfgcat.starcaton[vostar-BaseStar] then FindAtPosCat(vostar);
+     if Fcatalog.cfgcat.starcaton[DefStar-BaseStar] then FindAtPosCat(DefStar);
      if Fcatalog.cfgcat.starcaton[bsc-BaseStar] then FindAtPosCat(bsc);
      if Fcatalog.cfgcat.starcaton[dsbase-BaseStar] then FindAtPosCat(dsbase);
      if Fcatalog.cfgcat.starcaton[sky2000-BaseStar] then FindAtPosCat(sky2000);

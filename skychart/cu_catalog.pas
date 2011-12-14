@@ -119,6 +119,10 @@ type
      function OpenDSL(forcecolor: boolean; col:integer):boolean;
      function CloseDSL:boolean;
      function ReadDSL(var rec:GcatRec):boolean;
+     function OpenDefaultStars:boolean;
+     Procedure OpenDefaultStarsPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+     function CloseDefaultStars:boolean;
+     function GetDefaultStars(var rec:GcatRec):boolean;
      function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
      function SearchNebulae(Num:string; var ar1,de1: double): boolean;
      function SearchStar(Num:string; var ar1,de1: double): boolean;
@@ -235,7 +239,7 @@ function Tcatalog.ReadStar(var rec:GcatRec):boolean;
 begin
 result:=false;
 case curcat of
-   bsc     : result:=GetBSC(rec);
+   DefStar : result:=GetDefaultStars(rec);
    sky2000 : result:=GetSky2000(rec);
    tyc     : result:=GetTYC(rec);
    tyc2    : result:=GetTYC2(rec);
@@ -261,6 +265,7 @@ case curcat of
    vostar  : begin
              result:=GetVOcatS(rec);
              end;
+   bsc     : result:=GetBSC(rec);
 end;
 if (not result) and ((curcat-BaseStar)<numcat) then begin
   CloseStarCat;
@@ -284,7 +289,7 @@ end else begin
 end;
 InitRec(curcat);
 case curcat of
-   bsc     : begin SetBscPath(PChar(cfgcat.starcatpath[bsc-BaseStar])); OpenBSCwin(result); end;
+   DefStar : result:=OpenDefaultStars;
    sky2000 : begin SetSkyPath(PChar(cfgcat.starcatpath[sky2000-BaseStar])); OpenSkywin(result); end;
    tyc     : begin SetTycPath(PChar(cfgcat.starcatpath[tyc-BaseStar])); OpenTYCwin(result); end;
    tyc2    : begin SetTy2Path(PChar(cfgcat.starcatpath[tyc2-BaseStar])); OpenTY2win(nty2cat,result); end;
@@ -311,6 +316,7 @@ case curcat of
                 SetVOCatpath(slash(VODir));
                 OpenVOCatwin(result);
              end;
+   bsc     : begin SetBscPath(PChar(cfgcat.starcatpath[bsc-BaseStar])); OpenBSCwin(result); end;
    else result:=false;
 end;
 end;
@@ -319,7 +325,7 @@ function Tcatalog.CloseStarCat:boolean;
 begin
 result:=true;
 case curcat of
-   bsc     : CloseBSC;
+   DefStar : CloseDefaultStars;
    sky2000 : CloseSky;
    tyc     : CloseTYC;
    tyc2    : CloseTY2;
@@ -334,6 +340,7 @@ case curcat of
    dsgsc   : CloseDSgsc;
    gcstar  : CloseGcat;
    vostar  : CloseVOCat;
+   bsc     : CloseBSC;
    else result:=false;
 end;
 end;
@@ -720,6 +727,37 @@ repeat
   end;
   break;
 until not result;
+end;
+
+function Tcatalog.OpenDefaultStars:boolean;
+var GcatH : TCatHeader;
+    v : integer;
+begin
+ SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
+ GetGCatInfo(GcatH,v,GCatFilter,result);
+ if result then result:=(v=rtStar);
+ if result then OpenGCatWin(result);
+end;
+
+Procedure Tcatalog.OpenDefaultStarsPos(ar1,ar2,de1,de2: double ; var ok : boolean);
+var GcatH : TCatHeader;
+    v : integer;
+begin
+ SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
+ GetGCatInfo(GcatH,v,GCatFilter,ok);
+ if ok then ok:=(v=rtStar);
+ if ok then OpenGCat(ar1,ar2,de1,de2,ok);
+end;
+
+function Tcatalog.CloseDefaultStars:boolean;
+begin
+ CloseGcat;
+ result:=true;
+end;
+
+function Tcatalog.GetDefaultStars(var rec:GcatRec):boolean;
+begin
+  result:=GetGCatS(rec);
 end;
 
 // CatGen header simulation for old catalog
@@ -2595,7 +2633,7 @@ if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMont
 if not nextobj then begin
   InitRec(cat);
   case cat of
-   bsc     : OpenBSC(xx1,xx2,yy1,yy2,ok);
+   DefStar : OpenDefaultStarsPos(xx1,xx2,yy1,yy2,ok);
    sky2000 : OpenSky(xx1,xx2,yy1,yy2,ok);
    tyc     : OpenTYC(xx1,xx2,yy1,yy2,ok);
    tyc2    : OpenTY2(xx1,xx2,yy1,yy2,2,ok);
@@ -2608,6 +2646,7 @@ if not nextobj then begin
    dsbase  : OpenDSbase(xx1,xx2,yy1,yy2,ok);
    dstyc   : OpenDSTyc(xx1,xx2,yy1,yy2,ok);
    dsgsc   : OpenDSGsc(xx1,xx2,yy1,yy2,ok);
+   bsc     : OpenBSC(xx1,xx2,yy1,yy2,ok);
    gcvs    : OpenGCV(xx1,xx2,yy1,yy2,ok);
    wds     : OpenWDS(xx1,xx2,yy1,yy2,ok);
    sac     : OpenSAC(xx1,xx2,yy1,yy2,ok);
@@ -2675,7 +2714,7 @@ end;
 repeat
   radius:=0;
   case cat of
-   bsc     : ok:=GetBSC(rec);
+   DefStar : ok:=GetDefaultStars(rec);
    sky2000 : ok:=GetSky2000(rec);
    tyc     : ok:=GetTYC(rec);
    tyc2    : ok:=GetTYC2(rec);
@@ -2688,6 +2727,7 @@ repeat
    dsbase  : ok:=GetDSbase(rec);
    dstyc   : ok:=GetDSTyc(rec);
    dsgsc   : ok:=GetDSGsc(rec);
+   bsc     : ok:=GetBSC(rec);
    gcvs    : ok:=GetGCVS(rec);
    wds     : ok:=GetWDS(rec);
    sac     : begin
@@ -2818,7 +2858,7 @@ if cfgsc.showstars then begin
   if (not ok) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.dblstarcaton[wds-BaseDbl]  then begin ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseWDS; end;
   if (not ok) then begin ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
-  if (not ok) and cfgcat.starcaton[bsc-BaseStar] then begin ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseBSC; end;
+  if (not ok) and cfgcat.starcaton[DefStar-BaseStar] then begin ok:=FindAtPos(DefStar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDefaultStars; end;
   if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then begin ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSbase; end;
   if (not ok) and cfgcat.starcaton[sky2000-BaseStar] then begin  ok:=FindAtPos(sky2000,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSky; end;
   if (not ok) and cfgcat.starcaton[tyc-BaseStar] then begin ok:=FindAtPos(tyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseTYC; end;
@@ -2831,6 +2871,7 @@ if cfgsc.showstars then begin
   if (not ok) and cfgcat.starcaton[dsgsc-BaseStar] then begin ok:=FindAtPos(dsgsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSgsc; end;
   if (not ok) and cfgcat.starcaton[usnoa-BaseStar] then begin ok:=FindAtPos(usnoa,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseUSNOA; end;
   if (not ok) and cfgcat.starcaton[microcat-BaseStar] then begin ok:=FindAtPos(microcat,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseMCT; end;
+  if (not ok) and cfgcat.starcaton[bsc-BaseStar] then begin ok:=FindAtPos(bsc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseBSC; end;
 end;
 { if (not ok) and Catalog1Show then FindCatalogue1(ar,de,dx,dx,nextobj,ok,nom,ma,desc);
   if (not ok) and Catalog2Show then FindCatalogue2(ar,de,dx,dx,nextobj,ok,nom,ma,desc,notes);
