@@ -28,10 +28,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 464
       Top = 1
       Width = 498
-      ActivePage = Page4
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 6
+      TabIndex = 1
       TabOrder = 1
       object Page1: TTabSheet
         Caption = 'Catalog'
@@ -401,6 +401,69 @@ object f_config_catalog: Tf_config_catalog
           MaxLength = 0
           TabOrder = 12
           OnChange = wds3Change
+        end
+        object Label89: TLabel
+          Left = 68
+          Height = 15
+          Top = 95
+          Width = 19
+          Caption = 'pm'
+          ParentColor = False
+        end
+        object DefBox: TCheckBox
+          Tag = 1
+          Left = 93
+          Height = 26
+          Hint = 'XHIP'
+          Top = 87
+          Width = 58
+          HelpContext = 102
+          Caption = 'X HIP'
+          OnClick = CDCStarSelClick
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 13
+        end
+        object Fdef1: TLongEdit
+          Tag = 1
+          Left = 266
+          Height = 22
+          Hint = '0..10'
+          Top = 87
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 14
+          OnChange = CDCStarField1Change
+          Value = 0
+          MaxValue = 10
+        end
+        object Fdef2: TLongEdit
+          Tag = 1
+          Left = 306
+          Height = 22
+          Hint = '0..10'
+          Top = 88
+          Width = 30
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 15
+          OnChange = CDCStarField2Change
+          Value = 0
+          MaxValue = 10
+        end
+        object def3: TDirectoryEdit
+          Tag = 1
+          Left = 343
+          Height = 22
+          Top = 87
+          Width = 111
+          OnAcceptDirectory = CDCAcceptDirectory
+          ShowHidden = False
+          ButtonWidth = 23
+          NumGlyphs = 1
+          MaxLength = 0
+          TabOrder = 16
         end
       end
       object Page3: TTabSheet
@@ -1885,7 +1948,7 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 33
         end
         object Fbsc1: TLongEdit
-          Tag = 1
+          Tag = 16
           Left = 261
           Height = 22
           Hint = '0..10'
@@ -1899,7 +1962,7 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object Fbsc2: TLongEdit
-          Tag = 1
+          Tag = 16
           Left = 301
           Height = 22
           Hint = '0..10'
@@ -1913,7 +1976,7 @@ object f_config_catalog: Tf_config_catalog
           MaxValue = 10
         end
         object bsc3: TDirectoryEdit
-          Tag = 1
+          Tag = 16
           Left = 338
           Height = 22
           Top = 383

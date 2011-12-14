@@ -73,6 +73,8 @@ type
     fsac2: TLongEdit;
     Fsky1: TLongEdit;
     Fsky2: TLongEdit;
+    Fdef1: TLongEdit;
+    Fdef2: TLongEdit;
     fw4: TLabel;
     fw5: TLabel;
     fw6: TLabel;
@@ -92,6 +94,7 @@ type
     Label6: TLabel;
     Label65: TLabel;
     Label66: TLabel;
+    Label89: TLabel;
     LabelDownload: TLabel;
     maxrows: TLongEdit;
     Label1: TLabel;
@@ -132,6 +135,8 @@ type
     StringGrid1: TStringGrid;
     StringGrid4: TStringGrid;
     Page1b: TTabSheet;
+    def3: TDirectoryEdit;
+    DefBox: TCheckBox;
     tyc3: TDirectoryEdit;
     tic3: TDirectoryEdit;
     gsc3: TDirectoryEdit;
@@ -624,6 +629,7 @@ end;
 
 procedure Tf_config_catalog.ShowCDCStar;
 begin
+defbox.Checked:=ccat.StarCatDef[DefStar-BaseStar];
 bscbox.Checked:=ccat.StarCatDef[bsc-BaseStar];
 skybox.Checked:=ccat.StarCatDef[sky2000-BaseStar];
 tycbox.Checked:=ccat.StarCatDef[tyc-BaseStar];
@@ -641,6 +647,8 @@ wdsbox.Checked:=ccat.DblStarCatDef[wds-BaseDbl];
 dsbasebox.Checked:=ccat.StarCatDef[dsbase-BaseStar];
 dstycbox.Checked:=ccat.StarCatDef[dstyc-BaseStar];
 dsgscbox.Checked:=ccat.StarCatDef[dsgsc-BaseStar];
+fdef1.Value:=ccat.StarCatField[DefStar-BaseStar,1];
+fdef2.Value:=ccat.StarCatField[DefStar-BaseStar,2];
 fbsc1.Value:=ccat.StarCatField[bsc-BaseStar,1];
 fbsc2.Value:=ccat.StarCatField[bsc-BaseStar,2];
 fsky1.Value:=ccat.StarCatField[sky2000-BaseStar,1];
@@ -671,6 +679,7 @@ dstyc1.Value:=ccat.StarCatField[dstyc-BaseStar,1];
 dstyc2.Value:=ccat.StarCatField[dstyc-BaseStar,2];
 dsgsc1.Value:=ccat.StarCatField[dsgsc-BaseStar,1];
 dsgsc2.Value:=ccat.StarCatField[dsgsc-BaseStar,2];
+def3.Text:=changetext(systoutf8(ccat.StarCatPath[DefStar-BaseStar]),def3.Text);
 bsc3.Text:=changetext(systoutf8(ccat.StarCatPath[bsc-BaseStar]),bsc3.Text);
 sky3.Text:=changetext(systoutf8(ccat.StarCatPath[sky2000-BaseStar]),sky3.Text);
 tyc3.Text:=changetext(systoutf8(ccat.StarCatPath[tyc-BaseStar]),tyc3.Text);
