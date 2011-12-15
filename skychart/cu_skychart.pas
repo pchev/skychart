@@ -1931,6 +1931,9 @@ begin
             else
                 cfgsc.FindName:=txt;
          Desc:=Desc+'  *'+tab+txt+tab;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+         end;
          if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
          Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
          if rec.star.valid[vsB_v] then begin
@@ -1976,6 +1979,9 @@ begin
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' V*'+tab+txt+tab;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+         end;
          if rec.variable.valid[vvVartype] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvVartype])+dp+rec.variable.vartype+tab;
          if rec.variable.valid[vvMagcode] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagcode])+dp+rec.variable.magcode+tab;
          if rec.variable.valid[vvMagmax] then begin
@@ -2007,6 +2013,9 @@ begin
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' D*'+tab+txt+tab;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+         end;
          if rec.double.valid[vdCompname] then begin
             Desc:=Desc+rec.double.compname+tab;
             cfgsc.FindName:=cfgsc.FindName+blank+trim(rec.double.compname);
@@ -2056,6 +2065,9 @@ begin
             end;
          end;
          Desc:=Desc+tab+txt+tab;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+         end;
          if rec.neb.valid[vnMag] then begin
             if (rec.neb.mag<90) then str(rec.neb.mag:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
@@ -2108,7 +2120,7 @@ begin
    Desc:=Desc+tab;
  end else begin
    for i:=1 to 10 do begin
-     if rec.vstr[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+      if rec.vstr[i] and (not rec.options.altname[i]) then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
    end;
  end;
  for i:=1 to 10 do begin
