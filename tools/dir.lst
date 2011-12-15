@@ -1,5 +1,5 @@
 cat
-cat/bsc5
+cat/xhip
 cat/DSoutlines
 cat/milkyway
 cat/ngc2000
@@ -11,6 +11,7 @@ data/constellation
 data/earthmap
 data/eclipses
 data/horizon
+data/indi
 data/iridflar
 data/jpleph
 data/language
