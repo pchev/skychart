@@ -1931,11 +1931,11 @@ begin
             else
                 cfgsc.FindName:=txt;
          Desc:=Desc+'  *'+tab+txt+tab;
+         if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
+         Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
          for i:=1 to 10 do begin
             if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
          end;
-         if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
-         Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
          if rec.star.valid[vsB_v] then begin
             if (rec.star.b_v<90) then str(rec.star.b_v:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vsB_v])+dp+txt+tab;
@@ -1979,11 +1979,6 @@ begin
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' V*'+tab+txt+tab;
-         for i:=1 to 10 do begin
-            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
-         end;
-         if rec.variable.valid[vvVartype] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvVartype])+dp+rec.variable.vartype+tab;
-         if rec.variable.valid[vvMagcode] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagcode])+dp+rec.variable.magcode+tab;
          if rec.variable.valid[vvMagmax] then begin
             if (rec.variable.magmax<90) then str(rec.variable.magmax:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagmax])+dp+txt+tab;
@@ -1992,6 +1987,8 @@ begin
             if (rec.variable.magmin<90) then str(rec.variable.magmin:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagmin])+dp+txt+tab;
          end;
+         if rec.variable.valid[vvVartype] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvVartype])+dp+rec.variable.vartype+tab;
+         if rec.variable.valid[vvMagcode] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvMagcode])+dp+rec.variable.magcode+tab;
          if rec.variable.valid[vvPeriod] then begin
             str(rec.variable.period:16:10,txt);
             Desc:=Desc+trim(rec.options.flabel[lOffset+vvPeriod])+dp+txt+tab;
@@ -2004,6 +2001,9 @@ begin
             str(rec.variable.risetime:5:2,txt);
             Desc:=Desc+trim(rec.options.flabel[lOffset+vvRisetime])+dp+txt+tab;
          end;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+         end;
          if rec.variable.valid[vvSp] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvSp])+dp+rec.variable.sp+tab;
          if rec.variable.valid[vvComment] then Desc:=Desc+trim(rec.options.flabel[lOffset+vvComment])+dp+rec.variable.comment+tab;
          end;
@@ -2013,13 +2013,6 @@ begin
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' D*'+tab+txt+tab;
-         for i:=1 to 10 do begin
-            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
-         end;
-         if rec.double.valid[vdCompname] then begin
-            Desc:=Desc+rec.double.compname+tab;
-            cfgsc.FindName:=cfgsc.FindName+blank+trim(rec.double.compname);
-         end;
          if rec.double.valid[vdMag1] then begin
             if (rec.double.mag1<90) then str(rec.double.mag1:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdMag1])+dp+txt+tab;
@@ -2028,10 +2021,13 @@ begin
             if (rec.double.mag2<90) then str(rec.double.mag2:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdMag2])+dp+txt+tab;
          end;
+         if rec.double.valid[vdCompname] then begin
+            Desc:=Desc+rec.double.compname+tab;
+            cfgsc.FindName:=cfgsc.FindName+blank+trim(rec.double.compname);
+         end;
          if rec.double.valid[vdSep] then begin
             if (rec.double.sep>0) then str(rec.double.sep:5:1,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdSep])+dp+txt+tab;
-            // cfgsc.FindSize:=rec.double.sep*secarc;
          end;
          if rec.double.valid[vdPa] then begin
             if (rec.double.pa>0) then str(round(rec.double.pa-rad2deg*PoleRot2000(rec.ra,rec.dec)):3,txt) else txt:='   ';
@@ -2040,6 +2036,9 @@ begin
          if rec.double.valid[vdEpoch] then begin
             str(rec.double.epoch:4:2,txt);
             Desc:=Desc+trim(rec.options.flabel[lOffset+vdEpoch])+dp+txt+tab;
+         end;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
          end;
          if rec.double.valid[vdSp1] then Desc:=Desc+trim(rec.options.flabel[lOffset+vdSp1])+dp+' 1 '+rec.double.sp1+tab;
          if rec.double.valid[vdSp2] then Desc:=Desc+trim(rec.options.flabel[lOffset+vdSp2])+dp+' 2 '+rec.double.sp2+tab;
@@ -2065,12 +2064,12 @@ begin
             end;
          end;
          Desc:=Desc+tab+txt+tab;
-         for i:=1 to 10 do begin
-            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
-         end;
          if rec.neb.valid[vnMag] then begin
             if (rec.neb.mag<90) then str(rec.neb.mag:5:2,txt) else txt:=b5;
             Desc:=Desc+trim(rec.options.flabel[lOffset+vnMag])+dp+txt+tab;
+         end;
+         for i:=1 to 10 do begin
+            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
          end;
          if rec.neb.valid[vnSbr] then begin
             if (rec.neb.sbr<90) then str(rec.neb.sbr:5:2,txt) else txt:=b5;
