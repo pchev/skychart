@@ -1,7 +1,7 @@
 object f_config_catalog: Tf_config_catalog
-  Left = 497
+  Left = 466
   Height = 573
-  Top = 0
+  Top = 13
   Width = 523
   ActiveControl = MainPanel
   BorderStyle = bsToolWindow
@@ -31,124 +31,8 @@ object f_config_catalog: Tf_config_catalog
       ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 1
-      object Page1: TTabSheet
-        Caption = 'Catalog'
-        ClientHeight = 464
-        ClientWidth = 498
-        object Label37: TLabel
-          Left = 51
-          Height = 15
-          Top = 19
-          Width = 235
-          Alignment = taRightJustify
-          Anchors = [akTop, akRight]
-          Caption = 'Stars and Nebulae catalogs prepared with '
-          ParentColor = False
-        end
-        object StringGrid3: TStringGrid
-          Left = 9
-          Height = 345
-          Top = 48
-          Width = 482
-          ColCount = 7
-          Columns = <          
-            item
-              Title.Caption = 'Cat'
-              Width = 50
-            end          
-            item
-              ButtonStyle = cbsPickList
-              PickList.Strings = (
-                '0'
-                '1'
-                '2'
-                '3'
-                '4'
-                '5'
-                '6'
-                '7'
-                '8'
-                '9'
-                '10'
-              )
-              Title.Caption = 'Min'
-              Width = 50
-            end          
-            item
-              ButtonStyle = cbsPickList
-              PickList.Strings = (
-                '0'
-                '1'
-                '2'
-                '3'
-                '4'
-                '5'
-                '6'
-                '7'
-                '8'
-                '9'
-                '10'
-              )
-              Title.Caption = 'Max'
-              Width = 50
-            end          
-            item
-              Title.Caption = 'Path'
-              Width = 222
-            end          
-            item
-              ButtonStyle = cbsNone
-              Title.Caption = ' '
-              Width = 40
-            end          
-            item
-              Title.Caption = 'Color'
-              Width = 40
-            end>
-          DefaultColWidth = 24
-          DefaultRowHeight = 24
-          GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
-          RowCount = 2
-          TabOrder = 1
-          TitleFont.Height = -11
-          TitleStyle = tsStandard
-          OnDrawCell = StringGrid3DrawCell
-          OnMouseUp = StringGrid3MouseUp
-          OnSelectCell = StringGrid3SelectCell
-          OnSetEditText = StringGrid3SetEditText
-        end
-        object CatgenButton: TButton
-          Left = 368
-          Height = 25
-          Top = 12
-          Width = 96
-          BorderSpacing.InnerBorder = 4
-          Caption = 'CatGen'
-          OnClick = CatgenClick
-          TabOrder = 0
-        end
-        object addcat: TButton
-          Left = 144
-          Height = 25
-          Top = 400
-          Width = 75
-          Caption = 'Add'
-          OnClick = AddCatClick
-          TabOrder = 2
-        end
-        object delcat: TButton
-          Left = 248
-          Height = 25
-          Top = 400
-          Width = 75
-          Caption = 'Delete'
-          OnClick = DelCatClick
-          TabOrder = 3
-        end
-      end
       object Page2: TTabSheet
         Caption = 'CdC Stars'
         ClientHeight = 464
@@ -164,7 +48,7 @@ object f_config_catalog: Tf_config_catalog
         object Label87: TLabel
           Left = 68
           Height = 15
-          Top = 147
+          Top = 148
           Width = 19
           Caption = 'pm'
           ParentColor = False
@@ -405,7 +289,7 @@ object f_config_catalog: Tf_config_catalog
         object Label89: TLabel
           Left = 68
           Height = 15
-          Top = 95
+          Top = 94
           Width = 19
           Caption = 'pm'
           ParentColor = False
@@ -414,11 +298,11 @@ object f_config_catalog: Tf_config_catalog
           Tag = 1
           Left = 93
           Height = 26
-          Hint = 'XHIP'
-          Top = 87
-          Width = 58
+          Hint = 'Extended Hipparcos Compilation (XHIP)  (Anderson+, 2011)'
+          Top = 89
+          Width = 139
           HelpContext = 102
-          Caption = 'X HIP'
+          Caption = 'Extended Hipparcos'
           OnClick = CDCStarSelClick
           ParentShowHint = False
           ShowHint = True
@@ -426,10 +310,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fdef1: TLongEdit
           Tag = 1
-          Left = 266
+          Left = 267
           Height = 22
           Hint = '0..10'
-          Top = 87
+          Top = 88
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -456,7 +340,7 @@ object f_config_catalog: Tf_config_catalog
           Tag = 1
           Left = 343
           Height = 22
-          Top = 87
+          Top = 88
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -472,50 +356,50 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 498
         object Label3: TLabel
           Left = 9
-          Height = 15
+          Height = 16
           Top = 7
-          Width = 165
+          Width = 183
           Caption = 'CDC Nebulae Catalog Setting'
           ParentColor = False
         end
         object Label15: TLabel
           Left = 279
-          Height = 15
+          Height = 16
           Top = 0
-          Width = 74
+          Width = 81
           Alignment = taRightJustify
           Caption = 'Field number'
           ParentColor = False
         end
         object Label116: TLabel
           Left = 279
-          Height = 15
+          Height = 16
           Top = 16
-          Width = 25
+          Width = 27
           Caption = ' min'
           ParentColor = False
         end
         object Label117: TLabel
           Left = 319
-          Height = 15
+          Height = 16
           Top = 16
-          Width = 27
+          Width = 30
           Caption = ' max'
           ParentColor = False
         end
         object Label118: TLabel
           Left = 361
-          Height = 15
+          Height = 16
           Top = 16
-          Width = 56
+          Width = 60
           Caption = 'Files Path'
           ParentColor = False
         end
         object Label120: TLabel
           Left = 9
-          Height = 15
+          Height = 16
           Top = 389
-          Width = 335
+          Width = 392
           Alignment = taCenter
           Caption = 'Use only catalog from one of the three block at the same time'
           ParentColor = False
@@ -542,19 +426,19 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 0
           object Label119: TLabel
             Left = 9
-            Height = 15
+            Height = 16
             Top = 19
-            Width = 40
+            Width = 46
             Caption = 'Default'
             ParentColor = False
           end
           object SACbox: TCheckBox
             Tag = 1
             Left = 92
-            Height = 26
+            Height = 21
             Hint = 'Saguaro Astronomy Club Database  8.1'
             Top = 16
-            Width = 55
+            Width = 51
             HelpContext = 107
             Caption = 'SAC '
             OnClick = CDCNebSelClick
@@ -565,7 +449,7 @@ object f_config_catalog: Tf_config_catalog
           object fsac1: TLongEdit
             Tag = 1
             Left = 277
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 16
             Width = 30
@@ -579,7 +463,7 @@ object f_config_catalog: Tf_config_catalog
           object fsac2: TLongEdit
             Tag = 1
             Left = 317
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 16
             Width = 30
@@ -593,7 +477,7 @@ object f_config_catalog: Tf_config_catalog
           object sac3: TDirectoryEdit
             Tag = 1
             Left = 353
-            Height = 22
+            Height = 23
             Top = 16
             Width = 104
             ShowHidden = False
@@ -615,19 +499,19 @@ object f_config_catalog: Tf_config_catalog
           TabOrder = 1
           object Label69: TLabel
             Left = 9
-            Height = 15
+            Height = 16
             Top = 14
-            Width = 45
+            Width = 50
             Caption = 'General'
             ParentColor = False
           end
           object NGCbox: TCheckBox
             Tag = 2
             Left = 92
-            Height = 26
+            Height = 21
             Hint = 'New General Catalogue of Nebulae and Cluster of Stars (Dreyer 1888) (Sky Pub. Corp. 1988)'
             Top = 11
-            Width = 146
+            Width = 154
             HelpContext = 107
             Caption = 'New General Catalog'
             OnClick = CDCNebSelClick
@@ -638,7 +522,7 @@ object f_config_catalog: Tf_config_catalog
           object fngc1: TLongEdit
             Tag = 2
             Left = 277
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 11
             Width = 30
@@ -652,7 +536,7 @@ object f_config_catalog: Tf_config_catalog
           object fngc2: TLongEdit
             Tag = 2
             Left = 317
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 11
             Width = 30
@@ -666,7 +550,7 @@ object f_config_catalog: Tf_config_catalog
           object ngc3: TDirectoryEdit
             Tag = 2
             Left = 353
-            Height = 22
+            Height = 23
             Top = 11
             Width = 104
             ShowHidden = False
@@ -739,10 +623,10 @@ object f_config_catalog: Tf_config_catalog
           object OCLbox: TCheckBox
             Tag = 6
             Left = 93
-            Height = 26
+            Height = 21
             Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
             Top = 105
-            Width = 130
+            Width = 138
             HelpContext = 110
             Caption = 'Open Cluster Data'
             OnClick = CDCNebSelClick
@@ -753,10 +637,10 @@ object f_config_catalog: Tf_config_catalog
           object GCMbox: TCheckBox
             Tag = 7
             Left = 93
-            Height = 26
+            Height = 21
             Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
             Top = 153
-            Width = 181
+            Width = 195
             HelpContext = 111
             Caption = 'Globular Cl. in the Milky Way'
             OnClick = CDCNebSelClick
@@ -767,10 +651,10 @@ object f_config_catalog: Tf_config_catalog
           object GPNbox: TCheckBox
             Tag = 8
             Left = 93
-            Height = 26
+            Height = 21
             Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
             Top = 201
-            Width = 183
+            Width = 202
             HelpContext = 112
             Caption = 'Cat, Galactic Planetary Neb. '
             OnClick = CDCNebSelClick
@@ -781,10 +665,10 @@ object f_config_catalog: Tf_config_catalog
           object LBNbox: TCheckBox
             Tag = 3
             Left = 93
-            Height = 26
+            Height = 21
             Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
             Top = 9
-            Width = 146
+            Width = 154
             HelpContext = 108
             Caption = 'Lynds Bright Nebulae'
             OnClick = CDCNebSelClick
@@ -795,10 +679,10 @@ object f_config_catalog: Tf_config_catalog
           object PGCBox: TCheckBox
             Tag = 5
             Left = 93
-            Height = 26
+            Height = 21
             Hint = 'PGC/LEDA  (Paturel+ 2009)'
             Top = 58
-            Width = 94
+            Width = 91
             HelpContext = 116
             Caption = 'PGC / LEDA'
             OnClick = CDCNebSelClick
@@ -809,7 +693,7 @@ object f_config_catalog: Tf_config_catalog
           object flbn1: TLongEdit
             Tag = 3
             Left = 278
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 9
             Width = 30
@@ -823,7 +707,7 @@ object f_config_catalog: Tf_config_catalog
           object flbn2: TLongEdit
             Tag = 3
             Left = 318
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 9
             Width = 30
@@ -837,7 +721,7 @@ object f_config_catalog: Tf_config_catalog
           object fpgc1: TLongEdit
             Tag = 5
             Left = 278
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 58
             Width = 30
@@ -851,7 +735,7 @@ object f_config_catalog: Tf_config_catalog
           object fpgc2: TLongEdit
             Tag = 5
             Left = 318
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 58
             Width = 30
@@ -865,7 +749,7 @@ object f_config_catalog: Tf_config_catalog
           object focl1: TLongEdit
             Tag = 6
             Left = 277
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 105
             Width = 30
@@ -879,7 +763,7 @@ object f_config_catalog: Tf_config_catalog
           object focl2: TLongEdit
             Tag = 6
             Left = 317
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 105
             Width = 30
@@ -893,7 +777,7 @@ object f_config_catalog: Tf_config_catalog
           object fgcm1: TLongEdit
             Tag = 7
             Left = 278
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 153
             Width = 30
@@ -907,7 +791,7 @@ object f_config_catalog: Tf_config_catalog
           object fgcm2: TLongEdit
             Tag = 7
             Left = 318
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 153
             Width = 30
@@ -921,7 +805,7 @@ object f_config_catalog: Tf_config_catalog
           object fgpn1: TLongEdit
             Tag = 8
             Left = 278
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 201
             Width = 30
@@ -935,7 +819,7 @@ object f_config_catalog: Tf_config_catalog
           object fgpn2: TLongEdit
             Tag = 8
             Left = 318
-            Height = 22
+            Height = 23
             Hint = '0..10'
             Top = 201
             Width = 30
@@ -949,7 +833,7 @@ object f_config_catalog: Tf_config_catalog
           object lbn3: TDirectoryEdit
             Tag = 3
             Left = 354
-            Height = 22
+            Height = 23
             Top = 9
             Width = 104
             ShowHidden = False
@@ -962,7 +846,7 @@ object f_config_catalog: Tf_config_catalog
           object pgc3: TDirectoryEdit
             Tag = 5
             Left = 354
-            Height = 22
+            Height = 23
             Top = 58
             Width = 104
             ShowHidden = False
@@ -975,7 +859,7 @@ object f_config_catalog: Tf_config_catalog
           object ocl3: TDirectoryEdit
             Tag = 6
             Left = 353
-            Height = 22
+            Height = 23
             Top = 105
             Width = 104
             ShowHidden = False
@@ -988,7 +872,7 @@ object f_config_catalog: Tf_config_catalog
           object gcm3: TDirectoryEdit
             Tag = 7
             Left = 354
-            Height = 22
+            Height = 23
             Top = 153
             Width = 104
             ShowHidden = False
@@ -1001,7 +885,7 @@ object f_config_catalog: Tf_config_catalog
           object gpn3: TDirectoryEdit
             Tag = 8
             Left = 354
-            Height = 22
+            Height = 23
             Top = 201
             Width = 104
             ShowHidden = False
@@ -1013,15 +897,131 @@ object f_config_catalog: Tf_config_catalog
           end
         end
       end
+      object Page1: TTabSheet
+        Caption = 'Catalog'
+        ClientHeight = 464
+        ClientWidth = 498
+        object Label37: TLabel
+          Left = 15
+          Height = 16
+          Top = 19
+          Width = 271
+          Alignment = taRightJustify
+          Anchors = [akTop, akRight]
+          Caption = 'Stars and Nebulae catalogs prepared with '
+          ParentColor = False
+        end
+        object StringGrid3: TStringGrid
+          Left = 9
+          Height = 345
+          Top = 48
+          Width = 482
+          ColCount = 7
+          Columns = <          
+            item
+              Title.Caption = 'Cat'
+              Width = 50
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                '0'
+                '1'
+                '2'
+                '3'
+                '4'
+                '5'
+                '6'
+                '7'
+                '8'
+                '9'
+                '10'
+              )
+              Title.Caption = 'Min'
+              Width = 50
+            end          
+            item
+              ButtonStyle = cbsPickList
+              PickList.Strings = (
+                '0'
+                '1'
+                '2'
+                '3'
+                '4'
+                '5'
+                '6'
+                '7'
+                '8'
+                '9'
+                '10'
+              )
+              Title.Caption = 'Max'
+              Width = 50
+            end          
+            item
+              Title.Caption = 'Path'
+              Width = 222
+            end          
+            item
+              ButtonStyle = cbsNone
+              Title.Caption = ' '
+              Width = 40
+            end          
+            item
+              Title.Caption = 'Color'
+              Width = 40
+            end>
+          DefaultColWidth = 24
+          DefaultRowHeight = 24
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+          RowCount = 2
+          TabOrder = 1
+          TitleFont.Height = -11
+          TitleStyle = tsStandard
+          OnDrawCell = StringGrid3DrawCell
+          OnMouseUp = StringGrid3MouseUp
+          OnSelectCell = StringGrid3SelectCell
+          OnSetEditText = StringGrid3SetEditText
+        end
+        object CatgenButton: TButton
+          Left = 368
+          Height = 25
+          Top = 12
+          Width = 96
+          BorderSpacing.InnerBorder = 4
+          Caption = 'CatGen'
+          OnClick = CatgenClick
+          TabOrder = 0
+        end
+        object addcat: TButton
+          Left = 144
+          Height = 25
+          Top = 400
+          Width = 75
+          Caption = 'Add'
+          OnClick = AddCatClick
+          TabOrder = 2
+        end
+        object delcat: TButton
+          Left = 248
+          Height = 25
+          Top = 400
+          Width = 75
+          Caption = 'Delete'
+          OnClick = DelCatClick
+          TabOrder = 3
+        end
+      end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
         ClientHeight = 464
         ClientWidth = 498
         object Label1: TLabel
           Left = 7
-          Height = 15
+          Height = 16
           Top = 19
-          Width = 149
+          Width = 172
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
         end
@@ -1091,7 +1091,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object maxrows: TLongEdit
           Left = 415
-          Height = 22
+          Height = 23
           Hint = '100..50000'
           Top = 15
           Width = 64
@@ -1105,9 +1105,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label4: TLabel
           Left = 289
-          Height = 15
+          Height = 16
           Top = 19
-          Width = 52
+          Width = 58
           Caption = 'Max rows'
           ParentColor = False
         end
@@ -1127,9 +1127,9 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 498
         object Label6: TLabel
           Left = 7
-          Height = 18
+          Height = 16
           Top = 19
-          Width = 132
+          Width = 131
           Caption = 'User defined objects'
           ParentColor = False
         end
@@ -1230,7 +1230,7 @@ object f_config_catalog: Tf_config_catalog
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
-          Height = 22
+          Height = 23
           Top = 165
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1244,7 +1244,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc3: TDirectoryEdit
           Tag = 12
           Left = 325
-          Height = 22
+          Height = 23
           Top = 119
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1258,7 +1258,7 @@ object f_config_catalog: Tf_config_catalog
         object dsbase3: TDirectoryEdit
           Tag = 11
           Left = 326
-          Height = 22
+          Height = 23
           Top = 77
           Width = 111
           OnAcceptDirectory = CDCAcceptDirectory
@@ -1272,7 +1272,7 @@ object f_config_catalog: Tf_config_catalog
         object dsbase2: TLongEdit
           Tag = 11
           Left = 288
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 77
           Width = 30
@@ -1286,7 +1286,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc2: TLongEdit
           Tag = 12
           Left = 288
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 119
           Width = 30
@@ -1300,7 +1300,7 @@ object f_config_catalog: Tf_config_catalog
         object dsgsc2: TLongEdit
           Tag = 13
           Left = 289
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 165
           Width = 30
@@ -1314,7 +1314,7 @@ object f_config_catalog: Tf_config_catalog
         object dsgsc1: TLongEdit
           Tag = 13
           Left = 249
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 165
           Width = 30
@@ -1328,7 +1328,7 @@ object f_config_catalog: Tf_config_catalog
         object dstyc1: TLongEdit
           Tag = 12
           Left = 249
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 119
           Width = 30
@@ -1342,7 +1342,7 @@ object f_config_catalog: Tf_config_catalog
         object dsbase1: TLongEdit
           Tag = 11
           Left = 249
-          Height = 22
+          Height = 23
           Hint = '0..10'
           Top = 77
           Width = 30
@@ -1355,11 +1355,11 @@ object f_config_catalog: Tf_config_catalog
         end
         object dsgscBox: TCheckBox
           Tag = 13
-          Left = 74
-          Height = 26
+          Left = 50
+          Height = 21
           Hint = 'The Hubble Space Telescope Guide Star Catalog from Deepsky 2000 CDROM'
           Top = 165
-          Width = 163
+          Width = 169
           HelpContext = 104
           Caption = 'Deepsky 2000 HST GSC'
           OnClick = CDCStarSelClick
@@ -1369,11 +1369,11 @@ object f_config_catalog: Tf_config_catalog
         end
         object dstycBox: TCheckBox
           Tag = 12
-          Left = 73
-          Height = 26
+          Left = 49
+          Height = 21
           Hint = 'Tycho Catalog from Deepsky 2000 CDROM'
           Top = 119
-          Width = 177
+          Width = 191
           HelpContext = 104
           Caption = 'Deepsky 2000 Super Tycho'
           OnClick = CDCStarSelClick
@@ -1383,11 +1383,11 @@ object f_config_catalog: Tf_config_catalog
         end
         object dsbasebox: TCheckBox
           Tag = 11
-          Left = 74
-          Height = 26
+          Left = 50
+          Height = 21
           Hint = 'Deepsky 2000 base directory with stars to magnitude 5.5'
           Top = 77
-          Width = 138
+          Width = 147
           HelpContext = 104
           Caption = 'Deepsky 2000 base'
           OnClick = CDCStarSelClick
@@ -1397,9 +1397,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label21: TLabel
           Left = 17
-          Height = 15
+          Height = 16
           Top = 37
-          Width = 80
+          Width = 90
           Caption = 'Deepsky 2000'
           ParentColor = False
           WordWrap = True
@@ -1411,26 +1411,16 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 498
         object Label88: TLabel
           Left = 9
-          Height = 15
+          Height = 16
           Top = 7
-          Width = 277
+          Width = 314
           Caption = 'CDC Obsolete Catalog (but you can still use them)'
           ParentColor = False
         end
         object Label91: TLabel
           Left = 9
           Height = 34
-          Top = 53
-          Width = 80
-          AutoSize = False
-          Caption = 'Replaced by Tycho-2'
-          ParentColor = False
-          WordWrap = True
-        end
-        object Label92: TLabel
-          Left = 9
-          Height = 37
-          Top = 101
+          Top = 117
           Width = 80
           AutoSize = False
           Caption = 'Replaced by Tycho-2'
@@ -1440,7 +1430,7 @@ object f_config_catalog: Tf_config_catalog
         object Label93: TLabel
           Left = 9
           Height = 38
-          Top = 149
+          Top = 197
           Width = 80
           AutoSize = False
           Caption = 'Replaced by UCAC3'
@@ -1450,7 +1440,7 @@ object f_config_catalog: Tf_config_catalog
         object Label94: TLabel
           Left = 9
           Height = 32
-          Top = 309
+          Top = 357
           Width = 70
           AutoSize = False
           Caption = 'Not available'
@@ -1460,10 +1450,10 @@ object f_config_catalog: Tf_config_catalog
         object TYCbox: TCheckBox
           Tag = 3
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'The Tycho Catalogue (ESA 1997)'
-          Top = 53
-          Width = 105
+          Top = 117
+          Width = 109
           HelpContext = 102
           Caption = 'Tycho Catalog'
           OnClick = CDCStarSelClick
@@ -1473,10 +1463,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftyc1: TLongEdit
           Tag = 3
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 53
+          Top = 117
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1487,10 +1477,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftyc2: TLongEdit
           Tag = 3
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 53
+          Top = 117
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1502,10 +1492,10 @@ object f_config_catalog: Tf_config_catalog
         object TICbox: TCheckBox
           Tag = 5
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'Tycho Input Catalog  (Revised Version) (Egret+ 1992)'
-          Top = 101
-          Width = 138
+          Top = 157
+          Width = 149
           HelpContext = 103
           Caption = 'Tycho  Input Catalog'
           OnClick = CDCStarSelClick
@@ -1515,10 +1505,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftic1: TLongEdit
           Tag = 5
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 101
+          Top = 157
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1529,10 +1519,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Ftic2: TLongEdit
           Tag = 5
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 101
+          Top = 157
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1544,10 +1534,10 @@ object f_config_catalog: Tf_config_catalog
         object GSCbox: TCheckBox
           Tag = 8
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)'
-          Top = 149
-          Width = 159
+          Top = 197
+          Width = 169
           HelpContext = 104
           Caption = 'HST Guide Star Catalog'
           OnClick = CDCStarSelClick
@@ -1557,10 +1547,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgsc1: TLongEdit
           Tag = 8
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 149
+          Top = 197
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1571,10 +1561,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgsc2: TLongEdit
           Tag = 8
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 149
+          Top = 197
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1586,10 +1576,10 @@ object f_config_catalog: Tf_config_catalog
         object MCTBox: TCheckBox
           Tag = 10
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'AUDE MicroCat CDROM'
-          Top = 309
-          Width = 112
+          Top = 357
+          Width = 115
           HelpContext = 113
           Caption = 'AUDE MicroCat'
           OnClick = CDCStarSelClick
@@ -1599,10 +1589,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fmct1: TLongEdit
           Tag = 10
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 309
+          Top = 357
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1613,10 +1603,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fmct2: TLongEdit
           Tag = 10
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 309
+          Top = 357
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1627,9 +1617,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object tyc3: TDirectoryEdit
           Tag = 3
-          Left = 338
-          Height = 22
-          Top = 53
+          Left = 358
+          Height = 23
+          Top = 117
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1641,9 +1631,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object tic3: TDirectoryEdit
           Tag = 5
-          Left = 338
-          Height = 22
-          Top = 101
+          Left = 358
+          Height = 23
+          Top = 157
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1655,9 +1645,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object gsc3: TDirectoryEdit
           Tag = 8
-          Left = 338
-          Height = 22
-          Top = 149
+          Left = 358
+          Height = 23
+          Top = 197
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1669,9 +1659,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object mct3: TDirectoryEdit
           Tag = 10
-          Left = 338
-          Height = 22
-          Top = 309
+          Left = 358
+          Height = 23
+          Top = 357
           Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
@@ -1683,10 +1673,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object usn3: TDirectoryEdit
           Tag = 9
-          Left = 338
-          Height = 22
-          Top = 269
-          Width = 111
+          Left = 358
+          Height = 23
+          Top = 317
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -1697,10 +1687,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object gscc3: TDirectoryEdit
           Tag = 7
-          Left = 338
-          Height = 22
-          Top = 229
-          Width = 111
+          Left = 358
+          Height = 23
+          Top = 277
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -1711,10 +1701,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object gscf3: TDirectoryEdit
           Tag = 6
-          Left = 338
-          Height = 22
-          Top = 189
-          Width = 111
+          Left = 358
+          Height = 23
+          Top = 237
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -1725,10 +1715,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscf2: TLongEdit
           Tag = 6
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 189
+          Top = 237
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1739,10 +1729,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscc2: TLongEdit
           Tag = 7
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 229
+          Top = 277
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1753,10 +1743,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn2: TLongEdit
           Tag = 9
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 269
+          Top = 317
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1767,10 +1757,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fusn1: TLongEdit
           Tag = 9
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 269
+          Top = 317
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1781,10 +1771,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscc1: TLongEdit
           Tag = 7
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 229
+          Top = 277
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1795,10 +1785,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object fgscf1: TLongEdit
           Tag = 6
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 189
+          Top = 237
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1810,9 +1800,9 @@ object f_config_catalog: Tf_config_catalog
         object USNBright: TCheckBox
           Tag = 9
           Left = 170
-          Height = 26
-          Top = 269
-          Width = 91
+          Height = 21
+          Top = 317
+          Width = 96
           Caption = 'Bright stars'
           OnClick = USNBrightClick
           TabOrder = 25
@@ -1820,10 +1810,10 @@ object f_config_catalog: Tf_config_catalog
         object USNbox: TCheckBox
           Tag = 9
           Left = 87
-          Height = 26
+          Height = 21
           Hint = '- USNO-SA1.0 '#13#10'- USNO-A1.0 '#13#10'- USNO-A2.0'#13#10'  U.S. Naval Observatory CDROM''s'
-          Top = 269
-          Width = 74
+          Top = 317
+          Width = 70
           HelpContext = 113
           Caption = 'USNO-A'
           OnClick = CDCStarSelClick
@@ -1834,10 +1824,10 @@ object f_config_catalog: Tf_config_catalog
         object GSCCbox: TCheckBox
           Tag = 7
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  Compact CDS version '
-          Top = 229
-          Width = 131
+          Top = 277
+          Width = 134
           HelpContext = 104
           Caption = 'HST GSC compact'
           OnClick = CDCStarSelClick
@@ -1848,10 +1838,10 @@ object f_config_catalog: Tf_config_catalog
         object GSCFBox: TCheckBox
           Tag = 6
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'The Hubble Space Telescope Guide Star Catalog  ( Lasker 1990)  original FITS CDROM'
-          Top = 189
-          Width = 153
+          Top = 237
+          Width = 155
           HelpContext = 104
           Caption = 'HST GSC original FITS'
           OnClick = CDCStarSelClick
@@ -1861,10 +1851,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object rc33: TDirectoryEdit
           Tag = 4
-          Left = 338
-          Height = 22
-          Top = 349
-          Width = 104
+          Left = 358
+          Height = 23
+          Top = 397
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -1875,10 +1865,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object frc32: TLongEdit
           Tag = 4
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 349
+          Top = 397
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1889,10 +1879,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object frc31: TLongEdit
           Tag = 4
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 349
+          Top = 397
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1904,10 +1894,10 @@ object f_config_catalog: Tf_config_catalog
         object RC3box: TCheckBox
           Tag = 4
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'Third Reference Catalogue of Bright Galaxies (RC3) (de Vaucouleurs+ 1991)'
-          Top = 349
-          Width = 173
+          Top = 397
+          Width = 186
           HelpContext = 109
           Caption = '3'' Ref. Cat. Bright Galaxies'
           OnClick = CDCNebSelClick
@@ -1918,28 +1908,20 @@ object f_config_catalog: Tf_config_catalog
         object Label95: TLabel
           Left = 9
           Height = 38
-          Top = 349
+          Top = 397
           Width = 80
           AutoSize = False
           Caption = 'Replaced by PGC'
           ParentColor = False
           WordWrap = True
         end
-        object Label65: TLabel
-          Left = 63
-          Height = 15
-          Top = 386
-          Width = 19
-          Caption = 'pm'
-          ParentColor = False
-        end
         object BSCbox: TCheckBox
-          Tag = 1
+          Tag = 16
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'Bright Stars Catalog 5th Edition  (Hoffleit 1991)'
-          Top = 383
-          Width = 131
+          Top = 39
+          Width = 142
           HelpContext = 100
           Caption = 'Bright Star Catalog'
           OnClick = CDCStarSelClick
@@ -1949,10 +1931,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fbsc1: TLongEdit
           Tag = 16
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 383
+          Top = 39
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1963,10 +1945,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fbsc2: TLongEdit
           Tag = 16
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 383
+          Top = 39
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -1977,10 +1959,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object bsc3: TDirectoryEdit
           Tag = 16
-          Left = 338
-          Height = 22
-          Top = 383
-          Width = 111
+          Left = 358
+          Height = 23
+          Top = 39
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -1991,10 +1973,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object sky3: TDirectoryEdit
           Tag = 2
-          Left = 338
-          Height = 22
-          Top = 423
-          Width = 111
+          Left = 358
+          Height = 23
+          Top = 77
+          Width = 108
           OnAcceptDirectory = CDCAcceptDirectory
           ShowHidden = False
           ButtonWidth = 23
@@ -2005,10 +1987,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fsky2: TLongEdit
           Tag = 2
-          Left = 301
-          Height = 22
+          Left = 321
+          Height = 23
           Hint = '0..10'
-          Top = 423
+          Top = 77
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -2019,10 +2001,10 @@ object f_config_catalog: Tf_config_catalog
         end
         object Fsky1: TLongEdit
           Tag = 2
-          Left = 261
-          Height = 22
+          Left = 281
+          Height = 23
           Hint = '0..10'
-          Top = 423
+          Top = 77
           Width = 30
           ParentShowHint = False
           ShowHint = True
@@ -2034,10 +2016,10 @@ object f_config_catalog: Tf_config_catalog
         object SKYbox: TCheckBox
           Tag = 2
           Left = 87
-          Height = 26
+          Height = 21
           Hint = 'SKY2000 - Master Star Catalog  (Sande+ 1998)'
-          Top = 423
-          Width = 79
+          Top = 77
+          Width = 77
           HelpContext = 101
           Caption = 'SKY2000'
           OnClick = CDCStarSelClick
@@ -2045,13 +2027,15 @@ object f_config_catalog: Tf_config_catalog
           ShowHint = True
           TabOrder = 40
         end
-        object Label66: TLabel
-          Left = 63
-          Height = 15
-          Top = 426
-          Width = 19
-          Caption = 'pm'
+        object Label96: TLabel
+          Left = 9
+          Height = 34
+          Top = 39
+          Width = 80
+          AutoSize = False
+          Caption = 'Replaced by XHIP'
           ParentColor = False
+          WordWrap = True
         end
       end
     end

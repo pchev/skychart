@@ -851,6 +851,10 @@ for j:=0 to Fcatalog.cfgcat.GCatNum-1 do  begin
       first:=false;
    end;
 end;
+if first and Fcatalog.cfgcat.starcaton[bsc-BaseStar] then begin
+  firstcat:='BSC';
+  first:=false;
+end;
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
  if first then begin
