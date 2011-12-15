@@ -1470,7 +1470,7 @@ end else begin
    buf:=copy(gr,1,i-1);
    num:=copy(gr,i+1,9);
 end;
-buf:=lowercase(trim(buf));
+buf:=lowercase(trim(copy(buf,1,3)));
 buf:=StringReplace(buf,'.','',[]);
 for i:=1 to 24 do begin
   if buf=greeksymbol[1,i] then begin
