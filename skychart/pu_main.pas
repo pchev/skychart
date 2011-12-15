@@ -3074,7 +3074,7 @@ end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
 begin
-SetupPicturesPage(1);
+ShowBackgroundImageExecute(sender);
 end;
 
 procedure Tf_main.SetupChartExecute(Sender: TObject);
@@ -3174,7 +3174,7 @@ end;
 procedure Tf_main.ToolButtonShowStarsMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(1);
+if Button=mbRight then SetupCatalogPage(0);
 end;
 
 procedure Tf_main.ToolButtonShowAsteroidsMouseUp(Sender: TObject;
@@ -3579,13 +3579,13 @@ end;
 procedure Tf_main.ToolButtonShowNebulaeMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupCatalogPage(2);
+if Button=mbRight then SetupCatalogPage(1);
 end;
 
 procedure Tf_main.ToolButtonShowLinesMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-if Button=mbRight then SetupDisplayPage(4);//SetupCatalogPage(0);
+if Button=mbRight then SetupDisplayPage(4);
 end;
 
 procedure Tf_main.ToolButtonShowPicturesMouseUp(Sender: TObject;
@@ -6333,6 +6333,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     ToolButtonUObj.Down:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
+    ToolButtonShowBackgroundImage.down:=sc.cfgsc.ShowBackgroundImage;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
     ShowLines1.checked:=sc.cfgsc.ShowLine;
     toolbuttonShowAsteroids.down:=sc.cfgsc.ShowAsteroid;
