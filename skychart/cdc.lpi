@@ -45,6 +45,7 @@
           <Linking>
             <Debugging>
               <GenerateDebugInfo Value="True"/>
+              <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>
               <Win32>
@@ -59,7 +60,8 @@
             <CompilerMessages>
               <UseMsgFile Value="True"/>
             </CompilerMessages>
-            <CustomOptions Value="-dtrace_debug"/>
+            <CustomOptions Value="-dtrace_debug
+-dUSEHEAPTRC"/>
             <CompilerPath Value="$(CompPath)"/>
           </Other>
         </CompilerOptions>

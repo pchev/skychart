@@ -1438,13 +1438,19 @@ repeat
       flam:=(trim(rec.str[4])<>'');
       rec.vstr[4]:=flam;
       bayer:=(trim(rec.str[5])<>'');
+      if trim(rec.str[5])='H02' then begin
+         rec.vstr[5]:=bayer;
+      end;
       rec.vstr[5]:=bayer;
       if bayer then begin
           rec.star.greeksymbol:=GreekLetter(rec.str[5]);
-          rec.star.valid[vsGreekSymbol]:=true;
-      end else if flam  then begin
+          if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
+             else bayer:=false;
+      end;
+      if (not bayer) and flam  then begin
           rec.star.greeksymbol:=trim(rec.str[4]);
-          rec.star.valid[vsGreekSymbol]:=true;
+          if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
+             else flam:=false;
       end;
       rec.options.flabel[lOffsetStr+3]:=rsCommonName;
       rec.vstr[3]:=(trim(rec.str[3])<>'');

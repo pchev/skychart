@@ -18,14 +18,12 @@ SO_Name       = libcdcwcs.dll
 LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
 endif
 
-OBJS =	cdcwcs.o imsetwcs.o imgetwcs.o matchstar.o findstar.o daoread.o wcscon.o \
-	fitswcs.o wcsinit.o wcs.o ty2read.o webread.o tmcread.o \
-	gscread.o gsc2read.o ujcread.o uacread.o ubcread.o ucacread.o \
-	sdssread.o tabread.o binread.o ctgread.o actread.o catutil.o \
-	skybotread.o imrotate.o fitsfile.o imhfile.o \
+OBJS =	cdcwcs.o imgetwcs.o daoread.o wcscon.o \
+	fitswcs.o wcsinit.o wcs.o  \
+	imrotate.o fitsfile.o imhfile.o \
 	hget.o hput.o imio.o dateutil.o imutil.o \
 	worldpos.o tnxpos.o zpxpos.o dsspos.o platepos.o \
-	sortstar.o platefit.o iget.o fileutil.o \
+	sortstar.o iget.o fileutil.o \
 	wcslib.o lin.o cel.o proj.o sph.o wcstrig.o distort.o poly.o
 
 all: $(SO_Name)
