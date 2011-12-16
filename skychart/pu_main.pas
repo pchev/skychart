@@ -2848,11 +2848,28 @@ end;
 procedure Tf_main.Search1Execute(Sender: TObject);
 var ok: string;
 begin
- f_search.Proxy:=cfgm.HttpProxy;
- f_search.HttpProxyHost:=cfgm.ProxyHost;
- f_search.HttpProxyPort:=cfgm.ProxyPort;
- f_search.HttpProxyUser:=cfgm.ProxyUser;
- f_search.HttpProxyPass:=cfgm.ProxyPass;
+if cfgm.HttpProxy then begin
+   f_search.SocksProxy:='';
+   f_search.SocksType:='';
+   f_search.HttpProxy:=cfgm.ProxyHost;
+   f_search.HttpProxyPort:=cfgm.ProxyPort;
+   f_search.HttpProxyUser:=cfgm.ProxyUser;
+   f_search.HttpProxyPass:=cfgm.ProxyPass;
+end else if cfgm.SocksProxy then begin
+   f_search.HttpProxy:='';
+   f_search.SocksType:=cfgm.SocksType;
+   f_search.SocksProxy:=cfgm.ProxyHost;
+   f_search.HttpProxyPort:=cfgm.ProxyPort;
+   f_search.HttpProxyUser:=cfgm.ProxyUser;
+   f_search.HttpProxyPass:=cfgm.ProxyPass;
+end else begin
+   f_search.SocksProxy:='';
+   f_search.SocksType:='';
+   f_search.HttpProxy:='';
+   f_search.HttpProxyPort:='';
+   f_search.HttpProxyUser:='';
+   f_search.HttpProxyPass:='';
+end;
  formpos(f_search,mouse.cursorpos.x,mouse.cursorpos.y);
  repeat
    f_search.showmodal;

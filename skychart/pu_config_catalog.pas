@@ -485,11 +485,28 @@ procedure Tf_config_catalog.Button5Click(Sender: TObject);
 begin
   f_voconfig:=Tf_voconfig.Create(Self);
   f_voconfig.vopath:=VODir;
-  f_voconfig.Proxy:=cmain.HttpProxy;
-  f_voconfig.ProxyHost:=cmain.ProxyHost;
-  f_voconfig.ProxyPort:=cmain.ProxyPort;
-  f_voconfig.ProxyUser:=cmain.ProxyUser;
-  f_voconfig.ProxyPass:=cmain.ProxyPass;
+  if cmain.HttpProxy then begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else if cmain.SocksProxy then begin
+     f_voconfig.HttpProxy:='';
+     f_voconfig.SocksType:=cmain.SocksType;
+     f_voconfig.SocksProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:='';
+     f_voconfig.HttpProxyPort:='';
+     f_voconfig.HttpProxyUser:='';
+     f_voconfig.HttpProxyPass:='';
+  end;
   f_voconfig.ra:=ra;
   f_voconfig.dec:=dec;
   f_voconfig.fov:=fov;
@@ -512,11 +529,28 @@ fn:=slash(VODir)+stringgrid4.cells[2,p];
 fn:=ChangeFileExt(fn,'.config');
 f_voconfig:=Tf_voconfig.Create(Self);
 f_voconfig.vopath:=VODir;
-f_voconfig.Proxy:=cmain.HttpProxy;
-f_voconfig.ProxyHost:=cmain.ProxyHost;
-f_voconfig.ProxyPort:=cmain.ProxyPort;
-f_voconfig.ProxyUser:=cmain.ProxyUser;
-f_voconfig.ProxyPass:=cmain.ProxyPass;
+  if cmain.HttpProxy then begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else if cmain.SocksProxy then begin
+     f_voconfig.HttpProxy:='';
+     f_voconfig.SocksType:=cmain.SocksType;
+     f_voconfig.SocksProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:='';
+     f_voconfig.HttpProxyPort:='';
+     f_voconfig.HttpProxyUser:='';
+     f_voconfig.HttpProxyPass:='';
+  end;
 f_voconfig.ra:=ra;
 f_voconfig.dec:=dec;
 f_voconfig.fov:=fov;
@@ -1180,11 +1214,28 @@ try
   f_voconfig:=Tf_voconfig.Create(Self);
   f_voconfig.onReloadFeedback:=ReloadFeedback;
   f_voconfig.vopath:=VODir;
-  f_voconfig.Proxy:=cmain.HttpProxy;
-  f_voconfig.ProxyHost:=cmain.ProxyHost;
-  f_voconfig.ProxyPort:=cmain.ProxyPort;
-  f_voconfig.ProxyUser:=cmain.ProxyUser;
-  f_voconfig.ProxyPass:=cmain.ProxyPass;
+  if cmain.HttpProxy then begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else if cmain.SocksProxy then begin
+     f_voconfig.HttpProxy:='';
+     f_voconfig.SocksType:=cmain.SocksType;
+     f_voconfig.SocksProxy:=cmain.ProxyHost;
+     f_voconfig.HttpProxyPort:=cmain.ProxyPort;
+     f_voconfig.HttpProxyUser:=cmain.ProxyUser;
+     f_voconfig.HttpProxyPass:=cmain.ProxyPass;
+  end else begin
+     f_voconfig.SocksProxy:='';
+     f_voconfig.SocksType:='';
+     f_voconfig.HttpProxy:='';
+     f_voconfig.HttpProxyPort:='';
+     f_voconfig.HttpProxyUser:='';
+     f_voconfig.HttpProxyPass:='';
+  end;
   f_voconfig.ra:=ra;
   f_voconfig.dec:=dec;
   f_voconfig.fov:=fov;

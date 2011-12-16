@@ -62,8 +62,8 @@ type
     procedure LoadData;
     procedure ClearData;
   protected
-    Fproxy : boolean;
-    Fproxyhost,Fproxyport,Fproxyuser,Fproxypass : string;
+    Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
+    FSocksproxy,FSockstype : string;
     Sockreadcount, LastRead: integer;
     FDownloadFeedback: TDownloadFeedback;
     procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
@@ -95,11 +95,12 @@ type
     property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
     property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
     property onDownloadFeedback: TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
-    property Proxy : boolean read Fproxy  write Fproxy ;
-    property HttpProxyhost : string read Fproxyhost  write Fproxyhost ;
+    property HttpProxy : string read Fproxy  write Fproxy ;
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
     property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
     property HttpProxyPass : string read Fproxypass  write Fproxypass ;
+    property SocksProxy : string read FSocksproxy  write FSocksproxy ;
+    property SocksType : string read FSockstype  write FSockstype ;
   end;
 
 implementation
@@ -134,6 +135,8 @@ begin
  Fra:=0;
  Fde:=0;
  FFov:=0.1;
+ Fproxy:='';
+ FSocksproxy:='';
 end;
 
 destructor TVO_TableData.Destroy;
@@ -189,16 +192,21 @@ case Fvo_type of
               end;
 end;
 http.Clear;
-if Fproxy then begin
-   http.ProxyHost:=Fproxyhost;
-   http.ProxyPort:=Fproxyport;
-   http.ProxyUser :=Fproxyuser;
-   http.ProxyPass :=Fproxypass;
-end else begin
-  http.ProxyHost:='';
-  http.ProxyPort:='';
-  http.ProxyUser :='';
-  http.ProxyPass :='';
+http.Sock.SocksIP:='';
+http.ProxyHost:='';
+if FSocksproxy<>'' then begin
+  http.Sock.SocksIP:=FSocksproxy;
+  if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
+  if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
+                         else http.Sock.SocksType:=ST_Socks5;
+  if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
+  if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+end
+else if Fproxy<>'' then  begin
+    http.ProxyHost:=Fproxy;
+    if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
+    if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
+    if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
 end;
 http.Timeout:=60000;
 http.Sock.OnStatus:=httpstatus;

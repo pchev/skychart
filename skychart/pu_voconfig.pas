@@ -104,11 +104,12 @@ type
     procedure ReceiveData(Sender: TObject);
     procedure DefColumns(Sender: TObject);
     procedure Setvopath(value:string);
-    procedure SetProxy(value:boolean);
-    procedure SetProxyHost(value:string);
+    procedure SetHttpProxy(value:string);
     procedure SetProxyPort(value:string);
     procedure SetProxyUser(value:string);
     procedure SetProxyPass(value:string);
+    procedure SetSocksProxy(value:string);
+    procedure SetSockstype(value:string);
     procedure Setvourlnum(value: integer);
     procedure DownloadFeedback1(txt:string);
     procedure DownloadFeedback2(txt:string);
@@ -121,11 +122,12 @@ type
     procedure ReloadVO(fn: string);
     procedure UpdateCatalog(cn: string);
     property vopath: string read Fvopath write Setvopath;
-    property Proxy: boolean  write SetProxy;
-    property ProxyHost: string  write SetProxyHost;
-    property ProxyPort: string  write SetProxyPort;
-    property ProxyUser: string  write SetProxyUser;
-    property ProxyPass: string  write SetProxyPass;
+    property HttpProxy : string write SetHttpProxy;
+    property HttpProxyPort : string write SetProxyPort ;
+    property HttpProxyUser : string write SetProxyUser ;
+    property HttpProxyPass : string write SetProxyPass ;
+    property SocksProxy : string write SetSocksProxy ;
+    property SocksType : string write SetSockstype;
     property vourlnum: integer read Fvourlnum write Setvourlnum;
     property vo_maxrecord: integer read Fvo_maxrecord write Fvo_maxrecord;
     property onReloadFeedback: TDownloadFeedback read FReloadFeedback write FReloadFeedback;
@@ -166,18 +168,11 @@ VO_Detail1.CachePath:=Fvopath;
 VO_TableData1.CachePath:=Fvopath;
 end;
 
-procedure Tf_voconfig.SetProxy(value:boolean);
+procedure Tf_voconfig.SetHttpProxy(value:string);
 begin
-VO_Catalogs1.Proxy:=value;
-VO_Detail1.Proxy:=value;
-VO_TableData1.Proxy:=value;
-end;
-
-procedure Tf_voconfig.SetProxyHost(value:string);
-begin
-VO_Catalogs1.HttpProxyhost:=value;
-VO_Detail1.HttpProxyhost:=value;
-VO_TableData1.HttpProxyhost:=value;
+VO_Catalogs1.HttpProxy:=value;
+VO_Detail1.HttpProxy:=value;
+VO_TableData1.HttpProxy:=value;
 end;
 
 procedure Tf_voconfig.SetProxyPort(value:string);
@@ -199,6 +194,20 @@ begin
 VO_Catalogs1.HttpProxyPass:=value;
 VO_Detail1.HttpProxyPass:=value;
 VO_TableData1.HttpProxyPass:=value;
+end;
+
+procedure Tf_voconfig.SetSocksProxy(value:string);
+begin
+VO_Catalogs1.SocksProxy:=value;
+VO_Detail1.SocksProxy:=value;
+VO_TableData1.SocksProxy:=value;
+end;
+
+procedure Tf_voconfig.SetSockstype(value:string);
+begin
+VO_Catalogs1.Sockstype:=value;
+VO_Detail1.Sockstype:=value;
+VO_TableData1.Sockstype:=value;
 end;
 
 procedure Tf_voconfig.Setvourlnum(value: integer);
