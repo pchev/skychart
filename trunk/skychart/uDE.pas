@@ -258,7 +258,7 @@ begin
       de_filename := de_folder +DirectorySeparator+ de_file;
       //see if file is there, set DE return true if it works
       if fileexists(de_filename) then begin
-            if init_de_file(PChar(de_filename)) then begin
+            if init_de_file(de_filename) then begin
               de_eph.de_file := de_file;
               result := true;
             end;

@@ -35,12 +35,12 @@ SACrec = record
             desc : string[120];
             clas : string[11];
          end;
-Function IsSACpath(path : PChar) : Boolean; stdcall;
-procedure SetSACpath(path : PChar); stdcall;
-Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenSACwin(var ok : boolean); stdcall;
-Procedure ReadSAC(var lin : SACrec; var ok : boolean); stdcall;
-procedure CloseSAC ; stdcall;
+Function IsSACpath(path : string) : Boolean;
+procedure SetSACpath(path : string);
+Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenSACwin(var ok : boolean);
+Procedure ReadSAC(var lin : SACrec; var ok : boolean);
+procedure CloseSAC ;
 
 
 var
@@ -64,12 +64,12 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsSACpath(path : PChar) : Boolean; stdcall;
+Function IsSACpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetSACpath(path : PChar); stdcall;
+procedure SetSACpath(path : string);
 var i : integer;
     buf:string;
 begin
@@ -128,7 +128,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -152,7 +152,7 @@ end;
   end;
 end;
 
-Procedure ReadSAC(var lin : SACrec; var ok : boolean); stdcall;
+Procedure ReadSAC(var lin : SACrec; var ok : boolean);
 begin
 ok:=true;
 inc(Icache);
@@ -186,13 +186,13 @@ end else begin
 end;
 end;
 
-procedure CloseSAC ; stdcall;
+procedure CloseSAC ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenSACwin(var ok : boolean); stdcall;
+Procedure OpenSACwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;

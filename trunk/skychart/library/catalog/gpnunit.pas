@@ -32,12 +32,12 @@ GPNrec = record ar,de :longint ;
                 pk  : array[1..9] of char;
                 name: array[1..13] of char;
                 end;
-Function IsGPNpath(path : PChar) : Boolean;  stdcall;
-procedure SetGPNpath(path : PChar); stdcall;
-Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenGPNwin(var ok : boolean); stdcall;
-Procedure ReadGPN(var lin : GPNrec; var ok : boolean); stdcall;
-procedure CloseGPN ; stdcall;
+Function IsGPNpath(path : string) : Boolean;
+procedure SetGPNpath(path : string);
+Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGPNwin(var ok : boolean);
+Procedure ReadGPN(var lin : GPNrec; var ok : boolean);
+procedure CloseGPN ;
 
 var
   GPNpath : string;
@@ -53,12 +53,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsGPNpath(path : PChar) : Boolean; stdcall;
+Function IsGPNpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetGPNpath(path : PChar); stdcall;
+procedure SetGPNpath(path : string);
 var buf:string;
 begin
 buf:=noslash(path);
@@ -90,7 +90,7 @@ reset(fgpn);
 ok:=true ;
 end;
 
-Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -100,7 +100,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadGPN(var lin : GPNrec; var ok : boolean); stdcall;
+Procedure ReadGPN(var lin : GPNrec; var ok : boolean);
 var sm:integer;
 begin
 ok:=true;
@@ -116,13 +116,13 @@ end;
 if ok then  Read(fgpn,lin);
 end;
 
-procedure CloseGPN ; stdcall;
+procedure CloseGPN ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenGPNwin(var ok : boolean); stdcall;
+Procedure OpenGPNwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;

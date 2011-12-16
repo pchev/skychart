@@ -27,8 +27,8 @@ type
      coordvector = array[1..3] of double;
      rotmatrix = array[1..3,1..3] of double;
 
-Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
+Procedure InitCat(hnd : Cardinal ;Cache : boolean);
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
@@ -152,13 +152,13 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
-Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
+Procedure InitCat(hnd : Cardinal ;Cache : boolean);
 begin
 UseCache:=Cache;
 // HND is no more used, keep for compatibility with previous version
 end;
 
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
 begin
    BxGlb:= bx;
    ByGlb:= by;

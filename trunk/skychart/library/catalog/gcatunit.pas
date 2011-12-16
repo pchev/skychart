@@ -21,7 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
 
-{.$define cache_gcat}
+//{$ifdef CPU64}
+   {$define cache_gcat}
+//{$endif}
 
 interface
 
@@ -54,25 +56,25 @@ Tlabellst = array[1..35,0..15] of char;
 TSname = array[0..3] of char;
 Tstar =   packed record
           magv,b_v,magb,magr,pmra,pmdec,epoch,px : double;
-          id,sp,greeksymbol : shortstring;
+          id,sp,greeksymbol : string;
           comment: string;
           valid : TVstar;
           end;
 Tvariable=packed record
           magmax,magmin,period,maxepoch,risetime : double;
-          id,vartype,sp,magcode,comment : shortstring;
+          id,vartype,sp,magcode,comment : string;
           valid : TVvar;
           end;
 Tdouble = packed record
           mag1,mag2,sep,pa,epoch : double;
-          id,compname,sp1,sp2,comment : shortstring;
+          id,compname,sp1,sp2,comment : string;
           valid : TVdbl;
           end;
 Tneb    = packed record
           mag,sbr,dim1,dim2,pa,rv : double;
           nebunit : Smallint;
           nebtype : ShortInt;
-          id,morph : shortstring;
+          id,morph : string;
           comment : string;
           messierobject : boolean;
           color: integer;
@@ -81,7 +83,7 @@ Tneb    = packed record
 Toutlines = packed record
           linecolor : LongWord;
           lineoperation,linewidth,linetype : byte;
-          id,comment : shortstring;
+          id,comment : string;
           valid : TVlin;
           end;
 TCatOption = packed record
@@ -108,7 +110,7 @@ GCatrec = packed record
           double   : Tdouble;
           neb      : Tneb;
           outlines : Toutlines;
-          str      : array[1..10] of shortstring;
+          str      : array[1..10] of string;
           num      : array[1..10] of double;
           vstr,vnum: Tvalid;
           options  : TCatoption;
@@ -172,24 +174,23 @@ TFileHeader = packed record
          Spare4   : array[1..19,0..8] of char;
          end;
 TCatHdrInfo = record
-         neblst: array[1..15] of shortstring;
+         neblst: array[1..15] of string;
          nebtype: array[1..15] of integer;
-         nebunit: array[1..3] of shortstring;
+         nebunit: array[1..3] of string;
          nebunits: array[1..3] of integer;
-         Linelst: array[1..4] of shortstring;
+         Linelst: array[1..4] of string;
          LineType: array[1..4] of integer;
-         Colorlst: array[1..10] of shortstring;
+         Colorlst: array[1..10] of string;
          Color: array[1..10] of Cardinal;
          calc : array[0..40,1..2] of double;
          end;
 
 {$ifdef cache_gcat}
-type Tstarcache = record
+type Tstarcache = packed record
          star: Tstar;
-         str      : array[1..10] of shortstring;
+         str      : array[1..10] of string;
          num      : array[1..10] of double;
          ra,de: double;
-         lma: string;
 end;
 type Tlinecache = record
          outlines : Toutlines;
@@ -199,10 +200,9 @@ type TcacheOption = record
      baserec: gcatrec;
      header: Tcatheader;
 end;
-const CacheInc=500;
+const CacheInc=1000;
       MaxZone=50;
-      MaxCache=4;
-      CacheCat:array[1..MaxCache]of string=('star','mwf','mwl','dsl') ;
+      MaxCache=10;
 {$endif}
 
 procedure SetGCatpath(path,catshortname : string);
@@ -360,7 +360,7 @@ begin
 result:=false;
 CurCache:=-1;
 for i:=0 to MaxCache-1 do begin
-  if CacheIndex[i]=GCatpath+Catname then begin
+  if CacheIndex[i]=slash(GCatpath)+Catname then begin
      CurCache:=i;
      result:=true;
      break;
@@ -370,17 +370,9 @@ end;
 
 function NewCache:boolean;
 var i,n: integer;
-    ok: boolean;
 begin
 result:=false;
-ok:=false;
-for i:=1 to MaxCache do begin
-   if catname=CacheCat[i] then begin
-      ok:=true;
-      break;
-   end;
-end;
-if ok and (cattype=1)and((catversion=rtStar)or(catversion=rtLin))and(catheader.filenum<=50) //  binary, star or line, 50 zones
+if (cattype=1)and((catversion=rtStar)or(catversion=rtLin))and(catheader.filenum<=50) //  binary, star or line, 50 zones
 then begin
     n:=-1;
     for i:=0 to MaxCache-1 do begin
@@ -390,7 +382,7 @@ then begin
       end;
     end;
     if n>=0 then begin
-      CacheIndex[n]:=GCatpath+Catname;
+      CacheIndex[n]:=slash(GCatpath)+Catname;
       for i:=0 to MaxZone-1 do CacheZone[n,i]:=0;
       CurCache:=n;
       result:=true;
@@ -405,7 +397,7 @@ onCache:=false;
 case catversion of
 rtStar: begin
           for i:=0 to MaxCache-1 do begin
-            if CacheIndex[i]=GCatpath+Catname then begin
+            if CacheIndex[i]=slash(GCatpath)+Catname then begin
                CacheIndex[i]:='';
                for j:=0 to MaxZone-1 do begin
                   CacheZone[i,j]:=0;
@@ -417,7 +409,7 @@ rtStar: begin
         end;
 rtlin: begin
           for i:=0 to MaxCache-1 do begin
-            if CacheIndex[i]=GCatpath+Catname then begin
+            if CacheIndex[i]=slash(GCatpath)+Catname then begin
                CacheIndex[i]:='';
                for j:=0 to MaxZone-1 do begin
                   CacheZone[i,j]:=0;
@@ -738,10 +730,6 @@ if onCache and (CacheZone[CurCache,sm]=0) then begin
            CacheStar[CurCache,SM,n].num:=lin.num;
            CacheStar[CurCache,SM,n].ra:=lin.ra;
            CacheStar[CurCache,SM,n].de:=lin.dec;
-           if lin.options.flabel[lOffset+vsMagv]=emptyrec.options.flabel[lOffset+vsMagv] then
-              CacheStar[CurCache,SM,n].lma:=''
-           else
-              CacheStar[CurCache,SM,n].lma:=lin.options.flabel[lOffset+vsMagv];
            end;
    rtlin: begin
            inc(n);
@@ -754,6 +742,10 @@ if onCache and (CacheZone[CurCache,sm]=0) then begin
            end;
    end;
  until not ok;
+ case catversion of
+   rtStar: SetLength(CacheStar[CurCache,SM],n+1);
+   rtlin:  SetLength(CacheLine[CurCache,SM],n+1);
+ end;
  CacheZone[CurCache,sm]:=n;
  reset(f,1);
 end;
@@ -826,8 +818,6 @@ case cattype of
                  lin.num:= CacheStar[CurCache,SM,CurCacheRec].num;
                  lin.ra:=CacheStar[CurCache,SM,CurCacheRec].ra;
                  lin.dec:=CacheStar[CurCache,SM,CurCacheRec].de;
-                 if CacheStar[CurCache,SM,CurCacheRec].lma<>'' then
-                    lin.options.flabel[lOffset+vsMagv]:=CacheStar[CurCache,SM,CurCacheRec].lma;
                  ok:=true;
               end
               else begin

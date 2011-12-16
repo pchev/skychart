@@ -41,24 +41,24 @@ DSRec = record
                   Mag : double;
               end;
 
-Function IsDSbasepath(path : PChar) : Boolean; stdcall;
-Function IsDStycpath(path : PChar) : Boolean; stdcall;
-Function IsDSgscpath(path : PChar) : Boolean; stdcall;
-procedure SetDSpath(path,tycpath,gscpath : PChar); stdcall;
-Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenDSTYCwin(var ok : boolean); stdcall;
-Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean); stdcall;
-Procedure NextDSTYC( var ok : boolean); stdcall;
-procedure CloseDSTYC ; stdcall;
-Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenDSGSCwin(var ok : boolean); stdcall;
-Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean); stdcall;
-Procedure NextDSGSC( var ok : boolean); stdcall;
-procedure CloseDSGSC ; stdcall;
-Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenDSbasewin(var ok : boolean); stdcall;
-Procedure ReadDSbase(var dslin : DSrec; var ok : boolean); stdcall;
-procedure CloseDSbase ; stdcall;
+Function IsDSbasepath(path : string) : Boolean;
+Function IsDStycpath(path : string) : Boolean;
+Function IsDSgscpath(path : string) : Boolean;
+procedure SetDSpath(path,tycpath,gscpath : string);
+Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenDSTYCwin(var ok : boolean);
+Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean);
+Procedure NextDSTYC( var ok : boolean);
+procedure CloseDSTYC ;
+Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenDSGSCwin(var ok : boolean);
+Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean);
+Procedure NextDSGSC( var ok : boolean);
+procedure CloseDSGSC ;
+Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenDSbasewin(var ok : boolean);
+Procedure ReadDSbase(var dslin : DSrec; var ok : boolean);
+procedure CloseDSbase ;
 
 var
   DSpath, DSTYCpath, DSGSCpath: String;
@@ -78,22 +78,22 @@ var
    OnCache : Boolean = false;
    Cache : array of DSrec;
 
-Function IsDSbasepath(path : PChar) : Boolean; stdcall;
+Function IsDSbasepath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'star5.dat');
 end;
 
-Function IsDStycpath(path : PChar) : Boolean; stdcall;
+Function IsDStycpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'00N00.dat');
 end;
 
-Function IsDSgscpath(path : PChar) : Boolean; stdcall;
+Function IsDSgscpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'00N00.DAT');
 end;
 
-procedure SetDSpath(path,tycpath,gscpath : PChar); stdcall;
+procedure SetDSpath(path,tycpath,gscpath : string);
 var buf:string;
 begin
 buf:=noslash(path);
@@ -131,7 +131,7 @@ reset(fds);
 ok:=true;
 end;
 
-Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -141,7 +141,7 @@ zone := zonelst[curSM];
 OpenRegionTYC(zone,ok);
 end;
 
-Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean); stdcall;
+Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean);
 begin
 ok:=true;
 if eof(fds) then NextDSTYC(ok);
@@ -153,7 +153,7 @@ if ok then begin
 end;
 end;
 
-Procedure NextDSTYC( var ok : boolean); stdcall;
+Procedure NextDSTYC( var ok : boolean);
 begin
   CloseRegion;
   inc(curSM);
@@ -164,13 +164,13 @@ begin
   end;
 end;
 
-procedure CloseDSTYC ; stdcall;
+procedure CloseDSTYC ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenDSTYCwin(var ok : boolean);  stdcall;
+Procedure OpenDSTYCwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -197,7 +197,7 @@ reset(fds);
 ok:=true;
 end;
 
-Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -207,7 +207,7 @@ zone := zonelst[curSM];
 OpenRegionGSC(zone,ok);
 end;
 
-Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean); stdcall;
+Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean);
 begin
 ok:=true;
 if eof(fds) then NextDSGSC(ok);
@@ -219,7 +219,7 @@ if ok then begin
 end;
 end;
 
-Procedure NextDSGSC( var ok : boolean); stdcall;
+Procedure NextDSGSC( var ok : boolean);
 begin
   CloseRegion;
   inc(curSM);
@@ -230,13 +230,13 @@ begin
   end;
 end;
 
-procedure CloseDSGSC ;  stdcall;
+procedure CloseDSGSC ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenDSGSCwin(var ok : boolean);  stdcall;
+Procedure OpenDSGSCwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -281,13 +281,13 @@ Icache:=0;
 ok:=true;
 end;
 
-Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 OpenRegionBase(ok);
 end;
 
-Procedure ReadDSbase(var dslin : DSrec; var ok : boolean); stdcall;
+Procedure ReadDSbase(var dslin : DSrec; var ok : boolean);
 begin
 ok:=true;
 inc(Icache);
@@ -308,12 +308,12 @@ end;
 end;
 end;
 
-procedure CloseDSbase ;  stdcall;
+procedure CloseDSbase ;
 begin
 CloseRegionBase;
 end;
 
-Procedure OpenDSbasewin(var ok : boolean);  stdcall;
+Procedure OpenDSbasewin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;

@@ -33,13 +33,13 @@ type
                    dm     : longint;
                    hd,sao   :longint ;
                    end;
-Function IsSKYpath(path : PChar) : Boolean; stdcall;
-procedure SetSKYpath(path : PChar); stdcall;
-Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenSKYwin(var ok : boolean); stdcall;
-Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall;
-Procedure NextSKY( var ok : boolean); stdcall;
-procedure CloseSKY ; stdcall;
+Function IsSKYpath(path : string) : Boolean;
+procedure SetSKYpath(path : string);
+Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenSKYwin(var ok : boolean);
+Procedure ReadSKY(var lin : SKYrec; var ok : boolean);
+Procedure NextSKY( var ok : boolean);
+procedure CloseSKY ;
 
 var
   SKYpath: String='';
@@ -62,12 +62,12 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsSKYpath(path : PChar) : Boolean; stdcall;
+Function IsSKYpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'001.dat');
 end;
 
-procedure SetSKYpath(path : PChar); stdcall;
+procedure SetSKYpath(path : string);
 var i : integer;
     buf:string;
 begin
@@ -126,7 +126,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -137,7 +137,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall;
+Procedure ReadSKY(var lin : SKYrec; var ok : boolean);
 begin
 ok:=true;
 inc(Icache);
@@ -171,7 +171,7 @@ end else begin
 end;
 end;
 
-Procedure NextSKY( var ok : boolean); stdcall;
+Procedure NextSKY( var ok : boolean);
 begin
 if OnCache then begin
 end else begin
@@ -185,13 +185,13 @@ end;
   end;
 end;
 
-procedure CloseSKY ; stdcall;
+procedure CloseSKY ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenSKYwin(var ok : boolean); stdcall;
+Procedure OpenSKYwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
