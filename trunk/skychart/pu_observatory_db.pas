@@ -161,17 +161,28 @@ if MessageDlg(Format(rsThisActionRe, [countrylist.Text, crlf, crlf]),
   mtWarning, [mbYes, mbNo], 0) = mrYes
   then begin
     country:=countrycode[countrylist.ItemIndex];
-    if cmain.HttpProxy then begin
-       DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-       DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-       DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-       DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
-    end else begin
-       DownloadDialog1.HttpProxy:='';
-       DownloadDialog1.HttpProxyPort:='';
-       DownloadDialog1.HttpProxyUser:='';
-       DownloadDialog1.HttpProxyPass:='';
-    end;
+      if cmain.HttpProxy then begin
+         DownloadDialog1.SocksProxy:='';
+         DownloadDialog1.SocksType:='';
+         DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+         DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+         DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+         DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+      end else if cmain.SocksProxy then begin
+         DownloadDialog1.HttpProxy:='';
+         DownloadDialog1.SocksType:=cmain.SocksType;
+         DownloadDialog1.SocksProxy:=cmain.ProxyHost;
+         DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+         DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+         DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+      end else begin
+         DownloadDialog1.SocksProxy:='';
+         DownloadDialog1.SocksType:='';
+         DownloadDialog1.HttpProxy:='';
+         DownloadDialog1.HttpProxyPort:='';
+         DownloadDialog1.HttpProxyUser:='';
+         DownloadDialog1.HttpProxyPass:='';
+      end;
     DownloadDialog1.ConfirmDownload:=cmain.ConfirmDownload;
     if copy(country,1,3)='US-' then begin // US States
        state:=uppercase(copy(country,4,2));

@@ -58,11 +58,11 @@ type
     function  GetCatList:TstringList;
     procedure Set_source(value: Tvo_source);
   protected
-     Fproxy: boolean;
-     Fproxyhost,Fproxyport,Fproxyuser,Fproxypass : string;
-     Sockreadcount, LastRead: integer;
-     FDownloadFeedback: TDownloadFeedback;
-     procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+    Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
+    FSocksproxy,FSockstype : string;
+    Sockreadcount, LastRead: integer;
+    FDownloadFeedback: TDownloadFeedback;
+    procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
@@ -78,11 +78,12 @@ type
     property ListUrl: string read FListUrl write FListUrl;
     property CachePath: string read Fvopath write Fvopath;
     property onDownloadFeedback: TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
-    property Proxy : boolean read Fproxy  write Fproxy ;
-    property HttpProxyhost : string read Fproxyhost  write Fproxyhost ;
+    property HttpProxy : string read Fproxy  write Fproxy ;
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
     property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
     property HttpProxyPass : string read Fproxypass  write Fproxypass ;
+    property SocksProxy : string read FSocksproxy  write FSocksproxy ;
+    property SocksType : string read FSockstype  write FSockstype ;
   end;
 
 implementation
@@ -123,6 +124,8 @@ begin
  Fvo_type:=vo_types[Fvo_source];
  FListUrl:=vo_url[Fvo_source,1,1];
  Fvopath:='.';
+ Fproxy:='';
+ FSocksproxy:='';
 end;
 
 destructor TVO_Catalogs.Destroy;
@@ -177,16 +180,21 @@ var url:string;
 begin
 url:=FListUrl;
 http.Clear;
-if Fproxy then begin
-   http.ProxyHost:=Fproxyhost;
-   http.ProxyPort:=Fproxyport;
-   http.ProxyUser :=Fproxyuser;
-   http.ProxyPass :=Fproxypass;
-end else begin
-  http.ProxyHost:='';
-  http.ProxyPort:='';
-  http.ProxyUser :='';
-  http.ProxyPass :='';
+http.Sock.SocksIP:='';
+http.ProxyHost:='';
+if FSocksproxy<>'' then begin
+  http.Sock.SocksIP:=FSocksproxy;
+  if Fproxyport<>'' then http.Sock.SocksPort:=Fproxyport;
+  if FSockstype='Socks4' then http.Sock.SocksType:=ST_Socks4
+                         else http.Sock.SocksType:=ST_Socks5;
+  if Fproxyuser<>'' then http.Sock.SocksUsername:=Fproxyuser;
+  if Fproxypass<>'' then http.Sock.SocksPassword:=Fproxypass;
+end
+else if Fproxy<>'' then  begin
+    http.ProxyHost:=Fproxy;
+    if Fproxyport<>'' then http.ProxyPort:=Fproxyport;
+    if Fproxyuser<>'' then http.ProxyUser :=Fproxyuser;
+    if Fproxypass<>'' then http.ProxyPass :=Fproxypass;
 end;
 http.Timeout:=10000;
 http.Sock.OnStatus:=httpstatus;

@@ -480,11 +480,22 @@ var fn,buf,country: string;
     f: textfile;
 begin
   if cmain.HttpProxy then begin
+     DownloadDialog1.SocksProxy:='';
+     DownloadDialog1.SocksType:='';
      DownloadDialog1.HttpProxy:=cmain.ProxyHost;
      DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
      DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
      DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+  end else if cmain.SocksProxy then begin
+     DownloadDialog1.HttpProxy:='';
+     DownloadDialog1.SocksType:=cmain.SocksType;
+     DownloadDialog1.SocksProxy:=cmain.ProxyHost;
+     DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+     DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+     DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
   end else begin
+     DownloadDialog1.SocksProxy:='';
+     DownloadDialog1.SocksType:='';
      DownloadDialog1.HttpProxy:='';
      DownloadDialog1.HttpProxyPort:='';
      DownloadDialog1.HttpProxyUser:='';
