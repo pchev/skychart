@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses gcatunit, {libcatalog,} // libcatalog statically linked
+uses gcatunit,
      cu_tz, dynlibs,
      Classes, Controls, FPCanvas, Graphics;
 
@@ -813,12 +813,6 @@ var gzopen : Tgzopen;
     gzclose : Tgzclose;
     zlibok: boolean;
     zlib: TLibHandle;
-
-// libsatxy
-{type double8 = array[1..8] of double;
-     Pdouble8 = ^double8;
-     TSatxyfm = Function(djc : double; ipla : integer; Pxx,Pyy : Pdouble8):integer; stdcall;
-}
 
 // Encoders
 type

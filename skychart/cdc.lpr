@@ -54,6 +54,9 @@ var i : integer;
 {$R *.res}
 
 begin
+  {$ifdef USEHEAPTRC}
+  SetHeapTraceOutput('/tmp/skychart_heap.trc');
+  {$endif}
 
   {$ifdef trace_debug}
   debugln('Read parameters');

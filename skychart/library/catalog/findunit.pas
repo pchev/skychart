@@ -23,28 +23,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,bscunit,pgcunit,sacunit,tyc2unit,usnoaunit;
 
-Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGCVS(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGSC(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGSCF(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGSCC(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumBayer(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumFlam(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumBD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumCD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumCPD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumSAC(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumWDS(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumGcat(path,catshortname,id : PChar ; keylen : integer; var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumTYC2(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
-Procedure FindNumUSNOA(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumGCVS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGSC(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGSCF(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGSCC(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumBayer(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumFlam(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumBD(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumCD(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumCPD(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumSAC(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
+Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
 
 implementation                          
 
@@ -121,17 +121,17 @@ if ok then begin
 end;
 end;
 
-Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(NGCpath+slashchar+'ngc.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(NGCpath+slashchar+'ic.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(NGCpath+slashchar+'messier.idx',id,ar,de,ok);
 end;
@@ -143,7 +143,7 @@ val(n,Dummy_double,i);
 result:= (i=0) ;
 end;
 
-Procedure FindNumGCVS(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGCVS(id:string ;var ar,de:double; var ok:boolean);
 var buf,buf1,buf2 : string;
 begin
 buf1:=words(id,'',1,1);
@@ -163,7 +163,7 @@ buf:=copy(buf1,1,6)+copy(buf2,1,6);
 FindIdxStr(GCVpath+slashchar+'gcvs.idx',buf,ar,de,ok);
 end;
 
-Procedure FindNumGSC(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGSC(id : string ;var ar,de:double; var ok:boolean);
 var smnum,num,p : integer;
     buf:string;
 begin
@@ -177,7 +177,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumGSCF(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGSCF(id : string ;var ar,de:double; var ok:boolean);
 var smnum,num,p : integer;
     buf:string;
 begin
@@ -191,7 +191,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumGSCC(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGSCC(id : string ;var ar,de:double; var ok:boolean);
 var smnum,num : integer;
     p : integer;
     buf:string;
@@ -206,7 +206,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumTYC2(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
 var smnum,num : integer;
     p : integer;
     buf:string;
@@ -224,7 +224,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumUSNOA(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
 var smnum,num : integer;
     p : integer;
     buf:string;
@@ -239,12 +239,12 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(BSCpath+slashchar+'gc.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean);
 var x1,x2,y1,y2 : double;
     bscrok : boolean;
     lin : bscrec;
@@ -266,7 +266,7 @@ ar:=lin.ar/100000/15;
 de:=lin.de/100000;
 end;
 
-Procedure FindNumBayer(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumBayer(id:string ;var ar,de:double; var ok:boolean);
 var x1,x2,y1,y2 : double;
     bscrok : boolean;
     lin : bscrec;
@@ -292,7 +292,7 @@ ar:=lin.ar/100000/15;
 de:=lin.de/100000;
 end;
 
-Procedure FindNumFlam(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumFlam(id:string ;var ar,de:double; var ok:boolean);
 var x1,x2,y1,y2 : double;
     bscrok : boolean;
     lin : bscrec;
@@ -320,24 +320,24 @@ ar:=lin.ar/100000/15;
 de:=lin.de/100000;
 end;
 
-Procedure FindNumWDS(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
 var buf : string;
 begin
 buf:=copy(uppercase(stringreplace(id,' ','',[rfReplaceAll]))+'             ',1,12);
 FindIdxStr(WDSpath+slashchar+'wds.idx',buf,ar,de,ok);
 end;
 
-Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(BSCpath+slashchar+'hd.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(BSCpath+slashchar+'sao.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumBD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumBD(id:string ;var ar,de:double; var ok:boolean);
 var sign,buf : string;
     zone,num,p : integer;
 begin
@@ -352,7 +352,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumCD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumCD(id:string ;var ar,de:double; var ok:boolean);
 var sign,buf : string;
     zone,num,p : integer;
 begin
@@ -367,7 +367,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumCPD(id:PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumCPD(id:string ;var ar,de:double; var ok:boolean);
 var sign,buf : string;
     zone,num,p : integer;
 begin
@@ -382,12 +382,12 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(PGCpath+slashchar+'pgc.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumSAC(id : PChar ;var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumSAC(id : string ;var ar,de:double; var ok:boolean);
 Type idxfil = record
               num : string[18];
               ar,de :single;
@@ -425,7 +425,7 @@ if ok then begin
 end;
 end;
 
-Procedure FindNumGcat(path,catshortname,id : PChar ; keylen : integer; var ar,de:double; var ok:boolean); stdcall;
+Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
 Type
 Tixrec = record ra,dec : single;
                    key : array [0..512] of char;

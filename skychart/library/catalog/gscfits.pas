@@ -33,13 +33,13 @@ type GSCFrec = packed record
                      plate,mult : shortstring;
                      end;
 
-Function IsGSCFpath(path : PChar) : Boolean; stdcall;
-procedure SetGSCFpath(path : PChar); stdcall;
-Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenGSCFwin(var ok : boolean); stdcall;
-Procedure ReadGSCF(var lin : GSCFrec; var SMnum : PChar ; var ok : boolean); stdcall;
-procedure CloseGSCF ; stdcall;
-Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
+Function IsGSCFpath(path : string) : Boolean;
+procedure SetGSCFpath(path : string);
+Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGSCFwin(var ok : boolean);
+Procedure ReadGSCF(var lin : GSCFrec; var SMnum : string ; var ok : boolean);
+procedure CloseGSCF ;
+Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
 
 var
   GSCFpath: String;
@@ -60,7 +60,7 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
 
-Function IsGSCFpath(path : PChar) : Boolean; stdcall;
+Function IsGSCFpath(path : string) : Boolean;
 var p,buf : string;
     tst : array[0..5]of char;
     i,n : integer;
@@ -84,7 +84,7 @@ for i:=0 to 23 do begin
 end;
 end;
 
-procedure SetGSCFpath(path : PChar); stdcall;
+procedure SetGSCFpath(path : string);
 var buf:string;
 begin
 buf:=noslash(path);
@@ -156,7 +156,7 @@ begin
  rec:=copy(buf,1,l);
 end;
 
-Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 currec:=0;
@@ -170,7 +170,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadGSCF(var lin : GSCFrec; var SMnum : PChar ; var ok : boolean); stdcall;
+Procedure ReadGSCF(var lin : GSCFrec; var SMnum : string ; var ok : boolean);
 var rec : string;
 begin
 inc(currec);
@@ -199,17 +199,17 @@ if ok then begin
    lin.plate:=copy(rec,41,4);
    lin.mult:=copy(rec,45,1);
 end;
-SMnum:=PChar(SMname);
+SMnum:=SMname;
 end;
 
-procedure CloseGSCF ; stdcall;
+procedure CloseGSCF ;
 begin
 currec:=nrecs;
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
+Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
 var L1,S1,zone,i,j : integer;
     hemis : char;
     rec : string;
@@ -246,7 +246,7 @@ if ok then begin
 end;
 end;
 
-Procedure OpenGSCFwin(var ok : boolean); stdcall;
+Procedure OpenGSCFwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 currec:=0;

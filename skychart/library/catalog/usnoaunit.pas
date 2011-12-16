@@ -33,13 +33,13 @@ Type USNOArec = record  id  : shortstring;
                         field,q,s: integer;
                 end;
 
-Function IsUSNOApath(path : PChar) : Boolean; stdcall;
-Procedure OpenUSNOAwin(var ok : boolean); stdcall;
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
-procedure CloseUSNOA ; stdcall;
-procedure SetUSNOApath(path : PChar); stdcall;
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean); stdcall;
+Function IsUSNOApath(path : string) : Boolean;
+Procedure OpenUSNOAwin(var ok : boolean);
+Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
+procedure CloseUSNOA ;
+procedure SetUSNOApath(path : string);
+Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
 
 var USNOApath : string;
 
@@ -63,7 +63,7 @@ var
    demin,demax,armin,armax : double;
    fullwin : boolean;
 
-Function IsUSNOApath(path : PChar) : Boolean; stdcall;
+Function IsUSNOApath(path : string) : Boolean;
 var p : string;
 begin
 p:=slash(path);
@@ -94,7 +94,7 @@ result:= FileExists(p+'zone0000.acc')
 end;
 
 
-procedure SetUSNOApath(path : PChar); stdcall;
+procedure SetUSNOApath(path : string);
 begin
 USNOApath:=noslash(path);
 end;
@@ -192,7 +192,7 @@ begin
   end;
 end;
 
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
+Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
 var
     cat:CatRec;
     ar,de : cardinal;
@@ -231,13 +231,13 @@ fok:=false;
    lin.id:=CurZone+'-'+padzeros(buf,8);
 end;
 
-procedure CloseUSNOA ; stdcall;
+procedure CloseUSNOA ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean); stdcall;
+Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
 var nomfich: string;
     lin : USNOArec;
 begin
@@ -374,7 +374,7 @@ if (armax-armin)>300 then begin
 end;
 end;
 
-Procedure OpenUSNOAwin(var ok : boolean); stdcall;
+Procedure OpenUSNOAwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -383,7 +383,7 @@ Sm := Smlst[curSM];
 OpenRegion(ok);
 end;
 
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;

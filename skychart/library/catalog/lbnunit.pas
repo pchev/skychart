@@ -31,12 +31,12 @@ LBNrec = record ar,de :longint ;
                 color,bright : byte;
                 name : array[1..8] of char;
                 end;
-Function IsLBNpath(path : PChar) : Boolean; stdcall;
-procedure SetLBNpath(path : PChar); stdcall;
-Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenLBNwin(var ok : boolean); stdcall;
-Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall;
-procedure CloseLBN ; stdcall;
+Function IsLBNpath(path : string) : Boolean;
+procedure SetLBNpath(path : string);
+Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenLBNwin(var ok : boolean);
+Procedure ReadLBN(var lin : LBNrec; var ok : boolean);
+procedure CloseLBN ;
 
 var
   LBNpath : string;
@@ -52,12 +52,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsLBNpath(path : PChar) : Boolean; stdcall;
+Function IsLBNpath(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetLBNpath(path : PChar); stdcall;
+procedure SetLBNpath(path : string);
 begin
 LBNpath:=noslash(path);
 end;
@@ -87,7 +87,7 @@ reset(flbn);
 ok:=true ;
 end;
 
-Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -97,7 +97,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall;
+Procedure ReadLBN(var lin : LBNrec; var ok : boolean);
 var sm:integer;
 begin
 ok:=true;
@@ -113,13 +113,13 @@ end;
 if ok then  Read(flbn,lin);
 end;
 
-procedure CloseLBN ;  stdcall;
+procedure CloseLBN ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenLBNwin(var ok : boolean);  stdcall;
+Procedure OpenLBNwin(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;

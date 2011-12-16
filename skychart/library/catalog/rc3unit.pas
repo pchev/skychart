@@ -32,12 +32,12 @@ RC3rec = record ar,de,vgsr :longint ;
                 pa    : byte;
                 stage,lumcl,d25,r25,Ae,mb,b_vt,b_ve,m25,me : smallint;
                 end;
-Function IsRC3path(path : PChar) : Boolean; stdcall;
-procedure SetRC3path(path : PChar); stdcall;
-Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure OpenRC3win(var ok : boolean); stdcall;
-Procedure ReadRC3(var lin : RC3rec; var ok : boolean); stdcall;
-procedure CloseRC3 ; stdcall;
+Function IsRC3path(path : string) : Boolean;
+procedure SetRC3path(path : string);
+Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenRC3win(var ok : boolean);
+Procedure ReadRC3(var lin : RC3rec; var ok : boolean);
+procedure CloseRC3 ;
 
 var
   RC3path : string;
@@ -53,12 +53,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsRC3path(path : PChar) : Boolean; stdcall;
+Function IsRC3path(path : string) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetRC3path(path : PChar); stdcall;
+procedure SetRC3path(path : string);
 begin
 RC3path:=noslash(path);
 end;
@@ -88,7 +88,7 @@ reset(frc3);
 ok:=true;
 end;
 
-Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -98,7 +98,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadRC3(var lin : RC3rec; var ok : boolean); stdcall;
+Procedure ReadRC3(var lin : RC3rec; var ok : boolean);
 var sm:integer;
 begin
 ok:=true;
@@ -114,13 +114,13 @@ end;
 if ok then  Read(frc3,lin);
 end;
 
-procedure CloseRC3 ; stdcall;
+procedure CloseRC3 ;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenRC3win(var ok : boolean); stdcall;
+Procedure OpenRC3win(var ok : boolean);
 begin
 JDCatalog:=jd2000;
 curSM:=1;
