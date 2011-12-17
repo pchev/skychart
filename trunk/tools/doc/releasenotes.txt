@@ -1,6 +1,14 @@
 Version 3.5 release Notes
 
-- Add option to only show the meridian lines
+- New default star catalog based on Extended Hipparcos to replace the BSC and Sky2000.
+- Improved precision of the apparent coordinates (many thanks to P. Wallace for its help):
+  - Star parallax
+  - Take account of the radial velocity to compute the proper motions.
+  - Light deflection by the Sun.
+  - Extended time validity for nutation and aberration if using DE422.
+- Allow to use Socks proxy.
+- Improved precision in the display of FITS images by using WCStools. Can show the images with transparency.
+- Add option to only show the meridian lines.
 - Increase planet simulation up to 500 positions, no change for comets and asteroids.
 - Add user defined objects in catalog setting.
 - Can change the color for lines and nebulae from the catalog setting.

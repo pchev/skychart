@@ -1,5 +1,13 @@
 Version 3.5  Notes de la version
 
+- Nouveau catalogue d'étoile par défaut basé sur "Extended Hipparcos" pour remplacer le BSC et Sky2000.
+- Meilleur précision des positions apparentes (un grand merci à P. Wallace pour son aide):
+  - Parallaxe des étoiles.
+  - Mouvement propre tenant compte de la vitesse radiale.
+  - Déviation de la lumière par le soleil.
+  - Validité étendue pour la nutation et l'aberration en utilisant DE422.
+- Utilisation d'un proxy Socks.
+- Meilleur précision de l'affichage des images FITS avec WCStools. Peut afficher l'image avec une transparence.
 - Ajoute une option pour n'afficher que la ligne du méridien.
 - Augmentation de simulation des planètes jusqu'à 500 positions, pas de changement pour les comètes et astéroïdes.
 - Ajout d'objets personnels dans la configuration des catalogues.
