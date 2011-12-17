@@ -4665,6 +4665,10 @@ msgstr "Csillagkép határok mutatása"
 msgid "Show coordinates grid"
 msgstr "Azimutális háló mutatása"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 #| msgid "Show Earth Shadow  (Lunar eclipses)"
 msgid "Show Earth shadow (Lunar eclipses)"

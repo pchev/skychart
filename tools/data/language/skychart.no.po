@@ -4314,6 +4314,10 @@ msgstr "Vis stjernebildegrenser"
 msgid "Show coordinates grid"
 msgstr "Vis koordinatnett"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Vis jordskygge (måneformørkelser)"

@@ -4316,6 +4316,10 @@ msgstr "Zobrazit hranice souhvězdí"
 msgid "Show coordinates grid"
 msgstr "Zobrazit souřadnice"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Zobrazit stín Země (zatmění Měsíce)"

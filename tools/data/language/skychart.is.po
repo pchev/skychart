@@ -5035,6 +5035,10 @@ msgstr "Birta mörk stjörnumerkja"
 msgid "Show coordinates grid"
 msgstr "Birta hnitakerfi"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 #, fuzzy
 #| msgid "Show Earth Shadow  (Lunar eclipses)"

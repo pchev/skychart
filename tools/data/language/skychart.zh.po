@@ -4316,6 +4316,10 @@ msgstr "顯示星座邊界"
 msgid "Show coordinates grid"
 msgstr "顯示座標網格"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "顯示地影（月食）"

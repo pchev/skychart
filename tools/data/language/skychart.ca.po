@@ -4318,6 +4318,10 @@ msgstr "Mostra els límits de constel·lacions"
 msgid "Show coordinates grid"
 msgstr "Mostra la graella de coordenades"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Mostra l'ombra de la Terra (eclipsis lunars)"
