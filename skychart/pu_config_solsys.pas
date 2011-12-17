@@ -296,6 +296,7 @@ implementation
 {$R *.lfm}
 
 procedure Tf_config_solsys.SetLang;
+var Alabels: TDatesLabelsArray;
 begin
 Caption:=rsSolarSystem;
 page1.Caption:=rsSolarSystem;
@@ -431,6 +432,17 @@ DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
 DownloadDialog1.msgDownloadBtn:=rsDownload;
 DownloadDialog1.msgCancelBtn:=rsCancel;
+GRSJDDate.Caption:=rsJDCalendar;
+Alabels.Mon:=rsMonday;
+Alabels.Tue:=rsTuesday;
+Alabels.Wed:=rsWednesday;
+Alabels.Thu:=rsThursday;
+Alabels.Fri:=rsFriday;
+Alabels.Sat:=rsSaturday;
+Alabels.Sun:=rsSunday;
+Alabels.jd:=rsJulianDay;
+Alabels.today:=rsToday;
+GRSJDDate.labels:=Alabels;
 end;
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);
