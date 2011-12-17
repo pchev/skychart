@@ -4317,6 +4317,10 @@ msgstr "Показать границы созвездий"
 msgid "Show coordinates grid"
 msgstr "Показать координатную сетку"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Показать земную тень (лунные затмения)"

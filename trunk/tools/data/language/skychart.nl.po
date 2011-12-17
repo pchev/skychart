@@ -4314,6 +4314,10 @@ msgstr "Toon sterrenbeeld begrenzing"
 msgid "Show coordinates grid"
 msgstr "Toon coördinaten rooster"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Toon aardschaduw (maansverduisteringen)"

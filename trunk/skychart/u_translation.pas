@@ -1353,6 +1353,7 @@ resourcestring
   rsShowOnlyMeri = 'Show only meridian in Alt/Az';
   rsOneEvery = 'One every';
   rsComponent = 'Component';
+  rsShowDSOLines = 'Show DSO lines';
 
 implementation
 

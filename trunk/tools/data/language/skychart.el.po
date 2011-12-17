@@ -4396,6 +4396,10 @@ msgstr "Εμφάνιση Συνόρων Αστερισμών"
 msgid "Show coordinates grid"
 msgstr "Εμφάνιση πλέγματος συντεταγμένων"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr ""

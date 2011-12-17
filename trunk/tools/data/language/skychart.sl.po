@@ -4316,6 +4316,10 @@ msgstr "Prikaži meje ozvezdij"
 msgid "Show coordinates grid"
 msgstr "Prikaži koordinatno mrežo"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Prikaži Zemljino senco (Lunin mrk)"

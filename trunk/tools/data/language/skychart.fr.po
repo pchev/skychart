@@ -3,7 +3,7 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-12 22:27+0100\n"
+"PO-Revision-Date: 2011-12-17 18:22+0100\n"
 "Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
@@ -4321,6 +4321,10 @@ msgstr "Voir les limites"
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
 msgstr "Voir les grilles de coordonnées"
+
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr "Lignes des nébuleuses"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"

@@ -52,6 +52,7 @@ type
     antialias: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    Label10: TLabel;
     ShowLineShape: TShape;
     ShowLines: TCheckBox;
     OnlyMeridian: TCheckBox;
@@ -616,6 +617,8 @@ Page5.caption:=rsLines;
 EqGrid.caption:=rsAddEquatoria;
 CGrid.caption:=rsShowCoordina;
 OnlyMeridian.Caption:=rsShowOnlyMeri;
+ShowLines.Caption:=rsShowDSOLines;
+Label10.Caption:=rsColor;
 ecliptic.caption:=rsShowEcliptic;
 galactic.caption:=rsShowGalactic;
 GridNum.caption:=rsShowGridLabe;

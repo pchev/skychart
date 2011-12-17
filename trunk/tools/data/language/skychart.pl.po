@@ -4321,6 +4321,10 @@ msgstr "Pokaż granice gwiazdozbiorów"
 msgid "Show coordinates grid"
 msgstr "Pokaż siatkę współrzędnych"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Pokaż cień Ziemi (zaćmienie Księżyca)"

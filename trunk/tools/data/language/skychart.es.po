@@ -4317,6 +4317,10 @@ msgstr "Mostrar límites de las constelaciones"
 msgid "Show coordinates grid"
 msgstr "Mostrar cuadrícula coordenadas"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Mostrar Sombra de la Tierra (eclipses lunares)"

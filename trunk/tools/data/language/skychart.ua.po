@@ -4318,6 +4318,10 @@ msgstr "Показати межі сузір'їв"
 msgid "Show coordinates grid"
 msgstr "Показати координатну сітку"
 
+#: u_translation.rsshowdsolines
+msgid "Show DSO lines"
+msgstr ""
+
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
 msgstr "Показати земну тінь (затьмарення Місяця)"
