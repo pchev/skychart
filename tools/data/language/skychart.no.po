@@ -2,7 +2,7 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-08-23 21:52+0100\n"
+"PO-Revision-Date: 2011-12-05 21:11+0100\n"
 "Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.no\n"
 "POT-Creation-Date: \n"
@@ -218,7 +218,7 @@ msgstr "Perihelvinkel"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Rundt gjeldende posisjon"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -318,7 +318,7 @@ msgstr "Asimut-koordinater"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr ""
+msgstr "Asimut-opprinnelse"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
@@ -330,7 +330,7 @@ msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr ""
+msgstr "Tilbake"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -454,7 +454,7 @@ msgstr "etter"
 
 #: u_translation.rsbyname
 msgid "By name"
-msgstr ""
+msgstr "Med navn"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -466,7 +466,7 @@ msgstr "Avbryt"
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
-msgstr "Avbrytl %s"
+msgstr "Avbryt %s"
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
@@ -478,11 +478,11 @@ msgstr "Kan ikke beregne satellitter."
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr ""
+msgstr "Kan ikke koble til server. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "Kan ikke tegne"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
@@ -514,7 +514,7 @@ msgstr "Katalog - langt navn"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
-msgstr ""
+msgstr "%s kataloger tilgjengelig."
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -790,7 +790,7 @@ msgstr "Programinnstillinger"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Bekreft filsletting: "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1028,7 +1028,7 @@ msgstr "Data-vedlikehold"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr ""
+msgstr "Forhåndsvisning"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
@@ -1036,7 +1036,7 @@ msgstr "Data starter på linje %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr ""
+msgstr "Datatype"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -1164,7 +1164,7 @@ msgstr "Standard-påskrift"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Standard magnitude"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
@@ -1180,7 +1180,7 @@ msgstr "Standard omriss-parametere"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr ""
+msgstr "Standardstørrelse (buesek)"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1308,7 +1308,7 @@ msgstr "Frakoblet"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Differansen mellom terrestrisk tid og universell tid"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1420,7 +1420,7 @@ msgstr "Last ned %s"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr ""
+msgstr "Last ned katalog"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
@@ -1432,7 +1432,7 @@ msgstr "Nedlastingsfil"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr ""
+msgstr "Last ned fullstendig katalog"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1452,11 +1452,11 @@ msgstr "Tegn en linje som viser egenbevegelse for neste"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr ""
+msgstr "Tegn som DSO"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "Tegn som stjerne"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1744,7 +1744,7 @@ msgstr "ffmpeg programbane"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr ""
+msgstr "Feltnavn"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1768,7 +1768,7 @@ msgstr "Feltrotasjon"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
-msgstr "Felt for bred! Maksimum er %s"
+msgstr "Felt for bredt! Maksimum er %s"
 
 #: u_translation.rsfile
 msgid "File"
@@ -1808,15 +1808,15 @@ msgstr "Filtrer stjerner"
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "Finn"
+msgstr "Søk"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr "Okular"
+msgstr "Søkesirkel (okular)"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr "Okular"
+msgstr "Søkesirkel"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -2046,11 +2046,11 @@ msgstr "Guide"
 
 #: u_translation.rsguidearcsec
 msgid "guide arcsec"
-msgstr ""
+msgstr "guide buesek"
 
 #: u_translation.rsguiderate
 msgid "Guide Rate"
-msgstr ""
+msgstr "Guide-rate"
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
@@ -2150,7 +2150,7 @@ msgstr "HTTP proxy"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr "Ikon-klikk handling"
+msgstr "Handling ved ikon-klikk"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2254,7 +2254,7 @@ msgstr "Informasjon"
 
 #: u_translation.rsinfo2
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
@@ -2538,7 +2538,7 @@ msgstr "Last fra fil"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr ""
+msgstr "Laster katalogliste. Vent ..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -2670,7 +2670,7 @@ msgstr "Hovedlinje"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr ""
+msgstr "Velg tabellen og kolonnene du vil ha i katalogen din"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -2710,7 +2710,7 @@ msgstr "Maksimum magnitude"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Maksimum rekker"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -2830,7 +2830,7 @@ msgstr "Månen"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr ""
+msgstr "Mer informasjon"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -2966,7 +2966,7 @@ msgstr "Nytt kart"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
-msgstr "Nytt okular"
+msgstr "Ny søkesirkel"
 
 #: u_translation.rsnewlabel
 msgid "New label"
@@ -3006,7 +3006,7 @@ msgstr "Ikke astronomisk tussmørke i dag!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Ingen katalog valgt, eller ingen tabell fra den valgte katalogen inneholder koordinatinformasjon."
 
 #: u_translation.rsnochange
 msgid "No change"
@@ -3014,7 +3014,7 @@ msgstr "Ingen endring"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr ""
+msgstr "Ingen data"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3210,7 +3210,7 @@ msgstr "På"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "En hver"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -3226,11 +3226,11 @@ msgstr "Nettbaserte bildeservere"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
-msgstr ""
+msgstr "Søk på nettet feilet!"
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr ""
+msgstr "Resultat for nettsøk"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
@@ -3290,7 +3290,7 @@ msgstr "Andre påskrifter"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Andre programvaredata"
+msgstr "Annen programvaredata"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3712,7 +3712,7 @@ msgstr "Pulsmodus"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Plasser filene med endelsen .tle i mappen %s "
+msgstr "Plasser filene med endelsen .tle i mappen %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3872,15 +3872,15 @@ msgstr "Utgivelsesnotater"
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr ""
+msgstr "Last inn"
 
 #: u_translation.rsreloadforcur
 msgid "Reload %s for current chart"
-msgstr ""
+msgstr "Last inn på nytt %s for aktuelle kart"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr "Fjern alle okularer"
+msgstr "Fjern alle sirkler"
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
@@ -3888,7 +3888,7 @@ msgstr "Fjern alle påskrifter"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "Fjern siste okular"
+msgstr "Fjern siste sirkel"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
@@ -4008,7 +4008,7 @@ msgstr "Rotering"
 
 #: u_translation.rsrows
 msgid "Rows"
-msgstr ""
+msgstr "Rekker"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4096,15 +4096,15 @@ msgstr "Søk"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr ""
+msgstr "Søk med navn"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
-msgstr ""
+msgstr "Søk med posisjon"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr ""
+msgstr "Søk i kataloger"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4148,15 +4148,15 @@ msgstr "Velg alt"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr ""
+msgstr "Velg katalog"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Velg farge (svart for standardverdien)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr ""
+msgstr "Velg nedlastingssted"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4380,7 +4380,7 @@ msgstr "Vis objekter"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "Vis bare meridianen i Alt/Az"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4408,11 +4408,11 @@ msgstr "Vis dette bildet"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Vis brukerdefinerte objekter"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr ""
+msgstr "Vis data fra det virtuelle observatoriet"
 
 #: u_translation.rssideral
 msgid "Sidereal"
@@ -4696,7 +4696,7 @@ msgstr "Overflatelysstyrke"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr "Bytte knapp"
+msgstr "Bytt knapp"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
@@ -4736,15 +4736,15 @@ msgstr "Systemstatus:"
 
 #: u_translation.rstable
 msgid "Table"
-msgstr ""
+msgstr "Tabell"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%sTabell %s eksisterer ikke! %sKorriger feilen og prøv igjen."
+msgstr "%stabell %s eksisterer ikke! %sKorriger feilen og prøv igjen."
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
-msgstr "%sDenne tabell eksisterer: %s"
+msgstr "%sdenne tabell eksisterer: %s"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
@@ -4808,7 +4808,7 @@ msgstr "Tema"
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr ""
+msgstr "Antallet elementer i denne katalogen er ukjent. Nedlastingen vil begrenses til %s elementer"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -4824,7 +4824,7 @@ msgstr "Denne handling overskriver hele database-innholdet for landet %s ved å 
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr ""
+msgstr "Denne katalogen inneholder %s elementer. Det er ikke mulig å laste den ned i sin helhet av ytelsesgrunner."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4956,7 +4956,7 @@ msgstr "Trumpler-klasse"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5020,7 +5020,7 @@ msgstr "Angre siste endring"
 
 #: u_translation.rsunits
 msgid "Units"
-msgstr ""
+msgstr "Enheter"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
@@ -5064,7 +5064,7 @@ msgstr "Nettadresse - startkommando"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Bruk en annen verdi for TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5096,7 +5096,7 @@ msgstr "Bruk bare kataloger fra samme gruppe."
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Brukerdefinerte objekter"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -5136,7 +5136,7 @@ msgstr "Bruk Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr "Bruker eksisterende fil %s"
+msgstr "Bruker den eksisterende filen %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -5188,7 +5188,7 @@ msgstr ""
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr ""
+msgstr "Det virtuelle observatoriets katalog"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5200,11 +5200,11 @@ msgstr "Visuell magnitude"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr ""
+msgstr "VO-katalog"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr ""
+msgstr "Nettleser for VO-kataloger"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
