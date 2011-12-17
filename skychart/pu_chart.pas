@@ -802,7 +802,7 @@ with sc do begin
  end
  else if cfgsc.Projpole=Ecl then begin
     cfgsc.lecentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
-    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.ecl,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
     cfgsc.racentre:=rmod(pi2-deg2rad*HorScrollBar.Position/3600+pi2,pi2);
@@ -852,7 +852,7 @@ with sc do begin
  else if cfgsc.Projpole=Ecl then begin
     cfgsc.becentre:=-deg2rad*VertScrollBar.Position/3600;
     if cfgsc.becentre>pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
-    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.ecl,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
     cfgsc.decentre:=-deg2rad*VertScrollBar.Position/3600;
@@ -2270,6 +2270,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr: boolean;
+    ApparentValid:boolean;
     ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst: double;
 
@@ -2450,17 +2451,20 @@ radate:=ra2000;
 dedate:=de2000;
 precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
 // apparent
-raapp:=ra2000;
-deapp:=de2000;
-// apply parallax
-if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
-// apply precession
-precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
-// apply nutation, aberration, light deflection
-apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
+ApparentValid:=((sc.cfgsc.nutl<>0)or(sc.cfgsc.nuto<>0)) and (sc.cfgsc.abm or(sc.cfgsc.abp<>0)or(sc.cfgsc.abe<>0));
+if ApparentValid then begin
+  raapp:=ra2000;
+  deapp:=de2000;
+  // apply parallax
+  if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
+  // apply precession
+  precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
+  // apply nutation, aberration, light deflection
+  apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
+end;
 // print coord.
 if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
-if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
+if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
 if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
 if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
    txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
@@ -2468,7 +2472,7 @@ else
    txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-Eq2Ecl(ra,dec,sc.cfgsc.e,a,h) ;
+Eq2Ecl(ra,dec,sc.cfgsc.ecl,a,h) ;
 a:=rmod(a+pi2,pi2);
 txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
 ra:=sc.cfgsc.FindRA;

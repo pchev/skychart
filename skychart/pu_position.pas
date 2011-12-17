@@ -155,7 +155,7 @@ case cfgsc.projpole of
           eq2gal(deg2rad*15*ra.value,deg2rad*de.value,a,h,cfgsc);
           end;
   Ecl   : begin
-          eq2ecl(deg2rad*15*ra.value,deg2rad*de.value,cfgsc.e,a,h);
+          eq2ecl(deg2rad*15*ra.value,deg2rad*de.value,cfgsc.ecl,a,h);
           end;
 end;
 long.value:=rad2deg*rmod(a+pi2,pi2);
@@ -180,7 +180,7 @@ case cfgsc.projpole of
           Gal2Eq(deg2rad*long.value,deg2rad*lat.value,r,d,cfgsc);
           end;
   Ecl   : begin
-          Ecl2Eq(deg2rad*long.value,deg2rad*lat.value,cfgsc.e,r,d);
+          Ecl2Eq(deg2rad*long.value,deg2rad*lat.value,cfgsc.ecl,r,d);
           end;
 end;
 ra.value:=rmod(r+pi2,pi2)*rad2deg/15;

@@ -112,6 +112,7 @@ function sofa_PDP(a,b: coordvector):double;
 procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
 procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
 procedure sofa_RXR(a,b: rotmatrix; var atb: rotmatrix);
+Function ltp_Ecliptic(epj: double):double;
 procedure GCRS2J2000(var ra, de: double);
 procedure J20002GCRS(var ra, de: double);
 
@@ -359,7 +360,7 @@ Gal:   begin
        dc:=c.bcentre;
        end;
 Ecl:   begin
-       Eq2Ecl(ar,de,c.e,a,h) ;
+       Eq2Ecl(ar,de,c.ecl,a,h) ;
        ar:=a;
        de:=h;
        ac:=c.lecentre;
@@ -489,7 +490,7 @@ Gal:   begin
        de:=hh;
        end;
 Ecl:   begin
-       Ecl2Eq(ar,de,c.e,a,hh) ;
+       Ecl2Eq(ar,de,c.ecl,a,hh) ;
        ar:=a;
        de:=hh;
        end;
@@ -855,30 +856,9 @@ end;
 end;
 
 function ecliptic(j:double; nuto:double=0):double;
-var u : double;
+var u,e : double;
 begin
-{meeus91 21.3
-  precision: 0.01" for 1000 years
-  max validity: 10000 years
-}
-u:=(j-jd2000)/3652500;
-if u<=1 then begin
-result:=eps2000 +(
-        -4680.93*u
-        -1.55*u*u
-        +1999.25*intpower(u,3)
-        -51.38*intpower(u,4)
-        -249.67*intpower(u,5)
-        -39.05*intpower(u,6)
-        +7.12*intpower(u,7)
-        +27.87*intpower(u,8)
-        +5.79*intpower(u,9)
-        +2.45*intpower(u,10)
-        )/3600;
-result:=deg2rad*result+nuto;
-end else begin
-  result:=eps2000;
-end;
+result:=ltp_Ecliptic(j)+nuto;
 end;
 
 procedure nutationme(j:double; var nutl,nuto:double);
@@ -1052,10 +1032,10 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
     //meeus91 22.3
     sincos(ra,sra,cra);
     sincos(de,sde,cde);
-    sincos(c.e,se,ce);
+    sincos(c.ecl,se,ce);
     sincos(c.sunl,sls,cls);
     sincos(c.abp,sp,cp);
-    te:=tan(c.e);
+    te:=tan(c.ecl);
     da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
     dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
     ra:=ra+da;
@@ -1078,7 +1058,7 @@ end;
 
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
 var da,dd,p1dv,pde,pdep1,w: double;
-    cra,sra,cde,sde,ce,se,cp,sp,cls,sls: extended;
+    cra,sra,cde,sde,ce,se,te,cp,sp,cls,sls: extended;
     p1,p2: coordvector;
     NutMATR : rotmatrix;
     i: integer;
@@ -1108,11 +1088,12 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
       //meeus91 22.3
       sincos(ra,sra,cra);
       sincos(de,sde,cde);
-      sincos(c.e,se,ce);
+      sincos(c.ecl,se,ce);
       sincos(c.sunl,sls,cls);
       sincos(c.abp,sp,cp);
+      te:=tan(c.ecl);
       da:=-abek*(cra*cls*ce+sra*sls)/cde + c.abe*abek*(cra*cp*ce+sra*sp)/cde;
-      dd:=-abek*(cls*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(tan(c.e)*cde-sra*sde)+cra*sde*sp);
+      dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
       ra:=ra-da;
       de:=de-dd;
    end;
@@ -1821,6 +1802,55 @@ end else begin
   prec_j0:=j0;
   prec_j1:=j1;
 end;
+end;
+
+Function ltp_Ecliptic(epj: double):double;
+// Obliquity of the ecliptic
+// Using equation 9, table 3.
+// Only the obliquity is computed here but the term in longitude are kept for clarity.
+const npol=4;
+      nper=10;
+      // Polynomials
+      pepol: array[1..npol,1..2] of double = (
+             (+8134.017132,84028.206305),
+             (+5043.0520035,+0.3624445),
+             (-0.00710733,-0.00004039),
+             (+0.000000271,-0.000000110));
+      // Periodics
+      peper: array[1..5,1..nper] of double = (
+             (409.90,396.15,537.22,402.90,417.15,288.92,4043.00,306.00,277.00,203.00),
+             (-6908.287473,-3198.706291,1453.674527,-857.748557,1173.231614,-156.981465,371.836550,-216.619040,193.691479,11.891524),
+             (753.872780,-247.805823,379.471484,-53.880558,-90.109153,-353.600190,-63.115353,-28.248187,17.703387,38.911307),
+             (-2845.175469,449.844989,-1255.915323,886.736783,418.887514,997.912441,-240.979710,76.541307,-36.788069,-170.964086),
+             (-1704.720302,-862.308358,447.832178,-889.571909,190.402846,-56.564991,-296.222622,-75.859952,67.473503,3.014055));
+var as2r, d2pi, t, e, p, w, a, s, c : extended;
+    i : integer;
+begin
+d2pi:=pi2;
+//Arcseconds to radians
+as2r:=secarc;
+// Centuries since J2000.
+t:=(epj-jd2000)/36525;
+//p:=0;
+e:=0;
+// Periodic terms.
+for i:=1 to nper do begin
+   W := D2PI*T;
+   A := W/peper[1,I];
+   sincos(A,S,C);
+//   p := p + C*peper[2,I] + S*peper[4,I];
+   e := e + C*peper[3,I] + S*peper[5,I];
+end;
+//Polynomial terms.
+W := 1;
+for i:=1 to npol do begin
+//  p := p + pepol[I,1]*W;
+  e := e + pepol[I,2]*W;
+  W := W*T;
+end;
+// in radiant.
+//p := p*AS2R;
+result := e*AS2R;
 end;
 
 ///////////////////////
