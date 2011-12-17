@@ -573,7 +573,7 @@ type
      Tconf_skychart = class(TObject)    // chart setting
                 public
                 tz: TCdCTimeZone;
-                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,e,eqeq,nutl,nuto,sunl,sunb,ab1,abe,abp,gr2e,raprev,deprev : double;
+                racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,ecl,eqeq,nutl,nuto,sunl,sunb,ab1,abe,abp,gr2e,raprev,deprev : double;
                 EarthB,abv,ehn : coordvector;
                 NutMAT: rotmatrix;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved,abm,asl : Boolean;
@@ -1335,7 +1335,7 @@ lcentre:=Source.lcentre ;
 bcentre:=Source.bcentre ;
 lecentre:=Source.lecentre ;
 becentre:=Source.becentre ;
-e:=Source.e ;
+ecl:=Source.ecl ;
 for i:=1 to 3 do abv[i]:=Source.abv[i];
 for i:=1 to 3 do ehn[i]:=Source.ehn[i];
 for i:=1 to 3 do EarthB[i]:=Source.EarthB[i];

@@ -636,11 +636,19 @@ if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
 // nutation constant
-Fplanet.nutation(cfgsc.JDChart,cfgsc.nutl,cfgsc.nuto);
+if cfgsc.ApparentPos then
+   Fplanet.nutation(cfgsc.JDChart,cfgsc.nutl,cfgsc.nuto)
+else begin
+   cfgsc.nutl:=0;
+   cfgsc.nuto:=0;
+end;
 // ecliptic obliquity
-cfgsc.e:=ecliptic(cfgsc.JdChart,cfgsc.nuto);
+if cfgsc.ApparentPos then
+   cfgsc.ecl:=ecliptic(cfgsc.JdChart,cfgsc.nuto)
+else
+   cfgsc.ecl:=ecliptic(cfgsc.JdChart);
 // nutation matrix
-sincos(cfgsc.e,se,ce);
+sincos(cfgsc.ecl,se,ce);
 cfgsc.NutMAT[1,1]:= 1;
 cfgsc.NutMAT[1,2]:= -ce*cfgsc.nutl;
 cfgsc.NutMAT[1,3]:= -se*cfgsc.nutl;
@@ -650,8 +658,9 @@ cfgsc.NutMAT[2,3]:= -cfgsc.nuto;
 cfgsc.NutMAT[3,1]:= se*cfgsc.nutl;
 cfgsc.NutMAT[3,2]:= cfgsc.nuto;
 cfgsc.NutMAT[3,3]:= 1;
+// equation of the equinox
+cfgsc.eqeq:=cfgsc.nutl*cos(cfgsc.ecl);
 // Sidereal time
-cfgsc.eqeq:=cfgsc.nutl*cos(cfgsc.e);
 cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude,cfgsc.eqeq);
 // Sun geometric longitude eq. of date for aberration
 fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
@@ -665,7 +674,14 @@ cfgsc.ShowEarthShadowValid:=cfgsc.ShowEarthShadow and cfgsc.ephvalid;
 cfgsc.ShowEclipticValid:=cfgsc.ShowEcliptic and cfgsc.ephvalid;
 Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
 // aberration and light deflection constant
-Fplanet.aberration(cfgsc.CurJd,cfgsc.abv,cfgsc.ehn,cfgsc.ab1,cfgsc.abe,cfgsc.abp,cfgsc.gr2e,cfgsc.abm,cfgsc.asl);
+if cfgsc.ApparentPos then
+   Fplanet.aberration(cfgsc.CurJd,cfgsc.abv,cfgsc.ehn,cfgsc.ab1,cfgsc.abe,cfgsc.abp,cfgsc.gr2e,cfgsc.abm,cfgsc.asl)
+else begin
+   cfgsc.abe:=0;
+   cfgsc.abp:=0;
+   cfgsc.abm:=false;
+   cfgsc.asl:=false;
+end;
 // Earth barycentric position in parsec for parallax
 fplanet.SunRect(cfgsc.CurJd,false,v1,v2,v3,true);
 cfgsc.EarthB[1]:=-v1*au2parsec;
@@ -786,7 +802,7 @@ cfgsc.RefractionOffset:=h-cfgsc.hcentre;
 // get galactic center
 Eq2Gal(cfgsc.racentre,cfgsc.decentre,cfgsc.lcentre,cfgsc.bcentre,cfgsc) ;
 // get ecliptic center
-Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,cfgsc.lecentre,cfgsc.becentre) ;
+Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.ecl,cfgsc.lecentre,cfgsc.becentre) ;
 // is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
 cfgsc.SP:=southpoleinmap(cfgsc);
@@ -1841,7 +1857,7 @@ begin
            cfgsc.becentre:=cfgsc.becentre+boffset;
            if cfgsc.becentre>=pid2 then cfgsc.becentre:=pid2-secarc;
            if cfgsc.becentre<=-pid2 then cfgsc.becentre:=-pid2+secarc;
-           Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+           Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.ecl,cfgsc.racentre,cfgsc.decentre);
            end;
    end;
    cfgsc.racentre:=rmod(cfgsc.racentre+pi2,pi2);
@@ -1872,7 +1888,7 @@ begin
     cfgsc.becentre:=cfgsc.becentre+ns*cfgsc.fov/movefactor/cfgsc.windowratio;
     if cfgsc.becentre>=pid2 then cfgsc.becentre:=pi-cfgsc.becentre;
     if cfgsc.becentre<=-pid2 then cfgsc.becentre:=-pi-cfgsc.becentre;
-    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.e,cfgsc.racentre,cfgsc.decentre);
+    Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.ecl,cfgsc.racentre,cfgsc.decentre);
  end
  else begin // Equ
     cfgsc.racentre:=rmod(cfgsc.racentre+ew*cfgsc.fov/movefactor/cos(cfgsc.decentre)+pi2,pi2);
@@ -3301,8 +3317,7 @@ if not cfgsc.ShowEclipticValid then exit;
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
 {$endif}
-//e:=ecliptic(cfgsc.JDChart);
-e:=cfgsc.e;
+e:=cfgsc.ecl;
 b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[14];
@@ -3951,8 +3966,8 @@ begin
    Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
  end;
  if cfgsc.ProjPole=Ecl then begin
-   Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.e,l,b);
-   Ecl2eq(l,b+0.001,cfgsc.e,ar,de);
+   Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.ecl,l,b);
+   Ecl2eq(l,b+0.001,cfgsc.ecl,ar,de);
    projection(ar,de,x2,y2,false,cfgsc) ;
    rot:=-arctan2((x2-x1),(y2-y1));
    Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
@@ -4022,8 +4037,7 @@ begin
     Equat : result:=rsEquatorialCo3+sep+cep+sep+dat;
     AltAz : result:=rsAltAZCoord2+sep+cep+sep+trim(cfgsc.ObsName)+sep+dat;
     Gal :    result:=rsGalacticCoor2+sep+dat;
-    Ecl :     result:=rsEclipticCoor3+sep+cep+sep+dat+sep+rsInclination2+
-      detostr(cfgsc.e*rad2deg);
+    Ecl :     result:=rsEclipticCoor3+sep+cep+sep+dat+sep+rsInclination2+detostr(cfgsc.ecl*rad2deg);
     else result:='';
     end;
     result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart.min_ma)+sep+rsFOV2+
