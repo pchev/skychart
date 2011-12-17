@@ -446,7 +446,7 @@ end else begin
   f_calendar.config.CurJD:=f_calendar.config.JDChart;
   f_calendar.config.PlanetParalaxe:=true;
   f_calendar.config.ApparentPos:=true;
-  f_calendar.config.e:=ecliptic(f_calendar.config.JdChart);
+  f_calendar.config.ecl:=ecliptic(f_calendar.config.JdChart);
   nutationme(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
   f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
   PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
