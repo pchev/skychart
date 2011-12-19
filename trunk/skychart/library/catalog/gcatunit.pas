@@ -88,7 +88,7 @@ Toutlines = packed record
           end;
 TCatOption = packed record
           ShortName: TSname;
-          LongName : String;
+          LongName : ShortString;
           rectype  : integer;
           Equinox  : double;
           EquinoxJD: double;
