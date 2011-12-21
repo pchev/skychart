@@ -2,10 +2,10 @@
 Version=1.0
 Encoding=UTF-8
 Name=Skychart
-Comment=Skychart / Cartes du Ciel
+Comment=Planetarium software for the advanced amateur astronomer
 Exec=skychart
 Icon=skychart
 Terminal=false
 Type=Application
-Categories=Astronomy;Education;Application
-GenericName[fr_CH]=
+Categories=Education;Science;Astronomy;
+GenericName=SkyChart
