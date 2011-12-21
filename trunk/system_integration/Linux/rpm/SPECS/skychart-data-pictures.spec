@@ -3,7 +3,7 @@ Name: skychart-data-pictures
 Version: 3
 Release: 1
 Group: Sciences/Astronomy
-License: GPL
+License: GPLv2+
 URL: http://skychart.sourceforge.net
 Packager: Patrick Chevalley
 BuildRoot: %_topdir/%{name}
