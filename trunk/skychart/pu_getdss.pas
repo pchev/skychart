@@ -75,6 +75,7 @@ type
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    procedure BitBtn2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
   private
@@ -146,6 +147,11 @@ cfgdss:=Tconf_dss.Create;
   end;
 end;
 
+procedure Tf_getdss.BitBtn2Click(Sender: TObject);
+begin
+  if HTMLViewer1.Visible then close;
+end;
+
 procedure Tf_getdss.FormDestroy(Sender: TObject);
 begin
 try
@@ -172,6 +178,9 @@ var i : SImageConfig;
     gzbuf : array[0..4095]of char;
 begin
 try
+HTMLViewer1.visible:=false;
+ListBox1.Visible:=true;
+BitBtn1.Visible:=true;
 hide;
 application.ProcessMessages;
 result:=false;
@@ -273,10 +282,7 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      BitBtn1.Visible:=false;
      HTMLViewer1.Clear;
      HTMLViewer1.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
-     showmodal;
-     HTMLViewer1.visible:=false;
-     ListBox1.Visible:=true;
-     BitBtn1.Visible:=true;
+     show;
   end;
 
 end else if Fenabled then begin    // RealSky cdrom
