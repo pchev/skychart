@@ -2622,20 +2622,24 @@ end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
-   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius : double;
+   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,maxpm : double;
    ok,found : boolean;
 begin
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
+                 else cyear:=cfgsc.YPmon;
+maxpm:=abs(secarc*cyear);  // maximum PM of 1 arcsec/year in radiant to add to search radius
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
-xx1:=x1; xx2:=x2; yy1:=y1; yy2:=y2;
+xx1:=x1-maxpm;
+xx2:=x2+maxpm;
+yy1:=y1-maxpm;
+yy2:=y2+maxpm;
 if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc,true,true);
 if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc,true,true);
 xx1:=rad2deg*xx1/15;
 xx2:=rad2deg*xx2/15;
 yy1:=rad2deg*yy1;
 yy2:=rad2deg*yy2;
-if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
-                 else cyear:=cfgsc.YPmon;
 if not nextobj then begin
   InitRec(cat);
   case cat of
