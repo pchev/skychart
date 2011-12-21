@@ -2625,11 +2625,11 @@ var
    xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,maxpm : double;
    ok,found : boolean;
 begin
-if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
-                 else cyear:=cfgsc.YPmon;
-maxpm:=abs(secarc*cyear);  // maximum PM of 1 arcsec/year in radiant to add to search radius
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
+if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
+                 else cyear:=cfgsc.YPmon;
+maxpm:=abs(secarc*(cyear-2000.0));  // maximum PM of 1 arcsec/year in radian to add to the catalog area.
 xx1:=x1-maxpm;
 xx2:=x2+maxpm;
 yy1:=y1-maxpm;
