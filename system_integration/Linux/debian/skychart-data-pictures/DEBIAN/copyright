@@ -1,12 +1,12 @@
 
-Copyright: GPL
+Copyright: 2003-2011 Patrick Chevalley <pch@freesurf.ch>
 
 Information :
 Name        : skychart-pictures
 Version     : 1.0.0.1
 Release     : 1
 Group       : Sciences/Astronomy
-License     : GPL
+License     : GPL-2+
 Packager    : Patrick Chevalley
 URL         : http://skychart.sourceforge.net
 Summary     : Skychart / Cartes du Ciel Pictures of Deepsky objects
