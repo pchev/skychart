@@ -282,6 +282,7 @@ type
     function cmd_SetObs(obs:string):string;
     function cmd_IdentCursor:string;
     function cmd_SaveImage(format,fn,quality:string):string;
+    function cmd_Print(Method,Orient,Col,path:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -3226,6 +3227,33 @@ y:=strtoint(trim(buf));
 sc.MovetoXY(x,y);
 end;
 
+function Tf_chart.cmd_Print(Method,Orient,Col,path:string):string;
+var PrintMethod,printcolor: integer;
+    ok,printlandscape:boolean;
+    PrintTmpPath: string;
+begin
+ok:=true;
+Method:=UpperCase(Trim(Method));
+if Method='' then PrintMethod:=cmain.PrintMethod
+else if Method='PRT' then PrintMethod:=0
+else if Method='PS' then PrintMethod:=1
+else if Method='BMP' then PrintMethod:=2
+else ok:=false;
+Orient:=UpperCase(Trim(Orient));
+if Orient='' then printlandscape:=cmain.printlandscape
+else if Orient='PORTRAIT' then printlandscape:=false
+else if Orient='LANDSCAPE' then printlandscape:=true
+else ok:=false;
+Col:=UpperCase(Trim(Col));
+if Col='' then printcolor:=cmain.printcolor
+else if Col='COLOR' then printcolor:=0
+else if Col='BW' then printcolor:=1
+else ok:=false;
+if path='' then PrintTmpPath:=cmain.PrintTmpPath
+   else PrintTmpPath:=path;
+if ok then PrintChart(printlandscape,printcolor,PrintMethod,cmain.PrinterResolution,cmain.PrintCmd1,cmain.PrintCmd2,PrintTmpPath,cmain,false);
+end;
+
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;
 var i : integer;
 begin
@@ -3379,6 +3407,7 @@ case n of
  78 : result:=cmd_SetConstL(arg[1]);
  79 : result:=cmd_SetConstB(arg[1]);
  80 : result:=cmd_resize(arg[1],arg[2]);
+ 81 : result:=cmd_print(arg[1],arg[2],arg[3],arg[4]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
