@@ -1052,39 +1052,16 @@ var buf:TStringList;
 begin
 buf:=TStringList.Create;
 buf.LoadFromFile(fn);
-// Add Pagesize to the Postscript file to avoid bad clipping
 if printlandscape then begin
-   buf.Delete(1);
-   buf.Insert(1,'%%BoundingBox: 0 0 '+inttostr(ph)+' '+inttostr(pw));
-   i:=buf.IndexOf('%%PageOrder: Ascend')+1;
-   if i>1 then begin
-     buf.Insert(i,'%%Orientation: Landscape');
-   end;
    i:=buf.IndexOf('%%Page: 1 1')+1;
    if i>1 then begin
-     buf.Insert(i,'%%PageBoundingBox: 0 0 '+inttostr(ph)+' '+inttostr(pw));
-     buf.Insert(i+1,'%%ViewingOrientation: 0 1 -1 0');
-     buf.Insert(i+2,'<< /PageSize ['+inttostr(ph)+' '+inttostr(pw)+'] >> setpagedevice');
-     buf.Insert(i+3,'90 rotate 0 -'+inttostr(ph)+' translate');
+     buf.Insert(i,'<< /PageSize ['+inttostr(ph)+' '+inttostr(pw)+'] >> setpagedevice');
    end;
 end else begin
    i:=buf.IndexOf('%%Page: 1 1')+1;
    if i>1 then begin
-     buf.Insert(i,'%%PageBoundingBox: 0 0 '+inttostr(pw)+' '+inttostr(ph));
-     buf.Insert(i+1,'<< /PageSize ['+inttostr(pw)+' '+inttostr(ph)+'] >> setpagedevice');
+     buf.Insert(i,'<< /PageSize ['+inttostr(pw)+' '+inttostr(ph)+'] >> setpagedevice');
    end;
-end;
-// Add Symbol font
-i:=buf.IndexOf('% ISO Fonts')+1;
-if i>1 then begin
-  buf.Insert(i,'/Symbol findfont');
-  buf.Insert(i+1,'  dup length dict begin');
-  buf.Insert(i+2,'  {1 index /FID ne {def} {pop pop} ifelse} forall');
-  buf.Insert(i+3,'  /Encoding ISOLatin1Encoding def');
-  buf.Insert(i+4,'  currentdict');
-  buf.Insert(i+5,'end');
-  buf.Insert(i+6,'/SymbolISO exch definefont pop');
-  buf.Insert(i+7,'');
 end;
 buf.SaveToFile(fn);
 end;
@@ -1227,7 +1204,6 @@ try
      sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
     end;
     Printer.EndDoc;
-//{$endif}
     end;
  1: begin  // to postscript canvas
     InitPrintColor;
@@ -1267,6 +1243,7 @@ try
       ps.enddoc;
       fname:=slash(printpath)+'cdcprint.ps';
       ps.savetofile(SysToUTF8(fname));
+      FixPostscript(fname,PrintLandscape,round(PaperWidth[cm.Paper]*72),round(PaperHeight[cm.Paper]*72));
       ps.Free;
       chdir(appdir);
       if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
