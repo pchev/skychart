@@ -1726,7 +1726,7 @@ Procedure TSplot.PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : 
 var ds,ds1,xx,yy,cxx,cyy,i,j,co:integer;
     cp1,cp2: array[0..3] of TPoint;
     cpf1,cpf2: array[0..3] of TPointf;
-    cr,cg,cb: byte;
+    cr,cg,cb,ctr,ctg,ctb: byte;
     Col: Tcolor;
     colb: TBGRAPixel;
     dx,dy,a,r,k : double;
@@ -1759,19 +1759,11 @@ if cfgplot.UseBMP then begin
         cr:=round(k*(cfgplot.Color[21] and $FF));
         cg:=round(k*((cfgplot.Color[21] shr 8) and $FF));
         cb:=round(k*((cfgplot.Color[21] shr 16) and $FF));
-        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
-        for i:=19 downto 0 do begin  // coma
-          co:=max(0,255-i*13);
-          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
-          Col:=Addcolor(Col,cfgplot.backgroundcolor);
-          colb:=ColorToBGRA(Col);
-          ds1:=round((i+1)*ds/20);
-          cbmp.FillEllipseAntialias(x,y,ds1,ds1,colb);
-        end;
-        if r>30 then begin  // tail
-        cr:=cr div 2;
-        cg:=cg div 2;
-        cb:=cb div 2;
+        ctr:=cr div 2;
+        ctg:=cg div 2;
+        ctb:=cb div 2;
+        // tail
+        if r>30 then begin
         if (dx<>0)or(dy<>0) then for i:=0 to 9 do begin
          cpf1[2].X:=x;
          cpf1[2].Y:=y;
@@ -1780,10 +1772,11 @@ if cfgplot.UseBMP then begin
          cpf2:=cpf1;
          r:=0.99*r;
          for j:=0 to 19 do begin
-          co:=max(0,255-i*20-j*13);
-          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+//          co:=max(0,255-i*20-j*13);
+          co:=max(0,round(200-ln(i+j+1)*55));
+          Col:=(ctr*co div 255)+256*(ctg*co div 255)+65536*(ctb*co div 255);
           Col:=Addcolor(Col,cfgplot.backgroundcolor);
-          colb:=ColorToBGRA(Col);
+          colb:=ColorToBGRA(Col,Co);
           cpf1[0].X:=cpf1[3].X;
           cpf1[0].Y:=cpf1[3].Y;
           cpf1[1].X:=cpf1[2].X;
@@ -1792,7 +1785,7 @@ if cfgplot.UseBMP then begin
           cpf1[2].Y:=y+((j+1)*r/20*sin(a+0.015*(i)));
           cpf1[3].X:=x+((j+1)*0.99*r/20*cos(a+0.015*(i+1)));
           cpf1[3].Y:=y+((j+1)*0.99*r/20*sin(a+0.015*(i+1)));
-          if (abs(cpf1[2].X-cpf1[3].X)>1)or(abs(cpf1[2].Y-cpf1[3].Y)>1) then cbmp.FillPoly(cpf1,colb,dmset)
+          if (abs(cpf1[2].X-cpf1[3].X)>1)or(abs(cpf1[2].Y-cpf1[3].Y)>1) then cbmp.FillPoly(cpf1,colb,dmDrawWithTransparency)
              else BGRADrawLine(cpf1[0].X,cpf1[0].Y,cpf1[2].X,cpf1[2].Y,colb,cfgchart.DrawPen,cbmp);
           cpf2[0].X:=cpf2[3].X;
           cpf2[0].Y:=cpf2[3].Y;
@@ -1802,11 +1795,23 @@ if cfgplot.UseBMP then begin
           cpf2[2].Y:=y+((j+1)*r/20*sin(a-0.015*(i)));
           cpf2[3].X:=x+((j+1)*0.99*r/20*cos(a-0.015*(i+1)));
           cpf2[3].Y:=y+((j+1)*0.99*r/20*sin(a-0.015*(i+1)));
-          if (abs(cpf2[2].X-cpf2[3].X)>1)or(abs(cpf2[2].Y-cpf2[3].Y)>1) then cbmp.FillPoly(cpf2,colb,dmset)
+          if (abs(cpf2[2].X-cpf2[3].X)>1)or(abs(cpf2[2].Y-cpf2[3].Y)>1) then cbmp.FillPoly(cpf2,colb,dmDrawWithTransparency)
              else BGRADrawLine(cpf2[0].X,cpf2[0].Y,cpf2[2].X,cpf2[2].Y,colb,cfgchart.DrawPen,cbmp);
          end;
         end;
         end;
+        // coma
+        ds:=round(max(PixScale*diam/2,2*cfgchart.drawpen));
+        for i:=19 downto 0 do begin
+//         co:=max(0,255-i*13);
+          co:=max(0,round(200-ln(i+1)*60));
+          Col:=(cr*co div 255)+256*(cg*co div 255)+65536*(cb*co div 255);
+          Col:=Addcolor(Col,cfgplot.backgroundcolor);
+          colb:=ColorToBGRA(Col,Co);
+          ds1:=round((i+1)*ds/20);
+          cbmp.FillEllipseAntialias(x,y,ds1,ds1,colb);
+        end;
+        // nucleus
         PlotStar(x,y,ma+3,1021);
       end;
    2: begin

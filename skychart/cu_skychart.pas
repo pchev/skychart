@@ -287,12 +287,12 @@ end;
     DrawMilkyWay; // most extended first
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP) then DrawHorizon;
-    DrawComet;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
     if cfgsc.showline then begin
        DrawOutline;
        DrawDSL;
     end;
+    DrawComet;
   end;
   // then the lines
   DrawGrid;
