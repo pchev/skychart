@@ -6964,6 +6964,12 @@ for i:=0 to Params.Count-1 do begin
       for p:=pp.count to MaxCmdArg do pp.add('');
       resp:=ExecuteCmd('',pp);
       if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
+   end else if cmd='--print' then begin
+      parm:='PRINT '+parm;
+      splitarg(parm,blank,pp);
+      for p:=pp.count to MaxCmdArg do pp.add('');
+      resp:=ExecuteCmd('',pp);
+      if (resp<>msgOK)and(resp<>'') then WriteTrace(resp);
    end;
 end;
 finally
