@@ -65,7 +65,6 @@ type
     Fprojection : string;
     Fmean,Fsigma,dmin,dmax,Fmin_sigma,Fmax_sigma : double;
     itt : array[0..255] of byte;
-    rwcs: rotmatrix;
     procedure SetFile(value:string);
     procedure Readfitsheader;
     Procedure FITSCoord ;

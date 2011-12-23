@@ -612,6 +612,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
+    acc,dcc: double;
     se,ce : extended;
     s1,s2,s3: string;
     TrackAltAz: boolean;
@@ -623,6 +624,9 @@ begin
 TrackAltAz:=false;
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
+// max altaz fov
+if cfgsc.ProjPole=Altaz then
+   cfgsc.fov:=min(cfgsc.fov,deg2rad*300);
 // clipping limit
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
@@ -777,8 +781,10 @@ end;
 w := cfgsc.fov;
 h := cfgsc.fov/cfgsc.WindowRatio;
 w := maxvalue([w,h]);
-cfgsc.FieldNum:=GetFieldNum(w);
+cfgsc.FieldNum:=GetFieldNum(w-musec);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
+// full sky button
+if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)then cfgsc.projtype:='A' ;
 // normalize the coordinates
 if (cfgsc.decentre>=(pid2-secarc)) then cfgsc.decentre:=pid2-secarc;
 if (cfgsc.decentre<=(-pid2+secarc)) then cfgsc.decentre:=-pid2+secarc;
@@ -803,6 +809,29 @@ cfgsc.RefractionOffset:=h-cfgsc.hcentre;
 Eq2Gal(cfgsc.racentre,cfgsc.decentre,cfgsc.lcentre,cfgsc.bcentre,cfgsc) ;
 // get ecliptic center
 Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.ecl,cfgsc.lecentre,cfgsc.becentre) ;
+// Rotation matrix for equator centered projection
+case cfgsc.ProjPole of
+Equat: begin
+   acc:=cfgsc.racentre;
+   dcc:=cfgsc.decentre;
+   end;
+Altaz : begin
+   acc:=-cfgsc.acentre;
+   dcc:=cfgsc.hcentre;
+   end;
+Gal: begin
+   acc:=cfgsc.lcentre;
+   dcc:=cfgsc.bcentre;
+   end;
+Ecl: begin
+   acc:=cfgsc.lecentre;
+   dcc:=cfgsc.becentre;
+   end;
+end;
+sofa_Ir(cfgsc.EqpMAT);
+sofa_Rz(acc, cfgsc.EqpMAT);
+sofa_Ry(-dcc, cfgsc.EqpMAT);
+sofa_tr(cfgsc.EqpMAT,cfgsc.EqtMAT);
 // is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
 cfgsc.SP:=southpoleinmap(cfgsc);
@@ -811,7 +840,7 @@ if not cfgsc.quick then begin
   cfgsc.moved:=(cfgsc.racentre<>cfgsc.raprev)or(cfgsc.decentre<>cfgsc.deprev);
   cfgsc.raprev:=cfgsc.racentre;
   cfgsc.deprev:=cfgsc.decentre;
-end;  
+end;
 result:=true;
 end;
 
@@ -4018,7 +4047,7 @@ end;
 end;
 
 function Tskychart.GetChartInfo(sep:string=blank):string;
-var cep,dat:string;
+var pr,cep,dat:string;
 begin
     if cfgsc.CoordExpertMode then begin;
       if cfgsc.ApparentPos then cep:=rsApparent
@@ -4033,11 +4062,13 @@ begin
       end;
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
     dat:=dat+' ('+cfgsc.tz.ZoneName+')';
+    if cfgsc.projtype='A' then pr:=' ARC'
+                          else pr:=' '+cfgsc.projname[cfgsc.fieldnum];
     case cfgsc.projpole of
-    Equat : result:=rsEquatorialCo3+sep+cep+sep+dat;
-    AltAz : result:=rsAltAZCoord2+sep+cep+sep+trim(cfgsc.ObsName)+sep+dat;
-    Gal :    result:=rsGalacticCoor2+sep+dat;
-    Ecl :     result:=rsEclipticCoor3+sep+cep+sep+dat+sep+rsInclination2+detostr(cfgsc.ecl*rad2deg);
+    Equat : result:=rsEquatorialCo3+pr+sep+cep+sep+dat;
+    AltAz : result:=rsAltAZCoord2+pr+sep+cep+sep+trim(cfgsc.ObsName)+sep+dat;
+    Gal :    result:=rsGalacticCoor2+pr+sep+dat;
+    Ecl :     result:=rsEclipticCoor3+pr+sep+cep+sep+dat+sep+rsInclination2+detostr(cfgsc.ecl*rad2deg);
     else result:='';
     end;
     result:=result+sep+rsMag+formatfloat(f1, plot.cfgchart.min_ma)+sep+rsFOV2+

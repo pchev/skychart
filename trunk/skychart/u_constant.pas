@@ -38,7 +38,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
 {$i revision.inc}
 
 const cdcversion = 'Version 3.5-svn';
-      cdcver     = '3.5g';
+      cdcver     = '3.5h';
       cdccpy = 'Copyright (C) 2002-2011 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,'+crlf+
@@ -575,7 +575,7 @@ type
                 tz: TCdCTimeZone;
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,ecl,eqeq,nutl,nuto,sunl,sunb,ab1,abe,abp,gr2e,raprev,deprev : double;
                 EarthB,abv,ehn : coordvector;
-                NutMAT: rotmatrix;
+                NutMAT, EqpMAT, EqtMAT: rotmatrix;
                 Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved,abm,asl : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
@@ -1341,8 +1341,11 @@ for i:=1 to 3 do abv[i]:=Source.abv[i];
 for i:=1 to 3 do ehn[i]:=Source.ehn[i];
 for i:=1 to 3 do EarthB[i]:=Source.EarthB[i];
 for i:=1 to 3 do
-  for j:=1 to 3 do
+  for j:=1 to 3 do begin
     NutMAT[i,j]:=Source.NutMAT[i,j];
+    EqpMAT[i,j]:=Source.EqpMAT[i,j];
+    EqtMAT[i,j]:=Source.EqtMAT[i,j];
+  end;
 eqeq:=Source.eqeq;
 nutl:=Source.nutl ;
 nuto:=Source.nuto ;
