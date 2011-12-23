@@ -27,7 +27,6 @@ type
      coordvector = array[1..3] of double;
      rotmatrix = array[1..3,1..3] of double;
 
-Procedure InitCat(hnd : Cardinal ;Cache : boolean);
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
@@ -118,6 +117,7 @@ Const
     deg2rad = pi/180;
     rad2deg = 180/pi;
     pi2 = 2*pi;
+    pid2 = pi/2;
     secarc = deg2rad/3600;
     jd2000 : double =2451545.0 ;
     jd1950 : double =2433282.4235;
@@ -144,6 +144,7 @@ var
   Northpoleinmap,Southpoleinmap : boolean;
   appcaption : string;
   UseCache : Boolean = True;
+  rt: rotmatrix;
 
 implementation
 
@@ -152,13 +153,162 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
-Procedure InitCat(hnd : Cardinal ;Cache : boolean);
+////// Required functions adapted from the SOFA library
+
+procedure sofa_S2C(theta,phi: double; var c: coordvector);
+// Convert spherical coordinates to Cartesian.
+// THETA    d         longitude angle (radians)
+// PHI      d         latitude angle (radians)
+var sa,ca,sd,cd: extended;
 begin
-UseCache:=Cache;
-// HND is no more used, keep for compatibility with previous version
+sincos(theta,sa,ca);
+sincos(phi,sd,cd);
+c[1]:=ca*cd;
+c[2]:=sa*cd;
+c[3]:=sd;
+end;
+
+procedure sofa_c2s(p: coordvector; var theta,phi: double);
+// P-vector to spherical coordinates.
+// THETA    d         longitude angle (radians)
+// PHI      d         latitude angle (radians)
+var x,y,z,d2: double;
+begin
+X := P[1];
+Y := P[2];
+Z := P[3];
+D2 := X*X + Y*Y;
+IF ( D2 = 0 ) THEN
+   theta := 0
+ELSE
+   theta := arctan2(Y,X);
+IF ( Z = 0 ) THEN
+   phi := 0
+ELSE
+   phi := arctan2(Z,SQRT(D2));
+end;
+
+procedure sofa_cp(p: coordvector; var c: coordvector);
+// Copy a p-vector.
+var i: integer;
+begin
+for i:=1 to 3 do c[i]:=p[i];
+end;
+
+procedure sofa_cr(r:rotmatrix; var c: rotmatrix);
+// Copy an r-matrix.
+var i,j: integer;
+begin
+for j:=1 to 3 do
+  for i:=1 to 3 do c[j,i]:=r[j,i];
+end;
+
+procedure sofa_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
+// Multiply a p-vector by an r-matrix.
+var w: double;
+    wrp: coordvector;
+    i,j: integer;
+begin
+// Matrix R * vector P.
+for j:=1 to 3 do begin
+   W := 0;
+   for i:=1 to 3 do begin
+      W := W + R[J,I]*P[I];
+   end; //i
+   WRP[J] := W;
+end; //j
+// Return the result.
+sofa_CP ( WRP, RP );
+end;
+
+procedure sofa_tr(r: rotmatrix; var rt: rotmatrix);
+// Transpose an r-matrix.
+var wm: rotmatrix;
+    i,j: integer;
+begin
+for i:=1 to 3 do begin
+   for j:=1 to 3 do begin
+      wm[i,j] := r[j,i];
+   end;
+end;
+sofa_cr ( wm, rt );
+end;
+
+procedure sofa_rxr(a,b: rotmatrix; var atb: rotmatrix);
+// Multiply two r-matrices.
+var i,j,k: integer;
+    w: double;
+    wm: rotmatrix;
+begin
+for i:=1 to 3 do begin
+   for j:=1 to 3 do begin
+      W := 0;
+      for k:=1 to 3 do begin
+         W := W + A[I,K]*B[K,J];
+      end; //k
+      WM[I,J] := W;
+   end; //j
+end; //i
+sofa_CR ( WM, ATB );
+end;
+
+procedure sofa_Zr(var r: rotmatrix);
+// Initialize an r-matrix to the null matrix.
+var i,j: integer;
+begin
+for i:=1 to 3 do
+  for j:=1 to 3 do
+     r[i,j]:=0;
+end;
+
+procedure sofa_Ir(var r: rotmatrix);
+//   Initialize an r-matrix to the identity matrix.
+begin
+sofa_Zr(r);
+r[1,1] := 1.0;
+r[2,2] := 1.0;
+r[3,3] := 1.0;
+end;
+
+procedure sofa_Rz(psi: double; var r: rotmatrix);
+//  Rotate an r-matrix about the z-axis.
+var s,c : extended;
+    a,w : rotmatrix;
+begin
+// Matrix representing new rotation.
+   sincos(psi,s,c);
+   sofa_Ir(a);
+   a[1,1] :=  c;
+   a[2,1] := -s;
+   a[1,2] :=  s;
+   a[2,2] :=  c;
+// Rotate.
+   sofa_Rxr(a, r, w);
+// Return result.
+   sofa_Cr(w, r);
+end;
+
+procedure sofa_Ry(theta: double; var r: rotmatrix);
+//  Rotate an r-matrix about the y-axis.
+var s,c : extended;
+    a,w : rotmatrix;
+begin
+// Matrix representing new rotation.
+   sincos(theta,s,c);
+   sofa_Ir(a);
+   a[1,1] :=  c;
+   a[3,1] :=  s;
+   a[1,3] := -s;
+   a[3,3] :=  c;
+// Rotate.
+   sofa_Rxr(a, r, w);
+// Return result.
+   sofa_Cr(w, r);
 end;
 
 Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
+var acc,dcc: double;
+    rm: rotmatrix;
 begin
    BxGlb:= bx;
    ByGlb:= by;
@@ -183,20 +333,36 @@ begin
    Northpoleinmap:=np;
    Southpoleinmap:=sp;
    case ProjPole of
-   0..1: begin
+   0: begin
+      acentre:=azc;    // equat
+      hcentre:=hc;
+      acc:=arcentre*15;
+      dcc:=decentre;
+      end;
+   1: begin
       acentre:=azc;    // alt-az
       hcentre:=hc;
+      acc:=-acentre;
+      dcc:=hcentre;
       end;
    2: begin
       lcentre:=azc;    // galactic
       bcentre:=hc;
+      acc:=lcentre;
+      dcc:=bcentre;
       end;
    3: begin
       lecentre:=azc;   // ecliptic
       becentre:=hc;
       ecl:=ecliptic(JDChart);
+      acc:=lecentre;
+      dcc:=becentre;
       end;
    end;
+   sofa_Ir(rm);
+   sofa_Rz(deg2rad*acc, rm);
+   sofa_Ry(-deg2rad*dcc, rm);
+   sofa_tr(rm,rt);
 end;
 
 Function PadZeros(x : string ; l :integer) : string;
@@ -312,9 +478,9 @@ l:=rmod(l+360,360);
 b:=rad2deg*arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
 end;
 
-
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double );
 Var a,r,hh,s1,c1,x,y,ac,dc : Double ;
+    p,pr: coordvector;
 Begin
 case Projpole of
    0 : begin
@@ -346,8 +512,20 @@ case projtype of
     ar := ac - hh - 1E-7 ;
    end;
 'C' : begin
-    ar:=ac-x;
-    de:=dc-y;
+    sofa_S2C(-deg2rad*xx,deg2rad*yy,p);
+    sofa_rxp(rt,p,pr);
+    sofa_c2s(pr,xx,yy);
+    ar := rad2deg*xx;
+    de := rad2deg*yy;
+    if de>0 then de:=min(89.999,de) else de:=max(-89.999,de);
+    end;
+'M' : begin
+    yy:=2*arctan(exp(deg2rad*yy))-pid2;
+    sofa_S2C(-deg2rad*xx,yy,p);
+    sofa_rxp(rt,p,pr);
+    sofa_c2s(pr,xx,yy);
+    ar := rad2deg*xx;
+    de := rad2deg*yy;
     if de>0 then de:=min(89.999,de) else de:=max(-89.999,de);
     end;
 'S' : begin

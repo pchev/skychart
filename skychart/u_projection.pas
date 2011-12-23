@@ -112,6 +112,10 @@ function sofa_PDP(a,b: coordvector):double;
 procedure sofa_RXP(r: rotmatrix; p: coordvector; var rp: coordvector);
 procedure sofa_TR(r: rotmatrix; var rt: rotmatrix);
 procedure sofa_RXR(a,b: rotmatrix; var atb: rotmatrix);
+procedure sofa_Ir(var r: rotmatrix);
+procedure sofa_Rz(psi: double; var r: rotmatrix);
+procedure sofa_Ry(theta: double; var r: rotmatrix);
+procedure sofa_Rx(phi: double; var r: rotmatrix);
 Function ltp_Ecliptic(epj: double):double;
 procedure GCRS2J2000(var ra, de: double);
 procedure J20002GCRS(var ra, de: double);
@@ -169,7 +173,9 @@ Begin
 end ;
 
 function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart ):boolean;
-Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
+Var r,hh,s1,s2,s3,c1,c2,c3 : Extended ;
+    xx,yy: double;
+    p,pr: coordvector;
 BEGIN
 result:=false;
 s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
@@ -188,13 +194,18 @@ case c.projtype of              // AIPS memo 27
     result:=true;
     end;
 'C' : begin                 // CAR
-    ar:=rmod(ar+pi4,pi2);
-    hh:=rmod(ac+pi,pi2);
-    if ar>hh then ar:=ar-hh
-             else ar:=ar+pi2-hh;
-    ac:=rmod(hh-ac+pi2,pi2);
-    xx:=ac-ar;
-    yy:=de-dc;
+    sofa_S2C(ar,de,p);
+    sofa_rxp(c.EqpMAT,p,pr);
+    sofa_c2s(pr,xx,yy);
+    xx:=-xx;
+    result:=true;
+    end;
+'M' : begin                 // MER
+    sofa_S2C(ar,de,p);
+    sofa_rxp(c.EqpMAT,p,pr);
+    sofa_c2s(pr,xx,yy);
+    xx:=-xx;
+    yy:=ln(tan((pid2+yy)/2));
     result:=true;
     end;
 'S' : begin                 // SIN
@@ -255,7 +266,9 @@ Y:=yy*c.costheta-xx*c.sintheta;
 END ;
 
 PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart );
-Var r,hh,s1,s2,s3,c1,c2,c3,xx,yy : Extended ;
+Var r,hh,s1,s2,s3,c1,c2,c3 : Extended ;
+    xx,yy: double;
+    p,pr: coordvector;
 BEGIN
 s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
 case c.projtype of              // AIPS memo 27
@@ -272,13 +285,17 @@ case c.projtype of              // AIPS memo 27
     yy:= r*(s2*c1-c2*s1*c3);
     end;
 'C' : begin                 // CAR
-    ar:=rmod(ar+pi4,pi2);
-    hh:=rmod(ac+pi,pi2);
-    if ar>hh then ar:=ar-hh
-             else ar:=ar+pi2-hh;
-    ac:=rmod(hh-ac+pi2,pi2);
-    xx:=ac-ar;
-    yy:=de-dc;
+    sofa_S2C(ar,de,p);
+    sofa_rxp(c.EqpMAT,p,pr);
+    sofa_c2s(pr,xx,yy);
+    xx:=-xx;
+    end;
+'M' : begin                 // MER
+    sofa_S2C(ar,de,p);
+    sofa_rxp(c.EqpMAT,p,pr);
+    sofa_c2s(pr,xx,yy);
+    xx:=-xx;
+    yy:=ln(tan((pid2+yy)/2));
     end;
 'S' : begin                 // SIN
     hh := ar-ac ;
@@ -408,6 +425,7 @@ END ;
 
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Tconf_skychart);
 Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y : Extended ;
+    p,pr: coordvector;
 Begin
 s1:=0;c1:=0;s2:=0;c2:=0;s3:=0;c3:=0;
 x:=(xx*c.costheta-yy*c.sintheta) ;     // AIPS memo 27
@@ -424,8 +442,16 @@ case c.projtype of
     ar := ac - hh - 1E-9 ;
    end;
 'C' : begin
-    ar:=ac-x;
-    de:=dc-y;
+    sofa_S2C(-xx,yy,p);
+    sofa_rxp(c.EqtMAT,p,pr);
+    sofa_c2s(pr,ar,de);
+    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
+    end;
+'M' : begin
+    yy:=2*arctan(exp(yy))-pid2;
+    sofa_S2C(-xx,yy,p);
+    sofa_rxp(c.EqtMAT,p,pr);
+    sofa_c2s(pr,ar,de);
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;
 'S' : begin
@@ -856,7 +882,6 @@ end;
 end;
 
 function ecliptic(j:double; nuto:double=0):double;
-var u,e : double;
 begin
 result:=ltp_Ecliptic(j)+nuto;
 end;
@@ -1823,7 +1848,7 @@ const npol=4;
              (753.872780,-247.805823,379.471484,-53.880558,-90.109153,-353.600190,-63.115353,-28.248187,17.703387,38.911307),
              (-2845.175469,449.844989,-1255.915323,886.736783,418.887514,997.912441,-240.979710,76.541307,-36.788069,-170.964086),
              (-1704.720302,-862.308358,447.832178,-889.571909,190.402846,-56.564991,-296.222622,-75.859952,67.473503,3.014055));
-var as2r, d2pi, t, e, p, w, a, s, c : extended;
+var as2r, d2pi, t, e, w, a, s, c : extended;
     i : integer;
 begin
 d2pi:=pi2;

@@ -4503,9 +4503,9 @@ def_cfgsc.projname[4]:='TAN';
 def_cfgsc.projname[5]:='TAN';
 def_cfgsc.projname[6]:='TAN';
 def_cfgsc.projname[7]:='TAN';
-def_cfgsc.projname[8]:='ARC';
-def_cfgsc.projname[9]:='ARC';
-def_cfgsc.projname[10]:='ARC';
+def_cfgsc.projname[8]:='MER';
+def_cfgsc.projname[9]:='MER';
+def_cfgsc.projname[10]:='MER';
 catalog.cfgshr.StarMagFilter[0]:=99;
 catalog.cfgshr.StarMagFilter[1]:=99;
 catalog.cfgshr.StarMagFilter[2]:=99;
@@ -5314,6 +5314,19 @@ if Config_Version < '3.5f' then begin
   end;
 end;
 {$endif}
+if  Config_Version < '3.5h' then begin
+  def_cfgsc.projname[0]:='TAN';
+  def_cfgsc.projname[1]:='TAN';
+  def_cfgsc.projname[2]:='TAN';
+  def_cfgsc.projname[3]:='TAN';
+  def_cfgsc.projname[4]:='TAN';
+  def_cfgsc.projname[5]:='TAN';
+  def_cfgsc.projname[6]:='TAN';
+  def_cfgsc.projname[7]:='TAN';
+  def_cfgsc.projname[8]:='MER';
+  def_cfgsc.projname[9]:='MER';
+  def_cfgsc.projname[10]:='MER';
+end;
 end;
 
 procedure Tf_main.SaveVersion;

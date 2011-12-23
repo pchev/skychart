@@ -616,10 +616,11 @@ procedure Tf_config_chart.ShowProjection;
    procedure setprojrange(var cb:Tcombobox;n:integer);
    begin
      cb.items.clear;
+     cb.items.add('MER');
+     cb.items.add('CAR');
      cb.items.add('ARC');
      if cshr.fieldnum[n]<=180 then cb.items.add('TAN');
      if cshr.fieldnum[n]<=90 then cb.items.add('SIN');
-     cb.items.add('CAR');
      cb.text:=csc.projname[n]
    end;
 begin
@@ -965,9 +966,9 @@ csc.projname[4]:='TAN';
 csc.projname[5]:='TAN';
 csc.projname[6]:='TAN';
 csc.projname[7]:='TAN';
-csc.projname[8]:='ARC';
-csc.projname[9]:='ARC';
-csc.projname[10]:='ARC';
+csc.projname[8]:='MER';
+csc.projname[9]:='MER';
+csc.projname[10]:='MER';
 ShowProjection;
 end;
 
