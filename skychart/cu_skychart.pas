@@ -625,8 +625,10 @@ TrackAltAz:=false;
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
 // max altaz fov
-if cfgsc.ProjPole=Altaz then
+if cfgsc.ProjPole=Altaz then begin
    cfgsc.fov:=min(cfgsc.fov,deg2rad*300);
+   if cfgsc.fov>pi then cfgsc.horizonopaque:=true;
+end;
 // clipping limit
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
