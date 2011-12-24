@@ -2834,6 +2834,7 @@ if cfgsc.ProjPole=Altaz then begin
                    break;
                  end;
           end;
+          if (abs(ps[0,hdiv]-ps[0,hdiv+1])>cfgsc.xmax)or(abs(ps[1,hdiv]-ps[1,hdiv+1])>cfgsc.ymax) then ok:=false;
           if ok then begin
             if fill then begin
               SetLength(psf,2*hdiv+2);
@@ -2864,7 +2865,9 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-            Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
+            if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then begin
+                Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
+            end;
          end;
          xph:=xh;
          yph:=yh;
@@ -2901,7 +2904,10 @@ if cfgsc.ProjPole=Altaz then begin
            proj2(-az,(hdiv-j)*hstep,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
            WindowXY(x1,y1,ps[0,j+hdiv+1],ps[1,j+hdiv+1],cfgsc);
          end;
-         if cfgsc.FillHorizon then begin
+         ok:=true;
+         if (abs(ps[0,hdiv]-ps[0,hdiv+1])>cfgsc.xmax)or(abs(ps[1,hdiv]-ps[1,hdiv+1])>cfgsc.ymax) then ok:=false;
+         if ok then begin
+           if cfgsc.FillHorizon then begin
            Fplot.PlotOutline(ps[0,0],ps[1,0],0,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
            for j:=1 to 2*hdiv do begin
               Fplot.PlotOutline(ps[0,j],ps[1,j],2,1,2,1,99*cfgsc.x2,Fplot.cfgplot.Color[19]);
@@ -2913,6 +2919,7 @@ if cfgsc.ProjPole=Altaz then begin
            Fplot.Plotline(ps[0,hdiv],ps[1,hdiv],ps[0,hdiv+1],ps[1,hdiv+1],Fplot.cfgplot.Color[19],1);
          end;
          Fplot.Plotline(ps[0,0],ps[1,0],ps[0,2*hdiv+1],ps[1,2*hdiv+1],Fplot.cfgplot.Color[12],2);
+         end;
        end;
        azp:=az;
        hpstep:=hstep;
@@ -2942,7 +2949,9 @@ if cfgsc.ProjPole=Altaz then begin
           x0h:=xh;
           y0h:=yh;
        end else begin
-          Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+         if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then begin
+           Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
+         end;
        end;
        xph:=xh;
        yph:=yh;
@@ -2962,7 +2971,9 @@ if cfgsc.ProjPole=Altaz then begin
        if first then begin
           first:=false;
        end else begin
-          Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[15],2);
+         if (x>-cfgsc.Xmax)and(x<2*cfgsc.Xmax)and(y>-cfgsc.Ymax)and(y<2*cfgsc.Ymax)and(abs(x-xp)<cfgsc.xmax)and(abs(y-yp)<cfgsc.ymax) then begin
+           Fplot.Plotline(xp,yp,x,y,Fplot.cfgplot.Color[15],2);
+         end;
        end;
        xp:=x;
        yp:=y;

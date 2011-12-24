@@ -1771,14 +1771,20 @@ end;
 destructor Tconf_main.Destroy;
 var i:integer;
 begin
+try
   if CometUrlList<>nil then CometUrlList.Free;
   if AsteroidUrlList<>nil then AsteroidUrlList.Free;
   if ObsNameList<>nil then begin
+    try
     for i:=0 to ObsNameList.Count-1 do
         if ObsNameList.Objects[i]<>nil then ObsNameList.Objects[i].Free;
+    except
+    end;
     ObsNameList.Free;
   end;
+finally
   Inherited Destroy;
+end;
 end;
 
 procedure Tconf_main.Assign(Source: Tconf_main);
