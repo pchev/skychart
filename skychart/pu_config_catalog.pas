@@ -1330,7 +1330,6 @@ end;
 procedure Tf_config_catalog.StringGrid1MouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var col,row:integer;
-    config:TXMLConfig;
 begin
 StringGrid1.MouseToCell(X, Y, Col, Row);
 if row=0 then exit;

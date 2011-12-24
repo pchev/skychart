@@ -10,7 +10,7 @@ uses  skylibcat, gcatunit, XMLRead, DOM, math, XMLConf,
 procedure SetVOCatpath(path:string);
 Procedure OpenVOCat(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenVOCatwin(var ok : boolean);
-Procedure ReadVOCat(var lin : GCatrec; var ok : boolean);
+Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 Procedure NextVOCat( var ok : boolean);
 procedure CloseVOCat ;
 function GetVOMagmax: double;
@@ -19,17 +19,17 @@ type TFieldData = class(Tobject)
      name, ucd, datatype, units, description : string;
      end;
 
-type Tstarcache = record
+type Tvostarcache = record
          star: Tstar;
          ra,de: double;
          lma: string;
 end;
-type Tnebcache = record
+type Tvonebcache = record
          neb: Tneb;
          ra,de: double;
          lma,ldim: string;
 end;
-type TcacheOption = record
+type TvocacheOption = record
      option: TCatoption;
      vofiledate: longint;
 end;
@@ -60,9 +60,9 @@ var
    onCache,CacheAvailable: boolean;
    CurNebCache, CurStarCache, CurCacheRec: integer;
    NebCacheIndex, StarCacheIndex: array[0..maxcache-1] of string;
-   StarOptionCache, NebOptionCache: array[0..maxcache-1] of TcacheOption;
-   NebCache: array[0..maxcache-1] of array of Tnebcache;
-   StarCache: array[0..maxcache-1] of array of Tstarcache;
+   StarOptionCache, NebOptionCache: array[0..maxcache-1] of TvocacheOption;
+   NebCache: array[0..maxcache-1] of array of Tvonebcache;
+   StarCache: array[0..maxcache-1] of array of Tvostarcache;
 
 implementation
 
@@ -73,7 +73,7 @@ begin
 VOCatpath:=noslash(path);
 end;
 
-function numericunit(units: string; var u:double; var log:boolean): string;   //  numeric prefix
+function numericunit(units: string; out u:double; out log:boolean): string;   //  numeric prefix
 var i,j,pe,s,ni: integer;
     e,k,c,n:string;
     ex: double;
@@ -135,7 +135,7 @@ end;
 result:=k;
 end;
 
-function angleunits(units: string; var log: Boolean): double;  // result in radian
+function angleunits(units: string; out log: Boolean): double;  // result in radian
 var k:string;
     u: double;
 begin
@@ -149,7 +149,7 @@ begin
   result:=deg2rad*u;
 end;
 
-function timeunits(units: string; var log: Boolean): double;  // result in seconds
+function timeunits(units: string; out log: Boolean): double;  // result in seconds
 var k:string;
     u: double;
 begin
@@ -163,8 +163,8 @@ else if k<>'s' then u:=0;
 result:=u;
 end;
 
-function pmunits(units: string; var log,cosdec: Boolean): double;  // result in radian/year
-var e,k,v:string;
+function pmunits(units: string; out log,cosdec: Boolean): double;  // result in radian/year
+var k,v:string;
     u,y,uu: double;
     i: integer;
     ok: boolean;
@@ -187,7 +187,6 @@ end;
 
 Procedure InitRec;
 var n : integer;
-    ucd: string;
 begin
   emptyrec.options.rectype:=catversion;
   emptyrec.options.Equinox:=2000;
@@ -343,7 +342,7 @@ end;
 end;
 
 Function ReadVOHeader: boolean;
-var buf,e,k,v:string;
+var buf,k:string;
     u: double;
     i,j: integer;
     fieldnode: TDOMNode;
@@ -508,7 +507,7 @@ VOopen:=true;
 NextVOCat(ok);
 end;
 
-Procedure ReadVOCat(var lin : GCatrec; var ok : boolean);
+Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 var cell: TDOMNode;
     buf,recno: string;
     i: integer;

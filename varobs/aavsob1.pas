@@ -29,7 +29,7 @@ uses
 {$ifdef mswindows}
   Windows,
 {$endif}
-  LCLIntf,  Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ComCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
 
 type
@@ -180,7 +180,7 @@ result:=stringreplace(result,'-','',[rfReplaceAll]);
 result:=stringreplace(result,' ','',[rfReplaceAll]);
 end;
 
-Procedure GetGCVSInfo(nom : string; var vartype,per,slope,jdt : string);
+Procedure GetGCVSInfo(nom : string; out vartype,per,slope,jdt : string);
 var f : textfile;
     buf,id1,id2,constel : string;
     p : integer;
@@ -218,7 +218,7 @@ end;
 
 Procedure Tform1.ConvAAVSOb;
 var fb,f : textfile;
-    buf,design,nom,mag,dat,mag1,mag2,datm,vartype,jdt,per,slope,puls,v1,p1,j1 : string;
+    buf,design,nom,mag,dat,mag1,mag2,datm,vartype,jdt,per,slope,puls,j1 : string;
     i,n,p,year1,year,mois,jour : integer;
     jdm : double;
 begin
@@ -311,7 +311,7 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
-decimalseparator:='.';
+DefaultFormatSettings.decimalseparator:='.';
 end;
 
 procedure TForm1.Label7Click(Sender: TObject);

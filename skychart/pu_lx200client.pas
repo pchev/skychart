@@ -1266,7 +1266,6 @@ longedit1.Enabled:=CheckBox6.Checked;
 end;
 
 procedure Tpop_lx200.SpeedButton8Click(Sender: TObject);
-var ok : boolean;
 begin
  if ScopeConnected then begin
      CoordLock := true;
@@ -1331,18 +1330,18 @@ LX200_Scope_Hp_Mode(selectedmode);
 end;
 
 procedure Tpop_lx200.GetMsArcSecClick(Sender: TObject);
-var arcsec: string;
+//var arcsec: string;
 begin
 MsArcSec.Value:=LX200_Scope_GetMsArcSec;
-arcsec:=IntToStr(MsArcSec.Value);
+//arcsec:=IntToStr(MsArcSec.Value);
 // showmessage('MsArcSec:'+arcsec);
 end;
 
 procedure Tpop_lx200.GetGuideArcSecClick(Sender: TObject);
-var arcsec: string;
+//var arcsec: string;
 begin
 GuideArcSec.Value:=LX200_Scope_GetGuideArcSec;
-arcsec:=IntToStr(GuideArcSec.Value);
+//arcsec:=IntToStr(GuideArcSec.Value);
 // showmessage('MsArcSec:'+arcsec);
 end;
 

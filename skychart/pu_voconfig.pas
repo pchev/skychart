@@ -340,7 +340,7 @@ begin
 end;
 
 function dedupstr(txt:string):string;
-var i,p,l: integer;
+var p,l: integer;
     buf1,buf2:string;
 begin
 l:=length(txt);
@@ -435,7 +435,7 @@ end;
 
 procedure Tf_voconfig.UpdateCatalog(cn: string);
 var i,j,n: integer;
-    buf,ucd,table,baseurl,objtype: string;
+    buf,table,baseurl: string;
     fullcat:boolean;
     dt,dc,ds,dm,fc: integer;
     tb:TTabsheet;
@@ -453,7 +453,6 @@ try
   config.Filename:=cn;
   CatName:=config.GetValue('VOcat/catalog/name','');
   table:=config.GetValue('VOcat/catalog/table','');
-  objtype:=config.GetValue('VOcat/catalog/objtype','');
   baseurl:=config.GetValue('VOcat/update/baseurl','');
   votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
   fullcat:=config.GetValue('VOcat/update/fullcat',false);
@@ -645,7 +644,7 @@ end;
 end;
 
 procedure Tf_voconfig.ReloadVO(fn: string);
-var coordselection, objtype, extfn, baseurl,table: string;
+var objtype, extfn, baseurl,table: string;
     i, fieldcount: integer;
     votype:Tvo_type;
     config: TXMLConfig;
@@ -681,7 +680,7 @@ end;
 end;
 
 procedure Tf_voconfig.Updateconfig(Sender: TObject);
-var coordselection, objtype, extfn: string;
+var objtype, extfn: string;
     i: integer;
     config: TXMLConfig;
 begin
@@ -725,7 +724,7 @@ end;
 end;
 
 procedure Tf_voconfig.PreviewData(Sender: TObject);
-var coordselection, objtype, extfn: string;
+var coordselection, objtype: string;
     i: integer;
 const previewmax=50;
 begin

@@ -290,10 +290,8 @@ end;
 end;
 
 Procedure TFits.InfoWCScoord;
-var n,m: integer;
-    x0,x1,y0,y1: double;
+var n: integer;
     i: TcdcWCSinfo;
-    p: TcdcWCScoord;
 begin
 try
 n:=cdcwcs_initfitsfile(pchar(FFileName));
@@ -808,7 +806,7 @@ end;
 procedure TFits.GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
 var IntfImg,ProjImg: TLazIntfImage;
     ImgHandle,ImgMaskHandle: HBitmap;
-    i,j,x,y,n: integer;
+    i,j,x,y: integer;
     ra,dec,ra_offset,de_offset: double;
 begin
 try

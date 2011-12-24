@@ -3912,7 +3912,7 @@ end;
 
 Procedure Tskychart.DrawTarget;
 var r,d,phi,rot,x,y,xx,yy: double;
-    xc,yc,x1,y1,x2,y2,xi,yi : single;
+    xc,yc,xi,yi : single;
     a,b: single;
     txt:string;
 begin

@@ -381,7 +381,6 @@ end;
 procedure Tf_config_time.ShowTime;
 var h,n,s:string;
     y,m,d,i,j:integer;
-    hh: double;
 begin
 if not lockJD then JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 y:=csc.curyear;
