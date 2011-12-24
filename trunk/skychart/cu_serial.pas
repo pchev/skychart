@@ -107,8 +107,6 @@ begin
 end;
 
 Procedure PurgeBuffer(var ser:TBlockSerial);
-var count : integer;
-    buf : string;
 begin
 if com_opened then begin
   if debug then writeserialdebug(FormatDateTime('hh:mm:ss.zzz',now)+' Purge Buffer');

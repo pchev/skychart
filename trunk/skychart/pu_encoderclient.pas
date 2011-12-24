@@ -572,7 +572,7 @@ end;
 function Tpop_encoder.ReadConfig(ConfigPath : shortstring):boolean;
 var ini:tinifile;
     newcolumn:tlistcolumn;
-    buf,nom : string;
+    nom : string;
 begin
 result:=DirectoryExists(ConfigPath);
 if Result then

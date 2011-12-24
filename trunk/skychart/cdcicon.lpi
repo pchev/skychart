@@ -56,7 +56,7 @@
         <PackageName Value="LCL"/>
       </Item8>
     </RequiredPackages>
-    <Units Count="25">
+    <Units Count="27">
       <Unit0>
         <Filename Value="cdcicon.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -71,11 +71,10 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="426"/>
-        <CursorPos X="56" Y="460"/>
+        <TopLine Value="433"/>
+        <CursorPos X="47" Y="450"/>
         <UsageCount Value="30"/>
         <Bookmarks Count="2">
           <Item0 X="27" Y="390" ID="1"/>
@@ -130,7 +129,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_clock"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="3"/>
         <WindowIndex Value="0"/>
         <TopLine Value="19"/>
         <CursorPos X="6" Y="55"/>
@@ -203,7 +202,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="4"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1191"/>
         <CursorPos X="9" Y="1198"/>
@@ -262,8 +261,29 @@
         <CursorPos X="3" Y="201"/>
         <UsageCount Value="10"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="cu_fits.pas"/>
+        <UnitName Value="cu_fits"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="840"/>
+        <CursorPos X="20" Y="813"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="u_satellite.pas"/>
+        <UnitName Value="u_satellite"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="387"/>
+        <CursorPos X="34" Y="393"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit26>
     </Units>
-    <JumpHistory Count="21" HistoryIndex="20">
+    <JumpHistory Count="27" HistoryIndex="26">
       <Position1>
         <Filename Value="pu_tray.pas"/>
         <Caret Line="158" Column="60" TopLine="136"/>
@@ -348,6 +368,30 @@
         <Filename Value="pu_tray.pas"/>
         <Caret Line="450" Column="13" TopLine="432"/>
       </Position21>
+      <Position22>
+        <Filename Value="cu_fits.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position22>
+      <Position23>
+        <Filename Value="cu_fits.pas"/>
+        <Caret Line="293" Column="6" TopLine="288"/>
+      </Position23>
+      <Position24>
+        <Filename Value="cu_fits.pas"/>
+        <Caret Line="294" Column="1" TopLine="289"/>
+      </Position24>
+      <Position25>
+        <Filename Value="cu_fits.pas"/>
+        <Caret Line="295" Column="1" TopLine="281"/>
+      </Position25>
+      <Position26>
+        <Filename Value="u_satellite.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position26>
+      <Position27>
+        <Filename Value="u_satellite.pas"/>
+        <Caret Line="97" Column="40" TopLine="182"/>
+      </Position27>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

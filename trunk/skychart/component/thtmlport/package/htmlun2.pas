@@ -490,7 +490,7 @@ uses
   {$ifndef NoOldPng}
      PngImage1,   
   {$endif}
-     htmlview, htmlsubs, HtmlGif2, StylePars{$IFNDEF LCL}, ActiveX {$ENDIF};
+     htmlsubs, HtmlGif2, StylePars{$IFNDEF LCL}, ActiveX {$ENDIF};
 
 type
   EGDIPlus = class (Exception);

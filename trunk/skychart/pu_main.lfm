@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 240
+  Left = 147
   Height = 525
-  Top = 154
+  Top = 48
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 505
+  ClientHeight = 500
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -2665,12 +2665,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 417
+    Height = 412
     Top = 54
     Width = 26
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 417
+    ClientHeight = 412
     ClientWidth = 26
     Font.Height = 10
     FullRepaint = False
@@ -2678,7 +2678,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 417
+      Height = 412
       Top = 0
       Width = 26
       Align = alClient
@@ -2771,18 +2771,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 417
+    Height = 412
     Top = 54
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 417
+    ClientHeight = 412
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 167
+      Height = 162
       Top = 250
       Width = 28
       Align = alClient
@@ -3011,7 +3011,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 471
+    Top = 466
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -3305,7 +3305,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 24
+        Height = 25
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -3451,7 +3451,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 26
+        Height = 27
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3508,7 +3508,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 22
+        Height = 25
         Top = 2
         Width = 35
         TabOrder = 5

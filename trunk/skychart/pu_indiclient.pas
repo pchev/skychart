@@ -68,7 +68,6 @@ type
   private
     { Private declarations }
     indi1: TIndiClient;
-    FConfig: string;
     CoordLock : boolean;
     connected: boolean;
     TelescopeJD: double;
@@ -140,7 +139,6 @@ ok:=true;
 end;
 
 Procedure Tpop_indi.ScopeConnect(var ok : boolean);
-var dis_ok : boolean;
 begin
 if not connected then begin
   led.color:=clRed;
@@ -244,7 +242,6 @@ begin
 end;
 
 Procedure Tpop_indi.ScopeGetEqSys(var EqSys : double);
-var i: integer;
 begin
 if ScopeConnected then begin
    if indi1.EquatorialOfDay then EqSys:=0
@@ -305,10 +302,9 @@ SetHelp(self,hlpINDI);
 end;
 
 function Tpop_indi.ReadConfig(ConfigPath : shortstring):boolean;
-var ini:tinifile;
-    nom : string;
 begin
 // config managed in main program
+result:=true;
 end;
 
 procedure Tpop_indi.ScopeShow;
@@ -340,8 +336,6 @@ ScopeConnect(ok);
 end;
 
 procedure Tpop_indi.SaveConfig;
-var
-ini:tinifile;
 begin
 // config managed in main program
 end;

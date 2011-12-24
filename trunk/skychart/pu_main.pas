@@ -1032,9 +1032,6 @@ end else
 end;
 
 function Tf_main.LoadDefaultChart(fn: string): string;
-var nam: string;
-    p: integer;
-    maxi: boolean;
 begin
 {$ifdef trace_debug}
  WriteTrace('LoadDefaultChart '+fn);
@@ -1698,10 +1695,10 @@ step:='Init';
 {$ifdef trace_debug}
  debugln(step);
 {$endif}
-DecimalSeparator:='.';
-ThousandSeparator:=',';
-DateSeparator:='/';
-TimeSeparator:=':';
+DefaultFormatSettings.DecimalSeparator:='.';
+DefaultFormatSettings.ThousandSeparator:=',';
+DefaultFormatSettings.DateSeparator:='/';
+DefaultFormatSettings.TimeSeparator:=':';
 NeedRestart:=false;
 showsplash:=true;
 ConfirmSaveConfig:=true;
@@ -2459,7 +2456,6 @@ end;
 end;
 
 procedure Tf_main.DSSImageExecute(Sender: TObject);
-var ra2000,de2000: double;
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
@@ -6687,7 +6683,6 @@ var i :integer;
     Registry1: TRegistry;
     {$else}
     f: textfile;
-    fn: string;
     {$endif}
 begin
 {$ifdef mswindows}
@@ -7143,7 +7138,6 @@ tcpport: string;
  Registry1: TRegistry;
 {$else}
  f: textfile;
- fn: string;
 {$endif}
 begin
 tcpport:=msg;

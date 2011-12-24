@@ -3163,6 +3163,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
       sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
       sc.cfgsc.ShowBackgroundImage:=true;
       Refresh;
+      result:=msgOK;
    end;
 end;
 end;
@@ -3229,6 +3230,8 @@ else ok:=false;
 if path='' then PrintTmpPath:=cmain.PrintTmpPath
    else PrintTmpPath:=path;
 if ok then PrintChart(printlandscape,printcolor,PrintMethod,cmain.PrinterResolution,cmain.PrintCmd1,cmain.PrintCmd2,PrintTmpPath,cmain,false);
+if ok then result:=msgOK
+   else result:=msgFailed;
 end;
 
 function Tf_chart.cmd_SaveImage(format,fn,quality:string):string;

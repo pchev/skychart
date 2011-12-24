@@ -901,14 +901,14 @@ var count : integer;
     buf, dt, tm, tz, site, saved, savet : string;
 label exit;
 begin
-  saved := ShortDateFormat;
-  savet := ShortTimeFormat;
+  saved := DefaultFormatSettings.ShortDateFormat;
+  savet := DefaultFormatSettings.ShortTimeFormat;
   try
         result:=false;
         PurgeBuffer(LX200_port);
 
         //Set Date
-        ShortDateFormat := 'mm/dd/yy';
+        DefaultFormatSettings.ShortDateFormat := 'mm/dd/yy';
         buf := '#:SC '+DateToStr(Date)+'#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
@@ -922,7 +922,7 @@ begin
         ReadCom(LX200_port,buf,count);
 
         //Set Time
-        ShortTimeFormat := 'hh:mm:ss';
+        DefaultFormatSettings.ShortTimeFormat := 'hh:mm:ss';
         buf := '#:SL '+TimeToStr(Time)+'#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
@@ -965,8 +965,8 @@ begin
         ShowMessage('Telescope setting is now:'+crlf+'Site: ' + site + crlf+'Date: ' + dt + crlf+'Time: ' + tm +crlf+'Time zone: ' + tz+ '.');
 exit:
 finally
-  ShortDateFormat := saved;
-  ShortTimeFormat := savet;
+  DefaultFormatSettings.ShortDateFormat := saved;
+  DefaultFormatSettings.ShortTimeFormat := savet;
 end;
 end;
 

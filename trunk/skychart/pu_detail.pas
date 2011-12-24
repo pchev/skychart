@@ -115,7 +115,7 @@ end;
 
 procedure Tf_detail.HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
   var Handled: boolean);
-var i,p: integer;
+var i: integer;
     url,sra,sde,n: string;
 begin
   i:=strtointdef(src,-1);
@@ -187,7 +187,6 @@ begin
 end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
-var i: integer;
 begin
 SetLang;
 end;

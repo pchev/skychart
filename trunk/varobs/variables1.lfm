@@ -1,11 +1,11 @@
 object VarForm: TVarForm
-  Left = 360
+  Left = 220
   Height = 500
-  Top = 125
+  Top = 73
   Width = 800
   ActiveControl = Panel1
   Caption = 'Variable stars observer'
-  ClientHeight = 478
+  ClientHeight = 475
   ClientWidth = 800
   Font.Height = -11
   Font.Name = 'Default'
@@ -119,10 +119,10 @@ object VarForm: TVarForm
   OnCreate = FormCreate
   OnShow = FormShow
   ShowHint = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.3'
   object Grid1: TStringGrid
     Left = 0
-    Height = 406
+    Height = 403
     Hint = 'Right click on a line to show menu'
     Top = 72
     Width = 800
