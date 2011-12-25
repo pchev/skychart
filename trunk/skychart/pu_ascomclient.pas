@@ -103,6 +103,10 @@ type
     T : Variant;
     Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
     Latitude : single;                  // Observatory latitude
+    {$ifdef mswindows}
+    curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
+    cur_az,  cur_alt :double;           // current alt-az position in degrees
+    {$endif}
   public
     { Public declarations }
     procedure SetLang;
