@@ -4,7 +4,7 @@ Version 3.5 release Notes
   - Add Mercator projection. 
   - Cartesian and Mercator projection are rotated to the screen center for full sky coverage.
   - Change the default projection to Tangent for FOV up to 90 deg. and Mercator for widther fields.
-  - Limit the use of Arc projection to 300 deg. FOV.
+  - Limit the use of Arc projection to 250 deg. FOV.
 - New default star catalog based on Extended Hipparcos to replace the BSC and Sky2000.
 - Improved precision of the apparent coordinates (many thanks to P. Wallace for its help):
   - Star parallax
