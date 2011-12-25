@@ -1879,6 +1879,7 @@ end;
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
+var i:integer;
 begin
 try
 {$ifdef trace_debug}
@@ -1890,6 +1891,14 @@ planet.free;
 cdcdb.free;
 def_cfgsc.Free;
 cfgs.Free;
+if cfgm.ObsNameList<>nil then begin
+  try
+  for i:=0 to cfgm.ObsNameList.Count-1 do
+      if cfgm.ObsNameList.Objects[i]<>nil then cfgm.ObsNameList.Objects[i].Free;
+  except
+  end;
+  cfgm.ObsNameList.Free;
+end;
 cfgm.Free;
 def_cfgplot.Free;
 cfgp.Free;
@@ -5801,10 +5810,12 @@ end;
 j:=cfgm.ObsNameList.Count;
 WriteInteger(section,'ObsNameListCount',j);
 if j>0 then for i:=0 to j-1 do begin
-  WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
-  WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
-  WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
-  WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
+  if cfgm.ObsNameList.Objects[i]<>nil then begin
+    WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
+    WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
+    WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
+    WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
+  end;
 end;
 WriteBool(section,'IndiAutostart',def_cfgsc.IndiAutostart);
 WriteString(section,'IndiServerHost',def_cfgsc.IndiServerHost);
