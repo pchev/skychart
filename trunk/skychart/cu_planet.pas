@@ -1374,7 +1374,8 @@ BEGIN
 END ;
 
 PROCEDURE TPlanet.Comet(jd :Double; lightcor:boolean; VAR ar,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc : Double);
-VAR xs,ys,zs,rr,cxc,cyc,czc,n1 :Double;
+VAR xs,ys,zs,rr,cxc,cyc,czc,n1,ll :Double;
+    n:integer;
 BEGIN
 SunRect(jd,false,xs,ys,zs);
 OrbRect(jd,xc,yc,zc,r);
@@ -1400,13 +1401,18 @@ diam:=(max(0,1-ln(r))/max(1,comelem.Oh-2))*30/dist;
 { estimated tail length UA, personal empirical formula }
 Lc:= max(0,1-ln(r))/power(max(1,comelem.Oh),1.5);
 { apparent position of tail end}
-cxc:=xc+Lc*xc/r;
-cyc:=yc+Lc*yc/r;
-czc:=zc+Lc*zc/r;
-car:=arctan2((ys+cyc),(xs+cxc)) ;
-car:=Rmod(car+pi2,pi2);
-rc:=sqrt((cxc+xs)*(cxc+xs)+(cyc+ys)*(ys+cyc)+(czc+zs)*(czc+zs));
-cde:=arcsin((czc+zs)/rc);
+ll:=lc; n:=0;
+repeat
+  cxc:=xc+ll*xc/r;
+  cyc:=yc+ll*yc/r;
+  czc:=zc+ll*zc/r;
+  car:=arctan2((ys+cyc),(xs+cxc)) ;
+  car:=Rmod(car+pi2,pi2);
+  rc:=sqrt((cxc+xs)*(cxc+xs)+(cyc+ys)*(ys+cyc)+(czc+zs)*(czc+zs));
+  cde:=arcsin((czc+zs)/rc);
+  ll:=ll/2;
+  inc(n);
+until (AngularDistance(ar,de,car,cde)<pid2) or (n>5);
 END ;
 
 PROCEDURE TPlanet.InitAsteroid(epoch,mh,mg,ma,ap,an,ic,ec,sa,eq: double; nam:string);
