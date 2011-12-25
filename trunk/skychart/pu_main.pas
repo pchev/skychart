@@ -5319,7 +5319,7 @@ if Config_Version < '3.5f' then begin
   end;
 end;
 {$endif}
-if  Config_Version < '3.5h' then begin
+if  Config_Version < '3.5i' then begin
   def_cfgsc.projname[0]:='TAN';
   def_cfgsc.projname[1]:='TAN';
   def_cfgsc.projname[2]:='TAN';
