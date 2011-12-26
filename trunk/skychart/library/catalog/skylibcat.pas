@@ -517,7 +517,7 @@ case projtype of
     sofa_c2s(pr,xx,yy);
     ar := rad2deg*xx;
     de := rad2deg*yy;
-    if de>0 then de:=min(89.999,de) else de:=max(-89.999,de);
+    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
     end;
 'M' : begin
     yy:=2*arctan(exp(deg2rad*yy))-pid2;
@@ -526,7 +526,7 @@ case projtype of
     sofa_c2s(pr,xx,yy);
     ar := rad2deg*xx;
     de := rad2deg*yy;
-    if de>0 then de:=min(89.999,de) else de:=max(-89.999,de);
+    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
     end;
 'S' : begin
     dc:=degtorad(dc);
@@ -945,7 +945,7 @@ for i:=0 to 15 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 15 do begin
     de:=y1+j*dde ;
-    if abs(de) >= 89.9 then continue;
+    if abs(de) >= 89.99999 then continue;
     arp:=ar; dep:=de;
     precession(JDChart,JDCatalog,arp,dep);
     Findregion30(arp,dep,Sm);
