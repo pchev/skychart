@@ -26,6 +26,5 @@ install -m 755 -d $destdir/share/skychart
 
 InstCat catalog_gcvs $destdir/share/skychart
 InstCat catalog_idx  $destdir/share/skychart
-InstCat catalog_sky2000 $destdir/share/skychart
 InstCat catalog_tycho2 $destdir/share/skychart
 InstCat catalog_wds $destdir/share/skychart

@@ -24,7 +24,6 @@ install -m 755 -d $destdir
 
 InstCat catalog_gcvs $destdir
 InstCat catalog_idx  $destdir
-InstCat catalog_sky2000 $destdir
 InstCat catalog_tycho2  $destdir
 InstCat catalog_wds  $destdir
 
