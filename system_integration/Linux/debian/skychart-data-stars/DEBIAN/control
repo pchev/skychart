@@ -6,5 +6,5 @@ Maintainer: Patrick Chevalley <pch@freesurf.ch>
 Architecture: all
 Depends: skychart
 Description: Star catalog data for Skychart / Cartes du Ciel planetarium software
- Contain the catalogs: Sky2000, Tycho2, GCVS, WDS and search index for SAO, BD, HD, GC
+ Contain the catalogs: Tycho2, GCVS, WDS and search index for SAO, BD, HD, GC
  .
