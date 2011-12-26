@@ -1587,7 +1587,7 @@ if cfgsc.ShowCometValid then begin
       projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5]) then begin
+        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and((cfgsc.SimNb>1)or(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5])) then begin
           lid:=GetId(cfgsc.CometName[j,i,1]);
           sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
           if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
