@@ -45,11 +45,19 @@ Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
 Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
+procedure SetXHIPpath(path : string);
 
 implementation                          
 
 const blank='               ';
 var dummy_double : double;
+    XHIPpath: string;
+
+
+procedure SetXHIPpath(path : string);
+begin
+XHIPpath:=noslash(path);
+end;
 
 Procedure FindIdxStr(idx, id : string; var ar,de:double; var ok:boolean);
 Type idxfil = record
@@ -245,79 +253,20 @@ FindIdx(BSCpath+slashchar+'gc.idx',id,ar,de,ok);
 end;
 
 Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean);
-var x1,x2,y1,y2 : double;
-    bscrok : boolean;
-    lin : bscrec;
+var buf:string;
 begin
-x1 := 0;
-x2 := 24;
-y1 := -89.9997;
-y2 := 89.9997;
-OpenBSC(x1,x2,y1,y2,BSCrok);
-if not BSCrok then begin ok:=false; exit; end;
-ok := false;
-repeat
-  ReadBSC(lin,BSCrok);
-  if not BSCrok then break;
-  if lin.bs=id then ok:=true;
-until ok ;
-CloseBSC;
-ar:=lin.ar/100000/15;
-de:=lin.de/100000;
+buf:='HR'+inttostr(id);
+FindNumGcat(XHIPpath,'ixhr',buf,9,ar,de,ok);
 end;
 
 Procedure FindNumBayer(id:string ;var ar,de:double; var ok:boolean);
-var x1,x2,y1,y2 : double;
-    bscrok : boolean;
-    lin : bscrec;
-    cons,bayer : string;
 begin
-bayer:=lowercase(trim(copy(id,1,pos(' ',id))));
-cons:=lowercase(trim(copy(id,pos(' ',id),99)));
-x1 := 0;
-x2 := 24;
-y1 := -89.9997;
-y2 := 89.9997;
-OpenBSC(x1,x2,y1,y2,BSCrok);
-if not BSCrok then begin ok:=false; exit; end;
-ok := false;
-repeat
-  ReadBSC(lin,BSCrok);
-  if not BSCrok then break;
-//  if (lowercase(trim(lin.cons))=cons)and(lowercase(trim(copy(lin.bayer,1,length(bayer))))=bayer) then ok:=true;
-  if (lowercase(trim(lin.cons))=cons)and(lowercase(trim(lin.bayer))=bayer) then ok:=true;
-until ok ;
-CloseBSC;
-ar:=lin.ar/100000/15;
-de:=lin.de/100000;
+FindNumGcat(XHIPpath,'ixhr',id,9,ar,de,ok);
 end;
 
 Procedure FindNumFlam(id:string ;var ar,de:double; var ok:boolean);
-var x1,x2,y1,y2 : double;
-    bscrok : boolean;
-    lin : bscrec;
-    cons : string;
-    flam : byte;
 begin
-cons:=trim(copy(id,1,pos(' ',id)));
-if Isnumber(cons) then flam:=strtoint(cons)
-                  else begin ok:=false; exit; end;
-cons:=lowercase(trim(copy(id,pos(' ',id),99)));
-x1 := 0;
-x2 := 24;
-y1 := -89.9997;
-y2 := 89.9997;
-OpenBSC(x1,x2,y1,y2,BSCrok);
-if not BSCrok then begin ok:=false; exit; end;
-ok := false;
-repeat
-  ReadBSC(lin,BSCrok);
-  if not BSCrok then break;
-  if (lowercase(trim(lin.cons))=cons)and(lin.flam=flam) then ok:=true;
-until ok ;
-CloseBSC;
-ar:=lin.ar/100000/15;
-de:=lin.de/100000;
+FindNumGcat(XHIPpath,'ixhr',id,9,ar,de,ok);
 end;
 
 Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
