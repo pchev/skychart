@@ -13,8 +13,8 @@ const sep='|';
       hipmax=125000;
       hdmax=360000;
       hrmax=10000;
-var bufin, bufout, buf : string;
-    fmain,fphot,fbib,fout : textfile;
+var bufin, bufout, bufhr, buf, buffl,bufbay : string;
+    fmain,fphot,fbib,fout,fhr : textfile;
     hipn,hdn,hrn,i,n,maxname:integer;
     hd: array[0..hipmax]of integer;
     bd: array[0..hipmax]of string;
@@ -217,6 +217,8 @@ begin
   getStarName;
   AssignFile(fout,'cdc_xhip.dat');
   Rewrite(fout);
+  AssignFile(fhr,'cdc_hr.dat');
+  Rewrite(fhr);
   writeheader;
   AssignFile(fmain,'xhip_main.dat');
   reset(fmain);
@@ -230,6 +232,7 @@ begin
     inc(n);
     if (n mod 10000)=0 then write('.');
     bufout:='';
+    bufhr:='';
     readln(fmain,bufin);
     buf:=copyp(bufin,1,6); //HIP
     bufout:=bufout+buf+sep;
@@ -246,11 +249,14 @@ begin
     buf:=copy(buf+blank,1,4); //HR
     hrn:=i;
     bufout:=bufout+buf+sep;
+    if hrn>0 then bufhr:=bufhr+'HR'+buf+sep;
     i:=fl[hdn];
     if i>0 then buf:=inttostr(i) else buf:='';
     buf:=copy(buf+blank,1,3); //Flamsteed
+    buffl:=buf;
     bufout:=bufout+buf+sep;
     buf:=copy(bayer[hdn]+blank,1,5); // Bayer
+    bufbay:=buf;
     bufout:=bufout+buf+sep;
 //    buf:=copy(cst[hdn]+blank,1,3); // Constellation
 //    bufout:=bufout+buf+sep;
@@ -259,8 +265,10 @@ begin
     bufout:=bufout+buf+sep;
     buf:=copyp(bufin,59,70); //RA ICRS J1991.25
     bufout:=bufout+buf+sep;
+    if hrn>0 then bufhr:=bufhr+buf+sep;
     buf:=copyp(bufin,72,83); //DEC ICRS J1991.25
     bufout:=bufout+buf+sep;
+    if hrn>0 then bufhr:=bufhr+buf+sep;
     buf:=copyp(bufin,85,90); //Px
     bufout:=bufout+buf+sep;
     buf:=copyp(bufin,92,99); //pmRA
@@ -293,6 +301,19 @@ begin
     readln(fbib,bufin);
     buf:=copyp(bufin,8,10); //Const
     bufout:=bufout+buf+sep;
+    if hrn>0 then begin
+       bufbay:=stringreplace(bufbay,'.',' ',[]);
+       if trim(buffl)>'' then begin
+          buffl:=copy(stringreplace(buffl+buf,' ','',[rfreplaceall])+'       ',1,7);
+          bufhr:=bufhr+buffl+sep;
+       end else
+          bufhr:=bufhr+'       '+sep; 
+       if trim(bufbay)>'' then begin
+          bufbay:=copy(stringreplace(bufbay+buf,' ','',[rfreplaceall])+'         ',1,9);
+          bufhr:=bufhr+bufbay+sep;
+       end else
+          bufhr:=bufhr+'         '+sep;
+    end;
 //    buf:=copyp(bufin,28,75); //Name
 //    bufout:=bufout+buf+sep;
 //    buf:=copyp(bufin,184,199); //CompId
@@ -300,9 +321,11 @@ begin
     buf:=copy(Starname[hrn]+blank+blank,1,maxname); //star  name
     bufout:=bufout+buf+sep;
     writeln(fout,bufout);
+    if hrn>0 then writeln(fhr,bufhr);
   end;
   writeln;
   CloseFile(fout);
+  CloseFile(fhr);
   CloseFile(fmain);
   CloseFile(fphot);
   CloseFile(fbib);

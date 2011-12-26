@@ -65,7 +65,7 @@ var
 
 Function IsBSCpath(path : string) : Boolean;
 begin
-result:= FileExists(slash(path)+'01.dat');
+result:= DirectoryExists(slash(path));
 end;
 
 procedure SetBSCpath(path : string);

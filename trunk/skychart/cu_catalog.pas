@@ -2371,31 +2371,22 @@ try
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
                      FindNumCPD(id,ra,dec,result) ;
                      end;
-        S_HR       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_HR       : begin
+                     SetXHIPPath(cfgcat.StarCatPath[DefStar-BaseStar]);
                      FindNumHR(strtointdef(id,0),ra,dec,result) ;
                      end;
-{        S_Const    : begin
-                     FindNumCon(strtointdef(id,0),ra,dec,result);
-                     end; }
-        S_Bayer    : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_Bayer    : begin
+                     SetXHIPPath(cfgcat.StarCatPath[DefStar-BaseStar]);
                      FindNumBayer(id,ra,dec,result) ;
                      end;
-        S_Flam     : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
-                     SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
+        S_Flam     : begin
+                     SetXHIPPath(cfgcat.StarCatPath[DefStar-BaseStar]);
                      FindNumFlam(id,ra,dec,result) ;
                      end;
         S_SAC      : if IsSACPath(cfgcat.NebCatPath[sac-BaseNeb]) then begin
                      SetSACPath(cfgcat.NebCatPath[sac-BaseNeb]);
                      FindNumSAC(id,ra,dec,result) ;
                      end;
-{       S_SIMBAD   : begin
-                     FindNumSIMBAD(id,ra,dec,result) ;
-                     end;
-        S_NED      : begin
-                     FindNumNED(id,ra,dec,result) ;
-                     end;}
         S_WDS      : if IsWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]) then begin
                      SetWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]);
                      FindNumWDS(id,ra,dec,result) ;
@@ -2411,9 +2402,6 @@ try
                      SetUSNOApath(cfgcat.StarCatPath[usnoa-BaseStar]);
                      FindNumUSNOA(id,ra,dec,result) ;
                      end;
-{       S_Common   : begin
-                     FindNumObjectName(strtointdef(id,0),ra,dec,result);
-                     end; }
    end;
    ra:=deg2rad*15*ra;
    dec:=deg2rad*dec;
