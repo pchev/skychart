@@ -4934,6 +4934,10 @@ msgstr "Перетворення"
 msgid "Translator:"
 msgstr "Перекладач:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
 msgstr "Прозорий тип лінії (затьмарення)"
@@ -5113,6 +5117,10 @@ msgstr "Ідент.Користувача:"
 #: u_translation.rsusername
 msgid "User name"
 msgstr "І'мя користувача"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

@@ -5341,6 +5341,10 @@ msgstr "Átalakítás"
 msgid "Translator:"
 msgstr "Fordító:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 #| msgid "Transparent line mode (occultation)"
 msgid "Transparent line mode (occultations)"
@@ -5536,6 +5540,10 @@ msgstr "Felhasználó azonosító:"
 #| msgid "User Name"
 msgid "User name"
 msgstr "Felhasználó név:"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

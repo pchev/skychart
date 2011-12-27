@@ -5310,3 +5310,11 @@ msgstr ""
 msgid "Show DSO lines"
 msgstr ""
 
+#: u_translation:rstransparency
+msgid "Transparency"
+msgstr ""
+
+#: u_translation:rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
+

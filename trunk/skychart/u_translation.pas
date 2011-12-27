@@ -1354,6 +1354,8 @@ resourcestring
   rsOneEvery = 'One every';
   rsComponent = 'Component';
   rsShowDSOLines = 'Show DSO lines';
+  rsTransparency = 'Transparency';
+  rsUseSocksProx = 'Use Socks proxy';
 
 implementation
 
