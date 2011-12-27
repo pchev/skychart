@@ -5773,6 +5773,10 @@ msgstr "Vörpun"
 msgid "Translator:"
 msgstr "Þýðandi:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 #, fuzzy
 #| msgid "Transparent line mode (occultation)"
@@ -5984,6 +5988,10 @@ msgstr "Notandi:"
 #| msgid "User Name"
 msgid "User name"
 msgstr "Notendanafn"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 #, fuzzy

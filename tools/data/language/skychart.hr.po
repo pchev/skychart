@@ -4932,6 +4932,10 @@ msgstr "Transformacija"
 msgid "Translator:"
 msgstr "Prijevod na Hrvatski: Zoran Novak"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
 msgstr "Proziran linijski mod (pomrčine)"
@@ -5111,6 +5115,10 @@ msgstr ""
 #: u_translation.rsusername
 msgid "User name"
 msgstr "Ime korisnika"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

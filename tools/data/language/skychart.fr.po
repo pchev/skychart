@@ -3,8 +3,8 @@
 # pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-17 18:22+0100\n"
-"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"
+"PO-Revision-Date: 2011-12-27 17:27+0100\n"
+"Last-Translator: pch\n"
 "Project-Id-Version: skychart.fr\n"
 "POT-Creation-Date: \n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
@@ -4938,6 +4938,10 @@ msgstr "Transformation"
 msgid "Translator:"
 msgstr "Traducteur:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr "Transparence"
+
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
 msgstr "Mode transparent (occultation)"
@@ -5117,6 +5121,10 @@ msgstr "Utilisateur"
 #: u_translation.rsusername
 msgid "User name"
 msgstr "Utilisateur"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr "Utiliser le proxy Socks"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

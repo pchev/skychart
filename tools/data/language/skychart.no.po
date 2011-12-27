@@ -4930,6 +4930,10 @@ msgstr "Transformasjon"
 msgid "Translator:"
 msgstr "Oversetter:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
 msgstr "Transparent linjemodus (okkultasjoner)"
@@ -5109,6 +5113,10 @@ msgstr "Bruker-id:"
 #: u_translation.rsusername
 msgid "User name"
 msgstr "Brukernavn"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

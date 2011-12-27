@@ -5045,6 +5045,10 @@ msgstr ""
 msgid "Translator:"
 msgstr "Μεταφραστής:"
 
+#: u_translation.rstransparency
+msgid "Transparency"
+msgstr ""
+
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
 msgstr ""
@@ -5227,6 +5231,10 @@ msgstr "ID χρήστη:"
 #: u_translation.rsusername
 msgid "User name"
 msgstr "Όνομα χρήστη"
+
+#: u_translation.rsusesocksprox
+msgid "Use Socks proxy"
+msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

@@ -137,6 +137,7 @@ Caption:=rsInternet;
 Page1.caption:=rsProxy;
 GroupBox1.caption:=rsHTTPProxy;
 httpproxy.caption:=rsUseHTTPProxy;
+SocksProxy.Caption:=rsUseSocksProx;
 Label2.caption:=rsProxyHost;
 Label3.caption:=rsProxyPort;
 Label4.caption:=rsUserName;

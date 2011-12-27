@@ -144,6 +144,7 @@ const cdcversion = 'Version 3.5-svn';
       blank15='               ';
       blank=' ';
       tab=#09;
+      Ellipsis='...';
       deftxt = '?';
       f0='0';
       f1='0.0';
