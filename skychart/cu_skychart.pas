@@ -1065,7 +1065,7 @@ var rec:GcatRec;
   imgfile: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
-  al: TLabelAlign;
+  al,alsac: TLabelAlign;
   saveusebmp: boolean;
 
   Procedure Drawing;
@@ -1120,6 +1120,7 @@ var rec:GcatRec;
       Fplot.cfgplot.UseBMP:=false;
       FPlot.cnv:=Fplot.cbmp.Canvas;
     end;
+    alsac:=laTopLeft;
     if Fcatalog.OpenNeb then
       while Fcatalog.readneb(rec) do
         begin
@@ -1172,8 +1173,11 @@ var rec:GcatRec;
                     Drawing;
                   end;
               if rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
-                 if rec.options.ShortName='SAC' then al:=laLeft
-                                                else al:=laRight;
+                 if rec.options.ShortName='SAC' then begin
+                       al:=alsac;
+                       inc(alsac);
+                       if alsac>laBottomRight then alsac:=laTopLeft;
+                   end else al:=laRight;
                  SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al);
               end;
             end;
