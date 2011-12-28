@@ -4795,6 +4795,7 @@ csc.projtype:=buf[1];
 csc.ProjPole:=ReadInteger(section,'ProjPole',csc.ProjPole);
 csc.FlipX:=ReadInteger(section,'FlipX',csc.FlipX);
 csc.FlipY:=ReadInteger(section,'FlipY',csc.FlipY);
+if csc.FlipY<0 then csc.FlipX:=1;
 csc.CoordExpertMode:=ReadBool(section,'CoordExpertMode',csc.CoordExpertMode);
 csc.PMon:=ReadBool(section,'PMon',csc.PMon);
 csc.YPMon:=ReadFloat(section,'YPMon',csc.YPMon);

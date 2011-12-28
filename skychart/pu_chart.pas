@@ -1341,6 +1341,7 @@ begin
  WriteTrace(caption+' FlipxExecute');
 {$endif}
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
+ if sc.cfgsc.FlipX<0 then sc.cfgsc.FlipY:=1;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
@@ -1351,6 +1352,7 @@ begin
  WriteTrace(caption+' FlipyExecute');
 {$endif}
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
+ if sc.cfgsc.FlipY<0 then sc.cfgsc.FlipX:=1;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
@@ -3322,8 +3324,8 @@ case n of
  8 : sc.MoveChart(1,-1,movefactor);
  9 : sc.MoveChart(-1,1,movefactor);
  10 : sc.MoveChart(-1,-1,movefactor);
- 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
- 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
+ 11 : begin sc.cfgsc.FlipX:=-sc.cfgsc.FlipX; if sc.cfgsc.FlipX<0 then sc.cfgsc.FlipY:=1; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
+ 12 : begin sc.cfgsc.FlipY:=-sc.cfgsc.FlipY; if sc.cfgsc.FlipY<0 then sc.cfgsc.FlipX:=1; if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);end;
  13 : result:=cmd_SetCursorPosition(strtointdef(arg[1],-1),strtointdef(arg[2],-1));
  14 : sc.MovetoXY(xcursor,ycursor);
  15 : begin sc.zoom(zoomfactor);sc.MovetoXY(xcursor,ycursor);end;
