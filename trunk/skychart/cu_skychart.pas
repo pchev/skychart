@@ -261,7 +261,6 @@ if isWin98 and (Fplot.cfgplot.starplot=1) then begin
    cfgsc.msg:='Cannot use this star drawing mode with Win98. Change star drawing mode to Line or Parametric.';
 end;
 {$endif}
-
   InitObservatory;
   InitTime;
   InitChart;
@@ -539,6 +538,11 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
 {$endif}
+// max altaz fov
+if cfgsc.ProjPole=Altaz then begin
+   cfgsc.fov:=min(cfgsc.fov,deg2rad*250);
+   if cfgsc.fov>pi then cfgsc.horizonopaque:=true;
+end;
 cfgsc.xmin:=cfgsc.LeftMargin;
 cfgsc.ymin:=cfgsc.TopMargin;
 cfgsc.xmax:=Fplot.cfgchart.width-cfgsc.RightMargin;
@@ -624,11 +628,6 @@ begin
 TrackAltAz:=false;
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
-// max altaz fov
-if cfgsc.ProjPole=Altaz then begin
-   cfgsc.fov:=min(cfgsc.fov,deg2rad*250);
-   if cfgsc.fov>pi then cfgsc.horizonopaque:=true;
-end;
 // clipping limit
 Fplot.cfgchart.hw:=Fplot.cfgchart.width div 2;
 Fplot.cfgchart.hh:=Fplot.cfgchart.height div 2;
