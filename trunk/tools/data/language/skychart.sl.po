@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-27 13:31+0100\n"
+"PO-Revision-Date: 2011-12-28 10:19+0100\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -219,7 +219,7 @@ msgstr "Argument prisončja"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr "V bližini obstoječega pložaja"
+msgstr "V bližini obstoječega položaja"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -375,7 +375,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Binaredn indeksni katalog"
+msgstr "Dvojiški indeksni katalog"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -903,11 +903,11 @@ msgstr "Kopiraj"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr "Kopirajte koordinate"
+msgstr "Kopiraj koordinate"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr "Kopirajte iz:"
+msgstr "Kopiraj iz:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -1205,7 +1205,7 @@ msgstr "Stopinje, minute, sekunde"
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
-msgstr "Zakasnitev med okviri"
+msgstr "Zakasnitev med sličicami"
 
 #: u_translation.rsdelete
 msgid "Delete"
@@ -1383,7 +1383,7 @@ msgstr "Prikaži oznake"
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "Prikaži črto obzorja"
+msgstr "Prikaži krajevno črto obzorja"
 
 #: u_translation.rsdistance
 msgid "Distance"
@@ -1867,7 +1867,7 @@ msgstr "Pisave"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Za velik katalog, vedno izberi Binary. Za male podatkovne nize, ki se pogosto spreminjajo, izberi Text. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
+msgstr "Za velik katalog, vedno izberite Dvojiški. Za male podatkovne nize, ki se pogosto spreminjajo, izberite Besedilne. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -2521,7 +2521,7 @@ msgstr "Poveži vse karte"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
-msgstr "Poslušaj na vratih: %s"
+msgstr "Poslušam na vratih: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
@@ -2561,15 +2561,15 @@ msgstr "Naloži projekt"
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
-msgstr "Lokalno obzorje"
+msgstr "Krajevno obzorje"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Ime datoteke lokalnega obzorja :"
+msgstr "Ime datoteke krajevnega obzorja :"
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr "Lokalni zvezdni čas"
+msgstr "Krajevni zvezdni čas"
 
 #: u_translation.rslocationcode
 msgid "Location code"
@@ -3225,7 +3225,7 @@ msgstr "V živo DSS slike"
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
-msgstr "V živo strežniki slik"
+msgstr "Spletni strežniki slik"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
@@ -3341,7 +3341,7 @@ msgstr "Geslo"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr "Pastel"
+msgstr "Pastelna"
 
 #: u_translation.rspath
 msgid "Path"
@@ -3349,7 +3349,7 @@ msgstr "Pot"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Pod do shranjene datoteke:"
+msgstr "Pot do shranjene datoteke:"
 
 #: u_translation.rspathwidth
 msgid "Path width"
@@ -3675,11 +3675,11 @@ msgstr "Nastavitve projekcije"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr "Pravilni premik  je desni dvig"
+msgstr "Pravilni premik v desni dvig"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr "Pravilni premik je spuščanje"
+msgstr "Pravilni premik v spuščanju"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
@@ -3891,7 +3891,7 @@ msgstr "Odstrani vse oznake"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr "Odstrani zadnji obroče"
+msgstr "Odstrani zadnji obroč"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
@@ -4147,7 +4147,7 @@ msgstr "Izberi"
 
 #: u_translation.rsselectall
 msgid "Select all"
-msgstr "Izberi vse"
+msgstr "Izberite vse"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
@@ -4159,11 +4159,11 @@ msgstr "Izberi barvo (črna je privzeta za katalog)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr "Izberi zrcalno stran"
+msgstr "Izberite zrcalno stran"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "Izberi plošlo iz seznama"
+msgstr "Izberi ploščo iz seznama"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4171,15 +4171,15 @@ msgstr "Izberi polja za uporabo in njihov položaj v besedilni datoteki."
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Izberi sistemski tiskalnik in možnosti za uporabo"
+msgstr "Izberite sistemski tiskalnik in možnosti, ki jih želite uporabljati"
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
-msgstr "Izberi vmestnik teleskopa"
+msgstr "Izberite vmestnik teleskopa"
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr "Izberi tip predmeta v tvojem katalogu"
+msgstr "Izberite tip predmeta v svojem katalogu"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4259,7 +4259,7 @@ msgstr "Nastavi vrtljivost"
 
 #: u_translation.rssettargetto
 msgid "Set target to %s"
-msgstr "Nastavi clij na %s"
+msgstr "Nastavi cilj na %s"
 
 #: u_translation.rssettelescope
 msgid "Set TelescopeTime"
@@ -4363,7 +4363,7 @@ msgstr "Prikaži črte"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "Prikaži znak"
+msgstr "Prikaži tarčo"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
@@ -4375,7 +4375,7 @@ msgstr "Prikaži predmete globokega vesolja"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr "Prikaži predmete pod "
+msgstr "Prikaži predmete pod obzorjem"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
@@ -4839,7 +4839,7 @@ msgstr "Datoteka ni prepoznana."
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Ta program je svoboden program. Lahko ga podelite drugim in/ali ga spreminjate pod pogoji GNU General Public License."
+msgstr "Ta program je prost program. Lahko ga podelite drugim in/ali ga spreminjate pod pogoji GNU General Public License."
 
 #: u_translation.rsthursday
 msgid "Thu."
@@ -4935,7 +4935,7 @@ msgstr "Prevajalec:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Prozornost"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -5103,7 +5103,7 @@ msgstr "Uporabi živo sliko Sonca iz SDO ali SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "Izberi samo kataloge iz iste skupine"
+msgstr "Izberite samo kataloge iz iste skupine"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
@@ -5119,7 +5119,7 @@ msgstr "Uporabniško ime"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Uporabi Socks posredniški strežnik"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -5223,7 +5223,7 @@ msgstr "VO kataloški brskalnik"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr "Ali hočeš spremljati predmet pred vzhodom?"
+msgstr "Ali želite spremljati predmet pred njegovim vzhodom?"
 
 #: u_translation.rswarning
 msgid "Warning!"
@@ -5299,7 +5299,7 @@ msgstr "Leto"
 
 #: u_translation.rsyears
 msgid "years"
-msgstr "leta"
+msgstr "let"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
@@ -5311,7 +5311,7 @@ msgstr "Sedaj si pripravljen na prikaz asteroida za dano časovno obdobje."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Če opazuješ iz višje gore, je črta obzorja nižje kot na višini morja."
+msgstr "Če opazujete višje na gori, je črta obzorja nižje kot na višini morja."
 
 #: u_translation.rszenith
 msgid "Zenith"
