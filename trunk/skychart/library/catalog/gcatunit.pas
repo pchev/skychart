@@ -546,7 +546,10 @@ version:=catversion;
 //?? some star catalog not sorted by mag or missing mag ??
 // filter mean open next catalog file if the read mag if fainter than limit
 // otherwise it finish to read the file.
-filter:=(cattype=1)and(catversion<>rtstar);
+// the change 1365 that add this restriction: http://svn.origo.ethz.ch/wsvn/skychart?op=comp&compare[]=%2Ftrunk@1364&compare[]=%2Ftrunk@1365
+// rollback for now :
+//filter:=(cattype=1)and(catversion<>rtstar);
+filter:=(cattype=1);
 end;
 
 Function GetRecCard(p: integer):cardinal ;
