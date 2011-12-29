@@ -874,6 +874,7 @@ var rec:GcatRec;
   firstcat:TSname;
   gk: string;
   al: TLabelAlign;
+  p: coordvector;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw stars');
@@ -917,8 +918,11 @@ if Fcatalog.OpenStar then
  if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
  end;
- precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
- if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
+ sofa_S2C(rec.ra,rec.dec,p);
+ PrecessionV(rec.options.EquinoxJD,cfgsc.JDChart,p);
+ if cfgsc.ApparentPos then apparent_equatorialV(p,cfgsc,true,true);
+ sofa_c2s(p,rec.ra,rec.dec);
+ rec.ra:=rmod(rec.ra+pi2,pi2);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin

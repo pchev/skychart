@@ -61,6 +61,7 @@ procedure Paralaxe(SideralTime,dist,ar1,de1 : double; var ar,de,q : double; c: T
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
 PROCEDURE PrecessionFK5(ti,tf : double; VAR ari,dei : double);
 PROCEDURE Precession(j0,j1 : double; VAR ra,de : double);
+Procedure PrecessionV(j0,j1: double; var p: coordvector);
 procedure PrecessionEcl(ti,tf : double; VAR l,b : double);
 PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skychart);
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
@@ -70,6 +71,7 @@ function ecliptic(j:double; nuto:double=0):double;
 procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberrationme(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
+procedure apparent_equatorialV(var p1:coordvector; c: Tconf_skychart; aberration,lightdeflection:boolean);
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
@@ -104,6 +106,7 @@ Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
 procedure sofa_PM(p:coordvector; var r:double);
 procedure sofa_S2C(theta,phi: double; var c: coordvector);
 procedure sofa_C2S(p: coordvector; var theta,phi: double);
+procedure sofa_CP(p: coordvector; var c: coordvector);
 Procedure sofa_SXP(s: double; p: coordvector;  var sp: coordvector);
 Procedure sofa_PN(p:coordvector; var r:double; var u:coordvector);
 Procedure sofa_PMP(a,b:coordvector; var amb:coordvector);
@@ -1028,32 +1031,39 @@ end;
 end;
 
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
-var da,dd,p1dv,pde,pdep1,w: double;
+var p: coordvector;
+begin
+sofa_S2C(ra,de,p);
+apparent_equatorialV(p,c,aberration,lightdeflection);
+sofa_c2s(p,ra,de);
+ra:=rmod(ra+pi2,pi2);
+end;
+
+procedure apparent_equatorialV(var p1:coordvector; c: Tconf_skychart; aberration,lightdeflection:boolean);
+var ra,de,da,dd,p1dv,pde,pdep1,w: double;
     cra,sra,cde,sde,ce,se,te,cp,sp,cls,sls: extended;
-    p1,p2: coordvector;
+    p2: coordvector;
     i: integer;
 begin
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
     // rotate using nutation matrix
-    sofa_S2C(ra,de,p1);
     sofa_RXP(c.NutMAT,p1,p2);
-    sofa_C2S(p2,ra,de);
+    sofa_CP(p2,p1);
 end;
 //aberration
 if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
    if c.abm then begin
      // "communicated by Patrick Wallace, RAL Space, UK"
-     // geocentric unit vector to the star
-     sofa_S2C(ra,de,p1);
      // relativistic term
      p1dv := sofa_Pdp ( p1, c.abv );
      w := 1.0 + p1dv / ( c.ab1 + 1.0 );
      // add Earth velocity vector to star vector
      for i:=1 to 3 do
         p2[i] := c.ab1*p1[i] + w*c.abv[i];
-     sofa_C2S(p2,ra,de);
+     sofa_CP(p2,p1);
    end else begin
+    sofa_C2S(p1,ra,de);
     //meeus91 22.3
     sincos(ra,sra,cra);
     sincos(de,sde,cde);
@@ -1065,20 +1075,19 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
     dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
     ra:=ra+da;
     de:=de+dd;
+    sofa_S2C(ra,de,p1);
   end;
 end;
 // Sun light deflection
 if lightdeflection and c.asl then begin
   // "communicated by Patrick Wallace, RAL Space, UK"
-  sofa_S2C(ra,de,p1);
   pde := sofa_Pdp( p1, c.ehn );
   pdep1 := 1.0 + pde;
   w := c.gr2e / max ( pdep1, 1.0e-5 );
   for i:=1 to 3 do
      p2[i] := p1[i] + ( w * ( c.ehn[i] - pde * p1[i] ) );
-  sofa_C2S(p2,ra,de);
+  sofa_CP(p2,p1);
 end;
-ra:=rmod(ra+pi2,pi2);
 end;
 
 procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
@@ -1088,28 +1097,27 @@ var da,dd,p1dv,pde,pdep1,w: double;
     NutMATR : rotmatrix;
     i: integer;
 begin
+sofa_S2C(ra,de,p1);
 // nutation
 if (c.nutl<>0)or(c.nuto<>0) then begin
   // rotate using transposed nutation matrix
-  sofa_S2C(ra,de,p1);
   sofa_TR(c.NutMAT,NutMATR);
   sofa_RXP(NutMATR,p1,p2);
-  sofa_C2S(p2,ra,de);
+  sofa_CP(p2,p1);
 end;
 //aberration
 if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
    if c.abm then begin
      // "communicated by Patrick Wallace, RAL Space, UK"
-     // geocentric unit vector to the star
-     sofa_S2C(ra,de,p1);
      // relativistic term
      p1dv := sofa_Pdp ( p1, c.abv );
      w := 1.0 + p1dv / ( c.ab1 + 1.0 );
      // substract Earth velocity vector from star vector
      for i:=1 to 3 do
         p2[i] := p1[i]/c.ab1 - w*c.abv[i];
-     sofa_C2S(p2,ra,de);
+     sofa_CP(p2,p1);
    end else begin
+      sofa_C2S(p1,ra,de);
       //meeus91 22.3
       sincos(ra,sra,cra);
       sincos(de,sde,cde);
@@ -1121,19 +1129,20 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
       dd:=-abek*(cls*ce*(te*cde-sra*sde)+cra*sde*sls) + c.abe*abek*(cp*ce*(te*cde-sra*sde)+cra*sde*sp);
       ra:=ra-da;
       de:=de-dd;
+      sofa_S2C(ra,de,p1);
    end;
 end;
 // Sun light deflection
 if lightdeflection and c.asl then begin
   // "communicated by Patrick Wallace, RAL Space, UK"
-  sofa_S2C(ra,de,p1);
   pde := sofa_Pdp( p1, c.ehn );
   pdep1 := 1.0 + pde;
   w := c.gr2e / max ( pdep1, 1.0e-5 );
   for i:=1 to 3 do
      p2[i] := p1[i] - ( w * ( c.ehn[i] - pde * p1[i] ) );
-  sofa_C2S(p2,ra,de);
+  sofa_CP(p2,p1);
 end;
+sofa_C2S(p1,ra,de);
 ra:=rmod(ra+pi2,pi2);
 end;
 
@@ -1794,17 +1803,25 @@ end;
 ////////////// Finally the precession function for CdC
 
 Procedure Precession(j0,j1: double; var ra,de: double);
-var p,rp: coordvector;
+var p: coordvector;
+begin
+if abs(j0-j1)<0.01 then exit; // no change
+sofa_S2C(ra,de,p);
+PrecessionV(j0,j1,p);
+sofa_c2s(p,ra,de);
+ra:=rmod(ra+pi2,pi2);
+end;
+
+Procedure PrecessionV(j0,j1: double; var p: coordvector);
+var rp: coordvector;
     r,wm1,wm2: rotmatrix;
     oncache: boolean;
 begin
 if abs(j0-j1)<0.01 then exit; // no change
 oncache:= (prec_j0=j0) and (prec_j1=j1);
 if oncache then begin
-  sofa_S2C(ra,de,p);
   sofa_rxp(prec_r,p,rp);
-  sofa_c2s(rp,ra,de);
-  ra:=rmod(ra+pi2,pi2);
+  sofa_cp(rp,p);
 end else begin
   if j0=jd2000 then begin       // from j2000
     ltp_PMAT(j1,r);
@@ -1819,10 +1836,8 @@ end else begin
     ltp_PMAT(j1,wm2);
     sofa_rxr(wm1,wm2,r);
   end;
-  sofa_S2C(ra,de,p);
   sofa_rxp(r,p,rp);
-  sofa_c2s(rp,ra,de);
-  ra:=rmod(ra+pi2,pi2);
+  sofa_cp(rp,p);
   prec_r:=r;
   prec_j0:=j0;
   prec_j1:=j1;
