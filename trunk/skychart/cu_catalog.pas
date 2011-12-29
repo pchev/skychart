@@ -735,6 +735,8 @@ var GcatH : TCatHeader;
 begin
  SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
  GetGCatInfo(GcatH,v,GCatFilter,result);
+ // files are sorted
+ GCatFilter:=true;
  if result then result:=(v=rtStar);
  if result then OpenGCatWin(result);
 end;
@@ -745,6 +747,8 @@ var GcatH : TCatHeader;
 begin
  SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
  GetGCatInfo(GcatH,v,GCatFilter,ok);
+ // files are sorted
+ GCatFilter:=true;
  if ok then ok:=(v=rtStar);
  if ok then OpenGCat(ar1,ar2,de1,de2,ok);
 end;
