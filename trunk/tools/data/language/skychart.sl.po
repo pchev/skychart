@@ -1,7 +1,7 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-28 10:19+0100\n"
+"PO-Revision-Date: 2011-12-28 21:34+0100\n"
 "Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
 "POT-Creation-Date: \n"
@@ -299,7 +299,7 @@ msgstr "Samodejno osveži"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Samodejno posodobi vsake"
+msgstr "Samodejno posodobi vsakih"
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -375,7 +375,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Dvojiški indeksni katalog"
+msgstr "Dvojiški indeksni kat."
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -543,7 +543,7 @@ msgstr "CDC nastavitve kataloga globokega vesolja"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Zastarel CDC katalog (še vedno ga lahko uporabljaš)"
+msgstr "Zastarel CDC katalog (še vedno ga lahko uporabljate)"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
@@ -935,7 +935,7 @@ msgstr "Ustvari indeks iskalne datoteke"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
-msgstr "Ustvari zbirko podatkov"
+msgstr "Ustvari zbirko"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
@@ -1021,7 +1021,7 @@ msgstr "Podatkovne datoteke"
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr "Podatkovne datoteke, zgoščenka"
+msgstr "Podatkovne datoteke, CD"
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
@@ -1491,7 +1491,7 @@ msgstr "Izbira gonilnika"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
-msgstr "Briši podatkovno zbirko"
+msgstr "Briši zbirko"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1803,7 +1803,7 @@ msgstr "Filter ->"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr "Filter predmetov globokega vesolja"
+msgstr "Filter globo. vesolja"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
@@ -1867,7 +1867,7 @@ msgstr "Pisave"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Za velik katalog, vedno izberite Dvojiški. Za male podatkovne nize, ki se pogosto spreminjajo, izberite Besedilne. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
+msgstr "Za velik katalog, vedno izberite Dvojiški. Za kratke nize, ki se pogosto  spreminjajo, izberite Besedilne. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -2285,7 +2285,7 @@ msgstr "Inicializiraj podatkovno zbirko"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Vhodne datoteke kataloga"
+msgstr "Vhodne datoteke"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
@@ -2365,7 +2365,7 @@ msgstr "Jupiter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "Jupitrova GRS zemljepisna dolžina"
+msgstr "Jupitrova GRS longituda:"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2565,7 +2565,7 @@ msgstr "Krajevno obzorje"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Ime datoteke krajevnega obzorja :"
+msgstr "Datoteka krajevnega obzorja: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2589,7 +2589,7 @@ msgstr "Zemljepisna dolžina"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr "Naraščujoče sečišče zemljepisne dolžine"
+msgstr "Naraščujoče sečišče Longitude"
 
 #: u_translation.rslosange
 msgid "Lozenge"
@@ -2793,7 +2793,7 @@ msgstr "Minuta"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr "minute"
+msgstr "minut"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
@@ -2937,7 +2937,7 @@ msgstr "Prikaži globoko vesolje"
 
 #: u_translation.rsnebulae
 msgid "Deep sky objects"
-msgstr "Predmet globokega vesolja"
+msgstr "Globoko vesolje"
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
@@ -2945,7 +2945,7 @@ msgstr "Filter globokega vesolja"
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
-msgstr "Globoko vesolje ali drugi predmeti"
+msgstr "Globoko vesolje ali drugo"
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
@@ -3185,7 +3185,7 @@ msgstr "Opazovalnica"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr "Podatkovna zbirka opazovalnice"
+msgstr "Zbirka opazovalnic"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -3257,7 +3257,7 @@ msgstr "Odpri karto"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr "Razsuta kopica"
+msgstr "Razsute kopice"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -3281,7 +3281,7 @@ msgstr "Smer"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Ali pa uporabi lokalno datoteko :"
+msgstr "Ali pa uporabi lokalno datoteko"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3401,7 +3401,7 @@ msgstr "Slike"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "piksli"
+msgstr "pikslov"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3410,16 +3410,16 @@ msgstr "Planet"
 #: u_translation.rsplanetaryneb
 msgctxt "u_translation.rsplanetaryneb"
 msgid "Planetary nebula"
-msgstr "Planetarna meglica"
+msgstr "Planetarne meglice"
 
 #: u_translation.rsplanetaryneb2
 msgid "Planetary nebulae"
-msgstr "Planetarna meglica"
+msgstr "Planetarne meglice"
 
 #: u_translation.rsplanetaryneb3
 msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
-msgstr "Planetarna meglica"
+msgstr "Planetarne meglice"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
@@ -3783,7 +3783,7 @@ msgstr "Beri v razmikih [ms]"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Resnične slike (zahteva Xplanet 1.2.0)"
+msgstr "Resnične slike"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
@@ -4131,7 +4131,7 @@ msgstr "Sekunda"
 
 #: u_translation.rsseconds
 msgid "Seconds"
-msgstr "Sekunde"
+msgstr "sekund"
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
@@ -4799,7 +4799,7 @@ msgstr "Besedilo"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Katalog besedilne datoteke"
+msgstr "Katalog besedilne dat."
 
 #: u_translation.rstextsize
 msgid "Text size"
@@ -5091,7 +5091,7 @@ msgstr "Uporabi HPP"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Uporabi HTTP posredniški strežnik"
+msgstr "HTTP posrednik"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
@@ -5119,11 +5119,11 @@ msgstr "Uporabniško ime"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr "Uporabi Socks posredniški strežnik"
+msgstr "Socks posrednik"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr "Uporabi podvzorčenje za omejitev velikosti slike na"
+msgstr "Uporabi podvzorčenje da omejite velikosti slike na"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
