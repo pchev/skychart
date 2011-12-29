@@ -1063,12 +1063,6 @@ msgstr "%sCW"
 
 #: u_translation.rsdarknebula
 #| msgid "Dark Nebula"
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Sötétköd"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Sötétköd"
 
@@ -2114,12 +2108,6 @@ msgstr "Galaxis"
 
 #: u_translation.rsgalaxycluste
 #| msgid "Galaxy Cluster"
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Galaxishalmaz"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Galaxishalmaz"
 
@@ -3686,16 +3674,6 @@ msgstr "Bolygó"
 
 #: u_translation.rsplanetaryneb
 #| msgid "Planetary Nebula"
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Planetáris köd"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Planetáris köd"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Planetáris köd"
 

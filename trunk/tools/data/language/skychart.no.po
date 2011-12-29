@@ -973,12 +973,6 @@ msgid "%sCW"
 msgstr "%stil høyre"
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Mørk stjernetåke"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Mørk stjernetåke"
 
@@ -1947,12 +1941,6 @@ msgid "Galaxy"
 msgstr "Galakse"
 
 #: u_translation.rsgalaxycluste
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Galaksehop"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Galaksehop"
 
@@ -3405,16 +3393,6 @@ msgid "Planet"
 msgstr "Planet"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Planetarisk tåke"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Planetariske tåker"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Planetarisk tåke"
 

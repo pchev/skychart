@@ -973,12 +973,6 @@ msgid "%sCW"
 msgstr "%sCW"
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Tmavá mlhovina"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Tmavá mlhovina"
 
@@ -1949,12 +1943,6 @@ msgid "Galaxy"
 msgstr "Galaxie"
 
 #: u_translation.rsgalaxycluste
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Kupa galaxií"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Kupa galaxií"
 
@@ -3407,16 +3395,6 @@ msgid "Planet"
 msgstr "Planeta"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Planetární mlhovina"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Planetární mlhovina"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Planetární mlhovina"
 
