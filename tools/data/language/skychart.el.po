@@ -1006,12 +1006,6 @@ msgid "%sCW"
 msgstr "%sΩρ."
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Σκοτεινό νεφέλωμα"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Σκοτεινό νεφέλωμα"
 
@@ -2001,14 +1995,8 @@ msgstr "γαλαξίας"
 
 #: u_translation.rsgalaxycluste
 #| msgid "Galaxy Cluster"
-msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
 msgstr "Σμήνος Γαλαξιών"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
-msgid "Galaxy cluster"
-msgstr "Σμήνος γαλαξιών"
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -3474,16 +3462,6 @@ msgid "Planet"
 msgstr "Πλανήτης"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Πλανητικό νεφέλωμα"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Πλανητικά νεφελώματα"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Πλανητικό νεφέλωμα"
 

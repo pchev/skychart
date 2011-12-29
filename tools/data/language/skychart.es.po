@@ -975,12 +975,6 @@ msgid "%sCW"
 msgstr "%sen sentido horario"
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Nebulosa oscura"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Nebulosa oscura"
 
@@ -1950,12 +1944,6 @@ msgid "Galaxy"
 msgstr "Galaxia"
 
 #: u_translation.rsgalaxycluste
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Cúmulo de Galaxias"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Cúmulo de Galaxias"
 
@@ -3408,16 +3396,6 @@ msgid "Planet"
 msgstr "Planeta"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Nebulosa planetaria"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Nebulosas planetarias"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Nebulosa planetaria"
 

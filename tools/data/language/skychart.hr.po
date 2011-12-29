@@ -975,12 +975,6 @@ msgid "%sCW"
 msgstr "%sCW"
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Tamna maglica"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Tamna maglica"
 
@@ -1949,12 +1943,6 @@ msgid "Galaxy"
 msgstr "Galaksija"
 
 #: u_translation.rsgalaxycluste
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Jato galaksija"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Jato galaksija"
 
@@ -3407,16 +3395,6 @@ msgid "Planet"
 msgstr "Planet"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Planetarna maglica"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Planetarne maglice"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Planetarna maglica"
 

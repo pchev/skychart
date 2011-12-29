@@ -485,7 +485,6 @@ resourcestring
   rsLoadProject = 'Load project';
   rsSaveProject = 'Save project';
   rsCatalogStrin = 'Catalog string';
-  rsDarkNebula2 = 'Dark nebula';
   rsObjectSizeUn = 'Object size unit';
   rsLineOperatio = 'Line operation';
   rsStartOfObjec = 'Start of object';
@@ -547,7 +546,6 @@ resourcestring
   rsCDCNebulaeCa = 'CdC deep sky catalogs and settings';
   rsNebulae = 'Deep sky objects';
   rsGalaxies = 'Galaxies';
-  rsPlanetaryNeb2 = 'Planetary nebulae';
   rsGeneral = 'General';
   rsUseOnlyCatal = 'Use only catalogs from one single group.';
   rsDefault = 'Default';
@@ -611,10 +609,8 @@ resourcestring
   rsUseAPresetCo = 'Use a preset colour scheme:';
   rsChooseColour = 'Choose colours for the object types';
   rsSupernovaRem = 'Supernova remnant';
-  rsPlanetaryNeb3 = 'Planetary nebula';
   rsEmissionNebu = 'Emission nebula';
   rsReflectionNe = 'Reflection nebula';
-  rsGalaxyCluste2 = 'Galaxy cluster';
   rsQuasar = 'Quasar';
   rsGravitationa = 'Gravitational lens';
   rsNonExistentU = 'Non-existent/unknown';

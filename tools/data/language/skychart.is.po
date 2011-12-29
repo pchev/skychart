@@ -1154,12 +1154,6 @@ msgstr "%sCW"
 #: u_translation.rsdarknebula
 #, fuzzy
 #| msgid "Dark Nebula"
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Skuggaþoka"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Skuggaþoka"
 
@@ -2286,14 +2280,8 @@ msgstr "Vetrarbraut"
 #: u_translation.rsgalaxycluste
 #, fuzzy
 #| msgid "Galaxy Cluster"
-msgctxt "u_translation.rsgalaxycluste"
 msgid "Galaxy cluster"
 msgstr "Vetrarbrautaþyrping"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
-msgid "Galaxy cluster"
-msgstr "Vetrarbrautaþyrp."
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -3978,16 +3966,6 @@ msgstr "Reikistj."
 #: u_translation.rsplanetaryneb
 #, fuzzy
 #| msgid "Planetary Nebula"
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Hringþoka"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Hringþokur"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Hringþoka"
 

@@ -1,19 +1,20 @@
-#translation of skychart.po to Polish by Jarosław Wójcik <wojcikj [at] op [dot] pl>, 2010
+#translation of skychart.po to Polish by Jarosław Wójcik <wojcikj@op.pl>, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-01-01 17:23+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2011-12-29 18:27+0100\n"
+"Last-Translator: pch\n"
 "Project-Id-Version: skychart\n"
 "POT-Creation-Date: \n"
-"Language-Team: polski <pl@li.org>\n"
+"Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.2\n"
 "Plural-Forms: 3\n"
 "X-Poedit-Language: Polish\n"
 "X-Poedit-Country: Poland\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Language: fr\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -136,7 +137,6 @@ msgid "All tool bars"
 msgstr "Wszystkie paski narzędzi"
 
 #: u_translation.rsalsobesureth
-#, fuzzy
 #| msgid "%sAlso be sure the required base software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgstr "%sUpewnij się, czy wymagana baza danych jest zainstalowana.%sPrzejrzyj dokumentację jeśli nie jesteś tego pewny.%sCzy chcesz kontynuować?"
@@ -978,12 +978,6 @@ msgid "%sCW"
 msgstr "%sCW"
 
 #: u_translation.rsdarknebula
-msgctxt "u_translation.rsdarknebula"
-msgid "Dark nebula"
-msgstr "Mgławice ciemne"
-
-#: u_translation.rsdarknebula2
-msgctxt "u_translation.rsdarknebula2"
 msgid "Dark nebula"
 msgstr "Mgławice ciemne"
 
@@ -1954,12 +1948,6 @@ msgid "Galaxy"
 msgstr "Galaktyka"
 
 #: u_translation.rsgalaxycluste
-msgctxt "u_translation.rsgalaxycluste"
-msgid "Galaxy cluster"
-msgstr "Gromady galaktyczne"
-
-#: u_translation.rsgalaxycluste2
-msgctxt "u_translation.rsgalaxycluste2"
 msgid "Galaxy cluster"
 msgstr "Gromady galaktyczne"
 
@@ -3412,16 +3400,6 @@ msgid "Planet"
 msgstr "Planeta"
 
 #: u_translation.rsplanetaryneb
-msgctxt "u_translation.rsplanetaryneb"
-msgid "Planetary nebula"
-msgstr "Mgławice planetarne"
-
-#: u_translation.rsplanetaryneb2
-msgid "Planetary nebulae"
-msgstr "Mgławice planetarne"
-
-#: u_translation.rsplanetaryneb3
-msgctxt "u_translation.rsplanetaryneb3"
 msgid "Planetary nebula"
 msgstr "Mgławice planetarne"
 

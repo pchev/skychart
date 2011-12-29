@@ -1894,10 +1894,6 @@ msgstr ""
 msgid "Catalog string"
 msgstr ""
 
-#: u_translation:rsdarknebula2
-msgid "Dark nebula"
-msgstr ""
-
 #: u_translation:rsobjectsizeun
 msgid "Object size unit"
 msgstr ""
@@ -2136,10 +2132,6 @@ msgstr ""
 
 #: u_translation:rsgalaxies
 msgid "Galaxies"
-msgstr ""
-
-#: u_translation:rsplanetaryneb2
-msgid "Planetary nebulae"
 msgstr ""
 
 #: u_translation:rsgeneral
@@ -2394,20 +2386,12 @@ msgstr ""
 msgid "Supernova remnant"
 msgstr ""
 
-#: u_translation:rsplanetaryneb3
-msgid "Planetary nebula"
-msgstr ""
-
 #: u_translation:rsemissionnebu
 msgid "Emission nebula"
 msgstr ""
 
 #: u_translation:rsreflectionne
 msgid "Reflection nebula"
-msgstr ""
-
-#: u_translation:rsgalaxycluste2
-msgid "Galaxy cluster"
 msgstr ""
 
 #: u_translation:rsquasar
