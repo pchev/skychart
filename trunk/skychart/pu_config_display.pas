@@ -1446,7 +1446,7 @@ procedure Tf_config_display.StarButton1Click(Sender: TObject);
 begin
 StarSizeBar.Position:=12;
 SizeContrastBar.Position:=40;
-StarContrastBar.Position:=350;
+StarContrastBar.Position:=450;
 SaturationBar.Position:=255;
 cplot.partsize:= StarSizeBar.position/10;
 cplot.magsize:= SizeContrastBar.position/10;
