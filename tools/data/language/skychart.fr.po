@@ -1534,6 +1534,10 @@ msgstr "Edition"
 msgid "Edit colour"
 msgstr "Modifier la couleur"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 msgid "Edit label"
 msgstr "Modifier les labels"

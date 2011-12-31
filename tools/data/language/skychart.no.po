@@ -1528,6 +1528,10 @@ msgstr "Rediger"
 msgid "Edit colour"
 msgstr "Rediger farge"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 msgid "Edit label"
 msgstr "Rediger påskrift"
