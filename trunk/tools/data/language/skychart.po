@@ -5302,3 +5302,7 @@ msgstr ""
 msgid "Use Socks proxy"
 msgstr ""
 
+#: u_translation:rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+

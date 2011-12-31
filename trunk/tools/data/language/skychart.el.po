@@ -1571,6 +1571,10 @@ msgstr "Επεξεργασία"
 msgid "Edit colour"
 msgstr "Επεξεργασία χρώματος"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 #| msgid "Edit Label"
 msgid "Edit label"

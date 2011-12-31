@@ -1663,6 +1663,10 @@ msgstr "Szerkesztés"
 msgid "Edit colour"
 msgstr "Szín szerkesztése"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 #| msgid "Edit Label"
 msgid "Edit label"

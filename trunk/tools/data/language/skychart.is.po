@@ -1803,6 +1803,10 @@ msgstr "Breyta"
 msgid "Edit colour"
 msgstr "Breyta lit"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 #, fuzzy
 #| msgid "Edit Label"

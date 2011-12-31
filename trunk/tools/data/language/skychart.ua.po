@@ -1532,6 +1532,10 @@ msgstr "Редагування"
 msgid "Edit colour"
 msgstr "Ред.кольору"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 msgid "Edit label"
 msgstr "Ред. позначки"

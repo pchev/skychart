@@ -1352,6 +1352,7 @@ resourcestring
   rsShowDSOLines = 'Show DSO lines';
   rsTransparency = 'Transparency';
   rsUseSocksProx = 'Use Socks proxy';
+  rsEditDSOLines = 'Edit DSO lines color';
 
 implementation
 

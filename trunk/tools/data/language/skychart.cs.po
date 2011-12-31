@@ -1530,6 +1530,10 @@ msgstr "Upravit"
 msgid "Edit colour"
 msgstr "Upravit barvu"
 
+#: u_translation.rseditdsolines
+msgid "Edit DSO lines color"
+msgstr ""
+
 #: u_translation.rseditlabel
 msgid "Edit label"
 msgstr "Upravit popisek"
