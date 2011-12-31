@@ -2,11 +2,12 @@ This tools are used to make the default star catalog for CDC.
 It is based on V/137 Extended Hipparcos Compilation (XHIP).
 
 The HD and BD identifier are take from the original I/239 Hipparcos hip_main file.
-The HR identifier is taken from V/50 Bright Star Catalogue, 5th Revised Ed.
-The Bayer and Flamsteed identifier are from IV/27A HD-DM-GC-HR-HIP-Bayer-Flamsteed Cross Index
+The HR identifier is taken from V/50 Bright Star Catalogue, 5th Revised Ed. using HD as key.
+The Bayer and Flamsteed identifier are from IV/27A HD-DM-GC-HR-HIP-Bayer-Flamsteed Cross Index. using HD as key.
 
 The script makexhip.sh download the required files, compile and launch the program 
-cdc_xhip.pp which merge and extract the data to the file cdc_xhip.dat
+cdc_xhip.pp which merge and extract the data to the file cdc_xhip.dat and cdc_hr.dat
 
-This last file is used with Catgen and the project file cdc_xhip.prj to build the 
-binary catalog.
+The file cdc_xhip.dat is used with Catgen and the project file cdc_xhip.prj to build the binary catalog.
+
+The file cdc_hr.dat is used with Catgen and the project file cdc_hridx.prj to build the HR,Bayer,Flamsteed index.
