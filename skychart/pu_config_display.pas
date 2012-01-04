@@ -52,7 +52,9 @@ type
     antialias: TCheckBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
     Label10: TLabel;
+    Label14: TLabel;
     ShowLineShape: TShape;
     ShowLines: TCheckBox;
     OnlyMeridian: TCheckBox;
@@ -367,6 +369,7 @@ type
     procedure CFStyleChange(Sender: TObject);
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
+    procedure CheckBox5Click(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
@@ -677,7 +680,7 @@ constlabel.Items[2]:=rsLatinName;
 Showlabelall.caption:=rsDisplayTheLa;
 ShowChartInfo.caption:=rsDisplayTheCh;
 ShowTitle.Caption:=rsShowPosition;
-GroupBox5.caption:=rsLabelObject;
+label14.caption:=rsLabelObject;
 Label237.caption:=rsMagnitudeDif;
 Label252.caption:=rsColor;
 Label240.caption:=rsLabel2;
@@ -690,6 +693,7 @@ showlabelSol.caption:=rsSolarSystem;
 showlabelConst.caption:=rsConstellatio7;
 showlabelMisc.caption:=rsOtherLabel;
 ShowLabelChartInfo.caption:=rsChartInforma;
+CheckBox5.Caption:=rsChartLegend;
 Button9.Caption:=rsDefault;
 
 Page7.caption:=rsFonts;
@@ -849,6 +853,11 @@ end;
 procedure Tf_config_display.CheckBox2Click(Sender: TObject);
 begin
 csc.RectangleLabel:=CheckBox2.Checked
+end;
+
+procedure Tf_config_display.CheckBox5Click(Sender: TObject);
+begin
+  csc.ShowLegend:=CheckBox5.Checked;
 end;
 
 procedure Tf_config_display.MarkNumberClick(Sender: TObject);
@@ -1311,6 +1320,7 @@ begin
  ShowTitle.Checked:=cmain.ShowTitlePos;
  DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
  LabelLine.Checked := csc.MovedLabelLine;
+ CheckBox5.Checked := csc.ShowLegend;
 end;
 
 procedure Tf_config_display.ShowCircle;

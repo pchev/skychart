@@ -2418,13 +2418,15 @@ function Tcatalog.SearchNebulae(Num:string; var ar1,de1: double): boolean;
 var buf : string;
     i:integer;
 begin
-   buf:=uppercase(Num);
-   for i:=0 to Length(cfgcat.UserObjects)-1 do begin
-     if cfgcat.UserObjects[i].active and (UpperCase(cfgcat.UserObjects[i].oname)=buf) then begin
-        ar1:= cfgcat.UserObjects[i].ra;
-        de1:= cfgcat.UserObjects[i].dec;
-        result:=true;
-        exit;
+   if cfgcat.nebcatdef[uneb-BaseNeb] then begin
+     buf:=uppercase(Num);
+     for i:=0 to Length(cfgcat.UserObjects)-1 do begin
+       if cfgcat.UserObjects[i].active and (UpperCase(cfgcat.UserObjects[i].oname)=buf) then begin
+          ar1:= cfgcat.UserObjects[i].ra;
+          de1:= cfgcat.UserObjects[i].dec;
+          result:=true;
+          exit;
+       end;
      end;
    end;
    if uppercase(copy(Num,1,1))='M' then begin

@@ -17,7 +17,7 @@ packages=rtl
 [compiler]
 unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 includedir=./
-options= $(opt_target) -CF64 -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -g -gl -WG -vewni -l
+options= $(opt_target) -CF64 -dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi -g -gl -vewni -l
 unitdir=library/catalog/lib/$(CPU_TARGET)-$(OS_TARGET)/ library/satxy/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ component/uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ component/jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/bgrabitmap/lib/$(CPU_TARGET)-$(OS_TARGET) component/enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ component/xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/components/synedit/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/printers/lib/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 
 [clean]
@@ -33,24 +33,23 @@ LAZDIR=%LAZDIR%
 ifndef LCL_PLATFORM
 ifeq ($(OS_TARGET),win32)
 LCL_PLATFORM=win32
+opt_target= -WG
 else
 ifeq ($(OS_TARGET),win64)
 LCL_PLATFORM=win32
+opt_target= -WG
 else
 ifeq ($(OS_TARGET),darwin)
 LCL_PLATFORM=carbon
+opt_target= -WG -k-macosx_version_min -k10.4 -XR/Developer/SDKs/MacOSX10.4u.sdk/
 else
 LCL_PLATFORM=gtk2
+opt_target=
 endif
 endif
 endif
 endif
 export LCL_PLATFORM
-ifeq ($(OS_TARGET),darwin)
-opt_target= -k-macosx_version_min -k10.4 -XR/Developer/SDKs/MacOSX10.4u.sdk/
-else
-opt_target=
-endif
 
 [rules]
 .PHONY: all

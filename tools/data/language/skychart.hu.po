@@ -669,6 +669,10 @@ msgstr "Térkép koordináta rendszere"
 msgid "Chart information"
 msgstr "Térkép információk"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Térképek"

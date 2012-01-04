@@ -617,6 +617,10 @@ msgstr "Sistema di coordinate della cartina"
 msgid "Chart information"
 msgstr "Informazioni sulla cartina"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Cartine"
