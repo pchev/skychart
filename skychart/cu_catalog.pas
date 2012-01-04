@@ -2848,7 +2848,7 @@ ok:=false;
 nextobj:=false;
 if cfgsc.shownebulae then begin
   ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
-  if (not ok) then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
+  if (not ok) and cfgcat.nebcaton[voneb-BaseNeb] then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
   if (not ok) then begin ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then begin ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSAC; end;
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then begin ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseNGC; end;
@@ -2860,7 +2860,7 @@ if cfgsc.shownebulae then begin
   if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then begin ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGPN; end;
 end;
 if cfgsc.showstars then begin
-  if (not ok) then begin ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
+  if (not ok) and cfgcat.starcaton[vostar-BaseStar] then begin ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
   if (not ok) then begin ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then begin ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCV; end;
   if (not ok) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;

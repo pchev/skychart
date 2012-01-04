@@ -1918,7 +1918,7 @@ if cfgm.ObsNameList<>nil then begin
       if cfgm.ObsNameList.Objects[i]<>nil then cfgm.ObsNameList.Objects[i].Free;
   except
   end;
-  cfgm.ObsNameList.Free;
+  //cfgm.ObsNameList.Free;
 end;
 cfgm.Free;
 def_cfgplot.Free;
