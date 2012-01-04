@@ -628,6 +628,10 @@ msgstr "Συστήματα συντεταγμένων χάρτη"
 msgid "Chart information"
 msgstr "Πληροφορίες Χάρτη"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Χάρτες"

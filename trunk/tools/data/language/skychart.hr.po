@@ -618,6 +618,10 @@ msgstr "Koordinatni sustav karte"
 msgid "Chart information"
 msgstr "Informacije o karti"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Karte"

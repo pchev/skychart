@@ -618,6 +618,10 @@ msgstr "Координатна система мапи"
 msgid "Chart information"
 msgstr "Інформація мапи"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Мапи"

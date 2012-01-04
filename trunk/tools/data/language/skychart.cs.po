@@ -616,6 +616,10 @@ msgstr "Souřadnicový systém"
 msgid "Chart information"
 msgstr "Informace o mapě"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Mapy"

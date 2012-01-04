@@ -49,6 +49,10 @@ type
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
     CloseTimer: TTimer;
+    MenuItem32: TMenuItem;
+    MenuChartInfo: TMenuItem;
+    MenuChartLegend: TMenuItem;
+    ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
     ToolButtonUObj: TToolButton;
     ToolButtonVO: TToolButton;
@@ -402,7 +406,6 @@ type
     ShowGalacticEquator1: TMenuItem;
     ShowEcliptic1: TMenuItem;
     ShowMark1: TMenuItem;
-    ShowLabels1: TMenuItem;
     ShowObjectbelowthehorizon1: TMenuItem;
     Calendar1: TMenuItem;
     N6: TMenuItem;
@@ -458,6 +461,8 @@ type
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
+    procedure MenuChartInfoClick(Sender: TObject);
+    procedure MenuChartLegendClick(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -1440,6 +1445,22 @@ end;
 procedure Tf_main.Maillist1Click(Sender: TObject);
 begin
    ExecuteFile(URL_Maillist);
+end;
+
+procedure Tf_main.MenuChartInfoClick(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
+   Refresh;
+end;
+end;
+
+procedure Tf_main.MenuChartLegendClick(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+   sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
+   Refresh;
+end;
 end;
 
 procedure Tf_main.NextChild1Click(Sender: TObject);
@@ -4238,6 +4259,7 @@ def_cfgsc.SimDateHour:=true;
 def_cfgsc.SimDateMinute:=true;
 def_cfgsc.SimDateSecond:=false;
 def_cfgsc.SimMagLabel:=false;
+def_cfgsc.ShowLegend:=true;
 def_cfgsc.SimD:=1;
 def_cfgsc.SimH:=0;
 def_cfgsc.SimM:=0;
@@ -4877,6 +4899,7 @@ csc.SimDateHour:=ReadBool(section,'SimDateHour',csc.SimDateHour);
 csc.SimDateMinute:=ReadBool(section,'SimDateMinute',csc.SimDateMinute);
 csc.SimDateSecond:=ReadBool(section,'SimDateSecond',csc.SimDateSecond);
 csc.SimMagLabel:=ReadBool(section,'SimMagLabel',csc.SimMagLabel);
+csc.ShowLegend:=ReadBool(section,'ShowLegend',csc.ShowLegend);
 csc.SimD:=ReadInteger(section,'SimD',csc.SimD);
 csc.SimH:=ReadInteger(section,'SimH',csc.SimH);
 csc.SimM:=ReadInteger(section,'SimM',csc.SimM);
@@ -5632,6 +5655,7 @@ WriteBool(section,'SimDateHour',csc.SimDateHour);
 WriteBool(section,'SimDateMinute',csc.SimDateMinute);
 WriteBool(section,'SimDateSecond',csc.SimDateSecond);
 WriteBool(section,'SimMagLabel',csc.SimMagLabel);
+WriteBool(section,'ShowLegend',csc.ShowLegend);
 WriteInteger(section,'SimD',csc.SimD);
 WriteInteger(section,'SimH',csc.SimH);
 WriteInteger(section,'SimM',csc.SimM);
@@ -6148,6 +6172,8 @@ ShowGalacticEquator1.caption:='&'+rsShowGalactic;
 ShowEcliptic1.caption:='&'+rsShowEcliptic;
 ShowMark1.caption:='&'+rsShowMark;
 ShowLabels1.caption:='&'+rsShowLabels;
+MenuChartInfo.Caption:=rsChartInforma;
+MenuChartLegend.Caption:=rsChartLegend;
 ShowObjectbelowthehorizon1.caption:='&'+rsBelowTheHori;
 TelescopeSetup1.Caption:='&'+rsTelescopeSet+Ellipsis;
 telescope1.caption:='&'+rsTelescope;
@@ -6258,33 +6284,51 @@ end else begin
       if MultiDoc1.Childs[i].caption=cname then chart:=MultiDoc1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
-   stype:='N';  itype:=ftNeb;
-   ok:=catalog.SearchNebulae(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='V*'; itype:=ftVar;
-   ok:=catalog.SearchVarStar(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='D*'; itype:=ftDbl;
-   ok:=catalog.SearchDblStar(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='*';  itype:=ftStar;
-   ok:=catalog.SearchStar(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='P';  itype:=ftPla;
-   ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
-   if ok then goto findit;
-   stype:='*';  itype:=ftStar;
-   ok:=catalog.SearchStarName(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='N';  itype:=ftNeb;
-   ok:=f_search.SearchNebName(Num,ar1,de1) ;
-   if ok then goto findit;
-   stype:='As';  itype:=ftAst;
-   ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
-   if ok then goto findit;
-   stype:='Cm'; itype:=ftCom;
-   ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
-   if ok then goto findit;
+   if sc.cfgsc.shownebulae then begin
+     stype:='N';  itype:=ftNeb;
+     ok:=catalog.SearchNebulae(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.showstars then begin
+     stype:='V*'; itype:=ftVar;
+     ok:=catalog.SearchVarStar(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.showstars then begin
+     stype:='D*'; itype:=ftDbl;
+     ok:=catalog.SearchDblStar(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.showstars then begin
+     stype:='*';  itype:=ftStar;
+     ok:=catalog.SearchStar(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.ShowPlanet then begin
+     stype:='P';  itype:=ftPla;
+     ok:=planet.FindPlanetName(trim(Num),ar1,de1,sc.cfgsc);
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.showstars then begin
+     stype:='*';  itype:=ftStar;
+     ok:=catalog.SearchStarName(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.shownebulae then begin
+     stype:='N';  itype:=ftNeb;
+     ok:=f_search.SearchNebName(Num,ar1,de1) ;
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.ShowAsteroid then begin
+     stype:='As';  itype:=ftAst;
+     ok:=planet.FindAsteroidName(trim(Num),ar1,de1,sc.cfgsc);
+     if ok then goto findit;
+   end;
+   if sc.cfgsc.ShowComet then begin
+     stype:='Cm'; itype:=ftCom;
+     ok:=planet.FindCometName(trim(Num),ar1,de1,sc.cfgsc);
+     if ok then goto findit;
+   end;
 
 Findit:
    result:=ok;
@@ -6385,6 +6429,8 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     toolbuttonShowlabels.down:=sc.cfgsc.Showlabelall;
     toolbuttonEditlabels.down:=sc.cfgsc.Editlabels;
     ShowLabels1.checked:=sc.cfgsc.Showlabelall;
+    MenuChartInfo.Checked:=sc.cfgsc.ShowLabel[8];
+    MenuChartLegend.Checked:=sc.cfgsc.ShowLegend;
     toolbuttonGrid.down:=sc.cfgsc.ShowGrid;
     Grid1.checked:=sc.cfgsc.ShowGrid;
     toolbuttonGridEq.down:=sc.cfgsc.ShowEqGrid;

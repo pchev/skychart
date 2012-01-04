@@ -1353,6 +1353,7 @@ resourcestring
   rsTransparency = 'Transparency';
   rsUseSocksProx = 'Use Socks proxy';
   rsEditDSOLines = 'Edit DSO lines color';
+  rsChartLegend = 'Chart legend';
 
 implementation
 

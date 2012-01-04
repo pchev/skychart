@@ -1,16 +1,17 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-28 21:34+0100\n"
-"Last-Translator: \n"
 "Project-Id-Version: skychart.en\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-31 13:54+0000\n"
+"PO-Revision-Date: 2011-12-30 06:11+0000\n"
+"Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Launchpad-Export-Date: 2011-12-31 16:28+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -147,7 +148,7 @@ msgstr "Alt-Az"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Alt/AZ koord."
+msgstr "Alt/AZ koord. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -203,7 +204,7 @@ msgstr "Prikaz"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Dodaj k obstoječemu katalogu"
+msgstr "Dodaj k obstoječemu katalogu "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -231,7 +232,7 @@ msgstr "Umetni satelit"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
-msgstr "Vmesnik teleskopa ASCOM "
+msgstr "Vmesnik teleskopa ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -299,7 +300,7 @@ msgstr "Samodejno osveži"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Samodejno posodobi vsakih"
+msgstr "Samodejno posodobi vsakih "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -617,6 +618,10 @@ msgstr "Koordinatni sistem karte"
 msgid "Chart information"
 msgstr "Podatki o karti"
 
+#: u_translation.rschartlegend
+msgid "Chart legend"
+msgstr ""
+
 #: u_translation.rscharts
 msgid "Charts"
 msgstr "Karte"
@@ -663,7 +668,7 @@ msgstr "Odstrani cilj"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Klikni za spremembo barve"
+msgstr "Klikni za spremembo barve "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -835,7 +840,7 @@ msgstr "Liki ozvezdij"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Ime datoteke likov ozvezdij"
+msgstr "Ime datoteke likov ozvezdij "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -843,7 +848,7 @@ msgstr "Meje ozvezdja"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Ime datoteke meje ozvezdja"
+msgstr "Ime datoteke meje ozvezdja "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -863,7 +868,7 @@ msgstr "Nadzorna plošča"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Ukaz nadzorne plošče"
+msgstr "Ukaz nadzorne plošče "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -919,7 +924,7 @@ msgstr "Soodvisnost"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Ne morem naložiti knjižnice"
+msgstr "Ne morem naložiti knjižnice "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -991,7 +996,7 @@ msgstr "Črta pika črta"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Datoteka zbirke:"
+msgstr "Datoteka zbirke: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1226,10 +1231,8 @@ msgid "Deleting from the element list..."
 msgstr "Izbriši iz osnovnega seznama..."
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
-#| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Izbriši iz mesečne tabele..."
+msgstr "Brišem iz mesečne tabele ..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1241,11 +1244,11 @@ msgstr "Izbriši iz imenskega seznama..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Izbriši mesečne podatke"
+msgstr "Izbriši mesečne podatke "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Izbriši mesečne podatke starejše kot"
+msgstr "Izbriši mesečne podatke starejše kot "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1285,7 +1288,7 @@ msgstr "Podrobnosti"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Vrata naprave"
+msgstr "Vrata naprave "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1685,7 +1688,7 @@ msgstr "Večerni mrak"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "vsak"
+msgstr "vsak "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1721,7 +1724,7 @@ msgstr "Šibkejše"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Velikost šibkoski zvezde"
+msgstr "Velikost šibkoski zvezde "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1805,7 +1808,7 @@ msgstr "Filter globo. vesolja"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filter zvezd"
+msgstr "Filter zvezd "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -2221,7 +2224,7 @@ msgstr "Določi določilni niz za vsako izrisalno opravilo"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr "Določi niz za vsako barvo "
+msgstr "Določi niz za vsako barvo"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
@@ -2233,7 +2236,7 @@ msgstr "INDI nastavitve gonilnika"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "INDI gostiteljev strežnik"
+msgstr "INDI gostiteljev strežnik "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2505,7 +2508,7 @@ msgstr "Črte / Mreža"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Šrina črte"
+msgstr "Šrina črte "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2545,7 +2548,7 @@ msgstr "Naloži MPC oblike datoteko"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Naloži samo prvih"
+msgstr "Naloži samo prvih "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -3549,7 +3552,7 @@ msgstr "Pripravi CatGen katalog"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Pripravi podatke"
+msgstr "Pripravi podatke "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3629,7 +3632,7 @@ msgstr "Podatki o proizvodu"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Podatki programa"
+msgstr "Podatki programa "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -4189,7 +4192,7 @@ msgstr "Strežnik"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Ukaz strežnika"
+msgstr "Ukaz strežnika "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4445,7 +4448,7 @@ msgstr "Zavrti"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
-msgstr "Hitrost vrtenja"
+msgstr " Hitrost vrtenja"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -4521,7 +4524,7 @@ msgstr "Razvrščanje datoteko po magnitudi"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Razvrščanje indeksne datoteke"
+msgstr "Razvrščanje indeksne datoteke "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4597,7 +4600,7 @@ msgstr "Zvezde"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Katalogi zvezde in globokega vesolja pripravljeno z"
+msgstr "Katalogi zvezde in globokega vesolja pripravljeno z "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -4949,7 +4952,7 @@ msgstr "Trumplerjev razred"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr "TT - UT:"
+msgstr "TT - UT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -4997,7 +5000,7 @@ msgstr "Senca"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Ne morem ustvariti mape"
+msgstr "Ne morem ustvariti mape "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5181,7 +5184,7 @@ msgstr "Pokaži obzorje"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
-msgstr "Navidezni HandPad za Scope.exe"
+msgstr "Navidezni HandPad za Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
@@ -5213,7 +5216,7 @@ msgstr "Opozorilo!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Opozorilo! Preračun "
+msgstr "Opozorilo! Preračun"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
@@ -5320,7 +5323,6 @@ msgid "Zoom in"
 msgstr "Približaj"
 
 #: u_translation.rszoomout
-#, fuzzy
 msgid "Zoom out"
 msgstr "Oddalji"
 

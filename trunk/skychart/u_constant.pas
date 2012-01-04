@@ -607,7 +607,7 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindPX,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec : Double;
-                DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
+                DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,ShowLegend,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindNote,FindCat,FindCatname : string;
                 BGalpha: integer;
                 BGmin_sigma,BGmax_sigma,NEBmin_sigma,NEBmax_sigma: double;
@@ -1401,6 +1401,7 @@ SimDateMinute:=Source.SimDateMinute;
 SimDateSecond:=Source.SimDateSecond;
 SimNameLabel:=Source.SimNameLabel ;
 SimMagLabel:=Source.SimMagLabel ;
+ShowLegend:=Source.ShowLegend;
 ShowPlanet:=Source.ShowPlanet ;
 PlanetParalaxe:=Source.PlanetParalaxe ;
 ShowEarthShadow:=Source.ShowEarthShadow ;
