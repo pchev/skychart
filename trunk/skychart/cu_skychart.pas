@@ -1180,8 +1180,8 @@ var rec:GcatRec;
               if rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
                  if rec.options.ShortName='SAC' then begin
                        al:=alsac;
-                       inc(alsac);
-                       if alsac>laBottomRight then alsac:=laTopLeft;
+                       if alsac>=laBottomRight then alsac:=laTopLeft
+                          else inc(alsac);
                    end else al:=laRight;
                  SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al);
               end;
