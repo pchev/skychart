@@ -17,29 +17,28 @@ interface
   The unit registers a TFPCustomImageReader so that it can be read by any image reading function of FreePascal }
 
 uses
-  Classes, SysUtils, BGRADNetDeserial, BGRABitmap, BGRABitmapTypes, FPImage;
+  Classes, SysUtils, BGRADNetDeserial, BGRALayers, BGRABitmap, BGRABitmapTypes, FPImage;
 
 type
 
   { TPaintDotNetFile }
 
-  TPaintDotNetFile = class
+  TPaintDotNetFile = class(TBGRACustomLayeredBitmap)
   public
-    procedure LoadFromFile(filename: string);
-    procedure LoadFromStream(stream: TStream);
-    procedure Clear;
-    function ToString: ansistring;
-    destructor Destroy; override;
+    procedure LoadFromFile(filename: string); override;
+    procedure LoadFromStream(stream: TStream); override;
+    procedure Clear; override;
+    function ToString: ansistring; override;
+    function GetLayerBitmapCopy(layer: integer): TBGRABitmap; override;
     constructor Create;
-    function Width: integer;
-    function Height: integer;
-    function NbLayers: integer;
-    function BlendOperation(Layer: integer): TBlendOperation;
-    function LayerVisible(layer: integer): boolean;
-    function LayerOpacity(layer: integer): byte;
-    function LayerName(layer: integer): string;
-    function MakeBitmapLayer(layer: integer): TBGRABitmap;
-    function ComputeFlatImage: TBGRABitmap;
+  protected
+    function GetWidth: integer; override;
+    function GetHeight: integer; override;
+    function GetNbLayers: integer; override;
+    function GetBlendOperation(Layer: integer): TBlendOperation; override;
+    function GetLayerVisible(layer: integer): boolean; override;
+    function GetLayerOpacity(layer: integer): byte; override;
+    function GetLayerName(layer: integer): string; override;
   private
     XmlHeader: string;
     ThumbNail: TBGRABitmap;
@@ -47,11 +46,11 @@ type
     Document:  TSerializedClass;
     Layers:    TSerializedClass;
     LayerData: array of TMemoryStream;
-    function GetLayer(num: integer): TSerializedClass;
-    function GetBlendOperation(layer: TSerializedClass): TBlendOperation;
-    function GetLayerName(layer: TSerializedClass): string;
-    function GetLayerVisible(layer: TSerializedClass): boolean;
-    function GetLayerOpacity(layer: TSerializedClass): byte;
+    function InternalGetLayer(num: integer): TSerializedClass;
+    function InternalGetBlendOperation(layer: TSerializedClass): TBlendOperation;
+    function InternalGetLayerName(layer: TSerializedClass): string;
+    function InternalGetLayerVisible(layer: TSerializedClass): boolean;
+    function InternalGetLayerOpacity(layer: TSerializedClass): byte;
     function LayerDataSize(numLayer: integer): int64;
     procedure LoadLayer(dest: TMemoryStream; src: TStream; uncompressedSize: int64);
   end;
@@ -258,7 +257,7 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.ToString: string;
+function TPaintDotNetFile.ToString: ansistring;
 var
   i, j, nbbytes: integer;
   b: byte;
@@ -271,7 +270,7 @@ begin
   Result += LineEnding + LineEnding + Content.ToString;
   for i := 0 to NbLayers - 1 do
   begin
-    Result += LineEnding + 'Layer ' + IntToStr(i) + ' : ' + LayerName(i) + LineEnding;
+    Result += LineEnding + 'Layer ' + IntToStr(i) + ' : ' + LayerName[i] + LineEnding;
     Result += '[ ';
     LayerData[i].Position := 0;
     if LayerData[i].Size > 256 then
@@ -289,14 +288,6 @@ begin
       Result += '...';
     Result   += ']' + lineending;
   end;
-end;
-
-destructor TPaintDotNetFile.Destroy;
-begin
-  Clear;
-  content.Free;
-  Thumbnail.Free;
-  inherited Destroy;
 end;
 
 constructor TPaintDotNetFile.Create;
@@ -321,7 +312,7 @@ begin
   setLength(LayerData, 0);
 end;
 
-function TPaintDotNetFile.Width: integer;
+function TPaintDotNetFile.GetWidth: integer;
 begin
   if Document = nil then
     Result := 0
@@ -329,7 +320,7 @@ begin
     Result := StrToInt(Content.GetSimpleField(Document, 'width'));
 end;
 
-function TPaintDotNetFile.Height: integer;
+function TPaintDotNetFile.GetHeight: integer;
 begin
   if Document = nil then
     Result := 0
@@ -337,7 +328,7 @@ begin
     Result := StrToInt(Content.GetSimpleField(Document, 'height'));
 end;
 
-function TPaintDotNetFile.NbLayers: integer;
+function TPaintDotNetFile.GetNbLayers: integer;
 begin
   if Layers = nil then
     Result := 0
@@ -345,27 +336,27 @@ begin
     Result := StrToInt(Content.GetSimpleField(Layers, '_size'));
 end;
 
-function TPaintDotNetFile.BlendOperation(Layer: integer): TBlendOperation;
+function TPaintDotNetFile.GetBlendOperation(Layer: integer): TBlendOperation;
 begin
-  Result := GetBlendOperation(GetLayer(layer));
+  Result := InternalGetBlendOperation(InternalGetLayer(layer));
 end;
 
-function TPaintDotNetFile.LayerVisible(layer: integer): boolean;
+function TPaintDotNetFile.GetLayerVisible(layer: integer): boolean;
 begin
-  Result := GetLayerVisible(GetLayer(layer));
+  Result := InternalGetLayerVisible(InternalGetLayer(layer));
 end;
 
-function TPaintDotNetFile.LayerOpacity(layer: integer): byte;
+function TPaintDotNetFile.GetLayerOpacity(layer: integer): byte;
 begin
-  Result := GetLayerOpacity(GetLayer(layer));
+  Result := InternalGetLayerOpacity(InternalGetLayer(layer));
 end;
 
-function TPaintDotNetFile.LayerName(layer: integer): string;
+function TPaintDotNetFile.GetLayerName(layer: integer): string;
 begin
-  Result := GetLayerName(GetLayer(layer));
+  Result := InternalGetLayerName(InternalGetLayer(layer));
 end;
 
-function TPaintDotNetFile.MakeBitmapLayer(layer: integer): TBGRABitmap;
+function TPaintDotNetFile.GetLayerBitmapCopy(layer: integer): TBGRABitmap;
 begin
   if (layer < 0) or (layer >= NbLayers) then
     raise Exception.Create('Index out of bounds');
@@ -387,42 +378,7 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.ComputeFlatImage: TBGRABitmap;
-var
-  tempLayer, tempMerge: TBGRABitmap;
-  i: integer;
-begin
-  Result := TBGRABitmap.Create(Width, Height);
-  for i := 0 to NbLayers - 1 do
-  begin
-    tempLayer := MakeBitmapLayer(i);
-    if tempLayer <> nil then
-    begin
-      //first layer is simply the background
-      if i = 0 then
-        Result.PutImage(0, 0, tempLayer, dmSet)
-      else
-      //simple blend operations
-      if BlendOperation(i) in [boTransparent, boLinearBlend] then
-      begin
-        tempLayer.ApplyGlobalOpacity(LayerOpacity(i));
-        Result.BlendImage(0, 0, tempLayer, BlendOperation(i));
-      end
-      else
-        //complex blend operations are done in a third bitmap
-      begin
-        tempMerge := Result.Duplicate as TBGRABitmap;
-        tempMerge.BlendImage(0, 0, tempLayer, BlendOperation(i));
-        tempMerge.ApplyGlobalOpacity(LayerOpacity(i));
-        Result.PutImage(0, 0, tempMerge, dmFastBlend);
-        tempMerge.Free;
-      end;
-      tempLayer.Free;
-    end;
-  end;
-end;
-
-function TPaintDotNetFile.GetLayerName(layer: TSerializedClass): string;
+function TPaintDotNetFile.InternalGetLayerName(layer: TSerializedClass): string;
 var
   prop: TCustomSerializedObject;
 begin
@@ -444,7 +400,7 @@ function TPaintDotNetFile.LayerDataSize(numLayer: integer): int64;
 var
   layer, surface, scan0: TCustomSerializedObject;
 begin
-  layer := GetLayer(numLayer);
+  layer := InternalGetLayer(numLayer);
   if layer = nil then
     Result := 0
   else
@@ -513,7 +469,7 @@ begin
     raise Exception('Unknown compression flag (' + IntToStr(CompressionFlag) + ')');
 end;
 
-function TPaintDotNetFile.GetLayer(num: integer): TSerializedClass;
+function TPaintDotNetFile.InternalGetLayer(num: integer): TSerializedClass;
 var
   layerList: TCustomSerializedObject;
 begin
@@ -529,7 +485,7 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.GetBlendOperation(layer: TSerializedClass): TBlendOperation;
+function TPaintDotNetFile.InternalGetBlendOperation(layer: TSerializedClass): TBlendOperation;
 var
   prop, blendOp: TCustomSerializedObject;
   blendName:     string;
@@ -604,7 +560,7 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.GetLayerVisible(layer: TSerializedClass): boolean;
+function TPaintDotNetFile.InternalGetLayerVisible(layer: TSerializedClass): boolean;
 var
   prop: TCustomSerializedObject;
 begin
@@ -622,7 +578,7 @@ begin
   end;
 end;
 
-function TPaintDotNetFile.GetLayerOpacity(layer: TSerializedClass): byte;
+function TPaintDotNetFile.InternalGetLayerOpacity(layer: TSerializedClass): byte;
 var
   prop: TCustomSerializedObject;
 begin
@@ -645,4 +601,5 @@ initialization
   ImageHandlers.RegisterImageReader ('Paint.NET image', 'pdn', TFPReaderPaintDotNet);
 
 end.
+
 

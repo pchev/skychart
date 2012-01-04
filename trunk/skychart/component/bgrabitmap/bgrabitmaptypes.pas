@@ -87,11 +87,25 @@ type
   //Advanced blending modes
   //see : http://www.brighthub.com/multimedia/photography/articles/18301.aspx
   //and : http://www.pegtop.net/delphi/articles/blendmodes/  
-  TBlendOperation = (boLinearBlend, boTransparent, boMultiply,
-    boLinearMultiply, boAdditive, boLinearAdd, boColorBurn, boColorDodge, boReflect,
-    boGlow, boOverlay, boDifference, boLinearDifference, boNegation,
-    boLinearNegation, boLighten, boDarken, boScreen, boXor);
+  TBlendOperation = (boLinearBlend, boTransparent,                                  //blending
+    boLighten, boScreen, boAdditive, boLinearAdd, boColorDodge, boNiceGlow,         //lighting
+    boGlow, boReflect, boOverlay, boDarkOverlay, boDarken, boMultiply, boColorBurn, //masking
+    boDifference, boLinearDifference, boNegation, boLinearNegation, boXor);         //negative
 
+const
+  boGlowMask = boGlow;
+  boLinearMultiply = boMultiply;
+
+const
+  BlendOperationStr : array[TBlendOperation] of string =
+   ('LinearBlend', 'Transparent',
+    'Lighten', 'Screen', 'Additive', 'LinearAdd', 'ColorDodge', 'NiceGlow',
+    'Glow', 'Reflect', 'Overlay', 'DarkOverlay', 'Darken', 'Multiply', 'ColorBurn',
+    'Difference', 'LinearDifference', 'Negation', 'LinearNegation', 'Xor');
+
+function StrToBlendOperation(str: string): TBlendOperation;
+
+type
   TGradientType = (gtLinear, gtReflected, gtDiamond, gtRadial);
 const
   GradientTypeStr : array[TGradientType] of string =
@@ -104,7 +118,7 @@ type
     It must have an even number of values. }
   TBGRAPenStyle = Array Of Single;
   TRoundRectangleOption = (rrTopLeftSquare,rrTopRightSquare,rrBottomRightSquare,rrBottomLeftSquare,
-                           rrTopLeftBevel,rrTopRightBevel,rrBottomRightBevel,rrBottomLeftBevel);
+                           rrTopLeftBevel,rrTopRightBevel,rrBottomRightBevel,rrBottomLeftBevel,rrDefault);
   TRoundRectangleOptions = set of TRoundRectangleOption;
   TPolygonOrder = (poNone, poFirstOnTop, poLastOnTop); //see TBGRAMultiShapeFiller in BGRAPolygon
   
@@ -154,11 +168,202 @@ const
   BGRAPixelTransparent: TBGRAPixel = (blue: 0; green: 0; red: 0; alpha: 0);
   BGRAWhite: TBGRAPixel = (blue: 255; green: 255; red: 255; alpha: 255);
   BGRABlack: TBGRAPixel = (blue: 0; green: 0; red: 0; alpha: 255);
-  
+
+  //Red colors
+  CSSIndianRed: TBGRAPixel = (blue: 92; green: 92; red: 205; alpha: 255);
+  CSSLightCoral: TBGRAPixel = (blue: 128; green: 128; red: 240; alpha: 255);
+  CSSSalmon: TBGRAPixel = (blue: 114; green: 128; red: 250; alpha: 255);
+  CSSDarkSalmon: TBGRAPixel = (blue: 122; green: 150; red: 233; alpha: 255);
+  CSSRed: TBGRAPixel = (blue: 0; green: 0; red: 255; alpha: 255);
+  CSSCrimson: TBGRAPixel = (blue: 60; green: 20; red: 220; alpha: 255);
+  CSSFireBrick: TBGRAPixel = (blue: 34; green: 34; red: 178; alpha: 255);
+  CSSDarkRed: TBGRAPixel = (blue: 0; green: 0; red: 139; alpha: 255);
+
+  //Pink colors
+  CSSPink: TBGRAPixel = (blue: 203; green: 192; red: 255; alpha: 255);
+  CSSLightPink: TBGRAPixel = (blue: 193; green: 182; red: 255; alpha: 255);
+  CSSHotPink: TBGRAPixel = (blue: 180; green: 105; red: 255; alpha: 255);
+  CSSDeepPink: TBGRAPixel = (blue: 147; green: 20; red: 255; alpha: 255);
+  CSSMediumVioletRed: TBGRAPixel = (blue: 133; green: 21; red: 199; alpha: 255);
+  CSSPaleVioletRed: TBGRAPixel = (blue: 147; green: 112; red: 219; alpha: 255);
+
+  //Orange colors
+  CSSLightSalmon: TBGRAPixel = (blue: 122; green: 160; red: 255; alpha: 255);
+  CSSCoral: TBGRAPixel = (blue: 80; green: 127; red: 255; alpha: 255);
+  CSSTomato: TBGRAPixel = (blue: 71; green: 99; red: 255; alpha: 255);
+  CSSOrangeRed: TBGRAPixel = (blue: 0; green: 69; red: 255; alpha: 255);
+  CSSDarkOrange: TBGRAPixel = (blue: 0; green: 140; red: 255; alpha: 255);
+  CSSOrange: TBGRAPixel = (blue: 0; green: 165; red: 255; alpha: 255);
+
+  //Yellow colors
+  CSSGold: TBGRAPixel = (blue: 0; green: 215; red: 255; alpha: 255);
+  CSSYellow: TBGRAPixel = (blue: 0; green: 255; red: 255; alpha: 255);
+  CSSLightYellow: TBGRAPixel = (blue: 224; green: 255; red: 255; alpha: 255);
+  CSSLemonChiffon: TBGRAPixel = (blue: 205; green: 250; red: 255; alpha: 255);
+  CSSLightGoldenrodYellow: TBGRAPixel = (blue: 210; green: 250; red: 250; alpha: 255);
+  CSSPapayaWhip: TBGRAPixel = (blue: 213; green: 239; red: 255; alpha: 255);
+  CSSMoccasin: TBGRAPixel = (blue: 181; green: 228; red: 255; alpha: 255);
+  CSSPeachPuff: TBGRAPixel = (blue: 185; green: 218; red: 255; alpha: 255);
+  CSSPaleGoldenrod: TBGRAPixel = (blue: 170; green: 232; red: 238; alpha: 255);
+  CSSKhaki: TBGRAPixel = (blue: 140; green: 230; red: 240; alpha: 255);
+  CSSDarkKhaki: TBGRAPixel = (blue: 107; green: 183; red: 189; alpha: 255);
+
+  //Purple colors
+  CSSLavender: TBGRAPixel = (blue: 250; green: 230; red: 230; alpha: 255);
+  CSSThistle: TBGRAPixel = (blue: 216; green: 191; red: 216; alpha: 255);
+  CSSPlum: TBGRAPixel = (blue: 221; green: 160; red: 221; alpha: 255);
+  CSSViolet: TBGRAPixel = (blue: 238; green: 130; red: 238; alpha: 255);
+  CSSOrchid: TBGRAPixel = (blue: 214; green: 112; red: 218; alpha: 255);
+  CSSFuchsia: TBGRAPixel = (blue: 255; green: 0; red: 255; alpha: 255);
+  CSSMagenta: TBGRAPixel = (blue: 255; green: 0; red: 255; alpha: 255);
+  CSSMediumOrchid: TBGRAPixel = (blue: 211; green: 85; red: 186; alpha: 255);
+  CSSMediumPurple: TBGRAPixel = (blue: 219; green: 112; red: 147; alpha: 255);
+  CSSBlueViolet: TBGRAPixel = (blue: 226; green: 43; red: 138; alpha: 255);
+  CSSDarkViolet: TBGRAPixel = (blue: 211; green: 0; red: 148; alpha: 255);
+  CSSDarkOrchid: TBGRAPixel = (blue: 204; green: 50; red: 153; alpha: 255);
+  CSSDarkMagenta: TBGRAPixel = (blue: 139; green: 0; red: 139; alpha: 255);
+  CSSPurple: TBGRAPixel = (blue: 128; green: 0; red: 128; alpha: 255);
+  CSSIndigo: TBGRAPixel = (blue: 130; green: 0; red: 75; alpha: 255);
+  CSSDarkSlateBlue: TBGRAPixel = (blue: 139; green: 61; red: 72; alpha: 255);
+  CSSSlateBlue: TBGRAPixel = (blue: 205; green: 90; red: 106; alpha: 255);
+  CSSMediumSlateBlue: TBGRAPixel = (blue: 238; green: 104; red: 123; alpha: 255);
+
+  //Green colors
+  CSSGreenYellow: TBGRAPixel = (blue: 47; green: 255; red: 173; alpha: 255);
+  CSSChartreuse: TBGRAPixel = (blue: 0; green: 255; red: 127; alpha: 255);
+  CSSLawnGreen: TBGRAPixel = (blue: 0; green: 252; red: 124; alpha: 255);
+  CSSLime: TBGRAPixel = (blue: 0; green: 255; red: 0; alpha: 255);
+  CSSLimeGreen: TBGRAPixel = (blue: 50; green: 205; red: 50; alpha: 255);
+  CSSPaleGreen: TBGRAPixel = (blue: 152; green: 251; red: 152; alpha: 255);
+  CSSLightGreen: TBGRAPixel = (blue: 144; green: 238; red: 144; alpha: 255);
+  CSSMediumSpringGreen: TBGRAPixel = (blue: 154; green: 250; red: 0; alpha: 255);
+  CSSSpringGreen: TBGRAPixel = (blue: 127; green: 255; red: 0; alpha: 255);
+  CSSMediumSeaGreen: TBGRAPixel = (blue: 113; green: 179; red: 60; alpha: 255);
+  CSSSeaGreen: TBGRAPixel = (blue: 87; green: 139; red: 46; alpha: 255);
+  CSSForestGreen: TBGRAPixel = (blue: 34; green: 139; red: 34; alpha: 255);
+  CSSGreen: TBGRAPixel = (blue: 0; green: 128; red: 0; alpha: 255);
+  CSSDarkGreen: TBGRAPixel = (blue: 0; green: 100; red: 0; alpha: 255);
+  CSSYellowGreen: TBGRAPixel = (blue: 50; green: 205; red: 154; alpha: 255);
+  CSSOliveDrab: TBGRAPixel = (blue: 35; green: 142; red: 107; alpha: 255);
+  CSSOlive: TBGRAPixel = (blue: 0; green: 128; red: 128; alpha: 255);
+  CSSDarkOliveGreen: TBGRAPixel = (blue: 47; green: 107; red: 85; alpha: 255);
+  CSSMediumAquamarine: TBGRAPixel = (blue: 170; green: 205; red: 102; alpha: 255);
+  CSSDarkSeaGreen: TBGRAPixel = (blue: 143; green: 188; red: 143; alpha: 255);
+  CSSLightSeaGreen: TBGRAPixel = (blue: 170; green: 178; red: 32; alpha: 255);
+  CSSDarkCyan: TBGRAPixel = (blue: 139; green: 139; red: 0; alpha: 255);
+  CSSTeal: TBGRAPixel = (blue: 128; green: 128; red: 0; alpha: 255);
+
+  //Blue/Cyan colors
+  CSSAqua: TBGRAPixel = (blue: 255; green: 255; red: 0; alpha: 255);
+  CSSCyan: TBGRAPixel = (blue: 255; green: 255; red: 0; alpha: 255);
+  CSSLightCyan: TBGRAPixel = (blue: 255; green: 255; red: 224; alpha: 255);
+  CSSPaleTurquoise: TBGRAPixel = (blue: 238; green: 238; red: 175; alpha: 255);
+  CSSAquamarine: TBGRAPixel = (blue: 212; green: 255; red: 127; alpha: 255);
+  CSSTurquoise: TBGRAPixel = (blue: 208; green: 224; red: 64; alpha: 255);
+  CSSMediumTurquoise: TBGRAPixel = (blue: 204; green: 209; red: 72; alpha: 255);
+  CSSDarkTurquoise: TBGRAPixel = (blue: 209; green: 206; red: 0; alpha: 255);
+  CSSCadetBlue: TBGRAPixel = (blue: 160; green: 158; red: 95; alpha: 255);
+  CSSSteelBlue: TBGRAPixel = (blue: 180; green: 130; red: 70; alpha: 255);
+  CSSLightSteelBlue: TBGRAPixel = (blue: 222; green: 196; red: 176; alpha: 255);
+  CSSPowderBlue: TBGRAPixel = (blue: 230; green: 224; red: 176; alpha: 255);
+  CSSLightBlue: TBGRAPixel = (blue: 230; green: 216; red: 173; alpha: 255);
+  CSSSkyBlue: TBGRAPixel = (blue: 235; green: 206; red: 135; alpha: 255);
+  CSSLightSkyBlue: TBGRAPixel = (blue: 250; green: 206; red: 135; alpha: 255);
+  CSSDeepSkyBlue: TBGRAPixel = (blue: 255; green: 191; red: 0; alpha: 255);
+  CSSDodgerBlue: TBGRAPixel = (blue: 255; green: 144; red: 30; alpha: 255);
+  CSSCornflowerBlue: TBGRAPixel = (blue: 237; green: 149; red: 100; alpha: 255);
+  CSSRoyalBlue: TBGRAPixel = (blue: 255; green: 105; red: 65; alpha: 255);
+  CSSBlue: TBGRAPixel = (blue: 255; green: 0; red: 0; alpha: 255);
+  CSSMediumBlue: TBGRAPixel = (blue: 205; green: 0; red: 0; alpha: 255);
+  CSSDarkBlue: TBGRAPixel = (blue: 139; green: 0; red: 0; alpha: 255);
+  CSSNavy: TBGRAPixel = (blue: 128; green: 0; red: 0; alpha: 255);
+  CSSMidnightBlue: TBGRAPixel = (blue: 112; green: 25; red: 25; alpha: 255);
+
+  //Brown colors
+  CSSCornsilk: TBGRAPixel = (blue: 220; green: 248; red: 255; alpha: 255);
+  CSSBlanchedAlmond: TBGRAPixel = (blue: 205; green: 235; red: 255; alpha: 255);
+  CSSBisque: TBGRAPixel = (blue: 196; green: 228; red: 255; alpha: 255);
+  CSSNavajoWhite: TBGRAPixel = (blue: 173; green: 222; red: 255; alpha: 255);
+  CSSWheat: TBGRAPixel = (blue: 179; green: 222; red: 245; alpha: 255);
+  CSSBurlyWood: TBGRAPixel = (blue: 135; green: 184; red: 222; alpha: 255);
+  CSSTan: TBGRAPixel = (blue: 140; green: 180; red: 210; alpha: 255);
+  CSSRosyBrown: TBGRAPixel = (blue: 143; green: 143; red: 188; alpha: 255);
+  CSSSandyBrown: TBGRAPixel = (blue: 96; green: 164; red: 244; alpha: 255);
+  CSSGoldenrod: TBGRAPixel = (blue: 32; green: 165; red: 218; alpha: 255);
+  CSSDarkGoldenrod: TBGRAPixel = (blue: 11; green: 134; red: 184; alpha: 255);
+  CSSPeru: TBGRAPixel = (blue: 63; green: 133; red: 205; alpha: 255);
+  CSSChocolate: TBGRAPixel = (blue: 30; green: 105; red: 210; alpha: 255);
+  CSSSaddleBrown: TBGRAPixel = (blue: 19; green: 69; red: 139; alpha: 255);
+  CSSSienna: TBGRAPixel = (blue: 45; green: 82; red: 160; alpha: 255);
+  CSSBrown: TBGRAPixel = (blue: 42; green: 42; red: 165; alpha: 255);
+  CSSMaroon: TBGRAPixel = (blue: 0; green: 0; red: 128; alpha: 255);
+
+  //White colors
+  CSSWhite: TBGRAPixel = (blue: 255; green: 255; red: 255; alpha: 255);
+  CSSSnow: TBGRAPixel = (blue: 250; green: 250; red: 255; alpha: 255);
+  CSSHoneydew: TBGRAPixel = (blue: 240; green: 255; red: 250; alpha: 255);
+  CSSMintCream: TBGRAPixel = (blue: 250; green: 255; red: 245; alpha: 255);
+  CSSAzure: TBGRAPixel = (blue: 255; green: 255; red: 240; alpha: 255);
+  CSSAliceBlue: TBGRAPixel = (blue: 255; green: 248; red: 240; alpha: 255);
+  CSSGhostWhite: TBGRAPixel = (blue: 255; green: 248; red: 248; alpha: 255);
+  CSSWhiteSmoke: TBGRAPixel = (blue: 245; green: 245; red: 245; alpha: 255);
+  CSSSeashell: TBGRAPixel = (blue: 255; green: 245; red: 238; alpha: 255);
+  CSSBeige: TBGRAPixel = (blue: 220; green: 245; red: 245; alpha: 255);
+  CSSOldLace: TBGRAPixel = (blue: 230; green: 245; red: 253; alpha: 255);
+  CSSFloralWhite: TBGRAPixel = (blue: 240; green: 250; red: 255; alpha: 255);
+  CSSIvory: TBGRAPixel = (blue: 240; green: 255; red: 255; alpha: 255);
+  CSSAntiqueWhite: TBGRAPixel = (blue: 215; green: 235; red: 250; alpha: 255);
+  CSSLinen: TBGRAPixel = (blue: 230; green: 240; red: 250; alpha: 255);
+  CSSLavenderBlush: TBGRAPixel = (blue: 245; green: 240; red: 255; alpha: 255);
+  CSSMistyRose: TBGRAPixel = (blue: 255; green: 228; red: 255; alpha: 255);
+
+  //Gray colors
+  CSSGainsboro: TBGRAPixel = (blue: 220; green: 220; red: 220; alpha: 255);
+  CSSLightGray: TBGRAPixel = (blue: 211; green: 211; red: 211; alpha: 255);
+  CSSSilver: TBGRAPixel = (blue: 192; green: 192; red: 192; alpha: 255);
+  CSSDarkGray: TBGRAPixel = (blue: 169; green: 169; red: 169; alpha: 255);
+  CSSGray: TBGRAPixel = (blue: 128; green: 128; red: 128; alpha: 255);
+  CSSDimGray: TBGRAPixel = (blue: 105; green: 105; red: 105; alpha: 255);
+  CSSLightSlateGray: TBGRAPixel = (blue: 153; green: 136; red: 119; alpha: 255);
+  CSSSlateGray: TBGRAPixel = (blue: 144; green: 128; red: 112; alpha: 255);
+  CSSDarkSlateGray: TBGRAPixel = (blue: 79; green: 79; red: 47; alpha: 255);
+  CSSBlack: TBGRAPixel = (blue: 0; green: 0; red: 0; alpha: 255);
+
   { This color is needed for drawing black shapes on the standard TCanvas, because
     when drawing with pure black, there is no way to know if something has been
     drawn or if it is transparent }
   clBlackOpaque = TColor($010000);
+
+type
+  TBGRAColorDefinition = record
+    Name: string;
+    Color: TBGRAPixel;
+  end;
+
+  { TBGRAColorList }
+
+  TBGRAColorList = class
+  protected
+    FFinished: boolean;
+    FNbColors: integer;
+    FColors: array of TBGRAColorDefinition;
+    function GetByIndex(Index: integer): TBGRAPixel;
+    function GetByName(Name: string): TBGRAPixel;
+    function GetName(Index: integer): string;
+  public
+    constructor Create;
+    procedure Add(Name: string; Color: TBGRAPixel);
+    procedure Finished;
+    function IndexOf(Name: string): integer;
+
+    property ByName[Name: string]: TBGRAPixel read GetByName;
+    property ByIndex[Index: integer]: TBGRAPixel read GetByIndex; default;
+    property Name[Index: integer]: string read GetName;
+    property Count: integer read FNbColors;
+  end;
+
+var
+  CSSColors: TBGRAColorList;
 
 function isEmptyPointF(pt: TPointF): boolean;
 
@@ -671,6 +876,19 @@ implementation
 
 uses Math, SysUtils;
 
+function StrToBlendOperation(str: string): TBlendOperation;
+var op: TBlendOperation;
+begin
+  result := boTransparent;
+  str := LowerCase(str);
+  for op := low(TBlendOperation) to high(TBlendOperation) do
+    if str = LowerCase(BlendOperationStr[op]) then
+    begin
+      result := op;
+      exit;
+    end;
+end;
+
 function StrToGradientType(str: string): TGradientType;
 var gt: TGradientType;
 begin
@@ -830,6 +1048,71 @@ end;
 function isEmptyPointF(pt: TPointF): boolean;
 begin
   Result := (pt.x = EmptySingle) and (pt.y = EmptySingle);
+end;
+
+{ TBGRAColorList }
+
+function TBGRAColorList.GetByIndex(Index: integer): TBGRAPixel;
+begin
+  if (Index < 0) or (Index >= FNbColors) then
+    result := BGRAPixelTransparent
+  else
+    result := FColors[Index].Color;
+end;
+
+function TBGRAColorList.GetByName(Name: string): TBGRAPixel;
+var i: integer;
+begin
+  i := IndexOf(Name);
+  if i = -1 then
+    result := BGRAPixelTransparent
+  else
+    result := FColors[i].Color;
+end;
+
+function TBGRAColorList.GetName(Index: integer): string;
+begin
+  if (Index < 0) or (Index >= FNbColors) then
+    result := ''
+  else
+    result := FColors[Index].Name;
+end;
+
+constructor TBGRAColorList.Create;
+begin
+  FNbColors:= 0;
+  FColors := nil;
+  FFinished:= false;
+end;
+
+procedure TBGRAColorList.Add(Name: string; Color: TBGRAPixel);
+begin
+  if FFinished then
+    raise Exception.Create('This list is already finished');
+  if length(FColors) = FNbColors then
+    SetLength(FColors, FNbColors*2+1);
+  FColors[FNbColors].Name := Name;
+  FColors[FNbColors].Color := Color;
+  inc(FNbColors);
+end;
+
+procedure TBGRAColorList.Finished;
+begin
+  if FFinished then exit;
+  FFinished := true;
+  SetLength(FColors, FNbColors);
+end;
+
+function TBGRAColorList.IndexOf(Name: string): integer;
+var i: integer;
+begin
+  for i := 0 to FNbColors-1 do
+    if CompareText(Name, FColors[i].Name) = 0 then
+    begin
+      result := i;
+      exit;
+    end;
+  result := -1;
 end;
 
 { TBGRACustomBitmap }
@@ -1775,6 +2058,7 @@ function StrToBGRA(str: string): TBGRAPixel;
 var errPos: integer;
     values: array of string;
     alphaF: single;
+    idx: integer;
 begin
   if str = '' then
   begin
@@ -1782,6 +2066,8 @@ begin
     exit;
   end;
   str := lowerCase(str);
+
+  //VGA color names
   if str='black' then result := BGRA(0,0,0) else
   if str='silver' then result := BGRA(192,192,192) else
   if str='gray' then result := BGRA(128,128,128) else
@@ -1800,6 +2086,15 @@ begin
   if str='aqua' then result := BGRA(0,255,255) else
   if str='transparent' then result := BGRAPixelTransparent else
   begin
+    //check CSS color
+    idx := CSSColors.IndexOf(str);
+    if idx <> -1 then
+    begin
+      result := CSSColors[idx];
+      exit;
+    end;
+
+    //CSS RGB notation
     if (copy(str,1,4)='rgb(') or (copy(str,1,5)='rgba(') then
     begin
       values := SimpleParseFuncParam(str);
@@ -1823,9 +2118,15 @@ begin
         result := BGRAPixelTransparent;
       exit;
     end;
+
+    //remove HTML notation header
     if str[1]='#' then delete(str,1,1);
+
+    //add alpha if missing
     if length(str)=6 then str += 'FF';
     if length(str)=3 then str += 'F';
+
+    //hex notation
     if length(str)=8 then
     begin
       val('$'+copy(str,1,2),result.red,errPos);
@@ -2162,6 +2463,151 @@ end;
 initialization
 
   InitGamma;
+  CSSColors := TBGRAColorList.Create;
+  CSSColors.Add('AliceBlue',CSSAliceBlue);
+  CSSColors.Add('AntiqueWhite',CSSAntiqueWhite);
+  CSSColors.Add('Aqua',CSSAqua);
+  CSSColors.Add('Aquamarine',CSSAquamarine);
+  CSSColors.Add('Azure',CSSAzure);
+  CSSColors.Add('Beige',CSSBeige);
+  CSSColors.Add('Bisque',CSSBisque);
+  CSSColors.Add('Black',CSSBlack);
+  CSSColors.Add('BlanchedAlmond',CSSBlanchedAlmond);
+  CSSColors.Add('Blue',CSSBlue);
+  CSSColors.Add('BlueViolet',CSSBlueViolet);
+  CSSColors.Add('Brown',CSSBrown);
+  CSSColors.Add('BurlyWood',CSSBurlyWood);
+  CSSColors.Add('CadetBlue',CSSCadetBlue);
+  CSSColors.Add('Chartreuse',CSSChartreuse);
+  CSSColors.Add('Chocolate',CSSChocolate);
+  CSSColors.Add('Coral',CSSCoral);
+  CSSColors.Add('CornflowerBlue',CSSCornflowerBlue);
+  CSSColors.Add('Cornsilk',CSSCornsilk);
+  CSSColors.Add('Crimson',CSSCrimson);
+  CSSColors.Add('Cyan',CSSCyan);
+  CSSColors.Add('DarkBlue',CSSDarkBlue);
+  CSSColors.Add('DarkCyan',CSSDarkCyan);
+  CSSColors.Add('DarkGoldenrod',CSSDarkGoldenrod);
+  CSSColors.Add('DarkGray',CSSDarkGray);
+  CSSColors.Add('DarkGreen',CSSDarkGreen);
+  CSSColors.Add('DarkKhaki',CSSDarkKhaki);
+  CSSColors.Add('DarkMagenta',CSSDarkMagenta);
+  CSSColors.Add('DarkOliveGreen',CSSDarkOliveGreen);
+  CSSColors.Add('DarkOrange',CSSDarkOrange);
+  CSSColors.Add('DarkOrchid',CSSDarkOrchid);
+  CSSColors.Add('DarkRed',CSSDarkRed);
+  CSSColors.Add('DarkSalmon',CSSDarkSalmon);
+  CSSColors.Add('DarkSeaGreen',CSSDarkSeaGreen);
+  CSSColors.Add('DarkSlateBlue',CSSDarkSlateBlue);
+  CSSColors.Add('DarkSlateGray',CSSDarkSlateGray);
+  CSSColors.Add('DarkTurquoise',CSSDarkTurquoise);
+  CSSColors.Add('DarkViolet',CSSDarkViolet);
+  CSSColors.Add('DeepPink',CSSDeepPink);
+  CSSColors.Add('DeepSkyBlue',CSSDeepSkyBlue);
+  CSSColors.Add('DimGray',CSSDimGray);
+  CSSColors.Add('DodgerBlue',CSSDodgerBlue);
+  CSSColors.Add('FireBrick',CSSFireBrick);
+  CSSColors.Add('FloralWhite',CSSFloralWhite);
+  CSSColors.Add('ForestGreen',CSSForestGreen);
+  CSSColors.Add('Fuchsia',CSSFuchsia);
+  CSSColors.Add('Gainsboro',CSSGainsboro);
+  CSSColors.Add('GhostWhite',CSSGhostWhite);
+  CSSColors.Add('Gold',CSSGold);
+  CSSColors.Add('Goldenrod',CSSGoldenrod);
+  CSSColors.Add('Gray',CSSGray);
+  CSSColors.Add('Green',CSSGreen);
+  CSSColors.Add('GreenYellow',CSSGreenYellow);
+  CSSColors.Add('Honeydew',CSSHoneydew);
+  CSSColors.Add('HotPink',CSSHotPink);
+  CSSColors.Add('IndianRed',CSSIndianRed);
+  CSSColors.Add('Indigo',CSSIndigo);
+  CSSColors.Add('Ivory',CSSIvory);
+  CSSColors.Add('Khaki',CSSKhaki);
+  CSSColors.Add('Lavender',CSSLavender);
+  CSSColors.Add('LavenderBlush',CSSLavenderBlush);
+  CSSColors.Add('LawnGreen',CSSLawnGreen);
+  CSSColors.Add('LemonChiffon',CSSLemonChiffon);
+  CSSColors.Add('LightBlue',CSSLightBlue);
+  CSSColors.Add('LightCoral',CSSLightCoral);
+  CSSColors.Add('LightCyan',CSSLightCyan);
+  CSSColors.Add('LightGoldenrodYellow',CSSLightGoldenrodYellow);
+  CSSColors.Add('LightGray',CSSLightGray);
+  CSSColors.Add('LightGreen',CSSLightGreen);
+  CSSColors.Add('LightPink',CSSLightPink);
+  CSSColors.Add('LightSalmon',CSSLightSalmon);
+  CSSColors.Add('LightSeaGreen',CSSLightSeaGreen);
+  CSSColors.Add('LightSkyBlue',CSSLightSkyBlue);
+  CSSColors.Add('LightSlateGray',CSSLightSlateGray);
+  CSSColors.Add('LightSteelBlue',CSSLightSteelBlue);
+  CSSColors.Add('LightYellow',CSSLightYellow);
+  CSSColors.Add('Lime',CSSLime);
+  CSSColors.Add('LimeGreen',CSSLimeGreen);
+  CSSColors.Add('Linen',CSSLinen);
+  CSSColors.Add('Magenta',CSSMagenta);
+  CSSColors.Add('Maroon',CSSMaroon);
+  CSSColors.Add('MediumAquamarine',CSSMediumAquamarine);
+  CSSColors.Add('MediumBlue',CSSMediumBlue);
+  CSSColors.Add('MediumOrchid',CSSMediumOrchid);
+  CSSColors.Add('MediumPurple',CSSMediumPurple);
+  CSSColors.Add('MediumSeaGreen',CSSMediumSeaGreen);
+  CSSColors.Add('MediumSlateBlue',CSSMediumSlateBlue);
+  CSSColors.Add('MediumSpringGreen',CSSMediumSpringGreen);
+  CSSColors.Add('MediumTurquoise',CSSMediumTurquoise);
+  CSSColors.Add('MediumVioletRed',CSSMediumVioletRed);
+  CSSColors.Add('MidnightBlue',CSSMidnightBlue);
+  CSSColors.Add('MintCream',CSSMintCream);
+  CSSColors.Add('MistyRose',CSSMistyRose);
+  CSSColors.Add('Moccasin',CSSMoccasin);
+  CSSColors.Add('NavajoWhite',CSSNavajoWhite);
+  CSSColors.Add('Navy',CSSNavy);
+  CSSColors.Add('OldLace',CSSOldLace);
+  CSSColors.Add('Olive',CSSOlive);
+  CSSColors.Add('OliveDrab',CSSOliveDrab);
+  CSSColors.Add('Orange',CSSOrange);
+  CSSColors.Add('OrangeRed',CSSOrangeRed);
+  CSSColors.Add('Orchid',CSSOrchid);
+  CSSColors.Add('PaleGoldenrod',CSSPaleGoldenrod);
+  CSSColors.Add('PaleGreen',CSSPaleGreen);
+  CSSColors.Add('PaleTurquoise',CSSPaleTurquoise);
+  CSSColors.Add('PaleVioletRed',CSSPaleVioletRed);
+  CSSColors.Add('PapayaWhip',CSSPapayaWhip);
+  CSSColors.Add('PeachPuff',CSSPeachPuff);
+  CSSColors.Add('Peru',CSSPeru);
+  CSSColors.Add('Pink',CSSPink);
+  CSSColors.Add('Plum',CSSPlum);
+  CSSColors.Add('PowderBlue',CSSPowderBlue);
+  CSSColors.Add('Purple',CSSPurple);
+  CSSColors.Add('Red',CSSRed);
+  CSSColors.Add('RosyBrown',CSSRosyBrown);
+  CSSColors.Add('RoyalBlue',CSSRoyalBlue);
+  CSSColors.Add('SaddleBrown',CSSSaddleBrown);
+  CSSColors.Add('Salmon',CSSSalmon);
+  CSSColors.Add('SandyBrown',CSSSandyBrown);
+  CSSColors.Add('SeaGreen',CSSSeaGreen);
+  CSSColors.Add('Seashell',CSSSeashell);
+  CSSColors.Add('Sienna',CSSSienna);
+  CSSColors.Add('Silver',CSSSilver);
+  CSSColors.Add('SkyBlue',CSSSkyBlue);
+  CSSColors.Add('SlateBlue',CSSSlateBlue);
+  CSSColors.Add('SlateGray',CSSSlateGray);
+  CSSColors.Add('Snow',CSSSnow);
+  CSSColors.Add('SpringGreen',CSSSpringGreen);
+  CSSColors.Add('SteelBlue',CSSSteelBlue);
+  CSSColors.Add('Tan',CSSTan);
+  CSSColors.Add('Teal',CSSTeal);
+  CSSColors.Add('Thistle',CSSThistle);
+  CSSColors.Add('Tomato',CSSTomato);
+  CSSColors.Add('Turquoise',CSSTurquoise);
+  CSSColors.Add('Violet',CSSViolet);
+  CSSColors.Add('Wheat',CSSWheat);
+  CSSColors.Add('White',CSSWhite);
+  CSSColors.Add('WhiteSmoke',CSSWhiteSmoke);
+  CSSColors.Add('Yellow',CSSYellow);
+  CSSColors.Add('YellowGreen',CSSYellowGreen);
+  CSSColors.Finished;
+
+finalization
+
+  CSSColors.Free;
 
 end.
-
