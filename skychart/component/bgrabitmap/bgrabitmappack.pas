@@ -12,7 +12,7 @@ uses
   BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
   BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
   BGRACanvas, BGRAFillInfo, BGRAPath, BGRACanvas2D, BGRAScene3D, BGRATextFX, 
-  BGRAPhongTypes, LazarusPackageIntf;
+  BGRAPhongTypes, BGRALayers, LazarusPackageIntf;
 
 implementation
 

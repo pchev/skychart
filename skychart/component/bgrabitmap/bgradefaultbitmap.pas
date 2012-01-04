@@ -1307,61 +1307,216 @@ end;
 function TBGRADefaultBitmap.LoadFromRawImage(ARawImage: TRawImage;
   DefaultOpacity: byte; AlwaysReplaceAlpha: boolean; RaiseErrorOnInvalidPixelFormat: boolean): boolean;
 var
-  psource_byte, pdest_byte: PByte;
-  n, x, y, delta: integer;
-  psource_pix, pdest_pix: PBGRAPixel;
-  sourceval:      longword;
-  OpacityOrMask:  longword;
+  psource_byte, pdest_byte,
+  psource_first, pdest_first: PByte;
+  psource_delta, pdest_delta: integer;
+
+  n: integer;
+  mustSwapRedBlue: boolean;
+
+  procedure CopyAndSwapIfNecessary(psrc: PBGRAPixel; pdest: PBGRAPixel; count: integer);
+  begin
+    if mustSwapRedBlue then
+    begin
+      while count > 0 do
+      begin
+        pdest^.red := psrc^.blue;
+        pdest^.green := psrc^.green;
+        pdest^.blue := psrc^.red;
+        pdest^.alpha := psrc^.alpha;
+        dec(count);
+        inc(pdest);
+        inc(psrc);
+      end;
+    end else
+      move(psrc^,pdest^,count*sizeof(TBGRAPixel));
+  end;
+
+  procedure CopyRGBAndSwapIfNecessary(psrc: PByte; pdest: PBGRAPixel; count: integer);
+  begin
+    if mustSwapRedBlue then
+    begin
+      while count > 0 do
+      begin
+        pdest^.blue := (psource_byte+2)^;
+        pdest^.green := (psource_byte+1)^;
+        pdest^.red := psource_byte^;
+        pdest^.alpha := DefaultOpacity;
+        inc(psrc,3);
+        inc(pdest);
+        dec(count);
+      end;
+    end else
+    begin
+      while count > 0 do
+      begin
+        PWord(pdest)^ := PWord(psource_byte)^;
+        pdest^.red := (psource_byte+2)^;
+        pdest^.alpha := DefaultOpacity;
+        inc(psrc,3);
+        inc(pdest);
+        dec(count);
+      end;
+    end;
+  end;
+
+  procedure CopyAndSwapIfNecessaryAndSetAlpha(psrc: PBGRAPixel; pdest: PBGRAPixel; count: integer);
+  begin
+    if mustSwapRedBlue then
+    begin
+      while count > 0 do
+      begin
+        pdest^.red := psrc^.blue;
+        pdest^.green := psrc^.green;
+        pdest^.blue := psrc^.red;
+        pdest^.alpha := DefaultOpacity; //use default opacity
+        inc(psrc);
+        inc(pdest);
+        dec(count);
+      end;
+    end else
+    begin
+      while count > 0 do
+      begin
+        PWord(pdest)^ := PWord(psource_byte)^;
+        pdest^.red := psrc^.red;
+        pdest^.alpha := DefaultOpacity; //use default opacity
+        inc(psrc);
+        inc(pdest);
+        dec(count);
+      end;
+    end;
+  end;
+
+  procedure CopyAndSwapIfNecessaryAndReplaceAlpha(psrc: PBGRAPixel; pdest: PBGRAPixel; count: integer);
+  var OpacityOrMask, OpacityAndMask, sourceval: Longword;
+  begin
+    OpacityOrMask := NtoLE(longword(DefaultOpacity) shl 24);
+    OpacityAndMask := NtoLE($FFFFFF);
+    if mustSwapRedBlue then
+    begin
+      while count > 0 do
+      begin
+        sourceval := plongword(psrc)^ and OpacityAndMask;
+        if (sourceval <> 0) and (psrc^.alpha = 0) then //if not black but transparent
+        begin
+          pdest^.red := psrc^.blue;
+          pdest^.green := psrc^.green;
+          pdest^.blue := psrc^.red;
+          pdest^.alpha := DefaultOpacity; //use default opacity
+        end
+        else
+        begin
+          pdest^.red := psrc^.blue;
+          pdest^.green := psrc^.green;
+          pdest^.blue := psrc^.red;
+          pdest^.alpha := psrc^.alpha;
+        end;
+        dec(count);
+        inc(pdest);
+        inc(psrc);
+      end;
+    end else
+    begin
+      while count > 0 do
+      begin
+        sourceval := plongword(psrc)^ and OpacityAndMask;
+        if (sourceval <> 0) and (psrc^.alpha = 0) then //if not black but transparent
+          plongword(pdest)^ := sourceval or OpacityOrMask //use default opacity
+        else
+          pdest^ := psrc^;
+        dec(count);
+        inc(pdest);
+        inc(psrc);
+      end;
+    end;
+  end;
+
 begin
   if (ARawImage.Description.Width <> cardinal(Width)) or
     (ARawImage.Description.Height <> cardinal(Height)) then
-  begin
     raise Exception.Create('Bitmap size is inconsistant');
-  end
+
+  DiscardBitmapChange;
+  if (Height=0) or (Width=0) then
+  begin
+    result := true;
+    exit;
+  end;
+
+  if ARawImage.Description.LineOrder = riloTopToBottom then
+  begin
+    psource_first := ARawImage.Data;
+    psource_delta := ARawImage.Description.BytesPerLine;
+  end else
+  begin
+    psource_first := ARawImage.Data + (ARawImage.Description.Height-1) * ARawImage.Description.BytesPerLine;
+    psource_delta := -ARawImage.Description.BytesPerLine;
+  end;
+
+  if ((ARawImage.Description.RedShift = 0) and
+    (ARawImage.Description.BlueShift = 16) and
+    (ARawImage.Description.ByteOrder = riboLSBFirst)) or
+    ((ARawImage.Description.RedShift = 16) and
+    (ARawImage.Description.BlueShift = 0) and
+    (ARawImage.Description.ByteOrder = riboMSBFirst)) then
+    mustSwapRedBlue:= true
   else
+    mustSwapRedBlue:= false;
+
+  if self.LineOrder = riloTopToBottom then
+  begin
+    pdest_first := PByte(self.Data);
+    pdest_delta := self.Width*sizeof(TBGRAPixel);
+  end else
+  begin
+    pdest_first := PByte(self.Data) + (self.Height-1)*self.Width*sizeof(TBGRAPixel);
+    pdest_delta := -self.Width*sizeof(TBGRAPixel);
+  end;
+
   { 32 bits per pixel }
   if (ARawImage.Description.BitsPerPixel = 32) and
-    (ARawImage.DataSize = longword(NbPixels) * sizeof(TBGRAPixel)) then
+    (ARawImage.DataSize >= longword(NbPixels) * 4) then
   begin
     { If there is an alpha channel }
     if (ARawImage.Description.AlphaPrec = 8) and not AlwaysReplaceAlpha then
     begin
-      psource_pix := PBGRAPixel(ARawImage.Data);
-      pdest_pix   := FData;
       if DefaultOpacity = 0 then
-        move(psource_pix^, pdest_pix^, NbPixels * sizeof(TBGRAPixel))
+      begin
+        if ARawImage.Description.LineOrder = FLineOrder then
+          CopyAndSwapIfNecessary(PBGRAPixel(ARawImage.Data), FData, NbPixels) else
+        begin
+          psource_byte := psource_first;
+          pdest_byte := pdest_first;
+          for n := FHeight-1 downto 0 do
+          begin
+            CopyAndSwapIfNecessary(PBGRAPixel(psource_byte), PBGRAPixel(pdest_byte), FWidth);
+            inc(psource_byte, psource_delta);
+            inc(pdest_byte, pdest_delta);
+          end;
+        end;
+      end
       else
       begin
-        OpacityOrMask := longword(DefaultOpacity) shl 24;
-        for n := NbPixels - 1 downto 0 do
+        psource_byte := psource_first;
+        pdest_byte := pdest_first;
+        for n := FHeight-1 downto 0 do
         begin
-          sourceval := plongword(psource_pix)^ and $FFFFFF;
-          if (sourceval <> 0) and (psource_pix^.alpha = 0) then
-          begin
-            plongword(pdest_pix)^ := sourceval or OpacityOrMask;
-            InvalidateBitmap;
-          end
-          else
-            pdest_pix^ := psource_pix^;
-          Inc(pdest_pix);
-          Inc(psource_pix);
+          CopyAndSwapIfNecessaryAndReplaceAlpha(PBGRAPixel(psource_byte), PBGRAPixel(pdest_byte), FWidth);
+          inc(psource_byte, psource_delta);
+          inc(pdest_byte, pdest_delta);
         end;
       end;
     end
     else
     begin { If there isn't any alpha channel }
-      psource_byte := ARawImage.Data;
-      pdest_byte   := PByte(FData);
-      for n := NbPixels - 1 downto 0 do
+      psource_byte := psource_first;
+      pdest_byte := pdest_first;
+      for n := FHeight-1 downto 0 do
       begin
-        PWord(pdest_byte)^ := PWord(psource_byte)^;
-        Inc(pdest_byte, 2);
-        Inc(psource_byte, 2);
-        pdest_byte^ := psource_byte^;
-        Inc(pdest_byte);
-        Inc(psource_byte, 2);
-        pdest_byte^ := DefaultOpacity;
-        Inc(pdest_byte);
+        CopyAndSwapIfNecessaryAndSetAlpha(PBGRAPixel(psource_byte), PBGRAPixel(pdest_byte), FWidth);
+        inc(psource_byte, psource_delta);
+        inc(pdest_byte, pdest_delta);
       end;
     end;
   end
@@ -1369,23 +1524,13 @@ begin
   { 24 bit per pixel }
   if (ARawImage.Description.BitsPerPixel = 24) then
   begin
-    psource_byte := ARawImage.Data;
-    pdest_byte := PByte(FData);
-    delta := integer(ARawImage.Description.BytesPerLine) - FWidth * 3;
-    for y := 0 to FHeight - 1 do
+    psource_byte := psource_first;
+    pdest_byte := pdest_first;
+    for n := FHeight-1 downto 0 do
     begin
-      for x := 0 to FWidth - 1 do
-      begin
-        PWord(pdest_byte)^ := PWord(psource_byte)^;
-        Inc(pdest_byte, 2);
-        Inc(psource_byte, 2);
-        pdest_byte^ := psource_byte^;
-        Inc(pdest_byte);
-        Inc(psource_byte);
-        pdest_byte^ := DefaultOpacity;
-        Inc(pdest_byte);
-      end;
-      Inc(psource_byte, delta);
+      CopyRGBAndSwapIfNecessary(psource_byte, PBGRAPixel(pdest_byte), FWidth);
+      inc(psource_byte, psource_delta);
+      inc(pdest_byte, pdest_delta);
     end;
   end
   else
@@ -1398,13 +1543,8 @@ begin
       exit;
     end;
   end;
-  DiscardBitmapChange;
-  //it it is in RGBA order then swap
-  if (ARawImage.Description.RedShift = 0) and
-    (ARawImage.Description.BlueShift = 16) then
-    SwapRedBlue;
-  if ARawImage.Description.LineOrder <> FLineOrder then
-    VerticalFlip;
+
+  InvalidateBitmap;
   result := true;
 end;
 
@@ -3291,7 +3431,7 @@ var
   tempPixel: TBGRAPixel;
 
 begin
-  if source = nil then exit;
+  if (source = nil) or (AOpacity = 0) then exit;
   sourcewidth := Source.Width;
 
   if not CheckPutImageBounds(x,y,sourcewidth,source.height,minxb,minyb,maxxb,maxyb,ignoreleft) then exit;
@@ -4367,9 +4507,9 @@ var
   ADataSize: integer;
   ALineEndMargin: integer;
   CreateResult: boolean;
-{$IFDEF DARWIN}
-  TempShift: byte;
-{$ENDIF}
+  {$IFDEF DARWIN}
+  TempShift: Byte;
+  {$ENDIF}
 begin
   if (AHeight = 0) or (AWidth = 0) then
     exit;
@@ -4382,36 +4522,45 @@ begin
      {$HINTS ON}
   PTempData := TempData;
   PSource   := AData;
-     {$IFDEF DARWIN}
-  SwapRedBlue; //swap red and blue values
-     {$ENDIF}
+
+{$IFDEF DARWIN} //swap red and blue values
+  for y := 0 to AHeight - 1 do
+  begin
+    for x := 0 to AWidth - 1 do
+    begin
+      PTempData^ := (PSource+2)^;
+      (PTempData+1)^ := (PSource+1)^;
+      (PTempData+2)^ := PSource^;
+      inc(PTempData,3);
+      inc(PSource,4);
+    end;
+    Inc(PTempData, ALineEndMargin);
+  end;
+{$ELSE}
   for y := 0 to AHeight - 1 do
   begin
     for x := 0 to AWidth - 1 do
     begin
       PWord(PTempData)^ := PWord(PSource)^;
-      Inc(PTempData, 2);
-      Inc(PSource, 2);
-      PTempData^ := PSource^;
-      Inc(PTempData);
-      Inc(PSource, 2);
+      (PTempData+2)^ := (PSource+2)^;
+      Inc(PTempData,3);
+      Inc(PSource, 4);
     end;
     Inc(PTempData, ALineEndMargin);
   end;
-     {$IFDEF DARWIN}
-  SwapRedBlue; //swap red and blue values
-     {$ENDIF}
+{$ENDIF}
 
   RawImage.Init;
   RawImage.Description.Init_BPP24_B8G8R8_BIO_TTB(AWidth, AHeight);
-     {$IFDEF DARWIN}
-  //swap red and blue positions
+{$IFDEF DARWIN}
   TempShift := RawImage.Description.RedShift;
   RawImage.Description.RedShift := RawImage.Description.BlueShift;
   RawImage.Description.BlueShift := TempShift;
-     {$ENDIF}
+{$ENDIF}
+
   RawImage.Description.LineOrder := ALineOrder;
   RawImage.Description.LineEnd := rileDWordBoundary;
+
   if integer(RawImage.Description.BytesPerLine) <> AWidth * 3 + ALineEndMargin then
   begin
     FreeMem(TempData);

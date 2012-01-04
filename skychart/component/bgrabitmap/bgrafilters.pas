@@ -206,11 +206,11 @@ begin
         if diag1.cd < 0.3 then
         begin
           c1 := bmp.GetPixel(xb, yb);
-          c2 := bmp.GetPixel(xb + 1, yb + 1);
+          c2 := bmp.GetPixel(integer(xb + 1), integer(yb + 1));
           c := MergeBGRA(c1, c2);
           //restore
           Result.SetPixel(xb * 3 + 2, yb * 3 + 2, bmp.GetPixel(xb, yb));
-          Result.SetPixel(xb * 3 + 3, yb * 3 + 3, bmp.GetPixel(xb + 1, yb + 1));
+          Result.SetPixel(xb * 3 + 3, yb * 3 + 3, bmp.GetPixel(integer(xb + 1), integer(yb + 1)));
 
           if (diag1.sd < h1.sd) and (diag1.sd < v2.sd) then
             Result.SetPixel(xb * 3 + 3, yb * 3 + 2, c);
@@ -282,7 +282,7 @@ begin
         for dx := -1 to 1 do
           if (dx <> 0) or (dy <> 0) then
           begin
-            a_pixels[n] := bmp.GetPixel(xb + dx, yb + dy);
+            a_pixels[n] := bmp.GetPixel(integer(xb + dx), integer(yb + dy));
             Inc(n);
           end;
 
@@ -707,10 +707,10 @@ begin
     for xb := bounds.Left to bounds.Right - 1 do
     begin
       c[0] := bmp.getPixel(xb, yb);
-      c[1] := bmp.getPixel(xb + idx1, yb + idy1);
-      c[2] := bmp.getPixel(xb + idx2, yb + idy2);
-      c[3] := bmp.getPixel(xb + idx3, yb + idy3);
-      c[4] := bmp.getPixel(xb + idx4, yb + idy4);
+      c[1] := bmp.getPixel(integer(xb + idx1), integer(yb + idy1));
+      c[2] := bmp.getPixel(integer(xb + idx2), integer(yb + idy2));
+      c[3] := bmp.getPixel(integer(xb + idx3), integer(yb + idy3));
+      c[4] := bmp.getPixel(integer(xb + idx4), integer(yb + idy4));
 
       sumR   := 0;
       sumG   := 0;
@@ -1455,7 +1455,7 @@ begin
       for dy := -1 to 1 do
         for dx := -1 to 1 do
         begin
-          a_pixels[n] := bmp.GetPixel(xb + dx, yb + dy);
+          a_pixels[n] := bmp.GetPixel(integer(xb + dx), integer(yb + dy));
           if a_pixels[n].alpha = 0 then
             a_pixels[n] := BGRAPixelTransparent;
           Inc(n);

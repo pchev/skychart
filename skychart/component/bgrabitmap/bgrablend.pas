@@ -64,15 +64,17 @@ procedure BlendPixels(pdest: PBGRAPixel; psrc: PBGRAPixel;
   blendOp: TBlendOperation; Count: integer);
 
 //layer blend modes ( http://www.pegtop.net/delphi/articles/blendmodes/ )
-procedure MultiplyPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure LinearMultiplyPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure AddPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure LinearAddPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure ColorBurnPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure ColorDodgePixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure ReflectPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+procedure NonLinearReflectPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure GlowPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+procedure NiceGlowPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure OverlayPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+procedure LinearOverlayPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure DifferencePixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure LinearDifferencePixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure NegationPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -151,15 +153,7 @@ begin
 
     boMultiply: while Count > 0 do
       begin
-        MultiplyPixelInline(pdest, psrc^);
-        Inc(pdest);
-        Inc(psrc);
-        Dec(Count);
-      end;
-
-    boLinearMultiply: while Count > 0 do
-      begin
-        LinearMultiplyPixelInline(pdest, psrc^);
+        LinearMultiplyPixelInline(pdest, psrc^);  //same look with non linear
         Inc(pdest);
         Inc(psrc);
         Dec(Count);
@@ -213,7 +207,23 @@ begin
         Dec(Count);
       end;
 
+    boNiceGlow: while Count > 0 do
+      begin
+        NiceGlowPixelInline(pdest, psrc^);
+        Inc(pdest);
+        Inc(psrc);
+        Dec(Count);
+      end;
+
     boOverlay: while Count > 0 do
+      begin
+        LinearOverlayPixelInline(pdest, psrc^);
+        Inc(pdest);
+        Inc(psrc);
+        Dec(Count);
+      end;
+
+    boDarkOverlay: while Count > 0 do
       begin
         OverlayPixelInline(pdest, psrc^);
         Inc(pdest);
@@ -419,9 +429,9 @@ end;
 
 procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; c: TBGRAPixel; appliedOpacity: byte);
 begin
+  c.alpha := ApplyOpacity(c.alpha,appliedOpacity);
   if c.alpha = 0 then
     exit;
-  c.alpha := ApplyOpacity(c.alpha,appliedOpacity);
   if c.alpha = 255 then
   begin
     dest^ := c;
@@ -596,28 +606,9 @@ end;
 
 {--------------------------------------- Layer blending -----------------------------------------}
 
-function ByteMultiplyInline(a, b: byte): byte;
-begin
-  Result := GammaCompressionTab[GammaExpansionTab[a] * GammaExpansionTab[b] shr 16];
-end;
-
 function ByteLinearMultiplyInline(a, b: byte): byte;
 begin
   Result := (a * b) shr 8;
-end;
-
-procedure MultiplyPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
-var
-  destalpha: byte;
-begin
-  destalpha   := dest^.alpha;
-  dest^.red   := (ByteMultiplyInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteMultiplyInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteMultiplyInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
 end;
 
 procedure LinearMultiplyPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -742,6 +733,25 @@ begin
 end;
 
 {$hints off}
+function ByteNonLinearReflectInline(a, b: byte): byte; inline;
+var
+  temp: longword;
+  wa,wb: word;
+begin
+  if b = 255 then
+    Result := 255
+  else
+  begin
+    wa := GammaExpansionTab[a];
+    wb := GammaExpansionTab[b];
+    temp := wa * wa div (not wb);
+    if temp >= 65535 then
+      Result := 255
+    else
+      Result := GammaCompressionTab[ temp ];
+  end;
+end;
+
 function ByteReflectInline(a, b: byte): byte; inline;
 var
   temp: integer;
@@ -758,6 +768,7 @@ begin
   end;
 end;
 {$hints on}
+
 
 procedure ReflectPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 var
@@ -787,13 +798,58 @@ begin
   dest^.alpha := c.alpha;
 end;
 
+procedure NiceGlowPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+var
+  destalpha: byte;
+begin
+  destalpha   := dest^.alpha;
+  dest^.red   := (ByteReflectInline(c.red, dest^.red) * destalpha +
+    c.red * (not destalpha)) shr 8;
+  dest^.green := (ByteReflectInline(c.green, dest^.green) * destalpha +
+    c.green * (not destalpha)) shr 8;
+  dest^.blue  := (ByteReflectInline(c.blue, dest^.blue) * destalpha +
+    c.blue * (not destalpha)) shr 8;
+
+  if (c.red > c.green) and (c.red > c.blue) then
+    dest^.alpha := c.red else
+  if (c.green > c.blue) then
+    dest^.alpha := c.green else
+    dest^.alpha := c.blue;
+  dest^.alpha := ApplyOpacity(GammaExpansionTab[dest^.alpha] shr 8,c.alpha);
+end;
+
+procedure NonLinearReflectPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+var
+  destalpha: byte;
+begin
+  destalpha   := dest^.alpha;
+  dest^.red   := (ByteNonLinearReflectInline(dest^.red, c.red) * destalpha +
+    c.red * (not destalpha)) shr 8;
+  dest^.green := (ByteNonLinearReflectInline(dest^.green, c.green) * destalpha +
+    c.green * (not destalpha)) shr 8;
+  dest^.blue  := (ByteNonLinearReflectInline(dest^.blue, c.blue) * destalpha +
+    c.blue * (not destalpha)) shr 8;
+  dest^.alpha := c.alpha;
+end;
+
 {$hints off}
 function ByteOverlayInline(a, b: byte): byte; inline;
+var wa,wb: word;
+begin
+  wa := GammaExpansionTab[a];
+  wb := GammaExpansionTab[b];
+  if wa < 32768 then
+    Result := GammaCompressionTab[ (wa * wb) shr 15 ]
+  else
+    Result := GammaCompressionTab[ 65535 - ((not wa) * (not wb) shr 15) ];
+end;
+
+function ByteLinearOverlayInline(a, b: byte): byte; inline;
 begin
   if a < 128 then
     Result := (a * b) shr 7
   else
-    Result := 255 - ((255 - a) * (255 - b) shr 7);
+    Result := 255 - ((not a) * (not b) shr 7);
 end;
 
 {$hints on}
@@ -808,6 +864,20 @@ begin
   dest^.green := (ByteOverlayInline(dest^.green, c.green) * destalpha +
     c.green * (not destalpha)) shr 8;
   dest^.blue  := (ByteOverlayInline(dest^.blue, c.blue) * destalpha +
+    c.blue * (not destalpha)) shr 8;
+  dest^.alpha := c.alpha;
+end;
+
+procedure LinearOverlayPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
+var
+  destalpha: byte;
+begin
+  destalpha   := dest^.alpha;
+  dest^.red   := (ByteLinearOverlayInline(dest^.red, c.red) * destalpha +
+    c.red * (not destalpha)) shr 8;
+  dest^.green := (ByteLinearOverlayInline(dest^.green, c.green) * destalpha +
+    c.green * (not destalpha)) shr 8;
+  dest^.blue  := (ByteLinearOverlayInline(dest^.blue, c.blue) * destalpha +
     c.blue * (not destalpha)) shr 8;
   dest^.alpha := c.alpha;
 end;
