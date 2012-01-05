@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -34,13 +34,13 @@ type
                               sp       : array[1..20] of char;
                               end;
 
-Function IsBSCpath(path : string) : Boolean;
-procedure SetBSCpath(path : string);
-Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenBSCwin(var ok : boolean);
-Procedure ReadBSC(var lin : BSCrec; var ok : boolean);
-Procedure NextBSC( var ok : boolean);
-procedure CloseBSC ;
+Function IsBSCpath(path : shortstring) : Boolean; stdcall;
+procedure SetBSCpath(path : shortstring); stdcall;
+Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenBSCwin(var ok : boolean); stdcall;
+Procedure ReadBSC(var lin : BSCrec; var ok : boolean); stdcall;
+Procedure NextBSC( var ok : boolean); stdcall;
+procedure CloseBSC ; stdcall;
 
 var
   BSCpath : string ='';
@@ -63,18 +63,17 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsBSCpath(path : string) : Boolean;
+Function IsBSCpath(path : shortstring) : Boolean;
 begin
-result:= DirectoryExists(slash(path));
+result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetBSCpath(path : string);
+procedure SetBSCpath(path : shortstring);
 var i : integer;
-    buf:string;
 begin
-buf:=noslash(path);
-if buf<>Bscpath then for i:=1 to CacheNum do cachelst[i]:=0;
-BSCpath:=buf;
+path:=noslash(path);
+if path<>Bscpath then for i:=1 to CacheNum do cachelst[i]:=0;
+BSCpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -120,7 +119,7 @@ if UseCache then begin
    SetLength(cache[Ncache],1);
    Imax[Ncache]:=filesize(fbsc)-1;
    Iread[Ncache]:=0;
-   SetLength(cache[Ncache],Imax[Ncache]+2);
+   SetLength(cache[Ncache],Imax[Ncache]+1);
 end;
 end;
 ok:=true;

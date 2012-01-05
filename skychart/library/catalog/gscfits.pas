@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses gscconst,
@@ -33,13 +33,13 @@ type GSCFrec = packed record
                      plate,mult : shortstring;
                      end;
 
-Function IsGSCFpath(path : string) : Boolean;
-procedure SetGSCFpath(path : string);
-Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGSCFwin(var ok : boolean);
-Procedure ReadGSCF(var lin : GSCFrec; var SMnum : string ; var ok : boolean);
-procedure CloseGSCF ;
-Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsGSCFpath(path : shortstring) : Boolean; stdcall;
+procedure SetGSCFpath(path : shortstring); stdcall;
+Procedure OpenGSCF(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGSCFwin(var ok : boolean); stdcall;
+Procedure ReadGSCF(var lin : GSCFrec; var SMnum : shortstring ; var ok : boolean); stdcall;
+procedure CloseGSCF ; stdcall;
+Procedure FindGSCFnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 
 var
   GSCFpath: String;
@@ -60,7 +60,7 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
 
-Function IsGSCFpath(path : string) : Boolean;
+Function IsGSCFpath(path : shortstring) : Boolean;
 var p,buf : string;
     tst : array[0..5]of char;
     i,n : integer;
@@ -84,11 +84,10 @@ for i:=0 to 23 do begin
 end;
 end;
 
-procedure SetGSCFpath(path : string);
-var buf:string;
+procedure SetGSCFpath(path : shortstring);
 begin
-buf:=noslash(path);
-GSCFpath:=buf;
+path:=noslash(path);
+GSCFpath:=path;
 end;
 
 procedure ReadFITSHeader;
@@ -170,7 +169,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadGSCF(var lin : GSCFrec; var SMnum : string ; var ok : boolean);
+Procedure ReadGSCF(var lin : GSCFrec; var SMnum : shortstring ; var ok : boolean);
 var rec : string;
 begin
 inc(currec);
@@ -232,18 +231,16 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
-if ok then begin
-  ok:=false;
-  for i:=1 to nrecs do begin
-      ReadFITSRec(recsz,rec);
-      if strtoint(copy(rec,1,5))=num then begin ok:=true; break; end;
-  end;
-  if ok then begin
-    ar:=strtofloat(copy(rec,6,9))/15;
-    de:=strtofloat(copy(rec,15,9));
-  end;
-  Closeregion;
+ok:=false;
+for i:=1 to nrecs do begin
+    ReadFITSRec(recsz,rec);
+    if strtoint(copy(rec,1,5))=num then begin ok:=true; break; end;
 end;
+if ok then begin
+  ar:=strtofloat(copy(rec,6,9))/15;
+  de:=strtofloat(copy(rec,15,9));
+end;
+Closeregion;
 end;
 
 Procedure OpenGSCFwin(var ok : boolean);

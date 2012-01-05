@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -36,12 +36,12 @@ type
                     cons  : array [1..3] of char;
                     desc  : array[1..50] of char;
                  end;
-Function IsNGCpath(path : string) : Boolean;
-procedure SetNGCpath(path : string);
-Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenNGCwin(var ok : boolean);
-Procedure ReadNGC(var lin : NGCrec; var ok : boolean);
-procedure CloseNGC ;
+Function IsNGCpath(path : shortstring) : Boolean; stdcall;
+procedure SetNGCpath(path : shortstring); stdcall;
+Procedure OpenNGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenNGCwin(var ok : boolean); stdcall;
+Procedure ReadNGC(var lin : NGCrec; var ok : boolean); stdcall;
+procedure CloseNGC ; stdcall;
 
 var
   NGCpath : string;
@@ -57,14 +57,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsNGCpath(path : string) : Boolean;
+Function IsNGCpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetNGCpath(path : string);
+procedure SetNGCpath(path : shortstring);
 begin
-NGCpath:=noslash(path);
+path:=noslash(path);
+NGCpath:=path;
 end;
 
 Procedure CloseRegion;

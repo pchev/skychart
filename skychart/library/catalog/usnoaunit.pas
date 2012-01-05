@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses math,
@@ -33,13 +33,12 @@ Type USNOArec = record  id  : shortstring;
                         field,q,s: integer;
                 end;
 
-Function IsUSNOApath(path : string) : Boolean;
-Procedure OpenUSNOAwin(var ok : boolean);
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
-procedure CloseUSNOA ;
-procedure SetUSNOApath(path : string);
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
+Function IsUSNOApath(path : shortstring) : Boolean; stdcall;
+Procedure OpenUSNOAwin(var ok : boolean); stdcall;
+Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
+procedure CloseUSNOA ; stdcall;
+procedure SetUSNOApath(path : shortstring); stdcall;
 
 var USNOApath : string;
 
@@ -63,7 +62,7 @@ var
    demin,demax,armin,armax : double;
    fullwin : boolean;
 
-Function IsUSNOApath(path : string) : Boolean;
+Function IsUSNOApath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
@@ -94,9 +93,10 @@ result:= FileExists(p+'zone0000.acc')
 end;
 
 
-procedure SetUSNOApath(path : string);
+procedure SetUSNOApath(path : shortstring);
 begin
-USNOApath:=noslash(path);
+path:=noslash(path);
+USNOApath:=path;
 end;
 
 Procedure CloseRegion;
@@ -227,44 +227,14 @@ fok:=false;
    lin.field:=trunc(ma/1e6); ma:=trunc(1e6*frac(ma/1e6));
    lin.mb:=trunc(ma/1e3)/10; ma:=trunc(1e3*frac(ma/1e3));
    lin.mr:=ma/10;
-   str((rec1+currec):8,buf);
-   lin.id:=CurZone+'-'+padzeros(buf,8);
+   str((rec1+currec-1):8,buf);
+   lin.id:=CurZone+'.'+padzeros(buf,8);
 end;
 
 procedure CloseUSNOA ;
 begin
 curSM:=nSM;
 CloseRegion;
-end;
-
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
-var nomfich: string;
-    lin : USNOArec;
-begin
-ok:=false;
-if num<1 then exit;
-nomfich:=USNOApath+slashchar+'zone'+PadZeros(inttostr(zone),4)+'.cat';
-if not FileExists(nomfich) then exit;
-AssignFile(fcat,nomfich);
-FileisOpen:=true;
-FileMode:=0;
-reset(fcat);
-rec1:=0;
-nrec:=MaxInt;
-curSM:=1;
-nSM:=1;
-armin:=-1E99;
-armax:=1E99;
-demin:=-1E99;
-demax:=1E99;
-currec:=num-1;
-seek(fcat,currec);
-if not eof(fcat) then begin
-  ReadUSNOA(lin,ok);
-  ar:=lin.ar;
-  de:=lin.de;
-end;
-CloseUSNOA;
 end;
 
 Procedure FindRegionU(ar,de : double; var lg : integer);

@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -29,12 +29,12 @@ OCLrec = record ar,de :longint ;
                 cat,num,ocl,dim,dist,age,ms,mt,b_v,ns : smallint;
                 conc,range,rich,neb : char;
                 end;
-Function IsOCLpath(path : string) : Boolean;
-procedure SetOCLpath(path : string);
-Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenOCLwin(var ok : boolean);
-Procedure ReadOCL(var lin : OCLrec; var ok : boolean);
-procedure CloseOCL ;
+Function IsOCLpath(path : shortstring) : Boolean; stdcall;
+procedure SetOCLpath(path : shortstring); stdcall;
+Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenOCLwin(var ok : boolean); stdcall;
+Procedure ReadOCL(var lin : OCLrec; var ok : boolean); stdcall;
+procedure CloseOCL ; stdcall;
 
 var
   OCLpath : string;
@@ -50,14 +50,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsOCLpath(path : string) : Boolean;
+Function IsOCLpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetOCLpath(path : string);
+procedure SetOCLpath(path : shortstring);
 begin
-OCLpath:=noslash(path);
+path:=noslash(path);
+OCLpath:=path;
 end;
 
 Procedure CloseRegion;
