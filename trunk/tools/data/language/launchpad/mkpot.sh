@@ -1,3 +1,5 @@
+# Update the template on launchpad
+
 mkdir translation
 mkdir translation/skychart
 rm translation/skychart/*

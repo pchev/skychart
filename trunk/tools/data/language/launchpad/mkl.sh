@@ -1,3 +1,7 @@
+# initial upload to Launchpad
+
+exit
+
 for f in $(ls -1 ../skychart.*.po)
  do 
  fg=$(echo $f | sed 's/\.\.\/skychart\.//')
