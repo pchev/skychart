@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -32,12 +32,12 @@ PGCrec = record
                 pa    : byte;
                 maj,min,mb : smallint;
                 end;
-Function IsPGCpath(path : string) : Boolean;
-procedure SetPGCpath(path : string);
-Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenPGCwin(var ok : boolean);
-Procedure ReadPGC(var lin : PGCrec; var ok : boolean);
-procedure ClosePGC ;
+Function IsPGCpath(path : shortstring) : Boolean; stdcall;
+procedure SetPGCpath(path : shortstring); stdcall;
+Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenPGCwin(var ok : boolean); stdcall;
+Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall;
+procedure ClosePGC ; stdcall;
 
 var
   PGCpath : string;
@@ -53,14 +53,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsPGCpath(path : string) : Boolean;
+Function IsPGCpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetPGCpath(path : string);
+procedure SetPGCpath(path : shortstring);
 begin
-PGCpath:=noslash(path);
+path:=noslash(path);
+PGCpath:=path;
 end;
 
 Procedure CloseRegion;

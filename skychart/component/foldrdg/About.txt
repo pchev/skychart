@@ -1,0 +1,422 @@
+About TFolderDialog
+---------------------
+
+Component for Delphi 2.0x, Delphi 3.0x and Delphi 4.0 up to & incl. UpgrPck2.
+
+Package: Delphi Super Page FOLDRDG6.zip
+Date: 2 April 1999, replaces 12 Oct 1997 DSP upload FOLDRDG5.ZIP
+From: Fred de Jong, frejon@worldonline.nl
+-------------------------------------------
+
+The TFolderDialog Component for Borland Delphi 32 wraps the Windows 95/NT 4.0+
+  Shell32 dialog 'Browse For Folder' into a true native, customizable
+  and extendable Delphi component.
+
+Copyright (C) 1997,1998,1999  Fred de Jong - Heerlen - Netherlands
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Library General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later version.
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Library General Public License for more details.
+You should have received a copy of the GNU Library General Public
+License along with this library; if not, write to the
+Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA  02111-1307, USA.
+
+FoldrDlg.pas - 2 April 1999
+
+Most ideas and parts of this source originate from the freeware
+TBrowseFolder component written by:
+ - Todd Fast, Pencilneck Software, tfast@eden.com, pencilneck@hotmail.com
+         http://www.eden.com/~tfast/pencilneck.html
+ - Alin Flaider, aflaidar@datalog.ro
+ - Ahto Tanner, ahto@moonsoftware.ee, http://www.moonsoftware.ee
+ - Manuel Duarte
+ 
+It was redesigned to a Delphi 'naturalized' TFolderDialog and
+brought under the 'GNU Library General Public License' by:
+ - Fred de Jong, frejon@worldonline.nl, fjng@cbs.nl
+
+The TFolderDialog librarycomponent is CopyLefted software, see
+accompanying COPYLIB.htm text, added to this distribution, and:
+http://agnes.dida.physik.uni-essen.de/gnu/copyleft/lgpl.html
+
+For Free Software Foundation, see:
+http://agnes.dida.physik.uni-essen.de/gnu/fsf/fsf.html
+
+--------------------------------------------------------------------
+From:	Fred de Jong [frejon@worldonline.nl]
+Sent:	Friday, October 10, 1997 10:35 AM
+To:	'tfast@eden.com'; 'aflaidar@datalog.ro'; 'ahto@moonsoftware.ee'
+Subject:	TBrowseFolder as TFolderDialog
+Hello Todd, Alin and Ahto,
+
+Last week I saw your TBrowseFolder component on the Delphi Super
+Page. It was the first time I discovered how easy one can fiddle
+around with these Shell pidls. 
+
+Seeing the many properties needed to support a custom button
+in this common dialog, I wondered if this couldn't be handled
+in a more 'naturalized', object-oriented way.
+
+So I started to work on your source a bit...
+
+For the CustomButton this lead to ONE property, that can be
+assigned to at design-time in Delphi's IDE from a template button.
+Having done that, I decided to 'normalize' other properties
+too.
+
+Reusing common Delphi property names (for ease of use and
+enabling true Rapid Application Development), bringing the
+message-handling under the standard Delphi regime (WndProc
+method) and deriving from TCommonDialog, I actually ended up
+with a new component.
+
+So I renamed the whole thing to TFolderDialog, which also is
+in accordance with Delphi's naming convention.
+
+TFolderDialog is uploaded to the Delphi Super Page as
+FOLDRDLG.ZIP. To garantuee to everyone all rights to freely
+reuse and change the source, and making sure it stays that way,
+the source is distributed under the 'GNU LIBRARY GENERAL
+PUBLIC LICENSE'. See added file 'COPYLIB.htm'.
+It would be nice if this could become the preferred way of
+distributing software for Delphi related things too.
+
+Hope you can appreciate it...
+
+Fred
+
+
+--------------------------------------------------------------------
+From:	Todd Fast [Todd.Fast@DigitalExistence.com]
+Sent:	Friday, October 10, 1997 12:02 PM
+To:	Fred de Jong
+Subject:	Re: TBrowseFolder as TFolderDialog
+Hi Fred,
+
+>Seeing the many properties needed to support a custom button
+>in this common dialog, I wondered if this couldn't be handled
+>in a more 'naturalized', object-oriented way.
+
+Absolutely.  I've spent a grand total of maybe 20 hours on the component,
+documentation and release included.  It's certainly not an "ideal" piece of
+code in my mind, particularly the denormalized "CustomButton*" properties.
+In addition, many features were added by contributors, like the property
+editor and the choice of the custom button as a check box, which I simply
+added on to the component as I made further releases.
+
+>For the CustomButton this lead to ONE property, that can be
+>assigned to at design-time in Delphi's IDE from a template button.
+>Having done that, I decided to 'normalize' other properties
+>too.
+
+I am impressed by your command of Delphi 3.0.  I'm unfortunately new to
+this version and have a long way to go to understad it as well as I have 1
+and 2.  Just looking over your code helped me gain some insight to this
+version in addition to direct Win32 programming from Delphi, of which I
+admittedly do little.
+
+It's unfortunate--and I wonder why--you decided to flaunt a number of
+Delphi naming conventions?  For example, you use GVP* and SVP instead of
+Get and Set, which are visually much more confusing than the Borland
+covention.  
+
+Although I repsect the skill with which you implemented the template button
+mechanism, I wonder if it was really worth the additional effort?
+Specifically, only two button types--TPushButton and  TCheckBox--work
+properly under your component.  BitBtn's, radio buttons, and speed buttons
+either are not valid choices, or when displayed, display as normal buttons.
+ Also, many key properties of the template button, like size, are not used
+by your component.  Although, I didn't like the denormalized set of
+"CustomButton*" properties in my component, it seems like a better design
+choice than using template buttons and having to disregard the majority of
+component properties from the template.  Your code, alhthough it is a
+valuable exercise, is considerably more dense and difficult to follow
+because of this choice.
+
+Finally, I wonder if TCommonDialog was an appropriate choice of parents for
+this component.  Although conceptually it is a "common dialog", I don't
+believe it resides in the commdlg library, and it doesn't share the factors
+that make using the TCommonDialog library useful, like the ability to
+define a custom dialog template.
+
+Don't take these criticisms too harshly; perhaps they're best understood as
+coming from someone whose work you used to generate your own component that
+shares the same "market" (even though they're free), what with the custom
+dialog button.  I would, given the time, probably do the same thing just to
+see if I could get it to work. <g> I would consider it a favor, though, if
+you would change the component resource for your component, just to avoid
+confusion in the distribution of the two components.
+
+By the way, you need to override the Notification method in your component
+to detect when the  template button is removed from the form so you can
+delete your reference to it.  Currently, removing a referenced button
+generates an access violation in the component.
+
+Thanks,
+Todd
+--
+Todd Fast
+Todd.Fast@DigitalExistence.com
+
+"I want to throttle...[our parents]...for blithely handing over the world 
+to us like so much skid-marked underwear." Douglas Coupland, Generation X
+
+
+--------------------------------------------------------------------
+From:	Fred de Jong [frejon@worldonline.nl]
+Sent:	Friday, October 10, 1997 11:27 PM
+To:	'Todd Fast'
+Subject:	RE: TBrowseFolder as TFolderDialog
+Hi Todd,
+
+Thanks for your comments. 
+
+>...  I've spent a grand total of maybe 20 hours on the component,
+
+Well, I admit, it took me more hours (about 4 days) to produce the
+source and find out things like how Delphi integrates Windows message-
+handling in their objects, for example.
+
+>It's unfortunate--and I wonder why--you decided to flaunt a number of
+>Delphi naming conventions?  For example, you use GVP* and SVP instead of
+>Get and Set, which are visually much more confusing than the Borland
+>covention.  
+
+At first sight, you're right about that. It's just a custom I got hooked up with,
+when I started with Delphi programming. This way of naming proved
+to avoid conflicts with possible existing methods on beforehand. I always
+find it quite hard understanding the behaviour of objects that have multiple,
+non-overridden methods with the same name. Also many Get* and Set* names
+are also in use in the Win32 API and other global functions. GetPropertyValue*
+and SetPropertyValue* names ensure recognizing the methods as proper
+read- and write-property functions, which must have a fixed procedural
+header format. Because it's getting so crowded in computerland's namespace,
+I wanted to have distinctive mnemonics.
+
+>....  BitBtn's, radio buttons, and speed buttons
+>either are not valid choices, or when displayed, display as normal buttons.
+> Also, many key properties of the template button, like size, are not used
+>by your component.
+
+You have a strong point here. Initially, I tried to reuse Delphi's Assign/
+AssignFrom methods (these are meant to copy property values from one
+instance to another, even amongst objects in different classes), but these
+apparently weren't available for the button-classes. However, supporting
+a template component stays a powerfull concept, and I will think it
+over again, to make it even easier to use. Hearing the storm outside my
+house now, it looks like a good time to do that tomorrow...
+
+>Finally, I wonder if TCommonDialog was an appropriate choice of parents for
+>this component.  Although conceptually it is a "common dialog", I don't
+>believe it resides in the commdlg library, and it doesn't share the factors
+>that make using the TCommonDialog library useful, like the ability to
+>define a custom dialog template.
+
+I considered inheriting from TWinControl, which would offer the TFolderDialog
+more ready-to-use methods, but a shared dialog is common by nature, isn't it.
+Moreover, it would be usefull to have a general Delphi mechanism of
+customizing any predefined, system-supplied dialog. Some tricks provided
+in this source, might prove to be a lead-in to that.
+
+>you would change the component resource for your component, just to avoid
+>confusion in the distribution of the two components.
+
+Checked, I will let my deepest artistic resources come up with some fancy,
+unique picture.
+
+>By the way, you need to override the Notification method in your component
+>to detect when the  template button is removed from the form so you can
+>delete your reference to it.  Currently, removing a referenced button
+>generates an access violation in the component.
+
+Ah, thanks for the hint...
+
+...and your thorough thoughts.
+
+Fred
+
+----------------------------------------------------------------------
+From:	Fred de Jong [frejon@worldonline.nl]
+Sent:	25 May 1998 22:27
+To:	'rebenkov@usa.net'
+Subject:	RE: TFolderDialog
+Hello Yuri,
+
+On Sunday, May 24, 1998 8:45 PM, Yuri Rebenkov [SMTP:rebenkov@usa.net] wrote:
+
+> I got exeption EAcessViolation and "run-time error 216 message"
+> next to it when using TFolderDialog.
+> At line 1496 of FoldrDlg.pas " ClassFDIDesktop:= nil;"
+> It happens time to time and rebuilding helps !?
+> Maybe something wrong with my code?
+
+The lines you are referring to are in the unit's finalisation section.
+They are executed whenever your application terminates.
+In Delphi3, assigning nil to a COM-interface instance variable,
+activates calling its internal IUnknown::Release method.
+So these lines expect that the OLE32 library is still
+initialized at the moment they are called. This might not always
+be the case.
+
+Maybe your application uses other COM-interfaces in other
+units too ? It might happen that the - for the Release-call needed -
+dynamically linked OLE32.DLL library is already uninitialized
+(CoUnInitialize) before FoldrDlg's finalization gets its turn. 
+
+Solution: comment out the whole finalization section. It won't
+do much harm if your application doesn't release all references
+to the system shell interfaces: the Windows shell is
+supposed to stay in the air anyhow.
+
+Good luck,
+
+Fred.
+--------------------------------------------------------------
+From:	Fred de Jong [frejon@worldonline.nl]
+Sent:	31 July 1998 23:44
+To:	'Amet, Chris'
+Subject:	RE: Folder dialog commercial use.
+Hello Chris,
+
+On Friday, July 31, 1998 12:19 AM, Amet, Chris [SMTP:chrisamt@anova-tech.com] wrote:
+> Hi, 
+> 
+> If I have a program and include your
+> component in my delphi executable
+> and wish to sell it what exactly do I
+> have to provide and to whom?
+
+I hereby grant you and any organisation you might represent the right to include the Folder Dialog software component in your own software free of any charges.
+
+Thanks for verifying...
+
+Fred de Jong
+-------------------------------------------------------------------
+From:	Fred de Jong [frejon@worldonline.nl]
+Sent:	05 August 1998 21:19
+To:	'David Sweeney'
+Subject:	RE: TFolderDialog
+Hello David,
+
+On Wednesday, August 05, 1998 12:25 AM, you [SMTP:David@stulife2.tamu.edu] wrote:
+> I have used your TFolderDialog
+> component under Delphi 3 and
+> attempted to
+> compile Foldrdlg.pas under Delphi 4.0
+> and received the following error:
+> 
+> [Error] Foldrdlg.pas(1012): Types of
+> actual and formal var parameters
+> must be identical
+> 
+> The line in question is this:
+> 
+> if Desktop.GetAttributesOf(FIGAO_Dim,
+> IDLArr[0], AtrArr[0]) <> NOERROR
+> then
+>     FSelectionAttributes:= 0
+>   else
+>     FSelectionAttributes:= AtrArr[0];
+> 
+> The compile stops just before the <>
+> symbol.  Any suggestions on how to
+> fix it?
+> 
+> David Sweeney
+> Texas A&M University
+> David@stulife2.tamu.edu
+> <mailto:David@stulife2.tamu.edu> 
+> "When I get bigger, I will have your
+> eyes and you will have my eyes."
+> -David's 2 year old daughter
+
+Thanks for the remark. The problem is the type of
+the formal var-parameter rgfInOut: UINT in the interfacemethod
+IShellFolder.GetAttributesOf(). The code calls this method
+with the local variable AtrArr[0], which is declared as
+an integer, a signed 32-bit value.
+
+Delphi ObjectPascal always is critical about the type of
+(especially var) parameters. The UINT is defined in the
+Windows unit as a LongWord, which is new since Delphi4.
+A LongWord is an unsigned 32-bit value (like a Cardinal).
+
+Delphi4 apparently refuses to compile a signed 32-bit variable 
+being passed as an unsigned 32-bit actual parameter.
+
+When you typecast the actual parameter AtrArr[0] as follows:
+
+  if Desktop.GetAttributesOf(FIGAO_Dim,
+       IDLArr[0], UINT(AtrArr[0])) <> NOERROR then
+    FSelectionAttributes:= 0
+  else
+    FSelectionAttributes:= AtrArr[0];
+
+Delphi4 will compile the TFolderDialog code successfully again.
+
+Fred.
+
+"If we could only typecast ourselves again..."
+----------------------------------------------------------
+From: Fred de Jong [frejon@worldonline.nl]
+Sent: 31 March 1999 23:37
+To: Dave Serena
+Subject: RE: TFolderDialog component
+
+Well Dave, looking at the [Hint] you sent me, moving
+the DefineProperties() declaration from the private
+section of the TFolderDialog type definition to the
+public one should make the Delphi 4 Upgrade Pack 2
+happy.
+
+Apparently the Delphi friends at Inprise did the same
+move in the new TCommonDialog unit.
+
+Generally, this is one of pains a developer has
+to go through when re-using a class framework
+based on inheritance.
+
+The trend (Java, COM) is to use abstract interface
+definitions, so as to avoid dependencies like this.
+Delphi supports interfaces too, but their classes
+are not based on it.
+
+Happy spring time,
+Fred.
+
+> -----Original Message-----
+> From: Dave Serena [mailto:serena@sensus.com]
+> Sent: Tuesday, March 30, 1999 2:41 PM
+> To: frejon@worldonline.nl
+> Subject: TFolderDialog component
+> 
+> 
+> Hello Fred,
+> 
+> You helped me before and I need just a little more help again.
+> I installed Delphi 4 Upgrade Pack 2 on my machine.
+> I'm now getting this hint:
+> 
+> [Hint] CMP_Foldr_DLG.pas(147): Overriding virtual method
+> 'TFolderDialog.DefineProperties' has lower visibility 
+> (private) than base
+> class 'TCommonDialog' (public)
+> 
+> Can you help me get rid of this hint?  I don't know what 
+> the problem is,
+> there were not hints or warnings before this.  The updated 
+> .PAS file you
+> sent before worked great.
+> 
+> Thank you very much in advance,
+> Dave
+> 
+> 
+--------------------------------------------------------------------
+

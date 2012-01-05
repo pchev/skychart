@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -31,13 +31,13 @@ type
                 lmax,lmin,mcode : char;
                 gcvs,vartype : array[1..10] of char;
                 end;
-Function IsGCVpath(path : string) : Boolean;
-procedure SetGCVpath(path : string);
-Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGCVwin(var ok : boolean);
-Procedure ReadGCV(var lin : GCVrec; var ok : boolean);
-Procedure NextGCV( var ok : boolean);
-procedure CloseGCV ;
+Function IsGCVpath(path : shortstring) : Boolean; stdcall;
+procedure SetGCVpath(path : shortstring); stdcall;
+Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGCVwin(var ok : boolean); stdcall;
+Procedure ReadGCV(var lin : GCVrec; var ok : boolean); stdcall;
+Procedure NextGCV( var ok : boolean); stdcall;
+procedure CloseGCV ; stdcall;
 
 var
   GCVpath : string;
@@ -53,16 +53,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsGCVpath(path : string) : Boolean;
+Function IsGCVpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetGCVpath(path : string);
-var buf:string;
+procedure SetGCVpath(path : shortstring);
 begin
-buf:=noslash(path);
-GCVpath:=buf;
+path:=noslash(path);
+GCVpath:=path;
 end;
 
 Procedure CloseRegion;
