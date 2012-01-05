@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -32,12 +32,12 @@ GPNrec = record ar,de :longint ;
                 pk  : array[1..9] of char;
                 name: array[1..13] of char;
                 end;
-Function IsGPNpath(path : string) : Boolean;
-procedure SetGPNpath(path : string);
-Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGPNwin(var ok : boolean);
-Procedure ReadGPN(var lin : GPNrec; var ok : boolean);
-procedure CloseGPN ;
+Function IsGPNpath(path : shortstring) : Boolean;  stdcall;
+procedure SetGPNpath(path : shortstring); stdcall;
+Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGPNwin(var ok : boolean); stdcall;
+Procedure ReadGPN(var lin : GPNrec; var ok : boolean); stdcall;
+procedure CloseGPN ; stdcall;
 
 var
   GPNpath : string;
@@ -53,16 +53,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsGPNpath(path : string) : Boolean;
+Function IsGPNpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetGPNpath(path : string);
-var buf:string;
+procedure SetGPNpath(path : shortstring);
 begin
-buf:=noslash(path);
-GPNpath:=buf;
+path:=noslash(path);
+GPNpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -92,7 +91,6 @@ end;
 
 Procedure OpenGPN(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
@@ -124,7 +122,6 @@ end;
 
 Procedure OpenGPNwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];

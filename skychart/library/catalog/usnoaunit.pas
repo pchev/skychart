@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses math,
@@ -33,13 +33,12 @@ Type USNOArec = record  id  : shortstring;
                         field,q,s: integer;
                 end;
 
-Function IsUSNOApath(path : string) : Boolean;
-Procedure OpenUSNOAwin(var ok : boolean);
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
-procedure CloseUSNOA ;
-procedure SetUSNOApath(path : string);
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
+Function IsUSNOApath(path : shortstring) : Boolean; stdcall;
+Procedure OpenUSNOAwin(var ok : boolean); stdcall;
+Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
+procedure CloseUSNOA ; stdcall;
+procedure SetUSNOApath(path : shortstring); stdcall;
 
 var USNOApath : string;
 
@@ -63,7 +62,7 @@ var
    demin,demax,armin,armax : double;
    fullwin : boolean;
 
-Function IsUSNOApath(path : string) : Boolean;
+Function IsUSNOApath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
@@ -94,9 +93,10 @@ result:= FileExists(p+'zone0000.acc')
 end;
 
 
-procedure SetUSNOApath(path : string);
+procedure SetUSNOApath(path : shortstring);
 begin
-USNOApath:=noslash(path);
+path:=noslash(path);
+USNOApath:=path;
 end;
 
 Procedure CloseRegion;
@@ -198,10 +198,8 @@ var
     ar,de : cardinal;
     ma : longint;
     buf : string;
-    fok:boolean;
 begin
 ok:=true;
-fok:=false;
    repeat
      inc(currec);
      if eof(fcat) or (currec>nrec) then NextRegion(ok);
@@ -217,8 +215,7 @@ fok:=false;
      end;
      de:=InvertI32(cat.de);
      lin.de:=de/360000-90;
-     if (lin.de>demin)and(lin.de<demax) then fok:=true;
-   until fok;
+   until (lin.de>demin)and(lin.de<demax);
    ma:=InvertI32(cat.ma);
    lin.ar:=lin.ar/15;
    lin.s:=trunc(sgn(ma));
@@ -227,44 +224,14 @@ fok:=false;
    lin.field:=trunc(ma/1e6); ma:=trunc(1e6*frac(ma/1e6));
    lin.mb:=trunc(ma/1e3)/10; ma:=trunc(1e3*frac(ma/1e3));
    lin.mr:=ma/10;
-   str((rec1+currec):8,buf);
-   lin.id:=CurZone+'-'+padzeros(buf,8);
+   str((rec1+currec-1):8,buf);
+   lin.id:=CurZone+'.'+padzeros(buf,8);
 end;
 
 procedure CloseUSNOA ;
 begin
 curSM:=nSM;
 CloseRegion;
-end;
-
-Procedure FindUSNOAnum(zone,num :integer; var ar,de : Double; var ok : boolean);
-var nomfich: string;
-    lin : USNOArec;
-begin
-ok:=false;
-if num<1 then exit;
-nomfich:=USNOApath+slashchar+'zone'+PadZeros(inttostr(zone),4)+'.cat';
-if not FileExists(nomfich) then exit;
-AssignFile(fcat,nomfich);
-FileisOpen:=true;
-FileMode:=0;
-reset(fcat);
-rec1:=0;
-nrec:=MaxInt;
-curSM:=1;
-nSM:=1;
-armin:=-1E99;
-armax:=1E99;
-demin:=-1E99;
-demax:=1E99;
-currec:=num-1;
-seek(fcat,currec);
-if not eof(fcat) then begin
-  ReadUSNOA(lin,ok);
-  ar:=lin.ar;
-  de:=lin.de;
-end;
-CloseUSNOA;
 end;
 
 Procedure FindRegionU(ar,de : double; var lg : integer);
@@ -280,7 +247,7 @@ end;
 Procedure FindRegionListWin;
 var
    xx,yy,dx,dy,Sm,i,j,k : integer;
-   ar,de,arp,dep : double;
+   ar,de : double;
    def : boolean;
 begin
 fullwin:=true;
@@ -299,13 +266,11 @@ for i:=0 to 9 do begin
     ar:=ar*15;
     if ar>=360 then ar:=ar-360;
     if ar<0 then ar:=ar+360;
-    arp:=ar; dep:=de;
-    precession(JDChart,JDCatalog,arp,dep);
-    FindregionU(arp,dep,Sm);
-    demin:=minvalue([demin,dep]);
-    demax:=maxvalue([demax,dep]);
-    armin:=minvalue([armin,arp]);
-    armax:=maxvalue([armax,arp]);
+    FindregionU(ar,de,Sm);
+    demin:=minvalue([demin,de]);
+    demax:=maxvalue([demax,de]);
+    armin:=minvalue([armin,ar]);
+    armax:=maxvalue([armax,ar]);
     def:=true ;
     for k:=1 to nSM do begin
       if Sm=SMlst[k] then def:=false
@@ -333,7 +298,7 @@ end;
 procedure FindRegionList(x1,x2,y1,y2:Double );
 var
    Sm,i,j,k : integer;
-   ar,de,dar,dde,arp,dep : double;
+   ar,de,dar,dde : double;
    def : boolean;
 begin
 fullwin:=false;
@@ -350,14 +315,12 @@ for i:=0 to 9 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 9 do begin
     de:=y1+j*dde ;
-    arp:=ar; dep:=de;
-    precession(JDChart,JDCatalog,arp,dep);
-    if abs(dep) >= 90 then continue;
-    FindregionU(arp,dep,Sm);
-    demin:=minvalue([demin,dep]);
-    demax:=maxvalue([demax,dep]);
-    armin:=minvalue([armin,arp]);
-    armax:=maxvalue([armax,arp]);
+    if abs(de) >= 90 then continue;
+    FindregionU(ar,de,Sm);
+    demin:=minvalue([demin,de]);
+    demax:=maxvalue([demax,de]);
+    armin:=minvalue([armin,ar]);
+    armax:=maxvalue([armax,ar]);
     def:=true ;
     for k:=1 to nSM do begin
       if Sm=Smlst[k] then def:=false
@@ -376,7 +339,6 @@ end;
 
 Procedure OpenUSNOAwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin;
 Sm := Smlst[curSM];
@@ -385,7 +347,6 @@ end;
 
 Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList(ar1,ar2,de1,de2);

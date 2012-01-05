@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses skylibcat, sysutils;
@@ -41,24 +41,24 @@ DSRec = record
                   Mag : double;
               end;
 
-Function IsDSbasepath(path : string) : Boolean;
-Function IsDStycpath(path : string) : Boolean;
-Function IsDSgscpath(path : string) : Boolean;
-procedure SetDSpath(path,tycpath,gscpath : string);
-Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenDSTYCwin(var ok : boolean);
-Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean);
-Procedure NextDSTYC( var ok : boolean);
-procedure CloseDSTYC ;
-Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenDSGSCwin(var ok : boolean);
-Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean);
-Procedure NextDSGSC( var ok : boolean);
-procedure CloseDSGSC ;
-Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenDSbasewin(var ok : boolean);
-Procedure ReadDSbase(var dslin : DSrec; var ok : boolean);
-procedure CloseDSbase ;
+Function IsDSbasepath(path : shortstring) : Boolean; stdcall;
+Function IsDStycpath(path : shortstring) : Boolean; stdcall;
+Function IsDSgscpath(path : shortstring) : Boolean; stdcall;
+procedure SetDSpath(path,tycpath,gscpath : shortstring); stdcall;
+Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSTYCwin(var ok : boolean); stdcall;
+Procedure ReadDSTYC(var dslin : DSrec; var ok : boolean); stdcall;
+Procedure NextDSTYC( var ok : boolean); stdcall;
+procedure CloseDSTYC ; stdcall;
+Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSGSCwin(var ok : boolean); stdcall;
+Procedure ReadDSGSC(var dslin : DSrec; var ok : boolean); stdcall;
+Procedure NextDSGSC( var ok : boolean); stdcall;
+procedure CloseDSGSC ; stdcall;
+Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenDSbasewin(var ok : boolean); stdcall;
+Procedure ReadDSbase(var dslin : DSrec; var ok : boolean); stdcall;
+procedure CloseDSbase ; stdcall;
 
 var
   DSpath, DSTYCpath, DSGSCpath: String;
@@ -78,27 +78,26 @@ var
    OnCache : Boolean = false;
    Cache : array of DSrec;
 
-Function IsDSbasepath(path : string) : Boolean;
+Function IsDSbasepath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'star5.dat');
 end;
 
-Function IsDStycpath(path : string) : Boolean;
+Function IsDStycpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'00N00.dat');
 end;
 
-Function IsDSgscpath(path : string) : Boolean;
+Function IsDSgscpath(path : shortstring) : Boolean;
 begin
-result:= FileExists(slash(path)+'00N00.DAT');
+result:= FileExists(slash(path)+'00N00.dat');
 end;
 
-procedure SetDSpath(path,tycpath,gscpath : string);
-var buf:string;
+procedure SetDSpath(path,tycpath,gscpath : shortstring);
 begin
-buf:=noslash(path);
-if buf<>DSpath then OnCache:=false;
-DSpath:=buf;
+path:=noslash(path);
+if path<>DSpath then OnCache:=false;
+DSpath:=path;
 DSTYCpath:=tycpath;
 DSGSCpath:=gscpath;
 end;
@@ -133,7 +132,6 @@ end;
 
 Procedure OpenDSTYC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionListDS(ar1,ar2,de1,de2,nSM,zonelst);
@@ -172,7 +170,6 @@ end;
 
 Procedure OpenDSTYCwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWinDS(nSM,zonelst);
 zone := zonelst[curSM];
@@ -184,7 +181,7 @@ end;
 Procedure OpenRegionGSC(zone : string ; var ok:boolean);
 var nomfich :string;
 begin
-nomfich:=DSGSCpath+slashchar+zone+'.DAT';
+nomfich:=DSGSCpath+slashchar+zone+'.dat';
 if not FileExists(nomfich) then begin
    ok:=false;
    exit;
@@ -199,7 +196,6 @@ end;
 
 Procedure OpenDSGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionListDS(ar1,ar2,de1,de2,nSM,zonelst);
@@ -238,7 +234,6 @@ end;
 
 Procedure OpenDSGSCwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWinDS(nSM,zonelst);
 zone := zonelst[curSM];
@@ -274,7 +269,7 @@ if not OnCache then begin
    if Usecache then begin
       SetLength(cache,1);
       Imax:=filesize(fbase)-1;
-      SetLength(cache,Imax+2);
+      SetLength(cache,Imax+1);
    end;
 end;
 Icache:=0;
@@ -283,7 +278,6 @@ end;
 
 Procedure OpenDSbase(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 OpenRegionBase(ok);
 end;
 
@@ -315,7 +309,6 @@ end;
 
 Procedure OpenDSbasewin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 Nsm:=1;
 OpenRegionBase(ok);

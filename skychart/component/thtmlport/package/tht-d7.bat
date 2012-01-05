@@ -1,1 +1,0 @@
-c:\delphi7\bin\dcc32 frambrwz.pas /dDebugIt -M

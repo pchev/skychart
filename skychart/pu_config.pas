@@ -1,579 +1,502 @@
 unit pu_config;
 
-{$MODE Delphi}{$H+}
-
-{
-Copyright (C) 2002 Patrick Chevalley
-
-http://www.astrosurf.com/astropc
-pch@freesurf.ch
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-}
-{
- Configuration form
-}
-
 interface
 
-uses u_help, u_translation, u_constant, u_util,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
-  cu_fits, cu_catalog, cu_database,
-  pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
-  pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
-  pu_config_internet,
-  LResources, MultiDoc, ChildDoc, PairSplitter, LazHelpHTML;
+uses Math, u_constant,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, ComCtrls, StdCtrls, Buttons, Grids, ExtCtrls, enhedits, ActnList,
+  FoldrDlg;
 
 type
-
-  { Tf_config }
-
   Tf_config = class(TForm)
-    MultiDoc1: TMultiDoc;
-    Panel1: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Splitter1: TSplitter;
     TreeView1: TTreeView;
-    previous: TButton;
-    next: TButton;
+    PageControl1: TPageControl;
+    p_catgen: TTabSheet;
+    Label1: TLabel;
+    p_cdcstars: TTabSheet;
+    p_cdcneb: TTabSheet;
+    p_external: TTabSheet;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    p_planets: TTabSheet;
+    p_comets: TTabSheet;
+    p_asteroids: TTabSheet;
+    p_color: TTabSheet;
+    p_lines: TTabSheet;
+    p_labels: TTabSheet;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    p_catalog: TTabSheet;
+    Label11: TLabel;
+    p_solsys: TTabSheet;
+    Label12: TLabel;
+    p_cdc: TTabSheet;
+    Label13: TLabel;
+    p_display: TTabSheet;
+    Label14: TLabel;
+    Label65: TLabel;
+    BSCbox: TCheckBox;
+    Fbsc1: TLongEdit;
+    Fbsc2: TLongEdit;
+    bsc3: TEdit;
+    BitBtn9: TBitBtn;
+    Label66: TLabel;
+    SKYbox: TCheckBox;
+    Fsky1: TLongEdit;
+    Fsky2: TLongEdit;
+    sky3: TEdit;
+    BitBtn10: TBitBtn;
+    BitBtn11: TBitBtn;
+    tyc3: TEdit;
+    Ftyc2: TLongEdit;
+    Ftyc1: TLongEdit;
+    TYCbox: TCheckBox;
+    Label67: TLabel;
+    Label87: TLabel;
+    TY2Box: TCheckBox;
+    TICbox: TCheckBox;
+    Ftic1: TLongEdit;
+    Fty21: TLongEdit;
+    Fty22: TLongEdit;
+    Ftic2: TLongEdit;
+    ty23: TEdit;
+    tic3: TEdit;
+    BitBtn13: TBitBtn;
+    BitBtn12: TBitBtn;
+    GSCFBox: TCheckBox;
+    GSCCbox: TCheckBox;
+    GSCbox: TCheckBox;
+    USNbox: TCheckBox;
+    MCTBox: TCheckBox;
+    dsbasebox: TCheckBox;
+    dstycBox: TCheckBox;
+    dsgscBox: TCheckBox;
+    USNBright: TCheckBox;
+    fgscf1: TLongEdit;
+    fgscc1: TLongEdit;
+    fgsc1: TLongEdit;
+    fusn1: TLongEdit;
+    fmct1: TLongEdit;
+    dsbase1: TLongEdit;
+    dstyc1: TLongEdit;
+    dsgsc1: TLongEdit;
+    dsgsc2: TLongEdit;
+    dstyc2: TLongEdit;
+    dsbase2: TLongEdit;
+    fmct2: TLongEdit;
+    fusn2: TLongEdit;
+    fgsc2: TLongEdit;
+    fgscc2: TLongEdit;
+    fgscf2: TLongEdit;
+    gscf3: TEdit;
+    gscc3: TEdit;
+    gsc3: TEdit;
+    usn3: TEdit;
+    mct3: TEdit;
+    dsbase3: TEdit;
+    dstyc3: TEdit;
+    dsgsc3: TEdit;
+    BitBtn22: TBitBtn;
+    BitBtn21: TBitBtn;
+    BitBtn20: TBitBtn;
+    BitBtn32: TBitBtn;
+    BitBtn19: TBitBtn;
+    BitBtn18: TBitBtn;
+    BitBtn17: TBitBtn;
+    BitBtn16: TBitBtn;
+    Label16: TLabel;
+    Label28: TLabel;
+    Label17: TLabel;
+    Label27: TLabel;
+    Label18: TLabel;
+    Label21: TLabel;
+    BitBtn14: TBitBtn;
+    BitBtn15: TBitBtn;
+    wds3: TEdit;
+    gcv3: TEdit;
+    Fgcv2: TLongEdit;
+    Fwds2: TLongEdit;
+    Fwds1: TLongEdit;
+    Fgcv1: TLongEdit;
+    GCVBox: TCheckBox;
+    IRVar: TCheckBox;
+    WDSbox: TCheckBox;
+    Label19: TLabel;
+    Label20: TLabel;
+    Label22: TLabel;
+    Label23: TLabel;
+    Label24: TLabel;
+    Label25: TLabel;
+    Label26: TLabel;
+    Label69: TLabel;
+    NGCbox: TCheckBox;
+    RC3box: TCheckBox;
+    OCLbox: TCheckBox;
+    GCMbox: TCheckBox;
+    GPNbox: TCheckBox;
+    LBNbox: TCheckBox;
+    ngc3: TEdit;
+    rc33: TEdit;
+    lbn3: TEdit;
+    ocl3: TEdit;
+    gcm3: TEdit;
+    gpn3: TEdit;
+    PGCBox: TCheckBox;
+    pgc3: TEdit;
+    SACbox: TCheckBox;
+    sac3: TEdit;
+    fngc1: TLongEdit;
+    fngc2: TLongEdit;
+    fsac1: TLongEdit;
+    fsac2: TLongEdit;
+    flbn1: TLongEdit;
+    flbn2: TLongEdit;
+    frc31: TLongEdit;
+    frc32: TLongEdit;
+    fpgc1: TLongEdit;
+    fpgc2: TLongEdit;
+    focl1: TLongEdit;
+    focl2: TLongEdit;
+    fgcm1: TLongEdit;
+    fgcm2: TLongEdit;
+    fgpn1: TLongEdit;
+    fgpn2: TLongEdit;
+    BitBtn23: TBitBtn;
+    BitBtn24: TBitBtn;
+    BitBtn25: TBitBtn;
+    BitBtn26: TBitBtn;
+    BitBtn27: TBitBtn;
+    BitBtn28: TBitBtn;
+    BitBtn29: TBitBtn;
+    BitBtn30: TBitBtn;
+    Label52: TLabel;
+    Label71: TLabel;
+    StringGrid1: TStringGrid;
+    Cat1Box: TCheckBox;
+    Edit1: TEdit;
+    Label64: TLabel;
+    Cat2Box: TCheckBox;
+    StringGrid2: TStringGrid;
+    Label37: TLabel;
+    BitBtn33: TBitBtn;
+    BitBtn35: TBitBtn;
+    StringGrid3: TStringGrid;
+    p_chart: TTabSheet;
+    p_fov: TTabSheet;
+    p_filter: TTabSheet;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    GroupBox2: TGroupBox;
+    StarBox: TCheckBox;
+    GroupBox1: TGroupBox;
+    NebBox: TCheckBox;
+    BigNebBox: TCheckBox;
+    p_image: TTabSheet;
+    GroupBox3: TGroupBox;
+    Label72: TLabel;
+    Label73: TLabel;
+    Label74: TLabel;
+    Bevel1: TBevel;
+    Bevel2: TBevel;
+    Label75: TLabel;
+    Label77: TLabel;
+    realskydir: TEdit;
+    realskydrive: TEdit;
+    realskyfile: TEdit;
+    RealSkyNord: TCheckBox;
+    RealSkySud: TCheckBox;
+    DSS102CD: TCheckBox;
+    usesubsample: TCheckBox;
+    realskymax: TEdit;
+    realskymb: TEdit;
+    reallist: TCheckBox;
+    dssautofilter: TCheckBox;
+    RadioGroup3: TRadioGroup;
+    RadioGroup4: TRadioGroup;
+    GroupBox4: TGroupBox;
+    compdss: TCheckBox;
+    GroupBox5: TGroupBox;
+    Label50: TLabel;
+    Label53: TLabel;
+    Label89: TLabel;
+    PlanetBox: TCheckBox;
+    Planet3: TEdit;
+    RadioGroup1: TRadioGroup;
+    RadioGroup2: TRadioGroup;
+    PlanetBox2: TCheckBox;
+    PlanetBox3: TCheckBox;
+    BitBtn31: TBitBtn;
+    PlanetBox4: TCheckBox;
+    GRS: TFloatEdit;
+    BitBtn37: TBitBtn;
+    Label54: TLabel;
+    Label55: TLabel;
+    Label56: TLabel;
+    Label57: TLabel;
+    Label58: TLabel;
+    Label59: TLabel;
+    Label60: TLabel;
+    Label61: TLabel;
+    Label62: TLabel;
+    Label63: TLabel;
+    Label70: TLabel;
+    NbComet: TLabel;
+    CometList: TListBox;
+    com1: TEdit;
+    com2: TEdit;
+    com3: TEdit;
+    com4: TEdit;
+    com5: TEdit;
+    com6: TEdit;
+    com7: TEdit;
+    com8: TEdit;
+    com9: TEdit;
+    com10: TEdit;
+    com11: TEdit;
+    RadioComet1: TRadioGroup;
+    GroupBox6: TGroupBox;
+    Image1: TImage;
+    BitBtn6: TBitBtn;
+    BitBtn7: TBitBtn;
+    NbAster: TLabel;
+    Label81: TLabel;
+    Label82: TLabel;
+    Label83: TLabel;
+    Label84: TLabel;
+    Label85: TLabel;
+    Label86: TLabel;
+    Label88: TLabel;
+    Label90: TLabel;
+    Label91: TLabel;
+    Label92: TLabel;
+    Label93: TLabel;
+    Label94: TLabel;
+    Label95: TLabel;
+    AsterList: TListBox;
+    RadioAsteroid1: TRadioGroup;
+    RadioAsteroid2: TRadioGroup;
+    ast1: TEdit;
+    ast5: TEdit;
+    ast8: TEdit;
+    ast3: TEdit;
+    ast6: TEdit;
+    ast9: TEdit;
+    ast10: TEdit;
+    ast4: TEdit;
+    ast7: TEdit;
+    ast11: TEdit;
+    ast2: TEdit;
+    AstMax: TEdit;
+    BitBtn8: TBitBtn;
+    Astmin: TEdit;
+    Panel1: TPanel;
+    Label68: TLabel;
+    PMBox: TCheckBox;
+    DrawPmBox: TCheckBox;
+    lDrawPMy: TLongEdit;
+    GroupBox7: TGroupBox;
+    fw1: TFloatEdit;
+    fw2: TFloatEdit;
+    fw3: TFloatEdit;
+    fw4: TFloatEdit;
+    fw5: TFloatEdit;
+    fw6: TFloatEdit;
+    fw7: TFloatEdit;
+    fw8: TFloatEdit;
+    fw9: TFloatEdit;
+    fw10: TFloatEdit;
+    fw0: TFloatEdit;
+    Label96: TLabel;
+    Label97: TLabel;
+    Label98: TLabel;
+    Label99: TLabel;
+    Label100: TLabel;
+    Label101: TLabel;
+    Label102: TLabel;
+    Label103: TLabel;
+    Label104: TLabel;
+    Label105: TLabel;
+    Label106: TLabel;
+    Label107: TLabel;
+    fw00: TFloatEdit;
+    Panel4: TPanel;
+    Panel3: TPanel;
+    Label110: TLabel;
+    fsmagvis: TFloatEdit;
+    StarAutoBox: TCheckBox;
     Panel2: TPanel;
-    Applyall: TCheckBox;
-    OKBtn: TButton;
-    Apply: TButton;
+    Label32: TLabel;
+    Label33: TLabel;
+    Label34: TLabel;
+    Label35: TLabel;
+    Label36: TLabel;
+    Label38: TLabel;
+    Label39: TLabel;
+    Label40: TLabel;
+    Label76: TLabel;
+    Label78: TLabel;
+    Label108: TLabel;
+    Label109: TLabel;
+    fsmag0: TFloatEdit;
+    fsmag1: TFloatEdit;
+    fsmag2: TFloatEdit;
+    fsmag3: TFloatEdit;
+    fsmag4: TFloatEdit;
+    fsmag5: TFloatEdit;
+    fsmag6: TFloatEdit;
+    fsmag7: TFloatEdit;
+    fsmag8: TFloatEdit;
+    fsmag9: TFloatEdit;
+    Panel5: TPanel;
+    fmag0: TFloatEdit;
+    fmag1: TFloatEdit;
+    fmag2: TFloatEdit;
+    fmag3: TFloatEdit;
+    fmag4: TFloatEdit;
+    fmag5: TFloatEdit;
+    fmag6: TFloatEdit;
+    fdim0: TFloatEdit;
+    fdim1: TFloatEdit;
+    fdim2: TFloatEdit;
+    fdim3: TFloatEdit;
+    fdim4: TFloatEdit;
+    fdim5: TFloatEdit;
+    fdim6: TFloatEdit;
+    Label48: TLabel;
+    Label49: TLabel;
+    Label41: TLabel;
+    Label42: TLabel;
+    Label43: TLabel;
+    Label44: TLabel;
+    Label45: TLabel;
+    Label46: TLabel;
+    Label47: TLabel;
+    Label79: TLabel;
+    Label80: TLabel;
+    Label111: TLabel;
+    Label112: TLabel;
+    fmag7: TFloatEdit;
+    fmag8: TFloatEdit;
+    fmag9: TFloatEdit;
+    fdim7: TFloatEdit;
+    fdim8: TFloatEdit;
+    fdim9: TFloatEdit;
     CancelBtn: TButton;
+    OKBtn: TButton;
     HelpBtn: TButton;
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormDestroy(Sender: TObject);
-    procedure HelpBtnClick(Sender: TObject);
+    Label113: TLabel;
+    Label114: TLabel;
+    Label15: TLabel;
+    Label116: TLabel;
+    Label117: TLabel;
+    Label118: TLabel;
+    Label119: TLabel;
+    Bevel3: TBevel;
+    Bevel4: TBevel;
+    Bevel5: TBevel;
+    Label120: TLabel;
+    p_fonts: TTabSheet;
+    Label51: TLabel;
+    Label121: TLabel;
+    Label122: TLabel;
+    Label123: TLabel;
+    Label124: TLabel;
+    Label125: TLabel;
+    Label126: TLabel;
+    Label127: TLabel;
+    Label128: TLabel;
+    Label129: TLabel;
+    gridfont: TEdit;
+    labelfont: TEdit;
+    legendfont: TEdit;
+    statusfont: TEdit;
+    listfont: TEdit;
+    prtfont: TEdit;
+    FontDialog1: TFontDialog;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    SpeedButton6: TSpeedButton;
+    Button1: TButton;
+    FolderDialog1: TFolderDialog;
+    stardisplay: TRadioGroup;
+    nebuladisplay: TRadioGroup;
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
+    procedure SelectFontClick(Sender: TObject);
+    procedure DefaultFontClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure nextClick(Sender: TObject);
-    procedure previousClick(Sender: TObject);
-    procedure ApplyClick(Sender: TObject);
+    procedure FWChange(Sender: TObject);
+    procedure CDCStarSelClick(Sender: TObject);
+    procedure CDCStarField1Change(Sender: TObject);
+    procedure CDCStarField2Change(Sender: TObject);
+    procedure CDCStarPathChange(Sender: TObject);
+    procedure CDCStarSelPathClick(Sender: TObject);
+    procedure StarBoxClick(Sender: TObject);
+    procedure StarAutoBoxClick(Sender: TObject);
+    procedure NebBoxClick(Sender: TObject);
+    procedure BigNebBoxClick(Sender: TObject);
+    procedure fsmagvisChange(Sender: TObject);
+    procedure fsmagChange(Sender: TObject);
+    procedure fmagChange(Sender: TObject);
+    procedure fdimChange(Sender: TObject);
+    procedure CDCNebSelPathClick(Sender: TObject);
+    procedure CDCNebSelClick(Sender: TObject);
+    procedure CDCNebField1Change(Sender: TObject);
+    procedure CDCNebField2Change(Sender: TObject);
+    procedure CDCNebPathChange(Sender: TObject);
+    procedure USNBrightClick(Sender: TObject);
+    procedure IRVarClick(Sender: TObject);
+    procedure GCVBoxClick(Sender: TObject);
+    procedure Fgcv1Change(Sender: TObject);
+    procedure Fgcv2Change(Sender: TObject);
+    procedure WDSboxClick(Sender: TObject);
+    procedure Fwds1Change(Sender: TObject);
+    procedure Fwds2Change(Sender: TObject);
+    procedure gcv3Change(Sender: TObject);
+    procedure wds3Change(Sender: TObject);
+    procedure BitBtn14Click(Sender: TObject);
+    procedure BitBtn15Click(Sender: TObject);
+    procedure stardisplayClick(Sender: TObject);
+    procedure nebuladisplayClick(Sender: TObject);
   private
     { Déclarations privées }
-    locktree: boolean;
-    Fccat : Tconf_catalog;
-    Fcshr : Tconf_shared;
-    Fcsc  : Tconf_skychart;
-    Fcplot : Tconf_plot;
-    Fcmain : Tconf_main;
-    Fcdss : Tconf_dss;
-    Fnightvision: boolean;
-    astpage,compage,dbpage: integer;
-    lastSelectedNode: TTreeNode;
-    FApplyConfig: TNotifyEvent;
-    FDBChange: TNotifyEvent;
-    FSaveAndRestart: TNotifyEvent;
-    FPrepareAsteroid: TPrepareAsteroid;
-    FGetTwilight: TGetTwilight;
-    f_config_observatory1: Tf_config_observatory;
-    f_config_chart1: Tf_config_chart;
-    f_config_catalog1: Tf_config_catalog;
-    f_config_solsys1: Tf_config_solsys;
-    f_config_display1: Tf_config_display;
-    f_config_pictures1: Tf_config_pictures;
-    f_config_system1: Tf_config_system;
-    f_config_time1: Tf_config_time;
-    f_config_internet1: Tf_config_internet;
-    function GetFits: TFits;
-    procedure SetFits(value: TFits);
-    function GetCatalog: Tcatalog;
-    procedure SetCatalog(value: Tcatalog);
-    function GetDB: Tcdcdb;
-    procedure SetDB(value: Tcdcdb);
-    procedure SetCcat(value: Tconf_catalog);
-    procedure SetCshr(value: Tconf_shared);
-    procedure SetCsc(value: Tconf_skychart);
-    procedure SetCplot(value: Tconf_plot);
-    procedure SetCmain(value: Tconf_main);
-    procedure SetCdss(value: Tconf_dss);
-    procedure ShowDBSetting(Sender: TObject);
-    procedure ShowCometSetting(Sender: TObject);
-    procedure ShowAsteroidSetting(Sender: TObject);
-    procedure LoadMPCSample(Sender: TObject);
-    procedure SysDBChange(Sender: TObject);
-    procedure SysSaveAndRestart(Sender: TObject);
-    function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
-    procedure TimeGetTwilight(jd0: double; out ht: double);
-    procedure ShowPage(i,j:Integer);
-    procedure ActivateChanges;
   public
     { Déclarations publiques }
-    procedure SetLang;
-    property ccat : Tconf_catalog read Fccat write SetCcat;
-    property cshr : Tconf_shared read Fcshr write SetCshr;
-    property csc  : Tconf_skychart read Fcsc write SetCsc;
-    property cplot : Tconf_plot read Fcplot write SetCplot;
-    property cmain : Tconf_main read Fcmain write SetCmain;
-    property cdss : Tconf_dss read Fcdss write SetCdss;
-    property fits : TFits read GetFits write SetFits;
-    property catalog : Tcatalog read GetCatalog write SetCatalog;
-    property db : Tcdcdb read GetDB write SetDB;
-    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
-    property onDBChange: TNotifyEvent read FDBChange write FDBChange;
-    property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
-    property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
-    property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
+    ccat : conf_catalog;
+    cshr : conf_shared;
+    cskyc : conf_skychart;
+    cplot : conf_plot;
+    cmain : conf_main;
+    procedure SetLang(lang:string);
+    function SelectPage(txt:string):boolean;
+    procedure SetFonts(ctrl:Tedit;num:integer);
+    procedure ShowDisplay;
+    procedure ShowFonts;
+    procedure ShowField;
+    procedure ShowFilter;
+    procedure ShowCDCStar;
+    procedure ShowCDCNeb;
   end;
 
 var
   f_config: Tf_config;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_config.SetLang;
-begin
-Caption:=rsConfiguratio;
-TreeView1.items[0].text:='1- '+rsDateTime2;
-TreeView1.items[1].text:='1- '+rsDateTime2;
-TreeView1.items[2].text:='2- '+rsTimeSimulati;
-TreeView1.items[3].text:='3- '+rsAnimation;
-TreeView1.items[4].text:='2- '+rsObservatory;
-TreeView1.items[5].text:='1- '+rsObservatory;
-TreeView1.items[6].text:='2- '+rsHorizon;
-TreeView1.items[7].text:='3- '+rsChartCoordin;
-TreeView1.items[8].text:='1- '+rsChartCoordin;
-TreeView1.items[9].text:='2- '+rsFieldOfVisio;
-TreeView1.items[10].text:='3- '+rsProjection;
-TreeView1.items[11].text:='4- '+rsObjectFilter;
-TreeView1.items[12].text:='5- '+rsGridSpacing;
-TreeView1.items[13].text:='6- '+rsObjectList;
-TreeView1.items[14].text:='4- '+rsCatalog;
-TreeView1.items[15].text:='1- '+rsCdCStars;
-TreeView1.items[16].text:='2- '+rsCdCNebulae;
-TreeView1.items[17].text:='3- '+rsCatalog;
-TreeView1.items[18].text:='4- '+'VO '+rsCatalog;
-TreeView1.items[19].text:='5- '+rsUserDefinedO;
-TreeView1.items[20].text:='6- '+rsOtherSoftwar;
-TreeView1.items[21].text:='7- '+rsObsolete;
-TreeView1.items[22].text:='5- '+rsSolarSystem;
-TreeView1.items[23].text:='1- '+rsSolarSystem;
-TreeView1.items[24].text:='2- '+rsPlanet;
-TreeView1.items[25].text:='3- '+rsComet;
-TreeView1.items[26].text:='4- '+rsAsteroid;
-TreeView1.items[27].text:='6- '+rsDisplay;
-TreeView1.items[28].text:='1- '+rsDisplay;
-TreeView1.items[29].text:='2- '+rsDisplayColou;
-TreeView1.items[30].text:='3- '+rsDeepSkyObjec;
-TreeView1.items[31].text:='4- '+rsSkyBackgroun;
-TreeView1.items[32].text:='5- '+rsLines;
-TreeView1.items[33].text:='6- '+rsLabels;
-TreeView1.items[34].text:='7- '+rsFonts;
-TreeView1.items[35].text:='8- '+rsFinderCircle;
-TreeView1.items[36].text:='9- '+rsFinderRectan;
-TreeView1.items[37].text:='7- '+rsPictures;
-TreeView1.items[38].text:='1- '+rsObject;
-TreeView1.items[39].text:='2- '+rsBackground;
-TreeView1.items[40].text:='3- '+rsDSSRealSky;
-TreeView1.items[41].text:='8- '+rsSystem;
-TreeView1.items[42].text:='1- '+rsSystem;
-TreeView1.items[43].text:='2- '+rsServer;
-TreeView1.items[44].text:='3- '+rsTelescope;
-TreeView1.items[45].text:='4- '+rsLanguage2;
-TreeView1.items[46].text:='9- '+rsInternet;
-TreeView1.items[47].text:='1- '+rsProxy;
-TreeView1.items[48].text:='2- '+rsOrbitalEleme;
-TreeView1.items[49].text:='3- '+rsOnlineDSSPic;
-Applyall.caption:=rsApplyChangeT;
-Apply.Caption:=rsApply;
-OKBtn.caption:=rsOK;
-CancelBtn.caption:=rsCancel;
-HelpBtn.caption:=rsHelp;
-if f_config_catalog1<>nil then f_config_catalog1.SetLang;
-if f_config_chart1<>nil then f_config_chart1.SetLang;
-if f_config_display1<>nil then f_config_display1.SetLang;
-if f_config_internet1<>nil then f_config_internet1.SetLang;
-if f_config_observatory1<>nil then f_config_observatory1.SetLang;
-if f_config_pictures1<>nil then f_config_pictures1.SetLang;
-if f_config_solsys1<>nil then f_config_solsys1.SetLang;
-if f_config_system1<>nil then f_config_system1.SetLang;
-if f_config_time1<>nil then f_config_time1.SetLang;
-SetHelp(self,hlpMenuSetup);
-end;
+uses pu_main;
 
-procedure Tf_config.FormCreate(Sender: TObject);
-var Child: TChildDoc;
-begin
-Fcsc:=Tconf_skychart.Create;
-Fccat:=Tconf_catalog.Create;
-Fcshr:=Tconf_shared.Create;
-Fcplot:=Tconf_plot.Create;
-Fcmain:=Tconf_main.Create;
-Fcdss:=Tconf_dss.Create;
-SetLang;
-compage:=25;
-astpage:=26;
-dbpage:=42;
-Fnightvision:=false;
+{$R *.dfm}
 
-Child:=MultiDoc1.NewChild;
-f_config_time1:=Tf_config_time.Create(Child);
-Child.DockedPanel:=f_config_time1.MainPanel;
+{$include i_config.pas }
 
-Child:=MultiDoc1.NewChild;
-f_config_observatory1:=Tf_config_observatory.Create(Child);
-Child.DockedPanel:=f_config_observatory1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_chart1:=Tf_config_chart.Create(Child);
-Child.DockedPanel:=f_config_chart1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_catalog1:=Tf_config_catalog.Create(Child);
-Child.DockedPanel:=f_config_catalog1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_solsys1:=Tf_config_solsys.Create(Child);
-Child.DockedPanel:=f_config_solsys1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_display1:=Tf_config_display.Create(Child);
-Child.DockedPanel:=f_config_display1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_pictures1:=Tf_config_pictures.Create(Child);
-Child.DockedPanel:=f_config_pictures1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_system1:=Tf_config_system.Create(Child);
-Child.DockedPanel:=f_config_system1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_internet1:=Tf_config_internet.Create(Child);
-Child.DockedPanel:=f_config_internet1.MainPanel;
-
-f_config_solsys1.onShowDB:=ShowDBSetting;
-f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
-f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
-f_config_system1.onShowComet:=ShowCometSetting;
-f_config_system1.onLoadMPCSample:=LoadMPCSample;
-f_config_system1.onDBChange:=SysDBChange;
-f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
-f_config_time1.onGetTwilight:=TimeGetTwilight;
-end;
-
-procedure Tf_config.FormShow(Sender: TObject);
-{$ifdef mswindows}var i:integer;{$endif}
-begin
-locktree:=false;
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   for i:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[i].Color:=nv_dark;
-   SetFormNightVision(self,nightvision);
-   SetFormNightVision(f_config_time1,nightvision);
-   SetFormNightVision(f_config_observatory1,nightvision);
-   SetFormNightVision(f_config_chart1,nightvision);
-   SetFormNightVision(f_config_catalog1,nightvision);
-   SetFormNightVision(f_config_solsys1,nightvision);
-   SetFormNightVision(f_config_display1,nightvision);
-   SetFormNightVision(f_config_pictures1,nightvision);
-   SetFormNightVision(f_config_system1,nightvision);
-   SetFormNightVision(f_config_internet1,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
-f_config_time1.FormShow(Sender);
-f_config_observatory1.FormShow(Sender);
-f_config_chart1.FormShow(Sender);
-f_config_catalog1.FormShow(Sender);
-f_config_solsys1.FormShow(Sender);
-f_config_display1.FormShow(Sender);
-f_config_pictures1.FormShow(Sender);
-f_config_system1.FormShow(Sender);
-f_config_internet1.FormShow(Sender);
-TreeView1.FullCollapse;
-Treeview1.selected:=Treeview1.items[0];
-Treeview1.selected:=Treeview1.items[cmain.configpage];
-lastSelectedNode:=Treeview1.selected;
-end;
-
-procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
-var i,j: integer;
-begin
-if locktree then exit;
-if node=nil then begin
-   Treeview1.selected:=lastSelectedNode;
-   exit;
-end;
-try
-if node.level=0 then begin
-   Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
-end else begin
-   locktree:=true;
-   i:=node.parent.index;
-   j:=node.index;
-   ShowPage(i,j);
-   TreeView1.FullCollapse;
-   node.Parent.Expand(true);
-end;
-lastSelectedNode:=Treeview1.selected;
-application.processmessages;
-finally
-locktree:=false;
-end;
-end;
-
-procedure Tf_config.ShowPage(i,j:Integer);
-var k: integer;
-begin
-   // before the page change:
-   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
-     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
-   end;
-   if MultiDoc1.ActiveObject=f_config_system1 then begin
-     if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
-   end;
-   // page change
-   for k:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[k].Visible:=false;
-   MultiDoc1.Childs[i].Visible:=true;
-   MultiDoc1.SetActiveChild(i);
-   case i of
-     0 : begin f_config_time1.PageControl1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
-     1 : begin f_config_observatory1.PageControl1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
-     2 : begin f_config_chart1.PageControl1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
-     3 : begin f_config_catalog1.PageControl1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
-     4 : begin f_config_solsys1.PageControl1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
-     5 : begin f_config_display1.PageControl1.PageIndex:=j;     f_config_display1.FormShow(self); end;
-     6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
-     7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
-     8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
-   end;
-   cmain.configpage_i:=i;
-   cmain.configpage_j:=j;
-end;
-
-procedure Tf_config.ActivateChanges;
-begin
-  if Treeview1.selected<>nil then
-     cmain.configpage:=Treeview1.selected.absoluteindex;
-  if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-    if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
-    if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
-  end;
-  if MultiDoc1.ActiveObject=f_config_system1 then begin
-    if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
-  end;
-  Fcdss:=f_config_internet1.cdss;
-end;
-
-procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  ActivateChanges;
-end;
-
-procedure Tf_config.FormDestroy(Sender: TObject);
-begin
-  Fcsc.free;
-  Fccat.free;
-  Fcshr.free;
-  Fcplot.free;
-  Fcmain.free;
-  Fcdss.free;
-end;
-
-procedure Tf_config.HelpBtnClick(Sender: TObject);
-begin
-  MultiDoc1.ActiveObject.ShowHelp;
-end;
-
-procedure Tf_config.nextClick(Sender: TObject);
-begin
-if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex< Treeview1.items.count-1) then begin
- Treeview1.selected:=Treeview1.selected.GetNext;
- treeview1.topitem:=Treeview1.selected;
- TreeView1Change(Sender,Treeview1.selected);
-end;
-end;
-
-procedure Tf_config.previousClick(Sender: TObject);
-var i : integer;
-begin
-if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex>1) then begin
- locktree:=true;
- Treeview1.selected:=Treeview1.selected.GetPrev;
- if Treeview1.selected.level=0 then Treeview1.selected:=Treeview1.selected.GetPrev;
- i:=Treeview1.selected.absoluteindex;
- locktree:=false;
- Treeview1.selected:=Treeview1.items[i];
- treeview1.topitem:=Treeview1.selected;
- TreeView1Change(Sender,Treeview1.selected);
-end;
-end;
-
-procedure Tf_config.ShowDBSetting(Sender: TObject);
-begin
-Treeview1.selected:=Treeview1.items[dbpage];
-end;
-
-procedure Tf_config.ShowCometSetting(Sender: TObject);
-begin
-Treeview1.selected:=Treeview1.items[compage];
-end;
-
-procedure Tf_config.ShowAsteroidSetting(Sender: TObject);
-begin
-Treeview1.selected:=Treeview1.items[astpage];
-end;
-
-procedure Tf_config.LoadMPCSample(Sender: TObject);
-begin
-f_config_solsys1.LoadSampleData;
-end;
-
-procedure Tf_config.SysDBChange(Sender: TObject);
-begin
- if Assigned(FDBChange) then FDBChange(self);
-end;
-
-procedure Tf_config.SysSaveAndRestart(Sender: TObject);
-begin
- if Assigned(FSaveAndRestart) then FSaveAndRestart(self);
-end;
-
-function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
-begin
- if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
-   else result:=false;
-end;
-
-procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);
-begin
- if assigned(FGetTwilight) then FGetTwilight(jd0,ht)
-   else ht:=-99;
-end;
-
-function Tf_config.GetFits: TFits;
-begin
-result:=f_config_pictures1.Fits;
-end;
-
-procedure Tf_config.SetFits(value: TFits);
-begin
-f_config_pictures1.Fits:=value;
-end;
-
-function Tf_config.GetCatalog: Tcatalog;
-begin
-result:=f_config_catalog1.catalog;
-end;
-
-procedure Tf_config.SetCatalog(value: Tcatalog);
-begin
-f_config_catalog1.catalog:=value;
-end;
-
-function Tf_config.GetDB: Tcdcdb;
-begin
-result:=f_config_system1.cdb;
-end;
-
-procedure Tf_config.SetDB(value: Tcdcdb);
-begin
-f_config_system1.cdb:=value;
-f_config_solsys1.cdb:=value;
-f_config_pictures1.cdb:=value;
-f_config_observatory1.cdb:=value;
-end;
-
-procedure Tf_config.SetCcat(value: Tconf_catalog);
-begin
-Fccat.Assign(value);
-f_config_time1.ccat:=Fccat;
-f_config_observatory1.ccat:=Fccat;
-f_config_chart1.ccat:=Fccat;
-f_config_catalog1.ccat:=Fccat;
-f_config_solsys1.ccat:=Fccat;
-f_config_display1.ccat:=Fccat;
-f_config_pictures1.ccat:=Fccat;
-f_config_system1.ccat:=Fccat;
-end;
-
-procedure Tf_config.SetCshr(value: Tconf_shared);
-begin
-Fcshr.Assign(value);
-f_config_time1.cshr:=Fcshr;
-f_config_observatory1.cshr:=Fcshr;
-f_config_chart1.cshr:=Fcshr;
-f_config_catalog1.cshr:=Fcshr;
-f_config_solsys1.cshr:=Fcshr;
-f_config_display1.cshr:=Fcshr;
-f_config_pictures1.cshr:=Fcshr;
-f_config_system1.cshr:=Fcshr;
-end;
-
-procedure Tf_config.SetCsc(value: Tconf_skychart);
-begin
-Fcsc.Assign(value);
-f_config_time1.csc:=Fcsc;
-f_config_observatory1.csc:=Fcsc;
-f_config_chart1.csc:=Fcsc;
-f_config_catalog1.csc:=Fcsc;
-f_config_solsys1.csc:=Fcsc;
-f_config_display1.csc:=Fcsc;
-f_config_pictures1.csc:=Fcsc;
-f_config_system1.csc:=Fcsc;
-end;
-
-procedure Tf_config.SetCplot(value: Tconf_plot);
-begin
-Fcplot.Assign(value);
-f_config_time1.cplot:=Fcplot;
-f_config_observatory1.cplot:=Fcplot;
-f_config_chart1.cplot:=Fcplot;
-f_config_catalog1.cplot:=Fcplot;
-f_config_solsys1.cplot:=Fcplot;
-f_config_display1.cplot:=Fcplot;
-f_config_pictures1.cplot:=Fcplot;
-f_config_system1.cplot:=Fcplot;
-end;
-
-procedure Tf_config.SetCmain(value: Tconf_main);
-begin
-Fcmain.Assign(value);
-f_config_time1.cmain:=Fcmain;
-f_config_observatory1.cmain:=Fcmain;
-f_config_chart1.cmain:=Fcmain;
-f_config_catalog1.cmain:=Fcmain;
-f_config_solsys1.cmain:=Fcmain;
-f_config_display1.cmain:=Fcmain;
-f_config_pictures1.cmain:=Fcmain;
-f_config_system1.cmain:=Fcmain;
-f_config_internet1.cmain:=Fcmain;
-end;
-
-procedure Tf_config.SetCdss(value: Tconf_dss);
-begin
-Fcdss.Assign(value);
-f_config_pictures1.cdss:=Fcdss;
-f_config_internet1.cdss:=Fcdss;
-end;
-
-procedure Tf_config.applyClick(Sender: TObject);
-begin
-ActivateChanges;
-if assigned(FApplyConfig) then FApplyConfig(Self);
-end;
 
 end.
-
-
-
-
