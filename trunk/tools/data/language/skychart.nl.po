@@ -1,15 +1,17 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-10-27 19:01+0100\n"
-"Last-Translator: Marc Fokker <marc@cwnetwerk.nl>\n"
 "Project-Id-Version: skychart.en\n"
-"POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:32+0000\n"
+"Last-Translator: Marc Fokker <Unknown>\n"
+"Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -125,7 +127,7 @@ msgstr "Alle configuratie instellingen"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
-msgstr "%sAlle tabel-structuren bestaan. "
+msgstr "%sAlle tabel-structuren bestaan."
 
 #: u_translation.rsalltoolsbar
 msgid "All tool bars"
@@ -201,7 +203,7 @@ msgstr "Verschijning"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Voeg toe aan bestaande catalogus"
+msgstr "Voeg toe aan bestaande catalogus "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -297,7 +299,7 @@ msgstr "Vernieuw automatisch"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Vernieuw automatisch iedere"
+msgstr "Vernieuw automatisch iedere "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -665,7 +667,7 @@ msgstr "Wis doel"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Klik om de kleur te veranderen"
+msgstr "Klik om de kleur te veranderen "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -837,7 +839,7 @@ msgstr "Sterrenbeeld figuren"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Sterrenbeeld figuren bestandsnaam:"
+msgstr "Sterrenbeeld figuren bestandsnaam: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -845,7 +847,7 @@ msgstr "Sterrenbeeld grenzen"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Sterrenbeeld grenzen bestandsnaam:"
+msgstr "Sterrenbeeld grenzen bestandsnaam: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -865,7 +867,7 @@ msgstr "Telescoop configuratiescherm"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Configuratiescherm commando"
+msgstr "Configuratiescherm commando "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -921,7 +923,7 @@ msgstr "Gecorreleerd"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Kan de bibliotheek niet laden"
+msgstr "Kan de bibliotheek niet laden "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1129,7 +1131,7 @@ msgstr "Verlaag tijd"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC keer:"
+msgstr "DEC keer: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1242,15 +1244,15 @@ msgstr "Verwijderen uit namenlijst..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Verwijderen van de maandelijkse gegevens"
+msgstr "Verwijderen van de maandelijkse gegevens "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Verwijderen van de maandelijkse data ouder dan"
+msgstr "Verwijderen van de maandelijkse data ouder dan "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "Selectief verwijderen van MPC data "
+msgstr "Selectief verwijderen van MPC data"
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
@@ -1286,7 +1288,7 @@ msgstr "Details"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Apparaat-poort"
+msgstr "Apparaat-poort "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1686,7 +1688,7 @@ msgstr "Avondschemer"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "iedere"
+msgstr "iedere "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1722,7 +1724,7 @@ msgstr "Zwakker"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Zwakke sterren grootte"
+msgstr "Zwakke sterren grootte "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1806,7 +1808,7 @@ msgstr "Filter deep sky objecten"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filter sterren"
+msgstr "Filter sterren "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -2094,7 +2096,7 @@ msgstr "Verberg object groter dan"
 
 #: u_translation.rshigh
 msgid "High"
-msgstr "Hoog "
+msgstr "Hoog"
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -2314,11 +2316,11 @@ msgstr "Ongeldig FITS bestand: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "Ongeldig pad:"
+msgstr "Ongeldig pad: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
-msgstr "Invertering Alpha, "
+msgstr "Invertering Alpha,"
 
 #: u_translation.rsinversiondel
 msgid "%s Inversion Delta"
@@ -2506,7 +2508,7 @@ msgstr "Lijnen/rooster"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Lijndikte"
+msgstr "Lijndikte "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2546,7 +2548,7 @@ msgstr "Laad MPC formaat bestand"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Laad alleen de eerste"
+msgstr "Laad alleen de eerste "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2558,7 +2560,7 @@ msgstr "Lokale horizon"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Lokale horizon-bestandsnaam:"
+msgstr "Lokale horizon-bestandsnaam: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2590,7 +2592,7 @@ msgstr "ruit"
 
 #: u_translation.rslow
 msgid "Low"
-msgstr "Laag "
+msgstr "Laag"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -2846,7 +2848,7 @@ msgstr "Meer dan 1000 fouten! Het verwerken is afgebroken."
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr "Meer dan %s objecten, het resultaat is afgekort. "
+msgstr "Meer dan %s objecten, het resultaat is afgekort."
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -3122,7 +3124,7 @@ msgstr "Aantal stappen"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr "Nutatie, aberratie "
+msgstr "Nutatie, aberratie"
 
 #: u_translation.rsobject
 msgid "Object"
@@ -3254,7 +3256,7 @@ msgstr "Open sterrenhoop"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Open de bitmap. "
+msgstr "Open de bitmap."
 
 #: u_translation.rsoptions
 msgid "Options"
@@ -3442,7 +3444,7 @@ msgstr "Verzeker u ervan dat de ASCOM telecoop stuurprogramma's correct zijn ge�
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Voer alstublieft een object identificatie in. "
+msgstr "Voer alstublieft een object identificatie in."
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
@@ -3550,7 +3552,7 @@ msgstr "Creëer een catalogus CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Creëer gegevens"
+msgstr "Creëer gegevens "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3630,7 +3632,7 @@ msgstr "Product informatie"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Programmagegevens"
+msgstr "Programmagegevens "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -3754,7 +3756,7 @@ msgstr "Raster resolutie"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA keer:"
+msgstr "RA keer: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -3890,7 +3892,7 @@ msgstr "Raporteer een probleem"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "Te veel tijd verstreken. Mogelijk heeft u een te groot gebied ingesteld dat te veel rekentijd kost op de server. "
+msgstr "Te veel tijd verstreken. Mogelijk heeft u een te groot gebied ingesteld dat te veel rekentijd kost op de server."
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
@@ -4206,7 +4208,7 @@ msgstr "Server IP port:"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr "Serve reactie:"
+msgstr "Serve reactie: "
 
 #: u_translation.rsset
 msgid "Set"
@@ -4226,7 +4228,7 @@ msgstr "Stel beeldveld in op"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Stel per as in hoeveel uw telescoop beweegt wanneer u de betreffende aandrijfknop op uw montering éénmaal omdraait. In het vervolg kunt u de telescoopknop klikken om zien hoeveel keren u de aandrijfknop moet omdraaien om van het huidige naar het volgende object te gaan.  "
+msgstr "Stel per as in hoeveel uw telescoop beweegt wanneer u de betreffende aandrijfknop op uw montering éénmaal omdraait. In het vervolg kunt u de telescoopknop klikken om zien hoeveel keren u de aandrijfknop moet omdraaien om van het huidige naar het volgende object te gaan."
 
 #: u_translation.rssetlocation
 msgid "Set Location"
@@ -4522,7 +4524,7 @@ msgstr "Sorteert bestanden op magnitude"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Sorteert het index bestand"
+msgstr "Sorteert het index bestand "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4598,7 +4600,7 @@ msgstr "Sterren"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Sterren - en deep sky catalogi gecreëerd met"
+msgstr "Sterren - en deep sky catalogi gecreëerd met "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -4730,7 +4732,7 @@ msgstr "Tabel"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%sTabel %s bestaat niet! %sHerstel alstublieft de fout en probeer opnieuw. "
+msgstr "%sTabel %s bestaat niet! %sHerstel alstublieft de fout en probeer opnieuw."
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
@@ -4814,7 +4816,7 @@ msgstr "Deze handeling vervangt alle database inhoud van het land %s met verse g
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr "Deze catalogus bevat %s records. Vanwege de programma-performance is het niet mogelijk alles te downloaden. "
+msgstr "Deze catalogus bevat %s records. Vanwege de programma-performance is het niet mogelijk alles te downloaden."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4998,7 +5000,7 @@ msgstr "Umbra"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Kan de map niet aanmaken"
+msgstr "Kan de map niet aanmaken "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5182,7 +5184,7 @@ msgstr "Horizonzicht"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
-msgstr "Virtuele HandPad voor Scope.exe"
+msgstr "Virtuele HandPad voor Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
@@ -5230,7 +5232,7 @@ msgstr "Waarschuwing! De oorspronkelijke waarde van datum en/of observatielocati
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Waarschuwing!%sU staat op het punt om de database %s te vernietigen en alles wat daar in zit, zelfs als de inhoud los staat van dit programma.%sWeet u zeker dat u verder wilt gaan? "
+msgstr "Waarschuwing!%sU staat op het punt om de database %s te vernietigen en alles wat daar in zit, zelfs als de inhoud los staat van dit programma.%sWeet u zeker dat u verder wilt gaan?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
@@ -5290,7 +5292,7 @@ msgstr "Y Fouten"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "U bent nu gereed om planetoïden voor deze tijdsperiode weer te geven. "
+msgstr "U bent nu gereed om planetoïden voor deze tijdsperiode weer te geven."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-12-31 13:54+0000\n"
-"PO-Revision-Date: 2011-12-30 06:11+0000\n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2012-01-03 17:23+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-12-31 16:28+0000\n"
-"X-Generator: Launchpad (build 14560)\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -156,7 +156,7 @@ msgstr "Alt/AZ koord."
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "Alt-Az koordinata"
+msgstr "Alt-Az koordinate"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
@@ -348,7 +348,7 @@ msgstr "Baterija"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr "Bayerjevo število"
+msgstr "Bayerjeva črka"
 
 #: u_translation.rsbc
 msgid "BC"
@@ -576,11 +576,11 @@ msgstr "Središčni poldnevnik"
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr "Središčna zvezda B magnitude"
+msgstr "Magnituda središčne zvezde B"
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr "Središčna zvezda V magnitude"
+msgstr "Mangituda središčne zvezde V"
 
 #: u_translation.rscentre
 msgid "Centre on"
@@ -592,7 +592,7 @@ msgstr "Spremeni način risanja"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
-msgstr "Spremeni prikaz slik"
+msgstr "Spremeni prikaz slike"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -764,11 +764,11 @@ msgstr "Sestavina"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr "Enota 1 magnitude"
+msgstr "Enota 1. magnitude"
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr "Enota 2 magnitude"
+msgstr "Enota 2. magnitude"
 
 #: u_translation.rscompute
 msgid "Compute"
@@ -792,7 +792,7 @@ msgstr "Nastavi"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "Nastavitve programa"
+msgstr "Nastavi program"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
@@ -1184,7 +1184,7 @@ msgstr "Privzeta velikost (arcsec)"
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr "°"
+msgstr "d"
 
 #: u_translation.rsdegree
 msgid "Degree"
@@ -1408,7 +1408,7 @@ msgstr "Dvozvezdja"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr "Dvojna zvezda"
+msgstr "Dvozvezdje"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -1520,7 +1520,7 @@ msgstr "Ekliptika"
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr "Ekliptična koordinata"
+msgstr "Ekliptične koordinate"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
@@ -1536,7 +1536,7 @@ msgstr "Uredi barvo"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Uredi barve DSO črt"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -1612,7 +1612,7 @@ msgstr "Ekvatorialen"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "Ekvatorska koordinata"
+msgstr "Ekvatorske koordinate"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
@@ -1936,7 +1936,7 @@ msgstr "Rimski"
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr "Rimska koordinata"
+msgstr "Rimske koordinate"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
@@ -2068,7 +2068,7 @@ msgstr "Izbira načina HandPad"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr "H-Beta magnituda"
+msgstr "Magnituda H-Beta"
 
 #: u_translation.rsheight
 msgid "Height"
@@ -2276,7 +2276,7 @@ msgstr "Začenjaj"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr "Inicializiraj podatkovno zbirko"
+msgstr "Nastavi začetne vrednosti podatkovne zbirke"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -2400,7 +2400,7 @@ msgstr "Pokrajina"
 
 #: u_translation.rslanguage
 msgid "Internal language"
-msgstr "English"
+msgstr "Notranji jezik"
 
 #: u_translation.rslanguage2
 msgid "Language"
@@ -2660,7 +2660,7 @@ msgstr "Magnitude Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
-msgstr "Poštni seznam"
+msgstr "Poštni seznam (Yahoo skupina)"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -2700,7 +2700,7 @@ msgstr "maks"
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr "Maksimalno"
+msgstr "Razpni"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
@@ -2772,7 +2772,7 @@ msgstr "Rimska cesta"
 
 #: u_translation.rsmin
 msgid "m"
-msgstr "'"
+msgstr "m"
 
 #: u_translation.rsmin2
 msgid "min"
@@ -2792,11 +2792,11 @@ msgstr "minut"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr "Zrcalno vodoravno"
+msgstr "Zrcali vodoravno"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr "Zrcalno navpično"
+msgstr "Zrcali navpično"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -3384,7 +3384,7 @@ msgstr "Mena"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr "Fotografijska plošča"
+msgstr "Fotografska plošča"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -3528,7 +3528,7 @@ msgstr "Položaj"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr "Kot položaja"
+msgstr "Položaj kota"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
@@ -4104,7 +4104,7 @@ msgstr "Iskalni indeks"
 
 #: u_translation.rssec
 msgid "s"
-msgstr "\""
+msgstr "s"
 
 #: u_translation.rssec2
 msgid "Sec."
@@ -4832,11 +4832,11 @@ msgstr "Thu."
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
-msgstr "Zloži vodoravno"
+msgstr "Razpostavi vodoravno"
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
-msgstr "Zloži navpično"
+msgstr "Razpostavi navpično"
 
 #: u_translation.rstime
 msgid "Time"
@@ -4912,7 +4912,7 @@ msgstr "Sledi teleskopu"
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr "Pretvorba"
+msgstr "Preoblikovanje"
 
 #: u_translation.rstranslator
 msgid "Translator:"

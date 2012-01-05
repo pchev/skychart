@@ -1,17 +1,19 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-03-05 17:43+0800\n"
-"Last-Translator: philipTao <idpt441@seed.net.tw>\n"
 "Project-Id-Version: skychart.zh\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:13+0000\n"
+"Last-Translator: philipTao <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
-"X-Poedit-Language: Chinese\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "X-Poedit-Country: CHINA\n"
+"X-Poedit-Language: Chinese\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -147,7 +149,7 @@ msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "地平座標"
+msgstr "地平座標 "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -203,7 +205,7 @@ msgstr "視"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "附加到現有星表"
+msgstr "附加到現有星表 "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -299,7 +301,7 @@ msgstr "自動更新"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "每次自動更新"
+msgstr "每次自動更新 "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -667,7 +669,7 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "點擊更改顏色"
+msgstr "點擊更改顏色 "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -839,7 +841,7 @@ msgstr "星座圖"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "星座檔案名稱："
+msgstr "星座檔案名稱： "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -847,7 +849,7 @@ msgstr "星座邊界"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "星座邊界檔案名稱："
+msgstr "星座邊界檔案名稱： "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -867,7 +869,7 @@ msgstr "控制面板"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "控制面板命令"
+msgstr "控制面板命令 "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -923,7 +925,7 @@ msgstr "相關"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "無法下載程序庫"
+msgstr "無法下載程序庫 "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -995,7 +997,7 @@ msgstr "破折號點點"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "資料庫檔案："
+msgstr "資料庫檔案： "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1131,7 +1133,7 @@ msgstr "减少時間"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "赤緯轉動："
+msgstr "赤緯轉動： "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1244,11 +1246,11 @@ msgstr "從名稱列表刪除..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "刪除每月數據"
+msgstr "刪除每月數據 "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "刪除每月數據早於"
+msgstr "刪除每月數據早於 "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1288,7 +1290,7 @@ msgstr "詳細資料"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "設備端口"
+msgstr "設備端口 "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1688,7 +1690,7 @@ msgstr "暮光"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "每步"
+msgstr "每步 "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1724,7 +1726,7 @@ msgstr "暗"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "暗星大小"
+msgstr "暗星大小 "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1808,7 +1810,7 @@ msgstr "篩選深空天體"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "篩選恆星"
+msgstr "篩選恆星 "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -1916,7 +1918,7 @@ msgstr "從"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP"
+msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
@@ -2236,7 +2238,7 @@ msgstr "INDI 驅動程式設定"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "INDI 伺服器主機"
+msgstr "INDI 伺服器主機 "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2316,7 +2318,7 @@ msgstr "無效 FITS 檔案：%s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "無效的路徑："
+msgstr "無效的路徑： "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
@@ -2508,7 +2510,7 @@ msgstr "線 / 網格"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "線寬"
+msgstr "線寬 "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2548,7 +2550,7 @@ msgstr "載入 MPC 格式檔案"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "只載表頭"
+msgstr "只載表頭 "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2560,7 +2562,7 @@ msgstr "本地地平"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "本地地平檔案名："
+msgstr "本地地平檔案名： "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -3552,7 +3554,7 @@ msgstr "使用 CatGen 編製星表"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "编製資料"
+msgstr "编製資料 "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3632,7 +3634,7 @@ msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "程式資料"
+msgstr "程式資料 "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -3756,7 +3758,7 @@ msgstr "光栅分辨率"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "赤經轉動："
+msgstr "赤經轉動： "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4192,7 +4194,7 @@ msgstr "伺服器"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "伺服器指令"
+msgstr "伺服器指令 "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4524,7 +4526,7 @@ msgstr "檔案照星等排序案"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "索引檔排序"
+msgstr "索引檔排序 "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4600,7 +4602,7 @@ msgstr "恆星"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "恆星和深空星表编制使用"
+msgstr "恆星和深空星表编制使用 "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -5000,7 +5002,7 @@ msgstr "本影"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "無法創建目錄"
+msgstr "無法創建目錄 "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

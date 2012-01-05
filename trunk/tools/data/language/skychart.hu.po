@@ -1,15 +1,17 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2008.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2010-10-18 21:51+0100\n"
-"Last-Translator: Sáfár Péter <safarpeter@t-online.hu>\n"
 "Project-Id-Version: skychart.en\n"
-"POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:13+0000\n"
+"Last-Translator: Sáfár Péter <Unknown>\n"
+"Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -157,7 +159,7 @@ msgstr ""
 #: u_translation.rsaltazcoord
 #| msgid "Alt/AZ Coord. "
 msgid "Alt/Az coord. "
-msgstr "Alt/Az koord."
+msgstr "Alt/Az koord. "
 
 #: u_translation.rsaltazcoord2
 #| msgid "Alt/AZ Coord."
@@ -218,7 +220,7 @@ msgstr "Megjelenés"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Meglevő katalógushoz csatolás"
+msgstr "Meglevő katalógushoz csatolás "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -322,7 +324,7 @@ msgstr "Automatikus frissítés"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Auto frissítés"
+msgstr "Auto frissítés "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -487,7 +489,7 @@ msgstr "Kat.felépítése"
 
 #: u_translation.rsby
 msgid "by"
-msgstr " "
+msgstr ""
 
 #: u_translation.rsbyname
 msgid "By name"
@@ -722,7 +724,7 @@ msgstr ""
 #: u_translation.rsclicktochang
 #| msgid "Click to change the color "
 msgid "Click to change the colour "
-msgstr "Szín megváltoztatása"
+msgstr "Szín megváltoztatása "
 
 #: u_translation.rsclientconnec
 #| msgid "Client Connection Keep Alive"
@@ -915,7 +917,7 @@ msgstr "Csillagkép ábrák"
 #: u_translation.rsconstellatio3
 #| msgid "Constellation Figure File Name : "
 msgid "Constellation figures file name: "
-msgstr "Csillagkép ábrák file név:"
+msgstr "Csillagkép ábrák file név: "
 
 #: u_translation.rsconstellatio4
 #| msgid "Constellation Boundaries"
@@ -925,7 +927,7 @@ msgstr "Csillagképek határai"
 #: u_translation.rsconstellatio5
 #| msgid "Constellation Boundary File Name : "
 msgid "Constellation boundaries file name: "
-msgstr "Csillagkép határok file név:"
+msgstr "Csillagkép határok file név: "
 
 #: u_translation.rsconstellatio6
 #| msgid "Constellation Label"
@@ -948,7 +950,7 @@ msgstr "Vezérlőpult"
 #: u_translation.rscontrolpanel2
 #| msgid "Control Panel command "
 msgid "Control panel command "
-msgstr "Vezérlőpult parancs"
+msgstr "Vezérlőpult parancs "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -1008,7 +1010,7 @@ msgstr ""
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "A könyvtár betöltése nem lehetséges"
+msgstr "A könyvtár betöltése nem lehetséges "
 
 #: u_translation.rscountrytimez
 #| msgid "Country Timezone"
@@ -1026,7 +1028,7 @@ msgstr "Kereső index fájl készítése"
 #: u_translation.rscreatedataba
 #| msgid "Create Database"
 msgid "Create database"
-msgstr "Új adatbázis "
+msgstr "Új adatbázis"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
@@ -1086,7 +1088,7 @@ msgstr "Vonás pont pont"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Adatbázis helye:"
+msgstr "Adatbázis helye: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1232,7 +1234,7 @@ msgstr "Idő vissza"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC forgatás:"
+msgstr "DEC forgatás: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1357,12 +1359,12 @@ msgstr "Törlés a névlistából..."
 #: u_translation.rsdeletemonthl
 #| msgid "Delete Monthly data "
 msgid "Delete monthly data "
-msgstr "Havi adatok törlése"
+msgstr "Havi adatok törlése "
 
 #: u_translation.rsdeletemonthl2
 #| msgid "Delete Monthly data older than "
 msgid "Delete monthly data older than "
-msgstr "Havi adatok törlése ami régebbi mint"
+msgstr "Havi adatok törlése ami régebbi mint "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1404,7 +1406,7 @@ msgstr "Információs ablak"
 #: u_translation.rsdeviceport
 #| msgid "Device Port "
 msgid "Device port "
-msgstr "Port használata"
+msgstr "Port használata "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1832,7 +1834,7 @@ msgstr "Esti szürkület"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "minden"
+msgstr "minden "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1869,7 +1871,7 @@ msgstr "Halványabb"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Halvány csillagok mérete"
+msgstr "Halvány csillagok mérete "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1959,7 +1961,7 @@ msgstr "Mélyég obj. szűrése"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Csillagok szűrése"
+msgstr "Csillagok szűrése "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -2026,7 +2028,7 @@ msgstr "Betütípus"
 #: u_translation.rsforalargecat
 #| msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb, gyakran használt adatmennyiség esetén válszd a szövegfájl típust. Ez lehetőséget ad az eredmény azonnali ellenőrzésére a térképen. "
+msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb, gyakran használt adatmennyiség esetén válszd a szövegfájl típust. Ez lehetőséget ad az eredmény azonnali ellenőrzésére a térképen."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -2075,7 +2077,7 @@ msgstr "-tól:"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP"
+msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 #| msgid "FTP Passive Mode"
@@ -2267,7 +2269,7 @@ msgstr "Címke elrejtése"
 #: u_translation.rshideobjectwi
 #| msgid "Hide object wider than"
 msgid "Hide objects wider than"
-msgstr "Obj. elrejtése ami szélesebb mint "
+msgstr "Obj. elrejtése ami szélesebb mint"
 
 #: u_translation.rshigh
 msgid "High"
@@ -2431,7 +2433,7 @@ msgstr "INDI Driver beállítások"
 #: u_translation.rsindiserverho
 #| msgid "INDI Server Host "
 msgid "INDI server host "
-msgstr "INDI szerver IP"
+msgstr "INDI szerver IP "
 
 #: u_translation.rsindiserverpo
 #| msgid "INDI server Port"
@@ -2487,7 +2489,7 @@ msgstr "Sikertelen beszúrás %s sorban: %s"
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
-msgstr "Sikertelen beszúrás! %s "
+msgstr "Sikertelen beszúrás! %s"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2516,7 +2518,7 @@ msgstr "Hibás FITS fájl: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "Érvénytelen elérési út:"
+msgstr "Érvénytelen elérési út: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
@@ -2721,7 +2723,7 @@ msgstr "Vonalak/háló"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Vonal vastag"
+msgstr "Vonal vastag "
 
 #: u_translation.rslinkallchart
 #| msgid "Link All Chart"
@@ -2763,7 +2765,7 @@ msgstr "MPC formátumú fájl betöltése"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Csak az első betöltése"
+msgstr "Csak az első betöltése "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2777,7 +2779,7 @@ msgstr "Helyi horizont"
 #: u_translation.rslocalhorizon2
 #| msgid "Local Horizon File Name : "
 msgid "Local horizon file name: "
-msgstr "Helyi horizont fájlnév:"
+msgstr "Helyi horizont fájlnév: "
 
 #: u_translation.rslocalsideral
 #| msgid "Local Sideral Time"
@@ -3841,7 +3843,7 @@ msgstr "CatGen katalógus készítése"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Adatok előkészítése"
+msgstr "Adatok előkészítése "
 
 #: u_translation.rspreparemonth
 #| msgid "Prepare Monthly Data"
@@ -3927,7 +3929,7 @@ msgstr ""
 #: u_translation.rsprogramdata
 #| msgid "Program Data "
 msgid "Program data "
-msgstr "Program adatok:"
+msgstr "Program adatok: "
 
 #: u_translation.rsprograminfor
 #| msgid "Program Information"
@@ -4062,7 +4064,7 @@ msgstr "Raszter felbontása"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA forgatás:"
+msgstr "RA forgatás: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4529,7 +4531,7 @@ msgstr "Szerver"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Szerver parancs"
+msgstr "Szerver parancs "
 
 #: u_translation.rsserverinform
 #| msgid "Server Information"
@@ -4901,7 +4903,7 @@ msgstr "Fájlok rendezése magnitúdó szerint"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Index fájl rendezése"
+msgstr "Index fájl rendezése "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4985,7 +4987,7 @@ msgstr "Csillagok"
 #: u_translation.rsstarsandnebu
 #| msgid "Stars and Deep Sky catalogs prepared with "
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Csillag és mélyég katalógus készítése:"
+msgstr "Csillag és mélyég katalógus készítése: "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -5415,7 +5417,7 @@ msgstr "Umbra"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "A könyvtár létrehozása nem lehetséges"
+msgstr "A könyvtár létrehozása nem lehetséges "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5650,7 +5652,7 @@ msgstr "Figyelem!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Figyelem! Számolása "
+msgstr "Figyelem! Számolása"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
