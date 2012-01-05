@@ -1,5 +1,6 @@
 Version 3.5 release Notes
 
+- Add chart legend. See menu Chart / Labels
 - Change in projection mapping:
   - Add Mercator projection. 
   - Cartesian and Mercator projection are rotated to the screen center for full sky coverage.
