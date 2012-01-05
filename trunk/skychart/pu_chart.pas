@@ -2341,8 +2341,7 @@ if (otype='S*')and(oname=pla[10]) then begin
   if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
 end;
 // DSO picture
-if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
-  if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
+if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
   if (ExtractFileExt(fn)<>'.nil') then begin
        sc.Fits.FileName:=fn;
        if sc.Fits.Header.valid then begin
@@ -2359,7 +2358,6 @@ if (sc.cfgsc.FindCat='SAC') then begin  // add other catalog with picture here
          bmp.Free;
          end;
         end;
-  end;
   end;
 end;
 // source catalog

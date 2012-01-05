@@ -1089,7 +1089,7 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
                            'width double NOT NULL default "0", '+
                            'height double NOT NULL default "0", '+
                            'rotation  double NOT NULL default "0", '+
-                           'PRIMARY KEY (ra,de))','2'),
+                           'PRIMARY KEY (catalogname,ra,de))','2'),
            ('cdc_country','(country varchar(5) NOT NULL default "",'+
                            'isocode varchar(5) NOT NULL default "",'+
                            'name varchar(50) NOT NULL default "",'+
@@ -1143,7 +1143,7 @@ sqltable : array[mysql..sqlite,1..numsqltable,1..3] of string =(
                            'width NUMERIC NOT NULL default "0", '+
                            'height NUMERIC NOT NULL default "0", '+
                            'rotation  NUMERIC NOT NULL default "0", '+
-                           'PRIMARY KEY (ra,de))','2'),
+                           'PRIMARY KEY (catalogname,ra,de))','2'),
            ('cdc_country','(country TEXT NOT NULL default "",'+
                            'isocode TEXT NOT NULL default "",'+
                            'name TEXT NOT NULL default "",'+
@@ -1162,12 +1162,12 @@ numsqlindex=4;
 sqlindex : array[mysql..sqlite,1..numsqlindex,1..2] of string =(
            (
            ('ast_mag_idx','cdc_ast_mag (mag)'),
-           ('cdc_fits_objname','cdc_fits (objectname)'),
+           ('cdc_fits_objname','cdc_fits (catalogname,objectname)'),
            ('cdc_location_idx1','cdc_location(country,location)'),
            ('cdc_location_idx2','cdc_location(latitude,longitude)')
            ),(
            ('ast_mag_idx','cdc_ast_mag (mag)'),
-           ('cdc_fits_objname','cdc_fits (objectname)'),
+           ('cdc_fits_objname','cdc_fits (catalogname,objectname)'),
            ('cdc_location_idx1','cdc_location(country,location)'),
            ('cdc_location_idx2','cdc_location(latitude,longitude)')
            ));

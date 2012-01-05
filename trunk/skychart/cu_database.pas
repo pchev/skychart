@@ -167,7 +167,8 @@ end;
 
 function TCDCdb.CheckForUpgrade(memo:Tmemo):boolean;
 var updcountry:boolean;
-    i: integer;
+    i,k: integer;
+    buf: string;
 begin
 result:=false;
 updcountry:=false;
@@ -196,6 +197,30 @@ if db.Active then begin
      writetrace('Create table '+sqltable[dbtype,9,1]+' ...  '+db.ErrorMessage);
      LoadCountryList(slash(sampledir)+'country.dat',memo);
      result:=true;
+  end;
+  // Correct Fits index
+  if DBtype=mysql then begin
+    db.Query('show index from cdc_fits where Key_name="cdc_fits_objname"');
+    i:=0; buf:=' ';
+    while i<db.Rowcount do begin
+      buf:=buf+' '+db.Results[i][4];
+      inc(i);
+    end;
+  end
+  else begin
+    buf:=db.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
+  end;
+  if (pos('objectname',buf)>0) and (pos('catalogname',buf)=0) then begin
+     {$ifdef trace_debug}
+     WriteTrace('Upgrade DB for new Fits indexes');
+     {$endif}
+     db.Query('drop table cdc_fits');
+     writetrace('Drop table cdc_fits ... '+db.ErrorMessage);
+     db.Commit;
+     db.Query('CREATE TABLE '+sqltable[dbtype,8,1]+sqltable[dbtype,8,2]);
+     writetrace('Create table '+sqltable[dbtype,8,1]+' ...  '+db.ErrorMessage);
+     k:=2;
+     db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
   end;
 end;
 end;
