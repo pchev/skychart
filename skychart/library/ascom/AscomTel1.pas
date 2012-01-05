@@ -26,8 +26,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  Windows,  Messages, SysUtils, Classes, Graphics, Controls,
-  Forms, Dialogs, ShellAPI,
+  Windows,  Messages, SysUtils, Classes, Graphics, Controls, 
+  Forms, Dialogs, ShellAPI, 
   StdCtrls, Buttons, inifiles, ComCtrls, Menus, ExtCtrls;
 
 type
@@ -66,6 +66,7 @@ type
     SpeedButton4: TSpeedButton;
     SpeedButton11: TSpeedButton;
     {Utility and form functions}
+    procedure formcreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
     procedure Timer1Timer(Sender: TObject);
     procedure setresClick(Sender: TObject);
@@ -85,10 +86,8 @@ type
     procedure SpeedButton11Click(Sender: TObject);
   private
     { Private declarations }
-    FConfig: string;
   public
     { Public declarations }
-    function  ReadConfig(ConfigPath : shortstring):boolean;
   end;
 
 procedure InitLib;
@@ -99,7 +98,6 @@ Procedure ScopeShowModal(var ok : boolean); stdcall;
 Procedure ScopeConnect(var ok : boolean); stdcall;
 Procedure ScopeDisconnect(var ok : boolean); stdcall;
 Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer); stdcall;
-Procedure ScopeGetEqSys(var EqSys : double); stdcall;
 Procedure ScopeSetObs(la,lo : double); stdcall;
 Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
 Procedure ScopeGetRaDec(var ar,de : double; var ok : boolean); stdcall;
@@ -109,19 +107,23 @@ Procedure ScopeReset; stdcall;
 Function  ScopeInitialized : boolean ; stdcall;
 Function  ScopeConnected : boolean ; stdcall;
 Procedure ScopeClose; stdcall;
-Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
 
 var
   pop_scope: Tpop_scope;
 
 implementation
 
-uses comobj, variants;
+uses comobj
+{$IFDEF VER140}
+, variants
+{$ENDIF}
+;
 
 {$R *.DFM}
 
 var CoordLock : boolean = false;
     Initialized : boolean = false;
+    Initial : boolean = true;
     Appdir : string;
     T : Variant;
   curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
@@ -201,12 +203,6 @@ begin
     result := d+'h'+m+'m'+s+'s';
 end;
 
-Function Slash(nom : string) : string;
-begin
-result:=trim(nom);
-if copy(result,length(nom),1)<>PathDelim then result:=result+PathDelim;
-end;
-
 {-------------------------------------------------------------------------------
 
                        Cartes du Ciel Dll functions
@@ -257,7 +253,6 @@ pop_scope.pos_y.text:='';
 pop_scope.az_x.text:='';
 pop_scope.alt_y.text:='';
 if trim(pop_scope.edit1.text)='' then exit;
-try
 if not VarIsEmpty(T) then begin
   T.connected:=false;
   T:=Unassigned;
@@ -270,9 +265,6 @@ pop_scope.speedbutton7.enabled:=true;
 pop_scope.speedbutton8.enabled:=false;
 pop_scope.speedbutton9.enabled:=false;
 pop_scope.UpdTrackingButton;
-except
- on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-end;
 end;
 
 Procedure ScopeConnect(var ok : boolean); stdcall;
@@ -284,7 +276,6 @@ pop_scope.timer1.enabled:=false;
 pop_scope.speedbutton3.enabled:=true;
 ok:=false;
 if trim(pop_scope.edit1.text)='' then exit;
-try
 T:=Unassigned;
 T := CreateOleObject(pop_scope.edit1.text);
 T.connected:=true;
@@ -301,9 +292,6 @@ if T.connected then begin
    pop_scope.speedbutton9.enabled:=true;
 end else scopedisconnect(dis_ok);
 pop_scope.UpdTrackingButton;
-except
- on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-end;
 end;
 
 Procedure ScopeClose; stdcall;
@@ -316,11 +304,7 @@ begin
 result:=false;
 if not initialized then exit;
 if VarIsEmpty(T) then exit;
-try
 result:=T.connected;
-except
- result:=false;
-end;
 end;
 
 Function  ScopeInitialized : boolean ; stdcall;
@@ -332,11 +316,7 @@ Procedure ScopeAlign(source : string; ra,dec : double); stdcall;
 begin
    if not ScopeConnected then exit;
    if T.CanSync then begin
-      try                 
-         if not T.tracking then begin
-            T.tracking:=true;
-            pop_scope.UpdTrackingButton;
-         end;
+      try
          T.SyncToCoordinates(Ra,Dec);
       except
          on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
@@ -392,6 +372,7 @@ Procedure ScopeGetInfo(var Name : shortstring; var QueryOK,SyncOK,GotoOK : boole
 begin
    if (pop_scope=nil)or(pop_scope.pos_x=nil) then begin
       Initialized := false;
+      Initial := true;
       pop_scope:=Tpop_scope.Create(nil);
    end;
    if ScopeConnected  then begin
@@ -412,25 +393,6 @@ begin
    refreshrate:=pop_scope.timer1.interval;
 end;
 
-Procedure ScopeGetEqSys(var EqSys : double); stdcall;
-var i: integer;
-begin
-   if ScopeConnected then begin
-      try
-         i:=T.EquatorialSystem;
-      except
-         i:=0;
-      end;
-   end else i:=0;
-   case i of
-   0 : EqSys:=0;
-   1 : EqSys:=0;
-   2 : EqSys:=2000;
-   3 : EqSys:=2050;
-   4 : EqSys:=1950;
-   end;
-end;
-
 Procedure ScopeReset; stdcall;
 begin
 end;
@@ -447,20 +409,11 @@ Procedure ScopeGoto(ar,de : double; var ok : boolean); stdcall;
 begin
    if not ScopeConnected then exit;
    try
-      if not T.tracking then begin
-         T.tracking:=true;
-         pop_scope.UpdTrackingButton;
-      end;
       if T.CanSlewAsync then T.SlewToCoordinatesAsync(ar,de)
       else T.SlewToCoordinates(ar,de);
-   except                                                                
+   except
       on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
    end;
-end;
-
-Procedure ScopeReadConfig(ConfigPath : shortstring; var ok : boolean); stdcall;
-begin
-  ok:=pop_scope.ReadConfig(ConfigPath);
 end;
 
 {-------------------------------------------------------------------------------
@@ -468,31 +421,31 @@ end;
                        Form functions
 
 --------------------------------------------------------------------------------}
-
-function Tpop_scope.ReadConfig(ConfigPath : shortstring):boolean;
+procedure Tpop_scope.formcreate(Sender: TObject);
 var ini:tinifile;
-    nom : string;
+    buf,nom : string;
 begin
-result:=DirectoryExists(ConfigPath);
-if Result then
-  FConfig:=slash(ConfigPath)+'scope.ini'
-else
-  FConfig:=slash(extractfilepath(paramstr(0)))+'scope.ini';
-ini:=tinifile.create(FConfig);
-nom:= ini.readstring('Ascom','name','');
-edit1.text:=nom;
-ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
-ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
-lat.text:=ini.readstring('observatory','latitude','0');
-long.text:=ini.readstring('observatory','longitude','0');
-ini.free;
-Timer1.Interval:=strtointdef(ReadIntBox.text,1000);
+     Getdir(0,appdir);
+     buf:=extractfilepath(paramstr(0));
+     ini:=tinifile.create(buf+'scope.ini');
+     nom:= ini.readstring('Ascom','name','');
+     edit1.text:=nom;
+     ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
+     ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
+     lat.text:=ini.readstring('observatory','latitude','0');
+     long.text:=ini.readstring('observatory','longitude','0');
+     ini.free;
+     Timer1.Interval:=strtointdef(ReadIntBox.text,500);
+{     if trim(edit1.text)>'' then begin
+        T := CreateOleObject(edit1.text);
+     end;}
+     UpdTrackingButton;
+     initial:=false;
 end;
 
 procedure InitLib;
 begin
      decimalseparator:='.';
-     Getdir(0,appdir);
 end;
 
 
@@ -508,17 +461,12 @@ end;
 procedure Tpop_scope.Timer1Timer(Sender: TObject);
 begin
 if not ScopeConnected then exit;
-try
 if T.connected and (not CoordLock) then begin
    CoordLock := true;
    timer1.enabled:=false;
    ShowCoordinates;
    CoordLock := false;
    timer1.enabled:=true;
-end;
-except
-   timer1.enabled:=false;
-   Initialized := false;
 end;
 end;
 
@@ -532,7 +480,7 @@ procedure Tpop_scope.SaveConfig;
 var
 ini:tinifile;
 begin
-ini:=tinifile.create(FConfig);
+ini:=tinifile.create(extractfilepath(paramstr(0))+'scope.ini');
 ini.writestring('Ascom','name',edit1.text);
 ini.writestring('Ascom','read_interval',ReadIntBox.text);
 ini.writeBool('Ascom','AltAz',ShowAltAz.Checked);
@@ -567,7 +515,7 @@ end;
 
 procedure Tpop_scope.SpeedButton4Click(Sender: TObject);
 begin
-ExecuteFile('ascomtel.html','',appdir+'\doc\html_doc\en',SW_SHOWNORMAL);
+ExecuteFile('ascomtel.html','',appdir+'\doc',SW_SHOWNORMAL);
 end;
 
 procedure Tpop_scope.SpeedButton6Click(Sender: TObject);
@@ -600,7 +548,6 @@ end;
 
 procedure Tpop_scope.SpeedButton7Click(Sender: TObject);
 begin
-try
 if (edit1.text>'') and (not Scopeconnected) then begin
 if VarIsEmpty(T) then begin
    T := CreateOleObject(edit1.text);
@@ -611,10 +558,6 @@ end else begin
 end;
 UpdTrackingButton;
 end;
-except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-end;
-
 end;
 
 procedure Tpop_scope.SpeedButton9Click(Sender: TObject);
@@ -654,7 +597,6 @@ end;
 
 procedure Tpop_scope.UpdTrackingButton;
 begin
-try
    if not ScopeConnected then exit;
    if (not T.CanSetTracking)or(not T.connected) then begin
       SpeedButton10.Font.Color:=clWindowText;
@@ -666,9 +608,6 @@ try
       if T.Tracking then SpeedButton10.Font.Color:=clGreen
       else SpeedButton10.Font.Color:=clRed;
    end;
-except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-end;
 end;
 
 
@@ -687,7 +626,6 @@ end;
 procedure Tpop_scope.SpeedButton11Click(Sender: TObject);
 var buf : string;
 begin
-try
    if (edit1.text>'') then begin
       try
          if VarIsEmpty(T) then begin
@@ -705,9 +643,6 @@ try
       except
       end;
    end;
-except
-  on E: EOleException do MessageDlg('Error: ' + E.Message, mtWarning, [mbOK], 0);
-end;
 end;
 
 initialization

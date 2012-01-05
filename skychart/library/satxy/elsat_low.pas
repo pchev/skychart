@@ -1,4 +1,4 @@
-unit elsat_low;
+unit elsat;
 interface
 type Tsatel = record
                  t0  : double;

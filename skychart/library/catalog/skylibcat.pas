@@ -19,15 +19,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode delphi}{$H+}
+
 interface
-uses  gscconst,SysUtils,Math;
+uses   gscconst,SysUtils,Math;
 
-type
-     coordvector = array[1..3] of double;
-     rotmatrix = array[1..3,1..3] of double;
-
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
+Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
+Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
@@ -100,12 +98,8 @@ procedure FindRegionListDS(x1,x2,y1,y2:Double ;
 function InvertI32(X : LongWord) : LongInt;
 Function NoSlash(nom : string) : string;
 Function Slash(nom : string) : string;
-Procedure Precession_rad(j0,j1: double; var ra,de: double);
 
 {$ifdef linux}
-const slashchar='/';
-{$endif}
-{$ifdef darwin}
 const slashchar='/';
 {$endif}
 {$ifdef mswindows}
@@ -113,12 +107,8 @@ const slashchar='\';
 {$endif}
 
 Const
-    tab=#09;
     deg2rad = pi/180;
     rad2deg = 180/pi;
-    pi2 = 2*pi;
-    pid2 = pi/2;
-    secarc = deg2rad/3600;
     jd2000 : double =2451545.0 ;
     jd1950 : double =2433282.4235;
     lg_reg_x7 : array [0..23,1..2] of integer = (
@@ -144,7 +134,6 @@ var
   Northpoleinmap,Southpoleinmap : boolean;
   appcaption : string;
   UseCache : Boolean = True;
-  rt: rotmatrix;
 
 implementation
 
@@ -153,162 +142,13 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
-////// Required functions adapted from the SOFA library
-
-procedure sofa_S2C(theta,phi: double; var c: coordvector);
-// Convert spherical coordinates to Cartesian.
-// THETA    d         longitude angle (radians)
-// PHI      d         latitude angle (radians)
-var sa,ca,sd,cd: extended;
+Procedure InitCat(hnd : Cardinal ;Cache : boolean); stdcall;
 begin
-sincos(theta,sa,ca);
-sincos(phi,sd,cd);
-c[1]:=ca*cd;
-c[2]:=sa*cd;
-c[3]:=sd;
+UseCache:=Cache;
+// HND is no more used, keep for compatibility with previous version
 end;
 
-procedure sofa_c2s(p: coordvector; var theta,phi: double);
-// P-vector to spherical coordinates.
-// THETA    d         longitude angle (radians)
-// PHI      d         latitude angle (radians)
-var x,y,z,d2: double;
-begin
-X := P[1];
-Y := P[2];
-Z := P[3];
-D2 := X*X + Y*Y;
-IF ( D2 = 0 ) THEN
-   theta := 0
-ELSE
-   theta := arctan2(Y,X);
-IF ( Z = 0 ) THEN
-   phi := 0
-ELSE
-   phi := arctan2(Z,SQRT(D2));
-end;
-
-procedure sofa_cp(p: coordvector; var c: coordvector);
-// Copy a p-vector.
-var i: integer;
-begin
-for i:=1 to 3 do c[i]:=p[i];
-end;
-
-procedure sofa_cr(r:rotmatrix; var c: rotmatrix);
-// Copy an r-matrix.
-var i,j: integer;
-begin
-for j:=1 to 3 do
-  for i:=1 to 3 do c[j,i]:=r[j,i];
-end;
-
-procedure sofa_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
-// Multiply a p-vector by an r-matrix.
-var w: double;
-    wrp: coordvector;
-    i,j: integer;
-begin
-// Matrix R * vector P.
-for j:=1 to 3 do begin
-   W := 0;
-   for i:=1 to 3 do begin
-      W := W + R[J,I]*P[I];
-   end; //i
-   WRP[J] := W;
-end; //j
-// Return the result.
-sofa_CP ( WRP, RP );
-end;
-
-procedure sofa_tr(r: rotmatrix; var rt: rotmatrix);
-// Transpose an r-matrix.
-var wm: rotmatrix;
-    i,j: integer;
-begin
-for i:=1 to 3 do begin
-   for j:=1 to 3 do begin
-      wm[i,j] := r[j,i];
-   end;
-end;
-sofa_cr ( wm, rt );
-end;
-
-procedure sofa_rxr(a,b: rotmatrix; var atb: rotmatrix);
-// Multiply two r-matrices.
-var i,j,k: integer;
-    w: double;
-    wm: rotmatrix;
-begin
-for i:=1 to 3 do begin
-   for j:=1 to 3 do begin
-      W := 0;
-      for k:=1 to 3 do begin
-         W := W + A[I,K]*B[K,J];
-      end; //k
-      WM[I,J] := W;
-   end; //j
-end; //i
-sofa_CR ( WM, ATB );
-end;
-
-procedure sofa_Zr(var r: rotmatrix);
-// Initialize an r-matrix to the null matrix.
-var i,j: integer;
-begin
-for i:=1 to 3 do
-  for j:=1 to 3 do
-     r[i,j]:=0;
-end;
-
-procedure sofa_Ir(var r: rotmatrix);
-//   Initialize an r-matrix to the identity matrix.
-begin
-sofa_Zr(r);
-r[1,1] := 1.0;
-r[2,2] := 1.0;
-r[3,3] := 1.0;
-end;
-
-procedure sofa_Rz(psi: double; var r: rotmatrix);
-//  Rotate an r-matrix about the z-axis.
-var s,c : extended;
-    a,w : rotmatrix;
-begin
-// Matrix representing new rotation.
-   sincos(psi,s,c);
-   sofa_Ir(a);
-   a[1,1] :=  c;
-   a[2,1] := -s;
-   a[1,2] :=  s;
-   a[2,2] :=  c;
-// Rotate.
-   sofa_Rxr(a, r, w);
-// Return result.
-   sofa_Cr(w, r);
-end;
-
-procedure sofa_Ry(theta: double; var r: rotmatrix);
-//  Rotate an r-matrix about the y-axis.
-var s,c : extended;
-    a,w : rotmatrix;
-begin
-// Matrix representing new rotation.
-   sincos(theta,s,c);
-   sofa_Ir(a);
-   a[1,1] :=  c;
-   a[3,1] :=  s;
-   a[1,3] := -s;
-   a[3,3] :=  c;
-// Rotate.
-   sofa_Rxr(a, r, w);
-// Return result.
-   sofa_Cr(w, r);
-end;
-
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
-var acc,dcc: double;
-    rm: rotmatrix;
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean); stdcall;
 begin
    BxGlb:= bx;
    ByGlb:= by;
@@ -333,36 +173,20 @@ begin
    Northpoleinmap:=np;
    Southpoleinmap:=sp;
    case ProjPole of
-   0: begin
-      acentre:=azc;    // equat
-      hcentre:=hc;
-      acc:=arcentre*15;
-      dcc:=decentre;
-      end;
-   1: begin
+   0..1: begin
       acentre:=azc;    // alt-az
       hcentre:=hc;
-      acc:=-acentre;
-      dcc:=hcentre;
       end;
    2: begin
       lcentre:=azc;    // galactic
       bcentre:=hc;
-      acc:=lcentre;
-      dcc:=bcentre;
       end;
    3: begin
       lecentre:=azc;   // ecliptic
       becentre:=hc;
       ecl:=ecliptic(JDChart);
-      acc:=lecentre;
-      dcc:=becentre;
       end;
    end;
-   sofa_Ir(rm);
-   sofa_Rz(deg2rad*acc, rm);
-   sofa_Ry(-deg2rad*dcc, rm);
-   sofa_tr(rm,rt);
 end;
 
 Function PadZeros(x : string ; l :integer) : string;
@@ -380,17 +204,23 @@ Begin
    ywindow:= (y-yshift-AyGlb)/ByGlb;
 end ;
 
-PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
-var ra,de : double ;
+PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);  // ICRS
+var i1,i2,i3,i4,i5,i6,i7 : double ;
 //RA en degre!
-BEGIN
- ra:=deg2rad*ari;
- de:=deg2rad*dei;
- Precession_rad(ti,tf,ra,de);
- ari:=rad2deg*ra;
- dei:=rad2deg*de;
- ARI:=RMOD(ARI+360.0,360.0);
-END  ;
+   BEGIN
+      if ti=tf then exit;
+      I1:=(TI-2451545.0)/36525 ;
+      I2:=(TF-TI)/36525;
+      I3:=((2306.2181+1.39656*i1-1.39e-4*i1*i1)*i2+(0.30188-3.44e-4*i1)*i2*i2+1.7998e-2*i2*i2*i2)/3600 ;
+      I4:=((2306.2181+1.39656*i1-1.39e-4*i1*i1)*i2+(1.09468+6.6e-5*i1)*i2*i2+1.8203e-2*i2*i2*i2)/3600 ;
+      I5:=((2004.3109-0.85330*i1-2.17e-4*i1*i1)*i2-(0.42665+2.17e-4*i1)*i2*i2-4.1833e-2*i2*i2*i2)/3600 ;
+      I6:=COS(degtorad(DEI))*SIN(degtorad(ARI+I3)) ;
+      I7:=COS(degtorad(I5))*COS(degtorad(DEI))*COS(degtorad(ARI+I3))-SIN(degtorad(I5))*SIN(degtorad(DEI)) ;
+      DEI:=radtodeg(ArcSIN(SIN(degtorad(I5))*COS(degtorad(DEI))*COS(degtorad(ARI+I3))+COS(degtorad(I5))*SIN(degtorad(DEI)))) ;
+      ARI:=radtodeg(ARCTAN2(I6,I7)) ;
+      ARI:=ARI+I4   ;
+      ARI:=RMOD(ARI+360.0,360.0);
+   END  ;
 
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double );
 var l1,d1,h1 : double;
@@ -402,8 +232,7 @@ h:= radtodeg(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ))  ;
 A:= radtodeg(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+360,360);
 { refraction meeus91 15.4 }
-if h>-1 then h:=minvalue([90.0,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60])
-        else h:=h+0.64658062088*(h+90)/89;
+h:=minvalue([90,h+(1.02/tan(degtorad(h+10.3/(h+5.11))))/60]);
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double);
@@ -412,8 +241,7 @@ BEGIN
 l1:=degtorad(ObsLatitude);
 a1:=degtorad(A);
 { refraction meeus91 15.3 }
-if h>-0.3534193791 then h:=minvalue([90.0,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60])
-        else h:=h-0.65705159*(h+90)/89.64658;
+h:=minvalue([90,h-(1/tan(degtorad(h+(7.31/(h+4.4)))))/60]);
 h1:=degtorad(h);
 de:= radtodeg(arcsin( sin(l1)*sin(h1)-cos(l1)*cos(h1)*cos(a1) ))  ;
 hh:= radtodeg(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
@@ -478,9 +306,9 @@ l:=rmod(l+360,360);
 b:=rad2deg*arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
 end;
 
+
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double );
 Var a,r,hh,s1,c1,x,y,ac,dc : Double ;
-    p,pr: coordvector;
 Begin
 case Projpole of
    0 : begin
@@ -512,21 +340,9 @@ case projtype of
     ar := ac - hh - 1E-7 ;
    end;
 'C' : begin
-    sofa_S2C(-deg2rad*xx,deg2rad*yy,p);
-    sofa_rxp(rt,p,pr);
-    sofa_c2s(pr,xx,yy);
-    ar := rad2deg*xx;
-    de := rad2deg*yy;
-    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
-    end;
-'M' : begin
-    yy:=2*arctan(exp(deg2rad*yy))-pid2;
-    sofa_S2C(-deg2rad*xx,yy,p);
-    sofa_rxp(rt,p,pr);
-    sofa_c2s(pr,xx,yy);
-    ar := rad2deg*xx;
-    de := rad2deg*yy;
-    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
+    ar:=ac-x;
+    de:=dc-y;
+    if de>0 then de:=minvalue([de,89.999]) else de:=maxvalue([de,-89.999]);
     end;
 'S' : begin
     dc:=degtorad(dc);
@@ -945,7 +761,7 @@ for i:=0 to 15 do begin
   if ar<0 then ar:=ar+360;
   for j:=0 to 15 do begin
     de:=y1+j*dde ;
-    if abs(de) >= 89.99999 then continue;
+    if abs(de) >= 89.9 then continue;
     arp:=ar; dep:=de;
     precession(JDChart,JDCatalog,arp,dep);
     Findregion30(arp,dep,Sm);
@@ -1107,7 +923,7 @@ step:=minvalue([ra,de,step]);
 nSM:=0;
 de:=y1;
 repeat
-  if abs(de) < 90 then begin
+  if abs(de) >= 90 then continue;
   ra:=x1;
   repeat
     ar:=ra;
@@ -1129,7 +945,6 @@ repeat
     end;
     ra:=ra+step/cos(degtorad(de));
   until ra>x2;
-  end;
   de:=de+step;
 until de>y2;
 end;
@@ -1234,8 +1049,8 @@ var
    ar,de,dar,dde,arp,dep : double;
    def : boolean;
 begin
-dar:=min(10.0,(x2-x1)/2); // plus petit que 15 pour etre sur de tout avoir
-dde:=min(8.0,(y2-y1)/2);  // ==
+dar:=minvalue([10,(x2-x1)/2]); // plus petit que 15 pour etre sur de tout avoir
+dde:=minvalue([8,(y2-y1)/2]);  // ==
 nSM:=0;
 i:=0;
 repeat
@@ -1419,336 +1234,11 @@ if gregorian then begin
 end;
 end;
 
-//////   New precession expressions, valid for long time intervals
-//////   J. Vondrak , N. Capitaine , and P. Wallace
-//////   A&A 2011
-
-////// Required functions adapted from the SOFA library
-
-Procedure ltp_PXP(a,b: coordvector; var axb: coordvector);
-// p-vector outer (=vector=cross) product.
-var xa,ya,za,xb,yb,zb: double;
+Procedure SetCatLang(msg1,msg2,msg3,capt : shortstring); stdcall;
 begin
-XA := A[1];
-YA := A[2];
-ZA := A[3];
-XB := B[1];
-YB := B[2];
-ZB := B[3];
-AXB[1] := YA*ZB - ZA*YB;
-AXB[2] := ZA*XB - XA*ZB;
-AXB[3] := XA*YB - YA*XB;
+// no more used, added for compatibility with previous version
 end;
 
-procedure ltp_PM(p:coordvector; var r:double);
-// Modulus of p-vector.
-var i: integer;
-    w,c : double;
-begin
-W := 0;
-for i:=1 to 3 do begin
-   C := P[I];
-   W := W + C*C;
-end;
-R := SQRT(W);
-end;
-
-Procedure ltp_ZP(var p:coordvector);
-// Zero a p-vector.
-var i: integer;
-begin
-for i:=1 to 3 do p[i]:=0;
-end;
-
-Procedure ltp_SXP(s: double; p: coordvector;  var sp: coordvector);
-//  Multiply a p-vector by a scalar.
-var i: integer;
-begin
-for i:=1 to 3 do sp[i]:=s*p[i];
-end;
-
-Procedure ltp_PN(p:coordvector; var r:double; var u:coordvector);
-// Convert a p-vector into modulus and unit vector.
-var w: double;
-begin
-// Obtain the modulus and test for zero.
-ltp_PM ( P, W );
-IF ( W = 0 ) THEN
-//  Null vector.
-    ltp_ZP ( U )
-ELSE
-//  Unit vector.
-    ltp_SXP ( 1/W, P, U );
-//  Return the modulus.
-R := W;
-end;
-
-procedure ltp_S2C(theta,phi: double; var c: coordvector);
-// Convert spherical coordinates to Cartesian.
-// THETA    d         longitude angle (radians)
-// PHI      d         latitude angle (radians)
-var sa,ca,sd,cd: extended;
-begin
-sincos(theta,sa,ca);
-sincos(phi,sd,cd);
-c[1]:=ca*cd;
-c[2]:=sa*cd;
-c[3]:=sd;
-end;
-
-procedure ltp_c2s(p: coordvector; var theta,phi: double);
-// P-vector to spherical coordinates.
-// THETA    d         longitude angle (radians)
-// PHI      d         latitude angle (radians)
-var x,y,z,d2: double;
-begin
-X := P[1];
-Y := P[2];
-Z := P[3];
-D2 := X*X + Y*Y;
-IF ( D2 = 0 ) THEN
-   theta := 0
-ELSE
-   theta := arctan2(Y,X);
-IF ( Z = 0 ) THEN
-   phi := 0
-ELSE
-   phi := arctan2(Z,SQRT(D2));
-end;
-
-procedure ltp_cp(p: coordvector; var c: coordvector);
-// Copy a p-vector.
-var i: integer;
-begin
-for i:=1 to 3 do c[i]:=p[i];
-end;
-
-procedure ltp_cr(r:rotmatrix; var c: rotmatrix);
-// Copy an r-matrix.
-var i,j: integer;
-begin
-for j:=1 to 3 do
-  for i:=1 to 3 do c[j,i]:=r[j,i];
-end;
-
-procedure ltp_rxp(r: rotmatrix; p: coordvector; var rp: coordvector);
-// Multiply a p-vector by an r-matrix.
-var w: double;
-    wrp: coordvector;
-    i,j: integer;
-begin
-// Matrix R * vector P.
-for j:=1 to 3 do begin
-   W := 0;
-   for i:=1 to 3 do begin
-      W := W + R[J,I]*P[I];
-   end; //i
-   WRP[J] := W;
-end; //j
-// Return the result.
-ltp_CP ( WRP, RP );
-end;
-
-procedure ltp_tr(r: rotmatrix; var rt: rotmatrix);
-// Transpose an r-matrix.
-var wm: rotmatrix;
-    i,j: integer;
-begin
-for i:=1 to 3 do begin
-   for j:=1 to 3 do begin
-      wm[i,j] := r[j,i];
-   end;
-end;
-ltp_cr ( wm, rt );
-end;
-
-procedure ltp_rxr(a,b: rotmatrix; var atb: rotmatrix);
-// Multiply two r-matrices.
-var i,j,k: integer;
-    w: double;
-    wm: rotmatrix;
-begin
-for i:=1 to 3 do begin
-   for j:=1 to 3 do begin
-      W := 0;
-      for k:=1 to 3 do begin
-         W := W + A[I,K]*B[K,J];
-      end; //k
-      WM[I,J] := W;
-   end; //j
-end; //i
-ltp_CR ( WM, ATB );
-end;
-
-/////// Precession expressions
-
-Procedure ltp_PECL(epj: double; var vec: coordvector);
-// Precession of the ecliptic
-// The Fortran subroutine ltp PECL generates the unit vector for the pole of the ecliptic, using the series for PA , QA (Eq. 8 and Tab. 1)
-const npol=4;
-      nper=8;
-      // Polynomials
-      pqpol: array[1..npol,1..2] of double = (
-             (+5851.607687,-1600.886300),
-             (-0.1189000,+1.1689818),
-             (-0.00028913,-0.00000020),
-             (+0.000000101,-0.000000437));
-      // Periodics
-      pqper: array[1..5,1..nper] of double = (
-             (708.15,2309,1620,492.2,1183,622,882,547),
-             (-5486.751211,-17.127623,-617.517403,413.44294,78.614193,-180.732815,-87.676083,46.140315),
-             (-684.66156,2446.28388,399.671049,-356.652376,-186.387003,-316.80007,198.296071,101.135679),
-             (667.66673,-2354.886252,-428.152441,376.202861,184.778874,335.321713,-185.138669,-120.97283),
-             (-5523.863691,-549.74745,-310.998056,421.535876,-36.776172,-145.278396,-34.74445,22.885731));
-var as2r, d2pi, eps0, t, p, q, w, a, s, c, z : extended;
-    i, j : integer;
-begin
-d2pi:=pi2;
-//Arcseconds to radians
-as2r:=secarc;
-//Obliquity at J2000.0 (radians).
-eps0 := 84381.406 * as2r;
-// Centuries since J2000.
-t:=(epj-jd2000)/36525;
-//Initialize P_A and Q_A accumulators.
-P := 0;
-Q := 0;
-// Periodic terms.
-for i:=1 to nper do begin
-  W := D2PI*T;
-  A := W/PQPER[1,I];
-  sincos(A,S,C);
-  P := P + C*PQPER[2,I] + S*PQPER[4,I];
-  Q := Q + C*PQPER[3,I] + S*PQPER[5,I];
-end;
-// Polynomial terms.
-W := 1;
-for i:=1 to npol do begin
-  P := P + PQPOL[I,1]*W;
-  Q := Q + PQPOL[I,2]*W;
-  W := W*T;
-end;
-// P_A and Q_A (radians).
-P := P*AS2R;
-Q := Q*AS2R;
-// Form the ecliptic pole vector.
-Z := SQRT(MAX(1-P*P-Q*Q,0));
-sincos(eps0,s,c);
-VEC[1] := P;
-VEC[2] := - Q*C - Z*S;
-VEC[3] := - Q*S + Z*C;
-end;
-
-Procedure ltp_PEQU(epj: double; var veq: coordvector);
-// Precession of the equator
-// The Fortran subroutine ltp PEQU generates the unit vector for the pole of the equator, using the series for XA , YA (Eq. 9 and Tab. 2)
-const npol=4;
-      nper=14;
-      // Polynomials
-      xypol: array[1..npol,1..2] of double = (
-             (+5453.282155,-73750.930350),
-             (+0.4252841,-0.7675452),
-             (-0.00037173,-0.00018725),
-             (-0.000000152,+0.000000231));
-      // Periodics
-      xyper: array[1..5,1..nper] of double = (
-             (256.75,708.15,274.2,241.45,2309,492.2,396.1,288.9,231.1,1610,620,157.87,220.3,1200),
-             (-819.940624,-8444.676815,2600.009459,2755.17563,-167.659835,871.855056,44.769698,-512.313065,-819.415595,-538.071099,-189.793622,-402.922932,179.516345,-9.814756),
-             (75004.344875,624.033993,1251.136893,-1102.212834,-2660.66498,699.291817,153.16722,-950.865637,499.754645,-145.18821,558.116553,-23.923029,-165.405086,9.344131),
-             (81491.287984,787.163481,1251.296102,-1257.950837,-2966.79973,639.744522,131.600209,-445.040117,584.522874,-89.756563,524.42963,-13.549067,-210.157124,-44.919798),
-             (1558.515853,7774.939698,-2219.534038,-2523.969396,247.850422,-846.485643,-1393.124055,368.526116,749.045012,444.704518,235.934465,374.049623,-171.33018,-22.899655));
-var as2r, d2pi, t, x, y, w, a, s, c : extended;
-    i, j : integer;
-begin
-d2pi:=pi2;
-//Arcseconds to radians
-as2r:=secarc;
-// Centuries since J2000.
-t:=(epj-jd2000)/36525;
-x:=0;
-y:=0;
-// Periodic terms.
-for i:=1 to nper do begin
-   W := D2PI*T;
-   A := W/XYPER[1,I];
-   sincos(A,S,C);
-   X := X + C*XYPER[2,I] + S*XYPER[4,I];
-   Y := Y + C*XYPER[3,I] + S*XYPER[5,I];
-end;
-//Polynomial terms.
-W := 1;
-for i:=1 to npol do begin
-  X := X + XYPOL[I,1]*W;
-  Y := Y + XYPOL[I,2]*W;
-  W := W*T;
-end;
-// X and Y (direction cosines).
-X := X*AS2R;
-Y := Y*AS2R;
-// Form the equator pole vector.
-VEQ[1] := X;
-VEQ[2] := Y;
-W := X*X + Y*Y;
-IF ( W < 1 ) THEN
-   VEQ[3] := SQRT(1-W)
-ELSE
-   VEQ[3] := 0;
-end;
-
-Procedure ltp_PMAT(epj: double; var rp: rotmatrix );
-// Precession matrix, mean J2000.0
-// The Fortran subroutine ltp PMAT generates the 3 x 3 rotation matrix P, constructed using Fabri parameterization (i.e. directly from
-// the unit vectors for the ecliptic and equator poles  see Sect. 5.4). As well as calling the two previous subroutines, ltp PMAT calls
-// subroutines from the IAU SOFA library. The resulting matrix transforms vectors with respect to the mean equator and equinox of
-// epoch 2000.0 into mean place of date.
-var peqr, pecl, v, eqx : coordvector;
-    w :  double;
-begin
-ltp_PEQU(epj,peqr);
-ltp_PECL(epj,pecl);
-ltp_PXP(peqr,pecl,v);
-ltp_pn(v,w,eqx);
-ltp_PXP(peqr,eqx,v);
-RP[1,1]:= EQX[1];
-RP[1,2]:= EQX[2];
-RP[1,3]:= EQX[3];
-RP[2,1]:= V[1];
-RP[2,2]:= V[2];
-RP[2,3]:= V[3];
-RP[3,1]:= PEQR[1];
-RP[3,2]:= PEQR[2];
-RP[3,3]:= PEQR[3];
-end;
-
-////////////// Finally the precession function for CdC
-
-Procedure Precession_rad(j0,j1: double; var ra,de: double);
-var p,rp: coordvector;
-    r,wm1,wm2: rotmatrix;
-begin
-{ TODO : Cache rotation matrix if called for same date }
-if abs(j0-j1)<0.01 then exit; // no change
-if j0=jd2000 then begin       // from j2000
-  ltp_PMAT(j1,r);
-end
-else if j1=jd2000 then begin  // to j2000
-  ltp_PMAT(j0,wm1);
-  ltp_tr(wm1,r);
-end
-else begin                    // from date0 to date1
-  ltp_PMAT(j0,r);
-  ltp_tr(r,wm1);
-  ltp_PMAT(j1,wm2);
-  ltp_rxr(wm1,wm2,r);
-end;
-ltp_S2C(ra,de,p);
-ltp_rxp(r,p,rp);
-ltp_c2s(rp,ra,de);
-ra:=rmod(ra+pi2,pi2);
-end;
-
-
-///////////////////////
 Initialization
   JDChart:=jd2000;
   JDcatalog:=jd2000;

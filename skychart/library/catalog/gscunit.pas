@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
- {$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -34,14 +34,14 @@ uses
                      mult : char;
                      end;
 
-Function IsGSCpath(path : string) : Boolean;
-procedure SetGSCpath(path : string);
-Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGSCwin(var ok : boolean);
-Procedure ReadGSC(var lin : GSCrec; var SMnum : string ; var ok : boolean);
-Procedure NextGSC( var ok : boolean);
-procedure CloseGSC ;
-Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsGSCpath(path : shortstring) : Boolean; stdcall;
+procedure SetGSCpath(path : shortstring); stdcall;
+Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGSCwin(var ok : boolean); stdcall;
+Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure NextGSC( var ok : boolean); stdcall;
+procedure CloseGSC ; stdcall;
+Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 
 var
   GSCpath: String;
@@ -59,7 +59,7 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
 
-Function IsGSCpath(path : string) : Boolean;
+Function IsGSCpath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
@@ -89,9 +89,10 @@ result:=    FileExists(p+'n0000'+slashchar+'0001.dat')
          or FileExists(p+'s8230'+slashchar+'9490.dat')
 end;
 
-procedure SetGSCpath(path : string);
+procedure SetGSCpath(path : shortstring);
 begin
-GSCpath:=noslash(path);
+path:=noslash(path);
+GSCpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -136,7 +137,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadGSC(var lin : GSCrec; var SMnum : string ; var ok : boolean);
+Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean);
 begin
 if eof(fgsc) then NextGSC(ok);
 if ok then  Read(fgsc,lin);
@@ -187,18 +188,16 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
+ok:=false;
+repeat
+    Read(fgsc,lin);
+    if lin.gscn=num then begin ok:=true; break; end;
+until eof(fgsc);
 if ok then begin
-  ok:=false;
-  repeat
-      Read(fgsc,lin);
-      if lin.gscn=num then begin ok:=true; break; end;
-  until eof(fgsc);
-  if ok then begin
-    ar:=lin.ar/100000/15;
-    de:=lin.de/100000;
-  end;
-  Closeregion;
+  ar:=lin.ar/100000/15;
+  de:=lin.de/100000;
 end;
+Closeregion;
 end;
 
 Procedure OpenGSCwin(var ok : boolean);

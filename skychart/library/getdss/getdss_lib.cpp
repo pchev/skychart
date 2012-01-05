@@ -241,21 +241,34 @@ extern "C" int ImageExtract( SImageConfig *pConfig )
 
       /* Attempt to extract the image. */
 
+      //hWait = LoadCursor( NULL, IDC_WAIT );
+      //hOldCursor = SetCursor(hWait);
 
                        /* 1 Dec 2001:  modified so that this function */
                        /* only asks you to insert the right CD if the */
                        /* 'bPromptForDisk' boolean is TRUE.    -- BJG */
-      if ((rval = extract_realsky_as_fits( pdata, &edata ))==DSS_IMG_ERR_WRONG_CD
+      while ((rval = extract_realsky_as_fits( pdata, &edata ))==DSS_IMG_ERR_WRONG_CD
                         && pConfig->bPromptForDisk)
       {
-            fprintf( debug_file, "\nAsk for CD %d\n", pdata->cd_number);
-	    // just return the cd number, 
-	    // the main application will ask for the cd and retry
-	    // other return code defined in errcode.h are all negative
-	    rval = pdata->cd_number;
+/*         sprintf( buff, "Please insert RealSky® CD %d\nin drive %s",   */
+/*                pdata->cd_number, edata.szDrive);                      */
+/*         sprintf( buff, "%s %d \n%s %s",
+                  pConfig->pPrompt1,
+                  pdata->cd_number,
+                  pConfig->pPrompt2,
+                  edata.szDrive);
+*/		  
+//         if (MessageBox( pConfig->hWnd, buff, pConfig->pAppliName, MB_ICONEXCLAMATION|MB_OKCANCEL )==IDCANCEL)
+         //{
+            rval = DSS_IMG_ERR_USER_CANCEL;
+            break;
+         //}
+
+         //SetCursor(hWait);
       }
 
       free(pdata);
+      //SetCursor(hOldCursor);
    }
    
    	
@@ -589,20 +602,34 @@ extern "C" int ImageExtractFromPlate( SImageConfig *pConfig ,char *ReqPlateName 
 
       /* Attempt to extract the image. */
 
+      //hWait = LoadCursor( NULL, IDC_WAIT );
+      //hOldCursor = SetCursor(hWait);
+
                        /* 2 Dec 2001:  modified so that this function */
                        /* only asks you to insert the right CD if the */
                        /* 'bPromptForDisk' boolean is TRUE.    -- BJG */
-      if ((rval = extract_realsky_as_fits( pdata + plate_to_use, &edata ))==DSS_IMG_ERR_WRONG_CD
+      while ((rval = extract_realsky_as_fits( pdata + plate_to_use, &edata ))==DSS_IMG_ERR_WRONG_CD
                         && pConfig->bPromptForDisk)
-      {     
-            fprintf( debug_file, "\nAsk for CD %d\n", pdata->cd_number);
-	    // just return the cd number, 
-	    // the main application will ask for the cd and retry
-	    // other return code defined in errcode.h are all negative
-	    rval = pdata->cd_number;
+      {
+/*         sprintf( buff, "Please insert RealSky® CD %d\nin drive %s",  */
+/*                pdata->cd_number, edata.szDrive);                     */
+/*         sprintf( buff, "%s %d \n%s %s",
+                  pConfig->pPrompt1,
+                  (pdata+plate_to_use)->cd_number,
+                  pConfig->pPrompt2,
+                  edata.szDrive);
+*/		  
+//         if (MessageBox( pConfig->hWnd, buff, pConfig->pAppliName, MB_ICONEXCLAMATION|MB_OKCANCEL )==IDCANCEL)
+         //{
+            rval = DSS_IMG_ERR_USER_CANCEL;
+            break;
+         //}
+
+         //SetCursor(hWait);
       }
 
       free(pdata);
+      //SetCursor(hOldCursor);
    }
 
    #ifdef UNIX

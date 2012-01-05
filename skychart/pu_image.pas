@@ -1,7 +1,4 @@
 unit pu_image;
-
-{$MODE Delphi}{$H+}
-
 {
 Copyright (C) 2005 Patrick Chevalley
 
@@ -24,17 +21,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_util, u_translation,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
-  LResources;
+uses Math,
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, Buttons, ComCtrls, pngimage, ToolWin, cu_zoomimage;
 
 type
-
-  { Tf_image }
-
   Tf_image = class(TForm)
-    ButtonPrint: TButton;
     Image1: TZoomImage;
     Panel1: TPanel;
     VScrollBar: TScrollBar;
@@ -62,7 +54,6 @@ type
     { Public declarations }
     titre,labeltext: string;
     imagewidth,imageheight: integer;
-    procedure SetLang;
     Procedure LoadImage(f : string);
     Procedure ZoomN(n:double);
     Procedure Zoomplus;
@@ -74,133 +65,15 @@ var
   f_image: Tf_image;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_image.SetLang;
-begin
-Button1.caption:=rsClose;
-Button2.caption:=rsZoom;
-Button3.caption:=rsZoom2;
-ButtonPrint.Caption:=rsPrint;
-end;
+{$R *.DFM}
 
-Procedure Tf_image.LoadImage(f : string);
-begin
- image1.Zoom:=1;
- image1.picture.LoadFromFile(f);
- imagewidth:=image1.picture.width;
- imageheight:=image1.picture.height;
-end;
+// include all cross-platform common code.
+// you can temporarily copy the file content here
+// to use the IDE facilities
 
-Procedure Tf_image.ZoomN(n:double);
-begin
-   Image1.Zoom:=n;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
-end;
+{$include i_image.pas}
 
-Procedure Tf_image.Zoomplus;
-begin
-   Image1.Zoom:=sqrt(2)*Image1.Zoom;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
-end;
-
-Procedure Tf_image.Zoommoins;
-begin
-   Image1.Zoom:=Image1.Zoom/sqrt(2);
-   if abs(Image1.Zoom-1)<0.2 then Image1.Zoom:=1;
-   Image1.Draw;
-   SetScrollBar;
-   Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
-end;
-
-procedure Tf_image.FormKeyPress(Sender: TObject; var Key: Char);
-begin
-if key=chr(27) then Close;
-if (key='+') then Zoomplus;
-if (key='-') then Zoommoins;
-end;
-
-procedure Tf_image.Init;
-begin
-Image1.Draw;
-Hscrollbar.Position:=Image1.SizeX div 2;
-Vscrollbar.Position:=Image1.SizeY div 2;
-Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
-label1.Caption:=labeltext;
-end;
-
-procedure Tf_image.Button2Click(Sender: TObject);
-begin
-Zoomplus;
-end;
-
-procedure Tf_image.Button3Click(Sender: TObject);
-begin
-Zoommoins;
-end;
-
-procedure Tf_image.Button1Click(Sender: TObject);
-begin
-close;
-end;
-
-procedure Tf_image.FormMouseWheel(Sender: TObject; Shift: TShiftState;
-  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
-begin
-if wheeldelta>0 then Zoomplus
-                else Zoommoins;
-end;
-
-procedure Tf_image.FormCreate(Sender: TObject);
-begin
-SetLang;
-Image1.Align:=alClient;
-titre:='';
-labeltext:='';
-VScrollBar.Width:=15;
-end;
-
-procedure Tf_image.FormResize(Sender: TObject);
-begin
-if visible then begin
-   Image1.Draw;
-   SetScrollBar;
-end;   
-end;
-
-Procedure Tf_image.SetScrollBar;
-begin
-try
-ScrollLock:=true;
-scrollw:=min(Image1.SizeX-1,round(Image1.Width/Image1.zoom)) div 2;
-Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw,1);
-Hscrollbar.LargeChange:=scrollw;
-Hscrollbar.SmallChange:=scrollw div 10;
-scrollh:=min(Image1.SizeY-1,round(Image1.Height/Image1.zoom)) div 2;
-Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh,1);
-Vscrollbar.LargeChange:=scrollh;
-Vscrollbar.SmallChange:=scrollh div 10;
-finally
-ScrollLock:=false;
-end;
-end;
-
-procedure Tf_image.HScrollBarChange(Sender: TObject);
-begin
-if scrolllock then exit;
-Image1.Xcentre:=HScrollBar.Position;
-Image1.Draw;
-end;
-
-procedure Tf_image.VScrollBarChange(Sender: TObject);
-begin
-if scrolllock then exit;
-Image1.Ycentre:=VScrollBar.Position;
-Image1.Draw;
-end;
+// end of common code
 
 end.

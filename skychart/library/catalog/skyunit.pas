@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -33,13 +33,13 @@ type
                    dm     : longint;
                    hd,sao   :longint ;
                    end;
-Function IsSKYpath(path : string) : Boolean;
-procedure SetSKYpath(path : string);
-Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenSKYwin(var ok : boolean);
-Procedure ReadSKY(var lin : SKYrec; var ok : boolean);
-Procedure NextSKY( var ok : boolean);
-procedure CloseSKY ;
+Function IsSKYpath(path : shortstring) : Boolean; stdcall;
+procedure SetSKYpath(path : shortstring); stdcall;
+Procedure OpenSKY(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenSKYwin(var ok : boolean); stdcall;
+Procedure ReadSKY(var lin : SKYrec; var ok : boolean); stdcall;
+Procedure NextSKY( var ok : boolean); stdcall;
+procedure CloseSKY ; stdcall;
 
 var
   SKYpath: String='';
@@ -62,18 +62,17 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsSKYpath(path : string) : Boolean;
+Function IsSKYpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'001.dat');
 end;
 
-procedure SetSKYpath(path : string);
+procedure SetSKYpath(path : shortstring);
 var i : integer;
-    buf:string;
 begin
-buf:=noslash(path);
-if buf<>SKYpath then for i:=1 to CacheNum do cachelst[i]:=0;
-SKYpath:=buf;
+path:=noslash(path);
+if path<>SKYpath then for i:=1 to CacheNum do cachelst[i]:=0;
+SKYpath:=path;
 end;
 
 Procedure CloseRegion;

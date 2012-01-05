@@ -1,5 +1,6 @@
 
-XMLparser component adapted for Lazarus.
+Get XMLparser component from:
 
-The original for Delphi is here:
 http://destructor.de/xmlparser/index.htm
+
+Or use the include zip distributed here as authorized in the file Licence.txt
