@@ -2,15 +2,17 @@
 # Norwegian translation: FreewareTips <http://home.c2i.net/freewaretips/> 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-12-05 21:11+0100\n"
-"Last-Translator: FreewareTips <http://home.c2i.net/freewaretips/>\n"
 "Project-Id-Version: skychart.no\n"
-"POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:28+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
+"Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -202,7 +204,7 @@ msgstr "Utseende"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Legg ved en eksisterende katalog"
+msgstr "Legg ved en eksisterende katalog "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -298,7 +300,7 @@ msgstr "Auto-gjenoppfrisk"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Auto-oppdateringsintervall"
+msgstr "Auto-oppdateringsintervall "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -666,7 +668,7 @@ msgstr "Rydd mål"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Klikk for å endre fargen"
+msgstr "Klikk for å endre fargen "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -742,7 +744,7 @@ msgstr "Kommando ikke funnet!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Kommando for behandling: "
+msgstr "Kommando for behandling:"
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -838,7 +840,7 @@ msgstr "Stjernebildeframstilling"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Filnavn:"
+msgstr "Filnavn: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -846,7 +848,7 @@ msgstr "Stjernebildegrenser"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Filnavn:"
+msgstr "Filnavn: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -866,7 +868,7 @@ msgstr "Kontrollpanel"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Kontrollpanel-kommando"
+msgstr "Kontrollpanel-kommando "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -922,7 +924,7 @@ msgstr "Korrelert"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Kunne ikke laste bibliotek"
+msgstr "Kunne ikke laste bibliotek "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1130,7 +1132,7 @@ msgstr "Tilbake i tid"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC omdreininger:"
+msgstr "DEC omdreininger: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1242,11 +1244,11 @@ msgstr "Sletter fra navnelisten..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Slett månedlige data"
+msgstr "Slett månedlige data "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Slett månedlige data eldre enn"
+msgstr "Slett månedlige data eldre enn "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1686,7 +1688,7 @@ msgstr "Kveldsskumring"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "Intervall"
+msgstr "Intervall "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1722,7 +1724,7 @@ msgstr "Svakere"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Størrelse på svake stjerner"
+msgstr "Størrelse på svake stjerner "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1806,7 +1808,7 @@ msgstr "Filtrer deep sky objekter"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filtrer stjerner"
+msgstr "Filtrer stjerner "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -2094,7 +2096,7 @@ msgstr "Skjul objekter større enn"
 
 #: u_translation.rshigh
 msgid "High"
-msgstr "Høy "
+msgstr "Høy"
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -2234,7 +2236,7 @@ msgstr "INDI driver-innstillinger"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "INDI server-vert"
+msgstr "INDI server-vert "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2506,7 +2508,7 @@ msgstr "Linjer / rutenett"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Linjebredde"
+msgstr "Linjebredde "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2546,7 +2548,7 @@ msgstr "Last fil i MPC-format"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Last bare de første"
+msgstr "Last bare de første "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2558,7 +2560,7 @@ msgstr "Lokal horisont"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Filnavn:"
+msgstr "Filnavn: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2590,7 +2592,7 @@ msgstr "Rombe"
 
 #: u_translation.rslow
 msgid "Low"
-msgstr "Lav "
+msgstr "Lav"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -3550,7 +3552,7 @@ msgstr "Lag en katalog med CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Utarbeid data"
+msgstr "Utarbeid data "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3754,7 +3756,7 @@ msgstr "Raster-oppløsning"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA omdreininger:"
+msgstr "RA omdreininger: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4190,7 +4192,7 @@ msgstr "Server"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Server-kommando"
+msgstr "Server-kommando "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4522,7 +4524,7 @@ msgstr "Sorterer filer etter magnitude"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Sorterer indeksfilen"
+msgstr "Sorterer indeksfilen "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4998,7 +5000,7 @@ msgstr "Umbra"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Ikke i stand til å opprette mappe"
+msgstr "Ikke i stand til å opprette mappe "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"

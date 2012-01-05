@@ -1,15 +1,17 @@
 # translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2007-08-14 15:58+0100\n"
-"Last-Translator: Ondřej Šubrt <ondrej.subrt@email.cz>\n"
 "Project-Id-Version: skychart.cs\n"
-"POT-Creation-Date: \n"
-"Language-Team:  <translation@ap-i.net>\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:13+0000\n"
+"Last-Translator: Ondřej Šubrt <Unknown>\n"
+"Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: PSPad\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -146,7 +148,7 @@ msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Azimutální souřad."
+msgstr "Azimutální souřad. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -202,7 +204,7 @@ msgstr ""
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Připojit k existujícímu katalogu"
+msgstr "Připojit k existujícímu katalogu "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -298,7 +300,7 @@ msgstr "Automatické obnovování"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Automaticky obnovovat každých"
+msgstr "Automaticky obnovovat každých "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -666,7 +668,7 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Klikněte pro změnu barvy"
+msgstr "Klikněte pro změnu barvy "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -838,7 +840,7 @@ msgstr "Souhvězdí"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Soubor se souhvězdími:"
+msgstr "Soubor se souhvězdími: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -846,7 +848,7 @@ msgstr "Hranice souhvězdí"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Soubor s hranicemi souhvězdí:"
+msgstr "Soubor s hranicemi souhvězdí: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -866,7 +868,7 @@ msgstr "Ovládací panel"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Příkaz ovládacího panelu"
+msgstr "Příkaz ovládacího panelu "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -994,7 +996,7 @@ msgstr "Čárka tečka tečka"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Soubor databáze:"
+msgstr "Soubor databáze: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1130,7 +1132,7 @@ msgstr "Ubrat čas"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC posun:"
+msgstr "DEC posun: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1229,10 +1231,8 @@ msgid "Deleting from the element list..."
 msgstr "Smazat ze seznamu prvků"
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
-#| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Smazat z měsíční tabulky"
+msgstr ""
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1244,11 +1244,11 @@ msgstr "Smazat ze seznamu názvů..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Smazat měsíční data"
+msgstr "Smazat měsíční data "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Smazat měsíční data starší než"
+msgstr "Smazat měsíční data starší než "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1288,7 +1288,7 @@ msgstr "Detaily"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Port zařízení"
+msgstr "Port zařízení "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1688,7 +1688,7 @@ msgstr "Noční soumrak"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "každých"
+msgstr "každých "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1724,7 +1724,7 @@ msgstr "Slabší"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Slabší velikost hvězd"
+msgstr "Slabší velikost hvězd "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1808,7 +1808,7 @@ msgstr "Filtrovat deep sky"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filtrovat hvězdy"
+msgstr "Filtrovat hvězdy "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -1916,7 +1916,7 @@ msgstr "od"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP"
+msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
@@ -2236,7 +2236,7 @@ msgstr "Nastavení ovladače INDI"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "Server INDI"
+msgstr "Server INDI "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2508,7 +2508,7 @@ msgstr "Linie / Siť"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Šířka linií"
+msgstr "Šířka linií "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2548,7 +2548,7 @@ msgstr "Nahrát formát souboru MPC"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Nahrát pouze první"
+msgstr "Nahrát pouze první "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2560,7 +2560,7 @@ msgstr "Místní horizont"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Soubor místního horizontu:"
+msgstr "Soubor místního horizontu: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -2600,7 +2600,7 @@ msgstr "Nízký jas povrchu"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
-msgstr "  Osvětlení"
+msgstr "Osvětlení"
 
 #: u_translation.rslunar
 msgid "Lunar"
@@ -3368,7 +3368,7 @@ msgstr "Perihélium - datum"
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Perihélium - vzdálenost "
+msgstr "Perihélium - vzdálenost"
 
 #: u_translation.rsperiod
 msgid "Period"
@@ -3552,7 +3552,7 @@ msgstr "Vytvořit katalog pomocí CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Vytvořit data"
+msgstr "Vytvořit data "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3632,7 +3632,7 @@ msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Data programu"
+msgstr "Data programu "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -3756,7 +3756,7 @@ msgstr "Rozlišení"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA posun:"
+msgstr "RA posun: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4192,7 +4192,7 @@ msgstr "Server"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Příkaz serveru"
+msgstr "Příkaz serveru "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4524,7 +4524,7 @@ msgstr "Řazení podle magnitudy"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Řazení indexového souboru"
+msgstr "Řazení indexového souboru "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4600,7 +4600,7 @@ msgstr "Hvězdy"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Katalogy hvězd a deep sky připravené pomocí"
+msgstr "Katalogy hvězd a deep sky připravené pomocí "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"

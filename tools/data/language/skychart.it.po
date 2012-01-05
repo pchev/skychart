@@ -1,16 +1,17 @@
 # translation of skychart.po to Mattia Verga <mverga@freemail.it>, 2007, 2008, 2009, 2010, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-11-28 14:19+0100\n"
-"Last-Translator: Mattia Verga\n"
 "Project-Id-Version: skychart\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:16+0000\n"
+"Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -147,7 +148,7 @@ msgstr "Alt-Az"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Coord. Alt/AZ"
+msgstr "Coord. Alt/AZ "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -203,7 +204,7 @@ msgstr "Aspetto"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Aggiungi a un catalogo esistente"
+msgstr "Aggiungi a un catalogo esistente "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -299,7 +300,7 @@ msgstr "Auto aggiornamento"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Auto aggiornamento ogni"
+msgstr "Auto aggiornamento ogni "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -667,7 +668,7 @@ msgstr "Cancella obiettivo"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Premi per cambiare colore"
+msgstr "Premi per cambiare colore "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -795,7 +796,7 @@ msgstr "Configura il programma"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr "Conferma cancellazione file:"
+msgstr "Conferma cancellazione file: "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -867,7 +868,7 @@ msgstr "Pannello di controllo"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Comando pannello di controllo"
+msgstr "Comando pannello di controllo "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -923,7 +924,7 @@ msgstr "Correlato"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Impossibile caricare la libreria"
+msgstr "Impossibile caricare la libreria "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -995,7 +996,7 @@ msgstr "Trattino Punto Punto"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "File di database:"
+msgstr "File di database: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1131,7 +1132,7 @@ msgstr "Arretra Orologio"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "Rotazioni DEC:"
+msgstr "Rotazioni DEC: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1244,7 +1245,7 @@ msgstr "Cancellazione dalla lista nomi..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Cancella dati mensili"
+msgstr "Cancella dati mensili "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
@@ -1288,7 +1289,7 @@ msgstr "Dettagli"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Porta di collegamento"
+msgstr "Porta di collegamento "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1448,7 +1449,7 @@ msgstr "Vuoi salvare le impostazioni?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Disegna una linea che rappresenti il moto proprio per i prossimi "
+msgstr "Disegna una linea che rappresenti il moto proprio per i prossimi"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -1688,7 +1689,7 @@ msgstr "Crepuscolo serale"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "ogni"
+msgstr "ogni "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1724,7 +1725,7 @@ msgstr "Più debole"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Dimensione stelle deboli"
+msgstr "Dimensione stelle deboli "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1744,7 +1745,7 @@ msgstr "Preferito"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr "Percorso ffmpeg "
+msgstr "Percorso ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
@@ -1808,7 +1809,7 @@ msgstr "Filtra profondo cielo"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filtra le stelle"
+msgstr "Filtra le stelle "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -1916,7 +1917,7 @@ msgstr "Da"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP"
+msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
@@ -2236,7 +2237,7 @@ msgstr "Impostazioni Driver INDI"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "Server Host INDI"
+msgstr "Server Host INDI "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2476,7 +2477,7 @@ msgstr "Limite magnitudine, lista:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "Magnitudine limite : "
+msgstr "Magnitudine limite :"
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
@@ -2508,7 +2509,7 @@ msgstr "Linee / Griglia"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Spessore linea"
+msgstr "Spessore linea "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2548,7 +2549,7 @@ msgstr "Carica file in formato MPC"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Carica solo i primi"
+msgstr "Carica solo i primi "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2560,7 +2561,7 @@ msgstr "Carica orizzonte"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Nome File dell'Orizzonte"
+msgstr "Nome File dell'Orizzonte "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -3276,7 +3277,7 @@ msgstr "Orientazione"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "o usa un file locale : "
+msgstr "o usa un file locale :"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3344,7 +3345,7 @@ msgstr "Percorso"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Percorso di salvataggio del file : "
+msgstr "Percorso di salvataggio del file :"
 
 #: u_translation.rspathwidth
 msgid "Path width"
@@ -3552,7 +3553,7 @@ msgstr "Crea un catalogo CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Prepara i dati"
+msgstr "Prepara i dati "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3632,7 +3633,7 @@ msgstr "Informazioni prodotto"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Dati di programma"
+msgstr "Dati di programma "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -3756,7 +3757,7 @@ msgstr "Risoluzione raster"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "Rotazioni A.R.:"
+msgstr "Rotazioni A.R.: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4192,7 +4193,7 @@ msgstr "Server"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Comando server"
+msgstr "Comando server "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4448,7 +4449,7 @@ msgstr "Muovi"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
-msgstr "Velocità puntamento"
+msgstr " Velocità puntamento"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -4524,7 +4525,7 @@ msgstr "Elenca file per magnitudine"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Elenco il file indice"
+msgstr "Elenco il file indice "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4600,7 +4601,7 @@ msgstr "Stelle"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Cataloghi preparati con"
+msgstr "Cataloghi preparati con "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -4952,7 +4953,7 @@ msgstr "Classe Trumpler"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr "TT - TU:"
+msgstr "TT - TU: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5000,7 +5001,7 @@ msgstr "Ombra"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Impossibile creare la cartella"
+msgstr "Impossibile creare la cartella "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5184,7 +5185,7 @@ msgstr "Vista orizzonte"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
-msgstr "Pulsantiera virtuale per Scope.exe"
+msgstr "Pulsantiera virtuale per Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"

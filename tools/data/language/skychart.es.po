@@ -2,17 +2,18 @@
 # Patrick Chevalley <pch@ap-i.net>, 2011.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2011-11-07 15:14+0100\n"
-"Last-Translator: Luis Castedo <pedroluis.castedo@ono.com>\n"
 "Project-Id-Version: skychart.es\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:16+0000\n"
+"Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.2\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -148,7 +149,7 @@ msgstr "Alt-Az"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Coord. acimutales"
+msgstr "Coord. acimutales "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -204,7 +205,7 @@ msgstr "Apariencia"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Añadir a un catálogo existente"
+msgstr "Añadir a un catálogo existente "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -300,7 +301,7 @@ msgstr "Auto-refresco"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Auto-refrescar cada"
+msgstr "Auto-refrescar cada "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -668,7 +669,7 @@ msgstr "Borrar Objetivo"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Click para cambiar el color"
+msgstr "Click para cambiar el color "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -728,7 +729,7 @@ msgstr "Cometa"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Elementos de cometa en formato MPC (una URL por línea) "
+msgstr "Elementos de cometa en formato MPC (una URL por línea)"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -796,7 +797,7 @@ msgstr "Ajustes del programa"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr "Confirmar borrado de archivo:"
+msgstr "Confirmar borrado de archivo: "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1289,7 +1290,7 @@ msgstr "Detalles"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Puerto del dispositivo"
+msgstr "Puerto del dispositivo "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1689,7 +1690,7 @@ msgstr "Crepúsculo vespertino"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "cada"
+msgstr "cada "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1725,7 +1726,7 @@ msgstr "Más debil"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Tamaño estrellas débiles"
+msgstr "Tamaño estrellas débiles "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1765,7 +1766,7 @@ msgstr "Ajustes del campo visual"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Número del campo visual: "
+msgstr "Número del campo visual:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
@@ -1809,7 +1810,7 @@ msgstr "Filtrar nebulosas"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Filtrar estrellas"
+msgstr "Filtrar estrellas "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -1917,7 +1918,7 @@ msgstr "De"
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP"
+msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
@@ -2509,7 +2510,7 @@ msgstr "Líneas / Cuadrícula"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Ancho de Línea"
+msgstr "Ancho de Línea "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -4449,7 +4450,7 @@ msgstr "Desplazar"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
-msgstr "Velocidad de Desplazamiento"
+msgstr " Velocidad de Desplazamiento"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"

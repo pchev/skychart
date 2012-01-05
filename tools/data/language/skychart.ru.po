@@ -1,15 +1,17 @@
 # translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2008-12-08 18:35+0200\n"
-"Last-Translator: Oleg Maliy <astroclubzp@gmail.com>\n"
 "Project-Id-Version: skychart.ru\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"PO-Revision-Date: 2011-12-29 17:15+0000\n"
+"Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.2\n"
+"X-Launchpad-Export-Date: 2012-01-05 12:08+0000\n"
+"X-Generator: Launchpad (build 14625)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Russian\n"
 
@@ -31,7 +33,7 @@ msgstr "732 (рекомендовано для более 5'000'000 объект
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
-msgstr "9537 (большой набор данных) "
+msgstr "9537 (большой набор данных)"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -135,7 +137,7 @@ msgstr "Все панели инструментов"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sТакже убедиться, что необходимое програмное обеспечение базы данных установлено. % s Пожалуйста, обратитесь к документации, если вы не уверенны. % s Вы хотите продолжить? "
+msgstr "%sТакже убедиться, что необходимое програмное обеспечение базы данных установлено. % s Пожалуйста, обратитесь к документации, если вы не уверенны. % s Вы хотите продолжить?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -147,7 +149,7 @@ msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr "Азимутальные коорд."
+msgstr "Азимутальные коорд. "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
@@ -203,7 +205,7 @@ msgstr "Внешний вид"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Добавить существующий каталог"
+msgstr "Добавить существующий каталог "
 
 #: u_translation.rsapply
 msgid "Apply"
@@ -299,7 +301,7 @@ msgstr "Автообновление"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Автообновление каждые"
+msgstr "Автообновление каждые "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -587,7 +589,7 @@ msgstr "Центр"
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr "Изменить тип рисования "
+msgstr "Изменить тип рисования"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
@@ -667,7 +669,7 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr "Нажмите для замены цвета"
+msgstr "Нажмите для замены цвета "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
@@ -839,7 +841,7 @@ msgstr "Контуры созвездий"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Названия файла контуров созвездий:"
+msgstr "Названия файла контуров созвездий: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -847,7 +849,7 @@ msgstr "Границы созвездий"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Название файла границ созвездий:"
+msgstr "Название файла границ созвездий: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -867,7 +869,7 @@ msgstr "Контрольная панель"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr "Команда контрольной панели"
+msgstr "Команда контрольной панели "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -923,7 +925,7 @@ msgstr "Корреляция"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "Невозможно загрузить библиотеку"
+msgstr "Невозможно загрузить библиотеку "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -995,7 +997,7 @@ msgstr "Тире-точка-точка"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Файл базы данных:"
+msgstr "Файл базы данных: "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1131,7 +1133,7 @@ msgstr "Убыль времени"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC повороты:"
+msgstr "DEC повороты: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
@@ -1230,10 +1232,8 @@ msgid "Deleting from the element list..."
 msgstr "Удалить со списка элементов..."
 
 #: u_translation.rsdeletefrommo
-#, fuzzy
-#| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Удалить из ежемесячной таблицы..."
+msgstr ""
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1245,11 +1245,11 @@ msgstr "Удалить со списка названий..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr "Удалить ежемесячные данные"
+msgstr "Удалить ежемесячные данные "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr "Удалить ежемесячные данные, старее чем"
+msgstr "Удалить ежемесячные данные, старее чем "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1289,7 +1289,7 @@ msgstr "Детальнее"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr "Порт устройства"
+msgstr "Порт устройства "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1673,7 +1673,7 @@ msgstr "Ошибка! Пожалуйста, проверьте параметр�
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "Предполагаемый размер файла: %sMB %sХотите продолжить? "
+msgstr "Предполагаемый размер файла: %sMB %sХотите продолжить?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
@@ -1689,7 +1689,7 @@ msgstr "Вечерние сумерки"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "Через каждые:"
+msgstr "Через каждые: "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1725,7 +1725,7 @@ msgstr "Слабее"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Слабые размеры звёзд"
+msgstr "Слабые размеры звёзд "
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1809,7 +1809,7 @@ msgstr "Фильтр Deep Sky объектов"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Фильтр звёзд"
+msgstr "Фильтр звёзд "
 
 #: u_translation.rsfind
 msgid "Find"
@@ -2237,7 +2237,7 @@ msgstr "Установки INDI драйвера"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr "Хост INDI сервера"
+msgstr "Хост INDI сервера "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
@@ -2289,7 +2289,7 @@ msgstr "включить неудачную линию %s : %s"
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
-msgstr "Неудачное включение! %s "
+msgstr "Неудачное включение! %s"
 
 #: u_translation.rsinternet
 msgid "Internet"
@@ -2509,7 +2509,7 @@ msgstr "Линии/ Сетка"
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Ширина линии"
+msgstr "Ширина линии "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
@@ -2549,7 +2549,7 @@ msgstr "Загрузить файл в МРС формате"
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Загрузить только первые"
+msgstr "Загрузить только первые "
 
 #: u_translation.rsloadproject
 msgid "Load project"
@@ -2561,7 +2561,7 @@ msgstr "Местный горизонт"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr "Название файла горизонта:"
+msgstr "Название файла горизонта: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
@@ -3473,7 +3473,7 @@ msgstr ""
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr "Пожалуйста, укажите номер RealSky256 CD "
+msgstr "Пожалуйста, укажите номер RealSky256 CD"
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
@@ -3553,7 +3553,7 @@ msgstr "Приготовить каталог CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Приготовить данные"
+msgstr "Приготовить данные "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
@@ -3633,7 +3633,7 @@ msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Програмные данные"
+msgstr "Програмные данные "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
@@ -3757,7 +3757,7 @@ msgstr "Разрешение растра"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "Повороты по RA:"
+msgstr "Повороты по RA: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
@@ -4193,7 +4193,7 @@ msgstr "Сервер"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Команда сервера"
+msgstr "Команда сервера "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4525,7 +4525,7 @@ msgstr "Сортировка файлов за блеском"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Сортировка файла индексов"
+msgstr "Сортировка файла индексов "
 
 #: u_translation.rssouth
 msgid "South"
@@ -4601,7 +4601,7 @@ msgstr "Звёзды"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Каталоги звёзд и Deep Sky, приготовленные"
+msgstr "Каталоги звёзд и Deep Sky, приготовленные "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -5001,7 +5001,7 @@ msgstr "Полная тень"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Невозможно создать директорию"
+msgstr "Невозможно создать директорию "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5069,7 +5069,7 @@ msgstr "Использовать предустановленную цветов
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(пригодно изображать потоки) "
+msgstr "(пригодно изображать потоки)"
 
 #: u_translation.rsusehpp
 msgid "Use HPP"
@@ -5229,11 +5229,11 @@ msgstr ""
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Предупреждение! Текущая дата и местонахождение обсерватории, возможно изменились от  значений по умолчанию. Вы должны ответить \"Нет\" и нажать %s кнопку, чтобы возвратиться к вашим значениям по умолчанию, а иначе они могут потеряться. Вы хотите продолжить? "
+msgstr "Предупреждение! Текущая дата и местонахождение обсерватории, возможно изменились от  значений по умолчанию. Вы должны ответить \"Нет\" и нажать %s кнопку, чтобы возвратиться к вашим значениям по умолчанию, а иначе они могут потеряться. Вы хотите продолжить?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Предупреждение! %sВы собираетесь разрушить базу данных %sи всё её содержание, даже если оно и не имеет отношения к данной программе. % sВы действительно уверены, что хотите продолжить? "
+msgstr "Предупреждение! %sВы собираетесь разрушить базу данных %sи всё её содержание, даже если оно и не имеет отношения к данной программе. % sВы действительно уверены, что хотите продолжить?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
@@ -5241,7 +5241,7 @@ msgstr "Предупреждение! Вы используете много к�
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "ПРЕДУПРЕЖДЕНИЕ! %sУ вас есть возможность добавить данные в существующий каталог% Существующий каталог и индексы должны быть в одном формате, так как иначе каталог будет искажаться.% Весьма хорошая идея сделать копии актуальных файлов перед этой операцией.% sВы хотите продолжить? "
+msgstr "ПРЕДУПРЕЖДЕНИЕ! %sУ вас есть возможность добавить данные в существующий каталог% Существующий каталог и индексы должны быть в одном формате, так как иначе каталог будет искажаться.% Весьма хорошая идея сделать копии актуальных файлов перед этой операцией.% sВы хотите продолжить?"
 
 #: u_translation.rswednesday
 msgid "Wed."
