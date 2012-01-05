@@ -24,4 +24,4 @@ echo '"Plural-Forms: nplurals=2; plural=(n > 1);\n"'>> translation/skychart/skyc
 
 cat ../skychart.po >> translation/skychart/skychart.pot
 
-tar cvf skychartpot.tar translation
+tar cvf skychartpot.tar translation/skychart/skychart.pot
