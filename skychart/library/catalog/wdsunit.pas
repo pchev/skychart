@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -33,13 +33,13 @@ WDSrec = record ar,de,dm :longint ;
                 sp : array[1..9] of char;
                 note : array[1..2] of char;
                 end;
-Function IsWDSpath(path : string) : Boolean;
-procedure SetWDSpath(path : string);
-Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenWDSwin(var ok : boolean);
-Procedure ReadWDS(var lin : WDSrec; var ok : boolean);
-Procedure NextWDS( var ok : boolean);
-procedure CloseWDS ;
+Function IsWDSpath(path : shortstring) : Boolean; stdcall;
+procedure SetWDSpath(path : shortstring); stdcall;
+Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenWDSwin(var ok : boolean); stdcall;
+Procedure ReadWDS(var lin : WDSrec; var ok : boolean); stdcall;
+Procedure NextWDS( var ok : boolean); stdcall;
+procedure CloseWDS ; stdcall;
 
 var
   WDSpath : string;
@@ -55,12 +55,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsWDSpath(path : string) : Boolean;
+Function IsWDSpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetWDSpath(path : string);
+procedure SetWDSpath(path : shortstring);
 begin
 WDSpath:=noslash(path);
 end;
@@ -92,7 +92,6 @@ end;
 
 Procedure OpenWDS(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
@@ -126,7 +125,6 @@ end;
 
 Procedure OpenWDSwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];

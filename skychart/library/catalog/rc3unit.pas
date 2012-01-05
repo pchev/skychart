@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -32,12 +32,12 @@ RC3rec = record ar,de,vgsr :longint ;
                 pa    : byte;
                 stage,lumcl,d25,r25,Ae,mb,b_vt,b_ve,m25,me : smallint;
                 end;
-Function IsRC3path(path : string) : Boolean;
-procedure SetRC3path(path : string);
-Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenRC3win(var ok : boolean);
-Procedure ReadRC3(var lin : RC3rec; var ok : boolean);
-procedure CloseRC3 ;
+Function IsRC3path(path : shortstring) : Boolean; stdcall;
+procedure SetRC3path(path : shortstring); stdcall;
+Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenRC3win(var ok : boolean); stdcall;
+Procedure ReadRC3(var lin : RC3rec; var ok : boolean); stdcall;
+procedure CloseRC3 ; stdcall;
 
 var
   RC3path : string;
@@ -53,14 +53,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsRC3path(path : string) : Boolean;
+Function IsRC3path(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetRC3path(path : string);
+procedure SetRC3path(path : shortstring);
 begin
-RC3path:=noslash(path);
+path:=noslash(path);
+RC3path:=path;
 end;
 
 Procedure CloseRegion;
@@ -90,7 +91,6 @@ end;
 
 Procedure OpenRC3(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
@@ -122,7 +122,6 @@ end;
 
 Procedure OpenRC3win(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];

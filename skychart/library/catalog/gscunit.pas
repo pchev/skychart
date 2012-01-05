@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
- {$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -34,14 +34,14 @@ uses
                      mult : char;
                      end;
 
-Function IsGSCpath(path : string) : Boolean;
-procedure SetGSCpath(path : string);
-Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGSCwin(var ok : boolean);
-Procedure ReadGSC(var lin : GSCrec; var SMnum : string ; var ok : boolean);
-Procedure NextGSC( var ok : boolean);
-procedure CloseGSC ;
-Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsGSCpath(path : shortstring) : Boolean; stdcall;
+procedure SetGSCpath(path : shortstring); stdcall;
+Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGSCwin(var ok : boolean); stdcall;
+Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure NextGSC( var ok : boolean); stdcall;
+procedure CloseGSC ; stdcall;
+Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 
 var
   GSCpath: String;
@@ -59,39 +59,40 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileIsOpen : Boolean = false;
 
-Function IsGSCpath(path : string) : Boolean;
+Function IsGSCpath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
-result:=    FileExists(p+'n0000'+slashchar+'0001.dat')
-         or FileExists(p+'n0730'+slashchar+'0594.dat')
-         or FileExists(p+'n1500'+slashchar+'1178.dat')
-         or FileExists(p+'n2230'+slashchar+'1729.dat')
-         or FileExists(p+'n3000'+slashchar+'2259.dat')
-         or FileExists(p+'n3730'+slashchar+'2781.dat')
-         or FileExists(p+'n4500'+slashchar+'3246.dat')
-         or FileExists(p+'n5230'+slashchar+'3652.dat')
-         or FileExists(p+'n6000'+slashchar+'4014.dat')
-         or FileExists(p+'n6730'+slashchar+'4294.dat')
-         or FileExists(p+'n7500'+slashchar+'4492.dat')
-         or FileExists(p+'n8230'+slashchar+'4615.dat')
-         or FileExists(p+'s0000'+slashchar+'4663.dat')
-         or FileExists(p+'s0730'+slashchar+'5260.dat')
-         or FileExists(p+'s1500'+slashchar+'5838.dat')
-         or FileExists(p+'s2230'+slashchar+'6412.dat')
-         or FileExists(p+'s3000'+slashchar+'6989.dat')
-         or FileExists(p+'s3730'+slashchar+'7523.dat')
-         or FileExists(p+'s4500'+slashchar+'8022.dat')
-         or FileExists(p+'s5230'+slashchar+'8464.dat')
-         or FileExists(p+'s6000'+slashchar+'8840.dat')
-         or FileExists(p+'s6730'+slashchar+'9134.dat')
-         or FileExists(p+'s7500'+slashchar+'9346.dat')
-         or FileExists(p+'s8230'+slashchar+'9490.dat')
+result:=    FileExists(p+'N0000'+slashchar+'0001.dat')
+         or FileExists(p+'N0730'+slashchar+'0594.dat')
+         or FileExists(p+'N1500'+slashchar+'1178.dat')
+         or FileExists(p+'N2230'+slashchar+'1729.dat')
+         or FileExists(p+'N3000'+slashchar+'2259.dat')
+         or FileExists(p+'N3730'+slashchar+'2781.dat')
+         or FileExists(p+'N4500'+slashchar+'3246.dat')
+         or FileExists(p+'N5230'+slashchar+'3652.dat')
+         or FileExists(p+'N6000'+slashchar+'4014.dat')
+         or FileExists(p+'N6730'+slashchar+'4294.dat')
+         or FileExists(p+'N7500'+slashchar+'4492.dat')
+         or FileExists(p+'N8230'+slashchar+'4615.dat')
+         or FileExists(p+'S0000'+slashchar+'4663.dat')
+         or FileExists(p+'S0730'+slashchar+'5260.dat')
+         or FileExists(p+'S1500'+slashchar+'5838.dat')
+         or FileExists(p+'S2230'+slashchar+'6412.dat')
+         or FileExists(p+'S3000'+slashchar+'6989.dat')
+         or FileExists(p+'S3730'+slashchar+'7523.dat')
+         or FileExists(p+'S4500'+slashchar+'8022.dat')
+         or FileExists(p+'S5230'+slashchar+'8464.dat')
+         or FileExists(p+'S6000'+slashchar+'8840.dat')
+         or FileExists(p+'S6730'+slashchar+'9134.dat')
+         or FileExists(p+'S7500'+slashchar+'9346.dat')
+         or FileExists(p+'S8230'+slashchar+'9490.dat')
 end;
 
-procedure SetGSCpath(path : string);
+procedure SetGSCpath(path : shortstring);
 begin
-GSCpath:=noslash(path);
+path:=noslash(path);
+GSCpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -125,7 +126,6 @@ end;
 
 Procedure OpenGSC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 if usecache then FindRegionList(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst)
@@ -136,7 +136,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadGSC(var lin : GSCrec; var SMnum : string ; var ok : boolean);
+Procedure ReadGSC(var lin : GSCrec; var SMnum : shortstring ; var ok : boolean);
 begin
 if eof(fgsc) then NextGSC(ok);
 if ok then  Read(fgsc,lin);
@@ -164,8 +164,8 @@ end;
 
 Procedure FindGSCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
 const dirlst : array [0..23,1..5] of char =
-      ('s8230','s7500','s6730','s6000','s5230','s4500','s3730','s3000','s2230','s1500','s0730','s0000',
-       'n0000','n0730','n1500','n2230','n3000','n3730','n4500','n5230','n6000','n6730','n7500','n8230');
+      ('S8230','S7500','S6730','S6000','S5230','S4500','S3730','S3000','S2230','S1500','S0730','S0000',
+       'N0000','N0730','N1500','N2230','N3000','N3730','N4500','N5230','N6000','N6730','N7500','N8230');
 var L1,S1,zone,i,j : integer;
     hemis : char;
 begin
@@ -187,23 +187,20 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
+ok:=false;
+repeat
+    Read(fgsc,lin);
+    if lin.gscn=num then begin ok:=true; break; end;
+until eof(fgsc);
 if ok then begin
-  ok:=false;
-  repeat
-      Read(fgsc,lin);
-      if lin.gscn=num then begin ok:=true; break; end;
-  until eof(fgsc);
-  if ok then begin
-    ar:=lin.ar/100000/15;
-    de:=lin.de/100000;
-  end;
-  Closeregion;
+  ar:=lin.ar/100000/15;
+  de:=lin.de/100000;
 end;
+Closeregion;
 end;
 
 Procedure OpenGSCwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 if usecache then FindRegionListWin(nSM,zonelst,SMlst,hemislst)
             else FindRegionAllWin(nSM,zonelst,SMlst,hemislst);

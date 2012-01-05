@@ -22,7 +22,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {
  correction of an error message if only the first part of the Tycho-2 catalog is installed.
 }
-{$mode objfpc}{$H+}
 interface
 
 uses
@@ -97,14 +96,14 @@ type  TY2rec = record
                bt,vt :word
                end;
 
-Function IsTY2path(path : string) : Boolean;
-procedure SetTY2path(path : string);
-Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
-Procedure OpenTY2win(ncat : integer;var ok : boolean);
-Procedure ReadTY2(var lin : TY2rec; var SMnum : string ; var ok : boolean);
-Procedure NextTY2( var ok : boolean);
-procedure CloseTY2 ;
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsTY2path(path : shortstring) : Boolean; stdcall;
+procedure SetTY2path(path : shortstring); stdcall;
+Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
+Procedure OpenTY2win(ncat : integer;var ok : boolean); stdcall;
+Procedure ReadTY2(var lin : TY2rec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure NextTY2( var ok : boolean); stdcall;
+procedure CloseTY2 ; stdcall;
+Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);stdcall;
 
 var
   TY2path: String;
@@ -140,18 +139,17 @@ var
    lastcache : integer = 0;
    maxbin : integer = 2;
 
-Function IsTY2path(path : string) : Boolean;
+Function IsTY2path(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'tyc2idx.dat');
 end;
 
-procedure SetTY2path(path : string);
+procedure SetTY2path(path : shortstring);
 var i : integer;
-    buf: string;
 begin
-buf:=noslash(path);
-if buf<>TY2path then for i:=1 to CacheNum do cachelst[i]:=0;
-TY2path:=buf;
+path:=noslash(path);
+if path<>TY2path then for i:=1 to CacheNum do cachelst[i]:=0;
+TY2path:=path;
 end;
 
 Procedure CloseRegion;
@@ -250,7 +248,7 @@ if (not OnCache) and UseCache then begin      // initialize cache
    SetLength(cache[Ncache],1);
    tmax[Ncache]:=t2nrec;
    smax[Ncache]:=s1nrec;
-   SetLength(cache[Ncache],t2nrec+s1nrec+2);
+   SetLength(cache[Ncache],t2nrec+s1nrec+1);
 end;
 end;
 SMname:=nomreg;
@@ -260,7 +258,6 @@ end;
 
 Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 maxcat:=ncat;
 if maxbin=1 then maxcat:=maxbin;
 curSM:=1;
@@ -273,7 +270,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadTY2(var lin : TY2rec; var SMnum : string ; var ok : boolean);
+Procedure ReadTY2(var lin : TY2rec; var SMnum : shortstring ; var ok : boolean);
 begin
 inc(currec);
 inc(icache);
@@ -298,7 +295,7 @@ if readsup and (currec>s1nrec) then begin            // end of second data file
 end;
 if not ok then exit;
 
-if not readsup then begin                                  // read first data file
+if not readsup then                                  // read first data file
 if oncache then lin:=cache[ncache,icache]
 else
 if readbin then begin
@@ -308,8 +305,8 @@ if readbin then begin
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
-    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
+    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
@@ -332,9 +329,8 @@ end else begin
                    else lin.vt:=99;
     if usecache then cache[ncache,icache]:=lin;
 end;
-end;
 
-if readsup then begin                                      // read second data file
+if readsup then                                       // read second data file
 if oncache then lin:=cache[ncache,icache]
 else
  if readbin then begin
@@ -344,8 +340,8 @@ else
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
-    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
+    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
@@ -365,7 +361,6 @@ else
     if trim(sup.vt)>'' then lin.vt:=strtofloat(sup.vt)
                    else lin.vt:=99;
     if usecache then cache[ncache,icache]:=lin;
-  end;
   end;
 SMnum:=SMname;
 end;
@@ -391,7 +386,6 @@ end;
 
 Procedure OpenTY2win(ncat : integer; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 maxcat:=ncat;
 if maxbin=1 then maxcat:=maxbin;
 curSM:=1;
@@ -407,7 +401,7 @@ Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
 var L1,S1,zone,i,j : integer;
     hemis : char;
     fok : boolean;
-    buf:string;
+    buf:shortstring;
 begin
 ok:=false ;
 for i:=0 to 11 do begin

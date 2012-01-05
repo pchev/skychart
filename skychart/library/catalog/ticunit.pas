@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -31,13 +31,13 @@ type
                      gscn: word;
                      mb,mv :smallint;
                      end;
-Function IsTICpath(path : string) : Boolean;
-procedure SetTICpath(path : string);
-Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenTICwin(var ok : boolean);
-Procedure ReadTIC(var lin : TICrec; var SMnum : string ; var ok : boolean);
-Procedure NextTIC( var ok : boolean);
-procedure CloseTIC ;
+Function IsTICpath(path : shortstring) : Boolean; stdcall;
+procedure SetTICpath(path : shortstring); stdcall;
+Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenTICwin(var ok : boolean); stdcall;
+Procedure ReadTIC(var lin : TICrec; var SMnum : shortstring ; var ok : boolean); stdcall;
+Procedure NextTIC( var ok : boolean); stdcall;
+procedure CloseTIC ; stdcall;
 
 
 var
@@ -62,43 +62,42 @@ var
    Ncache,Icache : integer;
    lastcache : integer = 0;
 
-Function IsTICpath(path : string) : Boolean;
+Function IsTICpath(path : shortstring) : Boolean;
 var p : string;
 begin
 p:=slash(path);
-result:=    FileExists(p+'n0000'+slashchar+'001.dat')
-         or FileExists(p+'n0730'+slashchar+'049.dat')
-         or FileExists(p+'n1500'+slashchar+'096.dat')
-         or FileExists(p+'n2230'+slashchar+'141.dat')
-         or FileExists(p+'n3000'+slashchar+'184.dat')
-         or FileExists(p+'n3730'+slashchar+'224.dat')
-         or FileExists(p+'n4500'+slashchar+'260.dat')
-         or FileExists(p+'n5230'+slashchar+'292.dat')
-         or FileExists(p+'n6000'+slashchar+'319.dat')
-         or FileExists(p+'n6730'+slashchar+'340.dat')
-         or FileExists(p+'n7500'+slashchar+'355.dat')
-         or FileExists(p+'n8230'+slashchar+'364.dat')
-         or FileExists(p+'s0000'+slashchar+'367.dat')
-         or FileExists(p+'s0730'+slashchar+'415.dat')
-         or FileExists(p+'s1500'+slashchar+'462.dat')
-         or FileExists(p+'s2230'+slashchar+'507.dat')
-         or FileExists(p+'s3000'+slashchar+'550.dat')
-         or FileExists(p+'s3730'+slashchar+'590.dat')
-         or FileExists(p+'s4500'+slashchar+'626.dat')
-         or FileExists(p+'s5230'+slashchar+'658.dat')
-         or FileExists(p+'s6000'+slashchar+'685.dat')
-         or FileExists(p+'s6730'+slashchar+'706.dat')
-         or FileExists(p+'s7500'+slashchar+'721.dat')
-         or FileExists(p+'s8230'+slashchar+'730.dat')
+result:=    FileExists(p+'N0000'+slashchar+'001.dat')
+         or FileExists(p+'N0730'+slashchar+'049.dat')
+         or FileExists(p+'N1500'+slashchar+'096.dat')
+         or FileExists(p+'N2230'+slashchar+'141.dat')
+         or FileExists(p+'N3000'+slashchar+'184.dat')
+         or FileExists(p+'N3730'+slashchar+'224.dat')
+         or FileExists(p+'N4500'+slashchar+'260.dat')
+         or FileExists(p+'N5230'+slashchar+'292.dat')
+         or FileExists(p+'N6000'+slashchar+'319.dat')
+         or FileExists(p+'N6730'+slashchar+'340.dat')
+         or FileExists(p+'N7500'+slashchar+'355.dat')
+         or FileExists(p+'N8230'+slashchar+'364.dat')
+         or FileExists(p+'S0000'+slashchar+'367.dat')
+         or FileExists(p+'S0730'+slashchar+'415.dat')
+         or FileExists(p+'S1500'+slashchar+'462.dat')
+         or FileExists(p+'S2230'+slashchar+'507.dat')
+         or FileExists(p+'S3000'+slashchar+'550.dat')
+         or FileExists(p+'S3730'+slashchar+'590.dat')
+         or FileExists(p+'S4500'+slashchar+'626.dat')
+         or FileExists(p+'S5230'+slashchar+'658.dat')
+         or FileExists(p+'S6000'+slashchar+'685.dat')
+         or FileExists(p+'S6730'+slashchar+'706.dat')
+         or FileExists(p+'S7500'+slashchar+'721.dat')
+         or FileExists(p+'S8230'+slashchar+'730.dat')
 end;
 
-procedure SetTICpath(path : string);
+procedure SetTICpath(path : shortstring);
 var i : integer;
-    buf:string;
 begin
-buf:=noslash(path);
-if buf<>TICpath then for i:=1 to CacheNum do cachelst[i]:=0;
-TICpath:=buf;
+path:=noslash(path);
+if path<>TICpath then for i:=1 to CacheNum do cachelst[i]:=0;
+TICpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -149,7 +148,7 @@ if UseCache then begin
    SetLength(cache[Ncache],1);
    Imax[Ncache]:=filesize(ftic)-1;
    Iread[Ncache]:=0;
-   SetLength(cache[Ncache],Imax[Ncache]+2);
+   SetLength(cache[Ncache],Imax[Ncache]+1);
 end;
 end;
 ok:=true;
@@ -157,7 +156,6 @@ end;
 
 Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 if Usecache then FindRegionList7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst)
@@ -168,7 +166,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadTIC(var lin : TICrec; var SMnum : string ; var ok : boolean);
+Procedure ReadTIC(var lin : TICrec; var SMnum : shortstring ; var ok : boolean);
 begin
 ok:=true;
 inc(Icache);
@@ -227,7 +225,6 @@ end;
 
 Procedure OpenTICwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 if usecache then FindRegionListWin7(nSM,zonelst,SMlst,hemislst)
             else FindRegionAllWin7(nSM,zonelst,SMlst,hemislst);
@@ -238,4 +235,3 @@ OpenRegion(hemis,zone,Sm,ok);
 end;
 
 end.
-

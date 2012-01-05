@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
-{$mode objfpc}{$H+}
+
 interface
 
 uses
@@ -31,12 +31,12 @@ LBNrec = record ar,de :longint ;
                 color,bright : byte;
                 name : array[1..8] of char;
                 end;
-Function IsLBNpath(path : string) : Boolean;
-procedure SetLBNpath(path : string);
-Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenLBNwin(var ok : boolean);
-Procedure ReadLBN(var lin : LBNrec; var ok : boolean);
-procedure CloseLBN ;
+Function IsLBNpath(path : shortstring) : Boolean; stdcall;
+procedure SetLBNpath(path : shortstring); stdcall;
+Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenLBNwin(var ok : boolean); stdcall;
+Procedure ReadLBN(var lin : LBNrec; var ok : boolean); stdcall;
+procedure CloseLBN ; stdcall;
 
 var
   LBNpath : string;
@@ -52,14 +52,15 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsLBNpath(path : string) : Boolean;
+Function IsLBNpath(path : shortstring) : Boolean;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetLBNpath(path : string);
+procedure SetLBNpath(path : shortstring);
 begin
-LBNpath:=noslash(path);
+path:=noslash(path);
+LBNpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -89,7 +90,6 @@ end;
 
 Procedure OpenLBN(ar1,ar2,de1,de2: double ; var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
@@ -121,7 +121,6 @@ end;
 
 Procedure OpenLBNwin(var ok : boolean);
 begin
-JDCatalog:=jd2000;
 curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];

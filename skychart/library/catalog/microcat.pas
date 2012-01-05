@@ -1,4 +1,4 @@
-unit usnoaunit;
+unit microcat;
 {
 Copyright (C) 2000 Patrick Chevalley
 
@@ -22,38 +22,39 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses math,
-  skylibcat, sysutils;
+uses math, skylibcat, sysutils;
 
-Type USNOArec = record  id  : shortstring;
-                        ar  : double;
+Type MCTrec = record    ar  : double;
                         de  : double;
                         mb  : double;
                         mr  : double;
-                        field,q,s: integer;
                 end;
 
-Function IsUSNOApath(path : shortstring) : Boolean; stdcall;
-Procedure OpenUSNOAwin(var ok : boolean); stdcall;
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean); stdcall;
-procedure CloseUSNOA ; stdcall;
-procedure SetUSNOApath(path : shortstring); stdcall;
+Function IsMCTpath(path : shortstring) : Boolean; stdcall;
+Procedure OpenMCTwin(ncat : integer;var ok : boolean); stdcall;
+Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
+Procedure ReadMCT(var lin : MCTrec; var ok : boolean); stdcall;
+procedure CloseMCT ; stdcall;
+procedure SetMCTpath(path : shortstring); stdcall;
 
-var USNOApath : string;
+var MCTpath : string;
 
 implementation
 
-Type Catrec = record ar,de,ma : longword; end;
+Type Catrec = packed record ar,de : longWord;
+//                     mb,mr : byte; apparement inverser par raport a la doc
+                     mr,mb : byte;
+              end;
 
 Type Accrec = record ar   : array[1..8] of char;
                      rec1 : array[1..12] of char;
                      nrec : array[1..9] of char;
+                     cr   : char;
                      lf   : char;
               end;
 var
    fcat : file of Catrec ;
-   curSM : integer;
+   curSM,cursub,maxsub : integer;
    Sm,nSM : integer;
    rec1,nrec,CurRec : integer;
    SMlst : array[1..100] of integer;
@@ -62,41 +63,21 @@ var
    demin,demax,armin,armax : double;
    fullwin : boolean;
 
-Function IsUSNOApath(path : shortstring) : Boolean;
-var p : string;
+Const SubCat : array[1..3] of string = (slashchar+'tyc',slashchar+'gsc',slashchar+'usno');
+
+Function IsMCTpath(path : shortstring) : Boolean;
 begin
-p:=slash(path);
-result:= FileExists(p+'zone0000.acc')
-         or FileExists(p+'zone0075.acc')
-         or FileExists(p+'zone0150.acc')
-         or FileExists(p+'zone0225.acc')
-         or FileExists(p+'zone0300.acc')
-         or FileExists(p+'zone0375.acc')
-         or FileExists(p+'zone0450.acc')
-         or FileExists(p+'zone0525.acc')
-         or FileExists(p+'zone0600.acc')
-         or FileExists(p+'zone0675.acc')
-         or FileExists(p+'zone0750.acc')
-         or FileExists(p+'zone0825.acc')
-         or FileExists(p+'zone0900.acc')
-         or FileExists(p+'zone0975.acc')
-         or FileExists(p+'zone1050.acc')
-         or FileExists(p+'zone1125.acc')
-         or FileExists(p+'zone1200.acc')
-         or FileExists(p+'zone1275.acc')
-         or FileExists(p+'zone1350.acc')
-         or FileExists(p+'zone1425.acc')
-         or FileExists(p+'zone1500.acc')
-         or FileExists(p+'zone1575.acc')
-         or FileExists(p+'zone1650.acc')
-         or FileExists(p+'zone1725.acc');
+result:=     FileExists(noslash(path)+subcat[1]+slashchar+'Zon0000.acc')
+         and FileExists(noslash(path)+subcat[2]+slashchar+'Zon0000.acc')
+         and FileExists(noslash(path)+subcat[3]+slashchar+'Zon0000.acc');
 end;
 
 
-procedure SetUSNOApath(path : shortstring);
+
+procedure SetMCTpath(path : shortstring);
 begin
 path:=noslash(path);
-USNOApath:=path;
+MCTpath:=path;
 end;
 
 Procedure CloseRegion;
@@ -112,7 +93,6 @@ end;
 Procedure SetFirstRec;
 var
     cat:CatRec;
-    a : cardinal;
     i : integer;
     ar : double;
 begin
@@ -124,8 +104,7 @@ repeat
   seek(fcat,rec1+i);
   Read(fcat,cat);
   if eof(fcat) then break;
-  a:=InvertI32(cat.ar);
-  ar:=a/360000;
+  ar:=cat.ar/360000;
 until (ar>armin);
 i:=i-1000;
 seek(fcat,rec1+i);
@@ -134,11 +113,9 @@ end;
 
 Procedure OpenRegion(var ok:boolean);
 var nomreg,nomfich,nomacc :string;
-    zone,box,znum : integer;
+    zone,box : integer;
     facc : file of Accrec ;
     acc : accrec;
-const cd : array[1..24] of string = ('1','1','6','5','3','2','1','4','6','5','7','10','8','7','8','9','9','4','10','3','2','6','2','3');
-      cd2: array[1..24] of string = ('1','1','9','7','5','4','3','2','1','6','7','10','9','8','8','11','10','11','6','4','2','3','3','2');
 begin
 box:=0;
 if fullwin and northpoleinmap then nomreg:='1725'
@@ -150,8 +127,13 @@ str(zone:4,nomreg);
 nomreg:=padzeros(nomreg,4);
 end;
 CurZone:=nomreg;
-nomfich:=USNOApath+slashchar+'zone'+nomreg+'.cat';
-znum:=trunc(strtoint(nomreg)/75)+1;
+nomfich:=MCTpath+subcat[cursub]+slashchar+'zon'+nomreg+'.cat';
+nomacc:=MCTpath+subcat[cursub]+slashchar+'zon'+nomreg+'.acc';
+while not FileExists(nomacc) do
+if not FileExists(nomacc) then begin
+   ok:=false;
+   exit;
+end;
 if not FileExists(nomfich) then begin
    ok:=false;
    exit;
@@ -161,7 +143,6 @@ if fullwin and (northpoleinmap or southpoleinmap) then begin
 rec1:=0;
 nrec:=99999999;
 end else begin
-nomacc:=USNOApath+slashchar+'zone'+nomreg+'.acc';
 AssignFile(facc,nomacc);
 FileMode:=0;
 reset(facc);
@@ -181,23 +162,25 @@ if (armax-armin)<300 then setfirstrec;
 ok:=true;
 end;
 
-Procedure NextRegion( var ok : boolean);
+Procedure NextRegion(var ok : boolean);
 begin
   CloseRegion;
   inc(curSM);
-  if curSM>nSM then ok:=false
-  else begin
+  if curSM>nSM then begin
+     curSM:=1;
+     inc(cursub);
+     if cursub>maxsub then ok:=false
+  end
+  else ok:=true;
+  if ok then begin
     Sm := Smlst[curSM];
     OpenRegion(ok);
   end;
 end;
 
-Procedure ReadUSNOA(var lin : USNOArec; var ok : boolean);
+Procedure ReadMCT(var lin : MCTrec; var ok : boolean);
 var
     cat:CatRec;
-    ar,de : cardinal;
-    ma : longint;
-    buf : string;
 begin
 ok:=true;
    repeat
@@ -205,32 +188,24 @@ ok:=true;
      if eof(fcat) or (currec>nrec) then NextRegion(ok);
      if not ok then exit;
      Read(fcat,cat);
-     ar:=InvertI32(cat.ar);
-     lin.ar:=ar/360000;
+     lin.ar:=cat.ar/360000;
      if (lin.ar<armin) then continue;
      if (lin.ar>armax) then begin
         NextRegion(ok);
         if not ok then exit;
         continue;
      end;
-     de:=InvertI32(cat.de);
-     lin.de:=de/360000-90;
+     lin.de:=cat.de/360000-90;
    until (lin.de>demin)and(lin.de<demax);
-   ma:=InvertI32(cat.ma);
    lin.ar:=lin.ar/15;
-   lin.s:=trunc(sgn(ma));
-   ma:=abs(ma);
-   lin.q:=trunc(ma/1e9); ma:=trunc(1e9*frac(ma/1e9));
-   lin.field:=trunc(ma/1e6); ma:=trunc(1e6*frac(ma/1e6));
-   lin.mb:=trunc(ma/1e3)/10; ma:=trunc(1e3*frac(ma/1e3));
-   lin.mr:=ma/10;
-   str((rec1+currec-1):8,buf);
-   lin.id:=CurZone+'.'+padzeros(buf,8);
+   lin.mb:=(cat.mb/10)-3;
+   lin.mr:=(cat.mr/10)-3;
 end;
 
-procedure CloseUSNOA ;
+procedure CloseMCT ;
 begin
 curSM:=nSM;
+cursub:=1;
 CloseRegion;
 end;
 
@@ -337,20 +312,24 @@ if (armax-armin)>300 then begin
 end;
 end;
 
-Procedure OpenUSNOAwin(var ok : boolean);
+Procedure OpenMCTwin(ncat : integer; var ok : boolean);
 begin
 curSM:=1;
 FindRegionListWin;
 Sm := Smlst[curSM];
+cursub:=1;
+maxsub:=ncat;
 OpenRegion(ok);
 end;
 
-Procedure OpenUSNOA(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
 begin
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 FindRegionList(ar1,ar2,de1,de2);
 Sm := Smlst[curSM];
+cursub:=1;
+maxsub:=ncat;
 OpenRegion(ok);
 end;
 

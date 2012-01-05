@@ -1,9 +1,0 @@
-; plan404.def : Declares the module parameters for the DLL.
-
-LIBRARY      "libplan404"
-DESCRIPTION  'plan404 Windows Dynamic Link Library'
-
-EXPORTS
-    ; Explicit exports can go here
-    Plan404
-
