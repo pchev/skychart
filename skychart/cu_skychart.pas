@@ -1067,11 +1067,11 @@ var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de: Double;
   x,y,xx,yy,sz:single;
   lid, save_nebplot: integer;
-  imgfile: string;
+  imgfile,CurrentCat: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
   al,alsac: TLabelAlign;
-  saveusebmp: boolean;
+  saveusebmp,imageok: boolean;
 
   Procedure Drawing;
     begin
@@ -1117,6 +1117,8 @@ var rec:GcatRec;
     {$ifdef trace_debug}
      WriteTrace('SkyChart '+cfgsc.chartname+': draw deepsky objects');
     {$endif}
+    CurrentCat:='';
+    imageok:=false;
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
     saveusebmp:=Fplot.cfgplot.UseBMP;
@@ -1142,7 +1144,11 @@ var rec:GcatRec;
              ((yy+sz)>cfgsc.Ymin) and
              ((yy-sz)<cfgsc.Ymax) then
             begin
-              if cfgsc.ShowImages and
+              if cfgsc.ShowImages and (rec.options.ShortName<>CurrentCat) then begin
+                 CurrentCat:=rec.options.ShortName;
+                 imageok:=FFits.ImagesForCatalog(CurrentCat);
+              end;
+              if cfgsc.ShowImages and imageok and
                  FFits.GetFileName(rec.options.ShortName,rec.neb.id,imgfile) then
                 begin
                  if (ExtractFileExt(imgfile)<>'.nil') then begin

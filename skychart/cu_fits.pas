@@ -84,6 +84,7 @@ type
      Function GetDB(var filename,objname:string; var ra,de,width,height,rot:double):boolean;
      Function DeleteDB(cname,oname: string):boolean;
      Function InsertDB(fname,cname,oname: string; ra,de,width,height,rotation:double):boolean;
+     Function ImagesForCatalog(catname:string):boolean;
      Function GetFileName(catname,objectname:string; var filename:string):boolean;
      Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
@@ -932,6 +933,16 @@ end
 else result:=false;
 except
  result:=false;
+end;
+end;
+
+function TFits.ImagesForCatalog(catname:string):boolean;
+var i : integer;
+begin
+if not db1.Active then result:=false
+else begin
+  i:=strtointdef(db1.QueryOne('select count(*) from cdc_fits where catalogname="'+uppercase(trim(catname))+'"'),0);
+  result:=(i>0)
 end;
 end;
 
