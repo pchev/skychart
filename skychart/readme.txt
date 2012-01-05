@@ -1,7 +1,8 @@
 How to install the source code to compile with Lazarus/Freepascal
 -----------------------------------------------------------------
 
-The simplest way is to add a ./src directory to your existing cdc binary directory.
+The simplest way is to add a ./src directory to your existing cdc binary directory or
+to a new directory if you want to keep a separated stable version.
 
 Download the source file skychart_XXX_source.tar.gz to this directory 
 and extract the file here. 
@@ -15,21 +16,19 @@ cdc -|                                    < base directory containing the execut
                          |- component     < project component
                          |- library       < project library
                          |- ...
-                         |- units         < all compilation object go here
-             |- tools | - data            < the "data" directory structure require to run the progran
-                      | - ...             < various tools not necessarily useful to the end user
+             |- units                     < all compilation .dcu object go here
 
-Install Lazarus using at least the version 0.9.12 from http://lazarus.freepascal.org
+Install Lazarus using a recent snapshot from http://lazarus.freepascal.org
 
-There is a lot of package to install, do not compile Lazarus for each!
-To install each package in Lazarus use File-Open to open the .lpk
+There is a lot of package to install. To install each package in Lazarus
+use File-Open to open the .lpk.
 Click "Open Package", "Compile", "Install".
 When the install tell you to rebuild Lazarus say NO.
+After all are installed click Tools-Build Lazarus.
 
-Launch Lazarus and open Components-Configure Installed Packages
-Check that Printer4Lazarus, JPEGForLazarus and TurboPowerIPro are installed, 
-this is normally the case with the version 0.9.12.
-If not install them from lazarus/component 
+Launch Lazarus and go first to lazarus/component to install the following 
+standard packages:
+
       printers/printer4lazarus.lpk
       jpeg/jpegforlazarus.lpk
       turbopower_ipro/turbopoweripro.lpk
@@ -39,31 +38,24 @@ the packages for the required component:
 
       enhedits/enhedit.lpk
       jdcalendar/cdcjdcalendar.lpk
-      libsql/libsql.lpk
       multidoc/multidocpackage.lpk
       radec/radec.lpk
-      synapse/source/lib/synapse.lpk
-      downloaddialog/downldialog.lpk  (after synapse)
-      wizardntb/wizardntb.lpk
+      winxp/winxpstyle.lpk ( for Windows only )
       xmlparser/xmlparser.lpk
       zoomimage/zoomimage.lpk
-For the last one reply YES to rebuild Lazarus.
+      wizardntb/wizardntb.lpk
+      libsql/libsql.lpk
 
 And the packages for the library src/skychart/library :
-(compile only)
 
       catalog/cdccatalog.lpk
       elp82/elp82.lpk
       satxy/satxy.lpk
       series96/series96.lpk
 
-
 You can now open the main project files skychart\cdc.lpi and compile.
-To run in debug adjust Run-Run Parameters-Working Directory to your CDC directory.
+To run in debug adjust Run-RunParameters-Worjing Directory to your CDC directory.
 To reduce the executable size for production use strip and upx.
-
-A few Windows specific library and plugin are not yet ported to Lazarus,
-please use Delphi if you want to compile them.
 
 Naming convention for the program source.
 ----------------------------------------

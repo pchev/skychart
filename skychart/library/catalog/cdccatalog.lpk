@@ -1,23 +1,20 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="2">
     <Name Value="cdccatalog"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="5"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)/"/>
       </SearchPaths>
-      <Parsing>
-        <SyntaxOptions>
-          <UseAnsiStrings Value="False"/>
-        </SyntaxOptions>
-      </Parsing>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
       <Other>
-        <CustomOptions Value="-CF64"/>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
-    <Files Count="26">
+    <Files Count="25">
       <Item1>
         <Filename Value="bscunit.pas"/>
         <UnitName Value="bscunit"/>
@@ -118,10 +115,6 @@
         <Filename Value="rc3unit.pas"/>
         <UnitName Value="rc3unit"/>
       </Item25>
-      <Item26>
-        <Filename Value="vocat.pas"/>
-        <UnitName Value="vocat"/>
-      </Item26>
     </Files>
     <RequiredPkgs Count="1">
       <Item1>

@@ -31,13 +31,13 @@ type
                 lmax,lmin,mcode : char;
                 gcvs,vartype : array[1..10] of char;
                 end;
-Function IsGCVpath(path : string) : Boolean;
-procedure SetGCVpath(path : string);
-Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGCVwin(var ok : boolean);
-Procedure ReadGCV(var lin : GCVrec; var ok : boolean);
-Procedure NextGCV( var ok : boolean);
-procedure CloseGCV ;
+Function IsGCVpath(path : PChar) : Boolean; stdcall;
+procedure SetGCVpath(path : PChar); stdcall;
+Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGCVwin(var ok : boolean); stdcall;
+Procedure ReadGCV(var lin : GCVrec; var ok : boolean); stdcall;
+Procedure NextGCV( var ok : boolean); stdcall;
+procedure CloseGCV ; stdcall;
 
 var
   GCVpath : string;
@@ -53,12 +53,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsGCVpath(path : string) : Boolean;
+Function IsGCVpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetGCVpath(path : string);
+procedure SetGCVpath(path : PChar); stdcall;
 var buf:string;
 begin
 buf:=noslash(path);
@@ -90,7 +90,7 @@ reset(fgcv);
 ok:=true;
 end;
 
-Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGCV(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -100,14 +100,14 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadGCV(var lin : GCVrec; var ok : boolean);
+Procedure ReadGCV(var lin : GCVrec; var ok : boolean);stdcall;
 begin
 ok:=true;
 if eof(fgcv) then NextGCV(ok);
 if ok then  Read(fgcv,lin);
 end;
 
-Procedure NextGCV( var ok : boolean);
+Procedure NextGCV( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -118,13 +118,13 @@ begin
   end;
 end;
 
-procedure CloseGCV ;
+procedure CloseGCV ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenGCVwin(var ok : boolean);
+Procedure OpenGCVwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

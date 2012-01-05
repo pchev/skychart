@@ -42,14 +42,14 @@ uses gscconst,
        plate : array[1..10]of string;
        end;
 
-Function IsGSCCpath(path : string) : Boolean;
-procedure SetGSCCpath(path : string);
-Procedure OpenGSCC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenGSCCwin(var ok : boolean);
-Procedure ReadGSCC(var lin : GSCCrec; var SMnum : string ; var ok : boolean);
-Procedure NextGSCC( var ok : boolean);
-procedure CloseGSCC ;
-Procedure FindGSCCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsGSCCpath(path : PChar) : Boolean; stdcall;
+procedure SetGSCCpath(path : PChar); stdcall;
+Procedure OpenGSCC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenGSCCwin(var ok : boolean); stdcall;
+Procedure ReadGSCC(var lin : GSCCrec; var SMnum : PChar ; var ok : boolean); stdcall;
+Procedure NextGSCC( var ok : boolean); stdcall;
+procedure CloseGSCC ; stdcall;
+Procedure FindGSCCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 
 var
   GSCCpath: String;
@@ -81,7 +81,7 @@ for i:=0 to 23 do begin
 end;
 end;
 
-Function IsGSCCpath(path : string) : Boolean;
+Function IsGSCCpath(path : PChar) : Boolean; stdcall;
 var p,buf : string;
     tst : array[0..5]of char;
     i,n : integer;
@@ -107,7 +107,7 @@ for i:=0 to 23 do begin
 end;
 end;
 
-procedure SetGSCCpath(path : string);
+procedure SetGSCCpath(path : PChar); stdcall;
 var buf:string;
 begin
 buf:=noslash(path);
@@ -178,7 +178,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenGSCC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenGSCC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -223,14 +223,14 @@ begin
          else lin.mult := 'T';
 end;
 
-Procedure ReadGSCC(var lin : GSCCrec; var SMnum : string ; var ok : boolean);
+Procedure ReadGSCC(var lin : GSCCrec; var SMnum : PChar ; var ok : boolean); stdcall;
 begin
 if eof(fgsc) then NextGSCC(ok);
 if ok then ReadGsccRec(lin,ok);
-SMnum:=SMname;
+SMnum:=PChar(SMname);
 end;
 
-Procedure NextGSCC( var ok : boolean);
+Procedure NextGSCC( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -243,13 +243,13 @@ begin
   end;
 end;
 
-procedure CloseGSCC ;
+procedure CloseGSCC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure FindGSCCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindGSCCnum(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 var L1,S1,zone,i,j : integer;
     hemis : char;
     fok : boolean;
@@ -272,21 +272,19 @@ end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
 OpenRegion(hemis,zone,Smnum,ok);
+ok:=false;
+repeat
+    ReadGsccRec(lin,fok);
+    if lin.gscn=num then begin ok:=true; break; end;
+until eof(fgsc);
 if ok then begin
-  ok:=false;
-  repeat
-      ReadGsccRec(lin,fok);
-      if lin.gscn=num then begin ok:=true; break; end;
-  until eof(fgsc);
-  if ok then begin
-    ar:=lin.ar/15;
-    de:=lin.de;
-  end;
-  Closeregion;
+  ar:=lin.ar/15;
+  de:=lin.de;
 end;
+Closeregion;
 end;
 
-Procedure OpenGSCCwin(var ok : boolean);
+Procedure OpenGSCCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

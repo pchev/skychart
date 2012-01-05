@@ -29,12 +29,12 @@ OCLrec = record ar,de :longint ;
                 cat,num,ocl,dim,dist,age,ms,mt,b_v,ns : smallint;
                 conc,range,rich,neb : char;
                 end;
-Function IsOCLpath(path : string) : Boolean;
-procedure SetOCLpath(path : string);
-Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenOCLwin(var ok : boolean);
-Procedure ReadOCL(var lin : OCLrec; var ok : boolean);
-procedure CloseOCL ;
+Function IsOCLpath(path : PChar) : Boolean; stdcall;
+procedure SetOCLpath(path : PChar); stdcall;
+Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenOCLwin(var ok : boolean); stdcall;
+Procedure ReadOCL(var lin : OCLrec; var ok : boolean); stdcall;
+procedure CloseOCL ; stdcall;
 
 var
   OCLpath : string;
@@ -50,12 +50,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsOCLpath(path : string) : Boolean;
+Function IsOCLpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetOCLpath(path : string);
+procedure SetOCLpath(path : PChar); stdcall;
 begin
 OCLpath:=noslash(path);
 end;
@@ -85,7 +85,7 @@ reset(focl);
 ok:=true ;
 end;
 
-Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenOCL(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -95,7 +95,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadOCL(var lin : OCLrec; var ok : boolean);
+Procedure ReadOCL(var lin : OCLrec; var ok : boolean); stdcall;
 var sm:integer;
 begin
 ok:=true;
@@ -111,13 +111,13 @@ end;
 if ok then  Read(focl,lin);
 end;
 
-procedure CloseOCL ;
+procedure CloseOCL ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenOCLwin(var ok : boolean);
+Procedure OpenOCLwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

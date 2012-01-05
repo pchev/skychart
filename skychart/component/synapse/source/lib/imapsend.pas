@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.005.002 |
+| Project : Ararat Synapse                                       | 002.005.001 |
 |==============================================================================|
 | Content: IMAP4rev1 client                                                    |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2004, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2001-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2001-2004.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -51,11 +51,6 @@ Used RFC: RFC-2060, RFC-2595
   {$MODE DELPHI}
 {$ENDIF}
 {$H+}
-
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
 
 unit imapsend;
 
@@ -182,8 +177,8 @@ type
     {:Append given message to specified folder.}
     function AppendMess(ToFolder: string; const Mess: TStrings): Boolean;
 
-    {:'Delete' message from current selected folder. It mark message as Deleted.
-     Real deleting will be done after sucessfull @link(CloseFolder) or
+    {:'Delete' message from currect selected folder. It mark message as Deleted.
+     Real deleting waill be done after sucessfull @link(CloseFolder) or
      @link(ExpungeFolder)}
     function DeleteMess(MessID: integer): boolean;
 
@@ -274,7 +269,6 @@ begin
   FFullResult := TStringList.Create;
   FIMAPcap := TStringList.Create;
   FSock := TTCPBlockSocket.Create;
-  FSock.Owner := self;
   FSock.ConvertLineEnd := True;
   FSock.SizeRecvBuffer := 32768;
   FSock.SizeSendBuffer := 32768;

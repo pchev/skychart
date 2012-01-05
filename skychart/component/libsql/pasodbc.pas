@@ -1,14 +1,13 @@
 unit pasodbc;
 
 {$IFDEF FPC}
-  {$MODE Delphi}
-  {$H+}
+{$MODE Delphi}
+{$H+}
+{$ENDIF}
+{$IFDEF LINUX}
+{$DEFINE UNIX}
 {$ELSE}
-  {$IFNDEF LINUX}
-    {$DEFINE WIN32}
-  {$ELSE}
-    {$DEFINE UNIX}
-  {$ENDIF}
+{$DEFINE WIN32}
 {$ENDIF}
 
 //ODBC-32 interface for libsql
@@ -18,7 +17,7 @@ unit pasodbc;
 
 interface
 uses
-     {$IFDEF MSWINDOWS}
+     {$IFDEF WIN32}
      Windows,
      {$ENDIF}
      Classes, SysUtils,

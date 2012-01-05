@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.006.002 |
+| Project : Ararat Synapse                                       | 002.004.000 |
 |==============================================================================|
 | Content: POP3 client                                                         |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2001-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2001-2005.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -51,12 +51,6 @@ Used RFC: RFC-1734, RFC-1939, RFC-2195, RFC-2449, RFC-2595
   {$MODE DELPHI}
 {$ENDIF}
 {$H+}
-{$M+}
-
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
 
 unit pop3send;
 
@@ -67,7 +61,7 @@ uses
   blcksock, synautil, synacode;
 
 const
-  cPop3Protocol = '110';
+  cPop3Protocol = 'pop3';
 
 type
 
@@ -90,7 +84,6 @@ type
     FFullResult: TStringList;
     FStatCount: Integer;
     FStatSize: Integer;
-    FListSize: Integer;
     FTimeStamp: string;
     FAuthType: TPOP3AuthType;
     FPOP3cap: TStringList;
@@ -103,11 +96,6 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-
-    {:You can call any custom by this method. Call Command without trailing CRLF.
-      If MultiLine parameter is @true, multilined response are expected.
-      Result is @true on sucess.}
-    function CustomCommand(const Command: string; MultiLine: Boolean): boolean;
 
     {:Call CAPA command for get POP3 server capabilites.
      note: not all servers support this command!}
@@ -136,10 +124,6 @@ type
     {:Send RETR command. After successful operation dowloaded message in
      @link(FullResult). If all OK, result is @true.}
     function Retr(Value: Integer): Boolean;
-
-    {:Send RETR command. After successful operation dowloaded message in
-     @link(Stream). If all OK, result is @true.}
-    function RetrStream(Value: Integer; Stream: TStream): Boolean;
 
     {:Send DELE command for delete specified message. If all OK, result is @true.}
     function Dele(Value: Integer): Boolean;
@@ -177,9 +161,6 @@ type
     {:After STAT command is there size of all messages in inbox.}
     property StatSize: Integer read  FStatSize;
 
-    {:After LIST 0 command size of all messages on server, After LIST x size of message x on server}
-    property ListSize: Integer read  FListSize;
-
     {:If server support this, after comnnect is in this property timestamp of
      remote server.}
     property TimeStamp: string read FTimeStamp;
@@ -209,13 +190,11 @@ begin
   FFullResult := TStringList.Create;
   FPOP3cap := TStringList.Create;
   FSock := TTCPBlockSocket.Create;
-  FSock.Owner := self;
   FSock.ConvertLineEnd := true;
   FTimeout := 60000;
   FTargetPort := cPop3Protocol;
   FStatCount := 0;
   FStatSize := 0;
-  FListSize := 0;
   FAuthType := POP3AuthAll;
   FAutoTLS := False;
   FFullSSL := False;
@@ -231,7 +210,7 @@ end;
 
 function TPOP3Send.ReadResult(Full: Boolean): Integer;
 var
-  s: AnsiString;
+  s: string;
 begin
   Result := 0;
   FFullResult.Clear;
@@ -249,25 +228,17 @@ begin
           Delete(s, 1, 1);
       FFullResult.Add(s);
     until FSock.LastError <> 0;
-  if not Full and (Result = 1) then
-    FFullResult.Add(SeparateRight(FResultString, ' '));
-  if FSock.LastError <> 0 then
-    Result := 0;
   FResultCode := Result;
-end;
-
-function TPOP3Send.CustomCommand(const Command: string; MultiLine: Boolean): boolean;
-begin
-  FSock.SendString(Command + CRLF);
-  Result := ReadResult(MultiLine) <> 0;
 end;
 
 function TPOP3Send.AuthLogin: Boolean;
 begin
   Result := False;
-  if not CustomCommand('USER ' + FUserName, False) then
-    exit;
-  Result := CustomCommand('PASS ' + FPassword, False)
+  FSock.SendString('USER ' + FUserName + CRLF);
+  if ReadResult(False) <> 1 then
+    Exit;
+  FSock.SendString('PASS ' + FPassword + CRLF);
+  Result := ReadResult(False) = 1;
 end;
 
 function TPOP3Send.AuthAPOP: Boolean;
@@ -275,7 +246,8 @@ var
   s: string;
 begin
   s := StrToHex(MD5(FTimeStamp + FPassWord));
-  Result := CustomCommand('APOP ' + FUserName + ' ' + s, False);
+  FSock.SendString('APOP ' + FUserName + ' ' + s + CRLF);
+  Result := ReadResult(False) = 1;
 end;
 
 function TPOP3Send.Connect: Boolean;
@@ -297,7 +269,8 @@ end;
 function TPOP3Send.Capability: Boolean;
 begin
   FPOP3cap.Clear;
-  Result := CustomCommand('CAPA', True);
+  FSock.SendString('CAPA' + CRLF);
+  Result := ReadResult(True) = 1;
   if Result then
     FPOP3cap.AddStrings(FFullResult);
 end;
@@ -346,119 +319,78 @@ end;
 
 function TPOP3Send.Logout: Boolean;
 begin
-  Result := CustomCommand('QUIT', False);
+  FSock.SendString('QUIT' + CRLF);
+  Result := ReadResult(False) = 1;
   FSock.CloseSocket;
 end;
 
 function TPOP3Send.Reset: Boolean;
 begin
-  Result := CustomCommand('RSET', False);
+  FSock.SendString('RSET' + CRLF);
+  Result := ReadResult(False) = 1;
 end;
 
 function TPOP3Send.NoOp: Boolean;
 begin
-  Result := CustomCommand('NOOP', False);
+  FSock.SendString('NOOP' + CRLF);
+  Result := ReadResult(False) = 1;
 end;
 
 function TPOP3Send.Stat: Boolean;
 var
   s: string;
 begin
-  Result := CustomCommand('STAT', False);
-  if Result then
-  begin
-    s := SeparateRight(ResultString, '+OK ');
-    FStatCount := StrToIntDef(Trim(SeparateLeft(s, ' ')), 0);
-    FStatSize := StrToIntDef(Trim(SeparateRight(s, ' ')), 0);
-  end;
+  Result := False;
+  FSock.SendString('STAT' + CRLF);
+  if ReadResult(False) <> 1 then
+    Exit;
+  s := SeparateRight(ResultString, '+OK ');
+  FStatCount := StrToIntDef(Trim(SeparateLeft(s, ' ')), 0);
+  FStatSize := StrToIntDef(Trim(SeparateRight(s, ' ')), 0);
+  Result := True;
 end;
 
 function TPOP3Send.List(Value: Integer): Boolean;
-var
-  s: string;
-  n: integer;
 begin
   if Value = 0 then
-    s := 'LIST'
+    FSock.SendString('LIST' + CRLF)
   else
-    s := 'LIST ' + IntToStr(Value);
-  Result := CustomCommand(s, Value = 0);
-  FListSize := 0;
-  if Result then
-    if Value <> 0 then
-    begin
-      s := SeparateRight(ResultString, '+OK ');
-      FListSize := StrToIntDef(SeparateLeft(SeparateRight(s, ' '), ' '), 0);
-    end
-    else
-      for n := 0 to FFullResult.Count - 1 do
-        FListSize := FListSize + StrToIntDef(SeparateLeft(SeparateRight(s, ' '), ' '), 0);
+    FSock.SendString('LIST ' + IntToStr(Value) + CRLF);
+  Result := ReadResult(Value = 0) = 1;
 end;
 
 function TPOP3Send.Retr(Value: Integer): Boolean;
 begin
-  Result := CustomCommand('RETR ' + IntToStr(Value), True);
-end;
-
-//based on code by Miha Vrhovnik
-function TPOP3Send.RetrStream(Value: Integer; Stream: TStream): Boolean;
-var
-  s: string;
-begin
-  Result := False;
-  FFullResult.Clear;
-  Stream.Size := 0;
   FSock.SendString('RETR ' + IntToStr(Value) + CRLF);
-
-  s := FSock.RecvString(FTimeout);
-  if Pos('+OK', s) = 1 then
-    Result := True;
-  FResultString := s;
-  if Result then begin
-    repeat
-      s := FSock.RecvString(FTimeout);
-      if s = '.' then
-        Break;
-      if s <> '' then begin
-        if s[1] = '.' then
-          Delete(s, 1, 1);
-      end;
-      WriteStrToStream(Stream, s);
-      WriteStrToStream(Stream, CRLF);
-    until FSock.LastError <> 0;
-  end;
-
-  if Result then
-    FResultCode := 1
-  else
-    FResultCode := 0;
+  Result := ReadResult(True) = 1;
 end;
 
 function TPOP3Send.Dele(Value: Integer): Boolean;
 begin
-  Result := CustomCommand('DELE ' + IntToStr(Value), False);
+  FSock.SendString('DELE ' + IntToStr(Value) + CRLF);
+  Result := ReadResult(False) = 1;
 end;
 
 function TPOP3Send.Top(Value, Maxlines: Integer): Boolean;
 begin
-  Result := CustomCommand('TOP ' + IntToStr(Value) + ' ' + IntToStr(Maxlines), True);
+  FSock.SendString('TOP ' + IntToStr(Value) + ' ' + IntToStr(Maxlines) + CRLF);
+  Result := ReadResult(True) = 1;
 end;
 
 function TPOP3Send.Uidl(Value: Integer): Boolean;
-var
-  s: string;
 begin
   if Value = 0 then
-    s := 'UIDL'
+    FSock.SendString('UIDL' + CRLF)
   else
-    s := 'UIDL ' + IntToStr(Value);
-  Result := CustomCommand(s, Value = 0);
+    FSock.SendString('UIDL ' + IntToStr(Value) + CRLF);
+  Result := ReadResult(Value = 0) = 1;
 end;
 
 function TPOP3Send.StartTLS: Boolean;
 begin
   Result := False;
-  if CustomCommand('STLS', False) then
+  FSock.SendString('STLS' + CRLF);
+  if ReadResult(False) = 1 then
   begin
     Fsock.SSLDoConnect;
     Result := FSock.LastError = 0;

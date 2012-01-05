@@ -34,13 +34,13 @@ type
                               sp       : array[1..20] of char;
                               end;
 
-Function IsBSCpath(path : string) : Boolean;
-procedure SetBSCpath(path : string);
-Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenBSCwin(var ok : boolean);
-Procedure ReadBSC(var lin : BSCrec; var ok : boolean);
-Procedure NextBSC( var ok : boolean);
-procedure CloseBSC ;
+Function IsBSCpath(path : PChar) : Boolean; stdcall;
+procedure SetBSCpath(path : PChar); stdcall;
+Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenBSCwin(var ok : boolean); stdcall;
+Procedure ReadBSC(var lin : BSCrec; var ok : boolean); stdcall;
+Procedure NextBSC( var ok : boolean); stdcall;
+procedure CloseBSC ; stdcall;
 
 var
   BSCpath : string ='';
@@ -63,12 +63,12 @@ var
    lastcache : integer = 0;
    chkfile : Boolean = true;
 
-Function IsBSCpath(path : string) : Boolean;
+Function IsBSCpath(path : PChar) : Boolean; stdcall;
 begin
-result:= DirectoryExists(slash(path));
+result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetBSCpath(path : string);
+procedure SetBSCpath(path : PChar); stdcall;
 var i : integer;
     buf:string;
 begin
@@ -126,7 +126,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenBSC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -136,7 +136,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadBSC(var lin : BSCrec; var ok : boolean);
+Procedure ReadBSC(var lin : BSCrec; var ok : boolean); stdcall;
 begin
 ok:=true;
 inc(Icache);
@@ -170,7 +170,7 @@ end else begin
 end;
 end;
 
-Procedure NextBSC( var ok : boolean);
+Procedure NextBSC( var ok : boolean); stdcall;
 begin
 if OnCache then begin
 end else begin
@@ -184,13 +184,13 @@ end;
   end;
 end;
 
-procedure CloseBSC ;
+procedure CloseBSC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenBSCwin(var ok : boolean);
+Procedure OpenBSCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

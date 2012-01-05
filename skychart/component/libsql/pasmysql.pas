@@ -11,7 +11,7 @@ unit pasmysql;
 
 interface
 uses
-     {$IFDEF MSWINDOWS}
+     {$IFDEF WIN32}
      Windows,
      {$ENDIF}
      Classes, SysUtils,
@@ -118,7 +118,7 @@ implementation
 constructor TMyDB.Create;
 begin
   FLibrary:=DEFAULT_DLL_LOCATION;
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WIN32}
   DLL:=FLibrary;
   {$ENDIF}
   FHost:='localhost';
@@ -167,12 +167,12 @@ begin
   //Close if already active
   if FActive then Close;
 
-  {  $IFDEF MSWINDOWS}
+  {  $IFDEF WIN32}
   //Allow user to change shared library
   if FLibrary<>'' then
     DLL_Client:=FLibrary;
 
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WIN32}
     //Embedded mysql 4.1 will definitively not work without config file.
   if FEmbedded and not fileexists ('c:\my.cnf') then
     //for some reason or another, %sysdir%\mysql.ini is not sufficient
@@ -195,9 +195,7 @@ begin
         FActive := mf.mysql_thread_init = 0
       else
         begin
-          {$IFNDEF MSWINDOWS}
           mf.mysql_thread_init; //call anyway.
-          {$ENDIF}
           FActive := True;
         end;
     end
@@ -210,7 +208,7 @@ begin
 
   if Assigned (mf.mysql_get_client_info) then
     FClientVersion := mf.mysql_get_client_info;
-  FMyVersion := mv5_0; // assume 5.0 for higher version
+  FMyVersion := mvUnknown;
   if pos ('3.23.', FClientVersion)>0 then
     FMyVersion := mv3_23;
   if pos ('4.0.', FClientVersion)>0 then
@@ -263,7 +261,7 @@ begin
       if FRealConnect then
         try
           PMyHandle:= mf.mysql_real_connect(@MyHandle, PChar(String(Host)), PChar(String(User)), PChar(String(Pass)),
-                     PChar(String(FDataBase)), FPort, nil {PChar(String(FUnixSock))}, Integer(CLIENT_COMPRESS){ FConnectOptions});
+                     PChar(String(FDataBase)), FPort, nil {PChar(String(FUnixSock))}, 0{ FConnectOptions});
           FActive := PMyHandle<>nil;
           if not FActive then
             begin
@@ -497,12 +495,10 @@ begin
 
           //Perform actual query:
           if 0=mf.mysql_query(@MyHandle, PChar(SQL)) then
-          //seems noor version of libmysql
-          //returns on, even on failure (...)
             begin
               StoreResult(mf.mysql_store_result(@MyHandle));
-              FLastError := mf.mysql_errno(@MyHandle);
-              Result := FLastError=0;
+              Result := true;
+              FLastError := 0;
               FLastErrorText := '';
               FHasResult := True;
             end
@@ -724,11 +720,8 @@ begin
       Result := Integer (mf.mysql_store_result(@MyHandle));
       UseResultSet (Result);
       FCurrentSet.Clear;
-      if Result <> 0 then
-        begin
-          FillFieldInfo (PMYSQL_RES(Result));
-          FCurrentSet.FColCount := mf.mysql_num_fields(PMYSQL_RES(Result));
-        end;
+      FillFieldInfo (PMYSQL_RES(Result));
+      FCurrentSet.FColCount := mf.mysql_num_fields(PMYSQL_RES(Result));
     end;
 end;
 
@@ -816,25 +809,6 @@ begin
                   decimals:=PMysql_field_50(field).decimals;
                 end;
             end;
-            //map mysql flags to some properties
-            //just hope this is compatible across all mysql versions
-            //afaik this is 4.1 (3.2 compatible) flag specification
-            IsNullable := 0 <> (Flags and NOT_NULL_FLAG);
-            IsPrimaryKey := 0 <> (Flags and PRI_KEY_FLAG);
-            IsUnique := 0 <> (Flags and UNIQUE_KEY_FLAG);
-            IsKey := 0 <> (Flags and MULTIPLE_KEY_FLAG);
-            IsBlob := 0 <> (Flags and BLOB_FLAG);
-            IsUnsigned := 0 <> (Flags and UNSIGNED_FLAG);
-            IsAutoIncrement := 0 <> (Flags and AUTO_INCREMENT_FLAG);
-            IsNumeric := 0 <> (Flags and NUM_FLAG);
-(*
-  non mapped flags:
-  ZEROFILL_FLAG   { Field is zerofill }
-  BINARY_FLAG     { Field is binary }
-  ENUM_FLAG       { Field is an enum }
-  TIMESTAMP_FLAG  { Field is a timestamp }
-  SET_FLAG        { Field is a set }
-*)
           end;
         end;
     end;

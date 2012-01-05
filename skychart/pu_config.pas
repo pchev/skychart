@@ -1,6 +1,6 @@
 unit pu_config;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2002 Patrick Chevalley
@@ -28,14 +28,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
+uses Math, u_constant, u_util, u_projection,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
-  cu_fits, cu_catalog, cu_database,
+  StrUtils,  cu_fits, cu_catalog, cu_database,
   pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
   pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
-  pu_config_internet,
-  LResources, MultiDoc, ChildDoc, PairSplitter, LazHelpHTML;
+  LResources, MultiDoc, ChildDoc;
 
 type
 
@@ -44,9 +43,6 @@ type
   Tf_config = class(TForm)
     MultiDoc1: TMultiDoc;
     Panel1: TPanel;
-    Panel3: TPanel;
-    Panel4: TPanel;
-    Splitter1: TSplitter;
     TreeView1: TTreeView;
     previous: TButton;
     next: TButton;
@@ -57,8 +53,6 @@ type
     CancelBtn: TButton;
     HelpBtn: TButton;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
-    procedure FormDestroy(Sender: TObject);
-    procedure HelpBtnClick(Sender: TObject);
     procedure TreeView1Change(Sender: TObject; Node: TTreeNode);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -68,20 +62,17 @@ type
   private
     { Déclarations privées }
     locktree: boolean;
-    Fccat : Tconf_catalog;
-    Fcshr : Tconf_shared;
-    Fcsc  : Tconf_skychart;
-    Fcplot : Tconf_plot;
-    Fcmain : Tconf_main;
-    Fcdss : Tconf_dss;
-    Fnightvision: boolean;
+    Fccat : conf_catalog;
+    Fcshr : conf_shared;
+    Fcsc  : conf_skychart;
+    Fcplot : conf_plot;
+    Fcmain : conf_main;
+    Fcdss : conf_dss;
     astpage,compage,dbpage: integer;
-    lastSelectedNode: TTreeNode;
     FApplyConfig: TNotifyEvent;
     FDBChange: TNotifyEvent;
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
-    FGetTwilight: TGetTwilight;
     f_config_observatory1: Tf_config_observatory;
     f_config_chart1: Tf_config_chart;
     f_config_catalog1: Tf_config_catalog;
@@ -90,38 +81,33 @@ type
     f_config_pictures1: Tf_config_pictures;
     f_config_system1: Tf_config_system;
     f_config_time1: Tf_config_time;
-    f_config_internet1: Tf_config_internet;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
     procedure SetCatalog(value: Tcatalog);
     function GetDB: Tcdcdb;
     procedure SetDB(value: Tcdcdb);
-    procedure SetCcat(value: Tconf_catalog);
-    procedure SetCshr(value: Tconf_shared);
-    procedure SetCsc(value: Tconf_skychart);
-    procedure SetCplot(value: Tconf_plot);
-    procedure SetCmain(value: Tconf_main);
-    procedure SetCdss(value: Tconf_dss);
+    procedure SetCcat(value: conf_catalog);
+    procedure SetCshr(value: conf_shared);
+    procedure SetCsc(value: conf_skychart);
+    procedure SetCplot(value: conf_plot);
+    procedure SetCmain(value: conf_main);
+    procedure SetCdss(value: conf_dss);
     procedure ShowDBSetting(Sender: TObject);
     procedure ShowCometSetting(Sender: TObject);
     procedure ShowAsteroidSetting(Sender: TObject);
     procedure LoadMPCSample(Sender: TObject);
     procedure SysDBChange(Sender: TObject);
     procedure SysSaveAndRestart(Sender: TObject);
-    function  SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
-    procedure TimeGetTwilight(jd0: double; out ht: double);
-    procedure ShowPage(i,j:Integer);
-    procedure ActivateChanges;
+    function SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
   public
     { Déclarations publiques }
-    procedure SetLang;
-    property ccat : Tconf_catalog read Fccat write SetCcat;
-    property cshr : Tconf_shared read Fcshr write SetCshr;
-    property csc  : Tconf_skychart read Fcsc write SetCsc;
-    property cplot : Tconf_plot read Fcplot write SetCplot;
-    property cmain : Tconf_main read Fcmain write SetCmain;
-    property cdss : Tconf_dss read Fcdss write SetCdss;
+    property ccat : conf_catalog read Fccat write SetCcat;
+    property cshr : conf_shared read Fcshr write SetCshr;
+    property csc  : conf_skychart read Fcsc write SetCsc;
+    property cplot : conf_plot read Fcplot write SetCplot;
+    property cmain : conf_main read Fcmain write SetCmain;
+    property cdss : conf_dss read Fcdss write SetCdss;
     property fits : TFits read GetFits write SetFits;
     property catalog : Tcatalog read GetCatalog write SetCatalog;
     property db : Tcdcdb read GetDB write SetDB;
@@ -129,99 +115,21 @@ type
     property onDBChange: TNotifyEvent read FDBChange write FDBChange;
     property onSaveAndRestart: TNotifyEvent read FSaveAndRestart write FSaveAndRestart;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
-    property onGetTwilight: TGetTwilight read FGetTwilight write FGetTwilight;
   end;
 
 var
   f_config: Tf_config;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_config.SetLang;
-begin
-Caption:=rsConfiguratio;
-TreeView1.items[0].text:='1- '+rsDateTime2;
-TreeView1.items[1].text:='1- '+rsDateTime2;
-TreeView1.items[2].text:='2- '+rsTimeSimulati;
-TreeView1.items[3].text:='3- '+rsAnimation;
-TreeView1.items[4].text:='2- '+rsObservatory;
-TreeView1.items[5].text:='1- '+rsObservatory;
-TreeView1.items[6].text:='2- '+rsHorizon;
-TreeView1.items[7].text:='3- '+rsChartCoordin;
-TreeView1.items[8].text:='1- '+rsChartCoordin;
-TreeView1.items[9].text:='2- '+rsFieldOfVisio;
-TreeView1.items[10].text:='3- '+rsProjection;
-TreeView1.items[11].text:='4- '+rsObjectFilter;
-TreeView1.items[12].text:='5- '+rsGridSpacing;
-TreeView1.items[13].text:='6- '+rsObjectList;
-TreeView1.items[14].text:='4- '+rsCatalog;
-TreeView1.items[15].text:='1- '+rsCdCStars;
-TreeView1.items[16].text:='2- '+rsCdCNebulae;
-TreeView1.items[17].text:='3- '+rsCatalog;
-TreeView1.items[18].text:='4- '+'VO '+rsCatalog;
-TreeView1.items[19].text:='5- '+rsUserDefinedO;
-TreeView1.items[20].text:='6- '+rsOtherSoftwar;
-TreeView1.items[21].text:='7- '+rsObsolete;
-TreeView1.items[22].text:='5- '+rsSolarSystem;
-TreeView1.items[23].text:='1- '+rsSolarSystem;
-TreeView1.items[24].text:='2- '+rsPlanet;
-TreeView1.items[25].text:='3- '+rsComet;
-TreeView1.items[26].text:='4- '+rsAsteroid;
-TreeView1.items[27].text:='6- '+rsDisplay;
-TreeView1.items[28].text:='1- '+rsDisplay;
-TreeView1.items[29].text:='2- '+rsDisplayColou;
-TreeView1.items[30].text:='3- '+rsDeepSkyObjec;
-TreeView1.items[31].text:='4- '+rsSkyBackgroun;
-TreeView1.items[32].text:='5- '+rsLines;
-TreeView1.items[33].text:='6- '+rsLabels;
-TreeView1.items[34].text:='7- '+rsFonts;
-TreeView1.items[35].text:='8- '+rsFinderCircle;
-TreeView1.items[36].text:='9- '+rsFinderRectan;
-TreeView1.items[37].text:='7- '+rsPictures;
-TreeView1.items[38].text:='1- '+rsObject;
-TreeView1.items[39].text:='2- '+rsBackground;
-TreeView1.items[40].text:='3- '+rsDSSRealSky;
-TreeView1.items[41].text:='8- '+rsSystem;
-TreeView1.items[42].text:='1- '+rsSystem;
-TreeView1.items[43].text:='2- '+rsServer;
-TreeView1.items[44].text:='3- '+rsTelescope;
-TreeView1.items[45].text:='4- '+rsLanguage2;
-TreeView1.items[46].text:='9- '+rsInternet;
-TreeView1.items[47].text:='1- '+rsProxy;
-TreeView1.items[48].text:='2- '+rsOrbitalEleme;
-TreeView1.items[49].text:='3- '+rsOnlineDSSPic;
-Applyall.caption:=rsApplyChangeT;
-Apply.Caption:=rsApply;
-OKBtn.caption:=rsOK;
-CancelBtn.caption:=rsCancel;
-HelpBtn.caption:=rsHelp;
-if f_config_catalog1<>nil then f_config_catalog1.SetLang;
-if f_config_chart1<>nil then f_config_chart1.SetLang;
-if f_config_display1<>nil then f_config_display1.SetLang;
-if f_config_internet1<>nil then f_config_internet1.SetLang;
-if f_config_observatory1<>nil then f_config_observatory1.SetLang;
-if f_config_pictures1<>nil then f_config_pictures1.SetLang;
-if f_config_solsys1<>nil then f_config_solsys1.SetLang;
-if f_config_system1<>nil then f_config_system1.SetLang;
-if f_config_time1<>nil then f_config_time1.SetLang;
-SetHelp(self,hlpMenuSetup);
-end;
+
 
 procedure Tf_config.FormCreate(Sender: TObject);
 var Child: TChildDoc;
 begin
-Fcsc:=Tconf_skychart.Create;
-Fccat:=Tconf_catalog.Create;
-Fcshr:=Tconf_shared.Create;
-Fcplot:=Tconf_plot.Create;
-Fcmain:=Tconf_main.Create;
-Fcdss:=Tconf_dss.Create;
-SetLang;
-compage:=25;
-astpage:=26;
-dbpage:=42;
-Fnightvision:=false;
+compage:=22;
+astpage:=23;
+dbpage:=38;
 
 Child:=MultiDoc1.NewChild;
 f_config_time1:=Tf_config_time.Create(Child);
@@ -255,10 +163,6 @@ Child:=MultiDoc1.NewChild;
 f_config_system1:=Tf_config_system.Create(Child);
 Child.DockedPanel:=f_config_system1.MainPanel;
 
-Child:=MultiDoc1.NewChild;
-f_config_internet1:=Tf_config_internet.Create(Child);
-Child.DockedPanel:=f_config_internet1.MainPanel;
-
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
@@ -266,29 +170,11 @@ f_config_system1.onShowComet:=ShowCometSetting;
 f_config_system1.onLoadMPCSample:=LoadMPCSample;
 f_config_system1.onDBChange:=SysDBChange;
 f_config_system1.onSaveAndRestart:=SysSaveAndRestart;
-f_config_time1.onGetTwilight:=TimeGetTwilight;
 end;
 
 procedure Tf_config.FormShow(Sender: TObject);
-{$ifdef mswindows}var i:integer;{$endif}
 begin
 locktree:=false;
-{$ifdef mswindows}
-if Fnightvision<>nightvision then begin
-   for i:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[i].Color:=nv_dark;
-   SetFormNightVision(self,nightvision);
-   SetFormNightVision(f_config_time1,nightvision);
-   SetFormNightVision(f_config_observatory1,nightvision);
-   SetFormNightVision(f_config_chart1,nightvision);
-   SetFormNightVision(f_config_catalog1,nightvision);
-   SetFormNightVision(f_config_solsys1,nightvision);
-   SetFormNightVision(f_config_display1,nightvision);
-   SetFormNightVision(f_config_pictures1,nightvision);
-   SetFormNightVision(f_config_system1,nightvision);
-   SetFormNightVision(f_config_internet1,nightvision);
-   Fnightvision:=nightvision;
-end;
-{$endif}
 f_config_time1.FormShow(Sender);
 f_config_observatory1.FormShow(Sender);
 f_config_chart1.FormShow(Sender);
@@ -297,21 +183,15 @@ f_config_solsys1.FormShow(Sender);
 f_config_display1.FormShow(Sender);
 f_config_pictures1.FormShow(Sender);
 f_config_system1.FormShow(Sender);
-f_config_internet1.FormShow(Sender);
 TreeView1.FullCollapse;
-Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
-lastSelectedNode:=Treeview1.selected;
+Treeview1.Refresh;
 end;
 
 procedure Tf_config.TreeView1Change(Sender: TObject; Node: TTreeNode);
 var i,j: integer;
 begin
 if locktree then exit;
-if node=nil then begin
-   Treeview1.selected:=lastSelectedNode;
-   exit;
-end;
 try
 if node.level=0 then begin
    Treeview1.selected:=Treeview1.items[(Treeview1.selected.absoluteindex+1)];
@@ -319,85 +199,34 @@ end else begin
    locktree:=true;
    i:=node.parent.index;
    j:=node.index;
-   ShowPage(i,j);
-   TreeView1.FullCollapse;
-   node.Parent.Expand(true);
+   MultiDoc1.SetActiveChild(i);
+   case i of
+     0 : begin f_config_time1.WizardNotebook1.PageIndex:=j;        f_config_time1.FormShow(Sender); end;
+     1 : begin f_config_observatory1.WizardNotebook1.PageIndex:=j; f_config_observatory1.FormShow(Sender); end;
+     2 : begin f_config_chart1.WizardNotebook1.PageIndex:=j;       f_config_chart1.FormShow(Sender); end;
+     3 : begin f_config_catalog1.WizardNotebook1.PageIndex:=j;     f_config_catalog1.FormShow(Sender); end;
+     4 : begin f_config_solsys1.WizardNotebook1.PageIndex:=j;      f_config_solsys1.FormShow(Sender); end;
+     5 : begin f_config_display1.WizardNotebook1.PageIndex:=j;     f_config_display1.FormShow(Sender); end;
+     6 : begin f_config_pictures1.WizardNotebook1.PageIndex:=j;    f_config_pictures1.FormShow(Sender); end;
+     7 : begin f_config_system1.WizardNotebook1.PageIndex:=j;      f_config_system1.FormShow(Sender); end;
+   end;
 end;
-lastSelectedNode:=Treeview1.selected;
 application.processmessages;
 finally
 locktree:=false;
 end;
 end;
 
-procedure Tf_config.ShowPage(i,j:Integer);
-var k: integer;
-begin
-   // before the page change:
-   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
-     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
-   end;
-   if MultiDoc1.ActiveObject=f_config_system1 then begin
-     if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
-   end;
-   // page change
-   for k:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[k].Visible:=false;
-   MultiDoc1.Childs[i].Visible:=true;
-   MultiDoc1.SetActiveChild(i);
-   case i of
-     0 : begin f_config_time1.PageControl1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
-     1 : begin f_config_observatory1.PageControl1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
-     2 : begin f_config_chart1.PageControl1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
-     3 : begin f_config_catalog1.PageControl1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
-     4 : begin f_config_solsys1.PageControl1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
-     5 : begin f_config_display1.PageControl1.PageIndex:=j;     f_config_display1.FormShow(self); end;
-     6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
-     7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
-     8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
-   end;
-   cmain.configpage_i:=i;
-   cmain.configpage_j:=j;
-end;
-
-procedure Tf_config.ActivateChanges;
-begin
-  if Treeview1.selected<>nil then
-     cmain.configpage:=Treeview1.selected.absoluteindex;
-  if MultiDoc1.ActiveObject=f_config_catalog1 then begin
-    if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
-    if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
-  end;
-  if MultiDoc1.ActiveObject=f_config_system1 then begin
-    if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
-  end;
-  Fcdss:=f_config_internet1.cdss;
-end;
-
 procedure Tf_config.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
-  ActivateChanges;
-end;
-
-procedure Tf_config.FormDestroy(Sender: TObject);
-begin
-  Fcsc.free;
-  Fccat.free;
-  Fcshr.free;
-  Fcplot.free;
-  Fcmain.free;
-  Fcdss.free;
-end;
-
-procedure Tf_config.HelpBtnClick(Sender: TObject);
-begin
-  MultiDoc1.ActiveObject.ShowHelp;
+  cmain.configpage:=f_config.Treeview1.selected.absoluteindex;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);
 begin
-if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex< Treeview1.items.count-1) then begin
+if Treeview1.selected.absoluteindex< Treeview1.items.count-1 then begin
  Treeview1.selected:=Treeview1.selected.GetNext;
+// Treeview1.selected.parent.expand(true);
  treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
 end;
@@ -406,12 +235,13 @@ end;
 procedure Tf_config.previousClick(Sender: TObject);
 var i : integer;
 begin
-if (Treeview1.selected<>nil)and(Treeview1.selected.absoluteindex>1) then begin
+if Treeview1.selected.absoluteindex>1 then begin
  locktree:=true;
  Treeview1.selected:=Treeview1.selected.GetPrev;
  if Treeview1.selected.level=0 then Treeview1.selected:=Treeview1.selected.GetPrev;
  i:=Treeview1.selected.absoluteindex;
  locktree:=false;
+// Treeview1.selected.parent.expand(true);
  Treeview1.selected:=Treeview1.items[i];
  treeview1.topitem:=Treeview1.selected;
  TreeView1Change(Sender,Treeview1.selected);
@@ -421,15 +251,21 @@ end;
 procedure Tf_config.ShowDBSetting(Sender: TObject);
 begin
 Treeview1.selected:=Treeview1.items[dbpage];
+Treeview1.selected.parent.expand(true);
+Treeview1.selected:=Treeview1.items[dbpage];
 end;
 
 procedure Tf_config.ShowCometSetting(Sender: TObject);
 begin
 Treeview1.selected:=Treeview1.items[compage];
+Treeview1.selected.parent.expand(true);
+Treeview1.selected:=Treeview1.items[compage];
 end;
 
 procedure Tf_config.ShowAsteroidSetting(Sender: TObject);
 begin
+Treeview1.selected:=Treeview1.items[astpage];
+Treeview1.selected.parent.expand(true);
 Treeview1.selected:=Treeview1.items[astpage];
 end;
 
@@ -452,12 +288,6 @@ function Tf_config.SolSysPrepareAsteroid(jdt:double; msg:Tstrings):boolean;
 begin
  if assigned(FPrepareAsteroid) then result:=FPrepareAsteroid(jdt,msg)
    else result:=false;
-end;
-
-procedure Tf_config.TimeGetTwilight(jd0: double; out ht: double);
-begin
- if assigned(FGetTwilight) then FGetTwilight(jd0,ht)
-   else ht:=-99;
 end;
 
 function Tf_config.GetFits: TFits;
@@ -490,87 +320,86 @@ begin
 f_config_system1.cdb:=value;
 f_config_solsys1.cdb:=value;
 f_config_pictures1.cdb:=value;
-f_config_observatory1.cdb:=value;
 end;
 
-procedure Tf_config.SetCcat(value: Tconf_catalog);
+procedure Tf_config.SetCcat(value: conf_catalog);
 begin
-Fccat.Assign(value);
-f_config_time1.ccat:=Fccat;
-f_config_observatory1.ccat:=Fccat;
-f_config_chart1.ccat:=Fccat;
-f_config_catalog1.ccat:=Fccat;
-f_config_solsys1.ccat:=Fccat;
-f_config_display1.ccat:=Fccat;
-f_config_pictures1.ccat:=Fccat;
-f_config_system1.ccat:=Fccat;
+Fccat:=value;
+f_config_time1.ccat:=@Fccat;
+f_config_observatory1.ccat:=@Fccat;
+f_config_chart1.ccat:=@Fccat;
+f_config_catalog1.ccat:=@Fccat;
+f_config_solsys1.ccat:=@Fccat;
+f_config_display1.ccat:=@Fccat;
+f_config_pictures1.ccat:=@Fccat;
+f_config_system1.ccat:=@Fccat;
 end;
 
-procedure Tf_config.SetCshr(value: Tconf_shared);
+procedure Tf_config.SetCshr(value: conf_shared);
 begin
-Fcshr.Assign(value);
-f_config_time1.cshr:=Fcshr;
-f_config_observatory1.cshr:=Fcshr;
-f_config_chart1.cshr:=Fcshr;
-f_config_catalog1.cshr:=Fcshr;
-f_config_solsys1.cshr:=Fcshr;
-f_config_display1.cshr:=Fcshr;
-f_config_pictures1.cshr:=Fcshr;
-f_config_system1.cshr:=Fcshr;
+Fcshr:=value;
+f_config_time1.cshr:=@Fcshr;
+f_config_observatory1.cshr:=@Fcshr;
+f_config_chart1.cshr:=@Fcshr;
+f_config_catalog1.cshr:=@Fcshr;
+f_config_solsys1.cshr:=@Fcshr;
+f_config_display1.cshr:=@Fcshr;
+f_config_pictures1.cshr:=@Fcshr;
+f_config_system1.cshr:=@Fcshr;
 end;
 
-procedure Tf_config.SetCsc(value: Tconf_skychart);
+procedure Tf_config.SetCsc(value: conf_skychart);
 begin
-Fcsc.Assign(value);
-f_config_time1.csc:=Fcsc;
-f_config_observatory1.csc:=Fcsc;
-f_config_chart1.csc:=Fcsc;
-f_config_catalog1.csc:=Fcsc;
-f_config_solsys1.csc:=Fcsc;
-f_config_display1.csc:=Fcsc;
-f_config_pictures1.csc:=Fcsc;
-f_config_system1.csc:=Fcsc;
+Fcsc:=value;
+f_config_time1.csc:=@Fcsc;
+f_config_observatory1.csc:=@Fcsc;
+f_config_chart1.csc:=@Fcsc;
+f_config_catalog1.csc:=@Fcsc;
+f_config_solsys1.csc:=@Fcsc;
+f_config_display1.csc:=@Fcsc;
+f_config_pictures1.csc:=@Fcsc;
+f_config_system1.csc:=@Fcsc;
 end;
 
-procedure Tf_config.SetCplot(value: Tconf_plot);
+procedure Tf_config.SetCplot(value: conf_plot);
 begin
-Fcplot.Assign(value);
-f_config_time1.cplot:=Fcplot;
-f_config_observatory1.cplot:=Fcplot;
-f_config_chart1.cplot:=Fcplot;
-f_config_catalog1.cplot:=Fcplot;
-f_config_solsys1.cplot:=Fcplot;
-f_config_display1.cplot:=Fcplot;
-f_config_pictures1.cplot:=Fcplot;
-f_config_system1.cplot:=Fcplot;
+Fcplot:=value;
+f_config_time1.cplot:=@Fcplot;
+f_config_observatory1.cplot:=@Fcplot;
+f_config_chart1.cplot:=@Fcplot;
+f_config_catalog1.cplot:=@Fcplot;
+f_config_solsys1.cplot:=@Fcplot;
+f_config_display1.cplot:=@Fcplot;
+f_config_pictures1.cplot:=@Fcplot;
+f_config_system1.cplot:=@Fcplot;
 end;
 
-procedure Tf_config.SetCmain(value: Tconf_main);
+procedure Tf_config.SetCmain(value: conf_main);
 begin
-Fcmain.Assign(value);
-f_config_time1.cmain:=Fcmain;
-f_config_observatory1.cmain:=Fcmain;
-f_config_chart1.cmain:=Fcmain;
-f_config_catalog1.cmain:=Fcmain;
-f_config_solsys1.cmain:=Fcmain;
-f_config_display1.cmain:=Fcmain;
-f_config_pictures1.cmain:=Fcmain;
-f_config_system1.cmain:=Fcmain;
-f_config_internet1.cmain:=Fcmain;
+Fcmain:=value;
+f_config_time1.cmain:=@Fcmain;
+f_config_observatory1.cmain:=@Fcmain;
+f_config_chart1.cmain:=@Fcmain;
+f_config_catalog1.cmain:=@Fcmain;
+f_config_solsys1.cmain:=@Fcmain;
+f_config_display1.cmain:=@Fcmain;
+f_config_pictures1.cmain:=@Fcmain;
+f_config_system1.cmain:=@Fcmain;
 end;
 
-procedure Tf_config.SetCdss(value: Tconf_dss);
+procedure Tf_config.SetCdss(value: conf_dss);
 begin
-Fcdss.Assign(value);
-f_config_pictures1.cdss:=Fcdss;
-f_config_internet1.cdss:=Fcdss;
+Fcdss:=value;
+f_config_pictures1.cdss:=@Fcdss;
 end;
 
 procedure Tf_config.applyClick(Sender: TObject);
 begin
-ActivateChanges;
 if assigned(FApplyConfig) then FApplyConfig(Self);
 end;
+
+initialization
+  {$i pu_config.lrs}
 
 end.
 

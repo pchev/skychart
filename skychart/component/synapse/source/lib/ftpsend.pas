@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 004.000.000 |
+| Project : Ararat Synapse                                       | 003.004.005 |
 |==============================================================================|
 | Content: FTP client                                                          |
 |==============================================================================|
-| Copyright (c)1999-2011, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 1999-2010.               |
+| Portions created by Lukas Gebauer are Copyright (c) 1999-2005.               |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -53,22 +53,17 @@ Used RFC: RFC-959, RFC-2228, RFC-2428
 {$ENDIF}
 {$H+}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit ftpsend;
 
 interface
 
 uses
   SysUtils, Classes,
-  blcksock, synautil, synaip, synsock;
+  blcksock, synautil, synsock;
 
 const
-  cFtpProtocol = '21';
-  cFtpDataProtocol = '20';
+  cFtpProtocol = 'ftp';
+  cFtpDataProtocol = 'ftp-data';
 
   {:Terminating value for TLogonActions}
   FTP_OK = 255;
@@ -89,17 +84,18 @@ type
    listing of FTP server.}
   TFTPListRec = class(TObject)
   private
-    FFileName: String;
+    FFileName: string;
     FDirectory: Boolean;
     FReadable: Boolean;
-    FFileSize: int64;
+    FFileSize: Longint;
     FFileTime: TDateTime;
     FOriginalLine: string;
     FMask: string;
-    FPermission: String;
+    FPermission: string;
   public
     {: You can assign another TFTPListRec to this object.}
     procedure Assign(Value: TFTPListRec); virtual;
+  published
     {:name of file}
     property FileName: string read FFileName write FFileName;
     {:if name is subdirectory not file.}
@@ -107,7 +103,7 @@ type
     {:if you have rights to read}
     property Readable: Boolean read FReadable write FReadable;
     {:size of file in bytes}
-    property FileSize: int64 read FFileSize write FFileSize;
+    property FileSize: Longint read FFileSize write FFileSize;
     {:date and time of file. Local server timezone is used. Any timezone
      conversions was not done!}
     property FileTime: TDateTime read FFileTime write FFileTime;
@@ -139,16 +135,16 @@ type
     YearTime: string;
     Year: string;
     Hours: string;
-    HoursModif: Ansistring;
+    HoursModif: string;
     Minutes: string;
     Seconds: string;
-    Size: Ansistring;
-    Permissions: Ansistring;
+    Size: string;
+    Permissions: string;
     DirFlag: string;
     function GetListItem(Index: integer): TFTPListRec; virtual;
     function ParseEPLF(Value: string): Boolean; virtual;
     procedure ClearStore; virtual;
-    function ParseByMask(Value, NextValue, Mask: ansistring): Integer; virtual;
+    function ParseByMask(Value, NextValue, Mask: string): Integer; virtual;
     function CheckValues: Boolean; virtual;
     procedure FillRecord(const Value: TFTPListRec); virtual;
   public
@@ -228,7 +224,7 @@ type
     FFullSSL: Boolean;
     function Auth(Mode: integer): Boolean; virtual;
     function Connect: Boolean; virtual;
-    function InternalStor(const Command: string; RestoreAt: int64): Boolean; virtual;
+    function InternalStor(const Command: string; RestoreAt: integer): Boolean; virtual;
     function DataSocket: Boolean; virtual;
     function AcceptDataSocket: Boolean; virtual;
     procedure DoStatus(Response: Boolean; const Value: string); virtual;
@@ -308,7 +304,7 @@ type
 
     {:Return size of Filename file on FTP server. If command failed (i.e. not
      implemented), return -1.}
-    function FileSize(const FileName: string): int64; virtual;
+    function FileSize(const FileName: string): integer; virtual;
 
     {:Send NOOP command to FTP server for preserve of disconnect by inactivity
      timeout.}
@@ -318,9 +314,6 @@ type
     function ChangeWorkingDir(const Directory: string): Boolean; virtual;
 
     {:walk to upper directory on FTP server.}
-    function ChangeToParentDir: Boolean; virtual;
-
-    {:walk to root directory on FTP server. (May not work with all servers properly!)}
     function ChangeToRootDir: Boolean; virtual;
 
     {:Delete Directory on FTP server.}
@@ -469,10 +462,8 @@ begin
   FFullResult := TStringList.Create;
   FDataStream := TMemoryStream.Create;
   FSock := TTCPBlockSocket.Create;
-  FSock.Owner := self;
   FSock.ConvertLineEnd := True;
   FDSock := TTCPBlockSocket.Create;
-  FDSock.Owner := self;
   FFtpList := TFTPList.Create;
   FTimeout := 300000;
   FTargetPort := cFtpProtocol;
@@ -514,7 +505,7 @@ end;
 
 function TFTPSend.ReadResult: Integer;
 var
-  s, c: AnsiString;
+  s, c: string;
 begin
   FFullResult.Clear;
   c := '';
@@ -824,7 +815,7 @@ end;
 procedure TFTPSend.ParseRemoteEPSV(Value: string);
 var
   n: integer;
-  s, v: AnsiString;
+  s, v: string;
 begin
   s := SeparateRight(Value, '(');
   s := Trim(SeparateLeft(s, ')'));
@@ -852,7 +843,7 @@ begin
       s := '2'
     else
       s := '1';
-    if FSock.IP6used and not(FForceOldPort) and ((FTPCommand('EPSV ' + s) div 100) = 2) then
+    if not(FForceOldPort) and ((FTPCommand('EPSV ' + s) div 100) = 2) then
     begin
       ParseRemoteEPSV(FResultString);
     end
@@ -881,13 +872,13 @@ begin
     FDSock.Bind(FSock.GetLocalSinIP, s);
     if FDSock.LastError <> 0 then
       Exit;
-    FDSock.SetLinger(True, 10000);
+    FDSock.SetLinger(True, 10);
     FDSock.Listen;
     FDSock.GetSins;
     FDataIP := FDSock.GetLocalSinIP;
     FDataIP := FDSock.ResolveName(FDataIP);
     FDataPort := IntToStr(FDSock.GetLocalSinPort);
-    if FSock.IP6used and (not FForceOldPort) then
+    if not FForceOldPort then
     begin
       if IsIp6(FDataIP) then
         s := '2'
@@ -989,11 +980,11 @@ begin
   Result := DataRead(FDataStream);
   if (not NameList) and Result then
   begin
-    FDataStream.Position := 0;
+    FDataStream.Seek(0, soFromBeginning);
     FFTPList.Lines.LoadFromStream(FDataStream);
     FFTPList.ParseLines;
   end;
-  FDataStream.Position := 0;
+  FDataStream.Seek(0, soFromBeginning);
 end;
 
 function TFTPSend.RetrieveFile(const FileName: string; Restore: Boolean): Boolean;
@@ -1022,7 +1013,7 @@ begin
       FTPCommand('TYPE A');
     if Restore then
     begin
-      RetrStream.Position := RetrStream.Size;
+      RetrStream.Seek(0, soFromEnd);
       if (FTPCommand('REST ' + IntToStr(RetrStream.Size)) div 100) <> 3 then
         Exit;
     end
@@ -1033,17 +1024,17 @@ begin
       Exit;
     Result := DataRead(RetrStream);
     if not FDirectFile then
-      RetrStream.Position := 0;
+      RetrStream.Seek(0, soFromBeginning);
   finally
     if FDirectFile then
       RetrStream.Free;
   end;
 end;
 
-function TFTPSend.InternalStor(const Command: string; RestoreAt: int64): Boolean;
+function TFTPSend.InternalStor(const Command: string; RestoreAt: integer): Boolean;
 var
   SendStream: TStream;
-  StorSize: int64;
+  StorSize: integer;
 begin
   Result := False;
   if FDirectFile then
@@ -1075,7 +1066,7 @@ begin
     if FCanResume then
       if (FTPCommand('REST ' + IntToStr(RestoreAt)) div 100) <> 3 then
         Exit;
-    SendStream.Position := RestoreAt;
+    SendStream.Seek(RestoreAt, soFromBeginning);
     if (FTPCommand(Command) div 100) <> 1 then
       Exit;
     Result := DataWrite(SendStream);
@@ -1087,7 +1078,7 @@ end;
 
 function TFTPSend.StoreFile(const FileName: string; Restore: Boolean): Boolean;
 var
-  RestoreAt: int64;
+  RestoreAt: integer;
 begin
   Result := False;
   if FileName = '' then
@@ -1113,7 +1104,7 @@ begin
   Result := False;
   if FileName = '' then
     Exit;
-  Result := InternalStor('APPE ' + FileName, 0);
+  Result := InternalStor('APPE '+FileName, 0);
 end;
 
 function TFTPSend.NoOp: Boolean;
@@ -1134,7 +1125,7 @@ begin
   Result := (FTPCommand('DELE ' + FileName) div 100) = 2;
 end;
 
-function TFTPSend.FileSize(const FileName: string): int64;
+function TFTPSend.FileSize(const FileName: string): integer;
 var
   s: string;
 begin
@@ -1143,11 +1134,7 @@ begin
   begin
     s := Trim(SeparateRight(ResultString, ' '));
     s := Trim(SeparateLeft(s, ' '));
-    {$IFDEF VER100}
-      Result := StrToIntDef(s, -1);
-    {$ELSE}
-      Result := StrToInt64Def(s, -1);
-    {$ENDIF}
+    Result := StrToIntDef(s, -1);
   end;
 end;
 
@@ -1156,14 +1143,9 @@ begin
   Result := (FTPCommand('CWD ' + Directory) div 100) = 2;
 end;
 
-function TFTPSend.ChangeToParentDir: Boolean;
-begin
-  Result := (FTPCommand('CDUP') div 100) = 2;
-end;
-
 function TFTPSend.ChangeToRootDir: Boolean;
 begin
-  Result := ChangeWorkingDir('/');
+  Result := (FTPCommand('CDUP') div 100) = 2;
 end;
 
 function TFTPSend.DeleteDir(const Directory: string): Boolean;
@@ -1238,7 +1220,6 @@ begin
   //VMS
   FMasks.add('v*$  DD TTT YYYY hh mm');
   FMasks.add('v*$!DD TTT YYYY hh mm');
-  FMasks.add('n*$                 YYYY MM DD hh mm$S*');
   //AS400
   FMasks.add('!S*$MM DD YY hh mm ss !n*');
   FMasks.add('!S*$DD MM YY hh mm ss !n*');
@@ -1265,7 +1246,7 @@ begin
   //tandem
   FMasks.add('nnnnnnnn                   SSSSSSS DD TTT YY hh mm ss');
   //MVS
-  FMasks.add('-             YYYY MM DD                     SSSSS   d=O n*');
+  FMasks.add('-             YYYY MM DD                     SSSSS   d=O  n*');
   //BullGCOS8
   FMasks.add('             $S* MM DD YY hh mm ss  !n*');
   FMasks.add('d            $S* MM DD YY           !n*');
@@ -1346,11 +1327,11 @@ begin
   DirFlag := '';
 end;
 
-function TFTPList.ParseByMask(Value, NextValue, Mask: AnsiString): Integer;
+function TFTPList.ParseByMask(Value, NextValue, Mask: string): Integer;
 var
   Ivalue, IMask: integer;
-  MaskC, LastMaskC: AnsiChar;
-  c: AnsiChar;
+  MaskC, LastMaskC: Char;
+  c: char;
   s: string;
 begin
   ClearStore;
@@ -1680,11 +1661,7 @@ begin
     x := StrToIntDef(BlockSize, 1)
   else
     x := 1;
-  {$IFDEF VER100}
   Value.FileSize := x * StrToIntDef(Size, 0);
-  {$ELSE}
-  Value.FileSize := x * StrToInt64Def(Size, 0);
-  {$ENDIF}
 
   DecodeDate(Date,myear,mmonth,mday);
   mhours := 0;
@@ -1761,25 +1738,21 @@ begin
     if Value[1] = '+' then
     begin
       os := Value;
-      Delete(Value, 1, 1);
       flr := TFTPListRec.create;
-      flr.FileName := SeparateRight(Value, #9);
       s := Fetch(Value, ',');
       while s <> '' do
       begin
         if s[1] = #9 then
-          Break;
+        begin
+          flr.FileName := Copy(s, 2, Length(s) - 1);
+        end;
         case s[1] of
           '/':
             flr.Directory := true;
           'r':
             flr.Readable := true;
           's':
-            {$IFDEF VER100}
             flr.FileSize := StrToIntDef(Copy(s, 2, Length(s) - 1), 0);
-            {$ELSE}
-            flr.FileSize := StrToInt64Def(Copy(s, 2, Length(s) - 1), 0);
-            {$ENDIF}
           'm':
             flr.FileTime := (StrToIntDef(Copy(s, 2, Length(s) - 1), 0) / 86400)
               + 25569;

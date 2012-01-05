@@ -1,6 +1,6 @@
 unit pu_image;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -24,17 +24,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 interface
 
-uses Math, u_util, u_translation,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, Buttons, ComCtrls, cu_zoomimage,
+uses Math,
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, Buttons, ComCtrls, ToolWin, cu_zoomimage,
   LResources;
 
 type
-
-  { Tf_image }
-
   Tf_image = class(TForm)
-    ButtonPrint: TButton;
     Image1: TZoomImage;
     Panel1: TPanel;
     VScrollBar: TScrollBar;
@@ -62,7 +58,6 @@ type
     { Public declarations }
     titre,labeltext: string;
     imagewidth,imageheight: integer;
-    procedure SetLang;
     Procedure LoadImage(f : string);
     Procedure ZoomN(n:double);
     Procedure Zoomplus;
@@ -74,19 +69,9 @@ var
   f_image: Tf_image;
 
 implementation
-{$R *.lfm}
-
-procedure Tf_image.SetLang;
-begin
-Button1.caption:=rsClose;
-Button2.caption:=rsZoom;
-Button3.caption:=rsZoom2;
-ButtonPrint.Caption:=rsPrint;
-end;
 
 Procedure Tf_image.LoadImage(f : string);
 begin
- image1.Zoom:=1;
  image1.picture.LoadFromFile(f);
  imagewidth:=image1.picture.width;
  imageheight:=image1.picture.height;
@@ -102,7 +87,7 @@ end;
 
 Procedure Tf_image.Zoomplus;
 begin
-   Image1.Zoom:=sqrt(2)*Image1.Zoom;
+   Image1.Zoom:=1.5*Image1.Zoom;
    Image1.Draw;
    SetScrollBar;
    Caption:=titre+' x'+formatfloat('0.#',Image1.Zoom);
@@ -110,7 +95,7 @@ end;
 
 Procedure Tf_image.Zoommoins;
 begin
-   Image1.Zoom:=Image1.Zoom/sqrt(2);
+   Image1.Zoom:=Image1.Zoom/1.5;
    if abs(Image1.Zoom-1)<0.2 then Image1.Zoom:=1;
    Image1.Draw;
    SetScrollBar;
@@ -157,11 +142,9 @@ end;
 
 procedure Tf_image.FormCreate(Sender: TObject);
 begin
-SetLang;
 Image1.Align:=alClient;
 titre:='';
 labeltext:='';
-VScrollBar.Width:=15;
 end;
 
 procedure Tf_image.FormResize(Sender: TObject);
@@ -177,11 +160,11 @@ begin
 try
 ScrollLock:=true;
 scrollw:=min(Image1.SizeX-1,round(Image1.Width/Image1.zoom)) div 2;
-Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw,1);
+Hscrollbar.SetParams(Hscrollbar.Position, scrollw, Image1.SizeX-scrollw);
 Hscrollbar.LargeChange:=scrollw;
 Hscrollbar.SmallChange:=scrollw div 10;
 scrollh:=min(Image1.SizeY-1,round(Image1.Height/Image1.zoom)) div 2;
-Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh,1);
+Vscrollbar.SetParams(Vscrollbar.Position, scrollh, Image1.SizeY-scrollh);
 Vscrollbar.LargeChange:=scrollh;
 Vscrollbar.SmallChange:=scrollh div 10;
 finally
@@ -202,5 +185,8 @@ if scrolllock then exit;
 Image1.Ycentre:=VScrollBar.Position;
 Image1.Draw;
 end;
+
+initialization
+  {$i pu_image.lrs}
 
 end.

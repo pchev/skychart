@@ -11,11 +11,11 @@ unit sqlsupport;
 
 interface
 
-uses {$IFDEF MSWINDOWS}Windows, {$ENDIF} Classes, SysUtils{, DateUtils}{, System};
+uses {$IFDEF WIN32}Windows, {$ENDIF} Classes, SysUtils{, DateUtils}{, System};
 //{$IFDEF FPC}, LCLIntf{$ENDIF};
 
 type
-  TDBMajorType = (dbANSI, dbMySQL, dbSQLite, dbODBC, dbJanSQL);
+  TDBMajorType = (dbANSI, dbMySQL, dbSQLite, dbODBC);
   TDBSubType = (dbDefault, dbSqlite2, dbSqlite3, dbSqlite3W, dbODBC32);
 
 const
@@ -112,14 +112,14 @@ begin
 end;
 
 function SystemErrorMsg(ErrNo: Integer = -1): String;
-{$IFDEF MSWINDOWS}
+{$IFDEF WIN32}
 var
   buf: PChar;
   size: Integer;
   MsgLen: Integer;
   {$ENDIF}
 begin
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WIN32}
   size := 256;
   GetMem(buf, size);
   If ErrNo = - 1 then

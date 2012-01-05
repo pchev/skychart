@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.005.003 |
+| Project : Ararat Synapse                                       | 001.005.000 |
 |==============================================================================|
 | Content: NNTP client                                                         |
 |==============================================================================|
-| Copyright (c)1999-2011, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 1999-2011.               |
+| Portions created by Lukas Gebauer are Copyright (c) 1999-2005.               |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -53,12 +53,6 @@ Used RFC: RFC-977, RFC-2980
 {$ENDIF}
 {$H+}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-  {$WARN SUSPICIOUS_TYPECAST OFF}
-{$ENDIF}
-
 unit nntpsend;
 
 interface
@@ -68,7 +62,7 @@ uses
   blcksock, synautil;
 
 const
-  cNNTPProtocol = '119';
+  cNNTPProtocol = 'nntp';
 
 type
 
@@ -201,7 +195,6 @@ constructor TNNTPSend.Create;
 begin
   inherited Create;
   FSock := TTCPBlockSocket.Create;
-  FSock.Owner := self;
   FData := TStringList.Create;
   FDataToSend := TStringList.Create;
   FNNTPcap := TStringList.Create;
@@ -292,13 +285,11 @@ begin
   if not Connect then
     Exit;
   Result := (ReadResult div 100) = 2;
+  ListExtensions;
+  FNNTPcap.Assign(Fdata);
   if Result then
-  begin
-    ListExtensions;
-    FNNTPcap.Assign(Fdata);
     if (not FullSSL) and FAutoTLS and (FindCap('STARTTLS') <> '') then
       Result := StartTLS;
-  end;
   if (FUsername <> '') and Result then
   begin
     FSock.SendString('AUTHINFO USER ' + FUsername + CRLF);

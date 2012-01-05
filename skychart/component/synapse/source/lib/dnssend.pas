@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.007.006 |
+| Project : Ararat Synapse                                       | 002.007.000 |
 |==============================================================================|
 | Content: DNS client                                                          |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2004, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2000-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2000-2004.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -54,21 +54,16 @@ Used RFC: RFC-1035, RFC-1183, RFC1706, RFC1712, RFC2163, RFC2230
 {$Q-}
 {$H+}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit dnssend;
 
 interface
 
 uses
   SysUtils, Classes,
-  blcksock, synautil, synaip, synsock;
+  blcksock, synautil, synsock;
 
 const
-  cDnsProtocol = '53';
+  cDnsProtocol = 'domain';
 
   QTYPE_A = 1;
   QTYPE_NS = 2;
@@ -125,11 +120,13 @@ type
     FSock: TUDPBlockSocket;
     FTCPSock: TTCPBlockSocket;
     FUseTCP: Boolean;
-    FAnswerInfo: TStringList;
+    FAnsferInfo: TStringList;
     FNameserverInfo: TStringList;
     FAdditionalInfo: TStringList;
     FAuthoritative: Boolean;
     FTruncated: Boolean;
+    function ReverseIP(Value: AnsiString): AnsiString;
+    function ReverseIP6(Value: AnsiString): AnsiString;
     function CompressName(const Value: AnsiString): AnsiString;
     function CodeHeader: AnsiString;
     function CodeQuery(const Name: AnsiString; QType: Integer): AnsiString;
@@ -180,16 +177,16 @@ type
       4-not implemented, 5-refused.}
     property RCode: Integer read FRCode;
 
-    {:@True, if answer is authoritative.}
+    {:@True, if ansfer is authoritative.}
     property Authoritative: Boolean read FAuthoritative;
 
-    {:@True, if answer is truncated to 512 bytes.}
+    {:@True, if ansfer is truncated to 512 bytes.}
     property Truncated: Boolean read FTRuncated;
 
     {:Detailed informations from name server reply. One record per line. Record
      have comma delimited entries with type number, TTL and data filelds.
      This information contains detailed information about query reply.}
-    property AnswerInfo: TStringList read FAnswerInfo;
+    property AnsferInfo: TStringList read FAnsferInfo;
 
     {:Detailed informations from name server reply. One record per line. Record
      have comma delimited entries with type number, TTL and data filelds.
@@ -217,13 +214,11 @@ constructor TDNSSend.Create;
 begin
   inherited Create;
   FSock := TUDPBlockSocket.Create;
-  FSock.Owner := self;
   FTCPSock := TTCPBlockSocket.Create;
-  FTCPSock.Owner := self;
   FUseTCP := False;
   FTimeout := 10000;
   FTargetPort := cDnsProtocol;
-  FAnswerInfo := TStringList.Create;
+  FAnsferInfo := TStringList.Create;
   FNameserverInfo := TStringList.Create;
   FAdditionalInfo := TStringList.Create;
   Randomize;
@@ -231,12 +226,50 @@ end;
 
 destructor TDNSSend.Destroy;
 begin
-  FAnswerInfo.Free;
+  FAnsferInfo.Free;
   FNameserverInfo.Free;
   FAdditionalInfo.Free;
   FTCPSock.Free;
   FSock.Free;
   inherited Destroy;
+end;
+
+function TDNSSend.ReverseIP(Value: AnsiString): AnsiString;
+var
+  x: Integer;
+begin
+  Result := '';
+  repeat
+    x := LastDelimiter('.', Value);
+    Result := Result + '.' + Copy(Value, x + 1, Length(Value) - x);
+    Delete(Value, x, Length(Value) - x + 1);
+  until x < 1;
+  if Length(Result) > 0 then
+    if Result[1] = '.' then
+      Delete(Result, 1, 1);
+end;
+
+function TDNSSend.ReverseIP6(Value: AnsiString): AnsiString;
+var
+  ip6: TSockAddrIn6;
+begin
+  ip6 := FSock.StrToIP6(Value);
+  Result := ip6.sin6_addr.S_un_b.s_b16
+    + '.' + ip6.sin6_addr.S_un_b.s_b15
+    + '.' + ip6.sin6_addr.S_un_b.s_b14
+    + '.' + ip6.sin6_addr.S_un_b.s_b13
+    + '.' + ip6.sin6_addr.S_un_b.s_b12
+    + '.' + ip6.sin6_addr.S_un_b.s_b11
+    + '.' + ip6.sin6_addr.S_un_b.s_b10
+    + '.' + ip6.sin6_addr.S_un_b.s_b9
+    + '.' + ip6.sin6_addr.S_un_b.s_b8
+    + '.' + ip6.sin6_addr.S_un_b.s_b7
+    + '.' + ip6.sin6_addr.S_un_b.s_b6
+    + '.' + ip6.sin6_addr.S_un_b.s_b5
+    + '.' + ip6.sin6_addr.S_un_b.s_b4
+    + '.' + ip6.sin6_addr.S_un_b.s_b3
+    + '.' + ip6.sin6_addr.S_un_b.s_b2
+    + '.' + ip6.sin6_addr.S_un_b.s_b1;
 end;
 
 function TDNSSend.CompressName(const Value: AnsiString): AnsiString;
@@ -253,13 +286,13 @@ begin
     for n := 1 to Length(Value) do
       if Value[n] = '.' then
       begin
-        Result := Result + AnsiChar(Length(s)) + s;
+        Result := Result + Char(Length(s)) + s;
         s := '';
       end
       else
         s := s + Value[n];
     if s <> '' then
-      Result := Result + AnsiChar(Length(s)) + s;
+      Result := Result + Char(Length(s)) + s;
     Result := Result + #0;
   end;
 end;
@@ -330,7 +363,7 @@ var
   RType, Len, j, x, y, z, n: Integer;
   R: AnsiString;
   t1, t2, ttl: integer;
-  ip6: TIp6bytes;
+  ip6: TSockAddrIn6;
 begin
   Result := '';
   R := '';
@@ -360,9 +393,28 @@ begin
         end;
       QTYPE_AAAA:
         begin
-          for n := 0 to 15 do
-            ip6[n] := ord(FBuffer[j + n]);
-          R := IP6ToStr(ip6);
+//          FillChar(ip6, SizeOf(ip6), 0);
+          ip6.sin6_addr.S_un_b.s_b1 := Char(FBuffer[j]);
+          ip6.sin6_addr.S_un_b.s_b2 := Char(FBuffer[j + 1]);
+          ip6.sin6_addr.S_un_b.s_b3 := Char(FBuffer[j + 2]);
+          ip6.sin6_addr.S_un_b.s_b4 := Char(FBuffer[j + 3]);
+          ip6.sin6_addr.S_un_b.s_b5 := Char(FBuffer[j + 4]);
+          ip6.sin6_addr.S_un_b.s_b6 := Char(FBuffer[j + 5]);
+          ip6.sin6_addr.S_un_b.s_b7 := Char(FBuffer[j + 6]);
+          ip6.sin6_addr.S_un_b.s_b8 := Char(FBuffer[j + 7]);
+          ip6.sin6_addr.S_un_b.s_b9 := Char(FBuffer[j + 8]);
+          ip6.sin6_addr.S_un_b.s_b10 := Char(FBuffer[j + 9]);
+          ip6.sin6_addr.S_un_b.s_b11 := Char(FBuffer[j + 10]);
+          ip6.sin6_addr.S_un_b.s_b12 := Char(FBuffer[j + 11]);
+          ip6.sin6_addr.S_un_b.s_b13 := Char(FBuffer[j + 12]);
+          ip6.sin6_addr.S_un_b.s_b14 := Char(FBuffer[j + 13]);
+          ip6.sin6_addr.S_un_b.s_b15 := Char(FBuffer[j + 14]);
+          ip6.sin6_addr.S_un_b.s_b16 := Char(FBuffer[j + 15]);
+          ip6.sin6_family := word(AF_INET6);
+          ip6.sin6_port := 0;
+          ip6.sin6_flowinfo := 0;
+          ip6.sin6_scope_id := 0;
+          R := FSock.IP6ToStr(ip6);
         end;
       QTYPE_NS, QTYPE_MD, QTYPE_MF, QTYPE_CNAME, QTYPE_MB,
         QTYPE_MG, QTYPE_MR, QTYPE_PTR, QTYPE_X25, QTYPE_NSAP,
@@ -462,7 +514,7 @@ var
 begin
   Result := False;
   Reply.Clear;
-  FAnswerInfo.Clear;
+  FAnsferInfo.Clear;
   FNameserverInfo.Clear;
   FAdditionalInfo.Clear;
   FAuthoritative := False;
@@ -490,7 +542,7 @@ begin
       if (ancount > 0) and (Length(Buf) > i) then // decode reply
         for n := 1 to ancount do
         begin
-          s := DecodeResource(i, FAnswerInfo, QType);
+          s := DecodeResource(i, FAnsferInfo, QType);
           if s <> '' then
             Reply.Add(s);
         end;
@@ -536,11 +588,11 @@ begin
     try
       repeat
         b := DecodeResponse(FBuffer, Reply, QType);
-        if (t.Count > 1) and (AnswerInfo.Count > 0) then  //find end of transfer
-          b := b and (t[0] <> AnswerInfo[AnswerInfo.count - 1]);
+        if (t.Count > 1) and (AnsferInfo.Count > 0) then  //find end of transfer
+          b := b and (t[0] <> AnsferInfo[AnsferInfo.count - 1]);
         if b then
         begin
-          t.AddStrings(AnswerInfo);
+          t.AddStrings(AnsferInfo);
           FBuffer := RecvTCPResponse(WorkSock);
           if FBuffer = '' then
             Break;

@@ -1,22 +1,11 @@
 unit MultiDoc;
 
-{ Copyright (C) 2007 Patrick Chevalley
+{ Copyright (C) 2005 Patrick Chevalley
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at your
-  option) any later version with the following modification:
-
-  As a special exception, the copyright holders of this library give you
-  permission to link this library with independent modules to produce an
-  executable, regardless of the license terms of these independent modules,and
-  to copy and distribute the resulting executable under terms of your choice,
-  provided that you also meet, for each linked independent module, the terms
-  and conditions of the license of that module. An independent module is a
-  module which is not derived from or based on this library. If you modify
-  this library, you may extend this exception to your version of the library,
-  but you are not obligated to do so. If you do not wish to do so, delete this
-  exception statement from your version.
+  option) any later version.
 
   This program is distributed in the hope that it will be useful, but WITHOUT
   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -32,8 +21,7 @@ unit MultiDoc;
 
 interface
 
-uses
-  LCLIntf,LCLType,ChildDoc,
+uses ChildDoc,
   Classes, SysUtils, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus, GraphType;
 
 type
@@ -60,7 +48,7 @@ type
    MDIChildren[i]  -> MultiDoc1.Childs[i].DockedObject
                    or MultiDoc1.Childs[i]
 }
-  TMultiDoc = class(TCustomPanel)
+  TMultiDoc = class(TPanel)
   private
     { Private declarations }
     FChildIndex,FActiveChild: integer;
@@ -71,10 +59,6 @@ type
     FOnResize : TNotifyEvent;
     FonActiveChildChange : TNotifyEvent;
     FChild: ChildArray;
-    DestroyTimer:TTimer;
-    DestroyPending: array of TChildDoc;
-    DestroyPendingCount: integer;
-    DestroyCriticalSection: TCriticalSection;
     FWindowList: TmenuItem;
     FWindowListOffset:integer;
     DefaultPos:TPoint;
@@ -97,7 +81,6 @@ type
     procedure SetWindowList(value:TmenuItem);
     procedure SetWireframeMoveResize(value:boolean);
     procedure SetResize(Sender: TObject);
-    procedure DestroyChildTimer(Sender: TObject);
   protected
     { Protected declarations }
   public
@@ -112,10 +95,6 @@ type
      Create a new child window
     }
     function NewChild:TChildDoc;
-    {
-     Focus next child on list
-    }
-    function NexChild:integer;
     {
      Cascade the windows
     }
@@ -133,18 +112,6 @@ type
     }
     procedure SetActiveChild(n:integer);
     {
-     The number of child actually defined
-    }
-    property ChildCount: integer read GetChildCount;
-    {
-     The child that as focus
-    }
-    property ActiveChild: TChildDoc read GetActiveChild;
-    {
-     The form contained in ActiveChild, a shortcut for ActiveChild.DockedObject
-    }
-    property ActiveObject: TForm read GetActiveObject;
-    {
      The border and title color.
      Default value are from the current theme.
     }
@@ -157,6 +124,18 @@ type
      The menu that receive the list of child windows
     }
     property WindowList: TmenuItem read FWindowList write SetWindowList;
+    {
+     The number of child actually defined
+    }
+    property ChildCount: integer read GetChildCount;
+    {
+     The child that as focus
+    }
+    property ActiveChild: TChildDoc read GetActiveChild;
+    {
+     The form contained in ActiveChild, a shortcut for ActiveChild.DockedObject
+    }
+    property ActiveObject: TForm read GetActiveObject;
     {
      Maximise the child windows
     }
@@ -192,57 +171,7 @@ type
     {
      When resizings
     }
-    property OnResize: TNotifyEvent read FOnResize write FOnResize;
-    published
-    property Align;
-    property Alignment;
-    property Anchors;
-    property AutoSize;
-    property BorderSpacing;
-    property BevelInner;
-    property BevelOuter;
-    property BevelWidth;
-    property BorderStyle;
-    property Caption;
-    property ChildSizing;
-    property ClientHeight;
-    property ClientWidth;
-    property Color;
-    property Constraints;
-    property DockSite;
-    property DragCursor;
-    property DragKind;
-    property DragMode;
-    property Enabled;
-    property Font;
-    property FullRepaint;
-    property ParentColor;
-    property ParentFont;
-    property ParentShowHint;
-    property PopupMenu;
-    property ShowHint;
-    property TabOrder;
-    property TabStop;
-    property UseDockManager default True;
-    property Visible;
-    property OnClick;
-    property OnDockDrop;
-    property OnDockOver;
-    property OnDblClick;
-    property OnDragDrop;
-    property OnDragOver;
-    property OnEndDock;
-    property OnEndDrag;
-    property OnEnter;
-    property OnExit;
-    property OnGetSiteInfo;
-    property OnGetDockCaption;
-    property OnMouseDown;
-    property OnMouseMove;
-    property OnMouseUp;
-    property OnStartDock;
-    property OnStartDrag;
-    property OnUnDock;
+    property OnResize : TNotifyEvent read FOnResize write FOnResize;
   end;
 
 procedure Register;
@@ -258,20 +187,18 @@ end;
 constructor TMultiDoc.Create(AOwner:TComponent);
 begin
 inherited Create(AOwner);
-DoubleBuffered:=true;
 FChildIndex:=-1;
 FActiveChild:=-1;
 FWindowListOffset:=0;
 setlength(FChild,0);
 color:=clBlack;
-//align:=alClient;
+align:=alClient;
 BevelOuter:=bvNone;
-BevelWidth:=1;
 FBorderWidth:=3;  FTitleHeight:=12;
 FBorderColor:=clActiveCaption;
 FInactiveColor:=clInactiveCaption;
 FTitleColor:=clCaptionText;
-{$ifdef lclgtk}
+{$ifdef linux}
 FBorderColor:=$C00000;
 FInactiveColor:=clGray;
 FTitleColor:=clWhite;
@@ -279,19 +206,12 @@ FTitleColor:=clWhite;
 DefaultPos:=Point(0,0);
 FOnResize:=nil;
 Inherited onResize:=@SetResize;
-InitializeCriticalSection(DestroyCriticalSection);
-DestroyPendingCount:=0;
-SetLength(DestroyPending,DestroyPendingCount);
-DestroyTimer:=TTimer.Create(self);
-DestroyTimer.Enabled:=false;
-DestroyTimer.Interval:=100;
-DestroyTimer.OnTimer:=@DestroyChildTimer;
 end;
 
 destructor  TMultiDoc.Destroy;
+var i: integer;
 begin
 try
-DeleteCriticalSection(DestroyCriticalSection);
 FActiveChild:=-1;
 inherited destroy;
 except
@@ -305,7 +225,7 @@ inc(FChildIndex);
 setlength(FChild,FChildIndex+1);
 FChild[FChildIndex]:=TChildDoc.Create(self);
 FChild[FChildIndex].Parent:=self;
-FChild[FChildIndex].SetBorderWdth(BorderWidth);
+FChild[FChildIndex].SetBorderWidth(BorderWidth);
 FChild[FChildIndex].SetBorderColor(BorderColor);
 FChild[FChildIndex].SetTitleHeight(TitleHeight);
 FChild[FChildIndex].SetTitleColor(TitleColor);
@@ -338,19 +258,6 @@ end;
 result:=FChild[FChildIndex];
 end;
 
-function TMultiDoc.NexChild:integer;
-var i: integer;
-begin
-result:=0;
-if FChildIndex>0 then begin
-   i:=FActiveChild;
-   inc(i);
-   if i>FChildIndex then i:=0;
-   SetActiveChild(i);
-   result:=i;
-end;
-end;
-
 procedure TMultiDoc.FormCloseQuery(Sender: TObject; var CanClose: boolean);
 begin
 CanClose:= not (KeepLastChild and (ChildCount=1));
@@ -377,12 +284,7 @@ end;
 dec(FChildIndex);
 setlength(FChild,FChildIndex+1);
 SetActiveChild(FChildIndex);
-EnterCriticalSection(DestroyCriticalSection);
-inc(DestroyPendingCount);
-SetLength(DestroyPending,DestroyPendingCount);
-DestroyPending[DestroyPendingCount-1]:=TChildDoc(Sender);
-DestroyTimer.Enabled:=true;
-LeaveCriticalSection(DestroyCriticalSection);
+TChildDoc(Sender).Free;
 end;
 
 procedure TMultiDoc.ChildMaximize(Sender: TObject);
@@ -452,7 +354,6 @@ procedure TMultiDoc.SetActiveChild(n:integer);
 var i:integer;
 begin
 try
-if (n<0)or(n>FChildIndex) then exit;
 if (parent<>nil) and parent.visible and (n>=0) then begin
   FChild[n].BringToFront;
 end;
@@ -538,10 +439,8 @@ var i: integer;
 begin
 if Maximized then
   for i:=0 to FChildIndex do begin
-    FChild[i].top:=0;
-    FChild[i].left:=0;
-    FChild[i].Width:=ClientWidth;
-    FChild[i].Height:=ClientHeight;
+    FChild[i].Width:=clientwidth;
+    FChild[i].Height:=clientheight;
   end;
 if Assigned(FOnResize) then  FOnResize(Sender);
 end;
@@ -636,23 +535,6 @@ if ChildCount>0 then begin
    end;
   end;
 end;
-end;
-
-procedure TMultiDoc.DestroyChildTimer(Sender: TObject);
-var i,n: integer;
-begin
-DestroyTimer.Enabled:=false;
-EnterCriticalSection(DestroyCriticalSection);
-n:=DestroyPendingCount-1;
-if n>=0 then begin
-  for i:=0 to n do begin
-     if DestroyPending[i]<>nil then
-        DestroyPending[i].Free;
-  end;
-end;
-DestroyPendingCount:=0;
-SetLength(DestroyPending,DestroyPendingCount);
-LeaveCriticalSection(DestroyCriticalSection);
 end;
 
 end.

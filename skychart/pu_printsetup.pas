@@ -1,6 +1,6 @@
 unit pu_printsetup;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2004 Patrick Chevalley
@@ -28,23 +28,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, FileUtil,
+uses u_constant, u_util,
   SysUtils, Types, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Printers, ExtCtrls, enhedits, Buttons,
-  LResources, PrintersDlgs, EditBtn, LazHelpHTML;
+  LResources, PrintersDlgs;
 
 type
 
   { Tf_printsetup }
 
   Tf_printsetup = class(TForm)
-    Button1: TButton;
-    Label5: TLabel;
-    PaperSize: TComboBox;
-    printcmd: TFileNameEdit;
-    PrintDialog1: TPrintDialog;
-    PrinterSetupDialog1: TPrinterSetupDialog;
-    savepath: TDirectoryEdit;
     printmode: TRadioGroup;
     qtoption: TPanel;
     customoption: TPanel;
@@ -54,79 +47,67 @@ type
     Ok: TButton;
     Cancel: TButton;
     Label1: TLabel;
+    prtcolor: TRadioGroup;
+    prtorient: TRadioGroup;
     Label2: TLabel;
     Label3: TLabel;
+    PrintDialog1: TPrintDialog;
     prtres: TLongEdit;
     cmdreport: TEdit;
     Label4: TLabel;
+    Label5: TLabel;
+    savepath: TEdit;
     Label6: TLabel;
     Label7: TLabel;
-    procedure Button1Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
-    procedure PaperSizeChange(Sender: TObject);
-    procedure printcmdAcceptFileName(Sender: TObject; var Value: String);
+    printcmd: TEdit;
+    savepathsel: TBitBtn;
+    printcmdsel: TBitBtn;
+    OpenDialog1: TOpenDialog;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     procedure qtsetupClick(Sender: TObject);
     procedure printmodeClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure prtresChange(Sender: TObject);
     procedure printcmdChange(Sender: TObject);
-    procedure savepathExit(Sender: TObject);
+    procedure prtcolorClick(Sender: TObject);
+    procedure prtorientClick(Sender: TObject);
+    procedure savepathChange(Sender: TObject);
+    procedure savepathselClick(Sender: TObject);
+    procedure printcmdselClick(Sender: TObject);
   private
     { Private declarations }
-    lockupd: boolean;
     procedure updprtsetup;
   public
     { Public declarations }
-    cm: Tconf_main;
-    procedure SetLang;
+    cm: conf_main;
   end;
 
 var
   f_printsetup: Tf_printsetup;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_printsetup.SetLang;
-begin
-Caption:=rsPrinterSetup;
-Label2.caption:=rsPrinter;
-Label3.caption:=rsResolution;
-Label7.caption:=rsSelectTheSys;
-qtsetup.caption:=rsPrinterSetup;
-Label1.caption:=rsRasterResolu;
-Label4.caption:=rsCommandToUse;
-Label5.caption:=rsSize;
-Label6.caption:=rsPathToSaveTh;
-printmode.caption:=rsPrintMethod;
-printmode.Items[0]:=rsSystemPrinte;
-printmode.Items[1]:=rsPostscript;
-printmode.Items[2]:=rsBitmapFile;
-Ok.Caption:=rsOK;
-Cancel.Caption:=rsCancel;
-Button1.caption:=rsHelp;
-SetHelp(self,hlpMenuFile);
-end;
+
 
 procedure Tf_printsetup.FormShow(Sender: TObject);
 begin
-PaperSize.ItemIndex:=cm.Paper-1;
 updprtsetup;
+prtcolor.ItemIndex:=cm.PrintColor;
+if cm.PrintLandscape then prtorient.ItemIndex:=1
+                     else prtorient.ItemIndex:=0;
 end;
 
 procedure Tf_printsetup.updprtsetup;
 var i:integer;
     ok:boolean;
 begin
-try
-lockupd:=true;
-if (cm.PrintMethod=0)and(Printer.PrinterIndex<0) then begin
-  ShowMessage(rsNoPrinterFou);
-  cm.PrintMethod:=1;
-end;
 case cm.PrintMethod of
 0: begin
    printmode.ItemIndex:=0;
+   if cm.PrintColor=2 then begin
+      cm.PrintColor:=0;
+      prtcolor.ItemIndex:=cm.PrintColor;
+   end;
    customoption.Visible:=false;
    qtoption.Visible:=true;
    GetPrinterResolution(cm.prtname,i);
@@ -138,21 +119,18 @@ case cm.PrintMethod of
    customoption.Visible:=true;
    qtoption.Visible:=false;
    printcmd.Text:=cm.PrintCmd1;
-   savepath.Directory:=SysToUTF8(cm.PrintTmpPath);
+   savepath.Text:=cm.PrintTmpPath;
    prtres.Value:=cm.PrinterResolution;
-   if cm.PrintCmd1='' then cmdreport.text:=''
-   else begin
-     {$ifdef unix}
-       ok:=(0=exec('which '+cm.PrintCmd1));
-     {$endif}
-     {$ifdef mswindows}
-       ok:=Fileexists(cm.PrintCmd1);
-     {$endif}
-     if ok then begin
-        cmdreport.text:=rsCommandFound;
-     end else begin
-        cmdreport.text:=rsCommandNotFo;
-     end;
+   {$ifdef unix}
+     ok:=(0=exec('which pnmtops'));
+   {$endif}
+   {$ifdef mswindows}
+     ok:=Fileexists(slash(appdir)+'plugins\bmptops.bat');
+   {$endif}
+   if ok then begin
+      cmdreport.text:='Netpbm package OK.';
+   end else begin
+      cmdreport.text:='Please install Netpbm package.';
    end;
    end;
 2: begin
@@ -171,47 +149,19 @@ case cm.PrintMethod of
        ok:=Fileexists(cm.PrintCmd2);
      {$endif}
      if ok then begin
-        cmdreport.text:=rsCommandFound;
+        cmdreport.text:='Command found OK.';
      end else begin
-        cmdreport.text:=rsCommandNotFo;
+        cmdreport.text:='Command not found!';
      end;
    end;
    end;
-end;
-finally
-lockupd:=false;
 end;
 end;
 
 procedure Tf_printsetup.qtsetupClick(Sender: TObject);
 begin
-{$ifdef mswindows}
-  PrinterSetupDialog1.execute;
-{$endif}
-{$ifdef unix}
   PrintDialog1.execute;
-{$endif}
   updprtsetup;
-end;
-
-procedure Tf_printsetup.FormCreate(Sender: TObject);
-var i: integer;
-begin
-SetLang;
-PaperSize.Clear;
-for i:=1 to PaperNumber do begin
-   PaperSize.Items.Add(Papername[i]);
-end;
-end;
-
-procedure Tf_printsetup.Button1Click(Sender: TObject);
-begin
-  ShowHelp;
-end;
-
-procedure Tf_printsetup.PaperSizeChange(Sender: TObject);
-begin
-  cm.Paper:=PaperSize.ItemIndex+1;
 end;
 
 procedure Tf_printsetup.printmodeClick(Sender: TObject);
@@ -222,39 +172,59 @@ end;
 
 procedure Tf_printsetup.prtresChange(Sender: TObject);
 begin
-if lockupd then exit;
 cm.PrinterResolution:=prtres.value;
 end;
 
-////////// duplicate because of filenameedit onchange bug //////////////////////////
 procedure Tf_printsetup.printcmdChange(Sender: TObject);
 begin
-if lockupd then exit;
 case cm.PrintMethod of
 1: cm.PrintCmd1:=printcmd.Text;
 2: cm.PrintCmd2:=printcmd.Text;
 end;
 updprtsetup;
 end;
-procedure Tf_printsetup.printcmdAcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-if lockupd then exit;
-case cm.PrintMethod of
-1: cm.PrintCmd1:=value;
-2: cm.PrintCmd2:=value;
-end;
-updprtsetup;
-end;
-//////////////////////////////////////////
 
-procedure Tf_printsetup.savepathExit(Sender: TObject);
+procedure Tf_printsetup.savepathChange(Sender: TObject);
 begin
-if lockupd then exit;
-if DirectoryIsWritable(savepath.Text) then
-   cm.PrintTmpPath:=savepath.Text
-else
-   ShowMessage(rsInvalidPath+savepath.Text);
+cm.PrintTmpPath:=savepath.Text;
 end;
+
+procedure Tf_printsetup.prtcolorClick(Sender: TObject);
+begin
+if (cm.PrintMethod=0)and(prtcolor.ItemIndex=2) then prtcolor.ItemIndex:=0;
+cm.PrintColor:=prtcolor.ItemIndex;
+end;
+
+procedure Tf_printsetup.prtorientClick(Sender: TObject);
+begin
+cm.PrintLandscape:=(prtorient.ItemIndex=1);
+end;
+
+procedure Tf_printsetup.savepathselClick(Sender: TObject);
+begin
+  SelectDirectoryDialog1.Filename:=savepath.Text;
+  if SelectDirectoryDialog1.execute then
+     savepath.Text:=SelectDirectoryDialog1.Filename;
+end;
+
+procedure Tf_printsetup.printcmdselClick(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(printcmd.Text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   printcmd.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+initialization
+  {$i pu_printsetup.lrs}
 
 end.

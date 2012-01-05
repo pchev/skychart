@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.001.001 |
+| Project : Ararat Synapse                                       | 001.000.003 |
 |==============================================================================|
 | Content: SSL support by OpenSSL                                              |
 |==============================================================================|
-| Copyright (c)1999-2008, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2005-2008.                |
+| Portions created by Lukas Gebauer are Copyright (c)2005.                     |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -80,11 +80,6 @@ accepting of new connections!
 {$ENDIF}
 {$H+}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit ssl_openssl;
 
 interface
@@ -110,7 +105,7 @@ type
     function Init(server:Boolean): Boolean;
     function DeInit: Boolean;
     function Prepare(server:Boolean): Boolean;
-    function LoadPFX(pfxdata: ansistring): Boolean;
+    function LoadPFX(pfxdata: string): Boolean;
     function CreateSelfSignedCert(Host: string): Boolean; override;
   public
     {:See @inherited}
@@ -161,9 +156,9 @@ implementation
 {==============================================================================}
 
 {$IFNDEF CIL}
-function PasswordCallback(buf:PAnsiChar; size:Integer; rwflag:Integer; userdata: Pointer):Integer; cdecl;
+function PasswordCallback(buf:PChar; size:Integer; rwflag:Integer; userdata: Pointer):Integer; cdecl;
 var
-  Password: AnsiString;
+  Password: String;
 begin
   Password := '';
   if TCustomSSL(userdata) is TCustomSSL then
@@ -171,7 +166,7 @@ begin
   if Length(Password) > (Size - 1) then
     SetLength(Password, Size - 1);
   Result := Length(Password);
-  StrLCopy(buf, PAnsiChar(Password + #0), Result + 1);
+  StrLCopy(buf, PChar(Password + #0), Result + 1);
 end;
 {$ENDIF}
 
@@ -202,11 +197,10 @@ begin
 end;
 
 function TSSLOpenSSL.SSLCheck: Boolean;
-var
 {$IFDEF CIL}
+var
   sb: StringBuilder;
 {$ENDIF}
-  s : AnsiString;
 begin
   Result := true;
   FLastErrorDesc := '';
@@ -220,9 +214,8 @@ begin
     ErrErrorString(FLastError, sb, 256);
     FLastErrorDesc := Trim(sb.ToString);
 {$ELSE}
-    s := StringOfChar(#0, 256);
-    ErrErrorString(FLastError, s, Length(s));
-    FLastErrorDesc := s;
+    FLastErrorDesc := StringOfChar(#0, 256);
+    ErrErrorString(FLastError, FLastErrorDesc, Length(FLastErrorDesc));
 {$ENDIF}
   end;
 end;
@@ -314,7 +307,7 @@ begin
   end;
 end;
 
-function TSSLOpenSSL.LoadPFX(pfxdata: Ansistring): Boolean;
+function TSSLOpenSSL.LoadPFX(pfxdata: string): Boolean;
 var
   cert, pkey, ca: SslPtr;
   b: PBIO;
@@ -399,8 +392,6 @@ begin
 end;
 
 function TSSLOpenSSL.Init(server:Boolean): Boolean;
-var
-  s: AnsiString;
 begin
   Result := False;
   FLastErrorDesc := '';
@@ -425,8 +416,7 @@ begin
   end
   else
   begin
-    s := FCiphers;
-    SslCtxSetCipherList(Fctx, s);
+    SslCtxSetCipherList(Fctx, FCiphers);
     if FVerifyCert then
       SslCtxSetVerify(FCtx, SSL_VERIFY_PEER, nil)
     else
@@ -501,8 +491,6 @@ begin
       SSLCheck;
       Exit;
     end;
-    if SNIHost<>'' then
-      SSLCtrl(Fssl, SSL_CTRL_SET_TLSEXT_HOSTNAME, TLSEXT_NAMETYPE_host_name, pchar(SNIHost));
     x := sslconnect(FSsl);
     if x < 1 then
     begin
@@ -510,7 +498,7 @@ begin
       Exit;
     end;
   if FverifyCert then
-    if (GetVerifyCert <> 0) or (not DoVerifyCert) then
+    if GetVerifyCert <> 0 then
       Exit;
     FSSLEnabled := True;
     Result := True;
@@ -622,9 +610,10 @@ begin
     err := SslGetError(FSsl, Result);
   until (err <> SSL_ERROR_WANT_READ) and (err <> SSL_ERROR_WANT_WRITE);
   if err = SSL_ERROR_ZERO_RETURN then
-    Result := 0;
-  if (err <> 0) then
-    FLastError := err;
+    Result := 0
+  else
+    if (err <> 0) then
+      FLastError := err;
 end;
 
 function TSSLOpenSSL.WaitingData: Integer;
@@ -643,7 +632,7 @@ end;
 function TSSLOpenSSL.GetPeerSubject: string;
 var
   cert: PX509;
-  s: ansistring;
+  s: string;
 {$IFDEF CIL}
   sb: StringBuilder;
 {$ENDIF}
@@ -654,11 +643,6 @@ begin
     Exit;
   end;
   cert := SSLGetPeerCertificate(Fssl);
-  if not assigned(cert) then
-  begin
-    Result := '';
-    Exit;
-  end;
 {$IFDEF CIL}
   sb := StringBuilder.Create(4096);
   Result := X509NameOneline(X509GetSubjectName(cert), sb, 4096);
@@ -671,7 +655,7 @@ end;
 
 function TSSLOpenSSL.GetPeerName: string;
 var
-  s: ansistring;
+  s: string;
 begin
   s := GetPeerSubject;
   s := SeparateRight(s, '/CN=');
@@ -681,7 +665,7 @@ end;
 function TSSLOpenSSL.GetPeerIssuer: string;
 var
   cert: PX509;
-  s: ansistring;
+  s: string;
 {$IFDEF CIL}
   sb: StringBuilder;
 {$ENDIF}
@@ -692,11 +676,6 @@ begin
     Exit;
   end;
   cert := SSLGetPeerCertificate(Fssl);
-  if not assigned(cert) then
-  begin
-    Result := '';
-    Exit;
-  end;
 {$IFDEF CIL}
   sb := StringBuilder.Create(4096);
   Result := X509NameOneline(X509GetIssuerName(cert), sb, 4096);
@@ -721,11 +700,6 @@ begin
     Exit;
   end;
   cert := SSLGetPeerCertificate(Fssl);
-  if not assigned(cert) then
-  begin
-    Result := '';
-    Exit;
-  end;
 {$IFDEF CIL}
   sb := StringBuilder.Create(EVP_MAX_MD_SIZE);
   X509Digest(cert, EvpGetDigestByName('MD5'), sb, x);
@@ -755,11 +729,6 @@ begin
     Exit;
   end;
   cert := SSLGetPeerCertificate(Fssl);
-  if not assigned(cert) then
-  begin
-    Result := '';
-    Exit;
-  end;
   b := BioNew(BioSMem);
   try
     X509Print(b, cert);

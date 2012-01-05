@@ -1,59 +1,200 @@
 object f_config_pictures: Tf_config_pictures
-  Left = 732
+  Left = 275
   Height = 535
-  Top = 127
-  Width = 513
-  ActiveControl = MainPanel
-  BorderStyle = bsToolWindow
-  Caption = 'Pictures'
+  Top = 134
+  Width = 526
+  HorzScrollBar.Page = 525
+  VertScrollBar.Page = 534
+  ActiveControl = imgpath
+  Caption = 'f_config_pictures'
   ClientHeight = 535
-  ClientWidth = 513
-  OnClose = FormClose
+  ClientWidth = 526
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   OnShow = FormShow
-  ParentFont = True
-  LCLVersion = '0.9.30.3'
+  PixelsPerInch = 80
   object MainPanel: TPanel
-    Left = 0
-    Height = 485
-    Top = 0
-    Width = 513
-    Align = alClient
-    ClientHeight = 485
-    ClientWidth = 513
+    Left = 8
+    Height = 480
+    Top = 8
+    Width = 500
+    ClientHeight = 480
+    ClientWidth = 500
     ParentColor = False
     TabOrder = 0
-    object PageControl1: TPageControl
+    object WizardNotebook1: TWizardNotebook
       Left = 1
-      Height = 483
+      Height = 478
       Top = 1
-      Width = 511
-      ActivePage = Page1
+      Width = 498
       Align = alClient
+      PageIndex = 0
       ShowTabs = False
-      TabIndex = 0
-      TabOrder = 0
-      OnPageChanged = PageControl1PageChanged
-      object Page1: TTabSheet
-        Caption = 'Objects'
-        ClientHeight = 483
-        ClientWidth = 511
-        object ProgressPanel: TPanel
-          Left = 15
-          Height = 94
-          Top = 71
+      object Page1: TPage
+        Caption = 'Page1'
+        ClientWidth = 494
+        ClientHeight = 474
+        object Label50: TLabel
+          Left = 2
+          Height = 13
+          Top = 2
+          Width = 197
+          Caption = 'Display image of cataloged objects'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label264: TLabel
+          Left = 8
+          Height = 13
+          Top = 46
+          Width = 89
+          Caption = 'Image Directory'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label265: TLabel
+          Left = 98
+          Height = 13
+          Top = 80
+          Width = 50
+          Caption = 'There is '
+          Color = clNone
+          ParentColor = False
+        end
+        object nimages: TLabel
+          Left = 144
+          Height = 13
+          Top = 80
+          Width = 47
+          Caption = 'nimages'
+          Color = clNone
+          ParentColor = False
+        end
+        object Label267: TLabel
+          Left = 200
+          Height = 13
+          Top = 80
+          Width = 106
+          Caption = 'catalogued images'
+          Color = clNone
+          ParentColor = False
+        end
+        object imgpath: TEdit
+          Tag = 1
+          Left = 98
+          Height = 19
+          Top = 43
+          Width = 239
+          OnChange = imgpathChange
+          TabOrder = 0
+        end
+        object BitBtn3: TBitBtn
+          Tag = 1
+          Left = 335
+          Height = 19
+          Top = 43
+          Width = 19
+          BorderSpacing.InnerBorder = 2
+          Glyph.Data = {
+            BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+            69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+            2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+            222A20632023464646464646222C0A226120632023303030303030222C0A222E
+            2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+            2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+            2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+            2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+            2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+            612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+            2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+            2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+            2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+          }
+          Margin = 0
+          NumGlyphs = 0
+          OnClick = BitBtn3Click
+          TabOrder = 1
+          TabStop = False
+        end
+        object ScanImages: TButton
+          Left = 98
+          Height = 25
+          Top = 104
+          Width = 113
+          BorderSpacing.InnerBorder = 2
+          Caption = 'Scan directory'
+          OnClick = ScanImagesClick
+          TabOrder = 2
+        end
+        object Panel11: TPanel
+          Left = 16
+          Height = 145
+          Top = 168
           Width = 401
-          ClientHeight = 94
+          ClientHeight = 145
           ClientWidth = 401
           TabOrder = 3
+          object Label266: TLabel
+            Left = 32
+            Height = 13
+            Top = 32
+            Width = 60
+            Caption = 'Luminosity'
+            Color = clNone
+            ParentColor = False
+          end
+          object Label268: TLabel
+            Left = 40
+            Height = 13
+            Top = 96
+            Width = 47
+            Caption = 'Contrast'
+            Color = clNone
+            ParentColor = False
+          end
+          object ImgLumBar: TTrackBar
+            Left = 120
+            Height = 45
+            Top = 24
+            Width = 222
+            Frequency = 5
+            Max = 30
+            Min = -30
+            OnChange = ImgLumBarChange
+            PageSize = 5
+            ScalePos = trTop
+            TabOrder = 0
+          end
+          object ImgContrastBar: TTrackBar
+            Left = 120
+            Height = 45
+            Top = 88
+            Width = 222
+            Frequency = 5
+            Max = 30
+            Min = -30
+            OnChange = ImgContrastBarChange
+            PageSize = 5
+            ScalePos = trTop
+            TabOrder = 1
+          end
+        end
+        object ProgressPanel: TPanel
+          Left = 16
+          Height = 73
+          Top = 80
+          Width = 401
+          ClientHeight = 73
+          ClientWidth = 401
+          TabOrder = 4
           Visible = False
           object ProgressCat: TLabel
             Left = 187
-            Height = 15
+            Height = 13
             Top = 8
-            Width = 31
+            Width = 32
             Caption = 'Other'
+            Color = clNone
             ParentColor = False
           end
           object ProgressBar1: TProgressBar
@@ -61,523 +202,335 @@ object f_config_pictures: Tf_config_pictures
             Height = 17
             Top = 40
             Width = 361
-            TabOrder = 0
-          end
-        end
-        object Label50: TLabel
-          Left = 2
-          Height = 15
-          Top = 2
-          Width = 193
-          Caption = 'Display image of cataloged objects'
-          ParentColor = False
-        end
-        object Label264: TLabel
-          Left = 15
-          Height = 15
-          Top = 46
-          Width = 87
-          Caption = 'Image Directory'
-          ParentColor = False
-        end
-        object Panel11: TPanel
-          Left = 16
-          Height = 199
-          Top = 168
-          Width = 401
-          ClientHeight = 199
-          ClientWidth = 401
-          TabOrder = 1
-          object Label266: TLabel
-            Left = 24
-            Height = 15
-            Top = 39
-            Width = 61
-            Caption = 'Luminosity'
-            ParentColor = False
-          end
-          object Label268: TLabel
-            Left = 24
-            Height = 15
-            Top = 111
-            Width = 48
-            Caption = 'Contrast'
-            ParentColor = False
-          end
-          object ImgLumBar: TTrackBar
-            Left = 120
-            Height = 45
-            Top = 15
-            Width = 222
-            Frequency = 5
             Max = 100
-            Min = -100
-            OnChange = ImgLumBarChange
-            PageSize = 5
-            Position = 0
             TabOrder = 0
-          end
-          object ImgContrastBar: TTrackBar
-            Left = 120
-            Height = 45
-            Top = 87
-            Width = 222
-            Frequency = 5
-            Max = 100
-            Min = -100
-            OnChange = ImgContrastBarChange
-            PageSize = 5
-            Position = 0
-            TabOrder = 1
-          end
-          object ResetLum: TButton
-            Left = 191
-            Height = 25
-            Top = 159
-            Width = 75
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Reset'
-            OnClick = ResetLumClick
-            TabOrder = 2
           end
         end
         object ShowImagesBox: TCheckBox
-          Left = 31
-          Height = 26
-          Top = 375
-          Width = 209
+          Left = 32
+          Height = 24
+          Top = 344
+          Width = 212
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
-          TabOrder = 2
-        end
-        object imgpath: TDirectoryEdit
-          Left = 150
-          Height = 22
-          Top = 39
-          Width = 264
-          ShowHidden = False
-          ButtonWidth = 23
-          NumGlyphs = 1
-          MaxLength = 0
-          TabOrder = 0
-          OnChange = imgpathChange
-        end
-        object Panel3: TPanel
-          Left = 16
-          Height = 94
-          Top = 71
-          Width = 401
-          ClientHeight = 94
-          ClientWidth = 401
-          TabOrder = 4
-          object nimages: TLabel
-            Left = 24
-            Height = 53
-            Top = 8
-            Width = 353
-            AutoSize = False
-            Caption = 'nimages'
-            ParentColor = False
-            WordWrap = True
-          end
-          object ScanImages: TButton
-            Left = 127
-            Height = 25
-            Top = 64
-            Width = 156
-            BorderSpacing.InnerBorder = 4
-            Caption = 'Scan directory'
-            OnClick = ScanImagesClick
-            TabOrder = 0
-          end
+          TabOrder = 5
         end
       end
-      object Page2: TTabSheet
-        Caption = 'Background'
-        ClientHeight = 483
-        ClientWidth = 511
+      object Page2: TPage
+        Caption = 'Page2'
+        ClientWidth = 494
+        ClientHeight = 474
         object Label270: TLabel
-          Left = 0
-          Height = 15
-          Top = 0
-          Width = 108
+          Height = 13
+          Width = 111
           Caption = 'Background Picture'
+          Color = clNone
           ParentColor = False
         end
         object Label271: TLabel
           Left = 8
-          Height = 15
+          Height = 13
           Top = 22
-          Width = 49
+          Width = 52
           Caption = 'FITS File'
+          Color = clNone
           ParentColor = False
         end
         object backimginfo: TLabel
-          Left = 15
-          Height = 15
-          Top = 122
-          Width = 7
-          Caption = '  '
+          Left = 8
+          Height = 13
+          Top = 40
+          Width = 67
+          Caption = 'backimginfo'
+          Color = clNone
           ParentColor = False
         end
         object Image1: TImage
-          Left = 7
           Height = 313
-          Top = 143
+          Top = 112
           Width = 481
           Stretch = True
+          Transparent = True
+        end
+        object backimg: TEdit
+          Tag = 1
+          Left = 98
+          Height = 19
+          Top = 19
+          Width = 327
+          OnChange = backimgChange
+          TabOrder = 0
+        end
+        object BitBtn5: TBitBtn
+          Tag = 1
+          Left = 428
+          Height = 19
+          Top = 19
+          Width = 19
+          BorderSpacing.InnerBorder = 2
+          Glyph.Data = {
+            BA0100002F2A2058504D202A2F0A7374617469632063686172202A6772617068
+            69635B5D203D207B0A22313620313620352031222C0A222E2063204E6F6E6522
+            2C0A222C20632023374637463746222C0A222D20632023464646463030222C0A
+            222A20632023464646464646222C0A226120632023303030303030222C0A222E
+            2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E
+            2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2E2E
+            2E2E2E2E2E2E2E2E2E2E2E222C0A222E2E2E2C2C2C2C2E2E2E2E2E2E2E2E2E22
+            2C0A222E2E2C2D2A2D2A2C2E2E2E2E2E2E2E2E222C0A222E2E2C2C2C2C2C2C2C
+            2C2C2C612E2E2E222C0A222E2E2C2A2A2A2A2A2A2A2A2A2C612E2E222C0A222E
+            2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E2D2E2D2E2D2E2D2C
+            612E2E222C0A222E2E2C2A2D2E2D2E2D2E2D2E2C612E2E222C0A222E2E2C2A2E
+            2D2E2D2E2D2E2D2C612E2E222C0A222E2E2C2C2C2C2C2C2C2C2C2C2C612E2E22
+            2C0A222E2E61616161616161616161612E2E2E222C0A222E2E2E2E2E2E2E2E2E
+            2E2E2E2E2E2E2E222C0A222E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E227D0A
+          }
+          Margin = 0
+          NumGlyphs = 0
+          OnClick = BitBtn5Click
+          TabOrder = 1
+          TabStop = False
         end
         object ShowBackImg: TCheckBox
-          Left = 95
-          Height = 26
-          Top = 39
-          Width = 122
+          Left = 8
+          Height = 24
+          Top = 80
+          Width = 120
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
-          TabOrder = 1
+          TabOrder = 2
         end
         object Panel1: TPanel
-          Left = 7
-          Height = 48
-          Top = 67
-          Width = 474
-          ClientHeight = 48
-          ClientWidth = 474
-          TabOrder = 2
-          object ImgTrBar2: TTrackBar
-            Left = 304
-            Height = 45
-            Top = 12
-            Width = 140
-            Frequency = 5
-            Max = 250
-            Min = 10
-            OnChange = ImgTrBar2Change
-            PageSize = 5
-            Position = 200
-            TickStyle = tsNone
-            TabOrder = 2
-          end
+          Left = 176
+          Height = 50
+          Top = 60
+          Width = 305
+          ClientHeight = 50
+          ClientWidth = 305
+          TabOrder = 3
           object Label1: TLabel
             Left = 54
-            Height = 15
-            Top = 6
-            Width = 61
+            Height = 13
+            Top = 8
+            Width = 60
             Caption = 'Luminosity'
+            Color = clNone
             ParentColor = False
           end
           object Label2: TLabel
             Left = 203
-            Height = 15
-            Top = 6
-            Width = 48
+            Height = 13
+            Top = 8
+            Width = 47
             Caption = 'Contrast'
+            Color = clNone
             ParentColor = False
           end
           object ImgLumBar2: TTrackBar
             Left = 8
-            Height = 27
-            Top = 20
+            Height = 18
+            Top = 24
             Width = 140
             Frequency = 5
-            Max = 100
-            Min = -100
+            Max = 30
+            Min = -30
             OnChange = ImgLumBar2Change
             PageSize = 5
-            Position = 0
-            TickStyle = tsNone
+            ScalePos = trTop
             TabOrder = 0
           end
           object ImgContrastBar2: TTrackBar
             Left = 152
-            Height = 27
-            Top = 20
+            Height = 18
+            Top = 24
             Width = 140
             Frequency = 5
-            Max = 100
-            Min = -100
+            Max = 30
+            Min = -30
             OnChange = ImgContrastBar2Change
             PageSize = 5
-            Position = 0
-            TickStyle = tsNone
+            ScalePos = trTop
             TabOrder = 1
           end
-          object Label4: TLabel
-            Left = 336
-            Height = 15
-            Top = 4
-            Width = 76
-            Caption = 'Transparency'
-            ParentColor = False
-          end
-        end
-        object backimg: TFileNameEdit
-          Left = 95
-          Height = 22
-          Top = 15
-          Width = 360
-          OnAcceptFileName = backimgAcceptFileName
-          DialogOptions = []
-          Filter = 'FITS Files|*.fit *.fits *.fts|All|*'
-          FilterIndex = 0
-          HideDirectories = False
-          ButtonWidth = 23
-          NumGlyphs = 1
-          MaxLength = 0
-          TabOrder = 0
-          OnChange = backimgChange
-        end
-        object Button5: TButton
-          Left = 359
-          Height = 25
-          Top = 37
-          Width = 96
-          Caption = 'Reset'
-          OnClick = Button5Click
-          TabOrder = 3
         end
       end
-      object Page3: TTabSheet
-        Caption = 'DSS - Realsky'
-        ClientHeight = 483
-        ClientWidth = 511
+      object Page3: TPage
+        Caption = 'Page3'
+        ClientWidth = 494
+        ClientHeight = 474
         object GroupBox3: TGroupBox
           Left = 1
-          Height = 355
-          Top = 101
+          Height = 345
+          Top = 8
           Width = 481
-          Caption = 'RealSkyÂ®'
-          ClientHeight = 339
+          Caption = 'RealSky®'
+          ClientHeight = 328
           ClientWidth = 477
           TabOrder = 0
           object Label72: TLabel
             Left = 8
-            Height = 15
+            Height = 13
             Top = 100
-            Width = 71
+            Width = 76
             Caption = 'Auxiliary files'
+            Color = clNone
             ParentColor = False
           end
           object Label73: TLabel
             Left = 8
-            Height = 15
+            Height = 13
             Top = 152
-            Width = 103
+            Width = 104
             Caption = 'Data Files, CDrom'
+            Color = clNone
             ParentColor = False
           end
           object Label74: TLabel
             Left = 8
-            Height = 15
+            Height = 13
             Top = 196
-            Width = 75
+            Width = 76
             Caption = 'temporary file'
+            Color = clNone
             ParentColor = False
           end
           object Label75: TLabel
             Left = 416
-            Height = 15
+            Height = 13
             Top = 272
             Width = 33
             Caption = 'pixels'
+            Color = clNone
             ParentColor = False
           end
           object Label77: TLabel
             Left = 416
-            Height = 15
+            Height = 13
             Top = 308
-            Width = 40
+            Width = 43
             Caption = 'MBytes'
+            Color = clNone
             ParentColor = False
           end
           object realskydir: TEdit
-            Left = 196
-            Height = 22
-            Top = 92
+            Left = 144
+            Height = 21
+            Top = 96
             Width = 169
             OnChange = realskydirChange
-            TabOrder = 3
+            TabOrder = 0
             Text = 'cat\RealSky\'
           end
           object realskydrive: TEdit
-            Left = 196
-            Height = 22
-            Top = 144
+            Left = 144
+            Height = 21
+            Top = 148
             Width = 169
             OnChange = realskydriveChange
-            TabOrder = 4
+            TabOrder = 1
             Text = 'X:\'
           end
           object realskyfile: TEdit
-            Left = 196
-            Height = 22
-            Top = 188
+            Left = 144
+            Height = 21
+            Top = 192
             Width = 169
             OnChange = realskyfileChange
-            TabOrder = 5
+            TabOrder = 2
             Text = 'images\$TEMP.FIT'
           end
           object RealSkyNorth: TCheckBox
             Left = 8
-            Height = 26
+            Height = 24
             Top = 26
-            Width = 106
+            Width = 104
             Caption = 'RealSky North'
             OnClick = RealSkyNorthClick
-            TabOrder = 0
+            TabOrder = 3
           end
           object RealSkySouth: TCheckBox
             Left = 8
-            Height = 26
+            Height = 24
             Top = 62
-            Width = 108
+            Width = 106
             Caption = 'RealSky South'
             OnClick = RealSkySouthClick
-            TabOrder = 1
+            TabOrder = 4
           end
           object DSS102CD: TCheckBox
             Left = 184
-            Height = 26
+            Height = 24
             Top = 26
-            Width = 98
+            Width = 96
             Caption = '102 CD DSS'
             OnClick = DSS102CDClick
-            TabOrder = 2
+            TabOrder = 5
           end
           object usesubsample: TCheckBox
             Left = 8
-            Height = 26
+            Height = 24
             Top = 272
-            Width = 242
+            Width = 234
             Caption = 'Use subsampling to limit image size to'
             Checked = True
             OnClick = usesubsampleClick
             State = cbChecked
-            TabOrder = 7
+            TabOrder = 6
           end
           object reallist: TCheckBox
             Left = 8
-            Height = 26
+            Height = 24
             Top = 240
-            Width = 139
+            Width = 136
             Caption = 'Select plate from list'
             Checked = True
             OnClick = reallistClick
             State = cbChecked
-            TabOrder = 6
+            TabOrder = 7
           end
           object realskymax: TLongEdit
+            Name = 'realskymax'
             Left = 336
             Height = 22
             Top = 268
             Width = 65
+            BorderStyle = bsSingle
+            ParentColor = False
             TabOrder = 8
             OnChange = realskymaxChange
-            Value = 0
           end
           object realskymb: TLongEdit
+            Name = 'realskymb'
             Left = 336
             Height = 22
             Top = 304
             Width = 65
+            BorderStyle = bsSingle
             Color = clBtnFace
+            ParentColor = False
             ReadOnly = True
             TabOrder = 9
-            Value = 0
-          end
-        end
-        object GroupBox1: TGroupBox
-          Left = 1
-          Height = 85
-          Top = 8
-          Width = 481
-          Caption = 'Online DSS'
-          ClientHeight = 69
-          ClientWidth = 477
-          TabOrder = 1
-          object OnlineDSS: TCheckBox
-            Left = 8
-            Height = 26
-            Top = 20
-            Width = 221
-            Caption = 'Use online DSS instead of RealSky'
-            OnChange = OnlineDSSChange
-            TabOrder = 0
-          end
-          object OnlineDSSList: TComboBox
-            Left = 292
-            Height = 24
-            Top = 20
-            Width = 176
-            ItemHeight = 0
-            OnSelect = OnlineDSSListChange
-            TabOrder = 1
-            Text = 'OnlineDSSList'
           end
         end
       end
     end
   end
-  object Panel2: TPanel
-    Left = 0
-    Height = 50
-    Top = 485
-    Width = 513
-    Align = alBottom
-    ClientHeight = 50
-    ClientWidth = 513
-    TabOrder = 1
-    object Button1: TButton
-      Left = 216
-      Height = 25
-      Top = 11
-      Width = 75
-      Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 4
-      Caption = 'OK'
-      Default = True
-      ModalResult = 1
-      TabOrder = 0
-    end
-    object Button2: TButton
-      Left = 312
-      Height = 25
-      Top = 11
-      Width = 75
-      Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 4
-      Caption = 'Apply'
-      OnClick = Button2Click
-      TabOrder = 1
-    end
-    object Button3: TButton
-      Left = 408
-      Height = 25
-      Top = 11
-      Width = 75
-      Anchors = [akTop, akRight]
-      BorderSpacing.InnerBorder = 4
-      Cancel = True
-      Caption = 'Cancel'
-      ModalResult = 2
-      TabOrder = 2
-    end
-    object Button4: TButton
-      Left = 120
-      Height = 25
-      Top = 11
-      Width = 75
-      Anchors = [akTop, akRight]
-      Caption = 'Help'
-      OnClick = Button4Click
-      TabOrder = 3
-    end
+  object OpenDialog1: TOpenDialog
+    Title = 'Open existing file'
+    FilterIndex = 0
+    left = 496
+    top = 16
   end
   object ImageTimer1: TTimer
     Enabled = False
-    Interval = 500
+    Interval = 200
     OnTimer = ImageTimer1Timer
-    left = 464
-    top = 56
+    left = 496
+    top = 136
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    Title = 'Select Directory'
+    FilterIndex = 0
+    left = 496
+    top = 72
   end
 end

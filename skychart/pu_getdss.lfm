@@ -1,97 +1,69 @@
 object f_getdss: Tf_getdss
-  Left = 331
-  Height = 308
-  Top = 137
-  Width = 420
-  ActiveControl = ListBox1
-  BorderStyle = bsToolWindow
   Caption = 'List of available plates'
-  ClientHeight = 308
-  ClientWidth = 420
+  ClientHeight = 246
+  ClientWidth = 509
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
   FormStyle = fsStayOnTop
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  ParentFont = True
-  LCLVersion = '0.9.30.3'
-  object HTMLViewer1: THTMLViewer
-    Left = 8
-    Height = 232
-    Top = 32
-    Width = 401
-    TabOrder = 3
-    DefBackground = clWindow
-    BorderStyle = htFocused
-    HistoryMaxCount = 0
-    DefFontName = 'Times New Roman'
-    DefPreFontName = 'Courier New'
-    DefFontColor = clWindowText
-    NoSelect = False
-    CharSet = DEFAULT_CHARSET
-    PrintMarginLeft = 2
-    PrintMarginRight = 2
-    PrintMarginTop = 2
-    PrintMarginBottom = 2
-    PrintScale = 1
+  OnShow = FormShow
+  PixelsPerInch = 80
+  TextHeight = 13
+  HorzScrollBar.Page = 508
+  VertScrollBar.Page = 245
+  Left = 191
+  Height = 246
+  Top = 162
+  Width = 509
+  object Label1: TLabel
+    BorderSpacing.OnChange = nil
+    Caption = 'Label1'
+    Color = clNone
+    Font.CharSet = ANSI_CHARSET
+    Font.Height = -16
+    Font.Name = 'Courier New'
+    Left = 12
+    Height = 18
+    Top = 8
+    Width = 60
   end
   object ListBox1: TListBox
-    Left = 8
-    Height = 230
-    Top = 32
-    Width = 401
+    BorderSpacing.OnChange = nil
     Font.CharSet = ANSI_CHARSET
-    Font.Height = -11
-    Font.Name = 'courier'
-    Font.Pitch = fpFixed
+    Font.Height = -16
+    Font.Name = 'Courier New'
     IntegralHeight = True
-    ItemHeight = 0
-    ParentFont = False
-    ScrollWidth = 397
+    ItemHeight = 18
     TabOrder = 0
     TopIndex = -1
-  end
-  object Label1: TLabel
-    Left = 12
-    Height = 15
-    Top = 8
-    Width = 43
-    Caption = 'Label1'
-    Font.CharSet = ANSI_CHARSET
-    Font.Height = -11
-    Font.Name = 'courier'
-    Font.Pitch = fpFixed
-    ParentColor = False
-    ParentFont = False
+    Left = 8
+    Height = 166
+    Top = 32
+    Width = 497
   end
   object BitBtn1: TBitBtn
-    Left = 96
-    Height = 25
-    Top = 272
-    Width = 75
+    BorderSpacing.OnChange = nil
     BorderSpacing.InnerBorder = 2
     Caption = 'OK'
     Default = True
     ModalResult = 1
-    NumGlyphs = 0
     TabOrder = 1
+    Left = 157
+    Height = 25
+    Top = 206
+    Width = 75
   end
   object BitBtn2: TBitBtn
-    Left = 206
-    Height = 25
-    Top = 272
-    Width = 75
+    BorderSpacing.OnChange = nil
     BorderSpacing.InnerBorder = 2
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    NumGlyphs = 0
-    OnClick = BitBtn2Click
     TabOrder = 2
-  end
-  object DownloadDialog1: TDownloadDialog
-    FtpFwMode = 0
-    FtpFwPassive = True
-    ConfirmDownload = True
-    left = 264
-    top = 16
+    Left = 267
+    Height = 25
+    Top = 206
+    Width = 75
   end
 end

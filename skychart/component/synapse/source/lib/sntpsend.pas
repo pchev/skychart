@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 003.000.003 |
+| Project : Ararat Synapse                                       | 003.000.001|
 |==============================================================================|
 | Content: SNTP client                                                         |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2003, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2000-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2000-2003.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -63,7 +63,7 @@ uses
   synsock, blcksock, synautil;
 
 const
-  cNtpProtocol = '123';
+  cNtpProtocol = 'ntp';
 
 type
 
@@ -101,7 +101,7 @@ type
     FMaxSyncDiff: double;
     FSyncTime: Boolean;
     FSock: TUDPBlockSocket;
-    FBuffer: AnsiString;
+    FBuffer: string;
     FLi, FVn, Fmode : byte;
     function StrToNTP(const Value: AnsiString): TNtp;
     function NTPtoStr(const Value: Tntp): AnsiString;
@@ -162,7 +162,6 @@ constructor TSNTPSend.Create;
 begin
   inherited Create;
   FSock := TUDPBlockSocket.Create;
-  FSock.Owner := self;
   FTimeout := 5000;
   FTargetPort := cNtpProtocol;
   FMaxSyncDiff := 3600;

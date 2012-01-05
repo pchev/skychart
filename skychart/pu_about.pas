@@ -1,6 +1,6 @@
 unit pu_about;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2002 Patrick Chevalley
@@ -28,92 +28,74 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
+uses u_constant,
   LCLIntf, Classes, Graphics, Forms, Controls, StdCtrls,
-  ExtCtrls, LResources, Buttons, LazHelpHTML, ComCtrls;
+  Buttons, ExtCtrls, LResources;
 
 type
-
-  { Tf_about }
-
   Tf_about = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
-    Image2: TImage;
+    logo: TImage;
+    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Memo1: TMemo;
-    Memo2: TMemo;
-    PageControl1: TPageControl;
-    Page1: TTabSheet;
-    Page2: TTabSheet;
-    Page3: TTabSheet;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Panel3: TPanel;
-    Panel0: TPanel;
-    Panel4: TPanel;
-    procedure Button2Click(Sender: TObject);
+    Timer1: TTimer;
     procedure FormCreate(Sender: TObject);
-    procedure PageControl1Change(Sender: TObject);
-    procedure Panell1Click(Sender: TObject);
+    procedure Timer1Timer(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure logoDblClick(Sender: TObject);
+    procedure FormPaint(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    procedure SetLang;
+    ShowTimer: Boolean;
   end;
 
 var
   f_about: Tf_about;
 
 implementation
-{$R *.lfm}
-
-procedure Tf_about.SetLang;
-begin
-Caption:=rsAbout;
-if rsSkyCharts='Cartes du Ciel' then  Label5.caption:=''
-   else Label5.caption:=rsSkyCharts;
-Label7.caption:=rsThisProgramI;
-Button1.Caption:=rsClose;
-Label8.caption:=cdccpy;
-Label3.caption:=rsPleaseReport;
-page1.Caption:=rsAbout;
-page2.Caption:=rsAuthors;
-page3.Caption:=rsLicenseAgree;
-memo1.Text:=rsProgrammer+crlf+cdcauthors+crlf+crlf+rsTranslator+crlf+rsCDCTranslator+crlf+crlf;
-SetHelp(self,hlpIndex);
-end;
 
 procedure Tf_about.FormCreate(Sender: TObject);
 begin
-SetLang;
- panel1.caption:=URL_WebHome;
- button2.caption:=URL_BugTracker;
- label2.caption:=cdcversion+RevisionStr+blank+compile_time;
- label4.Caption:=rsCompiledWith+blank+compile_version;
+ ShowTimer:=false;
+ label2.caption:=cdcversion;
 end;
 
-procedure Tf_about.PageControl1Change(Sender: TObject);
+procedure Tf_about.FormShow(Sender: TObject);
 begin
-
+if ShowTimer then begin
+   Timer1.Enabled:=true;
+end else begin
+   Timer1.Enabled:=false;
+end;
 end;
 
-procedure Tf_about.Button2Click(Sender: TObject);
+procedure Tf_about.Timer1Timer(Sender: TObject);
 begin
- ExecuteFile(URL_BugTracker);
+Timer1.Enabled:=false;
+ShowTimer:=false;
+BorderStyle:=bsToolWindow;
+ClientHeight:=253;
+Close;
 end;
 
-procedure Tf_about.Panell1Click(Sender: TObject);
+procedure Tf_about.logoDblClick(Sender: TObject);
 begin
-  ExecuteFile(URL_WebHome);
+Timer1Timer(Sender);
 end;
+
+procedure Tf_about.FormPaint(Sender: TObject);
+begin
+if ShowTimer then begin
+   Timer1.Enabled:=false;
+   Timer1.Enabled:=true;
+end;   
+end;
+
+initialization
+  {$i pu_about.lrs}
 
 end.
  

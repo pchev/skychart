@@ -25,8 +25,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
-  Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils, u_translation;
+uses
+  passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
+  Forms, Stdctrls, ComCtrls, Classes, Sysutils, StrUtils;
 
 
 type
@@ -36,32 +37,18 @@ type
     db:TSqlDB;
     FFits: TFits;
     FInitializeDB: TNotifyEvent;
-    FAstmsg, FCommsg: string;
   public
     { Public declarations }
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
-     function createDB(cmain: Tconf_main; var ok:boolean): string;
-     function dropDB(cmain: Tconf_main): string;
-     function checkDBConfig(cmain: Tconf_main): string;
+     function createDB(cmain: conf_main; var ok:boolean): string;
+     function dropDB(cmain: conf_main): string;
+     function checkDBConfig(cmain: conf_main): string;
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
-     function CheckForUpgrade(memo:Tmemo):boolean;
      function CheckDB:boolean;
-     function LoadCountryList(locfile:string; memo:Tmemo):boolean;
-     function LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo):boolean;
-     function LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = ''):boolean;
-     procedure GetCountryList(codelist,countrylist:Tstrings);
-     procedure GetCountryISOCode(countrycode:string; var isocode: string);
-     procedure GetCountryFromISO(isocode:string; var cname: string);
-     procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
-     procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
-     function  GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
-     function  UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
-     function  DeleteCity(locid:integer):string;
-     function  DeleteCountry(country:string; deleteall: boolean):string;
-     procedure GetCometFileList(cmain:Tconf_main; list:Tstrings);
-     procedure GetAsteroidFileList(cmain:Tconf_main; list:Tstrings);
-     function LoadCometFile(comfile:string; memocom:Tmemo):boolean;
+     procedure GetCometFileList(cmain:conf_main; list:Tstrings);
+     procedure GetAsteroidFileList(cmain:conf_main; list:Tstrings);
+     procedure LoadCometFile(comfile:string; memocom:Tmemo);
      procedure DelComet(comelemlist: string; memocom:Tmemo);
      procedure DelCometAll(memocom:Tmemo);
      function AddCom(comid,comt,comep,comq,comec,comperi,comnode,comi,comh,comg,comnam,comeq:string ):string;
@@ -80,12 +67,10 @@ type
      Function GetAstElemEpoch(id:string; jd:double; var epoch,h,g,ma,ap,an,ic,ec,sa,eq: double; var ref,nam,elem_id:string):boolean;
      Function GetComElem(id: string; epoch:double; var tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
      Function GetComElemEpoch(id:string; jd:double; var epoch,tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
-     procedure LoadSampleData(memo:Tmemo; cmain: Tconf_main);
+     procedure LoadSampleData(memo:Tmemo);
      function CountImages:integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
-     property AstMsg : string read FAstmsg write FAstmsg;
-     property ComMsg : string read FCommsg write FCommsg;
   end;
 
 implementation
@@ -117,9 +102,6 @@ try
  if DBtype=mysql then begin
    db.SetPort(port);
    db.Connect(host,user,pass,dbn);
- end
- else if DBtype=sqlite then begin
-   dbn:=UTF8Encode(dbn);
  end;
  if db.database<>dbn then db.Use(dbn);
  result:=db.Active;
@@ -129,154 +111,97 @@ end;
 end;
 
 function TCDCdb.Checkdb:boolean;
-var i,j,k:integer;
+var i,j:integer;
    ok,creatednow:boolean;
-   indexlist: TStringlist;
-   emsg: string;
 begin
 creatednow:=false;
 if db.Active then begin
-  indexlist:=TStringlist.Create;
   result:=true;
   for i:=1 to numsqltable do begin
-     ok:=(sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"'));
+     ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
      if not ok then begin  // try to create the missing table
-       db.Query('CREATE TABLE '+sqltable[dbtype,i,1]+sqltable[dbtype,i,2]);
-       emsg:=db.ErrorMessage;
-       if sqltable[dbtype,i,3]>'' then begin   // create the index
-          SplitRec(sqltable[dbtype,i,3],',',indexlist);
-          for j:=0 to indexlist.Count-1 do begin
-            k:=strtoint(indexlist[j]);
-            db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
-          end;
+       if DBtype=sqlite then
+           db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
+       else
+           db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
+       if sqltable[i,3]>'' then begin   // create the index
+          j:=strtoint(sqltable[i,3]);
+          db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
        end;
-       ok:=(sqltable[dbtype,i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"'));
+       ok:=(sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"'));
        if ok then begin
-           writetrace('Create table '+sqltable[dbtype,i,1]+' ... Ok');
+           writetrace('Create table '+sqltable[i,1]+' ... Ok');
            creatednow:=true;
            end
-        else writetrace('Create table '+sqltable[dbtype,i,1]+' ... Failed: '+emsg);
+        else writetrace('Create table '+sqltable[i,1]+' ... Failed');
      end;
      result:=result and ok;
   end;
-  indexlist.Free;
 end
  else result:=false;
 if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
 end;
 
-function TCDCdb.CheckForUpgrade(memo:Tmemo):boolean;
-var updcountry:boolean;
-    i: integer;
-begin
-result:=false;
-updcountry:=false;
-if db.Active then begin
-  // add isocode column to country table
-  if ((not db.Query('select isocode from cdc_country where country="AF"'))
-      or (db.RowCount<1) )
-   then updcountry:=true;
-  // Correct Japan code
-  if ((db.Query('select isocode from cdc_country where isocode="JA"'))
-      and (db.RowCount>=1) )
-   then updcountry:=true;
-  // Correct Australia code
-  i:=strtointdef(db.QueryOne('select count(*) from cdc_country where isocode="AU"'),0);
-  if (i>1)
-   then updcountry:=true;
-  if (updcountry)
-   then begin
-     {$ifdef trace_debug}
-     WriteTrace('Upgrade DB for country change ');
-     {$endif}
-     db.Query('drop table cdc_country');
-     writetrace('Drop table cdc_country ... '+db.ErrorMessage);
-     db.Commit;
-     db.Query('CREATE TABLE '+sqltable[dbtype,9,1]+sqltable[dbtype,9,2]);
-     writetrace('Create table '+sqltable[dbtype,9,1]+' ...  '+db.ErrorMessage);
-     LoadCountryList(slash(sampledir)+'country.dat',memo);
-     result:=true;
-  end;
-end;
-end;
-
-function TCDCdb.checkDBConfig(cmain: Tconf_main):string;
-var msg,dbn: string;
+function TCDCdb.checkDBConfig(cmain: conf_main):string;
+var msg: string;
     i:integer;
 label dmsg;
 begin
 try
   if DBtype=mysql then begin
-    dbn:=cmain.db;
     db.SetPort(cmain.dbport);
     db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
-    if db.Active then msg:=Format(rsConnectToSuc, [cmain.dbhost, inttostr(
-      cmain.dbport), crlf])
-       else begin msg:=Format(rsConnectToFai, [cmain.dbhost, inttostr(
-         cmain.dbport), trim(db.ErrorMessage)+crlf]); goto dmsg; end;
-  end else if DBtype=sqlite then begin
-    dbn:=UTF8Encode(cmain.db);
+    if db.Active then msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' successful.'+crlf
+       else begin msg:='Connect to '+cmain.dbhost+', '+inttostr(cmain.dbport)+' failed! '+trim(db.ErrorMessage)+crlf+'Verify if the MySQL Server is running and control the Userid/Password'; goto dmsg;end;
   end;
-  if ((db.database=dbn)or db.use(dbn)) then msg:=Format(rsDatabaseOpen, [msg,
-    cmain.db, crlf])
-     else begin msg:=Format(rsCannotOpenDa, [msg, cmain.db, trim(db.ErrorMessage
-       )+crlf]); goto dmsg; end;
+  if ((db.database=cmain.db)or db.use(cmain.db)) then msg:=msg+'Database '+cmain.db+' opened.'+crlf
+     else begin msg:=msg+'Cannot open database '+cmain.db+'! '+trim(db.ErrorMessage)+crlf; goto dmsg;end;
   for i:=1 to numsqltable do begin
-     if sqltable[dbtype, i, 1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[
-       dbtype, i, 1]+'"') then msg:=Format(rsTableExist, [msg, sqltable[dbtype,
-       i, 1]+crlf])
-        else begin msg:=Format(rsTableDoNotEx, [msg, sqltable[dbtype, i, 1],
-          crlf]) ; goto dmsg; end;
+     if sqltable[i,1]=db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then msg:=msg+'Table exist '+sqltable[i,1]+crlf
+        else begin msg:=msg+'Table '+sqltable[i,1]+' do not exist! '+crlf+'Please correct the error and retry.' ; goto dmsg;end;
   end;
-  msg:=Format(rsAllTablesStr, [msg]);
+  msg:=msg+'All tables structure exists.';
 dmsg:
   result:=msg;
 except
-  result:=rsSQLDatabaseS;
+  result:='SQL database software is probably not installed!';
 end;
 end;
 
-function TCDCdb.createDB(cmain: Tconf_main; var ok:boolean): string;
-var msg,dbn:string;
-    i,j,k:integer;
-    indexlist: TStringlist;
+function TCDCdb.createDB(cmain: conf_main; var ok:boolean): string;
+var msg:string;
+    i,j:integer;
 begin
 ok:=false;
 result:='';
 try
   if DBtype=mysql then begin
-     dbn:=cmain.db;
      db.SetPort(cmain.dbport);
      db.database:='';
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,'');
      if db.Active then db.Query('Create Database if not exists '+cmain.db);
      result:=trim(db.ErrorMessage);
      db.Connect(cmain.dbhost,cmain.dbuser,cmain.dbpass,cmain.db);
-  end else if DBtype=sqlite then begin
-    dbn:=UTF8Encode(cmain.db);
   end;
-  if db.database<>dbn then db.Use(dbn);
-  if db.database=dbn then begin
-    indexlist:=TStringlist.Create;
+  if db.database<>cmain.db then db.Use(cmain.db);
+  if db.database=cmain.db then begin
     ok:=true;
     for i:=1 to numsqltable do begin
-      db.Query('CREATE TABLE '+sqltable[dbtype,i,1]+sqltable[dbtype,i,2]);
+      if DBtype=sqlite then
+          db.Query('CREATE TABLE '+sqltable[i,1]+stringreplace(sqltable[i,2],'binary','',[rfReplaceAll]))
+      else
+          db.Query('CREATE TABLE '+sqltable[i,1]+sqltable[i,2]);
       msg:=trim(db.ErrorMessage);
-      if sqltable[dbtype,i,3]>'' then begin   // create the index
-         SplitRec(sqltable[dbtype,i,3],',',indexlist);
-         for j:=0 to indexlist.Count-1 do begin
-           k:=strtoint(indexlist[j]);
-           db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
-         end;
+      if sqltable[i,3]>'' then begin   // create the index
+         j:=strtoint(sqltable[i,3]);
+         db.Query('CREATE INDEX '+sqlindex[j,1]+' on '+sqlindex[j,2]);
       end;
-      if sqltable[dbtype,i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[dbtype,i,1]+'"') then begin
+      if sqltable[i,1]<>db.QueryOne(showtable[dbtype]+' "'+sqltable[i,1]+'"') then begin
          ok:=false;
-         result:=Format(rsErrorCreatin, [result+crlf, sqltable[dbtype, i, 1]+
-           blank+msg]);
+         result:=result+crlf+'Error creating table '+sqltable[i,1]+' '+msg;
          break;
       end;
     end;
-    indexlist.Free;
   end else begin
      ok:=false;
      result:=result+crlf+trim(db.ErrorMessage);
@@ -286,9 +211,9 @@ except
 end;
 end;
 
-function TCDCdb.dropDB(cmain: Tconf_main): string;
+function TCDCdb.dropDB(cmain: conf_main): string;
 var msg:string;
-    //i: integer;
+    i: integer;
 begin
 result:='';
 if DBtype=mysql then begin
@@ -305,7 +230,7 @@ if DBtype=mysql then begin
 end
 else if DBtype=sqlite then begin
   // do not work
-{  result:='';
+  result:='';
   db.StartTransaction;
   for i:=0 to db.Tables.Count-1 do begin
     db.Query('DROP TABLE '+db.Tables[i]);
@@ -315,13 +240,11 @@ else if DBtype=sqlite then begin
   db.Commit;
   db.Vacuum;
   msg:=trim(db.ErrorMessage);
-  if msg<>'0' then result:=result+msg;}
-  db.Close;
-  DeleteFile(cmain.db);
+  if msg<>'0' then result:=result+msg;
 end;
 end;
 
-procedure TCDCdb.GetCometFileList(cmain:Tconf_main; list:Tstrings);
+procedure TCDCdb.GetCometFileList(cmain:conf_main; list:Tstrings);
 var i:integer;
 begin
 list.clear;
@@ -338,7 +261,7 @@ except
 end;
 end;
 
-procedure TCDCdb.GetAsteroidFileList(cmain:Tconf_main; list:Tstrings);
+procedure TCDCdb.GetAsteroidFileList(cmain:conf_main; list:Tstrings);
 var i:integer;
 begin
 list.clear;
@@ -355,7 +278,7 @@ except
 end;
 end;
 
-function TCDCdb.LoadCometFile(comfile:string; memocom:Tmemo):boolean;
+procedure TCDCdb.LoadCometFile(comfile:string; memocom:Tmemo);
 var
   buf,cmd,filedesc,filenum :string;
   t,ep,id,nam,ec,q,i,node,peri,eq,h,g  : string;
@@ -363,15 +286,14 @@ var
   hh:double;
   f : textfile;
 begin
-result:=false;
+MemoCom.clear;
 if not fileexists(comfile) then begin
-  MemoCom.lines.add(rsFileNotFound);
+  MemoCom.lines.add('File not found!');
   exit;
 end;
 try
 if db.Active then begin
-  filedesc:=extractfilename(comfile)+blank+FormatDateTime('yyyy-mm-dd hh:nn',FileDateToDateTime(FileAge(comfile)));
-  Filemode:=0;
+  filedesc:=extractfilename(comfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(comfile)));
   assignfile(f,comfile);
   reset(f);
   db.starttransaction;
@@ -381,8 +303,7 @@ if db.Active then begin
     readln(f,buf);
     inc(nl);
     if trim(buf)='' then continue;
-    if (nl mod 10000)=0 then begin MemoCom.lines.add(Format(rsProcessingLi, [
-      inttostr(nl)])); application.processmessages; end;
+    if (nl mod 10000)=0 then begin MemoCom.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
     id:=trim(copy(buf,1,12));
     y:=strtoint(trim(copy(buf,15,4)));
     m:=strtoint(trim(copy(buf,20,2)));
@@ -397,15 +318,13 @@ if db.Active then begin
        hh:=0;
     end;
     ep:=formatfloat(f1,jd(y,m,d,hh));
-    q:=trim(copy(buf,31,9));
-    ec:=trim(copy(buf,41,9));
-    peri:=trim(copy(buf,51,9));
-    node:=trim(copy(buf,61,9));
-    i:=trim(copy(buf,71,9));
-    h:=trim(copy(buf,92,4));
-    if trim(h)='' then h:='15';
-    g:=trim(copy(buf,97,4));
-    if trim(g)='' then g:='4.0';
+    q:=copy(buf,31,9);
+    ec:=copy(buf,41,9);
+    peri:=copy(buf,51,9);
+    node:=copy(buf,61,9);
+    i:=copy(buf,71,9);
+    h:=copy(buf,92,4);
+    g:=copy(buf,97,4);
     nam:=stringreplace(trim(copy(buf,103,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
     if nl=1 then begin
@@ -416,7 +335,7 @@ if db.Active then begin
        if not db.Query('Insert into cdc_com_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
               MemoCom.lines.add(trim(db.ErrorMessage));
     end;
-    cmd:='REPLACE INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
+    cmd:='INSERT INTO cdc_com_elem (id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclination,epoch,h,g,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
         +',"'+t+'"'
         +',"'+q+'"'
@@ -430,26 +349,23 @@ if db.Active then begin
         +',"'+nam+'"'
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
-    if (not db.query(cmd))and(db.LastError<>19) then begin
-       MemoCom.lines.add(Format(rsInsertFailed, [inttostr(nl), trim(
-         db.ErrorMessage)]));
-    end
-      else result:=true; // at least one insert
-    cmd:='REPLACE INTO cdc_com_name (name, id) VALUES ('
+    if not db.query(cmd) then begin
+       MemoCom.lines.add('insert failed line '+inttostr(nl)+' : '+trim(db.ErrorMessage));
+    end;
+    cmd:='INSERT INTO cdc_com_name (name, id) VALUES ('
         +'"'+nam+'"'
         +',"'+id+'"'+')';
     db.query(cmd);
   until eof(f);
   closefile(f);
-  MemoCom.lines.add(Format(rsProcessingEn, [inttostr(nl)]));
+  MemoCom.lines.add('Processing ended. Total number of comet :'+inttostr(nl));
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then MemoCom.lines.add(buf);
 end;
-db.UnLockTables;
-db.commit;
-db.flush('tables');
-memocom.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCometFile.log');
+  db.UnLockTables;
+  db.commit;
+  db.flush('tables');
 except
 end;
 end;
@@ -466,21 +382,21 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_com_elem WRITE, cdc_com_elem_list WRITE');
-  memocom.lines.add(rsDeleteFromEl);
+  memocom.lines.add('Delete from element table...');
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem where elem_id='+elem_id) then
-     memocom.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+     memocom.lines.add('Failed : '+trim(db.ErrorMessage));
   memocom.lines.add('Delete from element list...');
   application.processmessages;
   if not db.Query('Delete from cdc_com_elem_list where elem_id='+elem_id) then
-     memocom.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+     memocom.lines.add('Failed : '+trim(db.ErrorMessage));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  memocom.lines.add(rsDeleteDailyD);
+  memocom.lines.add('Delete daily data');
   TruncateDailyComet;
   db.Vacuum;
-  memocom.lines.add(rsDeleteComple);
+  memocom.lines.add('Delete completed');
 end;
 except
 end;
@@ -493,20 +409,20 @@ try
 if db.Active then begin
   db.UnLockTables;
   db.starttransaction;
-  memocom.lines.add(rsDeleteFromEl);
+  memocom.lines.add('Delete from element table...');
   application.processmessages;
   db.TruncateTable('cdc_com_elem');
-  memocom.lines.add(rsDeleteFromEl2);
+  memocom.lines.add('Delete from element list...');
   application.processmessages;
   db.TruncateTable('cdc_com_elem_list');
-  memocom.lines.add(rsDeleteFromNa);
+  memocom.lines.add('Delete from name list...');
   application.processmessages;
   db.TruncateTable('cdc_com_name');
   db.commit;
-  memocom.lines.add(rsDeleteDailyD);
+  memocom.lines.add('Delete daily data');
   TruncateDailyComet;
   db.Vacuum;
-  memocom.lines.add(rsDeleteComple);
+  memocom.lines.add('Delete completed');
 end;
 except
 end;
@@ -572,7 +488,7 @@ if db.Active then begin
            +',"'+id+'"'+')';
        db.query(cmd);
        result:='OK!'
-    end else result:=Format(rsInsertFailed2, [trim(db.ErrorMessage)]);
+    end else result:='Insert failed! '+trim(db.ErrorMessage);
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
@@ -592,14 +508,14 @@ var
 begin
 nerr:=1;
 result:=false;
+memoast.clear;
 if not fileexists(astfile) then begin
-  memoast.lines.add(rsFileNotFound);
+  memoast.lines.add('File not found!');
   exit;
 end;
 try
 if db.Active then begin
-  filedesc:=extractfilename(astfile)+blank+FormatDateTime('yyyy-mm-dd hh:nn',FileDateToDateTime(FileAge(astfile)));
-  Filemode:=0;
+  filedesc:=extractfilename(astfile)+blank+FormatDateTime('yyyy-mmm-dd hh:nn',FileDateToDateTime(FileAge(astfile)));
   assignfile(f,astfile);
   reset(f);
   // minimal file checking to distinguish full mpcorb from daily update
@@ -615,10 +531,10 @@ if db.Active then begin
              inc(nl);
           until eof(f) or (copy(buf,1,5)='-----');
   if eof(f) then begin
-     memoast.lines.add(rsThisFileWasN);
+     memoast.lines.add('This file was not recognized as a MPCORB file.');
      raise exception.create('');
   end;
-  memoast.lines.add(Format(rsDataStartOnL, [inttostr(nl+1)]));
+  memoast.lines.add('Data start on line '+inttostr(nl+1));
   prefl:=nl;
   db.starttransaction;
   db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_name WRITE');
@@ -631,26 +547,26 @@ if db.Active then begin
       if astnumbered then break
                      else continue;
     end;
-    if (nl mod 10000)=0 then begin memoast.lines.add(Format(rsProcessingLi, [inttostr(nl)])); application.processmessages; end;
+    if (nl mod 10000)=0 then begin memoast.lines.add('Processing line '+inttostr(nl)); application.processmessages; end;
     id:=trim(copy(buf,1,7));
     lid:=length(id);
     if lid<7 then id:=StringofChar('0',7-lid)+id;
-    h:=trim(copy(buf,9,5));
-    g:=trim(copy(buf,15,5));
+    h:=copy(buf,9,5);
+    g:=copy(buf,15,5);
     ep:=trim(copy(buf,21,5));
     if decode_mpc_date(ep,y,m,d,hh) then
        ep:=floattostr(jd(y,m,d,hh))
      else begin
        inc(nerr);
-       memoast.lines.add(Format(rsInvalidEpoch, [inttostr(nl+prefl), buf]));
+       memoast.lines.add('invalid epoch on line'+inttostr(nl+prefl)+' : '+buf);
        break;
      end;
-    ma:=trim(copy(buf,27,9));
-    peri:=trim(copy(buf,38,9));
-    node:=trim(copy(buf,49,9));
-    i:=trim(copy(buf,60,9));
-    ec:=trim(copy(buf,71,9));
-    ax:=trim(copy(buf,93,11));
+    ma:=copy(buf,27,9);
+    peri:=copy(buf,38,9);
+    node:=copy(buf,49,9);
+    i:=copy(buf,60,9);
+    ec:=copy(buf,71,9);
+    ax:=copy(buf,93,11);
     ref:=trim(copy(buf,108,10));
     nam:=stringreplace(trim(copy(buf,167,27)),'"','\"',[rfreplaceall]);
     eq:='2000';
@@ -662,7 +578,7 @@ if db.Active then begin
        if not db.Query('Insert into cdc_ast_elem_list (elem_id, filedesc) Values("'+filenum+'","'+filedesc+'")') then
               memoast.lines.add(trim(db.ErrorMessage));
     end;
-    cmd:='REPLACE INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
+    cmd:='INSERT INTO cdc_ast_elem (id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccentricity,semi_axis,ref,name,equinox,elem_id) VALUES ('
         +'"'+id+'"'
         +',"'+h+'"'
         +',"'+g+'"'
@@ -677,32 +593,30 @@ if db.Active then begin
         +',"'+nam+'"'
         +',"'+eq+'"'
         +',"'+filenum+'"'+')';
-    if (not db.query(cmd))and(db.LastError<>19) then begin
-       memoast.lines.add(Format(rsInsertFailed, [inttostr(nl+prefl), trim(
-         db.ErrorMessage)]));
+    if not db.query(cmd) then begin
+       memoast.lines.add('insert failed line '+inttostr(nl+prefl)+' : '+trim(db.ErrorMessage));
        inc(nerr);
        if stoperr and (nerr>1000) then begin
-          memoast.lines.add(rsMoreThan1000);
+          memoast.lines.add('More than 1000 errors! Process aborted.');
           break;
        end;
     end;
-    cmd:='REPLACE INTO cdc_ast_name (name, id) VALUES ('
+    cmd:='INSERT INTO cdc_ast_name (name, id) VALUES ('
         +'"'+nam+'"'
         +',"'+id+'"'+')';
     db.query(cmd);
     if limit and (nl>=astlimit) then break;
   until eof(f);
   closefile(f);
-  memoast.lines.add(Format(rsProcessingEn2, [inttostr(nl)]));
+  memoast.lines.add('Processing ended. Total number of asteroid :'+inttostr(nl));
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then memoast.lines.add(buf);
 end;
-db.UnLockTables;
-db.commit;
-db.flush('tables');
+  db.UnLockTables;
+  db.commit;
+  db.flush('tables');
 result:=(nerr=0);
-memoast.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadAsteroidFile.log');
 except
 end;
 end;
@@ -719,25 +633,25 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_ast_elem WRITE, cdc_ast_elem_list WRITE, cdc_ast_mag WRITE');
-  memoast.lines.add(rsDeleteFromEl);
+  memoast.lines.add('Delete from element table...');
   application.processmessages;
   if not db.Query('Delete from cdc_ast_elem where elem_id='+elem_id) then
-     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
-  memoast.lines.add(rsDeleteFromEl2);
+     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
+  memoast.lines.add('Delete from element list...');
   application.processmessages;
   if not db.Query('Delete from cdc_ast_elem_list where elem_id='+elem_id) then
-     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
-  memoast.lines.add(rsDeleteFromMo);
+     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
+  memoast.lines.add('Delete from monthly table...');
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where elem_id='+elem_id) then
-     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
-  memoast.lines.add(rsDeleteDailyD);
+  memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
   db.Vacuum;
-  memoast.lines.add(rsDeleteComple);
+  memoast.lines.add('Delete completed');
 end;
 except
 end;
@@ -756,15 +670,15 @@ try
 if db.Active then begin
   db.starttransaction;
   db.LockTables('cdc_ast_mag WRITE');
-  memoast.lines.add(Format(rsDeleteFromMo2, [jds]));
+  memoast.lines.add('Delete from monthly table for jd<'+jds);
   application.processmessages;
   if not db.Query('Delete from cdc_ast_mag where jd<'+jds) then
-     memoast.lines.add(Format(rsFailed, [trim(db.ErrorMessage)]));
+     memoast.lines.add('Failed : '+trim(db.ErrorMessage));
   db.UnLockTables;
   db.commit;
   db.flush('tables');
   db.Vacuum;
-  memoast.lines.add(rsDeleteComple);
+  memoast.lines.add('Delete completed');
 end;
 except
 end;
@@ -777,23 +691,23 @@ try
 if db.Active then begin
   db.UnLockTables;
   db.starttransaction;
-  memoast.lines.add(rsDeleteFromEl);
+  memoast.lines.add('Delete from element table...');
   application.processmessages;
   db.TruncateTable('cdc_ast_elem');
-  memoast.lines.add(rsDeleteFromEl2);
+  memoast.lines.add('Delete from element list...');
   application.processmessages;
   db.TruncateTable('cdc_ast_elem_list');
-  memoast.lines.add(rsDeleteFromNa);
+  memoast.lines.add('Delete from name list...');
   application.processmessages;
   db.TruncateTable('cdc_ast_name');
-  memoast.lines.add(rsDeleteFromMo);
+  memoast.lines.add('Delete from monthly table...');
   application.processmessages;
   db.TruncateTable('cdc_ast_mag');
   db.commit;
-  memoast.lines.add(rsDeleteDailyD);
+  memoast.lines.add('Delete daily data');
   TruncateDailyAsteroid;
   db.Vacuum;
-  memoast.lines.add(rsDeleteComple);
+  memoast.lines.add('Delete completed');
 end;
 except
 end;
@@ -848,7 +762,7 @@ if db.Active then begin
            +',"'+id+'"'+')';
        db.query(cmd);
        result:='OK!'
-    end else result:=Format(rsInsertFailed2, [trim(db.ErrorMessage)]);
+    end else result:='Insert failed! '+trim(db.ErrorMessage);
 end else begin
    buf:=trim(db.ErrorMessage);
    if buf<>'0' then result:=buf;
@@ -875,7 +789,6 @@ try
   db.StartTransaction;
   while j<dailytable.Count do begin
      db.TruncateTable(dailytable[j]);
-     db.Query('drop table '+dailytable[j]);
      inc(j);
   end;
   db.Commit;
@@ -901,7 +814,6 @@ try
   db.StartTransaction;
   while j<dailytable.Count do begin
      db.TruncateTable(dailytable[j]);
-     db.Query('drop table '+dailytable[j]);
      inc(j);
   end;
   db.Commit;
@@ -910,42 +822,12 @@ finally
 end;
 end;
 
-procedure TCDCdb.LoadSampleData(memo:Tmemo; cmain: Tconf_main);
+procedure TCDCdb.LoadSampleData(memo:Tmemo);
 begin
-try
   // load sample asteroid data
-  if not LoadAsteroidFile(slash(sampledir)+'MPCsample.dat',true,false,false,1000,memo) then begin
-     dropdb(cmain);
-     raise exception.create('Error loading '+slash(sampledir)+'MPCsample.dat');
-  end;
+  LoadAsteroidFile(slash(sampledir)+'MPCsample.dat',true,false,false,1000,memo);
   // load sample comet data
-  if not LoadCometFile(slash(sampledir)+'Cometsample.dat',memo) then begin
-     dropdb(cmain);
-     raise exception.create('Error loading '+slash(sampledir)+'Cometsample.dat');
-  end;
-  // load location
-  if not LoadCountryList(slash(sampledir)+'country.dat',memo) then begin
-     dropdb(cmain);
-     raise exception.create('Error loading '+slash(sampledir)+'country.dat');
-  end;
-  if not LoadWorldLocation(slash(sampledir)+'world.dat','',false,memo) then begin
-     dropdb(cmain);
-     raise exception.create('Error loading '+slash(sampledir)+'world.dat');
-  end;
-  if not LoadUSLocation(slash(sampledir)+'us.dat',false,memo) then begin
-     dropdb(cmain);
-     raise exception.create('Error loading '+slash(sampledir)+'us.dat');
-  end;
-except
-  on E: Exception do begin
-   WriteTrace('LoadSampleData: '+E.Message);
-   MessageDlg('LoadSampleData: '+E.Message+crlf+rsSomethingGoW+crlf
-             +rsPleaseTryToR,
-             mtError, [mbAbort], 0);
-   Halt;
-   end;
-end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadSampleData.log');
+  LoadCometFile(slash(sampledir)+'Cometsample.dat',memo);
 end;
 
 procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
@@ -985,9 +867,9 @@ qry:='SELECT epoch FROM cdc_com_elem where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then
   for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(trim(db.Results[i][0]))-now_jd);
+      dif:=abs(strtofloat(db.Results[i][0])-now_jd);
       if dif<diff then begin
-         result:=strtofloat(trim(db.Results[i][0]));
+         result:=strtofloat(db.Results[i][0]);
          diff:=dif;
       end;
   end;
@@ -1004,9 +886,9 @@ qry:='SELECT epoch FROM cdc_ast_elem where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then
   for i:=0 to db.Rowcount-1 do begin
-      dif:=abs(strtofloat(trim(db.Results[i][0]))-now_jd);
+      dif:=abs(strtofloat(db.Results[i][0])-now_jd);
       if dif<diff then begin
-         result:=strtofloat(trim(db.Results[i][0]));
+         result:=strtofloat(db.Results[i][0]);
          diff:=dif;
       end;
   end;
@@ -1023,17 +905,17 @@ qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccen
     +' and epoch='+formatfloat(f1,epoch);
 db.Query(qry);
 if db.rowcount>0 then begin
-  if not trystrtofloat(trim(db.Results[0][1]),h) then h:=17;
-  if not trystrtofloat(trim(db.Results[0][2]),g) then g:=0.15;
-  ma:=strtofloat(trim(db.Results[0][4]));
-  ap:=strtofloat(trim(db.Results[0][5]));
-  an:=strtofloat(trim(db.Results[0][6]));
-  ic:=strtofloat(trim(db.Results[0][7]));
-  ec:=strtofloat(trim(db.Results[0][8]));
-  sa:=strtofloat(trim(db.Results[0][9]));
+  h:=strtofloat(db.Results[0][1]);
+  g:=strtofloat(db.Results[0][2]);
+  ma:=strtofloat(db.Results[0][4]);
+  ap:=strtofloat(db.Results[0][5]);
+  an:=strtofloat(db.Results[0][6]);
+  ic:=strtofloat(db.Results[0][7]);
+  ec:=strtofloat(db.Results[0][8]);
+  sa:=strtofloat(db.Results[0][9]);
   ref:=db.Results[0][10];
   nam:=db.Results[0][11];
-  eq:=strtofloat(trim(db.Results[0][12]));
+  eq:=strtofloat(db.Results[0][12]);
   elem_id:=db.Results[0][13];
   result:=true;
 end else begin
@@ -1054,16 +936,16 @@ qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclin
     +' and epoch='+formatfloat(f1,epoch);
 db.Query(qry);
 if db.Rowcount>0 then begin
-  tp:=strtofloat(trim(db.Results[0][1]));
-  q:=strtofloat(trim(db.Results[0][2]));
-  ec:=strtofloat(trim(db.Results[0][3]));
-  ap:=strtofloat(trim(db.Results[0][4]));
-  an:=strtofloat(trim(db.Results[0][5]));
-  ic:=strtofloat(trim(db.Results[0][6]));
-  h:=strtofloat(trim(db.Results[0][8]));
-  g:=strtofloat(trim(db.Results[0][9]));
+  tp:=strtofloat(db.Results[0][1]);
+  q:=strtofloat(db.Results[0][2]);
+  ec:=strtofloat(db.Results[0][3]);
+  ap:=strtofloat(db.Results[0][4]);
+  an:=strtofloat(db.Results[0][5]);
+  ic:=strtofloat(db.Results[0][6]);
+  h:=strtofloat(db.Results[0][8]);
+  g:=strtofloat(db.Results[0][9]);
   nam:=db.Results[0][10];
-  eq:=strtofloat(trim(db.Results[0][11]));
+  eq:=strtofloat(db.Results[0][11]);
   elem_id:=db.Results[0][12];
   result:=true;
 end else begin
@@ -1085,12 +967,12 @@ qry:='SELECT id,h,g,epoch,mean_anomaly,arg_perihelion,asc_node,inclination,eccen
     +' where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then begin
-  epoch:=strtofloat(trim(db.Results[0][3]));
+  epoch:=strtofloat(db.Results[0][3]);
   dt:=abs(jd-epoch);
   j:=0;
   i:=1;
   while i<db.Rowcount do begin
-    t:=strtofloat(trim(db.Results[i][3]));
+    t:=strtofloat(db.Results[i][3]);
     if abs(jd-t)<dt then begin
        epoch:=t;
        dt:=abs(jd-t);
@@ -1098,22 +980,23 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  if dt>1000 then begin
-     FAstmsg:=rsWarningSomeA;
-  end;
-  h:=StrToFloatDef(trim(db.Results[j][1]),20);  // H and G not present in file for some poorly observed asteroids
-  g:=StrToFloatDef(trim(db.Results[j][2]),0.15);
-  ma:=strtofloat(trim(db.Results[j][4]));
-  ap:=strtofloat(trim(db.Results[j][5]));
-  an:=strtofloat(trim(db.Results[j][6]));
-  ic:=strtofloat(trim(db.Results[j][7]));
-  ec:=strtofloat(trim(db.Results[j][8]));
-  sa:=strtofloat(trim(db.Results[j][9]));
-  ref:=db.Results[j][10];
-  nam:=db.Results[j][11];
-  eq:=strtofloat(trim(db.Results[j][12]));
-  elem_id:=db.Results[j][13];
-  result:=true;
+  if dt<1000 then begin
+     h:=strtofloat(db.Results[j][1]);
+     g:=strtofloat(db.Results[j][2]);
+     ma:=strtofloat(db.Results[j][4]);
+     ap:=strtofloat(db.Results[j][5]);
+     an:=strtofloat(db.Results[j][6]);
+     ic:=strtofloat(db.Results[j][7]);
+     ec:=strtofloat(db.Results[j][8]);
+     sa:=strtofloat(db.Results[j][9]);
+     ref:=db.Results[j][10];
+     nam:=db.Results[j][11];
+     eq:=strtofloat(db.Results[j][12]);
+     elem_id:=db.Results[j][13];
+     result:=true;
+  end
+  else
+     result:=false;
 end else begin
   result:=false;
 end;
@@ -1133,12 +1016,12 @@ qry:='SELECT id,peri_epoch,peri_dist,eccentricity,arg_perihelion,asc_node,inclin
     +' where id="'+id+'"';
 db.Query(qry);
 if db.Rowcount>0 then begin
-  epoch:=strtofloat(trim(db.Results[0][7]));
+  epoch:=strtofloat(db.Results[0][7]);
   dt:=abs(jd-epoch);
   j:=0;
   i:=1;
   while i<db.Rowcount do begin
-    t:=strtofloat(trim(db.Results[i][7]));
+    t:=strtofloat(db.Results[i][7]);
     if abs(jd-t)<dt then begin
        epoch:=t;
        dt:=abs(jd-t);
@@ -1146,22 +1029,22 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-
-  if dt>1000 then begin
-     FCommsg:=rsWarningSomeC;
-  end;
-  tp:=strtofloat(trim(db.Results[j][1]));
-  q:=strtofloat(trim(db.Results[j][2]));
-  ec:=strtofloat(trim(db.Results[j][3]));
-  ap:=strtofloat(trim(db.Results[j][4]));
-  an:=strtofloat(trim(db.Results[j][5]));
-  ic:=strtofloat(trim(db.Results[j][6]));
-  h:=strtofloat(trim(db.Results[j][8]));
-  g:=strtofloat(trim(db.Results[j][9]));
-  nam:=db.Results[j][10];
-  eq:=strtofloat(trim(db.Results[j][11]));
-  elem_id:=db.Results[j][12];
-  result:=true;
+  if dt<1000 then begin
+     tp:=strtofloat(db.Results[j][1]);
+     q:=strtofloat(db.Results[j][2]);
+     ec:=strtofloat(db.Results[j][3]);
+     ap:=strtofloat(db.Results[j][4]);
+     an:=strtofloat(db.Results[j][5]);
+     ic:=strtofloat(db.Results[j][6]);
+     h:=strtofloat(db.Results[j][8]);
+     g:=strtofloat(db.Results[j][9]);
+     nam:=db.Results[j][10];
+     eq:=strtofloat(db.Results[j][11]);
+     elem_id:=db.Results[j][12];
+     result:=true;
+  end
+  else
+    result:=false;
 end else begin
   result:=false;
 end;
@@ -1188,8 +1071,6 @@ var c,f : tsearchrec;
     dummyfile : boolean;
     ra,de,w,h,r: double;
 begin
-try
-if DirectoryExists(ImagePath) then begin
 try
 if db.Active then begin
 ProgressCat.caption:='';
@@ -1244,7 +1125,7 @@ while j=0 do begin
       objn:=extractfilename(f.Name);
       p:=pos(extractfileext(objn),objn);
       objn:=copy(objn,1,p-1);
-      objn:=uppercase(stringreplace(objn,blank,'',[rfReplaceAll]));
+      objn:=uppercase(stringreplace(objn,' ','',[rfReplaceAll]));
       cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
         +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
         +',"'+uppercase(c.Name)+'"'
@@ -1256,13 +1137,12 @@ while j=0 do begin
         +',"'+formatfloat(f5,r)+'"'
         +')';
       if not db.query(cmd) then
-         writetrace(Format(rsDBInsertFail, [f.Name, db.ErrorMessage]));
+         writetrace('DB insert failed for '+f.Name+' :'+db.ErrorMessage);
     end
-    else writetrace(Format(rsInvalidFITSF, [f.Name]));
+    else writetrace('Invalid FITS file: '+f.Name);
     i:=findnext(f);
   end;
   db.commit;
-  findclose(f);
   end;
   j:=findnext(c);
 end;
@@ -1270,346 +1150,8 @@ db.flush('tables');
 end;
 finally
   findclose(c);
+  findclose(f);
 end;
-end else begin
-  ProgressCat.Caption:='Directory not found!';
-end;
-except
-end;
-end;
-
-function TCDCdb.LoadCountryList(locfile:string; memo:Tmemo):boolean;
-var f: textfile;
-    buf,sql: string;
-    rec: TStringList;
-begin
-result:=false;
-Memo.clear;
-if not fileexists(locfile) then begin
-  Memo.lines.add(rsFileNotFound);
-  ShowMessage(rsFileNotFound+crlf+locfile);
-  exit;
-end;
-try
-if db.Active then begin
-  rec:= TStringList.Create;
-  Filemode:=0;
-  assignfile(f,locfile);
-  reset(f);
-  db.StartTransaction;
-  repeat
-    readln(f,buf);
-    SplitRec(buf,tab,rec);
-    sql:='insert into cdc_country (country,isocode,name)'+
-       'values ('+
-       '"'+rec[0]+'",'+
-       '"'+rec[1]+'",'+
-       '"'+rec[2]+'")';
-    if not db.Query(sql) then Memo.lines.add(rec[0]+blank+db.ErrorMessage)
-       else result:=true;
-  until(eof(f));
-  db.Commit;
-  db.flush('tables');
-  closefile(f);
-  rec.Free;
-end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCountryList.log');
-application.ProcessMessages;
-except
-end;
-end;
-
-function TCDCdb.LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo):boolean;
-var f: textfile;
-    buf,sql,cc: string;
-    rec: TStringList;
-    nl: integer;
-    force_country: boolean;
-begin
-result:=false;
-Memo.clear;
-if not fileexists(locfile) then begin
-  Memo.lines.add(rsFileNotFound);
-  exit;
-end;
-try
-if db.Active then begin
-  rec:= TStringList.Create;
-  nl:=0;
-  force_country:=(country<>'');
-  Filemode:=0;
-  assignfile(f,locfile);
-  reset(f);
-  readln(f,buf); // heading
-  if isnumber(copy(buf,1,1)) then reset(f);
-  db.starttransaction;
-  db.LockTables('cdc_location WRITE');
-  repeat
-    readln(f,buf);
-    if (nl mod 10000)=0 then begin Memo.lines.add(Format(rsProcessingLi, [
-      inttostr(nl)])); application.processmessages; end;
-    SplitRec(buf,tab,rec);
-    if (rec[17]<>'V') and  // skip alternate name
-       ((not  city_only)  // all names
-          or ((rec[9]='P')and(rec[10]<>'PPLQ')and(rec[10]<>'PPLW'))  // populated place only
-        )
-     then begin
-       if not IsNumber(rec[3]) then continue;
-       if not IsNumber(rec[4]) then continue;
-       if force_country then cc:=country
-          else cc:=rec[12];
-       sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
-         'values ('+
-         rec[2]+','+
-         '"'+cc+'",'+
-         '"'+trim(rec[22])+'",'+
-         '"'+rec[10]+'",'+
-         rec[3]+','+
-         rec[4]+','+
-         '0,'+
-         '0)';
-       if not db.Query(sql) then Memo.lines.add(rec[2]+blank+cc+blank+db.ErrorMessage)
-          else inc(nl);
-    end;
-  until(eof(f));
-  closefile(f);
-  rec.Free;
-  db.UnLockTables;
-  db.commit;
-  db.flush('tables');
-  Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
-  application.ProcessMessages;
-  result:=(nl>0);
-end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadWorldLocation.log');
-except
-end;
-end;
-
-function TCDCdb.LoadUSLocation(locfile:string; city_only:boolean; memo:Tmemo; state:string = ''):boolean;
-var f: textfile;
-    buf,sql: string;
-    rec: TStringList;
-    nl: integer;
-    elev:double;
-begin
-result:=false;
-Memo.clear;
-if not fileexists(locfile) then begin
-  Memo.lines.add(rsFileNotFound);
-  exit;
-end;
-try
-if db.Active then begin
-  rec:= TStringList.Create;
-  nl:=0;
-  Filemode:=0;
-  assignfile(f,locfile);
-  reset(f);
-  readln(f,buf); // heading
-  if isnumber(copy(buf,1,1)) then reset(f);
-  db.starttransaction;
-  db.LockTables('cdc_location WRITE');
-  repeat
-    if (nl mod 10000)=0 then begin Memo.lines.add(Format(rsProcessingLi, [
-      inttostr(nl)])); application.processmessages; end;
-    readln(f,buf);
-    SplitRec(buf,tab,rec);
-     if ((not city_only)  // all names
-          or (rec[2]='Populated Place')  // populated place only
-        )
-     then begin
-      if (state<>'')and(state<>rec[3]) then continue; // wrong state
-      if not IsNumber(rec[9]) then continue;
-      if not IsNumber(rec[10]) then continue;
-      elev:=strtointdef(rec[15],0);
-      if rec[1]<>rec[5] then rec[1]:=rec[1]+', '+rec[5];
-      sql:='insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
-         'values ('+
-         rec[0]+','+
-         '"US-'+rec[3]+'",'+
-         '"'+Condutf8encode(trim(rec[1]))+'",'+
-         '"'+rec[2]+'",'+
-         rec[9]+','+
-         rec[10]+','+
-         formatfloat('0.0',elev)+','+
-         '0)';
-       if not db.Query(sql) then Memo.lines.add(rec[0]+blank+rec[3]+blank+db.ErrorMessage)
-          else inc(nl);
-    end;
-  until(eof(f));
-  closefile(f);
-  rec.Free;
-  db.UnLockTables;
-  db.commit;
-  db.flush('tables');
-  Memo.lines.add(Format(rsProcessingEn3, [inttostr(nl)]));
-  Application.ProcessMessages;
-  result:=(nl>0);
-end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadUSLocation.log');
-except
-end;
-end;
-
-procedure TCDCdb.GetCountryList(codelist,countrylist:Tstrings);
-var i:integer;
-    buf:string;
-begin
-countrylist.Clear;
-codelist.Clear;
-db.Query('select country,name from cdc_country');
-i:=0;
-while i<db.RowCount do begin
-  codelist.add(db.results[i][0]);
-  buf:=db.results[i][1];
-  countrylist.add(Condutf8decode(buf));
-  inc(i);
-end;
-end;
-
-procedure TCDCdb.GetCountryISOCode(countrycode:string; var isocode: string);
-begin
-isocode:=db.QueryOne('select isocode from cdc_country where country = "'+countrycode+'"');
-end;
-
-procedure TCDCdb.GetCountryFromISO(isocode:string; var cname: string);
-begin
-cname:=db.QueryOne('select name from cdc_country where isocode = "'+isocode+'"');
-end;
-
-procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
-var i,k:integer;
-    prev,buf,bufutf8:string;
-begin
-citylist.Clear;
-codelist.Clear;
-filter:=Condutf8encode(filter);
-buf:='select locid,location,type from cdc_location where country = "'+countrycode+'" ';
-if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
-buf:=buf+' order by location limit '+inttostr(limit);
-db.Query(buf);
-i:=0;
-k:=0;
-prev:='';
-while i<db.RowCount do begin
-  codelist.add(db.results[i][0]);
-  buf:=db.results[i][1];
-  if copy(db.results[i][2],1,3)<>'PPL' then
-     buf:=buf+' -- '+db.results[i][2];
-  if buf=prev then begin
-    inc(k);
-    buf:=buf+' -- '+inttostr(k);
-  end else begin
-    prev:=buf;
-    k:=0;
-  end;
-  bufutf8:=Condutf8decode(buf);
-  citylist.add(bufutf8);
-  inc(i);
-end;
-end;
-
-procedure TCDCdb.GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
-var lo1,lo2,la1,la2,buf,prev:string;
-    i,k: integer;
-begin
-la1:=floattostr(lat1);
-la2:=floattostr(lat2);
-lo1:=floattostr(lon1);
-lo2:=floattostr(lon2);
-db.Query('select locid,location,type from cdc_location where '+
-        'country="'+country+'" and '+
-        '(latitude between '+la1+' and '+la2+') and '+
-        '(longitude between '+lo1+' and '+lo2+') order by location limit '+inttostr(limit));
-i:=0;
-k:=0;
-prev:='';
-while i<db.RowCount do begin
-  codelist.add(db.results[i][0]);
-  buf:=db.results[i][1];
-  if copy(db.results[i][2],1,3)<>'PPL' then
-     buf:=buf+' -- '+db.results[i][2];
-  if buf=prev then begin
-    inc(k);
-    buf:=buf+' -- '+inttostr(k);
-  end else begin
-    prev:=buf;
-    k:=0;
-  end;
-  citylist.add(Condutf8decode(buf));
-  inc(i);
-end;
-end;
-
-function TCDCdb.GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
-begin
-db.Query('select type,latitude,longitude,elevation,timezone from cdc_location where locid="'+locid+'"');
-if db.RowCount>0 then begin
-  loctype:=db.results[0][0];
-  latitude:=db.results[0][1];
-  longitude:=db.results[0][2];
-  elevation:=db.results[0][3];
-  timezone:=db.results[0][4];
-  result:=true;
-end
-else result:=false;
-end;
-
-function TCDCdb.UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
-var id,buf:string;
-begin
-if locid=0 then begin // Add new location
-  id:=CdcMinLocid;
-  buf:=db.QueryOne('select max(locid) from cdc_location where locid>='+id);
-  if buf<>'' then begin
-    id:=inttostr(strtoint(buf)+1)
-  end;
-  db.StartTransaction;
-  db.Query('insert into cdc_location (locid,country,location,type,latitude,longitude,elevation,timezone)'+
-       'values ('+
-       id+','+
-       '"'+country+'",'+
-       '"'+Condutf8encode(location)+'",'+
-       '"'+loctype+'",'+
-       lat+','+
-       lon+','+
-       elev+','+
-       tz+')');
-  result:=db.ErrorMessage;
-  db.Commit;
-end
-else begin  // update location
-  id:=inttostr(locid);
-  db.StartTransaction;
-  db.Query('update cdc_location set '+
-           'latitude='+lat+','+
-           'longitude='+lon+','+
-           'elevation='+elev+','+
-           'timezone='+tz+
-           ' where locid='+id);
-  result:=db.ErrorMessage;
-  db.Commit;
-end;
-end;
-
-function TCDCdb.DeleteCity(locid:integer):string;
-begin
-db.StartTransaction;
-db.Query('delete from cdc_location where locid="'+inttostr(locid)+'"');
-result:=db.ErrorMessage;
-db.Commit;
-end;
-
-function TCDCdb.DeleteCountry(country:string; deleteall: boolean):string;
-var sql: string;
-begin
-sql:='delete from cdc_location where country="'+country+'"';
-if not deleteall then sql:=sql+' and locid<'+CdcMinLocid;
-db.StartTransaction;
-db.Query(sql);
-result:=db.ErrorMessage;
-db.Commit;
 end;
 
 end.

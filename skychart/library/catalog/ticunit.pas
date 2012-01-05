@@ -31,13 +31,13 @@ type
                      gscn: word;
                      mb,mv :smallint;
                      end;
-Function IsTICpath(path : string) : Boolean;
-procedure SetTICpath(path : string);
-Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenTICwin(var ok : boolean);
-Procedure ReadTIC(var lin : TICrec; var SMnum : string ; var ok : boolean);
-Procedure NextTIC( var ok : boolean);
-procedure CloseTIC ;
+Function IsTICpath(path : PChar) : Boolean; stdcall;
+procedure SetTICpath(path : PChar); stdcall;
+Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenTICwin(var ok : boolean); stdcall;
+Procedure ReadTIC(var lin : TICrec; var SMnum : PChar ; var ok : boolean); stdcall;
+Procedure NextTIC( var ok : boolean); stdcall;
+procedure CloseTIC ; stdcall;
 
 
 var
@@ -62,7 +62,7 @@ var
    Ncache,Icache : integer;
    lastcache : integer = 0;
 
-Function IsTICpath(path : string) : Boolean;
+Function IsTICpath(path : PChar) : Boolean; stdcall;
 var p : string;
 begin
 p:=slash(path);
@@ -92,7 +92,7 @@ result:=    FileExists(p+'n0000'+slashchar+'001.dat')
          or FileExists(p+'s8230'+slashchar+'730.dat')
 end;
 
-procedure SetTICpath(path : string);
+procedure SetTICpath(path : PChar); stdcall;
 var i : integer;
     buf:string;
 begin
@@ -155,7 +155,7 @@ end;
 ok:=true;
 end;
 
-Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenTIC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -168,7 +168,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadTIC(var lin : TICrec; var SMnum : string ; var ok : boolean);
+Procedure ReadTIC(var lin : TICrec; var SMnum : PChar ; var ok : boolean); stdcall;
 begin
 ok:=true;
 inc(Icache);
@@ -200,10 +200,10 @@ end else begin
      end;
   end;
 end;
-SMnum:=SMname;
+SMnum:=PChar(SMname);
 end;
 
-Procedure NextTIC( var ok : boolean);
+Procedure NextTIC( var ok : boolean); stdcall;
 begin
 if OnCache then begin
 end else begin
@@ -219,13 +219,13 @@ end;
   end;
 end;
 
-procedure CloseTIC ;
+procedure CloseTIC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenTICwin(var ok : boolean);
+Procedure OpenTICwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

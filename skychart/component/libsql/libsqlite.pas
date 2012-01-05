@@ -1,13 +1,11 @@
 unit libsqlite;
 
 {$IFDEF FPC}
-  {$MODE Delphi}
-  {$H+}
-{$ELSE}
+{$MODE Delphi}
+{$H+}
+{ELSE}
   {$IFNDEF LINUX}
-    {$DEFINE WIN32}
-  {$ELSE}
-    {$DEFINE UNIX}
+  {$DEFINE WIN32}
   {$ENDIF}
 {$ENDIF}
 
@@ -30,7 +28,7 @@ Thanks to Roger Reghin (RReghin@scelectric.ca) for his idea to ValueList.
 
 interface
 
-uses {$IFNDEF FPC}{$IFDEF MSWINDOWS}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
+uses {$IFNDEF FPC}{$IFDEF WIN32}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
 
 const
   SQLITE_OK         =  0;   // Successful result
@@ -63,7 +61,7 @@ const
 
 
 
-  SQLITEDLL: PChar  = {$IFDEF LINUX}'libsqlite.so'{$ENDIF}{$IFDEF MSWINDOWS}'sqlite.dll'{$ENDIF}{$IFDEF WINCE}'sqlite.dll'{$ENDIF}{$IFDEF darwin}'libsqlite.dylib'{$ENDIF};
+  SQLITEDLL: PChar  = {$IFNDEF WIN32}'libsqlite.so' {$ELSE} 'sqlite.dll'{$ENDIF};
 
 function LoadLibSqlite2 (var LibraryPath: String): Boolean;
 
@@ -171,9 +169,9 @@ begin
   {$ELSE}
   DLLHandle := LoadLibrary(PChar(libname));
   {$ENDIF}
-  {$IFNDEF MSWINDOWS}
+  {$IFNDEF WIN32}
       // try other possible library name
-      if DLLHandle = 0 then begin
+      if DLLHandle = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then begin
          libname := libname + '.0';
          {$IFDEF FPC}
          DLLHandle := LoadLibrary(libname);
@@ -183,7 +181,7 @@ begin
       end;
   {$ENDIF}
 
-  if DLLHandle <> 0 then
+  if DLLHandle <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
   begin
 	  Result := True; //assume everything ok unless..
     LibraryPath := LibName;
@@ -274,7 +272,7 @@ initialization
 
 //  MsgNoError := SystemErrorMsg(0);
 finalization
-  if DLLHandle <> 0 then
+  if DLLHandle <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
     {$IFNDEF FPC}FreeLibrary (DllHandle){$ELSE}UnloadLibrary(DllHandle){$ENDIF};
 
 

@@ -76,12 +76,15 @@ type
     { Private declarations }
   protected
     { Protected declarations }
+    property OnExit;
   public
     { Public declarations }
     constructor Create(AOwner: TComponent); override;
     procedure SetBounds(ALeft, ATop, AWidth, AHeight: Integer); override;
   published
     { Published declarations }
+   {property AutoSelect;}
+  { property AutoSize; }
     property BorderStyle;
     property Color;
     property Cursor;
@@ -97,11 +100,13 @@ type
     property ParentColor;
     property ParentFont;
     property ParentShowHint;
+  { property PasswordChar; }
     property PopupMenu;
     property ReadOnly;
     property ShowHint;
     property TabOrder;
     property Tag;
+  { property Text; }
     property Top;
     property Visible;
     property Width;
@@ -119,13 +124,13 @@ type
     property OnMouseMove;
     property OnMouseUp;
     property CharCase;
+    property Ctl3D;
     property DragCursor;
   end;
 
   TLongEdit = class(TRightEdit)
   private
     { Private declarations }
-    FOnExit : TNotifyEvent;
     FValue: LongInt;
     FMinValue: LongInt;
     FMaxValue: LongInt;
@@ -143,7 +148,8 @@ type
     procedure SetAsByte(NewValue: byte);
     function GetAsByte: byte;
     procedure FormatText;
-    procedure CMonExit(Sender: TObject);
+//    procedure CMExit(var Message: TCMExit); message CM_EXIT;
+    procedure CMExit(Sender: TObject);
   protected
     { Protected declarations }
     procedure KeyPress(var Key: Char); override;
@@ -159,7 +165,6 @@ type
     property Value: LongInt read GetValue write SetValue;
     property MinValue: LongInt read FMinValue write SetMinValue default 0;
     property MaxValue: LongInt read FMaxValue write SetMaxValue default 0;
-    property OnExit: TNotifyEvent read FOnExit write FOnExit;
   end;
 
   TNumericType = (ntGeneral, ntExponent, ntFixed);
@@ -167,7 +172,6 @@ type
   TFloatEdit = class(TRightEdit)
   private
     { Private declarations }
-    FOnExit : TNotifyEvent;
     FValue: Extended;
     FDecimals: word;
     FMinValue: Extended;
@@ -191,7 +195,7 @@ type
     procedure SetAsReal(NewValue: real);
     function GetAsReal: real;
     procedure FormatText;
-    procedure CMonExit(Sender: TObject);
+    procedure CMExit(Sender: TObject);
   protected
     { Protected declarations }
     procedure KeyPress(var Key: Char); override;
@@ -210,7 +214,6 @@ type
     property MaxValue: Extended read FMaxValue write SetMaxValue;
     property Digits: word read FDigits write SetDigits default 12;
     property NumericType: TNumericType read FNumericType write SetNumericType default ntGeneral;
-    property OnExit: TNotifyEvent read FOnExit write FOnExit;
   end;
 
 procedure Register;
@@ -238,8 +241,7 @@ begin
   FMaxValue := 0;
   FValue := 0;
   Text := '0';
-  FOnExit:=nil;
-  Inherited onExit:=@CMonExit;
+  onExit:=@CMExit;
 end;
 
 { Set the unpublished Text property to its string
@@ -265,7 +267,7 @@ begin
   if FMinValue <> NewValue then
   begin
     FMinValue := NewValue;
-//    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+    if FMinValue > FMaxValue then FMinValue := FMaxValue;
     if FValue < FMinValue then
       FValue := FMinValue;
     FormatText;
@@ -286,7 +288,7 @@ begin
   if FMaxValue <> NewValue then
   begin
     FMaxValue := NewValue;
-//    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+    if FMaxValue < FMinValue then FMaxValue := FMinValue;
     if FValue > FMaxValue then
       FValue := FMaxValue;
     FormatText;
@@ -332,7 +334,7 @@ end;
 { Method to Set Value as a string }
 procedure TLongEdit.SetAsString(NewValue: string);
 begin
-  FValue := CheckValue(StrToIntDef(NewValue,0));
+  FValue := CheckValue(StrToInt(NewValue));
   FormatText;
 end;
 
@@ -344,7 +346,7 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToIntDef(Text,0);
+    FValue := StrToInt(Text);
   if (FValue <= MaxInteger) and (FValue >= MinInteger) then
      Result := FValue;
 end;
@@ -364,9 +366,9 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToIntDef(Text,0);
+    FValue := StrToInt(Text);
   if (FValue <= MaxWord) and (FValue >= MinWord) then
-     Result := word(FValue);
+     Result := FValue;
 end;
 
 { Method to Set Value as a word }
@@ -384,9 +386,9 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToIntDef(Text,0);
+    FValue := StrToInt(Text);
   if (FValue <= MaxByte) and (FValue >= MinByte) then
-     Result := byte(FValue);
+     Result := FValue;
 end;
 
 { Method to Set Value as a byte }
@@ -399,31 +401,27 @@ end;
 { Check the Value property is in range before allowing
   user to exit the edit.  }
 //procedure TLongEdit.CMExit(var Message: TCMExit);
-procedure TLongEdit.CMonExit(Sender: TObject);
+procedure TLongEdit.CMExit(Sender: TObject);
 var
   L: LongInt;
 begin
   L := StrToIntDef(Text,0);
   if ((FMinValue<>0) or (FMaxValue<>0)) and (L > FMaxValue) or (L < FMinValue) then
   begin
-    if L>FMaxValue then Text:=inttostr(FMaxValue);
-    if L<FMinValue then Text:=inttostr(FMinValue);
     Beep;
     SelectAll;
     SetFocus;
   end else
   begin
-    Text:=inttostr(L);
     FValue := L;
 //    inherited;
-    if Assigned(FOnExit) then  FOnExit(Sender);
   end;
 end;
 
 { Don't accept invalid characters }
 procedure TLongEdit.KeyPress(var Key: Char);
 begin
-  if Key in ['0'..'9', '-', #0 .. #20] then
+  if Key in ['0'..'9', '-', #8] then
     inherited KeyPress(Key)
   else begin
     Key := #0;
@@ -441,13 +439,12 @@ begin
   FMinValue := 0;
   FMaxValue := 0;
   Text := '0.0';
-  FOnExit:=nil;
-  Inherited onExit:=@CMonExit;
+  onExit:=@CMExit;
 end;
 
 { Check the Value property is in range before allowing
   user to exit the edit.  }
-procedure TFloatEdit.CMonExit(Sender: TObject);
+procedure TFloatEdit.CMExit(Sender: TObject);
 var
   L: double;
 begin
@@ -461,7 +458,6 @@ begin
   begin
     FValue := L;
     inherited;
-    if Assigned(FOnExit) then  FOnExit(Sender);
   end;
 end;
 
@@ -479,7 +475,7 @@ function TFloatEdit.GetValue: Extended;
 begin
 try
   if Text='' then FValue:=0
-             else FValue := StrToFloatDef(Text,0);
+             else FValue := StrToFloat(Text);
   Result := CheckValue(FValue);
 except
   FValue := 0;
@@ -494,7 +490,7 @@ begin
   if FMinValue <> NewValue then
   begin
     FMinValue := NewValue;
-//    if FMinValue > FMaxValue then FMinValue := FMaxValue;
+    if FMinValue > FMaxValue then FMinValue := FMaxValue;
     if FValue < FMinValue then
       FValue := FMinValue;
     FormatText;
@@ -515,7 +511,7 @@ begin
   if FMaxValue <> NewValue then
   begin
     FMaxValue := NewValue;
-//    if FMaxValue < FMinValue then FMaxValue := FMinValue;
+    if FMaxValue < FMinValue then FMaxValue := FMinValue;
     if FValue > FMaxValue then
       FValue := FMaxValue;
     FormatText;
@@ -537,12 +533,12 @@ const
   FMinVal: Double = -1.7E308;
 begin
   Result := NewValue;
-  if (FMaxValue <> FMinValue) then
+  if (FMaxVal <> FMinVal) then
   begin
-    if NewValue < FMinValue
-      then Result := FMinValue
+    if NewValue < FMinVal
+      then Result := FMinVal
     else
-      if NewValue > FMaxValue then Result := FMaxValue;
+      if NewValue > FMaxVal then Result := FMaxVal;
   end;
 end;
 
@@ -583,7 +579,7 @@ end;
 { Method to Set Value as a string }
 procedure TFloatEdit.SetAsString(NewValue: string);
 begin
-  FValue := CheckValue(StrToFloatDef(NewValue,0));
+  FValue := CheckValue(StrToFloat(NewValue));
   FormatText;
 end;
 
@@ -595,9 +591,9 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToFloatDef(Text,0);
+    FValue := StrToFloat(Text);
   if (FValue <= MaxDouble) and (FValue >= MinDouble) then
-     Result := Double(FValue);
+     Result := FValue;
 end;
 
 { Method to Set Value as a double }
@@ -615,9 +611,9 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToFloatDef(Text,0);
+    FValue := StrToFloat(Text);
   if (FValue <= MaxSingle) and (FValue >= MinSingle) then
-     Result := Single(FValue);
+     Result := FValue;
 end;
 
 { Method to Set Value as a single }
@@ -635,9 +631,9 @@ const
 begin
   Result := 0;
   if (Text <> '') and not (Text = '-') then
-    FValue := StrToFloatDef(Text,0);
+    FValue := StrToFloat(Text);
   if (FValue <= MaxReal) and (FValue >= MinReal) then
-     Result := Real(FValue);
+     Result := FValue;
 end;
 
 { Method to Set Value as a real }
@@ -662,7 +658,7 @@ end;
 { Don't accept invalid characters }
 procedure TFloatEdit.KeyPress(var Key: Char);
 begin
-  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #0 .. #20] then
+  if Key in ['0'..'9', '-', '+', 'e', 'E', DecimalSeparator, #8] then
     inherited KeyPress(Key)
   else begin
     Key := #0;

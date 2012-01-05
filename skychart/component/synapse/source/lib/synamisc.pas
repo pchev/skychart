@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.003.001 |
+| Project : Ararat Synapse                                       | 001.001.003 |
 |==============================================================================|
 | Content: misc. procedures and functions                                      |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2003, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c) 2002-2010.               |
+| Portions created by Lukas Gebauer are Copyright (c) 2002-2003.               |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -50,18 +50,6 @@
 {$Q-}
 {$H+}
 
-//Kylix does not known UNIX define
-{$IFDEF LINUX}
-  {$IFNDEF UNIX}
-    {$DEFINE UNIX}
-  {$ENDIF}
-{$ENDIF}
-
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit synamisc;
 
 interface
@@ -75,15 +63,15 @@ interface
 {$ENDIF}
 
 uses
-  synautil, blcksock, SysUtils, Classes
-{$IFDEF UNIX}
-  {$IFNDEF FPC}
-  , Libc
-  {$ENDIF}
+  synautil, blcksock, SysUtils, Classes,
+{$IFDEF LINUX}
+  Libc;
 {$ELSE}
-  , Windows
+{$IFDEF FPC}
+  winver,
 {$ENDIF}
-;
+  Windows;
+{$ENDIF}
 
 Type
   {:@abstract(This record contains information about proxy setting.)}
@@ -110,17 +98,14 @@ function GetDNS: string;
 working only on windows!}
 function GetIEProxy(protocol: string): TProxySetting;
 
-{:Return all known IP addresses on local system. Addresses are divided by comma.}
-function GetLocalIPs: string;
-
 implementation
 
 {==============================================================================}
 procedure WakeOnLan(MAC, IP: string);
 var
   sock: TUDPBlockSocket;
-  HexMac: Ansistring;
-  data: Ansistring;
+  HexMac: string;
+  data: string;
   n: integer;
   b: Byte;
 begin
@@ -155,11 +140,11 @@ end;
 
 {==============================================================================}
 
-{$IFNDEF UNIX}
+{$IFNDEF LINUX}
 function GetDNSbyIpHlp: string;
 type
   PTIP_ADDRESS_STRING = ^TIP_ADDRESS_STRING;
-  TIP_ADDRESS_STRING = array[0..15] of Ansichar;
+  TIP_ADDRESS_STRING = array[0..15] of char;
   PTIP_ADDR_STRING = ^TIP_ADDR_STRING;
   TIP_ADDR_STRING = packed record
     Next: PTIP_ADDR_STRING;
@@ -169,12 +154,12 @@ type
   end;
   PTFixedInfo = ^TFixedInfo;
   TFixedInfo = packed record
-    HostName: array[1..128 + 4] of Ansichar;
-    DomainName: array[1..128 + 4] of Ansichar;
+    HostName: array[1..128 + 4] of char;
+    DomainName: array[1..128 + 4] of char;
     CurrentDNSServer: PTIP_ADDR_STRING;
     DNSServerList: TIP_ADDR_STRING;
     NodeType: UINT;
-    ScopeID: array[1..256 + 4] of Ansichar;
+    ScopeID: array[1..256 + 4] of char;
     EnableRouting: UINT;
     EnableProxy: UINT;
     EnableDNS: UINT;
@@ -195,7 +180,7 @@ begin
   if IpHlpModule = 0 then
     exit;
   try
-    GetNetworkParams := GetProcAddress(IpHlpModule,PAnsiChar(AnsiString('GetNetworkParams')));
+    GetNetworkParams := GetProcAddress(IpHlpModule,'GetNetworkParams');
     if @GetNetworkParams = nil then
       Exit;
     err := GetNetworkParams(Nil, @InfoSize);
@@ -240,14 +225,14 @@ begin
     DataType := REG_SZ;
     DataSize := SizeOf(Temp);
     if RegQueryValueEx(OpenKey, Vn, nil, @DataType, @Temp, @DataSize) = ERROR_SUCCESS then
-      SetString(Result, Temp, DataSize div SizeOf(Char) - 1);
+      Result := string(Temp);
     RegCloseKey(OpenKey);
    end;
 end ;
 {$ENDIF}
 
 function GetDNS: string;
-{$IFDEF UNIX}
+{$IFDEF LINUX}
 var
   l: TStringList;
   n: integer;
@@ -275,26 +260,21 @@ const
 begin
   Result := GetDNSbyIpHlp;
   if Result = '...' then
-  begin
     if Win32Platform = VER_PLATFORM_WIN32_NT then
     begin
       Result := ReadReg(NTdyn, 'NameServer');
       if result = '' then
         Result := ReadReg(NTfix, 'NameServer');
-      if result = '' then
-        Result := ReadReg(NTfix, 'DhcpNameServer');
     end
     else
       Result := ReadReg(W9xfix, 'NameServer');
-    Result := ReplaceString(trim(Result), ' ', ',');
-  end;
 end;
 {$ENDIF}
 
 {==============================================================================}
 
 function GetIEProxy(protocol: string): TProxySetting;
-{$IFDEF UNIX}
+{$IFDEF LINUX}
 begin
   Result.Host := '';
   Result.Port := '';
@@ -331,7 +311,7 @@ begin
   if WininetModule = 0 then
     exit;
   try
-    InternetQueryOption := GetProcAddress(WininetModule,PAnsiChar(AnsiString('InternetQueryOptionA')));
+    InternetQueryOption := GetProcAddress(WininetModule,'InternetQueryOptionA');
     if @InternetQueryOption = nil then
       Exit;
 
@@ -376,28 +356,6 @@ begin
   end;
 end;
 {$ENDIF}
-
-{==============================================================================}
-
-function GetLocalIPs: string;
-var
-  TcpSock: TTCPBlockSocket;
-  ipList: TStringList;
-begin
-  Result := '';
-  ipList := TStringList.Create;
-  try
-    TcpSock := TTCPBlockSocket.create;
-    try
-      TcpSock.ResolveNameToIP(TcpSock.LocalName, ipList);
-      Result := ipList.CommaText;
-    finally
-      TcpSock.Free;
-    end;
-  finally
-    ipList.Free;
-  end;
-end;
 
 {==============================================================================}
 

@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_translation,
+uses
   u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, StrUtils,
   Graphics,Math, FPImage, LCLType, IntfGraphics;
 
@@ -61,7 +61,6 @@ type
     FFileName : String;
     n_axis,cur_axis,Fwidth,Fheight,hdr_end,colormode,current_result : Integer;
     Fimg_width,Fimg_Height,Fra,Fde,Frotation : double;
-    FWCSvalid: boolean;
     Fprojection : string;
     Fmean,Fsigma,dmin,dmax,Fmin_sigma,Fmax_sigma : double;
     itt : array[0..255] of byte;
@@ -70,7 +69,6 @@ type
     Procedure FITSCoord ;
     Procedure ReadFitsImage;
     procedure SetITT;
-    procedure pixelatcoord(ra,de: double; var x,y: integer);
   protected
     { Protected declarations }
   public
@@ -88,15 +86,12 @@ type
      Procedure GetAllHeader(var result:Tstringlist);
      procedure GetBitmap(var imabmp:Tbitmap);
      procedure GetIntfImg(var IntfImg: TLazIntfImage);
-     Procedure InfoWCScoord;
-     procedure GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
      Property Header : Tfitsheader read Fheader;
      Property FileName : string read FFileName write SetFile;
      Property Center_RA : double read Fra;
      Property Center_DE : double read Fde;
      Property Img_Width : double read Fimg_width;
      Property Img_Height : double read Fimg_Height;
-     Property WCSvalid : boolean read FWCSvalid;
      Property Rotation  : double read Frotation;
      Property Projection : string read Fprojection;
      Property min_sigma  : double read Fmin_sigma write Fmin_sigma;
@@ -134,10 +129,6 @@ end;
 procedure TFits.SetFile(value:string);
 begin
 try
-{$ifdef mswindows} // Win98 do not accept \\ as path delimiter
-value:=StringReplace(value,'\\','\',[rfReplaceAll]);
-{$endif}
-FWCSvalid:=false;
 Fheader.valid:=false;
 Fheader.coordinate_valid:=false;
 if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
@@ -175,13 +166,12 @@ repeat
       p1:=pos('=',header[i]);
       if p1=0 then p1:=9;
       keyword:=trim(copy(header[i],1,p1-1));
-      value:=trim(copy(header[i],p1+1,99))+blank;
+      value:=trim(copy(header[i],p1+1,99))+' ';
       if (not ItsFits) and (keyword='SIMPLE') and (value[1]='T') then itsFits:=true;
       if (keyword='END') then eoh:=true;
       result.add(header[i]);
    end;
-   if not ItsFits then begin result.Add(rsNotAFITSFile); Closefile(f); Exit;
-     end;
+   if not ItsFits then begin result.Add('Not a FITS file, "SIMPLE = T" keyword missing');Closefile(f);Exit;end;
 until eoh;
 Closefile(f);
 end;
@@ -196,7 +186,6 @@ begin
 filemode:=fmShareDenyNone;
 assignfile(f,FFileName);
 reset(f,1);
-try
 with FHeader do begin
 coordinate_valid:=false;
 valid:=false;eoh:=false; naxis1:=0 ; naxis2:=0 ; naxis3:=1; bitpix:=0 ; dmin:=0 ; dmax := 0; blank:=0;
@@ -219,7 +208,7 @@ repeat
       keyword:=trim(copy(header[i],1,p1-1));
       buf:=trim(copy(header[i],p1+1,p2-p1-1));
       if (keyword='SIMPLE') then if (copy(buf,1,1)<>'T') then begin valid:=false;Break;end
-                                                         else begin valid:=true;end;
+                                                         else valid:=true;
       if (keyword='BITPIX') then bitpix:=strtoint(buf);
       if (keyword='NAXIS')  then naxis:=strtoint(buf);
       if (keyword='NAXIS1') then naxis1:=strtoint(buf);
@@ -284,31 +273,7 @@ if radecsys='' then radecsys:='''FK4''';
 if (equinox=0) then if (copy(radecsys,2,3)='FK4') then equinox:=1950
                                                   else equinox:=2000;
 end;
-finally
-  Closefile(f);
-end;
-end;
-
-Procedure TFits.InfoWCScoord;
-var n: integer;
-    i: TcdcWCSinfo;
-begin
-try
-n:=cdcwcs_initfitsfile(pchar(FFileName));
-n:=cdcwcs_getinfo(addr(i));
-if n=0 then begin
-  Fra:=deg2rad*i.cra;
-  Fde:=deg2rad*i.cdec;
-  Fimg_width:=deg2rad*i.wp*i.secpix/3600;
-  Fimg_Height:=deg2rad*i.hp*i.secpix/3600;
-  Frotation:=deg2rad*i.rot;
-  FWCSvalid:=True;
-end else begin
-  FWCSvalid:=False;
-end;
-except
- FWCSvalid:=False;
-end;
+Closefile(f);
 end;
 
 Procedure TFits.FITSCoord ;
@@ -610,8 +575,8 @@ closefile(f);
 Fmean:=sum/ni;
 Fsigma:=sqrt( (sum2/ni)-(Fmean*Fmean) );
 if (Fheader.dmin=0)and(Fheader.dmax=0) then begin
-  Fheader.dmin:=max(dmin,Fmean-5*Fsigma);
-  Fheader.dmax:=min(dmax,Fmean+5*Fsigma);
+  Fheader.dmin:=dmin;
+  Fheader.dmax:=dmax;
 end;
 end;
 
@@ -638,7 +603,7 @@ ReadFitsImage;
 IntfImg.SetSize(Fwidth,Fheight);
 dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
 dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
-if dmin>=dmax then dmax:=dmin+1;
+if dmin=dmax then dmax:=dmin+1;
 c:=255/(dmax-dmin);
 color.alpha:=65535;
 case Fheader.bitpix of
@@ -792,82 +757,15 @@ begin
 imabmp.freeimage;
 imabmp.height:=1;
 imabmp.width:=1;
-if Fheader.naxis1>0 then begin
-  IntfImg:=TLazIntfImage.Create(0,0);
-  IntfImg.LoadFromBitmap(imabmp.Handle,0);
-  GetIntfImg(IntfImg);
-  IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-  imabmp.freeimage;
-  imabmp.SetHandles(ImgHandle,ImgMaskHandle);
-  IntfImg.Free;
-end;
-end;
-
-procedure TFits.GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
-var IntfImg,ProjImg: TLazIntfImage;
-    ImgHandle,ImgMaskHandle: HBitmap;
-    i,j,x,y: integer;
-    ra,dec,ra_offset,de_offset: double;
-begin
-try
+//imabmp.pixelformat:=pf32bit;
+IntfImg:=TLazIntfImage.Create(0,0);
+IntfImg.LoadFromBitmap(imabmp.Handle,0);
+GetIntfImg(IntfImg);
+IntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
 imabmp.freeimage;
-imabmp.height:=1;
-imabmp.width:=1;
-InfoWCScoord;
-if FWCSvalid and(Fheader.naxis1>0) then begin
-  IntfImg:=TLazIntfImage.Create(0,0);
-  ProjImg:=TLazIntfImage.Create(0,0);
-  IntfImg.LoadFromBitmap(imabmp.Handle,0);
-  ProjImg.LoadFromBitmap(imabmp.Handle,0);
-  GetIntfImg(IntfImg);
-  ProjImg.SetSize(c.xmax,c.ymax);
-  ra_offset:=Fra;
-  de_offset:=Fde;
-  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c,true,true);
-  Precession(c.JDChart,jd2000,ra_offset,de_offset);
-  ra_offset:=ra_offset-Fra;
-  de_offset:=de_offset-Fde;
-  for i:=0 to c.ymax-1 do begin
-     for j:=0 to c.xmax-1 do begin
-        getadxy(j,i,ra,dec,c);
-        ra:=ra+ra_offset;
-        dec:=dec+de_offset;
-        pixelatcoord(ra,dec,x,y);
-        if (x>=0)and(x<Fwidth)and(y>=0)and(y<Fheight) then
-           ProjImg.Colors[j,i]:=IntfImg.Colors[x,Fheight-y]
-        else
-           ProjImg.Colors[j,i]:=colTransparent;
-     end;
-  end;
-  ProjImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-  imabmp.freeimage;
-  imabmp.SetHandles(ImgHandle,ImgMaskHandle);
-  IntfImg.Free;
-  ProjImg.Free;
-  cdcwcs_release();
-end;
-except
-end;
-end;
-
-procedure TFits.pixelatcoord(ra,de: double; var x,y: integer);
-var  p: TcdcWCScoord;
-begin
-try
-p.ra:=rad2deg*ra;
-p.dec:=rad2deg*de;
-cdcwcs_sky2xy(addr(p));
-if p.n=0 then begin
-  x:=round(p.x);
-  y:=round(p.y);
-end else begin
-  x:=-1;
-  y:=-1
-end;
-except
-  x:=-1;
-  y:=-1
-end;
+imabmp.Handle:=ImgHandle;
+//imabmp.MaskHandle:=ImgMaskHandle;
+IntfImg.Free;
 end;
 
 Function TFits.ConnectDB(host,db,user,pass:string; port:integer):boolean;
@@ -876,8 +774,6 @@ try
 if DBtype=mysql then begin
   db1.SetPort(port);
   db1.Connect(host,user,pass,db);
-end else if DBtype=sqlite then begin
-  db:=UTF8Encode(db);
 end;
 if db1.database<>db then db1.Use(db);
 dbconnected:=db1.Active;
@@ -922,11 +818,11 @@ try
 if current_result < db1.RowCount then begin
   filename:=db1.Results[current_result][0];
   objname:=db1.Results[current_result][1];
-  ra:=strtofloat(trim(db1.Results[current_result][2]));
-  de:=strtofloat(trim(db1.Results[current_result][3]));
-  width:=strtofloat(trim(db1.Results[current_result][4]));
-  height:=strtofloat(trim(db1.Results[current_result][5]));
-  rot:=strtofloat(trim(db1.Results[current_result][6]));
+  ra:=strtofloat(db1.Results[current_result][2]);
+  de:=strtofloat(db1.Results[current_result][3]);
+  width:=strtofloat(db1.Results[current_result][4]);
+  height:=strtofloat(db1.Results[current_result][5]);
+  rot:=strtofloat(db1.Results[current_result][6]);
   result:=true;
 end
 else result:=false;
@@ -941,7 +837,7 @@ if not db1.Active then result:=false
 else begin
   filename:=db1.QueryOne('SELECT filename from cdc_fits where '+
         'catalogname="'+uppercase(trim(catname))+'" and '+
-        'objectname="'+uppercase(stringreplace(objectname,blank,'',[rfReplaceAll]))+'" ');
+        'objectname="'+uppercase(stringreplace(objectname,' ','',[rfReplaceAll]))+'" ');
   result:=filename<>'';
 end;
 end;
@@ -951,7 +847,7 @@ var cmd:string;
 begin
 if not db1.Active then result:=false
 else begin
-      oname:=uppercase(stringreplace(oname,blank,'',[rfReplaceAll]));
+      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
       cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
         +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
         +',"'+uppercase(cname)+'"'
@@ -971,7 +867,7 @@ var cmd:string;
 begin
 if not db1.Active then result:=false
 else begin
-      oname:=uppercase(stringreplace(oname,blank,'',[rfReplaceAll]));
+      oname:=uppercase(stringreplace(oname,' ','',[rfReplaceAll]));
       cname:=uppercase(cname);
       cmd:='DELETE FROM cdc_fits WHERE catalogname="'+cname+'" AND objectname="'+oname+'"';
       result:= db1.query(cmd);

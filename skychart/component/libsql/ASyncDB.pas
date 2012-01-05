@@ -18,7 +18,7 @@ uses
   {$ENDIF}
   SysUtils, Classes,
   syncobjs,
-  pasmysql, passqlite, pasODBC, pasjansql, passql,
+  pasmysql, passqlite, pasODBC, passql,
   sqlsupport;
 
 type
@@ -27,7 +27,6 @@ type
     SQL: String;
     Results: TResultSet;
     Handle: Integer;
-    UserData: Integer;
   end;
 
   TDBThread = class;
@@ -67,8 +66,8 @@ type
 
     constructor Create (AOwner: TComponent); override;
     destructor Destroy; override;
-    function Query (SQL: String; UserData: Integer=0): Integer;
-    function FormatQuery (SQL: String; const Args: array of const; UserData: Integer=0): Integer;
+    function Query (SQL: String): Integer;
+    function FormatQuery (SQL: String; const Args: array of const): Integer;
   published
     { Published declarations }
     property Active: Boolean read FActive write SetActive;
@@ -98,7 +97,7 @@ procedure Register;
 
 implementation
 
-//{ $R *.dcr}
+{$R *.dcr}
 
 constructor TASyncDB.Create(AOwner: TComponent);
 begin
@@ -120,7 +119,7 @@ begin
 end;
 
 function TASyncDB.FormatQuery(SQL: String;
-  const Args: array of const; UserData: Integer=0): Integer;
+  const Args: array of const): Integer;
 var s: String;
     w: WideString;
 begin
@@ -129,12 +128,12 @@ begin
     if Assigned (FThread) and Assigned (FThread.db) then
       begin
         TSQLDB._FormatSql (s,w,SQL, Args, False, dbType);
-        Result := Query (s, UserData);
+        Result := Query (s);
       end;
   except end;
 end;
 
-function TASyncDB.Query(SQL: String; UserData: Integer=0): Integer;
+function TASyncDB.Query(SQL: String): Integer;
 var data: TDBData;
 begin
   CS.Enter;
@@ -142,7 +141,6 @@ begin
     begin
       data := TDBData.Create;
       data.SQL := SQL;
-      data.UserData := UserData;
       inc (FHandleCount);
       Result := FHandleCount;
       data.Handle := FHandleCount;
@@ -248,12 +246,6 @@ begin
         db := TODBCDB.Create (nil);
         dbloaded := db.Connect (Owner.FHost, Owner.FUser, Owner.FPass, Owner.FDatabase);
         dbtype := dbODBC;
-      end;
-    dbJanSQL:
-      begin
-        db := TJanDB.Create(nil);
-        dbloaded := db.Connect (Owner.FHost, Owner.FUser, Owner.FPass, Owner.FDatabase);
-        dbType := dbJanSQL;
       end;
   end;
   Owner.CS.Leave;

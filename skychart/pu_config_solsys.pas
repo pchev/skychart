@@ -1,6 +1,6 @@
 unit pu_config_solsys;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -25,77 +25,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, u_projection, cu_database,
+uses  u_constant, u_util, u_projection, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources,
-  downloaddialog, jdcalendar, EditBtn, Process, LazHelpHTML, FileUtil;
+  Spin, enhedits, StdCtrls, Buttons, ExtCtrls, ComCtrls, LResources, MaskEdit,
+  WizardNotebook;
 
 type
 
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TForm)
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    ComboBox2: TComboBox;
-    GRSdrift: TFloatEdit;
-    GRSJDDate: TJDDatePicker;
-    Label10: TLabel;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label8: TLabel;
-    GRSPanel: TPanel;
-    Label9: TLabel;
-    SunPanel: TPanel;
-    SunOnline: TCheckBox;
-    CheckBoxPluto: TCheckBox;
-    ComboBox1: TComboBox;
-    comfile: TFileNameEdit;
-    comt_y: TEdit;
-    comt_m: TEdit;
-    comt_d: TEdit;
-    astdeldate_y: TEdit;
-    astdeldate_m: TEdit;
-    aststrtdate_y: TEdit;
-    aststrtdate_m: TEdit;
-    DownloadAsteroid: TButton;
-    DownloadComet: TButton;
-    astnummonthEdit: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Loadcom: TButton;
-    LoadMPC: TButton;
-    mpcfile: TFileNameEdit;
-    ComPageControl1: TPageControl;
-    AstPageControl2: TPageControl;
-    Panel1: TPanel;
-    astnummonth: TUpDown;
-    TabSheet1: TTabSheet;
-    TabSheet2: TTabSheet;
-    TabSheet3: TTabSheet;
-    TabSheet4: TTabSheet;
-    TransparentPlanet: TCheckBox;
-    planetdir: TDirectoryEdit;
-    DownloadDialog1: TDownloadDialog;
-    GroupBox1: TGroupBox;
     MainPanel: TPanel;
-    Page1: TTabSheet;
-    Page2: TTabSheet;
-    Page3: TTabSheet;
-    Page4: TTabSheet;
+    Page1: TPage;
+    Page2: TPage;
+    Page3: TPage;
+    Page4: TPage;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label12: TLabel;
     Label131: TLabel;
     PlaParalaxe: TRadioGroup;
+    planetdir: TEdit;
+    planetdirsel: TBitBtn;
     Label5: TLabel;
     Label89: TLabel;
+    Label53: TLabel;
     PlanetBox: TCheckBox;
     PlanetMode: TRadioGroup;
     PlanetBox3: TCheckBox;
     GRS: TFloatEdit;
     BitBtn37: TBitBtn;
+    Edit2: TEdit;
     ComPageControl: TPageControl;
     comsetting: TTabSheet;
     GroupBox13: TGroupBox;
@@ -109,6 +68,11 @@ type
     comdbset: TButton;
     comload: TTabSheet;
     Label232: TLabel;
+    GroupBox14: TGroupBox;
+    Label233: TLabel;
+    comfile: TEdit;
+    Loadcom: TButton;
+    comfilebtn: TBitBtn;
     MemoCom: TMemo;
     comdelete: TTabSheet;
     Label238: TLabel;
@@ -145,6 +109,7 @@ type
     comnam: TEdit;
     comeq: TEdit;
     AddCom: TButton;
+    comt: TMaskEdit;
     AstPageControl: TPageControl;
     astsetting: TTabSheet;
     GroupBox9: TGroupBox;
@@ -158,8 +123,13 @@ type
     astdbset: TButton;
     astload: TTabSheet;
     Label206: TLabel;
+    GroupBox7: TGroupBox;
+    Label204: TLabel;
     Label215: TLabel;
+    mpcfile: TEdit;
     astnumbered: TCheckBox;
+    LoadMPC: TButton;
+    mpcfilebtn: TBitBtn;
     aststoperr: TCheckBox;
     astlimitbox: TCheckBox;
     astlimit: TLongEdit;
@@ -169,7 +139,9 @@ type
     GroupBox8: TGroupBox;
     Label7: TLabel;
     Label207: TLabel;
+    aststrtdate: TMaskEdit;
     AstCompute: TButton;
+    astnummonth: TSpinEdit;
     prepastmemo: TMemo;
     astdelete: TTabSheet;
     Label211: TLabel;
@@ -182,6 +154,7 @@ type
     delastMemo: TMemo;
     GroupBox12: TGroupBox;
     Label214: TLabel;
+    astdeldate: TMaskEdit;
     deldateast: TButton;
     AddsingleAst: TTabSheet;
     Label217: TLabel;
@@ -213,19 +186,12 @@ type
     asteq: TEdit;
     Addast: TButton;
     OpenDialog1: TOpenDialog;
-    PageControl1: TPageControl;
-    procedure Button2Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure CheckBoxPlutoChange(Sender: TObject);
-    procedure ComboBox1Select(Sender: TObject);
-    procedure ComboBox2Select(Sender: TObject);
-    procedure DownloadAsteroidClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    WizardNotebook1: TWizardNotebook;
+    XplanetBox: TGroupBox;
+    UseXplanet: TCheckBox;
+    XplanetDir: TEdit;
+    XplanetBtn: TBitBtn;
     procedure FormCreate(Sender: TObject);
-    procedure DownloadCometClick(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure GRSdriftChange(Sender: TObject);
-    procedure GRSJDDateChange(Sender: TObject);
     procedure PlanetDirChange(Sender: TObject);
     procedure PlanetDirSelClick(Sender: TObject);
     procedure PlaParalaxeClick(Sender: TObject);
@@ -239,6 +205,7 @@ type
     procedure comsymbolClick(Sender: TObject);
     procedure comlimitmagChange(Sender: TObject);
     procedure commagdiffChange(Sender: TObject);
+    procedure comfilebtnClick(Sender: TObject);
     procedure LoadcomClick(Sender: TObject);
     procedure DelComClick(Sender: TObject);
     procedure DelComAllClick(Sender: TObject);
@@ -249,214 +216,57 @@ type
     procedure astlimitmagChange(Sender: TObject);
     procedure astmagdiffChange(Sender: TObject);
     procedure astdbsetClick(Sender: TObject);
+    procedure mpcfilebtnClick(Sender: TObject);
     procedure LoadMPCClick(Sender: TObject);
     procedure AstComputeClick(Sender: TObject);
     procedure delastClick(Sender: TObject);
     procedure deldateastClick(Sender: TObject);
     procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
-    procedure SunOnlineClick(Sender: TObject);
-    procedure TransparentPlanetClick(Sender: TObject);
+    procedure XplanetBtnClick(Sender: TObject);
+    procedure XplanetDirChange(Sender: TObject);
+    procedure UseXplanetClick(Sender: TObject);
   private
     { Private declarations }
     FShowDB: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
-    FApplyConfig: TNotifyEvent;
     LockChange: boolean;
     procedure ShowPlanet;
     procedure ShowComet;
     procedure UpdComList;
     procedure ShowAsteroid;
     procedure UpdAstList;
-    procedure AsteroidFeedback(txt:string);
-    procedure CometFeedback(txt:string);
   public
     { Public declarations }
     cdb: Tcdcdb;
     autoprocess: boolean;
-    mycsc : Tconf_skychart;
-    myccat : Tconf_catalog;
-    mycshr : Tconf_shared;
-    mycplot : Tconf_plot;
-    mycmain : Tconf_main;
-    csc : Tconf_skychart;
-    ccat : Tconf_catalog;
-    cshr : Tconf_shared;
-    cplot : Tconf_plot;
-    cmain : Tconf_main;
+    mycsc : conf_skychart;
+    myccat : conf_catalog;
+    mycshr : conf_shared;
+    mycplot : conf_plot;
+    mycmain : conf_main;
+    csc : ^conf_skychart;
+    ccat : ^conf_catalog;
+    cshr : ^conf_shared;
+    cplot : ^conf_plot;
+    cmain : ^conf_main;
     constructor Create(AOwner:TComponent); override;
-    procedure SetLang;
     procedure LoadSampleData;
     property onShowDB: TNotifyEvent read FShowDB write FShowDB;
     property onPrepareAsteroid: TPrepareAsteroid read FPrepareAsteroid write FPrepareAsteroid;
-    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_config_solsys.SetLang;
-var Alabels: TDatesLabelsArray;
-begin
-Caption:=rsSolarSystem;
-page1.Caption:=rsSolarSystem;
-page2.Caption:=rsPlanet;
-page3.Caption:=rsComet;
-page4.Caption:=rsAsteroid;
-Label12.caption:=rsSolarSystemS;
-Label131.caption:=rsDataFiles;
-PlaParalaxe.caption:=rsPosition;
-PlaParalaxe.Items[0]:=rsGeocentric;
-PlaParalaxe.Items[1]:=rsTopoCentric;
-CheckBoxPluto.Caption:=rsPlutoIsAPlan;
-Label3.caption:=rsUncheckToAvo;
-Label5.caption:=rsPlanetsSetti;
-Label89.caption:=rsJupiterGRSLo;
-Label9.Caption:=rsDrift;
-Label10.Caption:=rsDate;
-BitBtn37.Caption:=rsGetRecentMea;
-BitBtn37.Hint:=rsGetRecentMea;
-PlanetBox.caption:=rsShowPlanetOn;
-PlanetMode.caption:=rsDrawPlanetAs;
-PlanetMode.Items[0]:=rsStar;
-PlanetMode.Items[1]:=rsLineModeDraw;
-PlanetMode.Items[2]:=rsRealisticsIm;
-PlanetMode.Items[3]:=rsSymbol;
-{$ifdef unix}
-PlanetMode.Items[2]:=PlanetMode.Items[2]+blank+rsRequireXplan;
-{$endif}
-PlanetBox3.caption:=rsShowEarthSha;
-TransparentPlanet.caption:=rsTransparentL;
-SunOnline.Caption:=rsUseOnlineSun;
-Label4.Caption:=rsSunImageSour;
-Label6.Caption:=rsRefreshImage;
-Label8.Caption:=rsHours;
-comsetting.caption:=rsGeneralSetti;
-GroupBox13.caption:=rsChartSetting;
-Label154.caption:=rsDoNotTakeAcc;
-Label216.caption:=rsShowComets;
-Label231.caption:=rsMagnitudeFai;
-showcom.caption:=rsShowCometsOn;
-comdbset.caption:=rsDatabaseSett;
-comload.caption:=rsLoadMPCFile;
-Label232.caption:=rsMessages;
-TabSheet2.caption:=rsOrUseALocalF;
-TabSheet1.caption:=rsLoadMPCForma;
-Label2.caption:=rsDownloadLate;
-DownloadComet.caption:=rsDownload;
-Loadcom.caption:=rsLoadFile;
-comdelete.caption:=rsDataMaintena;
-Label238.caption:=rsMessages;
-GroupBox16.caption:=rsDeleteMPCDat;
-DelCom.caption:=rsDelete;
-GroupBox17.caption:=rsQuickDelete;
-Label239.caption:=rsQuicklyDelet;
-DelComAll.caption:=rsDelete;
-Addsinglecom.caption:=rsAdd;
-Label241.caption:=rsAddASingleEl;
-Label242.caption:=rsDesignation;
-Label243.caption:=rsHAbsoluteMag;
-Label244.caption:=rsGSlopeParame;
-Label245.caption:=rsEpochJD;
-Label246.caption:=rsPerihelionDa;
-Label247.caption:=rsArgumentOfPe;
-Label248.caption:=rsLongitudeAsc;
-Label249.caption:=rsInclination;
-Label250.caption:=rsEccentricity;
-Label251.caption:=rsPerihelionDi;
-Label253.caption:=rsEquinox2;
-Label254.caption:=rsName;
-AddCom.caption:=rsAdd;
-astsetting.caption:=rsGeneralSetti;
-GroupBox9.caption:=rsChartSetting;
-Label203.caption:=rsDoNotTakeAcc2;
-Label212.caption:=rsShowAsteroid;
-Label213.caption:=rsMagnitudeFai;
-showast.caption:=rsShowAsteroid3;
-astdbset.caption:=rsDatabaseSett;
-astload.caption:=rsLoadMPCFile;
-Label206.caption:=rsMessages;
-TabSheet4.caption:=rsOrUseALocalF;
-TabSheet3.caption:=rsLoadMPCForma;
-Label1.caption:=rsDownloadLate;
-DownloadAsteroid.caption:=rsDownload;
-GroupBox1.caption:=rsOptions;
-Label215.caption:=rsAsteroidsFro;
-astnumbered.caption:=rsOnlyNumbered;
-aststoperr.caption:=rsHaltAfter100;
-astlimitbox.caption:=rsLoadOnlyTheF;
-LoadMPC.caption:=rsLoadFile;
-astprepare.caption:=rsPrepareMonth;
-Label210.caption:=rsMessages;
-GroupBox8.caption:=rsPrepareData;
-Label7.caption:=rsStartMonth;
-Label207.caption:=rsNumberOfMont;
-AstCompute.caption:=rsCompute;
-astdelete.caption:=rsDataMaintena;
-Label211.caption:=rsMessages;
-GroupBox10.caption:=rsDeleteMPCDat;
-delast.caption:=rsDelete;
-GroupBox11.caption:=rsQuickDelete;
-Label209.caption:=rsQuicklyDelet2;
-delallast.caption:=rsDelete;
-GroupBox12.caption:=rsDeleteMonthl;
-Label214.caption:=rsDeleteMonthl2;
-deldateast.caption:=rsDelete;
-AddsingleAst.caption:=rsAdd;
-Label217.caption:=rsAddASingleEl;
-Label218.caption:=rsDesignation;
-Label219.caption:=rsHAbsoluteMag;
-Label220.caption:=rsGSlopeParame;
-Label221.caption:=rsEpochJD;
-Label222.caption:=rsMeanAnomaly;
-Label223.caption:=rsArgumentOfPe;
-Label224.caption:=rsLongitudeAsc;
-Label225.caption:=rsInclination;
-Label226.caption:=rsEccentricity;
-Label227.caption:=rsSemimajorAxi;
-Label228.caption:=rsReference;
-Label229.caption:=rsEquinox2;
-Label230.caption:=rsName;
-Addast.caption:=rsAdd;
-comsymbol.Items[0]:=rsDisplayAsASy;
-comsymbol.Items[1]:=rsProportional;
-astsymbol.Items[0]:=rsDisplayAsASy;
-astsymbol.Items[1]:=rsProportional2;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCfgSol);
-DownloadDialog1.msgDownloadFile:=rsDownloadFile;
-DownloadDialog1.msgCopyfrom:=rsCopyFrom;
-DownloadDialog1.msgtofile:=rsToFile;
-DownloadDialog1.msgDownloadBtn:=rsDownload;
-DownloadDialog1.msgCancelBtn:=rsCancel;
-GRSJDDate.Caption:=rsJDCalendar;
-Alabels.Mon:=rsMonday;
-Alabels.Tue:=rsTuesday;
-Alabels.Wed:=rsWednesday;
-Alabels.Thu:=rsThursday;
-Alabels.Fri:=rsFriday;
-Alabels.Sat:=rsSaturday;
-Alabels.Sun:=rsSunday;
-Alabels.jd:=rsJulianDay;
-Alabels.today:=rsToday;
-GRSJDDate.labels:=Alabels;
-end;
+
 
 constructor Tf_config_solsys.Create(AOwner:TComponent);
 begin
- mycsc:=Tconf_skychart.Create;
- myccat:=Tconf_catalog.Create;
- mycshr:=Tconf_shared.Create;
- mycplot:=Tconf_plot.Create;
- mycmain:=Tconf_main.Create;
- csc:=mycsc;
- ccat:=myccat;
- cshr:=mycshr;
- cplot:=mycplot;
- cmain:=mycmain;
+ csc:=@mycsc;
+ ccat:=@myccat;
+ cshr:=@mycshr;
+ cplot:=@mycplot;
+ cmain:=@mycmain;
  inherited Create(AOwner);
 end;
 
@@ -467,34 +277,23 @@ ShowPlanet;
 ShowComet;
 ShowAsteroid;
 LockChange:=false;
-if PageControl1.ActivePage=page2 then
-   PlanetModeClick(Sender);
 end;
 
 procedure Tf_config_solsys.ShowPlanet;
-var i:integer;
 begin
 if csc.PlanetParalaxe then PlaParalaxe.itemindex:=1
                       else PlaParalaxe.itemindex:=0;
-CheckBoxPluto.checked:=csc.ShowPluto;
 PlanetBox.checked:=csc.ShowPlanet;
 PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
-GRSdrift.Value:=csc.GRSdrift*365.25;
-GRSJDDate.JD:=csc.GRSjd;
 PlanetBox3.checked:=csc.ShowEarthShadow;
 Planetdir.Text:=cmain.planetdir;
-TransparentPlanet.Checked:=cplot.TransparentPlanet;
-SunOnline.Checked:=csc.SunOnline;
-for i:=0 to URL_SUN_NUMBER-1 do
-  if ComboBox1.Items[i]=csc.sunurlname then ComboBox1.ItemIndex:=i;
-for i:=0 to ComboBox2.Items.Count-1 do
-  if strtoint(ComboBox2.Items[i])=csc.sunrefreshtime then ComboBox2.ItemIndex:=i;
-if PlanetMode.itemindex=2 then begin
-   SunPanel.Visible:=true;
-end else begin
-   SunPanel.Visible:=false;
-end;
+XplanetDir.text:=xplanet_dir;
+UseXplanet.checked:=use_xplanet;
+{$ifdef unix}
+ XplanetDir.Visible:=false;
+ XplanetBtn.Visible:=false;
+{$endif}
 end;
 
 procedure Tf_config_solsys.ShowComet;
@@ -504,7 +303,6 @@ comsymbol.itemindex:=csc.ComSymbol;
 comlimitmag.value:=csc.CommagMax;
 commagdiff.value:=csc.CommagDiff;
 if csc.ShowComet then UpdComList;
-comfile.InitialDir:=slash(privatedir)+slash('MPC');
 end;
 
 procedure Tf_config_solsys.ShowAsteroid;
@@ -513,12 +311,9 @@ showast.checked:=csc.ShowAsteroid;
 astsymbol.itemindex:=csc.AstSymbol;
 astlimitmag.value:=csc.AstmagMax;
 astmagdiff.value:=csc.AstmagDiff;
-aststrtdate_y.text:=inttostr(csc.curyear);
-aststrtdate_m.text:=inttostr(csc.curmonth);
-astdeldate_y.text:=inttostr(csc.curyear-1);
-astdeldate_m.text:=inttostr(csc.curmonth);
+aststrtdate.text:=inttostr(csc.curyear)+'.'+inttostr(csc.curmonth);
+astdeldate.text:=inttostr(csc.curyear-1)+'.'+inttostr(csc.curmonth);
 if csc.ShowAsteroid then UpdAstList;
-mpcfile.InitialDir:=slash(privatedir)+slash('MPC');
 end;
 
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
@@ -527,262 +322,17 @@ if LockChange then exit;
 cmain.planetdir:=planetdir.text;
 end;
 
+procedure Tf_config_solsys.FormCreate(Sender: TObject);
+begin
+  LockChange:=true;
+end;
+
 procedure Tf_config_solsys.PlanetDirSelClick(Sender: TObject);
 begin
+  SelectDirectoryDialog1.InitialDir:=expandfilename(planetdir.text);
+  if SelectDirectoryDialog1.execute then
+     planetdir.text:=SelectDirectoryDialog1.Filename;
 
-end;
-
-procedure Tf_config_solsys.FormCreate(Sender: TObject);
-var i:integer;
-begin
-SetLang;
-  LockChange:=true;
-  ComboBox1.Clear;
-  for i:=1 to URL_SUN_NUMBER do ComboBox1.Items.Add(URL_SUN_NAME[i]);
-end;
-
-procedure Tf_config_solsys.DownloadAsteroidClick(Sender: TObject);
-var fn,tmpfn,tfn,ext,buf: string;
-    i,l,n: integer;
-    ok,gzfile: boolean;
-    fi,fo: Textfile;
-    gzf:pointer;
-    ffile:file;
-    gzbuf : array[0..4095]of char;
-begin
- MemoMpc.Clear;
- n:=cmain.AsteroidUrlList.Count;
- if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
- fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
-  if cmain.HttpProxy then begin
-    DownloadDialog1.SocksProxy:='';
-    DownloadDialog1.SocksType:='';
-    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
- end else if cmain.SocksProxy then begin
-    DownloadDialog1.HttpProxy:='';
-    DownloadDialog1.SocksType:=cmain.SocksType;
-    DownloadDialog1.SocksProxy:=cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
- end else begin
-    DownloadDialog1.SocksProxy:='';
-    DownloadDialog1.SocksType:='';
-    DownloadDialog1.HttpProxy:='';
-    DownloadDialog1.HttpProxyPort:='';
-    DownloadDialog1.HttpProxyUser:='';
-    DownloadDialog1.HttpProxyPass:='';
- end;
- DownloadDialog1.FtpUserName:='anonymous';
- DownloadDialog1.FtpPassword:=cmain.AnonPass;
- DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
- DownloadDialog1.onFeedback:=AsteroidFeedback;
- ok:=false; gzfile:=false;
- for i:=1 to n do begin
-    if copy(cmain.AsteroidUrlList[i-1],1,1)='*' then continue;
-    DownloadDialog1.URL:=cmain.AsteroidUrlList[i-1];
-    ext:=ExtractFileExt(DownloadDialog1.URL);
-    gzfile:=(ext='.gz');
-    MemoMpc.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
-    tmpfn:=slash(TempDir)+'mpc.tmp';
-    if i=1 then begin
-      tfn:=fn;
-       if gzfile then
-         DownloadDialog1.SaveToFile:=fn+'.gz'
-       else
-         DownloadDialog1.SaveToFile:=fn;
-       DownloadDialog1.ConfirmDownload:=true;
-    end else begin
-       tfn:=fn;
-       if gzfile then
-         DownloadDialog1.SaveToFile:=tmpfn+'.gz'
-       else
-         DownloadDialog1.SaveToFile:=tmpfn;
-       DownloadDialog1.ConfirmDownload:=false;
-    end;
-    if DownloadDialog1.Execute then begin
-       ok:=true;
-       if gzfile then begin
-         try
-         gzf:=gzopen(pchar(DownloadDialog1.SaveToFile),pchar('rb'));
-         Filemode:=2;
-         assignfile(ffile,tfn);
-         rewrite(ffile,1);
-         repeat
-           l:=gzread(gzf,@gzbuf,length(gzbuf));
-           blockwrite(ffile,gzbuf,l,n);
-         until gzeof(gzf);
-         finally
-         gzclose(gzf);
-         CloseFile(ffile);
-         end;
-       end;
-       if i>1 then begin
-          Filemode:=2;
-          assignfile(fi,tmpfn);
-          assignfile(fo,fn);
-          reset(fi);
-          append(fo);
-          repeat
-            readln(fi,buf);
-            writeln(fo,buf);
-          until eof(fi);
-          Closefile(fi);
-          Closefile(fo);
-          DeleteFile(tmpfn);
-       end;
-    end else begin
-       Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
-       ok:=false;
-       break;
-    end;
- end;
- if ok then begin
-    mpcfile.Text:=systoutf8(fn);
-    application.ProcessMessages;
-    LoadMPCClick(Sender);
- end;
-end;
-
-procedure Tf_config_solsys.CheckBoxPlutoChange(Sender: TObject);
-begin
-if LockChange then exit;
-  csc.ShowPluto:=CheckBoxPluto.checked;
-end;
-
-procedure Tf_config_solsys.ComboBox1Select(Sender: TObject);
-var i: integer;
-begin
-  i:=ComboBox1.ItemIndex+1;
-  csc.sunurlname:=URL_SUN_NAME[i];
-  csc.sunurl:=URL_SUN[i];
-  csc.sunurlsize:=URL_SUN_SIZE[i];
-  csc.sunurlmargin:=URL_SUN_MARGIN[i];
-end;
-
-procedure Tf_config_solsys.ComboBox2Select(Sender: TObject);
-begin
-  csc.sunrefreshtime:=StrToInt(ComboBox2.Text);
-end;
-
-procedure Tf_config_solsys.Button2Click(Sender: TObject);
-begin
-   if assigned(FApplyConfig) then FApplyConfig(Self);
-end;
-
-procedure Tf_config_solsys.Button4Click(Sender: TObject);
-begin
-  ShowHelp;
-end;
-
-procedure Tf_config_solsys.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
-begin
-LockChange:=true;
-end;
-
-procedure Tf_config_solsys.AsteroidFeedback(txt:string);
-begin
-if copy(txt,1,9)='Read Byte' then exit;
-memompc.Lines.Add(txt);
-memompc.SelStart:=length(memompc.Text)-1;
-end;
-
-procedure Tf_config_solsys.DownloadCometClick(Sender: TObject);
-var fn,tmpfn,buf: string;
-    i,n: integer;
-    ok: boolean;
-    fi,fo: Textfile;
-begin
- MemoCom.Clear;
- n:=cmain.CometUrlList.Count;
- if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
- fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
- tmpfn:=slash(TempDir)+'mpc.tmp';
- if cmain.HttpProxy then begin
-    DownloadDialog1.SocksProxy:='';
-    DownloadDialog1.SocksType:='';
-    DownloadDialog1.HttpProxy:=cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
- end else if cmain.SocksProxy then begin
-    DownloadDialog1.HttpProxy:='';
-    DownloadDialog1.SocksType:=cmain.SocksType;
-    DownloadDialog1.SocksProxy:=cmain.ProxyHost;
-    DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
-    DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
-    DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
- end else begin
-    DownloadDialog1.SocksProxy:='';
-    DownloadDialog1.SocksType:='';
-    DownloadDialog1.HttpProxy:='';
-    DownloadDialog1.HttpProxyPort:='';
-    DownloadDialog1.HttpProxyUser:='';
-    DownloadDialog1.HttpProxyPass:='';
- end;
- DownloadDialog1.FtpUserName:='anonymous';
- DownloadDialog1.FtpPassword:=cmain.AnonPass;
- DownloadDialog1.FtpFwPassive:=cmain.FtpPassive;
- DownloadDialog1.onFeedback:=CometFeedback;
- ok:=false;
- for i:=1 to n do begin
-    if copy(cmain.CometUrlList[i-1],1,1)='*' then continue;
-    DownloadDialog1.URL:=cmain.CometUrlList[i-1];
-    MemoCom.Lines.Add(Format(rsDownload2, [DownloadDialog1.URL]));
-    if i=1 then begin
-       DownloadDialog1.SaveToFile:=fn;
-       DownloadDialog1.ConfirmDownload:=true;
-    end else begin
-       DownloadDialog1.SaveToFile:=tmpfn;
-       DownloadDialog1.ConfirmDownload:=false;
-    end;
-    if DownloadDialog1.Execute then begin
-       ok:=true;
-       if i>1 then begin
-          Filemode:=2;
-          assignfile(fi,tmpfn);
-          assignfile(fo,fn);
-          reset(fi);
-          append(fo);
-          repeat
-            readln(fi,buf);
-            writeln(fo,buf);
-          until eof(fi);
-          Closefile(fi);
-          Closefile(fo);
-          DeleteFile(tmpfn);
-       end;
-    end else begin
-       Showmessage(Format(rsCancel2, [DownloadDialog1.ResponseText]));
-       ok:=false;
-       break;
-    end;
- end;
- if ok then begin
-    comfile.Text:=systoutf8(fn);
-    application.ProcessMessages;
-    LoadcomClick(Sender);
- end;
-end;
-
-procedure Tf_config_solsys.FormDestroy(Sender: TObject);
-begin
-mycsc.Free;
-myccat.Free;
-mycshr.Free;
-mycplot.Free;
-mycmain.Free;
-end;
-
-procedure Tf_config_solsys.CometFeedback(txt:string);
-begin
-if copy(txt,1,9)='Read Byte' then exit;
-memocom.Lines.Add(txt);
-memocom.SelStart:=length(memocom.Text)-1;
 end;
 
 procedure Tf_config_solsys.PlaParalaxeClick(Sender: TObject);
@@ -790,10 +340,6 @@ begin
 csc.PlanetParalaxe:=(PlaParalaxe.itemindex=1);
 end;
 
-procedure Tf_config_solsys.TransparentPlanetClick(Sender: TObject);
-begin
-cplot.TransparentPlanet:=TransparentPlanet.checked;
-end;
 
 procedure Tf_config_solsys.PlanetBoxClick(Sender: TObject);
 begin
@@ -802,12 +348,6 @@ end;
 
 procedure Tf_config_solsys.PlanetModeClick(Sender: TObject);
 begin
-if LockChange and (PageControl1.ActivePage<>Page2) then exit;
-if PlanetMode.itemindex=2 then begin
-   SunPanel.Visible:=true;
-end else begin
-   SunPanel.Visible:=false;
-end;
 cplot.plaplot:=PlanetMode.itemindex;
 end;
 
@@ -815,18 +355,6 @@ procedure Tf_config_solsys.GRSChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.GRSlongitude:=grs.value;
-end;
-
-procedure Tf_config_solsys.GRSdriftChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.GRSdrift := GRSdrift.Value/365.25;
-end;
-
-procedure Tf_config_solsys.GRSJDDateChange(Sender: TObject);
-begin
-if LockChange then exit;
-csc.GRSjd := GRSJDDate.JD;
 end;
 
 procedure Tf_config_solsys.PlanetBox3Click(Sender: TObject);
@@ -841,7 +369,7 @@ end;
 
 procedure Tf_config_solsys.UpdComList;
 begin
-cdb.GetCometFileList(cmain,comelemlist.items);
+cdb.GetCometFileList(cmain^,comelemlist.items);
 comelemlist.itemindex:=0;
 if comelemlist.items.count>0 then comelemlist.text:=comelemlist.items[0];
 end;
@@ -868,12 +396,28 @@ if LockChange then exit;
 csc.CommagDiff:=commagdiff.value;
 end;
 
+procedure Tf_config_solsys.comfilebtnClick(Sender: TObject);
+var f : string;
+begin
+f:=comFile.Text;
+opendialog1.InitialDir:=extractfilepath(f);
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   comFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
 procedure Tf_config_solsys.LoadcomClick(Sender: TObject);
 begin
-if Sender=LoadCom then MemoCom.Clear;
 screen.cursor:=crHourGlass;
-cdb.LoadCometFile(SafeUTF8ToSys(comfile.text),MemoCom);
-memocom.SelStart:=length(memocom.Text)-1;
+cdb.LoadCometFile(comfile.text,MemoCom);
 UpdComList;
 screen.cursor:=crDefault;
 end;
@@ -898,7 +442,7 @@ procedure Tf_config_solsys.AddComClick(Sender: TObject);
 var
   msg :string;
 begin
-msg:=cdb.AddCom(comid.text,trim(comt_y.text)+'.'+trim(comt_m.text)+'.'+trim(comt_d.text),comep.text,comq.text,comec.text,comperi.text,comnode.text,comi.text,comh.text,comg.text,comnam.text,comeq.text);
+msg:=cdb.AddCom(comid.text,comt.text,comep.text,comq.text,comec.text,comperi.text,comnode.text,comi.text,comh.text,comg.text,comnam.text,comeq.text);
 UpdComList;
 if msg<>'' then Showmessage(msg);
 end;
@@ -910,7 +454,7 @@ end;
 
 procedure Tf_config_solsys.UpdAstList;
 begin
-cdb.GetAsteroidFileList(cmain,astelemlist.items);
+cdb.GetAsteroidFileList(cmain^,astelemlist.items);
 astelemlist.itemindex:=0;
 if astelemlist.items.count>0 then astelemlist.text:=astelemlist.items[0];
 end;
@@ -943,18 +487,35 @@ begin
 if Assigned(FShowDB) then FShowDB(self);
 end;
 
+procedure Tf_config_solsys.mpcfilebtnClick(Sender: TObject);
+var f : string;
+begin
+f:=mpcFile.Text;
+opendialog1.InitialDir:=extractfilepath(f);
+if opendialog1.InitialDir='' then opendialog1.InitialDir:=slash(privatedir)+slash('MPC');
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='DAT Files|*.DAT|All Files|*.*';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   mpcFile.Text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
 procedure Tf_config_solsys.LoadMPCClick(Sender: TObject);
 var ok:boolean;
 begin
-if Sender=LoadMPC then MemoMpc.Clear;
 screen.cursor:=crHourGlass;
-ok:=cdb.LoadAsteroidFile(SafeUTF8ToSys(mpcfile.text),astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
+ok:=cdb.LoadAsteroidFile(mpcfile.text,astnumbered.checked,aststoperr.checked,astlimitbox.checked,astlimit.value,MemoMPC);
 UpdAstList;
 screen.cursor:=crDefault;
 if ok then begin
   if autoprocess then AstComputeClick(Sender)
   else begin
-     Showmessage(rsToUseThisNew);
+     Showmessage('To use this new data you must now compute the Monthly Data');
      AstPageControl.activepage:=astprepare;
   end;
 end;
@@ -968,13 +529,14 @@ try
 screen.cursor:=crHourGlass;
 prepastmemo.clear;
 if assigned(FPrepareAsteroid) then begin
-y:=strtoint(trim(aststrtdate_y.text));
-m:=strtoint(trim(aststrtdate_m.text));
-for i:=1 to astnummonth.position do begin
+i:=pos('.',aststrtdate.text);
+y:=strtoint(trim(copy(aststrtdate.text,1,i-1)));
+m:=strtoint(trim(copy(aststrtdate.text,i+1,99)));
+for i:=1 to astnummonth.value do begin
   jdt:=jd(y,m,1,0);
   if not FPrepareAsteroid(jdt,prepastmemo.lines) then begin
      screen.cursor:=crDefault;
-     ShowMessage(Format(rsNoAsteroidDa, [crlf]));
+     ShowMessage('No Asteroid data found!'+crlf+'Please load a MPC file first.');
      AstPageControl.activepage:=astload;
      exit;
   end;
@@ -984,7 +546,7 @@ for i:=1 to astnummonth.position do begin
      m:=1;
   end;
 end;
-prepastmemo.lines.Add(rsYouAreNowRea);
+prepastmemo.lines.Add('You are now ready to display the asteroid for this time period.');
 screen.cursor:=crDefault;
 showast.checked:=true;
 end
@@ -1005,7 +567,7 @@ end;
 procedure Tf_config_solsys.deldateastClick(Sender: TObject);
 begin
 screen.cursor:=crHourGlass;
-cdb.DelAstDate(trim(astdeldate_y.text)+'.'+trim(astdeldate_m.text), delastMemo);
+cdb.DelAstDate(astdeldate.text, delastMemo);
 screen.cursor:=crDefault;
 end;
 
@@ -1026,11 +588,6 @@ UpdAstList;
 if msg<>'' then showmessage(msg);
 end;
 
-procedure Tf_config_solsys.SunOnlineClick(Sender: TObject);
-begin
-  csc.SunOnline := SunOnline.Checked;
-end;
-
 procedure Tf_config_solsys.LoadSampleData;
 begin
   // load sample asteroid data
@@ -1046,5 +603,37 @@ begin
   csc.ShowComet:=true;
   csc.ShowAsteroid:=true;
 end;
+
+// windows specific code:
+procedure Tf_config_solsys.XplanetBtnClick(Sender: TObject);
+var f : string;
+begin
+f:=slash(XplanetDir.text)+'xplanet.exe';
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='Exe Files|*.exe';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   XplanetDir.text:=extractfilepath(opendialog1.FileName);
+end;
+finally
+ chdir(appdir);
+end;
+end;
+
+procedure Tf_config_solsys.XplanetDirChange(Sender: TObject);
+begin
+if LockChange then exit;
+xplanet_dir:=XplanetDir.text;
+end;
+
+procedure Tf_config_solsys.UseXplanetClick(Sender: TObject);
+begin
+use_xplanet:=UseXplanet.checked;
+end;
+
+initialization
+  {$i pu_config_solsys.lrs}
 
 end.

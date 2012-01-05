@@ -29,18 +29,14 @@ uses
   Math, SysUtils, Graphics, Classes, FPImage, LCLType, IntfGraphics;
 
 Procedure BitmapRotation(var bmp,rbmp: TBitmap; Rotation:double; WhiteBg:boolean);
-Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double; pixelized: boolean=false);
+Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
 Procedure BitmapFlip(img:Tbitmap; flipx,flipy: boolean);
 Procedure BitmapSubstract(var img1:Tbitmap; img2:Tbitmap);
-Procedure BitmapLumCon(var img: TBitmap; Luminosity, Contrast: integer);
-Procedure BitmapNegative(var img: TBitmap);
 
 Procedure RotateImage(OriginalIntfImg, RotatedIntfImg:TLazIntfImage; theta:Double; oldAxis:TPOINT;var   newAxis:TPOINT;TransparentColor: TFPColor;RevertImage : Boolean);
-Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double; pixelized: boolean=false);
+Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double);
 Procedure FlipImage(OriginalIntfImg,FlipIntfImg:TLazIntfImage; flipx,flipy: boolean);
 Procedure SubstractImage(IntfImg1, IntfImg2:TLazIntfImage);
-Procedure LumConImage(OriginalIntfImg,IntfImg:TLazIntfImage; Luminosity, Contrast: integer);
-Procedure NegativeImage(OriginalIntfImg,IntfImg:TLazIntfImage);
 
 implementation
 
@@ -214,7 +210,7 @@ RotateImage(OriginalIntfImg,RotatedIntfImg,Rotation,point(bmp.Width div 2, bmp.H
 
 // create bitmap from rotated raw image
 rbmp.FreeImage;
-RotatedIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+RotatedIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
 rbmp.Handle:=ImgMaskHandle;
 rbmp.FreeImage;
 rbmp.Handle:=ImgHandle;
@@ -224,7 +220,7 @@ OriginalIntfImg.Free;
 
 end;
 
-Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double; pixelized: boolean=false);
+Procedure ResizeImage(OriginalIntfImg, ResizedIntfImg:TLazIntfImage; zoom:double);
 var i,j,k,k2,l,nw,nh:integer;
     x,y,a,b:double;
     color,color1,color2,color3,color4: TFPColor;
@@ -232,7 +228,6 @@ begin
    nh:=round(OriginalIntfImg.Height*zoom);
    nw:=round(OriginalIntfImg.Width*zoom);
    ResizedIntfImg.SetSize(nw,nh);
-   if zoom<=1 then pixelized:=true;
    for i:=0 to nh-1 do begin
       y:=i/zoom;
       k:=trunc(y);
@@ -243,7 +238,7 @@ begin
          x:=l/zoom;
          j:=trunc(x);
          a:=x-j;
-         if pixelized or ((abs(a)<1e-3)and(abs(b)<1e-3)) then        // pixel center, use the original value
+         if (abs(a)<1e-3)and(abs(b)<1e-3) then        // pixel center, use the original value
                 ResizedIntfImg.Colors[l,i]:=OriginalIntfImg.Colors[j,k]
             else
             if j<(OriginalIntfImg.Width-1) then begin
@@ -264,7 +259,7 @@ begin
    end;
 end;
 
-Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double; pixelized: boolean=false);
+Procedure BitmapResize(img1:Tbitmap; var img2:Tbitmap; zoom:double);
 var
     OriginalIntfImg, ResizedIntfImg : TLazIntfImage;
     ImgHandle,ImgMaskHandle: HBitmap;
@@ -276,11 +271,11 @@ else begin
   OriginalIntfImg:=img1.CreateIntfImage;
   ResizedIntfImg:=img1.CreateIntfImage;
 
-  ResizeImage(OriginalIntfImg,ResizedIntfImg,zoom,pixelized);
+  ResizeImage(OriginalIntfImg,ResizedIntfImg,zoom);
 
   // create bitmap from rotated raw image
   img2.FreeImage;
-  ResizedIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+  ResizedIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
   img2.Handle:=ImgMaskHandle;
   img2.FreeImage;
   img2.Handle:=ImgHandle;
@@ -319,7 +314,7 @@ FlipIntfImg:=img.CreateIntfImage;
 FlipImage(OriginalIntfImg,FlipIntfImg,flipx,flipy);
 
 img.FreeImage;
-FlipIntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+FlipIntfImg.CreateBitmap(ImgHandle,ImgMaskHandle,false);
 img.Handle:=ImgMaskHandle;
 img.FreeImage;
 img.Handle:=ImgHandle;
@@ -360,89 +355,13 @@ begin
 
   // create bitmap from rotated raw image
   img1.FreeImage;
-  IntfImg1.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+  IntfImg1.CreateBitmap(ImgHandle,ImgMaskHandle,false);
   img1.Handle:=ImgMaskHandle;
   img1.FreeImage;
   img1.Handle:=ImgHandle;
   // free the raw images
   IntfImg1.Free;
   IntfImg2.Free;
-end;
-
-Procedure LumConImage(OriginalIntfImg,IntfImg:TLazIntfImage; Luminosity, Contrast: integer);
-var i,j,dmin,dmax:integer;
-    c : double;
-    col: TFPColor;
-begin
-if (Luminosity=0) and (Contrast=0) then exit;
-dmin:=0+255*Contrast;
-dmax:=65535-255*Luminosity;
-if dmin>=dmax then dmax:=dmin+1;
-c:=65535/(dmax-dmin);
-IntfImg.SetSize(OriginalIntfImg.Width,OriginalIntfImg.Height);
-  for i:=0 to OriginalIntfImg.Height-1 do begin
-    for j:=0 to OriginalIntfImg.Width-1 do begin
-       col:=OriginalIntfImg.Colors[j,i];
-       col.red:=trunc(max(0,min(65535,(col.red-dmin) * c )) );
-       col.green:=trunc(max(0,min(65535,(col.green-dmin) * c )) );
-       col.blue:=trunc(max(0,min(65535,(col.blue-dmin) * c )) );
-       IntfImg.Colors[j,i]:=col;
-    end;
-  end;
-end;
-
-Procedure BitmapLumCon(var img: TBitmap; Luminosity, Contrast: integer);
-var ImgHandle,ImgMaskHandle: HBitmap;
-    OriginalIntfImg, IntfImg : TLazIntfImage;
-begin
-if (Luminosity=0) and (Contrast=0) then exit;
-OriginalIntfImg:=img.CreateIntfImage;
-IntfImg:=img.CreateIntfImage;
-
-LumConImage(OriginalIntfImg,IntfImg, Luminosity, Contrast);
-
-img.FreeImage;
-IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-img.Handle:=ImgMaskHandle;
-img.FreeImage;
-img.Handle:=ImgHandle;
-OriginalIntfImg.Free;
-IntfImg.Free;
-end;
-
-Procedure NegativeImage(OriginalIntfImg,IntfImg:TLazIntfImage);
-var i,j,dmax:integer;
-    col: TFPColor;
-begin
-dmax:=65535;
-IntfImg.SetSize(OriginalIntfImg.Width,OriginalIntfImg.Height);
-  for i:=0 to OriginalIntfImg.Height-1 do begin
-    for j:=0 to OriginalIntfImg.Width-1 do begin
-       col:=OriginalIntfImg.Colors[j,i];
-       col.red:=dmax-col.red;
-       col.green:=dmax-col.green;
-       col.blue:=dmax-col.blue;
-       IntfImg.Colors[j,i]:=col;
-    end;
-  end;
-end;
-
-Procedure BitmapNegative(var img: TBitmap);
-var ImgHandle,ImgMaskHandle: HBitmap;
-    OriginalIntfImg, IntfImg : TLazIntfImage;
-begin
-OriginalIntfImg:=img.CreateIntfImage;
-IntfImg:=img.CreateIntfImage;
-
-NegativeImage(OriginalIntfImg,IntfImg);
-
-img.FreeImage;
-IntfImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
-img.Handle:=ImgMaskHandle;
-img.FreeImage;
-img.Handle:=ImgHandle;
-OriginalIntfImg.Free;
-IntfImg.Free;
 end;
 
 end.

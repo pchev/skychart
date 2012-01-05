@@ -97,14 +97,14 @@ type  TY2rec = record
                bt,vt :word
                end;
 
-Function IsTY2path(path : string) : Boolean;
-procedure SetTY2path(path : string);
-Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
-Procedure OpenTY2win(ncat : integer;var ok : boolean);
-Procedure ReadTY2(var lin : TY2rec; var SMnum : string ; var ok : boolean);
-Procedure NextTY2( var ok : boolean);
-procedure CloseTY2 ;
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Function IsTY2path(path : PChar) : Boolean; stdcall;
+procedure SetTY2path(path : PChar); stdcall;
+Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
+Procedure OpenTY2win(ncat : integer;var ok : boolean); stdcall;
+Procedure ReadTY2(var lin : TY2rec; var SMnum : PChar ; var ok : boolean); stdcall;
+Procedure NextTY2( var ok : boolean); stdcall;
+procedure CloseTY2 ; stdcall;
+Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);stdcall;
 
 var
   TY2path: String;
@@ -140,12 +140,12 @@ var
    lastcache : integer = 0;
    maxbin : integer = 2;
 
-Function IsTY2path(path : string) : Boolean;
+Function IsTY2path(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'tyc2idx.dat');
 end;
 
-procedure SetTY2path(path : string);
+procedure SetTY2path(path : PChar); stdcall;
 var i : integer;
     buf: string;
 begin
@@ -258,7 +258,7 @@ readsup:=false ;    // begin with first file
 ok:=true;
 end;
 
-Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
+Procedure OpenTY2(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 maxcat:=ncat;
@@ -273,7 +273,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure ReadTY2(var lin : TY2rec; var SMnum : string ; var ok : boolean);
+Procedure ReadTY2(var lin : TY2rec; var SMnum : PChar ; var ok : boolean); stdcall;
 begin
 inc(currec);
 inc(icache);
@@ -308,8 +308,8 @@ if readbin then begin
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
-    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
+    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
@@ -344,8 +344,8 @@ else
     lin.gscn:=bin.gscn;
     lin.ar:=bin.ar/5000000;
     lin.de:=bin.de/5000000;
-    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
-    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.pmar:=(((bin.bt and $0000F000) shl 4)+bin.pmar-100000)/10;
+    lin.pmde:=(((bin.vt and $0000F000) shl 4)+bin.pmde-100000)/10;
     lin.bt:=((bin.bt and $00000FFF)-200)/100;
     lin.vt:=((bin.vt and $00000FFF)-200)/100;
     if usecache then cache[ncache,icache]:=lin;
@@ -367,10 +367,10 @@ else
     if usecache then cache[ncache,icache]:=lin;
   end;
   end;
-SMnum:=SMname;
+SMnum:=PChar(SMname);
 end;
 
-Procedure NextTY2( var ok : boolean);
+Procedure NextTY2( var ok : boolean); stdcall;
 begin
   CloseRegion;
   inc(curSM);
@@ -383,13 +383,13 @@ begin
   end;
 end;
 
-procedure CloseTY2 ;
+procedure CloseTY2 ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenTY2win(ncat : integer; var ok : boolean);
+Procedure OpenTY2win(ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 maxcat:=ncat;
@@ -403,11 +403,11 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean); stdcall;
 var L1,S1,zone,i,j : integer;
     hemis : char;
     fok : boolean;
-    buf:string;
+    buf:PChar;
 begin
 ok:=false ;
 for i:=0 to 11 do begin

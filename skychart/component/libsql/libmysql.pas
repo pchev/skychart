@@ -2,13 +2,11 @@
 unit libmysql;
 
 {$IFDEF FPC}
-  {$MODE Delphi}
-  {$H+}
+{$MODE Delphi}
+{$H+}
 {$ELSE}
   {$IFNDEF LINUX}
-    {$DEFINE WIN32}
-  {$ELSE}
-    {$DEFINE UNIX}
+  {$DEFINE WIN32}
   {$ENDIF}
 {$ENDIF}
 
@@ -21,7 +19,7 @@ interface
 // (Win32 and UNIX).
 // FPC-compatibility code by Trustmaster (trustware@bk.ru).
 
-uses {$IFNDEF FPC}{$IFDEF MSWINDOWS}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
+uses {$IFNDEF FPC}{$IFDEF WIN32}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs{$ENDIF};
 
 
 //Make sure you link to the correct version of the libmysql.dll/.so library!
@@ -73,24 +71,17 @@ uses {$IFNDEF FPC}{$IFDEF MSWINDOWS}Windows{$ELSE}SysUtils{$ENDIF}{$ELSE}Dynlibs
 
 
 const
-{$IFDEF MSWINDOWS}
+{$IFDEF WIN32}
   //libmysql client
   DEFAULT_DLL_LOCATION = 'libmysql.dll';
   //The embedded mysql daemon
   MYSQLD_DLL_LOCATION = 'libmysqld.dll';
-{$ELSE}
-{$IFDEF darwin}
-  //libmysql client
-  DEFAULT_DLL_LOCATION = 'libmysqlclient.dylib';
-  //The embedded mysql daemon
-  MYSQLD_DLL_LOCATION = 'libmysqld.dylib';
 {$ELSE}
   DEFAULT_DLL_LOCATION = 'libmysqlclient.so';
   //embedded mysql on unix, not really sure:
   MYSQLD_DLL_LOCATION = 'libmysqld.so'; // ?
   //you may want to specify a full path like:
   //DEFAULT_DLL_LOCATION = '/usr/local/lib/mysql/libmysqlclient.so';
-{$ENDIF}
 {$ENDIF}
 
 
@@ -653,7 +644,7 @@ type TMYSQL_MANAGER = packed record
 const
   SERVER_GROUPS : array [0..3] of PChar = ('test_libmysqld_SERVER'#0,'embedded'#0,'server'#0, nil);
 
-  DEFAULT_PARAMS : array [0..2] of PChar = ('not_used'#0, {$IFDEF MSWINDOWS}'--datadir=.\'#0{$ELSE}'--datadir=./'{$ENDIF}, '--set-variable=key_buffer_size=32M'#0);
+  DEFAULT_PARAMS : array [0..2] of PChar = ('not_used'#0, {$IFDEF WIN32}'--datadir=.\'#0{$ELSE}'--datadir=./'{$ENDIF}, '--set-variable=key_buffer_size=32M'#0);
 
 
 {************** Plain API Function types definition *************}
@@ -663,123 +654,123 @@ type
   Tmysql_dump_debug_info = function(Handle: PMYSQL): Integer;
 
   Tmysql_init = function(Handle: PMYSQL): PMYSQL;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_connect = function(Handle: PMYSQL; const Host, User, Passwd: PChar):
-    PMYSQL; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    PMYSQL; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_real_connect = function(Handle: PMYSQL;
     const Host, User, Passwd, Db: PChar; Port: Cardinal;
     unix_socket: PChar; clientflag: Cardinal): PMYSQL;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_close = procedure(Handle: PMYSQL);
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_query = function(Handle: PMYSQL; const Query: PChar): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_real_query = function(Handle: PMYSQL; const Query: PChar;
     len: Integer): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_select_db = function(Handle: PMYSQL; const Db: PChar): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_create_db = function(Handle: PMYSQL; const Db: PChar): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_drop_db = function(Handle: PMYSQL; const Db: PChar): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_shutdown = function(Handle: PMYSQL): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_refresh = function(Handle: PMYSQL; Options: Cardinal): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_kill = function(Handle: PMYSQL; Pid: longint): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_ping = function(Handle: PMYSQL): Integer;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_stat = function(Handle: PMYSQL): PChar;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_options = function(Handle: PMYSQL; Option: mysql_option;
-    const Arg: PChar): Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    const Arg: PChar): Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_escape_string = function(PTo, PFrom: PChar; Len: Cardinal): Cardinal;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_get_server_info = function(Handle: PMYSQL): PChar;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_get_client_info = function: PChar;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_get_host_info = function(Handle: PMYSQL): PChar;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_get_proto_info = function(Handle: PMYSQL): Cardinal;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_list_dbs = function(Handle: PMYSQL; Wild: PChar): PMYSQL_RES;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_list_tables = function(Handle: PMYSQL; const Wild: PChar): PMYSQL_RES;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_list_fields = function(Handle: PMYSQL; const Table, Wild: PChar):
-    PMYSQL_RES; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    PMYSQL_RES; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_list_processes = function(Handle: PMYSQL): PMYSQL_RES;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_store_result = function(Handle: PMYSQL): PMYSQL_RES;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_use_result = function(Handle: PMYSQL): PMYSQL_RES;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_free_result = procedure(Result: PMYSQL_RES);
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_fetch_row = function(Result: PMYSQL_RES): PMYSQL_ROW;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_fetch_lengths = function(Result: PMYSQL_RES): PLongInt;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_fetch_field = function(Result: PMYSQL_RES): PMYSQL_FIELD;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
 {$IFNDEF OLD_LIBMYSQL_DLL}
   Tmysql_data_seek = procedure(Result: PMYSQL_RES; Offset: TInt64);
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 {$ELSE}
   Tmysql_data_seek = procedure(Result: PMYSQL_RES; Offset: Cardinal);
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 {$ENDIF}
 
   Tmysql_row_seek = function(Result: PMYSQL_RES; Row: MYSQL_ROW_OFFSET):
-    MYSQL_ROW_OFFSET; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    MYSQL_ROW_OFFSET; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_field_seek = function(Result: PMYSQL_RES; Offset: mysql_field_offset):
-    mysql_field_offset; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    mysql_field_offset; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_thread_id = function(Handle: PMYSQL): cardinal;
-    {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
   //EOZeos
 
   //Functions added by ArTee@dubaron.com:
-  Tmysql_insert_id = function(Handle: PMYSQL):Int64;          {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
-  Tmysql_fetch_fields = function(Result: PMYSQL_RES):PMYSQL_FIELDS; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
-  Tmysql_num_fields = function(Result: PMYSQL_RES):Integer;   {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+  Tmysql_insert_id = function(Handle: PMYSQL):Int64;          {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
+  Tmysql_fetch_fields = function(Result: PMYSQL_RES):PMYSQL_FIELDS; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
+  Tmysql_num_fields = function(Result: PMYSQL_RES):Integer;   {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   //returns a boolean value indicating weather mysql was compiled thread-safe
-  TMySQL_thread_safe = function: Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+  TMySQL_thread_safe = function: Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   //argc = parameter count
   //argv = array of PChar (ending in nil) to options
@@ -787,47 +778,47 @@ type
   //just call with mysql_server_init (0,nil,nil) for default options.
   //returns 0 for ok, 1 for not ok.
   TMySQL_server_init =
-    function (argc: Integer; argv: PChar; groups: PChar): Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (argc: Integer; argv: PChar; groups: PChar): Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   TMySQL_server_end =
-    procedure; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    procedure; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   TMySQL_thread_init =
-    function: Integer; {MY_BOOL} {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function: Integer; {MY_BOOL} {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   TMySQL_thread_end =
-    procedure {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    procedure {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   // Functions added by Trustmaster
   Tmysql_num_rows =
-    function (Result: PMYSQL_RES): Int64; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Result: PMYSQL_RES): Int64; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_eof =
-    function (Result: PMYSQL_RES): Integer; {MY_BOOL} {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Result: PMYSQL_RES): Integer; {MY_BOOL} {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_field_count =
-    function (Handle: PMYSQL): Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 		
   Tmysql_affected_rows =
-    function (Handle: PMYSQL): Int64; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): Int64; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 		
   Tmysql_errno =
-    function (Handle: PMYSQL): Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 		
   Tmysql_error =
-    function (Handle: PMYSQL): PChar; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): PChar; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_info =
-    function (Handle: PMYSQL): PChar; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): PChar; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_character_set_name =
-    function (Handle: PMYSQL): PChar; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL): PChar; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_change_user =
-    function (Handle: PMYSQL; const User, Passwd, Db: PChar): Integer; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function (Handle: PMYSQL; const User, Passwd, Db: PChar): Integer; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
   Tmysql_real_escape_string =
-    function(Handle: PMYSQL; PTo, PFrom: PChar; Len: Cardinal): Cardinal; {$IFDEF MSWINDOWS}stdcall{$ELSE}cdecl{$ENDIF};
+    function(Handle: PMYSQL; PTo, PFrom: PChar; Len: Cardinal): Cardinal; {$IFDEF WIN32}stdcall{$ELSE}cdecl{$ENDIF};
 
 // The function variables:
   TMySQLFunctions = record
@@ -944,41 +935,31 @@ begin
   else
     LibraryPath := DLL;
 
-  if hDLL = 0 then
+  if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
   begin
     //check if library exists
     {$IFNDEF FPC}
     hDLL := GetModuleHandle(PChar(DLL));
     {$ENDIF}
-    if hDLL = 0 then
+    if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
       LibLoaded := False
     else LibLoaded := True;
-    if not LibLoaded then
+    if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
     begin //Now retry with other API
       hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL)){$ELSE}LoadLibrary(DLL){$ENDIF};
-      {$IFNDEF MSWINDOWS}
+      {$IFNDEF WIN32}
          // try version specific library, some distribution do not provide the generic link
          {$IFDEF MYSQL4}
-         if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.19')){$ELSE}LoadLibrary(DLL+'.19'){$ENDIF}; // future
-         if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.18')){$ELSE}LoadLibrary(DLL+'.18'){$ENDIF}; // future
-         if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.17')){$ELSE}LoadLibrary(DLL+'.17'){$ENDIF}; // future
-         if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.16')){$ELSE}LoadLibrary(DLL+'.16'){$ENDIF}; // 5.1
-         if hDLL = 0 then
-            hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.15')){$ELSE}LoadLibrary(DLL+'.15'){$ENDIF}; // 5.0
-         if hDLL = 0 then
+         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.14')){$ELSE}LoadLibrary(DLL+'.14'){$ENDIF}; // mysql 4.1, 5.0
-         if hDLL = 0 then
+         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.12')){$ELSE}LoadLibrary(DLL+'.12'){$ENDIF}; // mysql 4.0
          {$ELSE}
-         if hDLL = 0 then
+         if hDLL = {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
             hDLL := {$IFNDEF FPC}LoadLibrary(PChar(DLL+'.10')){$ELSE}LoadLibrary(DLL+'.10'){$ENDIF}; // mysql 3.23
          {$ENDIF}
       {$ENDIF}
-      if hDLL <> 0 then
+      if hDLL <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
         LibLoaded := True;
     end;
     Result := LibLoaded;
@@ -994,7 +975,7 @@ begin
       end;
   end;
 
-  if hDLL <> 0 then
+  if hDLL <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF} then
     with MyFunc do
       begin
         mysql_server_init := nil;
@@ -1153,8 +1134,9 @@ end;
 
 initialization
 
+
 finalization
-  if (hDLLClient <> 0) and ClientLoaded then
+  if (hDLLClient <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF}) and ClientLoaded then
     try
       if Assigned (myprocs.mysql_server_end) then
         try
@@ -1167,7 +1149,7 @@ finalization
       {$ENDIF};
     except //should not happen, but if debugging, find out why.
     end;
-  if (hDLLEmbedded <> 0) and EmbeddedLoaded then
+  if (hDLLEmbedded <> {$IFDEF FPC}0{$ELSE}{$IFDEF UNIX}nil{$ELSE}0{$ENDIF}{$ENDIF}) and EmbeddedLoaded then
     try
       //embedded mysql has unloading issues//
       //temporary fix: just don't unload (...)

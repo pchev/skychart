@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.003.001 |
+| Project : Ararat Synapse                                       | 001.002.000 |
 |==============================================================================|
 | Content: TELNET and SSH2 client                                              |
 |==============================================================================|
-| Copyright (c)1999-2010, Lukas Gebauer                                        |
+| Copyright (c)1999-2004, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2002-2010.                |
+| Portions created by Lukas Gebauer are Copyright (c)2002-2005.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -52,11 +52,6 @@ Used RFC: RFC-854
 {$ENDIF}
 {$H+}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit tlntsend;
 
 interface
@@ -66,7 +61,7 @@ uses
   blcksock, synautil;
 
 const
-  cTelnetProtocol = '23';
+  cTelnetProtocol = 'telnet';
   cSSHProtocol = '22';
 
   TLNT_EOR                = #239;
@@ -99,15 +94,15 @@ type
   TTelnetSend = class(TSynaClient)
   private
     FSock: TTCPBlockSocket;
-    FBuffer: Ansistring;
+    FBuffer: string;
     FState: TTelnetState;
-    FSessionLog: Ansistring;
-    FSubNeg: Ansistring;
-    FSubType: Ansichar;
-    FTermType: Ansistring;
+    FSessionLog: string;
+    FSubNeg: string;
+    FSubType: char;
+    FTermType: string;
     function Connect: Boolean;
-    function Negotiate(const Buf: Ansistring): Ansistring;
-    procedure FilterHook(Sender: TObject; var Value: AnsiString);
+    function Negotiate(const Buf: string): string;
+    procedure FilterHook(Sender: TObject; var Value: string);
   public
     constructor Create;
     destructor Destroy; override;
@@ -141,10 +136,10 @@ type
 
     {:all readed datas in this session (from connect) is stored in this large
      string.}
-    property SessionLog: Ansistring read FSessionLog write FSessionLog;
+    property SessionLog: string read FSessionLog write FSessionLog;
 
     {:Terminal type indentification. By default is 'SYNAPSE'.}
-    property TermType: Ansistring read FTermType write FTermType;
+    property TermType: string read FTermType write FTermType;
   end;
 
 implementation
@@ -153,7 +148,6 @@ constructor TTelnetSend.Create;
 begin
   inherited Create;
   FSock := TTCPBlockSocket.Create;
-  FSock.Owner := self;
   FSock.OnReadFilter := FilterHook;
   FTimeout := 60000;
   FTargetPort := cTelnetProtocol;
@@ -196,18 +190,18 @@ begin
   Result := FSock.RecvTerminated(FTimeout, Value) <> '';
 end;
 
-procedure TTelnetSend.FilterHook(Sender: TObject; var Value: AnsiString);
+procedure TTelnetSend.FilterHook(Sender: TObject; var Value: string);
 begin
   Value := Negotiate(Value);
   FSessionLog := FSessionLog + Value;
 end;
 
-function TTelnetSend.Negotiate(const Buf: Ansistring): Ansistring;
+function TTelnetSend.Negotiate(const Buf: string): string;
 var
   n: integer;
-  c: Ansichar;
-  Reply: Ansistring;
-  SubReply: Ansistring;
+  c: char;
+  Reply: string;
+  SubReply: string;
 begin
   Result := '';
   for n := 1 to Length(Buf) do

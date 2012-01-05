@@ -1,7 +1,7 @@
 unit passql;
 
 {$IFDEF FPC}
-{$MODE DELPHI}              
+{$MODE DELPHI}
 {$H+}
 {$ENDIF}
 
@@ -19,7 +19,7 @@ unit passql;
 interface
 
 uses
-  {$IFDEF MSWINDOWS}
+  {$IFDEF WIN32}
   Windows,
   {$ENDIF}
   Classes, SysUtils,
@@ -32,13 +32,14 @@ uses
   {$ENDIF}
   {$ENDIF}
   sqlsupport, utf8util, SyncObjs
-  {$IFDEF VER150} //and up, not needed, function is in sqlsupport as well
+  {$IFDEF VER 150} //and up, not needed, function is in sqlsupport as well
   , strutils
   {$ENDIF}
   ;
 
-{$I libsqlversion.inc}
 
+const
+  LibSQLVersion = '0.62';
 
   NaN = {$IFNDEF FPC}0.0 / 0.0{$ELSE}nil{$ENDIF}; //Not A Number; a special float.
   VarIntTypes =
@@ -67,33 +68,12 @@ type
     dtUnknown
   );
 
+type
   //used for dump table/database and showcreatetable functions
+
   TDumpTarget = (dt_TestOnly, dt_String, dt_File, dt_Stream, dt_Strings);
 
   TDumpTargets = set of TDumpTarget;
-
-  TFieldDesc = class
-    name: String;
-    table: String;
-    def: String; //database specific
-    _datatype: Byte; //database specific
-//    length: Integer; MySQL per-cell based info, ignore...
-    max_length: Integer; //~= size
-    flags: Integer; //database specific
-    decimals: Integer; //database specific
-    datatype: TSQLDataTypes;
-    Required: Boolean;
-    digits: Integer;
-    //cross-database if available
-    IsNumeric, //non-float(!)
-    IsAutoIncrement,
-    IsPrimaryKey,
-    IsKey,
-    IsUnique,
-    IsBlob,
-    IsUnsigned,
-    IsNullable: Boolean;
-  end;
 
   TSQLDB = class;
 
@@ -108,8 +88,8 @@ type
     function GetInteger:Int64;
     function GetFloat:Extended;
     function GetBoolean:Boolean;
-    function GetSQLDateTime: TDateTime;                                            //Dak_Alpha
-    function GetSQLTime: TDateTime;                                                //Dak_Alpha
+    function GetSQLDateTime: TDateTime;                                            //Dak
+    function GetSQLTime: TDateTime;                                                //Dak
   public
     property IsNull:Boolean read FIsNull;
     property AsString:String read FValue;
@@ -122,18 +102,17 @@ type
     //dont must convert thist string manuly.
     //It requires that the date be represented in strict format
     // yyyy-mm-dd [hh:nn[:ss[:mmm]]]
-    property AsSQLDateTime: TDateTime read GetSQLDateTime;                         //Dak_Alpha
+    property AsSQLDateTime: TDateTime read GetSQLDateTime;
     //It requires that the date be represented in strict format
     // hh:nn[:ss[:mmm]]
-    property AsSQLTime: TDateTime read GetSQLTime;                                 //Dak_Alpha
-//    property AsVariant:Variant read FValue;                                      
+    property AsSQLTime: TDateTime read GetSQLTime;                      
+//    property AsVariant:Variant read FValue;
     property ValidValue: Boolean read FValidValue;
   end;
 
   TResultRow = class (TStringList)
-  private
-    function GetMemoryStream(Index: Variant): TMemoryStream;
   protected
+    function FieldIndex (Value: Variant): Integer;
   public //i'd prefer to have this private or protected, but thats impossible right now...
     FNulls:TList;
     FResultCell:TResultCell;
@@ -152,7 +131,8 @@ type
     procedure AddW(Value: WideString);
     function GetColCount: Integer;
     function GetVariant (i: Variant): Variant;
-    function FieldIndex (Value: Variant): Integer;
+
+    function FieldExists(Fieldname: String): Boolean;
 
     procedure Clear; override;
 //public
@@ -167,8 +147,6 @@ type
     property Format[Index:Variant]:TResultCell read GetResultCell;
     property IsNull[i:Variant]:Boolean read GetIsNull;
     property ByField[Value:String]:TResultCell read GetByField;
-    //Return TMemoryStream object. Applicable to Blob field or Clob field etc.     //Dak_Alpha
-    property AsMemoryStream[Index:Variant]: TMemoryStream read GetMemoryStream;    //Dak_Alpha
     property Fields:TStrings read FFields;
     property AsTabSep: String read GetAsTabSep;
     property FieldsAsTabSep: String read GetFieldsAsTabSep;
@@ -176,17 +154,25 @@ type
     property ColCount: Integer read GetColCount;
   end;
 
+  TFieldDesc = class
+    name: String;
+    table: String;
+    def: String; //database specific
+    _datatype: Byte; //database specific
+//    length: Integer; MySQL per-cell based info, ignore...
+    max_length: Integer; //~= size
+    flags: Integer; //database specific
+    decimals: Integer; //database specific
+    datatype: TSQLDataTypes;
+    Required: Boolean;
+    digits: Integer;
+  end;
+
   TResultSet = class (TObject)
   private
     FAutoFree: Boolean;
-    function GetErrorMessage: string;                                              //Dak_Alpha
   protected
     FFetchedRow: TResultRow; //never create, it is pointer to existing row
-    function GetFieldName(Index: Integer): String;
-    function GetFieldType(Index: Variant): TSQLDataTypes;
-    function GetFieldDescriptor(Index: Variant): TFieldDesc;
-    function GetFieldTypeName(Index: Variant): String;
-    function FieldExists(Fieldname: String): Boolean;
   public //TPersistant?
     //all those should be protected
     SQLDB: TSQLDB;
@@ -214,8 +200,6 @@ type
     procedure Refresh; //Refreshes last SQL query.
     procedure Clear; //Cleans up
     function GetResultRow(Index: Integer): TResultRow;
-    function FieldIndex (Value: Variant): Integer;
-
 
     function Query (SQL:String):Boolean;
     function QueryW (SQL: WideString): Boolean;
@@ -242,19 +226,6 @@ type
     //This works confusing and will only lead to errors.
     //property Results:TResultRow read FFetchedRow;
 
-    //Usefull for external ResulSet objects
-    procedure AttachToDB(DB: TSQLDB);                                              //Dak_Alpha
-    procedure DetachFromDB;                                                        //Dak_Alpha
-    property AutoFree: Boolean read FAutoFree write FAutoFree;                     //Dak_Alpha
-
-    property FieldName[Index: Integer]: String read GetFieldName;
-    property FieldType[Index: Variant]: TSQLDataTypes read GetFieldType;
-    property FieldTypeName[Index: Variant]: String read GetFieldTypeName;
-    property FieldDescriptor[Index: Variant]: TFieldDesc read GetFieldDescriptor;
-
-    property ErrorMessage: string read GetErrorMessage;                            //Dak_Alpha
-    property RowCount: Integer read FRowCount;                                     //Dak_Alpha
-    property ColCount: Integer read FColCount;                                     //Dak_Alpha
   end;
 
   TDatabaseInfo = class
@@ -409,7 +380,6 @@ type
     //all these functions call query or operate on a Query result set.
     function  QueryOne (SQL:String):String;
     //comment this out if not supported by compiler:
-    class function DatabaseType (DB: TSQLDB): TDBMajorType;
     class procedure _FormatSql(var sql: String; var sqlw: WideString; Value: String; const Args: array of const; Wide: Boolean; DBType: TDBMajorType);
     function FormatSql (Value: String; const Args: array of const): String;
     function FormatSqlW (Value: String; const Args: array of const): WideString;
@@ -468,8 +438,6 @@ type
 
     function DeleteResultSet (Name: String): Boolean; overload;
     function DeleteResultSet (Value: Integer): Boolean; overload;
-
-    function InsertResultsetIntoTable (Table: String; ResultSet: TResultSet; CreateNewTable: Boolean=False): Boolean;
 
     procedure ClearResultSets;
 
@@ -560,7 +528,7 @@ end;
 
 function TResultCell.GetInteger: Int64;
 begin
-  Result := StrToInt64Def (FValue, 0);
+  Result := StrToIntDef (FValue, 0);
 end;
 
 function TResultCell.GetFloat: Extended;
@@ -587,7 +555,7 @@ begin
             );
 end;
 
-// DateTime support by Dak_Alpha..
+// DateTime suppert by Dak..
 function TResultCell.GetSQLDateTime: TDateTime;
 var
   Year, Month, Day, Hour, Min, Sec, MSec: Word;
@@ -725,7 +693,7 @@ begin
   end;
 end;
 
-// Dito (Time support by Dak_Alpha..)
+// Dito (DateTime suppert by Dak..)
 function TResultCell.GetSQLTime: TDateTime;
 var
   Hour, Min, Sec, MSec: Word;
@@ -733,7 +701,7 @@ var
   TmpValue: string;
 begin
 // It requires that the time be in strict hh:nn[:ss[:mmm]]
-// (unofficially respect format h:n[:s[:m]] too)
+// (unofficially respect format yyyy-m-d [h:n[:s[:m]]] too)
   Result := 0;
   TmpValue := Trim(FValue);
 
@@ -822,6 +790,10 @@ begin
   end;
 end;
 
+
+
+
+
 function TResultCell.GetWideString: WideString;
 begin
   if FIsNull then
@@ -848,18 +820,7 @@ begin
 end;
 
 destructor TResultRow.Destroy;
-var
-  i: Integer;                                                                      //Dak_Alpha
 begin
-  //Destroy TMemoryStream objects if is assigned                                   //Dak_Alpha
-  for i := 0 to Count-1 do                                                         //Dak_Alpha
-  begin                                                                            //Dak_Alpha
-    if Assigned(Objects[i]) then                                                   //Dak_Alpha
-    begin                                                                          //Dak_Alpha
-       Objects[i].Free;                                                            //Dak_Alpha
-       Objects[i] := nil;                                                          //Dak_Alpha
-    end;                                                                           //Dak_Alpha
-  end;                                                                             //Dak_Alpha
   FResultCell.Free;
   FNulls.Free;
   FNameValue.Free;
@@ -868,18 +829,7 @@ begin
 end;
 
 procedure TResultRow.Clear;
-var
-  i: Integer;                                                                      //Dak_Alpha
 begin
-  //Destroy TMemoryStream objects if is assigned                                   //Dak_Alpha
-  for i := 0 to Count-1 do                                                         //Dak_Alpha
-  begin                                                                            //Dak_Alpha
-    if Assigned(Objects[i]) then                                                   //Dak_Alpha
-    begin                                                                          //Dak_Alpha
-       Objects[i].Free;                                                            //Dak_Alpha
-       Objects[i] := nil;                                                          //Dak_Alpha
-    end;                                                                           //Dak_Alpha
-  end;                                                                             //Dak_Alpha
   inherited Clear;
   FNulls.Clear;
   FWideStrings.Clear;
@@ -1045,86 +995,9 @@ begin
 end;
 
 
-function TResultSet.FieldExists(Fieldname: String): Boolean;
+function TResultRow.FieldExists(Fieldname: String): Boolean;
 begin
   Result := FFields.IndexOf (Fieldname) >= 0;
-end;
-
-function TResultSet.GetFieldName(Index: Integer): String;
-begin
-  if (Index>=0) and (Index<FFields.Count) then
-    Result := FFields[Index]
-  else
-    Result := '';
-end;
-
-function TResultSet.GetFieldType(Index: Variant): TSQLDataTypes;
-var i: Integer;
-begin
-  i := FieldIndex(Index);
-  if (i>=0) and (i<FFields.Count) then
-    Result := TFieldDesc(FFields.Objects[i]).Datatype
-  else
-    Result := dtEmpty;
-end;
-
-function TResultSet.GetFieldDescriptor(Index: Variant): TFieldDesc;
-var i: Integer;
-begin
-  i := FieldIndex(Index);
-  if (i>=0) and (i<FFields.Count) then
-    Result := TFieldDesc(FFields.Objects[i])
-  else
-    Result := nil;
-end;
-
-function TResultSet.GetFieldTypeName(Index: Variant): String;
-var dt: TSQLDataTypes;
-begin
-  dt := GetFieldType(Index);
-  case dt of
-    dtEmpty: Result := 'Empty';
-    dtNull: Result := 'Null';
-    dtTinyInt: Result := 'TinyInt';
-    dtInteger: Result := 'Integer';
-    dtInt64: Result := 'Int64';
-    dtFloat: Result := 'Float';
-    dtCurrency: Result := 'Currency';
-    dtDateTime: Result := 'DateTime';
-    dtTimeStamp: Result := 'TimeStamp';
-    dtWideString: Result := 'WideString';
-    dtBoolean: Result := 'Boolean';
-    dtString: Result := 'String';
-    dtBlob: Result := 'Blob';
-    dtOther: Result := 'Other';
-    dtUnknown: Result := 'Unknown';
-  else //can never happen unless type TSQLDataTypes changes
-    Result := '';
-  end;
-end;
-
-function TResultRow.GetMemoryStream(Index: Variant): TMemoryStream;                //Dak_Alpha
-var
-  idx: Integer;
-  tmpStream: TMemoryStream;
-begin
-  idx := FieldIndex (Index);
-  if (idx>=0) and (idx<Count) then
-    if Assigned(Objects[idx]) then
-    begin
-      TMemoryStream(Objects[idx]).Position := 0;
-      Result := TMemoryStream(Objects[idx]);
-    end
-    else
-    begin
-      tmpStream := TMemoryStream.Create;
-      tmpStream.Write(Strings[idx][1],Length(Strings[idx]));
-      tmpStream.Position := 0;
-      Objects[idx] := tmpStream;
-      Result := tmpStream;
-    end
-  else
-    Result := nil;
 end;
 
 { TResultSet }
@@ -1145,7 +1018,6 @@ begin
   FQuerySize := 0;
   FLastError := 0;
   FLastErrorText := '';
-  FSQL := '';                                                                      //Dak_Alpha
 end;
 
 constructor TResultSet.Create(DB: TSQLDB=nil);
@@ -1173,40 +1045,14 @@ begin
   inherited;
 end;
 
-//by Dak_Alpha...
-procedure TResultSet.AttachToDB(DB: TSQLDB);                                       //Dak_Alpha
-begin
-  if Assigned (SQLDB) then
-    SQLDB.RemoveResultSet(Self);
-
-  SQLDB := DB;
-
-  if Assigned(SQLDB) then
-  begin
-    SQLDB.RegisterResultSet(Self);
-  end;
-end;
-
-//by Dak_Alpha...
-procedure TResultSet.DetachFromDB;                                                 //Dak_Alpha
-begin
-  if Assigned (SQLDB) then
-    SQLDB.RemoveResultSet(Self);
-
-  SQLDB := nil;
-end;
-
 function TResultSet.FetchRowW: Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (Self);
       SQLDB.CurrentResult.FCallbackOnly := True;
       Result := SQLDB.FetchRowW (FStmt, FFetchedRow);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1214,15 +1060,12 @@ begin
 end;
 
 function TResultSet.FetchRow: Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (Self);
       Result := SQLDB.FetchRow (FStmt, FFetchedRow);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1230,17 +1073,14 @@ begin
 end;
 
 function TResultSet.ExecuteW(SQL: WideString): Boolean;
-var TempSet: TResultSet;
 begin
   FFetchedRow := FNilRow;
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       FStmt := SQLDB.ExecuteW (SQL);
       Result := FStmt <> 0;
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1248,17 +1088,14 @@ begin
 end;
 
 function TResultSet.Execute(SQL: String): Boolean;
-var TempSet: TResultSet;
 begin
   FFetchedRow := FNilRow;
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       FStmt := SQLDB.Execute (SQL);
       Result := FStmt <> 0;
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1267,15 +1104,12 @@ end;
 
 function TResultSet.FormatQuery(Value: string;
   const Args: array of const): Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       Result := SQLDB.FormatQuery (Value, Args);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1284,15 +1118,12 @@ end;
 
 function TResultSet.FormatQueryW(Value: WideString;
   const Args: array of const): Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       Result := SQLDB.FormatQueryW (Value, Args);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1310,31 +1141,26 @@ begin
 end;
 
 function TResultSet.Query(SQL: String): Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       Result := SQLDB.Query (SQL);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
     Result := False;
+
 end;
 
 function TResultSet.QueryW(SQL: WideString): Boolean;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB){ and (FName<>'')} then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (Self);
       Result := SQLDB.QueryW(SQL);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -1346,22 +1172,6 @@ begin
   SQLDB.Query (FSQL);
 end;
 
-function TResultSet.FieldIndex(Value: Variant): Integer;
-begin
-  if (VarType(Value) in varIntTypes) then
-    Result := Value
-  else
-    Result := FFields.IndexOf (Value);
-end;
-
-//Dak_Alpha...
-function TResultSet.GetErrorMessage: string;                                       //Dak_Alpha
-begin
-  if FLastErrorText <> '' then
-    Result := FLastErrorText
-  else
-    Result := IntToStr (FLastError);
-end;
 
 { TSQLDB }
 
@@ -1402,6 +1212,7 @@ begin
   //but as said: there are no string support functions for it yet. so..
   Result := _FormatQuery (EncodeUTF8(Value), Args, True);
 end;
+
 
 function TSQLDB._FormatQuery (Value: string; const Args: array of const; Wide: Boolean=False):Boolean;
 var sql:String;
@@ -1483,6 +1294,7 @@ begin
     Close;
 end;
 
+
 //Some virtual prototypes
 function TSQLDB.Use (DataBase:String):Boolean;
 begin
@@ -1491,7 +1303,10 @@ end;
 
 function TSQLDB.GetErrorMessage: String;
 begin
-  Result := FCurrentSet.ErrorMessage;                                              //Dak_Alpha
+  if FCurrentSet.FLastErrorText <> '' then
+    Result := FCurrentSet.FLastErrorText
+  else
+    Result := IntToStr (FCurrentSet.FLastError);
 end;
 
 procedure TSQLDB.StartTransaction;
@@ -1895,29 +1710,6 @@ begin
   FResultSet := Value;
 end;
 
-class function TSQLDB.DatabaseType(DB: TSQLDB): TDBMajorType;
-var s: String;
-begin
-  if DB=nil then
-    Result := dbANSI
-  else
-  begin
-    s := lowercase (DB.ClassName);
-    if (s = 'tlitedb') or (s='tmlitedb') then
-      Result := dbSQLite
-    else
-    if s = 'tmydb' then
-      Result := dbMySQL
-    else
-    if s = 'todbcdb' then
-      Result := dbODBC
-    else
-    if s = 'tjandb' then
-      Result := dbJanSQL
-    else
-      Result := dbANSI;
-  end;
-end;
 
 class procedure TSQLDB._FormatSql(var sql: String; var sqlw: WideString; Value: String; const Args: array of const;
   Wide: Boolean; DBType: TDBMajorType);
@@ -1948,9 +1740,6 @@ begin
         c:=upcase(Value[j+1])
       else
         c:=#0; //exit;
-      //support for 'any' type by wildcard
-      if c='*' then
-        c := 'A';
       if Wide then
         sqlw := sqlw + DecodeUTF8 (copy(Value,1,j-1))
       else
@@ -1981,7 +1770,7 @@ begin
               end;
             vtString:
               begin
-                if c in ['S', 'Q', 'Z', 'U', 'X', 'A'] then
+                if c in ['S', 'Q', 'Z', 'X', 'A'] then
                   p :=  String(VString^)
                 else
                 if c in ['W'] then
@@ -1995,14 +1784,14 @@ begin
               end;
             vtChar:
               begin
-                if c in ['S', 'Q', 'Z', 'U', 'X', 'A'] then
+                if c in ['S', 'Q', 'Z', 'X', 'A'] then
                   p := VChar
                 else
                   exit; //illegal format
               end;
             vtWideChar:
               begin
-                if c in ['W', 'S', 'Q', 'Z', 'U', 'A'] then
+                if c in ['W', 'S', 'Q', 'Z', 'A'] then
                   pw := VWideChar
                 else
                   exit; //illegal format
@@ -2211,15 +2000,12 @@ begin
 end;
 
 procedure TResultSet.FreeResult;
-var TempSet: TResultSet;
 begin
   if Assigned (SQLDB) then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (Self);
       SQLDB.FreeResult (FStmt);
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end;
   FFetchedRow := FNilRow;
@@ -2227,17 +2013,14 @@ end;
 
 function TResultSet.FormatExecuteW(SQL: WideString;
   const Args: array of const): Boolean;
-var TempSet: TResultSet;
 begin
   FFetchedRow := FNilRow;
   if Assigned (SQLDB) and (FName<>'') then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (FName);
       FStmt := SQLDB.FormatExecuteW (SQL, Args);
       Result := FStmt <> 0;
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -2246,17 +2029,14 @@ end;
 
 function TResultSet.FormatExecute(SQL: String;
   const Args: array of const): Boolean;
-var TempSet: TResultSet;
 begin
   FFetchedRow := FNilRow;
   if Assigned (SQLDB) then
     begin
       SQLDB.Lock;
-      TempSet := SQLDB.FCurrentSet;
       SQLDB.UseResultSet (Self);
       FStmt := SQLDB.FormatExecute (SQL, Args);
       Result := FStmt <> 0;
-      SQLDB.UseResultSet(TempSet);
       SQLDB.Unlock;
     end
   else
@@ -2418,15 +2198,6 @@ end;
 procedure TSQLDB.RefreshDBInfo;
 begin
   FillDBInfo;
-end;
-
-function TSQLDB.InsertResultsetIntoTable(Table: String;
-  ResultSet: TResultSet; CreateNewTable: Boolean=False): Boolean;
-//inserts the contents of a resultset into table
-//usefull for passing data accross databases
-begin
-  //todo
-  Result := False;
 end;
 
 end.

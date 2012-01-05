@@ -1,21 +1,18 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="2">
     <PathDelim Value="\"/>
     <Name Value="satxy"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="5"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
       </SearchPaths>
-      <Parsing>
-        <SyntaxOptions>
-          <UseAnsiStrings Value="False"/>
-        </SyntaxOptions>
-      </Parsing>
+      <CodeGeneration>
+        <Generate Value="Faster"/>
+      </CodeGeneration>
       <Other>
-        <CustomOptions Value="-CF64"/>
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>

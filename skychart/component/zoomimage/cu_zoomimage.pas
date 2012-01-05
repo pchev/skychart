@@ -41,7 +41,6 @@ type
      FXcentre, FYcentre, FSizeX, FSizeY, FXo, FYo, FXc, FYc, Fw, Fh  : integer;
      FOnPaint: TNotifyEvent;
      FOnPosChange: TNotifyEvent;
-     FBGcolor:Tcolor;
      procedure SetPicture(Value: TPicture);
   protected
     { Protected declarations }
@@ -65,12 +64,10 @@ type
      property ZoomMax : double read FZoomMax write FZoomMax;
      property Xcentre : integer read FXcentre  write FXcentre  ;
      property Ycentre : integer read FYcentre  write FYcentre  ;
-     property BGcolor : TColor read FBGcolor write FBGcolor;
      property Xc : integer read FXc;
      property Yc : integer read FYc;
      property SizeX : integer read FSizeX;
      property SizeY : integer read FSizeY;
-     property Align;
      property OnClick;
      property OnDblClick;
      property OnMouseDown;
@@ -78,7 +75,6 @@ type
      property OnMouseUp;
      property OnPaint: TNotifyEvent read FOnPaint write FOnPaint;
      property OnPosChange: TNotifyEvent read FOnPosChange write FOnPosChange;
-     property OnResize;
   end;
 
 procedure Register;
@@ -99,7 +95,6 @@ Width  := 105;
 FZoom  := 1;
 FZoomMin  := 1;
 FZoomMax  := 4;
-FBGcolor := clblack;
 FBitmap := TBitmap.Create;
 TmpBmp := TBitmap.Create;
 FPicture := TPicture.Create;
@@ -130,12 +125,12 @@ if lockPicture then begin
    // do not loop when replacing the picture by a bitmap (windows only)
    exit;
 end;
-if FPicture.Width=0 then exit;
+if FPicture.Width=0 then raise exception.create('Invalid image!');
 FSizeX:=FPicture.Width;
 FSizeY:=FPicture.Height;
 FZoomMin:=Width / FSizeX;
 if FZoomMax<=FZoomMin then FZoomMax:=FZoomMin+1;
-//FZoom:=ZoomMin;
+FZoom:=ZoomMin;
 Draw;
 end;
 
@@ -164,21 +159,17 @@ FYc:=FYo+dy;
 FBitmap.Width:=Fw;
 FBitmap.Height:=Fh;
 with FBitmap.Canvas do begin
- brush.Color:=FBGcolor;
- pen.Color:=FBGcolor;
+ brush.Color:=clblack;
+ pen.Color:=clblack;
  brush.Style:=bsSolid;
- FillRect(0,0,fw,fh);
+ rectangle(0,0,width,height);
 end;
-try
 FBitmap.Canvas.CopyRect(Rect(0, 0, Fw, Fh),FPicture.Bitmap.Canvas,Rect(FXo, FYo, FXo+Fw, FYo+Fh));
 // Resize
 BitmapResize(FBitmap,TmpBmp,Width/FBitmap.Width);
 // refresh the image
 Paint;
 if Assigned(FOnPosChange) then FOnPosChange(Self);
-except
-
-end;
 end;
 end;
 
@@ -187,12 +178,7 @@ begin
 if assigned(FPicture.Graphic) then begin
 Canvas.Draw(0,0,TmpBmp);
 if Assigned(FOnPaint) then FOnPaint(Self);
-end
-else begin
-  Canvas.Brush.Color:=FBGcolor;
-  Canvas.Rectangle(Rect(0,0,width,height));
 end;
-Inherited Paint;
 end;
 
 function TZoomImage.Wrld2ScrX(X: integer): integer;

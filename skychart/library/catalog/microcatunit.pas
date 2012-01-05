@@ -30,12 +30,12 @@ Type MCTrec = record    ar  : double;
                         mr  : double;
                 end;
 
-Function IsMCTpath(path : string) : Boolean;
-Procedure OpenMCTwin(ncat : integer;var ok : boolean);
-Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
-Procedure ReadMCT(var lin : MCTrec; var ok : boolean);
-procedure CloseMCT ;
-procedure SetMCTpath(path : string);
+Function IsMCTpath(path : PChar) : Boolean; stdcall;
+Procedure OpenMCTwin(ncat : integer;var ok : boolean); stdcall;
+Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
+Procedure ReadMCT(var lin : MCTrec; var ok : boolean); stdcall;
+procedure CloseMCT ; stdcall;
+procedure SetMCTpath(path : PChar); stdcall;
 
 var MCTpath : string;
 
@@ -65,7 +65,7 @@ var
 
 Const SubCat : array[1..3] of string = (slashchar+'tyc',slashchar+'gsc',slashchar+'usno');
 
-Function IsMCTpath(path : string) : Boolean;
+Function IsMCTpath(path : PChar) : Boolean; stdcall;
 begin
 result:=     FileExists(noslash(path)+subcat[1]+slashchar+'Zon0000.acc')
          and FileExists(noslash(path)+subcat[2]+slashchar+'Zon0000.acc')
@@ -74,7 +74,7 @@ end;
 
 
 
-procedure SetMCTpath(path : string);
+procedure SetMCTpath(path : PChar); stdcall;
 begin
 MCTpath:=noslash(path);
 end;
@@ -177,7 +177,7 @@ begin
   end;
 end;
 
-Procedure ReadMCT(var lin : MCTrec; var ok : boolean);
+Procedure ReadMCT(var lin : MCTrec; var ok : boolean); stdcall;
 var
     cat:CatRec;
     fok:boolean;
@@ -204,7 +204,7 @@ fok:=false;
    lin.mr:=(cat.mr/10)-3;
 end;
 
-procedure CloseMCT ;
+procedure CloseMCT ; stdcall;
 begin
 curSM:=nSM;
 cursub:=1;
@@ -318,7 +318,7 @@ if (armax-armin)>300 then begin
 end;
 end;
 
-Procedure OpenMCTwin(ncat : integer; var ok : boolean);
+Procedure OpenMCTwin(ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -329,7 +329,7 @@ maxsub:=ncat;
 OpenRegion(ok);
 end;
 
-Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean);
+Procedure OpenMCT(ar1,ar2,de1,de2: double ;ncat : integer; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;

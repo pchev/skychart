@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 002.008.000 |
+| Project : Ararat Synapse                                       | 002.007.002 |
 |==============================================================================|
 | Content: MIME support procedures and functions                               |
 |==============================================================================|
-| Copyright (c)1999-2008, Lukas Gebauer                                        |
+| Copyright (c)1999-2005, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2000-2008.                |
+| Portions created by Lukas Gebauer are Copyright (c)2000-2005.                |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -55,18 +55,19 @@ Used RFC: RFC-2045
 {$Q-}
 {$R-}
 
-{$IFDEF UNICODE}
-  {$WARN IMPLICIT_STRING_CAST OFF}
-  {$WARN IMPLICIT_STRING_CAST_LOSS OFF}
-{$ENDIF}
-
 unit mimepart;
 
 interface
 
 uses
   SysUtils, Classes,
+{$IFDEF LINUX}
+  {$IFDEF FPC}
   synafpc,
+  {$ENDIF}
+{$ELSE}
+  Windows,
+{$ENDIF}
   synachar, synacode, synautil, mimeinln;
 
 type
@@ -352,10 +353,41 @@ const
     ('ZIP', 'application', 'ZIP')
     );
 
+{:Read header from "Value" stringlist beginning at "Index" position. If header
+ is Splitted into multiple lines, then this procedure de-split it into one line.}
+function NormalizeHeader(Value: TStrings; var Index: Integer): string;
+
 {:Generates a unique boundary string.}
 function GenerateBoundary: string;
 
 implementation
+
+function NormalizeHeader(Value: TStrings; var Index: Integer): string;
+var
+  s, t: string;
+  n: Integer;
+begin
+  s := Value[Index];
+  Inc(Index);
+  if s <> '' then
+    while (Value.Count - 1) > Index do
+    begin
+      t := Value[Index];
+      if t = '' then
+        Break;
+      for n := 1 to Length(t) do
+        if t[n] = #9 then
+          t[n] := ' ';
+      if not(t[1] in [' ', '"', ':', '=']) then
+        Break
+      else
+      begin
+        s := s + ' ' + Trim(t);
+        Inc(Index);
+      end;
+    end;
+  Result := TrimRight(s);
+end;
 
 {==============================================================================}
 
@@ -371,9 +403,7 @@ begin
   FDecodedLines := TMemoryStream.Create;
   FSubParts := TList.Create;
   FTargetCharset := GetCurCP;
-  //was 'US-ASCII' before, but RFC-ignorant Outlook sometimes using default
-  //system charset instead.
-  FDefaultCharset := GetIDFromCP(GetCurCP);
+  FDefaultCharset := 'US-ASCII';
   FMaxLineLength := 78;
   FSubLevel := 0;
   FMaxSubLevel := -1;
@@ -512,7 +542,6 @@ begin
   Result.DefaultCharset := FDefaultCharset;
   FSubParts.Add(Result);
   Result.SubLevel := FSubLevel + 1;
-  Result.MaxSubLevel := FMaxSubLevel;  
 end;
 
 {==============================================================================}
@@ -709,7 +738,7 @@ end;
 procedure TMIMEPart.DecodePart;
 var
   n: Integer;
-  s, t, t2: string;
+  s, t: string;
   b: Boolean;
 begin
   FDecodedLines.Clear;
@@ -733,25 +762,12 @@ begin
   if FConvertCharset and (FPrimaryCode = MP_TEXT) then
     if (not FForcedHTMLConvert) and (uppercase(FSecondary) = 'HTML') then
     begin
-      b := false;
-      t2 := uppercase(s);
-      t := SeparateLeft(t2, '</HEAD>');
-      if length(t) <> length(s) then
-      begin
-        t := SeparateRight(t, '<HEAD>');
-        t := ReplaceString(t, '"', '');
-        t := ReplaceString(t, ' ', '');
-        b := Pos('HTTP-EQUIV=CONTENT-TYPE', t) > 0;
-      end;
-      //workaround for shitty M$ Outlook 11 which is placing this information
-      //outside <head> section
-      if not b then
-      begin
-        t := Copy(t2, 1, 2048);
-        t := ReplaceString(t, '"', '');
-        t := ReplaceString(t, ' ', '');
-        b := Pos('HTTP-EQUIV=CONTENT-TYPE', t) > 0;
-      end;
+      t := uppercase(s);
+      t := SeparateLeft(t, '</HEAD>');
+      t := SeparateRight(t, '<HEAD>');
+      t := ReplaceString(t, '"', '');
+      t := ReplaceString(t, ' ', '');
+      b := Pos('HTTP-EQUIV=CONTENT-TYPE', t) > 0;
       if not b then
         s := CharsetConversion(s, FCharsetCode, FTargetCharset);
     end
@@ -774,8 +790,7 @@ begin
   FDescription := '';
   Charset := FDefaultCharset;
   FFileName := '';
-  //was 7bit before, but this is more compatible with RFC-ignorant outlook
-  Encoding := '8BIT';
+  Encoding := '7BIT';
   FDisposition := '';
   FContentID := '';
   fn := '';
@@ -820,7 +835,7 @@ begin
       if Pos('CONTENT-ID:', su) = 1 then
         FContentID := Trim(SeparateRight(s, ':'));
     end;
-  if fn <> '' then
+  if FFileName = '' then
     FFileName := fn;
   FFileName := InlineDecode(FFileName, FTargetCharset);
   FFileName := ExtractFileName(FFileName);
@@ -1053,11 +1068,8 @@ end;
 
 procedure TMIMEPart.SetCharset(Value: string);
 begin
-  if value <> '' then
-  begin
-    FCharset := Value;
-    FCharsetCode := GetCPFromID(Value);
-  end;
+  FCharset := Value;
+  FCharsetCode := GetCPFromID(Value);
 end;
 
 function TMIMEPart.CanSubPart: boolean;

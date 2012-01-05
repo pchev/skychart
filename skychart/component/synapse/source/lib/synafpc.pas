@@ -1,9 +1,9 @@
 {==============================================================================|
-| Project : Ararat Synapse                                       | 001.002.000 |
+| Project : Ararat Synapse                                       | 001.000.000 |
 |==============================================================================|
 | Content: Utils for FreePascal compatibility                                  |
 |==============================================================================|
-| Copyright (c)1999-2011, Lukas Gebauer                                        |
+| Copyright (c)1999-2003, Lukas Gebauer                                        |
 | All rights reserved.                                                         |
 |                                                                              |
 | Redistribution and use in source and binary forms, with or without           |
@@ -33,7 +33,7 @@
 | DAMAGE.                                                                      |
 |==============================================================================|
 | The Initial Developer of the Original Code is Lukas Gebauer (Czech Republic).|
-| Portions created by Lukas Gebauer are Copyright (c)2003-2011.                |
+| Portions created by Lukas Gebauer are Copyright (c)2003.                     |
 | All Rights Reserved.                                                         |
 |==============================================================================|
 | Contributor(s):                                                              |
@@ -48,94 +48,61 @@
   {$MODE DELPHI}
 {$ENDIF}
 {$H+}
-//old Delphi does not have MSWINDOWS define.
-{$IFDEF WIN32}
-  {$IFNDEF MSWINDOWS}
-    {$DEFINE MSWINDOWS}
-  {$ENDIF}
-{$ENDIF}
 
 unit synafpc;
 
 interface
 
+{$IFDEF LINUX}
+  {$IFDEF FPC}
 uses
-{$IFDEF FPC}
-  dynlibs, sysutils;
-{$ELSE}
-  {$IFDEF MSWINDOWS}
-  Windows;
-  {$ELSE}
-  SysUtils;
-  {$ENDIF}
-{$ENDIF}
+  Libc,
+  dynlibs;
 
-{$IFDEF FPC}
 type
-  TLibHandle = dynlibs.TLibHandle;
-  
-function LoadLibrary(ModuleName: PChar): TLibHandle;
-function FreeLibrary(Module: TLibHandle): LongBool;
-function GetProcAddress(Module: TLibHandle; Proc: PChar): Pointer;
-function GetModuleFileName(Module: TLibHandle; Buffer: PChar; BufLen: Integer): Integer;
-{$ELSE}
-type
-  {$IFDEF CIL}
-  TLibHandle = Integer;
-  PtrInt = Integer;
-  {$ELSE}
-  TLibHandle = HModule;
-    {$IFNDEF WIN64}
-  PtrInt = Integer;
-    {$ENDIF}
-  {$ENDIF}
-  {$IFDEF VER100}
-  LongWord = DWord;
-  {$ENDIF}
-{$ENDIF}
+  HMODULE = Longint;
 
+function LoadLibrary(ModuleName: PChar): HMODULE;
+function FreeLibrary(Module: HMODULE): LongBool;
+function GetProcAddress(Module: HMODULE; Proc: PChar): Pointer;
+function GetModuleFileName(Module: HMODULE; Buffer: PChar; BufLen: Integer): Integer;
 procedure Sleep(milliseconds: Cardinal);
+
+  {$ENDIF}
+{$ENDIF}
 
 
 implementation
 
 {==============================================================================}
-{$IFDEF FPC}
-function LoadLibrary(ModuleName: PChar): TLibHandle;
+{$IFDEF LINUX}
+  {$IFDEF FPC}
+function LoadLibrary(ModuleName: PChar): HMODULE;
 begin
-  Result := dynlibs.LoadLibrary(Modulename);
+  Result := HMODULE(dynlibs.LoadLibrary(Modulename));
 end;
 
-function FreeLibrary(Module: TLibHandle): LongBool;
+function FreeLibrary(Module: HMODULE): LongBool;
 begin
-  Result := dynlibs.UnloadLibrary(Module);
+  Result := dynlibs.UnloadLibrary(TLibHandle(Module));
 end;
 
-function GetProcAddress(Module: TLibHandle; Proc: PChar): Pointer;
+function GetProcAddress(Module: HMODULE; Proc: PChar): Pointer;
 begin
-  Result := dynlibs.GetProcedureAddress(Module, Proc);
+  Result := dynlibs.GetProcedureAddress(TLibHandle(Module), Proc);
 end;
 
-function GetModuleFileName(Module: TLibHandle; Buffer: PChar; BufLen: Integer): Integer;
+function GetModuleFileName(Module: HMODULE; Buffer: PChar; BufLen: Integer): Integer;
 begin
   Result := 0;
-end;
-
-{$ELSE}
-{$ENDIF}
+end; 
 
 procedure Sleep(milliseconds: Cardinal);
 begin
-{$IFDEF MSWINDOWS}
-  {$IFDEF FPC}
-  sysutils.sleep(milliseconds);
-  {$ELSE}
-  windows.sleep(milliseconds);
-  {$ENDIF}
-{$ELSE}
-  sysutils.sleep(milliseconds);
-{$ENDIF}
-
+  usleep(milliseconds * 1000);  // usleep is in microseconds
 end;
+ 
+  {$ENDIF}
+{$ENDIF}
 
 end.

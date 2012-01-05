@@ -1,6 +1,6 @@
 unit pu_config_pictures;
 
-{$MODE Delphi}{$H+}
+{$MODE Delphi}
 
 {
 Copyright (C) 2005 Patrick Chevalley
@@ -25,38 +25,27 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
-  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  EditBtn, LazHelpHTML;
+uses  u_constant, u_util, cu_fits, cu_database, 
+  LCLIntf, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources, WizardNotebook;
 
 type
 
   { Tf_config_pictures }
 
   Tf_config_pictures = class(TForm)
-    backimg: TFileNameEdit;
-    Button1: TButton;
-    Button2: TButton;
-    Button3: TButton;
-    Button4: TButton;
-    Button5: TButton;
-    ImgTrBar2: TTrackBar;
-    Label4: TLabel;
-    Panel3: TPanel;
-    ResetLum: TButton;
-    OnlineDSS: TCheckBox;
-    OnlineDSSList: TComboBox;
-    GroupBox1: TGroupBox;
-    imgpath: TDirectoryEdit;
     MainPanel: TPanel;
-    Page1: TTabSheet;
-    Page2: TTabSheet;
-    Page3: TTabSheet;
+    Page1: TPage;
+    Page2: TPage;
+    Page3: TPage;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     Label50: TLabel;
     Label264: TLabel;
+    Label265: TLabel;
     nimages: TLabel;
-    Panel2: TPanel;
+    Label267: TLabel;
+    imgpath: TEdit;
+    BitBtn3: TBitBtn;
     ScanImages: TButton;
     Panel11: TPanel;
     Label266: TLabel;
@@ -70,7 +59,10 @@ type
     Label270: TLabel;
     Label271: TLabel;
     backimginfo: TLabel;
+    backimg: TEdit;
+    BitBtn5: TBitBtn;
     ShowBackImg: TCheckBox;
+    OpenDialog1: TOpenDialog;
     Panel1: TPanel;
     ImgLumBar2: TTrackBar;
     Image1: TImage;
@@ -94,26 +86,17 @@ type
     reallist: TCheckBox;
     realskymax: TLongEdit;
     realskymb: TLongEdit;
-    PageControl1: TPageControl;
-    procedure backimgAcceptFileName(Sender: TObject; var Value: String);
-    procedure Button2Click(Sender: TObject);
-    procedure Button4Click(Sender: TObject);
-    procedure Button5Click(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure ImgTrBar2Change(Sender: TObject);
-    procedure ResetLumClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    WizardNotebook1: TWizardNotebook;
     procedure FormCreate(Sender: TObject);
-    procedure PageControl1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
+    procedure BitBtn3Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure OnlineDSSChange(Sender: TObject);
-    procedure OnlineDSSListChange(Sender: TObject);
     procedure ScanImagesClick(Sender: TObject);
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
     procedure ShowImagesBoxClick(Sender: TObject);
     procedure backimgChange(Sender: TObject);
+    procedure BitBtn5Click(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
     procedure ImgLumBar2Change(Sender: TObject);
     procedure ImgContrastBar2Change(Sender: TObject);
@@ -131,88 +114,38 @@ type
     { Private declarations }
     LockChange: boolean;
     FFits: TFits;
-    FApplyConfig: TNotifyEvent;
-    InitialTimer: boolean;
     procedure ShowImages;
     procedure RefreshImage;
   public
     { Public declarations }
     cdb: Tcdcdb;
-    mycsc : Tconf_skychart;
-    myccat : Tconf_catalog;
-    mycshr : Tconf_shared;
-    mycplot : Tconf_plot;
-    mycmain : Tconf_main;
-    mycdss : Tconf_dss;
-    csc : Tconf_skychart;
-    ccat : Tconf_catalog;
-    cshr : Tconf_shared;
-    cplot : Tconf_plot;
-    cmain : Tconf_main;
-    cdss : Tconf_dss;
-    procedure SetLang;
+    mycsc : conf_skychart;
+    myccat : conf_catalog;
+    mycshr : conf_shared;
+    mycplot : conf_plot;
+    mycmain : conf_main;
+    mycdss : conf_dss;
+    csc : ^conf_skychart;
+    ccat : ^conf_catalog;
+    cshr : ^conf_shared;
+    cplot : ^conf_plot;
+    cmain : ^conf_main;
+    cdss : ^conf_dss;
     constructor Create(AOwner:TComponent); override;
     property Fits: TFits read FFits write FFits;
-    property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
   end;
 
 implementation
-{$R *.lfm}
 
-procedure Tf_config_pictures.SetLang;
-begin
-Caption:=rsPictures;
-Page1.caption:=rsObjects;
-Label50.caption:=rsDisplayImage;
-Label264.caption:=rsImageDirecto;
-ScanImages.caption:=rsScanDirector;
-Label266.caption:=rsLuminosity;
-Label268.caption:=rsContrast;
-ResetLum.caption:=rsReset;
-Button5.Caption:=rsReset;
-ShowImagesBox.caption:=rsShowObjectPi;
-ProgressCat.caption:=rsOther;
-Page2.caption:=rsBackground;
-Label270.caption:=rsBackgroundPi;
-Label271.caption:=rsFITSFile;
-ShowBackImg.caption:=rsShowThisPict;
-Label1.caption:=rsLuminosity;
-Label2.caption:=rsContrast;
-label4.Caption:=rsTransparency;
-Page3.caption:=rsDSSRealsky;
-Label72.caption:=rsAuxiliaryFil;
-Label73.caption:=rsDataFilesCDr;
-Label74.caption:=rsTemporaryFil;
-Label75.caption:=rsPixels;
-Label77.caption:=rsMBytes;
-RealSkyNorth.caption:=rsRealSkyNorth;
-RealSkySouth.caption:=rsRealSkySouth;
-DSS102CD.caption:=rs102CDDSS;
-usesubsample.caption:=rsUseSubsampli;
-reallist.caption:=rsSelectPlateF;
-GroupBox1.caption:=rsOnlineDSS;
-OnlineDSS.caption:=rsUseOnlineDSS;
-Button1.caption:=rsOK;
-Button2.caption:=rsApply;
-Button3.caption:=rsCancel;
-Button4.caption:=rsHelp;
-SetHelp(self,hlpCfgPict);
-end;
 
 constructor Tf_config_pictures.Create(AOwner:TComponent);
 begin
- mycsc:=Tconf_skychart.Create;
- myccat:=Tconf_catalog.Create;
- mycshr:=Tconf_shared.Create;
- mycplot:=Tconf_plot.Create;
- mycmain:=Tconf_main.Create;
- mycdss:=Tconf_DSS.Create;
- csc:=mycsc;
- ccat:=myccat;
- cshr:=mycshr;
- cplot:=mycplot;
- cmain:=mycmain;
- cdss:=mycdss;
+ csc:=@mycsc;
+ ccat:=@myccat;
+ cshr:=@mycshr;
+ cplot:=@mycplot;
+ cmain:=@mycmain;
+ cdss:=@mycdss;
  inherited Create(AOwner);
 end;
 
@@ -221,24 +154,20 @@ begin
 LockChange:=true;
 ShowImages;
 LockChange:=false;
-InitialTimer:=true;
-ImageTimer1.Interval:=100;
-ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ShowImages;
 var save:boolean;
-  i: Integer;
 begin
 imgpath.text:=cmain.ImagePath;
-ImgLumBar.position:=-round(100*csc.NEBmin_sigma);
-ImgContrastBar.position:=round(100*csc.NEBmax_sigma);
-ImgLumBar2.position:=-round(10*csc.BGmin_sigma);
-ImgContrastBar2.position:=round(10*csc.BGmax_sigma);
+ImgLumBar.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar.position:=round(10*cmain.ImageContrast);
+ImgLumBar2.position:=-round(10*cmain.ImageLuminosity);
+ImgContrastBar2.position:=round(10*cmain.ImageContrast);
 ShowImagesBox.checked:=csc.ShowImages;
-nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
+nimages.caption:=inttostr(cdb.CountImages);
 save:=csc.ShowBackgroundImage;
-backimg.text:=SysToUTF8(csc.BackgroundImage);
+backimg.text:=csc.BackgroundImage;
 ShowBackImg.checked:=save;
 cmain.NewBackgroundImage:=false;
 ImageTimer1.enabled:=false;
@@ -251,12 +180,6 @@ realskyfile.text:=cdss.dssfile;
 reallist.checked:=cdss.dssplateprompt;
 usesubsample.checked:=cdss.dsssampling;
 realskymax.value:=cdss.dssmaxsize;
-OnlineDSS.Checked:=cdss.OnlineDSS;
-OnlineDSSList.Clear;
-for i:=1 to MaxDSSurl do
-  if cdss.DSSurl[i,1]<>'' then
-     OnlineDSSList.Items.Add(cdss.DSSurl[i,0]);
-OnlineDSSList.ItemIndex:=cdss.OnlineDSSid-1;
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -267,106 +190,39 @@ end;
 
 procedure Tf_config_pictures.FormCreate(Sender: TObject);
 begin
- SetLang;
   LockChange:=true;
-  backimginfo.caption:=rsNoPicture;
-  ShowBackImg.checked:=false;
-  Image1.canvas.brush.color:=clBlack;
-  Image1.canvas.pen.color:=clBlack;
-  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
-  {$ifdef CPU64}
-  GroupBox3.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
-  OnlineDSS.Enabled:=false;
-  {$endif}
 end;
 
-procedure Tf_config_pictures.Button2Click(Sender: TObject);
+procedure Tf_config_pictures.BitBtn3Click(Sender: TObject);
 begin
-  if assigned(FApplyConfig) then FApplyConfig(Self);
+  SelectDirectoryDialog1.InitialDir:=expandfilename(imgpath.text);
+  if SelectDirectoryDialog1.execute then
+     imgpath.text:=SelectDirectoryDialog1.FileName;
 end;
 
-procedure Tf_config_pictures.Button4Click(Sender: TObject);
-begin
-  ShowHelp;
-end;
 
-procedure Tf_config_pictures.FormDestroy(Sender: TObject);
-begin
-mycsc.Free;
-myccat.Free;
-mycshr.Free;
-mycplot.Free;
-mycmain.Free;
-mycdss.free;
-end;
-
-procedure Tf_config_pictures.ResetLumClick(Sender: TObject);
-begin
-LockChange:=true;
-try
-ImgContrastBar.position:=0;
-ImgLumBar.position:=0;
-csc.NEBmin_sigma:=0;
-csc.NEBmax_sigma:=0;
-finally
-LockChange:=false;
-end;
-end;
-
-procedure Tf_config_pictures.Button5Click(Sender: TObject);
-begin
-LockChange:=true;
-try
-ImgContrastBar2.position:=0;
-ImgLumBar2.position:=0;
-ImgTrBar2.Position:=200;
-csc.BGmin_sigma:=0;
-csc.BGmax_sigma:=0;
-csc.BGalpha:=200;
-ImageTimer1.enabled:=true;
-finally
-LockChange:=false;
-end;
-end;
-
-procedure Tf_config_pictures.FormClose(Sender: TObject;
-  var CloseAction: TCloseAction);
-begin
- LockChange:=true;
-end;
-
-procedure Tf_config_pictures.PageControl1PageChanged(Sender: TObject);
-begin
-if PageControl1.PageIndex=1 then backimgChange(Sender);
-end;
 
 procedure Tf_config_pictures.ScanImagesClick(Sender: TObject);
 begin
-WriteTrace('Scan picture directory: '+cmain.ImagePath);
-if DirectoryExists(cmain.ImagePath) then begin
 screen.cursor:=crHourGlass;
 ProgressPanel.visible:=true;
 Cdb.ScanImagesDirectory(cmain.ImagePath,ProgressCat,ProgressBar1 );
 ShowImagesBox.checked:=true;
 screen.cursor:=crDefault;
 ProgressPanel.visible:=false;
-nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
-end else begin
-  nimages.Caption:=rsDirectoryNot2;
-end;
-WriteTrace(nimages.Caption);
+nimages.caption:=inttostr(cdb.CountImages);
 end;
 
 procedure Tf_config_pictures.ImgLumBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-csc.NEBmin_sigma:=-ImgLumBar.position/100;
+cmain.ImageLuminosity:=-ImgLumBar.position/10;
 end;
 
 procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
-csc.NEBmax_sigma:=ImgContrastBar.position/100;
+cmain.ImageContrast:=ImgContrastBar.position/10;
 end;
 
 procedure Tf_config_pictures.ShowImagesBoxClick(Sender: TObject);
@@ -377,102 +233,52 @@ end;
 procedure Tf_config_pictures.ImgContrastBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-csc.BGmax_sigma:=ImgContrastBar2.position/10;
-FFits.max_sigma:=csc.BGmax_sigma;
+cmain.ImageContrast:=ImgContrastBar2.position/10;
+FFits.max_sigma:=cmain.ImageContrast;
 ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ImgLumBar2Change(Sender: TObject);
 begin
 if LockChange then exit;
-csc.BGmin_sigma:=-ImgLumBar2.position/10;
-FFits.min_sigma:=csc.BGmin_sigma;
+cmain.ImageLuminosity:=-ImgLumBar2.position/10;
+FFits.min_sigma:=cmain.ImageLuminosity;
 ImageTimer1.enabled:=true;
-end;
-
-procedure Tf_config_pictures.ImgTrBar2Change(Sender: TObject);
-begin
-if LockChange then exit;
-csc.BGalpha:=ImgTrBar2.position;
-//ImageTimer1.enabled:=true;
 end;
 
 procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);
 begin
 ImageTimer1.enabled:=false;
-ImageTimer1.Interval:=500;
-if InitialTimer then  begin
-  InitialTimer:=false;
-  backimgChange(Sender);
-end
-  else RefreshImage;
+RefreshImage;
 end;
 
-////////// duplicate because of filenameedit onchange bug //////////////////////////
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
-if LockChange or (not Fileexists(backimg.text)) then exit;
+if LockChange then exit;
 csc.BackgroundImage:=backimg.text;
 Ffits.filename:=csc.BackgroundImage;
-FFits.InfoWCScoord;
-if Ffits.WCSvalid then begin
-  if Sender=backimg then begin
-     ShowBackImg.checked:=true;
-     cmain.NewBackgroundImage:=true;
-  end;
-  backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
-    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+
-    DEtoStr(Ffits.center_de*rad2deg)+blank+
-    rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
+if Ffits.header.coordinate_valid then begin
+  cmain.NewBackgroundImage:=true;
+  ShowBackImg.checked:=true;
+  backimginfo.caption:=extractfilename(csc.BackgroundImage)+' RA:'+ARtoStr(Ffits.center_ra*rad2deg/15)+' DEC:'+DEtoStr(Ffits.center_de*rad2deg)+' FOV:'+DEtoStr(Ffits.img_width*rad2deg);
   RefreshImage;
 end
 else begin
-  backimginfo.caption:=rsNoPicture;
+  backimginfo.caption:='No picture';
   ShowBackImg.checked:=false;
   Image1.canvas.brush.color:=clBlack;
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
 end;
-procedure Tf_config_pictures.backimgAcceptFileName(Sender: TObject;
-  var Value: String);
-begin
-if LockChange or (not Fileexists(value)) then exit;
-csc.BackgroundImage:=value;
-Ffits.filename:=csc.BackgroundImage;
-FFits.InfoWCScoord;
-if Ffits.WCSvalid then begin
-  if Sender=backimg then begin
-     ShowBackImg.checked:=true;
-     cmain.NewBackgroundImage:=true;
-  end;
-  backimginfo.caption:=extractfilename(csc.BackgroundImage)+blank+rsRA+':'+
-    ARtoStr(Ffits.center_ra*rad2deg/15)+blank+''+rsDEC+''+':'+
-    DEtoStr(Ffits.center_de*rad2deg)+blank+
-    rsFOV+':'+DEtoStr(Ffits.img_width*rad2deg);
-  RefreshImage;
-end
-else begin
-  backimginfo.caption:=rsNoPicture;
-  ShowBackImg.checked:=false;
-  Image1.canvas.brush.color:=clBlack;
-  Image1.canvas.pen.color:=clBlack;
-  Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
-end;
-end;
-
-//////////////////////////
 
 Procedure  Tf_config_pictures.RefreshImage;
 var bmp: TBitmap;
     c1,c2:double;
     x,y,dx,dy:integer;
 begin
-bmp:=Tbitmap.create;
-FFits.min_sigma:=csc.BGmin_sigma;
-FFits.max_sigma:=csc.BGmax_sigma;
-FFits.GetBitmap(bmp);
-if bmp.Width>1 then begin
+  bmp:=Tbitmap.create;
+  FFits.GetBitmap(bmp);
   c1:=Image1.width/Image1.Height;
   c2:=bmp.width/bmp.Height;
   if c1>c2 then begin
@@ -490,15 +296,30 @@ if bmp.Width>1 then begin
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
   Image1.canvas.stretchdraw(rect(x,y,x+dx,y+dy),bmp);
+  bmp.Free;
 end;
-bmp.Free;
+
+procedure Tf_config_pictures.BitBtn5Click(Sender: TObject);
+var f : string;
+begin
+f:=expandfilename(backimg.text);
+opendialog1.InitialDir:=extractfilepath(f);
+opendialog1.filename:=extractfilename(f);
+opendialog1.Filter:='FITS Files|*.fit';
+opendialog1.DefaultExt:='';
+try
+if opendialog1.execute then begin
+   backimg.text:=opendialog1.FileName;
+end;
+finally
+ chdir(appdir);
+end;
 end;
 
 procedure Tf_config_pictures.ShowBackImgClick(Sender: TObject);
 begin
 csc.ShowBackgroundImage:=ShowBackImg.checked;
 cmain.NewBackgroundImage:=csc.ShowBackgroundImage;
-backimgChange(Sender);
 end;
 
 procedure Tf_config_pictures.DSS102CDClick(Sender: TObject);
@@ -558,26 +379,15 @@ end;
 
 procedure Tf_config_pictures.reallistClick(Sender: TObject);
 begin
-if LockChange then exit;
 cdss.dssplateprompt:=reallist.checked;
 end;
 
 procedure Tf_config_pictures.usesubsampleClick(Sender: TObject);
 begin
-if LockChange then exit;
 cdss.dsssampling:=usesubsample.checked;
 end;
 
-procedure Tf_config_pictures.OnlineDSSChange(Sender: TObject);
-begin
-if LockChange then exit;
-cdss.OnlineDSS:=OnlineDSS.Checked;
-end;
-
-procedure Tf_config_pictures.OnlineDSSListChange(Sender: TObject);
-begin
-if LockChange then exit;
-cdss.OnlineDSSid:=OnlineDSSList.ItemIndex+1;
-end;
+initialization
+  {$i pu_config_pictures.lrs}
 
 end.

@@ -32,12 +32,12 @@ PGCrec = record
                 pa    : byte;
                 maj,min,mb : smallint;
                 end;
-Function IsPGCpath(path : string) : Boolean;
-procedure SetPGCpath(path : string);
-Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean);
-Procedure OpenPGCwin(var ok : boolean);
-Procedure ReadPGC(var lin : PGCrec; var ok : boolean);
-procedure ClosePGC ;
+Function IsPGCpath(path : PChar) : Boolean; stdcall;
+procedure SetPGCpath(path : PChar); stdcall;
+Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
+Procedure OpenPGCwin(var ok : boolean); stdcall;
+Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall;
+procedure ClosePGC ; stdcall;
 
 var
   PGCpath : string;
@@ -53,12 +53,12 @@ var
    FileIsOpen : Boolean = false;
    chkfile : Boolean = true;
 
-Function IsPGCpath(path : string) : Boolean;
+Function IsPGCpath(path : PChar) : Boolean; stdcall;
 begin
 result:= FileExists(slash(path)+'01.dat');
 end;
 
-procedure SetPGCpath(path : string);
+procedure SetPGCpath(path : PChar); stdcall;
 begin
 PGCpath:=noslash(path);
 end;
@@ -88,7 +88,7 @@ reset(f);
 ok:=true;
 end;
 
-Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean);
+Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
@@ -98,7 +98,7 @@ Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
 end;
 
-Procedure ReadPGC(var lin : PGCrec; var ok : boolean);
+Procedure ReadPGC(var lin : PGCrec; var ok : boolean); stdcall;
 var sm:integer;
 begin
 ok:=true;
@@ -114,13 +114,13 @@ end;
 if ok then  Read(f,lin);
 end;
 
-procedure ClosePGC ;
+procedure ClosePGC ; stdcall;
 begin
 curSM:=nSM;
 CloseRegion;
 end;
 
-Procedure OpenPGCwin(var ok : boolean);
+Procedure OpenPGCwin(var ok : boolean); stdcall;
 begin
 JDCatalog:=jd2000;
 curSM:=1;
