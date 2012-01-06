@@ -1385,6 +1385,10 @@ msgstr "Birta sjóndeildarhring"
 msgid "Distance"
 msgstr "Fjarlægð"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Fjarlægð síðasta fyrirbæris"

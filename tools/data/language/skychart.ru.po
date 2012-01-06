@@ -1387,6 +1387,10 @@ msgstr "Отображать контур горизонта"
 msgid "Distance"
 msgstr "Дистанция"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Расстояние к предыдущему объекту"

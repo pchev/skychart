@@ -1390,6 +1390,10 @@ msgstr "Mostra l'horitzó local"
 msgid "Distance"
 msgstr "Distància"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Distància a l'objecte precedent"

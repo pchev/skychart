@@ -615,10 +615,6 @@ msgstr "Carta, Coordenadas"
 msgid "Chart coordinate systems"
 msgstr "Sistema de Coordenadas da Carta"
 
-#: u_translation.rschartinforma
-msgid "Chart information"
-msgstr "Informação da Carta"
-
 #~ msgctxt "u_translation.rsdarknebula"
 #~ msgid "Dark nebula"
 #~ msgstr "Nebulosa Escura"
@@ -628,6 +624,10 @@ msgstr "Informação da Carta"
 #~ msgctxt "u_translation.rsplanetaryneb"
 #~ msgid "Planetary nebula"
 #~ msgstr "Nebulosa Planetária"
+#: u_translation.rschartinforma
+msgid "Chart information"
+msgstr "Informação da Carta"
+
 #: u_translation.rschartlegend
 msgid "Chart legend"
 msgstr ""
@@ -1396,6 +1396,10 @@ msgstr "Exibir a linha do horizonte local"
 #: u_translation.rsdistance
 msgid "Distance"
 msgstr "Distância"
+
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"

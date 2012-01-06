@@ -1391,6 +1391,10 @@ msgstr "Voir l'horizon local"
 msgid "Distance"
 msgstr "Distance"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Distance à l'objet précédent"

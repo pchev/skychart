@@ -247,11 +247,12 @@ type
     ChartCursor: TCursor;
     sc: Tskychart;
     cmain: Tconf_main;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove,MeasureOn :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
-    lastl,lastb: double;
+    lastl,lastb,MeasureRa,MeasureDe: double;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
+    XM1,YM1,XMD1,YMD1: integer;
     procedure Refresh;
     procedure AutoRefresh;
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
@@ -286,6 +287,7 @@ type
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
+    Procedure MeasureDistance(action,x,y:integer);
     Procedure TrackCursor(X,Y : integer);
     Procedure ZoomCursor(yy : double);
     procedure SetField(field : double);
@@ -405,6 +407,7 @@ begin
  moveguide:=false;
  frommovecam:=false;
  printing:=false;
+ MeasureOn:=false;
  SetLang;
  for i:=1 to maxundo do undolist[i]:=Tconf_skychart.Create;
  Image1:= TChartDrawingControl.Create(Self);
@@ -1875,8 +1878,10 @@ if MovingCircle then begin
       Refresh;
    end;
 end
-else
-if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
+else if (button=mbLeft)and sc.cfgsc.ShowScale then begin
+   MeasureDistance(3,X,Y);
+end
+else if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
    if zoomstep>0 then begin
      ZoomBox(3,X,Y);
    end
@@ -1915,7 +1920,8 @@ GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 scp:=Image1.ControlToScreen(point(x,y));
 case Button of
-   mbLeft  : ZoomBox(1,X,Y);
+   mbLeft  : if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
+               else ZoomBox(1,X,Y);
    mbRight : PopupMenu1.PopUp(scp.x,scp.y);
    mbMiddle: image1.cursor:=crHandPoint;
 end;
@@ -1944,7 +1950,8 @@ if MovingCircle then begin
    {$endif}
 end else
 if (ssLeft in shift)and(not(ssShift in shift)) then begin
-   ZoomBox(2,X,Y);
+   if sc.cfgsc.ShowScale then  MeasureDistance(2,X,Y)
+               else ZoomBox(2,X,Y);
 end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift)) then begin
      TrackCursor(X,Y);
 end else if Shift=[ssCtrl] then begin
@@ -1965,7 +1972,7 @@ end else if ((ssMiddle in shift)and(ssCtrl in Shift)) then begin
      lastyzoom:=y;
 end else begin
    if lastquick then Refresh; //the mouse as leave during a quick refresh
-   ShowCoord(x,y);
+   if not sc.cfgsc.ShowScale then ShowCoord(x,y);
 end;
 end;
 
@@ -1997,6 +2004,97 @@ begin
           end;
    end;
    if assigned(Fshowcoord) then Fshowcoord(txt);
+end;
+
+Procedure Tf_chart.MeasureDistance(action,x,y:integer);
+var ra,de,dx,dy,dist,x1,y1: double;
+    xx,yy: single;
+    pa: integer;
+    txt:string;
+begin
+case action of
+1 : begin    // mouse down
+     // cleanup last measure
+     if MeasureOn then MeasureDistance(4,0,0);
+     // begin measure
+     GetADxy(X,Y,MeasureRa,MeasureDe,sc.cfgsc);
+     // start on object?
+     if IdentXY(X,Y,false,true) then begin
+       MeasureRa:=sc.cfgsc.FindRA;
+       MeasureDe:=sc.cfgsc.FindDec;
+       Projection(MeasureRa,MeasureDe,x1,y1,false,sc.cfgsc,false);
+       WindowXY(x1,y1,xx,yy,sc.cfgsc);
+       X:=round(xx);
+       Y:=round(yy);
+     end;
+     XM1:=X;
+     YM1:=Y;
+     XMD1:=X;
+     YMD1:=Y;
+     MeasureOn:=true;
+   end;
+2,3 : begin    // mouse move, up
+    if  MeasureOn then begin
+      // clean
+      with Image1.Canvas do begin
+       Pen.Width := 1;
+       pen.Color:=clWhite;
+       Pen.Mode:=pmXor;
+       brush.Style:=bsclear;
+       MoveTo(XM1,YM1);
+       LineTo(XMD1,YMD1);
+       Pen.Mode:=pmCopy;
+       brush.Style:=bsSolid;
+      end;
+    GetADxy(X,Y,ra,de,sc.cfgsc);
+    // end on object?
+    if (action=3) and IdentXY(X,Y,false,true) then begin
+       ra:=sc.cfgsc.FindRA;
+       de:=sc.cfgsc.FindDec;
+       Projection(ra,de,x1,y1,false,sc.cfgsc,false);
+       WindowXY(x1,y1,xx,yy,sc.cfgsc);
+       X:=round(xx);
+       Y:=round(yy);
+    end;
+    dist:=rad2deg*AngularDistance(MeasureRa,MeasureDe,ra,de);
+    if dist>0 then begin
+      pa:=round(rmod(rad2deg*PositionAngle(MeasureRa,MeasureDe,ra,de)+360,360));
+      txt:=DEptoStr(dist)+' PA:'+inttostr(pa)+ldeg;
+      dx:=rmod((rad2deg*(ra-MeasureRa)/15)+24,24);
+      if dx>12 then dx:=dx-24;
+      dy:=rad2deg*(de-MeasureDe);
+      txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
+      if assigned(Fshowcoord) then Fshowcoord(txt);
+    end;
+    with Image1.Canvas do begin
+     Pen.Width := 1;
+     pen.Color:=clWhite;
+     Pen.Mode:=pmXor;
+     brush.Style:=bsclear;
+     XMD1:=X;
+     YMD1:=Y;
+     MoveTo(XM1,YM1);
+     LineTo(XMD1,YMD1);
+     Pen.Mode:=pmCopy;
+     brush.Style:=bsSolid;
+    end;
+    end;
+    end;
+4 : begin    // cleanup
+    if MeasureOn then
+      with Image1.Canvas do begin
+       Pen.Width := 1;
+       pen.Color:=clWhite;
+       Pen.Mode:=pmXor;
+       brush.Style:=bsclear;
+       MoveTo(XM1,YM1);
+       LineTo(XMD1,YMD1);
+       Pen.Mode:=pmCopy;
+       brush.Style:=bsSolid;
+      end;
+    MeasureOn:=False;
+    end;
+end;
 end;
 
 Procedure Tf_chart.ZoomBox(action,x,y:integer);

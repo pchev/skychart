@@ -1354,6 +1354,7 @@ resourcestring
   rsUseSocksProx = 'Use Socks proxy';
   rsEditDSOLines = 'Edit DSO lines color';
   rsChartLegend = 'Chart legend';
+  rsDistanceMeas = 'Distance measurement';
 
 implementation
 
