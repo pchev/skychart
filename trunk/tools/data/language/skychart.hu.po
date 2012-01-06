@@ -1509,6 +1509,10 @@ msgstr "A helyi horizont mutatása"
 msgid "Distance"
 msgstr "Távolság"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Távolsága a legutóbbi objektumtól"

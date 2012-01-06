@@ -577,7 +577,7 @@ type
                 racentre,decentre,fov,theta,acentre,hcentre,lcentre,bcentre,lecentre,becentre,ecl,eqeq,nutl,nuto,sunl,sunb,ab1,abe,abp,gr2e,raprev,deprev : double;
                 EarthB,abv,ehn : coordvector;
                 NutMAT, EqpMAT, EqtMAT: rotmatrix;
-                Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved,abm,asl : Boolean;
+                Force_DT_UT,horizonopaque,autorefresh,TrackOn,TargetOn,Quick,NP,SP,moved,abm,asl,ShowScale : Boolean;
                 projtype : char;
                 projname : array [0..MaxField] of string[3];
                 FlipX, FlipY, ProjPole, TrackType,TrackObj, AstSymbol, ComSymbol : integer;
@@ -1370,6 +1370,7 @@ raprev:=Source.raprev ;
 deprev:=Source.deprev ;
 Force_DT_UT:=Source.Force_DT_UT ;
 horizonopaque:=Source.horizonopaque ;
+ShowScale:=Source.ShowScale;
 autorefresh:=Source.autorefresh ;
 TrackOn:=Source.TrackOn ;
 TargetOn:=Source.TargetOn;

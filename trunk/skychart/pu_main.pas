@@ -54,6 +54,7 @@ type
     MenuChartLegend: TMenuItem;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
+    ToolButtonScale: TToolButton;
     ToolButtonUObj: TToolButton;
     ToolButtonVO: TToolButton;
     TrackTelescope1: TMenuItem;
@@ -488,6 +489,7 @@ type
     procedure ToolButton13Click(Sender: TObject);
     procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonScaleClick(Sender: TObject);
     procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonConfigClick(Sender: TObject);
@@ -2358,6 +2360,15 @@ begin
   if Button=mbRight then SetupTimePage(2);
 end;
 
+procedure Tf_main.ToolButtonScaleClick(Sender: TObject);
+begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.ShowScale:=ToolButtonScale.Down;
+     if MeasureOn then MeasureDistance(4,0,0);
+     Refresh;
+  end;
+end;
+
 procedure Tf_main.AnimationTimerTimer(Sender: TObject);
 var fn:string;
 begin
@@ -4217,6 +4228,7 @@ def_cfgsc.ObsName := 'Geneva' ;
 def_cfgsc.countrytz := true;
 def_cfgsc.ObsCountry := 'Switzerland' ;
 def_cfgsc.horizonopaque:=true;
+def_cfgsc.ShowScale:=false;
 def_cfgsc.FillHorizon:=true;
 def_cfgsc.ShowHorizon:=false;
 def_cfgsc.ShowHorizonDepression:=false;
@@ -6078,6 +6090,7 @@ ToolButtonShowConstellationLimit.hint:=rsShowConstell2;
 ToolButtonShowGalacticEquator.hint:=rsShowGalactic;
 ToolButtonShowEcliptic.hint:=rsShowEcliptic;
 ToolButtonShowMark.hint:=rsShowMark;
+ToolButtonScale.Hint:=rsDistanceMeas;
 ToolButtonShowLabels.hint:=rsShowLabels;
 ToolButtonEditlabels.hint:=rsEditLabel;
 MenuEditlabels.Caption:='&'+rsEditLabel;
@@ -6428,6 +6441,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     ShowMilkyWay.checked:=sc.cfgsc.ShowMilkyWay;
     toolbuttonShowlabels.down:=sc.cfgsc.Showlabelall;
     toolbuttonEditlabels.down:=sc.cfgsc.Editlabels;
+    ToolButtonScale.Down := sc.cfgsc.ShowScale;
     ShowLabels1.checked:=sc.cfgsc.Showlabelall;
     MenuChartInfo.Checked:=sc.cfgsc.ShowLabel[8];
     MenuChartLegend.Checked:=sc.cfgsc.ShowLegend;

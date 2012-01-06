@@ -5310,3 +5310,7 @@ msgstr ""
 msgid "Chart legend"
 msgstr ""
 
+#: u_translation:rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+

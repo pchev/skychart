@@ -1387,6 +1387,10 @@ msgstr "Prikaži liniju lokalnog horizonta"
 msgid "Distance"
 msgstr "Udaljenost"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Udaljenost do posljednjeg objekta"

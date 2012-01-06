@@ -1387,6 +1387,10 @@ msgstr "Mostra la linea dell'orizzonte"
 msgid "Distance"
 msgstr "Distanza"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Distanza dall'ultimo oggetto"

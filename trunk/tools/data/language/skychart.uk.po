@@ -1388,6 +1388,10 @@ msgstr "Відобразити абрис місцевого обрію"
 msgid "Distance"
 msgstr "Дистанція"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Відстань до попереднього об'єкту"

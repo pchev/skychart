@@ -1388,6 +1388,10 @@ msgstr "Mostrar línea de horizonte local"
 msgid "Distance"
 msgstr "Distancia"
 
+#: u_translation.rsdistancemeas
+msgid "Distance measurement"
+msgstr ""
+
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Distancia al último objeto"
