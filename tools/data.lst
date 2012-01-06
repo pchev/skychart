@@ -5,7 +5,7 @@ data/common_names/NebulaNames_is.txt
 data/common_names/StarsNames_is.txt
 data/common_names/StarsNames_ru.txt
 data/common_names/StarsNames.txt
-data/common_names/StarsNames_ua.txt
+data/common_names/StarsNames_uk.txt
 data/constellation
 data/constellation/constb.cby
 data/constellation/constlabel.cla
@@ -19,7 +19,7 @@ data/constellation/constlabel_nl.cla
 data/constellation/constlabel_no.cla
 data/constellation/constlabel_ru.cla
 data/constellation/constlabel_sl.cla
-data/constellation/constlabel_ua.cla
+data/constellation/constlabel_uk.cla
 data/constellation/constlabel_zh.cla
 data/constellation/DefaultConstL.cln
 data/constellation/ReyConstL.cln
@@ -235,7 +235,7 @@ data/language/help.nl.po
 data/language/help.pl.po
 data/language/help.pt.po
 data/language/help.ru.po
-data/language/help.ua.po
+data/language/help.uk.po
 data/language/lclstrconsts.ca.po
 data/language/lclstrconsts.cs.po
 data/language/lclstrconsts.de.po
@@ -259,7 +259,6 @@ data/language/lclstrconsts.pt.po
 data/language/lclstrconsts.ru.po
 data/language/lclstrconsts.sk.po
 data/language/lclstrconsts.tr.po
-data/language/lclstrconsts.ua.po
 data/language/lclstrconsts.uk.po
 data/language/lclstrconsts.zh-cn.po
 data/language/lclstrconsts.zh_CN.po
@@ -282,7 +281,7 @@ data/language/skychart.pl.po
 data/language/skychart.pt.po
 data/language/skychart.ru.po
 data/language/skychart.sl.po
-data/language/skychart.ua.po
+data/language/skychart.uk.po
 data/language/skychart.zh.po
 data/pictures
 data/planet
