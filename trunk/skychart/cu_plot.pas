@@ -3439,7 +3439,7 @@ const aafactor=4;
 begin
 if cfgplot.AntiAlias then begin
   size:=abmp.TextSize(s);
-  aacx:=round(max((aafactor+0.1)*size.cx,aafactor*(size.cx+1)));
+  aacx:=round(max((aafactor+0.2)*size.cx,aafactor*(size.cx+1)));
   temp := TBGRABitmap.Create(aacx, aafactor*size.cy);
   temp.FontHeight:=aafactor*abmp.FontHeight;
   temp.FontStyle:=abmp.FontStyle;

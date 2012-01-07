@@ -246,8 +246,8 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 2
           object ImgTrBar2: TTrackBar
             Left = 304
-            Height = 45
-            Top = 12
+            Height = 27
+            Top = 20
             Width = 140
             Frequency = 5
             Max = 250
