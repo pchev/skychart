@@ -639,6 +639,10 @@ case trunc(rad2deg*cfgsc.fov) of
   6..999: outr:=10;
 end;
 Fplot.cfgplot.outradius:=abs(round(min(outr*cfgsc.fov,0.98*pi2)*cfgsc.BxGlb/2));
+if cfgsc.projtype='T' then begin
+   Fplot.cfgplot.outradius:=2*Fplot.cfgplot.outradius;
+   cfgsc.x2:=9*cfgsc.x2;
+end;
 if Fplot.cfgplot.outradius>maxSmallint then Fplot.cfgplot.outradius:=maxSmallint;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hw then Fplot.cfgplot.outradius:=Fplot.cfgchart.hw;
 if Fplot.cfgplot.outradius<Fplot.cfgchart.hh then Fplot.cfgplot.outradius:=Fplot.cfgchart.hh;
