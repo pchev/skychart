@@ -1355,6 +1355,8 @@ resourcestring
   rsEditDSOLines = 'Edit DSO lines color';
   rsChartLegend = 'Chart legend';
   rsDistanceMeas = 'Distance measurement';
+  rsExampleOfUse = 'Example of user defined object: North galactic pole';
+  rsShowMarkInde = 'Show mark index';
 
 implementation
 
@@ -1386,6 +1388,7 @@ function Translate(lang : string = ''):string;
 var lang2,pofile: string;
 begin
  lang2:='';
+ if lang='ua' then lang:='uk'; // new Ukranian code
  if lang='' then GetDefaultLanguage(lang,lang2);
  writetrace('Try language: '+lang+', '+lang2);
  pofile:=format(slash(appdir)+slash('data')+slash('language')+'skychart.%s.po',[lang]);

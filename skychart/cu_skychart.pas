@@ -3812,7 +3812,7 @@ var lbmp : TBGRABitmap;
     col: TBGRAPixel;
     txtl,txt,buf: string;
     drawgray: boolean;
-    w,h,h0,fontnum,labelnum,p,ls,i,xx,yy,sz:integer;
+    w,h,h0,fontnum,labelnum,p,ls,i,xx,yy,sz,tr:integer;
     mag,dma: double;
     ts: TSize;
 begin
@@ -3856,7 +3856,9 @@ h0:=h;
 if cfgsc.showlegend then begin
   w:=max(w,10*ls);
   h:=h+6*ls;
-end;
+  tr:=255;
+end
+ else tr:=220;
 // set size
 lbmp.SetSize(w,h);
 // fill background
@@ -3866,7 +3868,7 @@ if cfgsc.WhiteBg then begin
   lbmp.Rectangle(0,0,w,h,clBlack);
 end
 else begin
-  col:=ColorToBGRA($202020,255);
+  col:=ColorToBGRA($202020,tr);
   lbmp.Fill(col);
 end;
 // replace drawing bitmap

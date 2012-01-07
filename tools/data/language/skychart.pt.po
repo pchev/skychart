@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-05 12:01+0000\n"
+"POT-Creation-Date: 2012-01-07 11:01+0000\n"
 "PO-Revision-Date: 2012-01-06 06:36+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-06 11:52+0000\n"
-"X-Generator: Launchpad (build 14637)\n"
+"X-Launchpad-Export-Date: 2012-01-07 11:20+0000\n"
+"X-Generator: Launchpad (build 14640)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -615,15 +615,6 @@ msgstr "Carta, Coordenadas"
 msgid "Chart coordinate systems"
 msgstr "Sistema de Coordenadas da Carta"
 
-#~ msgctxt "u_translation.rsdarknebula"
-#~ msgid "Dark nebula"
-#~ msgstr "Nebulosa Escura"
-#~ msgctxt "u_translation.rsgalaxycluste"
-#~ msgid "Galaxy cluster"
-#~ msgstr "Agrupamento de Galáxias"
-#~ msgctxt "u_translation.rsplanetaryneb"
-#~ msgid "Planetary nebula"
-#~ msgstr "Nebulosa Planetária"
 #: u_translation.rschartinforma
 msgid "Chart information"
 msgstr "Informação da Carta"
@@ -1708,6 +1699,10 @@ msgstr "cada "
 #: u_translation.rseverypositio
 msgid "Every position"
 msgstr "Toda posição"
+
+#: u_translation.rsexampleofuse
+msgid "Example of user defined object: North galactic pole"
+msgstr ""
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -4364,6 +4359,10 @@ msgstr "Mostrar Linhas"
 #: u_translation.rsshowmark
 msgid "Show mark"
 msgstr "Mostrar Ocular"
+
+#: u_translation.rsshowmarkinde
+msgid "Show mark index"
+msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"

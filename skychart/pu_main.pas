@@ -4410,7 +4410,7 @@ catalog.cfgcat.UserObjects[0].dec:=0.473478737245;
 catalog.cfgcat.UserObjects[0].mag:=0;
 catalog.cfgcat.UserObjects[0].size:=30;
 catalog.cfgcat.UserObjects[0].color:=0;
-catalog.cfgcat.UserObjects[0].comment:='Example of user defined object: North galactic pole';
+catalog.cfgcat.UserObjects[0].comment:=rsExampleOfUse;
 catalog.cfgcat.GCatNum:=0;
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 for i:=1 to maxstarcatalog do begin

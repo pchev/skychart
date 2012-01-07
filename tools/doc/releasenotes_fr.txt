@@ -1,11 +1,13 @@
 Version 3.5  Notes de la version
 
+- Ajout d'un outil de mesure des distances.
 - Ajout d'une légende de la carte. Voir le menu Carte / Labels
 - Changement dans les projections cartographiques:
   - Ajout de la projection Mercator. 
   - Les projections Cartésienne et Mercator sont pivotée vers le centre de l'écran pour une couverture complète du ciel.
   - Les projections par défaut sont maintenant Tangent pour les champs jusqu'à 90 deg. et Mercator au dela.
   - Limite l'utilisation de la projection Arc aux champs de moins de 250 deg.
+  - Limite la vision des objets en dessous de l'horizon aux champs de moins de 180 deg.
 - Nouveau catalogue d'étoile par défaut basé sur "Extended Hipparcos" pour remplacer le BSC et Sky2000.
 - Meilleur précision des positions apparentes (un grand merci à P. Wallace pour son aide):
   - Parallaxe des étoiles.

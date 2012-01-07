@@ -29,10 +29,10 @@ object f_config_display: Tf_config_display
       Height = 530
       Top = 1
       Width = 513
-      ActivePage = Page6
+      ActivePage = Page9
       Align = alClient
       ShowTabs = False
-      TabIndex = 5
+      TabIndex = 8
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'

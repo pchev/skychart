@@ -2066,6 +2066,7 @@ case action of
       txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
       if assigned(Fshowcoord) then Fshowcoord(txt);
     end;
+    if action=3 then Image1.Repaint;
     with Image1.Canvas do begin
      Pen.Width := 1;
      pen.Color:=clWhite;
