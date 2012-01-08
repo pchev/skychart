@@ -1357,6 +1357,7 @@ resourcestring
   rsDistanceMeas = 'Distance measurement';
   rsExampleOfUse = 'Example of user defined object: North galactic pole';
   rsShowMarkInde = 'Show mark index';
+  rsValidForFiel = 'Valid for field smaller than %s degrees';
 
 implementation
 

@@ -50,6 +50,7 @@ type
     DownloadDialog1: TDownloadDialog;
     Label2: TLabel;
     Label3: TLabel;
+    Label4: TLabel;
     ObsName: TEdit;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
@@ -189,6 +190,7 @@ Label83.caption:=rsTemperatureC;
 Page2.caption:=rsHorizon;
 GroupBox2.caption:=rsWantToTrackA;
 horizonopaque.caption:=rsShowObjectBe;
+label4.Caption:=Format(rsValidForFiel, ['180']);
 GroupBox1.caption:=rsLocalHorizon;
 hor_l1.caption:=rsLocalHorizon2;
 displayhorizon.caption:=rsDisplayTheLo;
