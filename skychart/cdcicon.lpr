@@ -12,8 +12,6 @@ uses
   Printer4Lazarus, satxy, libsql, pu_calendar,
   CDCjdcalendar, zoomimage;
 
-{$IFDEF WINDOWS}{$R cdcicon.rc}{$ENDIF}
-
 {$R *.res}
 
 begin
