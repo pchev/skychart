@@ -1,0 +1,288 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="/"/>
+    <Version Value="5"/>
+    <General>
+      <MainUnit Value="0"/>
+      <IconPath Value="./"/>
+      <TargetFileExt Value=".dll"/>
+      <ActiveEditorIndexAtStart Value="1"/>
+    </General>
+    <LazDoc Paths=""/>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <Units Count="29">
+      <Unit0>
+        <Filename Value="catalog.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="catalog"/>
+        <CursorPos X="5" Y="39"/>
+        <TopLine Value="34"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="26"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="skylibcat.pas"/>
+        <UnitName Value="skylibcat"/>
+        <CursorPos X="69" Y="17"/>
+        <TopLine Value="114"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="11"/>
+        <Loaded Value="True"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="C:/appli/lazarus/fpcsrc/rtl/objpas/math.pp"/>
+        <UnitName Value="math"/>
+        <CursorPos X="14" Y="24"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="bscunit.pas"/>
+        <UnitName Value="bscunit"/>
+        <CursorPos X="13" Y="77"/>
+        <TopLine Value="170"/>
+        <UsageCount Value="11"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="gcvunit.pas"/>
+        <UnitName Value="gcvunit"/>
+        <CursorPos X="13" Y="65"/>
+        <TopLine Value="78"/>
+        <UsageCount Value="11"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="gpnunit.pas"/>
+        <UnitName Value="gpnunit"/>
+        <CursorPos X="13" Y="65"/>
+        <TopLine Value="45"/>
+        <UsageCount Value="11"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="dscat.pas"/>
+        <UnitName Value="dscat"/>
+        <CursorPos X="25" Y="102"/>
+        <TopLine Value="80"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="gscfits.pas"/>
+        <UnitName Value="gscfits"/>
+        <CursorPos X="21" Y="202"/>
+        <TopLine Value="212"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="gscunit.pas"/>
+        <UnitName Value="gscunit"/>
+        <CursorPos X="31" Y="143"/>
+        <TopLine Value="123"/>
+        <UsageCount Value="10"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="lbnunit.pas"/>
+        <UnitName Value="lbnunit"/>
+        <CursorPos X="24" Y="62"/>
+        <TopLine Value="39"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="ngcunit.pas"/>
+        <UnitName Value="ngcunit"/>
+        <CursorPos X="36" Y="68"/>
+        <TopLine Value="105"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="sacunit.pas"/>
+        <UnitName Value="sacunit"/>
+        <CursorPos X="41" Y="64"/>
+        <TopLine Value="51"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="oclunit.pas"/>
+        <UnitName Value="oclunit"/>
+        <CursorPos X="4" Y="60"/>
+        <TopLine Value="44"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="pgcunit.pas"/>
+        <UnitName Value="pgcunit"/>
+        <CursorPos X="32" Y="67"/>
+        <TopLine Value="48"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="gcmunit.pas"/>
+        <UnitName Value="gcmunit"/>
+        <CursorPos X="1" Y="63"/>
+        <TopLine Value="44"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="wdsunit.pas"/>
+        <UnitName Value="wdsunit"/>
+        <CursorPos X="34" Y="63"/>
+        <TopLine Value="47"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="ticunit.pas"/>
+        <UnitName Value="ticunit"/>
+        <CursorPos X="13" Y="101"/>
+        <TopLine Value="74"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="tycunit.pas"/>
+        <UnitName Value="tycunit"/>
+        <CursorPos X="13" Y="102"/>
+        <TopLine Value="76"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="usnoaunit.pas"/>
+        <UnitName Value="usnoaunit"/>
+        <CursorPos X="1" Y="99"/>
+        <TopLine Value="80"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="skyunit.pas"/>
+        <UnitName Value="skyunit"/>
+        <CursorPos X="30" Y="69"/>
+        <TopLine Value="49"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="rc3unit.pas"/>
+        <UnitName Value="rc3unit"/>
+        <CursorPos X="1" Y="64"/>
+        <TopLine Value="45"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="gscc.pas"/>
+        <UnitName Value="gscc"/>
+        <CursorPos X="14" Y="115"/>
+        <TopLine Value="100"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="tyc2unit.pas"/>
+        <UnitName Value="tyc2unit"/>
+        <CursorPos X="39" Y="25"/>
+        <TopLine Value="18"/>
+        <UsageCount Value="10"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="findunit.pas"/>
+        <UnitName Value="findunit"/>
+        <CursorPos X="13" Y="441"/>
+        <TopLine Value="418"/>
+        <UsageCount Value="10"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="microcat.pas"/>
+        <UnitName Value="microcat"/>
+        <CursorPos X="1" Y="80"/>
+        <TopLine Value="61"/>
+        <UsageCount Value="10"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="gcatunit.pas"/>
+        <UnitName Value="gcatunit"/>
+        <CursorPos X="42" Y="541"/>
+        <TopLine Value="114"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="/home/pch/lazarus/fpcsrc/rtl/inc/systemh.inc"/>
+        <CursorPos X="3" Y="194"/>
+        <TopLine Value="178"/>
+        <UsageCount Value="10"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="libcatalog.pas"/>
+        <UnitName Value="libcatalog"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="gscconst.pas"/>
+        <UnitName Value="gscconst"/>
+        <CursorPos X="44" Y="31"/>
+        <TopLine Value="1"/>
+        <UsageCount Value="10"/>
+      </Unit28>
+    </Units>
+    <JumpHistory Count="1" HistoryIndex="0">
+      <Position1>
+        <Filename Value="catalog.lpr"/>
+        <Caret Line="39" Column="5" TopLine="34"/>
+      </Position1>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="5"/>
+    <SearchPaths>
+      <UnitOutputDirectory Value="lib/"/>
+    </SearchPaths>
+    <CodeGeneration>
+      <Generate Value="Faster"/>
+    </CodeGeneration>
+    <Other>
+      <Verbosity>
+        <ShowHints Value="False"/>
+      </Verbosity>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <BreakPoints Count="1">
+      <Item1>
+        <Source Value="C:/appli/Sources/test/laz_multiform/ChildDoc.pas"/>
+        <Line Value="435"/>
+      </Item1>
+    </BreakPoints>
+    <Watches Count="3">
+      <Item1>
+        <Expression Value="Sender"/>
+        <Enabled Value="False"/>
+      </Item1>
+      <Item2>
+        <Expression Value="FWireframeMoveResize"/>
+        <Enabled Value="False"/>
+      </Item2>
+      <Item3>
+        <Expression Value="Height"/>
+        <Enabled Value="False"/>
+      </Item3>
+    </Watches>
+    <Exceptions Count="2">
+      <Item1>
+        <Name Value="ECodetoolError"/>
+      </Item1>
+      <Item2>
+        <Name Value="EFOpenError"/>
+      </Item2>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
