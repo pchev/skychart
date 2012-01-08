@@ -45,7 +45,6 @@ object f_getdss: Tf_getdss
     IntegralHeight = True
     ItemHeight = 0
     ParentFont = False
-    ScrollWidth = 397
     TabOrder = 0
     TopIndex = -1
   end
