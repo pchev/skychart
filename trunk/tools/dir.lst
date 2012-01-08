@@ -12,11 +12,9 @@ data/earthmap
 data/eclipses
 data/horizon
 data/indi
-data/iridflar
 data/jpleph
 data/language
 data/planet
-data/quicksat
 data/sample
 data/stars
 data/Themes
@@ -26,8 +24,3 @@ data/Themes/default/icon_color
 data/Themes/default/icon_green
 data/Themes/default/icon_red
 data/varobs
-doc
-doc/html_doc
-doc/html_doc/en
-doc/html_doc/en/feature_class_fichiers
-doc/varobs

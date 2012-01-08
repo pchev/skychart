@@ -54,6 +54,10 @@ data:
 	\$(MAKE) -C tools all
 install_data:
 	\$(MAKE) -C tools install 
+install_doc:
+	\$(MAKE) -C tools install_doc 
+install_nonfree:
+	\$(MAKE) -C tools install_nonfree 
 install_cat1:
 	./install_darwin_cat1.sh $(PREFIX) 
 install_cat2:
@@ -77,6 +81,10 @@ uninstall_win64:
 	./uninstall_win.sh $(PREFIX)
 install_win_data:
 	\$(MAKE) -C tools install_win 
+install_win_doc:
+	\$(MAKE) -C tools install_win_doc 
+install_win_nonfree:
+	\$(MAKE) -C tools install_win_nonfree 
 install_win_cat1:
 	./install_win_cat1.sh $(PREFIX) 
 install_win_cat2:
@@ -89,6 +97,10 @@ data:
 	\$(MAKE) -C tools all
 install_data:
 	\$(MAKE) -C tools install
+install_doc:
+	\$(MAKE) -C tools install_doc
+install_nonfree:
+	\$(MAKE) -C tools install_nonfree
 install_cat1:
 	./install_cat1.sh $(PREFIX) 
 install_cat2:

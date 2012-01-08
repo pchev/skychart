@@ -64,6 +64,10 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_data
   if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_doc
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_nonfree
+  if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
   cd ..
@@ -123,6 +127,10 @@ if [[ $make_linux64 ]]; then
   make install
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_data
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_doc
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_nonfree
   if [[ $? -ne 0 ]]; then exit 1;fi
   # tar
   cd $builddir
@@ -189,6 +197,10 @@ if [[ $make_win32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_win_data
   if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_win_doc
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_win_nonfree
+  if [[ $? -ne 0 ]]; then exit 1;fi
   # zip
   cd $builddir/Data
   zip -r  skychart-$version-$currentrev-windows.zip *
@@ -231,6 +243,10 @@ if [[ $make_win64 ]]; then
   make install_win64
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_win_data
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_win_doc
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_win_nonfree
   if [[ $? -ne 0 ]]; then exit 1;fi
   # zip
   cd $builddir/Data

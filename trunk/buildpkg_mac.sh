@@ -39,6 +39,10 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_data
   if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_doc
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  make install_nonfree
+  if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   cp system_integration/MacOSX/skychart.packproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
