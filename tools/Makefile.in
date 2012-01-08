@@ -21,6 +21,10 @@ else
 ifeq ($(OS_TARGET),darwin)
 install: 
 	./install_data_darwin.sh $(PREFIX) 
+install_doc: 
+	./install_doc_darwin.sh $(PREFIX) 
+install_nonfree: 
+	./install_nonfree_darwin.sh $(PREFIX) 
 uninstall: 
 	./uninstall_data_darwin.sh $(PREFIX) 
 refresh_doc: 
@@ -28,10 +32,18 @@ refresh_doc:
 else
 install: 
 	./install_data.sh $(PREFIX) 
+install_doc: 
+	./install_doc.sh $(PREFIX) 
+install_nonfree: 
+	./install_nonfree.sh $(PREFIX) 
 uninstall: 
 	./uninstall_data.sh $(PREFIX) 
 install_win: 
 	./install_win_data.sh $(PREFIX)
+install_win_doc: 
+	./install_win_doc.sh $(PREFIX)
+install_win_nonfree: 
+	./install_win_nonfree.sh $(PREFIX)
 uninstall_win: 
 	./uninstall_win_data.sh $(PREFIX)
 refresh_doc: 

@@ -215,13 +215,6 @@ data/horizon
 data/horizon/horizon_Geneve.txt
 data/indi/drivers.xml
 data/indi/readme.txt
-data/iridflar
-data/iridflar/dosbox.conf
-data/iridflar/F77L.EER
-data/iridflar/FLARE221.TXT
-data/iridflar/IRIDFLAR.EXE
-data/iridflar/sample.tle
-data/iridflar/SORT.COM
 data/language
 data/language/help.ca.po
 data/language/help.cs.po
@@ -309,10 +302,6 @@ data/planet/symbol8.png
 data/planet/symbol9.png
 data/planet/symbol10.png
 data/planet/symbol11.png
-data/quicksat/quicksat.txt
-data/quicksat/quicksat.exe
-data/quicksat/quicksat.mag
-data/quicksat/sample.tle
 data/sample
 data/sample/d2k.hdr
 data/sample/d2k.info2

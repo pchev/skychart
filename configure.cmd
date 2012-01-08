@@ -5,9 +5,8 @@ rem
 rem set the variable below before to run
 rem
 rem To compile the C libraries getdss and plan404 
-rem you need to install Mingw and Msys from http://www.mingw.org/
-rem and add them to your PATH
-rem For Windows 64 bits I have success with WPG System64 http://www.cadforte.com/system64.html
+rem you need to install Mingw and add them to your PATH
+rem I have success with http://mingw-w64.sourceforge.net
 
 rem ################################################################
 rem start parameters
