@@ -5322,3 +5322,7 @@ msgstr ""
 msgid "Show mark index"
 msgstr ""
 
+#: u_translation:rsvalidforfiel
+msgid "Valid for field smaller than %s degrees"
+msgstr ""
+
