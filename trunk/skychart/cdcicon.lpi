@@ -6,10 +6,11 @@
       <Flags>
         <LRSInOutputDirectory Value="False"/>
       </Flags>
+      <SessionStorage Value="InProjectDir"/>
       <MainUnit Value="0"/>
       <Title Value="cdcicon"/>
+      <ResourceType Value="res"/>
       <Icon Value="0"/>
-      <ActiveWindowIndexAtStart Value="0"/>
     </General>
     <VersionInfo>
       <StringTable ProductVersion=""/>
@@ -56,14 +57,11 @@
         <PackageName Value="LCL"/>
       </Item8>
     </RequiredPackages>
-    <Units Count="27">
+    <Units Count="4">
       <Unit0>
         <Filename Value="cdcicon.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="cdcicon"/>
-        <TopLine Value="1"/>
-        <CursorPos X="38" Y="21"/>
-        <UsageCount Value="30"/>
       </Unit0>
       <Unit1>
         <Filename Value="pu_tray.pas"/>
@@ -71,328 +69,24 @@
         <ComponentName Value="f_tray"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
-        <EditorIndex Value="0"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="433"/>
-        <CursorPos X="47" Y="450"/>
-        <UsageCount Value="30"/>
-        <Bookmarks Count="2">
-          <Item0 X="27" Y="390" ID="1"/>
-          <Item1 X="1" Y="467" ID="2"/>
-        </Bookmarks>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="../../../lazarus/lcl/graphics.pp"/>
-        <UnitName Value="Graphics"/>
-        <TopLine Value="1002"/>
-        <CursorPos X="15" Y="1024"/>
-        <UsageCount Value="10"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="../../../lazarus/lcl/include/customtrayicon.inc"/>
-        <TopLine Value="208"/>
-        <CursorPos X="55" Y="238"/>
-        <UsageCount Value="10"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="../../../lazarus/lcl/include/fpimagebitmap.inc"/>
-        <TopLine Value="101"/>
-        <CursorPos X="43" Y="143"/>
-        <UsageCount Value="10"/>
-      </Unit4>
-      <Unit5>
-        <Filename Value="../../../lazarus/lcl/lclproc.pas"/>
-        <UnitName Value="LCLProc"/>
-        <TopLine Value="1471"/>
-        <CursorPos X="1" Y="1493"/>
-        <UsageCount Value="10"/>
-      </Unit5>
-      <Unit6>
-        <Filename Value="../../../lazarus/lcl/extctrls.pp"/>
-        <UnitName Value="ExtCtrls"/>
-        <TopLine Value="1117"/>
-        <CursorPos X="64" Y="1149"/>
-        <UsageCount Value="10"/>
-      </Unit6>
-      <Unit7>
-        <Filename Value="../../../lazarus/lcl/include/rasterimage.inc"/>
-        <TopLine Value="155"/>
-        <CursorPos X="55" Y="183"/>
-        <UsageCount Value="10"/>
-      </Unit7>
-      <Unit8>
         <Filename Value="pu_clock.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_clock"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_clock"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="19"/>
-        <CursorPos X="6" Y="55"/>
-        <UsageCount Value="28"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
-      </Unit8>
-      <Unit9>
-        <Filename Value="u_constant.pas"/>
-        <UnitName Value="u_constant"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="622"/>
-        <CursorPos X="37" Y="644"/>
-        <UsageCount Value="11"/>
-      </Unit9>
-      <Unit10>
-        <Filename Value="cu_tz.pas"/>
-        <UnitName Value="cu_tz"/>
-        <TopLine Value="313"/>
-        <CursorPos X="30" Y="328"/>
-        <UsageCount Value="10"/>
-      </Unit10>
-      <Unit11>
-        <Filename Value="u_help.pas"/>
-        <UnitName Value="u_help"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
-        <UsageCount Value="10"/>
-      </Unit11>
-      <Unit12>
-        <Filename Value="u_util.pas"/>
-        <UnitName Value="u_util"/>
-        <TopLine Value="1111"/>
-        <CursorPos X="66" Y="1132"/>
-        <UsageCount Value="12"/>
-      </Unit12>
-      <Unit13>
-        <Filename Value="u_translation.pas"/>
-        <UnitName Value="u_translation"/>
-        <TopLine Value="1103"/>
-        <CursorPos X="11" Y="1131"/>
-        <UsageCount Value="11"/>
-      </Unit13>
-      <Unit14>
-        <Filename Value="cu_planet.pas"/>
-        <UnitName Value="cu_planet"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="2343"/>
-        <CursorPos X="29" Y="2357"/>
-        <UsageCount Value="12"/>
-      </Unit14>
-      <Unit15>
-        <Filename Value="cu_database.pas"/>
-        <UnitName Value="cu_database"/>
-        <TopLine Value="308"/>
-        <CursorPos X="16" Y="311"/>
-        <UsageCount Value="11"/>
-      </Unit15>
-      <Unit16>
-        <Filename Value="../../../pch/lazarus/lcl/forms.pp"/>
-        <UnitName Value="Forms"/>
-        <TopLine Value="43"/>
-        <CursorPos X="33" Y="63"/>
-        <UsageCount Value="10"/>
-      </Unit16>
-      <Unit17>
+      </Unit2>
+      <Unit3>
         <Filename Value="pu_calendar.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_calendar"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_calendar"/>
-        <EditorIndex Value="4"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1191"/>
-        <CursorPos X="9" Y="1198"/>
-        <UsageCount Value="25"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
-      </Unit17>
-      <Unit18>
-        <Filename Value="pu_image.pas"/>
-        <ComponentName Value="f_image"/>
-        <HasResources Value="True"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="pu_image"/>
-        <TopLine Value="1"/>
-        <CursorPos X="1" Y="1"/>
-        <UsageCount Value="11"/>
-      </Unit18>
-      <Unit19>
-        <Filename Value="u_projection.pas"/>
-        <UnitName Value="u_projection"/>
-        <TopLine Value="45"/>
-        <CursorPos X="1" Y="65"/>
-        <UsageCount Value="12"/>
-      </Unit19>
-      <Unit20>
-        <Filename Value="../../../pch/lazarus/lcl/interfaces/gtk/gtkwidgetset.inc"/>
-        <TopLine Value="1233"/>
-        <CursorPos X="1" Y="1253"/>
-        <UsageCount Value="10"/>
-      </Unit20>
-      <Unit21>
-        <Filename Value="../../../pch/lazarus/lcl/include/customform.inc"/>
-        <TopLine Value="671"/>
-        <CursorPos X="55" Y="698"/>
-        <UsageCount Value="10"/>
-      </Unit21>
-      <Unit22>
-        <Filename Value="../../../compiler/lazarus/lcl/include/icon.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="152"/>
-        <CursorPos X="1" Y="174"/>
-        <UsageCount Value="10"/>
-      </Unit22>
-      <Unit23>
-        <Filename Value="../../../compiler/lazarus/lcl/extctrls.pp"/>
-        <UnitName Value="ExtCtrls"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="1245"/>
-        <CursorPos X="21" Y="1259"/>
-        <UsageCount Value="10"/>
-      </Unit23>
-      <Unit24>
-        <Filename Value="../../../compiler/lazarus/lcl/include/customtrayicon.inc"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="184"/>
-        <CursorPos X="3" Y="201"/>
-        <UsageCount Value="10"/>
-      </Unit24>
-      <Unit25>
-        <Filename Value="cu_fits.pas"/>
-        <UnitName Value="cu_fits"/>
-        <EditorIndex Value="1"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="840"/>
-        <CursorPos X="20" Y="813"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit25>
-      <Unit26>
-        <Filename Value="u_satellite.pas"/>
-        <UnitName Value="u_satellite"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="2"/>
-        <WindowIndex Value="0"/>
-        <TopLine Value="387"/>
-        <CursorPos X="34" Y="393"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit26>
+      </Unit3>
     </Units>
-    <JumpHistory Count="27" HistoryIndex="26">
-      <Position1>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="158" Column="60" TopLine="136"/>
-      </Position1>
-      <Position2>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="428" Column="13" TopLine="417"/>
-      </Position2>
-      <Position3>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="426" Column="48" TopLine="417"/>
-      </Position3>
-      <Position4>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="429" Column="1" TopLine="426"/>
-      </Position4>
-      <Position5>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="430" Column="1" TopLine="425"/>
-      </Position5>
-      <Position6>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="449" Column="1" TopLine="425"/>
-      </Position6>
-      <Position7>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="430" Column="37" TopLine="425"/>
-      </Position7>
-      <Position8>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position8>
-      <Position9>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="87" Column="1" TopLine="49"/>
-      </Position9>
-      <Position10>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="705" Column="45" TopLine="674"/>
-      </Position10>
-      <Position11>
-        <Filename Value="pu_clock.pas"/>
-        <Caret Line="93" Column="75" TopLine="56"/>
-      </Position11>
-      <Position12>
-        <Filename Value="pu_clock.pas"/>
-        <Caret Line="154" Column="1" TopLine="111"/>
-      </Position12>
-      <Position13>
-        <Filename Value="pu_clock.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position13>
-      <Position14>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1708" Column="55" TopLine="1681"/>
-      </Position14>
-      <Position15>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="2435" Column="5" TopLine="2392"/>
-      </Position15>
-      <Position16>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position16>
-      <Position17>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="60" Column="73" TopLine="45"/>
-      </Position17>
-      <Position18>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="447" Column="22" TopLine="426"/>
-      </Position18>
-      <Position19>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="195" Column="40" TopLine="175"/>
-      </Position19>
-      <Position20>
-        <Filename Value="pu_calendar.pas"/>
-        <Caret Line="1200" Column="32" TopLine="1191"/>
-      </Position20>
-      <Position21>
-        <Filename Value="pu_tray.pas"/>
-        <Caret Line="450" Column="13" TopLine="432"/>
-      </Position21>
-      <Position22>
-        <Filename Value="cu_fits.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position22>
-      <Position23>
-        <Filename Value="cu_fits.pas"/>
-        <Caret Line="293" Column="6" TopLine="288"/>
-      </Position23>
-      <Position24>
-        <Filename Value="cu_fits.pas"/>
-        <Caret Line="294" Column="1" TopLine="289"/>
-      </Position24>
-      <Position25>
-        <Filename Value="cu_fits.pas"/>
-        <Caret Line="295" Column="1" TopLine="281"/>
-      </Position25>
-      <Position26>
-        <Filename Value="u_satellite.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
-      </Position26>
-      <Position27>
-        <Filename Value="u_satellite.pas"/>
-        <Caret Line="97" Column="40" TopLine="182"/>
-      </Position27>
-    </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
     <Version Value="9"/>
@@ -410,17 +104,13 @@
         <OptimizationLevel Value="0"/>
       </Optimizations>
     </CodeGeneration>
-    <Linking>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
-    </Linking>
     <Other>
       <Verbosity>
         <ShowHints Value="False"/>
       </Verbosity>
+      <CompilerMessages>
+        <UseMsgFile Value="True"/>
+      </CompilerMessages>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

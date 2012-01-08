@@ -9,13 +9,14 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms
   { you can add units after this }, pu_tray, pu_clock, cdccatalog, enhedit,
-  Printer4Lazarus, LResources, satxy, libsql, pu_calendar,
+  Printer4Lazarus, satxy, libsql, pu_calendar,
   CDCjdcalendar, zoomimage;
 
 {$IFDEF WINDOWS}{$R cdcicon.rc}{$ENDIF}
 
+{$R *.res}
+
 begin
-  {$I cdcicon.lrs}
   Application.Initialize;
   Application.ShowMainForm:=false;
   Application.CreateForm(Tf_tray, f_tray);

@@ -1,7 +1,7 @@
 object f_tray: Tf_tray
-  Left = 393
+  Left = 395
   Height = 300
-  Top = 120
+  Top = 121
   Width = 400
   ActiveControl = PageControl1
   Caption = 'Skychart Icon Setup'
