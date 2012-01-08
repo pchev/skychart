@@ -17,10 +17,10 @@ wd=`pwd`
 
 # check if new revision since last run
 read lastrev <last.build
-lang=LANG
-LANG=C
-currentrev=`svn info . | grep Revision: | sed 's/Revision: //'`
-LANG=$lang
+currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
+if [[ -z $currentrev ]]; then 
+ currentrev=$(grep RevisionStr skychart/revision.inc| sed "s/const RevisionStr = '//"| sed "s/';//")
+fi
 echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
