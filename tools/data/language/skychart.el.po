@@ -3,14 +3,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-08 15:24+0000\n"
+"POT-Creation-Date: 2012-01-09 17:42+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-08 15:31+0000\n"
+"X-Launchpad-Export-Date: 2012-01-09 17:53+0000\n"
 "X-Generator: Launchpad (build 14640)\n"
 
 #: u_translation.rs102cddss
@@ -1811,6 +1811,10 @@ msgstr "Αριθμός πεδίου"
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
 msgstr "Πεδίο όρασης"
+
+#: u_translation.rsfieldofvisio2
+msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
+msgstr ""
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
@@ -5271,10 +5275,6 @@ msgstr ""
 #: u_translation.rsut
 msgid "UT"
 msgstr "UT"
-
-#: u_translation.rsvalidforfiel
-msgid "Valid for field smaller than %s degrees"
-msgstr ""
 
 #: u_translation.rsvariables
 msgid "Variables"

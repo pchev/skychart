@@ -81,6 +81,7 @@ const cdcversion = 'Version 3.5-svn';
       pi2 = 2*pi;
       pi4 = 4*pi;
       pid2 = pi/2;
+      pid4 = pi/4;
       minarc = deg2rad/60;
       secarc = deg2rad/3600;
       musec  = deg2rad/3600/1000000; // 1 microarcsec for rounding test

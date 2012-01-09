@@ -117,7 +117,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 38
+          ClientHeight = 52
           ClientWidth = 181
           TabOrder = 0
           object Label58: TLabel
@@ -193,7 +193,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 38
+          ClientHeight = 52
           ClientWidth = 181
           TabOrder = 1
           object Label61: TLabel
@@ -269,7 +269,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 38
+          ClientHeight = 52
           ClientWidth = 77
           TabOrder = 2
           object Label70: TLabel
@@ -304,7 +304,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 149
           Width = 449
           Caption = 'Time Zone'
-          ClientHeight = 35
+          ClientHeight = 49
           ClientWidth = 445
           TabOrder = 3
           object TZComboBox: TComboBox
@@ -416,19 +416,11 @@ object f_config_observatory: Tf_config_observatory
           object horizonopaque: TCheckBox
             Left = 13
             Height = 26
-            Top = 5
+            Top = 13
             Width = 196
             Caption = 'Show Object below the horizon'
             OnClick = horizonopaqueClick
             TabOrder = 0
-          end
-          object Label4: TLabel
-            Left = 44
-            Height = 15
-            Top = 37
-            Width = 39
-            Caption = 'Label4'
-            ParentColor = False
           end
         end
         object GroupBox1: TGroupBox
