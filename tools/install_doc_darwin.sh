@@ -20,6 +20,14 @@ do
   install -v -m 644  $f $destdir/$f
 done
 
+# make the empty directory first
+for f in $(find doc/wiki_doc|grep -v .svn)
+do  
+ if [ -d $f ]
+   then  install -v -d -m 755  $destdir/$f
+ fi
+done
+
 if [ ! -d doc/wiki_doc ]; then
   cd wiki_doc
   ./getdoc.sh
@@ -33,3 +41,4 @@ do
   then install -v -m 644  $f $destdir/$f
  fi
 done
+
