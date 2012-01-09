@@ -435,7 +435,7 @@ begin
  sc.cfgsc.FlipX:=1;
  sc.cfgsc.FlipY:=1;
  sc.onShowDetailXY:=IdentDetail;
- sc.InitChart;
+ sc.InitChart(false);
  skipmove:=0;
  movefactor:=4;
  zoomfactor:=2;
