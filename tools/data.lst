@@ -798,3 +798,8 @@ data/varobs/Vel.dat
 data/varobs/Vir.dat
 data/varobs/Vol.dat
 data/varobs/Vul.dat
+doc
+doc/releasenotes_fr.txt
+doc/releasenotes_ru.txt
+doc/releasenotes.txt
+doc/releasenotes_ua.txt
