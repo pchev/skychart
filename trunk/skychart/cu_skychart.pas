@@ -540,10 +540,12 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
 {$endif}
-// max altaz fov
-if cfgsc.ProjPole=Altaz then begin
-   cfgsc.fov:=min(cfgsc.fov,deg2rad*250);
-   if cfgsc.fov>pi then cfgsc.horizonopaque:=true;
+// max arc altaz fov
+if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
+   if (not cfgsc.horizonopaque) and (cfgsc.fov>pi) then begin
+      cfgsc.horizonopaque:=true;
+      cfgsc.msg:=rsFieldOfVisio2;
+   end;
 end;
 cfgsc.xmin:=cfgsc.LeftMargin;
 cfgsc.ymin:=cfgsc.TopMargin;
@@ -791,7 +793,7 @@ w := maxvalue([w,h]);
 cfgsc.FieldNum:=GetFieldNum(w-musec);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // full sky button
-if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)then cfgsc.projtype:='A' ;
+if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)and(cfgsc.hcentre>pid4)then cfgsc.projtype:='A' ;
 // normalize the coordinates
 if (cfgsc.decentre>=(pid2-secarc)) then cfgsc.decentre:=pid2-secarc;
 if (cfgsc.decentre<=(-pid2+secarc)) then cfgsc.decentre:=-pid2+secarc;
@@ -2801,7 +2803,7 @@ begin
 {$endif}
 fillx1:=0;
 filly1:=0;
-hlimit:=1*deg2rad;
+hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
 // Only with Alt/Az display
 if cfgsc.ProjPole=Altaz then begin
   if (cfgsc.hcentre<-hlimit) then begin
@@ -2851,7 +2853,7 @@ if cfgsc.ProjPole=Altaz then begin
                    break;
                  end;
           end;
-          if (abs(ps[0,hdiv]-ps[0,hdiv+1])>cfgsc.xmax)or(abs(ps[1,hdiv]-ps[1,hdiv+1])>cfgsc.ymax) then ok:=false;
+          if (abs(ps[0,hdiv]-ps[0,hdiv+1])>(cfgsc.xmax/2))or(abs(ps[1,hdiv]-ps[1,hdiv+1])>(cfgsc.ymax/2)) then ok:=false;
           if ok then begin
             if fill then begin
               SetLength(psf,2*hdiv+2);
@@ -2882,16 +2884,18 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-            if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then begin
+            if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then begin
                 Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
             end;
          end;
          xph:=xh;
          yph:=yh;
     end;
-    Fplot.BGRADrawLine(xh,yh,x0h,y0h,col2,2,hbmp);
+    xph:=x0h; yph:=y0h;
+    if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then
+        Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
     // Fill below horizon
-    if fill and (not Fplot.cfgchart.onprinter) then begin
+    if fill and (not Fplot.cfgchart.onprinter) and(cfgsc.fov<358*deg2rad) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) and (hbmp.GetPixel(integer(cfgsc.Xmin+1),integer(cfgsc.Ymin+1))<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymax-1) and (hbmp.GetPixel(integer(cfgsc.Xmin+1),integer(cfgsc.Ymax-1))<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
@@ -2973,7 +2977,9 @@ if cfgsc.ProjPole=Altaz then begin
        xph:=xh;
        yph:=yh;
      end;
-     Fplot.Plotline(xh,yh,x0h,y0h,Fplot.cfgplot.Color[12],2);
+     xph:=x0h; yph:=y0h;
+     if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then
+        Fplot.Plotline(xh,yh,xph,yph,Fplot.cfgplot.Color[12],2);
   end;
  end;
  ////// End of horizon drawing
