@@ -38,9 +38,10 @@ wget http://download.origo.ethz.ch/skychart/2443/data_jpleph.tgz
 cd -
 
 # tar files
-tar cvzf $verdir.tgz $verdir
+tar cvjf $verdir.tar.bz2 $verdir
 
-mv $verdir.tgz $wd/
+mv $verdir.tar.bz2 $wd/
 
 cd $wd
 rm -rf $builddir
+
