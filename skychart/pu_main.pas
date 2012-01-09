@@ -888,7 +888,7 @@ begin
   result:=true;
   Child.locked:=false;
   Child.lock_refresh:=false;
-  Child.Refresh;
+  if (MultiDoc1.ChildCount>1) then Child.Refresh;
 end;
 
 procedure Tf_main.RefreshAllChild(applydef:boolean);

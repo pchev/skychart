@@ -77,7 +77,7 @@ Tskychart = class (TComponent)
     function Refresh : boolean;
     function InitCatalog : boolean;
     function InitTime : boolean;
-    function InitChart : boolean;
+    function InitChart(full: boolean=true): boolean;
     function InitColor : boolean;
     function GetFieldNum(fov:double):integer;
     function InitCoordinates : boolean;
@@ -534,18 +534,29 @@ begin
    result:=true;
 end;
 
-function Tskychart.InitChart:boolean;
+function Tskychart.InitChart(full: boolean=true):boolean;
+var w,h:double;
 begin
 // do not add more function here as this is also called at the chart create
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
 {$endif}
-// max arc altaz fov
-if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
-   if (not cfgsc.horizonopaque) and (cfgsc.fov>pi) then begin
-      cfgsc.horizonopaque:=true;
-      cfgsc.msg:=rsFieldOfVisio2;
-   end;
+if full then begin
+  // we must know the projection now
+  w := cfgsc.fov;
+  h := cfgsc.fov/cfgsc.WindowRatio;
+  w := maxvalue([w,h]);
+  cfgsc.FieldNum:=GetFieldNum(w-musec);
+  cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
+  // full sky button
+  if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)and(cfgsc.hcentre>pid4)then cfgsc.projtype:='A' ;
+  // max arc altaz fov
+  if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
+     if (not cfgsc.horizonopaque) and (cfgsc.fov>pi) then begin
+        cfgsc.horizonopaque:=true;
+        cfgsc.msg:=rsFieldOfVisio2;
+     end;
+  end;
 end;
 cfgsc.xmin:=cfgsc.LeftMargin;
 cfgsc.ymin:=cfgsc.TopMargin;
@@ -612,7 +623,8 @@ begin
 fov:=rad2deg*fov;
 if fov>360 then fov:=360;
 result:=MaxField;
-for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>fov then begin
+if Fcatalog<>nil then
+    for i:=0 to MaxField do if Fcatalog.cfgshr.FieldNum[i]>fov then begin
        result:=i;
        break;
     end;
@@ -786,7 +798,7 @@ end;
          end;
    end;
   end;
-// find the current field number and projection
+// find the current field number and projection (a second time if fov is adjusted to the image size)
 w := cfgsc.fov;
 h := cfgsc.fov/cfgsc.WindowRatio;
 w := maxvalue([w,h]);
