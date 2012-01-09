@@ -2775,7 +2775,7 @@ var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz : double;
     ps: array[0..1,0..2*hdiv+1] of single;
     psf: array of TPointF;
     i,j,xx,yy: integer;
-    x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1 :single;
+    x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1,fillx2,filly2 :single;
     first,fill,ok:boolean;
     hbmp : TBGRABitmap;
     col: TColor;
@@ -2810,6 +2810,8 @@ if cfgsc.ProjPole=Altaz then begin
      fillx1:=(cfgsc.xmax-cfgsc.xmin)div 2;
      filly1:=(cfgsc.ymax-cfgsc.ymin)div 2;
   end;
+  proj2(-cfgsc.acentre,-hlimit,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+  WindowXY(x1,y1,fillx2,filly2,cfgsc);
 ///// Draw to bgra bitmap
   if Fplot.cfgplot.UseBMP then begin
     fill:=cfgsc.FillHorizon;
@@ -2892,11 +2894,12 @@ if cfgsc.ProjPole=Altaz then begin
          yph:=yh;
     end;
     xph:=x0h; yph:=y0h;
-    if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then
+    if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
         Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
     // Fill below horizon
     if fill and (not Fplot.cfgchart.onprinter) and(cfgsc.fov<358*deg2rad) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
+         if (fillx2>-cfgsc.Xmax)and(fillx2<2*cfgsc.Xmax)and(filly2>-cfgsc.Ymax)and(filly2<2*cfgsc.Ymax)then  hbmp.FloodFill(round(fillx2),round(filly2),col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) and (hbmp.GetPixel(integer(cfgsc.Xmin+1),integer(cfgsc.Ymin+1))<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymax-1) and (hbmp.GetPixel(integer(cfgsc.Xmin+1),integer(cfgsc.Ymax-1))<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymax-1,col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmax-1,cfgsc.Ymin+1) and (hbmp.GetPixel(integer(cfgsc.Xmax-1),integer(cfgsc.Ymin+1))<>col1) then hbmp.FloodFill(cfgsc.Xmax-1,cfgsc.Ymin+1,col1,fmSet);
@@ -2948,6 +2951,7 @@ if cfgsc.ProjPole=Altaz then begin
      // Fill below horizon
      if cfgsc.horizonopaque and cfgsc.FillHorizon and (not Fplot.cfgchart.onprinter) then begin
         if (fillx1>0)or(filly1>0) then fplot.FloodFill(round(fillx1),round(filly1),Fplot.cfgplot.Color[19]);
+        if (fillx2>-cfgsc.Xmax)and(fillx2<2*cfgsc.Xmax)and(filly2>-cfgsc.Ymax)and(filly2<2*cfgsc.Ymax) then fplot.FloodFill(round(fillx2),round(filly2),Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymin+1,az,h,cfgsc);
         if h<0 then fplot.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,Fplot.cfgplot.Color[19]);
         GetAHxy(cfgsc.Xmin+1,cfgsc.Ymax-1,az,h,cfgsc);
@@ -2970,7 +2974,7 @@ if cfgsc.ProjPole=Altaz then begin
           x0h:=xh;
           y0h:=yh;
        end else begin
-         if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then begin
+         if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then begin
            Fplot.Plotline(xph,yph,xh,yh,Fplot.cfgplot.Color[12],2);
          end;
        end;
@@ -2978,7 +2982,7 @@ if cfgsc.ProjPole=Altaz then begin
        yph:=yh;
      end;
      xph:=x0h; yph:=y0h;
-     if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<cfgsc.xmax)and(abs(yh-yph)<cfgsc.ymax) then
+     if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
         Fplot.Plotline(xh,yh,xph,yph,Fplot.cfgplot.Color[12],2);
   end;
  end;
