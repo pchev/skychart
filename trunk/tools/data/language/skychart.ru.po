@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-09 17:42+0000\n"
-"PO-Revision-Date: 2011-12-29 17:15+0000\n"
-"Last-Translator: Astronom <astroclubzp@gmail.com>\n"
+"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"PO-Revision-Date: 2012-01-11 13:28+0000\n"
+"Last-Translator: Aleksey Kabanov <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-10 16:44+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-12 11:40+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Russian\n"
 
@@ -21,15 +21,15 @@ msgstr "102 CD DSS"
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184 (рекомендовано для более 1'000'000 объектов)"
+msgstr "184 (рекомендовано для более 1000000 объектов)"
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50 (рекомендовано для более 100'000 объектов)"
+msgstr "50 (рекомендовано для более 100000 объектов)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732 (рекомендовано для более 5'000'000 объектов)"
+msgstr "732 (рекомендовано для более 5000000 объектов)"
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
@@ -45,19 +45,67 @@ msgstr "Отказ"
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
-msgstr "Удалено пользователем"
+msgstr "Прервано пользователем"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Отказ уничтожен"
+msgstr "Прервать поворот"
 
 #: u_translation.rsabout
 msgid "About"
-msgstr "Анонс"
+msgstr "О программе"
 
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Об %s"
+
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr ""
+
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr ""
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr ""
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr ""
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr ""
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr ""
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr ""
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr ""
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr ""
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr ""
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr ""
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr ""
 
 #: u_translation.rsaction
 msgid "Action"
@@ -77,7 +125,7 @@ msgstr "Добавить"
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "Добавить элемент в базу данных. Все поля обязательно заполнить."
+msgstr "Добавить элемент в базу данных. Все поля обязательны для заполнения."
 
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
@@ -85,7 +133,7 @@ msgstr "Добавить экваториальную сетку"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr ""
+msgstr "Дополн. параметры ffmpeg"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
@@ -109,7 +157,7 @@ msgstr "Быстрый поиск"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
-msgstr ""
+msgstr "Дополнительные параметры для Scope.exe"
 
 #: u_translation.rsage
 msgid "Age"
@@ -137,7 +185,7 @@ msgstr "Все панели инструментов"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sТакже убедиться, что необходимое програмное обеспечение базы данных установлено. % s Пожалуйста, обратитесь к документации, если вы не уверенны. % s Вы хотите продолжить?"
+msgstr "%sПроверьте также, установлено ли необходимое програмное обеспечение базы данных. %sПожалуйста, обратитесь к документации, если вы не уверены. %sВы хотите продолжить?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -173,7 +221,7 @@ msgstr "%sAlt повороты:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr ""
+msgstr "Всегда сохранять без подтверждения."
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
@@ -181,7 +229,7 @@ msgstr "Всегда показывать компас"
 
 #: u_translation.rsanimation
 msgid "Animation"
-msgstr ""
+msgstr "Анимация"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -221,7 +269,7 @@ msgstr "Аргумент перигелия"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Вокруг текущей позиции"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -229,19 +277,19 @@ msgstr "ИСЗ"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Искусственный спутник"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
-msgstr ""
+msgstr "Интерфейс телескопа ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr "Спрашивать подтверждение перед любым интернет-соединением"
+msgstr "Запрашивать подтверждение перед любым интернет-соединением"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "Как на экране (чёрной фон!!!)"
+msgstr "Как на экране (чёрный фон!)"
 
 #: u_translation.rsasterism
 msgid "Asterism"
@@ -261,7 +309,7 @@ msgstr "Опции астероидов"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr "Астероиды из файла"
+msgstr "астероидов из файла"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -321,7 +369,7 @@ msgstr "Азимутальные координаты"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr ""
+msgstr "Отсчёт азимута от"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
@@ -333,7 +381,7 @@ msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -377,7 +425,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Бинарно индексированный каталог"
+msgstr "Двоичный индексированный"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -413,7 +461,7 @@ msgstr "B- величина"
 
 #: u_translation.rsbottom
 msgid "Bottom"
-msgstr "Низ"
+msgstr "Нижнее"
 
 #: u_translation.rsboundary
 msgid "Boundary"
@@ -457,7 +505,7 @@ msgstr "через"
 
 #: u_translation.rsbyname
 msgid "By name"
-msgstr ""
+msgstr "По имени"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -473,7 +521,7 @@ msgstr "Отмена %s"
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Отменить, неправильный zip файл ??? %s"
+msgstr "Отменить, неправильный zip файл ?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
@@ -481,7 +529,7 @@ msgstr ""
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr ""
+msgstr "Не удаётся подключиться к серверу. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
@@ -489,7 +537,7 @@ msgstr ""
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Не удалось получить ваш IP-адрес или не найдено местоположение для этого адреса."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -497,7 +545,7 @@ msgstr "%sНевозможно открыть базу данных %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Не удаётся запись в"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -513,15 +561,15 @@ msgstr "Каталог"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Полное название каталога"
+msgstr "Полн. название каталога"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
-msgstr ""
+msgstr "%s каталогов доступно."
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Краткое название каталога"
+msgstr "Кратк.название каталога"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
@@ -541,7 +589,7 @@ msgstr "CdC Deep Sky"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "Установки CDC каталога туманностей"
+msgstr "Параметры CDC каталога туманностей"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
@@ -553,7 +601,7 @@ msgstr "CdC звёзды"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "Установки CDC звёздного каталога"
+msgstr "Параметры CDC звёздного каталога"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
@@ -597,7 +645,7 @@ msgstr "Изменить показ изображений"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "При изменении этого параметра произойдёт перезапуск программы!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -621,7 +669,7 @@ msgstr "Информация карты"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
+msgstr "Пояснения к карте"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -629,7 +677,7 @@ msgstr "Карты"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
-msgstr "Установки карты"
+msgstr "Параметры карты"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -721,7 +769,7 @@ msgstr "Цветное, метод линий"
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
-msgstr "Цвет сатурации"
+msgstr "Насыщенность цвета"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -737,7 +785,7 @@ msgstr "Опции комет"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
-msgstr "Команда нашлась успешно"
+msgstr "Команда найдена успешно"
 
 #: u_translation.rscommandnotfo
 msgid "Command not found!"
@@ -745,7 +793,7 @@ msgstr "Команда не найдена!"
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "Команда используется для обработки файла."
+msgstr "Команда для обработки файла."
 
 #: u_translation.rscommonname
 msgid "Common name"
@@ -757,7 +805,7 @@ msgstr "Размер компаса"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr "Компиллировано:"
+msgstr "Компилирована:"
 
 #: u_translation.rscomponent
 msgid "Component"
@@ -789,7 +837,7 @@ msgstr "Конфигурация"
 
 #: u_translation.rsconfigure
 msgid "Configure"
-msgstr ""
+msgstr "Настроить"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
@@ -797,19 +845,19 @@ msgstr "Конфигурация программы"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Подтвердить удаление файла: "
 
 #: u_translation.rsconnect
 msgid "Connect"
-msgstr ""
+msgstr "Подключить"
 
 #: u_translation.rsconnected
 msgid "Connected"
-msgstr ""
+msgstr "Подключен"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s подключено к %s, использование диаграммы %s, время соединения:%s"
+msgstr "%s подключен к %s, используется карта %s, время соединения:%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
@@ -825,7 +873,7 @@ msgstr "Подключить телескоп"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Соединение из %s, %s неудачное! %sПроверьте, если MySQL сервер функционирует, Идент.Пользователя и пароль"
+msgstr "Соединение из %s, %s неудачное! %sУбедитесь, что MySQL сервер запущен, проверьте идент.пользователя и пароль"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -849,7 +897,7 @@ msgstr "Границы созвездий"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Название файла границ созвездий: "
+msgstr "Имя файла границ созвездий: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -861,7 +909,7 @@ msgstr "Названия созвездия"
 
 #: u_translation.rscontrast
 msgid "Contrast"
-msgstr "Контраст"
+msgstr "Контрастность"
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
@@ -893,7 +941,7 @@ msgstr "Координаты:"
 
 #: u_translation.rscoordinates2
 msgid "Coordinates"
-msgstr ""
+msgstr "Координаты"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
@@ -905,15 +953,15 @@ msgstr "Координатная сетка"
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr "Копия"
+msgstr "Копировать"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr ""
+msgstr "Копировать координаты"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "Копировать из:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
@@ -953,11 +1001,11 @@ msgstr "Создать оглавление"
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Создание postscript диаграммы. Пожалуйста, подождите..."
+msgstr "Создание postscript-карты. Пожалуйста, подождите..."
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
-msgstr "Создание растровой диаграммы %s dpi. Пожалуйста, подождите..."
+msgstr "Создание растровой карты %s dpi. Пожалуйста, подождите..."
 
 #: u_translation.rsculmination
 msgid "Culmination"
@@ -969,7 +1017,7 @@ msgstr "Текущая дата"
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
-msgstr ""
+msgstr "Текущий драйвер"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -981,7 +1029,7 @@ msgstr "%sCW"
 
 #: u_translation.rsdarknebula
 msgid "Dark nebula"
-msgstr "Тёмная Туманность"
+msgstr "Тёмная туманность"
 
 #: u_translation.rsdash1
 msgid "Dash"
@@ -1005,7 +1053,7 @@ msgstr "%sБаза данных %s открыта.%s"
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Установки БД..."
+msgstr "Параметры БД..."
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
@@ -1013,7 +1061,7 @@ msgstr "Тип базы данных (БД)"
 
 #: u_translation.rsdatabits
 msgid "Data bits"
-msgstr ""
+msgstr "Биты данных"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1021,7 +1069,7 @@ msgstr "Файлы данных:"
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr "Файлы данных, CDrom"
+msgstr "Файлы данных, CD-ROM"
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
@@ -1029,15 +1077,15 @@ msgstr "Использование данных"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr ""
+msgstr "Предпросмотр данных"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
-msgstr "Інші каталоги абрисів"
+msgstr "Начало данных в строке %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr ""
+msgstr "Тип данных"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -1045,15 +1093,15 @@ msgstr "Дата"
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
-msgstr ""
+msgstr "Нельзя изменить дату и/или время"
 
 #: u_translation.rsdateformat
 msgid "Date format"
-msgstr "Формат Даты"
+msgstr "Формат даты"
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr "Дата от"
+msgstr "Даты с"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
@@ -1061,11 +1109,11 @@ msgstr "данных может продолжаться длительное в
 
 #: u_translation.rsdatetime
 msgid "Date / time"
-msgstr "Дата/Время"
+msgstr "Дата/время"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
-msgstr "Дата/ Время"
+msgstr "Дата/время"
 
 #: u_translation.rsday
 msgid "Day"
@@ -1081,11 +1129,11 @@ msgstr "День"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
-msgstr "БД включает неудачу для %s :%s"
+msgstr "Не удалась вставка в БД для %s :%s"
 
 #: u_translation.rsdbname
 msgid "DB Name:"
-msgstr "DB название:"
+msgstr "Название БД:"
 
 #: u_translation.rsde
 msgid "DE"
@@ -1125,7 +1173,7 @@ msgstr "DEC опции"
 
 #: u_translation.rsdecrease
 msgid "Decrease"
-msgstr ""
+msgstr "Уменьшить"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1149,11 +1197,11 @@ msgstr "Цвет объектов Deep Sky"
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "Встроенный"
+msgstr "По умолчанию"
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "Кнопка встроенное режима"
+msgstr "Кнопка режима по умолчанию"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
@@ -1161,7 +1209,7 @@ msgstr "Встроенный цвет"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "Встроенная метка"
+msgstr "Метка по умолчанию"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
@@ -1169,11 +1217,11 @@ msgstr ""
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "Устан. поля"
+msgstr "По умолчанию"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr "Встроенные параметры туманностей"
+msgstr "Параметры туманностей по умолчанию"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
@@ -1205,7 +1253,7 @@ msgstr "Градусы, минуты, секунды"
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
-msgstr ""
+msgstr "Задержка между кадрами"
 
 #: u_translation.rsdelete
 msgid "Delete"
@@ -1229,11 +1277,11 @@ msgstr "Удалить из таблицы элементов..."
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr "Удалить со списка элементов..."
+msgstr "Удалить из списка элементов..."
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
-msgstr ""
+msgstr "Удаление из ежемесячной таблицы..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1241,7 +1289,7 @@ msgstr "Удалить из ежемесячной таблицы для jd<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr "Удалить со списка названий..."
+msgstr "Удалить из списка названий..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
@@ -1281,7 +1329,7 @@ msgstr "Обозначение"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr "Оформление стола"
+msgstr "Среда рабочего стола"
 
 #: u_translation.rsdetails
 msgid "Details"
@@ -1293,7 +1341,7 @@ msgstr "Порт устройства "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
-msgstr ""
+msgstr "Статус устройства"
 
 #: u_translation.rsdiam
 msgid "Diam."
@@ -1305,11 +1353,11 @@ msgstr "Диаметр"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr ""
+msgstr "Отключен"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Разница между земным (TT) и международным (UT) временем"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1329,11 +1377,11 @@ msgstr "Dir"
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "Директория"
+msgstr "Каталог"
 
 #: u_translation.rsdirectorynot
 msgid "Directory not found %s"
-msgstr "Директория не найдена %s"
+msgstr "Каталог не найден %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
@@ -1341,7 +1389,7 @@ msgstr ""
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr ""
+msgstr "Отключить"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1361,7 +1409,7 @@ msgstr "Цвета отображения"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "Показ изображения из каталога объектов"
+msgstr "Показ изображений из каталога объектов"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
@@ -1373,7 +1421,7 @@ msgstr ""
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
-msgstr "Отображать информацию карты в панеле меню."
+msgstr "Отображать информацию карты в панели меню."
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
@@ -1389,7 +1437,7 @@ msgstr "Дистанция"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Измерение расстояния"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
@@ -1397,11 +1445,11 @@ msgstr "Расстояние к предыдущему объекту"
 
 #: u_translation.rsdonottakeacc
 msgid "Do not take into account comets fainter than magnitude"
-msgstr "Не учитывать комету слабее, чем величина"
+msgstr "Не учитывать кометы слабее, чем величина"
 
 #: u_translation.rsdonottakeacc2
 msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "Не учитывать астероид, звёздная величина которого слабее, чем"
+msgstr "Не учитывать астероиды, звёздная величина которых слабее, чем"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1413,7 +1461,7 @@ msgstr "Двойные"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr "Двойные звёзды"
+msgstr "Двойная звёзда"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -1425,7 +1473,7 @@ msgstr "Загружено %s"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr ""
+msgstr "Загрузить каталог"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
@@ -1433,11 +1481,11 @@ msgstr "Загрузить населённые пункты"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "Загрузить файл"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr ""
+msgstr "Загрузить весь каталог"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1445,7 +1493,7 @@ msgstr "Загрузить самые последние орбитальные 
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr ""
+msgstr "Загрузить TLE"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1457,11 +1505,11 @@ msgstr "Нарисовать линию, показывающую собстве
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr ""
+msgstr "Рисовать как DSO"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "Рисовать как звезду"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1469,7 +1517,7 @@ msgstr "Тип рисования"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr "Навести линию"
+msgstr "Провести линию"
 
 #: u_translation.rsdrawplanetas
 msgid "Draw planet as"
@@ -1485,11 +1533,11 @@ msgstr ""
 
 #: u_translation.rsdrivername
 msgid "Driver name"
-msgstr "Название драйвера"
+msgstr "Имя драйвера"
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr ""
+msgstr "Выбор драйвера"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
@@ -1537,15 +1585,15 @@ msgstr "Редактирование"
 
 #: u_translation.rseditcolor
 msgid "Edit colour"
-msgstr "Ред.цвета"
+msgstr "Изм.цвета"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Изменить цвет линий DSO"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
-msgstr "Ред.метки"
+msgstr "Изм.метки"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
@@ -1553,11 +1601,11 @@ msgstr "Редактировать оператор линии"
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
-msgstr "Ред. типа объектов"
+msgstr "Изм. тип объектов"
 
 #: u_translation.rseditunits
 msgid "Edit units"
-msgstr "Ред. величин"
+msgstr "Изм. величин"
 
 #: u_translation.rselong
 msgid "Elong."
@@ -1589,7 +1637,7 @@ msgstr "Конец обработки: %s астероидов"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
-msgstr ""
+msgstr "Эфемериды"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
@@ -1657,11 +1705,11 @@ msgstr "Ошибка открытия  %s"
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
-msgstr ""
+msgstr "Ошибка открытия %s на порту %s"
 
 #: u_translation.rserroropening3
 msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr ""
+msgstr "Ошибка открытия %s на порту %s. Убедитесь, что устройство подсоединено и включено"
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1669,7 +1717,7 @@ msgstr "Ошибка! Пожалуйста, проверьте параметр�
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Ошибка! Пожалуйста, проверьте параметры базы данных и загрузите кометный файл данных."
+msgstr "Ошибка! Пожалуйста, проверьте параметры базы данных и загрузите файл кометных данных."
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
@@ -1677,7 +1725,7 @@ msgstr "Ошибка! Пожалуйста, проверьте параметр�
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "Предполагаемый размер файла: %sMB %sХотите продолжить?"
+msgstr "Предполагаемый размер файла: %sМб %sХотите продолжить?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
@@ -1701,7 +1749,7 @@ msgstr "Каждое положение"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr ""
+msgstr "Пример заданного пользователем объекта: Северный галактический полюс"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -1741,11 +1789,11 @@ msgstr ""
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "ЧаВо"
+msgstr "Часто задаваемые вопросы"
 
 #: u_translation.rsfast
 msgid "Fast"
-msgstr ""
+msgstr "Быстро"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1753,11 +1801,11 @@ msgstr ""
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr ""
+msgstr "путь к программе ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr ""
+msgstr "Имя поля"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1773,11 +1821,11 @@ msgstr ""
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr "Установки поля зрения"
+msgstr "Параметры поля зрения"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Ном. поля зрения:"
+msgstr "№ поля зрения:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
@@ -1797,7 +1845,7 @@ msgstr "Файл не найден!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "Путь файлов"
+msgstr "Путь к файлам"
 
 #: u_translation.rsfill
 msgid "Fill?"
@@ -1809,7 +1857,7 @@ msgstr "Залить Млечный путь"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr "Залить горизонт цветом"
+msgstr "Залить цветом горизонта"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
@@ -1817,7 +1865,7 @@ msgstr "Фильтр ->"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr "Фильтр Deep Sky объектов"
+msgstr "Фильтровать Deep Sky"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
@@ -1865,7 +1913,7 @@ msgstr "Обозначение Флемстида"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
-msgstr ""
+msgstr "предсказание вспышек «Иридиума»"
 
 #: u_translation.rsfocus
 msgid "Focus"
@@ -1881,11 +1929,11 @@ msgstr "Шрифты"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Для большого каталога, всегда выбирайте Бинарний тип. Для малых каталогов, которые часто изменяются, выберите Текстовый, что позволит вам редактировать файл и видеть результат непосредственно на карте, без необходимости повторного обращения к CatGen 3.0"
+msgstr "Для большого каталога всегда выбирайте двоичный тип. Для малых, часто изменяемых каталогов выберите текстовый тип, что позволит вам редактировать файл и видеть результат непосредственно на карте, без необходимости повторного обращения к CatGen 3.0"
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
-msgstr ""
+msgstr "Только для текущей карты"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
@@ -1901,15 +1949,15 @@ msgstr "ПЗ:"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
-msgstr "Ном. поля зрения:"
+msgstr "№ поля зрения:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr ""
+msgstr "Кадров в секунду"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr ""
+msgstr "Размер кадра"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
@@ -1917,7 +1965,7 @@ msgstr ""
 
 #: u_translation.rsfreesize
 msgid "Free size"
-msgstr ""
+msgstr "Произвольный размер"
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -1933,7 +1981,7 @@ msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "FTP пассивний тип"
+msgstr "Пассивный FTP"
 
 #: u_translation.rsfullname
 msgid "Full name"
@@ -1965,7 +2013,7 @@ msgstr "Галактика"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
-msgstr "Скопление Галактик"
+msgstr "Скопление галактик"
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -1977,7 +2025,7 @@ msgstr "Общий"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "Общие установки каталога"
+msgstr "Общие параметры каталога"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
@@ -2017,7 +2065,7 @@ msgstr "Графическое"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr ""
+msgstr "Диаграммы"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -2037,7 +2085,7 @@ msgstr "Зелёный"
 
 #: u_translation.rsgridsetting
 msgid "Grid settings"
-msgstr "Установки сетки"
+msgstr "Параметры сетки"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
@@ -2097,7 +2145,7 @@ msgstr "Содержание помощи"
 
 #: u_translation.rshide
 msgid "Hide"
-msgstr ""
+msgstr "Скрыть"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
@@ -2105,15 +2153,15 @@ msgstr "Скрыть метку"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr "Скрыть объект шире, чем"
+msgstr "Скрыть объекты шире, чем"
 
 #: u_translation.rshigh
 msgid "High"
-msgstr ""
+msgstr "Высокая"
 
 #: u_translation.rshighcolor
 msgid "High colour"
-msgstr "Качественные цвета"
+msgstr "Качеств. цвета"
 
 #: u_translation.rshighest
 msgid "Highest"
@@ -2149,7 +2197,7 @@ msgstr "Часовой шаг сетки"
 
 #: u_translation.rshours
 msgid "hours"
-msgstr ""
+msgstr "часов"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
@@ -2161,15 +2209,15 @@ msgstr "HTTP прокси"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr "Действие после нажатия иконки"
+msgstr "Действие после нажатия значка"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
-msgstr "Размер иконки"
+msgstr "Размер значка"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr "Показ времени на иконке"
+msgstr "Показ времени на значке"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -2185,7 +2233,7 @@ msgstr "Освещённая часть"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "Директория изображения"
+msgstr "Каталог изображения"
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2201,15 +2249,15 @@ msgstr "Наклон="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "В т.ч. прохождения днём"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
-msgstr ""
+msgstr "В т.ч. вспышки «Иридиума»"
 
 #: u_translation.rsincrease
 msgid "Increase"
-msgstr ""
+msgstr "Увеличить"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2221,7 +2269,7 @@ msgstr "Приращение времени"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Здесь укажите, как вычислить нужную величину из данных, размещённых в текстовом файле каталога."
+msgstr "Укажите здесь, как вычислить нужную величину из данных, размещённых в текстовом файле каталога."
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
@@ -2245,7 +2293,7 @@ msgstr "INDI драйвер"
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
-msgstr "Установки INDI драйвера"
+msgstr "Параметры INDI драйвера"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
@@ -2273,7 +2321,7 @@ msgstr "Информационная деталь"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Информация из каталога"
 
 #: u_translation.rsinit
 msgid "Init"
@@ -2293,11 +2341,11 @@ msgstr "Инициализация базы данных"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Файлы исходного каталога"
+msgstr "Файлы исходн. каталога"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
-msgstr "включить неудачную линию %s : %s"
+msgstr "включить неудачную строку %s : %s"
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
@@ -2309,7 +2357,7 @@ msgstr "Интернет"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr ""
+msgstr "Поиск места по IP-адресу"
 
 #: u_translation.rsintervaltime
 msgid "Interval Timeout"
@@ -2317,7 +2365,7 @@ msgstr ""
 
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
-msgstr ""
+msgstr "Встроенный драйвер телескопа."
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
@@ -2329,7 +2377,7 @@ msgstr "Негодный FITS файл: %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr ""
+msgstr "Неверный путь: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
@@ -2433,7 +2481,7 @@ msgstr "Широта"
 
 #: u_translation.rsleft
 msgid "Left"
-msgstr "Левый"
+msgstr "Левое"
 
 #: u_translation.rsleftbar
 msgid "Left bar"
@@ -2457,11 +2505,11 @@ msgstr "Длина"
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
-msgstr "Менше Deep Sky"
+msgstr "Меньше Deep Sky"
 
 #: u_translation.rslessstars
 msgid "Less stars"
-msgstr "Менше звезд"
+msgstr "Меньше звёзд"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2485,7 +2533,7 @@ msgstr "LII"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "Укажите предельную величину:"
+msgstr "Предельная величина:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
@@ -2517,7 +2565,7 @@ msgstr "Линии"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr "Линии/ Сетка"
+msgstr "Линии и сетка"
 
 #: u_translation.rslinewidth
 msgid "Line width "
@@ -2533,7 +2581,7 @@ msgstr "Прослушивание порта: %s"
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "Список наявных пластинок"
+msgstr "Список доступных пластинок"
 
 #: u_translation.rsload
 msgid "Load"
@@ -2545,11 +2593,11 @@ msgstr "Загрузить файл"
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
-msgstr ""
+msgstr "Загрузить из файла"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr ""
+msgstr "Загружается список каталогов. Пожалуйста, подождите..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -2565,7 +2613,7 @@ msgstr "Загрузить только первые "
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr "Вызов проекта"
+msgstr "Загр. проект"
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
@@ -2605,7 +2653,7 @@ msgstr "Ромб"
 
 #: u_translation.rslow
 msgid "Low"
-msgstr ""
+msgstr "Низкая"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
@@ -2721,7 +2769,7 @@ msgstr "Максим. величина"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Макс. кол-во записей"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -2821,11 +2869,11 @@ msgstr ""
 
 #: u_translation.rsmodel
 msgid "Model"
-msgstr ""
+msgstr "Модель"
 
 #: u_translation.rsmodify
 msgid "Modify"
-msgstr "Видоизменить"
+msgstr "Изменить"
 
 #: u_translation.rsmonday
 msgid "Mon."
@@ -2841,7 +2889,7 @@ msgstr "Луна"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr ""
+msgstr "Дополнительная информация"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -2857,7 +2905,7 @@ msgstr "Больше звёзд"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Более 1000 ошибок! Процесс удалён."
+msgstr "Более 1000 ошибок! Процесс прерван."
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
@@ -2893,7 +2941,7 @@ msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
-msgstr "Больше меток"
+msgstr "Переместить метку"
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
@@ -2913,15 +2961,15 @@ msgstr "Кратная звезда"
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr "MySQL база данных"
+msgstr "База данных MySQL"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
-msgstr "Невооруженный глаз"
+msgstr "Невооруж. глаз"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "Стандарт для невооруженного глаза"
+msgstr "Стандарт для невооруж. глаза"
 
 #: u_translation.rsname
 msgid "Name"
@@ -2949,7 +2997,7 @@ msgstr "Deep Sky объекты"
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
-msgstr "Фильтр Deep Sky"
+msgstr "Фильтр объектов Deep Sky"
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
@@ -2961,7 +3009,7 @@ msgstr "Контуры туманностей"
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
-msgstr ""
+msgstr "(отрицательные к востоку от Гринвича)"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
@@ -2989,7 +3037,7 @@ msgstr "Далее >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr ""
+msgstr "Следующая карта"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
@@ -3009,7 +3057,7 @@ msgstr "№"
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Не найдено никаких астероидных данных!%sПожалуйста, сперва загрузите МРС файл."
+msgstr "Не найдено никаких астероидных данных!%sСначала загрузите МРС файл."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -3017,15 +3065,15 @@ msgstr ""
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Не выбран каталог или таблицы из выбранного каталога не содержат информации о координатах."
 
 #: u_translation.rsnochange
 msgid "No change"
-msgstr ""
+msgstr "Без изменений"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr ""
+msgstr "Нет данных"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3081,11 +3129,11 @@ msgstr "Недоступен"
 
 #: u_translation.rsnotavailon
 msgid "Not available on %s"
-msgstr ""
+msgstr "Недоступно на %s"
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
-msgstr "%s не связанно."
+msgstr "%s не подключен."
 
 #: u_translation.rsnote
 msgid "Note"
@@ -3105,7 +3153,7 @@ msgstr "%s Не найдено!%sВозможно каталог не устан
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
-msgstr ""
+msgstr "Не инициализирован"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3113,7 +3161,7 @@ msgstr "Сейчас"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr ""
+msgstr "Количество копий"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -3153,7 +3201,7 @@ msgstr "Фильтр объектов"
 
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
-msgstr "Установки фильтра объектов"
+msgstr "Параметры фильтра объектов"
 
 #: u_translation.rsobjectlist
 msgid "Object list"
@@ -3161,7 +3209,7 @@ msgstr "Список объектов"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
-msgstr "Установки списка объектов"
+msgstr "Параметры списка объектов"
 
 #: u_translation.rsobjectname
 msgid "Object name"
@@ -3197,11 +3245,11 @@ msgstr "Данные обсерватории"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
-msgstr "Устаревший"
+msgstr "Устаревшие"
 
 #: u_translation.rsoff
 msgid "Off"
-msgstr ""
+msgstr "Выкл."
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -3217,11 +3265,11 @@ msgstr "OK"
 
 #: u_translation.rson
 msgid "On"
-msgstr ""
+msgstr "Вкл."
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Одну каждые"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -3241,7 +3289,7 @@ msgstr ""
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr ""
+msgstr "Результаты онлайн-поиска"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
@@ -3269,7 +3317,7 @@ msgstr "Рассеянное скопление"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Открыть bitmap изображение"
+msgstr "Открыть bitmap-изображение"
 
 #: u_translation.rsoptions
 msgid "Options"
@@ -3289,7 +3337,7 @@ msgstr "Ориентация"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Или использовать местный:"
+msgstr "Или использовать локальный:"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3301,7 +3349,7 @@ msgstr "Иные метки"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Данные других программ"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3309,11 +3357,11 @@ msgstr "Тип конечного каталога"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Опции конечного каталога"
+msgstr "Опции каталога для вывода"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr "Директория на выходе"
+msgstr "Каталог для вывода"
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
@@ -3329,7 +3377,7 @@ msgstr "Параметрическое"
 
 #: u_translation.rsparity
 msgid "Parity"
-msgstr ""
+msgstr "Контроль чётности"
 
 #: u_translation.rsparkinganddi
 msgid "Parking and Disconnecting telescope."
@@ -3349,7 +3397,7 @@ msgstr "Пароль"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr ""
+msgstr "Пастель"
 
 #: u_translation.rspath
 msgid "Path"
@@ -3409,7 +3457,7 @@ msgstr "Рисунки"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "пикселей"
+msgstr "пикселов"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3417,7 +3465,7 @@ msgstr "Планета"
 
 #: u_translation.rsplanetaryneb
 msgid "Planetary nebula"
-msgstr "Планетарная Туманность"
+msgstr "Планетарная туманность"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
@@ -3425,7 +3473,7 @@ msgstr "Спутник планеты"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr "Установки отображения планет"
+msgstr "Параметры отображения планет"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -3437,11 +3485,11 @@ msgstr "Идент. пластинки   Дата   Эксп.  Поле   CD   �
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Пожалуйста, проверьте связь с Интернетом и определение URL"
+msgstr "Проверьте связь с Интернетом и правильно ли задан URL"
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Пожалуйста, сперва задайте путь к вашему DSS файлу."
+msgstr "Пожалуйста, сначала задайте путь к вашему DSS файлу."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
@@ -3453,7 +3501,7 @@ msgstr "Пожалуйста, подтвердите, что телескоп о
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
-msgstr ""
+msgstr "Проверьте, правильно ли установлен драйвер телескопа ASCOM."
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
@@ -3493,11 +3541,11 @@ msgstr ""
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "Пожалуйста, сообщите о проблемах им::"
+msgstr "Сообщайте о проблемах на:"
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Пожалуйста, попробуйте сами создать эту директорию и перезапустите программу."
+msgstr "Попробуйте создать этот каталог вручную и перезапустите программу."
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
@@ -3529,7 +3577,7 @@ msgstr "Порт:"
 
 #: u_translation.rsportconfigur
 msgid "Port Configuration"
-msgstr ""
+msgstr "Параметры порта"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -3561,7 +3609,7 @@ msgstr "Префикс альтернативных названий с их м�
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr "Приготовить каталог CatGen"
+msgstr "Подготовить каталог в CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
@@ -3581,7 +3629,7 @@ msgstr "<<   Назад"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Предпросмотр"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3613,7 +3661,7 @@ msgstr "Тип печати"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Предварительный просмотр печати"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3637,7 +3685,7 @@ msgstr "Обработка завершена. Общее количество �
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
-msgstr "Обработка линии %s"
+msgstr "Обработка строки %s"
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
@@ -3645,15 +3693,15 @@ msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr "Програмные данные "
+msgstr "Данные программы "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
-msgstr "Програмная информация"
+msgstr "Информация о программе"
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "Програмист:"
+msgstr "Программист:"
 
 #: u_translation.rsprogress
 msgid "Progress"
@@ -3669,7 +3717,7 @@ msgstr "Проекция"
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
-msgstr "Установки проекции"
+msgstr "Параметры проекции"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
@@ -3705,11 +3753,11 @@ msgstr "Прокси порт"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr ""
+msgstr "Длительность импульса"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr ""
+msgstr "Импульсный режим"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -3777,11 +3825,11 @@ msgstr "%sRA повороты:"
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
-msgstr ""
+msgstr "Интервал чтения [мс]"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Реальные изображения"
+msgstr "Реалистичные изображения"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
@@ -3797,7 +3845,7 @@ msgstr "RealSky Юг"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr ""
+msgstr "Параметры реального времени"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -3805,23 +3853,23 @@ msgstr "Опознание единиц или типа объекта из фа
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
-msgstr ""
+msgstr "Запись анимации в файл"
 
 #: u_translation.rsrecordingdir
 msgid "Recording directory"
-msgstr ""
+msgstr "Каталог для записи"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr ""
+msgstr "Расширение файла записи"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
-msgstr ""
+msgstr "Параметры записи"
 
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
-msgstr ""
+msgstr "Префикс файла записи"
 
 #: u_translation.rsrecordprotoc
 msgid "Record protocol to a trace file"
@@ -3837,11 +3885,11 @@ msgstr "R- величина"
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr "Обновить"
+msgstr "Вернуть"
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr "Вернуть последнее изменекние"
+msgstr "Вернуть последнее изменение"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
@@ -3861,23 +3909,23 @@ msgstr "Обновить"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr ""
+msgstr "Обновлять каждые"
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
-msgstr ""
+msgstr "Частота обновления"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
-msgstr "Комментарии"
+msgstr "Примечания к релизу"
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr ""
+msgstr "Перезагрузить"
 
 #: u_translation.rsreloadforcur
 msgid "Reload %s for current chart"
-msgstr ""
+msgstr "Перезагрузить %s для текущей карты"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -3905,7 +3953,7 @@ msgstr "Сообщить о проблеме"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "Ожидание. Возможно вы сделали запрос весьма широкой области, что требует больше серверного времени."
+msgstr "Истекло время ожидания. Вероятно, запрошена слишком широкая область, требующая слишком долгой обработки на сервере."
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
@@ -3933,15 +3981,15 @@ msgstr "Перезапуск карты и настроек"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Сброс к исходным настройкам по умолчанию и перезапуск"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Сброс ко времени последнего сохранения карты"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr "Разделение:"
+msgstr "Разрешение:"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
@@ -3973,7 +4021,7 @@ msgstr "Вернуть кнопку RA"
 
 #: u_translation.rsright
 msgid "Right"
-msgstr "Правый"
+msgstr "Правое"
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
@@ -4021,7 +4069,7 @@ msgstr "Спутник"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr ""
+msgstr "Вычисление орбит спутников:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -4057,11 +4105,11 @@ msgstr "Сохранить изображение..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr "Сохранить проект"
+msgstr "Сохр. проект"
 
 #: u_translation.rssavesetting
 msgid "Save setting"
-msgstr ""
+msgstr "Сохранить настройки"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
@@ -4073,7 +4121,7 @@ msgstr "Сохранить в файл"
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
-msgstr "Сканировать директорию"
+msgstr "Сканировать каталог"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
@@ -4097,15 +4145,15 @@ msgstr "Поиск"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr ""
+msgstr "Поиск по имени"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
-msgstr ""
+msgstr "Поиск по позиции"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr ""
+msgstr "Поиск каталогов"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4133,7 +4181,7 @@ msgstr "Секунд"
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
-msgstr ""
+msgstr "Подробнее смотрите %s."
 
 #: u_translation.rssel
 msgid "Sel."
@@ -4141,7 +4189,7 @@ msgstr ""
 
 #: u_translation.rsselect
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 #: u_translation.rsselectall
 msgid "Select all"
@@ -4149,7 +4197,7 @@ msgstr "Выбрать всё"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr ""
+msgstr "Выбрать каталог"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
@@ -4157,7 +4205,7 @@ msgstr ""
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr ""
+msgstr "Выбрать «зеркало» сайта"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4189,7 +4237,7 @@ msgstr "Большая полуось"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
-msgstr "Послать карту на печать."
+msgstr "Отправить карту на печать."
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4197,7 +4245,7 @@ msgstr "Разделение"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
-msgstr ""
+msgstr "Последовательный порт"
 
 #: u_translation.rsserver
 msgid "Server"
@@ -4221,7 +4269,7 @@ msgstr "IP порт сервера:"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr ""
+msgstr "Ответ сервера: "
 
 #: u_translation.rsset
 msgid "Set"
@@ -4233,7 +4281,7 @@ msgstr "Установка даты и времени"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr "Установки ПЗ"
+msgstr "Установки поля зрения"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
@@ -4245,7 +4293,7 @@ msgstr "Установите, насколько корректно ходят �
 
 #: u_translation.rssetlocation
 msgid "Set Location"
-msgstr ""
+msgstr "Задать место"
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -4265,7 +4313,7 @@ msgstr ""
 
 #: u_translation.rssettime
 msgid "Set Time"
-msgstr ""
+msgstr "Задать время"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -4281,7 +4329,7 @@ msgstr "Показать всё небо"
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr "Показать астероиды на"
+msgstr "Показать астероиды"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -4289,7 +4337,7 @@ msgstr "Показать астероиды на карте"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr "Показать кометы на"
+msgstr "Показать кометы"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -4317,7 +4365,7 @@ msgstr "Показать координатную сетку"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "Показывать линии DSO"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -4353,7 +4401,7 @@ msgstr "Показать метки"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Показать линию от перемещённой метки к объекту"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
@@ -4373,11 +4421,11 @@ msgstr "Показать Млечный Путь"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr "Показать туманности"
+msgstr "Показать объекты глубокого космоса"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr "Показать объект под горизонтом"
+msgstr "Показать объекты под горизонтом"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
@@ -4405,7 +4453,7 @@ msgstr "Показать планеты"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "Показывать позицию в заголовке окна"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
@@ -4417,11 +4465,11 @@ msgstr "Показать это изображение"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Показать объекты, заданные пользователем"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr ""
+msgstr "Показать данные Virtual Observatory"
 
 #: u_translation.rssideral
 msgid "Sidereal"
@@ -4445,15 +4493,15 @@ msgstr "Цвет фона неба"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
-msgstr "Домашняя страница \"Звёздные Карты\" на русском языке"
+msgstr "Домашняя страница «Звёздных Карт»"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
-msgstr "Установки иконки Звёздных Карт"
+msgstr "Параметры значка «Звёзных карт»"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
-msgstr "Звёздные Карты"
+msgstr "Звёздные карты"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
@@ -4473,7 +4521,7 @@ msgstr ""
 
 #: u_translation.rsslow
 msgid "Slow"
-msgstr ""
+msgstr "Медленно"
 
 #: u_translation.rsslowest
 msgid "Slowest"
@@ -4517,7 +4565,7 @@ msgstr "Объекты Солнечной системы"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr "Установки для Солнечной системы"
+msgstr "Параметры Солнечной системы"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
@@ -4525,7 +4573,7 @@ msgstr "Некоторые записи отклонены, детали смо�
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "Что-то происходит неправильно при инициализации программы. Мы сейчас должны закрыть"
+msgstr "Что-то происходит неправильно при инициализации программы. Нужно закрыть её."
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -4533,11 +4581,11 @@ msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"
-msgstr ""
+msgstr "Сортировка по"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "Сортировка файлов за блеском"
+msgstr "Сортировка файлов по блеску"
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
@@ -4553,15 +4601,15 @@ msgstr "Спектральный класс"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Скорость"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
-msgstr ""
+msgstr "Выбор скорости"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
-msgstr ""
+msgstr "Параметры скорости"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -4569,19 +4617,19 @@ msgstr "Паз"
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "SQL база данных недосягаема."
+msgstr "База данных SQL недоступна."
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "Програмное обеспечение SQL базы данных вероятно не установлено!"
+msgstr "Вероятно, програмное обеспечение SQL базы данных не установлено!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr "Sqlite база данных"
+msgstr "База данных SQLite"
 
 #: u_translation.rssquare
 msgid "Square"
-msgstr "Площадь"
+msgstr "Квадрат"
 
 #: u_translation.rsssecond
 msgid "S"
@@ -4617,7 +4665,7 @@ msgstr "Звёзды"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Каталоги звёзд и Deep Sky, приготовленные "
+msgstr "Каталоги звёзд и Deep Sky, подготовленные "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
@@ -4629,7 +4677,7 @@ msgstr "Фильтр звёзд"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Установки собственных движений звёзд (при их наличии в каталоге)"
+msgstr "Параметры собственных движений звёзд (при их наличии в каталоге)"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
@@ -4641,7 +4689,7 @@ msgstr "Начало объекта"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -4661,11 +4709,11 @@ msgstr "Единица шага"
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr ""
+msgstr "Стоп"
 
 #: u_translation.rsstopbits
 msgid "Stop bits"
-msgstr ""
+msgstr "Стоп-биты"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -4685,7 +4733,7 @@ msgstr "Вс."
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Источник изображения Солнца"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4737,7 +4785,7 @@ msgstr "Системный принтер"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
-msgstr "Установки системы"
+msgstr "Параметры системы"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -4745,7 +4793,7 @@ msgstr ""
 
 #: u_translation.rstable
 msgid "Table"
-msgstr ""
+msgstr "Таблица"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -4781,7 +4829,7 @@ msgstr "Телескоп не подключен"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
-msgstr "Установки телескопа"
+msgstr "Параметры телескопа"
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
@@ -4797,19 +4845,19 @@ msgstr "Временный файл"
 
 #: u_translation.rstext
 msgid "Text"
-msgstr "Вид текста иконки"
+msgstr "Вид текста значка"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Текстовий файл каталога"
+msgstr "Текстовый файл"
 
 #: u_translation.rstextsize
 msgid "Text size"
-msgstr "Размер текста иконки"
+msgstr "Размер текста значка"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
-msgstr ""
+msgstr "Интерфейс не подключен или не инициализирован"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -4817,7 +4865,7 @@ msgstr "Тема"
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr ""
+msgstr "Количество записей в этом каталоге неизвестно. Будет загружено лишь %s записей"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -4829,7 +4877,7 @@ msgstr "Присутствуют %s объектов в данном поле."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Данное действие заменяет всё содержание базы данных для страны %s, используя свежия данные от NGA и GNIS.%Все ваши редактирования по данной стране будут потерянными, за исключение того пункта, который вы добавили под новым названием, что и будет сохранено.%Хотите продолжить?"
+msgstr "Данное действие заменяет всё содержание базы данных для страны %s, используя свежия данные от NGA и GNIS.%Все ваши изменения для данной страны будут потеряны, за исключением пунктов, добавленных под новым названием.%Хотите продолжить?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -4841,7 +4889,7 @@ msgstr "Данный файл не был определён, как MPCORB фа
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Данная программа является бесплатной; вы можете перераспределять её и/или видоизменять, согласно условий GNU General Public License."
+msgstr "Данная программа является свободной; вы можете распространять и/или изменять её при соблюдении условий GNU General Public License."
 
 #: u_translation.rsthursday
 msgid "Thu."
@@ -4861,7 +4909,7 @@ msgstr "Время"
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
-msgstr ""
+msgstr "Тайм-аут [мс]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -4885,11 +4933,11 @@ msgstr "Сегодня"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "в файл:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr ""
+msgstr "Сегод. вечер"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4901,7 +4949,7 @@ msgstr "Слишком много открытых окон: просьба за
 
 #: u_translation.rstop
 msgid "Top"
-msgstr "Верх"
+msgstr "Верхнее"
 
 #: u_translation.rstopocentric
 msgid "Topocentric"
@@ -4937,7 +4985,7 @@ msgstr "Переводчик:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Прозрачность"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -4961,7 +5009,7 @@ msgstr "Истинное положение"
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr "Солнечное истинн."
+msgstr "Солнеч.истинн."
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
@@ -4969,7 +5017,7 @@ msgstr "Класс Трамплера"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -4981,7 +5029,7 @@ msgstr "повороты / градус"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "повороти / час"
+msgstr "повороты / час"
 
 #: u_translation.rstwilight
 msgid "Twilight"
@@ -4989,7 +5037,7 @@ msgstr "Сумерки"
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
-msgstr ""
+msgstr "Для инициализации нужно использовать ДВЕ звезды."
 
 #: u_translation.rstype
 msgid "Type"
@@ -5005,7 +5053,7 @@ msgstr "Тип координат"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr "Тип объекта для добавления в лист списка"
+msgstr "Типы объектов для добавления список"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
@@ -5017,7 +5065,7 @@ msgstr "Полная тень"
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "Невозможно создать директорию "
+msgstr "Невозможно создать каталог "
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
@@ -5077,7 +5125,7 @@ msgstr "Команда запуска URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Использовать другое значение TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5101,19 +5149,19 @@ msgstr "Использовать online DSS вместо RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Использовать онлайн-изображение Солнца с SDO или SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "Используйте каталог только со сходной группы"
+msgstr "Используйте каталоги только из одной группы"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Заданные пользователем объекты"
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Идент.Пользователя:"
+msgstr "Идент.пользователя:"
 
 #: u_translation.rsusername
 msgid "User name"
@@ -5121,7 +5169,7 @@ msgstr "Имя пользователя"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Использовать Socks прокси"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -5137,7 +5185,7 @@ msgstr "Использовать TCP/IP сервер"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "Используйте меню или кнопку «%s» для настройки этого драйвера."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
@@ -5165,15 +5213,15 @@ msgstr "Переменные"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr "Переменные звёзды"
+msgstr "Переменная звёзда"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
-msgstr "Переменные Звёзды"
+msgstr "Переменные звёзды"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Скорость"
 
 #: u_translation.rsvenus
 msgid "Venus"
@@ -5205,7 +5253,7 @@ msgstr ""
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr ""
+msgstr "Каталог Virtual Observatory"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5217,11 +5265,11 @@ msgstr "Визуальная величина"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr ""
+msgstr "Каталог VO"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr ""
+msgstr "Обозреватель каталогов VO"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
@@ -5229,7 +5277,7 @@ msgstr "Хотите проследить объект до его восход�
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Предупреждение!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -5245,19 +5293,19 @@ msgstr ""
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Предупреждение! Текущая дата и местонахождение обсерватории, возможно изменились от  значений по умолчанию. Вы должны ответить \"Нет\" и нажать %s кнопку, чтобы возвратиться к вашим значениям по умолчанию, а иначе они могут потеряться. Вы хотите продолжить?"
+msgstr "Предупреждение! Текущая дата и местонахождение обсерватории изменены. Вы можете ответить «Нет» и нажать кнопку %s, чтобы вернуться к исходным значениям, иначе изменения будут применены. Вы хотите продолжить?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Предупреждение! %sВы собираетесь разрушить базу данных %sи всё её содержание, даже если оно и не имеет отношения к данной программе. % sВы действительно уверены, что хотите продолжить?"
+msgstr "Предупреждение! %sВы собираетесь разрушить базу данных %sи всё её содержимое, даже не имеющее отношения к данной программе. %sВы действительно хотите продолжить?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "Предупреждение! Вы используете много каталогов для одного объекта. Будьте уверены, что вы этого хотите."
+msgstr "Предупреждение! Вы используете несколько каталогов для одного объекта. Возможно отображение дубликатов. Делайте это только если уверены, что вы этого хотите."
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "ПРЕДУПРЕЖДЕНИЕ! %sУ вас есть возможность добавить данные в существующий каталог% Существующий каталог и индексы должны быть в одном формате, так как иначе каталог будет искажаться.% Весьма хорошая идея сделать копии актуальных файлов перед этой операцией.% sВы хотите продолжить?"
+msgstr "ПРЕДУПРЕЖДЕНИЕ! %sВы выбрали добавление данных в существующий каталог.%sСуществующий каталог и индексы должны быть в одном формате, иначе каталог будет повреждён.%sЖелательно сделать копии актуальных файлов перед этой операцией.%sВы хотите продолжить?"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -5281,19 +5329,19 @@ msgstr "Окно"
 
 #: u_translation.rsxerrors
 msgid "X Errors"
-msgstr ""
+msgstr "X ошибки"
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
-msgstr "Xplane не компиллирована с поддержкой JPEG"
+msgstr "Xplane скомпилирована без поддержки JPEG"
 
 #: u_translation.rsxplanetispro
 msgid "Xplanet is probably not installed!"
-msgstr "Xplanet вероятно не установлена!"
+msgstr "Вероятно, Xplanet не установлена!"
 
 #: u_translation.rsxplanetretur
 msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet рапортирует %s"
+msgstr "%s, xplanet возвращает %s"
 
 #: u_translation.rsyear
 msgid "Year"
@@ -5305,7 +5353,7 @@ msgstr "лет"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
-msgstr ""
+msgstr "Y ошибки"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."

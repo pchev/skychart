@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-09 17:42+0000\n"
-"PO-Revision-Date: 2011-12-29 15:24+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"PO-Revision-Date: 2012-01-12 09:16+0000\n"
+"Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-10 16:44+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-12 11:40+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -19,19 +19,19 @@ msgstr "102 CD DSS"
 
 #: u_translation.rs184recommend
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr ""
+msgstr "184 (mælt með upp að 1.000.000 fyrirbærum)"
 
 #: u_translation.rs50recommende
 msgid "50   (recommended up to 100,000 objects)"
-msgstr ""
+msgstr "50   (mælt með upp að 100.000 fyrirbærum)"
 
 #: u_translation.rs732recommend
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr ""
+msgstr "732 (mælt með upp að 5.000.000 fyrirbærum)"
 
 #: u_translation.rs9537largerda
 msgid "9537 (larger datasets)"
-msgstr ""
+msgstr "9537 (stærra gagnasafn)"
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
@@ -57,6 +57,63 @@ msgstr "Um"
 msgid "About %s"
 msgstr "Um %s"
 
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr ""
+
+#~ msgctxt "u_translation.rsdarknebula"
+#~ msgid "Dark nebula"
+#~ msgstr "Skuggaþoka"
+#~ msgctxt "u_translation.rsgalaxycluste"
+#~ msgid "Galaxy cluster"
+#~ msgstr "Vetrarbrautaþyrping"
+#~ msgctxt "u_translation.rsplanetaryneb"
+#~ msgid "Planetary nebula"
+#~ msgstr "Hringþoka"
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr ""
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr ""
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr ""
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr ""
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr ""
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr ""
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr ""
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr ""
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr ""
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr ""
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr ""
+
 #: u_translation.rsaction
 msgid "Action"
 msgstr "Aðgerð"
@@ -79,7 +136,7 @@ msgstr "Bæta einu atriði við gagnagrunninn. Allir aðrir eru nauðsynlegir."
 
 #: u_translation.rsaddequatoria
 msgid "Add equatorial grid"
-msgstr ""
+msgstr "Bæta við miðbaugsmöskva"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -87,11 +144,11 @@ msgstr ""
 
 #: u_translation.rsaddlabel
 msgid "Add label"
-msgstr ""
+msgstr "Bæta við tákni"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr ""
+msgstr "Bæta viðbótarnöfnunum við efnisyfirlitið"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -103,7 +160,7 @@ msgstr "Þróað"
 
 #: u_translation.rsadvancedsear
 msgid "Advanced search"
-msgstr ""
+msgstr "Flókin leit"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
@@ -127,15 +184,15 @@ msgstr "Allar stillingar"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
-msgstr ""
+msgstr "%sGrind allra taflna til staðar."
 
 #: u_translation.rsalltoolsbar
 msgid "All tool bars"
-msgstr ""
+msgstr "Allt stikan"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr ""
+msgstr "%sGakktu úr skugga um að gagnagrunnshugbúnaður sé innsettur.%sFlettu upp í leiðarvísinum ef þú ert óörugg(ur).%sViltu halda áfram?"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -147,19 +204,19 @@ msgstr ""
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
-msgstr ""
+msgstr "Sjónb.hnit "
 
 #: u_translation.rsaltazcoord2
 msgid "Alt/Az coord."
-msgstr ""
+msgstr "Sjónb.hnit"
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr ""
+msgstr "Sjónbaugshnit"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
-msgstr ""
+msgstr "Lóðstillt undirstaða"
 
 #: u_translation.rsaltitude
 msgid "Altitude"
@@ -171,19 +228,19 @@ msgstr "%sStjörnuhæð - snúningar:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr ""
+msgstr "Vista alltaf án spurninga."
 
 #: u_translation.rsalwaysshowco
 msgid "Always show the compass rose"
-msgstr ""
+msgstr "Sýna alltaf áttavita"
 
 #: u_translation.rsanimation
 msgid "Animation"
-msgstr ""
+msgstr "Hreyfimynd"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
-msgstr ""
+msgstr "Árleg eiginhreyfing"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
@@ -211,7 +268,7 @@ msgstr "Virkja"
 
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
-msgstr ""
+msgstr "Virkja breytingu fyrir öll kort"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -223,11 +280,11 @@ msgstr ""
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
-msgstr ""
+msgstr "Gervitungl"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Gervihnöttur"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -251,15 +308,15 @@ msgstr "Smástirni"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr ""
+msgstr "Brautarstikar smástirna á MPC sniði (ein vefslóð með línu)"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
-msgstr ""
+msgstr "Stillingar smástirna"
 
 #: u_translation.rsasteroidsfro
 msgid "asteroids from the file"
-msgstr ""
+msgstr "Smástirni úr skránni"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
@@ -271,7 +328,7 @@ msgstr "Stj.rökkur"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr ""
+msgstr "Stjörnurökkur"
 
 #: u_translation.rsat
 msgid "at"
@@ -279,7 +336,7 @@ msgstr "á"
 
 #: u_translation.rsatmosphericr
 msgid "Atmospheric refraction"
-msgstr ""
+msgstr "Ljósbrot í andrúmsloftinu"
 
 #: u_translation.rsauthors
 msgid "Authors"
@@ -295,7 +352,7 @@ msgstr "Ræsa staðbundinn netþjón sjálfkrafa ef ekki er kveikt á honum"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
-msgstr ""
+msgstr "Glæða sjálfkrafa"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
@@ -315,7 +372,7 @@ msgstr "Áttarhorn"
 
 #: u_translation.rsazimuthalcoo
 msgid "Azimuthal coordinates"
-msgstr ""
+msgstr "Hnit áttarhorns"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
@@ -339,7 +396,7 @@ msgstr "Bakgrunnur"
 
 #: u_translation.rsbackgroundpi
 msgid "Background picture"
-msgstr ""
+msgstr "Bakgrunnsmynd"
 
 #: u_translation.rsbattery
 msgid "Battery"
@@ -347,7 +404,7 @@ msgstr ""
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
-msgstr ""
+msgstr "Bayer tákn"
 
 #: u_translation.rsbc
 msgid "BC"
@@ -363,7 +420,7 @@ msgstr "Neðan sjóndeildarhrings"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr ""
+msgstr "Vertu viss að þau noti DOS line end snið."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -383,23 +440,23 @@ msgstr "Bitmap"
 
 #: u_translation.rsbitmapfile
 msgid "Bitmap file"
-msgstr ""
+msgstr "Bitmap skrá"
 
 #: u_translation.rsblackonwhite
 msgid "Black on white"
-msgstr ""
+msgstr "Svart á hvítu"
 
 #: u_translation.rsblackwhite
 msgid "Black/white"
-msgstr ""
+msgstr "Svart/hvítt"
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
-msgstr ""
+msgstr "Svart/hvítt, línuhamur"
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
-msgstr ""
+msgstr "Blikkandi mynd"
 
 #: u_translation.rsblue
 msgid "Blue"
@@ -407,7 +464,7 @@ msgstr "Blár"
 
 #: u_translation.rsbluemagnitud
 msgid "Blue magnitude"
-msgstr ""
+msgstr "Birtustig í bláu"
 
 #: u_translation.rsbottom
 msgid "Bottom"
@@ -423,11 +480,11 @@ msgstr "Bjartari"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
-msgstr ""
+msgstr "Birtustig björtustu stjörnu"
 
 #: u_translation.rsbrightnebula
 msgid "Bright nebula"
-msgstr ""
+msgstr "Björt þoka"
 
 #: u_translation.rsbrightneo
 msgid "Bright + NEO + TNO"
@@ -443,11 +500,11 @@ msgstr "Bjartar stjörnur"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr ""
+msgstr "Stærð bjartra stjarna"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
-msgstr ""
+msgstr "Byggja skrá"
 
 #: u_translation.rsby
 msgid "by"
@@ -495,7 +552,7 @@ msgstr "%sGet ekki opnað gagnagrunn %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Get ekki skrifað í"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -507,7 +564,7 @@ msgstr "Skrár"
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "Skrá"
+msgstr "Skrár"
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
@@ -535,27 +592,27 @@ msgstr "%sCCW"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
-msgstr ""
+msgstr "CdC Djúphiminn"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr ""
+msgstr "Stillingar CDC djúphiminsskrár"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr ""
+msgstr "Úrelt CDC skrá (en þú getur samt notað hana)"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
-msgstr ""
+msgstr "CdC stjörnur"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr ""
+msgstr "Stilingar CDC stjörnuskrár"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr ""
+msgstr "Sverrir Guðmundsson"
 
 #: u_translation.rscenter
 msgid "Center"
@@ -567,7 +624,7 @@ msgstr ""
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr ""
+msgstr "Miðja"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
@@ -575,27 +632,27 @@ msgstr "Meðal hádegisbaugur"
 
 #: u_translation.rscentralstarb
 msgid "Central star B magnitude"
-msgstr ""
+msgstr "Birtust. miðstjörnu á B-borða"
 
 #: u_translation.rscentralstarv
 msgid "Central star V magnitude"
-msgstr ""
+msgstr "Birtust. miðstjörnu á V-borða"
 
 #: u_translation.rscentre
 msgid "Centre on"
-msgstr ""
+msgstr "Miðja"
 
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
-msgstr ""
+msgstr "Breyta teikniham"
 
 #: u_translation.rschangepictur
 msgid "Change the displayed picture"
-msgstr ""
+msgstr "Breyta birtingu mynda"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "Breyting yfir í þessa stillingu endurræsir forritið núna!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -603,19 +660,19 @@ msgstr "Kort"
 
 #: u_translation.rschart2
 msgid "chart:"
-msgstr ""
+msgstr "kort :"
 
 #: u_translation.rschartcoordin
 msgid "Chart, coordinates"
-msgstr ""
+msgstr "Kort, hnit"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr ""
+msgstr "Hnitakerfi korts"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
-msgstr ""
+msgstr "Upplýsingar um kort"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
@@ -627,7 +684,7 @@ msgstr "Kort"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
-msgstr ""
+msgstr "Stillingar korts"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -639,7 +696,7 @@ msgstr "Athuga"
 
 #: u_translation.rschoosecolour
 msgid "Choose colours for the object types"
-msgstr ""
+msgstr "Velja lit fyrir gerð fyrirbæris"
 
 #: u_translation.rscircle
 msgid "Circle"
@@ -655,7 +712,7 @@ msgstr "Flokkur"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr ""
+msgstr "Hreinsa kort"
 
 #: u_translation.rsclear
 msgid "Clear"
@@ -667,11 +724,11 @@ msgstr ""
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
-msgstr ""
+msgstr "Smelltu til að breyta lit "
 
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
-msgstr ""
+msgstr "Halda tengingu opinni"
 
 #: u_translation.rsclock
 msgid "Clock"
@@ -683,11 +740,11 @@ msgstr "Loka"
 
 #: u_translation.rsclosechart
 msgid "Close chart"
-msgstr ""
+msgstr "Loka korti"
 
 #: u_translation.rscloseconnect
 msgid "Close connection"
-msgstr ""
+msgstr "Loka tengingu"
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
@@ -703,23 +760,23 @@ msgstr "Loka tengingu"
 
 #: u_translation.rsclusterandne
 msgid "Cluster and nebula"
-msgstr ""
+msgstr "Þyrping og geimþoka"
 
 #: u_translation.rscolor
 msgid "Colour"
-msgstr ""
+msgstr "Litur"
 
 #: u_translation.rscolorindex
 msgid "Colour index"
-msgstr ""
+msgstr "Litvísir"
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr ""
+msgstr "Litur, línuhamur"
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
-msgstr ""
+msgstr "Litmettun"
 
 #: u_translation.rscomet
 msgid "Comet"
@@ -727,11 +784,11 @@ msgstr "Halastj."
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr ""
+msgstr "Brautarstikar halastjörnur á MPC-sniði (ein vefslóð í línu)"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
-msgstr ""
+msgstr "Stillingar halastjarna"
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
@@ -747,7 +804,7 @@ msgstr "Aðgerð til þess að meðhöndla skrá."
 
 #: u_translation.rscommonname
 msgid "Common name"
-msgstr ""
+msgstr "Alg. heiti"
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
@@ -763,11 +820,11 @@ msgstr ""
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
-msgstr ""
+msgstr "Birtustig þáttar 1"
 
 #: u_translation.rscomponent2ma
 msgid "Component 2 magnitude"
-msgstr ""
+msgstr "Birtustig þáttar 2"
 
 #: u_translation.rscompute
 msgid "Compute"
@@ -779,7 +836,7 @@ msgstr "Reikna gögn um smástirni fyrir mánuðinn"
 
 #: u_translation.rscomputefield
 msgid "Compute field"
-msgstr ""
+msgstr "Reikna svið"
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
@@ -807,11 +864,11 @@ msgstr ""
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr ""
+msgstr "%s tengt frá %s, notar kort %s, tengitími:%s."
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
-msgstr ""
+msgstr "Tengdur við SQL gagnagrunninn %s"
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
@@ -819,15 +876,15 @@ msgstr "Tengja línur milli allra staða"
 
 #: u_translation.rsconnectteles
 msgid "Connect telescope"
-msgstr ""
+msgstr "Tengja sjónauka"
 
 #: u_translation.rsconnecttofai
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr ""
+msgstr "Tengjast við %s, %s brást! %sAthugið hvort MySQL netþjónn sé uppi og athugið Notendanafn/lykilorð"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
-msgstr ""
+msgstr "Tenging við %s, %s heppnaðist.%s"
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
@@ -835,23 +892,23 @@ msgstr "Stjörnumerki"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr ""
+msgstr "Stjörnumerkjamyndir"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr ""
+msgstr "Skrá með stjörnumerkjamyndum : "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
-msgstr ""
+msgstr "Mörk stjörnumerkja"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr ""
+msgstr "Skrá með mörkum stjörnumerkja : "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
-msgstr ""
+msgstr "Tákn stjörnumerkja"
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
@@ -863,11 +920,11 @@ msgstr "Skerpa"
 
 #: u_translation.rscontrolpanel
 msgid "Control panel"
-msgstr ""
+msgstr "Stjórnborð"
 
 #: u_translation.rscontrolpanel2
 msgid "Control panel command "
-msgstr ""
+msgstr "Stjórnborðsaðgerð "
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
@@ -883,7 +940,7 @@ msgstr "Hnit"
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
-msgstr ""
+msgstr "Hnitakerfi"
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
@@ -895,11 +952,11 @@ msgstr ""
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr ""
+msgstr "Jafngægrapuntkur"
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
-msgstr ""
+msgstr "Hnitakerfi"
 
 #: u_translation.rscopy
 msgid "Copy"
@@ -907,15 +964,15 @@ msgstr "Afrita"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr ""
+msgstr "Afrita hnit"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr ""
+msgstr "Afrita frá:"
 
 #: u_translation.rscoreradius
 msgid "Core radius"
-msgstr ""
+msgstr "Geisli kjarna"
 
 #: u_translation.rscorrelated
 msgid "Correlated"
@@ -927,7 +984,7 @@ msgstr "Gat ekki hlaðið inn safni "
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
-msgstr ""
+msgstr "Tímabelti"
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
@@ -939,7 +996,7 @@ msgstr "Mynda leitarskrá"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
-msgstr ""
+msgstr "Mynda gagnagrunn"
 
 #: u_translation.rscreatefiles
 msgid "Create files"
@@ -963,7 +1020,7 @@ msgstr "Háganga"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
-msgstr ""
+msgstr "Núv. dags."
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
@@ -979,7 +1036,7 @@ msgstr "%sCW"
 
 #: u_translation.rsdarknebula
 msgid "Dark nebula"
-msgstr ""
+msgstr "Skuggaþoka"
 
 #: u_translation.rsdash1
 msgid "Dash"
@@ -987,11 +1044,11 @@ msgstr "Strik"
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr ""
+msgstr "Strik punktur"
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
-msgstr ""
+msgstr "Strik pkt. pkt."
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
@@ -1007,7 +1064,7 @@ msgstr "Stillingar gagnagrunns..."
 
 #: u_translation.rsdatabasetype
 msgid "Database type"
-msgstr ""
+msgstr "Gerð gagnagrunns"
 
 #: u_translation.rsdatabits
 msgid "Data bits"
@@ -1015,15 +1072,15 @@ msgstr ""
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
-msgstr ""
+msgstr "Gagnaskrár :"
 
 #: u_translation.rsdatafilescdr
 msgid "Data files, CD-ROM"
-msgstr ""
+msgstr "Gagnaskrár, geisladiskur"
 
 #: u_translation.rsdatamaintena
 msgid "Data maintenance"
-msgstr ""
+msgstr "Viðhald gagna"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
@@ -1031,7 +1088,7 @@ msgstr ""
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
-msgstr ""
+msgstr "Gögn frá línu %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
@@ -1047,7 +1104,7 @@ msgstr ""
 
 #: u_translation.rsdateformat
 msgid "Date format"
-msgstr ""
+msgstr "Snið dagsetningar"
 
 #: u_translation.rsdatefrom
 msgid "Date from"
@@ -1055,15 +1112,15 @@ msgstr "Dags. frá"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr ""
+msgstr "dagsetningum gætu tekið langan tíma í vinnslu. Viltu halda áfram?"
 
 #: u_translation.rsdatetime
 msgid "Date / time"
-msgstr ""
+msgstr "Dags./tími"
 
 #: u_translation.rsdatetime2
 msgid "Date/time"
-msgstr ""
+msgstr "Dags./tími"
 
 #: u_translation.rsday
 msgid "Day"
@@ -1079,7 +1136,7 @@ msgstr "Tími dags"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
-msgstr ""
+msgstr "Inns. grunns fyrir %s brást :%s"
 
 #: u_translation.rsdbname
 msgid "DB Name:"
@@ -1111,7 +1168,7 @@ msgstr "Tugakerfisstundir"
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
-msgstr ""
+msgstr "Fjarlægð suðurpóls í tugakerfi"
 
 #: u_translation.rsdeclination
 msgid "Declination"
@@ -1127,7 +1184,7 @@ msgstr ""
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
-msgstr ""
+msgstr "Minnka um"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
@@ -1139,7 +1196,7 @@ msgstr "%sStjörnubreidd - snúningar:"
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
-msgstr ""
+msgstr "Litur djúphimins"
 
 #: u_translation.rsdeepskyobjec
 msgid "Deep sky object colour"
@@ -1151,11 +1208,11 @@ msgstr "Sjálfg."
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr ""
+msgstr "Sjálfgefið"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr ""
+msgstr "Sjálfg. litur"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
@@ -1167,15 +1224,15 @@ msgstr ""
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr ""
+msgstr "Sjálf. spássía"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr ""
+msgstr "Sjálfgefnar stillingar þoka"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr ""
+msgstr "Sjálfgefnar stillingar marka"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
@@ -1191,7 +1248,7 @@ msgstr "Gráða"
 
 #: u_translation.rsdegreegridsp
 msgid "Declination grid"
-msgstr ""
+msgstr "Möskvastærð hnitak."
 
 #: u_translation.rsdegrees
 msgid "degrees"
@@ -1215,7 +1272,7 @@ msgstr "Eyðing tókst"
 
 #: u_translation.rsdeletedailyd
 msgid "Deleting the daily data"
-msgstr ""
+msgstr "Eyða gögnum dags"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
@@ -1223,15 +1280,15 @@ msgstr "Eyðing heppnaðist!"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
-msgstr ""
+msgstr "Eyða úr töflu..."
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr ""
+msgstr "Eyða úr lista..."
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
-msgstr ""
+msgstr "Eyða úr töflu mánaðar..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1239,15 +1296,15 @@ msgstr "Eyða úr töflu mánaðar fyrir jd<%s"
 
 #: u_translation.rsdeletefromna
 msgid "Deleting from the name list..."
-msgstr ""
+msgstr "Eyða úr nafnalista..."
 
 #: u_translation.rsdeletemonthl
 msgid "Delete monthly data "
-msgstr ""
+msgstr "Eyða mánaðargögnum "
 
 #: u_translation.rsdeletemonthl2
 msgid "Delete monthly data older than "
-msgstr ""
+msgstr "Eyða mánaðargögnum eldri en "
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
@@ -1259,7 +1316,7 @@ msgstr "Eyða fyrri gögnum fyrir þessa dagsetningu"
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr ""
+msgstr "Eyða núverandi stöðu úr gagnagrunninum ?"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1287,7 +1344,7 @@ msgstr "Smáatriði"
 
 #: u_translation.rsdeviceport
 msgid "Device port "
-msgstr ""
+msgstr "Tengi tækis "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1311,7 +1368,7 @@ msgstr ""
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr ""
+msgstr "%s (ekki sama og uppsett tengi, e.t.v. upptekið eða önnur villa)"
 
 #: u_translation.rsdimension
 msgid "Dimension"
@@ -1319,7 +1376,7 @@ msgstr "Stærð"
 
 #: u_translation.rsdimensionand
 msgid "Dimension and units"
-msgstr ""
+msgstr "Stærðir og einingar"
 
 #: u_translation.rsdir
 msgid "Dir"
@@ -1335,7 +1392,7 @@ msgstr "Mappa fannst ekki %s"
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
-msgstr ""
+msgstr "Mappa fannst ekki! Vinsamlegast settu inn Skychart Pictures pakkann."
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
@@ -1343,7 +1400,7 @@ msgstr ""
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
-msgstr ""
+msgstr "Aftengja sjónauka"
 
 #: u_translation.rsdisplay
 msgid "Display"
@@ -1359,11 +1416,11 @@ msgstr "Litur skjás"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr ""
+msgstr "Sýna mynd af skráðum fyrirbærum"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr ""
+msgstr "Birta tákn fyrir skrá yfir allar stjörnur"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
@@ -1395,11 +1452,11 @@ msgstr "Fjarlægð síðasta fyrirbæris"
 
 #: u_translation.rsdonottakeacc
 msgid "Do not take into account comets fainter than magnitude"
-msgstr ""
+msgstr "Ekki taka tillit til halastjarna af daufara birtustigi en"
 
 #: u_translation.rsdonottakeacc2
 msgid "Do not take into account asteroids fainter than magnitude"
-msgstr ""
+msgstr "Ekki taka tillit til smástirna af daufara birtustigi"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1411,7 +1468,7 @@ msgstr "Tvöfaldar"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
-msgstr ""
+msgstr "Tvístirni"
 
 #: u_translation.rsdownload
 msgid "Download"
@@ -1431,7 +1488,7 @@ msgstr "Ná í upplýsingar um land"
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr ""
+msgstr "Hlaða niður skrá"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
@@ -1439,7 +1496,7 @@ msgstr ""
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
-msgstr ""
+msgstr "Ná í síðustu brautarstika"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
@@ -1447,11 +1504,11 @@ msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
-msgstr ""
+msgstr "Viltu vista stillingar forrits núna?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr ""
+msgstr "Teikna línu sem sýnir eiginhreyfingu fyrir næstu"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -1463,7 +1520,7 @@ msgstr ""
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
-msgstr ""
+msgstr "Gerð teikningar"
 
 #: u_translation.rsdrawline
 msgid "Draw line"
@@ -1471,7 +1528,7 @@ msgstr "Teikna línu"
 
 #: u_translation.rsdrawplanetas
 msgid "Draw planet as"
-msgstr ""
+msgstr "Teikna reikistjörnu sem"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
@@ -1491,7 +1548,7 @@ msgstr ""
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
-msgstr ""
+msgstr "Henda gagnagrunni"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1523,11 +1580,11 @@ msgstr "Sólbaugur"
 
 #: u_translation.rseclipticcoor
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Hnit sólbaugs"
 
 #: u_translation.rseclipticcoor3
 msgid "Ecliptic coord."
-msgstr ""
+msgstr "Hnit sólbaugs"
 
 #: u_translation.rsedit
 msgid "Edit"
@@ -1535,7 +1592,7 @@ msgstr "Breyta"
 
 #: u_translation.rseditcolor
 msgid "Edit colour"
-msgstr ""
+msgstr "Breyta lit"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
@@ -1543,19 +1600,19 @@ msgstr ""
 
 #: u_translation.rseditlabel
 msgid "Edit label"
-msgstr ""
+msgstr "Breyta táknum"
 
 #: u_translation.rseditlineoper
 msgid "Edit line operation"
-msgstr ""
+msgstr "Breyta línuaðgerð"
 
 #: u_translation.rseditobjectty
 msgid "Edit object types"
-msgstr ""
+msgstr "Breyta gerðum fyrirbæris"
 
 #: u_translation.rseditunits
 msgid "Edit units"
-msgstr ""
+msgstr "Breyta einingum"
 
 #: u_translation.rselong
 msgid "Elong."
@@ -1583,7 +1640,7 @@ msgstr "Endi fyrirbæris"
 
 #: u_translation.rsendprocessin
 msgid "End of processing: %s asteroids"
-msgstr ""
+msgstr "Enda útreikninga: %s smástirni"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
@@ -1591,7 +1648,7 @@ msgstr ""
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr ""
+msgstr "Stjörnualmanak"
 
 #: u_translation.rsepoch
 msgid "Epoch"
@@ -1607,7 +1664,7 @@ msgstr "Tímabil hámarks"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr ""
+msgstr "Miðb.hnit"
 
 #: u_translation.rsequatorial
 msgid "Equatorial"
@@ -1615,7 +1672,7 @@ msgstr ""
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr ""
+msgstr "Miðbaugshnit"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
@@ -1623,11 +1680,11 @@ msgstr "Miðbaugshnit, vorpunktur: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr ""
+msgstr "Miðbaugshnit"
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr ""
+msgstr "Pólstillt stæði"
 
 #: u_translation.rsequatorialsy
 msgid "Equatorial System"
@@ -1675,7 +1732,7 @@ msgstr "Villa! Vinsamlega athugið stika gagnagrunnsins og hlaðið inn myndapak
 
 #: u_translation.rsestimatedfil
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr ""
+msgstr "Áætluð skráarstærð: %sMB %sViltu halda áfram ?"
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
@@ -1723,7 +1780,7 @@ msgstr "Augngler"
 
 #: u_translation.rsfailed
 msgid "Failed: %s"
-msgstr ""
+msgstr "Mistókst : %s"
 
 #: u_translation.rsfainter
 msgid "Fainter"
@@ -1747,7 +1804,7 @@ msgstr ""
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Eftirlæti"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
@@ -1763,7 +1820,7 @@ msgstr "Númer svæðis"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr ""
+msgstr "Sjónsvið"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
@@ -1771,7 +1828,7 @@ msgstr ""
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr ""
+msgstr "Stillingar sjónsviðs"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
@@ -1783,7 +1840,7 @@ msgstr ""
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
-msgstr ""
+msgstr "Of stórt svæði! Hámarkið er %s"
 
 #: u_translation.rsfile
 msgid "File"
@@ -1795,7 +1852,7 @@ msgstr "Skráin finnst ekki!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr ""
+msgstr "Slóð á skrár"
 
 #: u_translation.rsfill
 msgid "Fill?"
@@ -1807,7 +1864,7 @@ msgstr "Þekja Vetrarbrautina"
 
 #: u_translation.rsfillwithhori
 msgid "Fill with horizon colour"
-msgstr ""
+msgstr "Fylla með lit sjóndeildarhrings"
 
 #: u_translation.rsfilter
 msgid "Filter ->"
@@ -1815,7 +1872,7 @@ msgstr "Sía ->"
 
 #: u_translation.rsfilternebula
 msgid "Filter deep sky objects"
-msgstr ""
+msgstr "Sía djúpfyrirbæri"
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
@@ -1827,7 +1884,7 @@ msgstr "Finna"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
-msgstr ""
+msgstr "Hringur leitarsjónauka (augngler)"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
@@ -1843,23 +1900,23 @@ msgstr "Fyrstu 5000"
 
 #: u_translation.rsfirstchar
 msgid "First char"
-msgstr ""
+msgstr "Fyrsti bókst."
 
 #: u_translation.rsfitsfile
 msgid "FITS file"
-msgstr ""
+msgstr "FITS skrá"
 
 #: u_translation.rsfixedblack
 msgid "Fixed black"
-msgstr ""
+msgstr "Fastur svartur litur"
 
 #: u_translation.rsfixedskycolo
 msgid "Fixed sky colour"
-msgstr ""
+msgstr "Fastur litur himins"
 
 #: u_translation.rsflamsteednum
 msgid "Flamsteed number"
-msgstr ""
+msgstr "Flamsteed númer"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
@@ -1879,7 +1936,7 @@ msgstr "Stafagerðir"
 
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr ""
+msgstr "Fyrir stóra skrá skal alltaf velja tvíundarkerfi. Fyrir litla töflu sem breytist ört skal velja texta svo að þú getir breytt skránni og séð samstundis hvað breytist á kortinu án þess að þurfa að fara í gegnum þetta ferli."
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -1899,15 +1956,15 @@ msgstr "Sjónsv:"
 
 #: u_translation.rsfovnumber
 msgid "FOV number:"
-msgstr ""
+msgstr "nr. svæðis:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr ""
+msgstr "Rammar á sekúndu"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr ""
+msgstr "Stærð ramma"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
@@ -1931,15 +1988,15 @@ msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr ""
+msgstr "Óvirkur FTP hamur"
 
 #: u_translation.rsfullname
 msgid "Full name"
-msgstr ""
+msgstr "Fullt heiti"
 
 #: u_translation.rsfullscreen
 msgid "Full screen"
-msgstr ""
+msgstr "Heilskjár"
 
 #: u_translation.rsgalactic
 msgid "Galactic"
@@ -1947,11 +2004,11 @@ msgstr "Vetrarbrautar"
 
 #: u_translation.rsgalacticcoor
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Vetrarbrautarhnit"
 
 #: u_translation.rsgalacticcoor2
 msgid "Galactic coord."
-msgstr ""
+msgstr "Vetrarbr.hnit"
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
@@ -1963,7 +2020,7 @@ msgstr "Vetrarbraut"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
-msgstr ""
+msgstr "Vetrarbrautaþyrping"
 
 #: u_translation.rsgamma
 msgid "Gamma"
@@ -1979,7 +2036,7 @@ msgstr "Almennar skráarstillingar"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
-msgstr ""
+msgstr "Almennar stillingar"
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
@@ -1991,19 +2048,19 @@ msgstr ""
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
-msgstr ""
+msgstr "Ná í lista yfir smástirni."
 
 #: u_translation.rsgetdssimage
 msgid "Get the DSS image"
-msgstr ""
+msgstr "Ná í DSS mynd"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr ""
+msgstr "Ná í nýlega mælingur frá JUPOS verkefninu"
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
-msgstr ""
+msgstr "Kúluþyrping"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2027,7 +2084,7 @@ msgstr "Hæst"
 
 #: u_translation.rsgreeksymbol
 msgid "Greek symbols"
-msgstr ""
+msgstr "Grískur bókstafur"
 
 #: u_translation.rsgreen
 msgid "Green"
@@ -2035,11 +2092,11 @@ msgstr "Grænn"
 
 #: u_translation.rsgridsetting
 msgid "Grid settings"
-msgstr ""
+msgstr "Stillingar hnitakerfis"
 
 #: u_translation.rsgridspacing
 msgid "Grid spacing"
-msgstr ""
+msgstr "Möskvastærð hnitakerfis"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
@@ -2067,7 +2124,7 @@ msgstr "H reyndarbirtustig"
 
 #: u_translation.rshalfmassradi
 msgid "Half-mass radius"
-msgstr ""
+msgstr "Hálfur-massa radíus"
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
@@ -2079,7 +2136,7 @@ msgstr ""
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
-msgstr ""
+msgstr "Hbeta birtustig"
 
 #: u_translation.rsheight
 msgid "Height"
@@ -2103,7 +2160,7 @@ msgstr "Fela tákn"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr ""
+msgstr "Fela fyrirbæri stærri en"
 
 #: u_translation.rshigh
 msgid "High"
@@ -2111,7 +2168,7 @@ msgstr ""
 
 #: u_translation.rshighcolor
 msgid "High colour"
-msgstr ""
+msgstr "Fullur litur"
 
 #: u_translation.rshighest
 msgid "Highest"
@@ -2131,7 +2188,7 @@ msgstr "Sjónd.hr."
 
 #: u_translation.rshostname
 msgid "Hostname:"
-msgstr ""
+msgstr "Netfang hýsingaraðila"
 
 #: u_translation.rshour
 msgid "Hour"
@@ -2139,11 +2196,11 @@ msgstr "Klst."
 
 #: u_translation.rshourangle
 msgid "Hour angle"
-msgstr ""
+msgstr "Tímahorn"
 
 #: u_translation.rshourgridspac
 msgid "Right ascension grid"
-msgstr ""
+msgstr "Möskvi tímahorns"
 
 #: u_translation.rshours
 msgid "hours"
@@ -2155,19 +2212,19 @@ msgstr "Klst., mínútur, sekúndur"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
-msgstr ""
+msgstr "HTTP Proxy"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr ""
+msgstr "Táknmyndarsmellur"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
-msgstr ""
+msgstr "Stærð táknmyndar"
 
 #: u_translation.rsicontime
 msgid "Icon time display"
-msgstr ""
+msgstr "Sýna tíma í táknmynd"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -2179,15 +2236,15 @@ msgstr "Uppl."
 
 #: u_translation.rsilluminatedf
 msgid "Illuminated fraction"
-msgstr ""
+msgstr "Hluti sem er upplýstur"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr ""
+msgstr "Myndasvæði"
 
 #: u_translation.rsimageoptions
 msgid "Image options"
-msgstr ""
+msgstr "Myndastillingar"
 
 #: u_translation.rsinclination
 msgid "Inclination"
@@ -2211,23 +2268,23 @@ msgstr ""
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr ""
+msgstr "Aukning fyrir bjartar stjörnur"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
-msgstr ""
+msgstr "Auka um"
 
 #: u_translation.rsindicatehere
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr ""
+msgstr "Velja hér hvernig á að reikna gildin sem þarf að nota út frá gögnum í textaskránni"
 
 #: u_translation.rsindicatehowt
 msgid "Indicate how to recognize the object size unit:"
-msgstr ""
+msgstr "Veldu hvernig á að þekkja stærðareiningu fyrirbærisins :"
 
 #: u_translation.rsindicatethes
 msgid "Indicate the string identifier for each type of object:"
-msgstr ""
+msgstr "Vísið á á kennimerki strengs fyrir hverja gerð fyrirbæris :"
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
@@ -2235,23 +2292,23 @@ msgstr "Vísið á streng fyrir sérhverja teikniaðgerð"
 
 #: u_translation.rsindicatethes3
 msgid "Indicate the string for each colour"
-msgstr ""
+msgstr "Vísið á streng fyrir sérhvern lit"
 
 #: u_translation.rsindidriver
 msgid "INDI driver"
-msgstr ""
+msgstr "INDI rekill"
 
 #: u_translation.rsindidriverse
 msgid "INDI driver settings"
-msgstr ""
+msgstr "Stillingar INDI rekils"
 
 #: u_translation.rsindiserverho
 msgid "INDI server host "
-msgstr ""
+msgstr "Hýsill INDI netþjóns "
 
 #: u_translation.rsindiserverpo
 msgid "INDI server port"
-msgstr ""
+msgstr "Gátt INDI netþjóns"
 
 #: u_translation.rsindrive
 msgid "in drive"
@@ -2287,15 +2344,15 @@ msgstr ""
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
-msgstr ""
+msgstr "Núllstilla gagnagrunn"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr ""
+msgstr "Innsetning skráa"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
-msgstr ""
+msgstr "innsetning misheppnaðist í línu %s : %s"
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
@@ -2319,7 +2376,7 @@ msgstr ""
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
-msgstr ""
+msgstr "ógilt tímabil í line%s : %s"
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
@@ -2327,7 +2384,7 @@ msgstr "Ógild FITS skrá:  %s"
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr ""
+msgstr "Ógild slóð: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
@@ -2343,7 +2400,7 @@ msgstr "Sést ekki frá þessari breiddargráðu"
 
 #: u_translation.rsiscoordinate
 msgid "Is the coordinates epoch really %s?"
-msgstr ""
+msgstr "Er tímabil hnitakerfi í alvöru %s ?"
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2371,7 +2428,7 @@ msgstr "Júpíter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr ""
+msgstr "Júpíter GRS lengd :"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2395,7 +2452,7 @@ msgstr "Tákn"
 
 #: u_translation.rslabelobject
 msgid "Label object"
-msgstr ""
+msgstr "Setja inn tákn fyrirbæris"
 
 #: u_translation.rslabels
 msgid "Labels"
@@ -2403,7 +2460,7 @@ msgstr "Tákn"
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr ""
+msgstr "Texti tákns"
 
 #: u_translation.rslandscape
 msgid "Landscape"
@@ -2423,7 +2480,7 @@ msgstr "Velja tungumál"
 
 #: u_translation.rslatinname
 msgid "Latin name"
-msgstr ""
+msgstr "Latn. heiti"
 
 #: u_translation.rslatitude
 msgid "Latitude"
@@ -2435,7 +2492,7 @@ msgstr "Vinstri"
 
 #: u_translation.rsleftbar
 msgid "Left bar"
-msgstr ""
+msgstr "Vinstri stika"
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
@@ -2455,11 +2512,11 @@ msgstr "Lengd"
 
 #: u_translation.rslessnebulae
 msgid "Less deep sky"
-msgstr ""
+msgstr "Færri djúpfyrirbæri"
 
 #: u_translation.rslessstars
 msgid "Less stars"
-msgstr ""
+msgstr "Færri stjörnur"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
@@ -2471,7 +2528,7 @@ msgstr "Tunglvik lengdargráðu"
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
-msgstr ""
+msgstr "Notendaleyfi"
 
 #: u_translation.rslightyears
 msgid "light years"
@@ -2483,15 +2540,15 @@ msgstr "LII"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr ""
+msgstr "Takmörk birtustigs, listi:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr ""
+msgstr "Birtustigsmörk :"
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
-msgstr ""
+msgstr "Stærðarmörk (bogmínútur) :"
 
 #: u_translation.rsline1
 msgid "Line"
@@ -2515,7 +2572,7 @@ msgstr "Línur"
 
 #: u_translation.rslinesgrid
 msgid "Lines / grid"
-msgstr ""
+msgstr "Línur / Hnitakerfi"
 
 #: u_translation.rslinewidth
 msgid "Line width "
@@ -2523,7 +2580,7 @@ msgstr "Línubreidd "
 
 #: u_translation.rslinkallchart
 msgid "Link all charts"
-msgstr ""
+msgstr "Tengja allt kortið"
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
@@ -2551,7 +2608,7 @@ msgstr ""
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
-msgstr ""
+msgstr "Hlaða inn MPC skrá"
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
@@ -2567,15 +2624,15 @@ msgstr "Hlaða verk."
 
 #: u_translation.rslocalhorizon
 msgid "Local horizon"
-msgstr ""
+msgstr "Sjóndeildarhringur"
 
 #: u_translation.rslocalhorizon2
 msgid "Local horizon file name: "
-msgstr ""
+msgstr "Skráarnafn sjóndeildarhrings : "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr ""
+msgstr "Stjörnutími staðar"
 
 #: u_translation.rslocationcode
 msgid "Location code"
@@ -2595,11 +2652,11 @@ msgstr "Lengd"
 
 #: u_translation.rslongitudeasc
 msgid "Longitude ascending node"
-msgstr ""
+msgstr "Rishnútur lengdargráðu"
 
 #: u_translation.rslosange
 msgid "Lozenge"
-msgstr ""
+msgstr "Jafnhliða"
 
 #: u_translation.rslow
 msgid "Low"
@@ -2619,7 +2676,7 @@ msgstr ""
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
-msgstr ""
+msgstr "Tunglmyrkvar"
 
 #: u_translation.rsmag
 msgid "Mag:"
@@ -2643,7 +2700,7 @@ msgstr "Lágmarksbirtustig"
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
-msgstr ""
+msgstr "Birtuborði"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
@@ -2651,15 +2708,15 @@ msgstr "Munur á birtustigi"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Birtustig myrkva"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
-msgstr ""
+msgstr "Skekkja birtustigs"
 
 #: u_translation.rsmagnitudefai
 msgid "magnitudes fainter than the stars."
-msgstr ""
+msgstr "birtustigum daufari en stjörnurnar."
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
@@ -2671,11 +2728,11 @@ msgstr "Birtustig Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
-msgstr ""
+msgstr "Póstlisti"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
-msgstr ""
+msgstr "Aðalstika"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
@@ -2683,11 +2740,11 @@ msgstr ""
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
-msgstr ""
+msgstr "Handvirkt stæði"
 
 #: u_translation.rsmanualtelesc
 msgid "Manual telescope"
-msgstr ""
+msgstr "Handvirkur sjónauki"
 
 #: u_translation.rsmap
 msgid "Map"
@@ -2695,7 +2752,7 @@ msgstr "Kort"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
-msgstr ""
+msgstr "Merkja miðju korts"
 
 #: u_translation.rsmars
 msgid "Mars"
@@ -2803,15 +2860,15 @@ msgstr "mínútur"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr ""
+msgstr "Spegla lárétt"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr ""
+msgstr "Spegla lóðrétt"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr ""
+msgstr "Ýmsar línur"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -2843,23 +2900,23 @@ msgstr ""
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
-msgstr ""
+msgstr "Fleiri djúpfyrirbæri"
 
 #: u_translation.rsmoreoptions
 msgid "More options"
-msgstr ""
+msgstr "Viðb.stillingar"
 
 #: u_translation.rsmorestars
 msgid "More stars"
-msgstr ""
+msgstr "Fleiri stjörnur"
 
 #: u_translation.rsmorethan1000
 msgid "More than 1000 errors! The processing is aborted."
-msgstr ""
+msgstr "Yfir 1000 villur! Hætti við ferlið."
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr ""
+msgstr "Fleiri en %s fyrirbæri. Ekki hægt að birta allar niðurstöðurnar."
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -2895,27 +2952,27 @@ msgstr "Hreyfa tákn"
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
-msgstr ""
+msgstr "MPC Ftp"
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
-msgstr ""
+msgstr "MPC Http"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
-msgstr ""
+msgstr "Margir fánar"
 
 #: u_translation.rsmultiplestar
 msgid "Multiple star"
-msgstr ""
+msgstr "Fjölstirni"
 
 #: u_translation.rsmysqldatabas
 msgid "MySQL database"
-msgstr ""
+msgstr "MySQL gagnagrunnur"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
-msgstr ""
+msgstr "Með berum augum"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
@@ -2931,27 +2988,27 @@ msgstr "Sigl.rökkur"
 
 #: u_translation.rsnebula
 msgid "Deep sky object"
-msgstr ""
+msgstr "Djúpfyrirbæri"
 
 #: u_translation.rsnebulacommon
 msgid "Deep sky common name"
-msgstr ""
+msgstr "Algengt nafn djúpfyrirbæris"
 
 #: u_translation.rsnebuladispla
 msgid "Deep sky objects display"
-msgstr ""
+msgstr "Útlit djúpfyrirbæra"
 
 #: u_translation.rsnebulae
 msgid "Deep sky objects"
-msgstr ""
+msgstr "Djúpfyrirbæri"
 
 #: u_translation.rsnebulaefilte
 msgid "Deep sky filter"
-msgstr ""
+msgstr "Djúphiminssía"
 
 #: u_translation.rsnebulaeoroth
 msgid "Deep sky or other objects"
-msgstr ""
+msgstr "Djúpfyrirb. eða önnur fyrirb."
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
@@ -2963,7 +3020,7 @@ msgstr ""
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
-msgstr ""
+msgstr "Nágrenni"
 
 #: u_translation.rsneptune
 msgid "Neptune"
@@ -2971,15 +3028,15 @@ msgstr "Neptúnus"
 
 #: u_translation.rsnewchart
 msgid "New chart"
-msgstr ""
+msgstr "Nýtt kort"
 
 #: u_translation.rsnewfindercir
 msgid "New finder circle"
-msgstr ""
+msgstr "Nýr leitarsjónaukahringur"
 
 #: u_translation.rsnewlabel
 msgid "New label"
-msgstr ""
+msgstr "Nýtt tákn"
 
 #: u_translation.rsnext
 msgid "Next   >>"
@@ -2987,15 +3044,15 @@ msgstr "Næst  >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr ""
+msgstr "Næsta kort"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
-msgstr ""
+msgstr "Rautt fyrir næturaðlögun"
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr ""
+msgstr "Hnappur fyrir næturaðlögun"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
@@ -3007,11 +3064,11 @@ msgstr "Nr."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr ""
+msgstr "Engin gögn fyrir smástirni fundust!%sVinsamlegast hlaðið fyrst inn MPC skrá."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr ""
+msgstr "Ekkert stjörnurökkur í dag!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
@@ -3019,7 +3076,7 @@ msgstr ""
 
 #: u_translation.rsnochange
 msgid "No change"
-msgstr ""
+msgstr "Engin breyting"
 
 #: u_translation.rsnodata
 msgid "No Data"
@@ -3027,7 +3084,7 @@ msgstr ""
 
 #: u_translation.rsnomargin
 msgid "No margin"
-msgstr ""
+msgstr "Ekki jaðar"
 
 #: u_translation.rsnone1
 msgid "None"
@@ -3035,7 +3092,7 @@ msgstr "Ekkert"
 
 #: u_translation.rsnonexistant
 msgid "Non-existent"
-msgstr ""
+msgstr "Er ekki til"
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
@@ -3051,15 +3108,15 @@ msgstr "Engin mynd"
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
-msgstr ""
+msgstr "Enginn prentari finnst!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr ""
+msgstr ", engin eiginhreyfing"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
-msgstr ""
+msgstr "Venjulegur (litur)"
 
 #: u_translation.rsnorth
 msgid "North"
@@ -3095,11 +3152,11 @@ msgstr "%s finnst ekki"
 
 #: u_translation.rsnotfoundinan
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr ""
+msgstr "%s  Finnst ekki í neinu innsettu skráaryfirliti."
 
 #: u_translation.rsnotfoundmayb
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr ""
+msgstr "%s Finnst ekki!%sEf til vill er skráin ekki innsett eða röng slóð í skráarstillingum."
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
@@ -3119,7 +3176,7 @@ msgstr "Fjöldi skráa"
 
 #: u_translation.rsnumberofmont
 msgid "Number of months"
-msgstr ""
+msgstr "Mánaðarnúmer"
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
@@ -3127,7 +3184,7 @@ msgstr "Fjöldi þoka"
 
 #: u_translation.rsnumberofstar
 msgid "Number of stars"
-msgstr ""
+msgstr "Fjöldi stjarna"
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
@@ -3135,7 +3192,7 @@ msgstr "Fjöldi skrefa"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr ""
+msgstr "Pólriða , ljósvilla"
 
 #: u_translation.rsobject
 msgid "Object"
@@ -3143,31 +3200,31 @@ msgstr "Fyrirbæri"
 
 #: u_translation.rsobjectbar
 msgid "Object bar"
-msgstr ""
+msgstr "Fyrirbærastika"
 
 #: u_translation.rsobjectfilter
 msgid "Object filter"
-msgstr ""
+msgstr "Sía fyrirb."
 
 #: u_translation.rsobjectfilter2
 msgid "Object filter settings"
-msgstr ""
+msgstr "Síustill. fyrirb."
 
 #: u_translation.rsobjectlist
 msgid "Object list"
-msgstr ""
+msgstr "Listi yfir fyrirbæri"
 
 #: u_translation.rsobjectlistse
 msgid "Object list settings"
-msgstr ""
+msgstr "Stillingar fyrir lista fyrirbæra"
 
 #: u_translation.rsobjectname
 msgid "Object name"
-msgstr ""
+msgstr "Nafn fyrirbæris"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Staðsetning fyrirbæris finnst í skrá, en nánari upplýsingar finnast ekki í virkri skrá"
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -3191,7 +3248,7 @@ msgstr "Athugunarstaður"
 
 #: u_translation.rsobservatoryd
 msgid "Observatory database"
-msgstr ""
+msgstr "Gagnagrunnur athugunarstaðar"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -3263,7 +3320,7 @@ msgstr "Opna kort"
 
 #: u_translation.rsopencluster
 msgid "Open cluster"
-msgstr ""
+msgstr "Lausþyrping"
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
@@ -3279,7 +3336,7 @@ msgstr "Braut"
 
 #: u_translation.rsorbitaleleme
 msgid "Orbital elements"
-msgstr ""
+msgstr "Brautarstikar"
 
 #: u_translation.rsorientation
 msgid "Orientation"
@@ -3287,7 +3344,7 @@ msgstr "Stefna"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr ""
+msgstr "Eða nota skjal á tölvunni :"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3295,15 +3352,15 @@ msgstr "Annað"
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "Annað merki"
+msgstr "Önnur tákn"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Önnur gögn forrits"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
-msgstr ""
+msgstr "Gerð úttaks skrárinnar"
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
@@ -3311,11 +3368,11 @@ msgstr "Stillingar fyrir útskrift gagnagrunnsins"
 
 #: u_translation.rsoutputdirect
 msgid "Output directory"
-msgstr ""
+msgstr "Mappa úttaksins"
 
 #: u_translation.rspagemarginin
 msgid "Page margin in millimeters"
-msgstr ""
+msgstr "Spássía í millimetrum"
 
 #: u_translation.rsparallax
 msgid "Parallax"
@@ -3347,7 +3404,7 @@ msgstr "Lykilorð"
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr ""
+msgstr "Pastel"
 
 #: u_translation.rspath
 msgid "Path"
@@ -3355,11 +3412,11 @@ msgstr "Slóð"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr ""
+msgstr "Slóð til þess að vista skrá :"
 
 #: u_translation.rspathwidth
 msgid "Path width"
-msgstr ""
+msgstr "Br. slóða"
 
 #: u_translation.rspec
 msgid "PEC"
@@ -3395,7 +3452,7 @@ msgstr "Kvartil"
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
-msgstr ""
+msgstr "Ljósmyndaplata"
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
@@ -3415,7 +3472,7 @@ msgstr "Reikistj."
 
 #: u_translation.rsplanetaryneb
 msgid "Planetary nebula"
-msgstr ""
+msgstr "Hringþoka"
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
@@ -3423,15 +3480,15 @@ msgstr "Tungl reikistjörnu"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr ""
+msgstr "Stillingar reikistjörnu"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
-msgstr ""
+msgstr "Galli í plötu"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr ""
+msgstr "Nr. Plötu   Dags.  Lýs.t.  Jaðar  CD  Stjörnustöð"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
@@ -3443,11 +3500,11 @@ msgstr "Vinsamlega stilltu slóðina fyrir DSS skrána fyrst."
 
 #: u_translation.rspleaseconfig2
 msgid "Please configure the orbital elements URL!"
-msgstr ""
+msgstr "Vinsamlega lagaðu vefslóð fyrir brautareiginleikana!"
 
 #: u_translation.rspleaseconfir
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr ""
+msgstr "Vinsamlega staðfestu að sjónaukinn sé stilltur á %s"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -3467,7 +3524,7 @@ msgstr "Vinsamlegast settu inn allt heiti skrárinnar"
 
 #: u_translation.rspleaseindica3
 msgid "Please indicate the directory where the catalog must be built"
-msgstr ""
+msgstr "Vinsamlega skráðu inn möppuna þar sem skráin verður sett inn"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
@@ -3483,7 +3540,7 @@ msgstr ""
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
-msgstr ""
+msgstr "Vinsamlega settu inn RealSky256 CD númer"
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
@@ -3503,7 +3560,7 @@ msgstr "Vinsamlegast reyndu að setja aftur upp forritið."
 
 #: u_translation.rsplottheposit
 msgid "Plot the position of the moving object."
-msgstr ""
+msgstr "Skrá inn hreyfingu fyrirbæris."
 
 #: u_translation.rspluto
 msgid "Pluto"
@@ -3539,27 +3596,27 @@ msgstr "Staða"
 
 #: u_translation.rspositionangl
 msgid "Position angle"
-msgstr ""
+msgstr "Stöðuhorn"
 
 #: u_translation.rspositionepoc
 msgid "Position epoch"
-msgstr ""
+msgstr "Viðmiðunartímabil staðsetningar"
 
 #: u_translation.rspostscript
 msgid "PostScript"
-msgstr ""
+msgstr "Postscript"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr ""
+msgstr "Hafa stuttnefni skráar fyrir framan heiti"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
-msgstr ""
+msgstr "Setja tákn fyrir framan viðbótarnöfn fyrirbæra"
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr ""
+msgstr "Undirbúa skrá CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
@@ -3567,7 +3624,7 @@ msgstr "Undirbúa gögn "
 
 #: u_translation.rspreparemonth
 msgid "Prepare monthly data"
-msgstr ""
+msgstr "Undirbúa mánaðarlegar upplýsingar"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
@@ -3587,11 +3644,11 @@ msgstr "Prenta"
 
 #: u_translation.rsprintchart
 msgid "Print chart"
-msgstr ""
+msgstr "Prenta kort"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr ""
+msgstr "Útprentað kort"
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3603,7 +3660,7 @@ msgstr "Skýring prentara"
 
 #: u_translation.rsprintersetup
 msgid "Printer setup"
-msgstr ""
+msgstr "Upps. prent."
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -3623,11 +3680,11 @@ msgstr "Er að vinna... %s"
 
 #: u_translation.rsprocessingen
 msgid "Processing ended. Total number of comets: %s"
-msgstr ""
+msgstr "Vinnslu er lokið. Heildarfjöldi halastjarna :%s"
 
 #: u_translation.rsprocessingen2
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr ""
+msgstr "Vinnslu er lokið. Heildarfjöldi smástirna :%s"
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
@@ -3643,11 +3700,11 @@ msgstr ""
 
 #: u_translation.rsprogramdata
 msgid "Program data "
-msgstr ""
+msgstr "Gögn forrits "
 
 #: u_translation.rsprograminfor
 msgid "Program information"
-msgstr ""
+msgstr "Upplýsingar um forritið"
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
@@ -3659,7 +3716,7 @@ msgstr "Vinnsla"
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
-msgstr ""
+msgstr "Skilaboð um vinnslu"
 
 #: u_translation.rsprojection
 msgid "Projection"
@@ -3667,19 +3724,19 @@ msgstr "Vörpun"
 
 #: u_translation.rsprojectionse
 msgid "Projection settings"
-msgstr ""
+msgstr "Stilling vörpunar"
 
 #: u_translation.rspropermotion
 msgid "Proper motion in right ascension"
-msgstr ""
+msgstr "Eiginhreyfing í stjörnulengd"
 
 #: u_translation.rspropermotion2
 msgid "Proper motion in declination"
-msgstr ""
+msgstr "Eiginhreyfing í stjörnubreidd"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr ""
+msgstr "Eiginhreyfing"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
@@ -3711,7 +3768,7 @@ msgstr ""
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr ""
+msgstr "Setja skrárnar með skráartegundina .tle í %s möppuna"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3723,15 +3780,15 @@ msgstr ""
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
-msgstr ""
+msgstr "Eyða snögglega"
 
 #: u_translation.rsquicklydelet
 msgid "Quickly delete all data related to comets"
-msgstr ""
+msgstr "Eyða snögglega öllum upplýsingum sem tengjast halastjörnum"
 
 #: u_translation.rsquicklydelet2
 msgid "Quickly delete all data related to asteroids"
-msgstr ""
+msgstr "Eyða snögglega öllum upplýsingum sem tengjast smástirnum."
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
@@ -3751,7 +3808,7 @@ msgstr ""
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr ""
+msgstr "Sjónlínuhraði"
 
 #: u_translation.rsrange
 msgid "Range"
@@ -3763,7 +3820,7 @@ msgstr "Stillingar stjörnulengdar"
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr ""
+msgstr "Rastaupplausn"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
@@ -3799,7 +3856,7 @@ msgstr ""
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
-msgstr ""
+msgstr "Þekkja einingar eða gerð fyrirbæra úr skránni:"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
@@ -3831,7 +3888,7 @@ msgstr "Rautt"
 
 #: u_translation.rsredmagnitude
 msgid "Red magnitude"
-msgstr ""
+msgstr "Birtustig í rauðu"
 
 #: u_translation.rsredo
 msgid "Redo"
@@ -3839,11 +3896,11 @@ msgstr "Endurtaka"
 
 #: u_translation.rsredolastchan
 msgid "Redo last change"
-msgstr ""
+msgstr "Endurtaka síðustu breytingu"
 
 #: u_translation.rsreducedetail
 msgid "Reduce details when moving the chart"
-msgstr ""
+msgstr "Fækka smáatriðum við færslu korts"
 
 #: u_translation.rsreference
 msgid "Reference"
@@ -3867,7 +3924,7 @@ msgstr ""
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
-msgstr ""
+msgstr "Um útgáfuna"
 
 #: u_translation.rsreload
 msgid "Reload"
@@ -3879,19 +3936,19 @@ msgstr ""
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
-msgstr ""
+msgstr "Fjarlæga alla hringi"
 
 #: u_translation.rsremovealllab
 msgid "Remove all labels"
-msgstr ""
+msgstr "Fjarlæga öll tákn"
 
 #: u_translation.rsremovelastci
 msgid "Remove last circle"
-msgstr ""
+msgstr "Fjarlægja síðasta hring"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
-msgstr ""
+msgstr "Fjarlæga síðasta tákn"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -3903,15 +3960,15 @@ msgstr "Senda inn vandamál"
 
 #: u_translation.rsrequesttimeo
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr ""
+msgstr "Beiðni tók of langan tíma. Líklega baðstu um of breitt svæði sem krafðist of mikillar vinnslu á netþjóninum."
 
 #: u_translation.rsrequiredfiel
 msgid "Required field missing!"
-msgstr ""
+msgstr "Vantar nauðsynlegt svæði !"
 
 #: u_translation.rsrequirexplan
 msgid "(requires Xplanet 1.2.0)"
-msgstr ""
+msgstr "(þarfnast Xplanet 1.2.0)"
 
 #: u_translation.rsreset
 msgid "Reset"
@@ -3919,11 +3976,11 @@ msgstr "Endurst."
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr ""
+msgstr "Fyrri tákn"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr ""
+msgstr "Endurstilla kort"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
@@ -3931,11 +3988,11 @@ msgstr "Endurstilla kort og stillingar"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Upprunalegar stillingar og endurræsing"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Snúa aftur til síðasta skiptis sem kort var vistað"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3995,11 +4052,11 @@ msgstr "Rís klukkan"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr ""
+msgstr "Snúa til vinstri"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr ""
+msgstr "Snúa til hægri"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -4023,7 +4080,7 @@ msgstr ""
 
 #: u_translation.rssatring
 msgid "Sat. ring"
-msgstr ""
+msgstr "Hringir Sat."
 
 #: u_translation.rssaturday
 msgid "Sat."
@@ -4039,23 +4096,23 @@ msgstr "Vista"
 
 #: u_translation.rssaveas
 msgid "Save as..."
-msgstr ""
+msgstr "Vista sem..."
 
 #: u_translation.rssaveconfigur
 msgid "Save configuration now"
-msgstr ""
+msgstr "Vista stillingar núna"
 
 #: u_translation.rssaveconfigur2
 msgid "Save configuration on exit"
-msgstr ""
+msgstr "Vista stillingar við lokun forrits"
 
 #: u_translation.rssaveimage
 msgid "Save image..."
-msgstr ""
+msgstr "Vista mynd..."
 
 #: u_translation.rssaveproject
 msgid "Save project"
-msgstr ""
+msgstr "Vista verkefni"
 
 #: u_translation.rssavesetting
 msgid "Save setting"
@@ -4063,11 +4120,11 @@ msgstr ""
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr ""
+msgstr "Vista núverandi kort"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
-msgstr ""
+msgstr "Vista í skrá"
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
@@ -4079,11 +4136,11 @@ msgstr ""
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
-msgstr ""
+msgstr "Skjá- og stöðustika"
 
 #: u_translation.rsscrollbar
 msgid "Scroll bar"
-msgstr ""
+msgstr "Skrunbraut"
 
 #: u_translation.rssday
 msgid "D"
@@ -4111,7 +4168,7 @@ msgstr "Leita að"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr ""
+msgstr "Atriðaskrá leitar"
 
 #: u_translation.rssec
 msgid "s"
@@ -4143,7 +4200,7 @@ msgstr ""
 
 #: u_translation.rsselectall
 msgid "Select all"
-msgstr ""
+msgstr "Velja allt"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
@@ -4159,7 +4216,7 @@ msgstr ""
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr ""
+msgstr "Veldu plötu úr listanum"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4175,7 +4232,7 @@ msgstr "Veldu viðmót sjónaukans"
 
 #: u_translation.rsselectthetyp
 msgid "Select the type of objects in your catalog"
-msgstr ""
+msgstr "Veldu gerð fyrirbæra í skránni"
 
 #: u_translation.rssemi
 msgid "Semi"
@@ -4183,11 +4240,11 @@ msgstr "Hluti"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr ""
+msgstr "Hálfur langás"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
-msgstr ""
+msgstr "Senda kort til prentara."
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4207,15 +4264,15 @@ msgstr "Skipun til netþjóns "
 
 #: u_translation.rsserverinform
 msgid "Server information"
-msgstr ""
+msgstr "Upplýsingar um netþjón"
 
 #: u_translation.rsserveripinte
 msgid "Server IP interface:"
-msgstr ""
+msgstr "IP viðmót netþjóns :"
 
 #: u_translation.rsserveripport
 msgid "Server IP port:"
-msgstr ""
+msgstr "IP port netþjóns :"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
@@ -4239,7 +4296,7 @@ msgstr "Stilla sjónsviðið á"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr ""
+msgstr "Stilltu hvernig stæðið hreyfist eftir ásunum þegar þú snýrð drifhúninum. Síðan birtir sjónaukahnappurinn hve marga snúninga þarf til þess að fara frá einu fyrirbæri til annars."
 
 #: u_translation.rssetlocation
 msgid "Set Location"
@@ -4275,11 +4332,11 @@ msgstr "K"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr ""
+msgstr "Sýna allan himininn"
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
-msgstr ""
+msgstr "Sýna smástirni"
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
@@ -4287,7 +4344,7 @@ msgstr "Birta smástirni á kortinu"
 
 #: u_translation.rsshowcomets
 msgid "Show comets"
-msgstr ""
+msgstr "Sýna halastjörnur"
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
@@ -4295,23 +4352,23 @@ msgstr "Birta halastjörnur á kortinu"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
-msgstr ""
+msgstr "Birta stjörnumerkjalínur"
 
 #: u_translation.rsshowconstell2
 msgid "Show constellation limits"
-msgstr ""
+msgstr "Birta mörk stjörnumerkjanna"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
-msgstr ""
+msgstr "Birta stjörnumerkjamyndir"
 
 #: u_translation.rsshowconstell4
 msgid "Show constellation boundaries"
-msgstr ""
+msgstr "Birta mörk stjörnumerkja"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr ""
+msgstr "Birta hnitakerfi"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
@@ -4319,27 +4376,27 @@ msgstr ""
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr ""
+msgstr "Birta skugga jarðar við tunglmyrkva"
 
 #: u_translation.rsshowecliptic
 msgid "Show ecliptic"
-msgstr ""
+msgstr "Birta sólbaug"
 
 #: u_translation.rsshowgalactic
 msgid "Show galactic equator"
-msgstr ""
+msgstr "Birta miðbaug Vetrarbrautarinnar"
 
 #: u_translation.rsshowgrid
 msgid "Show grid"
-msgstr ""
+msgstr "Birta hnitakerfi"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
-msgstr ""
+msgstr "Birta tölur hnitak."
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
-msgstr ""
+msgstr "Birta/fela DSS mynd"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4347,7 +4404,7 @@ msgstr "Birta óreglul. br.stj."
 
 #: u_translation.rsshowlabels
 msgid "Show labels"
-msgstr ""
+msgstr "Birta tákn"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
@@ -4355,11 +4412,11 @@ msgstr ""
 
 #: u_translation.rsshowlines
 msgid "Show lines"
-msgstr ""
+msgstr "Birta útlínur gasskýja"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr ""
+msgstr "Sjónsvið leitarsjónauka"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
@@ -4371,11 +4428,11 @@ msgstr "Birta Vetrarbrautina"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
-msgstr ""
+msgstr "Birta djúpfyrirbæri"
 
 #: u_translation.rsshowobjectbe
 msgid "Show objects below the horizon"
-msgstr ""
+msgstr "Birta fyrirbæri sem eru undir sjóndeildarhring"
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
@@ -4383,7 +4440,7 @@ msgstr "Birta myndir á kortinu"
 
 #: u_translation.rsshowobjects
 msgid "Show objects"
-msgstr ""
+msgstr "Birta fyrirbæri"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
@@ -4391,23 +4448,23 @@ msgstr ""
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
-msgstr ""
+msgstr "Birta myndir"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
-msgstr ""
+msgstr "Birta reikistjörnur á kortinu"
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
-msgstr ""
+msgstr "Birta reikistjörnur"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "Sýna stöðu í titillínu"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
-msgstr ""
+msgstr "Birta stjörnur"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4423,11 +4480,11 @@ msgstr ""
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr ""
+msgstr "Stjörnutími"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
-msgstr ""
+msgstr "Stjörnudagur"
 
 #: u_translation.rssimulation
 msgid "Simulation"
@@ -4439,15 +4496,15 @@ msgstr "Stærð"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
-msgstr ""
+msgstr "Bakgrunnslitur himins"
 
 #: u_translation.rsskycharthome
 msgid "Skychart homepage"
-msgstr ""
+msgstr "Vefsíða Skychart"
 
 #: u_translation.rsskycharticon
 msgid "Skychart icon setup"
-msgstr ""
+msgstr "Stillingar Skychart táknmyndar"
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
@@ -4455,7 +4512,7 @@ msgstr "Stjörnukort"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
-msgstr ""
+msgstr "Litur himins"
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -4487,7 +4544,7 @@ msgstr "M"
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr ""
+msgstr "M."
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
@@ -4495,15 +4552,15 @@ msgstr "Socket villa %s.  %s"
 
 #: u_translation.rssolardistanc
 msgid "Solar distance"
-msgstr ""
+msgstr "Fjarlægð sólar"
 
 #: u_translation.rssolareclipse
 msgid "Solar eclipses"
-msgstr ""
+msgstr "Sólmyrkvar"
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
-msgstr ""
+msgstr "Álengd sólar"
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
@@ -4511,19 +4568,19 @@ msgstr "Sólkerfi"
 
 #: u_translation.rssolarsystemo
 msgid "Solar system object"
-msgstr ""
+msgstr "Fyrirbæri í sólkerfinu"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr ""
+msgstr "Stillingar sólkerfis"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr ""
+msgstr "Sumum færslum var hafnað, upplýsingar eru í %sreject.txt"
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr ""
+msgstr "Eitthvað fór úrskeiðis við innsetningu forritsins. Það verður að hætta"
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -4531,7 +4588,7 @@ msgstr ""
 
 #: u_translation.rssortby
 msgid "Sort by"
-msgstr ""
+msgstr "Raða eftir"
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
@@ -4547,7 +4604,7 @@ msgstr "Suður"
 
 #: u_translation.rsspectralclas
 msgid "Spectral class"
-msgstr ""
+msgstr "Litrófsflokkur"
 
 #: u_translation.rsspeed
 msgid "Speed"
@@ -4575,7 +4632,7 @@ msgstr "Líklega er ekki búið að setja inn hugbúnað fyrir SQL-grunn!"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr ""
+msgstr "Sqlite gagnagrunnur"
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4587,7 +4644,7 @@ msgstr "S"
 
 #: u_translation.rsstandardcolo
 msgid "Standard  colour"
-msgstr ""
+msgstr "Staðallitur"
 
 #: u_translation.rsstar
 msgid "Star"
@@ -4595,19 +4652,19 @@ msgstr "Stjarna"
 
 #: u_translation.rsstarcolourbv
 msgid "Star colour (B-V):"
-msgstr ""
+msgstr "Litvísir (B-V) :"
 
 #: u_translation.rsstarcommonna
 msgid "Star common name"
-msgstr ""
+msgstr "Algengt nafn stjörnu"
 
 #: u_translation.rsstardisplay
 msgid "Star display"
-msgstr ""
+msgstr "Útlit stjarna"
 
 #: u_translation.rsstarlabel
 msgid "Star label"
-msgstr ""
+msgstr "Tákn stjarna"
 
 #: u_translation.rsstars
 msgid "Stars"
@@ -4615,15 +4672,15 @@ msgstr "Stjörnur"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "
-msgstr ""
+msgstr "Skrár stjarna/djúpfyrirbæra undirbúnar með "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr ""
+msgstr "Bitmap skrár stjarna"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
-msgstr ""
+msgstr "Stjörnusíur"
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
@@ -4631,7 +4688,7 @@ msgstr "Stillingar á eiginhreyfingum stjarna (ef þær eru í stjörnuskránni)
 
 #: u_translation.rsstartmonth
 msgid "Start month"
-msgstr ""
+msgstr "Byrja mánuð"
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
@@ -4643,7 +4700,7 @@ msgstr ""
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
-msgstr ""
+msgstr "Stöðustika"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -4699,7 +4756,7 @@ msgstr "Yfirb."
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr ""
+msgstr "Yfirborðsljósstyrkur"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
@@ -4723,7 +4780,7 @@ msgstr "Samstilla"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"
-msgstr ""
+msgstr "Tunglmánuður"
 
 #: u_translation.rssystem
 msgid "System"
@@ -4731,11 +4788,11 @@ msgstr "Kerfi"
 
 #: u_translation.rssystemprinte
 msgid "System printer"
-msgstr ""
+msgstr "Prentari"
 
 #: u_translation.rssystemsettin
 msgid "System settings"
-msgstr ""
+msgstr "Kerfisstillingar"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -4747,19 +4804,19 @@ msgstr ""
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr ""
+msgstr "%sTafla %s er ekki til staðar! %sVinsamlegast leiðréttu villuna og reyndu aftur."
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
-msgstr ""
+msgstr "%sTafla er til staðar %s"
 
 #: u_translation.rstcpipconnect
 msgid "TCP/IP connection"
-msgstr ""
+msgstr "TCP/IP tenging"
 
 #: u_translation.rstcpipserver
 msgid "TCP/IP server"
-msgstr ""
+msgstr "TCP/IP þjónn"
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
@@ -4779,7 +4836,7 @@ msgstr "Sjónauki ekki tengdur"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
-msgstr ""
+msgstr "Stillingar sjónauka"
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
@@ -4803,7 +4860,7 @@ msgstr "Textagrunnur"
 
 #: u_translation.rstextsize
 msgid "Text size"
-msgstr ""
+msgstr "Stærð texta"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -4827,7 +4884,7 @@ msgstr "Thad eru %s fyrirbaeri a thessu svaedi."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr ""
+msgstr "Þessi aðgerð skrifar yfir allar upplýsingar í gagnagrunninum fyrir landið %s með nýjum upplýsingum frá NGA og GNIS.%sAllar breytingar fyrir þetta land hverfa nema staðsetningar með nýjum nöfnum sem þú hefur sett inn.%sViltu halda áfram?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -4847,11 +4904,11 @@ msgstr "Fim."
 
 #: u_translation.rstilehorizont
 msgid "Tile horizontally"
-msgstr ""
+msgstr "Raða lárétt"
 
 #: u_translation.rstilevertical
 msgid "Tile vertically"
-msgstr ""
+msgstr "Raða lóðrétt"
 
 #: u_translation.rstime
 msgid "Time"
@@ -4863,15 +4920,15 @@ msgstr ""
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
-msgstr ""
+msgstr "Hermun tíma"
 
 #: u_translation.rstimeunits
 msgid "Time units"
-msgstr ""
+msgstr "Tímaein."
 
 #: u_translation.rstimezone
 msgid "Time zone"
-msgstr ""
+msgstr "Tímabelti"
 
 #: u_translation.rsto
 msgid "to"
@@ -4883,19 +4940,19 @@ msgstr "Í dag"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "í skrá:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr ""
+msgstr "Í kvöld"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
-msgstr ""
+msgstr "Tækjastika"
 
 #: u_translation.rstoomanyopenw
 msgid "Too many open windows, please close some charts."
-msgstr ""
+msgstr "Of margir opnir gluggar, lokaðu einhverju korti."
 
 #: u_translation.rstop
 msgid "Top"
@@ -4903,7 +4960,7 @@ msgstr "Toppur"
 
 #: u_translation.rstopocentric
 msgid "Topocentric"
-msgstr ""
+msgstr "Hnitakerfi miðað við athuganda"
 
 #: u_translation.rstotal
 msgid "Totality"
@@ -4911,11 +4968,11 @@ msgstr "Almyrkvi"
 
 #: u_translation.rstotalradius
 msgid "Total radius"
-msgstr ""
+msgstr "Heildarradíus"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr ""
+msgstr "Til þess að nota þessi nýju gögn verðurðu núna að reikna mánaðarlegar upplýsingar"
 
 #: u_translation.rstracking
 msgid "Tracking"
@@ -4939,15 +4996,15 @@ msgstr ""
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
-msgstr ""
+msgstr "Gegnsæjar línur (stjörnumyrkvar)"
 
 #: u_translation.rstriplestar
 msgid "Triple star"
-msgstr ""
+msgstr "Þrístirni"
 
 #: u_translation.rstropicalyear
 msgid "Tropical year"
-msgstr ""
+msgstr "Hvarfár"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -4963,7 +5020,7 @@ msgstr "Rétt sólar"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
-msgstr ""
+msgstr "Trumpler flokkur"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
@@ -5003,11 +5060,11 @@ msgstr "Tegund hnitakerfis"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
-msgstr ""
+msgstr "Tegund fyrirbæris sem bæta á við listann"
 
 #: u_translation.rstypeofvariab
 msgid "Type of variability"
-msgstr ""
+msgstr "Gerð breytistjörnu"
 
 #: u_translation.rsumbra
 msgid "Umbra"
@@ -5027,7 +5084,7 @@ msgstr "Afturkalla"
 
 #: u_translation.rsundolastchan
 msgid "Undo last change"
-msgstr ""
+msgstr "Afturkalla breytingu"
 
 #: u_translation.rsunits
 msgid "Units"
@@ -5039,15 +5096,15 @@ msgstr "Alheimstími"
 
 #: u_translation.rsunknow
 msgid "unknown"
-msgstr ""
+msgstr "Óþekkt"
 
 #: u_translation.rsunknowobject
 msgid "Unknown object"
-msgstr ""
+msgstr "Óþekkt fyrirbæri"
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr ""
+msgstr "Aflæsa korti"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -5059,7 +5116,7 @@ msgstr "Uppfærsla tókst!"
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr ""
+msgstr "Uppfæra eða bæta við núverandi staðsetningu í gagnagrunninum?"
 
 #: u_translation.rsuranus
 msgid "Uranus"
@@ -5079,7 +5136,7 @@ msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr ""
+msgstr "Nota tilbúið litakort :"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5091,7 +5148,7 @@ msgstr ""
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr ""
+msgstr "Nota HTTP Proxy"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
@@ -5103,7 +5160,7 @@ msgstr ""
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr ""
+msgstr "Nota einungis skrá frá sama hópi"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
@@ -5111,11 +5168,11 @@ msgstr ""
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr ""
+msgstr "Notandi:"
 
 #: u_translation.rsusername
 msgid "User name"
-msgstr ""
+msgstr "Notendanafn"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
@@ -5123,7 +5180,7 @@ msgstr ""
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr ""
+msgstr "Nota hlutúrtak svo stærð myndar sé innan við"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
@@ -5131,11 +5188,11 @@ msgstr "Nota kerfistíma"
 
 #: u_translation.rsusetcpipserv
 msgid "Use TCP/IP server"
-msgstr ""
+msgstr "Nota TCP/IP þjón"
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr ""
+msgstr "Notaðu valblað eða \"%s\"-hnappinn til þess að stilla rekilinn."
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
@@ -5143,7 +5200,7 @@ msgstr "Nota eiginhreyfingu til þess að leiðrétta stöðu miðað við uppge
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
-msgstr ""
+msgstr "Svæði fyrir annað nafn"
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
@@ -5151,7 +5208,7 @@ msgstr "Nota Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr ""
+msgstr "Nota skrá %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -5163,15 +5220,15 @@ msgstr "Breytur"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
-msgstr ""
+msgstr "Breytistjarna"
 
 #: u_translation.rsvariablestar2
 msgid "Variable stars"
-msgstr ""
+msgstr "Breytistjörnur"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Hraði"
 
 #: u_translation.rsvenus
 msgid "Venus"
@@ -5195,7 +5252,7 @@ msgstr "Útsýni"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
-msgstr ""
+msgstr "Sjóndeildarhringur"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
@@ -5207,11 +5264,11 @@ msgstr ""
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
-msgstr ""
+msgstr "Það sem sést frá athugunarstaðnum"
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
-msgstr ""
+msgstr "Sýndarbirtustig"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
@@ -5223,11 +5280,11 @@ msgstr ""
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr ""
+msgstr "Viltu sjá fyrirbæri áður en það rís upp á himininn ?"
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr ""
+msgstr "Aðvörun!"
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
@@ -5235,27 +5292,27 @@ msgstr "Aðvörun! Útreikningar á"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Athugið! Sumir brautarstikar smástirna eru útrunnir fyrir meira en 3 árum. Reyndu að finna nýrri fyrir dagsetningu kortsins."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Athugið! Sumir brautarstikar halastjarna eru útrunnir fyrir meira en 3 árum. Reyndu að finna nýrri fyrir dagsetningu kortsins."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr ""
+msgstr "Aðvörun! Núverandi dagsetning og staðsetning gætu hafa breyst frá sjálfgefnum stað/tíma. Þú verður að ýta á Nei og nota %s hnappinn til þess að hverfa aftur til sjálfgefinna gilda, annars gætu þau horfið. Viltu halda áfram?"
 
 #: u_translation.rswarningyouar
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr ""
+msgstr "Aðvörun!%sÞú ert að eyða gagnagrunninum %s og öllu innihaldi hans, jafnvel þó að innihald hans tengist ekki forritinu.%sViltu halda áfram?"
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr ""
+msgstr "Aðvörun! Þú ert að nota fleiri en einn gagnagrunn fyrir sama fyrirbæri. Athugaðu val þitt."
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr ""
+msgstr "Aðvörun !%sÞú hefur valið að bæta gögnum við skrá sem er þegar til staðar.%sSkráin og yfirlitið verða að hafa nákvæmlega sama form því annars verður ruglingur.%sÞað er góð hugmynd að taka afrit af skránum sem eru til staðar áður en haldið er áfram.%sViltu halda áfram ?"
 
 #: u_translation.rswednesday
 msgid "Wed."
@@ -5267,7 +5324,7 @@ msgstr "Vestur"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
-msgstr ""
+msgstr "Hvítt á svörtu"
 
 #: u_translation.rswidth
 msgid "Width"
@@ -5291,7 +5348,7 @@ msgstr "Xplanet er líklega ekki til staðar!"
 
 #: u_translation.rsxplanetretur
 msgid "%s, xplanet returns %s"
-msgstr ""
+msgstr "%s, xplanet skilar %s"
 
 #: u_translation.rsyear
 msgid "Year"
@@ -5311,7 +5368,7 @@ msgstr "Nú geturðu sýnt smástirnið á þesu tímabili."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr ""
+msgstr "Ef þú gáir til stjarna af háu fjalli verður sjóndeildarhringurinn neðar á himninum en við sjávarmál."
 
 #: u_translation.rszenith
 msgid "Zenith"
@@ -5327,17 +5384,17 @@ msgstr "Minnka -"
 
 #: u_translation.rszoomcentre
 msgid "Zoom + and centre on"
-msgstr ""
+msgstr "Aðdr. + Miðja"
 
 #: u_translation.rszoomcentre2
 msgid "Zoom - and centre on"
-msgstr ""
+msgstr "Minnkun - Miðja"
 
 #: u_translation.rszoomin
 msgid "Zoom in"
-msgstr ""
+msgstr "Aðdráttur"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
-msgstr ""
+msgstr "Minnkun"
 

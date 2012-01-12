@@ -1359,6 +1359,18 @@ resourcestring
   rsShowMarkInde = 'Show mark index';
   rsFieldOfVisio2 = 'Field of vision too wide for ARC projection, hiding the '
     +'object below the horizon';
+  rsAbrevAsteroid = 'Ast';
+  rsAbrevComet = 'Com';
+  rsAbrevVariable = 'Var';
+  rsAbrevDouble = 'Dbl';
+  rsAbrevDark = 'Drk';
+  rsAbrevGalaxyCluster = 'Gcl';
+  rsAbrevGalaxy = 'Gx';
+  rsAbrevOpenCluster = 'OC';
+  rsAbrevGlobularCluster = 'Gb';
+  rsAbrevPlanetaryNebula = 'Pl';
+  rsAbrevNebula = 'Nb';
+  rsAbrevClusterNebula = 'C+N';
 
 implementation
 

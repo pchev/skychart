@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-09 17:42+0000\n"
-"PO-Revision-Date: 2012-01-09 17:50+0000\n"
+"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"PO-Revision-Date: 2012-01-10 18:02+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-10 16:44+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-12 11:41+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -59,6 +59,54 @@ msgstr "A propos"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Au sujet de %s"
+
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr "Ast"
+
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr "A+N"
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr "Com"
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr "Obs"
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr "Dbl"
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr "Gx"
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr "AGx"
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr "AG"
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr "Nb"
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr "AO"
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr "Pl"
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr "Var"
 
 #: u_translation.rsaction
 msgid "Action"
