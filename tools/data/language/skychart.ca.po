@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-09 17:42+0000\n"
-"PO-Revision-Date: 2011-12-29 17:16+0000\n"
+"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"PO-Revision-Date: 2012-01-11 17:00+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-10 16:44+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-12 11:40+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -57,6 +57,54 @@ msgstr "Crèdits"
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Referent a %s"
+
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr "Ast"
+
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr "C+N"
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr "Com"
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr "Neb"
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr "Dbl"
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr "Gx"
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr "Clu"
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr "Glb"
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr "Nb"
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr "OC"
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr "Pl"
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr "Var"
 
 #: u_translation.rsaction
 msgid "Action"
@@ -622,7 +670,7 @@ msgstr "Informació sobre la carta"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
+msgstr "Legenda de la carta"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -762,7 +810,7 @@ msgstr "Compilat amb:"
 
 #: u_translation.rscomponent
 msgid "Component"
-msgstr ""
+msgstr "Component"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
@@ -1392,7 +1440,7 @@ msgstr "Distància"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Mesura de la distància"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
@@ -1544,7 +1592,7 @@ msgstr "Modifica el color"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Edita el color de línies DSO"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -1704,7 +1752,7 @@ msgstr "Cada posició"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr ""
+msgstr "Exemple d'objecte definit per l'usuari:Pol nord galàctic"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -1772,7 +1820,7 @@ msgstr "Camp de visió"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
+msgstr "Camp de visió massa ample per la projecció ARC, amagant objectes sota de l'horitzó"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
@@ -3224,7 +3272,7 @@ msgstr "Engegat"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Una cada"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -4320,7 +4368,7 @@ msgstr "Mostra la graella de coordenades"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "Mostra les línies DSO"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -4368,7 +4416,7 @@ msgstr "Mostra les marques del buscador"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
-msgstr ""
+msgstr "Mostra l'índex de marques"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
@@ -4392,7 +4440,7 @@ msgstr "Mostra els objectes"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "Mostra el meridià sols en Alt-Az"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4940,7 +4988,7 @@ msgstr "Traductor:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Transparència"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -5080,7 +5128,7 @@ msgstr "Obre una URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Usa un altre valor de TT-TU"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5124,7 +5172,7 @@ msgstr "Nom usuari"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Usa els sòcols proxy"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

@@ -5326,3 +5326,51 @@ msgstr ""
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
 msgstr ""
 
+#: u_translation:rsabrevasteroid
+msgid "Ast"
+msgstr ""
+
+#: u_translation:rsabrevcomet
+msgid "Com"
+msgstr ""
+
+#: u_translation:rsabrevvariable
+msgid "Var"
+msgstr ""
+
+#: u_translation:rsabrevdouble
+msgid "Dbl"
+msgstr ""
+
+#: u_translation:rsabrevdark
+msgid "Drk"
+msgstr ""
+
+#: u_translation:rsabrevgalaxycluster
+msgid "Gcl"
+msgstr ""
+
+#: u_translation:rsabrevgalaxy
+msgid "Gx"
+msgstr ""
+
+#: u_translation:rsabrevopencluster
+msgid "OC"
+msgstr ""
+
+#: u_translation:rsabrevglobularcluster
+msgid "Gb"
+msgstr ""
+
+#: u_translation:rsabrevplanetarynebula
+msgid "Pl"
+msgstr ""
+
+#: u_translation:rsabrevnebula
+msgid "Nb"
+msgstr ""
+
+#: u_translation:rsabrevclusternebula
+msgid "C+N"
+msgstr ""
+

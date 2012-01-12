@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-09 17:42+0000\n"
-"PO-Revision-Date: 2011-12-29 17:16+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"PO-Revision-Date: 2012-01-11 08:53+0000\n"
+"Last-Translator: Andreas Papalambrou <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-10 16:44+0000\n"
-"X-Generator: Launchpad (build 14640)\n"
+"X-Launchpad-Export-Date: 2012-01-12 11:41+0000\n"
+"X-Generator: Launchpad (build 14664)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -56,6 +56,54 @@ msgstr "Περί..."
 #: u_translation.rsabout2
 msgid "About %s"
 msgstr "Περί %s"
+
+#: u_translation.rsabrevasteroid
+msgid "Ast"
+msgstr ""
+
+#: u_translation.rsabrevclusternebula
+msgid "C+N"
+msgstr ""
+
+#: u_translation.rsabrevcomet
+msgid "Com"
+msgstr ""
+
+#: u_translation.rsabrevdark
+msgid "Drk"
+msgstr ""
+
+#: u_translation.rsabrevdouble
+msgid "Dbl"
+msgstr ""
+
+#: u_translation.rsabrevgalaxy
+msgid "Gx"
+msgstr ""
+
+#: u_translation.rsabrevgalaxycluster
+msgid "Gcl"
+msgstr ""
+
+#: u_translation.rsabrevglobularcluster
+msgid "Gb"
+msgstr ""
+
+#: u_translation.rsabrevnebula
+msgid "Nb"
+msgstr ""
+
+#: u_translation.rsabrevopencluster
+msgid "OC"
+msgstr ""
+
+#: u_translation.rsabrevplanetarynebula
+msgid "Pl"
+msgstr ""
+
+#: u_translation.rsabrevvariable
+msgid "Var"
+msgstr ""
 
 #: u_translation.rsaction
 msgid "Action"
@@ -508,7 +556,7 @@ msgstr "Δεν μπορεί να γίνει εγγραφή σε"
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr ""
+msgstr "Διαδοχικά"
 
 #: u_translation.rscat
 msgid "Cat."
@@ -2869,11 +2917,11 @@ msgstr "λεπτά"
 
 #: u_translation.rsmirrorhorizo
 msgid "Mirror horizontally"
-msgstr ""
+msgstr "Κατοπτρισμός οριζόντια"
 
 #: u_translation.rsmirrorvertic
 msgid "Mirror vertically"
-msgstr ""
+msgstr "Κατοπτρισμός κατακόρυφα"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -4065,11 +4113,11 @@ msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr ""
+msgstr "Περιστροφή αριστερά"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr ""
+msgstr "Περιστροφή δεξιά"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -4081,7 +4129,7 @@ msgstr ""
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr ""
+msgstr "Σάρος"
 
 #: u_translation.rssatellite
 msgid "Satellite"
@@ -4137,7 +4185,7 @@ msgstr ""
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
-msgstr ""
+msgstr "Αποθήκευση ενεργού χάρτη"
 
 #: u_translation.rssavetofile
 msgid "Save to file"
@@ -4302,7 +4350,7 @@ msgstr ""
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr ""
+msgstr "Ρύθμιση ώρας και ημερομηνίας"
 
 #: u_translation.rssetfov
 msgid "Set FOV"
