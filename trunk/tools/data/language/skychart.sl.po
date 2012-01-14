@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-10 17:30+0000\n"
-"PO-Revision-Date: 2012-01-10 16:50+0000\n"
+"PO-Revision-Date: 2012-01-13 17:54+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 11:41+0000\n"
+"X-Launchpad-Export-Date: 2012-01-14 14:16+0000\n"
 "X-Generator: Launchpad (build 14664)\n"
 "Language: en_US\n"
 
@@ -60,51 +60,51 @@ msgstr "Več o %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
-msgstr ""
+msgstr "Ast"
 
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
-msgstr ""
+msgstr "C+N"
 
 #: u_translation.rsabrevcomet
 msgid "Com"
-msgstr ""
+msgstr "Com"
 
 #: u_translation.rsabrevdark
 msgid "Drk"
-msgstr ""
+msgstr "Drk"
 
 #: u_translation.rsabrevdouble
 msgid "Dbl"
-msgstr ""
+msgstr "Dbl"
 
 #: u_translation.rsabrevgalaxy
 msgid "Gx"
-msgstr ""
+msgstr "Gx"
 
 #: u_translation.rsabrevgalaxycluster
 msgid "Gcl"
-msgstr ""
+msgstr "Gcl"
 
 #: u_translation.rsabrevglobularcluster
 msgid "Gb"
-msgstr ""
+msgstr "Gb"
 
 #: u_translation.rsabrevnebula
 msgid "Nb"
-msgstr ""
+msgstr "Nb"
 
 #: u_translation.rsabrevopencluster
 msgid "OC"
-msgstr ""
+msgstr "OC"
 
 #: u_translation.rsabrevplanetarynebula
 msgid "Pl"
-msgstr ""
+msgstr "Pl"
 
 #: u_translation.rsabrevvariable
 msgid "Var"
-msgstr ""
+msgstr "Var"
 
 #: u_translation.rsaction
 msgid "Action"

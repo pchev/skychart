@@ -4,13 +4,13 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-10 17:30+0000\n"
-"PO-Revision-Date: 2011-12-29 17:32+0000\n"
+"PO-Revision-Date: 2012-01-13 13:29+0000\n"
 "Last-Translator: Marc Fokker <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-12 11:41+0000\n"
+"X-Launchpad-Export-Date: 2012-01-14 14:16+0000\n"
 "X-Generator: Launchpad (build 14664)\n"
 
 #: u_translation.rs102cddss
@@ -59,51 +59,51 @@ msgstr "Over %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
-msgstr ""
+msgstr "Ast"
 
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
-msgstr ""
+msgstr "C+N"
 
 #: u_translation.rsabrevcomet
 msgid "Com"
-msgstr ""
+msgstr "Com"
 
 #: u_translation.rsabrevdark
 msgid "Drk"
-msgstr ""
+msgstr "Drk"
 
 #: u_translation.rsabrevdouble
 msgid "Dbl"
-msgstr ""
+msgstr "Dbl"
 
 #: u_translation.rsabrevgalaxy
 msgid "Gx"
-msgstr ""
+msgstr "Gx"
 
 #: u_translation.rsabrevgalaxycluster
 msgid "Gcl"
-msgstr ""
+msgstr "Gcl"
 
 #: u_translation.rsabrevglobularcluster
 msgid "Gb"
-msgstr ""
+msgstr "Gb"
 
 #: u_translation.rsabrevnebula
 msgid "Nb"
-msgstr ""
+msgstr "Nb"
 
 #: u_translation.rsabrevopencluster
 msgid "OC"
-msgstr ""
+msgstr "OC"
 
 #: u_translation.rsabrevplanetarynebula
 msgid "Pl"
-msgstr ""
+msgstr "Pl"
 
 #: u_translation.rsabrevvariable
 msgid "Var"
-msgstr ""
+msgstr "Var"
 
 #: u_translation.rsaction
 msgid "Action"
@@ -667,7 +667,7 @@ msgstr "Kaart informatie"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
+msgstr "Kaart legenda"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -807,7 +807,7 @@ msgstr "Gecompileerd met:"
 
 #: u_translation.rscomponent
 msgid "Component"
-msgstr ""
+msgstr "Component"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
@@ -1356,7 +1356,7 @@ msgstr "Ontkoppeld"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Verschil tussen Terrestrische Tijd en Universele Tijd"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1436,7 +1436,7 @@ msgstr "Afstand"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Afstandsmeting"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
@@ -1588,7 +1588,7 @@ msgstr "Bewerk kleur"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Bewerk kleur deep sky object lijnen"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -1748,7 +1748,7 @@ msgstr "Iedere positie"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr ""
+msgstr "Voorbeeld van gebruikersgedefiniëerd object: Galactische noordpool"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -1816,7 +1816,7 @@ msgstr "Beeldveld"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
+msgstr "Beeldveld te breed voor ARC-projectie, objecten onder de horizon verborgen"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
@@ -2768,7 +2768,7 @@ msgstr "Maximum magnitude"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Maximum rijen"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -3268,7 +3268,7 @@ msgstr "Aan"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Een iedere"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -4200,7 +4200,7 @@ msgstr "Selecteer catalogus"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Selecteer kleur (zwart voor catalogus standaard)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
@@ -4364,7 +4364,7 @@ msgstr "Toon coördinaten rooster"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "Toon deep sky object-lijnen"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -4412,7 +4412,7 @@ msgstr "Toon veldmarkering zoeker/oculair/camera"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
-msgstr ""
+msgstr "Toon markeringsindex"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
@@ -4436,7 +4436,7 @@ msgstr "Toon objecten"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "Toon meridiaan alleen in Alt/Az"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4464,7 +4464,7 @@ msgstr "Toon deze afbeelding"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Toon eigen gedefinieerde objecten"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -4984,7 +4984,7 @@ msgstr "Vertaler:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Transparantie"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -5016,7 +5016,7 @@ msgstr "Trumpler klasse"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UT "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5124,7 +5124,7 @@ msgstr "URL voer commando uit"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Gebruik een andere TT-UT waarde"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5156,7 +5156,7 @@ msgstr "Combineer alleen catalogi binnen dezelfde groep."
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Eigen gedefinieerde objecten"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -5168,7 +5168,7 @@ msgstr "Gebruikersnaam"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Gebruik Socks proxy"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

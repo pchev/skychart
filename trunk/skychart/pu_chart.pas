@@ -2463,10 +2463,12 @@ end;
 if isd2k then begin
   txt:=txt+html_b+rsFrom+blank+'Deepsky software'+':'+htms_b+html_br;
 end else if isvo then begin
-  txt:=txt+html_b+rsFrom+blank+'Virtual Observatory table'+':'+html_br+sc.cfgsc.FindCatname+htms_b+html_br;
+  txt:=txt+html_b+rsFrom+blank+rsVirtualObser+':'+html_br+sc.cfgsc.FindCatname+
+    htms_b+html_br;
 end else begin
   if (sc.cfgsc.FindCat<>'')or(sc.cfgsc.FindCatname<>'') then begin
-    txt:=txt+html_b+rsInformationF+blank+sc.cfgsc.FindCat+':';
+    if sc.cfgsc.FindCat='Star' then txt:=txt+html_b+rsInformationF+':'+blank+rsStars
+      else txt:=txt+html_b+rsInformationF+':'+blank+sc.cfgsc.FindCat;
   end;
   if sc.cfgsc.FindCatname<>'' then begin
     txt:=txt+html_br+sc.cfgsc.FindCatname;
