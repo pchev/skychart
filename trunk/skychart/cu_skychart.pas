@@ -2028,12 +2028,12 @@ begin
          end;
          if rec.star.valid[vsSp] then Desc:=Desc+trim(rec.options.flabel[lOffset+vsSp])+dp+rec.star.sp+tab;
          if rec.star.valid[vsPmra] then begin
-            str(rad2deg*3600*rec.star.pmra:6:3,txt);
-            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmra])+dp+txt+tab;
+            str(rad2deg*3600*1000*rec.star.pmra:6:0,txt);
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmra])+dp+txt+b+'[mas/y]'+tab;
          end;
          if rec.star.valid[vsPmdec] then begin
-            str(rad2deg*3600*rec.star.pmdec:6:3,txt);
-            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmdec])+dp+txt+tab;
+            str(rad2deg*3600*1000*rec.star.pmdec:6:0,txt);
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPmdec])+dp+txt+b+'[mas/y]'+tab;
          end;
          if rec.star.valid[vsEpoch] then begin
             str(rec.star.epoch:8:2,txt);
@@ -2041,11 +2041,11 @@ begin
          end;
          if rec.star.valid[vsPx] then begin
             cfgsc.FindPX:=rec.star.px;
-            str(rec.star.px:6:4,txt);
-            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPx])+dp+txt+tab;
+            str(rec.star.px*1000:6:1,txt);
+            Desc:=Desc+trim(rec.options.flabel[lOffset+vsPx])+dp+txt+b+'[mas]'+tab;
             if rec.star.px>0 then begin
                str(3.2616/rec.star.px:5:1,txt);
-               Desc:=Desc+'Dist:'+txt+b+'ly'+tab;
+               Desc:=Desc+'Dist:'+txt+b+'[ly]'+tab;
             end;
          end;
          if rec.star.valid[vsComment] then
@@ -2200,9 +2200,13 @@ begin
       if rec.vstr[i] and (not rec.options.altname[i]) then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
    end;
  end;
- for i:=1 to 10 do begin
-   if rec.vnum[i] then Desc:=Desc+trim(rec.options.flabel[25+i])+dp+formatfloat('0.0####',rec.num[i])+tab;
- end;
+ for i:=1 to 10 do
+   if rec.vnum[i] then begin
+     buf:=trim(rec.options.flabel[25+i]);
+     txt:=formatfloat('0.0####',rec.num[i]);
+     if (cfgsc.FindCat='Star')and(buf='RV') then txt:=txt+b+'[km/s]';
+     Desc:=Desc+buf+dp+txt+tab;
+   end;
  cfgsc.FindName:=wordspace(cfgsc.FindName);
  cfgsc.FindDesc:=Desc;
  cfgsc.FindNote:='';
