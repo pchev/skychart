@@ -2616,10 +2616,11 @@ end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
-   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,maxpm : double;
+   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,maxpm,rac : double;
    p: coordvector;
    ok,found : boolean;
 begin
+if x2>pi2 then rac:=pi2 else rac:=0;
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
@@ -2825,7 +2826,7 @@ repeat
   PrecessionV(rec.options.EquinoxJD,cfgsc.JDChart,p);
   if cfgsc.ApparentPos then apparent_equatorialV(p,cfgsc,true,true);
   sofa_c2s(p,rec.ra,rec.dec);
-  rec.ra:=rmod(rec.ra+pi2,pi2);
+  rec.ra:=rmod(rec.ra+pi2,pi2)+rac;
   found:=true;
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then found:=false;
