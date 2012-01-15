@@ -1,12 +1,16 @@
-# translation of skychart.en.po translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2008.
+# Turkish translation for skychart
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the skychart package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: skychart.en\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: skychart\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-01-10 17:30+0000\n"
-"PO-Revision-Date: 2011-12-29 17:13+0000\n"
-"Last-Translator: Sáfár Péter <Unknown>\n"
-"Language-Team: <translation@ap-i.net>\n"
+"PO-Revision-Date: 2012-01-01 18:31+0000\n"
+"Last-Translator: zeugma <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,51 +19,47 @@ msgstr ""
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
-msgstr "102 CD DSS"
+msgstr ""
 
 #: u_translation.rs184recommend
-#| msgid "184 (recommended up to 1'000'000 objects)"
 msgid "184 (recommended up to 1,000,000 objects)"
-msgstr "184 (1'000'000 objektumig ajánlott)"
+msgstr ""
 
 #: u_translation.rs50recommende
-#| msgid "50   (recommended up to 100'000 objects)"
 msgid "50   (recommended up to 100,000 objects)"
-msgstr "50   (100'000 objektumig ajánlott)"
+msgstr ""
 
 #: u_translation.rs732recommend
-#| msgid "732 (recommended up to 5'000'000 objects)"
 msgid "732 (recommended up to 5,000,000 objects)"
-msgstr "732 (5'000'000 objektumig ajánlott)"
+msgstr ""
 
 #: u_translation.rs9537largerda
-#| msgid "9537 (larger dataset)"
 msgid "9537 (larger datasets)"
-msgstr "9537 (legnagyobb adathalmaz)"
+msgstr ""
 
 #: u_translation.rsabbreviation
 msgid "Abbreviation"
-msgstr "Rövidítés"
+msgstr ""
 
 #: u_translation.rsabort
 msgid "Abort"
-msgstr "Megszakít"
+msgstr ""
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
-msgstr "Megszakítva a felhasználó által"
+msgstr ""
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Mozgatás megszakítása"
+msgstr ""
 
 #: u_translation.rsabout
 msgid "About"
-msgstr "Névjegy"
+msgstr ""
 
 #: u_translation.rsabout2
 msgid "About %s"
-msgstr "Adatok: %s"
+msgstr ""
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
@@ -111,55 +111,51 @@ msgstr ""
 
 #: u_translation.rsaction
 msgid "Action"
-msgstr "Művelet"
+msgstr ""
 
 #: u_translation.rsactualsystem
 msgid "Actual system time"
-msgstr "Pillanatnyi rendszeridő"
+msgstr ""
 
 #: u_translation.rsad
 msgid "AD"
-msgstr "Kr.u."
+msgstr ""
 
 #: u_translation.rsadd
 msgid "Add"
-msgstr "Hozzáad"
+msgstr ""
 
 #: u_translation.rsaddasingleel
 msgid "Add a single element to the database. All fields are mandatory."
-msgstr "Egy adatsor hozzáadása az adatbázishoz. Minden mező kitöltése kötelező."
+msgstr ""
 
 #: u_translation.rsaddequatoria
-#| msgid "Add Equatorial Grid"
 msgid "Add equatorial grid"
-msgstr "Ekvatoriális háló mutatása"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
 msgstr ""
 
 #: u_translation.rsaddlabel
-#| msgid "Add Label"
 msgid "Add label"
-msgstr "Címke hozzáadása"
+msgstr ""
 
 #: u_translation.rsaddthealtern
-#| msgid "Add the alternate names to the index"
 msgid "Add the alternative names to the index"
-msgstr "Alternatív nevek hozzáadása az indexhez"
+msgstr ""
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Szín telitettség beállítása"
+msgstr ""
 
 #: u_translation.rsadvanced
 msgid "Advanced"
-msgstr "Speciális"
+msgstr ""
 
 #: u_translation.rsadvancedsear
-#| msgid "Advanced Search"
 msgid "Advanced search"
-msgstr "Részletes keresés"
+msgstr ""
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
@@ -167,92 +163,83 @@ msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
-msgstr "Kor"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
-msgstr "Igazítás"
+msgstr ""
 
 #: u_translation.rsall
 msgid "All"
-msgstr "Mindegyik"
+msgstr ""
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr "Minden beállítás"
+msgstr ""
 
 #: u_translation.rsalltablesstr
-#| msgid "%sAll tables structure exists."
 msgid "%sAll table structures exist."
-msgstr "%s Minden szükséges tábla létezik."
+msgstr ""
 
 #: u_translation.rsalltoolsbar
-#| msgid "All Tools Bar"
 msgid "All tool bars"
-msgstr "Minden eszköztár"
+msgstr ""
 
 #: u_translation.rsalsobesureth
-#| msgid "%sAlso be sure the require database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr "%sGyőződj meg arról, hogy a szükséges adatbáziskezelő szoftver installálva van. %sHa nem vagy ebben biztos, használd a dokumentációt. %sValóban folytatni akarod?"
+msgstr ""
 
 #: u_translation.rsalt
 msgid "Alt"
-msgstr "Alt"
+msgstr ""
 
 #: u_translation.rsaltaz
 msgid "Alt-Az"
 msgstr ""
 
 #: u_translation.rsaltazcoord
-#| msgid "Alt/AZ Coord. "
 msgid "Alt/Az coord. "
-msgstr "Alt/Az koord. "
+msgstr ""
 
 #: u_translation.rsaltazcoord2
-#| msgid "Alt/AZ Coord."
 msgid "Alt/Az coord."
-msgstr "Alt/Az koord."
+msgstr ""
 
 #: u_translation.rsaltazcoordin
-#| msgid "Alt-Az Coordinate"
 msgid "Alt-Az coordinates"
-msgstr "Alt/Az koordináta"
+msgstr ""
 
 #: u_translation.rsaltazmount
-#| msgid "Alt/Az Mount"
 msgid "Alt/Az mount"
-msgstr "Alt/Az állvány"
+msgstr ""
 
 #: u_translation.rsaltitude
 msgid "Altitude"
-msgstr "Magasság"
+msgstr ""
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sforgatás függőlegesen:"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr ""
 
 #: u_translation.rsalwaysshowco
-#| msgid "Always show compass rose"
 msgid "Always show the compass rose"
-msgstr "Iránytű állandó mutatása"
+msgstr ""
 
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr ""
 
 #: u_translation.rsannualproper
-#| msgid "Annual Proper Motion"
 msgid "Annual proper motion"
-msgstr "Éves sajátmozgás"
+msgstr ""
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
-msgstr "Anonymous jelszó"
+msgstr ""
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
@@ -260,37 +247,35 @@ msgstr ""
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr "Apparent"
+msgstr ""
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr "Megjelenés"
+msgstr ""
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
-msgstr "Meglevő katalógushoz csatolás "
+msgstr ""
 
 #: u_translation.rsapply
 msgid "Apply"
-msgstr "Alkalmaz"
+msgstr ""
 
 #: u_translation.rsapplychanget
-#| msgid "Apply Change To All Chart"
 msgid "Apply changes to all charts"
-msgstr "A változások alkalmazása minden térképre"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "Pericentrum argumentum-omega"
+msgstr ""
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
 msgstr ""
 
 #: u_translation.rsartificialsa
-#| msgid "Artificial Satellites"
 msgid "Artificial satellites"
-msgstr "Műholdak"
+msgstr ""
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
@@ -302,94 +287,87 @@ msgstr ""
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr "Megerősítés kérése internet kapcsolat létesítése esetén"
+msgstr ""
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
-msgstr "Amilyen a képernyőn (fekete háttér)"
+msgstr ""
 
 #: u_translation.rsasterism
 msgid "Asterism"
-msgstr "Aszterizmus"
+msgstr ""
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
-msgstr "Kisbolygó"
+msgstr ""
 
 #: u_translation.rsasteroidelem
-#| msgid "Asteroid elements in MPC format (one URL by line)"
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Kisbolygó pályaadatok MPC formátumban (egy URL soronként)"
+msgstr ""
 
 #: u_translation.rsasteroidsett
-#| msgid "Asteroid Setting"
 msgid "Asteroid settings"
-msgstr "Kisbolygó beállítások"
+msgstr ""
 
 #: u_translation.rsasteroidsfro
-#| msgid "Asteroids from the file"
 msgid "asteroids from the file"
-msgstr "Kisbolgók a fájlból"
+msgstr ""
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr "Astrometric J2000"
+msgstr ""
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
-msgstr "Csillagászati"
+msgstr ""
 
 #: u_translation.rsastronomical2
-#| msgid "Astronomical Twilight"
 msgid "Astronomical twilight"
-msgstr "Csillagászati szürkület"
+msgstr ""
 
 #: u_translation.rsat
 msgid "at"
-msgstr "óra"
+msgstr ""
 
 #: u_translation.rsatmosphericr
-#| msgid "Atmospheric Refraction"
 msgid "Atmospheric refraction"
-msgstr "Légkör fénytörése"
+msgstr ""
 
 #: u_translation.rsauthors
 msgid "Authors"
-msgstr "Szerzők"
+msgstr ""
 
 #: u_translation.rsautomatic
 msgid "Automatic"
-msgstr "Automatikus"
+msgstr ""
 
 #: u_translation.rsautomaticall
 msgid "Automatically start a local server if not already running"
-msgstr "A helyi szerver automatikus elindítása, ha még nem fut"
+msgstr ""
 
 #: u_translation.rsautorefresh
-#| msgid "AutoRefresh"
 msgid "Auto-refresh"
-msgstr "Automatikus frissítés"
+msgstr ""
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Auto frissítés "
+msgstr ""
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
-msgstr "Kiegészítő fájlok"
+msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr "Az"
+msgstr ""
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
-msgstr "Azimut"
+msgstr ""
 
 #: u_translation.rsazimuthalcoo
-#| msgid "Azimuthal Coordinate"
 msgid "Azimuthal coordinates"
-msgstr "Azimutális koordináta"
+msgstr ""
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
@@ -397,11 +375,11 @@ msgstr ""
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sforgatás vízszintesen:"
+msgstr ""
 
 #: u_translation.rsb
 msgid "B"
-msgstr "B"
+msgstr ""
 
 #: u_translation.rsback
 msgid "Back"
@@ -409,33 +387,31 @@ msgstr ""
 
 #: u_translation.rsbackground
 msgid "Background"
-msgstr "Háttér"
+msgstr ""
 
 #: u_translation.rsbackgroundpi
-#| msgid "Background Picture"
 msgid "Background picture"
-msgstr "Háttérkép"
+msgstr ""
 
 #: u_translation.rsbattery
 msgid "Battery"
 msgstr ""
 
 #: u_translation.rsbayerletter
-#| msgid "Bayer Letter"
 msgid "Bayer letter"
-msgstr "Bayer betü"
+msgstr ""
 
 #: u_translation.rsbc
 msgid "BC"
-msgstr "Kr.e."
+msgstr ""
 
 #: u_translation.rsbeginprocess
 msgid "Begin processing for jd=%s / %s"
-msgstr "Adatok feldolgozása: JD=%s / %s"
+msgstr ""
 
 #: u_translation.rsbelowthehori
 msgid "Below the horizon"
-msgstr "A horizont alatt"
+msgstr ""
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
@@ -443,97 +419,87 @@ msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
-msgstr "Nagy csillagok"
+msgstr ""
 
 #: u_translation.rsbii
 msgid "BII"
-msgstr "BII"
+msgstr ""
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr "Bináris indexelt katalógus"
+msgstr ""
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
-msgstr "Bitmap"
+msgstr ""
 
 #: u_translation.rsbitmapfile
-#| msgid "Bitmap File"
 msgid "Bitmap file"
-msgstr "Bitmap fájl"
+msgstr ""
 
 #: u_translation.rsblackonwhite
-#| msgid "Black on White"
 msgid "Black on white"
-msgstr "Fehér a feketén"
+msgstr ""
 
 #: u_translation.rsblackwhite
-#| msgid "Black/White"
 msgid "Black/white"
-msgstr "Fekete/fehér"
+msgstr ""
 
 #: u_translation.rsblackwhiteli
-#| msgid "Black/White, Line mode"
 msgid "Black/white, line mode"
-msgstr "Fekete/fehér, körvonal"
+msgstr ""
 
 #: u_translation.rsblinkingpict
-#| msgid "Blinking Picture"
 msgid "Blinking picture"
-msgstr "Villogó kép"
+msgstr ""
 
 #: u_translation.rsblue
 msgid "Blue"
-msgstr "Kék"
+msgstr ""
 
 #: u_translation.rsbluemagnitud
-#| msgid "Blue Magnitude"
 msgid "Blue magnitude"
-msgstr "Kék magnitúdó"
+msgstr ""
 
 #: u_translation.rsbottom
 msgid "Bottom"
-msgstr "Alján"
+msgstr ""
 
 #: u_translation.rsboundary
 msgid "Boundary"
-msgstr "Határok"
+msgstr ""
 
 #: u_translation.rsbrighter
 msgid "Brighter"
-msgstr "Fényesebb"
+msgstr ""
 
 #: u_translation.rsbrighteststa
-#| msgid "Brightest Star Magnitude"
 msgid "Brightest star magnitude"
-msgstr "Legfényesebb csillag magnitúdója"
+msgstr ""
 
 #: u_translation.rsbrightnebula
-#| msgid "Bright Nebula"
 msgid "Bright nebula"
-msgstr "Fényes köd"
+msgstr ""
 
 #: u_translation.rsbrightneo
 msgid "Bright + NEO + TNO"
-msgstr "Fényes + NEO + TNO"
+msgstr ""
 
 #: u_translation.rsbrightness
 msgid "Brightness"
-msgstr "Fényesség"
+msgstr ""
 
 #: u_translation.rsbrightstars
 msgid "Bright stars"
-msgstr "Fényes csillagok"
+msgstr ""
 
 #: u_translation.rsbrightstarss
-#| msgid "Bright Stars Size"
 msgid "Bright star size"
-msgstr "A fényes csillagok mérete"
+msgstr ""
 
 #: u_translation.rsbuildcatalog
-#| msgid "Build Catalog"
 msgid "Build catalog"
-msgstr "Kat.felépítése"
+msgstr ""
 
 #: u_translation.rsby
 msgid "by"
@@ -545,19 +511,19 @@ msgstr ""
 
 #: u_translation.rscalendar
 msgid "Calendar"
-msgstr "Kalendárium"
+msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
-msgstr "Vissza"
+msgstr ""
 
 #: u_translation.rscancel2
 msgid "Cancel %s"
-msgstr "Megszakít %s"
+msgstr ""
 
 #: u_translation.rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr "Megszakítás, hibás zip fájl? %s"
+msgstr ""
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
@@ -577,7 +543,7 @@ msgstr ""
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
-msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
+msgstr ""
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
@@ -585,19 +551,19 @@ msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
-msgstr "Lépcsőzetes rendezés"
+msgstr ""
 
 #: u_translation.rscat
 msgid "Cat."
-msgstr "Kat."
+msgstr ""
 
 #: u_translation.rscatalog
 msgid "Catalog"
-msgstr "Katalógus"
+msgstr ""
 
 #: u_translation.rscataloglongn
 msgid "Catalog long name"
-msgstr "Katalógus hoisszú név"
+msgstr ""
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
@@ -605,119 +571,103 @@ msgstr ""
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Katalógus rövid név"
+msgstr ""
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
-msgstr "Katalógus beállítások"
+msgstr ""
 
 #: u_translation.rscatalogtype
 msgid "Catalog type"
-msgstr "Katalógus típus"
+msgstr ""
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%sCCW"
+msgstr ""
 
 #: u_translation.rscdcnebulae
-#| msgid "CdC Deep Sky"
 msgid "CdC deep sky"
-msgstr "CdC mélyég katalógusok"
+msgstr ""
 
 #: u_translation.rscdcnebulaeca
-#| msgid "CDC Deep Sky Catalog Setting"
 msgid "CdC deep sky catalogs and settings"
-msgstr "CdC mélyég katalógusok beállítása"
+msgstr ""
 
 #: u_translation.rscdcobsoletec
-#| msgid "Obsolete CDC Catalog (but you can still use them)"
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Kifutó CdC katalógusok (még használható)"
+msgstr ""
 
 #: u_translation.rscdcstars
-#| msgid "CdC Stars"
 msgid "CdC stars"
-msgstr "CdC csillag katalógusok"
+msgstr ""
 
 #: u_translation.rscdcstarscata
-#| msgid "CDC Stars Catalog Setting"
 msgid "CdC star catalogs and settings"
-msgstr "CdC csillag katalógusok beállítása"
+msgstr ""
 
 #: u_translation.rscdctranslator
-#| msgid "CDCTranslator"
 msgid "Patrick Chevalley, Marc Fokker"
-msgstr "ÍziRájderCsillag(fordító)Klub"
+msgstr ""
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr "Középre"
+msgstr ""
 
 #: u_translation.rscentering
 msgid "Centering"
 msgstr ""
 
 #: u_translation.rscenterobject
-#| msgid "Center Object"
 msgid "Centre on this object"
-msgstr "Középre"
+msgstr ""
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
-msgstr "Centrálmeridián"
+msgstr ""
 
 #: u_translation.rscentralstarb
-#| msgid "Central Star B Magnitude"
 msgid "Central star B magnitude"
-msgstr "központi csilag B magnitúdó"
+msgstr ""
 
 #: u_translation.rscentralstarv
-#| msgid "Central Star V Magnitude"
 msgid "Central star V magnitude"
-msgstr "központi csilag V magnitúdó"
+msgstr ""
 
 #: u_translation.rscentre
-#| msgid "Centre"
 msgid "Centre on"
-msgstr "Középre"
+msgstr ""
 
 #: u_translation.rschangedrawin
-#| msgid "Change Drawing Mode"
 msgid "Change drawing mode"
-msgstr "Megjelenítés módja"
+msgstr ""
 
 #: u_translation.rschangepictur
-#| msgid "Change pictures display"
 msgid "Change the displayed picture"
-msgstr "Képek megjelenítésének megváltoztatása"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr "A program újra indul, ha megváltoztatod a beállításokat!"
+msgstr ""
 
 #: u_translation.rschart
 msgid "Chart"
-msgstr "Térkép"
+msgstr ""
 
 #: u_translation.rschart2
-#| msgid "chart :"
 msgid "chart:"
-msgstr "térkép:"
+msgstr ""
 
 #: u_translation.rschartcoordin
-#| msgid "Chart, Coordinates"
 msgid "Chart, coordinates"
-msgstr "Térkép, koordináták"
+msgstr ""
 
 #: u_translation.rschartcoordin2
-#| msgid "Chart Coordinate System"
 msgid "Chart coordinate systems"
-msgstr "Térkép koordináta rendszere"
+msgstr ""
 
 #: u_translation.rschartinforma
-#| msgid "Chart Information"
 msgid "Chart information"
-msgstr "Térkép információk"
+msgstr ""
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
@@ -725,37 +675,35 @@ msgstr ""
 
 #: u_translation.rscharts
 msgid "Charts"
-msgstr "Térképek"
+msgstr ""
 
 #: u_translation.rschartsetting
-#| msgid "Chart Setting"
 msgid "Chart settings"
-msgstr "Térkép beállítások"
+msgstr ""
 
 #: u_translation.rschart_
 msgid "Chart_"
-msgstr "Térkép_"
+msgstr ""
 
 #: u_translation.rscheck
 msgid "Check"
-msgstr "Ellenőriz"
+msgstr ""
 
 #: u_translation.rschoosecolour
-#| msgid "Choose colours for object type"
 msgid "Choose colours for the object types"
-msgstr "Válassz színt az objektum típusához"
+msgstr ""
 
 #: u_translation.rscircle
 msgid "Circle"
-msgstr "Kör"
+msgstr ""
 
 #: u_translation.rscircumpolar
 msgid "Circumpolar"
-msgstr "Cirkumpoláris"
+msgstr ""
 
 #: u_translation.rsclass
 msgid "Class"
-msgstr "Osztály"
+msgstr ""
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
@@ -770,139 +718,124 @@ msgid "Clear Target"
 msgstr ""
 
 #: u_translation.rsclicktochang
-#| msgid "Click to change the color "
 msgid "Click to change the colour "
-msgstr "Szín megváltoztatása "
+msgstr ""
 
 #: u_translation.rsclientconnec
-#| msgid "Client Connection Keep Alive"
 msgid "Client connection keep alive"
-msgstr "Kliens kapcsolatok fenntartása"
+msgstr ""
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr "Óra"
+msgstr ""
 
 #: u_translation.rsclose
 msgid "Close"
-msgstr "Bezár"
+msgstr ""
 
 #: u_translation.rsclosechart
-#| msgid "Close Chart"
 msgid "Close chart"
-msgstr "Térkép bezárása"
+msgstr ""
 
 #: u_translation.rscloseconnect
-#| msgid "Close Connection"
 msgid "Close connection"
-msgstr "Kapcsolat bezárása"
+msgstr ""
 
 #: u_translation.rsclosedcontou
 msgid "Closed contour"
-msgstr "Bezárt körvonal"
+msgstr ""
 
 #: u_translation.rsclosefiles
 msgid "Close files"
-msgstr "Fájl bezárása"
+msgstr ""
 
 #: u_translation.rsclosingconne
 msgid "Closing connection"
-msgstr "Kapcsolat bezárás"
+msgstr ""
 
 #: u_translation.rsclusterandne
-#| msgid "Cluster and Nebula"
 msgid "Cluster and nebula"
-msgstr "Halmaz és köd"
+msgstr ""
 
 #: u_translation.rscolor
-#| msgid "Color"
 msgid "Colour"
-msgstr "Szín"
+msgstr ""
 
 #: u_translation.rscolorindex
-#| msgid "Color Index"
 msgid "Colour index"
-msgstr "Színindex"
+msgstr ""
 
 #: u_translation.rscolorlinemod
-#| msgid "Color, Line mode"
 msgid "Colour, line mode"
-msgstr "Színes, körvonal"
+msgstr ""
 
 #: u_translation.rscolorsaturat
-#| msgid "Color saturation"
 msgid "Colour saturation"
-msgstr "Szín szaturáció"
+msgstr ""
 
 #: u_translation.rscomet
 msgid "Comet"
-msgstr "Üstökös"
+msgstr ""
 
 #: u_translation.rscometelement
-#| msgid "Comet elements in MPC format (one URL by line) "
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Üstökös pályaadatok MPC formátumban (egy URL soronként)"
+msgstr ""
 
 #: u_translation.rscometsetting
-#| msgid "Comet Setting"
 msgid "Comet settings"
-msgstr "üstökös beállítások"
+msgstr ""
 
 #: u_translation.rscommandfound
 msgid "Command found OK."
-msgstr "A parancs rendben."
+msgstr ""
 
 #: u_translation.rscommandnotfo
 msgid "Command not found!"
-msgstr "A parancs nem található!"
+msgstr ""
 
 #: u_translation.rscommandtouse
 msgid "Command to use to process the file."
-msgstr "A fájl feldolgozásához használt parancs"
+msgstr ""
 
 #: u_translation.rscommonname
-#| msgid "Common Name"
 msgid "Common name"
-msgstr "Ismert név"
+msgstr ""
 
 #: u_translation.rscompassroses
 msgid "Compass rose size"
-msgstr "Iránytű mérete"
+msgstr ""
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr "Program fordítása:"
+msgstr ""
 
 #: u_translation.rscomponent
 msgid "Component"
 msgstr ""
 
 #: u_translation.rscomponent1ma
-#| msgid "Component 1 Magnitude"
 msgid "Component 1 magnitude"
-msgstr "Az 1. komponens magnitúdója"
+msgstr ""
 
 #: u_translation.rscomponent2ma
-#| msgid "Component 2 Magnitude"
 msgid "Component 2 magnitude"
-msgstr "A 2. komponens magnitúdója"
+msgstr ""
 
 #: u_translation.rscompute
 msgid "Compute"
-msgstr "Számítás"
+msgstr ""
 
 #: u_translation.rscomputeaster
 msgid "Compute asteroid data for this month"
-msgstr "A kisbolygó adatok számítása a hónapra."
+msgstr ""
 
 #: u_translation.rscomputefield
-#| msgid "Compute Field"
 msgid "Compute field"
-msgstr "Mező számítása"
+msgstr ""
 
 #: u_translation.rsconfiguratio
 msgid "Configuration"
-msgstr "Beállítások"
+msgstr ""
 
 #: u_translation.rsconfigure
 msgid "Configure"
@@ -910,7 +843,7 @@ msgstr ""
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
-msgstr "Program beállításai"
+msgstr ""
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
@@ -925,119 +858,104 @@ msgid "Connected"
 msgstr ""
 
 #: u_translation.rsconnectedfro
-#| msgid "%s connected from %s, using chart %s, connect time:%s"
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s kapcsolódott %s-ról, a %s térkép használata, kapcsolódás ideje: %s"
+msgstr ""
 
 #: u_translation.rsconnectedtos
-#| msgid "Connected to SQL database %s"
 msgid "Connected to the SQL database %s"
-msgstr "Kapcsolódás SQL adatbázishoz %s"
+msgstr ""
 
 #: u_translation.rsconnectionli
 msgid "Connection lines between each position"
-msgstr "Összekötő vonalak a lépések között"
+msgstr ""
 
 #: u_translation.rsconnectteles
-#| msgid "Connect Telescope"
 msgid "Connect telescope"
-msgstr "Vezérlőpult"
+msgstr ""
 
 #: u_translation.rsconnecttofai
-#| msgid "Connect to %s, %s failed! %sVerify if the MySQL Server is running and control the Userid/Password"
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
-msgstr "Kapcsolódás %s-hoz, %s sikertelen! %s Ellenőrizd hogy a MySQL szerver üzemel, valamint a felhasználónevet és jelszót."
+msgstr ""
 
 #: u_translation.rsconnecttosuc
-#| msgid "Connect to %s, %s successful.%s"
 msgid "Connection to %s, %s successful.%s"
-msgstr "Kapcsolódás %s-hez, %s sikeres. %s"
+msgstr ""
 
 #: u_translation.rsconstellatio
 msgid "Constellation"
-msgstr "Csillagkép"
+msgstr ""
 
 #: u_translation.rsconstellatio2
-#| msgid "Constellation Figures"
 msgid "Constellation figures"
-msgstr "Csillagkép ábrák"
+msgstr ""
 
 #: u_translation.rsconstellatio3
-#| msgid "Constellation Figure File Name : "
 msgid "Constellation figures file name: "
-msgstr "Csillagkép ábrák file név: "
+msgstr ""
 
 #: u_translation.rsconstellatio4
-#| msgid "Constellation Boundaries"
 msgid "Constellation boundaries"
-msgstr "Csillagképek határai"
+msgstr ""
 
 #: u_translation.rsconstellatio5
-#| msgid "Constellation Boundary File Name : "
 msgid "Constellation boundaries file name: "
-msgstr "Csillagkép határok file név: "
+msgstr ""
 
 #: u_translation.rsconstellatio6
-#| msgid "Constellation Label"
 msgid "Constellation label"
-msgstr "Csillagkép címke"
+msgstr ""
 
 #: u_translation.rsconstellatio7
 msgid "Constellation name"
-msgstr "Csillagkép neve"
+msgstr ""
 
 #: u_translation.rscontrast
 msgid "Contrast"
-msgstr "Kontraszt"
+msgstr ""
 
 #: u_translation.rscontrolpanel
-#| msgid "Control Panel"
 msgid "Control panel"
-msgstr "Vezérlőpult"
+msgstr ""
 
 #: u_translation.rscontrolpanel2
-#| msgid "Control Panel command "
 msgid "Control panel command "
-msgstr "Vezérlőpult parancs "
+msgstr ""
 
 #: u_translation.rsconvertcatal
 msgid "Convert catalog file %s"
-msgstr "Katalógus fájl konvertálása %s"
+msgstr ""
 
 #: u_translation.rsconvertcatal2
 msgid "Convert catalog files"
-msgstr "Katalógus fájl konvertálása"
+msgstr ""
 
 #: u_translation.rscoord
 msgid "Coord."
-msgstr "Koord."
+msgstr ""
 
 #: u_translation.rscoordgrid
-#| msgid "Coord. Grid"
 msgid "Coord. grid"
-msgstr "Koord.háló"
+msgstr ""
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
-msgstr "Koordináták:"
+msgstr ""
 
 #: u_translation.rscoordinates2
 msgid "Coordinates"
 msgstr ""
 
 #: u_translation.rscoordinatese
-#| msgid "Coordinates Equinox"
 msgid "Coordinates equinox"
-msgstr "Tavaszpont koordinátája"
+msgstr ""
 
 #: u_translation.rscoordinatesg
-#| msgid "Coordinates Grid"
 msgid "Coordinates grid"
-msgstr "Koordináta hálók"
+msgstr ""
 
 #: u_translation.rscopy
 msgid "Copy"
-msgstr "Másolás"
+msgstr ""
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
@@ -1045,12 +963,11 @@ msgstr ""
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
-msgstr "Másolás innen:"
+msgstr ""
 
 #: u_translation.rscoreradius
-#| msgid "Core Radius"
 msgid "Core radius"
-msgstr "Mag sugara"
+msgstr ""
 
 #: u_translation.rscorrelated
 msgid "Correlated"
@@ -1058,37 +975,35 @@ msgstr ""
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
-msgstr "A könyvtár betöltése nem lehetséges "
+msgstr ""
 
 #: u_translation.rscountrytimez
-#| msgid "Country Timezone"
 msgid "Country timezone"
-msgstr "Ország időzónája"
+msgstr ""
 
 #: u_translation.rscreateanewch
 msgid "Create a new chart"
-msgstr "Új térkép"
+msgstr ""
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "Kereső index fájl készítése"
+msgstr ""
 
 #: u_translation.rscreatedataba
-#| msgid "Create Database"
 msgid "Create database"
-msgstr "Új adatbázis"
+msgstr ""
 
 #: u_translation.rscreatefiles
 msgid "Create files"
-msgstr "Új fájl"
+msgstr ""
 
 #: u_translation.rscreateheader
 msgid "Create header"
-msgstr "Fejléc készítése"
+msgstr ""
 
 #: u_translation.rscreatepostsc
 msgid "Create postscript chart. Please wait..."
-msgstr "Postscript térkép készítése. Kérem várj..."
+msgstr ""
 
 #: u_translation.rscreateraster
 msgid "Create raster chart at %s dpi. Please wait..."
@@ -1096,12 +1011,11 @@ msgstr ""
 
 #: u_translation.rsculmination
 msgid "Culmination"
-msgstr "Delel"
+msgstr ""
 
 #: u_translation.rscurrentdate
-#| msgid "Current Date"
 msgid "Date of validity"
-msgstr "Aktuális dátum"
+msgstr ""
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
@@ -1113,71 +1027,63 @@ msgstr ""
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%sCW"
+msgstr ""
 
 #: u_translation.rsdarknebula
-#| msgid "Dark Nebula"
 msgid "Dark nebula"
-msgstr "Sötétköd"
+msgstr ""
 
 #: u_translation.rsdash1
 msgid "Dash"
-msgstr "Szaggatott"
+msgstr ""
 
 #: u_translation.rsdashdot1
-#| msgid "Dash Dot"
 msgid "Dash dot"
-msgstr "Vonás pont"
+msgstr ""
 
 #: u_translation.rsdashdotdot1
-#| msgid "Dash Dot Dot"
 msgid "Dash dot dot"
-msgstr "Vonás pont pont"
+msgstr ""
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Adatbázis helye: "
+msgstr ""
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
-msgstr "%sAdatbázis %s nyitva. %s"
+msgstr ""
 
 #: u_translation.rsdatabasesett
 msgid "Database setting..."
-msgstr "Adatbázis beállítások..."
+msgstr ""
 
 #: u_translation.rsdatabasetype
-#| msgid "Database Type"
 msgid "Database type"
-msgstr "Adatbázis tipusa"
+msgstr ""
 
 #: u_translation.rsdatabits
 msgid "Data bits"
 msgstr ""
 
 #: u_translation.rsdatafiles
-#| msgid "Data Files :"
 msgid "Data files:"
-msgstr "Adatfájlok:"
+msgstr ""
 
 #: u_translation.rsdatafilescdr
-#| msgid "Data Files, CDrom"
 msgid "Data files, CD-ROM"
-msgstr "Adatfájlok, CDRom"
+msgstr ""
 
 #: u_translation.rsdatamaintena
-#| msgid "Data Maintenance"
 msgid "Data maintenance"
-msgstr "Adatok karbantartása"
+msgstr ""
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
 msgstr ""
 
 #: u_translation.rsdatastartonl
-#| msgid "Data start on line %s"
 msgid "Data starts on line %s"
-msgstr "Adatok kezdete: %s sor"
+msgstr ""
 
 #: u_translation.rsdatatype
 msgid "Data Type"
@@ -1185,63 +1091,59 @@ msgstr ""
 
 #: u_translation.rsdate
 msgid "Date"
-msgstr "Dátum"
+msgstr ""
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
 msgstr ""
 
 #: u_translation.rsdateformat
-#| msgid "Date Format"
 msgid "Date format"
-msgstr "Dátumforma"
+msgstr ""
 
 #: u_translation.rsdatefrom
 msgid "Date from"
-msgstr "Dátumtól"
+msgstr ""
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
 msgstr ""
 
 #: u_translation.rsdatetime
-#| msgid "Date / Time"
 msgid "Date / time"
-msgstr "Dátum/Idő"
+msgstr ""
 
 #: u_translation.rsdatetime2
-#| msgid "Date/Time"
 msgid "Date/time"
-msgstr "Dátum/Idő"
+msgstr ""
 
 #: u_translation.rsday
 msgid "Day"
-msgstr "Nap"
+msgstr "Gün"
 
 #: u_translation.rsdays
 msgid "days"
-msgstr "naponta"
+msgstr ""
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Nappal"
+msgstr ""
 
 #: u_translation.rsdbinsertfail
-#| msgid "DB insert failed for %s :%s"
 msgid "DB insert failed for %s: %s"
-msgstr "Sikertelen DB beszúrás %s : %s"
+msgstr ""
 
 #: u_translation.rsdbname
 msgid "DB Name:"
-msgstr "DB név:"
+msgstr ""
 
 #: u_translation.rsde
 msgid "DE"
-msgstr "DE"
+msgstr ""
 
 #: u_translation.rsdec
 msgid "DEC"
-msgstr "DEC"
+msgstr ""
 
 #: u_translation.rsdecelpeccomp
 msgid "DEC/EL PEC Compensation"
@@ -1253,11 +1155,11 @@ msgstr ""
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
-msgstr "Tizedes fokok"
+msgstr ""
 
 #: u_translation.rsdecimalhours
 msgid "Decimal hours"
-msgstr "Tizedes órák"
+msgstr ""
 
 #: u_translation.rsdecimalsouth
 msgid "Decimal south polar distance"
@@ -1265,74 +1167,67 @@ msgstr ""
 
 #: u_translation.rsdeclination
 msgid "Declination"
-msgstr "Deklináció"
+msgstr ""
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
-msgstr "DEC opciók"
+msgstr ""
 
 #: u_translation.rsdecrease
 msgid "Decrease"
 msgstr ""
 
 #: u_translation.rsdecrementtim
-#| msgid "Decrement Time"
 msgid "Decrement time"
-msgstr "Idő vissza"
+msgstr ""
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC forgatás: "
+msgstr ""
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC forgatás:"
+msgstr ""
 
 #: u_translation.rsdeepskycolou
-#| msgid "Deep-sky colour"
 msgid "Deep sky colour"
-msgstr "Mélyég szín"
+msgstr ""
 
 #: u_translation.rsdeepskyobjec
 msgid "Deep sky object colour"
-msgstr "Mélyég objektum színe"
+msgstr ""
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "Alapért."
+msgstr ""
 
 #: u_translation.rsdefaultbutto
-#| msgid "Default Button"
 msgid "Default button"
-msgstr "Normál megjelenítés esetén"
+msgstr ""
 
 #: u_translation.rsdefaultcolor
-#| msgid "Default color"
 msgid "Default colour"
-msgstr "Alapértelmezett szín"
+msgstr ""
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "Alapértelmezett címke"
+msgstr ""
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
 msgstr ""
 
 #: u_translation.rsdefaultmargi
-#| msgid "Default Margin"
 msgid "Default margin"
-msgstr "Alapért. margó"
+msgstr ""
 
 #: u_translation.rsdefaultnebul
-#| msgid "Default Nebulae parameters"
 msgid "Default nebulae parameters"
-msgstr "Ködök alapértelmezett paraméterei"
+msgstr ""
 
 #: u_translation.rsdefaultoutli
-#| msgid "Default Outline parameters"
 msgid "Default outline parameters"
-msgstr "Körvonal alapértelmezett értékei"
+msgstr ""
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
@@ -1340,24 +1235,23 @@ msgstr ""
 
 #: u_translation.rsdeg
 msgid "d"
-msgstr "°"
+msgstr "d"
 
 #: u_translation.rsdegree
 msgid "Degree"
-msgstr "Fok"
+msgstr ""
 
 #: u_translation.rsdegreegridsp
-#| msgid "Degree Grid Spacing"
 msgid "Declination grid"
-msgstr "Fokok beosztása"
+msgstr ""
 
 #: u_translation.rsdegrees
 msgid "degrees"
-msgstr "fokok"
+msgstr ""
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, secondes"
-msgstr "Fok, perc, másodperc"
+msgstr ""
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
@@ -1365,83 +1259,75 @@ msgstr ""
 
 #: u_translation.rsdelete
 msgid "Delete"
-msgstr "Töröl"
+msgstr ""
 
 #: u_translation.rsdeletecomple
 msgid "Delete completed"
-msgstr "A törlés sikeres"
+msgstr ""
 
 #: u_translation.rsdeletedailyd
-#| msgid "Delete daily data"
 msgid "Deleting the daily data"
-msgstr "Napi adatok törlése"
+msgstr ""
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
-msgstr "A törlés sikeres"
+msgstr ""
 
 #: u_translation.rsdeletefromel
-#| msgid "Delete from element table..."
 msgid "Deleting from the element table..."
-msgstr "Törlés az alap táblázatból..."
+msgstr ""
 
 #: u_translation.rsdeletefromel2
-#| msgid "Delete from element list..."
 msgid "Deleting from the element list..."
-msgstr "Törlés az alap listából..."
+msgstr ""
 
 #: u_translation.rsdeletefrommo
-#| msgid "Deleting from the monthly table for jd<%s"
 msgid "Deleting from the monthly table ..."
-msgstr "Törlés a havi táblából..."
+msgstr ""
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
-msgstr "Törlés a havi táblából, JD<%s"
+msgstr ""
 
 #: u_translation.rsdeletefromna
-#| msgid "Delete from name list..."
 msgid "Deleting from the name list..."
-msgstr "Törlés a névlistából..."
+msgstr ""
 
 #: u_translation.rsdeletemonthl
-#| msgid "Delete Monthly data "
 msgid "Delete monthly data "
-msgstr "Havi adatok törlése "
+msgstr ""
 
 #: u_translation.rsdeletemonthl2
-#| msgid "Delete Monthly data older than "
 msgid "Delete monthly data older than "
-msgstr "Havi adatok törlése ami régebbi mint "
+msgstr ""
 
 #: u_translation.rsdeletempcdat
 msgid "Delete MPC data selectively"
-msgstr "MPC adatok törlése egyenként"
+msgstr ""
 
 #: u_translation.rsdeleteprevio
 msgid "Delete previous data for this date."
-msgstr "Az ettől régebbi adatok törlése."
+msgstr ""
 
 #: u_translation.rsdeletethecur
-#| msgid "Delete the current location from the database ?"
 msgid "Delete the current location from the database?"
-msgstr "Valóban törölni akarod a jelenlegi helyet az adatbázisból?"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
-msgstr "A látható horizont süllyedése"
+msgstr ""
 
 #: u_translation.rsdesc
 msgid "desc:"
-msgstr "leirés:"
+msgstr ""
 
 #: u_translation.rsdescription
 msgid "Description"
-msgstr "Leírás"
+msgstr ""
 
 #: u_translation.rsdesignation
 msgid "Designation"
-msgstr "Jelölés"
+msgstr ""
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
@@ -1449,12 +1335,11 @@ msgstr ""
 
 #: u_translation.rsdetails
 msgid "Details"
-msgstr "Információs ablak"
+msgstr ""
 
 #: u_translation.rsdeviceport
-#| msgid "Device Port "
 msgid "Device port "
-msgstr "Port használata "
+msgstr ""
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
@@ -1462,11 +1347,11 @@ msgstr ""
 
 #: u_translation.rsdiam
 msgid "Diam."
-msgstr "Átm."
+msgstr ""
 
 #: u_translation.rsdiameter
 msgid "Diameter"
-msgstr "Átmérő"
+msgstr ""
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
@@ -1477,30 +1362,28 @@ msgid "Difference between Terrestrial Time and Universal Time"
 msgstr ""
 
 #: u_translation.rsdifferenttha
-#| msgid "%s (different than configured port, maybe busy or other error.)"
 msgid "%s (different than the configured port, maybe busy or other error.)"
-msgstr "%s (különböző a beállított porttól, foglalt, vagy más hiba.)"
+msgstr ""
 
 #: u_translation.rsdimension
 msgid "Dimension"
-msgstr "Méretek"
+msgstr ""
 
 #: u_translation.rsdimensionand
-#| msgid "Dimension and Units"
 msgid "Dimension and units"
-msgstr "Méret és egysége"
+msgstr ""
 
 #: u_translation.rsdir
 msgid "Dir"
-msgstr "Dir"
+msgstr ""
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "Könyvtár"
+msgstr ""
 
 #: u_translation.rsdirectorynot
 msgid "Directory not found %s"
-msgstr "Nem található a könyvtár: %s"
+msgstr ""
 
 #: u_translation.rsdirectorynot2
 msgid "Directory not found! Please install the Skychart Pictures package."
@@ -1511,31 +1394,28 @@ msgid "Disconnect"
 msgstr ""
 
 #: u_translation.rsdisconnectte
-#| msgid "Disconnect Telescope"
 msgid "Disconnect telescope"
-msgstr "Távcső szétkapcsolása"
+msgstr ""
 
 #: u_translation.rsdisplay
 msgid "Display"
-msgstr "Megjelenítés"
+msgstr ""
 
 #: u_translation.rsdisplayasasy
 msgid "Display as a symbol"
-msgstr "Megjelenítés mint szimbólum"
+msgstr ""
 
 #: u_translation.rsdisplaycolou
 msgid "Display colour"
-msgstr "Megjelenítés színei"
+msgstr ""
 
 #: u_translation.rsdisplayimage
-#| msgid "Display image of cataloged objects"
 msgid "Display images of catalogued objects"
-msgstr "Katalógus objektum képének mutatása"
+msgstr ""
 
 #: u_translation.rsdisplaylabel
-#| msgid "Display labels for all star catalog"
 msgid "Display labels for all star catalogs"
-msgstr "Minden katalógus címkéjének megjelenítése"
+msgstr ""
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
@@ -1543,19 +1423,19 @@ msgstr ""
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
-msgstr "A térkép információinak megjelenítése a menü soron."
+msgstr ""
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
-msgstr "Címkék megjelenítése"
+msgstr ""
 
 #: u_translation.rsdisplaythelo
 msgid "Display the local horizon line"
-msgstr "A helyi horizont mutatása"
+msgstr ""
 
 #: u_translation.rsdistance
 msgid "Distance"
-msgstr "Távolság"
+msgstr ""
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
@@ -1563,38 +1443,35 @@ msgstr ""
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
-msgstr "Távolsága a legutóbbi objektumtól"
+msgstr ""
 
 #: u_translation.rsdonottakeacc
-#| msgid "Do not take account of comet fainter than magnitude"
 msgid "Do not take into account comets fainter than magnitude"
-msgstr "Üstökösök megjelenítése a következő magnitúdó felett:"
+msgstr ""
 
 #: u_translation.rsdonottakeacc2
-#| msgid "Do not take account of asteroid fainter than magnitude"
 msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "Kisbolygók megjelenítése a következő magnitúdó felett:"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr "Pont"
+msgstr ""
 
 #: u_translation.rsdoubles
 msgid "Doubles"
-msgstr "Kettősök"
+msgstr ""
 
 #: u_translation.rsdoublestar
-#| msgid "Double Star"
 msgid "Double star"
-msgstr "Kettőscsillag"
+msgstr ""
 
 #: u_translation.rsdownload
 msgid "Download"
-msgstr "Letöltés"
+msgstr ""
 
 #: u_translation.rsdownload2
 msgid "Download %s"
-msgstr "Letöltés %s"
+msgstr ""
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
@@ -1602,34 +1479,31 @@ msgstr ""
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
-msgstr "Ország adatok letöltése"
+msgstr ""
 
 #: u_translation.rsdownloadfile
 msgid "Download File"
-msgstr "File letöltése"
+msgstr ""
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
 msgstr ""
 
 #: u_translation.rsdownloadlate
-#| msgid "Download latest orbital elements"
 msgid "Download the latest orbital elements"
-msgstr "A legutóbbi pályaelemek letöltése"
+msgstr ""
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr ""
 
 #: u_translation.rsdoyouwanttos
-#| msgid "Do you want to save the program setting now?"
 msgid "Do you want to save the program settings now?"
-msgstr "Akarod menteni a program beállításait?"
+msgstr ""
 
 #: u_translation.rsdrawalinetha
-#| msgid "Draw a line that represent the proper motion for the next "
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Vonal rajzolása amely megmutatja a csillag sajátmozgását a következő"
+msgstr ""
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -1640,22 +1514,20 @@ msgid "Draw as star"
 msgstr ""
 
 #: u_translation.rsdrawingtype
-#| msgid "Drawing Type"
 msgid "Drawing type"
-msgstr "Rajzolás típusa"
+msgstr ""
 
 #: u_translation.rsdrawline
 msgid "Draw line"
-msgstr "Vonal rajzolása"
+msgstr ""
 
 #: u_translation.rsdrawplanetas
-#| msgid "Draw Planet As"
 msgid "Draw planet as"
-msgstr "A bolygók rajza"
+msgstr ""
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "A horizont látszólagos süllyedésének mutatása"
+msgstr ""
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -1663,95 +1535,87 @@ msgstr ""
 
 #: u_translation.rsdrivername
 msgid "Driver name"
-msgstr "Driver név"
+msgstr ""
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
 msgstr ""
 
 #: u_translation.rsdropdatabase
-#| msgid "Drop Database"
 msgid "Drop database"
-msgstr "Adatbázis megszüntetése"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
-msgstr "DSS RealSky"
+msgstr ""
 
 #: u_translation.rsduration
 msgid "Duration"
-msgstr "Időtartam"
+msgstr ""
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
-msgstr "Föld árnyéka"
+msgstr ""
 
 #: u_translation.rseast
 msgid "East"
-msgstr "Kelet"
+msgstr "Doğu"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "Excentritás - e"
+msgstr ""
 
 #: u_translation.rseclipse
 msgid "Eclipse"
-msgstr "Fogyatkozás"
+msgstr ""
 
 #: u_translation.rsecliptic
 msgid "Ecliptic"
-msgstr "Ekliptikus"
+msgstr ""
 
 #: u_translation.rseclipticcoor
-#| msgid "Ecliptic Coordinate"
 msgid "Ecliptic coordinates"
-msgstr "Ekliptikus koordináta"
+msgstr ""
 
 #: u_translation.rseclipticcoor3
-#| msgid "Ecliptic Coord."
 msgid "Ecliptic coord."
-msgstr "Ekliptikus koord."
+msgstr ""
 
 #: u_translation.rsedit
 msgid "Edit"
-msgstr "Szerkesztés"
+msgstr ""
 
 #: u_translation.rseditcolor
-#| msgid "Edit Color"
 msgid "Edit colour"
-msgstr "Szín szerkesztése"
+msgstr ""
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
 msgstr ""
 
 #: u_translation.rseditlabel
-#| msgid "Edit Label"
 msgid "Edit label"
-msgstr "Információs ablak"
+msgstr ""
 
 #: u_translation.rseditlineoper
-#| msgid "Edit Line operation"
 msgid "Edit line operation"
-msgstr "Vonal műveletek"
+msgstr ""
 
 #: u_translation.rseditobjectty
-#| msgid "Edit Object Types"
 msgid "Edit object types"
-msgstr "Objektum típus szerk."
+msgstr ""
 
 #: u_translation.rseditunits
-#| msgid "Edit Units"
 msgid "Edit units"
-msgstr "Mértékegységek"
+msgstr ""
 
 #: u_translation.rselong
 msgid "Elong."
-msgstr "Elong."
+msgstr ""
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Emissziós köd"
+msgstr ""
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -1767,61 +1631,55 @@ msgstr ""
 
 #: u_translation.rsendofobject
 msgid "End of object"
-msgstr "Objektum vége"
+msgstr ""
 
 #: u_translation.rsendprocessin
-#| msgid "End processing: %s asteroids"
 msgid "End of processing: %s asteroids"
-msgstr "Feldolgozás vége: %s kisbolygó"
+msgstr ""
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
 msgstr ""
 
 #: u_translation.rsephemeriscal
-#| msgid "Ephemeris Calendar"
 msgid "Ephemeris calendar"
-msgstr "Efemerisz naptár"
+msgstr ""
 
 #: u_translation.rsepoch
 msgid "Epoch"
-msgstr "Epocha"
+msgstr ""
 
 #: u_translation.rsepochjd
 msgid "Epoch (JD)"
-msgstr "Epocha (JD) - t"
+msgstr ""
 
 #: u_translation.rsepochofmaxim
 msgid "Epoch of maxima"
-msgstr "A maximum epochája"
+msgstr ""
 
 #: u_translation.rseqgrid
-#| msgid "Eq. Grid"
 msgid "Eq. grid"
-msgstr "Eq.háló"
+msgstr ""
 
 #: u_translation.rsequatorial
 msgid "Equatorial"
 msgstr ""
 
 #: u_translation.rsequatorialco
-#| msgid "Equatorial Coordinate"
 msgid "Equatorial coordinates"
-msgstr "Ekvatoriális kordináta"
+msgstr ""
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "Ekvatoriális koordináták (tavaszpont: %s)"
+msgstr ""
 
 #: u_translation.rsequatorialco3
-#| msgid "Equatorial Coord."
 msgid "Equatorial coord."
-msgstr "Ekvatoriális koord."
+msgstr ""
 
 #: u_translation.rsequatorialmo
-#| msgid "Equatorial Mount"
 msgid "Equatorial mount"
-msgstr "Ekvatoriális állvány"
+msgstr ""
 
 #: u_translation.rsequatorialsy
 msgid "Equatorial System"
@@ -1829,23 +1687,23 @@ msgstr ""
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "Tavaszpont:"
+msgstr ""
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Tavaszpont"
+msgstr ""
 
 #: u_translation.rserror
 msgid "Error"
-msgstr "Hiba"
+msgstr ""
 
 #: u_translation.rserrorcreatin
 msgid "%sError creating table %s"
-msgstr "%sHiba a táblázat készítésekor %s"
+msgstr ""
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
-msgstr "Hiba %s megnyitásakor"
+msgstr ""
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
@@ -1857,40 +1715,39 @@ msgstr ""
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
-msgstr "Hiba! Ellenőrizd az adatbázis paramétereit."
+msgstr ""
 
 #: u_translation.rserrorpleasec2
 msgid "Error! Please check the database parameters and load the comete data file."
-msgstr "Hiba! Ellenőrizd az adatbázis paramétereit és töltsd be az üstökösök adatfájlját."
+msgstr ""
 
 #: u_translation.rserrorpleasec3
 msgid "Error! Please check the database parameters and load the picture package."
-msgstr "Hiba! Ellenőrizd az adatbázis paramétereit és tölts be a kép csomagot."
+msgstr ""
 
 #: u_translation.rsestimatedfil
-#| msgid "Estimated file size: %sMB %sDo you want to continue ?"
 msgid "Estimated file size: %sMB %sDo you want to continue?"
-msgstr "A becsült fájl méret: %sMB %sAkarod folytatni?"
+msgstr ""
 
 #: u_translation.rsestimatedtai
 msgid "Estimated tail length"
-msgstr "A csóva megközelítő hossza"
+msgstr ""
 
 #: u_translation.rsevening
 msgid "Evening"
-msgstr "Este"
+msgstr ""
 
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
-msgstr "Esti szürkület"
+msgstr ""
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "minden "
+msgstr ""
 
 #: u_translation.rseverypositio
 msgid "Every position"
-msgstr "Minden lépésnél"
+msgstr ""
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
@@ -1898,36 +1755,35 @@ msgstr ""
 
 #: u_translation.rsexit
 msgid "Exit"
-msgstr "Kilép"
+msgstr ""
 
 #: u_translation.rsexiting
 msgid "Exiting ..."
-msgstr "Kilépés..."
+msgstr ""
 
 #: u_translation.rsexpertmode
 msgid "Expert mode"
-msgstr "Haladó"
+msgstr ""
 
 #: u_translation.rsexternalcata
 msgid "External catalog object"
-msgstr "Külső katalógus objektuma"
+msgstr ""
 
 #: u_translation.rseyepiece
 msgid "Eyepiece"
-msgstr "Kereső kör"
+msgstr ""
 
 #: u_translation.rsfailed
-#| msgid "Failed : %s"
 msgid "Failed: %s"
-msgstr "Sikertelen: %s"
+msgstr ""
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr "Halványabb"
+msgstr ""
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Halvány csillagok mérete "
+msgstr ""
 
 #: u_translation.rsfan
 msgid "Fan"
@@ -1935,7 +1791,7 @@ msgstr ""
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "GYIK"
+msgstr ""
 
 #: u_translation.rsfast
 msgid "Fast"
@@ -1955,82 +1811,75 @@ msgstr ""
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
-msgstr "Mező szám"
+msgstr ""
 
 #: u_translation.rsfieldofvisio
-#| msgid "Field of Vision"
 msgid "Field of vision"
-msgstr "Látómező"
+msgstr ""
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
 msgstr ""
 
 #: u_translation.rsfieldofvisio3
-#| msgid "Field of Vision Setting"
 msgid "Field of vision settings"
-msgstr "Látómező beállítások"
+msgstr ""
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Látómező száma:"
+msgstr ""
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
 msgstr ""
 
 #: u_translation.rsfieldtoowidt
-#| msgid "Field too width! Maximum is %s"
 msgid "Field too wide! Maximum is %s"
-msgstr "Túl széles mező! Max: %s"
+msgstr ""
 
 #: u_translation.rsfile
 msgid "File"
-msgstr "Fájl"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
-msgstr "A fájl nem található!"
+msgstr ""
 
 #: u_translation.rsfilespath
-#| msgid "Files Path"
 msgid "Files path"
-msgstr "Fájl elérhetősége"
+msgstr ""
 
 #: u_translation.rsfill
 msgid "Fill?"
-msgstr "Kitölt"
+msgstr ""
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
-msgstr "Tejút kitöltése"
+msgstr ""
 
 #: u_translation.rsfillwithhori
-#| msgid "Fill with horizon color"
 msgid "Fill with horizon colour"
-msgstr "Kitöltés a horizont színével"
+msgstr ""
 
 #: u_translation.rsfilter
 msgid "Filter ->"
-msgstr "Szűrés ->"
+msgstr ""
 
 #: u_translation.rsfilternebula
-#| msgid "Filter Deep Sky Objects"
 msgid "Filter deep sky objects"
-msgstr "Mélyég obj. szűrése"
+msgstr ""
 
 #: u_translation.rsfilterstars
 msgid "Filter stars "
-msgstr "Csillagok szűrése "
+msgstr ""
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "Keresés"
+msgstr ""
 
 #: u_translation.rsfindercircle
-#| msgid "Finder circle (Eyepiece)"
 msgid "Finder circle (eyepiece)"
-msgstr "Kereső kör (okulár)"
+msgstr ""
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
@@ -2038,36 +1887,31 @@ msgstr ""
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
-msgstr "Kereső négyszög (CCD)"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
-msgstr "Első 5000"
+msgstr ""
 
 #: u_translation.rsfirstchar
-#| msgid "First Char"
 msgid "First char"
-msgstr "Első karakter"
+msgstr ""
 
 #: u_translation.rsfitsfile
-#| msgid "FITS File"
 msgid "FITS file"
-msgstr "FITS fájl"
+msgstr ""
 
 #: u_translation.rsfixedblack
-#| msgid "Fixed Black"
 msgid "Fixed black"
-msgstr "Beállított szín"
+msgstr ""
 
 #: u_translation.rsfixedskycolo
-#| msgid "Fixed sky color"
 msgid "Fixed sky colour"
-msgstr "Az ég beállított színe"
+msgstr ""
 
 #: u_translation.rsflamsteednum
-#| msgid "Flamsteed Number"
 msgid "Flamsteed number"
-msgstr "Flamsteed szám"
+msgstr ""
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
@@ -2083,12 +1927,11 @@ msgstr ""
 
 #: u_translation.rsfonts
 msgid "Fonts"
-msgstr "Betütípus"
+msgstr ""
 
 #: u_translation.rsforalargecat
-#| msgid "For a large catalog always select Binary. For a small dataset that change frequently select Text, this let you edit the file and see the result immediatly on the chart without the need to rerun this utility."
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
-msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb, gyakran használt adatmennyiség esetén válszd a szövegfájl típust. Ez lehetőséget ad az eredmény azonnali ellenőrzésére a térképen."
+msgstr ""
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
@@ -2100,16 +1943,15 @@ msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "LM"
+msgstr ""
 
 #: u_translation.rsfov2
 msgid "FOV:"
-msgstr "LM:"
+msgstr ""
 
 #: u_translation.rsfovnumber
-#| msgid "fov number:"
 msgid "FOV number:"
-msgstr "LM száma"
+msgstr ""
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
@@ -2129,101 +1971,91 @@ msgstr ""
 
 #: u_translation.rsfriday
 msgid "Fri."
-msgstr "Pé."
+msgstr ""
 
 #: u_translation.rsfrom
 msgid "From"
-msgstr "-tól:"
+msgstr ""
 
 #: u_translation.rsftp
 msgid "FTP "
-msgstr "FTP "
+msgstr ""
 
 #: u_translation.rsftppassivemo
-#| msgid "FTP Passive Mode"
 msgid "FTP passive mode"
-msgstr "FTP Passive Mode"
+msgstr ""
 
 #: u_translation.rsfullname
-#| msgid "Full Name"
 msgid "Full name"
-msgstr "Teljes név"
+msgstr ""
 
 #: u_translation.rsfullscreen
-#| msgid "Full Screen"
 msgid "Full screen"
-msgstr "Teljes képernyő"
+msgstr ""
 
 #: u_translation.rsgalactic
 msgid "Galactic"
-msgstr "Galaktikus"
+msgstr ""
 
 #: u_translation.rsgalacticcoor
-#| msgid "Galactic Coordinate"
 msgid "Galactic coordinates"
-msgstr "Galaktikus koordináta"
+msgstr ""
 
 #: u_translation.rsgalacticcoor2
-#| msgid "Galactic Coord."
 msgid "Galactic coord."
-msgstr "Galaktikus koord."
+msgstr ""
 
 #: u_translation.rsgalaxies
 msgid "Galaxies"
-msgstr "Galaxisok"
+msgstr ""
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr "Galaxis"
+msgstr ""
 
 #: u_translation.rsgalaxycluste
-#| msgid "Galaxy Cluster"
 msgid "Galaxy cluster"
-msgstr "Galaxishalmaz"
+msgstr ""
 
 #: u_translation.rsgamma
 msgid "Gamma"
-msgstr "Gamma"
+msgstr ""
 
 #: u_translation.rsgeneral
 msgid "General"
-msgstr "Általános"
+msgstr ""
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "Általános katalógus opciók"
+msgstr ""
 
 #: u_translation.rsgeneralsetti
-#| msgid "General Setting"
 msgid "General settings"
-msgstr "Általános beállítások"
+msgstr ""
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
-msgstr "Geocentrikus"
+msgstr ""
 
 #: u_translation.rsget
 msgid "Get"
 msgstr ""
 
 #: u_translation.rsgetasteroidl
-#| msgid "Get Asteroid list."
 msgid "Get the asteroids list."
-msgstr "Kisbolygó lista olvasása."
+msgstr ""
 
 #: u_translation.rsgetdssimage
-#| msgid "Get DSS Image"
 msgid "Get the DSS image"
-msgstr "DSS kép letöltés"
+msgstr ""
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
 msgstr ""
 
 #: u_translation.rsglobularclus
-#| msgid "Globular Cluster"
 msgid "Globular cluster"
-msgstr "Gömbhalmaz"
+msgstr ""
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2231,7 +2063,7 @@ msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
-msgstr "Grafika"
+msgstr ""
 
 #: u_translation.rsgraphs
 msgid "Graphs"
@@ -2239,38 +2071,35 @@ msgstr ""
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
-msgstr "Gravitációs lencse"
+msgstr ""
 
 #: u_translation.rsgreatest
 msgid "Greatest"
-msgstr "Legnagyobb"
+msgstr ""
 
 #: u_translation.rsgreeksymbol
-#| msgid "Greek symbol"
 msgid "Greek symbols"
-msgstr "Görög betűk"
+msgstr ""
 
 #: u_translation.rsgreen
 msgid "Green"
-msgstr "Zöld"
+msgstr ""
 
 #: u_translation.rsgridsetting
-#| msgid "Grid Setting"
 msgid "Grid settings"
-msgstr "Háló beállításai"
+msgstr ""
 
 #: u_translation.rsgridspacing
-#| msgid "Grid Spacing"
 msgid "Grid spacing"
-msgstr "Háló beosztása"
+msgstr ""
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "VörösFolt áthaladás"
+msgstr ""
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
-msgstr "G slope paraméter"
+msgstr ""
 
 #: u_translation.rsguide
 msgid "Guide"
@@ -2286,37 +2115,35 @@ msgstr ""
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
-msgstr "H abszolut magnitúdó"
+msgstr ""
 
 #: u_translation.rshalfmassradi
-#| msgid "Half-Mass Radius"
 msgid "Half-mass radius"
-msgstr "Féltömeg sugara"
+msgstr ""
 
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
-msgstr "Állj 1000 hiba után"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr ""
 
 #: u_translation.rshbetamagnitu
-#| msgid "Hbeta Magnitude"
 msgid "H-Beta magnitude"
-msgstr "Hbeta magnitúdó"
+msgstr ""
 
 #: u_translation.rsheight
 msgid "Height"
-msgstr "Magasság"
+msgstr ""
 
 #: u_translation.rshelp
 msgid "Help"
-msgstr "Segítség"
+msgstr ""
 
 #: u_translation.rshelpcontents
 msgid "Help contents"
-msgstr "Segítség - tartalom"
+msgstr ""
 
 #: u_translation.rshide
 msgid "Hide"
@@ -2324,21 +2151,19 @@ msgstr ""
 
 #: u_translation.rshidelabel
 msgid "Hide label"
-msgstr "Címke elrejtése"
+msgstr ""
 
 #: u_translation.rshideobjectwi
-#| msgid "Hide object wider than"
 msgid "Hide objects wider than"
-msgstr "Obj. elrejtése ami szélesebb mint"
+msgstr ""
 
 #: u_translation.rshigh
 msgid "High"
 msgstr ""
 
 #: u_translation.rshighcolor
-#| msgid "High Color"
 msgid "High colour"
-msgstr "Színes"
+msgstr ""
 
 #: u_translation.rshighest
 msgid "Highest"
@@ -2350,30 +2175,27 @@ msgstr ""
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Magas felületi fényesség"
+msgstr ""
 
 #: u_translation.rshorizon
 msgid "Horizon"
-msgstr "Horizont"
+msgstr ""
 
 #: u_translation.rshostname
-#| msgid "Host Name:"
 msgid "Hostname:"
-msgstr "Host név:"
+msgstr ""
 
 #: u_translation.rshour
 msgid "Hour"
-msgstr "Óra"
+msgstr "Saat"
 
 #: u_translation.rshourangle
-#| msgid "Hour Angle"
 msgid "Hour angle"
-msgstr "Óraszög"
+msgstr ""
 
 #: u_translation.rshourgridspac
-#| msgid "Hour Grid Spacing"
 msgid "Right ascension grid"
-msgstr "Órák beosztása"
+msgstr ""
 
 #: u_translation.rshours
 msgid "hours"
@@ -2381,27 +2203,23 @@ msgstr ""
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
-msgstr "Óra, perc, másodperc"
+msgstr ""
 
 #: u_translation.rshttpproxy
-#| msgid "HTTP Proxy"
 msgid "HTTP proxy"
-msgstr "HTTP Proxy"
+msgstr ""
 
 #: u_translation.rsiconclickact
-#| msgid "Icon Click Action"
 msgid "Icon click action"
-msgstr "Ikonra kattintás művelete"
+msgstr ""
 
 #: u_translation.rsiconsize
-#| msgid "Icon Size"
 msgid "Icon size"
-msgstr "Ikon mérete"
+msgstr ""
 
 #: u_translation.rsicontime
-#| msgid "Icon Time Display"
 msgid "Icon time display"
-msgstr "Idő megjelenítése a tálcán"
+msgstr ""
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
@@ -2409,30 +2227,27 @@ msgstr ""
 
 #: u_translation.rsillum
 msgid "Illum."
-msgstr "Megvil."
+msgstr ""
 
 #: u_translation.rsilluminatedf
-#| msgid "Illuminated Fraction"
 msgid "Illuminated fraction"
-msgstr "Megvilágított hányad"
+msgstr ""
 
 #: u_translation.rsimagedirecto
-#| msgid "Image Directory"
 msgid "Image directory"
-msgstr "Képek könyvtára"
+msgstr ""
 
 #: u_translation.rsimageoptions
-#| msgid "Image Options"
 msgid "Image options"
-msgstr "Képek opciói"
+msgstr ""
 
 #: u_translation.rsinclination
 msgid "Inclination"
-msgstr "Pályahajlás - i"
+msgstr ""
 
 #: u_translation.rsinclination2
 msgid "Inclination="
-msgstr "Pályahajlás="
+msgstr ""
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
@@ -2447,58 +2262,48 @@ msgid "Increase"
 msgstr ""
 
 #: u_translation.rsincrementfor
-#| msgid "Increment for Bright Stars"
 msgid "Increment for bright stars"
-msgstr "Fényes csillagok méretének növelése"
+msgstr ""
 
 #: u_translation.rsincrementtim
-#| msgid "Increment Time"
 msgid "Increment time"
-msgstr "Idő előre"
+msgstr ""
 
 #: u_translation.rsindicatehere
-#| msgid "Indicate here how to compute the require value from the data stored in the catalog text file."
 msgid "Indicate here how to compute the required values from the data stored in the catalog text file."
-msgstr "Jelöld ki hogy miként számolja a betöltendő értéket a program a katalógus text fájlban találhatóból"
+msgstr ""
 
 #: u_translation.rsindicatehowt
-#| msgid "Indicate how to recognize the object size unit :"
 msgid "Indicate how to recognize the object size unit:"
-msgstr "Jelöld az alábbi stringekkel az objektum méretének egségét:"
+msgstr ""
 
 #: u_translation.rsindicatethes
-#| msgid "Indicate the string identifier for each type of object :"
 msgid "Indicate the string identifier for each type of object:"
-msgstr "Jelöld az alábbi stringekkel az objektum típusát:"
+msgstr ""
 
 #: u_translation.rsindicatethes2
 msgid "Indicate the string for each draw operation"
-msgstr "Jelöld az alábbi stringekkel a vonal műveleteket"
+msgstr ""
 
 #: u_translation.rsindicatethes3
-#| msgid "Indicate the string for each color"
 msgid "Indicate the string for each colour"
-msgstr "Jelöld az alábbi stringekkel a színeket"
+msgstr ""
 
 #: u_translation.rsindidriver
-#| msgid "INDI Driver"
 msgid "INDI driver"
-msgstr "INDI Driver"
+msgstr ""
 
 #: u_translation.rsindidriverse
-#| msgid "INDI Driver setting"
 msgid "INDI driver settings"
-msgstr "INDI Driver beállítások"
+msgstr ""
 
 #: u_translation.rsindiserverho
-#| msgid "INDI Server Host "
 msgid "INDI server host "
-msgstr "INDI szerver IP "
+msgstr ""
 
 #: u_translation.rsindiserverpo
-#| msgid "INDI server Port"
 msgid "INDI server port"
-msgstr "INDI szerver port"
+msgstr ""
 
 #: u_translation.rsindrive
 msgid "in drive"
@@ -2506,7 +2311,7 @@ msgstr ""
 
 #: u_translation.rsinfo
 msgid "Information"
-msgstr "Információ"
+msgstr ""
 
 #: u_translation.rsinfo2
 msgid "Info"
@@ -2514,7 +2319,7 @@ msgstr ""
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr "Információs ablak"
+msgstr ""
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
@@ -2533,27 +2338,24 @@ msgid "Initialize"
 msgstr ""
 
 #: u_translation.rsinitializeda
-#| msgid "Initialize Database"
 msgid "Initialize database"
-msgstr "Adatbázis beállítása"
+msgstr ""
 
 #: u_translation.rsinputcatalog
-#| msgid "Input Catalog files"
 msgid "Input catalog files"
-msgstr "Input katalógus fájl"
+msgstr ""
 
 #: u_translation.rsinsertfailed
-#| msgid "insert failed line %s : %s"
 msgid "insert failed line %s: %s"
-msgstr "Sikertelen beszúrás %s sorban: %s"
+msgstr ""
 
 #: u_translation.rsinsertfailed2
 msgid "Insert failed! %s"
-msgstr "Sikertelen beszúrás! %s"
+msgstr ""
 
 #: u_translation.rsinternet
 msgid "Internet"
-msgstr "Internet"
+msgstr ""
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
@@ -2568,17 +2370,16 @@ msgid "Integrated telescope driver."
 msgstr ""
 
 #: u_translation.rsinvalidepoch
-#| msgid "invalid epoch on line%s : %s"
 msgid "invalid epoch on line%s: %s"
-msgstr "Hibás epocha a %s sorban: %s"
+msgstr ""
 
 #: u_translation.rsinvalidfitsf
 msgid "Invalid FITS file: %s"
-msgstr "Hibás FITS fájl: %s"
+msgstr ""
 
 #: u_translation.rsinvalidpath
 msgid "Invalid path: "
-msgstr "Érvénytelen elérési út: "
+msgstr ""
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
@@ -2590,109 +2391,103 @@ msgstr ""
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
-msgstr "Ezen a szélességi körön nem megfigyelhető"
+msgstr ""
 
 #: u_translation.rsiscoordinate
-#| msgid "Is coordinates epoch really %s ?"
 msgid "Is the coordinates epoch really %s?"
-msgstr "A koordináták epochája valóban %s?"
+msgstr ""
 
 #: u_translation.rsjd
 msgid "JD:"
-msgstr "JD:"
+msgstr ""
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr "JD"
+msgstr ""
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
-msgstr "Julián dátum"
+msgstr ""
 
 #: u_translation.rsjulianday
 msgid "Julian Day ="
-msgstr "Julián nap ="
+msgstr ""
 
 #: u_translation.rsjulianyear
 msgid "Julian Year"
-msgstr "Julián év"
+msgstr ""
 
 #: u_translation.rsjupiter
 msgid "Jupiter"
-msgstr "Jupiter"
+msgstr ""
 
 #: u_translation.rsjupitergrslo
-#| msgid "Jupiter GRS longitude :"
 msgid "Jupiter GRS longitude:"
-msgstr "Jupiter \"VörösFolt\" hosszúsága:"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
-msgstr "Km."
+msgstr ""
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr "Csomó"
+msgstr ""
 
 #: u_translation.rsl
 msgid "L"
-msgstr "L"
+msgstr ""
 
 #: u_translation.rslabel
 msgid "Label:"
-msgstr "Címke:"
+msgstr ""
 
 #: u_translation.rslabel2
 msgid "Label"
-msgstr "Címke"
+msgstr ""
 
 #: u_translation.rslabelobject
-#| msgid "Label Object"
 msgid "Label object"
-msgstr "Objektum címke"
+msgstr ""
 
 #: u_translation.rslabels
 msgid "Labels"
-msgstr "Címkék"
+msgstr ""
 
 #: u_translation.rslabeltext
-#| msgid "Label Text"
 msgid "Label text"
-msgstr "Címke szöveg"
+msgstr ""
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "Fekvő"
+msgstr ""
 
 #: u_translation.rslanguage
 msgid "Internal language"
-msgstr "English"
+msgstr ""
 
 #: u_translation.rslanguage2
 msgid "Language"
-msgstr "Nyelv"
+msgstr ""
 
 #: u_translation.rslanguagesele
 msgid "Language selection"
-msgstr "Nyelv választása"
+msgstr ""
 
 #: u_translation.rslatinname
-#| msgid "Latin Name"
 msgid "Latin name"
-msgstr "Latin név"
+msgstr ""
 
 #: u_translation.rslatitude
 msgid "Latitude"
-msgstr "Szélesség"
+msgstr ""
 
 #: u_translation.rsleft
 msgid "Left"
-msgstr "Balra"
+msgstr ""
 
 #: u_translation.rsleftbar
-#| msgid "Left Bar"
 msgid "Left bar"
-msgstr "Baloldali"
+msgstr ""
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
@@ -2700,111 +2495,103 @@ msgstr ""
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr "Használt"
+msgstr ""
 
 #: u_translation.rslegend
 msgid "Legend"
-msgstr "Jelmagyarázat"
+msgstr ""
 
 #: u_translation.rslength
 msgid "Length"
-msgstr "Hosszúság"
+msgstr ""
 
 #: u_translation.rslessnebulae
-#| msgid "Less Deep Sky"
 msgid "Less deep sky"
-msgstr "Kevesebb mélyég"
+msgstr ""
 
 #: u_translation.rslessstars
-#| msgid "Less Stars"
 msgid "Less stars"
-msgstr "Kevesebb csillag"
+msgstr ""
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr "Libráció szélessége"
+msgstr ""
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr "Libráció hosszúsága"
+msgstr ""
 
 #: u_translation.rslicenseagree
-#| msgid "License Agreement"
 msgid "License agreement"
-msgstr "Licenc-szerződés"
+msgstr ""
 
 #: u_translation.rslightyears
 msgid "light years"
-msgstr "fényév"
+msgstr ""
 
 #: u_translation.rslii
 msgid "LII"
-msgstr "LII"
+msgstr ""
 
 #: u_translation.rslimitingmagn
-#| msgid "Limiting magnitude, list :"
 msgid "Limiting magnitude, list:"
-msgstr "Határmagnitúdó, lista:"
+msgstr ""
 
 #: u_translation.rslimitingmagn2
-#| msgid "Limiting magnitude :"
 msgid "Limiting magnitude:"
-msgstr "Határmagnitúdó:"
+msgstr ""
 
 #: u_translation.rslimitingsize
-#| msgid "Limiting Size (arcminutes) :"
 msgid "Limiting size (arcminutes):"
-msgstr "Határméret (ívperc):"
+msgstr ""
 
 #: u_translation.rsline1
 msgid "Line"
-msgstr "Vonal"
+msgstr ""
 
 #: u_translation.rslinemode
 msgid "Line mode"
-msgstr "Körvonal"
+msgstr ""
 
 #: u_translation.rslinemodedraw
 msgid "Line mode drawing"
-msgstr "Körvonal rajzolása"
+msgstr ""
 
 #: u_translation.rslineoperatio
 msgid "Line operation"
-msgstr "Vonal műveletek"
+msgstr ""
 
 #: u_translation.rslines
 msgid "Lines"
-msgstr "Vonalak"
+msgstr ""
 
 #: u_translation.rslinesgrid
-#| msgid "Lines / Grid"
 msgid "Lines / grid"
-msgstr "Vonalak/háló"
+msgstr ""
 
 #: u_translation.rslinewidth
 msgid "Line width "
-msgstr "Vonal vastag "
+msgstr ""
 
 #: u_translation.rslinkallchart
-#| msgid "Link All Chart"
 msgid "Link all charts"
-msgstr "Térképek csatolása"
+msgstr ""
 
 #: u_translation.rslistenonport
 msgid "Listen on port: %s"
-msgstr "Port használata: %s"
+msgstr ""
 
 #: u_translation.rslistofavaila
 msgid "List of available plates"
-msgstr "A lehetséges bolygók listája"
+msgstr ""
 
 #: u_translation.rsload
 msgid "Load"
-msgstr "Betölt"
+msgstr ""
 
 #: u_translation.rsloadfile
 msgid "Load file"
-msgstr "Fájl betöltés"
+msgstr ""
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
@@ -2815,36 +2602,32 @@ msgid "Loading catalog list. Please wait ..."
 msgstr ""
 
 #: u_translation.rsloadmpcfile
-#| msgid "Load MPC File"
 msgid "Load MPC file"
-msgstr "MPC fájl betöltés"
+msgstr ""
 
 #: u_translation.rsloadmpcforma
 msgid "Load MPC format file"
-msgstr "MPC formátumú fájl betöltése"
+msgstr ""
 
 #: u_translation.rsloadonlythef
 msgid "Load only the first "
-msgstr "Csak az első betöltése "
+msgstr ""
 
 #: u_translation.rsloadproject
 msgid "Load project"
-msgstr "Project betöltése"
+msgstr ""
 
 #: u_translation.rslocalhorizon
-#| msgid "Local Horizon"
 msgid "Local horizon"
-msgstr "Helyi horizont"
+msgstr ""
 
 #: u_translation.rslocalhorizon2
-#| msgid "Local Horizon File Name : "
 msgid "Local horizon file name: "
-msgstr "Helyi horizont fájlnév: "
+msgstr ""
 
 #: u_translation.rslocalsideral
-#| msgid "Local Sideral Time"
 msgid "Local sidereal time"
-msgstr "Helyi sziderikus idő"
+msgstr ""
 
 #: u_translation.rslocationcode
 msgid "Location code"
@@ -2852,25 +2635,23 @@ msgstr ""
 
 #: u_translation.rslockon
 msgid "Lock on %s"
-msgstr "Rögzít: %s"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
-msgstr "Logaritmus skála"
+msgstr ""
 
 #: u_translation.rslongitude
 msgid "Longitude"
-msgstr "Hosszúság"
+msgstr ""
 
 #: u_translation.rslongitudeasc
-#| msgid "Longitude ascending Node"
 msgid "Longitude ascending node"
-msgstr "Felszálló csomó hossz-OMEGA"
+msgstr ""
 
 #: u_translation.rslosange
-#| msgid "Losange"
 msgid "Lozenge"
-msgstr "Losange"
+msgstr ""
 
 #: u_translation.rslow
 msgid "Low"
@@ -2878,40 +2659,39 @@ msgstr ""
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Alacsony felületi fényesség"
+msgstr ""
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
-msgstr "Fényerősség"
+msgstr ""
 
 #: u_translation.rslunar
 msgid "Lunar"
 msgstr ""
 
 #: u_translation.rslunareclipse
-#| msgid "Lunar Eclipses"
 msgid "Lunar eclipses"
-msgstr "Holdfogyatkozás"
+msgstr ""
 
 #: u_translation.rsmag
 msgid "Mag:"
-msgstr "Mag:"
+msgstr ""
 
 #: u_translation.rsmagn
 msgid "Magn."
-msgstr "Magn."
+msgstr ""
 
 #: u_translation.rsmagnitude
 msgid "Magnitude"
-msgstr "Magnitúdó"
+msgstr ""
 
 #: u_translation.rsmagnitudeatm
 msgid "Magnitude at maxima"
-msgstr "Magnitúdó maximumban"
+msgstr ""
 
 #: u_translation.rsmagnitudeatm2
 msgid "Magnitude at minima"
-msgstr "Magnitúdó minimumban"
+msgstr ""
 
 #: u_translation.rsmagnitudeban
 msgid "Magnitude band"
@@ -2919,82 +2699,75 @@ msgstr ""
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Magnitúdó különbség"
+msgstr ""
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
 msgstr ""
 
 #: u_translation.rsmagnitudeerr
-#| msgid "Magnitude Error"
 msgid "Magnitude error"
-msgstr "Magnitúdó hiba"
+msgstr ""
 
 #: u_translation.rsmagnitudefai
-#| msgid "magnitude fainter than the stars."
 msgid "magnitudes fainter than the stars."
-msgstr "magnitúdóval halványabbak mint a csillagok."
+msgstr ""
 
 #: u_translation.rsmagnitudetyc
 msgid "Magnitude Tycho BT"
-msgstr "Tycho BT magnitúdó"
+msgstr ""
 
 #: u_translation.rsmagnitudetyc2
 msgid "Magnitude Tycho VT"
-msgstr "Tycho VT magnitúdó"
+msgstr ""
 
 #: u_translation.rsmaillist
-#| msgid "MailList"
 msgid "Mail list (Yahoo group)"
-msgstr "LevList"
+msgstr ""
 
 #: u_translation.rsmainbar
-#| msgid "Main Bar"
 msgid "Main bar"
-msgstr "Szokásás"
+msgstr ""
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
 msgstr ""
 
 #: u_translation.rsmanualmount
-#| msgid "Manual Mount"
 msgid "Manual mount"
-msgstr "Kézi vezérlés"
+msgstr ""
 
 #: u_translation.rsmanualtelesc
-#| msgid "Manual Telescope"
 msgid "Manual telescope"
-msgstr "Kézi vezérlésű távcső"
+msgstr ""
 
 #: u_translation.rsmap
 msgid "Map"
-msgstr "Térkép"
+msgstr ""
 
 #: u_translation.rsmarkthechart
-#| msgid "Mark the chart center "
 msgid "Mark the centre of the chart"
-msgstr "Térkép közepének jelölése"
+msgstr ""
 
 #: u_translation.rsmars
 msgid "Mars"
-msgstr "Mars"
+msgstr ""
 
 #: u_translation.rsmax
 msgid "Max."
-msgstr "Max."
+msgstr ""
 
 #: u_translation.rsmax2
 msgid "max"
-msgstr "LM-ig"
+msgstr ""
 
 #: u_translation.rsmaximize
 msgid "Maximize"
-msgstr "Teljes képernyő"
+msgstr ""
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
-msgstr "Maximum magnitúdó"
+msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3002,55 +2775,55 @@ msgstr ""
 
 #: u_translation.rsmbytes
 msgid "MBytes"
-msgstr "MBytes"
+msgstr ""
 
 #: u_translation.rsmean
 msgid "Mean"
-msgstr "Közép"
+msgstr ""
 
 #: u_translation.rsmeananomaly
 msgid "Mean anomaly"
-msgstr "Középanomália - M"
+msgstr ""
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr "mean equator, equinox and epoch of the date"
+msgstr ""
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr "mean equinox and epoch J2000"
+msgstr ""
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr "mean equinox J2000, epoch of the date"
+msgstr ""
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
-msgstr "Mean J2000"
+msgstr ""
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr "Helyi közép"
+msgstr ""
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr "Mean of the date"
+msgstr ""
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
-msgstr "Középhely"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
-msgstr "Merkúr"
+msgstr ""
 
 #: u_translation.rsmessages
 msgid "Messages:"
-msgstr "Üzenetek:"
+msgstr ""
 
 #: u_translation.rsmeters
 msgid "Meters"
-msgstr "Méter"
+msgstr ""
 
 #: u_translation.rsmiddle
 msgid "Middle"
@@ -3058,37 +2831,35 @@ msgstr ""
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
-msgstr "Tejút"
+msgstr ""
 
 #: u_translation.rsmin
 msgid "m"
-msgstr "'"
+msgstr "m"
 
 #: u_translation.rsmin2
 msgid "min"
-msgstr "LM-től"
+msgstr ""
 
 #: u_translation.rsmin3
 msgid "Min."
-msgstr "p."
+msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
-msgstr "Perc"
+msgstr "Dakika"
 
 #: u_translation.rsminutes
 msgid "minutes"
-msgstr "perc"
+msgstr ""
 
 #: u_translation.rsmirrorhorizo
-#| msgid "Mirror Horizontally"
 msgid "Mirror horizontally"
-msgstr "Vízszintes tükrözés"
+msgstr ""
 
 #: u_translation.rsmirrorvertic
-#| msgid "Mirror Vertically"
 msgid "Mirror vertically"
-msgstr "Függőleges tükrözés"
+msgstr ""
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
@@ -3104,56 +2875,51 @@ msgstr ""
 
 #: u_translation.rsmodify
 msgid "Modify"
-msgstr "Módosít"
+msgstr ""
 
 #: u_translation.rsmonday
 msgid "Mon."
-msgstr "Hé."
+msgstr ""
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "Hónap"
+msgstr "Ay"
 
 #: u_translation.rsmoon
 msgid "Moon"
-msgstr "Hold"
+msgstr ""
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
 msgstr ""
 
 #: u_translation.rsmorenebulae
-#| msgid "More Deep Sky"
 msgid "More deep sky"
-msgstr "Több mélyég"
+msgstr ""
 
 #: u_translation.rsmoreoptions
-#| msgid "More Options"
 msgid "More options"
-msgstr "További beállítások"
+msgstr ""
 
 #: u_translation.rsmorestars
-#| msgid "More Stars"
 msgid "More stars"
-msgstr "Több csillag"
+msgstr ""
 
 #: u_translation.rsmorethan1000
-#| msgid "More than 1000 errors! Process aborted."
 msgid "More than 1000 errors! The processing is aborted."
-msgstr "Több mint 1000 hiba! Folyamat megszakítva."
+msgstr ""
 
 #: u_translation.rsmorethanobje
-#| msgid "More than %s objects, result truncated."
 msgid "More than %s objects, the result is truncated."
-msgstr "Több mint %s objektum, eredmény hiányos."
+msgstr ""
 
 #: u_translation.rsmorning
 msgid "Morning"
-msgstr "Reggel"
+msgstr ""
 
 #: u_translation.rsmorningtwili
 msgid "Morning twilight"
-msgstr "Reggeli szürkület"
+msgstr ""
 
 #: u_translation.rsmotor
 msgid "Motor"
@@ -3177,141 +2943,123 @@ msgstr ""
 
 #: u_translation.rsmovelabel
 msgid "Move label"
-msgstr "Címke mozgatása"
+msgstr ""
 
 #: u_translation.rsmpcftp
-#| msgid "MPC Ftp"
 msgid "MPC FTP"
-msgstr "MPC Ftp"
+msgstr ""
 
 #: u_translation.rsmpchttp
-#| msgid "MPC Http"
 msgid "MPC HTTP"
-msgstr "MPC Http"
+msgstr ""
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
 msgstr ""
 
 #: u_translation.rsmultiplestar
-#| msgid "Multiple Star"
 msgid "Multiple star"
-msgstr "Többes csillag"
+msgstr ""
 
 #: u_translation.rsmysqldatabas
-#| msgid "MySQL Database"
 msgid "MySQL database"
-msgstr "MySQL adatbázis"
+msgstr ""
 
 #: u_translation.rsnakedeye
-#| msgid "Naked Eye"
 msgid "Naked eye"
-msgstr "Szabadszemes"
+msgstr ""
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "Szabadszemes magnitúdó"
+msgstr ""
 
 #: u_translation.rsname
 msgid "Name"
-msgstr "Név"
+msgstr ""
 
 #: u_translation.rsnautical
 msgid "Nautical"
-msgstr "Tengerészeti"
+msgstr ""
 
 #: u_translation.rsnebula
-#| msgid "Deep Sky Object"
 msgid "Deep sky object"
-msgstr "Mélyég objektum"
+msgstr ""
 
 #: u_translation.rsnebulacommon
-#| msgid "Deep Sky Common Name"
 msgid "Deep sky common name"
-msgstr "Mélyég általános neve"
+msgstr ""
 
 #: u_translation.rsnebuladispla
-#| msgid "Deep Sky Objects Display"
 msgid "Deep sky objects display"
-msgstr "Mélyég objektumok megjelenítése"
+msgstr ""
 
 #: u_translation.rsnebulae
-#| msgid "Deep Sky Objects"
 msgid "Deep sky objects"
-msgstr "Mélyég objektumok"
+msgstr ""
 
 #: u_translation.rsnebulaefilte
-#| msgid "Deep Sky Filter"
 msgid "Deep sky filter"
-msgstr "Mélyég szűrés"
+msgstr ""
 
 #: u_translation.rsnebulaeoroth
-#| msgid "Deep Sky or other objects"
 msgid "Deep sky or other objects"
-msgstr "Mélyég vagy más objektumok"
+msgstr ""
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
-msgstr "Ködök körvonala"
+msgstr ""
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
 msgstr ""
 
 #: u_translation.rsneighbor
-#| msgid "Neighbor"
 msgid "Neighbour"
-msgstr "Objektum lista"
+msgstr ""
 
 #: u_translation.rsneptune
 msgid "Neptune"
-msgstr "Neptunusz"
+msgstr ""
 
 #: u_translation.rsnewchart
-#| msgid "New Chart"
 msgid "New chart"
-msgstr "Új térkép"
+msgstr ""
 
 #: u_translation.rsnewfindercir
-#| msgid "New Finder Circle"
 msgid "New finder circle"
-msgstr "Új kereső körök"
+msgstr ""
 
 #: u_translation.rsnewlabel
-#| msgid "New Label"
 msgid "New label"
-msgstr "Új címke"
+msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
-msgstr "Következő >>"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr "Következő térkép"
+msgstr ""
 
 #: u_translation.rsnightvision
-#| msgid "Night Vision"
 msgid "Night vision"
-msgstr "Éjszakai üzemmód"
+msgstr ""
 
 #: u_translation.rsnightvisionb
-#| msgid "Night Vision Button"
 msgid "Night vision button"
-msgstr "Éjszakai üzemmód esetén"
+msgstr ""
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Éjszakai üzemmód"
+msgstr ""
 
 #: u_translation.rsno
 msgid "No."
-msgstr "No."
+msgstr ""
 
 #: u_translation.rsnoasteroidda
-#| msgid "No Asteroid data found!%sPlease load a MPC file first."
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr "Nincs kisbolygó adat! %s Töltsd be először az MPC táblázatot."
+msgstr ""
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -3330,53 +3078,48 @@ msgid "No Data"
 msgstr ""
 
 #: u_translation.rsnomargin
-#| msgid "No Margin"
 msgid "No margin"
-msgstr "Nincs margó"
+msgstr ""
 
 #: u_translation.rsnone1
 msgid "None"
-msgstr "Egyik sem"
+msgstr ""
 
 #: u_translation.rsnonexistant
-#| msgid "Non Existant"
 msgid "Non-existent"
-msgstr "Nem létezik"
+msgstr ""
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
-msgstr "Ismeretlen"
+msgstr ""
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
-msgstr "Nincs rögzített objektum"
+msgstr ""
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "Nincs kép"
+msgstr ""
 
 #: u_translation.rsnoprinterfou
-#| msgid "No Printer found!"
 msgid "No printer found!"
-msgstr "Nincs nyomtató!"
+msgstr ""
 
 #: u_translation.rsnopropermo
-#| msgid ", no proper motion"
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr ", nincs sajátmozgás"
+msgstr ""
 
 #: u_translation.rsnormalcolor
-#| msgid "Normal (color)"
 msgid "Normal (colour)"
-msgstr "Normál (szín)"
+msgstr ""
 
 #: u_translation.rsnorth
 msgid "North"
-msgstr "Észak"
+msgstr "Kuzey"
 
 #: u_translation.rsnotafitsfile
 msgid "Not a FITS file, SIMPLE = T keyword missing"
-msgstr "Nem FITS fájl, SIMPLE = T kulcsszó hiba"
+msgstr ""
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
@@ -3384,7 +3127,7 @@ msgstr ""
 
 #: u_translation.rsnotavailable
 msgid "Not available"
-msgstr "Nem érvényes"
+msgstr ""
 
 #: u_translation.rsnotavailon
 msgid "Not available on %s"
@@ -3392,25 +3135,23 @@ msgstr ""
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
-msgstr "%s nincs kapcsolat."
+msgstr ""
 
 #: u_translation.rsnote
 msgid "Note"
-msgstr "jegyzet"
+msgstr ""
 
 #: u_translation.rsnotfound
 msgid "%s not found"
-msgstr "%s nincs"
+msgstr ""
 
 #: u_translation.rsnotfoundinan
-#| msgid "%s  Not found in any installed catalog index."
 msgid "%s  Not found in any of the installed catalog indices."
-msgstr "%s Nem található egyik installált katalógus keresőjében sem."
+msgstr ""
 
 #: u_translation.rsnotfoundmayb
-#| msgid "%s Not found!%sMaybe the catalog is not installed, or wrong path in catalog setting."
 msgid "%s Not found!%sMaybe the catalog is not installed, or there is a wrong path in catalog setting."
-msgstr "%s Nem található!%sA katalógus nincs installálva, vagy rossz az elérési út a beállításokban."
+msgstr ""
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
@@ -3418,7 +3159,7 @@ msgstr ""
 
 #: u_translation.rsnow
 msgid "Now"
-msgstr "Most"
+msgstr ""
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
@@ -3426,64 +3167,55 @@ msgstr ""
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
-msgstr "Fájlok száma"
+msgstr ""
 
 #: u_translation.rsnumberofmont
-#| msgid "Number of Month"
 msgid "Number of months"
-msgstr "Hónap száma"
+msgstr ""
 
 #: u_translation.rsnumberofnebu
 msgid "Number of nebulae"
-msgstr "Mélyég objektumok száma"
+msgstr ""
 
 #: u_translation.rsnumberofstar
-#| msgid "Number of Stars"
 msgid "Number of stars"
-msgstr "Csillagok száma"
+msgstr ""
 
 #: u_translation.rsnumberofstep
 msgid "Number of steps"
-msgstr "Lépések száma"
+msgstr ""
 
 #: u_translation.rsnutationaber
-#| msgid "Nutation ,  Aberration"
 msgid "Nutation, aberration"
-msgstr "Nutáció, aberráció"
+msgstr ""
 
 #: u_translation.rsobject
 msgid "Object"
-msgstr "Objektum"
+msgstr ""
 
 #: u_translation.rsobjectbar
-#| msgid "Object Bar"
 msgid "Object bar"
-msgstr "Objektumok"
+msgstr ""
 
 #: u_translation.rsobjectfilter
-#| msgid "Object Filter"
 msgid "Object filter"
-msgstr "Objektumok szűrése"
+msgstr ""
 
 #: u_translation.rsobjectfilter2
-#| msgid "Object Filter Setting"
 msgid "Object filter settings"
-msgstr "Objektum szűrés beállítások"
+msgstr ""
 
 #: u_translation.rsobjectlist
-#| msgid "Object List"
 msgid "Object list"
-msgstr "Objektum lista"
+msgstr ""
 
 #: u_translation.rsobjectlistse
-#| msgid "Object List Setting"
 msgid "Object list settings"
-msgstr "Objektum lista beállításai"
+msgstr ""
 
 #: u_translation.rsobjectname
-#| msgid "Object Name"
 msgid "Object name"
-msgstr "Objektum neve"
+msgstr ""
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
@@ -3491,11 +3223,11 @@ msgstr ""
 
 #: u_translation.rsobjects
 msgid "Objects"
-msgstr "Objektumok"
+msgstr ""
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
-msgstr "Objektum méretének egysége"
+msgstr ""
 
 #: u_translation.rsobjectsusedf
 msgid "Objects used for Initialisation"
@@ -3503,20 +3235,19 @@ msgstr ""
 
 #: u_translation.rsobjecttype
 msgid "Object type"
-msgstr "Objektum típusa"
+msgstr ""
 
 #: u_translation.rsobservatory
 msgid "Observatory"
-msgstr "Megfigyelés helye"
+msgstr ""
 
 #: u_translation.rsobservatoryd
-#| msgid "Observatory Database"
 msgid "Observatory database"
-msgstr "Hely adatbázis"
+msgstr ""
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
-msgstr "Kifutó katalógusok"
+msgstr ""
 
 #: u_translation.rsoff
 msgid "Off"
@@ -3524,7 +3255,7 @@ msgstr ""
 
 #: u_translation.rsoffset
 msgid "Offset"
-msgstr "Eltolás"
+msgstr ""
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
@@ -3532,7 +3263,7 @@ msgstr ""
 
 #: u_translation.rsok
 msgid "OK"
-msgstr "OK"
+msgstr ""
 
 #: u_translation.rson
 msgid "On"
@@ -3544,15 +3275,15 @@ msgstr ""
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
-msgstr "Online DSS"
+msgstr ""
 
 #: u_translation.rsonlinedsspic
 msgid "Online DSS pictures"
-msgstr "Online DSS képek"
+msgstr ""
 
 #: u_translation.rsonlinepictur
 msgid "Online pictures servers"
-msgstr "Online képek szervere"
+msgstr ""
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
@@ -3564,93 +3295,87 @@ msgstr ""
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
-msgstr "Csak számozott kisbolygók"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
-msgstr "Csak az első"
+msgstr ""
 
 #: u_translation.rsonlythelast
 msgid "Only the last"
-msgstr "Csak az utolsó"
+msgstr ""
 
 #: u_translation.rsopen
 msgid "Open"
-msgstr "Megnyitás"
+msgstr ""
 
 #: u_translation.rsopenachart
 msgid "Open a chart"
-msgstr "Térkép megnyitása"
+msgstr ""
 
 #: u_translation.rsopencluster
-#| msgid "Open Cluster"
 msgid "Open cluster"
-msgstr "Nyílthalmaz"
+msgstr ""
 
 #: u_translation.rsopenthebitma
 msgid "Open the bitmap."
-msgstr "Bitmap megnyitása"
+msgstr ""
 
 #: u_translation.rsoptions
 msgid "Options"
-msgstr "Beállítások"
+msgstr ""
 
 #: u_translation.rsorbit
 msgid "Orbit"
-msgstr "Pálya"
+msgstr ""
 
 #: u_translation.rsorbitaleleme
-#| msgid "Orbital Elements"
 msgid "Orbital elements"
-msgstr "Pálya adatok"
+msgstr ""
 
 #: u_translation.rsorientation
 msgid "Orientation"
-msgstr "Tájolás"
+msgstr ""
 
 #: u_translation.rsorusealocalf
-#| msgid "Or use a local file :"
 msgid "Or use a local file:"
-msgstr "Letöltött fájl használata"
+msgstr ""
 
 #: u_translation.rsother
 msgid "Other"
-msgstr "Más"
+msgstr ""
 
 #: u_translation.rsotherlabel
 msgid "Other label"
-msgstr "Egyéb címke"
+msgstr ""
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Más szoftver adatbázis"
+msgstr ""
 
 #: u_translation.rsoutputcatalo
-#| msgid "Output Catalog Type"
 msgid "Output catalog type"
-msgstr "Output katalógus típusa"
+msgstr ""
 
 #: u_translation.rsoutputcatalo2
 msgid "Output catalog options"
-msgstr "Output katalógus opciói"
+msgstr ""
 
 #: u_translation.rsoutputdirect
-#| msgid "Output Directory"
 msgid "Output directory"
-msgstr "Output könyvtár"
+msgstr ""
 
 #: u_translation.rspagemarginin
-#| msgid "Page Margin in millimeter"
 msgid "Page margin in millimeters"
-msgstr "Az oldal margói miliméterben"
+msgstr ""
 
 #: u_translation.rsparallax
 msgid "Parallax"
-msgstr "Parallaxis"
+msgstr ""
 
 #: u_translation.rsparametric
 msgid "Parametric"
-msgstr "Paraméterezhető"
+msgstr ""
 
 #: u_translation.rsparity
 msgid "Parity"
@@ -3666,29 +3391,27 @@ msgstr ""
 
 #: u_translation.rspartial
 msgid "Partial"
-msgstr "Részleges"
+msgstr ""
 
 #: u_translation.rspassword
 msgid "Password"
-msgstr "Jelszó"
+msgstr ""
 
 #: u_translation.rspastel
 msgid "Pastel"
-msgstr "Pasztell"
+msgstr ""
 
 #: u_translation.rspath
 msgid "Path"
-msgstr "Elérési út"
+msgstr ""
 
 #: u_translation.rspathtosaveth
-#| msgid "Path to save the file :"
 msgid "Path to save the file:"
-msgstr "A file mentésének elérési útvonala:"
+msgstr ""
 
 #: u_translation.rspathwidth
-#| msgid "Path Width"
 msgid "Path width"
-msgstr "Út szélessége"
+msgstr ""
 
 #: u_translation.rspec
 msgid "PEC"
@@ -3700,27 +3423,27 @@ msgstr ""
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
-msgstr "Penumbra"
+msgstr ""
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "Perihélium dátum"
+msgstr ""
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Perihélium távolság"
+msgstr ""
 
 #: u_translation.rsperiod
 msgid "Period"
-msgstr "Periódus"
+msgstr ""
 
 #: u_translation.rspersonaldata
 msgid "Personal data"
-msgstr "Saját adatok:"
+msgstr ""
 
 #: u_translation.rsphase
 msgid "Phase"
-msgstr "Fázis"
+msgstr ""
 
 #: u_translation.rsphotographic
 msgid "Photographic plate"
@@ -3728,33 +3451,31 @@ msgstr ""
 
 #: u_translation.rsphotographic2
 msgid "Photographic"
-msgstr "Fotografikus"
+msgstr ""
 
 #: u_translation.rspictures
 msgid "Pictures"
-msgstr "Képek"
+msgstr ""
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "pixel"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
-msgstr "Bolygó"
+msgstr ""
 
 #: u_translation.rsplanetaryneb
-#| msgid "Planetary Nebula"
 msgid "Planetary nebula"
-msgstr "Planetáris köd"
+msgstr ""
 
 #: u_translation.rsplanetarysat
 msgid "Planetary satellite"
-msgstr "Bolygó holdja"
+msgstr ""
 
 #: u_translation.rsplanetssetti
-#| msgid "Planets Setting"
 msgid "Planet settings"
-msgstr "Bolygók beállítása"
+msgstr ""
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -3766,21 +3487,19 @@ msgstr ""
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
-msgstr "Ellenőrizd az internet kapcsolatot és az URL-t"
+msgstr ""
 
 #: u_translation.rspleaseconfig
 msgid "Please configure your DSS file path first."
-msgstr "Először állítsd be a DSS fájlok elérési útvonalát."
+msgstr ""
 
 #: u_translation.rspleaseconfig2
-#| msgid "Please configure the orbital element URL!"
 msgid "Please configure the orbital elements URL!"
-msgstr "Állítsd be a pályaelemek URL-jét!"
+msgstr ""
 
 #: u_translation.rspleaseconfir
-#| msgid "Please confirm that the telescope is centered to %s"
 msgid "Please confirm that the telescope is pointed at %s"
-msgstr "Erősítsd meg hogy a távcső középontján a %s  van"
+msgstr ""
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
@@ -3788,20 +3507,19 @@ msgstr ""
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Adj meg egy objektum azonosítót"
+msgstr ""
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Add meg a katalógus rövid nevét"
+msgstr ""
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
-msgstr "Add meg a katalógus hosszú nevét"
+msgstr ""
 
 #: u_translation.rspleaseindica3
-#| msgid "Please indicate the directory where the catalog must to be build"
 msgid "Please indicate the directory where the catalog must be built"
-msgstr "Jelöld ki a könyvtárat ahol a katalógust fel kell építeni"
+msgstr ""
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
@@ -3825,40 +3543,39 @@ msgstr ""
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "A problémák jelentése:"
+msgstr ""
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
-msgstr "Hozdd létre a könyvtárat manuáliasan és indítsd újra a programot."
+msgstr ""
 
 #: u_translation.rspleasetrytor
 msgid "Please try to reinstall the program."
-msgstr "Próbáld újrainstallálni a programot."
+msgstr ""
 
 #: u_translation.rsplottheposit
-#| msgid "Plot the position of moving object."
 msgid "Plot the position of the moving object."
-msgstr "A mozgó objektum poziciójának rajzolása"
+msgstr ""
 
 #: u_translation.rspluto
 msgid "Pluto"
-msgstr "Plútó"
+msgstr ""
 
 #: u_translation.rsplutoisaplan
 msgid "Pluto is a planet."
-msgstr "A Plútó bolygó"
+msgstr ""
 
 #: u_translation.rspm
 msgid "pm"
-msgstr "pm"
+msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
-msgstr "Pólus tengelyének hajlásszöge"
+msgstr ""
 
 #: u_translation.rsport
 msgid "Port:"
-msgstr "Port:"
+msgstr ""
 
 #: u_translation.rsportconfigur
 msgid "Port Configuration"
@@ -3866,57 +3583,51 @@ msgstr ""
 
 #: u_translation.rsportrait
 msgid "Portrait"
-msgstr "Álló"
+msgstr ""
 
 #: u_translation.rsposition
 msgid "Position"
-msgstr "Pozició"
+msgstr ""
 
 #: u_translation.rspositionangl
-#| msgid "Position Angle"
 msgid "Position angle"
-msgstr "Poziciószög"
+msgstr ""
 
 #: u_translation.rspositionepoc
-#| msgid "Position Epoch"
 msgid "Position epoch"
-msgstr "Pozició epocha"
+msgstr ""
 
 #: u_translation.rspostscript
-#| msgid "Postscript"
 msgid "PostScript"
-msgstr "Postscript"
+msgstr ""
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr ""
 
 #: u_translation.rsprefixthealt
-#| msgid "Prefix the alternate names with their label"
 msgid "Prefix the alternative names with their label"
-msgstr "Alternativ név előtt a címke neve"
+msgstr ""
 
 #: u_translation.rsprepareacata
-#| msgid "Prepare a catalog CatGen"
 msgid "Prepare a catalog with CatGen"
-msgstr "CatGen katalógus készítése"
+msgstr ""
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
-msgstr "Adatok előkészítése "
+msgstr ""
 
 #: u_translation.rspreparemonth
-#| msgid "Prepare Monthly Data"
 msgid "Prepare monthly data"
-msgstr "Havi adatok előkészítése"
+msgstr ""
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
-msgstr "Nyomás (milibár)"
+msgstr ""
 
 #: u_translation.rsprev
 msgid "<<   Prev"
-msgstr "<< Előző"
+msgstr ""
 
 #: u_translation.rspreview
 msgid "Preview"
@@ -3924,12 +3635,11 @@ msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
-msgstr "Nyomtatás"
+msgstr ""
 
 #: u_translation.rsprintchart
-#| msgid "Print Chart"
 msgid "Print chart"
-msgstr "Térkép nyomtatása"
+msgstr ""
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
@@ -3937,20 +3647,19 @@ msgstr ""
 
 #: u_translation.rsprinter
 msgid "Printer:"
-msgstr "Nyomtató:"
+msgstr ""
 
 #: u_translation.rsprinterlegen
 msgid "Printer legend"
-msgstr "Nyomtatás jelmagyarázat"
+msgstr ""
 
 #: u_translation.rsprintersetup
-#| msgid "Printer Setup"
 msgid "Printer setup"
-msgstr "Nyomtató beállítás"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
-msgstr "Nyomtatás módja"
+msgstr ""
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
@@ -3958,100 +3667,91 @@ msgstr ""
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
-msgstr "Térkép nyomtatása"
+msgstr ""
 
 #: u_translation.rsprocessing
 msgid "Processing... %s"
-msgstr "Feldolgozás... %s"
+msgstr ""
 
 #: u_translation.rsprocessingen
-#| msgid "Processing ended. Total number of comet :%s"
 msgid "Processing ended. Total number of comets: %s"
-msgstr "Feldolgozás vége. Összesen %s számú üstökös."
+msgstr ""
 
 #: u_translation.rsprocessingen2
-#| msgid "Processing ended. Total number of asteroid :%s"
 msgid "Processing ended. Total number of asteroids: %s"
-msgstr "Feldolgozás vége. Összesen %s számú kisbolygó."
+msgstr ""
 
 #: u_translation.rsprocessingen3
 msgid "Processing ended. Total number of location :%s"
-msgstr "Feldolgozás vége. Összesen %s számú hely."
+msgstr ""
 
 #: u_translation.rsprocessingli
 msgid "Processing line %s"
-msgstr "Sor feldolgozása %s"
+msgstr ""
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
 msgstr ""
 
 #: u_translation.rsprogramdata
-#| msgid "Program Data "
 msgid "Program data "
-msgstr "Program adatok: "
+msgstr ""
 
 #: u_translation.rsprograminfor
-#| msgid "Program Information"
 msgid "Program information"
-msgstr "Program információk"
+msgstr ""
 
 #: u_translation.rsprogrammer
 msgid "Programmer:"
-msgstr "Programozó"
+msgstr ""
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr "Folyamatban"
+msgstr ""
 
 #: u_translation.rsprogressmess
-#| msgid "Progress Messages"
 msgid "Progress messages"
-msgstr "A folyamat üzenetei"
+msgstr ""
 
 #: u_translation.rsprojection
 msgid "Projection"
-msgstr "Projekció"
+msgstr ""
 
 #: u_translation.rsprojectionse
-#| msgid "Projection Setting"
 msgid "Projection settings"
-msgstr "Projekció beállításai"
+msgstr ""
 
 #: u_translation.rspropermotion
-#| msgid "Proper Motion in Right ascension"
 msgid "Proper motion in right ascension"
-msgstr "Sajátmozgás rektaszcenziója"
+msgstr ""
 
 #: u_translation.rspropermotion2
-#| msgid "Proper Motion in Declination"
 msgid "Proper motion in declination"
-msgstr "Sajátmozgás deklinációja"
+msgstr ""
 
 #: u_translation.rspropermotion3
-#| msgid "Proper Motion"
 msgid "Proper motion"
-msgstr "Sajátmozgás"
+msgstr ""
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
-msgstr "A csóva méretével arányosan"
+msgstr ""
 
 #: u_translation.rsproportional2
 msgid "Proportional to the magnitude"
-msgstr "A magnitúdóval arányosan"
+msgstr ""
 
 #: u_translation.rsproxy
 msgid "Proxy"
-msgstr "Proxy"
+msgstr ""
 
 #: u_translation.rsproxyhost
 msgid "Proxy host"
-msgstr "Proxy IP"
+msgstr ""
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Proxy port"
+msgstr ""
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
@@ -4067,34 +3767,31 @@ msgstr ""
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "Kvazár"
+msgstr ""
 
 #: u_translation.rsquery
 msgid "Query"
 msgstr ""
 
 #: u_translation.rsquickdelete
-#| msgid "Quick Delete"
 msgid "Quick delete"
-msgstr "Gyorstörlés"
+msgstr ""
 
 #: u_translation.rsquicklydelet
-#| msgid "Quickly delete all comet related data"
 msgid "Quickly delete all data related to comets"
-msgstr "Minden üstökös adat törlése"
+msgstr ""
 
 #: u_translation.rsquicklydelet2
-#| msgid "Quickly delete all asteroid related data"
 msgid "Quickly delete all data related to asteroids"
-msgstr "Minden kisbolygó adat törlése"
+msgstr ""
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr "Gyors segítség"
+msgstr ""
 
 #: u_translation.rsra
 msgid "RA"
-msgstr "RA"
+msgstr ""
 
 #: u_translation.rsraazpeccompe
 msgid "RA/AZ PEC Compensation"
@@ -4105,30 +3802,28 @@ msgid "RA/Az Slew Rate"
 msgstr ""
 
 #: u_translation.rsradialveloci
-#| msgid "Radial Velocity"
 msgid "Radial velocity"
-msgstr "Vöröseltolódás"
+msgstr ""
 
 #: u_translation.rsrange
 msgid "Range"
-msgstr "Tartomány"
+msgstr ""
 
 #: u_translation.rsraoptions
 msgid "RA options"
-msgstr "RA opciók"
+msgstr ""
 
 #: u_translation.rsrasterresolu
-#| msgid "Raster Resolution"
 msgid "Raster resolution"
-msgstr "Raszter felbontása"
+msgstr ""
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA forgatás: "
+msgstr ""
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA forgatás:"
+msgstr ""
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
@@ -4136,7 +3831,7 @@ msgstr ""
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
-msgstr "Valós képek"
+msgstr ""
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
@@ -4144,20 +3839,19 @@ msgstr ""
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
-msgstr "RealSky North"
+msgstr ""
 
 #: u_translation.rsrealskysouth
 msgid "RealSky South"
-msgstr "RealSky South"
+msgstr ""
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
 msgstr ""
 
 #: u_translation.rsrecognizeuni
-#| msgid "Recognize Units or Object type from the file:"
 msgid "Recognize units or object type from the file:"
-msgstr "Az objektum típusának és a méret egységének betöltése a fájlból:"
+msgstr ""
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
@@ -4185,38 +3879,35 @@ msgstr ""
 
 #: u_translation.rsred
 msgid "Red"
-msgstr "Vörös"
+msgstr ""
 
 #: u_translation.rsredmagnitude
-#| msgid "Red Magnitude"
 msgid "Red magnitude"
-msgstr "Vörös magnitúdó"
+msgstr ""
 
 #: u_translation.rsredo
 msgid "Redo"
-msgstr "Mégis"
+msgstr ""
 
 #: u_translation.rsredolastchan
-#| msgid "Redo Last Change"
 msgid "Redo last change"
-msgstr "Utolsó változtatások mégis"
+msgstr ""
 
 #: u_translation.rsreducedetail
-#| msgid "Reduce detail when moving the chart"
 msgid "Reduce details when moving the chart"
-msgstr "Részletesség csökkentése a térkép mozgatása esetén"
+msgstr ""
 
 #: u_translation.rsreference
 msgid "Reference"
-msgstr "Referencia"
+msgstr ""
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Reflexiós köd"
+msgstr ""
 
 #: u_translation.rsrefresh
 msgid "Refresh"
-msgstr "Frissítés"
+msgstr ""
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
@@ -4227,9 +3918,8 @@ msgid "Refresh rate"
 msgstr ""
 
 #: u_translation.rsreleasenotes
-#| msgid "Release Notes"
 msgid "Release notes"
-msgstr "Verzió információk"
+msgstr ""
 
 #: u_translation.rsreload
 msgid "Reload"
@@ -4240,65 +3930,56 @@ msgid "Reload %s for current chart"
 msgstr ""
 
 #: u_translation.rsremoveallcir
-#| msgid "Remove All Circles"
 msgid "Remove all circles"
-msgstr "Az összes kereső kör eltüntetése"
+msgstr ""
 
 #: u_translation.rsremovealllab
-#| msgid "Remove All Labels"
 msgid "Remove all labels"
-msgstr "Minden címke törlése"
+msgstr ""
 
 #: u_translation.rsremovelastci
-#| msgid "Remove Last Circle"
 msgid "Remove last circle"
-msgstr "Az utolsó kereső kör eltüntetése"
+msgstr ""
 
 #: u_translation.rsremovelastla
-#| msgid "Remove Last Label"
 msgid "Remove last label"
-msgstr "Utolsó címke törlése"
+msgstr ""
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
-msgstr "Helyettesítve"
+msgstr ""
 
 #: u_translation.rsreportaprobl
 msgid "Report a problem"
-msgstr "Probléma jelentése"
+msgstr ""
 
 #: u_translation.rsrequesttimeo
-#| msgid "Request timeout. You probably asked a too width area that request too much processing time on the remote server."
 msgid "Request timeout. You probably asked a too wide area which demanded too much processing time on the remote server."
-msgstr "Időtúllépés. Valószínüleg túl nagy területet kértél és ez túl sok időt vesz igénybe a szerveren."
+msgstr ""
 
 #: u_translation.rsrequiredfiel
-#| msgid "Required field missing !"
 msgid "Required field missing!"
-msgstr "Hiányzó kötelező mező!"
+msgstr ""
 
 #: u_translation.rsrequirexplan
-#| msgid "(require Xplanet 1.2.0)"
 msgid "(requires Xplanet 1.2.0)"
-msgstr "(Xplanet 1.2.0 szükséges)"
+msgstr ""
 
 #: u_translation.rsreset
 msgid "Reset"
-msgstr "Alapértékek"
+msgstr ""
 
 #: u_translation.rsresetalllabe
-#| msgid "Reset All Labels"
 msgid "Reset all labels"
-msgstr "Cimkék alapállapotba"
+msgstr ""
 
 #: u_translation.rsresetchart
-#| msgid "Reset Chart"
 msgid "Reset chart"
-msgstr "Térkép alapbeállít."
+msgstr ""
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr "Alapértelmezett térkép beállítások"
+msgstr ""
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
@@ -4310,7 +3991,7 @@ msgstr ""
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr "Felbontás:"
+msgstr ""
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
@@ -4322,35 +4003,35 @@ msgstr ""
 
 #: u_translation.rsreturn
 msgid "Return"
-msgstr "Vissza"
+msgstr ""
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr "Ellentétes forgású Alt finombeállító gomb"
+msgstr ""
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr "Ellentétes forgású Az finombeállító gomb"
+msgstr ""
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr "Ellentétes forgású DEC finombeállító gomb"
+msgstr ""
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr "Ellentétes forgású RA finombeállító gomb"
+msgstr ""
 
 #: u_translation.rsright
 msgid "Right"
-msgstr "Jobbra"
+msgstr ""
 
 #: u_translation.rsrightascensi
 msgid "Right Ascension"
-msgstr "Rektaszcenzió"
+msgstr ""
 
 #: u_translation.rsrightbar
 msgid "Right Bar"
-msgstr "Jobboldali"
+msgstr ""
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
@@ -4358,25 +4039,23 @@ msgstr ""
 
 #: u_translation.rsrise
 msgid "Rise"
-msgstr "Kél"
+msgstr ""
 
 #: u_translation.rsrisetime
 msgid "Rise time"
-msgstr "Kelés ideje"
+msgstr ""
 
 #: u_translation.rsrotateleft
-#| msgid "Rotate Left"
 msgid "Rotate left"
-msgstr "Forgatás balra"
+msgstr ""
 
 #: u_translation.rsrotateright
-#| msgid "Rotate Right"
 msgid "Rotate right"
-msgstr "Forgatás jobbra"
+msgstr ""
 
 #: u_translation.rsrotation
 msgid "Rotation"
-msgstr "Forgatás"
+msgstr ""
 
 #: u_translation.rsrows
 msgid "Rows"
@@ -4384,97 +4063,87 @@ msgstr ""
 
 #: u_translation.rssaros
 msgid "Saros"
-msgstr "Szárosz"
+msgstr ""
 
 #: u_translation.rssatellite
 msgid "Satellite"
-msgstr "Satellite"
+msgstr ""
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
 msgstr ""
 
 #: u_translation.rssatring
-#| msgid "Sat.Ring"
 msgid "Sat. ring"
-msgstr "Szat.gyűrü"
+msgstr ""
 
 #: u_translation.rssaturday
 msgid "Sat."
-msgstr "Szo."
+msgstr ""
 
 #: u_translation.rssaturn
 msgid "Saturn"
-msgstr "Szaturnusz"
+msgstr ""
 
 #: u_translation.rssave
 msgid "Save"
-msgstr "Mentés"
+msgstr ""
 
 #: u_translation.rssaveas
-#| msgid "Save As..."
 msgid "Save as..."
-msgstr "Mentés másképp..."
+msgstr ""
 
 #: u_translation.rssaveconfigur
-#| msgid "Save Configuration Now"
 msgid "Save configuration now"
-msgstr "Beállítások mentése"
+msgstr ""
 
 #: u_translation.rssaveconfigur2
-#| msgid "Save Configuration On Exit"
 msgid "Save configuration on exit"
-msgstr "Beállítások mentése kilépéskor"
+msgstr ""
 
 #: u_translation.rssaveimage
-#| msgid "Save Image..."
 msgid "Save image..."
-msgstr "Kép mentése"
+msgstr ""
 
 #: u_translation.rssaveproject
-#| msgid "Save Project"
 msgid "Save project"
-msgstr "Project mentése"
+msgstr ""
 
 #: u_translation.rssavesetting
 msgid "Save setting"
 msgstr ""
 
 #: u_translation.rssavethecurre
-#| msgid "Save the current chart"
 msgid "Save the active chart"
-msgstr "Az aktuális térkép mentése"
+msgstr ""
 
 #: u_translation.rssavetofile
-#| msgid "Save to File"
 msgid "Save to file"
-msgstr "Mentés fájlba"
+msgstr ""
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
-msgstr "Könyvtár átnézése"
+msgstr ""
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
 msgstr ""
 
 #: u_translation.rsscreenandsta
-#| msgid "Screen and Status Bar"
 msgid "Screen and status bar"
-msgstr "Kép és státusz sor"
+msgstr ""
 
 #: u_translation.rsscrollbar
-#| msgid "Scroll Bar"
 msgid "Scroll bar"
-msgstr "Görgető sáv"
+msgstr ""
 
 #: u_translation.rssday
 msgid "D"
-msgstr "n"
+msgstr ""
 
 #: u_translation.rssearch
 msgid "Search"
-msgstr "Keresés"
+msgstr ""
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
@@ -4490,28 +4159,27 @@ msgstr ""
 
 #: u_translation.rssearchfor
 msgid "Search for"
-msgstr "Keresés"
+msgstr ""
 
 #: u_translation.rssearchindex
-#| msgid "Search Index"
 msgid "Search index"
-msgstr "Kereső index"
+msgstr ""
 
 #: u_translation.rssec
 msgid "s"
-msgstr "\""
+msgstr "s"
 
 #: u_translation.rssec2
 msgid "Sec."
-msgstr "mp."
+msgstr ""
 
 #: u_translation.rssecond
 msgid "Second"
-msgstr "Másodperc"
+msgstr "Saniye"
 
 #: u_translation.rsseconds
 msgid "Seconds"
-msgstr "másodpercenként"
+msgstr ""
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
@@ -4526,9 +4194,8 @@ msgid "Select"
 msgstr ""
 
 #: u_translation.rsselectall
-#| msgid "Select All"
 msgid "Select all"
-msgstr "Mindent kiválaszt"
+msgstr ""
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
@@ -4548,38 +4215,35 @@ msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
-msgstr "Válaszd ki a mezőket és kezdőpoziciójukat a text fájlban"
+msgstr ""
 
 #: u_translation.rsselectthesys
 msgid "Select the system printer and options you want to use"
-msgstr "Válaszd a nyomtató beállításait a helyes nyomtatáshoz"
+msgstr ""
 
 #: u_translation.rsselectthetel
 msgid "Select the telescope interface"
-msgstr "Távcső vezérlésének kiválaszása"
+msgstr ""
 
 #: u_translation.rsselectthetyp
-#| msgid "Select the type of object in your catalog"
 msgid "Select the type of objects in your catalog"
-msgstr "Válaszd ki a katalógusodhoz megfelelő típust"
+msgstr ""
 
 #: u_translation.rssemi
 msgid "Semi"
-msgstr "Fél"
+msgstr ""
 
 #: u_translation.rssemimajoraxi
-#| msgid "Semimajor Axis"
 msgid "Semimajor axis"
-msgstr "Fél nagytengely - a"
+msgstr ""
 
 #: u_translation.rssendcharttop
-#| msgid "Send chart to printer."
 msgid "Send the chart to the printer."
-msgstr "Térkép a nyomtatóra"
+msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "Szögtávolság"
+msgstr ""
 
 #: u_translation.rsserialport
 msgid "Serial Port"
@@ -4587,26 +4251,23 @@ msgstr ""
 
 #: u_translation.rsserver
 msgid "Server"
-msgstr "Szerver"
+msgstr ""
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr "Szerver parancs "
+msgstr ""
 
 #: u_translation.rsserverinform
-#| msgid "Server Information"
 msgid "Server information"
-msgstr "Szerver információk"
+msgstr ""
 
 #: u_translation.rsserveripinte
-#| msgid "Server IP Interface :"
 msgid "Server IP interface:"
-msgstr "Szerver IP cím:"
+msgstr ""
 
 #: u_translation.rsserveripport
-#| msgid "Server IP Port :"
 msgid "Server IP port:"
-msgstr "Szerver IP port:"
+msgstr ""
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
@@ -4614,24 +4275,23 @@ msgstr ""
 
 #: u_translation.rsset
 msgid "Set"
-msgstr "Nyugszik"
+msgstr ""
 
 #: u_translation.rssetdateandti
 msgid "Set date and time"
-msgstr "Dátum és idő beállítása"
+msgstr ""
 
 #: u_translation.rssetfov
 msgid "Set FOV"
-msgstr "Látómező beállítása"
+msgstr ""
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
-msgstr "Látómező:"
+msgstr ""
 
 #: u_translation.rssethowthemou
-#| msgid "Set how the mount move on each axis when you turn the driving knob. Then the Telescope button show you the turns you must do to go from one object to another."
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Állítsd be, hogy miként mozog az állványod mindkét tengelyén, amikor mozgatod a finombeállító gombokat. Ezután a Távcső ablak megmutatja az elvégezendő forgatások számát a következő objektumig."
+msgstr ""
 
 #: u_translation.rssetlocation
 msgid "Set Location"
@@ -4639,7 +4299,7 @@ msgstr ""
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
-msgstr "Megfigyelés helyének beállítása"
+msgstr ""
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
@@ -4659,116 +4319,99 @@ msgstr ""
 
 #: u_translation.rssetup
 msgid "Setup"
-msgstr "Beállítások"
+msgstr ""
 
 #: u_translation.rsshour
 msgid "H"
-msgstr "ó"
+msgstr ""
 
 #: u_translation.rsshowallsky
-#| msgid "Show All Sky"
 msgid "Show all sky"
-msgstr "Teljes ég mutatása"
+msgstr ""
 
 #: u_translation.rsshowasteroid
-#| msgid "Show Asteroids"
 msgid "Show asteroids"
-msgstr "Kisbolygók mutatása"
+msgstr ""
 
 #: u_translation.rsshowasteroid3
 msgid "Show asteroids on the chart"
-msgstr "Kisbolygók mutatása a térképen"
+msgstr ""
 
 #: u_translation.rsshowcomets
-#| msgid "Show Comets"
 msgid "Show comets"
-msgstr "Üstökösök mutatása"
+msgstr ""
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
-msgstr "Üstökösök mutatása a térképen"
+msgstr ""
 
 #: u_translation.rsshowconstell
-#| msgid "Show Constellation Line"
 msgid "Show constellation lines"
-msgstr "Csillagkép vonalak mutatása"
+msgstr ""
 
 #: u_translation.rsshowconstell2
-#| msgid "Show Constellation Limit"
 msgid "Show constellation limits"
-msgstr "Csillagképek határainak mutatása"
+msgstr ""
 
 #: u_translation.rsshowconstell3
-#| msgid "Show Constellation Figure"
 msgid "Show constellation figures"
-msgstr "Csillagkép ábrák mutatása"
+msgstr ""
 
 #: u_translation.rsshowconstell4
-#| msgid "Show Constellation Boundary"
 msgid "Show constellation boundaries"
-msgstr "Csillagkép határok mutatása"
+msgstr ""
 
 #: u_translation.rsshowcoordina
-#| msgid "Show Coordinate Grid"
 msgid "Show coordinates grid"
-msgstr "Azimutális háló mutatása"
+msgstr ""
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
 msgstr ""
 
 #: u_translation.rsshowearthsha
-#| msgid "Show Earth Shadow  (Lunar eclipses)"
 msgid "Show Earth shadow (Lunar eclipses)"
-msgstr "Földárnyék mutatása"
+msgstr ""
 
 #: u_translation.rsshowecliptic
-#| msgid "Show Ecliptic"
 msgid "Show ecliptic"
-msgstr "Ekliptika mutatása"
+msgstr ""
 
 #: u_translation.rsshowgalactic
-#| msgid "Show Galactic Equator"
 msgid "Show galactic equator"
-msgstr "Galaxis egyenlítőjének mutatása"
+msgstr ""
 
 #: u_translation.rsshowgrid
-#| msgid "Show Grid"
 msgid "Show grid"
-msgstr "Háló mutatása"
+msgstr ""
 
 #: u_translation.rsshowgridlabe
-#| msgid "Show Grid Label"
 msgid "Show grid label"
-msgstr "Háló címkéinek mutatása"
+msgstr ""
 
 #: u_translation.rsshowhidedssi
-#| msgid "Show/Hide DSS image"
 msgid "Show/hide DSS image"
-msgstr "DSS kép mutatása/elrejtése"
+msgstr ""
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
-msgstr "IR változók mutatása"
+msgstr ""
 
 #: u_translation.rsshowlabels
-#| msgid "Show Labels"
 msgid "Show labels"
-msgstr "Címkék mutatása"
+msgstr ""
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
 msgstr ""
 
 #: u_translation.rsshowlines
-#| msgid "Show Lines"
 msgid "Show lines"
-msgstr "Vonalak mutatása"
+msgstr ""
 
 #: u_translation.rsshowmark
-#| msgid "Show Mark"
 msgid "Show mark"
-msgstr "Kereső kör"
+msgstr ""
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
@@ -4776,58 +4419,51 @@ msgstr ""
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
-msgstr "Tejút mutatása"
+msgstr ""
 
 #: u_translation.rsshownebulae
-#| msgid "Show Deep Sky Objects"
 msgid "Show deep sky objects"
-msgstr "Mélyég objektumok mutatása"
+msgstr ""
 
 #: u_translation.rsshowobjectbe
-#| msgid "Show Object below the horizon"
 msgid "Show objects below the horizon"
-msgstr "Horizont alatti objektumok mutatása"
+msgstr ""
 
 #: u_translation.rsshowobjectpi
 msgid "Show object pictures on the chart"
-msgstr "Az objektumok képének mutatása a térképen"
+msgstr ""
 
 #: u_translation.rsshowobjects
-#| msgid "Show Objects"
 msgid "Show objects"
-msgstr "Objektumok mutatása"
+msgstr ""
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
 msgstr ""
 
 #: u_translation.rsshowpictures
-#| msgid "Show Pictures"
 msgid "Show pictures"
-msgstr "Képek mutatása"
+msgstr ""
 
 #: u_translation.rsshowplaneton
-#| msgid "Show Planet on the Chart"
 msgid "Show planets on the chart"
-msgstr "Bolygók megjelenítése a térképen"
+msgstr ""
 
 #: u_translation.rsshowplanets
-#| msgid "Show Planets"
 msgid "Show planets"
-msgstr "Bolygók mutatása"
+msgstr ""
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr "Pozició megjelenítése a címsorban"
+msgstr ""
 
 #: u_translation.rsshowstars
-#| msgid "Show Stars"
 msgid "Show stars"
-msgstr "Csillagok mutatása"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "Mutatsd a képet"
+msgstr ""
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
@@ -4838,50 +4474,44 @@ msgid "Show Virtual Observatory data"
 msgstr ""
 
 #: u_translation.rssideral
-#| msgid "Sideral"
 msgid "Sidereal"
-msgstr "Sziderikus"
+msgstr ""
 
 #: u_translation.rssiderealday
-#| msgid "Sidereal Day"
 msgid "Sidereal day"
-msgstr "Sziderikus nap"
+msgstr ""
 
 #: u_translation.rssimulation
 msgid "Simulation"
-msgstr "Szimuláció"
+msgstr ""
 
 #: u_translation.rssize
 msgid "Size"
-msgstr "Méret"
+msgstr ""
 
 #: u_translation.rsskybackgroun
-#| msgid "Sky Background Color"
 msgid "Sky background colour"
-msgstr "Égi háttér színe"
+msgstr ""
 
 #: u_translation.rsskycharthome
-#| msgid "Skychart Homepage"
 msgid "Skychart homepage"
-msgstr "SkyChart honlap"
+msgstr ""
 
 #: u_translation.rsskycharticon
-#| msgid "Skychart Icon Setup"
 msgid "Skychart icon setup"
-msgstr "Skychart ikon beállítás"
+msgstr ""
 
 #: u_translation.rsskycharts
 msgid "Sky Charts"
-msgstr "Sky Charts"
+msgstr ""
 
 #: u_translation.rsskycolour
-#| msgid "Sky Colour"
 msgid "Sky colour"
-msgstr "Ég színe"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Mozgatás"
+msgstr ""
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -4901,29 +4531,27 @@ msgstr ""
 
 #: u_translation.rssmallstars
 msgid "Small stars"
-msgstr "Kis csillagok"
+msgstr ""
 
 #: u_translation.rssminute
 msgid "M"
-msgstr "H"
+msgstr ""
 
 #: u_translation.rssmonth
 msgid "M."
-msgstr "M."
+msgstr ""
 
 #: u_translation.rssocketerror
 msgid "Socket error %s.  %s"
-msgstr "Socket hiba %s. %s"
+msgstr ""
 
 #: u_translation.rssolardistanc
-#| msgid "Solar Distance"
 msgid "Solar distance"
-msgstr "Naptávolság"
+msgstr ""
 
 #: u_translation.rssolareclipse
-#| msgid "Solar Eclipses"
 msgid "Solar eclipses"
-msgstr "Napfogyatkozás"
+msgstr ""
 
 #: u_translation.rssolarelongat
 msgid "Solar elongation"
@@ -4931,27 +4559,23 @@ msgstr ""
 
 #: u_translation.rssolarsystem
 msgid "Solar System"
-msgstr "Naprendszer"
+msgstr ""
 
 #: u_translation.rssolarsystemo
-#| msgid "Solar System object"
 msgid "Solar system object"
-msgstr "Naprendszer objektum"
+msgstr ""
 
 #: u_translation.rssolarsystems
-#| msgid "Solar System Setting"
 msgid "Solar system settings"
-msgstr "Naprendszer beállításai"
+msgstr ""
 
 #: u_translation.rssomerecordsw
-#| msgid "Some records where rejected, see file %sreject.txt for details"
 msgid "Some records where rejected, see the file %sreject.txt for details."
-msgstr "Néhány record nem lett elfogadva, ellenőrizd a %s reject.txt fájlban a részletekért."
+msgstr ""
 
 #: u_translation.rssomethinggow
-#| msgid "Something go wrong during program initialization. We must now close"
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr "A program betöltése során hiba történt. A program most bezár."
+msgstr ""
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -4963,20 +4587,19 @@ msgstr ""
 
 #: u_translation.rssortingfiles
 msgid "Sorting files by magnitude"
-msgstr "Fájlok rendezése magnitúdó szerint"
+msgstr ""
 
 #: u_translation.rssortingthein
 msgid "Sorting the index file "
-msgstr "Index fájl rendezése "
+msgstr ""
 
 #: u_translation.rssouth
 msgid "South"
-msgstr "Dél"
+msgstr "Güney"
 
 #: u_translation.rsspectralclas
-#| msgid "Spectral Class"
 msgid "Spectral class"
-msgstr "Színképosztály"
+msgstr ""
 
 #: u_translation.rsspeed
 msgid "Speed"
@@ -4992,97 +4615,87 @@ msgstr ""
 
 #: u_translation.rsspline
 msgid "Spline"
-msgstr "Barázda"
+msgstr ""
 
 #: u_translation.rssqldatabasen
 msgid "SQL database not available."
-msgstr "Az SQL adatbázis nem elérhető"
+msgstr ""
 
 #: u_translation.rssqldatabases
 msgid "SQL database software is probably not installed!"
-msgstr "Az SQL adatbázis szoftver valószínüleg nincs telepítve!"
+msgstr ""
 
 #: u_translation.rssqlitedataba
-#| msgid "Sqlite Database"
 msgid "SQLite database"
-msgstr "SQLite adatbázis"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
-msgstr "Négyzet"
+msgstr ""
 
 #: u_translation.rsssecond
 msgid "S"
-msgstr "mp"
+msgstr ""
 
 #: u_translation.rsstandardcolo
-#| msgid "Standard  Color"
 msgid "Standard  colour"
-msgstr "Szabványos színek"
+msgstr ""
 
 #: u_translation.rsstar
 msgid "Star"
-msgstr "Csillag"
+msgstr ""
 
 #: u_translation.rsstarcolourbv
-#| msgid "Star colour (B-V) :"
 msgid "Star colour (B-V):"
-msgstr "Csillagok színe (B-V):"
+msgstr ""
 
 #: u_translation.rsstarcommonna
-#| msgid "Star Common Name"
 msgid "Star common name"
-msgstr "Csillag szokásos neve"
+msgstr ""
 
 #: u_translation.rsstardisplay
-#| msgid "Star Display"
 msgid "Star display"
-msgstr "Csillagok megjelenítése"
+msgstr ""
 
 #: u_translation.rsstarlabel
-#| msgid "Star Label"
 msgid "Star label"
-msgstr "Csillag címke"
+msgstr ""
 
 #: u_translation.rsstars
 msgid "Stars"
-msgstr "Csillagok"
+msgstr ""
 
 #: u_translation.rsstarsandnebu
-#| msgid "Stars and Deep Sky catalogs prepared with "
 msgid "Stars and deep sky catalogs prepared with "
-msgstr "Csillag és mélyég katalógus készítése: "
+msgstr ""
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
 msgstr ""
 
 #: u_translation.rsstarsfilter
-#| msgid "Stars Filter"
 msgid "Star filter"
-msgstr "Csillagok szűrése"
+msgstr ""
 
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
-msgstr "Csillagok sajátmozgása opció (ha rendelkezésre áll a katalógusban)"
+msgstr ""
 
 #: u_translation.rsstartmonth
-#| msgid "Start Month"
 msgid "Start month"
-msgstr "Hónap kezdete"
+msgstr ""
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
-msgstr "Objektum eleje"
+msgstr ""
 
 #: u_translation.rsstatus
 msgid "Status"
 msgstr ""
 
 #: u_translation.rsstatusbar
-#| msgid "Status Bar"
 msgid "Status bar"
-msgstr "Státusz sor"
+msgstr ""
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
@@ -5094,7 +4707,7 @@ msgstr ""
 
 #: u_translation.rsstepunit
 msgid "Step unit"
-msgstr "Lépésköz"
+msgstr ""
 
 #: u_translation.rsstop
 msgid "Stop"
@@ -5106,19 +4719,19 @@ msgstr ""
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
-msgstr "TCP/IP szerver leállítása"
+msgstr ""
 
 #: u_translation.rssun
 msgid "Sun"
-msgstr "Nap"
+msgstr ""
 
 #: u_translation.rssunalt
 msgid "Sun alt."
-msgstr "Nap alt."
+msgstr ""
 
 #: u_translation.rssunday
 msgid "Sun."
-msgstr "Vas."
+msgstr ""
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
@@ -5126,20 +4739,19 @@ msgstr ""
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
-msgstr "Nap inklináció"
+msgstr ""
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "Szupernova maradvány"
+msgstr ""
 
 #: u_translation.rssurface
 msgid "Surface"
-msgstr "Felület"
+msgstr ""
 
 #: u_translation.rssurfacebrigh
-#| msgid "Surface Brightness"
 msgid "Surface brightness"
-msgstr "Felületi fényesség"
+msgstr ""
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
@@ -5151,34 +4763,31 @@ msgstr ""
 
 #: u_translation.rssyear
 msgid "Y"
-msgstr "É"
+msgstr ""
 
 #: u_translation.rssymbol
 msgid "Symbol"
-msgstr "Szimbólum"
+msgstr ""
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr "Szinkronizálás"
+msgstr ""
 
 #: u_translation.rssynodicmonth
-#| msgid "Synodic Month"
 msgid "Synodic month"
-msgstr "Szinodikus hónap"
+msgstr ""
 
 #: u_translation.rssystem
 msgid "System"
-msgstr "Rendszer"
+msgstr ""
 
 #: u_translation.rssystemprinte
-#| msgid "System Printer"
 msgid "System printer"
-msgstr "Rendszer nyomtatója"
+msgstr ""
 
 #: u_translation.rssystemsettin
-#| msgid "System Setting"
 msgid "System settings"
-msgstr "Rendszer beállítások"
+msgstr ""
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5189,70 +4798,64 @@ msgid "Table"
 msgstr ""
 
 #: u_translation.rstabledonotex
-#| msgid "%sTable %s do not exist! %sPlease correct the error and retry."
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
-msgstr "%sTábla %s nem létezik! %sjavítsd ki a hibát és próbáld újra."
+msgstr ""
 
 #: u_translation.rstableexist
-#| msgid "%sTable exist %s"
 msgid "%sThis table exists: %s"
-msgstr "%sTábla létezik %s"
+msgstr ""
 
 #: u_translation.rstcpipconnect
-#| msgid "TCP/IP Connection"
 msgid "TCP/IP connection"
-msgstr "TCP/IP kapcsolat"
+msgstr ""
 
 #: u_translation.rstcpipserver
-#| msgid "TCP/IP Server"
 msgid "TCP/IP server"
-msgstr "TCP/IP szerver"
+msgstr ""
 
 #: u_translation.rstcpipservice
 msgid "TCP/IP service not available."
-msgstr "A TCP/IP szolgáltatás nem elérhető"
+msgstr ""
 
 #: u_translation.rstelescope
 msgid "Telescope"
-msgstr "Távcső"
+msgstr ""
 
 #: u_translation.rstelescope2
 msgid "Telescope: %s"
-msgstr "Távcső: %s"
+msgstr ""
 
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
-msgstr "A távcső nincs csatlakoztatva"
+msgstr ""
 
 #: u_translation.rstelescopeset
-#| msgid "Telescope Setting"
 msgid "Telescope settings"
-msgstr "Távcső beállítások"
+msgstr ""
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
-msgstr "Távcső típus"
+msgstr ""
 
 #: u_translation.rstemperaturec
 msgid "Temperature (Celsius)"
-msgstr "Hőmérséklet (Celsius)"
+msgstr ""
 
 #: u_translation.rstemporaryfil
 msgid "temporary file"
-msgstr "Ideiglenes fájlok"
+msgstr ""
 
 #: u_translation.rstext
 msgid "Text"
-msgstr "Szöveg"
+msgstr ""
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr "Szövegfájl katalógus"
+msgstr ""
 
 #: u_translation.rstextsize
-#| msgid "Text Size"
 msgid "Text size"
-msgstr "Szöveg mérete"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5260,7 +4863,7 @@ msgstr ""
 
 #: u_translation.rstheme
 msgid "Theme"
-msgstr "Téma"
+msgstr ""
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
@@ -5268,16 +4871,15 @@ msgstr ""
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
-msgstr "%s db katalogizált objektum"
+msgstr ""
 
 #: u_translation.rsthereareobjec
 msgid "There are %s objects in this field."
-msgstr "%s darab objektum a mezőben."
+msgstr ""
 
 #: u_translation.rsthisactionre
-#| msgid "This action replace all the database content for the country %s using fresh data from NGA and GNIS.%sAll your editing for this country will be lost except the location you added with a new name that will be kept.%sDo you want to continue ?"
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Ez a művelet felülírja az adatbázis tartalmát %s ország esetén, az NGA és GNIS %s használatával. Minden erre az országra vonatkozó előző módosítás elvész, kivéve ha új néven lett lementve az adat. %s Valóban folytatni akarod?"
+msgstr ""
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -5285,97 +4887,87 @@ msgstr ""
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
-msgstr "A fájl nem MPCORB formátúmú."
+msgstr ""
 
 #: u_translation.rsthisprogrami
 msgid "This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License"
-msgstr "Ez a program szabad szoftver, továbbadhatod és/vagy módosíthatod a GNU Általános Nyilvános Licenc értelmében"
+msgstr ""
 
 #: u_translation.rsthursday
 msgid "Thu."
-msgstr "Cs."
+msgstr ""
 
 #: u_translation.rstilehorizont
-#| msgid "Tile Horizontally"
 msgid "Tile horizontally"
-msgstr "Vízszintes rendezés"
+msgstr ""
 
 #: u_translation.rstilevertical
-#| msgid "Tile Vertically"
 msgid "Tile vertically"
-msgstr "Függőleges rendezés"
+msgstr ""
 
 #: u_translation.rstime
 msgid "Time"
-msgstr "Idő"
+msgstr ""
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
 msgstr ""
 
 #: u_translation.rstimesimulati
-#| msgid "Time Simulation"
 msgid "Time simulation"
-msgstr "Mozgáások szimulációja"
+msgstr ""
 
 #: u_translation.rstimeunits
-#| msgid "Time Units"
 msgid "Time units"
-msgstr "Idő egysége"
+msgstr ""
 
 #: u_translation.rstimezone
-#| msgid "Time Zone"
 msgid "Time zone"
-msgstr "Időzóna"
+msgstr ""
 
 #: u_translation.rsto
 msgid "to"
-msgstr "-ig:"
+msgstr ""
 
 #: u_translation.rstoday
 msgid "Today"
-msgstr "Ma"
+msgstr ""
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr "fileba:"
+msgstr ""
 
 #: u_translation.rstonight
 msgid "Tonight"
 msgstr ""
 
 #: u_translation.rstoolbar
-#| msgid "Tool Bar"
 msgid "Tool bar"
-msgstr "Eszköztárak"
+msgstr ""
 
 #: u_translation.rstoomanyopenw
-#| msgid "Too many open window, please close some chart."
 msgid "Too many open windows, please close some charts."
-msgstr "Túl sok térkép ablak van nyitva, zárj be néhányat."
+msgstr ""
 
 #: u_translation.rstop
 msgid "Top"
-msgstr "Tetején"
+msgstr ""
 
 #: u_translation.rstopocentric
-#| msgid "TopoCentric"
 msgid "Topocentric"
-msgstr "Topocentrikus"
+msgstr ""
 
 #: u_translation.rstotal
 msgid "Totality"
-msgstr "Totalitás"
+msgstr ""
 
 #: u_translation.rstotalradius
-#| msgid "Total Radius"
 msgid "Total radius"
-msgstr "Teljes sugár"
+msgstr ""
 
 #: u_translation.rstousethisnew
-#| msgid "To use this new data you must now compute the Monthly Data"
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr "Ezen adatok használatához most a havi adatokat kell előkészítened"
+msgstr ""
 
 #: u_translation.rstracking
 msgid "Tracking"
@@ -5387,47 +4979,43 @@ msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
-msgstr "Átalakítás"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
-msgstr "Fordító:"
+msgstr ""
 
 #: u_translation.rstransparency
 msgid "Transparency"
 msgstr ""
 
 #: u_translation.rstransparentl
-#| msgid "Transparent line mode (occultation)"
 msgid "Transparent line mode (occultations)"
-msgstr "Áttetsző korong (együttállások esetén)"
+msgstr ""
 
 #: u_translation.rstriplestar
-#| msgid "Triple Star"
 msgid "Triple star"
-msgstr "Hármas csillag"
+msgstr ""
 
 #: u_translation.rstropicalyear
-#| msgid "Tropical Year"
 msgid "Tropical year"
-msgstr "Tropikus év"
+msgstr ""
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr "true equator, equinox and epoch of the date"
+msgstr ""
 
 #: u_translation.rstrueposition
 msgid "True position"
-msgstr "Valós pozició"
+msgstr ""
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr "Valódi szoláris"
+msgstr ""
 
 #: u_translation.rstrumplerclas
-#| msgid "Trumpler Class"
 msgid "Trumpler class"
-msgstr "Trumpler osztály"
+msgstr ""
 
 #: u_translation.rsttut
 msgid "TT - UT: "
@@ -5435,19 +5023,19 @@ msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
-msgstr "Ke."
+msgstr ""
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "forgatás / fok"
+msgstr ""
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "forgatás / óra"
+msgstr ""
 
 #: u_translation.rstwilight
 msgid "Twilight"
-msgstr "Szürkület"
+msgstr ""
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
@@ -5455,46 +5043,43 @@ msgstr ""
 
 #: u_translation.rstype
 msgid "Type"
-msgstr "Tipus"
+msgstr ""
 
 #: u_translation.rstype2
 msgid "Type:"
-msgstr "Típus:"
+msgstr ""
 
 #: u_translation.rstypeofcoordi
 msgid "Type of coordinates"
-msgstr "Vonatkoztatási rendszer"
+msgstr ""
 
 #: u_translation.rstypeofobject
-#| msgid "Type of object to add to the list"
 msgid "Object types to add to the list"
-msgstr "Az objektum listában szereplő típusok"
+msgstr ""
 
 #: u_translation.rstypeofvariab
-#| msgid "Type of Variability"
 msgid "Type of variability"
-msgstr "Változó típusa"
+msgstr ""
 
 #: u_translation.rsumbra
 msgid "Umbra"
-msgstr "Umbra"
+msgstr ""
 
 #: u_translation.rsunabletocrea
 msgid "Unable to create directory "
-msgstr "A könyvtár létrehozása nem lehetséges "
+msgstr ""
 
 #: u_translation.rsunchecktoavo
 msgid "Uncheck to avoid duplicate with minor planet 134340"
-msgstr "Hagyd üresen, ha el akarod kerülni a duplikációt a 134340 kisbolygóval"
+msgstr ""
 
 #: u_translation.rsundo
 msgid "Undo"
-msgstr "Visszavonás"
+msgstr ""
 
 #: u_translation.rsundolastchan
-#| msgid "Undo Last Change"
 msgid "Undo last change"
-msgstr "Utolsó változtatás visszavonása"
+msgstr ""
 
 #: u_translation.rsunits
 msgid "Units"
@@ -5502,96 +5087,87 @@ msgstr ""
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
-msgstr "Universal Time"
+msgstr ""
 
 #: u_translation.rsunknow
-#| msgid "Unknow"
 msgid "unknown"
-msgstr "Ismeretlen"
+msgstr ""
 
 #: u_translation.rsunknowobject
-#| msgid "Unknow object"
 msgid "Unknown object"
-msgstr "Ismeretlen objektum"
+msgstr ""
 
 #: u_translation.rsunlockchart
-#| msgid "Unlock Chart"
 msgid "Unlock chart"
-msgstr "Rögzítés kikapcsolása"
+msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"
-msgstr "Felülír"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
-msgstr "A frissítés sikeres!"
+msgstr ""
 
 #: u_translation.rsupdateoraddt
-#| msgid "Update or add the current location to the database ?"
 msgid "Update/add the current location to the database?"
-msgstr "Frissíti a jelenlegi hely adatbázist?"
+msgstr ""
 
 #: u_translation.rsuranus
 msgid "Uranus"
-msgstr "Uránusz"
+msgstr ""
 
 #: u_translation.rsurl
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
-msgstr "URL betöltése"
+msgstr ""
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
 msgstr ""
 
 #: u_translation.rsuseapresetco
-#| msgid "Use a preset colour scheme :"
 msgid "Use a preset colour scheme:"
-msgstr "Előre beállított szín séma:"
+msgstr ""
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
-msgstr "(a fluxus ábrázolásához használható)"
+msgstr ""
 
 #: u_translation.rsusehpp
 msgid "Use HPP"
 msgstr ""
 
 #: u_translation.rsusehttpproxy
-#| msgid "Use HTTP Proxy"
 msgid "Use HTTP proxy"
-msgstr "HTTP proxy használata"
+msgstr ""
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
-msgstr "DSS használata RealSky helyett"
+msgstr ""
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
 msgstr ""
 
 #: u_translation.rsuseonlycatal
-#| msgid "Use only the catalog from the same group"
 msgid "Use only catalogs from one single group."
-msgstr "Egy csoportból  egy katalógust válassz!"
+msgstr ""
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
 msgstr ""
 
 #: u_translation.rsuserid
-#| msgid "Userid:"
 msgid "User id:"
-msgstr "Felhasználó azonosító:"
+msgstr ""
 
 #: u_translation.rsusername
-#| msgid "User Name"
 msgid "User name"
-msgstr "Felhasználó név:"
+msgstr ""
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
@@ -5603,52 +5179,47 @@ msgstr ""
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
-msgstr "A rendszeridő használata"
+msgstr ""
 
 #: u_translation.rsusetcpipserv
-#| msgid "Use TCP/IP Server"
 msgid "Use TCP/IP server"
-msgstr "TCP/IP szerver használata"
+msgstr ""
 
 #: u_translation.rsusethemenuor
 msgid "Use the menu or button \"%s\" to configure this driver."
-msgstr "Használd a menüt vagy a \"%s\" gombot a driver beállításához."
+msgstr ""
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr "Az adott epochához tartozó pozició korrigálásához használd a sajátmozgást"
+msgstr ""
 
 #: u_translation.rsusethisfield
-#| msgid "Use this field as an Alternate Name"
 msgid "Use this field as an alternative name"
-msgstr "Használd ezt a mezőt mint Alternatív név"
+msgstr ""
 
 #: u_translation.rsusexplanet
 msgid "Use Xplanet"
-msgstr "Xplanet használata"
+msgstr ""
 
 #: u_translation.rsusingexistin
-#| msgid "Using existing file %s"
 msgid "Using the existing file %s"
-msgstr "A meglevő fájl használata %s"
+msgstr ""
 
 #: u_translation.rsut
 msgid "UT"
-msgstr "UT"
+msgstr ""
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr "Változók"
+msgstr ""
 
 #: u_translation.rsvariablestar
-#| msgid "Variable Star"
 msgid "Variable star"
-msgstr "Változócsillag"
+msgstr ""
 
 #: u_translation.rsvariablestar2
-#| msgid "Variable Stars"
 msgid "Variable stars"
-msgstr "Változócsillag"
+msgstr ""
 
 #: u_translation.rsvelocity
 msgid "Velocity"
@@ -5656,7 +5227,7 @@ msgstr ""
 
 #: u_translation.rsvenus
 msgid "Venus"
-msgstr "Vénusz"
+msgstr ""
 
 #: u_translation.rsverticalaxis
 msgid "Vertical axis encoder origin : %s"
@@ -5668,16 +5239,15 @@ msgstr ""
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
-msgstr "Környék"
+msgstr ""
 
 #: u_translation.rsview
 msgid "View"
-msgstr "Nézet"
+msgstr ""
 
 #: u_translation.rsviewhorizon
-#| msgid "View Horizon"
 msgid "View horizon"
-msgstr "Égtályra ugrás"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
@@ -5688,14 +5258,12 @@ msgid "Virtual Observatory Catalog"
 msgstr ""
 
 #: u_translation.rsvisibilityfo
-#| msgid "Visibility for observatory"
 msgid "Visibility for your observatory"
-msgstr "Láthatósága a megfigyelés helyéről"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
-#| msgid "Visual Magnitude"
 msgid "Visual magnitude"
-msgstr "Vizuális magnitúdó"
+msgstr ""
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
@@ -5706,66 +5274,60 @@ msgid "VO Catalog Browser"
 msgstr ""
 
 #: u_translation.rswanttotracka
-#| msgid "Want to track an object before it rise ?"
 msgid "Do you want to track an object before it rises?"
-msgstr "Szeretnéd az objektumot kelése előtt is követni?"
+msgstr ""
 
 #: u_translation.rswarning
 msgid "Warning!"
-msgstr "Figyelem!"
+msgstr ""
 
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
-msgstr "Figyelem! Számolása"
+msgstr ""
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Figyelem! Néhány kisbolygó pályaadata 3 évnél régebbi. Próbálj a térkép dátumához tartozó pályaadatot keresni."
+msgstr ""
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Figyelem! Néhány üstökös pályaadata 3 évnél régebbi. Próbálj a térkép dátumához tartozó pályaadatott keresni."
+msgstr ""
 
 #: u_translation.rswarningthecu
-#| msgid "Warning! The current date and the observatory location may have changed from the default value. You must reply No and use the %s button now to return to your default values, otherwise they may be lost. Do you want to continue ?"
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
-msgstr "Figyelem! Az aktuális dátum és a megfigyelés helye meg lett változtatva az alapértelmezetthez képest. Ha \"Nem\"-el válaszolsz és a %s gombot használod, vissza tudsz térni az alapértelmezett beállításokhoz, egyébként elveszted azokat. Valóban folytatni akarod?"
+msgstr ""
 
 #: u_translation.rswarningyouar
-#| msgid "Warning!%sYou are about to destroy the database %s and all it's content, even if this content is not related to this program.%sAre you sure you want to continue?"
 msgid "Warning!%sYou are about to destroy the database %s and all its content, even if this content is not related to this program.%sAre you sure you want to continue?"
-msgstr "Figyelem! %s A %s adatbázis adatainak teljes megsemmisitése előtt állsz, még ha a tartalom nem kapcsolódik ehhez a programhoz. %s Biztos hogy folytatod?"
+msgstr ""
 
 #: u_translation.rswarningyouar2
-#| msgid "Warning! you are using multiple catalog for the same object. Be sure this what you want."
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr "FIGYELEM! Több katalógust használsz azonos objektumokra. Tényleg ezt akarod?"
+msgstr ""
 
 #: u_translation.rswarningyouha
-#| msgid "WARNING !%sYou have choose to append the data to an existing catalog.%sThe existing catalog and index must be exactly of the same format, otherwise it will be corrupted.%sIt is a good idea to backup the actual files before this operation.%sDo you want to continue ?"
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
-msgstr "Figyelem! %s Egy létező katalógushoz akarsz adatokat hozzáadni. %s A meglevő katalógusn és index formátuma azonos kell hogy maradjon, egyébként sérült lesz. %sJavasolt a jelenlegi fájlokat a művelet előtt lementeni. %s Valóban folytatni akarod?"
+msgstr ""
 
 #: u_translation.rswednesday
 msgid "Wed."
-msgstr "Sze."
+msgstr ""
 
 #: u_translation.rswest
 msgid "West"
-msgstr "Nyugat"
+msgstr ""
 
 #: u_translation.rswhiteonblack
-#| msgid "White on Black"
 msgid "White on black"
-msgstr "Fekete a fehéren"
+msgstr ""
 
 #: u_translation.rswidth
 msgid "Width"
-msgstr "Szélesség"
+msgstr ""
 
 #: u_translation.rswindow
 msgid "Window"
-msgstr "Ablak"
+msgstr ""
 
 #: u_translation.rsxerrors
 msgid "X Errors"
@@ -5773,24 +5335,23 @@ msgstr ""
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
-msgstr "Az Xplanet nem lett jpeg támogatással fordítva"
+msgstr ""
 
 #: u_translation.rsxplanetispro
 msgid "Xplanet is probably not installed!"
-msgstr "Xplanet valószínüleg nincs installálva!"
+msgstr ""
 
 #: u_translation.rsxplanetretur
-#| msgid "%s, xplanet return %s"
 msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet vissza %s"
+msgstr ""
 
 #: u_translation.rsyear
 msgid "Year"
-msgstr "Év"
+msgstr "Yıl"
 
 #: u_translation.rsyears
 msgid "years"
-msgstr "évben"
+msgstr ""
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
@@ -5798,42 +5359,37 @@ msgstr ""
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr "Kész, a kisbolygók megjeleníthetőek az adott időintervallumban."
+msgstr ""
 
 #: u_translation.rsyouliveonabi
-#| msgid "If you observe from a big mountain, the horizon line will be lower than would be at sea level."
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Ha egy magas hegyről  észlelsz, a horizont vonala alacsonyabb mint tengerszint magasságában."
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"
-msgstr "Zenit"
+msgstr ""
 
 #: u_translation.rszoom
 msgid "Zoom +"
-msgstr "Nagyít+"
+msgstr ""
 
 #: u_translation.rszoom2
 msgid "Zoom -"
-msgstr "Nagyít-"
+msgstr ""
 
 #: u_translation.rszoomcentre
-#| msgid "Zoom + Centre"
 msgid "Zoom + and centre on"
-msgstr "Nagyít+ középre"
+msgstr ""
 
 #: u_translation.rszoomcentre2
-#| msgid "Zoom - Centre"
 msgid "Zoom - and centre on"
-msgstr "Nagyít- középre"
+msgstr ""
 
 #: u_translation.rszoomin
-#| msgid "Zoom In"
 msgid "Zoom in"
-msgstr "Nagyítás be"
+msgstr ""
 
 #: u_translation.rszoomout
-#| msgid "Zoom Out"
 msgid "Zoom out"
-msgstr "Nagyítás ki"
+msgstr ""
 
