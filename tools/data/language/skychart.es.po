@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"POT-Creation-Date: 2012-01-19 17:27+0000\n"
 "PO-Revision-Date: 2012-01-14 17:04+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 17:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
+"X-Generator: Launchpad (build 14692)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -63,6 +63,8 @@ msgstr "Acerca de %s"
 msgid "Ast"
 msgstr "Ast"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Añadir cuadrícula ecuatorial"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -128,8 +130,8 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Añadir un único elemento a la base de datos. Todos los campos son obligatorios."
 
 #: u_translation.rsaddequatoria
-msgid "Add equatorial grid"
-msgstr "Añadir cuadrícula ecuatorial"
+msgid "Show equatorial grid"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"

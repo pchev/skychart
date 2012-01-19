@@ -76,7 +76,7 @@ resourcestring
   rsShowComets = 'Show comets';
   rsShowMilkyWay = 'Show Milky Way';
   rsShowCoordina = 'Show coordinates grid';
-  rsAddEquatoria = 'Add equatorial grid';
+  rsAddEquatoria = 'Show equatorial grid';
   rsShowConstell = 'Show constellation lines';
   rsShowConstell2 = 'Show constellation limits';
   rsShowGalactic = 'Show galactic equator';

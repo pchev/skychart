@@ -259,7 +259,7 @@ msgid "Show coordinates grid"
 msgstr ""
 
 #: u_translation:rsaddequatoria
-msgid "Add equatorial grid"
+msgid "Show equatorial grid"
 msgstr ""
 
 #: u_translation:rsshowconstell
