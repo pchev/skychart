@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"POT-Creation-Date: 2012-01-19 17:27+0000\n"
 "PO-Revision-Date: 2012-01-12 09:16+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 17:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
+"X-Generator: Launchpad (build 14692)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -61,6 +61,8 @@ msgstr "Um %s"
 msgid "Ast"
 msgstr ""
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Bæta við miðbaugsmöskva"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -126,8 +128,8 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Bæta einu atriði við gagnagrunninn. Allir aðrir eru nauðsynlegir."
 
 #: u_translation.rsaddequatoria
-msgid "Add equatorial grid"
-msgstr "Bæta við miðbaugsmöskva"
+msgid "Show equatorial grid"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"

@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"POT-Creation-Date: 2012-01-19 17:27+0000\n"
 "PO-Revision-Date: 2012-01-11 17:00+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 17:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
+"X-Generator: Launchpad (build 14692)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -62,6 +62,8 @@ msgstr "Referent a %s"
 msgid "Ast"
 msgstr "Ast"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Afegeix la graella equatorial"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -127,8 +129,8 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Afegir un element a la base de dades. Tots els camps són necessaris."
 
 #: u_translation.rsaddequatoria
-msgid "Add equatorial grid"
-msgstr "Afegeix la graella equatorial"
+msgid "Show equatorial grid"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"

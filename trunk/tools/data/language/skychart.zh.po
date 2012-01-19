@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 17:30+0000\n"
+"POT-Creation-Date: 2012-01-19 17:27+0000\n"
 "PO-Revision-Date: 2011-12-29 17:13+0000\n"
 "Last-Translator: philipTao <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 17:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
+"X-Generator: Launchpad (build 14692)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -63,6 +63,8 @@ msgstr "關於 %s"
 msgid "Ast"
 msgstr ""
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "增加赤道網格"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -128,8 +130,8 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "增加一個要素到資料庫，所有欄位都必須填寫。"
 
 #: u_translation.rsaddequatoria
-msgid "Add equatorial grid"
-msgstr "增加赤道網格"
+msgid "Show equatorial grid"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"

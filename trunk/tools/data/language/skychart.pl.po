@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-10 17:30+0000\n"
-"PO-Revision-Date: 2012-01-14 20:23+0000\n"
+"POT-Creation-Date: 2012-01-19 17:27+0000\n"
+"PO-Revision-Date: 2012-01-18 19:43+0000\n"
 "Last-Translator: Michał Cegielski <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-15 17:44+0000\n"
-"X-Generator: Launchpad (build 14664)\n"
+"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
+"X-Generator: Launchpad (build 14692)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -65,6 +65,8 @@ msgstr "O %s"
 msgid "Ast"
 msgstr ""
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Pokaż siatkę równikową"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -130,8 +132,8 @@ msgid "Add a single element to the database. All fields are mandatory."
 msgstr "Dopisz pojedynczy element do bazy danych. Wszystkie pola są obowiązkowe."
 
 #: u_translation.rsaddequatoria
-msgid "Add equatorial grid"
-msgstr "Pokaż siatkę równikową"
+msgid "Show equatorial grid"
+msgstr ""
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -159,7 +161,7 @@ msgstr "Wyszukiwanie zaawansowane"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
-msgstr ""
+msgstr "Zaawansowanie ustawienia dla Scope.exe"
 
 #: u_translation.rsage
 msgid "Age"
@@ -616,7 +618,7 @@ msgstr "Centruj"
 
 #: u_translation.rscentering
 msgid "Centering"
-msgstr ""
+msgstr "Wyśrodkowywanie"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
@@ -1024,7 +1026,7 @@ msgstr "Aktualny sterownik"
 
 #: u_translation.rscustom
 msgid "Custom"
-msgstr ""
+msgstr "Własny"
 
 #: u_translation.rscw
 msgid "%sCW"
@@ -1152,7 +1154,7 @@ msgstr ""
 
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
-msgstr ""
+msgstr "Tępo obrotu DEC/El"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1176,7 +1178,7 @@ msgstr "Opcje DEC"
 
 #: u_translation.rsdecrease
 msgid "Decrease"
-msgstr ""
+msgstr "Zmniejsz"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1356,11 +1358,11 @@ msgstr "Średnica"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr ""
+msgstr "Rozłączony"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Różnica między czasem ziemskim a uniwersalnym."
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1708,7 +1710,7 @@ msgstr "Błąd w czasie otwierania %s"
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
-msgstr ""
+msgstr "Błąd otwarcia %s na porcie %s"
 
 #: u_translation.rserroropening3
 msgid "Error opening %s on port %sCheck if device is connected and power on"
@@ -1788,7 +1790,7 @@ msgstr "Siła rozmycia gwiazd "
 
 #: u_translation.rsfan
 msgid "Fan"
-msgstr ""
+msgstr "Wiatrak"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -1796,7 +1798,7 @@ msgstr "Często zadawane pytania: FAQ"
 
 #: u_translation.rsfast
 msgid "Fast"
-msgstr ""
+msgstr "Szybko"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
@@ -1832,7 +1834,7 @@ msgstr "Numer pola widzenia :"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
-msgstr ""
+msgstr "Rotacja pola"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -1920,11 +1922,11 @@ msgstr "Przewidywane flary Iridium"
 
 #: u_translation.rsfocus
 msgid "Focus"
-msgstr ""
+msgstr "Ostrość"
 
 #: u_translation.rsfocusspeed
 msgid "Focus Speed"
-msgstr ""
+msgstr "Prędkość wyostrzania"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1964,7 +1966,7 @@ msgstr "Rozmiar klatek"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
-msgstr ""
+msgstr "Kąt FR"
 
 #: u_translation.rsfreesize
 msgid "Free size"
@@ -2040,7 +2042,7 @@ msgstr "Geocentryczna"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "Pobierz"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -2060,7 +2062,7 @@ msgstr "Gromady kuliste"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
-msgstr ""
+msgstr "Gps-16\" Ustawienia zaaw."
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2104,7 +2106,7 @@ msgstr "Parametr krzywej G"
 
 #: u_translation.rsguide
 msgid "Guide"
-msgstr ""
+msgstr "Prowadzić"
 
 #: u_translation.rsguidearcsec
 msgid "guide arcsec"
@@ -2112,7 +2114,7 @@ msgstr ""
 
 #: u_translation.rsguiderate
 msgid "Guide Rate"
-msgstr ""
+msgstr "Tępo prowadzenia"
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
@@ -2172,7 +2174,7 @@ msgstr ""
 
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
-msgstr ""
+msgstr "Wskazywnie wysokiej dokładności"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -2252,7 +2254,7 @@ msgstr "Nachylenie="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "Dodaj datę i czas przejścia"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
@@ -2260,7 +2262,7 @@ msgstr "Dodaj flary Iridium"
 
 #: u_translation.rsincrease
 msgid "Increase"
-msgstr ""
+msgstr "Zwiększ"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
@@ -2332,11 +2334,11 @@ msgstr "Inicjalizuj"
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr ""
+msgstr "Zainicjalizowany w %s%s używając %s%s (RA: %s DEC :%s)"
 
 #: u_translation.rsinitialize
 msgid "Initialize"
-msgstr ""
+msgstr "Inicjalizuj"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2384,11 +2386,11 @@ msgstr "Nieprawidłowa ścieżka: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
-msgstr ""
+msgstr "Inwersja Alfa"
 
 #: u_translation.rsinversiondel
 msgid "%s Inversion Delta"
-msgstr ""
+msgstr "%s Inwersja Delta"
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
@@ -2492,7 +2494,7 @@ msgstr "Lewy pasek narzędzi"
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
-msgstr ""
+msgstr "Tryb lewy"
 
 #: u_translation.rslegal
 msgid "Legal"
@@ -2668,7 +2670,7 @@ msgstr "Luminescencja"
 
 #: u_translation.rslunar
 msgid "Lunar"
-msgstr ""
+msgstr "Księżycowy"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -2704,7 +2706,7 @@ msgstr "Wielkość gwiazdowa"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "Rozmiar zaćmienia"
 
 #: u_translation.rsmagnitudeerr
 msgid "Magnitude error"
@@ -2924,11 +2926,11 @@ msgstr "Świt"
 
 #: u_translation.rsmotor
 msgid "Motor"
-msgstr ""
+msgstr "Silnik"
 
 #: u_translation.rsmotorspeeds
 msgid "Motor Speeds"
-msgstr ""
+msgstr "Prędkość silnika"
 
 #: u_translation.rsmountfabrica
 msgid "Mount fabrication error"
@@ -2940,7 +2942,7 @@ msgstr "Typ montażu"
 
 #: u_translation.rsmove
 msgid "Move"
-msgstr ""
+msgstr "Przesuń"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -3156,7 +3158,7 @@ msgstr "%s Nie znaleziono!%sKatalog może być nie zainstalowany, albo biepopraw
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
-msgstr ""
+msgstr "Nie zainicjalizowany"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3252,7 +3254,7 @@ msgstr "Przestarzałe"
 
 #: u_translation.rsoff
 msgid "Off"
-msgstr ""
+msgstr "Wył."
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -3268,7 +3270,7 @@ msgstr "OK"
 
 #: u_translation.rson
 msgid "On"
-msgstr ""
+msgstr "Wł."
 
 #: u_translation.rsoneevery
 msgid "One every"
@@ -3388,7 +3390,7 @@ msgstr ""
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
-msgstr ""
+msgstr "Zatrzymaj teleskop"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -3524,7 +3526,7 @@ msgstr "Proszę wskazać folder gdzie katalog musi być utworzony"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
-msgstr ""
+msgstr "Proszę ustaw najpierw kąt 90 stopni"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -3540,7 +3542,7 @@ msgstr "Proszę włożyć płytkę RealSky CD numer"
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
-msgstr ""
+msgstr "Proszę porusz teleskopem wzdłuż obu osi"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -3756,11 +3758,11 @@ msgstr "Port Proxy:"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr ""
+msgstr "Długość pulsu"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr ""
+msgstr "Tryb pulsacyjny"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -3800,7 +3802,7 @@ msgstr ""
 
 #: u_translation.rsraazslewrate
 msgid "RA/Az Slew Rate"
-msgstr ""
+msgstr "Tępo obrotu RA/Az"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -3996,11 +3998,11 @@ msgstr "Rozdzielczość:"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
-msgstr ""
+msgstr "Rozdzielczość X: %s Y: %s kroków"
 
 #: u_translation.rsresumegoto
 msgid "Resume GoTo"
-msgstr ""
+msgstr "Wznów Idź do"
 
 #: u_translation.rsreturn
 msgid "Return"
@@ -4036,7 +4038,7 @@ msgstr "Prawy pasek narzędzi"
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
-msgstr ""
+msgstr "Tryb prawy"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -4128,7 +4130,7 @@ msgstr "Skanuj folder"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
-msgstr ""
+msgstr "Zakres zaaw."
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
@@ -4304,7 +4306,7 @@ msgstr "Ustaw lokalizację obserwatorium"
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
-msgstr ""
+msgstr "Ustal obroty"
 
 #: u_translation.rssettargetto
 msgid "Set target to %s"
@@ -4312,7 +4314,7 @@ msgstr ""
 
 #: u_translation.rssettelescope
 msgid "Set TelescopeTime"
-msgstr ""
+msgstr "Ustaw czas teleskopu"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -4516,7 +4518,7 @@ msgstr "Obrót"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
-msgstr ""
+msgstr " Prędkość obrotu"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
@@ -4524,7 +4526,7 @@ msgstr "Obróć do pozycji kursora"
 
 #: u_translation.rsslow
 msgid "Slow"
-msgstr ""
+msgstr "Wolno"
 
 #: u_translation.rsslowest
 msgid "Slowest"
@@ -4608,11 +4610,11 @@ msgstr "Prędkość"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
-msgstr ""
+msgstr "Wybór prędkości"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
-msgstr ""
+msgstr "Ustawienia prędkości"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -4712,7 +4714,7 @@ msgstr "Użyta jednostka"
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr ""
+msgstr "Zatrzymaj"
 
 #: u_translation.rsstopbits
 msgid "Stop bits"
@@ -4756,7 +4758,7 @@ msgstr "Jasność powierzchni"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Przycisk odwrócenia"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
@@ -4860,7 +4862,7 @@ msgstr "Rozmiar tekstu"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
-msgstr ""
+msgstr "Interfejs jest nie podłączony lub nie zainicjalizowany"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -5020,7 +5022,7 @@ msgstr "Klasa Trumplera"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UTC: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5128,7 +5130,7 @@ msgstr "Uruchaminanie polecenia URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Użyj innej wartości dla TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
