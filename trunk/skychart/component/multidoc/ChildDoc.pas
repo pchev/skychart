@@ -442,7 +442,7 @@ end;
 
 procedure TChildDoc.MenuBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-onEnter(self);
+if assigned(onEnter) then onEnter(self);
 startpoint:=clienttoscreen(point(X,titleheight div 2));
 moving:=true;
 movecount:=-1;
@@ -503,7 +503,7 @@ end;
 
 procedure TChildDoc.SizeBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-onEnter(self);
+if assigned(onEnter) then onEnter(self);
 GetCursorPos(startpoint);
 sizing:=true;
 movedirection:=(sender as TCdCSplitter).Tag;
@@ -651,7 +651,7 @@ end;
 
 procedure TChildDoc.ButtonMaximizeClick(Sender: TObject);
 begin
- onEnter(self);
+if assigned(onEnter) then onEnter(self);
  Maximized:=not FMaximized;
 end;
 
