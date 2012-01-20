@@ -3305,13 +3305,14 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 309
-        Height = 24
+        Height = 22
         Hint = 'Search'
         Top = 2
         Width = 90
         ArrowKeysTraverseList = False
         AutoComplete = True
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
+        AutoSize = False
         DropDownCount = 15
         ItemHeight = 0
         OnCloseUp = quicksearchClick

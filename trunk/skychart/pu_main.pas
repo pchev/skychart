@@ -1138,6 +1138,7 @@ try
  InitFonts;
  SetLpanel1('');
  // ensure a first chart is draw, even if it usually result in a double refresh on launch
+ MultiDoc1.setActiveChild(0);
  for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
