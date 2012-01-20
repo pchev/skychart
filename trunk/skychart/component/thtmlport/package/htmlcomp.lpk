@@ -57,32 +57,32 @@
         <UnitName Value="GDIPL2A"/>
       </Item6>
       <Item7>
-        <Filename Value="htmlgif1.pas"/>
-        <UnitName Value="HtmlGif1"/>
-      </Item7>
-      <Item8>
-        <Filename Value="htmlgif2.pas"/>
-        <UnitName Value="HTMLGif2"/>
-      </Item8>
-      <Item9>
-        <Filename Value="htmlmisc.pas"/>
-        <UnitName Value="HtmlMisc"/>
-      </Item9>
-      <Item10>
-        <Filename Value="htmlsbs1.pas"/>
-        <UnitName Value="Htmlsbs1"/>
-      </Item10>
-      <Item11>
-        <Filename Value="htmlsubs.pas"/>
-        <UnitName Value="Htmlsubs"/>
-      </Item11>
-      <Item12>
-        <Filename Value="htmlun2.lrs"/>
-        <Type Value="LRS"/>
-      </Item12>
-      <Item13>
         <Filename Value="htmlun2.pas"/>
         <UnitName Value="htmlun2"/>
+      </Item7>
+      <Item8>
+        <Filename Value="htmlun2.lrs"/>
+        <Type Value="LRS"/>
+      </Item8>
+      <Item9>
+        <Filename Value="htmlgif1.pas"/>
+        <UnitName Value="HtmlGif1"/>
+      </Item9>
+      <Item10>
+        <Filename Value="htmlgif2.pas"/>
+        <UnitName Value="HTMLGif2"/>
+      </Item10>
+      <Item11>
+        <Filename Value="htmlmisc.pas"/>
+        <UnitName Value="HtmlMisc"/>
+      </Item11>
+      <Item12>
+        <Filename Value="htmlsbs1.pas"/>
+        <UnitName Value="Htmlsbs1"/>
+      </Item12>
+      <Item13>
+        <Filename Value="htmlsubs.pas"/>
+        <UnitName Value="Htmlsubs"/>
       </Item13>
       <Item14>
         <Filename Value="htmlview.pas"/>
