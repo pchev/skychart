@@ -7,7 +7,7 @@ name=skychart
 version=3
 
 [target]
-dirs=component library
+dirs=component library component/thtmlport/package
 programs=cdc cdcicon
 
 [require]
@@ -55,7 +55,7 @@ export LCL_PLATFORM
 .PHONY: all
 
 #   thtmlport must be compiled two time! see http://wiki.lazarus.freepascal.org/THtmlPort#Installation 
-all: component_all library_all cdc$(EXEEXT) cdcicon$(EXEEXT)
+all: component_all library_all component/thtmlport/package_all cdc$(EXEEXT) cdcicon$(EXEEXT)
 
 revision:
 	$(LAZDIR)/tools/svn2revisioninc . revision.inc
