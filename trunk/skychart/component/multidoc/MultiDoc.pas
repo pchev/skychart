@@ -321,11 +321,14 @@ FChild[FChildIndex].Top:=DefaultPos.Y;
 FChild[FChildIndex].Left:=DefaultPos.X;
 FActiveChild:=FChildIndex;
 if Assigned(FWindowList) then begin
+  try
   m:=TmenuItem.Create(self);
   m.Caption:='Child '+ inttostr(FChildIndex);
   m.Tag:=100+FChildIndex;
   m.OnClick:=@FocusChildClick;
   FWindowList.Add(m);
+  except
+  end;
 end;
 FChild[FChildIndex].Maximized:=FMaximized;
 SetActiveChild(FChildIndex);
@@ -459,11 +462,14 @@ end;
 except
 end;
 FActiveChild:=n;
+try
 for i:=0 to FChildIndex do begin
   if i=n then FChild[i].SetBorderColor(FBorderColor)
          else FChild[i].SetBorderColor(FInactiveColor);
 end;
 if assigned(FonActiveChildChange) then FonActiveChildChange(self);
+except
+end;
 end;
 
 procedure TMultiDoc.FocusChildClick(Sender: TObject);

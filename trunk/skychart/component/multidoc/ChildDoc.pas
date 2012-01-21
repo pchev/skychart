@@ -591,6 +591,7 @@ end;
 
 Procedure TChildDoc.Maximize;
 begin
+try
  FMaximized:=true;
  save_top:=top;
  save_left:=left;
@@ -610,10 +611,13 @@ begin
  LeftBar.Visible:=false;
  RightBar.Visible:=false;
  if assigned(FonMaximize) then FonMaximize(self);
+except
+end;
 end;
 
 Procedure TChildDoc.Restore;
 begin
+try
  FMaximized:=false;
  top:=save_top;
  left:=save_left;
@@ -630,6 +634,8 @@ begin
  RightBar.Visible:=true;
  SetBorderWdth(BorderW);
  if assigned(FonRestore) then FonRestore(self);
+except
+end;
 end;
 
 Procedure TChildDoc.RestoreSize;
@@ -657,12 +663,16 @@ end;
 
 procedure TChildDoc.SetTitleColor(col:TColor);
 begin
+try
 TitleColor:=col;
 Title.Font.Color:=TitleColor;
+except
+end;
 end;
 
 procedure TChildDoc.SetBorderColor(col:TColor);
 begin
+try
 BorderColor:=col;
 TopLeftBar.Color:=BorderColor;
 TopRightBar.Color:=BorderColor;
@@ -673,11 +683,13 @@ BotBar.Color:=BorderColor;
 LeftBar.Color:=BorderColor;
 RightBar.Color:=BorderColor;
 MenuBar.Color:=BorderColor;
-
+except
+end;
 end;
 
 procedure TChildDoc.SetTitleHeight(x:integer);
 begin
+try
 TitleHeight:=x;
 MenuBar.Height:=TitleHeight;
 ButtonMaximize.Width:=TitleHeight-2;
@@ -685,14 +697,17 @@ ButtonMaximize.Height:=TitleHeight-2;
 ButtonClose.Width:=TitleHeight-2;
 ButtonClose.Height:=TitleHeight-2;
 Title.Font.Height:=-(TitleHeight-2);
+except
+end;
 end;
 
 procedure TChildDoc.SetBorderWdth(x:integer);
 begin
-TopLeftBar.SendtoBack;
+{TopLeftBar.SendtoBack;   // crash on GTK2
 TopRightBar.SendtoBack;
 BotLeftBar.SendtoBack;
-BotRightBar.SendtoBack;
+BotRightBar.SendtoBack;}
+try
 BorderW:=x;
 TopLeftBar.Height:=borderw;
 TopLeftBar.Width:=borderw;
@@ -718,10 +733,12 @@ LeftBar.Width:=borderw;
 LeftBar.Left:=0;
 RightBar.Width:=borderw;
 RightBar.Left:=width-borderw;
-TopLeftBar.BringToFront;
+except
+end;
+{TopLeftBar.BringToFront;
 TopRightBar.BringToFront;
 BotLeftBar.BringToFront;
-BotRightBar.BringToFront;
+BotRightBar.BringToFront;  }
 end;
 
 

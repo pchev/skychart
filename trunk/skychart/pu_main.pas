@@ -1312,10 +1312,13 @@ end;
      WriteTrace('Load '+inttostr(InitialChartNum-1)+' supplementary charts');
     {$endif}
     for i:=1 to InitialChartNum-1 do begin
+      try
       cfgp.Assign(def_cfgplot);
       cfgs.Assign(def_cfgsc);
       ReadChartConfig(configfile+inttostr(i),true,false,cfgp,cfgs);
       CreateChild(GetUniqueName(rsChart_, true) , false, cfgs, cfgp);
+      except
+      end;
     end;
  end;
  {$ifdef trace_debug}
