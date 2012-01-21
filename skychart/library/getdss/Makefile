@@ -7,15 +7,15 @@ SO_Name = libgetdss.dylib
 LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++
 else
 SO_Name = libgetdss.so
-LDFLAGS= -shared -WL,-soname,$(SO_Name) $(arch_flags)
+LDFLAGS= -shared -Wl,-soname,$(SO_Name) $(arch_flags)
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
 SO_Name = libgetdss.dll
-LDFLAGS= -shared -WL,-soname,$(SO_Name)
+LDFLAGS= -shared -Wl,-soname,$(SO_Name)
 endif
 ifneq ($(findstring MINGW,$(OSTYPE)),)
 SO_Name = libgetdss.dll
-LDFLAGS= -shared -WL,-soname,$(SO_Name)
+LDFLAGS= -shared -Wl,-soname,$(SO_Name)
 endif
 OBJS = getdss_lib.o dss.o extr_fit.o getpiece.o \
 	hdcmprss.o bitinput.o decode.o dodecode.o hinv.o \

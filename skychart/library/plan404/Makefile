@@ -8,15 +8,15 @@ SO_Name       = libplan404.dylib
 LIBFLAGS      = -Wl,-single_module -dynamiclib  -lc -lm
 else
 SO_Name       = libplan404.so
-LIBFLAGS      = -shared -WL,-soname,$(SO_Name) -lc -lm
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lc -lm
 endif
 ifneq ($(findstring W32,$(OSTYPE)),)
 SO_Name       = libplan404.dll
-LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 endif
 ifneq ($(findstring MINGW,$(OSTYPE)),)
 SO_Name       = libplan404.dll
-LIBFLAGS      = -shared -WL,-soname,$(SO_Name)  -lm
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
 endif
 
 .PHONY: clean
