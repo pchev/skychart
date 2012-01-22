@@ -101,6 +101,7 @@ Tskychart = class (TComponent)
     function  FindArtSat(x1,y1,x2,y2:double; nextobj:boolean;  var nom,ma,desc:string):boolean;
     function DrawOrbitPath:boolean;
     Procedure DrawGrid;
+    Procedure DrawAltAzEqGrid;
     Procedure DrawPole(pole: integer);
     procedure DrawEqGrid;
     procedure DrawAzGrid;
@@ -285,6 +286,8 @@ end;
   // first the extended object
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
+    // EQ grid in ALt/Az mode
+    DrawAltAzEqGrid;
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP) then DrawHorizon;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
@@ -2428,13 +2431,23 @@ if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.F
     if cfgsc.ShowGrid then begin
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
-       AltAz  :  begin DrawAzGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
+       AltAz  :  begin DrawAzGrid; if ((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque)) and cfgsc.ShowEqGrid then DrawEqGrid; end;
        Gal    :  begin DrawGalGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        Ecl    :  begin DrawEclGrid; if cfgsc.ShowEqGrid then DrawEqGrid; end;
        end
-    end else if cfgsc.ShowEqGrid then begin
+    end else if cfgsc.ShowEqGrid and (((not Fplot.cfgplot.UseBMP)or(not cfgsc.horizonopaque))or(cfgsc.ProjPole<>AltAz)) then begin
       DrawEqGrid;
     end
+end;
+end;
+
+Procedure Tskychart.DrawAltAzEqGrid;
+begin
+if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
+    {$ifdef trace_debug}
+     WriteTrace('SkyChart '+cfgsc.chartname+': draw alt/az EQ grid');
+    {$endif}
+    if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid;
 end;
 end;
 
@@ -2541,7 +2554,7 @@ plotok:=false;
 repeat
  inc(n);
  de:=de+dd/3;
- projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
+ projection(ra,de,x1,y1,((not Fplot.cfgplot.UseBMP)and(cfgsc.horizonopaque)),cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
@@ -2575,7 +2588,7 @@ plotok:=false;
 repeat
  inc(n);
  ra:=ra+da/3;
- projection(ra,de,x1,y1,cfgsc.horizonopaque,cfgsc) ;
+ projection(ra,de,x1,y1,((not Fplot.cfgplot.UseBMP)and(cfgsc.horizonopaque)),cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (intpower(xxp-xx,2)+intpower(yyp-yy,2))<cfgsc.x2 then
  if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then begin
