@@ -1,6 +1,8 @@
 Version 3.5  Notes de la version
 
-- Ajout d'un outil de mesure des distances.
+- Modifie la manière de travailler des bouttons "Voir les grilles".
+- Ajout du boutton "Voir la boussole".
+- Ajout d'un outil de mesure des distances, ajout du boutton "Mesure de la distance".
 - Ajout d'une légende de la carte. Voir le menu Carte / Labels
 - Changement dans les projections cartographiques:
   - Ajout de la projection Mercator. 

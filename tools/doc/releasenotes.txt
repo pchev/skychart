@@ -1,6 +1,8 @@
 Version 3.5 release Notes
 
-- Add distance measurement tool.
+- Change the way the "Show grid" buttons are working.
+- Add "Show compass" button.
+- Add distance measurement tool, add "Measure distance" button.
 - Add chart legend. See menu Chart / Labels
 - Change in projection mapping:
   - Add Mercator projection. 
