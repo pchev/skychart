@@ -145,6 +145,8 @@ var
   appcaption : string;
   UseCache : Boolean = True;
   rt: rotmatrix;
+  prec_r : rotmatrix;
+  prec_j0, prec_j1: double;
 
 implementation
 
@@ -1095,15 +1097,14 @@ procedure FindRegionAll(x1,x2,y1,y2:Double ;
 var
    hemis : char;
    zone,Sm,k : integer;
-   step,ar,de,ra,arp,dep : double;
+   stepra,stepde,ar,de,ra,arp,dep : double;
    def : boolean;
 begin
 if x2<x1 then begin ra:=x2; x2:=x1; x1:=ra; end;
 if y2<y1 then begin ra:=y2; y2:=y1; y1:=ra; end;
-step:= 1;
-ra:=(x2-x1)/5;
-de:=(y2-y1)/5;
-step:=minvalue([ra,de,step]);
+stepra:=min((x2-x1)/5,1);
+if abs(x2-x1)>359 then stepra:=359;
+stepde:=min((y2-y1)/5,1);
 nSM:=0;
 de:=y1;
 repeat
@@ -1127,10 +1128,10 @@ repeat
       hemislst[nSM]:=hemis;
       inc(nSM);
     end;
-    ra:=ra+step/cos(degtorad(de));
+    ra:=ra+stepra; ///cos(degtorad(de));
   until ra>x2;
   end;
-  de:=de+step;
+  de:=de+stepde;
 until de>y2;
 end;
 
@@ -1722,31 +1723,47 @@ end;
 
 ////////////// Finally the precession function for CdC
 
-Procedure Precession_rad(j0,j1: double; var ra,de: double);
-var p,rp: coordvector;
-    r,wm1,wm2: rotmatrix;
+Procedure PrecessionV(j0,j1: double; var p: coordvector);
+  var rp: coordvector;
+      r,wm1,wm2: rotmatrix;
+      oncache: boolean;
 begin
-{ TODO : Cache rotation matrix if called for same date }
-if abs(j0-j1)<0.01 then exit; // no change
-if j0=jd2000 then begin       // from j2000
-  ltp_PMAT(j1,r);
-end
-else if j1=jd2000 then begin  // to j2000
-  ltp_PMAT(j0,wm1);
-  ltp_tr(wm1,r);
-end
-else begin                    // from date0 to date1
-  ltp_PMAT(j0,r);
-  ltp_tr(r,wm1);
-  ltp_PMAT(j1,wm2);
-  ltp_rxr(wm1,wm2,r);
-end;
-ltp_S2C(ra,de,p);
-ltp_rxp(r,p,rp);
-ltp_c2s(rp,ra,de);
-ra:=rmod(ra+pi2,pi2);
+  if abs(j0-j1)<0.01 then exit; // no change
+  oncache:= (prec_j0=j0) and (prec_j1=j1);
+  if oncache then begin
+    sofa_rxp(prec_r,p,rp);
+    sofa_cp(rp,p);
+  end else begin
+    if j0=jd2000 then begin       // from j2000
+      ltp_PMAT(j1,r);
+    end
+    else if j1=jd2000 then begin  // to j2000
+      ltp_PMAT(j0,wm1);
+      sofa_tr(wm1,r);
+    end
+    else begin                    // from date0 to date1
+      ltp_PMAT(j0,r);
+      sofa_tr(r,wm1);
+      ltp_PMAT(j1,wm2);
+      sofa_rxr(wm1,wm2,r);
+    end;
+    sofa_rxp(r,p,rp);
+    sofa_cp(rp,p);
+    prec_r:=r;
+    prec_j0:=j0;
+    prec_j1:=j1;
+  end;
 end;
 
+Procedure Precession_rad(j0,j1: double; var ra,de: double);
+  var p: coordvector;
+  begin
+  if abs(j0-j1)<0.01 then exit; // no change
+  sofa_S2C(ra,de,p);
+  PrecessionV(j0,j1,p);
+  sofa_c2s(p,ra,de);
+  ra:=rmod(ra+pi2,pi2);
+end;
 
 ///////////////////////
 Initialization

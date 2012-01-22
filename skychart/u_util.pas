@@ -710,7 +710,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(de);
     min1:=abs(de-dd)*60;
-    if min1>=59.99166667 then begin
+    if min1>=59.9999166667 then begin
        dd:=dd+sgn(de);
        min1:=0.0;
     end;
@@ -736,7 +736,7 @@ var dd,min1,min,sec: Double;
 begin
     dd:=Int(ar);
     min1:=abs(ar-dd)*60;
-    if min1>=59.99166667 then begin
+    if min1>=59.9999166667 then begin
        dd:=dd+sgn(ar);
        min1:=0.0;
     end;

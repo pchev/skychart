@@ -2826,7 +2826,8 @@ repeat
   PrecessionV(rec.options.EquinoxJD,cfgsc.JDChart,p);
   if cfgsc.ApparentPos then apparent_equatorialV(p,cfgsc,true,true);
   sofa_c2s(p,rec.ra,rec.dec);
-  rec.ra:=rmod(rec.ra+pi2,pi2)+rac;
+  rec.ra:=rmod(rec.ra+pi2,pi2);
+  if (rec.ra<pid4) then rec.ra:=rec.ra+rac;
   found:=true;
   if truncate then begin
     if (rec.ra<x1) or (rec.ra>x2) then found:=false;
