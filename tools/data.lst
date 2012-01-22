@@ -425,6 +425,7 @@ data/Themes/default/icon_blue/i89.png
 data/Themes/default/icon_blue/i8.png
 data/Themes/default/icon_blue/i9.png
 data/Themes/default/icon_blue/i90.png
+data/Themes/default/icon_blue/i91.png
 data/Themes/default/icon_color
 data/Themes/default/icon_color/a1.png
 data/Themes/default/icon_color/b1.png
@@ -520,6 +521,7 @@ data/Themes/default/icon_color/i89.png
 data/Themes/default/icon_color/i8.png
 data/Themes/default/icon_color/i9.png
 data/Themes/default/icon_color/i90.png
+data/Themes/default/icon_color/i91.png
 data/Themes/default/icon_green
 data/Themes/default/icon_green/a1.png
 data/Themes/default/icon_green/b1.png
@@ -615,6 +617,7 @@ data/Themes/default/icon_green/i89.png
 data/Themes/default/icon_green/i8.png
 data/Themes/default/icon_green/i9.png
 data/Themes/default/icon_green/i90.png
+data/Themes/default/icon_green/i91.png
 data/Themes/default/icon_red
 data/Themes/default/icon_red/a1.png
 data/Themes/default/icon_red/b1.png
@@ -710,6 +713,7 @@ data/Themes/default/icon_red/i89.png
 data/Themes/default/icon_red/i8.png
 data/Themes/default/icon_red/i9.png
 data/Themes/default/icon_red/i90.png
+data/Themes/default/icon_red/i91.png
 data/varobs/And.dat
 data/varobs/Ant.dat
 data/varobs/Aps.dat

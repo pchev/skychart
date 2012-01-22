@@ -57,13 +57,13 @@ msgstr "Περί..."
 msgid "About %s"
 msgstr "Περί %s"
 
+#~| msgid "Add Equatorial Grid"
+#~ msgid "Add equatorial grid"
+#~ msgstr "Προσθήκη ισημερινού πλέγματος"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~| msgid "Add Equatorial Grid"
-#~ msgid "Add equatorial grid"
-#~ msgstr "Προσθήκη ισημερινού πλέγματος"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -225,10 +225,6 @@ msgstr "%sΥψ. στροφές:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr ""
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Πάντα εμφάνιση πυξίδας στο χάρτη"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4420,6 +4416,10 @@ msgstr "Εμφάνιση Κομητών"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Εμφάνιση κομητών στο χάρτη"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 #| msgid "Show Constellation Line"

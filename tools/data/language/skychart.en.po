@@ -223,10 +223,6 @@ msgstr ""
 msgid "Always save without asking."
 msgstr ""
 
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr ""
-
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr ""
@@ -4341,6 +4337,10 @@ msgstr ""
 
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
+msgstr ""
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
 msgstr ""
 
 #: u_translation.rsshowconstell

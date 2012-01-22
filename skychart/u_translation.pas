@@ -1017,7 +1017,7 @@ resourcestring
   rsNoPrinterFou = 'No printer found!';
   rsShowGrid = 'Show grid';
   rsCompassRoseS = 'Compass rose size';
-  rsAlwaysShowCo = 'Always show the compass rose';
+  rsShowCompass = 'Show the compass rose';
   rsProgramInfor = 'Program information';
   rsCountryTimez = 'Country timezone';
   rsMoreOptions = 'More options';

@@ -58,12 +58,12 @@ msgstr "Crèdits"
 msgid "About %s"
 msgstr "Referent a %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Afegeix la graella equatorial"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Afegeix la graella equatorial"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -223,10 +223,6 @@ msgstr "%svoltes Alt:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Desa-ho sempre sense preguntar-m'ho"
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Rosa dels vents sempre visible"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4347,6 +4343,10 @@ msgstr "Mostra els cometes"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Mostra els cometes"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

@@ -58,12 +58,12 @@ msgstr "O programu"
 msgid "About %s"
 msgstr "Več o %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Dodaj ekvatorialno mrežo"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Dodaj ekvatorialno mrežo"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -223,10 +223,6 @@ msgstr "%sAlt obrati:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Vedno shrani brez vprašanja."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Vedno prikaži kompasovo vetrovnico"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4343,6 +4339,10 @@ msgstr "Prikaži komete"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Prikaži komete na karti"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

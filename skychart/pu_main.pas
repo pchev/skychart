@@ -52,8 +52,10 @@ type
     MenuItem32: TMenuItem;
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
+    Compass1: TMenuItem;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
+    ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
     ToolButtonUObj: TToolButton;
     ToolButtonVO: TToolButton;
@@ -489,6 +491,7 @@ type
     procedure ToolButton13Click(Sender: TObject);
     procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonCompassClick(Sender: TObject);
     procedure ToolButtonScaleClick(Sender: TObject);
     procedure ToolButton1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -2236,6 +2239,11 @@ end;
 procedure Tf_main.GridExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do GridExecute(Sender);
+end;
+
+procedure Tf_main.ToolButtonCompassClick(Sender: TObject);
+begin
+if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SwitchCompass(Sender);
 end;
 
 procedure Tf_main.switchstarsExecute(Sender: TObject);
@@ -4516,13 +4524,13 @@ catalog.cfgshr.FieldNum[9]:=310;
 catalog.cfgshr.FieldNum[10]:=360;
 catalog.cfgshr.ShowCRose:=false;
 catalog.cfgshr.CRoseSz:=80;
-catalog.cfgshr.DegreeGridSpacing[0]:=1000+5/60;
-catalog.cfgshr.DegreeGridSpacing[1]:=1000+10/60;
-catalog.cfgshr.DegreeGridSpacing[2]:=1000+20/60;
-catalog.cfgshr.DegreeGridSpacing[3]:=1000+30/60;
-catalog.cfgshr.DegreeGridSpacing[4]:=1000+1;
-catalog.cfgshr.DegreeGridSpacing[5]:=1000+2;
-catalog.cfgshr.DegreeGridSpacing[6]:=1000+5;
+catalog.cfgshr.DegreeGridSpacing[0]:=5/60;
+catalog.cfgshr.DegreeGridSpacing[1]:=10/60;
+catalog.cfgshr.DegreeGridSpacing[2]:=20/60;
+catalog.cfgshr.DegreeGridSpacing[3]:=30/60;
+catalog.cfgshr.DegreeGridSpacing[4]:=1;
+catalog.cfgshr.DegreeGridSpacing[5]:=2;
+catalog.cfgshr.DegreeGridSpacing[6]:=5;
 catalog.cfgshr.DegreeGridSpacing[7]:=10;
 catalog.cfgshr.DegreeGridSpacing[8]:=15;
 catalog.cfgshr.DegreeGridSpacing[9]:=20;
@@ -4781,7 +4789,10 @@ section:='grid';
 catalog.cfgshr.ShowCRose:=ReadBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
 catalog.cfgshr.CRoseSz:=ReadInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
-for i:=0 to maxfield do catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+for i:=0 to maxfield do begin
+  catalog.cfgshr.DegreeGridSpacing[i]:=ReadFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+  if catalog.cfgshr.DegreeGridSpacing[i]>1000 then catalog.cfgshr.DegreeGridSpacing[i]:=catalog.cfgshr.DegreeGridSpacing[i]-1000;
+end;
 except
   ShowError('Error reading '+filename+' grid');
 end;
@@ -6089,6 +6100,8 @@ ToolButtonShowComets.hint:=rsShowComets;
 ToolButtonShowMilkyWay.hint:=rsShowMilkyWay;
 ToolButtonGrid.hint:=rsShowCoordina;
 ToolButtonGridEq.hint:=rsAddEquatoria;
+ToolButtonCompass.Hint:=rsShowCompass;
+Compass1.Caption:=rsShowCompass;
 ToolButtonShowConstellationLine.hint:=rsShowConstell;
 ToolButtonShowConstellationLimit.hint:=rsShowConstell2;
 ToolButtonShowGalacticEquator.hint:=rsShowGalactic;
@@ -6453,15 +6466,7 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
     Grid1.checked:=sc.cfgsc.ShowGrid;
     toolbuttonGridEq.down:=sc.cfgsc.ShowEqGrid;
     GridEQ1.checked:=sc.cfgsc.ShowEqGrid;
-    if sc.cfgsc.ProjPole=Equat then begin
-       toolbuttonGridEq.Enabled:=false;
-       toolbuttonGridEq.Indeterminate:=true;
-       GridEQ1.Enabled:=false;
-    end else begin
-       toolbuttonGridEq.Enabled:=true;
-       toolbuttonGridEq.Indeterminate:=false;
-       GridEQ1.Enabled:=true;
-    end;
+    ToolButtonCompass.Down:=sc.catalog.cfgshr.ShowCRose;
     ToolButtonShowConstellationLine.down:=sc.cfgsc.ShowConstl;
     ShowConstellationLine1.checked:=sc.cfgsc.ShowConstl;
     ToolButtonShowConstellationLimit.down:=sc.cfgsc.ShowConstB;

@@ -59,12 +59,12 @@ msgstr "關於"
 msgid "About %s"
 msgstr "關於 %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "增加赤道網格"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "增加赤道網格"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -224,10 +224,6 @@ msgstr "%s地平緯度轉動："
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr ""
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "總是顯示羅盤"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4345,6 +4341,10 @@ msgstr "顯示彗星"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "在星圖顯示彗星"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

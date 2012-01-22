@@ -61,12 +61,12 @@ msgstr "O programie Cartes du Ciel"
 msgid "About %s"
 msgstr "O %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Pokaż siatkę równikową"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Pokaż siatkę równikową"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -227,10 +227,6 @@ msgstr "%sAlt obrotów:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Zawsze zapisuj bez pytania."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Zawsze pokazuj Różę Wiatrów"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4347,6 +4343,10 @@ msgstr "Pokaż komety"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Pokaż komety na mapie"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

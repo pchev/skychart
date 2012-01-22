@@ -13,7 +13,7 @@ object f_config_chart: Tf_config_chart
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.3'
   object MainPanel: TPanel
     Left = 0
     Height = 517
@@ -29,10 +29,10 @@ object f_config_chart: Tf_config_chart
       Height = 461
       Top = 1
       Width = 508
-      ActivePage = Page3
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 4
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
@@ -87,7 +87,7 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 2
-            ClientHeight = 27
+            ClientHeight = 41
             ClientWidth = 413
             Columns = 2
             ItemIndex = 0
@@ -120,7 +120,7 @@ object f_config_chart: Tf_config_chart
             Top = 56
             Width = 417
             Caption = 'Stars proper motion options (if available in the catalog)'
-            ClientHeight = 27
+            ClientHeight = 41
             ClientWidth = 413
             TabOrder = 2
             object PMBox: TCheckBox
@@ -165,7 +165,7 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 66
+          ClientHeight = 80
           ClientWidth = 446
           Columns = 2
           ItemIndex = 0
@@ -210,7 +210,7 @@ object f_config_chart: Tf_config_chart
             ChildSizing.ShrinkVertical = crsScaleChilds
             ChildSizing.Layout = cclLeftToRightThenTopToBottom
             ChildSizing.ControlsPerLine = 1
-            ClientHeight = 146
+            ClientHeight = 160
             ClientWidth = 436
             ItemIndex = 0
             Items.Strings = (
@@ -238,7 +238,7 @@ object f_config_chart: Tf_config_chart
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 20
+          ClientHeight = 34
           ClientWidth = 446
           Columns = 2
           Items.Strings = (
@@ -1971,16 +1971,6 @@ object f_config_chart: Tf_config_chart
           Caption = '10'
           ParentColor = False
         end
-        object Label3: TLabel
-          Left = 389
-          Height = 32
-          Top = 23
-          Width = 67
-          AutoSize = False
-          Caption = 'Show Grid'
-          ParentColor = False
-          WordWrap = True
-        end
         object Label4: TLabel
           Left = 67
           Height = 15
@@ -1989,112 +1979,14 @@ object f_config_chart: Tf_config_chart
           Caption = 'Compass rose size'
           ParentColor = False
         end
-        object CheckBox1: TCheckBox
-          Left = 453
-          Height = 26
-          Top = 76
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 25
-        end
-        object CheckBox2: TCheckBox
-          Tag = 1
-          Left = 453
-          Height = 26
-          Top = 101
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 26
-        end
-        object CheckBox4: TCheckBox
-          Tag = 3
-          Left = 453
-          Height = 26
-          Top = 151
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 27
-        end
-        object CheckBox5: TCheckBox
-          Tag = 4
-          Left = 453
-          Height = 26
-          Top = 176
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 28
-        end
-        object CheckBox6: TCheckBox
-          Tag = 5
-          Left = 453
-          Height = 26
-          Top = 201
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 29
-        end
-        object CheckBox7: TCheckBox
-          Tag = 6
-          Left = 453
-          Height = 26
-          Top = 226
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 30
-        end
-        object CheckBox8: TCheckBox
-          Tag = 7
-          Left = 453
-          Height = 26
-          Top = 251
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 31
-        end
-        object CheckBox9: TCheckBox
-          Tag = 8
-          Left = 453
-          Height = 26
-          Top = 276
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 32
-        end
-        object CheckBox10: TCheckBox
-          Tag = 9
-          Left = 453
-          Height = 26
-          Top = 301
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 33
-        end
         object CheckBox13: TCheckBox
           Left = 253
           Height = 26
           Top = 357
-          Width = 182
-          Caption = 'Always show compass rose'
+          Width = 142
+          Caption = 'Show compass rose'
           OnClick = CheckBox13Click
           TabOrder = 23
-        end
-        object CheckBox3: TCheckBox
-          Tag = 2
-          Left = 453
-          Height = 26
-          Top = 126
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 34
-        end
-        object CheckBox11: TCheckBox
-          Tag = 10
-          Left = 453
-          Height = 26
-          Top = 326
-          Width = 28
-          OnClick = ShowGridBoxClick
-          TabOrder = 35
         end
         object Button2: TButton
           Left = 253

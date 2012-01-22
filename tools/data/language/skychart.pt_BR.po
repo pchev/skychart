@@ -59,12 +59,12 @@ msgstr "Sobre"
 msgid "About %s"
 msgstr "Sobre %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Adicionar Grade Equatorial"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Adicionar Grade Equatorial"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -224,10 +224,6 @@ msgstr "%sAlt volta:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Salve sempre sem perguntar."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Sempre mostrar rosa dos ventos"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4345,6 +4341,10 @@ msgstr "Mostras Cometas"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Mostrar cometas na carta"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

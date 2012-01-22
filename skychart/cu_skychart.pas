@@ -2421,7 +2421,7 @@ end;
 
 Procedure Tskychart.DrawGrid;
 begin
-if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
+if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
     {$ifdef trace_debug}
      WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
     {$endif}
@@ -2435,8 +2435,6 @@ if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.F
     end else if cfgsc.ShowEqGrid then begin
       DrawEqGrid;
     end
-end else if cfgsc.ShowGrid then begin
-    if cfgsc.ShowEqGrid then DrawEqGrid;
 end;
 end;
 
@@ -2481,7 +2479,6 @@ begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw scale line');
 {$endif}
-DrawCRose;
 DrawPole(cfgsc.ProjPole);
 fv:=rad2deg*cfgsc.fov/3;
 if trunc(fv)>20 then begin l1:='5'+ldeg; n:=trunc(fv/5); l2:=inttostr(n*5)+ldeg; s:=5; u:=deg2rad; end
@@ -4200,12 +4197,25 @@ end;
 
 //  compass rose
 Procedure Tskychart.DrawCompass;
+var compassok,scaleok: boolean;
 begin
-  if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=cfgsc.fov) then begin
-      if Fcatalog.cfgshr.ShowCRose then DrawCRose;
-  end else if cfgsc.ShowGrid then begin
-      DrawScale;
-  end;
+compassok:=false;
+scaleok:=false;
+if (cfgsc.ShowGrid or cfgsc.ShowEqGrid)and
+   ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])>(cfgsc.fov/2))
+   then begin
+     compassok:=true;
+     scaleok:=true;
+   end;
+if Fcatalog.cfgshr.ShowCRose
+   then compassok:=true;
+if (not cfgsc.ShowGrid)and(not cfgsc.ShowEqGrid)and Fcatalog.cfgshr.ShowCRose
+   then begin
+     compassok:=true;
+     scaleok:=true;
+   end;
+if compassok then DrawCRose;
+if scaleok then DrawScale;
 end;
 
 Procedure Tskychart.DrawCRose;

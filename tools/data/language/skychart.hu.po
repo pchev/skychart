@@ -61,13 +61,13 @@ msgstr "Névjegy"
 msgid "About %s"
 msgstr "Adatok: %s"
 
+#~| msgid "Add Equatorial Grid"
+#~ msgid "Add equatorial grid"
+#~ msgstr "Ekvatoriális háló mutatása"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~| msgid "Add Equatorial Grid"
-#~ msgid "Add equatorial grid"
-#~ msgstr "Ekvatoriális háló mutatása"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -237,11 +237,6 @@ msgstr "%sforgatás függőlegesen:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr ""
-
-#: u_translation.rsalwaysshowco
-#| msgid "Always show compass rose"
-msgid "Always show the compass rose"
-msgstr "Iránytű állandó mutatása"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4689,6 +4684,10 @@ msgstr "Üstökösök mutatása"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Üstökösök mutatása a térképen"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 #| msgid "Show Constellation Line"

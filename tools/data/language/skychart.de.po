@@ -57,12 +57,12 @@ msgstr "Über"
 msgid "About %s"
 msgstr "Über %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Äquat. Koordinatengitter hinzufügen"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Äquat. Koordinatengitter hinzufügen"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -222,10 +222,6 @@ msgstr "%sAlt Umdrehungen:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Immer ohne Nachfrage speichern."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Kompass immer anzeigen"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4343,6 +4339,10 @@ msgstr "Kometen anzeigen"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Kometen in der Karte anzeigen"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

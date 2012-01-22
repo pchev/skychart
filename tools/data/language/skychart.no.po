@@ -58,12 +58,12 @@ msgstr "Om programmet"
 msgid "About %s"
 msgstr "Om %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Legg til ekvatorialt nett"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Legg til ekvatorialt nett"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -223,10 +223,6 @@ msgstr "%sAlt omdreininger:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Lagre alltid uten å spørre."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Vis alltid kompassrosen"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4343,6 +4339,10 @@ msgstr "Vis kometer"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Vis kometer på kartet"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
