@@ -3982,6 +3982,7 @@ end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
 end;
 
@@ -4001,6 +4002,7 @@ end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_indi.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
@@ -4037,6 +4039,7 @@ end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_lx200.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
 end;
 
@@ -4056,6 +4059,7 @@ end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_lx200.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
@@ -4091,6 +4095,7 @@ end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_encoder.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
@@ -4128,6 +4133,7 @@ end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_scope.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
 end;
 
@@ -4147,6 +4153,7 @@ end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
 end;
+ra:=rmod(ra+pi2,pi2);
 Fpop_scope.ScopeAlign(sc.cfgsc.FindName,ra*rad2deg/15,dec*rad2deg);
 end;
 
