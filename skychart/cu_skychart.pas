@@ -4222,7 +4222,7 @@ if (cfgsc.ShowGrid or cfgsc.ShowEqGrid)and
    end;
 if Fcatalog.cfgshr.ShowCRose
    then compassok:=true;
-if (not cfgsc.ShowGrid)and(not cfgsc.ShowEqGrid)and Fcatalog.cfgshr.ShowCRose
+if ((not cfgsc.ShowGrid) or cfgsc.ShowOnlyMeridian)and(not cfgsc.ShowEqGrid)and Fcatalog.cfgshr.ShowCRose
    then begin
      compassok:=true;
      scaleok:=true;
