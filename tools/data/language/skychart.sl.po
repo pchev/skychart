@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-19 17:27+0000\n"
-"PO-Revision-Date: 2012-01-13 17:54+0000\n"
+"POT-Creation-Date: 2012-01-22 13:01+0000\n"
+"PO-Revision-Date: 2012-01-22 16:17+0000\n"
 "Last-Translator: grofaty <grofaty@hotmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-19 18:12+0000\n"
-"X-Generator: Launchpad (build 14692)\n"
+"X-Launchpad-Export-Date: 2012-01-22 18:36+0000\n"
+"X-Generator: Launchpad (build 14700)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -58,12 +58,12 @@ msgstr "O programu"
 msgid "About %s"
 msgstr "Več o %s"
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Dodaj ekvatorialno mrežo"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr "Ast"
 
+#~ msgid "Always show the compass rose"
+#~ msgstr "Vedno prikaži kompasovo vetrovnico"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -130,7 +130,7 @@ msgstr "Dodaj eden element v podatkovno zbirko. Vsa polja so obvezna."
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Prikaži ekvatorialno mrežo"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -4342,7 +4342,7 @@ msgstr "Prikaži komete na karti"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr ""
+msgstr "Prikaži kompasovo vetrovnico"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
