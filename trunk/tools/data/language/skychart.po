@@ -4014,8 +4014,8 @@ msgstr ""
 msgid "Compass rose size"
 msgstr ""
 
-#: u_translation:rsalwaysshowco
-msgid "Always show the compass rose"
+#: u_translation:rsshowcompass
+msgid "Show the compass rose"
 msgstr ""
 
 #: u_translation:rsprograminfor

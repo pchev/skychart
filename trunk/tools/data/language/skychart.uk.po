@@ -60,12 +60,12 @@ msgstr "Оповістка"
 msgid "About %s"
 msgstr "Про %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Додати екваторіальну сітку"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Додати екваторіальну сітку"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -225,10 +225,6 @@ msgstr "%sAlt повороти:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr ""
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Завжди показувати компас"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4345,6 +4341,10 @@ msgstr "Показати комети на"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Показати комети на мапі"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

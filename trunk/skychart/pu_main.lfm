@@ -3621,94 +3621,94 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLine: TToolButton
-        Left = 346
+        Left = 369
         Top = 2
         Action = ShowConstellationLine
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowConstellationLimit: TToolButton
-        Left = 369
+        Left = 392
         Top = 2
         Action = ShowConstellationLimit
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowGalacticEquator: TToolButton
-        Left = 392
+        Left = 415
         Top = 2
         Action = ShowGalacticEquator
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowEcliptic: TToolButton
-        Left = 415
+        Left = 438
         Top = 2
         Action = ShowEcliptic
         OnMouseUp = ToolButtonShowLineMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowMark: TToolButton
-        Left = 438
+        Left = 461
         Top = 2
         Action = ShowMark
         OnMouseUp = ToolButtonShowMarkMouseUp
         Style = tbsCheck
       end
       object ToolButtonShowLabels: TToolButton
-        Left = 484
+        Left = 507
         Top = 2
         Action = ShowLabels
         OnMouseUp = ToolButtonShowLabelsMouseUp
         Style = tbsCheck
       end
       object ToolButtonEditlabels: TToolButton
-        Left = 507
+        Left = 530
         Top = 2
         Action = EditLabels
         PopupMenu = PopupMenu1
         Style = tbsCheck
       end
       object ToolButtonShowObjectbelowHorizon: TToolButton
-        Left = 530
+        Left = 553
         Top = 2
         Action = ShowObjectbelowHorizon
         Style = tbsCheck
       end
       object ToolButtonswitchbackground: TToolButton
-        Left = 553
+        Left = 576
         Top = 2
         Action = switchbackground
         OnMouseUp = ToolButtonswitchbackgroundMouseUp
         Style = tbsCheck
       end
       object ToolButtonSyncChart: TToolButton
-        Left = 580
+        Left = 603
         Top = 2
         Action = SyncChart
         Style = tbsCheck
       end
       object ToolButtonTrack: TToolButton
-        Left = 603
+        Left = 626
         Top = 2
         Action = Track
         Style = tbsCheck
       end
       object ToolButtonswitchstars: TToolButton
-        Left = 630
+        Left = 653
         Top = 2
         Action = switchstars
         OnMouseUp = ToolButtonswitchstarsMouseUp
         Style = tbsCheck
       end
       object ToolButton2: TToolButton
-        Left = 626
+        Left = 649
         Top = 2
         Width = 4
         Style = tbsDivider
       end
       object ToolButton4: TToolButton
-        Left = 576
+        Left = 599
         Top = 2
         Width = 4
         Style = tbsDivider
@@ -3738,11 +3738,18 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButtonScale: TToolButton
-        Left = 461
+        Left = 484
         Top = 2
         ImageIndex = 90
         OnClick = ToolButtonScaleClick
         Style = tbsCheck
+      end
+      object ToolButtonCompass: TToolButton
+        Left = 346
+        Top = 2
+        Caption = 'ToolButtonCompass'
+        ImageIndex = 91
+        OnClick = ToolButtonCompassClick
       end
     end
   end
@@ -5843,6 +5850,9 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
           OnClick = GridEQExecute
         end
+        object Compass1: TMenuItem
+          OnClick = ToolButtonCompassClick
+        end
         object ShowConstellationLine1: TMenuItem
           Action = ShowConstellationLine
           Bitmap.Data = {
@@ -7459,7 +7469,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695B00000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
+      4C695C00000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FF0000
       000000000000000000000000000000000000000000009C6B6BFF000000000000
       000000000000000000000000000000000000000000009C6B6BFF00000000945A
@@ -10371,6 +10381,38 @@ object f_main: Tf_main
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000000000000000FFBC
+      800CFFBF7F4FFFBE7FA5FFBE80E4FFBE80E2FFBE7FA5FFBE7F4EFFBC800C0000
+      00000000000000000000000000000000000000000000FFAA8001FFBE8050E7AB
+      72F1B98858FFA0754AFF966D44FFA1754BFFB98858FFE6AB71FFFFBE7FF1FFBE
+      8050FFAA8001000000000000000000000000FFAA8001F7B87978BF8C5AFFA481
+      5EFFE6D8CAFFFCF4EDFFFFF6EDFFFEF4EBFFF6EBE0FFCAB39DFFC18F5EFFF7B8
+      79FFFAB97978FFAA80010000000000000000F1B17351BB8858FFBA9E83FFFEF9
+      F5FFFFFAF6FFFFFAF5FFFFF9F3FFFFF6EEFFFFF3E8FFFFF2E5FFC4CBE4FF7A78
+      93FFF1B174FFF1B0735000000000ECAC6C0BD69C65F1A4805DFFFEFAF6FFFFFC
+      FAFFFFFDFBFFFFFDFAFFFFFBF8FFF4F1F3FFA1B9F2FF3C78FAFF628BDEFF9EAE
+      D4FFD79E68FFE9AA6EF1ECAC6C0BE0A3664FAE7E50FFE6D9CCFFFFFBF8FFFFFE
+      FDFFFFFEFEFFCFDDFDFF6A9AFDFF1762FFFF0C5BFFFF87A7E6FF0D41ADFFFFF4
+      EAFFD1B599FFDEA065FFD99D6051CC9157A99B7046FFFCF6F0FFFFFBF7FFFFFD
+      FBFFFAEDE0FFBCABAFFF0C5BFFFF0C5BFFFFACC3EEFF01339AFF6081CCFFFFEF
+      E0FFEBE2D9FFD5995EFFC58950ABBA7E46E8946B43FFFFF8F1FFFFFAF4FFFFFB
+      F7FFEFC8A2FFE4A66BFFE0CFCAFFEFF2F7FF01339AFF02359FFFE9DFDEFFFFEC
+      DBFFFAF8F6FFD19459FFB27840E8A76E38E8996E45FFFEF6EFFFFFF8F1FFFEF5
+      ECFFE5AA71FFE4A66BFFF7F8F9FFD6C3B8FF01339AFF2B5ABEFFFFEEDEFFFFEE
+      DEFFFAF8F6FFC88C52FF9F6831E99A612DB39F6F41FFF6EDE4FFFFF6EDFFF4D6
+      BAFFE4A66BFFEBE0D7FFA26A34FFA26A34FF585D80FFA7B3D7FFFFEDDDFFFFF3
+      E8FFECE3D9FFB97E47FF935B28B5925B26649C6632FFC9B29CFFFFF5EAFFE9B5
+      84FFE2CFBBFFA26A34FFA56D37FFC08E5FFFE9D3BEFFFFF4EAFFFFEDDCFFFFFC
+      FAFFD2B294FF9F6731FF8E5823658F582412804917F2A07144FFEEDAC7FFDABC
+      9FFFB07943FFD5AB84FFFAE7D5FFFFFDFBFFFFFCFAFFFFFBF8FFFFFAF7FFEDE4
+      DBFFB17944FF7A4513F28F592312000000007F48166E834D1AFFB38252FFDDC3
+      AAFFFFF6EDFFFFF1E4FFFFEEDFFFFFFAF6FFFFFCF8FFFFFEFDFFF5F0EBFFB37F
+      4EFF804B18FF7B471471000000000000000080401502713E0C97794412FF9F6C
+      3BFFC5AB92FFE9E0D7FFFAF8F5FFFBFAF8FFEDE5DDFFCCB096FFA16C38FF7843
+      11FF6F3C0B988040150200000000000000000000000080401502733F0D746834
+      04F37F4A18FF915A26FF97602CFF97602CFF915A26FF7F4A18FF673404F3733F
+      0D74804015020000000000000000000000000000000000000000000000007946
+      1316713E0C726A3605C2653202EF653202EF6A3605C2723E0C72794613160000
       0000000000000000000000000000
     }
   end

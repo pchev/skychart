@@ -57,12 +57,12 @@ msgstr "Um"
 msgid "About %s"
 msgstr "Um %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Bæta við miðbaugsmöskva"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr ""
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Bæta við miðbaugsmöskva"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr ""
@@ -222,10 +222,6 @@ msgstr "%sStjörnuhæð - snúningar:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Vista alltaf án spurninga."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Sýna alltaf áttavita"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4342,6 +4338,10 @@ msgstr "Sýna halastjörnur"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Birta halastjörnur á kortinu"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

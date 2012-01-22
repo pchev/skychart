@@ -57,12 +57,12 @@ msgstr "Over dit programma"
 msgid "About %s"
 msgstr "Over %s"
 
+#~ msgid "Add equatorial grid"
+#~ msgstr "Voeg equatoriaal rooster toe"
 #: u_translation.rsabrevasteroid
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Add equatorial grid"
-#~ msgstr "Voeg equatoriaal rooster toe"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -222,10 +222,6 @@ msgstr "%sAlt as-omw.:"
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Automatisch opslaan zonder bevestiging."
-
-#: u_translation.rsalwaysshowco
-msgid "Always show the compass rose"
-msgstr "Altijd kompasroos tonen"
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -4343,6 +4339,10 @@ msgstr "Toon kometen"
 #: u_translation.rsshowcometson
 msgid "Show comets on the chart"
 msgstr "Toon kometen op de kaart"
+
+#: u_translation.rsshowcompass
+msgid "Show the compass rose"
+msgstr ""
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"

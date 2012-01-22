@@ -47,20 +47,9 @@ type
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
-    CheckBox1: TCheckBox;
-    CheckBox10: TCheckBox;
     epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
     CheckBox13: TCheckBox;
-    CheckBox11: TCheckBox;
-    CheckBox2: TCheckBox;
-    CheckBox3: TCheckBox;
-    CheckBox4: TCheckBox;
-    CheckBox5: TCheckBox;
-    CheckBox6: TCheckBox;
-    CheckBox7: TCheckBox;
-    CheckBox8: TCheckBox;
-    CheckBox9: TCheckBox;
     ComboBox1: TComboBox;
     ComboBox10: TComboBox;
     ComboBox11: TComboBox;
@@ -177,7 +166,6 @@ type
     Label177: TLabel;
     Label2: TLabel;
     Label29: TLabel;
-    Label3: TLabel;
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
@@ -282,7 +270,6 @@ type
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
-    procedure ShowGridBoxClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
@@ -414,9 +401,8 @@ CoordType.Items[1]:=rsMeanOfTheDat+blank+'('+rsMeanEquatorE+')';
 CoordType.Items[2]:=rsMeanJ2000+blank+'('+rsMeanEquinoxA+')';
 CoordType.Items[3]:=rsAstrometricJ+blank+'('+rsMeanEquinoxJ+')';
 Button2.Caption:=rsDefault;
-Label3.caption:=rsShowGrid;
 Label4.caption:=rsCompassRoseS;
-CheckBox13.caption:=rsAlwaysShowCo;
+CheckBox13.caption:=rsShowCompass;
 Button3.caption:=rsOK;
 Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
@@ -480,28 +466,6 @@ begin
   RaDec9.value:=cshr.DegreeGridSpacing[8];
   RaDec10.value:=cshr.DegreeGridSpacing[9];
   RaDec11.value:=cshr.DegreeGridSpacing[10];
-  RaDec1.Enabled:=cshr.DegreeGridSpacing[0]<1000;
-  RaDec2.Enabled:=cshr.DegreeGridSpacing[1]<1000;
-  RaDec3.Enabled:=cshr.DegreeGridSpacing[2]<1000;
-  RaDec4.Enabled:=cshr.DegreeGridSpacing[3]<1000;
-  RaDec5.Enabled:=cshr.DegreeGridSpacing[4]<1000;
-  RaDec6.Enabled:=cshr.DegreeGridSpacing[5]<1000;
-  RaDec7.Enabled:=cshr.DegreeGridSpacing[6]<1000;
-  RaDec8.Enabled:=cshr.DegreeGridSpacing[7]<1000;
-  RaDec9.Enabled:=cshr.DegreeGridSpacing[8]<1000;
-  RaDec10.Enabled:=cshr.DegreeGridSpacing[9]<1000;
-  RaDec11.Enabled:=cshr.DegreeGridSpacing[10]<1000;
-  CheckBox1.Checked:=RaDec1.Enabled;
-  CheckBox2.Checked:=RaDec2.Enabled;
-  CheckBox3.Checked:=RaDec3.Enabled;
-  CheckBox4.Checked:=RaDec4.Enabled;
-  CheckBox5.Checked:=RaDec5.Enabled;
-  CheckBox6.Checked:=RaDec6.Enabled;
-  CheckBox7.Checked:=RaDec7.Enabled;
-  CheckBox8.Checked:=RaDec8.Enabled;
-  CheckBox9.Checked:=RaDec9.Enabled;
-  CheckBox10.Checked:=RaDec10.Enabled;
-  CheckBox11.Checked:=RaDec11.Enabled;
   RaDec12.value:=cshr.HourGridSpacing[0];
   RaDec13.value:=cshr.HourGridSpacing[1];
   RaDec14.value:=cshr.HourGridSpacing[2];
@@ -513,17 +477,6 @@ begin
   RaDec20.value:=cshr.HourGridSpacing[8];
   RaDec21.value:=cshr.HourGridSpacing[9];
   RaDec22.value:=cshr.HourGridSpacing[10];
-  RaDec12.Enabled:=RaDec1.Enabled;
-  RaDec13.Enabled:=RaDec2.Enabled;
-  RaDec14.Enabled:=RaDec3.Enabled;
-  RaDec15.Enabled:=RaDec4.Enabled;
-  RaDec16.Enabled:=RaDec5.Enabled;
-  RaDec17.Enabled:=RaDec6.Enabled;
-  RaDec18.Enabled:=RaDec7.Enabled;
-  RaDec19.Enabled:=RaDec8.Enabled;
-  RaDec20.Enabled:=RaDec9.Enabled;
-  RaDec21.Enabled:=RaDec10.Enabled;
-  RaDec22.Enabled:=RaDec11.Enabled;
 end;
 
 procedure Tf_config_chart.ShowField;
@@ -918,13 +871,13 @@ end;
 procedure Tf_config_chart.Button2Click(Sender: TObject);
 begin
 if LockChange then exit;
-cshr.DegreeGridSpacing[0]:=1000+5/60;
-cshr.DegreeGridSpacing[1]:=1000+10/60;
-cshr.DegreeGridSpacing[2]:=1000+20/60;
-cshr.DegreeGridSpacing[3]:=1000+30/60;
-cshr.DegreeGridSpacing[4]:=1000+1;
-cshr.DegreeGridSpacing[5]:=1000+2;
-cshr.DegreeGridSpacing[6]:=1000+5;
+cshr.DegreeGridSpacing[0]:=5/60;
+cshr.DegreeGridSpacing[1]:=10/60;
+cshr.DegreeGridSpacing[2]:=20/60;
+cshr.DegreeGridSpacing[3]:=30/60;
+cshr.DegreeGridSpacing[4]:=1;
+cshr.DegreeGridSpacing[5]:=2;
+cshr.DegreeGridSpacing[6]:=5;
 cshr.DegreeGridSpacing[7]:=10;
 cshr.DegreeGridSpacing[8]:=15;
 cshr.DegreeGridSpacing[9]:=20;
@@ -1012,28 +965,13 @@ NebBox.Checked:=true;
 BigNebBox.Checked:=true;
 end;
 
+
 procedure Tf_config_chart.CheckBox13Click(Sender: TObject);
 begin
 if LockChange then exit;
   cshr.ShowCRose:=CheckBox13.Checked;
 end;
 
-procedure Tf_config_chart.ShowGridBoxClick(Sender: TObject);
-begin
-if LockChange then exit;
-LockChange:=true;
-if sender is TCheckBox then with sender as TCheckBox do begin
-  if checked then begin
-     if cshr.DegreeGridSpacing[tag]>1000 then begin
-        cshr.DegreeGridSpacing[tag]:=cshr.DegreeGridSpacing[tag]-1000;
-     end
-  end else begin
-     cshr.DegreeGridSpacing[tag]:=cshr.DegreeGridSpacing[tag]+1000;
-  end;
-end;
-ShowGridSpacing;
-LockChange:=false;
-end;
 
 procedure Tf_config_chart.DegSpacingChange(Sender: TObject);
 var x: double;

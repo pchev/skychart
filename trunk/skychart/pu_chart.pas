@@ -295,6 +295,7 @@ type
     procedure SetAz(Az : double; redraw:boolean=true);
     procedure SetDateUT(y,m,d,h,n,s:integer);
     procedure SetJD(njd:double);
+    procedure SwitchCompass(Sender: TObject);
     function cmd_GetProjection:string;
     function cmd_GetSkyMode:string;
     function cmd_GetNebMode:string;
@@ -1464,6 +1465,12 @@ begin
  rotation(-15);
 end;
 
+procedure Tf_chart.SwitchCompass(Sender: TObject);
+begin
+   sc.catalog.cfgshr.ShowCRose:=not sc.catalog.cfgshr.ShowCRose;
+   Refresh;
+end;
+
 procedure Tf_chart.GridEQExecute(Sender: TObject);
 begin
 {$ifdef trace_debug}
@@ -1479,8 +1486,8 @@ begin
  WriteTrace(caption+' GridExecute');
 {$endif}
  sc.cfgsc.ShowGrid := not sc.cfgsc.ShowGrid;
- if sc.cfgsc.projpole=Equat then
-    sc.cfgsc.ShowEqGrid:=sc.cfgsc.ShowGrid;
+{ if sc.cfgsc.projpole=Equat then
+    sc.cfgsc.ShowEqGrid:=sc.cfgsc.ShowGrid;   }
  Refresh;
 end;
 
