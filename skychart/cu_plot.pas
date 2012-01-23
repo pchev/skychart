@@ -77,6 +77,7 @@ type
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
+     procedure editlabelmenuPopup(Sender: TObject);
      procedure labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
      procedure labelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
      procedure labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -216,20 +217,9 @@ for i:=0 to 6 do
     planetbmps.Height:=450;
     xplanetimg:=TPicture.create;
  end;
- for i:=1 to maxlabels do begin
-    labels[i]:=Tlabel.Create(nil);
-    labels[i].parent:=TPanel(AOwner);
-    labels[i].tag:=i;
-    labels[i].color:=clNone;
-    labels[i].ShowAccelChar:=false;
-    labels[i].Font.CharSet:=FCS_ISO_10646_1;
-    labels[i].PopupMenu:=editlabelmenu;
-    labels[i].OnMouseDown:=labelmousedown;
-    labels[i].OnMouseUp:=labelmouseup;
-    labels[i].OnMouseMove:=labelmousemove;
-    labels[i].OnMouseLeave:=labelmouseleave;
- end;
  editlabelmenu:=Tpopupmenu.Create(self);
+ editlabelmenu.AutoPopup:=true;
+ editlabelmenu.OnPopup:=editlabelmenuPopup;
  MenuItem := TMenuItem.Create(editlabelmenu);
  editlabelmenu.Items.Add(MenuItem);
  MenuItem.Caption := '';
@@ -261,6 +251,19 @@ for i:=0 to 6 do
  editlabelmenu.Items.Add(MenuItem);
  MenuItem.Caption := rsResetAllLabe;
  MenuItem.OnClick := DeleteAllLabel;
+ for i:=1 to maxlabels do begin
+    labels[i]:=Tlabel.Create(nil);
+    labels[i].parent:=TPanel(AOwner);
+    labels[i].tag:=i;
+    labels[i].color:=clNone;
+    labels[i].ShowAccelChar:=false;
+    labels[i].Font.CharSet:=FCS_ISO_10646_1;
+    labels[i].PopupMenu:=editlabelmenu;
+    labels[i].OnMouseDown:=labelmousedown;
+    labels[i].OnMouseUp:=labelmouseup;
+    labels[i].OnMouseMove:=labelmousemove;
+    labels[i].OnMouseLeave:=labelmouseleave;
+ end;
 end;
 
 destructor TSplot.Destroy;
@@ -2298,20 +2301,28 @@ begin
 end;
 
 procedure TSplot.labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-var pt:Tpoint;
 begin
-if editlabel<0 then with Sender as Tlabel do begin
-pt:=clienttoscreen(point(x,y));
-if button=mbRight then begin
-  selectedlabel:=tag;
-  editlabelx:=pt.x;
-  editlabely:=pt.y;
-  editlabelmod:=false;
-  editlabelmenu.Items[0].Caption:=labels[selectedlabel].Caption;
-  editlabelmenu.popup(pt.x,pt.y);
-end else if button=mbLeft then begin
-  if assigned(FLabelClick) then FLabelClick(tag);
+  if (sender is Tlabel)and(editlabel<0) then begin
+    if button=mbLeft then begin
+      if assigned(FLabelClick) then FLabelClick(Tlabel(sender).tag);
+    end;
+  end;
 end;
+
+procedure TSplot.editlabelmenuPopup(Sender: TObject);
+var pt:Tpoint;
+    lb: TComponent;
+begin
+lb:=editlabelmenu.PopupComponent;
+if (lb is Tlabel) and (editlabel<0) then begin
+ pt.x:=mouse.cursorpos.x;
+ pt.y:=mouse.cursorpos.y;
+ selectedlabel:=Tlabel(lb).tag;
+ editlabelx:=pt.x;
+ editlabely:=pt.y;
+ editlabelmod:=false;
+ editlabelmenu.Items[0].Caption:=labels[selectedlabel].Caption;
+// editlabelmenu.popup(pt.x,pt.y);
 end;
 end;
 

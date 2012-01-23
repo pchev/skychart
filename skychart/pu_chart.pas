@@ -423,7 +423,7 @@ begin
  Image1.OnMouseUp:=Image1MouseUp;
  Image1.OnMouseWheel:=Image1MouseWheel;
  Image1.OnPaint:=Image1Paint;
-
+ Image1.PopupMenu:=PopupMenu1;
  sc:=Tskychart.Create(Image1);
  sc.Image:=Image1.Canvas;
  // set initial value
@@ -1929,7 +1929,6 @@ scp:=Image1.ControlToScreen(point(x,y));
 case Button of
    mbLeft  : if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
                else ZoomBox(1,X,Y);
-   mbRight : PopupMenu1.PopUp(scp.x,scp.y);
    mbMiddle: image1.cursor:=crHandPoint;
 end;
 if assigned(FSetFocus) then FSetFocus(Self);
