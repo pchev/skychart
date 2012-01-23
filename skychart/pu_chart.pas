@@ -2506,14 +2506,15 @@ repeat
 until buf='';
 
 // coordinates
+ApparentValid:=((sc.cfgsc.nutl<>0)or(sc.cfgsc.nuto<>0)) and (sc.cfgsc.abm or(sc.cfgsc.abp<>0)or(sc.cfgsc.abe<>0));
 txt:=txt+html_br+html_b+rsCoordinates+blank;
 if sc.cfgsc.CoordExpertMode then begin;
-  if sc.cfgsc.ApparentPos then txt:=txt+blank+rsApparent
-                          else txt:=txt+blank+rsMean;
+  if sc.cfgsc.ApparentPos and ApparentValid then txt:=txt+blank+rsApparent
+     else txt:=txt+blank+rsMean;
   txt:=txt+blank+sc.cfgsc.EquinoxName;
 end else
   case sc.cfgsc.CoordType of
-  0: txt:=txt+blank+rsApparent;
+  0: if ApparentValid then txt:=txt+blank+rsApparent else txt:=txt+blank+rsMeanOfTheDat;
   1: txt:=txt+blank+rsMeanOfTheDat;
   2: txt:=txt+blank+rsMeanJ2000;
   3: txt:=txt+blank+rsAstrometricJ;
@@ -2536,7 +2537,6 @@ radate:=ra2000;
 dedate:=de2000;
 precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
 // apparent
-ApparentValid:=((sc.cfgsc.nutl<>0)or(sc.cfgsc.nuto<>0)) and (sc.cfgsc.abm or(sc.cfgsc.abp<>0)or(sc.cfgsc.abe<>0));
 if ApparentValid then begin
   raapp:=ra2000;
   deapp:=de2000;
