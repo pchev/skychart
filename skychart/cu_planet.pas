@@ -2408,8 +2408,8 @@ end;
 function TPlanet.load_de(t: double): boolean;
 var
   i: integer;
-  y,m,d : integer;
-  hour: double;
+  y,ys,ye,m,d : integer;
+  hour,jdstart,jdend: double;
 begin
 djd(t,y,m,d,hour);
 if y=de_year then begin
@@ -2418,13 +2418,22 @@ end else begin
   result:=false;
   de_type:=0;
   for i:=1 to nJPL_DE do begin
-     if load_de_file(t,de_folder,JPL_DE[i]) then begin
+     if load_de_file(t,de_folder,JPL_DE[i],jdstart,jdend) then begin
        result:=true;
        de_type:=JPL_DE[i];
        break;
      end;
   end;
-  de_year:=y;
+  if result then begin
+    djd(jdstart,ys,m,d,hour);
+    djd(jdend,ye,m,d,hour);
+    if (y=ys)or(y=ye) then
+       de_year:=MaxInt
+    else
+       de_year:=y;
+  end
+   else
+    de_year:=MaxInt;
 end;
 end;
 
