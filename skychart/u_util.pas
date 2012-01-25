@@ -738,6 +738,7 @@ begin
     min1:=abs(ar-dd)*60;
     if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
@@ -788,6 +789,7 @@ begin
     min1:=abs(ar-dd)*60;
     if min1>=59.9999166667 then begin
        dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
@@ -860,6 +862,7 @@ begin
     min:=abs(ar-dd)*60;
     if min>=59.5 then begin
        dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
        min:=0.0;
     end;
     min:=Round(min);
@@ -901,6 +904,7 @@ begin
     min1:=abs(ar-dd)*60;
     if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
@@ -926,6 +930,7 @@ begin
     min1:=abs(ar-dd)*60;
     if min1>=59.99166667 then begin
        dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
