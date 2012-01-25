@@ -50,8 +50,8 @@ procedure SetXHIPpath(path : string);
 implementation                          
 
 const blank='               ';
-var dummy_double : double;
-    XHIPpath: string;
+
+var XHIPpath: string;
 
 
 procedure SetXHIPpath(path : string);
@@ -79,6 +79,7 @@ FileMode:=0;
 Reset(fx);
 imin:=0;
 imax := filesize(fx);
+lin.num:='';
 repeat
   pnum:=lin.num;
   i:=imin + ((imax-imin) div 2);
@@ -113,6 +114,7 @@ FileMode:=0;
 Reset(fx);
 imin:=0;
 imax := filesize(fx);
+lin.num:=-MaxInt;
 repeat
   pnum:=lin.num;
   i:=imin + ((imax-imin) div 2);
@@ -144,12 +146,15 @@ begin
 FindIdx(NGCpath+slashchar+'messier.idx',id,ar,de,ok);
 end;
 
+{$NOTES OFF}
 function IsNumber(n : string) : boolean;
 var i : integer;
+    dummy_double : double;
 begin
 val(n,Dummy_double,i);
 result:= (i=0) ;
 end;
+{$NOTES ON}
 
 Procedure FindNumGCVS(id:string ;var ar,de:double; var ok:boolean);
 var buf,buf1,buf2 : string;
@@ -358,6 +363,7 @@ FileMode:=0;
 Reset(fx);
 imin:=0;
 imax := filesize(fx);
+lin.num:='';
 repeat
   pnum:=lin.num;
   i:=imin + ((imax-imin) div 2);

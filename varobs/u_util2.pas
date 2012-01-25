@@ -51,6 +51,7 @@ function SubColor(c1,c2 : Tcolor):Tcolor;
 function roundF(x:double;n:integer):double;
 procedure Splitarg(buf,sep:string; var arg: TStringList);
 procedure SplitRec(buf,sep:string; var arg: TStringList);
+Procedure SplitCmd(S : String; List : TStringList);
 function ExpandTab(str:string; tabwidth:integer):string;
 function words(str,osep : string; p,n : integer; isep:string=' ') : string;
 function wordspace(str:string):string;
@@ -86,7 +87,7 @@ function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 Procedure FormPos(form : Tform; x,y : integer);
-Function ExecProcess(cmd: string; output: TStringList): integer;
+Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
 procedure ExecNoWait(cmd: string; title:string=''; hide: boolean=true);
 function decode_mpc_date(s: string; var y,m,d : integer; var hh:double):boolean;
@@ -354,6 +355,55 @@ while pos(sep,buf)<>0 do begin
  end;
 end;
 arg.add(buf);
+end;
+
+// handle more separator automativally. Copied from TProcess CommandToList
+Procedure SplitCmd(S : String; List : TStringList);
+  Function GetNextWord : String;
+  Const
+    WhiteSpace = [' ',#9,#10,#13];
+    Literals = ['"',''''];
+  Var
+    Wstart,wend : Integer;
+    InLiteral : Boolean;
+    LastLiteral : char;
+  begin
+    WStart:=1;
+    While (WStart<=Length(S)) and (S[WStart] in WhiteSpace) do
+      Inc(WStart);
+    WEnd:=WStart;
+    InLiteral:=False;
+    LastLiteral:=#0;
+    While (Wend<=Length(S)) and (Not (S[Wend] in WhiteSpace) or InLiteral) do
+      begin
+      if S[Wend] in Literals then
+        If InLiteral then
+          InLiteral:=Not (S[Wend]=LastLiteral)
+        else
+          begin
+          InLiteral:=True;
+          LastLiteral:=S[Wend];
+          end;
+       inc(wend);
+       end;
+     Result:=Copy(S,WStart,WEnd-WStart);
+     if  (Length(Result) > 0)
+     and (Result[1] = Result[Length(Result)]) // if 1st char = last char and..
+     and (Result[1] in Literals) then // it's one of the literals, then
+       Result:=Copy(Result, 2, Length(Result) - 2); //delete the 2 (but not others in it)
+     While (WEnd<=Length(S)) and (S[Wend] in WhiteSpace) do
+       inc(Wend);
+     Delete(S,1,WEnd-1);
+  end;
+Var
+  W : String;
+begin
+  While Length(S)>0 do
+    begin
+    W:=GetNextWord;
+    If (W<>'') then
+      List.Add(W);
+    end;
 end;
 
 function ExpandTab(str:string; tabwidth:integer):string;
@@ -1043,21 +1093,33 @@ with Form do begin
 end;
 end;
 
-Function ExecProcess(cmd: string; output: TStringList): integer;
+Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 const READ_BYTES = 2048;
 var
   M: TMemoryStream;
   P: TProcess;
+  param: TStringList;
   n: LongInt;
   BytesRead: LongInt;
 begin
 M := TMemoryStream.Create;
 P := TProcess.Create(nil);
-result:=999;
+param:=TStringList.Create;
+result:=1;
 try
   BytesRead := 0;
-  P.CommandLine := cmd;
-  P.Options := [poUsePipes, poStdErrToOutPut, poNoConsole];
+  SplitCmd(cmd,param);
+  cmd:= param[0];
+  param.Delete(0);
+  P.Executable:=cmd;
+  P.Parameters:=param;
+  if ShowConsole then begin
+     P.ShowWindow:=swoShowNormal;
+     P.StartupOptions:=[suoUseShowWindow];
+  end else begin
+     P.ShowWindow:=swoHIDE;
+  end;
+  P.Options := [poUsePipes, poStdErrToOutPut];
   P.Execute;
   while P.Running do begin
     Application.ProcessMessages;
@@ -1081,8 +1143,13 @@ try
   P.Free;
   M.Free;
 except
-  P.Free;
-  M.Free;
+  on E: Exception do begin
+    result:=-1;
+    output.add(E.Message);
+    P.Free;
+    M.Free;
+    param.Free;
+  end;
 end;
 end;
 

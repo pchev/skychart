@@ -45,6 +45,7 @@ Var Com_opened : boolean = false;
     debugfile : string;
     Tot_timout,Int_timout : integer;
 
+{$NOTES OFF}
 Procedure CloseSerialDebug;
 var i : integer;
 begin
@@ -58,6 +59,7 @@ i:=ioresult;
 except
 end;
 end;
+{$NOTES ON}
 
 Procedure InitSerialDebug(ff : string);
 begin

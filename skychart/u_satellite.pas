@@ -189,6 +189,7 @@ chdir(slash(tmpdir));
 exec(dcmd +' "'+slash(prgdir)+'quicksat.exe'+'" '+slash('.')+'quicksat.ctl',true);
 chdir(curdir);
 except
+{$NOTES OFF}
 {$I-}
 Closefile(satctl);
 dummy_double:=ioresult;
@@ -200,6 +201,7 @@ chdir(curdir);
 raise;
 end;
 end;
+{$NOTES ON}
 
 Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; boxsearch:boolean=false);
 var
@@ -398,6 +400,7 @@ chdir(slash(tmpdir));
 exec(dcmd +' IRIDFLAR.EXE',false);
 chdir(curdir);
 except
+{$NOTES OFF}
 {$I-}
 Closefile(irictl);
 i1:=ioresult;
@@ -409,6 +412,7 @@ chdir(curdir);
 raise;
 end;
 end;
+{$NOTES ON}
 
 end.
 

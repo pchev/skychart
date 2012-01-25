@@ -48,7 +48,6 @@ var
    Sm,nSM : integer;
    SMlst : array[1..50] of integer;
    FileIsOpen : Boolean = false;
-   chkfile : Boolean = true;
 
 Function IsOCLpath(path : string) : Boolean;
 begin
@@ -75,7 +74,7 @@ var nomreg,nomfich :string;
 begin
 str(S:2,nomreg);
 nomfich:=OCLpath+slashchar+padzeros(nomreg,2)+'.dat';
-if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
+if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 if fileisopen then CloseRegion;
 AssignFile(focl,nomfich);
 FileisOpen:=true;
