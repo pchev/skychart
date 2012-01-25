@@ -2526,10 +2526,10 @@ if isSolarSystem then
                               else txt:=txt+blank+rsGeocentric;
 txt:=txt+htms_b+html_br;
 // return to j2000 coord.
-ra2000:=sc.cfgsc.FindRA;
-de2000:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
-precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+ra2000:=sc.cfgsc.FindRA2000;
+de2000:=sc.cfgsc.FindDec2000;
+//if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
+//precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 // mean of date, apply only precession
 radate:=ra2000;
 dedate:=de2000;

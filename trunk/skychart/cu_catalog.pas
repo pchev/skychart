@@ -2817,11 +2817,17 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
+  if rec.star.id='0000-0000184' then begin
+     rec.star.id:='0000-0000184' ;
+  end;
   if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
     propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
   end;
+  cfgsc.FindRA2000:=rec.ra;
+  cfgsc.FindDec2000:=rec.dec;
+  Precession(rec.options.EquinoxJD,jd2000,cfgsc.FindRA2000,cfgsc.FindDec2000);
   sofa_S2C(rec.ra,rec.dec,p);
   PrecessionV(rec.options.EquinoxJD,cfgsc.JDChart,p);
   if cfgsc.ApparentPos then apparent_equatorialV(p,cfgsc,true,true);

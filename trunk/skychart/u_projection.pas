@@ -1098,11 +1098,14 @@ var da,dd,p1dv,pde,pdep1,w: double;
     i: integer;
 begin
 sofa_S2C(ra,de,p1);
-// nutation
-if (c.nutl<>0)or(c.nuto<>0) then begin
-  // rotate using transposed nutation matrix
-  sofa_TR(c.NutMAT,NutMATR);
-  sofa_RXP(NutMATR,p1,p2);
+// Sun light deflection
+if lightdeflection and c.asl then begin
+  // "communicated by Patrick Wallace, RAL Space, UK"
+  pde := sofa_Pdp( p1, c.ehn );
+  pdep1 := 1.0 + pde;
+  w := c.gr2e / max ( pdep1, 1.0e-5 );
+  for i:=1 to 3 do
+     p2[i] := p1[i] - ( w * ( c.ehn[i] - pde * p1[i] ) );
   sofa_CP(p2,p1);
 end;
 //aberration
@@ -1132,14 +1135,11 @@ if aberration and(c.abm or(c.abp<>0)or(c.abe<>0)) then begin
       sofa_S2C(ra,de,p1);
    end;
 end;
-// Sun light deflection
-if lightdeflection and c.asl then begin
-  // "communicated by Patrick Wallace, RAL Space, UK"
-  pde := sofa_Pdp( p1, c.ehn );
-  pdep1 := 1.0 + pde;
-  w := c.gr2e / max ( pdep1, 1.0e-5 );
-  for i:=1 to 3 do
-     p2[i] := p1[i] - ( w * ( c.ehn[i] - pde * p1[i] ) );
+// nutation
+if (c.nutl<>0)or(c.nuto<>0) then begin
+  // rotate using transposed nutation matrix
+  sofa_TR(c.NutMAT,NutMATR);
+  sofa_RXP(NutMATR,p1,p2);
   sofa_CP(p2,p1);
 end;
 sofa_C2S(p1,ra,de);
