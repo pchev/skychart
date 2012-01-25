@@ -1773,7 +1773,6 @@ begin
 end;
 
 destructor Tconf_main.Destroy;
-var i:integer;
 begin
 try
   if CometUrlList<>nil then CometUrlList.Free;

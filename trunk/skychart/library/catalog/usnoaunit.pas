@@ -134,11 +134,9 @@ end;
 
 Procedure OpenRegion(var ok:boolean);
 var nomreg,nomfich,nomacc :string;
-    zone,box,znum : integer;
+    zone,box : integer;
     facc : file of Accrec ;
     acc : accrec;
-const cd : array[1..24] of string = ('1','1','6','5','3','2','1','4','6','5','7','10','8','7','8','9','9','4','10','3','2','6','2','3');
-      cd2: array[1..24] of string = ('1','1','9','7','5','4','3','2','1','6','7','10','9','8','8','11','10','11','6','4','2','3','3','2');
 begin
 box:=0;
 if fullwin and northpoleinmap then nomreg:='1725'
@@ -151,7 +149,6 @@ nomreg:=padzeros(nomreg,4);
 end;
 CurZone:=nomreg;
 nomfich:=USNOApath+slashchar+'zone'+nomreg+'.cat';
-znum:=trunc(strtoint(nomreg)/75)+1;
 if not FileExists(nomfich) then begin
    ok:=false;
    exit;

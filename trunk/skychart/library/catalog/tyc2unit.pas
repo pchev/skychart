@@ -135,7 +135,7 @@ var
    readsup,readbin : boolean;
    cache : array[1..CacheNum] of array of TY2rec;
    cachelst,tmax,smax,catread : array[1..CacheNum] of integer;
-   OnCache,fok : boolean;
+   OnCache : boolean;
    Ncache,Icache : integer;
    lastcache : integer = 0;
    maxbin : integer = 2;

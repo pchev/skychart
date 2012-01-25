@@ -60,7 +60,6 @@ var
    OnCache : boolean;
    Ncache,Icache : integer;
    lastcache : integer = 0;
-   chkfile : Boolean = true;
 
 Function IsSKYpath(path : string) : Boolean;
 begin
@@ -89,7 +88,7 @@ end;
 Procedure Openfile(nomfich : string; var ok : boolean);
 begin
 ok:=false;
-if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
+if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 AssignFile(fsky,nomfich);
 FileisOpen:=true;
 FileMode:=0;

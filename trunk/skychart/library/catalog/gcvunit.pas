@@ -51,7 +51,6 @@ var
    Sm,nSM : integer;
    SMlst : array[1..50] of integer;
    FileIsOpen : Boolean = false;
-   chkfile : Boolean = true;
 
 Function IsGCVpath(path : string) : Boolean;
 begin
@@ -80,7 +79,7 @@ var nomreg,nomfich :string;
 begin
 str(S:2,nomreg);
 nomfich:=GCVpath+slashchar+padzeros(nomreg,2)+'.dat';
-if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
+if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 if fileisopen then CloseRegion;
 AssignFile(fgcv,nomfich);
 FileisOpen:=true;

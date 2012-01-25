@@ -234,7 +234,6 @@ var
    zonelst,SMlst : array[1..9537] of integer;
    FileBIsOpen : Boolean = false;
    FileTIsOpen : Boolean = false;
-   chkfile : Boolean = true;
    {$ifdef cache_gcat}
    onCache : boolean;
    CurCache, CurCacheRec: integer;
@@ -689,7 +688,7 @@ end;
 Procedure Openfile(nomfich : string; var ok : boolean);
 begin
 ok:=false;
-if not FileExists(nomfich) then begin ; ok:=false ; chkfile:=false ; exit; end;
+if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 FileMode:=0;
 if cattype=1 then begin
    try

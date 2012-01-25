@@ -1915,7 +1915,6 @@ end;
 
 procedure Tf_chart.Image1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
-var scp: TPoint;
 begin
 {$ifdef trace_debug}
  WriteTrace(caption+' MouseDown');
@@ -1925,7 +1924,6 @@ lasty:=y;
 TrackCursorMove:=false;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
-scp:=Image1.ControlToScreen(point(x,y));
 case Button of
    mbLeft  : if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
                else ZoomBox(1,X,Y);
