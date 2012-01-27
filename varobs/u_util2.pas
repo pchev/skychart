@@ -1108,11 +1108,15 @@ param:=TStringList.Create;
 result:=1;
 try
   BytesRead := 0;
+  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
+  P.CommandLine:=cmd;
+  {$ELSE}
   SplitCmd(cmd,param);
   cmd:= param[0];
   param.Delete(0);
   P.Executable:=cmd;
   P.Parameters:=param;
+  {$ENDIF}
   if ShowConsole then begin
      P.ShowWindow:=swoShowNormal;
      P.StartupOptions:=[suoUseShowWindow];
