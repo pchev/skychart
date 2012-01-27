@@ -3475,12 +3475,12 @@ if cfgplot.AntiAlias then begin
 end
 else  begin
   {$ifdef mswindows}if ps<>psSolid then w:=1;{$endif}
-  abmp.Canvas.Pen.Style:=ps;
-  abmp.Canvas.Pen.Width:=ceil(w);
-  abmp.Canvas.Pen.Color:=BGRAToColor(c);
-  abmp.Canvas.MoveTo(round(x1),round(y1));
-  abmp.Canvas.LineTo(round(x2),round(y2));
-  abmp.Canvas.Pen.Style:=psSolid;
+  abmp.CanvasFP.Pen.Style:=ps;
+  abmp.CanvasFP.Pen.Width:=ceil(w);
+  abmp.CanvasFP.Pen.FPColor:=BGRAToFPColor(c);
+  abmp.CanvasFP.MoveTo(round(x1),round(y1));
+  abmp.CanvasFP.LineTo(round(x2),round(y2));
+  abmp.CanvasFP.Pen.Style:=psSolid;
 end;
 end;
 
