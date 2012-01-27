@@ -294,7 +294,7 @@ try
   Process1.Executable:='pidof';
   Process1.Parameters.Add(ExtractFileName(Application.ExeName));
 {$ifdef darwin}
-  Process1.Executable:='killall');
+  Process1.Executable:='killall';
   Process1.Parameters.Add('-s');
   Process1.Parameters.Add(ExtractFileName(Application.ExeName));
 {$endif}
