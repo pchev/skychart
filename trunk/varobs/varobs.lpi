@@ -61,6 +61,7 @@
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DetailForm"/>
         <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
         <UnitName Value="detail1"/>
       </Unit1>
       <Unit2>
@@ -135,11 +136,6 @@
       <Debugging>
         <GenerateDebugInfo Value="True"/>
       </Debugging>
-      <Options>
-        <Win32>
-          <GraphicApplication Value="True"/>
-        </Win32>
-      </Options>
     </Linking>
     <Other>
       <Verbosity>
