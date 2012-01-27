@@ -132,6 +132,7 @@ Tskychart = class (TComponent)
     procedure SetFOV(f:double);
     function PoleRot2000(ra,dec:double):double;
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
+    Procedure FindRiseSet(mode: integer);
     function FindatRaDec(ra,dec,dx: double; searchcenter: boolean; showall:boolean=false):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 //    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
@@ -2215,6 +2216,48 @@ begin
  cfgsc.FindNote:='';
 end;
 
+Procedure Tskychart.FindRiseSet(mode: integer);
+var txt,thr,tht,ths,tazr,tazs: string;
+    cjd0,ra,dec,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
+    i,y,m,d: integer;
+begin
+// mode= 0 star, 1..11 planet
+ if (mode>0) and (cfgsc.FindSimjd<>0) then begin
+    Djd(cfgsc.FindSimjd+(cfgsc.TimeZone-cfgsc.DT_UT)/24,y,m,d,h);
+    cjd0:=jd(y,m,d,0);
+ end else begin
+    cjd0:=cfgsc.jd0;
+ end;
+// rise/set time
+if mode>0 then begin // planet
+   planet.PlanetRiseSet(mode,cjd0,catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,cfgsc);
+end
+else begin // fixed object
+     ra:=cfgsc.FindRA;
+     dec:=cfgsc.FindDec;
+     RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,cfgsc);
+     thr:=armtostr(rmod(hr+24,24));
+     tht:=armtostr(rmod(ht+24,24));
+     ths:=armtostr(rmod(hs+24,24));
+end;
+txt:='';
+case i of
+0 : begin
+    txt:=txt+rsRise+':'+thr+blank+blank;
+    txt:=txt+rsCulmination+':'+tht+blank+blank;
+    txt:=txt+rsSet+':'+ths+blank;
+    end;
+1 : begin
+    txt:=txt+rsCircumpolar+blank;
+    txt:=txt+rsCulmination+':'+tht+blank;
+    end;
+else begin
+    txt:=txt+rsInvisibleAtT+blank;
+    end;
+end;
+cfgsc.FindDesc2:=txt;
+end;
+
 function Tskychart.FindatRaDec(ra,dec,dx: double;searchcenter: boolean; showall:boolean=false):boolean;
 var x1,x2,y1,y2:double;
     rec: Gcatrec;
@@ -2228,6 +2271,7 @@ y1 := max(-pid2,dec-dx);
 y2 := min(pid2,dec+dx);
 desc:='';
 cfgsc.FindSimjd:=0;
+cfgsc.FindDesc2:='';
 Fcatalog.OpenCat(cfgsc);
 InitCatalog;
 saveNebFilter:=Fcatalog.cfgshr.NebFilter;
@@ -2248,6 +2292,7 @@ finally
 end;
 if result then begin
    FormatCatRec(rec,desc);
+   FindRiseSet(0);
    cfgsc.TrackType:=6;
    cfgsc.TrackName:=cfgsc.FindName;
    cfgsc.TrackRA:=rec.ra;
@@ -2259,14 +2304,17 @@ end else begin
    if cfgsc.ShowPlanetValid then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
       if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d; // add date to the name if simulation for more than one date
+      FindRiseSet(cfgsc.FindIpla);
    end else begin
       if cfgsc.ShowAsteroidValid then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
+         FindRiseSet(0);
    end else begin
       if cfgsc.ShowCometValid then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
+         FindRiseSet(0);
    end else begin
 // search artificial satellite
       if cfgsc.ShowArtSat then begin

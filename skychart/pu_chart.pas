@@ -47,7 +47,7 @@ type
   Tstr2func = procedure(txt:string;sender:TObject) of object;
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
-  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil) of object;
+  Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='') of object;
 
 type
   TChartDrawingControl = class(TCustomControl)
@@ -1336,7 +1336,7 @@ begin
 {$endif}
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 if assigned(fshowtopmessage) then fshowtopmessage(sc.GetChartInfo,self);
-if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false);
+if sc.cfgsc.FindOk and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,false,nil,sc.cfgsc.FindDesc2);
 end;
 
 procedure Tf_chart.FlipxExecute(Sender: TObject);
@@ -1854,7 +1854,7 @@ if sc.cfgsc.TrackOn then begin
   sc.cfgsc.Trackobj:=lastobj;
   sc.cfgsc.TrackName:=lasttrname;
 end;
-if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
+if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
 end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
@@ -2586,7 +2586,9 @@ txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
 if (otype='P') then begin // planet
    sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
-// todo: rise/set time comet, asteroid, satellites, ...
+else if (otype='S*')and(oname=pla[10]) then begin // Sun
+   sc.planet.PlanetRiseSet(10,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+end
 else if (otype='Ps')and(ipla=11) then begin // Moon
    sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
 end
@@ -3657,7 +3659,7 @@ ra:=rmod(ra+pi2,pi2);
 dx:=1/sc.cfgsc.BxGlb; // search a 1 pixel radius
 sc.FindatRaDec(ra,dec,dx,true);
 if sc.cfgsc.FindDesc>'' then begin
-   if assigned(Fshowinfo) then Fshowinfo(wordspace(sc.cfgsc.FindDesc),caption,true,self);
+   if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
    identlabelClick(Self);
 end;   
 end;

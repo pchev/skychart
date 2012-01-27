@@ -737,7 +737,7 @@ type
     procedure ChangeLanguage(newlang:string);
     Procedure InitFonts;
     Procedure activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
-    Procedure SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil);
+    Procedure SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='');
     Procedure SetLPanel0(txt:string);
     Procedure SetTopMessage(txt:string;sender:TObject);
     Procedure SetTitleMessage(txt:string;sender:TObject);
@@ -3969,11 +3969,14 @@ begin
    P0L1.Align:=alClient;
 end;
 
-Procedure Tf_main.SetLPanel1(txt:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil);
+Procedure Tf_main.SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil; txt2:string='');
+var buf: string;
 begin
-if (trim(txt)>'') then writetrace(txt);
-P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
-if sendmsg then SendInfo(Sender,origin,txt);
+if (trim(txt1)>'') then writetrace(txt1);
+buf:=words(txt1,blank,1,6,tab);
+P1L1.Caption:=buf+crlf+txt2;
+//P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
+if sendmsg then SendInfo(Sender,origin,txt1);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
     if sc.cfgsc.TrackOn then begin
