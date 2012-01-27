@@ -3468,12 +3468,20 @@ end;
 
 procedure TSplot.BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
 begin
-abmp.PenStyle:=ps;
-if cfgplot.AntiAlias then
-  abmp.DrawLineAntialias(x1,y1,x2,y2,c,w,false)
-else
-  abmp.DrawLine(round(x1),round(y1),round(x2),round(y2),c,true);
-abmp.PenStyle:=psSolid;
+if cfgplot.AntiAlias then begin
+  abmp.PenStyle:=ps;
+  abmp.DrawLineAntialias(x1,y1,x2,y2,c,w,false);
+  abmp.PenStyle:=psSolid;
+end
+else  begin
+  {$ifdef mswindows}if ps<>psSolid then w:=1;{$endif}
+  abmp.Canvas.Pen.Style:=ps;
+  abmp.Canvas.Pen.Width:=ceil(w);
+  abmp.Canvas.Pen.Color:=BGRAToColor(c);
+  abmp.Canvas.MoveTo(round(x1),round(y1));
+  abmp.Canvas.LineTo(round(x2),round(y2));
+  abmp.Canvas.Pen.Style:=psSolid;
+end;
 end;
 
 Procedure TSplot.BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);
