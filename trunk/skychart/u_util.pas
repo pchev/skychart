@@ -53,7 +53,7 @@ procedure Splitarg(buf,sep:string; var arg: TStringList);
 procedure SplitRec(buf,sep:string; var arg: TStringList);
 Procedure SplitCmd(S : String; List : TStringList);
 function ExpandTab(str:string; tabwidth:integer):string;
-function words(str,sep : string; p,n : integer) : string;
+function words(str,sep : string; p,n : integer; isep:char=blank) : string;
 function wordspace(str:string):string;
 function pos2(sub,str:string;i:integer):integer;
 function InvertI16(X : Word) : SmallInt;
@@ -515,18 +515,18 @@ for i:=1 to length(str) do begin
 end;
 end;
 
-function words(str,sep : string; p,n : integer) : string;
+function words(str,sep : string; p,n : integer; isep:char=blank) : string;
 var     i,j : Integer;
 begin
 result:='';
 str:=trim(str);
 for i:=1 to p-1 do begin
- j:=pos(blank,str);
+ j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
  str:=trim(copy(str,j,length(str)));
 end;
 for i:=1 to n do begin
- j:=pos(blank,str);
+ j:=pos(isep,str);
  if j=0 then j:=length(str)+1;
  result:=result+trim(copy(str,1,j))+sep;
  str:=trim(copy(str,j,length(str)));

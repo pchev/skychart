@@ -1219,6 +1219,7 @@ if result and (currentplanet>28) and (currentplanet<=30) then begin
           +'diam:'+sdiam+blank+lsec+tab
           +date+tab;
 end;
+cfgsc.FindIpla:=CurrentPlanet;
 cfgsc.FindName:=nom;
 cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
