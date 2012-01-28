@@ -3970,12 +3970,36 @@ begin
 end;
 
 Procedure Tf_main.SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil; txt2:string='');
-var buf: string;
+var txt,buf,buf1: string;
+    p,l: integer;
 begin
 if (trim(txt1)>'') then writetrace(txt1);
-buf:=words(txt1,blank,1,6,tab);
-P1L1.Caption:=buf+crlf+txt2;
-//P1L1.Caption:=wordspace(stringreplace(txt,tab,blank,[rfReplaceall]));
+if txt2='' then begin
+  txt:=StringReplace(txt1,tab,blank,[rfReplaceAll]);
+end else begin
+  buf:=txt1;
+  p:=pos(tab,buf);
+  txt:=rsRA+':'+copy(buf,1,p-1)+blank;
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  txt:=txt+rsDE+':'+copy(buf,1,p-1)+blank;
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  buf1:=trim(copy(buf,1,p-1));
+  txt:=txt+catalog.LongLabelObj(buf1)+':'+blank;
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  txt:=txt+trim(copy(buf,1,p-1))+blank;
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  buf1:=trim(copy(buf,1,p-1));
+  txt:=txt+catalog.LongLabel(buf1)+blank;
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  buf1:=trim(copy(buf,1,p-1));
+  txt:=txt+catalog.LongLabel(buf1)+blank;
+end;
+P1L1.Caption:=txt+crlf+txt2;
 if sendmsg then SendInfo(Sender,origin,txt1);
 // refresh tracking object
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin

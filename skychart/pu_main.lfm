@@ -3452,7 +3452,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 26
+        Height = 22
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3509,7 +3509,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 22
+        Height = 24
         Top = 2
         Width = 35
         TabOrder = 5

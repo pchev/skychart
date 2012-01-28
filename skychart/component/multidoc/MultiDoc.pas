@@ -453,6 +453,7 @@ end;
 
 procedure TMultiDoc.SetActiveChild(n:integer);
 var i:integer;
+    change: boolean;
 begin
 try
 if (n<0)or(n>FChildIndex) then exit;
@@ -461,13 +462,14 @@ if (parent<>nil) and parent.visible and (n>=0) then begin
 end;
 except
 end;
+change:=(FActiveChild<>n);
 FActiveChild:=n;
 try
 for i:=0 to FChildIndex do begin
   if i=n then FChild[i].SetBorderColor(FBorderColor)
          else FChild[i].SetBorderColor(FInactiveColor);
 end;
-if assigned(FonActiveChildChange) then FonActiveChildChange(self);
+if change and assigned(FonActiveChildChange) then FonActiveChildChange(self);
 except
 end;
 end;
