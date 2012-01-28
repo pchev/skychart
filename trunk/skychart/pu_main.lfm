@@ -3093,7 +3093,6 @@ object f_main: Tf_main
           Align = alClient
           AutoSize = False
           ParentColor = False
-          WordWrap = True
         end
       end
     end

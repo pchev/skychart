@@ -2243,12 +2243,12 @@ end;
 txt:='';
 case i of
 0 : begin
-    txt:=txt+rsRise+':'+thr+blank+blank;
-    txt:=txt+rsCulmination+':'+tht+blank+blank;
+    txt:=txt+rsRise+':'+thr+blank+blank+blank;
+    txt:=txt+rsCulmination+':'+tht+blank+blank+blank;
     txt:=txt+rsSet+':'+ths+blank;
     end;
 1 : begin
-    txt:=txt+rsCircumpolar+blank;
+    txt:=txt+rsCircumpolar+blank+blank+blank;
     txt:=txt+rsCulmination+':'+tht+blank;
     end;
 else begin
