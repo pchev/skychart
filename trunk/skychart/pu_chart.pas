@@ -261,10 +261,6 @@ type
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
-    function  LongLabel(txt:string):string;
-    function  LongLabelObj(txt:string):string;
-    function  LongLabelGreek(txt : string) : string;
-    Function  LongLabelConst(txt : string) : string;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
     procedure rotation(rot:double);
     procedure GetSunImage;
@@ -2398,7 +2394,7 @@ end else begin
    cjd0:=sc.cfgsc.jd0;
    cst:=sc.cfgsc.CurST;
 end;
-buf:=LongLabelObj(otype);
+buf:=sc.catalog.LongLabelObj(otype);
 txt:=txt+html_h2+buf+htms_h2;
 buf:=copy(desc,l+1,9999);
 // object name
@@ -2496,7 +2492,7 @@ repeat
      if isvo or isOsr then
         txt:=txt+bold(buf2)
      else
-        txt:=txt+bold(LongLabel(buf2));
+        txt:=txt+bold(sc.catalog.LongLabel(buf2));
   end
   else
      txt:=txt+buf2;
@@ -2658,162 +2654,6 @@ end;
 txt:=txt+html_br;
 //writetrace(txt);
 result:=txt+html_br+htms_h;
-end;
-
-function Tf_chart.LongLabelObj(txt:string):string;
-begin
-if txt='OC' then txt:=rsOpenCluster
-else if txt='Gb' then txt:=rsGlobularClus
-else if txt='Gx' then txt:=rsGalaxy
-else if txt='Nb' then txt:=rsBrightNebula
-else if txt='Pl' then txt:=rsPlanetaryNeb
-else if txt='C+N' then txt:=rsClusterAndNe
-else if txt='N' then txt:=rsNebula
-else if txt='*' then txt:=rsStar
-else if txt='DS*' then txt:=rsStar
-else if txt='**' then txt:=rsDoubleStar
-else if txt='***' then txt:=rsTripleStar
-else if txt='D*' then txt:=rsDoubleStar
-else if txt='V*' then txt:=rsVariableStar
-else if txt='DSV*' then txt:=rsVariableStar
-else if txt='Ast' then txt:=rsAsterism
-else if txt='Kt' then txt:=rsKnot
-else if txt='?' then txt:=rsUnknowObject
-else if txt='' then txt:=rsUnknowObject
-else if txt='-' then txt:=rsPlateDefect
-else if txt='PD' then txt:=rsPlateDefect
-else if txt='S*' then txt:=rsStar
-else if txt='P' then txt:=rsPlanet
-else if txt='DSP' then txt:=rsPlanet
-else if txt='Ps' then txt:=rsPlanetarySat
-else if txt='As' then txt:=rsAsteroid
-else if txt='DSAs' then txt:=rsAsteroid
-else if txt='Cm' then txt:=rsComet
-else if txt='DSCm' then txt:=rsComet
-else if txt='Sat' then txt:=rsArtificialSa2
-else if txt='C1' then txt:=rsExternalCata
-else if txt='C2' then txt:=rsExternalCata
-else if txt='OSR' then txt:=rsOnlineSearch2;
-result:=txt;
-end;
-
-function Tf_chart.LongLabel(txt:string):string;
-var key,value : string;
-    i : integer;
-const d=': ';
-begin
-i:=pos(':',txt);
-if i>0 then begin
-  key:=uppercase(trim(copy(txt,1,i-1)));
-  value:=copy(txt,i+1,9999);
-  if key='MB' then result:=rsBlueMagnitud+d+value
-  else if key='MV' then result:=rsVisualMagnit+d+value
-  else if key='MR' then result:=rsRedMagnitude+d+value
-  else if key='M' then result:=rsMagnitude+d+value
-  else if key='MI' then result:=rsMagnitude+' '+'I'+d+value
-  else if key='MJ' then result:=rsMagnitude+' '+'J'+d+value
-  else if key='MH' then result:=rsMagnitude+' '+'H'+d+value
-  else if key='MK' then result:=rsMagnitude+' '+'K'+d+value
-  else if key='BT' then result:=rsMagnitudeTyc+d+value
-  else if key='VT' then result:=rsMagnitudeTyc2+d+value
-  else if key='B-V' then result:=rsColorIndex+d+value
-  else if key='SP' then result:=rsSpectralClas+d+value
-  else if key='PM' then result:=rsAnnualProper+d+value
-  else if key='CLASS' then result:=rsClass+d+value
-  else if key='N' then result:=rsNote+d+value
-  else if key='T' then result:=rsTypeOfVariab+d+value
-  else if key='P' then result:=rsPeriod+d+value
-  else if key='BAND' then result:=rsMagnitudeBan+d+value
-  else if key='PLATE' then result:=rsPhotographic+d+value
-  else if key='MULT' then result:=rsMultipleFlag+d+value
-  else if key='FIELD' then result:=rsFieldNumber+d+value
-  else if key='Q' then result:=rsMagnitudeErr+d+value
-  else if key='S' then result:=rsCorrelated+d+value
-  else if key='DIM' then result:=rsDimension+d+value
-  else if key='CONST' then result:=rsConstellatio+d+longlabelconst(value)
-  else if key='SBR' then result:=rsSurfaceBrigh+d+value
-  else if key='DESC' then result:=rsDescription+d+value
-  else if key='RV' then result:=rsRadialVeloci+d+value
-  else if key='SURFACE' then result:=rsSurface+d+value
-  else if key='COLOR' then result:=rsColor+d+value
-  else if key='BRIGHT' then result:=rsBrightness+d+value
-  else if key='TR' then result:=rsTrumplerClas+d+value
-  else if key='DIST' then result:=rsDistance+d+value
-  else if key='M*' then result:=rsBrightestSta+d+value
-  else if key='N*' then result:=rsNumberOfStar+d+value
-  else if key='AGE' then result:=rsAge+d+value
-  else if key='RT' then result:=rsTotalRadius+d+value
-  else if key='RH' then result:=rsHalfMassRadi+d+value
-  else if key='RC' then result:=rsCoreRadius+d+value
-  else if key='MHB' then result:=rsHbetaMagnitu+d+value
-  else if key='C*B' then result:=rsCentralStarB+d+value
-  else if key='C*V' then result:=rsCentralStarV+d+value
-  else if key='DIAM' then result:=rsDiameter+d+value
-  else if key='ILLUM' then result:=rsIlluminatedF+d+value
-  else if key='PHASE' then result:=rsPhase+d+value
-  else if key='TL' then result:=rsEstimatedTai+d+value
-  else if key='EL' then result:=rsSolarElongat+d+value
-  else if key='RSOL' then result:=rsSolarDistanc+d+value
-  else if key='VEL' then result:=rsVelocity+d+value
-  else if key='D1' then result:=rsDescription+' 1'+d+value
-  else if key='D2' then result:=rsDescription+' 2'+d+value
-  else if key='D3' then result:=rsDescription+' 3'+d+value
-  else if key='FL' then result:=rsFlamsteedNum+d+value
-  else if key='BA' then result:=rsBayerLetter+d+LongLabelGreek(value)
-  else if key='PX' then result:=rsParallax+d+value
-  else if key='PA' then result:=rsPositionAngl+d+value
-  else if key='PMRA' then result:=rsProperMotion+d+value
-  else if key='PMDE' then result:=rsProperMotion2+d+value
-  else if key='MMAX' then result:=rsMagnitudeAtM+d+value
-  else if key='MMIN' then result:=rsMagnitudeAtM2+d+value
-  else if key='MEPOCH' then result:=rsEpochOfMaxim+d+value
-  else if key='RISE' then result:=rsRiseTime+d+value
-  else if key='COMP' then result:=rsComponent+d+value
-  else if key='COMPID' then result:=rsDoubleStar+d+value
-  else if key='M1' then result:=rsComponent1Ma+d+value
-  else if key='M2' then result:=rsComponent2Ma+d+value
-  else if key='SEP' then result:=rsSeparation+d+value
-  else if key='DATE' then result:=rsDate+d+value
-  else if key='POLEINCL' then result:=rsPoleInclinat+d+value
-  else if key='SUNINCL' then result:=rsSunInclinati+d+value
-  else if key='CM' then result:=rsCentralMerid+d+value
-  else if key='CMI' then result:=rsCentralMerid+' I'+d+value
-  else if key='CMII' then result:=rsCentralMerid+' II'+d+value
-  else if key='CMIII' then result:=rsCentralMerid+' III'+d+value
-  else if key='GRSTR' then result:=rsGRSTransit+d+value
-  else if key='LLAT' then result:=rsLibrationInL+d+value
-  else if key='LLON' then result:=rsLibrationInL2+d+value
-  else if key='EPHEMERIS' then result:=rsEphemeris+d+value
-  else if key='D' then result:=value
-  else result:=txt;
-end
-else result:=txt;
-end;
-
-Function Tf_chart.LongLabelConst(txt : string) : string;
-var i : integer;
-begin
-txt:=uppercase(trim(txt));
-for i:=0 to sc.catalog.cfgshr.ConstelNum-1 do begin
-  if txt=UpperCase(sc.catalog.cfgshr.ConstelName[i,1]) then begin
-     txt:=sc.catalog.cfgshr.ConstelName[i,2];
-     break;
-   end;
-end;
-result:=txt;
-end;
-
-Function Tf_chart.LongLabelGreek(txt : string) : string;
-var i : integer;
-begin
-txt:=uppercase(trim(txt));
-for i:=1 to 24 do begin
-  if txt=UpperCase(trim(greek[2,i])) then begin
-     txt:=greek[1,i];
-     break;
-   end;
-end;
-result:=txt;
 end;
 
 procedure Tf_chart.switchstarExecute(Sender: TObject);
