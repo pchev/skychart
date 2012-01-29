@@ -1056,6 +1056,7 @@ begin
     min1:=abs(l-dd)*60;
     if min1>=59.99166667 then begin
        dd:=dd+sgn(l);
+       if dd=360 then dd:=0;
        min1:=0.0;
     end;
     min:=Int(min1);
@@ -1082,6 +1083,7 @@ begin
     min:=abs(l-dd)*60;
     if min>=59.5 then begin
        dd:=dd+sgn(l);
+       if dd=360 then dd:=0;
        min:=0.0;
     end;
     min:=Round(min);
