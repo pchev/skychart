@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-22 13:01+0000\n"
-"PO-Revision-Date: 2012-01-10 23:19+0000\n"
+"PO-Revision-Date: 2012-01-23 13:04+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-22 18:36+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-01-29 20:34+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -63,8 +63,6 @@ msgstr "Sobre %s"
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Always show the compass rose"
-#~ msgstr "Sempre mostrar rosa dos ventos"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
@@ -131,7 +129,7 @@ msgstr "Adicionar um elemento simples no banco de dados. Todos os campos são ob
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Mostrar Grade Equatorial"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
@@ -4344,7 +4342,7 @@ msgstr "Mostrar cometas na carta"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr ""
+msgstr "Mostrar a Rosa dos Ventos"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
