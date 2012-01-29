@@ -2748,9 +2748,11 @@ repeat
     if (xx>0)and(xx<cfgsc.Xmax)and(yy>0)and(yy<cfgsc.Ymax) then plotok:=true;
  end;
  if (cfgsc.ShowGridNum)and(plotok)and(not labelok)and((abs(h)<minarc)or(xx<0)or(xx>cfgsc.Xmax)or(yy<0)or(yy>cfgsc.Ymax)) then begin
-    if Fcatalog.cfgshr.AzNorth then al:=rmod(a+pi+pi2,pi2) else al:=rmod(a+pi2,pi2);
-    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al*rad2deg),cfgsc.WhiteBg,false,true,5)
-                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al*rad2deg),cfgsc.WhiteBg,false,true,5);
+    if Fcatalog.cfgshr.AzNorth then al:=rmod(rad2deg*a+540,360) else al:=rmod(rad2deg*a+360,360);
+    if (al<359.9999)or(cfgsc.fov<pid4) then begin
+    if dda<=15*minarc then Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lontostr(al),cfgsc.WhiteBg,false,true,5)
+                      else Fplot.PlotText(round(xx),round(yy+10),1,Fplot.cfgplot.LabelColor[7],laCenter,laTop,lonmtostr(al),cfgsc.WhiteBg,false,true,5);
+    end;
     labelok:=true;
  end;
  xxp:=xx;
@@ -2802,8 +2804,6 @@ col:=Fplot.cfgplot.Color[12];
 n:=GetFieldNum(cfgsc.fov/cos(cfgsc.hcentre));
 dda:=Fcatalog.cfgshr.DegreeGridSpacing[n];
 ddh:=Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum];
-if dda>(rad2deg*cfgsc.fov/2) then dda:=round(rad2deg*cfgsc.fov/2);
-if ddh>(rad2deg*cfgsc.fov/2) then ddh:=round(rad2deg*cfgsc.fov/2);
 a1:=deg2rad*round(rad2deg*cfgsc.acentre/dda)*dda;
 h1:=deg2rad*round(rad2deg*cfgsc.hcentre/ddh)*ddh;
 dda:=deg2rad*dda;
