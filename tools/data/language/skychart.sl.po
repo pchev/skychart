@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-22 18:36+0000\n"
-"X-Generator: Launchpad (build 14700)\n"
+"X-Launchpad-Export-Date: 2012-01-29 20:34+0000\n"
+"X-Generator: Launchpad (build 14727)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -62,8 +62,6 @@ msgstr "Več o %s"
 msgid "Ast"
 msgstr "Ast"
 
-#~ msgid "Always show the compass rose"
-#~ msgstr "Vedno prikaži kompasovo vetrovnico"
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
 msgstr "C+N"
