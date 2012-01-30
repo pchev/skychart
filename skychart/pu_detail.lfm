@@ -64,12 +64,13 @@ object f_detail: Tf_detail
     TabOrder = 1
     Align = alClient
     PopupMenu = PopupMenu1
+    DefBackground = 14737632
     BorderStyle = htNone
     HistoryMaxCount = 0
     DefFontName = 'Times New Roman'
     DefPreFontName = 'Courier New'
     DefFontSize = 10
-    DefFontColor = clWindowText
+    DefFontColor = clBlack
     NoSelect = False
     CharSet = DEFAULT_CHARSET
     PrintMarginLeft = 2
