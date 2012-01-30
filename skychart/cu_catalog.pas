@@ -2822,9 +2822,6 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
-  if rec.star.id='0000-0000184' then begin
-     rec.star.id:='0000-0000184' ;
-  end;
   if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
                                else dyear:=cyear-rec.options.Epoch;
