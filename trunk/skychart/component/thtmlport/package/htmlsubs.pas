@@ -11284,8 +11284,10 @@ var
       if Inverted then
         begin
         SetBkMode(Canvas.Handle, Opaque);
-        Canvas.Brush.Color := Canvas.Font.Color;
-        if FO.TheFont.bgColor = clNone then
+        Canvas.Font.Color:=clBlue;
+        Canvas.Brush.Color := $e0e0e0;
+     {   Canvas.Brush.Color := Canvas.Font.Color;    // This not work with Lazarus GTK
+        if FO.TheFont.bgColor = clNone then          // Using fixed blue selection instead
           begin
           Color := Canvas.Font.Color;
           if Color and $80000000 = $80000000 then
@@ -11293,7 +11295,7 @@ var
           else Color := Color and $FFFFFF;
           Canvas.Font.Color := Color xor $FFFFFF;
           end
-        else Canvas.Font.Color := FO.TheFont.bgColor;
+        else Canvas.Font.Color := FO.TheFont.bgColor; }
         end
       else if FO.TheFont.BGColor = clNone then
         begin
