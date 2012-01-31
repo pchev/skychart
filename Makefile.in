@@ -109,6 +109,8 @@ install_pict:
 	./install_pict.sh $(PREFIX) 
 uninstall_data:
 	\$(MAKE) -C tools uninstall
+revision:
+	\$(MAKE) -C skychart revision
 endif
 endif
 endif
