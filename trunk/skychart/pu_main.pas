@@ -3970,34 +3970,46 @@ begin
 end;
 
 Procedure Tf_main.SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil; txt2:string='');
-var txt,buf,buf1: string;
+var txt,buf,buf1,buf2,k: string;
     p,l: integer;
 begin
 if (trim(txt1)>'') then writetrace(txt1);
 if txt2='' then begin
   txt:=StringReplace(txt1,tab,blank,[rfReplaceAll]);
 end else begin
-  buf:=txt1;
+  buf:=txt1+tab;
   p:=pos(tab,buf);
-  txt:=rsRA+':'+copy(buf,1,p-1)+blank;
+  txt:=rsRA+':'+copy(buf,1,p-1)+blank;                     // RA
   delete(buf,1,p);
   p:=pos(tab,buf);
-  txt:=txt+rsDE+':'+copy(buf,1,p-1)+blank+blank+blank;
-  delete(buf,1,p);
-  p:=pos(tab,buf);
-  buf1:=trim(copy(buf,1,p-1));
-  txt:=txt+catalog.LongLabelObj(buf1)+':'+blank;
-  delete(buf,1,p);
-  p:=pos(tab,buf);
-  txt:=txt+trim(copy(buf,1,p-1))+blank+blank+blank;
+  txt:=txt+rsDE+':'+copy(buf,1,p-1)+blank+blank;           // DEC
   delete(buf,1,p);
   p:=pos(tab,buf);
   buf1:=trim(copy(buf,1,p-1));
-  txt:=txt+catalog.LongLabel(buf1)+blank+blank+blank;
+  txt:=txt+catalog.LongLabelObj(buf1)+':'+blank;           // Object type
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  txt:=txt+wordspace(copy(buf,1,p-1))+blank+blank;         // Object name
   delete(buf,1,p);
   p:=pos(tab,buf);
   buf1:=trim(copy(buf,1,p-1));
-  txt:=txt+catalog.LongLabel(buf1);
+  txt:=txt+catalog.LongLabel(buf1)+blank+blank;            // Magnitude
+  delete(buf,1,p);
+  p:=pos(tab,buf);
+  buf2:=trim(copy(buf,1,p-1));                             // save Alt name for the end
+  delete(buf,1,p);
+  while buf>'' do begin                                    // Search for size
+    p:=pos(tab,buf);
+    buf1:=trim(copy(buf,1,p-1));
+    delete(buf,1,p);
+    p:=pos(':',buf1);
+    k:=uppercase(trim(copy(buf1,1,p-1)));
+    if (k='DIM')or(k=uppercase(rsCommonName)) then begin
+       txt:=txt+catalog.LongLabel(buf1)+blank+blank;       // Size / common name
+    end;
+  end;
+  txt:=txt+catalog.LongLabel(buf2);                        // Alt name
+  writeln(txt);
 end;
 P1L1.Caption:=txt+crlf+txt2;
 if sendmsg then SendInfo(Sender,origin,txt1);
