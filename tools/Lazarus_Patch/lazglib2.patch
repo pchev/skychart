@@ -1,0 +1,24 @@
+--- lcl/interfaces/gtk2/gtk2widgetset.inc	2012/01/31 04:38:11	35050
++++ lcl/interfaces/gtk2/gtk2widgetset.inc	2012/01/31 07:12:20	35051
+@@ -1479,8 +1479,10 @@
+       if GetThreadManager(TM) and Assigned(TM.InitManager) and g_thread_supported then
+       begin
+         g_thread_init(nil);
++        {$IFDEF USE_GTK_MAIN_OLD_ITERATION}
+         gdk_threads_init;
+         gdk_threads_enter;
++        {$ENDIF}
+         fMultiThreadingEnabled := True;
+       end;
+     {$ELSE}
+@@ -1847,7 +1849,9 @@
+     if MultiThreadingEnabled then
+     begin
+       {$IFNDEF Win32}
++        {$IFDEF USE_GTK_MAIN_OLD_ITERATION}
+         gdk_threads_leave;
++        {$ENDIF}
+       {$ENDIF}
+       fMultiThreadingEnabled := False;
+     end;
+
