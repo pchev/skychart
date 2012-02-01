@@ -90,8 +90,8 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  rm debian/skychart/usr/bin/skychart
-  mv debian/skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
+  rm skychart/usr/bin/skychart
+  mv skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
@@ -158,8 +158,8 @@ if [[ $make_linux64 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
-  rm debian/skychart/usr/bin/skychart
-  mv debian/skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
+  rm skychart/usr/bin/skychart
+  mv skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
