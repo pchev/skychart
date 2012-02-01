@@ -4009,7 +4009,6 @@ end else begin
     end;
   end;
   txt:=txt+catalog.LongLabel(buf2);                        // Alt name
-  writeln(txt);
 end;
 P1L1.Caption:=txt+crlf+txt2;
 if sendmsg then SendInfo(Sender,origin,txt1);
