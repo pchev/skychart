@@ -18,6 +18,10 @@ install -m 755 -d $destdir/share/applications
 install -m 755 -d $destdir/share/doc
 install -m 755 -d $destdir/share/doc/skychart
 install -m 755 -d $destdir/share/pixmaps
+install -m 755 -d $destdir/share/icons
+install -m 755 -d $destdir/share/icons/hicolor
+install -m 755 -d $destdir/share/icons/hicolor/48x48
+install -m 755 -d $destdir/share/icons/hicolor/48x48/apps
 
 install -v -m 755 -s skychart/cdc  $destdir/bin/skychart
 install -v -m 755 -s skychart/cdcicon  $destdir/bin/cdcicon
@@ -30,4 +34,5 @@ install -v -m 644 system_integration/Linux/share/applications/skychart.desktop $
 install -v -m 644 system_integration/Linux/share/doc/skychart/changelog $destdir/share/doc/skychart/changelog
 install -v -m 644 system_integration/Linux/share/doc/skychart/copyright $destdir/share/doc/skychart/copyright
 install -v -m 644 system_integration/Linux/share/pixmaps/skychart.png $destdir/share/pixmaps/skychart.png
+install -v -m 644 system_integration/Linux/share/icons/hicolor/48x48/apps/skychart.png $destdir/share/icons/hicolor/48x48/apps/skychart.png
 
