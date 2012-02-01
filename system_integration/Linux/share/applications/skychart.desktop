@@ -3,7 +3,7 @@ Version=1.0
 Encoding=UTF-8
 Name=Skychart
 Comment=Planetarium software for the advanced amateur astronomer
-Exec=skychart
+Exec=env LIBOVERLAY_SCROLLBAR=0 UBUNTU_MENUPROXY=0 skychart
 Icon=skychart
 Terminal=false
 Type=Application
