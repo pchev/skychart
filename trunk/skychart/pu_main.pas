@@ -6146,6 +6146,7 @@ ToolButtonShowGalacticEquator.hint:=rsShowGalactic;
 ToolButtonShowEcliptic.hint:=rsShowEcliptic;
 ToolButtonShowMark.hint:=rsShowMark;
 ToolButtonScale.Hint:=rsDistanceMeas;
+MenuItem32.Caption:=rsLabels;
 ToolButtonShowLabels.hint:=rsShowLabels;
 ToolButtonEditlabels.hint:=rsEditLabel;
 MenuEditlabels.Caption:='&'+rsEditLabel;
