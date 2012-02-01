@@ -82,12 +82,16 @@ if [[ $make_linux32 ]]; then
   mv bin debian/skychart/usr/
   mv lib debian/skychart/usr/
   mv share debian/skychart/usr/
+  mv debian/skychart/usr/bin/skychart debian/skychart/usr/bin/skychart-bin
+  cp $wd/system_integration/Linux/bin/skychart debian/skychart/usr/bin/skychart
   cd debian
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart/DEBIAN/control
   fakeroot dpkg-deb --build skychart .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
+  rm debian/skychart/usr/bin/skychart
+  mv debian/skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
@@ -146,12 +150,16 @@ if [[ $make_linux64 ]]; then
   mv bin debian/skychart64/usr/
   mv lib debian/skychart64/usr/
   mv share debian/skychart64/usr/
+  mv debian/skychart/usr/bin/skychart debian/skychart/usr/bin/skychart-bin
+  cp $wd/system_integration/Linux/bin/skychart debian/skychart/usr/bin/skychart
   cd debian
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart64/DEBIAN/control
   fakeroot dpkg-deb --build skychart64 .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
+  rm debian/skychart/usr/bin/skychart
+  mv debian/skychart/usr/bin/skychart-bin debian/skychart/usr/bin/skychart
   # rpm
   cd $wd
   rsync -a --exclude=.svn system_integration/Linux/rpm $builddir
