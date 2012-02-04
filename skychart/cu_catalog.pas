@@ -2621,20 +2621,19 @@ end;
 
 function Tcatalog.FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
 var
-   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,maxpm,rac : double;
+   xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,rac,epoch : double;
    p: coordvector;
-   ok,found : boolean;
+   ok,found,fullmotion : boolean;
 begin
 if x2>pi2 then rac:=pi2 else rac:=0;
 xxc:=(x1+x2)/2;
 yyc:=(y1+y2)/2;
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
                  else cyear:=cfgsc.YPmon;
-maxpm:=abs(secarc*(cyear-2000.0));  // maximum PM of 1 arcsec/year in radian to add to the catalog area.
-xx1:=x1-maxpm;
-xx2:=x2+maxpm;
-yy1:=y1-maxpm;
-yy2:=y2+maxpm;
+xx1:=x1;
+xx2:=x2;
+yy1:=y1;
+yy2:=y2;
 if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc,true,true);
 if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc,true,true);
 xx1:=rad2deg*xx1/15;
@@ -2822,10 +2821,14 @@ repeat
    else ok:=false;
   end;
   if not ok then break;
+  cfgsc.FindStarPM:=false;
   if cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
-    if rec.star.valid[vsEpoch] then dyear:=cyear-rec.star.epoch
-                               else dyear:=cyear-rec.options.Epoch;
-    propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
+    if rec.star.valid[vsEpoch] then epoch:=rec.star.epoch
+                               else epoch:=rec.options.Epoch;
+    dyear:=cyear-epoch;
+    fullmotion:=(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV'));
+    propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,fullmotion,rec.star.px,rec.num[1]);
+    cfgsc.FindStarPM:=true;
   end;
   cfgsc.FindRA2000:=rec.ra;
   cfgsc.FindDec2000:=rec.dec;
@@ -2844,6 +2847,21 @@ repeat
        if AngularDistance(xxc,yyc,rec.ra,rec.dec)<radius then found:=true;
     end;
     if not found then continue;
+  end;
+  if cfgsc.FindStarPM then begin
+    cfgsc.FindPMra:=rec.star.pmra;
+    cfgsc.FindPMde:=rec.star.pmdec;
+    cfgsc.FindPMEpoch:=epoch;
+    cfgsc.FindPMpx:=rec.star.px;
+    cfgsc.FindPMrv:=rec.num[1];
+    cfgsc.FindPMfullmotion:=fullmotion;
+  end else begin
+    cfgsc.FindPMra:=0;
+    cfgsc.FindPMde:=0;
+    cfgsc.FindPMEpoch:=0;
+    cfgsc.FindPMpx:=0;
+    cfgsc.FindPMrv:=0;
+    cfgsc.FindPMfullmotion:=false;
   end;
   break;
 until false ;

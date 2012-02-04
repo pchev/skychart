@@ -2272,6 +2272,7 @@ y2 := min(pid2,dec+dx);
 desc:='';
 cfgsc.FindSimjd:=0;
 cfgsc.FindDesc2:='';
+cfgsc.FindDesc:='';
 Fcatalog.OpenCat(cfgsc);
 InitCatalog;
 saveNebFilter:=Fcatalog.cfgshr.NebFilter;

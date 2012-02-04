@@ -6334,7 +6334,8 @@ end;
 
 function Tf_main.GenericSearch(cname,Num:string):boolean;
 var ok : Boolean;
-    ar1,de1 : Double;
+    ar1,de1,saveChartJD,dyear : Double;
+    saveCurYear,saveCurMonth,saveCurDay:integer;
     i : integer;
     chart:TForm;
     stype: string;
@@ -6402,16 +6403,20 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 Findit:
    result:=ok;
    if ok then begin
+   {$ifdef trace_debug}
+    WriteTrace('GenericSearch');
+   {$endif}
       sc.cfgsc.TrackOn:=false;
       IdentLabel.visible:=false;
-      precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
-      if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc,true,itype<ftPla);
-      sc.movetoradec(ar1,de1);
-{$ifdef trace_debug}
- WriteTrace('GenericSearch');
-{$endif}
-      Refresh;
       sc.cfgsc.FindType:=ftInv;
+      saveChartJD:=sc.cfgsc.JDChart;
+      saveCurYear:=sc.cfgsc.CurYear;
+      saveCurMonth:=sc.cfgsc.CurMonth;
+      saveCurDay:=sc.cfgsc.CurDay;
+      sc.cfgsc.JDChart:=jd2000;
+      sc.cfgsc.CurYear:=2000;
+      sc.cfgsc.CurMonth:=1;
+      sc.cfgsc.CurDay:=1;
       ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
       if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
       if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
@@ -6432,8 +6437,21 @@ Findit:
         sc.cfgsc.TrackDec:=de1;
         sc.cfgsc.TrackName:=Num;
       end;
-      ShowIdentLabel;
-      f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
+      sc.cfgsc.JDChart := saveChartJD;
+      sc.cfgsc.CurYear  := saveCurYear;
+      sc.cfgsc.CurMonth := saveCurMonth;
+      sc.cfgsc.CurDay   := saveCurDay;
+      if sc.cfgsc.FindStarPM then begin
+        dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
+        propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
+      end;
+      precession(jd2000,sc.cfgsc.JDchart,sc.cfgsc.FindRA,sc.cfgsc.FindDec);
+      if sc.cfgsc.ApparentPos then apparent_equatorial(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc,true,itype<ftPla);
+      sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
+      sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
+      sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
+      Refresh;
+      IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
    end;
 end;
 end;

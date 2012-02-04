@@ -785,17 +785,24 @@ CurCacheRec:=-1;
 end;
 
 Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean);
+var i:integer;
 begin
 curSM:=1;
 ar1:=ar1*15; ar2:=ar2*15;
 ok:=ReadCatHeader;
 if ok then begin
+    if (catversion=rtStar)and(catheader.filenum=50)and(emptyrec.star.valid[vsPmra])and((abs(JDChart-jd2000)/3652500)>1) then begin
+       // if more than 10000 years from j2000 and proper motion, then use all the files
+       nSM:=50;
+       for i:=1 to nSM do SMlst[i]:=i;
+    end else begin
 case catheader.filenum of
     1      : begin nSM:=1; SMlst[1]:=1; end;
     50     : FindRegionList30(ar1,ar2,de1,de2,nSM,SMlst);
     184    : FindRegionAll15(ar1,ar2,de1,de2,nSM,SMlst);
     732    : FindRegionAll7(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
     9537   : FindRegionAll(ar1,ar2,de1,de2,nSM,zonelst,SMlst,hemislst);
+end;
 end;
 hemis:= hemislst[curSM];
 zone := zonelst[curSM];
@@ -1090,16 +1097,23 @@ CloseRegion;
 end;
 
 Procedure OpenGCatwin(var ok : boolean);
+var i: integer;
 begin
 curSM:=1;
 ok:=ReadCatHeader;
 if ok then begin
+if (catversion=rtStar)and(catheader.filenum=50)and(emptyrec.star.valid[vsPmra])and((abs(JDChart-jd2000)/3652500)>1) then begin
+   // if more than 10000 years from j2000 and proper motion, then use all the files
+   nSM:=50;
+   for i:=1 to nSM do SMlst[i]:=i;
+end else begin
 case catheader.filenum of
     1      : begin nSM:=1; SMlst[1]:=1; end;
     50     : FindRegionListWin30(nSM,SMlst);
     184    : FindRegionAllWin15(nSM,SMlst);
     732    : FindRegionAllWin7(nSM,zonelst,SMlst,hemislst);
     9537   : FindRegionAllWin(nSM,zonelst,SMlst,hemislst);
+end;
 end;
 hemis:= hemislst[curSM];
 zone := zonelst[curSM];
