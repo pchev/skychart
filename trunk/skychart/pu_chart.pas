@@ -1780,6 +1780,7 @@ lasttrname:=sc.cfgsc.TrackName;
 lastX:=sc.cfgsc.FindX;
 lastY:=sc.cfgsc.FindY;
 lastZ:=sc.cfgsc.FindZ;
+sc.cfgsc.TrackName:='';
 lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Findtype=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
@@ -1787,7 +1788,7 @@ dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx,searchcenter);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter);  //else 6 pixel
 if showlabel then ShowIdentLabel;
-if showdist then begin
+if result and showdist then begin
    ra:=sc.cfgsc.FindRA;
    dec:=sc.cfgsc.FindDEC;
    solsys:=((sc.cfgsc.FindType=ftAst)or(sc.cfgsc.FindType=ftCom)or(sc.cfgsc.FindType=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
