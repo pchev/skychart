@@ -759,6 +759,7 @@ var
 const
      desinpi = 4.26345151e-5;
 begin
+if dist>1e-5 then begin
 // AR, DE may be standard epoch but paralaxe is to be computed with coordinates of the date.
 precession(c.JDchart,c.curjd,ar1,de1);
 H:=(SideralTime-ar1);
@@ -771,6 +772,11 @@ q := sqrt(a*a+b*b+d*d);
 ar:=SideralTime-arctan2(a,b);
 de:=double(arcsin(d/q));
 precession(c.curjd,c.JDchart,ar,de);
+end else begin
+  ar:=ar1;
+  de:=de1;
+  q:=1;
+end;
 end;
 
 PROCEDURE PrecessionFK4(ti,tf : double; VAR ari,dei : double);
