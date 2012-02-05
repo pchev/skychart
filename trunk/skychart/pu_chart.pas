@@ -2334,8 +2334,8 @@ precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 f_detail.ra:=ra2000;
 f_detail.de:=de2000;
 f_detail.objname:=sc.cfgsc.FindName;
-f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
-f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
+f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
+f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
 f_detail.show;
 f_detail.text:=FormatDesc;
 f_detail.setfocus;
@@ -2429,7 +2429,7 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
    if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd));
    DeleteFile(slash(Tempdir)+'info.png');
    i:=exec(cmd);
-   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
+   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;
  end;
 end;
 // Sun picture
@@ -2438,7 +2438,7 @@ if (otype='S*')and(oname=pla[10]) then begin
   if not FileExistsutf8(fn) then begin  // use default image
     fn:=slash(systoutf8(appdir))+slash('data')+slash('planet')+'sun-0.jpg';
   end;
-  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
+  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
 end;
 // DSO picture
 if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
@@ -2453,7 +2453,7 @@ if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
          fn:=slash(systoutf8(TempDir))+'info.bmp';
          DeleteFileutf8(fn);
          bmp.SaveToFile(fn);
-         if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
+         if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
          finally
          bmp.Free;
          end;
