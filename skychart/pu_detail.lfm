@@ -54,25 +54,30 @@ object f_detail: Tf_detail
       TabOrder = 1
     end
   end
-  object IpHtmlPanel1: TIpHtmlPanel
+  object HTMLViewer1: THTMLViewer
     Left = 0
     Height = 425
     Top = 36
     Width = 393
-    HelpType = htKeyword
-    Align = alClient
-    FixedTypeface = 'Courier New'
-    DefaultTypeFace = 'default'
-    DefaultFontSize = 12
-    FlagErrors = False
-    PopupMenu = PopupMenu1
-    PrintSettings.MarginLeft = 0.5
-    PrintSettings.MarginTop = 0.5
-    PrintSettings.MarginRight = 0.5
-    PrintSettings.MarginBottom = 0.5
-    ShowHints = False
+    OnHotSpotClick = HTMLViewer1HotSpotClick
+    OnImageRequest = HTMLViewer1ImageRequest
     TabOrder = 1
-    OnHotClick = IpHtmlPanel1HotClick
+    Align = alClient
+    PopupMenu = PopupMenu1
+    DefBackground = 14737632
+    BorderStyle = htNone
+    HistoryMaxCount = 0
+    DefFontName = 'Times New Roman'
+    DefPreFontName = 'Courier New'
+    DefFontSize = 10
+    DefFontColor = clBlack
+    NoSelect = False
+    CharSet = DEFAULT_CHARSET
+    PrintMarginLeft = 2
+    PrintMarginRight = 2
+    PrintMarginTop = 2
+    PrintMarginBottom = 2
+    PrintScale = 1
   end
   object ActionList1: TActionList
     left = 72
@@ -93,7 +98,6 @@ object f_detail: Tf_detail
     top = 144
     object SelectAll1: TMenuItem
       Action = SelectAll
-      Visible = False
       OnClick = SelectAllExecute
     end
     object Copy1: TMenuItem
