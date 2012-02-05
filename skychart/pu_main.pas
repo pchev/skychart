@@ -2932,9 +2932,10 @@ end;
 
 function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
 var ok: Boolean;
-    ar1,de1 : Double;
+    ar1,de1,saveChartJD,dyear : Double;
     i, itype : integer;
     chart:TForm;
+    saveCurYear,saveCurMonth,saveCurDay:integer;
 begin
 result:=msgFailed;
 chart:=nil; ok:=false;
@@ -2975,13 +2976,17 @@ if chart is Tf_chart then with chart as Tf_chart do begin
       if ok then begin
         sc.cfgsc.TrackOn:=false;
         IdentLabel.visible:=false;
-        precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
-        if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc,true,itype<ftPla);
-        sc.movetoradec(ar1,de1);
+        saveChartJD:=sc.cfgsc.JDChart;
+        saveCurYear:=sc.cfgsc.CurYear;
+        saveCurMonth:=sc.cfgsc.CurMonth;
+        saveCurDay:=sc.cfgsc.CurDay;
+        sc.cfgsc.JDChart:=jd2000;
+        sc.cfgsc.CurYear:=2000;
+        sc.cfgsc.CurMonth:=1;
+        sc.cfgsc.CurDay:=1;
 {$ifdef trace_debug}
  WriteTrace('Search1Execute');
 {$endif}
-        Refresh;
         if itype=ftlin then begin
             sc.cfgsc.FindCatname:='';
             sc.cfgsc.FindCat:='';
@@ -2991,6 +2996,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             sc.cfgsc.FindDec:=de1;
             sc.cfgsc.FindSize:=0;
             sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindStarPM:=false;
             sc.cfgsc.FindOK:=true;
             sc.cfgsc.FindType:=itype;
             sc.cfgsc.TrackOn:=False;
@@ -3004,11 +3010,11 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             sc.cfgsc.FindDec:=de1;
             sc.cfgsc.FindSize:=0;
             sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindStarPM:=false;
             sc.cfgsc.FindOK:=true;
             sc.cfgsc.FindType:=itype;
             sc.cfgsc.TrackOn:=False;
             sc.cfgsc.TrackType:=0;
-            ShowIdentLabel;
         end else begin
           ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
           if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
@@ -3022,6 +3028,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             sc.cfgsc.FindDec:=de1;
             sc.cfgsc.FindSize:=0;
             sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindStarPM:=false;
             sc.cfgsc.FindOK:=true;
             sc.cfgsc.FindType:=itype;
             sc.cfgsc.TrackOn:=true;
@@ -3030,9 +3037,22 @@ if chart is Tf_chart then with chart as Tf_chart do begin
             sc.cfgsc.TrackDec:=de1;
             sc.cfgsc.TrackName:=Num;
           end;
-          ShowIdentLabel;
         end;
-        f_main.SetLpanel1(wordspace(sc.cfgsc.FindDesc),caption,true);
+        sc.cfgsc.JDChart := saveChartJD;
+        sc.cfgsc.CurYear  := saveCurYear;
+        sc.cfgsc.CurMonth := saveCurMonth;
+        sc.cfgsc.CurDay   := saveCurDay;
+        if sc.cfgsc.FindStarPM then begin
+          dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
+          propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
+        end;
+        precession(jd2000,sc.cfgsc.JDchart,sc.cfgsc.FindRA,sc.cfgsc.FindDec);
+        if sc.cfgsc.ApparentPos then apparent_equatorial(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc,true,itype<ftPla);
+        sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
+        sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
+        sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
+        Refresh;
+        IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
