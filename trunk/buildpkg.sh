@@ -18,7 +18,7 @@ if [[ $arch -eq x86_64 ]]; then make_linux64=1;fi
 unset make_win32
 make_win32=1
 unset make_win64
-make_win64=1
+#make_win64=1
 
 # For win32 and win64 target you must also install the corresponding mingw-w64 to build the C library
 mingw32=/opt/mingw-w32/bin/

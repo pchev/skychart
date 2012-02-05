@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML, Htmlview;
+  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML, IpHtml;
 
 // GetDss.dll interface
   type
@@ -70,11 +70,12 @@ type
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
-    HTMLViewer1: THTMLViewer;
+    IpHtmlPanel1: TIpHtmlPanel;
     ListBox1: TListBox;
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -149,7 +150,12 @@ end;
 
 procedure Tf_getdss.BitBtn2Click(Sender: TObject);
 begin
-  if HTMLViewer1.Visible then close;
+  if IpHtmlPanel1.Visible then close;
+end;
+
+procedure Tf_getdss.BitBtn1Click(Sender: TObject);
+begin
+ if IpHtmlPanel1.Visible then close;
 end;
 
 procedure Tf_getdss.FormDestroy(Sender: TObject);
@@ -176,9 +182,11 @@ var i : SImageConfig;
     gzf:pointer;
     fitsfile:file;
     gzbuf : array[0..4095]of char;
+    NewHTML: TIpHtml;
+    s: TMemoryStream;
 begin
 try
-HTMLViewer1.visible:=false;
+IpHtmlPanel1.visible:=false;
 ListBox1.Visible:=true;
 BitBtn1.Visible:=true;
 hide;
@@ -276,12 +284,16 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
   if (DownloadDialog1.ResponseText<>'')and(not result) then begin
      caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;
+     s:=TMemoryStream.Create;
      RenameFile(ExpandFileName(cfgdss.dssfile),ExpandFileName(cfgdss.dssfile)+'.txt');
-     HTMLViewer1.visible:=true;
+     s.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
+     NewHTML:=TIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
+     NewHTML.LoadFromStream(s);
+     s.free;
+     IpHtmlPanel1.SetHtml(NewHTML);
+     IpHtmlPanel1.visible:=true;
      ListBox1.Visible:=false;
      BitBtn1.Visible:=false;
-     HTMLViewer1.Clear;
-     HTMLViewer1.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
      show;
   end;
 

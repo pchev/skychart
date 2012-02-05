@@ -13,26 +13,6 @@ object f_getdss: Tf_getdss
   OnDestroy = FormDestroy
   ParentFont = True
   LCLVersion = '0.9.30.3'
-  object HTMLViewer1: THTMLViewer
-    Left = 8
-    Height = 232
-    Top = 32
-    Width = 401
-    TabOrder = 3
-    DefBackground = clWindow
-    BorderStyle = htFocused
-    HistoryMaxCount = 0
-    DefFontName = 'Times New Roman'
-    DefPreFontName = 'Courier New'
-    DefFontColor = clWindowText
-    NoSelect = False
-    CharSet = DEFAULT_CHARSET
-    PrintMarginLeft = 2
-    PrintMarginRight = 2
-    PrintMarginTop = 2
-    PrintMarginBottom = 2
-    PrintScale = 1
-  end
   object ListBox1: TListBox
     Left = 8
     Height = 230
@@ -45,6 +25,7 @@ object f_getdss: Tf_getdss
     IntegralHeight = True
     ItemHeight = 0
     ParentFont = False
+    ScrollWidth = 399
     TabOrder = 0
     TopIndex = -1
   end
@@ -71,6 +52,7 @@ object f_getdss: Tf_getdss
     Default = True
     ModalResult = 1
     NumGlyphs = 0
+    OnClick = BitBtn1Click
     TabOrder = 1
   end
   object BitBtn2: TBitBtn
@@ -85,6 +67,21 @@ object f_getdss: Tf_getdss
     NumGlyphs = 0
     OnClick = BitBtn2Click
     TabOrder = 2
+  end
+  object IpHtmlPanel1: TIpHtmlPanel
+    Left = 10
+    Height = 234
+    Top = 27
+    Width = 398
+    FixedTypeface = 'Courier New'
+    DefaultTypeFace = 'default'
+    DefaultFontSize = 12
+    FlagErrors = False
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
+    TabOrder = 3
   end
   object DownloadDialog1: TDownloadDialog
     FtpFwMode = 0
