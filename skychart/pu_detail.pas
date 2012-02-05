@@ -28,10 +28,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_util, u_constant, Clipbrd,
+uses u_help, u_translation, u_util, u_constant,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, FileUtil,
   Dialogs, StdCtrls, ComCtrls, ExtCtrls, Menus, StdActns, ActnList, LResources,
-  Buttons, LazHelpHTML, Htmlview, Htmlsubs, types, Readhtml;
+  Buttons, LazHelpHTML, IpHtml, types;
+
+type
+  TSimpleIpHtml = class(TIpHtml)
+  public
+    property OnGetImageX;
+  end;
 
 type
   Tstr1func = procedure(txt:string) of object;
@@ -40,7 +46,7 @@ type
 
   Tf_detail = class(TForm)
     EditCopy: TAction;
-    HTMLViewer1: THTMLViewer;
+    IpHtmlPanel1: TIpHtmlPanel;
     SelectAll: TAction;
     Panel1: TPanel;
     Button1: TButton;
@@ -56,10 +62,7 @@ type
     procedure Button3Click(Sender: TObject);
     procedure EditCopyExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
-      var Handled: boolean);
-    procedure HTMLViewer1ImageRequest(Sender: TObject; const SRC: string;
-      var Stream: TMemoryStream);
+    procedure IpHtmlPanel1HotClick(Sender: TObject);
     procedure SelectAllExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -69,6 +72,7 @@ type
     FNeighbor : Tstr1func;
     FHTMLText: String;
     procedure SetHTMLText(const value: string);
+    procedure HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
   public
     { Public declarations }
     source_chart:string;
@@ -113,41 +117,45 @@ begin
 if assigned(FNeighbor) then FNeighbor(source_chart);
 end;
 
-procedure Tf_detail.HTMLViewer1HotSpotClick(Sender: TObject; const SRC: string;
-  var Handled: boolean);
-var i: integer;
-    url,sra,sde,n: string;
+procedure Tf_detail.IpHtmlPanel1HotClick(Sender: TObject);
+var
+  NodeA: TIpHtmlNodeA;
+  i: integer;
+  src,url,sra,sde,n: string;
 begin
-  i:=strtointdef(src,-1);
-  if i>0 then begin
-    if i>infoname_maxurl then begin
-      i:=i-infoname_maxurl;
-      sra:=trim(ARtoStr(rad2deg*ra/15));
-      sde:=trim(DEToStr3(rad2deg*de));
-      if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
-      url:=infocoord_url[i,1];
-      url:=StringReplace(url,'$RA',sra,[]);
-      url:=StringReplace(url,'$DE',sde,[]);
-    end else begin
-      n:=objname;
-      if pos('BSC',n)=1 then Delete(n,1,3);
-      if pos('Sky',n)=1 then Delete(n,1,3);
-      n:=StringReplace(n,' ','%20',[rfReplaceAll]);
-      n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
-      n:=StringReplace(n,'.','%20',[rfReplaceAll]);
-      url:=infoname_url[i,1];
-      url:=StringReplace(url,'$ID',n,[]);
+  if IpHtmlPanel1.HotNode is TIpHtmlNodeA then begin
+    NodeA:=TIpHtmlNodeA(IpHtmlPanel1.HotNode);
+    src:=NodeA.HRef;
+    i:=strtointdef(src,-1);
+    if i>0 then begin
+      if i>infoname_maxurl then begin
+        i:=i-infoname_maxurl;
+        sra:=trim(ARtoStr(rad2deg*ra/15));
+        sde:=trim(DEToStr3(rad2deg*de));
+        if (Copy(sde,1,1)<>'-') then sde:='%2b'+sde;
+        url:=infocoord_url[i,1];
+        url:=StringReplace(url,'$RA',sra,[]);
+        url:=StringReplace(url,'$DE',sde,[]);
+      end else begin
+        n:=objname;
+        if pos('BSC',n)=1 then Delete(n,1,3);
+        if pos('Sky',n)=1 then Delete(n,1,3);
+        n:=StringReplace(n,' ','%20',[rfReplaceAll]);
+        n:=StringReplace(n,'+','%2b',[rfReplaceAll]);
+        n:=StringReplace(n,'.','%20',[rfReplaceAll]);
+        url:=infoname_url[i,1];
+        url:=StringReplace(url,'$ID',n,[]);
+      end;
+      ExecuteFile(url);
     end;
-    ExecuteFile(url);
   end;
 end;
 
 procedure Tf_detail.EditCopyExecute(Sender: TObject);
 var buf: string;
 begin
-  if HTMLViewer1.SelLength=0 then HTMLViewer1.SelectAll;
-  buf:=HTMLViewer1.SelText;
-  Clipboard.AsText:=buf;
+if not IpHtmlPanel1.HaveSelection then IpHtmlPanel1.SelectAll;
+IpHtmlPanel1.CopyToClipboard;
 end;
 
 procedure Tf_detail.FormShow(Sender: TObject);
@@ -157,23 +165,6 @@ begin
   {$endif}
 end;
 
-procedure Tf_detail.HTMLViewer1ImageRequest(Sender: TObject; const SRC: string; var Stream: TMemoryStream);
-var png: TPortableNetworkGraphic;
-    bmp: TBitmap;
-begin
-  // bmp and jpg load nativelly.
-  if LowerCase(ExtractFileExt(src))='.png' then begin
-    Stream:=TMemoryStream.Create;
-    bmp:=TBitmap.Create;
-    png:=TPortableNetworkGraphic.Create;
-    png.LoadFromFile(systoutf8(src));
-    bmp.Assign(png);
-    bmp.SaveToStream(Stream);
-    Stream.position:=0;
-    bmp.free;
-    png.free;
-  end;
-end;
 
 procedure Tf_detail.Timer1Timer(Sender: TObject);
 begin
@@ -183,7 +174,8 @@ end;
 
 procedure Tf_detail.SelectAllExecute(Sender: TObject);
 begin
-  HTMLViewer1.SelectAll;
+  IpHtmlPanel1.SelectAll;
+  IpHtmlPanel1.Invalidate;
 end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
@@ -192,10 +184,85 @@ SetLang;
 end;
 
 procedure Tf_detail.SetHTMLText(const value: string);
+var s: TStringStream;
+  NewHTML: TSimpleIpHtml;
 begin
-  HTMLViewer1.Clear;
-  HTMLViewer1.ClearHistory;
-  HTMLViewer1.LoadFromString(value);
+  try
+    s:=TStringStream.Create(value);
+    try
+      NewHTML:=TSimpleIpHtml.Create; // Beware: Will be freed automatically by IpHtmlPanel1
+      NewHTML.OnGetImageX:=HTMLGetImageX;
+      NewHTML.LoadFromStream(s);
+    finally
+      FHTMLText:=value;
+      s.Free;
+    end;
+    IpHtmlPanel1.SetHtml(NewHTML);
+  except
+  end;
 end;
+
+procedure Tf_detail.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
+var
+  PicCreated: boolean;
+  bmp:tbitmap;
+  Stream: TMemoryStream;
+  png: TPortableNetworkGraphic;
+  jpg: TJPEGImage;
+  src,ext: string;
+begin
+  try
+    src:=SysToUTF8(url);
+    if FileExistsUTF8(src) then begin
+      PicCreated := False;
+      if Picture=nil then begin
+        Picture:=TPicture.Create;
+        PicCreated := True;
+      end;
+      ext:=uppercase(ExtractFileExt(src));
+      bmp:=TBitmap.Create;
+      png:=TPortableNetworkGraphic.Create;
+      jpg:=TJPEGImage.Create;
+      Stream:=TMemoryStream.Create;
+      try
+        if ext='.PNG' then begin
+           png.LoadFromFile(src);
+           bmp.Assign(png);
+        end;
+        if ext='.JPG' then begin
+           jpg.LoadFromFile(src);
+           bmp.Assign(jpg);
+        end;
+        if ext='.BMP' then begin
+           bmp.LoadFromFile(src);
+        end;
+        if not bmp.Empty then begin
+          bmp.Canvas.Pen.Color:=clFuchsia;
+          bmp.Canvas.Pen.Width:=1;
+          bmp.Canvas.Pen.Mode:=pmCopy;
+          bmp.Canvas.Brush.Style:=bsClear;
+          bmp.Canvas.Rectangle(0,0,bmp.Width,bmp.Height);
+          bmp.SaveToStream(Stream);
+          Stream.position:=0;
+          Picture.LoadFromStream(stream);
+        end else begin
+          if PicCreated then
+            Picture.Free;
+          Picture := nil;
+        end;
+      finally
+        bmp.free;
+        png.free;
+        jpg.free;
+        Stream.Free;
+      end;
+    end;
+  except
+    if PicCreated then
+      Picture.Free;
+    Picture := nil;
+  end;
+end;
+
 
 end.
