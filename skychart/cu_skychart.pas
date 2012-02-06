@@ -3360,7 +3360,7 @@ end;
 Procedure Tskychart.GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 var x1,y1:double;
     xxx,yyy:single;
-    rr,xx,yy:integer;
+    rr,xx,yy,o,hh:integer;
 begin
  // no precession, the label position is already for the rigth equinox
  projection(ra,dec,x1,y1,true,cfgsc) ;
@@ -3370,15 +3370,21 @@ begin
  yy:=round(yyy);
  x:=xx;
  y:=yy;
- if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-    case cfgsc.LabelOrientation of
+ if (xx>=cfgsc.Xmin) and (xx<=cfgsc.Xmax) and (yy>=cfgsc.Ymin) and (yy<=cfgsc.Ymax) then begin
+    o:=cfgsc.LabelOrientation;
+    hh:=(h div 2);
+    if (o=1)and((xx+w)>cfgsc.Xmax) then o:=0;
+    if (o=0)and((xx-w)<cfgsc.Xmin) then o:=1;
+    if hh>(cfgsc.Ymax-yy) then hh:=h;
+    if (yy-hh)<(cfgsc.Ymin+1) then hh:=yy+cfgsc.Ymin+1;
+    case o of
     0 : begin                    // to the left
          x:=xx-rr-labspacing-w;
-         y:=y-(h div 2);
+         y:=y-hh;
         end;
     1 : begin                    // to the right
          x:=xx+rr+labspacing;
-         y:=y-(h div 2);
+         y:=y-hh;
         end;
     end;
  end;
