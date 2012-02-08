@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-22 13:01+0000\n"
-"PO-Revision-Date: 2012-01-15 20:08+0000\n"
+"PO-Revision-Date: 2012-01-30 19:38+0000\n"
 "Last-Translator: Sáfár Péter <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-29 20:34+0000\n"
-"X-Generator: Launchpad (build 14727)\n"
+"X-Launchpad-Export-Date: 2012-02-01 20:32+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -131,11 +131,11 @@ msgstr "Egy adatsor hozzáadása az adatbázishoz. Minden mező kitöltése köt
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Ekvatoriális hálómutatása"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr ""
+msgstr "További ffmpeg lehetőségek"
 
 #: u_translation.rsaddlabel
 #| msgid "Add Label"
@@ -233,7 +233,7 @@ msgstr "%sforgatás függőlegesen:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
-msgstr ""
+msgstr "Mentés megerősítés nélkül is."
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -575,7 +575,7 @@ msgstr "%sNem lehet megnyitni az adatbázist %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Nem lehet írni a"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -753,7 +753,7 @@ msgstr "Osztály"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr ""
+msgstr "Térkép törlése."
 
 #: u_translation.rsclear
 msgid "Clear"
@@ -1035,7 +1035,7 @@ msgstr "Másolás"
 
 #: u_translation.rscopycoordina
 msgid "Copy coordinates"
-msgstr ""
+msgstr "Koordináták másolása"
 
 #: u_translation.rscopyfrom
 msgid "Copy from:"
@@ -1048,7 +1048,7 @@ msgstr "Mag sugara"
 
 #: u_translation.rscorrelated
 msgid "Correlated"
-msgstr ""
+msgstr "korrelált"
 
 #: u_translation.rscouldnotload
 msgid "Could not load library "
@@ -1099,7 +1099,7 @@ msgstr "Aktuális dátum"
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
-msgstr ""
+msgstr "Jelenlegi meghajó"
 
 #: u_translation.rscustom
 msgid "Custom"
@@ -1196,7 +1196,7 @@ msgstr "Dátumtól"
 
 #: u_translation.rsdatesmaytake
 msgid "dates may take a long time. Do you want to continue?"
-msgstr ""
+msgstr "sokái tarthat. Biztosan folytatod?"
 
 #: u_translation.rsdatetime
 #| msgid "Date / Time"
@@ -1439,7 +1439,7 @@ msgstr "Jelölés"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
-msgstr ""
+msgstr "Desktop környezet"
 
 #: u_translation.rsdetails
 msgid "Details"
@@ -1464,11 +1464,11 @@ msgstr "Átmérő"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr ""
+msgstr "Nincs kapcsolat"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "A földi és Universal Time közti különbség"
 
 #: u_translation.rsdifferenttha
 #| msgid "%s (different than configured port, maybe busy or other error.)"
@@ -1613,7 +1613,7 @@ msgstr "A legutóbbi pályaelemek letöltése"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr ""
+msgstr "TLE letöltéde"
 
 #: u_translation.rsdoyouwanttos
 #| msgid "Do you want to save the program setting now?"
@@ -1757,7 +1757,7 @@ msgstr ""
 
 #: u_translation.rsencoders
 msgid "Encoders"
-msgstr ""
+msgstr "Enkóder"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1819,7 +1819,7 @@ msgstr "Ekvatoriális állvány"
 
 #: u_translation.rsequatorialsy
 msgid "Equatorial System"
-msgstr ""
+msgstr "Ekvatoriális rendszer"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
@@ -1843,11 +1843,11 @@ msgstr "Hiba %s megnyitásakor"
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
-msgstr ""
+msgstr "Hiba a % megnyitásakor a % porton"
 
 #: u_translation.rserroropening3
 msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr ""
+msgstr "Hiba a  % nyitásakor, a  %s porton. Ellenőrizd hogy az eszköz csatlakoztatva van és be van kapcsolva."
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1925,7 +1925,7 @@ msgstr "Halvány csillagok mérete "
 
 #: u_translation.rsfan
 msgid "Fan"
-msgstr ""
+msgstr "Ventillátor"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -1941,7 +1941,7 @@ msgstr "Kedvenc"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr ""
+msgstr "ffmpeg  program elérési út"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
@@ -1971,7 +1971,7 @@ msgstr "Látómező száma:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
-msgstr ""
+msgstr "Mező forgatása"
 
 #: u_translation.rsfieldtoowidt
 #| msgid "Field too width! Maximum is %s"
@@ -2073,7 +2073,7 @@ msgstr "Fókusz"
 
 #: u_translation.rsfocusspeed
 msgid "Focus Speed"
-msgstr ""
+msgstr "Fókusz sebesség"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -2086,7 +2086,7 @@ msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb,
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
-msgstr ""
+msgstr "Csak a jelenlegi térképre"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
@@ -2434,7 +2434,7 @@ msgstr ""
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
-msgstr ""
+msgstr "Iridium felvillanás beszúrása"
 
 #: u_translation.rsincrease
 msgid "Increase"
@@ -2524,7 +2524,7 @@ msgstr ""
 
 #: u_translation.rsinitialize
 msgid "Initialize"
-msgstr ""
+msgstr "Inicializálás"
 
 #: u_translation.rsinitializeda
 #| msgid "Initialize Database"
@@ -2559,7 +2559,7 @@ msgstr ""
 
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
-msgstr ""
+msgstr "Integrált telescope driver"
 
 #: u_translation.rsinvalidepoch
 #| msgid "invalid epoch on line%s : %s"
@@ -2842,7 +2842,7 @@ msgstr "Helyi sziderikus idő"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Hely kód"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2917,7 +2917,7 @@ msgstr "Magnitúdó különbség"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "A fogyatkozás magnitúdója"
 
 #: u_translation.rsmagnitudeerr
 #| msgid "Magnitude Error"
@@ -3086,7 +3086,7 @@ msgstr "Függőleges tükrözés"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr ""
+msgstr "Vegyes vonalak"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -3155,7 +3155,7 @@ msgstr "Motor"
 
 #: u_translation.rsmotorspeeds
 msgid "Motor Speeds"
-msgstr ""
+msgstr "Motor sebességek"
 
 #: u_translation.rsmountfabrica
 msgid "Mount fabrication error"
@@ -3163,7 +3163,7 @@ msgstr ""
 
 #: u_translation.rsmounttype
 msgid "Mount type"
-msgstr ""
+msgstr "Állványfej típusa"
 
 #: u_translation.rsmove
 msgid "Move"
@@ -3309,7 +3309,7 @@ msgstr "Nincs kisbolygó adat! %s Töltsd be először az MPC táblázatot."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr ""
+msgstr "A mai nap nincs asztronómiai szürkület!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
@@ -3408,7 +3408,7 @@ msgstr "%s Nem található!%sA katalógus nincs installálva, vagy rossz az elé
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
-msgstr ""
+msgstr "Nincs inicializálva"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3481,7 +3481,7 @@ msgstr "Objektum neve"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Az objektum metalálható az indexben, de nincs részletes adat az aktív katalóusban"
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -3656,7 +3656,7 @@ msgstr ""
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
-msgstr ""
+msgstr "Teleszkóp parkolása"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -3686,7 +3686,7 @@ msgstr "Út szélessége"
 
 #: u_translation.rspec
 msgid "PEC"
-msgstr ""
+msgstr "PEC"
 
 #: u_translation.rspectoggle
 msgid "Pec Toggle"
@@ -3803,11 +3803,11 @@ msgstr ""
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
+msgstr "telepítsd a \"Dosbox\"-ot http://www.dosbox.com/ az Iridium felvillanások számításához."
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
+msgstr "Telepítsd a gépeden a wine -t:  http://www.winehq.org/ a műhold adatok számításához."
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
@@ -3978,7 +3978,7 @@ msgstr "Sor feldolgozása %s"
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
-msgstr ""
+msgstr "termék információ"
 
 #: u_translation.rsprogramdata
 #| msgid "Program Data "
@@ -4126,7 +4126,7 @@ msgstr "%sRA forgatás:"
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
-msgstr ""
+msgstr "Olavsás időköze"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -4134,7 +4134,7 @@ msgstr "Valós képek"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
+msgstr "TÉNYLEG parkolod a teleszkópot?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4214,7 +4214,7 @@ msgstr "Frissítés"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr ""
+msgstr "A kép frissítése minden"
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
@@ -4308,11 +4308,11 @@ msgstr "Felbontás:"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
-msgstr ""
+msgstr "Felbontás X: %  Y: % lépés"
 
 #: u_translation.rsresumegoto
 msgid "Resume GoTo"
-msgstr ""
+msgstr "GoTo folyatatása"
 
 #: u_translation.rsreturn
 msgid "Return"
@@ -4386,7 +4386,7 @@ msgstr "Satellite"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr ""
+msgstr "Műhold kalkuláció:"
 
 #: u_translation.rssatring
 #| msgid "Sat.Ring"
@@ -4645,7 +4645,7 @@ msgstr ""
 
 #: u_translation.rssettelescope
 msgid "Set TelescopeTime"
-msgstr ""
+msgstr "teleszhóp idő beállítása"
 
 #: u_translation.rssettime
 msgid "Set Time"
@@ -4684,7 +4684,7 @@ msgstr "Üstökösök mutatása a térképen"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr ""
+msgstr "Az iránytű mutatója színes"
 
 #: u_translation.rsshowconstell
 #| msgid "Show Constellation Line"
@@ -4953,7 +4953,7 @@ msgstr "A program betöltése során hiba történt. A program most bezár."
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
+msgstr "Elnézést, a másolás még nem lehetsées ennél az oldalnál"
 
 #: u_translation.rssortby
 msgid "Sort by"
@@ -4982,7 +4982,7 @@ msgstr "Sebesség"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
-msgstr ""
+msgstr "Sebesség választása"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
@@ -5120,7 +5120,7 @@ msgstr "Vas."
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Nap kép forrása"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -5141,7 +5141,7 @@ msgstr "Felületi fényesség"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Billentyű cseréje"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
@@ -5429,7 +5429,7 @@ msgstr "Trumpler osztály"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT-UT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5544,7 +5544,7 @@ msgstr "URL betöltése"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Más TT-UT érték használata"
 
 #: u_translation.rsuseapresetco
 #| msgid "Use a preset colour scheme :"
@@ -5570,7 +5570,7 @@ msgstr "DSS használata RealSky helyett"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Online Nap kép használata az SDO-ról vagy a SOHO-ról"
 
 #: u_translation.rsuseonlycatal
 #| msgid "Use only the catalog from the same group"
@@ -5767,7 +5767,7 @@ msgstr "Ablak"
 
 #: u_translation.rsxerrors
 msgid "X Errors"
-msgstr ""
+msgstr "X hibák"
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
@@ -5792,7 +5792,7 @@ msgstr "évben"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
-msgstr ""
+msgstr "Y hiobák"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
