@@ -2349,9 +2349,9 @@ var desc,buf,buf2,otype,oname,txt: string;
     bmp: Tbitmap;
     ipla:integer;
     i,p,l,y,m,d,precision : integer;
-    isStar, isSolarSystem, isd2k, isvo, isOsr: boolean;
+    isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
-    ra,dec,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
+    ra,dec,q,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
     ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst: double;
 
 function Bold(s:string):string;
@@ -2385,6 +2385,7 @@ else precision:=0;
 isStar:=(otype='*');
 isSolarSystem:=((otype='P')or(otype='Ps')or(otype='S*')or(otype='As')or(otype='Cm'));
 isOsr:=(otype='OSR');
+isArtSat:=(otype='Sat');
 if isSolarSystem and (sc.cfgsc.FindSimjd<>0) then begin
    cjd:=sc.cfgsc.FindSimjd;
    Djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
@@ -2522,34 +2523,45 @@ if isSolarSystem then
    if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
                               else txt:=txt+blank+rsGeocentric;
 txt:=txt+htms_b+html_br;
-// return to j2000 coord.
-ra2000:=sc.cfgsc.FindRA2000;
-de2000:=sc.cfgsc.FindDec2000;
-//if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
-//precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
-// mean of date, apply only precession
-radate:=ra2000;
-dedate:=de2000;
-precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
-// apparent
-if ApparentValid then begin
-  raapp:=ra2000;
-  deapp:=de2000;
-  // apply parallax
-  if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
-  // apply precession
-  precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
-  // apply nutation, aberration, light deflection
-  apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
+if isArtSat then begin
+  raapp:=sc.cfgsc.FindRA;
+  deapp:=sc.cfgsc.FindDec;
+  txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+armtostr(rad2deg*raapp/15)+'   '+rsDE+':'+demtostr(rad2deg*deapp)+html_br;
+end else begin
+  // return to j2000 coord.
+  ra2000:=sc.cfgsc.FindRA2000;
+  de2000:=sc.cfgsc.FindDec2000;
+  ra2000:=NormRA(ra2000);
+  //if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
+  //precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+  // mean of date, apply only precession
+  radate:=ra2000;
+  dedate:=de2000;
+  precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
+  if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,radate,dedate,radate,dedate,q,sc.cfgsc);
+  radate:=NormRA(radate);
+  // apparent
+  if ApparentValid then begin
+    raapp:=ra2000;
+    deapp:=de2000;
+    // apply parallax
+    if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
+    // apply precession
+    precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
+    // apply nutation, aberration, light deflection
+    apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
+    if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,raapp,deapp,raapp,deapp,q,sc.cfgsc);
+    raapp:=NormRA(raapp);
+  end;
+  // print coord.
+  if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
+  if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
+  if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
+  if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
+     txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
+  else
+     txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
 end;
-// print coord.
-if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
-if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
-if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
-if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
-   txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
-else
-   txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 Eq2Ecl(ra,dec,sc.cfgsc.ecl,a,h) ;
@@ -2579,50 +2591,52 @@ txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+h
 txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
 txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
 txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
-// rise/set time
-if (otype='P') then begin // planet
-   sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-end
-else if (otype='S*')and(oname=pla[10]) then begin // Sun
-   sc.planet.PlanetRiseSet(10,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-end
-else if (otype='Ps')and(ipla=11) then begin // Moon
-   sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-end
-else begin // fixed object
-     RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
-     if sc.catalog.cfgshr.AzNorth then begin
-        Azr:=rmod(Azr+pi,pi2);
-        Azs:=rmod(Azs+pi,pi2);
-     end;
-     thr:=armtostr(rmod(hr+24,24));
-     tht:=armtostr(rmod(ht+24,24));
-     ths:=armtostr(rmod(hs+24,24));
-     tazr:=demtostr(rad2deg*Azr);
-     tazs:=demtostr(rad2deg*Azs);
-end;
-culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
-if culmalt>90 then culmalt:=180-culmalt;
-if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
-              else culmalt:=culmalt+0.64658062088;
-tculmalt:=demtostr(culmalt);
-case i of
-0 : begin
-    txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
-    if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
-                     else txt:=txt+html_br;
-    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
-    txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
-    if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
-                     else txt:=txt+html_br;
-    end;
-1 : begin
-    txt:=txt+rsCircumpolar+html_br;
-    txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
-    end;
-else begin
-    txt:=txt+rsInvisibleAtT+html_br;
-    end;
+if not isArtSat then begin
+  // rise/set time
+  if (otype='P') then begin // planet
+     sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+  end
+  else if (otype='S*')and(oname=pla[10]) then begin // Sun
+     sc.planet.PlanetRiseSet(10,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+  end
+  else if (otype='Ps')and(ipla=11) then begin // Moon
+     sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+  end
+  else begin // fixed object
+       RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
+       if sc.catalog.cfgshr.AzNorth then begin
+          Azr:=rmod(Azr+pi,pi2);
+          Azs:=rmod(Azs+pi,pi2);
+       end;
+       thr:=armtostr(rmod(hr+24,24));
+       tht:=armtostr(rmod(ht+24,24));
+       ths:=armtostr(rmod(hs+24,24));
+       tazr:=demtostr(rad2deg*Azr);
+       tazs:=demtostr(rad2deg*Azs);
+  end;
+  culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
+  if culmalt>90 then culmalt:=180-culmalt;
+  if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
+                else culmalt:=culmalt+0.64658062088;
+  tculmalt:=demtostr(culmalt);
+  case i of
+  0 : begin
+      txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
+      if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
+                       else txt:=txt+html_br;
+      txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
+      txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
+      if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
+                       else txt:=txt+html_br;
+      end;
+  1 : begin
+      txt:=txt+rsCircumpolar+html_br;
+      txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
+      end;
+  else begin
+      txt:=txt+rsInvisibleAtT+html_br;
+      end;
+  end;
 end;
 // other notes
 buf:=sc.cfgsc.FindNote;
@@ -2641,19 +2655,20 @@ if buf>'' then begin
     txt:=txt+buf2+html_br;
   until buf='';
 end;
-// external links
-txt:=txt+html_br+html_b+rsMoreInformat+':'+htms_b+html_br;
-txt:=txt+rsSearchByName+':'+blank;
-for i:=1 to infoname_maxurl do begin
-  txt:=txt+'<a href="'+inttostr(i)+'">'+infoname_url[i,2]+'</a>,'+blank;
+if (not isArtSat)and(not isSolarSystem) then begin
+  // external links
+  txt:=txt+html_br+html_b+rsMoreInformat+':'+htms_b+html_br;
+  txt:=txt+rsSearchByName+':'+blank;
+  for i:=1 to infoname_maxurl do begin
+    txt:=txt+'<a href="'+inttostr(i)+'">'+infoname_url[i,2]+'</a>,'+blank;
+  end;
+  txt:=txt+html_br;
+  txt:=txt+rsSearchByPosi+':'+blank;
+  for i:=1 to infocoord_maxurl do begin
+    txt:=txt+'<a href="'+inttostr(i+infoname_maxurl)+'">'+infocoord_url[i,2]+'</a>,'+blank;
+  end;
+  txt:=txt+html_br;
 end;
-txt:=txt+html_br;
-txt:=txt+rsSearchByPosi+':'+blank;
-for i:=1 to infocoord_maxurl do begin
-  txt:=txt+'<a href="'+inttostr(i+infoname_maxurl)+'">'+infocoord_url[i,2]+'</a>,'+blank;
-end;
-txt:=txt+html_br;
-//writetrace(txt);
 result:=txt+html_br+htms_h;
 end;
 
