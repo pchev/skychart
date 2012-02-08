@@ -461,7 +461,7 @@ const cdcversion = 'Version 3.5-svn';
 {$endif}
 
 type
-     Tplanetlst = array[0..MaxPlSim,1..MaxPla,1..7] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
+     Tplanetlst = array[0..MaxPlSim,1..MaxPla,1..10] of double; // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
      Tcometlst = array of array[1..MaxComet,1..8] of double;       // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch
      TcometName= array of array[1..MaxComet,1..2] of string[27];   // id, name
      Tasteroidlst = array of array[1..MaxAsteroid,1..5] of double;  // ra, dec, magn, jd, epoch
@@ -607,7 +607,7 @@ type
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType,FindIpla : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindRA2000,FindDec2000,FindPX,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec,FindPMra,FindPMde,FindPMEpoch,FindPMpx,FindPMrv : Double;
+                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec,FindPMra,FindPMde,FindPMEpoch,FindPMpx,FindPMrv,FindDist : Double;
                 DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,ShowLegend,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM,FindStarPM,FindPMfullmotion : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindDesc2,FindNote,FindCat,FindCatname : string;
                 BGalpha: integer;
@@ -1537,6 +1537,7 @@ FindPMde:=Source.FindPMde ;
 FindPMEpoch:=Source.FindPMEpoch ;
 FindPMpx:=Source.FindPMpx ;
 FindPMrv:=Source.FindPMrv ;
+FindDist:=Source.FindDist;
 FindPM:=Source.FindPM ;
 FindRA:=Source.FindRA ;
 FindDec:=Source.FindDec ;

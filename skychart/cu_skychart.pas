@@ -2299,6 +2299,8 @@ if result then begin
    cfgsc.TrackRA:=rec.ra;
    cfgsc.TrackDec:=rec.dec;
 end else begin
+   cfgsc.FindRA2000:=0;
+   cfgsc.FindDec2000:=0;
    cfgsc.FindCat:='';
    cfgsc.FindCatname:='';
 // search solar system object

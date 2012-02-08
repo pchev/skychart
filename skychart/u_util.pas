@@ -270,9 +270,7 @@ END  ;
 
 Function NormRA(ra : double):double;
 begin
-result:=rmod(ra+pi2+pi2,pi2);
-//if (ar2<ar1)and(ra<=arm) then NormRA:=ra+pi2
-//else NormRA:=ra;
+result:=rmod(ra+pi4,pi2);
 end;
 
 Function sgn(x:Double):Double ;
@@ -800,7 +798,7 @@ begin
     end;
     str(abs(dd):2:0,d);
     if abs(dd)<10 then d:='0'+trim(d);
-    if dd<0 then d:='-'+d else d:=blank+d;
+    if ar<0 then d:='-'+d else d:=blank+d;
     str(min:2:0,m);
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:5:precision+1,s);

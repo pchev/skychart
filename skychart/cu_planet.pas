@@ -799,12 +799,21 @@ for j:=0 to cfgsc.SimNb-1 do begin
  // Sun first
  ipla:=10;
  Sun(jdt,ar,de,dist,diam);
+ cfgsc.PlanetLst[j,ipla,8]:=NormRA(ar); //J2000
+ cfgsc.PlanetLst[j,ipla,9]:=de;
+ cfgsc.PlanetLst[j,ipla,10]:=dist;
+ cfgsc.PlanetLst[j,32,8]:=rmod(ar+pi,pi2);
+ cfgsc.PlanetLst[j,32,9]:=-de;
  if eph_method='' then exit;
  precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
  cfgsc.PlanetLst[j,32,1]:=rmod(ar+pi,pi2);   // use geocentrique position for earth umbra
  cfgsc.PlanetLst[j,32,2]:=-de;
  cfgsc.PlanetLst[j,32,3]:=dist;
- if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+ if cfgsc.PlanetParalaxe then begin
+    Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+    diam:=diam/q;
+    dist:=dist*q;
+ end;
  if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,true,false);
  ar:=rmod(ar,pi2);
  cfgsc.PlanetLst[j,ipla,1]:=ar;
@@ -820,8 +829,15 @@ for j:=0 to cfgsc.SimNb-1 do begin
  for ipla:=1 to 9 do begin
    if ipla=3 then continue;
    Planet(ipla,jdt,ar,de,dist,illum,phase,diam,magn,dp,xp,yp,zp,vel);
+   cfgsc.PlanetLst[j,ipla,8]:=NormRA(ar); //J2000
+   cfgsc.PlanetLst[j,ipla,9]:=de;
+   cfgsc.PlanetLst[j,ipla,10]:=dist;
    precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
-   if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+   if cfgsc.PlanetParalaxe then begin
+      Paralaxe(st0,dist,ar,de,ar,de,q,cfgsc);
+      diam:=diam/q;
+      dist:=dist*q;
+   end;
    if cfgsc.ApparentPos then apparent_equatorial(ar,de,cfgsc,true,false);
    ar:=rmod(ar,pi2);
    cfgsc.PlanetLst[j,ipla,1]:=ar;
@@ -836,9 +852,14 @@ for j:=0 to cfgsc.SimNb-1 do begin
        ierr:=Marsat(jdt,diam,satx,saty,supconj);
        if ierr>0 then for i:=1 to 2 do cfgsc.PlanetLst[j,i+28,6]:=99
        else for i:=1 to 2 do begin
+           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
+           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
+           cfgsc.PlanetLst[j,i+28,8]:=NormRA(ars);
+           cfgsc.PlanetLst[j,i+28,9]:=des;
+           cfgsc.PlanetLst[j,i+28,10]:=cfgsc.PlanetLst[j,ipla,10];
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+28,1]:=ars;
+           cfgsc.PlanetLst[j,i+28,1]:=NormRA(ars);
            cfgsc.PlanetLst[j,i+28,2]:=des;
            cfgsc.PlanetLst[j,i+28,3]:=jdt;
            cfgsc.PlanetLst[j,i+28,4]:=rad2deg*(2*D0mar[i]/km_au/dist)*3600;
@@ -851,9 +872,14 @@ for j:=0 to cfgsc.SimNb-1 do begin
        ierr:=jupsat(jdt,diam,satx,saty,supconj);
        if ierr>0 then for i:=1 to 4 do cfgsc.PlanetLst[j,i+11,6]:=99
        else for i:=1 to 4 do begin
+           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
+           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
+           cfgsc.PlanetLst[j,i+11,8]:=NormRA(ars);
+           cfgsc.PlanetLst[j,i+11,9]:=des;
+           cfgsc.PlanetLst[j,i+11,10]:=cfgsc.PlanetLst[j,ipla,10];
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+11,1]:=ars;
+           cfgsc.PlanetLst[j,i+11,1]:=NormRA(ars);
            cfgsc.PlanetLst[j,i+11,2]:=des;
            cfgsc.PlanetLst[j,i+11,3]:=jdt;
            cfgsc.PlanetLst[j,i+11,4]:=rad2deg*(2*D0jup[i]/km_au/dist)*3600;
@@ -866,9 +892,14 @@ for j:=0 to cfgsc.SimNb-1 do begin
        ierr:=Satsat(jdt,diam,satx,saty,supconj);
        if ierr>0 then for i:=1 to 8 do cfgsc.PlanetLst[j,i+15,6]:=99
        else for i:=1 to 8 do begin
+           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
+           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
+           cfgsc.PlanetLst[j,i+15,8]:=NormRA(ars);
+           cfgsc.PlanetLst[j,i+15,9]:=des;
+           cfgsc.PlanetLst[j,i+15,10]:=cfgsc.PlanetLst[j,ipla,10];
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+15,1]:=ars;
+           cfgsc.PlanetLst[j,i+15,1]:=NormRA(ars);
            cfgsc.PlanetLst[j,i+15,2]:=des;
            cfgsc.PlanetLst[j,i+15,3]:=jdt;
            cfgsc.PlanetLst[j,i+15,4]:=rad2deg*(2*D0sat[i]/km_au/dist)*3600;
@@ -889,9 +920,14 @@ for j:=0 to cfgsc.SimNb-1 do begin
        ierr:=Urasat(jdt,diam,satx,saty,supconj);
        if ierr>0 then for i:=1 to 5 do cfgsc.PlanetLst[j,i+23,6]:=99
        else for i:=1 to 5 do begin
+           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
+           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
+           cfgsc.PlanetLst[j,i+23,8]:=NormRA(ars);
+           cfgsc.PlanetLst[j,i+23,9]:=des;
+           cfgsc.PlanetLst[j,i+23,10]:=cfgsc.PlanetLst[j,ipla,10];
            ars:=ar+secarc*satx[i]/cos(de);
            des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+23,1]:=ars;
+           cfgsc.PlanetLst[j,i+23,1]:=NormRA(ars);
            cfgsc.PlanetLst[j,i+23,2]:=des;
            cfgsc.PlanetLst[j,i+23,3]:=jdt;
            cfgsc.PlanetLst[j,i+23,4]:=rad2deg*(2*D0ura[i]/km_au/dist)*3600;
@@ -903,6 +939,9 @@ for j:=0 to cfgsc.SimNb-1 do begin
  end;
  ipla:=11;
  Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
+ cfgsc.PlanetLst[j,ipla,8]:=NormRA(ar); //J2000
+ cfgsc.PlanetLst[j,ipla,9]:=de;
+ cfgsc.PlanetLst[j,ipla,10]:=dist;
  precession(jd2000,cfgsc.JDChart,ar,de);     // equinox require for the chart
  cfgsc.PlanetLst[j,32,4]:=dist;
  cfgsc.PlanetLst[j,32,5]:=dkm;
@@ -1001,6 +1040,9 @@ if cfgsc.ephvalid then repeat
   if (currentplanet>11) and (currentplanet<32) and((rad2deg*cfgsc.fov>1.5) or (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
   tar:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   tde:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
+  cfgsc.FindRA2000:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,8]);
+  cfgsc.FindDec2000:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,9];
+  cfgsc.FindDist:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,10];
   // search if this planet center is at the position
   if ( trunc ) and (
      (tar<x1) or (tar>x2) or
@@ -1109,7 +1151,7 @@ if result and (currentplanet<10) then begin
   Desc:=Desc+'date:'+date;
 end;
 if result and (currentplanet=10) then begin
- Sun(jdt,ar,de,dist,diam);
+  Sun(jdt,ar,de,dist,diam);
   str(dist:7:4,sdist);
   str(diam/60:5:1,sdiam);
   nom:=pla[CurrentPlanet];
@@ -2028,6 +2070,9 @@ if result then begin
   cdb.GetAstElem(cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1],cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
   InitAsteroid(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,nam);
   Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
+  cfgsc.FindRA2000:=ra;
+  cfgsc.FindDec2000:=dec;
+  cfgsc.FindDist:=dist;
   nom:=nam;
   str(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,3]:5:1,mag);
   str(r:7:4,sdp);
@@ -2111,6 +2156,9 @@ if result then begin
   cdb.GetComElem(cfgsc.CometName[CurrentComStep,CurrentComet,1],cfgsc.CometLst[CurrentComStep,CurrentComet,8],tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id);
   InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
   Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+  cfgsc.FindRA2000:=ra;
+  cfgsc.FindDec2000:=dec;
+  cfgsc.FindDist:=dist;
   nom:=nam;
   str(cfgsc.CometLst[CurrentComStep,CurrentComet,3]:5:1,mag);
   str(r:7:4,sdp);
