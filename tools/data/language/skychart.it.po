@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-01-22 13:01+0000\n"
-"PO-Revision-Date: 2012-01-20 19:23+0000\n"
+"PO-Revision-Date: 2012-02-01 19:35+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-01-29 20:34+0000\n"
-"X-Generator: Launchpad (build 14727)\n"
+"X-Launchpad-Export-Date: 2012-02-01 20:32+0000\n"
+"X-Generator: Launchpad (build 14738)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -4341,7 +4341,7 @@ msgstr "Mostra comete sulla cartina"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr ""
+msgstr "Mostra bussola"
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
