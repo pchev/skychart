@@ -2280,6 +2280,13 @@ begin
 jdr:=0;jdt:=0;jds:=0;ymax0:=0;
 frise := false;fset := false;ftransit := false;
 case pla of
+  12..15 : pla:=5; //jup sat
+  16..23 : pla:=6; //sat sat ;
+  24..28 : pla:=7; //ura sat ;
+  29..30 : pla:=4; //mar sat ;
+  31 : pla:=6; //sat ring ;
+end;
+case pla of
 1..9: ho:=-0.5667;
 10 : ho:=-0.8333;
 11: begin
