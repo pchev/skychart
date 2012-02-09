@@ -2229,7 +2229,7 @@ begin
     cjd0:=cfgsc.jd0;
  end;
 // rise/set time
-if mode>0 then begin // planet
+if (mode>0)and(mode<=31) then begin // planet
    planet.PlanetRiseSet(mode,cjd0,catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,cfgsc);
 end
 else begin // fixed object
