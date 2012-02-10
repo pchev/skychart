@@ -12,6 +12,7 @@ procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
 procedure SetHelp(aControl: TControl; helpstr:string);
 
 var HelpDir: string;
+    UseOnlineHelp: Boolean;
 
 resourcestring
   hlpBaseDir = 'en/documentation/';
@@ -81,16 +82,24 @@ resourcestring
 implementation
 
 procedure SetHelpDB(aHelpDB:THTMLHelpDatabase);
-var buf:string;
+var buf,hdir:string;
 begin
 buf:=StringReplace(hlpBaseDir,'/',PathDelim,[rfReplaceAll]);
 buf:=StringReplace(buf,'\',PathDelim,[rfReplaceAll]);
-aHelpDB.BaseURL:='file://'+SysToUTF8(slash(helpdir)+slash('wiki_doc')+buf);
+hdir:=SysToUTF8(slash(helpdir)+slash('wiki_doc')+buf);
+if DirectoryExistsUTF8(hdir) then begin
+   aHelpDB.BaseURL:='file://'+hdir;
+   UseOnlineHelp:=false;
+end else begin
+   aHelpDB.BaseURL:='http://www.ap-i.net/static/skychart/'+buf;
+   UseOnlineHelp:=true;
+end;
 aHelpDB.KeywordPrefix:='H/';
 end;
 
 procedure SetHelp(aControl: TControl; helpstr:string);
 begin
+if UseOnlineHelp then helpstr:=ExtractFileNameWithoutExt(helpstr);
 aControl.HelpKeyword:='H/'+helpstr;
 aControl.HelpType:=htKeyword;
 end;
