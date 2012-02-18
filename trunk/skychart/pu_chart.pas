@@ -66,6 +66,7 @@ type
     DownloadDialog1: TDownloadDialog;
     CopyCoord1: TMenuItem;
     Cleanupmap1: TMenuItem;
+    Identlabel: TImage;
     MenuFinderCircle: TMenuItem;
     nsearch1: TMenuItem;
     nsearch2: TMenuItem;
@@ -117,7 +118,6 @@ type
     rot_minus: TAction;
     GridEQ: TAction;
     Grid: TAction;
-    identlabel: TLabel;
     switchbackground: TAction;
     switchstar: TAction;
     Telescope1: TMenuItem;
@@ -636,8 +636,6 @@ try
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
-    Identlabel.color:=sc.plot.cfgplot.color[0];
-    Identlabel.font.color:=sc.plot.cfgplot.color[11];
     if sc.cfgsc.FindOk then ShowIdentLabel;
     if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
     if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
@@ -1740,17 +1738,30 @@ end;
 
 Procedure Tf_chart.ShowIdentLabel;
 var x,y : integer;
+    ts:TSize;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK then begin
    sc.plot.FlushCnv;
    identlabel.Visible:=false;
-   identlabel.font.name:=sc.plot.cfgplot.fontname[2];
-   identlabel.font.size:=sc.plot.cfgplot.fontSize[2];
+   Identlabel.Picture.Bitmap.Canvas.Brush.Color:=sc.plot.cfgplot.color[0];
+   Identlabel.Picture.Bitmap.Canvas.Brush.Style:=bsSolid;
+   Identlabel.Picture.Bitmap.Canvas.Pen.Color:=sc.plot.cfgplot.color[12];
+   Identlabel.Picture.Bitmap.Canvas.Pen.Mode:=pmCopy;
+   Identlabel.Picture.Bitmap.Canvas.font.color:=sc.plot.cfgplot.color[11];
+   identlabel.Picture.Bitmap.Canvas.font.name:=sc.plot.cfgplot.fontname[2];
+   identlabel.Picture.Bitmap.Canvas.font.size:=sc.plot.cfgplot.fontSize[2];
    identlabel.caption:=trim(sc.cfgsc.FindName);
+   ts:=identlabel.Picture.Bitmap.Canvas.TextExtent(identlabel.caption);
+   identlabel.Width:=ts.cx+8;
+   identlabel.Height:=ts.cy+4;
+   Identlabel.Picture.Bitmap.Width:=identlabel.Width;
+   Identlabel.Picture.Bitmap.Height:=identlabel.Height;
    sc.GetLabPos(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc.FindSize/2,identlabel.Width,identlabel.Height,x,y);
    identlabel.left:=x;
    identlabel.top:=y;
+   Identlabel.Picture.Bitmap.Canvas.Rectangle(0,0,identlabel.Width,identlabel.Height);
+   Identlabel.Picture.Bitmap.Canvas.TextOut(2,2,Identlabel.Caption);
    identlabel.Visible:=true;
    identlabel.Cursor:=crHandPoint;
    identlabel.bringtofront;
@@ -3745,7 +3756,7 @@ if savelabel then begin
 end;
 if identlabel.Visible then begin
   sc.plot.cnv:=sc.plot.cbmp.Canvas;
-  sc.plot.PlotText(identlabel.Left,identlabel.Top,2,identlabel.Font.Color,laLeft,laTop,identlabel.Caption,sc.cfgsc.WhiteBg);
+  sc.plot.cnv.Draw(identlabel.Left,identlabel.Top,identlabel.Picture.Bitmap);
   needrefresh:=true;
 end;
  if fn='' then fn:='cdc.bmp';

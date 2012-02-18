@@ -1088,7 +1088,7 @@ function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de: Double;
   x,y,xx,yy,sz:single;
-  lid, save_nebplot: integer;
+  i, lid, save_nebplot: integer;
   imgfile,CurrentCat: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
@@ -3945,7 +3945,7 @@ if cfgsc.showlabel[8] then begin
         delete(txt,1,p+1);
     end;
     ts:=lbmp.TextSize(buf);
-    w:=max(w,round(1.2*ts.cx));
+    w:=max(w,round(1.1*ts.cx));
     h:=h+ls;
   until p=0;
 end;

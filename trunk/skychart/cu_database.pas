@@ -36,7 +36,8 @@ type
     db:TSqlDB;
     FFits: TFits;
     FInitializeDB: TNotifyEvent;
-    FAstmsg, FCommsg: string;
+    FAstmsg: string;
+    FComMindt: integer;
   public
     { Public declarations }
      constructor Create(AOwner:TComponent); override;
@@ -53,7 +54,7 @@ type
      procedure GetCountryList(codelist,countrylist:Tstrings);
      procedure GetCountryISOCode(countrycode:string; var isocode: string);
      procedure GetCountryFromISO(isocode:string; var cname: string);
-     procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
+     procedure GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; startr,limit:integer);
      procedure GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);
      function  GetCityLoc(locid:string; var loctype,latitude,longitude,elevation,timezone: string):boolean;
      function  UpdateCity(locid:integer; country,location,loctype,lat,lon,elev,tz:string):string;
@@ -85,7 +86,7 @@ type
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
      property AstMsg : string read FAstmsg write FAstmsg;
-     property ComMsg : string read FCommsg write FCommsg;
+     property ComMinDT : integer read FComMinDT write FComMinDT;
   end;
 
 implementation
@@ -1172,8 +1173,8 @@ if db.Rowcount>0 then begin
     inc(i);
   end;
 
-  if dt>1000 then begin
-     FCommsg:=rsWarningSomeC;
+  if dt<FComMindt then begin
+     FComMindt:=round(dt);
   end;
   tp:=strtofloat(trim(db.Results[j][1]));
   q:=strtofloat(trim(db.Results[j][2]));
@@ -1503,7 +1504,7 @@ begin
 cname:=db.QueryOne('select name from cdc_country where isocode = "'+isocode+'"');
 end;
 
-procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; limit:integer);
+procedure TCDCdb.GetCityList(countrycode,filter:string; codelist,citylist:Tstrings; startr,limit:integer);
 var i,k:integer;
     prev,buf,bufutf8:string;
 begin
@@ -1512,7 +1513,7 @@ codelist.Clear;
 filter:=Condutf8encode(filter);
 buf:='select locid,location,type from cdc_location where country = "'+countrycode+'" ';
 if filter<>'' then buf:=buf+' and location like "'+filter+'" ';
-buf:=buf+' order by location limit '+inttostr(limit);
+buf:=buf+' order by location limit '+inttostr(startr)+','+inttostr(limit);
 db.Query(buf);
 i:=0;
 k:=0;
@@ -1533,6 +1534,7 @@ while i<db.RowCount do begin
   citylist.add(bufutf8);
   inc(i);
 end;
+if db.RowCount>=limit then citylist.add('...');
 end;
 
 procedure TCDCdb.GetCityRange(country:string;lat1,lat2,lon1,lon2:double; codelist,citylist:Tstrings; limit:integer);

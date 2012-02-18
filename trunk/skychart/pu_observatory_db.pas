@@ -60,9 +60,10 @@ type
     procedure vicinityClick(Sender: TObject);
   private
     { private declarations }
-    CurObsId:integer;
+    CurObsId,StartSearch:integer;
     FCountryChange: TNotifyEvent;
     FObsChange: TNotifyEvent;
+    procedure DoCitySearch;
   public
     { public declarations }
     countrycode: TStringList;
@@ -382,6 +383,12 @@ var id,loctype,lati,longi,elevation,timezone:string;
     p:integer;
 begin
 if LockChange then exit;
+if citylist.ItemIndex>MaxCityList-1 then begin
+  citylist.Text:=csc.ObsName;
+  StartSearch:=StartSearch+MaxCityList-1;
+  DoCitySearch;
+  exit;
+end;
 csc.obsname:=citylist.text;
 p:=pos(' -- ',csc.obsname);
 if p>0 then delete(csc.obsname,p,99);
@@ -399,20 +406,26 @@ end
 else curobsid:=0;
 end;
 
-procedure Tf_observatory_db.citysearchClick(Sender: TObject);
+procedure Tf_observatory_db.DoCitySearch;
 var code,filter: string;
 begin
-screen.Cursor:=crHourGlass;
-try
 if countrylist.ItemIndex<0 then exit;
 lockChange:=true;
 code:=countrycode[countrylist.ItemIndex];
 filter:=cityfilter.Text;
 if filter<>'' then filter:=filter+'%';
-cdb.GetCityList(code,filter,citycode,citylist.Items,MaxCityList);
+cdb.GetCityList(code,filter,citycode,citylist.Items,StartSearch,MaxCityList);
 if citylist.Items.Count>0 then citylist.Text:=citylist.Items[0];
 lockChange:=false;
 citylistChange(self);
+end;
+
+procedure Tf_observatory_db.citysearchClick(Sender: TObject);
+begin
+screen.Cursor:=crHourGlass;
+try
+StartSearch:=0;
+DoCitySearch;
 finally
 screen.Cursor:=crDefault;
 end;

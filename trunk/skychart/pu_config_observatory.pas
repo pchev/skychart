@@ -105,6 +105,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
     procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
+    procedure ObsNameChange(Sender: TObject);
     procedure TZComboBoxChange(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -182,7 +183,7 @@ long.items[1]:=rsEast;
 Label70.caption:=rsMeters;
 timezone.caption:=rsTimeZone;
 CountryTZ.Caption:=rsCountryTimez;
-Obsmap.caption:=rsLoad;
+Obsmap.caption:=rsMap;
 refraction.caption:=rsAtmosphericR;
 Label82.caption:=rsPressureMill;
 Label83.caption:=rsTemperatureC;
@@ -405,6 +406,11 @@ procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
 begin
  if LockChange then exit;
  cmain.horizonfile:=value;
+end;
+
+procedure Tf_config_observatory.ObsNameChange(Sender: TObject);
+begin
+  csc.ObsName:=ObsName.Text;
 end;
 
 procedure Tf_config_observatory.Button2Click(Sender: TObject);

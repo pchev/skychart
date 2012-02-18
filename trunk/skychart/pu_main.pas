@@ -976,7 +976,9 @@ function Tf_main.GetUniqueName(cname:string; forcenumeric:boolean):string;
 var xname: array of string;
     i,n : integer;
     ok: boolean;
+    sep: string;
 begin
+if copy(cname,length(cname),1)='_' then sep:='' else sep:='_';
 setlength(xname,MultiDoc1.ChildCount);
 for i:=0 to MultiDoc1.ChildCount-1 do xname[i]:=MultiDoc1.Childs[i].caption;
 if forcenumeric then n:=1
@@ -984,7 +986,7 @@ if forcenumeric then n:=1
 repeat
   ok:=true;
   if n=0 then result:=cname
-         else result:=cname+inttostr(n);
+         else result:=cname+sep+inttostr(n);
   for i:=0 to MultiDoc1.ChildCount-1 do
      if xname[i]=result then ok:=false;
   inc(n);
@@ -2855,6 +2857,9 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
      {$endif}
      sc.cfgsc.TrackOn:=true;
      Refresh;
+  end else begin
+    sc.cfgsc.TrackOn:=false;
+    UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiDoc1.ActiveObject);
   end;
 end;
 end;
@@ -3779,9 +3784,9 @@ end;
 
 procedure Tf_main.activateconfig(cmain:Tconf_main; csc:Tconf_skychart; ccat:Tconf_catalog; cshr:Tconf_shared; cplot:Tconf_plot; cdss:Tconf_dss; applyall:boolean );
 var i:integer;
-  themechange,langchange,starchange: Boolean;
+  dbchange,themechange,langchange,starchange: Boolean;
 begin
-    themechange:=false; langchange:=false; starchange:=false;
+    dbchange:=false; themechange:=false; langchange:=false; starchange:=false;
     if cmain<>nil then begin
       if (cfgm.language<>cmain.language) then langchange:=true;
     end;
@@ -3793,6 +3798,12 @@ begin
          then themechange:=true;
       if cfgm.starshape_file<>cmain.starshape_file then
          starchange:=true;
+      if (cfgm.dbhost<>cmain.dbhost) or
+         (cfgm.db<>cmain.db) or
+         (cfgm.dbuser<>cmain.dbuser) or
+         (cfgm.dbpass<>cmain.dbpass) or
+         (cfgm.dbport<>cmain.dbport)
+         then dbchange:=true;
       cfgm.Assign(cmain);
       AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
     end;
@@ -3835,7 +3846,7 @@ begin
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     f_search.init;
-    ConnectDB;
+    if dbchange then ConnectDB;
     if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
        sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
@@ -3991,7 +4002,7 @@ end;
 
 Procedure Tf_main.SetLPanel1(txt1:string; origin:string='';sendmsg:boolean=false;Sender: TObject=nil; txt2:string='');
 var txt,buf,buf1,buf2,k: string;
-    p,l: integer;
+    p: integer;
 begin
 if (trim(txt1)>'') then writetrace(txt1);
 if txt2='' then begin
@@ -7238,8 +7249,11 @@ for i:=0 to MultiDoc1.ChildCount-1 do
       sc.cfgsc.FindPM:=false;
       sc.cfgsc.FindOK:=true;
       sc.cfgsc.FindSize:=0;
+      sc.cfgsc.TrackName:='';
+      sc.cfgsc.TrackType:=0;
       ShowIdentLabel;
       identlabelClick(nil);
+      UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiDoc1.Childs[i].DockedObject);
       break;
 end;
 end;
