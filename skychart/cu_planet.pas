@@ -1867,7 +1867,7 @@ var ra,dec,dist,r,elong,phase,magn,jdt,st0,q : double;
 begin
 try
 while lockdb do application.ProcessMessages; lockdb:=true;
-cdb.ComMsg:='';
+cdb.ComMinDT:=MaxInt;
 cfgsc.com_day:='cdc_com_day_'+cfgsc.chartname;
 cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
 cfgsc.CometNb:=0;
@@ -1940,7 +1940,8 @@ if db2.Rowcount>0 then begin
   end;
 end;
 cfgsc.CometNb:=db2.Rowcount;
-cfgsc.msg:=cfgsc.msg+blank+cdb.ComMsg;
+if cdb.ComMinDT>1000 then
+   cfgsc.msg:=cfgsc.msg+blank+rsWarningSomeC;
 finally
   lockdb:=false;
 end;
