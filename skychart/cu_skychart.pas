@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_translation, gcatunit,
-     BGRABitmap, BGRABitmapTypes,
+     BGRABitmap, BGRABitmapTypes, contnrs,
      cu_plot, cu_catalog, cu_fits, u_constant, cu_planet, cu_database, u_projection, u_util,
      pu_addlabel, SysUtils, Classes, Math, Types, Buttons, dialogs,
      Forms, StdCtrls, Controls, ExtCtrls, Graphics, FPImage, LCLType, IntfGraphics;
@@ -874,12 +874,14 @@ var
   ra,dec,x1,y1: Double;
   xx,yy : single;
   lid,i : integer;
+  lis:string;
 begin
 result:=false;
 for i:=1 to cfgsc.numcustomlabels do begin
  ra:=cfgsc.customlabels[i].ra;
  dec:=cfgsc.customlabels[i].dec;
- lid:=trunc(1e5*ra)+trunc(1e5*dec);
+ lis:=cfgsc.customlabels[i].txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+ lid:=rshash(lis,$7FFFFFFF);
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
@@ -896,7 +898,7 @@ var rec:GcatRec;
   j,lid,saveplot : integer;
   first,saveusebmp: boolean;
   firstcat:TSname;
-  gk: string;
+  gk,lis: string;
   al: TLabelAlign;
   p: coordvector;
 begin
@@ -932,7 +934,8 @@ if Fcatalog.OpenStar then
     firstcat:=rec.options.ShortName;
     first:=false;
  end;
- lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+ lis:=rec.star.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
+ lid:=rshash(lis,$7FFFFFFF);
  pra:=rec.ra;
  pdec:=rec.dec;
  if cfgsc.PMon or cfgsc.DrawPMon then begin
@@ -991,6 +994,7 @@ var rec:GcatRec;
   xx,yy:single;
   lid: integer;
   saveusebmp: boolean;
+  lis:string;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
@@ -1004,7 +1008,8 @@ if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp t
 end;
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
- lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+ lis:=rec.variable.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
+ lid:=rshash(lis,$7FFFFFFF);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
@@ -1032,6 +1037,7 @@ var rec:GcatRec;
   xx,yy:single;
   lid: integer;
   saveusebmp: boolean;
+  lis:string;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
@@ -1045,7 +1051,8 @@ if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp t
 end;
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
- lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+ lis:=rec.double.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
+ lid:=rshash(lis,$7FFFFFFF);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
  if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
  projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
@@ -1088,8 +1095,8 @@ function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de: Double;
   x,y,xx,yy,sz:single;
-  i, lid, save_nebplot: integer;
-  imgfile,CurrentCat: string;
+  lid, save_nebplot: integer;
+  imgfile,CurrentCat,lis: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
   al,alsac: TLabelAlign;
@@ -1153,7 +1160,8 @@ var rec:GcatRec;
     if Fcatalog.OpenNeb then
       while Fcatalog.readneb(rec) do
         begin
-          lid:=trunc(1e5*rec.ra)+trunc(1e5*rec.dec);
+          lis:=rec.neb.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
+          lid:=rshash(lis,$7FFFFFFF);
           precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
           if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,true);
           projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
@@ -1432,9 +1440,9 @@ var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
   ppa,poleincl,sunincl,w1,w2,w3 : double;
   xx,yy:single;
-  i,j,n,ipla,sunsize: integer;
+  i,j,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
-  ltxt: string;
+  ltxt,lis: string;
 begin
 {$ifdef trace_debug}
  WriteTrace('SkyChart '+cfgsc.chartname+': draw planets');
@@ -1484,7 +1492,9 @@ for j:=0 to cfgsc.SimNb-1 do begin
           if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
              else ltxt:=ltxt+formatfloat(f1,magn);
       end;
-      SetLabel((j+1)*1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
+      lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+      lid:=rshash(lis,$7FFFFFFF);
+      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
     end;
     case ipla of
       4 :  begin
@@ -1543,18 +1553,23 @@ begin
  penumbra:=umbra+1.07*deg2rad;  // + 2x sun diameter
  pixscale:=abs(cfgsc.BxGlb);
  Fplot.PlotEarthShadow(xx,yy,umbra,penumbra,pixscale);
-// SetLabel(1000032,xx,yy,round(pixscale*penumbra/2),2,5,'Earth Shadow');
 end;
 
 Procedure Tskychart.DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
 var
   x1,y1 : double;
   xx,yy : single;
+  lid:integer;
+  lis:string;
 begin
 projection(ra,dec,x1,y1,true,cfgsc) ;
 WindowXY(x1,y1,xx,yy,cfgsc);
 Fplot.PlotSatel(xx,yy,ipla,pixscale,ma,diam,hidesat,showhide);
-if not(hidesat xor showhide)and(j=0) then SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
+if not(hidesat xor showhide)and(j=0) then begin
+  lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+  lid:=rshash(lis,$7FFFFFFF);
+  SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
+end;
 end;
 
 function Tskychart.DrawAsteroid :boolean;
@@ -1562,7 +1577,7 @@ var
   x1,y1,ra,dec,magn: Double;
   xx,yy:single;
   i,j,lid: integer;
-  ltxt:string;
+  ltxt,lis:string;
 begin
 if cfgsc.ShowAsteroidValid then begin
 {$ifdef trace_debug}
@@ -1580,7 +1595,8 @@ if cfgsc.ShowAsteroidValid then begin
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
         if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
-          lid:=GetId(cfgsc.AsteroidName[j,i,1]);
+          lis:=cfgsc.AsteroidName[j,i,1]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+          lid:=rshash(lis,$7FFFFFFF);
           if cfgsc.SimNb=1 then ltxt:=cfgsc.AsteroidName[j,i,2]
           else begin
            if cfgsc.SimNameLabel then
@@ -1609,7 +1625,7 @@ var
   x1,y1: Double;
   xx,yy,cxx,cyy:single;
   i,j,lid,sz : integer;
-  ltxt:string;
+  ltxt,lis:string;
 begin
 if cfgsc.ShowCometValid then begin
   {$ifdef trace_debug}
@@ -1623,7 +1639,8 @@ if cfgsc.ShowCometValid then begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and((cfgsc.SimNb>1)or(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5])) then begin
-          lid:=GetId(cfgsc.CometName[j,i,1]);
+          lis:=cfgsc.CometName[j,i,1]+FormatFloat(f6,cfgsc.CometLst[j,i,1])+FormatFloat(f6,cfgsc.CometLst[j,i,2]);
+          lid:=rshash(lis,$7FFFFFFF);
           sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
           if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
           else begin
@@ -1658,7 +1675,7 @@ var
    x1,y1 : double;
    xx,yy,xp,yp:single;
    line,showlabel : boolean;
-   nom,buf,mm,dat,last : string;
+   nom,buf,mm,dat,last,lis : string;
    i,lid : integer;
    f : textfile;
 const mois : array[1..12]of string = ('Jan ','Feb ','Mar ','Apr ','May ','June','July','Aug ','Sept','Oct ','Nov ','Dec ');
@@ -1708,7 +1725,8 @@ if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
        end;
        Fplot.PlotStar(xx,yy,ma,0);
        if showlabel then begin
-         lid:=GetId(nom);
+         lis:=nom+FormatFloat(f6,ar)+FormatFloat(f6,de);
+         lid:=rshash(lis,$7FFFFFFF);
          SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
        end;
     end;
@@ -1725,7 +1743,8 @@ if cfgsc.IridiumMA<90 then begin
   windowxy(x1,y1,xx,yy,cfgsc);
   if (xx>-2*cfgsc.xmax)and(yy>-2*cfgsc.ymax)and(xx<3*cfgsc.xmax)and(yy<3*cfgsc.ymax) then begin
      Fplot.PlotStar(xx,yy,cfgsc.IridiumMA,0);
-     lid:=GetId(nom);
+     lis:=nom+FormatFloat(f6,cfgsc.IridiumRA)+FormatFloat(f6,cfgsc.IridiumDE);
+     lid:=rshash(lis,$7FFFFFFF);
      SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
   end;
 end;
@@ -3537,6 +3556,7 @@ Procedure Tskychart.InitLabels;
 var i,lid : integer;
     xx,yy:single;
     ra,de,x1,y1:double;
+    lis:string;
 begin
   {$ifdef trace_debug}
    WriteTrace('SkyChart '+cfgsc.chartname+': Init labels');
@@ -3548,7 +3568,8 @@ begin
       precession(jd2000,cfgsc.JDChart,ra,de);
       projection(ra,de,x1,y1,true,cfgsc) ;
       WindowXY(x1,y1,xx,yy,cfgsc);
-      lid:=GetId(Fcatalog.cfgshr.ConstelName[i,2]);
+      lis:=Fcatalog.cfgshr.ConstelName[i,2]+FormatFloat(f6,ra)+FormatFloat(f6,de);
+      lid:=rshash(lis,$7FFFFFFF);
       if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter)
                               else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter);
   end;
@@ -3714,9 +3735,8 @@ var i,lid: integer;
     x1,y1: double;
     x,y: single;
     fontnum:byte;
-    txt: string;
+    txt,lis: string;
 begin
-lid:=trunc(1e5*ra)+trunc(1e5*dec);
 projection(ra,dec,x1,y1,true,cfgsc) ;
 ra:=NormRA(ra);
 WindowXY(x1,y1,x,y,cfgsc);
@@ -3737,6 +3757,8 @@ if f_addlabel.ShowModal=mrOK then begin
    cfgsc.customlabels[i].labelnum:=f_addlabel.labelnum;
    cfgsc.customlabels[i].txt:=txt;
    cfgsc.customlabels[i].align:=f_addlabel.Lalign;
+   lis:=txt+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+   lid:=rshash(lis,$7FFFFFFF);
    SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align);
    DrawLabels;
 {$ifdef trace_debug}
@@ -4108,7 +4130,7 @@ var x1,y1,x2,y2,r : double;
     spa,cpa:extended;
     p : array [0..4] of Tpoint;
     col: TColor;
-    lbl: string;
+    lbl,lis: string;
 begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
@@ -4138,7 +4160,8 @@ for i:=1 to 10 do if cfgsc.circleok[i] then begin
         sz:=trunc(abs(cfgsc.BxGlb*r));
         xla:=abs(xa+xb)/2;
         yla:=abs(ya+yb)/2;
-        lid:=GetId(cfgsc.circlelbl[i]);
+        lis:=cfgsc.circlelbl[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
+        lid:=rshash(lis,$7FFFFFFF);
         if sz>=20 then SetLabel(lid,xla,yla,sz,2,7,lbl,laBottom);
       end;
     end;
@@ -4178,7 +4201,8 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
         xla:=abs(p[0].X+p[1].X)/2;
         yla:=abs(p[0].Y+p[1].Y)/2;
         sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
-        lid:=GetId(cfgsc.rectanglelbl[i]);
+        lis:=cfgsc.rectanglelbl[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
+        lid:=rshash(lis,$7FFFFFFF);
         if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom);
       end;
     end;
