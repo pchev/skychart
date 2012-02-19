@@ -12,7 +12,7 @@ version=0.0
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options= -MObjFPC -Sgi
+options= -MObjFPC -O1 -Sgi
 
 [target]
 units=mrecsort.pas
