@@ -1114,13 +1114,13 @@ if c.Force_DT_UT then
   result:=c.DT_UT_val
 else begin
   { Reference  :
-  NASA/TP2006214141
+  NASA TP-2006-214141
   Five Millennium Canon of Solar Eclipses: 1999 to +3000 (2000 BCE to 3000 CE)
   Fred Espenak and Jean Meeus
   }
   y:=year+(month-0.5)/12;
   case year of
-  -MaxInt..-501:begin
+  minyeardt..-501:begin
                 u:=(y-1820)/100;
                 result:=(-20+32*u*u)/3600;
                 end;
@@ -1186,10 +1186,11 @@ else begin
                 result:=(-20+32*u*u-0.5788*t)/3600;
                 //result:=(-20+32*u*u-0.5628*t)/3600;
                 end;
-  2150..MaxInt: begin
+  2150..maxyeardt: begin
                 u:=(y-1820)/100;
                 result:=(-20+32*u*u)/3600;
                 end;
+  else  result:=0; // we don't need deltat for very distant epoch as there is no available ephemeris
   end;
 end;
 end;
