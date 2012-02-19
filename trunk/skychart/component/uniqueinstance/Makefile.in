@@ -12,7 +12,7 @@ version=0.2
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
 unitdir=$(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options=-dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
+options=-dLCL -dLCL$(LCL_PLATFORM) -O1 -MObjFPC -Sgi
 
 [target]
 units=uniqueinstance_package.pas

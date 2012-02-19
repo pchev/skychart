@@ -29,7 +29,7 @@ units=cdccomponents.pas
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
 unitdir=uniqueinstance/lib/$(CPU_TARGET)-$(OS_TARGET)/ thtmlport/package/units/$(CPU_TARGET)-$(OS_TARGET)/ jdcalendar/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ downloaddialog/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ bgrabitmap/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ enhedits/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ libsql/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ mrecsort/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ multidoc/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ radec/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ zoomimage/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ vo/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ xmlparser/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -MObjFPC -Sgi
+options=-dUseCThreads -dLCL -dLCL$(LCL_PLATFORM) -O1 -MObjFPC -Sgi
 
 [clean]
 files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
