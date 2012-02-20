@@ -1,7 +1,7 @@
 object f_observatory_db: Tf_observatory_db
-  Left = 45
+  Left = 618
   Height = 291
-  Top = 0
+  Top = 71
   Width = 488
   BorderStyle = bsToolWindow
   Caption = 'f_observatory_db'
@@ -20,23 +20,23 @@ object f_observatory_db: Tf_observatory_db
     TabOrder = 0
     object Label2: TLabel
       Left = 320
-      Height = 18
+      Height = 17
       Top = 85
-      Width = 21
+      Width = 18
       Caption = '+/-'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 428
-      Height = 18
+      Height = 17
       Top = 85
-      Width = 26
+      Width = 23
       Caption = 'Km.'
       ParentColor = False
     end
     object citylist: TComboBox
       Left = 8
-      Height = 25
+      Height = 28
       Top = 41
       Width = 233
       AutoComplete = True
@@ -59,7 +59,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object countrylist: TComboBox
       Left = 8
-      Height = 27
+      Height = 30
       Top = 1
       Width = 234
       DropDownCount = 10
@@ -70,7 +70,7 @@ object f_observatory_db: Tf_observatory_db
     end
     object cityfilter: TEdit
       Left = 254
-      Height = 25
+      Height = 26
       Top = 41
       Width = 104
       OnKeyDown = cityfilterKeyDown
@@ -109,7 +109,7 @@ object f_observatory_db: Tf_observatory_db
     object LocCode: TEdit
       Cursor = crHandPoint
       Left = 133
-      Height = 25
+      Height = 26
       Top = 83
       Width = 108
       Color = clBtnFace
@@ -131,14 +131,14 @@ object f_observatory_db: Tf_observatory_db
     end
     object vicinityrangeEdit: TEdit
       Left = 345
-      Height = 25
+      Height = 26
       Top = 83
       Width = 56
       TabOrder = 9
     end
     object vicinityrange: TUpDown
       Left = 401
-      Height = 25
+      Height = 26
       Top = 83
       Width = 17
       Associate = vicinityrangeEdit
@@ -159,9 +159,9 @@ object f_observatory_db: Tf_observatory_db
     end
     object Label1: TLabel
       Left = 8
-      Height = 18
+      Height = 17
       Top = 85
-      Width = 114
+      Width = 109
       Caption = 'Designation Code'
       ParentColor = False
     end
@@ -171,20 +171,20 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Latitude'
-      ClientHeight = 49
+      ClientHeight = 50
       ClientWidth = 181
       TabOrder = 12
       object Label58: TLabel
         Left = 4
-        Height = 18
+        Height = 17
         Top = 4
-        Width = 48
+        Width = 47
         Caption = 'Degree'
         ParentColor = False
       end
       object hemis: TComboBox
         Left = 112
-        Height = 25
+        Height = 28
         Top = 19
         Width = 65
         AutoCompleteText = [cbactSearchAscending]
@@ -200,7 +200,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latdeg: TLongEdit
         Left = 4
-        Height = 25
+        Height = 26
         Hint = '0..90'
         Top = 20
         Width = 33
@@ -214,7 +214,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latmin: TLongEdit
         Left = 48
-        Height = 25
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -228,7 +228,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object latsec: TLongEdit
         Left = 80
-        Height = 25
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -247,20 +247,20 @@ object f_observatory_db: Tf_observatory_db
       Top = 114
       Width = 185
       Caption = 'Longitude'
-      ClientHeight = 49
+      ClientHeight = 50
       ClientWidth = 181
       TabOrder = 13
       object Label61: TLabel
         Left = 4
-        Height = 18
+        Height = 17
         Top = 4
-        Width = 48
+        Width = 47
         Caption = 'Degree'
         ParentColor = False
       end
       object long: TComboBox
         Left = 112
-        Height = 25
+        Height = 28
         Top = 19
         Width = 65
         AutoCompleteText = [cbactSearchAscending]
@@ -276,7 +276,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longdeg: TLongEdit
         Left = 4
-        Height = 25
+        Height = 26
         Hint = '0..180'
         Top = 20
         Width = 33
@@ -290,7 +290,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longmin: TLongEdit
         Left = 48
-        Height = 25
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25
@@ -304,7 +304,7 @@ object f_observatory_db: Tf_observatory_db
       end
       object longsec: TLongEdit
         Left = 80
-        Height = 25
+        Height = 26
         Hint = '0..59'
         Top = 20
         Width = 25

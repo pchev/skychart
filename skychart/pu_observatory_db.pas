@@ -254,11 +254,17 @@ obslock:=false;
 end;
 
 procedure Tf_observatory_db.FormShow(Sender: TObject);
+var cntrychange: boolean;
 begin
   LockChange:=true;
   cityfilter.text:=copy(csc.obsname,1,3);
+  cntrychange:=(countrylist.Items.Count>0)and(uppercase(trim(countrylist.Text))<>uppercase(trim(csc.obscountry)));
   ShowObservatory;
   showobscoord;
+  if cntrychange then begin
+    cityfilter.Text:='';
+    citysearchClick(Sender);
+  end;
   if cityfilter.Text='-' then begin
      cityfilter.Text:='';
      citysearchClick(Sender);
