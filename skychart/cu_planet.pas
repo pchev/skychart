@@ -1705,8 +1705,10 @@ end else begin
   currentjd:=-99999999;
   currentmag:=-999;
 end;
-if (currentjd=trunc(newjd))and(currentmag=lmag) then result:=true
- else begin
+if (currentjd=trunc(newjd))and(currentmag=lmag) then begin
+  result:=true;
+  cdb.ComMinDT:=0;
+end else begin
      if cfgsc.com_day<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_day+'"') then
         db1.Query('CREATE TABLE '+cfgsc.com_day+create_table_com_day);
      if cfgsc.com_daypos<>db1.QueryOne(showtable[DBtype]+' "'+cfgsc.com_daypos+'"') then begin
