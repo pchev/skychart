@@ -46,6 +46,7 @@ type
     Button7: TButton;
     Button8: TButton;
     ComboBox1: TComboBox;
+    countrylist: TComboBox;
     CountryTZ: TCheckBox;
     DownloadDialog1: TDownloadDialog;
     Label2: TLabel;
@@ -102,6 +103,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure ComboBox1Select(Sender: TObject);
+    procedure countrylistSelect(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
     procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
@@ -136,13 +138,16 @@ type
     Obsposx,Obsposy : integer;
     scrollw, scrollh : integer;
     ObsMapFile:string;
+    countrycode: TStringList;
     Procedure SetScrollBar;
     Procedure SetObsPos;
     Procedure ShowObsCoord;
     procedure CenterObs;
     procedure ShowHorizon;
     procedure ShowObservatory;
+    procedure ShowCountryList;
     procedure UpdTZList(Sender: TObject);
+    procedure UpdTZList1(Sender: TObject);
     procedure UpdFavList;
     procedure CountryChange(Sender: TObject);
     procedure ObsChange(Sender: TObject);
@@ -233,6 +238,7 @@ end;
 procedure Tf_config_observatory.FormDestroy(Sender: TObject);
 begin
 mycsc.Free;
+countrycode.Free;
 end;
 
 procedure Tf_config_observatory.FormCreate(Sender: TObject);
@@ -242,6 +248,7 @@ LockChange:=true;
 f_observatory_db:=Tf_observatory_db.Create(self);
 f_observatory_db.onCountryChange:=CountryChange;
 f_observatory_db.onObsChange:=ObsChange;
+countrycode:=TStringList.Create;
 end;
 
 procedure Tf_config_observatory.FormShow(Sender: TObject);
@@ -301,6 +308,19 @@ ZoomImage1.Draw;
 SetScrollBar;
 end;
 
+procedure Tf_config_observatory.ShowCountryList;
+var i: integer;
+begin
+CountryTZ.checked:=csc.countrytz;
+if countrylist.Items.Count=0 then cdb.GetCountryList(countrycode,countrylist.Items);
+countrylist.itemindex:=0;
+for i:=0 to countrylist.items.count-1 do
+  if uppercase(trim(countrylist.Items[i]))=uppercase(trim(csc.obscountry)) then begin
+    countrylist.itemindex:=i;
+    break;
+  end;
+end;
+
 procedure Tf_config_observatory.ShowObservatory;
 var img:TJPEGImage;
     pict:TPicture;
@@ -309,7 +329,7 @@ try
 pressure.value:=csc.obspressure;
 temperature.value:=csc.obstemperature;
 ShowObsCoord;
-CountryTZ.checked:=csc.countrytz;
+ShowCountryList;
 UpdTZList(self);
 ObsName.text:=csc.obsname;
 UpdFavList;
@@ -363,6 +383,32 @@ begin
 if f_observatory_db.countrylist.ItemIndex<0 then exit;
 if CountryTZ.Checked then begin
    code:=f_observatory_db.countrycode[f_observatory_db.countrylist.ItemIndex];
+   cdb.GetCountryISOCode(code,isocode);
+end else begin
+   isocode:='ZZ';
+end;
+TZComboBox.Clear;
+j:=0;
+for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
+  if csc.tz.ZoneTabCnty[i]=isocode then begin
+     buf:=csc.tz.ZoneTabZone[i];
+     if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+     TZComboBox.Items.Add(buf);
+     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ)or((isocode='ZZ')and(j=12)) then TZComboBox.ItemIndex:=j;
+     inc(j);
+  end;
+end;
+TZComboBoxChange(Sender);
+end;
+
+procedure Tf_config_observatory.UpdTZList1(Sender: TObject);
+// same as UpdTZList but using local country selection
+var code, isocode,buf: string;
+    i,j: integer;
+begin
+if countrylist.ItemIndex<0 then exit;
+if CountryTZ.Checked then begin
+   code:=countrycode[countrylist.ItemIndex];
    cdb.GetCountryISOCode(code,isocode);
 end else begin
    isocode:='ZZ';
@@ -446,6 +492,7 @@ end else begin
   f_observatory_db.ShowObservatory;
 end;
 ObsName.Text:=csc.ObsName;
+ShowCountryList;
 UpdTZList(nil);
 ShowObsCoord;
 SetObsPos;
@@ -549,6 +596,17 @@ begin
   SetObsPos;
   CenterObs;
   UpdTZList(sender);
+end;
+
+procedure Tf_config_observatory.countrylistSelect(Sender: TObject);
+begin
+  if lockChange then exit;
+  if countrylist.ItemIndex<0 then exit;
+  try
+  csc.obscountry:=countrylist.text;
+  UpdTZList1(self);
+  except
+  end;
 end;
 
 procedure Tf_config_observatory.UpdFavList;
