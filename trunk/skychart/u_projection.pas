@@ -761,7 +761,7 @@ const
 begin
 if dist>1e-5 then begin
 // AR, DE may be standard epoch but paralaxe is to be computed with coordinates of the date.
-precession(c.JDchart,c.curjd,ar1,de1);
+precession(c.JDchart,c.CurJDUT,ar1,de1);
 H:=(SideralTime-ar1);
 //rde:=de1;
 sinpi:=desinpi/dist;
@@ -771,7 +771,7 @@ d := sin(de1)-c.ObsRoSinPhi*sinpi;
 q := sqrt(a*a+b*b+d*d);
 ar:=SideralTime-arctan2(a,b);
 de:=double(arcsin(d/q));
-precession(c.curjd,c.JDchart,ar,de);
+precession(c.CurJDUT,c.JDchart,ar,de);
 end else begin
   ar:=ar1;
   de:=de1;

@@ -498,15 +498,15 @@ begin
 {$endif}
 if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
-cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
+cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
+cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
-if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
+if cfgsc.CurJDTT<>cfgsc.LastJD then begin // thing to do when the date change
    cfgsc.FindOk:=false;    // last search no longuer valid
    if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid
 end;
-cfgsc.LastJD:=cfgsc.CurJD;
+cfgsc.LastJD:=cfgsc.CurJDTT;
 if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
-   // cfgsc.JDChart:=cfgsc.CurJD;
    cfgsc.JDChart:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);  // UT
    cfgsc.EquinoxName:=rsDate;
 end else begin
@@ -692,8 +692,8 @@ cfgsc.eqeq:=cfgsc.nutl*cos(cfgsc.ecl);
 // Sidereal time
 cfgsc.CurST:=Sidtim(cfgsc.jd0,cfgsc.CurTime-cfgsc.TimeZone,cfgsc.ObsLongitude,cfgsc.eqeq);
 // Sun geometric longitude eq. of date for aberration
-fplanet.sunecl(cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
-PrecessionEcl(jd2000,cfgsc.CurJd,cfgsc.sunl,cfgsc.sunb);
+fplanet.sunecl(cfgsc.CurJDTT,cfgsc.sunl,cfgsc.sunb);
+PrecessionEcl(jd2000,cfgsc.CurJDUT,cfgsc.sunl,cfgsc.sunb);
 // Can compute planet?
 cfgsc.ephvalid:=(Fplanet.eph_method>'');
 cfgsc.ShowPlanetValid:=cfgsc.ShowPlanet and cfgsc.ephvalid;
@@ -704,7 +704,7 @@ cfgsc.ShowEclipticValid:=cfgsc.ShowEcliptic and cfgsc.ephvalid;
 Fplot.cfgplot.autoskycolorValid:=Fplot.cfgplot.autoskycolor and cfgsc.ephvalid;
 // aberration and light deflection constant
 if cfgsc.ApparentPos then
-   Fplanet.aberration(cfgsc.CurJd,cfgsc.abv,cfgsc.ehn,cfgsc.ab1,cfgsc.abe,cfgsc.abp,cfgsc.gr2e,cfgsc.abm,cfgsc.asl)
+   Fplanet.aberration(cfgsc.CurJDTT,cfgsc.abv,cfgsc.ehn,cfgsc.ab1,cfgsc.abe,cfgsc.abp,cfgsc.gr2e,cfgsc.abm,cfgsc.asl)
 else begin
    cfgsc.abe:=0;
    cfgsc.abp:=0;
@@ -712,7 +712,7 @@ else begin
    cfgsc.asl:=false;
 end;
 // Earth barycentric position in parsec for parallax
-fplanet.SunRect(cfgsc.CurJd,false,v1,v2,v3,true);
+fplanet.SunRect(cfgsc.CurJDTT,false,v1,v2,v3,true);
 cfgsc.EarthB[1]:=-v1*au2parsec;
 cfgsc.EarthB[2]:=-v2*au2parsec;
 cfgsc.EarthB[3]:=-v3*au2parsec;
@@ -740,7 +740,7 @@ end;
          // comet
          if cdb.GetComElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2) then begin
             Fplanet.InitComet(v1,v2,v3,v4,v5,v6,v7,v8,v9,s1);
-            Fplanet.Comet(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12);
+            Fplanet.Comet(cfgsc.CurJDTT,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12);
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
@@ -756,7 +756,7 @@ end;
          // asteroid
          if cdb.GetAstElem(cfgsc.TrackId,cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s1,s2,s3) then begin
             Fplanet.InitAsteroid(cfgsc.TrackEpoch,v1,v2,v3,v4,v5,v6,v7,v8,v9,s2);
-            Fplanet.Asteroid(cfgsc.CurJd,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7);
+            Fplanet.Asteroid(cfgsc.CurJDTT,true,a,d,dist,v1,v2,v3,v4,v5,v6,v7);
             precession(jd2000,cfgsc.JDChart,a,d);
             cfgsc.LastJDChart:=cfgsc.JDChart;
             if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,a,d,a,d,v1,cfgsc);
@@ -1504,7 +1504,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
            end;
       5 :  begin
             if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2, Fplanet.JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJD),0,0,cfgsc.WhiteBg);
+            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2, Fplanet.JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJDTT),0,0,cfgsc.WhiteBg);
             if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
            end;
       6 :  begin

@@ -2406,20 +2406,20 @@ begin
 // tag is used for the sign
 mult:=TAction(sender).tag*TimeVal.Position;
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   djd(sc.cfgsc.CurJD,y,m,d,hh);
+   djd(sc.cfgsc.CurJDUT,y,m,d,hh);
    DtoS(hh,h,n,s);
    case TimeU.itemindex of
    0 : begin
-       SetJD(sc.cfgsc.CurJD+mult/24);
+       SetJD(sc.cfgsc.CurJDUT+mult/24);
        end;
    1 : begin
-       SetJD(sc.cfgsc.CurJD+mult/1440);
+       SetJD(sc.cfgsc.CurJDUT+mult/1440);
        end;
    2 : begin
-       SetJD(sc.cfgsc.CurJD+mult/86400);
+       SetJD(sc.cfgsc.CurJDUT+mult/86400);
        end;
    3 : begin
-       SetJD(sc.cfgsc.CurJD+mult);
+       SetJD(sc.cfgsc.CurJDUT+mult);
        end;
    4 : begin
        inc(m,mult);
@@ -2429,11 +2429,11 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
        inc(y,mult);
        SetDateUT(y,m,d,h,n,s);
        end;
-   6 : SetJD(sc.cfgsc.CurJD+mult*365.25);      // julian year
-   7 : SetJD(sc.cfgsc.CurJD+mult*365.2421988); // tropical year
-   8 : SetJD(sc.cfgsc.CurJD+mult*0.99726956633); // sideral day
-   9 : SetJD(sc.cfgsc.CurJD+mult*29.530589);   // synodic month
-   10: SetJD(sc.cfgsc.CurJD+mult*6585.321);    // saros
+   6 : SetJD(sc.cfgsc.CurJDUT+mult*365.25);      // julian year
+   7 : SetJD(sc.cfgsc.CurJDUT+mult*365.2421988); // tropical year
+   8 : SetJD(sc.cfgsc.CurJDUT+mult*0.99726956633); // sideral day
+   9 : SetJD(sc.cfgsc.CurJDUT+mult*29.530589);   // synodic month
+   10: SetJD(sc.cfgsc.CurJDUT+mult*6585.321);    // saros
    end;
 end;
 end;
@@ -2587,7 +2587,7 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       f_info.setpage(2);
       f_info.show;
       f_info.ProgressMemo.lines.add(rsComputeAster);
-      if Planet.PrepareAsteroid(sc.cfgsc.curjd, f_info.ProgressMemo.lines) then begin
+      if Planet.PrepareAsteroid(sc.cfgsc.curjdtt, f_info.ProgressMemo.lines) then begin
          sc.cfgsc.ShowAsteroid:=true;
          Refresh;
       end;

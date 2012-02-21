@@ -611,7 +611,7 @@ type
                 xmin,xmax,ymin,ymax,xshift,yshift,FieldNum,winx,winy,wintop,winleft,FindType,FindIpla : integer;
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindRA2000,FindDec2000,FindPX,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
-                TimeZone,DT_UT,CurST,CurJD,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec,FindPMra,FindPMde,FindPMEpoch,FindPMpx,FindPMrv,FindDist : Double;
+                TimeZone,DT_UT,CurST,CurJDTT,CurJDUT,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec,FindPMra,FindPMde,FindPMEpoch,FindPMpx,FindPMrv,FindDist : Double;
                 DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,ShowLegend,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM,FindStarPM,FindPMfullmotion : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindDesc2,FindNote,FindCat,FindCatname : string;
                 BGalpha: integer;
@@ -1559,7 +1559,8 @@ Commagdiff:=Source.Commagdiff ;
 TimeZone:=Source.TimeZone ;
 DT_UT:=Source.DT_UT ;
 CurST:=Source.CurST ;
-CurJD:=Source.CurJD ;
+CurJDTT:=Source.CurJDTT ;
+CurJDUT:=Source.CurJDUT ;
 LastJD:=Source.LastJD ;
 jd0:=Source.jd0 ;
 JDChart:=Source.JDChart ;
