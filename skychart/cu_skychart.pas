@@ -498,7 +498,7 @@ begin
 {$endif}
 if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
-cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);
+cfgsc.CurJD:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 if cfgsc.CurJD<>cfgsc.LastJD then begin // thing to do when the date change
    cfgsc.FindOk:=false;    // last search no longuer valid
@@ -507,7 +507,7 @@ end;
 cfgsc.LastJD:=cfgsc.CurJD;
 if (Fcatalog.cfgshr.Equinoxtype=2) then begin  // use equinox of the date
    // cfgsc.JDChart:=cfgsc.CurJD;
-   cfgsc.JDChart:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);
+   cfgsc.JDChart:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);  // UT
    cfgsc.EquinoxName:=rsDate;
 end else begin
    cfgsc.JDChart:=Fcatalog.cfgshr.DefaultJDChart;
