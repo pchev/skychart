@@ -794,7 +794,7 @@ try
 while lockpla do application.ProcessMessages; lockpla:=true;
 cfgsc.SimNb:=min(cfgsc.SimNb,MaxPlSim);
 for j:=0 to cfgsc.SimNb-1 do begin
- jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+ jdt:=cfgsc.CurJDTT+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
  st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
  // Sun first
  ipla:=10;
@@ -1797,7 +1797,7 @@ cfgsc.ast_daypos:='cdc_ast_day_pos_'+cfgsc.chartname;
 cfgsc.AsteroidNb:=0;
 if not db1.Active then cfgsc.ShowAsteroid:=false;
 if not cfgsc.ShowAsteroidValid then exit;
-if not NewAstDay(cfgsc.CurJD,cfgsc.AstmagMax,cfgsc) then begin
+if not NewAstDay(cfgsc.CurJDTT,cfgsc.AstmagMax,cfgsc) then begin
    cfgsc.ShowAsteroid:=false;
    exit;
 end;
@@ -1832,7 +1832,7 @@ if db2.Rowcount>0 then begin
      cfgsc.AsteroidLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+    jdt:=cfgsc.CurJDTT+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
@@ -1875,7 +1875,7 @@ cfgsc.com_daypos:='cdc_com_day_pos_'+cfgsc.chartname;
 cfgsc.CometNb:=0;
 if not db1.Active then cfgsc.ShowComet:=false;
 if not cfgsc.ShowCometValid then exit;
-if not NewComDay(cfgsc.CurJD,cfgsc.CommagMax,cfgsc) then begin
+if not NewComDay(cfgsc.CurJDTT,cfgsc.CommagMax,cfgsc) then begin
    cfgsc.ShowComet:=false;
    exit;
 end;
@@ -1909,7 +1909,7 @@ if db2.Rowcount>0 then begin
      cfgsc.CometLstSize:=SimNb;
   end;
   for j:=0 to SimNb-1 do begin
-    jdt:=cfgsc.CurJD+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
+    jdt:=cfgsc.CurJDTT+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
     st0:=Rmod(cfgsc.CurST+ 1.00273790935*(j*cfgsc.SimD*24+j*cfgsc.SimH+j*cfgsc.SimM/60+j*cfgsc.SimS/3600)*15*deg2rad,pi2);
     for i:=0 to db2.Rowcount-1 do begin
        id:=db2.Results[i][0];
@@ -1962,9 +1962,9 @@ qry:='SELECT id FROM cdc_ast_name'
     +' limit 1';
 id:=db1.QueryOne(qry);
 if id='' then exit;
-if cdb.GetAstElemEpoch(id,cfgsc.curjd,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
+if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
-   Asteroid(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn,xc,yc,zc);
+   Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,xc,yc,zc);
    precession(jd2000,cfgsc.jdchart,ra,de);
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
    ira:=round(ra*1000);
@@ -1997,9 +1997,9 @@ qry:='SELECT id FROM cdc_com_name'
     +' limit 1';
 id:=db1.QueryOne(qry);
 if id='' then exit;
-if cdb.GetComElemEpoch(id,cfgsc.curjd,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
+if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
-   Comet(cfgsc.curjd,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+   Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
    precession(jd2000,cfgsc.jdchart,ra,de);
    ira:=round(ra*1000);
    idec:=round(de*1000);

@@ -286,7 +286,6 @@ end;
 {$endif}
 if initial then begin
   date1.JD:=jd(config.CurYear,config.CurMonth,config.CurDay,0);
-//  date1.JD:=trunc(config.CurJD+(config.TimeZone-config.DT_UT)/24);
   date2.JD:=date1.JD+5;
   deltajd:=date2.JD-date1.JD;
   time.Time:=config.CurTime/24;
@@ -1099,7 +1098,7 @@ end;
 
 procedure Tf_calendar.RefreshTwilight;
 var jda,jd0,jd1,jd2,h,hh : double;
-    hp1,hp2,ars,des,dist,diam :Double;
+    hp1,hp2,ars,des,dist,diam,jdt_ut :Double;
     a,m,d,s,i,nj : integer;
 begin
 screen.cursor:=crHourglass;
@@ -1113,7 +1112,8 @@ dat14:=step.text;
 s:=step.Value;
 djd(date1.JD,a,m,d,hh);
 config.tz.JD:=date1.JD;
-config.TimeZone:=config.tz.SecondsOffset/3600;;
+config.TimeZone:=config.tz.SecondsOffset/3600;
+jdt_ut:=DTminusUT(a,m,config)/24;
 h:=12-config.TimeZone;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
@@ -1131,7 +1131,7 @@ config.timezone:=config.tz.SecondsOffset/3600;
 with TwilightGrid do begin
   RowCount:=i+1;
   cells[0,i]:=isodate(a,m,d);
-  Fplanet.Sun(jd0+0.5,ars,des,dist,diam);
+  Fplanet.Sun(jda+jdt_ut,ars,des,dist,diam);
 //  precession(jd2000,config.JDChart,ars,des);
   precession(jd2000,jda,ars,des);
   if (ars<0) then ars:=ars+pi2;

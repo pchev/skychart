@@ -2403,7 +2403,7 @@ if isSolarSystem and (sc.cfgsc.FindSimjd<>0) then begin
    cjd0:=jd(y,m,d,0);
    cst:=Sidtim(cjd0,h-sc.cfgsc.TimeZone,sc.cfgsc.ObsLongitude,sc.cfgsc.eqeq);
 end else begin
-   cjd:=sc.cfgsc.CurJD;
+   cjd:=sc.cfgsc.CurJDTT;
    cjd0:=sc.cfgsc.jd0;
    cst:=sc.cfgsc.CurST;
 end;
@@ -2595,7 +2595,7 @@ txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
 txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
-precession(sc.cfgsc.JDChart,cjd,ra,dec);
+precession(sc.cfgsc.JDChart,cjd-sc.cfgsc.DT_UT/24,ra,dec);
 Eq2Hz(cst-ra,dec,a,h,sc.cfgsc) ;
 if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
 txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
@@ -3494,14 +3494,14 @@ jj:=jd(y,m,d,hh);
 SetJD(jj);
 end;
 
-procedure Tf_chart.SetJD(njd:double);
+procedure Tf_chart.SetJD(njd:double);  // UT
 var y,m,d : integer;
     h : double;
 begin
 if (njd>maxjd)or(njd<minjd) then exit;
 sc.cfgsc.tz.JD:=njd;
 sc.cfgsc.TimeZone:=sc.cfgsc.tz.SecondsOffset/3600;
-djd(njd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
+djd(njd+sc.cfgsc.TimeZone/24,y,m,d,h);  // local time
 sc.cfgsc.UseSystemTime:=false;
 sc.cfgsc.CurYear:=y;
 sc.cfgsc.CurMonth:=m;
@@ -3843,7 +3843,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -3863,7 +3863,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -3900,7 +3900,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -3920,7 +3920,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -3956,7 +3956,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -3994,7 +3994,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+  precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -4014,7 +4014,7 @@ begin
 ra:=sc.cfgsc.FindRA;
 dec:=sc.cfgsc.FindDec;
 if sc.cfgsc.TelescopeJD=0 then begin
-   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJD,ra,dec);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
 end else begin
    if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
    precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
@@ -4071,7 +4071,7 @@ if Connect1.checked then begin
  if ok then begin
     ra:=ra*15*deg2rad;
     dec:=dec*deg2rad;
-    if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJD,sc.cfgsc.JDChart,ra,dec)
+    if sc.cfgsc.TelescopeJD=0 then precession(sc.cfgsc.CurJDUT,sc.cfgsc.JDChart,ra,dec)
        else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
     if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
     if sc.cfgsc.moved then begin
