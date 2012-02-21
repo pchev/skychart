@@ -6462,7 +6462,7 @@ Findit:
         sc.cfgsc.FindPM:=false;
         sc.cfgsc.FindOK:=true;
         sc.cfgsc.FindType:=ftInv;
-        sc.cfgsc.TrackOn:=true;
+        sc.cfgsc.TrackOn:=false;
         sc.cfgsc.TrackType:=6;
         sc.cfgsc.TrackRA:=ar1;
         sc.cfgsc.TrackDec:=de1;
