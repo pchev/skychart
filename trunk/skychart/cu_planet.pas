@@ -2262,7 +2262,7 @@ end;
 Procedure TPlanet.PlanetAltitude(pla: integer; jd0,hh: double; cfgsc: Tconf_skychart; var har,sina: double);
 var jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13: double;
 begin
-jdt:=jd0+(hh-cfgsc.TimeZone-cfgsc.DT_UT)/24;
+jdt:=jd0+(hh-cfgsc.TimeZone+cfgsc.DT_UT)/24;   // local time -> TT
 case pla of
 1..9: Planet(pla,jdt,ra,de,dm4,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
 10 :  Sun(jdt,ra,de,dm4,dm5);
@@ -2293,7 +2293,7 @@ case pla of
 1..9: ho:=-0.5667;
 10 : ho:=-0.8333;
 11: begin
-    Moon(jd0,ra,de,dist,dm5,diam,dm7,dm8);
+    Moon(jd0+(cfgsc.DT_UT/24),ra,de,dist,dm5,diam,dm7,dm8);
     ho:=(8.794/dist/3600)-0.5748*cfgsc.ObsRefractionCor-diam/2/3600-0.04;
     end;
 end;
@@ -2354,9 +2354,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         thr:=armtostr(hr);
         jdr:=jd0+(hr-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdr,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
-        10 :  Sun(jdr,ra,de,dist,dm5);
-        11 :  Moon(jdr,ra,de,dist,dm5,dm6,dm7,dm8);
+        1..9: Planet(pla,jdr+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdr+cfgsc.DT_UT/24,ra,de,dist,dm5);
+        11 :  Moon(jdr+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2377,9 +2377,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         ths:=armtostr(hs);
         jds:=jd0+(hs-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jds,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
-        10 :  Sun(jds,ra,de,dist,dm5);
-        11 :  Moon(jds,ra,de,dist,dm5,dm6,dm7,dm8);
+        1..9: Planet(pla,jds+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jds+cfgsc.DT_UT/24,ra,de,dist,dm5);
+        11 :  Moon(jds+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2400,9 +2400,9 @@ if (frise or fset) then begin    // rise (and/or) set and transit
         tht:=armtostr(ht);
         jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
-        10 :  Sun(jdt,ra,de,dist,dm5);
-        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8);
+        1..9: Planet(pla,jdt+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdt+cfgsc.DT_UT/24,ra,de,dist,dm5);
+        11 :  Moon(jdt+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin
@@ -2425,9 +2425,9 @@ end else begin
         tht:=armtostr(ht);
         jdt:=jd0+(ht-cfgsc.TimeZone)/24;
         case pla of
-        1..9: Planet(pla,jdt,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
-        10 :  Sun(jdt,ra,de,dist,dm5);
-        11 :  Moon(jdt,ra,de,dist,dm5,dm6,dm7,dm8);
+        1..9: Planet(pla,jdt+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8,dm9,dm10,dm11,dm12,dm13);
+        10 :  Sun(jdt+cfgsc.DT_UT/24,ra,de,dist,dm5);
+        11 :  Moon(jdt+cfgsc.DT_UT/24,ra,de,dist,dm5,dm6,dm7,dm8);
         end;
         precession(jd2000,jd0,ra,de);
         if cfgsc.PlanetParalaxe then begin

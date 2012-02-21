@@ -2399,7 +2399,7 @@ isOsr:=(otype='OSR');
 isArtSat:=(otype='Sat');
 if isSolarSystem and (sc.cfgsc.FindSimjd<>0) then begin
    cjd:=sc.cfgsc.FindSimjd;
-   Djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
+   Djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h); // return to local from TT
    cjd0:=jd(y,m,d,0);
    cst:=Sidtim(cjd0,h-sc.cfgsc.TimeZone,sc.cfgsc.ObsLongitude,sc.cfgsc.eqeq);
 end else begin
