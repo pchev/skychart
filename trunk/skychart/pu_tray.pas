@@ -419,7 +419,8 @@ end;
 
 procedure Tf_tray.MenuItem4Click(Sender: TObject);
 var y,m,d:word;
-    u,p : double;
+    u,p,v1,v2,v3 : double;
+    se,ce: Extended;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
 begin
@@ -443,22 +444,47 @@ end else begin
   f_calendar.config.CurDay:=d;
   f_calendar.config.CurTime:=frac(now)*24;
   f_calendar.config.JDChart:=jd(y,m,d,0);
-  f_calendar.config.CurJD:=f_calendar.config.JDChart;
+  f_calendar.config.Force_DT_UT:=false;
+  f_calendar.config.DT_UT:=DTminusUT(y,m,f_calendar.config);
+  f_calendar.config.CurJDUT:=f_calendar.config.JDChart;
+  f_calendar.config.CurJDTT:=f_calendar.config.JDChart+f_calendar.config.DT_UT/24;
   f_calendar.config.PlanetParalaxe:=true;
   f_calendar.config.ApparentPos:=true;
   f_calendar.config.ecl:=ecliptic(f_calendar.config.JdChart);
-  nutationme(f_calendar.config.CurJd,f_calendar.config.nutl,f_calendar.config.nuto);
-  f_calendar.planet.sunecl(f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
-  PrecessionEcl(jd2000,f_calendar.config.CurJd,f_calendar.config.sunl,f_calendar.config.sunb);
-  aberrationme(f_calendar.config.CurJd,f_calendar.config.abe,f_calendar.config.abp);
+  // nutation constant
+  f_calendar.planet.nutation(f_calendar.config.JDChart,f_calendar.config.nutl,f_calendar.config.nuto);
+  // ecliptic obliquity
+  f_calendar.config.ecl:=ecliptic(f_calendar.config.JdChart,f_calendar.config.nuto);
+  // nutation matrix
+  sincos(f_calendar.config.ecl,se,ce);
+  f_calendar.config.NutMAT[1,1]:= 1;
+  f_calendar.config.NutMAT[1,2]:= -ce*f_calendar.config.nutl;
+  f_calendar.config.NutMAT[1,3]:= -se*f_calendar.config.nutl;
+  f_calendar.config.NutMAT[2,1]:= ce*f_calendar.config.nutl;
+  f_calendar.config.NutMAT[2,2]:= 1;
+  f_calendar.config.NutMAT[2,3]:= -f_calendar.config.nuto;
+  f_calendar.config.NutMAT[3,1]:= se*f_calendar.config.nutl;
+  f_calendar.config.NutMAT[3,2]:= f_calendar.config.nuto;
+  f_calendar.config.NutMAT[3,3]:= 1;
+  // equation of the equinox
+  f_calendar.config.eqeq:=f_calendar.config.nutl*cos(f_calendar.config.ecl);
+  // Sun geometric longitude eq. of date for aberration
+  f_calendar.planet.sunecl(f_calendar.config.CurJDTT,f_calendar.config.sunl,f_calendar.config.sunb);
+  PrecessionEcl(jd2000,f_calendar.config.CurJDUT,f_calendar.config.sunl,f_calendar.config.sunb);
+  // aberration and light deflection constant
+  f_calendar.planet.aberration(f_calendar.config.CurJDTT,f_calendar.config.abv,f_calendar.config.ehn,f_calendar.config.ab1,f_calendar.config.abe,f_calendar.config.abp,f_calendar.config.gr2e,f_calendar.config.abm,f_calendar.config.asl);
+  // Earth barycentric position in parsec for parallax
+  f_calendar.planet.SunRect(f_calendar.config.CurJDTT,false,v1,v2,v3,true);
+  f_calendar.config.EarthB[1]:=-v1*au2parsec;
+  f_calendar.config.EarthB[2]:=-v2*au2parsec;
+  f_calendar.config.EarthB[3]:=-v3*au2parsec;
+  // observatory
   p:=deg2rad*f_calendar.config.ObsLatitude;
   u:=arctan(ratio*tan(p));
   f_calendar.config.ObsRoSinPhi:=ratio*sin(u)+(f_calendar.config.ObsAltitude/H0)*sin(p);
   f_calendar.config.ObsRoCosPhi:=cos(u)+(f_calendar.config.ObsAltitude/H0)*cos(p);
   f_calendar.config.ObsRefractionCor:=1;
   f_calendar.config.EquinoxName:=rsDate;
-  f_calendar.config.Force_DT_UT:=false;
-  f_calendar.config.DT_UT:=DTminusUT(y,m,f_calendar.config);
   if (calposx<0)or(calposy<0) then begin
     calposx:=SysTray.GetPosition.X+SysTray.Icon.Width;
     calposy:=SysTray.GetPosition.Y;
