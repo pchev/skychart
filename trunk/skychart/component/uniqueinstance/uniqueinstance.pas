@@ -291,19 +291,21 @@ result:='';
 try
   Process1:=TProcess.Create(nil);
   FillChar(s,sizeof(s),' ');
-  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
-  Process1.CommandLine:='pidof '+ExtractFileName(Application.ExeName);
-  {$ELSE}
-  Process1.Executable:='pidof';
-  Process1.Parameters.Add(ExtractFileName(Application.ExeName));
-  {$ENDIF}
+
 {$ifdef darwin}
   {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
-  Process1.CommandLine:='killall -s '+ExtractFileName(Application.ExeName);
+    Process1.CommandLine:='killall -s '+ExtractFileName(Application.ExeName);
   {$ELSE}
-  Process1.Executable:='killall';
-  Process1.Parameters.Add('-s');
-  Process1.Parameters.Add(ExtractFileName(Application.ExeName));
+    Process1.Executable:='killall';
+    Process1.Parameters.Add('-s');
+    Process1.Parameters.Add(ExtractFileName(Application.ExeName));
+  {$ENDIF}
+{$ELSE}
+  {$IF (FPC_VERSION = 2) and (FPC_RELEASE < 5)}
+    Process1.CommandLine:='pidof '+ExtractFileName(Application.ExeName);
+  {$ELSE}
+    Process1.Executable:='pidof';
+    Process1.Parameters.Add(ExtractFileName(Application.ExeName));
   {$ENDIF}
 {$endif}
   Process1.Options:=[poWaitOnExit,poUsePipes,poNoConsole];
