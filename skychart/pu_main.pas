@@ -3833,9 +3833,11 @@ begin
        if (not csc.SunOnline)or(csc.sunurlname<>def_cfgsc.sunurlname) then DeleteFile(slash(Tempdir)+'sun.jpg');
        def_cfgsc.Assign(csc);
     end;
-    if cplot<>nil then def_cfgplot.Assign(cplot);
-    def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
-    def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
+    if cplot<>nil then begin
+       def_cfgplot.Assign(cplot);
+       def_cfgplot.starshapesize:=starshape.Picture.bitmap.Width div 11;
+       def_cfgplot.starshapew:=def_cfgplot.starshapesize div 2;
+    end;
     InitFonts;
     if def_cfgsc.ConstLatinLabel then
          catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
@@ -3848,7 +3850,7 @@ begin
     f_search.init;
     if dbchange then ConnectDB;
     if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-       sc.cfgsc.Assign(def_cfgsc);
+       if csc<>nil then sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
        sc.planet:=planet;
        sc.cdb:=cdcdb;
