@@ -131,6 +131,8 @@ var prec_r : rotmatrix;
 Procedure ScaleWindow(c: Tconf_skychart);
 var X1,x2,Y1,Y2 : Integer;
 begin
+   c.fov:=max(c.fov,secarc);
+   c.fov:=min(c.fov,pi2);
    X1 := c.Xmin ; X2 := c.Xmax;
    Y1 := c.Ymin ; Y2 := c.Ymax;
    c.WindowRatio := double(X2-X1) / double(Y2-Y1) ;

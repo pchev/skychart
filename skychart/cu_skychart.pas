@@ -780,7 +780,10 @@ end;
      5 : begin
          // fits image
          cfgsc.TrackOn:=false;
-         if FFits.Header.valid then begin
+         if FFits.Header.valid and Fits.WCSvalid then begin
+           {$ifdef trace_debug}
+            WriteTrace('Center to FITS image '+' ra:'+formatfloat(f5,rad2deg*FFits.Center_RA)+' de:'+formatfloat(f5,rad2deg*FFits.Center_DE)+' fov:'+formatfloat(f6,rad2deg*FFits.Img_Width) );
+           {$endif}
             cfgsc.lastJDchart:=cfgsc.JDChart;
             v1:=FFits.Center_RA;
             v2:=FFits.Center_DE;

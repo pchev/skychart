@@ -3128,7 +3128,7 @@ precession(sc.cfgsc.JDchart,jd2000,ra2000,de2000);
 if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width) then begin
    sc.Fits.Filename:=expandfilename(f_getdss.cfgdss.dssfile);
    sc.Fits.InfoWCScoord;
-   if sc.Fits.Header.valid then begin
+   if sc.Fits.Header.valid and sc.Fits.WCSvalid then begin
       sc.Fits.DeleteDB('OTHER','BKG');
       if not sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
              sc.Fits.InsertDB(sc.Fits.Filename,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
