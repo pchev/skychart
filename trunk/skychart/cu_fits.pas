@@ -300,7 +300,7 @@ n:=cdcwcs_getinfo(addr(i));
 {$ifdef trace_debug}
  WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
 {$endif}
-if n=0 then begin
+if (n=0)and(i.secpix<>0) then begin
   Fra:=deg2rad*i.cra;
   Fde:=deg2rad*i.cdec;
   Fimg_width:=deg2rad*i.wp*i.secpix/3600;
@@ -309,6 +309,7 @@ if n=0 then begin
   FWCSvalid:=True;
 end else begin
   FWCSvalid:=False;
+  WriteTrace('Invalid WCS in file');
 end;
 except
  FWCSvalid:=False;
