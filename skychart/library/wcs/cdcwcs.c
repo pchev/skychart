@@ -14,6 +14,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <math.h>
+#include <locale.h>
 #include "wcs.h"
 #include "fitsfile.h"
 
@@ -61,6 +62,8 @@ extern char *GetFITShead();
 int cdcwcs_initfitsfile (fn)
 char *fn;
 {
+  /* ensure decimal dot */
+  setlocale(LC_NUMERIC,"C");
   wcs = NULL;
   *coorsys = 0;
   header = GetFITShead (fn, verbose);
