@@ -1017,9 +1017,9 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 494
         object Label1: TLabel
           Left = 7
-          Height = 18
+          Height = 15
           Top = 19
-          Width = 177
+          Width = 149
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
         end
@@ -1089,7 +1089,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object maxrows: TLongEdit
           Left = 415
-          Height = 25
+          Height = 24
           Hint = '100..50000'
           Top = 15
           Width = 64
@@ -1103,9 +1103,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label4: TLabel
           Left = 289
-          Height = 18
+          Height = 15
           Top = 19
-          Width = 60
+          Width = 52
           Caption = 'Max rows'
           ParentColor = False
         end
