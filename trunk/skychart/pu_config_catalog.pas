@@ -729,8 +729,8 @@ end;
 
 procedure Tf_config_catalog.ShowFov;
 begin
-fw0.Caption:='0: 0 - '+formatfloat(f1s,cshr.fieldnum[0]);
-fw1.Caption:='1: '+formatfloat(f1s,cshr.fieldnum[0])+' - '+formatfloat(f1s,cshr.fieldnum[1]);
+fw0.Caption:='0: 0 - '+formatfloat(f2s,cshr.fieldnum[0]);
+fw1.Caption:='1: '+formatfloat(f2s,cshr.fieldnum[0])+' - '+formatfloat(f1s,cshr.fieldnum[1]);
 fw2.Caption:='2: '+formatfloat(f1s,cshr.fieldnum[1])+' - '+formatfloat(f1s,cshr.fieldnum[2]);
 fw3.Caption:='3: '+formatfloat(f1s,cshr.fieldnum[2])+' - '+formatfloat(f1s,cshr.fieldnum[3]);
 fw4.Caption:='4: '+formatfloat(f1s,cshr.fieldnum[3])+' - '+formatfloat(f1s,cshr.fieldnum[4]);
