@@ -2647,56 +2647,68 @@ begin
 {$ifdef trace_debug}
  WriteTrace('ResetDefaultChartExecute');
 {$endif}
-f1:=TForm.Create(self);
-f1.AutoSize:=false;
-f1.Caption:=rsResetChartAn;
-r1:=TRadioGroup.Create(f1);
-r1.AutoSize:=true;
-r1.top:=8;
-r1.Left:=8;
-btn:= TButtonPanel.Create(f1);
-btn.ShowButtons:=[pbOK,pbCancel];
-btn.OKButton.Caption:=rsOK;
-btn.CancelButton.Caption:=rsCancel;
-btn.ShowGlyphs:=[];
-btn.AutoSize:=true;
-btn.Align:=alBottom;
-r1.Items.Add(rsResetInitial);
-r1.Items.Add(rsResetToLastT);
-r1.ItemIndex:=1;
-r1.Parent:=f1;
-btn.Parent:=f1;
-r1.AdjustSize;
-btn.AdjustSize;
-h:=r1.Height+btn.Height+16;
-w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
-f1.Height:=h;
-f1.Width:=w;
-try
-FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
-if f1.ShowModal=mrOK then begin
-  case r1.ItemIndex of
-    0: begin
-        WriteTrace('Reload default configuration');
-        ClearAndRestart;
-       end;
-    1: begin
-        WriteTrace('Reload last configuration');
-        for i:=1 to MultiDoc1.ChildCount-1 do
-          if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-             MultiDoc1.Childs[i].close;
-        Multidoc1.Maximized:=true;
-        with MultiDoc1.ActiveObject as Tf_chart do begin
-          ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
-          Refresh;
-        end;
-       end;
+if sender<>nil then begin
+  f1:=TForm.Create(self);
+  f1.AutoSize:=false;
+  f1.Caption:=rsResetChartAn;
+  r1:=TRadioGroup.Create(f1);
+  r1.AutoSize:=true;
+  r1.top:=8;
+  r1.Left:=8;
+  btn:= TButtonPanel.Create(f1);
+  btn.ShowButtons:=[pbOK,pbCancel];
+  btn.OKButton.Caption:=rsOK;
+  btn.CancelButton.Caption:=rsCancel;
+  btn.ShowGlyphs:=[];
+  btn.AutoSize:=true;
+  btn.Align:=alBottom;
+  r1.Items.Add(rsResetInitial);
+  r1.Items.Add(rsResetToLastT);
+  r1.ItemIndex:=1;
+  r1.Parent:=f1;
+  btn.Parent:=f1;
+  r1.AdjustSize;
+  btn.AdjustSize;
+  h:=r1.Height+btn.Height+16;
+  w:=max(f1.Canvas.TextWidth(rsResetInitial),f1.Canvas.TextWidth(rsResetToLastT))+80;
+  f1.Height:=h;
+  f1.Width:=w;
+  try
+  FormPos(f1,mouse.cursorpos.x,mouse.cursorpos.y);
+  if f1.ShowModal=mrOK then begin
+    case r1.ItemIndex of
+      0: begin
+          WriteTrace('Reload default configuration');
+          ClearAndRestart;
+         end;
+      1: begin
+          WriteTrace('Reload last configuration');
+          for i:=1 to MultiDoc1.ChildCount-1 do
+            if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+               MultiDoc1.Childs[i].close;
+          Multidoc1.Maximized:=true;
+          with MultiDoc1.ActiveObject as Tf_chart do begin
+            ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
+            Refresh;
+          end;
+         end;
+    end;
   end;
-end;
-finally
- btn.Free;
- r1.Free;
- f1.Free;
+  finally
+   btn.Free;
+   r1.Free;
+   f1.Free;
+  end;
+end else begin
+  WriteTrace('Reload last configuration');
+  for i:=1 to MultiDoc1.ChildCount-1 do
+    if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+       MultiDoc1.Childs[i].close;
+  Multidoc1.Maximized:=true;
+  with MultiDoc1.ActiveObject as Tf_chart do begin
+    ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
+    Refresh;
+  end;
 end;
 end;
 
