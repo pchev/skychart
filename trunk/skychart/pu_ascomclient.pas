@@ -575,7 +575,7 @@ try
   UpdTrackingButton;
   except
     {$ifdef  win64}
-    Showmessage('The ASCOM telescope chooser require ASCOM Platform 6 or better for a 64 bits application.'+crlf+'Even in this case do not try to configure the driver from the chooser. '+crlf+'Download ASCOM Platform 6 from http://ascom-standards.org');
+    Showmessage('The ASCOM telescope chooser do not work well with a 64 bits application.'+crlf+'Please configure your telescope in POTH.Telescope until this is fixed.');
     {$else}
     Showmessage(rsPleaseEnsure+crlf+Format(rsSeeHttpAscom,['http://ascom-standards.org']));
     {$endif}
