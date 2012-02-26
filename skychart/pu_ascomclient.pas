@@ -554,6 +554,7 @@ procedure Tpop_scope.SpeedButton3Click(Sender: TObject);
 {$ifdef mswindows}
 var
   V: variant;
+  err: string;
 {$endif}
 begin
 {$ifdef mswindows}
@@ -574,11 +575,14 @@ try
   SaveConfig;
   UpdTrackingButton;
   except
-    {$ifdef  win64}
-    Showmessage('The ASCOM telescope chooser do not work well with a 64 bits application.'+crlf+'Please configure your telescope in POTH.Telescope until this is fixed.');
-    {$else}
-    Showmessage(rsPleaseEnsure+crlf+Format(rsSeeHttpAscom,['http://ascom-standards.org']));
-    {$endif}
+    on E: Exception do begin
+      err:='ASCOM exception:'+E.Message;
+     {$ifdef  win64}
+      Showmessage(err+crlf+'The ASCOM telescope chooser do not work well with a 64 bits application.'+crlf+'Please configure your telescope in POTH.Telescope until this is fixed.');
+     {$else}
+      Showmessage(err+crlf+rsPleaseEnsure+crlf+Format(rsSeeHttpAscom,['http://ascom-standards.org']));
+     {$endif}
+    end;
   end;
 {$endif}
 end;
