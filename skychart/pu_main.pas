@@ -3556,7 +3556,12 @@ if (posx=0)and(posy=0) then
    formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y)
 else
   if (posx>0)and(posy>0) then
-   formpos(ConfigObservatory,posx,posy);
+   formpos(ConfigObservatory,posx,posy)
+else begin
+   posx:=Screen.Width div 2 - ConfigObservatory.Width div 2;
+   posy:=Screen.Height div 2 - ConfigObservatory.Height div 2;
+   formpos(ConfigObservatory,posx,posy)
+end;
 ConfigObservatory.PageControl1.PageIndex:=page;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin

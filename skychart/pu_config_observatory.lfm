@@ -1,6 +1,6 @@
 object f_config_observatory: Tf_config_observatory
   Left = 1085
-  Height = 563
+  Height = 560
   Top = 277
   Width = 481
   ActiveControl = MainPanel
@@ -8,28 +8,27 @@ object f_config_observatory: Tf_config_observatory
   BorderStyle = bsToolWindow
   Caption = 'Observatory'
   ChildSizing.LeftRightSpacing = 525
-  ClientHeight = 563
+  ClientHeight = 560
   ClientWidth = 481
   OnClose = FormClose
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  Position = poScreenCenter
   LCLVersion = '0.9.30.3'
   object MainPanel: TPanel
     Left = 0
-    Height = 511
-    Top = 8
+    Height = 520
+    Top = 0
     Width = 482
     Anchors = [akTop, akLeft, akRight, akBottom]
-    ClientHeight = 511
+    ClientHeight = 520
     ClientWidth = 482
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 509
+      Height = 518
       Top = 1
       Width = 480
       ActivePage = Page1
@@ -39,7 +38,7 @@ object f_config_observatory: Tf_config_observatory
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
-        ClientHeight = 505
+        ClientHeight = 514
         ClientWidth = 476
         object Obszp: TButton
           Left = 5
@@ -414,7 +413,7 @@ object f_config_observatory: Tf_config_observatory
       end
       object Page2: TTabSheet
         Caption = 'Horizon'
-        ClientHeight = 505
+        ClientHeight = 514
         ClientWidth = 476
         object GroupBox2: TGroupBox
           Left = 8
@@ -578,7 +577,7 @@ object f_config_observatory: Tf_config_observatory
   object Panel1: TPanel
     Left = 1
     Height = 50
-    Top = 519
+    Top = 516
     Width = 481
     Anchors = [akLeft, akRight, akBottom]
     ClientHeight = 50
