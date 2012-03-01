@@ -1565,7 +1565,7 @@ begin {DrawGraph of RefreshPlanetGraph}
     xtick := (xte-xts) div 7;
     xSInc := 2;
     tsc   := xtick / xSInc;
-    if ipl > 0 {planet} then begin
+    if ipl < 10 {planet} then begin
       xSStrt:= 8;
       tstrt := (((xte - xts) * 2) / 3) / tsc; {now ix = (tstrt - x) * tsc + xts}
       end
@@ -1682,7 +1682,7 @@ try
   DrawGraph(PlanetGraphs[6], Uranusgrid,  7);
   DrawGraph(PlanetGraphs[7], Neptunegrid, 8);
   DrawGraph(PlanetGraphs[8], Plutongrid,  9);
-  DrawGraph(PlanetGraphs[9], Lunegrid,    0);
+  DrawGraph(PlanetGraphs[9], Lunegrid,    11);
   dgPlanet.Invalidate;
 except
   tsPGraphs.TabVisible:=false;
