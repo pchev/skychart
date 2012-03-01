@@ -36,6 +36,9 @@ type
     TObjCoord = class(Tobject)
                 jd,ra,dec : double;
                 end;
+    TLine = record
+              P1, P2: TPoint;
+              end;
 
 const nummsg = 47;
       maxcombo = 500;
@@ -1361,50 +1364,62 @@ end;
 
 procedure Tf_calendar.RefreshPlanetGraph;
 procedure DrawGraph(bm: TBitmap; gr:TStringGrid; iPl: Integer); {of RefreshPlanetGraph}
+// bm is the bit map of the draw grid for this planet.
 var
   xts, xte: Integer;  {x pos of start and end of rise/set area}
   xmidday: Integer;   { the x poisiton that midday would have if shown}
-  //tFst, tLst: Double; {first and last times of Graph Axis}
+  tFst, tLst: Double; {first and last times of Graph Axis}
   ygtop, ygbtm: Integer; {y pos of top and bottom of graph area}
   i, ix, iy: Integer;
   x, y: double;
   s: String;
-  txtsz: TSize;
+  txtsz: TSize;       {Size of a date, eg 99/99}
   ytick: Single;
-  xtick,  yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
-  xSStrt, xSInc: Double;
+  xtick, xcnt, yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
+  xSStrt, xSInc, ySStrt, ySInc: Double;
   tstrt, tsc: Double; {to get graph x, sub tstrt, * by tsc}
+  LineEnds: TLine; {Start and end point of a line drawn by TimeLine}
 function ScaledTime(grd: TStringGrid; C, R: Integer): Integer;
+var
+  dbgs: String;
+  evt_time: double;
 begin {ScaledTime of DrawGraph of RefreshPlanetGraph}
   if assigned(grd) and assigned(grd.Objects[c, r]) then begin
-   result:=trunc( ( (grd.Objects[c,r] as TObjCoord).jd
-                      - (date1.JD + (r - 2) * step.Value)
-                      + config.tz.SecondsOffset/(3600*24)
-                      - tstrt)
-                   * tsc);
-    {Is result back by a day ?}
+    config.tz.JD:=date1.JD + (r - 2) * step.Value;
+    evt_time := (grd.Objects[c,r] as TObjCoord).jd
+                 - (date1.JD + (r - 2) * step.Value)
+                 + config.tz.SecondsOffset/(3600*24);  // local time
+    // Normalise time ot current day
+    evt_time := evt_time - floor(evt_time);
+    // now convert to graph scale
+    result:= trunc( (evt_time - tstrt) * tsc) + xts;
     if result < xmidday then
       result := result + trunc(tsc);
     end
   else
     result := -9999;
-end; {ScaledTime of of DrawGraph RefreshPlanetGraph}
+end; {ScaledTime of DrawGraph of RefreshPlanetGraph}
 Procedure TimeLine(grd: TStringGrid; C: Integer; cv: TCanvas; s: string = '');
+{ draws one line on the rise / set graph, using the data in column C of grid grd
+  on canvas cv.  s is a label, if set }
 var
  lix, liy: Integer;
  ir, lir: Boolean; {in range, last point in range}
 begin {TimeLine of DrawGraph of RefreshPlanetGraph}
-  i := 2;
-  repeat
+  i := 2; {First row of grid with times}
+  repeat {Skip past any lines with missing values}
     lix := ScaledTime(Grd, C, i);
     inc(i);
-  until lix > -9000;  {I it is < -9000, => bad value}
+  until lix > -9000;  {If it is < -9000, => bad value}
   liy := ygtop;
   lir := (lix >= xts) and (lix <= xte);
   if lir then
     cv.MoveTo(lix, liy);
   y := liy;
-  repeat
+  {line end start - this is a bit of a guess, check this later 201103}
+  LineEnds.P1.x := lix;
+  LineEnds.P1.y := liy;
+  repeat  {late note - can't see how this stays in sync if there are missing points 201103}
     y := y + ytick; iy := trunc(y);
     ix := ScaledTime(Grd, C, i);
     if  ix > -9000 then begin {otherwise no point - just skip completely}
@@ -1429,7 +1444,10 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
       end;
     inc(i);
   until i >= Grd.RowCount;
-  if ir and (ix > -9000) then begin
+  {record last point drawn - also a bit of a guess, 201103}
+  LineEnds.P2.x:= ix;
+  LineEnds.P2.y:= iy;
+  if ir then begin
     cv.LineTo(ix, ygbtm);
     if s <> '' then begin
       txtsz := cv.TextExtent(s);
@@ -1447,9 +1465,9 @@ begin {DrawGraph of RefreshPlanetGraph}
     Pen.Mode:= pmCopy;
     Font.Color:= clWhite;
     Rectangle(2, 2, 3, 3); {Dummy - it seems the first command won't do anything}
-    FillRect(0, 0, Width-1, Height-1);
+    FillRect(0, 0, Width-1, Height-1); // Whole canvas
     // y scale & axis - same for all graph segments
-    txtsz := TextExtent('22/22');
+    txtsz := TextExtent('22/22'); // all numbers will be the same size
     ygtop := txtsz.cy div 2;
     ygBtm := Height - 3 - txtsz.cy;
     ytick := (ygbtm - ygtop) / (gr.RowCount - 3); {rc-2 gives data rows, -1 for intervals}
@@ -1466,19 +1484,19 @@ begin {DrawGraph of RefreshPlanetGraph}
       y := y + ytick*yskip;
       iy := trunc(y);
     until i >= gr.RowCount;
-    // Set up constants for Rise/set
+    // Set up constants for Rise/set - rise set is 70% of width
     xte := ((width * 7) div 10) - 2; {-2 provides gutter to next}
     xts   := txtsz.cx + 2;
     Rectangle(xts, ygtop, xte, ygBtm);
     {for now, take nominal graph time range as 5pm to 8 am}
-    xtick := (xte-xts) div 15;
+    xtick := (xte-xts) div 15; // pixels
     ix    := (txtsz.cx div xtick + 1); {temp x skip}
     xtick := xtick * ix;
     xSInc := (1 / 24) * ix;
-    xSStrt:= 17/24;
+    xSStrt:= 17/24;  // 5 pm
     tstrt := xSStrt;
     tsc   := xtick / xSInc;
-    xmidday:= trunc((0.5 - tstrt) * tsc);
+    xmidday := trunc((0.5 - tstrt) * tsc);
     ix    := xts + xtick;
     x     := xSStrt + xSInc;
     iy    := Height-txtsz.cy;
@@ -1491,10 +1509,17 @@ begin {DrawGraph of RefreshPlanetGraph}
     until (ix + txtsz.cx div 2) > xte;
     {now put in sun rise and set}
     Brush.Color:= dfskycolor[1];
-    TimeLine(SoleilGrid, 8, bm.Canvas);
-    FloodFill(ix-2, iy-2, pen.Color, fsBorder );
-    TimeLine(SoleilGrid, 6, bm.Canvas);
-    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
+    TimeLine(SoleilGrid, 8, bm.Canvas); {set, left on graph}
+    if LineEnds.P1.x - 1 > xts then
+        FloodFill(xts + 1, ygtop + 2, pen.Color, fsBorder );
+    if LineEnds.P2.x - 1 > xts then
+        FloodFill(xts + 1, ygbtm - 2, pen.Color, fsBorder );
+    TimeLine(SoleilGrid, 6, bm.Canvas); {rise, right on graph}
+    if LineEnds.P1.x + 1 < xte then
+      FloodFill(xte - 2, ygtop + 2, pen.Color, fsBorder );
+    if LineEnds.P2.x + 1 < xte then
+      FloodFill(xte - 2, ygbtm - 2, pen.Color, fsBorder );
+    (*FloodFill(xte - 2, (ygtop + ygbtm) div 2, pen.Color, fsBorder );*)
     {Twilights}
     Brush.Color:= dfskycolor[3];
     TimeLine(TwilightGrid, 3, bm.Canvas);
@@ -1508,6 +1533,7 @@ begin {DrawGraph of RefreshPlanetGraph}
     FloodFill(ix+2, iy-2, pen.Color, fsBorder);
     Brush.Color:= dfskycolor[7];
     FloodFill(ix-2, iy-2, pen.Color, fsBorder);
+
     {Now - finally - the planet times}
     font.Color:= clWhite;
     Brush.Style:= bsSolid;
@@ -1656,7 +1682,7 @@ try
   DrawGraph(PlanetGraphs[6], Uranusgrid,  7);
   DrawGraph(PlanetGraphs[7], Neptunegrid, 8);
   DrawGraph(PlanetGraphs[8], Plutongrid,  9);
-  DrawGraph(PlanetGraphs[9], Lunegrid,    11);
+  DrawGraph(PlanetGraphs[9], Lunegrid,    0);
   dgPlanet.Invalidate;
 except
   tsPGraphs.TabVisible:=false;
@@ -2122,6 +2148,14 @@ procedure Tf_calendar.dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
 begin
   if (aCol = 0) and (aRow < high(PlanetGraphs)) then
     dgPlanet.Canvas.Draw(aRect.Left, aRect.Top, PlanetGraphs[aRow+1]);
+  if dgPlanet.Selection.Top = ARow then
+    with dgPlanet.Canvas do begin
+      Pen.Style:= psSolid;
+      Pen.Color:= clLime;
+      Pen.Width:= 3;
+      Brush.Style:= bsClear;
+      Rectangle(aRect.Left + 1, aRect.Top + 1, aRect.Right - 1, aRect.Bottom -1);
+      end;
 end;
 
 procedure Tf_calendar.EcliPanelClick(Sender: TObject);

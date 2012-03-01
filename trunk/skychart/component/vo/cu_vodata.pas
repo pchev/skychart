@@ -93,7 +93,7 @@ type
     property MaxData: integer read Fmax write Fmax;
     property onColsDef: TNotifyEvent read FColsDef write FColsDef;
     property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
-    property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
+    //property onDataRow: TNotifyEvent read FGetDataRow write FGetDataRow;
     property onDownloadFeedback: TDownloadFeedback read FDownloadFeedback write FDownloadFeedback;
     property HttpProxy : string read Fproxy  write Fproxy ;
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
