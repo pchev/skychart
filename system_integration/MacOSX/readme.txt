@@ -1,8 +1,8 @@
 Skychart / Cartes du Ciel
-Version 3.5 beta
+Version 3.6
 
 
-Copyright (C) 2011 Patrick Chevalley
+Copyright (C) 2012 Patrick Chevalley
 
 http://ap-i.net/skychart
 http://skychart.origo.ethz.ch/
