@@ -1,0 +1,54 @@
+default: all
+
+PREFIX=%PREFIX%
+
+.PHONY: all
+all: 
+	#build data tools
+
+ifeq ($(OS_TARGET),win32)
+install: 
+	.\install_data.cmd $(PREFIX) 
+uninstall: 
+	.\uninstall_data.cmd $(PREFIX) 
+else
+ifeq ($(OS_TARGET),win64)
+install: 
+	.\install_data.cmd $(PREFIX) 
+uninstall: 
+	.\uninstall_data.cmd $(PREFIX) 
+else
+ifeq ($(OS_TARGET),darwin)
+install: 
+	./install_data_darwin.sh $(PREFIX) 
+install_doc: 
+	./install_doc_darwin.sh $(PREFIX) 
+install_nonfree: 
+	./install_nonfree_darwin.sh $(PREFIX) 
+uninstall: 
+	./uninstall_data_darwin.sh $(PREFIX) 
+refresh_doc: 
+	./refresh_wiki_doc.sh 
+else
+install: 
+	./install_data.sh $(PREFIX) 
+install_doc: 
+	./install_doc.sh $(PREFIX) 
+install_nonfree: 
+	./install_nonfree.sh $(PREFIX) 
+uninstall: 
+	./uninstall_data.sh $(PREFIX) 
+install_win: 
+	./install_win_data.sh $(PREFIX)
+install_win_doc: 
+	./install_win_doc.sh $(PREFIX)
+install_win_nonfree: 
+	./install_win_nonfree.sh $(PREFIX)
+uninstall_win: 
+	./uninstall_win_data.sh $(PREFIX)
+refresh_doc: 
+	./refresh_wiki_doc.sh 
+endif
+endif
+endif
+                        

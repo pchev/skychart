@@ -1,0 +1,115 @@
+object f_detail: Tf_detail
+  Left = 428
+  Height = 461
+  Top = 257
+  Width = 393
+  ActiveControl = Panel1
+  BorderStyle = bsSizeToolWin
+  Caption = 'Details'
+  ClientHeight = 461
+  ClientWidth = 393
+  OnCreate = FormCreate
+  OnShow = FormShow
+  ParentFont = True
+  LCLVersion = '0.9.30.3'
+  object Panel1: TPanel
+    Left = 0
+    Height = 36
+    Top = 0
+    Width = 393
+    Align = alTop
+    ClientHeight = 36
+    ClientWidth = 393
+    FullRepaint = False
+    TabOrder = 0
+    object Button1: TButton
+      Left = 261
+      Height = 25
+      Top = 6
+      Width = 91
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Close'
+      OnClick = Button1Click
+      TabOrder = 2
+    end
+    object Button2: TButton
+      Left = 4
+      Height = 25
+      Top = 6
+      Width = 125
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Center Object'
+      OnClick = Button2Click
+      TabOrder = 0
+    end
+    object Button3: TButton
+      Left = 138
+      Height = 25
+      Top = 6
+      Width = 117
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Neighbor'
+      OnClick = Button3Click
+      TabOrder = 1
+    end
+  end
+  object HTMLViewer1: THTMLViewer
+    Left = 0
+    Height = 425
+    Top = 36
+    Width = 393
+    OnHotSpotClick = HTMLViewer1HotSpotClick
+    OnImageRequest = HTMLViewer1ImageRequest
+    TabOrder = 1
+    Align = alClient
+    PopupMenu = PopupMenu1
+    DefBackground = 14737632
+    BorderStyle = htNone
+    HistoryMaxCount = 0
+    DefFontName = 'Times New Roman'
+    DefPreFontName = 'Courier New'
+    DefFontSize = 10
+    DefFontColor = clBlack
+    NoSelect = False
+    CharSet = DEFAULT_CHARSET
+    PrintMarginLeft = 2
+    PrintMarginRight = 2
+    PrintMarginTop = 2
+    PrintMarginBottom = 2
+    PrintScale = 1
+  end
+  object ActionList1: TActionList
+    left = 72
+    top = 208
+    object SelectAll: TAction
+      Caption = 'SelectAll'
+      OnExecute = SelectAllExecute
+      ShortCut = 16449
+    end
+    object EditCopy: TAction
+      Caption = 'Copy'
+      OnExecute = EditCopyExecute
+      ShortCut = 16451
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    left = 72
+    top = 144
+    object SelectAll1: TMenuItem
+      Action = SelectAll
+      OnClick = SelectAllExecute
+    end
+    object Copy1: TMenuItem
+      Action = EditCopy
+      OnClick = EditCopyExecute
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    left = 207
+    top = 149
+  end
+end

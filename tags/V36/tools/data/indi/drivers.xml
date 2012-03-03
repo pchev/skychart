@@ -1,0 +1,46 @@
+<devGroup group="Telescopes">
+	<device label="LX200 Basic" focal_length="" aperture="">
+		<driver name="LX200 Basic">indi_lx200basic</driver>
+		<version>1.0</version>
+	</device>
+	<device label="LX200 Autostar" focal_length="" aperture="">
+		<driver name="LX200 Autostar">indi_lx200autostar</driver>
+		<version>2.0</version>
+	</device>
+	<device label="LX200 Classic" focal_length="" aperture="">
+		<driver name="LX200 Classic">indi_lx200classic</driver>
+		<version>1.0</version>
+	</device>
+	<device label="LX200 GPS" focal_length="" aperture="">
+		<driver name="LX200 GPS">indi_lx200gps</driver>
+		<version>2.0</version>
+	</device>
+	<device label="LX200 16" focal_length="4064" aperture="406.4">
+		<driver name="LX200 16">indi_lx200_16</driver>
+		<version>2.0</version>
+	</device>
+	<device label="LX200 Astro-Physics">
+		<driver name="LX200 Astro-Physics">indi_lx200ap</driver>
+		<version>1.0</version>
+	</device>
+	<device label="Celestron GPS" focal_length="" aperture="">
+		<driver name="Celestron GPS">indi_celestron_gps</driver>
+		<version>1.0</version>
+	</device>
+	<device label="Orion Atlas" focal_length="" aperture="">
+		<driver name="Orion Atlas">indi_orion_atlas</driver>
+		<version>0.1</version>
+	</device>
+	<device label="Temma Takahashi" focal_length="" aperture="">
+		<driver name="Temma">indi_temma</driver>
+	  	<version>0.1</version>
+	</device>
+	<device label="Sky Commander" focal_length="" aperture="">
+		<driver name="Sky Commander">indi_skycommander</driver>
+		<version>0.1</version>
+	</device>
+	<device label="Intelliscope" focal_length="" aperture="">
+		<driver name="Intelliscope">indi_intelliscope</driver>
+		<version>0.2</version>
+	</device>
+</devGroup>

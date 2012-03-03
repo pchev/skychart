@@ -1,0 +1,116 @@
+#
+#   Makefile.fpc for Skychart
+#
+
+[package]
+name=skychart
+version=3
+
+[target]
+dirs=skychart varobs
+
+[require]
+libc=y
+packages=rtl
+
+[prerules]
+PREFIX=%PREFIX%
+
+[rules]
+.PHONY: all
+
+all: skychart_all varobs_all
+
+ifeq ($(OS_TARGET),win32)
+install: 
+	.\install.cmd $(PREFIX)
+uninstall: 
+	.\uninstall.cmd $(PREFIX)
+data:
+	$(MAKE) -C tools all
+install_data:
+	$(MAKE) -C tools install 
+uninstall_data:
+	$(MAKE) -C tools uninstall
+else
+ifeq ($(OS_TARGET),win64)
+install: 
+	.\install.cmd $(PREFIX)
+uninstall: 
+	.\uninstall.cmd $(PREFIX)
+data:
+	$(MAKE) -C tools all
+install_data:
+	$(MAKE) -C tools install 
+uninstall_data:
+	$(MAKE) -C tools uninstall
+else
+ifeq ($(OS_TARGET),darwin)
+install: 
+	./install_darwin.sh $(PREFIX)
+uninstall: 
+	./uninstall_darwin.sh $(PREFIX)
+data:
+	\$(MAKE) -C tools all
+install_data:
+	\$(MAKE) -C tools install 
+install_doc:
+	\$(MAKE) -C tools install_doc 
+install_nonfree:
+	\$(MAKE) -C tools install_nonfree 
+install_cat1:
+	./install_darwin_cat1.sh $(PREFIX) 
+install_cat2:
+	./install_darwin_cat2.sh $(PREFIX) 
+install_pict:
+	./install_darwin_pict.sh $(PREFIX) 
+uninstall_data:
+	\$(MAKE) -C tools uninstall
+else
+install: 
+	./install.sh $(PREFIX) $(CPU_TARGET)
+uninstall: 
+	./uninstall.sh $(PREFIX)
+install_win: 
+	./install_win.sh win32 $(PREFIX)
+uninstall_win: 
+	./uninstall_win.sh $(PREFIX)
+install_win64:
+	./install_win.sh win64 $(PREFIX)
+uninstall_win64: 
+	./uninstall_win.sh $(PREFIX)
+install_win_data:
+	\$(MAKE) -C tools install_win 
+install_win_doc:
+	\$(MAKE) -C tools install_win_doc 
+install_win_nonfree:
+	\$(MAKE) -C tools install_win_nonfree 
+install_win_cat1:
+	./install_win_cat1.sh $(PREFIX) 
+install_win_cat2:
+	./install_win_cat2.sh $(PREFIX) 
+install_win_pict:
+	./install_win_pict.sh $(PREFIX) 
+uninstall_win_data:
+	\$(MAKE) -C tools uninstall_win
+data:
+	\$(MAKE) -C tools all
+install_data:
+	\$(MAKE) -C tools install
+install_doc:
+	\$(MAKE) -C tools install_doc
+install_nonfree:
+	\$(MAKE) -C tools install_nonfree
+install_cat1:
+	./install_cat1.sh $(PREFIX) 
+install_cat2:
+	./install_cat2.sh $(PREFIX) 
+install_pict:
+	./install_pict.sh $(PREFIX) 
+uninstall_data:
+	\$(MAKE) -C tools uninstall
+revision:
+	\$(MAKE) -C skychart revision
+endif
+endif
+endif

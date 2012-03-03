@@ -1,0 +1,57 @@
+                              BUREAU DES LONGITUDES 
+
+		   	     /pub/ephem/satel/posxy/lowprec
+
+                                Septembre 1997
+===========================                         ============================
+
+
+satel/posxy/lowprec
+
+              Ephemerides basse precision des principaux satellites naturels
+              Positions differentielles des satellites de
+              Mars, Jupiter, Saturne, Uranus donnees sous forme de 
+              developpements en fonctions mixtes
+
+AUTEURS :     J.-E. Arlot, Ch. Ruatti, D.T. Vu et  W.Thuillot
+
+ADRESSE :     Bureau des Longitudes - URA 707 
+              77 av. Denfert Rochereau, F-75014 PARIS
+              Phone: (1) 40 51 22 67  / (1) 40 51 22 65  
+              Fax:   (1) 46 33 28 34 
+              e-mail:arlot@bdl.fr, vu@bdl.fr, ruatti@bdl.fr, thuillot@bdl.fr
+
+CONTENU:      Les fichiers de ce repertoire permette de calculer les coordonnees
+              differentielles des principaux satellites naturels avec une 
+              precision de 0.5 seconde de degre sur la periode 1997-2020.
+
+              Attention: Les programmes de ce sous-repertoire fonctionnent 
+              conformement a ceux du repertoire posxy: voir ce repertoire 
+              pour plus de details
+             
+
+  seqdir.f  : ce programme Fortran (a compiler) permet de transformer les 
+              fichiers sequentiels upiter.xxxx, saturne.xxxx, uranus.xxxx 
+              (ou xxxx est l'annee correspondante), en des fichiers acces 
+              direct a utiliser par le programme ephang.
+
+
+  diffpos.f : ce programme Fortran (a compiler) utilise les fichiers acces 
+              direct pour calculer les positions differentielles des satellites
+              
+
+  mars.xxxx     |  fichiers sequentiels de coefficients des fonctions mixtes 
+  jupiter.xxxx  |  pour l'annee xxxx (comprise entre 1997 et 2020)
+  saturne.xxxx  |
+  uranus.xxxx   |
+
+================================================================================
+Les remarques sur ce serveur ou cette rubrique sont a faire a une des adresses 
+suivantes.                     E-mail     : comments@bdl.fr
+                               Fax        : (33) 1 46 33 28 34 
+                               Poste      : Bureau des longitudes
+                                            77 avenue Denfert Rochereau
+                                            F-75014 PARIS
+================================================================================
+
+

@@ -1,0 +1,1 @@
+\tools\xdev\lazres htmlcomp.lrs THTMLVIEWER.bmp TFRAMEVIEWER.bmp TFRAMEBROWSER.bmp 
