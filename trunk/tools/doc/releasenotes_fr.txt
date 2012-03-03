@@ -1,4 +1,4 @@
-Version 3.5  Notes de la version
+Version 3.6  Notes de la version
 
 - Modifie la manière de travailler des bouttons "Voir les grilles".
 - Ajout du boutton "Voir la boussole".
