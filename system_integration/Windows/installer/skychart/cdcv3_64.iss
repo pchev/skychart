@@ -30,7 +30,7 @@ CreateStartupIcon=Launch Skychart Clock automatically on Windows startup
 [Tasks]
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}
 Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
-Name: startupicon; Description: {cm:CreateStartupIcon}; GroupDescription: {cm:AdditionalIcons}
+Name: startupicon; Description: {cm:CreateStartupIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
 
 [InstallDelete]
 Name: {app}\cdc.exe; Type: files; Components: ; Tasks: 
