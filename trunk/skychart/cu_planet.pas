@@ -252,6 +252,7 @@ if (ipla<1) or (ipla=3) or (ipla>9) then exit;
  qr:=(2*dp*distance);
  if qr<>0 then phase:=(dp*dp+distance*distance-dt*dt)/qr //=cos(phase)
           else phase:=1;
+ if abs(phase)>1 then phase:=sgn(phase);
  illum:=(1+phase)/2;
  phase:=radtodeg(arccos(phase));
  // lt and lp must be computed!
