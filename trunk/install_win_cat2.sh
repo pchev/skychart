@@ -7,7 +7,7 @@ function InstCat {
   ddir=$2
   pkgz=BaseData/$pkg
   if [ ! -e $pkgz ]; then
-     wget http://download.origo.ethz.ch/skychart/2075/$pkg -O $pkgz
+     wget http://sourceforge.net/projects/skychart/files/4-source_data/$pkg -O $pkgz
   fi
   tar xvzf $pkgz -C $ddir
 }

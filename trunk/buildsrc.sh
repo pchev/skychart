@@ -2,10 +2,10 @@
 
 # Script to make the full source tar for release
 
-version=3.5
+version=3.7
 pkg=trunk
 #pkg=tags/V36
-repo=https://svn.origo.ethz.ch/skychart
+repo=https://skychart.svn.sourceforge.net/svnroot/skychart
 
 builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, it is removed after the run!
 
@@ -34,7 +34,7 @@ cd -
 
 # download jpleph
 cd $verdir/BaseData
-wget http://download.origo.ethz.ch/skychart/2443/data_jpleph.tgz
+wget http://sourceforge.net/projects/skychart/files/4-source_data/data_jpleph.tgz
 cd -
 
 # tar files
