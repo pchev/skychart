@@ -1353,6 +1353,7 @@ if (not firstuse)and(config_version<cdcver) then
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
+if not Application.ShowMainForm then InitOK:=true;  // no formshow if --daemon
 except
   on E: Exception do begin
    WriteTrace('Initialization error: '+E.Message);
