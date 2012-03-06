@@ -6,7 +6,7 @@ To avoid to reboot your computer please close the Skychart Clock Icon now if it 
 Copyright (C) 2012 Patrick Chevalley
 
 http://ap-i.net/skychart
-http://skychart.origo.ethz.ch/
+http://skychart.sourceforge.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
