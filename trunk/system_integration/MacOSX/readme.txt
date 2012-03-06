@@ -5,7 +5,7 @@ Version 3.7 beta
 Copyright (C) 2012 Patrick Chevalley
 
 http://ap-i.net/skychart
-http://skychart.origo.ethz.ch/
+http://skychart.sourceforge.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

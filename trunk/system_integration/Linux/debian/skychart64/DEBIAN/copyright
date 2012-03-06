@@ -8,7 +8,7 @@ Release     : 1
 Group       : Sciences/Astronomy
 License     : GPL-2+
 Packager    : Patrick Chevalley
-URL         : http://skychart.origo.ethz.ch
+URL         : http://skychart.sourceforge.net
 Summary     : Skychart / Cartes du Ciel planetarium software
 Description :
 Planetarium software for the advanced amateur astronomer.
