@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-22 13:01+0000\n"
+"POT-Creation-Date: 2012-03-09 17:21+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-03 12:44+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-09 17:32+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -4438,6 +4438,10 @@ msgstr "Показати об'єкти"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
+msgstr ""
+
+#: u_translation.rsshowonlytext
+msgid "Show only text in detail window"
 msgstr ""
 
 #: u_translation.rsshowpictures

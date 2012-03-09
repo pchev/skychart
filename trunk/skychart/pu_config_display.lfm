@@ -13,7 +13,7 @@ object f_config_display: Tf_config_display
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.3'
+  LCLVersion = '0.9.30.4RC2'
   object MainPanel: TPanel
     Left = 0
     Height = 532
@@ -29,10 +29,10 @@ object f_config_display: Tf_config_display
       Height = 530
       Top = 1
       Width = 513
-      ActivePage = Page3
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -304,9 +304,9 @@ object f_config_display: Tf_config_display
         end
         object red_moveBox: TCheckBox
           Left = 28
-          Height = 26
-          Top = 429
-          Width = 230
+          Height = 19
+          Top = 421
+          Width = 223
           Caption = 'Reduce detail when moving the chart'
           OnClick = red_moveBoxClick
           TabOrder = 2
@@ -329,7 +329,7 @@ object f_config_display: Tf_config_display
           end
           object FileNameEdit1: TFileNameEdit
             Left = 37
-            Height = 22
+            Height = 24
             Top = 84
             Width = 332
             OnAcceptFileName = FileNameEdit1AcceptFileName
@@ -354,12 +354,21 @@ object f_config_display: Tf_config_display
         end
         object antialias: TCheckBox
           Left = 28
-          Height = 26
-          Top = 458
-          Width = 83
+          Height = 19
+          Top = 441
+          Width = 76
           Caption = 'Anti Alias  '
           OnClick = antialiasClick
           TabOrder = 6
+        end
+        object CheckBox6: TCheckBox
+          Left = 28
+          Height = 19
+          Top = 461
+          Width = 189
+          Caption = 'Show only text in detail window'
+          OnClick = CheckBox6Click
+          TabOrder = 7
         end
       end
       object Page2: TTabSheet

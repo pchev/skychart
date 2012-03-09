@@ -53,6 +53,7 @@ type
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
     ShowLineShape: TShape;
@@ -370,6 +371,7 @@ type
     procedure CheckBox1Click(Sender: TObject);
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox5Click(Sender: TObject);
+    procedure CheckBox6Click(Sender: TObject);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
@@ -746,6 +748,7 @@ label8.caption:=rsDrawALineTha;
 Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
 antialias.Caption:=rsAntiAliasDra;
+CheckBox6.Caption:=rsShowOnlyText;
 SetHelp(self,hlpCfgDispl);
 end;
 
@@ -860,6 +863,11 @@ end;
 procedure Tf_config_display.CheckBox5Click(Sender: TObject);
 begin
   csc.ShowLegend:=CheckBox5.Checked;
+end;
+
+procedure Tf_config_display.CheckBox6Click(Sender: TObject);
+begin
+ cmain.TextOnlyDetail := CheckBox6.Checked;
 end;
 
 procedure Tf_config_display.MarkNumberClick(Sender: TObject);
@@ -1060,6 +1068,7 @@ begin
  SizeContrastBar.position:=round(cplot.magsize*10);
  red_moveBox.Checked:=cplot.red_move;
  antialias.Checked:=cplot.AntiAlias;
+ CheckBox6.Checked:=cmain.TextOnlyDetail;
  StarSizeBar1.position:=cplot.starsize;
  StarDynBar1.position:=cplot.stardyn;
  FileNameEdit1.FileName:=cmain.starshape_file;

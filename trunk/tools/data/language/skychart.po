@@ -5374,3 +5374,7 @@ msgstr ""
 msgid "C+N"
 msgstr ""
 
+#: u_translation:rsshowonlytext
+msgid "Show only text in detail window"
+msgstr ""
+

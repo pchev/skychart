@@ -18,7 +18,7 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.3'
+  LCLVersion = '0.9.30.4RC2'
   object MultiDoc1: TMultiDoc
     Left = 384
     Height = 230
