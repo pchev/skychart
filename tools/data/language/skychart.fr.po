@@ -5,15 +5,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-22 13:01+0000\n"
-"PO-Revision-Date: 2012-01-22 13:02+0000\n"
+"POT-Creation-Date: 2012-03-09 17:21+0000\n"
+"PO-Revision-Date: 2012-03-09 17:26+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-03-03 12:44+0000\n"
-"X-Generator: Launchpad (build 14886)\n"
+"X-Launchpad-Export-Date: 2012-03-09 17:32+0000\n"
+"X-Generator: Launchpad (build 14914)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -4444,6 +4444,10 @@ msgstr "Voir les objets"
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
 msgstr "Voir seulement le méridien en Alt/Az"
+
+#: u_translation.rsshowonlytext
+msgid "Show only text in detail window"
+msgstr "Afficher uniquement le texte dans la fenêtre de détail"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"

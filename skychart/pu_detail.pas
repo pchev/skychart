@@ -41,6 +41,7 @@ type
   Tf_detail = class(TForm)
     EditCopy: TAction;
     HTMLViewer1: THTMLViewer;
+    Memo1: TMemo;
     SelectAll: TAction;
     Panel1: TPanel;
     Button1: TButton;
@@ -68,6 +69,7 @@ type
     FCenter : Tstr1func;
     FNeighbor : Tstr1func;
     FHTMLText: String;
+    FTextOnly: boolean;
     procedure SetHTMLText(const value: string);
   public
     { Public declarations }
@@ -76,6 +78,7 @@ type
     objname: string;
     InfoUrlNum: integer;
     property text: string read FHTMLText write SetHTMLText;
+    property TextOnly: boolean read FTextOnly write FTextOnly;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
     procedure SetLang;
@@ -155,6 +158,8 @@ begin
   {$ifdef darwin}   { TODO : Check Mac OS X Bringtofront when called from popupmenu }
   timer1.Enabled:=true;
   {$endif}
+  memo1.Visible:=FTextOnly;
+  HTMLViewer1.Visible:=not FTextOnly;
 end;
 
 procedure Tf_detail.HTMLViewer1ImageRequest(Sender: TObject; const SRC: string; var Stream: TMemoryStream);
@@ -188,6 +193,7 @@ end;
 
 procedure Tf_detail.FormCreate(Sender: TObject);
 begin
+FTextOnly:=false;
 SetLang;
 end;
 
@@ -196,6 +202,11 @@ begin
   HTMLViewer1.Clear;
   HTMLViewer1.ClearHistory;
   HTMLViewer1.LoadFromString(value);
+  if FTextOnly then begin
+    memo1.clear;
+    HTMLViewer1.SelectAll;
+    memo1.Text:=SysToUTF8(HTMLViewer1.SelText);
+  end;
 end;
 
 end.

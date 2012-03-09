@@ -2347,6 +2347,7 @@ f_detail.de:=de2000;
 f_detail.objname:=sc.cfgsc.FindName;
 f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
 f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
+f_detail.TextOnly:=cmain.TextOnlyDetail;
 f_detail.show;
 f_detail.text:=FormatDesc;
 f_detail.setfocus;

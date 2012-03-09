@@ -1371,6 +1371,7 @@ resourcestring
   rsAbrevPlanetaryNebula = 'Pl';
   rsAbrevNebula = 'Nb';
   rsAbrevClusterNebula = 'C+N';
+  rsShowOnlyText = 'Show only text in detail window';
 
 implementation
 

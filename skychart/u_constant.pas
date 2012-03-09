@@ -705,7 +705,7 @@ type
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize, VOurl, VOmaxrecord: integer;
                 PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
-                maximized,updall,AutostartServer,keepalive, NewBackgroundImage : boolean;
+                maximized,updall,AutostartServer,keepalive, NewBackgroundImage, TextOnlyDetail : boolean;
                 ServerIPaddr,ServerIPport,PrintDesc,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
                 AnimFps : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass, SocksType: string;
@@ -1863,6 +1863,7 @@ updall:=Source.updall;
 AutostartServer:=Source.AutostartServer;
 keepalive:=Source.keepalive;
 NewBackgroundImage:=Source.NewBackgroundImage;
+TextOnlyDetail:=Source.TextOnlyDetail;
 ServerIPaddr:=Source.ServerIPaddr;
 ServerIPport:=Source.ServerIPport;
 PrintCmd1:=Source.PrintCmd1;
