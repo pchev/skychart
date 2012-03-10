@@ -6463,41 +6463,57 @@ Findit:
       sc.cfgsc.TrackOn:=false;
       IdentLabel.visible:=false;
       sc.cfgsc.FindType:=ftInv;
-      saveChartJD:=sc.cfgsc.JDChart;
-      saveCurYear:=sc.cfgsc.CurYear;
-      saveCurMonth:=sc.cfgsc.CurMonth;
-      saveCurDay:=sc.cfgsc.CurDay;
-      sc.cfgsc.JDChart:=jd2000;
-      sc.cfgsc.CurYear:=2000;
-      sc.cfgsc.CurMonth:=1;
-      sc.cfgsc.CurDay:=1;
-      ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
-      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position, error search 10 min
-      if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position, error search 20 min
-      if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
+      if itype=ftStar then begin     // search in catalog for proper motion
+          saveChartJD:=sc.cfgsc.JDChart;
+          saveCurYear:=sc.cfgsc.CurYear;
+          saveCurMonth:=sc.cfgsc.CurMonth;
+          saveCurDay:=sc.cfgsc.CurDay;
+          sc.cfgsc.JDChart:=jd2000;
+          sc.cfgsc.CurYear:=2000;
+          sc.cfgsc.CurMonth:=1;
+          sc.cfgsc.CurDay:=1;
+          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position, error search 10 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position, error search 20 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
+            sc.cfgsc.FindName:=Num;
+            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsObjectPositi+'';
+            sc.cfgsc.FindRA:=ar1;
+            sc.cfgsc.FindDec:=de1;
+            sc.cfgsc.FindSize:=0;
+            sc.cfgsc.FindPM:=false;
+            sc.cfgsc.FindOK:=true;
+            sc.cfgsc.FindType:=ftInv;
+            sc.cfgsc.TrackOn:=false;
+            sc.cfgsc.TrackType:=6;
+            sc.cfgsc.TrackRA:=ar1;
+            sc.cfgsc.TrackDec:=de1;
+            sc.cfgsc.TrackName:=Num;
+          end;
+          sc.cfgsc.JDChart := saveChartJD;
+          sc.cfgsc.CurYear  := saveCurYear;
+          sc.cfgsc.CurMonth := saveCurMonth;
+          sc.cfgsc.CurDay   := saveCurDay;
+          if sc.cfgsc.FindStarPM then begin
+            dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
+            propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
+          end;
+      end else begin
         sc.cfgsc.FindName:=Num;
-        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsObjectPositi+'';
+        sc.cfgsc.FindDesc:=Num;
         sc.cfgsc.FindRA:=ar1;
         sc.cfgsc.FindDec:=de1;
         sc.cfgsc.FindSize:=0;
         sc.cfgsc.FindPM:=false;
         sc.cfgsc.FindOK:=true;
-        sc.cfgsc.FindType:=ftInv;
+        sc.cfgsc.FindType:=itype;
         sc.cfgsc.TrackOn:=false;
         sc.cfgsc.TrackType:=6;
         sc.cfgsc.TrackRA:=ar1;
         sc.cfgsc.TrackDec:=de1;
         sc.cfgsc.TrackName:=Num;
-      end;
-      sc.cfgsc.JDChart := saveChartJD;
-      sc.cfgsc.CurYear  := saveCurYear;
-      sc.cfgsc.CurMonth := saveCurMonth;
-      sc.cfgsc.CurDay   := saveCurDay;
-      if sc.cfgsc.FindStarPM then begin
-        dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
-        propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
       end;
       precession(jd2000,sc.cfgsc.JDchart,sc.cfgsc.FindRA,sc.cfgsc.FindDec);
       if sc.cfgsc.ApparentPos then apparent_equatorial(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc,true,itype<ftPla);
