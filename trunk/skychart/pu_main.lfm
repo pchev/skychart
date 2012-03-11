@@ -4377,7 +4377,7 @@ object f_main: Tf_main
         OnClick = SetupDisplayExecute
       end
       object MenuItem7: TMenuItem
-        Action = SetupPictures
+        Caption = 'Setup Pictures'
         Bitmap.Data = {
           36040000424D3604000000000000360000002800000010000000100000000100
           2000000000000004000064000000640000000000000000000000000000000000
@@ -4414,7 +4414,9 @@ object f_main: Tf_main
           0000000000000000000000000000000000000000000000000000000000000000
           0000000000000000000000000000000000000000000000000000
         }
-        OnClick = SetupPicturesExecute
+        Hint = 'Change pictures display'
+        ImageIndex = 77
+        OnClick = MenuItem7Click
       end
       object MenuItem4: TMenuItem
         Action = SetupSystem
