@@ -1,2 +1,12 @@
 Version 3.7 release Notes
 
+New options:
+  - Setup/Display "Show only text in detail window", use if you have problem with the standard detail window.
+
+Bug fixed since version 3.6:
+  - Crash in planet computation.
+  - Accept command if running with --daemon option
+  - Wrong position when searching for planet name.
+  - Crash in Observatory database.
+  - Fix Setup/Pictures menu
+  - Fix UTF-8 picture path

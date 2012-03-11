@@ -1,2 +1,12 @@
 Version 3.7  Notes de la version
 
+Nouvelles options:
+  - Configuration/Affichage "Afficher uniquement le texte dans la fenêtre de détail", a utiliser si vous avez un problème avec la fenêtre de détail standard.
+
+Problèmes corrigé depuis la version 3.6:
+  - Plantage du programme lors du calcul des planètes.
+  - Accepte des commandes si vous utilisez l'option --daemon
+  - Mauvaise position lors d'une recherche de planète par nom.
+  - Plantage du programme avec la base de donnée observatoires.
+  - Corrige le menu Configuration/Images
+  - Corrige le chemin des images UTF-8.
