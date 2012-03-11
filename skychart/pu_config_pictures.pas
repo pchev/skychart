@@ -408,11 +408,11 @@ end
   else RefreshImage;
 end;
 
-////////// duplicate because of filenameedit onchange bug //////////////////////////
+////////// duplicate because of filenameedit onchange bug on Mac OS X //////////////////////////
 procedure Tf_config_pictures.backimgChange(Sender: TObject);
 begin
-if LockChange or (not Fileexists(backimg.text)) then exit;
-csc.BackgroundImage:=backimg.text;
+if LockChange or (not FileExistsUTF8(backimg.text)) then exit;
+csc.BackgroundImage:=UTF8ToSys(backimg.text);
 Ffits.filename:=csc.BackgroundImage;
 FFits.InfoWCScoord;
 if Ffits.WCSvalid then begin
@@ -437,8 +437,9 @@ end;
 procedure Tf_config_pictures.backimgAcceptFileName(Sender: TObject;
   var Value: String);
 begin
-if LockChange or (not Fileexists(value)) then exit;
-csc.BackgroundImage:=value;
+{$ifdef darwin}
+if LockChange or (not FileExistsUTF8(value)) then exit;
+csc.BackgroundImage:=UTF8ToSys(value);
 Ffits.filename:=csc.BackgroundImage;
 FFits.InfoWCScoord;
 if Ffits.WCSvalid then begin
@@ -459,6 +460,7 @@ else begin
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
 end;
+{$endif}
 end;
 
 //////////////////////////

@@ -13,7 +13,7 @@ object f_config_pictures: Tf_config_pictures
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.3'
+  LCLVersion = '0.9.30.4RC2'
   object MainPanel: TPanel
     Left = 0
     Height = 485
@@ -29,16 +29,16 @@ object f_config_pictures: Tf_config_pictures
       Height = 483
       Top = 1
       Width = 511
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       OnPageChanged = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 483
-        ClientWidth = 511
+        ClientHeight = 479
+        ClientWidth = 507
         object ProgressPanel: TPanel
           Left = 15
           Height = 94
@@ -143,16 +143,16 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 26
+          Height = 19
           Top = 375
-          Width = 209
+          Width = 202
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 2
         end
         object imgpath: TDirectoryEdit
           Left = 150
-          Height = 22
+          Height = 24
           Top = 39
           Width = 264
           ShowHidden = False
@@ -194,8 +194,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 483
-        ClientWidth = 511
+        ClientHeight = 479
+        ClientWidth = 507
         object Label270: TLabel
           Left = 0
           Height = 15
@@ -229,9 +229,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 95
-          Height = 26
+          Height = 19
           Top = 39
-          Width = 122
+          Width = 115
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -313,12 +313,12 @@ object f_config_pictures: Tf_config_pictures
         end
         object backimg: TFileNameEdit
           Left = 95
-          Height = 22
+          Height = 24
           Top = 15
           Width = 360
           OnAcceptFileName = backimgAcceptFileName
           DialogOptions = []
-          Filter = 'FITS Files|*.fit *.fits *.fts|All|*'
+          Filter = 'FITS Files|*.fit; *.fits; *.fts|All|*.*'
           FilterIndex = 0
           HideDirectories = False
           ButtonWidth = 23
@@ -339,16 +339,16 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 483
-        ClientWidth = 511
+        ClientHeight = 479
+        ClientWidth = 507
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
           Top = 101
           Width = 481
           Caption = 'RealSky®'
-          ClientHeight = 339
-          ClientWidth = 477
+          ClientHeight = 341
+          ClientWidth = 481
           TabOrder = 0
           object Label72: TLabel
             Left = 8
@@ -492,8 +492,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 8
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 69
-          ClientWidth = 477
+          ClientHeight = 71
+          ClientWidth = 481
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
