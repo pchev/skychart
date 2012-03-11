@@ -466,6 +466,7 @@ type
     procedure Maillist1Click(Sender: TObject);
     procedure MenuChartInfoClick(Sender: TObject);
     procedure MenuChartLegendClick(Sender: TObject);
+    procedure MenuItem7Click(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -1473,6 +1474,11 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
    Refresh;
 end;
+end;
+
+procedure Tf_main.MenuItem7Click(Sender: TObject);
+begin
+  SetupPicturesPage(1);
 end;
 
 procedure Tf_main.NextChild1Click(Sender: TObject);
@@ -2500,6 +2506,9 @@ procedure Tf_main.ShowBackgroundImageExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
+   if sc.cfgsc.ShowBackgroundImage and (not Fits.Header.valid) then begin
+      sc.cfgsc.ShowBackgroundImage:=false;
+   end;
    if sc.cfgsc.ShowBackgroundImage and (not Fits.dbconnected) then begin
       sc.cfgsc.ShowBackgroundImage:=false;
       ShowError(rsErrorPleaseC);
@@ -6241,6 +6250,7 @@ SetupSolSys.caption:='&'+rsSolarSystem+Ellipsis;
 SetupSystem.caption:='&'+rsSystem+Ellipsis;
 SetupInternet.caption:='&'+rsInternet+Ellipsis;
 SetupPictures.caption:='&'+rsPictures+Ellipsis;
+MenuItem7.caption:='&'+rsPictures+Ellipsis;
 SetupCatalog.caption:='&'+rsCatalog+Ellipsis;
 MenuItem8.caption:='&'+rsShowHideDSSI;
 View1.caption:='&'+rsView;
