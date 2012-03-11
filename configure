@@ -144,8 +144,7 @@ cd $basedir
 
 echo
 echo You can now build with:
-echo make clean  
-echo make  
+echo make clean  all
 echo make install 
 echo make install_data
 echo make install_doc
@@ -154,8 +153,7 @@ echo make install_cat1
 echo make install_cat2
 echo
 echo To crosscompile from Linux to Windows: 
-echo make clean OS_TARGET=win32 CPU_TARGET=i386
-echo make OS_TARGET=win32 CPU_TARGET=i386
+echo make clean all OS_TARGET=win32 CPU_TARGET=i386
 echo make install_win
 echo make install_win_data
 echo make install_win_doc
