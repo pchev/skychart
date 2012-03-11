@@ -42,7 +42,7 @@ object f_observatory_db: Tf_observatory_db
       AutoComplete = True
       AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
       ItemHeight = 0
-      OnSelect = citylistChange
+      OnChange = citylistChange
       TabOrder = 3
       Text = '...'
     end
