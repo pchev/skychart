@@ -385,7 +385,7 @@ begin
 end;
 
 procedure Tf_observatory_db.citylistChange(Sender: TObject);
-var id,loctype,lati,longi,elevation,timezone:string;
+var id,loctype,lati,longi,elevation,timezone,obs:string;
     p:integer;
 begin
 if LockChange then exit;
@@ -395,9 +395,10 @@ if citylist.ItemIndex>MaxCityList-1 then begin
   DoCitySearch;
   exit;
 end;
-csc.obsname:=citylist.text;
-p:=pos(' -- ',csc.obsname);
-if p>0 then csc.ObsName:=copy(csc.obsname,1,p-1);
+obs:=citylist.text;
+p:=pos(' -- ',obs);
+if p>0 then obs:=copy(obs,1,p-1);
+csc.obsname:=obs;
 if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
 id:=citycode[citylist.ItemIndex];
 if cdb.GetCityLoc(id,loctype,lati,longi,elevation,timezone) then begin
