@@ -735,7 +735,7 @@ begin
   buf:=trim(TZComboBox.Text);
   if buf='' then exit;
   i:=pos(' ',buf);
-  if i>0 then Delete(buf,i,9999);
+  if i>0 then buf:=Copy(buf,1,i-1);
   csc.ObsTZ:=buf;
   if copy(buf,1,3)='Etc' then
      csc.countrytz:=false
