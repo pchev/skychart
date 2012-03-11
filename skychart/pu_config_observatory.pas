@@ -434,7 +434,7 @@ begin
   buf:=trim(TZComboBox.Text);
   if buf='' then exit;
   i:=pos(' ',buf);
-  if i>0 then Delete(buf,i,9999);
+  if i>0 then buf:=copy(buf,1,i-1);
   csc.ObsTZ:=buf;
   csc.tz.TimeZoneFile:=ZoneDir+StringReplace(buf,'/',PathDelim,[rfReplaceAll]);
   csc.timezone:=csc.tz.SecondsOffset/3600;

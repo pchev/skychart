@@ -343,7 +343,7 @@ if MessageDlg(rsUpdateOrAddT, mtWarning, [mbYes, mbNo], 0) = mrYes
     country:=countrycode[countrylist.ItemIndex];
     location:=citylist.Text;
     p:=pos(' -- ',location);
-    if p>0 then delete(location,p,99);
+    if p>0 then location:=copy(location,1,p-1);
     buf:=cdb.UpdateCity(curobsid,country,location,'user',lat,lon,elev,ltz);
     if buf='' then buf:=rsUpdatedSucce;
     vicinityClick(Sender);
@@ -359,7 +359,7 @@ begin
 if countrylist.ItemIndex<0 then exit;
 oldcity:=trim(citylist.Text);
 p:=pos(' -- ',oldcity);
-if p>0 then delete(oldcity,p,99);
+if p>0 then oldcity:=Copy(oldcity,1,p-1);
 lockChange:=true;
 citylist.Clear;
 citycode.Clear;
@@ -397,7 +397,7 @@ if citylist.ItemIndex>MaxCityList-1 then begin
 end;
 csc.obsname:=citylist.text;
 p:=pos(' -- ',csc.obsname);
-if p>0 then delete(csc.obsname,p,99);
+if p>0 then csc.ObsName:=copy(csc.obsname,1,p-1);
 if citylist.ItemIndex<0 then begin curobsid:=0; exit; end;
 id:=citycode[citylist.ItemIndex];
 if cdb.GetCityLoc(id,loctype,lati,longi,elevation,timezone) then begin
