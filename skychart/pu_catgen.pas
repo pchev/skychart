@@ -28,7 +28,7 @@ uses u_help, u_translation, u_constant, u_util, pu_progressbar, pu_catgenadv, GS
   SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   StdCtrls, ExtCtrls, ComCtrls, CheckLst, EnhEdits,
   Buttons, Math, Inifiles, Grids, mwFixedRecSort, mwCompFrom,
-  LResources, EditBtn, SynEdit, LazHelpHTML;
+  LResources, EditBtn, LazHelpHTML;
 
 const
 l_sup =10;

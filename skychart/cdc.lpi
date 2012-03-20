@@ -159,7 +159,7 @@
         <WorkingDirectory Value="/usr/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="20">
+    <RequiredPackages Count="19">
       <Item1>
         <PackageName Value="lazvo"/>
         <MinVersion Minor="1" Valid="True"/>
@@ -224,17 +224,13 @@
         <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
       </Item17>
       <Item18>
-        <PackageName Value="SynEdit"/>
-        <MinVersion Major="1" Valid="True"/>
-      </Item18>
-      <Item19>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
-      </Item19>
-      <Item20>
+      </Item18>
+      <Item19>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
-      </Item20>
+      </Item19>
     </RequiredPackages>
     <Units Count="59">
       <Unit0>
