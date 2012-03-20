@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation, u_constant, u_util,
   SysUtils, Types, Classes, Controls, Forms, Printers, Graphics,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
-  LResources, Buttons, SynEdit, LazHelpHTML;
+  LResources, Buttons, LazHelpHTML;
 
 type
   Tistrfunc = procedure(i:integer; var txt:string) of object;
