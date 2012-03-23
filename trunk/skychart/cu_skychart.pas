@@ -48,7 +48,7 @@ Tskychart = class (TComponent)
     fsat: textfile;
     constlabelindex:integer;
     bgcra,bgcde,bgfov,bgmis,bgmas: double;
-    bgw,bgh: integer;
+    bgw,bgh,bgproj: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
@@ -1262,7 +1262,7 @@ y2 := minvalue([pid2,cfgsc.decentre+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
 if FFits.OpenDB('other',x1,x2,y1,y2) then
   while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
     if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
-    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax) then begin
+    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole) then begin
       //cache bgbmp
       Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
     end else begin
@@ -1291,6 +1291,7 @@ if FFits.OpenDB('other',x1,x2,y1,y2) then
             bgmas:=cfgsc.BGmax_sigma;
             bgw:=cfgsc.xmax;
             bgh:=cfgsc.ymax;
+            bgproj:=cfgsc.ProjPole;
          end;
       end;
     end;
