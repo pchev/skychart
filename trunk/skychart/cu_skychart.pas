@@ -47,7 +47,7 @@ Tskychart = class (TComponent)
     FShowDetailXY: Tint2func;
     fsat: textfile;
     constlabelindex:integer;
-    bgcra,bgcde,bgfov,bgmis,bgmas: double;
+    bgcra,bgcde,bgfov,bgmis,bgmas,bgrot: double;
     bgw,bgh,bgproj: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
@@ -1242,7 +1242,7 @@ var
   filename,objname : string;
   ra,de,width,height,dw,dh: double;
   cosr,sinr: extended;
-  x1,y1,x2,y2,rot: Double;
+  x1,y1,x2,y2,rot,ra2000,de2000: Double;
   xx,yy:single;
 begin
 {$ifdef trace_debug}
@@ -1250,19 +1250,23 @@ begin
 {$endif}
 result:=false;
 try
+ra2000:=cfgsc.racentre;
+de2000:=cfgsc.decentre;
+if cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,cfgsc,true,true);
+precession(cfgsc.JDChart,jd2000,ra2000,de2000);
 if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
   x1:=0;
   x2:=pi2;
 end else begin
-  x1 := NormRA(cfgsc.racentre-cfgsc.fov/cos(cfgsc.decentre)-deg2rad);
-  x2 := NormRA(cfgsc.racentre+cfgsc.fov/cos(cfgsc.decentre)+deg2rad);
+  x1 := NormRA(ra2000-cfgsc.fov/cos(de2000)-deg2rad);
+  x2 := NormRA(ra2000+cfgsc.fov/cos(de2000)+deg2rad);
 end;
-y1 := maxvalue([-pid2,cfgsc.decentre-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
-y2 := minvalue([pid2,cfgsc.decentre+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
+y1 := maxvalue([-pid2,de2000-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
+y2 := minvalue([pid2,de2000+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
 if FFits.OpenDB('other',x1,x2,y1,y2) then
   while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
     if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
-    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole) then begin
+    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)and(bgrot=cfgsc.theta) then begin
       //cache bgbmp
       Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
     end else begin
@@ -1287,6 +1291,7 @@ if FFits.OpenDB('other',x1,x2,y1,y2) then
             bgcra:=cfgsc.racentre;
             bgcde:=cfgsc.decentre;
             bgfov:=cfgsc.fov;
+            bgrot:=cfgsc.theta;
             bgmis:=cfgsc.BGmin_sigma;
             bgmas:=cfgsc.BGmax_sigma;
             bgw:=cfgsc.xmax;
