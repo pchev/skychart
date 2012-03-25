@@ -828,15 +828,15 @@ if FWCSvalid and(Fheader.naxis1>0) then begin
   ProjImg.SetSize(c.xmax,c.ymax);
   ra_offset:=Fra;
   de_offset:=Fde;
-  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c,true,true);
-  Precession(c.JDChart,jd2000,ra_offset,de_offset);
+  Precession(jd2000,c.JDChart,ra_offset,de_offset);
+  if c.ApparentPos then apparent_equatorial(ra_offset,de_offset,c,true,true);
   ra_offset:=ra_offset-Fra;
   de_offset:=de_offset-Fde;
   for i:=0 to c.ymax-1 do begin
      for j:=0 to c.xmax-1 do begin
         getadxy(j,i,ra,dec,c);
-        ra:=ra+ra_offset;
-        dec:=dec+de_offset;
+        ra:=ra-ra_offset;
+        dec:=dec-de_offset;
         pixelatcoord(ra,dec,x,y);
         if (x>=0)and(x<Fwidth)and(y>=0)and(y<Fheight) then
            ProjImg.Colors[j,i]:=IntfImg.Colors[x,Fheight-y]
