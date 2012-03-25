@@ -1725,14 +1725,24 @@ begin
 end;
 
 procedure Tf_chart.Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+var zf:double;
+    x,y: integer;
 begin
-handled:=true;
-//lock_TrackCursor:=true;
-if wheeldelta>0 then sc.Zoom(1.25)
-                else sc.Zoom(0.8);
 {$ifdef trace_debug}
  WriteTrace(caption+' Image1MouseWheel');
 {$endif}
+handled:=true;
+//lock_TrackCursor:=true;
+if wheeldelta>0 then zf:=1.25
+                else zf:=0.8;
+sc.Zoom(zf);
+if ssShift in Shift then begin
+  x:=MousePos.X;
+  y:=MousePos.Y;
+  x:=x+round((sc.cfgsc.Xcentre-x)/zf);
+  y:=y+round((sc.cfgsc.Ycentre-y)/zf);
+  sc.MovetoXY(x,y);
+end;
 Refresh;
 end;
 
