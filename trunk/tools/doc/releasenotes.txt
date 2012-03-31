@@ -1,7 +1,10 @@
 Version 3.7 release Notes
 
 New options:
+  - Meta+rotate button rotate by 180 degrees.
+  - Right click on rotate button reset the rotation to 0.
   - Setup/Display "Show only text in detail window", use if you have problem with the standard detail window.
+
 
 Bug fixed since version 3.6:
   - Crash in planet computation.
