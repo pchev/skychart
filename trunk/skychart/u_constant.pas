@@ -930,7 +930,7 @@ const
      );
 
 // Chart Commands
-     numcmd = 81;
+     numcmd = 82;
      cmdlist: array[1..numcmd,1..3] of string=(
      ('ZOOM+','1',''),
      ('ZOOM-','2',''),
@@ -1014,7 +1014,8 @@ const
      ('SETCONSTLINE','78','ON/OFF'),
      ('SETCONSTBOUNDARY','79','ON/OFF'),
      ('RESIZE' ,'80','width height'),
-     ('PRINT' ,'81','PRT/PS/BMP PORTRAIT/LANDSCAPE COLOR/BW filepath')
+     ('PRINT' ,'81','PRT/PS/BMP PORTRAIT/LANDSCAPE COLOR/BW filepath'),
+     ('GETRISESET','82','')
      );
 
 // INDI Telescope driver

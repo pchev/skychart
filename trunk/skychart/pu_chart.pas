@@ -3373,6 +3373,7 @@ case n of
  79 : result:=cmd_SetConstB(arg[1]);
  80 : result:=cmd_resize(arg[1],arg[2]);
  81 : result:=cmd_print(arg[1],arg[2],arg[3],arg[4]);
+ 82 : result:=sc.cfgsc.FindName+blank+sc.cfgsc.FindDesc2;
 else result:=msgFailed+' Bad command name';
 end;
 end;
