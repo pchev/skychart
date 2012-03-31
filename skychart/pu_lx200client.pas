@@ -747,7 +747,7 @@ begin
   Paritybox.text:=ini.readstring('lx200','parity','N');
   StopbitBox.text:=ini.readstring('lx200','stopbits','1');
   TimeOutBox.text:=ini.readstring('lx200','timeout','1000');
-  IntTimeOutBox.text:=ini.readstring('lx200','inttimeout','100');
+  IntTimeOutBox.text:=ini.readstring('lx200','inttimeout','400');
   checkBox1.Checked:=ini.ReadBool('lx200','hpp',false);
   ShowAltAz.Checked:=ini.ReadBool('lx200','AltAz',false);
   av:=ini.ReadBool('lx200','AlwaysVisible',true);
