@@ -312,6 +312,8 @@ type
     procedure ShowObjList;
     procedure SetExpertEquinox;
     procedure SetFieldHint(var lab:Tlabel; n:integer);
+    procedure SetDefaultApparent;
+    Procedure SetValidCoordtype;
   public
     { Public declarations }
     mycsc : Tconf_skychart;
@@ -396,10 +398,6 @@ projectiontype.Items[1]:=rsAzimuthalCoo;
 projectiontype.Items[2]:=rsGalacticCoor;
 projectiontype.Items[3]:=rsEclipticCoor;
 CoordType.Caption:=rsTypeOfCoordi;
-CoordType.Items[0]:=rsApparent+blank+'('+rsTrueEquatorE+')';
-CoordType.Items[1]:=rsMeanOfTheDat+blank+'('+rsMeanEquatorE+')';
-CoordType.Items[2]:=rsMeanJ2000+blank+'('+rsMeanEquinoxA+')';
-CoordType.Items[3]:=rsAstrometricJ+blank+'('+rsMeanEquinoxJ+')';
 Button2.Caption:=rsDefault;
 Label4.caption:=rsCompassRoseS;
 CheckBox13.caption:=rsShowCompass;
@@ -408,6 +406,7 @@ Button4.caption:=rsApply;
 Button5.caption:=rsCancel;
 Button6.caption:=rsHelp;
 SetHelp(self,hlpCfgChart);
+SetValidCoordtype;
 end;
 
 constructor Tf_config_chart.Create(AOwner:TComponent);
@@ -447,8 +446,10 @@ if csc.ApparentPos then ApparentType.ItemIndex:=1
 projectiontype.itemindex:=csc.ProjPole;
 if cshr.AzNorth then AzimutOrigin.ItemIndex:=0
                 else AzimutOrigin.ItemIndex:=1;
-coordtype.ItemIndex:=csc.CoordType;
+ExpertMode.Enabled:=(csc.ProjPole<>1);
+csc.CoordExpertMode:=ExpertMode.Enabled and csc.CoordExpertMode;
 ExpertMode.Checked:=csc.CoordExpertMode;
+SetValidCoordtype;
 end;
 
 procedure Tf_config_chart.ShowGridSpacing;
@@ -691,10 +692,10 @@ begin
   PanelExpert.Visible:=ExpertMode.Checked;
   PanelCoord.Visible:=not PanelExpert.Visible;
   if ExpertMode.Checked then SetExpertEquinox
-                        else begin
-                             cshr.EquinoxType:=0;
-                             CoordTypeClick(Sender);
-                             end;
+    else begin
+         SetDefaultApparent;
+         CoordTypeClick(Sender);
+    end;
 end;
 
 procedure Tf_config_chart.SetExpertEquinox;
@@ -732,16 +733,50 @@ if (cshr.EquinoxType=1)and(trim(epoch2.text)>'') then begin
 end;
 end;
 
+procedure Tf_config_chart.SetDefaultApparent;
+begin
+ExpertMode.Enabled:=false;
+cshr.EquinoxType:=2;
+cshr.EquinoxChart:=rsDate;
+cshr.DefaultJDChart:=jd2000;
+csc.CoordExpertMode:=false;
+csc.ApparentPos:=true;
+csc.PMon:=true;
+csc.YPmon:=0;
+csc.CoordType:=0;
+end;
+
 procedure Tf_config_chart.projectiontypeClick(Sender: TObject);
 begin
 if LockChange then exit;
 csc.ProjPole:=projectiontype.itemindex;
+SetValidCoordtype;
+if csc.ProjPole=1 then begin
+   SetDefaultApparent;
+   ShowChart;
+end else begin
+   ExpertMode.Enabled:=true;
+end;
 end;
 
 procedure Tf_config_chart.AzimutOriginClick(Sender: TObject);
 begin
 if LockChange then exit;
 cshr.AzNorth:=(AzimutOrigin.ItemIndex=0);
+end;
+
+Procedure Tf_config_chart.SetValidCoordtype;
+begin
+CoordType.Items.Clear;
+CoordType.Items.Add(rsApparent+blank+'('+rsTrueEquatorE+')');
+CoordType.Items.Add(rsMeanOfTheDat+blank+'('+rsMeanEquatorE+')');
+if csc.ProjPole<>1 then begin
+  CoordType.Items.Add(rsMeanJ2000+blank+'('+rsMeanEquinoxA+')');
+  CoordType.Items.Add(rsAstrometricJ+blank+'('+rsMeanEquinoxJ+')');
+end else begin
+  if csc.CoordType>1 then csc.CoordType:=0;
+end;
+coordtype.ItemIndex:=csc.CoordType;
 end;
 
 procedure Tf_config_chart.CoordTypeClick(Sender: TObject);

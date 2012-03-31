@@ -2249,41 +2249,45 @@ var txt,thr,tht,ths,tazr,tazs: string;
     cjd0,ra,dec,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des :double;
     i,y,m,d: integer;
 begin
-// mode= 0 star, 1..11 planet
- if (mode>0) and (cfgsc.FindSimjd<>0) then begin
-    Djd(cfgsc.FindSimjd+(cfgsc.TimeZone-cfgsc.DT_UT)/24,y,m,d,h);
-    cjd0:=jd(y,m,d,0);
- end else begin
-    cjd0:=cfgsc.jd0;
- end;
-// rise/set time
-if (mode>0)and(mode<=31) then begin // planet
-   planet.PlanetRiseSet(mode,cjd0,catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,cfgsc);
-end
-else begin // fixed object
-     ra:=cfgsc.FindRA;
-     dec:=cfgsc.FindDec;
-     RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,cfgsc);
-     thr:=armtostr(rmod(hr+24,24));
-     tht:=armtostr(rmod(ht+24,24));
-     ths:=armtostr(rmod(hs+24,24));
+ if (Fcatalog.cfgshr.Equinoxtype=2) then begin
+    // mode= 0 star, 1..11 planet
+     if (mode>0) and (cfgsc.FindSimjd<>0) then begin
+        Djd(cfgsc.FindSimjd+(cfgsc.TimeZone-cfgsc.DT_UT)/24,y,m,d,h);
+        cjd0:=jd(y,m,d,0);
+     end else begin
+        cjd0:=cfgsc.jd0;
+     end;
+    // rise/set time
+    if (mode>0)and(mode<=31) then begin // planet
+       planet.PlanetRiseSet(mode,cjd0,catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,cfgsc);
+    end
+    else begin // fixed object
+         ra:=cfgsc.FindRA;
+         dec:=cfgsc.FindDec;
+         RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,cfgsc);
+         thr:=armtostr(rmod(hr+24,24));
+         tht:=armtostr(rmod(ht+24,24));
+         ths:=armtostr(rmod(hs+24,24));
+    end;
+    txt:='';
+    case i of
+    0 : begin
+        txt:=txt+rsRise+':'+thr+blank+blank+blank;
+        txt:=txt+rsCulmination+':'+tht+blank+blank+blank;
+        txt:=txt+rsSet+':'+ths+blank;
+        end;
+    1 : begin
+        txt:=txt+rsCircumpolar+blank+blank+blank;
+        txt:=txt+rsCulmination+':'+tht+blank;
+        end;
+    else begin
+        txt:=txt+rsInvisibleAtT+blank;
+        end;
+    end;
+    cfgsc.FindDesc2:=txt;
+end else begin
+    cfgsc.FindDesc2:=' ';
 end;
-txt:='';
-case i of
-0 : begin
-    txt:=txt+rsRise+':'+thr+blank+blank+blank;
-    txt:=txt+rsCulmination+':'+tht+blank+blank+blank;
-    txt:=txt+rsSet+':'+ths+blank;
-    end;
-1 : begin
-    txt:=txt+rsCircumpolar+blank+blank+blank;
-    txt:=txt+rsCulmination+':'+tht+blank;
-    end;
-else begin
-    txt:=txt+rsInvisibleAtT+blank;
-    end;
-end;
-cfgsc.FindDesc2:=txt;
 end;
 
 function Tskychart.FindatRaDec(ra,dec,dx: double;searchcenter: boolean; showall:boolean=false):boolean;

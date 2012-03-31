@@ -2598,68 +2598,71 @@ txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+
 txt:=txt+html_br;
 
 // local position
-txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
-djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
-txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
-djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
-txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
-txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-precession(sc.cfgsc.JDChart,cjd-sc.cfgsc.DT_UT/24,ra,dec);
-Eq2Hz(cst-ra,dec,a,h,sc.cfgsc) ;
-if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
-txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
-txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
-txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
-txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
-if not isArtSat then begin
-  // rise/set time
-  if (otype='P') then begin // planet
-     sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-  end
-  else if (otype='S*')and(oname=pla[10]) then begin // Sun
-     sc.planet.PlanetRiseSet(10,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-  end
-  else if (otype='Ps')and(ipla=11) then begin // Moon
-     sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
-  end
-  else begin // fixed object
-       RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
-       if sc.catalog.cfgshr.AzNorth then begin
-          Azr:=rmod(Azr+pi,pi2);
-          Azs:=rmod(Azs+pi,pi2);
-       end;
-       thr:=armtostr(rmod(hr+24,24));
-       tht:=armtostr(rmod(ht+24,24));
-       ths:=armtostr(rmod(hs+24,24));
-       tazr:=demtostr(rad2deg*Azr);
-       tazs:=demtostr(rad2deg*Azs);
-  end;
-  culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
-  if culmalt>90 then culmalt:=180-culmalt;
-  if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
-                else culmalt:=culmalt+0.64658062088;
-  tculmalt:=demtostr(culmalt);
-  case i of
-  0 : begin
-      txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
-      if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
-                       else txt:=txt+html_br;
-      txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
-      txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
-      if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
-                       else txt:=txt+html_br;
-      end;
-  1 : begin
-      txt:=txt+rsCircumpolar+html_br;
-      txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
-      end;
-  else begin
-      txt:=txt+rsInvisibleAtT+html_br;
-      end;
+if (sc.catalog.cfgshr.Equinoxtype=2) then begin
+  txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
+  djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
+  txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
+  djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
+  txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
+  txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
+  ra:=sc.cfgsc.FindRA;
+  dec:=sc.cfgsc.FindDec;
+  precession(sc.cfgsc.JDChart,cjd-sc.cfgsc.DT_UT/24,ra,dec);
+  Eq2Hz(cst-ra,dec,a,h,sc.cfgsc) ;
+  if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
+  txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
+  txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
+  txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
+  txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
+  if (not isArtSat) then begin
+    // rise/set time
+    if (otype='P') then begin // planet
+       sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+    end
+    else if (otype='S*')and(oname=pla[10]) then begin // Sun
+       sc.planet.PlanetRiseSet(10,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+    end
+    else if (otype='Ps')and(ipla=11) then begin // Moon
+       sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
+    end
+    else begin // fixed object
+         RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
+         if sc.catalog.cfgshr.AzNorth then begin
+            Azr:=rmod(Azr+pi,pi2);
+            Azs:=rmod(Azs+pi,pi2);
+         end;
+         thr:=armtostr(rmod(hr+24,24));
+         tht:=armtostr(rmod(ht+24,24));
+         ths:=armtostr(rmod(hs+24,24));
+         tazr:=demtostr(rad2deg*Azr);
+         tazs:=demtostr(rad2deg*Azs);
+    end;
+    culmalt:= 90 - sc.cfgsc.ObsLatitude + rad2deg*sc.cfgsc.FindDec;
+    if culmalt>90 then culmalt:=180-culmalt;
+    if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
+                  else culmalt:=culmalt+0.64658062088;
+    tculmalt:=demtostr(culmalt);
+    case i of
+    0 : begin
+        txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
+        if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
+                         else txt:=txt+html_br;
+        txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
+        txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
+        if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
+                         else txt:=txt+html_br;
+        end;
+    1 : begin
+        txt:=txt+rsCircumpolar+html_br;
+        txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
+        end;
+    else begin
+        txt:=txt+rsInvisibleAtT+html_br;
+        end;
+    end;
   end;
 end;
+
 // other notes
 buf:=sc.cfgsc.FindNote;
 if buf>'' then begin
@@ -2843,6 +2846,16 @@ if proj='ALTAZ' then sc.cfgsc.projpole:=altaz
   else if proj='ECLIPTIC' then sc.cfgsc.projpole:=ecl
   else result:=msgFailed+' Bad projection name.';
 sc.cfgsc.FindOk:=false;
+if (sc.cfgsc.projpole=altaz)and(sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.catalog.cfgshr.EquinoxType:=2;
+  sc.catalog.cfgshr.EquinoxChart:=rsDate;
+  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+  sc.cfgsc.CoordExpertMode:=false;
+  sc.cfgsc.ApparentPos:=true;
+  sc.cfgsc.PMon:=true;
+  sc.cfgsc.YPmon:=0;
+  sc.cfgsc.CoordType:=0;
+end;
 end;
 
 function Tf_chart.cmd_GetProjection:string;
@@ -3468,6 +3481,16 @@ if field>0 then begin
      else sc.cfgsc.fov:=field;
 end;
 sc.cfgsc.ProjPole:=Altaz;
+if (sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.catalog.cfgshr.EquinoxType:=2;
+  sc.catalog.cfgshr.EquinoxChart:=rsDate;
+  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+  sc.cfgsc.CoordExpertMode:=false;
+  sc.cfgsc.ApparentPos:=true;
+  sc.cfgsc.PMon:=true;
+  sc.cfgsc.YPmon:=0;
+  sc.cfgsc.CoordType:=0;
+end;
 sc.cfgsc.Acentre:=0;
 sc.cfgsc.hcentre:=pid2;
 Hz2Eq(sc.cfgsc.acentre,sc.cfgsc.hcentre,a,d,sc.cfgsc);
@@ -3494,6 +3517,16 @@ sc.cfgsc.racentre:=sc.cfgsc.CurST-a;
 sc.cfgsc.decentre:=d;
 sc.cfgsc.ProjPole:=Altaz;
 sc.cfgsc.TrackOn:=false;
+if (sc.catalog.cfgshr.EquinoxType<>2) then begin // ensure equinox of the date for alt/az
+  sc.catalog.cfgshr.EquinoxType:=2;
+  sc.catalog.cfgshr.EquinoxChart:=rsDate;
+  sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+  sc.cfgsc.CoordExpertMode:=false;
+  sc.cfgsc.ApparentPos:=true;
+  sc.cfgsc.PMon:=true;
+  sc.cfgsc.YPmon:=0;
+  sc.cfgsc.CoordType:=0;
+end;
 if redraw then Refresh;
 end;
 
