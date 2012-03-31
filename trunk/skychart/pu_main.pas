@@ -2833,6 +2833,16 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=AltAz;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
+   if sc.catalog.cfgshr.EquinoxType<>2 then begin // ensure equinox of the date
+     sc.catalog.cfgshr.EquinoxType:=2;
+     sc.catalog.cfgshr.EquinoxChart:=rsDate;
+     sc.catalog.cfgshr.DefaultJDChart:=jd2000;
+     sc.cfgsc.CoordExpertMode:=false;
+     sc.cfgsc.ApparentPos:=true;
+     sc.cfgsc.PMon:=true;
+     sc.cfgsc.YPmon:=0;
+     sc.cfgsc.CoordType:=0;
+   end;
 {$ifdef trace_debug}
  WriteTrace('AltAzProjectionExecute');
 {$endif}
