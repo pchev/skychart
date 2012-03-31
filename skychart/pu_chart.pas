@@ -1445,7 +1445,7 @@ begin
 {$ifdef trace_debug}
  WriteTrace(caption+' rotation');
 {$endif}
- sc.cfgsc.theta:=sc.cfgsc.theta+deg2rad*rot;
+ sc.cfgsc.theta:=rmod(sc.cfgsc.theta+deg2rad*rot+pi2,pi2);
  Refresh;
 end;
 

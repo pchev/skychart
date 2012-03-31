@@ -1,6 +1,8 @@
 Version 3.7  Notes de la version
 
 Nouvelles options:
+  - Bouton Meta+rotation tourne de 180 degrees.
+  - Clic droit sur le bouton rotation annule les rotations.
   - Configuration/Affichage "Afficher uniquement le texte dans la fenêtre de détail", a utiliser si vous avez un problème avec la fenêtre de détail standard.
 
 Problèmes corrigé depuis la version 3.6:

@@ -2146,18 +2146,6 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_plusExecute(Sender);
 end;
 
-
-procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
-var rot:double;
-begin
-if ssCtrl in Shift then rot:=45
-else if ssShift in Shift then rot:=1
-else rot:=15;
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
-end;
-
-
 procedure Tf_main.VariableStar1Click(Sender: TObject);
 begin
   ExecNoWait(varobs);
@@ -2173,15 +2161,42 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
 end;
 
+procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if Button=mbLeft then begin
+  if ssCtrl in Shift then rot:=45
+  else if ssShift in Shift then rot:=1
+  else if ssMeta in Shift then rot:=180
+  else rot:=15;
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
+end;
 
 procedure Tf_main.ToolButtonRotMMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 var rot:double;
 begin
-if ssCtrl in Shift then rot:=-45
-else if ssShift in Shift then rot:=-1
-else rot:=-15;
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do  rotation(rot);
+if Button=mbLeft then begin
+  if ssCtrl in Shift then rot:=-45
+  else if ssShift in Shift then rot:=-1
+  else if ssMeta in Shift then rot:=-180
+  else rot:=-15;
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do  rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
 end;
 
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
