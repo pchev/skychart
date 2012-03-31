@@ -16,20 +16,20 @@ object pop_encoder: Tpop_encoder
   OnCreate = formcreate
   OnShow = FormShow
   Position = poDefault
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '0.9.30.4'
   object PageControl1: TPageControl
     Left = 0
-    Height = 471
+    Height = 475
     Top = 0
     Width = 352
-    ActivePage = TabSheet1
+    ActivePage = TabSheet3
     Align = alClient
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'Coordinates'
-      ClientHeight = 435
-      ClientWidth = 344
+      ClientHeight = 449
+      ClientWidth = 348
       object Panel1: TPanel
         Left = 8
         Height = 61
@@ -72,7 +72,7 @@ object pop_encoder: Tpop_encoder
         end
         object pos_x: TEdit
           Left = 62
-          Height = 22
+          Height = 24
           Top = 2
           Width = 81
           ReadOnly = True
@@ -80,7 +80,7 @@ object pop_encoder: Tpop_encoder
         end
         object pos_y: TEdit
           Left = 206
-          Height = 22
+          Height = 24
           Top = 2
           Width = 81
           ReadOnly = True
@@ -88,7 +88,7 @@ object pop_encoder: Tpop_encoder
         end
         object az_x: TEdit
           Left = 62
-          Height = 22
+          Height = 24
           Top = 30
           Width = 81
           ReadOnly = True
@@ -96,7 +96,7 @@ object pop_encoder: Tpop_encoder
         end
         object alt_y: TEdit
           Left = 206
-          Height = 22
+          Height = 24
           Top = 30
           Width = 81
           ReadOnly = True
@@ -108,8 +108,8 @@ object pop_encoder: Tpop_encoder
         Height = 202
         Top = 130
         Width = 310
-        ClientHeight = 198
-        ClientWidth = 306
+        ClientHeight = 202
+        ClientWidth = 310
         TabOrder = 1
         object SpeedButton4: TSpeedButton
           Left = 204
@@ -156,8 +156,8 @@ object pop_encoder: Tpop_encoder
         Height = 89
         Top = 344
         Width = 310
-        ClientHeight = 85
-        ClientWidth = 306
+        ClientHeight = 89
+        ClientWidth = 310
         TabOrder = 2
         object SpeedButton1: TSpeedButton
           Left = 2
@@ -253,15 +253,15 @@ object pop_encoder: Tpop_encoder
         end
         object CheckBox2: TCheckBox
           Left = 6
-          Height = 26
+          Height = 19
           Top = 11
-          Width = 106
+          Width = 99
           Caption = 'Device Status'
           TabOrder = 0
         end
         object Edit1: TEdit
           Left = 133
-          Height = 22
+          Height = 24
           Top = 14
           Width = 25
           ReadOnly = True
@@ -269,7 +269,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit2: TEdit
           Left = 197
-          Height = 22
+          Height = 24
           Top = 14
           Width = 25
           ReadOnly = True
@@ -277,7 +277,7 @@ object pop_encoder: Tpop_encoder
         end
         object Edit3: TEdit
           Left = 260
-          Height = 22
+          Height = 24
           Top = 14
           Width = 25
           ReadOnly = True
@@ -287,8 +287,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet2: TTabSheet
       Caption = 'Encoder Configuration'
-      ClientHeight = 435
-      ClientWidth = 344
+      ClientHeight = 449
+      ClientWidth = 348
       ImageIndex = 1
       object GroupBox2: TGroupBox
         Left = 8
@@ -296,8 +296,8 @@ object pop_encoder: Tpop_encoder
         Top = 12
         Width = 310
         Caption = 'Encoder Configuration'
-        ClientHeight = 141
-        ClientWidth = 306
+        ClientHeight = 143
+        ClientWidth = 310
         TabOrder = 0
         object Label2: TLabel
           Left = 22
@@ -426,8 +426,8 @@ object pop_encoder: Tpop_encoder
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 34
-        ClientWidth = 162
+        ClientHeight = 36
+        ClientWidth = 166
         Columns = 2
         ItemIndex = 0
         Items.Strings = (
@@ -443,8 +443,8 @@ object pop_encoder: Tpop_encoder
         Top = 266
         Width = 312
         Caption = 'Observatory '
-        ClientHeight = 74
-        ClientWidth = 308
+        ClientHeight = 76
+        ClientWidth = 312
         TabOrder = 3
         object Label15: TLabel
           Left = 22
@@ -488,8 +488,8 @@ object pop_encoder: Tpop_encoder
         Top = 218
         Width = 310
         Caption = 'Mount fabrication error'
-        ClientHeight = 33
-        ClientWidth = 306
+        ClientHeight = 35
+        ClientWidth = 310
         ParentShowHint = False
         ShowHint = True
         TabOrder = 4
@@ -566,8 +566,8 @@ object pop_encoder: Tpop_encoder
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 34
-        ClientWidth = 165
+        ClientHeight = 36
+        ClientWidth = 169
         Columns = 2
         ItemIndex = 1
         Items.Strings = (
@@ -598,8 +598,8 @@ object pop_encoder: Tpop_encoder
     end
     object TabSheet3: TTabSheet
       Caption = 'Port Configuration'
-      ClientHeight = 435
-      ClientWidth = 344
+      ClientHeight = 449
+      ClientWidth = 348
       ImageIndex = 2
       object GroupBox4: TGroupBox
         Left = 8
@@ -607,8 +607,8 @@ object pop_encoder: Tpop_encoder
         Top = 12
         Width = 297
         Caption = 'Port Configuration'
-        ClientHeight = 206
-        ClientWidth = 293
+        ClientHeight = 208
+        ClientWidth = 297
         TabOrder = 0
         object Label5: TLabel
           Left = 22
@@ -668,7 +668,7 @@ object pop_encoder: Tpop_encoder
         end
         object PortSpeedbox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 33
           Width = 113
           ItemHeight = 0
@@ -690,7 +690,7 @@ object pop_encoder: Tpop_encoder
         end
         object cbo_port: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 6
           Width = 113
           ItemHeight = 0
@@ -709,7 +709,7 @@ object pop_encoder: Tpop_encoder
         end
         object Paritybox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 87
           Width = 113
           ItemHeight = 0
@@ -723,7 +723,7 @@ object pop_encoder: Tpop_encoder
         end
         object DatabitBox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 60
           Width = 113
           ItemHeight = 0
@@ -739,7 +739,7 @@ object pop_encoder: Tpop_encoder
         end
         object StopbitBox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 114
           Width = 113
           ItemHeight = 0
@@ -752,7 +752,7 @@ object pop_encoder: Tpop_encoder
         end
         object TimeOutBox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 141
           Width = 113
           ItemHeight = 0
@@ -769,17 +769,17 @@ object pop_encoder: Tpop_encoder
         end
         object IntTimeOutBox: TComboBox
           Left = 164
-          Height = 22
+          Height = 25
           Top = 168
           Width = 113
           ItemHeight = 0
           Items.Strings = (
-            '10'
-            '50'
             '100'
+            '150'
+            '200'
             '250'
+            '400'
             '500'
-            '1000'
           )
           TabOrder = 6
           Text = 'IntTimeOutBox'
@@ -816,8 +816,8 @@ object pop_encoder: Tpop_encoder
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Height = 18
-    Top = 471
+    Height = 14
+    Top = 475
     Width = 352
     Panels = <>
   end
