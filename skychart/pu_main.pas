@@ -2988,6 +2988,10 @@ var ok: Boolean;
     i, itype : integer;
     chart:TForm;
     saveCurYear,saveCurMonth,saveCurDay:integer;
+    lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
+    lasttype,lastobj: integer;
+    lastname,lasttrname: string;
+    lastok: boolean;
 begin
 result:=msgFailed;
 chart:=nil; ok:=false;
@@ -3000,7 +3004,19 @@ if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
    end;
 itype:=ftInv;
 if chart is Tf_chart then with chart as Tf_chart do begin
-      case kind of
+    lastok:=sc.cfgsc.FindOK;
+    lastra:=sc.cfgsc.FindRA;
+    lastdec:=sc.cfgsc.FindDEC;
+    lastname:=sc.cfgsc.FindName;
+    lasttrra:=sc.cfgsc.TrackRA;
+    lasttrde:=sc.cfgsc.TrackDEC;
+    lasttype:=sc.cfgsc.TrackType;
+    lastobj:=sc.cfgsc.Trackobj;
+    lasttrname:=sc.cfgsc.TrackName;
+    lastXX:=sc.cfgsc.FindX;
+    lastYY:=sc.cfgsc.FindY;
+    lastZZ:=sc.cfgsc.FindZ;
+    case kind of
       0  : begin ok:=catalog.SearchNebulae(num,ar1,de1) ; itype:=ftNeb  ; end;
       1  : begin
            ar1:=def_ra;
@@ -3104,6 +3120,18 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
         sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
         Refresh;
+        sc.cfgsc.FindOK    := lastok;
+        sc.cfgsc.FindRA    := lastra;
+        sc.cfgsc.FindDEC   := lastdec;
+        sc.cfgsc.FindName  := lastname;
+        sc.cfgsc.TrackRA   := lasttrra;
+        sc.cfgsc.TrackDEC  := lasttrde;
+        sc.cfgsc.TrackType := lasttype;
+        sc.cfgsc.Trackobj  := lastobj;
+        sc.cfgsc.TrackName := lasttrname;
+        sc.cfgsc.FindX     := lastXX;
+        sc.cfgsc.FindY     := lastYY;
+        sc.cfgsc.FindZ     := lastZZ;
         IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
@@ -6429,6 +6457,10 @@ var ok : Boolean;
     chart:TForm;
     stype: string;
     itype:integer;
+    lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
+    lasttype,lastobj: integer;
+    lastname,lasttrname: string;
+    lastok: boolean;
 label findit;
 begin
 result:=false;
@@ -6443,6 +6475,18 @@ end else begin
       if MultiDoc1.Childs[i].caption=cname then chart:=MultiDoc1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
+   lastok:=sc.cfgsc.FindOK;
+   lastra:=sc.cfgsc.FindRA;
+   lastdec:=sc.cfgsc.FindDEC;
+   lastname:=sc.cfgsc.FindName;
+   lasttrra:=sc.cfgsc.TrackRA;
+   lasttrde:=sc.cfgsc.TrackDEC;
+   lasttype:=sc.cfgsc.TrackType;
+   lastobj:=sc.cfgsc.Trackobj;
+   lasttrname:=sc.cfgsc.TrackName;
+   lastXX:=sc.cfgsc.FindX;
+   lastYY:=sc.cfgsc.FindY;
+   lastZZ:=sc.cfgsc.FindZ;
    if sc.cfgsc.shownebulae then begin
      stype:='N';  itype:=ftNeb;
      ok:=catalog.SearchNebulae(Num,ar1,de1) ;
@@ -6556,6 +6600,18 @@ Findit:
       sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
       sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
       Refresh;
+      sc.cfgsc.FindOK    := lastok;
+      sc.cfgsc.FindRA    := lastra;
+      sc.cfgsc.FindDEC   := lastdec;
+      sc.cfgsc.FindName  := lastname;
+      sc.cfgsc.TrackRA   := lasttrra;
+      sc.cfgsc.TrackDEC  := lasttrde;
+      sc.cfgsc.TrackType := lasttype;
+      sc.cfgsc.Trackobj  := lastobj;
+      sc.cfgsc.TrackName := lasttrname;
+      sc.cfgsc.FindX     := lastXX;
+      sc.cfgsc.FindY     := lastYY;
+      sc.cfgsc.FindZ     := lastZZ;
       IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
    end;
 end;
