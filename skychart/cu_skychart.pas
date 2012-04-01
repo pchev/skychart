@@ -501,8 +501,13 @@ cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
 cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
 cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
-if cfgsc.CurJDTT<>cfgsc.LastJD then begin // thing to do when the date change
-   cfgsc.FindOk:=false;    // last search no longuer valid
+// thing to do when the date change
+if ((cfgsc.FindType<ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/24))) or     // one hour limit
+   ((cfgsc.FindType>=ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(30/86400)))   // 30 sec. limit for moving objects
+   then begin
+    cfgsc.FindOk:=false;    // last search no longuer valid
+end;
+if cfgsc.CurJDTT<>cfgsc.LastJD then begin
    if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid
 end;
 cfgsc.LastJD:=cfgsc.CurJDTT;
