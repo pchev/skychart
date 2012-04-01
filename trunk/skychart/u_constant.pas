@@ -170,7 +170,7 @@ const cdcversion = 'Version 3.7-svn';
       Altaz = 1;
       Gal = 2;
       Ecl = 3;
-      ftStar=1; ftVar=2; ftDbl=3; ftNeb=4; ftlin=5; ftPla=6; ftCom=7; ftAst=8; ftInv=9; ftOnline=10;
+      ftStar=1; ftVar=2; ftDbl=3; ftNeb=4; ftlin=5; ftInv=6; ftOnline=7; ftPla=100; ftCom=101; ftAst=102;
       BaseStar = 1000;
       MaxStarCatalog = 16;
       DefStar = 1001;
