@@ -29,10 +29,10 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 462
-      Height = 254
+      Left = 465
+      Height = 257
       Top = 0
-      Width = 18
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -44,8 +44,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 18
-      Top = 254
+      Height = 15
+      Top = 257
       Width = 480
       Align = alBottom
       LargeChange = 10

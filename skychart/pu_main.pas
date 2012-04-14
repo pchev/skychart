@@ -55,6 +55,9 @@ type
     Compass1: TMenuItem;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
+    InitTimer: TTimer;
+    TabControl1: TTabControl;
+    ToolButtonRot180: TToolButton;
     ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
     ToolButtonUObj: TToolButton;
@@ -461,12 +464,15 @@ type
     procedure HelpFaq1Execute(Sender: TObject);
     procedure HelpQS1Execute(Sender: TObject);
     procedure HomePage1Click(Sender: TObject);
+    procedure InitTimerTimer(Sender: TObject);
     procedure MagPanelMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Maillist1Click(Sender: TObject);
     procedure MenuChartInfoClick(Sender: TObject);
     procedure MenuChartLegendClick(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
+    procedure MultiDoc1CreateChild(Sender: TObject);
+    procedure MultiDoc1DeleteChild(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -491,6 +497,8 @@ type
     procedure ThemeTimerTimer(Sender: TObject);
     procedure ToolButton13Click(Sender: TObject);
     procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonCompassClick(Sender: TObject);
     procedure ToolButtonScaleClick(Sender: TObject);
@@ -619,6 +627,7 @@ type
     procedure PositionExecute(Sender: TObject);
     procedure Search1Execute(Sender: TObject);
     procedure SyncChartExecute(Sender: TObject);
+    procedure TabControl1Change(Sender: TObject);
     procedure TrackExecute(Sender: TObject);
     procedure ZoomBarExecute(Sender: TObject);
     procedure DSSImageExecute(Sender: TObject);
@@ -846,7 +855,7 @@ begin
     l:=cfg1.winleft;
   end;
   // create a new child window
-  cp:=MultiDoc1.NewChild;
+  cp:=MultiDoc1.NewChild(CName);
   Child := Tf_chart.Create(cp);
   cp.DockedPanel:=child.Panel1;
   if locked then Child.lock_refresh:=true;
@@ -995,8 +1004,11 @@ until ok;
 end;
 
 procedure Tf_main.FileNew1Execute(Sender: TObject);
+var cname: string;
 begin
-  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot);
+  cname:=GetUniqueName(rsChart_, true);
+  CreateChild(cname, true, def_cfgsc, def_cfgplot);
+  SelectChart(cname);
 end;
 
 procedure Tf_main.FileClose1Execute(Sender: TObject);
@@ -1134,7 +1146,6 @@ begin
 end;
 
 procedure Tf_main.FormShow(Sender: TObject);
-var i:integer;
 begin
 try
 {$ifdef trace_debug}
@@ -1143,24 +1154,36 @@ try
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then ThemeTimer.Enabled:=true;
  InitFonts;
  SetLpanel1('');
- // ensure a first chart is draw, even if it usually result in a double refresh on launch
- MultiDoc1.setActiveChild(0);
- for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
-        RefreshTimer.Enabled:=false;
-        RefreshTimer.Enabled:=true;
-     end;
- ImageSetFocus(Sender);
 except
   on E: Exception do begin
    WriteTrace('FormShow error: '+E.Message);
    MessageDlg('FormShow error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
+InitTimer.Enabled:=true;
 InitOK:=true;
 {$ifdef trace_debug}
  WriteTrace('Exit Tf_main.FormShow');
+{$endif}
+end;
+
+procedure Tf_main.InitTimerTimer(Sender: TObject);
+var i:integer;
+begin
+InitTimer.Enabled:=False;
+{$ifdef trace_debug}
+ WriteTrace('Enter Tf_main.InitTimerTimer');
+{$endif}
+MultiDoc1.setActiveChild(0);
+// ensure a first chart is draw, even if it usually result in a double refresh on launch
+for i:=0 to MultiDoc1.ChildCount-1 do
+ if MultiDoc1.Childs[i].DockedObject is Tf_chart then
+    with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+       RefreshTimer.Enabled:=false;
+       RefreshTimer.Enabled:=true;
+    end;
+{$ifdef trace_debug}
+ WriteTrace('Exit Tf_main.InitTimerTimer');
 {$endif}
 end;
 
@@ -1479,6 +1502,40 @@ end;
 procedure Tf_main.MenuItem7Click(Sender: TObject);
 begin
   SetupPicturesPage(1);
+end;
+
+procedure Tf_main.MultiDoc1CreateChild(Sender: TObject);
+begin
+TabControl1.Tabs.Add(TChildDoc(Sender).Caption);
+if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1) then begin
+  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1);
+  ViewTopPanel;
+end;
+end;
+
+procedure Tf_main.MultiDoc1DeleteChild(Sender: TObject);
+var i: integer;
+begin
+for i:=0 to TabControl1.Tabs.Count-1 do begin
+   if TabControl1.Tabs[i]=TChildDoc(Sender).Caption then begin
+      TabControl1.Tabs.Delete(i);
+      break;
+   end;
+end;
+// test for two childs because the currently deleting child is still counted
+if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>2) then begin
+  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>2);
+  ViewTopPanel;
+end;
+end;
+
+procedure Tf_main.TabControl1Change(Sender: TObject);
+var cname: string;
+begin
+if (TabControl1.TabIndex>=0)and(TabControl1.TabIndex<TabControl1.Tabs.Count)  then begin
+  cname:=TabControl1.Tabs[TabControl1.TabIndex];
+  SelectChart(cname);
+end;
 end;
 
 procedure Tf_main.NextChild1Click(Sender: TObject);
@@ -1822,6 +1879,7 @@ step:='Multidoc';
 {$ifdef trace_debug}
  WriteTrace(step);
 {$endif}
+TabControl1.Visible:=false;
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
 MultiDoc1.KeepLastChild:=true;
@@ -2199,6 +2257,22 @@ if Button=mbRight then begin
 end;
 end;
 
+procedure Tf_main.ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var rot:double;
+begin
+if Button=mbLeft then begin
+  rot:=180;
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+end;
+if Button=mbRight then begin
+  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+     sc.cfgsc.theta:=0;
+     Refresh;
+  end;
+end;
+end;
+
 procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
 var P : Tpoint;
 begin
@@ -2395,6 +2469,7 @@ procedure Tf_main.ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
 begin
   if Button=mbRight then SetupTimePage(2);
 end;
+
 
 procedure Tf_main.ToolButtonScaleClick(Sender: TObject);
 begin
@@ -3963,6 +4038,7 @@ begin
 i:=0;
 if ToolBar1.visible then i:=i+ToolBar1.Height;
 if ToolBar4.visible then i:=i+ToolBar4.Height;
+if TabControl1.visible then i:=i+TabControl1.Height;
 if i=0 then PanelTop.visible:=false
    else begin
      PanelTop.visible:=true;
@@ -6618,6 +6694,8 @@ end;
 end;
 
 procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
+var cname:string;
+    i: integer;
 begin
 if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
   if fx>0 then begin FlipButtonX.ImageIndex:=15 ; Flipx1.checked:=false; end
@@ -6639,6 +6717,13 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
   PrintPreview1.Visible:=(cfgm.PrintMethod=0);
+  cname:=MultiDoc1.ActiveChild.Caption;
+  for i:=0 to TabControl1.Tabs.Count-1 do begin
+      if TabControl1.Tabs[i]=cname then begin
+         TabControl1.TabIndex:=i;
+         break;
+      end;
+  end;
   with MultiDoc1.ActiveObject as Tf_chart do begin
     if sc.cfgsc.ManualTelescope then begin
        ControlPanel1.Visible:=false;
@@ -6821,7 +6906,7 @@ result:=msgNotFound;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
      with MultiDoc1.Childs[i] do
-        if caption=cname then begin
+        if InitOK and (caption=cname) then begin
          setfocus;
          result:=msgOK;
         end;
@@ -7702,8 +7787,13 @@ else
 end;
 
 procedure Tf_main.MultiDoc1Maximize(Sender: TObject);
+
 begin
 ChildControl.visible:=MultiDoc1.Maximized;
+if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1) then begin
+  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1);
+  ViewTopPanel;
+end;
 end;
 
 procedure Tf_main.BtnRestoreChildClick(Sender: TObject);

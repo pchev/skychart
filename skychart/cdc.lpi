@@ -156,7 +156,7 @@
         <FormatVersion Value="1"/>
         <CommandLineParams Value="--nosplash"/>
         <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
-        <WorkingDirectory Value="/usr/bin"/>
+        <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
     <RequiredPackages Count="19">
