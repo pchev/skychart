@@ -253,7 +253,7 @@ type
     lastl,lastb,MeasureRa,MeasureDe: double;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     XM1,YM1,XMD1,YMD1: integer;
-    procedure Refresh;
+    procedure Refresh(setfocus:boolean=true);
     procedure AutoRefresh;
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
     function  FormatDesc:string;
@@ -580,7 +580,7 @@ end;
 Refresh;
 end;
 
-procedure Tf_chart.Refresh;
+procedure Tf_chart.Refresh(setfocus:boolean=true);
 var  savebg:Tcolor;
      i: integer;
 {$ifdef showtime}
@@ -649,7 +649,7 @@ finally
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
-if assigned(FImageSetFocus) then FImageSetFocus(Self);
+if setfocus and assigned(FImageSetFocus) then FImageSetFocus(Self);
 if assigned(Fshowinfo) then begin
   {$ifdef showtime}
    Fshowinfo('Drawing time: '+formatfloat(f2,(now-starttime)*86400));
@@ -923,7 +923,7 @@ if locked then exit;
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': RefreshTimer');
 {$endif}
-Refresh;
+Refresh(false); // do not set focus on random timer event
 end;
 
 procedure Tf_chart.RemoveAllLabel1Click(Sender: TObject);
@@ -1639,6 +1639,7 @@ end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 begin
+ if assigned(FImageSetFocus) then FImageSetFocus(self);
  xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
  ycursor:=Image1.ScreenToClient(mouse.cursorpos).y;
  IdentXY(xcursor, ycursor);

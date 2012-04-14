@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 145
+  Left = 307
   Height = 525
-  Top = 48
+  Top = 42
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 505
+  ClientHeight = 500
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -31,6 +31,8 @@ object f_main: Tf_main
     WireframeMoveResize = False
     onMaximize = MultiDoc1Maximize
     onActiveChildChange = MultiDoc1ActiveChildChange
+    OnCreateChild = MultiDoc1CreateChild
+    OnDeleteChild = MultiDoc1DeleteChild
     BevelOuter = bvNone
     ClientHeight = 230
     ClientWidth = 304
@@ -2665,23 +2667,23 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 417
-    Top = 54
-    Width = 26
+    Height = 388
+    Top = 78
+    Width = 25
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 417
-    ClientWidth = 26
+    ClientHeight = 388
+    ClientWidth = 25
     Font.Height = 10
     FullRepaint = False
     ParentFont = False
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 417
+      Height = 380
       Top = 0
-      Width = 26
-      Align = alClient
+      Width = 25
+      Align = alNone
       ButtonHeight = 23
       Caption = 'ToolBar2'
       EdgeBorders = [ebBottom]
@@ -2751,13 +2753,14 @@ object f_main: Tf_main
         Action = FlipY
         Wrap = True
       end
-      object ToolButtonRotP: TToolButton
+      object ToolButtonRot180: TToolButton
         Left = 1
-        Hint = 'Rotate Right'
-        Top = 207
-        ImageIndex = 21
-        OnMouseUp = ToolButtonRotPMouseUp
-        Wrap = True
+        Hint = 'Rotate by 180 degrees'
+        Top = 253
+        AutoSize = True
+        Caption = 'ToolButtonRot180'
+        ImageIndex = 92
+        OnMouseUp = ToolButtonRot180MouseUp
       end
       object ToolButtonRotM: TToolButton
         Left = 1
@@ -2767,22 +2770,30 @@ object f_main: Tf_main
         OnMouseUp = ToolButtonRotMMouseUp
         Wrap = True
       end
+      object ToolButtonRotP: TToolButton
+        Left = 1
+        Hint = 'Rotate Right'
+        Top = 207
+        ImageIndex = 21
+        OnMouseUp = ToolButtonRotPMouseUp
+        Wrap = True
+      end
     end
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 417
-    Top = 54
+    Height = 388
+    Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 417
+    ClientHeight = 388
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 167
+      Height = 138
       Top = 250
       Width = 28
       Align = alClient
@@ -3011,7 +3022,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 471
+    Top = 466
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -3099,12 +3110,12 @@ object f_main: Tf_main
   end
   object PanelTop: TPanel
     Left = 0
-    Height = 54
+    Height = 78
     Top = 0
     Width = 873
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 54
+    ClientHeight = 78
     ClientWidth = 873
     FullRepaint = False
     TabOrder = 1
@@ -3112,7 +3123,7 @@ object f_main: Tf_main
     object ToolBar1: TToolBar
       Left = 0
       Height = 25
-      Top = 0
+      Top = 25
       Width = 873
       Images = ImageNormal
       ParentShowHint = False
@@ -3451,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 22
+        Height = 27
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3508,7 +3519,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 24
+        Height = 25
         Top = 2
         Width = 35
         TabOrder = 5
@@ -3526,7 +3537,7 @@ object f_main: Tf_main
     object ToolBar4: TToolBar
       Left = 0
       Height = 28
-      Top = 26
+      Top = 50
       Width = 873
       Align = alBottom
       ButtonHeight = 24
@@ -3750,6 +3761,17 @@ object f_main: Tf_main
         ImageIndex = 91
         OnClick = ToolButtonCompassClick
       end
+    end
+    object TabControl1: TTabControl
+      Left = 0
+      Height = 25
+      Top = 0
+      Width = 873
+      Align = alTop
+      OnChange = TabControl1Change
+      TabOrder = 2
+      TabStop = False
+      Visible = False
     end
   end
   object MainMenu1: TMainMenu
@@ -7470,7 +7492,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695C00000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
+      4C695D00000010000000100000000000000000000000EF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FF0000
       000000000000000000000000000000000000000000009C6B6BFF000000000000
       000000000000000000000000000000000000000000009C6B6BFF00000000945A
@@ -10414,6 +10436,38 @@ object f_main: Tf_main
       04F37F4A18FF915A26FF97602CFF97602CFF915A26FF7F4A18FF673404F3733F
       0D74804015020000000000000000000000000000000000000000000000007946
       1316713E0C726A3605C2653202EF653202EF6A3605C2723E0C72794613160000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000840000FFC60000FF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000840000FFDE9C5AFFDE9C5AFFC60000FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000840000FFDE9C5AFFDE9C5AFFFFD6B5FFDE9C5AFFC60000FF000000000000
+      0000000000000000000000000000000000000000000000000000000000008400
+      00FFFF4242FFDE9C5AFFFFD6B5FFFFD6B5FFDE9C5AFFFF4242FFC60000FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFD6B5FFFFD6B5FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFD6B5FFFFE7D6FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFD6B5FFFFE7D6FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFE7D6FFFFE7D6FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFE7D6FFFFE7D6FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFD6B5FFFFE7D6FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFE7D6FFFFD6B5FFFF4242FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000FF4242FFFFD6B5FFFFD6B5FFFF4242FF00000000000000000000
+      000000000000000000000000000000000000000000000000000000000000C600
+      00FFFF4242FFDE9C5AFFFFD6B5FFFFD6B5FFDE9C5AFFFF4242FF840000FF0000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000C60000FFDE9C5AFFFFD6B5FFDE9C5AFFDE9C5AFF840000FF000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000C60000FFDE9C5AFFDE9C5AFF840000FF00000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000C60000FF840000FF0000000000000000000000000000
       0000000000000000000000000000
     }
   end
@@ -10512,6 +10566,13 @@ object f_main: Tf_main
     Interval = 500
     OnTimer = CloseTimerTimer
     left = 169
+    top = 428
+  end
+  object InitTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = InitTimerTimer
+    left = 96
     top = 428
   end
 end

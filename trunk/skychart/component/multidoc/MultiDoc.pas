@@ -70,6 +70,8 @@ type
     FonMaximize : TNotifyEvent;
     FOnResize : TNotifyEvent;
     FonActiveChildChange : TNotifyEvent;
+    FOnCreateChild : TNotifyEvent;
+    FOnDeleteChild : TNotifyEvent;
     FChild: ChildArray;
     DestroyTimer:TTimer;
     DestroyPending: array of TChildDoc;
@@ -111,7 +113,7 @@ type
     {
      Create a new child window
     }
-    function NewChild:TChildDoc;
+    function NewChild(Aname:string=''):TChildDoc;
     {
      Focus next child on list
     }
@@ -193,6 +195,15 @@ type
      When resizings
     }
     property OnResize: TNotifyEvent read FOnResize write FOnResize;
+    {
+     When new child is created
+    }
+    property OnCreateChild : TNotifyEvent read FOnCreateChild write FOnCreateChild;
+    {
+     When a child is deleted
+    }
+    property OnDeleteChild : TNotifyEvent read FOnDeleteChild write FOnDeleteChild;
+
     published
     property Align;
     property Alignment;
@@ -298,12 +309,13 @@ except
 end;
 end;
 
-Function TMultiDoc.NewChild():TChildDoc;
+Function TMultiDoc.NewChild(Aname:string=''):TChildDoc;
 var m: TmenuItem;
 begin
 inc(FChildIndex);
 setlength(FChild,FChildIndex+1);
 FChild[FChildIndex]:=TChildDoc.Create(self);
+FChild[FChildIndex].Caption:=Aname;
 FChild[FChildIndex].Parent:=self;
 FChild[FChildIndex].SetBorderWdth(BorderWidth);
 FChild[FChildIndex].SetBorderColor(BorderColor);
@@ -330,6 +342,7 @@ if Assigned(FWindowList) then begin
   except
   end;
 end;
+if Assigned(FOnCreateChild) then FOnCreateChild(FChild[FChildIndex]);
 FChild[FChildIndex].Maximized:=FMaximized;
 SetActiveChild(FChildIndex);
 DefaultPos.X:=DefaultPos.X+FTitleHeight;
@@ -362,6 +375,7 @@ end;
 procedure TMultiDoc.ChildClose(Sender: TObject);
 var i,j,n: integer;
 begin
+if Assigned(FOnDeleteChild) then FOnDeleteChild(Sender);
 n:=(Sender as TChildDoc).Tag;
 if Assigned(FWindowList) then begin
   j:=FWindowList.Count;

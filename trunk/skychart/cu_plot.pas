@@ -2735,7 +2735,7 @@ begin
       cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen)
     else
       cbmp.FillEllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor));
-    cbmp.DrawHorizLine(xx-round(ds*1.3),yy,xx+round(ds*1.3),ColorToBGRA(nebcolor));
+    cbmp.DrawLineAntialias(xx-ds*1.5,yy,xx+ds*1.5,yy,ColorToBGRA(nebcolor),1.5);
 end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
@@ -2749,8 +2749,9 @@ end else begin
   end;
 // and draw it... we're using an circle, in future we may adjust this for non-circular planetaries
   cnv.Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
-  cnv.MoveTo((xx-round(ds*1.3)),yy);
-  cnv.LineTo((xx+round(ds*1.3)),yy);
+  cnv.MoveTo((xx-round(ds*1.5)-1),yy);
+  cnv.Pen.Width := 2*cnv.Pen.Width;
+  cnv.LineTo((xx+round(ds*1.5)),yy);
 // reset brush and pen back to default ready for next object
   cnv.Brush.Style := bsClear;
   cnv.Pen.Style := psSolid;
