@@ -447,14 +447,14 @@ case c.projtype of
     ar := ac - hh - 1E-9 ;
    end;
 'C' : begin
-    sofa_S2C(-xx,yy,p);
+    sofa_S2C(-x,-y,p);
     sofa_rxp(c.EqtMAT,p,pr);
     sofa_c2s(pr,ar,de);
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;
 'M' : begin
-    yy:=2*arctan(exp(yy))-pid2;
-    sofa_S2C(-xx,yy,p);
+    y:=2*arctan(exp(y))-pid2;
+    sofa_S2C(-x,-y,p);
     sofa_rxp(c.EqtMAT,p,pr);
     sofa_c2s(pr,ar,de);
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
