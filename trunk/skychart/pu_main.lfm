@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 500
+  ClientHeight = 505
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -2667,12 +2667,12 @@ object f_main: Tf_main
   end
   object PanelLeft: TPanel
     Left = 0
-    Height = 388
+    Height = 393
     Top = 78
     Width = 25
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 388
+    ClientHeight = 393
     ClientWidth = 25
     Font.Height = 10
     FullRepaint = False
@@ -2782,18 +2782,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 388
+    Height = 393
     Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 388
+    ClientHeight = 393
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 138
+      Height = 143
       Top = 250
       Width = 28
       Align = alClient
@@ -3022,7 +3022,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 466
+    Top = 471
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -3462,7 +3462,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 651
-        Height = 27
+        Height = 22
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -3519,7 +3519,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 591
-        Height = 25
+        Height = 24
         Top = 2
         Width = 35
         TabOrder = 5

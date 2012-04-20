@@ -856,6 +856,7 @@ Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : s
      de_type, de_year:integer;
      NumIndiDriver:integer;
      IndiDriverLst: array of array of string;
+     VerboseMsg : boolean = false;
 
 {$ifdef darwin}
      OpenFileCMD:string = 'open';   //

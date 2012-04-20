@@ -591,6 +591,7 @@ if printing then exit;
 {$ifdef trace_debug}
  WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh');
 {$endif}
+if VerboseMsg then WriteTrace('Chart '+sc.cfgsc.chartname+': Refresh');
 {$ifdef showtime}
 starttime:=now;
 {$endif}
