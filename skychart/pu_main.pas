@@ -6946,6 +6946,11 @@ var i,n,w,h : integer;
     chart:TForm;
     child:TChildDoc;
 begin
+if VerboseMsg then begin
+  cmd:=cname+' Receive command:';
+  for i:=0 to arg.Count-1 do cmd:=cmd+blank+arg[i];
+   WriteTrace(cmd);
+end;
 cmd:=trim(uppercase(arg[0]));
 for i:=1 to arg.Count-1 do arg[i]:=StringReplace(arg[i],'"','',[rfReplaceAll]);
 n:=-1;
@@ -7171,6 +7176,8 @@ for i:=0 to Params.Count-1 do begin
       Application.ShowMainForm:=false;
    end else if cmd='--nosplash' then begin
       showsplash:=false;
+   end else if cmd='--verbose' then begin
+      VerboseMsg:=true;
    end else if cmd='--test' then begin
    end;
 end;
