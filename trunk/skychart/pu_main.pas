@@ -32,6 +32,9 @@ uses
   {$ifdef mswindows}
     Windows, ShlObj, Registry,
   {$endif}
+  {$ifdef darwin}
+  baseunix,       //  to catch SIGPIPE
+  {$endif}
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, pu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
@@ -791,6 +794,11 @@ type
 
 var
   f_main: Tf_main;
+
+{$ifdef darwin}  // to catch SIGPIPE
+var NewSigRec, OldSigRec: SigActionRec;
+    res: Integer;
+{$endif}
 
 implementation
 
@@ -8116,5 +8124,16 @@ GetTranslationString(Tf_image.Create(self),f);
 GetTranslationString(Tf_progress.Create(self),f);
 closefile(f);
 end;}
+
+initialization
+
+ {$ifdef darwin}           //  ignore SIGPIPE
+ with NewSigRec do begin
+   Integer(@Sa_Handler):=SIG_IGN; // ignore signal
+   Sa_Mask[0]:=0;
+   Sa_Flags:=0;
+   end;
+ res:=fpsigaction(SIGPIPE,@NewSigRec,@OldSigRec);
+ {$endif}
 
 end.
