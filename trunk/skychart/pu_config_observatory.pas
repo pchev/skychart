@@ -107,6 +107,8 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
     procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
+    procedure HScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
+      var ScrollPos: Integer);
     procedure ObsNameChange(Sender: TObject);
     procedure TZComboBoxChange(Sender: TObject);
     procedure fillhorizonClick(Sender: TObject);
@@ -117,12 +119,12 @@ type
     procedure altmeterChange(Sender: TObject);
     procedure pressureChange(Sender: TObject);
     procedure temperatureChange(Sender: TObject);
+    procedure VScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
+      var ScrollPos: Integer);
     procedure ZoomImage1MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ZoomImage1Paint(Sender: TObject);
     procedure ZoomImage1PosChange(Sender: TObject);
-    procedure HScrollBarChange(Sender: TObject);
-    procedure VScrollBarChange(Sender: TObject);
     procedure ObszpClick(Sender: TObject);
     procedure ObszmClick(Sender: TObject);
     procedure ObsmapClick(Sender: TObject);
@@ -134,7 +136,7 @@ type
   private
     { Private declarations }
     FApplyConfig: TNotifyEvent;
-    scrolllock,obslock,LockChange:boolean;
+    scrolllock,obslock,LockChange,lockscrollbar:boolean;
     Obsposx,Obsposy : integer;
     scrollw, scrollh : integer;
     ObsMapFile:string;
@@ -690,7 +692,7 @@ end;
 
 procedure Tf_config_observatory.ZoomImage1PosChange(Sender: TObject);
 begin
-if LockChange then exit;
+if LockChange or lockscrollbar then exit;
 ScrollLock:=true;
 Hscrollbar.Position:=ZoomImage1.Xc;
 Vscrollbar.Position:=ZoomImage1.Yc;
@@ -698,20 +700,34 @@ application.processmessages;
 ScrollLock:=false;
 end;
 
-procedure Tf_config_observatory.HScrollBarChange(Sender: TObject);
+procedure Tf_config_observatory.HScrollBarScroll(Sender: TObject;
+  ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
 if LockChange then exit;
 if scrolllock then exit;
+if lockscrollbar then exit;
+lockscrollbar:=true;
+try
 ZoomImage1.Xcentre:=HScrollBar.Position;
 ZoomImage1.Draw;
+finally
+ lockscrollbar:=False;
+end;
 end;
 
-procedure Tf_config_observatory.VScrollBarChange(Sender: TObject);
+procedure Tf_config_observatory.VScrollBarScroll(Sender: TObject;
+  ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
 if LockChange then exit;
 if scrolllock then exit;
+if lockscrollbar then exit;
+lockscrollbar:=true;
+try
 ZoomImage1.Ycentre:=VScrollBar.Position;
 ZoomImage1.Draw;
+finally
+ lockscrollbar:=False;
+end;
 end;
 
 procedure Tf_config_observatory.ObszpClick(Sender: TObject);
