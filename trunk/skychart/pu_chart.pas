@@ -451,6 +451,8 @@ begin
  HorScrollBar.onScroll:=HorScrollBarScroll;
  VertScrollBar.onScroll:=VertScrollBarScroll;
 {$endif}
+ VertScrollBar.Width:=15;
+ HorScrollBar.Height:=15;
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
  VertScrollBar.Min:=-90*3600;
  VertScrollBar.SmallChange:=3600;
