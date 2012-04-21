@@ -142,7 +142,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
-    procedure HorScrollBarChange(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure MenuLoadCircleClick(Sender: TObject);
@@ -156,7 +155,6 @@ type
     procedure SlewCursorClick(Sender: TObject);
     procedure Target1Click(Sender: TObject);
     procedure TrackTelescopeClick(Sender: TObject);
-    procedure VertScrollBarChange(Sender: TObject);
     procedure VertScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure zoomplusExecute(Sender: TObject);
@@ -444,13 +442,8 @@ begin
  Image1.Cursor := ChartCursor;
  lock_refresh:=false;
  MovingCircle:=false;
-{$ifdef lclgtk2}  // clic on bar or arrow not working
- HorScrollBar.onChange:=HorScrollBarChange;
- VertScrollBar.onChange:=VertScrollBarChange;
-{$else}
  HorScrollBar.onScroll:=HorScrollBarScroll;
  VertScrollBar.onScroll:=VertScrollBarScroll;
-{$endif}
  VertScrollBar.Width:=15;
  HorScrollBar.Height:=15;
  VertScrollBar.Max:=90*3600;   // arcsecond position precision
@@ -772,23 +765,15 @@ lockscrollbar:=false;
 end;
 end;
 
-procedure Tf_chart.HorScrollBarChange(Sender: TObject);
-var i: integer;
-begin
-  HorScrollBarScroll(Sender,scTrack,i);
-end;
-
 procedure Tf_chart.HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
   var ScrollPos: Integer);
 begin
+if lockscrollbar then exit;
+lockscrollbar:=true;
+application.processmessages; // empty the message queue and process only the last position
 {$ifdef trace_debug}
  WriteTrace(caption+' HorScrollBarScroll');
 {$endif}
-{$ifdef mswindows}
-if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
-{$endif}
-if lockscrollbar then exit;
-lockscrollbar:=true;
 try
 with sc do begin
  cfgsc.TrackOn:=false;
@@ -811,7 +796,6 @@ with sc do begin
 end;
 end;
 Refresh;
-//application.processmessages;
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
@@ -819,23 +803,15 @@ lockscrollbar:=false;
 end;
 end;
 
-procedure Tf_chart.VertScrollBarChange(Sender: TObject);
-var i: integer;
-begin
-  VertScrollBarScroll(Sender,scTrack,i);
-end;
-
 procedure Tf_chart.VertScrollBarScroll(Sender: TObject;
   ScrollCode: TScrollCode; var ScrollPos: Integer);
 begin
+if lockscrollbar then exit;
+lockscrollbar:=true;
+application.processmessages; // empty the message queue and process only the last position
 {$ifdef trace_debug}
  WriteTrace(caption+' VertScrollBarScroll');
 {$endif}
-{$ifdef mswindows}
-if ScrollCode in [scPageUp,scPageDown] then exit; // do not refresh while scrolling scEndScroll do the final refresh
-{$endif}
-if lockscrollbar then exit;
-lockscrollbar:=true;
 try
 with sc do begin
  cfgsc.TrackOn:=false;
@@ -862,7 +838,6 @@ with sc do begin
 end;
 end;
 Refresh;
-//application.processmessages;
 RefreshTimer.enabled:=false;
 RefreshTimer.enabled:=true;
 finally
