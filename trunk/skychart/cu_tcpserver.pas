@@ -87,6 +87,11 @@ type
   end;
 
 implementation
+{$ifdef darwin}
+uses BaseUnix;       //  to catch SIGPIPE
+var NewSigRec, OldSigRec: SigActionRec;
+    res: Integer;
+{$endif}
 
 Constructor TTCPDaemon.Create;
 begin
@@ -292,6 +297,17 @@ finally
   lockexecutecmd:=false;
 end;
 end;
+
+initialization
+
+ {$ifdef darwin}           //  ignore SIGPIPE
+ with NewSigRec do begin
+   Integer(@Sa_Handler):=SIG_IGN; // ignore signal
+   Sa_Mask[0]:=0;
+   Sa_Flags:=0;
+   end;
+ res:=fpsigaction(SIGPIPE,@NewSigRec,@OldSigRec);
+ {$endif}
 
 end.
 
