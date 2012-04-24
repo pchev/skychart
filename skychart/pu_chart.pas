@@ -2580,7 +2580,7 @@ txt:=txt+html_br;
 if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
   djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
-  txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+sc.cfgsc.tz.ZoneName+' )'+html_br;
+  txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+TzGMT2UTC(sc.cfgsc.tz.ZoneName)+' )'+html_br;
   djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
   txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
   txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
@@ -3102,6 +3102,7 @@ function Tf_chart.cmd_SetTZ(tz:string):string;
 var buf:string;
 begin
 try
+  if copy(tz,1,3)='UTC' then tz:=TzUTC2GMT(tz);
   buf:=ZoneDir+StringReplace(tz,'/',PathDelim,[rfReplaceAll]);
   if FileExists(buf) then begin
     sc.cfgsc.ObsTZ:=tz;

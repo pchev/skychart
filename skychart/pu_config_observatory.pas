@@ -390,15 +390,21 @@ end else begin
    isocode:='ZZ';
 end;
 TZComboBox.Clear;
+TZComboBox.ItemIndex:=-1;
 j:=0;
 for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
   if csc.tz.ZoneTabCnty[i]=isocode then begin
      buf:=csc.tz.ZoneTabZone[i];
      if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+     if (isocode='ZZ') then buf:=TzGMT2UTC(buf);
      TZComboBox.Items.Add(buf);
-     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ)or((isocode='ZZ')and(j=12)) then TZComboBox.ItemIndex:=j;
+     if (TZComboBox.ItemIndex=-1)and(csc.tz.ZoneTabZone[i]=csc.ObsTZ) then TZComboBox.ItemIndex:=j;
      inc(j);
   end;
+end;
+if (TZComboBox.ItemIndex=-1) then begin
+  if isocode='ZZ' then TZComboBox.ItemIndex:=12
+     else TZComboBox.ItemIndex:=0;
 end;
 TZComboBoxChange(Sender);
 end;
@@ -416,15 +422,21 @@ end else begin
    isocode:='ZZ';
 end;
 TZComboBox.Clear;
+TZComboBox.ItemIndex:=-1;
 j:=0;
 for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
   if csc.tz.ZoneTabCnty[i]=isocode then begin
      buf:=csc.tz.ZoneTabZone[i];
      if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+     if (isocode='ZZ') then buf:=TzGMT2UTC(buf);
      TZComboBox.Items.Add(buf);
-     if (j=0)or(csc.tz.ZoneTabZone[i]=csc.ObsTZ)or((isocode='ZZ')and(j=12)) then TZComboBox.ItemIndex:=j;
+     if (TZComboBox.ItemIndex=-1)and(csc.tz.ZoneTabZone[i]=csc.ObsTZ) then TZComboBox.ItemIndex:=j;
      inc(j);
   end;
+end;
+if (TZComboBox.ItemIndex=-1) then begin
+  if isocode='ZZ' then TZComboBox.ItemIndex:=12
+     else TZComboBox.ItemIndex:=0;
 end;
 TZComboBoxChange(Sender);
 end;
@@ -437,6 +449,7 @@ begin
   if buf='' then exit;
   i:=pos(' ',buf);
   if i>0 then buf:=copy(buf,1,i-1);
+  if copy(buf,1,3)='UTC' then buf:=TzUTC2GMT(buf);
   csc.ObsTZ:=buf;
   csc.tz.TimeZoneFile:=ZoneDir+StringReplace(buf,'/',PathDelim,[rfReplaceAll]);
   csc.timezone:=csc.tz.SecondsOffset/3600;
