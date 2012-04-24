@@ -72,7 +72,7 @@ jdt:=jd(y,m,d,t-tz);
 Fplanet.sun(jdt,ra,dec,dist,diam);
 precession(jd2000,jdt,ra,dec);
 ra:=ra*rad2deg/15;
-clock1.Caption:=TimToStr(rmod(t+24,24))+blank+cfgsc.tz.ZoneName;
+clock1.Caption:=TimToStr(rmod(t+24,24))+blank+TzGMT2UTC(cfgsc.tz.ZoneName);
 clock2.Caption:=TimToStr(rmod(t-tz+24,24));
 clock3.Caption:=TimToStr(rmod(t-tz-(cfgsc.ObsLongitude/15)+24,24));
 clock4.Caption:=TimToStr(rmod(st-ra+24+12,24));

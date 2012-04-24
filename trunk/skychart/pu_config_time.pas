@@ -344,6 +344,7 @@ if not csc.ShowPluto then csc.SimObject[9]:=false;
 ShowTime;
 // fill time zone
 TZComboBox.Clear;
+TZComboBox.ItemIndex:=-1;
 TZComboBox.Sorted:=true;
 for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
      buf:=csc.tz.ZoneTabZone[i];
@@ -352,16 +353,18 @@ for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
        TZComboBox.Items.Add(buf);
      end;
 end;
-// Put Etc time zone at theend of the list
+// Put Etc time zone at the end of the list
 TZComboBox.Sorted:=false;
 for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
      buf:=csc.tz.ZoneTabZone[i];
      if copy(buf,1,3)='Etc' then begin
        if csc.tz.ZoneTabComment[i]>'' then buf:=buf+' ('+csc.tz.ZoneTabComment[i]+')';
+       buf:=TzGMT2UTC(buf);
        TZComboBox.Items.Add(buf);
      end;
 end;
-TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(csc.ObsTZ);
+if copy(csc.ObsTZ,1,3)='Etc' then TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(TzGMT2UTC(csc.ObsTZ))
+   else TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(csc.ObsTZ);
 LockChange:=false;
 end;
 
@@ -375,7 +378,7 @@ UTlabel.Caption:=date2str(y,m,d)+blank+timtostr(h)+blank+rsUT;
 h:=csc.tz.SecondsOffset/3600;
 if h=0 then s:=''
 else if h>0 then s:='+' else s:='-';
-tzlabel.caption:=csc.tz.ZoneName+blank+s+timtostr(abs(h));
+tzlabel.caption:=TzGMT2UTC(csc.tz.ZoneName)+blank+s+timtostr(abs(h));
 end;
 
 procedure Tf_config_time.ShowTime;
@@ -736,6 +739,7 @@ begin
   if buf='' then exit;
   i:=pos(' ',buf);
   if i>0 then buf:=Copy(buf,1,i-1);
+  if copy(buf,1,3)='UTC' then buf:=TzUTC2GMT(buf);
   csc.ObsTZ:=buf;
   if copy(buf,1,3)='Etc' then
      csc.countrytz:=false

@@ -1096,7 +1096,7 @@ begin
   config.tz.JD:=date2.JD;
   z2:=config.tz.ZoneName;
   if z1<>z2 then z1:=z1+'/'+z2;
-  caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+z1;
+  caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+TzGMT2UTC(z1);
 end;
 
 procedure Tf_calendar.RefreshTwilight;
@@ -1711,7 +1711,7 @@ z1:=config.tz.ZoneName;
 config.tz.JD:=date2.JD;
 z2:=config.tz.ZoneName;
 if z1<>z2 then z1:=z1+'/'+z2;
-caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+z1;
+caption:=title+blank+config.Obsname+blank+rsTimeZone+'='+TzGMT2UTC(z1);
 end;
 
 procedure Tf_calendar.BtnCloseClick(Sender: TObject);
@@ -1944,7 +1944,7 @@ z1:=config.tz.ZoneName;
 config.tz.JD:=date2.JD;
 z2:=config.tz.ZoneName;
 if z1<>z2 then z1:=z1+'/'+z2;
-buf:=buf+rsTimeZone+'='+z1+'"';
+buf:=buf+rsTimeZone+'='+TzGMT2UTC(z1)+'"';
 lst.Add(buf);
 for i:=0 to grid.RowCount-1 do begin
   for j:=0 to grid.ColCount-1 do begin
@@ -2003,7 +2003,7 @@ z1:=config.tz.ZoneName;
 config.tz.JD:=date2.JD;
 z2:=config.tz.ZoneName;
 if z1<>z2 then z1:=z1+'/'+z2;
-buf:=buf+blank+rsTimeZone+'='+z1;
+buf:=buf+blank+rsTimeZone+'='+TzGMT2UTC(z1);
 if grid=cometgrid then
   PrtGrid(Grid,'CdC',buf,'',poLandscape)
 else
@@ -2080,7 +2080,7 @@ begin {BtnCopyClipClick}
     config.tz.JD:=date2.JD;
     z2:=config.tz.ZoneName;
     if z1<>z2 then z1:=z1+'/'+z2;
-    buf:=buf+blank+rsTimeZone+'='+z1+LineEnding;
+    buf:=buf+blank+rsTimeZone+'='+TzGMT2UTC(z1)+LineEnding;
     {At this stage we have something like
      "Churchill Longitude=146Â°24'55"East Latitude=-38Â°21'50" Time Zone=LHST"}
     for i := 0 to 1 do begin

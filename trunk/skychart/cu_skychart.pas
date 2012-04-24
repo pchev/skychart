@@ -4418,7 +4418,7 @@ begin
       3: cep:=rsAstrometricJ;
       end;
     dat:=Date2Str(cfgsc.CurYear,cfgsc.curmonth,cfgsc.curday)+sep+ArToStr3(cfgsc.Curtime);
-    dat:=dat+' ('+cfgsc.tz.ZoneName+')';
+    dat:=dat+' ('+TzGMT2UTC(cfgsc.tz.ZoneName)+')';
     if cfgsc.projtype='A' then pr:=' ARC'
                           else pr:=' '+cfgsc.projname[cfgsc.fieldnum];
     case cfgsc.projpole of

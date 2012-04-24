@@ -111,6 +111,8 @@ function CondUTF8Encode(v:string):string;
 function GreekSymbolUtf8(v:string):string;
 function SafeUTF8ToSys(v:string):string;
 function GetSerialPorts(var c: TComboBox):boolean;
+function TzGMT2UTC(gmttz:string):string;
+function TzUTC2GMT(utctz:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2044,6 +2046,47 @@ with form do begin
      end;
 end;
 end;
+
+function TzGMT2UTC(gmttz:string):string;
+var buf:string;
+begin
+//  Etc/GMT+5 -> UTC-5
+if copy(gmttz,1,7)='Etc/GMT' then begin
+  buf:=StringReplace(gmttz,'Etc/GMT','UTC',[]);
+  if pos('+',buf)>0 then
+     buf:=StringReplace(buf,'+','-',[])
+  else
+     buf:=StringReplace(buf,'-','+',[]);
+  result:=buf;
+//  GMT+5 -> UTC-5
+end else if copy(gmttz,1,3)='GMT' then begin
+    buf:=StringReplace(gmttz,'GMT','UTC',[]);
+    if pos('+',buf)>0 then
+       buf:=StringReplace(buf,'+','-',[])
+    else
+       buf:=StringReplace(buf,'-','+',[]);
+    result:=buf;
+end else begin
+  result:=gmttz;
+end;
+end;
+
+function TzUTC2GMT(utctz:string):string;
+var buf:string;
+begin
+//  UTC-5 -> Etc/GMT+5
+if copy(utctz,1,3)='UTC' then begin
+  buf:=StringReplace(utctz,'UTC','Etc/GMT',[]);
+  if pos('+',buf)>0 then
+     buf:=StringReplace(buf,'+','-',[])
+  else
+     buf:=StringReplace(buf,'-','+',[]);
+  result:=buf;
+end else begin
+  result:=utctz;
+end;
+end;
+
 
 end.
 
