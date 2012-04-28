@@ -1,11 +1,15 @@
 Version 3.7  Notes de la version
 
 Nouvelles options:
+  - Traduction Thai par Worachate Boonplod
+  - Remplace les zones horaires Etc/GMT par les plus intuitive UTC (GMT+5 -> UTC-5)
+  - Nouveau boutton pour une roatation de 180 degrees.
   - Bouton Meta+rotation tourne de 180 degrees.
   - Clic droit sur le bouton rotation annule les rotations.
   - Configuration/Affichage "Afficher uniquement le texte dans la fenêtre de détail", a utiliser si vous avez un problème avec la fenêtre de détail standard.
 
 Problèmes corrigé depuis la version 3.6:
+  - Barre de défilement plus réactive.
   - Plantage du programme lors du calcul des planètes.
   - Accepte des commandes si vous utilisez l'option --daemon
   - Mauvaise position lors d'une recherche de planète par nom.

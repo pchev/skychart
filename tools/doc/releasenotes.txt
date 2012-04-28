@@ -1,12 +1,15 @@
 Version 3.7 release Notes
 
 New options:
+  - Add Thai translation by Worachate Boonplod
+  - Replace Etc/GMT timezone by the more intuitive UTC (GMT+5 -> UTC-5)
+  - New 180deg rotation button.
   - Meta+rotate button rotate by 180 degrees.
   - Right click on rotate button reset the rotation to 0.
   - Setup/Display "Show only text in detail window", use if you have problem with the standard detail window.
 
-
 Bug fixed since version 3.6:
+  - More reactive scrollbar
   - Crash in planet computation.
   - Accept command if running with --daemon option
   - Wrong position when searching for planet name.

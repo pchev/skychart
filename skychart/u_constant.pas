@@ -38,7 +38,7 @@ type Starcolarray =  Array [0..Maxcolor] of Tcolor; // 0:sky, 1-10:object, 11:no
 {$i revision.inc}
 
 const cdcversion = 'Version 3.7-svn';
-      cdcver     = '3.7a';
+      cdcver     = '3.7b';
       cdccpy = 'Copyright (C) 2002-2012 Patrick Chevalley';
       cdcauthors = 'Patrick Chevalley, pch@freesurf.ch'+crlf+
                    'Peter Dean,'+crlf+
