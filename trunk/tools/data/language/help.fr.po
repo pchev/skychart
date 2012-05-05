@@ -251,8 +251,8 @@ msgid "advanced_search.html"
 msgstr "recherche_avancee.html"
 
 #: u_help.hlpsetfov
-msgid "set_fov.html"
-msgstr "regle_le_champ.html"
+msgid "menuview.html#set_fov"
+msgstr "menuvoir.html"
 
 #: u_help.hlpsoftlic
 msgid "software_license.html"

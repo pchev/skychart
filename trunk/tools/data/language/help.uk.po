@@ -250,8 +250,8 @@ msgid "advanced_search.html"
 msgstr "поліпшений_пошук.html"
 
 #: u_help.hlpsetfov
-msgid "set_fov.html"
-msgstr "настанови_поля_зору.html"
+msgid "menuview.html#set_fov"
+msgstr "меню_вид.html#set_fov"
 
 #: u_help.hlpsoftlic
 msgid "software_license.html"
