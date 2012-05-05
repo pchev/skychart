@@ -247,7 +247,7 @@ msgid "advanced_search.html"
 msgstr ""
 
 #: u_help.hlpsetfov
-msgid "set_fov.html"
+msgid "menuview.html#set_fov"
 msgstr ""
 
 #: u_help.hlpsoftlic

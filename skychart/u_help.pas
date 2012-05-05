@@ -68,7 +68,7 @@ resourcestring
   hlpBarRight = 'right_bar.html';
   hlpSrvCmd ='server_commands.html';
   hlpSrvInfo = 'server_information.html';
-  hlpSetFov = 'set_fov.html';
+  hlpSetFov = 'menuview.html#set_fov';
   hlpSoftLic ='software_license.html';
   hlpCfgSol = 'solar_system.html';
   hlpIndex = 'start.html';

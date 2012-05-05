@@ -247,8 +247,8 @@ msgid "advanced_search.html"
 msgstr "geavanceerd_zoeken.html"
 
 #: u_help.hlpsetfov
-msgid "set_fov.html"
-msgstr "positie_en_beeldveld.html"
+msgid "menuview.html#set_fov"
+msgstr "menuweergave.html#stel_beeldveld_in"
 
 #: u_help.hlpsoftlic
 msgid "software_license.html"
