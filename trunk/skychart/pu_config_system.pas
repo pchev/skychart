@@ -532,7 +532,7 @@ if messageDlg(Format(rsAlsoBeSureTh, [DBtypeGroup.hint+crlf+crlf, crlf, crlf]),
         DBtype:=sqlite;
         MysqlBox.visible:=false;
         SqliteBox.visible:=true;
-        dbnamesqlite.text:=SysToUTF8(slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]));
+        dbnamesqlite.text:=SysToUTF8(slash(dbdir)+defaultSqliteDB);
         dbpath:=extractfilepath(dbnamesqlite.text);
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);

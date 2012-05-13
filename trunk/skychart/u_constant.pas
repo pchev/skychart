@@ -839,9 +839,9 @@ type
        end;
 
 // pseudo-constant only here
-Var  Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : string;
-     VarObs,CdC : String;
-     ForceConfig, Configfile, Lang : string;
+Var  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, TempDir, ZoneDir, HomeDir, VODir : string;
+     VarObs,CdC, MPCDir, DBDir, PictureDir : String;
+     ForceConfig, ForceUserDir, Configfile, Lang : string;
      compile_time,compile_version, compile_system, lclver : string;
      ldeg,lmin,lsec : string;
      ImageListCount: integer;
@@ -1043,7 +1043,7 @@ const
                 'show tables like',
                 'select name from sqlite_master where type="table" and name like'
                 );
-    defaultSqliteDB='database/cdc.db';
+    defaultSqliteDB='cdc.db';
     defaultMysqlDB='cdc';            
 var DBtype: TDBtype = sqlite;
 

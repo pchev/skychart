@@ -113,6 +113,7 @@ function SafeUTF8ToSys(v:string):string;
 function GetSerialPorts(var c: TComboBox):boolean;
 function TzGMT2UTC(gmttz:string):string;
 function TzUTC2GMT(utctz:string):string;
+function ExtractSubPath(basepath, path: string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2087,6 +2088,10 @@ end else begin
 end;
 end;
 
+function ExtractSubPath(basepath, path: string):string;
+begin
+result:=StringReplace(path,basepath,'',[]);
+end;
 
 end.
 
