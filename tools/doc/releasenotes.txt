@@ -1,6 +1,8 @@
 Version 3.7 release Notes
 
 New options:
+  - New option --userdir=
+  - Configuration file now use relative path when possible 
   - Add Thai translation by Worachate Boonplod
   - Replace Etc/GMT timezone by the more intuitive UTC (GMT+5 -> UTC-5)
   - New 180deg rotation button.
