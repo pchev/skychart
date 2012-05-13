@@ -475,7 +475,7 @@ end;
 db.UnLockTables;
 db.commit;
 db.flush('tables');
-memocom.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCometFile.log');
+memocom.Lines.SaveToFile(slash(DBDir)+'LoadCometFile.log');
 except
 end;
 end;
@@ -728,7 +728,7 @@ db.UnLockTables;
 db.commit;
 db.flush('tables');
 result:=(nerr=0);
-memoast.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadAsteroidFile.log');
+memoast.Lines.SaveToFile(slash(DBDir)+'LoadAsteroidFile.log');
 except
 end;
 end;
@@ -971,7 +971,7 @@ except
    Halt;
    end;
 end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadSampleData.log');
+memo.Lines.SaveToFile(slash(DBDir)+'LoadSampleData.log');
 end;
 
 procedure TCDCdb.GetCometList(filter:string; maxnumber:integer; list:TstringList; var cometid: array of string);
@@ -1339,7 +1339,7 @@ if db.Active then begin
   closefile(f);
   rec.Free;
 end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadCountryList.log');
+memo.Lines.SaveToFile(slash(DBDir)+'LoadCountryList.log');
 application.ProcessMessages;
 except
 end;
@@ -1407,7 +1407,7 @@ if db.Active then begin
   application.ProcessMessages;
   result:=(nl>0);
 end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadWorldLocation.log');
+memo.Lines.SaveToFile(slash(DBDir)+'LoadWorldLocation.log');
 except
 end;
 end;
@@ -1473,7 +1473,7 @@ if db.Active then begin
   Application.ProcessMessages;
   result:=(nl>0);
 end;
-memo.Lines.SaveToFile(slash(PrivateDir)+slash('database')+'LoadUSLocation.log');
+memo.Lines.SaveToFile(slash(DBDir)+'LoadUSLocation.log');
 except
 end;
 end;

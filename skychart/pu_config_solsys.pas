@@ -504,7 +504,7 @@ comsymbol.itemindex:=csc.ComSymbol;
 comlimitmag.value:=csc.CommagMax;
 commagdiff.value:=csc.CommagDiff;
 if csc.ShowComet then UpdComList;
-comfile.InitialDir:=slash(privatedir)+slash('MPC');
+comfile.InitialDir:=slash(MPCDir);
 end;
 
 procedure Tf_config_solsys.ShowAsteroid;
@@ -518,7 +518,7 @@ aststrtdate_m.text:=inttostr(csc.curmonth);
 astdeldate_y.text:=inttostr(csc.curyear-1);
 astdeldate_m.text:=inttostr(csc.curmonth);
 if csc.ShowAsteroid then UpdAstList;
-mpcfile.InitialDir:=slash(privatedir)+slash('MPC');
+mpcfile.InitialDir:=slash(MPCDir);
 end;
 
 procedure Tf_config_solsys.PlanetDirChange(Sender: TObject);
@@ -553,7 +553,7 @@ begin
  MemoMpc.Clear;
  n:=cmain.AsteroidUrlList.Count;
  if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
- fn:=slash(privatedir)+slash('MPC')+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ fn:=slash(MPCDir)+'MPCORB-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
   if cmain.HttpProxy then begin
     DownloadDialog1.SocksProxy:='';
     DownloadDialog1.SocksType:='';
@@ -700,7 +700,7 @@ begin
  MemoCom.Clear;
  n:=cmain.CometUrlList.Count;
  if n=0 then begin showmessage(rsPleaseConfig2); exit; end;
- fn:=slash(privatedir)+slash('MPC')+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
+ fn:=slash(MPCDir)+'COMET-'+FormatDateTime('yyyy-mm-dd',now)+'.DAT';
  tmpfn:=slash(TempDir)+'mpc.tmp';
  if cmain.HttpProxy then begin
     DownloadDialog1.SocksProxy:='';

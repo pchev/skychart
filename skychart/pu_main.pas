@@ -1091,6 +1091,7 @@ if v<>0 then exit;
 val(max,x,v);
 if v<>0 then exit;
 if not fileexists(slash(path)+shortname+'.hdr') then exit;
+path:=ExtractSubPath(Appdir,path);
 i:=-1;
 for j:=0 to catalog.cfgcat.GCatNum-1 do
    if catalog.cfgcat.GCatLst[j].shortname=trim(shortname) then i:=j;
@@ -1268,7 +1269,7 @@ try
  WriteTrace('Background Image');
 {$endif}
  if def_cfgsc.BackgroundImage='' then begin
-   def_cfgsc.BackgroundImage:=slash(privatedir)+slash('pictures');
+   def_cfgsc.BackgroundImage:=slash(PictureDir);
    if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
  end;
 {$ifdef trace_debug}
@@ -1602,6 +1603,9 @@ if not DirectoryExists(slash(appdir)+slash('data')+slash('planet')) then begin
 end;
 {$else}
 appdir:=getcurrentdir;
+if not DirectoryExists(slash(appdir)+slash('data')+slash('planet')) then begin
+   appdir:=ExtractFilePath(ParamStr(0));
+end;
 {$ifdef trace_debug}
  debugln('appdir='+appdir);
 {$endif}
@@ -1643,18 +1647,25 @@ homedir:=trim(systoutf8(Folder));
 
 if ForceConfig<>'' then Configfile:=ForceConfig;
 
+ConfigAppdir:='';
+ConfigPrivateDir:='';
 
 if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
   try
   buf:=inif.ReadString('main','AppDir',appdir);
   if Directoryexists(buf) then appdir:=buf;
-//  privatedir:=SafeUTF8ToSys(inif.ReadString('main','PrivateDir',privatedir));
-  privatedir:=inif.ReadString('main','PrivateDir',privatedir);
+  if buf<>'' then ConfigAppdir:=buf;
+  buf:=inif.ReadString('main','PrivateDir',privatedir);
+  if Directoryexists(buf) then privatedir:=buf;
+  if buf<>'' then ConfigPrivateDir:=buf;
   finally
    inif.Free;
   end;
 end;
+
+if ForceUserDir<>'' then PrivateDir:=ForceUserDir;
+
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectories(privatedir);
 if not directoryexists(privatedir) then begin
@@ -1663,17 +1674,19 @@ if not directoryexists(privatedir) then begin
              mtError, [mbAbort], 0);
    Halt;
 end;
-
-if not directoryexists(slash(privatedir)+'MPC') then CreateDir(slash(privatedir)+'MPC');
-if not directoryexists(slash(privatedir)+'MPC') then forcedirectories(slash(privatedir)+'MPC');
-if not directoryexists(slash(privatedir)+'database') then CreateDir(slash(privatedir)+'database');
-if not directoryexists(slash(privatedir)+'database') then forcedirectories(slash(privatedir)+'database');
-if not directoryexists(slash(privatedir)+'pictures') then CreateDir(slash(privatedir)+'pictures');
+MPCDir:=slash(privatedir)+'MPC';
+if not directoryexists(MPCDir) then CreateDir(MPCDir);
+if not directoryexists(MPCDir) then forcedirectories(MPCDir);
+DBDir:=slash(privatedir)+'database';
+if not directoryexists(DBDir) then CreateDir(DBDir);
+if not directoryexists(DBDir) then forcedirectories(DBDir);
+PictureDir:=slash(privatedir)+'pictures';
+if not directoryexists(PictureDir) then CreateDir(slash(privatedir)+'pictures');
 if not directoryexists(slash(privatedir)+'pictures') then forcedirectories(slash(privatedir)+'pictures');
-if not directoryexists(slash(privatedir)+'vo') then CreateDir(slash(privatedir)+'vo');
-if not directoryexists(slash(privatedir)+'vo') then forcedirectories(slash(privatedir)+'vo');
-Tempdir:=slash(privatedir)+DefaultTmpDir;
 VODir:=slash(privatedir)+'vo';
+if not directoryexists(VODir) then CreateDir(VODir);
+if not directoryexists(VODir) then forcedirectories(VODir);
+Tempdir:=slash(privatedir)+DefaultTmpDir;
 if not directoryexists(TempDir) then CreateDir(TempDir);
 if not directoryexists(TempDir) then forcedirectories(TempDir);
 SatDir:=slash(privatedir)+'satellites';
@@ -4284,10 +4297,10 @@ cfgm.TextOnlyDetail:=false;
 cfgm.AutostartServer:=true;
 cfgm.dbhost:='localhost';
 cfgm.dbport:=3306;
-cfgm.db:=slash(privatedir)+StringReplace(defaultSqliteDB,'/',PathDelim,[rfReplaceAll]);
+cfgm.db:=slash(dbdir)+(defaultSqliteDB);
 cfgm.dbuser:='root';
 cfgm.dbpass:='';
-cfgm.ImagePath:=slash(appDir)+slash('data')+slash('pictures');
+cfgm.ImagePath:=slash('data')+slash('pictures');
 cfgm.ShowChartInfo:=false;
 cfgm.ShowTitlePos:=false;
 cfgm.SyncChart:=false;
@@ -4393,11 +4406,11 @@ def_cfgplot.partsize:=1.2;
 def_cfgplot.red_move:=true;
 def_cfgplot.magsize:=4;
 def_cfgplot.saturation:=255;
-cfgm.Constellationpath:=slash(appdir)+'data'+Pathdelim+'constellation';
-cfgm.ConstLfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
-cfgm.ConstBfile:=slash(appdir)+'data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
-cfgm.EarthMapFile:=slash(appdir)+'data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
-cfgm.PlanetDir:=slash(appdir)+'data'+Pathdelim+'planet';
+cfgm.Constellationpath:='data'+Pathdelim+'constellation';
+cfgm.ConstLfile:='data'+Pathdelim+'constellation'+Pathdelim+'DefaultConstL.cln';
+cfgm.ConstBfile:='data'+Pathdelim+'constellation'+Pathdelim+'constb.cby';
+cfgm.EarthMapFile:='data'+Pathdelim+'earthmap'+Pathdelim+'earthmap1k.jpg';
+cfgm.PlanetDir:='data'+Pathdelim+'planet';
 cfgm.horizonfile:='';
 def_cfgplot.UseBMP:=true;
 def_cfgplot.AntiAlias:=true;
@@ -4654,7 +4667,7 @@ catalog.cfgcat.UserObjects[0].comment:=rsExampleOfUse;
 catalog.cfgcat.GCatNum:=0;
 SetLength(catalog.cfgcat.GCatLst,catalog.cfgcat.GCatNum);
 for i:=1 to maxstarcatalog do begin
-   catalog.cfgcat.starcatpath[i]:=slash(appdir)+'cat';
+   catalog.cfgcat.starcatpath[i]:='cat';
    catalog.cfgcat.starcatdef[i]:=false;
    catalog.cfgcat.starcaton[i]:=false;
    catalog.cfgcat.starcatfield[i,1]:=0;
@@ -4692,7 +4705,7 @@ catalog.cfgcat.starcatpath[dsgsc-BaseStar]:='C:\Program Files\Deepsky Astronomy 
 catalog.cfgcat.starcatfield[dsgsc-BaseStar,1]:=0;
 catalog.cfgcat.starcatfield[dsgsc-BaseStar,2]:=3;
 for i:=1 to maxvarstarcatalog do begin
-   catalog.cfgcat.varstarcatpath[i]:=slash(appdir)+'cat';
+   catalog.cfgcat.varstarcatpath[i]:='cat';
    catalog.cfgcat.varstarcatdef[i]:=false;
    catalog.cfgcat.varstarcaton[i]:=false;
    catalog.cfgcat.varstarcatfield[i,1]:=0;
@@ -4702,7 +4715,7 @@ catalog.cfgcat.varstarcatpath[gcvs-BaseVar]:=catalog.cfgcat.varstarcatpath[gcvs-
 catalog.cfgcat.varstarcatfield[gcvs-BaseVar,1]:=0;
 catalog.cfgcat.varstarcatfield[gcvs-BaseVar,2]:=10;
 for i:=1 to maxdblstarcatalog do begin
-   catalog.cfgcat.dblstarcatpath[i]:=slash(appdir)+'cat';
+   catalog.cfgcat.dblstarcatpath[i]:='cat';
    catalog.cfgcat.dblstarcatdef[i]:=false;
    catalog.cfgcat.dblstarcaton[i]:=false;
    catalog.cfgcat.dblstarcatfield[i,1]:=0;
@@ -4712,7 +4725,7 @@ catalog.cfgcat.dblstarcatpath[wds-BaseDbl]:=catalog.cfgcat.dblstarcatpath[wds-Ba
 catalog.cfgcat.dblstarcatfield[wds-BaseDbl,1]:=0;
 catalog.cfgcat.dblstarcatfield[wds-BaseDbl,2]:=10;
 for i:=1 to maxnebcatalog do begin
-   catalog.cfgcat.nebcatpath[i]:=slash(appdir)+'cat';
+   catalog.cfgcat.nebcatpath[i]:='cat';
    catalog.cfgcat.nebcatdef[i]:=false;
    catalog.cfgcat.nebcaton[i]:=false;
    catalog.cfgcat.nebcatfield[i,1]:=0;
@@ -4722,22 +4735,22 @@ catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=false;
 catalog.cfgcat.nebcatfield[uneb-BaseNeb,2]:=10;
 catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=false;
 catalog.cfgcat.nebcatfield[voneb-BaseNeb,2]:=10;
-catalog.cfgcat.nebcatpath[sac-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'sac';
+catalog.cfgcat.nebcatpath[sac-BaseNeb]:='cat'+PathDelim+'sac';
 catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
 catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
-catalog.cfgcat.nebcatpath[ngc-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'ngc2000';
+catalog.cfgcat.nebcatpath[ngc-BaseNeb]:='cat'+PathDelim+'ngc2000';
 catalog.cfgcat.nebcatfield[ngc-BaseNeb,2]:=10;
-catalog.cfgcat.nebcatpath[lbn-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'lbn';
+catalog.cfgcat.nebcatpath[lbn-BaseNeb]:='cat'+PathDelim+'lbn';
 catalog.cfgcat.nebcatfield[lbn-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[rc3-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'rc3';
+catalog.cfgcat.nebcatpath[rc3-BaseNeb]:='cat'+PathDelim+'rc3';
 catalog.cfgcat.nebcatfield[rc3-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[pgc-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'pgc';
+catalog.cfgcat.nebcatpath[pgc-BaseNeb]:='cat'+PathDelim+'pgc';
 catalog.cfgcat.nebcatfield[pgc-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[ocl-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'ocl';
+catalog.cfgcat.nebcatpath[ocl-BaseNeb]:='cat'+PathDelim+'ocl';
 catalog.cfgcat.nebcatfield[ocl-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[gcm-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'gcm';
+catalog.cfgcat.nebcatpath[gcm-BaseNeb]:='cat'+PathDelim+'gcm';
 catalog.cfgcat.nebcatfield[gcm-BaseNeb,2]:=5;
-catalog.cfgcat.nebcatpath[gpn-BaseNeb]:=slash(appdir)+'cat'+PathDelim+'gpn';
+catalog.cfgcat.nebcatpath[gpn-BaseNeb]:='cat'+PathDelim+'gpn';
 catalog.cfgcat.nebcatfield[gpn-BaseNeb,2]:=5;
 catalog.cfgshr.FieldNum[0]:=0.5;
 catalog.cfgshr.FieldNum[1]:=1;
@@ -4901,7 +4914,7 @@ for i:=0 to catalog.cfgcat.GCatNum-1 do begin
       continue;
    end;
    catalog.cfgcat.GCatLst[j].name:=Readstring(section,'CatLongName'+inttostr(i),catalog.cfgcat.GCatLst[i].name);
-   catalog.cfgcat.GCatLst[j].path:=Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path);
+   catalog.cfgcat.GCatLst[j].path:=ExtractSubPath(ConfigAppdir,Readstring(section,'CatPath'+inttostr(i),catalog.cfgcat.GCatLst[i].path));
    catalog.cfgcat.GCatLst[j].min:=ReadFloat(section,'CatMin'+inttostr(i),catalog.cfgcat.GCatLst[i].min);
    catalog.cfgcat.GCatLst[j].max:=ReadFloat(section,'CatMax'+inttostr(i),catalog.cfgcat.GCatLst[i].max);
    catalog.cfgcat.GCatLst[j].Actif:=ReadBool(section,'CatActif'+inttostr(i),catalog.cfgcat.GCatLst[i].Actif);
@@ -4948,7 +4961,7 @@ for i:=1 to maxstarcatalog do begin
    catalog.cfgcat.starcatfield[i,2]:=ReadInteger(section,'starcatfield2'+inttostr(i),catalog.cfgcat.starcatfield[i,2]);
 end;
 if pos('bsc5',catalog.cfgcat.starcatpath[DefStar-BaseStar])>0 then begin    // Upgrade to new default catalog
-  catalog.cfgcat.starcatpath[DefStar-BaseStar]:=slash(appdir)+slash('cat')+'xhip';
+  catalog.cfgcat.starcatpath[DefStar-BaseStar]:=slash('cat')+'xhip';
 end;
 for i:=1 to maxvarstarcatalog do begin
    catalog.cfgcat.varstarcatdef[i]:=ReadBool(section,'varstarcatdef'+inttostr(i),catalog.cfgcat.varstarcatdef[i]);
@@ -5113,7 +5126,13 @@ csc.showstars:=ReadBool(section,'ShowStars',csc.showstars);
 csc.shownebulae:=ReadBool(section,'ShowNebulae',csc.shownebulae);
 csc.showline:=ReadBool(section,'ShowLine',csc.showline);
 csc.ShowBackgroundImage:=ReadBool(section,'ShowBackgroundImage',csc.ShowBackgroundImage);
-csc.BackgroundImage:=ReadString(section,'BackgroundImage',csc.BackgroundImage);
+buf:=ReadString(section,'BackgroundImage',csc.BackgroundImage);
+if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir) then
+   csc.BackgroundImage:=buf
+else begin
+   buf:=ExtractSubPath(slash(ConfigPrivateDir),buf);
+   csc.BackgroundImage:=slash(PrivateDir)+buf;
+end;
 csc.AstSymbol:=ReadInteger(section,'AstSymbol',csc.AstSymbol);
 csc.AstmagMax:=ReadFloat(section,'AstmagMax',csc.AstmagMax);
 csc.AstmagDiff:=ReadFloat(section,'AstmagDiff',csc.AstmagDiff);
@@ -5328,12 +5347,16 @@ cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 buf:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
+buf:=ExtractSubPath(ConfigAppdir,buf);
 if FileExists(buf) then cfgm.ConstLfile:=buf;
 buf:=ReadString(section,'ConstBfile',cfgm.ConstBfile);
+buf:=ExtractSubPath(ConfigAppdir,buf);
 if FileExists(buf) then cfgm.ConstBfile:=buf;
 buf:=ReadString(section,'EarthMapFile',cfgm.EarthMapFile);
+buf:=ExtractSubPath(ConfigAppdir,buf);
 if FileExists(buf) then cfgm.EarthMapFile:=buf;
 buf:=ReadString(section,'PlanetDir',cfgm.PlanetDir);
+buf:=ExtractSubPath(ConfigAppdir,buf);
 if DirectoryExists(buf) then cfgm.PlanetDir:=buf;
 cfgm.horizonfile:=ReadString(section,'horizonfile',cfgm.horizonfile);
 cfgm.ServerIPaddr:=ReadString(section,'ServerIPaddr',cfgm.ServerIPaddr);
@@ -5345,12 +5368,18 @@ cfgm.AutostartServer:=ReadBool(section,'AutostartServer',cfgm.AutostartServer);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
-//cfgm.db:=SafeUTF8ToSys(ReadString(section,'db',cfgm.db));
-cfgm.db:=ReadString(section,'db',cfgm.db);
+buf:=ReadString(section,'db',cfgm.db);
+if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir) then
+   cfgm.db:=buf
+else begin
+   buf:=ExtractSubPath(slash(ConfigPrivateDir),buf);
+   cfgm.db:=slash(PrivateDir)+buf;
+end;
 cfgm.dbuser:=ReadString(section,'dbuser',cfgm.dbuser);
 cryptedpwd:=hextostr(ReadString(section,'dbpass',cfgm.dbpass));
 cfgm.dbpass:=DecryptStr(cryptedpwd,encryptpwd);
 buf:=ReadString(section,'ImagePath',cfgm.ImagePath);
+buf:=ExtractSubPath(ConfigAppdir,buf);
 if DirectoryExists(buf) then cfgm.ImagePath:=buf;
 cfgm.ShowChartInfo:=ReadBool(section,'ShowChartInfo',cfgm.ShowChartInfo);
 cfgm.ShowTitlePos:=ReadBool(section,'ShowTitlePos',cfgm.ShowTitlePos);
@@ -5459,18 +5488,22 @@ try
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    buf:=ReadString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
+   buf:=ExtractSubPath(slash(ConfigAppdir),buf);
    if DirectoryExists(buf) then catalog.cfgcat.starcatpath[i]:=buf;
 end;
 for i:=1 to maxvarstarcatalog do begin
    buf:=ReadString(section,'varstarcatpath'+inttostr(i),catalog.cfgcat.varstarcatpath[i]);
+   buf:=ExtractSubPath(slash(ConfigAppdir),buf);
    if DirectoryExists(buf) then catalog.cfgcat.varstarcatpath[i]:=buf;
 end;
 for i:=1 to maxdblstarcatalog do begin
    buf:=ReadString(section,'dblstarcatpath'+inttostr(i),catalog.cfgcat.dblstarcatpath[i]);
+   buf:=ExtractSubPath(slash(ConfigAppdir),buf);
    if DirectoryExists(buf) then catalog.cfgcat.dblstarcatpath[i]:=buf;
 end;
 for i:=1 to maxnebcatalog do begin
    buf:=ReadString(section,'nebcatpath'+inttostr(i),catalog.cfgcat.nebcatpath[i]);
+   buf:=ExtractSubPath(slash(ConfigAppdir),buf);
    if DirectoryExists(buf) then catalog.cfgcat.nebcatpath[i]:=buf;
 end;
 except
@@ -5486,7 +5519,7 @@ f_getdss.cfgdss.dssplateprompt:=ReadBool(section,'dssplateprompt',true);
 f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
-f_getdss.cfgdss.dssfile:=slash(privatedir)+slash('pictures')+'$temp.fit';
+f_getdss.cfgdss.dssfile:=slash(PictureDir)+'$temp.fit';
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:=ReadString(section,'DSSurlName'+inttostr(i),f_getdss.cfgdss.DSSurl[i,0]);
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
@@ -7163,6 +7196,8 @@ for i:=0 to Params.Count-1 do begin
       if parm<>'' then begin
          ForceConfig:=SafeUTF8ToSys(trim(parm));
       end;
+   end else if cmd='--userdir' then begin
+      ForceUserDir:=SafeUTF8ToSys(trim(parm));
    end else if cmd='--daemon' then begin
       showsplash:=false;
       Application.ShowMainForm:=false;
