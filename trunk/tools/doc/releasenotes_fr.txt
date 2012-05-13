@@ -1,6 +1,8 @@
 Version 3.7  Notes de la version
 
 Nouvelles options:
+  - Nouvelle option --userdir=
+  - Utilisation de chemin relatif dans le fichier de configuration
   - Traduction Thai par Worachate Boonplod
   - Remplace les zones horaires Etc/GMT par les plus intuitive UTC (GMT+5 -> UTC-5)
   - Nouveau boutton pour une roatation de 180 degrees.
