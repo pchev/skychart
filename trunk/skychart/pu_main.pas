@@ -7107,6 +7107,7 @@ var i :integer;
     f: textfile;
     {$endif}
 begin
+if TCPDaemon=nil then exit;
 {$ifdef mswindows}
   Registry1 := TRegistry.Create;
   with Registry1 do begin
@@ -7121,7 +7122,6 @@ begin
   Write(f,'0');
   CloseFile(f);
 {$endif}
-if TCPDaemon=nil then exit;
 SetLpanel1(rsStopTCPIPSer);
 try
 screen.cursor:=crHourglass;
