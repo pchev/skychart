@@ -1654,17 +1654,17 @@ if fileexists(configfile) then begin
   inif:=TMeminifile.create(configfile);
   try
   buf:=inif.ReadString('main','AppDir',appdir);
-  if Directoryexists(buf) then appdir:=buf;
-  if buf<>'' then ConfigAppdir:=buf;
+  if Directoryexists(buf) then appdir:=noslash(buf);
+  if buf<>'' then ConfigAppdir:=noslash(buf);
   buf:=inif.ReadString('main','PrivateDir',privatedir);
-  if Directoryexists(buf) then privatedir:=buf;
-  if buf<>'' then ConfigPrivateDir:=buf;
+  if Directoryexists(buf) then privatedir:=noslash(buf);
+  if buf<>'' then ConfigPrivateDir:=noslash(buf);
   finally
    inif.Free;
   end;
 end;
 
-if ForceUserDir<>'' then PrivateDir:=ForceUserDir;
+if ForceUserDir<>'' then PrivateDir:=noslash(ForceUserDir);
 
 if not directoryexists(privatedir) then CreateDir(privatedir);
 if not directoryexists(privatedir) then forcedirectories(privatedir);
@@ -5127,7 +5127,7 @@ csc.shownebulae:=ReadBool(section,'ShowNebulae',csc.shownebulae);
 csc.showline:=ReadBool(section,'ShowLine',csc.showline);
 csc.ShowBackgroundImage:=ReadBool(section,'ShowBackgroundImage',csc.ShowBackgroundImage);
 buf:=ReadString(section,'BackgroundImage',csc.BackgroundImage);
-if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir) then
+if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir)or(pos(ConfigPrivateDir,buf)=0) then
    csc.BackgroundImage:=buf
 else begin
    buf:=ExtractSubPath(slash(ConfigPrivateDir),buf);
@@ -5369,7 +5369,7 @@ DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 cfgm.dbhost:=ReadString(section,'dbhost',cfgm.dbhost);
 cfgm.dbport:=ReadInteger(section,'dbport',cfgm.dbport);
 buf:=ReadString(section,'db',cfgm.db);
-if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir) then
+if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir)or(pos(ConfigPrivateDir,buf)=0) then
    cfgm.db:=buf
 else begin
    buf:=ExtractSubPath(slash(ConfigPrivateDir),buf);
