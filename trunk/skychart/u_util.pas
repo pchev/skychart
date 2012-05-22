@@ -2090,7 +2090,7 @@ end;
 
 function ExtractSubPath(basepath, path: string):string;
 begin
-result:=StringReplace(path,basepath,'',[]);
+result:=StringReplace(path,slash(basepath),'',[]);
 end;
 
 end.
