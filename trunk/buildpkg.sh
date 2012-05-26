@@ -212,6 +212,7 @@ if [[ $make_win32 ]]; then
   # zip
   cd $builddir/Data
   zip -r  skychart-$version-$currentrev-windows.zip *
+  zip  update-bin-$version-$currentrev-windows.zip skychart.exe
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.zip $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
