@@ -156,7 +156,7 @@ type
     procedure Date1Change(Sender: TObject);
     procedure Date2Change(Sender: TObject);
     procedure SatPanelClick(Sender: TObject);
-    procedure TLEListBoxExit(Sender: TObject);
+    procedure TLEListBoxClick(Sender: TObject);
   private
     { Private declarations }
     initial, lockclick: boolean;
@@ -243,7 +243,6 @@ for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
  end;
 SatGrid.ColWidths[0]:=130;
 SatGrid.ColWidths[1]:=120;
-TLEListBox.OnMouseLeave:=TLEListBoxExit;
 TLEListBox.Directory:=SatDir;
 {$ifdef mswindows}
 SaveDialog1.Options:=SaveDialog1.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
@@ -318,7 +317,7 @@ if date2.JD<=date1.JD then date1.JD:=date2.JD-deltajd;
 deltajd:=date2.JD-date1.JD;
 end;
 
-procedure Tf_calendar.TLEListBoxExit(Sender: TObject);
+procedure Tf_calendar.TLEListBoxClick(Sender: TObject);
 var i : integer;
     buf : string;
 begin
@@ -330,7 +329,6 @@ with TLEListBox do begin
  end;
 end;
 end;
-
 
 Procedure Tf_calendar.SetLang;
 var Alabels: TDatesLabelsArray;
