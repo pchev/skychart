@@ -693,7 +693,7 @@ type
                 end;
      TObsDetail = class(Tobject)
                 country: string;
-                lat,lon: double;
+                lat,lon,alt: double;
                 end;
      Tconf_main = class(TObject)    // main form setting
                 public

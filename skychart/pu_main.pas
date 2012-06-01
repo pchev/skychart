@@ -5435,6 +5435,7 @@ if j>0 then for i:=0 to j-1 do begin
   obsdetail.country:=ReadString(section,'ObsCountry'+inttostr(i),'');
   obsdetail.lat:=ReadFloat(section,'ObsLat'+inttostr(i),0);
   obsdetail.lon:=ReadFloat(section,'ObsLon'+inttostr(i),0);
+  obsdetail.alt:=ReadFloat(section,'ObsAlt'+inttostr(i),0);
   cfgm.ObsNameList.AddObject(ReadString(section,'ObsName'+inttostr(i),''),obsdetail);
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
@@ -6129,6 +6130,7 @@ if j>0 then for i:=0 to j-1 do begin
     WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
     WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
     WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
+    WriteFloat(section,'ObsAlt'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).alt);
     WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
   end;
 end;
