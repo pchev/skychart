@@ -522,6 +522,7 @@ obsdetail:=TObsDetail.Create;
 obsdetail.country:=csc.ObsCountry;
 obsdetail.lat:=csc.ObsLatitude;
 obsdetail.lon:=csc.ObsLongitude;
+obsdetail.alt:=csc.ObsAltitude;
 if cmain.ObsNameList.Find(csc.ObsName,i) then begin
    cmain.ObsNameList.Objects[i].Free;
    cmain.ObsNameList.Objects[i]:=obsdetail;
@@ -604,6 +605,7 @@ begin
   csc.ObsCountry   := TObsDetail(cmain.ObsNameList.Objects[i]).country;
   csc.ObsLatitude  := TObsDetail(cmain.ObsNameList.Objects[i]).lat;
   csc.ObsLongitude := TObsDetail(cmain.ObsNameList.Objects[i]).lon;
+  csc.ObsAltitude  := TObsDetail(cmain.ObsNameList.Objects[i]).alt;
   f_observatory_db.csc.ObsCountry := csc.ObsCountry;
   f_observatory_db.ShowObservatory;
   ObsName.text:=csc.obsname;
