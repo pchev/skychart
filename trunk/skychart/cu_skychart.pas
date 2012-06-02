@@ -310,8 +310,8 @@ end;
   // the stars
   if cfgsc.showstars then DrawStars;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
-    DrawDblStars;
-    DrawVarStars;
+    if cfgsc.showstars then DrawDblStars;
+    if cfgsc.showstars then DrawVarStars;
   end;
   // finally the planets
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
