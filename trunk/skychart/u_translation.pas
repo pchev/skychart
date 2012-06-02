@@ -734,7 +734,6 @@ resourcestring
   rsUseXplanet = 'Use Xplanet';
   rsTransparentL = 'Transparent line mode (occultations)';
   rsGeneralSetti = 'General settings';
-  rsDoNotTakeAcc = 'Do not take into account comets fainter than magnitude';
   rsMagnitudeFai = 'magnitudes fainter than the stars.';
   rsShowCometsOn = 'Show comets on the chart';
   rsDatabaseSett = 'Database setting...';
@@ -761,7 +760,6 @@ resourcestring
   rsEccentricity = 'Eccentricity';
   rsPerihelionDi = 'Perihelion distance';
   rsEquinox2 = 'Equinox';
-  rsDoNotTakeAcc2 = 'Do not take into account asteroids fainter than magnitude';
   rsShowAsteroid3 = 'Show asteroids on the chart';
   rsOptions = 'Options';
   rsAsteroidsFro = 'asteroids from the file';
@@ -1372,6 +1370,8 @@ resourcestring
   rsAbrevNebula = 'Nb';
   rsAbrevClusterNebula = 'C+N';
   rsShowOnlyText = 'Show only text in detail window';
+  rsButNeverFain = 'But never fainter than magnitude';
+  rsShowNearEart = 'Show near Earth asteroids independently of the magnitude';
 
 implementation
 

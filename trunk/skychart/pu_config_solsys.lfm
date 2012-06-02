@@ -1,7 +1,7 @@
 object f_config_solsys: Tf_config_solsys
-  Left = 709
+  Left = 691
   Height = 536
-  Top = 72
+  Top = 71
   Width = 503
   BorderStyle = bsToolWindow
   Caption = 'Solar System'
@@ -12,7 +12,7 @@ object f_config_solsys: Tf_config_solsys
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.3'
+  LCLVersion = '0.9.30.4'
   object MainPanel: TPanel
     Left = 0
     Height = 486
@@ -35,30 +35,30 @@ object f_config_solsys: Tf_config_solsys
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 484
-        ClientWidth = 501
+        ClientHeight = 480
+        ClientWidth = 497
         object Label12: TLabel
           Left = 7
-          Height = 15
+          Height = 16
           Top = 17
-          Width = 115
+          Width = 117
           Caption = 'Solar System Setting'
           ParentColor = False
         end
         object Label131: TLabel
           Left = 40
-          Height = 15
+          Height = 16
           Top = 64
-          Width = 63
+          Width = 62
           Caption = 'Data Files :'
           ParentColor = False
           Visible = False
         end
         object Label3: TLabel
           Left = 62
-          Height = 15
+          Height = 16
           Top = 280
-          Width = 324
+          Width = 332
           Caption = 'Uncheck to avoid double labeling with minor planet 134340'
           ParentColor = False
         end
@@ -77,7 +77,7 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 2
-          ClientHeight = 51
+          ClientHeight = 64
           ClientWidth = 386
           Columns = 2
           Items.Strings = (
@@ -89,7 +89,7 @@ object f_config_solsys: Tf_config_solsys
         end
         object planetdir: TDirectoryEdit
           Left = 182
-          Height = 22
+          Height = 23
           Top = 55
           Width = 224
           ShowHidden = False
@@ -102,9 +102,9 @@ object f_config_solsys: Tf_config_solsys
         end
         object CheckBoxPluto: TCheckBox
           Left = 40
-          Height = 26
+          Height = 23
           Top = 248
-          Width = 119
+          Width = 118
           Caption = 'Pluto is a planet.'
           OnChange = CheckBoxPlutoChange
           TabOrder = 2
@@ -112,22 +112,22 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 484
-        ClientWidth = 501
+        ClientHeight = 480
+        ClientWidth = 497
         object Label5: TLabel
           Left = 0
-          Height = 15
+          Height = 16
           Top = 17
-          Width = 84
+          Width = 88
           Caption = 'Planets Setting'
           ParentColor = False
         end
         object PlanetBox: TCheckBox
           Left = 15
-          Height = 26
+          Height = 23
           Hint = 'Planetary Ephemerides     (Chapront+ 1996)'
           Top = 39
-          Width = 167
+          Width = 168
           HelpContext = 107
           Caption = 'Show Planet on the Chart'
           Checked = True
@@ -152,7 +152,7 @@ object f_config_solsys: Tf_config_solsys
           ChildSizing.ShrinkVertical = crsScaleChilds
           ChildSizing.Layout = cclLeftToRightThenTopToBottom
           ChildSizing.ControlsPerLine = 1
-          ClientHeight = 87
+          ClientHeight = 100
           ClientWidth = 352
           Items.Strings = (
             'Star'
@@ -165,18 +165,18 @@ object f_config_solsys: Tf_config_solsys
         end
         object PlanetBox3: TCheckBox
           Left = 18
-          Height = 26
+          Height = 23
           Top = 391
-          Width = 235
+          Width = 227
           Caption = 'Show Earth Shadow  (Lunar eclipses)'
           OnClick = PlanetBox3Click
           TabOrder = 2
         end
         object TransparentPlanet: TCheckBox
           Left = 18
-          Height = 26
+          Height = 23
           Top = 419
-          Width = 223
+          Width = 229
           Caption = 'Transparent line mode (occultation)'
           OnClick = TransparentPlanetClick
           TabOrder = 3
@@ -201,15 +201,15 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label4: TLabel
             Left = 13
-            Height = 15
+            Height = 16
             Top = 44
-            Width = 102
+            Width = 100
             Caption = 'Sun image source'
             ParentColor = False
           end
           object ComboBox1: TComboBox
             Left = 171
-            Height = 26
+            Height = 25
             Top = 40
             Width = 176
             ItemHeight = 0
@@ -219,17 +219,17 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label6: TLabel
             Left = 13
-            Height = 15
+            Height = 16
             Top = 76
-            Width = 114
+            Width = 115
             Caption = 'Refresh image every'
             ParentColor = False
           end
           object ComboBox2: TComboBox
             Left = 171
-            Height = 26
+            Height = 25
             Top = 72
-            Width = 52
+            Width = 60
             ItemHeight = 0
             ItemIndex = 0
             Items.Strings = (
@@ -245,8 +245,8 @@ object f_config_solsys: Tf_config_solsys
             Text = '1'
           end
           object Label8: TLabel
-            Left = 235
-            Height = 15
+            Left = 243
+            Height = 16
             Top = 76
             Width = 33
             Caption = 'hours'
@@ -263,15 +263,15 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 5
           object Label89: TLabel
             Left = 13
-            Height = 15
+            Height = 16
             Top = 8
-            Width = 127
+            Width = 130
             Caption = 'Jupiter GRS longitude :'
             ParentColor = False
           end
           object GRS: TFloatEdit
             Left = 171
-            Height = 22
+            Height = 23
             Hint = '0..360'
             Top = 4
             Width = 41
@@ -376,15 +376,15 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label9: TLabel
             Left = 219
-            Height = 15
+            Height = 16
             Top = 8
-            Width = 56
+            Width = 62
             Caption = 'Yearly drift'
             ParentColor = False
           end
           object GRSdrift: TFloatEdit
             Left = 307
-            Height = 22
+            Height = 23
             Hint = '-90..90'
             Top = 4
             Width = 40
@@ -400,7 +400,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object GRSJDDate: TJDDatePicker
             Left = 171
-            Height = 22
+            Height = 23
             Top = 29
             Width = 80
             ButtonWidth = 23
@@ -456,15 +456,15 @@ object f_config_solsys: Tf_config_solsys
             NumGlyphs = 1
             OnChange = GRSJDDateChange
             TabOrder = 3
-            Text = '2011.12.17.25'
+            Text = '2012.06.02.25'
             Caption = 'JD calendar'
             JD = 2455767.5
           end
           object Label10: TLabel
             Left = 13
-            Height = 15
+            Height = 16
             Top = 33
-            Width = 27
+            Width = 29
             Caption = 'Date'
             ParentColor = False
           end
@@ -472,10 +472,10 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 484
-        ClientWidth = 501
+        ClientHeight = 480
+        ClientWidth = 497
         object ComPageControl: TPageControl
-          Left = -3
+          Left = 0
           Height = 429
           Top = 4
           Width = 481
@@ -484,40 +484,40 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 3
             object GroupBox13: TGroupBox
-              Left = 9
+              Left = 8
               Height = 316
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 300
+              ClientHeight = 299
               ClientWidth = 437
               TabOrder = 0
               object Label154: TLabel
                 Left = 32
                 Height = 46
-                Top = 162
-                Width = 302
+                Top = 218
+                Width = 286
                 AutoSize = False
-                Caption = 'Do not take account of comet fainter than magnitude'
+                Caption = 'But never fainter than magnitude'
                 ParentColor = False
                 WordWrap = True
               end
               object Label216: TLabel
                 Left = 32
-                Height = 15
-                Top = 239
-                Width = 69
+                Height = 16
+                Top = 162
+                Width = 71
                 Caption = 'Show comet'
                 ParentColor = False
               end
               object Label231: TLabel
-                Left = 200
+                Left = 221
                 Height = 52
-                Top = 239
+                Top = 162
                 Width = 191
                 AutoSize = False
                 Caption = 'magnitude fainter than the stars.'
@@ -525,10 +525,10 @@ object f_config_solsys: Tf_config_solsys
                 WordWrap = True
               end
               object comlimitmag: TFloatEdit
-                Left = 350
-                Height = 22
+                Left = 329
+                Height = 23
                 Hint = '0..99'
-                Top = 159
+                Top = 218
                 Width = 41
                 ParentShowHint = False
                 ShowHint = True
@@ -540,9 +540,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object showcom: TCheckBox
                 Left = 32
-                Height = 26
+                Height = 23
                 Top = 14
-                Width = 170
+                Width = 175
                 Caption = 'Show comets on the chart'
                 OnClick = showcomClick
                 TabOrder = 0
@@ -561,7 +561,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 80
+                ClientHeight = 92
                 ClientWidth = 389
                 Color = clBtnFace
                 ItemIndex = 1
@@ -574,10 +574,10 @@ object f_config_solsys: Tf_config_solsys
                 TabOrder = 1
               end
               object commagdiff: TFloatEdit
-                Left = 140
-                Height = 22
+                Left = 164
+                Height = 23
                 Hint = '0..99'
-                Top = 234
+                Top = 157
                 Width = 41
                 ParentShowHint = False
                 ShowHint = True
@@ -602,14 +602,14 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
-              Height = 15
+              Height = 16
               Top = 123
-              Width = 62
+              Width = 60
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -633,13 +633,13 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 1
               object TabSheet1: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 100
+                ClientHeight = 75
                 ClientWidth = 432
                 object Label2: TLabel
                   Left = 13
-                  Height = 15
+                  Height = 16
                   Top = 27
-                  Width = 182
+                  Width = 190
                   Caption = 'Download latest orbital elements'
                   ParentColor = False
                 end
@@ -656,7 +656,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet2: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 100
+                ClientHeight = 75
                 ClientWidth = 432
                 object comfile: TFileNameEdit
                   Left = 13
@@ -687,7 +687,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 3
             object Label238: TLabel
@@ -704,7 +704,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Delete MPC data selectively'
-              ClientHeight = 44
+              ClientHeight = 43
               ClientWidth = 437
               TabOrder = 0
               object comelemlist: TComboBox
@@ -734,7 +734,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 80
               Width = 441
               Caption = 'Quick Delete'
-              ClientHeight = 47
+              ClientHeight = 46
               ClientWidth = 437
               TabOrder = 1
               object Label239: TLabel
@@ -769,7 +769,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 4
             object Label241: TLabel
@@ -997,8 +997,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 484
-        ClientWidth = 501
+        ClientHeight = 480
+        ClientWidth = 497
         object AstPageControl: TPageControl
           Left = 0
           Height = 429
@@ -1009,40 +1009,40 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 0
           object astsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 3
             object GroupBox9: TGroupBox
-              Left = 9
-              Height = 316
+              Left = 8
+              Height = 340
               Top = 10
               Width = 441
               Caption = 'Chart Setting'
-              ClientHeight = 300
+              ClientHeight = 323
               ClientWidth = 437
               TabOrder = 0
               object Label203: TLabel
-                Left = 29
+                Left = 32
                 Height = 44
-                Top = 172
-                Width = 314
+                Top = 218
+                Width = 266
                 AutoSize = False
-                Caption = 'Do not take account of asteroid fainter than magnitude'
+                Caption = 'But never fainter than magnitude'
                 ParentColor = False
                 WordWrap = True
               end
               object Label212: TLabel
-                Left = 29
-                Height = 15
-                Top = 244
+                Left = 32
+                Height = 16
+                Top = 162
                 Width = 80
                 Caption = 'Show asteroid'
                 ParentColor = False
               end
               object Label213: TLabel
-                Left = 218
+                Left = 221
                 Height = 44
-                Top = 244
+                Top = 162
                 Width = 191
                 AutoSize = False
                 Caption = 'magnitude fainter than the stars.'
@@ -1050,10 +1050,10 @@ object f_config_solsys: Tf_config_solsys
                 WordWrap = True
               end
               object astlimitmag: TFloatEdit
-                Left = 365
-                Height = 22
+                Left = 329
+                Height = 23
                 Hint = '0..99'
-                Top = 167
+                Top = 218
                 Width = 41
                 ParentShowHint = False
                 ShowHint = True
@@ -1065,9 +1065,9 @@ object f_config_solsys: Tf_config_solsys
               end
               object showast: TCheckBox
                 Left = 32
-                Height = 26
+                Height = 23
                 Top = 22
-                Width = 181
+                Width = 184
                 Caption = 'Show asteroids on the chart'
                 OnClick = showastClick
                 TabOrder = 0
@@ -1086,7 +1086,7 @@ object f_config_solsys: Tf_config_solsys
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 1
-                ClientHeight = 73
+                ClientHeight = 85
                 ClientWidth = 389
                 Color = clBtnFace
                 ItemIndex = 1
@@ -1099,10 +1099,10 @@ object f_config_solsys: Tf_config_solsys
                 TabOrder = 1
               end
               object astmagdiff: TFloatEdit
-                Left = 161
-                Height = 22
+                Left = 164
+                Height = 23
                 Hint = '0..99'
-                Top = 239
+                Top = 157
                 Width = 41
                 ParentShowHint = False
                 ShowHint = True
@@ -1111,6 +1111,15 @@ object f_config_solsys: Tf_config_solsys
                 Value = 0
                 MinValue = 0
                 MaxValue = 99
+              end
+              object AstNeo: TCheckBox
+                Left = 32
+                Height = 23
+                Top = 277
+                Width = 357
+                Caption = 'Show near Earth asteroids independently of the magnitude'
+                OnClick = AstNeoClick
+                TabOrder = 4
               end
             end
             object astdbset: TButton
@@ -1127,14 +1136,14 @@ object f_config_solsys: Tf_config_solsys
           end
           object astload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 1
             object Label206: TLabel
               Left = 8
-              Height = 15
+              Height = 16
               Top = 203
-              Width = 62
+              Width = 60
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -1154,14 +1163,14 @@ object f_config_solsys: Tf_config_solsys
               Top = 107
               Width = 441
               Caption = 'Options'
-              ClientHeight = 72
+              ClientHeight = 71
               ClientWidth = 437
               TabOrder = 0
               object Label215: TLabel
                 Left = 258
-                Height = 15
+                Height = 16
                 Top = 45
-                Width = 120
+                Width = 130
                 Caption = 'Asteroids from the file'
                 ParentColor = False
               end
@@ -1169,7 +1178,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 20
                 Height = 23
                 Top = 6
-                Width = 164
+                Width = 166
                 Caption = 'Only numbered asteroids'
                 TabOrder = 0
               end
@@ -1177,7 +1186,7 @@ object f_config_solsys: Tf_config_solsys
                 Left = 241
                 Height = 23
                 Top = 6
-                Width = 141
+                Width = 149
                 Caption = 'Halt after 1000 errors'
                 Checked = True
                 State = cbChecked
@@ -1187,13 +1196,13 @@ object f_config_solsys: Tf_config_solsys
                 Left = 20
                 Height = 23
                 Top = 39
-                Width = 124
+                Width = 130
                 Caption = 'Load only the first '
                 TabOrder = 2
               end
               object astlimit: TLongEdit
                 Left = 197
-                Height = 22
+                Height = 23
                 Hint = '0..999999'
                 Top = 39
                 Width = 49
@@ -1214,13 +1223,13 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 2
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 92
+                ClientHeight = 67
                 ClientWidth = 437
                 object Label1: TLabel
                   Left = 22
-                  Height = 15
+                  Height = 16
                   Top = 24
-                  Width = 182
+                  Width = 190
                   Caption = 'Download latest orbital elements'
                   ParentColor = False
                 end
@@ -1237,7 +1246,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 92
+                ClientHeight = 67
                 ClientWidth = 437
                 object mpcfile: TFileNameEdit
                   Left = 14
@@ -1268,14 +1277,14 @@ object f_config_solsys: Tf_config_solsys
           end
           object astprepare: TTabSheet
             Caption = 'Prepare Monthly Data'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 2
             object Label210: TLabel
               Left = 8
-              Height = 14
+              Height = 16
               Top = 109
-              Width = 54
+              Width = 60
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -1285,22 +1294,22 @@ object f_config_solsys: Tf_config_solsys
               Top = 7
               Width = 441
               Caption = 'Prepare data '
-              ClientHeight = 78
+              ClientHeight = 77
               ClientWidth = 437
               TabOrder = 0
               object Label7: TLabel
                 Left = 9
-                Height = 14
+                Height = 16
                 Top = 13
-                Width = 56
+                Width = 71
                 Caption = 'Start Month'
                 ParentColor = False
               end
               object Label207: TLabel
                 Left = 9
-                Height = 14
+                Height = 16
                 Top = 50
-                Width = 83
+                Width = 103
                 Caption = 'Number of Month'
                 ParentColor = False
               end
@@ -1316,21 +1325,21 @@ object f_config_solsys: Tf_config_solsys
               end
               object aststrtdate_y: TEdit
                 Left = 177
-                Height = 21
+                Height = 23
                 Top = 5
                 Width = 66
                 TabOrder = 0
               end
               object aststrtdate_m: TEdit
                 Left = 257
-                Height = 21
+                Height = 23
                 Top = 5
                 Width = 32
                 TabOrder = 1
               end
               object astnummonth: TUpDown
                 Left = 225
-                Height = 21
+                Height = 23
                 Top = 46
                 Width = 17
                 Associate = astnummonthEdit
@@ -1342,7 +1351,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object astnummonthEdit: TEdit
                 Left = 177
-                Height = 21
+                Height = 23
                 Top = 46
                 Width = 48
                 TabOrder = 4
@@ -1361,7 +1370,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object astdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 3
             object Label211: TLabel
@@ -1378,7 +1387,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 10
               Width = 441
               Caption = 'Delete MPC data selectively'
-              ClientHeight = 44
+              ClientHeight = 43
               ClientWidth = 437
               TabOrder = 0
               object astelemlist: TComboBox
@@ -1408,7 +1417,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 128
               Width = 441
               Caption = 'Quick Delete'
-              ClientHeight = 33
+              ClientHeight = 32
               ClientWidth = 437
               TabOrder = 3
               object Label209: TLabel
@@ -1446,7 +1455,7 @@ object f_config_solsys: Tf_config_solsys
               Top = 72
               Width = 441
               Caption = 'Delete Monthly data '
-              ClientHeight = 41
+              ClientHeight = 40
               ClientWidth = 437
               TabOrder = 1
               object Label214: TLabel
@@ -1486,7 +1495,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object AddsingleAst: TTabSheet
             Caption = 'Add'
-            ClientHeight = 425
+            ClientHeight = 400
             ClientWidth = 477
             ImageIndex = 4
             object Label217: TLabel
