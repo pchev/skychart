@@ -1819,8 +1819,9 @@ else
            +' and ra<'+inttostr(round(1000*(cfgsc.racentre+da)))+')';
 
 qry:=qry+' and (de>'+inttostr(round(1000*(cfgsc.decentre-d)))
-    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+')) or (near_earth=1)'
-    +' limit '+inttostr(MaxAsteroid) ;
+    +' and de<'+inttostr(round(1000*(cfgsc.decentre+d)))+'))';
+if cfgsc.AstNEO then qry:=qry+' or (near_earth=1)';
+qry:=qry+' limit '+inttostr(MaxAsteroid) ;
 db2.Query(qry);
 if db2.Rowcount>0 then begin
   if db2.Rowcount=MaxAsteroid then cfgsc.msg:=cfgsc.msg+'More than '+inttostr(MaxAsteroid)+' asteroids, result truncated!';

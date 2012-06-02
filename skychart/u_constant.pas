@@ -613,7 +613,7 @@ type
                 LeftMargin,RightMargin,TopMargin,BottomMargin,Xcentre,Ycentre: Integer;
                 ObsRoSinPhi,ObsRoCosPhi,StarmagMax,NebMagMax,FindRA,FindDec,FindRA2000,FindDec2000,FindPX,FindSize,FindX,FindY,FindZ,FindSimjd,AstmagMax,AstMagDiff,CommagMax,Commagdiff : double;
                 TimeZone,DT_UT,CurST,CurJDTT,CurJDUT,LastJD,jd0,JDChart,YPmon,LastJDChart,FindJD,CurSunH,CurMoonH,CurMoonIllum,ScopeRa,ScopeDec,TrackEpoch,TrackRA,TrackDec,TargetRA,TargetDec,FindPMra,FindPMde,FindPMEpoch,FindPMpx,FindPMrv,FindDist : Double;
-                DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,ShowLegend,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM,FindStarPM,FindPMfullmotion : boolean;
+                DrawAllStarLabel,MovedLabelLine,StarFilter,NebFilter,FindOK,WhiteBg,ShowLegend,MagLabel,NameLabel,ConstFullLabel,ConstLatinLabel,ScopeMark,ScopeLock,FindPM,FindStarPM,FindPMfullmotion,AstNEO : boolean;
                 EquinoxName,TargetName,TrackName,TrackId,FindName,FindDesc,FindDesc2,FindNote,FindCat,FindCatname : string;
                 BGalpha: integer;
                 BGmin_sigma,BGmax_sigma,NEBmin_sigma,NEBmax_sigma: double;
@@ -1557,6 +1557,7 @@ FindSimjd:=Source.FindSimjd;
 FindPX:=Source.FindPX;
 AstmagMax:=Source.AstmagMax ;
 AstMagDiff:=Source.AstMagDiff ;
+AstNEO:=Source.AstNEO ;
 CommagMax:=Source.CommagMax ;
 Commagdiff:=Source.Commagdiff ;
 TimeZone:=Source.TimeZone ;

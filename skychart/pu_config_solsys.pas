@@ -40,6 +40,7 @@ type
     Button3: TButton;
     Button4: TButton;
     ComboBox2: TComboBox;
+    AstNeo: TCheckBox;
     GRSdrift: TFloatEdit;
     GRSJDDate: TJDDatePicker;
     Label10: TLabel;
@@ -214,6 +215,7 @@ type
     Addast: TButton;
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
+    procedure AstNeoClick(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure CheckBoxPlutoChange(Sender: TObject);
@@ -333,7 +335,7 @@ Label6.Caption:=rsRefreshImage;
 Label8.Caption:=rsHours;
 comsetting.caption:=rsGeneralSetti;
 GroupBox13.caption:=rsChartSetting;
-Label154.caption:=rsDoNotTakeAcc;
+Label154.caption:=rsButNeverFain;
 Label216.caption:=rsShowComets;
 Label231.caption:=rsMagnitudeFai;
 showcom.caption:=rsShowCometsOn;
@@ -369,9 +371,10 @@ Label254.caption:=rsName;
 AddCom.caption:=rsAdd;
 astsetting.caption:=rsGeneralSetti;
 GroupBox9.caption:=rsChartSetting;
-Label203.caption:=rsDoNotTakeAcc2;
+Label203.caption:=rsButNeverFain;
 Label212.caption:=rsShowAsteroid;
 Label213.caption:=rsMagnitudeFai;
+AstNeo.Caption:=rsShowNearEart;
 showast.caption:=rsShowAsteroid3;
 astdbset.caption:=rsDatabaseSett;
 astload.caption:=rsLoadMPCFile;
@@ -510,6 +513,7 @@ end;
 procedure Tf_config_solsys.ShowAsteroid;
 begin
 showast.checked:=csc.ShowAsteroid;
+AstNeo.Checked:=csc.AstNEO;
 astsymbol.itemindex:=csc.AstSymbol;
 astlimitmag.value:=csc.AstmagMax;
 astmagdiff.value:=csc.AstmagDiff;
@@ -671,6 +675,11 @@ end;
 procedure Tf_config_solsys.Button2Click(Sender: TObject);
 begin
    if assigned(FApplyConfig) then FApplyConfig(Self);
+end;
+
+procedure Tf_config_solsys.AstNeoClick(Sender: TObject);
+begin
+  csc.AstNEO := AstNeo.Checked;
 end;
 
 procedure Tf_config_solsys.Button4Click(Sender: TObject);
@@ -956,6 +965,7 @@ if ok then begin
   else begin
      Showmessage(rsToUseThisNew);
      AstPageControl.activepage:=astprepare;
+     AstComputeClick(Sender);
   end;
 end;
 end;
