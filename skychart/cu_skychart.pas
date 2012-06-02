@@ -2275,6 +2275,9 @@ begin
          ths:=armtostr(rmod(hs+24,24));
     end;
     txt:='';
+    if trim(thr)='' then thr:='N/A';
+    if trim(tht)='' then tht:='N/A';
+    if trim(ths)='' then ths:='N/A';
     case i of
     0 : begin
         txt:=txt+rsRise+':'+thr+blank+blank+blank;
