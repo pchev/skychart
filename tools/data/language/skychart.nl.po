@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-28 15:16+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -492,6 +492,10 @@ msgstr "Heldere sterren-grootte"
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
 msgstr "creëer catalogus"
+
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
 
 #: u_translation.rsby
 msgid "by"
@@ -1437,14 +1441,6 @@ msgstr "Afstandsmeting"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Afstand tot vorig object"
-
-#: u_translation.rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr "Negeer kometen zwakker dan magnitude"
-
-#: u_translation.rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "Negeer planetoïden zwakker dan magnitude"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -4417,6 +4413,10 @@ msgstr "Toon markeringsindex"
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Toon de Melkweg"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"

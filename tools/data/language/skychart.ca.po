@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-28 15:16+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -493,6 +493,10 @@ msgstr "Mida d'estels brillants"
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
 msgstr "Construir el catàleg"
+
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
 
 #: u_translation.rsby
 msgid "by"
@@ -1441,14 +1445,6 @@ msgstr "Mesura de la distància"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Distància a l'objecte precedent"
-
-#: u_translation.rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr "No tinguis en compte els cometes més febles que la magnitud"
-
-#: u_translation.rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "No tinguis en compte els asteroides més febles que la magnitud"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -4421,6 +4417,10 @@ msgstr "Mostra l'índex de marques"
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Mostra la Via Làctia"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"

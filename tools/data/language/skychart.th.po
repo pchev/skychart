@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-03-09 17:21+0000\n"
-"PO-Revision-Date: 2012-03-25 02:02+0000\n"
+"PO-Revision-Date: 2012-04-30 01:55+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-28 15:16+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -497,6 +497,10 @@ msgstr "ขนาดดาวสว่าง"
 msgid "Build catalog"
 msgstr "สร้างแค็ตตาล็อก"
 
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "โดย"
@@ -643,7 +647,7 @@ msgstr "เปลี่ยนภาพที่แสดงอยู่"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
-msgstr ""
+msgstr "การเปลี่ยนแปลงการตั้งค่านี้จะทำให้โปรแกรมเริ่มทำงานใหม่ในทันที!"
 
 #: u_translation.rschart
 msgid "Chart"
@@ -1440,14 +1444,6 @@ msgstr "การวัดระยะห่าง"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "ระยะห่างจากวัตถุที่แล้ว"
-
-#: u_translation.rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr "ละทิ้งดาวหางที่จางกว่าโชติมาตร"
-
-#: u_translation.rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "ละทิ้งดาวเคราะห์น้อยที่จางกว่าโชติมาตร"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -3379,7 +3375,7 @@ msgstr "ภาวะบิต"
 
 #: u_translation.rsparkinganddi
 msgid "Parking and Disconnecting telescope."
-msgstr ""
+msgstr "พักและตัดการเชื่อมต่อกับกล้องโทรทรรศน์"
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
@@ -3831,7 +3827,7 @@ msgstr "ภาพเหมือนจริง"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
+msgstr "แน่ใจว่าต้องการพักและตัดการเชื่อมต่อกับกล้องโทรทรรศน์?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4420,6 +4416,10 @@ msgstr "แสดงดัชนีเครื่องหมาย"
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "แสดงทางช้างเผือก"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -5043,7 +5043,7 @@ msgstr "สนธยา"
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
-msgstr ""
+msgstr "ต้องใช้ดาว 2 ดวง ในการเริ่มต้น"
 
 #: u_translation.rstype
 msgid "Type"

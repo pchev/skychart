@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-03-09 17:21+0000\n"
-"PO-Revision-Date: 2012-03-04 21:40+0000\n"
+"PO-Revision-Date: 2012-06-01 21:45+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-28 15:16+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-06-02 08:17+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -143,7 +143,7 @@ msgstr "Dodaj etykietę"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Dodaj alternatywną nazwę do indeksu."
+msgstr "Dodaj nazwy alternatywne do indeksu"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -256,7 +256,7 @@ msgstr "Dodaj do istniejącego katalogu "
 
 #: u_translation.rsapply
 msgid "Apply"
-msgstr "Akceptuj"
+msgstr "Zastosuj"
 
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
@@ -280,7 +280,7 @@ msgstr "Sztuczny satelita"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
-msgstr "Interfejs ASCOM telescope"
+msgstr "Interfejs ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
@@ -444,7 +444,7 @@ msgstr "Czarny/biały"
 
 #: u_translation.rsblackwhiteli
 msgid "Black/white, line mode"
-msgstr "Czarny/biały, tryb liniowy"
+msgstr "Czarno-biały, tryb liniowy"
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
@@ -498,6 +498,10 @@ msgstr "Rozmiar jasności gwiazd"
 msgid "Build catalog"
 msgstr "Buduj katalog"
 
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
+
 #: u_translation.rsby
 msgid "by"
 msgstr "przez"
@@ -532,7 +536,7 @@ msgstr "Problem z połączeniem do serwera %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "Nie można wyświetlić"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
@@ -588,7 +592,7 @@ msgstr "Głębokie niebo (CdC)"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "Katalog głębokiego nieba i ustawienia dla CdC"
+msgstr "Katalogi głębokiego nieba i ustawienia"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
@@ -600,7 +604,7 @@ msgstr "gwiazdy (CdC)"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "Katalog gwiazd i ustawienia programu CdC"
+msgstr "Katalogi gwiazd i ustawienia"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
@@ -616,7 +620,7 @@ msgstr "Wyśrodkowywanie"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
-msgstr "Centruj obiekt"
+msgstr "Centruj na tym obiekcie"
 
 #: u_translation.rscentralmerid
 msgid "Central meridian"
@@ -712,7 +716,7 @@ msgstr "Wyczyść"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
-msgstr ""
+msgstr "Zrezygnuj z ustawionego celu"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -724,7 +728,7 @@ msgstr "Utrzymaj aktywne połączenie klienta"
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr "Okno zegara"
+msgstr "Zegar"
 
 #: u_translation.rsclose
 msgid "Close"
@@ -764,7 +768,7 @@ msgstr "Indeks koloru"
 
 #: u_translation.rscolorlinemod
 msgid "Colour, line mode"
-msgstr "Kolorowy, tryb liniowy"
+msgstr "Kolor, tryb liniowy"
 
 #: u_translation.rscolorsaturat
 msgid "Colour saturation"
@@ -884,7 +888,7 @@ msgstr "Gwiazdozbiór"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr "Kształty gwiazdozbioru"
+msgstr "Kształty gwiazdozbiorów"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
@@ -892,7 +896,7 @@ msgstr "Plik z kształtami gwiazdozbiorów: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
-msgstr "Granice gwiazdozbioru"
+msgstr "Granice gwiazdozbiorów"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
@@ -984,7 +988,7 @@ msgstr "Utwórz nową mapę"
 
 #: u_translation.rscreateasearc
 msgid "Create a search index file"
-msgstr "Utwórz indeks wyszukiwania plików"
+msgstr "Utwórz plik indeksu wyszukiwania"
 
 #: u_translation.rscreatedataba
 msgid "Create database"
@@ -1080,7 +1084,7 @@ msgstr "Podgląd danych"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
-msgstr "Dane zaczynają się na linii %s"
+msgstr "Dane zaczynają się w linii %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
@@ -1404,7 +1408,7 @@ msgstr "Pokaż jako symbol"
 
 #: u_translation.rsdisplaycolou
 msgid "Display colour"
-msgstr "Wyświetl kolor"
+msgstr "Kolory wyświetlania"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
@@ -1441,14 +1445,6 @@ msgstr "Pomiar odległości"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Odległość do ostatniego obiektu"
-
-#: u_translation.rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr "Nie bierz pod uwagę komet słabszych niż wielkość gwiazdowa"
-
-#: u_translation.rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "Nie bierz pod uwagę planetoid słabszych niż wielkość gwiazdowa"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1540,7 +1536,7 @@ msgstr "Wybór sterownika"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
-msgstr "Opuść bazę danych"
+msgstr "Usuń bazę danych"
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1776,7 +1772,7 @@ msgstr "Nie powiodło się : %s"
 
 #: u_translation.rsfainter
 msgid "Fainter"
-msgstr "Słabszy"
+msgstr "Ciemniejszy"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
@@ -1784,7 +1780,7 @@ msgstr "Siła rozmycia gwiazd "
 
 #: u_translation.rsfan
 msgid "Fan"
-msgstr "Wiatrak"
+msgstr "Wentylator"
 
 #: u_translation.rsfaq
 msgid "FAQ"
@@ -2152,7 +2148,7 @@ msgstr "Ukryj etykietę"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr "Ukryj ciało niebieskie szersze niż"
+msgstr "Ukryj obiekty szersze niż"
 
 #: u_translation.rshigh
 msgid "High"
@@ -2172,7 +2168,7 @@ msgstr "Wskazywnie wysokiej dokładności"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Duży obszar jasności"
+msgstr "Duża jasność powierzchniowa"
 
 #: u_translation.rshorizon
 msgid "Horizon"
@@ -2452,7 +2448,7 @@ msgstr "Etykiety"
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr "Zawartość etykiety"
+msgstr "Tekst etykiety"
 
 #: u_translation.rslandscape
 msgid "Landscape"
@@ -2468,7 +2464,7 @@ msgstr "Język"
 
 #: u_translation.rslanguagesele
 msgid "Language selection"
-msgstr "Wybór języka aplikacji Cartes du Ciel."
+msgstr "Wybór języka"
 
 #: u_translation.rslatinname
 msgid "Latin name"
@@ -2656,7 +2652,7 @@ msgstr "Niski"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Mały obszar jasności"
+msgstr "Mała jasność powierzchniowa"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
@@ -2696,7 +2692,7 @@ msgstr "Pasmo wielkości gwiazdowej"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Wielkość gwiazdowa"
+msgstr "Różnica wielkości gwiazdowej"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
@@ -3004,7 +3000,7 @@ msgstr "Głębokie niebo lub inne obiekty"
 
 #: u_translation.rsnebulaeoutli
 msgid "Nebulae outlines"
-msgstr "Zarys mgławicy"
+msgstr "Zarysy mgławic"
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
@@ -3216,7 +3212,7 @@ msgstr "Nazwa obiektu"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr "Pozycja obiektu znaleziona w indeksie, ale nie znaleziono szczegółów w aktywnym katalogu."
+msgstr "Pozycja obiektu znaleziona w indeksie, ale nie znaleziono szczegółów w żadnym aktywnym katalogu."
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -3268,7 +3264,7 @@ msgstr "Wł."
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Jedna na"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -3504,7 +3500,7 @@ msgstr "Proszę upewnij się, że sterowniki ASCOM są poprawnie zainstalowane."
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
-msgstr "Proszę wpisać identyfikator obiektu."
+msgstr "Podaj identyfikator obiektu"
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
@@ -3520,7 +3516,7 @@ msgstr "Proszę wskazać folder gdzie katalog musi być utworzony"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
-msgstr "Proszę ustaw najpierw kąt 90 stopni"
+msgstr "Ustaw najpierw kąt 90 stopni w osi wysokości"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
@@ -3752,11 +3748,11 @@ msgstr "Port Proxy:"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr "Długość pulsu"
+msgstr "Długość impulsu"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr "Tryb pulsacyjny"
+msgstr "Tryb impulsowy"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -4180,7 +4176,7 @@ msgstr "sekund(y)"
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
-msgstr "Zobacz %s po więcej informacji."
+msgstr "Zobacz %s aby uzyskać więcej informacji."
 
 #: u_translation.rssel
 msgid "Sel."
@@ -4200,7 +4196,7 @@ msgstr "Wybierz katalog"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr "Wybierz kolor"
+msgstr "Wybierz kolor (czarny domyślnie dla katalogu)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
@@ -4344,7 +4340,7 @@ msgstr "Pokaż komety na mapie"
 
 #: u_translation.rsshowcompass
 msgid "Show the compass rose"
-msgstr "Pokaż różę wiatrów."
+msgstr "Pokaż Różę Wiatrów."
 
 #: u_translation.rsshowconstell
 msgid "Show constellation lines"
@@ -4416,11 +4412,15 @@ msgstr "Pokaż marker"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
-msgstr ""
+msgstr "Pokaż indeks znacznika"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "Pokaż Drogę Mleczną"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4440,11 +4440,11 @@ msgstr "Pokaż obiekty"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "Pokaż tylko południk dla Alt/Az"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
-msgstr ""
+msgstr "Pokaż tylko tekst w oknie opisu szczegółowego"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4480,7 +4480,7 @@ msgstr "Pokaż dane obserwatorium wirtualnego"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Gwiazdowy"
+msgstr "Syderyczny (gwiazdowy)"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
@@ -5104,7 +5104,7 @@ msgstr "Nieznany obiekt"
 
 #: u_translation.rsunlockchart
 msgid "Unlock chart"
-msgstr "Odblokowana mapa"
+msgstr "Odblokuj mapę"
 
 #: u_translation.rsupdate1
 msgid "Update"
@@ -5160,7 +5160,7 @@ msgstr "Użyj obrazów Słońca z SDO albo SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
-msgstr "Użyj tylko katalogu tej samej grupy"
+msgstr "Używaj katalogów  tylko z tej samej grupy"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
@@ -5212,7 +5212,7 @@ msgstr "Użycie istniejącego pliku %s"
 
 #: u_translation.rsut
 msgid "UT"
-msgstr "Uniwersalny"
+msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
@@ -5240,7 +5240,7 @@ msgstr ""
 
 #: u_translation.rsverticalaxis2
 msgid "Vertical axis 90 degree initialisation not done"
-msgstr ""
+msgstr "Nie wykonano inicjalizacji 90 stopni w osi wysokości"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
@@ -5256,7 +5256,7 @@ msgstr "Widok horyzontu"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
-msgstr "Wirualny panel sterowania dla Scope.exe "
+msgstr "Wirtualny panel sterowania dla Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
@@ -5276,7 +5276,7 @@ msgstr "Katalog W.O."
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr "Przeglądarka W.O."
+msgstr "Przeglądarka katalogu W.O."
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
@@ -5348,7 +5348,7 @@ msgstr "Xplanent prawdopodobnie nie jest zainstalowany!"
 
 #: u_translation.rsxplanetretur
 msgid "%s, xplanet returns %s"
-msgstr "%s, xplanet powrót %s"
+msgstr "%s, xplanet zwraca %s"
 
 #: u_translation.rsyear
 msgid "Year"

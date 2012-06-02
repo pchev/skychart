@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-04-28 15:16+0000\n"
-"X-Generator: Launchpad (build 15149)\n"
+"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
+"X-Generator: Launchpad (build 15342)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -494,6 +494,10 @@ msgstr "亮星大小"
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
 msgstr "建立星表"
+
+#: u_translation.rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
 
 #: u_translation.rsby
 msgid "by"
@@ -1439,14 +1443,6 @@ msgstr ""
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "到上一天體距離"
-
-#: u_translation.rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr "不考慮彗星星等暗於"
-
-#: u_translation.rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
-msgstr "不考慮小行星星等暗於"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -4419,6 +4415,10 @@ msgstr ""
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
 msgstr "顯示銀河"
+
+#: u_translation.rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
+msgstr ""
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"

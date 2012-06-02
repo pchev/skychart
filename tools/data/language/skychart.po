@@ -2886,10 +2886,6 @@ msgstr ""
 msgid "General settings"
 msgstr ""
 
-#: u_translation:rsdonottakeacc
-msgid "Do not take into account comets fainter than magnitude"
-msgstr ""
-
 #: u_translation:rsmagnitudefai
 msgid "magnitudes fainter than the stars."
 msgstr ""
@@ -2992,10 +2988,6 @@ msgstr ""
 
 #: u_translation:rsequinox2
 msgid "Equinox"
-msgstr ""
-
-#: u_translation:rsdonottakeacc2
-msgid "Do not take into account asteroids fainter than magnitude"
 msgstr ""
 
 #: u_translation:rsshowasteroid3
@@ -5376,5 +5368,13 @@ msgstr ""
 
 #: u_translation:rsshowonlytext
 msgid "Show only text in detail window"
+msgstr ""
+
+#: u_translation:rsbutneverfain
+msgid "But never fainter than magnitude"
+msgstr ""
+
+#: u_translation:rsshowneareart
+msgid "Show near Earth asteroids independently of the magnitude"
 msgstr ""
 
