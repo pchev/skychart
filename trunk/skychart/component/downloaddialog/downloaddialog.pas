@@ -367,10 +367,27 @@ end else begin                // FTP protocol
 end;
 end;
 
+function StripHTML(S: string): string;
+var
+  TagBegin, TagEnd, TagLength: integer;
+begin
+  TagBegin := Pos( '<', S);      // search position of first <
+
+  while (TagBegin > 0) do begin  // while there is a < in S
+    TagEnd := Pos('>', S);              // find the matching >
+    TagLength := TagEnd - TagBegin + 1;
+    Delete(S, TagBegin, TagLength);     // delete the tag
+    TagBegin:= Pos( '<', S);            // search for next <
+  end;
+
+  Result := S;                   // give the result
+end;
+
 procedure TDownloadDialog.HTTPComplete;
 var ok:boolean;
     i: integer;
     newurl:string;
+    abuf: string;
 begin
  ok:=DownloadDaemon.ok;
  if ok
@@ -395,13 +412,20 @@ begin
          end;
       end;
       ok:=false;
+    end else if (http.ResultCode=300) then begin
+        ok:=false;
+        FResponse:='Error 300: ';
+        http.Document.Position:=0;
+        SetString(abuf, http.Document.Memory, http.Document.Size);
+        abuf:=StripHTML(abuf);
+        FResponse:=FResponse+abuf;
     end else
     begin // error
       ok:=false;
       if  http.ResultCode=0 then
           FResponse:='Finished: '+progress.text+' / Error: Timeout '+http.ResultString
       else
-          FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString;
+          FResponse:='Finished: '+progress.text+' / Error: '+inttostr(http.ResultCode)+' '+http.ResultString+' '+http.Sock.LastErrorDesc;
       progress.Text:=FResponse;
  end;
  if assigned(FDownloadFeedback) then FDownloadFeedback(FResponse);
