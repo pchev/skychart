@@ -699,13 +699,13 @@ type
                 public
                 prtname,language,Constellationpath, ConstLfile, ConstBfile, EarthMapFile, HorizonFile, Planetdir : string;
                 db,dbhost,dbuser,dbpass, ImagePath, persdir, prgdir : string;
-                starshape_file: string;
+                starshape_file, KioskPass: string;
                 Paper,PrinterResolution,PrintMethod,PrintColor,configpage,configpage_i,configpage_j,autorefreshdelay,MaxChildID,dbport : integer;
                 PrtLeftMargin,PrtRightMargin,PrtTopMargin,PrtBottomMargin,PrintCopies: integer;
                 savetop,saveleft,saveheight,savewidth: integer;
                 ButtonStandard,ButtonNight, AnimDelay, AnimSx, AnimSy, AnimSize, VOurl, VOmaxrecord: integer;
                 PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec :boolean;
-                maximized,updall,AutostartServer,keepalive, NewBackgroundImage, TextOnlyDetail : boolean;
+                maximized,updall,AutostartServer,keepalive, NewBackgroundImage, TextOnlyDetail, KioskMode, KioskDebug : boolean;
                 ServerIPaddr,ServerIPport,PrintDesc,PrintCmd1,PrintCmd2,PrintTmpPath,ThemeName,IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt, AnimOpt, Animffmpeg : string;
                 AnimFps : double;
                 ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass, SocksType: string;
