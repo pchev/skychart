@@ -1893,6 +1893,7 @@ else if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
      IdentXY(x,y);
      xcursor:=x;
      ycursor:=y;
+     if cmain.KioskMode and sc.cfgsc.FindOK then identlabelClick(self);
    end;
 end
 else if (button=mbLeft)and(ssCtrl in shift) then begin
@@ -2325,7 +2326,8 @@ end;
 procedure Tf_chart.identlabelClick(Sender: TObject);
 var ra2000,de2000: double;
 begin
-if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
+if cmain.KioskMode then begin f_detail.top:=0; f_detail.left:=0; end
+   else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
 de2000:=sc.cfgsc.FindDec;

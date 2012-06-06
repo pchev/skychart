@@ -863,6 +863,7 @@ begin
   Child.tag:=cfgm.MaxChildID;
   Child.VertScrollBar.Visible:=ViewScrollBar1.Checked;
   Child.HorScrollBar.Visible:=ViewScrollBar1.Checked;
+  if cfgm.KioskMode then Child.Image1.PopupMenu:=nil;
   cp.Caption:=CName;
   Child.Caption:=CName;
   Child.sc.catalog:=catalog;
@@ -8108,7 +8109,7 @@ if cfgm.KioskMode then FullScreen1.Checked:=true
                   else FullScreen1.Checked:=not FullScreen1.Checked;
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
 { TODO : fullscreen showmodal do not work with Gnome }
-  //SetWindowFullScreen(f_main,FullScreen1.Checked);
+ SetWindowFullScreen(f_main,FullScreen1.Checked);
  if FullScreen1.Checked then
     WindowState:=wsMaximized
  else
