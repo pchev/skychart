@@ -660,7 +660,7 @@ type
     ConfigDisplay: Tf_config_display;
     ConfigPictures: Tf_config_pictures;
     ConfigCatalog: Tf_config_catalog;
-    cryptedpwd,basecaption :string;
+    cryptedpwd,basecaption,kioskpwd :string;
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
@@ -1333,6 +1333,35 @@ end;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
+ if cfgm.KioskMode then begin
+   {$ifdef trace_debug}
+    WriteTrace('Initialize kiosk mode');
+   {$endif}
+   if not cfgm.KioskDebug then ViewFullScreenExecute(nil);
+   ViewScrollBar1Click(nil);
+   file1.Visible:=False;
+   edit1.Visible:=False;
+   setup1.Visible:=False;
+   view1.Visible:=False;
+   chart1.Visible:=False;
+   telescope1.Visible:=False;
+   Window1.Visible:=False;
+   help1.Visible:=False;
+   topmessage.Visible:=False;
+   ToolBar1.visible:=False;
+   PanelLeft.visible:=ToolBar1.visible;
+   PanelRight.visible:=ToolBar1.visible;
+   ToolBar4.visible:=ToolBar1.visible;
+   PanelBottom.visible:=ToolBar1.visible;
+   ViewToolsBar1.checked:=ToolBar1.visible;
+   MainBar1.checked:=ToolBar1.visible;
+   ObjectBar1.checked:=ToolBar1.visible;
+   LeftBar1.checked:=ToolBar1.visible;
+   RightBar1.checked:=ToolBar1.visible;
+   ViewStatusBar1.checked:=ToolBar1.visible;
+   ViewTopPanel;
+   FormResize(nil);
+ end;
 {$ifdef trace_debug}
  WriteTrace('Create default chart');
 {$endif}
@@ -4103,8 +4132,8 @@ begin
 {$ifdef trace_debug}
  WriteTrace('ViewScrollBar1Click');
 {$endif}
-
-ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
+if cfgm.KioskMode then ViewScrollBar1.Checked:=false
+                  else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
 for i:=0 to MultiDoc1.ChildCount-1 do
   if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
     (MultiDoc1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
@@ -4287,6 +4316,9 @@ cfgm.PrtRightMargin:=15;
 cfgm.PrtTopMargin:=10;
 cfgm.PrtBottomMargin:=5;
 cfgm.maximized:=true;
+cfgm.KioskMode:=false;
+cfgm.KioskDebug:=false;
+cfgm.KioskPass:='';
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
 cfgm.ServerIPaddr:='127.0.0.1';
@@ -5346,6 +5378,9 @@ cfgm.PrtRightMargin:=ReadInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 cfgm.PrtTopMargin:=ReadInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
 cfgm.PrtBottomMargin:=ReadInteger(section,'PrtBottomMargin',cfgm.PrtBottomMargin);
 cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
+cfgm.KioskPass:=ReadString(section,'KioskPass','');
+cfgm.KioskDebug:=ReadBool(section,'KioskDebug',false);
+cfgm.KioskMode:=(cfgm.KioskPass>'');
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 buf:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
@@ -7881,6 +7916,14 @@ end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
 begin
+if cfgm.KioskMode then begin
+  if ord(key)=key_cr then kioskpwd:=''
+     else kioskpwd:=kioskpwd+key;
+  if kioskpwd=cfgm.KioskPass then begin
+    Close;
+    Exit;
+  end;
+end;
 if (Activecontrol=quicksearch) or
    (Activecontrol=EditTimeVal) or
    (Activecontrol=TimeVal) or
@@ -8061,7 +8104,8 @@ end;
 
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
-FullScreen1.Checked:=not FullScreen1.Checked;
+if cfgm.KioskMode then FullScreen1.Checked:=true
+                  else FullScreen1.Checked:=not FullScreen1.Checked;
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
 { TODO : fullscreen showmodal do not work with Gnome }
   //SetWindowFullScreen(f_main,FullScreen1.Checked);
