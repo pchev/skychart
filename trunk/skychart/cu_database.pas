@@ -188,9 +188,7 @@ if db.Active then begin
    then updcountry:=true;
   if (updcountry)
    then begin
-     {$ifdef trace_debug}
-     WriteTrace('Upgrade DB for country change ');
-     {$endif}
+     if VerboseMsg then WriteTrace('Upgrade DB for country change ');
      db.Query('drop table cdc_country');
      writetrace('Drop table cdc_country ... '+db.ErrorMessage);
      db.Commit;
@@ -212,9 +210,7 @@ if db.Active then begin
     buf:=db.QueryOne('select sql from sqlite_master where name="cdc_fits_objname"');
   end;
   if (pos('objectname',buf)>0) and (pos('catalogname',buf)=0) then begin
-     {$ifdef trace_debug}
-     WriteTrace('Upgrade DB for new Fits indexes');
-     {$endif}
+     if VerboseMsg then WriteTrace('Upgrade DB for new Fits indexes');
      db.Query('drop table cdc_fits');
      writetrace('Drop table cdc_fits ... '+db.ErrorMessage);
      db.Commit;

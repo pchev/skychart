@@ -129,18 +129,14 @@ procedure Tf_getdss.FormCreate(Sender: TObject);
 begin
 SetLang;
 cfgdss:=Tconf_dss.Create;
-  {$ifdef trace_debug}
-   WriteTrace('Loadlibrary '+dsslibname);
-  {$endif}
+  if VerboseMsg then WriteTrace('Loadlibrary '+dsslibname);
   dsslib := LoadLibrary(dsslibname);
   if dsslib<>0 then begin
     ImageExtract:= TImageExtract(GetProcedureAddress(dsslib, 'ImageExtract'));
     GetPlateList:= TGetPlateList(GetProcedureAddress(dsslib, 'GetPlateList'));
     ImageExtractFromPlate:= TImageExtractFromPlate(GetProcedureAddress(dsslib, 'ImageExtractFromPlate'));
     Fenabled:=true;
-    {$ifdef trace_debug}
-     WriteTrace('Library ok');
-    {$endif}
+    if VerboseMsg then WriteTrace('Library ok');
   end else begin
     Fenabled:=false;
     writetrace(Format(rsNotFound, [dsslibname]));

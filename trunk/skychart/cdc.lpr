@@ -58,16 +58,13 @@ begin
   SetHeapTraceOutput('/tmp/skychart_heap.trc');
   {$endif}
 
-  {$ifdef trace_debug}
-  debugln('Read parameters');
-  {$endif}
-
   Params:=TStringList.Create;
   buf:='';
   for i:=1 to Paramcount do begin
       p:=ParamStr(i);
       if copy(p,1,2)='--' then begin
          if buf<>'' then Params.Add(buf);
+         if buf='--verbose' then VerboseMsg:=true;
          buf:=p;
       end
       else
@@ -79,89 +76,59 @@ begin
   compile_time:={$I %DATE%}+' '+{$I %TIME%};
   compile_version:='Lazarus '+lcl_version+' Free Pascal '+{$I %FPCVERSION%}+' '+{$I %FPCTARGETOS%}+'-'+{$I %FPCTARGETCPU%}+'-'+LCLPlatformDirNames[WidgetSet.LCLPlatform];
   compile_system:={$I %FPCTARGETOS%};
-  {$ifdef trace_debug}
+  if VerboseMsg then begin
   debugln('Program version : '+cdcversion+'-'+RevisionStr);
   debugln('Program compiled: '+compile_time);
   debugln('Compiler version: '+compile_version);
-  {$endif}
+  end;
   Application.Title:='Skychart';
-  {$ifdef trace_debug}
-  debugln('Initialize');
-  {$endif}
+  if VerboseMsg then debugln('Initialize');
   Application.Initialize;
   try
   step:='Create main form';
-  {$ifdef trace_debug}
-  debugln(step);
-  {$endif}
+  if VerboseMsg then debugln(step);
   Application.CreateForm(Tf_main, f_main);
   step:='Create splash';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   if f_main.showsplash then begin
     Application.CreateForm(Tf_splash, f_splash);
     step:='Show splash';
-    {$ifdef trace_debug}
-     WriteTrace(step);
-    {$endif}
+    if VerboseMsg then WriteTrace(step);
     f_splash.Show; f_splash.Invalidate;
     Application.ProcessMessages;
   end;
   step:='Create f_position';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_position, f_position);
   step:='Create f_search';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_search, f_search);
   step:='Create f_zoom';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_zoom, f_zoom);
   step:='Create f_getdss';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_getdss, f_getdss);
   step:='Create f_manualtelescope';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_manualtelescope, f_manualtelescope);
   step:='Create f_detail';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_detail, f_detail);
   step:='Create f_info';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_info, f_info);
   step:='Create f_calendar';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_calendar, f_calendar);
   step:='Create f_printsetup';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_printsetup, f_printsetup);
   step:='Create f_print';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_print, f_print);
   step:='Main Init';
-  {$ifdef trace_debug}
-   WriteTrace(step);
-  {$endif}
+  if VerboseMsg then WriteTrace(step);
   f_main.init;
   step:='';
   except
@@ -174,9 +141,7 @@ begin
    Halt;
    end;
   end;
-  {$ifdef trace_debug}
-   WriteTrace('Application Run');
-  {$endif}
+  if VerboseMsg then WriteTrace('Application Run');
   Application.Run;
 
   Params.Free;
