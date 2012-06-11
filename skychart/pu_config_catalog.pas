@@ -1463,9 +1463,7 @@ begin
 if stringgrid1.RowCount<=1 then exit;
 if SaveDialog1.InitialDir='' then SaveDialog1.InitialDir:=HomeDir;
 if SaveDialog1.Execute then begin
-  {$ifdef trace_debug}
-   WriteTrace(caption+' Save user objects to '+UTF8ToSys(SaveDialog1.FileName));
-  {$endif}
+   if VerboseMsg then WriteTrace(caption+' Save user objects to '+UTF8ToSys(SaveDialog1.FileName));
    ActivateUserObjects;
    AssignFile(f,UTF8ToSys(SaveDialog1.FileName));
    Rewrite(f);
@@ -1494,9 +1492,7 @@ var f: textfile;
 begin
 if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
 if OpenDialog1.Execute then begin
-  {$ifdef trace_debug}
-   WriteTrace(caption+' Load user objects from '+UTF8ToSys(OpenDialog1.FileName));
-  {$endif}
+  if VerboseMsg then WriteTrace(caption+' Load user objects from '+UTF8ToSys(OpenDialog1.FileName));
   AssignFile(f,UTF8ToSys(OpenDialog1.FileName));
   reset(f);
   n:=0;

@@ -10,6 +10,8 @@ unit u_unzip;
 
 {$mode objfpc}{$H+}
 
+//{$define zip_debug}
+
 interface
 
 uses unzip, ziputils, paszlib, ctypes,
@@ -71,7 +73,7 @@ implementation
       p^   := #0;
       if (not mymkdir(buffer)) {and (errno = ENOENT)} then
       begin
-      {$ifdef trace_debug}
+      {$ifdef zip_debug}
         WriteLn('couldn''t create directory ', buffer);
       {$endif}
         if Assigned(buffer) then
@@ -122,7 +124,7 @@ end;
 
     if (err <> UNZ_OK) then
     begin
-      {$ifdef trace_debug}
+      {$ifdef zip_debug}
       WriteLn('error ', err, ' with zipfile in unzGetCurrentFileInfo');
       {$endif}
       do_extract_currentfile := err;
@@ -133,7 +135,7 @@ end;
     buf      := allocmem(size_buf);
     if (buf = nil) then
     begin
-      {$ifdef trace_debug}
+      {$ifdef zip_debug}
       WriteLn('Error allocating memory');
       {$endif}
       do_extract_currentfile := UNZ_INTERNALERROR;
@@ -153,7 +155,7 @@ end;
     begin
       if (popt_extract_without_path = 0) then
       begin
-        {$ifdef trace_debug}
+        {$ifdef zip_debug}
         WriteLn('creating directory: ', filename_inzip);
         {$endif}
         mymkdir(filename_inzip);
@@ -170,7 +172,7 @@ end;
 
       err := unzOpenCurrentFile(uf);
       if (err <> UNZ_OK) then begin
-      {$ifdef trace_debug}
+      {$ifdef zip_debug}
         WriteLn('error ', err, ' with zipfile in unzOpenCurrentFile');
       {$endif}
       end;
@@ -217,7 +219,7 @@ end;
         end;
 
         if (fout = nil) then  begin
-          {$ifdef trace_debug}
+          {$ifdef zip_debug}
           WriteLn('error opening ', write_filename);
           {$endif}
         end;
@@ -225,14 +227,14 @@ end;
 
       if (fout <> nil) then
       begin
-        {$ifdef trace_debug}
+        {$ifdef zip_debug}
         WriteLn(' extracting: ', write_filename);
         {$endif}
         repeat
           err := unzReadCurrentFile(uf, buf, size_buf);
           if (err < 0) then
           begin
-            {$ifdef trace_debug}
+            {$ifdef zip_debug}
             WriteLn('error ', err, ' with zipfile in unzReadCurrentFile');
             {$endif}
             break;
@@ -240,7 +242,7 @@ end;
           if (err > 0) then
             if (fwrite(buf, err, 1, fout) <> 1) then
             begin
-              {$ifdef trace_debug}
+              {$ifdef zip_debug}
               WriteLn('error in writing extracted file');
               {$endif}
               err := UNZ_ERRNO;
@@ -257,7 +259,7 @@ end;
       begin
         err := unzCloseCurrentFile(uf);
         if (err <> UNZ_OK) then  begin
-          {$ifdef trace_debug}
+          {$ifdef zip_debug}
           WriteLn('error ', err, ' with zipfile in unzCloseCurrentFile')
           {$endif}
         end
@@ -276,7 +278,7 @@ end;
   begin
     if (unzLocateFile(uf, filename, CASESENSITIVITY) <> UNZ_OK) then
     begin
-      {$ifdef trace_debug}
+      {$ifdef zip_debug}
       WriteLn('file ', filename, ' not found in the zipfile');
       {$endif}
       do_extract_onefile := 2;

@@ -919,9 +919,8 @@ for i:=0 to MultiDoc1.ChildCount-1 do
         sc.cfgsc.FindOk:=false;
         sc.plot.cfgplot.Assign(def_cfgplot);
       end;
-      {$ifdef trace_debug}
+      if VerboseMsg then
        WriteTrace('RefreshAllChild');
-      {$endif}
       AutoRefresh;
      end;
 end;
@@ -954,9 +953,8 @@ if MultiDoc1.ActiveObject is Tf_chart then begin
       sc.cfgsc.TrackOn:=false;
       sc.cfgsc.racentre:=ra;
       sc.cfgsc.decentre:=de;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('SyncChild');
-{$endif}
       Refresh;
      end;
 end;
@@ -967,9 +965,8 @@ var i: integer;
 begin
 if AutoRefreshLock then exit;
 try
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('AutorefreshTimer');
-{$endif}
 AutoRefreshLock:=true;
 Autorefresh.enabled:=false;
 for i:=0 to MultiDoc1.ChildCount-1 do
@@ -1059,9 +1056,8 @@ end;
 
 function Tf_main.LoadDefaultChart(fn: string): string;
 begin
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('LoadDefaultChart '+fn);
-{$endif}
 if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
@@ -1083,9 +1079,8 @@ end;
 function Tf_main.SetGCat(path,shortname,active,min,max: string): string;
 var i,j,x,v:integer;
 begin
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('SetGCat '+path+blank+shortname+blank+active+blank+min+blank+max);
-{$endif}
 result:=msgFailed;
 val(min,x,v);
 if v<>0 then exit;
@@ -1150,9 +1145,8 @@ end;
 procedure Tf_main.FormShow(Sender: TObject);
 begin
 try
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Enter Tf_main.FormShow');
-{$endif}
  if nightvision or (cfgm.ThemeName<>'default')or(cfgm.ButtonStandard>1) then ThemeTimer.Enabled:=true;
  InitFonts;
  SetLpanel1('');
@@ -1164,18 +1158,16 @@ except
 end;
 InitTimer.Enabled:=true;
 InitOK:=true;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Exit Tf_main.FormShow');
-{$endif}
 end;
 
 procedure Tf_main.InitTimerTimer(Sender: TObject);
 var i:integer;
 begin
 InitTimer.Enabled:=False;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Enter Tf_main.InitTimerTimer');
-{$endif}
 MultiDoc1.setActiveChild(0);
 // ensure a first chart is draw, even if it usually result in a double refresh on launch
 for i:=0 to MultiDoc1.ChildCount-1 do
@@ -1184,9 +1176,8 @@ for i:=0 to MultiDoc1.ChildCount-1 do
        RefreshTimer.Enabled:=false;
        RefreshTimer.Enabled:=true;
     end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Exit Tf_main.InitTimerTimer');
-{$endif}
 end;
 
 {$ifdef unix}
@@ -1233,9 +1224,8 @@ var i: integer;
 begin
 firstuse:=false;
 try
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Enter Tf_main.Init');
-{$endif}
  // some initialisation that need to be done after all the forms are created.
  f_info.onGetTCPinfo:=GetTCPInfo;
  f_info.onKillTCP:=KillTCPClient;
@@ -1243,22 +1233,18 @@ try
  f_info.OnShowDetail:=showdetailinfo;
  f_detail.OnCenterObj:=CenterFindObj;
  f_detail.OnNeighborObj:=NeighborObj;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('SetDefault');
-{$endif}
  SetDefault;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ReadDefault');
-{$endif}
  ReadDefault;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('InitDS2000');
-{$endif}
  InitDS2000;
  // must read db configuration before to create this one!
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Create DB');
-{$endif}
  cdcdb:=TCDCdb.Create(self);
  planet:=Tplanet.Create(self);
  Fits:=TFits.Create(self);
@@ -1266,16 +1252,14 @@ try
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
  planet.SetDE(slash(Appdir)+slash('data')+'jpleph');
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Background Image');
-{$endif}
  if def_cfgsc.BackgroundImage='' then begin
    def_cfgsc.BackgroundImage:=slash(PictureDir);
    if not DirectoryExists(def_cfgsc.BackgroundImage) then forcedirectories(def_cfgsc.BackgroundImage);
  end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Constellation');
-{$endif}
  if def_cfgsc.ConstLatinLabel then
     catalog.LoadConstellation(cfgm.Constellationpath,'Latin')
   else
@@ -1289,55 +1273,47 @@ try
  f_search.SesameUrlNum:=cfgm.SesameUrlNum;
  f_search.SesameCatNum:=cfgm.SesameCatNum;
  f_search.Init;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Connect DB');
-{$endif}
  ConnectDB;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Cursor');
-{$endif}
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
     CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur'));
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
  end
  else crRetic:=crCross;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Compass');
-{$endif}
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp') then
     compass.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'compass.bmp'));
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp') then
     arrow.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'arrow.bmp'));
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Starshape file');
-{$endif}
 if (cfgm.starshape_file<>'')and(FileExists(utf8tosys(cfgm.starshape_file))) then begin
   starshape.Picture.LoadFromFile(cfgm.starshape_file);
 end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Timezone');
-{$endif}
  def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  if def_cfgsc.tz.TimeZoneFile='' then firstuse:=true;
  if firstuse then begin
-    {$ifdef trace_debug}
+    if VerboseMsg then
      WriteTrace('First setup');
-    {$endif}
     FirstSetup
  end;
  application.ProcessMessages; // apply any resizing
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Init calendar');
-{$endif}
  f_calendar.planet:=planet;
  f_calendar.cdb:=cdcdb;
  f_calendar.OnGetChartConfig:=GetChartConfig;
  f_calendar.OnUpdateChart:=DrawChart;
  f_calendar.eclipsepath:=slash(appdir)+slash('data')+slash('eclipses');
  if cfgm.KioskMode then begin
-   {$ifdef trace_debug}
+   if VerboseMsg then
     WriteTrace('Initialize kiosk mode');
-   {$endif}
    if not cfgm.KioskDebug then ViewFullScreenExecute(nil);
    ViewScrollBar1Click(nil);
    file1.Visible:=False;
@@ -1363,14 +1339,12 @@ end;
    ViewTopPanel;
    FormResize(nil);
  end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Create default chart');
-{$endif}
  CreateChild(GetUniqueName(rsChart_, true), true, def_cfgsc, def_cfgplot, true);
  if InitialChartNum>1 then begin
-    {$ifdef trace_debug}
+    if VerboseMsg then
      WriteTrace('Load '+inttostr(InitialChartNum-1)+' supplementary charts');
-    {$endif}
     for i:=1 to InitialChartNum-1 do begin
       try
       cfgp.Assign(def_cfgplot);
@@ -1381,26 +1355,22 @@ end;
       end;
     end;
  end;
- {$ifdef trace_debug}
+ if VerboseMsg then
  WriteTrace('Read params');
-{$endif}
  ProcessParams2;
 if cfgm.AutostartServer then begin
-    {$ifdef trace_debug}
+    if VerboseMsg then
      WriteTrace('Start server');
-    {$endif}
     StartServer;
 end;
 {$ifdef unix}
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Add signal handler');
-{$endif}
 CdcSigAction(@RecvSignal);
 {$endif}
 if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages=0) then begin
-  {$ifdef trace_debug}
+  if VerboseMsg then
    WriteTrace('Init picture DB');
-  {$endif}
   SetupPicturesPage(0,1);
 end;
 if (not firstuse)and(config_version<cdcver) then
@@ -1415,9 +1385,8 @@ except
    MessageDlg('Initialization error: '+E.Message, mtError, [mbClose], 0);
   end;
 end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Exit Tf_main.Init');
-{$endif}
 end;
 
 procedure Tf_main.ShowReleaseNotes(shownext:boolean);
@@ -1636,9 +1605,8 @@ appdir:=getcurrentdir;
 if not DirectoryExists(slash(appdir)+slash('data')+slash('planet')) then begin
    appdir:=ExtractFilePath(ParamStr(0));
 end;
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('appdir='+appdir);
-{$endif}
 {$endif}
 PrivateDir:=DefaultPrivateDir;
 HomeDir:=DefaultHomeDir;
@@ -1722,40 +1690,35 @@ if not directoryexists(TempDir) then forcedirectories(TempDir);
 SatDir:=slash(privatedir)+'satellites';
 if not directoryexists(SatDir) then CreateDir(SatDir);
 if not directoryexists(SatDir) then forcedirectories(SatDir);
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('appdir='+appdir);
-{$endif}
 // Be sur the data directory exists
 if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
   // try under the current directory
   buf:=GetCurrentDir;
-  {$ifdef trace_debug}
+  if VerboseMsg then
    debugln('Try '+buf);
-  {$endif}
   if (directoryexists(slash(buf)+slash('data')+'constellation')) then
      appdir:=buf
   else begin
      // try under the program directory
      buf:=ExtractFilePath(ParamStr(0));
-    {$ifdef trace_debug}
+    if VerboseMsg then
      debugln('Try '+buf);
-    {$endif}
      if (directoryexists(slash(buf)+slash('data')+'constellation')) then
         appdir:=buf
      else begin
          // try share directory under current location
          buf:=ExpandFileName(slash(GetCurrentDir)+SharedDir);
-          {$ifdef trace_debug}
+          if VerboseMsg then
            debugln('Try '+buf);
-          {$endif}
          if (directoryexists(slash(buf)+slash('data')+'constellation')) then
             appdir:=buf
          else begin
             // try share directory at the same location as the program
             buf:=ExpandFileName(slash(ExtractFilePath(ParamStr(0)))+SharedDir);
-            {$ifdef trace_debug}
+            if VerboseMsg then
              debugln('Try '+buf);
-            {$endif}
             if (directoryexists(slash(buf)+slash('data')+'constellation')) then
                appdir:=buf
             else begin
@@ -1769,10 +1732,10 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
      end;
   end;
 end;
-{$ifdef trace_debug}
+if VerboseMsg then begin
  debugln('appdir='+appdir);
  debugln('privatedir='+privatedir);
-{$endif}
+end;
 {$ifdef mswindows}
 tracefile:=slash(privatedir)+tracefile;
 {$endif}
@@ -1782,20 +1745,17 @@ helpdir:=slash(appdir)+slash('doc');
 SampleDir:=slash(appdir)+slash('data')+'sample';
 // Be sure zoneinfo exists in standard location or in skychart directory
 ZoneDir:=slash(appdir)+slash('data')+slash('zoneinfo');
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('ZoneDir='+ZoneDir);
-{$endif}
 buf:=slash('')+slash('usr')+slash('share')+slash('zoneinfo');
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('Try '+buf);
-{$endif}
 if (FileExists(slash(buf)+'zone.tab')) then
      ZoneDir:=slash(buf)
 else begin
   buf:=slash('')+slash('usr')+slash('lib')+slash('zoneinfo');
-  {$ifdef trace_debug}
+  if VerboseMsg then
    debugln('Try '+buf);
-  {$endif}
   if (FileExists(slash(buf)+'zone.tab')) then
       ZoneDir:=slash(buf)
   else begin
@@ -1808,18 +1768,16 @@ else begin
      end;
   end;
 end;
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('ZoneDir='+ZoneDir);
-{$endif}
 end;
 
 procedure Tf_main.FormCreate(Sender: TObject);
 var step,buf:string;
 begin
 try
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln('Enter f_main.formcreate');
-{$endif}
 InitOK:=false;
 ForceClose:=false;
 RestoreState:=false;
@@ -1831,9 +1789,8 @@ UniqueInstance1.OnInstanceRunning:=InstanceRunning;
 UniqueInstance1.Enabled:=true;
 UniqueInstance1.Loaded;
 step:='Init';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
@@ -1876,9 +1833,8 @@ CanShowScrollbar:=true;
   MenuItem6.Visible:=false;
 {$endif}
 step:='Create config';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 def_cfgsc:=Tconf_skychart.Create;
 cfgs:=Tconf_skychart.Create;
 cfgm:=Tconf_main.Create;
@@ -1886,42 +1842,35 @@ def_cfgplot:=Tconf_plot.Create;
 cfgp:=Tconf_plot.Create;
 ForceConfig:='';
 step:='Create cursor';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 CursorImage1:=TCursorImage.Create;
 step:='Read initial parameters';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 ProcessParams1;
 step:='Application directory';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 GetAppDir;
 chdir(appdir);
 step:='Trace';
-{$ifdef trace_debug}
+if VerboseMsg then
  debugln(step);
-{$endif}
 InitTrace;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Privatedir: '+PrivateDir);
-{$endif}
 step:='Language';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 GetLanguage;
 lang:=u_translation.translate(cfgm.language);
 u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
 step:='Multidoc';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 TabControl1.Visible:=false;
 basecaption:=caption;
 MultiDoc1.WindowList:=Window1;
@@ -1930,17 +1879,15 @@ ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 step:='Size control';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 MultiDoc1.Align:=alClient;
 starshape.Picture.Bitmap.Transparent:=false;
 quicksearch.Width:=round( 75 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 step:='Load zlib';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 zlib:=LoadLibrary(libz);
 if zlib<>0 then begin
   gzopen:= Tgzopen(GetProcedureAddress(zlib,'gzopen'));
@@ -1950,9 +1897,8 @@ if zlib<>0 then begin
   zlibok:=true;
 end else zlibok:=false;
 step:='Load plan404';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 Plan404:=nil;
 Plan404lib:=LoadLibrary(lib404);
 if Plan404lib<>0 then begin
@@ -1965,9 +1911,8 @@ if @Plan404=nil then begin
    Halt;
 end;
 step:='Load cdcwcs';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 cdcwcs_initfitsfile:=nil;
 cdcwcs_release:=nil;
 cdcwcs_sky2xy:=nil;
@@ -1986,23 +1931,20 @@ if (@cdcwcs_initfitsfile=nil)or(@cdcwcs_release=nil)or(@cdcwcs_sky2xy=nil)or(@cd
 end;
 {$ifdef unix}
    step:='Multidoc unix';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
    MultiDoc1.InactiveBorderColor:=$404040;
    MultiDoc1.TitleColor:=clBlack;
    MultiDoc1.BorderColor:=$808080;
 {$endif}
 step:='Bitmap';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
 step:='Load timezone';
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace(step);
-{$endif}
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 except
   on E: Exception do begin
@@ -2013,18 +1955,16 @@ except
    Halt;
    end;
 end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Exit Tf_main.FormCreate');
-{$endif}
 end;
 
 procedure Tf_main.FormDestroy(Sender: TObject);
 var i:integer;
 begin
 try
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Destroy Tf_main');
-{$endif}
 catalog.free;
 Fits.Free;
 planet.free;
@@ -2045,17 +1985,15 @@ cfgp.Free;
 compass.free;
 arrow.free;
 if NeedRestart then ExecNoWait(paramstr(0));
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Destroy Cursor');
-{$endif}
 if CursorImage1<>nil then begin
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
 //if TCPDaemon<>nil then TCPDaemon.Free;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Destroy end');
-{$endif}
 except
 writetrace('error destroy '+name);
 end;
@@ -2152,9 +2090,8 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with Tf_chart(MultiDoc1.ActiveObject) do begin
     savelabel:= sc.cfgsc.Editlabels;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('EditCopy1Execute');
-{$endif}
     bmp:=TBitmap.Create;
     try
       if savelabel then begin
@@ -2223,9 +2160,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
  f_zoom.showmodal;
  if f_zoom.modalresult=mrOK then begin
     sc.setfov(deg2rad*f_zoom.fov);
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ZoomBarExecute');
-{$endif}
     Refresh;
  end;
 
@@ -2586,9 +2522,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.TrackOn:=true;
       sc.cfgsc.TrackType:=4;
    end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('TimeResetExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2598,9 +2533,8 @@ procedure Tf_main.ShowStarsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.showstars:=not sc.cfgsc.showstars;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowStarsExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2609,9 +2543,8 @@ procedure Tf_main.ShowNebulaeExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.shownebulae:=not sc.cfgsc.shownebulae;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowNebulaeExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2628,9 +2561,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.ShowImages:=false;
       ShowError(rsErrorPleaseC3);
    end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowPicturesExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2646,9 +2578,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.ShowBackgroundImage:=false;
       ShowError(rsErrorPleaseC);
    end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowBackgroundImageExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2657,9 +2588,8 @@ procedure Tf_main.DSSImageExecute(Sender: TObject);
 begin
 if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiDoc1.ActiveObject as Tf_chart do begin
-      {$ifdef trace_debug}
+      if VerboseMsg then
        WriteTrace('DSSImageExecute');
-      {$endif}
       cmd_PDSS('','','','');
   end;
 end;
@@ -2671,9 +2601,8 @@ if (MultiDoc1.ActiveObject is Tf_chart)
      if BlinkTimer.enabled then begin
         BlinkTimer.enabled:=false;
         sc.cfgsc.ShowBackgroundImage:=true;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('BlinkImageExecute');
-{$endif}
         Refresh;
      end else begin
         if sc.cfgsc.ShowBackgroundImage then
@@ -2698,9 +2627,8 @@ procedure Tf_main.ShowLinesExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLine:=not sc.cfgsc.ShowLine;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowLinesExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2709,9 +2637,8 @@ procedure Tf_main.ShowPlanetsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowPlanetsExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2722,9 +2649,8 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
    showast:=sc.cfgsc.ShowAsteroid;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowAsteroidsExecute');
-{$endif}
    Refresh;
    if showast<>sc.cfgsc.ShowAsteroid then begin
       f_info.setpage(2);
@@ -2745,9 +2671,8 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowCometsExecute');
-{$endif}
    Refresh;
    if showcom<>sc.cfgsc.ShowComet then ShowError(rsErrorPleaseC2);
 end;
@@ -2757,9 +2682,8 @@ procedure Tf_main.ShowMilkyWayExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
- {$ifdef trace_debug}
+ if VerboseMsg then
  WriteTrace('ShowMilkyWayExecute');
-{$endif}
   Refresh;
 end;
 end;
@@ -2768,9 +2692,8 @@ procedure Tf_main.ShowLabelsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowLabelsExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2787,9 +2710,8 @@ var i,w,h: integer;
     r1: TRadioGroup;
     btn: TButtonPanel;
 begin
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ResetDefaultChartExecute');
-{$endif}
 if sender<>nil then begin
   f1:=TForm.Create(self);
   f1.AutoSize:=false;
@@ -2859,9 +2781,8 @@ procedure Tf_main.EditLabelsExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Editlabels:=not sc.cfgsc.Editlabels;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('EditLabelsExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2870,9 +2791,8 @@ procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowConstellationLineExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2881,9 +2801,8 @@ procedure Tf_main.ShowConstellationLimitExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowConstellationLimitExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2892,9 +2811,8 @@ procedure Tf_main.ShowGalacticEquatorExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowGalacticEquatorExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2903,9 +2821,8 @@ procedure Tf_main.ShowEclipticExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowEclipticExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2914,9 +2831,8 @@ procedure Tf_main.ShowMarkExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowMarkExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2925,9 +2841,8 @@ procedure Tf_main.ShowObjectbelowHorizonExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ShowObjectbelowHorizonExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2938,9 +2853,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Equat;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('EquatorialProjectionExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2961,9 +2875,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
      sc.cfgsc.YPmon:=0;
      sc.cfgsc.CoordType:=0;
    end;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('AltAzProjectionExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2974,9 +2887,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Ecl;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('EclipticProjectionExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -2987,9 +2899,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
    sc.cfgsc.projpole:=Gal;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('GalacticProjectionExecute');
-{$endif}
    Refresh;
 end;
 end;
@@ -3010,16 +2921,14 @@ procedure Tf_main.TrackExecute(Sender: TObject);
 begin
 if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
   if sc.cfgsc.TrackOn then begin
-     {$ifdef trace_debug}
+     if VerboseMsg then
       WriteTrace('TrackExecute 1');
-     {$endif}
      sc.cfgsc.TrackOn:=false;
      Refresh;
   end else if (((sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3)) or(sc.cfgsc.TrackType=6))and(sc.cfgsc.TrackName<>'')
   then begin
-     {$ifdef trace_debug}
+     if VerboseMsg then
       WriteTrace('TrackExecute 2');
-     {$endif}
      sc.cfgsc.TrackOn:=true;
      Refresh;
   end else begin
@@ -3056,9 +2965,8 @@ if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_cha
       sc.cfgsc.decentre:=deg2rad*f_position.de.value;
       sc.cfgsc.fov:=deg2rad*f_position.fov.value;
       sc.cfgsc.theta:=deg2rad*f_position.rot.value;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('PositionExecute');
-{$endif}
       refresh;
    end;
 end;
@@ -3170,9 +3078,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
         sc.cfgsc.CurYear:=2000;
         sc.cfgsc.CurMonth:=1;
         sc.cfgsc.CurDay:=1;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('Search1Execute');
-{$endif}
         if itype=ftlin then begin
             sc.cfgsc.FindCatname:='';
             sc.cfgsc.FindCat:='';
@@ -3280,9 +3187,8 @@ begin
 if MultiDoc1.ActiveObject is Tf_chart then
  with MultiDoc1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Assign(csc);
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('DrawChart');
-{$endif}
    Refresh;
 end;
 end;
@@ -3531,9 +3437,8 @@ procedure Tf_main.ThemeTimerTimer(Sender: TObject);
 begin
 ThemeTimer.Enabled:=false;
   if nightvision then begin
-      {$ifdef trace_debug}
+      if VerboseMsg then
        WriteTrace('Night vision');
-      {$endif}
      ToolButtonNightVision.Down:=nightvision;
      NightVision1.Checked:=nightvision;
    end;
@@ -4130,9 +4035,8 @@ end;
 procedure Tf_main.ViewScrollBar1Click(Sender: TObject);
 var i: Integer;
 begin
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ViewScrollBar1Click');
-{$endif}
 if cfgm.KioskMode then ViewScrollBar1.Checked:=false
                   else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
 for i:=0 to MultiDoc1.ChildCount-1 do
@@ -6686,9 +6590,8 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 Findit:
    result:=ok;
    if ok then begin
-   {$ifdef trace_debug}
+   if VerboseMsg then
     WriteTrace('GenericSearch');
-   {$endif}
       sc.cfgsc.TrackOn:=false;
       IdentLabel.visible:=false;
       sc.cfgsc.FindType:=ftInv;
@@ -7480,17 +7383,15 @@ try
     NeedToInitializeDB:=false;
     if ((DBtype=sqlite) and not Fileexists(cfgm.db)) then begin
         dbpath:=extractfilepath(cfgm.db);
-        {$ifdef trace_debug}
+        if VerboseMsg then
          WriteTrace('Create sqlite '+dbpath);
-        {$endif}
         if not directoryexists(dbpath) then CreateDir(dbpath);
         if not directoryexists(dbpath) then forcedirectories(dbpath);
     end;
     cdcdb.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
     if cdcdb.CheckDB then begin
-         {$ifdef trace_debug}
+         if VerboseMsg then
           WriteTrace('DB connected');
-         {$endif}
           if not NeedToInitializeDB then cdcdb.CheckForUpgrade(f_info.ProgressMemo);
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
@@ -7502,9 +7403,8 @@ try
           def_cfgsc.ShowImages:=false;
     end;
     if NeedToInitializeDB then begin
-       {$ifdef trace_debug}
+       if VerboseMsg then
        WriteTrace('Initialize DB');
-       {$endif}
        f_info.setpage(2);
        f_info.show;
        f_info.ProgressMemo.lines.add(rsInitializeDa);
@@ -7565,9 +7465,8 @@ for i:=0 to MultiDoc1.ChildCount-1 do
      sc.cfgsc.racentre:=sc.cfgsc.FindRa;
      sc.cfgsc.decentre:=sc.cfgsc.FindDec;
      sc.cfgsc.TrackOn:=false;
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('CenterFindObj');
-{$endif}
      Refresh;
      break;
 end;
@@ -7633,9 +7532,8 @@ end;
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
 // to restore focus to the chart that as no text control
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('ImageSetFocus');
-{$endif}
   ActiveControl:=nil;
   quicksearch.Enabled:=false;   // add all main form focusable control here
   EditTimeVal.Enabled:=false;
@@ -7938,9 +7836,8 @@ var i:integer;
 begin
 for i:=0 to MultiDoc1.ChildCount-1 do
    if MultiDoc1.Childs[i].DockedObject=Sender then begin
-     {$ifdef trace_debug}
+     if VerboseMsg then
       WriteTrace('SetChildFocus '+tf_chart(MultiDoc1.Childs[i].DockedObject).Caption);
-     {$endif}
       MultiDoc1.setActiveChild(i);
    end;
 end;

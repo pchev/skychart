@@ -297,9 +297,8 @@ begin
 try
 n:=cdcwcs_initfitsfile(pchar(FFileName));
 n:=cdcwcs_getinfo(addr(i));
-{$ifdef trace_debug}
+if VerboseMsg then
  WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
-{$endif}
 if (n=0)and(i.secpix<>0) then begin
   Fra:=deg2rad*i.cra;
   Fde:=deg2rad*i.cdec;

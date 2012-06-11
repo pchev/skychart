@@ -227,9 +227,8 @@ SetLang;
 config:=Tconf_skychart.Create;
 Fnightvision:=false;
 AzNorth:=true;
-{$ifdef trace_debug}
+if VerboseMsg then
 WriteTrace('Create Tf_image');
-{$endif}
 ShowImage:=Tf_image.Create(self);
 ShowImage.Position:=poScreenCenter;
 decodedate(now,yy,mm,dd);
