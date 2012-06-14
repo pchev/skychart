@@ -1447,9 +1447,13 @@ begin
  end;
  ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
  jpg:=TJPEGImage.Create;
+ try
  jpg.LoadFromFile(SysToUTF8(fn));
  chdir(appdir);
  planetbmp.Assign(jpg);
+ finally
+  jpg.free;
+ end;
  planetbmppla:=ipla;
  planetbmpjd:=jdt;
  planetbmprot:=0;
