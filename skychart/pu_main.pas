@@ -2404,9 +2404,9 @@ end;
 
 procedure Tf_main.ToolButton13Click(Sender: TObject);
 var fs : TSearchRec;
-    i: integer;
+    i,rc: integer;
     r: TStringList;
-    fn,cmd: string;
+    fn,cmd,logfile: string;
 begin
 AnimationTimer.Enabled:=ToolButton13.Down;
 if ToolButton13.Down then begin  // start animation
@@ -2436,9 +2436,18 @@ end else begin                   // end animation
         fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
       until (not FileExists(fn))or(i>1000);
       cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i "'+slash(TempDir)+'%06d.jpg" "'+utf8tosys(fn)+'"';
-      ExecProcess(cmd,r,true);
-      r.SaveToFile(slash(TempDir)+'ffmpeg.log');
+      rc:=ExecProcess(cmd,r,true);
+      logfile:=slash(TempDir)+'ffmpeg.log';
+      r.SaveToFile(logfile);
       r.free;
+      if (rc<>0)and(fileexists(logfile)) then begin
+         f_info.setpage(3);
+         f_info.TitlePanel.Caption:='ffmpeg command failed';
+         f_info.Button1.caption:=rsClose;
+         f_info.InfoMemo.Lines.LoadFromFile(logfile);
+         f_info.InfoMemo.Text:=CondUTF8Decode(f_info.InfoMemo.Text);
+         f_info.showmodal;
+      end;
    end;
 end;
 end;
