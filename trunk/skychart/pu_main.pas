@@ -1862,8 +1862,10 @@ step:='Trace';
 if VerboseMsg then
  debugln(step);
 InitTrace;
-if VerboseMsg then
+if VerboseMsg then begin
  WriteTrace('Privatedir: '+PrivateDir);
+ WriteTrace('Appdir: '+AppDir);
+end;
 step:='Language';
 if VerboseMsg then
  WriteTrace(step);
