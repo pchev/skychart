@@ -1279,8 +1279,12 @@ if VerboseMsg then
 if VerboseMsg then
  WriteTrace('Cursor');
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
+    try
     CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur'));
     Screen.Cursors[crRetic]:=CursorImage1.Handle;
+    except
+      crRetic:=crCross;
+    end;
  end
  else crRetic:=crCross;
 if VerboseMsg then
