@@ -6730,6 +6730,8 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
        TSlew.Enabled:=true;
        TSync.Enabled:=true;
     end;
+    if (abs(sc.cfgsc.theta)>(pi-secarc))and(abs(sc.cfgsc.theta)<(pi+secarc)) then ToolButtonRot180.ImageIndex:=93
+       else  ToolButtonRot180.ImageIndex:=92;
     TrackTelescope1.Checked:=(sc.cfgsc.TrackOn and (sc.cfgsc.TrackName=rsTelescope));
     Tf_chart(sender).TrackTelescope.Checked:=TrackTelescope1.Checked;
     toolbuttonshowStars.down:=sc.cfgsc.showstars;
