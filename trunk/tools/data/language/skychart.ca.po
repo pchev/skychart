@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 17:21+0000\n"
-"PO-Revision-Date: 2012-04-24 10:11+0000\n"
-"Last-Translator: Antoni Clavell <Unknown>\n"
+"POT-Creation-Date: 2012-06-02 08:30+0000\n"
+"PO-Revision-Date: 2012-06-05 18:33+0000\n"
+"Last-Translator: Alfredo Hernández <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-30 09:12+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -496,7 +496,7 @@ msgstr "Construir el catàleg"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Però mai més feble que la magnitud"
 
 #: u_translation.rsby
 msgid "by"
@@ -4420,7 +4420,7 @@ msgstr "Mostra la Via Làctia"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Mostra asteroides propers a la Terra independentment de la seva magnitud"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4776,7 +4776,7 @@ msgstr "Símbol"
 
 #: u_translation.rssync
 msgid "Sync"
-msgstr "Sincro"
+msgstr "Sincronitza"
 
 #: u_translation.rssynodicmonth
 msgid "Synodic month"

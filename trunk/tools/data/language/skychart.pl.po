@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 17:21+0000\n"
-"PO-Revision-Date: 2012-06-01 21:45+0000\n"
+"POT-Creation-Date: 2012-06-02 08:30+0000\n"
+"PO-Revision-Date: 2012-06-10 19:57+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-02 08:17+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-30 09:12+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -292,7 +292,7 @@ msgstr "Jak na ekranie (czarne tło!)"
 
 #: u_translation.rsasterism
 msgid "Asterism"
-msgstr "Asteryzm"
+msgstr "Asteryzmy"
 
 #: u_translation.rsasteroid
 msgid "Asteroid"
@@ -596,11 +596,11 @@ msgstr "Katalogi głębokiego nieba i ustawienia"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
-msgstr "Przestarzały katalog CdC (ale wciąż można z niego korzystać)"
+msgstr "Przestarzałe katalogi CdC (wciąż można z nich korzystać)"
 
 #: u_translation.rscdcstars
 msgid "CdC stars"
-msgstr "gwiazdy (CdC)"
+msgstr "Gwiazdy (CdC)"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
@@ -1496,7 +1496,7 @@ msgstr "Czy chcesz zapisać ustawienia programu?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Rysuj linię, która reprezentuje prawidłowy ruch własny ciał niebieskich na następne"
+msgstr "Rysuj linię prezentującą prawidłowy ruch własny obiektów na następne"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
@@ -1808,7 +1808,7 @@ msgstr "Numer Pola"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr "Pole widzenia"
+msgstr "Pole widzenia (FOV)"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
@@ -1876,7 +1876,7 @@ msgstr "Koło szukacza (okular)"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr "Koło celownika"
+msgstr "Koło szukacza"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -2004,7 +2004,7 @@ msgstr "Galaktyki"
 
 #: u_translation.rsgalaxy
 msgid "Galaxy"
-msgstr "Galaktyka"
+msgstr "Galaktyki"
 
 #: u_translation.rsgalaxycluste
 msgid "Galaxy cluster"
@@ -3344,7 +3344,7 @@ msgstr "Inne etykiety"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr "Inne dane oprogramowania."
+msgstr "Inne dane"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3760,7 +3760,7 @@ msgstr "Przenieś pliki z rozszerzeniem .tle do folderu %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
-msgstr "Kwazar"
+msgstr "Kwazary"
 
 #: u_translation.rsquery
 msgid "Query"
@@ -3808,7 +3808,7 @@ msgstr "Opcje RA"
 
 #: u_translation.rsrasterresolu
 msgid "Raster resolution"
-msgstr "Rozdzielczość rastrowa"
+msgstr "DPI"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
@@ -4280,7 +4280,7 @@ msgstr "Pole widzenia (FOV)"
 
 #: u_translation.rssetfovto
 msgid "Set FOV to"
-msgstr "Ustaw pole widzenia (FOV) jako"
+msgstr "Ustaw pole widzenia (FOV) na"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
@@ -4480,7 +4480,7 @@ msgstr "Pokaż dane obserwatorium wirtualnego"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr "Syderyczny (gwiazdowy)"
+msgstr "Syderyczny"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
@@ -4884,7 +4884,7 @@ msgstr "Występuje %s obiektów w tym polu"
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Ta operacja nadpisze całą zawartość bazy danych dla kraju %s, używając najnowszych danych z NGA oarz GNIS.%sWszystkie zmiany dla tego kraju zostaną utracone, poza miejscami, dla których zostały nadane nowe nazwy.%sCzy chcesz kontynuować?"
+msgstr "Ta operacja nadpisze całą zawartość bazy danych dla kraju %s, używając najnowszych danych z NGA oraz GNIS.%sWszystkie zmiany dla tego kraju zostaną utracone, poza miejscami, dla których zostały nadane nowe nazwy.%sCzy chcesz kontynuować?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -5272,11 +5272,11 @@ msgstr "Wielkość gwiazd. obserwowana"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr "Katalog W.O."
+msgstr "Katalog VO"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr "Przeglądarka katalogu W.O."
+msgstr "Przeglądarka katalogu VO"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
