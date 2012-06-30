@@ -1,6 +1,7 @@
 Version 3.7  Notes de la version
 
 Nouvelles options:
+  - Traduction en Suédois par Kåre Lekebjer
   - Nouvelle option --userdir=
   - Utilisation de chemin relatif dans le fichier de configuration
   - Traduction Thai par Worachate Boonplod

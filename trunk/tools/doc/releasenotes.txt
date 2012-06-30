@@ -1,6 +1,7 @@
 Version 3.7 release Notes
 
 New options:
+  - Add Swedish translation by Kåre Lekebjer
   - New option --userdir=
   - Configuration file now use relative path when possible 
   - Add Thai translation by Worachate Boonplod
