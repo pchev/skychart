@@ -6,14 +6,14 @@ msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-06-02 08:30+0000\n"
-"PO-Revision-Date: 2012-06-02 08:38+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"PO-Revision-Date: 2012-06-19 23:57+0000\n"
+"Last-Translator: Vincent Lhote <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-02 08:40+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-30 09:12+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -4421,10 +4421,6 @@ msgstr "Numéroter les chercheurs"
 msgid "Show Milky Way"
 msgstr "Voir la voie lactée"
 
-#~ msgid "Do not take into account comets fainter than magnitude"
-#~ msgstr "Ne pas tenir compte des comètes plus faible que"
-#~ msgid "Do not take into account asteroids fainter than magnitude"
-#~ msgstr "Ne pas tenir compte des astéroïdes plus faible que"
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
 msgstr "Toujours afficher les astéroïdes proche de la Terre"
@@ -4675,7 +4671,7 @@ msgstr "Label des étoiles"
 
 #: u_translation.rsstars
 msgid "Stars"
-msgstr "Etoiles"
+msgstr "Étoiles"
 
 #: u_translation.rsstarsandnebu
 msgid "Stars and deep sky catalogs prepared with "

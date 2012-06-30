@@ -3,15 +3,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-09 17:21+0000\n"
-"PO-Revision-Date: 2012-04-10 12:41+0000\n"
-"Last-Translator: Tiago Silva <Unknown>\n"
+"POT-Creation-Date: 2012-06-02 08:30+0000\n"
+"PO-Revision-Date: 2012-06-08 18:21+0000\n"
+"Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-02 08:16+0000\n"
-"X-Generator: Launchpad (build 15342)\n"
+"X-Launchpad-Export-Date: 2012-06-30 09:12+0000\n"
+"X-Generator: Launchpad (build 15520)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -497,7 +497,7 @@ msgstr "Construir Catálogo"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Mas nunca mais fracas que magnitude"
 
 #: u_translation.rsby
 msgid "by"
@@ -4418,7 +4418,7 @@ msgstr "Mostrar a Via Láctea"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Mostrar asteroides próximos da Terra independentemente da magnitude"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
