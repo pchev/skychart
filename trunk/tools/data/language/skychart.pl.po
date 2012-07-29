@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-30 09:12+0000\n"
-"X-Generator: Launchpad (build 15520)\n"
+"X-Launchpad-Export-Date: 2012-07-29 15:16+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -341,6 +341,10 @@ msgstr "Zmienne tło nieba"
 #: u_translation.rsautomaticall
 msgid "Automatically start a local server if not already running"
 msgstr "Automatycznie uruchom lokalny serwer jeśli aktualnie nie działa"
+
+#: u_translation.rsautomaticall2
+msgid "Automatically optimize the labels placement"
+msgstr ""
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
