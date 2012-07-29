@@ -4,7 +4,7 @@ type=3
 shortname=syn
 longname=Synscan alignment stars
 numfiles=1
-inputfiles0=/data/synscan/synscan.txt
+inputfiles0=synscan.txt
 
 [Page2]
 ratype=0
@@ -94,6 +94,8 @@ label30=Num7
 label31=Num8
 label32=Num9
 label33=Num10
+label34=
+label35=
 fieldindex0=18
 fieldlength0=2
 calcA0=1
@@ -271,7 +273,7 @@ altname10=0
 
 [Page4]
 numfile=0
-ouputdir=/data/synscan
+ouputdir=
 index=1
 altindex=0
 prefalt=1
@@ -302,6 +304,7 @@ unit3=s,"
 linetype1=start,0
 linetype2=end,1
 linetype3=vertex, ,2
+linetype4=
 
 [Page7]
 colorstr1=White,W,1

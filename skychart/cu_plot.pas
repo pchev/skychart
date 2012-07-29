@@ -48,7 +48,7 @@ type
      outlinetype,outlinemax,outlinenum,outlinelw: integer;
      outlinecol: Tcolor;
      outlinepts: array of TPoint;
-     labels: array [1..maxlabels] of Tlabel;
+     ilabels: array [1..maxlabels] of TImage;
      editlabel,editlabelx,editlabely,selectedlabel : integer;
      editlabelmod: boolean;
      FlabelRaDec: boolean;
@@ -108,7 +108,7 @@ type
      function Init(w,h : integer) : boolean;
      function InitLabel : boolean;
      //--------------------------------------------
-     procedure BGRATextOut(x, y: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap);
+     function BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
      procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
      Procedure BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);
      //--------------------------------------------
@@ -147,9 +147,9 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
-     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5);
-     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
+     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
+     procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
+     procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
@@ -252,17 +252,16 @@ for i:=0 to 6 do
  MenuItem.Caption := rsResetAllLabe;
  MenuItem.OnClick := DeleteAllLabel;
  for i:=1 to maxlabels do begin
-    labels[i]:=Tlabel.Create(nil);
-    labels[i].parent:=TPanel(AOwner);
-    labels[i].tag:=i;
-    labels[i].color:=clNone;
-    labels[i].ShowAccelChar:=false;
-    labels[i].Font.CharSet:=FCS_ISO_10646_1;
-    labels[i].PopupMenu:=editlabelmenu;
-    labels[i].OnMouseDown:=labelmousedown;
-    labels[i].OnMouseUp:=labelmouseup;
-    labels[i].OnMouseMove:=labelmousemove;
-    labels[i].OnMouseLeave:=labelmouseleave;
+    ilabels[i]:=TImage.Create(nil);
+    ilabels[i].parent:=TPanel(AOwner);
+    ilabels[i].tag:=i;
+    ilabels[i].Transparent:=True;
+    ilabels[i].Font.CharSet:=FCS_ISO_10646_1;
+    ilabels[i].PopupMenu:=editlabelmenu;
+    ilabels[i].OnMouseDown:=labelmousedown;
+    ilabels[i].OnMouseUp:=labelmouseup;
+    ilabels[i].OnMouseMove:=labelmousemove;
+    ilabels[i].OnMouseLeave:=labelmouseleave;
  end;
 end;
 
@@ -270,8 +269,8 @@ destructor TSplot.Destroy;
 var i,j:integer;
 begin
 try
- for i:=1 to maxlabels do labels[i].Free;
-for i:=0 to 6 do
+ for i:=1 to maxlabels do ilabels[i].Free;
+ for i:=0 to 6 do
   for j:=0 to 10 do begin
      Astarbmp[i,j].free;
      Bstarbmp[i,j].free;
@@ -463,6 +462,12 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
                 else
                     CurColor.alpha:=alphaOpaque;
              end;
+          3: begin  // White transparent
+                if newalpha>=(65535) then
+                    CurColor:=colTransparent
+                else
+                    CurColor.alpha:=alphaOpaque;
+             end;
            end;
           IntfImage.Colors[x,y]:=CurColor;
         end;
@@ -557,7 +562,7 @@ function TSplot.InitLabel : boolean;
 var i:integer;
 begin
 editlabel:=-1;
-for i:=1 to maxlabels do labels[i].visible:=false;
+for i:=1 to maxlabels do ilabels[i].visible:=false;
 result:=true;
 end;
 
@@ -1962,45 +1967,48 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
+function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
 var ts:TSize;
+    mp:TRect;
     ATextStyle: TTextStyle;
     lcolor:Tcolor;
-    xx,yy,r: integer;
+    cosa,sina:extended;
+    xx,yy,r,offx,offy,lsp: integer;
+    tbmp : TBGRABitmap;
 begin
 xx:=round(xxs);
 yy:=round(yys);
 r:=round(rs);
 if (abs(xx-cfgchart.hw)<cfgplot.outradius)and(abs(yy-cfgchart.hh)<cfgplot.outradius)
 then begin
+  sincos(deg2rad*orient,sina,cosa);
+  lsp:=labspacing*cfgchart.drawpen;
 // If drawing to the printer force to plot the text label to the canvas
 // even if label editing is selected
 if (cfgchart.onprinter or forcetextlabel) then begin
 if cfgplot.UseBMP then begin;
-  ATextStyle.Opaque:=opaque;
   cbmp.FontName:=cfgplot.FontName[fontnum];
   lcolor:=cfgplot.LabelColor[labelnum];
   if WhiteBg then lcolor:=cfgplot.Color[11];
   if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
-  if WhiteBg then lcolor:=cfgplot.Color[11];
   if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
   if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
   cbmp.FontHeight:=trunc(cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
   ts:=cbmp.TextSize(txt);
   if r>=0 then begin
   case Xalign of
-   laLeft   : xxs:=xxs+labspacing*cfgchart.drawpen+rs;
-   laRight  : xxs:=xxs-ts.cx-labspacing*cfgchart.drawpen-rs;
-   laCenter : xxs:=xxs-(ts.cx div 2);
+    laLeft   : begin xxs:=xxs+(lsp+rs)*cosa;yys:=yys-(lsp+rs)*sina;end;
+    laRight  : xxs:=xxs-ts.cx-lsp-rs;
+    laCenter : xxs:=xxs-(ts.cx div 2);
   end;
   case Yalign of
-   laTop    : yys:=yys-rs;
-   laBottom : yys:=yys-ts.cy+rs;
-   laCenter : yys:=yys-(ts.cy div 2);
+    laTop    : yys:=yys-ts.cy-rs;
+    laBottom : yys:=yys+rs;
+    laCenter : begin yys:=yys-(ts.cy div 2)*cosa;xxs:=xxs-(ts.cy div 2)*sina;end;
   end;
   end;
   if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),ColorToBGRA(cfgplot.backgroundcolor),dmSet);
-  BGRATextOut(xxs,yys,txt,ColorToBGRA(lcolor),cbmp);
+  BGRATextOut(xxs,yys,orient,txt,ColorToBGRA(lcolor),cbmp);
 end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
@@ -2013,18 +2021,18 @@ end else if cnv<>nil then with cnv do begin
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
- // Font.Orientation:=900;
+  Font.Orientation:=round(10*orient);
   ts:=TextExtent(txt);
   if r>=0 then begin
   case Xalign of
-   laLeft   : xx:=xx+labspacing*cfgchart.drawpen+r;
-   laRight  : xx:=xx-ts.cx-labspacing*cfgchart.drawpen-r;
+   laLeft   : begin xx:=xx+round((lsp+rs)*cosa);yy:=yy-round((lsp+rs)*sina);end;
+   laRight  : xx:=xx-ts.cx-lsp-r;
    laCenter : xx:=xx-(ts.cx div 2);
   end;
   case Yalign of
-   laTop    : yy:=yy-r;
-   laBottom : yy:=yy-ts.cy+r;
-   laCenter : yy:=yy-(ts.cy div 2);
+   laTop    : yy:=yy-ts.cy-r;
+   laBottom : yy:=yy+r;
+   laCenter : begin yy:=yy-round((ts.cy div 2)*cosa);xx:=xx-round((ts.cy div 2)*sina);end;
   end;
   end;
   if cnv is TPostscriptCanvas then begin
@@ -2040,45 +2048,53 @@ if i>maxlabels then begin
   result:=-1;
   exit;
 end;
-with labels[i] do begin
-//  Color:=cfgplot.Color[0];
-//  Transparent:=true;
-  color:=clNone;
-  Font.Name:=cfgplot.FontName[fontnum];
-  Font.Color:=cfgplot.LabelColor[labelnum];
-  if WhiteBg and (Font.Color=clWhite) then Font.Color:=clBlack;
-  Font.Size:=cfgplot.LabelSize[labelnum];
-  if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
-  if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+with ilabels[i] do begin
+  tbmp:=TBGRABitmap.Create;
+  tbmp.FontName:=cfgplot.FontName[fontnum];
+  lcolor:=cfgplot.LabelColor[labelnum];
+  if WhiteBg then lcolor:=cfgplot.Color[11];
+  if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
+  if cfgplot.FontBold[fontnum] then tbmp.FontStyle:=[fsBold] else tbmp.FontStyle:=[];
+  if cfgplot.FontItalic[fontnum] then tbmp.FontStyle:=tbmp.FontStyle+[fsItalic];
+  tbmp.FontHeight:=trunc(cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
+  ts:=tbmp.TextSize(txt);
+  if orient=0 then begin
+    tbmp.SetSize(ts.cx,ts.cy);
+    tbmp.FillRect(0,0,tbmp.Width,tbmp.Height,ColorToBGRA(cfgplot.bgcolor),dmSet);
+    BGRATextOut(0,0,orient,txt,ColorToBGRA(lcolor),tbmp);
+    mp:=rect(0,0,ts.cx,ts.cy);
+    offx:= 0;
+    offy:= 0;
+  end else begin
+    tbmp.SetSize(1000,1000);
+    tbmp.FillRect(0,0,tbmp.Width,tbmp.Height,ColorToBGRA(cfgplot.bgcolor),dmSet);
+    mp:=BGRATextOut(500,500,orient,txt,ColorToBGRA(lcolor),tbmp,true);
+    offx:= -500-mp.Left;
+    offy:= -500-mp.Top;
+  end;
+  width:=mp.Right;
+  height:=mp.Bottom;
+  Picture.Bitmap.Width:=Width;
+  Picture.Bitmap.Height:=Height;
+  tbmp.Draw(Picture.Bitmap.Canvas,offx,offy,true);
+  if WhiteBg then SetTransparencyFromLuminance(Picture.Bitmap,3)
+             else SetTransparencyFromLuminance(Picture.Bitmap,2);
   caption:=txt;
- {
-  visible:=true;
-  AutoSize:=true;
-  Font.Orientation:=0;
-  caption:=txt;
-  AdjustSize;
-  h:=height;
-  w:=width;
-  AutoSize:=false;
-  Font.Orientation:=600;
-  width:=h;
-  height:=w;
- }
-  //tag:=id;
+  tbmp.free;
   if r>=0 then begin
     case Xalign of
-     laLeft   : xx:=xx+labspacing+r;
-     laRight  : xx:=xx-width-labspacing-r;
-     laCenter : xx:=xx-(width div 2);
+     laLeft   : begin xxs:=xxs+(lsp+rs)*cosa;yys:=yys-(lsp+rs)*sina;end;
+     laRight  : xxs:=xxs-ts.cx-lsp-rs;
+     laCenter : xxs:=xxs-(ts.cx div 2);
     end;
     case Yalign of
-     //laTop
-     laBottom : yy:=yy-height;
-     laCenter : yy:=yy-(height div 2);
+     laTop    : yys:=yys-ts.cy-rs;
+     laBottom : yys:=yys+rs;
+     laCenter : begin yys:=yys-(ts.cy div 2)*cosa;xxs:=xxs-(ts.cy div 2)*sina;end;
     end;
   end;
-  left:=xx;
-  top:=yy;
+  left:=round(xxs)+mp.Left;
+  top:=round(yys)+mp.Top;
   visible:=true;
 end;
 end;
@@ -2086,7 +2102,7 @@ end;
 result:=0;
 end;
 
-procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5);
+procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
 var ts:TSize;
     arect: TRect;
     ATextStyle:TTextStyle;
@@ -2118,7 +2134,7 @@ if cfgplot.UseBMP then begin;
   end;
   arect:=Bounds(xx,yy,ts.cx,ts.cy+2);
   if opaque then cbmp.FillRect(xx,yy,xx+ts.cx,yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
-  BGRATextOut(xx,yy,txt,ColorToBGRA(lcolor),cbmp);
+  BGRATextOut(xx,yy,orient,txt,ColorToBGRA(lcolor),cbmp);
 end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
@@ -2161,7 +2177,7 @@ end;
 end;
 end;
 
-procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true);
+procedure TSplot.PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
 var ls,p:Integer;
     buf: string;
     arect: TRect;
@@ -2196,7 +2212,7 @@ if cfgplot.UseBMP then begin;
      ts:=cbmp.TextSize(buf);
      arect:=Bounds(xx,yy,round(1.2*ts.cx),ts.cy+2);
      if opaque then cbmp.FillRect(xx,yy,xx+round(1.2*ts.cx),yy+ts.cy+2,ColorToBGRA(cfgplot.backgroundcolor),dmSet);
-     BGRATextOut(xx,yy,buf,ColorToBGRA(lcolor),cbmp);
+     BGRATextOut(xx,yy,orient,buf,ColorToBGRA(lcolor),cbmp);
      yy:=yy+ls;
    until p=0;
 end else if cnv<>nil then with cnv do begin
@@ -2306,9 +2322,9 @@ end;
 
 procedure TSplot.labelMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
-  if (sender is Tlabel)and(editlabel<0) then begin
+  if (sender is TImage)and(editlabel<0) then begin
     if button=mbLeft then begin
-      if assigned(FLabelClick) then FLabelClick(Tlabel(sender).tag);
+      if assigned(FLabelClick) then FLabelClick(TImage(sender).tag);
     end;
   end;
 end;
@@ -2318,14 +2334,14 @@ var pt:Tpoint;
     lb: TComponent;
 begin
 lb:=editlabelmenu.PopupComponent;
-if (lb is Tlabel) and (editlabel<0) then begin
+if (lb is TImage) and (editlabel<0) then begin
  pt.x:=mouse.cursorpos.x;
  pt.y:=mouse.cursorpos.y;
- selectedlabel:=Tlabel(lb).tag;
+ selectedlabel:=TImage(lb).tag;
  editlabelx:=pt.x;
  editlabely:=pt.y;
  editlabelmod:=false;
- editlabelmenu.Items[0].Caption:=labels[selectedlabel].Caption;
+ editlabelmenu.Items[0].Caption:=ilabels[selectedlabel].Caption;
 // editlabelmenu.popup(pt.x,pt.y);
 end;
 end;
@@ -2333,10 +2349,10 @@ end;
 procedure TSplot.labelMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
 var pt:Tpoint;
 begin
-if editlabel>0 then with Sender as Tlabel do begin
+if editlabel>0 then with Sender as TImage do begin
   pt:=clienttoscreen(point(x,y));
-  labels[editlabel].left:=labels[editlabel].Left+pt.X-editlabelX;
-  labels[editlabel].Top:=labels[editlabel].Top+pt.Y-editlabelY;
+  ilabels[editlabel].left:=ilabels[editlabel].Left+pt.X-editlabelX;
+  ilabels[editlabel].Top:=ilabels[editlabel].Top+pt.Y-editlabelY;
   editlabelx:=pt.x;
   editlabely:=pt.y;
   editlabelmod:=true;
@@ -2347,9 +2363,9 @@ procedure TSplot.labelMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShi
 begin
 if editlabel>0 then begin
 //  labels[editlabel].Transparent:=true;
-  labels[editlabel].color:=clNone;
-  labels[editlabel].Cursor:=crDefault;
-  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,labels[editlabel].left,labels[editlabel].top,FlabelRaDec);
+  ilabels[editlabel].color:=clNone;
+  ilabels[editlabel].Cursor:=crDefault;
+  if editlabelmod and assigned(FEditLabelPos) then FEditLabelPos(editlabel,ilabels[editlabel].left,ilabels[editlabel].top,FlabelRaDec);
 end;
 editlabel:=-1;
 end;
@@ -2358,8 +2374,8 @@ procedure TSplot.labelMouseLeave(Sender: TObject);
 begin
 if editlabel>0 then begin
  // force the label to the cursor while editing
- labels[editlabel].left:=labels[editlabel].Left+mouse.CursorPos.x-editlabelX;
- labels[editlabel].Top:=labels[editlabel].Top+mouse.CursorPos.y-editlabelY;
+ ilabels[editlabel].left:=ilabels[editlabel].Left+mouse.CursorPos.x-editlabelX;
+ ilabels[editlabel].Top:=ilabels[editlabel].Top+mouse.CursorPos.y-editlabelY;
  editlabelx:=mouse.CursorPos.x;
  editlabely:=mouse.CursorPos.y;
 end;
@@ -2371,8 +2387,8 @@ FlabelRaDec:=false;
 mouse.CursorPos:=point(editlabelx,editlabely);
 editlabel:=selectedlabel;
 //labels[editlabel].Transparent:=false;
-labels[editlabel].Color:=cfgplot.Color[0];
-labels[editlabel].Cursor:=crSizeAll;
+ilabels[editlabel].Color:=cfgplot.Color[0];
+ilabels[editlabel].Cursor:=crSizeAll;
 end;
 
 Procedure TSplot.MovelabelRaDec(Sender: TObject);
@@ -2381,8 +2397,8 @@ FlabelRaDec:=true;
 mouse.CursorPos:=point(editlabelx,editlabely);
 editlabel:=selectedlabel;
 //labels[editlabel].Transparent:=false;
-labels[editlabel].Color:=cfgplot.Color[0];
-labels[editlabel].Cursor:=crSizeAll;
+ilabels[editlabel].Color:=cfgplot.Color[0];
+ilabels[editlabel].Cursor:=crSizeAll;
 end;
 
 Procedure TSplot.EditlabelTxt(Sender: TObject);
@@ -3446,28 +3462,67 @@ end;
 end;
 
 /// BGRAbitmap interface
-procedure TSplot.BGRATextOut(x, y: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap);
+function TSplot.BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
 var
   size:  TSize;
   temp:  TBGRABitmap;
-  aacx: integer;
+  aacx,aacy,orient: integer;
+  TopRight,BottomRight,BottomLeft: TPointF;
+  cosA,sinA,tx,ty: single;
+  rotBounds: TRect;
+  sizeFactor: integer;
 const aafactor=4;
+procedure rotBoundsAdd(pt: TPointF);
 begin
-if cfgplot.AntiAlias then begin
+  if floor(pt.X) < rotBounds.Left then rotBounds.Left := floor(pt.X/sizeFactor)*sizeFactor;
+  if floor(pt.Y) < rotBounds.Top then rotBounds.Top := floor(pt.Y/sizeFactor)*sizeFactor;
+  if ceil(pt.X) > rotBounds.Right then rotBounds.Right := ceil(pt.X/sizeFactor)*sizeFactor;
+  if ceil(pt.Y) > rotBounds.Bottom then rotBounds.Bottom := ceil(pt.Y/sizeFactor)*sizeFactor;
+end;
+begin
+orient:=round(10*o);
+if cfgplot.AntiAlias or (forceantialias) then begin
   size:=abmp.TextSize(s);
+  sizeFactor:=aafactor;
+  if orient<>0 then begin
+    cosA := cos(orient*Pi/1800);
+    sinA := sin(orient*Pi/1800);
+    TopRight := PointF(cosA*size.cx,-sinA*size.cx);
+    BottomRight := PointF(cosA*size.cx+sinA*size.cy,cosA*size.cy-sinA*size.cx);
+    BottomLeft := PointF(sinA*size.cy,cosA*size.cy);
+    rotBounds := rect(0,0,0,0);
+    rotBoundsAdd(TopRight);
+    rotBoundsAdd(BottomRight);
+    rotBoundsAdd(BottomLeft);
+    inc(rotBounds.Right);
+    inc(rotBounds.Bottom);
+    size.cx:=rotBounds.Right-rotBounds.Left;
+    size.cy:=rotBounds.Bottom-rotBounds.Top;
+  end else begin
+    rotBounds.Left:=0;
+    rotBounds.Top:=0;
+  end;
   aacx:=round(max((aafactor+0.2)*size.cx,aafactor*(size.cx+1)));
-  temp := TBGRABitmap.Create(aacx, aafactor*size.cy);
+  aacy:=aafactor*size.cy;
+  temp := TBGRABitmap.Create(aacx,aacy);
+//  temp.Rectangle(0,0,aacx,aacy,clred);
   temp.FontHeight:=aafactor*abmp.FontHeight;
   temp.FontStyle:=abmp.FontStyle;
   temp.FontName:=abmp.FontName;
-  temp.TextOut(round(aafactor*frac(x)),round(aafactor*frac(y)),s,c);
-  abmp.ResampleFilter:=rfMitchell;
+  temp.FontOrientation := orient;
+  tx:=frac(x)-rotBounds.Left;
+  ty:=frac(y)-rotBounds.Top;
+  temp.TextOut(round(aafactor*tx),round(aafactor*ty),s,c);
+  temp.ResampleFilter:=rfMitchell;
   BGRAReplace(temp,temp.Resample(size.cx,size.cy,rmFineResample));
-  abmp.ResampleFilter:=rfLinear;
-  abmp.PutImage(trunc(x), trunc(y), temp, dmDrawWithTransparency);
+  abmp.PutImage(trunc(x-tx), trunc(y-ty), temp, dmDrawWithTransparency);
   temp.Free;
+  result.Left:=rotBounds.Left;
+  result.Top:=rotBounds.Top;
+  result.Right:=size.cx;
+  result.Bottom:=size.cy;
 end else begin
-  abmp.TextOut(round(x), round(y), s, c);
+  abmp.TextOutAngle(round(x), round(y),orient, s, c, taLeftJustify);
 end;
 end;
 

@@ -612,8 +612,8 @@ type
 
   Tobjlabel = record
     id: integer;
-    x, y, r: single;
-    labelnum, fontnum: byte;
+    x, y, r, orientation: single;
+    labelnum, fontnum,priority: byte;
     align: TLabelAlign;
     txt: string;  //txt:shortstring
   end;
@@ -778,7 +778,7 @@ type
     IndiAutostart, ShowCircle, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
     ShowBackgroundImage, showstars, shownebulae, showline,
-    showlabelall, Editlabels: boolean;
+    showlabelall, Editlabels, OptimizeLabels: boolean;
     BackgroundImage: string;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
@@ -1784,6 +1784,7 @@ begin
   showline := Source.showline;
   showlabelall := Source.showlabelall;
   Editlabels := Source.Editlabels;
+  OptimizeLabels := Source.OptimizeLabels;
   BackgroundImage := Source.BackgroundImage;
   HorizonMax := Source.HorizonMax;
   rap2000 := Source.rap2000;

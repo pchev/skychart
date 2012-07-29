@@ -1365,20 +1365,20 @@ procedure DrawGraph(bm: TBitmap; gr:TStringGrid; iPl: Integer); {of RefreshPlane
 var
   xts, xte: Integer;  {x pos of start and end of rise/set area}
   xmidday: Integer;   { the x poisiton that midday would have if shown}
-  tFst, tLst: Double; {first and last times of Graph Axis}
+//  tFst, tLst: Double; {first and last times of Graph Axis}
   ygtop, ygbtm: Integer; {y pos of top and bottom of graph area}
   i, ix, iy: Integer;
   x, y: double;
   s: String;
   txtsz: TSize;       {Size of a date, eg 99/99}
   ytick: Single;
-  xtick, xcnt, yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
-  xSStrt, xSInc, ySStrt, ySInc: Double;
+  xtick, yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
+  xSStrt, xSInc: Double;
   tstrt, tsc: Double; {to get graph x, sub tstrt, * by tsc}
   LineEnds: TLine; {Start and end point of a line drawn by TimeLine}
 function ScaledTime(grd: TStringGrid; C, R: Integer): Integer;
 var
-  dbgs: String;
+  //dbgs: String;
   evt_time: double;
 begin {ScaledTime of DrawGraph of RefreshPlanetGraph}
   if assigned(grd) and assigned(grd.Objects[c, r]) then begin

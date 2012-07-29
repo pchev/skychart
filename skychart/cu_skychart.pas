@@ -51,7 +51,7 @@ Tskychart = class (TComponent)
     bgw,bgh,bgproj: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
-    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
+    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5);
     procedure EditLabelPos(lnum,x,y: integer;moderadec:boolean);
     procedure EditLabelTxt(lnum,x,y: integer;mode:boolean);
     procedure DefaultLabel(lnum: integer);
@@ -62,6 +62,8 @@ Tskychart = class (TComponent)
     cfgsc : Tconf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
     numlabels: integer;
+    dsopos: array[1..maxlabels] of TPoint;
+    numdsopos: integer;
     bgbmp:Tbitmap;
     procedure ResetAllLabel;
     procedure AddNewLabel(ra,dec: double);
@@ -114,6 +116,7 @@ Tskychart = class (TComponent)
     function DrawHorizon:boolean;
     function DrawEcliptic:boolean;
     function DrawGalactic:boolean;
+    Procedure OptimizeLabels;
     function DrawLabels:boolean;
     Procedure DrawLegend;
     Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
@@ -961,12 +964,12 @@ if Fcatalog.OpenStar then
        if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
           y1:=0;
        end;
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al)
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al)
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al,0,4)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al,0,2)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
-          SetLabel(lid,xx,yy,0,7,1,gk,al);
-        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al);
+          SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al,0,4);
     end;
  end;
 end;
@@ -1009,8 +1012,8 @@ if Fcatalog.OpenVarStar then
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
     if rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft)
-       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id,laTopLeft);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
+       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id,laTopLeft,0,2);
  end;
 end;
 result:=true;
@@ -1058,8 +1061,8 @@ if Fcatalog.OpenDblStar then
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
     if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1),laTopRight)
-       else SetLabel(lid,xx,yy,0,2,3,rec.double.id,laTopRight);
+    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
+       else SetLabel(lid,xx,yy,0,2,3,rec.double.id,laTopRight,0,2);
  end;
 end;
 result:=true;
@@ -1086,7 +1089,7 @@ function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
   x1,y1,x2,y2,rot,ra,de: Double;
   x,y,xx,yy,sz:single;
-  lid, save_nebplot: integer;
+  lid, save_nebplot,lp: integer;
   imgfile,CurrentCat,lis: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
@@ -1164,6 +1167,10 @@ var rec:GcatRec;
              ((yy+sz)>cfgsc.Ymin) and
              ((yy-sz)<cfgsc.Ymax) then
             begin
+              if numdsopos<maxlabels then begin
+                inc(numdsopos);
+                dsopos[numdsopos]:=Point(round(xx),round(yy));
+              end;
               if cfgsc.ShowImages and (rec.options.ShortName<>CurrentCat) then begin
                  CurrentCat:=rec.options.ShortName;
                  imageok:=FFits.ImagesForCatalog(CurrentCat);
@@ -1209,7 +1216,10 @@ var rec:GcatRec;
                        if alsac>=laBottomRight then alsac:=laTopLeft
                           else inc(alsac);
                    end else al:=laRight;
-                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al);
+                 if rec.neb.messierobject then lp:=2
+                   else if (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]*2) then lp:=3
+                   else lp:=4;
+                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al,0,lp);
               end;
             end;
         end;
@@ -1431,8 +1441,8 @@ function Tskychart.DrawPlanet :boolean;
 var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
   ppa,poleincl,sunincl,w1,w2,w3 : double;
-  xx,yy:single;
-  i,j,n,ipla,sunsize,lid: integer;
+  xx,yy,lori:single;
+  i,j,jj,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
   ltxt,lis: string;
 begin
@@ -1471,7 +1481,10 @@ for j:=0 to cfgsc.SimNb-1 do begin
     rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
     if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
     if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(ipla<=11) then begin
-      if cfgsc.SimNb=1 then ltxt:=pla[ipla]
+      if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
+        ltxt:=pla[ipla];
+        lori:=0;
+      end
       else begin
        if cfgsc.SimNameLabel then
           ltxt:=pla[ipla]+blank
@@ -1482,10 +1495,13 @@ for j:=0 to cfgsc.SimNb-1 do begin
        if cfgsc.SimMagLabel then
           if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
              else ltxt:=ltxt+formatfloat(f1,magn);
+       if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
+       projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],x2,y2,true,cfgsc) ;
+       lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
       end;
       lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
       lid:=rshash(lis,$7FFFFFFF);
-      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft);
+      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft,lori,1);
     end;
     case ipla of
       4 :  begin
@@ -1559,7 +1575,7 @@ Fplot.PlotSatel(xx,yy,ipla,pixscale,ma,diam,hidesat,showhide);
 if not(hidesat xor showhide)and(j=0) then begin
   lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
   lid:=rshash(lis,$7FFFFFFF);
-  SetLabel(1000000+ipla,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
+  SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,pla[ipla],laLeft);
 end;
 end;
 
@@ -1598,7 +1614,7 @@ if VerboseMsg then
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,magn);
           end;
-          SetLabel(lid,xx,yy,0,2,5,ltxt,laLeft);
+          SetLabel(lid,xx,yy,0,2,5,ltxt,laLeft,0,4);
         end;
       end;
     end;
@@ -1642,7 +1658,7 @@ if cfgsc.ShowCometValid then begin
            if cfgsc.SimMagLabel then
               ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
           end;
-          SetLabel(lid,xx,yy,sz,2,5,ltxt,laLeft);
+          SetLabel(lid,xx,yy,sz,2,5,ltxt,laLeft,0,4);
         end;
         if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
            WindowXY(x1,y1,cxx,cyy,cfgsc)
@@ -1716,7 +1732,7 @@ if cfgsc.ShowArtSat and Fileexists(slash(SatDir)+'satdetail.txt') then begin
        if showlabel then begin
          lis:=nom+FormatFloat(f6,ar)+FormatFloat(f6,de);
          lid:=rshash(lis,$7FFFFFFF);
-         SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
+         SetLabel(lid,xx,yy,0,2,1,nom,laLeft,0,4);
        end;
     end;
     xp:=xx;
@@ -1734,7 +1750,7 @@ if cfgsc.IridiumMA<90 then begin
      Fplot.PlotStar(xx,yy,cfgsc.IridiumMA,0);
      lis:=nom+FormatFloat(f6,cfgsc.IridiumRA)+FormatFloat(f6,cfgsc.IridiumDE);
      lid:=rshash(lis,$7FFFFFFF);
-     SetLabel(lid,xx,yy,0,2,1,nom,laLeft);
+     SetLabel(lid,xx,yy,0,2,1,nom,laLeft,0,4);
   end;
 end;
 end;
@@ -3547,6 +3563,7 @@ begin
   if VerboseMsg then
    WriteTrace('SkyChart '+cfgsc.chartname+': Init labels');
   numlabels:=0;
+  numdsopos:=0;
   for i:=0 to Fcatalog.cfgshr.ConstelNum-1 do begin
       ra:=Fcatalog.cfgshr.ConstelPos[i].ra;
       de:=Fcatalog.cfgshr.ConstelPos[i].de;
@@ -3555,21 +3572,31 @@ begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       lis:=Fcatalog.cfgshr.ConstelName[i,2]+FormatFloat(f6,ra)+FormatFloat(f6,de);
       lid:=rshash(lis,$7FFFFFFF);
-      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter)
-                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter);
+      if cfgsc.ConstFullLabel then SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,2],laCenter,0,0)
+                              else SetLabel(lid,xx,yy,0,2,6,Fcatalog.cfgshr.ConstelName[i,1],laCenter,0,0);
   end;
   constlabelindex:=numlabels;
 end;
 
-procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft);
+procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5);
 begin
+{ Label priority is used during placement optimization.
+  0 : Constellation
+  1 : Planets
+  2 : Main stars, variable and double stars, Messier objects
+  3 : Other DSO
+  4 : Fainter DSO, fainter stars , asteroid, comets, art. sat.
+  5 : Other
+}
 if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=cfgsc.xmin)and(xx<=cfgsc.xmax)and(yy>=cfgsc.ymin)and(yy<=cfgsc.ymax) then begin
   inc(numlabels);
   try
   labels[numlabels].id:=id;
+  labels[numlabels].priority:=priority;
   labels[numlabels].x:=xx;
   labels[numlabels].y:=yy;
   labels[numlabels].r:=radius;
+  labels[numlabels].orientation:=orient;
   labels[numlabels].align:=align;
   labels[numlabels].labelnum:=labelnum;
   labels[numlabels].fontnum:=fontnum;
@@ -3824,9 +3851,167 @@ y:=round(labels[lnum].y);
 if assigned(FShowDetailXY) then FShowDetailXY(x,y);
 end;
 
+procedure Tskychart.OptimizeLabels;
+var labbox: array [0..maxlabels,1..8] of TRect;
+    obmp: TBitmap;
+    ts: TSize;
+    i,j,k,l,lsp: integer;
+    x,y,r,dist: single;
+    collision: boolean;
+const safedistance=200.0;
+      al:array[1..4]of TLabelAlign=(laTopLeft, laBottomLeft, laTopRight, laBottomRight);
+function SorCompare(l1,l2:Tobjlabel):integer;
+begin
+ if l1.priority<l2.priority then result:=-1
+ else if l1.priority=l2.priority then result:=0
+ else if l1.priority>l2.priority then result:=1;
+end;
+procedure SortLabels;
+var
+  Left, Right, SubArray, SubLeft, SubRight: integer;
+  Temp, Pivot: Tobjlabel;
+  Stack: array[1..32]of record First, Last: integer;
+  end;
+begin
+  SubArray:=1;
+  Stack[SubArray].First:=1;
+  Stack[SubArray].Last:=numlabels;
+  repeat
+    Left:=Stack[SubArray].First;
+    Right:=Stack[SubArray].Last;
+    Dec(SubArray);
+    repeat
+      SubLeft:=Left;
+      SubRight:=Right;
+      Pivot:=labels[(Left+Right)shr 1];
+      repeat
+        while SorCompare(labels[SubLeft], Pivot)<0 do Inc(SubLeft);
+        while SorCompare(labels[SubRight], Pivot)>0 do Dec(SubRight);
+        IF SubLeft<=SubRight then
+        begin
+          Temp:=labels[SubLeft];
+          labels[SubLeft]:=labels[SubRight];
+          labels[SubRight]:=Temp;
+          Inc(SubLeft);
+          Dec(SubRight);
+        end;
+      until SubLeft>SubRight;
+      IF SubLeft<Right then
+      begin
+        Inc(SubArray);
+        Stack[SubArray].First:=SubLeft;
+        Stack[SubArray].Last:=Right;
+      end;
+      Right:=SubRight;
+    until Left>=Right;
+  until SubArray=0;
+end;
+function rectangleintersect(r1,r2: TRect):boolean;
+begin
+// find more performant solution ?
+  result:= (
+  (((r1.Left>=r2.Left) and (r1.Left<=r2.Right)) or
+  ((r1.Right>=r2.Left) and (r1.Right<=r2.Right)))and
+  (((r1.Top>=r2.Top) and (r1.Top<=r2.Bottom)) or
+  ((r1.Bottom>=r2.Top) and (r1.Bottom<=r2.Bottom)))
+  ) or (
+  (((r2.Left>=r1.Left) and (r2.Left<=r1.Right)) or
+  ((r2.Right>=r1.Left) and (r2.Right<=r1.Right)))and
+  (((r2.Top>=r1.Top) and (r2.Top<=r1.Bottom)) or
+  ((r2.Bottom>=r1.Top) and (r2.Bottom<=r1.Bottom)))
+  );
+end;
+function pointinrectangle(p:Tpoint; r: trect):boolean;
+begin
+result:=((p.X>=r.Left)and(p.X<=r.Right))and((p.Y>=r.Top)and(p.Y<=r.Bottom));
+end;
+begin
+if VerboseMsg then
+   WriteTrace('SkyChart '+cfgsc.chartname+': Optimize labels');
+obmp:=TBitmap.Create;
+lsp:=labspacing*Fplot.cfgchart.drawpen;
+// sort labels by priority
+SortLabels;
+// compute text box
+for i:=1 to numlabels do begin
+  obmp.canvas.font.Name:=FPlot.cfgplot.FontName[labels[i].fontnum];
+  if FPlot.cfgplot.FontBold[labels[i].fontnum] then obmp.Canvas.Font.Style:=[fsBold] else obmp.Canvas.Font.Style:=[];
+  if FPlot.cfgplot.FontItalic[labels[i].fontnum] then obmp.Canvas.Font.Style:=obmp.Canvas.Font.Style+[fsItalic];
+  if (FPlot.cfgchart.onprinter or (not cfgsc.Editlabels)) then begin
+    if FPlot.cfgplot.UseBMP then
+     obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72)
+    else
+     obmp.canvas.Font.Size:=Fplot.cfgchart.drawpen*FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale;
+  end
+  else
+     obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72);
+  ts:=obmp.Canvas.TextExtent(labels[i].txt);
+  labels[i].align:=al[1];  // reset default position
+  labels[i].r:=labels[i].r/1.414; // label always in corner
+  r:=labels[i].r;
+  if r=0 then r:=lsp;
+  x:=labels[i].x;
+  y:=labels[i].y;
+    // TopLeft
+  labbox[i,1].Top:=round(y-ts.cy-r)-1;
+  labbox[i,1].Bottom:=round(y-r)+1;
+  labbox[i,1].Left:=round(x+r)-1;
+  labbox[i,1].Right:=round(x+ts.cx+r)+1;
+  // BottomLeft
+  labbox[i,2].Top:=round(y+r)-1;
+  labbox[i,2].Bottom:=round(y+ts.cy+r)+1;
+  labbox[i,2].Left:=round(x+r)-1;
+  labbox[i,2].Right:=round(x+ts.cx+r)+1;
+  // TopRight
+  labbox[i,3].Top:=round(y-ts.cy-r)-1;
+  labbox[i,3].Bottom:=round(y-r)+1;
+  labbox[i,3].Left:=round(x-ts.cx-r)-1;
+  labbox[i,3].Right:=round(x-r)+1;
+  // BottomRight
+  labbox[i,4].Top:=round(y+r)-1;
+  labbox[i,4].Bottom:=round(y+ts.cy+r)+1;
+  labbox[i,4].Left:=round(x-ts.cx-r)-1;
+  labbox[i,4].Right:=round(x-r)+1;
+end;
+obmp.Free;
+// label position and exclusion
+for i:=1 to numlabels do begin
+  for j:=1 to 4 do begin
+   collision:=false;
+   for k:=1 to numlabels do begin
+     if k=i then continue;
+     if labels[i].priority<labels[k].priority then continue;
+     dist:=sqrt(sqr(labels[i].x-labels[k].x)+sqr(labels[i].y-labels[k].y));
+     if dist<safedistance then begin
+       for l:=1 to 4 do begin
+         if labels[k].align=al[l] then begin
+           collision:=rectangleintersect(labbox[i,j],labbox[k,l]);
+           if collision then break;
+         end;
+       end;
+     end;
+     if collision then break;
+   end;
+   if (not collision) and (labels[i].priority>2) then for k:=1 to numdsopos do begin
+     collision:=pointinrectangle(dsopos[k],labbox[i,j]);
+     if collision then break;
+   end;
+   if not collision then begin
+     labels[i].align:=al[j];
+     break;
+   end;
+  end;
+  if collision then begin
+    labels[i].x:=-1000;
+  end;
+end;
+if VerboseMsg then
+   WriteTrace('SkyChart '+cfgsc.chartname+': Labels optimized');
+end;
+
 function Tskychart.DrawLabels:boolean;
 var i,j: integer;
-    x,y,r,x0,y0: single;
+    x,y,r,x0,y0,orient: single;
     x1,y1: double;
     labelnum,fontnum:byte;
     txt:string;
@@ -3835,9 +4020,10 @@ var i,j: integer;
     ts:TSize;
 begin
 if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
+   WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
 Fplot.InitLabel;
 DrawCustomlabel;
+if cfgsc.OptimizeLabels then OptimizeLabels;
 for i:=1 to numlabels do begin
   skiplabel:=false;
   x:=labels[i].x;
@@ -3875,6 +4061,7 @@ for i:=1 to numlabels do begin
   txt:=labels[i].txt;
   labelnum:=labels[i].labelnum;
   fontnum:=labels[i].fontnum;
+  orient:=labels[i].orientation;
   for j:=1 to cfgsc.nummodlabels do
      if labels[i].id=cfgsc.modlabels[j].id then begin
         skiplabel:=cfgsc.modlabels[j].hiden;
@@ -3893,7 +4080,7 @@ for i:=1 to numlabels do begin
         break;
      end;
   if not skiplabel then begin
-      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
       if cfgsc.MovedLabelLine and (i>constlabelindex)and(sqrt((x-x0)*(x-x0)+(y-y0)*(y-y0))>30) then begin
         if Fplot.cfgplot.UseBMP then ts:=Fplot.cbmp.TextSize(txt)
            else ts:=Fplot.cnv.TextExtent(txt);
