@@ -1372,6 +1372,7 @@ resourcestring
   rsShowOnlyText = 'Show only text in detail window';
   rsButNeverFain = 'But never fainter than magnitude';
   rsShowNearEart = 'Show near Earth asteroids independently of the magnitude';
+  rsAutomaticall2 = 'Automatically optimize the labels placement';
 
 implementation
 

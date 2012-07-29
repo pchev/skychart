@@ -54,6 +54,7 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
+    OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
     ShowLineShape: TShape;
@@ -391,6 +392,7 @@ type
     procedure LabelLineClick(Sender: TObject);
     procedure lstDSOCSchemeChange(Sender: TObject);
     procedure OnlyMeridianClick(Sender: TObject);
+    procedure OptLabelsClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
     procedure ShowLinesClick(Sender: TObject);
     procedure ShowLineShapeMouseUp(Sender: TObject; Button: TMouseButton;
@@ -671,6 +673,7 @@ GalEqStyle.items[4]:=rsDashDotDot1;
 Page6.caption:=rsLabels;
 DrawAllStarLabel.Caption:=rsDisplayLabel;
 LabelLine.Caption:=rsShowLineFrom;
+OptLabels.Caption:=rsAutomaticall2;
 MagLabel.caption:=rsStarLabel;
 MagLabel.Items[0]:=rsName;
 MagLabel.Items[1]:=rsCommonName;
@@ -1331,6 +1334,7 @@ begin
  ShowTitle.Checked:=cmain.ShowTitlePos;
  DrawAllStarLabel.Checked:=csc.DrawAllStarLabel;
  LabelLine.Checked := csc.MovedLabelLine;
+ OptLabels.Checked:= csc.OptimizeLabels;
  CheckBox5.Checked := csc.ShowLegend;
 end;
 
@@ -1757,6 +1761,11 @@ end;
 procedure Tf_config_display.OnlyMeridianClick(Sender: TObject);
 begin
   csc.ShowOnlyMeridian:=OnlyMeridian.Checked;
+end;
+
+procedure Tf_config_display.OptLabelsClick(Sender: TObject);
+begin
+   csc.OptimizeLabels := OptLabels.Checked;
 end;
 
 procedure Tf_config_display.EqGridClick(Sender: TObject);

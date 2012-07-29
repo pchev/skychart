@@ -2032,7 +2032,7 @@ end;
 procedure Tf_catgen.Button1Click(Sender: TObject);
 var ini : Tinifile;
     i : integer;
-    fn: string;
+    fn,prjdir: string;
 begin
 chdir(appdir);
 savedialog1.filterindex:=2;
@@ -2043,6 +2043,7 @@ if savedialog1.execute then begin
     deletefile(fn+'.old');
     renamefile(fn,fn+'.old');
   end;
+  prjdir:=ExtractFilePath(fn);
   ini:=Tinifile.Create(fn);
   ini.writeInteger('Page1','binarycat',binarycat.itemindex);
   ini.writeInteger('Page1','type',RadioGroup1.itemindex);
@@ -2050,7 +2051,7 @@ if savedialog1.execute then begin
   ini.writeString('Page1','longname',edit5.text);
   ini.writeInteger('Page1','numfiles',ListBox1.Items.count);
   for i:=0 to ListBox1.Items.count-1 do
-     ini.writeString('Page1','inputfiles'+inttostr(i),ListBox1.Items[i]);
+     ini.writeString('Page1','inputfiles'+inttostr(i),ExtractRelativepath(prjdir,ListBox1.Items[i]));
   ini.writeInteger('Page2','ratype',RadioGroup2.itemindex);
   ini.writeInteger('Page2','dectype',RadioGroup3.itemindex);
   ini.writeFloat('Page2','equinox',FloatEdit1.value);
@@ -2078,7 +2079,7 @@ if savedialog1.execute then begin
   for i:=1 to l_sup do
       ini.writeInteger('Page3','altname'+inttostr(i),altname[i]);
   ini.writeInteger('Page4','numfile',RadioGroup4.itemindex);
-  ini.writeString('Page4','ouputdir',DirectoryEdit1.text);
+  ini.writeString('Page4','ouputdir',ExtractRelativepath(prjdir,slash(DirectoryEdit1.text)));
   ini.writeBool('Page4','index',checkbox3.checked);
   ini.writeBool('Page4','altindex',checkbox4.checked);
   ini.writeBool('Page4','prefalt',checkbox5.checked);
@@ -2110,7 +2111,7 @@ end;
 procedure Tf_catgen.Button2Click(Sender: TObject);
 var ini : Tinifile;
     i,n : integer;
-    buf : string;
+    buf,fn,prjdir: string;
 begin
 chdir(appdir);
 opendialog1.filterindex:=2;
@@ -2118,19 +2119,24 @@ opendialog1.DefaultExt:='.prj';
 OpenDialog1.Options:=OpenDialog1.Options-[ofAllowMultiSelect];
 opendialog1.filename:='';
 if opendialog1.execute then begin
-  ini:=Tinifile.Create(SafeUTF8ToSys(opendialog1.FileName));
+  fn:=SafeUTF8ToSys(OpenDialog1.filename);
+  prjdir:=ExtractFilePath(fn);
+  ini:=Tinifile.Create(fn);
   binarycat.itemindex:=ini.ReadInteger('Page1','binarycat',0);
   RadioGroup1.itemindex:=ini.ReadInteger('Page1','type',RadioGroup1.itemindex);
   edit4.text:=ini.readString('Page1','shortname',edit4.text);
   edit5.text:=ini.readString('Page1','longname',edit5.text);
   n:=ini.readInteger('Page1','numfiles',0);
   ListBox1.Items.clear;
+  chdir(prjdir);
   for i:=0 to n-1 do begin
       buf:=ini.readString('Page1','inputfiles'+inttostr(i),'');
       if trim(buf)>'' then begin
+         buf:=ExpandFileName(buf);
          ListBox1.Items.Add(buf);
       end;
   end;
+  chdir(appdir);
   RadioGroup2.itemindex:=ini.readInteger('Page2','ratype',RadioGroup2.itemindex);
   RadioGroup3.itemindex:=ini.readInteger('Page2','dectype',RadioGroup3.itemindex);
   FloatEdit1.value:=ini.readFloat('Page2','equinox',FloatEdit1.value);
@@ -2159,7 +2165,11 @@ if opendialog1.execute then begin
       altname[i]:=ini.readInteger('Page3','altname'+inttostr(i),altname[i]);
 
   RadioGroup4.itemindex:=ini.readInteger('Page4','numfile',RadioGroup4.itemindex);
-  DirectoryEdit1.text:=ini.readString('Page4','ouputdir',DirectoryEdit1.text);
+  buf:=ini.readString('Page4','ouputdir','');
+  chdir(prjdir);
+  buf:=ExpandFileName(buf);
+  chdir(appdir);
+  DirectoryEdit1.text:=buf;
   checkbox3.checked:=ini.readBool('Page4','index',checkbox3.checked);
   checkbox4.checked:=ini.readBool('Page4','altindex',checkbox4.checked);
   checkbox5.checked:=ini.readBool('Page4','prefalt',checkbox5.checked);
