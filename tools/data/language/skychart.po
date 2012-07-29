@@ -5378,3 +5378,7 @@ msgstr ""
 msgid "Show near Earth asteroids independently of the magnitude"
 msgstr ""
 
+#: u_translation:rsautomaticall2
+msgid "Automatically optimize the labels placement"
+msgstr ""
+

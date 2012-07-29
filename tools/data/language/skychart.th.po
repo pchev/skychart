@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-06-02 08:30+0000\n"
-"PO-Revision-Date: 2012-04-30 01:55+0000\n"
+"PO-Revision-Date: 2012-07-09 01:32+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-06-30 09:13+0000\n"
-"X-Generator: Launchpad (build 15520)\n"
+"X-Launchpad-Export-Date: 2012-07-29 15:16+0000\n"
+"X-Generator: Launchpad (build 15694)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -341,6 +341,10 @@ msgstr "อัตโนมัติ"
 msgid "Automatically start a local server if not already running"
 msgstr "เริ่มเซิร์ฟเวอร์ท้องถิ่นโดยอัตโนมัติ หากยังไม่ทำงาน"
 
+#: u_translation.rsautomaticall2
+msgid "Automatically optimize the labels placement"
+msgstr ""
+
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
 msgstr "รีเฟรชอัตโนมัติ"
@@ -499,7 +503,7 @@ msgstr "สร้างแค็ตตาล็อก"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "แต่ไม่สว่างน้อยกว่าโชติมาตร"
 
 #: u_translation.rsby
 msgid "by"
@@ -4419,7 +4423,7 @@ msgstr "แสดงทางช้างเผือก"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "แสดงดาวเคราะห์น้อยใกล้โลกโดยไม่คำนึงถึงโชติมาตร"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
