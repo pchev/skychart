@@ -506,7 +506,7 @@ showcom.checked:=csc.ShowComet;
 comsymbol.itemindex:=csc.ComSymbol;
 comlimitmag.value:=csc.CommagMax;
 commagdiff.value:=csc.CommagDiff;
-if csc.ShowComet then UpdComList;
+UpdComList;
 comfile.InitialDir:=slash(MPCDir);
 end;
 
@@ -521,7 +521,7 @@ aststrtdate_y.text:=inttostr(csc.curyear);
 aststrtdate_m.text:=inttostr(csc.curmonth);
 astdeldate_y.text:=inttostr(csc.curyear-1);
 astdeldate_m.text:=inttostr(csc.curmonth);
-if csc.ShowAsteroid then UpdAstList;
+UpdAstList;
 mpcfile.InitialDir:=slash(MPCDir);
 end;
 

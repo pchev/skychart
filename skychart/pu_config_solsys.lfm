@@ -456,7 +456,7 @@ object f_config_solsys: Tf_config_solsys
             NumGlyphs = 1
             OnChange = GRSJDDateChange
             TabOrder = 3
-            Text = '2012.06.02.25'
+            Text = '2012.08.04.25'
             Caption = 'JD calendar'
             JD = 2455767.5
           end
@@ -477,7 +477,7 @@ object f_config_solsys: Tf_config_solsys
         object ComPageControl: TPageControl
           Left = 0
           Height = 429
-          Top = 4
+          Top = 5
           Width = 481
           ActivePage = comsetting
           TabIndex = 0
@@ -692,9 +692,9 @@ object f_config_solsys: Tf_config_solsys
             ImageIndex = 3
             object Label238: TLabel
               Left = 8
-              Height = 14
+              Height = 16
               Top = 151
-              Width = 54
+              Width = 60
               Caption = 'Messages:'
               ParentColor = False
             end
@@ -709,7 +709,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 0
               object comelemlist: TComboBox
                 Left = 16
-                Height = 24
+                Height = 25
                 Top = 6
                 Width = 281
                 AutoCompleteText = [cbactSearchAscending]
@@ -739,9 +739,9 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 1
               object Label239: TLabel
                 Left = 12
-                Height = 14
+                Height = 16
                 Top = 16
-                Width = 173
+                Width = 209
                 Caption = 'Quickly delete all comet related data'
                 ParentColor = False
               end
@@ -1223,7 +1223,7 @@ object f_config_solsys: Tf_config_solsys
               TabOrder = 2
               object TabSheet3: TTabSheet
                 Caption = 'Load MPC format file'
-                ClientHeight = 67
+                ClientHeight = 92
                 ClientWidth = 437
                 object Label1: TLabel
                   Left = 22
@@ -1246,7 +1246,7 @@ object f_config_solsys: Tf_config_solsys
               end
               object TabSheet4: TTabSheet
                 Caption = 'Or use a local file :'
-                ClientHeight = 67
+                ClientHeight = 92
                 ClientWidth = 437
                 object mpcfile: TFileNameEdit
                   Left = 14
