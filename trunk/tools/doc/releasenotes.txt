@@ -1,6 +1,10 @@
 Version 3.7 release Notes
 
 New options:
+  - Rotate the label of the planet simulation perpendicular to the orbit. 
+  - Reduced label overlap (Display/Labels/Automatically optimize the labels placement).
+  - Add the component name to the label of double stars.
+  - Add Portuguese constellation names by Hugo D. Valentim
   - Add Swedish translation by Kåre Lekebjer
   - New option --userdir=
   - Configuration file now use relative path when possible 
@@ -12,6 +16,7 @@ New options:
   - Setup/Display "Show only text in detail window", use if you have problem with the standard detail window.
 
 Bug fixed since version 3.6:
+  - Fix Catgen Text catalog (need to rebuild text catalog done with 3.6)
   - More reactive scrollbar
   - Crash in planet computation.
   - Accept command if running with --daemon option

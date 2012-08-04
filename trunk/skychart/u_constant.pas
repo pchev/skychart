@@ -43,7 +43,7 @@ type
 
 const
   cdcversion = 'Version 3.7-svn';
-  cdcver = '3.7d';
+  cdcver = '3.7e';
   cdccpy = 'Copyright (C) 2002-2012 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@freesurf.ch' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland';

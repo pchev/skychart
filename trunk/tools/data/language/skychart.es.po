@@ -4,15 +4,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-02 08:30+0000\n"
-"PO-Revision-Date: 2012-06-24 15:14+0000\n"
+"POT-Creation-Date: 2012-07-29 15:36+0000\n"
+"PO-Revision-Date: 2012-07-31 22:02+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-07-29 15:16+0000\n"
-"X-Generator: Launchpad (build 15694)\n"
+"X-Launchpad-Export-Date: 2012-08-04 13:29+0000\n"
+"X-Generator: Launchpad (build 15742)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -341,7 +341,7 @@ msgstr "Iniciar automáticamente un servidor local si no está ejecutándose"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Optimizar automáticamente la colocación de las etiquetas"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"

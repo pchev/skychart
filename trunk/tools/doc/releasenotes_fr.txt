@@ -1,6 +1,10 @@
 Version 3.7  Notes de la version
 
 Nouvelles options:
+  - Rotation du label de la simulation des planètes perpendiculaire à l'orbite. 
+  - Diminue le chevauchement des labels (Affichage/Labels/Optimise automatiquement la position des labels).
+  - Ajout du composant au label des étoiles doubles.
+  - Traduction du nom des constellations en Portugais par Hugo D. Valentim.
   - Traduction en Suédois par Kåre Lekebjer
   - Nouvelle option --userdir=
   - Utilisation de chemin relatif dans le fichier de configuration
@@ -12,6 +16,7 @@ Nouvelles options:
   - Configuration/Affichage "Afficher uniquement le texte dans la fenêtre de détail", a utiliser si vous avez un problème avec la fenêtre de détail standard.
 
 Problèmes corrigé depuis la version 3.6:
+  - Corrige les catalogues Text de Catgen (il faut reconstruire les catalogues fait avec la version 3.6)
   - Barre de défilement plus réactive.
   - Plantage du programme lors du calcul des planètes.
   - Accepte des commandes si vous utilisez l'option --daemon
