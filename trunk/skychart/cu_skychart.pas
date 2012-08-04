@@ -3596,6 +3596,7 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   labels[numlabels].x:=xx;
   labels[numlabels].y:=yy;
   labels[numlabels].r:=radius;
+  labels[numlabels].optimized:=false;
   labels[numlabels].orientation:=orient;
   labels[numlabels].align:=align;
   labels[numlabels].labelnum:=labelnum;
@@ -3855,7 +3856,7 @@ procedure Tskychart.OptimizeLabels;
 var labbox: array [0..maxlabels,1..8] of TRect;
     obmp: TBitmap;
     ts: TSize;
-    i,j,k,l,lsp: integer;
+    pass,i,j,k,l,lsp: integer;
     x,y,r,dist: single;
     collision: boolean;
 const safedistance=200.0;
@@ -3975,16 +3976,23 @@ for i:=1 to numlabels do begin
 end;
 obmp.Free;
 // label position and exclusion
+// pass 1 for high priority (>2) labels only
+for pass:=1 to 2 do
 for i:=1 to numlabels do begin
+  if (pass=1) and (labels[i].priority>2) then continue;
+  if labels[i].optimized then continue;
   for j:=1 to 4 do begin
    collision:=false;
    for k:=1 to numlabels do begin
      if k=i then continue;
+     if (pass=1) and (labels[k].priority>2) then continue;
      if labels[i].priority<labels[k].priority then continue;
+     if (pass>1)and(not labels[k].optimized) then continue;
      dist:=sqrt(sqr(labels[i].x-labels[k].x)+sqr(labels[i].y-labels[k].y));
      if dist<safedistance then begin
        for l:=1 to 4 do begin
          if labels[k].align=al[l] then begin
+           // conflict with other label
            collision:=rectangleintersect(labbox[i,j],labbox[k,l]);
            if collision then break;
          end;
@@ -3993,15 +4001,17 @@ for i:=1 to numlabels do begin
      if collision then break;
    end;
    if (not collision) and (labels[i].priority>2) then for k:=1 to numdsopos do begin
+     // conflict with DSO
      collision:=pointinrectangle(dsopos[k],labbox[i,j]);
      if collision then break;
    end;
    if not collision then begin
      labels[i].align:=al[j];
+     labels[i].optimized:=true;
      break;
    end;
   end;
-  if collision then begin
+  if collision and (pass=2) then begin
     labels[i].x:=-1000;
   end;
 end;
