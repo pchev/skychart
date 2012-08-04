@@ -614,6 +614,7 @@ type
     id: integer;
     x, y, r, orientation: single;
     labelnum, fontnum,priority: byte;
+    optimized: boolean;
     align: TLabelAlign;
     txt: string;  //txt:shortstring
   end;
