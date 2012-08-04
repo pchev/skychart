@@ -1998,8 +1998,8 @@ if cfgplot.UseBMP then begin;
   if r>=0 then begin
   case Xalign of
     laLeft   : begin xxs:=xxs+(lsp+rs)*cosa;yys:=yys-(lsp+rs)*sina;end;
-    laRight  : xxs:=xxs-ts.cx-lsp-rs;
-    laCenter : xxs:=xxs-(ts.cx div 2);
+    laRight  : begin xxs:=xxs-(ts.cx+lsp+rs)*cosa;yys:=yys+(ts.cx+lsp+rs)*sina;end;
+    laCenter : begin xxs:=xxs-(ts.cx div 2)*cosa;yys:=yys+(ts.cx div 2)*sina;end;
   end;
   case Yalign of
     laTop    : yys:=yys-ts.cy-rs;
@@ -2026,8 +2026,8 @@ end else if cnv<>nil then with cnv do begin
   if r>=0 then begin
   case Xalign of
    laLeft   : begin xx:=xx+round((lsp+rs)*cosa);yy:=yy-round((lsp+rs)*sina);end;
-   laRight  : xx:=xx-ts.cx-lsp-r;
-   laCenter : xx:=xx-(ts.cx div 2);
+   laRight  : begin xx:=xx-round((ts.cx+lsp+rs)*cosa);yy:=yy+round((ts.cx+lsp+rs)*sina);end;
+   laCenter : begin xx:=xx-round((ts.cx div 2)*cosa);yy:=yy+round((ts.cx div 2)*sina);end;
   end;
   case Yalign of
    laTop    : yy:=yy-ts.cy-r;
@@ -2084,8 +2084,8 @@ with ilabels[i] do begin
   if r>=0 then begin
     case Xalign of
      laLeft   : begin xxs:=xxs+(lsp+rs)*cosa;yys:=yys-(lsp+rs)*sina;end;
-     laRight  : xxs:=xxs-ts.cx-lsp-rs;
-     laCenter : xxs:=xxs-(ts.cx div 2);
+     laRight  : begin xxs:=xxs-(ts.cx+lsp+rs)*cosa;yys:=yys+(ts.cx+lsp+rs)*sina;end;
+     laCenter : begin xxs:=xxs-(ts.cx div 2)*cosa;yys:=yys+(ts.cx div 2)*sina;end;
     end;
     case Yalign of
      laTop    : yys:=yys-ts.cy-rs;

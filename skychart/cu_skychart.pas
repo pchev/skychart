@@ -51,7 +51,7 @@ Tskychart = class (TComponent)
     bgw,bgh,bgproj: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
-    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5);
+    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true);
     procedure EditLabelPos(lnum,x,y: integer;moderadec:boolean);
     procedure EditLabelTxt(lnum,x,y: integer;mode:boolean);
     procedure DefaultLabel(lnum: integer);
@@ -1442,6 +1442,8 @@ var
   x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
   ppa,poleincl,sunincl,w1,w2,w3 : double;
   xx,yy,lori:single;
+  lopt: boolean;
+  lalign: TLabelAlign;
   i,j,jj,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
   ltxt,lis: string;
@@ -1484,6 +1486,8 @@ for j:=0 to cfgsc.SimNb-1 do begin
       if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
         ltxt:=pla[ipla];
         lori:=0;
+        lopt:=true;
+        lalign:=laLeft;
       end
       else begin
        if cfgsc.SimNameLabel then
@@ -1498,10 +1502,17 @@ for j:=0 to cfgsc.SimNb-1 do begin
        if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
        projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],x2,y2,true,cfgsc) ;
        lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
+       if (lori<90)or(lori>270) then begin
+          lalign:=laLeft;
+       end else begin
+          lalign:=laRight;
+          lori:=lori-180;
+       end;
+       lopt:=false;
       end;
       lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
       lid:=rshash(lis,$7FFFFFFF);
-      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,laLeft,lori,1);
+      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
     end;
     case ipla of
       4 :  begin
@@ -3578,7 +3589,7 @@ begin
   constlabelindex:=numlabels;
 end;
 
-procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5);
+procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true);
 begin
 { Label priority is used during placement optimization.
   0 : Constellation
@@ -3596,6 +3607,7 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   labels[numlabels].x:=xx;
   labels[numlabels].y:=yy;
   labels[numlabels].r:=radius;
+  labels[numlabels].optimizable:=opt;
   labels[numlabels].optimized:=false;
   labels[numlabels].orientation:=orient;
   labels[numlabels].align:=align;
@@ -3947,8 +3959,10 @@ for i:=1 to numlabels do begin
   else
      obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72);
   ts:=obmp.Canvas.TextExtent(labels[i].txt);
-  labels[i].align:=al[1];  // reset default position
-  labels[i].r:=labels[i].r/1.414; // label always in corner
+  if labels[i].optimizable then begin
+    labels[i].align:=al[1];  // reset default position
+    labels[i].r:=labels[i].r/1.414; // label always in corner
+  end;
   r:=labels[i].r;
   if r=0 then r:=lsp;
   x:=labels[i].x;
@@ -3979,6 +3993,7 @@ obmp.Free;
 // pass 1 for high priority (>2) labels only
 for pass:=1 to 2 do
 for i:=1 to numlabels do begin
+  if not labels[i].optimizable then continue; // not for planet simulation
   if (pass=1) and (labels[i].priority>2) then continue;
   if labels[i].optimized then continue;
   for j:=1 to 4 do begin
