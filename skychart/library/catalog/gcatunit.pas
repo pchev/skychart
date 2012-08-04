@@ -32,6 +32,7 @@ uses
 
 const
  rtStar = 1;  rtVar  = 2; rtDbl  = 3; rtNeb  = 4; rtlin   = 5;
+ ctBin = 1; ctText = 2; ctTab =3;
  vsId=1; vsMagv=2; vsB_v=3; vsMagb=4; vsMagr=5; vsSp=6; vsPmra=7; vsPmdec=8; vsEpoch=9; vsPx=10; vsComment=11; vsGreekSymbol=12;
  vvId=1; vvMagmax=2; vvMagmin=3; vvPeriod=4; vvVartype=5; vvMaxepoch=6; vvRisetime=7;  vvSp=8; vvMagcode=9; vvComment=10;
  vdId=1; vdMag1=2; vdMag2=3; vdSep=4; vdPa=5; vdEpoch=6; vdCompname=7; vdSp1=8; vdSp2=9; vdComment=10;
@@ -174,13 +175,13 @@ TFileHeader = packed record
          Spare4   : array[1..19,0..8] of char;
          end;
 TCatHdrInfo = record
-         neblst: array[1..15] of string;
+         neblst: array[1..15] of shortstring;   // !! keep shortstring here !!
          nebtype: array[1..15] of integer;
-         nebunit: array[1..3] of string;
+         nebunit: array[1..3] of shortstring;
          nebunits: array[1..3] of integer;
-         Linelst: array[1..4] of string;
+         Linelst: array[1..4] of shortstring;
          LineType: array[1..4] of integer;
-         Colorlst: array[1..10] of string;
+         Colorlst: array[1..10] of shortstring;
          Color: array[1..10] of Cardinal;
          calc : array[0..40,1..2] of double;
          end;
@@ -371,7 +372,7 @@ function NewCache:boolean;
 var i,n: integer;
 begin
 result:=false;
-if (cattype=1)and((catversion=rtStar)or(catversion=rtLin))and(catheader.filenum<=50) //  binary, star or line, 50 zones
+if (cattype=ctBin)and((catversion=rtStar)or(catversion=rtLin))and(catheader.filenum<=50) //  binary, star or line, 50 zones
 then begin
     n:=-1;
     for i:=0 to MaxCache-1 do begin
@@ -525,7 +526,7 @@ begin
  if buf='CDCLINE' then catversion:=rtLin;
  buf:=copy(catheader.version,8,1);
  cattype:=strtointdef(buf,0);
- if cattype=2 then begin
+ if cattype=ctText then begin
     if fileexists(Gcatpath+slashchar+catname+'.info2') then begin
        filemode:=0;
        assignfile(fh,Gcatpath+slashchar+catname+'.info2');
@@ -548,7 +549,7 @@ version:=catversion;
 // the change 1365 that add this restriction: http://skychart.sourceforge.net/websvn/comp.php?repname=Skychart&compare[]=%2Ftrunk@1364&compare[]=%2Ftrunk@1365
 // rollback for now :
 //filter:=(cattype=1)and(catversion<>rtstar);
-filter:=(cattype=1);
+filter:=(cattype=ctBin);
 end;
 
 Function GetRecCard(p: integer):cardinal ;
@@ -690,7 +691,7 @@ begin
 ok:=false;
 if not FileExists(nomfich) then begin ; ok:=false ; exit; end;
 FileMode:=0;
-if cattype=1 then begin
+if cattype=ctBin then begin
    try
    AssignFile(f,nomfich);
    FileBIsOpen:=true;
@@ -701,7 +702,7 @@ if cattype=1 then begin
      ok:=false;            // catgen running?
      FileBIsOpen:=false;
    end;
-end else begin
+end else if cattype=ctText then begin
    try
    AssignFile(ft,nomfich);
    FileTIsOpen:=true;
@@ -762,7 +763,7 @@ var nomreg,nomzone :string;
 begin
 str(S:4,nomreg);
 str(abs(zone):4,nomzone);
-if cattype=1 then begin
+if cattype=ctBin then begin
     case catheader.filenum of
       1      : nomfich:=GCatpath+slashchar+catname+'.dat';
       50     : nomfich:=GCatpath+slashchar+catname+padzeros(nomreg,2)+'.dat';
@@ -772,7 +773,7 @@ if cattype=1 then begin
     end;
     SMname:=nomreg;
     if FileBIsOpen then CloseRegion;
-end else begin
+end else if cattype=ctText then begin
     nomfich:=GCatpath+slashchar+catheader.TxtFileName;
     SMname:=nomreg;
     if FileTIsOpen then CloseRegion;
@@ -818,7 +819,7 @@ begin
 ok:=true;
 lin:=emptyrec;
 case cattype of
-1 : begin  // binary catalog
+ctBin : begin  // binary catalog
    {$ifdef cache_gcat}
     if onCache and (CacheZone[CurCache,SM]>0) then begin
     // read form cache
@@ -952,7 +953,7 @@ case cattype of
   end;
   end;
   end;
-2: begin // text file, positional
+ctText: begin // text file, positional
    if not FileTIsOpen then begin
      ok:=false;
      exit;
@@ -1072,7 +1073,7 @@ case cattype of
     if catheader.flen[35]>0 then lin.num[10]:=Getfloat2(35,0);
    end else ok:=false;
   end;
-3: begin // text file, tab separated
+ctTab: begin // text file, tab separated
   end;
 end;
 end;
