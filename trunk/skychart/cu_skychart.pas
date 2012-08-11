@@ -3840,7 +3840,7 @@ procedure Tskychart.ResetAllLabel;
 begin
 cfgsc.nummodlabels:=0;
 cfgsc.posmodlabels:=0;
-DrawLabels;
+Refresh;
 end;
 
 procedure Tskychart.DefaultLabel(lnum: integer);
@@ -3947,6 +3947,13 @@ if VerboseMsg then
    WriteTrace('SkyChart '+cfgsc.chartname+': Optimize labels');
 obmp:=TBitmap.Create;
 lsp:=labspacing*Fplot.cfgchart.drawpen;
+// give high priority to moved or custom labels
+for j:=1 to cfgsc.nummodlabels do
+  for i:=1 to numlabels do
+     if labels[i].id=cfgsc.modlabels[j].id then begin
+       labels[i].priority:=0;
+       break;
+     end;
 // sort labels by priority
 SortLabels;
 // compute text box
@@ -4054,6 +4061,7 @@ Fplot.InitLabel;
 DrawCustomlabel;
 if cfgsc.OptimizeLabels then OptimizeLabels;
 for i:=1 to numlabels do begin
+  if labels[i].x<-900 then continue; // label removed by optimization
   skiplabel:=false;
   x:=labels[i].x;
   y:=labels[i].y;
