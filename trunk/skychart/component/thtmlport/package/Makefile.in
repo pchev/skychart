@@ -10,7 +10,7 @@ version=0.0.4
 
 [compiler]
 unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)
-unitdir=$(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET) .
+unitdir=$(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) .
 includedir=.
 options= -MDelphi -Sa -O1 -gl -vewni -dLCL -dLCL$(LCL_PLATFORM)
 
