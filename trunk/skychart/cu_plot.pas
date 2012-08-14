@@ -1278,8 +1278,10 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    DestY:=round(yy-dsy);
    BitmapFlip(imabmp,(flipx<0),(flipy<0));
    if cfgplot.UseBMP then begin
-      outbmp:=TBGRABitmap.Create(imabmp.Width,imabmp.Height);
-      outbmp.canvas.Draw(0,0,imabmp);
+      imabmp.SaveToStream(memstream);
+      memstream.position := 0;
+      outbmp:=TBGRABitmap.Create(memstream);
+      memstream.Clear;
       if iTransparent then begin
         SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg,forcealpha);
         cbmp.PutImage(DestX,DestY,outbmp,dmDrawWithTransparency);
@@ -1329,8 +1331,10 @@ end else begin
    imabmp.canvas.CopyRect(Rect(0,0,imabmp.Width,imabmp.Height),rbmp.Canvas,SrcR);
    BitmapResize(imabmp,rbmp,zoom);
    if cfgplot.UseBMP then begin
-       outbmp:=TBGRABitmap.Create(rbmp.Width,rbmp.Height);
-       outbmp.canvas.Draw(0,0,rbmp);
+       rbmp.SaveToStream(memstream);
+       memstream.position := 0;
+       outbmp:=TBGRABitmap.Create(memstream);
+       memstream.Clear;
        if iTransparent then begin
          SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
          cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
@@ -1371,13 +1375,21 @@ end;
 
 Procedure TSplot.PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
 var outbmp:TBGRABitmap;
+    memstream: TMemoryStream;
 begin
    if cfgplot.UseBMP then begin
-      outbmp:=TBGRABitmap.Create(ibmp.Width,ibmp.Height);
-      outbmp.canvas.Draw(0,0,ibmp);
+      memstream:=TMemoryStream.Create;
+      try
+      ibmp.SaveToStream(memstream);
+      memstream.position := 0;
+      outbmp:=TBGRABitmap.Create(memstream);
+      memstream.Clear;
       SetBGRATransparencyFromLuminance(outbmp,3,WhiteBg,alpha);
       cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
       outbmp.free;
+      finally
+        memstream.Free;
+      end;
    end else begin
      if DisplayIs32bpp then SetTransparencyFromLuminance(ibmp,0)
                        else ibmp.TransparentColor:=clBlack;
