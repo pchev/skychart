@@ -18,7 +18,7 @@
       <Item1 Name="default" Default="True"/>
       <Item2 Name="debug">
         <CompilerOptions>
-          <Version Value="9"/>
+          <Version Value="11"/>
           <Target>
             <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
           </Target>
@@ -44,7 +44,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="True"/>
+              <DebugInfoType Value="dsStabs"/>
             </Debugging>
           </Linking>
           <Other>
@@ -61,7 +61,7 @@
       </Item2>
       <Item3 Name="debug heap">
         <CompilerOptions>
-          <Version Value="9"/>
+          <Version Value="11"/>
           <Target>
             <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
           </Target>
@@ -87,7 +87,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="True"/>
+              <DebugInfoType Value="dsStabs"/>
               <UseHeaptrc Value="True"/>
             </Debugging>
           </Linking>
@@ -105,7 +105,7 @@
       </Item3>
       <Item4 Name="gui">
         <CompilerOptions>
-          <Version Value="9"/>
+          <Version Value="11"/>
           <Target>
             <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
           </Target>
@@ -125,7 +125,7 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="True"/>
+              <DebugInfoType Value="dsStabs"/>
             </Debugging>
             <Options>
               <Win32>
@@ -640,7 +640,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="9"/>
+    <Version Value="11"/>
     <Target>
       <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
     </Target>
@@ -655,7 +655,7 @@
     </Parsing>
     <Linking>
       <Debugging>
-        <GenerateDebugInfo Value="True"/>
+        <GenerateDebugInfo Value="False"/>
       </Debugging>
     </Linking>
     <Other>
