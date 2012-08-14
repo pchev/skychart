@@ -263,12 +263,12 @@ begin
   Render(ARect.Right - ARect.Left, ARect.Bottom - ARect.Top);
   if FImageChanged then
   begin
-    FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+    FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, False);
     FImageChanged := False;
   end
   else
   if not DrawOnlyIfChanged then
-    FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+    FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, False);
 
   FPreviousVirtualScreen := TBGRABitmap(FStretchedVirtualScreen.NewReference);
 end;
@@ -822,7 +822,7 @@ begin
   end;
 
   Render(Rect.Right - Rect.Left, Rect.Bottom - Rect.Top);
-  FStretchedVirtualScreen.Draw(ACanvas, Rect.Left, Rect.Top);
+  FStretchedVirtualScreen.Draw(ACanvas, Rect.Left, Rect.Top, false);
   FImageChanged := False;
 
   FPreviousVirtualScreen := TBGRABitmap(FStretchedVirtualScreen.Duplicate);
@@ -1019,14 +1019,14 @@ begin
           end;
           NewBackgroundImage.Free;
           FPreviousVirtualScreen.InvalidateBitmap;
-          FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+          FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, false);
           FPreviousVirtualScreen.PutImage(0, 0, FStretchedVirtualScreen, dmSet);
         end
         else
         begin
           if FPreviousVirtualScreen = nil then
           begin
-            FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+            FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, false);
             FPreviousVirtualScreen :=
               TBGRABitmap(FStretchedVirtualScreen.NewReference);
           end
@@ -1057,7 +1057,7 @@ begin
               Inc(PBackground);
             end;
             FPreviousVirtualScreen.InvalidateBitmap;
-            FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+            FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, false);
             FPreviousVirtualScreen.PutImage(0, 0, FStretchedVirtualScreen, dmSet);
           end;
         end;
@@ -1100,7 +1100,7 @@ begin
             p^ := BGRAPixelTransparent;
           Inc(p);
         end;
-        shape.Draw(Canvas, ARect.Left, ARect.Top);
+        shape.Draw(Canvas, ARect.Left, ARect.Top, false);
         shape.FreeReference;
       end;
     end;
@@ -1120,7 +1120,7 @@ begin
           Inc(p);
           Inc(pback);
         end;
-        shape.Draw(Canvas, ARect.Left, ARect.Top);
+        shape.Draw(Canvas, ARect.Left, ARect.Top, false);
         shape.FreeReference;
       end;
     end;
@@ -1159,7 +1159,7 @@ begin
     PBGRAPixel(@MemPixEraseColor)^ := ColorToBGRA(EraseColor);
     if FPreviousVirtualScreen = nil then
     begin
-      FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+      FStretchedVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, false);
       FPreviousVirtualScreen := TBGRABitmap(FStretchedVirtualScreen.NewReference);
     end
     else
@@ -1186,7 +1186,7 @@ begin
         Inc(PChangePix);
       end;
       FPreviousVirtualScreen.InvalidateBitmap;
-      FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top);
+      FPreviousVirtualScreen.Draw(Canvas, ARect.Left, ARect.Top, false);
       FPreviousVirtualScreen.PutImage(0, 0, FStretchedVirtualScreen, dmSet);
     end;
 

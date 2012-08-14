@@ -5,7 +5,7 @@ unit BGRAPath;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  Classes, BGRABitmapTypes;
 
 {----------------------- Spline ------------------}
 
