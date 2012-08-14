@@ -17,7 +17,7 @@ interface
   The unit registers a TFPCustomImageReader so that it can be read by any image reading function of FreePascal }
 
 uses
-  Classes, SysUtils, BGRADNetDeserial, BGRALayers, BGRABitmap, BGRABitmapTypes, FPImage;
+  Classes, SysUtils, BGRADNetDeserial, FPImage, BGRABitmapTypes, BGRABitmap, BGRALayers;
 
 type
 

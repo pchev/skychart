@@ -11,7 +11,7 @@ interface
   A poly-polyline consists in a series of polylines, defined by polyline points separated by empty points (see EmptyPointF) }
 
 uses
-  Classes, SysUtils, Graphics, BGRABitmapTypes;
+  SysUtils, Graphics, BGRABitmapTypes;
 
 var   //predefined pen styles
   SolidPenStyle, DashPenStyle, DotPenStyle, DashDotPenStyle, DashDotDotPenStyle, ClearPenStyle: TBGRAPenStyle;

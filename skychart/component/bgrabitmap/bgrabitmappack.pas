@@ -12,7 +12,8 @@ uses
   BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
   BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
   BGRACanvas, BGRAFillInfo, BGRAPath, BGRACanvas2D, BGRAScene3D, BGRATextFX, 
-  BGRAPhongTypes, BGRALayers, LazarusPackageIntf;
+  BGRAPhongTypes, BGRALayers, BGRASSE, BGRAMatrix3D, BGRAColorInt, 
+  BGRACoordPool3D, LazarusPackageIntf;
 
 implementation
 

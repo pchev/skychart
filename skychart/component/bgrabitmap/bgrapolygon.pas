@@ -31,7 +31,7 @@ unit BGRAPolygon;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, BGRAFillInfo, Graphics;
+  Classes, SysUtils, Graphics, BGRABitmapTypes, BGRAFillInfo;
 
 procedure FillShapeAntialias(bmp: TBGRACustomBitmap; shapeInfo: TFillShapeInfo;
   c: TBGRAPixel; EraseMode: boolean; scan: IBGRAScanner; NonZeroWinding: boolean);
