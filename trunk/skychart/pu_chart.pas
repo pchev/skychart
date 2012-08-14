@@ -208,6 +208,7 @@ type
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
     MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam,printing: Boolean;
+    LockMouseWheel: Boolean;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
@@ -1657,6 +1658,9 @@ procedure Tf_chart.Image1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDe
 var zf:double;
     x,y: integer;
 begin
+if LockMouseWheel then exit;
+LockMouseWheel:=true;
+try
 if VerboseMsg then
  WriteTrace(caption+' Image1MouseWheel');
 handled:=true;
@@ -1672,6 +1676,10 @@ if ssShift in Shift then begin
   sc.MovetoXY(x,y);
 end;
 Refresh;
+Application.ProcessMessages;
+finally
+LockMouseWheel:=false;
+end;
 end;
 
 Procedure Tf_chart.ShowIdentLabel;
