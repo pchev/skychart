@@ -3890,6 +3890,7 @@ var
   Stack: array[1..32]of record First, Last: integer;
   end;
 begin
+  if numlabels<2 then exit;
   SubArray:=1;
   Stack[SubArray].First:=1;
   Stack[SubArray].Last:=numlabels;

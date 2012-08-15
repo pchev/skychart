@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses  FileUtil, BGRABitmap, BGRABitmapTypes,
+uses  FileUtil, BGRABitmap, BGRABitmapTypes, FPReadBMP,
   u_constant, u_util, u_bitmap, PostscriptCanvas,
   SysUtils, Types, StrUtils, FPImage, LCLType, LCLIntf, IntfGraphics, FPCanvas,
   Menus, StdCtrls, Dialogs, Controls, ExtCtrls, Math, Classes, Graphics, u_translation;
@@ -95,6 +95,7 @@ type
     cbmp : TBGRABitmap;
     obmp : TBitmap;
     cnv, destcnv  : Tcanvas;
+    bmpreader:TFPReaderBMP;
     Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
     Astarbmp: array [0..6,0..10] of Tbitmap;
     Bstarbmp: array [0..6,0..10] of TBGRABitmap;
@@ -188,6 +189,7 @@ for i:=0 to 6 do
  starbmp:=Tbitmap.Create;
  cbmp:=TBGRABitmap.Create;
  obmp:= TBitmap.Create;
+ bmpreader:=TFPReaderBMP.Create;
  cnv:=obmp.canvas;
  cfgplot:=Tconf_plot.Create;
  cfgchart:=Tconf_chart.Create;
@@ -278,6 +280,7 @@ try
  starbmp.Free;
  cbmp.Free;
  obmp.free;
+ bmpreader.Free;
  cfgplot.Free;
  cfgchart.Free;
  if Xplanetrender then begin
@@ -1280,7 +1283,8 @@ if (iWidth<=cfgchart.Width)or(iHeight<=cfgchart.Height) then begin
    if cfgplot.UseBMP then begin
       imabmp.SaveToStream(memstream);
       memstream.position := 0;
-      outbmp:=TBGRABitmap.Create(memstream);
+      outbmp:=TBGRABitmap.Create;
+      outbmp.LoadFromStream(memstream,bmpreader);
       memstream.Clear;
       if iTransparent then begin
         SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg,forcealpha);
@@ -1333,7 +1337,8 @@ end else begin
    if cfgplot.UseBMP then begin
        rbmp.SaveToStream(memstream);
        memstream.position := 0;
-       outbmp:=TBGRABitmap.Create(memstream);
+       outbmp:=TBGRABitmap.Create;
+       outbmp.LoadFromStream(memstream,bmpreader);
        memstream.Clear;
        if iTransparent then begin
          SetBGRATransparencyFromLuminance(outbmp,TransparentMode,trWhiteBg);
@@ -1382,7 +1387,8 @@ begin
       try
       ibmp.SaveToStream(memstream);
       memstream.position := 0;
-      outbmp:=TBGRABitmap.Create(memstream);
+      outbmp:=TBGRABitmap.Create;
+      outbmp.LoadFromStream(memstream,bmpreader);
       memstream.Clear;
       SetBGRATransparencyFromLuminance(outbmp,3,WhiteBg,alpha);
       cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
