@@ -67,6 +67,7 @@
         <Filename Value="pu_tray.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_tray"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_tray"/>
       </Unit1>
@@ -89,7 +90,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="9"/>
+    <Version Value="11"/>
     <SearchPaths>
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
     </SearchPaths>
@@ -104,6 +105,13 @@
         <OptimizationLevel Value="0"/>
       </Optimizations>
     </CodeGeneration>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
     <Other>
       <Verbosity>
         <ShowHints Value="False"/>

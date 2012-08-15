@@ -14,6 +14,8 @@ uses
 {$R manifest.res}
 {$endif}
 
+{$R *.res}
+
 begin
   Application.Title:='lpv_bulletin';
   Application.Initialize;
