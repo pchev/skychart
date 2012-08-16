@@ -10,10 +10,6 @@ uses
   Forms
   { you can add units after this }, aavsob1;
 
-{$ifndef unix}
-{$R manifest.res}
-{$endif}
-
 {$R *.res}
 
 begin
