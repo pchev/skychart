@@ -257,7 +257,7 @@ type
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
-    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true):boolean;
+    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     procedure CKeyDown(var Key: Word; Shift: TShiftState);
@@ -1717,7 +1717,7 @@ end
 else identlabel.Visible:=false;
 end;
 
-function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true):boolean;
+function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true;ftype:integer=ftAll):boolean;
 var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
@@ -1742,8 +1742,8 @@ lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Fin
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
 dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
-result:=sc.FindatRaDec(ra,dec,dx,searchcenter);
-if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter);  //else 6 pixel
+result:=sc.FindatRaDec(ra,dec,dx,searchcenter,false,ftype);
+if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter,false,ftype);  //else 6 pixel
 if showlabel then ShowIdentLabel;
 if result and showdist then begin
    ra:=sc.cfgsc.FindRA;

@@ -18,52 +18,7 @@
       <Item1 Name="default" Default="True"/>
       <Item2 Name="debug">
         <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <Checks>
-              <IOChecks Value="True"/>
-              <RangeChecks Value="True"/>
-              <OverflowChecks Value="True"/>
-              <StackChecks Value="True"/>
-            </Checks>
-            <Optimizations>
-              <OptimizationLevel Value="0"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CustomOptions Value="-dtrace_debug -CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
-          </Other>
-        </CompilerOptions>
-      </Item2>
-      <Item3 Name="debug heap">
-        <CompilerOptions>
-          <Version Value="11"/>
+          <Version Value="9"/>
           <Target>
             <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
           </Target>
@@ -89,6 +44,55 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
+              <GenerateDebugInfo Value="True"/>
+            </Debugging>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShowHints Value="False"/>
+            </Verbosity>
+            <CompilerMessages>
+              <UseMsgFile Value="True"/>
+            </CompilerMessages>
+            <CustomOptions Value="-dtrace_debug -CF64"/>
+            <CompilerPath Value="$(CompPath)"/>
+          </Other>
+        </CompilerOptions>
+      </Item2>
+      <Item3 Name="debug heap">
+        <CompilerOptions>
+          <Version Value="9"/>
+          <Target>
+            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
+          </Target>
+          <SearchPaths>
+            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <CStyleOperator Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="True"/>
               <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>
@@ -604,7 +608,7 @@
     </Units>
   </ProjectOptions>
   <CompilerOptions>
-    <Version Value="11"/>
+    <Version Value="9"/>
     <Target>
       <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
     </Target>
@@ -619,7 +623,7 @@
     </Parsing>
     <Linking>
       <Debugging>
-        <GenerateDebugInfo Value="False"/>
+        <UseLineInfoUnit Value="False"/>
         <StripSymbols Value="True"/>
       </Debugging>
       <LinkSmart Value="True"/>

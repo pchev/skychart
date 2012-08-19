@@ -136,7 +136,7 @@ Tskychart = class (TComponent)
     function PoleRot2000(ra,dec:double):double;
     procedure FormatCatRec(rec:Gcatrec; var desc:string);
     Procedure FindRiseSet(mode: integer);
-    function FindatRaDec(ra,dec,dx: double; searchcenter: boolean; showall:boolean=false):boolean;
+    function FindatRaDec(ra,dec,dx: double; searchcenter: boolean; showall:boolean=false;ftype:integer=ftAll):boolean;
     Procedure GetLabPos(ra,dec,r:double; w,h: integer; var x,y: integer);
 //    Procedure LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
     procedure FindList(ra,dec,dx,dy: double;var text,msg:string;showall,allobject,trunc:boolean);
@@ -2303,7 +2303,7 @@ end else begin
 end;
 end;
 
-function Tskychart.FindatRaDec(ra,dec,dx: double;searchcenter: boolean; showall:boolean=false):boolean;
+function Tskychart.FindatRaDec(ra,dec,dx: double;searchcenter: boolean; showall:boolean=false;ftype:integer=ftAll):boolean;
 var x1,x2,y1,y2:double;
     rec: Gcatrec;
     desc,n,m,d: string;
@@ -2326,9 +2326,10 @@ if showall then begin
   Fcatalog.cfgshr.NebFilter:=false;
   Fcatalog.cfgshr.StarFilter:=false;
 end;
+result:=false;
 // search catalog object
 try
-  result:=fcatalog.Findobj(x1,y1,x2,y2,searchcenter,cfgsc,rec);
+  if (ftype=ftAll)or(ftype<ftCat) then result:=fcatalog.Findobj(x1,y1,x2,y2,searchcenter,cfgsc,rec,ftype);
 finally
   Fcatalog.CloseCat;
   if showall then begin
@@ -2349,23 +2350,23 @@ end else begin
    cfgsc.FindCat:='';
    cfgsc.FindCatname:='';
 // search solar system object
-   if cfgsc.ShowPlanetValid then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+   if cfgsc.ShowPlanetValid and ((ftype=ftAll)or(ftype=ftPla)) then result:=fplanet.findplanet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
    if result then begin
       if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d; // add date to the name if simulation for more than one date
       FindRiseSet(cfgsc.FindIpla);
    end else begin
-      if cfgsc.ShowAsteroidValid then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc.ShowAsteroidValid and ((ftype=ftAll)or(ftype=ftAst)) then result:=fplanet.findasteroid(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
          FindRiseSet(0);
    end else begin
-      if cfgsc.ShowCometValid then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
+      if cfgsc.ShowCometValid and ((ftype=ftAll)or(ftype=ftCom)) then result:=fplanet.findcomet(x1,y1,x2,y2,false,cfgsc,n,m,d,desc);
       if result then begin
          if cfgsc.SimNb>1 then cfgsc.FindName:=cfgsc.FindName+blank+d;
          FindRiseSet(0);
    end else begin
 // search artificial satellite
-      if cfgsc.ShowArtSat then begin
+      if cfgsc.ShowArtSat and (ftype=ftAll) then begin
         result:=FindArtSat(x1,y1,x2,y2,false,n,m,desc);
         CloseSat;
       end;

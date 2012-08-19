@@ -231,6 +231,7 @@ const
   Altaz = 1;
   Gal = 2;
   Ecl = 3;
+  ftAll = 0;
   ftStar = 1;
   ftVar = 2;
   ftDbl = 3;
@@ -238,6 +239,7 @@ const
   ftlin = 5;
   ftInv = 6;
   ftOnline = 7;
+  ftCat = 99;
   ftPla = 100;
   ftCom = 101;
   ftAst = 102;
