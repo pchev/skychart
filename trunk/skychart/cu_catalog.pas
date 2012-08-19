@@ -133,7 +133,7 @@ type
      function SearchConstellation(Num:string; var ar1,de1: double): boolean;
      function SearchConstAbrev(Num:string; var ar1,de1: double): boolean;
      function FindAtPos(cat:integer; x1,y1,x2,y2:double; nextobj,truncate,searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
-     function FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
+     function FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec;ftype:integer=ftAll):boolean;
      procedure GetAltName(rec: GCatrec; var txt: string);
      function CheckPath(cat: integer; catpath:string):boolean;
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
@@ -2868,13 +2868,13 @@ until false ;
 result:=ok;
 end;
 
-function Tcatalog.FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec):boolean;
+function Tcatalog.FindObj(x1,y1,x2,y2:double; searchcenter : boolean;cfgsc:Tconf_skychart; var rec: Gcatrec;ftype:integer=ftAll):boolean;
 var
    ok,nextobj : boolean;
 begin
 ok:=false;
 nextobj:=false;
-if cfgsc.shownebulae then begin
+if cfgsc.shownebulae and ((ftype=ftAll)or(ftype=ftNeb)) then begin
   ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
   if (not ok) and cfgcat.nebcaton[voneb-BaseNeb] then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
   if (not ok) then begin ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
@@ -2887,12 +2887,12 @@ if cfgsc.shownebulae then begin
   if (not ok) and cfgcat.nebcaton[gcm-BaseNeb] then begin ok:=FindAtPos(gcm,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCM; end;
   if (not ok) and cfgcat.nebcaton[gpn-BaseNeb] then begin ok:=FindAtPos(gpn,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGPN; end;
 end;
-if cfgsc.showstars then begin
+if cfgsc.showstars and ((ftype=ftAll)or(ftype=ftStar)or(ftype=ftVar)or(ftype=ftDbl)) then begin
   if (not ok) and cfgcat.starcaton[vostar-BaseStar] then begin ok:=FindAtPos(vostar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
-  if (not ok) then begin ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
-  if (not ok) and cfgcat.varstarcaton[gcvs-BaseVar] then begin ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCV; end;
-  if (not ok) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
-  if (not ok) and cfgcat.dblstarcaton[wds-BaseDbl]  then begin ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseWDS; end;
+  if (not ok) and ((ftype=ftAll)or(ftype=ftVar)) then begin ok:=FindAtPos(gcvar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and ((ftype=ftAll)or(ftype=ftVar)) and cfgcat.varstarcaton[gcvs-BaseVar] then begin ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCV; end;
+  if (not ok) and ((ftype=ftAll)or(ftype=ftDbl)) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
+  if (not ok) and ((ftype=ftAll)or(ftype=ftDbl)) and cfgcat.dblstarcaton[wds-BaseDbl]  then begin ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseWDS; end;
   if (not ok) then begin ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.starcaton[DefStar-BaseStar] then begin ok:=FindAtPos(DefStar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDefaultStars; end;
   if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then begin ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSbase; end;

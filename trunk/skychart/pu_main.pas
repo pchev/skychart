@@ -2077,6 +2077,7 @@ end else begin
   end;
   for i:=0 to MultiDoc1.ChildCount-1 do
      if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
+        TelescopeTimer.Enabled:=false;
         locked:=true;
      end;
   except
@@ -3124,11 +3125,11 @@ if VerboseMsg then
             sc.cfgsc.TrackOn:=False;
             sc.cfgsc.TrackType:=0;
         end else begin
-          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position error, search 3.5 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position error, search 10 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position error, search 20 min
+          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true,itype);               // search 10 sec radius
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true,itype); // if not search 1.7 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true,itype);  // big idx position error, search 3.5 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true,itype);  // big idx position error, search 10 min
+          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true,itype);  // big idx position error, search 20 min
           if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
             sc.cfgsc.FindName:=Num;
             sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsObjectPositi+'';
@@ -3172,7 +3173,7 @@ if VerboseMsg then
         sc.cfgsc.FindX     := lastXX;
         sc.cfgsc.FindY     := lastYY;
         sc.cfgsc.FindZ     := lastZZ;
-        IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
+        IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true,itype);
         if kind in [0,2,3,4,5,6,7,8] then begin
           i:=quicksearch.Items.IndexOf(num);
           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
