@@ -11,7 +11,7 @@ interface
   linear interpolation. Inverse values are used for projective transform. }
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, BGRAFillInfo, BGRAPolygon, BGRASSE;
+  Classes, SysUtils, BGRAPolygon, BGRAFillInfo, BGRABitmapTypes;
 
 type
   //segment information for linear color
@@ -43,39 +43,6 @@ procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap; polyInfo: TP
   NonZeroWinding: boolean); overload;
 procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap; const points: array of TPointF;
   const Colors: array of TBGRAPixel; NonZeroWinding: boolean); overload;
-
-type
-  //segment information for linear color
-  TPerspectiveColorInfo = record
-    ColorDivZ, ColorSlopesDivZ: TColorF;
-    InvZ, InvZSlope: single;
-  end;
-  PPerspectiveColorInfo = ^TPerspectiveColorInfo;
-
-  //add a color information to intersection info
-  TPerspectiveColorGradientIntersectionInfo = class(TIntersectionInfo)
-    ColorDivZ: TColorF;
-    coordInvZ: single;
-  end;
-
-  { TPolygonPerspectiveColorGradientInfo }
-
-  TPolygonPerspectiveColorGradientInfo = class(TFillPolyInfo)
-  protected
-    FColors: array of TColorF;
-    FPointsZ: array of single;
-  public
-    constructor Create(const points: array of TPointF; const pointsZ: array of single; const Colors: array of TBGRAPixel);
-    function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
-    function CreateIntersectionInfo: TIntersectionInfo; override;
-    procedure ComputeIntersection(cury: single;
-      var inter: ArrayOfTIntersectionInfo; var nbInter: integer); override;
-  end;
-
-procedure PolygonPerspectiveColorGradientAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonPerspectiveColorGradientInfo;
-  NonZeroWinding: boolean; zbuffer: psingle = nil); overload;
-procedure PolygonPerspectiveColorGradientAliased(bmp: TBGRACustomBitmap; const points: array of TPointF;
-  const pointsZ: array of single; const Colors: array of TBGRAPixel; NonZeroWinding: boolean; zbuffer: psingle = nil); overload;
 
 type
   //segment information for linear texture
@@ -116,6 +83,7 @@ procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; const point
 procedure PolygonLinearTextureMappingAliasedWithLightness(bmp: TBGRACustomBitmap; const points: array of TPointF; texture: IBGRAScanner;
   const texCoords: array of TPointF; TextureInterpolation: Boolean; lightnesses: array of word; NonZeroWinding: boolean); overload;
 
+
 type
   //segment information for perspective texture. Use inverse Z and slopes.
   TPerspectiveTextureInfo = record
@@ -124,8 +92,8 @@ type
     TexCoordDivByZSlopes: TPointF;
     lightness: single;
     lightnessSlope: single;
-    Position3D, Normal3D: TPoint3D_128;
-    Position3DSlope, Normal3DSlope: TPoint3D_128;
+    Position3D, Normal3D: TPoint3D;
+    Position3DSlope, Normal3DSlope: TPoint3D;
   end;
   PPerspectiveTextureInfo = ^TPerspectiveTextureInfo;
 
@@ -134,7 +102,7 @@ type
     texCoordDivByZ: TPointF;
     coordInvZ: single;
     lightness: word;
-    Position3D, Normal3D: TPoint3D_128;
+    Position3D, Normal3D: TPoint3D;
   end;
 
   { TPolygonPerspectiveTextureMappingInfo }
@@ -158,36 +126,31 @@ type
   TPolygonPerspectiveMappingShaderInfo = class(TFillPolyInfo)
   protected
     FTexCoords: array of TPointF;
-    FPositions3D, FNormals3D: array of TPoint3D_128;
+    FPositions3D, FNormals3D: array of TPoint3D;
   public
     constructor Create(const points: array of TPointF; const points3D: array of TPoint3D; const normals: array of TPoint3D; const texCoords: array of TPointF);
-    constructor Create(const points: array of TPointF; const points3D: array of TPoint3D_128; const normals: array of TPoint3D_128; const texCoords: array of TPointF);
     function CreateSegmentData(numPt,nextPt: integer; x,y: single): pointer; override;
     function CreateIntersectionInfo: TIntersectionInfo; override;
     procedure ComputeIntersection(cury: single;
       var inter: ArrayOfTIntersectionInfo; var nbInter: integer); override;
   end;
 
-  TShaderFunction3D = function (Context: PBasicLightingContext; Color: TBGRAPixel): TBGRAPixel of object;
+  TShaderFunction3D = function (APosition,ANormal: TPoint3D; Color: TBGRAPixel): TBGRAPixel of object;
 
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonPerspectiveTextureMappingInfo;
-         texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean; zbuffer: psingle = nil); overload;
+         texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
 procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner;
-           const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean; zbuffer: psingle = nil); overload;
+           const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean); overload;
 procedure PolygonPerspectiveTextureMappingAliasedWithLightness(bmp: TBGRACustomBitmap; const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner;
-           const texCoords: array of TPointF; TextureInterpolation: Boolean; lightnesses: array of word; NonZeroWinding: boolean; zbuffer: psingle = nil); overload;
+           const texCoords: array of TPointF; TextureInterpolation: Boolean; lightnesses: array of word; NonZeroWinding: boolean); overload;
 
 procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonPerspectiveMappingShaderInfo;
          texture: IBGRAScanner; TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean;
-         solidColor: TBGRAPixel; zbuffer: psingle = nil; ShaderContext: PBasicLightingContext= nil); overload;
+         solidColor: TBGRAPixel); overload;
 procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; const points3D: array of TPoint3D;
            const normals: array of TPoint3D; texture: IBGRAScanner; const texCoords: array of TPointF;
            TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean;
-           solidColor: TBGRAPixel; zbuffer: psingle = nil; ShaderContext: PBasicLightingContext= nil); overload;
-procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap; const points: array of TPointF; const points3D: array of TPoint3D_128;
-           const normals: array of TPoint3D_128; texture: IBGRAScanner; const texCoords: array of TPointF;
-           TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean;
-           solidColor: TBGRAPixel; zbuffer: psingle = nil; ShaderContext: PBasicLightingContext= nil); overload;
+           solidColor: TBGRAPixel); overload;
 
 { Aliased round rectangle }
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
@@ -197,580 +160,32 @@ implementation
 
 uses Math, BGRABlend;
 
-{ TPolygonPerspectiveColorGradientInfo }
-
-constructor TPolygonPerspectiveColorGradientInfo.Create(
-  const points: array of TPointF; const pointsZ: array of single;
-  const Colors: array of TBGRAPixel);
-var
-  i: Integer;
-  lPoints: array of TPointF;
-  nbP: integer;
-  ec: TExpandedPixel;
-begin
-  if (length(Colors) <> length(points)) or (length(points) <> length(pointsZ)) then
-    raise Exception.Create('Dimensions mismatch');
-
-  setlength(lPoints, length(points));
-  SetLength(FColors, length(points));
-  SetLength(FPointsZ, length(points));
-  nbP := 0;
-  for i := 0 to high(points) do
-  if (i=0) or (points[i]<>points[i-1]) then
-  begin
-    lPoints[nbP] := points[i];
-    FPointsZ[nbP] := PointsZ[i];
-    ec := GammaExpansion(Colors[i]);
-    FColors[nbP] := ColorF(ec.red,ec.green,ec.blue,ec.alpha);
-    inc(nbP);
-  end;
-  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
-  setlength(lPoints, nbP);
-  SetLength(FPointsZ, nbP);
-  SetLength(FColors, nbP);
-
-  inherited Create(lPoints);
-end;
-
 {$hints off}
-function TPolygonPerspectiveColorGradientInfo.CreateSegmentData(numPt,
-  nextPt: integer; x, y: single): pointer;
-var
-  info: PPerspectiveColorInfo;
-  InvTy,dy: single;
-  CurColorDivByZ,NextColorDivByZ: TColorF;
-  CurInvZ,NextInvZ: single;
-begin
-  New(info);
-  InvTy := 1/(FPoints[nextPt].y-FPoints[numPt].y);
-
-  CurInvZ := 1/FPointsZ[numPt];
-  CurColorDivByZ := FColors[numPt]*CurInvZ;
-  NextInvZ := 1/FPointsZ[nextPt];
-  NextColorDivByZ := FColors[nextPt]*NextInvZ;
-
-  info^.ColorSlopesDivZ := (NextColorDivByZ - CurColorDivByZ)*InvTy;
-  dy := y-FPoints[numPt].y;
-  info^.ColorDivZ := CurColorDivByZ + info^.ColorSlopesDivZ*dy;
-
-  info^.InvZSlope := (NextInvZ-CurInvZ)*InvTy;
-  info^.InvZ := CurInvZ+dy*info^.InvZSlope;
-
-  Result:= info;
-end;
-{$hints on}
-
-function TPolygonPerspectiveColorGradientInfo.CreateIntersectionInfo: TIntersectionInfo;
-begin
-  Result:= TPerspectiveColorGradientIntersectionInfo.Create;
-end;
-
-procedure TPolygonPerspectiveColorGradientInfo.ComputeIntersection(
-  cury: single; var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
-var
-  j: integer;
-  dy: single;
-  info: PPerspectiveColorInfo;
-begin
-  if length(FSlices)=0 then exit;
-
-  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
-  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
-  with FSlices[FCurSlice] do
-  if (cury >= y1) and (cury <= y2) then
-  begin
-    for j := 0 to nbSegments-1 do
-    begin
-      dy := cury - segments[j].y1;
-      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
-      inter[nbinter].winding := segments[j].winding;
-      info := PPerspectiveColorInfo(segments[j].data);
-      TPerspectiveColorGradientIntersectionInfo(inter[nbinter]).coordInvZ := dy*info^.InvZSlope + info^.InvZ;
-      TPerspectiveColorGradientIntersectionInfo(inter[nbinter]).ColorDivZ := info^.ColorDivZ + info^.ColorSlopesDivZ*dy;
-      Inc(nbinter);
-    end;
-  end;
-end;
-
-{ TPolygonLinearColorGradientInfo }
-
-constructor TPolygonLinearColorGradientInfo.Create(
-  const points: array of TPointF; const Colors: array of TBGRAPixel);
-var
-  i: Integer;
-  lPoints: array of TPointF;
-  nbP: integer;
-  ec: TExpandedPixel;
-begin
-  if length(Colors) <> length(points) then
-    raise Exception.Create('Dimensions mismatch');
-
-  setlength(lPoints, length(points));
-  SetLength(FColors, length(points));
-  nbP := 0;
-  for i := 0 to high(points) do
-  if (i=0) or (points[i]<>points[i-1]) then
-  begin
-    lPoints[nbP] := points[i];
-    ec := GammaExpansion(Colors[i]);
-    FColors[nbP] := ColorF(ec.red,ec.green,ec.blue,ec.alpha);
-    inc(nbP);
-  end;
-  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
-  setlength(lPoints, nbP);
-  SetLength(FColors, nbP);
-
-  inherited Create(lPoints);
-end;
-
-{$hints off}
-function TPolygonLinearColorGradientInfo.CreateSegmentData(numPt, nextPt: integer; x,
-  y: single): pointer;
-var
-  info: PLinearColorInfo;
-  ty,dy: single;
-begin
-  New(info);
-  ty := FPoints[nextPt].y-FPoints[numPt].y;
-  info^.ColorSlopes := (FColors[nextPt] - FColors[numPt])*(1/ty);
-  dy := y-FPoints[numPt].y;
-  info^.Color := FColors[numPt] + info^.ColorSlopes*dy;
-  Result:= info;
-end;
-{$hints on}
-
-function TPolygonLinearColorGradientInfo.CreateIntersectionInfo: TIntersectionInfo;
-begin
-  Result:= TLinearColorGradientIntersectionInfo.Create;
-end;
-
-procedure TPolygonLinearColorGradientInfo.ComputeIntersection(cury: single;
-      var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
-var
-  j: integer;
-  dy: single;
-  info: PLinearColorInfo;
-begin
-  if length(FSlices)=0 then exit;
-
-  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
-  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
-  with FSlices[FCurSlice] do
-  if (cury >= y1) and (cury <= y2) then
-  begin
-    for j := 0 to nbSegments-1 do
-    begin
-      dy := cury - segments[j].y1;
-      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
-      inter[nbinter].winding := segments[j].winding;
-      info := PLinearColorInfo(segments[j].data);
-      TLinearColorGradientIntersectionInfo(inter[nbinter]).color := info^.Color + info^.ColorSlopes*dy;
-      Inc(nbinter);
-    end;
-  end;
-end;
-
-procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap;
-  polyInfo: TPolygonLinearColorGradientInfo; NonZeroWinding: boolean);
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap;
+  polyInfo: TPolygonPerspectiveMappingShaderInfo; texture: IBGRAScanner;
+  TextureInterpolation: Boolean; ShaderFunction: TShaderFunction3D;
+  NonZeroWinding: boolean; solidColor: TBGRAPixel);
 var
   inter:    array of TIntersectionInfo;
   nbInter:  integer;
 
-  procedure DrawGradientLine(yb: integer; ix1: integer; ix2: integer;
-    x1: Single; c1: TColorF; x2: Single; c2: TColorF);
-  var
-    colorPos: TColorF;
-    colorStep: TColorF;
-    t: single;
-    pdest: PBGRAPixel;
-    i: LongInt;
-    ec: TExpandedPixel;
-    cInt: packed record
-        r,g,b,a: integer;
-       end;
-    c: TBGRAPixel;
-  begin
-    t := ((ix1+0.5)-x1)/(x2-x1);
-    colorPos := c1 + (c2-c1)*t;
-    colorStep := (c2-c1)*(1/(x2-x1));
-    pdest := bmp.ScanLine[yb]+ix1;
-
-    {$IFDEF CPUI386} {$asmmode intel}
-    If UseSSE then
-    begin
-      asm
-        movups xmm4, colorPos
-        movups xmm5, colorStep
-      end;
-      If UseSSE2 then
-      begin
-        for i := ix1 to ix2 do
-        begin
-          asm
-            cvtps2dq xmm0,xmm4
-            movups cInt, xmm0
-            addps xmm4,xmm5
-          end;
-          c.red := GammaCompressionTab[cInt.r];
-          c.green := GammaCompressionTab[cInt.g];
-          c.blue := GammaCompressionTab[cInt.b];
-          c.alpha := GammaCompressionTab[cInt.a];
-          DrawPixelInlineWithAlphaCheck(pdest, c);
-          inc(pdest);
-        end;
-      end else
-      begin
-        for i := ix1 to ix2 do
-        begin
-          asm
-            movups colorPos, xmm4
-            addps xmm4,xmm5
-          end;
-          ec.red := round(colorPos[1]);
-          ec.green := round(colorPos[2]);
-          ec.blue := round(colorPos[3]);
-          ec.alpha := round(colorPos[4]);
-          DrawPixelInlineWithAlphaCheck(pdest, GammaCompression(ec));
-          inc(pdest);
-        end;
-      end;
-    end else
-    {$ENDIF}
-    for i := ix1 to ix2 do
-    begin
-      ec.red := round(colorPos[1]);
-      ec.green := round(colorPos[2]);
-      ec.blue := round(colorPos[3]);
-      ec.alpha := round(colorPos[4]);
-      DrawPixelInlineWithAlphaCheck(pdest, GammaCompression(ec));
-      colorPos += colorStep;
-      inc(pdest);
-    end;
-  end;
-
-var
-  miny, maxy, minx, maxx: integer;
-
-  yb, i: integer;
-  x1, x2: single;
-
-  ix1, ix2: integer;
-
-begin
-  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
-  inter := polyInfo.CreateIntersectionArray;
-
-  //vertical scan
-  for yb := miny to maxy do
-  begin
-    //find intersections
-    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
-
-    for i := 0 to nbinter div 2 - 1 do
-    begin
-      x1 := inter[i + i].interX;
-      x2 := inter[i + i+ 1].interX;
-
-      if x1 <> x2 then
-      begin
-        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
-        if ix1 <= ix2 then
-          DrawGradientLine(yb,ix1,ix2,
-            x1,TLinearColorGradientIntersectionInfo(inter[i+i]).Color,
-            x2,TLinearColorGradientIntersectionInfo(inter[i+i+1]).Color);
-      end;
-    end;
-  end;
-
-  polyInfo.FreeIntersectionArray(inter);
-  bmp.InvalidateBitmap;
-end;
-
-procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap;
-  const points: array of TPointF; const Colors: array of TBGRAPixel;
-  NonZeroWinding: boolean);
-var polyInfo: TPolygonLinearColorGradientInfo;
-begin
-  polyInfo := TPolygonLinearColorGradientInfo.Create(points,Colors);
-  PolygonLinearColorGradientAliased(bmp,polyInfo,NonZeroWinding);
-  polyInfo.Free;
-end;
-
-{ TPolygonLinearTextureMappingInfo }
-
-constructor TPolygonLinearTextureMappingInfo.Create(const points: array of TPointF;
-  const texCoords: array of TPointF);
-var
-  i: Integer;
-  lPoints: array of TPointF;
-  nbP: integer;
-begin
-  if length(texCoords) <> length(points) then
-    raise Exception.Create('Dimensions mismatch');
-
-  setlength(lPoints, length(points));
-  SetLength(FTexCoords, length(points));
-  nbP := 0;
-  for i := 0 to high(points) do
-  if (i=0) or (points[i]<>points[i-1]) then
-  begin
-    lPoints[nbP] := points[i];
-    FTexCoords[nbP] := texCoords[i];
-    inc(nbP);
-  end;
-  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
-  setlength(lPoints, nbP);
-  SetLength(FTexCoords, nbP);
-
-  inherited Create(lPoints);
-end;
-
-constructor TPolygonLinearTextureMappingInfo.Create(
-  const points: array of TPointF; const texCoords: array of TPointF;
-  const lightnesses: array of word);
-var
-  i: Integer;
-  lPoints: array of TPointF;
-  nbP: integer;
-begin
-  if (length(texCoords) <> length(points)) or (length(lightnesses) <> length(points)) then
-    raise Exception.Create('Dimensions mismatch');
-
-  setlength(lPoints, length(points));
-  SetLength(FTexCoords, length(points));
-  setlength(FLightnesses, length(lightnesses));
-  nbP := 0;
-  for i := 0 to high(points) do
-  if (i=0) or (points[i]<>points[i-1]) then
-  begin
-    lPoints[nbP] := points[i];
-    FTexCoords[nbP] := texCoords[i];
-    FLightnesses[nbP] := lightnesses[i];
-    inc(nbP);
-  end;
-  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
-  setlength(lPoints, nbP);
-  SetLength(FTexCoords, nbP);
-  SetLength(FLightnesses, nbP);
-
-  inherited Create(lPoints);
-end;
-
-{$hints off}
-function TPolygonLinearTextureMappingInfo.CreateSegmentData(numPt, nextPt: integer; x,
-  y: single): pointer;
-var
-  info: PLinearTextureInfo;
-  ty,dy: single;
-begin
-  New(info);
-  ty := FPoints[nextPt].y-FPoints[numPt].y;
-  dy := y-FPoints[numPt].y;
-  info^.TexCoordSlopes := (FTexCoords[nextPt] - FTexCoords[numPt])*(1/ty);
-  info^.TexCoord := FTexCoords[numPt] + info^.TexCoordSlopes*dy;
-  if FLightnesses <> nil then
-  begin
-    info^.lightnessSlope := (FLightnesses[nextPt] - FLightnesses[numPt])*(1/ty);
-    info^.lightness := FLightnesses[numPt] + info^.lightnessSlope*dy;
-  end else
-  begin
-    info^.lightness := 32768;
-    info^.lightnessSlope := 0;
-  end;
-  Result:= info;
-end;
-{$hints on}
-
-function TPolygonLinearTextureMappingInfo.CreateIntersectionInfo: TIntersectionInfo;
-begin
-  result := TLinearTextureMappingIntersectionInfo.Create;
-end;
-
-procedure TPolygonLinearTextureMappingInfo.ComputeIntersection(cury: single;
-      var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
-var
-  j: integer;
-  dy: single;
-  info: PLinearTextureInfo;
-begin
-  if length(FSlices)=0 then exit;
-
-  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
-  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
-  with FSlices[FCurSlice] do
-  if (cury >= y1) and (cury <= y2) then
-  begin
-    for j := 0 to nbSegments-1 do
-    begin
-      dy := cury - segments[j].y1;
-      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
-      inter[nbinter].winding := segments[j].winding;
-      info := PLinearTextureInfo(segments[j].data);
-      TLinearTextureMappingIntersectionInfo(inter[nbinter]).texCoord := info^.TexCoord + info^.TexCoordSlopes*dy;
-      if FLightnesses<>nil then
-        TLinearTextureMappingIntersectionInfo(inter[nbinter]).lightness := round(info^.lightness + info^.lightnessSlope*dy)
-      else
-        TLinearTextureMappingIntersectionInfo(inter[nbinter]).lightness := 32768;
-      Inc(nbinter);
-    end;
-  end;
-end;
-
-{$hints off}
-
-procedure PolygonPerspectiveColorGradientAliased(bmp: TBGRACustomBitmap;
-  polyInfo: TPolygonPerspectiveColorGradientInfo; NonZeroWinding: boolean; zbuffer: psingle);
-var
-  inter:    array of TIntersectionInfo;
-  nbInter:  integer;
-
-  procedure DrawGradientLine(yb: integer; ix1: integer; ix2: integer;
-    x1: Single; info1: TPerspectiveColorGradientIntersectionInfo; x2: Single; info2: TPerspectiveColorGradientIntersectionInfo);
-  var
-    diff,colorPos,colorPosByZ: TColorF;
-    colorStep: TColorF;
-    t: single;
-    pdest: PBGRAPixel;
-    i: LongInt;
-    ec: TExpandedPixel;
-    invDx: single;
-    z,invZ,InvZStep: single;
-    r,g,b,a: integer;
-    minVal,maxVal: single;
-    cInt: packed record
-      r,g,b,a: integer;
-    end;
-    c: TBGRAPixel;
-    zbufferpos: psingle;
-
-  begin
-    invDx := 1/(x2-x1);
-    t := ((ix1+0.5)-x1)*InvDx;
-    diff := info2.ColorDivZ-info1.ColorDivZ;
-    colorPos := info1.ColorDivZ + diff*t;
-    colorStep := diff*InvDx;
-    invZ := info1.coordInvZ + (info2.coordInvZ-info1.coordInvZ)*t;
-    InvZStep := (info2.coordInvZ-info1.coordInvZ)*InvDx;
-    pdest := bmp.ScanLine[yb]+ix1;
-    if zbuffer <> nil then
-    begin
-    {$DEFINE PARAM_USEZBUFFER}
-      zbufferpos := zbuffer + yb*bmp.Width + ix1;
-      {$IFDEF CPUI386}
-      If UseSSE then
-      begin
-        {$DEFINE PARAM_USESSE}
-        If UseSSE2 then
-        begin
-          {$DEFINE PARAM_USESSE2}
-          {$i perspectivecolorscan.inc}
-          {$UNDEF PARAM_USESSE2}
-        end else
-        begin
-          {$i perspectivecolorscan.inc}
-        end;
-        {$UNDEF PARAM_USESSE}
-      end else
-      {$ENDIF}
-      begin
-        {$i perspectivecolorscan.inc}
-      end;
-    {$UNDEF PARAM_USEZBUFFER}
-    end else
-    begin
-      {$IFDEF CPUI386}
-      If UseSSE then
-      begin
-        {$DEFINE PARAM_USESSE}
-        If UseSSE2 then
-        begin
-          {$DEFINE PARAM_USESSE2}
-          {$i perspectivecolorscan.inc}
-          {$UNDEF PARAM_USESSE2}
-        end else
-        begin
-          {$i perspectivecolorscan.inc}
-        end;
-        {$UNDEF PARAM_USESSE}
-      end else
-      {$ENDIF}
-      begin
-        {$i perspectivecolorscan.inc}
-      end;
-    end;
-  end;
-
-var
-  miny, maxy, minx, maxx: integer;
-
-  yb, i: integer;
-  x1, x2: single;
-
-  ix1, ix2: integer;
-
-begin
-  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
-  inter := polyInfo.CreateIntersectionArray;
-
-  //vertical scan
-  for yb := miny to maxy do
-  begin
-    //find intersections
-    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
-
-    for i := 0 to nbinter div 2 - 1 do
-    begin
-      x1 := inter[i + i].interX;
-      x2 := inter[i + i+ 1].interX;
-
-      if x1 <> x2 then
-      begin
-        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
-        if ix1 <= ix2 then
-          DrawGradientLine(yb,ix1,ix2,
-            x1,TPerspectiveColorGradientIntersectionInfo(inter[i+i]),
-            x2,TPerspectiveColorGradientIntersectionInfo(inter[i+i+1]));
-      end;
-    end;
-  end;
-
-  polyInfo.FreeIntersectionArray(inter);
-  bmp.InvalidateBitmap;
-end;
-
-procedure PolygonPerspectiveColorGradientAliased(bmp: TBGRACustomBitmap;
-  const points: array of TPointF; const pointsZ: array of single;
-  const Colors: array of TBGRAPixel; NonZeroWinding: boolean; zbuffer: psingle);
-var polyInfo: TPolygonPerspectiveColorGradientInfo;
-begin
-  polyInfo := TPolygonPerspectiveColorGradientInfo.Create(points,pointsZ,Colors);
-  PolygonPerspectiveColorGradientAliased(bmp,polyInfo,NonZeroWinding,zbuffer);
-  polyInfo.Free;
-end;
-
-procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonLinearTextureMappingInfo;
-  texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean);
-var
-  inter:    array of TIntersectionInfo;
-  nbInter:  integer;
   scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
-  scanAtIntegerFunc: function(X,Y: integer): TBGRAPixel of object;
 
-  procedure DrawTextureLineWithoutLight(yb: integer; ix1: integer; ix2: integer;
-    info1,info2: TLinearTextureMappingIntersectionInfo;
-    WithInterpolation: boolean);
-    {$i lineartexscan.inc}
+  procedure DrawTextureLine(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USESHADER}
+    {$i perspectivescan.inc}
 
-  procedure DrawTextureLineWithLight(yb: integer; ix1: integer; ix2: integer;
-    info1,info2: TLinearTextureMappingIntersectionInfo;
-    WithInterpolation: boolean);
-    {$define PARAM_USELIGHTING}
-    {$i lineartexscan.inc}
+  procedure DrawTextureLineSolidColor(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USESOLIDCOLOR}
+    {$define PARAM_USESHADER}
+    {$i perspectivescan.inc}
 
 var
   miny, maxy, minx, maxx: integer;
 
-  yb, i: integer;
+  yb, i : integer;
   x1, x2: single;
 
   ix1, ix2: integer;
@@ -778,16 +193,19 @@ var
 begin
   If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
 
-  scanAtFunc := @texture.ScanAt;
-  scanAtIntegerFunc := @texture.ScanAtInteger;
-
   inter := polyInfo.CreateIntersectionArray;
+
+  if texture <> nil then
+    scanAtFunc := @texture.ScanAt
+  else
+    scanAtFunc:= nil;
 
   //vertical scan
   for yb := miny to maxy do
   begin
     //find intersections
     polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
+
     for i := 0 to nbinter div 2 - 1 do
     begin
       x1 := inter[i + i].interX;
@@ -798,17 +216,19 @@ begin
         ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
         if ix1 <= ix2 then
         begin
-          if (TLinearTextureMappingIntersectionInfo(inter[i+i]).lightness = 32768) and
-             (TLinearTextureMappingIntersectionInfo(inter[i+i+1]).lightness = 32768) then
-            DrawTextureLineWithoutLight(yb,ix1,ix2,
-               TLinearTextureMappingIntersectionInfo(inter[i+i]),
-               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
-               TextureInterpolation)
-          else
-            DrawTextureLineWithLight(yb,ix1,ix2,
-               TLinearTextureMappingIntersectionInfo(inter[i+i]),
-               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
-               TextureInterpolation);
+          if texture <> nil then
+          begin
+            DrawTextureLine(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+          end else
+          begin
+            DrawTextureLineSolidColor(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+          end;
         end;
       end;
     end;
@@ -819,29 +239,17 @@ begin
 end;
 {$hints on}
 
-procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap;
-  const points: array of TPointF; texture: IBGRAScanner;
-  const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean);
-var polyInfo: TPolygonLinearTextureMappingInfo;
+procedure PolygonPerspectiveMappingShaderAliased(bmp: TBGRACustomBitmap;
+  const points: array of TPointF; const points3D: array of TPoint3D;
+  const normals: array of TPoint3D; texture: IBGRAScanner;
+  const texCoords: array of TPointF; TextureInterpolation: Boolean;
+  ShaderFunction: TShaderFunction3D; NonZeroWinding: boolean; solidColor: TBGRAPixel);
+var polyInfo: TPolygonPerspectiveMappingShaderInfo;
 begin
-  polyInfo := TPolygonLinearTextureMappingInfo.Create(points,texCoords);
-  PolygonLinearTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation,NonZeroWinding);
+  polyInfo := TPolygonPerspectiveMappingShaderInfo.Create(points,points3D,normals,texCoords);
+  PolygonPerspectiveMappingShaderAliased(bmp,polyInfo,texture,TextureInterpolation, ShaderFunction, NonZeroWinding, solidColor);
   polyInfo.Free;
 end;
-
-procedure PolygonLinearTextureMappingAliasedWithLightness(
-  bmp: TBGRACustomBitmap; const points: array of TPointF;
-  texture: IBGRAScanner; const texCoords: array of TPointF;
-  TextureInterpolation: Boolean; lightnesses: array of word;
-  NonZeroWinding: boolean);
-var polyInfo: TPolygonLinearTextureMappingInfo;
-begin
-  polyInfo := TPolygonLinearTextureMappingInfo.Create(points,texCoords,lightnesses);
-  PolygonLinearTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation,NonZeroWinding);
-  polyInfo.Free;
-end;
-
-{$i polyaliaspersp.inc}
 
 {From LazRGBGraphics}
 procedure BGRARoundRectAliased(dest: TBGRACustomBitmap; X1, Y1, X2, Y2: integer;
@@ -1041,6 +449,716 @@ begin
     end;
     Inc(J);
   end;
+end;
+
+{ TPolygonPerspectiveMappingShaderInfo }
+
+constructor TPolygonPerspectiveMappingShaderInfo.Create(
+  const points: array of TPointF; const points3D: array of TPoint3D;
+  const normals: array of TPoint3D; const texCoords: array of TPointF);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if (length(texCoords) <> length(points)) or (length(points3D) <> length(points)) or (length(normals) <> length(points)) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  SetLength(FPositions3D, length(points));
+  SetLength(FNormals3D, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i].x<>points[i-1].X) or (points[i].y<>points[i-1].y) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    FPositions3D[nbP] := points3D[i];
+    FNormals3D[nbP] := normals[i];
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1].X = lPoints[0].X) and (lPoints[nbP-1].Y = lPoints[0].Y) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+  SetLength(FPositions3D, nbP);
+  SetLength(FNormals3D, nbP);
+
+  inherited Create(lPoints);
+end;
+
+{$hints off}
+function TPolygonPerspectiveMappingShaderInfo.CreateSegmentData(numPt,
+  nextPt: integer; x, y: single): pointer;
+var
+  info: PPerspectiveTextureInfo;
+  ty,dy: single;
+  CurInvZ,NextInvZ: single;
+  CurTexCoordDivByZ: TPointF;
+  NextTexCoordDivByZ: TPointF;
+
+  Cur3DDivByZ,Next3DDivByZ: TPoint3D;
+begin
+  New(info);
+  CurInvZ := 1/FPositions3D[numPt].z;
+  CurTexCoordDivByZ := FTexCoords[numPt]*CurInvZ;
+  NextInvZ := 1/FPositions3D[nextPt].z;
+  NextTexCoordDivByZ := FTexCoords[nextPt]*NextInvZ;
+  ty := FPoints[nextPt].y-FPoints[numPt].y;
+  info^.TexCoordDivByZSlopes := (NextTexCoordDivByZ - CurTexCoordDivByZ)*(1/ty);
+  dy := y-FPoints[numPt].y;
+  info^.TexCoordDivByZ := CurTexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+  info^.InvZSlope := (NextInvZ-CurInvZ)/ty;
+  info^.InvZ := CurInvZ+dy*info^.InvZSlope;
+
+  Cur3DDivByZ := FPositions3D[numPt]*CurInvZ;
+  Next3DDivByZ := FPositions3D[nextPt]*NextInvZ;
+  info^.Position3DSlope := (Next3DDivByZ - Cur3DDivByZ)*(1/ty);
+  info^.Position3D := Cur3DDivByZ + info^.Position3DSlope*dy;
+
+  Cur3DDivByZ := FNormals3D[numPt]*CurInvZ;
+  Next3DDivByZ := FNormals3D[nextPt]*NextInvZ;
+  info^.Normal3DSlope := (Next3DDivByZ - Cur3DDivByZ)*(1/ty);
+  info^.Normal3D := Cur3DDivByZ + info^.Normal3DSlope*dy;
+
+  Result:= info;
+end;
+{$hints on}
+
+function TPolygonPerspectiveMappingShaderInfo.CreateIntersectionInfo: TIntersectionInfo;
+begin
+  Result:= TPerspectiveTextureMappingIntersectionInfo.Create;
+end;
+
+procedure TPolygonPerspectiveMappingShaderInfo.ComputeIntersection(
+  cury: single; var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
+var
+  j: integer;
+  dy: single;
+  info: PPerspectiveTextureInfo;
+begin
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to nbSegments-1 do
+    begin
+      dy := cury - segments[j].y1;
+      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
+      inter[nbinter].winding := segments[j].winding;
+      info := PPerspectiveTextureInfo(segments[j].data);
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).coordInvZ := dy*info^.InvZSlope + info^.InvZ;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).texCoordDivByZ := info^.TexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).Position3D := info^.Position3D + info^.Position3DSlope*dy;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).Normal3D := info^.Normal3D + info^.Normal3DSlope*dy;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
+{ TPolygonLinearColorGradientInfo }
+
+constructor TPolygonLinearColorGradientInfo.Create(
+  const points: array of TPointF; const Colors: array of TBGRAPixel);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+  ec: TExpandedPixel;
+begin
+  if length(Colors) <> length(points) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FColors, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i]<>points[i-1]) then
+  begin
+    lPoints[nbP] := points[i];
+    ec := GammaExpansion(Colors[i]);
+    FColors[nbP] := ColorF(ec.red,ec.green,ec.blue,ec.alpha);
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FColors, nbP);
+
+  inherited Create(lPoints);
+end;
+
+{$hints off}
+function TPolygonLinearColorGradientInfo.CreateSegmentData(numPt, nextPt: integer; x,
+  y: single): pointer;
+var
+  info: PLinearColorInfo;
+  ty,dy: single;
+begin
+  New(info);
+  ty := FPoints[nextPt].y-FPoints[numPt].y;
+  info^.ColorSlopes := (FColors[nextPt] - FColors[numPt])*(1/ty);
+  dy := y-FPoints[numPt].y;
+  info^.Color := FColors[numPt] + info^.ColorSlopes*dy;
+  Result:= info;
+end;
+{$hints on}
+
+function TPolygonLinearColorGradientInfo.CreateIntersectionInfo: TIntersectionInfo;
+begin
+  Result:= TLinearColorGradientIntersectionInfo.Create;
+end;
+
+procedure TPolygonLinearColorGradientInfo.ComputeIntersection(cury: single;
+      var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
+var
+  j: integer;
+  dy: single;
+  info: PLinearColorInfo;
+begin
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to nbSegments-1 do
+    begin
+      dy := cury - segments[j].y1;
+      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
+      inter[nbinter].winding := segments[j].winding;
+      info := PLinearColorInfo(segments[j].data);
+      TLinearColorGradientIntersectionInfo(inter[nbinter]).color := info^.Color + info^.ColorSlopes*dy;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
+procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap;
+  polyInfo: TPolygonLinearColorGradientInfo; NonZeroWinding: boolean);
+var
+  inter:    array of TIntersectionInfo;
+  nbInter:  integer;
+
+  procedure DrawGradientLine(yb: integer; ix1: integer; ix2: integer;
+    x1: Single; c1: TColorF; x2: Single; c2: TColorF);
+  var
+    colorPos: TColorF;
+    colorStep: TColorF;
+    t: single;
+    pdest: PBGRAPixel;
+    i: LongInt;
+    ec: TExpandedPixel;
+  begin
+    t := ((ix1+0.5)-x1)/(x2-x1);
+    colorPos := c1 + (c2-c1)*t;
+    colorStep := (c2-c1)*(1/(x2-x1));
+    pdest := bmp.ScanLine[yb]+ix1;
+    for i := ix1 to ix2 do
+    begin
+      ec.red := round(colorPos[1]);
+      ec.green := round(colorPos[2]);
+      ec.blue := round(colorPos[3]);
+      ec.alpha := round(colorPos[4]);
+      DrawPixelInlineWithAlphaCheck(pdest, GammaCompression(ec));
+      colorPos += colorStep;
+      inc(pdest);
+    end;
+  end;
+
+var
+  miny, maxy, minx, maxx: integer;
+
+  yb, i: integer;
+  x1, x2: single;
+
+  ix1, ix2: integer;
+
+begin
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
+  inter := polyInfo.CreateIntersectionArray;
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //find intersections
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
+
+    for i := 0 to nbinter div 2 - 1 do
+    begin
+      x1 := inter[i + i].interX;
+      x2 := inter[i + i+ 1].interX;
+
+      if x1 <> x2 then
+      begin
+        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
+        if ix1 <= ix2 then
+          DrawGradientLine(yb,ix1,ix2,
+            x1,TLinearColorGradientIntersectionInfo(inter[i+i]).Color,
+            x2,TLinearColorGradientIntersectionInfo(inter[i+i+1]).Color);
+      end;
+    end;
+  end;
+
+  polyInfo.FreeIntersectionArray(inter);
+  bmp.InvalidateBitmap;
+end;
+
+procedure PolygonLinearColorGradientAliased(bmp: TBGRACustomBitmap;
+  const points: array of TPointF; const Colors: array of TBGRAPixel;
+  NonZeroWinding: boolean);
+var polyInfo: TPolygonLinearColorGradientInfo;
+begin
+  polyInfo := TPolygonLinearColorGradientInfo.Create(points,Colors);
+  PolygonLinearColorGradientAliased(bmp,polyInfo,NonZeroWinding);
+  polyInfo.Free;
+end;
+
+{ TPolygonLinearTextureMappingInfo }
+
+constructor TPolygonLinearTextureMappingInfo.Create(const points: array of TPointF;
+  const texCoords: array of TPointF);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if length(texCoords) <> length(points) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i]<>points[i-1]) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+
+  inherited Create(lPoints);
+end;
+
+constructor TPolygonLinearTextureMappingInfo.Create(
+  const points: array of TPointF; const texCoords: array of TPointF;
+  const lightnesses: array of word);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if (length(texCoords) <> length(points)) or (length(lightnesses) <> length(points)) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  setlength(FLightnesses, length(lightnesses));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i]<>points[i-1]) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    FLightnesses[nbP] := lightnesses[i];
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1] = lPoints[0]) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+  SetLength(FLightnesses, nbP);
+
+  inherited Create(lPoints);
+end;
+
+{$hints off}
+function TPolygonLinearTextureMappingInfo.CreateSegmentData(numPt, nextPt: integer; x,
+  y: single): pointer;
+var
+  info: PLinearTextureInfo;
+  ty,dy: single;
+begin
+  New(info);
+  ty := FPoints[nextPt].y-FPoints[numPt].y;
+  dy := y-FPoints[numPt].y;
+  info^.TexCoordSlopes := (FTexCoords[nextPt] - FTexCoords[numPt])*(1/ty);
+  info^.TexCoord := FTexCoords[numPt] + info^.TexCoordSlopes*dy;
+  if FLightnesses <> nil then
+  begin
+    info^.lightnessSlope := (FLightnesses[nextPt] - FLightnesses[numPt])*(1/ty);
+    info^.lightness := FLightnesses[numPt] + info^.lightnessSlope*dy;
+  end else
+  begin
+    info^.lightness := 32768;
+    info^.lightnessSlope := 0;
+  end;
+  Result:= info;
+end;
+{$hints on}
+
+function TPolygonLinearTextureMappingInfo.CreateIntersectionInfo: TIntersectionInfo;
+begin
+  result := TLinearTextureMappingIntersectionInfo.Create;
+end;
+
+procedure TPolygonLinearTextureMappingInfo.ComputeIntersection(cury: single;
+      var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
+var
+  j: integer;
+  dy: single;
+  info: PLinearTextureInfo;
+begin
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to nbSegments-1 do
+    begin
+      dy := cury - segments[j].y1;
+      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
+      inter[nbinter].winding := segments[j].winding;
+      info := PLinearTextureInfo(segments[j].data);
+      TLinearTextureMappingIntersectionInfo(inter[nbinter]).texCoord := info^.TexCoord + info^.TexCoordSlopes*dy;
+      if FLightnesses<>nil then
+        TLinearTextureMappingIntersectionInfo(inter[nbinter]).lightness := round(info^.lightness + info^.lightnessSlope*dy)
+      else
+        TLinearTextureMappingIntersectionInfo(inter[nbinter]).lightness := 32768;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
+{$hints off}
+procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap; polyInfo: TPolygonLinearTextureMappingInfo;
+  texture: IBGRAScanner; TextureInterpolation: Boolean; NonZeroWinding: boolean);
+var
+  inter:    array of TIntersectionInfo;
+  nbInter:  integer;
+  scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
+
+  procedure DrawTextureLineWithoutLight(yb: integer; ix1: integer; ix2: integer;
+    info1,info2: TLinearTextureMappingIntersectionInfo;
+    WithInterpolation: boolean);
+    {$i lineartexscan.inc}
+
+  procedure DrawTextureLineWithLight(yb: integer; ix1: integer; ix2: integer;
+    info1,info2: TLinearTextureMappingIntersectionInfo;
+    WithInterpolation: boolean);
+    {$define PARAM_USELIGHTING}
+    {$i lineartexscan.inc}
+
+var
+  miny, maxy, minx, maxx: integer;
+
+  yb, i: integer;
+  x1, x2: single;
+
+  ix1, ix2: integer;
+
+begin
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
+
+  scanAtFunc := @texture.ScanAt;
+
+  inter := polyInfo.CreateIntersectionArray;
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //find intersections
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
+    for i := 0 to nbinter div 2 - 1 do
+    begin
+      x1 := inter[i + i].interX;
+      x2 := inter[i + i+ 1].interX;
+
+      if x1 <> x2 then
+      begin
+        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
+        if ix1 <= ix2 then
+        begin
+          if (TLinearTextureMappingIntersectionInfo(inter[i+i]).lightness = 32768) and
+             (TLinearTextureMappingIntersectionInfo(inter[i+i+1]).lightness = 32768) then
+            DrawTextureLineWithoutLight(yb,ix1,ix2,
+               TLinearTextureMappingIntersectionInfo(inter[i+i]),
+               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
+               TextureInterpolation)
+          else
+            DrawTextureLineWithLight(yb,ix1,ix2,
+               TLinearTextureMappingIntersectionInfo(inter[i+i]),
+               TLinearTextureMappingIntersectionInfo(inter[i+i+1]),
+               TextureInterpolation);
+        end;
+      end;
+    end;
+  end;
+
+  polyInfo.FreeIntersectionArray(inter);
+  bmp.InvalidateBitmap;
+end;
+{$hints on}
+
+procedure PolygonLinearTextureMappingAliased(bmp: TBGRACustomBitmap;
+  const points: array of TPointF; texture: IBGRAScanner;
+  const texCoords: array of TPointF; TextureInterpolation: Boolean; NonZeroWinding: boolean);
+var polyInfo: TPolygonLinearTextureMappingInfo;
+begin
+  polyInfo := TPolygonLinearTextureMappingInfo.Create(points,texCoords);
+  PolygonLinearTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation,NonZeroWinding);
+  polyInfo.Free;
+end;
+
+procedure PolygonLinearTextureMappingAliasedWithLightness(
+  bmp: TBGRACustomBitmap; const points: array of TPointF;
+  texture: IBGRAScanner; const texCoords: array of TPointF;
+  TextureInterpolation: Boolean; lightnesses: array of word;
+  NonZeroWinding: boolean);
+var polyInfo: TPolygonLinearTextureMappingInfo;
+begin
+  polyInfo := TPolygonLinearTextureMappingInfo.Create(points,texCoords,lightnesses);
+  PolygonLinearTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation,NonZeroWinding);
+  polyInfo.Free;
+end;
+
+{ TPolygonPerspectiveTextureMappingInfo }
+
+constructor TPolygonPerspectiveTextureMappingInfo.Create(
+  const points: array of TPointF; const pointsZ: array of single;
+  const texCoords: array of TPointF);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if (length(texCoords) <> length(points)) or (length(pointsZ) <> length(points)) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  SetLength(FPointsZ, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i].x<>points[i-1].X) or (points[i].y<>points[i-1].y) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    FPointsZ[nbP] := abs(pointsZ[i]);
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1].X = lPoints[0].X) and (lPoints[nbP-1].Y = lPoints[0].Y) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+  SetLength(FPointsZ, nbP);
+
+  inherited Create(lPoints);
+end;
+
+constructor TPolygonPerspectiveTextureMappingInfo.Create(
+  const points: array of TPointF; const pointsZ: array of single;
+  const texCoords: array of TPointF; const lightnesses: array of word);
+var
+  i: Integer;
+  lPoints: array of TPointF;
+  nbP: integer;
+begin
+  if (length(texCoords) <> length(points)) or (length(pointsZ) <> length(points)) or
+     (length(lightnesses) <> length(points)) then
+    raise Exception.Create('Dimensions mismatch');
+
+  setlength(lPoints, length(points));
+  SetLength(FTexCoords, length(points));
+  SetLength(FPointsZ, length(points));
+  setLength(FLightnesses, length(points));
+  nbP := 0;
+  for i := 0 to high(points) do
+  if (i=0) or (points[i].x<>points[i-1].X) or (points[i].y<>points[i-1].y) then
+  begin
+    lPoints[nbP] := points[i];
+    FTexCoords[nbP] := texCoords[i];
+    FPointsZ[nbP] := abs(pointsZ[i]);
+    FLightnesses[nbP] := lightnesses[i];
+    inc(nbP);
+  end;
+  if (nbP>0) and (lPoints[nbP-1].X = lPoints[0].X) and (lPoints[nbP-1].Y = lPoints[0].Y) then dec(NbP);
+  setlength(lPoints, nbP);
+  SetLength(FTexCoords, nbP);
+  SetLength(FPointsZ, nbP);
+  SetLength(FLightnesses, nbP);
+
+  inherited Create(lPoints);
+end;
+
+{$hints off}
+
+function TPolygonPerspectiveTextureMappingInfo.CreateSegmentData(numPt,
+  nextPt: integer; x, y: single): pointer;
+var
+  info: PPerspectiveTextureInfo;
+  ty,dy: single;
+  CurInvZ,NextInvZ: single;
+  CurTexCoordDivByZ: TPointF;
+  NextTexCoordDivByZ: TPointF;
+begin
+  New(info);
+  CurInvZ := 1/FPointsZ[numPt];
+  CurTexCoordDivByZ := FTexCoords[numPt]*CurInvZ;
+  NextInvZ := 1/FPointsZ[nextPt];
+  NextTexCoordDivByZ := FTexCoords[nextPt]*NextInvZ;
+  ty := FPoints[nextPt].y-FPoints[numPt].y;
+  info^.TexCoordDivByZSlopes := (NextTexCoordDivByZ - CurTexCoordDivByZ)*(1/ty);
+  dy := y-FPoints[numPt].y;
+  info^.TexCoordDivByZ := CurTexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+  info^.InvZSlope := (NextInvZ-CurInvZ)/ty;
+  info^.InvZ := CurInvZ+dy*info^.InvZSlope;
+  if FLightnesses <> nil then
+  begin
+    info^.lightnessSlope := (FLightnesses[nextPt] - FLightnesses[numPt])*(1/ty);
+    info^.lightness := FLightnesses[numPt] + info^.lightnessSlope*dy;
+  end else
+  begin
+    info^.lightness := 32768;
+    info^.lightnessSlope := 0;
+  end;
+  Result:= info;
+end;
+{$hints on}
+
+function TPolygonPerspectiveTextureMappingInfo.CreateIntersectionInfo: TIntersectionInfo;
+begin
+  Result:= TPerspectiveTextureMappingIntersectionInfo.Create;
+end;
+
+procedure TPolygonPerspectiveTextureMappingInfo.ComputeIntersection(cury: single;
+      var inter: ArrayOfTIntersectionInfo; var nbInter: integer);
+var
+  j: integer;
+  dy: single;
+  info: PPerspectiveTextureInfo;
+begin
+  if length(FSlices)=0 then exit;
+
+  while (cury < FSlices[FCurSlice].y1) and (FCurSlice > 0) do dec(FCurSlice);
+  while (cury > FSlices[FCurSlice].y2) and (FCurSlice < high(FSlices)) do inc(FCurSlice);
+  with FSlices[FCurSlice] do
+  if (cury >= y1) and (cury <= y2) then
+  begin
+    for j := 0 to nbSegments-1 do
+    begin
+      dy := cury - segments[j].y1;
+      inter[nbinter].interX := dy * segments[j].slope + segments[j].x1;
+      inter[nbinter].winding := segments[j].winding;
+      info := PPerspectiveTextureInfo(segments[j].data);
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).coordInvZ := dy*info^.InvZSlope + info^.InvZ;
+      TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).texCoordDivByZ := info^.TexCoordDivByZ + info^.TexCoordDivByZSlopes*dy;
+      if FLightnesses<>nil then
+        TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).lightness := round(info^.lightness + info^.lightnessSlope*dy)
+      else
+        TPerspectiveTextureMappingIntersectionInfo(inter[nbinter]).lightness := 32768;
+      Inc(nbinter);
+    end;
+  end;
+end;
+
+{$hints off}
+procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap;
+  polyInfo: TPolygonPerspectiveTextureMappingInfo; texture: IBGRAScanner;
+  TextureInterpolation: Boolean; NonZeroWinding: boolean);
+var
+  inter:    array of TIntersectionInfo;
+  nbInter:  integer;
+
+  scanAtFunc: function(X,Y: Single): TBGRAPixel of object;
+
+  procedure DrawTextureLineWithoutLight(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$i perspectivescan.inc}
+
+  procedure DrawTextureLineWithLight(yb: integer; ix1: integer; ix2: integer;
+      info1, info2 : TPerspectiveTextureMappingIntersectionInfo; WithInterpolation: boolean);
+    {$define PARAM_USELIGHTING}
+    {$i perspectivescan.inc}
+
+var
+  miny, maxy, minx, maxx: integer;
+
+  yb, i : integer;
+  x1, x2: single;
+
+  ix1, ix2: integer;
+
+begin
+  If not polyInfo.ComputeMinMax(minx,miny,maxx,maxy,bmp) then exit;
+
+  inter := polyInfo.CreateIntersectionArray;
+  scanAtFunc := @texture.ScanAt;
+
+  //vertical scan
+  for yb := miny to maxy do
+  begin
+    //find intersections
+    polyInfo.ComputeAndSort(yb+0.5001,inter,nbInter,NonZeroWinding);
+
+    for i := 0 to nbinter div 2 - 1 do
+    begin
+      x1 := inter[i + i].interX;
+      x2 := inter[i + i+ 1].interX;
+
+      if x1 <> x2 then
+      begin
+        ComputeAliasedRowBounds(x1,x2, minx,maxx, ix1,ix2);
+        if ix1 <= ix2 then
+        begin
+          if (TPerspectiveTextureMappingIntersectionInfo(inter[i+i]).lightness = 32768) and
+             (TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]).lightness = 32768) then
+            DrawTextureLineWithoutLight(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation)
+          else
+            DrawTextureLineWithLight(yb,ix1,ix2,
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i]),
+              TPerspectiveTextureMappingIntersectionInfo(inter[i+i+1]),
+              TextureInterpolation);
+        end;
+      end;
+    end;
+  end;
+
+  polyInfo.FreeIntersectionArray(inter);
+  bmp.InvalidateBitmap;
+end;
+{$hints on}
+
+procedure PolygonPerspectiveTextureMappingAliased(bmp: TBGRACustomBitmap;
+  const points: array of TPointF; const pointsZ: array of single;
+  texture: IBGRAScanner; const texCoords: array of TPointF;
+  TextureInterpolation: Boolean; NonZeroWinding: boolean);
+var polyInfo: TPolygonPerspectiveTextureMappingInfo;
+begin
+  polyInfo := TPolygonPerspectiveTextureMappingInfo.Create(points,pointsZ,texCoords);
+  PolygonPerspectiveTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation, NonZeroWinding);
+  polyInfo.Free;
+end;
+
+procedure PolygonPerspectiveTextureMappingAliasedWithLightness(
+  bmp: TBGRACustomBitmap; const points: array of TPointF;
+  const pointsZ: array of single; texture: IBGRAScanner;
+  const texCoords: array of TPointF; TextureInterpolation: Boolean;
+  lightnesses: array of word; NonZeroWinding: boolean);
+var polyInfo: TPolygonPerspectiveTextureMappingInfo;
+begin
+  polyInfo := TPolygonPerspectiveTextureMappingInfo.Create(points,pointsZ,texCoords,lightnesses);
+  PolygonPerspectiveTextureMappingAliased(bmp,polyInfo,texture,TextureInterpolation, NonZeroWinding);
+  polyInfo.Free;
 end;
 
 end.

@@ -51,7 +51,7 @@ type
   end;
 
   //general purpose color variable with floating point values
-  TColorF = packed array[1..4] of single;
+  TColorF = array[1..4] of single;
   
   { These types are used as parameters }
 
@@ -127,7 +127,7 @@ function BGRAPenStyle(dash1, space1: single; dash2: single=0; space2: single = 0
 { Point, polygon and curve structures }
 type
   PPointF = ^TPointF;
-  TPointF = packed record
+  TPointF = record
     x, y: single;
   end;
   ArrayOfTPointF = array of TPointF;
@@ -169,12 +169,170 @@ const
   BGRAWhite: TBGRAPixel = (blue: 255; green: 255; red: 255; alpha: 255);
   BGRABlack: TBGRAPixel = (blue: 0; green: 0; red: 0; alpha: 255);
 
+  //Red colors
+  CSSIndianRed: TBGRAPixel = (blue: 92; green: 92; red: 205; alpha: 255);
+  CSSLightCoral: TBGRAPixel = (blue: 128; green: 128; red: 240; alpha: 255);
+  CSSSalmon: TBGRAPixel = (blue: 114; green: 128; red: 250; alpha: 255);
+  CSSDarkSalmon: TBGRAPixel = (blue: 122; green: 150; red: 233; alpha: 255);
+  CSSRed: TBGRAPixel = (blue: 0; green: 0; red: 255; alpha: 255);
+  CSSCrimson: TBGRAPixel = (blue: 60; green: 20; red: 220; alpha: 255);
+  CSSFireBrick: TBGRAPixel = (blue: 34; green: 34; red: 178; alpha: 255);
+  CSSDarkRed: TBGRAPixel = (blue: 0; green: 0; red: 139; alpha: 255);
+
+  //Pink colors
+  CSSPink: TBGRAPixel = (blue: 203; green: 192; red: 255; alpha: 255);
+  CSSLightPink: TBGRAPixel = (blue: 193; green: 182; red: 255; alpha: 255);
+  CSSHotPink: TBGRAPixel = (blue: 180; green: 105; red: 255; alpha: 255);
+  CSSDeepPink: TBGRAPixel = (blue: 147; green: 20; red: 255; alpha: 255);
+  CSSMediumVioletRed: TBGRAPixel = (blue: 133; green: 21; red: 199; alpha: 255);
+  CSSPaleVioletRed: TBGRAPixel = (blue: 147; green: 112; red: 219; alpha: 255);
+
+  //Orange colors
+  CSSLightSalmon: TBGRAPixel = (blue: 122; green: 160; red: 255; alpha: 255);
+  CSSCoral: TBGRAPixel = (blue: 80; green: 127; red: 255; alpha: 255);
+  CSSTomato: TBGRAPixel = (blue: 71; green: 99; red: 255; alpha: 255);
+  CSSOrangeRed: TBGRAPixel = (blue: 0; green: 69; red: 255; alpha: 255);
+  CSSDarkOrange: TBGRAPixel = (blue: 0; green: 140; red: 255; alpha: 255);
+  CSSOrange: TBGRAPixel = (blue: 0; green: 165; red: 255; alpha: 255);
+
+  //Yellow colors
+  CSSGold: TBGRAPixel = (blue: 0; green: 215; red: 255; alpha: 255);
+  CSSYellow: TBGRAPixel = (blue: 0; green: 255; red: 255; alpha: 255);
+  CSSLightYellow: TBGRAPixel = (blue: 224; green: 255; red: 255; alpha: 255);
+  CSSLemonChiffon: TBGRAPixel = (blue: 205; green: 250; red: 255; alpha: 255);
+  CSSLightGoldenrodYellow: TBGRAPixel = (blue: 210; green: 250; red: 250; alpha: 255);
+  CSSPapayaWhip: TBGRAPixel = (blue: 213; green: 239; red: 255; alpha: 255);
+  CSSMoccasin: TBGRAPixel = (blue: 181; green: 228; red: 255; alpha: 255);
+  CSSPeachPuff: TBGRAPixel = (blue: 185; green: 218; red: 255; alpha: 255);
+  CSSPaleGoldenrod: TBGRAPixel = (blue: 170; green: 232; red: 238; alpha: 255);
+  CSSKhaki: TBGRAPixel = (blue: 140; green: 230; red: 240; alpha: 255);
+  CSSDarkKhaki: TBGRAPixel = (blue: 107; green: 183; red: 189; alpha: 255);
+
+  //Purple colors
+  CSSLavender: TBGRAPixel = (blue: 250; green: 230; red: 230; alpha: 255);
+  CSSThistle: TBGRAPixel = (blue: 216; green: 191; red: 216; alpha: 255);
+  CSSPlum: TBGRAPixel = (blue: 221; green: 160; red: 221; alpha: 255);
+  CSSViolet: TBGRAPixel = (blue: 238; green: 130; red: 238; alpha: 255);
+  CSSOrchid: TBGRAPixel = (blue: 214; green: 112; red: 218; alpha: 255);
+  CSSFuchsia: TBGRAPixel = (blue: 255; green: 0; red: 255; alpha: 255);
+  CSSMagenta: TBGRAPixel = (blue: 255; green: 0; red: 255; alpha: 255);
+  CSSMediumOrchid: TBGRAPixel = (blue: 211; green: 85; red: 186; alpha: 255);
+  CSSMediumPurple: TBGRAPixel = (blue: 219; green: 112; red: 147; alpha: 255);
+  CSSBlueViolet: TBGRAPixel = (blue: 226; green: 43; red: 138; alpha: 255);
+  CSSDarkViolet: TBGRAPixel = (blue: 211; green: 0; red: 148; alpha: 255);
+  CSSDarkOrchid: TBGRAPixel = (blue: 204; green: 50; red: 153; alpha: 255);
+  CSSDarkMagenta: TBGRAPixel = (blue: 139; green: 0; red: 139; alpha: 255);
+  CSSPurple: TBGRAPixel = (blue: 128; green: 0; red: 128; alpha: 255);
+  CSSIndigo: TBGRAPixel = (blue: 130; green: 0; red: 75; alpha: 255);
+  CSSDarkSlateBlue: TBGRAPixel = (blue: 139; green: 61; red: 72; alpha: 255);
+  CSSSlateBlue: TBGRAPixel = (blue: 205; green: 90; red: 106; alpha: 255);
+  CSSMediumSlateBlue: TBGRAPixel = (blue: 238; green: 104; red: 123; alpha: 255);
+
+  //Green colors
+  CSSGreenYellow: TBGRAPixel = (blue: 47; green: 255; red: 173; alpha: 255);
+  CSSChartreuse: TBGRAPixel = (blue: 0; green: 255; red: 127; alpha: 255);
+  CSSLawnGreen: TBGRAPixel = (blue: 0; green: 252; red: 124; alpha: 255);
+  CSSLime: TBGRAPixel = (blue: 0; green: 255; red: 0; alpha: 255);
+  CSSLimeGreen: TBGRAPixel = (blue: 50; green: 205; red: 50; alpha: 255);
+  CSSPaleGreen: TBGRAPixel = (blue: 152; green: 251; red: 152; alpha: 255);
+  CSSLightGreen: TBGRAPixel = (blue: 144; green: 238; red: 144; alpha: 255);
+  CSSMediumSpringGreen: TBGRAPixel = (blue: 154; green: 250; red: 0; alpha: 255);
+  CSSSpringGreen: TBGRAPixel = (blue: 127; green: 255; red: 0; alpha: 255);
+  CSSMediumSeaGreen: TBGRAPixel = (blue: 113; green: 179; red: 60; alpha: 255);
+  CSSSeaGreen: TBGRAPixel = (blue: 87; green: 139; red: 46; alpha: 255);
+  CSSForestGreen: TBGRAPixel = (blue: 34; green: 139; red: 34; alpha: 255);
+  CSSGreen: TBGRAPixel = (blue: 0; green: 128; red: 0; alpha: 255);
+  CSSDarkGreen: TBGRAPixel = (blue: 0; green: 100; red: 0; alpha: 255);
+  CSSYellowGreen: TBGRAPixel = (blue: 50; green: 205; red: 154; alpha: 255);
+  CSSOliveDrab: TBGRAPixel = (blue: 35; green: 142; red: 107; alpha: 255);
+  CSSOlive: TBGRAPixel = (blue: 0; green: 128; red: 128; alpha: 255);
+  CSSDarkOliveGreen: TBGRAPixel = (blue: 47; green: 107; red: 85; alpha: 255);
+  CSSMediumAquamarine: TBGRAPixel = (blue: 170; green: 205; red: 102; alpha: 255);
+  CSSDarkSeaGreen: TBGRAPixel = (blue: 143; green: 188; red: 143; alpha: 255);
+  CSSLightSeaGreen: TBGRAPixel = (blue: 170; green: 178; red: 32; alpha: 255);
+  CSSDarkCyan: TBGRAPixel = (blue: 139; green: 139; red: 0; alpha: 255);
+  CSSTeal: TBGRAPixel = (blue: 128; green: 128; red: 0; alpha: 255);
+
+  //Blue/Cyan colors
+  CSSAqua: TBGRAPixel = (blue: 255; green: 255; red: 0; alpha: 255);
+  CSSCyan: TBGRAPixel = (blue: 255; green: 255; red: 0; alpha: 255);
+  CSSLightCyan: TBGRAPixel = (blue: 255; green: 255; red: 224; alpha: 255);
+  CSSPaleTurquoise: TBGRAPixel = (blue: 238; green: 238; red: 175; alpha: 255);
+  CSSAquamarine: TBGRAPixel = (blue: 212; green: 255; red: 127; alpha: 255);
+  CSSTurquoise: TBGRAPixel = (blue: 208; green: 224; red: 64; alpha: 255);
+  CSSMediumTurquoise: TBGRAPixel = (blue: 204; green: 209; red: 72; alpha: 255);
+  CSSDarkTurquoise: TBGRAPixel = (blue: 209; green: 206; red: 0; alpha: 255);
+  CSSCadetBlue: TBGRAPixel = (blue: 160; green: 158; red: 95; alpha: 255);
+  CSSSteelBlue: TBGRAPixel = (blue: 180; green: 130; red: 70; alpha: 255);
+  CSSLightSteelBlue: TBGRAPixel = (blue: 222; green: 196; red: 176; alpha: 255);
+  CSSPowderBlue: TBGRAPixel = (blue: 230; green: 224; red: 176; alpha: 255);
+  CSSLightBlue: TBGRAPixel = (blue: 230; green: 216; red: 173; alpha: 255);
+  CSSSkyBlue: TBGRAPixel = (blue: 235; green: 206; red: 135; alpha: 255);
+  CSSLightSkyBlue: TBGRAPixel = (blue: 250; green: 206; red: 135; alpha: 255);
+  CSSDeepSkyBlue: TBGRAPixel = (blue: 255; green: 191; red: 0; alpha: 255);
+  CSSDodgerBlue: TBGRAPixel = (blue: 255; green: 144; red: 30; alpha: 255);
+  CSSCornflowerBlue: TBGRAPixel = (blue: 237; green: 149; red: 100; alpha: 255);
+  CSSRoyalBlue: TBGRAPixel = (blue: 255; green: 105; red: 65; alpha: 255);
+  CSSBlue: TBGRAPixel = (blue: 255; green: 0; red: 0; alpha: 255);
+  CSSMediumBlue: TBGRAPixel = (blue: 205; green: 0; red: 0; alpha: 255);
+  CSSDarkBlue: TBGRAPixel = (blue: 139; green: 0; red: 0; alpha: 255);
+  CSSNavy: TBGRAPixel = (blue: 128; green: 0; red: 0; alpha: 255);
+  CSSMidnightBlue: TBGRAPixel = (blue: 112; green: 25; red: 25; alpha: 255);
+
+  //Brown colors
+  CSSCornsilk: TBGRAPixel = (blue: 220; green: 248; red: 255; alpha: 255);
+  CSSBlanchedAlmond: TBGRAPixel = (blue: 205; green: 235; red: 255; alpha: 255);
+  CSSBisque: TBGRAPixel = (blue: 196; green: 228; red: 255; alpha: 255);
+  CSSNavajoWhite: TBGRAPixel = (blue: 173; green: 222; red: 255; alpha: 255);
+  CSSWheat: TBGRAPixel = (blue: 179; green: 222; red: 245; alpha: 255);
+  CSSBurlyWood: TBGRAPixel = (blue: 135; green: 184; red: 222; alpha: 255);
+  CSSTan: TBGRAPixel = (blue: 140; green: 180; red: 210; alpha: 255);
+  CSSRosyBrown: TBGRAPixel = (blue: 143; green: 143; red: 188; alpha: 255);
+  CSSSandyBrown: TBGRAPixel = (blue: 96; green: 164; red: 244; alpha: 255);
+  CSSGoldenrod: TBGRAPixel = (blue: 32; green: 165; red: 218; alpha: 255);
+  CSSDarkGoldenrod: TBGRAPixel = (blue: 11; green: 134; red: 184; alpha: 255);
+  CSSPeru: TBGRAPixel = (blue: 63; green: 133; red: 205; alpha: 255);
+  CSSChocolate: TBGRAPixel = (blue: 30; green: 105; red: 210; alpha: 255);
+  CSSSaddleBrown: TBGRAPixel = (blue: 19; green: 69; red: 139; alpha: 255);
+  CSSSienna: TBGRAPixel = (blue: 45; green: 82; red: 160; alpha: 255);
+  CSSBrown: TBGRAPixel = (blue: 42; green: 42; red: 165; alpha: 255);
+  CSSMaroon: TBGRAPixel = (blue: 0; green: 0; red: 128; alpha: 255);
+
+  //White colors
+  CSSWhite: TBGRAPixel = (blue: 255; green: 255; red: 255; alpha: 255);
+  CSSSnow: TBGRAPixel = (blue: 250; green: 250; red: 255; alpha: 255);
+  CSSHoneydew: TBGRAPixel = (blue: 240; green: 255; red: 250; alpha: 255);
+  CSSMintCream: TBGRAPixel = (blue: 250; green: 255; red: 245; alpha: 255);
+  CSSAzure: TBGRAPixel = (blue: 255; green: 255; red: 240; alpha: 255);
+  CSSAliceBlue: TBGRAPixel = (blue: 255; green: 248; red: 240; alpha: 255);
+  CSSGhostWhite: TBGRAPixel = (blue: 255; green: 248; red: 248; alpha: 255);
+  CSSWhiteSmoke: TBGRAPixel = (blue: 245; green: 245; red: 245; alpha: 255);
+  CSSSeashell: TBGRAPixel = (blue: 255; green: 245; red: 238; alpha: 255);
+  CSSBeige: TBGRAPixel = (blue: 220; green: 245; red: 245; alpha: 255);
+  CSSOldLace: TBGRAPixel = (blue: 230; green: 245; red: 253; alpha: 255);
+  CSSFloralWhite: TBGRAPixel = (blue: 240; green: 250; red: 255; alpha: 255);
+  CSSIvory: TBGRAPixel = (blue: 240; green: 255; red: 255; alpha: 255);
+  CSSAntiqueWhite: TBGRAPixel = (blue: 215; green: 235; red: 250; alpha: 255);
+  CSSLinen: TBGRAPixel = (blue: 230; green: 240; red: 250; alpha: 255);
+  CSSLavenderBlush: TBGRAPixel = (blue: 245; green: 240; red: 255; alpha: 255);
+  CSSMistyRose: TBGRAPixel = (blue: 255; green: 228; red: 255; alpha: 255);
+
+  //Gray colors
+  CSSGainsboro: TBGRAPixel = (blue: 220; green: 220; red: 220; alpha: 255);
+  CSSLightGray: TBGRAPixel = (blue: 211; green: 211; red: 211; alpha: 255);
+  CSSSilver: TBGRAPixel = (blue: 192; green: 192; red: 192; alpha: 255);
+  CSSDarkGray: TBGRAPixel = (blue: 169; green: 169; red: 169; alpha: 255);
+  CSSGray: TBGRAPixel = (blue: 128; green: 128; red: 128; alpha: 255);
+  CSSDimGray: TBGRAPixel = (blue: 105; green: 105; red: 105; alpha: 255);
+  CSSLightSlateGray: TBGRAPixel = (blue: 153; green: 136; red: 119; alpha: 255);
+  CSSSlateGray: TBGRAPixel = (blue: 144; green: 128; red: 112; alpha: 255);
+  CSSDarkSlateGray: TBGRAPixel = (blue: 79; green: 79; red: 47; alpha: 255);
+  CSSBlack: TBGRAPixel = (blue: 0; green: 0; red: 0; alpha: 255);
+
   { This color is needed for drawing black shapes on the standard TCanvas, because
     when drawing with pure black, there is no way to know if something has been
     drawn or if it is transparent }
   clBlackOpaque = TColor($010000);
-
-{$i csscolorconst.inc}
 
 type
   TBGRAColorDefinition = record
@@ -221,13 +379,11 @@ type
     procedure ScanMoveTo(X,Y: Integer);
     function ScanNextPixel: TBGRAPixel;
     function ScanAt(X,Y: Single): TBGRAPixel;
-    function ScanAtInteger(X,Y: integer): TBGRAPixel;
     procedure ScanPutPixels(pdest: PBGRAPixel; count: integer; mode: TDrawMode);
     function IsScanPutPixelsDefined: boolean;
   end;
 
   TScanAtFunction = function (X,Y: Single): TBGRAPixel of object;
-  TScanAtIntegerFunction = function (X,Y: Integer): TBGRAPixel of object;
   TScanNextPixelFunction = function: TBGRAPixel of object;
   TBGRACustomGradient = class;
 
@@ -385,8 +541,8 @@ type
      procedure FillPolyLinearColor(const points: array of TPointF; AColors: array of TBGRAPixel);  virtual; abstract; overload;
      procedure FillPolyLinearMapping(const points: array of TPointF; texture: IBGRAScanner; texCoords: array of TPointF; TextureInterpolation: Boolean); virtual; abstract; overload;
      procedure FillPolyLinearMappingLightness(const points: array of TPointF; texture: IBGRAScanner; texCoords: array of TPointF; lightnesses: array of word; TextureInterpolation: Boolean); virtual; abstract; overload;
-     procedure FillPolyPerspectiveMapping(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; TextureInterpolation: Boolean; zbuffer: psingle = nil); virtual; abstract; overload;
-     procedure FillPolyPerspectiveMappingLightness(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; lightnesses: array of word; TextureInterpolation: Boolean; zbuffer: psingle = nil); virtual; abstract; overload;
+     procedure FillPolyPerspectiveMapping(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; TextureInterpolation: Boolean); virtual; abstract; overload;
+     procedure FillPolyPerspectiveMappingLightness(const points: array of TPointF; const pointsZ: array of single; texture: IBGRAScanner; texCoords: array of TPointF; lightnesses: array of word; TextureInterpolation: Boolean); virtual; abstract; overload;
 
      procedure FillPoly(const points: array of TPointF; c: TBGRAPixel; drawmode: TDrawMode); virtual; abstract;
      procedure FillPoly(const points: array of TPointF; texture: IBGRAScanner; drawmode: TDrawMode); virtual; abstract;
@@ -432,13 +588,13 @@ type
      procedure EraseRectAntialias(x, y, x2, y2: single; alpha: byte); virtual; abstract;
      procedure AlphaFillRect(x, y, x2, y2: integer; alpha: byte); virtual; abstract;
 
-     procedure TextOut(x, y: single; s: string; c: TBGRAPixel; align: TAlignment); virtual; abstract; overload;
-     procedure TextOut(x, y: single; s: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract; overload;
-     procedure TextOutAngle(x, y: single; orientation: integer; s: string; c: TBGRAPixel; align: TAlignment); virtual; abstract;
-     procedure TextOutAngle(x, y: single; orientation: integer; s: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract;
-     procedure TextOut(x, y: single; s: string; c: TBGRAPixel); virtual; overload;
-     procedure TextOut(x, y: single; s: string; c: TColor); virtual; overload;
-     procedure TextOut(x, y: single; s: string; texture: IBGRAScanner); virtual; overload;
+     procedure TextOut(x, y: integer; s: string; c: TBGRAPixel; align: TAlignment); virtual; abstract; overload;
+     procedure TextOut(x, y: integer; s: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract; overload;
+     procedure TextOutAngle(x, y, orientation: integer; s: string; c: TBGRAPixel; align: TAlignment); virtual; abstract;
+     procedure TextOutAngle(x, y, orientation: integer; s: string; texture: IBGRAScanner; align: TAlignment); virtual; abstract;
+     procedure TextOut(x, y: integer; s: string; c: TBGRAPixel); virtual; overload;
+     procedure TextOut(x, y: integer; s: string; c: TColor); virtual; overload;
+     procedure TextOut(x, y: integer; s: string; texture: IBGRAScanner); virtual; overload;
      procedure TextRect(ARect: TRect; x, y: integer; s: string; style: TTextStyle; c: TBGRAPixel); virtual; abstract; overload;
      procedure TextRect(ARect: TRect; x, y: integer; s: string; style: TTextStyle; texture: IBGRAScanner); virtual; abstract; overload;
      procedure TextRect(ARect: TRect; s: string; halign: TAlignment; valign: TTextLayout; c: TBGRAPixel); virtual; overload;
@@ -515,7 +671,6 @@ type
      {BGRA bitmap functions}
      procedure PutImage(x, y: integer; Source: TBGRACustomBitmap; mode: TDrawMode; AOpacity: byte = 255); virtual; abstract;
      procedure PutImageSubpixel(x, y: single; Source: TBGRACustomBitmap);
-     procedure PutImagePart(x,y: integer; Source: TBGRACustomBitmap; SourceRect: TRect; mode: TDrawMode; AOpacity: byte = 255);
      procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOpacity: Byte=255); virtual; abstract;
      procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0; AOpacity: Byte=255); virtual; abstract;
      procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap;
@@ -531,8 +686,6 @@ type
      function RotateCCW: TBGRACustomBitmap; virtual; abstract;
      procedure Negative; virtual; abstract;
      procedure LinearNegative; virtual; abstract;
-     procedure ConvertToLinearRGB; virtual; abstract;
-     procedure ConvertFromLinearRGB; virtual; abstract;
      procedure SwapRedBlue; virtual; abstract;
      procedure GrayscaleToAlpha; virtual; abstract;
      procedure AlphaToGrayscale; virtual; abstract;
@@ -597,7 +750,6 @@ type
      function _Release: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
 
      //IBGRAScanner
-     function ScanAtInteger(X,Y: integer): TBGRAPixel; virtual; abstract;
      procedure ScanMoveTo(X,Y: Integer); virtual; abstract;
      function ScanNextPixel: TBGRAPixel; virtual; abstract;
      function ScanAt(X,Y: Single): TBGRAPixel; virtual; abstract;
@@ -611,7 +763,6 @@ type
   private
     FCurX,FCurY: integer;
   public
-    function ScanAtInteger(X,Y: integer): TBGRAPixel; virtual;
     procedure ScanMoveTo(X,Y: Integer); virtual;
     function ScanNextPixel: TBGRAPixel; virtual;
     function ScanAt(X,Y: Single): TBGRAPixel; virtual; abstract;
@@ -642,42 +793,23 @@ function SetIntensity(c: TExpandedPixel; intensity: word): TExpandedPixel;
 function GetLightness(c: TExpandedPixel): word; inline;
 function SetLightness(c: TExpandedPixel; lightness: word): TExpandedPixel;
 function ApplyLightnessFast(color: TBGRAPixel; lightness: word): TBGRAPixel; inline;
-function ApplyIntensityFast(color: TBGRAPixel; lightness: longword): TBGRAPixel;
-function CombineLightness(lightness1,lightness2: integer): integer;
 function BGRAToHSLA(c: TBGRAPixel): THSLAPixel;
-function ExpandedToHSLA(ec: TExpandedPixel): THSLAPixel; inline;
-function BGRAToGSBA(c: TBGRAPixel): THSLAPixel;
-function HSLAToExpanded(c: THSLAPixel): TExpandedPixel;
 function HSLAToBGRA(c: THSLAPixel): TBGRAPixel;
-function GtoH(ghue: word): word;
-function HtoG(hue: word): word;
-function HueDiff(h1, h2: word): word;
-function GetHue(ec: TExpandedPixel): word;
-function ColorImportance(ec: TExpandedPixel): word;
-function GSBAToBGRA(c: THSLAPixel): TBGRAPixel;
-function GSBAToHSLA(c: THSLAPixel): THSLAPixel;
 function GammaExpansion(c: TBGRAPixel): TExpandedPixel; inline;
 function GammaCompression(ec: TExpandedPixel): TBGRAPixel; inline;
 function GammaCompression(red,green,blue,alpha: word): TBGRAPixel; inline;
 function BGRAToGrayscale(c: TBGRAPixel): TBGRAPixel;
-function GrayscaleToBGRA(lightness: word): TBGRAPixel;
-function MergeBGRA(const colors: array of TBGRAPixel): TBGRAPixel; overload;
-function MergeBGRAWithGammaCorrection(c1: TBGRAPixel; weight1: byte; c2: TBGRAPixel; weight2: byte): TBGRAPixel;
 function MergeBGRA(c1, c2: TBGRAPixel): TBGRAPixel; overload;
 function MergeBGRA(c1: TBGRAPixel; weight1: integer; c2: TBGRAPixel; weight2: integer): TBGRAPixel; overload;
 function MergeBGRA(ec1, ec2: TExpandedPixel): TExpandedPixel; overload;
 function BGRA(red, green, blue, alpha: byte): TBGRAPixel; overload; inline;
 function BGRA(red, green, blue: byte): TBGRAPixel; overload; inline;
-function HSLA(hue, saturation, lightness, alpha: word): THSLAPixel; overload; inline;
-function HSLA(hue, saturation, lightness: word): THSLAPixel; overload; inline;
 function ColorToBGRA(color: TColor): TBGRAPixel; overload;
 function ColorToBGRA(color: TColor; opacity: byte): TBGRAPixel; overload;
 function BGRAToFPColor(AValue: TBGRAPixel): TFPColor; inline;
 function FPColorToBGRA(AValue: TFPColor): TBGRAPixel;
 function BGRAToColor(c: TBGRAPixel): TColor;
 operator = (const c1, c2: TBGRAPixel): boolean; inline;
-function ExpandedDiff(ec1, ec2: TExpandedPixel): word;
-function BGRAWordDiff(c1, c2: TBGRAPixel): word;
 function BGRADiff(c1, c2: TBGRAPixel): byte;
 operator - (const c1, c2: TColorF): TColorF; inline;
 operator + (const c1, c2: TColorF): TColorF; inline;
@@ -686,7 +818,6 @@ operator * (const c1: TColorF; factor: single): TColorF; inline;
 function ColorF(red,green,blue,alpha: single): TColorF;
 function BGRAToStr(c: TBGRAPixel): string;
 function StrToBGRA(str: string): TBGRAPixel;
-function StrToBGRA(str: string; DefaultColor: TBGRAPixel): TBGRAPixel;
 
 { Get height [0..1] stored in a TBGRAPixel }
 function MapHeight(Color: TBGRAPixel): Single;
@@ -1129,17 +1260,17 @@ begin
   FillRect(x, y, x2, y2, ColorToBGRA(c), dmSet);
 end;
 
-procedure TBGRACustomBitmap.TextOut(x, y: single; s: string; c: TBGRAPixel);
+procedure TBGRACustomBitmap.TextOut(x, y: integer; s: string; c: TBGRAPixel);
 begin
   TextOut(x, y, s, c, taLeftJustify);
 end;
 
-procedure TBGRACustomBitmap.TextOut(x, y: single; s: string; c: TColor);
+procedure TBGRACustomBitmap.TextOut(x, y: integer; s: string; c: TColor);
 begin
   TextOut(x, y, s, ColorToBGRA(c));
 end;
 
-procedure TBGRACustomBitmap.TextOut(x, y: single; s: string;
+procedure TBGRACustomBitmap.TextOut(x, y: integer; s: string;
   texture: IBGRAScanner);
 begin
   TextOut(x, y, s, texture, taLeftJustify);
@@ -1221,41 +1352,6 @@ begin
   PutImageAngle(x,y,source,0);
 end;
 
-procedure TBGRACustomBitmap.PutImagePart(x, y: integer;
-  Source: TBGRACustomBitmap; SourceRect: TRect; mode: TDrawMode; AOpacity: byte);
-var w,h,sourcex,sourcey,nx,ny,xb,yb,destx,desty: integer;
-    oldClip,newClip: TRect;
-begin
-  if Source = nil then exit;
-  w := SourceRect.Right-SourceRect.Left;
-  h := SourceRect.Bottom-SourceRect.Top;
-  if (w <= 0) or (h <= 0) or (Source.Width = 0) or (Source.Height = 0) then exit;
-  sourcex := PositiveMod(SourceRect.Left, Source.Width);
-  sourcey := PositiveMod(SourceRect.Top, Source.Height);
-  nx := (sourceX+w + Source.Width-1) div Source.Width;
-  ny := (sourceY+h + Source.Height-1) div Source.Height;
-
-  oldClip := ClipRect;
-  newClip := rect(x,y,x+w,y+h);
-  if not IntersectRect(newClip,newClip,oldClip) then exit;
-
-  ClipRect := newClip;
-
-  desty := y-sourcey;
-  for yb := 0 to ny-1 do
-  begin
-    destx := x-sourcex;
-    for xb := 0 to nx-1 do
-    begin
-      self.PutImage(destx,desty,Source,mode,AOpacity);
-      inc(destx,Source.Width);
-    end;
-    inc(desty,Source.Height);
-  end;
-
-  ClipRect := oldClip;
-end;
-
 { Interface gateway }
 function TBGRACustomBitmap.QueryInterface({$IFDEF FPC_HAS_CONSTREF}constref{$ELSE}const{$ENDIF} IID: TGUID; out Obj): HResult; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
 begin
@@ -1294,11 +1390,6 @@ end;
 { TBGRACustomScanner }
 { The abstract class record the position so that a derived class
   need only to redefine ScanAt }
-
-function TBGRACustomScanner.ScanAtInteger(X, Y: integer): TBGRAPixel;
-begin
-  result := ScanAt(X,Y);
-end;
 
 procedure TBGRACustomScanner.ScanMoveTo(X, Y: Integer);
 begin
@@ -1516,10 +1607,8 @@ begin
   end;
 end;
 
-function ApplyLightnessFast(color: TBGRAPixel; lightness: word): TBGRAPixel;
-var
-  r,g,b: word;
-  lightness256: byte;
+function ApplyLightnessFast(color: TBGRAPixel; lightness: word): TBGRAPixel; inline;
+var lightness256: byte;
 begin
   if lightness <= 32768 then
   begin
@@ -1533,97 +1622,31 @@ begin
   end else
   begin
     if lightness = 65535 then
-      result := BGRA(255,255,255,color.alpha) else
+      result := BGRAWhite else
     begin
-      lightness -= 32767;
-      r := GammaExpansionTab[color.red];
-      g := GammaExpansionTab[color.green];
-      b := GammaExpansionTab[color.blue];
-      result := BGRA(GammaCompressionTab[ r + (not r)*lightness shr 15 ],
-                     GammaCompressionTab[ g + (not g)*lightness shr 15 ],
-                     GammaCompressionTab[ b + (not b)*lightness shr 15 ],
+      lightness256 := GammaCompressionTab[(lightness-32767) shl 1];
+      result := BGRA(color.red + (255-color.red)*lightness256 shr 8,
+                     color.green + (255-color.green)*lightness256 shr 8,
+                     color.blue + (255-color.blue)*lightness256 shr 8,
                      color.alpha);
-    end;
-  end;
-end;
-
-function CombineLightness(lightness1,lightness2: integer): integer;
-{$ifdef CPUI386} {$asmmode intel} assembler;
-  asm
-    imul edx
-    shl edx, 17
-    shr eax, 15
-    or edx, eax
-    mov result, edx
-  end;
-{$ELSE}
-begin
-  result := int64(lightness1)*lightness2 shr 15;
-end;
-{$ENDIF}
-
-function ApplyIntensityFast(color: TBGRAPixel; lightness: longword): TBGRAPixel;
-var
-    maxValue,invMaxValue,r,g,b: longword;
-    lightness256: byte;
-begin
-  if lightness <= 32768 then
-  begin
-    if lightness = 32768 then
-      result := color else
-    begin
-      lightness256 := GammaCompressionTab[lightness shl 1];
-      result := BGRA(color.red * lightness256 shr 8, color.green*lightness256 shr 8,
-                     color.blue * lightness256 shr 8, color.alpha);
-    end;
-  end else
-  begin
-    r := CombineLightness(GammaExpansionTab[color.red], lightness);
-    g := CombineLightness(GammaExpansionTab[color.green], lightness);
-    b := CombineLightness(GammaExpansionTab[color.blue], lightness);
-    maxValue := r;
-    if g > maxValue then maxValue := g;
-    if b > maxValue then maxValue := b;
-    if maxValue <= 65535 then
-      result := BGRA(GammaCompressionTab[r],
-                     GammaCompressionTab[g],
-                     GammaCompressionTab[b],
-                     color.alpha)
-    else
-    begin
-      invMaxValue := (longword(2147483647)+longword(maxValue-1)) div maxValue;
-      maxValue := (maxValue-65535) shr 1;
-      r := r*invMaxValue shr 15 + maxValue;
-      g := g*invMaxValue shr 15 + maxValue;
-      b := b*invMaxValue shr 15 + maxValue;
-      if r >= 65535 then result.red := 255 else
-        result.red := GammaCompressionTab[r];
-      if g >= 65535 then result.green := 255 else
-        result.green := GammaCompressionTab[g];
-      if b >= 65535 then result.blue := 255 else
-        result.blue := GammaCompressionTab[b];
-      result.alpha := color.alpha;
     end;
   end;
 end;
 
 { Conversion from RGB value to HSL colorspace. See : http://en.wikipedia.org/wiki/HSL_color_space }
 function BGRAToHSLA(c: TBGRAPixel): THSLAPixel;
-begin
-  result := ExpandedToHSLA(GammaExpansion(c));
-end;
-
-function ExpandedToHSLA(ec: TExpandedPixel): THSLAPixel;
 const
   deg60  = 8192;
   deg120 = deg60 * 2;
   deg240 = deg60 * 4;
   deg360 = deg60 * 6;
 var
+  ec: TExpandedPixel;
   min, max, minMax: integer;
   twiceLightness: integer;
   r,g,b: integer;
 begin
+  ec  := GammaExpansion(c);
   r := ec.red;
   g := ec.green;
   b := ec.blue;
@@ -1668,104 +1691,8 @@ begin
   Result.hue   := (Result.hue shl 16) div deg360;
 end;
 
-function HtoG(hue: word): word;
-const
-  segmentDest: array[0..5] of word =
-     (13653, 10923, 8192, 13653, 10923, 8192);
-  segmentSrc: array[0..5] of word =
-     (10923, 10922, 10923, 10923, 10922, 10923);
-begin
-  if hue < segmentSrc[0] then
-    result := hue * segmentDest[0] div segmentSrc[0]
-  else
-  begin
-    result := segmentDest[0];
-    hue -= segmentSrc[0];
-    if hue < segmentSrc[1] then
-      result += hue * segmentDest[1] div segmentSrc[1]
-    else
-    begin
-      result += segmentDest[1];
-      hue -= segmentSrc[1];
-      if hue < segmentSrc[2] then
-        result += hue * segmentDest[2] div segmentSrc[2]
-      else
-      begin
-        result += segmentDest[2];
-        hue -= segmentSrc[2];
-        if hue < segmentSrc[3] then
-          result += hue * segmentDest[3] div segmentSrc[3]
-        else
-        begin
-          result += segmentDest[3];
-          hue -= segmentSrc[3];
-          if hue < segmentSrc[4] then
-            result += hue * segmentDest[4] div segmentSrc[4]
-          else
-          begin
-            result += segmentDest[4];
-            hue -= segmentSrc[4];
-            result += hue * segmentDest[5] div segmentSrc[5];
-          end;
-        end;
-      end;
-    end;
-  end;
-end;
-
-function GtoH(ghue: word): word;
-const
-  segment: array[0..5] of word =
-     (13653, 10923, 8192, 13653, 10923, 8192);
-begin
-  if ghue < segment[0] then
-    result := ghue * 10923 div segment[0]
-  else
-  begin
-    ghue -= segment[0];
-    if ghue < segment[1] then
-      result := ghue * (21845-10923) div segment[1] + 10923
-    else
-    begin
-      ghue -= segment[1];
-      if ghue < segment[2] then
-        result := ghue * (32768-21845) div segment[2] + 21845
-      else
-      begin
-        ghue -= segment[2];
-        if ghue < segment[3] then
-          result := ghue * (43691-32768) div segment[3] + 32768
-        else
-        begin
-          ghue -= segment[3];
-          if ghue < segment[4] then
-            result := ghue * (54613-43691) div segment[4] + 43691
-          else
-          begin
-            ghue -= segment[4];
-            result := ghue * (65536-54613) div segment[5] + 54613;
-          end;
-        end;
-      end;
-    end;
-  end;
-end;
-
-function BGRAToGSBA(c: TBGRAPixel): THSLAPixel;
-var ec: TExpandedPixel;
-    lightness: word;
-begin
-  ec := GammaExpansion(c);
-  lightness := GetLightness(ec);
-
-  result := ExpandedToHSLA(ec);
-  if result.lightness > 32768 then
-    result.saturation := result.saturation* word(65535-result.lightness) div 32767;
-  result.lightness := lightness;
-  result.hue := HtoG(result.hue);
-end;
-
-function HSLAToExpanded(c: THSLAPixel): TExpandedPixel;
+{ Conversion from HSL colorspace to RGB. See : http://en.wikipedia.org/wiki/HSL_color_space }
+function HSLAToBGRA(c: THSLAPixel): TBGRAPixel;
 const
   deg30  = 4096;
   deg60  = 8192;
@@ -1792,14 +1719,16 @@ const
 
 var
   q, p: integer;
+  ec:   TExpandedPixel;
 begin
   c.hue := c.hue * deg360 shr 16;
   if c.saturation = 0 then  //gray
   begin
-    result.red   := c.lightness;
-    result.green := c.lightness;
-    result.blue  := c.lightness;
-    result.alpha := c.alpha;
+    ec.red   := c.lightness;
+    ec.green := c.lightness;
+    ec.blue  := c.lightness;
+    ec.alpha := c.alpha;
+    Result   := GammaCompression(ec);
     exit;
   end;
   {$hints off}
@@ -1814,101 +1743,11 @@ begin
   p   := c.lightness * 2 - q;
   if p > 65535 then
     p      := 65535;
-  result.red   := ComputeColor(p, q, c.hue + deg120);
-  result.green := ComputeColor(p, q, c.hue);
-  result.blue  := ComputeColor(p, q, c.hue + deg240);
-  result.alpha := c.alpha;
-end;
-
-{ Conversion from HSL colorspace to RGB. See : http://en.wikipedia.org/wiki/HSL_color_space }
-function HSLAToBGRA(c: THSLAPixel): TBGRAPixel;
-var ec: TExpandedPixel;
-begin
-  ec := HSLAToExpanded(c);
-  Result := GammaCompression(ec);
-end;
-
-function HueDiff(h1, h2: word): word;
-begin
-  result := abs(integer(h1)-integer(h2));
-  if result > 32768 then result := 65536-result;
-end;
-
-function GetHue(ec: TExpandedPixel): word;
-const
-  deg60  = 8192;
-  deg120 = deg60 * 2;
-  deg240 = deg60 * 4;
-  deg360 = deg60 * 6;
-var
-  min, max, minMax: integer;
-  r,g,b: integer;
-begin
-  r := ec.red;
-  g := ec.green;
-  b := ec.blue;
-  min := r;
-  max := r;
-  if g > max then
-    max := g
-  else
-  if g < min then
-    min := g;
-  if b > max then
-    max := b
-  else
-  if b < min then
-    min  := b;
-  minMax := max - min;
-
-  if minMax = 0 then
-    Result := 0
-  else
-  if max = r then
-    Result := (((g - b) * deg60) div
-      minMax + deg360) mod deg360
-  else
-  if max = g then
-    Result := ((b - r) * deg60) div minMax + deg120
-  else
-    {max = b} Result :=
-      ((r - g) * deg60) div minMax + deg240;
-
-  Result   := (Result shl 16) div deg360; //normalize
-end;
-
-function ColorImportance(ec: TExpandedPixel): word;
-var min,max: word;
-begin
-  min := ec.red;
-  max := ec.red;
-  if ec.green > max then
-    max := ec.green
-  else
-  if ec.green < min then
-    min := ec.green;
-  if ec.blue > max then
-    max := ec.blue
-  else
-  if ec.blue < min then
-    min  := ec.blue;
-  result := max - min;
-end;
-
-function GSBAToBGRA(c: THSLAPixel): TBGRAPixel;
-var ec: TExpandedPixel;
-    lightness: word;
-begin
-  c.hue := GtoH(c.hue);
-  lightness := c.lightness;
-  c.lightness := 32768;
-  ec := HSLAToExpanded(c);
-  result := GammaCompression(SetLightness(ec, lightness));
-end;
-
-function GSBAToHSLA(c: THSLAPixel): THSLAPixel;
-begin
-  result := BGRAToHSLA(GSBAToBGRA(c));
+  ec.red   := ComputeColor(p, q, c.hue + deg120);
+  ec.green := ComputeColor(p, q, c.hue);
+  ec.blue  := ComputeColor(p, q, c.hue + deg240);
+  ec.alpha := c.alpha;
+  Result   := GammaCompression(ec);
 end;
 
 { Apply gamma correction using conversion tables }
@@ -1957,47 +1796,6 @@ begin
   Result.alpha := c.alpha;
 end;
 
-function GrayscaleToBGRA(lightness: word): TBGRAPixel;
-begin
-  result.red := GammaCompressionTab[lightness];
-  result.green := result.red;
-  result.blue := result.red;
-  result.alpha := $ff;
-end;
-
-function MergeBGRA(const colors: array of TBGRAPixel): TBGRAPixel;
-var
-  sumR,sumG,sumB,sumA: longword;
-  i: integer;
-begin
-  if length(colors)<=0 then
-  begin
-    result := BGRAPixelTransparent;
-    exit;
-  end;
-  sumR := 0;
-  sumG := 0;
-  sumB := 0;
-  sumA := 0;
-  for i := 0 to high(colors) do
-  with colors[i] do
-  begin
-    sumR += red*alpha;
-    sumG += green*alpha;
-    sumB += blue*alpha;
-    sumA += alpha;
-  end;
-  if sumA > 0 then
-  begin
-    result.red := (sumR + sumA shr 1) div sumA;
-    result.green := (sumG + sumA shr 1) div sumA;
-    result.blue := (sumB + sumA shr 1) div sumA;
-    result.alpha := sumA div longword(length(colors));
-  end
-  else
-    result := BGRAPixelTransparent;
-end;
-
 { Merge linearly two colors of same importance }
 function MergeBGRA(c1, c2: TBGRAPixel): TBGRAPixel;
 var c12: cardinal;
@@ -2020,25 +1818,25 @@ end;
 function MergeBGRA(c1: TBGRAPixel; weight1: integer; c2: TBGRAPixel;
   weight2: integer): TBGRAPixel;
 var
-    f1,f2,f12: int64;
+    f1,f2,f12: integer;
 begin
-  if (weight1 = 0) then
+  f1 := c1.alpha*weight1;
+  f2 := c2.alpha*weight2;
+  if (f1 = 0) then
   begin
-    if (weight2 = 0) then
+    if (f2 = 0) then
       result := BGRAPixelTransparent
     else
       Result := c2
   end
   else
-  if (weight2 = 0) then
+  if (f2 = 0) then
     Result := c1
   else
   if (weight1+weight2 = 0) then
     Result := BGRAPixelTransparent
   else
   begin
-    f1 := int64(c1.alpha)*weight1;
-    f2 := int64(c2.alpha)*weight2;
     f12 := f1+f2;
     if f12 = 0 then
       result := BGRAPixelTransparent
@@ -2047,42 +1845,7 @@ begin
       Result.red   := (c1.red * f1 + c2.red * f2 + f12 shr 1) div f12;
       Result.green := (c1.green * f1 + c2.green * f2 + f12 shr 1) div f12;
       Result.blue  := (c1.blue * f1 + c2.blue * f2 + f12 shr 1) div f12;
-      {$hints off}
       Result.alpha := (f12 + ((weight1+weight2) shr 1)) div (weight1+weight2);
-      {$hints on}
-    end;
-  end;
-end;
-
-function MergeBGRAWithGammaCorrection(c1: TBGRAPixel; weight1: byte; c2: TBGRAPixel;
-  weight2: byte): TBGRAPixel;
-var
-    f1,f2: word;
-    f12: longword;
-begin
-  if (weight1 = 0) then
-  begin
-    if (weight2 = 0) then
-      result := BGRAPixelTransparent
-    else
-      Result := c2
-  end
-  else
-  if (weight2 = 0) then
-    Result := c1
-  else
-  begin
-    f1 := c1.alpha*weight1 shr 1;
-    f2 := c2.alpha*weight2 shr 1;
-    f12 := f1+f2;
-    if f12 = 0 then
-      result := BGRAPixelTransparent
-    else
-    begin
-      Result.red   := GammaCompressionTab[(GammaExpansionTab[c1.red] * f1 + GammaExpansionTab[c2.red] * f2) div f12];
-      Result.green := GammaCompressionTab[(GammaExpansionTab[c1.green] * f1 + GammaExpansionTab[c2.green] * f2) div f12];
-      Result.blue  := GammaCompressionTab[(GammaExpansionTab[c1.blue] * f1 + GammaExpansionTab[c2.blue] * f2) div f12];
-      Result.alpha := (c1.alpha*weight1+c2.alpha*weight2 + ((weight1+weight2) shr 1)) div (weight1+weight2);
     end;
   end;
 end;
@@ -2126,23 +1889,6 @@ end;
   you need to call ColorToRGB first if you use a system
   color identifier like clWindow. }
 {$PUSH}{$R-}
-
-function HSLA(hue, saturation, lightness, alpha: word): THSLAPixel;
-begin
-  Result.hue   := hue;
-  Result.saturation := saturation;
-  Result.lightness  := lightness;
-  Result.alpha := alpha;
-end;
-
-function HSLA(hue, saturation, lightness: word): THSLAPixel;
-begin
-  Result.hue   := hue;
-  Result.saturation := saturation;
-  Result.lightness  := lightness;
-  Result.alpha := $ffff;
-end;
-
 function ColorToBGRA(color: TColor): TBGRAPixel; overload;
 begin
   Result.red   := color;
@@ -2190,53 +1936,26 @@ begin
       (c1.green = c2.green) and (c1.blue = c2.blue);
 end;
 
-function LessStartSlope65535(value: word): word;
-var factor: word;
-begin
-  factor := 4096 - (not value)*3 shr 7;
-  result := value*factor shr 12;
-end;
-
-function ExpandedDiff(ec1, ec2: TExpandedPixel): word;
+function BGRADiff(c1, c2: TBGRAPixel): byte;
 var
   CompRedAlpha1, CompGreenAlpha1, CompBlueAlpha1, CompRedAlpha2,
   CompGreenAlpha2, CompBlueAlpha2: integer;
-  DiffAlpha: word;
-  ColorDiff: word;
-  TempHueDiff: word;
+  DiffAlpha: byte;
 begin
-  CompRedAlpha1 := ec1.red * ec1.alpha shr 16; //gives 0..65535
-  CompGreenAlpha1 := ec1.green * ec1.alpha shr 16;
-  CompBlueAlpha1 := ec1.blue * ec1.alpha shr 16;
-  CompRedAlpha2 := ec2.red * ec2.alpha shr 16;
-  CompGreenAlpha2 := ec2.green * ec2.alpha shr 16;
-  CompBlueAlpha2 := ec2.blue * ec2.alpha shr 16;
-  Result    := (Abs(CompRedAlpha2 - CompRedAlpha1)*redWeightShl10 +
-    Abs(CompBlueAlpha2 - CompBlueAlpha1)*blueWeightShl10 +
-    Abs(CompGreenAlpha2 - CompGreenAlpha1)*greenWeightShl10) shr 10;
-  ColorDiff := min(ColorImportance(ec1),ColorImportance(ec2));
-  if ColorDiff > 0 then
-  begin
-    TempHueDiff := HueDiff(HtoG(GetHue(ec1)),HtoG(GetHue(ec2)));
-    if TempHueDiff < 32768 then
-      TempHueDiff := LessStartSlope65535(TempHueDiff shl 1) shr 4
-    else
-      TempHueDiff := TempHueDiff shr 3;
-    Result := ((Result shr 4)* (not ColorDiff) + TempHueDiff*ColorDiff) shr 12;
-  end;
-  DiffAlpha := Abs(integer(ec2.Alpha) - integer(ec1.Alpha));
+    {$hints off}
+  CompRedAlpha1 := c1.red * c1.alpha;
+  CompGreenAlpha1 := c1.green * c1.alpha;
+  CompBlueAlpha1 := c1.blue * c1.alpha;
+  CompRedAlpha2 := c2.red * c2.alpha;
+  CompGreenAlpha2 := c2.green * c2.alpha;
+  CompBlueAlpha2 := c2.blue * c2.alpha;
+    {$hints on}
+  Result    := (Abs(CompRedAlpha2 - CompRedAlpha1) +
+    Abs(CompBlueAlpha2 - CompBlueAlpha1) + Abs(CompGreenAlpha2 - CompGreenAlpha1)) div
+    (3 * 255);
+  DiffAlpha := Abs(c2.Alpha - c1.Alpha) * 3 shr 2;
   if DiffAlpha > Result then
     Result := DiffAlpha;
-end;
-
-function BGRAWordDiff(c1, c2: TBGRAPixel): word;
-begin
-  result := ExpandedDiff(GammaExpansion(c1),GammaExpansion(c2));
-end;
-
-function BGRADiff(c1,c2: TBGRAPixel): byte;
-begin
-  result := ExpandedDiff(GammaExpansion(c1),GammaExpansion(c2)) shr 8;
 end;
 
 operator-(const c1, c2: TColorF): TColorF;
@@ -2334,13 +2053,8 @@ begin
   end;
 end;
 
-function StrToBGRA(str: string): TBGRAPixel;
-begin
-  result := StrToBGRA(str, BGRAPixelTransparent);
-end;
-
 { Read a color in hexadecimal format RRGGBB(AA) or RGB(A) }
-function StrToBGRA(str: string; DefaultColor: TBGRAPixel): TBGRAPixel;
+function StrToBGRA(str: string): TBGRAPixel;
 var errPos: integer;
     values: array of string;
     alphaF: single;
@@ -2348,7 +2062,7 @@ var errPos: integer;
 begin
   if str = '' then
   begin
-    result := DefaultColor;
+    result := BGRAPixelTransparent;
     exit;
   end;
   str := lowerCase(str);
@@ -2357,7 +2071,6 @@ begin
   if str='black' then result := BGRA(0,0,0) else
   if str='silver' then result := BGRA(192,192,192) else
   if str='gray' then result := BGRA(128,128,128) else
-  if str='grey' then result := BGRA(128,128,128) else
   if str='white' then result := BGRA(255,255,255) else
   if str='maroon' then result := BGRA(128,0,0) else
   if str='red' then result := BGRA(255,0,0) else
@@ -2371,7 +2084,7 @@ begin
   if str='blue' then result := BGRA(0,0,255) else
   if str='teal' then result := BGRA(0,128,128) else
   if str='aqua' then result := BGRA(0,255,255) else
-  if str='transparent' then result := DefaultColor else
+  if str='transparent' then result := BGRAPixelTransparent else
   begin
     //check CSS color
     idx := CSSColors.IndexOf(str);
@@ -2402,7 +2115,7 @@ begin
         end else
           result.alpha := 255;
       end else
-        result := DefaultColor;
+        result := BGRAPixelTransparent;
       exit;
     end;
 
@@ -2417,65 +2130,26 @@ begin
     if length(str)=8 then
     begin
       val('$'+copy(str,1,2),result.red,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,3,2),result.green,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,5,2),result.blue,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,7,2),result.alpha,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
     end else
     if length(str)=4 then
     begin
       val('$'+copy(str,1,1),result.red,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,2,1),result.green,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,3,1),result.blue,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       val('$'+copy(str,4,1),result.alpha,errPos);
-      if errPos <> 0 then
-      begin
-        result := DefaultColor;
-        exit;
-      end;
       result.red *= $11;
       result.green *= $11;
       result.blue *= $11;
       result.alpha *= $11;
     end else
-      result := DefaultColor;
+      result := BGRAPixelTransparent;
   end;
 
 end;
+
 
 function MapHeight(Color: TBGRAPixel): Single;
 var intval: integer;

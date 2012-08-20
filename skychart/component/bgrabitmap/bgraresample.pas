@@ -19,7 +19,7 @@ interface
   from TWideKernelFilter. It is slower of course than simple interpolation. }
 
 uses
-  SysUtils, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes;
 
 {------------------------------- Simple stretch ------------------------------------}
 
@@ -29,7 +29,6 @@ function SimpleStretch(bmp: TBGRACustomBitmap;
 {---------------------------- Interpolation filters --------------------------------}
 
 function FineInterpolation(t: single; ResampleFilter: TResampleFilter): single;
-function FineInterpolation256(t256: integer; ResampleFilter: TResampleFilter): integer;
 
 type
   TWideKernelFilter = class
@@ -645,18 +644,6 @@ begin
       result := t*t*2 else
       result := 1-(1-t)*(1-t)*2;
     if ResampleFilter <> rfCosine then result := (result+t)*0.5;
-  end;
-end;
-
-function FineInterpolation256(t256: integer; ResampleFilter: TResampleFilter): integer;
-begin
-  if ResampleFilter = rfLinear then
-    result := t256 else
-  begin
-    if t256 <= 128 then
-      result := (t256*t256) shr 7 else
-      result := 256 - (((256-t256)*(256-t256)) shr 7);
-    if ResampleFilter <> rfCosine then result := (result+t256) shr 1;
   end;
 end;
 

@@ -1,46 +1,30 @@
   var
+    xLen: single;       //horizontal length in pixels
+    t: single;          //initial horizontal position in [0..1]
+    pos: record
+           texPos: TPointF;    //texture start position
+           zPos: single;       //depth start position
+         {$IFDEF PARAM_USESHADER}
+           pos3D, normal3D: TPoint3D;
+         {$endif}
+         end;
+    step: record
+           texStep: TPointF;   //texture step
+           zStep: single;      //depth step
+         {$IFDEF PARAM_USESHADER}
+           pos3DStep, normal3DStep: TPoint3D;
+         {$endif}
+         end;
+
+    texVect: TPointF;   //texture vector between start and end of line
+    zLen: single;       //depth difference
+  {$IFDEF PARAM_USESHADER}
+    tempVect3D: TPoint3D;
+  {$ENDIF}
+
     //loop variables
     pdest: PBGRAPixel;
     i: LongInt;
-
-    InvXLen: single;    //inverse of horizontal length in pixels
-    t: single;          //initial horizontal position in [0..1]
-   {$IFNDEF PARAM_USESOLIDCOLOR}
-     texPosByZ: TPointF;
-     intTexPos: packed record
-       x,y: integer;
-     end;
-     texPos: TPoint3D_128;    //texture start position
-   {$ENDIF}
-   InvZPos: single;         //Z: depth start position
-
-   {$IFNDEF PARAM_USESOLIDCOLOR}
-     texStep: TPoint3D_128;   //texture step
-   {$ENDIF}
-   zStep: single;      //depth step
-
-  {$IFNDEF PARAM_USESOLIDCOLOR}
-    texVect: TPointF;   //texture vector between start and end of line
-  {$ENDIF}
-    zLen: single;       //depth difference
-  {$IFDEF PARAM_USESHADER}
-    tempVect3D: TPoint3D_128;
-  {$ENDIF}
-
-  {$IFNDEF PARAM_USESOLIDCOLOR}
-    {$DEFINE PARAM_USEZPOS}
-  {$ENDIF}
-  {$IFDEF PARAM_USESHADER}
-    {$DEFINE PARAM_USEZPOS}
-  {$ENDIF}
-
-  {$IFDEF PARAM_USEZPOS}
-    zPos: single;
-  {$ENDIF}
-
-  {$IFDEF PARAM_USEZBUFFER}
-    pzbuffer: PSingle;
-  {$ENDIF}
 
   {$IFDEF PARAM_USELIGHTING}
     light,lightStep,lightDiff,lightAcc,lightMod: word;
@@ -59,32 +43,27 @@
   {$ENDIF}
 
   begin
-    InvXLen := 1/(info2.interX - info1.interX);
-    t := ((ix1+0.5)-info1.interX)*InvXLen;
+    xLen := info2.interX - info1.interX;
+    t := ((ix1+0.5)-info1.interX)/xLen;
 
-  {$IFNDEF PARAM_USESOLIDCOLOR}
     texVect := info2.texCoordDivByZ-info1.texCoordDivByZ;
-    texPos := Point3D_128(info1.texCoordDivByZ + texVect*t);
-    texStep := Point3D_128(texVect*InvXLen);
-  {$ENDIF}
+    pos.texPos := info1.texCoordDivByZ + texVect*t;
+    step.texStep := texVect*(1/xLen);
     zLen := info2.coordInvZ-info1.coordInvZ;
-    InvZPos := info1.coordInvZ+t*zLen;
-    zStep := zLen*InvXLen;
+    pos.zPos := info1.coordInvZ+t*zLen;
+    step.zStep := zLen/xLen;
 
   {$IFDEF PARAM_USESHADER}
     tempVect3D := info2.Position3D - info1.Position3D;
-    ShaderContext^.PositionInvZ := info1.Position3D + tempVect3D*t;
-    ShaderContext^.PositionStepInvZ := tempVect3D*InvXLen;
+    pos.pos3D := info1.Position3D + tempVect3D*t;
+    step.pos3DStep := tempVect3D*(1/xlen);
 
     tempVect3D := info2.Normal3D - info1.Normal3D;
-    ShaderContext^.NormalInvZ := info1.Normal3D + tempVect3D*t;
-    ShaderContext^.NormalStepInvZ := tempVect3D*InvXLen;
+    pos.normal3D := info1.Normal3D + tempVect3D*t;
+    step.normal3DStep := tempVect3D*(1/xlen);
   {$endif}
 
     pdest := bmp.ScanLine[yb]+ix1;
-  {$IFDEF PARAM_USEZBUFFER}
-    pzbuffer := zbuffer + yb*bmp.Width + ix1;
-  {$ENDIF}
 
   {$IFDEF PARAM_USELIGHTING}
     if ix2 = ix1 then
@@ -105,52 +84,64 @@
     lightAcc := lightDiff div 2;
   {$ENDIF}
 
-  {$IFDEF CPUI386}
-    if UseSSE then
+    if WithInterpolation then
     begin
-      {$DEFINE PARAM_USESSE}
-      if UseSSE3 then
+      for i := ix1 to ix2 do
       begin
-        {$DEFINE PARAM_USESSE3}
-        if WithInterpolation then
-        begin
-          {$DEFINE PARAM_USEINTERPOLATION}
-          {$i perspectivescan2.inc}
-          {$UNDEF PARAM_USEINTERPOLATION}
-        end else
-        begin
-          {$i perspectivescan2.inc}
-        end;
-        {$UNDEF PARAM_USESSE3}
-      end else
-      begin
-        if WithInterpolation then
-        begin
-          {$DEFINE PARAM_USEINTERPOLATION}
-          {$i perspectivescan2.inc}
-          {$UNDEF PARAM_USEINTERPOLATION}
-        end else
-        begin
-          {$i perspectivescan2.inc}
-        end;
+        DrawPixelInlineWithAlphaCheck(pdest,
+          {$IFDEF PARAM_USESHADER} ShaderFunction(
+            pos.pos3D*(1/pos.zPos),pos.normal3D*(1/pos.zPos),
+          {$ENDIF}
+          {$IFDEF PARAM_USELIGHTING} ApplyLightnessFast( {$ENDIF}
+            {$IFDEF PARAM_USESOLIDCOLOR}
+              solidColor
+            {$ELSE}
+              scanAtFunc(pos.texPos.x/pos.zPos,pos.texPos.y/pos.zPos)
+            {$ENDIF}
+          {$IFDEF PARAM_USELIGHTING} ,light) {$ENDIF}
+          {$IFDEF PARAM_USESHADER} ) {$ENDIF}
+          );
+        pos.texPos += step.texStep;
+        pos.zPos += step.zStep;
+        {$IFDEF PARAM_USESHADER}
+          pos.pos3D += step.pos3DStep;
+          pos.normal3D += step.normal3DStep;
+        {$ENDIF}
+        {$IFDEF PARAM_USELIGHTING}
+          NextLight;
+        {$ENDIF}
+        inc(pdest);
       end;
-      {$UNDEF PARAM_USESSE}
     end else
-  {$ENDIF}
     begin
-      if WithInterpolation then
+      for i := ix1 to ix2 do
       begin
-        {$DEFINE PARAM_USEINTERPOLATION}
-        {$i perspectivescan2.inc}
-        {$UNDEF PARAM_USEINTERPOLATION}
-      end else
-      begin
-        {$i perspectivescan2.inc}
+        DrawPixelInlineWithAlphaCheck(pdest,
+          {$IFDEF PARAM_USESHADER} ShaderFunction(
+            pos.pos3D*(1/pos.zPos),pos.normal3D*(1/pos.zPos),
+          {$ENDIF}
+          {$IFDEF PARAM_USELIGHTING} ApplyLightnessFast( {$ENDIF}
+            {$IFDEF PARAM_USESOLIDCOLOR}
+              solidColor
+            {$ELSE}
+              scanAtFunc(round(pos.texPos.x/pos.zPos),round(pos.texPos.y/pos.zPos))
+            {$ENDIF}
+          {$IFDEF PARAM_USELIGHTING} ,light) {$ENDIF}
+          {$IFDEF PARAM_USESHADER} ) {$ENDIF}
+          );
+        pos.texPos += step.texStep;
+        pos.zPos += step.zStep;
+        {$IFDEF PARAM_USESHADER}
+          pos.pos3D += step.pos3DStep;
+          pos.normal3D += step.normal3DStep;
+        {$ENDIF}
+        {$IFDEF PARAM_USELIGHTING}
+          NextLight;
+        {$ENDIF}
+        inc(pdest);
       end;
     end;
   end;
 {$undef PARAM_USELIGHTING}
 {$undef PARAM_USESHADER}
 {$undef PARAM_USESOLIDCOLOR}
-{$undef PARAM_USEZBUFFER}
-{$undef PARAM_USEZPOS}
