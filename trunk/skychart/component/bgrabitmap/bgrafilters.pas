@@ -9,7 +9,7 @@ interface
   a result. }
 
 uses
-  Classes, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes;
 
 { The median filter consist in calculating the median value of pixels. Here
   a square of 9x9 pixel is considered. The median allow to select the most

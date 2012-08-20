@@ -5,7 +5,7 @@ unit BGRALayers;
 interface
 
 uses
-  Classes, SysUtils, Types, Graphics, BGRABitmapTypes, BGRABitmap;
+  Classes, SysUtils, Graphics, BGRABitmap, BGRABitmapTypes, Types;
 
 type
 
@@ -531,7 +531,7 @@ var
 begin
   Result := TBGRABitmap.Create(Width, Height);
   for i := 0 to NbLayers - 1 do
-  if LayerVisible[i] and (LayerOpacity[i]<>0) then
+  if LayerVisible[i] then
   begin
     tempLayer := GetLayerBitmapDirectly(i);
     if tempLayer <> nil then

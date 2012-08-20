@@ -5,7 +5,7 @@ unit BGRACanvas;
 interface
 
 uses
-  Classes, SysUtils, Graphics, GraphType, Types, FPImage, FPCanvas, BGRABitmapTypes;
+  Classes, SysUtils, BGRABitmapTypes, Graphics, GraphType, FPImage, Types, FPCanvas;
 
 type
 
@@ -188,7 +188,6 @@ type
                          Filled: boolean = False;
                          Continuous: boolean = False);
     procedure Draw(X,Y: Integer; SrcBitmap: TBGRACustomBitmap);
-    procedure CopyRect(X,Y: Integer; SrcBitmap: TBGRACustomBitmap; SrcRect: TRect);
     procedure StretchDraw(DestRect: TRect; SrcBitmap: TBGRACustomBitmap; HorizFlip: Boolean = false; VertFlip: Boolean = false);
     procedure DrawFocusRect(bounds: TRect);
     procedure CopyRect(Dest: TRect; SrcBmp: TBGRACustomBitmap;
@@ -1418,12 +1417,6 @@ begin
   FBitmap.PutImage(X,Y,SrcBitmap,dmDrawWithTransparency);
 end;
 
-procedure TBGRACanvas.CopyRect(X, Y: Integer; SrcBitmap: TBGRACustomBitmap;
-  SrcRect: TRect);
-begin
-  FBitmap.PutImagePart(X,Y,SrcBitmap,SrcRect,dmDrawWithTransparency);
-end;
-
 procedure TBGRACanvas.StretchDraw(DestRect: TRect; SrcBitmap: TBGRACustomBitmap; HorizFlip: Boolean = false; VertFlip: Boolean = false);
 var Stretched: TBGRACustomBitmap;
     temp: Integer;
@@ -1506,12 +1499,6 @@ var TempBmp: TBGRACustomBitmap;
   Temp: Integer;
   FlipHoriz,FlipVert: Boolean;
 begin
-  if (Dest.Right-Dest.Left = Source.Right-Source.Left) and (Dest.Bottom-Dest.Top = Source.Bottom-Source.Top) and
-     (Dest.Right > Dest.Left) and (Dest.Bottom > Dest.Top) then
-  begin
-    CopyRect(Dest.Left,Dest.Top, SrcBmp, Source);
-    exit;
-  end;
   if (Source.Left = Source.Right) or (Source.Bottom = Source.Top) or
     (Dest.Left = Dest.Right) or (Dest.Bottom = Dest.Top) then exit;
   if Source.Left > Source.Right then
@@ -1530,7 +1517,8 @@ begin
     FlipVert := True;
   end else
     FlipVert := false;
-  TempBmp := SrcBmp.GetPart(Source);
+  TempBmp := FBitmap.NewBitmap(Source.Right-Source.Left,Source.Bottom-Source.Top);
+  TempBmp.PutImage(-Source.Left,-Source.Top, SrcBmp, dmSet);
   StretchDraw(Dest,TempBmp,FlipHoriz,FlipVert);
   TempBmp.Free;
 end;
