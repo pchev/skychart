@@ -10,7 +10,7 @@ unit ds2cdc1;
 
    Program author : Patrick Chevalley
                     Switzerland
-                    pch@freesurf.ch
+                    pch@ap-i.net
 }
 interface
 

@@ -2,7 +2,7 @@ unit findunit;
 {
 Copyright (C) 2000 Patrick Chevalley
 
-http://www.astrosurf.org/astropc
+http://www.ap-i.net
 pchev@geocities.com
 
 This program is free software; you can redistribute it and/or

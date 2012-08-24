@@ -3,8 +3,8 @@ unit u_constant;
 {
 Copyright (C) 2002 Patrick Chevalley
 
-http://www.astrosurf.com/astropc
-pch@freesurf.ch
+http://www.ap-i.net
+pch@ap-i.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -45,7 +45,7 @@ const
   cdcversion = 'Version 3.7-svn';
   cdcver = '3.7e';
   cdccpy = 'Copyright (C) 2002-2012 Patrick Chevalley';
-  cdcauthors = 'Patrick Chevalley, pch@freesurf.ch' + crlf +
+  cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland';
   MaxPlSim = 500;
   MaxAstSim = 100;

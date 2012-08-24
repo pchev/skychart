@@ -2,7 +2,7 @@ Package: skychart-data-pictures
 Version: 3
 Section: education
 Priority: optional
-Maintainer: Patrick Chevalley <pch@freesurf.ch>
+Maintainer: Patrick Chevalley <pch@ap-i.net>
 Architecture: all
 Depends: skychart
 Replaces: skychart-pictures

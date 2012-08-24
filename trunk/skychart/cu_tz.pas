@@ -3,7 +3,7 @@ unit cu_tz;
 { Time Zone processing component.
   Based on FreePascal RTL rtl/unix/timezone.inc
 
-  Copyright (C) 2007 Patrick Chevalley  pch@freesurf.ch
+  Copyright (C) 2007 Patrick Chevalley  pch@ap-i.net
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Library General Public License as published by

@@ -5,8 +5,8 @@ unit cu_vodata;
 {                                        
 Copyright (C) 2005 Patrick Chevalley
 
-http://www.astrosurf.com/astropc
-pch@freesurf.ch
+http://www.ap-i.net
+pch@ap-i.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

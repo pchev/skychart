@@ -2,8 +2,8 @@ unit cu_indiprotocol;
 {                                        
 Copyright (C) 2004 Patrick Chevalley
 
-http://www.astrosurf.com/astropc
-pch@freesurf.ch
+http://www.ap-i.net
+pch@ap-i.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
