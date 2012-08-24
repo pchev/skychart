@@ -6,7 +6,7 @@ library ds2cdc;
 
    Program author : Patrick Chevalley
                     Switzerland
-                    pch@freesurf.ch
+                    pch@ap-i.net
 }
 
 {$mode objfpc}{$H+}

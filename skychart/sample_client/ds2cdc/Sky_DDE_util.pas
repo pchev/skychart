@@ -6,7 +6,7 @@ unit Sky_DDE_Util;
 
    Program author : Patrick Chevalley
                     Switzerland
-                    pch@freesurf.ch
+                    pch@ap-i.net
 }
 
 {$mode objfpc}{$H+}

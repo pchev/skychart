@@ -4,7 +4,7 @@ unit u_satellite;
 Copyright (C) 2010 Patrick Chevalley
 
 http://www.ap-i.net
-pch@freesurf.ch
+pch@ap-i.net
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
