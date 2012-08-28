@@ -96,8 +96,8 @@ var NewSigRec, OldSigRec: SigActionRec;
 Constructor TTCPDaemon.Create;
 begin
   FreeOnTerminate:=true;
-  keepalive:=false;
   inherited create(true);
+  keepalive:=false;
 end;
 
 procedure TTCPDaemon.ShowError;
@@ -201,22 +201,22 @@ try
       until false;
     end;
 finally
-  Suspended:=true;
+//  Suspended:=true;
   Sock.CloseSocket;
   Sock.free;
-  terminate;
+//  terminate;
 end;
 end;
 
 Constructor TTCPThrd.Create(Hsock:TSocket);
 begin
-  Csock := Hsock;
   FreeOnTerminate:=true;
+  inherited create(true);
+  Csock := Hsock;
   cmd:=TStringlist.create;
   keepalive:=false;
   abort:=false;
   lockexecutecmd:=false;
-  inherited create(true);
 end;
 
 procedure TTCPThrd.Execute;
@@ -265,8 +265,8 @@ try
     Fsock.CloseSocket;
     Fsock.Free;
     cmd.free;
-    Suspended:=true;
-    terminate;
+//    Suspended:=true;
+//    terminate;
   end;
 except
 end;

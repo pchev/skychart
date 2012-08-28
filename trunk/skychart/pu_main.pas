@@ -1983,7 +1983,7 @@ if cfgm.ObsNameList<>nil then begin
       if cfgm.ObsNameList.Objects[i]<>nil then cfgm.ObsNameList.Objects[i].Free;
   except
   end;
-  //cfgm.ObsNameList.Free;
+  cfgm.ObsNameList.Free;
 end;
 cfgm.Free;
 def_cfgplot.Free;
@@ -1997,7 +1997,6 @@ if CursorImage1<>nil then begin
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
-//if TCPDaemon<>nil then TCPDaemon.Free;
 if VerboseMsg then
  WriteTrace('Destroy end');
 except
