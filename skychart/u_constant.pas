@@ -907,11 +907,12 @@ type
     ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy,
     AnimSize, VOurl, VOmaxrecord: integer;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
-    maximized, updall, AutostartServer, keepalive, NewBackgroundImage,
+    maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
     TextOnlyDetail, KioskMode, KioskDebug: boolean;
-    ServerIPaddr, ServerIPport, PrintDesc, PrintCmd1, PrintCmd2,
-    PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt,
+    PrintDesc, PrintCmd1, PrintCmd2: string;
+    PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
     AnimOpt, Animffmpeg: string;
+    ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
     ProxyHost, ProxyPort, ProxyUser, ProxyPass, AnonPass, SocksType: string;
     FtpPassive, HttpProxy, SocksProxy, ConfirmDownload: boolean;
