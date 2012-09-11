@@ -5,7 +5,7 @@ unit BGRATextFX;
 interface
 
 uses
-  Classes, SysUtils, Graphics, BGRABitmapTypes, BGRAPhongTypes, Types;
+  Classes, SysUtils, Graphics, Types, BGRABitmapTypes, BGRAPhongTypes;
 
 type
 
@@ -27,8 +27,11 @@ type
     procedure DrawMask(ADest: TBGRACustomBitmap; AMask: TBGRACustomBitmap; X,Y: Integer; AColor: TBGRAPixel);
     procedure DrawMask(ADest: TBGRACustomBitmap; AMask: TBGRACustomBitmap; X,Y: Integer; ATexture: IBGRAScanner);
     procedure InternalDrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ATexture: IBGRAScanner; ARounded: Boolean);
+    procedure Init(AText: string; Font: TFont; Antialiasing: boolean; SubOffsetX,SubOffsetY: single; GrainX, GrainY: Integer);
   public
     constructor Create(AText: string; Font: TFont; Antialiasing: boolean);
+    constructor Create(AText: string; Font: TFont; Antialiasing: boolean; SubOffsetX,SubOffsetY: single);
+    constructor Create(AText: string; Font: TFont; Antialiasing: boolean; SubOffsetX,SubOffsetY: single; GrainX, GrainY: Integer);
     procedure ApplySphere;
     procedure ApplyVerticalCylinder;
     procedure ApplyHorizontalCylinder;
@@ -60,16 +63,17 @@ type
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
     AOffSetX,AOffSetY: Integer; ARadius: Integer = 0; AFontStyle: TFontStyles = []; AFontName: String = 'Default'; AShowText: Boolean = True; AFontQuality: TBGRAFontQuality = fqFineAntialiasing): TBGRACustomBitmap;
 
-procedure BGRATextOutImproveReadability(bmp: TBGRACustomBitmap; AFont: TFont; x,y: integer; text: string; color: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; useClearType: boolean; ClearTypeRGBOrder: boolean);
+procedure BGRATextOutImproveReadability(bmp: TBGRACustomBitmap; AFont: TFont; xf,yf: single; text: string; color: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; useClearType: boolean; ClearTypeRGBOrder: boolean);
 
 implementation
 
 uses BGRAGradientScanner, BGRAText, GraphType, Math;
 
-procedure BGRATextOutImproveReadability(bmp: TBGRACustomBitmap; AFont: TFont; x,y: integer; text: string; color: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; useClearType: boolean; ClearTypeRGBOrder: boolean);
+procedure BGRATextOutImproveReadability(bmp: TBGRACustomBitmap; AFont: TFont; xf,yf: single; text: string; color: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; useClearType: boolean; ClearTypeRGBOrder: boolean);
 var
   metric: TFontPixelMetric;
-  yb,cury,fromy: integer;
+  deltaX: single;
+  x,y,yb,cury,fromy: integer;
   toAdd: integer;
   lines: array[0..3] of integer;
   parts: array[0..3] of TBGRACustomBitmap;
@@ -83,6 +87,9 @@ var
   xThird: integer;
 
 begin
+  deltaX := xf-floor(xf);
+  x := round(floor(xf));
+
   FxFont := TFont.Create;
   FxFont.Assign(AFont);
   FxFont.Height := fxFont.Height*FontAntialiasingLevel;
@@ -93,10 +100,10 @@ begin
     if useClearType then
     begin
       if ClearTypeRGBOrder then
-        BGRATextOut(bmp, AFont, fqFineClearTypeRGB, x,y, text, color, tex, align) else
-        BGRATextOut(bmp, AFont, fqFineClearTypeBGR, x,y, text, color, tex, align)
+        BGRATextOut(bmp, AFont, fqFineClearTypeRGB, xf,yf, text, color, tex, align) else
+        BGRATextOut(bmp, AFont, fqFineClearTypeBGR, xf,yf, text, color, tex, align)
     end else
-      BGRATextOut(bmp, AFont, fqFineAntialiasing, x,y, text, color, tex, align);
+      BGRATextOut(bmp, AFont, fqFineAntialiasing, xf,yf, text, color, tex, align);
     exit;
   end;
 
@@ -129,7 +136,9 @@ begin
   lines[nbLines] := metric.Lineheight+1;
   inc(nbLines);
 
-  fx := TBGRATextEffect.Create(text,FxFont,False);
+  if not useClearType then
+    fx := TBGRATextEffect.Create(text,FxFont,False,deltaX*FontAntialiasingLevel,0,FontAntialiasingLevel,FontAntialiasingLevel) else
+    fx := TBGRATextEffect.Create(text,FxFont,False,0,0,3,0);
   alphaMax := 0;
   prevCenter := 0;
   newCenter := 0;
@@ -174,15 +183,15 @@ begin
 
   prevCenter /= FontAntialiasingLevel;
   diffCenter := prevCenter-newCenter;
-  y := round( y + diffCenter );
+  y := round( yf + diffCenter );
 
   xThird := 0;
   if useClearType then
   begin
     case align of
-    taCenter: xThird:= xThird+round((fx.TextMaskOffset.x-fx.Width/2)/FontAntialiasingLevel*3);
-    taRightJustify: xThird:= xThird+round((fx.TextMaskOffset.x-fx.Width)/FontAntialiasingLevel*3);
-    else xThird:= xThird+round(fx.TextMaskOffset.x/FontAntialiasingLevel*3);
+    taCenter: xThird:= xThird+round(((fx.TextMaskOffset.x-fx.Width/2)/FontAntialiasingLevel+deltaX)*3);
+    taRightJustify: xThird:= xThird+round(((fx.TextMaskOffset.x-fx.Width)/FontAntialiasingLevel+deltaX)*3);
+    else xThird:= xThird+round((fx.TextMaskOffset.x/FontAntialiasingLevel+deltaX)*3);
     end;
   end else
   begin
@@ -512,7 +521,20 @@ begin
 end;
 
 constructor TBGRATextEffect.Create(AText: string; Font: TFont;
-  Antialiasing: boolean);
+  Antialiasing: boolean; SubOffsetX,SubOffsetY: single);
+begin
+  Init(AText, Font, Antialiasing, SubOffsetX, SubOffsetY, 0,0);
+end;
+
+constructor TBGRATextEffect.Create(AText: string; Font: TFont;
+  Antialiasing: boolean; SubOffsetX, SubOffsetY: single; GrainX, GrainY: Integer
+  );
+begin
+  Init(AText, Font, Antialiasing, SubOffsetX, SubOffsetY, GrainX, GrainY);
+end;
+
+procedure TBGRATextEffect.Init(AText: string; Font: TFont;
+  Antialiasing: boolean; SubOffsetX,SubOffsetY: single; GrainX, GrainY: Integer);
 var temp: TBGRACustomBitmap;
     size: TSize;
     p: PBGRAPixel;
@@ -521,6 +543,7 @@ var temp: TBGRACustomBitmap;
     sizeX,sizeY: integer;
     onePixel: integer;
     quality: TBGRAFontQuality;
+    iSubX,iSubY: integer;
 begin
   if Antialiasing then
     quality := fqFineAntialiasing
@@ -538,6 +561,12 @@ begin
 
   sizeX := size.cx+size.cy;
   sizeY := size.cy;
+
+  iSubX := 0;
+  iSubY := 0;
+  if SubOffsetX < 0 then SubOffsetX := 0;
+  if SubOffsetY < 0 then SubOffsetY := 0;
+
   if Antialiasing then
   begin
     sizeX := (sizeX + FontAntialiasingLevel-1);
@@ -545,18 +574,53 @@ begin
 
     sizeY := (sizeY + FontAntialiasingLevel-1);
     sizeY -= sizeY mod FontAntialiasingLevel;
+
+    if SubOffsetX <> 0 then
+    begin
+      sizeX += ceil(SubOffsetX*FontAntialiasingLevel);
+      iSubX := round(SubOffsetX*FontAntialiasingLevel);
+    end;
+    if SubOffsetY <> 0 then
+    begin
+      sizeY += ceil(SubOffsetY*FontAntialiasingLevel);
+      iSubY := round(SubOffsetY*FontAntialiasingLevel);
+    end;
+
     OnePixel := FontAntialiasingLevel;
   end else
+  begin
     OnePixel := 1;
+
+    if SubOffsetX <> 0 then
+    begin
+      iSubX := round(SubOffsetX);
+      sizeX += iSubX;
+    end;
+    if SubOffsetY <> 0 then
+    begin
+      iSubY := round(SubOffsetY);
+      sizeY += iSubY;
+    end;
+  end;
   FOffset := Point(-size.cy div 2,-OnePixel); //include overhang
 
+  if GrainX > 0 then
+  begin
+    SizeX := SizeX+ (GrainX-1);
+    SizeX -= SizeX mod GrainX;
+  end;
+  if GrainY > 0 then
+  begin
+    SizeY := SizeY+ (GrainY-1);
+    SizeY -= SizeY mod GrainY;
+  end;
   temp := BGRABitmapFactory.Create(sizeX, sizeY+2*OnePixel,clBlack);
   temp.Canvas.Font := Font;
   temp.Canvas.Font.Height := Font.Height*OnePixel;
   temp.Canvas.Font.Color := clWhite;
   temp.Canvas.Font.Quality := FontDefaultQuality;
   temp.Canvas.Brush.Style := bsClear;
-  temp.Canvas.TextOut(-FOffset.X, -FOffset.Y, AText);
+  temp.Canvas.TextOut(-FOffset.X+iSubX, -FOffset.Y+iSubY, AText);
 
   if Antialiasing then
   begin
@@ -603,6 +667,12 @@ begin
       p^.blue := alpha;
     end;
   end;
+end;
+
+constructor TBGRATextEffect.Create(AText: string; Font: TFont;
+  Antialiasing: boolean);
+begin
+  Init(AText, Font, Antialiasing, 0,0,0,0);
 end;
 
 procedure TBGRATextEffect.ApplySphere;

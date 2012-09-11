@@ -10,12 +10,12 @@ interface
   These routines are rather slow. }
 
 uses
-  Classes, SysUtils, BGRABitmapTypes, Graphics, Types;
+  Classes, Types, SysUtils, Graphics, BGRABitmapTypes;
 
-procedure BGRATextOut(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; x, y: integer; s: string;
+procedure BGRATextOut(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; xf, yf: single; s: string;
   c: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; CustomAntialiasingLevel: Integer = 0);
 
-procedure BGRATextOutAngle(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; x, y, orientation: integer;
+procedure BGRATextOutAngle(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; xf, yf: single; orientation: integer;
   s: string; c: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; CustomAntialiasingLevel: Integer = 0);
 
 procedure BGRATextRect(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; ARect: TRect; x, y: integer;
@@ -28,7 +28,7 @@ function BGRAOriginalTextSize(Font: TFont; Quality: TBGRAFontQuality; s: string;
 function GetFontHeightSign(AFont: TFont): integer;
 
 procedure BGRAFillClearTypeMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner = nil; RGBOrder: boolean=true);
-procedure BGRAFillClearTypeRGBMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner = nil; RGBOrder: boolean=true);
+procedure BGRAFillClearTypeRGBMask(dest: TBGRACustomBitmap; x,y: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner = nil; KeepRGBOrder: boolean=true);
 
 const FontAntialiasingLevel = 6;
 const FontDefaultQuality = fqAntialiased;
@@ -245,16 +245,60 @@ end;
 
 procedure BGRAFillClearTypeMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner; RGBOrder: boolean);
 var
-  alphaLine: packed array of byte;
-  xb,yb: integer;
+  pdest: PBGRAPixel;
+  ClearTypePixel: array[0..2] of byte;
+  curThird: integer;
+
+  procedure OutputPixel; inline;
+  begin
+    if texture <> nil then
+      color := texture.ScanNextPixel;
+    if RGBOrder then
+      ClearTypeDrawPixel(pdest, ClearTypePixel[0],ClearTypePixel[1],ClearTypePixel[2], color)
+    else
+      ClearTypeDrawPixel(pdest, ClearTypePixel[2],ClearTypePixel[1],ClearTypePixel[0], color);
+  end;
+
+  procedure NextAlpha(alphaValue: byte); inline;
+  begin
+    ClearTypePixel[curThird] := alphaValue;
+    inc(curThird);
+    if curThird = 3 then
+    begin
+      OutputPixel;
+      curThird := 0;
+      Fillchar(ClearTypePixel, sizeof(ClearTypePixel),0);
+      inc(pdest);
+    end;
+  end;
+
+  procedure EndRow; inline;
+  begin
+    if curThird > 0 then OutputPixel;
+  end;
+
+var
+  yMask,n: integer;
   a: byte;
-  pmask,pdest: PBGRAPixel;
+  pmask: PBGRAPixel;
   dx:integer;
-  curThird, alphaAcc: integer;
-  a12: cardinal;
-  miny,maxy,minx,minxThird,maxx,alphaMinX,alphaMaxX,alphaMinXMask,alphaMaxXMask,alphaLineLen: integer;
-  startAlpha, NonClearTypeAlpha: byte;
-  NonClearTypeColor: TBGRAPixel;
+  miny,maxy,minx,minxThird,maxx,alphaMinX,alphaMaxX,alphaLineLen: integer;
+  leftOnSide, rightOnSide: boolean;
+  countBetween: integer;
+  v1,v2,v3: byte;
+
+  procedure StartRow; inline;
+  begin
+    pdest := dest.Scanline[yMask+y]+minx;
+    if texture <> nil then
+      texture.ScanMoveTo(minx,yMask+y);
+
+    curThird := minxThird;
+    ClearTypePixel[0] := 0;
+    ClearTypePixel[1] := 0;
+    ClearTypePixel[2] := 0;
+  end;
+
 begin
   alphaLineLen := mask.Width+2;
 
@@ -276,274 +320,125 @@ begin
     minx := x;
     minxThird := xThird;
     alphaMinX := 0;
+    leftOnSide := false;
   end else
   begin
     minx := dest.ClipRect.Left;
     minxThird := 0;
     alphaMinX := (dest.ClipRect.Left-x)*3 - xThird;
+    leftOnSide := true;
   end;
 
   if x*3+xThird+mask.Width-1 < dest.ClipRect.Right*3 then
   begin
     maxx := (x*3+xThird+mask.Width-1) div 3;
     alphaMaxX := alphaLineLen-1;
+    rightOnSide := false;
   end else
   begin
     maxx := dest.ClipRect.Right-1;
     alphaMaxX := maxx*3+2 - (x*3+xThird);
+    rightOnSide := true;
   end;
 
-  alphaMinXMask := alphaMinX-1;
-  if alphaMinXMask < 1 then alphaMinxMask := 1;
-  alphaMaxXMask := alphaMaxX+1;
-  if alphaMaxXMask > alphaLineLen-2 then alphaMaxXMask := alphaLineLen-2;
+  countBetween := alphaMaxX-alphaMinX-1;
 
-  setlength(alphaLine, alphaLineLen);
-
-  if (alphaMaxXMask >= alphaMinXMask) and (alphaMinX <= alphaMaxX) then
+  if (alphaMinX <= alphaMaxX) then
   begin
-    for yb := miny to maxy do
+    for yMask := miny to maxy do
     begin
-      pmask := mask.ScanLine[yb]+(alphaMinXMask-1);
-      for xb := alphaMinX to alphaMaxX do
-        alphaLine[xb] := 0;
-      for xb := alphaMinXMask to alphaMaxXMask do
+      StartRow;
+
+      if leftOnSide then
+      begin
+        pmask := mask.ScanLine[yMask]+(alphaMinX-1);
+        a := pmask^.green div 3;
+        v1 := a+a;
+        v2 := a;
+        v3 := 0;
+        inc(pmask);
+      end else
+      begin
+        pmask := mask.ScanLine[yMask];
+        v1 := 0;
+        v2 := 0;
+        v3 := 0;
+      end;
+
+      for n := countBetween-1 downto 0 do
       begin
         a := pmask^.green div 3;
-        alphaLine[xb-1] += a;
-        alphaLine[xb] += a;
-        alphaLine[xb+1] += a;
+        v1 += a;
+        v2 += a;
+        v3 += a;
         inc(pmask);
-      end;
-      pdest := dest.Scanline[yb+y]+minx;
-      if texture <> nil then
-      begin
-        texture.ScanMoveTo(minx,yb+y);
-        color := texture.ScanNextPixel;
-      end;
-      curThird := minxThird;
-      alphaAcc := 0;
-      startAlpha := pdest^.alpha;
-      NonClearTypeAlpha := 0;
-      for xb := alphaMinX to alphaMaxX do
-      begin
-        a := alphaLine[xb];
-        if a <> 0 then
-        begin
-          if curThird = 1 then NonClearTypeAlpha := a;
 
-          if RGBOrder then
-          begin
-            case curThird of
-            0: pdest^.red := GammaCompressionTab[ (GammaExpansionTab[pdest^.red] * (not byte(a)) +
-                              GammaExpansionTab[color.red] * a + 128) div 255 ];
-            1: pdest^.green := GammaCompressionTab[ (GammaExpansionTab[pdest^.green] * (not byte(a)) +
-                              GammaExpansionTab[color.green] * a + 128) div 255 ];
-            else pdest^.blue := GammaCompressionTab[ (GammaExpansionTab[pdest^.blue] * (not byte(a)) +
-                              GammaExpansionTab[color.blue] * a + 128) div 255 ];
-            end;
-          end else
-          begin
-            case curThird of
-            2: pdest^.red := GammaCompressionTab[ (GammaExpansionTab[pdest^.red] * (not byte(a)) +
-                              GammaExpansionTab[color.red] * a + 128) div 255 ];
-            1: pdest^.green := GammaCompressionTab[ (GammaExpansionTab[pdest^.green] * (not byte(a)) +
-                              GammaExpansionTab[color.green] * a + 128) div 255 ];
-            else pdest^.blue := GammaCompressionTab[ (GammaExpansionTab[pdest^.blue] * (not byte(a)) +
-                              GammaExpansionTab[color.blue] * a + 128) div 255 ];
-            end;
-          end;
-
-          inc(alphaAcc,a);
-        end;
-        inc(curThird);
-        if curThird = 3 then
-        begin
-          if alphaAcc > 0 then
-          begin
-            NonClearTypeColor := BGRA(color.red,color.Green,color.blue,ApplyOpacity(color.alpha,NonClearTypeAlpha));
-
-            alphaAcc := startAlpha + ApplyOpacity(NonClearTypeAlpha, not startAlpha);
-            pdest^.red := (pdest^.red*startAlpha + NonClearTypeColor.red*(not startAlpha)) div 255;
-            pdest^.green:= (pdest^.green*startAlpha + NonClearTypeColor.green*(not startAlpha)) div 255;
-            pdest^.blue:= (pdest^.blue*startAlpha + NonClearTypeColor.blue*(not startAlpha)) div 255;
-            pdest^.alpha := alphaAcc;
-            alphaAcc := 0;
-            NonClearTypeAlpha := 0;
-          end;
-          curThird := 0;
-          inc(pdest);
-          if xb <> alphaMaxX then
-          begin
-            startAlpha := pdest^.alpha;
-            if texture <> nil then
-              color := texture.ScanNextPixel;
-          end;
-        end;
+        NextAlpha(v1);
+        v1 := v2;
+        v2 := v3;
+        v3 := 0;
       end;
-      if alphaAcc > 0 then
+
+      if rightOnSide then
       begin
-        a12  := 65025 - (not pdest^.alpha) * ((255-alphaAcc) div 3);
-        pdest^.alpha := (a12 + (a12 shr 7)) shr 8;
+        a := pmask^.green div 3;
+        v1 += a;
+        v2 += a+a;
       end;
+
+      NextAlpha(v1);
+      NextAlpha(v2);
+
+      EndRow;
     end;
   end;
 end;
 
-procedure BGRAFillClearTypeRGBMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner; RGBOrder: boolean);
+procedure BGRAFillClearTypeRGBMask(dest: TBGRACustomBitmap; x, y: integer;
+  mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner;
+  KeepRGBOrder: boolean);
 var
-  alphaLine: packed array of byte;
-  xb,yb: integer;
-  a: byte;
-  pmask,pdest: PBGRAPixel;
-  dx:integer;
-  curThird, alphaAcc: integer;
-  a12: cardinal;
-  miny,maxy,minx,minxThird,maxx,alphaMinX,alphaMaxX,alphaLineLen: integer;
-  startAlpha, NonClearTypeAlpha: byte;
-  NonClearTypeColor: TBGRAPixel;
+  minx,miny,maxx,maxy,countx,n,yb: integer;
+  pdest,psrc: PBGRAPixel;
 begin
-  alphaLineLen := mask.Width*3;
-
-  if xThird >= 0 then dx := xThird div 3
-   else dx := -((-xThird+2) div 3);
-  x += dx;
-  xThird -= dx*3;
-
   if y >= dest.ClipRect.Top then miny := 0
     else miny := dest.ClipRect.Top-y;
   if y+mask.Height-1 < dest.ClipRect.Bottom then
     maxy := mask.Height-1 else
       maxy := dest.ClipRect.Bottom-1-y;
 
-  if x >= dest.ClipRect.Left then
-  begin
-    minx := x;
-    minxThird := xThird;
-    alphaMinX := 0;
-  end else
-  begin
-    minx := dest.ClipRect.Left;
-    minxThird := 0;
-    alphaMinX := (dest.ClipRect.Left-x)*3 - xThird;
-  end;
+  if x >= dest.ClipRect.Left then minx := 0
+    else minx := dest.ClipRect.Left-x;
+  if x+mask.Width-1 < dest.ClipRect.Right then
+    maxx := mask.Width-1 else
+      maxx := dest.ClipRect.Right-1-x;
 
-  if x*3+xThird+alphaLineLen-1 < dest.ClipRect.Right*3 then
-  begin
-    maxx := (x*3+xThird+alphaLineLen-1) div 3;
-    alphaMaxX := alphaLineLen-1;
-  end else
-  begin
-    maxx := dest.ClipRect.Right-1;
-    alphaMaxX := maxx*3+2 - (x*3+xThird);
-  end;
+  countx := maxx-minx+1;
+  if countx <= 0 then exit;
 
-  setlength(alphaLine, alphaLineLen);
-
-  if (alphaMinX <= alphaMaxX) then
+  for yb := miny to maxy do
   begin
-    for yb := miny to maxy do
+    pdest := dest.ScanLine[y+yb]+(x+minx);
+    psrc := mask.ScanLine[yb]+minx;
+    if texture <> nil then
+      texture.ScanMoveTo(x+minx, y+yb);
+    if KeepRGBOrder then
     begin
-      pmask := mask.ScanLine[yb]+(alphaMinX div 3);
-      curThird := alphaMinX mod 3;
-      for xb := alphaMinX to alphaMaxX do
+      for n := countx-1 downto 0 do
       begin
-        if RGBOrder then
-        begin
-          if curThird = 0 then
-            alphaLine[xb] := pmask^.red
-          else
-          if curThird = 1 then
-            alphaLine[xb] := pmask^.green
-          else
-            alphaLine[xb] := pmask^.blue;
-        end else
-        begin
-          if curThird = 0 then
-            alphaLine[xb] := pmask^.blue
-          else
-          if curThird = 1 then
-            alphaLine[xb] := pmask^.green
-          else
-            alphaLine[xb] := pmask^.red;
-        end;
-        inc(curThird);
-        if curThird = 3 then
-        begin
-          curThird := 0;
-          inc(pmask);
-        end;
+        if texture <> nil then color := texture.ScanNextPixel;
+        ClearTypeDrawPixel(pdest, psrc^.red, psrc^.green, psrc^.blue, color);
+        inc(pdest);
+        inc(psrc);
       end;
-      pdest := dest.Scanline[yb+y]+minx;
-      if texture <> nil then
+    end else
+    begin
+      for n := countx-1 downto 0 do
       begin
-        texture.ScanMoveTo(minx,yb+y);
-        color := texture.ScanNextPixel;
-      end;
-      curThird := minxThird;
-      alphaAcc := 0;
-      startAlpha := pdest^.alpha;
-      NonClearTypeAlpha := 0;
-      for xb := alphaMinX to alphaMaxX do
-      begin
-        a := alphaLine[xb];
-        if a <> 0 then
-        begin
-          if curThird = 1 then NonClearTypeAlpha := a;
-
-          if RGBOrder then
-          begin
-            case curThird of
-            0: pdest^.red := GammaCompressionTab[ (GammaExpansionTab[pdest^.red] * (not byte(a)) +
-                              GammaExpansionTab[color.red] * a + 128) div 255 ];
-            1: pdest^.green := GammaCompressionTab[ (GammaExpansionTab[pdest^.green] * (not byte(a)) +
-                              GammaExpansionTab[color.green] * a + 128) div 255 ];
-            else pdest^.blue := GammaCompressionTab[ (GammaExpansionTab[pdest^.blue] * (not byte(a)) +
-                              GammaExpansionTab[color.blue] * a + 128) div 255 ];
-            end;
-          end else
-          begin
-            case curThird of
-            2: pdest^.red := GammaCompressionTab[ (GammaExpansionTab[pdest^.red] * (not byte(a)) +
-                              GammaExpansionTab[color.red] * a + 128) div 255 ];
-            1: pdest^.green := GammaCompressionTab[ (GammaExpansionTab[pdest^.green] * (not byte(a)) +
-                              GammaExpansionTab[color.green] * a + 128) div 255 ];
-            else pdest^.blue := GammaCompressionTab[ (GammaExpansionTab[pdest^.blue] * (not byte(a)) +
-                              GammaExpansionTab[color.blue] * a + 128) div 255 ];
-            end;
-          end;
-
-          inc(alphaAcc,a);
-        end;
-        inc(curThird);
-        if curThird = 3 then
-        begin
-          if alphaAcc > 0 then
-          begin
-            NonClearTypeColor := BGRA(color.red,color.Green,color.blue,ApplyOpacity(color.alpha,NonClearTypeAlpha));
-
-            alphaAcc := startAlpha + ApplyOpacity(NonClearTypeAlpha, not startAlpha);
-            pdest^.red := (pdest^.red*startAlpha + NonClearTypeColor.red*(not startAlpha)) div 255;
-            pdest^.green:= (pdest^.green*startAlpha + NonClearTypeColor.green*(not startAlpha)) div 255;
-            pdest^.blue:= (pdest^.blue*startAlpha + NonClearTypeColor.blue*(not startAlpha)) div 255;
-            pdest^.alpha := alphaAcc;
-            alphaAcc := 0;
-            NonClearTypeAlpha := 0;
-          end;
-          curThird := 0;
-          inc(pdest);
-          if xb <> alphaMaxX then
-          begin
-            startAlpha := pdest^.alpha;
-            if texture <> nil then
-              color := texture.ScanNextPixel;
-          end;
-        end;
-      end;
-      if alphaAcc > 0 then
-      begin
-        a12  := 65025 - (not pdest^.alpha) * ((255-alphaAcc) div 3);
-        pdest^.alpha := (a12 + (a12 shr 7)) shr 8;
+        if texture <> nil then color := texture.ScanNextPixel;
+        ClearTypeDrawPixel(pdest, psrc^.blue, psrc^.green, psrc^.red, color);
+        inc(pdest);
+        inc(psrc);
       end;
     end;
   end;
@@ -724,20 +619,23 @@ begin
   end;
 end;
 
-procedure BGRATextOut(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; x, y: integer; s: string;
+procedure BGRATextOut(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; xf, yf: single; s: string;
   c: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; CustomAntialiasingLevel: Integer = 0);
 var
   size: TSize;
   temp: TBGRACustomBitmap;
   xMargin,xThird: integer;
   tempSize: TSize;
+  subX,subY: integer;
+  x,y :integer;
+  deltaX: single;
 begin
   if CustomAntialiasingLevel = 0 then
     CustomAntialiasingLevel:= FontAntialiasingLevel;
 
   if Font.Orientation mod 3600 <> 0 then
   begin
-    BGRATextOutAngle(bmp,Font,Quality,x,y,Font.Orientation,s,c,tex,align);
+    BGRATextOutAngle(bmp,Font,Quality,xf,yf,Font.Orientation,s,c,tex,align);
     exit;
   end;
 
@@ -747,11 +645,31 @@ begin
 
   if (size.cy >= 144) and (Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB]) and (CustomAntialiasingLevel > 4) then
   begin
-    BGRATextOut(bmp,Font,Quality,x,y,s,c,tex,align,4);
+    BGRATextOut(bmp,Font,Quality,xf,yf,s,c,tex,align,4);
     exit;
   end;
 
-  tempSize.cx := size.cx+size.cy;
+  if Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB] then
+  begin
+    case align of
+      taLeftJustify: ;
+      taCenter: xf -= size.cx/2/CustomAntialiasingLevel;
+      taRightJustify: xf -= size.cx/CustomAntialiasingLevel;
+    end;
+  end else
+  begin
+    case align of
+      taLeftJustify: ;
+      taCenter: xf -= size.cx/2;
+      taRightJustify: xf -= size.cx;
+    end;
+  end;
+
+  x := round(xf);
+  y := round(yf);
+
+  xThird := 0;
+  tempSize.cx := size.cx;
   tempSize.cy := size.cy;
   if Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB] then
   begin
@@ -759,75 +677,76 @@ begin
     tempSize.cx -= tempSize.cx mod CustomAntialiasingLevel;
     tempSize.cy += CustomAntialiasingLevel-1;
     tempSize.cy -= tempSize.cy mod CustomAntialiasingLevel;
+
+    deltaX := xf-floor(xf);
+    if Quality in [fqFineClearTypeBGR,fqFineClearTypeRGB] then
+    begin
+      xThird := floor(deltaX*3) mod 3;
+      deltaX -= xThird/3;
+    end;
+    subX := round(CustomAntialiasingLevel*deltaX);
+    x := round(floor(xf));
+    if subX <> 0 then inc(tempSize.cx, CustomAntialiasingLevel);
+    subY := round(CustomAntialiasingLevel*(yf-floor(yf)));
+    y := round(floor(yf));
+    if subY <> 0 then inc(tempSize.cy, CustomAntialiasingLevel);
+  end else
+  begin
+    subX := 0;
+    subY := 0;
   end;
-  xMargin := (tempSize.cx-size.cx) div 2;
+
+  xMargin := size.cy div 2;
   if Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB] then
   begin
     xMargin += CustomAntialiasingLevel-1;
     xMargin -= xMargin mod CustomAntialiasingLevel;
   end;
+  tempSize.cx += xMargin*2;
+
   temp := bmp.NewBitmap(tempSize.cx, tempSize.cy, BGRABlack);
   temp.Canvas.Font := Font;
   if Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB] then temp.Canvas.Font.Height := Font.Height*CustomAntialiasingLevel
    else temp.Canvas.Font.Height := Font.Height;
   temp.Canvas.Font.Color := clWhite;
   temp.Canvas.Brush.Style := bsClear;
-  temp.Canvas.TextOut(xMargin, 0, s);
+  temp.Canvas.TextOut(xMargin+subX, subY, s);
 
   FilterOriginalText(Quality,CustomAntialiasingLevel, temp,c,tex);
 
   if Quality in [fqFineClearTypeBGR,fqFineClearTypeRGB] then
-  begin
-    xThird := -round(xMargin/(CustomAntialiasingLevel/3));
-    case align of
-      taLeftJustify: ;
-      taCenter: dec(xThird, round(size.cx /(2*(CustomAntialiasingLevel/3))));
-      taRightJustify: dec(xThird, round(size.cx /(CustomAntialiasingLevel/3)));
-    end;
-    BGRAFillClearTypeMask(bmp,x,y,xThird, temp,c,tex,Quality=fqFineClearTypeRGB)
-  end
+    BGRAFillClearTypeMask(bmp,x-round(xMargin/CustomAntialiasingLevel),y,xThird, temp,c,tex,Quality=fqFineClearTypeRGB)
   else
   begin
-    if Quality = fqFineAntialiasing then
-    begin
-      dec(x, xMargin div CustomAntialiasingLevel);
-      case align of
-        taLeftJustify: ;
-        taCenter: Dec(x, size.cx div (2*CustomAntialiasingLevel));
-        taRightJustify: Dec(x, size.cx div CustomAntialiasingLevel);
-      end;
-    end else
-    begin
-      dec(x, xMargin);
-      case align of
-        taLeftJustify: ;
-        taCenter: Dec(x, size.cx div 2);
-        taRightJustify: Dec(x, size.cx);
-      end;
-    end;
     if Quality = fqSystemClearType then
-      BGRAFillClearTypeRGBMask(bmp,x,y,0, temp,c,tex)
-    else
-      bmp.PutImage(x, y, temp, dmDrawWithTransparency);
+      BGRAFillClearTypeRGBMask(bmp,x-xMargin,y, temp,c,tex)
+    else if Quality = fqFineAntialiasing then
+      bmp.PutImage(x-round(xMargin/CustomAntialiasingLevel), y, temp, dmDrawWithTransparency)
+    else bmp.PutImage(x-xMargin, y, temp, dmDrawWithTransparency);
   end;
   temp.Free;
 end;
 
-procedure BGRATextOutAngle(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; x, y, orientation: integer;
+procedure BGRATextOutAngle(bmp: TBGRACustomBitmap; Font: TFont; Quality: TBGRAFontQuality; xf, yf: single; orientation: integer;
   s: string; c: TBGRAPixel; tex: IBGRAScanner; align: TAlignment; CustomAntialiasingLevel: Integer = 0);
 var
+  x,y: integer;
+  deltaX,deltaY: integer;
   size: TSize;
   temp: TBGRACustomBitmap;
   TopRight,BottomRight,BottomLeft: TPointF;
+  Top: Single;
+  Left: Single;
   cosA,sinA: single;
   rotBounds: TRect;
   sizeFactor: integer;
   TempFont: TFont;
   oldOrientation: integer;
-  xThird: integer;
 
   procedure rotBoundsAdd(pt: TPointF);
   begin
+    if pt.x < Left then Left := pt.x;
+    if pt.y < Top then Top := pt.y;
     if floor(pt.X) < rotBounds.Left then rotBounds.Left := floor(pt.X/sizeFactor)*sizeFactor;
     if floor(pt.Y) < rotBounds.Top then rotBounds.Top := floor(pt.Y/sizeFactor)*sizeFactor;
     if ceil(pt.X) > rotBounds.Right then rotBounds.Right := ceil(pt.X/sizeFactor)*sizeFactor;
@@ -842,7 +761,7 @@ begin
   begin
     oldOrientation := Font.Orientation;
     Font.Orientation := 0;
-    BGRATextOut(bmp,Font,Quality,x,y,s,c,tex,align);
+    BGRATextOut(bmp,Font,Quality,xf,yf,s,c,tex,align);
     Font.Orientation := oldOrientation;
     exit;
   end;
@@ -867,61 +786,51 @@ begin
   BottomRight := PointF(cosA*size.cx+sinA*size.cy,cosA*size.cy-sinA*size.cx);
   BottomLeft := PointF(sinA*size.cy,cosA*size.cy);
   rotBounds := rect(0,0,0,0);
+  Top := 0;
+  Left := 0;
   rotBoundsAdd(TopRight);
   rotBoundsAdd(BottomRight);
   rotBoundsAdd(BottomLeft);
   inc(rotBounds.Right);
   inc(rotBounds.Bottom);
 
+  xf += Left/sizeFactor;
+  yf += Top/sizeFactor;
+  case align of
+    taLeftJustify: ;
+    taCenter:
+      begin
+        xf -= TopRight.x/2/sizeFactor;
+        yf -= TopRight.y/2/sizeFactor;
+      end;
+    taRightJustify:
+      begin
+        xf -= TopRight.x/sizeFactor;
+        yf -= TopRight.y/sizeFactor;
+      end;
+  end;
+  deltaX := round((xf - floor(xf))*sizeFactor);
+  x := floor(xf);
+  deltaY := round((yf - floor(yf))*sizeFactor);
+  y := floor(yf);
+  if deltaX <> 0 then rotBounds.Right += sizeFactor;
+  if deltaY <> 0 then rotBounds.Bottom += sizeFactor;
+
   temp := bmp.NewBitmap(rotBounds.Right-rotBounds.Left,rotBounds.Bottom-rotBounds.Top, BGRABlack);
   temp.Canvas.Font := Font;
   temp.Canvas.Font.Color := clWhite;
   temp.Canvas.Font.Orientation := orientation;
-  if Quality in[fqFineAntialiasing,fqFineClearTypeBGR,fqFineClearTypeRGB] then temp.Canvas.Font.Height := Font.Height*CustomAntialiasingLevel
-     else temp.Canvas.Font.Height := Font.Height;
+  temp.Canvas.Font.Height := round(Font.Height*sizeFactor);
   temp.Canvas.Brush.Style := bsClear;
-  temp.Canvas.TextOut(-rotBounds.Left, -rotBounds.Top, s);
+  temp.Canvas.TextOut(-rotBounds.Left+deltaX, -rotBounds.Top+deltaY, s);
 
   FilterOriginalText(Quality,CustomAntialiasingLevel,temp,c,tex);
 
   if Quality in [fqFineClearTypeRGB,fqFineClearTypeBGR] then
+    BGRAFillClearTypeMask(bmp, x, y, 0, temp, c,tex,Quality = fqFineClearTypeRGB) else
   begin
-    xThird := 0;
-    inc(xThird,round(rotBounds.Left/sizeFactor*3));
-    inc(y,round(rotBounds.Top/sizeFactor));
-    case align of
-      taLeftJustify: ;
-      taCenter:
-        begin
-          Dec(xThird, round(TopRight.x/2/sizeFactor*3));
-          Dec(y, round(TopRight.y/2/sizeFactor));
-        end;
-      taRightJustify:
-        begin
-          Dec(xThird, round(TopRight.x/sizeFactor*3));
-          Dec(y, round(TopRight.y/sizeFactor));
-        end;
-    end;
-    BGRAFillClearTypeMask(bmp, x, y, xThird, temp, c,tex,Quality = fqFineClearTypeRGB);
-  end else
-  begin
-    inc(x,round(rotBounds.Left/sizeFactor));
-    inc(y,round(rotBounds.Top/sizeFactor));
-    case align of
-      taLeftJustify: ;
-      taCenter:
-        begin
-          Dec(x, round(TopRight.x/2/sizeFactor));
-          Dec(y, round(TopRight.y/2/sizeFactor));
-        end;
-      taRightJustify:
-        begin
-          Dec(x, round(TopRight.x/sizeFactor));
-          Dec(y, round(TopRight.y/sizeFactor));
-        end;
-    end;
     if Quality = fqSystemClearType then
-      BGRAFillClearTypeRGBMask(bmp, x, y, 0, temp, c,tex)
+      BGRAFillClearTypeRGBMask(bmp, x, y, temp, c,tex)
     else
       bmp.PutImage(x, y, temp, dmDrawWithTransparency);
   end;
@@ -974,7 +883,7 @@ begin
   if Quality in [fqFineClearTypeBGR,fqFineClearTypeRGB] then
     BGRAFillClearTypeMask(bmp,lim.Left, lim.Top, 0, temp, c,tex,Quality = fqFineClearTypeRGB)
   else if Quality = fqSystemClearType then
-    BGRAFillClearTypeRGBMask(bmp,lim.Left, lim.Top, 0, temp, c,tex)
+    BGRAFillClearTypeRGBMask(bmp,lim.Left, lim.Top, temp, c,tex)
   else
     bmp.PutImage(lim.Left, lim.Top, temp, dmDrawWithTransparency);
   temp.Free;

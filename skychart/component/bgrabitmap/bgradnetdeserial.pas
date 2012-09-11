@@ -247,6 +247,8 @@ begin
   Result := LEtoN(Result);
 end;
 
+{$hints on}
+
 function GetFieldTypeSize(const fieldType: TFieldType): longword;
 begin
   case fieldType.category of
@@ -655,8 +657,6 @@ constructor TSerializedValue.Create(AContainer: TDotNetDeserialization;
 begin
   inherited Create(AContainer,AItemType,1);
 end;
-
-{$hints on}
 
 { TDotNetDeserialization }
 
