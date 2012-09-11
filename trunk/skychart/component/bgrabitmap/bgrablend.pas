@@ -9,7 +9,7 @@ unit BGRABlend;
 interface
 
 uses
-  Classes, SysUtils, BGRABitmapTypes;
+  BGRABitmapTypes;
 
 { Draw one pixel with alpha blending }
 procedure DrawPixelInlineWithAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel); inline; overload;
@@ -18,6 +18,7 @@ procedure DrawExpandedPixelInlineWithAlphaCheck(dest: PBGRAPixel; const ec: TExp
 procedure DrawPixelInlineExpandedOrNotWithAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel; c: TBGRAPixel); inline; overload;  //alpha in 'c' parameter
 procedure DrawPixelInlineNoAlphaCheck(dest: PBGRAPixel; const c: TBGRAPixel); inline; overload;
 procedure DrawExpandedPixelInlineNoAlphaCheck(dest: PBGRAPixel; const ec: TExpandedPixel; calpha: byte); inline; overload;
+procedure ClearTypeDrawPixel(pdest: PBGRAPixel; Cr, Cg, Cb: byte; Color: TBGRAPixel); inline;
 
 procedure CopyPixelsWithOpacity(dest,src: PBGRAPixel; opacity: byte; Count: integer); inline;
 function ApplyOpacity(opacity1,opacity2: byte): byte; inline;
@@ -85,6 +86,45 @@ procedure ScreenPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 procedure XorPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
 
 implementation
+
+procedure ClearTypeDrawPixel(pdest: PBGRAPixel; Cr, Cg, Cb: byte; Color: TBGRAPixel);
+var merge,mergeClearType: TBGRAPixel;
+    acc: word;
+    keep,dont_keep: byte;
+begin
+  Cr := ApplyOpacity(Cr,color.alpha);
+  Cg := ApplyOpacity(Cg,color.alpha);
+  Cb := ApplyOpacity(Cb,color.alpha);
+  acc := Cr+Cg+Cb;
+  if acc = 0 then exit;
+
+  merge := pdest^;
+  mergeClearType.red := GammaCompressionTab[(GammaExpansionTab[merge.red] * (not byte(Cr)) +
+                GammaExpansionTab[color.red] * Cr + 128) div 255];
+  mergeClearType.green := GammaCompressionTab[(GammaExpansionTab[merge.green] * (not byte(Cg)) +
+                GammaExpansionTab[color.green] * Cg + 128) div 255];
+  mergeClearType.blue := GammaCompressionTab[(GammaExpansionTab[merge.blue] * (not byte(Cb)) +
+                GammaExpansionTab[color.blue] * Cb + 128) div 255];
+  mergeClearType.alpha := merge.alpha;
+
+  if (mergeClearType.alpha = 255) then
+    pdest^:= mergeClearType
+  else
+  begin
+    if Cg <> 0 then
+      DrawPixelInlineWithAlphaCheck(@merge, color, Cg);
+    dont_keep := mergeClearType.alpha;
+    if dont_keep > 0 then
+    begin
+      keep := not dont_keep;
+      merge.red := GammaCompressionTab[(GammaExpansionTab[merge.red] * keep + GammaExpansionTab[mergeClearType.red] * dont_keep) div 255];
+      merge.green := GammaCompressionTab[(GammaExpansionTab[merge.green] * keep + GammaExpansionTab[mergeClearType.green] * dont_keep) div 255];
+      merge.blue := GammaCompressionTab[(GammaExpansionTab[merge.blue] * keep + GammaExpansionTab[mergeClearType.blue] * dont_keep) div 255];
+      merge.alpha := mergeClearType.alpha + ApplyOpacity(merge.alpha, not mergeClearType.alpha);
+    end;
+    pdest^ := merge;
+  end;
+end;
 
 procedure ScannerPutPixels(scan: IBGRAScanner; pdest: PBGRAPixel; count: integer; mode: TDrawMode);
 var c : TBGRAPixel;
@@ -442,13 +482,10 @@ end;
 
 procedure CopyPixelsWithOpacity(dest, src: PBGRAPixel; opacity: byte;
   Count: integer);
-var c: TBGRAPixel;
 begin
   while count > 0 do
   begin
-    c := src^;
-    c.alpha := ApplyOpacity(c.alpha,opacity);
-    dest^ := c;
+    dest^ := MergeBGRAWithGammaCorrection(src^,opacity,dest^,not opacity);
     inc(src);
     inc(dest);
     dec(count);

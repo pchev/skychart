@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="4">
     <PathDelim Value="\"/>
     <Name Value="bgrabitmappack"/>
+    <AddToProjectUsesSection Value="True"/>
     <Author Value="Circular"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\$(FPCVer)"/>
@@ -17,12 +18,13 @@
       </Parsing>
       <CodeGeneration>
         <Optimizations>
-          <OptimizationLevel Value="0"/>
+          <VariablesInRegisters Value="True"/>
+          <OptimizationLevel Value="3"/>
         </Optimizations>
       </CodeGeneration>
       <Linking>
         <Debugging>
-          <GenerateDebugInfo Value="True"/>
+          <DebugInfoType Value="dsStabs"/>
         </Debugging>
       </Linking>
       <Other>
@@ -34,8 +36,8 @@
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="5" Minor="5"/>
-    <Files Count="34">
+    <Version Major="5" Minor="9" Release="3"/>
+    <Files Count="49">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -172,6 +174,66 @@
         <Filename Value="bgralayers.pas"/>
         <UnitName Value="BGRALayers"/>
       </Item34>
+      <Item35>
+        <Filename Value="bgrasse.pas"/>
+        <UnitName Value="BGRASSE"/>
+      </Item35>
+      <Item36>
+        <Filename Value="perspectivescan2.inc"/>
+        <Type Value="Binary"/>
+      </Item36>
+      <Item37>
+        <Filename Value="shape3D.inc"/>
+        <Type Value="Binary"/>
+      </Item37>
+      <Item38>
+        <Filename Value="bgrascene3dinterface.inc"/>
+        <Type Value="Binary"/>
+      </Item38>
+      <Item39>
+        <Filename Value="bgramatrix3d.pas"/>
+        <UnitName Value="BGRAMatrix3D"/>
+      </Item39>
+      <Item40>
+        <Filename Value="bgracolorint.pas"/>
+        <UnitName Value="BGRAColorInt"/>
+      </Item40>
+      <Item41>
+        <Filename Value="csscolorconst.inc"/>
+        <Type Value="Binary"/>
+      </Item41>
+      <Item42>
+        <Filename Value="lightingclasses3d.inc"/>
+        <Type Value="Binary"/>
+      </Item42>
+      <Item43>
+        <Filename Value="phonglight.inc"/>
+        <Type Value="Binary"/>
+      </Item43>
+      <Item44>
+        <Filename Value="polyaliaspersp.inc"/>
+        <Type Value="Binary"/>
+      </Item44>
+      <Item45>
+        <Filename Value="lineartexscan2.inc"/>
+        <Type Value="Binary"/>
+      </Item45>
+      <Item46>
+        <Filename Value="perspectivecolorscan.inc"/>
+        <Type Value="Binary"/>
+      </Item46>
+      <Item47>
+        <Filename Value="phongdrawsse.inc"/>
+        <Type Value="Binary"/>
+      </Item47>
+      <Item48>
+        <Filename Value="phonglightsse.inc"/>
+        <Type Value="Binary"/>
+      </Item48>
+      <Item49>
+        <Filename Value="bgracoordpool3d.pas"/>
+        <UnitName Value="BGRACoordPool3D"/>
+      </Item49>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">

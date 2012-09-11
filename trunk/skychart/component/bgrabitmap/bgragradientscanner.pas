@@ -35,6 +35,27 @@ type
     function GetMonochrome: boolean; override;
   end;
 
+  THueGradientOption = (hgoRepeat, hgoPositiveDirection, hgoNegativeDirection, hgoHueCorrection, hgoLightnessCorrection);
+  THueGradientOptions = set of THueGradientOption;
+
+  { TBGRAHueGradient }
+
+  TBGRAHueGradient = class(TBGRACustomGradient)
+  private
+    FColor1,FColor2: TBGRAPixel;
+    hsla1,hsla2: THSLAPixel;
+    hue1,hue2: longword;
+    FOptions: THueGradientOptions;
+    procedure Init(c1,c2: THSLAPixel; AOptions: THueGradientOptions);
+  public
+    constructor Create(Color1,Color2: TBGRAPixel; options: THueGradientOptions); overload;
+    constructor Create(Color1,Color2: THSLAPixel; options: THueGradientOptions); overload;
+    constructor Create(AHue1,AHue2: Word; Saturation,Lightness: Word; options: THueGradientOptions); overload;
+    function GetColorAt(position: integer): TBGRAPixel; override;
+    function GetAverageColor: TBGRAPixel; override;
+    function GetMonochrome: boolean; override;
+  end;
+
   { TBGRAMultiGradient }
 
   TBGRAMultiGradient = class(TBGRACustomGradient)
@@ -155,6 +176,97 @@ type
 implementation
 
 uses BGRABlend;
+
+{ TBGRAHueGradient }
+
+procedure TBGRAHueGradient.Init(c1, c2: THSLAPixel; AOptions: THueGradientOptions);
+begin
+  FColor1 := HSLAToBGRA(c1);
+  FColor2 := HSLAToBGRA(c2);
+  FOptions:= AOptions;
+  if (hgoLightnessCorrection in AOptions) then
+  begin
+    hsla1 := BGRAToGSBA(FColor1);
+    hsla2 := BGRAToGSBA(FColor2);
+  end else
+  begin
+    hsla1 := c1;
+    hsla2 := c2;
+  end;
+  if not (hgoHueCorrection in AOptions) then
+  begin
+    hue1 := c1.hue;
+    hue2 := c2.hue;
+  end else
+  begin
+    hue1 := HtoG(c1.hue);
+    hue2 := HtoG(c2.hue);
+  end;
+  if (hgoPositiveDirection in AOptions) and not (hgoNegativeDirection in AOptions) then
+  begin
+    if c2.hue <= c1.hue then hue2 += 65536;
+  end else
+  if not (hgoPositiveDirection in AOptions) and (hgoNegativeDirection in AOptions) then
+  begin
+    if c2.hue >= c1.hue then hue1 += 65536;
+  end;
+end;
+
+constructor TBGRAHueGradient.Create(Color1, Color2: TBGRAPixel;options: THueGradientOptions);
+begin
+  Init(BGRAToHSLA(Color1),BGRAToHSLA(Color2),options);
+end;
+
+constructor TBGRAHueGradient.Create(Color1, Color2: THSLAPixel; options: THueGradientOptions);
+begin
+  Init(Color1,Color2, options);
+end;
+
+constructor TBGRAHueGradient.Create(AHue1, AHue2: Word; Saturation,
+  Lightness: Word; options: THueGradientOptions);
+begin
+  Init(HSLA(AHue1,saturation,lightness), HSLA(AHue2,saturation,lightness), options);
+end;
+
+function TBGRAHueGradient.GetColorAt(position: integer): TBGRAPixel;
+var b,b2: cardinal;
+    interm: THSLAPixel;
+begin
+  if (hgoRepeat in FOptions) then position := position and $ffff;
+  if position < 0 then
+    result := FColor1 else
+  if position >= 65536 then
+    result := FColor2 else
+  begin
+    b      := position shr 2;
+    b2     := 16384-b;
+    interm.hue := ((hue1 * b2 + hue2 * b + 8191) shr 14) and $ffff;
+    interm.saturation := (hsla1.saturation * b2 + hsla2.saturation * b + 8191) shr 14;
+    interm.lightness := (hsla1.lightness * b2 + hsla2.lightness * b + 8191) shr 14;
+    interm.alpha := (hsla1.alpha * b2 + hsla2.alpha * b + 8191) shr 14;
+    if hgoLightnessCorrection in FOptions then
+    begin
+      if not (hgoHueCorrection in FOptions) then
+        interm.hue := HtoG(interm.hue);
+      result := GSBAToBGRA(interm);
+    end else
+    begin
+      if hgoHueCorrection in FOptions then
+        interm.hue := GtoH(interm.hue);
+      result := HSLAToBGRA(interm);
+    end;
+  end;
+end;
+
+function TBGRAHueGradient.GetAverageColor: TBGRAPixel;
+begin
+  Result:= GetColorAt(32768);
+end;
+
+function TBGRAHueGradient.GetMonochrome: boolean;
+begin
+  Result:= false;
+end;
 
 { TBGRAMultiGradient }
 

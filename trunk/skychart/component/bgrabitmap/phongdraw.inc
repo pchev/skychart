@@ -7,24 +7,24 @@
 
 var
   //Light source normal.
-  vL: TVector3D;  {xmm0}
+  vL: TPoint3D_128;  {xmm0}
   //Light source position.
-  vLS: TVector3D; {xmm1}
+  vLS: TPoint3D_128; {xmm1}
   //Vector H is the unit normal to the hypothetical surface oriented
   //halfway between the light direction vector (L) and the viewing vector (V).
-  vH: TVector3D;  {xmm2}
+  vH: TPoint3D_128;  {xmm2}
 
-  vN: TVector3D;  {xmm3}        // surface normal
-  vP: TVector3D;  {xmm4}        // position of lighted pixel
-  vV: TVector3D;                // viewer direction
+  vN: TPoint3D_128;  {xmm3}        // surface normal
+  vP: TPoint3D_128;  {xmm4}        // position of lighted pixel
+  vV: TPoint3D_128;                // viewer direction
 {$ifdef PARAM_PHONGSSE}
-  LightDestFactor4: TVector3D;  // for multiplication
+  LightDestFactor4: TPoint3D_128;  // for multiplication
 {$endif}
 
   //Calculate LdotN and NnH
   NH: Single;
 {$ifndef PARAM_PHONGSSE}
-  vD: TVector3D;
+  vD: TPoint3D_128;
 {$endif}
 
   Iw, Ic: integer;    // Iw: specular intensity, Ic: ambient+diffuse intensity
@@ -71,7 +71,7 @@ var
   pmap: PBGRAPixel;
   pdest: PBGRAPixel;
   x,y : integer;      // Coordinates of point in height map.
-  vS1,vS2: TVector3D; // surface vectors (plane)
+  vS1,vS2: TPoint3D_128; // surface vectors (plane)
 
 begin
   {$ifndef PARAM_SIMPLECOLOR}
@@ -102,21 +102,21 @@ begin
   {$endif}
 
   //light origin
-  vLS := Vector3D(LightPosition.X-ofsX,
+  vLS := Point3D_128(LightPosition.X-ofsX,
                   LightPosition.Y-ofsY,
                   LightPositionZ);
   {$ifdef PARAM_PHONGSSE}
   asm
     movups xmm1, vLS
   end;
-  LightDestFactor4 := Vector3D(LightDestFactor,LightDestFactor,LightDestFactor,LightDestFactor);
+  LightDestFactor4 := Point3D_128(LightDestFactor,LightDestFactor,LightDestFactor,LightDestFactor);
   {$endif}
 
   //surface vectors
-  vS1 := Vector3D(1,0,0);
-  vS2 := Vector3D(0,1,0);
+  vS1 := Point3D_128(1,0,0);
+  vS2 := Point3D_128(0,1,0);
 
-  vV := Vector3D(0,0,1);
+  vV := Point3D_128(0,0,1);
 
 
   dist := 0;
@@ -190,152 +190,36 @@ begin
       end;
 
       //position vector
-      vP := Vector3D(x, y, z);
+      vP := Point3D_128(x, y, z);
       {$ifdef PARAM_PHONGSSE}
-      asm
-        //vL := vLS- vP*LightDestFactor;
-        movups xmm4, vP
-        movups xmm6,LightDestFactor4
-        shufps xmm6,xmm6, 0
-        mulps xmm6, xmm4
-        movaps xmm0, xmm1
-        subps xmm0, xmm6
-
-        //normalize(vL);
-        movaps xmm6, xmm0   //save
-        mulps xmm0, xmm0
-        //mix1
-        movaps xmm7, xmm0
-        shufps xmm7, xmm7, $4e
-        addps xmm0, xmm7
-        //mix2
-        movaps xmm7, xmm0
-        shufps xmm7, xmm7, $11
-        addps xmm0, xmm7
-        //1/sqrt
-        rsqrtps xmm0, xmm0
-        mulps xmm0, xmm6  //apply
-
-        //vH := vL + vV;
-        movaps xmm2, xmm0
-        movups xmm6, vV
-        addps xmm2, xmm6
-
-        //normalize(vH);
-        movaps xmm6, xmm2   //save
-        mulps xmm2, xmm2
-        //mix1
-        movaps xmm7, xmm2
-        shufps xmm7, xmm7, $4e
-        addps xmm2, xmm7
-        //mix2
-        movaps xmm7, xmm2
-        shufps xmm7, xmm7, $11
-        addps xmm2, xmm7
-        //1/sqrt
-        rsqrtps xmm2, xmm2
-        mulps xmm2, xmm6  //apply
-
-        //vectproduct(vS1,vS2,vN);
-        movups xmm6, vS1
-        shufps xmm6, xmm6, Shift231
-
-        movups xmm7, vS2
-        shufps xmm7, xmm7, Shift312
-
-        movaps xmm3,xmm6
-        mulps xmm3,xmm7
-
-        movups xmm6, vS1
-        shufps xmm6, xmm6, Shift312
-
-        movups xmm7, vS2
-        shufps xmm7, xmm7, Shift231
-
-        mulps xmm7,xmm6
-        subps xmm3,xmm7
-        //end of vectproduct
-
-        //normalize(vN);
-        movaps xmm6, xmm3   //save
-        mulps xmm3, xmm3
-        //mix1
-        movaps xmm7, xmm3
-        shufps xmm7, xmm7, $4e
-        addps xmm3, xmm7
-        //mix2
-        movaps xmm7, xmm3
-        shufps xmm7, xmm7, $11
-        addps xmm3, xmm7
-        //1/sqrt
-        rsqrtps xmm3, xmm3
-        mulps xmm3, xmm6  //apply
-
-        //LdotN := vN * vL;
-        movups xmm5, xmm3
-        mulps xmm5, xmm0
-        //mix1
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $4e
-        addps xmm5, xmm7
-        //mix2
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $11
-        addps xmm5, xmm7
-        //:=
-        movss LdotN, xmm5
-
-        //vD := vLS-vP;
-        movaps xmm5, xmm1
-        subps xmm5, xmm4
-
-        //dist := sqrt(vD*vD);
-        mulps xmm5, xmm5
-        //mix1
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $4e
-        addps xmm5, xmm7
-        //mix2
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $11
-        addps xmm5, xmm7
-        //:= sqrt
-        sqrtss xmm5,xmm5
-        movss dist, xmm5
-
-        //NH := vH * vN;
-        movups xmm5, xmm2
-        mulps xmm5, xmm3
-        //mix1
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $4e
-        addps xmm5, xmm7
-        //mix2
-        movaps xmm7, xmm5
-        shufps xmm7, xmm7, $11
-        addps xmm5, xmm7
-        //:=
-        movss NH, xmm5
+      if UseSSE3 then
+      begin
+        {$DEFINE PARAM_USESSE3}
+        {$i phongdrawsse.inc}
+        {$UNDEF PARAM_USESSE3}
+      end else
+      begin
+        {$i phongdrawsse.inc}
       end;
       {$else}
-        vP := Vector3D(x, y, z);
+        vP := Point3D_128(x, y, z);
         vL := vLS- vP*LightDestFactor;
-        normalize(vL);
+        Normalize3D_128(vL);
 
         //compute bisector of angle between light and observer
         vH := vL + vV;
-        normalize(vH);
+        Normalize3D_128(vH);
 
         // compute normal vector to the surface
-        vectproduct(vS1,vS2,vN);
-        normalize(vN);
+        VectProduct3D_128(vS1,vS2,vN);
+        Normalize3D_128(vN);
 
         //Calculate LdotN and NnH
-        LdotN := vN * vL;
+        LdotN := DotProduct3D_128(vN,vL);
         vD := vLS-vP;
-        dist := sqrt(vD*vD);
+        dist := sqrt(DotProduct3D_128(vD,vD));
 
-        NH := vH * vN;
+        NH := DotProduct3D_128(vH,vN);
         if NH <= 0 then
           NnH := 0
         else

@@ -7,8 +7,7 @@ interface
 { Here are various functions that draw gradients, shadow and lighting }
 
 uses
-  Graphics, Classes, BGRABitmap, BGRABitmapTypes, BGRABlend, BGRAPhongTypes
-  {$ifdef CPUI386},mmx{$endif};
+  Classes, Graphics, BGRABitmapTypes, BGRABitmap, BGRABlend, BGRAPhongTypes, BGRASSE;
 
 { Creates a bitmap with the specified text horizontally centered and with a shadow }
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
@@ -365,69 +364,6 @@ begin
   LightPositionZ := 100;
 end;
 
-type
-  TVector3D = record x,y,z,t: single; end;
-
-function Vector3D(x,y,z: single): TVector3D; inline;
-begin
-  result.x := x;
-  result.y := y;
-  result.z := z;
-  result.t := 0;
-end;
-
-function Vector3D(x,y,z,t: single): TVector3D; inline; overload;
-begin
-  result.x := x;
-  result.y := y;
-  result.z := z;
-  result.t := t;
-end;
-
-operator + (const v1,v2: TVector3D): TVector3D; inline;
-begin
-  result.x := v1.x+v2.x;
-  result.y := v1.y+v2.y;
-  result.z := v1.z+v2.z;
-end;
-
-operator - (const v1,v2: TVector3D): TVector3D; inline;
-begin
-  result.x := v1.x-v2.x;
-  result.y := v1.y-v2.y;
-  result.z := v1.z-v2.z;
-end;
-
-operator * (const v1: TVector3D; const factor: single): TVector3D; inline;
-begin
-  result.x := v1.x*factor;
-  result.y := v1.y*factor;
-  result.z := v1.z*factor;
-end;
-
-operator * (const v1,v2: TVector3D): single; inline;
-begin
-  result := v1.x*v2.x + v1.y*v2.y + v1.z*v2.z;
-end;
-
-procedure normalize(var v: TVector3D); inline;
-var len: double;
-begin
-  len := v*v;
-  if len = 0 then exit;
-  len := sqrt(len);
-  v.x /= len;
-  v.y /= len;
-  v.z /= len;
-end;
-
-procedure vectproduct(u,v: TVector3D; out w: TVector3D); overload;
-begin
-  w.x := u.y*v.z-u.z*v.y;
-  w.y := u.z*v.x-u.x*v.z;
-  w.z := u.x*v.Y-u.y*v.x;
-end;
-
 Const
   PhongLightPrecisionSh = 12;
   PhongLightPrecision = 1 shl PhongLightPrecisionSh;
@@ -439,39 +375,33 @@ procedure TPhongShading.Draw(dest: TBGRACustomBitmap; map: TBGRACustomBitmap; ma
                              Color : TBGRAPixel);
 begin
   {$ifdef CPUI386}
-    if is_sse_cpu then
+    if UseSSE then
       DrawColorSSE(dest,map,mapAltitude,ofsX,ofsY,Color)
     else
-      DrawColorNormal(dest,map,mapAltitude,ofsX,ofsY,Color);
-  {$else}
-    DrawColorNormal(dest,map,mapAltitude,ofsX,ofsY,Color);
   {$endif}
+      DrawColorNormal(dest,map,mapAltitude,ofsX,ofsY,Color);
 end;
 
 procedure TPhongShading.Draw(dest: TBGRACustomBitmap; map: TBGRACustomBitmap;
             mapAltitude: integer; ofsX, ofsY: integer; ColorMap: TBGRACustomBitmap);
 begin
   {$ifdef CPUI386}
-    if is_sse_cpu then
+    if UseSSE then
       DrawMapSSE(dest,map,mapAltitude,ofsX,ofsY,ColorMap)
     else
-      DrawMapNormal(dest,map,mapAltitude,ofsX,ofsY,ColorMap);
-  {$else}
-    DrawMapNormal(dest,map,mapAltitude,ofsX,ofsY,ColorMap);
   {$endif}
+      DrawMapNormal(dest,map,mapAltitude,ofsX,ofsY,ColorMap);
 end;
 
 procedure TPhongShading.DrawScan(dest: TBGRACustomBitmap; map: TBGRACustomBitmap;
   mapAltitude: integer; ofsX, ofsY: integer; ColorScan: IBGRAScanner);
 begin
   {$ifdef CPUI386}
-    if is_sse_cpu then
+    if UseSSE then
       DrawScannerSSE(dest,map,mapAltitude,ofsX,ofsY,ColorScan)
     else
-      DrawScannerNormal(dest,map,mapAltitude,ofsX,ofsY,ColorScan);
-  {$else}
-    DrawScannerNormal(dest,map,mapAltitude,ofsX,ofsY,ColorScan);
   {$endif}
+      DrawScannerNormal(dest,map,mapAltitude,ofsX,ofsY,ColorScan);
 end;
 
   {------------------ End of phong drawing ----------------}

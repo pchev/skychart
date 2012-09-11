@@ -553,10 +553,8 @@ for i:=0 to 6 do
 {$ENDIF}
    Astarbmp[i,j].canvas.CopyMode:=cmSrcCopy;
    Astarbmp[i,j].canvas.CopyRect(DestR,starbmp.canvas,SrcR);
-   Bstarbmp[i,j].SetSize(bw,bw);
-   Bstarbmp[i,j].canvas.Draw(0,0,Astarbmp[i,j]);
-   Bstarbmp[i,j].LoadFromBitmapIfNeeded;
    SetTransparencyFromLuminance(Astarbmp[i,j],1);
+   Bstarbmp[i,j].Assign(Astarbmp[i,j]);
    SetBGRATransparencyFromLuminance(Bstarbmp[i,j],1);
   end;
 end;
