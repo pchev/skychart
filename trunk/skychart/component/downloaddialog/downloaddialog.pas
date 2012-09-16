@@ -63,6 +63,7 @@ type
     FResponse: string;
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
     FSocksproxy,FSockstype : string;
+    FTimeout: integer;
     FFWMode : Integer;
     FFWpassive : Boolean;
     FUsername, FPassword, FFWhost, FFWport, FFWUsername, FFWPassword : string;
@@ -97,6 +98,7 @@ type
     property URL : string read Furl write Furl;
     property SaveToFile : string read Ffile write Ffile;
     property ResponseText : string read FResponse;
+    property Timeout: integer read FTimeout Write FTimeout;
     property HttpProxy : string read Fproxy  write Fproxy ;
     property HttpProxyPort : string read Fproxyport  write Fproxyport ;
     property HttpProxyUser : string read Fproxyuser  write Fproxyuser ;
@@ -146,6 +148,7 @@ begin
   Timer1.Enabled:=false;
   Timer1.Interval:=2000;
   Timer1.OnTimer:=@Timer1Timer;
+  FTimeout:=90000;
   Fproxy:='';
   FSocksproxy:='';
   FFWMode:=0;
@@ -311,6 +314,7 @@ begin
 FResponse:='';
 if copy(Furl,1,4)='http' then begin        // HTTP protocol
   http.Clear;
+  http.Timeout:=FTimeout;
   http.Sock.SocksIP:='';
   http.ProxyHost:='';
   if FSocksproxy<>'' then begin
