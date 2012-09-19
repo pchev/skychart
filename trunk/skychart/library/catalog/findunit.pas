@@ -386,7 +386,8 @@ Tixrec = record ra,dec : single;
                    key : array [0..512] of char;
          end;
 var
-    imin,imax,i,reclen,n : integer;
+    reclen,n : integer;
+    imin,imax,i: Int64;
     num,pnum,idx,buf : string;
     fx : file;
     lin : Tixrec;

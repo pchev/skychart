@@ -43,9 +43,6 @@
             </Optimizations>
           </CodeGeneration>
           <Linking>
-            <Debugging>
-              <DebugInfoType Value="dsDwarf2Set"/>
-            </Debugging>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>
@@ -92,7 +89,6 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsDwarf2Set"/>
               <UseHeaptrc Value="True"/>
             </Debugging>
             <Options>

@@ -145,7 +145,7 @@ type
     Button12: TButton;
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure PageControl1PageChanged(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure binarycatChange(Sender: TObject);
     procedure DirectoryEdit1AcceptDirectory(Sender: TObject; var Value: String);
     procedure FormCreate(Sender: TObject);
@@ -846,10 +846,10 @@ var i,j,n : integer;
     CatPrefix: boolean;
 begin
 for i:=1 to 20 do catheader.Spare1[i]:=0;
-for i:=1 to 20 do catheader.Spare2[i]:=0;
-for i:=1 to 20 do catheader.Spare3[i]:=0;
-for i:=1 to 35 do catheader.fpos[i]:=0;
-for i:=1 to 35 do catheader.flen[i]:=0;
+for i:=1 to 15 do catheader.Spare2[i]:=0;
+for i:=1 to 15 do catheader.Spare3[i]:=0;
+for i:=1 to 40 do catheader.fpos[i]:=0;
+for i:=1 to 40 do catheader.flen[i]:=0;
 n:=l_base;
 case radiogroup1.itemindex of
  0 : begin catheader.version:='CDCSTAR1'; n:=n+l_etoiles; end;
@@ -2211,11 +2211,6 @@ begin
   CheckBox6.Visible:=binarycat.ItemIndex=0;
 end;
 
-procedure Tf_catgen.PageControl1PageChanged(Sender: TObject);
-begin
-  Panel1.Visible:=PageControl1.PageIndex<=pageBuild;
-end;
-
 procedure Tf_catgen.FormShow(Sender: TObject);
 begin
 pagecontrol1.PageIndex:=pageFiles;
@@ -2224,6 +2219,11 @@ prevbt.enabled:=false;
 exitbt.Visible:=true;
 endbt.Visible:=false;
 endbt.enabled:=false;
+end;
+
+procedure Tf_catgen.PageControl1Change(Sender: TObject);
+begin
+  Panel1.Visible:=PageControl1.PageIndex<=pageBuild;
 end;
 
 procedure Tf_catgen.FormDestroy(Sender: TObject);
@@ -2303,5 +2303,21 @@ procedure Tf_catgen.ProgressAbort(Sender: TObject);
 begin
 abort:=true;
 end;
+
+{  Sort testing
+procedure Tf_catgen.Button13Click(Sender: TObject);
+var i:integer;
+begin
+abort:=false;
+chdir(appdir);
+for i:=1 to 15 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
+for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
+for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
+for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';
+destdir:=slash(directoryedit1.Text);
+ixfn:=lowercase(trim(edit4.text))+'.idx';
+BuildHeader;
+SortIXfile;
+end;  }
 
 end.
