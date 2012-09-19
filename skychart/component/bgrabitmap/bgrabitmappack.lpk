@@ -22,11 +22,6 @@
           <OptimizationLevel Value="3"/>
         </Optimizations>
       </CodeGeneration>
-      <Linking>
-        <Debugging>
-          <DebugInfoType Value="dsStabs"/>
-        </Debugging>
-      </Linking>
       <Other>
         <CompilerMessages>
           <UseMsgFile Value="True"/>
