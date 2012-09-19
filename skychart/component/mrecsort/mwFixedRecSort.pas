@@ -79,16 +79,16 @@ type
   TmSorIO=class(TObject)
   private
     IOStream: TFileStream;
-    fFilledSize: Longint;
+    fFilledSize: Int64;
     fBufferSize: LongInt;
-    fBufferPos: LongInt;
+    fBufferPos: Int64;
     fBuffer: Pointer;
     fNeedFill: Boolean;
     fEof: Boolean;
     fFileEof: Boolean;
     FRecCount: Cardinal;
-    fSize: Longint;
-    fFilePos: LongInt;
+    fSize: Int64;
+    fFilePos: Int64;
     fDataLen: Longint;
     procedure AllocBuffer(NewValue: Longint);
   protected
@@ -101,9 +101,9 @@ type
     procedure FlushBuffer;
     property Eof: Boolean read fEof;
     property RecCount: Cardinal read FRecCount;
-    property Size: Longint read fSize;
+    property Size: Int64 read fSize;
     property DataLen: Longint read fDataLen;
-    property FilePos: Longint read fFilePos;
+    property FilePos: Int64 read fFilePos;
   published
   end; { TmSorIO }
 
@@ -111,9 +111,9 @@ Type
   TmMergePart=class(TObject)
   private
     fPartStream: TFileStream;
-    PartFilePos: LongInt;
-    RecsToRead: LongInt;
-    RecsReaded: LongInt;
+    PartFilePos: Int64;
+    RecsToRead: Int64;
+    RecsReaded: Int64;
     fBufferSize: LongInt;
     fBufferPos: LongInt;
     fBuffer: Pointer;
@@ -128,7 +128,7 @@ Type
   protected
   public
     constructor create(Stream: TFileStream; FilePos, DataLen, Count, aNumber:
-      LongInt);
+      Int64);
     destructor destroy; override;
     procedure next;
     procedure Init;
@@ -530,7 +530,7 @@ begin
 end; { FlushBuffer }
 
 constructor TmMergePart.create(Stream: TFileStream; FilePos, DataLen, Count,
-  aNumber: LongInt);
+  aNumber: Int64);
 begin
   fPartStream:=Stream;
   PartFilePos:=FilePos;
@@ -674,7 +674,7 @@ end; { Merge }
 
 procedure TFixRecSort.CalculateBuffers;
 var
-  Size, PCount, Adjust: LongInt;
+  Size, PCount, Adjust: Int64;
   RLen: String;
 begin
   Size:=ReadStream.Size;
@@ -701,7 +701,7 @@ begin
     if ReadBuffSize<10000000 then ReadBuffSize:=10000000;
     WriteBuffSize:=ReadBuffSize div 5;
   end else;
-  if(Size>600000000)and(Size<=2000000000)then
+  if(Size>600000000){and(Size<=2000000000)}then
   begin
     ReadBuffSize:=20000000;
     WriteBuffSize:=ReadBuffSize div 5;
@@ -715,8 +715,8 @@ end; { CalculateBuffers }
 procedure TFixRecSort.Start(InFile, OutFile: String; Compare: TmSorCompare);
 var
   aFile, bFile: File;
-  K, Readed: Integer;
-  WriterPos, SorCount, PartNumber: LongInt;
+  K, Readed: Int64;
+  WriterPos, SorCount, PartNumber: Int64;
 begin
   TempFileName:=ExtractFilePath(Outfile)+PathDelim+'SorTemp.mkw';
   SorFileName:=OutFile;
