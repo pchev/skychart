@@ -81,7 +81,7 @@ type
     IOStream: TFileStream;
     fFilledSize: Int64;
     fBufferSize: LongInt;
-    fBufferPos: Int64;
+    fBufferPos: LongInt;
     fBuffer: Pointer;
     fNeedFill: Boolean;
     fEof: Boolean;
@@ -715,7 +715,8 @@ end; { CalculateBuffers }
 procedure TFixRecSort.Start(InFile, OutFile: String; Compare: TmSorCompare);
 var
   aFile, bFile: File;
-  K, Readed: Int64;
+  K: Integer;
+  Readed: Int64;
   WriterPos, SorCount, PartNumber: Int64;
 begin
   TempFileName:=ExtractFilePath(Outfile)+PathDelim+'SorTemp.mkw';
