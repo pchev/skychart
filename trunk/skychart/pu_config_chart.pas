@@ -47,6 +47,7 @@ type
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
+    MessierBox: TCheckBox;
     epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
     CheckBox13: TCheckBox;
@@ -272,6 +273,7 @@ type
     procedure CoordTypeClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
+    procedure MessierBoxClick(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -376,6 +378,7 @@ GroupBox1.caption:=rsNebulaeFilte;
 BigNebUnit.caption:=rsMinutes;
 NebBox.caption:=rsFilterNebula;
 BigNebBox.caption:=rsHideObjectWi;
+MessierBox.Caption:=rsDoNotFilterM;
 Label48.caption:=rsLimitingMagn2;
 Label49.caption:=rsLimitingSize;
 Label112.caption:=rsFieldOfVisio5;
@@ -539,6 +542,7 @@ fsmag9.Value:=cshr.StarMagFilter[10];
 nebbox.Checked:=cshr.NebFilter;
 bignebbox.Checked:=cshr.BigNebFilter;
 fBigNebLimit.value:=round(cshr.BigNebLimit);
+MessierBox.Checked:=cshr.NoFilterMessier;
 fmag0.Value:=cshr.NebMagFilter[1];
 fmag1.Value:=cshr.NebMagFilter[2];
 fmag2.Value:=cshr.NebMagFilter[3];
@@ -563,7 +567,6 @@ panel4.Visible:=cshr.StarFilter;
 panel3.visible:=cshr.AutoStarFilter;
 panel2.Visible:=not cshr.AutoStarFilter;
 Panel5.visible:=cshr.NebFilter;
-BigNebBox.visible:=cshr.NebFilter;
 end;
 
 procedure Tf_config_chart.ShowProjection;
@@ -650,6 +653,11 @@ myccat.Free;
 mycshr.Free;
 mycplot.Free;
 mycmain.Free;
+end;
+
+procedure Tf_config_chart.MessierBoxClick(Sender: TObject);
+begin
+  cshr.NoFilterMessier := MessierBox.Checked;
 end;
 
 procedure Tf_config_chart.PageControl1PageChanged(Sender: TObject);
@@ -871,9 +879,6 @@ procedure Tf_config_chart.NebBoxClick(Sender: TObject);
 begin
 cshr.NebFilter:=NebBox.Checked;
 Panel5.visible:=cshr.NebFilter;
-BigNebBox.visible:=cshr.NebFilter;
-fBigNebLimit.visible:=cshr.NebFilter;
-BigNebUnit.visible:=cshr.NebFilter;
 end;
 
 procedure Tf_config_chart.BigNebBoxClick(Sender: TObject);
@@ -998,6 +1003,7 @@ StarBox.Checked:=true;
 StarAutoBox.Checked:=true;
 NebBox.Checked:=true;
 BigNebBox.Checked:=true;
+MessierBox.Checked:=true;
 end;
 
 

@@ -706,6 +706,7 @@ type
     FieldNum: array [0..MaxField] of double;  // Field of vision limit
     StarFilter, NebFilter: boolean;   // filter by magnitude
     BigNebFilter: boolean;           // filter big nebulae
+    NoFilterMessier: Boolean;
     BigNebLimit: double;
     AutoStarFilter: boolean;         // automatic limit
     AutoStarFilterMag: double;       // automatic limit reference magnitude
@@ -1535,6 +1536,7 @@ begin
   NebFilter := Source.NebFilter;
   BigNebFilter := Source.BigNebFilter;
   BigNebLimit := Source.BigNebLimit;
+  NoFilterMessier := Source.NoFilterMessier;
   AutoStarFilter := Source.AutoStarFilter;
   AutoStarFilterMag := Source.AutoStarFilterMag;
   for i := 0 to MaxField do
