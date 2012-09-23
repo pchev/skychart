@@ -4604,6 +4604,7 @@ catalog.cfgcat.StarmagMax:=12;
 catalog.cfgshr.NebFilter:=true;
 catalog.cfgshr.BigNebFilter:=true;
 catalog.cfgshr.BigNebLimit:=211;
+catalog.cfgshr.NoFilterMessier:=true;
 catalog.cfgcat.NebmagMax:=12;
 catalog.cfgcat.NebSizeMin:=1;
 catalog.cfgcat.UseUSNOBrightStars:=false;
@@ -4846,6 +4847,7 @@ catalog.cfgshr.AutoStarFilterMag:=ReadFloat(section,'AutoStarFilterMag',catalog.
 catalog.cfgshr.NebFilter:=ReadBool(section,'NebFilter',catalog.cfgshr.NebFilter);
 catalog.cfgshr.BigNebFilter:=ReadBool(section,'BigNebFilter',catalog.cfgshr.BigNebFilter);
 catalog.cfgshr.BigNebLimit:=ReadFloat(section,'BigNebLimit',catalog.cfgshr.BigNebLimit);
+catalog.cfgshr.NoFilterMessier:=ReadBool(section,'NoFilterMessier',catalog.cfgshr.NoFilterMessier);
 for i:=1 to maxfield do begin
    catalog.cfgshr.StarMagFilter[i]:=ReadFloat(section,'StarMagFilter'+inttostr(i),catalog.cfgshr.StarMagFilter[i]);
    catalog.cfgshr.NebMagFilter[i]:=ReadFloat(section,'NebMagFilter'+inttostr(i),catalog.cfgshr.NebMagFilter[i]);
@@ -5680,6 +5682,7 @@ WriteFloat(section,'AutoStarFilterMag',catalog.cfgshr.AutoStarFilterMag);
 WriteBool(section,'NebFilter',catalog.cfgshr.NebFilter);
 WriteBool(section,'BigNebFilter',catalog.cfgshr.BigNebFilter);
 WriteFloat(section,'BigNebLimit',catalog.cfgshr.BigNebLimit);
+WriteBool(section,'NoFilterMessier',catalog.cfgshr.NoFilterMessier);
 for i:=1 to maxfield do begin
    WriteFloat(section,'StarMagFilter'+inttostr(i),catalog.cfgshr.StarMagFilter[i]);
    WriteFloat(section,'NebMagFilter'+inttostr(i),catalog.cfgshr.NebMagFilter[i]);

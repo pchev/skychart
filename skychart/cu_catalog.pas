@@ -2024,13 +2024,14 @@ result:=true;
 repeat
   ReadSAC(lin,result);
   if not result then break;
+  rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
   rec.neb.dim1:=lin.s1;
   if rec.neb.valid[vnNebunit] then nebunit:=rec.neb.nebunit
                               else nebunit:=rec.options.Units;
-  if cfgshr.NebFilter and ((rec.neb.dim1*60/nebunit)<cfgcat.NebSizeMin) then continue;
+  if cfgshr.NebFilter and (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and ((rec.neb.dim1*60/nebunit)<cfgcat.NebSizeMin) then continue;
   rec.neb.mag:=lin.ma;
   if trim(lin.typ)='Drk' then rec.neb.mag:=11;  // also filter dark nebulae
-  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
+  if cfgshr.NebFilter and (not (cfgshr.NoFilterMessier and rec.neb.messierobject)) and (rec.neb.mag>cfgcat.NebMagMax) then continue;
   if cfgshr.BigNebFilter and (rec.neb.dim1>=cfgshr.BigNebLimit) and (trim(lin.typ)<>'Gx') then continue; // filter big object (only open cluster)
   break;
 until not result;
@@ -2067,7 +2068,6 @@ if result then begin
                  else rec.neb.pa:=lin.pa;
    rec.neb.sbr:=lin.sbr;
    rec.neb.id:=lin.nom1;
-   rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
    rec.str[1]:=lin.nom2;
    rec.str[2]:=lin.cons;
    rec.neb.morph:=lin.clas;

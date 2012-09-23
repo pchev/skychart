@@ -13,7 +13,7 @@ object f_config_pictures: Tf_config_pictures
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.4RC2'
+  LCLVersion = '1.0.1.3'
   object MainPanel: TPanel
     Left = 0
     Height = 485
@@ -34,7 +34,7 @@ object f_config_pictures: Tf_config_pictures
       ShowTabs = False
       TabIndex = 1
       TabOrder = 0
-      OnPageChanged = PageControl1PageChanged
+      OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
         ClientHeight = 479
@@ -198,23 +198,23 @@ object f_config_pictures: Tf_config_pictures
         ClientWidth = 507
         object Label270: TLabel
           Left = 0
-          Height = 15
+          Height = 16
           Top = 0
-          Width = 108
+          Width = 113
           Caption = 'Background Picture'
           ParentColor = False
         end
         object Label271: TLabel
           Left = 8
-          Height = 15
+          Height = 16
           Top = 22
-          Width = 49
+          Width = 45
           Caption = 'FITS File'
           ParentColor = False
         end
         object backimginfo: TLabel
           Left = 15
-          Height = 15
+          Height = 16
           Top = 122
           Width = 7
           Caption = '  '
@@ -229,9 +229,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 95
-          Height = 19
+          Height = 23
           Top = 39
-          Width = 115
+          Width = 124
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -260,17 +260,17 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label1: TLabel
             Left = 54
-            Height = 15
+            Height = 16
             Top = 6
-            Width = 61
+            Width = 62
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 203
-            Height = 15
+            Height = 16
             Top = 6
-            Width = 48
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -304,7 +304,7 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label4: TLabel
             Left = 336
-            Height = 15
+            Height = 16
             Top = 4
             Width = 76
             Caption = 'Transparency'
@@ -313,7 +313,7 @@ object f_config_pictures: Tf_config_pictures
         end
         object backimg: TFileNameEdit
           Left = 95
-          Height = 24
+          Height = 23
           Top = 15
           Width = 360
           OnAcceptFileName = backimgAcceptFileName
@@ -347,8 +347,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 101
           Width = 481
           Caption = 'RealSky®'
-          ClientHeight = 341
-          ClientWidth = 481
+          ClientHeight = 338
+          ClientWidth = 477
           TabOrder = 0
           object Label72: TLabel
             Left = 8
@@ -492,8 +492,8 @@ object f_config_pictures: Tf_config_pictures
           Top = 8
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 71
-          ClientWidth = 481
+          ClientHeight = 68
+          ClientWidth = 477
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
