@@ -1,17 +1,17 @@
-#translation of skychart.po to Polish by Jarosław Wójcik <wojcikj@op.pl>, 2010, 2011.
+translation of skychart.po to Polish by Jarosław Wójcik <wojcikj@op.pl>, 2010, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-29 15:36+0000\n"
-"PO-Revision-Date: 2012-06-10 19:57+0000\n"
+"PO-Revision-Date: 2012-08-09 12:26+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 13:28+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
+"X-Generator: Launchpad (build 16019)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -344,7 +344,7 @@ msgstr "Automatycznie uruchom lokalny serwer jeśli aktualnie nie działa"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Automatycznie optymalizuj rozmieszczenie etykiet"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
@@ -504,7 +504,7 @@ msgstr "Buduj katalog"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Lecz nigdy ciemniejsze niż magnitudo"
 
 #: u_translation.rsby
 msgid "by"
@@ -1449,6 +1449,10 @@ msgstr "Pomiar odległości"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Odległość do ostatniego obiektu"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -4424,7 +4428,7 @@ msgstr "Pokaż Drogę Mleczną"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Pokaż asteroidy bliskie Ziemi niezależnie od ich jasności"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"

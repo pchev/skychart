@@ -1,17 +1,17 @@
-# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+ translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-29 15:36+0000\n"
-"PO-Revision-Date: 2012-03-09 19:39+0000\n"
-"Last-Translator: Tomáš Grygarčík <Unknown>\n"
+"PO-Revision-Date: 2012-09-20 19:32+0000\n"
+"Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 13:28+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
+"X-Generator: Launchpad (build 16019)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -48,7 +48,7 @@ msgstr "Přerušeno uživatelem"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Zrušit zaměření"
+msgstr "Zrušit přejezd"
 
 #: u_translation.rsabout
 msgid "About"
@@ -60,51 +60,51 @@ msgstr "Objekt: %s"
 
 #: u_translation.rsabrevasteroid
 msgid "Ast"
-msgstr ""
+msgstr "Ast"
 
 #: u_translation.rsabrevclusternebula
 msgid "C+N"
-msgstr ""
+msgstr "C+N"
 
 #: u_translation.rsabrevcomet
 msgid "Com"
-msgstr ""
+msgstr "Com"
 
 #: u_translation.rsabrevdark
 msgid "Drk"
-msgstr ""
+msgstr "Drk"
 
 #: u_translation.rsabrevdouble
 msgid "Dbl"
-msgstr ""
+msgstr "Dbl"
 
 #: u_translation.rsabrevgalaxy
 msgid "Gx"
-msgstr ""
+msgstr "Gx"
 
 #: u_translation.rsabrevgalaxycluster
 msgid "Gcl"
-msgstr ""
+msgstr "Gcl"
 
 #: u_translation.rsabrevglobularcluster
 msgid "Gb"
-msgstr ""
+msgstr "Gb"
 
 #: u_translation.rsabrevnebula
 msgid "Nb"
-msgstr ""
+msgstr "Nb"
 
 #: u_translation.rsabrevopencluster
 msgid "OC"
-msgstr ""
+msgstr "Oc"
 
 #: u_translation.rsabrevplanetarynebula
 msgid "Pl"
-msgstr ""
+msgstr "Pl"
 
 #: u_translation.rsabrevvariable
 msgid "Var"
-msgstr ""
+msgstr "Var"
 
 #: u_translation.rsaction
 msgid "Action"
@@ -128,11 +128,11 @@ msgstr "Přidat záznam do databáze. Všechny položky jsou povinné."
 
 #: u_translation.rsaddequatoria
 msgid "Show equatorial grid"
-msgstr ""
+msgstr "Zobrazit rovníkové souřadnice"
 
 #: u_translation.rsadditionalff
 msgid "Additional ffmpeg options"
-msgstr ""
+msgstr "Další parametry pro ffmpg"
 
 #: u_translation.rsaddlabel
 msgid "Add label"
@@ -140,7 +140,7 @@ msgstr "Přidat popisek"
 
 #: u_translation.rsaddthealtern
 msgid "Add the alternative names to the index"
-msgstr "Přidat alternativní indexy"
+msgstr "Přidat alternativní názvy do indexu"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -156,7 +156,7 @@ msgstr "Pokročilé hledání"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
-msgstr ""
+msgstr "Pokročilé nastavení pro Scope.exe"
 
 #: u_translation.rsage
 msgid "Age"
@@ -164,7 +164,7 @@ msgstr "Stáří"
 
 #: u_translation.rsalignment
 msgid "Alignment"
-msgstr ""
+msgstr "Zarovnání"
 
 #: u_translation.rsall
 msgid "All"
@@ -172,7 +172,7 @@ msgstr "Vše"
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
-msgstr "Veškeré nastavení"
+msgstr "Veškerá nastavení"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -192,7 +192,7 @@ msgstr "Alt"
 
 #: u_translation.rsaltaz
 msgid "Alt-Az"
-msgstr ""
+msgstr "Azimutální"
 
 #: u_translation.rsaltazcoord
 msgid "Alt/Az coord. "
@@ -216,7 +216,7 @@ msgstr "Výška"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
-msgstr "%sAlt posun:"
+msgstr "%sAlt otáček:"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -224,7 +224,7 @@ msgstr "Vždy ulož bez zeptání."
 
 #: u_translation.rsanimation
 msgid "Animation"
-msgstr ""
+msgstr "Animace"
 
 #: u_translation.rsannualproper
 msgid "Annual proper motion"
@@ -236,15 +236,15 @@ msgstr "Anonymní heslo"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr ""
+msgstr "Vyhlazené vykreslování"
 
 #: u_translation.rsapparent
 msgid "Apparent"
-msgstr ""
+msgstr "Zdánlivé"
 
 #: u_translation.rsappearance
 msgid "Appearance"
-msgstr ""
+msgstr "Vzhled"
 
 #: u_translation.rsappendtoanex
 msgid "Append to an existing catalog "
@@ -260,11 +260,11 @@ msgstr "Použít na všechny mapy"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
-msgstr "Perihélium"
+msgstr "Argument šířky perihela"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Kolem současné polohy"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -272,15 +272,15 @@ msgstr "Satelity"
 
 #: u_translation.rsartificialsa2
 msgid "Artificial satellite"
-msgstr ""
+msgstr "Umělý satelit"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
-msgstr ""
+msgstr "Rozhraní ASCOM"
 
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
-msgstr ""
+msgstr "Žádat potvrzení před každým připojením k Internetu"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -308,7 +308,7 @@ msgstr "Asteroidy ze souboru"
 
 #: u_translation.rsastrometricj
 msgid "Astrometric J2000"
-msgstr ""
+msgstr "Astrometrické k J2000"
 
 #: u_translation.rsastronomical
 msgid "Astronomical"
@@ -340,7 +340,7 @@ msgstr "Automaticky spustit lokální server pokud neběží"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Optimalizovat umístění popisků"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
@@ -348,7 +348,7 @@ msgstr "Automatické obnovování"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Automaticky obnovovat každých "
+msgstr "Automaticky obnovit každých "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -368,11 +368,11 @@ msgstr "Azimutální souřadnice"
 
 #: u_translation.rsazimuthorigi
 msgid "Azimuth origin"
-msgstr ""
+msgstr "Počátek azimutu"
 
 #: u_translation.rsazturns
 msgid "%sAz turns:"
-msgstr "%sAz posun:"
+msgstr "%sAz otáček:"
 
 #: u_translation.rsb
 msgid "B"
@@ -380,7 +380,7 @@ msgstr "B"
 
 #: u_translation.rsback
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 #: u_translation.rsbackground
 msgid "Background"
@@ -392,7 +392,7 @@ msgstr "Obrázek v pozadí"
 
 #: u_translation.rsbattery
 msgid "Battery"
-msgstr ""
+msgstr "Baterie"
 
 #: u_translation.rsbayerletter
 msgid "Bayer letter"
@@ -412,7 +412,7 @@ msgstr "Pod horizontem"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr ""
+msgstr "Ujistěte se, že používají DOSovský formát konce řádku."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -448,7 +448,7 @@ msgstr "Černá/bílá, linie"
 
 #: u_translation.rsblinkingpict
 msgid "Blinking picture"
-msgstr ""
+msgstr "Blikat obrázkem"
 
 #: u_translation.rsblue
 msgid "Blue"
@@ -492,7 +492,7 @@ msgstr "Jasné hvězdy"
 
 #: u_translation.rsbrightstarss
 msgid "Bright star size"
-msgstr ""
+msgstr "Velikost jasných hvězd"
 
 #: u_translation.rsbuildcatalog
 msgid "Build catalog"
@@ -500,7 +500,7 @@ msgstr "Vytvořit katalog"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Ne však slabší, než magnituda"
 
 #: u_translation.rsby
 msgid "by"
@@ -508,7 +508,7 @@ msgstr "po"
 
 #: u_translation.rsbyname
 msgid "By name"
-msgstr ""
+msgstr "Podle názvu"
 
 #: u_translation.rscalendar
 msgid "Calendar"
@@ -528,19 +528,19 @@ msgstr "Storno, chybný soubor zip ?? %s"
 
 #: u_translation.rscannotcomput
 msgid "Cannot compute satellites."
-msgstr ""
+msgstr "Nelze propočítat dráhy satelitů"
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr ""
+msgstr "Nelze se připojit k serveru. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "Nelze vykreslit"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Nelze zjistit vaši IP adresu, nebo z ní nelze zjistit zeměpisnou polohu."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -548,7 +548,7 @@ msgstr "%sNelze otevřít databázi %s! %s"
 
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
-msgstr ""
+msgstr "Nelze zapsat do"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -568,11 +568,11 @@ msgstr "Název katalogu"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
-msgstr ""
+msgstr "%s dostupných katalogů."
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
-msgstr "Krátký název katalogu"
+msgstr "Zkratka katalogu"
 
 #: u_translation.rscatalogstrin
 msgid "Catalog string"
@@ -584,7 +584,7 @@ msgstr "Typ katalogu"
 
 #: u_translation.rsccw
 msgid "%sCCW"
-msgstr "%sCCW"
+msgstr "%s Proti směru hodin"
 
 #: u_translation.rscdcnebulae
 msgid "CdC deep sky"
@@ -612,11 +612,11 @@ msgstr "Ondřej Šubrt"
 
 #: u_translation.rscenter
 msgid "Center"
-msgstr ""
+msgstr "Centrovat"
 
 #: u_translation.rscentering
 msgid "Centering"
-msgstr ""
+msgstr "Vystředění"
 
 #: u_translation.rscenterobject
 msgid "Centre on this object"
@@ -672,7 +672,7 @@ msgstr "Informace o mapě"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
+msgstr "Legenda mapy"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -708,15 +708,15 @@ msgstr "Třída"
 
 #: u_translation.rscleanupmap
 msgid "Cleanup map"
-msgstr ""
+msgstr "Vyčistit mapu"
 
 #: u_translation.rsclear
 msgid "Clear"
-msgstr ""
+msgstr "Smazat"
 
 #: u_translation.rscleartarget
 msgid "Clear Target"
-msgstr ""
+msgstr "Smazat cíl"
 
 #: u_translation.rsclicktochang
 msgid "Click to change the colour "
@@ -728,7 +728,7 @@ msgstr "Udržovat spojení (keep-alive)"
 
 #: u_translation.rsclock
 msgid "Clock"
-msgstr ""
+msgstr "Hodiny"
 
 #: u_translation.rsclose
 msgid "Close"
@@ -808,11 +808,11 @@ msgstr "Velikost kompasu"
 
 #: u_translation.rscompiledwith
 msgid "Compiled with:"
-msgstr ""
+msgstr "Kompilováno pomocí:"
 
 #: u_translation.rscomponent
 msgid "Component"
-msgstr ""
+msgstr "Složka"
 
 #: u_translation.rscomponent1ma
 msgid "Component 1 magnitude"
@@ -840,7 +840,7 @@ msgstr "Nastavení"
 
 #: u_translation.rsconfigure
 msgid "Configure"
-msgstr ""
+msgstr "Nastavit"
 
 #: u_translation.rsconfigurethe
 msgid "Configure the program"
@@ -848,19 +848,19 @@ msgstr "Nastavení programu"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Potvrdit smazání souboru: "
 
 #: u_translation.rsconnect
 msgid "Connect"
-msgstr ""
+msgstr "Připojit"
 
 #: u_translation.rsconnected
 msgid "Connected"
-msgstr ""
+msgstr "Připojeno"
 
 #: u_translation.rsconnectedfro
 msgid "%s connected with %s, using chart %s, connected time:%s"
-msgstr "%s připojeno z %s, mapa %s, časspojení:%s"
+msgstr "%s připojeno z %s, mapa %s, čas spojení:%s"
 
 #: u_translation.rsconnectedtos
 msgid "Connected to the SQL database %s"
@@ -944,11 +944,11 @@ msgstr "Souřadnice:"
 
 #: u_translation.rscoordinates2
 msgid "Coordinates"
-msgstr ""
+msgstr "Souřadnice"
 
 #: u_translation.rscoordinatese
 msgid "Coordinates equinox"
-msgstr "rovnodennost souřadnic"
+msgstr "Ekvinokcium souřadnic"
 
 #: u_translation.rscoordinatesg
 msgid "Coordinates grid"
@@ -1020,15 +1020,15 @@ msgstr "Datum"
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
-msgstr ""
+msgstr "Současný ovladač"
 
 #: u_translation.rscustom
 msgid "Custom"
-msgstr ""
+msgstr "Vlastní"
 
 #: u_translation.rscw
 msgid "%sCW"
-msgstr "%sCW"
+msgstr "%s Po směru hodin"
 
 #: u_translation.rsdarknebula
 msgid "Dark nebula"
@@ -1064,7 +1064,7 @@ msgstr "Typ databáze:"
 
 #: u_translation.rsdatabits
 msgid "Data bits"
-msgstr ""
+msgstr "Datové bity"
 
 #: u_translation.rsdatafiles
 msgid "Data files:"
@@ -1080,7 +1080,7 @@ msgstr "Údržba dat"
 
 #: u_translation.rsdatapreview
 msgid "Data preview"
-msgstr ""
+msgstr "Náhled dat"
 
 #: u_translation.rsdatastartonl
 msgid "Data starts on line %s"
@@ -1088,7 +1088,7 @@ msgstr "Data začínají na řádce %s"
 
 #: u_translation.rsdatatype
 msgid "Data Type"
-msgstr ""
+msgstr "Datový typ"
 
 #: u_translation.rsdate
 msgid "Date"
@@ -1096,7 +1096,7 @@ msgstr "Datum"
 
 #: u_translation.rsdateandortim
 msgid "Date and/or time cannot be changed"
-msgstr ""
+msgstr "Datum a/nebo čas nelze změnit"
 
 #: u_translation.rsdateformat
 msgid "Date format"
@@ -1128,7 +1128,7 @@ msgstr "dnech"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Čas"
+msgstr "Den"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
@@ -1148,11 +1148,11 @@ msgstr "DEC"
 
 #: u_translation.rsdecelpeccomp
 msgid "DEC/EL PEC Compensation"
-msgstr ""
+msgstr "Kompenzace PEC v De/Alt"
 
 #: u_translation.rsdecelslewrat
 msgid "DEC/El Slew Rate"
-msgstr ""
+msgstr "Rychlost přejezdu v De/Alt"
 
 #: u_translation.rsdecimaldegre
 msgid "Decimal degrees"
@@ -1176,7 +1176,7 @@ msgstr "Nastavení DEC"
 
 #: u_translation.rsdecrease
 msgid "Decrease"
-msgstr ""
+msgstr "Snížit"
 
 #: u_translation.rsdecrementtim
 msgid "Decrement time"
@@ -1184,11 +1184,11 @@ msgstr "Ubrat čas"
 
 #: u_translation.rsdecturns
 msgid "DEC turns: "
-msgstr "DEC posun: "
+msgstr "DEC otáček: "
 
 #: u_translation.rsdecturns2
 msgid "%sDEC turns:"
-msgstr "%sDEC posun:"
+msgstr "%sDEC otáček:"
 
 #: u_translation.rsdeepskycolou
 msgid "Deep sky colour"
@@ -1200,39 +1200,39 @@ msgstr "Barvy deep sky"
 
 #: u_translation.rsdefault
 msgid "Default"
-msgstr "Základní"
+msgstr "Výchozí"
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "Tlačítka základní verze"
+msgstr "Tlačítko základní verze"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "Základní barva"
+msgstr "Výchozí barva"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
-msgstr "Základní popisek"
+msgstr "Výchozí popisek"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Výchozí magnituda"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
-msgstr "Základní"
+msgstr "Výchozí okraj"
 
 #: u_translation.rsdefaultnebul
 msgid "Default nebulae parameters"
-msgstr "Základní parametry mlhovin"
+msgstr "Výchozí parametry mlhovin"
 
 #: u_translation.rsdefaultoutli
 msgid "Default outline parameters"
-msgstr "Základní parametry obrysů"
+msgstr "Výchozí parametry obrysů"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr ""
+msgstr "Výchozí velikost (vteřiny)"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1252,11 +1252,11 @@ msgstr "stupňů"
 
 #: u_translation.rsdegreesminut
 msgid "Degrees, minutes, secondes"
-msgstr "Stupně, minuty, sekundy"
+msgstr "Stupně, minuty, vteřiny"
 
 #: u_translation.rsdelaybetween
 msgid "Delay between frame"
-msgstr ""
+msgstr "Časový interval mezi snímky"
 
 #: u_translation.rsdelete
 msgid "Delete"
@@ -1284,7 +1284,7 @@ msgstr "Smazat ze seznamu prvků"
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
-msgstr ""
+msgstr "Promazávám měsíční tabulky..."
 
 #: u_translation.rsdeletefrommo2
 msgid "Delete from monthly table for jd<%s"
@@ -1328,7 +1328,7 @@ msgstr "Popis"
 
 #: u_translation.rsdesignation
 msgid "Designation"
-msgstr "Ustanovení"
+msgstr "Označení"
 
 #: u_translation.rsdesktopenvir
 msgid "Desktop environment"
@@ -1344,7 +1344,7 @@ msgstr "Port zařízení "
 
 #: u_translation.rsdevicestatus
 msgid "Device status"
-msgstr ""
+msgstr "Stav zařízení"
 
 #: u_translation.rsdiam
 msgid "Diam."
@@ -1356,11 +1356,11 @@ msgstr "Průměr"
 
 #: u_translation.rsdiconnected
 msgid "Diconnected"
-msgstr ""
+msgstr "Odpojeno"
 
 #: u_translation.rsdifferencebe
 msgid "Difference between Terrestrial Time and Universal Time"
-msgstr ""
+msgstr "Rozdíl mezi terestrickým a světovým časem"
 
 #: u_translation.rsdifferenttha
 msgid "%s (different than the configured port, maybe busy or other error.)"
@@ -1392,7 +1392,7 @@ msgstr "Adresář nenalezen! Prosím, přeinstalujte balíček Skychart Pictures
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr ""
+msgstr "Odpojit"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1416,11 +1416,11 @@ msgstr "Zobrazit obrázky objektů z katalogu"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
-msgstr ""
+msgstr "Zobrazit popisky pro všechny katalogy hvězd"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
-msgstr ""
+msgstr "Přesnost zobrazení"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1440,11 +1440,15 @@ msgstr "Vzdálenost"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Měření úhlové vzdálenosti"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Vzdálenost od posledního objektu"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1452,7 +1456,7 @@ msgstr "Tečka"
 
 #: u_translation.rsdoubles
 msgid "Doubles"
-msgstr "Dvojnásobná"
+msgstr "Dvojhvězdy"
 
 #: u_translation.rsdoublestar
 msgid "Double star"
@@ -1468,7 +1472,7 @@ msgstr "Stádnout %s"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
-msgstr ""
+msgstr "Stáhnout katalog"
 
 #: u_translation.rsdownloadcoun
 msgid "Download country details"
@@ -1480,7 +1484,7 @@ msgstr "Stáhnout soubor"
 
 #: u_translation.rsdownloadfull
 msgid "Download full catalog"
-msgstr ""
+msgstr "Stáhnout celý katalog"
 
 #: u_translation.rsdownloadlate
 msgid "Download the latest orbital elements"
@@ -1488,7 +1492,7 @@ msgstr "Stáhnout aktuální orbitální elementy"
 
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
-msgstr ""
+msgstr "Stáhnout TLE"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -1496,15 +1500,15 @@ msgstr "Přejete si uložit nastavení programu?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
-msgstr "Vykreslit linie reprezentující další pohyb"
+msgstr "Vykreslit linie vlastního pohybu pro dalších"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr ""
+msgstr "Vykreslit jako DSO"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "Vykreslit jako hvězdu"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1524,7 +1528,7 @@ msgstr "Vykreslit hranici zdánlivého horizontu"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
-msgstr ""
+msgstr "Roční drift"
 
 #: u_translation.rsdrivername
 msgid "Driver name"
@@ -1532,7 +1536,7 @@ msgstr "Ovladač"
 
 #: u_translation.rsdriverselect
 msgid "Driver Selection"
-msgstr ""
+msgstr "Výběr ovladače"
 
 #: u_translation.rsdropdatabase
 msgid "Drop database"
@@ -1556,7 +1560,7 @@ msgstr "Východ"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
-msgstr "Ekcentricita"
+msgstr "Excentricita"
 
 #: u_translation.rseclipse
 msgid "Eclipse"
@@ -1584,7 +1588,7 @@ msgstr "Upravit barvu"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Upravit barvu obrysů DSO"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -1612,15 +1616,15 @@ msgstr "Emisní mlhovina"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
-msgstr ""
+msgstr "Nastavení enkodéru"
 
 #: u_translation.rsencoderiniti
 msgid "Encoder initialization angle"
-msgstr ""
+msgstr "Inicializační úhel enkodéru"
 
 #: u_translation.rsencoders
 msgid "Encoders"
-msgstr ""
+msgstr "Enkodéry"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1632,11 +1636,11 @@ msgstr "Zpracování dokončeno: % asteroidů"
 
 #: u_translation.rsephemeris
 msgid "Ephemeris"
-msgstr ""
+msgstr "Efemerida"
 
 #: u_translation.rsephemeriscal
 msgid "Ephemeris calendar"
-msgstr "Efemeridy"
+msgstr "Kalendář"
 
 #: u_translation.rsepoch
 msgid "Epoch"
@@ -1656,35 +1660,35 @@ msgstr "Ekv. souřad."
 
 #: u_translation.rsequatorial
 msgid "Equatorial"
-msgstr ""
+msgstr "Rovníková"
 
 #: u_translation.rsequatorialco
 msgid "Equatorial coordinates"
-msgstr "Ekvatoriální souřadnice"
+msgstr "Rovníkové souřadnice"
 
 #: u_translation.rsequatorialco2
 msgid "Equatorial coordinates, equinox: %s"
-msgstr "Ekvatoriální souřadnice, rovnodenost: %s"
+msgstr "Rovníkové souřadnice, ekvinokcium: %s"
 
 #: u_translation.rsequatorialco3
 msgid "Equatorial coord."
-msgstr "Ekvatoriální souřad."
+msgstr "Rovníkové souřad."
 
 #: u_translation.rsequatorialmo
 msgid "Equatorial mount"
-msgstr "Ekvatoriální montáž"
+msgstr "Rovníková montáž"
 
 #: u_translation.rsequatorialsy
 msgid "Equatorial System"
-msgstr ""
+msgstr "Rovníková soustava"
 
 #: u_translation.rsequinox
 msgid "Equinox:"
-msgstr "Rovnodennost:"
+msgstr "Ekvinokcium:"
 
 #: u_translation.rsequinox2
 msgid "Equinox"
-msgstr "Rovnodennost"
+msgstr "Ekvinokcium"
 
 #: u_translation.rserror
 msgid "Error"
@@ -1700,11 +1704,11 @@ msgstr "Chyba při otvírání %s"
 
 #: u_translation.rserroropening2
 msgid "Error opening %s on port %s"
-msgstr ""
+msgstr "Chyba při otevírání %s na portu %s"
 
 #: u_translation.rserroropening3
 msgid "Error opening %s on port %sCheck if device is connected and power on"
-msgstr ""
+msgstr "Chyba při otevírání %s na portu %s Zkontrolujte, zda je zařízení připojeno a zapnuté."
 
 #: u_translation.rserrorpleasec
 msgid "Error! Please check the database parameters."
@@ -1732,7 +1736,7 @@ msgstr "Večer"
 
 #: u_translation.rseveningtwili
 msgid "Evening twilight"
-msgstr "Noční soumrak"
+msgstr "Večerní soumrak"
 
 #: u_translation.rsevery
 msgid "every "
@@ -1744,7 +1748,7 @@ msgstr "Každé"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr ""
+msgstr "Příklad uživatelsky definovaného objektu : Severní galaktický pól"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -1776,31 +1780,31 @@ msgstr "Slabší"
 
 #: u_translation.rsfaintstarssi
 msgid "Faint Stars Size "
-msgstr "Slabší velikost hvězd "
+msgstr "Velikost slabých hvězd "
 
 #: u_translation.rsfan
 msgid "Fan"
-msgstr ""
+msgstr "Větrák"
 
 #: u_translation.rsfaq
 msgid "FAQ"
-msgstr "Často kladené dotazy (FAQ)"
+msgstr "často kladené dotazy"
 
 #: u_translation.rsfast
 msgid "Fast"
-msgstr ""
+msgstr "Rychle"
 
 #: u_translation.rsfavorite
 msgid "Favorite"
-msgstr ""
+msgstr "Oblíbené"
 
 #: u_translation.rsffmpegprogra
 msgid "ffmpeg program path"
-msgstr ""
+msgstr "Cesta k programu ffmpeg"
 
 #: u_translation.rsfieldname
 msgid "Field Name"
-msgstr ""
+msgstr "Název pole"
 
 #: u_translation.rsfieldnumber
 msgid "Field Number"
@@ -1812,7 +1816,7 @@ msgstr "Zorné pole"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
-msgstr ""
+msgstr "Příliš široké zorné pole pro ARC projekci"
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
@@ -1824,7 +1828,7 @@ msgstr "Číslo zorného pole:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
-msgstr ""
+msgstr "Rotace pole"
 
 #: u_translation.rsfieldtoowidt
 msgid "Field too wide! Maximum is %s"
@@ -1868,7 +1872,7 @@ msgstr "Filtrovat hvězdy "
 
 #: u_translation.rsfind
 msgid "Find"
-msgstr "Hledat"
+msgstr "Hledání"
 
 #: u_translation.rsfindercircle
 msgid "Finder circle (eyepiece)"
@@ -1876,7 +1880,7 @@ msgstr "Zorná pole okulárů"
 
 #: u_translation.rsfindercircle2
 msgid "Finder Circle"
-msgstr ""
+msgstr "Zorné pole"
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
@@ -1908,15 +1912,15 @@ msgstr "Flamsteed číslo"
 
 #: u_translation.rsflarepredict
 msgid "Iridium flare prediction:"
-msgstr ""
+msgstr "Předpověď záblesku Iridia:"
 
 #: u_translation.rsfocus
 msgid "Focus"
-msgstr ""
+msgstr "Ostření"
 
 #: u_translation.rsfocusspeed
 msgid "Focus Speed"
-msgstr ""
+msgstr "Rychlost ostření"
 
 #: u_translation.rsfonts
 msgid "Fonts"
@@ -1928,11 +1932,11 @@ msgstr "Pro obsáhlé katalogy vyberte binární. Pro malé katalogy, které se 
 
 #: u_translation.rsforcurrentch
 msgid "For current chart only"
-msgstr ""
+msgstr "Pouze pro aktuální mapu"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
-msgstr ""
+msgstr "Vždy viditelný formulář"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -1948,19 +1952,19 @@ msgstr "Zorné pole:"
 
 #: u_translation.rsframespersec
 msgid "Frames per second"
-msgstr ""
+msgstr "Snímků za sekundu"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr ""
+msgstr "Rozlišení"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
-msgstr ""
+msgstr "Úhel natočení"
 
 #: u_translation.rsfreesize
 msgid "Free size"
-msgstr ""
+msgstr "Volná velikost"
 
 #: u_translation.rsfriday
 msgid "Fri."
@@ -1976,7 +1980,7 @@ msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "FTP pasivní mód"
+msgstr "Pasivní mód"
 
 #: u_translation.rsfullname
 msgid "Full name"
@@ -2016,15 +2020,15 @@ msgstr "Gamma"
 
 #: u_translation.rsgeneral
 msgid "General"
-msgstr "Základní"
+msgstr "Obecné"
 
 #: u_translation.rsgeneralcatal
 msgid "General catalog options"
-msgstr "Základní nastavení katalogů"
+msgstr "Obecná nastavení katalogů"
 
 #: u_translation.rsgeneralsetti
 msgid "General settings"
-msgstr "Základní nastavení"
+msgstr "Obecná nastavení"
 
 #: u_translation.rsgeocentric
 msgid "Geocentric"
@@ -2032,7 +2036,7 @@ msgstr "Geocentrická"
 
 #: u_translation.rsget
 msgid "Get"
-msgstr ""
+msgstr "Načíst"
 
 #: u_translation.rsgetasteroidl
 msgid "Get the asteroids list."
@@ -2044,7 +2048,7 @@ msgstr "Získat obrázek DSS"
 
 #: u_translation.rsgetrecentmea
 msgid "Get the recent GRS measurement from JUPOS project."
-msgstr ""
+msgstr "Získat aktuální polohu GRS z projektu JUPOS"
 
 #: u_translation.rsglobularclus
 msgid "Globular cluster"
@@ -2052,7 +2056,7 @@ msgstr "Kulová hvězdokupa"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
-msgstr ""
+msgstr "Nastavení GPS-16\" Adv."
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2060,7 +2064,7 @@ msgstr "Grafické"
 
 #: u_translation.rsgraphs
 msgid "Graphs"
-msgstr ""
+msgstr "Grafy"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
@@ -2088,7 +2092,7 @@ msgstr "Jemnost sítě"
 
 #: u_translation.rsgrstransit
 msgid "GRS transit"
-msgstr "GRS transit"
+msgstr "Přechod GRS"
 
 #: u_translation.rsgslopeparame
 msgid "G slope parameter"
@@ -2096,15 +2100,15 @@ msgstr "Parametr G sklonu"
 
 #: u_translation.rsguide
 msgid "Guide"
-msgstr ""
+msgstr "Vedení"
 
 #: u_translation.rsguidearcsec
 msgid "guide arcsec"
-msgstr ""
+msgstr "guide arcsec"
 
 #: u_translation.rsguiderate
 msgid "Guide Rate"
-msgstr ""
+msgstr "Rychlost vedení"
 
 #: u_translation.rshabsolutemag
 msgid "H absolute magnitude"
@@ -2120,7 +2124,7 @@ msgstr "Zastavit po 1 000 chybách"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
-msgstr ""
+msgstr "Výběr režimu HandPad"
 
 #: u_translation.rshbetamagnitu
 msgid "H-Beta magnitude"
@@ -2140,7 +2144,7 @@ msgstr "Témata nápovědy"
 
 #: u_translation.rshide
 msgid "Hide"
-msgstr ""
+msgstr "Skrýt"
 
 #: u_translation.rshidelabel
 msgid "Hide label"
@@ -2152,7 +2156,7 @@ msgstr "Skrýt objekty širší než"
 
 #: u_translation.rshigh
 msgid "High"
-msgstr ""
+msgstr "Vysoká"
 
 #: u_translation.rshighcolor
 msgid "High colour"
@@ -2160,15 +2164,15 @@ msgstr "Maximální barva"
 
 #: u_translation.rshighest
 msgid "Highest"
-msgstr ""
+msgstr "Nejvyšší"
 
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
-msgstr ""
+msgstr "Přesná pointace"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Maximální jas povrchu"
+msgstr "Vysoký povrchový jas"
 
 #: u_translation.rshorizon
 msgid "Horizon"
@@ -2192,7 +2196,7 @@ msgstr "Jemnost sítě (hodiny)"
 
 #: u_translation.rshours
 msgid "hours"
-msgstr ""
+msgstr "hodin"
 
 #: u_translation.rshoursminutes
 msgid "Hours, minutes, secondes"
@@ -2216,7 +2220,7 @@ msgstr ""
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
-msgstr ""
+msgstr "Pokud se nenainstaloval, v závislosti na vašem systému se pokuste o následující:"
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -2236,7 +2240,7 @@ msgstr "Nastavení obrázků"
 
 #: u_translation.rsinclination
 msgid "Inclination"
-msgstr "Sklon"
+msgstr "Sklon dráhy"
 
 #: u_translation.rsinclination2
 msgid "Inclination="
@@ -2244,19 +2248,19 @@ msgstr "Sklon="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "Včetně denních přechodů"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
-msgstr ""
+msgstr "Včetně záblesků Iridií"
 
 #: u_translation.rsincrease
 msgid "Increase"
-msgstr ""
+msgstr "Zvýšit"
 
 #: u_translation.rsincrementfor
 msgid "Increment for bright stars"
-msgstr "Přidat jasným hvězdám"
+msgstr "Bonus k velikosti jasných hvězd"
 
 #: u_translation.rsincrementtim
 msgid "Increment time"
@@ -2308,27 +2312,27 @@ msgstr "Informace"
 
 #: u_translation.rsinfo2
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: u_translation.rsinformationd
 msgid "Information detail"
-msgstr ""
+msgstr "Detail informace"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Informace z katalogu"
 
 #: u_translation.rsinit
 msgid "Init"
-msgstr ""
+msgstr "Init"
 
 #: u_translation.rsinitialiseda
 msgid "Initialised at %s%s using : %s%s (RA: %s DEC:%s)"
-msgstr ""
+msgstr "Inicializováno na %s%s za použití : %s%s (Ra: %s De: %s)"
 
 #: u_translation.rsinitialize
 msgid "Initialize"
-msgstr ""
+msgstr "Inicializovat"
 
 #: u_translation.rsinitializeda
 msgid "Initialize database"
@@ -2336,7 +2340,7 @@ msgstr "Inicializovat databázi"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
-msgstr "Vstupní soubory katalogu"
+msgstr "Vstupní soubory"
 
 #: u_translation.rsinsertfailed
 msgid "insert failed line %s: %s"
@@ -2352,15 +2356,15 @@ msgstr "Internet"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr ""
+msgstr "Internetová lokalizace"
 
 #: u_translation.rsintervaltime
 msgid "Interval Timeout"
-msgstr ""
+msgstr "Interval Timeout"
 
 #: u_translation.rsinttelesco
 msgid "Integrated telescope driver."
-msgstr ""
+msgstr "Integrovaný ovladač dalekohledu."
 
 #: u_translation.rsinvalidepoch
 msgid "invalid epoch on line%s: %s"
@@ -2376,11 +2380,11 @@ msgstr "Neplatná cesta: "
 
 #: u_translation.rsinversionalp
 msgid "Inversion Alpha ,"
-msgstr ""
+msgstr "Inverze Alfa,"
 
 #: u_translation.rsinversiondel
 msgid "%s Inversion Delta"
-msgstr ""
+msgstr "%s Inverze Delta"
 
 #: u_translation.rsinvisibleatt
 msgid "Invisible at this latitude"
@@ -2396,7 +2400,7 @@ msgstr "JD"
 
 #: u_translation.rsjd2
 msgid "JD"
-msgstr ""
+msgstr "JD"
 
 #: u_translation.rsjdcalendar
 msgid "JD calendar"
@@ -2416,7 +2420,7 @@ msgstr "Jupiter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "Zeměpisná délka Rudé skvrny:"
+msgstr "Zeměpisná délka GRS:"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2484,11 +2488,11 @@ msgstr "Levý panel"
 
 #: u_translation.rsleftmode
 msgid "Left Mode"
-msgstr ""
+msgstr "Levý režim"
 
 #: u_translation.rslegal
 msgid "Legal"
-msgstr ""
+msgstr "Občanský"
 
 #: u_translation.rslegend
 msgid "Legend"
@@ -2508,11 +2512,11 @@ msgstr "Méně hvězd"
 
 #: u_translation.rslibrationinl
 msgid "Libration in latitude"
-msgstr "Zeměpisná šířka libračního bodu"
+msgstr "Librace v šířce"
 
 #: u_translation.rslibrationinl2
 msgid "Libration in longitude"
-msgstr "Zeměpisná délka libračního bodu"
+msgstr "Librace v délce"
 
 #: u_translation.rslicenseagree
 msgid "License agreement"
@@ -2528,11 +2532,11 @@ msgstr "LII"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
-msgstr "Limitní magnituda, seznam:"
+msgstr "Mezní mag. pro seznam:"
 
 #: u_translation.rslimitingmagn2
 msgid "Limiting magnitude:"
-msgstr "Limitní magnituda:"
+msgstr "Mezní magnituda:"
 
 #: u_translation.rslimitingsize
 msgid "Limiting size (arcminutes):"
@@ -2588,11 +2592,11 @@ msgstr "Nahrát soubor"
 
 #: u_translation.rsloadfromfile
 msgid "Load from file"
-msgstr ""
+msgstr "Načíst ze souboru"
 
 #: u_translation.rsloadingcatal
 msgid "Loading catalog list. Please wait ..."
-msgstr ""
+msgstr "Nahrávám seznam katalogů. Prosím čekejte..."
 
 #: u_translation.rsloadmpcfile
 msgid "Load MPC file"
@@ -2620,11 +2624,11 @@ msgstr "Soubor místního horizontu: "
 
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
-msgstr ""
+msgstr "Místní hvězdný čas"
 
 #: u_translation.rslocationcode
 msgid "Location code"
-msgstr ""
+msgstr "Polohový kód"
 
 #: u_translation.rslockon
 msgid "Lock on %s"
@@ -2648,19 +2652,19 @@ msgstr "?Losange"
 
 #: u_translation.rslow
 msgid "Low"
-msgstr ""
+msgstr "Nízká"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Nízký jas povrchu"
+msgstr "Nízký povrchový jas"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
-msgstr "Osvětlení"
+msgstr "Jas"
 
 #: u_translation.rslunar
 msgid "Lunar"
-msgstr ""
+msgstr "Měsíční"
 
 #: u_translation.rslunareclipse
 msgid "Lunar eclipses"
@@ -2716,7 +2720,7 @@ msgstr "Magnituda Tycho VT"
 
 #: u_translation.rsmaillist
 msgid "Mail list (Yahoo group)"
-msgstr "Mailist"
+msgstr "Mail list"
 
 #: u_translation.rsmainbar
 msgid "Main bar"
@@ -2724,7 +2728,7 @@ msgstr "Hlavní panel"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr ""
+msgstr "Proveďte výběr tabulky a sloupce, které chcete do vašeho katalogu."
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
@@ -2740,7 +2744,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
-msgstr "Zobrazit zorná pole (střed mapy)"
+msgstr "Zobrazit zorná pole ve středu mapy"
 
 #: u_translation.rsmars
 msgid "Mars"
@@ -2764,7 +2768,7 @@ msgstr "Maximální magnituda:"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
-msgstr ""
+msgstr "Nejvýše řádků"
 
 #: u_translation.rsmbytes
 msgid "MBytes"
@@ -2772,7 +2776,7 @@ msgstr "MB"
 
 #: u_translation.rsmean
 msgid "Mean"
-msgstr ""
+msgstr "Střední"
 
 #: u_translation.rsmeananomaly
 msgid "Mean anomaly"
@@ -2780,27 +2784,27 @@ msgstr "Střední odchylka"
 
 #: u_translation.rsmeanequatore
 msgid "mean equator, equinox and epoch of the date"
-msgstr ""
+msgstr "střední rovník, ekvinokcium a epocha k datu"
 
 #: u_translation.rsmeanequinoxa
 msgid "mean equinox and epoch J2000"
-msgstr ""
+msgstr "střední ekvinokcium a epocha J2000"
 
 #: u_translation.rsmeanequinoxj
 msgid "mean equinox J2000, epoch of the date"
-msgstr ""
+msgstr "střední ekvinokcium J2000, epocha k datu"
 
 #: u_translation.rsmeanj2000
 msgid "Mean J2000"
-msgstr ""
+msgstr "Střední k J2000"
 
 #: u_translation.rsmeanlocal
 msgid "Mean local"
-msgstr ""
+msgstr "Střední místní"
 
 #: u_translation.rsmeanofthedat
 msgid "Mean of the date"
-msgstr ""
+msgstr "Střední k datu"
 
 #: u_translation.rsmeanposition
 msgid "Mean position"
@@ -2820,11 +2824,11 @@ msgstr "Metry"
 
 #: u_translation.rsmiddle
 msgid "Middle"
-msgstr ""
+msgstr "Střední"
 
 #: u_translation.rsmilkyway
 msgid "Milky Way"
-msgstr "Mléčná dr."
+msgstr "Mléčná dráha"
 
 #: u_translation.rsmin
 msgid "m"
@@ -2860,11 +2864,11 @@ msgstr "Základní linie"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
-msgstr ""
+msgstr "Simulátor tlačítka režimu"
 
 #: u_translation.rsmodel
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #: u_translation.rsmodify
 msgid "Modify"
@@ -2884,7 +2888,7 @@ msgstr "Měsíc"
 
 #: u_translation.rsmoreinformat
 msgid "More informations"
-msgstr ""
+msgstr "Více informací"
 
 #: u_translation.rsmorenebulae
 msgid "More deep sky"
@@ -2916,23 +2920,23 @@ msgstr "Ranní soumrak"
 
 #: u_translation.rsmotor
 msgid "Motor"
-msgstr ""
+msgstr "Motor"
 
 #: u_translation.rsmotorspeeds
 msgid "Motor Speeds"
-msgstr ""
+msgstr "Rychlosti motorů"
 
 #: u_translation.rsmountfabrica
 msgid "Mount fabrication error"
-msgstr ""
+msgstr "Výrobní nepřesnost montáže"
 
 #: u_translation.rsmounttype
 msgid "Mount type"
-msgstr ""
+msgstr "Druh montáže"
 
 #: u_translation.rsmove
 msgid "Move"
-msgstr ""
+msgstr "Pohyb"
 
 #: u_translation.rsmovelabel
 msgid "Move label"
@@ -2960,7 +2964,7 @@ msgstr "MySQL databáze"
 
 #: u_translation.rsnakedeye
 msgid "Naked eye"
-msgstr "Pohled bez dalekohledu"
+msgstr "Pouhým okem"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
@@ -3004,7 +3008,7 @@ msgstr "Obrysy mlhovin"
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
-msgstr ""
+msgstr "(východní je záporná)"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
@@ -3032,7 +3036,7 @@ msgstr "Další >>"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
-msgstr ""
+msgstr "Další mapa"
 
 #: u_translation.rsnightvision
 msgid "Night vision"
@@ -3040,11 +3044,11 @@ msgstr "Noční verze"
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr "Tlačítka noční verze"
+msgstr "Tlačítko noční verze"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Barva noční verze"
+msgstr "Noční barvy"
 
 #: u_translation.rsno
 msgid "No."
@@ -3056,19 +3060,19 @@ msgstr "Nebyla nalezena žádná data asteroidů!%sNejprve nahrajte soubor MPC."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
-msgstr ""
+msgstr "Tento den astronomický soumrak nenastává!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Není vybrán katalog, případně žádná z tabulek katalogu neobsahuje informace o poloze."
 
 #: u_translation.rsnochange
 msgid "No change"
-msgstr ""
+msgstr "Beze změny"
 
 #: u_translation.rsnodata
 msgid "No Data"
-msgstr ""
+msgstr "Žádná data"
 
 #: u_translation.rsnomargin
 msgid "No margin"
@@ -3100,7 +3104,7 @@ msgstr "Tiskárna nenalezena!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr ""
+msgstr "neopraveno o vlastní pohyb, v tomto katalogu nejsou pořebná data"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -3116,7 +3120,7 @@ msgstr "Nejedná se o soubor FITS, označení SIMPLE = T nebylo nalezeno"
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
-msgstr ""
+msgstr "Žádný cílový objekt"
 
 #: u_translation.rsnotavailable
 msgid "Not available"
@@ -3124,7 +3128,7 @@ msgstr "Nedostupný"
 
 #: u_translation.rsnotavailon
 msgid "Not available on %s"
-msgstr ""
+msgstr "Nedostupné na %s"
 
 #: u_translation.rsnotconnected
 msgid "%s not connected."
@@ -3148,7 +3152,7 @@ msgstr "Objekt %s nebyl nalzen!%sKatalog není pravděpodobně nainstalován neb
 
 #: u_translation.rsnotinitialis
 msgid "Not initialised"
-msgstr ""
+msgstr "Neinicializováno"
 
 #: u_translation.rsnow
 msgid "Now"
@@ -3156,7 +3160,7 @@ msgstr "Teď"
 
 #: u_translation.rsnumberofcopi
 msgid "Number of copies"
-msgstr ""
+msgstr "Počet kopií"
 
 #: u_translation.rsnumberoffile
 msgid "Number of files"
@@ -3180,7 +3184,7 @@ msgstr "Počet kroků"
 
 #: u_translation.rsnutationaber
 msgid "Nutation, aberration"
-msgstr "Mutace, Aberace"
+msgstr "Nutace, Aberace"
 
 #: u_translation.rsobject
 msgid "Object"
@@ -3212,7 +3216,7 @@ msgstr "Název objektu"
 
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
-msgstr ""
+msgstr "Poloha objektu byla v indexu nalezena, ale žádný aktivní katalog neobsahuje další podrobnosti."
 
 #: u_translation.rsobjects
 msgid "Objects"
@@ -3224,7 +3228,7 @@ msgstr "Jednotka velikosti objektu"
 
 #: u_translation.rsobjectsusedf
 msgid "Objects used for Initialisation"
-msgstr ""
+msgstr "Objekty pro inicializaci"
 
 #: u_translation.rsobjecttype
 msgid "Object type"
@@ -3244,7 +3248,7 @@ msgstr "Zastaralé"
 
 #: u_translation.rsoff
 msgid "Off"
-msgstr ""
+msgstr "Vypnuto"
 
 #: u_translation.rsoffset
 msgid "Offset"
@@ -3252,7 +3256,7 @@ msgstr "Offset"
 
 #: u_translation.rsoffsetlabel
 msgid "Offset label"
-msgstr ""
+msgstr "Posunout popisek"
 
 #: u_translation.rsok
 msgid "OK"
@@ -3260,11 +3264,11 @@ msgstr "OK"
 
 #: u_translation.rson
 msgid "On"
-msgstr ""
+msgstr "Zapnuto"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Každé n-té"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -3280,11 +3284,11 @@ msgstr "Online servery s obrázky"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
-msgstr ""
+msgstr "Online hledání selhalo!"
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr ""
+msgstr "Výsledek online hledání"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
@@ -3332,7 +3336,7 @@ msgstr "Orientace"
 
 #: u_translation.rsorusealocalf
 msgid "Or use a local file:"
-msgstr "Použít soubor:"
+msgstr "Použít soubor"
 
 #: u_translation.rsother
 msgid "Other"
@@ -3344,7 +3348,7 @@ msgstr "Ostatní popisky"
 
 #: u_translation.rsothersoftwar
 msgid "Other software data"
-msgstr ""
+msgstr "Data jiných programů"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3372,15 +3376,15 @@ msgstr "Parametrické"
 
 #: u_translation.rsparity
 msgid "Parity"
-msgstr ""
+msgstr "Parita"
 
 #: u_translation.rsparkinganddi
 msgid "Parking and Disconnecting telescope."
-msgstr ""
+msgstr "Parkuji a odpojuji dalekohled."
 
 #: u_translation.rsparktelescop
 msgid "Park Telescope"
-msgstr ""
+msgstr "Zaparkovat dalekohled"
 
 #: u_translation.rspartial
 msgid "Partial"
@@ -3408,11 +3412,11 @@ msgstr "Šířka dráhy"
 
 #: u_translation.rspec
 msgid "PEC"
-msgstr ""
+msgstr "PEC"
 
 #: u_translation.rspectoggle
 msgid "Pec Toggle"
-msgstr ""
+msgstr "Přepnout PEC"
 
 #: u_translation.rspenumbra
 msgid "Penumbra"
@@ -3420,11 +3424,11 @@ msgstr "Polostín"
 
 #: u_translation.rsperihelionda
 msgid "Perihelion date"
-msgstr "Perihélium - datum"
+msgstr "Průchod perihelem"
 
 #: u_translation.rsperiheliondi
 msgid "Perihelion distance"
-msgstr "Perihélium - vzdálenost"
+msgstr "Vzdálenost v perihelu"
 
 #: u_translation.rsperiod
 msgid "Period"
@@ -3496,7 +3500,7 @@ msgstr "Potvrďte prosím, že je dalekohled je vycentrován na objekt %s"
 
 #: u_translation.rspleaseensure
 msgid "Please ensure that ASCOM telescope drivers are installed properly."
-msgstr ""
+msgstr "Prosím, ujistěte se, že jsou správně nainstalované ovladače ASCOM."
 
 #: u_translation.rspleaseentera
 msgid "Please enter an object identifier."
@@ -3504,7 +3508,7 @@ msgstr "Zadejte prosím identifikátor objektu."
 
 #: u_translation.rspleaseindica
 msgid "Please indicate a catalog short name"
-msgstr "Zadejte prosím krátký název katalogu"
+msgstr "Zadejte prosím zkratku katalogu"
 
 #: u_translation.rspleaseindica2
 msgid "Please indicate a catalog long name"
@@ -3516,15 +3520,15 @@ msgstr "Zadejte prosím adresář, kde má být katalog vytvořen"
 
 #: u_translation.rspleaseinitth
 msgid "Please init the 90 degree elevation first"
-msgstr ""
+msgstr "Prosím, inicializujte napřed elevaci"
 
 #: u_translation.rspleaseinstdosbox
 msgid "Please install \"Dosbox\" http://www.dosbox.com/ to compute Iridium flares on your computer."
-msgstr ""
+msgstr "Pro výpočty záblesků Iridií je potřeba na vašem systému nainstalovat Dosbox http://www.dosbox.com/"
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
+msgstr "Pro výpočty umělých družic je potřeba na vašem systému nainstalovat Wine http://www.winehq.org/"
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
@@ -3532,11 +3536,11 @@ msgstr "Vložte prosím CD RealSky256"
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
-msgstr ""
+msgstr "Prosím, otočte dalekohledem kolem obou os"
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
-msgstr "Náměty a připomínky piště na:"
+msgstr "Náměty a připomínky pište na:"
 
 #: u_translation.rspleasetrytoc
 msgid "Please try to create this directory yourself and restart the program."
@@ -3572,7 +3576,7 @@ msgstr "Port:"
 
 #: u_translation.rsportconfigur
 msgid "Port Configuration"
-msgstr ""
+msgstr "Nastavení portu"
 
 #: u_translation.rsportrait
 msgid "Portrait"
@@ -3596,7 +3600,7 @@ msgstr "Postscript"
 
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
-msgstr ""
+msgstr "Prefix jména podle zkratky katalogu"
 
 #: u_translation.rsprefixthealt
 msgid "Prefix the alternative names with their label"
@@ -3624,7 +3628,7 @@ msgstr "<< Zpět"
 
 #: u_translation.rspreview
 msgid "Preview"
-msgstr ""
+msgstr "Náhled"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3636,7 +3640,7 @@ msgstr "Tisk mapy"
 
 #: u_translation.rsprintedchart
 msgid "Printed chart"
-msgstr ""
+msgstr "Tištěná mapa"
 
 #: u_translation.rsprinter
 msgid "Printer:"
@@ -3656,7 +3660,7 @@ msgstr "Metoda tisku"
 
 #: u_translation.rsprintpreview
 msgid "Print Preview"
-msgstr ""
+msgstr "Náhled tisku"
 
 #: u_translation.rsprintthechar
 msgid "Print the chart"
@@ -3684,7 +3688,7 @@ msgstr "Zpracování řádky %s"
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
-msgstr ""
+msgstr "Informace o produktu"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
@@ -3700,7 +3704,7 @@ msgstr "Autor:"
 
 #: u_translation.rsprogress
 msgid "Progress"
-msgstr "Vývoj"
+msgstr "Průběh"
 
 #: u_translation.rsprogressmess
 msgid "Progress messages"
@@ -3724,7 +3728,7 @@ msgstr "Vlastní pohyb (Dec)"
 
 #: u_translation.rspropermotion3
 msgid "Proper motion"
-msgstr ""
+msgstr "Vlastní pohyb"
 
 #: u_translation.rsproportional
 msgid "Proportional to the tail length"
@@ -3748,15 +3752,15 @@ msgstr "Port proxy"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr ""
+msgstr "Délka pulzu"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr ""
+msgstr "Pulzní režim"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr ""
+msgstr "Dejte soubory s příponou .tle do složky %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -3764,7 +3768,7 @@ msgstr "Kvasar"
 
 #: u_translation.rsquery
 msgid "Query"
-msgstr ""
+msgstr "Dotázat se"
 
 #: u_translation.rsquickdelete
 msgid "Quick delete"
@@ -3788,11 +3792,11 @@ msgstr "RA"
 
 #: u_translation.rsraazpeccompe
 msgid "RA/AZ PEC Compensation"
-msgstr ""
+msgstr "Kompenzace PEC v Ra/Az"
 
 #: u_translation.rsraazslewrate
 msgid "RA/Az Slew Rate"
-msgstr ""
+msgstr "Rychlost přejezdu v Ra/Az"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
@@ -3812,15 +3816,15 @@ msgstr "Rozlišení"
 
 #: u_translation.rsraturns
 msgid "RA turns: "
-msgstr "RA posun: "
+msgstr "RA otáček: "
 
 #: u_translation.rsraturns2
 msgid "%sRA turns:"
-msgstr "%sRA posun:"
+msgstr "%sRA otáček:"
 
 #: u_translation.rsreadinterval
 msgid "Read Interval [ms]"
-msgstr ""
+msgstr "Interval čtení [ms]"
 
 #: u_translation.rsrealisticsim
 msgid "Realistic images"
@@ -3828,7 +3832,7 @@ msgstr "Obrázek"
 
 #: u_translation.rsreallyparkan
 msgid "REALLY park and disconnect the telescope?"
-msgstr ""
+msgstr "Opravdu zaparkovat a odpojit dalekohled?"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -3840,7 +3844,7 @@ msgstr "RealSky South"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr ""
+msgstr "Nastavení reálného času"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -3848,27 +3852,27 @@ msgstr "Rozpoznat jednotky nebo typ objektu ze souboru:"
 
 #: u_translation.rsrecordanimat
 msgid "Record animation to file"
-msgstr ""
+msgstr "Zaznamenat animaci do souboru"
 
 #: u_translation.rsrecordingdir
 msgid "Recording directory"
-msgstr ""
+msgstr "Složka záznamu"
 
 #: u_translation.rsrecordingext
 msgid "Recording extension"
-msgstr ""
+msgstr "Přípona záznamu"
 
 #: u_translation.rsrecordingopt
 msgid "Recording options"
-msgstr ""
+msgstr "Nastavení záznamu"
 
 #: u_translation.rsrecordingpre
 msgid "Recording prefix"
-msgstr ""
+msgstr "Prefix záznamu"
 
 #: u_translation.rsrecordprotoc
 msgid "Record protocol to a trace file"
-msgstr ""
+msgstr "Zaznamenat komunikaci do souboru"
 
 #: u_translation.rsred
 msgid "Red"
@@ -3904,11 +3908,11 @@ msgstr "Obnovit"
 
 #: u_translation.rsrefreshimage
 msgid "Refresh image every"
-msgstr ""
+msgstr "Obnovit každých"
 
 #: u_translation.rsrefreshrate
 msgid "Refresh rate"
-msgstr ""
+msgstr "Rychlost obnovy"
 
 #: u_translation.rsreleasenotes
 msgid "Release notes"
@@ -3916,11 +3920,11 @@ msgstr "Poznámky k vydání"
 
 #: u_translation.rsreload
 msgid "Reload"
-msgstr ""
+msgstr "Obnovit"
 
 #: u_translation.rsreloadforcur
 msgid "Reload %s for current chart"
-msgstr ""
+msgstr "Obnovit %s pro tuto mapu"
 
 #: u_translation.rsremoveallcir
 msgid "Remove all circles"
@@ -3936,7 +3940,7 @@ msgstr "Odstranit poslední kružnici"
 
 #: u_translation.rsremovelastla
 msgid "Remove last label"
-msgstr "Odstranit podlední popisek"
+msgstr "Odstranit poslední popisek"
 
 #: u_translation.rsreplacedby
 msgid "Replaced by"
@@ -3972,15 +3976,15 @@ msgstr "Resetovat mapu"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
-msgstr ""
+msgstr "Resetovat mapu a nastavení"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Obnovit výchozí nastavení a restartovat"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Vrátit se k poslednímu uloženému nastavení"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -3988,11 +3992,11 @@ msgstr "Rozlišení:"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
-msgstr ""
+msgstr "Rozlišení X: %s Y: %s kroků"
 
 #: u_translation.rsresumegoto
 msgid "Resume GoTo"
-msgstr ""
+msgstr "Pokračovat v GoTo"
 
 #: u_translation.rsreturn
 msgid "Return"
@@ -4000,19 +4004,19 @@ msgstr "Zpět"
 
 #: u_translation.rsrevertaltkno
 msgid "Reverse Alt knob"
-msgstr ""
+msgstr "Opačný smysl otáčení v Alt"
 
 #: u_translation.rsrevertazknob
 msgid "Reverse Az knob"
-msgstr ""
+msgstr "Opačný smysl otáčení v Az"
 
 #: u_translation.rsrevertdeckno
 msgid "Reverse DEC knob"
-msgstr ""
+msgstr "Opačný smysl otáčení v Dec"
 
 #: u_translation.rsrevertraknob
 msgid "Reverse RA knob"
-msgstr ""
+msgstr "Opačný smysl otáčení v Ra"
 
 #: u_translation.rsright
 msgid "Right"
@@ -4028,7 +4032,7 @@ msgstr "Pravý panel"
 
 #: u_translation.rsrightmode
 msgid "Right Mode"
-msgstr ""
+msgstr "Pravý režim"
 
 #: u_translation.rsrise
 msgid "Rise"
@@ -4040,11 +4044,11 @@ msgstr "Čas východu"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
-msgstr "Rotovat doleva"
+msgstr "Otočit doleva"
 
 #: u_translation.rsrotateright
 msgid "Rotate right"
-msgstr "Rotovat doprava"
+msgstr "Otočit doprava"
 
 #: u_translation.rsrotation
 msgid "Rotation"
@@ -4052,7 +4056,7 @@ msgstr "Rotace"
 
 #: u_translation.rsrows
 msgid "Rows"
-msgstr ""
+msgstr "Řádky"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4064,7 +4068,7 @@ msgstr "Satelit"
 
 #: u_translation.rssatellitesca
 msgid "Satellites calculation:"
-msgstr ""
+msgstr "Výpočty satelitů:"
 
 #: u_translation.rssatring
 msgid "Sat. ring"
@@ -4104,7 +4108,7 @@ msgstr "Uložit projekt"
 
 #: u_translation.rssavesetting
 msgid "Save setting"
-msgstr ""
+msgstr "Uložit nastavení"
 
 #: u_translation.rssavethecurre
 msgid "Save the active chart"
@@ -4120,7 +4124,7 @@ msgstr "Prohledat adresář"
 
 #: u_translation.rsscopeadv
 msgid "Scope Adv"
-msgstr ""
+msgstr "Scope pokročilé"
 
 #: u_translation.rsscreenandsta
 msgid "Screen and status bar"
@@ -4140,15 +4144,15 @@ msgstr "Hledat"
 
 #: u_translation.rssearchbyname
 msgid "Search by name"
-msgstr ""
+msgstr "Hledat podle jména"
 
 #: u_translation.rssearchbyposi
 msgid "Search by position"
-msgstr ""
+msgstr "Hledat podle polohy"
 
 #: u_translation.rssearchcatalo
 msgid "Search Catalogs"
-msgstr ""
+msgstr "Hledat katalogy"
 
 #: u_translation.rssearchfor
 msgid "Search for"
@@ -4156,7 +4160,7 @@ msgstr "Hledat"
 
 #: u_translation.rssearchindex
 msgid "Search index"
-msgstr "Hledat index"
+msgstr "Vyhledávací index"
 
 #: u_translation.rssec
 msgid "s"
@@ -4176,15 +4180,15 @@ msgstr "sekund"
 
 #: u_translation.rsseehttpascom
 msgid "See %s for more information."
-msgstr ""
+msgstr "Více informací na %s"
 
 #: u_translation.rssel
 msgid "Sel."
-msgstr ""
+msgstr "Sel."
 
 #: u_translation.rsselect
 msgid "Select"
-msgstr ""
+msgstr "Vybrat"
 
 #: u_translation.rsselectall
 msgid "Select all"
@@ -4192,15 +4196,15 @@ msgstr "Vybrat vše"
 
 #: u_translation.rsselectcatalo
 msgid "Select Catalog"
-msgstr ""
+msgstr "Vybrat katalog"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Vyberte barvu (černou pro výchozí katalogu)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr ""
+msgstr "Vybrat mirror"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4228,7 +4232,7 @@ msgstr "Semi"
 
 #: u_translation.rssemimajoraxi
 msgid "Semimajor axis"
-msgstr "Semimajor osa"
+msgstr "Velká poloosa"
 
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
@@ -4236,11 +4240,11 @@ msgstr "Odeslat mapu na tiskárnu."
 
 #: u_translation.rsseparation
 msgid "Separation"
-msgstr "Oddělení"
+msgstr "Úhlová vzdálenost"
 
 #: u_translation.rsserialport
 msgid "Serial Port"
-msgstr ""
+msgstr "Sériový port"
 
 #: u_translation.rsserver
 msgid "Server"
@@ -4264,7 +4268,7 @@ msgstr "Port:"
 
 #: u_translation.rsserverrespon
 msgid "Server response: "
-msgstr ""
+msgstr "Odpověď serveru: "
 
 #: u_translation.rsset
 msgid "Set"
@@ -4284,11 +4288,11 @@ msgstr "Zorné pole"
 
 #: u_translation.rssethowthemou
 msgid "Set how the mount moves for each axis when you turn the driving knob. From then on, a click on the 'Connect telescope' button will show you how many turns you must make to go from one object to another."
-msgstr "Nastavte způsob pohybu montáže ve všech osách. Poté uvidíte jak jej ovládat pomocí programu."
+msgstr "Nastavte citlivost pohybu v každé ose na otáčku ovládacího knoflíku. Poté vám kliknutí na \"Ovládací panel\" ukáže, kolik otáček musíte provést, abyste se dostali od jednoho objektu k jinému."
 
 #: u_translation.rssetlocation
 msgid "Set Location"
-msgstr ""
+msgstr "Nastavit polohu"
 
 #: u_translation.rssetobservato
 msgid "Set observatory location"
@@ -4296,19 +4300,19 @@ msgstr "Nastavit pozici pozorovatele"
 
 #: u_translation.rssetslewing
 msgid "Set Slewing"
-msgstr ""
+msgstr "Nastavit přejezd"
 
 #: u_translation.rssettargetto
 msgid "Set target to %s"
-msgstr ""
+msgstr "Nastavit %s jako cíl"
 
 #: u_translation.rssettelescope
 msgid "Set TelescopeTime"
-msgstr ""
+msgstr "Nastavit čas"
 
 #: u_translation.rssettime
 msgid "Set Time"
-msgstr ""
+msgstr "Nastavit čas"
 
 #: u_translation.rssetup
 msgid "Setup"
@@ -4320,7 +4324,7 @@ msgstr "H"
 
 #: u_translation.rsshowallsky
 msgid "Show all sky"
-msgstr "Zobrazit celou obloku"
+msgstr "Zobrazit celou oblohu"
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
@@ -4364,7 +4368,7 @@ msgstr "Zobrazit souřadnice"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "Zobrazit obrysy DSO"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -4400,19 +4404,19 @@ msgstr "Zobrazit popisky u pozice"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Zobrazit linku od popisku k objektu"
 
 #: u_translation.rsshowlines
 msgid "Show lines"
-msgstr "Zobrazit linie"
+msgstr "Zobrazit obrysy"
 
 #: u_translation.rsshowmark
 msgid "Show mark"
-msgstr "Zobrazit zorná pole"
+msgstr "Zobrazit zorná pole ve středu mapy"
 
 #: u_translation.rsshowmarkinde
 msgid "Show mark index"
-msgstr ""
+msgstr "Číslovat zorná pole"
 
 #: u_translation.rsshowmilkyway
 msgid "Show Milky Way"
@@ -4420,7 +4424,7 @@ msgstr "Zobrazit mléčnou dráhu"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Zobrazit blízkozemní asteroidy bez ohledu na magnitudu"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4440,11 +4444,11 @@ msgstr "Zobrazit objekty"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "U Alt/Az souřadnic zobrazit jen meridián"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
-msgstr ""
+msgstr "V okně s detaily zobrazovat pouze text"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4460,7 +4464,7 @@ msgstr "Zobrazit planety"
 
 #: u_translation.rsshowposition
 msgid "Show position in title bar"
-msgstr ""
+msgstr "Ukazovat polohu v titulku"
 
 #: u_translation.rsshowstars
 msgid "Show stars"
@@ -4472,15 +4476,15 @@ msgstr "Zobrazit obrázek"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Zobrazit uživatelsky definované objekty"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
-msgstr ""
+msgstr "Zobrazit data virtuální observatoře"
 
 #: u_translation.rssideral
 msgid "Sidereal"
-msgstr ""
+msgstr "Hvězdný"
 
 #: u_translation.rssiderealday
 msgid "Sidereal day"
@@ -4516,23 +4520,23 @@ msgstr "Barva oblohy"
 
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Sledovat"
+msgstr "Přejezd"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
-msgstr ""
+msgstr " Rychlost přejíždění"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr ""
+msgstr "Přejet na pozici kurzoru"
 
 #: u_translation.rsslow
 msgid "Slow"
-msgstr ""
+msgstr "Pomalu"
 
 #: u_translation.rsslowest
 msgid "Slowest"
-msgstr ""
+msgstr "Nejpomalejší"
 
 #: u_translation.rssmallstars
 msgid "Small stars"
@@ -4584,7 +4588,7 @@ msgstr "Něco se nepovedlo při inicializaci programu. Program je nutné ukonči
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
-msgstr ""
+msgstr "Omlouváme se, ale kopírování zde ještě není implementováno"
 
 #: u_translation.rssortby
 msgid "Sort by"
@@ -4608,15 +4612,15 @@ msgstr "Spektrální třída"
 
 #: u_translation.rsspeed
 msgid "Speed"
-msgstr ""
+msgstr "Rychlost"
 
 #: u_translation.rsspeedselecti
 msgid "Speed Selection"
-msgstr ""
+msgstr "Výběr rychlosti"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
-msgstr ""
+msgstr "Nast. rychlosti"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -4676,7 +4680,7 @@ msgstr "Katalogy hvězd a deep sky připravené pomocí "
 
 #: u_translation.rsstarsbitmapf
 msgid "Stars bitmap file"
-msgstr ""
+msgstr "Bitmapa s obrazy hvězd"
 
 #: u_translation.rsstarsfilter
 msgid "Star filter"
@@ -4688,7 +4692,7 @@ msgstr "Vlastního pohyb hvězd (musí podporovat katalog)"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
-msgstr "Poč. měsíc"
+msgstr "Počáteční měsíc"
 
 #: u_translation.rsstartofobjec
 msgid "Start of object"
@@ -4696,7 +4700,7 @@ msgstr "Začátek objektu"
 
 #: u_translation.rsstatus
 msgid "Status"
-msgstr ""
+msgstr "Stav"
 
 #: u_translation.rsstatusbar
 msgid "Status bar"
@@ -4704,11 +4708,11 @@ msgstr "Stavový řádek"
 
 #: u_translation.rsstepsalpha
 msgid "Steps (Alpha)"
-msgstr ""
+msgstr "Kroky (Alfa)"
 
 #: u_translation.rsstepsdelta
 msgid "Steps (Delta)"
-msgstr ""
+msgstr "Kroky (Delta)"
 
 #: u_translation.rsstepunit
 msgid "Step unit"
@@ -4716,11 +4720,11 @@ msgstr "Jednotka krokování"
 
 #: u_translation.rsstop
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: u_translation.rsstopbits
 msgid "Stop bits"
-msgstr ""
+msgstr "Stop bity"
 
 #: u_translation.rsstoptcpipser
 msgid "Stop TCP/IP server"
@@ -4740,7 +4744,7 @@ msgstr "Ne"
 
 #: u_translation.rssunimagesour
 msgid "Sun image source"
-msgstr ""
+msgstr "Zdroj obrazu SLunce"
 
 #: u_translation.rssuninclinati
 msgid "Sun inclination"
@@ -4756,15 +4760,15 @@ msgstr "Povrch"
 
 #: u_translation.rssurfacebrigh
 msgid "Surface brightness"
-msgstr "Jas povrchu"
+msgstr "Povrchový jas"
 
 #: u_translation.rsswapbutton
 msgid "Swap button"
-msgstr ""
+msgstr "Zaměnit tlačítka"
 
 #: u_translation.rsswitchhpp
 msgid "Switch HPP"
-msgstr ""
+msgstr "Přepnout HPP"
 
 #: u_translation.rssyear
 msgid "Y"
@@ -4796,11 +4800,11 @@ msgstr "Nastavení"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
-msgstr ""
+msgstr "Stav systému:"
 
 #: u_translation.rstable
 msgid "Table"
-msgstr ""
+msgstr "Tabulka"
 
 #: u_translation.rstabledonotex
 msgid "%sTable %s does not exist! %sPlease correct the error and retry."
@@ -4864,7 +4868,7 @@ msgstr "Velikost textu"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
-msgstr ""
+msgstr "Rozhraní buď není připojeno nebo inicializováno"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -4872,7 +4876,7 @@ msgstr "Téma"
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr ""
+msgstr "Počet položek v tomto katalogu není znám. Stažení bude omezeno na %s položek"
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -4888,7 +4892,7 @@ msgstr "Tato operace nahradí veškeré údaje o státě %s aktuálními informa
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr ""
+msgstr "Katalog obsahuje %s položek. Kvůli dopadu na výkon ho není možné stáhnout najednou."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -4916,7 +4920,7 @@ msgstr "Čas"
 
 #: u_translation.rstimeoutms
 msgid "Timeout [ms]"
-msgstr ""
+msgstr "Timeout [ms]"
 
 #: u_translation.rstimesimulati
 msgid "Time simulation"
@@ -4940,11 +4944,11 @@ msgstr "Dnes"
 
 #: u_translation.rstofile
 msgid "to file:"
-msgstr ""
+msgstr "do souboru:"
 
 #: u_translation.rstonight
 msgid "Tonight"
-msgstr ""
+msgstr "Dnešní noc"
 
 #: u_translation.rstoolbar
 msgid "Tool bar"
@@ -4976,11 +4980,11 @@ msgstr "Aby bylo možné tato nová data použít, musíte nejprve spočítat m�
 
 #: u_translation.rstracking
 msgid "Tracking"
-msgstr ""
+msgstr "Sledování"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
-msgstr ""
+msgstr "Sledovat dalekohledem"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -4992,7 +4996,7 @@ msgstr "Překlad:"
 
 #: u_translation.rstransparency
 msgid "Transparency"
-msgstr ""
+msgstr "Průhlednost"
 
 #: u_translation.rstransparentl
 msgid "Transparent line mode (occultations)"
@@ -5008,7 +5012,7 @@ msgstr "Tropický rok"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
-msgstr ""
+msgstr "pravý rovník, ekvinokcium a epocha k datu"
 
 #: u_translation.rstrueposition
 msgid "True position"
@@ -5016,7 +5020,7 @@ msgstr "Pravá pozice"
 
 #: u_translation.rstruesolar
 msgid "True solar"
-msgstr ""
+msgstr "Pravý sluneční"
 
 #: u_translation.rstrumplerclas
 msgid "Trumpler class"
@@ -5024,7 +5028,7 @@ msgstr "Trumpler třída"
 
 #: u_translation.rsttut
 msgid "TT - UT: "
-msgstr ""
+msgstr "TT - UT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5032,11 +5036,11 @@ msgstr "Út"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr "posun / stupně"
+msgstr "Otáčky na stupeň"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
-msgstr "posun / hodiny"
+msgstr "Otáčky na hodinu"
 
 #: u_translation.rstwilight
 msgid "Twilight"
@@ -5044,7 +5048,7 @@ msgstr "Soumrak"
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
-msgstr ""
+msgstr "Pro inicializaci jsou třeba dvě hvězdy."
 
 #: u_translation.rstype
 msgid "Type"
@@ -5056,7 +5060,7 @@ msgstr "Typ:"
 
 #: u_translation.rstypeofcoordi
 msgid "Type of coordinates"
-msgstr ""
+msgstr "Druh souřadnic"
 
 #: u_translation.rstypeofobject
 msgid "Object types to add to the list"
@@ -5088,7 +5092,7 @@ msgstr "Zpět - poslední změna"
 
 #: u_translation.rsunits
 msgid "Units"
-msgstr ""
+msgstr "Jednotky"
 
 #: u_translation.rsuniversaltim
 msgid "Universal Time"
@@ -5132,7 +5136,7 @@ msgstr "Spouštěcí příkaz URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another TT-UT value"
-msgstr ""
+msgstr "Použít jinou hodnotu TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5144,7 +5148,7 @@ msgstr "(vhodný pro vytváření proudů)"
 
 #: u_translation.rsusehpp
 msgid "Use HPP"
-msgstr ""
+msgstr "Použít HPP"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
@@ -5156,7 +5160,7 @@ msgstr "Použít online DSS místo RealSky"
 
 #: u_translation.rsuseonlinesun
 msgid "Use online Sun image from SDO or SOHO"
-msgstr ""
+msgstr "Použít obraz Slunce ze SDO či SOHO"
 
 #: u_translation.rsuseonlycatal
 msgid "Use only catalogs from one single group."
@@ -5164,7 +5168,7 @@ msgstr "Použijte pouze jeden katalog ze stejné skupiny"
 
 #: u_translation.rsuserdefinedo
 msgid "User defined objects"
-msgstr ""
+msgstr "Uživatelsky definované objekty"
 
 #: u_translation.rsuserid
 msgid "User id:"
@@ -5176,7 +5180,7 @@ msgstr "Uživatelské jméno"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Použít Socks proxy"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -5196,7 +5200,7 @@ msgstr "Použijte menu nebo tlačítko \"%s\" pro konfiguraci ovladače"
 
 #: u_translation.rsusetheproper
 msgid "Use the proper motion to correct the position for the given epoch"
-msgstr ""
+msgstr "Opravit polohu o vliv vlastního pohybu"
 
 #: u_translation.rsusethisfield
 msgid "Use this field as an alternative name"
@@ -5208,7 +5212,7 @@ msgstr "Použít Xplanet"
 
 #: u_translation.rsusingexistin
 msgid "Using the existing file %s"
-msgstr ""
+msgstr "Používám existující soubor %s"
 
 #: u_translation.rsut
 msgid "UT"
@@ -5216,7 +5220,7 @@ msgstr "UT"
 
 #: u_translation.rsvariables
 msgid "Variables"
-msgstr "Proměnná"
+msgstr "Proměnné"
 
 #: u_translation.rsvariablestar
 msgid "Variable star"
@@ -5228,7 +5232,7 @@ msgstr "Proměnné hvězdy"
 
 #: u_translation.rsvelocity
 msgid "Velocity"
-msgstr ""
+msgstr "Rychlost"
 
 #: u_translation.rsvenus
 msgid "Venus"
@@ -5236,11 +5240,11 @@ msgstr "Venuše"
 
 #: u_translation.rsverticalaxis
 msgid "Vertical axis encoder origin : %s"
-msgstr ""
+msgstr "Počátek enkodéru vertikální osy : %s"
 
 #: u_translation.rsverticalaxis2
 msgid "Vertical axis 90 degree initialisation not done"
-msgstr ""
+msgstr "Inicializace vertikální osy není hotova"
 
 #: u_translation.rsvicinity
 msgid "Vicinity"
@@ -5256,11 +5260,11 @@ msgstr "Zobrazit horizont"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
-msgstr ""
+msgstr "Virtuální HandPad pro Scope.exe "
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr ""
+msgstr "VO Katalog"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5272,11 +5276,11 @@ msgstr "Vizuální magnituda"
 
 #: u_translation.rsvocatalog
 msgid "VO Catalog"
-msgstr ""
+msgstr "VO Katalog"
 
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
-msgstr ""
+msgstr "Prohlížeč VO katalogu"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
@@ -5292,11 +5296,11 @@ msgstr "Varování! Výpočet pro"
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Varování! Některé elementy asteroidů jsou více než tři roky staré. Pokuste se najít elementy platné pro datum mapy."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr ""
+msgstr "Varování! Některé elementy komet jsou více než tři roky staré. Pokuste se najít elementy platné pro datum mapy."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
@@ -5324,7 +5328,7 @@ msgstr "Západ"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
-msgstr "Bílé pozadí, černé linie"
+msgstr "Černé pozadí, bílé linie"
 
 #: u_translation.rswidth
 msgid "Width"
@@ -5336,7 +5340,7 @@ msgstr "Okno"
 
 #: u_translation.rsxerrors
 msgid "X Errors"
-msgstr ""
+msgstr "X Chyby"
 
 #: u_translation.rsxplanetisnot
 msgid "Xplanet is not compiled with JPEG support"
@@ -5360,7 +5364,7 @@ msgstr "let"
 
 #: u_translation.rsyerrors
 msgid "Y Errors"
-msgstr ""
+msgstr "Y Chyby"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
@@ -5368,7 +5372,7 @@ msgstr "Nyní je možné zobrazit asteroidy pro toto časové období."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr ""
+msgstr "Pozorujete-li vysoko v horách, horizont může být níže, než by odpovídalo pohledu z úrovně mořské hladiny."
 
 #: u_translation.rszenith
 msgid "Zenith"

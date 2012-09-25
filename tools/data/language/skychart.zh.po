@@ -1,4 +1,4 @@
-# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+ translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 13:28+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
+"X-Generator: Launchpad (build 16019)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -1447,6 +1447,10 @@ msgstr ""
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "到上一天體距離"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"

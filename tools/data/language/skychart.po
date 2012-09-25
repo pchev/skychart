@@ -5382,3 +5382,7 @@ msgstr ""
 msgid "Automatically optimize the labels placement"
 msgstr ""
 
+#: u_translation:rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
+
