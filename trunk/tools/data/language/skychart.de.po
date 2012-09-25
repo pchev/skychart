@@ -1,17 +1,17 @@
-# translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
+ translation of skychart.en.po Patrick Chevalley <pch@freesurf.ch>, 2006.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-07-29 15:36+0000\n"
-"PO-Revision-Date: 2012-04-26 05:56+0000\n"
-"Last-Translator: Dennis Baudys <Unknown>\n"
+"PO-Revision-Date: 2012-08-25 20:03+0000\n"
+"Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 13:28+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
+"X-Generator: Launchpad (build 16019)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -263,7 +263,7 @@ msgstr "Perihelwinkel"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "um die aktuelle Position"
 
 #: u_translation.rsartificialsa
 msgid "Artificial satellites"
@@ -499,7 +499,7 @@ msgstr "Katalog erstellen"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Niemals schwächer als Magnitude"
 
 #: u_translation.rsby
 msgid "by"
@@ -535,7 +535,7 @@ msgstr "Verbindung mit dem Server konnte nicht hergestellt werden. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
-msgstr ""
+msgstr "Zeichnen nicht möglich"
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
@@ -672,7 +672,7 @@ msgstr "Karteninformation"
 
 #: u_translation.rschartlegend
 msgid "Chart legend"
-msgstr ""
+msgstr "Kartenlegende"
 
 #: u_translation.rscharts
 msgid "Charts"
@@ -1216,7 +1216,7 @@ msgstr "Standardbeschriftung"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Voreinstellung Helligkeit"
 
 #: u_translation.rsdefaultmargi
 msgid "Default margin"
@@ -1232,7 +1232,7 @@ msgstr "Standard Umrissparameter"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr ""
+msgstr "Voreinstellung Größe (Bogensekunden)"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1440,11 +1440,15 @@ msgstr "Entfernung"
 
 #: u_translation.rsdistancemeas
 msgid "Distance measurement"
-msgstr ""
+msgstr "Abstandsmessung"
 
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Entfernung zum letzten Objekt"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1500,11 +1504,11 @@ msgstr "Linie zeichnen, welche die Eigenbewegung darstellt für die nächsten"
 
 #: u_translation.rsdrawasdso
 msgid "Draw as DSO"
-msgstr ""
+msgstr "als DSO zeichnen"
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "als Stern zeichnen"
 
 #: u_translation.rsdrawingtype
 msgid "Drawing type"
@@ -1584,7 +1588,7 @@ msgstr "Farbe bearbeiten"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "Farbe für DSO Linien ändern"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -3060,7 +3064,7 @@ msgstr "Heute keine astronomische Dämmerung!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Kein Katalog ausgewählt bzw. keine Tabelle des ausgwählten Katalogs enthält Koordinaten."
 
 #: u_translation.rsnochange
 msgid "No change"
@@ -4364,7 +4368,7 @@ msgstr "Koordinatengitter anzeigen"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "Zeige DSO Linien"
 
 #: u_translation.rsshowearthsha
 msgid "Show Earth shadow (Lunar eclipses)"
@@ -4420,7 +4424,7 @@ msgstr "Milchstraße anzeigen"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Zeige erdnahe Asteroiden (NEO's) unabhängig von der Helligkeit"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4872,7 +4876,7 @@ msgstr "Thema"
 
 #: u_translation.rsthenumberofr
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
-msgstr ""
+msgstr "Die Anzahl der Einträge für diesen Katalog ist unbekannt. Der Download wird auf %s Einträge beschränkt."
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -4888,7 +4892,7 @@ msgstr "Dies wird den gesamten Inhalt der Datenbank für das Land %s überschrei
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
-msgstr ""
+msgstr "Dieser Katalog enthält %s Einträge. Aus Performancegründen ist es nicht möglich den Katalog vollständig zu laden."
 
 #: u_translation.rsthisfilewasn
 msgid "This file was not recognized as a MPCORB file."
@@ -5176,7 +5180,7 @@ msgstr "Benutzername"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Socks Proxy nutzen"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"

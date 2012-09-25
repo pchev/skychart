@@ -1,21 +1,20 @@
-# Swedish translation for skychart
-# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
-# This file is distributed under the same license as the skychart package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+ Swedish translation for skychart
+ Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+ This file is distributed under the same license as the skychart package.
+ FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2012-07-29 15:36+0000\n"
-"PO-Revision-Date: 2012-06-26 13:11+0000\n"
+"PO-Revision-Date: 2012-08-06 18:05+0000\n"
 "Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-08-04 13:29+0000\n"
-"X-Generator: Launchpad (build 15742)\n"
+"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
+"X-Generator: Launchpad (build 16019)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -343,7 +342,7 @@ msgstr "Starta en lokal server automatiskt om den inte redan körs"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Optimera  etiketternas placering automatiskt"
 
 #: u_translation.rsautorefresh
 msgid "Auto-refresh"
@@ -1448,6 +1447,10 @@ msgstr "Distansmätning"
 #: u_translation.rsdistancetoth
 msgid "Distance to the last object"
 msgstr "Avstånd till senaste objekt"
+
+#: u_translation.rsdonotfilterm
+msgid "Do not filter Messier objects"
+msgstr ""
 
 #: u_translation.rsdot1
 msgid "Dot"
