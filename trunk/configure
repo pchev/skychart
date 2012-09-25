@@ -24,6 +24,7 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/downloaddialog \
      skychart/component/jdcalendar \
      skychart/component/multidoc \
+     skychart/component/multiframe \
      skychart/component/vo \
      skychart/component \
      skychart/library/catalog \

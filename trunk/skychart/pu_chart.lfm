@@ -1,38 +1,32 @@
 object f_chart: Tf_chart
-  Left = 451
+  Left = 0
   Height = 338
-  Top = 127
+  Top = 0
   Width = 508
-  ActiveControl = Panel1
-  Caption = 'Chart'
   ClientHeight = 338
   ClientWidth = 508
-  KeyPreview = True
-  OnClose = FormClose
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
-  OnKeyDown = FormKeyDown
-  OnKeyPress = FormKeyPress
-  ParentFont = True
-  LCLVersion = '0.9.30.4'
+  TabOrder = 0
+  DesignLeft = 361
+  DesignTop = 130
   object Panel1: TPanel
-    Left = 8
-    Height = 272
-    Top = 8
-    Width = 480
+    Left = 0
+    Height = 338
+    Top = 0
+    Width = 508
+    Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 272
-    ClientWidth = 480
+    ClientHeight = 338
+    ClientWidth = 508
     FullRepaint = False
     ParentColor = False
     TabOrder = 0
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 462
-      Height = 254
+      Left = 493
+      Height = 323
       Top = 0
-      Width = 18
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -44,9 +38,9 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 18
-      Top = 254
-      Width = 480
+      Height = 15
+      Top = 323
+      Width = 508
       Align = alBottom
       LargeChange = 10
       Max = 50
@@ -364,6 +358,7 @@ object f_chart: Tf_chart
     top = 202
   end
   object DownloadDialog1: TDownloadDialog
+    Timeout = 90000
     FtpFwMode = 0
     FtpFwPassive = True
     ConfirmDownload = True

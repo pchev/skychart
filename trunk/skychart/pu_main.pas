@@ -39,7 +39,7 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
+  LResources, uniqueinstance, enhedits, MultiFrame, ChildFrame, LazHelpHTML, ButtonPanel;
 
 type
 
@@ -53,6 +53,7 @@ type
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
     Compass1: TMenuItem;
+    MultiDoc1: TMultiFrame;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
@@ -164,7 +165,6 @@ type
     ToolButton8: TToolButton;
     ToolButton9: TToolButton;
     topmessage: TMenuItem;
-    MultiDoc1: TMultiDoc;
     PanelFieldSize: TPanel;
     ToolButton2: TToolButton;
     ToolButton4: TToolButton;
@@ -739,7 +739,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string; child: TChildDoc);
+    procedure SaveChartConfig(filename:string; child: TChildFrame);
     procedure SaveVersion;
     procedure SaveDefault;
     procedure SetDefault;
@@ -826,7 +826,7 @@ end;
 function Tf_main.CreateChild(const CName: string; copyactive: boolean; cfg1 : Tconf_skychart; cfgp : Tconf_plot; locked:boolean=false):boolean;
 var
   Child : Tf_chart;
-  cp: TChildDoc;
+  cp: TChildFrame;
   maxi: boolean;
   w,h,t,l: integer;
 begin
@@ -857,7 +857,7 @@ begin
   // create a new child window
   cp:=MultiDoc1.NewChild(CName);
   Child := Tf_chart.Create(cp);
-  cp.DockedPanel:=child.Panel1;
+  cp.DockedObject:=child;
   if locked then Child.lock_refresh:=true;
   inc(cfgm.MaxChildID);
   Child.tag:=cfgm.MaxChildID;
@@ -1510,7 +1510,7 @@ end;
 
 procedure Tf_main.MultiDoc1CreateChild(Sender: TObject);
 begin
-TabControl1.Tabs.Add(TChildDoc(Sender).Caption);
+TabControl1.Tabs.Add(TChildFrame(Sender).Caption);
 if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1) then begin
   TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1);
   ViewTopPanel;
@@ -1521,7 +1521,7 @@ procedure Tf_main.MultiDoc1DeleteChild(Sender: TObject);
 var i: integer;
 begin
 for i:=0 to TabControl1.Tabs.Count-1 do begin
-   if TabControl1.Tabs[i]=TChildDoc(Sender).Caption then begin
+   if TabControl1.Tabs[i]=TChildFrame(Sender).Caption then begin
       TabControl1.Tabs.Delete(i);
       break;
    end;
@@ -3027,7 +3027,7 @@ function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0)
 var ok: Boolean;
     ar1,de1,saveChartJD,dyear : Double;
     i, itype : integer;
-    chart:TForm;
+    chart:TFrame;
     saveCurYear,saveCurMonth,saveCurDay:integer;
     lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
     lasttype,lastobj: integer;
@@ -5648,7 +5648,7 @@ except
 end;
 end;
 
-procedure Tf_main.SaveChartConfig(filename:string; child: TChildDoc);
+procedure Tf_main.SaveChartConfig(filename:string; child: TChildFrame);
 var i,n:integer;
     inif: TMemIniFile;
     section : string;
@@ -6531,7 +6531,7 @@ var ok : Boolean;
     ar1,de1,saveChartJD,dyear : Double;
     saveCurYear,saveCurMonth,saveCurDay:integer;
     i : integer;
-    chart:TForm;
+    chart:TFrame;
     stype: string;
     itype:integer;
     lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
@@ -6937,8 +6937,8 @@ end;
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
 var i,n,w,h : integer;
     cmd:string;
-    chart:TForm;
-    child:TChildDoc;
+    chart:TFrame;
+    child:TChildFrame;
 begin
 if VerboseMsg then begin
   cmd:=cname+' Receive command:';
@@ -7835,7 +7835,7 @@ if (Activecontrol=quicksearch) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit
 else
-   (MultiDoc1.ActiveObject as Tf_chart).FormKeyDown(Sender,Key,Shift);
+   (MultiDoc1.ActiveObject as Tf_chart).KeyDown(Sender,Key,Shift);
 end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
@@ -7853,7 +7853,7 @@ if (Activecontrol=quicksearch) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit
 else
-   (MultiDoc1.ActiveObject as Tf_chart).FormKeyPress(Sender,Key);
+   (MultiDoc1.ActiveObject as Tf_chart).KeyPress(Sender,Key);
 end;
 
 procedure Tf_main.SetChildFocus(Sender: TObject);

@@ -59,7 +59,7 @@ type
   end;
   
   { Tf_chart }
-  Tf_chart = class(TForm)
+  Tf_chart = class(TFrame)
     About2: TMenuItem;
     About1: TMenuItem;
     AddLabel1: TMenuItem;
@@ -138,9 +138,6 @@ type
     procedure BlinkTimerTimer(Sender: TObject);
     procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure ChartResize(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
@@ -180,10 +177,8 @@ type
     procedure GridEQExecute(Sender: TObject);
     procedure GridExecute(Sender: TObject);
     procedure identlabelClick(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure switchstarExecute(Sender: TObject);
     procedure switchbackgroundExecute(Sender: TObject);
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure Connect1Click(Sender: TObject);
     procedure Slew1Click(Sender: TObject);
     procedure Sync1Click(Sender: TObject);
@@ -252,6 +247,10 @@ type
     lastl,lastb,MeasureRa,MeasureDe: double;
     zoomstep,Xzoom1,Yzoom1,Xzoom2,Yzoom2,DXzoom,DYzoom,XZoomD1,YZoomD1,XZoomD2,YZoomD2,ZoomMove : integer;
     XM1,YM1,XMD1,YMD1: integer;
+    constructor Create(TheOwner: TComponent); override;
+    destructor Destroy; override;
+    procedure KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure KeyPress(Sender: TObject; var Key: Char);
     procedure Refresh(setfocus:boolean=true);
     procedure AutoRefresh;
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
@@ -383,18 +382,12 @@ if Fpop_indi<>nil then Fpop_indi.SetLang;
 if Fpop_scope<>nil then Fpop_scope.SetLang;
 end;
 
-procedure Tf_chart.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  RefreshTimer.Enabled:=false;
-  TelescopeTimer.Enabled:=false;
-  Action := caFree;
-end;
-
-procedure Tf_chart.FormCreate(Sender: TObject);
+constructor Tf_chart.Create(TheOwner: TComponent);
 var i: integer;
 begin
 if VerboseMsg then
  WriteTrace('Create new chart');
+inherited Create(TheOwner);
  locked:=true;
  lockmove:=false;
  lockkey:=false;
@@ -459,7 +452,7 @@ if VerboseMsg then
  HorScrollBar.PageSize:=HorScrollBar.LargeChange;
 end;
 
-procedure Tf_chart.FormDestroy(Sender: TObject);
+destructor Tf_chart.Destroy;
 var i: integer;
     ok:boolean;
 begin
@@ -467,6 +460,8 @@ if VerboseMsg then
  WriteTrace('Destroy chart '+sc.cfgsc.chartname);
 try
  locked:=true;
+ RefreshTimer.Enabled:=false;
+ TelescopeTimer.Enabled:=false;
  if sc<>nil then sc.free;
  Image1.Free;
  if Fpop_indi<>nil then begin
@@ -486,6 +481,7 @@ try
    Fpop_encoder.Free;
  end;
  for i:=1 to maxundo do undolist[i].Free;
+ inherited Destroy;
  if VerboseMsg then
   WriteTrace('End Destroy chart ');
 except
@@ -493,8 +489,7 @@ writetrace('error destroy '+name);
 end;
 end;
 
-procedure Tf_chart.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure Tf_chart.KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
 CKeyDown(Key,Shift);
 end;
@@ -698,7 +693,7 @@ end;
 
 procedure Tf_chart.ChartResize(Sender: TObject);
 begin
-if locked or (fsCreating in FormState) then exit;
+if locked {or (fsCreating in FormState)} then exit;
 if VerboseMsg then
  WriteTrace(caption+' ChartResize');
 RefreshTimer.Enabled:=false;
@@ -3316,7 +3311,7 @@ else result:=msgFailed+' Bad command name';
 end;
 end;
 
-procedure Tf_chart.FormKeyPress(Sender: TObject; var Key: Char);
+procedure Tf_chart.KeyPress(Sender: TObject; var Key: Char);
 begin
 if lockkey then exit;
 if VerboseMsg then
