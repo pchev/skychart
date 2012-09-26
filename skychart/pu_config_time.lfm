@@ -1,7 +1,7 @@
 object f_configtime: Tf_configtime
-  Left = 357
+  Left = 455
   Height = 564
-  Top = 471
+  Top = 368
   Width = 474
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
@@ -72,6 +72,8 @@ object f_configtime: Tf_configtime
     Align = alClient
     ClientWidth = 474
     TabOrder = 1
+    DesignLeft = 174
+    DesignTop = 131
     inherited MainPanel: TPanel
       Width = 474
       ClientWidth = 474
@@ -80,10 +82,10 @@ object f_configtime: Tf_configtime
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientWidth = 474
+          ClientWidth = 470
         end
         inherited Page2: TTabSheet
-          ClientWidth = 474
+          ClientWidth = 470
           inherited SimObj: TCheckListBox
             Data = {
               0C000000000000000000000000000000
@@ -101,7 +103,7 @@ object f_configtime: Tf_configtime
           end
         end
         inherited Page3: TTabSheet
-          ClientWidth = 474
+          ClientWidth = 470
         end
       end
     end

@@ -1,7 +1,7 @@
 object f_configcatalog: Tf_configcatalog
-  Left = 269
+  Left = 430
   Height = 580
-  Top = 119
+  Top = 120
   Width = 523
   BorderStyle = bsToolWindow
   Caption = 'Catalog'
@@ -72,5 +72,38 @@ object f_configcatalog: Tf_configcatalog
     Align = alClient
     ClientHeight = 530
     TabOrder = 1
+    DesignLeft = 304
+    DesignTop = 274
+    inherited MainPanel: TPanel
+      Height = 530
+      ClientHeight = 530
+      inherited PageControl1: TPageControl
+        Height = 474
+        inherited Page2: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page3: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page1: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page1a: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page1b: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page5: TTabSheet
+          ClientHeight = 470
+        end
+        inherited Page4: TTabSheet
+          ClientHeight = 470
+        end
+      end
+      inherited FOVPanel: TPanel
+        Top = 475
+      end
+    end
   end
 end
