@@ -1,12 +1,12 @@
 object f_configsolsys: Tf_configsolsys
-  Left = 650
-  Height = 536
-  Top = 96
-  Width = 503
+  Left = 516
+  Height = 576
+  Top = 120
+  Width = 500
   BorderStyle = bsToolWindow
   Caption = 'Solar System'
-  ClientHeight = 536
-  ClientWidth = 503
+  ClientHeight = 576
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -15,14 +15,14 @@ object f_configsolsys: Tf_configsolsys
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 486
-    Width = 503
+    Top = 526
+    Width = 500
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 503
+    ClientWidth = 500
     TabOrder = 0
     object Button1: TButton
-      Left = 212
+      Left = 209
       Height = 25
       Top = 12
       Width = 75
@@ -34,7 +34,7 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 308
+      Left = 305
       Height = 25
       Top = 12
       Width = 75
@@ -45,7 +45,7 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 405
+      Left = 402
       Height = 25
       Top = 12
       Width = 75
@@ -57,7 +57,7 @@ object f_configsolsys: Tf_configsolsys
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 116
+      Left = 113
       Height = 25
       Top = 12
       Width = 75
@@ -68,26 +68,97 @@ object f_configsolsys: Tf_configsolsys
     end
   end
   inline f_config_solsys1: Tf_config_solsys
-    Height = 486
+    Height = 526
+    Width = 500
     Align = alClient
-    ClientHeight = 486
+    ClientHeight = 526
+    ClientWidth = 500
     TabOrder = 1
     inherited MainPanel: TPanel
-      Height = 486
-      ClientHeight = 486
+      Height = 526
+      Width = 500
+      ClientHeight = 526
+      ClientWidth = 500
       inherited PageControl1: TPageControl
-        Height = 484
+        Height = 524
+        Width = 498
+        ActivePage = nil
+        TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 484
+          ClientHeight = 520
+          ClientWidth = 494
         end
         inherited Page2: TTabSheet
-          ClientHeight = 484
+          ClientHeight = 520
+          ClientWidth = 494
         end
         inherited Page3: TTabSheet
-          ClientHeight = 484
+          ClientHeight = 520
+          ClientWidth = 494
+          inherited ComPageControl: TPageControl
+            inherited comsetting: TTabSheet
+              ClientHeight = 473
+              ClientWidth = 493
+            end
+            inherited comload: TTabSheet
+              ClientHeight = 473
+              ClientWidth = 493
+              inherited ComPageControl1: TPageControl
+                inherited TabSheet1: TTabSheet
+                  ClientHeight = 100
+                  ClientWidth = 432
+                end
+                inherited TabSheet2: TTabSheet
+                  ClientHeight = 100
+                  ClientWidth = 432
+                end
+              end
+            end
+            inherited comdelete: TTabSheet
+              ClientHeight = 473
+              ClientWidth = 493
+            end
+            inherited Addsinglecom: TTabSheet
+              ClientHeight = 473
+              ClientWidth = 493
+            end
+          end
         end
         inherited Page4: TTabSheet
-          ClientHeight = 484
+          ClientHeight = 520
+          ClientWidth = 494
+          inherited AstPageControl: TPageControl
+            inherited astsetting: TTabSheet
+              ClientHeight = 425
+              ClientWidth = 485
+            end
+            inherited astload: TTabSheet
+              ClientHeight = 425
+              ClientWidth = 485
+              inherited AstPageControl2: TPageControl
+                inherited TabSheet3: TTabSheet
+                  ClientHeight = 92
+                  ClientWidth = 437
+                end
+                inherited TabSheet4: TTabSheet
+                  ClientHeight = 92
+                  ClientWidth = 437
+                end
+              end
+            end
+            inherited astprepare: TTabSheet
+              ClientHeight = 425
+              ClientWidth = 485
+            end
+            inherited astdelete: TTabSheet
+              ClientHeight = 425
+              ClientWidth = 485
+            end
+            inherited AddsingleAst: TTabSheet
+              ClientHeight = 425
+              ClientWidth = 485
+            end
+          end
         end
       end
     end

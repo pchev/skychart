@@ -1,28 +1,28 @@
 object f_config_pictures: Tf_config_pictures
   Left = 0
-  Height = 478
+  Height = 524
   Top = 0
-  Width = 513
-  ClientHeight = 478
-  ClientWidth = 513
+  Width = 503
+  ClientHeight = 524
+  ClientWidth = 503
   TabOrder = 0
-  DesignLeft = 257
-  DesignTop = 120
+  DesignLeft = 114
+  DesignTop = 364
   object MainPanel: TPanel
     Left = 0
-    Height = 478
+    Height = 524
     Top = 0
-    Width = 513
+    Width = 503
     Align = alClient
-    ClientHeight = 478
-    ClientWidth = 513
+    ClientHeight = 524
+    ClientWidth = 503
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 476
+      Height = 522
       Top = 1
-      Width = 511
+      Width = 501
       ActivePage = Page2
       Align = alClient
       ShowTabs = False
@@ -31,8 +31,8 @@ object f_config_pictures: Tf_config_pictures
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 472
-        ClientWidth = 507
+        ClientHeight = 518
+        ClientWidth = 497
         object ProgressPanel: TPanel
           Left = 15
           Height = 94
@@ -188,8 +188,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 472
-        ClientWidth = 507
+        ClientHeight = 518
+        ClientWidth = 497
         object Label270: TLabel
           Left = 0
           Height = 16
@@ -333,8 +333,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 472
-        ClientWidth = 507
+        ClientHeight = 518
+        ClientWidth = 497
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355

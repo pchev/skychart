@@ -1,28 +1,28 @@
 object f_config_observatory: Tf_config_observatory
   Left = 0
-  Height = 507
+  Height = 527
   Top = 0
-  Width = 486
-  ClientHeight = 507
-  ClientWidth = 486
+  Width = 502
+  ClientHeight = 527
+  ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 300
-  DesignTop = 166
+  DesignLeft = 116
+  DesignTop = 363
   object MainPanel: TPanel
     Left = 0
-    Height = 507
+    Height = 527
     Top = 0
-    Width = 486
+    Width = 502
     Align = alClient
-    ClientHeight = 507
-    ClientWidth = 486
+    ClientHeight = 527
+    ClientWidth = 502
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 505
+      Height = 525
       Top = 1
-      Width = 484
+      Width = 500
       ActivePage = Page1
       Align = alClient
       ShowTabs = False
@@ -30,8 +30,8 @@ object f_config_observatory: Tf_config_observatory
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
-        ClientHeight = 501
-        ClientWidth = 480
+        ClientHeight = 521
+        ClientWidth = 496
         object Obszp: TButton
           Left = 5
           Height = 25
@@ -405,8 +405,8 @@ object f_config_observatory: Tf_config_observatory
       end
       object Page2: TTabSheet
         Caption = 'Horizon'
-        ClientHeight = 501
-        ClientWidth = 480
+        ClientHeight = 521
+        ClientWidth = 496
         object GroupBox2: TGroupBox
           Left = 8
           Height = 89

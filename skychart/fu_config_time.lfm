@@ -1,29 +1,29 @@
 object f_config_time: Tf_config_time
   Left = 0
-  Height = 514
+  Height = 530
   Top = 0
-  Width = 471
-  ClientHeight = 514
-  ClientWidth = 471
+  Width = 500
+  ClientHeight = 530
+  ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 256
-  DesignTop = 153
+  DesignLeft = 112
+  DesignTop = 360
   object MainPanel: TPanel
     Left = 0
-    Height = 514
+    Height = 530
     Top = 0
-    Width = 471
+    Width = 500
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 514
-    ClientWidth = 471
+    ClientHeight = 530
+    ClientWidth = 500
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 0
-      Height = 514
+      Height = 530
       Top = 0
-      Width = 471
+      Width = 500
       ActivePage = Page1
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
@@ -32,8 +32,8 @@ object f_config_time: Tf_config_time
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
-        ClientHeight = 510
-        ClientWidth = 467
+        ClientHeight = 526
+        ClientWidth = 496
         object Label142: TLabel
           Left = 286
           Height = 16
@@ -535,8 +535,8 @@ object f_config_time: Tf_config_time
       end
       object Page2: TTabSheet
         Caption = 'Simulation'
-        ClientHeight = 510
-        ClientWidth = 467
+        ClientHeight = 526
+        ClientWidth = 496
         object stepreset: TSpeedButton
           Left = 220
           Height = 25
@@ -780,8 +780,8 @@ object f_config_time: Tf_config_time
       end
       object Page3: TTabSheet
         Caption = 'Animation'
-        ClientHeight = 510
-        ClientWidth = 467
+        ClientHeight = 526
+        ClientWidth = 496
         object GroupBox1: TGroupBox
           Left = 22
           Height = 80

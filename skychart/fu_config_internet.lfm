@@ -1,29 +1,29 @@
 object f_config_internet: Tf_config_internet
   Left = 0
-  Height = 429
+  Height = 511
   Top = 0
-  Width = 482
-  ClientHeight = 429
-  ClientWidth = 482
+  Width = 498
+  ClientHeight = 511
+  ClientWidth = 498
   TabOrder = 0
-  DesignLeft = 219
-  DesignTop = 207
+  DesignLeft = 116
+  DesignTop = 363
   object MainPanel: TPanel
     Left = 0
-    Height = 429
+    Height = 511
     Top = 0
-    Width = 482
+    Width = 498
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 429
-    ClientWidth = 482
+    ClientHeight = 511
+    ClientWidth = 498
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 0
-      Height = 429
+      Height = 511
       Top = 0
-      Width = 482
+      Width = 498
       ActivePage = Page1
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
@@ -32,8 +32,8 @@ object f_config_internet: Tf_config_internet
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Proxy'
-        ClientHeight = 425
-        ClientWidth = 478
+        ClientHeight = 507
+        ClientWidth = 494
         object GroupBox1: TGroupBox
           Left = 20
           Height = 201
@@ -198,8 +198,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page2: TTabSheet
         Caption = 'Orbital Elements'
-        ClientHeight = 425
-        ClientWidth = 478
+        ClientHeight = 507
+        ClientWidth = 494
         object Label6: TLabel
           Left = 28
           Height = 17
@@ -341,8 +341,8 @@ object f_config_internet: Tf_config_internet
       end
       object Page3: TTabSheet
         Caption = 'Online DSS'
-        ClientHeight = 425
-        ClientWidth = 478
+        ClientHeight = 507
+        ClientWidth = 494
         object Label8: TLabel
           Left = 20
           Height = 14

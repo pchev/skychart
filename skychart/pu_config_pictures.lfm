@@ -1,12 +1,12 @@
 object f_configpictures: Tf_configpictures
-  Left = 695
-  Height = 535
-  Top = 119
-  Width = 513
+  Left = 513
+  Height = 576
+  Top = 120
+  Width = 501
   BorderStyle = bsToolWindow
   Caption = 'Pictures'
-  ClientHeight = 535
-  ClientWidth = 513
+  ClientHeight = 576
+  ClientWidth = 501
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -15,14 +15,14 @@ object f_configpictures: Tf_configpictures
   object Panel2: TPanel
     Left = 0
     Height = 50
-    Top = 485
-    Width = 513
+    Top = 526
+    Width = 501
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 513
+    ClientWidth = 501
     TabOrder = 0
     object Button1: TButton
-      Left = 216
+      Left = 204
       Height = 25
       Top = 11
       Width = 75
@@ -34,7 +34,7 @@ object f_configpictures: Tf_configpictures
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 312
+      Left = 300
       Height = 25
       Top = 11
       Width = 75
@@ -45,7 +45,7 @@ object f_configpictures: Tf_configpictures
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 408
+      Left = 396
       Height = 25
       Top = 11
       Width = 75
@@ -57,7 +57,7 @@ object f_configpictures: Tf_configpictures
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 120
+      Left = 108
       Height = 25
       Top = 11
       Width = 75
@@ -68,23 +68,33 @@ object f_configpictures: Tf_configpictures
     end
   end
   inline f_config_pictures1: Tf_config_pictures
-    Height = 485
+    Height = 526
+    Width = 501
     Align = alClient
-    ClientHeight = 485
+    ClientHeight = 526
+    ClientWidth = 501
     TabOrder = 1
     inherited MainPanel: TPanel
-      Height = 485
-      ClientHeight = 485
+      Height = 526
+      Width = 501
+      ClientHeight = 526
+      ClientWidth = 501
       inherited PageControl1: TPageControl
-        Height = 483
+        Height = 524
+        Width = 499
+        ActivePage = nil
+        TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 483
+          ClientHeight = 520
+          ClientWidth = 495
         end
         inherited Page2: TTabSheet
-          ClientHeight = 483
+          ClientHeight = 520
+          ClientWidth = 495
         end
         inherited Page3: TTabSheet
-          ClientHeight = 483
+          ClientHeight = 520
+          ClientWidth = 495
         end
       end
     end

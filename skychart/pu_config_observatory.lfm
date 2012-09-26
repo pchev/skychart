@@ -1,13 +1,13 @@
 object f_configobservatory: Tf_configobservatory
-  Left = 330
-  Height = 560
-  Top = 210
-  Width = 481
+  Left = 513
+  Height = 578
+  Top = 120
+  Width = 501
   BorderIcons = [biSystemMenu]
   BorderStyle = bsToolWindow
   Caption = 'Observatory'
-  ClientHeight = 560
-  ClientWidth = 481
+  ClientHeight = 578
+  ClientWidth = 501
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -16,14 +16,14 @@ object f_configobservatory: Tf_configobservatory
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 510
-    Width = 481
+    Top = 528
+    Width = 501
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 481
+    ClientWidth = 501
     TabOrder = 1
     object Button1: TButton
-      Left = 169
+      Left = 189
       Height = 25
       Top = 10
       Width = 83
@@ -35,7 +35,7 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 0
     end
     object Button2: TButton
-      Left = 273
+      Left = 293
       Height = 25
       Top = 10
       Width = 83
@@ -46,7 +46,7 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 1
     end
     object Button3: TButton
-      Left = 377
+      Left = 397
       Height = 25
       Top = 10
       Width = 83
@@ -58,7 +58,7 @@ object f_configobservatory: Tf_configobservatory
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 71
+      Left = 91
       Height = 25
       Top = 10
       Width = 75
@@ -69,28 +69,28 @@ object f_configobservatory: Tf_configobservatory
     end
   end
   inline f_config_observatory1: Tf_config_observatory
-    Height = 510
-    Width = 481
+    Height = 528
+    Width = 501
     Align = alClient
-    ClientHeight = 510
-    ClientWidth = 481
+    ClientHeight = 528
+    ClientWidth = 501
     inherited MainPanel: TPanel
-      Height = 510
-      Width = 481
-      ClientHeight = 510
-      ClientWidth = 481
+      Height = 528
+      Width = 501
+      ClientHeight = 528
+      ClientWidth = 501
       inherited PageControl1: TPageControl
-        Height = 508
-        Width = 479
+        Height = 526
+        Width = 499
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 504
-          ClientWidth = 475
+          ClientHeight = 522
+          ClientWidth = 495
         end
         inherited Page2: TTabSheet
-          ClientHeight = 504
-          ClientWidth = 475
+          ClientHeight = 522
+          ClientWidth = 495
         end
       end
     end

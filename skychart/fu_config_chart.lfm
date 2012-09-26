@@ -1,28 +1,28 @@
 object f_config_chart: Tf_config_chart
   Left = 0
-  Height = 516
+  Height = 528
   Top = 0
-  Width = 510
-  ClientHeight = 516
-  ClientWidth = 510
+  Width = 505
+  ClientHeight = 528
+  ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 308
-  DesignTop = 142
+  DesignLeft = 109
+  DesignTop = 358
   object MainPanel: TPanel
     Left = 0
-    Height = 516
+    Height = 528
     Top = 0
-    Width = 510
+    Width = 505
     Align = alClient
-    ClientHeight = 516
-    ClientWidth = 510
+    ClientHeight = 528
+    ClientWidth = 505
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 460
+      Height = 472
       Top = 1
-      Width = 508
+      Width = 503
       ActivePage = Page1
       Align = alClient
       ShowTabs = False
@@ -31,8 +31,8 @@ object f_config_chart: Tf_config_chart
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object PanelExpert: TPanel
           Left = 13
           Height = 192
@@ -245,8 +245,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object Label30: TLabel
           Left = 0
           Height = 15
@@ -701,8 +701,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object Bevel7: TBevel
           Left = 15
           Height = 375
@@ -1030,8 +1030,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object Label29: TLabel
           Left = 0
           Height = 17
@@ -1849,8 +1849,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page5: TTabSheet
         Caption = 'Page5'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object Label159: TLabel
           Left = 0
           Height = 15
@@ -2284,8 +2284,8 @@ object f_config_chart: Tf_config_chart
       end
       object Page6: TTabSheet
         Caption = 'Page6'
-        ClientHeight = 456
-        ClientWidth = 504
+        ClientHeight = 468
+        ClientWidth = 499
         object Label95: TLabel
           Left = 0
           Height = 14
@@ -2354,11 +2354,11 @@ object f_config_chart: Tf_config_chart
     object FOVPanel: TPanel
       Left = 1
       Height = 54
-      Top = 461
-      Width = 508
+      Top = 473
+      Width = 503
       Align = alBottom
       ClientHeight = 54
-      ClientWidth = 508
+      ClientWidth = 503
       TabOrder = 1
       Visible = False
       object fv10: TLabel

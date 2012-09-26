@@ -1,28 +1,28 @@
 object f_config_display: Tf_config_display
   Left = 0
-  Height = 530
+  Height = 528
   Top = 0
-  Width = 515
-  ClientHeight = 530
-  ClientWidth = 515
+  Width = 505
+  ClientHeight = 528
+  ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 281
-  DesignTop = 120
+  DesignLeft = 109
+  DesignTop = 362
   object MainPanel: TPanel
     Left = 0
-    Height = 530
+    Height = 528
     Top = 0
-    Width = 515
+    Width = 505
     Align = alClient
-    ClientHeight = 530
-    ClientWidth = 515
+    ClientHeight = 528
+    ClientWidth = 505
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 528
+      Height = 526
       Top = 1
-      Width = 513
+      Width = 503
       ActivePage = Page6
       Align = alClient
       ShowTabs = False
@@ -30,8 +30,8 @@ object f_config_display: Tf_config_display
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Panel4: TPanel
           Left = 8
           Height = 242
@@ -367,8 +367,8 @@ object f_config_display: Tf_config_display
       end
       object Page2: TTabSheet
         Caption = 'Colour'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Label181: TLabel
           Left = 86
           Height = 16
@@ -885,8 +885,8 @@ object f_config_display: Tf_config_display
       end
       object Page3: TTabSheet
         Caption = 'Deep-sky colour'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         OnShow = Page3Show
         object lblDSOCScheme: TLabel
           Left = 13
@@ -1432,8 +1432,8 @@ object f_config_display: Tf_config_display
       end
       object Page4: TTabSheet
         Caption = 'Sky colour'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Panel2: TPanel
           Left = 24
           Height = 147
@@ -1610,8 +1610,8 @@ object f_config_display: Tf_config_display
       end
       object Page5: TTabSheet
         Caption = 'Lines'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object EqGrid: TCheckBox
           Left = 16
           Height = 26
@@ -1977,8 +1977,8 @@ object f_config_display: Tf_config_display
       end
       object Page6: TTabSheet
         Caption = 'Labels'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object MagLabel: TRadioGroup
           Left = 16
           Height = 81
@@ -2589,8 +2589,8 @@ object f_config_display: Tf_config_display
       end
       object Page7: TTabSheet
         Caption = 'Fonts'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Bevel10: TBevel
           Left = 8
           Height = 329
@@ -3118,8 +3118,8 @@ object f_config_display: Tf_config_display
       end
       object Page8: TTabSheet
         Caption = 'Finder circle'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Label307: TLabel
           Left = 80
           Height = 15
@@ -3274,8 +3274,8 @@ object f_config_display: Tf_config_display
       end
       object Page9: TTabSheet
         Caption = 'Finder rectangle'
-        ClientHeight = 524
-        ClientWidth = 509
+        ClientHeight = 522
+        ClientWidth = 499
         object Label308: TLabel
           Left = 80
           Height = 15
