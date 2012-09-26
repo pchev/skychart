@@ -19,7 +19,7 @@
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
     <Type Value="RunAndDesignTime"/>
-    <RequiredPkgs Count="16">
+    <RequiredPkgs Count="15">
       <Item1>
         <PackageName Value="MultiFramePackage"/>
       </Item1>
@@ -52,37 +52,33 @@
         <DefaultFilename Value="radec/radec.lpk"/>
       </Item8>
       <Item9>
-        <PackageName Value="MultiDocPackage"/>
-        <DefaultFilename Value="multidoc/multidocpackage.lpk"/>
-      </Item9>
-      <Item10>
         <PackageName Value="mrecsort"/>
         <DefaultFilename Value="mrecsort/mrecsort.lpk"/>
-      </Item10>
-      <Item11>
+      </Item9>
+      <Item10>
         <PackageName Value="libsql"/>
         <DefaultFilename Value="libsql/libsql.lpk"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item12>
-      <Item13>
+      </Item11>
+      <Item12>
         <PackageName Value="enhedit"/>
         <DefaultFilename Value="enhedits/enhedit.lpk"/>
-      </Item13>
-      <Item14>
+      </Item12>
+      <Item13>
         <PackageName Value="downldialog"/>
         <DefaultFilename Value="downloaddialog/downldialog.lpk"/>
-      </Item14>
-      <Item15>
+      </Item13>
+      <Item14>
         <PackageName Value="CDCjdcalendar"/>
         <DefaultFilename Value="jdcalendar/cdcjdcalendar.lpk"/>
-      </Item15>
-      <Item16>
+      </Item14>
+      <Item15>
         <PackageName Value="uniqueinstance_package"/>
         <DefaultFilename Value="uniqueinstance/uniqueinstance_package.lpk"/>
-      </Item16>
+      </Item15>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)/"/>
