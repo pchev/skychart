@@ -1,4 +1,4 @@
-unit pu_chart;
+unit fu_chart;
 
 {$MODE Delphi}{$H+}
 
@@ -249,8 +249,6 @@ type
     XM1,YM1,XMD1,YMD1: integer;
     constructor Create(TheOwner: TComponent); override;
     destructor Destroy; override;
-    procedure KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure KeyPress(Sender: TObject; var Key: Char);
     procedure Refresh(setfocus:boolean=true);
     procedure AutoRefresh;
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
@@ -259,9 +257,10 @@ type
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll):boolean;
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
-    procedure CKeyDown(var Key: Word; Shift: TShiftState);
     procedure rotation(rot:double);
     procedure GetSunImage;
+    procedure CKeyPress(Key: Char);
+    procedure CKeyDown(Key: Word; Shift: TShiftState);
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
     function cmd_SetGrid(onoff:string):string;
@@ -487,11 +486,6 @@ try
 except
 writetrace('error destroy '+name);
 end;
-end;
-
-procedure Tf_chart.KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-CKeyDown(Key,Shift);
 end;
 
 procedure Tf_chart.Image1Click(Sender: TObject);
@@ -1530,7 +1524,7 @@ if VerboseMsg then
  Refresh;
 end;
 
-procedure Tf_chart.CKeyDown(var Key: Word; Shift: TShiftState);
+procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
 begin
 if LockKeyboard then exit;
 try
@@ -3311,7 +3305,7 @@ else result:=msgFailed+' Bad command name';
 end;
 end;
 
-procedure Tf_chart.KeyPress(Sender: TObject; var Key: Char);
+procedure Tf_chart.CKeyPress(Key: Char);
 begin
 if lockkey then exit;
 if VerboseMsg then

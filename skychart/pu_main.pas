@@ -32,14 +32,14 @@ uses
   {$ifdef mswindows}
     Windows, ShlObj, Registry,
   {$endif}
-  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, pu_chart,
+  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
-  ActnList, IniFiles, Spin, Clipbrd, MultiDoc, ChildDoc,
-  LResources, uniqueinstance, enhedits, MultiFrame, ChildFrame, LazHelpHTML, ButtonPanel;
+  ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
+  LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
 
 type
 
@@ -53,7 +53,7 @@ type
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
     Compass1: TMenuItem;
-    MultiDoc1: TMultiFrame;
+    MultiFrame1: TMultiFrame;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
@@ -471,8 +471,8 @@ type
     procedure MenuChartInfoClick(Sender: TObject);
     procedure MenuChartLegendClick(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
-    procedure MultiDoc1CreateChild(Sender: TObject);
-    procedure MultiDoc1DeleteChild(Sender: TObject);
+    procedure MultiFrame1CreateChild(Sender: TObject);
+    procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -632,8 +632,8 @@ type
     procedure ZoomBarExecute(Sender: TObject);
     procedure DSSImageExecute(Sender: TObject);
     procedure EditLabelsExecute(Sender: TObject);
-    procedure MultiDoc1ActiveChildChange(Sender: TObject);
-    procedure MultiDoc1Maximize(Sender: TObject);
+    procedure MultiFrame1ActiveChildChange(Sender: TObject);
+    procedure MultiFrame1Maximize(Sender: TObject);
     procedure BtnRestoreChildClick(Sender: TObject);
     procedure BtnCloseChildClick(Sender: TObject);
     procedure WindowCascade1Execute(Sender: TObject);
@@ -651,15 +651,15 @@ type
   private
     { Private declarations }
     UniqueInstance1: TCdCUniqueInstance;
-    ConfigTime: Tf_config_time;
-    ConfigObservatory: Tf_config_observatory;
-    ConfigChart: Tf_config_chart;
-    ConfigSolsys: Tf_config_solsys;
-    ConfigSystem: Tf_config_system;
-    ConfigInternet: Tf_config_internet;
-    ConfigDisplay: Tf_config_display;
-    ConfigPictures: Tf_config_pictures;
-    ConfigCatalog: Tf_config_catalog;
+    ConfigTime: Tf_configtime;
+    ConfigObservatory: Tf_configobservatory;
+    ConfigChart: Tf_configchart;
+    ConfigSolsys: Tf_configsolsys;
+    ConfigSystem: Tf_configsystem;
+    ConfigInternet: Tf_configinternet;
+    ConfigDisplay: Tf_configdisplay;
+    ConfigPictures: Tf_configpictures;
+    ConfigCatalog: Tf_configcatalog;
     cryptedpwd,basecaption,kioskpwd :string;
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
     InitialChartNum, Animcount: integer;
@@ -831,19 +831,19 @@ var
   w,h,t,l: integer;
 begin
   // allow for a reasonable number of chart 
-  if (MultiDoc1.ChildCount>=MaxWindow) then begin
+  if (MultiFrame1.ChildCount>=MaxWindow) then begin
      SetLpanel1(rsTooManyOpenW);
      result:=false;
      exit;
   end;
   // copy active child config
-  if copyactive and (MultiDoc1.Activeobject is Tf_chart) then begin
-    cfg1.Assign((MultiDoc1.Activeobject as Tf_chart).sc.cfgsc);
-    cfgp.Assign((MultiDoc1.Activeobject as Tf_chart).sc.plot.cfgplot);
+  if copyactive and (MultiFrame1.Activeobject is Tf_chart) then begin
+    cfg1.Assign((MultiFrame1.Activeobject as Tf_chart).sc.cfgsc);
+    cfgp.Assign((MultiFrame1.Activeobject as Tf_chart).sc.plot.cfgplot);
     cfg1.scopemark:=false;
-    maxi:=MultiDoc1.maximized;
-    w:=MultiDoc1.ActiveChild.width;
-    h:=MultiDoc1.ActiveChild.height;
+    maxi:=MultiFrame1.maximized;
+    w:=MultiFrame1.ActiveChild.width;
+    h:=MultiFrame1.ActiveChild.height;
     t:=-1;
     l:=-1;
   end
@@ -855,7 +855,7 @@ begin
     l:=cfg1.winleft;
   end;
   // create a new child window
-  cp:=MultiDoc1.NewChild(CName);
+  cp:=MultiFrame1.NewChild(CName);
   Child := Tf_chart.Create(cp);
   cp.DockedObject:=child;
   if locked then Child.lock_refresh:=true;
@@ -898,7 +898,7 @@ begin
      if t>=0 then cp.top:=t;
      if l>=0 then cp.left:=l;
   end;
-  multidoc1.maximized:=maxi;
+  MultiFrame1.maximized:=maxi;
   result:=true;
   Child.locked:=false;
   Child.lock_refresh:=false;
@@ -908,9 +908,9 @@ end;
 procedure Tf_main.RefreshAllChild(applydef:boolean);
 var i: integer;
 begin
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
       sc.Fits:=Fits;
       sc.planet:=planet;
       sc.cdb:=cdcdb;
@@ -930,19 +930,19 @@ var i,y,m,d: integer;
     ra,de,jda,t,tz: double;
     st: boolean;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then begin
- ra:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.racentre;
- de:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.decentre;
- jda:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.jdchart;
- y:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curyear;
- m:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curmonth;
- d:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curday;
- t:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.curtime;
- tz:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.Timezone;
- st:=(MultiDoc1.ActiveObject as Tf_chart).sc.cfgsc.UseSystemTime;
- for i:=0 to MultiDoc1.ChildCount-1 do
-  if (MultiDoc1.Childs[i].DockedObject is Tf_chart) and (MultiDoc1.Childs[i].DockedObject<>MultiDoc1.ActiveObject) then
-     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then begin
+ ra:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.racentre;
+ de:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.decentre;
+ jda:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.jdchart;
+ y:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.curyear;
+ m:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.curmonth;
+ d:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.curday;
+ t:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.curtime;
+ tz:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.Timezone;
+ st:=(MultiFrame1.ActiveObject as Tf_chart).sc.cfgsc.UseSystemTime;
+ for i:=0 to MultiFrame1.ChildCount-1 do
+  if (MultiFrame1.Childs[i].DockedObject is Tf_chart) and (MultiFrame1.Childs[i].DockedObject<>MultiFrame1.ActiveObject) then
+     with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
       precession(jda,sc.cfgsc.jdchart,ra,de);
       sc.cfgsc.UseSystemTime:=st;
       sc.cfgsc.curyear:=y;
@@ -969,9 +969,9 @@ if VerboseMsg then
  WriteTrace('AutorefreshTimer');
 AutoRefreshLock:=true;
 Autorefresh.enabled:=false;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
       if sc.cfgsc.autorefresh then AutoRefresh;
      end;
 finally
@@ -987,15 +987,15 @@ var xname: array of string;
     sep: string;
 begin
 if copy(cname,length(cname),1)='_' then sep:='' else sep:='_';
-setlength(xname,MultiDoc1.ChildCount);
-for i:=0 to MultiDoc1.ChildCount-1 do xname[i]:=MultiDoc1.Childs[i].caption;
+setlength(xname,MultiFrame1.ChildCount);
+for i:=0 to MultiFrame1.ChildCount-1 do xname[i]:=MultiFrame1.Childs[i].caption;
 if forcenumeric then n:=1
                 else n:=0;
 repeat
   ok:=true;
   if n=0 then result:=cname
          else result:=cname+sep+inttostr(n);
-  for i:=0 to MultiDoc1.ChildCount-1 do
+  for i:=0 to MultiFrame1.ChildCount-1 do
      if xname[i]=result then ok:=false;
   inc(n);
 until ok;
@@ -1011,14 +1011,14 @@ end;
 
 procedure Tf_main.FileClose1Execute(Sender: TObject);
 begin
-  if (MultiDoc1.ActiveObject is Tf_chart)and(MultiDoc1.ChildCount>1) then
-   MultiDoc1.ActiveChild.close;
+  if (MultiFrame1.ActiveObject is Tf_chart)and(MultiFrame1.ChildCount>1) then
+   MultiFrame1.ActiveChild.close;
 end;
 
 function Tf_main.SaveChart(fn: string): string;
 begin
-if (fn<>'')and(MultiDoc1.ActiveObject is Tf_chart) then begin
-  SaveChartConfig(SafeUTF8ToSys(fn),MultiDoc1.ActiveChild);
+if (fn<>'')and(MultiFrame1.ActiveObject is Tf_chart) then begin
+  SaveChartConfig(SafeUTF8ToSys(fn),MultiFrame1.ActiveChild);
   result:=msgOK;
 end else
   result:=msgFailed;
@@ -1041,12 +1041,12 @@ begin
 if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
- ReadChartConfig(SafeUTF8ToSys(fn),true,MultiDoc1.Maximized,cfgp,cfgs);
+ ReadChartConfig(SafeUTF8ToSys(fn),true,MultiFrame1.Maximized,cfgp,cfgs);
  nam:=stringreplace(extractfilename(fn),blank,'_',[rfReplaceAll]);
  p:=pos('.',nam);
  if p>0 then nam:=copy(nam,1,p-1);
  maxi:=cfgm.maximized;
- cfgm.maximized:=MultiDoc1.Maximized;
+ cfgm.maximized:=MultiFrame1.Maximized;
  CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
  cfgm.maximized:=maxi;
  result:=msgOK;
@@ -1062,15 +1062,15 @@ if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
  ReadChartConfig(SafeUTF8ToSys(fn),true,true,def_cfgplot,def_cfgsc);
- Tf_chart(multidoc1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
- Tf_chart(multidoc1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
+ Tf_chart(MultiFrame1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
+ Tf_chart(MultiFrame1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
  result:=msgOK;
 end else if FileExists(fn) then begin
  cfgp.Assign(def_cfgplot);
  cfgs.Assign(def_cfgsc);
  ReadChartConfig(fn,true,true,def_cfgplot,def_cfgsc);
- Tf_chart(multidoc1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
- Tf_chart(multidoc1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
+ Tf_chart(MultiFrame1.Childs[0].DockedObject).sc.cfgsc.Assign(def_cfgsc);
+ Tf_chart(MultiFrame1.Childs[0].DockedObject).sc.plot.cfgplot.Assign(def_cfgplot);
  result:=msgOK;
 end else
  result:=msgNotFound+' '+fn;
@@ -1168,11 +1168,11 @@ begin
 InitTimer.Enabled:=False;
 if VerboseMsg then
  WriteTrace('Enter Tf_main.InitTimerTimer');
-MultiDoc1.setActiveChild(0);
+MultiFrame1.setActiveChild(0);
 // ensure a first chart is draw, even if it usually result in a double refresh on launch
-for i:=0 to MultiDoc1.ChildCount-1 do
- if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-    with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+ if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+    with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
        RefreshTimer.Enabled:=false;
        RefreshTimer.Enabled:=true;
     end;
@@ -1433,8 +1433,8 @@ Savedialog.DefaultExt:='';
 if Savedialog.InitialDir='' then Savedialog.InitialDir:=HomeDir;
 savedialog.Filter:='PNG|*.png|JPEG|*.jpg|BMP|*.bmp';
 savedialog.Title:=rsSaveImage;
-if MultiDoc1.ActiveObject  is Tf_chart then
- with MultiDoc1.ActiveObject as Tf_chart do
+if MultiFrame1.ActiveObject  is Tf_chart then
+ with MultiFrame1.ActiveObject as Tf_chart do
   if SaveDialog.Execute then begin
      fn:=SaveDialog.Filename;
      ext:=uppercase(extractfileext(fn));
@@ -1489,7 +1489,7 @@ end;
 
 procedure Tf_main.MenuChartInfoClick(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
    Refresh;
 end;
@@ -1497,7 +1497,7 @@ end;
 
 procedure Tf_main.MenuChartLegendClick(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
    Refresh;
 end;
@@ -1508,16 +1508,16 @@ begin
   SetupPicturesPage(1);
 end;
 
-procedure Tf_main.MultiDoc1CreateChild(Sender: TObject);
+procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);
 begin
 TabControl1.Tabs.Add(TChildFrame(Sender).Caption);
-if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1) then begin
-  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1);
+if TabControl1.Visible<>(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>1) then begin
+  TabControl1.Visible:=(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>1);
   ViewTopPanel;
 end;
 end;
 
-procedure Tf_main.MultiDoc1DeleteChild(Sender: TObject);
+procedure Tf_main.MultiFrame1DeleteChild(Sender: TObject);
 var i: integer;
 begin
 for i:=0 to TabControl1.Tabs.Count-1 do begin
@@ -1527,8 +1527,8 @@ for i:=0 to TabControl1.Tabs.Count-1 do begin
    end;
 end;
 // test for two childs because the currently deleting child is still counted
-if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>2) then begin
-  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>2);
+if TabControl1.Visible<>(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>2) then begin
+  TabControl1.Visible:=(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>2);
   ViewTopPanel;
 end;
 end;
@@ -1544,7 +1544,7 @@ end;
 
 procedure Tf_main.NextChild1Click(Sender: TObject);
 begin
-  MultiDoc1.NexChild;
+  MultiFrame1.NexChild;
 end;
 
 procedure Tf_main.BugReport1Click(Sender: TObject);
@@ -1874,20 +1874,20 @@ lang:=u_translation.translate(cfgm.language);
 u_help.Translate(lang);
 catalog:=Tcatalog.Create(self);
 SetLang;
-step:='Multidoc';
+step:='Multiframe';
 if VerboseMsg then
  WriteTrace(step);
 TabControl1.Visible:=false;
 basecaption:=caption;
-MultiDoc1.WindowList:=Window1;
-MultiDoc1.KeepLastChild:=true;
+MultiFrame1.WindowList:=Window1;
+MultiFrame1.KeepLastChild:=true;
 ChildControl.visible:=false;
 BtnCloseChild.Glyph.LoadFromLazarusResource('CLOSE');
 BtnRestoreChild.Glyph.LoadFromLazarusResource('RESTORE');
 step:='Size control';
 if VerboseMsg then
  WriteTrace(step);
-MultiDoc1.Align:=alClient;
+MultiFrame1.Align:=alClient;
 starshape.Picture.Bitmap.Transparent:=false;
 quicksearch.Width:=round( 75 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
 TimeU.Width:=round( 95 {$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif} );
@@ -1936,12 +1936,12 @@ if (@cdcwcs_initfitsfile=nil)or(@cdcwcs_release=nil)or(@cdcwcs_sky2xy=nil)or(@cd
    Halt;
 end;
 {$ifdef unix}
-   step:='Multidoc unix';
+   step:='Multiframe unix';
 if VerboseMsg then
  WriteTrace(step);
-   MultiDoc1.InactiveBorderColor:=$404040;
-   MultiDoc1.TitleColor:=clBlack;
-   MultiDoc1.BorderColor:=$808080;
+   MultiFrame1.InactiveBorderColor:=$404040;
+   MultiFrame1.TitleColor:=clBlack;
+   MultiFrame1.BorderColor:=$808080;
 {$endif}
 step:='Bitmap';
 if VerboseMsg then
@@ -2074,8 +2074,8 @@ end else begin
   end else begin
      if not NeedRestart then SaveQuickSearch(configfile);
   end;
-  for i:=0 to MultiDoc1.ChildCount-1 do
-     if MultiDoc1.Childs[i].DockedObject is Tf_chart then with (MultiDoc1.Childs[i].DockedObject as Tf_chart) do begin
+  for i:=0 to MultiFrame1.ChildCount-1 do
+     if MultiFrame1.Childs[i].DockedObject is Tf_chart then with (MultiFrame1.Childs[i].DockedObject as Tf_chart) do begin
         TelescopeTimer.Enabled:=false;
         locked:=true;
      end;
@@ -2093,8 +2093,8 @@ procedure Tf_main.EditCopy1Execute(Sender: TObject);
 var savelabel:boolean;
     bmp:TBitmap;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
- with Tf_chart(MultiDoc1.ActiveObject) do begin
+if MultiFrame1.ActiveObject is Tf_chart then
+ with Tf_chart(MultiFrame1.ActiveObject) do begin
     savelabel:= sc.cfgsc.Editlabels;
 if VerboseMsg then
  WriteTrace('EditCopy1Execute');
@@ -2123,8 +2123,8 @@ formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
 f_print.showmodal;
 if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
  cfgm:=f_print.cm;
- if MultiDoc1.ActiveObject is Tf_chart then
-   with MultiDoc1.ActiveObject as Tf_chart do
+ if MultiFrame1.ActiveObject is Tf_chart then
+   with MultiFrame1.ActiveObject as Tf_chart do
       PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
 end;
 PrintPreview1.Visible:=(cfgm.PrintMethod=0);
@@ -2132,35 +2132,35 @@ end;
 
 procedure Tf_main.PrintPreview1Click(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
-  with MultiDoc1.ActiveObject as Tf_chart do
+if MultiFrame1.ActiveObject is Tf_chart then
+  with MultiFrame1.ActiveObject as Tf_chart do
      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,true);
 end;
 
 procedure Tf_main.UndoExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do UndoExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do UndoExecute(Sender);
 end;
 
 procedure Tf_main.RedoExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do RedoExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do RedoExecute(Sender);
 end;
 
 procedure Tf_main.zoomplusExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do zoomplusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do zoomplusExecute(Sender);
 end;
 
 procedure Tf_main.zoomminusExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do zoomminusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do zoomminusExecute(Sender);
 end;
 
 
 procedure Tf_main.ZoomBarExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
  formpos(f_zoom,mouse.cursorpos.x,mouse.cursorpos.y);
  f_zoom.fov:=rad2deg*sc.cfgsc.fov;
  f_zoom.showmodal;
@@ -2176,17 +2176,17 @@ end;
 
 procedure Tf_main.FlipxExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do FlipxExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do FlipxExecute(Sender);
 end;
 
 procedure Tf_main.FlipyExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do FlipyExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do FlipyExecute(Sender);
 end;
 
 procedure Tf_main.rot_plusExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_plusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rot_plusExecute(Sender);
 end;
 
 procedure Tf_main.VariableStar1Click(Sender: TObject);
@@ -2201,7 +2201,7 @@ end;
 
 procedure Tf_main.rot_minusExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rot_minusExecute(Sender);
 end;
 
 procedure Tf_main.ToolButtonRotPMouseUp(Sender: TObject; Button: TMouseButton;
@@ -2213,10 +2213,10 @@ if Button=mbLeft then begin
   else if ssShift in Shift then rot:=1
   else if ssMeta in Shift then rot:=180
   else rot:=15;
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
 end;
 if Button=mbRight then begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.cfgsc.theta:=0;
      Refresh;
   end;
@@ -2232,10 +2232,10 @@ if Button=mbLeft then begin
   else if ssShift in Shift then rot:=-1
   else if ssMeta in Shift then rot:=-180
   else rot:=-15;
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do  rotation(rot);
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do  rotation(rot);
 end;
 if Button=mbRight then begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.cfgsc.theta:=0;
      Refresh;
   end;
@@ -2248,10 +2248,10 @@ var rot:double;
 begin
 if Button=mbLeft then begin
   rot:=180;
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do rotation(rot);
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
 end;
 if Button=mbRight then begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.cfgsc.theta:=0;
      Refresh;
   end;
@@ -2262,7 +2262,7 @@ procedure Tf_main.TelescopeConnectExecute(Sender: TObject);
 var P : Tpoint;
 begin
 P:=point(0,0);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    Connect1Click(Sender);
    if sc.cfgsc.ManualTelescope then begin
      if f_manualtelescope.visible then
@@ -2279,12 +2279,12 @@ end;
 
 procedure Tf_main.TelescopeSlewExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do Slew1Click(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do Slew1Click(Sender);
 end;
 
 procedure Tf_main.TelescopeSyncExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do Sync1Click(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do Sync1Click(Sender);
 end;
 
 procedure Tf_main.TelescopePanelExecute(Sender: TObject);
@@ -2295,7 +2295,7 @@ end;
 procedure Tf_main.ListObjExecute(Sender: TObject);
 var buf,msg:string;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
   if sc.cfgsc.windowratio=0 then sc.cfgsc.windowratio:=1;
   sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,msg,false,false,false);
   ListInfo(buf,msg);
@@ -2304,7 +2304,7 @@ end;
 
 procedure Tf_main.ListInfo(buf,msg:string);
 begin
-  f_info.source_chart:=MultiDoc1.ActiveChild.Caption;
+  f_info.source_chart:=MultiFrame1.ActiveChild.Caption;
   f_info.setpage(1);
   f_info.TitlePanel.Caption:=f_info.TitlePanel.Caption+':   '+msg;
   f_info.StringGrid2.Font.Name:=def_cfgplot.FontName[5];
@@ -2316,34 +2316,34 @@ end;
 
 procedure Tf_main.GridEQExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do GridEQExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do GridEQExecute(Sender);
 end;
 
 procedure Tf_main.GridExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do GridExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do GridExecute(Sender);
 end;
 
 procedure Tf_main.ToolButtonCompassClick(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SwitchCompass(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SwitchCompass(Sender);
 end;
 
 procedure Tf_main.switchstarsExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do switchstarExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do switchstarExecute(Sender);
 end;
 
 procedure Tf_main.switchbackgroundExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do switchbackgroundExecute(Sender);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do switchbackgroundExecute(Sender);
 end;
 
 procedure Tf_main.SetFOVClick(Sender: TObject);
 var f : integer;
 begin
 with Sender as TSpeedButton do f:=tag;
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
 end;
 end;
@@ -2352,60 +2352,60 @@ procedure Tf_main.SetFovExecute(Sender: TObject);
 var f : integer;
 begin
 with Sender as TMenuItem do f:=tag;
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    SetField(deg2rad*sc.catalog.cfgshr.FieldNum[f]);
 end;
 end;
 
 procedure Tf_main.toNExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetAz(deg2rad*180);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetAz(deg2rad*180);
 end;
 
 procedure Tf_main.toEExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetAz(deg2rad*270);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetAz(deg2rad*270);
 end;
 
 procedure Tf_main.toSExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetAz(0);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetAz(0);
 end;
 
 procedure Tf_main.toWExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetAz(deg2rad*90);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetAz(deg2rad*90);
 end;
 
 procedure Tf_main.toZenithExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetZenit(0);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetZenit(0);
 end;
 
 procedure Tf_main.allSkyExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do SetZenit(deg2rad*200);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do SetZenit(deg2rad*200);
 end;
 
 
 procedure Tf_main.MoreStarExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_MoreStar;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do cmd_MoreStar;
 end;
 
 procedure Tf_main.LessStarExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_LessStar;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do cmd_LessStar;
 end;
 
 procedure Tf_main.MoreNebExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_MoreNeb;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do cmd_MoreNeb;
 end;
 
 procedure Tf_main.LessNebExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do cmd_LessNeb;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do cmd_LessNeb;
 end;
 
 procedure Tf_main.ToolButton13Click(Sender: TObject);
@@ -2467,7 +2467,7 @@ end;
 
 procedure Tf_main.ToolButtonScaleClick(Sender: TObject);
 begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.cfgsc.ShowScale:=ToolButtonScale.Down;
      if MeasureOn then MeasureDistance(4,0,0);
      Refresh;
@@ -2480,8 +2480,8 @@ begin
   AnimationTimer.Enabled:=false;
   TimeInc.Execute;
   if cfgm.AnimRec then begin
-    if MultiDoc1.ActiveObject  is Tf_chart then
-     with MultiDoc1.ActiveObject as Tf_chart do begin
+    if MultiFrame1.ActiveObject  is Tf_chart then
+     with MultiFrame1.ActiveObject as Tf_chart do begin
          inc(Animcount);
          fn:=Slash(systoutf8(TempDir))+FormatFloat('000000',Animcount)+'.jpg';
          SaveChartImage('JPEG',fn,80);
@@ -2496,7 +2496,7 @@ var hh : double;
 begin
 // tag is used for the sign
 mult:=TAction(sender).tag*TimeVal.Position;
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    djd(sc.cfgsc.CurJDUT,y,m,d,hh);
    DtoS(hh,h,n,s);
    case TimeU.itemindex of
@@ -2531,7 +2531,7 @@ end;
 
 procedure Tf_main.TimeResetExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.UseSystemTime:=true;
    if (not sc.cfgsc.TrackOn)and(sc.cfgsc.Projpole=Altaz) then begin
       sc.cfgsc.TrackOn:=true;
@@ -2546,7 +2546,7 @@ end;
 
 procedure Tf_main.ShowStarsExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.showstars:=not sc.cfgsc.showstars;
 if VerboseMsg then
  WriteTrace('ShowStarsExecute');
@@ -2556,7 +2556,7 @@ end;
 
 procedure Tf_main.ShowNebulaeExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.shownebulae:=not sc.cfgsc.shownebulae;
 if VerboseMsg then
  WriteTrace('ShowNebulaeExecute');
@@ -2566,7 +2566,7 @@ end;
 
 procedure Tf_main.ShowPicturesExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
    if sc.cfgsc.ShowImages then begin
      sc.catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
@@ -2584,7 +2584,7 @@ end;
 
 procedure Tf_main.ShowBackgroundImageExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
    if sc.cfgsc.ShowBackgroundImage and (not Fits.Header.valid) then begin
       sc.cfgsc.ShowBackgroundImage:=false;
@@ -2601,8 +2601,8 @@ end;
 
 procedure Tf_main.DSSImageExecute(Sender: TObject);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart) and (Fits.dbconnected)
-  then with MultiDoc1.ActiveObject as Tf_chart do begin
+if (MultiFrame1.ActiveObject is Tf_chart) and (Fits.dbconnected)
+  then with MultiFrame1.ActiveObject as Tf_chart do begin
       if VerboseMsg then
        WriteTrace('DSSImageExecute');
       cmd_PDSS('','','','');
@@ -2611,8 +2611,8 @@ end;
 
 procedure Tf_main.BlinkImageExecute(Sender: TObject);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart)
-  then with MultiDoc1.ActiveObject as Tf_chart do begin
+if (MultiFrame1.ActiveObject is Tf_chart)
+  then with MultiFrame1.ActiveObject as Tf_chart do begin
      if BlinkTimer.enabled then begin
         BlinkTimer.enabled:=false;
         sc.cfgsc.ShowBackgroundImage:=true;
@@ -2632,7 +2632,7 @@ end;
 
 procedure Tf_main.SyncChartExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then begin
+if MultiFrame1.ActiveObject is Tf_chart then begin
    cfgm.SyncChart:=not cfgm.SyncChart;
    if cfgm.SyncChart then SyncChild;
 end;
@@ -2640,7 +2640,7 @@ end;
 
 procedure Tf_main.ShowLinesExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowLine:=not sc.cfgsc.ShowLine;
 if VerboseMsg then
  WriteTrace('ShowLinesExecute');
@@ -2650,7 +2650,7 @@ end;
 
 procedure Tf_main.ShowPlanetsExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowPlanet:=not sc.cfgsc.ShowPlanet;
 if VerboseMsg then
  WriteTrace('ShowPlanetsExecute');
@@ -2661,7 +2661,7 @@ end;
 procedure Tf_main.ShowAsteroidsExecute(Sender: TObject);
 var showast:boolean;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowAsteroid:=not sc.cfgsc.ShowAsteroid;
    showast:=sc.cfgsc.ShowAsteroid;
 if VerboseMsg then
@@ -2683,7 +2683,7 @@ end;
 procedure Tf_main.ShowCometsExecute(Sender: TObject);
 var showcom:boolean;
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowComet:=not sc.cfgsc.ShowComet;
    showcom:=sc.cfgsc.ShowComet;
 if VerboseMsg then
@@ -2695,7 +2695,7 @@ end;
 
 procedure Tf_main.ShowMilkyWayExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowMilkyWay:=not sc.cfgsc.ShowMilkyWay;
  if VerboseMsg then
  WriteTrace('ShowMilkyWayExecute');
@@ -2705,7 +2705,7 @@ end;
 
 procedure Tf_main.ShowLabelsExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Showlabelall:=not sc.cfgsc.Showlabelall;
 if VerboseMsg then
  WriteTrace('ShowLabelsExecute');
@@ -2715,8 +2715,8 @@ end;
 
 procedure Tf_main.ResetAllLabels1Click(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
-      Tf_chart(MultiDoc1.ActiveObject).sc.ResetAllLabel;
+if MultiFrame1.ActiveObject is Tf_chart then
+      Tf_chart(MultiFrame1.ActiveObject).sc.ResetAllLabel;
 end;
 
 procedure Tf_main.ResetDefaultChartExecute(Sender: TObject);
@@ -2763,11 +2763,11 @@ if sender<>nil then begin
          end;
       1: begin
           WriteTrace('Reload last configuration');
-          for i:=1 to MultiDoc1.ChildCount-1 do
-            if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-               MultiDoc1.Childs[i].close;
-          Multidoc1.Maximized:=true;
-          with MultiDoc1.ActiveObject as Tf_chart do begin
+          for i:=1 to MultiFrame1.ChildCount-1 do
+            if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+               MultiFrame1.Childs[i].close;
+          MultiFrame1.Maximized:=true;
+          with MultiFrame1.ActiveObject as Tf_chart do begin
             ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
             Refresh;
           end;
@@ -2781,11 +2781,11 @@ if sender<>nil then begin
   end;
 end else begin
   WriteTrace('Reload last configuration');
-  for i:=1 to MultiDoc1.ChildCount-1 do
-    if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-       MultiDoc1.Childs[i].close;
-  Multidoc1.Maximized:=true;
-  with MultiDoc1.ActiveObject as Tf_chart do begin
+  for i:=1 to MultiFrame1.ChildCount-1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+       MultiFrame1.Childs[i].close;
+  MultiFrame1.Maximized:=true;
+  with MultiFrame1.ActiveObject as Tf_chart do begin
     ReadChartConfig(configfile,true,true,sc.plot.cfgplot,sc.cfgsc);
     Refresh;
   end;
@@ -2794,7 +2794,7 @@ end;
 
 procedure Tf_main.EditLabelsExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Editlabels:=not sc.cfgsc.Editlabels;
 if VerboseMsg then
  WriteTrace('EditLabelsExecute');
@@ -2804,7 +2804,7 @@ end;
 
 procedure Tf_main.ShowConstellationLineExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstl:=not sc.cfgsc.ShowConstl;
 if VerboseMsg then
  WriteTrace('ShowConstellationLineExecute');
@@ -2814,7 +2814,7 @@ end;
 
 procedure Tf_main.ShowConstellationLimitExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowConstB:=not sc.cfgsc.ShowConstB;
 if VerboseMsg then
  WriteTrace('ShowConstellationLimitExecute');
@@ -2824,7 +2824,7 @@ end;
 
 procedure Tf_main.ShowGalacticEquatorExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowGalactic:=not sc.cfgsc.ShowGalactic;
 if VerboseMsg then
  WriteTrace('ShowGalacticEquatorExecute');
@@ -2834,7 +2834,7 @@ end;
 
 procedure Tf_main.ShowEclipticExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowEcliptic:=not sc.cfgsc.ShowEcliptic;
 if VerboseMsg then
  WriteTrace('ShowEclipticExecute');
@@ -2844,7 +2844,7 @@ end;
 
 procedure Tf_main.ShowMarkExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.ShowCircle:=not sc.cfgsc.ShowCircle;
 if VerboseMsg then
  WriteTrace('ShowMarkExecute');
@@ -2854,7 +2854,7 @@ end;
 
 procedure Tf_main.ShowObjectbelowHorizonExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.horizonopaque:=not sc.cfgsc.horizonopaque;
 if VerboseMsg then
  WriteTrace('ShowObjectbelowHorizonExecute');
@@ -2864,7 +2864,7 @@ end;
 
 procedure Tf_main.EquatorialProjectionExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.projpole:=Equat;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
@@ -2876,7 +2876,7 @@ end;
 
 procedure Tf_main.AltAzProjectionExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.projpole:=AltAz;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
@@ -2898,7 +2898,7 @@ end;
 
 procedure Tf_main.EclipticProjectionExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.projpole:=Ecl;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
@@ -2910,7 +2910,7 @@ end;
 
 procedure Tf_main.GalacticProjectionExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.projpole:=Gal;
    sc.cfgsc.FindOk:=false; // invalidate the search result
    sc.cfgsc.theta:=0; // rotation = 0
@@ -2923,7 +2923,7 @@ end;
 procedure Tf_main.CalendarExecute(Sender: TObject);
 begin
   if not f_calendar.Visible then begin
-    if MultiDoc1.ActiveObject is Tf_chart then f_calendar.config.Assign(Tf_chart(MultiDoc1.ActiveObject).sc.cfgsc)
+    if MultiFrame1.ActiveObject is Tf_chart then f_calendar.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
        else f_calendar.config.Assign(def_cfgsc);
   end;
   f_calendar.AzNorth:=catalog.cfgshr.AzNorth;
@@ -2934,7 +2934,7 @@ end;
 
 procedure Tf_main.TrackExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
+if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as Tf_chart) do begin
   if sc.cfgsc.TrackOn then begin
      if VerboseMsg then
       WriteTrace('TrackExecute 1');
@@ -2948,21 +2948,21 @@ if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_ch
      Refresh;
   end else begin
     sc.cfgsc.TrackOn:=false;
-    UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiDoc1.ActiveObject);
+    UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiFrame1.ActiveObject);
   end;
 end;
 end;
 
 procedure Tf_main.TrackTelescope1Click(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
+if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as Tf_chart) do begin
   TrackTelescopeClick(Sender);
 end;
 end;
 
 procedure Tf_main.PositionExecute(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    f_position.cfgsc:=sc.cfgsc;
    f_position.AzNorth:=sc.catalog.cfgshr.AzNorth;
    formpos(f_position,mouse.cursorpos.x,mouse.cursorpos.y);
@@ -3036,11 +3036,11 @@ var ok: Boolean;
 begin
 result:=msgFailed;
 chart:=nil; ok:=false;
-if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject
+if MultiFrame1.ActiveObject is Tf_chart then chart:=MultiFrame1.ActiveObject
  else
- for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
-      chart:=MultiDoc1.Childs[i].DockedObject;
+ for i:=0 to MultiFrame1.ChildCount-1 do
+   if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
+      chart:=MultiFrame1.Childs[i].DockedObject;
       break;
    end;
 itype:=ftInv;
@@ -3190,8 +3190,8 @@ end;
 
 procedure Tf_main.GetChartConfig(csc:Tconf_skychart);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
- with MultiDoc1.ActiveObject as Tf_chart do
+if MultiFrame1.ActiveObject is Tf_chart then
+ with MultiFrame1.ActiveObject as Tf_chart do
    csc.Assign(sc.cfgsc)
 else
    csc.Assign(def_cfgsc);
@@ -3199,8 +3199,8 @@ end;
 
 procedure Tf_main.DrawChart(csc:Tconf_skychart);
 begin
-if MultiDoc1.ActiveObject is Tf_chart then
- with MultiDoc1.ActiveObject as Tf_chart do begin
+if MultiFrame1.ActiveObject is Tf_chart then
+ with MultiFrame1.ActiveObject as Tf_chart do begin
    sc.cfgsc.Assign(csc);
 if VerboseMsg then
  WriteTrace('DrawChart');
@@ -3244,29 +3244,29 @@ end;
 procedure Tf_main.SetupTimePage(page:integer);
 begin
 if ConfigTime=nil then begin
-   ConfigTime:=Tf_config_time.Create(self);
-   ConfigTime.PageControl1.ShowTabs:=true;
-   ConfigTime.PageControl1.PageIndex:=0;
-   ConfigTime.onApplyConfig:=ApplyConfigTime;
-   ConfigTime.onGetTwilight:=GetTwilight;
+   ConfigTime:=Tf_configtime.Create(self);
+   ConfigTime.f_config_time1.PageControl1.ShowTabs:=true;
+   ConfigTime.f_config_time1.PageControl1.PageIndex:=0;
+   ConfigTime.f_config_time1.onApplyConfig:=ApplyConfigTime;
+   ConfigTime.f_config_time1.onGetTwilight:=GetTwilight;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigTime,nightvision);{$endif}
-ConfigTime.ccat.Assign(catalog.cfgcat);
-ConfigTime.cshr.Assign(catalog.cfgshr);
-ConfigTime.cplot.Assign(def_cfgplot);
-ConfigTime.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigTime.csc.Assign(sc.cfgsc);
-   ConfigTime.cplot.Assign(sc.plot.cfgplot);
+ConfigTime.f_config_time1.ccat.Assign(catalog.cfgcat);
+ConfigTime.f_config_time1.cshr.Assign(catalog.cfgshr);
+ConfigTime.f_config_time1.cplot.Assign(def_cfgplot);
+ConfigTime.f_config_time1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigTime.f_config_time1.csc.Assign(sc.cfgsc);
+   ConfigTime.f_config_time1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigTime.cmain.Assign(cfgm);
+ConfigTime.f_config_time1.cmain.Assign(cfgm);
 formpos(ConfigTime,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigTime.PageControl1.PageIndex:=page;
+ConfigTime.f_config_time1.PageControl1.PageIndex:=page;
 ConfigTime.showmodal;
 if ConfigTime.ModalResult=mrOK then begin
- activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
+ activateconfig(ConfigTime.f_config_time1.cmain,ConfigTime.f_config_time1.csc,ConfigTime.f_config_time1.ccat,ConfigTime.f_config_time1.cshr,ConfigTime.f_config_time1.cplot,nil,false);
 end;
 ConfigTime.Free;
 ConfigTime:=nil;
@@ -3274,7 +3274,7 @@ end;
 
 procedure Tf_main.ApplyConfigTime(Sender: TObject);
 begin
- activateconfig(ConfigTime.cmain,ConfigTime.csc,ConfigTime.ccat,ConfigTime.cshr,ConfigTime.cplot,nil,false);
+ activateconfig(ConfigTime.f_config_time1.cmain,ConfigTime.f_config_time1.csc,ConfigTime.f_config_time1.ccat,ConfigTime.f_config_time1.cshr,ConfigTime.f_config_time1.cplot,nil,false);
 end;
 
 procedure Tf_main.SetupPicturesExecute(Sender: TObject);
@@ -3305,7 +3305,7 @@ try
  f_config.cshr:=catalog.cfgshr;
  f_config.cplot:=def_cfgplot;
  f_config.csc:=def_cfgsc;
- if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      f_config.csc:=sc.cfgsc;
      f_config.cplot:=sc.plot.cfgplot;
  end;
@@ -3338,28 +3338,28 @@ end;
 procedure Tf_main.SetupChartPage(page:integer);
 begin
 if ConfigChart=nil then begin
-   ConfigChart:=Tf_config_chart.Create(self);
-   ConfigChart.PageControl1.ShowTabs:=true;
-   ConfigChart.PageControl1.PageIndex:=0;
-   ConfigChart.onApplyConfig:=ApplyConfigChart;
+   ConfigChart:=Tf_configchart.Create(self);
+   ConfigChart.f_config_chart1.PageControl1.ShowTabs:=true;
+   ConfigChart.f_config_chart1.PageControl1.PageIndex:=0;
+   ConfigChart.f_config_chart1.onApplyConfig:=ApplyConfigChart;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigChart,nightvision);{$endif}
-ConfigChart.ccat.Assign(catalog.cfgcat);
-ConfigChart.cshr.Assign(catalog.cfgshr);
-ConfigChart.cplot.Assign(def_cfgplot);
-ConfigChart.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigChart.csc.Assign(sc.cfgsc);
-   ConfigChart.cplot.Assign(sc.plot.cfgplot);
+ConfigChart.f_config_chart1.ccat.Assign(catalog.cfgcat);
+ConfigChart.f_config_chart1.cshr.Assign(catalog.cfgshr);
+ConfigChart.f_config_chart1.cplot.Assign(def_cfgplot);
+ConfigChart.f_config_chart1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigChart.f_config_chart1.csc.Assign(sc.cfgsc);
+   ConfigChart.f_config_chart1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigChart.cmain.Assign(cfgm);
+ConfigChart.f_config_chart1.cmain.Assign(cfgm);
 formpos(ConfigChart,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigChart.PageControl1.PageIndex:=page;
+ConfigChart.f_config_chart1.PageControl1.PageIndex:=page;
 ConfigChart.showmodal;
 if ConfigChart.ModalResult=mrOK then begin
- activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
+ activateconfig(ConfigChart.f_config_chart1.cmain,ConfigChart.f_config_chart1.csc,ConfigChart.f_config_chart1.ccat,ConfigChart.f_config_chart1.cshr,ConfigChart.f_config_chart1.cplot,nil,false);
 end;
 ConfigChart.Free;
 ConfigChart:=nil;
@@ -3367,7 +3367,7 @@ end;
 
 procedure Tf_main.ApplyConfigChart(Sender: TObject);
 begin
- activateconfig(ConfigChart.cmain,ConfigChart.csc,ConfigChart.ccat,ConfigChart.cshr,ConfigChart.cplot,nil,false);
+ activateconfig(ConfigChart.f_config_chart1.cmain,ConfigChart.f_config_chart1.csc,ConfigChart.f_config_chart1.ccat,ConfigChart.f_config_chart1.cshr,ConfigChart.f_config_chart1.cplot,nil,false);
 end;
 
 procedure Tf_main.ToolButtonShowPlanetsMouseUp(Sender: TObject;
@@ -3408,30 +3408,30 @@ end;
 procedure Tf_main.SetupSolsysPage(page:integer);
 begin
 if ConfigSolsys=nil then begin
-   ConfigSolsys:=Tf_config_solsys.Create(self);
-   ConfigSolsys.PageControl1.ShowTabs:=true;
-   ConfigSolsys.PageControl1.PageIndex:=0;
-   ConfigSolsys.onApplyConfig:=ApplyConfigSolsys;
-   ConfigSolsys.onPrepareAsteroid:=PrepareAsteroid;
+   ConfigSolsys:=Tf_configsolsys.Create(self);
+   ConfigSolsys.f_config_solsys1.PageControl1.ShowTabs:=true;
+   ConfigSolsys.f_config_solsys1.PageControl1.PageIndex:=0;
+   ConfigSolsys.f_config_solsys1.onApplyConfig:=ApplyConfigSolsys;
+   ConfigSolsys.f_config_solsys1.onPrepareAsteroid:=PrepareAsteroid;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigSolsys,nightvision);{$endif}
-ConfigSolsys.cdb:=cdcdb;
-ConfigSolsys.ccat.Assign(catalog.cfgcat);
-ConfigSolsys.cshr.Assign(catalog.cfgshr);
-ConfigSolsys.cplot.Assign(def_cfgplot);
-ConfigSolsys.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigSolsys.csc.Assign(sc.cfgsc);
-   ConfigSolsys.cplot.Assign(sc.plot.cfgplot);
+ConfigSolsys.f_config_solsys1.cdb:=cdcdb;
+ConfigSolsys.f_config_solsys1.ccat.Assign(catalog.cfgcat);
+ConfigSolsys.f_config_solsys1.cshr.Assign(catalog.cfgshr);
+ConfigSolsys.f_config_solsys1.cplot.Assign(def_cfgplot);
+ConfigSolsys.f_config_solsys1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigSolsys.f_config_solsys1.csc.Assign(sc.cfgsc);
+   ConfigSolsys.f_config_solsys1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigSolsys.cmain.Assign(cfgm);
+ConfigSolsys.f_config_solsys1.cmain.Assign(cfgm);
 formpos(ConfigSolsys,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigSolsys.PageControl1.PageIndex:=page;
+ConfigSolsys.f_config_solsys1.PageControl1.PageIndex:=page;
 ConfigSolsys.showmodal;
 if ConfigSolsys.ModalResult=mrOK then begin
- activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
+ activateconfig(ConfigSolsys.f_config_solsys1.cmain,ConfigSolsys.f_config_solsys1.csc,ConfigSolsys.f_config_solsys1.ccat,ConfigSolsys.f_config_solsys1.cshr,ConfigSolsys.f_config_solsys1.cplot,nil,false);
 end;
 ConfigSolsys.Free;
 ConfigSolsys:=nil;
@@ -3439,7 +3439,7 @@ end;
 
 procedure Tf_main.ApplyConfigSolsys(Sender: TObject);
 begin
- activateconfig(ConfigSolsys.cmain,ConfigSolsys.csc,ConfigSolsys.ccat,ConfigSolsys.cshr,ConfigSolsys.cplot,nil,false);
+ activateconfig(ConfigSolsys.f_config_solsys1.cmain,ConfigSolsys.f_config_solsys1.csc,ConfigSolsys.f_config_solsys1.ccat,ConfigSolsys.f_config_solsys1.cshr,ConfigSolsys.f_config_solsys1.cplot,nil,false);
 end;
 
 procedure Tf_main.TConnectMouseUp(Sender: TObject; Button: TMouseButton;
@@ -3479,32 +3479,32 @@ end;
 procedure Tf_main.SetupSystemPage(page:integer);
 begin
 if ConfigSystem=nil then begin
-   ConfigSystem:=Tf_config_system.Create(self);
-   ConfigSystem.PageControl1.ShowTabs:=true;
-   ConfigSystem.PageControl1.PageIndex:=0;
-   ConfigSystem.onApplyConfig:=ApplyConfigSystem;
-   ConfigSystem.onDBChange:=ConfigDBChange;
-   ConfigSystem.onSaveAndRestart:=SaveAndRestart;
+   ConfigSystem:=Tf_configsystem.Create(self);
+   ConfigSystem.f_config_system1.PageControl1.ShowTabs:=true;
+   ConfigSystem.f_config_system1.PageControl1.PageIndex:=0;
+   ConfigSystem.f_config_system1.onApplyConfig:=ApplyConfigSystem;
+   ConfigSystem.f_config_system1.onDBChange:=ConfigDBChange;
+   ConfigSystem.f_config_system1.onSaveAndRestart:=SaveAndRestart;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigSystem,nightvision);{$endif}
-ConfigSystem.cdb:=cdcdb;
-ConfigSystem.ccat.Assign(catalog.cfgcat);
-ConfigSystem.cshr.Assign(catalog.cfgshr);
-ConfigSystem.cplot.Assign(def_cfgplot);
-ConfigSystem.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigSystem.csc.Assign(sc.cfgsc);
-   ConfigSystem.cplot.Assign(sc.plot.cfgplot);
+ConfigSystem.f_config_system1.cdb:=cdcdb;
+ConfigSystem.f_config_system1.ccat.Assign(catalog.cfgcat);
+ConfigSystem.f_config_system1.cshr.Assign(catalog.cfgshr);
+ConfigSystem.f_config_system1.cplot.Assign(def_cfgplot);
+ConfigSystem.f_config_system1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigSystem.f_config_system1.csc.Assign(sc.cfgsc);
+   ConfigSystem.f_config_system1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigSystem.cmain.Assign(cfgm);
+ConfigSystem.f_config_system1.cmain.Assign(cfgm);
 formpos(ConfigSystem,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigSystem.PageControl1.PageIndex:=page;
+ConfigSystem.f_config_system1.PageControl1.PageIndex:=page;
 ConfigSystem.showmodal;
 if ConfigSystem.ModalResult=mrOK then begin
- ConfigSystem.ActivateDBchange;
- activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
+ ConfigSystem.f_config_system1.ActivateDBchange;
+ activateconfig(ConfigSystem.f_config_system1.cmain,ConfigSystem.f_config_system1.csc,ConfigSystem.f_config_system1.ccat,ConfigSystem.f_config_system1.cshr,ConfigSystem.f_config_system1.cplot,nil,false);
 end;
 ConfigSystem.Free;
 ConfigSystem:=nil;
@@ -3514,35 +3514,35 @@ procedure Tf_main.ResetLanguageClick(Sender: TObject);
 begin
 // Reset language to default using the same procedure as SetupSystemPage
 if ConfigSystem=nil then begin
-   ConfigSystem:=Tf_config_system.Create(self);
-   ConfigSystem.PageControl1.ShowTabs:=true;
-   ConfigSystem.PageControl1.PageIndex:=0;
-   ConfigSystem.onApplyConfig:=ApplyConfigSystem;
-   ConfigSystem.onDBChange:=ConfigDBChange;
-   ConfigSystem.onSaveAndRestart:=SaveAndRestart;
+   ConfigSystem:=Tf_configsystem.Create(self);
+   ConfigSystem.f_config_system1.PageControl1.ShowTabs:=true;
+   ConfigSystem.f_config_system1.PageControl1.PageIndex:=0;
+   ConfigSystem.f_config_system1.onApplyConfig:=ApplyConfigSystem;
+   ConfigSystem.f_config_system1.onDBChange:=ConfigDBChange;
+   ConfigSystem.f_config_system1.onSaveAndRestart:=SaveAndRestart;
 end;
-ConfigSystem.cdb:=cdcdb;
-ConfigSystem.ccat.Assign(catalog.cfgcat);
-ConfigSystem.cshr.Assign(catalog.cfgshr);
-ConfigSystem.cplot.Assign(def_cfgplot);
-ConfigSystem.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigSystem.csc.Assign(sc.cfgsc);
-   ConfigSystem.cplot.Assign(sc.plot.cfgplot);
+ConfigSystem.f_config_system1.cdb:=cdcdb;
+ConfigSystem.f_config_system1.ccat.Assign(catalog.cfgcat);
+ConfigSystem.f_config_system1.cshr.Assign(catalog.cfgshr);
+ConfigSystem.f_config_system1.cplot.Assign(def_cfgplot);
+ConfigSystem.f_config_system1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigSystem.f_config_system1.csc.Assign(sc.cfgsc);
+   ConfigSystem.f_config_system1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigSystem.cmain.Assign(cfgm);
-ConfigSystem.cmain.language:='';
-ConfigSystem.ActivateDBchange;
-activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
+ConfigSystem.f_config_system1.cmain.Assign(cfgm);
+ConfigSystem.f_config_system1.cmain.language:='';
+ConfigSystem.f_config_system1.ActivateDBchange;
+activateconfig(ConfigSystem.f_config_system1.cmain,ConfigSystem.f_config_system1.csc,ConfigSystem.f_config_system1.ccat,ConfigSystem.f_config_system1.cshr,ConfigSystem.f_config_system1.cplot,nil,false);
 ConfigSystem.Free;
 ConfigSystem:=nil;
 end;
 
 procedure Tf_main.ApplyConfigSystem(Sender: TObject);
 begin
- activateconfig(ConfigSystem.cmain,ConfigSystem.csc,ConfigSystem.ccat,ConfigSystem.cshr,ConfigSystem.cplot,nil,false);
+ activateconfig(ConfigSystem.f_config_system1.cmain,ConfigSystem.f_config_system1.csc,ConfigSystem.f_config_system1.ccat,ConfigSystem.f_config_system1.cshr,ConfigSystem.f_config_system1.cplot,nil,false);
 end;
 
 procedure Tf_main.SetupInternetExecute(Sender: TObject);
@@ -3553,21 +3553,21 @@ end;
 procedure Tf_main.SetupInternetPage(page:integer);
 begin
 if ConfigInternet=nil then begin
-   ConfigInternet:=Tf_config_internet.Create(self);
-   ConfigInternet.PageControl1.ShowTabs:=true;
-   ConfigInternet.PageControl1.PageIndex:=0;
-   ConfigInternet.onApplyConfig:=ApplyConfigInternet;
+   ConfigInternet:=Tf_configinternet.Create(self);
+   ConfigInternet.f_config_internet1.PageControl1.ShowTabs:=true;
+   ConfigInternet.f_config_internet1.PageControl1.PageIndex:=0;
+   ConfigInternet.f_config_internet1.onApplyConfig:=ApplyConfigInternet;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigInternet,nightvision);{$endif}
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigInternet.cmain.Assign(cfgm);
-ConfigInternet.cdss.Assign(f_getdss.cfgdss);
+ConfigInternet.f_config_internet1.cmain.Assign(cfgm);
+ConfigInternet.f_config_internet1.cdss.Assign(f_getdss.cfgdss);
 formpos(ConfigInternet,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigInternet.PageControl1.PageIndex:=page;
+ConfigInternet.f_config_internet1.PageControl1.PageIndex:=page;
 ConfigInternet.showmodal;
 if ConfigInternet.ModalResult=mrOK then begin
- activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
+ activateconfig(ConfigInternet.f_config_internet1.cmain,nil,nil,nil,nil,ConfigInternet.f_config_internet1.cdss,false);
 end;
 ConfigInternet.Free;
 ConfigInternet:=nil;
@@ -3575,47 +3575,47 @@ end;
 
 procedure Tf_main.ApplyConfigInternet(Sender: TObject);
 begin
- activateconfig(ConfigInternet.cmain,nil,nil,nil,nil,ConfigInternet.cdss,false);
+ activateconfig(ConfigInternet.f_config_internet1.cmain,nil,nil,nil,nil,ConfigInternet.f_config_internet1.cdss,false);
 end;
 
 procedure Tf_main.SetupPicturesPage(page:integer; action:integer=0);
 begin
 if ConfigPictures=nil then begin
-   ConfigPictures:=Tf_config_pictures.Create(self);
-   ConfigPictures.PageControl1.ShowTabs:=true;
-   ConfigPictures.PageControl1.PageIndex:=0;
-   ConfigPictures.onApplyConfig:=ApplyConfigPictures;
+   ConfigPictures:=Tf_configpictures.Create(self);
+   ConfigPictures.f_config_pictures1.PageControl1.ShowTabs:=true;
+   ConfigPictures.f_config_pictures1.PageControl1.PageIndex:=0;
+   ConfigPictures.f_config_pictures1.onApplyConfig:=ApplyConfigPictures;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigPictures,nightvision);{$endif}
-ConfigPictures.cdb:=cdcdb;
-ConfigPictures.cdss.Assign(f_getdss.cfgdss);
-ConfigPictures.Fits:=Fits;
-ConfigPictures.ccat.Assign(catalog.cfgcat);
-ConfigPictures.cshr.Assign(catalog.cfgshr);
-ConfigPictures.cplot.Assign(def_cfgplot);
-ConfigPictures.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigPictures.csc.Assign(sc.cfgsc);
-   ConfigPictures.cplot.Assign(sc.plot.cfgplot);
+ConfigPictures.f_config_pictures1.cdb:=cdcdb;
+ConfigPictures.f_config_pictures1.cdss.Assign(f_getdss.cfgdss);
+ConfigPictures.f_config_pictures1.Fits:=Fits;
+ConfigPictures.f_config_pictures1.ccat.Assign(catalog.cfgcat);
+ConfigPictures.f_config_pictures1.cshr.Assign(catalog.cfgshr);
+ConfigPictures.f_config_pictures1.cplot.Assign(def_cfgplot);
+ConfigPictures.f_config_pictures1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigPictures.f_config_pictures1.csc.Assign(sc.cfgsc);
+   ConfigPictures.f_config_pictures1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigPictures.cmain.Assign(cfgm);
+ConfigPictures.f_config_pictures1.cmain.Assign(cfgm);
 formpos(ConfigPictures,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigPictures.PageControl1.PageIndex:=page;
+ConfigPictures.f_config_pictures1.PageControl1.PageIndex:=page;
 //ConfigPictures.show;
-ConfigPictures.backimgChange(self);
+ConfigPictures.f_config_pictures1.backimgChange(self);
 //ConfigPictures.hide;
 case action of
 0 : ConfigPictures.showmodal;
 1 : begin
     ConfigPictures.show;
-    ConfigPictures.ScanImagesClick(nil);
+    ConfigPictures.f_config_pictures1.ScanImagesClick(nil);
     ConfigPictures.Close;
     end;
 end;
 if ConfigPictures.ModalResult=mrOK then begin
- activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
+ activateconfig(ConfigPictures.f_config_pictures1.cmain,ConfigPictures.f_config_pictures1.csc,ConfigPictures.f_config_pictures1.ccat,ConfigPictures.f_config_pictures1.cshr,ConfigPictures.f_config_pictures1.cplot,ConfigPictures.f_config_pictures1.cdss,false);
 end;
 ConfigPictures.Free;
 ConfigPictures:=nil;
@@ -3623,7 +3623,7 @@ end;
 
 procedure Tf_main.ApplyConfigPictures(Sender: TObject);
 begin
- activateconfig(ConfigPictures.cmain,ConfigPictures.csc,ConfigPictures.ccat,ConfigPictures.cshr,ConfigPictures.cplot,ConfigPictures.cdss,false);
+ activateconfig(ConfigPictures.f_config_pictures1.cmain,ConfigPictures.f_config_pictures1.csc,ConfigPictures.f_config_pictures1.ccat,ConfigPictures.f_config_pictures1.cshr,ConfigPictures.f_config_pictures1.cplot,ConfigPictures.f_config_pictures1.cdss,false);
 end;
 
 
@@ -3635,24 +3635,24 @@ end;
 procedure Tf_main.SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
 begin
 if ConfigObservatory=nil then begin
-   ConfigObservatory:=Tf_config_observatory.Create(self);
-   ConfigObservatory.PageControl1.ShowTabs:=true;
-   ConfigObservatory.PageControl1.PageIndex:=0;
-   ConfigObservatory.onApplyConfig:=ApplyConfigObservatory;
+   ConfigObservatory:=Tf_configobservatory.Create(self);
+   ConfigObservatory.f_config_observatory1.PageControl1.ShowTabs:=true;
+   ConfigObservatory.f_config_observatory1.PageControl1.PageIndex:=0;
+   ConfigObservatory.f_config_observatory1.onApplyConfig:=ApplyConfigObservatory;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigObservatory,nightvision);{$endif}
-ConfigObservatory.cdb:=cdcdb;
-ConfigObservatory.ccat.Assign(catalog.cfgcat);
-ConfigObservatory.cshr.Assign(catalog.cfgshr);
-ConfigObservatory.cplot.Assign(def_cfgplot);
-ConfigObservatory.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigObservatory.csc.Assign(sc.cfgsc);
-   ConfigObservatory.cplot.Assign(sc.plot.cfgplot);
+ConfigObservatory.f_config_observatory1.cdb:=cdcdb;
+ConfigObservatory.f_config_observatory1.ccat.Assign(catalog.cfgcat);
+ConfigObservatory.f_config_observatory1.cshr.Assign(catalog.cfgshr);
+ConfigObservatory.f_config_observatory1.cplot.Assign(def_cfgplot);
+ConfigObservatory.f_config_observatory1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigObservatory.f_config_observatory1.csc.Assign(sc.cfgsc);
+   ConfigObservatory.f_config_observatory1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigObservatory.cmain.Assign(cfgm);
+ConfigObservatory.f_config_observatory1.cmain.Assign(cfgm);
 if (posx=0)and(posy=0) then
    formpos(ConfigObservatory,mouse.cursorpos.x,mouse.cursorpos.y)
 else
@@ -3663,10 +3663,10 @@ else begin
    posy:=Screen.Height div 2 - ConfigObservatory.Height div 2;
    formpos(ConfigObservatory,posx,posy)
 end;
-ConfigObservatory.PageControl1.PageIndex:=page;
+ConfigObservatory.f_config_observatory1.PageControl1.PageIndex:=page;
 ConfigObservatory.showmodal;
 if ConfigObservatory.ModalResult=mrOK then begin
- activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
+ activateconfig(ConfigObservatory.f_config_observatory1.cmain,ConfigObservatory.f_config_observatory1.csc,ConfigObservatory.f_config_observatory1.ccat,ConfigObservatory.f_config_observatory1.cshr,ConfigObservatory.f_config_observatory1.cplot,nil,false);
 end;
 ConfigObservatory.Free;
 ConfigObservatory:=nil;
@@ -3674,7 +3674,7 @@ end;
 
 procedure Tf_main.ApplyConfigObservatory(Sender: TObject);
 begin
- activateconfig(ConfigObservatory.cmain,ConfigObservatory.csc,ConfigObservatory.ccat,ConfigObservatory.cshr,ConfigObservatory.cplot,nil,false);
+ activateconfig(ConfigObservatory.f_config_observatory1.cmain,ConfigObservatory.f_config_observatory1.csc,ConfigObservatory.f_config_observatory1.ccat,ConfigObservatory.f_config_observatory1.cshr,ConfigObservatory.f_config_observatory1.cplot,nil,false);
 end;
 
 procedure Tf_main.SetupCatalogExecute(Sender: TObject);
@@ -3685,35 +3685,35 @@ end;
 procedure Tf_main.SetupCatalogPage(page:integer);
 begin
 if ConfigCatalog=nil then begin
-   ConfigCatalog:=Tf_config_catalog.Create(self);
-   ConfigCatalog.catalog:=catalog;
-   ConfigCatalog.PageControl1.ShowTabs:=true;
-   ConfigCatalog.PageControl1.PageIndex:=0;
-   ConfigCatalog.onApplyConfig:=ApplyConfigCatalog;
+   ConfigCatalog:=Tf_configcatalog.Create(self);
+   ConfigCatalog.f_config_catalog1.catalog:=catalog;
+   ConfigCatalog.f_config_catalog1.PageControl1.ShowTabs:=true;
+   ConfigCatalog.f_config_catalog1.PageControl1.PageIndex:=0;
+   ConfigCatalog.f_config_catalog1.onApplyConfig:=ApplyConfigCatalog;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
-ConfigCatalog.ccat.Assign(catalog.cfgcat);
-ConfigCatalog.cshr.Assign(catalog.cfgshr);
-ConfigCatalog.cplot.Assign(def_cfgplot);
-ConfigCatalog.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigCatalog.csc.Assign(sc.cfgsc);
-   ConfigCatalog.cplot.Assign(sc.plot.cfgplot);
-   ConfigCatalog.ra:=sc.cfgsc.racentre;
-   ConfigCatalog.dec:=sc.cfgsc.decentre;
-   ConfigCatalog.fov:=sc.cfgsc.fov*0.75;
-   Precession(sc.cfgsc.JDChart,jd2000,ConfigCatalog.ra,ConfigCatalog.dec);
+ConfigCatalog.f_config_catalog1.ccat.Assign(catalog.cfgcat);
+ConfigCatalog.f_config_catalog1.cshr.Assign(catalog.cfgshr);
+ConfigCatalog.f_config_catalog1.cplot.Assign(def_cfgplot);
+ConfigCatalog.f_config_catalog1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigCatalog.f_config_catalog1.csc.Assign(sc.cfgsc);
+   ConfigCatalog.f_config_catalog1.cplot.Assign(sc.plot.cfgplot);
+   ConfigCatalog.f_config_catalog1.ra:=sc.cfgsc.racentre;
+   ConfigCatalog.f_config_catalog1.dec:=sc.cfgsc.decentre;
+   ConfigCatalog.f_config_catalog1.fov:=sc.cfgsc.fov*0.75;
+   Precession(sc.cfgsc.JDChart,jd2000,ConfigCatalog.f_config_catalog1.ra,ConfigCatalog.f_config_catalog1.dec);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigCatalog.cmain.Assign(cfgm);
+ConfigCatalog.f_config_catalog1.cmain.Assign(cfgm);
 formpos(ConfigCatalog,mouse.cursorpos.x,mouse.cursorpos.y);
-ConfigCatalog.PageControl1.PageIndex:=page;
+ConfigCatalog.f_config_catalog1.PageControl1.PageIndex:=page;
 ConfigCatalog.showmodal;
 if ConfigCatalog.ModalResult=mrOK then begin
- ConfigCatalog.ActivateGCat;
- ConfigCatalog.ActivateUserObjects;
- activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
+ ConfigCatalog.f_config_catalog1.ActivateGCat;
+ ConfigCatalog.f_config_catalog1.ActivateUserObjects;
+ activateconfig(ConfigCatalog.f_config_catalog1.cmain,ConfigCatalog.f_config_catalog1.csc,ConfigCatalog.f_config_catalog1.ccat,ConfigCatalog.f_config_catalog1.cshr,ConfigCatalog.f_config_catalog1.cplot,nil,false);
 end;
 ConfigCatalog.Free;
 ConfigCatalog:=nil;
@@ -3721,9 +3721,9 @@ end;
 
 procedure Tf_main.ApplyConfigCatalog(Sender: TObject);
 begin
- ConfigCatalog.ActivateGCat;
- ConfigCatalog.ActivateUserObjects;
- activateconfig(ConfigCatalog.cmain,ConfigCatalog.csc,ConfigCatalog.ccat,ConfigCatalog.cshr,ConfigCatalog.cplot,nil,false);
+ ConfigCatalog.f_config_catalog1.ActivateGCat;
+ ConfigCatalog.f_config_catalog1.ActivateUserObjects;
+ activateconfig(ConfigCatalog.f_config_catalog1.cmain,ConfigCatalog.f_config_catalog1.csc,ConfigCatalog.f_config_catalog1.ccat,ConfigCatalog.f_config_catalog1.cshr,ConfigCatalog.f_config_catalog1.cplot,nil,false);
 end;
 
 procedure Tf_main.ToolButtonShowLabelsMouseUp(Sender: TObject;
@@ -3746,7 +3746,7 @@ end;
 
 procedure Tf_main.ToolButtonUObjClick(Sender: TObject);
 begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.catalog.cfgcat.nebcatdef[uneb-BaseNeb]:=ToolButtonUObj.Down;
      Refresh;
   end;
@@ -3760,7 +3760,7 @@ end;
 
 procedure Tf_main.ToolButtonVOClick(Sender: TObject);
 begin
-  if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+  if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
      sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=ToolButtonVO.Down;
      sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=ToolButtonVO.Down;
      Refresh;
@@ -3811,45 +3811,45 @@ end;
 procedure Tf_main.SetupDisplayPage(pagegroup:integer);
 begin
 if ConfigDisplay=nil then begin
-   ConfigDisplay:=Tf_config_display.Create(self);
-   ConfigDisplay.PageControl1.ShowTabs:=true;
-   ConfigDisplay.PageControl1.PageIndex:=0;
-   ConfigDisplay.onApplyConfig:=ApplyConfigDisplay;
+   ConfigDisplay:=Tf_configdisplay.Create(self);
+   ConfigDisplay.f_config_display1.PageControl1.ShowTabs:=true;
+   ConfigDisplay.f_config_display1.PageControl1.PageIndex:=0;
+   ConfigDisplay.f_config_display1.onApplyConfig:=ApplyConfigDisplay;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigDisplay,nightvision);{$endif}
-ConfigDisplay.ccat.Assign(catalog.cfgcat);
-ConfigDisplay.cshr.Assign(catalog.cfgshr);
-ConfigDisplay.cplot.Assign(def_cfgplot);
-ConfigDisplay.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigDisplay.csc.Assign(sc.cfgsc);
-   ConfigDisplay.cplot.Assign(sc.plot.cfgplot);
+ConfigDisplay.f_config_display1.ccat.Assign(catalog.cfgcat);
+ConfigDisplay.f_config_display1.cshr.Assign(catalog.cfgshr);
+ConfigDisplay.f_config_display1.cplot.Assign(def_cfgplot);
+ConfigDisplay.f_config_display1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigDisplay.f_config_display1.csc.Assign(sc.cfgsc);
+   ConfigDisplay.f_config_display1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigDisplay.cmain.Assign(cfgm);
+ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
 formpos(ConfigDisplay,mouse.cursorpos.x,mouse.cursorpos.y);
 {$ifdef mswindows}
 // TODO: Problem with initialization
 ConfigDisplay.show;
 ConfigDisplay.hide;
-ConfigDisplay.ccat.Assign(catalog.cfgcat);
-ConfigDisplay.cshr.Assign(catalog.cfgshr);
-ConfigDisplay.cplot.Assign(def_cfgplot);
-ConfigDisplay.csc.Assign(def_cfgsc);
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
-   ConfigDisplay.csc.Assign(sc.cfgsc);
-   ConfigDisplay.cplot.Assign(sc.plot.cfgplot);
+ConfigDisplay.f_config_display1.ccat.Assign(catalog.cfgcat);
+ConfigDisplay.f_config_display1.cshr.Assign(catalog.cfgshr);
+ConfigDisplay.f_config_display1.cplot.Assign(def_cfgplot);
+ConfigDisplay.f_config_display1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigDisplay.f_config_display1.csc.Assign(sc.cfgsc);
+   ConfigDisplay.f_config_display1.cplot.Assign(sc.plot.cfgplot);
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
-ConfigDisplay.cmain.Assign(cfgm);
+ConfigDisplay.f_config_display1.cmain.Assign(cfgm);
 ///////////////////////////////
 {$endif}
-ConfigDisplay.PageControl1.PageIndex:=pagegroup;
+ConfigDisplay.f_config_display1.PageControl1.PageIndex:=pagegroup;
 ConfigDisplay.showmodal;
 if ConfigDisplay.ModalResult=mrOK then begin
- activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
+ activateconfig(ConfigDisplay.f_config_display1.cmain,ConfigDisplay.f_config_display1.csc,ConfigDisplay.f_config_display1.ccat,ConfigDisplay.f_config_display1.cshr,ConfigDisplay.f_config_display1.cplot,nil,false);
 end;
 ConfigDisplay.Free;
 ConfigDisplay:=nil;
@@ -3857,7 +3857,7 @@ end;
 
 procedure Tf_main.ApplyConfigDisplay(Sender: TObject);
 begin
- activateconfig(ConfigDisplay.cmain,ConfigDisplay.csc,ConfigDisplay.ccat,ConfigDisplay.cshr,ConfigDisplay.cplot,nil,false);
+ activateconfig(ConfigDisplay.f_config_display1.cmain,ConfigDisplay.f_config_display1.csc,ConfigDisplay.f_config_display1.ccat,ConfigDisplay.f_config_display1.cshr,ConfigDisplay.f_config_display1.cplot,nil,false);
 end;
 
 function Tf_main.PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
@@ -3868,11 +3868,11 @@ end;
 procedure Tf_main.ConfigDBChange(Sender: TObject);
 begin
 if ConfigSystem<>nil then begin
-  cfgm.dbhost:=ConfigSystem.cmain.dbhost;
-  cfgm.db:=ConfigSystem.cmain.db;
-  cfgm.dbuser:=ConfigSystem.cmain.dbuser;
-  cfgm.dbpass:=ConfigSystem.cmain.dbpass;
-  cfgm.dbport:=ConfigSystem.cmain.dbport;
+  cfgm.dbhost:=ConfigSystem.f_config_system1.cmain.dbhost;
+  cfgm.db:=ConfigSystem.f_config_system1.cmain.db;
+  cfgm.dbuser:=ConfigSystem.f_config_system1.cmain.dbuser;
+  cfgm.dbpass:=ConfigSystem.f_config_system1.cmain.dbpass;
+  cfgm.dbport:=ConfigSystem.f_config_system1.cmain.dbport;
   ConnectDB;
 end;
 end;
@@ -3880,12 +3880,12 @@ end;
 procedure Tf_main.SaveAndRestart(Sender: TObject);
 begin
 if ConfigSystem<>nil then begin
-  cfgm.Assign(ConfigSystem.cmain);
+  cfgm.Assign(ConfigSystem.f_config_system1.cmain);
   if directoryexists(cfgm.prgdir) then appdir:=cfgm.prgdir;
   privatedir:=cfgm.persdir;
-  def_cfgsc.Assign(ConfigSystem.csc);
-  catalog.cfgcat.Assign(ConfigSystem.ccat);
-  catalog.cfgshr.Assign(ConfigSystem.cshr);
+  def_cfgsc.Assign(ConfigSystem.f_config_system1.csc);
+  catalog.cfgcat.Assign(ConfigSystem.f_config_system1.ccat);
+  catalog.cfgshr.Assign(ConfigSystem.f_config_system1.cshr);
   SavePrivateConfig(configfile);
   NeedRestart:=true;
   Close;
@@ -3967,7 +3967,7 @@ begin
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
     f_search.init;
     if dbchange then ConnectDB;
-    if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveObject as Tf_chart do begin
+    if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
        if csc<>nil then sc.cfgsc.Assign(def_cfgsc);
        sc.Fits:=Fits;
        sc.planet:=planet;
@@ -4054,11 +4054,11 @@ if VerboseMsg then
  WriteTrace('ViewScrollBar1Click');
 if cfgm.KioskMode then ViewScrollBar1.Checked:=false
                   else ViewScrollBar1.Checked:=(not ViewScrollBar1.Checked)and CanShowScrollbar;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then begin
-    (MultiDoc1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
-    (MultiDoc1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
-    (MultiDoc1.Childs[i].DockedObject as Tf_chart).Refresh;
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then begin
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).VertScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).HorScrollBar.Visible:=ViewScrollBar1.Checked;
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).Refresh;
   end;
 end;
 
@@ -4164,7 +4164,7 @@ end;
 P1L1.Caption:=txt+crlf+txt2;
 if sendmsg then SendInfo(Sender,origin,txt1);
 // refresh tracking object
-if MultiDoc1.ActiveObject is Tf_chart then with (MultiDoc1.ActiveObject as Tf_chart) do begin
+if MultiFrame1.ActiveObject is Tf_chart then with (MultiFrame1.ActiveObject as Tf_chart) do begin
     if sc.cfgsc.TrackOn then begin
        ToolButtonTrack.Hint:=rsUnlockChart;
        MenuTrack.Caption:=rsUnlockChart;
@@ -4189,7 +4189,7 @@ end;
 Procedure Tf_main.SetTopMessage(txt:string;sender:TObject);
 begin
 // set the message that appear in the menu bar
-if MultiDoc1.ActiveObject=sender then begin
+if MultiFrame1.ActiveObject=sender then begin
   topmsg:=txt;
   if cfgm.ShowChartInfo then topmessage.caption:=topmsg
      else topmessage.caption:=' ';
@@ -4199,9 +4199,9 @@ end;
 Procedure Tf_main.SetTitleMessage(txt:string;sender:TObject);
 begin
 // set the message that appear in the title bar
-if MultiDoc1.ActiveObject=sender then begin
-  if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption+blank+blank+txt
-     else caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption;
+if MultiFrame1.ActiveObject=sender then begin
+  if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+txt
+     else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
 end;
 end;
 
@@ -5635,14 +5635,14 @@ begin
 try
 SavePrivateConfig(configfile);
 SaveQuickSearch(configfile);
-if (MultiDoc1.ActiveObject is Tf_chart) then begin
-   SaveChartConfig(configfile,MultiDoc1.ActiveChild);
+if (MultiFrame1.ActiveObject is Tf_chart) then begin
+   SaveChartConfig(configfile,MultiFrame1.ActiveChild);
 end;
 j:=0;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if (MultiDoc1.Childs[i].DockedObject is Tf_chart) and (MultiDoc1.Childs[i].DockedObject<>MultiDoc1.ActiveObject) then begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if (MultiFrame1.Childs[i].DockedObject is Tf_chart) and (MultiFrame1.Childs[i].DockedObject<>MultiFrame1.ActiveObject) then begin
      inc(j);
-     SaveChartConfig(configfile+inttostr(j),MultiDoc1.Childs[i]);
+     SaveChartConfig(configfile+inttostr(j),MultiFrame1.Childs[i]);
   end;
 except
 end;
@@ -6121,7 +6121,7 @@ WriteBool(section,'ViewRightBar',PanelRight.visible);
 WriteBool(section,'ViewObjectBar',toolbar4.visible);
 WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
 WriteBool(section,'ViewStatusBar',ViewStatusBar1.Checked);
-WriteInteger(section,'NumChart',MultiDoc1.ChildCount);
+WriteInteger(section,'NumChart',MultiFrame1.ChildCount);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
@@ -6231,9 +6231,9 @@ f_info.SetLang;
 f_calendar.SetLang;
 f_printsetup.SetLang;
 f_print.SetLang;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     Tf_chart(MultiDoc1.Childs[i].DockedObject).SetLang;
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     Tf_chart(MultiFrame1.Childs[i].DockedObject).SetLang;
 if f_config<>nil then f_config.SetLang;
 if f_about<>nil then f_about.SetLang;
 if ConfigSystem<>nil then ConfigSystem.SetLang;
@@ -6545,11 +6545,11 @@ if trim(num)='' then exit;
 chart:=nil;
 stype:='';
 if cname='' then begin
-  if MultiDoc1.ActiveObject is Tf_chart then chart:=MultiDoc1.ActiveObject;
+  if MultiFrame1.ActiveObject is Tf_chart then chart:=MultiFrame1.ActiveObject;
 end else begin
- for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-      if MultiDoc1.Childs[i].caption=cname then chart:=MultiDoc1.Childs[i].DockedObject;
+ for i:=0 to MultiFrame1.ChildCount-1 do
+   if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+      if MultiFrame1.Childs[i].caption=cname then chart:=MultiFrame1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    lastok:=sc.cfgsc.FindOK;
@@ -6697,7 +6697,7 @@ procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
 var cname:string;
     i: integer;
 begin
-if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
+if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
   if fx>0 then begin FlipButtonX.ImageIndex:=15 ; Flipx1.checked:=false; end
           else begin FlipButtonX.ImageIndex:=16 ; Flipx1.checked:=true;  end;
   if fy>0 then begin FlipButtonY.ImageIndex:=17 ; Flipy1.checked:=false; end
@@ -6717,14 +6717,14 @@ if (sender<>nil)and(MultiDoc1.ActiveObject=sender) then begin
           end;
   ViewClock.Checked:=(f_clock<>nil)and(f_clock.Visible);
   PrintPreview1.Visible:=(cfgm.PrintMethod=0);
-  cname:=MultiDoc1.ActiveChild.Caption;
+  cname:=MultiFrame1.ActiveChild.Caption;
   for i:=0 to TabControl1.Tabs.Count-1 do begin
       if TabControl1.Tabs[i]=cname then begin
          TabControl1.TabIndex:=i;
          break;
       end;
   end;
-  with MultiDoc1.ActiveObject as Tf_chart do begin
+  with MultiFrame1.ActiveObject as Tf_chart do begin
     if sc.cfgsc.ManualTelescope then begin
        ControlPanel1.Visible:=false;
        telescopeSlew1.Visible:=false;
@@ -6862,7 +6862,7 @@ end;
 
 procedure Tf_main.ChartMove(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject=sender then begin   // active chart refresh
+if MultiFrame1.ActiveObject=sender then begin   // active chart refresh
 //  application.processmessages;
   if cfgm.SyncChart then SyncChild;
 end;
@@ -6870,7 +6870,7 @@ end;
 
 Function Tf_main.NewChart(cname:string):string;
 begin
-if cname='' then cname:=rsChart_ + IntToStr(MultiDoc1.ChildCount + 1);
+if cname='' then cname:=rsChart_ + IntToStr(MultiFrame1.ChildCount + 1);
 cname:=GetUniqueName(cname,false);
 if CreateChild(cname,true,def_cfgsc,def_cfgplot) then result:=msgOK+blank+cname
   else result:=msgFailed;
@@ -6880,9 +6880,9 @@ Function Tf_main.CloseChart(cname:string):string;
 var i: integer;
 begin
 result:=msgNotFound;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i] do
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     with MultiFrame1.Childs[i] do
         if caption=cname then begin
            Close;
            result:=msgOK;
@@ -6893,9 +6893,9 @@ Function Tf_main.ListChart:string;
 var i: integer;
 begin
 result:='';
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     result:=result+';'+MultiDoc1.Childs[i].caption;
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     result:=result+';'+MultiFrame1.Childs[i].caption;
 
 if result>'' then result:=msgOK+blank+result+';'
              else result:=msgFailed+blank+'No Chart!';
@@ -6905,9 +6905,9 @@ Function Tf_main.SelectChart(cname:string):string;
 var i: integer;
 begin
 result:=msgNotFound;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-     with MultiDoc1.Childs[i] do
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+     with MultiFrame1.Childs[i] do
         if InitOK and (caption=cname) then begin
          setfocus;
          result:=msgOK;
@@ -6973,16 +6973,16 @@ case n of
 else begin
  result:='Bad chart name '+cname;
  if cname='' then begin
-    if MultiDoc1.ActiveObject is Tf_chart then begin
-      chart:=MultiDoc1.ActiveObject;
-      child:=MultiDoc1.ActiveChild;
+    if MultiFrame1.ActiveObject is Tf_chart then begin
+      chart:=MultiFrame1.ActiveObject;
+      child:=MultiFrame1.ActiveChild;
     end;
  end else begin
-    for i:=0 to MultiDoc1.ChildCount-1 do
-      if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-         if MultiDoc1.Childs[i].caption=cname then begin
-           chart:=MultiDoc1.Childs[i].DockedObject;
-           child:=MultiDoc1.Childs[i];
+    for i:=0 to MultiFrame1.ChildCount-1 do
+      if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+         if MultiFrame1.Childs[i].caption=cname then begin
+           chart:=MultiFrame1.Childs[i].DockedObject;
+           child:=MultiFrame1.Childs[i];
          end;
  end;
  if chart is Tf_chart then with chart as Tf_chart do begin
@@ -6990,7 +6990,7 @@ else begin
          w:=StrToIntDef(arg[1],child.Width);
          h:=StrToIntDef(arg[2],child.Height);
          if (w>10)and(h>10) then begin
-           Multidoc1.Maximized:=false;
+           MultiFrame1.Maximized:=false;
            if InitOK then begin // only if form is show
              if VertScrollBar.Visible then w:=w+VertScrollBar.Width;
              if HorScrollBar.Visible then h:=h+HorScrollBar.Height;
@@ -7186,7 +7186,7 @@ var i,p: integer;
     pp: TStringList;
     chartchanged: boolean;
 begin
-if MultiDoc1.ChildCount=0 then exit;
+if MultiFrame1.ChildCount=0 then exit;
 chartchanged:=false;
 pp:=TStringList.Create;
 try
@@ -7459,9 +7459,9 @@ end;
 procedure Tf_main.showdetailinfo(chart:string;ra,dec:double;cat,nm,desc:string);
 var i : integer;
 begin
-for i:=0 to MultiDoc1.ChildCount-1 do
- if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-   if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+ if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+   if MultiFrame1.Childs[i].caption=chart then with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
       sc.cfgsc.FindCatname:=trim(cat);
       sc.cfgsc.FindCat:=trim(cat);
       sc.cfgsc.FindRa:=ra;
@@ -7476,7 +7476,7 @@ for i:=0 to MultiDoc1.ChildCount-1 do
       sc.cfgsc.TrackType:=0;
       ShowIdentLabel;
       identlabelClick(nil);
-      UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiDoc1.Childs[i].DockedObject);
+      UpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,MultiFrame1.Childs[i].DockedObject);
       break;
 end;
 end;
@@ -7484,9 +7484,9 @@ end;
 procedure Tf_main.CenterFindObj(chart:string);
 var i : integer;
 begin
-for i:=0 to MultiDoc1.ChildCount-1 do
- if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-   if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+ if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+   if MultiFrame1.Childs[i].caption=chart then with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
      sc.cfgsc.racentre:=sc.cfgsc.FindRa;
      sc.cfgsc.decentre:=sc.cfgsc.FindDec;
      sc.cfgsc.TrackOn:=false;
@@ -7502,9 +7502,9 @@ var i :integer;
     x,y:single;
     x1,y1: double;
 begin
-for i:=0 to MultiDoc1.ChildCount-1 do
- if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-   if MultiDoc1.Childs[i].caption=chart then with MultiDoc1.Childs[i].DockedObject as Tf_chart do begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+ if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+   if MultiFrame1.Childs[i].caption=chart then with MultiFrame1.Childs[i].DockedObject as Tf_chart do begin
      projection(sc.cfgsc.FindRa,sc.cfgsc.FindDec,x1,y1,true,sc.cfgsc) ;
      WindowXY(x1,y1,x,y,sc.cfgsc);
      ListXY(round(x),round(y));
@@ -7514,8 +7514,8 @@ end;
 
 procedure Tf_main.GetActiveChart(var active_chart: string);
 begin
-  if MultiDoc1.ActiveObject is Tf_chart then
-    active_chart:=MultiDoc1.ActiveChild.caption
+  if MultiFrame1.ActiveObject is Tf_chart then
+    active_chart:=MultiFrame1.ActiveChild.caption
   else
     active_chart:=newchart('');
 end;
@@ -7657,22 +7657,22 @@ begin
    CursorImage1.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'retic.cur'));
  //  inc(crRetic);
    Screen.Cursors[crRetic]:=CursorImage1.Handle;
-   for i:=0 to MultiDoc1.ChildCount-1 do
-        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-           Tf_chart(MultiDoc1.Childs[i].DockedObject).ChartCursor:=crRetic;
+   for i:=0 to MultiFrame1.ChildCount-1 do
+        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiFrame1.Childs[i].DockedObject).ChartCursor:=crRetic;
  end;  *)
 
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp') then begin
     compass.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'compass.bmp'));
-    for i:=0 to MultiDoc1.ChildCount-1 do
-        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-           Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
+    for i:=0 to MultiFrame1.ChildCount-1 do
+        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiFrame1.Childs[i].DockedObject).sc.plot.compassrose:=compass;
  end;
  if fileexists(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp') then begin
     arrow.LoadFromFile(SysToUTF8(slash(appdir)+slash('data')+slash('Themes')+slash(cfgm.ThemeName)+'arrow.bmp'));
-    for i:=0 to MultiDoc1.ChildCount-1 do
-        if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-           Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
+    for i:=0 to MultiFrame1.ChildCount-1 do
+        if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+           Tf_chart(MultiFrame1.Childs[i].DockedObject).sc.plot.compassarrow:=arrow;
  end;
  SetStarShape;
 end;
@@ -7690,9 +7690,9 @@ begin
         defaultfile:=slash(appdir)+slash('data')+slash('Themes')+slash('default')+'starshape.bmp';
      starshape.Picture.LoadFromFile(systoutf8(defaultfile));
   end;
-  for i:=0 to MultiDoc1.ChildCount-1 do
-    if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-       Tf_chart(MultiDoc1.Childs[i].DockedObject).sc.plot.Starshape:=starshape.Picture.Bitmap;
+  for i:=0 to MultiFrame1.ChildCount-1 do
+    if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+       Tf_chart(MultiFrame1.Childs[i].DockedObject).sc.plot.Starshape:=starshape.Picture.Bitmap;
 end;
 
 procedure Tf_main.SetButtonImage(button: Integer);
@@ -7781,51 +7781,51 @@ end;
 }
 
 
-procedure Tf_main.MultiDoc1ActiveChildChange(Sender: TObject);
+procedure Tf_main.MultiFrame1ActiveChildChange(Sender: TObject);
 begin
-if MultiDoc1.ActiveObject<>nil then begin
-   if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption+blank+blank+Tf_chart(MultiDoc1.ActiveObject).sc.GetChartPos
-      else caption:=basecaption+' - '+MultiDoc1.ActiveChild.Caption;
-   Tf_chart(MultiDoc1.ActiveObject).ChartActivate;
+if MultiFrame1.ActiveObject<>nil then begin
+   if cfgm.ShowTitlePos then caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption+blank+blank+Tf_chart(MultiFrame1.ActiveObject).sc.GetChartPos
+      else caption:=basecaption+' - '+MultiFrame1.ActiveChild.Caption;
+   Tf_chart(MultiFrame1.ActiveObject).ChartActivate;
 end
 else
    caption:=basecaption;
 end;
 
-procedure Tf_main.MultiDoc1Maximize(Sender: TObject);
+procedure Tf_main.MultiFrame1Maximize(Sender: TObject);
 
 begin
-ChildControl.visible:=MultiDoc1.Maximized;
-if TabControl1.Visible<>(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1) then begin
-  TabControl1.Visible:=(MultiDoc1.Maximized)and(MultiDoc1.ChildCount>1);
+ChildControl.visible:=MultiFrame1.Maximized;
+if TabControl1.Visible<>(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>1) then begin
+  TabControl1.Visible:=(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>1);
   ViewTopPanel;
 end;
 end;
 
 procedure Tf_main.BtnRestoreChildClick(Sender: TObject);
 begin
-   MultiDoc1.Maximized:=not MultiDoc1.Maximized;
+   MultiFrame1.Maximized:=not MultiFrame1.Maximized;
 end;
 
 procedure Tf_main.BtnCloseChildClick(Sender: TObject);
 begin
-if (MultiDoc1.ActiveObject is Tf_chart)and(MultiDoc1.ChildCount>1) then
-   MultiDoc1.ActiveChild.close;
+if (MultiFrame1.ActiveObject is Tf_chart)and(MultiFrame1.ChildCount>1) then
+   MultiFrame1.ActiveChild.close;
 end;
 
 procedure Tf_main.WindowCascade1Execute(Sender: TObject);
 begin
-MultiDoc1.Cascade;
+MultiFrame1.Cascade;
 end;
 
 procedure Tf_main.WindowTileHorizontal1Execute(Sender: TObject);
 begin
-MultiDoc1.TileHorizontal;
+MultiFrame1.TileHorizontal;
 end;
 
 procedure Tf_main.WindowTileVertical1Execute(Sender: TObject);
 begin
-MultiDoc1.TileVertical;
+MultiFrame1.TileVertical;
 end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -7835,7 +7835,7 @@ if (Activecontrol=quicksearch) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit
 else
-   (MultiDoc1.ActiveObject as Tf_chart).KeyDown(Sender,Key,Shift);
+   (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
 end;
 
 procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
@@ -7853,24 +7853,24 @@ if (Activecontrol=quicksearch) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit
 else
-   (MultiDoc1.ActiveObject as Tf_chart).KeyPress(Sender,Key);
+   (MultiFrame1.ActiveObject as Tf_chart).CKeyPress(Key);
 end;
 
 procedure Tf_main.SetChildFocus(Sender: TObject);
 var i:integer;
 begin
-for i:=0 to MultiDoc1.ChildCount-1 do
-   if MultiDoc1.Childs[i].DockedObject=Sender then begin
+for i:=0 to MultiFrame1.ChildCount-1 do
+   if MultiFrame1.Childs[i].DockedObject=Sender then begin
      if VerboseMsg then
-      WriteTrace('SetChildFocus '+tf_chart(MultiDoc1.Childs[i].DockedObject).Caption);
-      MultiDoc1.setActiveChild(i);
+      WriteTrace('SetChildFocus '+tf_chart(MultiFrame1.Childs[i].DockedObject).Caption);
+      MultiFrame1.setActiveChild(i);
    end;
 end;
 
 
 procedure Tf_main.MaximizeExecute(Sender: TObject);
 begin
-MultiDoc1.Maximized:=true;
+MultiFrame1.Maximized:=true;
 end;
 
 procedure Tf_main.ToolButtonNightVisionClick(Sender: TObject);
@@ -7880,9 +7880,9 @@ nightvision:= not nightvision;
 SetNightVision(nightvision);
 ToolButtonNightVision.Down:=nightvision;
 NightVision1.Checked:=nightvision;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i].DockedObject is Tf_chart then
-    (MultiDoc1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i].DockedObject is Tf_chart then
+    (MultiFrame1.Childs[i].DockedObject as Tf_chart).NightVision:=nightvision;
 end;
 
 {$ifdef mswindows}
@@ -8009,20 +8009,20 @@ var i: integer;
 begin
 if night then begin
    SetButtonImage(cfgm.ButtonNight);
-   MultiDoc1.InactiveBorderColor:=nv_black;
-   MultiDoc1.TitleColor:=nv_middle;
-   MultiDoc1.BorderColor:=nv_dark;
+   MultiFrame1.InactiveBorderColor:=nv_black;
+   MultiFrame1.TitleColor:=nv_middle;
+   MultiFrame1.BorderColor:=nv_dark;
  end else begin
    SetButtonImage(cfgm.ButtonStandard);
-   MultiDoc1.InactiveBorderColor:=$404040;
-   MultiDoc1.TitleColor:=clBlack;
-   MultiDoc1.BorderColor:=$808080;
+   MultiFrame1.InactiveBorderColor:=$404040;
+   MultiFrame1.TitleColor:=clBlack;
+   MultiFrame1.BorderColor:=$808080;
 end;
-for i:=0 to MultiDoc1.ChildCount-1 do
-  if MultiDoc1.Childs[i]=MultiDoc1.ActiveChild then
-     MultiDoc1.Childs[i].SetBorderColor(MultiDoc1.BorderColor)
+for i:=0 to MultiFrame1.ChildCount-1 do
+  if MultiFrame1.Childs[i]=MultiFrame1.ActiveChild then
+     MultiFrame1.Childs[i].SetBorderColor(MultiFrame1.BorderColor)
   else
-     MultiDoc1.Childs[i].SetBorderColor(MultiDoc1.InactiveBorderColor);
+     MultiFrame1.Childs[i].SetBorderColor(MultiFrame1.InactiveBorderColor);
 end;
 
 procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
@@ -8084,7 +8084,7 @@ end;
 procedure Tf_main.DdeSkyChartOpen(Sender: TObject);
 begin
 Dde_active_chart:='Chart_1';
-if MultiDoc1.ActiveObject is Tf_chart then with MultiDoc1.ActiveChild do Dde_active_chart:=caption;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveChild do Dde_active_chart:=caption;
 DDeOpen:=true;
 end;
 
@@ -8111,7 +8111,7 @@ GetTranslationString(f_info,f);
 GetTranslationString(f_calendar,f);
 GetTranslationString(f_printsetup,f);
 GetTranslationString(f_print,f);
-GetTranslationString(Tf_chart(MultiDoc1.ActiveObject),f);
+GetTranslationString(Tf_chart(MultiFrame1.ActiveObject),f);
 GetTranslationString(Tf_about.Create(self),f);
 GetTranslationString(Tf_addlabel.Create(self),f);
 GetTranslationString(Tf_catgen.Create(self),f);
