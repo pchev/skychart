@@ -22,6 +22,7 @@
     <RequiredPkgs Count="15">
       <Item1>
         <PackageName Value="MultiFramePackage"/>
+        <DefaultFilename Value="multiframe/multiframepackage.lpk"/>
       </Item1>
       <Item2>
         <PackageName Value="bgrabitmappack"/>
