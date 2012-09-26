@@ -1,27 +1,28 @@
 object f_config_catalog: Tf_config_catalog
   Left = 0
-  Height = 573
+  Height = 529
   Top = 0
   Width = 523
-  ClientHeight = 573
+  ClientHeight = 529
   ClientWidth = 523
   TabOrder = 0
-  DesignLeft = 31
-  DesignTop = 141
+  DesignLeft = 255
+  DesignTop = 140
   object MainPanel: TPanel
-    Left = 12
-    Height = 520
-    Top = 8
-    Width = 500
-    ClientHeight = 520
-    ClientWidth = 500
+    Left = 0
+    Height = 529
+    Top = 0
+    Width = 523
+    Align = alClient
+    ClientHeight = 529
+    ClientWidth = 523
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 464
+      Height = 473
       Top = 1
-      Width = 498
+      Width = 521
       ActivePage = Page1a
       Align = alClient
       ShowTabs = False
@@ -29,8 +30,8 @@ object f_config_catalog: Tf_config_catalog
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label2: TLabel
           Left = 8
           Height = 18
@@ -346,8 +347,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page3: TTabSheet
         Caption = 'CdC Nebulae'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label3: TLabel
           Left = 9
           Height = 16
@@ -893,8 +894,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1: TTabSheet
         Caption = 'Catalog'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label37: TLabel
           Left = 15
           Height = 18
@@ -1007,13 +1008,13 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1a: TTabSheet
         Caption = 'VO Catalog'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label1: TLabel
           Left = 7
-          Height = 17
+          Height = 16
           Top = 19
-          Width = 174
+          Width = 155
           Caption = 'Virtual Observatory Catalog'
           ParentColor = False
         end
@@ -1083,7 +1084,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object maxrows: TLongEdit
           Left = 415
-          Height = 22
+          Height = 23
           Hint = '100..50000'
           Top = 15
           Width = 64
@@ -1097,9 +1098,9 @@ object f_config_catalog: Tf_config_catalog
         end
         object Label4: TLabel
           Left = 289
-          Height = 17
+          Height = 16
           Top = 19
-          Width = 57
+          Width = 54
           Caption = 'Max rows'
           ParentColor = False
         end
@@ -1115,8 +1116,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page1b: TTabSheet
         Caption = 'User defined objects'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label6: TLabel
           Left = 7
           Height = 16
@@ -1217,8 +1218,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page5: TTabSheet
         Caption = 'Other software'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object dsgsc3: TDirectoryEdit
           Tag = 13
           Left = 326
@@ -1399,8 +1400,8 @@ object f_config_catalog: Tf_config_catalog
       end
       object Page4: TTabSheet
         Caption = 'Obsolete'
-        ClientHeight = 464
-        ClientWidth = 498
+        ClientHeight = 469
+        ClientWidth = 517
         object Label88: TLabel
           Left = 9
           Height = 16
@@ -2034,11 +2035,11 @@ object f_config_catalog: Tf_config_catalog
     object FOVPanel: TPanel
       Left = 1
       Height = 54
-      Top = 465
-      Width = 498
+      Top = 474
+      Width = 521
       Align = alBottom
       ClientHeight = 54
-      ClientWidth = 498
+      ClientWidth = 521
       TabOrder = 0
       object fw0: TLabel
         Left = 91

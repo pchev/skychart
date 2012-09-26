@@ -1,26 +1,26 @@
 object f_config_pictures: Tf_config_pictures
   Left = 0
-  Height = 535
+  Height = 478
   Top = 0
   Width = 513
-  ClientHeight = 535
+  ClientHeight = 478
   ClientWidth = 513
   TabOrder = 0
-  DesignLeft = 232
-  DesignTop = 131
+  DesignLeft = 257
+  DesignTop = 120
   object MainPanel: TPanel
     Left = 0
-    Height = 535
+    Height = 478
     Top = 0
     Width = 513
     Align = alClient
-    ClientHeight = 535
+    ClientHeight = 478
     ClientWidth = 513
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 533
+      Height = 476
       Top = 1
       Width = 511
       ActivePage = Page2
@@ -31,8 +31,8 @@ object f_config_pictures: Tf_config_pictures
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
-        ClientHeight = 533
-        ClientWidth = 511
+        ClientHeight = 472
+        ClientWidth = 507
         object ProgressPanel: TPanel
           Left = 15
           Height = 94
@@ -188,27 +188,27 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page2: TTabSheet
         Caption = 'Background'
-        ClientHeight = 533
-        ClientWidth = 511
+        ClientHeight = 472
+        ClientWidth = 507
         object Label270: TLabel
           Left = 0
-          Height = 17
+          Height = 16
           Top = 0
-          Width = 120
+          Width = 113
           Caption = 'Background Picture'
           ParentColor = False
         end
         object Label271: TLabel
           Left = 8
-          Height = 17
+          Height = 16
           Top = 22
-          Width = 50
+          Width = 45
           Caption = 'FITS File'
           ParentColor = False
         end
         object backimginfo: TLabel
           Left = 15
-          Height = 17
+          Height = 16
           Top = 122
           Width = 7
           Caption = '  '
@@ -223,9 +223,9 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowBackImg: TCheckBox
           Left = 95
-          Height = 26
+          Height = 23
           Top = 39
-          Width = 133
+          Width = 124
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
           TabOrder = 1
@@ -254,17 +254,17 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label1: TLabel
             Left = 54
-            Height = 17
+            Height = 16
             Top = 6
-            Width = 66
+            Width = 62
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 203
-            Height = 17
+            Height = 16
             Top = 6
-            Width = 55
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
           end
@@ -298,16 +298,16 @@ object f_config_pictures: Tf_config_pictures
           end
           object Label4: TLabel
             Left = 336
-            Height = 17
+            Height = 16
             Top = 4
-            Width = 81
+            Width = 76
             Caption = 'Transparency'
             ParentColor = False
           end
         end
         object backimg: TFileNameEdit
           Left = 95
-          Height = 22
+          Height = 23
           Top = 15
           Width = 360
           OnAcceptFileName = backimgAcceptFileName
@@ -333,15 +333,15 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 533
-        ClientWidth = 511
+        ClientHeight = 472
+        ClientWidth = 507
         object GroupBox3: TGroupBox
           Left = 1
           Height = 355
           Top = 101
           Width = 481
           Caption = 'RealSky®'
-          ClientHeight = 337
+          ClientHeight = 338
           ClientWidth = 477
           TabOrder = 0
           object Label72: TLabel
@@ -486,7 +486,7 @@ object f_config_pictures: Tf_config_pictures
           Top = 8
           Width = 481
           Caption = 'Online DSS'
-          ClientHeight = 67
+          ClientHeight = 68
           ClientWidth = 477
           TabOrder = 1
           object OnlineDSS: TCheckBox

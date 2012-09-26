@@ -1,7 +1,7 @@
 object f_configchart: Tf_configchart
-  Left = 920
+  Left = 351
   Height = 567
-  Top = 104
+  Top = 217
   Width = 510
   BorderStyle = bsToolWindow
   Caption = 'Charts'
@@ -79,23 +79,24 @@ object f_configchart: Tf_configchart
       ClientHeight = 517
       inherited PageControl1: TPageControl
         Height = 461
+        ActivePage = nil
+        TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
         end
         inherited Page2: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
         end
         inherited Page3: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
         end
         inherited Page4: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
           inherited Label29: TLabel
             Height = 16
             Width = 118
           end
           inherited GroupBox2: TGroupBox
-            ClientHeight = 166
             inherited StarBox: TCheckBox
               Height = 23
               Width = 90
@@ -187,7 +188,6 @@ object f_configchart: Tf_configchart
             end
           end
           inherited GroupBox1: TGroupBox
-            ClientHeight = 230
             inherited NebBox: TCheckBox
               Height = 23
               Width = 102
@@ -314,10 +314,10 @@ object f_configchart: Tf_configchart
           end
         end
         inherited Page5: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
         end
         inherited Page6: TTabSheet
-          ClientHeight = 461
+          ClientHeight = 457
         end
       end
       inherited FOVPanel: TPanel
