@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 526
+  ClientHeight = 529
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -21,12 +21,12 @@ object f_main: Tf_main
   LCLVersion = '1.0.1.3'
   object PanelLeft: TPanel
     Left = 0
-    Height = 414
+    Height = 417
     Top = 78
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 414
+    ClientHeight = 417
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -34,7 +34,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 414
+      Height = 417
       Top = 0
       Width = 28
       Align = alClient
@@ -136,18 +136,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 414
+    Height = 417
     Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 414
+    ClientHeight = 417
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 164
+      Height = 167
       Top = 250
       Width = 28
       Align = alClient
@@ -376,7 +376,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 492
+    Top = 495
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -816,7 +816,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 657
-        Height = 25
+        Height = 28
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -873,7 +873,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 595
-        Height = 23
+        Height = 22
         Top = 2
         Width = 35
         TabOrder = 5
@@ -1128,7 +1128,7 @@ object f_main: Tf_main
       Visible = False
     end
   end
-  object MultiDoc1: TMultiFrame
+  object MultiFrame1: TMultiFrame
     Left = 392
     Height = 237
     Top = 176
@@ -1138,10 +1138,10 @@ object f_main: Tf_main
     TitleHeight = 12
     KeepLastChild = False
     WireframeMoveResize = False
-    onMaximize = MultiDoc1Maximize
-    onActiveChildChange = MultiDoc1ActiveChildChange
-    OnCreateChild = MultiDoc1CreateChild
-    OnDeleteChild = MultiDoc1DeleteChild
+    onMaximize = MultiFrame1Maximize
+    onActiveChildChange = MultiFrame1ActiveChildChange
+    OnCreateChild = MultiFrame1CreateChild
+    OnDeleteChild = MultiFrame1DeleteChild
     BevelOuter = bvNone
     ClientHeight = 237
     ClientWidth = 331

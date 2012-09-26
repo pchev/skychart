@@ -32,21 +32,30 @@ uses u_help, u_translation, u_constant, u_util,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, StdCtrls, Buttons, ExtCtrls, enhedits,
   cu_fits, cu_catalog, cu_database,
-  pu_config_chart, pu_config_observatory, pu_config_time, pu_config_catalog,
-  pu_config_system, pu_config_pictures, pu_config_display, pu_config_solsys,
-  pu_config_internet,
-  LResources, MultiDoc, ChildDoc, PairSplitter, LazHelpHTML;
+  fu_config_chart, fu_config_observatory, fu_config_time, fu_config_catalog,
+  fu_config_system, fu_config_pictures, fu_config_display, fu_config_solsys,
+  fu_config_internet,
+  LResources, PairSplitter, LazHelpHTML;
 
 type
 
   { Tf_config }
 
   Tf_config = class(TForm)
-    MultiDoc1: TMultiDoc;
+    PageControl1: TPageControl;
     Panel1: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Splitter1: TSplitter;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
+    TabSheet6: TTabSheet;
+    TabSheet7: TTabSheet;
+    TabSheet8: TTabSheet;
+    TabSheet9: TTabSheet;
     TreeView1: TTreeView;
     previous: TButton;
     next: TButton;
@@ -56,6 +65,15 @@ type
     Apply: TButton;
     CancelBtn: TButton;
     HelpBtn: TButton;
+    f_config_observatory1: Tf_config_observatory;
+    f_config_chart1: Tf_config_chart;
+    f_config_catalog1: Tf_config_catalog;
+    f_config_solsys1: Tf_config_solsys;
+    f_config_display1: Tf_config_display;
+    f_config_pictures1: Tf_config_pictures;
+    f_config_system1: Tf_config_system;
+    f_config_time1: Tf_config_time;
+    f_config_internet1: Tf_config_internet;
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormDestroy(Sender: TObject);
     procedure HelpBtnClick(Sender: TObject);
@@ -82,15 +100,6 @@ type
     FSaveAndRestart: TNotifyEvent;
     FPrepareAsteroid: TPrepareAsteroid;
     FGetTwilight: TGetTwilight;
-    f_config_observatory1: Tf_config_observatory;
-    f_config_chart1: Tf_config_chart;
-    f_config_catalog1: Tf_config_catalog;
-    f_config_solsys1: Tf_config_solsys;
-    f_config_display1: Tf_config_display;
-    f_config_pictures1: Tf_config_pictures;
-    f_config_system1: Tf_config_system;
-    f_config_time1: Tf_config_time;
-    f_config_internet1: Tf_config_internet;
     function GetFits: TFits;
     procedure SetFits(value: TFits);
     function GetCatalog: Tcatalog;
@@ -209,7 +218,6 @@ SetHelp(self,hlpMenuSetup);
 end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
-var Child: TChildDoc;
 begin
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
@@ -222,43 +230,6 @@ compage:=25;
 astpage:=26;
 dbpage:=42;
 Fnightvision:=false;
-
-Child:=MultiDoc1.NewChild;
-f_config_time1:=Tf_config_time.Create(Child);
-Child.DockedPanel:=f_config_time1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_observatory1:=Tf_config_observatory.Create(Child);
-Child.DockedPanel:=f_config_observatory1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_chart1:=Tf_config_chart.Create(Child);
-Child.DockedPanel:=f_config_chart1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_catalog1:=Tf_config_catalog.Create(Child);
-Child.DockedPanel:=f_config_catalog1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_solsys1:=Tf_config_solsys.Create(Child);
-Child.DockedPanel:=f_config_solsys1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_display1:=Tf_config_display.Create(Child);
-Child.DockedPanel:=f_config_display1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_pictures1:=Tf_config_pictures.Create(Child);
-Child.DockedPanel:=f_config_pictures1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_system1:=Tf_config_system.Create(Child);
-Child.DockedPanel:=f_config_system1.MainPanel;
-
-Child:=MultiDoc1.NewChild;
-f_config_internet1:=Tf_config_internet.Create(Child);
-Child.DockedPanel:=f_config_internet1.MainPanel;
-
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;
 f_config_system1.onShowAsteroid:=ShowAsteroidSetting;
@@ -275,29 +246,19 @@ begin
 locktree:=false;
 {$ifdef mswindows}
 if Fnightvision<>nightvision then begin
-   for i:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[i].Color:=nv_dark;
    SetFormNightVision(self,nightvision);
-   SetFormNightVision(f_config_time1,nightvision);
-   SetFormNightVision(f_config_observatory1,nightvision);
-   SetFormNightVision(f_config_chart1,nightvision);
-   SetFormNightVision(f_config_catalog1,nightvision);
-   SetFormNightVision(f_config_solsys1,nightvision);
-   SetFormNightVision(f_config_display1,nightvision);
-   SetFormNightVision(f_config_pictures1,nightvision);
-   SetFormNightVision(f_config_system1,nightvision);
-   SetFormNightVision(f_config_internet1,nightvision);
    Fnightvision:=nightvision;
 end;
 {$endif}
-f_config_time1.FormShow(Sender);
-f_config_observatory1.FormShow(Sender);
-f_config_chart1.FormShow(Sender);
-f_config_catalog1.FormShow(Sender);
-f_config_solsys1.FormShow(Sender);
-f_config_display1.FormShow(Sender);
-f_config_pictures1.FormShow(Sender);
-f_config_system1.FormShow(Sender);
-f_config_internet1.FormShow(Sender);
+f_config_time1.Init;
+f_config_observatory1.Init;
+f_config_chart1.Init;
+f_config_catalog1.Init;
+f_config_solsys1.Init;
+f_config_display1.Init;
+f_config_pictures1.Init;
+f_config_system1.Init;
+f_config_internet1.Init;
 TreeView1.FullCollapse;
 Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
@@ -331,30 +292,27 @@ end;
 end;
 
 procedure Tf_config.ShowPage(i,j:Integer);
-var k: integer;
 begin
    // before the page change:
-   if MultiDoc1.ActiveObject=f_config_catalog1 then begin
+   if PageControl1.PageIndex=3 then begin // config catalog
      if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
      if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
    end;
-   if MultiDoc1.ActiveObject=f_config_system1 then begin
+   if PageControl1.PageIndex=7 then begin // config system
      if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
    end;
    // page change
-   for k:=0 to MultiDoc1.ChildCount-1 do MultiDoc1.Childs[k].Visible:=false;
-   MultiDoc1.Childs[i].Visible:=true;
-   MultiDoc1.SetActiveChild(i);
+   PageControl1.PageIndex:=i;
    case i of
-     0 : begin f_config_time1.PageControl1.PageIndex:=j;        f_config_time1.FormShow(self);  end;
-     1 : begin f_config_observatory1.PageControl1.PageIndex:=j; f_config_observatory1.FormShow(self);  end;
-     2 : begin f_config_chart1.PageControl1.PageIndex:=j;       f_config_chart1.FormShow(self);  end;
-     3 : begin f_config_catalog1.PageControl1.PageIndex:=j;     f_config_catalog1.FormShow(self);  end;
-     4 : begin f_config_solsys1.PageControl1.PageIndex:=j;      f_config_solsys1.FormShow(self);  end;
-     5 : begin f_config_display1.PageControl1.PageIndex:=j;     f_config_display1.FormShow(self); end;
-     6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.FormShow(self);  end;
-     7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.FormShow(self);  end;
-     8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.FormShow(self);  end;
+     0 : begin f_config_time1.PageControl1.PageIndex:=j;        f_config_time1.Init;  end;
+     1 : begin f_config_observatory1.PageControl1.PageIndex:=j; f_config_observatory1.Init;  end;
+     2 : begin f_config_chart1.PageControl1.PageIndex:=j;       f_config_chart1.Init;  end;
+     3 : begin f_config_catalog1.PageControl1.PageIndex:=j;     f_config_catalog1.Init;  end;
+     4 : begin f_config_solsys1.PageControl1.PageIndex:=j;      f_config_solsys1.Init;  end;
+     5 : begin f_config_display1.PageControl1.PageIndex:=j;     f_config_display1.Init; end;
+     6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.Init;  end;
+     7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.Init;  end;
+     8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.Init;  end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -364,11 +322,11 @@ procedure Tf_config.ActivateChanges;
 begin
   if Treeview1.selected<>nil then
      cmain.configpage:=Treeview1.selected.absoluteindex;
-  if MultiDoc1.ActiveObject=f_config_catalog1 then begin
+  if PageControl1.PageIndex=3 then begin // config catalog
     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1 then f_config_catalog1.ActivateGCat;
     if f_config_catalog1.PageControl1.ActivePage=f_config_catalog1.Page1b then f_config_catalog1.ActivateUserObjects;
   end;
-  if MultiDoc1.ActiveObject=f_config_system1 then begin
+  if PageControl1.PageIndex=7 then begin // config system
     if f_config_system1.PageControl1.ActivePage=f_config_system1.Page1 then f_config_system1.ActivateDBchange;
   end;
   Fcdss:=f_config_internet1.cdss;
@@ -391,7 +349,17 @@ end;
 
 procedure Tf_config.HelpBtnClick(Sender: TObject);
 begin
-  MultiDoc1.ActiveObject.ShowHelp;
+case PageControl1.PageIndex of
+  0 :  f_config_time1.ShowHelp;
+  1 :  f_config_observatory1.ShowHelp;
+  2 :  f_config_chart1.ShowHelp;
+  3 :  f_config_catalog1.ShowHelp;
+  4 :  f_config_solsys1.ShowHelp;
+  5 :  f_config_display1.ShowHelp;
+  6 :  f_config_pictures1.ShowHelp;
+  7 :  f_config_system1.ShowHelp;
+  8 :  f_config_internet1.ShowHelp;
+end;
 end;
 
 procedure Tf_config.nextClick(Sender: TObject);

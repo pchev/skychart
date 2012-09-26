@@ -1,0 +1,382 @@
+object f_config_internet: Tf_config_internet
+  Left = 0
+  Height = 484
+  Top = 0
+  Width = 482
+  ClientHeight = 484
+  ClientWidth = 482
+  TabOrder = 0
+  DesignLeft = 253
+  DesignTop = 250
+  object MainPanel: TPanel
+    Left = 0
+    Height = 484
+    Top = 0
+    Width = 482
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 484
+    ClientWidth = 482
+    ParentColor = False
+    TabOrder = 0
+    object PageControl1: TPageControl
+      Left = 0
+      Height = 484
+      Top = 0
+      Width = 482
+      ActivePage = Page1
+      Align = alClient
+      Anchors = [akLeft, akRight, akBottom]
+      ShowTabs = False
+      TabIndex = 0
+      TabOrder = 0
+      object Page1: TTabSheet
+        Caption = 'Proxy'
+        ClientHeight = 484
+        ClientWidth = 482
+        object GroupBox1: TGroupBox
+          Left = 20
+          Height = 201
+          Top = 12
+          Width = 401
+          Caption = 'HTTP Proxy'
+          ClientHeight = 169
+          ClientWidth = 397
+          TabOrder = 0
+          object httpproxy: TCheckBox
+            Left = 30
+            Height = 26
+            Top = 11
+            Width = 123
+            Caption = 'Use HTTP Proxy'
+            OnClick = httpproxyClick
+            TabOrder = 0
+          end
+          object Panel2: TPanel
+            Left = 16
+            Height = 137
+            Top = 40
+            Width = 378
+            ClientHeight = 137
+            ClientWidth = 378
+            TabOrder = 1
+            object proxypass: TEdit
+              Left = 123
+              Height = 22
+              Top = 98
+              Width = 90
+              OnChange = proxypassChange
+              TabOrder = 0
+            end
+            object proxyuser: TEdit
+              Left = 123
+              Height = 22
+              Top = 57
+              Width = 90
+              OnChange = proxyuserChange
+              TabOrder = 1
+            end
+            object proxyport: TEdit
+              Left = 307
+              Height = 22
+              Top = 13
+              Width = 40
+              OnChange = proxyportChange
+              TabOrder = 2
+            end
+            object proxyhost: TEdit
+              Left = 123
+              Height = 22
+              Top = 13
+              Width = 90
+              OnChange = proxyhostChange
+              TabOrder = 3
+            end
+            object Label5: TLabel
+              Left = 22
+              Height = 17
+              Top = 105
+              Width = 58
+              Caption = 'Password'
+              ParentColor = False
+            end
+            object Label4: TLabel
+              Left = 22
+              Height = 17
+              Top = 61
+              Width = 67
+              Caption = 'User Name'
+              ParentColor = False
+            end
+            object Label3: TLabel
+              Left = 227
+              Height = 17
+              Top = 17
+              Width = 66
+              Caption = 'Proxy port'
+              ParentColor = False
+            end
+            object Label2: TLabel
+              Left = 22
+              Height = 17
+              Top = 17
+              Width = 67
+              Caption = 'Proxy host'
+              ParentColor = False
+            end
+            object SocksType: TComboBox
+              Left = 247
+              Height = 24
+              Top = 52
+              Width = 100
+              ItemHeight = 0
+              ItemIndex = 0
+              Items.Strings = (
+                'Socks5'
+                'Socks4'
+              )
+              OnChange = SocksTypeChange
+              Style = csDropDownList
+              TabOrder = 4
+              Text = 'Socks5'
+            end
+          end
+          object SocksProxy: TCheckBox
+            Left = 202
+            Height = 26
+            Top = 11
+            Width = 101
+            Caption = 'Socks proxy'
+            OnClick = SocksProxyClick
+            TabOrder = 2
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 20
+          Height = 120
+          Top = 222
+          Width = 401
+          Caption = 'FTP '
+          ClientHeight = 88
+          ClientWidth = 397
+          TabOrder = 1
+          object Label1: TLabel
+            Left = 39
+            Height = 17
+            Top = 60
+            Width = 131
+            Caption = 'Anonymous password'
+            ParentColor = False
+          end
+          object ftppassive: TCheckBox
+            Left = 39
+            Height = 26
+            Top = 18
+            Width = 136
+            Caption = 'FTP Passive Mode'
+            OnClick = ftppassiveClick
+            TabOrder = 0
+          end
+          object anonpass: TEdit
+            Left = 210
+            Height = 22
+            Top = 52
+            Width = 144
+            OnChange = anonpassChange
+            TabOrder = 1
+          end
+        end
+        object CheckBox1: TCheckBox
+          Left = 20
+          Height = 26
+          Top = 350
+          Width = 323
+          Caption = 'Ask confirmation before any Internet connection'
+          OnClick = CheckBox1Click
+          TabOrder = 2
+        end
+      end
+      object Page2: TTabSheet
+        Caption = 'Orbital Elements'
+        ClientHeight = 484
+        ClientWidth = 482
+        object Label6: TLabel
+          Left = 28
+          Height = 17
+          Top = 6
+          Width = 300
+          Caption = 'Comet elements in MPC format (one URL by line) '
+          ParentColor = False
+        end
+        object Label7: TLabel
+          Left = 28
+          Height = 17
+          Top = 182
+          Width = 308
+          Caption = 'Asteroid elements in MPC format (one URL by line)'
+          ParentColor = False
+        end
+        object CometUrlList: TMemo
+          Left = 16
+          Height = 108
+          Top = 30
+          Width = 438
+          Anchors = [akTop, akLeft, akRight]
+          OnExit = CometUrlListExit
+          ScrollBars = ssAutoBoth
+          TabOrder = 0
+          WordWrap = False
+        end
+        object AsteroidUrlList: TMemo
+          Left = 14
+          Height = 112
+          Top = 206
+          Width = 438
+          Anchors = [akTop, akLeft, akRight]
+          OnExit = AsteroidUrlListExit
+          ScrollBars = ssAutoBoth
+          TabOrder = 4
+          WordWrap = False
+        end
+        object comdefault: TButton
+          Left = 371
+          Height = 25
+          Top = 142
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Default'
+          OnClick = comdefaultClick
+          TabOrder = 3
+        end
+        object astdefault: TButton
+          Left = 371
+          Height = 25
+          Top = 326
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Default'
+          OnClick = astdefaultClick
+          TabOrder = 8
+        end
+        object brightneo: TButton
+          Left = 151
+          Height = 25
+          Top = 326
+          Width = 120
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Bright + NEO + TNO'
+          OnClick = brightneoClick
+          TabOrder = 7
+        end
+        object mpcorb: TButton
+          Left = 151
+          Height = 25
+          Top = 358
+          Width = 120
+          BorderSpacing.InnerBorder = 4
+          Caption = 'MPCORB > 70Mb!'
+          OnClick = mpcorbClick
+          TabOrder = 5
+        end
+        object comhttp: TButton
+          Left = 275
+          Height = 25
+          Top = 142
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'MPC Http'
+          OnClick = comhttpClick
+          TabOrder = 2
+        end
+        object comftp: TButton
+          Left = 178
+          Height = 25
+          Top = 142
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'MPC Ftp'
+          OnClick = comftpClick
+          TabOrder = 1
+          Visible = False
+        end
+        object astcdc: TButton
+          Left = 30
+          Height = 25
+          Top = 326
+          Width = 106
+          BorderSpacing.InnerBorder = 4
+          Caption = 'First 5000'
+          OnClick = astcdcClick
+          TabOrder = 6
+        end
+        object Button4: TButton
+          Left = 62
+          Height = 25
+          Top = 142
+          Width = 91
+          Caption = 'astro.cz HTTP'
+          OnClick = Button4Click
+          TabOrder = 9
+          Visible = False
+        end
+        object Button5: TButton
+          Left = 30
+          Height = 25
+          Top = 356
+          Width = 106
+          Caption = 'astro.cz > 70MB!'
+          OnClick = Button5Click
+          TabOrder = 10
+          Visible = False
+        end
+        object astcdcneo: TButton
+          Left = 283
+          Height = 25
+          Top = 358
+          Width = 163
+          Caption = 'First 5000 + NEO + TNO'
+          OnClick = astcdcneoClick
+          TabOrder = 11
+        end
+      end
+      object Page3: TTabSheet
+        Caption = 'Online DSS'
+        ClientHeight = 484
+        ClientWidth = 482
+        object Label8: TLabel
+          Left = 20
+          Height = 14
+          Top = 19
+          Width = 135
+          Caption = 'Online pictures servers'
+          ParentColor = False
+        end
+        object DSSpictures: TStringGrid
+          Left = 16
+          Height = 324
+          Top = 48
+          Width = 454
+          Anchors = [akTop, akLeft, akRight]
+          ColCount = 2
+          DefaultColWidth = 120
+          FixedCols = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goAlwaysShowEditor, goSmoothScroll]
+          RowCount = 11
+          TabOrder = 0
+          TitleFont.Height = -11
+          OnEditingDone = DSSpicturesEditingDone
+        end
+        object DefaultDSS: TButton
+          Left = 394
+          Height = 25
+          Top = 373
+          Width = 75
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Default'
+          OnClick = DefaultDSSClick
+          TabOrder = 1
+        end
+      end
+    end
+  end
+end

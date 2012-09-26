@@ -123,7 +123,7 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="20">
+    <RequiredPackages Count="19">
       <Item1>
         <PackageName Value="MultiFramePackage"/>
       </Item1>
@@ -171,35 +171,31 @@
         <DefaultFilename Value="component/mrecsort/mrecsort.lpk"/>
       </Item13>
       <Item14>
-        <PackageName Value="MultiDocPackage"/>
-        <MinVersion Valid="True"/>
-      </Item14>
-      <Item15>
         <PackageName Value="Printer4Lazarus"/>
         <MinVersion Build="1" Valid="True"/>
-      </Item15>
-      <Item16>
+      </Item14>
+      <Item15>
         <PackageName Value="radec"/>
         <DefaultFilename Value="component/radec/radec.lpk"/>
-      </Item16>
-      <Item17>
+      </Item15>
+      <Item16>
         <PackageName Value="satxy"/>
         <DefaultFilename Value="library/satxy/satxy.lpk"/>
-      </Item17>
-      <Item18>
+      </Item16>
+      <Item17>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
-      </Item18>
-      <Item19>
+      </Item17>
+      <Item18>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
-      </Item19>
-      <Item20>
+      </Item18>
+      <Item19>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
-      </Item20>
+      </Item19>
     </RequiredPackages>
-    <Units Count="59">
+    <Units Count="68">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -262,12 +258,12 @@
         <UnitName Value="pu_calendar"/>
       </Unit10>
       <Unit11>
-        <Filename Value="pu_chart.pas"/>
+        <Filename Value="fu_chart.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_chart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Frame"/>
-        <UnitName Value="pu_chart"/>
+        <UnitName Value="fu_chart"/>
       </Unit11>
       <Unit12>
         <Filename Value="pu_detail.pas"/>
@@ -351,7 +347,7 @@
       <Unit23>
         <Filename Value="pu_config_catalog.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_catalog"/>
+        <ComponentName Value="f_configcatalog"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_catalog"/>
@@ -359,7 +355,7 @@
       <Unit24>
         <Filename Value="pu_config_time.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_time"/>
+        <ComponentName Value="f_configtime"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_time"/>
@@ -367,7 +363,7 @@
       <Unit25>
         <Filename Value="pu_config_system.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_system"/>
+        <ComponentName Value="f_configsystem"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_system"/>
@@ -375,7 +371,7 @@
       <Unit26>
         <Filename Value="pu_config_pictures.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_pictures"/>
+        <ComponentName Value="f_configpictures"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_pictures"/>
@@ -383,7 +379,7 @@
       <Unit27>
         <Filename Value="pu_config_display.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_display"/>
+        <ComponentName Value="f_configdisplay"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_display"/>
@@ -391,7 +387,7 @@
       <Unit28>
         <Filename Value="pu_config_solsys.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_solsys"/>
+        <ComponentName Value="f_configsolsys"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_solsys"/>
@@ -399,7 +395,7 @@
       <Unit29>
         <Filename Value="pu_config_chart.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_chart"/>
+        <ComponentName Value="f_configchart"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_chart"/>
@@ -407,7 +403,7 @@
       <Unit30>
         <Filename Value="pu_config_observatory.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_observatory"/>
+        <ComponentName Value="f_configobservatory"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_observatory"/>
@@ -415,7 +411,7 @@
       <Unit31>
         <Filename Value="pu_config_internet.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="f_config_internet"/>
+        <ComponentName Value="f_configinternet"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_internet"/>
@@ -604,6 +600,78 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pr_vodetail"/>
       </Unit58>
+      <Unit59>
+        <Filename Value="fu_config_time.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_time"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_time"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="fu_config_catalog.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_catalog"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_catalog"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="fu_config_chart.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_chart"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_chart"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="fu_config_display.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_display"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_display"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="fu_config_internet.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_internet"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_internet"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="fu_config_observatory.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_observatory"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_observatory"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="fu_config_pictures.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_pictures"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_pictures"/>
+      </Unit65>
+      <Unit66>
+        <Filename Value="fu_config_solsys.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_solsys"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_solsys"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="fu_config_system.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_system"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_system"/>
+      </Unit67>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
