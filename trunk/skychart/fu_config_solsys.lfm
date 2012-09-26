@@ -1,28 +1,28 @@
 object f_config_solsys: Tf_config_solsys
   Left = 0
-  Height = 483
+  Height = 522
   Top = 0
-  Width = 503
-  ClientHeight = 483
-  ClientWidth = 503
+  Width = 502
+  ClientHeight = 522
+  ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 326
-  DesignTop = 131
+  DesignLeft = 112
+  DesignTop = 363
   object MainPanel: TPanel
     Left = 0
-    Height = 483
+    Height = 522
     Top = 0
-    Width = 503
+    Width = 502
     Align = alClient
-    ClientHeight = 483
-    ClientWidth = 503
+    ClientHeight = 522
+    ClientWidth = 502
     ParentColor = False
     TabOrder = 0
     object PageControl1: TPageControl
       Left = 1
-      Height = 481
+      Height = 520
       Top = 1
-      Width = 501
+      Width = 500
       ActivePage = Page3
       Align = alClient
       ShowTabs = False
@@ -30,8 +30,8 @@ object f_config_solsys: Tf_config_solsys
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
-        ClientHeight = 477
-        ClientWidth = 497
+        ClientHeight = 516
+        ClientWidth = 496
         object Label12: TLabel
           Left = 7
           Height = 16
@@ -107,8 +107,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page2: TTabSheet
         Caption = 'Page2'
-        ClientHeight = 477
-        ClientWidth = 497
+        ClientHeight = 516
+        ClientWidth = 496
         object Label5: TLabel
           Left = 0
           Height = 16
@@ -467,21 +467,21 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page3: TTabSheet
         Caption = 'Page3'
-        ClientHeight = 477
-        ClientWidth = 497
+        ClientHeight = 516
+        ClientWidth = 496
         object ComPageControl: TPageControl
           Left = 0
-          Height = 477
+          Height = 516
           Top = 0
-          Width = 497
+          Width = 496
           ActivePage = comsetting
           Align = alClient
           TabIndex = 0
           TabOrder = 0
           object comsetting: TTabSheet
             Caption = 'General Setting'
-            ClientHeight = 448
-            ClientWidth = 493
+            ClientHeight = 487
+            ClientWidth = 492
             ImageIndex = 3
             object GroupBox13: TGroupBox
               Left = 8
@@ -598,8 +598,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comload: TTabSheet
             Caption = 'Load MPC File'
-            ClientHeight = 448
-            ClientWidth = 493
+            ClientHeight = 487
+            ClientWidth = 492
             ImageIndex = 1
             object Label232: TLabel
               Left = 15
@@ -683,8 +683,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object comdelete: TTabSheet
             Caption = 'Data Maintenance'
-            ClientHeight = 448
-            ClientWidth = 493
+            ClientHeight = 487
+            ClientWidth = 492
             ImageIndex = 3
             object Label238: TLabel
               Left = 8
@@ -765,8 +765,8 @@ object f_config_solsys: Tf_config_solsys
           end
           object Addsinglecom: TTabSheet
             Caption = 'Add'
-            ClientHeight = 448
-            ClientWidth = 493
+            ClientHeight = 487
+            ClientWidth = 492
             ImageIndex = 4
             object Label241: TLabel
               Left = 8
@@ -993,8 +993,8 @@ object f_config_solsys: Tf_config_solsys
       end
       object Page4: TTabSheet
         Caption = 'Page4'
-        ClientHeight = 477
-        ClientWidth = 497
+        ClientHeight = 516
+        ClientWidth = 496
         object AstPageControl: TPageControl
           Left = 0
           Height = 429

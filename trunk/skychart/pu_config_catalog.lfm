@@ -1,12 +1,12 @@
 object f_configcatalog: Tf_configcatalog
-  Left = 430
+  Left = 518
   Height = 580
   Top = 120
-  Width = 523
+  Width = 500
   BorderStyle = bsToolWindow
   Caption = 'Catalog'
   ClientHeight = 580
-  ClientWidth = 523
+  ClientWidth = 500
   OnClose = FormClose
   OnCreate = FormCreate
   OnShow = FormShow
@@ -16,12 +16,12 @@ object f_configcatalog: Tf_configcatalog
     Left = 0
     Height = 50
     Top = 530
-    Width = 523
+    Width = 500
     HelpType = htKeyword
     HelpKeyword = 'help/catalog.html'
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 523
+    ClientWidth = 500
     TabOrder = 0
     object Button1: TButton
       Left = 240
@@ -56,7 +56,7 @@ object f_configcatalog: Tf_configcatalog
       TabOrder = 2
     end
     object Button4: TButton
-      Left = 144
+      Left = 121
       Height = 25
       Top = 15
       Width = 75
@@ -69,40 +69,56 @@ object f_configcatalog: Tf_configcatalog
   end
   inline f_config_catalog1: Tf_config_catalog
     Height = 530
+    Width = 500
     Align = alClient
     ClientHeight = 530
+    ClientWidth = 500
     TabOrder = 1
     DesignLeft = 304
     DesignTop = 274
     inherited MainPanel: TPanel
       Height = 530
+      Width = 500
       ClientHeight = 530
+      ClientWidth = 500
       inherited PageControl1: TPageControl
         Height = 474
+        Width = 498
+        ActivePage = nil
+        TabIndex = -1
         inherited Page2: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page3: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page1: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page1a: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page1b: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page5: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
         inherited Page4: TTabSheet
           ClientHeight = 470
+          ClientWidth = 494
         end
       end
       inherited FOVPanel: TPanel
         Top = 475
+        Width = 498
+        ClientWidth = 498
       end
     end
   end
