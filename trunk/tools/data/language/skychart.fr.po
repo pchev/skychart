@@ -1,6 +1,3 @@
- translation of skychart.fr.po
- Patrick Chevalley <pch@ap-i.net>, 2009, 2010, 2011.
- pch <pch@ap-i.net>, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"

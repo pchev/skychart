@@ -1,4 +1,3 @@
- translation of skychart.ca.po
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
