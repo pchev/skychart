@@ -1,7 +1,3 @@
- Chinese (Simplified) translation for skychart
- Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
- This file is distributed under the same license as the skychart package.
- FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
