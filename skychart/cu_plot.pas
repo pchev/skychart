@@ -394,7 +394,11 @@ Procedure TSplot.FlushCnv;
 begin
 if cfgplot.UseBMP then begin
  cbmp.LoadFromBitmapIfNeeded;
+ {$ifdef darwin}
+ cbmp.Draw(destcnv,0,0,false); // avoid error message: "CGBitmapContextCreate: invalid data bytes/row"
+ {$else}
  cbmp.Draw(destcnv,0,0,true); // draw bitmap to screen
+ {$endif}
 end else begin
  destcnv.CopyMode:=cmSrcCopy;
  destcnv.Draw(0,0,obmp);
