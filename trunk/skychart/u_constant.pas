@@ -1068,7 +1068,7 @@ var
   isWin98: boolean;
   DisplayIs32bpp: boolean;
   ThemePath: string = 'data/Themes';
-  LinuxDesktop: integer = 0;  // FreeDesktop=0, KDE=1, GNOME=2, Other=3
+  LinuxDesktop: integer = 0;  // FreeDesktop=0, Other=1
   crRetic: TCursor = 5;
   Params: TStringList;
   de_folder: string;

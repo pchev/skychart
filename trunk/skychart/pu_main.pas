@@ -5284,6 +5284,7 @@ SaveConfigOnExit.Checked:=ReadBool(section,'SaveConfigOnExit',SaveConfigOnExit.C
 ConfirmSaveConfig:=ReadBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 {$ifdef linux}
 LinuxDesktop:=ReadInteger(section,'LinuxDesktop',LinuxDesktop);
+if LinuxDesktop>1 then LinuxDesktop:=1;
 OpenFileCMD:=ReadString(section,'OpenFileCMD',OpenFileCMD);
 {$endif}
 NightVision:=ReadBool(section,'NightVision',NightVision);
