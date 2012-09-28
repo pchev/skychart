@@ -1816,6 +1816,8 @@ isWin98:=false;
     if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
   end;
   SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
+  OnKeyDown:=nil;  { TODO : Strange behavior of OnKeyDown on Windows with Lazarus 1.0}
+  OnKeyUp:=FormKeyDown;
 {$endif}
 CanShowScrollbar:=true;
 {$ifdef unix}
