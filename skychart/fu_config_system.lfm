@@ -23,10 +23,10 @@ object f_config_system: Tf_config_system
       Height = 522
       Top = 1
       Width = 498
-      ActivePage = Page3
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 2
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
@@ -42,7 +42,7 @@ object f_config_system: Tf_config_system
           TabOrder = 4
           object dbnamesqlite: TEdit
             Left = 125
-            Height = 21
+            Height = 23
             Top = 32
             Width = 281
             Color = clBtnFace
@@ -62,18 +62,18 @@ object f_config_system: Tf_config_system
           end
           object SqliteBoxLabel: TLabel
             Left = 13
-            Height = 14
+            Height = 16
             Top = 12
-            Width = 72
+            Width = 83
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
         end
         object Label153: TLabel
           Left = 0
-          Height = 14
+          Height = 16
           Top = 0
-          Width = 73
+          Width = 87
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -106,7 +106,7 @@ object f_config_system: Tf_config_system
           end
           object prgdir: TDirectoryEdit
             Left = 179
-            Height = 21
+            Height = 23
             Top = 3
             Width = 240
             ShowHidden = False
@@ -118,7 +118,7 @@ object f_config_system: Tf_config_system
           end
           object persdir: TDirectoryEdit
             Left = 179
-            Height = 21
+            Height = 23
             Top = 42
             Width = 240
             ShowHidden = False
@@ -229,24 +229,21 @@ object f_config_system: Tf_config_system
           TabOrder = 3
           object Label12: TLabel
             Left = 203
-            Height = 14
+            Height = 16
             Top = 8
-            Width = 105
+            Width = 122
             Caption = 'URL launch command'
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 21
+            Height = 23
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 0
-            ItemIndex = 1
             Items.Strings = (
               'FreeDesktop'
-              'KDE'
-              'GNOME'
               'Other'
             )
             OnSelect = LinuxDesktopBoxChange
@@ -255,7 +252,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxCmd: TEdit
             Left = 204
-            Height = 21
+            Height = 23
             Top = 33
             Width = 194
             OnChange = LinuxCmdChange
@@ -273,7 +270,7 @@ object f_config_system: Tf_config_system
           TabOrder = 5
           object dbpass: TEdit
             Left = 348
-            Height = 21
+            Height = 23
             Top = 64
             Width = 100
             EchoMode = emPassword
@@ -284,7 +281,7 @@ object f_config_system: Tf_config_system
           end
           object dbuser: TEdit
             Left = 125
-            Height = 21
+            Height = 23
             Top = 64
             Width = 100
             OnChange = dbuserChange
@@ -293,7 +290,7 @@ object f_config_system: Tf_config_system
           end
           object dbhost: TEdit
             Left = 250
-            Height = 21
+            Height = 23
             Top = 24
             Width = 65
             OnChange = dbhostChange
@@ -302,7 +299,7 @@ object f_config_system: Tf_config_system
           end
           object dbport: TLongEdit
             Left = 391
-            Height = 21
+            Height = 23
             Top = 24
             Width = 57
             TabOrder = 3
@@ -311,7 +308,7 @@ object f_config_system: Tf_config_system
           end
           object dbname: TEdit
             Left = 80
-            Height = 21
+            Height = 23
             Top = 24
             Width = 65
             OnChange = dbnameChange
@@ -337,33 +334,33 @@ object f_config_system: Tf_config_system
           end
           object Label85: TLabel
             Left = 362
-            Height = 14
+            Height = 16
             Top = 28
-            Width = 23
+            Width = 29
             Caption = 'Port:'
             ParentColor = False
           end
           object Label84: TLabel
             Left = 178
-            Height = 14
+            Height = 16
             Top = 28
-            Width = 56
+            Width = 67
             Caption = 'Host Name:'
             ParentColor = False
           end
           object Label77: TLabel
             Left = 16
-            Height = 14
+            Height = 16
             Top = 28
-            Width = 48
+            Width = 57
             Caption = 'DB Name:'
             ParentColor = False
           end
           object MysqlBoxLabel: TLabel
             Left = 16
-            Height = 14
+            Height = 16
             Top = 3
-            Width = 74
+            Width = 83
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end

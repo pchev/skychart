@@ -26,7 +26,7 @@ interface
 
 uses u_help, u_translation, u_constant, u_util, cu_database,
   Dialogs, Controls, Buttons, enhedits, ComCtrls, Classes,
-  LCLIntf, SysUtils, Graphics, Forms, FileUtil,
+  LCLIntf, SysUtils, Graphics, Forms, FileUtil, math,
   ExtCtrls, StdCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
@@ -249,7 +249,7 @@ DBtypeGroup.caption:=rsDatabaseType;
 DBtypeGroup.Hint:=rsWarning+crlf+rsChangeToThis;
 GroupBoxLinux.caption:=rsDesktopEnvir;
 Label12.caption:=rsURLLaunchCom;
-LinuxDesktopBox.items[3]:=rsOther;
+LinuxDesktopBox.items[1]:=rsOther;
 GroupBox3.caption:=rsTCPIPServer;
 Label54.caption:=rsServerIPInte;
 Label55.caption:=rsServerIPPort;
@@ -404,9 +404,9 @@ dbpass.Text:=cmain.dbpass;
 prgdir.text:=SysToUTF8(cmain.prgdir);
 persdir.text:=SysToUTF8(cmain.persdir);
 {$ifdef linux}
-LinuxDesktopBox.itemIndex:=LinuxDesktop;
+LinuxDesktopBox.itemIndex:=min(1,LinuxDesktop);
 LinuxCmd.Text:=OpenFileCMD;
-if LinuxDesktopBox.itemIndex<>3 then LinuxCmd.Enabled:=false;
+if LinuxDesktopBox.itemIndex<1 then LinuxCmd.Enabled:=false;
 {$endif}
 end;
 
@@ -672,16 +672,7 @@ case LinuxDesktopBox.itemIndex of
         LinuxCmd.Text:='xdg-open';
         LinuxCmd.Enabled:=false;
       end;
-  1:  begin  // KDE
-        LinuxCmd.Text:='kfmclient exec';
-        LinuxCmd.Enabled:=false;
-      end;
-  2:  begin  // GNOME
-        LinuxCmd.Text:='gnome-open';
-        LinuxCmd.Enabled:=false;
-      end;
-  3:  begin  // Other
-        LinuxCmd.Text:='/usr/bin/mozilla';
+  1:  begin  // Other
         LinuxCmd.Enabled:=true;
       end;
 end;
