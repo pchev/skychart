@@ -1831,10 +1831,6 @@ CanShowScrollbar:=true;
 {$endif}
 {$ifdef darwin}
   step:='Darwin specific';
-  MenuItem24.Visible:=false;  // config all not working
-  MenuItem25.Visible:=false;
-  MenuItem26.Visible:=false;
-  MenuItem6.Visible:=false;
 {$endif}
 step:='Create config';
 if VerboseMsg then
