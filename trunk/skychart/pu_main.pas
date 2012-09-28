@@ -1635,10 +1635,7 @@ if buf='' then begin  // old windows version
    buf:=trim(Folder);
 end;
 if buf='' then begin
-   MessageDlg(rsUnableToCrea+privatedir+crlf
-             +rsPleaseTryToC,
-             mtError, [mbAbort], 0);
-   Halt;
+   buf:='C:\skychart';
 end;
 privatedir:=slash(buf)+privatedir;
 configfile:=slash(privatedir)+configfile;
