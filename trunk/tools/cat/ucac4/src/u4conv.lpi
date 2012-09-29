@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <Flags>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasTitleStatement Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <UseAppBundle Value="False"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <CommandLineParams Value="--cddir ../ --outdir ./asc --nofork"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <Units Count="2">
+      <Unit0>
+        <Filename Value="u4conv.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="u4conv"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="34"/>
+        <CursorPos X="19" Y="70"/>
+        <UsageCount Value="39"/>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="../../appli/fpc/rtl/objpas/sysutils/sysstrh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="107"/>
+        <CursorPos X="10" Y="130"/>
+        <UsageCount Value="10"/>
+      </Unit1>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="142" Column="1" TopLine="121"/>
+      </Position1>
+      <Position2>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="143" Column="1" TopLine="121"/>
+      </Position2>
+      <Position3>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="144" Column="1" TopLine="121"/>
+      </Position3>
+      <Position4>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="139" Column="1" TopLine="121"/>
+      </Position4>
+      <Position5>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="140" Column="1" TopLine="121"/>
+      </Position5>
+      <Position6>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="141" Column="1" TopLine="121"/>
+      </Position6>
+      <Position7>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="142" Column="1" TopLine="121"/>
+      </Position7>
+      <Position8>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="143" Column="1" TopLine="121"/>
+      </Position8>
+      <Position9>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="144" Column="1" TopLine="121"/>
+      </Position9>
+      <Position10>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="256" Column="102" TopLine="232"/>
+      </Position10>
+      <Position11>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="276" Column="12" TopLine="159"/>
+      </Position11>
+      <Position12>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="254" Column="65" TopLine="226"/>
+      </Position12>
+      <Position13>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="3" Column="2" TopLine="1"/>
+      </Position13>
+      <Position14>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="36" Column="28" TopLine="16"/>
+      </Position14>
+      <Position15>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="38" Column="5" TopLine="17"/>
+      </Position15>
+      <Position16>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="43" Column="1" TopLine="23"/>
+      </Position16>
+      <Position17>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="101" Column="1" TopLine="81"/>
+      </Position17>
+      <Position18>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="214" Column="70" TopLine="196"/>
+      </Position18>
+      <Position19>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="218" Column="13" TopLine="198"/>
+      </Position19>
+      <Position20>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="153" Column="42" TopLine="135"/>
+      </Position20>
+      <Position21>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="218" Column="13" TopLine="186"/>
+      </Position21>
+      <Position22>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="235" Column="21" TopLine="203"/>
+      </Position22>
+      <Position23>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="252" Column="28" TopLine="220"/>
+      </Position23>
+      <Position24>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="81" Column="14" TopLine="51"/>
+      </Position24>
+      <Position25>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="166" Column="18" TopLine="139"/>
+      </Position25>
+      <Position26>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="165" Column="62" TopLine="139"/>
+      </Position26>
+      <Position27>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="168" Column="1" TopLine="139"/>
+      </Position27>
+      <Position28>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="169" Column="1" TopLine="139"/>
+      </Position28>
+      <Position29>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="165" Column="1" TopLine="139"/>
+      </Position29>
+      <Position30>
+        <Filename Value="u4conv.pas"/>
+        <Caret Line="167" Column="1" TopLine="139"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Other>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
