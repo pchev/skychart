@@ -358,6 +358,7 @@ for i:=0 to csc.tz.ZoneTabCnty.Count-1 do begin
 end;
 if copy(csc.ObsTZ,1,3)='Etc' then TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(TzGMT2UTC(csc.ObsTZ))
    else TZComboBox.ItemIndex:=TZComboBox.Items.IndexOf(csc.ObsTZ);
+Application.ProcessMessages;
 LockChange:=false;
 end;
 
@@ -469,10 +470,7 @@ end;
 
 procedure Tf_config_time.CheckBox1Click(Sender: TObject);
 begin
-csc.UseSystemTime:=checkbox1.checked;
-SetCurrentTime(csc);
-csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
-d_year.enabled:=not csc.UseSystemTime;
+d_year.enabled:=not checkbox1.checked;
 d_yearEdit.enabled:=d_year.enabled;
 d_month.enabled:=d_year.enabled;
 d_monthEdit.enabled:=d_year.enabled;
@@ -491,7 +489,17 @@ BitBtn1.enabled:=d_year.enabled;
 Button5.enabled:=d_year.enabled;
 Button6.enabled:=d_year.enabled;
 Button8.enabled:=d_year.enabled;
+if LockChange then exit;
+try
+LockChange:=true;
+csc.UseSystemTime:=checkbox1.checked;
+SetCurrentTime(csc);
+csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
 ShowTime;
+Application.ProcessMessages;
+finally
+  LockChange:=false;
+end;
 end;
 
 procedure Tf_config_time.Button4Click(Sender: TObject);
@@ -513,15 +521,19 @@ end;
 procedure Tf_config_time.JDEditChange(Sender: TObject);
 begin
 if LockChange or LockJD then exit;
+try
+LockChange:=true;
+LockJD:=true;
 csc.tz.JD:=JDEdit.Value;
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
 Djd(JDEdit.Value+csc.timezone/24,csc.curyear,csc.curmonth,csc.curday,csc.CurTime);
-LockChange:=true;
-LockJD:=true;
 ShowTime;
-LockChange:=false;
-LockJD:=false;
 ShowUTTime;
+Application.ProcessMessages;
+finally
+  LockChange:=false;
+  LockJD:=false;
+end;
 end;
 
 procedure Tf_config_time.CheckBox2Click(Sender: TObject);
@@ -668,6 +680,8 @@ end;
 procedure Tf_config_time.DateEditChange(Sender: TObject);
 begin
 if LockChange then exit;
+try
+LockChange:=true;
 if adbc.itemindex=0 then
   csc.curyear:=d_yearEdit.Value
 else
@@ -680,22 +694,28 @@ csc.TimeZone:=csc.tz.SecondsOffset/3600;
 csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
 Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
-LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
-LockChange:=false;
 ShowUTTime;
+Application.ProcessMessages;
+finally
+  LockChange:=false;
+end;
 end;
 
 procedure Tf_config_time.TimeEditChange(Sender: TObject);
 begin
 if LockChange then exit;
+try
+LockChange:=true;
 csc.curtime:=t_hour.Position+t_min.Position/60+t_sec.Position/3600;
 csc.tz.JD:=jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime/secday);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
-LockChange:=true;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
-LockChange:=false;
 ShowUTTime;
+Application.ProcessMessages;
+finally
+  LockChange:=false;
+end;
 end;
 
 procedure Tf_config_time.TrackBar1Change(Sender: TObject);
