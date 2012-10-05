@@ -450,6 +450,8 @@ begin
   tempBmp.Canvas.Font := Font;
   if Quality in[fqFineClearTypeBGR,fqFineClearTypeRGB,fqFineAntialiasing] then tempBmp.Canvas.Font.Height := Font.Height*CustomAntialiasingLevel else
     tempBmp.Canvas.Font.Height := Font.Height;
+  Result.cx := 0;
+  Result.cy := 0;
   tempBmp.Canvas.Font.GetTextSize(s, Result.cx, Result.cy);
 end;
 

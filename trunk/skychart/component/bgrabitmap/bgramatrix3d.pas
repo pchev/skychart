@@ -51,9 +51,9 @@ begin
   result.z := M.x * A[3,1] + M.y * A[3,2] + M.z * A[3,3] + A[3,4];
 end;
 
+{$IFDEF CPUI386}
 var SingleConst1 : single = 1;
 
-{$IFDEF CPUI386}
 procedure Matrix3D_SSE_Load(const A: TMatrix3D);
 begin
   asm

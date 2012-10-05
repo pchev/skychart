@@ -51,7 +51,7 @@ procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer
 
 //antialiased version with bicolor dashes (to draw a frame)
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
+  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer);
 
 //length added to ensure accepable alpha join (using TBGRAMultishapeFiller is still better)
 function GetAlphaJoinFactor(alpha: byte): single;
@@ -227,18 +227,22 @@ begin
 end;
 
 procedure BGRADrawLineAntialias(dest: TBGRACustomBitmap; x1, y1, x2, y2: integer;
-  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
+  c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer);
 var
   Y, X:  integer;
   DX, DY, SX, SY, E: integer;
   alpha: single;
   c:     TBGRAPixel;
-  DashPos: integer;
 begin
   if (c1.alpha=0) and (c2.alpha=0) then exit;
+  if DashLen <= 0 then
+  begin
+    BGRADrawLineAntialias(dest,x1,y1,x2,y2,MergeBGRA(c1,c2),DrawLastPixel);
+    exit;
+  end;
 
-  c := c1;
-  DashPos := 0;
+  DashPos := PositiveMod(DashPos,DashLen+DashLen);
+  if DashPos < DashLen then c := c1 else c := c2;
 
   if (Y1 = Y2) and (X1 = X2) then
   begin
@@ -331,7 +335,11 @@ begin
     end;
   end;
   if DrawLastPixel then
+  begin
     dest.DrawPixel(X2, Y2, c);
+    inc(DashPos);
+    if DashPos = DashLen + DashLen then DashPos := 0;
+  end;
 end;
 
 function GetAlphaJoinFactor(alpha: byte): single;

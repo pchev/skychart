@@ -154,7 +154,7 @@ type
     function GetBoxedValue(obj: TCustomSerializedObject; index: integer): string;
     procedure LoadFromStream(Stream: TStream);
     procedure LoadFromFile(filename: string);
-    function ToString: string;
+    function ToString: string; override;
     constructor Create;
     destructor Destroy; override;
     function GetTypeOfClassObject(idObject: longword): integer;

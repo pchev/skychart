@@ -22,6 +22,12 @@
           <OptimizationLevel Value="3"/>
         </Optimizations>
       </CodeGeneration>
+      <Linking>
+        <Debugging>
+          <GenerateDebugInfo Value="False"/>
+          <DebugInfoType Value="dsStabs"/>
+        </Debugging>
+      </Linking>
       <Other>
         <CompilerMessages>
           <UseMsgFile Value="True"/>
@@ -31,8 +37,8 @@
     </CompilerOptions>
     <Description Value="Drawing routines with alpha blending and antialiasing"/>
     <License Value="modified LGPL"/>
-    <Version Major="5" Minor="9" Release="3"/>
-    <Files Count="49">
+    <Version Major="6"/>
+    <Files Count="53">
       <Item1>
         <Filename Value="bgraanimatedgif.pas"/>
         <UnitName Value="BGRAAnimatedGif"/>
@@ -229,6 +235,22 @@
         <Filename Value="bgracoordpool3d.pas"/>
         <UnitName Value="BGRACoordPool3D"/>
       </Item49>
+      <Item50>
+        <Filename Value="bgraopenraster.pas"/>
+        <UnitName Value="BGRAOpenRaster"/>
+      </Item50>
+      <Item51>
+        <Filename Value="blendpixels.inc"/>
+        <Type Value="Binary"/>
+      </Item51>
+      <Item52>
+        <Filename Value="blendpixelinline.inc"/>
+        <Type Value="Binary"/>
+      </Item52>
+      <Item53>
+        <Filename Value="blendpixelsover.inc"/>
+        <Type Value="Binary"/>
+      </Item53>
     </Files>
     <Type Value="RunAndDesignTime"/>
     <RequiredPkgs Count="2">
@@ -247,5 +269,8 @@
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
     </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
   </Package>
 </CONFIG>

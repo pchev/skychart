@@ -14,7 +14,8 @@ interface
   The class TPaintDotNetFile do not read the Xml header. ComputeFlatImage builds the resulting image
   by using blending operations to merge layers.
 
-  The unit registers a TFPCustomImageReader so that it can be read by any image reading function of FreePascal }
+  The unit registers a TFPCustomImageReader so that it can be read by any image reading function of FreePascal,
+  and also registers a reader for BGRALayers }
 
 uses
   Classes, SysUtils, BGRADNetDeserial, FPImage, BGRABitmapTypes, BGRABitmap, BGRALayers;
@@ -30,7 +31,7 @@ type
     procedure Clear; override;
     function ToString: ansistring; override;
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; override;
-    constructor Create;
+    constructor Create; override;
   protected
     function GetWidth: integer; override;
     function GetHeight: integer; override;
@@ -171,8 +172,7 @@ begin
   result := IsPaintDotNetStream(stream);
 end;
 
-procedure TFPReaderPaintDotNet.InternalRead(Stream: TStream; Img: TFPCustomImage
-  );
+procedure TFPReaderPaintDotNet.InternalRead(Stream: TStream; Img: TFPCustomImage);
 var
   pdn: TPaintDotNetFile;
   flat: TBGRABitmap;
@@ -292,10 +292,12 @@ end;
 
 constructor TPaintDotNetFile.Create;
 begin
+  inherited Create;
   Content   := nil;
   ThumbNail := nil;
   Document  := nil;
   Layers    := nil;
+  LinearBlend := True;
 end;
 
 procedure TPaintDotNetFile.Clear;
@@ -513,7 +515,7 @@ begin
             1, length('BlendOp'));
 
         if blendName = 'Normal' then
-          Result := boLinearBlend
+          Result := boTransparent
         else
         if blendName = 'Multiply' then
           Result := boLinearMultiply
@@ -599,6 +601,7 @@ end;
 initialization
 
   ImageHandlers.RegisterImageReader ('Paint.NET image', 'pdn', TFPReaderPaintDotNet);
+  RegisterLayeredBitmapReader('pdn', TPaintDotNetFile);
 
 end.
 
