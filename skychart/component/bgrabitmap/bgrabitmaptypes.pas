@@ -88,20 +88,23 @@ type
   //see : http://www.brighthub.com/multimedia/photography/articles/18301.aspx
   //and : http://www.pegtop.net/delphi/articles/blendmodes/  
   TBlendOperation = (boLinearBlend, boTransparent,                                  //blending
-    boLighten, boScreen, boAdditive, boLinearAdd, boColorDodge, boNiceGlow,         //lighting
+    boLighten, boScreen, boAdditive, boLinearAdd, boColorDodge, boDivide, boNiceGlow, boSoftLight, boHardLight, //lighting
     boGlow, boReflect, boOverlay, boDarkOverlay, boDarken, boMultiply, boColorBurn, //masking
-    boDifference, boLinearDifference, boNegation, boLinearNegation, boXor);         //negative
+    boDifference, boLinearDifference, boExclusion, boLinearExclusion, boSubtract, boLinearSubtract, boSubtractInverse, boLinearSubtractInverse,
+    boNegation, boLinearNegation, boXor);         //negative
 
 const
   boGlowMask = boGlow;
   boLinearMultiply = boMultiply;
+  boNonLinearOverlay = boDarkOverlay;
 
 const
   BlendOperationStr : array[TBlendOperation] of string =
    ('LinearBlend', 'Transparent',
-    'Lighten', 'Screen', 'Additive', 'LinearAdd', 'ColorDodge', 'NiceGlow',
+    'Lighten', 'Screen', 'Additive', 'LinearAdd', 'ColorDodge', 'Divide', 'NiceGlow', 'SoftLight', 'HardLight',
     'Glow', 'Reflect', 'Overlay', 'DarkOverlay', 'Darken', 'Multiply', 'ColorBurn',
-    'Difference', 'LinearDifference', 'Negation', 'LinearNegation', 'Xor');
+    'Difference', 'LinearDifference', 'Exclusion', 'LinearExclusion', 'Subtract', 'LinearSubtract', 'SubtractInverse', 'LinearSubtractInverse',
+    'Negation', 'LinearNegation', 'Xor');
 
 function StrToBlendOperation(str: string): TBlendOperation;
 
@@ -352,6 +355,7 @@ type
      procedure DrawLine(x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean); virtual; abstract;
      procedure DrawLineAntialias(x1, y1, x2, y2: integer; c: TBGRAPixel; DrawLastPixel: boolean); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: integer; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean); virtual; abstract; overload;
+     procedure DrawLineAntialias(x1, y1, x2, y2: integer; c1, c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean; var DashPos: integer); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: single; texture: IBGRAScanner; w: single); virtual; abstract; overload;
      procedure DrawLineAntialias(x1, y1, x2, y2: single; c: TBGRAPixel; w: single; Closed: boolean); virtual; abstract; overload;
@@ -457,14 +461,16 @@ type
      function ComputeWidePolyline(const points: array of TPointF; w: single; Closed: boolean): ArrayOfTPointF; virtual; abstract;
      function ComputeWidePolygon(const points: array of TPointF; w: single): ArrayOfTPointF; virtual; abstract;
 
-     function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF; virtual; abstract;
-     function ComputeEllipse(x,y,rx,ry,w: single): ArrayOfTPointF; virtual; abstract;
-     function ComputeArc65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
-     function ComputeArcRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
-     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF; virtual; abstract;
-     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions): ArrayOfTPointF; virtual; abstract;
-     function ComputePie65536(x,y,rx,ry: single; start65536,end65536: word): ArrayOfTPointF; virtual; abstract;
-     function ComputePieRad(x,y,rx,ry: single; startRad,endRad: single): ArrayOfTPointF; virtual; abstract;
+     function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF; deprecated;
+     function ComputeEllipse(x,y,rx,ry,w: single): ArrayOfTPointF; deprecated;
+     function ComputeEllipseContour(x,y,rx,ry: single; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputeEllipseBorder(x,y,rx,ry,w: single; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputeArc65536(x,y,rx,ry: single; start65536,end65536: word; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputeArcRad(x,y,rx,ry: single; startRad,endRad: single; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputePie65536(x,y,rx,ry: single; start65536,end65536: word; quality: single = 1): ArrayOfTPointF; virtual; abstract;
+     function ComputePieRad(x,y,rx,ry: single; startRad,endRad: single; quality: single = 1): ArrayOfTPointF; virtual; abstract;
 
      {Filling}
      procedure FillTransparent; virtual;
@@ -517,9 +523,10 @@ type
      procedure PutImageSubpixel(x, y: single; Source: TBGRACustomBitmap);
      procedure PutImagePart(x,y: integer; Source: TBGRACustomBitmap; SourceRect: TRect; mode: TDrawMode; AOpacity: byte = 255);
      procedure PutImageAffine(Origin,HAxis,VAxis: TPointF; Source: TBGRACustomBitmap; AOpacity: Byte=255); virtual; abstract;
-     procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0; AOpacity: Byte=255); virtual; abstract;
-     procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap;
-       operation: TBlendOperation); virtual; abstract;
+     procedure PutImageAngle(x,y: single; Source: TBGRACustomBitmap; angle: single; imageCenterX: single = 0; imageCenterY: single = 0; AOpacity: Byte=255; ARestoreOffsetAfterRotation: boolean = false); virtual; abstract;
+     procedure BlendImage(x, y: integer; Source: TBGRACustomBitmap; operation: TBlendOperation); virtual; abstract;
+     procedure BlendImageOver(x, y: integer; Source: TBGRACustomBitmap; operation: TBlendOperation; AOpacity: byte = 255;
+         ALinearBlend: boolean = false); virtual; abstract;
      function Duplicate(DuplicateProperties: Boolean = False): TBGRACustomBitmap; virtual; abstract;
      function Equals(comp: TBGRACustomBitmap): boolean; virtual; abstract;
      function Equals(comp: TBGRAPixel): boolean; virtual; abstract;
@@ -537,7 +544,7 @@ type
      procedure GrayscaleToAlpha; virtual; abstract;
      procedure AlphaToGrayscale; virtual; abstract;
      procedure ApplyMask(mask: TBGRACustomBitmap); virtual; abstract;
-     function GetImageBounds(Channel: TChannel = cAlpha): TRect; virtual; abstract;
+     function GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; virtual; abstract;
      function GetImageBounds(Channels: TChannels): TRect; virtual; abstract;
      function MakeBitmapCopy(BackgroundColor: TColor): TBitmap; virtual; abstract;
 
@@ -555,6 +562,8 @@ type
      function FilterCustomBlur(mask: TBGRACustomBitmap): TBGRACustomBitmap; virtual; abstract;
      function FilterEmboss(angle: single): TBGRACustomBitmap; virtual; abstract;
      function FilterEmbossHighlight(FillSelection: boolean): TBGRACustomBitmap; virtual; abstract;
+     function FilterEmbossHighlight(FillSelection: boolean; BorderColor: TBGRAPixel): TBGRACustomBitmap; virtual; abstract;
+     function FilterEmbossHighlight(FillSelection: boolean; BorderColor: TBGRAPixel; var Offset: TPoint): TBGRACustomBitmap; virtual; abstract;
      function FilterGrayscale: TBGRACustomBitmap; virtual; abstract;
      function FilterNormalize(eachChannel: boolean = True): TBGRACustomBitmap; virtual; abstract;
      function FilterRotate(origin: TPointF; angle: single): TBGRACustomBitmap; virtual; abstract;
@@ -622,9 +631,12 @@ type
     function _Release: Integer; {$IF (not defined(WINDOWS)) AND (FPC_FULLVERSION>=20501)}cdecl{$ELSE}stdcall{$IFEND};
   end;
 
+  { TBGRACustomGradient }
+
   TBGRACustomGradient = class
   public
     function GetColorAt(position: integer): TBGRAPixel; virtual; abstract;
+    function GetColorAtF(position: single): TBGRAPixel; virtual;
     function GetAverageColor: TBGRAPixel; virtual; abstract;
     function GetMonochrome: boolean; virtual; abstract;
     property Monochrome: boolean read GetMonochrome;
@@ -740,6 +752,7 @@ function PositiveMod(value, cycle: integer): integer; inline;
 procedure PrecalcSin65536; // compute all values now
 function Sin65536(value: word): integer; inline;
 function Cos65536(value: word): integer; inline;
+function ByteSqrt(value: byte): byte; inline;
 
 implementation
 
@@ -919,6 +932,19 @@ begin
   Result := (pt.x = EmptySingle) and (pt.y = EmptySingle);
 end;
 
+{ TBGRACustomGradient }
+
+function TBGRACustomGradient.GetColorAtF(position: single): TBGRAPixel;
+begin
+  position *= 65536;
+  if position < low(integer) then
+    result := GetColorAt(low(Integer))
+  else if position > high(integer) then
+    result := GetColorAt(high(Integer))
+  else
+    result := GetColorAt(round(position));
+end;
+
 { TBGRAColorList }
 
 function TBGRAColorList.GetByIndex(Index: integer): TBGRAPixel;
@@ -1075,14 +1101,16 @@ end;
 procedure TBGRACustomBitmap.DrawPolyLineAntialias(const points: array of TPoint; c1,
   c2: TBGRAPixel; dashLen: integer; DrawLastPixel: boolean);
 var i: integer;
+  DashPos: integer;
 begin
+   DashPos := 0;
    if length(points) = 1 then
    begin
      if DrawLastPixel then DrawPixel(points[0].x,points[0].y,c1);
    end
    else
      for i := 0 to high(points)-1 do
-       DrawLineAntialias(points[i].x,points[i].Y,points[i+1].x,points[i+1].y,c1,c2,dashLen,DrawLastPixel and (i=high(points)-1));
+       DrawLineAntialias(points[i].x,points[i].Y,points[i+1].x,points[i+1].y,c1,c2,dashLen,DrawLastPixel and (i=high(points)-1),DashPos);
 end;
 
 { Following functions are defined for convenience }
@@ -1175,6 +1203,17 @@ begin
   style.ShowPrefix := false;
   style.Clipping := false;
   TextRect(ARect,ARect.Left,ARect.Top,s,style,texture);
+end;
+
+function TBGRACustomBitmap.ComputeEllipse(x, y, rx, ry: single): ArrayOfTPointF;
+begin
+  result := ComputeEllipseContour(x,y,rx,ry);
+end;
+
+function TBGRACustomBitmap.ComputeEllipse(x, y, rx, ry, w: single
+  ): ArrayOfTPointF;
+begin
+  result := ComputeEllipseBorder(x,y,rx,ry,w);
 end;
 
 procedure TBGRACustomBitmap.FillTransparent;
@@ -2314,7 +2353,7 @@ begin
 end;
 
 function ParseColorValue(str: string): byte;
-var pourcent,unclipped,errPos: integer;
+var pourcent,unclipped,{%H-}errPos: integer;
 begin
   if str = '' then result := 0 else
   begin
@@ -2749,6 +2788,7 @@ end;
   in order to stay in the range 0..65535 }
 var
   sinTab65536: packed array of word;
+  byteSqrtTab: packed array of word;
 
 function Sin65536(value: word): integer;
 var b: integer;
@@ -2784,6 +2824,23 @@ var
   i: Integer;
 begin
   for i := 0 to 32767 do Sin65536(i);
+end;
+
+procedure PrecalcByteSqrt;
+var i: integer;
+begin
+  if byteSqrtTab = nil then
+  begin
+    setlength(byteSqrtTab,256);
+    for i := 0 to 255 do
+      byteSqrtTab[i] := round(sqrt(i/255)*255);
+  end;
+end;
+
+function ByteSqrt(value: byte): byte; inline;
+begin
+  if byteSqrtTab = nil then PrecalcByteSqrt;
+  result := ByteSqrtTab[value];
 end;
 
 initialization

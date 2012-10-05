@@ -18,10 +18,10 @@ function ComputeClosedSpline(const points: array of TPointF; Style: TSplineStyle
 function ComputeOpenedSpline(const points: array of TPointF; Style: TSplineStyle; EndCoeff: single = 0.25): ArrayOfTPointF;
 
 { Compute points to draw an antialiased ellipse }
-function ComputeEllipse(x,y,rx,ry: single): ArrayOfTPointF;
-function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF; overload;
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions): ArrayOfTPointF; overload;
+function ComputeEllipse(x,y,rx,ry: single; quality: single = 1): ArrayOfTPointF;
+function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word; quality: single = 1): ArrayOfTPointF;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; quality: single = 1): ArrayOfTPointF; overload;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; options: TRoundRectangleOptions; quality: single = 1): ArrayOfTPointF; overload;
 
 implementation
 
@@ -330,7 +330,7 @@ begin
 end;
 
 {$PUSH}{$R-}
-function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word): ArrayOfTPointF;
+function ComputeArc65536(x, y, rx, ry: single; start65536,end65536: word; quality: single): ArrayOfTPointF;
 var i,nb: integer;
     arclen: integer;
     pos: word;
@@ -339,8 +339,23 @@ begin
     arclen := end65536-start65536 else
     arclen := 65536-(start65536-end65536);
 
-  nb := round(((rx+ry)*2+8)*arclen/65536) and not 3;
-  if nb < 2 then nb := 2;
+  if quality < 0 then quality := 0;
+
+  nb := round(((rx+ry)*2*quality+8)*arclen/65536) and not 3;
+  if arclen <= 16384 then
+  begin
+    if nb < 2 then nb := 2;
+  end else
+  if arclen <= 32768 then
+  begin
+    if nb < 3 then nb := 3;
+  end else
+  if arclen <= 32768+16384 then
+  begin
+    if nb < 4 then nb := 4;
+  end else
+    if nb < 5 then nb := 5;
+
   if nb > arclen+1 then nb := arclen+1;
 
   setlength(result,nb);
@@ -353,18 +368,18 @@ begin
 end;
 {$R+}
 
-function ComputeEllipse(x, y, rx, ry: single): ArrayOfTPointF;
+function ComputeEllipse(x, y, rx, ry: single; quality: single): ArrayOfTPointF;
 begin
-  result := ComputeArc65536(x,y,rx,ry,0,0);
+  result := ComputeArc65536(x,y,rx,ry,0,0,quality);
 end;
 
-function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single): ArrayOfTPointF;
+function ComputeRoundRect(x1,y1,x2,y2,rx,ry: single; quality: single): ArrayOfTPointF;
 begin
-  result := ComputeRoundRect(x1,y1,x2,y2,rx,ry,[]);
+  result := ComputeRoundRect(x1,y1,x2,y2,rx,ry,[],quality);
 end;
 
 function ComputeRoundRect(x1, y1, x2, y2, rx, ry: single;
-  options: TRoundRectangleOptions): ArrayOfTPointF;
+  options: TRoundRectangleOptions; quality: single): ArrayOfTPointF;
 var q0,q1,q2,q3,q4: array of TPointF;
   temp: Single;
 begin
@@ -394,28 +409,28 @@ begin
   if rrTopRightSquare in options then
     q1 := PointsF([PointF(x2,y1)])
   else
-    q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384);
+    q1 := ComputeArc65536(x2-rx,y1+ry,rx,ry,0,16384,quality);
 
   if rrTopLeftBevel in options then
     q2 := PointsF([PointF(x1+rx,y1),PointF(x1,y1+ry)]) else
   if rrTopLeftSquare in options then
     q2 := PointsF([PointF(x1,y1)])
   else
-    q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768);
+    q2 := ComputeArc65536(x1+rx,y1+ry,rx,ry,16384,32768,quality);
 
   if rrBottomLeftBevel in options then
     q3 := PointsF([PointF(x1,y2-ry),PointF(x1+rx,y2)]) else
   if rrBottomLeftSquare in options then
     q3 := PointsF([PointF(x1,y2)])
   else
-    q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384);
+    q3 := ComputeArc65536(x1+rx,y2-ry,rx,ry,32768,32768+16384,quality);
 
   if rrBottomRightBevel in options then
     q4 := PointsF([PointF(x2-rx,y2),PointF(x2,y2-ry)]) else
   if rrBottomRightSquare in options then
     q4 := PointsF([PointF(x2,y2)])
   else
-    q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0);
+    q4 := ComputeArc65536(x2-rx,y2-ry,rx,ry,32768+16384,0,quality);
 
   result := ConcatPointsF([q0,q1,q2,q3,q4]);
 end;

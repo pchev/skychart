@@ -253,7 +253,7 @@ procedure TBGRAMaterial3D.ComputeDiffuseAndSpecularColor(Context: PSceneLighting
 var
   NH,PowerTablePos: single; //keep first for asm
 
-  NnH,value: single;
+  NnH: single;
   PowerTableFPos: single;
   PowerTableIPos,i: integer;
 begin

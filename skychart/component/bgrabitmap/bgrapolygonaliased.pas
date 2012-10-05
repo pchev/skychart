@@ -385,10 +385,10 @@ var
     pdest: PBGRAPixel;
     i: LongInt;
     ec: TExpandedPixel;
-    cInt: packed record
+    {%H-}cInt: packed record
         r,g,b,a: integer;
        end;
-    c: TBGRAPixel;
+    {$IFDEF CPUI386} c: TBGRAPixel; {$ENDIF}
   begin
     t := ((ix1+0.5)-x1)/(x2-x1);
     colorPos := c1 + (c2-c1)*t;
@@ -627,7 +627,7 @@ var
   procedure DrawGradientLine(yb: integer; ix1: integer; ix2: integer;
     x1: Single; info1: TPerspectiveColorGradientIntersectionInfo; x2: Single; info2: TPerspectiveColorGradientIntersectionInfo);
   var
-    diff,colorPos,colorPosByZ: TColorF;
+    diff,colorPos,{%H-}colorPosByZ: TColorF;
     colorStep: TColorF;
     t: single;
     pdest: PBGRAPixel;
@@ -636,11 +636,11 @@ var
     invDx: single;
     z,invZ,InvZStep: single;
     r,g,b,a: integer;
-    minVal,maxVal: single;
+    {$IFDEF CPUI386}minVal,maxVal: single;
     cInt: packed record
       r,g,b,a: integer;
     end;
-    c: TBGRAPixel;
+    c: TBGRAPixel;{$ENDIF}
     zbufferpos: psingle;
 
   begin
