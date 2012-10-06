@@ -2867,7 +2867,7 @@ if cfgsc.ProjPole=Altaz then begin
   if Fplot.cfgplot.UseBMP then begin
     fill:=cfgsc.FillHorizon;
     hbmp:=TBGRABitmap.Create;
-    hbmp.SetSize(fplot.cbmp.Width,fplot.cbmp.Height);
+    hbmp.SetSize(fplot.cfgchart.Width,fplot.cfgchart.Height);
     hbmp.FillTransparent;
     col:=FPlot.cfgplot.Color[19];
     if col = FPlot.cfgplot.bgcolor then begin
