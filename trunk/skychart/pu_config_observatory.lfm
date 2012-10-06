@@ -4,7 +4,6 @@ object f_configobservatory: Tf_configobservatory
   Top = 120
   Width = 501
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsToolWindow
   Caption = 'Observatory'
   ClientHeight = 578
   ClientWidth = 501

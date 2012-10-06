@@ -3,7 +3,6 @@ object f_catgen: Tf_catgen
   Height = 479
   Top = 94
   Width = 503
-  BorderStyle = bsToolWindow
   Caption = 'Prepare a catalog CatGen 3.0'
   ClientHeight = 479
   ClientWidth = 503

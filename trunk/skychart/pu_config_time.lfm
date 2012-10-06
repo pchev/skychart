@@ -4,7 +4,6 @@ object f_configtime: Tf_configtime
   Top = 120
   Width = 496
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsToolWindow
   Caption = 'Date / Time'
   ClientHeight = 583
   ClientWidth = 496
@@ -99,6 +98,8 @@ object f_configtime: Tf_configtime
           ClientHeight = 525
           ClientWidth = 492
           inherited SimObj: TCheckListBox
+            ItemHeight = 0
+            TopIndex = -1
             Data = {
               0C000000000000000000000000000000
             }

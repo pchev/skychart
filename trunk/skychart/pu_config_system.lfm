@@ -3,7 +3,6 @@ object f_configsystem: Tf_configsystem
   Height = 572
   Top = 120
   Width = 500
-  BorderStyle = bsToolWindow
   Caption = 'System'
   ClientHeight = 572
   ClientWidth = 500
@@ -69,19 +68,14 @@ object f_configsystem: Tf_configsystem
   end
   inline f_config_system1: Tf_config_system
     Height = 522
-    Width = 500
     Align = alClient
     ClientHeight = 522
-    ClientWidth = 500
     TabOrder = 1
     inherited MainPanel: TPanel
       Height = 522
-      Width = 500
       ClientHeight = 522
-      ClientWidth = 500
       inherited PageControl1: TPageControl
         Height = 520
-        Width = 498
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
@@ -99,6 +93,8 @@ object f_configsystem: Tf_configsystem
           ClientHeight = 516
           ClientWidth = 494
           inherited PageControl2: TPageControl
+            ActivePage = nil
+            TabIndex = -1
             inherited TabSheet1: TTabSheet
               ClientHeight = 348
               ClientWidth = 470
@@ -118,6 +114,8 @@ object f_configsystem: Tf_configsystem
                 ClientHeight = 326
                 ClientWidth = 446
                 inherited PageControl3: TPageControl
+                  ActivePage = nil
+                  TabIndex = -1
                   inherited TabSheet5: TTabSheet
                     ClientHeight = 173
                     ClientWidth = 382

@@ -3,7 +3,6 @@ object f_configsolsys: Tf_configsolsys
   Height = 576
   Top = 120
   Width = 500
-  BorderStyle = bsToolWindow
   Caption = 'Solar System'
   ClientHeight = 576
   ClientWidth = 500
@@ -96,14 +95,18 @@ object f_configsolsys: Tf_configsolsys
           ClientHeight = 520
           ClientWidth = 494
           inherited ComPageControl: TPageControl
+            ActivePage = nil
+            TabIndex = -1
             inherited comsetting: TTabSheet
-              ClientHeight = 473
-              ClientWidth = 493
+              ClientHeight = 512
+              ClientWidth = 492
             end
             inherited comload: TTabSheet
-              ClientHeight = 473
-              ClientWidth = 493
+              ClientHeight = 512
+              ClientWidth = 492
               inherited ComPageControl1: TPageControl
+                ActivePage = nil
+                TabIndex = -1
                 inherited TabSheet1: TTabSheet
                   ClientHeight = 100
                   ClientWidth = 432
@@ -115,12 +118,12 @@ object f_configsolsys: Tf_configsolsys
               end
             end
             inherited comdelete: TTabSheet
-              ClientHeight = 473
-              ClientWidth = 493
+              ClientHeight = 512
+              ClientWidth = 492
             end
             inherited Addsinglecom: TTabSheet
-              ClientHeight = 473
-              ClientWidth = 493
+              ClientHeight = 512
+              ClientWidth = 492
             end
           end
         end
@@ -128,6 +131,8 @@ object f_configsolsys: Tf_configsolsys
           ClientHeight = 520
           ClientWidth = 494
           inherited AstPageControl: TPageControl
+            ActivePage = nil
+            TabIndex = -1
             inherited astsetting: TTabSheet
               ClientHeight = 425
               ClientWidth = 485
@@ -136,6 +141,8 @@ object f_configsolsys: Tf_configsolsys
               ClientHeight = 425
               ClientWidth = 485
               inherited AstPageControl2: TPageControl
+                ActivePage = nil
+                TabIndex = -1
                 inherited TabSheet3: TTabSheet
                   ClientHeight = 92
                   ClientWidth = 437
