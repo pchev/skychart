@@ -6,8 +6,8 @@ object f_config_time: Tf_config_time
   ClientHeight = 530
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 372
-  DesignTop = 318
+  DesignLeft = 361
+  DesignTop = 334
   object MainPanel: TPanel
     Left = 0
     Height = 530
@@ -24,11 +24,11 @@ object f_config_time: Tf_config_time
       Height = 530
       Top = 0
       Width = 500
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -549,25 +549,25 @@ object f_config_time: Tf_config_time
         end
         object Label178: TLabel
           Left = 358
-          Height = 15
+          Height = 16
           Top = 46
-          Width = 35
+          Width = 36
           Caption = 'every  '
           ParentColor = False
         end
         object Label179: TLabel
           Left = 220
-          Height = 15
+          Height = 16
           Top = 46
-          Width = 93
+          Width = 97
           Caption = 'Number of steps'
           ParentColor = False
         end
         object Label56: TLabel
           Left = 8
-          Height = 15
+          Height = 16
           Top = 6
-          Width = 184
+          Width = 197
           Caption = 'Plot the position of moving object.'
           ParentColor = False
         end
@@ -595,37 +595,16 @@ object f_config_time: Tf_config_time
             'Seconds'
           )
           OnClick = stepunitClick
-          TabOrder = 5
+          TabOrder = 3
         end
         object stepline: TCheckBox
           Left = 8
-          Height = 19
+          Height = 23
           Top = 254
-          Width = 244
+          Width = 255
           Caption = 'Connection lines between each position '
           OnClick = steplineClick
-          TabOrder = 6
-        end
-        object nbstep: TSpinEdit
-          Left = 220
-          Height = 24
-          Top = 70
-          Width = 75
-          MinValue = 1
-          OnChange = nbstepChanged
-          TabOrder = 3
-          Value = 1
-        end
-        object stepsize: TSpinEdit
-          Left = 358
-          Height = 24
-          Top = 70
-          Width = 75
-          MaxValue = 999999
-          MinValue = 1
-          OnChange = stepsizeChanged
           TabOrder = 4
-          Value = 1
         end
         object SimObj: TCheckListBox
           Left = 6
@@ -646,10 +625,9 @@ object f_config_time: Tf_config_time
             'Asteroids'
             'Comets'
           )
-          ItemHeight = 0
+          ItemHeight = 21
           OnItemClick = SimObjItemClick
           TabOrder = 0
-          TopIndex = -1
           Data = {
             0C000000000000000000000000000000
           }
@@ -700,13 +678,13 @@ object f_config_time: Tf_config_time
             'One of'
           )
           OnClick = RadioGroup1Click
-          TabOrder = 7
+          TabOrder = 5
           object LongEdit1: TLongEdit
-            Left = 293
-            Height = 28
+            Left = 291
+            Height = 24
             Hint = '2..500'
-            Top = 30
-            Width = 139
+            Top = 31
+            Width = 137
             ParentShowHint = False
             ShowHint = True
             TabOrder = 6
@@ -740,7 +718,7 @@ object f_config_time: Tf_config_time
             'Magnitude'
           )
           OnItemClick = CheckGroup1ItemClick
-          TabOrder = 8
+          TabOrder = 6
           Data = {
             03000000020202
           }
@@ -772,10 +750,61 @@ object f_config_time: Tf_config_time
             'Second'
           )
           OnItemClick = CheckGroup2ItemClick
-          TabOrder = 9
+          TabOrder = 7
           Data = {
             06000000020202020202
           }
+        end
+        object nbstep: TLongEdit
+          Left = 220
+          Height = 23
+          Hint = '1..100'
+          Top = 70
+          Width = 75
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 8
+          OnChange = nbstepChanged
+          Value = 1
+          MinValue = 1
+          MaxValue = 100
+        end
+        object stepsize: TLongEdit
+          Left = 358
+          Height = 23
+          Hint = '1..999'
+          Top = 70
+          Width = 75
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 9
+          OnChange = stepsizeChanged
+          Value = 1
+          MinValue = 1
+          MaxValue = 999
+        end
+        object UpDown1: TUpDown
+          Left = 295
+          Height = 23
+          Top = 70
+          Width = 17
+          Associate = nbstep
+          Min = 1
+          Position = 1
+          TabOrder = 10
+          Wrap = False
+        end
+        object UpDown2: TUpDown
+          Left = 433
+          Height = 23
+          Top = 70
+          Width = 17
+          Associate = stepsize
+          Min = 1
+          Max = 999
+          Position = 1
+          TabOrder = 11
+          Wrap = False
         end
       end
       object Page3: TTabSheet
@@ -793,9 +822,9 @@ object f_config_time: Tf_config_time
           TabOrder = 0
           object Label2: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 34
-            Width = 117
+            Width = 121
             Caption = 'Delay between frame'
             ParentColor = False
           end
@@ -824,7 +853,7 @@ object f_config_time: Tf_config_time
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
             Left = 174
-            Height = 22
+            Height = 23
             Top = 60
             Width = 235
             ShowHidden = False
@@ -836,100 +865,87 @@ object f_config_time: Tf_config_time
           end
           object Label3: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 65
-            Width = 107
+            Width = 114
             Caption = 'Recording directory'
             ParentColor = False
           end
           object Label4: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 111
-            Width = 90
+            Width = 95
             Caption = 'Recording prefix'
             ParentColor = False
           end
           object Edit1: TEdit
             Left = 174
-            Height = 22
+            Height = 23
             Top = 106
             Width = 113
             OnChange = Edit1Change
             TabOrder = 1
           end
-          object FloatSpinEdit1: TFloatSpinEdit
-            Left = 174
-            Height = 22
-            Top = 180
-            Width = 61
-            DecimalPlaces = 1
-            Increment = 1
-            MaxValue = 30
-            MinValue = 0.1
-            OnChange = FloatSpinEdit1Change
-            TabOrder = 2
-            Value = 1
-          end
           object Label5: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 185
-            Width = 109
+            Width = 108
             Caption = 'Frames per second'
             ParentColor = False
           end
           object Label6: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 257
-            Width = 140
+            Width = 147
             Caption = 'Additional ffmpeg options'
             ParentColor = False
           end
           object Edit2: TEdit
             Left = 174
-            Height = 22
+            Height = 23
             Top = 252
             Width = 235
             OnChange = Edit2Change
-            TabOrder = 3
+            TabOrder = 2
           end
           object Label7: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 221
-            Width = 69
+            Width = 67
             Caption = 'Frames size'
             ParentColor = False
           end
           object Edit3: TEdit
             Left = 294
-            Height = 22
+            Height = 23
             Top = 216
             Width = 50
             OnChange = Edit3Change
-            TabOrder = 4
+            TabOrder = 3
           end
           object Label8: TLabel
             Left = 348
-            Height = 15
+            Height = 16
             Top = 221
-            Width = 6
+            Width = 7
             Caption = 'x'
             ParentColor = False
           end
           object Edit4: TEdit
             Left = 360
-            Height = 22
+            Height = 23
             Top = 216
             Width = 49
             OnChange = Edit4Change
-            TabOrder = 5
+            TabOrder = 4
           end
           object ComboBox1: TComboBox
             Left = 174
-            Height = 22
+            Height = 23
             Top = 216
             Width = 113
             ItemHeight = 0
@@ -942,7 +958,7 @@ object f_config_time: Tf_config_time
               'Free size'
             )
             OnChange = ComboBox1Change
-            TabOrder = 6
+            TabOrder = 5
             Text = 'ComboBox1'
           end
           object CheckBox3: TCheckBox
@@ -953,23 +969,23 @@ object f_config_time: Tf_config_time
             AutoSize = False
             Caption = 'Record animation to file'
             OnChange = CheckBox3Change
-            TabOrder = 7
+            TabOrder = 6
           end
           object Label9: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 143
-            Width = 110
+            Width = 118
             Caption = 'Recording extention'
             ParentColor = False
           end
           object Edit5: TEdit
             Left = 174
-            Height = 22
+            Height = 23
             Top = 140
             Width = 113
             OnChange = Edit5Change
-            TabOrder = 8
+            TabOrder = 7
           end
           object Button9: TButton
             Left = 174
@@ -978,19 +994,19 @@ object f_config_time: Tf_config_time
             Width = 85
             Caption = 'Button9'
             OnClick = Button9Click
-            TabOrder = 9
+            TabOrder = 8
           end
           object Label10: TLabel
             Left = 3
-            Height = 15
+            Height = 16
             Top = 296
-            Width = 116
+            Width = 122
             Caption = 'ffmpeg program path'
             ParentColor = False
           end
           object FileNameEdit1: TFileNameEdit
             Left = 174
-            Height = 22
+            Height = 23
             Top = 290
             Width = 235
             OnAcceptFileName = FileNameEdit1AcceptFileName
@@ -1000,8 +1016,34 @@ object f_config_time: Tf_config_time
             ButtonWidth = 23
             NumGlyphs = 0
             MaxLength = 0
-            TabOrder = 10
+            TabOrder = 9
             OnChange = FileNameEdit1Change
+          end
+          object UpDown3: TUpDown
+            Left = 222
+            Height = 23
+            Top = 178
+            Width = 17
+            Associate = fpsedit
+            Min = 1
+            Max = 60
+            Position = 2
+            TabOrder = 10
+            Wrap = False
+          end
+          object fpsedit: TLongEdit
+            Left = 174
+            Height = 23
+            Hint = '1..60'
+            Top = 178
+            Width = 48
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 11
+            OnChange = fpseditChange
+            Value = 2
+            MinValue = 1
+            MaxValue = 60
           end
         end
       end
