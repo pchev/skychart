@@ -67,6 +67,13 @@ type
      IntfImgReady: boolean;
      OldGRSlong: double;
      TransparentColor : TFPColor;
+     bmpreader:TFPReaderBMP;
+     obmp : TBitmap;
+     Fstarshape,starbmp: Tbitmap;
+     Astarbmp: array [0..6,0..10] of Tbitmap;
+     Bstarbmp: array [0..6,0..10] of TBGRABitmap;
+     starbmpw:integer;
+     IntfImg : TLazIntfImage;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
@@ -86,6 +93,25 @@ type
      procedure InitXPlanetRender;
      procedure SetImage(value:TCanvas);
      procedure InitStarBmp;
+     Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     procedure PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     Procedure PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
+     function BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
+     Procedure BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);
+     procedure ClearImage;
   protected
     { Protected declarations }
   public
@@ -93,52 +119,22 @@ type
     cfgplot : Tconf_plot;
     cfgchart: Tconf_chart;
     cbmp : TBGRABitmap;
-    obmp : TBitmap;
-    cnv, destcnv  : Tcanvas;
-    bmpreader:TFPReaderBMP;
-    Fstarshape,starbmp,compassrose,compassarrow: Tbitmap;
-    Astarbmp: array [0..6,0..10] of Tbitmap;
-    Bstarbmp: array [0..6,0..10] of TBGRABitmap;
-    starbmpw:integer;
-    IntfImg : TLazIntfImage;
+    cnv  : Tcanvas;
+    destcnv  : Tcanvas;
+    compassrose,compassarrow: Tbitmap;
     editlabelmenu: Tpopupmenu;
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
-  published
-    { Published declarations }
      function Init(w,h : integer) : boolean;
      function InitLabel : boolean;
-     //--------------------------------------------
-     function BGRATextOut(x, y, o: single; s: string; c: TBGRAPixel; abmp:TBGRABitmap; forceantialias:boolean=false):TRect;
-     procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
-     Procedure BGRARectangle(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap);
-     //--------------------------------------------
-     procedure ClearImage;
      Procedure FlushCnv;
+     procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
      Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
-//--------------------------------------------
-      Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
-      Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOBN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOClNb(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSODStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOTStar(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      procedure PlotDSOAst(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOHIIRegion(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOGxyCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSODN(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOUnknown(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOCircle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSOlozenge(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-      Procedure PlotDSORectangle(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer; forcecolor:boolean; col:Tcolor);
-//---------------------------------------------
+     Procedure PlotDeepSkyObject(Axx,Ayy: single;Adim,Ama,Asbr,Apixscale:Double;Atyp:Integer;Amorph:String;whitebg:boolean; forcecolor:boolean; col:Tcolor=clWhite);
+     Procedure PlotDSOGxy(Ax,Ay: single; Ar1,Ar2,Apa,Arnuc,Ab_vt,Ab_ve,Ama,Asbr,Apixscale : double;Amorph:string; forcecolor:boolean; col:Tcolor);
      Procedure PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
      Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
@@ -169,6 +165,8 @@ type
      property OnDeleteAllLabel: Tvoidfunc read FDeleteAllLabel write FDeleteAllLabel;
      property OnLabelClick: Tintfunc read FLabelClick write FLabelClick;
      property Image: TCanvas write SetImage;
+   published
+    { Published declarations }
 
   end;
 
