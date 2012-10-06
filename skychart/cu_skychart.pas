@@ -893,7 +893,7 @@ var rec:GcatRec;
   x1,y1,cyear,dyear,pra,pdec: Double;
   xx,yy,xxp,yyp : single;
   j,lid,saveplot : integer;
-  first,saveusebmp: boolean;
+  first: boolean;
   firstcat:TSname;
   gk,lis: string;
   al: TLabelAlign;
@@ -908,12 +908,7 @@ dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot.starplot;
 if (not Fplot.cfgplot.UseBMP) and cfgsc.DrawPMon and (Fplot.cfgplot.starplot=2) then Fplot.cfgplot.starplot:=1;
-saveusebmp:=Fplot.cfgplot.UseBMP;
 try
-if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-  Fplot.cfgplot.UseBMP:=false;
-  FPlot.cnv:=Fplot.cbmp.Canvas;
-end;
 for j:=0 to Fcatalog.cfgcat.GCatNum-1 do  begin
    if Fcatalog.cfgcat.GCatLst[j].CatOn and (Fcatalog.cfgcat.GCatLst[j].shortname='star') then begin
       firstcat:='Star';
@@ -975,10 +970,6 @@ if Fcatalog.OpenStar then
 end;
 result:=true;
 finally
-  if saveusebmp then begin
-    FPlot.cnv:=nil;
-  end;
-  Fplot.cfgplot.UseBMP := saveusebmp;
   Fcatalog.CloseStar;
   Fplot.cfgplot.starplot:=saveplot;
 end;
@@ -989,18 +980,12 @@ var rec:GcatRec;
   x1,y1: Double;
   xx,yy:single;
   lid: integer;
-  saveusebmp: boolean;
   lis:string;
 begin
 if VerboseMsg then
  WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
 fillchar(rec,sizeof(rec),0);
-saveusebmp:=Fplot.cfgplot.UseBMP;
 try
-if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-  Fplot.cfgplot.UseBMP:=false;
-  FPlot.cnv:=Fplot.cbmp.Canvas;
-end;
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
  lis:=rec.variable.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
@@ -1018,10 +1003,6 @@ if Fcatalog.OpenVarStar then
 end;
 result:=true;
 finally
-    if saveusebmp then begin
-    FPlot.cnv:=nil;
-  end;
-  Fplot.cfgplot.UseBMP := saveusebmp;
   Fcatalog.CloseVarStar;
 end;
 end;
@@ -1031,18 +1012,12 @@ var rec:GcatRec;
   x1,y1,x2,y2,rot: Double;
   xx,yy:single;
   lid: integer;
-  saveusebmp: boolean;
   lis,buf:string;
 begin
 if VerboseMsg then
  WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
 fillchar(rec,sizeof(rec),0);
-saveusebmp:=Fplot.cfgplot.UseBMP;
 try
-if (Fplot.cfgplot.starplot=0) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-  Fplot.cfgplot.UseBMP:=false;
-  FPlot.cnv:=Fplot.cbmp.Canvas;
-end;
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
  lis:=rec.double.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
@@ -1071,10 +1046,6 @@ if Fcatalog.OpenDblStar then
 end;
 result:=true;
 finally
-  if saveusebmp then begin
-    FPlot.cnv:=nil;
-  end;
-  Fplot.cfgplot.UseBMP := saveusebmp;
   Fcatalog.CloseDblStar;
 end;
 end;
@@ -1098,7 +1069,7 @@ var rec:GcatRec;
   bmp:Tbitmap;
   save_col: Starcolarray;
   al,alsac: TLabelAlign;
-  saveusebmp,imageok: boolean;
+  imageok: boolean;
 
   Procedure Drawing;
     begin
@@ -1147,12 +1118,7 @@ var rec:GcatRec;
     imageok:=false;
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
-    saveusebmp:=Fplot.cfgplot.UseBMP;
     try
-    if (not cfgsc.ShowImages) and (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-      Fplot.cfgplot.UseBMP:=false;
-      FPlot.cnv:=Fplot.cbmp.Canvas;
-    end;
     alsac:=laTopLeft;
     if Fcatalog.OpenNeb then
       while Fcatalog.readneb(rec) do
@@ -1229,10 +1195,6 @@ var rec:GcatRec;
         end;
       result:=true;
     finally
-      if saveusebmp then begin
-        FPlot.cnv:=nil;
-      end;
-      Fplot.cfgplot.UseBMP := saveusebmp;
       Fcatalog.CloseNeb;
       bmp.Free;
     end;
@@ -1310,7 +1272,6 @@ function Tskychart.DrawOutline :boolean;
 var rec:GcatRec;
   x1,y1: Double;
   xx,yy: single;
-  saveusebmp:boolean;
   op,lw,col,fs: integer;
 begin
 if VerboseMsg then
@@ -1318,11 +1279,6 @@ if VerboseMsg then
 if Fcatalog.OpenLin then begin
     fillchar(rec,sizeof(rec),0);
     try
-    saveusebmp:=Fplot.cfgplot.UseBMP;
-    if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-       Fplot.cfgplot.UseBMP:=false;
-       FPlot.cnv:=Fplot.cbmp.Canvas;
-    end;
    while Fcatalog.readlin(rec) do begin
    precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
    if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
@@ -1339,10 +1295,6 @@ if Fcatalog.OpenLin then begin
   end;
   result:=true;
   finally
-   if saveusebmp then begin
-     FPlot.cnv:=nil;
-   end;
-   Fplot.cfgplot.UseBMP := saveusebmp;
    Fcatalog.CloseLin;
   end;
 end;
@@ -1352,7 +1304,6 @@ function Tskychart.DrawDSL :boolean;
 var rec:GcatRec;
   x1,y1: Double;
   xx,yy: single;
-  saveusebmp:boolean;
   op,lw,col,fs: integer;
 begin
 if VerboseMsg then
@@ -1360,11 +1311,6 @@ if VerboseMsg then
 if Fcatalog.OpenDSL(cfgsc.DSLforcecolor,cfgsc.DSLcolor) then begin
    fillchar(rec,sizeof(rec),0);
    try
-   saveusebmp:=Fplot.cfgplot.UseBMP;
-   if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-      Fplot.cfgplot.UseBMP:=false;
-      FPlot.cnv:=Fplot.cbmp.Canvas;
-   end;
    while Fcatalog.ReadDSL(rec) do begin
    precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
    if cfgsc.ApparentPos then apparent_equatorial(rec.ra,rec.dec,cfgsc,true,false);
@@ -1381,10 +1327,6 @@ if Fcatalog.OpenDSL(cfgsc.DSLforcecolor,cfgsc.DSLcolor) then begin
   end;
   result:=true;
   finally
-    if saveusebmp then begin
-      FPlot.cnv:=nil;
-    end;
-    Fplot.cfgplot.UseBMP := saveusebmp;
     Fcatalog.CloseDSL;
   end;
 end;
@@ -1395,7 +1337,7 @@ var rec:GcatRec;
   x1,y1: Double;
   xx,yy:single;
   op,lw,col,fs: integer;
-  first,saveusebmp:boolean;
+  first:boolean;
 begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
@@ -1411,11 +1353,6 @@ else begin
 end;
 if col = FPlot.cfgplot.bgcolor then cfgsc.FillMilkyWay:=false;
 try
-saveusebmp:=Fplot.cfgplot.UseBMP;
-if (not Fplot.cfgplot.AntiAlias) and saveusebmp then begin
-   Fplot.cfgplot.UseBMP:=false;
-   FPlot.cnv:=Fplot.cbmp.Canvas;
-end;
 if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
  while Fcatalog.readMilkyway(rec) do begin
  if first then begin
@@ -1433,10 +1370,6 @@ if Fcatalog.OpenMilkyway(cfgsc.FillMilkyWay) then
 end;
 result:=true;
 finally
- if saveusebmp then begin
-   FPlot.cnv:=nil;
- end;
- Fplot.cfgplot.UseBMP := saveusebmp;
  Fcatalog.CloseMilkyway;
 end;
 end;
