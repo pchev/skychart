@@ -27,10 +27,13 @@ interface
 
 uses u_help, u_translation, u_constant, u_util, u_projection, cu_tz,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, Math,
-  StdCtrls, CheckLst, Buttons, ExtCtrls, Spin, enhedits, ComCtrls, LResources,
+  StdCtrls, CheckLst, Buttons, ExtCtrls, enhedits, ComCtrls, LResources,
   ButtonPanel, jdcalendar, LazHelpHTML, EditBtn;
 
 type
+
+  { Tf_config_time }
+
   Tf_config_time = class(TFrame)
     BitBtn1: TBitBtn;
     Button4: TButton;
@@ -45,6 +48,9 @@ type
     ComboBox1: TComboBox;
     Label11: TLabel;
     LongEdit1: TLongEdit;
+    fpsedit: TLongEdit;
+    nbstep: TLongEdit;
+    stepsize: TLongEdit;
     TZComboBox: TComboBox;
     DirectoryEdit1: TDirectoryEdit;
     Edit1: TEdit;
@@ -53,10 +59,12 @@ type
     Edit4: TEdit;
     Edit5: TEdit;
     FileNameEdit1: TFileNameEdit;
-    FloatSpinEdit1: TFloatSpinEdit;
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     Label10: TLabel;
+    UpDown1: TUpDown;
+    UpDown2: TUpDown;
+    UpDown3: TUpDown;
     UTLabel: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -108,8 +116,6 @@ type
     Label56: TLabel;
     stepunit: TRadioGroup;
     stepline: TCheckBox;
-    nbstep: TSpinEdit;
-    stepsize: TSpinEdit;
     SimObj: TCheckListBox;
     AllSim: TButton;
     NoSim: TButton;
@@ -142,7 +148,7 @@ type
     procedure Edit5Change(Sender: TObject);
     procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: String);
     procedure FileNameEdit1Change(Sender: TObject);
-    procedure FloatSpinEdit1Change(Sender: TObject);
+    procedure fpseditChange(Sender: TObject);
     procedure JDEditChange(Sender: TObject);
     procedure LongEdit1Change(Sender: TObject);
     procedure LongEdit2Change(Sender: TObject);
@@ -458,7 +464,7 @@ CheckBox3.Checked:=cmain.AnimRec;
 DirectoryEdit1.Directory:=cmain.AnimRecDir;
 Edit1.Text:=cmain.AnimRecPrefix;
 Edit5.Text:=cmain.AnimRecExt;
-FloatSpinEdit1.Value:=cmain.AnimFps;
+fpsedit.Value:=round(cmain.AnimFps);
 edit3.Text:=inttostr(cmain.AnimSx);
 edit4.Text:=inttostr(cmain.AnimSy);
 ComboBox1.ItemIndex:=cmain.AnimSize;
@@ -657,9 +663,9 @@ begin
   cmain.Animffmpeg:=FileNameEdit1.FileName;
 end;
 
-procedure Tf_config_time.FloatSpinEdit1Change(Sender: TObject);
+procedure Tf_config_time.fpseditChange(Sender: TObject);
 begin
-  cmain.AnimFps := FloatSpinEdit1.Value;
+  cmain.AnimFps := fpsedit.Value;
 end;
 
 procedure Tf_config_time.DateChange(Sender: TObject);
@@ -848,7 +854,7 @@ begin
   DirectoryEdit1.Directory:=HomeDir;
   Edit1.Text:='skychart';
   Edit5.Text:='.mp4';
-  FloatSpinEdit1.Value:=2.0;
+  fpsedit.Value:=10;
   ComboBox1.ItemIndex:=0;
   Edit2.Text:=DefaultffmpegOptions;
 end;
