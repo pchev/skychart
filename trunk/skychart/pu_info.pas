@@ -463,7 +463,7 @@ var i,j,rowc, colc: integer;
 begin
 // find table size
 rowc:=0; colc:=0;
-i:=0;
+i:=1;
 j:=0;
 repeat
   c:=txt[i];
@@ -494,7 +494,7 @@ StringGrid2.Cells[5,0]:=rsMagn;
 // fill the table
 rowc:=1;
 colc:=0;
-i:=0;
+i:=1;
 buf:='';
 repeat
   c:=txt[i];

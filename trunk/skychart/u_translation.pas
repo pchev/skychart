@@ -1374,6 +1374,7 @@ resourcestring
   rsShowNearEart = 'Show near Earth asteroids independently of the magnitude';
   rsAutomaticall2 = 'Automatically optimize the labels placement';
   rsDoNotFilterM = 'Do not filter Messier objects';
+  rsAllObjectsAt = 'All the objects at this position';
 
 implementation
 

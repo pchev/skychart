@@ -68,6 +68,7 @@ type
     Cleanupmap1: TMenuItem;
     Identlabel: TImage;
     MenuFinderCircle: TMenuItem;
+    AllAtThisPos: TMenuItem;
     nsearch1: TMenuItem;
     nsearch2: TMenuItem;
     nsearch3: TMenuItem;
@@ -135,6 +136,7 @@ type
     TrackOff1: TMenuItem;
     procedure About1Click(Sender: TObject);
     procedure AddLabel1Click(Sender: TObject);
+    procedure AllAtThisPosClick(Sender: TObject);
     procedure BlinkTimerTimer(Sender: TObject);
     procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
@@ -369,6 +371,7 @@ Cleanupmap1.Caption:=rsCleanupMap;
 Connect1.caption:=rsConnectTeles;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
+AllAtThisPos.Caption:=rsAllObjectsAt;
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
@@ -2241,6 +2244,11 @@ var ra,dec: double;
 begin
 GetAdXy(Xcursor,Ycursor,ra,dec,sc.cfgsc);
 sc.AddNewLabel(ra,dec);
+end;
+
+procedure Tf_chart.AllAtThisPosClick(Sender: TObject);
+begin
+  ListXY(xcursor,ycursor);
 end;
 
 procedure Tf_chart.BlinkTimerTimer(Sender: TObject);

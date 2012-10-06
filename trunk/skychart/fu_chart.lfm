@@ -23,10 +23,10 @@ object f_chart: Tf_chart
     OnResize = ChartResize
     object VertScrollBar: TScrollBar
       Cursor = crArrow
-      Left = 492
-      Height = 322
+      Left = 493
+      Height = 323
       Top = 0
-      Width = 16
+      Width = 15
       Align = alRight
       Kind = sbVertical
       LargeChange = 10
@@ -38,8 +38,8 @@ object f_chart: Tf_chart
     object HorScrollBar: TScrollBar
       Cursor = crArrow
       Left = 0
-      Height = 16
-      Top = 322
+      Height = 15
+      Top = 323
       Width = 508
       Align = alBottom
       LargeChange = 10
@@ -198,6 +198,10 @@ object f_chart: Tf_chart
       Caption = 'About'
       Visible = False
       OnClick = About1Click
+    end
+    object AllAtThisPos: TMenuItem
+      Caption = 'AllAtThisPos'
+      OnClick = AllAtThisPosClick
     end
     object SearchName1: TMenuItem
       Caption = 'SearchName1'
