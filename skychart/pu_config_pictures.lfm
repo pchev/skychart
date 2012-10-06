@@ -3,7 +3,6 @@ object f_configpictures: Tf_configpictures
   Height = 576
   Top = 120
   Width = 501
-  BorderStyle = bsToolWindow
   Caption = 'Pictures'
   ClientHeight = 576
   ClientWidth = 501

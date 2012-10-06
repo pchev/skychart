@@ -4,14 +4,13 @@ object f_about: Tf_about
   Top = 104
   Width = 581
   ActiveControl = Panel1
-  BorderStyle = bsToolWindow
   Caption = 'About'
   ClientHeight = 305
   ClientWidth = 581
   OnCreate = FormCreate
   ParentFont = True
   Position = poMainFormCenter
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object Panel2: TPanel
     Left = 0
     Height = 305
@@ -2387,13 +2386,13 @@ object f_about: Tf_about
         OnChange = PageControl1Change
         object Page1: TTabSheet
           Caption = 'About'
-          ClientHeight = 236
+          ClientHeight = 235
           ClientWidth = 495
           object Label5: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 30
-            Width = 63
+            Width = 64
             Caption = 'Sky Charts'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2401,9 +2400,9 @@ object f_about: Tf_about
           end
           object Label6: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 6
-            Width = 80
+            Width = 83
             Caption = 'Cartes du Ciel'
             Font.Style = [fsBold]
             ParentColor = False
@@ -2421,15 +2420,15 @@ object f_about: Tf_about
           end
           object Label8: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 78
-            Width = 53
+            Width = 56
             Caption = 'Copyright'
             ParentColor = False
           end
           object Label2: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 54
             Width = 42
             Caption = 'Version'
@@ -2437,7 +2436,7 @@ object f_about: Tf_about
           end
           object Label4: TLabel
             Left = 20
-            Height = 15
+            Height = 16
             Top = 158
             Width = 52
             Caption = 'Compiler'
@@ -2460,7 +2459,7 @@ object f_about: Tf_about
         end
         object Page2: TTabSheet
           Caption = 'Authors'
-          ClientHeight = 236
+          ClientHeight = 235
           ClientWidth = 495
           object Label3: TLabel
             Left = 11
@@ -2497,7 +2496,7 @@ object f_about: Tf_about
         end
         object Page3: TTabSheet
           Caption = 'License Agreement'
-          ClientHeight = 236
+          ClientHeight = 235
           ClientWidth = 495
           object Memo2: TMemo
             Left = 0

@@ -4,19 +4,18 @@ object f_print: Tf_print
   Top = 53
   Width = 403
   ActiveControl = Setup
-  BorderStyle = bsToolWindow
   Caption = 'Print Chart'
   ClientHeight = 372
   ClientWidth = 403
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object PrinterInfo: TLabel
     Left = 9
-    Height = 15
+    Height = 16
     Top = 14
-    Width = 57
+    Width = 63
     Caption = 'PrinterInfo'
     ParentColor = False
   end
@@ -35,7 +34,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 66
+    ClientHeight = 65
     ClientWidth = 211
     ItemIndex = 0
     Items.Strings = (
@@ -61,7 +60,7 @@ object f_print: Tf_print
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 1
-    ClientHeight = 66
+    ClientHeight = 65
     ClientWidth = 145
     Items.Strings = (
       'Portrait'
@@ -108,28 +107,28 @@ object f_print: Tf_print
     Top = 184
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 66
+    ClientHeight = 65
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
       Left = 23
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 21
+      Width = 25
       Caption = 'Left'
       ParentColor = False
     end
     object Label2: TLabel
       Left = 89
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 30
+      Width = 32
       Caption = 'Right'
       ParentColor = False
     end
     object Label3: TLabel
       Left = 153
-      Height = 15
+      Height = 16
       Top = 14
       Width = 21
       Caption = 'Top'
@@ -137,15 +136,15 @@ object f_print: Tf_print
     end
     object Label4: TLabel
       Left = 216
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 40
+      Width = 46
       Caption = 'Bottom'
       ParentColor = False
     end
     object LongEdit1: TLongEdit
       Left = 21
-      Height = 22
+      Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -158,7 +157,7 @@ object f_print: Tf_print
     end
     object LongEdit2: TLongEdit
       Left = 86
-      Height = 22
+      Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -171,7 +170,7 @@ object f_print: Tf_print
     end
     object LongEdit3: TLongEdit
       Left = 151
-      Height = 22
+      Height = 23
       Hint = '0..100'
       Top = 35
       Width = 40
@@ -184,7 +183,7 @@ object f_print: Tf_print
     end
     object LongEdit4: TLongEdit
       Left = 216
-      Height = 22
+      Height = 23
       Hint = '0..100'
       Top = 34
       Width = 40
@@ -227,15 +226,15 @@ object f_print: Tf_print
   end
   object Label5: TLabel
     Left = 9
-    Height = 15
+    Height = 16
     Top = 51
-    Width = 64
+    Width = 68
     Caption = 'Description'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 104
-    Height = 22
+    Height = 23
     Top = 48
     Width = 272
     OnChange = Edit1Change
@@ -251,15 +250,15 @@ object f_print: Tf_print
     TabOrder = 8
     object Label6: TLabel
       Left = 7
-      Height = 15
+      Height = 16
       Top = 5
-      Width = 102
+      Width = 105
       Caption = 'Number of copies '
       ParentColor = False
     end
     object copies: TLongEdit
       Left = 153
-      Height = 22
+      Height = 23
       Hint = '1..999'
       Top = 2
       Width = 40

@@ -4,7 +4,6 @@ object f_search: Tf_search
   Top = 105
   Width = 433
   ActiveControl = RadioGroup1.RadioButton0
-  BorderStyle = bsToolWindow
   Caption = 'Search'
   ClientHeight = 355
   ClientWidth = 433
@@ -13,7 +12,7 @@ object f_search: Tf_search
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object PlanetPanel: TPanel
     Left = 8
     Height = 41
@@ -26,15 +25,15 @@ object f_search: Tf_search
     Visible = False
     object Label2: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 39
+      Width = 40
       Caption = 'Planet '
       ParentColor = False
     end
     object PlanetBox: TComboBox
       Left = 184
-      Height = 22
+      Height = 23
       Top = 8
       Width = 146
       DropDownCount = 10
@@ -52,7 +51,7 @@ object f_search: Tf_search
     TabOrder = 6
     object CometFilter: TEdit
       Left = 8
-      Height = 22
+      Height = 23
       Top = 10
       Width = 99
       TabOrder = 0
@@ -69,7 +68,7 @@ object f_search: Tf_search
     end
     object CometList: TComboBox
       Left = 192
-      Height = 22
+      Height = 23
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -86,7 +85,7 @@ object f_search: Tf_search
     TabOrder = 5
     object AsteroidFilter: TEdit
       Left = 8
-      Height = 22
+      Height = 23
       Top = 10
       Width = 99
       TabOrder = 0
@@ -103,7 +102,7 @@ object f_search: Tf_search
     end
     object AsteroidList: TComboBox
       Left = 192
-      Height = 22
+      Height = 23
       Top = 10
       Width = 216
       ItemHeight = 0
@@ -122,15 +121,15 @@ object f_search: Tf_search
     Visible = False
     object Label3: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 41
+      Width = 40
       Caption = 'Nebula'
       ParentColor = False
     end
     object NebNameBox: TComboBox
       Left = 104
-      Height = 22
+      Height = 23
       Top = 11
       Width = 280
       ItemHeight = 0
@@ -149,15 +148,15 @@ object f_search: Tf_search
     Visible = False
     object Label4: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 23
+      Width = 24
       Caption = 'Star'
       ParentColor = False
     end
     object StarNameBox: TComboBox
       Left = 97
-      Height = 22
+      Height = 23
       Top = 11
       Width = 281
       ItemHeight = 0
@@ -176,15 +175,15 @@ object f_search: Tf_search
     Visible = False
     object Label5: TLabel
       Left = 13
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 74
+      Width = 77
       Caption = 'Constellation'
       ParentColor = False
     end
     object ConstBox: TComboBox
       Left = 113
-      Height = 22
+      Height = 23
       Top = 11
       Width = 265
       ItemHeight = 0
@@ -203,9 +202,9 @@ object f_search: Tf_search
     TabOrder = 1
     object Label1: TLabel
       Left = 6
-      Height = 15
+      Height = 16
       Top = 14
-      Width = 73
+      Width = 76
       Caption = 'Object Name'
       ParentColor = False
     end
@@ -361,7 +360,7 @@ object f_search: Tf_search
     end
     object Id: TEdit
       Left = 105
-      Height = 22
+      Height = 23
       Top = 10
       Width = 96
       OnKeyDown = IdKeyDown
@@ -566,7 +565,7 @@ object f_search: Tf_search
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 2
-    ClientHeight = 201
+    ClientHeight = 200
     ClientWidth = 412
     Columns = 2
     ItemIndex = 0
@@ -628,7 +627,7 @@ object f_search: Tf_search
     TabOrder = 11
     object OnlineEdit: TEdit
       Left = 256
-      Height = 22
+      Height = 23
       Top = 1
       Width = 151
       TabOrder = 0
@@ -636,7 +635,7 @@ object f_search: Tf_search
     end
     object ServerList: TComboBox
       Left = 16
-      Height = 26
+      Height = 25
       Top = 1
       Width = 200
       ItemHeight = 0
@@ -646,7 +645,7 @@ object f_search: Tf_search
     end
     object StatusLabel: TLabel
       Left = 19
-      Height = 15
+      Height = 16
       Top = 58
       Width = 67
       Caption = 'StatusLabel'

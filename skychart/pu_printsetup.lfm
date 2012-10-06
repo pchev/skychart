@@ -4,14 +4,13 @@ object f_printsetup: Tf_printsetup
   Top = 114
   Width = 443
   ActiveControl = qtoption
-  BorderStyle = bsToolWindow
   Caption = 'Printer Setup'
   ClientHeight = 245
   ClientWidth = 443
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.4'
+  LCLVersion = '1.0.1.3'
   object qtoption: TPanel
     Left = 10
     Height = 110

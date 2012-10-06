@@ -4,14 +4,13 @@ object f_detail: Tf_detail
   Top = 257
   Width = 393
   ActiveControl = Panel1
-  BorderStyle = bsSizeToolWin
   Caption = 'Details'
   ClientHeight = 461
   ClientWidth = 393
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.4RC2'
+  LCLVersion = '1.0.1.3'
   object Panel1: TPanel
     Left = 0
     Height = 36

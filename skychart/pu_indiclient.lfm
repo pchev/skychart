@@ -6,7 +6,6 @@ object pop_indi: Tpop_indi
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
   ActiveControl = Edit1
-  BorderStyle = bsToolWindow
   Caption = 'INDI Telescope Interface'
   ClientHeight = 401
   ClientWidth = 279
@@ -15,7 +14,7 @@ object pop_indi: Tpop_indi
   OnDestroy = FormDestroy
   ParentFont = True
   Position = poDefault
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object GroupBox3: TGroupBox
     Left = 8
     Height = 136
@@ -93,7 +92,7 @@ object pop_indi: Tpop_indi
     TabOrder = 1
     object LabelAlpha: TLabel
       Left = 8
-      Height = 15
+      Height = 16
       Top = 20
       Width = 19
       Caption = 'RA '
@@ -101,15 +100,15 @@ object pop_indi: Tpop_indi
     end
     object LabelDelta: TLabel
       Left = 126
-      Height = 15
+      Height = 16
       Top = 20
-      Width = 27
+      Width = 25
       Caption = 'DEC'
       ParentColor = False
     end
     object pos_x: TEdit
       Left = 30
-      Height = 22
+      Height = 23
       Top = 16
       Width = 86
       ReadOnly = True
@@ -118,7 +117,7 @@ object pop_indi: Tpop_indi
     end
     object pos_y: TEdit
       Left = 158
-      Height = 22
+      Height = 23
       Top = 16
       Width = 86
       ReadOnly = True
@@ -132,12 +131,12 @@ object pop_indi: Tpop_indi
     Top = 8
     Width = 257
     Caption = 'Current driver'
-    ClientHeight = 65
+    ClientHeight = 64
     ClientWidth = 253
     TabOrder = 2
     object Edit1: TEdit
       Left = 8
-      Height = 22
+      Height = 23
       Top = 24
       Width = 153
       Color = clBtnFace

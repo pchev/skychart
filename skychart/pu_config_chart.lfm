@@ -3,7 +3,6 @@ object f_configchart: Tf_configchart
   Height = 578
   Top = 361
   Width = 503
-  BorderStyle = bsToolWindow
   Caption = 'Charts'
   ClientHeight = 578
   ClientWidth = 503
@@ -82,15 +81,19 @@ object f_configchart: Tf_configchart
         ActivePage = nil
         TabIndex = -1
         inherited Page1: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
         end
         inherited Page2: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
         end
         inherited Page3: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
         end
         inherited Page4: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
           inherited Label29: TLabel
             Height = 16
@@ -314,9 +317,11 @@ object f_configchart: Tf_configchart
           end
         end
         inherited Page5: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
         end
         inherited Page6: TTabSheet
+          ClientHeight = 468
           ClientWidth = 497
         end
       end

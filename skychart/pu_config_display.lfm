@@ -3,7 +3,6 @@ object f_configdisplay: Tf_configdisplay
   Height = 579
   Top = 120
   Width = 502
-  BorderStyle = bsToolWindow
   Caption = 'Display'
   ClientHeight = 579
   ClientWidth = 502

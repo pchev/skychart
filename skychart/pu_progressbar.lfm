@@ -5,7 +5,6 @@ object f_progress: Tf_progress
   Width = 422
   HorzScrollBar.Page = 421
   VertScrollBar.Page = 161
-  BorderStyle = bsToolWindow
   Caption = 'Progress'
   ClientHeight = 162
   ClientWidth = 422
@@ -13,20 +12,20 @@ object f_progress: Tf_progress
   OnCreate = FormCreate
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object Label1: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 4
-    Width = 39
+    Width = 37
     Caption = 'Label1'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 16
-    Height = 15
+    Height = 16
     Top = 56
-    Width = 39
+    Width = 37
     Caption = 'Label2'
     ParentColor = False
   end

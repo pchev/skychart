@@ -4,7 +4,6 @@ object f_configinternet: Tf_configinternet
   Top = 120
   Width = 499
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsSizeToolWin
   Caption = 'Internet'
   ClientHeight = 576
   ClientWidth = 499

@@ -5,33 +5,32 @@ object f_addlabel: Tf_addlabel
   Width = 264
   ActiveControl = Edit1
   BorderIcons = [biSystemMenu]
-  BorderStyle = bsDialog
   Caption = 'Add Label'
   ClientHeight = 149
   ClientWidth = 264
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.1.3'
   object Label1: TLabel
     Left = 12
-    Height = 15
+    Height = 16
     Top = 16
-    Width = 35
+    Width = 33
     Caption = 'Label:'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 12
-    Height = 15
+    Height = 16
     Top = 45
-    Width = 29
+    Width = 30
     Caption = 'Type:'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 56
-    Height = 22
+    Height = 23
     Top = 8
     Width = 192
     OnChange = Edit1Change
@@ -95,7 +94,7 @@ object f_addlabel: Tf_addlabel
     ChildSizing.ShrinkVertical = crsScaleChilds
     ChildSizing.Layout = cclLeftToRightThenTopToBottom
     ChildSizing.ControlsPerLine = 3
-    ClientHeight = 28
+    ClientHeight = 27
     ClientWidth = 232
     Columns = 3
     ItemIndex = 0

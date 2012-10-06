@@ -452,6 +452,7 @@
         <Filename Value="pu_print.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_print"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_print"/>
       </Unit36>
@@ -498,6 +499,7 @@
         <Filename Value="pu_clock.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="f_clock"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_clock"/>
       </Unit43>

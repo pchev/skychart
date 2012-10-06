@@ -3,7 +3,6 @@ object f_configcatalog: Tf_configcatalog
   Height = 580
   Top = 120
   Width = 500
-  BorderStyle = bsToolWindow
   Caption = 'Catalog'
   ClientHeight = 580
   ClientWidth = 500
