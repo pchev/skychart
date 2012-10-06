@@ -2893,8 +2893,8 @@ if cfgsc.showstars and ((ftype=ftAll)or(ftype=ftStar)or(ftype=ftVar)or(ftype=ftD
   if (not ok) and ((ftype=ftAll)or(ftype=ftVar)) and cfgcat.varstarcaton[gcvs-BaseVar] then begin ok:=FindAtPos(gcvs,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGCV; end;
   if (not ok) and ((ftype=ftAll)or(ftype=ftDbl)) then begin ok:=FindAtPos(gcdbl,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and ((ftype=ftAll)or(ftype=ftDbl)) and cfgcat.dblstarcaton[wds-BaseDbl]  then begin ok:=FindAtPos(wds,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseWDS; end;
-  if (not ok) then begin ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.starcaton[DefStar-BaseStar] then begin ok:=FindAtPos(DefStar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDefaultStars; end;
+  if (not ok) then begin ok:=FindAtPos(gcstar,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.starcaton[dsbase-BaseStar] then begin ok:=FindAtPos(dsbase,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseDSbase; end;
   if (not ok) and cfgcat.starcaton[sky2000-BaseStar] then begin  ok:=FindAtPos(sky2000,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSky; end;
   if (not ok) and cfgcat.starcaton[tyc-BaseStar] then begin ok:=FindAtPos(tyc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseTYC; end;
