@@ -169,6 +169,9 @@ type
     procedure TimeEditChange(Sender: TObject);
     procedure TrackBar1Change(Sender: TObject);
     procedure TZComboBoxChange(Sender: TObject);
+    procedure UpDown1Click(Sender: TObject; Button: TUDBtnType);
+    procedure UpDown2Click(Sender: TObject; Button: TUDBtnType);
+    procedure UpDown3Click(Sender: TObject; Button: TUDBtnType);
   private
     { Private declarations }
     LockChange, LockJD: boolean;
@@ -746,6 +749,27 @@ begin
   csc.tz.TimeZoneFile:=ZoneDir+StringReplace(buf,'/',PathDelim,[rfReplaceAll]);
   csc.timezone:=csc.tz.SecondsOffset/3600;
   CheckBox1Click(Sender);
+end;
+
+procedure Tf_config_time.UpDown1Click(Sender: TObject; Button: TUDBtnType);
+begin
+{$ifdef darwin}
+nbstepChanged(Sender);
+{$endif}
+end;
+
+procedure Tf_config_time.UpDown2Click(Sender: TObject; Button: TUDBtnType);
+begin
+{$ifdef darwin}
+stepsizeChanged(Sender);
+{$endif}
+end;
+
+procedure Tf_config_time.UpDown3Click(Sender: TObject; Button: TUDBtnType);
+begin
+{$ifdef darwin}
+fpseditChange(Sender);
+{$endif}
 end;
 
 procedure Tf_config_time.TimeChange(Sender: TObject; Button: TUDBtnType);

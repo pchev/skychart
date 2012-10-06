@@ -24,11 +24,11 @@ object f_config_time: Tf_config_time
       Height = 530
       Top = 0
       Width = 500
-      ActivePage = Page2
+      ActivePage = Page3
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 2
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -793,6 +793,7 @@ object f_config_time: Tf_config_time
           Position = 1
           TabOrder = 10
           Wrap = False
+          OnClick = UpDown1Click
         end
         object UpDown2: TUpDown
           Left = 433
@@ -805,6 +806,7 @@ object f_config_time: Tf_config_time
           Position = 1
           TabOrder = 11
           Wrap = False
+          OnClick = UpDown2Click
         end
       end
       object Page3: TTabSheet
@@ -1030,6 +1032,7 @@ object f_config_time: Tf_config_time
             Position = 2
             TabOrder = 10
             Wrap = False
+            OnClick = UpDown3Click
           end
           object fpsedit: TLongEdit
             Left = 174
