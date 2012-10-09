@@ -35,16 +35,17 @@ Function CheckWine: boolean;
 function CheckDosbox: boolean;
 
 const
+  dosboxdef='dosbox -exit -conf dosbox.conf';
   {$ifdef mswindows}
     doscmd='cmd.exe /C';
     {$ifdef win64}
-      dosbox='dosbox -exit -conf dosbox.conf';
+      dosbox=dosboxdef;
     {$else}
       dosbox=doscmd;
     {$endif}
   {$else}
     doscmd='wine';
-    dosbox='dosbox -exit -conf dosbox.conf';
+    dosbox=dosboxdef;
   {$endif}
 
 implementation
@@ -333,7 +334,8 @@ const doslf = '';
 {$endif}
 begin
 if isWin98 then dcmd:='command.com /C'
-   else dcmd:=dosbox;
+  else if isWOW64 then dcmd:=dosboxdef
+  else dcmd:=dosbox;
 curdir:=GetCurrentDir;
 deletefile(slash(tmpdir)+'IRIDFLAR.OUT');
 try

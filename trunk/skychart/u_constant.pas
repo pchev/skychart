@@ -1066,6 +1066,7 @@ var
   ImageListCount: integer;
   nightvision: boolean;
   isWin98: boolean;
+  isWOW64: boolean;
   DisplayIs32bpp: boolean;
   ThemePath: string = 'data/Themes';
   LinuxDesktop: integer = 0;  // FreeDesktop=0, Other=1

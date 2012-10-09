@@ -121,6 +121,7 @@ function CdcSigAction(const action: pointer):boolean;
 {$ifdef mswindows}
 procedure SetFormNightVision(form: TForm; onoff:boolean);
 function FindWin98: boolean;
+function FindWOW64: boolean;
 function ScreenBPP: integer;
 {$endif}
 
@@ -1762,6 +1763,27 @@ if GetVersionEx(lpversioninfo) then begin
 end
 else
  result:=false;
+end;
+
+function FindWOW64: boolean;
+type
+  TIsWow64Process = function(Handle:THandle; var IsWow64 : BOOL) :BOOL; stdcall;
+var
+  hKernel32 : Integer;
+  IsWow64Process : TIsWow64Process;
+  IsWow64 : BOOL;
+begin
+  Result := False;
+  hKernel32 := LoadLibrary('kernel32.dll');
+  if (hKernel32 = 0) then exit;
+  @IsWow64Process := GetProcAddress(hkernel32, 'IsWow64Process');
+  if Assigned(IsWow64Process) then
+   Begin
+    IsWow64 := False;
+    if (IsWow64Process(GetCurrentProcess, IsWow64)) then
+     Result := IsWow64
+   end;
+  FreeLibrary(hKernel32);
 end;
 
 function ScreenBPP: integer;

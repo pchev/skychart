@@ -998,6 +998,13 @@ if IridiumBox.Checked then begin
   if not fileexists(slash(SatDir)+'SDL.dll') then CopyFile(srcdir+'SDL.dll', wrkdir+'SDL.dll');
   if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(srcdir+'SDL_net.dll', wrkdir+'SDL_net.dll');
   {$endif}
+  {$ifdef win32}
+  if isWOW64 then begin
+    if not fileexists(slash(SatDir)+'DOSBox.exe') then CopyFile(srcdir+'DOSBox.exe', wrkdir+'DOSBox.exe');
+    if not fileexists(slash(SatDir)+'SDL.dll') then CopyFile(srcdir+'SDL.dll', wrkdir+'SDL.dll');
+    if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(srcdir+'SDL_net.dll', wrkdir+'SDL_net.dll');
+  end;
+  {$endif}
   Iridium(inttostr(j),inttostr(m),inttostr(a),dt,formatfloat(f1,config.tz.SecondsOffset/3600),SatDir,config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude);
   if FileExists(slash(SatDir)+'IRIDFLAR.OUT') then begin
     Assignfile(fi,slash(SatDir)+'IRIDFLAR.OUT');
