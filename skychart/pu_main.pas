@@ -1802,9 +1802,11 @@ ConfirmSaveConfig:=true;
 ImageListCount:=ImageNormal.Count;
 DisplayIs32bpp:=true;
 isWin98:=false;
+isWOW64:=false;
 {$ifdef mswindows}
   step:='Windows spefic';
   isWin98:=FindWin98;
+  isWOW64:=FindWOW64;
   DisplayIs32bpp:=(ScreenBPP=32);
   configfile:=Defaultconfigfile;
   if isWin98 then begin
