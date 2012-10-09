@@ -28,6 +28,8 @@ if [ $OS_TARGET = win32 ]; then
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet
   unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
+  install -m 755 -d $destdir/data/iridflar
+  unzip -d $destdir/data/iridflar system_integration/Windows/data/dosbox.zip
 fi
 if [ $OS_TARGET = win64 ]; then
   x86_64-win64-strip -v -o $destdir/skychart.exe skychart/cdc.exe
@@ -41,8 +43,6 @@ if [ $OS_TARGET = win64 ]; then
   install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/planet
   unzip -d $destdir/data/planet/ system_integration/Windows/data/xplanet-windows.zip
-  # win64 specific:
-  install -m 755 -d $destdir/data
   install -m 755 -d $destdir/data/iridflar
   unzip -d $destdir/data/iridflar system_integration/Windows/data/dosbox.zip
 fi
