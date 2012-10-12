@@ -1968,7 +1968,7 @@ case action of
      // begin measure
      GetADxy(X,Y,MeasureRa,MeasureDe,sc.cfgsc);
      // start on object?
-     if IdentXY(X,Y,false,true) then begin
+     if IdentXY(X,Y,true,true) then begin
        MeasureRa:=sc.cfgsc.FindRA;
        MeasureDe:=sc.cfgsc.FindDec;
        Projection(MeasureRa,MeasureDe,x1,y1,false,sc.cfgsc,false);
@@ -1997,7 +1997,7 @@ case action of
       end;
     GetADxy(X,Y,ra,de,sc.cfgsc);
     // end on object?
-    if (action=3) and IdentXY(X,Y,false,true) then begin
+    if (action=3) and IdentXY(X,Y,true,true) then begin
        ra:=sc.cfgsc.FindRA;
        de:=sc.cfgsc.FindDec;
        Projection(ra,de,x1,y1,false,sc.cfgsc,false);
