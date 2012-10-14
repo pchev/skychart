@@ -6,9 +6,7 @@ rm translation/skychart/*
 
 echo cp ../skychart.po translation/skychart/skychart.pot
 
-echo '# translation of skychart.po Patrick Chevalley <pch@freesurf.ch>, 2006, 2008.'> translation/skychart/skychart.pot
-echo '# Patrick Chevalley <pch@ap-i.net>, 2011.'>> translation/skychart/skychart.pot
-echo 'msgid ""'>> translation/skychart/skychart.pot
+echo 'msgid ""'> translation/skychart/skychart.pot
 echo 'msgstr ""'>> translation/skychart/skychart.pot
 echo '"PO-Revision-Date: 2011-08-27 14:51+0200\n"'>> translation/skychart/skychart.pot
 echo '"Last-Translator: Patrick Chevalley <pch@ap-i.net>\n"'>> translation/skychart/skychart.pot

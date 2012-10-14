@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-07-29 15:36+0000\n"
+"POT-Creation-Date: 2012-10-13 19:21+0000\n"
 "PO-Revision-Date: 2012-01-01 18:31+0000\n"
 "Last-Translator: zeugma <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
-"X-Generator: Launchpad (build 16019)\n"
+"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
+"X-Generator: Launchpad (build 16137)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -170,6 +170,10 @@ msgstr ""
 
 #: u_translation.rsallconfigura
 msgid "All configuration options"
+msgstr ""
+
+#: u_translation.rsallobjectsat
+msgid "All the objects at this position"
 msgstr ""
 
 #: u_translation.rsalltablesstr

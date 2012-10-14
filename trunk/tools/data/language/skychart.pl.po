@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-07-29 15:36+0000\n"
-"PO-Revision-Date: 2012-08-09 12:26+0000\n"
+"POT-Creation-Date: 2012-10-13 19:21+0000\n"
+"PO-Revision-Date: 2012-09-30 20:14+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-09-25 06:01+0000\n"
-"X-Generator: Launchpad (build 16019)\n"
+"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
+"X-Generator: Launchpad (build 16137)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -175,6 +175,10 @@ msgstr "Wszystkie"
 #: u_translation.rsallconfigura
 msgid "All configuration options"
 msgstr "Wszystkie opcje programu"
+
+#: u_translation.rsallobjectsat
+msgid "All the objects at this position"
+msgstr ""
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -1451,7 +1455,7 @@ msgstr "Odległość do ostatniego obiektu"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
+msgstr "Nie filtruj obiektów Messiera"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2731,7 +2735,7 @@ msgstr "Pasek główny"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr ""
+msgstr "Zaznacz tabelę i kolumnę, które chcesz dodać do katalogu"
 
 #: u_translation.rsmanualmount
 msgid "Manual mount"
