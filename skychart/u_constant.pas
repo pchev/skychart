@@ -1976,21 +1976,32 @@ begin
     for j := 1 to MaxPla do
       for k := 1 to 7 do
         PlanetLst[i, j, k] := Source.PlanetLst[i, j, k];
-  SetLength(AsteroidLst, Source.SimNb);
-  for i := 0 to Source.SimNb - 1 do
+  if SimObject[12] then begin
+    SetLength(AsteroidLst, Source.SimNb);
+      for i := 0 to Source.SimNb - 1 do
+        for j := 1 to Source.AsteroidNb do
+          for k := 1 to 5 do
+            AsteroidLst[i, j, k] := Source.AsteroidLst[i, j, k];
+    SetLength(AsteroidName, Source.SimNb);
+      for i := 0 to Source.SimNb - 1 do
+        for j := 1 to Source.AsteroidNb do
+          for k := 1 to 2 do
+            AsteroidName[i, j, k] := Source.AsteroidName[i, j, k];
+  end else begin
+    Setlength(AsteroidLst,1);
     for j := 1 to Source.AsteroidNb do
       for k := 1 to 5 do
-        AsteroidLst[i, j, k] := Source.AsteroidLst[i, j, k];
+        AsteroidLst[0, j, k] := Source.AsteroidLst[0, j, k];
+    SetLength(AsteroidName,1);
+    for j := 1 to Source.AsteroidNb do
+      for k := 1 to 2 do
+        AsteroidName[0, j, k] := Source.AsteroidName[0, j, k];
+  end;
   SetLength(CometLst, Source.SimNb);
   for i := 0 to Source.SimNb - 1 do
     for j := 1 to Source.CometNb do
       for k := 1 to 8 do
         CometLst[i, j, k] := Source.CometLst[i, j, k];
-  SetLength(AsteroidName, Source.SimNb);
-  for i := 0 to Source.SimNb - 1 do
-    for j := 1 to Source.AsteroidNb do
-      for k := 1 to 2 do
-        AsteroidName[i, j, k] := Source.AsteroidName[i, j, k];
   SetLength(CometName, Source.SimNb);
   for i := 0 to Source.SimNb - 1 do
     for j := 1 to Source.CometNb do
