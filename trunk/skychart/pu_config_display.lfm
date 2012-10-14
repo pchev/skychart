@@ -1,10 +1,10 @@
 object f_configdisplay: Tf_configdisplay
-  Left = 515
-  Height = 579
-  Top = 120
+  Left = 269
+  Height = 602
+  Top = 338
   Width = 502
   Caption = 'Display'
-  ClientHeight = 579
+  ClientHeight = 602
   ClientWidth = 502
   OnClose = FormClose
   OnCreate = FormCreate
@@ -14,7 +14,7 @@ object f_configdisplay: Tf_configdisplay
   object Panel1: TPanel
     Left = 0
     Height = 50
-    Top = 529
+    Top = 552
     Width = 502
     Align = alBottom
     ClientHeight = 50
@@ -67,61 +67,56 @@ object f_configdisplay: Tf_configdisplay
     end
   end
   inline f_config_display1: Tf_config_display
-    Height = 529
+    Height = 552
     Width = 502
     Align = alClient
-    ClientHeight = 529
+    ClientHeight = 552
     ClientWidth = 502
     TabOrder = 1
     DesignLeft = 204
     DesignTop = 132
     inherited MainPanel: TPanel
-      Height = 529
+      Height = 552
       Width = 502
-      ClientHeight = 529
+      ClientHeight = 552
       ClientWidth = 502
       inherited PageControl1: TPageControl
-        Height = 527
+        Height = 550
         Width = 500
-        ActivePage = nil
-        TabIndex = -1
         inherited Page1: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page2: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page3: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page4: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page5: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page6: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
-          inherited GroupBox5: TGroupBox
-            ClientHeight = 270
-          end
         end
         inherited Page7: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page8: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
         inherited Page9: TTabSheet
-          ClientHeight = 523
+          ClientHeight = 546
           ClientWidth = 496
         end
       end
