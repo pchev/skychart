@@ -5386,3 +5386,7 @@ msgstr ""
 msgid "Do not filter Messier objects"
 msgstr ""
 
+#: u_translation:rsallobjectsat
+msgid "All the objects at this position"
+msgstr ""
+
