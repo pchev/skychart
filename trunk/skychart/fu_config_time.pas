@@ -443,8 +443,12 @@ for i:=0 to SimObj.Items.Count-1 do begin
 end;
 if csc.SimObject[12] or csc.SimObject[13] then begin
   nbstep.MaxValue:=100;
+  UpDown1.Max:=100;
   nbstepChanged(nil);
-end else nbstep.MaxValue:=500;
+end else begin
+  nbstep.MaxValue:=500;
+  UpDown1.Max:=500;
+end;
 if csc.SimLabel>=0 then begin
    if csc.SimLabel>3 then csc.SimLabel:=3;
    RadioGroup1.ItemIndex:=csc.SimLabel;
@@ -914,8 +918,12 @@ begin
   csc.SimObject[j]:=SimObj.checked[index];
   if csc.SimObject[12] or csc.SimObject[13] then begin
     nbstep.MaxValue:=MaxAstSim;
+    UpDown1.Max:=MaxAstSim;
     nbstepChanged(Sender);
-  end else nbstep.MaxValue:=MaxPlSim;
+  end else begin
+    nbstep.MaxValue:=MaxPlSim;
+    UpDown1.Max:=MaxPlSim;
+  end;
 end;
 
 procedure Tf_config_time.AllSimClick(Sender: TObject);
