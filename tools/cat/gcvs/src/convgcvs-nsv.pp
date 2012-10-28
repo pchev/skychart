@@ -120,6 +120,10 @@ GCVrec = record ar,de,num :longint ;
                 gcvs,vartype : array[1..10] of char;
                 end;
 
+filixr = packed record n: smallint;
+                r: integer;
+                key: array[1..12] of char; 
+         end;
 
 const
     lg_reg_x : array [0..5,1..2] of integer = (
@@ -132,9 +136,11 @@ var
    lin2 : nsvtxt;
    lin3 : evstxt;
    fb : file of gcvrec;
+   fo   : file of filixr;
    out : gcvrec;
-   inp : array[0..100000] of gcvrec;
-   nl : integer;
+   inp : array[0..200000] of gcvrec;
+   ixr : array[1..200000] of filixr;
+   nl,nixr : integer;
    pathi,patho : string;
    lgnum : integer;
 
@@ -205,8 +211,8 @@ function Jd(annee,mois,jour :INTEGER; Heure:double):double;
  END ;
 
 
-procedure Lecture;
-var i,p :integer;
+procedure ReadData;
+var i,ii,p :integer;
     ar,de,sde,jd1,jd2 : double;
     buf,buf1 : shortstring;
 const blanc='                                                                  ';
@@ -215,8 +221,6 @@ writeln('gcvs_cat.dat');
 Assignfile(F,pathi+PathDelim+'gcvs_cat.dat');
 Reset(F);
 i:=0;
-jd1:=jd(1950,1,1,0);
-jd2:=jd(2000,1,1,0);
 repeat
   Readln(F,buf);
   buf:=buf+blanc;
@@ -257,13 +261,17 @@ writeln('tot stars '+inttostr(i));
 
 writeln('nsv_cat.dat');
 Assignfile(F,pathi+PathDelim+'nsv_cat.dat');
+ii:=0;
 Reset(F);
-jd1:=jd(1950,1,1,0);
-jd2:=jd(2000,1,1,0);
 repeat
+inc(ii);
   Readln(F,buf);
   buf:=buf+blanc;
   move(buf,lin2,sizeof(lin2));
+if ii=8 then begin
+writeln(lin2.num,lin2.arh,lin2.ded,lin2.vartype,lin2.max,lin2.min,lin2.mcode);
+halt;
+end;
   if lin2.arh='  ' then continue;
   sde:=strtofloat(lin2.sde+'1');
   de := sde*strtofloat(lin2.ded)+sde*strtofloat(lin2.dem)/60 ;
@@ -274,7 +282,8 @@ repeat
   out.de:=round(de*100000);
   out.ar:=round(ar*100000);
   out.num:=strtoint(lin2.num);
-  move(lin2.desig,out.gcvs,sizeof(out.gcvs));
+  buf1:='NSV '+lin2.num+blanc;
+  move(buf1[1],out.gcvs,sizeof(out.gcvs));
   move(lin2.vartype,out.vartype,sizeof(lin2.vartype));
      p:=6;
      out.vartype[p]:=' ';
@@ -352,9 +361,11 @@ writeln('tot stars '+inttostr(i));
 nl:=i;
 end;
 
-procedure wrt_lg(lgnum:integer);
+procedure WrtZone(lgnum:integer);
 var i,n,zone :integer;
     ar,de : double;
+    buf: shortstring;
+const blanc='                                                                  ';
 begin
 assignfile(fb,patho+PathDelim+padzeros(inttostr(lgnum),2)+'.dat');
 Rewrite(fb);
@@ -365,21 +376,70 @@ for n:=1 to nl do begin
   de:=out.de/100000;
   findregion(ar,de,zone);
   if zone=lgnum then begin
-  inc(i);
-  write(fb,out);
+    inc(nixr);
+    buf:=uppercase(stringreplace(out.gcvs,' ','',[rfReplaceAll]))+blanc;
+    move(buf[1],ixr[nixr].key,sizeof(ixr[nixr].key));
+    ixr[nixr].n:=lgnum;
+    ixr[nixr].r:=i;
+    write(fb,out);
+    inc(i);
   end;
 end;
 close(fb);
+end;
+
+Procedure SortIndex(g,d:integer);
+var step,i,j,k : integer;
+    lin : filixr;
+begin
+step:=1;
+while step < ((d-g+1) div 9) do step :=step*3+1;
+repeat
+  for k:=g to step do begin
+    i:=k+step; if i<d then
+    repeat
+      lin:=ixr[i];
+      j:=i-step;
+      while (j>=k+step) and (ixr[j].key > lin.key) do begin
+        ixr[j+step] := ixr[j];
+        j:=j-step ;
+      end;
+      if ixr[k].key > lin.key then begin
+        j:=k-step;
+        ixr[k+step]:=ixr[k];
+      end;
+      ixr[j+step]:=lin;
+      i:=i+step;
+    until i>d;
+  end;
+  step:=step div 3;
+until step=0;
+end;
+
+procedure WrtIndex ;
+var i :integer;
+  lin : filixr;
+begin
+assignfile(fo,patho+PathDelim+'gcvs.ixr');
+Rewrite(fo);
+for i:=1 to nixr do begin
+  lin:=ixr[i];
+  Write(Fo,lin);
+end;
+CloseFile(Fo);
 end;
 
 begin
 pathi:='./';
 patho:='./gcvs-nsv';
 CreateDir(patho);
-Lecture;
+ReadData;
+nixr:=0;
 for lgnum:=1 to 50 do begin
-  wrt_lg(lgnum);
+  WrtZone(lgnum);
 end;
+SortIndex(1,nl);
+WrtIndex;
 
 end.
 

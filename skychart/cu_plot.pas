@@ -64,7 +64,6 @@ type
      PlanetBMPjd,PlanetBMProt : double;
      PlanetBMPpla : integer;
      Xplanetrender: boolean;
-     IntfImgReady: boolean;
      OldGRSlong: double;
      TransparentColor : TFPColor;
      bmpreader:TFPReaderBMP;
@@ -73,7 +72,6 @@ type
      Astarbmp: array [0..6,0..10] of Tbitmap;
      Bstarbmp: array [0..6,0..10] of TBGRABitmap;
      starbmpw:integer;
-     IntfImg : TLazIntfImage;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
@@ -144,7 +142,7 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
+     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false):integer;
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
@@ -206,7 +204,6 @@ for i:=0 to 6 do
  TransparentColor.green:=0;
  TransparentColor.blue:= 0;
  TransparentColor.alpha:=65535;
- IntfImgReady:=false;
  InitXPlanetRender;
  if Xplanetrender then begin
     planetbmp:=Tbitmap.create;
@@ -1165,16 +1162,13 @@ if not cfgplot.Invisible then begin
   case n of
       0 : begin // magn
           if ipla<11 then b_v:=planetcolor[ipla] else b_v:=1020;
-          //if not IntfImgReady then InitPixelImg;
           PlotStar(x,y,magn,b_v);
           end;
       1 : begin // diam
-          //if IntfImgReady then ClosePixelImg;
           PlotPlanet1(xx,yy,ipla,pixscale,diam);
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
-          //if IntfImgReady then ClosePixelImg;
           rot:=rot*FlipX*FlipY;
           if (ipla=10)and(size>0) then begin
              PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
@@ -1183,7 +1177,6 @@ if not cfgplot.Invisible then begin
           end;
           end;
       3 : begin // symbol
-          //if IntfImgReady then ClosePixelImg;
           PlotPlanet4(xx,yy,ipla,pixscale,WhiteBg);
           end;
   end;
@@ -1603,7 +1596,6 @@ if not cfgplot.Invisible then
     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);
     ds2:=round(diam*pixscale);
     if ds2>ds then begin
-      //if IntfImgReady then ClosePixelImg;
       ds1:=ds2/2;
       if cfgplot.UseBMP then begin
         cbmp.FillEllipseAntialias(x,y,ds1,ds1,ColorToBGRA(cfgplot.Color[20]));
@@ -1629,7 +1621,6 @@ if not cfgplot.Invisible then
         end;
       end;
      end else begin
-        //if not IntfImgReady then InitPixelImg;
         PlotStar(x,y,ma,1020)
      end;
    end;
@@ -1985,7 +1976,7 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; opaque:boolean=false):integer;
+function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false):integer;
 var ts:TSize;
     mp:TRect;
     ATextStyle: TTextStyle;
@@ -2027,6 +2018,8 @@ if cfgplot.UseBMP then begin;
   end;
   if opaque then cbmp.FillRect(round(xxs),round(yys),round(xxs+ts.cx),round(yys+ts.cy),ColorToBGRA(cfgplot.backgroundcolor),dmSet);
   BGRATextOut(xxs,yys,orient,txt,ColorToBGRA(lcolor),cbmp);
+  px:=round(xxs);
+  py:=round(yys);
 end else if cnv<>nil then with cnv do begin
   ATextStyle := TextStyle;
   ATextStyle.Opaque:=opaque;
@@ -2059,6 +2052,8 @@ end else if cnv<>nil then with cnv do begin
     TextOut(xx,yy,txt);
   end;
   Font.Orientation:=0;
+  px:=xx;
+  py:=yy;
 end;
 // If drawing to the screen use movable label 
 end else begin
@@ -2114,6 +2109,8 @@ with ilabels[i] do begin
   left:=round(xxs)+mp.Left;
   top:=round(yys)+mp.Top;
   visible:=true;
+  px:=left;
+  py:=top;
 end;
 end;
 end;

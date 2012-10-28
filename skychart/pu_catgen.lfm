@@ -3489,7 +3489,7 @@ object f_catgen: Tf_catgen
         Left = 18
         Height = 199
         Top = 40
-        Width = 345
+        Width = 354
         Items.Strings = (
           'RA'
           'DEC'
@@ -3534,7 +3534,7 @@ object f_catgen: Tf_catgen
       object CheckBox2: TCheckBox
         Left = 18
         Height = 23
-        Top = 280
+        Top = 276
         Width = 223
         Caption = 'Use this field as an Alternate Name'
         OnClick = CheckBox2Click
@@ -3552,10 +3552,10 @@ object f_catgen: Tf_catgen
         TabOrder = 5
       end
       object Memo1: TMemo
-        Left = 11
+        Left = 18
         Height = 90
-        Top = 318
-        Width = 351
+        Top = 326
+        Width = 354
         Font.Height = -11
         Font.Name = 'courier'
         Font.Pitch = fpFixed
@@ -3565,6 +3565,15 @@ object f_catgen: Tf_catgen
         ScrollBars = ssHorizontal
         TabOrder = 6
         WordWrap = False
+      end
+      object CheckBox9: TCheckBox
+        Left = 18
+        Height = 23
+        Top = 300
+        Width = 198
+        Caption = 'Prefix the name with the label '
+        OnClick = CheckBox9Click
+        TabOrder = 7
       end
     end
     object TabSheet4: TTabSheet
@@ -3664,23 +3673,13 @@ object f_catgen: Tf_catgen
           Caption = 'Add the alternate names to the index'
           TabOrder = 1
         end
-        object CheckBox5: TCheckBox
-          Left = 16
-          Height = 23
-          Top = 84
-          Width = 265
-          Caption = 'Prefix the alternate names with their label'
-          Checked = True
-          State = cbChecked
-          TabOrder = 2
-        end
         object CheckBox8: TCheckBox
           Left = 16
           Height = 23
           Top = 36
           Width = 233
           Caption = 'Prefix name with catalog short name'
-          TabOrder = 3
+          TabOrder = 2
         end
       end
     end

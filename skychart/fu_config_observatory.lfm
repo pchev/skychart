@@ -271,22 +271,19 @@ object f_config_observatory: Tf_config_observatory
             Caption = 'Meters'
             ParentColor = False
           end
-          object altmeter: TFloatEdit
+          object altmeter: TLongEdit
             Left = 4
             Height = 23
             Hint = '-500..15000'
-            Top = 20
+            Top = 19
             Width = 65
             ParentShowHint = False
             ShowHint = True
             TabOrder = 0
             OnChange = altmeterChange
             Value = 0
-            Decimals = 0
             MinValue = -500
             MaxValue = 15000
-            Digits = 5
-            NumericType = ntFixed
           end
         end
         object timezone: TGroupBox
@@ -322,7 +319,7 @@ object f_config_observatory: Tf_config_observatory
           object countrylist: TComboBox
             Left = 207
             Height = 25
-            Top = -1
+            Top = 2
             Width = 234
             DropDownCount = 10
             ItemHeight = 0

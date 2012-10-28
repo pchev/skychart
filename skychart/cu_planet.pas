@@ -1263,6 +1263,7 @@ if result and (currentplanet>28) and (currentplanet<=30) then begin
           +date+tab;
 end;
 cfgsc.FindIpla:=CurrentPlanet;
+cfgsc.FindId:=nom;
 cfgsc.FindName:=nom;
 cfgsc.FindDesc:=Desc;
 cfgsc.FindNote:='';
@@ -1842,6 +1843,8 @@ if db2.Rowcount>0 then begin
        if cdb.GetAstElem(id,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
           InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
           Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
+          cfgsc.AsteroidLst[j,i+1,6]:=ra;
+          cfgsc.AsteroidLst[j,i+1,7]:=dec;
           precession(jd2000,cfgsc.jdchart,ra,dec);
           if cfgsc.PlanetParalaxe then Paralaxe(st0,dist,ra,dec,ra,dec,q,cfgsc);
           if cfgsc.ApparentPos then apparent_equatorial(ra,dec,cfgsc,true,false);
@@ -1919,6 +1922,8 @@ if db2.Rowcount>0 then begin
        if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
           InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
           Comet(jdt,true,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+          cfgsc.CometLst[j,i+1,9]:=ra;
+          cfgsc.CometLst[j,i+1,10]:=dec;
           precession(jd2000,cfgsc.jdchart,ra,dec);
           precession(jd2000,cfgsc.jdchart,car,cde);
           if cfgsc.PlanetParalaxe then begin
@@ -2075,8 +2080,8 @@ if result then begin
   cdb.GetAstElem(cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1],cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id);
   InitAsteroid(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],h,g,ma,ap,an,ic,ec,sa,eq,nam);
   Asteroid(jdt,true,ra,dec,dist,r,elong,phase,magn,xc,yc,zc);
-  cfgsc.FindRA2000:=ra;
-  cfgsc.FindDec2000:=dec;
+  cfgsc.FindRA2000:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,6];
+  cfgsc.FindDec2000:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,7];
   cfgsc.FindDist:=dist;
   nom:=nam;
   str(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,3]:5:1,mag);
@@ -2098,6 +2103,7 @@ if result then begin
   cfgsc.TrackId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
   cfgsc.TrackEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
   cfgsc.TrackName:=nom;
+  cfgsc.FindId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
   cfgsc.FindX:=xc;
   cfgsc.FindY:=yc;
   cfgsc.FindZ:=zc;
@@ -2189,6 +2195,7 @@ if result then begin
   cfgsc.TrackId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
   cfgsc.TrackEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
   cfgsc.TrackName:=nom;
+  cfgsc.FindId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
   cfgsc.FindX:=xc;
   cfgsc.FindY:=yc;
   cfgsc.FindZ:=zc;

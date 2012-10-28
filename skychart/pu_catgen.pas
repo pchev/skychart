@@ -39,6 +39,7 @@ type
 
   Tf_catgen = class(TForm)
     CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
     Label22: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
@@ -110,7 +111,6 @@ type
     GroupBox6: TGroupBox;
     CheckBox3: TCheckBox;
     CheckBox4: TCheckBox;
-    CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
     Button7: TButton;
     TabSheet7: TTabSheet;
@@ -143,6 +143,7 @@ type
     RadioGroup6: TRadioGroup;
     CheckBox7: TCheckBox;
     Button12: TButton;
+    procedure CheckBox9Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
@@ -182,16 +183,14 @@ type
     Fprogress: Tf_progress;
     textpos : array [0..40] of array[1..2] of integer;
     calc : array[0..40,1..2] of double;
-    Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt : integer;
+    Lra,Lde,ListIndex,nebulaesizescale,l_fixe,nbalt,basealt : integer;
     lockchange: boolean;
     catheader : TFileHeader;
     catinfo : TCatHdrInfo;
     datarec : array [0..4096] of byte;
-    indexrec : array [0..1024] of byte;
     ff : array [1..9537] of file;
-    ixf : file;
     ffn : array [1..9537] of string;
-    ixfn, destdir : string;
+    destdir : string;
     freject : textfile;
     rejectopen : boolean;
     fillstring,inl : string;
@@ -203,8 +202,14 @@ type
     neblst  : array[1..15] of string;
     nebunit : array[1..3]  of string;
     altname : array[1..l_sup] of byte;
+    altprefix : array[1..l_sup] of byte;
     createindex, indexaltname, abort : boolean;
     usealt : array[0..10] of record i:integer; l : string; end;
+    {$ifdef build_old_index}
+    indexrec : array [0..1024] of byte;
+    ixf : file;
+    ixfn : string;
+    {$endif}
     Procedure SetFieldlist(field : array of string; n : integer);
     Procedure BuildFieldList;
     procedure OpenCatalog(filename : string);
@@ -233,8 +238,6 @@ type
     Procedure PutRecSmallInt(x : integer; p: integer) ;
     Procedure PutRecByte(x : byte; p: integer) ;
     Procedure PutRecString(x : string; p: integer) ;
-    Procedure PutIxSingle(x : single; p: integer) ;
-    Procedure PutIxkey(x : string) ;
     Procedure FindRegion30(ar,de : double; var lg : integer);
     Procedure FindRegion15(ar,de : double; var lg : integer);
     Procedure FindRegion7(ar,de : double; var hemis : char ; var zone,S : integer);
@@ -243,15 +246,20 @@ type
     Procedure CreateTxtfiles;
     Procedure Closefiles;
     Procedure WriteRec(num: integer);
-    Procedure WriteIx;
     Procedure RejectRec(lin : string);
     Procedure BuildFiles;
     function  filegetsize(fn:string):integer;
     Procedure Sortfiles;
-    Procedure SortIXfile;
     Procedure BuildBinCat;
     Procedure BuildTxtCat;
     procedure ProgressAbort(Sender: TObject);
+    procedure BuildIXrec;
+    {$ifdef build_old_index}
+    Procedure PutIxSingle(x : single; p: integer) ;
+    Procedure PutIxkey(x : string) ;
+    Procedure WriteIx;
+    Procedure SortIXfile;
+    {$endif}
   public
     procedure SetLang;
 
@@ -451,7 +459,6 @@ CheckBox6.caption:=rsAppendToAnEx;
 GroupBox6.caption:=rsSearchIndex;
 CheckBox3.caption:=rsCreateASearc;
 CheckBox4.caption:=rsAddTheAltern;
-CheckBox5.caption:=rsPrefixTheAlt;
 CheckBox8.caption:=rsPrefixNameWi;
 Label9.caption:=rsIndicateTheS;
 Button4.caption:=rsReturn;
@@ -516,6 +523,7 @@ Fprogress:=Tf_progress.Create(self);
 rejectopen := false;
 lockchange:=false;
 for i:=1 to l_sup do altname[i]:=0;
+for i:=1 to l_sup do altprefix[i]:=0;
 pagecontrol1.PageIndex:=pageFiles;
 nextbt.enabled:=true;
 prevbt.enabled:=false;
@@ -716,8 +724,12 @@ end;
   if (i>l_fixe)and(i<=l_fixe+l_sup) then begin
      checkbox2.visible:=true;
      checkbox2.checked:=AltName[i-l_fixe]=1;
-  end else checkbox2.visible:=false;
-
+     checkbox9.visible:=true;
+     checkbox9.checked:=altprefix[i-l_fixe]=1;
+  end else begin
+     checkbox2.visible:=false;
+     checkbox9.visible:=false;
+  end;
 lockchange:=false;
 end;
 
@@ -845,7 +857,7 @@ var i,j,n : integer;
     buf : shortstring;
     CatPrefix: boolean;
 begin
-for i:=1 to 20 do catheader.Spare1[i]:=0;
+for i:=1 to 10 do catheader.Spare1[i]:=0;
 for i:=1 to 15 do catheader.Spare2[i]:=0;
 for i:=1 to 15 do catheader.Spare3[i]:=0;
 for i:=1 to 40 do catheader.fpos[i]:=0;
@@ -873,14 +885,15 @@ end;
 if GroupBox6.Visible then begin
  createindex:=checkbox3.checked;
  indexaltname:=checkbox4.checked;
- if checkbox5.checked then catheader.useprefix:=1
-                      else catheader.useprefix:=0;
+ catheader.useprefix:=0;
+ for i:=1 to l_sup do if altprefix[i]=1 then catheader.useprefix:=2;
 end else begin
  createindex:=false;
  indexaltname:=false;
  catheader.useprefix:=0;
 end;
 for i:=1 to l_sup do catheader.AltName[i]:=altname[i];
+for i:=1 to l_sup do catheader.AltPrefix[i]:=altprefix[i];
 buf:=pchar(edit4.text+'    ');
 for i:=1 to 4 do catheader.ShortName[i-1]:=buf[i];
 buf:=pchar(edit5.text+StringOfChar(' ',50));
@@ -1083,6 +1096,7 @@ case radiogroup1.itemindex of
      end;
 end;
 nbalt:=0;
+basealt:=nextpos;
 for i:=0 to 9 do begin
    if CheckListBox1.Checked[nextpos+i] then begin
       catheader.fpos[n]:=curpos;
@@ -1091,9 +1105,10 @@ for i:=0 to 9 do begin
    if createindex and indexaltname and (altname[n-15]=1) then begin
       inc(nbalt);
       j:=catheader.flen[n];
-      if catheader.UsePrefix=1 then j:=j+length(trim(catheader.flabel[n]));
+      if (catheader.UsePrefix>=1)and(altprefix[n-15]=1)and(trim(catheader.flabel[n])<>'NA') then j:=j+length(trim(catheader.flabel[n]));
       usealt[nbalt].i:=nextpos+i;
-      usealt[nbalt].l:=trim(catheader.flabel[n]);
+      if (altprefix[n-15]=1)and(trim(catheader.flabel[n])<>'NA') then usealt[nbalt].l:=trim(catheader.flabel[n])
+         else usealt[nbalt].l:='';
       ixlen:=maxintvalue([ixlen,j]);
    end;
    curpos:=curpos+catheader.flen[n];
@@ -1118,7 +1133,7 @@ var i,j,n : integer;
     curpos : integer;
     buf : shortstring;
 begin
-for i:=1 to 20 do catheader.Spare1[i]:=0;
+for i:=1 to 10 do catheader.Spare1[i]:=0;
 for i:=1 to 20 do catheader.Spare2[i]:=0;
 for i:=1 to 20 do catheader.Spare3[i]:=0;
 for i:=1 to 35 do catheader.fpos[i]:=0;
@@ -1147,6 +1162,7 @@ createindex:=false;
 indexaltname:=false;
 catheader.useprefix:=0;
 for i:=1 to l_sup do catheader.AltName[i]:=altname[i];
+for i:=1 to l_sup do catheader.AltPrefix[i]:=altprefix[i];
 buf:=pchar(edit4.text+'    ');
 for i:=1 to 4 do catheader.ShortName[i-1]:=buf[i];
 buf:=pchar(edit5.text+StringOfChar(' ',50));
@@ -1404,6 +1420,7 @@ begin
   move(x[1],datarec[catheader.fpos[p]-1],catheader.flen[p]);
 end;
 
+{$ifdef build_old_index}
 Procedure Tf_catgen.PutIxSingle(x : single; p: integer) ;
 begin
   move(x,indexrec[p*4],4);
@@ -1414,6 +1431,14 @@ begin
   x:=x+fillstring;
   move(x[1],indexrec[8],ixlen);
 end;
+
+Procedure Tf_catgen.WriteIx;
+var n : integer;
+begin
+blockwrite(ixf,indexrec[0],8+ixlen,n);
+end;
+
+{$endif}
 
 Procedure Tf_catgen.FindRegion30(ar,de : double; var lg : integer);
 var i1,i2,N,L1 : integer;
@@ -1487,12 +1512,14 @@ assignfile(f,destdir+lowercase(trim(catheader.ShortName))+'.hdr');
 rewrite(f,1);
 blockwrite(f,catheader,catheader.hdrl,n);
 Closefile(f);
+{$ifdef build_old_index}
 if createindex then begin
   ixfn:=lowercase(trim(catheader.ShortName))+'.idx';
   assignfile(ixf,destdir+ixfn);
   if checkbox6.checked then begin reset(ixf,1);Seek(ixf, FileSize(ixf));end
                              else rewrite(ixf,1);
 end;
+{$endif}
 for i:=1 to catheader.FileNum do begin
   if abort then raise exception.create(rsAbortedByUse);
   Fprogress.ProgressBar2.Position:=i;
@@ -1568,19 +1595,15 @@ for i:=1 to catheader.FileNum do begin
   Fprogress.invalidate;
   Closefile(ff[i]);
 end;
+{$ifdef build_old_index}
 if createindex then closefile(ixf);
+{$endif}
 end;
 
 Procedure Tf_catgen.WriteRec(num: integer);
 var n : integer;
 begin
 blockwrite(ff[num],datarec[0],catheader.reclen,n);
-end;
-
-Procedure Tf_catgen.WriteIx;
-var n : integer;
-begin
-blockwrite(ixf,indexrec[0],8+ixlen,n);
 end;
 
 Procedure Tf_catgen.RejectRec(lin : string);
@@ -1596,10 +1619,11 @@ end;
 Procedure Tf_catgen.BuildFiles;
 var
     ra,s,de : double;
-    ixra,ixde : single;
     nextpos,reg,zone,i,j,n : integer;
     hemis : char;
-    buf: string;
+    {$ifdef build_old_index}
+    ixra,ixde : single;
+    {$endif}
 begin
 Fprogress.progressbar1.max:=ListBox1.Items.count;
 fillstring:=StringOfChar(' ',255);
@@ -1663,12 +1687,14 @@ repeat
   end;
   PutRecCard(round(ra*3600000),1);
   PutRecCard(round((de+90)*3600000),2);
+  {$ifdef build_old_index}
   if createindex then begin
      ixra:=ra;
      ixde:=de;
      PutIxSingle(ixra,0);
      PutIxSingle(ixde,1);
   end;
+  {$endif}
   case radiogroup1.itemindex of
 //9 ('Catalog ID','[Magnitude V]','B-V','Magnitude B','Magnitude R','Spectral class','Proper motion RA','Proper motion DEC','Parallax','Comments');
   0 : begin     // Stars
@@ -1793,17 +1819,19 @@ repeat
      if catheader.flen[j]>0 then PutRecSingle(Getfloat(nextpos,0),j);   // num
      inc(nextpos);
   end;
+  {$ifdef build_old_index}
   if createindex then for j:=0 to nbalt do begin
      if usealt[j].i>0 then begin
         buf:=uppercase(StringReplace(GetString(usealt[j].i),' ','',[rfReplaceAll]));
         if buf>'' then begin
-           if (j>0) and (catheader.useprefix=1) then buf:=usealt[j].l+buf;
+           if (j>0) and (catheader.useprefix>=1) then buf:=usealt[j].l+buf;
            if (j=0) and CheckBox8.Checked then buf:=usealt[j].l+buf;
            PutIxKey(buf);
            WriteIx;
         end;
      end;
   end;
+  {$endif}
   case catheader.filenum of
     1      : reg:=1;
     50     : FindRegion30(ra,de,reg);
@@ -1832,9 +1860,16 @@ begin
   Result:=CompSmallAt(Item1, Item2, keypos-1);
 end;
 
+{$ifdef build_old_index}
 function CompareIX(Item1, Item2: Pointer): Integer;
 begin
   Result:=CompareTextFrom(Item1, Item2, 9, ixlen);
+end;
+{$endif}
+
+function CompareIXrec(Item1, Item2: Pointer): Integer;
+begin
+  Result:=CompareTextFrom(Item1, Item2, 7, ixlen);
 end;
 
 Procedure Tf_catgen.Sortfiles;
@@ -1856,6 +1891,7 @@ for i:=1 to catheader.FileNum do begin
 end;
 end;
 
+{$ifdef build_old_index}
 Procedure Tf_catgen.SortIXfile;
 var
   Sorter: TFixRecSort;
@@ -1874,6 +1910,7 @@ Sorter.Free;
 DeleteFile(destdir+ixfn);
 RenameFile(destdir+'sort.out', destdir+ixfn);
 end;
+{$endif}
 
 Procedure Tf_catgen.BuildBinCat;
 begin
@@ -1924,7 +1961,10 @@ if radiogroup1.ItemIndex<4 then begin
  application.processmessages;
  SortFiles;
 end;
+{$ifdef build_old_index}
 if createindex then SortIXfile;
+{$endif}
+if createindex then BuildIXrec;
 if rejectopen then begin
    rejectopen:=false;
    closefile(freject);
@@ -2078,11 +2118,12 @@ if savedialog1.execute then begin
   end;
   for i:=1 to l_sup do
       ini.writeInteger('Page3','altname'+inttostr(i),altname[i]);
+  for i:=1 to l_sup do
+      ini.WriteInteger('Page3','altprefix'+inttostr(i),altprefix[i]);
   ini.writeInteger('Page4','numfile',RadioGroup4.itemindex);
   ini.writeString('Page4','ouputdir',ExtractRelativepath(prjdir,slash(DirectoryEdit1.text)));
   ini.writeBool('Page4','index',checkbox3.checked);
   ini.writeBool('Page4','altindex',checkbox4.checked);
-  ini.writeBool('Page4','prefalt',checkbox5.checked);
   ini.writeBool('Page4','prefname',checkbox8.checked);
   ini.writeBool('Page4','append',checkbox6.checked);
   with stringgrid1 do for i:=1 to 15 do
@@ -2112,6 +2153,7 @@ procedure Tf_catgen.Button2Click(Sender: TObject);
 var ini : Tinifile;
     i,n : integer;
     buf,fn,prjdir: string;
+    bufok: boolean;
 begin
 chdir(appdir);
 opendialog1.filterindex:=2;
@@ -2163,7 +2205,14 @@ if opendialog1.execute then begin
   end;
   for i:=1 to l_sup do
       altname[i]:=ini.readInteger('Page3','altname'+inttostr(i),altname[i]);
-
+  // for migration of old .prj
+    bufok:=ini.ReadBool('Page4','prefalt',false); // old checkbox5.checked
+    for i:=1 to l_sup do
+         if bufok and (altname[i]=1) then altprefix[i]:=1
+                                     else altprefix[i]:=0;
+  //
+  for i:=1 to l_sup do
+      altprefix[i]:=ini.ReadInteger('Page3','altprefix'+inttostr(i),altprefix[i]);
   RadioGroup4.itemindex:=ini.readInteger('Page4','numfile',RadioGroup4.itemindex);
   buf:=ini.readString('Page4','ouputdir','');
   chdir(prjdir);
@@ -2172,7 +2221,6 @@ if opendialog1.execute then begin
   DirectoryEdit1.text:=buf;
   checkbox3.checked:=ini.readBool('Page4','index',checkbox3.checked);
   checkbox4.checked:=ini.readBool('Page4','altindex',checkbox4.checked);
-  checkbox5.checked:=ini.readBool('Page4','prefalt',checkbox5.checked);
   checkbox8.checked:=ini.readBool('Page4','prefname',checkbox8.checked);
   checkbox6.checked:=ini.readBool('Page4','append',checkbox6.checked);
   with stringgrid1 do for i:=1 to 15 do
@@ -2256,6 +2304,12 @@ if checkbox2.checked then altname[listindex+1-l_fixe]:=1
                      else altname[listindex+1-l_fixe]:=0;
 end;
 
+procedure Tf_catgen.CheckBox9Click(Sender: TObject);
+begin
+if checkbox9.checked then altprefix[listindex+1-l_fixe]:=1
+                     else altprefix[listindex+1-l_fixe]:=0;
+end;
+
 procedure Tf_catgen.Button7Click(Sender: TObject);
 var i : integer;
     x : double;
@@ -2302,6 +2356,96 @@ end;
 procedure Tf_catgen.ProgressAbort(Sender: TObject);
 begin
 abort:=true;
+end;
+
+procedure Tf_catgen.BuildIXrec;
+type Tixrec = packed record n: smallint;
+                k: integer;
+                key : array [0..512] of char;
+              end;
+var rec:gcatrec;
+    ok: boolean;
+    i,j,k,kl,wr,ak: integer;
+    n:smallint;
+    key,fn:string;
+    ixrec : Tixrec;
+    ixrecf: file;
+    Sorter: TFixRecSort;
+procedure addindex;
+begin
+  ixrec.n:=n;
+  ixrec.k:=k;
+  ixrec.key:=key+fillstring;
+  blockwrite(ixrecf,ixrec,6+kl,wr);
+end;
+begin
+ kl:=ixlen;
+ fn:=slash(destdir)+lowercase(trim(catheader.ShortName))+'.ixr';
+ AssignFile(ixrecf,fn);
+ rewrite(ixrecf,1);
+ CleanCache;
+ SetGCatpath(destdir,lowercase(trim(catheader.ShortName)));
+ ReadGCatHeader;
+ Fprogress.progressbar2.max:=catheader.FileNum;
+ Fprogress.progressbar2.position:=0;
+ Fprogress.label1.caption:=rsCreateASearc;
+ Fprogress.label2.caption:='';
+ application.processmessages;
+ for i:=1 to catheader.FileNum do begin
+    OpenGCatfile(destdir+ffn[i],ok);
+    k:=0;
+    n:=i;
+    Fprogress.progressbar2.position:=0;
+    application.processmessages;
+    repeat
+      ReadGCat(rec,ok,false);
+      if ok then begin
+        // main index
+        if usealt[0].i>0 then begin
+          case radiogroup1.itemindex of
+          0:  key:=rec.star.id;
+          1:  key:=rec.variable.id;
+          2:  key:=rec.double.id;
+          3:  key:=rec.neb.id;
+          4:  key:=rec.outlines.id;
+          end;
+          key:=trim(key);
+          if key<>'' then begin
+            if CheckBox8.Checked then key:=usealt[0].l+key;
+            addindex;
+          end;
+        end;
+        // alternate indexes
+        if indexaltname then begin
+          for j:=1 to nbalt do begin
+             if usealt[j].i>0 then begin
+               ak:=usealt[j].i-basealt+1;
+               key:=uppercase(StringReplace(rec.str[ak],' ','',[rfReplaceAll]));
+               if key>'' then begin
+                  if catheader.useprefix>=1 then key:=usealt[j].l+key;
+                  addindex;
+                end;
+             end;
+          end;
+        end;
+        inc(k);
+      end;
+    until not ok;
+ end;
+ closefile(ixrecf);
+ Fprogress.progressbar2.max:=2;
+ Fprogress.progressbar2.position:=1;
+ Fprogress.label1.caption:=rsSortingTheIn;
+ Fprogress.label2.caption:='';
+ application.processmessages;
+ Sorter:=TFixRecSort.Create(kl+6);
+ Sorter.Stable:=True;
+ Sorter.Start(fn,destdir+'sort.out', @CompareIXrec);
+ Fprogress.progressbar2.position:=2;
+ application.processmessages;
+ Sorter.Free;
+ DeleteFile(fn);
+ RenameFile(destdir+'sort.out', fn);
 end;
 
 {  Sort testing

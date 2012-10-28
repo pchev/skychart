@@ -38,6 +38,8 @@ Procedure OpenGCVwin(var ok : boolean);
 Procedure ReadGCV(var lin : GCVrec; var ok : boolean);
 Procedure NextGCV( var ok : boolean);
 procedure CloseGCV ;
+procedure OpenGCVSFileNum(fnum:integer; var ok:boolean);
+Procedure ReadGCVSRec(r: integer; var lin : GCVrec; var ok : boolean);
 
 var
   GCVpath : string;
@@ -130,6 +132,21 @@ curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
+end;
+
+procedure OpenGCVSFileNum(fnum:integer; var ok:boolean);
+begin
+ OpenRegion(fnum,ok);
+end;
+
+Procedure ReadGCVSRec(r: integer; var lin : GCVrec; var ok : boolean);
+begin
+ok:=false;
+Seek(fgcv,r);
+if not eof(fgcv) then begin
+   Read(fgcv,lin);
+   ok:=true;
+end;
 end;
 
 end.

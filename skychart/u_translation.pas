@@ -1375,6 +1375,7 @@ resourcestring
   rsAutomaticall2 = 'Automatically optimize the labels placement';
   rsDoNotFilterM = 'Do not filter Messier objects';
   rsAllObjectsAt = 'All the objects at this position';
+  rsZoomMoreToVi = 'Zoom more to view the object';
 
 implementation
 

@@ -44,6 +44,8 @@ type
     NumCat,CurCat,CurGCat,VerGCat,CurrentUserObj,DSLcolor : integer;
     GcatFilter, DSLForceColor: boolean;
     EmptyRec : GCatRec;
+    FFindId : string;
+    FFindRec : GCatrec;
   protected
     { Protected declarations }
      function InitRec(cat:integer):boolean;
@@ -75,12 +77,18 @@ type
      function OpenVarStarCat:boolean;
      function CloseVarStarCat:boolean;
      function GetGCVS(var rec:GcatRec):boolean;
+     procedure FormatGCVS(lin : GCVrec; var rec:GcatRec);
+     procedure FindGCVS(id: string; var ra,dec: double; var ok:boolean);
      function OpenDblStarCat:boolean;
      function CloseDblStarCat:boolean;
      function GetWDS(var rec:GcatRec):boolean;
+     procedure FormatWDS(lin : WDSrec; var rec:GcatRec);
+     procedure FindWDS(id: string; var ra,dec: double; var ok:boolean);
      function OpenNebCat:boolean;
      function CloseNebCat:boolean;
      function GetSAC(var rec:GcatRec):boolean;
+     procedure FormatSAC(lin : SACrec; var rec:GcatRec);
+     procedure FindSAC(id: string; var ra,dec: double; var ok:boolean);
      function GetNGC(var rec:GcatRec):boolean;
      function GetLBN(var rec:GcatRec):boolean;
      function GetRC3(var rec:GcatRec):boolean;
@@ -90,6 +98,7 @@ type
      function GetGPN(var rec:GcatRec):boolean;
      function OpenLinCat:boolean;
      function CloseLinCat:boolean;
+     procedure FormatGCatS(var rec:GcatRec);
   public
     { Public declarations }
      cfgcat : Tconf_catalog;
@@ -123,6 +132,7 @@ type
      Procedure OpenDefaultStarsPos(ar1,ar2,de1,de2: double ; var ok : boolean);
      function CloseDefaultStars:boolean;
      function GetDefaultStars(var rec:GcatRec):boolean;
+     procedure FindDefaultStars(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
      function FindNum(cat: integer; id: string; var ra,dec: double):boolean ;
      function SearchNebulae(Num:string; var ar1,de1: double): boolean;
      function SearchStar(Num:string; var ar1,de1: double): boolean;
@@ -149,6 +159,8 @@ type
      function  LongLabelConst(txt : string) : string;
      function  LongLabel(txt:string):string;
      function  LongLabelObj(txt:string):string;
+     property FindId : string read FFindId;
+     property FindRec : GCatrec read FFindRec write FFindRec;
   published
     { Published declarations }
   end;
@@ -769,6 +781,31 @@ begin
   result:=GetGCatS(rec);
 end;
 
+procedure Tcatalog.FindDefaultStars(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
+var
+   H : TCatHeader;
+   rec:GCatrec;
+   i,version : integer;
+   iid:string;
+begin
+ok:=false;
+iid:=id;
+SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
+GetGCatInfo(H,version,GCatFilter,ok);
+GCatFilter:=true;
+if fileexists(slash(cfgcat.starcatpath[DefStar-BaseStar])+'star'+'.ixr') then begin
+   if ok then FindNumGcatRec(cfgcat.starcatpath[DefStar-BaseStar],'star',iid,H.ixkeylen,rec,ok);
+   if ok then begin
+      ar:=rec.ra/15;
+      de:=rec.dec;
+      FormatGCatS(rec);
+      FFindId:=id;
+      FFindRec:=rec;
+   end;
+end
+else ok:=false;
+end;
+
 // CatGen header simulation for old catalog
 
 function Tcatalog.InitRec(cat:integer):boolean;
@@ -853,7 +890,7 @@ begin
              EmptyRec.options.rectype:=rtStar;
              EmptyRec.options.Equinox:=2000;
              EmptyRec.options.EquinoxJD:=jd2000;
-             EmptyRec.options.Epoch:=1991.25;
+             EmptyRec.options.Epoch:=2000.0;
              EmptyRec.options.MagMax:=12;
              EmptyRec.options.UsePrefix:=0;
              Emptyrec.star.valid[vsId]:=true;
@@ -1423,8 +1460,51 @@ end else begin
 end;
 end;
 
-function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
+procedure Tcatalog.FormatGCatS(var rec:GcatRec);
 var bsccat, flam, bayer : boolean;
+    i: integer;
+begin
+rec.ra:=deg2rad*rec.ra;
+rec.dec:=deg2rad*rec.dec;
+rec.star.pmra:=deg2rad*rec.star.pmra/3600;
+rec.star.pmdec:=deg2rad*rec.star.pmdec/3600;
+rec.star.valid[vsGreekSymbol]:=false;
+bsccat:=(rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr+3])='CommonName'))and
+        (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr+4])='Fl'))and
+        (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr+5])='Bayer'))and
+        (rec.vstr[6] and (trim(rec.options.flabel[lOffsetStr+6])='Const'));
+if bsccat then begin
+    for i:=1 to 10 do begin  // remove fields used only for index
+       if UpperCase(trim(rec.options.flabel[lOffsetStr+i]))='NA' then rec.vstr[i]:=false;
+    end;
+    flam:=(trim(rec.str[4])<>'');
+    rec.vstr[4]:=flam;
+    bayer:=(trim(rec.str[5])<>'');
+    if trim(rec.str[5])='H02' then begin
+       rec.vstr[5]:=bayer;
+    end;
+    rec.vstr[5]:=bayer;
+    if bayer then begin
+        rec.star.greeksymbol:=GreekLetter(rec.str[5]);
+        if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
+           else bayer:=false;
+    end;
+    if (not bayer) and flam  then begin
+        rec.star.greeksymbol:=trim(rec.str[4]);
+        if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
+           else flam:=false;
+    end;
+    rec.options.flabel[lOffsetStr+3]:=rsCommonName;
+    rec.vstr[3]:=(trim(rec.str[3])<>'');
+    if flam and (not bayer) then rec.star.id:=copy(trim(rec.str[4])+blank15,1,3) else rec.star.id:='';
+    if bayer or flam  then begin
+      rec.star.id:=rec.star.id+blank+trim(rec.str[5])+blank+trim(rec.str[6]);
+      rec.star.valid[vsId]:=true;
+    end;
+end;
+end;
+
+function Tcatalog.GetGCatS(var rec:GcatRec):boolean;
 begin
 result:=true;
 repeat
@@ -1434,41 +1514,7 @@ repeat
              if GCatFilter then NextGCat(result);
              if result then continue;
   end;
-  rec.ra:=deg2rad*rec.ra;
-  rec.dec:=deg2rad*rec.dec;
-  rec.star.pmra:=deg2rad*rec.star.pmra/3600;
-  rec.star.pmdec:=deg2rad*rec.star.pmdec/3600;
-  rec.star.valid[vsGreekSymbol]:=false;
-  bsccat:=(rec.vstr[3] and (trim(rec.options.flabel[lOffsetStr+3])='CommonName'))and
-          (rec.vstr[4] and (trim(rec.options.flabel[lOffsetStr+4])='Fl'))and
-          (rec.vstr[5] and (trim(rec.options.flabel[lOffsetStr+5])='Bayer'))and
-          (rec.vstr[6] and (trim(rec.options.flabel[lOffsetStr+6])='Const'));
-  if bsccat then begin
-      flam:=(trim(rec.str[4])<>'');
-      rec.vstr[4]:=flam;
-      bayer:=(trim(rec.str[5])<>'');
-      if trim(rec.str[5])='H02' then begin
-         rec.vstr[5]:=bayer;
-      end;
-      rec.vstr[5]:=bayer;
-      if bayer then begin
-          rec.star.greeksymbol:=GreekLetter(rec.str[5]);
-          if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
-             else bayer:=false;
-      end;
-      if (not bayer) and flam  then begin
-          rec.star.greeksymbol:=trim(rec.str[4]);
-          if rec.star.greeksymbol<>'' then rec.star.valid[vsGreekSymbol]:=true
-             else flam:=false;
-      end;
-      rec.options.flabel[lOffsetStr+3]:=rsCommonName;
-      rec.vstr[3]:=(trim(rec.str[3])<>'');
-      if flam and (not bayer) then rec.star.id:=copy(trim(rec.str[4])+blank15,1,3) else rec.star.id:='';
-      if bayer or flam  then begin
-        rec.star.id:=rec.star.id+blank+trim(rec.str[5])+blank+trim(rec.str[6]);
-        rec.star.valid[vsId]:=true;
-      end;
-  end;
+  FormatGCatS(rec);
   break;
 until not result;
 end;
@@ -1554,19 +1600,31 @@ end;
 procedure Tcatalog.FindNGCat(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
 var
    H : TCatHeader;
+   rec:GCatrec;
    i,version : integer;
    iid:string;
 begin
 ok:=false;
 iid:=id;
 for i:=0 to cfgcat.GCatNum-1 do begin
-  if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype))
-   and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx')
-   then begin
-     SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
-     GetGCatInfo(H,version,GCatFilter,ok);
-     if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen, ar,de,ok);
-     if ok then break;
+  if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype)) then begin
+   SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
+   GetGCatInfo(H,version,GCatFilter,ok);
+   if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.ixr') then begin
+     if ok then FindNumGcatRec(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen,rec,ok);
+     if ok then begin
+        ar:=rec.ra/15;
+        de:=rec.dec;
+        FormatGCatS(rec);
+        FFindId:=id;
+        FFindRec:=rec;
+        break;
+     end;
+   end
+   else if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
+      if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen, ar,de,ok);
+      if ok then break;
+    end;
   end;
 end;
 end;
@@ -1944,75 +2002,165 @@ if result then begin
 end;
 end;
 
+procedure Tcatalog.FormatGCVS(lin: GCVrec; var rec: GcatRec);
+begin
+rec.ra:=deg2rad*lin.ar/100000;
+rec.dec:=deg2rad*lin.de/100000;
+rec.variable.magmin:=lin.min/100;
+rec.variable.magmax:=lin.max/100;
+rec.variable.id:=lin.gcvs;
+str(lin.num:7,rec.str[1]);
+if copy(lin.vartype,7,3)='NSV' then rec.str[1]:='NSV'+rec.str[1];
+rec.variable.period:=lin.period;
+rec.variable.vartype:=stringreplace(lin.vartype,':',blank,[rfReplaceAll]);
+rec.variable.magcode:=lin.mcode;
+rec.str[2]:=lin.lmin+blank+lin.lmax;
+end;
+
 function Tcatalog.GetGCVS(var rec:GcatRec):boolean;
 var lin : GCVrec;
+    ma: double;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
   ReadGCV(lin,result);
   if not result then break;
-  rec.variable.magmax:=lin.max/100;
-  if cfgshr.StarFilter and (rec.variable.magmax>cfgcat.StarMagMax) then continue;
+  ma:=lin.max/100;
+  if cfgshr.StarFilter and (ma>cfgcat.StarMagMax) then continue;
   if (not cfgcat.UseGSVSIr) and (lin.mcode>='J')and(lin.mcode<='N') then continue;
   break;
 until not result;
 if result then begin
-   rec.ra:=deg2rad*lin.ar/100000;
-   rec.dec:=deg2rad*lin.de/100000;
-   rec.variable.magmin:=lin.min/100;
-   rec.variable.magmax:=lin.max/100;
-   rec.variable.id:=lin.gcvs;
-   str(lin.num:7,rec.str[1]);
-   if copy(lin.vartype,7,3)='NSV' then rec.str[1]:='NSV'+rec.str[1];
-   rec.variable.period:=lin.period;
-   rec.variable.vartype:=stringreplace(lin.vartype,':',blank,[rfReplaceAll]);
-   rec.variable.magcode:=lin.mcode;
-   rec.str[2]:=lin.lmin+blank+lin.lmax;
+   FormatGCVS(lin,rec);
+end;
+end;
+
+procedure Tcatalog.FindGCVS(id: string; var ra,dec: double; var ok:boolean);
+var lin: GCVrec;
+    rec: GCatrec;
+begin
+InitRec(gcvs);
+rec:=EmptyRec;
+FindNumGCVS(id,lin,ok);
+if ok then begin
+   FormatGCVS(lin,rec);
+   ra:=rad2deg*rec.ra/15;
+   dec:=rad2deg*rec.dec;
+   FFindId:=id;
+   FFindRec:=rec;
+end;
+end;
+
+
+procedure Tcatalog.FormatWDS(lin : WDSrec; var rec:GcatRec);
+var n,s:string;
+    p:integer;
+begin
+rec.ra:=deg2rad*lin.ar/100000;
+rec.dec:=deg2rad*lin.de/100000;
+if (lin.pa2<>-999) and (lin.sep2>0) then begin
+   rec.double.epoch:=lin.date2;
+   rec.double.pa:=lin.pa2;
+   rec.double.sep:=lin.sep2/10;
+   end
+else begin
+   rec.double.epoch:=lin.date1;
+   rec.double.pa:=lin.pa1;
+   rec.double.sep:=lin.sep1/10;
+end;
+rec.double.mag1:=lin.ma/100;
+rec.double.mag2:=lin.mb/100;
+rec.double.id:=lin.id;
+rec.double.compname:=lin.comp;
+rec.double.sp1:=lin.sp;
+rec.double.comment:=lin.note;
+if lin.dm<>0 then begin
+  if lin.dm>=0 then s:='+' else s:='-';
+  n:=inttostr(abs(lin.dm));
+  p:=length(n)-4;
+  if p>0 then n:=s+copy(n,1,p-1)+'.'+copy(n,p,p+5)
+         else n:=s+'0.'+padzeros(n,5);
+  rec.double.comment:=rec.double.comment+' BD'+n;
 end;
 end;
 
 function Tcatalog.GetWDS(var rec:GcatRec):boolean;
 var lin : WDSrec;
-    n,s:string;
-    p:integer;
+    ma:  double;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
   ReadWDS(lin,result);
   if not result then break;
-  rec.double.mag1:=lin.ma/100;
-  if cfgshr.StarFilter and (rec.double.mag1>cfgcat.StarMagMax) then continue;
+  ma:=lin.ma/100;
+  if cfgshr.StarFilter and (ma>cfgcat.StarMagMax) then continue;
   break;
 until not result;
 if result then begin
-   rec.ra:=deg2rad*lin.ar/100000;
-   rec.dec:=deg2rad*lin.de/100000;
-   if (lin.pa2<>-999) and (lin.sep2>0) then begin
-      rec.double.epoch:=lin.date2;
-      rec.double.pa:=lin.pa2;
-      rec.double.sep:=lin.sep2/10;
-      end
-   else begin
-      rec.double.epoch:=lin.date1;
-      rec.double.pa:=lin.pa1;
-      rec.double.sep:=lin.sep1/10;
-   end;
-   rec.double.mag2:=lin.mb/100;
-   rec.double.id:=lin.id;
-   rec.double.compname:=lin.comp;
-   rec.double.sp1:=lin.sp;
-   rec.double.comment:=lin.note;
-   if lin.dm<>0 then begin
-     if lin.dm>=0 then s:='+' else s:='-';
-     n:=inttostr(abs(lin.dm));
-     p:=length(n)-4;
-     if p>0 then n:=s+copy(n,1,p-1)+'.'+copy(n,p,p+5)
-            else n:=s+'0.'+padzeros(n,5);
-     rec.double.comment:=rec.double.comment+' BD'+n;
-   end;
+   FormatWDS(lin,rec);
 end;
+end;
+
+procedure Tcatalog.FindWDS(id: string; var ra,dec: double; var ok:boolean);
+var lin: WDSrec;
+    rec: GCatrec;
+begin
+InitRec(wds);
+rec:=EmptyRec;
+FindNumWDS(id,lin,ok);
+if ok then begin
+   FormatWDS(lin,rec);
+   ra:=rad2deg*rec.ra/15;
+   dec:=rad2deg*rec.dec;
+   FFindId:=id;
+   FFindRec:=rec;
+end;
+end;
+
+procedure Tcatalog.FormatSAC(lin : SACrec; var rec:GcatRec);
+begin
+rec.ra:=deg2rad*lin.ar;
+rec.dec:=deg2rad*lin.de;
+rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
+rec.neb.dim1:=lin.s1;
+rec.neb.mag:=lin.ma;
+if trim(lin.typ)='Drk' then rec.neb.mag:=11;
+rec.neb.nebtype:=-1;
+if trim(lin.typ)='Gx'  then rec.neb.nebtype:=1
+else if trim(lin.typ)='OC'  then rec.neb.nebtype:=2
+else if trim(lin.typ)='Gb'  then rec.neb.nebtype:=3
+else if trim(lin.typ)='Pl'  then rec.neb.nebtype:=4
+else if trim(lin.typ)='Nb'  then rec.neb.nebtype:=5
+else if trim(lin.typ)='C+N'  then rec.neb.nebtype:=6
+else if trim(lin.typ)='*'  then rec.neb.nebtype:=7
+else if trim(lin.typ)='D*'  then rec.neb.nebtype:=8
+else if trim(lin.typ)='***'  then rec.neb.nebtype:=9
+else if trim(lin.typ)='Ast'  then rec.neb.nebtype:=10
+else if trim(lin.typ)='Kt'  then rec.neb.nebtype:=11
+else if trim(lin.typ)='Gcl'  then rec.neb.nebtype:=12
+else if trim(lin.typ)='Drk'  then rec.neb.nebtype:=13
+else if trim(lin.typ)='?'  then rec.neb.nebtype:=0
+else if lin.typ='   '  then rec.neb.nebtype:=0
+else if trim(lin.typ)='-'  then rec.neb.nebtype:=-1
+else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
+if (rec.neb.mag>70)or(rec.neb.mag<-70) then rec.neb.mag:=99.9;    // undefined magnitude
+rec.neb.dim2:=lin.s2;
+if rec.neb.nebtype=4 then begin // arc second units for PN
+   rec.neb.dim1:=rec.neb.dim1*60;
+   rec.neb.dim2:=rec.neb.dim2*60;
+   rec.neb.valid[vnNebunit]:=true;
+   rec.neb.nebunit:=3600;
+end;
+if lin.pa=255 then rec.neb.pa:=90
+              else rec.neb.pa:=lin.pa;
+rec.neb.sbr:=lin.sbr;
+rec.neb.id:=lin.nom1;
+rec.str[1]:=lin.nom2;
+rec.str[2]:=lin.cons;
+rec.neb.morph:=lin.clas;
+rec.neb.comment:=lin.desc;
 end;
 
 function Tcatalog.GetSAC(var rec:GcatRec):boolean;
@@ -2036,42 +2184,23 @@ repeat
   break;
 until not result;
 if result then begin
-   rec.ra:=deg2rad*lin.ar;
-   rec.dec:=deg2rad*lin.de;
-   rec.neb.nebtype:=-1;
-   if trim(lin.typ)='Gx'  then rec.neb.nebtype:=1
-   else if trim(lin.typ)='OC'  then rec.neb.nebtype:=2
-   else if trim(lin.typ)='Gb'  then rec.neb.nebtype:=3
-   else if trim(lin.typ)='Pl'  then rec.neb.nebtype:=4
-   else if trim(lin.typ)='Nb'  then rec.neb.nebtype:=5
-   else if trim(lin.typ)='C+N'  then rec.neb.nebtype:=6
-   else if trim(lin.typ)='*'  then rec.neb.nebtype:=7
-   else if trim(lin.typ)='D*'  then rec.neb.nebtype:=8
-   else if trim(lin.typ)='***'  then rec.neb.nebtype:=9
-   else if trim(lin.typ)='Ast'  then rec.neb.nebtype:=10
-   else if trim(lin.typ)='Kt'  then rec.neb.nebtype:=11
-   else if trim(lin.typ)='Gcl'  then rec.neb.nebtype:=12
-   else if trim(lin.typ)='Drk'  then rec.neb.nebtype:=13
-   else if trim(lin.typ)='?'  then rec.neb.nebtype:=0
-   else if lin.typ='   '  then rec.neb.nebtype:=0
-   else if trim(lin.typ)='-'  then rec.neb.nebtype:=-1
-   else if trim(lin.typ)='PD'  then rec.neb.nebtype:=-1;
-   if (rec.neb.mag>70)or(rec.neb.mag<-70) then rec.neb.mag:=99.9;    // undefined magnitude
-   rec.neb.dim2:=lin.s2;
-   if rec.neb.nebtype=4 then begin // arc second units for PN
-      rec.neb.dim1:=rec.neb.dim1*60;
-      rec.neb.dim2:=rec.neb.dim2*60;
-      rec.neb.valid[vnNebunit]:=true;
-      rec.neb.nebunit:=3600;
-   end;
-   if lin.pa=255 then rec.neb.pa:=90
-                 else rec.neb.pa:=lin.pa;
-   rec.neb.sbr:=lin.sbr;
-   rec.neb.id:=lin.nom1;
-   rec.str[1]:=lin.nom2;
-   rec.str[2]:=lin.cons;
-   rec.neb.morph:=lin.clas;
-   rec.neb.comment:=lin.desc;
+  FormatSAC(lin,rec);
+end;
+end;
+
+procedure Tcatalog.FindSAC(id: string; var ra,dec: double; var ok:boolean);
+var lin: SACrec;
+    rec: GCatrec;
+begin
+InitRec(sac);
+rec:=EmptyRec;
+FindNumSAC(id,lin,ok);
+if ok then begin
+   FormatSAC(lin,rec);
+   ra:=rad2deg*rec.ra/15;
+   dec:=rad2deg*rec.dec;
+   FFindId:=id;
+   FFindRec:=rec;
 end;
 end;
 
@@ -2346,7 +2475,7 @@ try
                      end;
         S_GCVS     : if IsGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]) then begin
                      SetGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]);
-                     FindNumGCVS(id,ra,dec,result) ;
+                     FindGCVS(id,ra,dec,result) ;
                      end;
         S_GC       : if IsBSCPath(cfgcat.StarCatPath[bsc-BaseStar]) then begin
                      SetBSCPath(cfgcat.StarCatPath[bsc-BaseStar]);
@@ -2394,11 +2523,11 @@ try
                      end;
         S_SAC      : if IsSACPath(cfgcat.NebCatPath[sac-BaseNeb]) then begin
                      SetSACPath(cfgcat.NebCatPath[sac-BaseNeb]);
-                     FindNumSAC(id,ra,dec,result) ;
+                     FindSAC(id,ra,dec,result) ;
                      end;
         S_WDS      : if IsWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]) then begin
                      SetWDSPath(cfgcat.DblStarCatPath[wds-BaseDbl]);
-                     FindNumWDS(id,ra,dec,result) ;
+                     FindWDS(id,ra,dec,result) ;
                      end;
         S_GCat     : begin
                      FindNGcat(id,ra,dec,result) ;
@@ -2434,6 +2563,8 @@ begin
        end;
      end;
    end;
+   result:=FindNum(S_SAC,Num,ar1,de1) ;
+   if result then exit;
    if uppercase(copy(Num,1,1))='M' then begin
       buf:=StringReplace(Num,'m','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_messier,buf,ar1,de1) ;
@@ -2454,8 +2585,6 @@ begin
       result:=FindNum(S_PGC,buf,ar1,de1) ;
       if result then exit;
    end;
-   result:=FindNum(S_SAC,Num,ar1,de1) ;
-   if result then exit;
    FindNGcat(Num,ar1,de1,result,rtNeb) ;
    if result then begin
       ar1:=deg2rad*15*ar1;
@@ -2493,6 +2622,7 @@ end;
 function Tcatalog.SearchStar(Num:string; var ar1,de1: double): boolean;
 var buf : string;
 begin
+   // first the id not in the default catalog
    if uppercase(copy(Num,1,2))='GC' then begin
       buf:=StringReplace(Num,'gc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_GC,buf,ar1,de1) ;
@@ -2518,6 +2648,21 @@ begin
       result:=FindNum(S_SAO,buf,ar1,de1) ;
       if result then exit;
    end;
+   // the default catalog
+   FindDefaultStars(Num,ar1,de1,result,rtStar) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+   // other catgen catalog
+   FindNGcat(Num,ar1,de1,result,rtStar) ;
+   if result then begin
+      ar1:=deg2rad*15*ar1;
+      de1:=deg2rad*de1;
+      exit;
+   end;
+   // then the id that duplicate some default catalog entries
    if uppercase(copy(Num,1,2))='HD' then begin
       buf:=StringReplace(Num,'hd','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_HD,buf,ar1,de1) ;
@@ -2547,17 +2692,12 @@ begin
    if result then exit;
    result:=FindNum(S_Flam,Num,ar1,de1) ;
    if result then exit;
-   FindNGcat(Num,ar1,de1,result,rtStar) ;
-   if result then begin
-      ar1:=deg2rad*15*ar1;
-      de1:=deg2rad*de1;
-      exit;
-   end;
 end;
 
 function Tcatalog.SearchDblStar(Num:string; var ar1,de1: double): boolean;
 begin
-   if fileexists(slash(cfgcat.DblStarCatPath[wds-BaseDbl])+'wds.idx') then begin
+   result:=false;
+   if fileexists(slash(cfgcat.DblStarCatPath[wds-BaseDbl])+'wds.ixr') then begin
       result:=FindNum(S_WDS,Num,ar1,de1) ;
       if result then exit;
    end;
@@ -2571,7 +2711,8 @@ end;
 
 function Tcatalog.SearchVarStar(Num:string; var ar1,de1: double): boolean;
 begin
-   if fileexists(slash(cfgcat.VarStarCatPath[gcvs-BaseVar])+'gcvs.idx') then begin
+   result:=false;
+   if fileexists(slash(cfgcat.VarStarCatPath[gcvs-BaseVar])+'gcvs.ixr') then begin
       result:=FindNum(S_GCVS,Num,ar1,de1) ;
       if result then exit;
    end;
@@ -2918,12 +3059,15 @@ end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);
 var i:integer;
+    usep: boolean;
 begin
 for i:=1 to 10 do begin
   if (rec.vstr[i])and(rec.options.altname[i]) then begin
      txt:=rec.str[i];
      if trim(txt)>'' then begin
-        if rec.options.UsePrefix=1 then txt:=trim(rec.options.flabel[15+i])+txt;
+        if (rec.options.UsePrefix=1) or
+           ((rec.options.UsePrefix=2)and(rec.options.altprefix[i]))
+           then txt:=trim(rec.options.flabel[15+i])+txt;
         break;
      end;
   end;

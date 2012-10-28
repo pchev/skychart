@@ -584,11 +584,11 @@ const
 type
   Tplanetlst = array[0..MaxPlSim, 1..MaxPla, 1..10] of double;
   // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
-  Tcometlst = array of array[1..MaxComet, 1..8] of double;
-  // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch
+  Tcometlst = array of array[1..MaxComet, 1..10] of double;
+  // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch, ra2000, dec2000
   TcometName = array of array[1..MaxComet, 1..2] of string[27];   // id, name
-  Tasteroidlst = array of array[1..MaxAsteroid, 1..5] of double;
-  // ra, dec, magn, jd, epoch
+  Tasteroidlst = array of array[1..MaxAsteroid, 1..7] of double;
+  // ra, dec, magn, jd, epoch, ra2000, dec2000
   TasteroidName = array of array[1..MaxAsteroid, 1..2] of string[27]; // id, name
   double6 = array[1..6] of double;
   Pdouble6 = ^double6;
@@ -615,6 +615,7 @@ type
   Tobjlabel = record
     id: integer;
     x, y, r, orientation: single;
+    px,py: integer;
     labelnum, fontnum,priority: byte;
     optimizable,optimized: boolean;
     align: TLabelAlign;
@@ -804,7 +805,7 @@ type
     FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, ConstFullLabel, ConstLatinLabel,
     ScopeMark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName,
-    FindDesc, FindDesc2, FindNote, FindCat, FindCatname: string;
+    FindDesc, FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
     IridiumRA, IridiumDE, IridiumMA: double;
@@ -890,8 +891,9 @@ type
   end;
 
   TObsDetail = class(TObject)
-    country: string;
+    country,tz: string;
     lat, lon, alt: double;
+    countrytz: boolean;
   end;
 
   Tconf_main = class(TObject)    // main form setting
@@ -1888,6 +1890,7 @@ begin
   TrackName := Source.TrackName;
   TrackId := Source.TrackId;
   FindName := Source.FindName;
+  FindId := Source.FindId;
   FindDesc := Source.FindDesc;
   FindDesc2 := Source.FindDesc2;
   FindNote := Source.FindNote;

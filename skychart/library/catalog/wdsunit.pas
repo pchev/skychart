@@ -40,6 +40,8 @@ Procedure OpenWDSwin(var ok : boolean);
 Procedure ReadWDS(var lin : WDSrec; var ok : boolean);
 Procedure NextWDS( var ok : boolean);
 procedure CloseWDS ;
+procedure OpenWDSFileNum(fnum:integer; var ok:boolean);
+Procedure ReadWDSRec(r: integer; var lin : WDSrec; var ok : boolean);
 
 var
   WDSpath : string;
@@ -130,6 +132,21 @@ curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
+end;
+
+procedure OpenWDSFileNum(fnum:integer; var ok:boolean);
+begin
+ OpenRegion(fnum,ok);
+end;
+
+Procedure ReadWDSRec(r: integer; var lin : WDSrec; var ok : boolean);
+begin
+ok:=false;
+Seek(fwds,r);
+if not eof(fwds) then begin
+   Read(fwds,lin);
+   ok:=true;
+end;
 end;
 
 end.

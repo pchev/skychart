@@ -47,6 +47,7 @@ type
     DownloadDialog1: TDownloadDialog;
     Label2: TLabel;
     Label3: TLabel;
+    altmeter: TLongEdit;
     ObsName: TEdit;
     TZComboBox: TComboBox;
     fillhorizon: TCheckBox;
@@ -74,7 +75,6 @@ type
     longsec: TLongEdit;
     Altitude: TGroupBox;
     Label70: TLabel;
-    altmeter: TFloatEdit;
     timezone: TGroupBox;
     Obszp: TButton;
     Obszm: TButton;
@@ -261,7 +261,7 @@ var d,m,s : string;
 begin
 try
 obslock:=true;
-altmeter.value:=csc.obsaltitude;
+altmeter.value:=round(csc.obsaltitude);
 ArToStr2(abs(csc.ObsLatitude),d,m,s);
 latdeg.Text:=d;
 latmin.Text:=m;
@@ -495,6 +495,8 @@ var obsdetail: TObsDetail;
 begin
 obsdetail:=TObsDetail.Create;
 obsdetail.country:=csc.ObsCountry;
+obsdetail.countrytz:=csc.countrytz;
+obsdetail.tz:=csc.ObsTZ;
 obsdetail.lat:=csc.ObsLatitude;
 obsdetail.lon:=csc.ObsLongitude;
 obsdetail.alt:=csc.ObsAltitude;
@@ -578,6 +580,8 @@ begin
   i:=ComboBox1.ItemIndex;
   csc.ObsName:=cmain.ObsNameList[i];
   csc.ObsCountry   := TObsDetail(cmain.ObsNameList.Objects[i]).country;
+  csc.countrytz    := TObsDetail(cmain.ObsNameList.Objects[i]).countrytz;
+  csc.ObsTZ        := TObsDetail(cmain.ObsNameList.Objects[i]).tz;
   csc.ObsLatitude  := TObsDetail(cmain.ObsNameList.Objects[i]).lat;
   csc.ObsLongitude := TObsDetail(cmain.ObsNameList.Objects[i]).lon;
   csc.ObsAltitude  := TObsDetail(cmain.ObsNameList.Objects[i]).alt;
@@ -587,6 +591,7 @@ begin
   ShowObsCoord;
   SetObsPos;
   CenterObs;
+  ShowCountryList;
   UpdTZList(sender);
 end;
 
