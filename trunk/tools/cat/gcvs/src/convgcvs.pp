@@ -58,6 +58,11 @@ GCVrec = record ar,de,num :longint ;
                 gcvs,vartype : array[1..10] of char;
                 end;
 
+filixr = packed record n: smallint;
+                r: integer;
+                key: array[1..12] of char; 
+         end;
+
 
 const
     lg_reg_x : array [0..5,1..2] of integer = (
@@ -67,10 +72,12 @@ const
 var
    F: textfile;
    lin1 : gcvtxt;
-    fb : file of gcvrec;
+   fb : file of gcvrec;
+   fo   : file of filixr;
    out : gcvrec;
-   inp : array[0..100000] of gcvrec;
-   nl : integer;
+   inp : array[0..200000] of gcvrec;
+   ixr : array[1..200000] of filixr;
+   nl,nixr : integer;
    pathi,patho : string;
    lgnum : integer;
 
@@ -98,61 +105,16 @@ BEGIN
     Rmod := x - Int(x/y) * y ;
 END  ;
 
-PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
-CONST DR : double = 1.74532925199433e-2 ;
-var i1,i2,i3,i4,i5,i6,i7 : double ;
-   BEGIN
-      I1:=(TI-2415020.313)/36524.2199 ;
-      I2:=(TF-TI)/36524.2199 ;
-      I3:=((1.8E-2*I2+3.02E-1)*I2+(2304.25+1.396*I1))*I2/3600.0 ;
-      I4:=I2*I2*(7.91E-1+I2/1000.0)/3600.0+I3 ;
-      I5:=((2004.682-8.35E-1*I1)-(4.2E-2*I2+4.26E-1)*I2)*I2/3600.0 ;
-      I6:=COS(DEI*DR)*SIN((ARI+I3)*DR) ;
-      I7:=COS(I5*DR)*COS(DEI*DR)*COS((ARI+I3)*DR)-SIN(I5*DR)*SIN(DEI*DR) ;
-      DEI:=ArcSIN(SIN(I5*DR)*COS(DEI*DR)*COS((ARI+I3)*DR)+COS(I5*DR)*SIN(DEI*DR))/DR ;
-      ARI:=ARCTAN2(I6,I7)/DR ;
-      ARI:=ARI+I4   ;
-      ARI:=RMOD(ARI+360.0,360.0)
-   END  ;
-
-function Jd(annee,mois,jour :INTEGER; Heure:double):double;
- VAR siecle,cor:INTEGER ;
-     jd1:double;
- BEGIN
-    IF mois<=2 THEN
-    begin
-      annee:=annee-1;
-      mois:=mois+12;
-    end ;
-    (* IF (annee>1582) OR ((annee=1582) AND ((mois*100+jour)>=1015)) THEN *)
-    IF annee > 1582 THEN
-    begin
-       siecle:=annee DIV 100;
-       cor:=2 - siecle + siecle DIV 4;
-       end
-        ELSE
-        cor:=0;
-    IF annee<0 THEN
-       jd1:=Int(365.25*annee-0.75)
-     ELSE
-       jd1:=Int(365.25*annee);
-    jd := jd1 + Int(30.6001*(mois+1)) + jour
-               + 1720994.5 + cor + Heure/24.0;
- END ;
-
-
-procedure Lecture;
+procedure ReadData;
 var i,p :integer;
-    ar,de,sde,jd1,jd2 : double;
-    buf,buf1 : shortstring;
+    ar,de,sde : double;
+    buf : shortstring;
 const blanc='                                                                  ';
 begin
 writeln('gcvs_cat.dat');
 Assignfile(F,pathi+PathDelim+'gcvs_cat.dat');
 Reset(F);
 i:=0;
-jd1:=jd(1950,1,1,0);
-jd2:=jd(2000,1,1,0);
 repeat
   Readln(F,buf);
   buf:=buf+blanc;
@@ -194,9 +156,11 @@ writeln('tot stars '+inttostr(i));
 nl:=i;
 end;
 
-procedure wrt_lg(lgnum:integer);
+procedure WrtZone(lgnum:integer);
 var i,n,zone :integer;
     ar,de : double;
+    buf: shortstring;
+const blanc='                                                                  ';
 begin
 assignfile(fb,patho+PathDelim+padzeros(inttostr(lgnum),2)+'.dat');
 Rewrite(fb);
@@ -207,21 +171,70 @@ for n:=1 to nl do begin
   de:=out.de/100000;
   findregion(ar,de,zone);
   if zone=lgnum then begin
-  inc(i);
-  write(fb,out);
+    inc(nixr);
+    buf:=uppercase(stringreplace(out.gcvs,' ','',[rfReplaceAll]))+blanc;
+    move(buf[1],ixr[nixr].key,sizeof(ixr[nixr].key));
+    ixr[nixr].n:=lgnum;
+    ixr[nixr].r:=i;
+    write(fb,out);
+    inc(i);
   end;
 end;
 close(fb);
+end;
+
+Procedure SortIndex(g,d:integer);
+var step,i,j,k : integer;
+    lin : filixr;
+begin
+step:=1;
+while step < ((d-g+1) div 9) do step :=step*3+1;
+repeat
+  for k:=g to step do begin
+    i:=k+step; if i<d then
+    repeat
+      lin:=ixr[i];
+      j:=i-step;
+      while (j>=k+step) and (ixr[j].key > lin.key) do begin
+        ixr[j+step] := ixr[j];
+        j:=j-step ;
+      end;
+      if ixr[k].key > lin.key then begin
+        j:=k-step;
+        ixr[k+step]:=ixr[k];
+      end;
+      ixr[j+step]:=lin;
+      i:=i+step;
+    until i>d;
+  end;
+  step:=step div 3;
+until step=0;
+end;
+
+procedure WrtIndex ;
+var i :integer;
+  lin : filixr;
+begin
+assignfile(fo,patho+PathDelim+'gcvs.ixr');
+Rewrite(fo);
+for i:=1 to nixr do begin
+  lin:=ixr[i];
+  Write(Fo,lin);
+end;
+CloseFile(Fo);
 end;
 
 begin
 pathi:='./';
 patho:='./gcvs';
 CreateDir(patho);
-Lecture;
+ReadData;
+nixr:=0;
 for lgnum:=1 to 50 do begin
-  wrt_lg(lgnum);
+  WrtZone(lgnum);
 end;
+SortIndex(1,nl);
+WrtIndex;
 
 end.
 

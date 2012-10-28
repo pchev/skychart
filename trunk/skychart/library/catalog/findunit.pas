@@ -21,12 +21,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
 interface
-Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,bscunit,pgcunit,sacunit,tyc2unit,usnoaunit;
+Uses sysutils,skylibcat,ngcunit,wdsunit,gcvunit,gscunit,gscfits,gsccompact,
+     bscunit,pgcunit,sacunit,tyc2unit,usnoaunit,gcatunit;
 
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumIC(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumMessier(id:Integer ;var ar,de:double; var ok:boolean);
-Procedure FindNumGCVS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGCVS(id:string; var lin:GCVrec; var ok:boolean);
 Procedure FindNumGSC(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGSCF(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGSCC(id : string ;var ar,de:double; var ok:boolean);
@@ -40,16 +41,17 @@ Procedure FindNumBD(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumCD(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumCPD(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean);
-Procedure FindNumSAC(id:string ;var ar,de:double; var ok:boolean);
-Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumSAC(id:string ;var rec:SACrec; var ok:boolean);
+Procedure FindNumWDS(id:string; var lin:WDSrec; var ok:boolean);
 Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
+Procedure FindNumGcatRec(path,catshortname,id : string ; keylen : integer; var rec:GCatrec; var ok:boolean);
 Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
 procedure SetXHIPpath(path : string);
 
 implementation                          
 
-const blank='               ';
+const blank='                    ';
 
 var XHIPpath: string;
 
@@ -131,6 +133,43 @@ if ok then begin
 end;
 end;
 
+Procedure FindIxrStr(ixr, id : string; var n,r: integer; var ok:boolean);
+Type filixr = packed record n: smallint;
+                r: integer;
+                key: array[1..12] of char;
+         end;
+var
+    imin,imax,i : integer;
+    pnum : string;
+    fx : file of filixr ;
+    lin : filixr;
+begin
+ok:=false;
+if not fileexists(ixr) then begin
+   exit;
+end;
+AssignFile(fx,ixr);
+FileMode:=0;
+Reset(fx);
+imin:=0;
+imax := filesize(fx);
+lin.key:='';
+repeat
+  pnum:=lin.key;
+  i:=imin + ((imax-imin) div 2);
+  seek(fx,i);
+  read(fx,lin);
+  if lin.key>id then imax:=i
+                else imin:=i;
+  if lin.key=id then ok:=true;
+until ok or (pnum=lin.key);
+CloseFile(fx);
+if ok then begin
+   n:=lin.n;
+   r:=lin.r;
+end;
+end;
+
 Procedure FindNumNGC(id:Integer ;var ar,de:double; var ok:boolean);
 begin
 FindIdx(NGCpath+slashchar+'ngc.idx',id,ar,de,ok);
@@ -156,8 +195,9 @@ result:= (i=0) ;
 end;
 {$NOTES ON}
 
-Procedure FindNumGCVS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumGCVS(id:string; var lin:GCVrec; var ok:boolean);
 var buf,buf1,buf2 : string;
+    n,r: integer;
 begin
 buf1:=words(id,'',1,1);
 buf2:=words(id,'',2,1);
@@ -172,8 +212,15 @@ if copy(buf2,1,1)='V' then begin
    buf:=trim(copy(buf2,2,99));
    if IsNumber(buf) then buf2:='V'+padzeros(buf,4)+blank;
 end;
-buf:=copy(buf1,1,6)+copy(buf2,1,6);
-FindIdxStr(GCVpath+slashchar+'gcvs.idx',buf,ar,de,ok);
+buf:=copy(trim(copy(buf1,1,6))+trim(copy(buf2,1,6))+blank,1,12);
+FindIxrStr(GCVpath+slashchar+'gcvs.ixr',buf,n,r,ok);
+if ok then begin
+   OpenGCVSFileNum(n,ok);
+   if not ok then exit;
+   ReadGCVSRec(r, lin, ok);
+   CloseGCV;
+end;
+
 end;
 
 Procedure FindNumGSC(id : string ;var ar,de:double; var ok:boolean);
@@ -274,11 +321,18 @@ begin
 FindNumGcat(XHIPpath,'ixhr',id,9,ar,de,ok);
 end;
 
-Procedure FindNumWDS(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumWDS(id:string ; var lin:WDSrec; var ok:boolean);
 var buf : string;
+    n,r: integer;
 begin
 buf:=copy(uppercase(stringreplace(id,' ','',[rfReplaceAll]))+'             ',1,12);
-FindIdxStr(WDSpath+slashchar+'wds.idx',buf,ar,de,ok);
+FindIxrStr(WDSpath+slashchar+'wds.ixr',buf,n,r,ok);
+if ok then begin
+   OpenWDSFileNum(n,ok);
+   if not ok then exit;
+   ReadWDSRec(r, lin, ok);
+   CloseWDS;
+end;
 end;
 
 Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean);
@@ -341,19 +395,20 @@ begin
 FindIdx(PGCpath+slashchar+'pgc.idx',id,ar,de,ok);
 end;
 
-Procedure FindNumSAC(id : string ;var ar,de:double; var ok:boolean);
-Type idxfil = record
-              num : string[18];
-              ar,de :single;
-              end;
+Procedure FindNumSAC(id : string ;var rec:SACrec; var ok:boolean);
+Type filixr = packed record n: smallint;
+                r: integer;
+                key: array[1..18] of char;
+         end;
 var
-    imin,imax,i : integer;
+    imin,imax,i,n,r : integer;
     pnum,idx,buf : string;
-    fx : file of idxfil ;
-    lin : idxfil;
+    fx : file of filixr ;
+    lin : filixr;
 begin
 buf:=Uppercase(stringreplace(id,' ','',[rfReplaceAll]));
-idx:=SACpath+slashchar+'sac.idx';
+buf:=copy(buf+blank,1,18);
+idx:=SACpath+slashchar+'sac.ixr';
 ok:=false;
 if not fileexists(idx) then begin
    exit;
@@ -363,20 +418,24 @@ FileMode:=0;
 Reset(fx);
 imin:=0;
 imax := filesize(fx);
-lin.num:='';
+lin.key:='';
 repeat
-  pnum:=lin.num;
+  pnum:=lin.key;
   i:=imin + ((imax-imin) div 2);
   seek(fx,i);
   read(fx,lin);
-  if lin.num>buf then imax:=i
+  if lin.key>buf then imax:=i
                 else imin:=i;
-  if lin.num=buf then ok:=true;
-until ok or (pnum=lin.num);
+  if lin.key=buf then ok:=true;
+until ok or (pnum=lin.key);
 CloseFile(fx);
 if ok then begin
-   ar:=lin.ar/15;
-   de:=lin.de;
+   n:=lin.n;
+   r:=lin.r;
+   OpenSACFileNum(n,ok);
+   if not ok then exit;
+   ReadSACRec(r, rec, ok);
+   CloseSAC;
 end;
 end;
 
@@ -419,6 +478,51 @@ CloseFile(fx);
 if ok then begin
    ar:=lin.ra/15;
    de:=lin.dec;
+end;
+end;
+
+Procedure FindNumGcatRec(path,catshortname,id : string ; keylen : integer; var rec:GCatrec; var ok:boolean);
+Type
+Tixrec = packed record n: smallint;
+                k: integer;
+                key : array [0..512] of char;
+         end;
+var
+    reclen,n : integer;
+    imin,imax,i: Int64;
+    num,pnum,idx,buf : string;
+    fx : file;
+    lin : Tixrec;
+begin
+buf:=uppercase(stringreplace(id,' ','',[rfReplaceAll]));
+idx:=path+slashchar+catshortname+'.ixr';
+ok:=false;
+if not fileexists(idx) then begin
+   exit;
+end;
+reclen:=keylen+6;
+AssignFile(fx,idx);
+FileMode:=0;
+Reset(fx,1);
+imin:=0;
+imax := filesize(fx) div reclen;
+num:='';
+repeat
+  pnum:=num;
+  i:=(imin + ((imax-imin) div 2))*reclen;
+  seek(fx,i);
+  blockread(fx,lin,reclen,n);
+  num:=trim(copy(lin.key,1,keylen));
+  if num>buf then imax:=i div reclen
+            else imin:=i div reclen;
+  if num=buf then ok:=true;
+until ok or (pnum=num);
+CloseFile(fx);
+if ok then begin
+   OpenGCatFileNum(lin.n,ok);
+   if not ok then exit;
+   ReadGCatRec(lin.k, rec, ok);
+   CloseGCat;
 end;
 end;
 

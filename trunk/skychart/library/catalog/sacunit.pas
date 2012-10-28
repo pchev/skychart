@@ -41,6 +41,8 @@ Procedure OpenSAC(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenSACwin(var ok : boolean);
 Procedure ReadSAC(var lin : SACrec; var ok : boolean);
 procedure CloseSAC ;
+procedure OpenSACFileNum(fnum:integer; var ok:boolean);
+Procedure ReadSACRec(r: integer; var lin : SACrec; var ok : boolean);
 
 
 var
@@ -198,6 +200,26 @@ curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
+end;
+
+
+procedure OpenSACFileNum(fnum:integer; var ok:boolean);
+var nomreg: string;
+begin
+if fileisopen then CloseRegion;
+str(fnum:2,nomreg);
+nomfich:=SACpath+slashchar+padzeros(nomreg,2)+'.dat';
+OpenFile(nomfich,ok);
+end;
+
+Procedure ReadSACRec(r: integer; var lin : SACrec; var ok : boolean);
+begin
+ok:=false;
+Seek(fsac,r);
+if not eof(fsac) then begin
+   Read(fsac,lin);
+   ok:=true;
+end;
 end;
 
 end.

@@ -27,15 +27,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 //{$define showtime}
 
-{ TODO : look if we still need otherwise, (with moveable label)  }
-{$define ImageBuffered}
-
 interface
 
 uses
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss,
-     u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image,
-     u_projection, Printers, Math, downloaddialog, IntfGraphics,
+     u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit,
+     u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
      
@@ -257,6 +254,7 @@ type
     function  FormatDesc:string;
     procedure ShowIdentLabel;
     function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll):boolean;
+    procedure IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
     procedure rotation(rot:double);
@@ -824,19 +822,7 @@ if printing then exit;
 if VerboseMsg then
  WriteTrace(caption+' Paint');
 sc.plot.FlushCnv;
-{$ifndef ImageBuffered}
-ZoomStep:=0;
-if StartCircle then begin
-  sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true);
-  StartCircle:=false;
-  end
-else MovingCircle := false;
-if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
-   sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
-end;
-{$endif}
 inherited Paint;
-{$ifdef ImageBuffered}
 if  MovingCircle then begin
   sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
 end;
@@ -857,7 +843,6 @@ end;
 if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
-{$endif}
 end;
 
 procedure TChartDrawingControl.Paint;
@@ -1677,6 +1662,9 @@ end;
 Procedure Tf_chart.ShowIdentLabel;
 var x,y : integer;
     ts:TSize;
+    lis: string;
+    lid,i: integer;
+    posok: boolean;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK then begin
@@ -1695,7 +1683,19 @@ if sc.cfgsc.FindOK then begin
    identlabel.Height:=ts.cy+4;
    Identlabel.Picture.Bitmap.Width:=identlabel.Width;
    Identlabel.Picture.Bitmap.Height:=identlabel.Height;
-   sc.GetLabPos(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc.FindSize/2,identlabel.Width,identlabel.Height,x,y);
+   lis:=sc.cfgsc.FindId+FormatFloat(f6,sc.cfgsc.FindRA2000)+FormatFloat(f6,sc.cfgsc.FindDec2000);
+   lid:=rshash(lis,$7FFFFFFF);
+   posok:=false;
+   for i:=1 to sc.numlabels do begin
+     if sc.labels[i].id=lid then begin
+       if (sc.labels[i].px>=0) and (sc.labels[i].py>=0) then begin
+         x:=sc.labels[i].px;
+         y:=sc.labels[i].py;
+         posok:=true;
+       end;
+     end;
+   end;
+   if not posok then sc.GetLabPos(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc.FindSize/2,identlabel.Width,identlabel.Height,x,y);
    identlabel.left:=x;
    identlabel.top:=y;
    Identlabel.Picture.Bitmap.Canvas.Rectangle(0,0,identlabel.Width,identlabel.Height);
@@ -1803,6 +1803,96 @@ end;
 if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
 end;
 
+procedure Tf_chart.IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
+var fullmotion : Boolean;
+    dyear,epoch : Double;
+    p: coordvector;
+    rec:GCatrec;
+begin
+sc.cfgsc.TrackOn:=false;
+IdentLabel.visible:=false;
+// full record returned by catalog search
+if sc.catalog.FindId=Num then begin
+    rec:=sc.catalog.FindRec;
+    sc.cfgsc.FindStarPM:=false;
+    // proper motion
+    if sc.cfgsc.PMon and (rec.options.rectype=rtStar) and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
+      if rec.star.valid[vsEpoch] then epoch:=rec.star.epoch
+                                 else epoch:=rec.options.Epoch;
+      dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-epoch;
+      fullmotion:=(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV'));
+      propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,fullmotion,rec.star.px,rec.num[1]);
+      sc.cfgsc.FindStarPM:=true;
+    end;
+    sc.cfgsc.FindRA2000:=rec.ra;
+    sc.cfgsc.FindDec2000:=rec.dec;
+    // precession
+    Precession(rec.options.EquinoxJD,jd2000,sc.cfgsc.FindRA2000,sc.cfgsc.FindDec2000);
+    sofa_S2C(rec.ra,rec.dec,p);
+    PrecessionV(rec.options.EquinoxJD,sc.cfgsc.JDChart,p);
+    if sc.cfgsc.ApparentPos then apparent_equatorialV(p,sc.cfgsc,true,true);
+    sofa_c2s(p,rec.ra,rec.dec);
+    rec.ra:=rmod(rec.ra+pi2,pi2);
+    // set the description
+    sc.FormatCatRec(rec,sc.cfgsc.FindDesc);
+    sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
+    sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
+    sc.cfgsc.TrackOn:=false;
+    sc.cfgsc.TrackType:=6;
+    sc.cfgsc.TrackName:=sc.cfgsc.FindName;
+    // center chart
+    sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
+    Refresh;
+    // show label
+    sc.cfgsc.FindOK:=true;
+    ShowIdentLabel;
+end
+// only coordinates are available
+else begin
+    // precession
+    precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
+    if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc,true,itype<ftPla);
+    // center chart
+    sc.movetoradec(ar1,de1);
+    Refresh;
+    // try to get more information and show the label
+    if (itype=ftOnline) or (not IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true)) then begin
+      // object not found
+      // online search result
+      if itype=ftOnline then begin
+        sc.cfgsc.FindCat:=sr;
+        sc.cfgsc.FindName:=sn;
+        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+
+                           DEpToStr(rad2deg*de1)+tab+'OSR'+tab+sn+tab+
+                           sd;
+      // set a minimal label
+      end else begin
+        sc.cfgsc.FindCat:='';
+        sc.cfgsc.FindName:=Num;
+        sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+
+                           DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+
+                           rsDesc+rsZoomMoreToVi;
+      end;
+      sc.cfgsc.FindCatname:='';
+      sc.cfgsc.FindRA:=ar1;
+      sc.cfgsc.FindDec:=de1;
+      sc.cfgsc.FindSize:=0;
+      sc.cfgsc.FindPM:=false;
+      sc.cfgsc.FindStarPM:=false;
+      sc.cfgsc.FindOK:=true;
+      sc.cfgsc.FindType:=itype;
+      sc.cfgsc.TrackOn:=false;
+      sc.cfgsc.TrackType:=6;
+      sc.cfgsc.TrackRA:=ar1;
+      sc.cfgsc.TrackDec:=de1;
+      sc.cfgsc.TrackName:=Num;
+      // show label
+      ShowIdentLabel;
+  end;
+end;
+
+end;
+
 function Tf_chart.ListXY(X, Y: Integer):boolean;
 var ra,dec,a,h,l,b,le,be,dx:double;
     buf,msg:string;
@@ -1894,9 +1984,7 @@ if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    GetAdXy(Xcursor,Ycursor,sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],sc.cfgsc);
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
-   {$ifdef ImageBuffered}
    Image1.Invalidate;
-   {$endif}
 end else
 if (ssLeft in shift)and(not(ssShift in shift)) then begin
    if sc.cfgsc.ShowScale then  MeasureDistance(2,X,Y)
@@ -2188,9 +2276,7 @@ case action of
         Zoomstep:=0;
    end;
 end;
-{$ifdef ImageBuffered}
  Image1.Invalidate;
-{$endif}
 end;
 
 Procedure Tf_chart.TrackCursor(X,Y : integer);

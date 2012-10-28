@@ -24,9 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {$mode objfpc}{$H+}
 
-{ TODO : look if we still need the otherwise }
-{$define ImageBuffered}
-
 interface
 
 uses u_translation, gcatunit,
@@ -335,9 +332,6 @@ end;
   if cfgsc.showlabel[8] or cfgsc.showlegend then DrawLegend;
   // refresh telescope mark
   if scopemark then begin
-    {$ifndef ImageBuffered}
-     DrawFinderMark(cfgsc.ScopeRa,cfgsc.ScopeDec,true);
-    {$endif}
      cfgsc.ScopeMark:=true;
   end;
   // Draw the chart border
@@ -925,8 +919,6 @@ if Fcatalog.OpenStar then
     firstcat:=rec.options.ShortName;
     first:=false;
  end;
- lis:=rec.star.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
- lid:=rshash(lis,$7FFFFFFF);
  pra:=rec.ra;
  pdec:=rec.dec;
  if cfgsc.PMon or cfgsc.DrawPMon then begin
@@ -936,6 +928,8 @@ if Fcatalog.OpenStar then
  if cfgsc.PMon and rec.star.valid[vsPmra] and rec.star.valid[vsPmdec] then begin
     propermotion(rec.ra,rec.dec,dyear,rec.star.pmra,rec.star.pmdec,(rec.star.valid[vsPx] and (trim(rec.options.flabel[26])='RV')),rec.star.px,rec.num[1]);
  end;
+ lis:=rec.star.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
+ lid:=rshash(lis,$7FFFFFFF);
  sofa_S2C(rec.ra,rec.dec,p);
  PrecessionV(rec.options.EquinoxJD,cfgsc.JDChart,p);
  if cfgsc.ApparentPos then apparent_equatorialV(p,cfgsc,true,true);
@@ -1137,7 +1131,7 @@ var rec:GcatRec;
              ((yy+sz)>cfgsc.Ymin) and
              ((yy-sz)<cfgsc.Ymax) then
             begin
-              if numdsopos<maxlabels then begin
+             if numdsopos<maxlabels then begin
                 inc(numdsopos);
                 dsopos[numdsopos]:=Point(round(xx),round(yy));
               end;
@@ -1447,7 +1441,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
        end;
        lopt:=false;
       end;
-      lis:=pla[ipla]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+      lis:=pla[ipla]+FormatFloat(f6,cfgsc.Planetlst[j,ipla,8])+FormatFloat(f6,cfgsc.Planetlst[j,ipla,9]);
       lid:=rshash(lis,$7FFFFFFF);
       SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
     end;
@@ -1549,7 +1543,7 @@ if VerboseMsg then
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
         if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
-          lis:=cfgsc.AsteroidName[j,i,1]+FormatFloat(f6,ra)+FormatFloat(f6,dec);
+          lis:=cfgsc.AsteroidName[j,i,1]+FormatFloat(f6,cfgsc.AsteroidLst[j,i,6])+FormatFloat(f6,cfgsc.AsteroidLst[j,i,7]);
           lid:=rshash(lis,$7FFFFFFF);
           if cfgsc.SimNb=1 then ltxt:=cfgsc.AsteroidName[j,i,2]
           else begin
@@ -1592,7 +1586,7 @@ if cfgsc.ShowCometValid then begin
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
         if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and((cfgsc.SimNb>1)or(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5])) then begin
-          lis:=cfgsc.CometName[j,i,1]+FormatFloat(f6,cfgsc.CometLst[j,i,1])+FormatFloat(f6,cfgsc.CometLst[j,i,2]);
+          lis:=cfgsc.CometName[j,i,1]+FormatFloat(f6,cfgsc.CometLst[j,i,9])+FormatFloat(f6,cfgsc.CometLst[j,i,10]);
           lid:=rshash(lis,$7FFFFFFF);
           sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
           if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
@@ -1793,6 +1787,7 @@ function Tskychart.FindArtSat(x1,y1,x2,y2:double; nextobj:boolean; var nom,ma,de
     cfgsc.FindPM:=false;
     cfgsc.FindType:=ftlin;
     cfgsc.FindName:=nom;
+    cfgsc.FindId:=nom;
     cfgsc.FindDesc:=Desc;
     cfgsc.FindNote:='';
     cfgsc.TrackRA:=cfgsc.FindRA;
@@ -1978,6 +1973,7 @@ begin
  rtStar: begin   // stars
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
+         cfgsc.FindId:=txt;
          if rec.options.ShortName<>'Star' then txt:=rec.options.ShortName+b+txt;
          if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then
                 cfgsc.FindName:=trim(rec.str[3])
@@ -2029,6 +2025,7 @@ begin
  rtVar : begin   // variables stars
          if rec.variable.valid[vvId] then txt:=rec.variable.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
+         cfgsc.FindId:=txt;
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' V*'+tab+txt+tab;
@@ -2063,6 +2060,7 @@ begin
  rtDbl : begin   // doubles stars
          if rec.double.valid[vdId] then txt:=rec.double.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
+         cfgsc.FindId:=txt;
          txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
          Desc:=Desc+' D*'+tab+txt+tab;
@@ -2100,6 +2098,7 @@ begin
  rtNeb : begin   // nebulae
          if rec.neb.valid[vnId] then txt:=rec.neb.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
+         cfgsc.FindId:=txt;
          cfgsc.FindName:=txt;
          if rec.neb.valid[vnNebtype] then i:=rec.neb.nebtype
                                         else i:=rec.options.ObjType;
@@ -2826,7 +2825,8 @@ const hdiv=10;
 var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz : double;
     ps: array[0..1,0..2*hdiv+1] of single;
     psf: array of TPointF;
-    i,j,xx,yy: integer;
+    i,j: integer;
+    xx,yy: int64;
     x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1,fillx2,filly2 :single;
     first,fill,ok:boolean;
     hbmp : TBGRABitmap;
@@ -3064,16 +3064,17 @@ if cfgsc.ProjPole=Altaz then begin
        proj2(-deg2rad*az,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
        WindowXY(x1,y1,x,y,cfgsc);
        xx:=round(x); yy:=round(y);
-       case round(az) of
-         0  : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'S',cfgsc.WhiteBg);
-         45 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SW',cfgsc.WhiteBg);
-         90 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'W',cfgsc.WhiteBg);
-         135: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NW',cfgsc.WhiteBg);
-         180: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'N',cfgsc.WhiteBg);
-         225: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NE',cfgsc.WhiteBg);
-         270: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'E',cfgsc.WhiteBg);
-         315: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SE',cfgsc.WhiteBg);
-       end;
+       if (xx>-cfgsc.Xmax)and(xx<2*cfgsc.Xmax)and(yy>-cfgsc.Ymax)and(yy<2*cfgsc.Ymax) then
+         case round(az) of
+           0  : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'S',cfgsc.WhiteBg);
+           45 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SW',cfgsc.WhiteBg);
+           90 : FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'W',cfgsc.WhiteBg);
+           135: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NW',cfgsc.WhiteBg);
+           180: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'N',cfgsc.WhiteBg);
+           225: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'NE',cfgsc.WhiteBg);
+           270: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'E',cfgsc.WhiteBg);
+           315: FPlot.PlotText(xx,yy,1,Fplot.cfgplot.LabelColor[7],laCenter,laBottom,'SE',cfgsc.WhiteBg);
+         end;
        az:=az+45;
     end;
   end;
@@ -3552,6 +3553,8 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   labels[numlabels].labelnum:=labelnum;
   labels[numlabels].fontnum:=fontnum;
   labels[numlabels].txt:=trim(wordspace(txt));
+  labels[numlabels].px:=-1000;
+  labels[numlabels].py:=-1000;
   except
    dec(numlabels);
   end;
@@ -4052,7 +4055,7 @@ for i:=1 to numlabels do begin
         break;
      end;
   if not skiplabel then begin
-      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt);
+      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt,labels[i].px,labels[i].py);
       if cfgsc.MovedLabelLine and (i>constlabelindex)and(sqrt((x-x0)*(x-x0)+(y-y0)*(y-y0))>30) then begin
         if Fplot.cfgplot.UseBMP then ts:=Fplot.cbmp.TextSize(txt)
            else ts:=Fplot.cnv.TextExtent(txt);

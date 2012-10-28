@@ -3022,15 +3022,12 @@ end;
 
 function Tf_main.Find(kind:integer; num:string; def_ra:double=0;def_de:double=0): string;
 var ok: Boolean;
-    ar1,de1,saveChartJD,dyear : Double;
+    ar1,de1 : Double;
     i, itype : integer;
     chart:TFrame;
-    saveCurYear,saveCurMonth,saveCurDay:integer;
-    lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
-    lasttype,lastobj: integer;
-    lastname,lasttrname: string;
-    lastok: boolean;
+    stype: string;
 begin
+if VerboseMsg then WriteTrace('Search1Execute');
 result:=msgFailed;
 chart:=nil; ok:=false;
 if MultiFrame1.ActiveObject is Tf_chart then chart:=MultiFrame1.ActiveObject
@@ -3042,140 +3039,41 @@ if MultiFrame1.ActiveObject is Tf_chart then chart:=MultiFrame1.ActiveObject
    end;
 itype:=ftInv;
 if chart is Tf_chart then with chart as Tf_chart do begin
-    lastok:=sc.cfgsc.FindOK;
-    lastra:=sc.cfgsc.FindRA;
-    lastdec:=sc.cfgsc.FindDEC;
-    lastname:=sc.cfgsc.FindName;
-    lasttrra:=sc.cfgsc.TrackRA;
-    lasttrde:=sc.cfgsc.TrackDEC;
-    lasttype:=sc.cfgsc.TrackType;
-    lastobj:=sc.cfgsc.Trackobj;
-    lasttrname:=sc.cfgsc.TrackName;
-    lastXX:=sc.cfgsc.FindX;
-    lastYY:=sc.cfgsc.FindY;
-    lastZZ:=sc.cfgsc.FindZ;
     case kind of
-      0  : begin ok:=catalog.SearchNebulae(num,ar1,de1) ; itype:=ftNeb  ; end;
+      0  : begin ok:=catalog.SearchNebulae(num,ar1,de1) ; itype:=ftNeb ; stype:='N'; end;
       1  : begin
            ar1:=def_ra;
            de1:=def_de;
            itype:=ftNeb ;
+           stype:='N';
            ok:=true;
            end;
-      2  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar  ; end;
-      3  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar  ; end;
-      4  : begin ok:=catalog.SearchVarStar(num,ar1,de1) ; itype:=ftVar  ; end;
-      5  : begin ok:=catalog.SearchDblStar(num,ar1,de1) ; itype:=ftDbl  ; end;
-      6  : begin ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc); itype:=ftCom  ; end;
-      7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc); itype:=ftAst  ; end;
-      8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla  ; end;
-      9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin  ; end;
+      2  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar; stype:='*'; end;
+      3  : begin ok:=catalog.SearchStar(num,ar1,de1) ; itype:=ftStar; stype:='*'; end;
+      4  : begin ok:=catalog.SearchVarStar(num,ar1,de1) ; itype:=ftVar; stype:='V*'; end;
+      5  : begin ok:=catalog.SearchDblStar(num,ar1,de1) ; itype:=ftDbl; stype:='D*'; end;
+      6  : begin ok:=planet.FindCometName(trim(num),ar1,de1,sc.cfgsc); itype:=ftCom; stype:='Cm'; end;
+      7  : begin ok:=planet.FindAsteroidName(trim(num),ar1,de1,sc.cfgsc); itype:=ftAst; stype:='As'; end;
+      8  : begin ok:=planet.FindPlanetName(trim(num),ar1,de1,sc.cfgsc); itype:=ftPla; stype:='P'; end;
+      9  : begin ok:=catalog.SearchConstellation(num,ar1,de1); itype:=ftlin; stype:=''; end;
       10 : begin
             ar1:=def_ra;
             de1:=def_de;
             itype:=ftOnline ;
+            stype:='OSR';
             ok:=true;
            end;
-      11 : begin ok:=catalog.SearchConstAbrev(num,ar1,de1); itype:=ftlin  ; end;
+      11 : begin ok:=catalog.SearchConstAbrev(num,ar1,de1); itype:=ftlin; stype:=''; end;
       else ok:=false;
       end;
       if ok then begin
-        sc.cfgsc.TrackOn:=false;
-        IdentLabel.visible:=false;
-        saveChartJD:=sc.cfgsc.JDChart;
-        saveCurYear:=sc.cfgsc.CurYear;
-        saveCurMonth:=sc.cfgsc.CurMonth;
-        saveCurDay:=sc.cfgsc.CurDay;
-        sc.cfgsc.JDChart:=jd2000;
-        sc.cfgsc.CurYear:=2000;
-        sc.cfgsc.CurMonth:=1;
-        sc.cfgsc.CurDay:=1;
-if VerboseMsg then
- WriteTrace('Search1Execute');
-        if itype=ftlin then begin
-            sc.cfgsc.FindCatname:='';
-            sc.cfgsc.FindCat:='';
-            sc.cfgsc.FindName:=Num;
-            sc.cfgsc.FindDesc:='';
-            sc.cfgsc.FindRA:=ar1;
-            sc.cfgsc.FindDec:=de1;
-            sc.cfgsc.FindSize:=0;
-            sc.cfgsc.FindPM:=false;
-            sc.cfgsc.FindStarPM:=false;
-            sc.cfgsc.FindOK:=true;
-            sc.cfgsc.FindType:=itype;
-            sc.cfgsc.TrackOn:=False;
-            sc.cfgsc.TrackType:=0;
-        end else if itype=ftOnline then begin
-            sc.cfgsc.FindCatname:='';
-            sc.cfgsc.FindCat:=f_search.sesame_resolver;
-            sc.cfgsc.FindName:=f_search.sesame_name;
-            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+'OSR'+tab+f_search.sesame_name+tab+f_search.sesame_desc;
-            sc.cfgsc.FindRA:=ar1;
-            sc.cfgsc.FindDec:=de1;
-            sc.cfgsc.FindSize:=0;
-            sc.cfgsc.FindPM:=false;
-            sc.cfgsc.FindStarPM:=false;
-            sc.cfgsc.FindOK:=true;
-            sc.cfgsc.FindType:=itype;
-            sc.cfgsc.TrackOn:=False;
-            sc.cfgsc.TrackType:=0;
-        end else begin
-          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true,itype);               // search 10 sec radius
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true,itype); // if not search 1.7 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true,itype);  // big idx position error, search 3.5 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true,itype);  // big idx position error, search 10 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true,itype);  // big idx position error, search 20 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
-            sc.cfgsc.FindName:=Num;
-            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+blank+tab+Num+tab+''+rsObjectPositi+'';
-            sc.cfgsc.FindRA:=ar1;
-            sc.cfgsc.FindDec:=de1;
-            sc.cfgsc.FindSize:=0;
-            sc.cfgsc.FindPM:=false;
-            sc.cfgsc.FindStarPM:=false;
-            sc.cfgsc.FindOK:=true;
-            sc.cfgsc.FindType:=itype;
-            sc.cfgsc.TrackOn:=true;
-            sc.cfgsc.TrackType:=6;
-            sc.cfgsc.TrackRA:=ar1;
-            sc.cfgsc.TrackDec:=de1;
-            sc.cfgsc.TrackName:=Num;
-          end;
-        end;
-        sc.cfgsc.JDChart := saveChartJD;
-        sc.cfgsc.CurYear  := saveCurYear;
-        sc.cfgsc.CurMonth := saveCurMonth;
-        sc.cfgsc.CurDay   := saveCurDay;
-        if sc.cfgsc.FindStarPM then begin
-          dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
-          propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
-        end;
-        precession(jd2000,sc.cfgsc.JDchart,sc.cfgsc.FindRA,sc.cfgsc.FindDec);
-        if sc.cfgsc.ApparentPos then apparent_equatorial(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc,true,itype<ftPla);
-        sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
-        sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
-        sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
-        Refresh;
-        sc.cfgsc.FindOK    := lastok;
-        sc.cfgsc.FindRA    := lastra;
-        sc.cfgsc.FindDEC   := lastdec;
-        sc.cfgsc.FindName  := lastname;
-        sc.cfgsc.TrackRA   := lasttrra;
-        sc.cfgsc.TrackDEC  := lasttrde;
-        sc.cfgsc.TrackType := lasttype;
-        sc.cfgsc.Trackobj  := lastobj;
-        sc.cfgsc.TrackName := lasttrname;
-        sc.cfgsc.FindX     := lastXX;
-        sc.cfgsc.FindY     := lastYY;
-        sc.cfgsc.FindZ     := lastZZ;
-        IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true,itype);
+        IdentSearchResult(num,stype,itype,ar1,de1,f_search.sesame_resolver,f_search.sesame_name,f_search.sesame_desc);
         if kind in [0,2,3,4,5,6,7,8] then begin
-          i:=quicksearch.Items.IndexOf(num);
-          if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
-          if i>=0 then quicksearch.Items.Delete(i);
-          quicksearch.Items.Insert(0,num);
-          quicksearch.ItemIndex:=0;
+           i:=quicksearch.Items.IndexOf(num);
+           if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
+           if i>=0 then quicksearch.Items.Delete(i);
+           quicksearch.Items.Insert(0,num);
+           quicksearch.ItemIndex:=0;
         end;
         result:=msgOK;
       end
@@ -4280,6 +4178,7 @@ cfgm.ProxyUser:='';
 cfgm.ProxyPass:='';
 cfgm.AnonPass:='skychart@';
 cfgm.ObsNameList:=TStringList.Create;
+cfgm.ObsNameList.Sorted:=true;
 cfgm.CometUrlList:=TStringList.Create;
 cfgm.CometUrlList.Add(URL_HTTPCometElements);
 cfgm.AsteroidUrlList:=TStringList.Create;
@@ -5393,6 +5292,8 @@ cfgm.ObsNameList.Clear;
 if j>0 then for i:=0 to j-1 do begin
   obsdetail:=TObsDetail.Create;
   obsdetail.country:=ReadString(section,'ObsCountry'+inttostr(i),'');
+  obsdetail.countrytz:=ReadBool(section,'ObsCountryTZ'+inttostr(i),true);
+  obsdetail.tz:=ReadString(section,'ObsTZ'+inttostr(i),'');
   obsdetail.lat:=ReadFloat(section,'ObsLat'+inttostr(i),0);
   obsdetail.lon:=ReadFloat(section,'ObsLon'+inttostr(i),0);
   obsdetail.alt:=ReadFloat(section,'ObsAlt'+inttostr(i),0);
@@ -6092,6 +5993,8 @@ WriteInteger(section,'ObsNameListCount',j);
 if j>0 then for i:=0 to j-1 do begin
   if cfgm.ObsNameList.Objects[i]<>nil then begin
     WriteString(section,'ObsCountry'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).country);
+    WriteBool(section,'ObsCountryTZ'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).countrytz);
+    WriteString(section,'ObsTZ'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).tz);
     WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
     WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
     WriteFloat(section,'ObsAlt'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).alt);
@@ -6526,18 +6429,14 @@ end;
 
 function Tf_main.GenericSearch(cname,Num:string):boolean;
 var ok : Boolean;
-    ar1,de1,saveChartJD,dyear : Double;
-    saveCurYear,saveCurMonth,saveCurDay:integer;
+    ar1,de1 : Double;
     i : integer;
     chart:TFrame;
     stype: string;
     itype:integer;
-    lastra,lastdec,lasttrra,lasttrde,lastxx,lastyy,lastzz: double;
-    lasttype,lastobj: integer;
-    lastname,lasttrname: string;
-    lastok: boolean;
 label findit;
 begin
+if VerboseMsg then WriteTrace('GenericSearch');
 result:=false;
 if trim(num)='' then exit;
 chart:=nil;
@@ -6550,18 +6449,6 @@ end else begin
       if MultiFrame1.Childs[i].caption=cname then chart:=MultiFrame1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
-   lastok:=sc.cfgsc.FindOK;
-   lastra:=sc.cfgsc.FindRA;
-   lastdec:=sc.cfgsc.FindDEC;
-   lastname:=sc.cfgsc.FindName;
-   lasttrra:=sc.cfgsc.TrackRA;
-   lasttrde:=sc.cfgsc.TrackDEC;
-   lasttype:=sc.cfgsc.TrackType;
-   lastobj:=sc.cfgsc.Trackobj;
-   lasttrname:=sc.cfgsc.TrackName;
-   lastXX:=sc.cfgsc.FindX;
-   lastYY:=sc.cfgsc.FindY;
-   lastZZ:=sc.cfgsc.FindZ;
    if sc.cfgsc.shownebulae then begin
      stype:='N';  itype:=ftNeb;
      ok:=catalog.SearchNebulae(Num,ar1,de1) ;
@@ -6611,82 +6498,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 Findit:
    result:=ok;
    if ok then begin
-   if VerboseMsg then
-    WriteTrace('GenericSearch');
-      sc.cfgsc.TrackOn:=false;
-      IdentLabel.visible:=false;
-      sc.cfgsc.FindType:=ftInv;
-      if itype=ftStar then begin     // search in catalog for proper motion
-          saveChartJD:=sc.cfgsc.JDChart;
-          saveCurYear:=sc.cfgsc.CurYear;
-          saveCurMonth:=sc.cfgsc.CurMonth;
-          saveCurDay:=sc.cfgsc.CurDay;
-          sc.cfgsc.JDChart:=jd2000;
-          sc.cfgsc.CurYear:=2000;
-          sc.cfgsc.CurMonth:=1;
-          sc.cfgsc.CurDay:=1;
-          ok:=sc.FindatRaDec(ar1,de1,0.00005,true,true);               // search 10 sec radius
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.0005,true,true); // if not search 1.7 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.001,true,true);  // big idx position, error search 3.5 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.003,true,true);  // big idx position, error search 10 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then ok:=sc.FindatRaDec(ar1,de1,0.006,true,true);  // big idx position, error search 20 min
-          if (not ok)or(sc.cfgsc.FindType<>itype) then begin  // object in index but not in any active catalog
-            sc.cfgsc.FindName:=Num;
-            sc.cfgsc.FindDesc:=ARpToStr(rmod(rad2deg*ar1/15+24, 24))+tab+DEpToStr(rad2deg*de1)+tab+stype+tab+Num+tab+''+rsObjectPositi+'';
-            sc.cfgsc.FindRA:=ar1;
-            sc.cfgsc.FindDec:=de1;
-            sc.cfgsc.FindSize:=0;
-            sc.cfgsc.FindPM:=false;
-            sc.cfgsc.FindOK:=true;
-            sc.cfgsc.FindType:=ftInv;
-            sc.cfgsc.TrackOn:=false;
-            sc.cfgsc.TrackType:=6;
-            sc.cfgsc.TrackRA:=ar1;
-            sc.cfgsc.TrackDec:=de1;
-            sc.cfgsc.TrackName:=Num;
-          end;
-          sc.cfgsc.JDChart := saveChartJD;
-          sc.cfgsc.CurYear  := saveCurYear;
-          sc.cfgsc.CurMonth := saveCurMonth;
-          sc.cfgsc.CurDay   := saveCurDay;
-          if sc.cfgsc.FindStarPM then begin
-            dyear:=(sc.cfgsc.CurYear+DayofYear(sc.cfgsc.CurYear,sc.cfgsc.CurMonth,sc.cfgsc.CurDay)/365.25)-sc.cfgsc.FindPMEpoch;
-            propermotion(sc.cfgsc.FindRA,sc.cfgsc.FindDec,dyear,sc.cfgsc.FindPMra,sc.cfgsc.FindPMde,sc.cfgsc.FindPMfullmotion,sc.cfgsc.FindPMpx,sc.cfgsc.FindPMrv);
-          end;
-      end else begin
-        sc.cfgsc.FindName:=Num;
-        sc.cfgsc.FindDesc:=Num;
-        sc.cfgsc.FindRA:=ar1;
-        sc.cfgsc.FindDec:=de1;
-        sc.cfgsc.FindSize:=0;
-        sc.cfgsc.FindPM:=false;
-        sc.cfgsc.FindOK:=true;
-        sc.cfgsc.FindType:=itype;
-        sc.cfgsc.TrackOn:=false;
-        sc.cfgsc.TrackType:=6;
-        sc.cfgsc.TrackRA:=ar1;
-        sc.cfgsc.TrackDec:=de1;
-        sc.cfgsc.TrackName:=Num;
-      end;
-      precession(jd2000,sc.cfgsc.JDchart,sc.cfgsc.FindRA,sc.cfgsc.FindDec);
-      if sc.cfgsc.ApparentPos then apparent_equatorial(sc.cfgsc.FindRA,sc.cfgsc.FindDec,sc.cfgsc,true,itype<ftPla);
-      sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
-      sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
-      sc.movetoradec(sc.cfgsc.FindRA,sc.cfgsc.FindDec);
-      Refresh;
-      sc.cfgsc.FindOK    := lastok;
-      sc.cfgsc.FindRA    := lastra;
-      sc.cfgsc.FindDEC   := lastdec;
-      sc.cfgsc.FindName  := lastname;
-      sc.cfgsc.TrackRA   := lasttrra;
-      sc.cfgsc.TrackDEC  := lasttrde;
-      sc.cfgsc.TrackType := lasttype;
-      sc.cfgsc.Trackobj  := lastobj;
-      sc.cfgsc.TrackName := lasttrname;
-      sc.cfgsc.FindX     := lastXX;
-      sc.cfgsc.FindY     := lastYY;
-      sc.cfgsc.FindZ     := lastZZ;
-      IdentXY(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,false,true);
+      IdentSearchResult(num,stype,itype,ar1,de1);
    end;
 end;
 end;

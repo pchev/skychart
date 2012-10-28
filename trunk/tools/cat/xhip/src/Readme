@@ -10,4 +10,3 @@ cdc_xhip.pp which merge and extract the data to the file cdc_xhip.dat and cdc_hr
 
 The file cdc_xhip.dat is used with Catgen and the project file cdc_xhip.prj to build the binary catalog.
 
-The file cdc_hr.dat is used with Catgen and the project file cdc_hridx.prj to build the HR,Bayer,Flamsteed index.
