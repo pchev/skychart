@@ -1080,6 +1080,9 @@ if result then begin
   cfgsc.FindSize:=deg2rad*cfgsc.Planetlst[CurrentStep,CurrentPlanet,4]/3600;
   cfgsc.FindRA:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   cfgsc.FindDec:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
+  cfgsc.FindRA2000:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,8]);
+  cfgsc.FindDec2000:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,9];
+  cfgsc.FindDist:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,10];
   cfgsc.FindPM:=false;
   cfgsc.FindType:=ftPla;
   cfgsc.FindX:=0;
