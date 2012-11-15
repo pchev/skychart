@@ -45,6 +45,7 @@ type
     GcatFilter, DSLForceColor: boolean;
     EmptyRec : GCatRec;
     FFindId : string;
+    FFindRecOK : boolean;
     FFindRec : GCatrec;
   protected
     { Protected declarations }
@@ -94,7 +95,9 @@ type
      function GetNGC(var rec:GcatRec):boolean;
      function GetLBN(var rec:GcatRec):boolean;
      function GetRC3(var rec:GcatRec):boolean;
+     procedure FormatPGC(lin : PGCrec; var rec:GcatRec);
      function GetPGC(var rec:GcatRec):boolean;
+     procedure FindPGC(id: integer; var ra,dec: double; var ok:boolean);
      function GetOCL(var rec:GcatRec):boolean;
      function GetGCM(var rec:GcatRec):boolean;
      function GetGPN(var rec:GcatRec):boolean;
@@ -161,7 +164,9 @@ type
      function  LongLabelConst(txt : string) : string;
      function  LongLabel(txt:string):string;
      function  LongLabelObj(txt:string):string;
+     procedure ClearSearch;
      property FindId : string read FFindId;
+     property FindRecOK : boolean read FFindRecOK;
      property FindRec : GCatrec read FFindRec write FFindRec;
   published
     { Published declarations }
@@ -201,6 +206,12 @@ try
 except
 writetrace('error destroy '+name);
 end;
+end;
+
+procedure Tcatalog.ClearSearch;
+begin
+FFindRecOK:=false;
+FFindId:='';
 end;
 
 Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
@@ -802,6 +813,7 @@ if fileexists(slash(cfgcat.starcatpath[DefStar-BaseStar])+'star'+'.ixr') then be
       de:=rec.dec;
       FormatGCatS(rec);
       FFindId:=id;
+      FFindRecOK:=true;
       FFindRec:=rec;
    end;
 end
@@ -1619,6 +1631,7 @@ for i:=0 to cfgcat.GCatNum-1 do begin
         de:=rec.dec;
         FormatGCatS(rec);
         FFindId:=id;
+        FFindRecOK:=true;
         FFindRec:=rec;
         break;
      end;
@@ -1799,6 +1812,7 @@ if ok then begin
    ra:=rad2deg*rec.ra/15;
    dec:=rad2deg*rec.dec;
    FFindId:='TYC '+trim(id);
+   FFindRecOK:=true;
    FFindRec:=rec;
 end;
 end;
@@ -2074,6 +2088,7 @@ if ok then begin
    ra:=rad2deg*rec.ra/15;
    dec:=rad2deg*rec.dec;
    FFindId:=id;
+   FFindRecOK:=true;
    FFindRec:=rec;
 end;
 end;
@@ -2141,6 +2156,7 @@ if ok then begin
    ra:=rad2deg*rec.ra/15;
    dec:=rad2deg*rec.dec;
    FFindId:=id;
+   FFindRecOK:=true;
    FFindRec:=rec;
 end;
 end;
@@ -2226,6 +2242,7 @@ if ok then begin
    ra:=rad2deg*rec.ra/15;
    dec:=rad2deg*rec.dec;
    FFindId:=id;
+   FFindRecOK:=true;
    FFindRec:=rec;
 end;
 end;
@@ -2357,32 +2374,58 @@ if result then begin
 end;
 end;
 
+procedure Tcatalog.FormatPGC(lin : PGCrec; var rec:GcatRec);
+begin
+rec.neb.mag:=min(99,abs(lin.mb/100));
+if lin.maj>=0 then rec.neb.dim1:=lin.maj/100
+              else rec.neb.dim1:=0;
+rec.ra:=deg2rad*lin.ar/100000;
+rec.dec:=deg2rad*lin.de/100000;
+rec.neb.id:=lin.nom;
+rec.str[1]:=inttostr(lin.pgc);
+rec.neb.morph:=lin.typ;
+if lin.min>=0 then rec.neb.dim2:=lin.min/100
+              else rec.neb.dim2:=rec.neb.dim1;
+if lin.pa=255 then rec.neb.pa:=90
+              else rec.neb.pa:=lin.pa;
+if lin.hrv>-999999 then rec.neb.rv:=lin.hrv;
+end;
+
 function Tcatalog.GetPGC(var rec:GcatRec):boolean;
 var lin : PGCrec;
+    ma,sz: double;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
   ReadPGC(lin,result);
   if not result then break;
-  rec.neb.mag:=min(99,abs(lin.mb/100));
-  if cfgshr.NebFilter and (rec.neb.mag>cfgcat.NebMagMax) then continue;
-  if lin.maj>=0 then rec.neb.dim1:=lin.maj/100
-                else rec.neb.dim1:=0;
-  if cfgshr.NebFilter and (rec.neb.dim1<cfgcat.NebSizeMin) then continue;
+  ma:=min(99,abs(lin.mb/100));
+  if cfgshr.NebFilter and (ma>cfgcat.NebMagMax) then continue;
+  if lin.maj>=0 then sz:=lin.maj/100
+                else sz:=0;
+  if cfgshr.NebFilter and (sz<cfgcat.NebSizeMin) then continue;
   break;
 until not result;
 if result then begin
-   rec.ra:=deg2rad*lin.ar/100000;
-   rec.dec:=deg2rad*lin.de/100000;
-   rec.neb.id:=lin.nom;
-   rec.str[1]:=inttostr(lin.pgc);
-   rec.neb.morph:=lin.typ;
-   if lin.min>=0 then rec.neb.dim2:=lin.min/100
-                 else rec.neb.dim2:=rec.neb.dim1;
-   if lin.pa=255 then rec.neb.pa:=90
-                 else rec.neb.pa:=lin.pa;
-   if lin.hrv>-999999 then rec.neb.rv:=lin.hrv;
+   FormatPGC(lin,rec);
+end;
+end;
+
+procedure Tcatalog.FindPGC(id: integer; var ra,dec: double; var ok:boolean);
+var lin: PGCrec;
+    rec: GCatrec;
+begin
+InitRec(pgc);
+rec:=EmptyRec;
+FindNumPGC(id,lin,ok);
+if ok then begin
+   FormatPGC(lin,rec);
+   ra:=rad2deg*rec.ra/15;
+   dec:=rad2deg*rec.dec;
+   FFindId:='PGC'+inttostr(id);
+   FFindRecOK:=true;
+   FFindRec:=rec;
 end;
 end;
 
@@ -2497,7 +2540,7 @@ try
                      end;
         S_PGC      : if IsPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]) then begin
                      SetPGCPath(cfgcat.NebCatPath[pgc-BaseNeb]);
-                     FindNumPGC(strtointdef(id,0),ra,dec,result) ;
+                     FindPGC(strtointdef(id,0),ra,dec,result) ;
                      end;
         S_GCVS     : if IsGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]) then begin
                      SetGCVPath(cfgcat.VarStarCatPath[gcvs-BaseVar]);

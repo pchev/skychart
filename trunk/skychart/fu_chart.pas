@@ -1812,7 +1812,7 @@ begin
 sc.cfgsc.TrackOn:=false;
 IdentLabel.visible:=false;
 // full record returned by catalog search
-if sc.catalog.FindId=Num then begin
+if sc.catalog.FindRecOK then begin
     rec:=sc.catalog.FindRec;
     sc.cfgsc.FindStarPM:=false;
     // proper motion
