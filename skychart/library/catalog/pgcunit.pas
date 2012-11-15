@@ -38,6 +38,9 @@ Procedure OpenPGC(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenPGCwin(var ok : boolean);
 Procedure ReadPGC(var lin : PGCrec; var ok : boolean);
 procedure ClosePGC ;
+procedure OpenPGCFileNum(fnum:integer; var ok:boolean);
+Procedure ReadPGCRec(r: integer; var lin : PGCrec; var ok : boolean);
+
 
 var
   PGCpath : string;
@@ -126,6 +129,21 @@ curSM:=1;
 FindRegionListWin30(nSM,SMlst);
 Sm := Smlst[curSM];
 OpenRegion(Sm,ok);
+end;
+
+procedure OpenPGCFileNum(fnum:integer; var ok:boolean);
+begin
+ OpenRegion(fnum,ok);
+end;
+
+Procedure ReadPGCRec(r: integer; var lin : PGCrec; var ok : boolean);
+begin
+ok:=false;
+Seek(f,r);
+if not eof(f) then begin
+   Read(f,lin);
+   ok:=true;
+end;
 end;
 
 end.

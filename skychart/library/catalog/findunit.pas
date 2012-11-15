@@ -40,7 +40,7 @@ Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumBD(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumCD(id:string ;var ar,de:double; var ok:boolean);
 Procedure FindNumCPD(id:string ;var ar,de:double; var ok:boolean);
-Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumPGC(id:Integer ;var lin: PGCrec; var ok:boolean);
 Procedure FindNumSAC(id:string ;var rec:SACrec; var ok:boolean);
 Procedure FindNumWDS(id:string; var lin:WDSrec; var ok:boolean);
 Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
@@ -154,6 +154,43 @@ Reset(fx);
 imin:=0;
 imax := filesize(fx);
 lin.key:='';
+repeat
+  pnum:=lin.key;
+  i:=imin + ((imax-imin) div 2);
+  seek(fx,i);
+  read(fx,lin);
+  if lin.key>id then imax:=i
+                else imin:=i;
+  if lin.key=id then ok:=true;
+until ok or (pnum=lin.key);
+CloseFile(fx);
+if ok then begin
+   n:=lin.n;
+   r:=lin.r;
+end;
+end;
+
+Procedure FindIxr(ixr: string; id: integer ; var n,r: integer; var ok:boolean);
+Type filixr = packed record n: smallint;
+                r: integer;
+                key: Longint;
+         end;
+var
+    imin,imax,i : integer;
+    pnum : integer;
+    fx : file of filixr ;
+    lin : filixr;
+begin
+ok:=false;
+if not fileexists(ixr) then begin
+   exit;
+end;
+AssignFile(fx,ixr);
+FileMode:=0;
+Reset(fx);
+imin:=0;
+imax := filesize(fx);
+lin.key:=0;
 repeat
   pnum:=lin.key;
   i:=imin + ((imax-imin) div 2);
@@ -390,9 +427,16 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumPGC(id:Integer ;var ar,de:double; var ok:boolean);
+Procedure FindNumPGC(id:Integer ;var lin:PGCrec; var ok:boolean);
+var n,r: integer;
 begin
-FindIdx(PGCpath+slashchar+'pgc.idx',id,ar,de,ok);
+FindIxr(PGCpath+slashchar+'pgc.ixr',id,n,r,ok);
+if ok then begin
+   OpenPGCFileNum(n,ok);
+   if not ok then exit;
+   ReadPGCRec(r, lin, ok);
+   ClosePGC;
+end;
 end;
 
 Procedure FindNumSAC(id : string ;var rec:SACrec; var ok:boolean);

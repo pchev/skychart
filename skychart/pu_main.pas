@@ -3039,6 +3039,7 @@ if MultiFrame1.ActiveObject is Tf_chart then chart:=MultiFrame1.ActiveObject
    end;
 itype:=ftInv;
 if chart is Tf_chart then with chart as Tf_chart do begin
+    catalog.ClearSearch;
     case kind of
       0  : begin ok:=catalog.SearchNebulae(num,ar1,de1) ; itype:=ftNeb ; stype:='N'; end;
       1  : begin
@@ -6449,6 +6450,7 @@ end else begin
       if MultiFrame1.Childs[i].caption=cname then chart:=MultiFrame1.Childs[i].DockedObject;
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
+   catalog.ClearSearch;
    if sc.cfgsc.shownebulae then begin
      stype:='N';  itype:=ftNeb;
      ok:=catalog.SearchNebulae(Num,ar1,de1) ;
