@@ -64,7 +64,9 @@ type
      function GetBSC(var rec:GcatRec):boolean;
      function GetSky2000(var rec:GcatRec):boolean;
      function GetTYC(var rec:GcatRec):boolean;
+     procedure FormatTYC2(lin : TY2rec; var rec:GcatRec);
      function GetTYC2(var rec:GcatRec):boolean;
+     procedure FindTYC2(id: string; var ra,dec: double; var ok:boolean);
      function GetTIC(var rec:GcatRec):boolean;
      function GetGSCF(var rec:GcatRec):boolean;
      function GetGSCC(var rec:GcatRec):boolean;
@@ -1751,29 +1753,53 @@ if result then begin
 end;
 end;
 
+procedure Tcatalog.FormatTYC2(lin : TY2rec; var rec:GcatRec);
+begin
+rec.ra:=deg2rad*lin.ar;
+rec.dec:=deg2rad*lin.de;
+rec.star.magv:=lin.vt;
+if rec.star.magv>30 then rec.star.magv:=lin.bt;
+rec.star.magb:=lin.bt;
+if (lin.vt<30)and(lin.bt<30) then rec.star.b_v:=0.850*(lin.bt-lin.vt)
+                             else rec.star.b_v:=0;
+rec.star.pmra:=deg2rad*lin.pmar/1000/3600;
+rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
+rec.star.id:=inttostr(lin.gscz)+'-'+inttostr(lin.gscn)+'-'+inttostr(lin.tycn);
+end;
+
 function Tcatalog.GetTYC2(var rec:GcatRec):boolean;
 var lin : TY2rec;
    smnum : string;
+   ma:  double;
 begin
 rec:=EmptyRec;
 result:=true;
 repeat
   ReadTY2(lin,smnum,result);
   if not result then break;
-  rec.star.magv:=lin.vt;
-  if rec.star.magv>30 then rec.star.magv:=lin.bt;
-  if cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then continue;
+  ma:=lin.vt;
+  if ma>30 then ma:=lin.bt;
+  if cfgshr.StarFilter and (ma>cfgcat.StarMagMax) then continue;
   break;
 until not result;
 if result then begin
-   rec.ra:=deg2rad*lin.ar;
-   rec.dec:=deg2rad*lin.de;
-   rec.star.magb:=lin.bt;
-   if (lin.vt<30)and(lin.bt<30) then rec.star.b_v:=0.850*(lin.bt-lin.vt)
-                                else rec.star.b_v:=0;
-   rec.star.pmra:=deg2rad*lin.pmar/1000/3600;
-   rec.star.pmdec:=deg2rad*lin.pmde/1000/3600;
-   rec.star.id:=inttostr(lin.gscz)+'-'+inttostr(lin.gscn)+'-'+inttostr(lin.tycn);
+   FormatTYC2(lin,rec);
+end;
+end;
+
+procedure Tcatalog.FindTYC2(id: string; var ra,dec: double; var ok:boolean);
+var lin: TY2rec;
+    rec: GCatrec;
+begin
+InitRec(tyc2);
+rec:=EmptyRec;
+FindNumTYC2(id,lin,ok);
+if ok then begin
+   FormatTYC2(lin,rec);
+   ra:=rad2deg*rec.ra/15;
+   dec:=rad2deg*rec.dec;
+   FFindId:='TYC '+trim(id);
+   FFindRec:=rec;
 end;
 end;
 
@@ -2534,7 +2560,7 @@ try
                      end;
         S_TYC2     : if IsTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]) then begin
                      SetTY2Path(cfgcat.StarCatPath[tyc2-BaseStar]);
-                     FindNumTYC2(id,ra,dec,result) ;
+                     FindTYC2(id,ra,dec,result) ;
                      end;
         S_UNA      : if IsUSNOApath(cfgcat.StarCatPath[usnoa-BaseStar]) then begin
                      SetUSNOApath(cfgcat.StarCatPath[usnoa-BaseStar]);
