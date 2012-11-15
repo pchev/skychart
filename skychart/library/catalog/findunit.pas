@@ -45,7 +45,7 @@ Procedure FindNumSAC(id:string ;var rec:SACrec; var ok:boolean);
 Procedure FindNumWDS(id:string; var lin:WDSrec; var ok:boolean);
 Procedure FindNumGcat(path,catshortname,id : string ; keylen : integer; var ar,de:double; var ok:boolean);
 Procedure FindNumGcatRec(path,catshortname,id : string ; keylen : integer; var rec:GCatrec; var ok:boolean);
-Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumTYC2(id : string ;var lin: TY2rec; var ok:boolean);
 Procedure FindNumUSNOA(id : string ;var ar,de:double; var ok:boolean);
 procedure SetXHIPpath(path : string);
 
@@ -266,7 +266,7 @@ if p>0 then begin
 end;
 end;
 
-Procedure FindNumTYC2(id : string ;var ar,de:double; var ok:boolean);
+Procedure FindNumTYC2(id : string ;var lin: TY2rec; var ok:boolean);
 var smnum,num : integer;
     p : integer;
     buf:string;
@@ -280,7 +280,7 @@ if p>0 then begin
    p:=pos('-',buf);
    if p>0 then delete(buf,p,5);
    num:=strtoint(buf);
-   FindTYC2num(smnum,num,ar,de,ok);
+   FindTYC2num(smnum,num,lin,ok);
 end;
 end;
 

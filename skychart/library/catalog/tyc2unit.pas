@@ -104,7 +104,7 @@ Procedure OpenTY2win(ncat : integer;var ok : boolean);
 Procedure ReadTY2(var lin : TY2rec; var SMnum : string ; var ok : boolean);
 Procedure NextTY2( var ok : boolean);
 procedure CloseTY2 ;
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindTYC2num(SMnum,num :Integer; var lin: TY2rec; var ok : boolean);
 
 var
   TY2path: String;
@@ -403,7 +403,7 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
-Procedure FindTYC2num(SMnum,num :Integer; var ar,de : Double; var ok : boolean);
+Procedure FindTYC2num(SMnum,num :Integer; var lin: TY2rec; var ok : boolean);
 var L1,S1,zone,i,j : integer;
     hemis : char;
     fok : boolean;
@@ -432,10 +432,6 @@ repeat
     ReadTY2(lin,buf,fok);
     if lin.gscn=num then begin ok:=true; break; end;
 until not fok;
-if ok then begin
-  ar:=lin.ar/15;
-  de:=lin.de;
-end;
 Closeregion;
 end;
 
