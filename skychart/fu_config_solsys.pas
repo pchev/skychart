@@ -469,6 +469,10 @@ end;
 procedure Tf_config_solsys.Init;
 begin
 LockChange:=true;
+ComPageControl.ActivePageIndex:=1;
+ComPageControl.ActivePageIndex:=0;
+AstPageControl.ActivePageIndex:=1;
+AstPageControl.ActivePageIndex:=0;
 ShowPlanet;
 ShowComet;
 ShowAsteroid;
@@ -811,6 +815,7 @@ begin
 if LockChange then exit;
 csc.GRSjd := GRSJDDate.JD;
 end;
+
 
 procedure Tf_config_solsys.PlanetBox3Click(Sender: TObject);
 begin
