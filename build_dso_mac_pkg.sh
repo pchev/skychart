@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-version=3.1
+version=3.8
 
 basedir=/tmp/skychart   # Be sure this is set to a non existent directory, it is removed after the run!
 
@@ -15,10 +15,7 @@ fi
 
 wd=`pwd`
 
-lang=LANG
-LANG=C
-currentrev=`svn info . | grep Revision: | sed 's/Revision: //'`
-LANG=$lang
+currentrev=`LC_ALL=C svn info . | grep Revision: | sed 's/Revision: //'`
 
 # delete old files
   rm skychart-data-dso*.dmg
