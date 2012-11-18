@@ -26,6 +26,7 @@ data/constellation/constlabel_sl.cla
 data/constellation/constlabel_th.cla
 data/constellation/constlabel_uk.cla
 data/constellation/constlabel_zh.cla
+data/constellation/constlabel_zh_TW.cla
 data/constellation/DefaultConstL.cln
 data/constellation/ReyConstL.cln
 data/constellation/Tirion-Constellations.cln
@@ -286,6 +287,8 @@ data/language/skychart.sv.po
 data/language/skychart.th.po
 data/language/skychart.uk.po
 data/language/skychart.zh.po
+data/language/skychart.zh_TW.po
+data/language/skychart.zh_CN.po
 data/pictures
 data/planet
 data/planet/jupiter-0.jpg
