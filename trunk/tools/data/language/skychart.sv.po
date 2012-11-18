@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
-"PO-Revision-Date: 2012-10-09 17:06+0000\n"
-"Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"PO-Revision-Date: 2012-11-04 01:30+0000\n"
+"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -174,7 +174,7 @@ msgstr "Alla inställningar"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Alla objekt på denna position"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -3984,6 +3984,10 @@ msgstr "Återställ karta och alternativ"
 msgid "Reset initial default and restart"
 msgstr "Återställ till standard och starta om"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Återställ till senaste gången kartan sparades"
@@ -4043,6 +4047,10 @@ msgstr "Går upp"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Går upp"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5399,6 +5407,10 @@ msgstr "Föstora+centrera på"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Förstora"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

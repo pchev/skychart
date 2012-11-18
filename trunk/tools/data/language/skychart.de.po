@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
 "PO-Revision-Date: 2012-08-25 20:03+0000\n"
 "Last-Translator: Stefan Beck <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3985,6 +3985,10 @@ msgstr "Karten und Optionen zurücksetzen"
 msgid "Reset initial default and restart"
 msgstr "Standard wiederherstellen und neustarten"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Zur letzten gespeicherten Karte zurücksetzen"
@@ -4044,6 +4048,10 @@ msgstr "Aufgang"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Aufgangszeit:"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5400,6 +5408,10 @@ msgstr "Verkleinern und zentrieren"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Vergrößern"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

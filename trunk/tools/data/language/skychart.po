@@ -5390,3 +5390,15 @@ msgstr ""
 msgid "All the objects at this position"
 msgstr ""
 
+#: u_translation:rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
+
+#: u_translation:rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
+
+#: u_translation:rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
-"PO-Revision-Date: 2012-09-20 19:32+0000\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"PO-Revision-Date: 2012-11-11 17:06+0000\n"
 "Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -175,7 +175,7 @@ msgstr "Veškerá nastavení"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Všechny objekty v tomto místě"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -1175,7 +1175,7 @@ msgstr "Deklinace"
 
 #: u_translation.rsdecoptions
 msgid "DEC options"
-msgstr "Nastavení DEC"
+msgstr "Možnosti DEC"
 
 #: u_translation.rsdecrease
 msgid "Decrease"
@@ -1451,7 +1451,7 @@ msgstr "Vzdálenost od posledního objektu"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
+msgstr "Messierovy objekty nefiltrovat"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -2639,7 +2639,7 @@ msgstr "Zamknout na: %s"
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
-msgstr "Logaritniké měřítko"
+msgstr "Logaritmické měřítko"
 
 #: u_translation.rslongitude
 msgid "Longitude"
@@ -2767,7 +2767,7 @@ msgstr "Maximalizovat"
 
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
-msgstr "Maximální magnituda:"
+msgstr "Mezní magnituda"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3985,6 +3985,10 @@ msgstr "Resetovat mapu a nastavení"
 msgid "Reset initial default and restart"
 msgstr "Obnovit výchozí nastavení a restartovat"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Vrátit se k poslednímu uloženému nastavení"
@@ -4044,6 +4048,10 @@ msgstr "Východ"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Čas východu"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5400,6 +5408,10 @@ msgstr "Oddálit – Centrovat"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Přiblížit"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
