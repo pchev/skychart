@@ -53,6 +53,8 @@ type
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
     Compass1: TMenuItem;
+    ResetRot: TMenuItem;
+    rot180: TMenuItem;
     MultiFrame1: TMultiFrame;
     ShowLabels1: TMenuItem;
     ResetLanguage: TMenuItem;
@@ -475,6 +477,8 @@ type
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
+    procedure ResetRotClick(Sender: TObject);
+    procedure rot180Click(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -2237,6 +2241,21 @@ if Button=mbRight then begin
      Refresh;
   end;
 end;
+end;
+
+procedure Tf_main.ResetRotClick(Sender: TObject);
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   sc.cfgsc.theta:=0;
+   Refresh;
+end;
+end;
+
+procedure Tf_main.rot180Click(Sender: TObject);
+var rot:double;
+begin
+rot:=180;
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do rotation(rot);
 end;
 
 procedure Tf_main.ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
@@ -6315,6 +6334,9 @@ FlipX1.caption:='&'+rsMirrorHorizo;
 FlipY1.caption:='&'+rsMirrorVertic;
 rotplus1.caption:='&'+rsRotateRight;
 rotminus1.caption:='&'+rsRotateLeft;
+rot180.Caption:='&'+rsRotateBy180D;
+ToolButtonRot180.Hint:=rsRotateBy180D;
+ResetRot.Caption:=rsResetRotatio;
 FieldofVision1.caption:='&'+rsFieldOfVisio;
 allSky1.caption:='&'+rsShowAllSky;
 ShowHorizon1.caption:='&'+rsViewHorizon;

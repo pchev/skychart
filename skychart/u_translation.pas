@@ -1376,6 +1376,8 @@ resourcestring
   rsDoNotFilterM = 'Do not filter Messier objects';
   rsAllObjectsAt = 'All the objects at this position';
   rsZoomMoreToVi = 'Zoom more to view the object';
+  rsRotateBy180D = 'Rotate by 180 degrees';
+  rsResetRotatio = 'Reset rotation';
 
 implementation
 

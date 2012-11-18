@@ -5202,6 +5202,13 @@ object f_main: Tf_main
           ShowAlwaysCheckable = True
           OnClick = rot_minusExecute
         end
+        object rot180: TMenuItem
+          ImageIndex = 92
+          OnClick = rot180Click
+        end
+        object ResetRot: TMenuItem
+          OnClick = ResetRotClick
+        end
       end
       object FieldofVision1: TMenuItem
         Caption = 'Field of Vision'
