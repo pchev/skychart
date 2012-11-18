@@ -814,7 +814,7 @@ end;
 procedure Tf_config_display.StarButton5Click(Sender: TObject);
 begin
 StarSizeBar1.Position:=13;
-StarDynBar1.Position:=65;
+StarDynBar1.Position:=75;
 cplot.stardyn:=StarDynBar1.Position;
 cplot.starsize:=StarSizeBar1.Position;
 end;
