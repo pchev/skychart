@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
-"PO-Revision-Date: 2012-09-17 19:43+0000\n"
-"Last-Translator: misibacsi <listas123@freemail.hu>\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"PO-Revision-Date: 2012-10-28 07:29+0000\n"
+"Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -178,7 +178,7 @@ msgstr "Minden beállítás"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Minden objektum ebben a pozícióban"
 
 #: u_translation.rsalltablesstr
 #| msgid "%sAll tables structure exists."
@@ -248,7 +248,7 @@ msgstr "Anonymous jelszó"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
-msgstr ""
+msgstr "antialiasing"
 
 #: u_translation.rsapparent
 msgid "Apparent"
@@ -277,7 +277,7 @@ msgstr "Pericentrum argumentum-omega"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Jelenlegi pozíció körül"
 
 #: u_translation.rsartificialsa
 #| msgid "Artificial Satellites"
@@ -358,7 +358,7 @@ msgstr "A helyi szerver automatikus elindítása, ha még nem fut"
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Címkék automatikus elhelyezése"
 
 #: u_translation.rsautorefresh
 #| msgid "AutoRefresh"
@@ -571,7 +571,7 @@ msgstr ""
 
 #: u_translation.rscannotgetyou
 msgid "Cannot get your IP address, or no location found for this address."
-msgstr ""
+msgstr "Nem található IP-cím, illetve helyszín."
 
 #: u_translation.rscannotopenda
 msgid "%sCannot open database %s! %s"
@@ -910,7 +910,7 @@ msgstr "Program beállításai"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Fájl törlésének megerősítése: "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1525,7 +1525,7 @@ msgstr "Minden katalógus címkéjének megjelenítése"
 
 #: u_translation.rsdisplaypreci
 msgid "Display Precision"
-msgstr ""
+msgstr "Megjelenítés pontossága"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
@@ -1868,7 +1868,7 @@ msgstr "Minden lépésnél"
 
 #: u_translation.rsexampleofuse
 msgid "Example of user defined object: North galactic pole"
-msgstr ""
+msgstr "Példa a felhasználó által megadott objektumra: Galaktikus északi pólus"
 
 #: u_translation.rsexit
 msgid "Exit"
@@ -2375,7 +2375,7 @@ msgstr "Idő megjelenítése a tálcán"
 
 #: u_translation.rsifitisnotins
 msgid "If it is not installed try the following depending on your system:"
-msgstr ""
+msgstr "Ha nincs felrakva, próbálja meg a következők valamelyikét:"
 
 #: u_translation.rsillum
 msgid "Illum."
@@ -3218,7 +3218,7 @@ msgstr "Ködök körvonala"
 
 #: u_translation.rsnegativeeast
 msgid "(negative east of Greenwich)"
-msgstr ""
+msgstr "(Greenwich-től keletre negatív)"
 
 #: u_translation.rsneighbor
 msgid "Neighbour"
@@ -3280,7 +3280,7 @@ msgstr "A mai nap nincs asztronómiai szürkület!"
 
 #: u_translation.rsnocatalogsel
 msgid "No catalog selected, or no table from the selected catalog contain coordinates information."
-msgstr ""
+msgstr "Nincs katalógus kiválasztva, vagy a katalógusban nincs koordináta információ."
 
 #: u_translation.rsnochange
 msgid "No change"
@@ -3341,7 +3341,7 @@ msgstr "Nem FITS fájl, SIMPLE = T kulcsszó hiányzik"
 
 #: u_translation.rsnotargetobje
 msgid "No target object"
-msgstr ""
+msgstr "Nincs célpont"
 
 #: u_translation.rsnotavailable
 msgid "Not available"
@@ -3777,7 +3777,7 @@ msgstr ""
 
 #: u_translation.rspleasemoveth
 msgid "Please move the telescope along the two axis"
-msgstr ""
+msgstr "Kérjük mozgassa a távcsövet a két tengely mentén."
 
 #: u_translation.rspleasereport
 msgid "Please report any problem to:"
@@ -4009,11 +4009,11 @@ msgstr "Proxy port"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
-msgstr ""
+msgstr "Impulzus időtartama"
 
 #: u_translation.rspulsemode
 msgid "Pulse Mode"
-msgstr ""
+msgstr "Impulzus mód"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
@@ -4103,7 +4103,7 @@ msgstr "RealSky South"
 
 #: u_translation.rsrealtimeopti
 msgid "Real time options"
-msgstr ""
+msgstr "Valósidejű opciók"
 
 #: u_translation.rsrecognizeuni
 #| msgid "Recognize Units or Object type from the file:"
@@ -4251,6 +4251,10 @@ msgstr "Alapértelmezett térkép beállítások"
 msgid "Reset initial default and restart"
 msgstr ""
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Visszaállítás a térkép utolsó mentésére"
@@ -4310,6 +4314,10 @@ msgstr "Kél"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Kelés ideje"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 #| msgid "Rotate Left"
@@ -4479,7 +4487,7 @@ msgstr "Katalógus választása"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Szín választása (alapból fekete)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
@@ -4727,7 +4735,7 @@ msgstr "Tejút mutatása"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Földközeli aszteroidák mutatása fényességtől függetlenül"
 
 #: u_translation.rsshownebulae
 #| msgid "Show Deep Sky Objects"
@@ -4786,7 +4794,7 @@ msgstr "Mutatsd a képet"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
-msgstr ""
+msgstr "Felhasználó által megadott objektumok mutatása"
 
 #: u_translation.rsshowvirtualo
 msgid "Show Virtual Observatory data"
@@ -4942,7 +4950,7 @@ msgstr "Sebesség választása"
 
 #: u_translation.rsspeedsetting
 msgid "Speed settings"
-msgstr ""
+msgstr "Sebesség-beállítások"
 
 #: u_translation.rsspline
 msgid "Spline"
@@ -5209,7 +5217,7 @@ msgstr "Szöveg mérete"
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
-msgstr ""
+msgstr "A csatoló nincs csatlakoztatva vagy beállítva"
 
 #: u_translation.rstheme
 msgid "Theme"
@@ -5402,7 +5410,7 @@ msgstr "Szürkület"
 
 #: u_translation.rstwostarsmust
 msgid "TWO stars must be used for initialisation."
-msgstr ""
+msgstr "A beállításhoz két csillagot kell használni."
 
 #: u_translation.rstype
 msgid "Type"
@@ -5543,7 +5551,7 @@ msgstr "Felhasználónév"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
-msgstr ""
+msgstr "Socks proxy használata"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
@@ -5774,6 +5782,10 @@ msgstr "Nagyít- középre"
 #| msgid "Zoom In"
 msgid "Zoom in"
 msgstr "Nagyítás be"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 #| msgid "Zoom Out"

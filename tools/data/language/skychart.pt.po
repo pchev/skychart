@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
-"PO-Revision-Date: 2012-10-04 19:21+0000\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"PO-Revision-Date: 2012-10-21 17:36+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -176,7 +176,7 @@ msgstr "Todas opções de configuração"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Todos os objetos nesta posição"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -3986,6 +3986,10 @@ msgstr "Reiniciar carta e opções"
 msgid "Reset initial default and restart"
 msgstr "Redefinir o padrão inicial e reinicie"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Voltar para última vez que a carta foi salva"
@@ -4045,6 +4049,10 @@ msgstr "Nascimento"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Hora de Nascimento"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5401,6 +5409,10 @@ msgstr "Centrar e Zoom -"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Aumentar zoom"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
-"PO-Revision-Date: 2012-10-07 07:52+0000\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"PO-Revision-Date: 2012-11-10 17:27+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:40+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -175,7 +175,7 @@ msgstr "Tutte le opzioni di configurazione"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Tutti gli oggetti in questa posizione"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -3986,6 +3986,10 @@ msgstr "Reset cartina e impostazioni"
 msgid "Reset initial default and restart"
 msgstr "Reimposta ai default iniziali e riavvia"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Reimposta all'ultimo salvataggio della cartina"
@@ -4045,6 +4049,10 @@ msgstr "Sorge"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Ora di levata"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5401,6 +5409,10 @@ msgstr "Zoom - Centra"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Aumenta ingrandimento"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-13 19:21+0000\n"
+"POT-Creation-Date: 2012-11-18 14:06+0000\n"
 "PO-Revision-Date: 2012-09-13 11:35+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-14 07:41+0000\n"
-"X-Generator: Launchpad (build 16137)\n"
+"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
+"X-Generator: Launchpad (build 16278)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -3989,6 +3989,10 @@ msgstr "Reinicia el mapa i les opcions"
 msgid "Reset initial default and restart"
 msgstr "Torna a les opcions per defecte i reengega"
 
+#: u_translation.rsresetrotatio
+msgid "Reset rotation"
+msgstr ""
+
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
 msgstr "Torna a les opcions de la darrera carta desada"
@@ -4048,6 +4052,10 @@ msgstr "Sortida"
 #: u_translation.rsrisetime
 msgid "Rise time"
 msgstr "Hora de sortida"
+
+#: u_translation.rsrotateby180d
+msgid "Rotate by 180 degrees"
+msgstr ""
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -5404,6 +5412,10 @@ msgstr "Centra i Zoom -"
 #: u_translation.rszoomin
 msgid "Zoom in"
 msgstr "Zoom augment"
+
+#: u_translation.rszoommoretovi
+msgid "Zoom more to view the object"
+msgstr ""
 
 #: u_translation.rszoomout
 msgid "Zoom out"
