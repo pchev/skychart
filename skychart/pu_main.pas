@@ -4270,7 +4270,7 @@ def_cfgplot.bgColor:=dfColor[0];
 def_cfgplot.backgroundcolor:=def_cfgplot.color[0];
 def_cfgplot.Nebgray:=55;
 def_cfgplot.NebBright:=180;
-def_cfgplot.stardyn:=65;
+def_cfgplot.stardyn:=75;
 def_cfgplot.starsize:=13;
 def_cfgplot.starplot:=2;
 def_cfgplot.nebplot:=1;
@@ -5507,6 +5507,9 @@ if  Config_Version < '3.5i' then begin
   def_cfgsc.projname[8]:='MER';
   def_cfgsc.projname[9]:='MER';
   def_cfgsc.projname[10]:='MER';
+end;
+if  Config_Version < '3.7f' then begin
+  if def_cfgplot.stardyn=65 then def_cfgplot.stardyn:=78;
 end;
 end;
 
