@@ -1,5 +1,17 @@
 Version 3.7 release Notes
 
+Major changes:
+  Change of the catalog index format, an index record was previously pointing directly
+  to the RA,DEC coordinates. Now the index point to a catalog record.
+  This allow to process the stars proper motion for a correct location at any epoch.
+  This also help to display the object label and full detail even if it is not visible with
+  the current chart setting.
+  Because of this change you need to reinstall the stars and dso additional catalog from:
+  https://sourceforge.net/projects/skychart/files/0-beta/catalog/
+  This also upgrade the WDS, GCVS, PGC catalog to the latest 2012 version.
+  If you make you own catalog with Catgen you can rebuild your catalog to take advantage of 
+  the change but the old index still work as before. 
+
 New options:
   - Rotate the label of the planet simulation perpendicular to the orbit. 
   - Reduced label overlap (Display/Labels/Automatically optimize the labels placement).

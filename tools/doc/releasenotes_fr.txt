@@ -1,5 +1,18 @@
 Version 3.7  Notes de la version
 
+Modifications majeurs:
+   Changement du format de l'index des catalogues, un enregistrement d'index pointait directement sur les
+   coordonnées RA, DEC. Maintenant, l'index pointe sur un enregistrement du catalogue.
+   Cela permet de traiter le mouvement propre des étoiles pour afficher un emplacement correct à n'importe quelle époque.
+   Cela aide également à afficher le label d'un objet et le détail complet, même si il n'est pas visible avec
+   le réglage de la carte en cours.
+   En raison de cette modification, vous devez réinstaller les catalogues supplémentaire d'étoiles et nébuleuses
+   à partir de:
+   https://sourceforge.net/projects/skychart/files/0-beta/catalog/
+   Cela met également à jour les catalogues WDS, GCVS, PGC à la dernière version 2012.
+   Si vous avez produit vos propre catalogues avec Catgen vous pouvez reconstruire les catalogues pour profiter de
+   ce changement, mais l'ancien indexe fonctionne comme avant.
+
 Nouvelles options:
   - Rotation du label de la simulation des planètes perpendiculaire à l'orbite. 
   - Diminue le chevauchement des labels (Affichage/Labels/Optimise automatiquement la position des labels).
