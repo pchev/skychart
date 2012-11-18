@@ -838,8 +838,13 @@ end;
 
 procedure Tf_config_time.Button6Click(Sender: TObject);
 var y,m,d,h,n,s,ms : word;
+    day: integer;
 begin
- csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.timezone);
+LockChange:=true;
+try
+ if csc.timezone>0 then day:=csc.curday
+    else day:=csc.curday+1;
+ csc.tz.JD:=Jd(csc.curyear,csc.curmonth,day,csc.timezone);
  if (csc.curyear>cu_tz.minYear)and(csc.curyear<cu_tz.maxYear) then begin
    decodedate(csc.tz.Date,y,m,d);
    d_yearEdit.Value:=y;
@@ -850,8 +855,11 @@ begin
  t_hour.Position:=h;
  t_min.Position:=n;
  t_sec.Position:=s;
- DateEditChange(Sender);
- TimeEditChange(Sender);
+finally
+ LockChange:=false;
+end;
+DateEditChange(Sender);
+TimeEditChange(Sender);
 end;
 
 procedure Tf_config_time.Button8Click(Sender: TObject);
