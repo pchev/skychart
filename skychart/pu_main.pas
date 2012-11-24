@@ -2078,6 +2078,9 @@ end else begin
   for i:=0 to MultiFrame1.ChildCount-1 do
      if MultiFrame1.Childs[i].DockedObject is Tf_chart then with (MultiFrame1.Childs[i].DockedObject as Tf_chart) do begin
         TelescopeTimer.Enabled:=false;
+        RefreshTimer.Enabled:=false;
+        BlinkTimer.Enabled:=false;
+        PDSSTimer.Enabled:=false;
         locked:=true;
      end;
   except
