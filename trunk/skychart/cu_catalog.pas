@@ -1617,15 +1617,16 @@ var
    rec:GCatrec;
    i,version : integer;
    iid:string;
+   catok: boolean;
 begin
 ok:=false;
 iid:=id;
 for i:=0 to cfgcat.GCatNum-1 do begin
   if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype)) then begin
    SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
-   GetGCatInfo(H,version,GCatFilter,ok);
-   if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.ixr') then begin
-     if ok then FindNumGcatRec(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen,rec,ok);
+   GetGCatInfo(H,version,GCatFilter,catok);
+   if catok and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.ixr') then begin
+     FindNumGcatRec(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen,rec,ok);
      if ok then begin
         ar:=rec.ra/15;
         de:=rec.dec;
@@ -1636,8 +1637,8 @@ for i:=0 to cfgcat.GCatNum-1 do begin
         break;
      end;
    end
-   else if fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
-      if ok then FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen, ar,de,ok);
+   else if catok and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.idx') then begin
+      FindNumGcat(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen, ar,de,ok);
       if ok then break;
     end;
   end;
