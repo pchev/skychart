@@ -585,9 +585,9 @@ yy:=round(y);
         else ico:=2;
  end;
  if ma<-5 then ma:=-5;
- ds := round(max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)));
+ ds := round(1.5*max(1,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma)));
  case ds of
-     1..2: isz:=10;
+     1..2: isz:=9;
      3: isz:=9;
      4: isz:=8;
      5: isz:=7;
