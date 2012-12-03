@@ -90,6 +90,7 @@ type
     procedure SetLineCap(const AValue: string);
     procedure SetLineJoin(const AValue: string);
     procedure FillPoly(const points: array of TPointF);
+    procedure FillStrokePoly(const points: array of TPointF; fillOver: boolean);
     procedure SetLineWidth(const AValue: single);
     procedure SetMiterLimit(const AValue: single);
     procedure SetPixelCenteredCoordinates(const AValue: boolean);
@@ -98,7 +99,7 @@ type
     procedure SetShadowOffsetX(const AValue: single);
     procedure SetShadowOffsetY(const AValue: single);
     procedure StrokePoly(const points: array of TPointF);
-    procedure DrawShadow(const points: array of TPointF);
+    procedure DrawShadow(const points, points2: array of TPointF);
     procedure ClearPoly(const points: array of TPointF);
     function ApplyTransform(const points: array of TPointF; matrix: TAffineMatrix): ArrayOfTPointF; overload;
     function ApplyTransform(const points: array of TPointF): ArrayOfTPointF; overload;
@@ -149,12 +150,16 @@ type
 
     procedure beginPath;
     procedure closePath;
+    procedure toSpline(closed: boolean; style: TSplineStyle= ssOutside);
     procedure moveTo(x,y: single); overload;
     procedure lineTo(x,y: single); overload;
     procedure moveTo(pt: TPointF); overload;
     procedure lineTo(pt: TPointF); overload;
-    procedure quadraticCurveTo(cpx,cpy,x,y: single);
-    procedure bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y: single);
+    procedure polylineTo(const pts: array of TPointF);
+    procedure quadraticCurveTo(cpx,cpy,x,y: single); overload;
+    procedure quadraticCurveTo(cp,pt: TPointF); overload;
+    procedure bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y: single); overload;
+    procedure bezierCurveTo(cp1,cp2,pt: TPointF); overload;
     procedure rect(x,y,w,h: single);
     procedure roundRect(x,y,w,h,radius: single);
     procedure spline(const pts: array of TPointF; style: TSplineStyle= ssOutside);
@@ -165,6 +170,8 @@ type
     procedure arcTo(p1,p2: TPointF; radius: single); overload;
     procedure fill;
     procedure stroke;
+    procedure fillOverStroke;
+    procedure strokeOverFill;
     procedure clearPath;
     procedure clip;
     procedure unclip;
@@ -597,7 +604,7 @@ var
   tempScan: TBGRACustomScanner;
 begin
   if length(points) = 0 then exit;
-  If hasShadow then DrawShadow(points);
+  If hasShadow then DrawShadow(points,[]);
   if currentState.clipMask <> nil then
   begin
     if currentState.fillTextureProvider <> nil then
@@ -621,6 +628,74 @@ begin
     else
       BGRAPolygon.FillPolyAntialias(surface, points, ApplyGlobalAlpha(currentState.fillColor), false, true);
   end;
+end;
+
+procedure TBGRACanvas2D.FillStrokePoly(const points: array of TPointF;
+  fillOver: boolean);
+var
+  tempScan,tempScan2: TBGRACustomScanner;
+  multi: TBGRAMultishapeFiller;
+  contour : array of TPointF;
+  texture: IBGRAScanner;
+begin
+  if length(points) = 0 then exit;
+  tempScan := nil;
+  tempScan2 := nil;
+  multi := TBGRAMultishapeFiller.Create;
+  multi.FillMode := fmWinding;
+  if currentState.clipMask <> nil then
+  begin
+    if currentState.fillTextureProvider <> nil then
+      tempScan := TBGRATextureMaskScanner.Create(currentState.clipMask,Point(0,0),currentState.fillTextureProvider.texture,currentState.globalAlpha)
+    else
+      tempScan := TBGRASolidColorMaskScanner.Create(currentState.clipMask,Point(0,0),ApplyGlobalAlpha(currentState.fillColor));
+    multi.AddPolygon(points, tempScan);
+  end else
+  begin
+    if currentState.fillTextureProvider <> nil then
+    begin
+      if currentState.globalAlpha <> 255 then
+      begin
+        tempScan := TBGRAOpacityScanner.Create(currentState.fillTextureProvider.texture, currentState.globalAlpha);
+        multi.AddPolygon(points, tempScan);
+      end else
+        multi.AddPolygon(points, currentState.fillTextureProvider.texture)
+    end
+    else
+      multi.AddPolygon(points, ApplyGlobalAlpha(currentState.fillColor));
+  end;
+
+  if currentState.lineWidth > 0 then
+  begin
+    contour := ComputeWidePolylinePoints(points,currentState.lineWidth,BGRAPixelTransparent,
+        currentState.lineCap,currentState.lineJoin,currentState.lineStyle,[plAutoCycle],miterLimit);
+
+    if currentState.clipMask <> nil then
+    begin
+      if currentState.strokeTextureProvider <> nil then
+        tempScan2 := TBGRATextureMaskScanner.Create(currentState.clipMask,Point(0,0),currentState.strokeTextureProvider.texture,currentState.globalAlpha)
+      else
+        tempScan2 := TBGRASolidColorMaskScanner.Create(currentState.clipMask,Point(0,0),ApplyGlobalAlpha(currentState.strokeColor));
+      multi.AddPolygon(contour,tempScan);
+    end else
+    begin
+      if currentState.strokeTextureProvider <> nil then
+        texture := currentState.strokeTextureProvider.texture else
+        texture := nil;
+      if texture = nil then
+        multi.AddPolygon(contour,ApplyGlobalAlpha(currentState.strokeColor))
+      else
+        multi.AddPolygon(contour,texture);
+    end;
+    If hasShadow then DrawShadow(points,contour);
+  end else
+    If hasShadow then DrawShadow(points,[]);
+
+  if fillOver then multi.PolygonOrder := poFirstOnTop else multi.PolygonOrder:= poLastOnTop;
+  multi.Draw(surface);
+  tempScan.free;
+  tempScan2.free;
+  multi.Free;
 end;
 
 procedure TBGRACanvas2D.lineStyle(const AValue: array of single);
@@ -678,7 +753,7 @@ begin
   contour := ComputeWidePolylinePoints(points,currentState.lineWidth,BGRAPixelTransparent,
       currentState.lineCap,currentState.lineJoin,currentState.lineStyle,[plAutoCycle],miterLimit);
 
-  If hasShadow then DrawShadow(contour);
+  If hasShadow then DrawShadow(contour,[]);
   if currentState.clipMask <> nil then
   begin
     if currentState.strokeTextureProvider <> nil then
@@ -699,8 +774,8 @@ begin
   end;
 end;
 
-procedure TBGRACanvas2D.DrawShadow(const points: array of TPointF);
-var ofsPts: array of TPointF;
+procedure TBGRACanvas2D.DrawShadow(const points, points2: array of TPointF);
+var ofsPts,ofsPts2: array of TPointF;
     offset: TPointF;
     i: Integer;
     tempBmp,blurred: TBGRACustomBitmap;
@@ -710,8 +785,13 @@ begin
   setlength(ofsPts, length(points));
   for i := 0 to high(ofsPts) do
     ofsPts[i] := points[i]+offset;
+  setlength(ofsPts2, length(points2));
+  for i := 0 to high(ofsPts2) do
+    ofsPts2[i] := points2[i]+offset;
   tempBmp := surface.NewBitmap(width,height,BGRAPixelTransparent);
-  tempBmp.FillPolyAntialias(ofsPts, ApplyGlobalAlpha(getShadowColor));
+  tempBmp.FillMode := fmWinding;
+  tempBmp.FillPolyAntialias(ofsPts, getShadowColor);
+  tempBmp.FillPolyAntialias(ofsPts2, getShadowColor);
   if shadowBlur > 0 then
   begin
     if (shadowBlur < 5) and (abs(shadowBlur-round(shadowBlur)) > 1e-6) then
@@ -723,7 +803,7 @@ begin
   end;
   if currentState.clipMask <> nil then
     tempBmp.ApplyMask(currentState.clipMask);
-  surface.PutImage(0,0,tempBmp,dmDrawWithTransparency);
+  surface.PutImage(0,0,tempBmp,dmDrawWithTransparency,currentState.globalAlpha);
   tempBmp.Free;
 end;
 
@@ -1080,6 +1160,28 @@ begin
   end;
 end;
 
+procedure TBGRACanvas2D.toSpline(closed: boolean; style: TSplineStyle);
+var i,j: integer;
+  pts, splinePts: array of TPointF;
+  nb: integer;
+begin
+  if FPathPointCount > 0 then
+  begin
+    i := FPathPointCount-1;
+    while (i > 0) and not isEmptyPointF(FPathPoints[i-1]) do dec(i);
+    nb := FPathPointCount - i;
+    setlength(pts,nb);
+    for j := 0 to nb-1 do
+      pts[j] := FPathPoints[i+j];
+    if closed then
+      splinePts := surface.ComputeClosedSpline(pts,style)
+    else
+      splinePts := surface.ComputeOpenedSpline(pts,style);
+    dec(FPathPointCount,nb);
+    AddPoints(splinePts);
+  end;
+end;
+
 procedure TBGRACanvas2D.moveTo(x, y: single);
 begin
   moveTo(PointF(x,y));
@@ -1102,6 +1204,11 @@ begin
   AddPoint(ApplyTransform(pt));
 end;
 
+procedure TBGRACanvas2D.polylineTo(const pts: array of TPointF);
+begin
+  AddPoints(ApplyTransform(pts));
+end;
+
 procedure TBGRACanvas2D.quadraticCurveTo(cpx, cpy, x, y: single);
 var
   curve : TQuadraticBezierCurve;
@@ -1110,6 +1217,11 @@ begin
   curve := BezierCurve(GetPenPos,ApplyTransform(PointF(cpx,cpy)),ApplyTransform(PointF(x,y)));
   pts := Surface.ComputeBezierCurve(curve);
   AddPoints(pts);
+end;
+
+procedure TBGRACanvas2D.quadraticCurveTo(cp, pt: TPointF);
+begin
+  quadraticCurveTo(cp.x,cp.y,pt.x,pt.y);
 end;
 
 procedure TBGRACanvas2D.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y: single);
@@ -1121,6 +1233,11 @@ begin
     ApplyTransform(PointF(cp2x,cp2y)),ApplyTransform(PointF(x,y)));
   pts := Surface.ComputeBezierCurve(curve);
   AddPoints(pts);
+end;
+
+procedure TBGRACanvas2D.bezierCurveTo(cp1, cp2, pt: TPointF);
+begin
+  bezierCurveTo(cp1.x,cp1.y,cp2.x,cp2.y,pt.x,pt.y);
 end;
 
 procedure TBGRACanvas2D.rect(x, y, w, h: single);
@@ -1292,6 +1409,18 @@ procedure TBGRACanvas2D.stroke;
 begin
   if FPathPointCount = 0 then exit;
   StrokePoly(slice(FPathPoints,FPathPointCount));
+end;
+
+procedure TBGRACanvas2D.fillOverStroke;
+begin
+  if FPathPointCount = 0 then exit;
+  FillStrokePoly(slice(FPathPoints,FPathPointCount),true);
+end;
+
+procedure TBGRACanvas2D.strokeOverFill;
+begin
+  if FPathPointCount = 0 then exit;
+  FillStrokePoly(slice(FPathPoints,FPathPointCount),false);
 end;
 
 procedure TBGRACanvas2D.clearPath;

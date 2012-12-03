@@ -26,6 +26,8 @@ function BGRATextSize(Font: TFont; Quality: TBGRAFontQuality; s: string; CustomA
 function BGRAOriginalTextSize(Font: TFont; Quality: TBGRAFontQuality; s: string; CustomAntialiasingLevel: integer): TSize;
 
 function GetFontHeightSign(AFont: TFont): integer;
+function FontEmHeightSign: integer;
+function FontFullHeightSign: integer;
 
 procedure BGRAFillClearTypeMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner = nil; RGBOrder: boolean=true);
 procedure BGRAFillClearTypeRGBMask(dest: TBGRACustomBitmap; x,y: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner = nil; KeepRGBOrder: boolean=true);
@@ -241,6 +243,25 @@ begin
     FontHeightSignValue := -1;
   FontHeightSignComputed := true;
   result := FontHeightSignValue;
+end;
+
+function FontEmHeightSign: integer;
+var f: TFont;
+begin
+  if FontHeightSignComputed then
+  begin
+    result := FontHeightSignValue;
+    exit;
+  end;
+  f:= TFont.Create;
+  f.Name := 'Arial';
+  result := GetFontHeightSign(f);
+  f.Free;
+end;
+
+function FontFullHeightSign: integer;
+begin
+  result := -FontEmHeightSign;
 end;
 
 procedure BGRAFillClearTypeMask(dest: TBGRACustomBitmap; x,y: integer; xThird: integer; mask: TBGRACustomBitmap; color: TBGRAPixel; texture: IBGRAScanner; RGBOrder: boolean);

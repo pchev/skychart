@@ -5,7 +5,7 @@ unit BGRALayers;
 interface
 
 uses
-  Classes, SysUtils, Types, Graphics, BGRABitmapTypes, BGRABitmap;
+  Graphics, Classes, SysUtils, Types, BGRABitmapTypes, BGRABitmap;
 
 type
   TBGRACustomLayeredBitmap = class;
@@ -16,7 +16,7 @@ type
 
   { TBGRACustomLayeredBitmap }
 
-  TBGRACustomLayeredBitmap = class
+  TBGRACustomLayeredBitmap = class(TGraphic)
   private
     FFrozenRange: array of record
       firstLayer,lastLayer: integer;
@@ -29,8 +29,6 @@ type
     procedure SetLinearBlend(AValue: boolean);
 
   protected
-    function GetWidth: integer; virtual; abstract;
-    function GetHeight: integer; virtual; abstract;
     function GetNbLayers: integer; virtual; abstract;
     function GetBlendOperation(Layer: integer): TBlendOperation; virtual; abstract;
     function GetLayerVisible(layer: integer): boolean; virtual; abstract;
@@ -43,18 +41,25 @@ type
     procedure SetLayerFrozen(layer: integer; AValue: boolean); virtual;
     function RangeIntersect(first1,last1,first2,last2: integer): boolean;
     procedure RemoveFrozenRange(index: integer);
+    function ContainsFrozenRange(first,last: integer): boolean;
+    function GetEmpty: boolean; override;
+    procedure SetWidth(Value: Integer); override;
+    procedure SetHeight(Value: Integer); override;
+    function GetTransparent: Boolean; override;
+    procedure SetTransparent(Value: Boolean); override;
 
   public
-    procedure LoadFromFile(filename: string); virtual; abstract;
-    procedure LoadFromStream(stream: TStream); virtual; abstract;
-    procedure SaveToFile(filename: string); virtual;
-    constructor Create; virtual;
+    procedure SaveToFile(const filename: string); override;
+    procedure SaveToStream(Stream: TStream); override;
+    constructor Create; override;
     destructor Destroy; override;
-    procedure Clear; virtual; abstract;
     function ToString: ansistring; override;
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; virtual; abstract;
     function ComputeFlatImage: TBGRABitmap; overload;
     function ComputeFlatImage(firstLayer, lastLayer: integer): TBGRABitmap; overload;
+    function ComputeFlatImage(ARect: TRect): TBGRABitmap; overload;
+    function ComputeFlatImage(ARect: TRect; firstLayer, lastLayer: integer): TBGRABitmap; overload;
+    procedure Draw(ACanvas: TCanvas; const Rect: TRect); override; overload;
     procedure Draw(Canvas: TCanvas; x,y: integer); overload;
     procedure Draw(Canvas: TCanvas; x,y: integer; firstLayer, lastLayer: integer); overload;
     procedure Draw(Dest: TBGRABitmap; x,y: integer); overload;
@@ -67,8 +72,6 @@ type
     procedure Unfreeze(layer: integer); overload;
     procedure Unfreeze(firstLayer, lastLayer: integer); overload;
 
-    property Width : integer read GetWidth;
-    property Height: integer read GetHeight;
     property NbLayers: integer read GetNbLayers;
     property BlendOperation[layer: integer]: TBlendOperation read GetBlendOperation;
     property LayerVisible[layer: integer]: boolean read GetLayerVisible;
@@ -121,13 +124,13 @@ type
     function GetLayerBitmapDirectly(layer: integer): TBGRABitmap; override;
 
   public
-    procedure LoadFromFile(filename: string); override;
+    procedure LoadFromFile(const filename: string); override;
     procedure LoadFromStream(stream: TStream); override;
     procedure SetSize(AWidth, AHeight: integer); virtual;
     procedure Clear; override;
     procedure RemoveLayer(index: integer);
     procedure InsertLayer(index: integer; fromIndex: integer);
-    procedure Assign(ASource: TBGRACustomLayeredBitmap; ASharedLayerIds: boolean = false);
+    procedure Assign(ASource: TBGRACustomLayeredBitmap; ASharedLayerIds: boolean = false); overload;
     function MoveLayerUp(index: integer): integer;
     function MoveLayerDown(index: integer): integer;
     function AddLayer(Source: TBGRABitmap; Opacity: byte = 255): integer; overload;
@@ -179,7 +182,26 @@ type
 procedure RegisterLayeredBitmapWriter(AExtension: string; AWriter: TBGRALayeredBitmapClass);
 procedure RegisterLayeredBitmapReader(AExtension: string; AReader: TBGRACustomLayeredBitmapClass);
 
+type
+  TOnLayeredBitmapLoadStartProc = procedure(AFilename: string) of object;
+  TOnLayeredBitmapLoadProgressProc = procedure(APercentage: integer) of object;
+  TOnLayeredBitmapLoadedProc = procedure() of object;
+
+procedure OnLayeredBitmapLoadFromStreamStart;
+procedure OnLayeredBitmapLoadStart(AFilename: string);
+procedure OnLayeredBitmapLoadProgress(APercentage: integer);
+procedure OnLayeredBitmapLoaded();
+procedure RegisterLoadingHandler(AStart: TOnLayeredBitmapLoadStartProc; AProgress: TOnLayeredBitmapLoadProgressProc;
+     ADone: TOnLayeredBitmapLoadedProc);
+procedure UnregisterLoadingHandler(AStart: TOnLayeredBitmapLoadStartProc; AProgress: TOnLayeredBitmapLoadProgressProc;
+     ADone: TOnLayeredBitmapLoadedProc);
+
 implementation
+
+var
+  OnLayeredBitmapLoadStartProc: TOnLayeredBitmapLoadStartProc;
+  OnLayeredBitmapLoadProgressProc: TOnLayeredBitmapLoadProgressProc;
+  OnLayeredBitmapLoadedProc: TOnLayeredBitmapLoadedProc;
 
 var
   NextLayerUniqueId: cardinal;
@@ -376,7 +398,7 @@ begin
     Result:= FLayers[layer].Source;
 end;
 
-procedure TBGRALayeredBitmap.LoadFromFile(filename: string);
+procedure TBGRALayeredBitmap.LoadFromFile(const filename: string);
 var bmp: TBGRABitmap;
     index: integer;
     ext: string;
@@ -862,7 +884,44 @@ begin
   setlength(FFrozenRange,length(FFrozenRange)-1);
 end;
 
-procedure TBGRACustomLayeredBitmap.SaveToFile(filename: string);
+function TBGRACustomLayeredBitmap.ContainsFrozenRange(first, last: integer): boolean;
+var i: integer;
+begin
+  for i := 0 to high(FFrozenRange) do
+    if (FFrozenRange[i].firstLayer = first) and (FFrozenRange[i].lastLayer = last) then
+    begin
+      result := true;
+      exit;
+    end;
+  result := false;
+end;
+
+function TBGRACustomLayeredBitmap.GetEmpty: boolean;
+begin
+  result := (NbLayers = 0) and (Width = 0) and (Height = 0);
+end;
+
+procedure TBGRACustomLayeredBitmap.SetWidth(Value: Integer);
+begin
+  //nothing
+end;
+
+procedure TBGRACustomLayeredBitmap.SetHeight(Value: Integer);
+begin
+  //nothing
+end;
+
+function TBGRACustomLayeredBitmap.GetTransparent: Boolean;
+begin
+  result := true;
+end;
+
+procedure TBGRACustomLayeredBitmap.SetTransparent(Value: Boolean);
+begin
+  //nothing
+end;
+
+procedure TBGRACustomLayeredBitmap.SaveToFile(const filename: string);
 var bmp: TBGRABitmap;
     ext: string;
     temp: TBGRALayeredBitmap;
@@ -890,6 +949,11 @@ begin
   end;
 end;
 
+procedure TBGRACustomLayeredBitmap.SaveToStream(Stream: TStream);
+begin
+  raise exception.Create('Not implemented');
+end;
+
 constructor TBGRACustomLayeredBitmap.Create;
 begin
   FFrozenRange := nil;
@@ -911,7 +975,18 @@ end;
 
 function TBGRACustomLayeredBitmap.ComputeFlatImage: TBGRABitmap;
 begin
-  result := ComputeFlatImage(0, NbLayers - 1);
+  result := ComputeFlatImage(rect(0,0,Width,Height), 0, NbLayers - 1);
+end;
+
+function TBGRACustomLayeredBitmap.ComputeFlatImage(firstLayer,
+  lastLayer: integer): TBGRABitmap;
+begin
+  result := ComputeFlatImage(rect(0,0,Width,Height), firstLayer,LastLayer);
+end;
+
+function TBGRACustomLayeredBitmap.ComputeFlatImage(ARect: TRect): TBGRABitmap;
+begin
+  result := ComputeFlatImage(ARect,0, NbLayers - 1);
 end;
 
 destructor TBGRACustomLayeredBitmap.Destroy;
@@ -919,14 +994,19 @@ begin
   Clear;
 end;
 
-function TBGRACustomLayeredBitmap.ComputeFlatImage(firstLayer, lastLayer: integer): TBGRABitmap;
+function TBGRACustomLayeredBitmap.ComputeFlatImage(ARect: TRect; firstLayer, lastLayer: integer): TBGRABitmap;
 var
   tempLayer: TBGRABitmap;
   i,j: integer;
   mustFreeCopy: boolean;
   op: TBlendOperation;
 begin
-  Result := TBGRABitmap.Create(Width, Height);
+  If (ARect.Right <= ARect.Left) or (ARect.Bottom <= ARect.Top) then
+  begin
+    result := TBGRABitmap.Create(0,0);
+    exit;
+  end;
+  Result := TBGRABitmap.Create(ARect.Right-ARect.Left, ARect.Bottom-ARect.Top);
   i := firstLayer;
   while i <= lastLayer do
   begin
@@ -936,11 +1016,11 @@ begin
       if j <> -1 then
       begin
         if i = 0 then
-          Result.PutImage(0,0,FFrozenRange[j].image,dmSet) else
+          Result.PutImage(-ARect.Left,-ARect.Top,FFrozenRange[j].image,dmSet) else
         if not FFrozenRange[j].linearBlend then
-          Result.PutImage(0,0,FFrozenRange[j].image,dmDrawWithTransparency)
+          Result.PutImage(-ARect.Left,-ARect.Top,FFrozenRange[j].image,dmDrawWithTransparency)
         else
-          Result.PutImage(0,0,FFrozenRange[j].image,dmLinearBlend);
+          Result.PutImage(-ARect.Left,-ARect.Top,FFrozenRange[j].image,dmLinearBlend);
         i := FFrozenRange[j].lastLayer+1;
         continue;
       end;
@@ -961,20 +1041,34 @@ begin
         op := BlendOperation[i];
         //first layer is simply the background
         if i = firstLayer then
-          Result.PutImage(x, y, tempLayer, dmSet, LayerOpacity[i])
+          Result.PutImage(x-ARect.Left, y-ARect.Top, tempLayer, dmSet, LayerOpacity[i])
         else
         //simple blend operations
         if (op = boLinearBlend) or ((op = boTransparent) and LinearBlend) then
-          Result.PutImage(x,y,tempLayer,dmLinearBlend, LayerOpacity[i]) else
+          Result.PutImage(x-ARect.Left,y-ARect.Top,tempLayer,dmLinearBlend, LayerOpacity[i]) else
         if op = boTransparent then
-          Result.PutImage(x,y,tempLayer,dmDrawWithTransparency, LayerOpacity[i])
+          Result.PutImage(x-ARect.Left,y-ARect.Top,tempLayer,dmDrawWithTransparency, LayerOpacity[i])
         else
           //complex blend operations are done in a third bitmap
-          result.BlendImageOver(x,y, tempLayer, op, LayerOpacity[i], LinearBlend);
+          result.BlendImageOver(x-ARect.Left,y-ARect.Top, tempLayer, op, LayerOpacity[i], LinearBlend);
         if mustFreeCopy then tempLayer.Free;
       end;
     end;
     inc(i);
+  end;
+end;
+
+procedure TBGRACustomLayeredBitmap.Draw(ACanvas: TCanvas; const Rect: TRect);
+var temp: TBGRABitmap;
+begin
+  if (Rect.Right <= Rect.Left) or (Rect.Bottom <= Rect.Top) then exit;
+  if (Rect.Right-Rect.Left = Width) and (Rect.Bottom-Rect.Top = Height) then
+    Draw(ACanvas, Rect.Left,Rect.Top) else
+  begin
+    temp := ComputeFlatImage;
+    BGRAReplace(temp,temp.Resample(Rect.Right-Rect.Left,Rect.Bottom-Rect.Top));
+    temp.Draw(ACanvas, Rect.Left,Rect.Top, False);
+    temp.Free;
   end;
 end;
 
@@ -1005,62 +1099,62 @@ var
   OldClipRect: TRect;
   NewClipRect: TRect;
 begin
+  OldClipRect := Dest.ClipRect;
+  NewClipRect := rect(0,0,0,0);
+  if not IntersectRect(NewClipRect,rect(AX,AY,AX+Width,AY+Height),Dest.ClipRect) then exit; //nothing to be drawn
+
   for i := firstLayer to lastLayer do
     if LayerVisible[i] and not (BlendOperation[i] in[boTransparent,boLinearBlend]) then
     begin
-      temp := ComputeFlatImage;
+      temp := ComputeFlatImage(rect(NewClipRect.Left-AX,NewClipRect.Top-AY,NewClipRect.Right-AX,NewClipRect.Bottom-AY));
       if self.LinearBlend then
-        Dest.PutImage(AX,AY,temp,dmLinearBlend)
+        Dest.PutImage(NewClipRect.Left,NewClipRect.Top,temp,dmLinearBlend)
       else
-        Dest.PutImage(AX,AY,temp,dmDrawWithTransparency);
+        Dest.PutImage(NewClipRect.Left,NewClipRect.Top,temp,dmDrawWithTransparency);
       temp.Free;
       exit;
     end;
-  OldClipRect := Dest.ClipRect;
-  NewClipRect := rect(0,0,0,0);
-  if IntersectRect(NewClipRect,rect(AX,AY,AX+Width,AY+Height),Dest.ClipRect) then
+
+  Dest.ClipRect := NewClipRect;
+  i := firstLayer;
+  while i <= lastLayer do
   begin
-    Dest.ClipRect := NewClipRect;
-    i := firstLayer;
-    while i <= lastLayer do
+    if LayerFrozen[i] then
     begin
-      if LayerFrozen[i] then
+      j := GetLayerFrozenRange(i);
+      if j <> -1 then
       begin
-        j := GetLayerFrozenRange(i);
-        if j <> -1 then
-        begin
-          if not FFrozenRange[j].linearBlend then
-            Dest.PutImage(AX,AY,FFrozenRange[j].image,dmDrawWithTransparency)
-          else
-            Dest.PutImage(AX,AY,FFrozenRange[j].image,dmLinearBlend);
-          i := FFrozenRange[j].lastLayer+1;
-          continue;
-        end;
-      end;
-      if LayerVisible[i] then
-      with LayerOffset[i] do
-      begin
-        tempLayer := GetLayerBitmapDirectly(i);
-        if tempLayer <> nil then
-          mustFreeCopy := false
+        if not FFrozenRange[j].linearBlend then
+          Dest.PutImage(AX,AY,FFrozenRange[j].image,dmDrawWithTransparency)
         else
-        begin
-          mustFreeCopy := true;
-          tempLayer := GetLayerBitmapCopy(i);
-        end;
-        if tempLayer <> nil then
-        begin
-          if (BlendOperation[i] = boTransparent) and not self.LinearBlend then //here it is specified not to use linear blending
-            Dest.PutImage(AX+x,AY+y,GetLayerBitmapDirectly(i),dmDrawWithTransparency, LayerOpacity[i])
-          else
-            Dest.PutImage(AX+x,AY+y,GetLayerBitmapDirectly(i),dmLinearBlend, LayerOpacity[i]);
-          if mustFreeCopy then tempLayer.Free;
-        end;
+          Dest.PutImage(AX,AY,FFrozenRange[j].image,dmLinearBlend);
+        i := FFrozenRange[j].lastLayer+1;
+        continue;
       end;
-      inc(i);
     end;
-    Dest.ClipRect := OldClipRect;
+    if LayerVisible[i] then
+    with LayerOffset[i] do
+    begin
+      tempLayer := GetLayerBitmapDirectly(i);
+      if tempLayer <> nil then
+        mustFreeCopy := false
+      else
+      begin
+        mustFreeCopy := true;
+        tempLayer := GetLayerBitmapCopy(i);
+      end;
+      if tempLayer <> nil then
+      begin
+        if (BlendOperation[i] = boTransparent) and not self.LinearBlend then //here it is specified not to use linear blending
+          Dest.PutImage(AX+x,AY+y,GetLayerBitmapDirectly(i),dmDrawWithTransparency, LayerOpacity[i])
+        else
+          Dest.PutImage(AX+x,AY+y,GetLayerBitmapDirectly(i),dmLinearBlend, LayerOpacity[i]);
+        if mustFreeCopy then tempLayer.Free;
+      end;
+    end;
+    inc(i);
   end;
+  Dest.ClipRect := OldClipRect;
 end;
 
 procedure TBGRACustomLayeredBitmap.FreezeExceptOneLayer(layer: integer);
@@ -1089,6 +1183,9 @@ procedure TBGRACustomLayeredBitmap.Freeze(firstLayer, lastLayer: integer);
       if LayerVisible[i] and (LayerOpacity[i] > 0) then nbVisible += 1;
     if nbvisible < 2 then exit;  //at least 2 frozen layers
 
+    if ContainsFrozenRange(first,last) then exit; //already frozen
+    Unfreeze(first,last);
+
     computedImage := ComputeFlatImage(first,last); //must compute before layers are considered as frozen
     setlength(FFrozenRange, length(FFrozenRange)+1);
     with FFrozenRange[high(FFrozenRange)] do
@@ -1102,23 +1199,14 @@ procedure TBGRACustomLayeredBitmap.Freeze(firstLayer, lastLayer: integer);
       SetLayerFrozen(i,True);
   end;
 
-var i,j: integer;
+var j: integer;
   start: integer;
   linear,nextLinear: boolean;
 begin
-  for i := 0 to high(FFrozenRange) do
-    if RangeIntersect(firstLayer,lastLayer,FFrozenRange[i].firstLayer,FFrozenRange[i].lastLayer) then
-    begin
-      if (FFrozenRange[i].firstLayer <> firstLayer) or (FFrozenRange[i].lastLayer <> lastLayer) then
-      begin
-        Unfreeze(firstLayer,lastLayer);
-        break;
-      end;
-    end;
   start := -1;
   linear := false; //to avoid hint
   for j := firstlayer to lastLayer do
-  if not LayerFrozen[j] and ((BlendOperation[j] in [boTransparent,boLinearBlend]) or (start= 0)) then
+  if (BlendOperation[j] in [boTransparent,boLinearBlend]) or (start = 0) or ((firstlayer= 0) and (j=0)) then
   begin
     nextLinear := (BlendOperation[j] = boLinearBlend) or self.LinearBlend;
     if start = -1 then
@@ -1177,6 +1265,46 @@ begin
     extension:= AExtension;
     theClass := AReader;
   end;
+end;
+
+procedure OnLayeredBitmapLoadFromStreamStart;
+begin
+  OnLayeredBitmapLoadStart('<Stream>');
+end;
+
+procedure OnLayeredBitmapLoadStart(AFilename: string);
+begin
+  if Assigned(OnLayeredBitmapLoadStartProc) then
+    OnLayeredBitmapLoadStartProc(AFilename);
+end;
+
+procedure OnLayeredBitmapLoadProgress(APercentage: integer);
+begin
+  if Assigned(OnLayeredBitmapLoadProgressProc) then
+    OnLayeredBitmapLoadProgressProc(APercentage);
+end;
+
+procedure OnLayeredBitmapLoaded;
+begin
+  if Assigned(OnLayeredBitmapLoadedProc) then
+    OnLayeredBitmapLoadedProc();
+end;
+
+procedure RegisterLoadingHandler(AStart: TOnLayeredBitmapLoadStartProc;
+  AProgress: TOnLayeredBitmapLoadProgressProc; ADone: TOnLayeredBitmapLoadedProc
+  );
+begin
+  OnLayeredBitmapLoadProgressProc:= AProgress;
+  OnLayeredBitmapLoadStartProc := AStart;
+  OnLayeredBitmapLoadedProc:= ADone;
+end;
+
+procedure UnregisterLoadingHandler(AStart: TOnLayeredBitmapLoadStartProc;
+  AProgress: TOnLayeredBitmapLoadProgressProc; ADone: TOnLayeredBitmapLoadedProc);
+begin
+  if OnLayeredBitmapLoadProgressProc = AProgress then OnLayeredBitmapLoadProgressProc := nil;
+  if OnLayeredBitmapLoadStartProc = AStart then OnLayeredBitmapLoadStartProc := nil;
+  if OnLayeredBitmapLoadedProc = ADone then OnLayeredBitmapLoadedProc := nil;
 end;
 
 procedure RegisterLayeredBitmapWriter(AExtension: string; AWriter: TBGRALayeredBitmapClass);

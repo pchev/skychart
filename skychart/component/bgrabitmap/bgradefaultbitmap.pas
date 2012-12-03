@@ -244,6 +244,8 @@ type
     procedure DrawPolygonAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); override;
     procedure DrawPolygonAntialias(const points: array of TPointF; texture: IBGRAScanner; w: single); override;
 
+    procedure EraseLine(x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean); override;
+    procedure EraseLineAntialias(x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean); override;
     procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single); override;
     procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single; Closed: boolean); override;
     procedure ErasePolyLineAntialias(const points: array of TPointF; alpha: byte; w: single); override;
@@ -392,6 +394,7 @@ type
     function Equals(comp: TBGRAPixel): boolean; override;
     function GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; override;
     function GetImageBounds(Channels: TChannels): TRect; override;
+    function GetDifferenceBounds(ABitmap: TBGRACustomBitmap): TRect; override;
     function MakeBitmapCopy(BackgroundColor: TColor): TBitmap; override;
 
     function Resample(newWidth, newHeight: integer;
@@ -2053,6 +2056,18 @@ procedure TBGRADefaultBitmap.DrawPolygonAntialias(
   const points: array of TPointF; texture: IBGRAScanner; w: single);
 begin
   BGRAPolyLine(self,points,w,BGRAPixelTransparent,LineCap,JoinStyle,FCustomPenStyle,[plCycle],texture,JoinMiterLimit);
+end;
+
+procedure TBGRADefaultBitmap.EraseLine(x1, y1, x2, y2: integer; alpha: byte;
+  DrawLastPixel: boolean);
+begin
+  BGRAEraseLineAliased(self,x1,y1,x2,y2,alpha,DrawLastPixel);
+end;
+
+procedure TBGRADefaultBitmap.EraseLineAntialias(x1, y1, x2, y2: integer;
+  alpha: byte; DrawLastPixel: boolean);
+begin
+  BGRAEraseLineAntialias(self,x1,y1,x2,y2,alpha,DrawLastPixel);
 end;
 
 procedure TBGRADefaultBitmap.EraseLineAntialias(x1, y1, x2, y2: single;
@@ -4567,6 +4582,60 @@ begin
   for c := low(TChannel) to high(TChannel) do
     if c in Channels then
       UnionRect(result,result,GetImageBounds(c));
+end;
+
+function TBGRADefaultBitmap.GetDifferenceBounds(ABitmap: TBGRACustomBitmap): TRect;
+var
+  minx, miny, maxx, maxy: integer;
+  xb, yb: integer;
+  p, p2:  PBGRAPixel;
+begin
+  if (ABitmap.Width <> Width) or (ABitmap.Height <> Height) then
+  begin
+    result := rect(0,0,Width,Height);
+    if ABitmap.Width > result.Right then result.Right := ABitmap.Width;
+    if ABitmap.Height > result.bottom then result.bottom := ABitmap.Height;
+    exit;
+  end;
+  maxx := -1;
+  maxy := -1;
+  minx := self.Width;
+  miny := self.Height;
+  for yb := 0 to self.Height - 1 do
+  begin
+    p := self.ScanLine[yb];
+    p2 := ABitmap.ScanLine[yb];
+    for xb := 0 to self.Width - 1 do
+    begin
+      if p^ <> p2^ then
+      begin
+        if xb < minx then
+          minx := xb;
+        if yb < miny then
+          miny := yb;
+        if xb > maxx then
+          maxx := xb;
+        if yb > maxy then
+          maxy := yb;
+      end;
+      Inc(p);
+      Inc(p2);
+    end;
+  end;
+  if minx > maxx then
+  begin
+    Result.left   := 0;
+    Result.top    := 0;
+    Result.right  := 0;
+    Result.bottom := 0;
+  end
+  else
+  begin
+    Result.left   := minx;
+    Result.top    := miny;
+    Result.right  := maxx + 1;
+    Result.bottom := maxy + 1;
+  end;
 end;
 
 { Make a copy of the transparent bitmap to a TBitmap with a background color

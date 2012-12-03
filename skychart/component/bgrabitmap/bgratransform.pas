@@ -13,6 +13,23 @@ type
   { Contains an affine matrix, i.e. a matrix to transform linearly and translate TPointF coordinates }
   TAffineMatrix = array[1..2,1..3] of single;
 
+  { TAffineBox }
+
+  TAffineBox = object
+  private
+    function GetAsPolygon: ArrayOfTPointF;
+    function GetBottomRight: TPointF;
+    function GetIsEmpty: boolean;
+  public
+    TopLeft, TopRight,
+    BottomLeft: TPointF;
+    function EmptyBox: TAffineBox;
+    function AffineBox(ATopLeft, ATopRight, ABottomLeft: TPointF): TAffineBox;
+    property BottomRight: TPointF read GetBottomRight;
+    property IsEmpty: boolean read GetIsEmpty;
+    property AsPolygon: ArrayOfTPointF read GetAsPolygon;
+  end;
+
   { TBGRAAffineScannerTransform allow to transform any scanner. To use it,
     create this object with a scanner as parameter, call transformation
     procedures, and finally, use the newly created object as a scanner.
@@ -123,6 +140,9 @@ function AffineMatrixTranslation(OfsX,OfsY: Single): TAffineMatrix;
 
 //define a scaling matrix
 function AffineMatrixScale(sx,sy: single): TAffineMatrix;
+
+//define a linear matrix
+function AffineMatrixLinear(v1,v2: TPointF): TAffineMatrix;
 
 //define a rotation matrix (positive radians are counter clock wise)
 function AffineMatrixRotationRad(Angle: Single): TAffineMatrix;
@@ -287,6 +307,12 @@ begin
                          0,  sy, 0);
 end;
 
+function AffineMatrixLinear(v1,v2: TPointF): TAffineMatrix;
+begin
+  result := AffineMatrix(v1.x, v2.x, 0,
+                         v1.y, v2.y, 0);
+end;
+
 function AffineMatrixRotationRad(Angle: Single): TAffineMatrix;
 begin
   result := AffineMatrix(cos(Angle),  sin(Angle), 0,
@@ -307,6 +333,40 @@ end;
 function IsAffineMatrixOrthogonal(M: TAffineMatrix): boolean;
 begin
   result := PointF(M[1,1],M[2,1])*PointF(M[1,2],M[2,2]) = 0;
+end;
+
+{ TAffineBox }
+
+function TAffineBox.GetAsPolygon: ArrayOfTPointF;
+begin
+  result := PointsF([TopLeft,TopRight,BottomRight,BottomLeft]);
+end;
+
+function TAffineBox.GetBottomRight: TPointF;
+begin
+  if IsEmpty then
+    result := EmptyPointF
+  else
+    result := TopRight + (BottomLeft-TopLeft);
+end;
+
+function TAffineBox.GetIsEmpty: boolean;
+begin
+  result := isEmptyPointF(TopRight) or isEmptyPointF(BottomLeft) or isEmptyPointF(TopLeft);
+end;
+
+function TAffineBox.EmptyBox: TAffineBox;
+begin
+  result.TopLeft := EmptyPointF;
+  result.TopRight := EmptyPointF;
+  result.BottomLeft := EmptyPointF;
+end;
+
+function TAffineBox.AffineBox(ATopLeft, ATopRight, ABottomLeft: TPointF): TAffineBox;
+begin
+  result.TopLeft := ATopLeft;
+  result.TopRight := ATopRight;
+  result.BottomLeft := ABottomLeft;
 end;
 
 { TBGRAScannerOffset }

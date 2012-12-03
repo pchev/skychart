@@ -97,6 +97,7 @@ const
   boGlowMask = boGlow;
   boLinearMultiply = boMultiply;
   boNonLinearOverlay = boDarkOverlay;
+  EmptyRect : TRect = (left:0; top:0; right:0; bottom: 0);
 
 const
   BlendOperationStr : array[TBlendOperation] of string =
@@ -148,6 +149,11 @@ type
     x,y,z: single;
   end;
 
+  TBGRATypeWriterAlignment = (twaTopLeft, twaTop, twaTopRight,
+                              twaLeft, twaMiddle, twaRight,
+                              twaBottomLeft, twaBottom, twaBottomRight);
+  TBGRATypeWriterOutlineMode = (twoPath, twoFill, twoStroke, twoFillOverStroke, twoStrokeOverFill, twoFillThenStroke, twoStrokeThenFill);
+
 function ConcatPointsF(const APolylines: array of ArrayOfTPointF): ArrayOfTPointF;
 
 function Point3D(x,y,z: single): TPoint3D;
@@ -162,6 +168,7 @@ procedure Normalize3D(var v: TPoint3D); inline;
 
 function BezierCurve(origin, control1, control2, destination: TPointF) : TCubicBezierCurve; overload;
 function BezierCurve(origin, control, destination: TPointF) : TQuadraticBezierCurve; overload;
+function BezierCurve(origin, destination: TPointF) : TQuadraticBezierCurve; overload;
 
 { Useful constants }
 const
@@ -368,6 +375,9 @@ type
      procedure DrawPolyLineAntialias(const points: array of TPointF; c: TBGRAPixel; w: single; Closed: boolean); virtual; abstract; overload;
      procedure DrawPolygonAntialias(const points: array of TPointF; c: TBGRAPixel; w: single); virtual; abstract; overload;
      procedure DrawPolygonAntialias(const points: array of TPointF; texture: IBGRAScanner; w: single); virtual; abstract; overload;
+
+     procedure EraseLine(x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean); virtual; abstract;
+     procedure EraseLineAntialias(x1, y1, x2, y2: integer; alpha: byte; DrawLastPixel: boolean); virtual; abstract; overload;
      procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single); virtual; abstract; overload;
      procedure EraseLineAntialias(x1, y1, x2, y2: single; alpha: byte; w: single; Closed: boolean); virtual; abstract; overload;
      procedure ErasePolyLineAntialias(const points: array of TPointF; alpha: byte; w: single); virtual; abstract; overload;
@@ -546,6 +556,7 @@ type
      procedure ApplyMask(mask: TBGRACustomBitmap); virtual; abstract;
      function GetImageBounds(Channel: TChannel = cAlpha; ANothingValue: Byte = 0): TRect; virtual; abstract;
      function GetImageBounds(Channels: TChannels): TRect; virtual; abstract;
+     function GetDifferenceBounds(ABitmap: TBGRACustomBitmap): TRect; virtual; abstract;
      function MakeBitmapCopy(BackgroundColor: TColor): TBitmap; virtual; abstract;
 
      {Filters}
@@ -923,6 +934,14 @@ function BezierCurve(origin, control, destination: TPointF
 begin
   result.p1 := origin;
   result.c := control;
+  result.p2 := destination;
+end;
+
+//straight line
+function BezierCurve(origin, destination: TPointF): TQuadraticBezierCurve;
+begin
+  result.p1 := origin;
+  result.c := (origin+destination)*0.5;
   result.p2 := destination;
 end;
 

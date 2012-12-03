@@ -2,18 +2,19 @@
   This source is only used to compile and install the package.
  }
 
-unit bgrabitmappack;
+unit BGRABitmapPack;
 
 interface
 
 uses
   BGRAAnimatedGif, BGRABitmap, BGRABitmapTypes, BGRABlend, 
   BGRACompressableBitmap, BGRADefaultBitmap, BGRADNetDeserial, BGRAFilters, 
-  BGRAGradients, BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, 
-  BGRATransform, BGRAGradientScanner, BGRAText, BGRAPolygonAliased, 
-  BGRACanvas, BGRAFillInfo, BGRAPath, BGRACanvas2D, BGRAScene3D, BGRATextFX, 
-  BGRAPhongTypes, BGRALayers, BGRASSE, BGRAMatrix3D, BGRAColorInt, 
-  BGRACoordPool3D, BGRAOpenRaster, LazarusPackageIntf;
+  BGRAPaintNet, BGRAPolygon, BGRAResample, BGRAPen, BGRATransform, 
+  BGRAGradientScanner, BGRAText, BGRAPolygonAliased, BGRACanvas, BGRAFillInfo, 
+  BGRAPath, BGRACanvas2D, BGRAScene3D, BGRATextFX, BGRAPhongTypes, BGRALayers, 
+  BGRASSE, BGRAMatrix3D, BGRAColorInt, BGRACoordPool3D, BGRAOpenRaster, 
+  BGRAFreeType, BGRAGradients, BGRASliceScaling, BGRAVectorize, 
+  BGRATypewriter, LazarusPackageIntf;
 
 implementation
 
@@ -22,5 +23,5 @@ begin
 end;
 
 initialization
-  RegisterPackage('bgrabitmappack', @Register);
+  RegisterPackage('BGRABitmapPack', @Register);
 end.

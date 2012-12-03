@@ -125,6 +125,7 @@ end;
 procedure TBGRAGtkBitmap.DrawTransparent(ACanvas: TCanvas; Rect: TRect);
 var DrawWidth,DrawHeight: integer;
     stretched: TBGRAGtkBitmap;
+    P: TPoint;
 begin
   DrawWidth := Rect.Right-Rect.Left;
   DrawHeight := Rect.Bottom-Rect.Top;
@@ -140,14 +141,18 @@ begin
   end;
 
   SwapRedBlue;
+  
+  P := Rect.TopLeft;
+  DpToLP(ACanvas.Handle, P, 1);
   gdk_pixbuf_render_to_drawable(FPixBuf,
     TGtkDeviceContext(ACanvas.Handle).Drawable,
     TGtkDeviceContext(ACanvas.Handle).GC,
     0,0,
-    TGtkDeviceContext(ACanvas.Handle).Offset.X+Rect.Left,
-    TGtkDeviceContext(ACanvas.Handle).Offset.Y+Rect.Top,
+    TGtkDeviceContext(ACanvas.Handle).Offset.X + abs(P.X),
+    TGtkDeviceContext(ACanvas.Handle).Offset.Y + abs(P.Y),
     Width,Height,
-    GDK_RGB_DITHER_NORMAL,0,0);
+    GDK_RGB_DITHER_NORMAL,0,0);   
+
   SwapRedBlue;
 end;
 
@@ -263,6 +268,7 @@ var
   subBmp: TBGRACustomBitmap;
   subRect: TRect;
   cw,ch: integer;
+  P: TPoint;
 begin
   cw := CanvasSource.Width;
   ch := CanvasSource.Height;
@@ -288,11 +294,13 @@ begin
     exit;
   end;
 
+  P := Point(x,y);
+  DpToLP(CanvasSource.Handle, P, 1);
   gdk_pixbuf_get_from_drawable(FPixBuf,
     TGtkDeviceContext(CanvasSource.Handle).Drawable,
     nil,
-    TGtkDeviceContext(CanvasSource.Handle).Offset.X+x,
-    TGtkDeviceContext(CanvasSource.Handle).Offset.Y+y,0,0,Width,Height);
+    TGtkDeviceContext(CanvasSource.Handle).Offset.X+abs(P.X),
+    TGtkDeviceContext(CanvasSource.Handle).Offset.Y+abs(P.Y),0,0,Width,Height);
   SwapRedBlue;
   InvalidateBitmap;
 end;

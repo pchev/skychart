@@ -13,7 +13,9 @@ type
 
   TBGRATextEffect = class
   private
+    function GetBounds: TRect;
     function GetHeight: integer;
+    function GetShadowBounds(ARadius: integer): TRect;
     function GetWidth: integer;
   protected
     FTextMask: TBGRACustomBitmap;
@@ -26,7 +28,7 @@ type
     procedure DrawMaskMulticolored(ADest: TBGRACustomBitmap; AMask: TBGRACustomBitmap; X,Y: Integer; const AColors: array of TBGRAPixel);
     procedure DrawMask(ADest: TBGRACustomBitmap; AMask: TBGRACustomBitmap; X,Y: Integer; AColor: TBGRAPixel);
     procedure DrawMask(ADest: TBGRACustomBitmap; AMask: TBGRACustomBitmap; X,Y: Integer; ATexture: IBGRAScanner);
-    procedure InternalDrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ATexture: IBGRAScanner; ARounded: Boolean);
+    function InternalDrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ATexture: IBGRAScanner; ARounded: Boolean): TRect;
     procedure Init(AText: string; Font: TFont; Antialiasing: boolean; SubOffsetX,SubOffsetY: single; GrainX, GrainY: Integer);
   public
     constructor Create(AText: string; Font: TFont; Antialiasing: boolean);
@@ -40,10 +42,10 @@ type
     procedure Draw(ADest: TBGRACustomBitmap; X, Y: integer; AColor: TBGRAPixel; AAlign: TAlignment);
     procedure Draw(ADest: TBGRACustomBitmap; X, Y: integer; ATexture: IBGRAScanner; AAlign: TAlignment);
 
-    procedure DrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ARounded: Boolean = true);
-    procedure DrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; ARounded: Boolean = true);
-    procedure DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; AAlign: TAlignment; ARounded: Boolean = true);
-    procedure DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer; Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; AAlign: TAlignment; ARounded: Boolean = true);
+    function DrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ARounded: Boolean = true): TRect;
+    function DrawShaded(ADest: TBGRACustomBitmap; X,Y: integer; Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; ARounded: Boolean = true): TRect;
+    function DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer; Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; AAlign: TAlignment; ARounded: Boolean = true): TRect;
+    function DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer; Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; AAlign: TAlignment; ARounded: Boolean = true): TRect;
 
     procedure DrawMulticolored(ADest: TBGRACustomBitmap; X,Y: integer; const AColors: array of TBGRAPixel);
     procedure DrawMulticolored(ADest: TBGRACustomBitmap; X,Y: integer; const AColors: array of TBGRAPixel; AAlign: TAlignment);
@@ -58,6 +60,8 @@ type
     property TextMaskOffset: TPoint read FOffset;
     property Width: integer read GetWidth;
     property Height: integer read GetHeight;
+    property Bounds: TRect read GetBounds;
+    property ShadowBounds[ARadius: integer]: TRect read GetShadowBounds;
   end;
 
 function TextShadow(AWidth,AHeight: Integer; AText: String; AFontHeight: Integer; ATextColor,AShadowColor: TBGRAPixel;
@@ -278,9 +282,29 @@ end;
 
 { TBGRATextEffect }
 
+function TBGRATextEffect.GetBounds: TRect;
+begin
+  if TextMask = nil then
+    result := EmptyRect else
+  with TextMaskOffset do
+    result := rect(X,Y,X+TextMask.Width,Y+TextMask.Height);
+end;
+
 function TBGRATextEffect.GetHeight: integer;
 begin
   result := FHeight;
+end;
+
+function TBGRATextEffect.GetShadowBounds(ARadius: integer): TRect;
+begin
+  result := Bounds;
+  if (ARadius > 0) and not IsRectEmpty(result) then
+  begin
+    result.left -= ARadius;
+    result.top -= ARadius;
+    result.right += ARadius;
+    result.bottom += ARadius;
+  end;
 end;
 
 function TBGRATextEffect.GetWidth: integer;
@@ -398,9 +422,9 @@ begin
   scan.Free;
 end;
 
-procedure TBGRATextEffect.InternalDrawShaded(ADest: TBGRACustomBitmap; X,
-  Y: integer; Shader: TCustomPhongShading;
-  Altitude: integer; AColor: TBGRAPixel; ATexture: IBGRAScanner; ARounded: Boolean);
+function TBGRATextEffect.InternalDrawShaded(ADest: TBGRACustomBitmap; X,
+  Y: integer; Shader: TCustomPhongShading; Altitude: integer;
+  AColor: TBGRAPixel; ATexture: IBGRAScanner; ARounded: Boolean): TRect;
 var
   WithMargin,Map: TBGRACustomBitmap;
   p: PBGRAPixel;
@@ -408,7 +432,11 @@ var
   v,blurRadius: single;
   iBlurRadius: integer;
 begin
-  if FTextMask = nil then exit;
+  if FTextMask = nil then
+  begin
+    result := EmptyRect;
+    exit;
+  end;
 
   if (FShadingMask <> nil) and ((FShadingAltitude <> Altitude) or (FShadingRounded <> ARounded)) then
     FreeAndNil(FShadingMask);
@@ -466,6 +494,7 @@ begin
     Shader.DrawScan(ADest,FShadingMask,Altitude,X+FOffset.X,Y+FOffset.Y, ATexture)
   else
     Shader.Draw(ADest,FShadingMask,Altitude,X+FOffset.X,Y+FOffset.Y, AColor);
+  result := rect(X+FOffset.X,Y+FOffset.Y, X+FOffset.X+FShadingMask.Width,Y+FOffset.Y+FShadingMask.Height);
 end;
 
 procedure TBGRATextEffect.Draw(ADest: TBGRACustomBitmap; X, Y: integer;
@@ -488,35 +517,43 @@ begin
   end;
 end;
 
-procedure TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
-  Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; ARounded: Boolean);
+function TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
+  Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel;
+  ARounded: Boolean): TRect;
 begin
-  InternalDrawShaded(ADest,X,Y,Shader,Altitude,AColor,nil,ARounded);
+  result := InternalDrawShaded(ADest,X,Y,Shader,Altitude,AColor,nil,ARounded);
 end;
 
-procedure TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
-  Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; ARounded: Boolean);
+function TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
+  Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner;
+  ARounded: Boolean): TRect;
 begin
-  InternalDrawShaded(ADest,X,Y,Shader,Altitude,BGRAPixelTransparent,ATexture,ARounded);
+  result := InternalDrawShaded(ADest,X,Y,Shader,Altitude,BGRAPixelTransparent,ATexture,ARounded);
 end;
 
-procedure TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
-  Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel; AAlign: TAlignment; ARounded: Boolean);
+function TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
+  Shader: TCustomPhongShading; Altitude: integer; AColor: TBGRAPixel;
+  AAlign: TAlignment; ARounded: Boolean): TRect;
 begin
   Case AAlign of
-  taLeftJustify: DrawShaded(ADest,X,Y,Shader,Altitude,AColor,ARounded);
-  taRightJustify: DrawShaded(ADest,X-Width,Y,Shader,Altitude,AColor,ARounded);
-  taCenter: DrawShaded(ADest,X-Width div 2,Y,Shader,Altitude,AColor,ARounded);
+  taLeftJustify: result := DrawShaded(ADest,X,Y,Shader,Altitude,AColor,ARounded);
+  taRightJustify: result := DrawShaded(ADest,X-Width,Y,Shader,Altitude,AColor,ARounded);
+  taCenter: result := DrawShaded(ADest,X-Width div 2,Y,Shader,Altitude,AColor,ARounded);
+  else
+    result := EmptyRect;
   end;
 end;
 
-procedure TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
-  Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner; AAlign: TAlignment; ARounded: Boolean);
+function TBGRATextEffect.DrawShaded(ADest: TBGRACustomBitmap; X, Y: integer;
+  Shader: TCustomPhongShading; Altitude: integer; ATexture: IBGRAScanner;
+  AAlign: TAlignment; ARounded: Boolean): TRect;
 begin
   Case AAlign of
-  taLeftJustify: DrawShaded(ADest,X,Y,Shader,Altitude,ATexture,ARounded);
-  taRightJustify: DrawShaded(ADest,X-Width,Y,Shader,Altitude,ATexture,ARounded);
-  taCenter: DrawShaded(ADest,X-Width div 2,Y,Shader,Altitude,ATexture,ARounded);
+  taLeftJustify: result := DrawShaded(ADest,X,Y,Shader,Altitude,ATexture,ARounded);
+  taRightJustify: result := DrawShaded(ADest,X-Width,Y,Shader,Altitude,ATexture,ARounded);
+  taCenter: result := DrawShaded(ADest,X-Width div 2,Y,Shader,Altitude,ATexture,ARounded);
+  else
+    result := EmptyRect;
   end;
 end;
 
@@ -786,7 +823,7 @@ end;
 procedure TBGRATextEffect.DrawShadow(ADest: TBGRACustomBitmap; X, Y,Radius: integer;
   AColor: TBGRAPixel);
 begin
-  if Radius = 0 then
+  if Radius <= 0 then
   begin
     Draw(ADest,X,Y,AColor);
     exit;
