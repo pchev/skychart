@@ -26,13 +26,14 @@ type
 
   TPaintDotNetFile = class(TBGRACustomLayeredBitmap)
   public
-    procedure LoadFromFile(filename: string); override;
+    procedure LoadFromFile(const filename: string); override;
     procedure LoadFromStream(stream: TStream); override;
     procedure Clear; override;
     function ToString: ansistring; override;
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; override;
     constructor Create; override;
   protected
+    procedure InternalLoadFromStream(stream: TStream);
     function GetWidth: integer; override;
     function GetHeight: integer; override;
     function GetNbLayers: integer; override;
@@ -68,9 +69,11 @@ function IsPaintDotNetFile(filename: string): boolean;
 function IsPaintDotNetStream(stream: TStream): boolean;
 function LoadPaintDotNetFile(filename: string): TBGRABitmap;
 
+procedure RegisterPaintNetFormat;
+
 implementation
 
-uses zstream, Math, graphtype;
+uses zstream, Math, graphtype, Graphics;
 
 {$hints off}
 function BEReadLongword(Stream: TStream): longword;
@@ -202,19 +205,31 @@ end;
 
 { TPaintDotNetFile }
 
-procedure TPaintDotNetFile.LoadFromFile(filename: string);
+procedure TPaintDotNetFile.LoadFromFile(const filename: string);
 var
   stream: TFileStream;
 begin
   stream := TFileStream.Create(filename, fmOpenRead);
+  OnLayeredBitmapLoadStart(filename);
   try
-    LoadFromStream(stream);
+    InternalLoadFromStream(stream);
   finally
+    OnLayeredBitmapLoaded;
     stream.Free;
   end;
 end;
 
 procedure TPaintDotNetFile.LoadFromStream(stream: TStream);
+begin
+  OnLayeredBitmapLoadFromStreamStart;
+  try
+    InternalLoadFromStream(stream);
+  finally
+    OnLayeredBitmapLoaded;
+  end;
+end;
+
+procedure TPaintDotNetFile.InternalLoadFromStream(stream: TStream);
 var
   header: packed array[0..3] of char;
   XmlHeaderSize: integer;
@@ -252,6 +267,7 @@ begin
   SetLength(LayerData, NbLayers);
   for i := 0 to NbLayers - 1 do
   begin
+    OnLayeredBitmapLoadProgress((i+1)*100 div NbLayers);
     LayerData[i] := TMemoryStream.Create;
     LoadLayer(LayerData[i], Stream, LayerDataSize(i));
   end;
@@ -298,6 +314,7 @@ begin
   Document  := nil;
   Layers    := nil;
   LinearBlend := True;
+  RegisterPaintNetFormat;
 end;
 
 procedure TPaintDotNetFile.Clear;
@@ -598,11 +615,15 @@ begin
   end;
 end;
 
-initialization
+var AlreadyRegistered: boolean;
 
+procedure RegisterPaintNetFormat;
+begin
+  if AlreadyRegistered then exit;
   ImageHandlers.RegisterImageReader ('Paint.NET image', 'pdn', TFPReaderPaintDotNet);
   RegisterLayeredBitmapReader('pdn', TPaintDotNetFile);
+  //TPicture.RegisterFileFormat('pdn', 'Paint.NET image', TPaintDotNetFile);
+  AlreadyRegistered := true;
+end;
 
 end.
-
-

@@ -8,13 +8,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearMultiplyInline(dest^.red, c.red) *
-    destalpha + c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearMultiplyInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearMultiplyInline(dest^.blue, c.blue) *
-    destalpha + c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearMultiplyInline(dest^.red, c.red);
+    dest^.green := ByteLinearMultiplyInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearMultiplyInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearMultiplyInline(dest^.red, c.red) *
+      destalpha + c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearMultiplyInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearMultiplyInline(dest^.blue, c.blue) *
+      destalpha + c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -44,10 +57,23 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := ByteAddInline(dest^.red * destalpha shr 8, c.red);
-  dest^.green := ByteAddInline(dest^.green * destalpha shr 8, c.green);
-  dest^.blue  := ByteAddInline(dest^.blue * destalpha shr 8, c.blue);
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteAddInline(dest^.red, c.red);
+    dest^.green := ByteAddInline(dest^.green, c.green);
+    dest^.blue  := ByteAddInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := ByteAddInline(dest^.red * destalpha shr 8, c.red);
+    dest^.green := ByteAddInline(dest^.green * destalpha shr 8, c.green);
+    dest^.blue  := ByteAddInline(dest^.blue * destalpha shr 8, c.blue);
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure LinearAddPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -55,10 +81,23 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := ByteLinearAddInline(dest^.red * destalpha shr 8, c.red);
-  dest^.green := ByteLinearAddInline(dest^.green * destalpha shr 8, c.green);
-  dest^.blue  := ByteLinearAddInline(dest^.blue * destalpha shr 8, c.blue);
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearAddInline(dest^.red, c.red);
+    dest^.green := ByteLinearAddInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearAddInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := ByteLinearAddInline(dest^.red * destalpha shr 8, c.red);
+    dest^.green := ByteLinearAddInline(dest^.green * destalpha shr 8, c.green);
+    dest^.blue  := ByteLinearAddInline(dest^.blue * destalpha shr 8, c.blue);
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteBurnInline(a, b: byte): byte; inline;
@@ -82,13 +121,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteBurnInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteBurnInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteBurnInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteBurnInline(dest^.red, c.red);
+    dest^.green := ByteBurnInline(dest^.green, c.green);
+    dest^.blue  := ByteBurnInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteBurnInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteBurnInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteBurnInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -114,13 +166,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteDodgeInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteDodgeInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteDodgeInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteDodgeInline(dest^.red, c.red);
+    dest^.green := ByteDodgeInline(dest^.green, c.green);
+    dest^.blue  := ByteDodgeInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteDodgeInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteDodgeInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteDodgeInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -146,13 +211,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteDivideInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteDivideInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteDivideInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteDivideInline(dest^.red, c.red);
+    dest^.green := ByteDivideInline(dest^.green, c.green);
+    dest^.blue  := ByteDivideInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteDivideInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteDivideInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteDivideInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -197,13 +275,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteReflectInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteReflectInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteReflectInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteReflectInline(dest^.red, c.red);
+    dest^.green := ByteReflectInline(dest^.green, c.green);
+    dest^.blue  := ByteReflectInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteReflectInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteReflectInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteReflectInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure GlowPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -211,13 +302,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteReflectInline(c.red, dest^.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteReflectInline(c.green, dest^.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteReflectInline(c.blue, dest^.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteReflectInline(c.red, dest^.red);
+    dest^.green := ByteReflectInline(c.green, dest^.green);
+    dest^.blue  := ByteReflectInline(c.blue, dest^.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteReflectInline(c.red, dest^.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteReflectInline(c.green, dest^.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteReflectInline(c.blue, dest^.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure NiceGlowPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -225,12 +329,25 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteReflectInline(c.red, dest^.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteReflectInline(c.green, dest^.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteReflectInline(c.blue, dest^.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
+
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteReflectInline(c.red, dest^.red);
+    dest^.green := ByteReflectInline(c.green, dest^.green);
+    dest^.blue  := ByteReflectInline(c.blue, dest^.blue);
+  end else
+  begin
+    dest^.red   := (ByteReflectInline(c.red, dest^.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteReflectInline(c.green, dest^.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteReflectInline(c.blue, dest^.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+  end;
 
   if (c.red > c.green) and (c.red > c.blue) then
     dest^.alpha := c.red else
@@ -245,13 +362,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteNonLinearReflectInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteNonLinearReflectInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteNonLinearReflectInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteNonLinearReflectInline(dest^.red, c.red);
+    dest^.green := ByteNonLinearReflectInline(dest^.green, c.green);
+    dest^.blue  := ByteNonLinearReflectInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteNonLinearReflectInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteNonLinearReflectInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteNonLinearReflectInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -280,13 +410,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteOverlayInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteOverlayInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteOverlayInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteOverlayInline(dest^.red, c.red);
+    dest^.green := ByteOverlayInline(dest^.green, c.green);
+    dest^.blue  := ByteOverlayInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteOverlayInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteOverlayInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteOverlayInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure LinearOverlayPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -294,13 +437,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearOverlayInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearOverlayInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearOverlayInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearOverlayInline(dest^.red, c.red);
+    dest^.green := ByteLinearOverlayInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearOverlayInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearOverlayInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearOverlayInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearOverlayInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteDifferenceInline(a, b: byte): byte; inline;
@@ -314,13 +470,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteDifferenceInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteDifferenceInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteDifferenceInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteDifferenceInline(dest^.red, c.red);
+    dest^.green := ByteDifferenceInline(dest^.green, c.green);
+    dest^.blue  := ByteDifferenceInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteDifferenceInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteDifferenceInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteDifferenceInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteLinearDifferenceInline(a, b: byte): byte; inline;
@@ -333,13 +502,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearDifferenceInline(dest^.red, c.red) *
-    destalpha + c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearDifferenceInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearDifferenceInline(dest^.blue, c.blue) *
-    destalpha + c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearDifferenceInline(dest^.red, c.red);
+    dest^.green := ByteLinearDifferenceInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearDifferenceInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearDifferenceInline(dest^.red, c.red) *
+      destalpha + c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearDifferenceInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearDifferenceInline(dest^.blue, c.blue) *
+      destalpha + c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteExclusionInline(a, b: byte): byte; inline;
@@ -355,13 +537,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteExclusionInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteExclusionInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteExclusionInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteExclusionInline(dest^.red, c.red);
+    dest^.green := ByteExclusionInline(dest^.green, c.green);
+    dest^.blue  := ByteExclusionInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteExclusionInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteExclusionInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteExclusionInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteLinearExclusionInline(a, b: byte): byte; inline;
@@ -374,13 +569,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearExclusionInline(dest^.red, c.red) *
-    destalpha + c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearExclusionInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearExclusionInline(dest^.blue, c.blue) *
-    destalpha + c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearExclusionInline(dest^.red, c.red);
+    dest^.green := ByteLinearExclusionInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearExclusionInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearExclusionInline(dest^.red, c.red) *
+      destalpha + c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearExclusionInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearExclusionInline(dest^.blue, c.blue) *
+      destalpha + c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteLinearSubtractInline(a, b: byte): byte; inline;
@@ -396,13 +604,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearSubtractInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearSubtractInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearSubtractInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearSubtractInline(dest^.red, c.red);
+    dest^.green := ByteLinearSubtractInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearSubtractInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearSubtractInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearSubtractInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearSubtractInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure LinearSubtractInversePixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -410,13 +631,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearSubtractInline(dest^.red, not c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearSubtractInline(dest^.green, not c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearSubtractInline(dest^.blue, not c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearSubtractInline(dest^.red, not c.red);
+    dest^.green := ByteLinearSubtractInline(dest^.green, not c.green);
+    dest^.blue  := ByteLinearSubtractInline(dest^.blue, not c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearSubtractInline(dest^.red, not c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearSubtractInline(dest^.green, not c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearSubtractInline(dest^.blue, not c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteSubtractInline(a, b: byte): byte; inline;
@@ -433,13 +667,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteSubtractInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteSubtractInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteSubtractInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteSubtractInline(dest^.red, c.red);
+    dest^.green := ByteSubtractInline(dest^.green, c.green);
+    dest^.blue  := ByteSubtractInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteSubtractInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteSubtractInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteSubtractInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteSubtractInverseInline(a, b: byte): byte; inline;
@@ -458,13 +705,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteSubtractInverseInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteSubtractInverseInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteSubtractInverseInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteSubtractInverseInline(dest^.red, c.red);
+    dest^.green := ByteSubtractInverseInline(dest^.green, c.green);
+    dest^.blue  := ByteSubtractInverseInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteSubtractInverseInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteSubtractInverseInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteSubtractInverseInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteNegationInline(a, b: byte): byte; inline;
@@ -493,13 +753,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteNegationInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteNegationInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteNegationInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteNegationInline(dest^.red, c.red);
+    dest^.green := ByteNegationInline(dest^.green, c.green);
+    dest^.blue  := ByteNegationInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteNegationInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteNegationInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteNegationInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure LinearNegationPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -507,13 +780,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLinearNegationInline(dest^.red, c.red) *
-    destalpha + c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLinearNegationInline(dest^.green, c.green) *
-    destalpha + c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLinearNegationInline(dest^.blue, c.blue) *
-    destalpha + c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLinearNegationInline(dest^.red, c.red);
+    dest^.green := ByteLinearNegationInline(dest^.green, c.green);
+    dest^.blue  := ByteLinearNegationInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLinearNegationInline(dest^.red, c.red) *
+      destalpha + c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLinearNegationInline(dest^.green, c.green) *
+      destalpha + c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLinearNegationInline(dest^.blue, c.blue) *
+      destalpha + c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteLightenInline(a, b: byte): byte; inline;
@@ -529,13 +815,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteLightenInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteLightenInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteLightenInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteLightenInline(dest^.red, c.red);
+    dest^.green := ByteLightenInline(dest^.green, c.green);
+    dest^.blue  := ByteLightenInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteLightenInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteLightenInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteLightenInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteDarkenInline(a, b: byte): byte; inline;
@@ -551,13 +850,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteDarkenInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteDarkenInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteDarkenInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteDarkenInline(dest^.red, c.red);
+    dest^.green := ByteDarkenInline(dest^.green, c.green);
+    dest^.blue  := ByteDarkenInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteDarkenInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteDarkenInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteDarkenInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 {$hints off}
@@ -572,13 +884,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ScreenByteInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ScreenByteInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ScreenByteInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ScreenByteInline(dest^.red, c.red);
+    dest^.green := ScreenByteInline(dest^.green, c.green);
+    dest^.blue  := ScreenByteInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ScreenByteInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ScreenByteInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ScreenByteInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteSoftLightInline(a,b: byte): byte; inline;
@@ -599,13 +924,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteSoftLightInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteSoftLightInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteSoftLightInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteSoftLightInline(dest^.red, c.red);
+    dest^.green := ByteSoftLightInline(dest^.green, c.green);
+    dest^.blue  := ByteSoftLightInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteSoftLightInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteSoftLightInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteSoftLightInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 function ByteHardLightInline(a,b: byte): byte; inline;
@@ -621,13 +959,26 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := (ByteHardLightInline(dest^.red, c.red) * destalpha +
-    c.red * (not destalpha)) shr 8;
-  dest^.green := (ByteHardLightInline(dest^.green, c.green) * destalpha +
-    c.green * (not destalpha)) shr 8;
-  dest^.blue  := (ByteHardLightInline(dest^.blue, c.blue) * destalpha +
-    c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := ByteHardLightInline(dest^.red, c.red);
+    dest^.green := ByteHardLightInline(dest^.green, c.green);
+    dest^.blue  := ByteHardLightInline(dest^.blue, c.blue);
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := (ByteHardLightInline(dest^.red, c.red) * destalpha +
+      c.red * (not destalpha)) shr 8;
+    dest^.green := (ByteHardLightInline(dest^.green, c.green) * destalpha +
+      c.green * (not destalpha)) shr 8;
+    dest^.blue  := (ByteHardLightInline(dest^.blue, c.blue) * destalpha +
+      c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 
 procedure BlendXorPixelInline(dest: PBGRAPixel; c: TBGRAPixel); inline;
@@ -635,10 +986,23 @@ var
   destalpha: byte;
 begin
   destalpha   := dest^.alpha;
-  dest^.red   := ((dest^.red xor c.red) * destalpha + c.red * (not destalpha)) shr 8;
-  dest^.green := ((dest^.green xor c.green) * destalpha + c.green *
-    (not destalpha)) shr 8;
-  dest^.blue  := ((dest^.blue xor c.blue) * destalpha + c.blue * (not destalpha)) shr 8;
-  dest^.alpha := c.alpha;
+  if destalpha = 0 then
+  begin
+    dest^ := c
+  end else
+  if destalpha = 255 then
+  begin
+    dest^.red := dest^.red xor c.red;
+    dest^.green := dest^.green xor c.green;
+    dest^.blue  := dest^.blue xor c.blue;
+    dest^.alpha := c.alpha;
+  end else
+  begin
+    dest^.red   := ((dest^.red xor c.red) * destalpha + c.red * (not destalpha)) shr 8;
+    dest^.green := ((dest^.green xor c.green) * destalpha + c.green *
+      (not destalpha)) shr 8;
+    dest^.blue  := ((dest^.blue xor c.blue) * destalpha + c.blue * (not destalpha)) shr 8;
+    dest^.alpha := c.alpha;
+  end;
 end;
 

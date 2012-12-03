@@ -22,7 +22,6 @@ type
     end;
     FStackXML: TXMLDocument;
     FZipInputStream: TStream;
-    function GetMimeType: string;
     procedure SetMimeType(AValue: string);
   protected
     Procedure ZipOnCreateStream(Sender : TObject; var AStream : TStream; AItem : TFullZipFileEntry);
@@ -42,12 +41,14 @@ type
     procedure ZipToFile(AFilename: string);
     procedure CopyThumbnailToMemoryStream(AMaxWidth, AMaxHeight: integer);
     procedure AnalyzeZip;
+    function GetMimeType: string; override;
 
   public
+    constructor Create; override;
     procedure Clear; override;
     procedure LoadFromStream(AStream: TStream); override;
-    procedure LoadFromFile(filename: string); override;
-    procedure SaveToFile(filename: string); override;
+    procedure LoadFromFile(const filename: string); override;
+    procedure SaveToFile(const filename: string); override;
     property MimeType : string read GetMimeType write SetMimeType;
     property StackXML : TXMLDocument read FStackXML;
   end;
@@ -60,9 +61,11 @@ type
       procedure InternalRead(Stream: TStream; Img: TFPCustomImage); override;
   end;
 
+procedure RegisterOpenRasterFormat;
+
 implementation
 
-uses XMLRead, XMLWrite, FPReadPNG, dialogs, BGRABitmapTypes, zstream;
+uses Graphics, XMLRead, XMLWrite, FPReadPNG, dialogs, BGRABitmapTypes, zstream;
 
 function IsZipStream(stream: TStream): boolean;
 var
@@ -169,6 +172,7 @@ begin
 
   for i := stackNode.ChildNodes.Length-1 downto 0 do
   begin
+    OnLayeredBitmapLoadProgress((stackNode.ChildNodes.Length-i)*100 div stackNode.ChildNodes.Length);
     layerNode:= stackNode.ChildNodes[i];
     if (layerNode.NodeName = 'layer') and Assigned(layerNode.Attributes) then
     begin
@@ -287,13 +291,18 @@ begin
 
 end;
 
-procedure TBGRAOpenRasterDocument.LoadFromFile(filename: string);
+procedure TBGRAOpenRasterDocument.LoadFromFile(const filename: string);
 begin
-  UnzipFromFile(filename);
-  AnalyzeZip;
+  OnLayeredBitmapLoadStart(filename);
+  try
+    UnzipFromFile(filename);
+    AnalyzeZip;
+  finally
+    OnLayeredBitmapLoaded;
+  end;
 end;
 
-procedure TBGRAOpenRasterDocument.SaveToFile(filename: string);
+procedure TBGRAOpenRasterDocument.SaveToFile(const filename: string);
 var i: integer;
     imageNode,stackNode,layerNode: TDOMElement;
     layerFilename,strval: string;
@@ -377,7 +386,16 @@ end;
 
 function TBGRAOpenRasterDocument.GetMimeType: string;
 begin
-  result := GetMemoryStreamAsString('mimetype');
+  if length(FFiles)=0 then
+    result := OpenRasterMimeType
+   else
+    result := GetMemoryStreamAsString('mimetype');
+end;
+
+constructor TBGRAOpenRasterDocument.Create;
+begin
+  inherited Create;
+  RegisterOpenRasterFormat;
 end;
 
 function TBGRAOpenRasterDocument.AddLayerFromMemoryStream(ALayerFilename: string): integer;
@@ -575,8 +593,13 @@ end;
 
 procedure TBGRAOpenRasterDocument.LoadFromStream(AStream: TStream);
 begin
-  UnzipFromStream(AStream);
-  AnalyzeZip;
+  OnLayeredBitmapLoadFromStreamStart;
+  try
+    UnzipFromStream(AStream);
+    AnalyzeZip;
+  finally
+    OnLayeredBitmapLoaded;
+  end;
 end;
 
 procedure TBGRAOpenRasterDocument.SetMimeType(AValue: string);
@@ -651,11 +674,17 @@ begin
   FFiles[high(FFiles)].Stream := AStream;
 end;
 
-initialization
+var AlreadyRegistered: boolean;
 
+procedure RegisterOpenRasterFormat;
+begin
+  if AlreadyRegistered then exit;
+  ImageHandlers.RegisterImageReader ('OpenRaster', 'ora', TFPReaderOpenRaster);
   RegisterLayeredBitmapReader('ora', TBGRAOpenRasterDocument);
   RegisterLayeredBitmapWriter('ora', TBGRAOpenRasterDocument);
-  ImageHandlers.RegisterImageReader ('OpenRaster', 'ora', TFPReaderOpenRaster);
+  //TPicture.RegisterFileFormat('ora', 'OpenRaster', TBGRAOpenRasterDocument);
+  AlreadyRegistered:= True;
+end;
 
 end.
 
