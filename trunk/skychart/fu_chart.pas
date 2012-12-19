@@ -1805,7 +1805,7 @@ if sc.cfgsc.TrackOn then begin
   sc.cfgsc.Trackobj:=lastobj;
   sc.cfgsc.TrackName:=lasttrname;
 end;
-if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
+if result and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
 end;
 
 procedure Tf_chart.IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
