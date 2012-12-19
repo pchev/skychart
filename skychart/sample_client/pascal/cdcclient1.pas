@@ -99,6 +99,8 @@ implementation
  uses unix,baseunix;
 {$endif}
 
+{$R *.lfm}
+
 
 // some useful functions
 Function Slash(nom : string) : string;
@@ -298,8 +300,5 @@ begin
     Execnowait(CdC+' '+param);
     StartCDC:=true;
 end;
-
-initialization
-  {$i cdcclient1.lrs}
 
 end.
