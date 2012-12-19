@@ -275,8 +275,12 @@ type
     function cmd_SetDate(dt:string):string;
     function cmd_SetObs(obs:string):string;
     function cmd_IdentCursor:string;
+    function cmd_IdentCenter:string;
+    Function cmd_IdentTelescope: string;
     function cmd_SaveImage(format,fn,quality:string):string;
     function cmd_Print(Method,Orient,Col,path:string):string;
+    function cmd_MoveScope(RA,DE:string):string;
+    function cmd_MoveScopeH(H,D:string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -1668,6 +1672,7 @@ var x,y : integer;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK then begin
+   sc.cfgsc.scopemark:=false;
    sc.plot.FlushCnv;
    identlabel.Visible:=false;
    Identlabel.Picture.Bitmap.Canvas.Brush.Color:=sc.plot.cfgplot.color[0];
@@ -2359,8 +2364,11 @@ end;
 
 procedure Tf_chart.identlabelClick(Sender: TObject);
 var ra2000,de2000: double;
+    pt:TPoint;
 begin
-if cmain.KioskMode then begin f_detail.top:=0; f_detail.left:=0; end
+pt.X:=0; pt.Y:=0;
+pt:=self.ClientToScreen(pt);
+if cmain.KioskMode then begin f_detail.Height:=450; f_detail.Width:=300; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
@@ -2385,7 +2393,7 @@ var desc,buf,buf2,otype,oname,txt: string;
     searchdir,cmd,fn: string;
     bmp: Tbitmap;
     ipla:integer;
-    i,p,l,y,m,d,precision : integer;
+    i,p,l,y,m,d,precision,ico : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
     ra,dec,q,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
@@ -2401,13 +2409,27 @@ begin
   end
   else result:=s;
 end;
+function FilterDetail(det:string):boolean;
+const filter='PA: POLEINCL: SUNINCL: EPHEMERIS: DATE: HD: BD: HIP: HR: PMRA: PMDE: PX: COMP: FL: BAYER: MI: SBR: CLASS: DESC:';
+var i:integer;
+    key:string;
+begin
+result:=false;
+i:=pos(':',det);
+if i>0 then begin
+  key:=uppercase(trim(copy(det,1,i)));
+  if pos(key,filter)>0 then result:=true;
+end;
+end;
+
 begin
 desc:=sc.cfgsc.FindDesc;
 isd2k:=(trim(sc.cfgsc.FindCat)='d2k');
 isvo:=(trim(sc.cfgsc.FindCat)='VO');
 // header
 if NightVision then txt:=html_h_nv
-               else txt:=html_h;
+  else if cmain.SimpleDetail then txt:=html_h_b
+  else txt:=html_h;
 // object type
 p:=pos(tab,desc);
 p:=pos2(tab,desc,p+1);
@@ -2498,20 +2520,50 @@ if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
         end;
   end;
 end;
-// source catalog
-if isd2k then begin
-  txt:=txt+html_b+rsFrom+blank+'Deepsky software'+':'+htms_b+html_br;
-end else if isvo then begin
-  txt:=txt+html_b+rsFrom+blank+rsVirtualObser+':'+html_br+sc.cfgsc.FindCatname+
-    htms_b+html_br;
-end else begin
-  if (sc.cfgsc.FindCat<>'')or(sc.cfgsc.FindCatname<>'') then begin
-    if sc.cfgsc.FindCat='Star' then txt:=txt+html_b+rsInformationF+':'+blank+rsStars
-      else txt:=txt+html_b+rsInformationF+':'+blank+sc.cfgsc.FindCat;
+if cmain.SimpleDetail and (otype='*') then begin
+  // star picture
+  i:=Round(sc.cfgsc.FindBV*10);
+  case i of
+        -999..-3: ico := 0;
+          -2..-1: ico := 1;
+           0..2 : ico := 2;
+           3..5 : ico := 3;
+           6..8 : ico := 4;
+           9..13: ico := 5;
+         14..900: ico := 6;
+         else ico:=2;
   end;
-  if sc.cfgsc.FindCatname<>'' then begin
-    txt:=txt+html_br+sc.cfgsc.FindCatname;
-    txt:=txt+htms_b+html_br;
+  bmp:=Tbitmap.Create;
+  bmp.SetSize(200,200);
+  bmp.Canvas.Brush.Color:=clBlack;
+  bmp.Canvas.FillRect(0,0,200,200);
+  i:=100-(sc.plot.Astarbmp[ico,0].Width div 2);
+  bmp.Canvas.Draw(i,i,sc.plot.Astarbmp[ico,0]);
+  fn:=slash(systoutf8(TempDir))+'info.bmp';
+  DeleteFileutf8(fn);
+  bmp.SaveToFile(fn);
+  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
+  try
+  finally
+  bmp.Free;
+  end;
+end;
+if not cmain.SimpleDetail then begin
+  // source catalog
+  if isd2k then begin
+    txt:=txt+html_b+rsFrom+blank+'Deepsky software'+':'+htms_b+html_br;
+  end else if isvo then begin
+    txt:=txt+html_b+rsFrom+blank+rsVirtualObser+':'+html_br+sc.cfgsc.FindCatname+
+      htms_b+html_br;
+  end else begin
+    if (sc.cfgsc.FindCat<>'')or(sc.cfgsc.FindCatname<>'') then begin
+      if sc.cfgsc.FindCat='Star' then txt:=txt+html_b+rsInformationF+':'+blank+rsStars
+        else txt:=txt+html_b+rsInformationF+':'+blank+sc.cfgsc.FindCat;
+    end;
+    if sc.cfgsc.FindCatname<>'' then begin
+      txt:=txt+html_br+sc.cfgsc.FindCatname;
+      txt:=txt+htms_b+html_br;
+    end;
   end;
 end;
 
@@ -2521,6 +2573,9 @@ repeat
   if i=0 then i:=length(buf)+1;
   buf2:=copy(buf,1,i-1);
   delete(buf,1,i);
+  if cmain.SimpleDetail then begin
+    if FilterDetail(buf2) then continue;
+  end;
   if isd2k and(copy(buf2,1,4)='Dim:') then continue;
   if isd2k and(copy(buf2,1,5)='desc:') then buf2:=copy(buf2,6,999);
   if isd2k and(copy(buf2,1,2)='n:') then buf2:=copy(buf2,3,999);
@@ -2538,82 +2593,85 @@ repeat
   txt:=txt+html_br;
 until buf='';
 
-// coordinates
-ApparentValid:=((sc.cfgsc.nutl<>0)or(sc.cfgsc.nuto<>0)) and (sc.cfgsc.abm or(sc.cfgsc.abp<>0)or(sc.cfgsc.abe<>0));
-txt:=txt+html_br+html_b+rsCoordinates+blank;
-if sc.cfgsc.CoordExpertMode then begin;
-  if sc.cfgsc.ApparentPos and ApparentValid then txt:=txt+blank+rsApparent
-     else txt:=txt+blank+rsMean;
-  txt:=txt+blank+sc.cfgsc.EquinoxName;
-end else
-  case sc.cfgsc.CoordType of
-  0: if ApparentValid then txt:=txt+blank+rsApparent else txt:=txt+blank+rsMeanOfTheDat;
-  1: txt:=txt+blank+rsMeanOfTheDat;
-  2: txt:=txt+blank+rsMeanJ2000;
-  3: txt:=txt+blank+rsAstrometricJ;
+if not cmain.SimpleDetail then begin
+  // coordinates
+  ApparentValid:=((sc.cfgsc.nutl<>0)or(sc.cfgsc.nuto<>0)) and (sc.cfgsc.abm or(sc.cfgsc.abp<>0)or(sc.cfgsc.abe<>0));
+  txt:=txt+html_br+html_b+rsCoordinates+blank;
+  if sc.cfgsc.CoordExpertMode then begin;
+    if sc.cfgsc.ApparentPos and ApparentValid then txt:=txt+blank+rsApparent
+       else txt:=txt+blank+rsMean;
+    txt:=txt+blank+sc.cfgsc.EquinoxName;
+  end else
+    case sc.cfgsc.CoordType of
+    0: if ApparentValid then txt:=txt+blank+rsApparent else txt:=txt+blank+rsMeanOfTheDat;
+    1: txt:=txt+blank+rsMeanOfTheDat;
+    2: txt:=txt+blank+rsMeanJ2000;
+    3: txt:=txt+blank+rsAstrometricJ;
+    end;
+  if isStar then begin
+     if sc.cfgsc.PMon and (not sc.cfgsc.FindPM) then txt:=txt+blank+rsNoProperMo
+     else if sc.cfgsc.PMon and (sc.cfgsc.YPmon<>0) then txt:=txt+blank+rsEpoch+': '+formatfloat(f1, sc.cfgsc.YPmon);
   end;
-if isStar then begin
-   if sc.cfgsc.PMon and (not sc.cfgsc.FindPM) then txt:=txt+blank+rsNoProperMo
-   else if sc.cfgsc.PMon and (sc.cfgsc.YPmon<>0) then txt:=txt+blank+rsEpoch+': '+formatfloat(f1, sc.cfgsc.YPmon);
-end;
-if isSolarSystem then
-   if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
-                              else txt:=txt+blank+rsGeocentric;
-txt:=txt+htms_b+html_br;
-if isArtSat then begin
-  raapp:=sc.cfgsc.FindRA;
-  deapp:=sc.cfgsc.FindDec;
-  txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+armtostr(rad2deg*raapp/15)+'   '+rsDE+':'+demtostr(rad2deg*deapp)+html_br;
-end else begin
-  // return to j2000 coord.
-  ra2000:=sc.cfgsc.FindRA2000;
-  de2000:=sc.cfgsc.FindDec2000;
-  ra2000:=NormRA(ra2000);
-  //if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
-  //precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
-  // mean of date, apply only precession
-  radate:=ra2000;
-  dedate:=de2000;
-  precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
-  if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,radate,dedate,radate,dedate,q,sc.cfgsc);
-  radate:=NormRA(radate);
-  // apparent
-  if ApparentValid then begin
-    raapp:=ra2000;
-    deapp:=de2000;
-    // apply parallax
-    if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
-    // apply precession
-    precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
-    // apply nutation, aberration, light deflection
-    apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
-    if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,raapp,deapp,raapp,deapp,q,sc.cfgsc);
-    raapp:=NormRA(raapp);
+  if isSolarSystem then
+     if sc.cfgsc.PlanetParalaxe then txt:=txt+blank+rsTopoCentric
+                                else txt:=txt+blank+rsGeocentric;
+  txt:=txt+htms_b+html_br;
+  if isArtSat then begin
+    raapp:=sc.cfgsc.FindRA;
+    deapp:=sc.cfgsc.FindDec;
+    txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+armtostr(rad2deg*raapp/15)+'   '+rsDE+':'+demtostr(rad2deg*deapp)+html_br;
+  end else begin
+    // return to j2000 coord.
+    ra2000:=sc.cfgsc.FindRA2000;
+    de2000:=sc.cfgsc.FindDec2000;
+    ra2000:=NormRA(ra2000);
+    //if sc.cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,sc.cfgsc,ipla<>11,not isSolarSystem);
+    //precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
+    // mean of date, apply only precession
+    radate:=ra2000;
+    dedate:=de2000;
+    precession(jd2000,sc.cfgsc.JDChart,radate,dedate);
+    if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,radate,dedate,radate,dedate,q,sc.cfgsc);
+    radate:=NormRA(radate);
+    // apparent
+    if ApparentValid then begin
+      raapp:=ra2000;
+      deapp:=de2000;
+      // apply parallax
+      if isStar then StarParallax(raapp,deapp,sc.cfgsc.FindPX,sc.cfgsc.EarthB);
+      // apply precession
+      precession(jd2000,sc.cfgsc.JDChart,raapp,deapp);
+      // apply nutation, aberration, light deflection
+      apparent_equatorial(raapp,deapp,sc.cfgsc,ipla<>11,not isSolarSystem);
+      if isSolarSystem and sc.cfgsc.PlanetParalaxe then Paralaxe(cst,sc.cfgsc.Finddist,raapp,deapp,raapp,deapp,q,sc.cfgsc);
+      raapp:=NormRA(raapp);
+    end;
+    // print coord.
+    if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
+    if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
+    if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
+    if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
+       txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
+    else
+       txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
   end;
-  // print coord.
-  if sc.cfgsc.CoordExpertMode then txt:=txt+rsRA+': '+arptostr(rad2deg*sc.cfgsc.FindRA/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*sc.cfgsc.FindDec, precision)+html_br;
-  if (sc.cfgsc.CoordType<=1)and ApparentValid then txt:=txt+html_b+rsApparent+blank+htms_b+rsRA+': '+arptostr(rad2deg*raapp/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*deapp, precision)+html_br;
-  if (sc.cfgsc.CoordType<=1) then txt:=txt+html_b+rsMeanOfTheDat+blank+htms_b+rsRA+': '+arptostr(rad2deg*radate/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*dedate,precision)+html_br;
-  if isStar and sc.cfgsc.PMon and sc.cfgsc.FindPM and (sc.cfgsc.YPmon=0) then
-     txt:=txt+html_b+rsAstrometricJ+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br
-  else
-     txt:=txt+html_b+rsMeanJ2000+htms_b+' '+rsRA+': '+arptostr(rad2deg*ra2000/15,precision)+'   '+rsDE+':'+deptostr(rad2deg*de2000, precision)+html_br;
+  ra:=sc.cfgsc.FindRA;
+  dec:=sc.cfgsc.FindDec;
+  Eq2Ecl(ra,dec,sc.cfgsc.ecl,a,h) ;
+  a:=rmod(a+pi2,pi2);
+  txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
+  ra:=sc.cfgsc.FindRA;
+  dec:=sc.cfgsc.FindDec;
+  if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,ipla<>11,not isSolarSystem);
+  Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
+  a:=rmod(a+pi2,pi2);
+  txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
+  txt:=txt+html_br;
 end;
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-Eq2Ecl(ra,dec,sc.cfgsc.ecl,a,h) ;
-a:=rmod(a+pi2,pi2);
-txt:=txt+html_b+rsEcliptic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
-ra:=sc.cfgsc.FindRA;
-dec:=sc.cfgsc.FindDec;
-if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,ipla<>11,not isSolarSystem);
-Eq2Gal(ra,dec,a,h,sc.cfgsc) ;
-a:=rmod(a+pi2,pi2);
-txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
-txt:=txt+html_br;
 
 // local position
 if (sc.catalog.cfgshr.Equinoxtype=2) then begin
+  if not cmain.SimpleDetail then begin
   txt:=txt+html_b+rsVisibilityFo+':'+htms_b+html_br;
   djd(cjd+(sc.cfgsc.TimeZone-sc.cfgsc.DT_UT)/24,y,m,d,h);
   txt:=txt+sc.cfgsc.ObsName+blank+Date2Str(y,m,d)+blank+ArToStr3(h)+'  ( '+TzGMT2UTC(sc.cfgsc.tz.ZoneName)+' )'+html_br;
@@ -2629,6 +2687,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
   txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
   txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
+  end;
   if (not isArtSat) then begin
     // rise/set time
     if (otype='P') then begin // planet
@@ -2660,11 +2719,11 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
     case i of
     0 : begin
         txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;
-        if trim(tazr)>'' then txt:=txt+rsAzimuth+tAzr+html_br
+        if (not cmain.SimpleDetail) and (trim(tazr)>'') then txt:=txt+rsAzimuth+tAzr+html_br
                          else txt:=txt+html_br;
         txt:=txt+html_b+rsCulmination+':'+htms_b+tht+blank+tculmalt+html_br;
         txt:=txt+html_b+rsSet+':'+htms_b+ths+blank;
-        if trim(tazs)>'' then txt:=txt+rsAzimuth+tAzs+html_br
+        if (not cmain.SimpleDetail) and (trim(tazs)>'') then txt:=txt+rsAzimuth+tAzs+html_br
                          else txt:=txt+html_br;
         end;
     1 : begin
@@ -2678,6 +2737,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   end;
 end;
 
+if not cmain.SimpleDetail then begin
 // other notes
 buf:=sc.cfgsc.FindNote;
 if buf>'' then begin
@@ -2695,6 +2755,9 @@ if buf>'' then begin
     txt:=txt+buf2+html_br;
   until buf='';
 end;
+end;
+
+if not cmain.SimpleDetail then begin
 if (not isArtSat)and(not isSolarSystem) then begin
   // external links
   txt:=txt+html_br+html_b+rsMoreInformat+':'+htms_b+html_br;
@@ -2708,6 +2771,7 @@ if (not isArtSat)and(not isSolarSystem) then begin
     txt:=txt+'<a href="'+inttostr(i+infoname_maxurl)+'">'+infocoord_url[i,2]+'</a>,'+blank;
   end;
   txt:=txt+html_br;
+end;
 end;
 result:=txt+html_br+htms_h;
 end;
@@ -3061,6 +3125,42 @@ begin
 result:=msgOK+blank+Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+'T'+ArToStr3(sc.cfgsc.Curtime);
 end;
 
+function Tf_chart.cmd_MoveScope(RA,DE:string):string;
+var r,d: double;
+begin
+r:=StrToFloatDef(RA,9999);
+d:=StrToFloatDef(DE,9999);
+if (abs(r)<=360)and(abs(d)<=90) then begin
+ d:=deg2rad*d;
+ r:=deg2rad*r;
+ sc.cfgsc.TrackOn:=true;
+ sc.cfgsc.TrackType:=6;
+ sc.cfgsc.TrackName:=rsTelescope;
+ sc.cfgsc.scopelock:=false;
+ if sc.TelescopeMove(r,d) then Refresh;
+ result:=msgOK;
+end
+else result:=msgFailed+' out of range';
+end;
+
+function Tf_chart.cmd_MoveScopeH(H,D:string):string;
+var hh,dd,ra,de: double;
+begin
+hh:=StrToFloatDef(H,9999);
+dd:=StrToFloatDef(D,9999);
+if (abs(hh)<=180)and(abs(dd)<=90) then begin
+ de:=deg2rad*dd;
+ ra:=sc.cfgsc.CurST-deg2rad*hh;
+ sc.cfgsc.TrackOn:=true;
+ sc.cfgsc.TrackType:=6;
+ sc.cfgsc.TrackName:=rsTelescope;
+ sc.cfgsc.scopelock:=false;
+ if sc.TelescopeMove(ra,de) then Refresh;
+ result:=msgOK;
+end
+else result:=msgFailed+' out of range';
+end;
+
 function Tf_chart.cmd_SetObs(obs:string):string;
 var n,buf : string;
     p,tz : integer;
@@ -3199,6 +3299,34 @@ if p=0 then buf:=yy
 y:=strtoint(trim(buf));
 if identxy(x,y) then result:=msgOK
    else result:=msgFailed+' No object found!';
+end;
+
+Function Tf_chart.cmd_IdentCenter: string;
+begin
+if identxy(sc.cfgsc.Xcentre,sc.cfgsc.Ycentre,true,true) then begin
+  if sc.cfgsc.FindOK then identlabelClick(self);
+  result:=msgOK
+end
+else result:=msgFailed+' No object found!';
+end;
+
+Function Tf_chart.cmd_IdentTelescope: string;
+var x,y : integer;
+    x1,y1: double;
+    xx,yy: single;
+begin
+projection(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,x1,y1,false,sc.cfgsc) ;
+WindowXY(x1,y1,xx,yy,sc.cfgsc);
+x:=round(xx);
+y:=round(yy);
+if identxy(x,y,true,false) then begin
+  if sc.cfgsc.FindOK then identlabelClick(self);
+  result:=msgOK
+end
+else begin
+  f_detail.Hide;
+  result:=msgFailed+' No object found!';
+end;
 end;
 
 Procedure Tf_chart.cmd_GoXY(xx,yy : string);
@@ -3395,6 +3523,10 @@ case n of
  80 : result:=cmd_resize(arg[1],arg[2]);
  81 : result:=cmd_print(arg[1],arg[2],arg[3],arg[4]);
  82 : result:=sc.cfgsc.FindName+blank+sc.cfgsc.FindDesc2;
+ 83 : result:=cmd_MoveScope(arg[1],arg[2]);
+ 84 : result:=cmd_MoveScopeH(arg[1],arg[2]);
+ 85 : result:=cmd_IdentCenter;
+ 86 : result:=cmd_IdentTelescope;
 else result:=msgFailed+' Bad command name';
 end;
 end;

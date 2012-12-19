@@ -5226,6 +5226,7 @@ cfgm.ThemeName:=ReadString(section,'Theme',cfgm.ThemeName);
 cfgm.KioskPass:=ReadString(section,'KioskPass','');
 cfgm.KioskDebug:=ReadBool(section,'KioskDebug',false);
 cfgm.KioskMode:=(cfgm.KioskPass>'');
+cfgm.SimpleDetail:=cfgm.KioskMode;
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 buf:=ReadString(section,'ConstLfile',cfgm.ConstLfile);

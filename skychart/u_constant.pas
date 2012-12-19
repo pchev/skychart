@@ -800,7 +800,7 @@ type
     TimeZone, DT_UT, CurST, CurJDTT, CurJDUT, LastJD, jd0,
     JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
     ScopeDec, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
-    FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist: double;
+    FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV: double;
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
     FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, ConstFullLabel, ConstLatinLabel,
     ScopeMark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
@@ -911,7 +911,7 @@ type
     AnimSize, VOurl, VOmaxrecord: integer;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
-    TextOnlyDetail, KioskMode, KioskDebug: boolean;
+    TextOnlyDetail, SimpleDetail, KioskMode, KioskDebug: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
     AnimOpt, Animffmpeg: string;
@@ -1110,6 +1110,8 @@ const
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body>';
   html_h_nv =
     '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#C03030">';
+  html_h_b =
+    '<HTML><HEAD><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /></HEAD><body bgcolor="#000000" text="#FFFFFF">';
   htms_h = '</body></HTML>';
   html_ffx = '<font face="fixed">';
   htms_f = '</font>';
@@ -1157,7 +1159,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 82;
+  numcmd = 86;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1242,7 +1244,11 @@ const
     ('SETCONSTBOUNDARY', '79', 'ON/OFF'),
     ('RESIZE', '80', 'width height'),
     ('PRINT', '81', 'PRT/PS/BMP PORTRAIT/LANDSCAPE COLOR/BW filepath'),
-    ('GETRISESET', '82', '')
+    ('GETRISESET', '82', ''),
+    ('MOVESCOPE', '83', 'RA Dec [00.00]'),
+    ('MOVESCOPEH', '84', 'HourAngle Declination [00.00]'),
+    ('IDCENTER', '85', ''),
+    ('IDSCOPE', '86', '')
     );
 
 // INDI Telescope driver
@@ -1836,6 +1842,7 @@ begin
   FindPMfullmotion := Source.FindPMfullmotion;
   FindPMra := Source.FindPMra;
   FindPMde := Source.FindPMde;
+  FindBV := Source.FindBV;
   FindPMEpoch := Source.FindPMEpoch;
   FindPMpx := Source.FindPMpx;
   FindPMrv := Source.FindPMrv;
