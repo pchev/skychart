@@ -253,7 +253,7 @@ type
     procedure PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
     function  FormatDesc:string;
     procedure ShowIdentLabel;
-    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll):boolean;
+    function  IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean= true;ftype:integer=ftAll;radius:integer=2):boolean;
     procedure IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
     procedure Identdetail(X, Y: Integer);
     function  ListXY(X, Y: Integer):boolean;
@@ -1714,7 +1714,7 @@ end
 else identlabel.Visible:=false;
 end;
 
-function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true;ftype:integer=ftAll):boolean;
+function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true;ftype:integer=ftAll;radius:integer=2):boolean;
 var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
@@ -1738,7 +1738,7 @@ sc.cfgsc.TrackName:='';
 lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Findtype=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
 ra:=rmod(ra+pi2,pi2);
-dx:=abs(2/sc.cfgsc.BxGlb); // search a 2 pixel radius
+dx:=abs(radius/sc.cfgsc.BxGlb); // search a 2 pixel radius
 result:=sc.FindatRaDec(ra,dec,dx,searchcenter,false,ftype);
 if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter,false,ftype);  //else 6 pixel
 if showlabel then ShowIdentLabel;
@@ -3311,15 +3311,33 @@ else result:=msgFailed+' No object found!';
 end;
 
 Function Tf_chart.cmd_IdentTelescope: string;
+const limitmag=4.5;
 var x,y : integer;
-    x1,y1: double;
+    x1,y1,savemagmax: double;
     xx,yy: single;
+    ok: boolean;
 begin
 projection(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,x1,y1,false,sc.cfgsc) ;
 WindowXY(x1,y1,xx,yy,sc.cfgsc);
 x:=round(xx);
 y:=round(yy);
-if identxy(x,y,true,false) then begin
+if cmain.SimpleDetail then begin
+  ok:=identxy(x,y,true,false,ftPla,10);
+  if not ok then ok:=identxy(x,y,true,false,ftNeb,10);
+  if not ok then begin
+    savemagmax:=sc.catalog.cfgshr.AutoStarFilterMag;
+    try
+    sc.catalog.cfgshr.AutoStarFilterMag:=limitmag;
+    ok:=identxy(x,y,true,false,ftStar,10);
+    finally
+    sc.catalog.cfgshr.AutoStarFilterMag := savemagmax;
+    end;
+    ok:=ok and (sc.cfgsc.FindMag<=limitmag);
+  end;
+end else begin
+  ok:=identxy(x,y,true,false,ftAll,4);
+end;
+if ok then begin
   if sc.cfgsc.FindOK then identlabelClick(self);
   result:=msgOK
 end

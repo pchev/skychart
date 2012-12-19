@@ -86,8 +86,8 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="203"/>
-        <CursorPos X="38" Y="230"/>
+        <TopLine Value="332"/>
+        <CursorPos X="108" Y="362"/>
         <UsageCount Value="31"/>
         <Bookmarks Count="1">
           <Item0 X="59" Y="210" ID="1"/>
@@ -190,7 +190,7 @@
         <UsageCount Value="10"/>
       </Unit18>
     </Units>
-    <JumpHistory Count="28" HistoryIndex="27">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="astrolabe1.pas"/>
         <Caret Line="67" Column="15" TopLine="47"/>
@@ -303,6 +303,10 @@
         <Filename Value="astrolabe1.pas"/>
         <Caret Line="227" Column="1" TopLine="195"/>
       </Position28>
+      <Position29>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="236" Column="58" TopLine="203"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

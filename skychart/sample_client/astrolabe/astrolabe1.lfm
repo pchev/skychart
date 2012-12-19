@@ -101,8 +101,8 @@ object f_astrolabe: Tf_astrolabe
       Height = 37
       Top = 4
       Width = 324
-      Max = 360
-      Min = -360
+      Max = 1800
+      Min = -1800
       OnChange = PosChange
       PageSize = 15
       Position = 0
@@ -114,8 +114,8 @@ object f_astrolabe: Tf_astrolabe
       Height = 37
       Top = 48
       Width = 324
-      Max = 180
-      Min = -180
+      Max = 900
+      Min = -900
       OnChange = PosChange
       PageSize = 15
       Position = 0

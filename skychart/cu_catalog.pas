@@ -3063,6 +3063,10 @@ repeat
     cfgsc.FindBV:=rec.star.b_v
   else
     cfgsc.FindBV:=0;
+  if (rec.options.rectype=rtStar) and rec.star.valid[vsMagv] then
+    cfgsc.FindMag:=rec.star.magv
+  else
+    cfgsc.FindBV:=0;
   if cfgsc.FindStarPM then begin
     cfgsc.FindPMra:=rec.star.pmra;
     cfgsc.FindPMde:=rec.star.pmdec;
