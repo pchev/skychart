@@ -16,7 +16,7 @@ object f_astrolabe: Tf_astrolabe
   OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnShow = FormShow
-  LCLVersion = '1.0.4.0'
+  LCLVersion = '1.0.1.3'
   object Memo1: TMemo
     Left = 0
     Height = 261

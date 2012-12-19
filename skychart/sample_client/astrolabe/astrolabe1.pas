@@ -87,14 +87,17 @@ var
 const
   {$ifdef linux}
         DefaultCdC='skychart';
+        DefaultCdcDir='/usr/bin';
         DefaultCdCconfig='~/.skychart/skychart.ini';
   {$endif}
   {$ifdef darwin}
         DefaultCdC='skychart';
-        DefaultCdCconfig='~/.skychart/skychart.ini';
+        DefaultCdcDir='/Applications/Cartes du Ciel/skychart.app/Contents/MacOS';
+        DefaultCdCconfig='~/Library/Application Support/skychart/skychart.ini';
   {$endif}
   {$ifdef mswindows}
         DefaultCdC='skychart.exe';
+        DefaultCdcDir='C:\Program Files\Ciel';
         DefaultCdCconfig='Skychart\skychart.ini';
   {$endif}
 
@@ -205,7 +208,7 @@ begin
 cdir:=GetCurrentDir;
 if FileExists(slash(cdir)+'astrolabe.ini') then
   CdCconfig:=slash(cdir)+'astrolabe.ini';
-CdCdir := '';
+CdCdir := DefaultCdcDir;
 if fileexists(CdCconfig) then
 begin
   inif := TMeminifile.Create(CdCconfig);
@@ -222,6 +225,9 @@ begin
   CdC := slash(CdCdir) + DefaultCdC;
   if not FileExists(CdC) then begin
      CdC :=ExpandFileName(slash(CdCdir)+slash('..')+slash('..')+slash('bin') + DefaultCdC);
+  end;
+  if not FileExists(CdC) then begin
+    CdC:='/usr/local/bin/'+DefaultCdC;
   end;
   CdCfound:=FileExists(CdC);
 end;
@@ -250,11 +256,16 @@ begin
 edit2.Text:=GetTcpPort;
 if edit2.Text<>'0' then DoConnect
 else begin
-   edit3.Text:='Launching Skychart ...';
-   edit3.Invalidate;
-   OpenCDC('--unique --nosplash --config='+CdCconfig);
-   StartCDC:=true;
-   ConnectRetryTimer.Enabled:=true;
+   if CdCfound then begin
+     edit3.Text:='Launching Skychart ...';
+     edit3.Invalidate;
+     OpenCDC('--unique --nosplash --config='+CdCconfig);
+     StartCDC:=true;
+     ConnectRetryTimer.Enabled:=true;
+   end else begin
+     ShowMessage('Cannot found skychart directory. Start skychart first.');
+     Close;
+   end;
 end;
 end;
 
