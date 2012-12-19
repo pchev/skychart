@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 333
+  Left = 253
   Height = 439
-  Top = 124
+  Top = 131
   Width = 375
   HorzScrollBar.Range = 331
   HorzScrollBar.Visible = False
@@ -15,34 +15,34 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   OnClose = FormClose
   OnShow = FormShow
-  LCLVersion = '0.9.28.3'
+  LCLVersion = '1.0.4.0'
   object Label1: TLabel
     Left = 8
-    Height = 14
+    Height = 15
     Top = 8
-    Width = 85
+    Width = 104
     Caption = 'Server IP address'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 104
-    Height = 14
+    Height = 15
     Top = 8
-    Width = 54
+    Width = 66
     Caption = 'Server Port'
     ParentColor = False
   end
   object Label3: TLabel
     Left = 8
-    Height = 14
+    Height = 15
     Top = 88
-    Width = 70
+    Width = 87
     Caption = 'Command line:'
     ParentColor = False
   end
   object Edit1: TEdit
     Left = 8
-    Height = 21
+    Height = 22
     Top = 24
     Width = 89
     TabOrder = 0
@@ -50,7 +50,7 @@ object Form1: TForm1
   end
   object Edit2: TEdit
     Left = 104
-    Height = 21
+    Height = 22
     Top = 24
     Width = 65
     TabOrder = 1
@@ -76,7 +76,7 @@ object Form1: TForm1
   end
   object Edit3: TEdit
     Left = 8
-    Height = 21
+    Height = 22
     Top = 56
     Width = 161
     Color = clBtnFace
@@ -102,10 +102,10 @@ object Form1: TForm1
   end
   object ComboBox1: TComboBox
     Left = 8
-    Height = 21
+    Height = 23
     Top = 104
     Width = 241
-    ItemHeight = 13
+    ItemHeight = 0
     ItemIndex = 4
     Items.Strings = (
       'redraw'
