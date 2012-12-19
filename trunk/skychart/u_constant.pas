@@ -800,7 +800,7 @@ type
     TimeZone, DT_UT, CurST, CurJDTT, CurJDUT, LastJD, jd0,
     JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
     ScopeDec, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
-    FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV: double;
+    FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
     FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, ConstFullLabel, ConstLatinLabel,
     ScopeMark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
@@ -1843,6 +1843,7 @@ begin
   FindPMra := Source.FindPMra;
   FindPMde := Source.FindPMde;
   FindBV := Source.FindBV;
+  FindMag := Source.FindMag;
   FindPMEpoch := Source.FindPMEpoch;
   FindPMpx := Source.FindPMpx;
   FindPMrv := Source.FindPMrv;

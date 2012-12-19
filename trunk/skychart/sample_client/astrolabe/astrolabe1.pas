@@ -359,7 +359,7 @@ begin
 if lockpos then exit;
 try
 lockpos:=true;
-CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/2)+' '+FormatFloat('0.00',TrackBarD.Position/2));
+CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
 edit3.Text:=CdCCmd('IDSCOPE');
 Application.ProcessMessages;
 finally
