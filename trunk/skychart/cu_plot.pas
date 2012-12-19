@@ -69,7 +69,6 @@ type
      bmpreader:TFPReaderBMP;
      obmp : TBitmap;
      Fstarshape,starbmp: Tbitmap;
-     Astarbmp: array [0..6,0..10] of Tbitmap;
      Bstarbmp: array [0..6,0..10] of TBGRABitmap;
      starbmpw:integer;
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
@@ -117,6 +116,7 @@ type
     cfgplot : Tconf_plot;
     cfgchart: Tconf_chart;
     cbmp : TBGRABitmap;
+    Astarbmp: array [0..6,0..10] of Tbitmap;
     cnv  : Tcanvas;
     destcnv  : Tcanvas;
     compassrose,compassarrow: Tbitmap;

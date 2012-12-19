@@ -3059,6 +3059,10 @@ repeat
     end;
     if not found then continue;
   end;
+  if (rec.options.rectype=rtStar) and rec.star.valid[vsB_v] then
+    cfgsc.FindBV:=rec.star.b_v
+  else
+    cfgsc.FindBV:=0;
   if cfgsc.FindStarPM then begin
     cfgsc.FindPMra:=rec.star.pmra;
     cfgsc.FindPMde:=rec.star.pmdec;
