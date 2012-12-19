@@ -1,0 +1,155 @@
+object f_astrolabe: Tf_astrolabe
+  Left = 253
+  Height = 439
+  Top = 131
+  Width = 375
+  HorzScrollBar.Range = 331
+  HorzScrollBar.Visible = False
+  VertScrollBar.Range = 377
+  VertScrollBar.Visible = False
+  Caption = 'TCP Client'
+  ClientHeight = 439
+  ClientWidth = 375
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  KeyPreview = True
+  OnClose = FormClose
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
+  LCLVersion = '1.0.4.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 261
+    Top = 178
+    Width = 375
+    Align = alClient
+    ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 88
+    Top = 0
+    Width = 375
+    Align = alTop
+    ClientHeight = 88
+    ClientWidth = 375
+    TabOrder = 1
+    object Label4: TLabel
+      Left = 8
+      Height = 15
+      Top = 59
+      Width = 38
+      Caption = 'Status'
+      ParentColor = False
+    end
+    object Edit3: TEdit
+      Left = 136
+      Height = 22
+      Top = 55
+      Width = 184
+      Color = clBtnFace
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object Edit2: TEdit
+      Left = 136
+      Height = 22
+      Top = 28
+      Width = 65
+      ReadOnly = True
+      TabOrder = 1
+      Text = '3292'
+    end
+    object Label2: TLabel
+      Left = 8
+      Height = 15
+      Top = 32
+      Width = 66
+      Caption = 'Server Port'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      Left = 136
+      Height = 22
+      Top = 1
+      Width = 89
+      ReadOnly = True
+      TabOrder = 2
+      Text = '127.0.0.1'
+    end
+    object Label1: TLabel
+      Left = 8
+      Height = 15
+      Top = 5
+      Width = 104
+      Caption = 'Server IP address'
+      ParentColor = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 90
+    Top = 88
+    Width = 375
+    Align = alTop
+    ClientHeight = 90
+    ClientWidth = 375
+    TabOrder = 2
+    object TrackBarH: TTrackBar
+      Left = 44
+      Height = 37
+      Top = 4
+      Width = 324
+      Max = 360
+      Min = -360
+      OnChange = PosChange
+      PageSize = 15
+      Position = 0
+      TickStyle = tsNone
+      TabOrder = 0
+    end
+    object TrackBarD: TTrackBar
+      Left = 44
+      Height = 37
+      Top = 48
+      Width = 324
+      Max = 180
+      Min = -180
+      OnChange = PosChange
+      PageSize = 15
+      Position = 0
+      TickStyle = tsNone
+      TabOrder = 1
+    end
+    object Label3: TLabel
+      Left = 8
+      Height = 15
+      Top = 15
+      Width = 9
+      Caption = 'H'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 8
+      Height = 15
+      Top = 62
+      Width = 9
+      Caption = 'D'
+      ParentColor = False
+    end
+  end
+  object ConnectRetryTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = ConnectRetryTimerTimer
+    left = 56
+    top = 384
+  end
+  object ExitTimer: TTimer
+    Enabled = False
+    OnTimer = ExitTimerTimer
+    left = 152
+    top = 384
+  end
+end
