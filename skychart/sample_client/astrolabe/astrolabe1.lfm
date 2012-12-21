@@ -1,7 +1,7 @@
 object f_astrolabe: Tf_astrolabe
-  Left = 253
+  Left = 12
   Height = 439
-  Top = 131
+  Top = 108
   Width = 375
   HorzScrollBar.Range = 331
   HorzScrollBar.Visible = False
@@ -45,7 +45,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Edit3: TEdit
       Left = 136
-      Height = 22
+      Height = 26
       Top = 55
       Width = 184
       Color = clBtnFace
@@ -54,7 +54,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Edit2: TEdit
       Left = 136
-      Height = 22
+      Height = 26
       Top = 28
       Width = 65
       ReadOnly = True
@@ -71,7 +71,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Edit1: TEdit
       Left = 136
-      Height = 22
+      Height = 26
       Top = 1
       Width = 89
       ReadOnly = True

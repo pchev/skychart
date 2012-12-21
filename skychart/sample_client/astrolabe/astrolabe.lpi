@@ -41,10 +41,13 @@
         <Filename Value="astrolabe.lpr"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="astrolabe"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="11" Y="14"/>
+        <CursorPos X="1" Y="12"/>
         <UsageCount Value="31"/>
+        <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="unit1.pas"/>
@@ -83,7 +86,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="astrolabe1"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="332"/>
@@ -190,7 +192,7 @@
         <UsageCount Value="10"/>
       </Unit18>
     </Units>
-    <JumpHistory Count="29" HistoryIndex="28">
+    <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="astrolabe1.pas"/>
         <Caret Line="67" Column="15" TopLine="47"/>
@@ -307,6 +309,10 @@
         <Filename Value="astrolabe1.pas"/>
         <Caret Line="236" Column="58" TopLine="203"/>
       </Position29>
+      <Position30>
+        <Filename Value="astrolabe.lpr"/>
+        <Caret Line="14" Column="11" TopLine="1"/>
+      </Position30>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

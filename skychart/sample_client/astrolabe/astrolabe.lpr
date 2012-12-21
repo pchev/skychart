@@ -9,8 +9,6 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms, synapse, cu_tcpclient, astrolabe1;
 
-{$IFDEF WINDOWS}{$R cdc_client.rc}{$ENDIF}
-
 {$R *.res}
 
 begin
