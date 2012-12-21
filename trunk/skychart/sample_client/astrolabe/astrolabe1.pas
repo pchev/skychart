@@ -59,6 +59,7 @@ type
     procedure ConnectRetryTimerTimer(Sender: TObject);
     procedure ExitTimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormCreate(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure PosChange(Sender: TObject);
@@ -313,6 +314,19 @@ if StartCDC then begin
 end;
 end;
 
+procedure Tf_astrolabe.FormCreate(Sender: TObject);
+begin
+DefaultFormatSettings.DecimalSeparator:='.';
+DefaultFormatSettings.ThousandSeparator:=',';
+DefaultFormatSettings.DateSeparator:='/';
+DefaultFormatSettings.TimeSeparator:=':';
+GetCdCInfo;
+edit1.Text:=ServerIPaddr;
+edit2.Text:=ServerIPport;
+ConnectRetry:=0;
+lockpos:=false;
+end;
+
 procedure Tf_astrolabe.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   case key of
@@ -335,11 +349,6 @@ end;
 
 procedure Tf_astrolabe.FormShow(Sender: TObject);
 begin
-  GetCdCInfo;
-  edit1.Text:=ServerIPaddr;
-  edit2.Text:=ServerIPport;
-  ConnectRetry:=0;
-  lockpos:=false;
   Connect;
 end;
 
