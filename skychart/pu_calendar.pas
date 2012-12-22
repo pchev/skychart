@@ -216,6 +216,14 @@ implementation
 
 uses u_util, u_projection, Clipbrd;
 
+type
+  {For Planet graphs}
+  TPGScaledTime = record
+                    Valid: Boolean;
+                    ScTime: Integer;
+                    end;
+  TPGScaledTimeRow = array[0..8] of TPGScaledTime;
+
 const maxstep = 1000;
       MonthLst : array [1..12] of string = ('Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec');
 
@@ -1233,7 +1241,6 @@ with gr do begin
   ar:=rmod(ar+pi2,pi2);
   objects[0,i]:=SetObjCoord(jda,ar,de);
   objects[3,i]:=SetObjCoord(magn,diam,illum);
-  objects[9,i]:=SetObjCoord(0,rad2deg*az,rad2deg*ha);
   Eq2Hz((st0-ar),de,az,ha,config);
   az:=rmod(az+pi,pi2);
   cells[0,0]:=pla[ipla];
@@ -1248,6 +1255,7 @@ with gr do begin
   cells[9,i]:=demtostr(rad2deg*az);
   cells[10,i]:=demtostr(rad2deg*ha);
   Planet.PlanetRiseSet(ipla,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,config);
+  objects[9,i]:=SetObjCoord(irc,rad2deg*az,rad2deg*ha);
   case irc of
        0 : begin
            cells[6,i]:=mr; cells[7,i]:=mt; cells[8,i]:=ms;
@@ -1371,10 +1379,11 @@ procedure DrawGraph(bm: TBitmap; gr:TStringGrid; iPl: Integer); {of RefreshPlane
 // bm is the bit map of the draw grid for this planet.
 var
   xts, xte: Integer;  {x pos of start and end of rise/set area}
-  xmidday: Integer;   { the x poisiton that midday would have if shown}
+  xmidday,
+  xmiddnight  : Integer;   { the x positon that midday would have if shown}
 //  tFst, tLst: Double; {first and last times of Graph Axis}
   ygtop, ygbtm: Integer; {y pos of top and bottom of graph area}
-  i, ix, iy: Integer;
+  i, ix, iy, ily: Integer;
   x, y: double;
   s: String;
   txtsz: TSize;       {Size of a date, eg 99/99}
@@ -1383,38 +1392,45 @@ var
   xSStrt, xSInc: Double;
   tstrt, tsc: Double; {to get graph x, sub tstrt, * by tsc}
   LineEnds: TLine; {Start and end point of a line drawn by TimeLine}
-function ScaledTime(grd: TStringGrid; C, R: Integer): Integer;
+{Scaled Time takes a time from the objects of the specified StringGrid and
+ column, and converts it to an x value on the graph.}
+function ScaledTime(grd: TStringGrid; C, R: Integer; var x: integer):Boolean;
 var
   //dbgs: String;
   evt_time: double;
 begin {ScaledTime of DrawGraph of RefreshPlanetGraph}
-  if assigned(grd) and assigned(grd.Objects[c, r]) then begin
+  Result := true;
+  if assigned(grd) and (C < grd.ColCount) and (R < grd.RowCount) and
+     assigned(grd.Objects[c, r]) then begin
     config.tz.JD:=date1.JD + (r - 2) * step.Value;
     evt_time := (grd.Objects[c,r] as TObjCoord).jd
                  - (date1.JD + (r - 2) * step.Value)
                  + config.tz.SecondsOffset/(3600*24);  // local time
     // Normalise time ot current day
     evt_time := evt_time - floor(evt_time);
+    // try this instead
+    if evt_time < 0.5 then
+      evt_time := evt_time + 1.0;
+
     // now convert to graph scale
-    result:= trunc( (evt_time - tstrt) * tsc) + xts;
-    if result < xmidday then
-      result := result + trunc(tsc);
+    x := trunc( (evt_time - tstrt) * tsc) + xts;
+    (*if x < xmidday then
+      x := x + trunc(tsc);*)
     end
   else
-    result := -9999;
+    result := false;
 end; {ScaledTime of DrawGraph of RefreshPlanetGraph}
-Procedure TimeLine(grd: TStringGrid; C: Integer; cv: TCanvas; s: string = '');
-{ draws one line on the rise / set graph, using the data in column C of grid grd
+{ draw one line on the rise / set graph, using the data in column C of grid grd
   on canvas cv.  s is a label, if set }
+Procedure TimeLine(grd: TStringGrid; C: Integer; cv: TCanvas; s: string = '');
 var
- lix, liy: Integer;
+ i, lix, liy: Integer; {last x,y coordinate (as graph integer)}
  ir, lir: Boolean; {in range, last point in range}
 begin {TimeLine of DrawGraph of RefreshPlanetGraph}
   i := 2; {First row of grid with times}
-  repeat {Skip past any lines with missing values}
-    lix := ScaledTime(Grd, C, i);
+  {Skip past any lines with missing values}
+  while (i < grd.RowCount) and not ScaledTime(Grd, C, i, lix) do
     inc(i);
-  until lix > -9000;  {If it is < -9000, => bad value}
   liy := ygtop;
   lir := (lix >= xts) and (lix <= xte);
   if lir then
@@ -1423,10 +1439,10 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
   {line end start - this is a bit of a guess, check this later 201103}
   LineEnds.P1.x := lix;
   LineEnds.P1.y := liy;
+  inc(i);
   repeat  {late note - can't see how this stays in sync if there are missing points 201103}
     y := y + ytick; iy := trunc(y);
-    ix := ScaledTime(Grd, C, i);
-    if  ix > -9000 then begin {otherwise no point - just skip completely}
+    if ScaledTime(Grd, C, i, ix) then begin {otherwise just skip completely}
       ir := (ix >= xts) and (ix <= xte);
       if ir then begin
         if not lir then {interpolation}
@@ -1459,17 +1475,125 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
       end;
     end;
 end; {TimeLine of of DrawGraph RefreshPlanetGraph}
+
+{DrawZone draws the twilight zones.  Prior to 20121219, they were drawn as lines
+ and then flood filled, but this was not reliable.  This version draws them
+ as quadrilaterals.  DrawZone must be called with grd1 as the "outside" limit,
+ ie earlier in the evening, later in the morning}
+procedure DrawZone( cv: TCanvas);
+var
+ crow, lrow: TPGScaledTimeRow;
+ rowcount, k, i: integer;
+ grdrw: Integer;
+{dzScaled time calls ScaledTime and "tidies up", forcing times outside the graph
+ back to the edge of the graph}
+function dzScaledTime(grd: TStringGrid; C, R: Integer; var x: integer):Boolean;
+begin {dzScaledTime of DrawZone of of DrawGraph of RefreshPlanetGraph}
+  result := ScaledTime(grd, C, R, x);
+  if Result then
+    if x > xte then x := xte else if x < xts then x := xts;
+end;{dzReadRow of DrawZone of of DrawGraph of RefreshPlanetGraph}
+procedure dzReadRow(rw: Integer; var r: TPGScaledTimeRow);
+var
+ i: integer;
+ a: double;
+ ai: integer;
+begin {dzReadRow of DrawZone of of DrawGraph of RefreshPlanetGraph}
+  {LeftEdge}
+  r[0].Valid := True;  r[0].ScTime := xts;
+  {Sunset}
+  r[1].Valid := dzScaledTime(SoleilGrid, 8, rw, r[1].ScTime);
+  {EndNatTL}
+  r[2].Valid := dzScaledTime(TwilightGrid, 3, rw, r[2].ScTime);
+  {EndAstTL}
+  r[3].Valid := dzScaledTime(TwilightGrid, 4, rw, r[3].ScTime);
+  {StartAstTL}
+  r[4].Valid := dzScaledTime(TwilightGrid, 1, rw, r[4].ScTime);
+  {StartNatTL}
+  r[5].Valid := dzScaledTime(TwilightGrid, 2, rw, r[5].ScTime);
+  {Sunrise}
+  r[6].Valid := dzScaledTime(SoleilGrid, 6, rw, r[6].ScTime);
+  {RightEdge}
+  r[7].Valid := True;  r[7].ScTime := xte;
+  {Sun behaviour}
+  r[8].Valid := Assigned(SoleilGrid) and Assigned(SoleilGrid.Objects[9, rw]);
+  if r[8].Valid then
+    r[8].ScTime := round((SoleilGrid.Objects[9, rw] as TObjCoord).jd);
+  {Now tidy up exceptions}
+  if not r[8].Valid then begin {give up - make everything night}
+    for i := 1 to 3 do r[i].ScTime := r[0].ScTime;
+    for i := 4 to 6 do r[i].ScTime := r[7].ScTime;
+    end
+  else if r[8].ScTime = 1 then {sun up all day}
+    for i := 1 to 6 do r[i].ScTime := r[7].ScTime
+  else begin {sun either rises and sets or is down  }
+    if r[8].ScTime = 2 then begin {is always down, so move rise & set to graph edge}
+      r[1] := r[0];
+      r[6] := r[7];
+      end;
+    if not (r[2].Valid and r[3].Valid and r[4].Valid and r[5].Valid) then
+      {not all twighlights valid, so need to do some sorting out}
+      if not (r[2].Valid or r[3].Valid or r[4].Valid or r[5].Valid) then begin
+        if r[8].ScTime = 0 then {sun rises/sets, no twilight change}
+          ai := 0
+        else
+          {none valid - twilight doesn't change all day - very near poles (or something horribly wrong)}
+          {get twilight estimate from sun's altitude - as it doesn't change (much)}
+          if assigned(SoleilGrid) and assigned(SoleilGrid.Objects[9,rw]) then
+            ai := trunc((SoleilGrid.Objects[9,rw] as TObjCoord).dec / 6)
+          else
+            ai := -3; {give up and treat as night}
+        case ai of {note this should never be positive if we get here}
+           0,-1: for i := 2 to 5 do r[i] := r[7]; {all Nautical/civil twilight}
+           -2  : begin r[2] := r[0]; for i := 3 to 5 do r[i] := r[7]; end {Ast}
+           else  begin r[2] := r[0]; r[3] := r[0]; r[4] := r[7]; r[5] := r[7]; end
+           end;
+        end
+      else {some valid, but not all - shoud be able to work back fron the valid ones}
+        if r[2].Valid and r[5].Valid then
+          {but not both r3 and r4 are, so assume no night, all ast twilight}
+          for i := 3 to 4 do r[i] := r[5]
+        else if r[3].Valid and r[4].Valid then begin
+          {but not both r2 and r5 - assume have nautical then ast twighlight all night}
+          r[2] := r[1]; r[5] := r[6];
+          end
+        else begin {give up - show everything as night}
+          r[2] := r[1]; r[3] := r[1]; r[4] := r[6]; r[5] := r[7];
+          end;
+    end;
+end;{dzReadRow of DrawZone of of DrawGraph of RefreshPlanetGraph}
+procedure dzDrawPoly(idx (*, c*): Integer);
+begin {dzDrawPoly of DrawZone of of DrawGraph of RefreshPlanetGraph}
+  cv.Brush.Color := dfskycolor[7 - abs(3-idx)*2];
+  cv.Polygon([ Point(lrow[idx].ScTime, ily),
+               Point(lrow[idx+1].ScTime, ily),
+               Point(crow[idx+1].ScTime, iy),
+               Point(crow[idx].ScTime, iy)
+               ]);
+end; {dzDrawPoly of DrawZone of of DrawGraph of RefreshPlanetGraph}
+begin {DrawZone of of DrawGraph of RefreshPlanetGraph}
+  if assigned(SoleilGrid) then {assume twighlight grid the same - should not crash anyway}
+    rowcount := SoleilGrid.RowCount
+  else
+    rowcount := 0;
+  y := ygtop;
+  ily := ygtop;
+  grdrw := 2; {First row of grid with times}
+  dzReadRow(grdrw, lrow);
+  inc(grdrw);
+  repeat
+    y := y + ytick; iy := trunc(y); {bump y to next point}
+    dzReadRow(grdrw, crow);
+    for k := 0 to 6 do
+      dzDrawPoly(k);
+    lrow := crow;
+    ily := iy;
+    inc(grdrw);
+  until grdrw >= rowcount;
+end; {DrawZone of of DrawGraph RefreshPlanetGraph}
 begin {DrawGraph of RefreshPlanetGraph}
   with bm.Canvas do begin
-    Brush.Color:= clBlack;
-    Brush.Style:= bsSolid;
-    Pen.Color:= clYellow;
-    Pen.Style:= psSolid;
-    Pen.Width:= 1;
-    Pen.Mode:= pmCopy;
-    Font.Color:= clWhite;
-    Rectangle(2, 2, 3, 3); {Dummy - it seems the first command won't do anything}
-    FillRect(0, 0, Width-1, Height-1); // Whole canvas
+    // Basic Geometry - needed for canvas and background setup
     // y scale & axis - same for all graph segments
     txtsz := TextExtent('22/22'); // all numbers will be the same size
     ygtop := txtsz.cy div 2;
@@ -1477,6 +1601,40 @@ begin {DrawGraph of RefreshPlanetGraph}
     ytick := (ygbtm - ygtop) / (gr.RowCount - 3); {rc-2 gives data rows, -1 for intervals}
     {ytick needs to be float to adequately fill the range - calc float then trun}
     ySkip := trunc(txtsz.cy / ytick) + 1;
+    // Set up constants for Rise/set - rise set is 70% of width
+    xte := ((width * 7) div 10) - 2; {-2 provides gutter to next}
+    xts   := txtsz.cx + 2;
+    {for now, take nominal graph time range as 5pm to 8 am}
+    xtick := (xte-xts) div 15; // pixels
+    ix    := (txtsz.cx div xtick + 1); {temp x skip}
+    xtick := xtick * ix;
+    xSInc := (1 / 24) * ix;
+    xSStrt:= 17/24;  // 5 pm
+    tstrt := xSStrt;
+    tsc   := xtick / xSInc;
+    xmidday := trunc((0.5 - tstrt) * tsc);
+
+    //Set up the canvas - first darw the whole canvas black
+    Pen.Style := psClear;
+    Brush.Color:= clBlack;
+    Brush.Style:= bsSolid;
+    Font.Color:= clWhite;
+    Rectangle(2, 2, 3, 3); {Dummy - it seems the first command won't do anything}
+    FillRect(0, 0, Width-1, Height-1); // Whole canvas
+    // Backgrounds for thr rise / set graphs
+    DrawZone(bm.Canvas);
+
+    // Still draw sunrise/set time as a line
+    Pen.Color:= clYellow;
+    Pen.Style:= psSolid;
+    Pen.Width:= 2;
+    Pen.Mode:= pmCopy;
+    TimeLine(SoleilGrid, 8, bm.Canvas); {set, left on graph}
+    TimeLine(SoleilGrid, 6, bm.Canvas); {rise, right on graph}
+
+    // Now do the graph frames.  Want these to oeverlay the backgrounds, but
+    // be behind the actual graph lines
+    Brush.Style := bsClear; // no fill
     i := 2; {first data cell}
     iy := ygtop - txtsz.cy div 2; {very close to 0 !!!}
     y := iy;
@@ -1488,19 +1646,7 @@ begin {DrawGraph of RefreshPlanetGraph}
       y := y + ytick*yskip;
       iy := trunc(y);
     until i >= gr.RowCount;
-    // Set up constants for Rise/set - rise set is 70% of width
-    xte := ((width * 7) div 10) - 2; {-2 provides gutter to next}
-    xts   := txtsz.cx + 2;
     Rectangle(xts, ygtop, xte, ygBtm);
-    {for now, take nominal graph time range as 5pm to 8 am}
-    xtick := (xte-xts) div 15; // pixels
-    ix    := (txtsz.cx div xtick + 1); {temp x skip}
-    xtick := xtick * ix;
-    xSInc := (1 / 24) * ix;
-    xSStrt:= 17/24;  // 5 pm
-    tstrt := xSStrt;
-    tsc   := xtick / xSInc;
-    xmidday := trunc((0.5 - tstrt) * tsc);
     ix    := xts + xtick;
     x     := xSStrt + xSInc;
     iy    := Height-txtsz.cy;
@@ -1511,38 +1657,11 @@ begin {DrawGraph of RefreshPlanetGraph}
       inc(ix, xtick);
       x := x + xSInc;
     until (ix + txtsz.cx div 2) > xte;
-    {now put in sun rise and set}
-    Brush.Color:= dfskycolor[1];
-    TimeLine(SoleilGrid, 8, bm.Canvas); {set, left on graph}
-    if LineEnds.P1.x - 1 > xts then
-        FloodFill(xts + 1, ygtop + 2, pen.Color, fsBorder );
-    if LineEnds.P2.x - 1 > xts then
-        FloodFill(xts + 1, ygbtm - 2, pen.Color, fsBorder );
-    TimeLine(SoleilGrid, 6, bm.Canvas); {rise, right on graph}
-    if LineEnds.P1.x + 1 < xte then
-      FloodFill(xte - 2, ygtop + 2, pen.Color, fsBorder );
-    if LineEnds.P2.x + 1 < xte then
-      FloodFill(xte - 2, ygbtm - 2, pen.Color, fsBorder );
-    (*FloodFill(xte - 2, (ygtop + ygbtm) div 2, pen.Color, fsBorder );*)
-    {Twilights}
-    Brush.Color:= dfskycolor[3];
-    TimeLine(TwilightGrid, 3, bm.Canvas);
-    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
-    TimeLine(TwilightGrid, 2, bm.Canvas);
-    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
-    Brush.Color:= dfskycolor[5];
-    TimeLine(TwilightGrid, 4, bm.Canvas);
-    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
-    TimeLine(TwilightGrid, 1, bm.Canvas);
-    FloodFill(ix+2, iy-2, pen.Color, fsBorder);
-    Brush.Color:= dfskycolor[7];
-    FloodFill(ix-2, iy-2, pen.Color, fsBorder);
 
     {Now - finally - the planet times}
     font.Color:= clWhite;
     Brush.Style:= bsSolid;
     Brush.Color:= clBlack;
-    pen.Width:=2;
     TimeLine(gr, 6, bm.Canvas, 'Rise'); {leave yellow}
     pen.Color:= clWhite;
     TimeLine(gr, 7, bm.Canvas, 'Cul');
@@ -2131,7 +2250,7 @@ begin {BtnCopyClipClick}
         buf := buf + tab + tab;
       buf := buf + LineEnding;
       end;
-    buf := buf + 'Times are in days - format rise/transit.set columns as time' + LineEnding;
+    buf := buf + 'Times are in days - format rise/transit/set columns as time' + LineEnding;
     Clipboard.AsText:=buf;
     end; {Grid => String Grid}
 end;
