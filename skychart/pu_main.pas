@@ -35,6 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
+  pu_config_calendar,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -46,6 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    SetupCalendar: TAction;
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
     CloseTimer: TTimer;
@@ -53,6 +55,7 @@ type
     MenuChartInfo: TMenuItem;
     MenuChartLegend: TMenuItem;
     Compass1: TMenuItem;
+    MenuItem33: TMenuItem;
     ResetRot: TMenuItem;
     rot180: TMenuItem;
     MultiFrame1: TMultiFrame;
@@ -472,6 +475,7 @@ type
     procedure Maillist1Click(Sender: TObject);
     procedure MenuChartInfoClick(Sender: TObject);
     procedure MenuChartLegendClick(Sender: TObject);
+    procedure MenuItem33Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
@@ -479,6 +483,7 @@ type
     procedure ResetLanguageClick(Sender: TObject);
     procedure ResetRotClick(Sender: TObject);
     procedure rot180Click(Sender: TObject);
+    procedure SetupCalendarExecute(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -664,6 +669,7 @@ type
     ConfigDisplay: Tf_configdisplay;
     ConfigPictures: Tf_configpictures;
     ConfigCatalog: Tf_configcatalog;
+    ConfigCalendar: Tf_configcalendar;
     cryptedpwd,basecaption,kioskpwd :string;
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
     InitialChartNum, Animcount: integer;
@@ -696,6 +702,8 @@ type
     procedure SetChildFocus(Sender: TObject);
     procedure SetNightVision(night: boolean);
     procedure SetupObservatoryPage(page:integer; posx:integer=0; posy:integer=0);
+    procedure SetupCalendarPage(page:integer);
+    procedure ApplyConfigCalendar(Sender: TObject);
     procedure SetupTimePage(page:integer);
     procedure SetupDisplayPage(pagegroup:integer);
     procedure SetupPicturesPage(page:integer; action:integer=0);
@@ -1505,6 +1513,11 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
    Refresh;
 end;
+end;
+
+procedure Tf_main.MenuItem33Click(Sender: TObject);
+begin
+
 end;
 
 procedure Tf_main.MenuItem7Click(Sender: TObject);
@@ -3141,6 +3154,10 @@ begin
 SetupTimePage(0);
 end;
 
+procedure Tf_main.SetupCalendarExecute(Sender: TObject);
+begin
+SetupCalendarPage(0);
+end;
 
 procedure Tf_main.ToolButtonConfigClick(Sender: TObject);
 begin
@@ -3157,6 +3174,34 @@ procedure Tf_main.ToolButtonListObjMouseUp(Sender: TObject;
   Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupChartPage(5);
+end;
+
+procedure Tf_main.SetupCalendarPage(page:integer);
+begin
+if ConfigCalendar=nil then begin
+   ConfigCalendar:=Tf_configcalendar.Create(self);
+   ConfigCalendar.f_config_calendar1.PageControl1.ShowTabs:=true;
+   ConfigCalendar.f_config_calendar1.PageControl1.PageIndex:=0;
+   ConfigCalendar.f_config_calendar1.onApplyConfig:=ApplyConfigCalendar;
+end;
+{$ifdef mswindows}SetFormNightVision(ConfigCalendar,nightvision);{$endif}
+ConfigCalendar.f_config_calendar1.csc.Assign(def_cfgsc);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   ConfigCalendar.f_config_calendar1.csc.Assign(sc.cfgsc);
+end;
+formpos(ConfigCalendar,mouse.cursorpos.x,mouse.cursorpos.y);
+ConfigCalendar.f_config_calendar1.PageControl1.PageIndex:=page;
+ConfigCalendar.showmodal;
+if ConfigCalendar.ModalResult=mrOK then begin
+ activateconfig(nil,ConfigCalendar.f_config_calendar1.csc,nil,nil,nil,nil,false);
+end;
+ConfigCalendar.Free;
+ConfigCalendar:=nil;
+end;
+
+procedure Tf_main.ApplyConfigCalendar(Sender: TObject);
+begin
+ activateconfig(nil,ConfigCalendar.f_config_calendar1.csc,nil,nil,nil,nil,false);
 end;
 
 procedure Tf_main.SetupTimePage(page:integer);
@@ -4457,6 +4502,7 @@ for i:=1 to 10 do def_cfgsc.rectangle[i,4]:=0;
 for i:=1 to 10 do def_cfgsc.rectangle[i,5]:=0;
 for i:=1 to 10 do def_cfgsc.rectangleok[i]:=false;
 for i:=1 to 10 do def_cfgsc.rectanglelbl[i]:='';
+def_cfgsc.CalGraphHeight:=100;
 def_cfgsc.CircleLabel:=true;
 def_cfgsc.RectangleLabel:=true;
 def_cfgsc.marknumlabel:=true;
@@ -4913,6 +4959,10 @@ except
   ShowError('Error reading '+filename+' grid');
 end;
 try
+
+section:='Calendar';
+csc.CalGraphHeight:=ReadInteger(section,'CalGraphHeight',csc.CalGraphHeight);;
+
 section:='Finder';
 csc.ShowCircle:=ReadBool(section,'ShowCircle',csc.ShowCircle);
 csc.CircleLabel:=ReadBool(section,'CircleLabel',csc.CircleLabel);
@@ -5716,6 +5766,10 @@ WriteBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
 WriteInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
+
+section:='Calendar';
+WriteInteger(section,'CalGraphHeight',csc.CalGraphHeight);;
+
 section:='Finder';
 WriteBool(section,'ShowCircle',csc.ShowCircle);
 WriteBool(section,'CircleLabel',csc.CircleLabel);
@@ -6308,6 +6362,7 @@ SetupSolSys.caption:='&'+rsSolarSystem+Ellipsis;
 SetupSystem.caption:='&'+rsSystem+Ellipsis;
 SetupInternet.caption:='&'+rsInternet+Ellipsis;
 SetupPictures.caption:='&'+rsPictures+Ellipsis;
+SetupCalendar.caption:='&'+rsCalendar+Ellipsis;
 MenuItem7.caption:='&'+rsPictures+Ellipsis;
 SetupCatalog.caption:='&'+rsCatalog+Ellipsis;
 MenuItem8.caption:='&'+rsShowHideDSSI;

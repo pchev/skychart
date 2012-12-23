@@ -832,6 +832,8 @@ type
     CircleLst: array[0..MaxCircle, 1..2] of double;
     CircleLabel, RectangleLabel, marknumlabel: boolean;
     msg: string;
+    // Calendar
+    CalGraphHeight: integer;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_skychart);
@@ -1955,6 +1957,7 @@ begin
   for i := 1 to 10 do
     rectanglelbl[i] := Source.rectanglelbl[i];
   CircleLabel := Source.CircleLabel;
+  CalGraphHeight := Source.CalGraphHeight;
   RectangleLabel := Source.RectangleLabel;
   marknumlabel := Source.marknumlabel;
   for i := 0 to Source.NumCircle - 1 do

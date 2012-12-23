@@ -285,6 +285,7 @@ end;
 end;
 
 procedure Tf_calendar.FormShow(Sender: TObject);
+var i: integer;
 begin
 {$ifdef mswindows}
 if Fnightvision<>nightvision then begin
@@ -307,6 +308,11 @@ if cdb=nil then begin
    comet.TabVisible:=false;
    Asteroids.TabVisible:=false;
 end;
+// apply graph setting (config is not available in formcreate)
+dgPlanet.DefaultRowHeight:=config.CalGraphHeight;
+for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
+  PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
+ end;
 lockclick:=true;
 end;
 
