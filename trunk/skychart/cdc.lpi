@@ -194,7 +194,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="68">
+    <Units Count="70">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -673,6 +673,20 @@
         <ResourceBaseClass Value="Frame"/>
         <UnitName Value="fu_config_system"/>
       </Unit67>
+      <Unit68>
+        <Filename Value="fu_config_calendar.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_config_calendar"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="fu_config_calendar"/>
+      </Unit68>
+      <Unit69>
+        <Filename Value="pu_config_calendar.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_configcalendar"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_config_calendar"/>
+      </Unit69>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

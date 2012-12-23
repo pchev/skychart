@@ -1,11 +1,11 @@
 object f_main: Tf_main
-  Left = 313
+  Left = 409
   Height = 549
-  Top = 162
+  Top = 165
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 525
+  ClientHeight = 526
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -18,15 +18,15 @@ object f_main: Tf_main
   OnResize = FormResize
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.4.0'
+  LCLVersion = '1.0.1.3'
   object PanelLeft: TPanel
     Left = 0
-    Height = 413
+    Height = 414
     Top = 78
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 413
+    ClientHeight = 414
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -34,7 +34,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 413
+      Height = 414
       Top = 0
       Width = 28
       Align = alClient
@@ -136,18 +136,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 413
+    Height = 414
     Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 413
+    ClientHeight = 414
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 163
+      Height = 164
       Top = 250
       Width = 28
       Align = alClient
@@ -376,7 +376,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 491
+    Top = 492
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -816,7 +816,7 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 657
-        Height = 26
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
@@ -873,7 +873,7 @@ object f_main: Tf_main
       end
       object EditTimeVal: TEdit
         Left = 595
-        Height = 24
+        Height = 23
         Top = 2
         Width = 35
         TabOrder = 5
@@ -4448,6 +4448,10 @@ object f_main: Tf_main
         Action = SetupInternet
         OnClick = SetupInternetExecute
       end
+      object MenuItem33: TMenuItem
+        Action = SetupCalendar
+        OnClick = SetupCalendarExecute
+      end
       object ReloadLanguage1: TMenuItem
         Caption = 'Reload Language'
         ShortCut = 16460
@@ -7511,6 +7515,11 @@ object f_main: Tf_main
       Hint = 'Blinking Picture'
       ImageIndex = 86
       OnExecute = BlinkImageExecute
+    end
+    object SetupCalendar: TAction
+      Category = 'Setup'
+      Caption = 'SetupCalendar'
+      OnExecute = SetupCalendarExecute
     end
   end
   object SaveDialog: TSaveDialog

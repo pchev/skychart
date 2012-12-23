@@ -37,19 +37,19 @@ uses
   cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
   pu_getdss, pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search,
   pu_printsetup, pu_position, pu_manualtelescope, u_projection, u_constant,
-  u_util, enhedit, pu_config_catalog, pu_config_system,
-  pu_config_solsys, pu_config_pictures, pu_config_observatory,
-  pu_config_display, pu_config_chart, pu_config_internet, libsql, radec,
-  XmlParser, zoomimage, CDCjdcalendar, cdccatalog, satxy, Printer4Lazarus,
-  downldialog, synapse, pu_catgen, pu_catgenadv, pu_progressbar, mrecsort,
-  pu_addlabel, pu_print, u_translation, pu_splash, pu_about, cu_tz,
-  uniqueinstance_package, u_help, LCLProc, pu_clock, u_unzip, cu_tcpserver,
-  pu_indiclient, u_satellite, pu_main, pu_observatory_db, pu_lx200client,
-  cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki, cu_encoderprotocol,
-  pu_ascomclient, uDE, pu_voconfig, pr_vodetail, bgrabitmappack, lazvo,
-  multiframepackage, fu_config_time, fu_config_catalog, fu_config_chart,
-  fu_config_display, fu_config_internet, fu_config_observatory,
-  fu_config_pictures, fu_config_solsys, fu_config_system;
+  u_util, enhedit, pu_config_catalog, pu_config_system, pu_config_solsys,
+  pu_config_pictures, pu_config_observatory, pu_config_display, pu_config_chart,
+  pu_config_internet, libsql, radec, XmlParser, zoomimage, CDCjdcalendar,
+  cdccatalog, satxy, Printer4Lazarus, downldialog, synapse, pu_catgen,
+  pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
+  pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc, pu_clock,
+  u_unzip, cu_tcpserver, pu_indiclient, u_satellite, pu_main, pu_observatory_db,
+  pu_lx200client, cu_lx200protocol, cu_serial, pu_encoderclient, cu_taki,
+  cu_encoderprotocol, pu_ascomclient, uDE, pu_voconfig, pr_vodetail,
+  bgrabitmappack, lazvo, multiframepackage, fu_config_time, fu_config_catalog,
+  fu_config_chart, fu_config_display, fu_config_internet, fu_config_observatory,
+  fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
+  pu_config_calendar;
   
 var i : integer;
     buf, p, step : string;
@@ -145,6 +145,7 @@ begin
    end;
   end;
   if VerboseMsg then WriteTrace('Application Run');
+  Application.CreateForm(Tf_configcalendar, f_configcalendar);
   Application.Run;
 
   Params.Free;

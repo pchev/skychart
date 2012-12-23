@@ -1,0 +1,80 @@
+object f_configcalendar: Tf_configcalendar
+  Left = 256
+  Height = 583
+  Top = 120
+  Width = 495
+  Caption = 'f_configcalendar'
+  ClientHeight = 583
+  ClientWidth = 495
+  OnClose = FormClose
+  OnShow = FormShow
+  LCLVersion = '1.0.1.3'
+  object Panel1: TPanel
+    Left = 0
+    Height = 54
+    Top = 529
+    Width = 495
+    Align = alBottom
+    ClientHeight = 54
+    ClientWidth = 495
+    TabOrder = 0
+    object Button1: TButton
+      Left = 205
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 301
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Caption = 'Apply'
+      OnClick = Button2Click
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 397
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      BorderSpacing.InnerBorder = 4
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
+    end
+    object Button7: TButton
+      Left = 109
+      Height = 25
+      Top = 12
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Help'
+      OnClick = Button7Click
+      TabOrder = 3
+    end
+  end
+  inline f_config_calendar1: Tf_config_calendar
+    Width = 495
+    Align = alClient
+    ClientWidth = 495
+    TabOrder = 1
+    inherited Mainpanel: TPanel
+      Width = 495
+      ClientWidth = 495
+      inherited PageControl1: TPageControl
+        Width = 493
+      end
+    end
+  end
+end

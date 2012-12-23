@@ -34,7 +34,7 @@ uses u_help, u_translation, u_constant, u_util,
   cu_fits, cu_catalog, cu_database,
   fu_config_chart, fu_config_observatory, fu_config_time, fu_config_catalog,
   fu_config_system, fu_config_pictures, fu_config_display, fu_config_solsys,
-  fu_config_internet,
+  fu_config_internet, fu_config_calendar,
   LResources, PairSplitter, LazHelpHTML;
 
 type
@@ -42,12 +42,14 @@ type
   { Tf_config }
 
   Tf_config = class(TForm)
+    f_config_calendar1: Tf_config_calendar;
     PageControl1: TPageControl;
     Panel1: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
     Splitter1: TSplitter;
     TabSheet1: TTabSheet;
+    TabSheet10: TTabSheet;
     TabSheet2: TTabSheet;
     TabSheet3: TTabSheet;
     TabSheet4: TTabSheet;
@@ -200,6 +202,8 @@ TreeView1.items[46].text:='9- '+rsInternet;
 TreeView1.items[47].text:='1- '+rsProxy;
 TreeView1.items[48].text:='2- '+rsOrbitalEleme;
 TreeView1.items[49].text:='3- '+rsOnlineDSSPic;
+TreeView1.items[50].text:='10- '+rsCalendar;
+TreeView1.items[51].text:='1- '+rsGraphs;
 Applyall.caption:=rsApplyChangeT;
 Apply.Caption:=rsApply;
 OKBtn.caption:=rsOK;
@@ -214,6 +218,7 @@ if f_config_pictures1<>nil then f_config_pictures1.SetLang;
 if f_config_solsys1<>nil then f_config_solsys1.SetLang;
 if f_config_system1<>nil then f_config_system1.SetLang;
 if f_config_time1<>nil then f_config_time1.SetLang;
+if f_config_calendar1<>nil then f_config_calendar1.SetLang;
 SetHelp(self,hlpMenuSetup);
 end;
 
@@ -259,6 +264,7 @@ f_config_display1.Init;
 f_config_pictures1.Init;
 f_config_system1.Init;
 f_config_internet1.Init;
+f_config_calendar1.Init;
 TreeView1.FullCollapse;
 Treeview1.selected:=Treeview1.items[0];
 Treeview1.selected:=Treeview1.items[cmain.configpage];
@@ -313,6 +319,7 @@ begin
      6 : begin f_config_pictures1.PageControl1.PageIndex:=j;    f_config_pictures1.Init;  end;
      7 : begin f_config_system1.PageControl1.PageIndex:=j;      f_config_system1.Init;  end;
      8 : begin f_config_internet1.PageControl1.PageIndex:=j;    f_config_internet1.Init;  end;
+     9 : begin f_config_calendar1.PageControl1.PageIndex:=j;    f_config_calendar1.Init;  end;
    end;
    cmain.configpage_i:=i;
    cmain.configpage_j:=j;
@@ -359,6 +366,7 @@ case PageControl1.PageIndex of
   6 :  f_config_pictures1.ShowHelp;
   7 :  f_config_system1.ShowHelp;
   8 :  f_config_internet1.ShowHelp;
+  9 :  f_config_calendar1.ShowHelp;
 end;
 end;
 
@@ -498,6 +506,7 @@ f_config_solsys1.csc:=Fcsc;
 f_config_display1.csc:=Fcsc;
 f_config_pictures1.csc:=Fcsc;
 f_config_system1.csc:=Fcsc;
+f_config_calendar1.csc:=Fcsc;
 end;
 
 procedure Tf_config.SetCplot(value: Tconf_plot);
