@@ -2026,8 +2026,8 @@ procedure Tf_catgen.ComboBox1Change(Sender: TObject);
 begin
 case Combobox1.ItemIndex of
 0 : nebulaesizescale:=1;
-2 : nebulaesizescale:=60;
-3 : nebulaesizescale:=3600;
+1 : nebulaesizescale:=60;
+2 : nebulaesizescale:=3600;
 end;
 end;
 
@@ -2186,6 +2186,7 @@ if opendialog1.execute then begin
   FloatEdit2.value:=ini.readFloat('Page2','magmax',FloatEdit2.value);
   LongEdit1.value:=ini.readInteger('Page2','nebsize',LongEdit1.value);
   Combobox1.itemindex:=ini.readInteger('Page2','nebunit',Combobox1.itemindex);
+  ComboBox1Change(self);
   Combobox3.itemindex:=ini.readInteger('Page2','nebtype',Combobox3.itemindex);
   checkbox1.checked:=ini.readBool('Page2','neblog',checkbox1.checked);
   LongEdit2.value:=ini.readInteger('Page2','linewidth',LongEdit2.value);
