@@ -2409,7 +2409,7 @@ begin
           3:  key:=rec.neb.id;
           4:  key:=rec.outlines.id;
           end;
-          key:=trim(key);
+          key:=uppercase(StringReplace(key,' ','',[rfReplaceAll]));
           if key<>'' then begin
             if CheckBox8.Checked then key:=usealt[0].l+key;
             addindex;
