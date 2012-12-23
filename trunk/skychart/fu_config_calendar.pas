@@ -14,6 +14,7 @@ type
   Tf_config_calendar = class(TFrame)
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
     LongEdit1: TLongEdit;
     Mainpanel: TPanel;
     PageControl1: TPageControl;
