@@ -1378,6 +1378,7 @@ resourcestring
   rsZoomMoreToVi = 'Zoom more to view the object';
   rsRotateBy180D = 'Rotate by 180 degrees';
   rsResetRotatio = 'Reset rotation';
+  rsRotateCylind = 'Rotate cylindrical projections to the chart center';
 
 implementation
 

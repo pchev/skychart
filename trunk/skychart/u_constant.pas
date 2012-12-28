@@ -747,6 +747,7 @@ type
     gr2e, raprev, deprev: double;
     EarthB, abv, ehn: coordvector;
     NutMAT, EqpMAT, EqtMAT: rotmatrix;
+    ProjEquatorCentered: boolean;
     Force_DT_UT, horizonopaque, autorefresh, TrackOn, TargetOn,
     Quick, NP, SP, moved, abm, asl, ShowScale: boolean;
     projtype: char;
@@ -1657,6 +1658,7 @@ begin
       EqpMAT[i, j] := Source.EqpMAT[i, j];
       EqtMAT[i, j] := Source.EqtMAT[i, j];
     end;
+  ProjEquatorCentered := Source.ProjEquatorCentered;
   eqeq := Source.eqeq;
   nutl := Source.nutl;
   nuto := Source.nuto;

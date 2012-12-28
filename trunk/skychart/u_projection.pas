@@ -199,18 +199,32 @@ case c.projtype of              // AIPS memo 27
     result:=true;
     end;
 'C' : begin                 // CAR
-    sofa_S2C(ar,de,p);
-    sofa_rxp(c.EqpMAT,p,pr);
-    sofa_c2s(pr,xx,yy);
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(ar,de,p);
+      sofa_rxp(c.EqpMAT,p,pr);
+      sofa_c2s(pr,xx,yy);
+    end else begin
+      xx:=ar-ac;
+      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
+      yy:=de-dc;
+    end;
     xx:=-xx;
     result:=true;
     end;
 'M' : begin                 // MER
-    sofa_S2C(ar,de,p);
-    sofa_rxp(c.EqpMAT,p,pr);
-    sofa_c2s(pr,xx,yy);
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(ar,de,p);
+      sofa_rxp(c.EqpMAT,p,pr);
+      sofa_c2s(pr,xx,yy);
+      yy:=pid2+yy;
+      yy:=ln(tan((yy)/2));
+    end else begin
+      xx:=ar-ac;
+      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
+      yy:=pid2+de;
+      yy:=ln(tan((yy)/2))-ln(tan((pid2+dc)/2));
+    end;
     xx:=-xx;
-    yy:=ln(tan((pid2+yy)/2));
     result:=true;
     end;
 'S' : begin                 // SIN
@@ -290,17 +304,31 @@ case c.projtype of              // AIPS memo 27
     yy:= r*(s2*c1-c2*s1*c3);
     end;
 'C' : begin                 // CAR
-    sofa_S2C(ar,de,p);
-    sofa_rxp(c.EqpMAT,p,pr);
-    sofa_c2s(pr,xx,yy);
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(ar,de,p);
+      sofa_rxp(c.EqpMAT,p,pr);
+      sofa_c2s(pr,xx,yy);
+    end else begin
+      xx:=ar-ac;
+      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
+      yy:=de-dc;
+    end;
     xx:=-xx;
     end;
 'M' : begin                 // MER
-    sofa_S2C(ar,de,p);
-    sofa_rxp(c.EqpMAT,p,pr);
-    sofa_c2s(pr,xx,yy);
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(ar,de,p);
+      sofa_rxp(c.EqpMAT,p,pr);
+      sofa_c2s(pr,xx,yy);
+      yy:=pid2+yy;
+      yy:=ln(tan((yy)/2));
+    end else begin
+      xx:=ar-ac;
+      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
+      yy:=pid2+de;
+      yy:=ln(tan((yy)/2))-ln(tan((pid2+dc)/2));
+    end;
     xx:=-xx;
-    yy:=ln(tan((pid2+yy)/2));
     end;
 'S' : begin                 // SIN
     hh := ar-ac ;
@@ -446,17 +474,28 @@ case c.projtype of
     hh:=(arctan2((c3*s1),(c2*s3+s2*c3*c1) ));
     ar := ac - hh - 1E-9 ;
    end;
-'C' : begin
-    sofa_S2C(-x,-y,p);
-    sofa_rxp(c.EqtMAT,p,pr);
-    sofa_c2s(pr,ar,de);
+'C' : begin                 // CAR
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(-x,-y,p);
+      sofa_rxp(c.EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      ar:=ac-x;
+      de:=dc-y;
+    end;
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;
-'M' : begin
-    y:=2*arctan(exp(y))-pid2;
-    sofa_S2C(-x,-y,p);
-    sofa_rxp(c.EqtMAT,p,pr);
-    sofa_c2s(pr,ar,de);
+'M' : begin                 // MER
+    if c.ProjEquatorCentered then begin
+      y:=2*arctan(exp(y))-pid2;
+      sofa_S2C(-x,-y,p);
+      sofa_rxp(c.EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      y:=2*arctan(exp(-y+ln(tan((pid2+dc)/2))))-pid2;
+      ar:=ac-x;
+      de:=y;
+    end;
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;
 'S' : begin
