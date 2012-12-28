@@ -43,6 +43,7 @@ type
     Button2: TButton;
     Button7: TButton;
     Button8: TButton;
+    CheckBox1: TCheckBox;
     MessierBox: TCheckBox;
     epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
@@ -262,6 +263,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
@@ -397,6 +399,7 @@ CoordType.Caption:=rsTypeOfCoordi;
 Button2.Caption:=rsDefault;
 Label4.caption:=rsCompassRoseS;
 CheckBox13.caption:=rsShowCompass;
+CheckBox1.Caption:=rsRotateCylind+crlf+'(CAR, MER)';
 SetHelp(self,hlpCfgChart);
 SetValidCoordtype;
 end;
@@ -614,6 +617,7 @@ setfieldhint(labelp7,7); combobox8.hint:=labelp7.hint;
 setfieldhint(labelp8,8); combobox9.hint:=labelp8.hint;
 setfieldhint(labelp9,9); combobox10.hint:=labelp9.hint;
 setfieldhint(labelp10,10); combobox11.hint:=labelp10.hint;
+CheckBox1.Checked:=csc.ProjEquatorCentered;
 end;
 
 procedure Tf_config_chart.ShowObjList;
@@ -980,6 +984,12 @@ StarAutoBox.Checked:=true;
 NebBox.Checked:=true;
 BigNebBox.Checked:=true;
 MessierBox.Checked:=true;
+end;
+
+procedure Tf_config_chart.CheckBox1Change(Sender: TObject);
+begin
+if LockChange then exit;
+  csc.ProjEquatorCentered := CheckBox1.Checked;
 end;
 
 
