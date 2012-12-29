@@ -27,7 +27,9 @@ type
      coordvector = array[1..3] of double;
      rotmatrix = array[1..3,1..3] of double;
 
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double;
+                     pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean;
+                     peqc: boolean;hax,hay: double);
 procedure GetADxy(x,y:Integer ; var a,d : Double);
 PROCEDURE Precession(ti,tf : double; VAR ari,dei : double);
 Function sgn(x:Double):Double ;
@@ -141,12 +143,13 @@ var
   xmin,xmax,ymin,ymax,Xshift,Yshift,ProjPole : Integer;
   BxGlb,ByGlb,AxGlb,AyGlb,sintheta,costheta: Double;
   projtype : char;
-  Northpoleinmap,Southpoleinmap : boolean;
+  Northpoleinmap,Southpoleinmap,ProjEquatorCentered : boolean;
   appcaption : string;
   UseCache : Boolean = True;
-  rt: rotmatrix;
   prec_r : rotmatrix;
   prec_j0, prec_j1: double;
+  EqpMAT, EqtMAT: rotmatrix;
+  haicx, haicy: double;
 
 implementation
 
@@ -308,9 +311,10 @@ begin
    sofa_Cr(w, r);
 end;
 
-Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double; pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean);
+Procedure InitCatWin(ax,ay,bx,by,st,ct,ac,dc,azc,hc,jdt,jdc,sidt,lat : double;
+                     pjp,xs,ys,xi,xa,yi,ya : integer; projt : char; np,sp : boolean;
+                     peqc: boolean;hax,hay: double);
 var acc,dcc: double;
-    rm: rotmatrix;
 begin
    BxGlb:= bx;
    ByGlb:= by;
@@ -334,6 +338,9 @@ begin
    projtype:=projt;
    Northpoleinmap:=np;
    Southpoleinmap:=sp;
+   ProjEquatorCentered:=peqc;
+   haicx:=hax;
+   haicy:=hay;
    case ProjPole of
    0: begin
       acentre:=azc;    // equat
@@ -361,10 +368,10 @@ begin
       dcc:=becentre;
       end;
    end;
-   sofa_Ir(rm);
-   sofa_Rz(deg2rad*acc, rm);
-   sofa_Ry(-deg2rad*dcc, rm);
-   sofa_tr(rm,rt);
+   sofa_Ir(EqpMAT);
+   sofa_Rz(deg2rad*acc, EqpMAT);
+   sofa_Ry(-deg2rad*dcc, EqpMAT);
+   sofa_tr(EqpMAT,EqtMAT);
 end;
 
 Function PadZeros(x : string ; l :integer) : string;
@@ -480,6 +487,99 @@ l:=rmod(l+360,360);
 b:=rad2deg*arcsin(sin(de)*sin(dp)+cos(de)*cos(dp)*cos(ar));
 end;
 
+// Same function as in u_projection.pas
+// must be copied every time it is changed
+Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double);
+Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y,z : Extended ;
+    p,pr: coordvector;
+Begin
+s1:=0;c1:=0;s2:=0;c2:=0;s3:=0;c3:=0;
+x:=(xx*costheta-yy*sintheta) ;     // AIPS memo 27
+y:=(-yy*costheta-xx*sintheta);
+case projtype of
+'A' : begin
+    r :=(pid2-sqrt(x*x+y*y)) ;
+    a := arctan2(x,y) ;
+    sincos(a,s1,c1);
+    sincos(dc,s2,c2);
+    sincos(r,s3,c3);
+    de:=(arcsin( s2*s3 - c2*c3*c1)) + 1E-9 ;
+    hh:=(arctan2((c3*s1),(c2*s3+s2*c3*c1) ));
+    ar := ac - hh - 1E-9 ;
+   end;
+'C' : begin                 // CAR
+    if ProjEquatorCentered then begin
+      sofa_S2C(-x,-y,p);
+      sofa_rxp(EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      ar:=ac-x;
+      de:=dc-y;
+    end;
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
+    end;
+'H' : begin                 // Hammer-Aitoff
+    if ProjEquatorCentered then begin
+      z:=1-(x/4)*(x/4)-(y/2)*(y/2);
+      if z>=0 then z:=sqrt(z)
+              else z:=0;
+      x:=pi+2*arctan2(2*z*z-1,z*x/2);
+      y:=-arcsin(y*z);
+      sofa_S2C(x,y,p);
+      sofa_rxp(EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      x:=x+haicx;
+      y:=y+haicy;
+      z:=1-(x/4)*(x/4)-(y/2)*(y/2);
+      if z>=0 then z:=sqrt(z)
+              else z:=0;
+      ar:=rmod(ac+pi+2*arctan2(2*z*z-1,z*x/2)+pi2,pi2);
+      y:=(-y*z);
+      if abs(y)<=1 then de:=arcsin(y)
+                   else de:=0;
+    end;
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
+    end;
+'M' : begin                 // MER
+    if ProjEquatorCentered then begin
+      y:=2*arctan(exp(y))-pid2;
+      sofa_S2C(-x,-y,p);
+      sofa_rxp(EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      y:=2*arctan(exp(-y+ln(tan((pid2+dc)/2))))-pid2;
+      ar:=ac-x;
+      de:=y;
+    end;
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
+    end;
+'S' : begin
+    sincos(dc,s1,c1);
+    x:=-(x);
+    y:=-(y);
+    r:=sqrt(1-x*x-y*y);
+    ar:=ac+(arctan2(x,(c1*r-y*s1)));
+    de:=(arcsin(y*c1+s1*r));
+    end;
+'T' : begin
+    sincos(dc,s1,c1);
+    x:=-(x);
+    y:=-(y);
+    ar:=ac+(arctan2(x,(c1-y*s1)));
+    de:=(arctan((cos(ar-ac)*(y*c1+s1))/(c1-y*s1)));
+    end;
+else begin
+    projtype:='A';
+    r :=(pid2-sqrt(x*x+y*y)) ;
+    a := arctan2(x,y) ;
+    de:=(arcsin( sin(dc)*sin(r) - cos(dc)*cos(r)*cos(a) )) + 1E-9 ;
+    hh:=(arctan2((cos(r)*sin(a)),(cos(dc)*sin(r)+sin(dc)*cos(r)*cos(a)) ));
+    ar := ac - hh - 1E-9 ;
+    end;
+end;
+end ;
+
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double );
 Var a,r,hh,s1,c1,x,y,ac,dc : Double ;
     p,pr: coordvector;
@@ -502,63 +602,9 @@ case Projpole of
        dc:=becentre;
        end;
 end;
-x:=(xx*costheta-yy*sintheta) ;     // AIPS memo 27
-y:=(-yy*costheta-xx*sintheta);
-case projtype of
-'A' : begin
-    r :=DegToRad(90-sqrt(x*x+y*y)) ;
-    a := arctan2(x,y) ;
-    dc:= DegToRad(dc) ;
-    de:=RadToDeg(arcsin( sin(dc)*sin(r) - cos(dc)*cos(r)*cos(a) )) + 1E-7 ;
-    hh:=RadToDeg(arctan2((cos(r)*sin(a)),(cos(dc)*sin(r)+sin(dc)*cos(r)*cos(a)) ));
-    ar := ac - hh - 1E-7 ;
-   end;
-'C' : begin
-    sofa_S2C(-deg2rad*xx,deg2rad*yy,p);
-    sofa_rxp(rt,p,pr);
-    sofa_c2s(pr,xx,yy);
-    ar := rad2deg*xx;
-    de := rad2deg*yy;
-    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
-    end;
-'M' : begin
-    yy:=2*arctan(exp(deg2rad*yy))-pid2;
-    sofa_S2C(-deg2rad*xx,yy,p);
-    sofa_rxp(rt,p,pr);
-    sofa_c2s(pr,xx,yy);
-    ar := rad2deg*xx;
-    de := rad2deg*yy;
-    if de>0 then de:=min(89.99999,de) else de:=max(-89.99999,de);
-    end;
-'S' : begin
-    dc:=degtorad(dc);
-    s1:=sin(dc);
-    c1:=cos(dc);
-    x:=-degtorad(x);
-    y:=-degtorad(y);
-    r:=sqrt(1-x*x-y*y);
-    ar:=ac+radtodeg(arctan2(x,(c1*r-y*s1)));
-    de:=radtodeg(arcsin(y*c1+s1*r));
-    end;
-'T' : begin
-    dc:=degtorad(dc);
-    s1:=sin(dc);
-    c1:=cos(dc);
-    x:=-degtorad(x);
-    y:=-degtorad(y);
-    ar:=ac+radtodeg(arctan2(x,(c1-y*s1)));
-    de:=radtodeg(arctan((cos(degtorad(ar-ac))*(y*c1+s1))/(c1-y*s1)));
-    end;
-else begin
-    projtype:='A';
-    r :=DegToRad(90-sqrt(x*x+y*y)) ;
-    a := arctan2(x,y) ;
-    dc:= DegToRad(dc) ;
-    de:=RadToDeg(arcsin( sin(dc)*sin(r) - cos(dc)*cos(r)*cos(a) )) + 1E-7 ;
-    hh:=RadToDeg(arctan2((cos(r)*sin(a)),(cos(dc)*sin(r)+sin(dc)*cos(r)*cos(a)) ));
-    ar := ac - hh - 1E-7 ;
-    end;
-end;
+InvProj2(xx*deg2rad,yy*deg2rad,ac*deg2rad,dc*deg2rad,ar,de);
+ar:=rad2deg*ar;
+de:=rad2deg*de;
 case Projpole of
    1 : begin
        Hz2Eq(-ar,de,a,hh) ;
@@ -1213,9 +1259,9 @@ repeat
       inc(nSM);
     end;
     xx:=xx+dx ;
-  until xx>xmax;
+  until xx>(xmax+dx);
   yy:=yy+dy ;
-until yy>ymax;
+until yy>(ymax+dy);
 end;
 
 Procedure FindRegionDS(ar,de : double; var zone : string);

@@ -216,6 +216,7 @@ end;
 
 Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
 var ac,dc,rac,ddc: double;
+    i,j: integer;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
@@ -236,7 +237,7 @@ begin
   end;
   rac:=c.racentre; ddc:=c.decentre;
   if c.ApparentPos then mean_equatorial(rac,ddc,c,true,true);
-  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*rac/15,rad2deg*ddc,ac,dc,c.CurJDUT,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c));
+  InitCatWin(c.axglb,c.ayglb,c.bxglb/rad2deg,c.byglb/rad2deg,c.sintheta,c.costheta,rad2deg*rac/15,rad2deg*ddc,ac,dc,c.CurJDUT,c.JDChart,rad2deg*c.CurST/15,c.ObsLatitude,c.ProjPole,c.xshift,c.yshift,c.xmin,c.xmax,c.ymin,c.ymax,c.projtype,northpole2000inmap(c),southpole2000inmap(c),c.ProjEquatorCentered,c.haicx,c.haicy);
   result:=true;
 end;
 

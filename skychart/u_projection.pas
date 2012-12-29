@@ -380,6 +380,10 @@ if clip and (c.projpole=AltAz) and c.horizonopaque and (h<=c.HorizonMax) then be
 end else result:=Proj2(ar,de,ac,dc,X,Y,c);
 END ;
 
+// This function must be copied every time it is changed
+// to library/catalog/skylibcat.pas
+// But without reference to c: Tconf_skychart.
+// Every necessary parameters must be added to InitCatwin
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Tconf_skychart);
 Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y,z : Extended ;
     p,pr: coordvector;
@@ -407,7 +411,7 @@ case c.projtype of
       ar:=ac-x;
       de:=dc-y;
     end;
-    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
     end;
 'H' : begin                 // Hammer-Aitoff
     if c.ProjEquatorCentered then begin
@@ -430,7 +434,7 @@ case c.projtype of
       if abs(y)<=1 then de:=arcsin(y)
                    else de:=0;
     end;
-    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
     end;
 'M' : begin                 // MER
     if c.ProjEquatorCentered then begin
@@ -443,7 +447,7 @@ case c.projtype of
       ar:=ac-x;
       de:=y;
     end;
-    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
+    if de>0 then de:=(min(de,pid2-0.00002)) else de:=(max(de,-pid2-0.00002));
     end;
 'S' : begin
     sincos(dc,s1,c1);
@@ -451,7 +455,7 @@ case c.projtype of
     y:=-(y);
     r:=sqrt(1-x*x-y*y);
     ar:=ac+(arctan2(x,(c1*r-y*s1)));
-    de:=double(arcsin(y*c1+s1*r));
+    de:=(arcsin(y*c1+s1*r));
     end;
 'T' : begin
     sincos(dc,s1,c1);
