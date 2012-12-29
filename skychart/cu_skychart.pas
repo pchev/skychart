@@ -858,7 +858,12 @@ sofa_Ry(-dcc, cfgsc.EqpMAT);
 sofa_tr(cfgsc.EqpMAT,cfgsc.EqtMAT);
 // Hammer-Aitoff center offset
 if (not cfgsc.ProjEquatorCentered) and (cfgsc.projtype='H') then begin
- Proj2(cfgsc.racentre,0.0,cfgsc.racentre,cfgsc.decentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+ case cfgsc.ProjPole of
+  Equat: Proj2(cfgsc.racentre,0.0,cfgsc.racentre,cfgsc.decentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+  Altaz: Proj2(cfgsc.acentre,0.0,cfgsc.acentre,cfgsc.hcentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+  Gal  : Proj2(cfgsc.lcentre,0.0,cfgsc.lcentre,cfgsc.bcentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+  Ecl  : Proj2(cfgsc.lecentre,0.0,cfgsc.lecentre,cfgsc.becentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+ end;
 end;
 // is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
