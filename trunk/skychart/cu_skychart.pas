@@ -546,7 +546,11 @@ if full then begin
   cfgsc.FieldNum:=GetFieldNum(w-musec);
   cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
   // full sky button
-  if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)and(cfgsc.hcentre>pid4)then cfgsc.projtype:='A' ;
+  if (cfgsc.ProjPole=Altaz)
+     and ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered))
+     and (cfgsc.fov>pi)
+     and (cfgsc.hcentre>pid4)
+     then cfgsc.projtype:='A' ;
   // max arc altaz fov
   if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
      if (not cfgsc.horizonopaque) and (cfgsc.fov>pi) then begin
@@ -800,7 +804,11 @@ w := maxvalue([w,h]);
 cfgsc.FieldNum:=GetFieldNum(w-musec);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // full sky button
-if (cfgsc.ProjPole=Altaz)and(cfgsc.fov>pi)and(cfgsc.hcentre>pid4)then cfgsc.projtype:='A' ;
+ if (cfgsc.ProjPole=Altaz)
+    and ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered))
+    and (cfgsc.fov>pi)
+    and (cfgsc.hcentre>pid4)
+    then cfgsc.projtype:='A' ;
 // normalize the coordinates
 if (cfgsc.decentre>=(pid2-secarc)) then cfgsc.decentre:=pid2-secarc;
 if (cfgsc.decentre<=(-pid2+secarc)) then cfgsc.decentre:=-pid2+secarc;
@@ -848,6 +856,10 @@ sofa_Ir(cfgsc.EqpMAT);
 sofa_Rz(acc, cfgsc.EqpMAT);
 sofa_Ry(-dcc, cfgsc.EqpMAT);
 sofa_tr(cfgsc.EqpMAT,cfgsc.EqtMAT);
+// Hammer-Aitoff center offset
+if (not cfgsc.ProjEquatorCentered) and (cfgsc.projtype='H') then begin
+ Proj2(cfgsc.racentre,0.0,cfgsc.racentre,cfgsc.decentre,cfgsc.haicx,cfgsc.haicy,cfgsc,true,true);
+end;
 // is the pole in the chart
 cfgsc.NP:=northpoleinmap(cfgsc);
 cfgsc.SP:=southpoleinmap(cfgsc);
@@ -1049,7 +1061,7 @@ var  x1,y1: Double;
 begin
 if cfgsc.JDChart=jd2000 then result:=0
 else begin
-  Proj3(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc);
+  Proj2(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc,false);
   result:=arctan2(x1,y1);
 end;
 end;
@@ -2691,6 +2703,7 @@ var a1,h1,ac,hc,dda,ddh:double;
     col,n:integer;
     ok,labelok:boolean;
 
+// draw meridian lines
 function DrawAline(a,h,dd:double):boolean;
 var x1,y1,al:double;
     n,w: integer;
@@ -2709,6 +2722,10 @@ end else begin
      col := Fplot.cfgplot.Color[12];
    end;
 end;
+if h>(pid2-2*dd/3) then h:=pid2-2*dd/3;
+if h>(pid2+2*dd/3) then h:=pid2+2*dd/3;
+if h<(-pid2-2*dd/3) then h:=-pid2-2*dd/3;
+if h<(-pid2+2*dd/3) then h:=-pid2+2*dd/3;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -2740,6 +2757,7 @@ until (xx<-cfgsc.Xmax)or(xx>2*cfgsc.Xmax)or
 result:=(n>1);
 end;
 
+// draw altitude lines
 function DrawHline(a,h,da:double):boolean;
 var x1,y1:double;
     n,w: integer;

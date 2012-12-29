@@ -6,8 +6,8 @@ object f_config_chart: Tf_config_chart
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 109
-  DesignTop = 363
+  DesignLeft = 536
+  DesignTop = 362
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -828,7 +828,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 83
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -845,7 +845,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 55
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -863,7 +863,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 111
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -881,7 +881,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 139
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -898,7 +898,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 167
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -915,7 +915,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 195
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -933,7 +933,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 223
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -951,7 +951,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 251
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -969,7 +969,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 279
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -987,7 +987,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 307
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0
@@ -1005,7 +1005,7 @@ object f_config_chart: Tf_config_chart
           Left = 195
           Height = 23
           Top = 336
-          Width = 73
+          Width = 180
           AutoCompleteText = [cbactSearchAscending]
           ItemHeight = 0
           ItemIndex = 0

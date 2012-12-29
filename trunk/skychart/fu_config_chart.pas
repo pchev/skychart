@@ -585,14 +585,18 @@ end;
 
 procedure Tf_config_chart.ShowProjection;
    procedure setprojrange(var cb:Tcombobox;n:integer);
+   const pn='HAI MER CAR ARC TAN SIN';
+   var i: integer;
    begin
      cb.items.clear;
-     cb.items.add('MER');
-     cb.items.add('CAR');
-     if cshr.fieldnum[n]<=250 then cb.items.add('ARC');
-     if cshr.fieldnum[n]<=180 then cb.items.add('TAN');
-     if cshr.fieldnum[n]<=90 then cb.items.add('SIN');
-     cb.text:=csc.projname[n]
+     cb.items.add('HAI '+rsHammerAitoff);
+     cb.items.add('MER '+rsMercator);
+     cb.items.add('CAR '+rsCartesian);
+     if cshr.fieldnum[n]<=250 then cb.items.add('ARC '+rsZenitalEquid);
+     if cshr.fieldnum[n]<=180 then cb.items.add('TAN '+rsGnomonic);
+     if cshr.fieldnum[n]<=90 then cb.items.add('SIN '+rsSlantOrthogr);
+     i:=(pos(csc.projname[n],pn)-1) div 4;
+     if (i>=0)and(i<cb.Items.Count) then cb.text:=cb.Items[i];
    end;
 begin
 setprojrange(combobox1,0);
@@ -835,7 +839,7 @@ procedure Tf_config_chart.ProjectionChange(Sender: TObject);
 begin
 if LockChange then exit;
 if sender is TComboBox then with sender as TComboBox do
-   csc.projname[tag]:=text;
+   csc.projname[tag]:=trim(copy(text,1,3));
 end;
 
 procedure Tf_config_chart.StarBoxClick(Sender: TObject);
