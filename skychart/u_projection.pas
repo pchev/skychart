@@ -34,8 +34,7 @@ Function RotationAngle(x1,y1,x2,y2: double; c: Tconf_skychart): double;
 Procedure WindowXY(x,y:Double; out WindowX,WindowY: single; c: Tconf_skychart);
 Procedure XYWindow( x,y: Integer; var Xwindow,Ywindow: double; c: Tconf_skychart);
 function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Tconf_skychart; tohrz:boolean=false):boolean;
-function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart ):boolean;
-PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart );
+function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart; rot:boolean=true; inithai:boolean=false ):boolean;
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double; c: Tconf_skychart );
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Tconf_skychart );
 procedure GetCoordxy(x,y:Integer ; var l,b : Double; c: Tconf_skychart);
@@ -177,8 +176,8 @@ Begin
    ywindow:= (y-c.yshift-c.AyGlb)/c.ByGlb;
 end ;
 
-function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart ):boolean;
-Var r,hh,s1,s2,s3,c1,c2,c3 : Extended ;
+function Proj2(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart; rot:boolean=true; inithai:boolean=false ):boolean;
+Var r,hh,g,s1,s2,s3,c1,c2,c3 : Extended ;
     xx,yy: double;
     p,pr: coordvector;
 BEGIN
@@ -207,6 +206,26 @@ case c.projtype of              // AIPS memo 27
       xx:=ar-ac;
       if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
       yy:=de-dc;
+    end;
+    xx:=-xx;
+    result:=true;
+    end;
+'H' : begin                 // Hammer-Aitoff
+    if c.ProjEquatorCentered then begin
+      sofa_S2C(ar,de,p);
+      sofa_rxp(c.EqpMAT,p,pr);
+      sofa_c2s(pr,xx,yy);
+      g:=sqrt(2/(1+(cos(yy)*cos(xx/2))));
+      xx:=2*g*cos(yy)*sin(xx/2);
+      yy:=g*sin(yy);
+    end else begin
+      xx:=ar-ac;
+      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
+      yy:=de;
+      g:=sqrt(2/(1+(cos(yy)*cos(xx/2))));
+      if inithai then c.haicy:=-g*sin(dc);
+      xx:=2*g*cos(yy)*sin(xx/2);
+      yy:=g*sin(yy)+c.haicy;
     end;
     xx:=-xx;
     result:=true;
@@ -280,108 +299,13 @@ else begin
     result:=true;
     end;
 end;
-X:=xx*c.costheta+yy*c.sintheta;
-Y:=yy*c.costheta-xx*c.sintheta;
-END ;
-
-PROCEDURE Proj3(ar,de,ac,dc : Double ; VAR X,Y : Double; c: Tconf_skychart );
-Var r,hh,s1,s2,s3,c1,c2,c3 : Extended ;
-    xx,yy: double;
-    p,pr: coordvector;
-BEGIN
-s1:=0;s2:=0;s3:=0;c1:=0;c2:=0;c3:=0;
-case c.projtype of              // AIPS memo 27
-'A' : begin                   //  ARC
-    hh := ac-ar ;
-    sincos(dc,s1,c1);
-    sincos(de,s2,c2);
-    sincos(hh,s3,c3);
-    r:=s1*s2 + c1*c2*c3;
-    if r>1 then r:=1;
-    r:= arccos(r)  ;
-    if r<>0 then r:= (r/sin(r));
-    xx:= r*c2*s3;
-    yy:= r*(s2*c1-c2*s1*c3);
-    end;
-'C' : begin                 // CAR
-    if c.ProjEquatorCentered then begin
-      sofa_S2C(ar,de,p);
-      sofa_rxp(c.EqpMAT,p,pr);
-      sofa_c2s(pr,xx,yy);
-    end else begin
-      xx:=ar-ac;
-      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
-      yy:=de-dc;
-    end;
-    xx:=-xx;
-    end;
-'M' : begin                 // MER
-    if c.ProjEquatorCentered then begin
-      sofa_S2C(ar,de,p);
-      sofa_rxp(c.EqpMAT,p,pr);
-      sofa_c2s(pr,xx,yy);
-      yy:=pid2+yy;
-      yy:=ln(tan((yy)/2));
-    end else begin
-      xx:=ar-ac;
-      if abs(xx)>pi then xx:=xx-sgn(xx)*pi2;
-      yy:=pid2+de;
-      yy:=ln(tan((yy)/2))-ln(tan((pid2+dc)/2));
-    end;
-    xx:=-xx;
-    end;
-'S' : begin                 // SIN
-    hh := ar-ac ;
-    sincos(dc,s1,c1);
-    sincos(de,s2,c2);
-    sincos(hh,s3,c3);
-    r:=s1*s2+c2*c1*c3;  // cos the
-    if r<=0 then begin  // > 90°
-      xx:=200;
-      yy:=200;
-    end else begin
-      xx:= -(c2*s3);
-      yy:= s2*c1-c2*s1*c3;
-    end;
-    if xx>200 then xx:=200
-     else if xx<-200 then xx:=-200;
-    if yy>200 then yy:=200
-     else if yy<-200 then yy:=-200;
-    end;
-'T' : begin                  //  TAN
-    hh := ar-ac ;
-    sincos(dc,s1,c1);
-    sincos(de,s2,c2);
-    sincos(hh,s3,c3);
-    r:=s1*s2+c2*c1*c3;     // cos the
-    if r<=0 then begin  // > 90°
-      xx:=200;
-      yy:=200;
-    end else begin
-      xx := -( c2*s3/r );
-      yy := (s2*c1-c2*s1*c3)/r ;
-    end;
-    if xx>200 then xx:=200
-     else if xx<-200 then xx:=-200;
-    if yy>200 then yy:=200
-     else if yy<-200 then yy:=-200;
-    end;
-else begin
-    c.projtype:='A';
-    hh := ac-ar ;
-    s1:=sin(dc);
-    s2:=sin(de);
-    c1:=cos(dc);
-    c2:=cos(de);
-    c3:=cos(hh);
-    r:= (arccos( s1*s2 + c1*c2*c3-1e-12 ))  ;
-    r:= (r/sin(r));
-    xx:= r*c2*sin(hh);
-    yy:= r*(s2*c1-c2*s1*c3);
-    end;
+if rot then begin
+  X:=xx*c.costheta+yy*c.sintheta;
+  Y:=yy*c.costheta-xx*c.sintheta;
+end else begin
+  X:=xx;
+  Y:=yy;
 end;
-X:=double(xx);
-Y:=double(yy);
 END ;
 
 function Projection(ar,de : Double ; VAR X,Y : Double; clip:boolean; c: Tconf_skychart; tohrz:boolean=false):boolean;
@@ -457,7 +381,7 @@ end else result:=Proj2(ar,de,ac,dc,X,Y,c);
 END ;
 
 Procedure InvProj2 (xx,yy,ac,dc : Double ; VAR ar,de : Double; c: Tconf_skychart);
-Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y : Extended ;
+Var a,r,hh,s1,c1,s2,c2,s3,c3,x,y,z : Extended ;
     p,pr: coordvector;
 Begin
 s1:=0;c1:=0;s2:=0;c2:=0;s3:=0;c3:=0;
@@ -482,6 +406,29 @@ case c.projtype of
     end else begin
       ar:=ac-x;
       de:=dc-y;
+    end;
+    if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
+    end;
+'H' : begin                 // Hammer-Aitoff
+    if c.ProjEquatorCentered then begin
+      z:=1-(x/4)*(x/4)-(y/2)*(y/2);
+      if z>=0 then z:=sqrt(z)
+              else z:=0;
+      x:=pi+2*arctan2(2*z*z-1,z*x/2);
+      y:=-arcsin(y*z);
+      sofa_S2C(x,y,p);
+      sofa_rxp(c.EqtMAT,p,pr);
+      sofa_c2s(pr,ar,de);
+    end else begin
+      x:=x+c.haicx;
+      y:=y+c.haicy;
+      z:=1-(x/4)*(x/4)-(y/2)*(y/2);
+      if z>=0 then z:=sqrt(z)
+              else z:=0;
+      ar:=rmod(ac+pi+2*arctan2(2*z*z-1,z*x/2)+pi2,pi2);
+      y:=(-y*z);
+      if abs(y)<=1 then de:=arcsin(y)
+                   else de:=0;
     end;
     if de>0 then de:=double(min(de,pid2-0.00002)) else de:=double(max(de,-pid2-0.00002));
     end;

@@ -790,6 +790,7 @@ type
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     ShowEarthShadowValid, ShowEclipticValid: boolean;
     HorizonMax, rap2000, dep2000, RefractionOffset: double;
+    haicx,haicy: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
     Xwrldmin, Xwrldmax, Ywrldmin, Ywrldmax: double;
     xmin, xmax, ymin, ymax, xshift, yshift, FieldNum, winx, winy,
@@ -1659,6 +1660,8 @@ begin
       EqtMAT[i, j] := Source.EqtMAT[i, j];
     end;
   ProjEquatorCentered := Source.ProjEquatorCentered;
+  haicx := Source.haicx;
+  haicy := Source.haicy;
   eqeq := Source.eqeq;
   nutl := Source.nutl;
   nuto := Source.nuto;

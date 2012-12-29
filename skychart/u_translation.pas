@@ -1379,6 +1379,12 @@ resourcestring
   rsRotateBy180D = 'Rotate by 180 degrees';
   rsResetRotatio = 'Reset rotation';
   rsRotateCylind = 'Rotate cylindrical projections to the chart center';
+  rsHammerAitoff = 'Hammer-Aitoff';
+  rsMercator = 'Mercator';
+  rsCartesian = 'Cartesian';
+  rsZenitalEquid = 'Zenital equidistant';
+  rsGnomonic = 'Gnomonic';
+  rsSlantOrthogr = 'Slant orthographic';
 
 implementation
 
