@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
-"PO-Revision-Date: 2012-11-18 14:15+0000\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
+"PO-Revision-Date: 2012-12-30 10:20+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:41+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -553,6 +553,10 @@ msgstr "%sNe peut pas ouvrir la base de donnée %s! %s"
 msgid "Cannot write to"
 msgstr "Ne peut pas écrire dans"
 
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr "Cartésien"
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Cascade"
@@ -1052,7 +1056,7 @@ msgstr "Trait point point"
 
 #: u_translation.rsdatabasefile
 msgid "Database file: "
-msgstr "Fichier: "
+msgstr "Fichier : "
 
 #: u_translation.rsdatabaseopen
 msgid "%sDatabase %s opened.%s"
@@ -1386,7 +1390,7 @@ msgstr "Dir"
 
 #: u_translation.rsdirectory
 msgid "Directory"
-msgstr "Répertoire"
+msgstr "Dossier"
 
 #: u_translation.rsdirectorynot
 msgid "Directory not found %s"
@@ -2061,6 +2065,10 @@ msgstr "Obtenir des mesures récentes du projet JUPOS"
 msgid "Globular cluster"
 msgstr "Amas globulaire"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr "Gnomonique"
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" Adv. Settings"
@@ -2129,6 +2137,10 @@ msgstr "Rayon de demi-masse"
 msgid "Halt after 1000 errors"
 msgstr "Arrêt après 1000 erreurs"
 
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr "Hammer-Aitoff"
+
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
 msgstr "HandPad Mode Selection"
@@ -2187,7 +2199,7 @@ msgstr "Horizon"
 
 #: u_translation.rshostname
 msgid "Hostname:"
-msgstr "Serveur:"
+msgstr "Nom d'hôte :"
 
 #: u_translation.rshour
 msgid "Hour"
@@ -2816,6 +2828,10 @@ msgstr "Moyenne de la date"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Position moyenne"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr "Mercator"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3579,7 +3595,7 @@ msgstr "Inclinaison du pole"
 
 #: u_translation.rsport
 msgid "Port:"
-msgstr "Port:"
+msgstr "Port :"
 
 #: u_translation.rsportconfigur
 msgid "Port Configuration"
@@ -4058,6 +4074,10 @@ msgstr "Heure du lever"
 msgid "Rotate by 180 degrees"
 msgstr "Rotation de 180 degrés"
 
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
+msgstr "Rotation des projections cylindriques au centre de la carte"
+
 #: u_translation.rsrotateleft
 msgid "Rotate left"
 msgstr "Rotation à gauche"
@@ -4534,6 +4554,10 @@ msgstr "Cartes du Ciel"
 msgid "Sky colour"
 msgstr "Couleur du ciel"
 
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr "orthographique oblique"
+
 #: u_translation.rsslew
 msgid "Slew"
 msgstr "Goto"
@@ -4652,7 +4676,7 @@ msgstr "Le logiciel de base de donnée SQL n'est probablement pas installé"
 
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
-msgstr "Base de donnée Sqlite"
+msgstr "Base de données Sqlite"
 
 #: u_translation.rssquare
 msgid "Square"
@@ -5188,7 +5212,7 @@ msgstr "Objets personnels"
 
 #: u_translation.rsuserid
 msgid "User id:"
-msgstr "Utilisateur"
+msgstr "Utilisateur :"
 
 #: u_translation.rsusername
 msgid "User name"
@@ -5389,6 +5413,10 @@ msgstr "Vous êtes mantenant prêt à afficher les astéroïdes pour cette péri
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Vous observez depuis une haute montagne près de l'océan et vous aimez observer l'image distordue des objets sous l'horizon."
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr "Zénital équidistants"
 
 #: u_translation.rszenith
 msgid "Zenith"

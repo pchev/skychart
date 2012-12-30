@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
 "PO-Revision-Date: 2012-11-10 17:27+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -552,6 +552,10 @@ msgstr "%sImpossibile aprire il database %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Impossibile scrivere su"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2058,6 +2062,10 @@ msgstr "Recupera misure recenti dal progetto JUPOS"
 msgid "Globular cluster"
 msgstr "Ammasso Globulare"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Imp. avanzate Gps-16\""
@@ -2125,6 +2133,10 @@ msgstr "Raggio di meta massa"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Fermati dopo 1000 errori"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2813,6 +2825,10 @@ msgstr "Medie per la data"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Posizione media"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -4054,6 +4070,10 @@ msgstr "Ora di levata"
 msgid "Rotate by 180 degrees"
 msgstr ""
 
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
+msgstr ""
+
 #: u_translation.rsrotateleft
 msgid "Rotate left"
 msgstr "Rotazione sinistra"
@@ -4529,6 +4549,10 @@ msgstr "Sky Charts"
 #: u_translation.rsskycolour
 msgid "Sky colour"
 msgstr "Colore del cielo"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5385,6 +5409,10 @@ msgstr "Ora sei pronto per visualizzare gli asteroidi di questo periodo."
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Se osservi da una montagna elevata, la linea dell'orizzonte risulterà più bassa rispetto al livello del mare."
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"

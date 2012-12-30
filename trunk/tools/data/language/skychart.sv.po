@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
-"PO-Revision-Date: 2012-11-04 01:30+0000\n"
-"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
+"PO-Revision-Date: 2012-12-29 15:42+0000\n"
+"Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:41+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -46,7 +46,7 @@ msgstr "Avbrutet av användaren"
 
 #: u_translation.rsabortslew
 msgid "Abort Slew"
-msgstr "Avbryt sökning"
+msgstr "Avbryt rikta in teleskop"
 
 #: u_translation.rsabout
 msgid "About"
@@ -552,6 +552,10 @@ msgstr "%sKan inte öppna databas %s! %s"
 msgid "Cannot write to"
 msgstr "Kan inte skriva till"
 
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
+
 #: u_translation.rscascade
 msgid "Cascade"
 msgstr "Överlappande"
@@ -1042,7 +1046,7 @@ msgstr "Streck"
 
 #: u_translation.rsdashdot1
 msgid "Dash dot"
-msgstr "Streck prick"
+msgstr "Streck punkt"
 
 #: u_translation.rsdashdotdot1
 msgid "Dash dot dot"
@@ -1454,7 +1458,7 @@ msgstr "Filtrera inte Messierobjekt"
 
 #: u_translation.rsdot1
 msgid "Dot"
-msgstr "Prick"
+msgstr "Punkt"
 
 #: u_translation.rsdoubles
 msgid "Doubles"
@@ -2056,6 +2060,10 @@ msgstr "Hämta senaste GRS mätningen från JUPOS projektet."
 msgid "Globular cluster"
 msgstr "Klotformad stjärnhop"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" avancerade inställningar"
@@ -2123,6 +2131,10 @@ msgstr "Half-mass radie"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Stopp efter 1000 fel"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2430,7 +2442,7 @@ msgstr "Km."
 
 #: u_translation.rsknot
 msgid "Knot"
-msgstr "Knut"
+msgstr "Knop"
 
 #: u_translation.rsl
 msgid "L"
@@ -2811,6 +2823,10 @@ msgstr "Medelvärde datum"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Medelposition"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3986,7 +4002,7 @@ msgstr "Återställ till standard och starta om"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Återställ rotation"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4050,6 +4066,10 @@ msgstr "Går upp"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
+msgstr "Rotera 180 grader"
+
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
 msgstr ""
 
 #: u_translation.rsrotateleft
@@ -4528,9 +4548,13 @@ msgstr "Sky Charts"
 msgid "Sky colour"
 msgstr "Färg på himlen"
 
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
+
 #: u_translation.rsslew
 msgid "Slew"
-msgstr "Sök"
+msgstr "Rikta in teleskop"
 
 #: u_translation.rsslewspeed
 msgid " Slew Speed"
@@ -4538,7 +4562,7 @@ msgstr " Sökhastighet"
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr "Sök markörens position"
+msgstr "Gå till markörens position"
 
 #: u_translation.rsslow
 msgid "Slow"
@@ -4850,7 +4874,7 @@ msgstr "Teleskopet inte anslutet"
 
 #: u_translation.rstelescopeset
 msgid "Telescope settings"
-msgstr "Teleskopinställningar"
+msgstr "Systeminställningar"
 
 #: u_translation.rstelescopetyp
 msgid "Telescope type"
@@ -4994,7 +5018,7 @@ msgstr "Följning"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
-msgstr "Följ teleskop"
+msgstr "Följ teleskopet"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5384,6 +5408,10 @@ msgstr "Du kan nu visa asteroider för denna tidsperiod."
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Om du observerar från ett högt belägen plats, kommer horisontlinjen lägre än om du befunnit dig vid havsnivån."
 
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
+
 #: u_translation.rszenith
 msgid "Zenith"
 msgstr "Zenit"
@@ -5410,7 +5438,7 @@ msgstr "Förstora"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "Zooma mer för att se objektet"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

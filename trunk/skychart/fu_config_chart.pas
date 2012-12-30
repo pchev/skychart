@@ -399,7 +399,7 @@ CoordType.Caption:=rsTypeOfCoordi;
 Button2.Caption:=rsDefault;
 Label4.caption:=rsCompassRoseS;
 CheckBox13.caption:=rsShowCompass;
-CheckBox1.Caption:=rsRotateCylind+crlf+'(CAR, MER)';
+CheckBox1.Caption:=rsRotateCylind+crlf+'(HAI, CAR, MER)';
 SetHelp(self,hlpCfgChart);
 SetValidCoordtype;
 end;

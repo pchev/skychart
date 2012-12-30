@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
 "PO-Revision-Date: 2012-05-06 22:00+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -552,6 +552,10 @@ msgstr "%sNe mogu otvoriti bazu podataka %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "NE mogu zapisati na"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2057,6 +2061,10 @@ msgstr "Preuzmi najnovija GRS mjerenja JUPOS projekta"
 msgid "Globular cluster"
 msgstr "Kuglasti skup"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" Napredne postavke"
@@ -2124,6 +2132,10 @@ msgstr ""
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Zaustavi nakon 1000 grešaka"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2812,6 +2824,10 @@ msgstr "Središnji datuma"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Središnja pozicija"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -4053,6 +4069,10 @@ msgstr "Vrijeme izlaska"
 msgid "Rotate by 180 degrees"
 msgstr ""
 
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
+msgstr ""
+
 #: u_translation.rsrotateleft
 msgid "Rotate left"
 msgstr "Okreni lijevo"
@@ -4528,6 +4548,10 @@ msgstr "Karta neba"
 #: u_translation.rsskycolour
 msgid "Sky colour"
 msgstr "Boja neba"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5384,6 +5408,10 @@ msgstr "Spremni ste za prikaz asteroida za trenutni period."
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Ako promatrate visoko na planini, linija horizonta će biti niže nego što bi bila na razini mora."
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"
