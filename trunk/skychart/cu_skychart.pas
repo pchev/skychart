@@ -972,7 +972,12 @@ if Fcatalog.OpenStar then
        else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al,0,2)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
-          SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+          {$ifdef mswindows}
+          if gk=rec.star.greeksymbol then SetLabel(lid,xx,yy,0,2,1,gk,al,0,2)
+                                     else SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+          {$else}
+          SetLabel(lid,xx,yy,0,2,1,gk,al,0,2);
+          {$endif}
         end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al,0,4);
     end;
  end;
