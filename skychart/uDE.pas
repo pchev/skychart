@@ -225,7 +225,7 @@ begin
               end;
         421:  begin  //1900 to 2050 - 1 file
                     jdstart:= 2414864.5;
-                    jdend:= 2471184.5;
+                    jdend:= 2469807.5;
                     if InRange(jd, jdstart, jdend) then begin
                       de_y := 1900;
                       de_file:='lnxp1900p2053.421';
