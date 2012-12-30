@@ -1066,8 +1066,11 @@ var  x1,y1: Double;
 begin
 if cfgsc.JDChart=jd2000 then result:=0
 else begin
-  Proj2(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc,false);
-  result:=arctan2(x1,y1);
+  result:=0;
+  if Proj2(cfgsc.rap2000,cfgsc.dep2000,ra,dec,x1,y1,cfgsc,false) then begin
+    if (abs(x1)<200) and (abs(x1)<200) then
+       result:=arctan2(x1,y1);
+  end;
 end;
 end;
 
