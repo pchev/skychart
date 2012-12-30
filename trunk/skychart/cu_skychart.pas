@@ -1548,9 +1548,11 @@ end;
 
 function Tskychart.DrawAsteroid :boolean;
 var
-  x1,y1,ra,dec,magn: Double;
-  xx,yy:single;
-  i,j,lid: integer;
+  x1,y1,x2,y2,ra,dec,magn: Double;
+  xx,yy,lori:single;
+  lopt: boolean;
+  lalign: TLabelAlign;
+  i,j,jj,lid: integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowAsteroidValid then begin
@@ -1570,18 +1572,33 @@ if VerboseMsg then
         if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
           lis:=cfgsc.AsteroidName[j,i,1]+FormatFloat(f6,cfgsc.AsteroidLst[j,i,6])+FormatFloat(f6,cfgsc.AsteroidLst[j,i,7]);
           lid:=rshash(lis,$7FFFFFFF);
-          if cfgsc.SimNb=1 then ltxt:=cfgsc.AsteroidName[j,i,2]
+          if (cfgsc.SimNb=1) or (not cfgsc.SimObject[12]) then begin
+            ltxt:=cfgsc.AsteroidName[j,i,2];
+            lori:=0;
+            lopt:=true;
+            lalign:=laLeft;
+          end
           else begin
-           if cfgsc.SimNameLabel then
-              ltxt:=cfgsc.AsteroidName[j,i,2]+blank
-             else
-              ltxt:='';
-           if cfgsc.SimDateLabel then
-              ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
-           if cfgsc.SimMagLabel then
-              ltxt:=ltxt+formatfloat(f1,magn);
-          end;
-          SetLabel(lid,xx,yy,0,2,5,ltxt,laLeft,0,4);
+            if cfgsc.SimNameLabel then
+               ltxt:=cfgsc.AsteroidName[j,i,2]+blank
+              else
+               ltxt:='';
+            if cfgsc.SimDateLabel then
+               ltxt:=ltxt+jddatetime(cfgsc.AsteroidLst[j,i,4]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
+            if cfgsc.SimMagLabel then
+               ltxt:=ltxt+formatfloat(f1,magn);
+            if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
+            projection(cfgsc.AsteroidLst[jj,i,1],cfgsc.AsteroidLst[jj,i,2],x2,y2,true,cfgsc) ;
+            lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
+            if (lori<90)or(lori>270) then begin
+               lalign:=laLeft;
+            end else begin
+               lalign:=laRight;
+               lori:=lori-180;
+            end;
+            lopt:=false;
+           end;
+          SetLabel(lid,xx,yy,0,2,5,ltxt,lalign,lori,4,lopt);
         end;
       end;
     end;
@@ -1595,9 +1612,11 @@ end;
 
 function Tskychart.DrawComet :boolean;
 var
-  x1,y1: Double;
-  xx,yy,cxx,cyy:single;
-  i,j,lid,sz : integer;
+  x1,y1,x2,y2: Double;
+  xx,yy,cxx,cyy,lori:single;
+  lopt: boolean;
+  lalign: TLabelAlign;
+  i,j,jj,lid,sz : integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowCometValid then begin
@@ -1614,18 +1633,34 @@ if cfgsc.ShowCometValid then begin
           lis:=cfgsc.CometName[j,i,1]+FormatFloat(f6,cfgsc.CometLst[j,i,9])+FormatFloat(f6,cfgsc.CometLst[j,i,10]);
           lid:=rshash(lis,$7FFFFFFF);
           sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
-          if cfgsc.SimNb=1 then ltxt:=cfgsc.CometName[j,i,2]
+
+          if (cfgsc.SimNb=1) or (not cfgsc.SimObject[13]) then begin
+            ltxt:=cfgsc.CometName[j,i,2];
+            lori:=0;
+            lopt:=true;
+            lalign:=laLeft;
+          end
           else begin
-           if cfgsc.SimNameLabel then
-              ltxt:=cfgsc.CometName[j,i,2]+blank
-             else
-              ltxt:='';
-           if cfgsc.SimDateLabel then
-              ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
-           if cfgsc.SimMagLabel then
-              ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
-          end;
-          SetLabel(lid,xx,yy,sz,2,5,ltxt,laLeft,0,4);
+            if cfgsc.SimNameLabel then
+               ltxt:=cfgsc.CometName[j,i,2]+blank
+              else
+               ltxt:='';
+              if cfgsc.SimDateLabel then
+                 ltxt:=ltxt+jddatetime(cfgsc.CometLst[j,i,7]+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
+              if cfgsc.SimMagLabel then
+                 ltxt:=ltxt+formatfloat(f1,cfgsc.CometLst[j,i,3]);
+            if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
+            projection(cfgsc.CometLst[jj,i,1],cfgsc.CometLst[jj,i,2],x2,y2,true,cfgsc) ;
+            lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
+            if (lori<90)or(lori>270) then begin
+               lalign:=laLeft;
+            end else begin
+               lalign:=laRight;
+               lori:=lori-180;
+            end;
+            lopt:=false;
+           end;
+          SetLabel(lid,xx,yy,sz,2,5,ltxt,lalign,lori,4,lopt);
         end;
         if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
            WindowXY(x1,y1,cxx,cyy,cfgsc)
