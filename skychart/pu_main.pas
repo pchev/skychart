@@ -1750,6 +1750,7 @@ if (not directoryexists(slash(appdir)+slash('data')+'constellation')) then begin
      end;
   end;
 end;
+if ConfigAppdir='' then ConfigAppdir:=Appdir;
 if VerboseMsg then begin
  debugln('appdir='+appdir);
  debugln('privatedir='+privatedir);
