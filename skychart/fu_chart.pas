@@ -1091,7 +1091,7 @@ try
         PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.ClientHeight:=Image1.Height;
         PrintPreview.ClientWidth:=Image1.Width;
-        PrintPreview.image1.ZoomMin:=0.5;
+        PrintPreview.image1.ZoomMin:=1;
         PrintPreview.labeltext:=rsPrintPreview;
         PrintPreview.Init;
         pt:=Image1.ClientToScreen(point(0,0));
