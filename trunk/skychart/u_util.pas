@@ -2112,7 +2112,8 @@ end;
 
 function ExtractSubPath(basepath, path: string):string;
 begin
-result:=StringReplace(path,slash(basepath),'',[]);
+if basepath='' then result:=path
+   else result:=StringReplace(path,slash(basepath),'',[]);
 end;
 
 end.
