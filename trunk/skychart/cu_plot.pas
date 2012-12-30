@@ -2027,7 +2027,7 @@ end else if cnv<>nil then with cnv do begin
   if opaque then Brush.Style:=bsSolid
             else Brush.Style:=bsClear;
   Pen.Mode:=pmCopy;
-  Font.Name:=cfgplot.FontName[fontnum];;
+  Font.Name:=cfgplot.FontName[fontnum];
   Font.Color:=cfgplot.LabelColor[labelnum];
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];

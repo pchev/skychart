@@ -973,10 +973,12 @@ if Fcatalog.OpenStar then
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
-          if gk=rec.star.greeksymbol then SetLabel(lid,xx,yy,0,2,1,gk,al,0,2)
-                                     else SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+          SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
           {$else}
-          SetLabel(lid,xx,yy,0,2,1,gk,al,0,2);
+          if plot.cfgchart.onprinter and (not plot.cfgplot.UseBMP) then begin
+            plot.cfgplot.FontName[7]:='symbol';
+            SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+          end else SetLabel(lid,xx,yy,0,2,1,gk,al,0,2);
           {$endif}
         end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al,0,4);
     end;
