@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
-"PO-Revision-Date: 2012-11-18 14:27+0000\n"
-"Last-Translator: Patrick Chevalley <Unknown>\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
+"PO-Revision-Date: 2012-11-20 22:42+0000\n"
+"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -553,6 +553,10 @@ msgstr "%s資料庫無法開啟 %s！%s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "不能寫至"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2059,6 +2063,10 @@ msgstr "從 JUPOS 取得現有的GRS測量"
 msgid "Globular cluster"
 msgstr "球狀星團"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr ""
@@ -2126,6 +2134,10 @@ msgstr "半質量半徑"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "1000誤差之後停止"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2461,7 +2473,7 @@ msgstr "標籤本文"
 
 #: u_translation.rslandscape
 msgid "Landscape"
-msgstr "横向"
+msgstr "橫向"
 
 #: u_translation.rslanguage
 msgid "Internal language"
@@ -2814,6 +2826,10 @@ msgstr "平均日期"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "平位置"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -4055,6 +4071,10 @@ msgstr "上升時間"
 msgid "Rotate by 180 degrees"
 msgstr ""
 
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
+msgstr ""
+
 #: u_translation.rsrotateleft
 msgid "Rotate left"
 msgstr "向左旋轉"
@@ -4530,6 +4550,10 @@ msgstr "星圖"
 #: u_translation.rsskycolour
 msgid "Sky colour"
 msgstr "天空顏色"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5386,6 +5410,10 @@ msgstr "現在準備顯示適合此時段的小行星"
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "如果從高山觀測，地平線會比從海平面觀測更遠。"
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"

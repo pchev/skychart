@@ -5402,3 +5402,31 @@ msgstr ""
 msgid "Reset rotation"
 msgstr ""
 
+#: u_translation:rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
+msgstr ""
+
+#: u_translation:rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
+
+#: u_translation:rsmercator
+msgid "Mercator"
+msgstr ""
+
+#: u_translation:rscartesian
+msgid "Cartesian"
+msgstr ""
+
+#: u_translation:rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
+
+#: u_translation:rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
+#: u_translation:rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
+

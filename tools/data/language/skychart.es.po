@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
-"PO-Revision-Date: 2012-11-01 18:02+0000\n"
-"Last-Translator: Luis Castedo <Unknown>\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
+"PO-Revision-Date: 2012-12-06 04:51+0000\n"
+"Last-Translator: Victor Roman <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -552,6 +552,10 @@ msgstr "%s¡No se puede abrir la base de datos %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "No se puede escribir en"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2058,6 +2062,10 @@ msgstr "Obtener medida reciente de GMR del proyecto JUPOS."
 msgid "Globular cluster"
 msgstr "Cúmulos globulares"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Ajustes Avnzds. Gps-16\""
@@ -2125,6 +2133,10 @@ msgstr "Radio de media masa"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Detener después de 1000 errores"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2813,6 +2825,10 @@ msgstr "Medias de la fecha"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Posición promedio"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3988,7 +4004,7 @@ msgstr "Restablecer a valores prefijados y reiniciar"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Restablecer Rotación"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4052,6 +4068,10 @@ msgstr "Hora de salida"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
+msgstr "Girar 180 Grados"
+
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
 msgstr ""
 
 #: u_translation.rsrotateleft
@@ -4529,6 +4549,10 @@ msgstr "Cartas Celestes"
 #: u_translation.rsskycolour
 msgid "Sky colour"
 msgstr "Color del cielo"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5386,6 +5410,10 @@ msgstr "Ahora está listo para mostrar el asteroide para este período de tiempo
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Vives en una gran montaña cerca de la costa y quieres observar la imagen distorsionada del objeto bajo el horizonte."
 
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
+
 #: u_translation.rszenith
 msgid "Zenith"
 msgstr "Cénit"
@@ -5412,7 +5440,7 @@ msgstr "Acercar"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "Enfocar más para ver Objeto"
 
 #: u_translation.rszoomout
 msgid "Zoom out"

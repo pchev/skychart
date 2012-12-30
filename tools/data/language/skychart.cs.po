@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-11-18 14:06+0000\n"
-"PO-Revision-Date: 2012-11-11 17:06+0000\n"
+"POT-Creation-Date: 2012-12-30 10:12+0000\n"
+"PO-Revision-Date: 2012-11-19 16:34+0000\n"
 "Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-18 16:12+0000\n"
-"X-Generator: Launchpad (build 16278)\n"
+"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -552,6 +552,10 @@ msgstr "%sNelze otevřít databázi %s! %s"
 #: u_translation.rscannotwritet
 msgid "Cannot write to"
 msgstr "Nelze zapsat do"
+
+#: u_translation.rscartesian
+msgid "Cartesian"
+msgstr ""
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2057,6 +2061,10 @@ msgstr "Získat aktuální polohu GRS z projektu JUPOS"
 msgid "Globular cluster"
 msgstr "Kulová hvězdokupa"
 
+#: u_translation.rsgnomonic
+msgid "Gnomonic"
+msgstr ""
+
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Nastavení GPS-16\" Adv."
@@ -2124,6 +2132,10 @@ msgstr "Half-Mass poloměr"
 #: u_translation.rshaltafter100
 msgid "Halt after 1000 errors"
 msgstr "Zastavit po 1 000 chybách"
+
+#: u_translation.rshammeraitoff
+msgid "Hammer-Aitoff"
+msgstr ""
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2812,6 +2824,10 @@ msgstr "Střední k datu"
 #: u_translation.rsmeanposition
 msgid "Mean position"
 msgstr "Střední pozice"
+
+#: u_translation.rsmercator
+msgid "Mercator"
+msgstr ""
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3803,7 +3819,7 @@ msgstr "Rychlost přejezdu v Ra/Az"
 
 #: u_translation.rsradialveloci
 msgid "Radial velocity"
-msgstr "Úhlová rychlost"
+msgstr "Radiální rychlost"
 
 #: u_translation.rsrange
 msgid "Range"
@@ -3987,7 +4003,7 @@ msgstr "Obnovit výchozí nastavení a restartovat"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Zrušit otočení"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4051,6 +4067,10 @@ msgstr "Čas východu"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
+msgstr "Otočit o 180°"
+
+#: u_translation.rsrotatecylind
+msgid "Rotate cylindrical projections to the chart center"
 msgstr ""
 
 #: u_translation.rsrotateleft
@@ -4528,6 +4548,10 @@ msgstr "Sky Charts"
 #: u_translation.rsskycolour
 msgid "Sky colour"
 msgstr "Barva oblohy"
+
+#: u_translation.rsslantorthogr
+msgid "Slant orthographic"
+msgstr ""
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5384,6 +5408,10 @@ msgstr "Nyní je možné zobrazit asteroidy pro toto časové období."
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
 msgstr "Pozorujete-li vysoko v horách, horizont může být níže, než by odpovídalo pohledu z úrovně mořské hladiny."
+
+#: u_translation.rszenitalequid
+msgid "Zenital equidistant"
+msgstr ""
 
 #: u_translation.rszenith
 msgid "Zenith"
