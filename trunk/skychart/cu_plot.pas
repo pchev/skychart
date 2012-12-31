@@ -2668,7 +2668,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillOCl then // SBR color
     begin
@@ -2747,7 +2747,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillPNe then // SBR color
   begin
@@ -2808,7 +2808,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGCl then // SBR color
     begin
@@ -2887,7 +2887,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   dsr:=ds div 4;
   // emission of reflection nebula?
     ObjMorph:=LeftStr(Amorph, 1);
@@ -2958,7 +2958,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   dsr:=ds div 4;
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillRN then // SBR color
@@ -3024,7 +3024,7 @@ begin
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
@@ -3065,7 +3065,7 @@ begin
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
@@ -3103,7 +3103,7 @@ begin
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     cbmp.DrawHorizLine(xx-ds,yy,xx+ds,ColorToBGRA(col));
     cbmp.DrawVertLine(xx,yy-ds,yy+ds,ColorToBGRA(col));
@@ -3142,7 +3142,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1)and cfgplot.DSOColorFillAst then // SBR color
     begin
@@ -3206,7 +3206,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   dsr:=ds div 4;
   nebcolor:=col;                           // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillEN then // SBR color
@@ -3262,7 +3262,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
      cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen/2);
   end else begin
@@ -3298,7 +3298,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,2*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   dsr:=ds div 4;
   nebcolor:= col;                          // Fix color
   if (cfgplot.nebplot=1) and cfgplot.DSOColorFillDN then // SBR color
@@ -3347,7 +3347,7 @@ begin
   yy:=round(Ay);
   Adim:=0.5;
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     BGRADrawLine(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(col),1,cbmp);
     BGRADrawLine(Ax+ds,Ay-ds,Ax-ds,Ay+ds,ColorToBGRA(col),1,cbmp);
@@ -3384,7 +3384,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen);
   end else begin
@@ -3416,7 +3416,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     BGRARectangle(Ax-ds,Ay-ds,Ax+ds,Ay+ds,ColorToBGRA(col),cfgchart.drawpen,cbmp);
   end else begin
@@ -3448,7 +3448,7 @@ begin
   xx:=round(Ax);
   yy:=round(Ay);
   sz:=APixScale*Adim/2;                         // calc size
-  ds:=round(max(sz,4*cfgchart.drawpen));
+  ds:=round(max(sz,MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
     cbmp.DrawPolygonAntialias([PointF(xx,yy-ds),
          PointF(Ax+ds,Ay),
