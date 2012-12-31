@@ -112,7 +112,7 @@ procedure interp(ephint: pephdata; iinfo: piinfo; bufi: pdouble; t: Array_1D;
             ncf, ncm, na, ifl: integer; var posvel: array_5D);
 
 var
-    de_stream   : TMemoryStream;  //serve as cache for DE405 file.
+    de_stream   : TFileStream;  //serve as cache for DE405 file.
     de_eph      : ephdata;        //init DE405
     de_iinfo  : iinfo;          //info on calc steps as part of DE405
     de_created  : boolean;
@@ -261,13 +261,6 @@ begin
               end;
     end;
 
-    //check if stream is created
-    if de_created then else
-    begin
-        de_stream := TMemoryStream.Create;
-        de_created := true;
-    end;
-
     //if file is not already loaded then load
     if de_eph.de_file <> de_file then begin
       //add folder location
@@ -282,7 +275,7 @@ begin
     end else result := true;
 end;
 
-// here we will use a memory stream to load and file and extract coef.
+// here we will use a file stream to load and extract coef.
 
 function init_de_file(ephemeris_filename: string): boolean;
 var
@@ -293,8 +286,13 @@ begin
     for j := 0 to 2 do
          for i := 0 to 12 do
             de_eph.ipt[i,j]:= 0;
-    de_stream.Clear;
-    de_stream.LoadFromFile(ephemeris_filename);
+    //check if stream is created
+    if de_created then
+    begin
+      de_stream.Free;
+    end;
+    de_stream := TFileStream.Create(ephemeris_filename,fmOpenRead);
+    de_created := true;
     //Seek - soFromCurrent - soFromBeginning - soFromEnd
     de_stream.Read(Title, Sizeof(Title));
     de_stream.Seek(2568, soFromCurrent);
