@@ -3163,7 +3163,7 @@ begin
     end;
 if cfgplot.usebmp then begin
     if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillAst then begin// line mode
-      cbmp.PenStyle:=psDash;
+      cbmp.PenStyle:=psDashDot;
       cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(nebcolor),cfgchart.drawpen);
       cbmp.PenStyle:=psSolid;
     end else
@@ -3264,7 +3264,9 @@ begin
   sz:=APixScale*Adim/2;                         // calc size
   ds:=round(max(sz,cfgplot.MinDsoSize*cfgchart.drawpen));
   if cfgplot.UseBMP then begin
-     cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen/2);
+     cbmp.PenStyle:=psDot;
+     cbmp.EllipseAntialias(Ax,Ay,ds,ds,ColorToBGRA(col),cfgchart.drawpen);
+     cbmp.PenStyle:=psSolid;
   end else begin
   cnv.Pen.Width := cfgchart.drawpen;
   cnv.Pen.Mode:=pmCopy;
