@@ -2014,7 +2014,7 @@ begin
 end;
 
 Procedure Tskychart.FormatCatRec(rec:Gcatrec; var desc:string);
-var txt,buf: string;
+var txt,buf,c: string;
     i : integer;
 const b=' ';
       b5='     ';
@@ -2034,7 +2034,8 @@ begin
          if rec.star.valid[vsId] then txt:=rec.star.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          cfgsc.FindId:=txt;
-         if rec.options.ShortName<>'Star' then txt:=rec.options.ShortName+b+txt;
+         c:=copy(txt,1,1);
+         if (rec.options.ShortName<>'Star')and(c>='0')and(c<='9') then txt:=rec.options.ShortName+b+txt;
          if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then
                 cfgsc.FindName:=trim(rec.str[3])
             else
