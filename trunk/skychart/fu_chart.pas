@@ -1000,7 +1000,7 @@ procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,pri
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,savedsosize,resol,rp: integer;
     rs: single;
-    saveskycolor,printok: boolean;
+    saveskycolor,savebgimage,printok: boolean;
     saveLabelColor : array[1..numlabtype] of Tcolor;
     prtname:string;
     fname:WideString;
@@ -1040,6 +1040,7 @@ if VerboseMsg then
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
  savedsosize:=sc.plot.cfgplot.MinDsoSize;
+ savebgimage:=sc.cfgsc.ShowBackgroundImage;
  for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
 try
  printing:=true;
@@ -1074,6 +1075,9 @@ try
         sc.plot.cfgchart.drawpen:=maxintvalue([1,rp div 150]);
         sc.plot.cfgchart.drawsize:=maxintvalue([1,rp div 100]);
         sc.plot.cfgchart.fontscale:=1;
+        {$ifndef mswindows}
+         sc.cfgsc.ShowBackgroundImage:=false; // do not work with Postscriptcanvas
+        {$endif}
         sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,rp);
         sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,rp);
         sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,rp);
@@ -1159,6 +1163,7 @@ try
       sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
       sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
       sc.plot.cfgchart.fontscale:=1;
+      sc.cfgsc.ShowBackgroundImage:=false;
       sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
       sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
       sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
@@ -1237,6 +1242,7 @@ finally
  sc.plot.cfgplot.autoskycolor:=saveskycolor;
  sc.plot.cfgplot.bgColor:=savebgcolor;
  sc.plot.cfgplot.MinDsoSize := savedsosize;
+ sc.cfgsc.ShowBackgroundImage := savebgimage;
  for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=saveLabelColor[i];
  sc.cfgsc.xshift:=0;
  sc.cfgsc.yshift:=0;
