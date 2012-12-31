@@ -998,7 +998,7 @@ end;
 
 procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,printresol:integer ;printcmd1,printcmd2,printpath:string; cm:Tconf_main; preview:boolean);
 var savecolor: Starcolarray;
-    savesplot,savenplot,savepplot,savebgcolor,resol,rp: integer;
+    savesplot,savenplot,savepplot,savebgcolor,savedsosize,resol,rp: integer;
     rs: single;
     saveskycolor,printok: boolean;
     saveLabelColor : array[1..numlabtype] of Tcolor;
@@ -1039,6 +1039,7 @@ if VerboseMsg then
  savepplot:=sc.plot.cfgplot.plaplot;
  saveskycolor:=sc.plot.cfgplot.autoskycolor;
  savebgcolor:=sc.plot.cfgplot.bgColor;
+ savedsosize:=sc.plot.cfgplot.MinDsoSize;
  for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
 try
  printing:=true;
@@ -1069,6 +1070,7 @@ try
         sc.plot.destcnv:=previewbmp.Canvas;
         sc.plot.cfgplot.UseBMP:=false;
         sc.plot.cfgchart.onprinter:=true;
+        sc.plot.cfgplot.MinDsoSize:=5;
         sc.plot.cfgchart.drawpen:=maxintvalue([1,rp div 150]);
         sc.plot.cfgchart.drawsize:=maxintvalue([1,rp div 100]);
         sc.plot.cfgchart.fontscale:=1;
@@ -1153,6 +1155,7 @@ try
       sc.plot.destcnv:=ps;
       sc.plot.cfgplot.UseBMP:=false;
       sc.plot.cfgchart.onprinter:=true;
+      sc.plot.cfgplot.MinDsoSize:=5;
       sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
       sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
       sc.plot.cfgchart.fontscale:=1;
@@ -1233,6 +1236,7 @@ finally
  sc.plot.cfgplot.plaplot:=savepplot;
  sc.plot.cfgplot.autoskycolor:=saveskycolor;
  sc.plot.cfgplot.bgColor:=savebgcolor;
+ sc.plot.cfgplot.MinDsoSize := savedsosize;
  for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=saveLabelColor[i];
  sc.cfgsc.xshift:=0;
  sc.cfgsc.yshift:=0;
