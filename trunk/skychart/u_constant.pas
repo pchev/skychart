@@ -154,8 +154,6 @@ const
 
   //  End of deep-sky objects colour
 
-  MinDsoSize = 4;
-
   // Paper size
   PaperNumber = 9;
   PaperName: array[1..PaperNumber] of
@@ -864,7 +862,7 @@ type
     partsize, magsize: single;
     red_move: boolean;
     autoskycolorValid: boolean;
-
+    MinDsoSize: integer;
     //  deep-sky objects colour defaults filss are decalers as boolean - either fill or not
     DSOColorFillAst: boolean;
     DSOColorFillOCl: boolean;
@@ -2060,6 +2058,7 @@ begin
   plaplot := Source.plaplot;
   Nebgray := Source.Nebgray;
   NebBright := Source.NebBright;
+  MinDsoSize := Source.MinDsoSize;
   starshapesize := Source.starshapesize;
   starshapew := Source.starshapew;
   Invisible := Source.Invisible;

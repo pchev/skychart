@@ -4358,6 +4358,7 @@ def_cfgplot.DSOColorFillGxyCl:=true;
 def_cfgplot.DSOColorFillQ:=true;
 def_cfgplot.DSOColorFillGL:=true;
 def_cfgplot.DSOColorFillNE:=true;
+def_cfgplot.MinDsoSize:=3;
 def_cfgsc.BGalpha:=200;
 def_cfgsc.BGmin_sigma:=0;
 def_cfgsc.BGmax_sigma:=0;
