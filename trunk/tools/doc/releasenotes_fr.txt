@@ -1,7 +1,7 @@
 Version 3.7  Notes de la version
 
 Modifications majeurs:
-   Changement du format de l'index des catalogues, un enregistrement d'index pointait directement sur les
+   Changement du format de l'index des catalogues. Un enregistrement d'index pointait directement sur les
    coordonnées RA, DEC. Maintenant, l'index pointe sur un enregistrement du catalogue.
    Cela permet de traiter le mouvement propre des étoiles pour afficher un emplacement correct à n'importe quelle époque.
    Cela aide également à afficher le label d'un objet et le détail complet, même si il n'est pas visible avec
@@ -14,6 +14,8 @@ Modifications majeurs:
    ce changement, mais l'ancien indexe fonctionne comme avant.
 
 Nouvelles options:
+  - Nouvelle projection Hammer-Aitoff.
+  - Option pour ne pas mettre l'équateur des projections cylindrique au centre de la carte.
   - Rotation du label de la simulation des planètes perpendiculaire à l'orbite. 
   - Diminue le chevauchement des labels (Affichage/Labels/Optimise automatiquement la position des labels).
   - Ajout du composant au label des étoiles doubles.
