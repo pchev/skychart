@@ -58,9 +58,10 @@ type
     BtnReset: TButton;
     Button3: TButton;
     dgPlanet: TDrawGrid;
-    SatChartBox:TCheckBox;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
+    Label10: TLabel;
+    MinSatAlt: TLongEdit;
     tsPGraphs: TTabSheet;
     Time: TTimePicker;
     TLEListBox:TFileListBox;
@@ -381,6 +382,7 @@ Label3.caption:=rsBy;
 Label4.caption:=rsDays;
 Label9.caption:=rsSatellitesCa+' QuickSat by Mike McCants,'+crlf+rsFlarePredict+' Iridflar by Robert Matson';
 label9.Hint:=URL_QUICKSAT;
+label10.Caption:=rsMinimalAltit;
 BtnRefresh.caption:=rsRefresh;
 BtnHelp.caption:=rsHelp;
 BtnClose.caption:=rsClose;
@@ -404,7 +406,6 @@ Label6.caption:='TLE';
 tle1.text:='visible.tle';
 fullday.caption:=rsIncludeDayTi;
 IridiumBox.caption:=rsIncludeIridi;
-SatChartBox.caption:=rsForCurrentCh;
 appmsg[1]:=rsRA;
 appmsg[2]:=rsDE;
 appmsg[3]:=rsMagn;
@@ -992,7 +993,7 @@ DeleteFile(slash(satdir)+'satlist.txt');
 DeleteFile(slash(satdir)+'quicksat.ctl');
 if not fileexists(slash(satdir)+'visible.tle') then CopyFile(srcdir+'sample.tle', wrkdir+'visible.tle');
 if not fileexists(slash(satdir)+'quicksat.mag') then CopyFile(srcdir+'quicksat.mag', wrkdir+'quicksat.mag');
-SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,SatChartBox.Checked);
+SatelliteList(inttostr(j),inttostr(m),inttostr(a),ed,maglimit.text,tle1.text,SatDir,prgdir,formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,fullday.Checked,false);
 if not Fileexists(slash(SatDir)+'satlist.txt') then begin
   Showmessage(rsCannotComput);
   exit;
@@ -1019,7 +1020,7 @@ if IridiumBox.Checked then begin
     if not fileexists(slash(SatDir)+'SDL_net.dll') then CopyFile(srcdir+'SDL_net.dll', wrkdir+'SDL_net.dll');
   end;
   {$endif}
-  Iridium(inttostr(j),inttostr(m),inttostr(a),dt,formatfloat(f1,config.tz.SecondsOffset/3600),SatDir,config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude);
+  Iridium(inttostr(j),inttostr(m),inttostr(a),dt,formatfloat(f1,config.tz.SecondsOffset/3600),SatDir,config.ObsName,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,MinSatAlt.Value);
   if FileExists(slash(SatDir)+'IRIDFLAR.OUT') then begin
     Assignfile(fi,slash(SatDir)+'IRIDFLAR.OUT');
     reset(fi);
@@ -1951,11 +1952,9 @@ if (aRow>=0)and(aColumn>=0) then begin
          if StrToFloatDef(trim(satmag),6)<10 then satmag:='10';
          if pos('iridium.tle',sattle)=0 then sattle:=sattle+',iridium.tle';
       end;
-      DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,satmag,sattle,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,SatChartBox.Checked);
-      if not SatChartBox.checked then begin
-        csconfig.racentre:=p.ra;
-        csconfig.decentre:=p.dec;
-      end;
+      DetailSat(p.jd,config.ObsLatitude,config.ObsLongitude,config.ObsAltitude,0,0,0,0,satmag,sattle,SatDir,slash(appdir)+slash('data')+slash('quicksat'),formatfloat(f1,config.tz.SecondsOffset/3600),config.ObsName,MinSatAlt.Text,false);
+      csconfig.racentre:=p.ra;
+      csconfig.decentre:=p.dec;
         csconfig.ShowArtSat:=true;
         csconfig.NewArtSat:=true;
         if copy(cells[1,aRow],1,14)='Flare: Iridium' then begin

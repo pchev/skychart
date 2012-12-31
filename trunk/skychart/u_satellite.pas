@@ -28,9 +28,9 @@ interface
 uses u_translation, u_util, u_projection, u_constant, math, FileUtil,
   Classes, SysUtils, Dialogs;
 
-Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
-Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; boxsearch:boolean=false);
-Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude: double);
+Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
+Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; boxsearch:boolean=false);
+Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,minalt: double);
 Function CheckWine: boolean;
 function CheckDosbox: boolean;
 
@@ -91,7 +91,7 @@ end;
 r.free;
 end;
 
-Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
+Procedure SatelliteList(y,m,startd,endd,maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2:double; fullday:boolean=false; boxsearch:boolean=false);
 var i : integer;
     satctl : textfile;
     buf,s1,s2,s3,curdir,dcmd : string;
@@ -125,7 +125,7 @@ buf:='2000 ';  //2000 Epoch of predicted RA, Dec
 writeln(satctl,buf);
 buf:=maglimit;  //6.5 Magnitude limit
 writeln(satctl,buf);
-buf:='5  ';  //5 Altitude cut-off value
+buf:=altcut+'  ';  //5 Altitude cut-off value
 writeln(satctl,buf);
 buf:='0.2 '; //0.2 The search/step parameter value
 writeln(satctl,buf);
@@ -201,7 +201,7 @@ end;
 end;
 {$NOTES ON}
 
-Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName : string; boxsearch:boolean=false);
+Procedure DetailSat(jds,ObsLatitude,ObsLongitude,ObsAltitude,boxra1,boxra2,boxde1,boxde2 : double; maglimit,tle,tmpdir,prgdir,timezone,ObsName,altcut : string; boxsearch:boolean=false);
 var
     satctl : textfile;
     buf,s1,s2,s3,s4,curdir,dcmd : string;
@@ -248,7 +248,7 @@ buf:='2000 ';  //2000 Epoch of predicted RA, Dec
 writeln(satctl,buf);
 buf:=maglimit;  //6.5 Magnitude limit
 writeln(satctl,buf);
-buf:='5  ';  //5 Altitude cut-off value
+buf:=altcut+'  ';  //5 Altitude cut-off value
 writeln(satctl,buf);
 buf:='0.2 '; //0.2 The search/step parameter value
 writeln(satctl,buf);
@@ -322,7 +322,7 @@ raise;
 end;
 end;
 
-Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude: double);
+Procedure Iridium(y,mm,d,dt,timezone,tmpdir,ObsName : string; ObsLatitude,ObsLongitude,ObsAltitude,minalt: double);
 var irictl : textfile;
     buf : string;
     curdir,dcmd : string;
@@ -367,7 +367,7 @@ buf:='SearchDur='+dt;
 writeln(irictl,buf+doslf);
 buf:='SunAng= -6.00';
 writeln(irictl,buf+doslf);
-buf:='MinElev=10.00';
+buf:='MinElev='+formatfloat('0.00',minalt);
 writeln(irictl,buf+doslf);
 buf:='MaxMirror= 4.00';
 writeln(irictl,buf+doslf);
