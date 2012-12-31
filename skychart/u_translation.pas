@@ -1119,7 +1119,6 @@ resourcestring
   rsFlarePredict = 'Iridium flare prediction:';
   rsIncludeDayTi = 'Include day time pass';
   rsIncludeIridi = 'Include Iridium flare';
-  rsForCurrentCh = 'For current chart only';
   rsCannotComput = 'Cannot compute satellites.';
   rsPleaseInstWine = 'Please install wine http://www.winehq.org/ to compute artificial satellites on your computer.';
   rsPleaseInstDosbox = 'Please install "Dosbox" http://www.dosbox.com/ to compute '
@@ -1385,6 +1384,7 @@ resourcestring
   rsZenitalEquid = 'Zenital equidistant';
   rsGnomonic = 'Gnomonic';
   rsSlantOrthogr = 'Slant orthographic';
+  rsMinimalAltit = 'Minimal altitude';
 
 implementation
 
