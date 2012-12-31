@@ -2846,8 +2846,10 @@ xx1:=x1;
 xx2:=x2;
 yy1:=y1;
 yy2:=y2;
-if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc,true,true);
-if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc,true,true);
+if not((abs(xx1)<musec)and(abs(xx2-pi2)<musec)) then begin
+  if cfgsc.ApparentPos then mean_equatorial(xx1,yy1,cfgsc,true,true);
+  if cfgsc.ApparentPos then mean_equatorial(xx2,yy2,cfgsc,true,true);
+end;
 xx1:=rad2deg*xx1/15;
 xx2:=rad2deg*xx2/15;
 yy1:=rad2deg*yy1;

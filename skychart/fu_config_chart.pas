@@ -946,6 +946,7 @@ csc.projname[7]:='TAN';
 csc.projname[8]:='MER';
 csc.projname[9]:='MER';
 csc.projname[10]:='MER';
+csc.ProjEquatorCentered :=true;
 ShowProjection;
 end;
 
