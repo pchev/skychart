@@ -1,7 +1,7 @@
 Version 3.7 release Notes
 
 Major changes:
-  Change of the catalog index format, an index record was previously pointing directly
+  Change of the catalog index format. An index record was previously pointing directly
   to the RA,DEC coordinates. Now the index point to a catalog record.
   This allow to process the stars proper motion for a correct location at any epoch.
   This also help to display the object label and full detail even if it is not visible with
@@ -13,6 +13,8 @@ Major changes:
   the change but the old index still work as before. 
 
 New options:
+  - New Hammer-Aitoff projection.
+  - Option to not set the cylindrical projection equator to the chart center.
   - Rotate the label of the planet simulation perpendicular to the orbit. 
   - Reduced label overlap (Display/Labels/Automatically optimize the labels placement).
   - Add the component name to the label of double stars.
