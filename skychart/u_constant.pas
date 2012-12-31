@@ -154,6 +154,8 @@ const
 
   //  End of deep-sky objects colour
 
+  MinDsoSize = 4;
+
   // Paper size
   PaperNumber = 9;
   PaperName: array[1..PaperNumber] of
