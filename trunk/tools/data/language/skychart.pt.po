@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-30 10:12+0000\n"
-"PO-Revision-Date: 2012-11-25 01:24+0000\n"
+"POT-Creation-Date: 2012-12-31 15:23+0000\n"
+"PO-Revision-Date: 2012-12-31 01:43+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-30 10:42+0000\n"
+"X-Launchpad-Export-Date: 2012-12-31 15:44+0000\n"
 "X-Generator: Launchpad (build 16378)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -556,7 +556,7 @@ msgstr "Não é possível gravar"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "Cartesiano"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -1938,10 +1938,6 @@ msgstr "Tipos de letra (fontes)"
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Para um catálogo grande sempre selecione Binário. Para um conjunto de dados pequeno que muda frequentemente selecione Texto, isto permite editar o arquivo e ver imediatamente o resultado na carta sem a necessidade de executar outra vez este procedimento."
 
-#: u_translation.rsforcurrentch
-msgid "For current chart only"
-msgstr "Para a carta atual apenas"
-
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
 msgstr "Forma sempre visível"
@@ -2064,7 +2060,7 @@ msgstr "Aglom. Globular"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
-msgstr ""
+msgstr "Gnomónico"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2136,7 +2132,7 @@ msgstr "Pare depois de 1000 erros"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2828,7 +2824,7 @@ msgstr "Posição média"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -2861,6 +2857,10 @@ msgstr "mín."
 #: u_translation.rsmin3
 msgid "Min."
 msgstr "Min."
+
+#: u_translation.rsminimalaltit
+msgid "Minimal altitude"
+msgstr ""
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -4072,7 +4072,7 @@ msgstr "Girar 180 graus"
 
 #: u_translation.rsrotatecylind
 msgid "Rotate cylindrical projections to the chart center"
-msgstr ""
+msgstr "Girar projecções cilíndricas para o centro da carta"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -4552,7 +4552,7 @@ msgstr "Cores do Céu"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
-msgstr ""
+msgstr "Inclinação ortográfica"
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5412,7 +5412,7 @@ msgstr "Se você observar de um local alto, a linha do horizonte será mais baix
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"
-msgstr ""
+msgstr "Zenital equidistante"
 
 #: u_translation.rszenith
 msgid "Zenith"

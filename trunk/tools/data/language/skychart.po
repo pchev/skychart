@@ -4406,10 +4406,6 @@ msgstr ""
 msgid "Include Iridium flare"
 msgstr ""
 
-#: u_translation:rsforcurrentch
-msgid "For current chart only"
-msgstr ""
-
 #: u_translation:rscannotcomput
 msgid "Cannot compute satellites."
 msgstr ""
@@ -5428,5 +5424,9 @@ msgstr ""
 
 #: u_translation:rsslantorthogr
 msgid "Slant orthographic"
+msgstr ""
+
+#: u_translation:rsminimalaltit
+msgid "Minimal altitude"
 msgstr ""
 
