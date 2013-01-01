@@ -5,14 +5,14 @@
 version=3.7
 pkg=trunk
 #pkg=tags/V36
-repo=https://skychart.svn.sourceforge.net/svnroot/skychart
+repo=http://svn.code.sf.net/p/skychart/code/trunk
 
 builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, it is removed after the run!
 
 wd=`pwd`
 
 # Get revision number
-svnrev=$(LANG=C svn info $repo/$pkg |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
+svnrev=$(LC_ALL=C svn info $repo/$pkg |grep "Last Changed Rev:" | sed 's/Last Changed Rev: //')
 verdir=skychart-$version-$svnrev-src
 
 mkdir -p $builddir
