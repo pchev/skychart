@@ -5,7 +5,7 @@
 version=3.7
 pkg=trunk
 #pkg=tags/V36
-repo=http://svn.code.sf.net/p/skychart/code/trunk
+repo=http://svn.code.sf.net/p/skychart/code
 
 builddir=/tmp/skychart-src  # Be sure this is set to a non existent directory, it is removed after the run!
 
