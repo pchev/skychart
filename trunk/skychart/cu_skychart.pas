@@ -802,11 +802,20 @@ w := maxvalue([w,h]);
 cfgsc.FieldNum:=GetFieldNum(w-musec);
 cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // full sky button
- if (cfgsc.ProjPole=Altaz)
-    and ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered))
-    and (cfgsc.fov>pi)
-    and (cfgsc.hcentre>pid4)
-    then cfgsc.projtype:='A' ;
+if (cfgsc.ProjPole=Altaz)
+  and (cfgsc.fov>pi)
+  and ( ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered)) and (cfgsc.hcentre>pid4)
+      or (cfgsc.hcentre>(85*deg2rad)) )
+  then cfgsc.projtype:='A' ;
+// Mercator diverge near the pole
+if (not cfgsc.ProjEquatorCentered) and (cfgsc.projtype='M') then begin
+ case cfgsc.ProjPole of
+  Equat: if abs(cfgsc.decentre)>(85*deg2rad) then cfgsc.decentre:=sgn(cfgsc.decentre)*85*deg2rad;
+  Altaz: if abs(cfgsc.hcentre)>(85*deg2rad) then begin cfgsc.hcentre:=sgn(cfgsc.hcentre)*85*deg2rad;Hz2Eq(cfgsc.acentre,cfgsc.hcentre,cfgsc.racentre,cfgsc.decentre,cfgsc); cfgsc.racentre:=cfgsc.CurST-cfgsc.racentre; end;
+  Gal  : if abs(cfgsc.bcentre)>(85*deg2rad) then begin cfgsc.bcentre:=sgn(cfgsc.bcentre)*85*deg2rad;Gal2Eq(cfgsc.lcentre,cfgsc.bcentre,cfgsc.racentre,cfgsc.decentre,cfgsc); end;
+  Ecl  : if abs(cfgsc.becentre)>(85*deg2rad) then begin cfgsc.becentre:=sgn(cfgsc.becentre)*85*deg2rad;Ecl2Eq(cfgsc.lecentre,cfgsc.becentre,cfgsc.ecl,cfgsc.racentre,cfgsc.decentre); end;
+ end;
+end;
 // normalize the coordinates
 if (cfgsc.decentre>=(pid2-secarc)) then cfgsc.decentre:=pid2-secarc;
 if (cfgsc.decentre<=(-pid2+secarc)) then cfgsc.decentre:=-pid2+secarc;
