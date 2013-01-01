@@ -528,7 +528,7 @@ begin
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
    cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
    cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
-   cfgsc.ObsHorizonDepression:=-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088;
+   cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088);
    result:=true;
 end;
 
@@ -549,7 +549,7 @@ if full then begin
   if (cfgsc.ProjPole=Altaz)
      and ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered))
      and (cfgsc.fov>pi)
-     and (cfgsc.hcentre>pid4)
+     and (abs(cfgsc.hcentre)>pid4)
      then cfgsc.projtype:='A' ;
   // max arc altaz fov
   if (cfgsc.ProjPole=Altaz)and(cfgsc.projtype='A') then begin
@@ -804,7 +804,7 @@ cfgsc.projtype:=(cfgsc.projname[cfgsc.fieldnum]+'A')[1];
 // full sky button
 if (cfgsc.ProjPole=Altaz)
   and (cfgsc.fov>pi)
-  and ( ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered)) and (cfgsc.hcentre>pid4)
+  and ( ((cfgsc.projtype='T')or(cfgsc.projtype='S')or(cfgsc.ProjEquatorCentered)) and (abs(cfgsc.hcentre)>pid4)
       or (cfgsc.hcentre>(85*deg2rad)) )
   then cfgsc.projtype:='A' ;
 // Mercator diverge near the pole
@@ -2898,13 +2898,13 @@ end;
 
 function Tskychart.DrawHorizon:boolean;
 const hdiv=10;
-var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz : double;
+var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz,fillfov : double;
     ps: array[0..1,0..2*hdiv+1] of single;
     psf: array of TPointF;
     i,j: integer;
     xx,yy: int64;
     x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1,fillx2,filly2 :single;
-    first,fill,ok:boolean;
+    first,fill,ok,hlplot:boolean;
     hbmp : TBGRABitmap;
     col: TColor;
     col1,col2: TBGRAPixel;
@@ -2930,6 +2930,7 @@ if VerboseMsg then
  WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
 fillx1:=0;
 filly1:=0;
+hlplot:=false;
 hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
 // Only with Alt/Az display
 if cfgsc.ProjPole=Altaz then begin
@@ -2941,7 +2942,13 @@ if cfgsc.ProjPole=Altaz then begin
   WindowXY(x1,y1,fillx2,filly2,cfgsc);
 ///// Draw to bgra bitmap
   if Fplot.cfgplot.UseBMP then begin
-    fill:=cfgsc.FillHorizon;
+    fill:=cfgsc.FillHorizon and (cfgsc.fov>(0.5*deg2rad));
+    case cfgsc.projtype of
+      'C' : fillfov:=357*deg2rad;
+      'H' : fillfov:=230*deg2rad;
+      'M' : fillfov:=357*deg2rad;
+      else  fillfov:=360*deg2rad;
+    end;
     hbmp:=TBGRABitmap.Create;
     hbmp.SetSize(fplot.cfgchart.Width,fplot.cfgchart.Height);
     hbmp.FillTransparent;
@@ -3013,9 +3020,10 @@ if cfgsc.ProjPole=Altaz then begin
             x0h:=xh;
             y0h:=yh;
          end else begin
-            if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then begin
+           if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
                 Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
-            end;
+                hlplot:=true;
+           end;
          end;
          xph:=xh;
          yph:=yh;
@@ -3024,7 +3032,7 @@ if cfgsc.ProjPole=Altaz then begin
     if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
         Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
     // Fill below horizon
-    if fill and (not Fplot.cfgchart.onprinter) and(cfgsc.fov<358*deg2rad) then begin
+    if hlplot and fill and (not Fplot.cfgchart.onprinter) and(cfgsc.fov<fillfov) then begin
          if (fillx1>0)or(filly1>0) then hbmp.FloodFill(round(fillx1),round(filly1),col1,fmSet);
          if (fillx2>-cfgsc.Xmax)and(fillx2<2*cfgsc.Xmax)and(filly2>-cfgsc.Ymax)and(filly2<2*cfgsc.Ymax)then  hbmp.FloodFill(round(fillx2),round(filly2),col1,fmSet);
          if CheckBelowHorizon(cfgsc.Xmin+1,cfgsc.Ymin+1) and (hbmp.GetPixel(integer(cfgsc.Xmin+1),integer(cfgsc.Ymin+1))<>col1) then hbmp.FloodFill(cfgsc.Xmin+1,cfgsc.Ymin+1,col1,fmSet);
