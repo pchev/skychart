@@ -1057,10 +1057,8 @@ if FileExistsUTF8(fn) then begin
  nam:=stringreplace(extractfilename(fn),blank,'_',[rfReplaceAll]);
  p:=pos('.',nam);
  if p>0 then nam:=copy(nam,1,p-1);
- maxi:=cfgm.maximized;
- cfgm.maximized:=MultiFrame1.Maximized;
+ MultiFrame1.Maximized:=cfgm.maximized;
  CreateChild(GetUniqueName(nam,false) ,false,cfgs,cfgp);
- cfgm.maximized:=maxi;
  result:=msgOK;
 end else
  result:=msgNotFound+' '+fn;
