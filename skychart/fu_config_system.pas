@@ -383,13 +383,17 @@ skipDBtypeGroupClick:=true;
 case DBtype of
  sqlite : begin
            DBtypeGroup.itemindex:=0;
+           MysqlBox.visible:=true;
            MysqlBox.visible:=false;
+           SqliteBox.visible:=false;
            SqliteBox.visible:=true;
            dropdb.visible:=false;
           end;
  mysql :  begin
            DBtypeGroup.itemindex:=1;
+           MysqlBox.visible:=false;
            MysqlBox.visible:=true;
+           SqliteBox.visible:=true;
            SqliteBox.visible:=false;
            dropdb.visible:=true;
           end;

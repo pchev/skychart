@@ -471,8 +471,12 @@ begin
 LockChange:=true;
 ComPageControl.ActivePageIndex:=1;
 ComPageControl.ActivePageIndex:=0;
+ComPageControl1.ActivePageIndex:=1;
+ComPageControl1.ActivePageIndex:=0;
 AstPageControl.ActivePageIndex:=1;
 AstPageControl.ActivePageIndex:=0;
+AstPageControl2.ActivePageIndex:=1;
+AstPageControl2.ActivePageIndex:=0;
 ShowPlanet;
 ShowComet;
 ShowAsteroid;

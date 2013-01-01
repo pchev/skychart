@@ -32,6 +32,111 @@ object f_config_system: Tf_config_system
         Caption = 'Page1'
         ClientHeight = 518
         ClientWidth = 494
+        object MysqlBox: TPanel
+          Left = 17
+          Height = 97
+          Top = 53
+          Width = 452
+          ClientHeight = 97
+          ClientWidth = 452
+          TabOrder = 5
+          object dbpass: TEdit
+            Left = 348
+            Height = 23
+            Top = 64
+            Width = 100
+            EchoMode = emPassword
+            OnChange = dbpassChange
+            PasswordChar = '*'
+            TabOrder = 0
+            Text = 'dbpass'
+          end
+          object dbuser: TEdit
+            Left = 125
+            Height = 23
+            Top = 64
+            Width = 100
+            OnChange = dbuserChange
+            TabOrder = 1
+            Text = 'dbuser'
+          end
+          object dbhost: TEdit
+            Left = 250
+            Height = 23
+            Top = 24
+            Width = 65
+            OnChange = dbhostChange
+            TabOrder = 2
+            Text = 'dbhost'
+          end
+          object dbport: TLongEdit
+            Left = 391
+            Height = 23
+            Top = 24
+            Width = 57
+            TabOrder = 3
+            OnChange = dbportChange
+            Value = 0
+          end
+          object dbname: TEdit
+            Left = 80
+            Height = 23
+            Top = 24
+            Width = 65
+            OnChange = dbnameChange
+            TabOrder = 4
+          end
+          object Label133: TLabel
+            Left = 274
+            Height = 15
+            Top = 68
+            Width = 81
+            AutoSize = False
+            Caption = 'Password'
+            ParentColor = False
+          end
+          object Label86: TLabel
+            Left = 16
+            Height = 15
+            Top = 68
+            Width = 106
+            AutoSize = False
+            Caption = 'Userid:'
+            ParentColor = False
+          end
+          object Label85: TLabel
+            Left = 362
+            Height = 16
+            Top = 28
+            Width = 29
+            Caption = 'Port:'
+            ParentColor = False
+          end
+          object Label84: TLabel
+            Left = 178
+            Height = 16
+            Top = 28
+            Width = 67
+            Caption = 'Host Name:'
+            ParentColor = False
+          end
+          object Label77: TLabel
+            Left = 16
+            Height = 16
+            Top = 28
+            Width = 57
+            Caption = 'DB Name:'
+            ParentColor = False
+          end
+          object MysqlBoxLabel: TLabel
+            Left = 16
+            Height = 16
+            Top = 3
+            Width = 83
+            Caption = 'MysqlBoxLabel'
+            ParentColor = False
+          end
+        end
         object SqliteBox: TPanel
           Left = 17
           Height = 97
@@ -260,111 +365,6 @@ object f_config_system: Tf_config_system
             Text = 'LinuxCmd'
           end
         end
-        object MysqlBox: TPanel
-          Left = 17
-          Height = 97
-          Top = 53
-          Width = 452
-          ClientHeight = 97
-          ClientWidth = 452
-          TabOrder = 5
-          object dbpass: TEdit
-            Left = 348
-            Height = 23
-            Top = 64
-            Width = 100
-            EchoMode = emPassword
-            OnChange = dbpassChange
-            PasswordChar = '*'
-            TabOrder = 0
-            Text = 'dbpass'
-          end
-          object dbuser: TEdit
-            Left = 125
-            Height = 23
-            Top = 64
-            Width = 100
-            OnChange = dbuserChange
-            TabOrder = 1
-            Text = 'dbuser'
-          end
-          object dbhost: TEdit
-            Left = 250
-            Height = 23
-            Top = 24
-            Width = 65
-            OnChange = dbhostChange
-            TabOrder = 2
-            Text = 'dbhost'
-          end
-          object dbport: TLongEdit
-            Left = 391
-            Height = 23
-            Top = 24
-            Width = 57
-            TabOrder = 3
-            OnChange = dbportChange
-            Value = 0
-          end
-          object dbname: TEdit
-            Left = 80
-            Height = 23
-            Top = 24
-            Width = 65
-            OnChange = dbnameChange
-            TabOrder = 4
-          end
-          object Label133: TLabel
-            Left = 274
-            Height = 15
-            Top = 68
-            Width = 81
-            AutoSize = False
-            Caption = 'Password'
-            ParentColor = False
-          end
-          object Label86: TLabel
-            Left = 16
-            Height = 15
-            Top = 68
-            Width = 106
-            AutoSize = False
-            Caption = 'Userid:'
-            ParentColor = False
-          end
-          object Label85: TLabel
-            Left = 362
-            Height = 16
-            Top = 28
-            Width = 29
-            Caption = 'Port:'
-            ParentColor = False
-          end
-          object Label84: TLabel
-            Left = 178
-            Height = 16
-            Top = 28
-            Width = 67
-            Caption = 'Host Name:'
-            ParentColor = False
-          end
-          object Label77: TLabel
-            Left = 16
-            Height = 16
-            Top = 28
-            Width = 57
-            Caption = 'DB Name:'
-            ParentColor = False
-          end
-          object MysqlBoxLabel: TLabel
-            Left = 16
-            Height = 16
-            Top = 3
-            Width = 83
-            Caption = 'MysqlBoxLabel'
-            ParentColor = False
-          end
-        end
       end
       object Page2: TTabSheet
         Caption = 'Page2'
@@ -491,8 +491,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
+              ClientHeight = 324
+              ClientWidth = 446
               TabOrder = 0
               object PanelCmd: TEdit
                 Left = 176
@@ -572,8 +572,8 @@ object f_config_system: Tf_config_system
                 Height = 92
                 Top = 128
                 Width = 444
-                ClientHeight = 92
-                ClientWidth = 444
+                ClientHeight = 88
+                ClientWidth = 440
                 TabOrder = 5
                 Visible = False
                 object Label258: TLabel
@@ -666,8 +666,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
+              ClientHeight = 326
+              ClientWidth = 446
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -683,7 +683,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 37
+                ClientHeight = 24
                 ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
@@ -908,8 +908,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -932,8 +932,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21
