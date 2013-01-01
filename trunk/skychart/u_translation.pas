@@ -1377,7 +1377,7 @@ resourcestring
   rsZoomMoreToVi = 'Zoom more to view the object';
   rsRotateBy180D = 'Rotate by 180 degrees';
   rsResetRotatio = 'Reset rotation';
-  rsRotateCylind = 'Rotate cylindrical projections to the chart center';
+  rsRotateCylind = 'Use oblique cylindrical projections';
   rsHammerAitoff = 'Hammer-Aitoff';
   rsMercator = 'Mercator';
   rsCartesian = 'Cartesian';
