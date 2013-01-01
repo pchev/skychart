@@ -5399,7 +5399,7 @@ msgid "Reset rotation"
 msgstr ""
 
 #: u_translation:rsrotatecylind
-msgid "Rotate cylindrical projections to the chart center"
+msgid "Use oblique cylindrical projections"
 msgstr ""
 
 #: u_translation:rshammeraitoff

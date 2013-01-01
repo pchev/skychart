@@ -1031,8 +1031,8 @@ object f_config_chart: Tf_config_chart
           Left = 61
           Height = 34
           Top = 365
-          Width = 307
-          Caption = 'Rotate cylindrical projections to the chart center'#10'(CAR, MER)'
+          Width = 217
+          Caption = 'Use oblique cylindrical projections'#10'(CAR, MER)'
           OnChange = CheckBox1Change
           TabOrder = 12
         end
