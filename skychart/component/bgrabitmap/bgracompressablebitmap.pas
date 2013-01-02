@@ -43,6 +43,7 @@ type
      FCompressionProgress: Int64;
      procedure Decompress;
      procedure FreeData;
+     procedure Init;
    public
      CompressionLevel: Tcompressionlevel;
      constructor Create;
@@ -76,23 +77,12 @@ const maxPartSize = 524288;
 
 constructor TBGRACompressableBitmap.Create;
 begin
-  FUncompressedData := nil;
-  FCompressedDataArray := nil;
-  FWidth := 0;
-  FHeight := 0;
-  FCaption := '';
-  FCompressionProgress := 0;
-  CompressionLevel := clfastest;
+  Init;
 end;
 
 constructor TBGRACompressableBitmap.Create(Source: TBGRABitmap);
 begin
-  FUncompressedData := nil;
-  FCompressedDataArray := nil;
-  FWidth := 0;
-  FHeight := 0;
-  FCaption := '';
-  FCompressionProgress := 0;
+  Init;
   Assign(Source);
 end;
 
@@ -267,6 +257,17 @@ begin
     FCompressedDataArray := nil;
   end;
   if FUncompressedData <> nil then FreeAndNil(FUncompressedData);
+end;
+
+procedure TBGRACompressableBitmap.Init;
+begin
+  FUncompressedData := nil;
+  FCompressedDataArray := nil;
+  FWidth := 0;
+  FHeight := 0;
+  FCaption := '';
+  FCompressionProgress := 0;
+  CompressionLevel := clfastest;
 end;
 
 { Copy a bitmap into this object. As it is copied, you need not

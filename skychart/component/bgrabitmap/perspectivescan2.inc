@@ -1,4 +1,4 @@
-{$asmmode intel}
+{$ifdef CPUI386}{$asmmode intel}{$endif}
     {$IFDEF PARAM_USESSE}
       asm
       {$IFDEF PARAM_USESHADER}

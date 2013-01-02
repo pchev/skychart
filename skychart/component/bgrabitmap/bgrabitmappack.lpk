@@ -249,11 +249,11 @@
       </Item55>
       <Item56>
         <Filename Value="bgravectorize.pas"/>
-        <UnitName Value="BGRAVectorize"/>
+        <UnitName Value="bgravectorize"/>
       </Item56>
       <Item57>
         <Filename Value="bgratypewriter.pas"/>
-        <UnitName Value="BGRATypewriter"/>
+        <UnitName Value="bgratypewriter"/>
       </Item57>
     </Files>
     <Type Value="RunAndDesignTime"/>
