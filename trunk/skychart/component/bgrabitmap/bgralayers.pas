@@ -159,6 +159,7 @@ type
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; override;
     function GetLayerIndexFromId(AIdentifier: integer): integer;
     function Duplicate(ASharedLayerIds: boolean = false): TBGRALayeredBitmap;
+    function ProduceLayerUniqueId: integer;
 
     procedure RotateCW;
     procedure RotateCCW;
@@ -556,7 +557,7 @@ begin
   FLayers[FNbLayers].Opacity := Opacity;
   FLayers[FNbLayers].Visible := true;
   FLayers[FNbLayers].Frozen := false;
-  FLayers[FNbLayers].UniqueId := InterLockedIncrement(NextLayerUniqueId);
+  FLayers[FNbLayers].UniqueId := ProduceLayerUniqueId;
   if Shared then
   begin
     FLayers[FNbLayers].Source := Source;
@@ -712,6 +713,11 @@ function TBGRALayeredBitmap.Duplicate(ASharedLayerIds: boolean): TBGRALayeredBit
 begin
   result := TBGRALayeredBitmap.Create;
   result.Assign(self, ASharedLayerIds);
+end;
+
+function TBGRALayeredBitmap.ProduceLayerUniqueId: integer;
+begin
+  result := InterLockedIncrement(NextLayerUniqueId);
 end;
 
 procedure TBGRALayeredBitmap.RotateCW;
