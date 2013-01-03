@@ -708,10 +708,10 @@ begin
     Lum := Lum * AAWidth;
     AAWidth := 1;
   end;
-  MinX := round(X - LineWidth - AAWidth - 0.5);
-  MaxX := round(X + LineWidth + AAWidth + 0.5);
-  MinY := round(Y - LineWidth - AAWidth - 0.5);
-  MaxY := round(Y + LineWidth + AAWidth + 0.5);
+  MinX := RoundInt(X - LineWidth - AAWidth - 0.5);
+  MaxX := RoundInt(X + LineWidth + AAWidth + 0.5);
+  MinY := RoundInt(Y - LineWidth - AAWidth - 0.5);
+  MaxY := RoundInt(Y + LineWidth + AAWidth + 0.5);
 
   with cbmp do begin
   bmWidth := Width;
@@ -1041,8 +1041,8 @@ if outlineinscreen and
 end;
 end;
 begin
-xx:=round(x);
-yy:=round(y);
+xx:=RoundInt(x);
+yy:=RoundInt(y);
 if not cfgplot.Invisible then begin
   case op of
   0 : begin // init vector
@@ -1150,8 +1150,8 @@ procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,d
 var b_v:double;
     ds,n,xx,yy : integer;
 begin
-xx:=round(x);
-yy:=round(y);
+xx:=RoundInt(x);
+yy:=RoundInt(y);
 if not cfgplot.Invisible then begin
  n:=cfgplot.plaplot;
  ds:=round(diam*pixscale/2)*cfgchart.drawsize;
@@ -1589,8 +1589,8 @@ var
   ds,ds2,xx,yy : Integer;
   ds1: single;
 begin
-xx:=round(x);
-yy:=round(y);
+xx:=RoundInt(x);
+yy:=RoundInt(y);
 if not cfgplot.Invisible then
   if not (hidesat xor showhide) then begin
     ds := round(max(3,(cfgplot.starsize*(cfgchart.min_ma-ma*cfgplot.stardyn/80)/cfgchart.min_ma))*cfgchart.drawsize);

@@ -3427,8 +3427,8 @@ begin
  projection(ra,dec,x1,y1,true,cfgsc) ;
  WindowXY(x1,y1,xxx,yyy,cfgsc);
  rr:=round(r*cfgsc.BxGlb);
- xx:=round(xxx);
- yy:=round(yyy);
+ xx:=RoundInt(xxx);
+ yy:=RoundInt(yyy);
  x:=xx;
  y:=yy;
  if (xx>=cfgsc.Xmin) and (xx<=cfgsc.Xmax) and (yy>=cfgsc.Ymin) and (yy<=cfgsc.Ymax) then begin
