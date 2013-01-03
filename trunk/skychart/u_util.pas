@@ -114,6 +114,7 @@ function GetSerialPorts(var c: TComboBox):boolean;
 function TzGMT2UTC(gmttz:string):string;
 function TzUTC2GMT(utctz:string):string;
 function ExtractSubPath(basepath, path: string):string;
+function RoundInt(x:double): integer;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2114,6 +2115,12 @@ function ExtractSubPath(basepath, path: string):string;
 begin
 if basepath='' then result:=path
    else result:=StringReplace(path,slash(basepath),'',[]);
+end;
+
+function RoundInt(x:double): integer;
+const maxi=MaxInt div 2;
+begin
+result:=round(sgn(x)*min(maxi,abs(x)));
 end;
 
 end.
