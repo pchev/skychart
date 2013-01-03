@@ -1385,6 +1385,8 @@ resourcestring
   rsGnomonic = 'Gnomonic';
   rsSlantOrthogr = 'Slant orthographic';
   rsMinimalAltit = 'Minimal altitude';
+  rsEphemerisPro = 'Ephemeris probably out of range, disabling any solar '
+    +'system object';
 
 implementation
 
