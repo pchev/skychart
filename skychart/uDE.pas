@@ -291,12 +291,18 @@ begin
     begin
       de_stream.Free;
     end;
-    de_stream := TFileStream.Create(ephemeris_filename,fmOpenRead);
+    de_stream := TFileStream.Create(ephemeris_filename,fmOpenRead+fmShareDenyNone);
     de_created := true;
     //Seek - soFromCurrent - soFromBeginning - soFromEnd
     de_stream.Read(Title, Sizeof(Title));
     de_stream.Seek(2568, soFromCurrent);
     de_stream.Read(de_eph, 28);
+    if de_eph.ephem_start=0 then begin  // protect again empty or corrupt file
+       de_stream.Free;
+       de_created:=false;
+       result:=false;
+       exit;
+    end;
     de_stream.Read(de_eph.auinkm, 8);
     de_stream.Read(de_eph.emrat, 8);
     de_stream.Read(de_eph.ipt, 144);
