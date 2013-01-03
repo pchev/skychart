@@ -71,7 +71,7 @@ type
      destructor  Destroy; override;
      procedure SetDE(folder:string);
      function load_de(t: double): boolean;
-     Procedure ComputePlanet(cfgsc: Tconf_skychart);
+     function ComputePlanet(cfgsc: Tconf_skychart):boolean;
      Procedure FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
      function  FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
      function  FindPlanet(x1,y1,x2,y2:double; nextobj:boolean; cfgsc: Tconf_skychart; var nom,ma,date,desc:string;trunc:boolean=true):boolean;
@@ -784,7 +784,7 @@ begin
 incl:=arctan2(cos(Sde)*sin(Sar-Lar),cos(Lde)*sin(Sde)-sin(Lde)*cos(Sde)*cos(Sar-Lar) );
 end;
 
-Procedure TPlanet.ComputePlanet(cfgsc: Tconf_skychart);
+function TPlanet.ComputePlanet(cfgsc: Tconf_skychart):boolean;
 var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,vel : double;
   ipla,j,i,ierr: integer;
   satx,saty : double8;
@@ -800,6 +800,10 @@ for j:=0 to cfgsc.SimNb-1 do begin
  // Sun first
  ipla:=10;
  Sun(jdt,ar,de,dist,diam);
+ if dist=0 then begin    // problem with the ephemeris, disable planet display
+    result:=false;
+    exit;
+ end;
  cfgsc.PlanetLst[j,ipla,8]:=NormRA(ar); //J2000
  cfgsc.PlanetLst[j,ipla,9]:=de;
  cfgsc.PlanetLst[j,ipla,10]:=dist;

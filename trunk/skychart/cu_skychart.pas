@@ -713,11 +713,24 @@ cfgsc.EarthB[2]:=-v2*au2parsec;
 cfgsc.EarthB[3]:=-v3*au2parsec;
 // Planet position
 if not cfgsc.quick then begin
-  if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': Compute planet position');
-  Fplanet.ComputePlanet(cfgsc);
-  if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': end Compute planet position');
+  if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Compute planet position');
+  if not Fplanet.ComputePlanet(cfgsc) then begin
+    if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': '+rsEphemerisPro);
+    cfgsc.msg:=rsEphemerisPro;
+    cfgsc.ephvalid:=false;
+    cfgsc.ShowPlanet:=false;
+    cfgsc.ShowAsteroid:=false;
+    cfgsc.ShowComet:=false;
+    cfgsc.ShowEarthShadow:=false;
+    cfgsc.ShowEcliptic:=false;
+    cfgsc.ShowPlanetValid:=false;
+    cfgsc.ShowAsteroidValid:=false;
+    cfgsc.ShowCometValid:=false;
+    cfgsc.ShowEarthShadowValid:=false;
+    cfgsc.ShowEclipticValid:=false;
+    Fplot.cfgplot.autoskycolorValid:=false;
+  end;
+  if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': end Compute planet position');
 end;
 // is the chart to be centered on an object ?
  if cfgsc.TrackOn then begin
