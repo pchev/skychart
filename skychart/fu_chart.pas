@@ -1850,6 +1850,7 @@ if sc.catalog.FindRecOK then begin
     rec.ra:=rmod(rec.ra+pi2,pi2);
     // set the description
     sc.FormatCatRec(rec,sc.cfgsc.FindDesc);
+    sc.FindRiseSet(0);
     sc.cfgsc.TrackRA:=sc.cfgsc.FindRA;
     sc.cfgsc.TrackDec:=sc.cfgsc.FindDec;
     sc.cfgsc.TrackOn:=false;
@@ -1905,7 +1906,7 @@ else begin
       ShowIdentLabel;
   end;
 end;
-
+if assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
 end;
 
 function Tf_chart.ListXY(X, Y: Integer):boolean;
