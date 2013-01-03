@@ -2399,7 +2399,7 @@ f_detail.BringToFront;
 end;
 
 function Tf_chart.FormatDesc:string;
-var desc,buf,buf2,otype,oname,txt: string;
+var desc,buf,buf2,otype,oname,txt,s1,s2,s3: string;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     searchdir,cmd,fn: string;
     bmp: Tbitmap;
@@ -2431,6 +2431,20 @@ if i>0 then begin
   key:=uppercase(trim(copy(det,1,i)));
   if pos(key,filter)>0 then result:=true;
 end;
+end;
+function GetDetailValue(key:string):string;
+var i,j:integer;
+    val : string;
+begin
+result:='';
+i:=pos(key,desc);
+if i>0 then begin
+   val:=copy(desc,i+length(key),99);
+   j:=pos(tab,val);
+   val:=copy(val,1,j-1);
+   result:=val;
+end;
+
 end;
 
 begin
@@ -2473,6 +2487,16 @@ buf:=copy(desc,l+1,9999);
 i:=pos(tab,buf);
 oname:=trim(copy(buf,1,i-1));
 delete(buf,1,i);
+if isStar then begin
+  s1:=GetDetailValue('Const:');
+  s2:=GetDetailValue('Bayer:');
+  s3:=GetDetailValue('Fl:');
+  if (s1>'')and(s2>'') then begin
+     oname:=sc.catalog.LongLabelGreek(s2)+' '+sc.catalog.LongLabelConst(s1);
+  end else if (s1>'')and(s3>'') then begin
+     oname:=s3+' '+sc.catalog.LongLabelConst(s1);
+  end;
+end;
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
 ipla:=0;
@@ -2594,6 +2618,7 @@ repeat
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
      if copy(buf2, 1, 5)=rsDesc then buf2:=stringreplace(buf2, ';', html_br+html_sp+html_sp+html_sp, [rfReplaceAll]);
+     if (copy(buf2,1,5)='Dist:') then buf2:=StringReplace(buf2,'[ly]',rsLightYears,[]);
      if isvo or isOsr then
         txt:=txt+bold(buf2)
      else
