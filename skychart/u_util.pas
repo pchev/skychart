@@ -2118,9 +2118,9 @@ if basepath='' then result:=path
 end;
 
 function RoundInt(x:double): integer;
-const maxi=MaxInt div 2;
+const maxi=MaxInt/2;
 begin
-result:=round(sgn(x)*min(maxi,abs(x)));
+result:=round(sgn(x)*minvalue([maxi,abs(x)]));
 end;
 
 end.
