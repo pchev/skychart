@@ -2030,7 +2030,8 @@ var i,h,w,mresult:integer;
     f1: TForm;
     l1: TLabel;
     c1: Tcheckbox;
-    btn: TButtonPanel;
+    p1: TPanel;
+    b1,b2,b3:Tbutton;
 begin
 if (not ForceClose) and TCPClientConnected then begin  // do not close if client are connected
    Action:=caMinimize;
@@ -2039,12 +2040,6 @@ if (not ForceClose) and TCPClientConnected then begin  // do not close if client
    writetrace('Client still connected, minimize instead of close.');
 end else begin
   try
-  {$ifdef mswindows}
-  if nightvision then ResetWinColor;
-  {$endif}
-  StopServer;
-  writetrace(rsExiting);
-  Autorefresh.Enabled:=false;
   if SaveConfigOnExit.checked then begin
      if ConfirmSaveConfig then begin
      try
@@ -2055,37 +2050,64 @@ end else begin
       l1:=TLabel.Create(f1);
       l1.Caption:=rsDoYouWantToS;
       l1.ParentFont:=true;
-      btn:= TButtonPanel.Create(f1);
-      btn.ShowButtons:=[pbOK,pbCancel];
-      btn.OKButton.Caption:=rsmbYes;
-      btn.CancelButton.Caption:=rsmbNo;
-      btn.ShowGlyphs:=[];
-      btn.AutoSize:=true;
-      btn.Align:=alBottom;
+      p1:=TPanel.Create(f1);
+      p1.Caption:='';
+      b1:=TButton.Create(f1);
+      b1.Caption:=rsMbYes;
+      b1.ModalResult:=mrYes;
+      b1.Anchors:=[akTop,akRight];
+      b2:=TButton.Create(f1);
+      b2.Caption:=rsMbNo;
+      b2.ModalResult:=mrNo;
+      b2.Anchors:=[akTop,akRight];
+      b3:=TButton.Create(f1);
+      b3.Caption:=rsAbort;
+      b3.ModalResult:=mrAbort;
+      b3.Anchors:=[akTop,akRight];
       c1:=Tcheckbox.Create(f1);
       c1.AutoSize:=true;
       c1.Caption:=rsAlwaysSaveWi;
       c1.Checked:=false;
       l1.Parent:=f1;
       c1.Parent:=f1;
-      btn.Parent:=f1;
+      b1.Parent:=p1;
+      b2.Parent:=p1;
+      b3.Parent:=p1;
+      p1.Parent:=f1;
       l1.AdjustSize;
       c1.AdjustSize;
-      btn.AdjustSize;
+      b1.AdjustSize;
+      b2.AdjustSize;
+      b3.AdjustSize;
+      p1.Height:=b1.Height+16;
+      p1.Width:=b1.Width+b2.Width+b3.Width+32;
+      p1.AdjustSize;
+      b1.Top:=8;
+      b2.Top:=8;
+      b3.Top:=8;
+      b3.Left:=8;
+      b2.Left:=b3.Left+b3.Width+8;
+      b1.Left:=b2.Left+b2.Width+8;
       l1.top:=8;
       l1.Left:=8;
       c1.Left:=8;
       c1.Top:=8+l1.Height+8;
-      h:=l1.height+c1.Height+btn.Height+20;
+      p1.Align:=alBottom;
+      h:=l1.height+c1.Height+p1.Height+20;
       w:=f1.Canvas.TextWidth(l1.Caption)+16;
       f1.Width:=w;
       f1.Height:=h;
       mresult:=f1.ShowModal;
       ConfirmSaveConfig:=not c1.Checked;
-      if mresult=mrOK then
+      if mresult=mrAbort then
+         Action:=caNone;
+      if mresult=mrYes then
          SaveDefault;
      finally
-      btn.free;
+      b1.free;
+      b2.free;
+      b3.free;
+      p1.free;
       l1.Free;
       c1.Free;
       f1.Free;
@@ -2095,14 +2117,22 @@ end else begin
   end else begin
      if not NeedRestart then SaveQuickSearch(configfile);
   end;
-  for i:=0 to MultiFrame1.ChildCount-1 do
-     if MultiFrame1.Childs[i].DockedObject is Tf_chart then with (MultiFrame1.Childs[i].DockedObject as Tf_chart) do begin
-        TelescopeTimer.Enabled:=false;
-        RefreshTimer.Enabled:=false;
-        BlinkTimer.Enabled:=false;
-        PDSSTimer.Enabled:=false;
-        locked:=true;
-     end;
+  if Action<>caNone then begin
+    {$ifdef mswindows}
+    if nightvision then ResetWinColor;
+    {$endif}
+    StopServer;
+    writetrace(rsExiting);
+    Autorefresh.Enabled:=false;
+    for i:=0 to MultiFrame1.ChildCount-1 do
+       if MultiFrame1.Childs[i].DockedObject is Tf_chart then with (MultiFrame1.Childs[i].DockedObject as Tf_chart) do begin
+          TelescopeTimer.Enabled:=false;
+          RefreshTimer.Enabled:=false;
+          BlinkTimer.Enabled:=false;
+          PDSSTimer.Enabled:=false;
+          locked:=true;
+       end;
+  end;
   except
   end;
 end;
