@@ -4214,7 +4214,7 @@ if cfgsc.showlabel[8] then begin
 end;
 h0:=h;
 if cfgsc.showlegend then begin
-  w:=max(w,10*ls);
+  w:=max(w,10*ls)+12;
   h:=h+6*ls;
   tr:=255;
 end
@@ -4247,7 +4247,7 @@ if cfgsc.showlegend then begin
   dma:=max(1,fplot.cfgchart.min_ma/6);
   mag:=-dma;
   yy:=h0;
-  xx:=-ls;
+  xx:=-ls+5;
   for i:=0 to 6 do begin
     mag:=mag+dma;
     xx:=round(xx+1.5*ls);
@@ -4258,7 +4258,7 @@ if cfgsc.showlegend then begin
   h0:=h0+2*ls;
   sz:=10*Fplot.cfgchart.drawsize;
   yy:=h0;
-  xx:=-ls;
+  xx:=-ls+5;
   // Ast
   xx:=round(xx+1.5*ls);
   mag:=5*dma;
@@ -4296,7 +4296,7 @@ if cfgsc.showlegend then begin
   h0:=h0+2*ls;
   sz:=10*Fplot.cfgchart.drawsize;
   yy:=h0;
-  xx:=-ls;
+  xx:=-ls+5;
   // OC
   xx:=round(xx+1.5*ls);
   Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,2,'',cfgsc.WhiteBg,drawgray,clGray);
