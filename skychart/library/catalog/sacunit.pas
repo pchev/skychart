@@ -29,11 +29,12 @@ type
 SACrec = record
             ar,de,ma,sbr,s1,s2 : single;
             pa : byte;
-            nom1 : string[17];
-            nom2 : string[18];
-            typ,cons  : string[3];
-            desc : string[120];
-            clas : string[11];
+            i0: byte; nom1 : array [1..17] of char;
+            i1: byte; nom2 : array [1..18] of char;
+            i2: byte; typ  : array [1..3] of char;
+            i3: byte; cons : array [1..3] of char;
+            i4: byte; desc : array [1..120] of char;
+            i5: byte; clas : array [1..11]of char;
          end;
 Function IsSACpath(path : string) : Boolean;
 procedure SetSACpath(path : string);
