@@ -1820,7 +1820,7 @@ end;
 
 procedure Tf_chart.IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
 var fullmotion : Boolean;
-    dyear,epoch : Double;
+    dyear,epoch,ra2000,dec2000 : Double;
     p: coordvector;
     rec:GCatrec;
 begin
@@ -1866,6 +1866,8 @@ end
 // only coordinates are available
 else begin
     // precession
+    ra2000:=ar1;
+    dec2000:=de1;
     precession(jd2000,sc.cfgsc.JDchart,ar1,de1);
     if sc.cfgsc.ApparentPos then apparent_equatorial(ar1,de1,sc.cfgsc,true,itype<ftPla);
     // center chart
@@ -1892,6 +1894,8 @@ else begin
       sc.cfgsc.FindCatname:='';
       sc.cfgsc.FindRA:=ar1;
       sc.cfgsc.FindDec:=de1;
+      sc.cfgsc.FindRA2000:=ra2000;
+      sc.cfgsc.FindDec2000:=dec2000;
       sc.cfgsc.FindSize:=0;
       sc.cfgsc.FindPM:=false;
       sc.cfgsc.FindStarPM:=false;
