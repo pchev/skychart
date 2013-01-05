@@ -1962,6 +1962,14 @@ if VerboseMsg then
 compass:=TBitmap.create;
 arrow:=TBitmap.create;
 step:='Load timezone';
+// check computer clock
+buf:=FormatDateTime('YYYY',now);
+if buf<'2000' then begin
+   MessageDlg('Your computer clock is back in year '+buf+crlf
+             +'Please set your computer clock and restart skychart',
+             mtError, [mbAbort], 0);
+   Halt;
+end;
 if VerboseMsg then
  WriteTrace(step);
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
