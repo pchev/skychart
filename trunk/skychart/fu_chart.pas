@@ -3981,16 +3981,11 @@ format:=uppercase(format);
 if VerboseMsg then
  WriteTrace(caption+' SaveChartImage');
 try
-if savelabel then begin
+ if savelabel then begin
    sc.cfgsc.Editlabels:=false;
    sc.Refresh;
    needrefresh:=true;
-end;
-if identlabel.Visible then begin
-  sc.plot.cnv:=sc.plot.cbmp.Canvas;
-  sc.plot.cnv.Draw(identlabel.Left,identlabel.Top,identlabel.Picture.Bitmap);
-  needrefresh:=true;
-end;
+ end;
  if fn='' then fn:='cdc.bmp';
  if format='' then format:='BMP';
  curdir:=getcurrentdir;
