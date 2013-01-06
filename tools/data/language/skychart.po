@@ -5430,3 +5430,7 @@ msgstr ""
 msgid "Minimal altitude"
 msgstr ""
 
+#: u_translation:rsephemerispro
+msgid "Ephemeris probably out of range, disabling any solar system object"
+msgstr ""
+

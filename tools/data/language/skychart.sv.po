@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-01 08:27+0000\n"
-"PO-Revision-Date: 2012-12-29 15:42+0000\n"
-"Last-Translator: Kåre Lekebjer <kare@lekebjer.se>\n"
+"PO-Revision-Date: 2013-01-06 02:04+0000\n"
+"Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-01 09:28+0000\n"
-"X-Generator: Launchpad (build 16378)\n"
+"X-Launchpad-Export-Date: 2013-01-06 16:28+0000\n"
+"X-Generator: Launchpad (build 16393)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -554,7 +554,7 @@ msgstr "Kan inte skriva till"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "Kartesisk"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -1648,6 +1648,10 @@ msgstr "Efemerid"
 msgid "Ephemeris calendar"
 msgstr "Ephemeris kalender"
 
+#: u_translation.rsephemerispro
+msgid "Ephemeris probably out of range, disabling any solar system object"
+msgstr ""
+
 #: u_translation.rsepoch
 msgid "Epoch"
 msgstr "Epok"
@@ -2058,7 +2062,7 @@ msgstr "Klotformad stjärnhop"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
-msgstr ""
+msgstr "Gnomonisk"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2130,7 +2134,7 @@ msgstr "Stopp efter 1000 fel"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff-projektion"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2822,7 +2826,7 @@ msgstr "Medelposition"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator-projektion"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -2858,7 +2862,7 @@ msgstr "Min."
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr ""
+msgstr "Lägsta altitud"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -4070,7 +4074,7 @@ msgstr "Rotera 180 grader"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
-msgstr ""
+msgstr "Använd snedställda cylindriska projektioner"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -4550,7 +4554,7 @@ msgstr "Färg på himlen"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
-msgstr ""
+msgstr "Snedställd ortografisk"
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -5410,7 +5414,7 @@ msgstr "Om du observerar från ett högt belägen plats, kommer horisontlinjen l
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"
-msgstr ""
+msgstr "Zenital ekvidistant"
 
 #: u_translation.rszenith
 msgid "Zenith"
