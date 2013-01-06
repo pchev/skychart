@@ -2636,35 +2636,22 @@ end;
 procedure Tf_main.ShowPicturesExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowImages:=not sc.cfgsc.ShowImages;
-   if sc.cfgsc.ShowImages then begin
-     sc.catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
-     sc.catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
-   end;
-   if sc.cfgsc.ShowImages and (not Fits.dbconnected) then begin
-      sc.cfgsc.ShowImages:=false;
-      ShowError(rsErrorPleaseC3);
-   end;
-if VerboseMsg then
- WriteTrace('ShowPicturesExecute');
-   Refresh;
+   if sc.cfgsc.ShowImages then
+     cmd_SetShowPicture('OFF')
+   else
+     cmd_SetShowPicture('ON');
+   if VerboseMsg then WriteTrace('ShowPicturesExecute');
 end;
 end;
 
 procedure Tf_main.ShowBackgroundImageExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
-   if sc.cfgsc.ShowBackgroundImage and (not Fits.Header.valid) then begin
-      sc.cfgsc.ShowBackgroundImage:=false;
-   end;
-   if sc.cfgsc.ShowBackgroundImage and (not Fits.dbconnected) then begin
-      sc.cfgsc.ShowBackgroundImage:=false;
-      ShowError(rsErrorPleaseC);
-   end;
-if VerboseMsg then
- WriteTrace('ShowBackgroundImageExecute');
-   Refresh;
+   if sc.cfgsc.ShowBackgroundImage then
+      cmd_SetBGimage('OFF')
+   else
+      cmd_SetBGimage('ON');
+   if VerboseMsg then WriteTrace('ShowBackgroundImageExecute');
 end;
 end;
 
