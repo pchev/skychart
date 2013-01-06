@@ -307,6 +307,8 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
+    function cmd_SetBGimage(onoff:string):string;
+    function cmd_SetShowPicture(onoff:string):string;
     function cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
     procedure cmd_GoXY(xx,yy : string);
     function cmd_IdXY(xx,yy : string): string;
@@ -2853,6 +2855,51 @@ begin
 result:=msgOK+blank+inttostr(xcursor)+blank+inttostr(ycursor);
 end;
 
+function Tf_Chart.cmd_SetBGimage(onoff:string):string;
+begin
+result:=msgOK;
+sc.cfgsc.ShowBackgroundImage:=(uppercase(onoff)='ON');
+if sc.cfgsc.ShowBackgroundImage and (not sc.Fits.dbconnected) then begin
+   sc.cfgsc.ShowBackgroundImage:=false;
+   WriteTrace(rsErrorPleaseC);
+   result:=msgFailed;
+   exit;
+end;
+if sc.cfgsc.ShowBackgroundImage and (not sc.Fits.Header.valid) then begin
+  sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
+  sc.Fits.InfoWCScoord;
+  if sc.Fits.Header.valid then begin
+    sc.Fits.DeleteDB('OTHER','BKG');
+    if not sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
+       sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=5;
+    result:=msgOK;
+  end
+  else begin
+    sc.cfgsc.ShowBackgroundImage:=false;
+    result:=msgFailed;
+  end;
+end
+  else result:=msgOK;
+Refresh;
+end;
+
+function Tf_Chart.cmd_SetShowPicture(onoff:string):string;
+begin
+result:=msgOK;
+sc.cfgsc.ShowImages:=(uppercase(onoff)='ON');
+if sc.cfgsc.ShowImages then begin
+  sc.catalog.cfgcat.nebcatdef[sac-BaseNeb]:=true;
+  sc.catalog.cfgcat.nebcatfield[sac-BaseNeb,2]:=10;
+end;
+if sc.cfgsc.ShowImages and (not sc.Fits.dbconnected) then begin
+   sc.cfgsc.ShowImages:=false;
+   WriteTrace(rsErrorPleaseC3);
+   result:=msgFailed;
+end;
+Refresh;
+end;
 
 function Tf_Chart.cmd_SetGridEQ(onoff:string):string;
 begin
@@ -3585,6 +3632,8 @@ case n of
  84 : result:=cmd_MoveScopeH(arg[1],arg[2]);
  85 : result:=cmd_IdentCenter;
  86 : result:=cmd_IdentTelescope;
+ 87 : result:=cmd_SetShowPicture(arg[1]);
+ 88 : result:=cmd_SetBGimage(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;

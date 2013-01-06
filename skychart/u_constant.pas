@@ -1163,7 +1163,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 86;
+  numcmd = 88;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1252,7 +1252,9 @@ const
     ('MOVESCOPE', '83', 'RA Dec [00.00]'),
     ('MOVESCOPEH', '84', 'HourAngle Declination [00.00]'),
     ('IDCENTER', '85', ''),
-    ('IDSCOPE', '86', '')
+    ('IDSCOPE', '86', ''),
+    ('SHOWPICTURE', '87', 'ON/OFF'),
+    ('SHOWBGIMAGE', '88', 'ON/OFF')
     );
 
 // INDI Telescope driver
