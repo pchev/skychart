@@ -6,8 +6,8 @@ object f_config_observatory: Tf_config_observatory
   ClientHeight = 527
   ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 116
-  DesignTop = 363
+  DesignLeft = 341
+  DesignTop = 423
   object MainPanel: TPanel
     Left = 0
     Height = 527
@@ -122,7 +122,7 @@ object f_config_observatory: Tf_config_observatory
           object hemis: TComboBox
             Left = 112
             Height = 23
-            Top = 19
+            Top = 20
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 0
@@ -132,7 +132,7 @@ object f_config_observatory: Tf_config_observatory
               'South'
             )
             OnChange = latdegChange
-            TabOrder = 3
+            TabOrder = 2
             Text = 'North'
           end
           object latdeg: TLongEdit
@@ -150,7 +150,7 @@ object f_config_observatory: Tf_config_observatory
             OnExit = latdegChange
           end
           object latmin: TLongEdit
-            Left = 48
+            Left = 40
             Height = 23
             Hint = '0..59'
             Top = 20
@@ -163,18 +163,19 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 59
             OnExit = latdegChange
           end
-          object latsec: TLongEdit
-            Left = 80
+          object latsec: TFloatEdit
+            Left = 68
             Height = 23
-            Hint = '0..59'
+            Hint = '0..59.9'
             Top = 20
-            Width = 25
-            MaxLength = 2
+            Width = 42
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 3
             Value = 0
-            MaxValue = 59
+            MinValue = 0
+            MaxValue = 59.99
+            NumericType = ntFixed
             OnExit = latdegChange
           end
         end
@@ -198,7 +199,7 @@ object f_config_observatory: Tf_config_observatory
           object long: TComboBox
             Left = 112
             Height = 23
-            Top = 19
+            Top = 20
             Width = 65
             AutoCompleteText = [cbactSearchAscending]
             ItemHeight = 0
@@ -208,7 +209,7 @@ object f_config_observatory: Tf_config_observatory
               'East'
             )
             OnChange = longdegChange
-            TabOrder = 3
+            TabOrder = 2
             Text = 'East'
           end
           object longdeg: TLongEdit
@@ -226,7 +227,7 @@ object f_config_observatory: Tf_config_observatory
             OnExit = longdegChange
           end
           object longmin: TLongEdit
-            Left = 48
+            Left = 40
             Height = 23
             Hint = '0..59'
             Top = 20
@@ -239,18 +240,19 @@ object f_config_observatory: Tf_config_observatory
             MaxValue = 59
             OnExit = longdegChange
           end
-          object longsec: TLongEdit
-            Left = 80
+          object longsec: TFloatEdit
+            Left = 68
             Height = 23
-            Hint = '0..59'
+            Hint = '0..59.9'
             Top = 20
-            Width = 25
-            MaxLength = 2
+            Width = 42
             ParentShowHint = False
             ShowHint = True
-            TabOrder = 2
+            TabOrder = 3
             Value = 0
-            MaxValue = 59
+            MinValue = 0
+            MaxValue = 59.99
+            NumericType = ntFixed
             OnExit = longdegChange
           end
         end
@@ -275,7 +277,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 23
             Hint = '-500..15000'
-            Top = 19
+            Top = 20
             Width = 65
             ParentShowHint = False
             ShowHint = True

@@ -45,6 +45,8 @@ type
     countrylist: TComboBox;
     CountryTZ: TCheckBox;
     DownloadDialog1: TDownloadDialog;
+    latsec: TFloatEdit;
+    longsec: TFloatEdit;
     Label2: TLabel;
     Label3: TLabel;
     altmeter: TLongEdit;
@@ -66,13 +68,11 @@ type
     hemis: TComboBox;
     latdeg: TLongEdit;
     latmin: TLongEdit;
-    latsec: TLongEdit;
     Longitude: TGroupBox;
     Label61: TLabel;
     long: TComboBox;
     longdeg: TLongEdit;
     longmin: TLongEdit;
-    longsec: TLongEdit;
     Altitude: TGroupBox;
     Label70: TLabel;
     timezone: TGroupBox;
@@ -262,11 +262,11 @@ begin
 try
 obslock:=true;
 altmeter.value:=round(csc.obsaltitude);
-ArToStr2(abs(csc.ObsLatitude),d,m,s);
+ArToStr4(abs(csc.ObsLatitude),f1,d,m,s);
 latdeg.Text:=d;
 latmin.Text:=m;
 latsec.Text:=s;
-ArToStr2(abs(csc.ObsLongitude),d,m,s);
+ArToStr4(abs(csc.ObsLongitude),f1,d,m,s);
 longdeg.Text:=d;
 longmin.Text:=m;
 longsec.Text:=s;

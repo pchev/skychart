@@ -2727,8 +2727,8 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
   txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
   txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
-  txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,0)+html_br;
-  txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,0)+html_br;
+  txt:=txt+html_b+rsAzimuth+':'+htms_b+deptostr(rad2deg*a,1)+html_br;
+  txt:=txt+html_b+rsAltitude+':'+htms_b+deptostr(rad2deg*h,1)+html_br;
   end;
   if (not isArtSat) then begin
     // rise/set time

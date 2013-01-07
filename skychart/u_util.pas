@@ -75,6 +75,7 @@ Function YearADBC(year : integer) : string;
 Function Date2Str(y,m,d:integer):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
 Function ARToStr3(ar: Double) : string;
+Function ARToStr4(ar: Double; f: string; var d,m,s : string) : string;
 Function Str3ToAR(dms : string) : double;
 Function DEToStr2(de: Double; var d,m,s : string) : string;
 Function DEToStr3(de: Double) : string;
@@ -922,6 +923,30 @@ begin
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
     if abs(sec)<9.95 then s:='0'+trim(s);
+    result := d+'h'+m+'m'+s+'s';
+end;
+
+Function ARToStr4(ar: Double; f: string; var d,m,s : string) : string;
+var dd,min1,min,sec: Double;
+begin
+    dd:=Int(ar);
+    min1:=abs(ar-dd)*60;
+    if min1>=59.99166667 then begin
+       dd:=dd+sgn(ar);
+       if dd=24 then dd:=0;
+       min1:=0.0;
+    end;
+    min:=Int(min1);
+    sec:=(min1-min)*60;
+    if sec>=59.95 then begin
+       min:=min+1;
+       sec:=0.0;
+    end;
+    str(dd:2:0,d);
+    if abs(dd)<10 then d:='0'+trim(d);
+    str(min:2:0,m);
+    if abs(min)<10 then m:='0'+trim(m);
+    s:=FormatFloat(f,sec);
     result := d+'h'+m+'m'+s+'s';
 end;
 
