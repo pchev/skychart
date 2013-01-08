@@ -762,7 +762,7 @@ type
     SimDateMinute, SimDateSecond: boolean;
     ObsLatitude, ObsLongitude, ObsAltitude: double;
     ObsTZ: string;
-    ObsTemperature, ObsPressure, ObsRefractionCor,
+    ObsTemperature, ObsPressure, ObsRefractionCor, ObsRefA, ObsRefB,
     ObsHorizonDepression: double;
     ObsName, ObsCountry, chartname, ast_day, ast_daypos,
     com_day, com_daypos, sunurlname, sunurl: string;
@@ -1740,6 +1740,8 @@ begin
   ObsTemperature := Source.ObsTemperature;
   ObsPressure := Source.ObsPressure;
   ObsRefractionCor := Source.ObsRefractionCor;
+  ObsRefA := Source.ObsRefA;
+  ObsRefB := Source.ObsRefB;
   ObsHorizonDepression := Source.ObsHorizonDepression;
   ObsName := Source.ObsName;
   ObsCountry := Source.ObsCountry;

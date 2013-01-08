@@ -2723,7 +2723,7 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   ra:=sc.cfgsc.FindRA;
   dec:=sc.cfgsc.FindDec;
   precession(sc.cfgsc.JDChart,cjd-sc.cfgsc.DT_UT/24,ra,dec);
-  Eq2Hz(cst-ra,dec,a,h,sc.cfgsc) ;
+  Eq2Hz(cst-ra,dec,a,h,sc.cfgsc,2) ;
   if sc.catalog.cfgshr.AzNorth then a:=Rmod(a+pi,pi2);
   txt:=txt+html_b+rsLocalSideral+':'+htms_b+artostr3(rmod(rad2deg*cst/15+24,24))+html_br;
   txt:=txt+html_b+rsHourAngle+':'+htms_b+ARptoStr(rmod(rad2deg*(cst-ra)/15+24,24),-1)+html_br;
