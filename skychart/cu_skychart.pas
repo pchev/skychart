@@ -632,7 +632,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
-    acc,dcc: double;
+    acc,dcc,h1,h2: double;
     se,ce : extended;
     s1,s2,s3: string;
     TrackAltAz: boolean;
@@ -845,6 +845,14 @@ if not TrackAltAz then begin
      cfgsc.acentre:=saveaz;
   end;
 end;
+// compute refraction constant
+//if (cfgsc.fov>0.1)and(cfgsc.hcentre>0) then
+   sla_REFCO(cfgsc.ObsAltitude,273+cfgsc.ObsTemperature,cfgsc.ObsPressure,0.5,0.55,deg2rad*cfgsc.ObsLatitude,0.0065,1E-8,cfgsc.ObsRefA,cfgsc.ObsRefb)
+;{else begin
+   h1:=pid2-max(0.1,cfgsc.hcentre+0.1);
+   h2:=pid2-max(0.02,cfgsc.hcentre-0.1);
+   cdc_REFCO(cfgsc.ObsAltitude,273+cfgsc.ObsTemperature,cfgsc.ObsPressure,0.5,0.55,deg2rad*cfgsc.ObsLatitude,0.0065,1E-8,h1,h2,cfgsc.ObsRefA,cfgsc.ObsRefb);
+end;}
 // compute refraction error at the chart center
 Hz2Eq(cfgsc.acentre,cfgsc.hcentre,a,d,cfgsc);
 Eq2Hz(a,d,w,h,cfgsc) ;

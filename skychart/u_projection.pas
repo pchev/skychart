@@ -29,6 +29,9 @@ interface
 uses u_constant, u_util,
      Math, SysUtils, Graphics;
 
+const refmethod=1;    // Refraction method: 0=norefraction, 1=Bennett, 2=slalib
+                      // Use 1 by default because of better reversability
+
 Procedure ScaleWindow(c: Tconf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; c: Tconf_skychart): double;
 Procedure WindowXY(x,y:Double; out WindowX,WindowY: single; c: Tconf_skychart);
@@ -63,9 +66,9 @@ PROCEDURE Precession(j0,j1 : double; VAR ra,de : double);
 Procedure PrecessionV(j0,j1: double; var p: coordvector);
 procedure PrecessionEcl(ti,tf : double; VAR l,b : double);
 PROCEDURE HorizontalGeometric(HH,DE : double ; VAR A,h : double; c: Tconf_skychart);
-PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart );
-Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
-Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart);
+PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart; method:smallint=refmethod);
+Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart; method:smallint=refmethod);
+Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart; method:smallint);
 function ecliptic(j:double; nuto:double=0):double;
 procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberrationme(j:double; var abe,abp:double);
@@ -121,6 +124,11 @@ procedure sofa_Rx(phi: double; var r: rotmatrix);
 Function ltp_Ecliptic(epj: double):double;
 procedure GCRS2J2000(var ra, de: double);
 procedure J20002GCRS(var ra, de: double);
+procedure sla_REFCO ( HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REFA, REFB: double );
+procedure cdc_REFCO ( HM, TDK, PMB, RH, WL, PHI, TLR, EPS,H1,H2: double; var REFA, REFB: double );
+procedure sla_REFRO ( ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REF: double );
+Procedure sla_REFCOQ (TDK, PMB, RH, WL: double; var REFA, REFB: double );
+Procedure sla_REFZ (ZU, REFA, REFB: double; var ZR:double);
 
 implementation
 
@@ -834,7 +842,7 @@ A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 END ;
 
-PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart);
+PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,d1,h1 : double;
 BEGIN
 l1:=deg2rad*c.ObsLatitude;
@@ -843,13 +851,13 @@ h1:=HH;
 h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
 A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
-Refraction(h,true,c);
+Refraction(h,true,c,method);
 END ;
 
-Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart);
+Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,a1,h1 : double;
 BEGIN
-Refraction(h,false,c);
+Refraction(h,false,c,method);
 l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 h1:=h;
@@ -858,29 +866,58 @@ hh:= double(arctan2(sin(a1),cos(a1)*sin(l1)+tan(h1)*cos(l1)));
 hh:=Rmod(hh+pi2,pi2);
 END ;
 
-Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart);
+Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart; method:smallint);
 var h1,R : double;
 begin
-{ meeus91 15.3, 15.4 }
-{ Bennett 2010}
 if flag then begin   // true -> apparent
-   h1:=rad2deg*h;
-   if h1>-1 then begin
-      R:=cotan(deg2rad*(h1+9.48/(h1+4.8)));
-      R:=R-0.06*sin(deg2rad*(14.7*R+13));
-      h:=double(minvalue([pid2,h+deg2rad*c.ObsRefractionCor*(R)/60]))
-   end
-    else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
+   case method of
+   0: begin  { no refraction for testing}
+       h:=h;
+      end;
+   1: begin  { Bennett 2010, meeus91 15.3, 15.4 }
+       h1:=rad2deg*h;
+       if h1>-1 then begin
+          R:=cotan(deg2rad*(h1+9.48/(h1+4.8)));
+          R:=R-0.06*sin(deg2rad*(14.7*R+13));
+          h:=double(minvalue([pid2,h+deg2rad*c.ObsRefractionCor*(R)/60]))
+       end
+        else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
+      end;
+   2: begin  { slalib }
+       if (rad2deg*h)>-1 then begin
+          h1:=pid2-h;
+          sla_REFZ(h1,c.ObsRefA,c.ObsRefB,h);
+          h:=pid2-h;
+       end
+        else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
+      end;
+   end;
 end
 else begin      // apparent -> true
-   h:=h-c.RefractionOffset; // correction for the refraction equation reversibility at the chart center
-   h1:=rad2deg*h;
-   if h1>-0.3534193791 then begin
-      R:=cotan(deg2rad*(0.99914*h1+(7.31/(h1+4.4))));
-      R:=R-0.06*sin(deg2rad*(14.7*R+13));
-      h:=double(minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(R)/60]))
-   end
-    else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(h1+90)/89.64658;
+   case method of
+   0: begin  { no refraction for testing}
+       h:=h;
+      end;
+   1: begin   { Bennett 2010, meeus91 15.3, 15.4 }
+       h:=h-c.RefractionOffset; // correction for the refraction equation reversibility at the chart center
+       h1:=rad2deg*h;
+       if h1>-0.347259404573 then begin
+          R:=cotan(deg2rad*(0.99914*h1+(7.31/(h1+4.4))));
+          R:=R-0.06*sin(deg2rad*(14.7*R+13));
+          h:=double(minvalue([pid2,h-deg2rad*c.ObsRefractionCor*(R)/60]))
+       end
+        else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(h1+90)/89.64658;
+     end;
+   2: begin   { slalib }
+       if (rad2deg*h)>-0.327565049146 then begin
+          h1:=pid2-h;
+          sla_REFRO ( h1, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,0.5,0.55, deg2rad*c.ObsLatitude, 0.0065,1E-8,R);
+          h1:=h1+R;
+          h:=pid2-h1;
+       end
+        else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(h1+90)/89.64658;
+      end;
+   end;
 end;
 end;
 
@@ -1931,6 +1968,561 @@ sofa_rxp(r,p,rp);
 sofa_c2s(rp,ra,de);
 ra:=rmod(ra+pi2,pi2);
 end;
+
+/////////////////////////////////////////
+// Refraction from slalib
+// P.T.Wallace   Starlink
+// License: GPL
+// converted from Fortran to Pascal
+/////////////////////////////////////////
+
+procedure sla__ATMS (RT, TT, DNT, GAMAL, R: double; var DN, RDNDR: double);
+//  Internal routine used by REFRO
+//
+//  Refractive index and derivative with respect to height for the
+//  stratosphere.
+//
+//  Given:
+//    RT      d    height of tropopause from centre of the Earth (metre)
+//    TT      d    temperature at the tropopause (K)
+//    DNT     d    refractive index at the tropopause
+//    GAMAL   d    constant of the atmospheric model = G*MD/R
+//    R       d    current distance from the centre of the Earth (metre)
+//
+//  Returned:
+//    DN      d    refractive index at R
+//    RDNDR   d    R * rate the refractive index is changing at R
+//
+
+var
+      B,W: double;
+
+begin
+      B := GAMAL/TT;
+      W := (DNT-1)*EXP(-B*(R-RT));
+      DN := 1+W;
+      RDNDR := -R*B*W;
+END;
+
+procedure sla__ATMT (R0, T0, ALPHA, GAMM2, DELM2, C1, C2, C3, C4, C5, C6, R: double; var T, DN, RDNDR: double);
+//  Internal routine used by REFRO
+//
+//  Refractive index and derivative with respect to height for the
+//  troposphere.
+//
+//  Given:
+//    R0      d    height of observer from centre of the Earth (metre)
+//    T0      d    temperature at the observer (K)
+//    ALPHA   d    alpha          )
+//    GAMM2   d    gamma minus 2  ) see HMNAO paper
+//    DELM2   d    delta minus 2  )
+//    C1      d    useful term  )
+//    C2      d    useful term  )
+//    C3      d    useful term  ) see source
+//    C4      d    useful term  ) of sla_REFRO
+//    C5      d    useful term  )
+//    C6      d    useful term  )
+//    R       d    current distance from the centre of the Earth (metre)
+//
+//  Returned:
+//    T       d    temperature at R (K)
+//    DN      d    refractive index at R
+//    RDNDR   d    R * rate the refractive index is changing at R
+//
+//  Note that in the optical case C5 and C6 are zero.
+
+
+var
+     TT0,TT0GM2,TT0DM2: double;
+
+begin
+      T := MAX(MIN(T0-ALPHA*(R-R0),320),100);
+      TT0 := T/T0;
+      TT0GM2 := TT0**GAMM2;
+      TT0DM2 := TT0**DELM2;
+      DN := 1+(C1*TT0GM2-(C2-C5/T)*TT0DM2)*TT0;
+      RDNDR := R*(-C3*TT0GM2+(C4-C6/TT0)*TT0DM2);
+END;
+
+procedure sla_REFRO ( ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REF: double );
+//  Atmospheric refraction for radio and optical/IR wavelengths.
+//
+//  Given:
+//    ZOBS    d  observed zenith distance of the source (radian)
+//    HM      d  height of the observer above sea level (metre)
+//    TDK     d  ambient temperature at the observer (K)
+//    PMB     d  pressure at the observer (millibar)
+//    RH      d  relative humidity at the observer (range 0-1)
+//    WL      d  effective wavelength of the source (micrometre)
+//    PHI     d  latitude of the observer (radian, astronomical)
+//    TLR     d  temperature lapse rate in the troposphere (K/metre)
+//    EPS     d  precision required to terminate iteration (radian)
+//
+//  Returned:
+//    REF     d  refraction: in vacuo ZD minus observed ZD (radian)
+
+
+//
+//  Fixed parameters
+//
+const
+//  93 degrees in radians
+      D93=1.623156204;
+//  Universal gas constant
+      GCR=8314.32;
+//  Molecular weight of dry air
+      DMD=28.9644;
+//  Molecular weight of water vapour
+      DMW=18.0152;
+//  Mean Earth radius (metre)
+      S=6378120.0;
+//  Exponent of temperature dependence of water vapour pressure
+      DELTA=18.36;
+//  Height of tropopause (metre)
+      HT=11000.0;
+//  Upper limit for refractive effects (metre)
+      HS=80000.0;
+//  Numerical integration: maximum number of strips.
+      ISMAX=16384;
+
+var
+      IS1,K,N,I,J: integer;
+      OPTIC,LOOP: boolean;
+      ZOBS1,ZOBS2,HMOK,TDKOK,PMBOK,RHOK,WLOK,ALPHA,
+      TOL,WLSQ,GB,A,GAMAL,GAMMA,GAMM2,DELM2,
+      TDC,PSAT,PWO,W,
+      C1,C2,C3,C4,C5,C6,R0,TEMPO,DN0,RDNDR0,SK0,F0,
+      RT,TT,DNT,RDNDRT,SINE,ZT,FT,DNTS,RDNDRP,ZTS,FTS,
+      RS,DNS,RDNDRS,ZS,FS,REFOLD,Z0,ZRANGE,FB,FF,FO,FE,
+      H,R,SZ,RG,DR,TG,DN,RDNDR,T,F,REFP,REFT : double;
+
+//  Normalize angle into range +/- pi  (double precision)
+function  sla_DRANGE (ANGLE: double): double;
+const
+     DPI=3.141592653589793238462643;
+     D2PI=6.283185307179586476925287;
+begin
+     sla_DRANGE:=RMOD(ANGLE,D2PI);
+     IF (ABS(sla_DRANGE)>=DPI) then
+             sla_DRANGE:=sla_DRANGE-D2PI*SIGN(ANGLE);
+end;
+
+//  The refraction integrand
+function REFI(DN,RDNDR:double): double;
+begin
+      REFI := RDNDR/(DN+RDNDR);
+end;
+
+begin
+//  Transform ZOBS into the normal range.
+      ZOBS1 := sla_DRANGE(ZOBS);
+      ZOBS2 := MIN(ABS(ZOBS1),D93);
+
+//  Keep other arguments within safe bounds.
+      HMOK := MIN(MAX(HM,-1E3),HS);
+      TDKOK := MIN(MAX(TDK,100),500);
+      PMBOK := MIN(MAX(PMB,0),10000);
+      RHOK := MIN(MAX(RH,0),1);
+      WLOK := MAX(WL,0.1);
+      ALPHA := MIN(MAX(ABS(TLR),0.001),0.01);
+
+//  Tolerance for iteration.
+      TOL := MIN(MAX(ABS(EPS),1E-12),0.1)/2;
+
+//  Decide whether optical/IR or radio case - switch at 100 microns.
+      OPTIC := (WLOK<=100);
+
+//  Set up model atmosphere parameters defined at the observer.
+      WLSQ := WLOK*WLOK;
+      GB := 9.784*(1-0.0026*COS(PHI+PHI)-0.00000028*HMOK);
+      IF (OPTIC) THEN
+         A := (287.6155+(1.62887+0.01360/WLSQ)/WLSQ)*273.15E-6/1013.25
+      ELSE
+         A := 77.6890E-6;
+      GAMAL := (GB*DMD)/GCR;
+      GAMMA := GAMAL/ALPHA;
+      GAMM2 := GAMMA-2;
+      DELM2 := DELTA-2;
+      TDC := TDKOK-273.15;
+      PSAT := 10**((0.7859+0.03477*TDC)/(1+0.00412*TDC))*(1+PMBOK*(4.5E-6+6E-10*TDC*TDC));
+      IF (PMBOK > 0) THEN
+         PWO := RHOK*PSAT/(1-(1-RHOK)*PSAT/PMBOK)
+      ELSE
+         PWO := 0;
+      W := PWO*(1-DMW/DMD)*GAMMA/(DELTA-GAMMA);
+      C1 := A*(PMBOK+W)/TDKOK;
+      IF (OPTIC) THEN
+         C2 := (A*W+11.2684E-6*PWO)/TDKOK
+      ELSE
+         C2 := (A*W+6.3938E-6*PWO)/TDKOK;
+      C3 := (GAMMA-1)*ALPHA*C1/TDKOK;
+      C4 := (DELTA-1)*ALPHA*C2/TDKOK;
+      IF (OPTIC) THEN begin
+         C5 := 0;
+         C6 := 0;
+      end ELSE begin
+         C5 := 375463E-6*PWO/TDKOK;
+         C6 := C5*DELM2*ALPHA/(TDKOK*TDKOK);
+      END;
+
+//  Conditions at the observer.
+      R0 := S+HMOK;
+      sla__ATMT(R0,TDKOK,ALPHA,GAMM2,DELM2,C1,C2,C3,C4,C5,C6,R0,TEMPO,DN0,RDNDR0);
+      SK0 := DN0*R0*SIN(ZOBS2);
+      F0 := REFI(DN0,RDNDR0);
+
+//  Conditions in the troposphere at the tropopause.
+      RT := S+MAX(HT,HMOK);
+      sla__ATMT(R0,TDKOK,ALPHA,GAMM2,DELM2,C1,C2,C3,C4,C5,C6,RT,TT,DNT,RDNDRT);
+      SINE := SK0/(RT*DNT);
+      ZT := ArcTAN2(SINE,SQRT(MAX(1-SINE*SINE,0)));
+      FT := REFI(DNT,RDNDRT);
+
+//  Conditions in the stratosphere at the tropopause.
+      sla__ATMS(RT,TT,DNT,GAMAL,RT,DNTS,RDNDRP);
+      SINE := SK0/(RT*DNTS);
+      ZTS := ArcTAN2(SINE,SQRT(MAX(1-SINE*SINE,0)));
+      FTS := REFI(DNTS,RDNDRP);
+
+//  Conditions at the stratosphere limit.
+      RS := S+HS;
+      sla__ATMS(RT,TT,DNT,GAMAL,RS,DNS,RDNDRS);
+      SINE := SK0/(RS*DNS);
+      ZS := ArcTAN2(SINE,SQRT(MAX(1-SINE*SINE,0)));
+      FS := REFI(DNS,RDNDRS);
+
+//  Variable initialization to avoid compiler warning.
+      REFT := 0;
+
+//  Integrate the refraction integral in two parts;  first in the
+//  troposphere (K=1), then in the stratosphere (K=2).
+
+      for K := 1 to 2 do begin
+
+//     Initialize previous refraction to ensure at least two iterations.
+         REFOLD := 1;
+
+//     Start off with 8 strips.
+         IS1 := 8;
+
+//     Start Z, Z range, and start and end values.
+         IF (K=1) THEN begin
+            Z0 := ZOBS2;
+            ZRANGE := ZT-Z0;
+            FB := F0;
+            FF := FT;
+         end ELSE begin
+            Z0 := ZTS;
+            ZRANGE := ZS-Z0;
+            FB := FTS;
+            FF := FS;
+         END;
+
+//     Sums of odd and even values.
+         FO := 0;
+         FE := 0;
+
+//     First time through the loop we have to do every point.
+         N := 1;
+
+//     Start of iteration loop (terminates at specified precision).
+         LOOP := TRUE;
+         WHILE LOOP do begin
+
+//        Strip width.
+            H := ZRANGE/IS1;
+
+//        Initialize distance from Earth centre for quadrature pass.
+            IF (K=1) THEN
+               R := R0
+            ELSE
+               R := RT;
+
+//        One pass (no need to compute evens after first time).
+            I:=1;
+            while I<IS1 do begin  // replace for loop with variable increment
+
+//           Sine of observed zenith distance.
+               SZ := SIN(Z0+H*I);
+
+//           Find R (to the nearest metre, maximum four iterations).
+               IF (SZ>1E-20) THEN begin
+                  W := SK0/SZ;
+                  RG := R;
+                  DR := 1E6;
+                  J := 0;
+                  WHILE ((ABS(DR)>1)AND(J<4)) do begin
+                     J:=J+1;
+                     IF (K=1) THEN
+                        sla__ATMT(R0,TDKOK,ALPHA,GAMM2,DELM2,C1,C2,C3,C4,C5,C6,RG,TG,DN,RDNDR)
+                     ELSE
+                        sla__ATMS(RT,TT,DNT,GAMAL,RG,DN,RDNDR);
+                     DR := (RG*DN-W)/(DN+RDNDR);
+                     RG := RG-DR;
+                  END; // while
+                  R := RG;
+               END;
+
+//           Find the refractive index and integrand at R.
+               IF (K=1) THEN
+                  sla__ATMT(R0,TDKOK,ALPHA,GAMM2,DELM2,C1,C2,C3,C4,C5,C6,R,T,DN,RDNDR)
+               ELSE
+                  sla__ATMS(RT,TT,DNT,GAMAL,R,DN,RDNDR);
+               F := REFI(DN,RDNDR);
+
+//           Accumulate odd and (first time only) even values.
+               IF ((N=1)AND((I mod 2)=0)) THEN
+                  FE := FE+F
+               ELSE
+                  FO := FO+F;
+
+               inc(I,N);
+            END; // while I // for I
+
+//        Evaluate the integrand using Simpson's Rule.
+            REFP := H*(FB+4*FO+2*FE+FF)/3;
+
+//        Has the required precision been achieved (or can't be)?
+            IF ((ABS(REFP-REFOLD)>TOL)AND(IS1<ISMAX)) THEN begin
+
+//           No: prepare for next iteration.
+
+//           Save current value for convergence test.
+               REFOLD := REFP;
+
+//           Double the number of strips.
+               IS1 := IS1+IS1;
+
+//           Sum of all current values = sum of next pass's even values.
+               FE := FE+FO;
+
+//           Prepare for new odd values.
+               FO := 0;
+
+//           Skip even values next time.
+               N := 2;
+            end ELSE begin
+
+//           Yes: save troposphere component and terminate the loop.
+               IF (K=1) then REFT := REFP;
+               LOOP := FALSE;
+            END; // IF
+         END; // WHILE LOOP
+      END; // for K
+
+//  Result.
+      REF := REFT+REFP;
+      IF (ZOBS1<0) then REF := -REF;
+
+      END;
+
+
+procedure sla_REFCO ( HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REFA, REFB: double );
+//  Determine the constants A and B in the atmospheric refraction
+//  model dZ = A tan Z + B tan**3 Z.
+//
+//  Z is the "observed" zenith distance (i.e. affected by refraction)
+//  and dZ is what to add to Z to give the "topocentric" (i.e. in vacuo)
+//  zenith distance.
+//
+//  Given:
+//    HM      d     height of the observer above sea level (metre)
+//    TDK     d     ambient temperature at the observer (K)
+//    PMB     d     pressure at the observer (millibar)
+//    RH      d     relative humidity at the observer (range 0-1)
+//    WL      d     effective wavelength of the source (micrometre)
+//    PHI     d     latitude of the observer (radian, astronomical)
+//    TLR     d     temperature lapse rate in the troposphere (K/metre)
+//    EPS     d     precision required to terminate iteration (radian)
+//
+//  Returned:
+//    REFA    d     tan Z coefficient (radian)
+//    REFB    d     tan**3 Z coefficient (radian)
+//
+var
+      R1,R2: double;
+
+//  Sample zenith distances: arctan(1) and arctan(4)
+const ATN1=0.7853981633974483;
+      ATN4=1.325817663668033;
+
+begin
+//  Determine refraction for the two sample zenith distances
+      sla_REFRO(ATN1,HM,TDK,PMB,RH,WL,PHI,TLR,EPS,R1);
+      sla_REFRO(ATN4,HM,TDK,PMB,RH,WL,PHI,TLR,EPS,R2);
+
+//  Solve for refraction constants
+      REFA := (64*R1-R2)/60;
+      REFB := (R2-4*R1)/60;
+
+END;
+
+procedure cdc_REFCO ( HM, TDK, PMB, RH, WL, PHI, TLR, EPS, H1, H2: double; var REFA, REFB: double );
+//  Same function as sla_REFRO but return coefficient adjusted for other zenith distance.
+//
+//  Determine the constants A and B in the atmospheric refraction
+//  model dZ = A tan Z + B tan**3 Z.
+//
+//  Z is the "observed" zenith distance (i.e. affected by refraction)
+//  and dZ is what to add to Z to give the "topocentric" (i.e. in vacuo)
+//  zenith distance.
+//
+//  Given:
+//    HM      d     height of the observer above sea level (metre)
+//    TDK     d     ambient temperature at the observer (K)
+//    PMB     d     pressure at the observer (millibar)
+//    RH      d     relative humidity at the observer (range 0-1)
+//    WL      d     effective wavelength of the source (micrometre)
+//    PHI     d     latitude of the observer (radian, astronomical)
+//    TLR     d     temperature lapse rate in the troposphere (K/metre)
+//    EPS     d     precision required to terminate iteration (radian)
+//    H1      d     first reference Z
+//    H2      d     second reference Z   H2>H1
+//
+//  Returned:
+//    REFA    d     tan Z coefficient (radian)
+//    REFB    d     tan**3 Z coefficient (radian)
+//
+var
+      R1,R2,a,b,d,e: double;
+
+begin
+//  Determine refraction for the two sample zenith distances
+      sla_REFRO(H1,HM,TDK,PMB,RH,WL,PHI,TLR,EPS,R1);
+      sla_REFRO(H2,HM,TDK,PMB,RH,WL,PHI,TLR,EPS,R2);
+
+//  Solve for refraction constants
+      a := tan(H1);
+      b := a*a*a;
+      d := tan(H2);
+      e := d*d*d;
+      REFA := (R1*e - R2*b) / (a*e-d*b);
+      REFB := (a*R2 - d*R1) / (a*e-d*b);
+
+END;
+
+Procedure sla_REFCOQ (TDK, PMB, RH, WL: double; var REFA, REFB: double );
+//
+//  Given:
+//    TDK      d      ambient temperature at the observer (K)
+//    PMB      d      pressure at the observer (millibar)
+//    RH       d      relative humidity at the observer (range 0-1)
+//    WL       d      effective wavelength of the source (micrometre)
+//
+//  Returned:
+//    REFA     d      tan Z coefficient (radian)
+//    REFB     d      tan**3 Z coefficient (radian)
+
+var OPTIC: boolean;
+    T,P,R,W,TDC,PS,PW,WLSQ,GAMMA,BETA: double;
+
+begin
+//  Decide whether optical/IR or radio case:  switch at 100 microns.
+      OPTIC := (WL <= 100);
+
+//  Restrict parameters to safe values.
+      T := MIN(MAX(TDK,100),500);
+      P := MIN(MAX(PMB,0),10000);
+      R := MIN(MAX(RH,0),1);
+      W := MIN(MAX(WL,0.1),1E6);
+
+//  Water vapour pressure at the observer.
+      IF (P>0) THEN begin
+         TDC := T-273.15;
+         PS := 10**((0.7859+0.03477*TDC)/(1+0.00412*TDC))*(1+P*(4.5E-6+6E-10*TDC*TDC));
+         PW := R*PS/(1-(1-R)*PS/P);
+      end
+      ELSE begin
+         PW := 0;
+      END;
+
+//  Refractive index minus 1 at the observer.
+      IF OPTIC THEN begin
+         WLSQ := W*W;
+         GAMMA := ((77.53484E-6+(4.39108E-7+3.666E-9/WLSQ)/WLSQ)*P -11.2684E-6*PW)/T;
+      end
+      ELSE begin
+         GAMMA := (77.6890E-6*P-(6.3938E-6-0.375463E0/T)*PW)/T;
+      END;
+
+//  Formula for beta adapted from Stone, with empirical adjustments.
+      BETA:=4.4474E-6*T;
+      IF (NOT OPTIC) then BETA:=BETA-0.0074*PW*BETA;
+
+//  Refraction constants from Green.
+      REFA := GAMMA*(1-BETA);
+      REFB := -GAMMA*(BETA-GAMMA/2);
+
+END;
+
+Procedure sla_REFZ (ZU, REFA, REFB: double; var ZR:double);
+//
+//  Given:
+//    ZU    dp    unrefracted zenith distance of the source (radian)
+//    REFA  dp    tan Z coefficient (radian)
+//    REFB  dp    tan**3 Z coefficient (radian)
+//
+//  Returned:
+//    ZR    dp    refracted zenith distance (radian)
+
+const
+//  Radians to degrees
+      R2D=57.29577951308232;
+
+//  Largest usable ZD (deg)
+      D93=93.0;
+
+//  Coefficients for high ZD model (used beyond ZD 83 deg)
+      C1=+0.55445;
+      C2=-0.01133;
+      C3=+0.00202;
+      C4=+0.28385;
+      C5=+0.02390;
+
+//  ZD at which one model hands over to the other (radians)
+      Z83=83.0/R2D;
+
+//  High-ZD-model prediction (deg) for that point
+      REF83=(C1+C2*7+C3*49)/(1+C4*7+C5*49);
+
+var
+      ZU1,ZL,S,C,T,TSQ,TCU,REF,E,E2: double;
+
+begin
+//  Perform calculations for ZU or 83 deg, whichever is smaller
+      ZU1 := MIN(ZU,Z83);
+
+//  Functions of ZD
+      ZL := ZU1;
+      S := SIN(ZL);
+      C := COS(ZL);
+      T := S/C;
+      TSQ := T*T;
+      TCU := T*TSQ;
+
+//  Refracted ZD (mathematically to better than 1 mas at 70 deg)
+      ZL := ZL-(REFA*T+REFB*TCU)/(1+(REFA+3*REFB*TSQ)/(C*C));
+
+//  Further iteration
+      S := SIN(ZL);
+      C := COS(ZL);
+      T := S/C;
+      TSQ := T*T;
+      TCU := T*TSQ;
+      REF := ZU1-ZL+(ZL-ZU1+REFA*T+REFB*TCU)/(1+(REFA+3*REFB*TSQ)/(C*C));
+
+// Special handling for large ZU
+      IF (ZU>ZU1) THEN begin
+         E := 90-MIN(D93,ZU*R2D);
+         E2 := E*E;
+         REF := (REF/REF83)*(C1+C2*E+C3*E2)/(1+C4*E+C5*E2);
+      END;
+
+//  Return refracted ZD
+      ZR := ZU-REF;
+
+END;
+
 
 end.
 
