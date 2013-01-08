@@ -30,7 +30,8 @@ uses u_constant, u_util,
      Math, SysUtils, Graphics;
 
 const refmethod=1;    // Refraction method: 0=norefraction, 1=Bennett, 2=slalib
-                      // Use 1 by default because of better reversability
+                      // Use 1 by default because of better reversability and performance for drawing.
+                      // 2 is used as parameter for higher accuracy in detail form.
 
 Procedure ScaleWindow(c: Tconf_skychart);
 Function RotationAngle(x1,y1,x2,y2: double; c: Tconf_skychart): double;
@@ -867,7 +868,9 @@ hh:=Rmod(hh+pi2,pi2);
 END ;
 
 Procedure Refraction(var h : double; flag:boolean; c: Tconf_skychart; method:smallint);
-var h1,R : double;
+const ZBREAK=0.242535625;
+var h1,R,DZD : double;
+    I : Integer;
 begin
 if flag then begin   // true -> apparent
    case method of
@@ -887,6 +890,20 @@ if flag then begin   // true -> apparent
        if (rad2deg*h)>-1 then begin
           h1:=pid2-h;
           sla_REFZ(h1,c.ObsRefA,c.ObsRefB,h);
+          IF (COS(h)<ZBREAK) THEN begin // from aopqk.f
+            I := 1;
+            DZD := 1E1;
+            WHILE (ABS(DZD)>1E-10)AND(I<=10) do begin
+             // Compute refraction using current estimate of observed ZD
+              sla_REFRO(h, c.ObsAltitude, 273+c.ObsTemperature, c.ObsPressure,0.5,0.55, deg2rad*c.ObsLatitude, 0.0065,1E-8,R);
+             // Remaining discrepancy
+              DZD := h+R-h1;
+             // Update the estimate
+              h := h-DZD;
+             // Increment the iteration counter
+              I := I+1;
+            END;
+          END;
           h:=pid2-h;
        end
         else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
