@@ -5680,6 +5680,7 @@ end;
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
+Clear;
 section:='main';
 WriteInteger(section,'WinTop',f_main.Top);
 WriteInteger(section,'WinLeft',f_main.Left);
