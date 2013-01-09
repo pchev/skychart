@@ -1387,6 +1387,9 @@ resourcestring
   rsMinimalAltit = 'Minimal altitude';
   rsEphemerisPro = 'Ephemeris probably out of range, disabling any solar '
     +'system object';
+  rsHumidity = 'Humidity %';
+  rsTroposphereT = 'Troposphere temperature lapse rate (K/km)';
+  rsPolarMotionA = 'Polar motion (arc sec)';
 
 implementation
 
