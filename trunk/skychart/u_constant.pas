@@ -80,6 +80,7 @@ const
   clight = 299792.458;
   grsun = 1.974126e-8;  // twice the gravitational radius of the Sun
   tlight = km_au / clight / 3600 / 24;
+  RefractionWavelength = 0.55;
   footpermeter = 0.3048;
   kmperdegree = 111.1111;
   secday = 3600 * 24;
@@ -362,6 +363,8 @@ const
 
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
+
+  URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
   URL_HTTPCometElements =
     'http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt';
@@ -760,7 +763,7 @@ type
     PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat: boolean;
     SimDateYear, SimDateMonth, SimDateDay, SimDateHour,
     SimDateMinute, SimDateSecond: boolean;
-    ObsLatitude, ObsLongitude, ObsAltitude,ObsXP,ObsYP: double;
+    ObsLatitude, ObsLongitude, ObsAltitude,ObsXP,ObsYP,ObsRH,ObsTlr: double;
     ObsTZ: string;
     ObsTemperature, ObsPressure : double;
     ObsName, ObsCountry, chartname, ast_day, ast_daypos,
@@ -1736,6 +1739,8 @@ begin
   ObsAltitude := Source.ObsAltitude;
   ObsXP := Source.ObsXP;
   ObsYP := Source.ObsYP;
+  ObsRH := Source.ObsRH;
+  ObsTlr:= Source.ObsTlr;
   ObsTZ := Source.ObsTZ;
   countrytz := Source.countrytz;
   ObsTemperature := Source.ObsTemperature;
