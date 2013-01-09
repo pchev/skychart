@@ -483,6 +483,7 @@ result:=true;
 end;
 
 function Tskychart.InitTime:boolean;
+var xp,yp,MJD,A,C : double;
 begin
 if VerboseMsg then
  WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
@@ -513,11 +514,29 @@ if (cfgsc.lastJDchart<-1E20) then cfgsc.lastJDchart:=cfgsc.JDchart; // initial v
 cfgsc.rap2000:=0;
 cfgsc.dep2000:=pid2;
 precession(jd2000,cfgsc.JDChart,cfgsc.rap2000,cfgsc.dep2000);
+// Pole motion (must be done after setting the time)
+xp:=cfgsc.ObsXP;
+yp:=cfgsc.ObsYP;
+if (xp=0) and (yp=0)and(cfgsc.CurJDUT>jd2000)and(cfgsc.CurJDUT<2458849.5) then begin // 2000-2020
+  // compute predicted value using formula in 3 January 2013 IERS BULLETIN-A
+  MJD := cfgsc.CurJDUT-2400000.5;
+  A := 2*pi*(MJD-56295)/365.25;
+  C:= 2*pi*(MJD-56295)/435;
+  xp :=  0.0940 - 0.0383*cos(A) - 0.1277*sin(A) + 0.0101*cos(C) + 0.0530*sin(C);
+  yp :=  0.3393 - 0.1066*cos(A) + 0.0261*sin(A) + 0.0530*cos(C) - 0.0101*sin(C);
+end;
+if (xp=0) and (yp=0) then begin
+  cfgsc.ObsELONG:=-deg2rad*cfgsc.ObsLongitude;
+  cfgsc.ObsPHI:=deg2rad*cfgsc.ObsLatitude;
+  cfgsc.ObsDAZ:=0
+end
+else
+  sla_POLMO ( -deg2rad*cfgsc.ObsLongitude, deg2rad*cfgsc.ObsLatitude, deg2rad*XP/3600, deg2rad*YP/3600, cfgsc.ObsELONG, cfgsc.ObsPHI, cfgsc.ObsDAZ);
 result:=true;
 end;
 
 function Tskychart.InitObservatory:boolean;
-var u,p,xp,yp,MJD,A,CC : double;
+var u,p : double;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
       SOLSID=1.00273790935;  // Ratio between solar and sidereal time
@@ -533,17 +552,6 @@ begin
    cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088);
    sla_GEOC(p,cfgsc.ObsAltitude,cfgsc.ObsRAU,cfgsc.ObsZAU);
    cfgsc.Diurab := PI2*cfgsc.ObsRAU*SOLSID/C;
-   xp:=cfgsc.ObsXP;
-   yp:=cfgsc.ObsYP;
-   if (xp=0) and (yp=0) then begin
-     // compute predicted value using formula in IERS BULLETIN-A
-     MJD := jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone)-2400000.5; // curjdut not yet computed
-     A := 2*pi*(MJD-56295)/365.25;
-     CC:= 2*pi*(MJD-56295)/435;
-     xp :=  0.0940 - 0.0383*cos(A) - 0.1277*sin(A) + 0.0101*cos(CC) + 0.0530*sin(CC);
-     yp :=  0.3393 - 0.1066*cos(A) + 0.0261*sin(A) + 0.0530*cos(CC) - 0.0101*sin(CC);
-   end;
-   sla_POLMO ( -deg2rad*cfgsc.ObsLongitude, deg2rad*cfgsc.ObsLatitude, deg2rad*XP/3600, deg2rad*YP/3600, cfgsc.ObsELONG, cfgsc.ObsPHI, cfgsc.ObsDAZ);
    result:=true;
 end;
 
