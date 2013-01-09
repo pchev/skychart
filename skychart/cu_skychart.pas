@@ -517,9 +517,11 @@ result:=true;
 end;
 
 function Tskychart.InitObservatory:boolean;
-var u,p : double;
+var u,p,xp,yp,MJD,A,CC : double;
 const ratio = 0.99664719;
       H0 = 6378140.0 ;
+      SOLSID=1.00273790935;  // Ratio between solar and sidereal time
+      C=173.14463331;        // Speed of light (AU per day)
 begin
   if VerboseMsg then
   WriteTrace('SkyChart '+cfgsc.chartname+': Init observatory');
@@ -529,6 +531,19 @@ begin
    cfgsc.ObsRoCosPhi:=cos(u)+(cfgsc.ObsAltitude/H0)*cos(p);
    cfgsc.ObsRefractionCor:=(cfgsc.ObsPressure/1010)*(283/(273+cfgsc.ObsTemperature));
    cfgsc.ObsHorizonDepression:=min(0,-deg2rad*sqrt(cfgsc.ObsAltitude)*0.02931+deg2rad*0.64658062088);
+   sla_GEOC(p,cfgsc.ObsAltitude,cfgsc.ObsRAU,cfgsc.ObsZAU);
+   cfgsc.Diurab := PI2*cfgsc.ObsRAU*SOLSID/C;
+   xp:=cfgsc.ObsXP;
+   yp:=cfgsc.ObsYP;
+   if (xp=0) and (yp=0) then begin
+     // compute predicted value using formula in IERS BULLETIN-A
+     MJD := jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone)-2400000.5; // curjdut not yet computed
+     A := 2*pi*(MJD-56295)/365.25;
+     CC:= 2*pi*(MJD-56295)/435;
+     xp :=  0.0940 - 0.0383*cos(A) - 0.1277*sin(A) + 0.0101*cos(CC) + 0.0530*sin(CC);
+     yp :=  0.3393 - 0.1066*cos(A) + 0.0261*sin(A) + 0.0530*cos(CC) - 0.0101*sin(CC);
+   end;
+   sla_POLMO ( -deg2rad*cfgsc.ObsLongitude, deg2rad*cfgsc.ObsLatitude, deg2rad*XP/3600, deg2rad*YP/3600, cfgsc.ObsELONG, cfgsc.ObsPHI, cfgsc.ObsDAZ);
    result:=true;
 end;
 
