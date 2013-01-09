@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-01-01 08:27+0000\n"
-"PO-Revision-Date: 2012-10-22 06:45+0000\n"
+"POT-Creation-Date: 2013-01-09 17:54+0000\n"
+"PO-Revision-Date: 2013-01-07 02:46+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 16:28+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-09 18:44+0000\n"
+"X-Generator: Launchpad (build 16412)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -554,7 +554,7 @@ msgstr "ไม่สามารถเขียนไปที่"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "คาร์ทีเซียน"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -2134,7 +2134,7 @@ msgstr "หยุดเมื่อเกิดข้อผิดพลาดม
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "แฮมเมอร์-ไอทอฟฟ์"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2219,6 +2219,10 @@ msgstr "ชั่วโมง, นาที, วินาที"
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
 msgstr "พร็อกซี HTTP"
+
+#: u_translation.rshumidity
+msgid "Humidity %"
+msgstr ""
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
@@ -2826,7 +2830,7 @@ msgstr "ตำแหน่งปานกลาง"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "เมอร์เคเตอร์"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3588,6 +3592,10 @@ msgstr "กำหนดให้พลูโตเป็นดาวเครา
 msgid "pm"
 msgstr "pm"
 
+#: u_translation.rspolarmotiona
+msgid "Polar motion (arc sec)"
+msgstr ""
+
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
 msgstr "มุมเอียงของขั้ว"
@@ -4006,7 +4014,7 @@ msgstr ""
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "ยกเลิกการหมุน"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4070,7 +4078,7 @@ msgstr "เวลาขึ้น"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
-msgstr ""
+msgstr "หมุน 180 องศา"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
@@ -5047,6 +5055,10 @@ msgstr "ดาวสามดวง"
 #: u_translation.rstropicalyear
 msgid "Tropical year"
 msgstr "ปีฤดูกาล"
+
+#: u_translation.rstropospheret
+msgid "Troposphere temperature lapse rate (K/km)"
+msgstr ""
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"

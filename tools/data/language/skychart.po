@@ -5434,3 +5434,15 @@ msgstr ""
 msgid "Ephemeris probably out of range, disabling any solar system object"
 msgstr ""
 
+#: u_translation:rshumidity
+msgid "Humidity %"
+msgstr ""
+
+#: u_translation:rstropospheret
+msgid "Troposphere temperature lapse rate (K/km)"
+msgstr ""
+
+#: u_translation:rspolarmotiona
+msgid "Polar motion (arc sec)"
+msgstr ""
+

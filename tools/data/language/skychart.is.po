@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-01 08:27+0000\n"
+"POT-Creation-Date: 2013-01-09 17:54+0000\n"
 "PO-Revision-Date: 2012-06-26 09:18+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 16:28+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-09 18:44+0000\n"
+"X-Generator: Launchpad (build 16412)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2220,6 +2220,10 @@ msgstr "Klst., mínútur, sekúndur"
 msgid "HTTP proxy"
 msgstr "HTTP Proxy"
 
+#: u_translation.rshumidity
+msgid "Humidity %"
+msgstr ""
+
 #: u_translation.rsiconclickact
 msgid "Icon click action"
 msgstr "Táknmyndarsmellur"
@@ -3587,6 +3591,10 @@ msgstr "Plútó er reikistjarna."
 #: u_translation.rspm
 msgid "pm"
 msgstr "e.h."
+
+#: u_translation.rspolarmotiona
+msgid "Polar motion (arc sec)"
+msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -5047,6 +5055,10 @@ msgstr "Þrístirni"
 #: u_translation.rstropicalyear
 msgid "Tropical year"
 msgstr "Hvarfár"
+
+#: u_translation.rstropospheret
+msgid "Troposphere temperature lapse rate (K/km)"
+msgstr ""
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"

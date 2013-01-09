@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-01 08:27+0000\n"
+"POT-Creation-Date: 2013-01-09 17:54+0000\n"
 "PO-Revision-Date: 2012-10-28 07:29+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-06 16:28+0000\n"
-"X-Generator: Launchpad (build 16393)\n"
+"X-Launchpad-Export-Date: 2013-01-09 18:44+0000\n"
+"X-Generator: Launchpad (build 16412)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2370,6 +2370,10 @@ msgstr "Óra, perc, másodperc"
 msgid "HTTP proxy"
 msgstr "HTTP Proxy"
 
+#: u_translation.rshumidity
+msgid "Humidity %"
+msgstr ""
+
 #: u_translation.rsiconclickact
 #| msgid "Icon Click Action"
 msgid "Icon click action"
@@ -3827,6 +3831,10 @@ msgstr "A Plútó egy bolygó"
 #: u_translation.rspm
 msgid "pm"
 msgstr "pm"
+
+#: u_translation.rspolarmotiona
+msgid "Polar motion (arc sec)"
+msgstr ""
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -5398,6 +5406,10 @@ msgstr "Hármas csillag"
 #| msgid "Tropical Year"
 msgid "Tropical year"
 msgstr "Tropikus év"
+
+#: u_translation.rstropospheret
+msgid "Troposphere temperature lapse rate (K/km)"
+msgstr ""
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
