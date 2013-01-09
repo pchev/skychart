@@ -130,6 +130,8 @@ procedure cdc_REFCO ( HM, TDK, PMB, RH, WL, PHI, TLR, EPS,H1,H2: double; var REF
 procedure sla_REFRO ( ZOBS, HM, TDK, PMB, RH, WL, PHI, TLR, EPS: double; var REF: double );
 Procedure sla_REFCOQ (TDK, PMB, RH, WL: double; var REFA, REFB: double );
 Procedure sla_REFZ (ZU, REFA, REFB: double; var ZR:double);
+Procedure sla_GEOC (P,H: double; var R, Z: double);
+Procedure sla_POLMO ( ELONGM, PHIM, XP, YP: Double; var ELONG, PHI, DAZ: Double );
 
 implementation
 
@@ -843,6 +845,27 @@ A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
 END ;
 
+Procedure DiurnalAberration(var A,h: double; c: Tconf_skychart);
+// from Slalib aopqk.f
+var p: coordvector;
+    XHD,YHD,ZHD,XHDT,YHDT,ZHDT,DIURAB,F: double;
+begin
+sofa_S2C(A,h,p);
+XHD := p[1];
+YHD := p[2];
+ZHD := p[3];
+DIURAB := c.Diurab;
+F := (1-DIURAB*YHD);
+XHDT := F*XHD;
+YHDT := F*(YHD+DIURAB);
+ZHDT := F*ZHD;
+p[1] := XHDT;
+p[2] := YHDT;
+p[3] := ZHDT;
+sofa_c2s(p,A,h);
+A:=rmod(A+pi2,pi2);
+end;
+
 PROCEDURE Eq2Hz(HH,DE : double ; VAR A,h : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,d1,h1 : double;
 BEGIN
@@ -852,13 +875,17 @@ h1:=HH;
 h:= double(arcsin( sin(l1)*sin(d1)+cos(l1)*cos(d1)*cos(h1) ));
 A:= double(arctan2(sin(h1),cos(h1)*sin(l1)-tan(d1)*cos(l1)));
 A:=Rmod(A+pi2,pi2);
+if method=2 then DiurnalAberration(A,h,c);
 Refraction(h,true,c,method);
+if method=2 then A:=A+c.ObsDAZ;
 END ;
 
 Procedure Hz2Eq(A,h : double; var hh,de : double; c: Tconf_skychart; method:smallint=refmethod);
 var l1,a1,h1 : double;
 BEGIN
+if method=2 then A:=A-c.ObsDAZ;
 Refraction(h,false,c,method);
+//if method=2 then Reverse_DiurnalAberration(A,h,c);
 l1:=deg2rad*c.ObsLatitude;
 a1:=A;
 h1:=h;
@@ -2539,6 +2566,109 @@ begin
       ZR := ZU-REF;
 
 END;
+
+Procedure sla_GEOC (P,H: double; var R, Z: double);
+//
+// Convert geodetic position to geocentric (double precision)
+//
+// Given:
+// P dp latitude (geodetic, radians)
+// H dp height above reference spheroid (geodetic, metres)
+//
+// Returned:
+// R dp distance from Earth axis (AU)
+// Z dp distance from plane of Earth equator (AU)
+//
+const
+// Earth equatorial radius (metres)
+      A0=6378140;
+// Reference spheroid flattening factor and useful function
+      F=1/298.257;
+      B=(1-F)*(1-F);
+// Astronomical unit in metres
+      AU=1.49597870E11;
+
+var SP,CP,C,S: double;
+begin
+// Geodetic to geocentric conversion
+SP := SIN(P);
+CP := COS(P);
+C := 1/SQRT(CP*CP+B*SP*SP);
+S := B*C;
+R := (A0*C+H)*CP/AU;
+Z := (A0*S+H)*SP/AU;
+end;
+
+Procedure sla_POLMO ( ELONGM, PHIM, XP, YP: Double; var ELONG, PHI, DAZ: Double );
+//  Polar motion:  correct site longitude and latitude for polar
+//  motion and calculate azimuth difference between celestial and
+//  terrestrial poles.
+//
+//  Given:
+//     ELONGM   d      mean longitude of the observer (radians, east +ve)
+//     PHIM     d      mean geodetic latitude of the observer (radians)
+//     XP       d      polar motion x-coordinate (radians)
+//     YP       d      polar motion y-coordinate (radians)
+//
+//  Returned:
+//     ELONG    d      true longitude of the observer (radians, east +ve)
+//     PHI      d      true geodetic latitude of the observer (radians)
+//     DAZ      d      azimuth correction (terrestrial-celestial, radians)
+//
+
+var SEL,CEL,SPH,CPH,XM,YM,ZM,XNM,YNM,ZNM,
+    SXP,CXP,SYP,CYP,ZW,XT,YT,ZT,XNT,YNT : Double;
+
+begin
+//  Site mean longitude and mean geodetic latitude as a Cartesian vector
+SEL:=SIN(ELONGM);
+CEL:=COS(ELONGM);
+SPH:=SIN(PHIM);
+CPH:=COS(PHIM);
+
+XM:=CEL*CPH;
+YM:=SEL*CPH;
+ZM:=SPH;
+
+//  Rotate site vector by polar motion, Y-component then X-component
+SXP:=SIN(XP);
+CXP:=COS(XP);
+SYP:=SIN(YP);
+CYP:=COS(YP);
+
+ZW:=(-YM*SYP+ZM*CYP);
+
+XT:=XM*CXP-ZW*SXP;
+YT:=YM*CYP+ZM*SYP;
+ZT:=XM*SXP+ZW*CXP;
+
+//  Rotate also the geocentric direction of the terrestrial pole (0,0,1)
+XNM:=-SXP*CYP;
+YNM:=SYP;
+ZNM:=CXP*CYP;
+
+CPH:=SQRT(XT*XT+YT*YT);
+IF (CPH=0) then XT:=1;
+SEL:=YT/CPH;
+CEL:=XT/CPH;
+
+//  Return true longitude and true geodetic latitude of site
+IF (XT<>0)OR(YT<>0) THEN
+   ELONG:=ArcTAN2(YT,XT)
+ELSE
+   ELONG:=0;
+PHI:=ArcTAN2(ZT,CPH);
+
+//  Return current azimuth of terrestrial pole seen from site position
+XNT:=(XNM*CEL+YNM*SEL)*ZT-ZNM*CPH;
+YNT:=-XNM*SEL+YNM*CEL;
+IF (XNT<>0)OR(YNT<>0) THEN
+   DAZ:=ArcTAN2(-YNT,-XNT)
+ELSE
+   DAZ:=0;
+
+END;
+
 
 
 end.

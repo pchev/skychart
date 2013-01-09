@@ -760,10 +760,9 @@ type
     PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat: boolean;
     SimDateYear, SimDateMonth, SimDateDay, SimDateHour,
     SimDateMinute, SimDateSecond: boolean;
-    ObsLatitude, ObsLongitude, ObsAltitude: double;
+    ObsLatitude, ObsLongitude, ObsAltitude,ObsXP,ObsYP: double;
     ObsTZ: string;
-    ObsTemperature, ObsPressure, ObsRefractionCor, ObsRefA, ObsRefB,
-    ObsHorizonDepression: double;
+    ObsTemperature, ObsPressure : double;
     ObsName, ObsCountry, chartname, ast_day, ast_daypos,
     com_day, com_daypos, sunurlname, sunurl: string;
     CurYear, CurMonth, CurDay, DrawPMyear, sunurlsize, sunurlmargin,
@@ -789,8 +788,8 @@ type
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     ShowEarthShadowValid, ShowEclipticValid: boolean;
-    HorizonMax, rap2000, dep2000, RefractionOffset: double;
-    haicx,haicy: double;
+    HorizonMax, rap2000, dep2000, RefractionOffset,ObsRAU,ObsZAU,Diurab: double;
+    haicx,haicy,ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression, ObsELONG,ObsPHI,ObsDAZ: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
     Xwrldmin, Xwrldmax, Ywrldmin, Ywrldmax: double;
     xmin, xmax, ymin, ymax, xshift, yshift, FieldNum, winx, winy,
@@ -1735,6 +1734,8 @@ begin
   ObsLatitude := Source.ObsLatitude;
   ObsLongitude := Source.ObsLongitude;
   ObsAltitude := Source.ObsAltitude;
+  ObsXP := Source.ObsXP;
+  ObsYP := Source.ObsYP;
   ObsTZ := Source.ObsTZ;
   countrytz := Source.countrytz;
   ObsTemperature := Source.ObsTemperature;
@@ -1816,6 +1817,12 @@ begin
   rap2000 := Source.rap2000;
   dep2000 := Source.dep2000;
   RefractionOffset := Source.RefractionOffset;
+  ObsRAU := Source.ObsRAU;
+  ObsZAU := Source.ObsZAU;
+  ObsELONG:=Source.ObsELONG;
+  ObsPHI:=Source.ObsPHI;
+  ObsDAZ:=Source.ObsDAZ;
+  Diurab := Source.Diurab;
   WindowRatio := Source.WindowRatio;
   BxGlb := Source.BxGlb;
   ByGlb := Source.ByGlb;
