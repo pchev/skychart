@@ -751,7 +751,7 @@ type
     procedure UpdateConfig;
     procedure SavePrivateConfig(filename:string);
     procedure SaveQuickSearch(filename:string);
-    procedure SaveChartConfig(filename:string; child: TChildFrame);
+    procedure SaveChartConfig(filename:string; child: TChildFrame; overwrite:boolean=false);
     procedure SaveVersion;
     procedure SaveDefault;
     procedure SetDefault;
@@ -1030,7 +1030,7 @@ end;
 function Tf_main.SaveChart(fn: string): string;
 begin
 if (fn<>'')and(MultiFrame1.ActiveObject is Tf_chart) then begin
-  SaveChartConfig(SafeUTF8ToSys(fn),MultiFrame1.ActiveChild);
+  SaveChartConfig(SafeUTF8ToSys(fn),MultiFrame1.ActiveChild,true);
   result:=msgOK;
 end else
   result:=msgFailed;
@@ -1433,7 +1433,7 @@ begin
     def_cfgsc.tz.TimeZoneFile:=ZoneDir+StringReplace(def_cfgsc.ObsTZ,'/',PathDelim,[rfReplaceAll]);
  end;
  SavePrivateConfig(configfile);
- SaveChartConfig(configfile,nil);
+ SaveChartConfig(configfile,nil,false);
 end;
 
 procedure Tf_main.SaveImageExecute(Sender: TObject);
@@ -5647,19 +5647,19 @@ try
 SavePrivateConfig(configfile);
 SaveQuickSearch(configfile);
 if (MultiFrame1.ActiveObject is Tf_chart) then begin
-   SaveChartConfig(configfile,MultiFrame1.ActiveChild);
+   SaveChartConfig(configfile,MultiFrame1.ActiveChild,false);
 end;
 j:=0;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if (MultiFrame1.Childs[i].DockedObject is Tf_chart) and (MultiFrame1.Childs[i].DockedObject<>MultiFrame1.ActiveObject) then begin
      inc(j);
-     SaveChartConfig(configfile+inttostr(j),MultiFrame1.Childs[i]);
+     SaveChartConfig(configfile+inttostr(j),MultiFrame1.Childs[i],false);
   end;
 except
 end;
 end;
 
-procedure Tf_main.SaveChartConfig(filename:string; child: TChildFrame);
+procedure Tf_main.SaveChartConfig(filename:string; child: TChildFrame; overwrite:boolean=false);
 var i,n:integer;
     inif: TMemIniFile;
     section : string;
@@ -5680,7 +5680,7 @@ end;
 inif:=TMeminifile.create(filename);
 try
 with inif do begin
-Clear;
+if overwrite then Clear;
 section:='main';
 WriteInteger(section,'WinTop',f_main.Top);
 WriteInteger(section,'WinLeft',f_main.Left);
