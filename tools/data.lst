@@ -26,6 +26,7 @@ data/constellation/constlabel_sl.cla
 data/constellation/constlabel_th.cla
 data/constellation/constlabel_uk.cla
 data/constellation/constlabel_zh.cla
+data/constellation/constlabel_zh_CN.cla
 data/constellation/constlabel_zh_TW.cla
 data/constellation/DefaultConstL.cln
 data/constellation/ReyConstL.cln
