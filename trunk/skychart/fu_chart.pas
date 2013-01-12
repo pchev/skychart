@@ -308,6 +308,7 @@ type
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
     function cmd_SetBGimage(onoff:string):string;
+    function cmd_LoadBGimage(fn:string):string;
     function cmd_SetShowPicture(onoff:string):string;
     function cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
     procedure cmd_GoXY(xx,yy : string);
@@ -2885,6 +2886,22 @@ end
 Refresh;
 end;
 
+function Tf_Chart.cmd_LoadBGimage(fn:string):string;
+begin
+sc.cfgsc.BackgroundImage:=fn;
+sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
+sc.Fits.InfoWCScoord;
+if sc.Fits.Header.valid then begin
+  sc.Fits.DeleteDB('OTHER','BKG');
+  if not sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA,sc.Fits.Center_DE,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation) then
+     sc.Fits.InsertDB(sc.cfgsc.BackgroundImage,'OTHER','BKG',sc.Fits.Center_RA+0.00001,sc.Fits.Center_DE+0.00001,sc.Fits.Img_Width,sc.Fits.Img_Height,sc.Fits.Rotation);
+  sc.cfgsc.TrackOn:=true;
+  sc.cfgsc.TrackType:=5;
+  result:=msgOK;
+end
+else result:=msgFailed;
+end;
+
 function Tf_Chart.cmd_SetShowPicture(onoff:string):string;
 begin
 result:=msgOK;
@@ -3634,6 +3651,7 @@ case n of
  86 : result:=cmd_IdentTelescope;
  87 : result:=cmd_SetShowPicture(arg[1]);
  88 : result:=cmd_SetBGimage(arg[1]);
+ 89 : result:=cmd_LoadBGimage(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
