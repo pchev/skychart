@@ -2,6 +2,7 @@ data
 data/common_names
 data/common_names/NebulaNames.txt
 data/common_names/NebulaNames_is.txt
+data/common_names/NebulaNames_zh_CN.txt
 data/common_names/StarsNames_is.txt
 data/common_names/StarsNames_ru.txt
 data/common_names/StarsNames.txt
