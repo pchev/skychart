@@ -119,7 +119,6 @@ var
    ftyc2 : file of TYC2rec ;
    fidx2 : file of TYC2idx ;
    fsup1 : file of SUP1rec ;
-   lin : TY2rec;
    rec : TYC2rec ;
    idx : TYC2idx ;
    sup : SUP1rec ;

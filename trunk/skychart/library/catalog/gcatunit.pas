@@ -1147,7 +1147,6 @@ end;
 
 Procedure ReadGCatRec(recnum:integer; var lin : GCatrec; var ok : boolean);
 var n : integer;
-    s: double;
 // read a single record from current file (bypass cache)
 begin
 ok:=true;

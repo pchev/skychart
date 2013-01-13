@@ -581,8 +581,7 @@ end;
 end ;
 
 Procedure InvProj (xx,yy : Double ; VAR ar,de : Double );
-Var a,r,hh,s1,c1,x,y,ac,dc : Double ;
-    p,pr: coordvector;
+Var a,hh,ac,dc : Double ;
 Begin
 case Projpole of
    0 : begin
