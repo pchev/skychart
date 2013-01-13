@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-09 17:54+0000\n"
-"PO-Revision-Date: 2013-01-07 05:12+0000\n"
-"Last-Translator: Allen Zhong <Unknown>\n"
+"PO-Revision-Date: 2013-01-12 13:20+0000\n"
+"Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-09 18:44+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-13 14:44+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -358,7 +358,7 @@ msgstr ""
 
 #: u_translation.rsaz
 msgid "Az"
-msgstr "方位角"
+msgstr "Az"
 
 #: u_translation.rsazimuth
 msgid "Azimuth"
@@ -3818,7 +3818,7 @@ msgstr "快速开始指导"
 
 #: u_translation.rsra
 msgid "RA"
-msgstr "赤经"
+msgstr "RA"
 
 #: u_translation.rsraazpeccompe
 msgid "RA/AZ PEC Compensation"
