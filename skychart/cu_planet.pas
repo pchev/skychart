@@ -791,6 +791,7 @@ var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,v
   supconj : array[1..8] of boolean;
   ars,des : double;
 begin
+result:=true;
 try
 while lockpla do application.ProcessMessages; lockpla:=true;
 cfgsc.SimNb:=min(cfgsc.SimNb,MaxPlSim);
