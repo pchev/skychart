@@ -655,7 +655,7 @@ end;
 
 function Tskychart.InitCoordinates:boolean;
 var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
-    acc,dcc,h1,h2: double;
+    acc,dcc: double;
     se,ce : extended;
     s1,s2,s3: string;
     TrackAltAz: boolean;

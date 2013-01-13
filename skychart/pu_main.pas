@@ -1048,7 +1048,6 @@ end;
 function Tf_main.OpenChart(fn: string): string;
 var nam: string;
     p: integer;
-    maxi: boolean;
 begin
 if FileExistsUTF8(fn) then begin
  cfgp.Assign(def_cfgplot);

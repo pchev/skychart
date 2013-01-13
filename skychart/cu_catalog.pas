@@ -216,7 +216,6 @@ end;
 
 Function Tcatalog.OpenCat(c: Tconf_skychart):boolean;
 var ac,dc,rac,ddc: double;
-    i,j: integer;
 begin
 // get a lock before to do anything, libcatalog is NOT thread safe.
   while lockcat do application.ProcessMessages;
@@ -799,7 +798,7 @@ procedure Tcatalog.FindDefaultStars(id:shortstring; var ar,de:double ; var ok:bo
 var
    H : TCatHeader;
    rec:GCatrec;
-   i,version : integer;
+   version : integer;
    iid:string;
 begin
 ok:=false;
@@ -3140,7 +3139,6 @@ end;
 
 Procedure Tcatalog.GetAltName(rec: GCatrec; var txt: string);
 var i:integer;
-    usep: boolean;
 begin
 for i:=1 to 10 do begin
   if (rec.vstr[i])and(rec.options.altname[i]) then begin
