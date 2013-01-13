@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-09 17:54+0000\n"
-"PO-Revision-Date: 2013-01-07 02:46+0000\n"
+"PO-Revision-Date: 2013-01-13 03:38+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-09 18:44+0000\n"
-"X-Generator: Launchpad (build 16412)\n"
+"X-Launchpad-Export-Date: 2013-01-13 14:44+0000\n"
+"X-Generator: Launchpad (build 16420)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2222,7 +2222,7 @@ msgstr "พร็อกซี HTTP"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr ""
+msgstr "ความชื้น %"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
@@ -2866,7 +2866,7 @@ msgstr ""
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr ""
+msgstr "มุมเงยต่ำสุด"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3594,7 +3594,7 @@ msgstr "pm"
 
 #: u_translation.rspolarmotiona
 msgid "Polar motion (arc sec)"
-msgstr ""
+msgstr "การเคลื่อนที่ของขั้ว (พิลิปดา)"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -5058,7 +5058,7 @@ msgstr "ปีฤดูกาล"
 
 #: u_translation.rstropospheret
 msgid "Troposphere temperature lapse rate (K/km)"
-msgstr ""
+msgstr "อัตราการลดอุณหภูมิในชั้นโทรโพสเฟียร์ (เคลวิน/กม.)"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -5454,7 +5454,7 @@ msgstr "ซูมเข้า"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "ซูมเข้าอีกเพื่อดูวัตถุ"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
