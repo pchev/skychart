@@ -1963,7 +1963,7 @@ end;
 end;
 
 function TPlanet.FindAsteroidName(astname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-var dist,r,elong,phase,magn : double;
+var dist,r,elong,phase,magn,rad,ded : double;
   epoch,h,g,ma,ap,an,ic,ec,sa,eq,xc,yc,zc : double;
   qry,id,ref,nam,elem_id :string;
   ira,idec,imag: integer;
@@ -1978,10 +1978,12 @@ if id='' then exit;
 if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,elem_id) then begin
    InitAsteroid(epoch,h,g,ma,ap,an,ic,ec,sa,eq,nam);
    Asteroid(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,xc,yc,zc);
-   precession(jd2000,cfgsc.jdchart,ra,de);
    if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
-   ira:=round(ra*1000);
-   idec:=round(de*1000);
+   rad:=ra;
+   ded:=de;
+   precession(jd2000,cfgsc.jdchart,rad,ded);
+   ira:=round(rad*1000);
+   idec:=round(ded*1000);
    imag:=round(magn*10);
    qry:='INSERT INTO '+cfgsc.ast_daypos+' (id,epoch,ra,de,mag) VALUES ('
         +'"'+id+'"'
@@ -1991,14 +1993,13 @@ if cdb.GetAstElemEpoch(id,cfgsc.CurJDTT,epoch,h,g,ma,ap,an,ic,ec,sa,eq,ref,nam,e
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
    db1.flush('tables');
-   precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
  else result:=false;
 end;
 
 function TPlanet.FindCometName(comname: String; var ra,de:double; cfgsc: Tconf_skychart):boolean;
-var dist,r,elong,phase,magn : double;
+var dist,r,elong,phase,magn,rad,ded : double;
   epoch,h,g,ap,an,ic,ec,eq,tp,q,diam,lc,car,cde,rc,xc,yc,zc : double;
   qry,id,nam,elem_id :string;
   ira,idec,imag: integer;
@@ -2013,9 +2014,12 @@ if id='' then exit;
 if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_id) then begin
    InitComet(tp,q,ec,ap,an,ic,h,g,eq,nam);
    Comet(cfgsc.CurJDTT,true,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
-   precession(jd2000,cfgsc.jdchart,ra,de);
-   ira:=round(ra*1000);
-   idec:=round(de*1000);
+   if cfgsc.PlanetParalaxe then Paralaxe(cfgsc.CurST,dist,ra,de,ra,de,r,cfgsc);
+   rad:=ra;
+   ded:=de;
+   precession(jd2000,cfgsc.jdchart,rad,ded);
+   ira:=round(rad*1000);
+   idec:=round(ded*1000);
    imag:=round(magn*10);
    qry:='INSERT INTO '+cfgsc.com_daypos+' (id,epoch,ra,de,mag) VALUES ('
         +'"'+id+'"'
@@ -2025,7 +2029,6 @@ if cdb.GetComElemEpoch(id,cfgsc.CurJDTT,epoch,tp,q,ec,ap,an,ic,h,g,eq,nam,elem_i
         +',"'+inttostr(imag)+'")';
    db1.Query(qry);
    db1.flush('tables');
-   precession(cfgsc.JDchart,jd2000,ra,de);
    result:=true;
 end
  else result:=false;
