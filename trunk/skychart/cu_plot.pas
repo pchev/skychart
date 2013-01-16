@@ -58,7 +58,6 @@ type
      FDeleteLabel: Tintfunc;
      FDeleteAllLabel: Tvoidfunc;
      FLabelClick: Tintfunc;
-     PlanetBMPs: Tbitmap;
      PlanetBMP : Tbitmap;
      XplanetImg: TPicture;
      PlanetBMPjd,PlanetBMProt : double;
@@ -207,11 +206,8 @@ for i:=0 to 6 do
  InitXPlanetRender;
  if Xplanetrender then begin
     planetbmp:=Tbitmap.create;
-    planetbmp.Width:=450;
-    planetbmp.Height:=450;
-    planetbmps:=Tbitmap.create;
-    planetbmps.Width:=450;
-    planetbmps.Height:=450;
+    planetbmp.Width:=512;
+    planetbmp.Height:=512;
     xplanetimg:=TPicture.create;
  end;
  editlabelmenu:=Tpopupmenu.Create(self);
@@ -280,7 +276,6 @@ try
  cfgchart.Free;
  if Xplanetrender then begin
     planetbmp.Free;
-    planetbmps.Free;
     xplanetimg.Free;
  end;
  inherited destroy;
@@ -1399,12 +1394,14 @@ end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
 var ds,i,mode : integer;
-    cmd, searchdir: string;
+    cmd, searchdir, bsize: string;
     ok: boolean;
 begin
 ok:=true;
 if ipla=6 then ds:=round(max(2.2261*diam*pixscale,4*cfgchart.drawpen))
           else ds:=round(max(diam*pixscale,4*cfgchart.drawpen));
+if ipla=11 then bsize:='1024x1024'
+           else bsize:='512x512';
 if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>0.2) then begin
  searchdir:='"'+slash(appdir)+slash('data')+'planet"';
  {$ifdef linux}
@@ -1422,7 +1419,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
       ' -searchdir '+searchdir+
       ' -config xplanet.config -verbosity -1'+
       ' -radius 50'+
-      ' -geometry 450x450 -output "'+slash(Tempdir)+'planet.png'+'"';
+      ' -geometry '+bsize+' -output "'+slash(Tempdir)+'planet.png'+'"';
  if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,gw);
  DeleteFile(slash(Tempdir)+'planet.png');
  i:=exec(cmd);
