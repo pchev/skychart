@@ -1165,7 +1165,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 89;
+  numcmd = 90;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1257,7 +1257,8 @@ const
     ('IDSCOPE', '86', ''),
     ('SHOWPICTURE', '87', 'ON/OFF'),
     ('SHOWBGIMAGE', '88', 'ON/OFF'),
-    ('LOADBGIMAGE', '89', 'fits_filename')
+    ('LOADBGIMAGE', '89', 'fits_filename'),
+    ('GETOBJECTLIST', '90', '')
     );
 
 // INDI Telescope driver

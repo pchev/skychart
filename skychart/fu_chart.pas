@@ -311,6 +311,7 @@ type
     function cmd_LoadBGimage(fn:string):string;
     function cmd_SetShowPicture(onoff:string):string;
     function cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
+    function cmd_GetObjectList:string;
     procedure cmd_GoXY(xx,yy : string);
     function cmd_IdXY(xx,yy : string): string;
     procedure cmd_MoreStar;
@@ -3383,6 +3384,14 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
 end;
 end;
 
+function Tf_chart.cmd_GetObjectList:string;
+var buf,msg: string;
+begin
+if sc.cfgsc.windowratio=0 then sc.cfgsc.windowratio:=1;
+sc.Findlist(sc.cfgsc.racentre,sc.cfgsc.decentre,sc.cfgsc.fov/2,sc.cfgsc.fov/2/sc.cfgsc.windowratio,buf,msg,false,false,false);
+result:=buf;
+end;
+
 function Tf_chart.cmd_IdentCursor:string;
 begin
 if identxy(xcursor,ycursor) then result:=msgOK
@@ -3652,6 +3661,7 @@ case n of
  87 : result:=cmd_SetShowPicture(arg[1]);
  88 : result:=cmd_SetBGimage(arg[1]);
  89 : result:=cmd_LoadBGimage(arg[1]);
+ 90 : result:=cmd_GetObjectList;
 else result:=msgFailed+' Bad command name';
 end;
 end;
