@@ -1143,7 +1143,7 @@ const
 const
   MaxCmdArg = 10;
   // Main Commands, excuted form main form
-  numcmdmain = 16;
+  numcmdmain = 17;
   maincmdlist: array[1..numcmdmain, 1..3] of string = (
     ('NEWCHART', '1', 'chart_name'),
     ('CLOSECHART', '2', 'chart_name'),
@@ -1161,7 +1161,8 @@ const
     ('SHUTDOWN', '13', ''),
     ('RESET', '14', ''),
     ('LOADDEFAULT', '15', 'saved_file_name'),
-    ('SETCAT', '16', 'path name active min max')
+    ('SETCAT', '16', 'path name active min max'),
+    ('PLANETINFO', '17', 'page_num')
     );
 
   // Chart Commands

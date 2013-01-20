@@ -35,7 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar,
+  pu_config_calendar, pu_planetinfo,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -47,6 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    PlanetInfo: TMenuItem;
     SetupCalendar: TAction;
     EditTimeVal: TEdit;
     MenuItem31: TMenuItem;
@@ -479,6 +480,7 @@ type
     procedure MenuItem7Click(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
+    procedure PlanetInfoClick(Sender: TObject);
     procedure PrintPreview1Click(Sender: TObject);
     procedure ResetLanguageClick(Sender: TObject);
     procedure ResetRotClick(Sender: TObject);
@@ -722,6 +724,8 @@ type
     function SaveChart(fn: string): string;
     function OpenChart(fn: string): string;
     function LoadDefaultChart(fn: string): string;
+    function ShowPlanetInfo(pg: string): string;
+    procedure PlanetInfoPage(pg:Integer);
     function SetGCat(path,shortname,active,min,max: string): string;
   {$ifdef mswindows}
     Procedure SaveWinColor;
@@ -1545,6 +1549,48 @@ if TabControl1.Visible<>(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>2) the
   TabControl1.Visible:=(MultiFrame1.Maximized)and(MultiFrame1.ChildCount>2);
   ViewTopPanel;
 end;
+end;
+
+procedure Tf_main.PlanetInfoClick(Sender: TObject);
+begin
+PlanetInfoPage(0);
+end;
+
+procedure Tf_main.PlanetInfoPage(pg:Integer);
+var pt:TPoint;
+begin
+  if f_planetinfo=nil then begin
+    f_planetinfo:=Tf_planetinfo.Create(self);
+    f_planetinfo.planet:=planet;
+  end;
+  if not f_planetinfo.Visible then begin
+    if MultiFrame1.ActiveObject is Tf_chart then f_planetinfo.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
+       else f_planetinfo.config.Assign(def_cfgsc);
+    if cfgm.KioskMode then begin
+       pt.X:=0; pt.Y:=0;
+       pt:=self.ClientToScreen(pt);
+       f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
+       f_planetinfo.Width:=Width;
+       f_planetinfo.Height:=Height;
+       f_planetinfo.BorderStyle:=bsNone;
+    end
+  end;
+  f_planetinfo.Show;
+  f_planetinfo.PageControl1.ActivePageIndex:=pg;
+  f_planetinfo.RefreshInfo;
+end;
+
+function Tf_main.ShowPlanetInfo(pg: string): string;
+var i: integer;
+begin
+result:=msgOK;
+if pg='OFF' then begin
+  if f_planetinfo<>nil then f_planetinfo.Hide;
+end else if (pg>='0')and(pg<='8') then begin
+  i:=StrToIntDef(pg,0);
+  PlanetInfoPage(i);
+end
+  else result:=msgFailed;
 end;
 
 procedure Tf_main.TabControl1Change(Sender: TObject);
@@ -6038,7 +6084,7 @@ WriteBool(section,'PrintLandscape',cfgm.PrintLandscape);
 WriteInteger(section,'PrintMethod',cfgm.PrintMethod);
 WriteString(section,'PrintCmd1',cfgm.PrintCmd1);
 WriteString(section,'PrintCmd2',cfgm.PrintCmd2);
-WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);;
+WriteString(section,'PrintTmpPath',cfgm.PrintTmpPath);
 WriteInteger(section,'PrtLeftMargin',cfgm.PrtLeftMargin);
 WriteInteger(section,'PrtRightMargin',cfgm.PrtRightMargin);
 WriteInteger(section,'PrtTopMargin',cfgm.PrtTopMargin);
@@ -6256,6 +6302,7 @@ f_print.SetLang;
 for i:=0 to MultiFrame1.ChildCount-1 do
   if MultiFrame1.Childs[i].DockedObject is Tf_chart then
      Tf_chart(MultiFrame1.Childs[i].DockedObject).SetLang;
+if f_planetinfo<>nil then f_planetinfo.SetLang;
 if f_config<>nil then f_config.SetLang;
 if f_about<>nil then f_about.SetLang;
 if ConfigSystem<>nil then ConfigSystem.SetLang;
@@ -6344,6 +6391,7 @@ ToolButtonUObj.Hint:=rsShowUserDefi;
 ToolButtonShowPictures.hint:=rsShowPictures;
 ToolButtonBlink.hint:=rsBlinkingPict;
 menublinkimage.Caption:='&'+rsBlinkingPict;
+PlanetInfo.Caption:=rsSolarSystemI;
 ToolButtonDSS.hint:=rsGetDSSImage;
 MenuDSS.Caption:='&'+rsGetDSSImage+Ellipsis;
 ToolButtonShowBackgroundImage.hint:=rsChangePictur;
@@ -6906,6 +6954,7 @@ case n of
  14 : begin ResetDefaultChartExecute(nil); result:=msgOK; end;
  15 : result:=LoadDefaultChart(arg[1]);
  16 : result:=SetGCat(arg[1],arg[2],arg[3],arg[4],arg[5]);
+ 17 : result:=ShowPlanetInfo(arg[1]);
 else begin
  result:='Bad chart name '+cname;
  if cname='' then begin

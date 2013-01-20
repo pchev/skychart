@@ -88,11 +88,11 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="316"/>
-        <CursorPos X="56" Y="335"/>
+        <TopLine Value="265"/>
+        <CursorPos X="23" Y="298"/>
         <UsageCount Value="31"/>
         <Bookmarks Count="1">
-          <Item0 X="59" Y="211" ID="1"/>
+          <Item0 X="59" Y="212" ID="1"/>
         </Bookmarks>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -192,127 +192,123 @@
         <UsageCount Value="10"/>
       </Unit18>
     </Units>
-    <JumpHistory Count="30" HistoryIndex="29">
+    <JumpHistory Count="29" HistoryIndex="28">
       <Position1>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="226" Column="31" TopLine="194"/>
+        <Caret Line="225" Column="1" TopLine="193"/>
       </Position1>
       <Position2>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="221" Column="29" TopLine="194"/>
+        <Caret Line="227" Column="1" TopLine="195"/>
       </Position2>
       <Position3>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="223" Column="1" TopLine="194"/>
+        <Caret Line="236" Column="58" TopLine="203"/>
       </Position3>
       <Position4>
-        <Filename Value="astrolabe1.pas"/>
-        <Caret Line="224" Column="1" TopLine="194"/>
+        <Filename Value="astrolabe.lpr"/>
+        <Caret Line="14" Column="11" TopLine="1"/>
       </Position4>
       <Position5>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="226" Column="1" TopLine="194"/>
+        <Caret Line="368" Column="108" TopLine="338"/>
       </Position5>
       <Position6>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="224" Column="87" TopLine="190"/>
+        <Caret Line="335" Column="56" TopLine="316"/>
       </Position6>
       <Position7>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="255" Column="11" TopLine="243"/>
+        <Caret Line="362" Column="25" TopLine="345"/>
       </Position7>
       <Position8>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="263" Column="11" TopLine="243"/>
+        <Caret Line="257" Column="1" TopLine="257"/>
       </Position8>
       <Position9>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="224" Column="39" TopLine="205"/>
+        <Caret Line="295" Column="49" TopLine="276"/>
       </Position9>
       <Position10>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="1" Column="1" TopLine="1"/>
+        <Caret Line="289" Column="43" TopLine="277"/>
       </Position10>
       <Position11>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="67" Column="25" TopLine="35"/>
+        <Caret Line="369" Column="54" TopLine="357"/>
       </Position11>
       <Position12>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="208" Column="7" TopLine="176"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position12>
       <Position13>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="215" Column="13" TopLine="183"/>
+        <Caret Line="48" Column="10" TopLine="16"/>
       </Position13>
       <Position14>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="228" Column="3" TopLine="209"/>
+        <Caret Line="247" Column="8" TopLine="214"/>
       </Position14>
       <Position15>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="212" Column="28" TopLine="189"/>
+        <Caret Line="245" Column="23" TopLine="230"/>
       </Position15>
       <Position16>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="210" Column="1" TopLine="189"/>
+        <Caret Line="246" Column="10" TopLine="230"/>
       </Position16>
       <Position17>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="212" Column="1" TopLine="189"/>
+        <Caret Line="247" Column="10" TopLine="230"/>
       </Position17>
       <Position18>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="213" Column="1" TopLine="189"/>
+        <Caret Line="262" Column="11" TopLine="230"/>
       </Position18>
       <Position19>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="214" Column="1" TopLine="189"/>
+        <Caret Line="263" Column="11" TopLine="231"/>
       </Position19>
       <Position20>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="215" Column="1" TopLine="189"/>
+        <Caret Line="277" Column="8" TopLine="245"/>
       </Position20>
       <Position21>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="217" Column="1" TopLine="189"/>
+        <Caret Line="278" Column="8" TopLine="246"/>
       </Position21>
       <Position22>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="218" Column="1" TopLine="189"/>
+        <Caret Line="377" Column="3" TopLine="327"/>
       </Position22>
       <Position23>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="221" Column="1" TopLine="189"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
       </Position23>
       <Position24>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="223" Column="1" TopLine="191"/>
+        <Caret Line="48" Column="10" TopLine="16"/>
       </Position24>
       <Position25>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="224" Column="1" TopLine="192"/>
+        <Caret Line="246" Column="10" TopLine="214"/>
       </Position25>
       <Position26>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="225" Column="1" TopLine="193"/>
+        <Caret Line="247" Column="10" TopLine="215"/>
       </Position26>
       <Position27>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="227" Column="1" TopLine="195"/>
+        <Caret Line="262" Column="11" TopLine="230"/>
       </Position27>
       <Position28>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="236" Column="58" TopLine="203"/>
+        <Caret Line="263" Column="11" TopLine="231"/>
       </Position28>
       <Position29>
-        <Filename Value="astrolabe.lpr"/>
-        <Caret Line="14" Column="11" TopLine="1"/>
-      </Position29>
-      <Position30>
         <Filename Value="astrolabe1.pas"/>
-        <Caret Line="368" Column="108" TopLine="338"/>
-      </Position30>
+        <Caret Line="277" Column="8" TopLine="245"/>
+      </Position29>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>
