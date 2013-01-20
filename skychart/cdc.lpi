@@ -195,7 +195,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="70">
+    <Units Count="71">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -690,6 +690,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_config_calendar"/>
       </Unit69>
+      <Unit70>
+        <Filename Value="pu_planetinfo.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_planetinfo"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="pu_planetinfo"/>
+      </Unit70>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

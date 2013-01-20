@@ -1390,6 +1390,11 @@ resourcestring
   rsHumidity = 'Humidity %';
   rsTroposphereT = 'Troposphere temperature lapse rate (K/km)';
   rsPolarMotionA = 'Polar motion (arc sec)';
+  rsEarth = 'Earth';
+  rsPlanetVisibi = 'Planet visibility';
+  rsInnerSolarSy = 'Inner Solar System';
+  rsOuterSolarSy = 'Outer Solar System';
+  rsSolarSystemI = 'Solar System Informations';
 
 implementation
 

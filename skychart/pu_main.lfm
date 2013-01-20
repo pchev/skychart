@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 409
+  Left = 403
   Height = 549
   Top = 165
   Width = 873
@@ -4578,6 +4578,10 @@ object f_main: Tf_main
         GlyphShowMode = gsmNever
         ShowAlwaysCheckable = True
         OnClick = ViewClockExecute
+      end
+      object PlanetInfo: TMenuItem
+        Caption = 'Planet Info'
+        OnClick = PlanetInfoClick
       end
       object N7: TMenuItem
         Caption = '-'

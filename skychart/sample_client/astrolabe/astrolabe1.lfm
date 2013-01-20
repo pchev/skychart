@@ -139,6 +139,15 @@ object f_astrolabe: Tf_astrolabe
       Caption = 'D'
       ParentColor = False
     end
+    object StaticText1: TStaticText
+      Left = 56
+      Height = 18
+      Top = 45
+      Width = 84
+      AutoSize = True
+      Caption = '| Zone Menu |'
+      TabOrder = 2
+    end
   end
   object ConnectRetryTimer: TTimer
     Enabled = False

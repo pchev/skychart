@@ -54,6 +54,7 @@ type
     ExitTimer: TTimer;
     Panel1: TPanel;
     Panel2: TPanel;
+    StaticText1: TStaticText;
     TrackBarH: TTrackBar;
     TrackBarD: TTrackBar;
     procedure ConnectRetryTimerTimer(Sender: TObject);
@@ -242,8 +243,8 @@ end;
 procedure Tf_astrolabe.ShowInfo(Sender: TObject; const messagetext:string);
 begin
 // process here socket status message.
-  edit3.Text:=messagetext;
-  edit3.Invalidate;
+//  edit3.Text:=messagetext;
+//  edit3.Invalidate;
 end;
 
 procedure Tf_astrolabe.ReceiveData(Sender : TObject; const data : string);
@@ -293,6 +294,10 @@ client.onShowMessage:=ShowInfo;
 client.onReceiveData:=ReceiveData;
 Connecting:=true;
 client.Resume;
+sleep(500);
+edit3.Text:='Connected';
+edit3.Invalidate;
+PosChange(nil);
 end;
 
 procedure Tf_astrolabe.Disconnect;
@@ -368,8 +373,21 @@ begin
 if lockpos then exit;
 try
 lockpos:=true;
-CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
-edit3.Text:=CdCCmd('IDSCOPE');
+if TrackBarD.Position>-450 then begin
+  CdCCmd('PLANETINFO OFF');
+  CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
+  CdCCmd('IDSCOPE');
+end
+else if TrackBarD.Position>-470 then CdCCmd('PLANETINFO 0') // Visibility
+else if TrackBarD.Position>-510 then CdCCmd('PLANETINFO 1') // Moon
+else if TrackBarD.Position>-550 then CdCCmd('PLANETINFO 2') // Mercury
+else if TrackBarD.Position>-590 then CdCCmd('PLANETINFO 3') // Venus
+else if TrackBarD.Position>-630 then CdCCmd('PLANETINFO 4') // Mars
+else if TrackBarD.Position>-670 then CdCCmd('PLANETINFO 5') // Jupiter
+else if TrackBarD.Position>-710 then CdCCmd('PLANETINFO 6') // Saturn
+else if TrackBarD.Position>-750 then CdCCmd('PLANETINFO 7') // Orbit1
+else if TrackBarD.Position>-790 then CdCCmd('PLANETINFO 8') // Orbit2
+else;
 Application.ProcessMessages;
 finally
 lockpos:=false;
