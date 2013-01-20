@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-09 17:54+0000\n"
+"POT-Creation-Date: 2013-01-20 18:09+0000\n"
 "PO-Revision-Date: 2012-10-28 07:29+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-13 14:44+0000\n"
-"X-Generator: Launchpad (build 16420)\n"
+"X-Launchpad-Export-Date: 2013-01-20 18:20+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1665,6 +1665,10 @@ msgstr "DSS RealSky"
 msgid "Duration"
 msgstr "Időtartam"
 
+#: u_translation.rsearth
+msgid "Earth"
+msgstr ""
+
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
 msgstr "Föld árnyéka"
@@ -2521,6 +2525,10 @@ msgstr "Inicializálás"
 #| msgid "Initialize Database"
 msgid "Initialize database"
 msgstr "Adatbázis beállítása"
+
+#: u_translation.rsinnersolarsy
+msgid "Inner Solar System"
+msgstr ""
 
 #: u_translation.rsinputcatalog
 #| msgid "Input Catalog files"
@@ -3608,6 +3616,10 @@ msgstr "Egyéb címke"
 msgid "Other software data"
 msgstr "Más szoftver adatbázis"
 
+#: u_translation.rsoutersolarsy
+msgid "Outer Solar System"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 #| msgid "Output Catalog Type"
 msgid "Output catalog type"
@@ -3737,6 +3749,10 @@ msgstr "Bolygó holdja"
 #| msgid "Planets Setting"
 msgid "Planet settings"
 msgstr "Bolygók beállítása"
+
+#: u_translation.rsplanetvisibi
+msgid "Planet visibility"
+msgstr ""
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -4931,6 +4947,10 @@ msgstr ""
 #: u_translation.rssolarsystem
 msgid "Solar System"
 msgstr "Naprendszer"
+
+#: u_translation.rssolarsystemi
+msgid "Solar System Informations"
+msgstr ""
 
 #: u_translation.rssolarsystemo
 #| msgid "Solar System object"
