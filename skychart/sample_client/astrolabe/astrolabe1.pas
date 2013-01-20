@@ -55,6 +55,7 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     StaticText1: TStaticText;
+    PosTimer: TTimer;
     TrackBarH: TTrackBar;
     TrackBarD: TTrackBar;
     procedure ConnectRetryTimerTimer(Sender: TObject);
@@ -64,6 +65,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure PosChange(Sender: TObject);
+    procedure PosTimerTimer(Sender: TObject);
   private
     { Private declarations }
     CdCconfig,CdC,CdCDir,ServerIPaddr,ServerIPport: string;
@@ -370,9 +372,15 @@ end;
 
 procedure Tf_astrolabe.PosChange(Sender: TObject);
 begin
+PosTimer.Enabled:=True;
+end;
+
+procedure Tf_astrolabe.PosTimerTimer(Sender: TObject);
+begin
 if lockpos then exit;
 try
 lockpos:=true;
+PosTimer.Enabled:=false;
 if TrackBarD.Position>-450 then begin
   CdCCmd('PLANETINFO OFF');
   CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
@@ -393,6 +401,7 @@ finally
 lockpos:=false;
 end;
 end;
+
 
 
 end.

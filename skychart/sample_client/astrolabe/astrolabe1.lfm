@@ -162,4 +162,11 @@ object f_astrolabe: Tf_astrolabe
     left = 152
     top = 384
   end
+  object PosTimer: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = PosTimerTimer
+    left = 240
+    top = 376
+  end
 end
