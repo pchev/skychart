@@ -355,6 +355,8 @@ begin
       bmp.DrawVertLine(x,y,ymin,c);
       if (i mod 2)=0 then bmp.TextOut(x,y-15,inttostr(i),c,taCenter);
   end;
+  x:=xmin+trunc(config.CurTime*((xmax-xmin)/24));
+  bmp.DrawVertLine(x,ymin,ymax,ColorToBGRA(clRed));
 end;
 
 Procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
