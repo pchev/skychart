@@ -1,7 +1,7 @@
 object f_planetinfo: Tf_planetinfo
-  Left = 375
+  Left = 390
   Height = 600
-  Top = 130
+  Top = 120
   Width = 800
   Caption = 'f_planetinfo'
   ClientHeight = 600
@@ -9,19 +9,19 @@ object f_planetinfo: Tf_planetinfo
   Color = clBlack
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnPaint = FormPaint
   OnResize = FormResize
   OnShow = FormShow
+  Position = poDefaultPosOnly
   LCLVersion = '1.0.4.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 600
     Top = 0
     Width = 800
-    ActivePage = TabSheet3
+    ActivePage = TabSheet9
     Align = alClient
     ShowTabs = False
-    TabIndex = 2
+    TabIndex = 8
     TabOrder = 0
     object TabSheet1: TTabSheet
       Caption = 'TabSheet1'
@@ -34,24 +34,23 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next1: TStaticText
-          Tag = 1
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
+      end
+      object Next1: TStaticText
+        Tag = 1
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
       end
     end
     object TabSheet2: TTabSheet
@@ -65,38 +64,38 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next2: TStaticText
-          Tag = 2
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev2: TStaticText
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next2: TStaticText
+        Tag = 2
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev2: TStaticText
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet3: TTabSheet
@@ -110,39 +109,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next3: TStaticText
-          Tag = 3
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev3: TStaticText
-          Tag = 1
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next3: TStaticText
+        Tag = 3
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev3: TStaticText
+        Tag = 1
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet4: TTabSheet
@@ -156,39 +155,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next4: TStaticText
-          Tag = 4
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev4: TStaticText
-          Tag = 2
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next4: TStaticText
+        Tag = 4
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev4: TStaticText
+        Tag = 2
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet5: TTabSheet
@@ -202,39 +201,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next5: TStaticText
-          Tag = 5
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev5: TStaticText
-          Tag = 3
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next5: TStaticText
+        Tag = 5
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev5: TStaticText
+        Tag = 3
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet6: TTabSheet
@@ -248,39 +247,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next6: TStaticText
-          Tag = 6
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev6: TStaticText
-          Tag = 4
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next6: TStaticText
+        Tag = 6
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev6: TStaticText
+        Tag = 4
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet7: TTabSheet
@@ -294,39 +293,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next7: TStaticText
-          Tag = 7
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev7: TStaticText
-          Tag = 5
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Next7: TStaticText
+        Tag = 7
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
+      end
+      object Prev7: TStaticText
+        Tag = 5
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
       end
     end
     object TabSheet8: TTabSheet
@@ -340,39 +339,39 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Next8: TStaticText
-          Tag = 8
-          Left = 726
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akRight, akBottom]
-          Caption = 'Next'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
-        object Prev8: TStaticText
-          Tag = 6
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 1
-        end
+      end
+      object Prev8: TStaticText
+        Tag = 6
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 2
+        Transparent = False
+      end
+      object Next8: TStaticText
+        Tag = 8
+        Left = 726
+        Height = 17
+        Top = 574
+        Width = 65
+        Anchors = [akRight, akBottom]
+        Caption = 'Next'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
       end
     end
     object TabSheet9: TTabSheet
@@ -386,24 +385,23 @@ object f_planetinfo: Tf_planetinfo
         Width = 796
         Align = alClient
         BevelOuter = bvNone
-        ClientHeight = 596
-        ClientWidth = 796
         TabOrder = 0
-        object Prev9: TStaticText
-          Tag = 7
-          Left = 6
-          Height = 17
-          Top = 574
-          Width = 65
-          Anchors = [akLeft, akBottom]
-          Caption = 'Prev'
-          Color = clBlack
-          Font.Color = clWhite
-          OnClick = SetPage
-          ParentFont = False
-          ParentColor = False
-          TabOrder = 0
-        end
+      end
+      object Prev9: TStaticText
+        Tag = 7
+        Left = 6
+        Height = 17
+        Top = 574
+        Width = 120
+        Anchors = [akLeft, akBottom]
+        Caption = 'Prev'
+        Color = clBlack
+        Font.Color = clWhite
+        OnClick = SetPage
+        ParentFont = False
+        ParentColor = False
+        TabOrder = 1
+        Transparent = False
       end
     end
   end

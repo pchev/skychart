@@ -725,7 +725,7 @@ type
     function OpenChart(fn: string): string;
     function LoadDefaultChart(fn: string): string;
     function ShowPlanetInfo(pg: string): string;
-    procedure PlanetInfoPage(pg:Integer);
+    procedure PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
     function SetGCat(path,shortname,active,min,max: string): string;
   {$ifdef mswindows}
     Procedure SaveWinColor;
@@ -1553,28 +1553,28 @@ end;
 
 procedure Tf_main.PlanetInfoClick(Sender: TObject);
 begin
-PlanetInfoPage(0);
+PlanetInfoPage(0,true);
 end;
 
-procedure Tf_main.PlanetInfoPage(pg:Integer);
+procedure Tf_main.PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
 var pt:TPoint;
 begin
   if f_planetinfo=nil then begin
     f_planetinfo:=Tf_planetinfo.Create(self);
     f_planetinfo.planet:=planet;
   end;
-  if not f_planetinfo.Visible then begin
-    if MultiFrame1.ActiveObject is Tf_chart then f_planetinfo.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
-       else f_planetinfo.config.Assign(def_cfgsc);
-    if cfgm.KioskMode then begin
-       pt.X:=0; pt.Y:=0;
-       pt:=self.ClientToScreen(pt);
-       f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
-       f_planetinfo.Width:=Width;
-       f_planetinfo.Height:=Height;
-       f_planetinfo.BorderStyle:=bsNone;
-    end
-  end;
+  if MultiFrame1.ActiveObject is Tf_chart then f_planetinfo.config.Assign(Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc)
+     else f_planetinfo.config.Assign(def_cfgsc);
+  if cfgm.KioskMode then begin
+     pt.X:=0; pt.Y:=0;
+     pt:=self.ClientToScreen(pt);
+     f_planetinfo.BorderStyle:=bsNone;
+     f_planetinfo.Width:=Width;
+     f_planetinfo.Height:=Height;
+     f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
+  end else
+     if cursorpos then
+        formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
   f_planetinfo.Show;
   f_planetinfo.PageControl1.ActivePageIndex:=pg;
   f_planetinfo.RefreshInfo;
