@@ -9,6 +9,16 @@ uses u_constant, u_translation, Math, u_util, cu_planet, u_projection,
   Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
 
 type
+  TChartDrawingControl = class(TCustomControl)
+  public
+    procedure Paint; override;
+    property onMouseDown;
+    property onMouseMove;
+    property onMouseUp;
+  end;
+
+
+type
 
   { Tf_planetinfo }
 
@@ -50,14 +60,17 @@ type
     TabSheet9: TTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
-    procedure FormPaint(Sender: TObject);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure SetPage(Sender: TObject);
   private
     { private declarations }
+    Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,Image9 : TChartDrawingControl;
     Fplanet : Tplanet;
     xmin,xmax,ymin,ymax: integer;
+    Initialized: boolean;
+    ActivePage, ActiveDate, ActiveSizeX,ActiveSizeY: integer;
+    procedure ImgPaint(Sender: TObject);
   public
     { public declarations }
     config: Tconf_skychart;
@@ -87,6 +100,11 @@ implementation
 
 {$R *.lfm}
 
+procedure TChartDrawingControl.Paint;
+begin
+  inherited Paint;
+end;
+
 { Tf_planetinfo }
 
 procedure Tf_planetinfo.FormShow(Sender: TObject);
@@ -96,6 +114,7 @@ end;
 
 procedure Tf_planetinfo.SetLang;
 begin
+caption:=rsSolarSystemI;
 Next1.caption:=rsNext;
 Next2.caption:=rsNext;
 Next3.caption:=rsNext;
@@ -123,46 +142,91 @@ begin
 end;
 
 procedure Tf_planetinfo.FormCreate(Sender: TObject);
+procedure InitImg(var img:TChartDrawingControl;par:TPanel);
 begin
+Img:= TChartDrawingControl.Create(Self);
+Img.Parent := par;
+Img.Align:=alClient;
+Img.DoubleBuffered := true;
+Img.OnPaint:=@ImgPaint;
+end;
+begin
+  Initialized:=false;
   config:=Tconf_skychart.Create;
   plbmp:=TBGRABitmap.Create;
   setlang;
+  ActivePage:=-1;
+  ActiveDate:=-1;
+  ActiveSizeX:=-1;
+  ActiveSizeY:=-1;
+  InitImg(Image1,Panel1);
+  InitImg(Image2,Panel2);
+  InitImg(Image3,Panel3);
+  InitImg(Image4,Panel4);
+  InitImg(Image5,Panel5);
+  InitImg(Image6,Panel6);
+  InitImg(Image7,Panel7);
+  InitImg(Image8,Panel8);
+  InitImg(Image9,Panel9);
 end;
 
 procedure Tf_planetinfo.FormDestroy(Sender: TObject);
 begin
   plbmp.Free;
   config.Free;
+  Image1.Free;
+  Image2.Free;
+  Image3.Free;
+  Image4.Free;
+  Image5.Free;
+  Image6.Free;
+  Image7.Free;
+  Image8.Free;
+  Image9.Free;
 end;
 
-procedure Tf_planetinfo.FormPaint(Sender: TObject);
+procedure Tf_planetinfo.ImgPaint(Sender: TObject);
 begin
   case PageControl1.ActivePageIndex of
-     0: plbmp.Draw(panel1.Canvas, 0, 0, True);
-     1: plbmp.Draw(panel2.Canvas, 0, 0, True);
-     2: plbmp.Draw(panel3.Canvas, 0, 0, True);
-     3: plbmp.Draw(panel4.Canvas, 0, 0, True);
-     4: plbmp.Draw(panel5.Canvas, 0, 0, True);
-     5: plbmp.Draw(panel6.Canvas, 0, 0, True);
-     6: plbmp.Draw(panel7.Canvas, 0, 0, True);
-     7: plbmp.Draw(panel8.Canvas, 0, 0, True);
-     8: plbmp.Draw(panel9.Canvas, 0, 0, True);
+     0: plbmp.Draw(Image1.Canvas, 0, 0, false);
+     1: plbmp.Draw(Image2.Canvas, 0, 0, false);
+     2: plbmp.Draw(Image3.Canvas, 0, 0, false);
+     3: plbmp.Draw(Image4.Canvas, 0, 0, false);
+     4: plbmp.Draw(Image5.Canvas, 0, 0, false);
+     5: plbmp.Draw(Image6.Canvas, 0, 0, false);
+     6: plbmp.Draw(Image7.Canvas, 0, 0, false);
+     7: plbmp.Draw(Image8.Canvas, 0, 0, false);
+     8: plbmp.Draw(Image9.Canvas, 0, 0, false);
   end;
 end;
 
 procedure Tf_planetinfo.FormResize(Sender: TObject);
 begin
-  RefreshInfo;
+if Initialized then RefreshInfo;
 end;
 
 procedure Tf_planetinfo.RefreshInfo;
 begin
+if (ActivePage=PageControl1.ActivePageIndex) and
+   (ActiveDate=trunc(config.CurJDTT)) and
+   (ActiveSizeX=TabSheet1.ClientWidth) and
+   (ActiveSizeY=TabSheet1.ClientHeight) then begin
+     BringToFront;
+     Exit;
+   end;
+
+try
+Initialized:=false;
 plbmp.SetSize(TabSheet1.ClientWidth,TabSheet1.ClientHeight);
 plbmp.Fill(ColorToBGRA(clBlack));
 xmin:=marginleft;
 xmax:=plbmp.Width-marginright;
 ymin:=margintop;
 ymax:=plbmp.Height-marginbottom;
+ActivePage:=PageControl1.ActivePageIndex;
+ActiveDate:=trunc(config.CurJDTT);
+ActiveSizeX:=TabSheet1.ClientWidth;
+ActiveSizeY:=TabSheet1.ClientHeight;
 case PageControl1.ActivePageIndex of
    0: begin
       PlotHeader(plbmp, rsPlanetVisibi);
@@ -203,7 +267,11 @@ case PageControl1.ActivePageIndex of
       PlotOrbit2(plbmp);
       end;
 end;
+finally
+Initialized:=true;
 Invalidate;
+BringToFront;
+end;
 end;
 
 Procedure Tf_planetinfo.PlotTwilight(bmp:TBGRABitmap);
