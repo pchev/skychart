@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-09 17:54+0000\n"
+"POT-Creation-Date: 2013-01-20 18:09+0000\n"
 "PO-Revision-Date: 2012-09-01 18:01+0000\n"
 "Last-Translator: Panos Bouklis <panos@echidna-band.com>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-13 14:44+0000\n"
-"X-Generator: Launchpad (build 16420)\n"
+"X-Launchpad-Export-Date: 2013-01-20 18:20+0000\n"
+"X-Generator: Launchpad (build 16430)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1591,6 +1591,10 @@ msgstr "DSS RealSky"
 msgid "Duration"
 msgstr "Διάρκεια"
 
+#: u_translation.rsearth
+msgid "Earth"
+msgstr ""
+
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
 msgstr "Σκιά Γης"
@@ -2410,6 +2414,10 @@ msgstr "Αρχικοποίηση"
 #: u_translation.rsinitializeda
 msgid "Initialize database"
 msgstr "Αρχικοποίηση βάσης δεδομένων"
+
+#: u_translation.rsinnersolarsy
+msgid "Inner Solar System"
+msgstr ""
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -3436,6 +3444,10 @@ msgstr "Άλλη ετικέτα"
 msgid "Other software data"
 msgstr "Άλλα δεδομένα λογισμικού"
 
+#: u_translation.rsoutersolarsy
+msgid "Outer Solar System"
+msgstr ""
+
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
 msgstr "Τύπος καταλόγου εξόδου"
@@ -3559,6 +3571,10 @@ msgstr "Δορυφόρος πλανήτη"
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
 msgstr "Ρυθμίσεις πλανήτη"
+
+#: u_translation.rsplanetvisibi
+msgid "Planet visibility"
+msgstr ""
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -4684,6 +4700,10 @@ msgstr "Ηλιακή αποχή"
 #: u_translation.rssolarsystem
 msgid "Solar System"
 msgstr "Ηλιακό Σύστημα"
+
+#: u_translation.rssolarsystemi
+msgid "Solar System Informations"
+msgstr ""
 
 #: u_translation.rssolarsystemo
 #| msgid "Solar System object"

@@ -5446,3 +5446,23 @@ msgstr ""
 msgid "Polar motion (arc sec)"
 msgstr ""
 
+#: u_translation:rsearth
+msgid "Earth"
+msgstr ""
+
+#: u_translation:rsplanetvisibi
+msgid "Planet visibility"
+msgstr ""
+
+#: u_translation:rsinnersolarsy
+msgid "Inner Solar System"
+msgstr ""
+
+#: u_translation:rsoutersolarsy
+msgid "Outer Solar System"
+msgstr ""
+
+#: u_translation:rssolarsystemi
+msgid "Solar System Informations"
+msgstr ""
+
