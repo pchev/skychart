@@ -1569,9 +1569,11 @@ begin
      pt.X:=0; pt.Y:=0;
      pt:=self.ClientToScreen(pt);
      f_planetinfo.BorderStyle:=bsNone;
+     f_planetinfo.Show;
      f_planetinfo.Width:=Width;
      f_planetinfo.Height:=Height;
      f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
+     Application.ProcessMessages;
   end else
      if cursorpos then
         formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
