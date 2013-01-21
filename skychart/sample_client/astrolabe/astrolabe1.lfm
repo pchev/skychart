@@ -15,6 +15,7 @@ object f_astrolabe: Tf_astrolabe
   KeyPreview = True
   OnClose = FormClose
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   LCLVersion = '1.0.4.0'
@@ -104,7 +105,6 @@ object f_astrolabe: Tf_astrolabe
       Width = 324
       Max = 1800
       Min = -1800
-      OnChange = PosChange
       PageSize = 15
       Position = 0
       TickStyle = tsNone
@@ -117,7 +117,6 @@ object f_astrolabe: Tf_astrolabe
       Width = 324
       Max = 900
       Min = -900
-      OnChange = PosChange
       PageSize = 15
       Position = 0
       TickStyle = tsNone
@@ -159,7 +158,7 @@ object f_astrolabe: Tf_astrolabe
   object ExitTimer: TTimer
     Enabled = False
     OnTimer = ExitTimerTimer
-    left = 152
+    left = 160
     top = 384
   end
   object PosTimer: TTimer
@@ -167,6 +166,6 @@ object f_astrolabe: Tf_astrolabe
     Interval = 100
     OnTimer = PosTimerTimer
     left = 240
-    top = 376
+    top = 384
   end
 end
