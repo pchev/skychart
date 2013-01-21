@@ -202,6 +202,7 @@ end;
 
 procedure Tf_planetinfo.FormResize(Sender: TObject);
 begin
+plbmp.SetSize(TabSheet1.ClientWidth,TabSheet1.ClientHeight);
 if Initialized then RefreshInfo;
 end;
 
@@ -210,7 +211,9 @@ begin
 if (ActivePage=PageControl1.ActivePageIndex) and
    (ActiveDate=trunc(config.CurJDTT)) and
    (ActiveSizeX=TabSheet1.ClientWidth) and
-   (ActiveSizeY=TabSheet1.ClientHeight) then begin
+   (ActiveSizeY=TabSheet1.ClientHeight) and
+   (ActiveSizeX=plbmp.Width) and
+   (ActiveSizeY=plbmp.Height) then begin
      BringToFront;
      Exit;
    end;
