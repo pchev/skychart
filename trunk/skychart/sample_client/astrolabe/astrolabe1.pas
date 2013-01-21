@@ -24,6 +24,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 }
 {
   Example of a TCP/IP client for Cartes du Ciel
+
+  Simulate an equatorial mount with HourAngle and Declination encoder.
+  The encoder are read from this program and the position show on a simplified chart.
+  If the Dec position is below -45° it show the information about the planets.
+
 }
 
 interface
@@ -62,15 +67,17 @@ type
     procedure ExitTimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
-    procedure PosChange(Sender: TObject);
     procedure PosTimerTimer(Sender: TObject);
   private
     { Private declarations }
     CdCconfig,CdC,CdCDir,ServerIPaddr,ServerIPport: string;
-    CdCfound, StartCDC,Connecting,lockpos : boolean;
+    CdCfound, StartCDC,Connecting,Closing,Restarting : boolean;
     ConnectRetry: integer;
+    LastPosX, LastPosY, InactiveLoop: integer;
+    EncoderX,EncoderY : integer;
     Function  GetTcpPort:string;
     procedure GetCdCInfo;
     procedure OpenCDC(param:string);
@@ -78,6 +85,8 @@ type
     procedure Connect;
     procedure DoConnect;
     procedure Disconnect;
+    procedure Restart;
+    procedure GetEncoder;
   public
     { Public declarations }
     client : TClientThrd;
@@ -89,6 +98,11 @@ var
   f_astrolabe: Tf_astrolabe;
 
 const
+  // some critical timing:
+  EncoderPooling=200;    // Encoder pooling frequency [ms]
+  CdCCmdTimeout=5;       // cdc response timeout [seconds]
+  CdCTcpimeout=100;      // tcp/ip timeout [ms] also act as a delay before to send command
+
   {$ifdef linux}
         DefaultCdC='skychart';
         DefaultCdcDir='/usr/bin';
@@ -244,7 +258,7 @@ end;
 
 procedure Tf_astrolabe.ShowInfo(Sender: TObject; const messagetext:string);
 begin
-// process here socket status message.
+// process here socket status message and command response
 //  edit3.Text:=messagetext;
 //  edit3.Invalidate;
 end;
@@ -253,17 +267,21 @@ procedure Tf_astrolabe.ReceiveData(Sender : TObject; const data : string);
 begin
 // process here unattended message from Cartes du Ciel.
   memo1.Lines.Add(Data);
+  if (data='Bye!')and(not closing) then   // unexpected failure in CdC
+    Restart;
 end;
 
 procedure Tf_astrolabe.Connect;
 begin
+//Initial connection to CdC
+//Check if CdC is already running
 edit2.Text:=GetTcpPort;
-if edit2.Text<>'0' then DoConnect
+if edit2.Text<>'0' then DoConnect  // yes, connect
 else begin
-   if CdCfound then begin
+   if CdCfound then begin                   // check CdC is installed
      edit3.Text:='Launching Skychart ...';
      edit3.Invalidate;
-     OpenCDC('--unique --nosplash --config='+CdCconfig);
+     OpenCDC('--unique --nosplash --config='+CdCconfig);  // Launch CdC
      StartCDC:=true;
      ConnectRetryTimer.Enabled:=true;
    end else begin
@@ -275,6 +293,7 @@ end;
 
 procedure Tf_astrolabe.ConnectRetryTimerTimer(Sender: TObject);
 begin
+  // wait CdC is started and ready for connection
   ConnectRetryTimer.Enabled:=false;
   edit3.Text:='Wait Skychart startup ...';
   edit3.Invalidate;
@@ -285,13 +304,14 @@ end;
 
 procedure Tf_astrolabe.DoConnect;
 begin
+// initialize connection to CdC after it is started
 if (client=nil)or(client.Terminated) then
    client:=TClientThrd.Create
    else exit;
 client.TargetHost:=edit1.Text;
 client.TargetPort:=edit2.Text;
-client.Timeout := 100;    // tcp/ip timeout [ms] also act as a delay before to send command
-client.CmdTimeout := 10;  // cdc response timeout [seconds]
+client.Timeout := CdCTcpimeout;    // tcp/ip timeout [ms] also act as a delay before to send command
+client.CmdTimeout := CdCCmdTimeout;  // cdc response timeout [seconds]
 client.onShowMessage:=ShowInfo;
 client.onReceiveData:=ReceiveData;
 Connecting:=true;
@@ -299,12 +319,21 @@ client.Resume;
 sleep(500);
 edit3.Text:='Connected';
 edit3.Invalidate;
-PosChange(nil);
+PosTimer.Enabled:=True;
+end;
+
+procedure Tf_astrolabe.Restart;
+begin
+Restarting:=true;
+Close;
 end;
 
 procedure Tf_astrolabe.Disconnect;
 var resp:string;
 begin
+// disconnect from CdC
+PosTimer.Enabled:=False;
+Closing:=true;
 if (client<>nil)and(not client.Terminated) then begin
    resp:=client.Send('quit');
    memo1.lines.add(resp);
@@ -314,8 +343,8 @@ end;
 
 procedure Tf_astrolabe.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-if StartCDC then begin
-  Disconnect;
+if not Closing then begin
+  Disconnect;                // stop the connection before to close
   ExitTimer.Enabled:=true;
   Action:=caNone;
 end;
@@ -323,6 +352,7 @@ end;
 
 procedure Tf_astrolabe.FormCreate(Sender: TObject);
 begin
+// prohgram initialisation
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
@@ -330,12 +360,23 @@ DefaultFormatSettings.TimeSeparator:=':';
 GetCdCInfo;
 edit1.Text:=ServerIPaddr;
 edit2.Text:=ServerIPport;
+PosTimer.Interval:=EncoderPooling;
 ConnectRetry:=0;
-lockpos:=false;
+InactiveLoop:=0;
+LastPosX:=MaxInt;
+LastPosY:=MaxInt;
+Closing:=false;
+Restarting:=false;
+end;
+
+procedure Tf_astrolabe.FormDestroy(Sender: TObject);
+begin
+  if Restarting then ExecNoWait(paramstr(0));
 end;
 
 procedure Tf_astrolabe.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+  // help small trackbar movement
   case key of
   37 : TrackBarH.Position:=TrackBarH.Position-1;
   38 : TrackBarD.Position:=TrackBarD.Position+1;
@@ -347,21 +388,25 @@ end;
 procedure Tf_astrolabe.ExitTimerTimer(Sender: TObject);
 begin
   ExitTimer.Enabled:=false;
-  OpenCDC('--unique --quit');
+  if StartCDC then begin
+     OpenCDC('--unique --quit');  // close CdC if we start it
+  end;
   StartCDC:=false;
   sleep(1000);
   Application.ProcessMessages;
-  Close;
+  Close;                          // return to really close this time
 end;
 
 procedure Tf_astrolabe.FormShow(Sender: TObject);
 begin
+  // automatic connection at startup
   Connect;
 end;
 
 function Tf_astrolabe.CdCCmd(cmd:string):string;
 var resp:string;
 begin
+// Send command to CdC and wait for response
 if (client<>nil)and(not client.Terminated) then begin
    memo1.lines.add(cmd);
    resp:=client.Send(cmd);
@@ -370,38 +415,50 @@ if (client<>nil)and(not client.Terminated) then begin
 end;
 end;
 
-procedure Tf_astrolabe.PosChange(Sender: TObject);
+procedure Tf_astrolabe.GetEncoder;
 begin
-PosTimer.Enabled:=True;
+ // read encoder position here
+ // simulation using two trackbar:
+ EncoderX:=TrackBarH.Position;
+ EncoderY:=TrackBarD.Position;
 end;
 
 procedure Tf_astrolabe.PosTimerTimer(Sender: TObject);
+var inactivity: boolean;
 begin
-if lockpos then exit;
 try
-lockpos:=true;
 PosTimer.Enabled:=false;
-if TrackBarD.Position>-450 then begin
-  CdCCmd('PLANETINFO OFF');
-  CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
-  CdCCmd('IDSCOPE');
-end
-else if TrackBarD.Position>-470 then CdCCmd('PLANETINFO 0') // Visibility
-else if TrackBarD.Position>-510 then CdCCmd('PLANETINFO 1') // Moon
-else if TrackBarD.Position>-550 then CdCCmd('PLANETINFO 2') // Mercury
-else if TrackBarD.Position>-590 then CdCCmd('PLANETINFO 3') // Venus
-else if TrackBarD.Position>-630 then CdCCmd('PLANETINFO 4') // Mars
-else if TrackBarD.Position>-670 then CdCCmd('PLANETINFO 5') // Jupiter
-else if TrackBarD.Position>-710 then CdCCmd('PLANETINFO 6') // Saturn
-else if TrackBarD.Position>-750 then CdCCmd('PLANETINFO 7') // Orbit1
-else if TrackBarD.Position>-790 then CdCCmd('PLANETINFO 8') // Orbit2
-else;
-Application.ProcessMessages;
+inc(InactiveLoop);
+GetEncoder;
+inactivity:=(InactiveLoop*PosTimer.Interval/1000>60);
+if (EncoderX<>LastPosX)or           // moved AH coder
+  (EncoderY<>LastPosY) or           // moved Dec coder
+  inactivity                        // one minute inactive,
+  then begin
+    LastPosX := EncoderX;
+    LastPosY := EncoderY;
+    InactiveLoop:=0;
+    if TrackBarD.Position>-450 then begin
+      CdCCmd('PLANETINFO OFF');
+      CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
+      CdCCmd('IDSCOPE');
+    end
+    else if TrackBarD.Position>-470 then CdCCmd('PLANETINFO 0') // Visibility
+    else if TrackBarD.Position>-510 then CdCCmd('PLANETINFO 1') // Moon
+    else if TrackBarD.Position>-550 then CdCCmd('PLANETINFO 2') // Mercury
+    else if TrackBarD.Position>-590 then CdCCmd('PLANETINFO 3') // Venus
+    else if TrackBarD.Position>-630 then CdCCmd('PLANETINFO 4') // Mars
+    else if TrackBarD.Position>-670 then CdCCmd('PLANETINFO 5') // Jupiter
+    else if TrackBarD.Position>-710 then CdCCmd('PLANETINFO 6') // Saturn
+    else if TrackBarD.Position>-750 then CdCCmd('PLANETINFO 7') // Orbit1
+    else if TrackBarD.Position>-1000 then CdCCmd('PLANETINFO 8') // Orbit2
+    else;
+    Application.ProcessMessages;
+end;
 finally
-lockpos:=false;
+PosTimer.Enabled:=true;
 end;
 end;
-
 
 
 end.
