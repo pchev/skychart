@@ -618,7 +618,7 @@ if VerboseMsg then
     if lastundo>maxundo then lastundo:=1;
     undolist[lastundo].Assign(sc.cfgsc);
     curundo:=lastundo;
-    if sc.cfgsc.FindOk then ShowIdentLabel;
+    if sc.cfgsc.FindOk and (not cmain.SimpleDetail) then ShowIdentLabel;
     if assigned(FShowTopMessage) then FShowTopMessage(sc.GetChartInfo,self);
     if assigned(FShowTitleMessage) then FShowTitleMessage(sc.GetChartPos,self);
     Image1.Cursor:=ChartCursor;
@@ -1685,7 +1685,7 @@ var x,y : integer;
     posok: boolean;
 begin
 if locked then exit;
-if sc.cfgsc.FindOK then begin
+if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
    sc.cfgsc.scopemark:=false;
    sc.plot.FlushCnv;
    identlabel.Visible:=false;
@@ -3430,6 +3430,7 @@ var x,y : integer;
     xx,yy: single;
     ok: boolean;
 begin
+try
 projection(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,x1,y1,false,sc.cfgsc) ;
 WindowXY(x1,y1,xx,yy,sc.cfgsc);
 x:=round(xx);
@@ -3457,6 +3458,9 @@ end
 else begin
   f_detail.Hide;
   result:=msgFailed+' No object found!';
+end;
+except
+ result:=msgFailed+' Search failed!';
 end;
 end;
 

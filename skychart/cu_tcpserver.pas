@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_constant, u_util, blcksock, synsock,
-     FileUtil, LCLIntf, SysUtils, Classes;
+     Dialogs,FileUtil, LCLIntf, SysUtils, Classes;
 
 type
 
@@ -221,7 +221,7 @@ end;
 
 procedure TTCPThrd.Execute;
 var
-  s: string;
+  s,msg: string;
   i,keepalivecount: integer;
 begin
 try
@@ -239,13 +239,16 @@ try
       begin
         repeat
           if stoping or terminated then break;
+          msg:='RecvString';
           s := RecvString(500);
           //if s<>'' then writetrace(s);   // for debuging only, not thread safe!
           if lastError=0 then begin
              if (uppercase(s)='QUIT')or(uppercase(s)='EXIT') then break;
              splitarg(s,blank,cmd);
              for i:=cmd.count to MaxCmdArg do cmd.add('');
+             msg:='ExecuteCmd '+s;
              Synchronize(ExecuteCmd);
+             msg:='SendString '+cmdresult;
              SendString(cmdresult+crlf);
              if lastError<>0 then break;
              if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then active_chart:=cmd[1];
@@ -253,6 +256,7 @@ try
             inc(keepalivecount);
             if keepalive and ((keepalivecount mod 10)=0) then begin
                keepalivecount:=0;
+               msg:='SendString keepalive';
                SendString('.'+crlf);      // keepalive check
                if lastError<>0 then break;  // if send failed we close the connection
             end;
@@ -260,6 +264,9 @@ try
         until false;
       end;
   finally
+    if VerboseMsg then begin
+       WriteTrace('Stop tcp/ip server:'+crlf+msg+crlf+s+crlf+inttostr(fsock.LastError)+' '+FSock.LastErrorDesc);
+    end;
     if assigned(FTerminate) then FTerminate(id);
     Fsock.SendString(msgBye+crlf);
     Fsock.CloseSocket;
