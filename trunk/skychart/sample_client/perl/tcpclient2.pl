@@ -37,17 +37,12 @@ sub sendcmd {
   print $handle $cmd.$eol;                       # send command
 
   $line = <$handle>;
-  if ($line =~ /$client/) {       # click form our client
-     print STDOUT $line;
-     }
   while (($line =~/^\.\r\n$/) or ($line =~ /^>/)) # keepalive and click on the chart
     {
      $line = <$handle>;
-     if ($line =~ /$client/) {       # click form our client
-        print STDOUT $line;
-        }
     }
   # we go here after receiving response from our command
+  print STDOUT $line;
   if (($line =~ /^OK!/) or ($line =~ /^Bye!/) )
      {
      print STDOUT "Command success\n";
