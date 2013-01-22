@@ -300,8 +300,10 @@ if lockexecutecmd then exit;
 lockexecutecmd:=true;
 try
   if Assigned(FExecuteCmd) then cmdresult:=FExecuteCmd(active_chart,cmd);
-finally
   lockexecutecmd:=false;
+except
+  lockexecutecmd:=false;
+  cmdresult:=msgFailed+blank+cmdresult;
 end;
 end;
 
