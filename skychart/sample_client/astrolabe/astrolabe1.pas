@@ -34,9 +34,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-{$ifdef mswindows}
-  Registry,
-{$endif}
   cu_tcpclient, IniFiles,
   SysUtils, Types, Classes, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, LResources, ComCtrls;
@@ -122,7 +119,7 @@ const
 implementation
 
 {$ifdef mswindows}
- uses  Windows, ShlObj;
+ uses  Windows, ShlObj, Registry;
 {$endif}
 {$ifdef unix}
  uses unix,baseunix;
@@ -204,6 +201,7 @@ var
   buf1: string;
   PIDL:   PItemIDList;
   Folder: array[0..MAX_PATH] of char;
+  var Registry1: TRegistry;
 const
   CSIDL_APPDATA  = $001a;   // <user name>\Application Data
   CSIDL_LOCAL_APPDATA = $001c; // <user name>\Local Settings\Applicaiton Data (non roaming)
@@ -241,12 +239,28 @@ begin
     inif.Free;
   end;
   CdC := slash(CdCdir) + DefaultCdC;
+  {$ifdef linux}
   if not FileExists(CdC) then begin
      CdC :=ExpandFileName(slash(CdCdir)+slash('..')+slash('..')+slash('bin') + DefaultCdC);
   end;
   if not FileExists(CdC) then begin
     CdC:='/usr/local/bin/'+DefaultCdC;
   end;
+  {$endif}
+  {$ifdef mswindows}
+  if not FileExists(CdC) then begin
+    Registry1 := TRegistry.Create;
+    with Registry1 do begin
+      if Openkey('Software\Astro_PC\Ciel',false) then
+       if ValueExists('Install_Dir') then begin
+         CdCdir:=ReadString('Install_Dir');
+         CdC := slash(CdCdir) + DefaultCdC;
+       end;
+      CloseKey;
+    end;
+    Registry1.Free;
+  end;
+  {$endif}
   CdCfound:=FileExists(CdC);
 end;
 end;
