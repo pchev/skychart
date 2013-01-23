@@ -328,7 +328,7 @@ var ipla,yc,ys,i:integer;
     ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,hp1,hp2,ht,azr,azs: double;
 
 procedure PlotLine(lbl:string; y:integer; des,h1,h2,ht:double);
-var x1,x2,xt,i:integer;
+var x1,x2,xt:integer;
 begin
   if h1>-99 then begin
     x1:=xmin+round((h1/24)*(xmax-xmin));
@@ -397,8 +397,7 @@ end;
 end;
 
 Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String);
-var x,y,i: integer;
-    c:TBGRAPixel;
+var c:TBGRAPixel;
     buf: string;
 begin
   c:=ColorToBGRA(clWhite);
@@ -468,7 +467,7 @@ end;
 Procedure Tf_planetinfo.PlotOrbit1(bmp:TBGRABitmap);
 var p: ArrayOfTPointF;
     s,ipla,txtp,txts: integer;
-    x,y,cx,cy,fx: single;
+    cx,cy,fx: single;
     jdt,sd:double;
     pl: TPlanData;
 const nbstep=100;
@@ -477,7 +476,7 @@ const nbstep=100;
 
   Procedure PlanetOrbit;
   var i:integer;
-      px,py,pz: double;
+      px,py: double;
   begin
     sd:=per[ipla]/nbstep;
     jdt:=config.CurJDTT;
@@ -486,9 +485,8 @@ const nbstep=100;
       // rotate equatorial to ecliptic
       px:=pl.x;
       py:= coseps2k*pl.y + sineps2k*pl.z;
-      pz:= -sineps2k*pl.y + coseps2k*pl.z;
       p[i].x:=fx*px+cx;
-      p[i].y:=fx*py+cy;
+      p[i].y:=-fx*py+cy;
       jdt:=jdt+sd;
     end;
     bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
@@ -513,7 +511,7 @@ end;
 Procedure Tf_planetinfo.PlotOrbit2(bmp:TBGRABitmap);
 var p: ArrayOfTPointF;
     s,ipla,txtp,txts: integer;
-    x,y,cx,cy,fx: single;
+    cx,cy,fx: single;
     jdt,sd:double;
     pl: TPlanData;
 const nbstep=100;
@@ -522,7 +520,7 @@ const nbstep=100;
 
   Procedure PlanetOrbit;
   var i:integer;
-      px,py,pz: double;
+      px,py: double;
   begin
     sd:=per[ipla]/nbstep;
     jdt:=config.CurJDTT;
@@ -531,9 +529,8 @@ const nbstep=100;
       // rotate equatorial to ecliptic
       px:=pl.x;
       py:= coseps2k*pl.y + sineps2k*pl.z;
-      pz:= -sineps2k*pl.y + coseps2k*pl.z;
       p[i].x:=fx*px+cx;
-      p[i].y:=fx*py+cy;
+      p[i].y:=-fx*py+cy;
       jdt:=jdt+sd;
     end;
     bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
