@@ -436,6 +436,7 @@ var searchdir,cmd,sz : string;
     b: TBGRABitmap;
 begin
   s:=min((xmax-xmin),(ymax-xmin));
+  s:=min(s,600);
   sz:=inttostr(s)+'x'+inttostr(s);
   searchdir:='"'+slash(appdir)+slash('data')+'planet"';
  {$ifdef linux}
@@ -459,7 +460,7 @@ begin
  i:=exec(cmd);
  if i=0 then begin
     b:=TBGRABitmap.Create(slash(Tempdir)+'info2.png');
-    bmp.PutImage(xmin+((xmax-xmin-s)div 2),ymin,b,dmSet);
+    bmp.PutImage(xmin+((xmax-xmin-s)div 2),ymin+((ymax-ymin-s)div 2),b,dmSet);
     b.Free;
  end;
 end;
