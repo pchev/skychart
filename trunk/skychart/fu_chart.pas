@@ -1127,6 +1127,9 @@ try
     sc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
     sc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
     sc.plot.cfgchart.fontscale:=1;
+    {$ifndef mswindows}
+     sc.cfgsc.ShowBackgroundImage:=false; // do not work with Postscriptcanvas
+    {$endif}
     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,resol);
