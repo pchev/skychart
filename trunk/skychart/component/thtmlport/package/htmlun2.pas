@@ -490,7 +490,7 @@ uses
   {$ifndef NoOldPng}
      PngImage1,   
   {$endif}
-     htmlsubs, HtmlGif2, StylePars{$IFNDEF LCL}, ActiveX {$ENDIF};
+     htmlview, htmlsubs, HtmlGif2, StylePars{$IFNDEF LCL}, ActiveX {$ENDIF};
 
 type
   EGDIPlus = class (Exception);
@@ -693,12 +693,11 @@ var
   ExtS: TSize;
   Ints: ^Integers;
   L, H, I: integer;
-
 begin
-Extent := 0;   
-Result := 0;
-if (Width <= 0) or (Max = 0) then
-  Exit;
+  Extent := 0;
+  Result := 0;
+  if (Width <= 0) or (Max = 0) then
+    Exit;
 
 {$IFDEF MSWINDOWS}  //Only compile if GetTextExtentExPointW exists
 if not IsWin32Platform then

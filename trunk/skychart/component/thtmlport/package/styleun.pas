@@ -2438,13 +2438,12 @@ if ColorStrings = nil then
   end;
 end;
 
-function ColorFromString(S: string; NeedPound: boolean; var Color: TColor): boolean;
 {Translate StyleSheet color string to Color.  If NeedPound is true, a '#' sign
  is required to preceed a hexidecimal value.}
+function ColorFromString(S: string; NeedPound: boolean; var Color: TColor): boolean;
 const
   LastS: string = '?&%@';
   LastColor: TColor = 0;
-
 var
   I, Rd, Bl: integer;
   S1: string;

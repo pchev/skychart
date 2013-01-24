@@ -6,7 +6,7 @@
 
 [package]
 name=htmlcomp
-version=0.0.4
+version=0.0.5
 
 [compiler]
 unittargetdir=units/$(CPU_TARGET)-$(OS_TARGET)

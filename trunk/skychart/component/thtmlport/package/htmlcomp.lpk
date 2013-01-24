@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
 <CONFIG>
-  <Package Version="3">
+  <Package Version="4">
     <Name Value="HtmlComp"/>
-    <AddToProjectUsesSection Value="False"/>
     <Author Value="L. David Baldwin's HTML Components for Delphi; ported to Lazarus by Phil Hess"/>
     <CompilerOptions>
-      <Version Value="9"/>
+      <Version Value="11"/>
       <SearchPaths>
         <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
@@ -26,6 +25,7 @@
         </CompilerMessages>
         <CustomOptions Value="-dDebugIt"/>
         <CompilerPath Value="$(CompPath)"/>
+        <CreateMakefileOnBuild Value="True"/>
       </Other>
     </CompilerOptions>
     <Description Value="HTML Components for Lazarus"/>
@@ -57,36 +57,36 @@
         <UnitName Value="GDIPL2A"/>
       </Item6>
       <Item7>
-        <Filename Value="htmlun2.pas"/>
-        <UnitName Value="htmlun2"/>
-      </Item7>
-      <Item8>
-        <Filename Value="htmlun2.lrs"/>
-        <Type Value="LRS"/>
-      </Item8>
-      <Item9>
         <Filename Value="htmlgif1.pas"/>
         <UnitName Value="HtmlGif1"/>
-      </Item9>
-      <Item10>
+      </Item7>
+      <Item8>
         <Filename Value="htmlgif2.pas"/>
         <UnitName Value="HTMLGif2"/>
-      </Item10>
-      <Item11>
+      </Item8>
+      <Item9>
         <Filename Value="htmlmisc.pas"/>
         <UnitName Value="HtmlMisc"/>
-      </Item11>
-      <Item12>
+      </Item9>
+      <Item10>
         <Filename Value="htmlsbs1.pas"/>
         <UnitName Value="Htmlsbs1"/>
-      </Item12>
-      <Item13>
+      </Item10>
+      <Item11>
         <Filename Value="htmlsubs.pas"/>
         <UnitName Value="Htmlsubs"/>
+      </Item11>
+      <Item12>
+        <Filename Value="htmlun2.lrs"/>
+        <Type Value="LRS"/>
+      </Item12>
+      <Item13>
+        <Filename Value="htmlun2.pas"/>
+        <UnitName Value="HTMLUn2"/>
       </Item13>
       <Item14>
         <Filename Value="htmlview.pas"/>
-        <UnitName Value="htmlview"/>
+        <UnitName Value="Htmlview"/>
       </Item14>
       <Item15>
         <Filename Value="readhtml.pas"/>
@@ -117,5 +117,8 @@
       <Version Value="2"/>
       <IgnoreBinaries Value="False"/>
     </PublishOptions>
+    <CustomOptions Items="ExternHelp" Version="2">
+      <_ExternHelp Items="Count"/>
+    </CustomOptions>
   </Package>
 </CONFIG>
