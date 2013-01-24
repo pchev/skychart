@@ -4579,33 +4579,37 @@ end;
 
 Procedure Tskychart.DrawCRose;
 var rosex,rosey,roserd: integer;
-    ar,de,a,h,l,b,x1,y1,x2,y2,rot: double;
+    tx,ty: single;
+    ar,de,a,h,l,b,x1,y1,x2,y2,rot,rar,rde: double;
 begin
 if VerboseMsg then
  WriteTrace('SkyChart '+cfgsc.chartname+': draw compass');
  roserd:=round(Fcatalog.cfgshr.CRoseSz*fplot.cfgchart.drawsize / 2);
  rosex:=cfgsc.xmin+10+roserd;
  rosey:=cfgsc.ymax-10-roserd;
- x1:=0; y1:=0;
- projection(cfgsc.racentre,cfgsc.decentre+0.001,x2,y2,false,cfgsc);
+ GetADxy(rosex,rosey,rar,rde,cfgsc);
+ projection(rar,rde,x1,y1,false,cfgsc);
+ WindowXY(x1,y1,tx,ty,cfgsc);
+ if (round(tx)<>rosex)or(round(ty)<>rosey) then exit; // reversibilty test, the rose is outside of valid coordinates
+ projection(rar,rde+0.001,x2,y2,false,cfgsc);
  rot:=-arctan2((x2-x1),(y2-y1));
  Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,1);
  if cfgsc.ProjPole=Altaz then begin
-   Eq2Hz(cfgsc.CurST-cfgsc.racentre,cfgsc.decentre,a,h,cfgsc) ;
+   Eq2Hz(cfgsc.CurST-rar,rde,a,h,cfgsc) ;
    Hz2Eq(a,h+0.001,ar,de,cfgsc);
    projection(cfgsc.CurST-ar,de,x2,y2,false,cfgsc) ;
    rot:=-arctan2((x2-x1),(y2-y1));
    Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
  end;
  if cfgsc.ProjPole=Ecl then begin
-   Eq2Ecl(cfgsc.racentre,cfgsc.decentre,cfgsc.ecl,l,b);
+   Eq2Ecl(rar,rde,cfgsc.ecl,l,b);
    Ecl2eq(l,b+0.001,cfgsc.ecl,ar,de);
    projection(ar,de,x2,y2,false,cfgsc) ;
    rot:=-arctan2((x2-x1),(y2-y1));
    Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
  end;
  if cfgsc.ProjPole=Gal then begin
-   Eq2Gal(cfgsc.racentre,cfgsc.decentre,l,b,cfgsc);
+   Eq2Gal(rar,rde,l,b,cfgsc);
    gal2eq(l,b+0.001,ar,de,cfgsc);
    projection(ar,de,x2,y2,false,cfgsc) ;
    rot:=-arctan2((x2-x1),(y2-y1));
