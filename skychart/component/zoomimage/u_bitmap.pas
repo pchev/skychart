@@ -166,9 +166,9 @@ begin
 				//( nearest neighbor interpolation)
                                 col:=OriginalIntfImg.Colors[iOriginal,joriginal];
                                 if RevertImage then begin
-                                   col.red:=65535-col.red;
-                                   col.green:=65535-col.green;
-                                   col.blue:=65535-col.blue;
+                                   col.red:=max(0,65535-col.red);
+                                   col.green:=max(0,65535-col.green);
+                                   col.blue:=max(0,65535-col.blue);
                                 end;
                                 RotatedIntfImg.Colors[i,j]:=col;
                       END //inside
@@ -205,9 +205,15 @@ OriginalIntfImg:=bmp.CreateIntfImage;
 RotatedIntfImg:=bmp.CreateIntfImage;
 
 Rotation:=rmod(Rotation+pi2,pi2);
-TransparentColor.red:= 0;
-TransparentColor.green:=0;
-TransparentColor.blue:= 0;
+if WhiteBg then begin
+  TransparentColor.red:= 65535;
+  TransparentColor.green:=65535;
+  TransparentColor.blue:= 65535;
+end else begin
+  TransparentColor.red:= 0;
+  TransparentColor.green:=0;
+  TransparentColor.blue:= 0;
+end;
 TransparentColor.alpha:=65535;
 
 RotateImage(OriginalIntfImg,RotatedIntfImg,Rotation,point(bmp.Width div 2, bmp.Height div 2),np,TransparentColor,WhiteBg);
