@@ -1482,79 +1482,81 @@ for j:=0 to cfgsc.SimNb-1 do begin
     phase:=cfgsc.Planetlst[j,ipla,7];
     projection(ra,dec,x1,y1,true,cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
-    projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
-    rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
-    if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
-    if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(ipla<=11) then begin
-      if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
-        ltxt:=pla[ipla];
-        lori:=0;
-        lopt:=true;
-        lalign:=laLeft;
-      end
-      else begin
-       if cfgsc.SimNameLabel then
-          ltxt:=pla[ipla]+blank
-         else
-          ltxt:='';
-       if cfgsc.SimDateLabel then
-          ltxt:=ltxt+jddatetime(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
-       if cfgsc.SimMagLabel then
-          if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
-             else ltxt:=ltxt+formatfloat(f1,magn);
-       if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
-       projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],x2,y2,true,cfgsc) ;
-       lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
-       if (lori<90)or(lori>270) then begin
+    if (xx>-5*cfgsc.Xmax) and (xx<6*cfgsc.Xmax) and (yy>-5*cfgsc.Ymax) and (yy<6*cfgsc.Ymax) then begin
+      projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
+      rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+      if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
+      if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(ipla<=11) then begin
+        if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
+          ltxt:=pla[ipla];
+          lori:=0;
+          lopt:=true;
           lalign:=laLeft;
-       end else begin
-          lalign:=laRight;
-          lori:=lori-180;
-       end;
-       lopt:=false;
+        end
+        else begin
+         if cfgsc.SimNameLabel then
+            ltxt:=pla[ipla]+blank
+           else
+            ltxt:='';
+         if cfgsc.SimDateLabel then
+            ltxt:=ltxt+jddatetime(jdt+(cfgsc.TimeZone-cfgsc.DT_UT)/24,cfgsc.SimDateYear,cfgsc.SimDateMonth,cfgsc.SimDateDay,cfgsc.SimDateHour,cfgsc.SimDateMinute,cfgsc.SimDateSecond)+blank;
+         if cfgsc.SimMagLabel then
+            if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
+               else ltxt:=ltxt+formatfloat(f1,magn);
+         if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
+         projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],x2,y2,true,cfgsc) ;
+         lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
+         if (lori<90)or(lori>270) then begin
+            lalign:=laLeft;
+         end else begin
+            lalign:=laRight;
+            lori:=lori-180;
+         end;
+         lopt:=false;
+        end;
+        lis:=pla[ipla]+FormatFloat(f6,cfgsc.Planetlst[j,ipla,8])+FormatFloat(f6,cfgsc.Planetlst[j,ipla,9]);
+        lid:=rshash(lis,$7FFFFFFF);
+        SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
       end;
-      lis:=pla[ipla]+FormatFloat(f6,cfgsc.Planetlst[j,ipla,8])+FormatFloat(f6,cfgsc.Planetlst[j,ipla,9]);
-      lid:=rshash(lis,$7FFFFFFF);
-      SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
-    end;
-    case ipla of
-      4 :  begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
-           end;
-      5 :  begin
-            if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2, Fplanet.JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJDTT),0,0,cfgsc.WhiteBg);
-            if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
-           end;
-      6 :  begin
-            if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
-            r1:=cfgsc.Planetlst[j,31,2];
-            r2:=cfgsc.Planetlst[j,31,3];
-            be:=cfgsc.Planetlst[j,31,4];
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,r1,r2,be,cfgsc.WhiteBg);
-            if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
-           end;
-      7 :  begin
-            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
-            if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
-           end;
-      10 : begin
-            if cfgsc.SunOnline or use_xplanet then sunsize:=cfgsc.sunurlsize
-               else sunsize:=0;
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg,sunsize,cfgsc.sunurlmargin);
-           end;
-      11 : begin
-            magn:=-10;  // better to alway show a bright dot for the Moon
-            dist:=cfgsc.Planetlst[j,ipla,6];
-            fplanet.MoonOrientation(jdt,ra,dec,dist,pa,poleincl,sunincl,w1);
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg);
-           end;
-      else begin
-            Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
-           end;
+      case ipla of
+        4 :  begin
+              if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,true);
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
+              if (fov<=1.5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
+             end;
+        5 :  begin
+              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w2, Fplanet.JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJDTT),0,0,cfgsc.WhiteBg);
+              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
+             end;
+        6 :  begin
+              if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
+              r1:=cfgsc.Planetlst[j,31,2];
+              r2:=cfgsc.Planetlst[j,31,3];
+              be:=cfgsc.Planetlst[j,31,4];
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,r1,r2,be,cfgsc.WhiteBg);
+              if (fov<=2) and (cfgsc.Planetlst[j,16,6]<90) then for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
+             end;
+        7 :  begin
+              if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
+              if (fov<=1.5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
+             end;
+        10 : begin
+              if cfgsc.SunOnline or use_xplanet then sunsize:=cfgsc.sunurlsize
+                 else sunsize:=0;
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg,sunsize,cfgsc.sunurlmargin);
+             end;
+        11 : begin
+              magn:=-10;  // better to alway show a bright dot for the Moon
+              dist:=cfgsc.Planetlst[j,ipla,6];
+              fplanet.MoonOrientation(jdt,ra,dec,dist,pa,poleincl,sunincl,w1);
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,-w1,0,0,0,cfgsc.WhiteBg);
+             end;
+        else begin
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
+             end;
+      end;
     end;
   end;
   if cfgsc.ShowEarthShadowValid then DrawEarthShadow(cfgsc.Planetlst[j,32,1],cfgsc.Planetlst[j,32,2],cfgsc.Planetlst[j,32,3],cfgsc.Planetlst[j,32,4],cfgsc.Planetlst[j,32,5]);
