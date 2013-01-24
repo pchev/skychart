@@ -651,10 +651,14 @@ begin
   if cchMultiByte < 0 then  {Null terminated?}
     s := lpMultiByteStr
   else
+  begin
+    if lpMultiByteStr = nil then s := ''
+    else
     begin
-    SetLength(s, cchMultiByte);
-    Move(lpMultiByteStr^, s[1], cchMultiByte);
+      SetLength(s, cchMultiByte);
+      Move(lpMultiByteStr^, s[1], cchMultiByte);
     end;
+  end;
   if CodePage = CP_UTF8 then
     begin
     w := UTF8Decode(s);
