@@ -1219,7 +1219,7 @@ var rec:GcatRec;
                     begin
                       FFits.FileName:=imgfile;
                       if FFits.Header.valid then begin
-                        if ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<10) then
+                        if ((FFits.Img_Width*cfgsc.BxGlb/FFits.Header.naxis1)<100) then
                           begin
                             ra:=FFits.Center_RA;
                             de:=FFits.Center_DE;
