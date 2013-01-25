@@ -1855,6 +1855,7 @@ UniqueInstance1.Loaded;
 step:='Init';
 if VerboseMsg then
  debugln(step);
+Application.UpdateFormatSettings := False;
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
