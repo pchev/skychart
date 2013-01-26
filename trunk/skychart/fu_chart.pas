@@ -281,6 +281,12 @@ type
     function cmd_Print(Method,Orient,Col,path:string):string;
     function cmd_MoveScope(RA,DE:string):string;
     function cmd_MoveScopeH(H,D:string):string;
+    function cmd_LoadCircle(fn: string):string;
+    function cmd_DefCircle(num, radius, rotation, offset: string):string;
+    function cmd_DefRectangle(num, w, h, rotation, offset: string):string;
+    function cmd_ShowCircle(numlist: string):string;
+    function cmd_ShowRectangle(numlist: string):string;
+    function cmd_MarkCenter(onoff: string):string;
     function ExecuteCmd(arg:Tstringlist):string;
     function SaveChartImage(format,fn : string; quality: integer=95):boolean;
     Procedure ZoomBox(action,x,y:integer);
@@ -3677,6 +3683,12 @@ case n of
  88 : result:=cmd_SetBGimage(arg[1]);
  89 : result:=cmd_LoadBGimage(arg[1]);
  90 : result:=cmd_GetObjectList;
+ 91 : result:= cmd_LoadCircle(arg[1]);
+ 92 : result:= cmd_DefCircle(arg[1], arg[2], arg[3], arg[4]);
+ 93 : result:= cmd_DefRectangle(arg[1], arg[2], arg[3], arg[4], arg[5]);
+ 94 : result:= cmd_ShowCircle(arg[1]);
+ 95 : result:= cmd_ShowRectangle(arg[1]);
+ 96 : result:= cmd_MarkCenter(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;
@@ -3998,16 +4010,89 @@ begin
   cmd_PDSS('','','','');
 end;
 
-procedure Tf_chart.MenuLoadCircleClick(Sender: TObject);
+function Tf_chart.cmd_DefCircle(num, radius, rotation, offset: string):string;
+var i: integer;
+begin
+i:=StrToIntDef(num,-1);
+if (i>=1)and(i<=10) then begin
+   sc.cfgsc.circle[i,1]:=StrToIntDef(radius,60);
+   sc.cfgsc.circle[i,2]:=StrToIntDef(rotation,0);
+   sc.cfgsc.circle[i,3]:=StrToIntDef(offset,0);
+   sc.cfgsc.circle[i,4]:=0;
+   result:=msgOK;
+end
+else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_DefRectangle(num, w, h, rotation, offset: string):string;
+var i: integer;
+begin
+i:=StrToIntDef(num,-1);
+if (i>=1)and(i<=10) then begin
+   sc.cfgsc.rectangle[i,1]:=StrToIntDef(w,60);
+   sc.cfgsc.rectangle[i,2]:=StrToIntDef(h,60);
+   sc.cfgsc.rectangle[i,3]:=StrToIntDef(rotation,0);
+   sc.cfgsc.rectangle[i,4]:=StrToIntDef(offset,0);
+   sc.cfgsc.rectangle[i,5]:=0;
+   result:=msgOK;
+end
+else result:=msgFailed;
+end;
+
+function Tf_chart.cmd_ShowCircle(numlist: string):string;
+var buf: string;
+    var i,p: integer;
+begin
+for i:=1 to 10 do sc.cfgsc.circleok[i]:=false;
+repeat
+  i:=-1;
+  p:=pos(',',numlist);
+  if p>0 then begin
+    buf:=copy(numlist,1,p-1);
+    delete(numlist,1,p);
+    i:=strtointdef(buf,-1)
+  end else begin
+    i:=strtointdef(numlist,-1)
+  end;
+  if (i>=1)and(i<=10) then sc.cfgsc.circleok[i]:=true;
+until p=0;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_ShowRectangle(numlist: string):string;
+var buf: string;
+    var i,p: integer;
+begin
+for i:=1 to 10 do sc.cfgsc.rectangleok[i]:=false;
+repeat
+  i:=-1;
+  p:=pos(',',numlist);
+  if p>0 then begin
+    buf:=copy(numlist,1,p-1);
+    delete(numlist,1,p);
+    i:=strtointdef(buf,-1)
+  end else begin
+    i:=strtointdef(numlist,-1)
+  end;
+  if (i>=1)and(i<=10) then sc.cfgsc.rectangleok[i]:=true;
+until p=0;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_MarkCenter(onoff: string):string;
+begin
+  sc.cfgsc.ShowCircle:=(onoff='ON');
+  result:=msgOK;
+end;
+
+function Tf_chart.cmd_LoadCircle(fn: string):string;
 var f: textfile;
     buf1,buf2: string;
     x: double;
 begin
-if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
-if OpenDialog1.Execute then begin
-  if VerboseMsg then
-   WriteTrace(caption+' Load Circles from '+UTF8ToSys(OpenDialog1.FileName));
-  AssignFile(f,UTF8ToSys(OpenDialog1.FileName));
+if VerboseMsg then WriteTrace(caption+' Load Circles from '+fn);
+try
+  AssignFile(f,fn);
   reset(f);
   sc.cfgsc.NumCircle:=0;
   repeat
@@ -4024,6 +4109,20 @@ if OpenDialog1.Execute then begin
      sc.cfgsc.CircleLst[sc.cfgsc.NumCircle,2]:=x;
   until eof(f);
   CloseFile(f);
+  result:=msgOK;
+except
+  result:=msgFailed;
+end;
+end;
+
+procedure Tf_chart.MenuLoadCircleClick(Sender: TObject);
+var f: textfile;
+    buf1,buf2: string;
+    x: double;
+begin
+if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
+if OpenDialog1.Execute then begin
+  cmd_LoadCircle(UTF8ToSys(OpenDialog1.FileName));
   Refresh;
 end;
 end;
