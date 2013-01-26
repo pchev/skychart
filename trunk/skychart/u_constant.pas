@@ -1260,7 +1260,7 @@ const
     ('LOADBGIMAGE', '89', 'fits_filename'),
     ('GETOBJECTLIST', '90', ''),
     ('LOADCIRCLE', '91', 'file_name'),
-    ('SETCIRCLE', '92', 'num radius rotation offset'),
+    ('SETCIRCLE', '92', 'num diameter rotation offset'),
     ('SETRECTANGLE', '93', 'num width height rotation offset'),
     ('SHOWCIRCLE', '94', 'num_list'),
     ('SHOWRECTANGLE', '95', 'num_list'),
