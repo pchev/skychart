@@ -1285,7 +1285,11 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' FlipxExecute');
  sc.cfgsc.FlipX:=-sc.cfgsc.FlipX;
- if sc.cfgsc.FlipX<0 then sc.cfgsc.FlipY:=1;
+ if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // flipx+y=rotation
+   sc.cfgsc.FlipX:=1;
+   sc.cfgsc.FlipY:=1;
+   rotation(180);
+ end;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
@@ -1295,7 +1299,11 @@ begin
 if VerboseMsg then
  WriteTrace(caption+' FlipyExecute');
  sc.cfgsc.FlipY:=-sc.cfgsc.FlipY;
- if sc.cfgsc.FlipY<0 then sc.cfgsc.FlipX:=1;
+if (sc.cfgsc.FlipX<0)and(sc.cfgsc.Flipy<0) then begin // flipx+y=rotation
+  sc.cfgsc.FlipX:=1;
+  sc.cfgsc.FlipY:=1;
+  rotation(180);
+end;
  if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  Refresh;
 end;
