@@ -282,7 +282,7 @@ type
     function cmd_MoveScope(RA,DE:string):string;
     function cmd_MoveScopeH(H,D:string):string;
     function cmd_LoadCircle(fn: string):string;
-    function cmd_DefCircle(num, radius, rotation, offset: string):string;
+    function cmd_DefCircle(num, diameter, rotation, offset: string):string;
     function cmd_DefRectangle(num, w, h, rotation, offset: string):string;
     function cmd_ShowCircle(numlist: string):string;
     function cmd_ShowRectangle(numlist: string):string;
@@ -4010,15 +4010,16 @@ begin
   cmd_PDSS('','','','');
 end;
 
-function Tf_chart.cmd_DefCircle(num, radius, rotation, offset: string):string;
+function Tf_chart.cmd_DefCircle(num, diameter, rotation, offset: string):string;
 var i: integer;
 begin
 i:=StrToIntDef(num,-1);
 if (i>=1)and(i<=10) then begin
-   sc.cfgsc.circle[i,1]:=StrToIntDef(radius,60);
+   sc.cfgsc.circle[i,1]:=StrToIntDef(diameter,60);
    sc.cfgsc.circle[i,2]:=StrToIntDef(rotation,0);
    sc.cfgsc.circle[i,3]:=StrToIntDef(offset,0);
    sc.cfgsc.circle[i,4]:=0;
+   sc.cfgsc.circlelbl[i]:='C'+diameter;
    result:=msgOK;
 end
 else result:=msgFailed;
@@ -4034,6 +4035,7 @@ if (i>=1)and(i<=10) then begin
    sc.cfgsc.rectangle[i,3]:=StrToIntDef(rotation,0);
    sc.cfgsc.rectangle[i,4]:=StrToIntDef(offset,0);
    sc.cfgsc.rectangle[i,5]:=0;
+   sc.cfgsc.rectanglelbl[i]:='R'+w+'x'+h;
    result:=msgOK;
 end
 else result:=msgFailed;
