@@ -829,8 +829,7 @@ type
     circle: array [1..10, 1..4] of single; // radius, rotation, offset, mode
     circleok: array [1..10] of boolean;
     circlelbl: array [1..10] of string;
-    rectangle: array [1..10, 1..5] of single;
-    // width, height, rotation, offset, mode
+    rectangle: array [1..10, 1..5] of single; // width, height, rotation, offset, mode
     rectangleok: array [1..10] of boolean;
     rectanglelbl: array [1..10] of string;
     CircleLst: array[0..MaxCircle, 1..2] of double;
@@ -1166,7 +1165,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 90;
+  numcmd = 96;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1259,7 +1258,13 @@ const
     ('SHOWPICTURE', '87', 'ON/OFF'),
     ('SHOWBGIMAGE', '88', 'ON/OFF'),
     ('LOADBGIMAGE', '89', 'fits_filename'),
-    ('GETOBJECTLIST', '90', '')
+    ('GETOBJECTLIST', '90', ''),
+    ('LOADCIRCLE', '91', 'file_name'),
+    ('SETCIRCLE', '92', 'num radius rotation offset'),
+    ('SETRECTANGLE', '93', 'num width height rotation offset'),
+    ('SHOWCIRCLE', '94', 'num_list'),
+    ('SHOWRECTANGLE', '95', 'num_list'),
+    ('MARKCENTER', '96', 'ON/OFF')
     );
 
 // INDI Telescope driver
