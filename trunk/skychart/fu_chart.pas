@@ -4015,9 +4015,9 @@ var i: integer;
 begin
 i:=StrToIntDef(num,-1);
 if (i>=1)and(i<=10) then begin
-   sc.cfgsc.circle[i,1]:=StrToIntDef(diameter,60);
-   sc.cfgsc.circle[i,2]:=StrToIntDef(rotation,0);
-   sc.cfgsc.circle[i,3]:=StrToIntDef(offset,0);
+   sc.cfgsc.circle[i,1]:=StrToFloatDef(diameter,60);
+   sc.cfgsc.circle[i,2]:=StrToFloatDef(rotation,0);
+   sc.cfgsc.circle[i,3]:=StrToFloatDef(offset,0);
    sc.cfgsc.circle[i,4]:=0;
    sc.cfgsc.circlelbl[i]:='C'+diameter;
    result:=msgOK;
@@ -4030,10 +4030,10 @@ var i: integer;
 begin
 i:=StrToIntDef(num,-1);
 if (i>=1)and(i<=10) then begin
-   sc.cfgsc.rectangle[i,1]:=StrToIntDef(w,60);
-   sc.cfgsc.rectangle[i,2]:=StrToIntDef(h,60);
-   sc.cfgsc.rectangle[i,3]:=StrToIntDef(rotation,0);
-   sc.cfgsc.rectangle[i,4]:=StrToIntDef(offset,0);
+   sc.cfgsc.rectangle[i,1]:=StrToFloatDef(w,60);
+   sc.cfgsc.rectangle[i,2]:=StrToFloatDef(h,60);
+   sc.cfgsc.rectangle[i,3]:=StrToFloatDef(rotation,0);
+   sc.cfgsc.rectangle[i,4]:=StrToFloatDef(offset,0);
    sc.cfgsc.rectangle[i,5]:=0;
    sc.cfgsc.rectanglelbl[i]:='R'+w+'x'+h;
    result:=msgOK;
