@@ -40,6 +40,7 @@ type
   Tf_printsetup = class(TForm)
     Button1: TButton;
     Label5: TLabel;
+    ResolWarning: TLabel;
     PaperSize: TComboBox;
     printcmd: TFileNameEdit;
     PrintDialog1: TPrintDialog;
@@ -131,6 +132,10 @@ case cm.PrintMethod of
    customoption.Visible:=false;
    qtoption.Visible:=true;
    GetPrinterResolution(cm.prtname,i);
+   if i>75 then
+      ResolWarning.Caption:=''
+   else
+      ResolWarning.Caption:='Warning! Low resolution mode. Use PostScript instead and print the result file.';
    qtprintername.Caption:=cm.prtname;
    qtprintresol.Caption:=inttostr(i);
    end;
