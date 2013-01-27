@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 18:09+0000\n"
-"PO-Revision-Date: 2013-01-11 01:44+0000\n"
-"Last-Translator: Angelo Rober Pulici <Unknown>\n"
+"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"PO-Revision-Date: 2013-01-25 18:47+0000\n"
+"Last-Translator: Hugo Valentim <hdvalentim@gmail.com>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-20 18:20+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 12:01+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -144,7 +144,7 @@ msgstr "Adicionar os nomes alternativos ao índice"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
-msgstr "Ajuste brilho de cor"
+msgstr "Ajustar a luminosidade de superfície"
 
 #: u_translation.rsadvanced
 msgid "Advanced"
@@ -236,7 +236,7 @@ msgstr "Movimento Próprio Anual"
 
 #: u_translation.rsanonymouspas
 msgid "Anonymous password"
-msgstr "Senha anônima"
+msgstr "Senha anónima"
 
 #: u_translation.rsantialiasdra
 msgid "Anti Alias drawing"
@@ -300,7 +300,7 @@ msgstr "Asteróide"
 
 #: u_translation.rsasteroidelem
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Fontes de elementos de asteróides em formato MPC (um URL por linha)"
+msgstr "Fontes dos elementos dos asteróides em formato MPC (um URL por linha)"
 
 #: u_translation.rsasteroidsett
 msgid "Asteroid settings"
@@ -320,7 +320,7 @@ msgstr "Astronómico"
 
 #: u_translation.rsastronomical2
 msgid "Astronomical twilight"
-msgstr "Crepúsculo Astronómico"
+msgstr "Crepúsculo astronómico"
 
 #: u_translation.rsat
 msgid "at"
@@ -468,11 +468,11 @@ msgstr "Em baixo"
 
 #: u_translation.rsboundary
 msgid "Boundary"
-msgstr "Fronteira"
+msgstr "Limite"
 
 #: u_translation.rsbrighter
 msgid "Brighter"
-msgstr "Luminoso"
+msgstr "Mais intenso"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -556,7 +556,7 @@ msgstr "Não é possível gravar"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr "Cartesiano"
+msgstr "Cartesianas"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -788,7 +788,7 @@ msgstr "Cometa"
 
 #: u_translation.rscometelement
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Elementos de cometas no formato MPC (uma URL por linha)"
+msgstr "Elementos de cometas no formato MPC (um URL por linha)"
 
 #: u_translation.rscometsetting
 msgid "Comet settings"
@@ -896,11 +896,11 @@ msgstr "Constelação"
 
 #: u_translation.rsconstellatio2
 msgid "Constellation figures"
-msgstr "Figuras da Constelação"
+msgstr "Figuras das Constelações"
 
 #: u_translation.rsconstellatio3
 msgid "Constellation figures file name: "
-msgstr "Nome do arquivo da figura da Constelação: "
+msgstr "Nome do arquivo das figuras das Constelações: "
 
 #: u_translation.rsconstellatio4
 msgid "Constellation boundaries"
@@ -908,7 +908,7 @@ msgstr "Limites da Constelação"
 
 #: u_translation.rsconstellatio5
 msgid "Constellation boundaries file name: "
-msgstr "Nome do arquivo do limite da Constelação: "
+msgstr "Nome do arquivo dos limites das Constelações: "
 
 #: u_translation.rsconstellatio6
 msgid "Constellation label"
@@ -944,7 +944,7 @@ msgstr "Coord."
 
 #: u_translation.rscoordgrid
 msgid "Coord. grid"
-msgstr "Coord. Grade"
+msgstr "Grade de Coord."
 
 #: u_translation.rscoordinates
 msgid "Coordinates:"
@@ -1136,7 +1136,7 @@ msgstr "dias"
 
 #: u_translation.rsdaytime
 msgid "Day Time"
-msgstr "Dia Hora"
+msgstr "Período diurno"
 
 #: u_translation.rsdbinsertfail
 msgid "DB insert failed for %s: %s"
@@ -1212,11 +1212,11 @@ msgstr "Predefinido"
 
 #: u_translation.rsdefaultbutto
 msgid "Default button"
-msgstr "Tecla Padrão"
+msgstr "Botão padrão"
 
 #: u_translation.rsdefaultcolor
 msgid "Default colour"
-msgstr "Cor Padrão"
+msgstr "Cor padrão"
 
 #: u_translation.rsdefaultlabel
 msgid "Default label"
@@ -1280,7 +1280,7 @@ msgstr "Apagar Dados Diariamente"
 
 #: u_translation.rsdeletedsucce
 msgid "Deleted successfully!"
-msgstr "Apagado corretamente!"
+msgstr "Eliminado com sucesso!"
 
 #: u_translation.rsdeletefromel
 msgid "Deleting from the element table..."
@@ -1320,7 +1320,7 @@ msgstr "Apagar dados anteriores a esta data."
 
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
-msgstr "Apagar localização atual do banco de dados ?"
+msgstr "Apagar localização atual da base de dados ?"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1420,7 +1420,7 @@ msgstr "Exibir cor"
 
 #: u_translation.rsdisplayimage
 msgid "Display images of catalogued objects"
-msgstr "Exibir imagem dos objetos catalogados"
+msgstr "Exibir imagens dos objetos catalogados"
 
 #: u_translation.rsdisplaylabel
 msgid "Display labels for all star catalogs"
@@ -1432,7 +1432,7 @@ msgstr "Mostrar precisão"
 
 #: u_translation.rsdisplaythech
 msgid "Display the chart information in the menu bar."
-msgstr "Exibir informação da carta na barra menu."
+msgstr "Exibir informação da carta na barra do menu."
 
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
@@ -1532,7 +1532,7 @@ msgstr "Desenhe os Planetas como"
 
 #: u_translation.rsdrawtheappar
 msgid "Draw the apparent depressed horizon line"
-msgstr "Desenhar a linha do horizonte aparentemente deprimida"
+msgstr "Desenhar a linha do horizonte aparentemente rebaixada."
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
@@ -1560,7 +1560,7 @@ msgstr "Duração"
 
 #: u_translation.rsearth
 msgid "Earth"
-msgstr ""
+msgstr "Terra"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -1624,7 +1624,7 @@ msgstr "Elong."
 
 #: u_translation.rsemissionnebu
 msgid "Emission nebula"
-msgstr "Nebulosa emissão"
+msgstr "Nebulosa de emissão"
 
 #: u_translation.rsencoderconfi
 msgid "Encoder Configuration"
@@ -1672,7 +1672,7 @@ msgstr "Época da máxima"
 
 #: u_translation.rseqgrid
 msgid "Eq. grid"
-msgstr "Eq. Grade"
+msgstr "Grelha Eq."
 
 #: u_translation.rsequatorial
 msgid "Equatorial"
@@ -1864,7 +1864,7 @@ msgstr "Caminho de Arquivos"
 
 #: u_translation.rsfill
 msgid "Fill?"
-msgstr "Preencher"
+msgstr "Preencher?"
 
 #: u_translation.rsfillmilkyway
 msgid "Fill Milky Way"
@@ -1992,7 +1992,7 @@ msgstr "FTP "
 
 #: u_translation.rsftppassivemo
 msgid "FTP passive mode"
-msgstr "Modo passivo FTP"
+msgstr "Modo FTP passivo"
 
 #: u_translation.rsfullname
 msgid "Full name"
@@ -2084,7 +2084,7 @@ msgstr "Gráficos"
 
 #: u_translation.rsgravitationa
 msgid "Gravitational lens"
-msgstr "Lentes gravitacionais"
+msgstr "Lente gravitacional"
 
 #: u_translation.rsgreatest
 msgid "Greatest"
@@ -2092,7 +2092,7 @@ msgstr "Maior"
 
 #: u_translation.rsgreeksymbol
 msgid "Greek symbols"
-msgstr "Símbolo Grego"
+msgstr "Símbolos em grego"
 
 #: u_translation.rsgreen
 msgid "Green"
@@ -2180,7 +2180,7 @@ msgstr "Alto"
 
 #: u_translation.rshighcolor
 msgid "High colour"
-msgstr "Cor Alta"
+msgstr "Cor Intensa"
 
 #: u_translation.rshighest
 msgid "Highest"
@@ -2192,7 +2192,7 @@ msgstr "Indicando Alta Precisão"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
-msgstr "Alto brilho da superfície"
+msgstr "Luminosidade intensa"
 
 #: u_translation.rshorizon
 msgid "Horizon"
@@ -2224,11 +2224,11 @@ msgstr "Horas, minutos, segundos"
 
 #: u_translation.rshttpproxy
 msgid "HTTP proxy"
-msgstr "HTTP Proxy"
+msgstr "Proxy HTTP"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr "Umidade %"
+msgstr "Humidade"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
@@ -2256,7 +2256,7 @@ msgstr "Fração Iluminada"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
-msgstr "Diretório de Imagem"
+msgstr "Diretório de Imagens"
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2364,7 +2364,7 @@ msgstr "Inicialização da base de dados."
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr ""
+msgstr "Sistema Solar Interior"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -2448,7 +2448,7 @@ msgstr "Júpiter"
 
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
-msgstr "Longitude Jupiter GRS :"
+msgstr "Longitude da grande mancha vermelha"
 
 #: u_translation.rskm
 msgid "Km."
@@ -2612,7 +2612,7 @@ msgstr "Lista de fotos disponíveis"
 
 #: u_translation.rsload
 msgid "Load"
-msgstr "Baixar"
+msgstr "Carregar"
 
 #: u_translation.rsloadfile
 msgid "Load file"
@@ -2684,7 +2684,7 @@ msgstr "Baixo"
 
 #: u_translation.rslowsurfacebr
 msgid "Low surface brightness"
-msgstr "Baixo brilho de superfície"
+msgstr "Luminosidade débil"
 
 #: u_translation.rsluminosity
 msgid "Luminosity"
@@ -2724,7 +2724,7 @@ msgstr "Banda de Magnitude"
 
 #: u_translation.rsmagnitudedif
 msgid "Magnitude difference"
-msgstr "Magnitude diferente"
+msgstr "Diferença da magnitude"
 
 #: u_translation.rsmagnitudeecl
 msgid "Eclipse magnitude"
@@ -2896,7 +2896,7 @@ msgstr "Espelhar verticalmente"
 
 #: u_translation.rsmisclines
 msgid "Misc. lines"
-msgstr "Linhas Misc."
+msgstr "Outras linhas"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
@@ -2980,11 +2980,11 @@ msgstr "Mover etiqueta"
 
 #: u_translation.rsmpcftp
 msgid "MPC FTP"
-msgstr "MPC Ftp"
+msgstr "MPC FTP"
 
 #: u_translation.rsmpchttp
 msgid "MPC HTTP"
-msgstr "MPC Http"
+msgstr "MPC HTTP"
 
 #: u_translation.rsmultipleflag
 msgid "Multiple flag"
@@ -3080,7 +3080,7 @@ msgstr "Visão Noturna"
 
 #: u_translation.rsnightvisionb
 msgid "Night vision button"
-msgstr "Tecla de Visão Noturna"
+msgstr "Botão de visão nocturna"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
@@ -3124,7 +3124,7 @@ msgstr "Inexistente"
 
 #: u_translation.rsnonexistentu
 msgid "Non-existent/unknown"
-msgstr "inexist./desconhecido"
+msgstr "Inexist./desconhecido"
 
 #: u_translation.rsnoobjecttolo
 msgid "No object to lock on"
@@ -3132,7 +3132,7 @@ msgstr "Nenhum objeto para bloquear"
 
 #: u_translation.rsnopicture
 msgid "No picture"
-msgstr "Nenhuma figura"
+msgstr "Nenhuma imagem"
 
 #: u_translation.rsnoprinterfou
 msgid "No printer found!"
@@ -3388,7 +3388,7 @@ msgstr "Outros dados do software"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr ""
+msgstr "Sistema Solar Exterior"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3496,7 +3496,7 @@ msgstr "Figuras"
 
 #: u_translation.rspixels
 msgid "pixels"
-msgstr "pixels"
+msgstr "pixéis"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3512,11 +3512,11 @@ msgstr "Satélite Planetário"
 
 #: u_translation.rsplanetssetti
 msgid "Planet settings"
-msgstr "Configurando Planetas"
+msgstr "Configuração dos Planetas"
 
 #: u_translation.rsplanetvisibi
 msgid "Planet visibility"
-msgstr ""
+msgstr "Visibilidade dos Planetas"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -3668,7 +3668,7 @@ msgstr "Perparar dados mensais"
 
 #: u_translation.rspressuremill
 msgid "Pressure (millibar)"
-msgstr "Pressão (millibar)"
+msgstr "Pressão (milibar)"
 
 #: u_translation.rsprev
 msgid "<<   Prev"
@@ -3796,7 +3796,7 @@ msgstr "Proxy host"
 
 #: u_translation.rsproxyport
 msgid "Proxy port"
-msgstr "Proxy porta"
+msgstr "Porta proxy"
 
 #: u_translation.rspulseduratio
 msgid "Pulse duration"
@@ -3948,7 +3948,7 @@ msgstr "Referência"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
-msgstr "Nebulosa reflexão"
+msgstr "Nebulsa de reflexão"
 
 #: u_translation.rsrefresh
 msgid "Refresh"
@@ -4012,7 +4012,7 @@ msgstr "(requer Xplanet 1.2.0)"
 
 #: u_translation.rsreset
 msgid "Reset"
-msgstr "Restaurar"
+msgstr "Reiniciar"
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
@@ -4268,7 +4268,7 @@ msgstr "Selecione local"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr "Selecionar foto da lista"
+msgstr "Selecionar placa da lista"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -4416,11 +4416,11 @@ msgstr "Mostar o Limite da Constelação"
 
 #: u_translation.rsshowconstell3
 msgid "Show constellation figures"
-msgstr "Mostrar Figura da Constelação"
+msgstr "Mostrar as figuras das constel."
 
 #: u_translation.rsshowconstell4
 msgid "Show constellation boundaries"
-msgstr "Mostrar Vizinhança da Constelação"
+msgstr "Mostrar os limites"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
@@ -4448,7 +4448,7 @@ msgstr "Mostrar grade"
 
 #: u_translation.rsshowgridlabe
 msgid "Show grid label"
-msgstr "Mostrar Rótulo da Grade"
+msgstr "Mostrar rótulos das grelhas"
 
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
@@ -4516,7 +4516,7 @@ msgstr "Mostrar Figuras"
 
 #: u_translation.rsshowplaneton
 msgid "Show planets on the chart"
-msgstr "Mostrar Planeta na Carta"
+msgstr "Mostrar Planetas na Carta"
 
 #: u_translation.rsshowplanets
 msgid "Show planets"
@@ -4532,7 +4532,7 @@ msgstr "Mostrar Estrelas"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
-msgstr "Mostrar esta figura"
+msgstr "Mostrar esta imagem"
 
 #: u_translation.rsshowuserdefi
 msgid "Show User defined objects"
@@ -4556,7 +4556,7 @@ msgstr "Simulação"
 
 #: u_translation.rssize
 msgid "Size"
-msgstr "Medida"
+msgstr "Tamanho"
 
 #: u_translation.rsskybackgroun
 msgid "Sky background colour"
@@ -4576,7 +4576,7 @@ msgstr "Cartas do Céu"
 
 #: u_translation.rsskycolour
 msgid "Sky colour"
-msgstr "Cores do Céu"
+msgstr "Cor do céu"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
@@ -4636,7 +4636,7 @@ msgstr "Sistema Solar"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Informations"
-msgstr ""
+msgstr "Informações do Sistema Solar"
 
 #: u_translation.rssolarsystemo
 msgid "Solar system object"
@@ -4644,7 +4644,7 @@ msgstr "Objeto do Sistema Solar"
 
 #: u_translation.rssolarsystems
 msgid "Solar system settings"
-msgstr "Configurando o Sistema Solar"
+msgstr "Configuração do Sistema Solar"
 
 #: u_translation.rssomerecordsw
 msgid "Some records where rejected, see the file %sreject.txt for details."
@@ -4820,7 +4820,7 @@ msgstr "Inclinação do Sol"
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "Supernova restante"
+msgstr "Resto de supernova"
 
 #: u_translation.rssurface
 msgid "Surface"
@@ -4956,7 +4956,7 @@ msgstr "Existem %s objetos no campo."
 
 #: u_translation.rsthisactionre
 msgid "This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?"
-msgstr "Esta ação substitui todo o conteúdo do banco de dados para o país%s que usa dados recentes de NGA e GNIS.%sTudo que você editou para este país serão perdidos exceto o local adicionado com um nome novo que será mantido.%sVocê quer continuar?"
+msgstr "Esta ação substitui todo o conteúdo do banco de dados para o país%s usando dados recentes de NGA e GNIS.%sTudo que você editou para este país será perdido exceto o local adicionado com um nome novo que será mantido.%sVocê quer continuar?"
 
 #: u_translation.rsthiscatalogc
 msgid "This catalog contain %s records. It is not possible to download in full for performance reason."
@@ -5192,7 +5192,7 @@ msgstr "Atualização efetuada!"
 
 #: u_translation.rsupdateoraddt
 msgid "Update/add the current location to the database?"
-msgstr "Atualização ou Inclusão da localização atual no banco de dados ?"
+msgstr "Actualizar/adicionar a localização atual na base de dados ?"
 
 #: u_translation.rsuranus
 msgid "Uranus"
@@ -5200,7 +5200,7 @@ msgstr "Úrano"
 
 #: u_translation.rsurl
 msgid "URL"
-msgstr "Comando de ativação da URL"
+msgstr "URL"
 
 #: u_translation.rsurllaunchcom
 msgid "URL launch command"
@@ -5212,7 +5212,7 @@ msgstr "Use outro valor TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "Usar um ajuste de cor :"
+msgstr "Usar um esquema de cor pré-definido"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5224,7 +5224,7 @@ msgstr "Use HPP"
 
 #: u_translation.rsusehttpproxy
 msgid "Use HTTP proxy"
-msgstr "Usar HTTP Proxy"
+msgstr "Utilizar proxy HTTP"
 
 #: u_translation.rsuseonlinedss
 msgid "Use online DSS instead of RealSky"
@@ -5248,7 +5248,7 @@ msgstr "Id de Usuário:"
 
 #: u_translation.rsusername
 msgid "User name"
-msgstr "Nome do Usuário"
+msgstr "Nome de Utilizador"
 
 #: u_translation.rsusesocksprox
 msgid "Use Socks proxy"
@@ -5356,7 +5356,7 @@ msgstr "Navegador no Catálogo OV"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
-msgstr "Quer localizar um objeto antes de sua elevação?"
+msgstr "Quer localizar um objeto antes da sua elevação?"
 
 #: u_translation.rswarning
 msgid "Warning!"
@@ -5365,6 +5365,10 @@ msgstr "Atenção!"
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
 msgstr "Cuidado! Cálculo de"
+
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
@@ -5444,7 +5448,7 @@ msgstr "Você está pronto agora para mostrar o asteróide para este período de
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
-msgstr "Se você observar de um local alto, a linha do horizonte será mais baixa em relação ao nível do mar."
+msgstr "Se você observar de uma altitude elevada, a linha do horizonte será mais baixa do que seria ao nível do mar."
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"

@@ -5466,3 +5466,7 @@ msgstr ""
 msgid "Solar System Informations"
 msgstr ""
 
+#: u_translation:rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
+

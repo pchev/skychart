@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 18:09+0000\n"
+"POT-Creation-Date: 2013-01-27 11:54+0000\n"
 "PO-Revision-Date: 2011-12-29 17:13+0000\n"
 "Last-Translator: philipTao <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-20 18:21+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 12:01+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -5366,6 +5366,10 @@ msgstr "警告！"
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
 msgstr "警告！計算的"
+
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
