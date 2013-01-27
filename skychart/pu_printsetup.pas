@@ -135,7 +135,7 @@ case cm.PrintMethod of
    if i>75 then
       ResolWarning.Caption:=''
    else
-      ResolWarning.Caption:='Warning! Low resolution mode. Use PostScript instead and print the result file.';
+      ResolWarning.Caption:=rsWarningLowRe;
    qtprintername.Caption:=cm.prtname;
    qtprintresol.Caption:=inttostr(i);
    end;

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 18:09+0000\n"
-"PO-Revision-Date: 2013-01-20 18:16+0000\n"
+"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"PO-Revision-Date: 2013-01-27 11:56+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-20 18:20+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 12:00+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1402,7 +1402,7 @@ msgstr "Répertoire introuvable! Veuillez installer le paquet Skychart Pictures.
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
-msgstr "Deconnecter"
+msgstr "Déconnecter"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -4044,7 +4044,7 @@ msgstr "Recharge la dernière carte sauvegardée"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
-msgstr "Résolution:"
+msgstr "Résolution :"
 
 #: u_translation.rsresolutionxy
 msgid "Resolution X: %s Y :%s steps"
@@ -5369,6 +5369,10 @@ msgstr "Attention!"
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
 msgstr "Attention! le calcul pour"
+
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr "Attention! Mode basse résolution. Utilisez plutôt PostScript et imprimer le fichier résultat."
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."

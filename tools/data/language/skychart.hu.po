@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 18:09+0000\n"
-"PO-Revision-Date: 2012-10-28 07:29+0000\n"
+"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"PO-Revision-Date: 2013-01-24 16:29+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-20 18:20+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 12:01+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -309,9 +309,8 @@ msgid "Asteroid"
 msgstr "Kisbolygó"
 
 #: u_translation.rsasteroidelem
-#| msgid "Asteroid elements in MPC format (one URL by line)"
 msgid "Sources for asteroid elements in MPC format (one URL per line)"
-msgstr "Kisbolygó pályaadatok MPC formátumban (egy URL soronként)"
+msgstr "Kisbolygó pályaadatok MPC formátumban (egy sorban egy URL)"
 
 #: u_translation.rsasteroidsett
 #| msgid "Asteroid Setting"
@@ -434,7 +433,7 @@ msgstr "Horizont alatti"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
-msgstr ""
+msgstr "Használd a DOS sorvége formátumot."
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -839,9 +838,8 @@ msgid "Comet"
 msgstr "Üstökös"
 
 #: u_translation.rscometelement
-#| msgid "Comet elements in MPC format (one URL by line) "
 msgid "Sources for comet elements in MPC format (one URL per line)"
-msgstr "Üstökös pályaadatok MPC formátumban (egy URL soronként)"
+msgstr "Üstökös pályaadatok MPC formátumban (egy sorban egy URL)"
 
 #: u_translation.rscometsetting
 #| msgid "Comet Setting"
@@ -1311,7 +1309,7 @@ msgstr "Alapértelmezett címke"
 
 #: u_translation.rsdefaultmagni
 msgid "Default magnitude"
-msgstr ""
+msgstr "Magnitúdó"
 
 #: u_translation.rsdefaultmargi
 #| msgid "Default Margin"
@@ -1330,7 +1328,7 @@ msgstr "Körvonal alapértelmezett értékei"
 
 #: u_translation.rsdefaultsizea
 msgid "Default size (arcsec)"
-msgstr ""
+msgstr "Alap méret  (arcsec)"
 
 #: u_translation.rsdeg
 msgid "d"
@@ -1710,7 +1708,7 @@ msgstr "Szín szerkesztése"
 
 #: u_translation.rseditdsolines
 msgid "Edit DSO lines color"
-msgstr ""
+msgstr "DSO vonalak színei"
 
 #: u_translation.rseditlabel
 msgid "Edit label"
@@ -1769,7 +1767,7 @@ msgstr "Efemerisz naptár"
 
 #: u_translation.rsephemerispro
 msgid "Ephemeris probably out of range, disabling any solar system object"
-msgstr ""
+msgstr "Az efemerisz valószínűleg olyan, hogy egyetlen objektum sem látszik a Naprendszerben"
 
 #: u_translation.rsepoch
 msgid "Epoch"
@@ -2097,7 +2095,7 @@ msgstr "Másodpercenkénti képkockaszám"
 
 #: u_translation.rsframessize
 msgid "Frames size"
-msgstr "képkocka méret"
+msgstr "Képkocka méret"
 
 #: u_translation.rsfrangle
 msgid "FR Angle"
@@ -2426,7 +2424,7 @@ msgstr "Pályahajlás="
 
 #: u_translation.rsincludedayti
 msgid "Include day time pass"
-msgstr ""
+msgstr "nappali felvillanások is"
 
 #: u_translation.rsincludeiridi
 msgid "Include Iridium flare"
@@ -2507,7 +2505,7 @@ msgstr "Információs ablak"
 
 #: u_translation.rsinformationf
 msgid "Information from catalog"
-msgstr ""
+msgstr "Információk katalógusból"
 
 #: u_translation.rsinit
 msgid "Init"
@@ -2528,7 +2526,7 @@ msgstr "Adatbázis beállítása"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr ""
+msgstr "Belső naprendszer"
 
 #: u_translation.rsinputcatalog
 #| msgid "Input Catalog files"
@@ -2550,7 +2548,7 @@ msgstr "Internet"
 
 #: u_translation.rsinternetloca
 msgid "Internet localization"
-msgstr ""
+msgstr "Földrajzi hely a böngésző alapján"
 
 #: u_translation.rsintervaltime
 msgid "Interval Timeout"
@@ -2943,7 +2941,7 @@ msgstr "Szokásos"
 
 #: u_translation.rsmakeselectio
 msgid "Make selection of the table and column you want to your catalog"
-msgstr ""
+msgstr "Válaszd ki, hogy milyen oszlopok legyenek a katalógusban."
 
 #: u_translation.rsmanualmount
 #| msgid "Manual Mount"
@@ -3532,7 +3530,7 @@ msgstr "Be"
 
 #: u_translation.rsoneevery
 msgid "One every"
-msgstr ""
+msgstr "Minden"
 
 #: u_translation.rsonlinedss
 msgid "Online DSS"
@@ -3618,7 +3616,7 @@ msgstr "Más szoftver adatbázis"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr ""
+msgstr "Külső  naprendszer"
 
 #: u_translation.rsoutputcatalo
 #| msgid "Output Catalog Type"
@@ -4061,7 +4059,7 @@ msgstr "Impulzus mód"
 
 #: u_translation.rsputthefilesw
 msgid "Put the files with a .tle extention to the %s folder"
-msgstr "Tedd a .TLE kiterjesztésű fájlokat ebbe a könyvtárba:  %"
+msgstr "Tedd a .TLE kiterjesztésű fájlokat ebbe a könyvtárba: %s"
 
 #: u_translation.rsquasar
 msgid "Quasar"
@@ -4293,7 +4291,7 @@ msgstr "Alapértelmezett térkép beállítások"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Kezdeti értékek visszaállítása"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
@@ -4718,7 +4716,7 @@ msgstr "Azimutális háló mutatása"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
-msgstr ""
+msgstr "DSO vonalak mutatása"
 
 #: u_translation.rsshowearthsha
 #| msgid "Show Earth Shadow  (Lunar eclipses)"
@@ -4761,7 +4759,7 @@ msgstr "Címkék mutatása"
 
 #: u_translation.rsshowlinefrom
 msgid "Show line from moved label to object"
-msgstr ""
+msgstr "Mozgatott címkéhez vonal mutatása"
 
 #: u_translation.rsshowlines
 #| msgid "Show Lines"
@@ -4806,7 +4804,7 @@ msgstr "Objektumok mutatása"
 
 #: u_translation.rsshowonlymeri
 msgid "Show only meridian in Alt/Az"
-msgstr ""
+msgstr "Csak meridián mutatása Alt/AZ-ban"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
@@ -4904,7 +4902,7 @@ msgstr ""
 
 #: u_translation.rsslewtocursor
 msgid "Slew to cursor position"
-msgstr ""
+msgstr "Forgatás a kurzor pozíciójába"
 
 #: u_translation.rsslow
 msgid "Slow"
@@ -4950,7 +4948,7 @@ msgstr "Naprendszer"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Informations"
-msgstr ""
+msgstr "Naprendszer információk"
 
 #: u_translation.rssolarsystemo
 #| msgid "Solar System object"
@@ -5398,7 +5396,7 @@ msgstr "Nyomonkövetés"
 
 #: u_translation.rstracktelesco
 msgid "Track telescope"
-msgstr ""
+msgstr "Távcső követése"
 
 #: u_translation.rstransformati
 msgid "Transformation"
@@ -5731,6 +5729,10 @@ msgstr "Figyelem!"
 #: u_translation.rswarningcalcu
 msgid "Warning! Calculation of"
 msgstr "Figyelem! Ennek számolása:"
+
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."

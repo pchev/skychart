@@ -1395,6 +1395,8 @@ resourcestring
   rsInnerSolarSy = 'Inner Solar System';
   rsOuterSolarSy = 'Outer Solar System';
   rsSolarSystemI = 'Solar System Informations';
+  rsWarningLowRe = 'Warning! Low resolution mode. Use PostScript instead and '
+    +'print the result file.';
 
 implementation
 

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-20 18:09+0000\n"
-"PO-Revision-Date: 2012-09-03 09:58+0000\n"
+"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"PO-Revision-Date: 2013-01-25 11:12+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-20 18:21+0000\n"
-"X-Generator: Launchpad (build 16430)\n"
+"X-Launchpad-Export-Date: 2013-01-27 12:01+0000\n"
+"X-Generator: Launchpad (build 16451)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -174,7 +174,7 @@ msgstr "Alle configuratie instellingen"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Alle objecten van deze positie"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -554,7 +554,7 @@ msgstr "Kan niet schrijven naar"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "Cartesiaans"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -670,7 +670,7 @@ msgstr "Kaart, coördinaten"
 
 #: u_translation.rschartcoordin2
 msgid "Chart coordinate systems"
-msgstr "Kaart coördinaten systeem"
+msgstr "Kaart coördinatensysteem"
 
 #: u_translation.rschartinforma
 msgid "Chart information"
@@ -1455,7 +1455,7 @@ msgstr "Afstand tot vorig object"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
+msgstr "Filter niet de Messier-objecten"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1559,7 +1559,7 @@ msgstr "Duur"
 
 #: u_translation.rsearth
 msgid "Earth"
-msgstr ""
+msgstr "Aarde"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -1655,7 +1655,7 @@ msgstr "Ephemeriden kalender"
 
 #: u_translation.rsephemerispro
 msgid "Ephemeris probably out of range, disabling any solar system object"
-msgstr ""
+msgstr "Efemeriden waarschijnlijk buiten bereik, zonnestelsel objecten niet actief gemaakt"
 
 #: u_translation.rsepoch
 msgid "Epoch"
@@ -2067,7 +2067,7 @@ msgstr "Bolvorm. sterrenhoop"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
-msgstr ""
+msgstr "Gnomonisch"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2139,7 +2139,7 @@ msgstr "Stop na 1000 fouten"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2227,7 +2227,7 @@ msgstr "HTTP proxy"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr ""
+msgstr "Vochtigheid %"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
@@ -2363,7 +2363,7 @@ msgstr "Initialiseer database"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr ""
+msgstr "Binnenste zonnestelsel"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -2839,7 +2839,7 @@ msgstr "Gemiddelde positie"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "Meractor"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -2875,7 +2875,7 @@ msgstr "Min."
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr ""
+msgstr "Minimale altitude"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3387,7 +3387,7 @@ msgstr "Overige programma-gegevens"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr ""
+msgstr "Buitenste zonnestelsel"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3515,7 +3515,7 @@ msgstr "Planeet-instellingen"
 
 #: u_translation.rsplanetvisibi
 msgid "Planet visibility"
-msgstr ""
+msgstr "Planeet zichbaarheid"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -3611,7 +3611,7 @@ msgstr "pm"
 
 #: u_translation.rspolarmotiona
 msgid "Polar motion (arc sec)"
-msgstr ""
+msgstr "Poolbeweging (boogsec)"
 
 #: u_translation.rspoleinclinat
 msgid "Pole inclination"
@@ -4031,7 +4031,7 @@ msgstr "Terug naar standaardinstellingen en herstart"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Rotatie ongedaan maken"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4095,11 +4095,11 @@ msgstr "Opkomst tijd"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
-msgstr ""
+msgstr "Roteer 180 graden"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
-msgstr ""
+msgstr "Gebruik scheve cilinderprojecties"
 
 #: u_translation.rsrotateleft
 msgid "Rotate left"
@@ -4423,7 +4423,7 @@ msgstr "Toon sterrenbeeld begrenzing"
 
 #: u_translation.rsshowcoordina
 msgid "Show coordinates grid"
-msgstr "Toon coördinaten rooster"
+msgstr "Toon coördinatenrooster"
 
 #: u_translation.rsshowdsolines
 msgid "Show DSO lines"
@@ -4579,7 +4579,7 @@ msgstr "Hemelkleur"
 
 #: u_translation.rsslantorthogr
 msgid "Slant orthographic"
-msgstr ""
+msgstr "Scheef orthografisch"
 
 #: u_translation.rsslew
 msgid "Slew"
@@ -4635,7 +4635,7 @@ msgstr "Zonnestelsel"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Informations"
-msgstr ""
+msgstr "Zonnestelsel informatie"
 
 #: u_translation.rssolarsystemo
 msgid "Solar system object"
@@ -4819,7 +4819,7 @@ msgstr "Zon inclinatie"
 
 #: u_translation.rssupernovarem
 msgid "Supernova remnant"
-msgstr "Supernova restant"
+msgstr "Supernovarestant"
 
 #: u_translation.rssurface
 msgid "Surface"
@@ -5079,7 +5079,7 @@ msgstr "Tropisch jaar"
 
 #: u_translation.rstropospheret
 msgid "Troposphere temperature lapse rate (K/km)"
-msgstr ""
+msgstr "Troposferische temperatuurgradiënt (K/km)"
 
 #: u_translation.rstrueequatore
 msgid "true equator, equinox and epoch of the date"
@@ -5365,6 +5365,10 @@ msgstr "Waarschuwing!"
 msgid "Warning! Calculation of"
 msgstr "Waarschuwing! Berekening van"
 
+#: u_translation.rswarninglowre
+msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
+
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
 msgstr "Waarschuwing! Sommige planetoïde elementen zijn ouder dan 3 jaar. Probeer elementen te vinden voor de datum van de kaart."
@@ -5447,7 +5451,7 @@ msgstr "Wanneer u vanaf een berg observeert, zal de horizon lager zijn dan wanne
 
 #: u_translation.rszenitalequid
 msgid "Zenital equidistant"
-msgstr ""
+msgstr "Zenitaal-equidistant"
 
 #: u_translation.rszenith
 msgid "Zenith"
@@ -5475,7 +5479,7 @@ msgstr "Zoom in"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "Zoom meer om object te bekijken"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
