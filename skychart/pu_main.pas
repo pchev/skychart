@@ -4146,10 +4146,13 @@ FormResize(sender);
 end;
 
 Procedure Tf_main.InitFonts;
-var ts: Tsize;
+var ts,ts1,ts2: Tsize;
 begin
    P0L1.Caption:='';
-   ts:=P0L1.Canvas.TextExtent('Ra:222h22m22.22s +22d22m22s22');
+   ts1:=P0L1.Canvas.TextExtent(rsRA+':222h22m22.22s +22d22m22s22');
+   ts2:=P0L1.Canvas.TextExtent(rsAz+':+222h22m22.22s +22d22m22s22');
+   if ts1.cx>ts2.cx then ts:=ts1
+      else ts:=ts2;
    PanelBottom.height:=2*ts.cy+4;
    PPanels0.Width:=ts.cx+4;
    P0L1.Align:=alClient;
@@ -6292,6 +6295,7 @@ end;
 lang:=u_translation.translate(cfgm.language);
 u_help.Translate(lang);
 SetLang;
+InitFonts;
 f_position.SetLang;
 f_search.SetLang;
 f_zoom.SetLang;
