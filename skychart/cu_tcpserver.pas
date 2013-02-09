@@ -155,7 +155,7 @@ try
       //writetrace('start main loop');
       repeat
         if stoping or terminated then break;
-        if canread(500) and (not terminated) then
+        if canread(500) and (not terminated) and (not stoping) then
           begin
             ClientSock:=accept;
             if lastError=0 then begin
