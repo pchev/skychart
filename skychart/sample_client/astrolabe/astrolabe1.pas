@@ -454,7 +454,7 @@ if (EncoderX<>LastPosX)or           // moved AH coder
     InactiveLoop:=0;
     if TrackBarD.Position>-450 then begin
       CdCCmd('PLANETINFO OFF');
-      CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
+      CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/15/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
       CdCCmd('IDSCOPE');
     end
     else if TrackBarD.Position>-470 then CdCCmd('PLANETINFO 0') // Visibility

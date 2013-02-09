@@ -3250,7 +3250,7 @@ end;
 function Tf_chart.cmd_MoveScope(RA,DE:string):string;
 var r,d: double;
 begin
-r:=StrToFloatDef(RA,9999);
+r:=StrToFloatDef(RA,9999)*15;
 d:=StrToFloatDef(DE,9999);
 if (abs(r)<=360)and(abs(d)<=90) then begin
  d:=deg2rad*d;
@@ -3268,7 +3268,7 @@ end;
 function Tf_chart.cmd_MoveScopeH(H,D:string):string;
 var hh,dd,ra,de: double;
 begin
-hh:=StrToFloatDef(H,9999);
+hh:=StrToFloatDef(H,9999)*15;
 dd:=StrToFloatDef(D,9999);
 if (abs(hh)<=180)and(abs(dd)<=90) then begin
  de:=deg2rad*dd;
