@@ -7820,8 +7820,8 @@ end;
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
 if cfgm.KioskMode then begin
-  if key=VK_RETURN then kioskpwd:=''
-     else kioskpwd:=kioskpwd+chr(key);
+  if (key=VK_RETURN)or(Length(kioskpwd)>50) then kioskpwd:='';
+  if (key>=VK_A)and(key<=VK_Z) then kioskpwd:=kioskpwd+chr(key);
   if uppercase(kioskpwd)=uppercase(cfgm.KioskPass) then begin
     Close;
     Exit;
