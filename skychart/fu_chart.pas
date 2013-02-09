@@ -281,6 +281,13 @@ type
     function cmd_Print(Method,Orient,Col,path:string):string;
     function cmd_MoveScope(RA,DE:string):string;
     function cmd_MoveScopeH(H,D:string):string;
+    function cmd_TrackTelescope(onoff: string): string;
+    function cmd_GetScopeRaDec:string;
+    function cmd_ConnectINDI:string;
+    function cmd_DisconnectINDI:string;
+    function cmd_SlewINDI(RA1,DE1:string):string;
+    function cmd_AbortSlewINDI:string;
+    function cmd_SyncINDI(RA2,DE2:string):string;
     function cmd_LoadCircle(fn: string):string;
     function cmd_DefCircle(num, diameter, rotation, offset: string):string;
     function cmd_DefRectangle(num, w, h, rotation, offset: string):string;
@@ -3283,6 +3290,162 @@ end
 else result:=msgFailed+' out of range';
 end;
 
+function Tf_chart.cmd_TrackTelescope(onoff: string): string;
+begin
+if onoff='ON' then begin
+    sc.cfgsc.TrackOn:=true;
+    sc.cfgsc.TrackType:=6;
+    sc.cfgsc.TrackName:=rsTelescope;
+    sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
+    sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+    sc.cfgsc.scopemark:=true;
+    sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
+    Refresh;
+end else begin
+    sc.cfgsc.TrackOn:=false;
+    Refresh;
+end;
+result:=msgOK;
+end;
+
+function Tf_chart.cmd_GetScopeRaDec:string;
+
+var ra,dec:double;
+    ok: boolean;
+begin
+
+if sc.cfgsc.ASCOMTelescope then begin
+     Connect1.checked:=Fpop_scope.ScopeConnected;
+     if Connect1.checked then begin
+      Fpop_scope.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      Fpop_scope.ScopeGetRaDec(ra,dec,ok);
+     end;
+ end
+else if sc.cfgsc.IndiTelescope then begin
+     Connect1.checked:=Fpop_indi.ScopeConnected;
+     if Connect1.checked then begin
+      Fpop_indi.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      Fpop_indi.ScopeGetRaDec(ra,dec,ok);
+     end;
+ end
+else if sc.cfgsc.LX200Telescope then begin
+     Connect1.checked:=Fpop_lx200.ScopeConnected;
+     if Connect1.checked then begin
+      Fpop_lx200.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      Fpop_lx200.ScopeGetRaDec(ra,dec,ok);
+     end;
+ end
+else if sc.cfgsc.EncoderTelescope then begin
+     Connect1.checked:=Fpop_encoder.ScopeConnected;
+     if Connect1.checked then begin
+      Fpop_encoder.ScopeGetEqSys(sc.cfgsc.TelescopeJD);
+      if sc.cfgsc.TelescopeJD<>0 then sc.cfgsc.TelescopeJD:=jd(trunc(sc.cfgsc.TelescopeJD),0,0,0);
+      Fpop_encoder.ScopeGetRaDec(ra,dec,ok);
+     end;
+end;
+
+result:=artostr3(ra)+blank+detostr3(dec);
+
+end;
+
+
+
+function Tf_chart.cmd_ConnectINDI:string;
+var ok:boolean;
+begin
+if Fpop_indi=nil then begin
+  Fpop_indi:=Tpop_indi.Create(self);
+  Fpop_indi.csc:=sc.cfgsc;
+  Fpop_indi.SetLang;
+end;
+
+  Fpop_indi.ScopeReadConfig(ExtractFilePath(Configfile));
+  Fpop_indi.ScopeSetObs(sc.cfgsc.ObsLatitude,sc.cfgsc.ObsLongitude);
+  TelescopeTimer.Interval:=2000;
+  TelescopeTimer.Enabled:=true;
+
+  Fpop_indi.ScopeConnect(ok);
+  Connect1.Checked:=true;
+
+result:=msgOK;
+
+end;
+
+
+
+function Tf_chart.cmd_DisconnectINDI:string;
+var ok:boolean;
+begin
+
+Fpop_indi.ScopeDisconnect(ok);
+Connect1.Checked:=false;
+
+result:=msgOK;
+
+end;
+
+
+function Tf_chart.cmd_SlewINDI(RA1,DE1:string):string;
+var ra,dec:double;
+    ok:boolean;
+begin
+
+ra:=StrToFloatDef(RA1,9999);
+dec:=StrToFloatDef(DE1,9999);
+
+if (ra>=0)and(ra<=24)and(abs(dec)<=90) then begin
+ ra:=ra*15*deg2rad;
+ dec:=dec*deg2rad;
+
+ if sc.cfgsc.TelescopeJD=0 then begin
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
+ end else begin
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+ end;
+ ra:=rmod(ra+pi2,pi2);
+ Fpop_indi.ScopeGoto(ra*rad2deg/15,dec*rad2deg,ok);
+
+ result:=msgOK;
+end
+else result:=msgFailed+' out of range';
+end;
+
+function Tf_chart.cmd_AbortSlewINDI:string;
+begin
+Fpop_indi.ScopeAbortSlew;
+result:=msgOK;
+end;
+
+
+function Tf_chart.cmd_SyncINDI(RA2,DE2:string):string;
+var ra,dec:double;
+begin
+
+ra:=StrToFloatDef(RA2,9999);
+dec:=StrToFloatDef(DE2,9999);
+
+if (ra>=0)and(ra<=24)and(abs(dec)<=90) then begin
+ ra:=ra*15*deg2rad;
+ dec:=dec*deg2rad;
+
+ if sc.cfgsc.TelescopeJD=0 then begin
+   precession(sc.cfgsc.JDChart,sc.cfgsc.CurJDUT,ra,dec);
+ end else begin
+   if sc.cfgsc.ApparentPos then mean_equatorial(ra,dec,sc.cfgsc,true,sc.cfgsc.FindType<ftPla);
+   precession(sc.cfgsc.JDChart,sc.cfgsc.TelescopeJD,ra,dec);
+ end;
+ ra:=rmod(ra+pi2,pi2);
+ Fpop_indi.ScopeAlign('sync',ra*rad2deg/15,dec*rad2deg);
+
+ result:=msgOK;
+end
+else result:=msgFailed+' out of range';
+end;
+
 function Tf_chart.cmd_SetObs(obs:string):string;
 var n,buf : string;
     p,tz : integer;
@@ -3689,6 +3852,13 @@ case n of
  94 : result:= cmd_ShowCircle(arg[1]);
  95 : result:= cmd_ShowRectangle(arg[1]);
  96 : result:= cmd_MarkCenter(arg[1]);
+ 97 : result:= cmd_GetScopeRaDec;
+ 98 : result:= cmd_ConnectINDI;
+ 99 : result:= cmd_DisconnectINDI;
+ 100 : result:= cmd_SlewINDI(arg[1],arg[2]);
+ 101 : result:= cmd_AbortSlewINDI;
+ 102 : result:= cmd_SyncINDI(arg[1],arg[2]);
+ 103 : result:= cmd_TrackTelescope(arg[1]);
 else result:=msgFailed+' Bad command name';
 end;
 end;

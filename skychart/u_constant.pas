@@ -1165,7 +1165,7 @@ const
     );
 
   // Chart Commands
-  numcmd = 96;
+  numcmd = 103;
   cmdlist: array[1..numcmd, 1..3] of string = (
     ('ZOOM+', '1', ''),
     ('ZOOM-', '2', ''),
@@ -1264,7 +1264,14 @@ const
     ('SETRECTANGLE', '93', 'num width height rotation offset'),
     ('SHOWCIRCLE', '94', 'num_list'),
     ('SHOWRECTANGLE', '95', 'num_list'),
-    ('MARKCENTER', '96', 'ON/OFF')
+    ('MARKCENTER', '96', 'ON/OFF'),
+    ('GETSCOPERADEC', '97', ''),
+    ('CONNECTINDI', '98', ''),
+    ('DISCONNECTINDI', '99', ''),
+    ('SLEWINDI', '100', 'RAhr in decimal and Dec in decimal'),
+    ('ABORTSLEWINDI', '101', ''),
+    ('SYNCINDI', '102', 'RAhr in decimal and Dec in decimal'),
+    ('TRACKTELESCOPE','103','ON/OFF')
     );
 
 // INDI Telescope driver
