@@ -652,7 +652,6 @@ type
     procedure WindowTileVertical1Execute(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure MaximizeExecute(Sender: TObject);
     procedure TelescopePanelExecute(Sender: TObject);
     procedure ToolButtonNightVisionClick(Sender: TObject);
@@ -1882,8 +1881,6 @@ isWOW64:=false;
     if FileExists(Win98DefaultBrowser) then HTMLBrowserHelpViewer1.BrowserPath:=Win98DefaultBrowser;
   end;
   SaveDialog.Options:=SaveDialog.Options-[ofNoReadOnlyReturn]; { TODO : check readonly test on Windows }
-  OnKeyDown:=nil;  { TODO : Strange behavior of OnKeyDown on Windows with Lazarus 1.0}
-  OnKeyUp:=FormKeyDown;
 {$endif}
 CanShowScrollbar:=true;
 {$ifdef unix}
@@ -6582,7 +6579,7 @@ end;
 procedure Tf_main.quicksearchClick(Sender: TObject);
 var key:word;
 begin
- key:=key_cr;
+ key:=VK_RETURN;
  quicksearchKeyDown(Sender,key,[]);
 end;
 
@@ -6591,7 +6588,7 @@ var ok : Boolean;
     num : string;
     i : integer;
 begin
-if key<>key_cr then exit;  // wait press Enter
+if key<>VK_RETURN then exit;  // wait press Enter
 Num:=trim(quicksearch.text);
 ok:=GenericSearch('',num);
 if ok then begin
@@ -7822,20 +7819,10 @@ end;
 
 procedure Tf_main.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-if (Activecontrol=quicksearch) or
-   (Activecontrol=EditTimeVal) or
-   (Activecontrol=TimeVal) or
-   (Activecontrol=TimeU) then exit
-else
-   (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
-end;
-
-procedure Tf_main.FormKeyPress(Sender: TObject; var Key: Char);
-begin
 if cfgm.KioskMode then begin
-  if ord(key)=key_cr then kioskpwd:=''
-     else kioskpwd:=kioskpwd+key;
-  if kioskpwd=cfgm.KioskPass then begin
+  if key=VK_RETURN then kioskpwd:=''
+     else kioskpwd:=kioskpwd+chr(key);
+  if uppercase(kioskpwd)=uppercase(cfgm.KioskPass) then begin
     Close;
     Exit;
   end;
@@ -7845,7 +7832,7 @@ if (Activecontrol=quicksearch) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit
 else
-   (MultiFrame1.ActiveObject as Tf_chart).CKeyPress(Key);
+   (MultiFrame1.ActiveObject as Tf_chart).CKeyDown(Key,Shift);
 end;
 
 procedure Tf_main.SetChildFocus(Sender: TObject);

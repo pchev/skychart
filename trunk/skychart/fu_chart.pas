@@ -32,7 +32,7 @@ interface
 uses
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit,
-     u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs,
+     u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
      
@@ -259,7 +259,6 @@ type
     function  ListXY(X, Y: Integer):boolean;
     procedure rotation(rot:double);
     procedure GetSunImage;
-    procedure CKeyPress(Key: Char);
     procedure CKeyDown(Key: Word; Shift: TShiftState);
     function cmd_SetCursorPosition(x,y:integer):string;
     function cmd_SetGridEQ(onoff:string):string;
@@ -432,6 +431,7 @@ inherited Create(TheOwner);
  Image1.OnMouseWheel:=Image1MouseWheel;
  Image1.OnPaint:=Image1Paint;
  Image1.PopupMenu:=PopupMenu1;
+ Image1.TabStop:=true;
  sc:=Tskychart.Create(Image1);
  sc.Image:=Image1.Canvas;
  // set initial value
@@ -1555,10 +1555,13 @@ if VerboseMsg then
 end;
 
 procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
+var ckey : char;
+    buf: string;
 begin
 if LockKeyboard then exit;
 try
 LockKeyboard:=true;
+// zoom and move acceleration
 movefactor:=6;
 zoomfactor:=2;
 if Shift = [ssShift] then begin
@@ -1569,16 +1572,92 @@ if Shift = [ssCtrl] then begin
    movefactor:=4;
    zoomfactor:=3;
 end;
+// numeric pad
+if (key>=VK_NUMPAD0)and(key<=VK_NUMPAD9) then key:=key-(VK_NUMPAD0-VK_0);
+// special keys handling
 case key of
-key_upright   : MoveNorthWest.execute;
-key_downright : MoveSouthWest.execute;
-key_downleft  : MoveSouthEast.execute;
-key_upleft    : MoveNorthEast.execute;
-key_left      : if (movecam or moveguide) then MoveCamera(5) else MoveEast.execute;
-key_up        : MoveNorth.execute;
-key_right     : if (movecam or moveguide) then MoveCamera(-5) else MoveWest.execute;
-key_down      : MoveSouth.execute;
-key_del       : Cleanupmap1Click(nil);
+VK_PRIOR      : begin sc.cfgsc.Quick:=true; MoveNorthWest.execute;RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_NEXT       : begin sc.cfgsc.Quick:=true; MoveSouthWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_END        : begin sc.cfgsc.Quick:=true; MoveSouthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_HOME       : begin sc.cfgsc.Quick:=true; MoveNorthEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_LEFT       : if (movecam or moveguide) then MoveCamera(5) else begin sc.cfgsc.Quick:=true; MoveEast.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_UP         : begin sc.cfgsc.Quick:=true; MoveNorth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_RIGHT      : if (movecam or moveguide) then MoveCamera(-5) else begin sc.cfgsc.Quick:=true; MoveWest.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_DOWN       : begin sc.cfgsc.Quick:=true; MoveSouth.execute; RefreshTimer.enabled:=false;RefreshTimer.enabled:=true;end;
+VK_DELETE     : Cleanupmap1Click(nil);
+VK_ADD,VK_OEM_PLUS        : Zoomplus.execute;
+VK_SUBTRACT,VK_OEM_MINUS  : Zoomminus.execute;
+else begin
+  ckey:=chr(key);
+  if (Shift=[ssCtrl])and (key<>17) then begin
+    // Ctrl + key handling
+    case ckey of
+     'Q' : if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
+            sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize+0.2;
+            Refresh;
+          end;
+     'A' : if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
+            sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize-0.2;
+            Refresh;
+          end;
+     'W' : if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
+            sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize+0.5;
+            Refresh;
+          end;
+     'S' : if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
+            sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize-0.5;
+            Refresh;
+          end;
+     'E' : if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
+            sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast+20;
+            Refresh;
+          end;
+     'D' : if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
+            sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast-20;
+            Refresh;
+          end;
+     'R' : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
+            sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation+20;
+            Refresh;
+          end;
+     'F' : if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
+            sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
+            Refresh;
+          end;
+    end;
+  end else begin
+    // Numeric keys handling
+    if shift=[] then begin
+    case ckey of
+     '1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
+     '2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
+     '3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
+     '4' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[3]);
+     '5' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[4]);
+     '6' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[5]);
+     '7' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[6]);
+     '8' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[7]);
+     '9' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[8]);
+     '0' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
+    end;
+    end;
+    // Alpha keys handling
+    if ssShift in Shift then buf:=UpperCase(ckey)
+       else buf:=LowerCase(ckey);
+    ckey:=buf[1];
+    case ckey of
+    'a' : SetZenit(deg2rad*200);
+    'e' : SetAz(deg2rad*270);
+    'n' : SetAz(deg2rad*180);
+    's' : SetAz(0);
+    'w' : SetAz(deg2rad*90);
+    'z' : SetZenit(0);
+    'C' : SetCameraRotation(1);
+    'G' : SetCameraRotation(2);
+    'S' : SetCameraRotation(0);
+    end;
+    end;
+  end;
 end;
 movefactor:=4;
 zoomfactor:=2;
@@ -3860,74 +3939,6 @@ case n of
  102 : result:= cmd_SyncINDI(arg[1],arg[2]);
  103 : result:= cmd_TrackTelescope(arg[1]);
 else result:=msgFailed+' Bad command name';
-end;
-end;
-
-procedure Tf_chart.CKeyPress(Key: Char);
-begin
-if lockkey then exit;
-if VerboseMsg then
- WriteTrace(caption+' FormKeyPress '+Key);
-lockkey:=true;
-try
-case key of
-#17 : if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
-       sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize+0.2;
-       Refresh;
-     end;
-#1 : if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
-       sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize-0.2;
-       Refresh;
-     end;
-#23 : if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
-       sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize+0.5;
-       Refresh;
-     end;
-#19 : if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
-       sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize-0.5;
-       Refresh;
-     end;
-#5  : if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
-       sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast+20;
-       Refresh;
-     end;
-#4  : if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
-       sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast-20;
-       Refresh;
-     end;
-#18 : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
-       sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation+20;
-       Refresh;
-     end;
-#6  : if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
-       sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
-       Refresh;
-     end;
-'+' : Zoomplus.execute;
-'-' : Zoomminus.execute;
-'1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
-'2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
-'3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
-'4' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[3]);
-'5' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[4]);
-'6' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[5]);
-'7' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[6]);
-'8' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[7]);
-'9' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[8]);
-'0' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
-'a' : SetZenit(deg2rad*200);
-'e' : SetAz(deg2rad*270);
-'n' : SetAz(deg2rad*180);
-'s' : SetAz(0);
-'w' : SetAz(deg2rad*90);
-'z' : SetZenit(0);
-'C' : SetCameraRotation(1);
-'G' : SetCameraRotation(2);
-'S' : SetCameraRotation(0);
-end;
-Application.ProcessMessages;
-finally
-lockkey:=false;
 end;
 end;
 

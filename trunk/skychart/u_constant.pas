@@ -335,18 +335,6 @@ const
   nebtype: array[1..18] of
     string = (' - ', ' ? ', ' Gx', ' OC', ' Gb', ' Pl', ' Nb', 'C+N', '  *', ' D*',
     '***', 'Ast', ' Kt', 'Gcl', 'Drk', 'Cat', 'Cat', 'Cat');
-  key_cr = 13;
-  key_plus = 107;
-  key_minus = 109;
-  key_left = 37;
-  key_right = 39;
-  key_up = 38;
-  key_down = 40;
-  key_upleft = 36;
-  key_upright = 33;
-  key_downleft = 35;
-  key_downright = 34;
-  key_del = 46;
 
   //Observatory database
   CdcMinLocid = '99999999';
