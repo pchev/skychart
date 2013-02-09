@@ -34,6 +34,7 @@ object f_chart: Tf_chart
       Min = -50
       PageSize = 10
       TabOrder = 0
+      TabStop = False
     end
     object HorScrollBar: TScrollBar
       Cursor = crArrow
@@ -47,6 +48,7 @@ object f_chart: Tf_chart
       Min = -50
       PageSize = 10
       TabOrder = 1
+      TabStop = False
     end
     object Identlabel: TImage
       Left = 105

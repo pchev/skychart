@@ -29,7 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses u_help, u_translation, u_constant, u_util,
-  SysUtils, Types, Classes, Controls, Forms, Printers, Graphics,
+  SysUtils, Types, Classes, Controls, Forms, Printers, Graphics, LCLType,
   Dialogs, StdCtrls, Grids, ComCtrls, ExtCtrls, Menus, StdActns, ActnList,
   LResources, Buttons, LazHelpHTML;
 
@@ -401,7 +401,7 @@ end;
 procedure Tf_info.Edit1KeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-if key=key_cr then Button3Click(sender);
+if key=VK_RETURN then Button3Click(sender);
 end;
 
 procedure Tf_info.Button6Click(Sender: TObject);

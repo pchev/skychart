@@ -4,7 +4,7 @@ unit pu_observatory_db;
 
 interface
 
-uses  u_help, u_unzip, u_translation, u_constant, u_util, cu_database,
+uses  u_help, u_unzip, u_translation, u_constant, u_util, cu_database, LCLType,
   downloaddialog, enhedits, Classes, SysUtils, FileUtil, LResources, Forms,
   Controls, Graphics, Dialogs, StdCtrls, ComCtrls;
 
@@ -381,7 +381,7 @@ end;
 procedure Tf_observatory_db.cityfilterKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
- if key=key_cr then citysearchClick(Sender);
+ if key=VK_RETURN then citysearchClick(Sender);
 end;
 
 procedure Tf_observatory_db.citylistChange(Sender: TObject);
