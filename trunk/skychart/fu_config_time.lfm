@@ -24,11 +24,11 @@ object f_config_time: Tf_config_time
       Height = 530
       Top = 0
       Width = 500
-      ActivePage = Page1
+      ActivePage = Page3
       Align = alClient
       Anchors = [akLeft, akRight, akBottom]
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 2
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Time'
@@ -815,13 +815,13 @@ object f_config_time: Tf_config_time
         ClientHeight = 526
         ClientWidth = 496
         object GroupBox1: TGroupBox
-          Left = 22
+          Left = 6
           Height = 80
           Top = 14
-          Width = 441
+          Width = 457
           Caption = 'Real time options'
           ClientHeight = 63
-          ClientWidth = 437
+          ClientWidth = 453
           TabOrder = 0
           object Label2: TLabel
             Left = 3
@@ -846,16 +846,16 @@ object f_config_time: Tf_config_time
           end
         end
         object GroupBox2: TGroupBox
-          Left = 22
+          Left = 6
           Height = 376
           Top = 102
-          Width = 441
+          Width = 457
           Caption = 'Recording options'
           ClientHeight = 359
-          ClientWidth = 437
+          ClientWidth = 453
           TabOrder = 1
           object DirectoryEdit1: TDirectoryEdit
-            Left = 174
+            Left = 190
             Height = 23
             Top = 60
             Width = 235
@@ -883,7 +883,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object Edit1: TEdit
-            Left = 174
+            Left = 190
             Height = 23
             Top = 106
             Width = 113
@@ -907,7 +907,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object Edit2: TEdit
-            Left = 174
+            Left = 190
             Height = 23
             Top = 252
             Width = 235
@@ -923,7 +923,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object Edit3: TEdit
-            Left = 294
+            Left = 310
             Height = 23
             Top = 216
             Width = 50
@@ -931,7 +931,7 @@ object f_config_time: Tf_config_time
             TabOrder = 3
           end
           object Label8: TLabel
-            Left = 348
+            Left = 364
             Height = 16
             Top = 221
             Width = 7
@@ -939,7 +939,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object Edit4: TEdit
-            Left = 360
+            Left = 376
             Height = 23
             Top = 216
             Width = 49
@@ -947,7 +947,7 @@ object f_config_time: Tf_config_time
             TabOrder = 4
           end
           object ComboBox1: TComboBox
-            Left = 174
+            Left = 190
             Height = 23
             Top = 216
             Width = 113
@@ -983,7 +983,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object Edit5: TEdit
-            Left = 174
+            Left = 190
             Height = 23
             Top = 140
             Width = 113
@@ -991,7 +991,7 @@ object f_config_time: Tf_config_time
             TabOrder = 7
           end
           object Button9: TButton
-            Left = 174
+            Left = 190
             Height = 25
             Top = 322
             Width = 85
@@ -1008,7 +1008,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object FileNameEdit1: TFileNameEdit
-            Left = 174
+            Left = 190
             Height = 23
             Top = 290
             Width = 235
@@ -1023,7 +1023,7 @@ object f_config_time: Tf_config_time
             OnChange = FileNameEdit1Change
           end
           object UpDown3: TUpDown
-            Left = 222
+            Left = 238
             Height = 23
             Top = 178
             Width = 17
@@ -1036,7 +1036,7 @@ object f_config_time: Tf_config_time
             OnClick = UpDown3Click
           end
           object fpsedit: TLongEdit
-            Left = 174
+            Left = 190
             Height = 23
             Hint = '1..60'
             Top = 178
