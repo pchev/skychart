@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-27 11:54+0000\n"
-"PO-Revision-Date: 2013-01-25 11:12+0000\n"
+"PO-Revision-Date: 2013-02-02 21:51+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-01-27 12:01+0000\n"
-"X-Generator: Launchpad (build 16451)\n"
+"X-Launchpad-Export-Date: 2013-02-10 19:39+0000\n"
+"X-Generator: Launchpad (build 16482)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -3943,7 +3943,7 @@ msgstr "Verminder detail bij verschuiven van de kaart"
 
 #: u_translation.rsreference
 msgid "Reference"
-msgstr "Verwijzing"
+msgstr "Referentie"
 
 #: u_translation.rsreflectionne
 msgid "Reflection nebula"
@@ -5367,7 +5367,7 @@ msgstr "Waarschuwing! Berekening van"
 
 #: u_translation.rswarninglowre
 msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
-msgstr ""
+msgstr "Let op! Lage resolutie modus. Gebruik in plaats hiervan PostScript en druk het resulterende bestand af."
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
