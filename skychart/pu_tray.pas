@@ -157,6 +157,7 @@ iconinfo:=4;
 f_clock.cfgsc:=Tconf_skychart.Create;
 f_clock.planet:=TPlanet.Create(self);
 f_clock.planet.SetDE(slash(appdir)+slash('data')+'jpleph');
+f_clock.Font.Color:=clRed;
 inif:=TMeminifile.create(configfile);
 try
 with inif do begin
@@ -182,6 +183,7 @@ f_clock.cfgsc.ObsCountry := ReadString(section,'ObsCountry','' );
 f_clock.cfgsc.ObsTZ := ReadString(section,'ObsTZ','Etc/GMT' );
 f_clock.cfgsc.countrytz := ReadBool(section,'countrytz',false);
 section:='main';
+f_clock.Font.Color:=ReadInteger(section,'ClockColor',f_clock.Font.Color);
 DBtype:=TDBtype(ReadInteger(section,'dbtype',1));
 dbhost:=ReadString(section,'dbhost','localhost');
 dbport:=ReadInteger(section,'dbport',3306);
@@ -226,6 +228,8 @@ WriteInteger(section,'clockposx',clockposx);
 WriteInteger(section,'clockposy',clockposy);
 WriteInteger(section,'calposx',calposx);
 WriteInteger(section,'calposy',calposy);
+section:='main';
+if f_clock<>nil then WriteInteger(section,'ClockColor',f_clock.Font.Color);
 UpdateFile;
 end;
 finally

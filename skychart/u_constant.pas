@@ -915,6 +915,7 @@ type
     CometUrlList, AsteroidUrlList: TStringList;
     ObsNameList: TStringList;
     SesameUrlNum, SesameCatNum: integer;
+    ClockColor: TColor;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2173,6 +2174,7 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: integer;
 begin
+  ClockColor := Source.ClockColor;
   SesameUrlNum := Source.SesameUrlNum;
   SesameCatNum := Source.SesameCatNum;
   prtname := Source.prtname;
