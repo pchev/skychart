@@ -46,7 +46,7 @@ const
   cdcver = '3.7g';
   cdccpy = 'Copyright (C) 2002-2012 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
-    'Peter Dean,' + crlf + 'John Sunderland';
+    'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
   MaxPlSim = 500;
   MaxAstSim = 100;
   MaxComet = 500;
