@@ -6,7 +6,7 @@ interface
 
 uses  u_constant, u_util, u_translation, u_projection, cu_planet,
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs,
-  ExtCtrls, StdCtrls;
+  ExtCtrls, StdCtrls, ColorBox;
 
 type
 
@@ -18,6 +18,7 @@ type
     clock4: TLabel;
     clock5: TLabel;
     clock6: TLabel;
+    ColorBox1: TColorBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -25,7 +26,9 @@ type
     clock1: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    Panel1: TPanel;
     Timer1: TTimer;
+    procedure ColorBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDblClick(Sender: TObject);
     procedure FormHide(Sender: TObject);
@@ -35,6 +38,8 @@ type
     procedure FormMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
+    procedure Panel1MouseEnter(Sender: TObject);
+    procedure Panel1MouseLeave(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
   private
     { private declarations }
@@ -95,6 +100,12 @@ begin
   SetLang;
 end;
 
+procedure Tf_clock.ColorBox1Change(Sender: TObject);
+begin
+  Font.Color:=ColorBox1.Selected;
+  ColorBox1.Visible:=false;
+end;
+
 procedure Tf_clock.FormDblClick(Sender: TObject);
 begin
  moving:=false;
@@ -136,8 +147,19 @@ end;
 
 procedure Tf_clock.FormShow(Sender: TObject);
 begin
+  ColorBox1.Selected:=Font.Color;
   UpdateClock;
   Timer1.Enabled:=true;
+end;
+
+procedure Tf_clock.Panel1MouseEnter(Sender: TObject);
+begin
+  ColorBox1.Visible:=true;
+end;
+
+procedure Tf_clock.Panel1MouseLeave(Sender: TObject);
+begin
+  ColorBox1.Visible:=false;
 end;
 
 procedure Tf_clock.FormHide(Sender: TObject);
