@@ -296,8 +296,6 @@ type
     LessStar: TAction;
     MoreNeb: TAction;
     LessNeb: TAction;
-//    DdeData: TDdeServerItem;
-//    DdeSkyChart: TDdeServerConv;
     ToolBar4: TToolBar;
     ToolButtonShowStars: TToolButton;
     ToolButtonShowNebulae: TToolButton;
@@ -604,9 +602,6 @@ type
     procedure LessStarExecute(Sender: TObject);
     procedure MoreNebExecute(Sender: TObject);
     procedure MoreStarExecute(Sender: TObject);
-{    procedure DdeDataPokeData(Sender: TObject);
-    procedure DdeSkyChartClose(Sender: TObject);
-    procedure DdeSkyChartOpen(Sender: TObject); }
     procedure ShowStarsExecute(Sender: TObject);
     procedure ShowNebulaeExecute(Sender: TObject);
     procedure ShowPicturesExecute(Sender: TObject);
@@ -741,10 +736,6 @@ type
     cdcdb: TCDCdb;
     serverinfo,topmsg : string;
     TCPDaemon: TTCPDaemon;
-    DdeInfo : TstringList;
-    Dde_active_chart : string;
-    DdeOpen : boolean;
-    DdeEnqueue: boolean;
     CanShowScrollbar: boolean;
     Config_Version : string;
     showsplash: boolean;
@@ -7021,22 +7012,6 @@ for i:=1 to Maxwindow do
     and(TCPDaemon.TCPThrd[i].sock<>nil)
     and(not TCPDaemon.TCPThrd[i].terminated)
     then TCPDaemon.TCPThrd[i].SendData('>'+tab+origin+' :'+tab+str);
-{$ifdef mswindows}
-{if DDEopen then begin
-   DdeInfo[0]:=formatdatetime('c',now);
-   DdeInfo[2]:='> '+origin+' : '+str;
-   if sender is Tf_Chart then with sender as Tf_Chart do begin
-      DdeInfo[1]:='RA:'+arptostr(rad2deg*sc.cfgsc.racentre/15)+' DEC:'+deptostr(rad2deg*sc.cfgsc.decentre)+' FOV:'+detostr(rad2deg*sc.cfgsc.fov);
-      DdeInfo[3]:=Date2Str(sc.cfgsc.CurYear,sc.cfgsc.curmonth,sc.cfgsc.curday)+'T'+TimtoStr(sc.cfgsc.Curtime);
-      DdeInfo[4]:='LAT:'+detostr3(sc.cfgsc.ObsLatitude)+' LON:'+detostr3(sc.cfgsc.ObsLongitude)+' ALT:'+floattostr(sc.cfgsc.ObsAltitude)+'m OBS:'+sc.cfgsc.ObsName;
-   end else begin
-      DdeInfo[1]:='';
-      DdeInfo[3]:='';
-      DdeInfo[4]:='';
-   end;
-   DdeData.Lines:=DdeInfo;
-end; }
-{$endif}
 end;
 
 procedure Tf_main.StartServer;
@@ -8031,46 +8006,6 @@ begin
   def_cfgsc.tz.JD:=jd0;
   ht:=rmod(astroe+def_cfgsc.tz.SecondsOffset/3600+24,24);
 end;
-
-// DDE server, windows only
-//todo: any DDE for Lazarus? if not create a separate app that relay to tcp/ip
-{procedure Tf_main.DdeDataPokeData(Sender: TObject);
-var cmd : Tstringlist;
-    cmdresult:string;
-    i: integer;
-begin
-while DDEenqueue do application.processmessages;
-try
-DdeEnqueue:=true;
-cmd:=TStringlist.create;
-splitarg(DdeData.text,blank,cmd);
-for i:=cmd.count to MaxCmdArg do cmd.add('');
-cmdresult:=ExecuteCmd(Dde_active_chart,cmd);
-if (cmdresult=msgOK)and(uppercase(cmd[0])='SELECTCHART') then Dde_active_chart:=cmd[1];
-if (cmdresult=msgOK) then DdeInfo[0]:=formatdatetime('c',now)+' ACK'
-                     else DdeInfo[0]:=formatdatetime('c',now)+' NAK';
-DdeInfo[2]:=cmdresult;
-DdeInfo[1]:='';
-DdeInfo[3]:='';
-DdeInfo[4]:='';
-DdeData.Lines:=DdeInfo;
-finally
-DdeEnqueue:=false;
-cmd.Free;
-end;
-end;
-
-procedure Tf_main.DdeSkyChartOpen(Sender: TObject);
-begin
-Dde_active_chart:='Chart_1';
-if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveChild do Dde_active_chart:=caption;
-DDeOpen:=true;
-end;
-
-procedure Tf_main.DdeSkyChartClose(Sender: TObject);
-begin
-DDeOpen:=false;
-end; }
 
 // one time use function to extract all text to translate from component object
 //uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,
