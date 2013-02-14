@@ -381,7 +381,7 @@ UTlabel.Caption:=date2str(y,m,d)+blank+timtostr(h)+blank+rsUT;
 h:=csc.tz.SecondsOffset/3600;
 if h=0 then s:=''
 else if h>0 then s:='+' else s:='-';
-tzlabel.caption:=TzGMT2UTC(csc.tz.ZoneName)+blank+s+timtostr(abs(h));
+tzlabel.caption:=TzGMT2UTC(csc.tz.ZoneName)+blank+'('+rsUT+s+timtostr(abs(h))+')';
 end;
 
 procedure Tf_config_time.ShowTime;
