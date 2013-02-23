@@ -2593,6 +2593,7 @@ begin
       end;
   end;
   AnimationTimer.Enabled:=true;
+  Application.ProcessMessages;
 end;
 
 procedure Tf_main.TimeIncExecute(Sender: TObject);
