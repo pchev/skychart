@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-27 11:54+0000\n"
-"PO-Revision-Date: 2013-01-29 05:49+0000\n"
+"PO-Revision-Date: 2013-02-11 02:57+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-10 19:39+0000\n"
-"X-Generator: Launchpad (build 16482)\n"
+"X-Launchpad-Export-Date: 2013-02-24 20:09+0000\n"
+"X-Generator: Launchpad (build 16506)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1950,7 +1950,7 @@ msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
-msgstr "FOV"
+msgstr "ขอบเขตการมองเห็น"
 
 #: u_translation.rsfov2
 msgid "FOV:"
@@ -2170,7 +2170,7 @@ msgstr "ซ่อนชื่อ"
 
 #: u_translation.rshideobjectwi
 msgid "Hide objects wider than"
-msgstr "ซ่อนวัตถุที่มีขนาดใหญ่กว่า"
+msgstr "ซ่อนวัตถุที่ใหญ่กว่า"
 
 #: u_translation.rshigh
 msgid "High"
@@ -3830,7 +3830,7 @@ msgstr "ลบข้อมูลทั้งหมดที่เกี่ยว
 
 #: u_translation.rsquickstartgu
 msgid "Quick start guide"
-msgstr ""
+msgstr "คำแนะนำในการเริ่มต้น"
 
 #: u_translation.rsra
 msgid "RA"
@@ -5210,7 +5210,7 @@ msgstr "ใช้ค่า TT-UT อื่น"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr ""
+msgstr "ใช้กลุ่มสีที่กำหนดไว้"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
