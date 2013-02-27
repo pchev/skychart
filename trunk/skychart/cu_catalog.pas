@@ -298,12 +298,18 @@ case curcat of
    bsc     : result:=GetBSC(rec);
 end;
 if (not result) and ((curcat-BaseStar)<numcat) then begin
+repeat
   CloseStarCat;
   inc(curcat);
   while ((curcat-BaseStar)<=numcat)and(not cfgcat.starcaton[curcat-BaseStar]) do inc(curcat);
-  if ((curcat-BaseStar)>numcat) then result:=false
-     else result:=OpenStarCat;
-  if result then result:=ReadStar(rec);
+  result:=false;
+  if ((curcat-BaseStar)>numcat) then break
+  else begin
+     result:=OpenStarCat;
+     if result then result:=ReadStar(rec)
+     else  cfgcat.starcaton[curcat-BaseStar]:=false;
+  end;
+until result;
 end;
 end;
 
@@ -409,12 +415,18 @@ case curcat of
              end;
 end;
 if (not result) and ((curcat-BaseVar)<numcat) then begin
+repeat
   CloseVarStarCat;
   inc(curcat);
   while ((curcat-BaseVar)<=numcat)and(not cfgcat.varstarcaton[curcat-BaseVar]) do inc(curcat);
-  if ((curcat-BaseVar)>numcat) then result:=false
-     else result:=OpenVarStarCat;
-  if result then result:=ReadVarStar(rec);
+  result:=false;
+  if ((curcat-BaseVar)>numcat) then break
+  else begin
+     result:=OpenVarStarCat;
+     if result then result:=ReadVarStar(rec)
+     else cfgcat.varstarcaton[curcat-BaseVar]:=false;
+  end;
+until result;
 end;
 end;
 
@@ -480,12 +492,18 @@ case curcat of
              end;
 end;
 if (not result) and ((curcat-BaseDbl)<numcat) then begin
+repeat
   CloseDblStarCat;
   inc(curcat);
   while ((curcat-BaseDbl)<=numcat)and(not cfgcat.dblstarcaton[curcat-BaseDbl]) do inc(curcat);
-  if ((curcat-BaseDbl)>numcat) then result:=false
-     else result:=OpendblStarCat;
-  if result then result:=ReadDblStar(rec);
+  result:=false;
+  if ((curcat-BaseDbl)>numcat) then break
+  else begin
+     result:=OpendblStarCat;
+     if result then result:=ReadDblStar(rec)
+     else cfgcat.dblstarcaton[curcat-BaseDbl]:=false;
+  end;
+until result;
 end;
 end;
 
@@ -564,12 +582,18 @@ case curcat of
              end;
 end;
 if (not result) and ((curcat-BaseNeb)<numcat) then begin
+repeat
   CloseNebCat;
   inc(curcat);
   while ((curcat-BaseNeb)<=numcat)and(not cfgcat.nebcaton[curcat-BaseNeb]) do inc(curcat);
-  if ((curcat-BaseNeb)>numcat) then result:=false
-     else result:=OpenNebCat;
-  if result then result:=ReadNeb(rec);
+  result:=false;
+  if ((curcat-BaseNeb)>numcat) then break
+  else begin
+    result:=OpenNebCat;
+    if result then result:=ReadNeb(rec)
+    else  cfgcat.nebcaton[curcat-BaseNeb]:=false;
+  end;
+until result;
 end;
 end;
 
