@@ -1,6 +1,8 @@
 program u4conv;
 
-{$APPTYPE CONSOLE}
+{$IFDEF MSWINDOWS}
+  {$APPTYPE CONSOLE}
+{$ENDIF}
 {$mode objfpc}{$H+}
 
 //{$define debug}
@@ -11,6 +13,7 @@ uses
   {$endif}
   SysUtils;
 
+// u4b binary format
 type Tu4rec = packed record
             ra,spd : integer;
             magm,maga: smallint;
@@ -30,6 +33,7 @@ type Tu4rec = packed record
             rnz : integer;
      end;
 
+// Data from u4i/u4hpm.dat
 const dimc = 53;
       dimhpm=25;
       hpmdata: array [1..dimhpm] of string = (
@@ -60,27 +64,37 @@ const dimc = 53;
 '113038183 494  48937   10990  -51230  442763714  355581607 12513');
 
 
-var cddir, outdir, fnbase, fnzone, fnout,buf : string;
-    zn,n,i,pid,l : integer;
-    fork: boolean;
+var cddir, outdir, outdirstrk, fnbase, fnbasestrk, fnzone, fnout, fnoutstrk, buf : string;
+    zn,n,i,l,badcount,badmag1,badmag2,hpmcount : integer;
+//    fork: boolean;
+//    pid: integer;
     u4rec : Tu4rec;
     fu4 : file of Tu4rec;
-    ftxt: textfile;
+    ftxt,fs, fstrk: textfile;
     bv,b,v : integer;
     flag: smallint;
 //  flag:
 //    0 OK
 //    1 double (ucac4 combined double star flag is non zero)
-//    2 streak, magnitude set to 99 (ucac4 object type flag = 2 and no magnitude from 2mass or apass)
+//    2 streak, the star is put on a separate directory
 //    4 non apass V or ucac magnitude
 //    8 dso match ( ucac4 gc flag >= 5 or leda>0 or x2m>0)
     dv : array[1..dimc] of integer;
     hpm : array[1..dimhpm,1..3] of integer;
+    streaklist : array [0..100000] of integer;
+    streaknum,streakpos : integer;
+    isstreak: Boolean;
 
 Function Slash(nom : string) : string;
 begin
 result:=trim(nom);
 if (nom<>'')and(copy(result,length(nom),1)<>PathDelim) then result:=result+PathDelim;
+end;
+
+Function NoSlash(nom : string) : string;
+begin
+result:=trim(nom);
+if copy(result,length(nom),1)=PathDelim then result:=copy(result,1,length(nom)-1);
 end;
 
 procedure ShowHelp;
@@ -93,13 +107,15 @@ begin
      writeln('the resolution of high proper motion, the addition of a single');
      writeln('combined flag, the best available magnitude for the chart,');
      writeln('B-V indice and the star name UCAC4-zzz-nnnnnn.');
+     writeln('If the file streaklist.txt is present the streak stars are removed and put');
+     writeln('on a separate directory.');
      writeln(' ');
      writeln('Syntax :');
-     writeln('    u4conv [--cddir /path/to/cdrom] [--outdir /path/to/textfiles] [--nofork]');
+     writeln('    u4conv [--cddir /path/to/cdrom] [--outdir /path/to/textfiles]');
      writeln('Options :');
      writeln('  --cddir    : Read binary files from path /path/to/cdrom');
      writeln('  --outdir   : Write ASCII files to /path/to/textfiles');
-     writeln('  --nofork   : Use only one process (Unix only)');
+//     writeln('  --nofork   : Use only one process (Unix only)');
      writeln(' ');
      Halt(1);
 end;
@@ -129,10 +145,23 @@ begin
 
 END; //  ! subr. <sigpmrecov>
 
+// exclude stars from streaklist.txt
+function findstreak(zn,n: integer):boolean;
+var num: integer;
+begin
+ result:=false;
+ if streakpos>streaknum then exit;
+ num:=zn*1000000+n;
+ if streaklist[streakpos]=num then begin
+   result:=true;
+   inc(streakpos);
+ end;
+end;
+
 begin
 cddir:='';
 outdir:='cdc';
-fork:=true;
+//fork:=true;
 i:=1;
 if Paramcount<1 then ShowHelp;
 while i <= Paramcount do begin
@@ -144,38 +173,67 @@ while i <= Paramcount do begin
      inc(i);
      outdir:=ParamStr(i);
   end
-  else if ParamStr(i)='--nofork' then begin
-     fork:=false;
-  end
+//  else if ParamStr(i)='--nofork' then begin
+//     fork:=false;
+//  end
   else begin
      ShowHelp;
   end;
   inc(i);
 end;
 
+outdirstrk:=trim(noslash(outdir))+'_streak';
 if not DirectoryExists(outdir) then ForceDirectories(outdir);
+if not DirectoryExists(outdirstrk) then ForceDirectories(outdirstrk);
 fnbase:=slash(outdir)+'4uc';
-pid:=0;
+fnbasestrk:=slash(outdirstrk)+'4uc';
+//pid:=0;
 i:=1;
 zn:=0;
+// high proper motion
 for l:=1 to dimhpm do begin
   buf:=hpmdata[l];
   hpm[l,1]:=strtoint(trim(copy(buf,1,9)));
   hpm[l,2]:=strtoint(trim(copy(buf,23,6)));
   hpm[l,3]:=strtoint(trim(copy(buf,31,6)));
 end;
+// streak
+streaknum:=0;
+streakpos:=1;
+if FileExists('streaklist.txt') then begin
+   AssignFile(fs,'streaklist.txt');
+   Reset(fs);
+   repeat
+     ReadLn(fs,buf);
+     if (trim(buf)>'') then begin
+       if (buf[1]='#') then writeln(buf) 
+       else begin
+         inc(streaknum);
+         streaklist[streaknum]:=StrToInt(copy(buf,1,3))*1000000+StrToInt(copy(buf,5,6));
+       end;
+     end;
+   until eof(fs);
+   CloseFile(fs);
+end;
 {$ifdef unix} {$ifndef debug}
+{ // fork not compatible with streak processing
 if fork then begin
   i:=2;
   pid := fpFork;
   if pid = 0 then zn:=-1
              else zn:=0;
-end;
+end;}
 {$endif} {$endif}
+badcount:=0;
+badmag1:=0;
+badmag2:=0;
+hpmcount:=0;
+// loop for all binary files
 repeat
  inc(zn,i);
  fnzone := Format('%s%3.3d', ['z',zn]);
  fnout := Format('%s%3.3d', [fnbase,zn]);
+ fnoutstrk := Format('%s%3.3d', [fnbasestrk,zn]);
  if fileexists(slash(cddir)+slash('u4b')+fnzone) then begin
    writeln('Convert '+fnzone);
    sleep(100);
@@ -184,7 +242,10 @@ repeat
    reset(fu4);
    assignfile(ftxt,fnout);
    rewrite(ftxt);
+   assignfile(fstrk,fnoutstrk);
+   rewrite(fstrk);
    n:=0;
+   // read all stars
    repeat
      inc(n);
      read(fu4,u4rec);
@@ -247,6 +308,7 @@ repeat
              if hpm[l,1]=u4rec.rnm then begin
                dv[15]:=hpm[l,2];
                dv[16]:=hpm[l,3];
+               inc(hpmcount);
                break;
              end;
            end;
@@ -254,14 +316,11 @@ repeat
 
         if u4rec.dsf>0 then flag:=flag+1;
 
-        if (u4rec.ojt=2)and(u4rec.apasm[1]=20000)and(u4rec.apasm[2]=20000)and(u4rec.jmag=20000)and(u4rec.hmag=20000) then begin
-          // Probable streak object, do not set the magnitude to avoid display on map.
-          v:=99000;
-          bv:=0;
-          flag:=flag+2;
-        end
-        else begin
-          // try to get the best B and V magn to plot the star
+        // search for streak
+        isstreak:=findstreak(zn,n);
+        if isstreak then flag:=flag+2;
+
+        // try to get the best B and V magn to plot the star
         b:=u4rec.apasm[1];  // APASS B
         v:=u4rec.apasm[2];  // APASS V
         if (b<20000) and (v<20000) then begin
@@ -276,6 +335,7 @@ repeat
                v:=u4rec.magm;  // UCAC fit model
                if v=20000 then begin
                  flag:=flag+4;
+                 badmag1:=badmag1+1;
                  v:=u4rec.apasm[3];  // APASS g
                  if v=20000 then begin
                    v:=u4rec.apasm[1];  // APASS B
@@ -284,6 +344,7 @@ repeat
                      if v=20000 then begin
                        v:=u4rec.apasm[5];  // APASS i
                        if v=20000 then begin
+                         badmag2:=badmag2+1;
                          v:=u4rec.jmag;  // 2MASS J
                          if v=20000 then begin
                            v:=u4rec.hmag;  // 2MASS H
@@ -300,37 +361,60 @@ repeat
              end;
            end;
            end;
-        end;
 
+        // is this "star" a DSO ?
         if (u4rec.gcflg>=5)or
            (u4rec.leda>0)or
            (u4rec.x2m>0)
            then flag:=flag+8;
 
-        { (2i10,2i6,i3,i2,
-          i3,2i4,3i3,2i6,
-          2i7,2i4,i11,3i6,6i3,
-          5i6,5i4,i2,9i2,
-          2i3,i10,i4,i7) }
-
-        writeln(ftxt,format('%10d|%9d|%5d|%5d|%2d|%1d|'+
-        '%2d|%3d|%3d|%2d|%2d|%2d|%5d|%5d|'+
-        '%6d|%6d|%3d|%3d|%10d|%5d|%5d|%5d|%2d|%2d|%2d|%2d|%2d|%2d|'+
-        '%5d|%5d|%5d|%5d|%5d|%3d|%3d|%3d|%3d|%3d|%2d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|'+
-        '%2d|%2d|%9d|%3d|%6d|'+
-        '%2d|%5d|%5d|UCAC4-%3.3d-%6.6d',
-        [ dv[1],dv[2],dv[3],dv[4],dv[5],dv[6],dv[7],dv[8],dv[9],
-          dv[10],dv[11],dv[12],dv[13],dv[14],dv[15],dv[16],dv[17],dv[18],dv[19],
-          dv[20],dv[21],dv[22],dv[23],dv[24],dv[25],dv[26],dv[27],dv[28],dv[29],
-          dv[30],dv[31],dv[32],dv[33],dv[34],dv[35],dv[36],dv[37],dv[38],dv[39],
-          dv[40],dv[41],dv[42],dv[43],dv[44],dv[45],dv[46],dv[47],dv[48],dv[49],
-          dv[50],dv[51],dv[52],dv[53],flag,v,bv,zn,n
-      ]));
+        // write output file
+        if isstreak then begin
+            // streak case
+            writeln(fstrk,format('%10d|%9d|%5d|%5d|%2d|%1d|'+
+            '%2d|%3d|%3d|%2d|%2d|%2d|%5d|%5d|'+
+            '%6d|%6d|%3d|%3d|%10d|%5d|%5d|%5d|%2d|%2d|%2d|%2d|%2d|%2d|'+
+            '%5d|%5d|%5d|%5d|%5d|%3d|%3d|%3d|%3d|%3d|%2d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|'+
+            '%2d|%2d|%9d|%3d|%6d|'+
+            '%2d|%5d|%5d|UCAC4-%3.3d-%6.6d',
+            [ dv[1],dv[2],dv[3],dv[4],dv[5],dv[6],dv[7],dv[8],dv[9],
+              dv[10],dv[11],dv[12],dv[13],dv[14],dv[15],dv[16],dv[17],dv[18],dv[19],
+              dv[20],dv[21],dv[22],dv[23],dv[24],dv[25],dv[26],dv[27],dv[28],dv[29],
+              dv[30],dv[31],dv[32],dv[33],dv[34],dv[35],dv[36],dv[37],dv[38],dv[39],
+              dv[40],dv[41],dv[42],dv[43],dv[44],dv[45],dv[46],dv[47],dv[48],dv[49],
+              dv[50],dv[51],dv[52],dv[53],flag,v,bv,zn,n
+            ]));
+            inc(badcount);
+        end else begin
+            // normal output
+            writeln(ftxt,format('%10d|%9d|%5d|%5d|%2d|%1d|'+
+            '%2d|%3d|%3d|%2d|%2d|%2d|%5d|%5d|'+
+            '%6d|%6d|%3d|%3d|%10d|%5d|%5d|%5d|%2d|%2d|%2d|%2d|%2d|%2d|'+
+            '%5d|%5d|%5d|%5d|%5d|%3d|%3d|%3d|%3d|%3d|%2d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|%1d|'+
+            '%2d|%2d|%9d|%3d|%6d|'+
+            '%2d|%5d|%5d|UCAC4-%3.3d-%6.6d',
+            [ dv[1],dv[2],dv[3],dv[4],dv[5],dv[6],dv[7],dv[8],dv[9],
+              dv[10],dv[11],dv[12],dv[13],dv[14],dv[15],dv[16],dv[17],dv[18],dv[19],
+              dv[20],dv[21],dv[22],dv[23],dv[24],dv[25],dv[26],dv[27],dv[28],dv[29],
+              dv[30],dv[31],dv[32],dv[33],dv[34],dv[35],dv[36],dv[37],dv[38],dv[39],
+              dv[40],dv[41],dv[42],dv[43],dv[44],dv[45],dv[46],dv[47],dv[48],dv[49],
+              dv[50],dv[51],dv[52],dv[53],flag,v,bv,zn,n
+            ]));
+        end;
    until eof(fu4);
+   // end of the zone file
    closefile(ftxt);
+   closefile(fstrk);
    closefile(fu4);
    writeln(fnzone+' stars: '+inttostr(n));
  end;
+// next zone
 until zn>=900;
+
+// write some reassuring statistics
+writeln(' streak stars removed : '+inttostr(badcount));
+writeln(' no V or UCAC magnitude : '+inttostr(badmag1));
+writeln(' using 2MASS magnitude : '+inttostr(badmag2));
+writeln(' high proper motion : '+inttostr(hpmcount));
 
 end.
