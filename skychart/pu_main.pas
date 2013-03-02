@@ -2009,6 +2009,11 @@ end;
 if VerboseMsg then
  WriteTrace(step);
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
+
+// Hide unfinished config calendar
+{ TODO : config calendar }
+MenuItem33.Visible:=false;
+
 except
   on E: Exception do begin
    WriteTrace(step+': '+E.Message);

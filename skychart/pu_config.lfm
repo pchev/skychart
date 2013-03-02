@@ -149,7 +149,7 @@ object f_config: Tf_config
   OnDestroy = FormDestroy
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.6.0'
   object Panel2: TPanel
     Left = 0
     Height = 41
@@ -379,8 +379,8 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 524
             Width = 497
-            ClientHeight = 524
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Height = 524
               Width = 497
@@ -389,6 +389,14 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 520
                 ClientWidth = 493
+                inherited Panel8: TPanel
+                  ClientHeight = 148
+                  ClientWidth = 413
+                end
+                inherited Panel9: TPanel
+                  ClientHeight = 196
+                  ClientWidth = 413
+                end
               end
               inherited Page2: TTabSheet
                 ClientHeight = 520
@@ -430,8 +438,8 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 524
             Width = 497
-            ClientHeight = 524
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Height = 522
               Width = 495
@@ -699,8 +707,8 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 524
             Width = 497
-            ClientHeight = 524
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Height = 522
               Width = 495
@@ -713,6 +721,14 @@ object f_config: Tf_config
               inherited Page2: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited SunPanel: TPanel
+                  ClientHeight = 102
+                  ClientWidth = 352
+                end
+                inherited GRSPanel: TPanel
+                  ClientHeight = 84
+                  ClientWidth = 352
+                end
               end
               inherited Page3: TTabSheet
                 ClientHeight = 518
@@ -757,12 +773,12 @@ object f_config: Tf_config
                   ActivePage = nil
                   TabIndex = -1
                   inherited astsetting: TTabSheet
-                    ClientHeight = 425
-                    ClientWidth = 485
+                    ClientHeight = 512
+                    ClientWidth = 492
                   end
                   inherited astload: TTabSheet
-                    ClientHeight = 425
-                    ClientWidth = 485
+                    ClientHeight = 512
+                    ClientWidth = 492
                     inherited AstPageControl2: TPageControl
                       ActivePage = nil
                       TabIndex = -1
@@ -777,16 +793,16 @@ object f_config: Tf_config
                     end
                   end
                   inherited astprepare: TTabSheet
-                    ClientHeight = 425
-                    ClientWidth = 485
+                    ClientHeight = 512
+                    ClientWidth = 492
                   end
                   inherited astdelete: TTabSheet
-                    ClientHeight = 425
-                    ClientWidth = 485
+                    ClientHeight = 512
+                    ClientWidth = 492
                   end
                   inherited AddsingleAst: TTabSheet
-                    ClientHeight = 425
-                    ClientWidth = 485
+                    ClientHeight = 512
+                    ClientWidth = 492
                   end
                 end
               end
@@ -807,8 +823,8 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 524
             Width = 497
-            ClientHeight = 524
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Height = 522
               Width = 495
@@ -817,18 +833,70 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited Panel7: TPanel
+                  ClientHeight = 238
+                  ClientWidth = 437
+                end
+                inherited Panel5: TPanel
+                  ClientHeight = 238
+                  ClientWidth = 437
+                end
+                inherited Panel4: TPanel
+                  ClientHeight = 238
+                  ClientWidth = 437
+                end
               end
               inherited Page2: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited bg1: TPanel
+                  ClientHeight = 34
+                  ClientWidth = 397
+                end
+                inherited bg3: TPanel
+                  ClientHeight = 34
+                  ClientWidth = 397
+                end
+                inherited bg4: TPanel
+                  ClientHeight = 34
+                  ClientWidth = 397
+                end
               end
               inherited Page3: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited gbDSOCOverrides: TGroupBox
+                  inherited FillPanel2: TPanel
+                    ClientHeight = 158
+                    ClientWidth = 62
+                  end
+                  inherited FillPanel1: TPanel
+                    ClientHeight = 175
+                    ClientWidth = 60
+                  end
+                end
+                inherited GroupBox2: TGroupBox
+                  inherited NebColorPanel: TPanel
+                    ClientHeight = 37
+                    ClientWidth = 229
+                  end
+                end
               end
               inherited Page4: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited Panel2: TPanel
+                  ClientHeight = 143
+                  ClientWidth = 412
+                  inherited Panel6: TPanel
+                    ClientHeight = 93
+                    ClientWidth = 360
+                  end
+                end
+                inherited Panel3: TPanel
+                  ClientHeight = 116
+                  ClientWidth = 172
+                end
               end
               inherited Page5: TTabSheet
                 ClientHeight = 518
@@ -837,9 +905,6 @@ object f_config: Tf_config
               inherited Page6: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
-                inherited GroupBox5: TGroupBox
-                  ClientHeight = 270
-                end
               end
               inherited Page7: TTabSheet
                 ClientHeight = 518
@@ -867,7 +932,8 @@ object f_config: Tf_config
           ClientWidth = 497
           inherited MainPanel: TPanel
             Width = 497
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Width = 495
               ActivePage = nil
@@ -875,10 +941,26 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited ProgressPanel: TPanel
+                  ClientHeight = 90
+                  ClientWidth = 397
+                end
+                inherited Panel11: TPanel
+                  ClientHeight = 195
+                  ClientWidth = 397
+                end
+                inherited Panel3: TPanel
+                  ClientHeight = 90
+                  ClientWidth = 397
+                end
               end
               inherited Page2: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
+                inherited Panel1: TPanel
+                  ClientHeight = 44
+                  ClientWidth = 470
+                end
               end
               inherited Page3: TTabSheet
                 ClientHeight = 518
@@ -898,7 +980,8 @@ object f_config: Tf_config
           ClientWidth = 497
           inherited MainPanel: TPanel
             Width = 497
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Width = 495
               ActivePage = nil
@@ -906,8 +989,13 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 518
                 ClientWidth = 491
-                inherited GroupBox1: TGroupBox
-                  ClientHeight = 94
+                inherited MysqlBox: TPanel
+                  ClientHeight = 93
+                  ClientWidth = 448
+                end
+                inherited SqliteBox: TPanel
+                  ClientHeight = 93
+                  ClientWidth = 448
                 end
               end
               inherited Page2: TTabSheet
@@ -923,21 +1011,11 @@ object f_config: Tf_config
                   inherited TabSheet1: TTabSheet
                     ClientHeight = 348
                     ClientWidth = 470
-                    inherited INDI: TPanel
-                      ClientHeight = 324
-                      ClientWidth = 446
-                      inherited Panel2: TPanel
-                        ClientHeight = 88
-                        ClientWidth = 440
-                      end
-                    end
                   end
                   inherited TabSheet2: TTabSheet
                     ClientHeight = 348
                     ClientWidth = 470
                     inherited TelescopeManual: TPanel
-                      ClientHeight = 326
-                      ClientWidth = 446
                       inherited PageControl3: TPageControl
                         ActivePage = nil
                         TabIndex = -1
@@ -955,18 +1033,10 @@ object f_config: Tf_config
                   inherited TabSheet4: TTabSheet
                     ClientHeight = 348
                     ClientWidth = 470
-                    inherited ASCOMPanel: TPanel
-                      ClientHeight = 324
-                      ClientWidth = 448
-                    end
                   end
                   inherited TabSheet3: TTabSheet
                     ClientHeight = 348
                     ClientWidth = 470
-                    inherited InterfacePanel: TPanel
-                      ClientHeight = 324
-                      ClientWidth = 448
-                    end
                   end
                 end
               end
@@ -991,8 +1061,8 @@ object f_config: Tf_config
           inherited MainPanel: TPanel
             Height = 524
             Width = 497
-            ClientHeight = 524
-            ClientWidth = 497
+            ClientHeight = 520
+            ClientWidth = 493
             inherited PageControl1: TPageControl
               Height = 524
               Width = 497
@@ -1001,6 +1071,12 @@ object f_config: Tf_config
               inherited Page1: TTabSheet
                 ClientHeight = 520
                 ClientWidth = 493
+                inherited GroupBox1: TGroupBox
+                  inherited Panel2: TPanel
+                    ClientHeight = 133
+                    ClientWidth = 374
+                  end
+                end
               end
               inherited Page2: TTabSheet
                 ClientHeight = 520
@@ -1032,6 +1108,12 @@ object f_config: Tf_config
             inherited PageControl1: TPageControl
               Height = 522
               Width = 495
+              ActivePage = nil
+              TabIndex = -1
+              inherited TabSheet1: TTabSheet
+                ClientHeight = 518
+                ClientWidth = 491
+              end
             end
           end
         end
