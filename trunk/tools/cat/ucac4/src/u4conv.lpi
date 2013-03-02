@@ -38,9 +38,9 @@
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="0"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="34"/>
-        <CursorPos X="19" Y="70"/>
-        <UsageCount Value="39"/>
+        <TopLine Value="182"/>
+        <CursorPos X="6" Y="207"/>
+        <UsageCount Value="40"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit0>
@@ -55,11 +55,11 @@
     <JumpHistory Count="30" HistoryIndex="29">
       <Position1>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="142" Column="1" TopLine="121"/>
+        <Caret Line="148" Column="1" TopLine="121"/>
       </Position1>
       <Position2>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="143" Column="1" TopLine="121"/>
+        <Caret Line="149" Column="1" TopLine="121"/>
       </Position2>
       <Position3>
         <Filename Value="u4conv.pas"/>
@@ -67,111 +67,111 @@
       </Position3>
       <Position4>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="139" Column="1" TopLine="121"/>
+        <Caret Line="145" Column="1" TopLine="121"/>
       </Position4>
       <Position5>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="140" Column="1" TopLine="121"/>
+        <Caret Line="146" Column="1" TopLine="121"/>
       </Position5>
       <Position6>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="141" Column="1" TopLine="121"/>
+        <Caret Line="148" Column="1" TopLine="121"/>
       </Position6>
       <Position7>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="142" Column="1" TopLine="121"/>
+        <Caret Line="149" Column="1" TopLine="121"/>
       </Position7>
       <Position8>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="143" Column="1" TopLine="121"/>
+        <Caret Line="144" Column="1" TopLine="121"/>
       </Position8>
       <Position9>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="144" Column="1" TopLine="121"/>
+        <Caret Line="145" Column="1" TopLine="121"/>
       </Position9>
       <Position10>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="256" Column="102" TopLine="232"/>
+        <Caret Line="146" Column="1" TopLine="121"/>
       </Position10>
       <Position11>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="276" Column="12" TopLine="159"/>
+        <Caret Line="148" Column="1" TopLine="121"/>
       </Position11>
       <Position12>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="254" Column="65" TopLine="226"/>
+        <Caret Line="149" Column="1" TopLine="121"/>
       </Position12>
       <Position13>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="3" Column="2" TopLine="1"/>
+        <Caret Line="144" Column="1" TopLine="121"/>
       </Position13>
       <Position14>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="36" Column="28" TopLine="16"/>
+        <Caret Line="145" Column="1" TopLine="121"/>
       </Position14>
       <Position15>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="38" Column="5" TopLine="17"/>
+        <Caret Line="146" Column="1" TopLine="121"/>
       </Position15>
       <Position16>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="43" Column="1" TopLine="23"/>
+        <Caret Line="148" Column="1" TopLine="121"/>
       </Position16>
       <Position17>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="101" Column="1" TopLine="81"/>
+        <Caret Line="149" Column="1" TopLine="121"/>
       </Position17>
       <Position18>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="214" Column="70" TopLine="196"/>
+        <Caret Line="144" Column="1" TopLine="121"/>
       </Position18>
       <Position19>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="218" Column="13" TopLine="198"/>
+        <Caret Line="145" Column="1" TopLine="121"/>
       </Position19>
       <Position20>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="153" Column="42" TopLine="135"/>
+        <Caret Line="146" Column="1" TopLine="121"/>
       </Position20>
       <Position21>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="218" Column="13" TopLine="186"/>
+        <Caret Line="148" Column="1" TopLine="121"/>
       </Position21>
       <Position22>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="235" Column="21" TopLine="203"/>
+        <Caret Line="149" Column="1" TopLine="121"/>
       </Position22>
       <Position23>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="252" Column="28" TopLine="220"/>
+        <Caret Line="304" Column="25" TopLine="288"/>
       </Position23>
       <Position24>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="81" Column="14" TopLine="51"/>
+        <Caret Line="199" Column="18" TopLine="172"/>
       </Position24>
       <Position25>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="166" Column="18" TopLine="139"/>
+        <Caret Line="8" Column="40" TopLine="1"/>
       </Position25>
       <Position26>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="165" Column="62" TopLine="139"/>
+        <Caret Line="65" Column="11" TopLine="33"/>
       </Position26>
       <Position27>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="168" Column="1" TopLine="139"/>
+        <Caret Line="101" Column="90" TopLine="69"/>
       </Position27>
       <Position28>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="169" Column="1" TopLine="139"/>
+        <Caret Line="105" Column="25" TopLine="73"/>
       </Position28>
       <Position29>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="165" Column="1" TopLine="139"/>
+        <Caret Line="150" Column="7" TopLine="118"/>
       </Position29>
       <Position30>
         <Filename Value="u4conv.pas"/>
-        <Caret Line="167" Column="1" TopLine="139"/>
+        <Caret Line="163" Column="8" TopLine="143"/>
       </Position30>
     </JumpHistory>
   </ProjectOptions>

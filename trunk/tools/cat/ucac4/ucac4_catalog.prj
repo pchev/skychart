@@ -1164,13 +1164,22 @@ altname7=0
 altname8=0
 altname9=0
 altname10=0
+altprefix1=0
+altprefix2=0
+altprefix3=0
+altprefix4=0
+altprefix5=0
+altprefix6=0
+altprefix7=0
+altprefix8=0
+altprefix9=0
+altprefix10=0
 
 [Page4]
 numfile=3
-ouputdir=../../../data/ucac4/
+ouputdir=ucac4/
 index=1
 altindex=0
-prefalt=0
 prefname=0
 append=0
 
