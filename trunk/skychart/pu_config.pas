@@ -202,8 +202,12 @@ TreeView1.items[46].text:='9- '+rsInternet;
 TreeView1.items[47].text:='1- '+rsProxy;
 TreeView1.items[48].text:='2- '+rsOrbitalEleme;
 TreeView1.items[49].text:='3- '+rsOnlineDSSPic;
-TreeView1.items[50].text:='10- '+rsCalendar;
-TreeView1.items[51].text:='1- '+rsGraphs;
+
+// Hide unfinished config calendar
+{ TODO : config calendar }
+//TreeView1.items[50].text:='10- '+rsCalendar;
+//TreeView1.items[51].text:='1- '+rsGraphs;
+
 Applyall.caption:=rsApplyChangeT;
 Apply.Caption:=rsApply;
 OKBtn.caption:=rsOK;
@@ -224,6 +228,11 @@ end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
 begin
+// Hide unfinished config calendar
+{ TODO : config calendar }
+TreeView1.Items.Item[51].Delete;
+TreeView1.Items.Item[50].Delete;
+
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
 Fcshr:=Tconf_shared.Create;
