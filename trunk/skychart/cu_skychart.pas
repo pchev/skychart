@@ -45,7 +45,7 @@ Tskychart = class (TComponent)
     fsat: textfile;
     constlabelindex:integer;
     bgcra,bgcde,bgfov,bgmis,bgmas,bgrot: double;
-    bgw,bgh,bgproj: integer;
+    bgw,bgh,bgproj,bgflipx,bgflipy: integer;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true);
@@ -1294,9 +1294,12 @@ y2 := minvalue([pid2,de2000+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
 if FFits.OpenDB('other',x1,x2,y1,y2) then
   while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
     if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
-    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)and(bgrot=cfgsc.theta) then begin
-      //cache bgbmp
-      Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)
+       and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)
+       and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)
+       and(bgrot=cfgsc.theta)and(bgflipx=cfgsc.FlipX)and(bgflipy=cfgsc.FlipY) then begin
+          //cache bgbmp
+          Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
     end else begin
       sincos(rot,sinr,cosr);
       precession(jd2000,cfgsc.JDChart,ra,de);
@@ -1320,6 +1323,8 @@ if FFits.OpenDB('other',x1,x2,y1,y2) then
             bgcde:=cfgsc.decentre;
             bgfov:=cfgsc.fov;
             bgrot:=cfgsc.theta;
+            bgflipx:=cfgsc.FlipX;
+            bgflipy:=cfgsc.FlipY;
             bgmis:=cfgsc.BGmin_sigma;
             bgmas:=cfgsc.BGmax_sigma;
             bgw:=cfgsc.xmax;
