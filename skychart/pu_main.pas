@@ -2135,7 +2135,7 @@ end else begin
       c1.Top:=8+l1.Height+8;
       p1.Align:=alBottom;
       h:=l1.height+c1.Height+p1.Height+20;
-      w:=f1.Canvas.TextWidth(l1.Caption)+16;
+      w:=max(f1.Canvas.TextWidth(l1.Caption),p1.Width)+16;
       f1.Width:=w;
       f1.Height:=h;
       mresult:=f1.ShowModal;
