@@ -45,7 +45,7 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
   sed -i.bak "18s/1.0/$version/"  $builddir/skychart.app/Contents/Info.plist
-  sed -i.bak "18s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
+  sed -i.bak "24s/1.0/$version/"  $builddir/varobs.app/Contents/Info.plist
   rm $builddir/skychart.app/Contents/Info.plist.bak
   rm $builddir/varobs.app/Contents/Info.plist.bak
   cp system_integration/MacOSX/skychart.packproj $basedir
