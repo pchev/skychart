@@ -44,10 +44,10 @@ if [[ $lastrev -ne $currentrev ]]; then
   make install_nonfree
   if [[ $? -ne 0 ]]; then exit 1;fi
   # pkg
-  sed -i ":CFBundleVersion s/1.0/$version-$currentrev/"  $builddir/skychart.app/Contents/Info.plist
-  sed -i ":CFBundleVersion s/1.0/$version-$currentrev/"  $builddir/cdcicon.app/Contents/Info.plist
-  sed -i ":CFBundleVersion s/1.0/$version-$currentrev/"  $builddir/varobs.app/Contents/Info.plist
-  sed -i ":CFBundleVersion s/1.0/$version-$currentrev/"  $builddir/varobs_lpv_bulletin.app/Contents/Info.plist
+  sed -i "18s/1.0/$version-$currentrev/"  $builddir/skychart.app/Contents/Info.plist
+  sed -i "18s/1.0/$version-$currentrev/"  $builddir/cdcicon.app/Contents/Info.plist
+  sed -i "18s/1.0/$version-$currentrev/"  $builddir/varobs.app/Contents/Info.plist
+  sed -i "18s/1.0/$version-$currentrev/"  $builddir/varobs_lpv_bulletin.app/Contents/Info.plist
   cp system_integration/MacOSX/skychart.packproj $basedir
   cp system_integration/MacOSX/readme.txt $basedir
   cd $basedir
