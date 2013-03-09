@@ -1,9 +1,9 @@
 Skychart / Cartes du Ciel
-Version 3.7 beta
+Version 3.8
 
 To avoid to reboot your computer please close the Skychart Clock Icon now if it is running in the task bar.
 
-Copyright (C) 2012 Patrick Chevalley
+Copyright (C) 2013 Patrick Chevalley
 
 http://ap-i.net/skychart
 http://skychart.sourceforge.net
