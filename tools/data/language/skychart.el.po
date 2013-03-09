@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-01-27 11:54+0000\n"
-"PO-Revision-Date: 2012-09-01 18:01+0000\n"
-"Last-Translator: Panos Bouklis <panos@echidna-band.com>\n"
+"PO-Revision-Date: 2013-03-03 22:19+0000\n"
+"Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-24 20:09+0000\n"
-"X-Generator: Launchpad (build 16506)\n"
+"X-Launchpad-Export-Date: 2013-03-09 09:48+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -38,7 +38,7 @@ msgstr "Συντομογραφία"
 
 #: u_translation.rsabort
 msgid "Abort"
-msgstr "Ματαίωση"
+msgstr "Ακύρωση"
 
 #: u_translation.rsabortedbyuse
 msgid "Aborted by user"
@@ -175,7 +175,7 @@ msgstr "Όλες οι επιλογές ρυθμίσεων"
 
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
-msgstr ""
+msgstr "Όλα τα αντικείμενα σε αυτή τη θέση"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -187,7 +187,7 @@ msgstr "Όλες οι εργαλειοθήκες"
 
 #: u_translation.rsalsobesureth
 msgid "%sAlso be sure the required database software is installed.%sPlease consult the documentation if you are unsure.%sDo you want to continue?"
-msgstr ""
+msgstr "%sΒεβαιωθείτε πως το λογισμικό βάσεων δεδομένων είναι εγκατεστημένο.%sPΕλέγξτε τις οδηγίες χρήσης αν δεν είστε σίγουροι.%sΘέλετε να συνεχίσετε;"
 
 #: u_translation.rsalt
 msgid "Alt"
@@ -267,7 +267,7 @@ msgstr "Όρισμα του περιηλίου"
 
 #: u_translation.rsaroundcurren
 msgid "Around current position"
-msgstr ""
+msgstr "Γύρω από την τρέχουσα θέση"
 
 #: u_translation.rsartificialsa
 #| msgid "Artificial Satellites"
@@ -345,7 +345,7 @@ msgstr "Αυτόματη έναρξη τοπικού server αν δεν τρέχ
 
 #: u_translation.rsautomaticall2
 msgid "Automatically optimize the labels placement"
-msgstr ""
+msgstr "Αυτόματη βελτιστοποίηση τοποθέτησης ετικετών"
 
 #: u_translation.rsautorefresh
 #| msgid "AutoRefresh"
@@ -431,7 +431,7 @@ msgstr "BII"
 
 #: u_translation.rsbinaryindexe
 msgid "Binary indexed catalog"
-msgstr ""
+msgstr "Binary indexed catalog"
 
 #: u_translation.rsbitmap
 msgid "Bitmap"
@@ -509,7 +509,7 @@ msgstr "Δημιουργία καταλόγου"
 
 #: u_translation.rsbutneverfain
 msgid "But never fainter than magnitude"
-msgstr ""
+msgstr "Αλλά ποτέ αμυδρότερο από μέγεθος"
 
 #: u_translation.rsby
 msgid "by"
@@ -541,7 +541,7 @@ msgstr "Αδυναμία υπολογισμού δορυφόρων"
 
 #: u_translation.rscannotconnec
 msgid "Cannot connect to server. %s"
-msgstr ""
+msgstr "Αδύνατη η σύνδεση με τον server. %s"
 
 #: u_translation.rscannotdraw
 msgid "Cannot draw"
@@ -561,7 +561,7 @@ msgstr "Δεν μπορεί να γίνει εγγραφή σε"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "Καρτεσιανές"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -581,7 +581,7 @@ msgstr "Πλήρες όνομα καταλόγου"
 
 #: u_translation.rscatalogsavai
 msgid "%s Catalogs availables."
-msgstr ""
+msgstr "%s διαθέσιμοι κατάλογοι."
 
 #: u_translation.rscatalogshort
 msgid "Catalog short name"
@@ -871,7 +871,7 @@ msgstr "Ρύθμιση του Προγράμματος"
 
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
-msgstr ""
+msgstr "Επιβεβαίωση διαγραφής αρχείου "
 
 #: u_translation.rsconnect
 msgid "Connect"
@@ -1486,7 +1486,7 @@ msgstr "Απόσταση προς το τελευταίο αντικείμενο
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
+msgstr "Να μην φιλτράρονται τα αντικείμενα Messier"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1593,7 +1593,7 @@ msgstr "Διάρκεια"
 
 #: u_translation.rsearth
 msgid "Earth"
-msgstr ""
+msgstr "Γη"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -2117,7 +2117,7 @@ msgstr "Σφαιρωτό σμήνος"
 
 #: u_translation.rsgnomonic
 msgid "Gnomonic"
-msgstr ""
+msgstr "Ορθοκανονικές"
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
@@ -2192,7 +2192,7 @@ msgstr "Διακοπή μετά από 1000 λάθη"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2281,11 +2281,11 @@ msgstr "HTTP Proxy"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr ""
+msgstr "Υγρασία %"
 
 #: u_translation.rsiconclickact
 msgid "Icon click action"
-msgstr ""
+msgstr "Ενέργεια κλικ στο εικονίδιο"
 
 #: u_translation.rsiconsize
 msgid "Icon size"
@@ -2417,7 +2417,7 @@ msgstr "Αρχικοποίηση βάσης δεδομένων"
 
 #: u_translation.rsinnersolarsy
 msgid "Inner Solar System"
-msgstr ""
+msgstr "Εσωτερικό ηλιακό σύστημα"
 
 #: u_translation.rsinputcatalog
 msgid "Input catalog files"
@@ -2895,7 +2895,7 @@ msgstr "Μέση θέση"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "Μερκατορικός"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -2931,7 +2931,7 @@ msgstr "Λεπ."
 
 #: u_translation.rsminimalaltit
 msgid "Minimal altitude"
-msgstr ""
+msgstr "Πολύ μικρό ύψος"
 
 #: u_translation.rsminute
 msgid "Minute"
@@ -3000,7 +3000,7 @@ msgstr "Πάνω από 1000 σφάλματα! Η επεξεργασία ματ�
 
 #: u_translation.rsmorethanobje
 msgid "More than %s objects, the result is truncated."
-msgstr ""
+msgstr "Περισσότερα από %s αντικείμενα, κάποια αποτελέσματα παραλείπονται."
 
 #: u_translation.rsmorning
 msgid "Morning"
@@ -3148,7 +3148,7 @@ msgstr "No."
 
 #: u_translation.rsnoasteroidda
 msgid "No asteroids data found!%sPlease load a MPC file first."
-msgstr ""
+msgstr "Δε βρέθηκαν δεδομένα αστεροειδών!%sΠαρακαλώ φορτώστε ένα αρχείο MPC πρώτα."
 
 #: u_translation.rsnoastronomic
 msgid "No astronomical twilight today!"
@@ -3378,11 +3378,11 @@ msgstr "Online server εικόνων"
 
 #: u_translation.rsonlinesearch
 msgid "Online search failed!"
-msgstr ""
+msgstr "Η αναζήτηση online απέτυχε!"
 
 #: u_translation.rsonlinesearch2
 msgid "Online search result"
-msgstr ""
+msgstr "Αποτέλεσματα αναζήτησης online"
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
@@ -3446,7 +3446,7 @@ msgstr "Άλλα δεδομένα λογισμικού"
 
 #: u_translation.rsoutersolarsy
 msgid "Outer Solar System"
-msgstr ""
+msgstr "Εξωτερικό ηλιακό σύστημα"
 
 #: u_translation.rsoutputcatalo
 msgid "Output catalog type"
@@ -3574,7 +3574,7 @@ msgstr "Ρυθμίσεις πλανήτη"
 
 #: u_translation.rsplanetvisibi
 msgid "Planet visibility"
-msgstr ""
+msgstr "Ορατότητα πλανητών"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -3582,7 +3582,7 @@ msgstr "Σφάλμα πλάκας"
 
 #: u_translation.rsplateiddatee
 msgid "Plate id.    Date  exp.   Margin  CD  Observatory"
-msgstr ""
+msgstr "Plate id.    Date  exp.   Margin  CD  Observatory"
 
 #: u_translation.rspleasechecky
 msgid "Please check your Internet connection and the URL definition"
@@ -3630,7 +3630,7 @@ msgstr "Παρακαλώ εγκαταστήστε το \"Dosbox\" http://www.dos
 
 #: u_translation.rspleaseinstwine
 msgid "Please install wine http://www.winehq.org/ to compute artificial satellites on your computer."
-msgstr ""
+msgstr "Εγκαταστείστε το wine http://www.winehq.org/ για να υπολογίσετε τους τεχνητούς δορυφόρους"
 
 #: u_translation.rspleasemountr
 msgid "Please mount RealSky CD number"
@@ -3714,7 +3714,7 @@ msgstr "Πρόθεμα στα εναλλακτικά ονόματα με την 
 
 #: u_translation.rsprepareacata
 msgid "Prepare a catalog with CatGen"
-msgstr ""
+msgstr "Προετοιμασία καταλόγου με το CatGen"
 
 #: u_translation.rspreparedata
 msgid "Prepare data "
@@ -3794,7 +3794,7 @@ msgstr "Γίνεται επεξεργασία της γραμμής %s"
 
 #: u_translation.rsproductinfo
 msgid "Product Info"
-msgstr ""
+msgstr "Πληροφορίες προϊόντος"
 
 #: u_translation.rsprogramdata
 msgid "Program data "
@@ -4086,15 +4086,15 @@ msgstr "Επαναφορά χάρτη και επιλογών"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr ""
+msgstr "Καθαρισμός σε προεπιλεγμένες ρυθμίσεις και επανεκκίνηση"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Καθαρισμός περιστροφής"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr ""
+msgstr "Επαναφορά στην τελευταία αποθήκευση του χάρτη"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -4154,7 +4154,7 @@ msgstr "Χρόνος ανόδου"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
-msgstr ""
+msgstr "Περιστροφή κατά 180 μοίρες"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
@@ -4323,11 +4323,11 @@ msgstr "Επιλογή καταλόγου"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
-msgstr ""
+msgstr "Επιλογή χρώματος (μαύρο για προεπιλογή καταλόγου)"
 
 #: u_translation.rsselectmirror
 msgid "Select mirror site"
-msgstr ""
+msgstr "Επιλογή mirror site"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
@@ -4375,7 +4375,7 @@ msgstr "Server"
 
 #: u_translation.rsservercomman
 msgid "Server command "
-msgstr ""
+msgstr "Εντολή server "
 
 #: u_translation.rsserverinform
 msgid "Server information"
@@ -4547,7 +4547,7 @@ msgstr "Προβολή του Γαλαξία μας"
 
 #: u_translation.rsshowneareart
 msgid "Show near Earth asteroids independently of the magnitude"
-msgstr ""
+msgstr "Προβολή NEO ανεξάρτητα από το μέγεθος"
 
 #: u_translation.rsshownebulae
 msgid "Show deep sky objects"
@@ -4571,7 +4571,7 @@ msgstr "Προβολή μόνο του μεσημβρινού σε Υψ/Αζ"
 
 #: u_translation.rsshowonlytext
 msgid "Show only text in detail window"
-msgstr ""
+msgstr "Προβολή μόνο κειμένου στο παράθυρο με τις λεπτομέρειες"
 
 #: u_translation.rsshowpictures
 msgid "Show pictures"
@@ -4703,7 +4703,7 @@ msgstr "Ηλιακό Σύστημα"
 
 #: u_translation.rssolarsystemi
 msgid "Solar System Informations"
-msgstr ""
+msgstr "Πληροφορίες ηλιακού συστήματος"
 
 #: u_translation.rssolarsystemo
 #| msgid "Solar System object"
@@ -4720,7 +4720,7 @@ msgstr "Κάποιες καταχωρήσεια απορρίφθηκαν, δεί
 
 #: u_translation.rssomethinggow
 msgid "Something went wrong during the initialization of the program. The program needs to be closed."
-msgstr ""
+msgstr "Σφάλμα κατά την έναρξη του προγράμματος. Το πρόγραμμα πρέπει να κλείσει."
 
 #: u_translation.rssorrycopyisn
 msgid "Sorry, copy is not yet implemented for this page"
@@ -4957,7 +4957,7 @@ msgstr ""
 
 #: u_translation.rstableexist
 msgid "%sThis table exists: %s"
-msgstr ""
+msgstr "%sΑυτός ο πίνακας υπάρχει: %s"
 
 #: u_translation.rstcpipconnect
 #| msgid "TCP/IP Connection"
@@ -5007,7 +5007,7 @@ msgstr "Κείμενο"
 
 #: u_translation.rstextfilecata
 msgid "Text file catalog"
-msgstr ""
+msgstr "Text file catalog"
 
 #: u_translation.rstextsize
 msgid "Text size"
@@ -5125,7 +5125,7 @@ msgstr "Συνολική ακτίνα"
 
 #: u_translation.rstousethisnew
 msgid "Before you can use the new orbital elements, you must compute the monthly data."
-msgstr ""
+msgstr "Πριν χρησιμοποιηθούν τα νέα τροχιακά στοιχεία, πρέπει να υπολογιστούν τα μηνιαία δεδομένα."
 
 #: u_translation.rstracking
 msgid "Tracking"
@@ -5340,7 +5340,7 @@ msgstr "Χρήση Socks proxy"
 
 #: u_translation.rsusesubsampli
 msgid "Use subsampling to limit the image size to"
-msgstr ""
+msgstr "Κάνε υπο-δειγματοληψία για να περιοριστεί το μέγεθος εικόνας σε"
 
 #: u_translation.rsusesystemtim
 msgid "Use system time"
@@ -5420,7 +5420,7 @@ msgstr ""
 
 #: u_translation.rsvirtualobser
 msgid "Virtual Observatory Catalog"
-msgstr ""
+msgstr "Κατάλογος εικωνικών παρατηρητηρίων"
 
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
@@ -5528,7 +5528,7 @@ msgstr "Y Σφάλματα"
 
 #: u_translation.rsyouarenowrea
 msgid "You are now ready to display the asteroid for this time period."
-msgstr ""
+msgstr "Τώρα είστε έτοιμοι να προβάλετε τον αστεροειδή για αυτή τη χρονική περίοδο."
 
 #: u_translation.rsyouliveonabi
 msgid "If you observe high on a mountain, the horizon line will be lower than it would be at sea level."
@@ -5564,7 +5564,7 @@ msgstr "Μεγέθυνση"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "Περισσότερο zoom να εμφανιστεί το αντικείμενο"
 
 #: u_translation.rszoomout
 msgid "Zoom out"
