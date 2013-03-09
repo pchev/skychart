@@ -96,7 +96,7 @@ begin
 SetLang;
  panel1.caption:=URL_WebHome;
  button2.caption:=URL_BugTracker;
- label2.caption:=cdcversion+RevisionStr+blank+compile_time;
+ label2.caption:=cdcversion+'-'+RevisionStr+blank+compile_time;
  label4.Caption:=rsCompiledWith+blank+compile_version;
 end;
 
