@@ -1,3 +1,11 @@
+skychart (3.8) experimental; urgency=low
+
+  * stable version
+    For the full change log, see :
+    http://www.ap-i.net/mantis/changelog_page.php?version_id=31
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Mar  9 10:34:19 CET 2013
+
 skychart (3.7) experimental; urgency=low
 
   * unstable version

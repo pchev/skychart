@@ -1,4 +1,4 @@
-Version 3.7  Notes de la version
+Version 3.8  Notes de la version
 
 Modifications majeurs:
    Changement du format de l'index des catalogues. Un enregistrement d'index pointait directement sur les

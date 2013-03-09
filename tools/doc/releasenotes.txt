@@ -1,4 +1,4 @@
-Version 3.7 release Notes
+Version 3.8 release Notes
 
 Major changes:
   Change of the catalog index format. An index record was previously pointing directly

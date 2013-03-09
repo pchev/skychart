@@ -42,9 +42,9 @@ type
 {$i revision.inc}
 
 const
-  cdcversion = 'Version 3.7-svn';
-  cdcver = '3.7g';
-  cdccpy = 'Copyright (C) 2002-2012 Patrick Chevalley';
+  cdcversion = 'Version 3.8';
+  cdcver = '3.8';
+  cdccpy = 'Copyright (C) 2002-2013 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
   MaxPlSim = 500;
