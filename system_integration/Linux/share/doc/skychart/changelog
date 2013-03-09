@@ -1,3 +1,75 @@
+skychart (3.8) experimental; urgency=low
+
+  * stable version
+    For the full change log, see :
+    http://www.ap-i.net/mantis/changelog_page.php?version_id=31
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Mar  9 10:34:19 CET 2013
+
+skychart (3.7) experimental; urgency=low
+
+  * unstable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sun Mar  4 18:54:11 CET 2012
+
+skychart (3.6) experimental; urgency=low
+
+  * stable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Mar  3 13:51:51 CET 2012
+
+skychart (3.5) experimental; urgency=low
+
+  * unstable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Tue Sep 3 11:54:38 CEST 2011
+
+skychart (3.4) experimental; urgency=low
+
+  * stable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Tue Aug 30 18:13:08 CEST 2011
+
+skychart (3.3) experimental; urgency=low
+
+  * unstable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Oct 10 16:42:35 CEST 2010
+
+skychart (3.2) experimental; urgency=low
+
+  * First stable version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Oct  9 09:42:35 CEST 2010
+
+skychart (3.1) experimental; urgency=low
+
+  * Unstable in progress version
+    For the full change log, see :
+    http://skychart.sourceforge.net/websvn/log.php?repname=Skychart&path=%2Ftrunk%2F&isdir=1&
+
+ -- Patrick Chevalley <pch@ap-i.net>  Thu, 25 Jan 2009 10:00:00 +0100
+
+skychart (3.0.1.6-1) experimental; urgency=low
+
+  * New beta version
+    For the full change log, see :
+    http://skychart.svn.sourceforge.net/viewcvs.cgi/skychart/trunk/?view=log
+
+ -- Patrick Chevalley <pch@ap-i.net>  Thu, 25 Jan 2009 10:00:00 +0100
+
 skychart (3.0.1.5-1) experimental; urgency=low
 
   * New beta version
