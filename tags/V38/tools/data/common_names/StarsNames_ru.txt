@@ -1,0 +1,305 @@
+﻿; Stars Name for Cartes du Ciel
+; For a translation copy this file to starsname_XX.dat where XX is the specific language code
+; the first column is the HR number
+;
+ 4910    Ава; Менелава; Auva; Minelauva
+ 3307    Авиор; Avior
+ 5267    Агена; Хадар; Agena; Hadar
+ 2618    Адара; ADARA; ADHARA
+ 4031    Адхафера; Adhafera; Aldhafara; Aldhafera
+  390    Адхил; Adhil
+ 8301    Азелфафадж; Azelfafage
+ 3045    Азмидиске; Azmidiske; Asmidiske
+ 7116    Айн эль Рами; Ain al Rami
+ 1409    Айн; Акулус Вореус; Ain; Oculus Boreus
+  897    Акамар; Acamar
+ 3572    Акубенс; Acubens; Sertan; Sartan
+ 7298    Аладфар; Aladfar
+  603    Аламак; ALMAAK; Almach; Alamak; Almak; Almaach
+ 6903    Алатфар; Alathfar; Al Athfar
+  936    Алголь; Горгониа Прима; Algol; Gorgona; Gorgonea Prima; Demon Star; El Ghoul
+ 6396    Алдхибах; Aldhibah; Eldsib
+ 4905    Алиот; Alioth; Aliath
+ 7141    Алия; Alya; Alga
+ 1605    Алмаз; Al Anz; Almaaz
+ 1903    Алнилам; ALNILAM; Alnihan; Alnitam
+ 1948    Алнитак; ALNITAK; Alnitah
+ 6084    Алният; Alniyat; Al Niyat
+ 8974    Алраи; Alrai; Arrai; Errai; Er Rai
+  596    Алриша; Alrisha; Alrischa; Alrescha; El Rischa; Al Richa; Rescha; Okda; Kaitain
+ 2827    Алудра; Aludra
+ 4375    Алула Аустралис; Alula Australis
+ 4377    Алула Бореалис; Alula Borealis
+ 7950    Альбали; Albali; Al Bali
+ 7264    Альбальдах; Albaldah; Al Baldah
+ 7417    Альбирео; Albireo
+   39    Альгениб; Algenib
+ 3873    Альгенуби; Аль Ашфар; Ras Elased Australis; Al Ras al Asad al Janubi-yyah; Algenubi; Al Ashfar
+ 4057    Альгиеба; ALGIEBA; Algeiba; Al Gieba
+ 7747    Альгиеди Прима; Prima Giedi; Algiedi Prima; Algedi
+ 7754    Альгиеди Секунда; Альгиеди; Secunda Giedi; Algiedi Secunda; Gredi; Algedi
+ 4757    Альгораб; Algorab; Algores; Algoral; Algorel
+ 1457    Альдебаран; Aldebaran; Cor Tauri; Parilicium
+ 8162    Альдерамин; Alderamin; Alderaimin
+ 2484    Альзир; Alzirr
+ 5191    Алькаид; Бенетнаш; ALKAID; Benetnash; Benetnasch; Elkeid
+ 5733    Алькалуропс; Alkalurops; Inkalunis; Icalurus; Clava; Venabulum
+ 4287    Алькес; Alkes
+ 5062    Алькор; Alcor; Saidak
+ 8417    Алькурах; Alkurhah; Al Kirdah; Kurhah
+ 6746    Альназл; Nash; Alnasl; Alwazl; Zujj al Nushshabah; Nushaba
+ 8425    Альнаир; ALNAIR; Al Nair
+ 7462    Альсафи; Alsafi; Athafi
+ 3634    Альсухайл; Alsuhail; Al Suhail al Wazn; Suhail
+ 7557    Альтаир; Altair; Atair
+ 7310    Альтаис; Nodus Secundus; Altais; Aldib
+ 3249    Альтарф; Altarf; Al Tarf
+ 3773    Альтерф; Alterf
+ 3748    Альфард; ALPHARD; Alfard; Alphart; Kalbelaphard; Cor Hydrae
+ 7254    Альфекка Меридиана; Alfecca Meridiana
+ 5793    Альфекка; Гемма; ALPHEKKA; Alphecca; Alphacca; Gemma; Gnosia; The Jewel; Gnosia Stella Coronae; Ashtaroth
+   15    Альферац; Сиррах; ALPHERATZ; Alpherat; Sirrah; Sirah
+ 8238    Альфирк; Alfirk; Alphirk
+ 2421    Альхена; ALHENA
+ 1165    Альциона (ярчайшая звезда Плеяд); Alcione
+ 4623    Альчиба; Alchiba; Alchita; Al Minliar al Ghurab; Al Chiba
+ 7602    Альшаин; ALSHAIN; Alschairn
+ 7773    Альшат; Alshat
+  850    Ангетенар; Angetenar; Al Anchat al Nahr; Anchat
+   99    Анкаа; ANKAA; Nair al Zaurak; Cymbae; Lucida Cymbae; Head of Phoe-nix
+ 7405    Ансер; Anser
+ 6134    Антарес; Antares; Cor Scorpii; Kalb al Akrab; Vespertilio
+ 8499    Анча; Ancha
+ 7337    Аркаб Приор; Arkab Prior; Arkab or Urkab
+ 7343    Аркаб; Arkab Posterior; Arkab or Urkab
+ 5340    Арктур; Arcturus; Haris-el-sema
+ 1865    Арнеб; Arneb
+ 6370    Арракис; Arrakis; Errakis; Al Rakis; El Rakis
+ 3461    Аселлус Аустралис; Asellus Australis
+ 3449    Аселлус Бореалис; Asellus Borealis
+ 5404    Аселлус Примус; Asellus Primus
+ 5350    Аселлус Примус; Asellus Secondus
+ 5329    Аселлус Тертиус; Asellus Tertius
+ 7194    Аскелла; Ascella
+ 1151    Астеропа; Asterope; Sterope I
+ 1131    Атик; Atik; Ati; Al Atik
+ 1178    Атлас; Atlas
+  472    Ахернар; Achernar
+  219    Ачирд; Achird
+  874    Аша; Azha
+  539    Батен Китос; Baten Kaitos
+ 1298    Бейд; Beid
+ 4853    Бекрукс; Becrux; MIMOSA
+ 1790    Беллатрикса; Звезда Амазонок; Bellatrix; the Amazon Star
+ 2061    Бетельгейзе; Betelgeuse; Betelguex; Betelgeuze; Beteiguex; Al Mankib
+ 8450    Бихам; Baham; Biham
+  951    Ботейн; Botein
+ 2777    Вазат; Wasat; Wesat
+ 7001    Вега; Vega; Wega; Fidis; Harp Star
+ 2693    Везен; Wezen; Alwazn; Wesen; Al Wazor
+ 2040    Везн; Wezn; Wazn
+ 4932    Виндемиатрикс; Алараф; VINDEMIATRIX; Vindemiator; Vende-miatrix; Almuredin; Provindemiator; Protrigetrix; Protrygetor; Alaraph
+ 4434    Гайузар; Gianfar; Giansar; Gaiusar; Giauzar; Juza
+ 4730    Гакрукс; Gacrux
+ 4763    Гакрукс; Gacrux
+ 1346    Гиады I; Hyadum I
+ 1373    Гиады II; Hyadum II
+ 7949    Гиенах; Gienah Cygni; Gienah
+ 4662    Гиенах; Gienah Ghurab; Gienah
+  591    Голова Гидры; Head of Hydrus
+ 2845    Гомеиза; Gomeisa; Algomeyla; Gomelza
+  947    Горгониа Кварта; Gorgonea Quarta
+  879    Горгониа Секунда; Gorgonea Secunda
+  921    Горгониа Тертиа; Gorgonea Tertia
+ 8316    'Гранатовая звезда' Гершеля; Herschel's 'Garnet Star'; Garnet Star
+ 5984    Граффиас; Graffias; Grafias; Grassias; Acrab; Akrab; Elacrab
+ 5978    Граффиас; Grafias
+ 4550    Грумбридж 1830; Groombridge 1830
+ 6688    Грумиум; Grumium; Genam; Nodus I
+ 7776    Дабих; Dabih; Beta1 = Dabih Major; Beta2 = Dabih Minor
+  334    Денеб Альгенуби; Dheneb; Deneb; Deneb Algenubi
+ 8322    Денеб Альгиеди; Deneb Algedi; Deneb Algiedi; Scheddi; Sheddi
+ 7852    Денеб Дилфим; Deneb Dulfim; Deneb el Delphinus
+   74    Денеб Китос Шемали; Deneb Kaitos Shemali; Deneb Kaitos Al Shamaliyy
+ 7176    Денеб эль Окаб; Deneb el Okab; Deneb
+ 7235    Денеб эль Окаб; Deneb el Okab; Deneb
+ 7924    Денеб; Deneb; Deneb Cygni; Deneb el Adige; Arided; Aridif; Gallina; Ar-rioph
+ 4534    Денеболла; Denebola; Deneb Aleet
+ 6027    Джаббах; Jabbah
+ 5953    Джубба; Dschubba; Iclarkrau
+ 6636    Дзибан; Dsiban; Dziban
+ 4968    Диадем; Diadem
+  188    Диффда; DIPHDA; Deneb Kaitos; Difda; Difda al Thani; Rana Secunda, the Second Frog
+ 4301    Дубхе; Dubhe; Dubb; Ak
+ 4540    Завиах; Zavijah; Zavijava; Zavyava; Zawijah; Zarijan; Minelauva; Alaraph
+ 4689    Заниах; Zaniah
+ 1231    Заурак; Zaurak; Zaurac; Zaurack
+ 5958    Звезда Блейз; Blaze Star
+  984    Зибал; Zibal 
+ 4357    Зосма; Zosma; Zozma; Zosca; Zozca; Duhr; Dhur; Zubra
+ 2422    Зпезда Пласкета; Plaskett's star
+ 5586    Зубен Элакриби; Zuben Elakribi
+ 5603    Зубен эль Генуби; Brachium; Cornu; Zuben el Genubi; Zuban al Akrab; Zuben Hakrabi
+ 5685    Зубен эль Шемали; Zuben Elschemali; Zuben Eschamali; Zuben el Chamali; Zubenesch; Zubenelg; Kiffa Borealis
+ 5787    Зубен Эльакраб; Zuben Elakrab; Zuben Hakraki; Zuben el Hakrabi
+ 5531    Зубен Эльгенуби; Zuben Elgenubi; Zubenelgenubi; Kiffa Australis; Elkhiffa Australis
+ 6075    Йед Постериор; Yed Posterior
+ 6056    Йед Приор; Yed Prior; Yad; Yed; Jed
+ 6789    Йилдун; Yildun; Vildiur; Gildun
+ 6117    Кайям; Kajam; Cujam; Cajam; Caiam
+ 2326    Канопус; Canopus; Suhel; Suhail
+ 1708    Капелла; Capella; Alhajoth
+ 2891    Кастор; Апполон; Castor; Apollo
+ 6879    Каус Аустралис; KAUS AUSTRALIS
+ 6913    Каус Бореалис; Kaus Borealis
+ 6859    Каус Меридианалис; Kaus Meridionalis; Kaus Media; Media
+   21    Каф; Caph; Chaph; Kaff; Al Sanam al Nakah
+  804    Каффальжидма; Kaffaljidhma; Al Kaff al Jidhmah
+ 1325    Кейд; Keid; Kied
+ 8131    Киталфа; Kitalpha; Kitel Phard; Kitalphar
+ 4915    Кор Кароли; COR CAROLI
+ 6148    Корнефорос; Kornephoros; Korneforos; Rutilicus
+ 5563    Кохаб; вместе с Gam UMi 'Гвардия Полюса'; KOCAB; Kochab; Ko-chah; Guards of the Pole
+ 4786    Краз у Бечвара; Kraz in Becvar
+ 6555    Кума; Kuma
+ 1666    Курса; Cursa; Dhalim; Kursa
+ 6508    Лезат; Lesath; Lesuth
+ 3275    Мабсутат; Alsciaukat; Mabsuthat
+ 1149    Майя; Maia
+ 8781    Маркаб; Markab; Marchab
+ 2948    Маркаб; Markab; Markeb
+  343    Марфак, так же называется Mu Cas; Marfak
+  321    Марфак, так же называется The Cas; Marfak
+ 6149    Марфик; Marfic; Marfik; Marsic
+ 6008    Марфик; Marfik; Marsik; Mirfak; Marfak
+ 8650    Матар; Matar
+ 2473    Мебсута; Mebsuta; Melucta; Meboula
+ 4660    Мегрец; Каффа; MEGREZ; Kaffa
+  546    Мезаршим; 'Первая звезда в Овне'; Mesarthim; Mesartim; First Star in Aries
+ 1879    Меисса; Meissa; Heka
+ 2650    Мекбуда; Mekbuda
+ 2088    Менкалинан; Menkalinan; Menkalina
+  896    Менкар; Menkar
+  911    Менкар; MENKAR; Mekab; Menkab; Monkar
+ 5288    Менкент; Menkent
+ 1228    Менкиб; Menkib; Menkhib; Menchib
+ 4295    Мерак; Merak; Mirak
+ 5533    Мерга; Merga; Marrha; El Mara el Musalsela; Falx Italica
+ 1156    Меропа; Merope
+  544    Металлах; Metallah; Mothallah; Atria; Caput Trianguli; Ras al Muthallah; Elmuthalleth
+ 3685    Миаплацидус; Miaplacidus
+ 6526    Мизам; Maasym; Masym; Misam
+ 4630    Минкар; Minkar
+ 1852    Минтака; MINTAKA; Mintika
+ 3418    Минчир; Al Minliar al Shuja; Minchir
+  681    Мира; Mira
+  834    Мирам у Бечвара; Miram
+  337    Мирах; Mirach; Merach; Mirac; Mirak; al Mizar
+ 2294    Мирзам; Murzim; Mirzam; Mirza
+ 1017    Мирфак; Альгиниб; MIRPHAK; Mirfak; Marfak; Algenib
+ 5506    Мицар; IZAR; Mirac; Mirak; Mirach; Mizar; Pulcherrima
+ 5054    Мицар; Mizar; Mizat; Mirza
+ 2657    Мулифен; Muliphen; Muliphein; Isis; Mirza
+ 3323    Мускида; Muscida
+ 3391    Мускида; Muscida
+ 3403    Мускида; Muscida
+ 5235    Муфрид; Mufrid; Muphrid; Mufride; Muphride
+ 1899    Наир Эль Саиф; Хатиса; Nair al Saif; Hatysa
+ 3165    Наос; Naos; Suhail Hadar
+ 8278    Нашира; Nashira
+ 5602    Неккар; Nekkar; Merez; Meres
+ 1829    Нихаль; NIHAL; Nibal
+ 5747    Нукасан; Nusakan
+ 7121    Нунки; NUNKI; Sadira
+ 7790    Пикок; Peacock
+ 1180    Плейона; Pleione
+ 2990    Поллукс; Геркулус; Pollux; Hercules
+  424    Полярная; Киносура; Polaris; Alruccabah; Cynosura; Phoenice; Lodestar; Pole Star; Tramontana; Angel Stern; Navigatoria; Star of Arcady;Yilduz; Mismar
+ 4825    Поррима; Арих; Porrima; Arich
+ 4247    Праеципия; Praecipua
+ 2134    Пропус; Propus
+ 2821    Пропус; Propus
+ 2216    Пропус; Propus; Praepes; Tejat Prior
+ 2943    Процион; Procyon; Elgomaisa; Algomeysa; Antecanis
+ 1136    Рана; Rana 
+ 3905    Расалас; Аль Ашфар; Ras Elased Borealis; Rasalas; Ras al Asad al Shamaliyy; Alshemali; Al Ashfar
+ 6406    Расальгети; RASALGETHI; Ras Algethi; Rasalegti
+ 6556    Расальхаге; RASALHAGUE; Ras Alhague
+ 6536    Растабан; Rastaban; Alwaid; Asuia; Rastaben
+ 3982    Регул; Regulus; Cor Leonis; Rex; Al Kalb al Asad; Kabeleced
+ 5459    Ригель Кентаурус; Толиман; Rigel Kentaurus; RIGIL KENT; Toliman
+ 1713    Ригель; Rigel; Algebar; Elgebar
+ 5487    Риджл эль Авва; Rijl al Awwa
+ 7882    Ротанев; Rotanev; Rotanen; Venator
+ 7851    Рукба; Ruchba; Rukbat al-dajajah; Al Rukbah al Dajajah
+  403    Рукба; Ксора; Ruchbah; Rucba; Rucha; Ksora
+ 7348    Рукбат; Rukbat; Rucba; Rukbat al Rami; Alrami
+ 6378    Сабик; Sabik
+ 8518    Садалашбиа; Sadalachbia; Sadachbia
+ 8414    Садалмелек; SADALMELIK; Sadalmelek; Sadlamulk; El Melik; Saad el Melik
+ 8232    Садалсуд; Sadalsuud; Sadalsud; Sad es Saud; Sadalsund; Saad el Sund
+ 7796    Садир; Sadr; Sador; Sadir
+ 2004    Саиф; SAIPH
+ 8880    Салм; Salm; Kerb; Markab; El khereb
+ 6553    Саргас; Sargas
+ 6410    Сарин; Sarin
+ 5435    Сегихус; Нарис; Seginus; Ceginus; Haris
+ 2491    Сириус; Каникула; Песья Звезда; Sirius; Canicula; Dog Star; Aschere
+ 5338    Сирма; Syrma
+ 8709    Скат; Skat; Scheat; Sheat
+ 1481    Скептрум; Sceptrum
+ 3699    Скутулум; Turais; Tureis; Scutulum; Aspidiske
+ 5056    Спика; Spica; Azimech; Spica Virginis; Alaraph
+ 1152    Стеропа II; Sterope II
+ 7906    Суалокин; Sualocin; Scalovin; Svalocin; Nicolaus
+ 3852    Субра; Subra
+ 7178    Сулафат; Sulafat; Sulaphat
+ 8610    Сутула; Situla
+ 3207    Сухайл аль Мухлиф; 'Призрачная драгоценность южного неба'; Suhail al Muhlif; Al Suhail al Muhlif
+ 1543    Табит; Tabit
+ 1855    Табит; Thabit; Tabit
+ 1145    Тайгета; Taygeta; Taygete
+ 3569    Талиха; Talitha; Talita
+ 4069    Тания Аустралис; Tania Australis
+ 4033    Тания Бореалис; Эль Кафзах Эль Таниах; Tania Borealis; Al Kafzah al Thaniyah.
+ 7525    Таразед; TARAZED; Reda
+ 3208    Тегмен; Tegmen; Tegmine
+ 1464    Темим; Бемин; Theemim; Beemin
+ 7597    Теребеллум; Terebellum
+ 7604    Теребеллум; Terebellum
+ 2286    Теят Постериор; Tejat Posterior; Calx; Pish Pai
+ 7582    Тил; Tyl
+  510    Торкуларис Септентрионалис; Torcularis Septentrionalis
+ 5291    Тубан; бывшая Полярная звезда; THUBAN; Adib; Dragon's Tail
+ 5854    Унукэльхайя; UNUKALHAI; Unuk al Hay; Unuk Elhaia; Unuk; Unukal-hay; Cor Serpentis
+ 1956    Факт; Phaet; Phakt; Phact; Phad
+ 4554    Фекда; PHAD; Phecda; Phekda; Phegda; Phekha; Phacd
+ 5714    Феркад Минор; Pherkad Minor
+ 5735    Феркад; Pherkad; Pherkad Major
+ 8728    Фомальгаут; FOMALHAUT; Os Piscis Meridiani; Os Piscis Notii; Difda al Auwel; the First Frog
+ 8773    Фум эль Самаках; Fum al Samakah
+ 2282    Фурид; Furud; Phurud
+  617    Хамаль; Ариетис; HAMAL; Hemal; Hamul; Ras Hammel; El Nath
+ 4785    Хара; Chara 
+ 1577    Хассалех у Бечвара; Hassaleh in Becvar; Hassaleh
+ 5107    Хезе; Heze
+ 1612    Хоедус I; Садатони; один из 'козлят'; Haedi; Haedus; Hoedus I; the kids; Sadatoni; Saclateni
+ 1641    Хоедус II; один из 'козлят'; Hoedus II; the kids
+ 8634    Хомам; Homam; Homan; Humam; Al Hammam
+ 6603    Цебальрай; Cebalrai; Kelb Alrai; Kabalrai; Cheleb; Celb-al-Rai
+ 1140    Целено; Celaeno; Celieno; Celeno; Lost Pleiad
+ 4359    Чертан; Chort; Coxa; Chertan
+ 7479    Шам; Эльшам; Sham; Alsahm
+ 6527    Шаула; SHAULA
+ 8775    Шеат; SCHEAT; Sheat; Seat Alpheras; Menkib
+  168    Шедир; SHEDIR; Schedar; Schedir
+ 7106    Шелиак; Sheliak; Shelyak; Shiliak
+  553    Шеретан; Sharatan; Sheratan; Al Sharatain
+ 5744    Эд Асих; Ed Asich; Eldsich; Al Dhiba; Al Dhihi
+ 1142    Электра; Electra
+ 8591    Эль Кальб эль Рай; Al Kalb al Rai
+ 3731    Эль Минлайр Эль Асад; Al Minliar al Asad
+ 1791    Эльнат; ALNATH; EL NATH; Nath
+ 8308    Эниф; ENIF; Enf; Enir; Al Anf; Os Pegasi; Fom
+ 6705    Этамин; ETAMIN; Etanin; Ettanin; Rastaban; Rasaben; Zenith Star
+ 7228    Южная Полярная; Polaris Australis

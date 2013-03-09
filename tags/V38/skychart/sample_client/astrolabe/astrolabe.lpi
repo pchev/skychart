@@ -1,0 +1,378 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="9"/>
+    <General>
+      <MainUnit Value="0"/>
+      <Title Value="astrolabe"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <Icon Value="0"/>
+      <ActiveWindowIndexAtStart Value="0"/>
+    </General>
+    <VersionInfo>
+      <StringTable ProductVersion=""/>
+    </VersionInfo>
+    <BuildModes Count="1">
+      <Item1 Name="default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="2">
+      <Item1>
+        <PackageName Value="synapse"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="LCL"/>
+      </Item2>
+    </RequiredPackages>
+    <Units Count="22">
+      <Unit0>
+        <Filename Value="astrolabe.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="astrolabe"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="12"/>
+        <UsageCount Value="33"/>
+        <Loaded Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="unit1.pas"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Unit1"/>
+        <TopLine Value="1"/>
+        <CursorPos X="1" Y="1"/>
+        <UsageCount Value="20"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="tcpclient_vcl1.pas"/>
+        <ComponentName Value="Form1"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="tcpclient_vcl1"/>
+        <TopLine Value="1"/>
+        <CursorPos X="68" Y="18"/>
+        <UsageCount Value="10"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="cu_tcpclient.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_tcpclient"/>
+        <EditorIndex Value="1"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="163"/>
+        <CursorPos X="1" Y="244"/>
+        <UsageCount Value="33"/>
+        <Loaded Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="astrolabe1.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="f_astrolabe"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="astrolabe1"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="0"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="235"/>
+        <CursorPos X="50" Y="258"/>
+        <UsageCount Value="33"/>
+        <Bookmarks Count="1">
+          <Item0 X="59" Y="226" ID="1"/>
+        </Bookmarks>
+        <Loaded Value="True"/>
+        <LoadedDesigner Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../../../../../lazarus/lcl/include/memostrings.inc"/>
+        <TopLine Value="110"/>
+        <CursorPos X="39" Y="124"/>
+        <UsageCount Value="11"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../../../../../fpc/rtl/unix/classes.pp"/>
+        <UnitName Value="Classes"/>
+        <TopLine Value="1"/>
+        <CursorPos X="12" Y="36"/>
+        <UsageCount Value="10"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="../../../../../fpc/rtl/objpas/classes/classesh.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1504"/>
+        <CursorPos X="15" Y="1527"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="../../../../../lazarus/lcl/include/control.inc"/>
+        <TopLine Value="1624"/>
+        <CursorPos X="1" Y="1644"/>
+        <UsageCount Value="10"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="../../../../../lazarus/lcl/include/buttoncontrol.inc"/>
+        <TopLine Value="2"/>
+        <CursorPos X="1" Y="22"/>
+        <UsageCount Value="10"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="../../../../../lazarus/lcl/include/buttons.inc"/>
+        <TopLine Value="296"/>
+        <CursorPos X="1" Y="332"/>
+        <UsageCount Value="10"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="../../../../../lazarus/lcl/include/wincontrol.inc"/>
+        <TopLine Value="5066"/>
+        <CursorPos X="1" Y="5086"/>
+        <UsageCount Value="10"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="../../../../../lazarus/lcl/lclmessageglue.pas"/>
+        <UnitName Value="LCLMessageGlue"/>
+        <TopLine Value="101"/>
+        <CursorPos X="1" Y="121"/>
+        <UsageCount Value="10"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="../../../../../lazarus/lcl/interfaces/gtk2/gtk2wsstdctrls.pp"/>
+        <UnitName Value="Gtk2WSStdCtrls"/>
+        <TopLine Value="1867"/>
+        <CursorPos X="1" Y="1887"/>
+        <UsageCount Value="10"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="../../../../../lazarus/lcl/interfaces/gtk/gtkwidgetset.inc"/>
+        <TopLine Value="1271"/>
+        <CursorPos X="19" Y="1277"/>
+        <UsageCount Value="10"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="../../../../../lazarus/lcl/forms.pp"/>
+        <UnitName Value="Forms"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="46"/>
+        <CursorPos X="25" Y="70"/>
+        <UsageCount Value="10"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="../../../../../lazarus/lcl/interfaces/gtk2/gtk2widgetset.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="26"/>
+        <CursorPos X="37" Y="49"/>
+        <UsageCount Value="10"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="../../../../../lazarus/lcl/comctrls.pp"/>
+        <UnitName Value="ComCtrls"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="2167"/>
+        <CursorPos X="15" Y="2190"/>
+        <UsageCount Value="10"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="../../../../../lazarus/lcl/include/trackbar.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="146"/>
+        <CursorPos X="32" Y="158"/>
+        <UsageCount Value="10"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="../../../../../compiler/lazarus/lcl/include/control.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="3246"/>
+        <CursorPos X="1" Y="3264"/>
+        <UsageCount Value="10"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="../../../../../compiler/lazarus/lcl/interfaces/gtk2/gtk2widgetset.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="1783"/>
+        <CursorPos X="1" Y="1803"/>
+        <UsageCount Value="10"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="../../../../../compiler/lazarus/lcl/include/customform.inc"/>
+        <WindowIndex Value="0"/>
+        <TopLine Value="952"/>
+        <CursorPos X="1" Y="971"/>
+        <UsageCount Value="10"/>
+      </Unit21>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="319" Column="36" TopLine="312"/>
+      </Position1>
+      <Position2>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="324" Column="10" TopLine="260"/>
+      </Position3>
+      <Position4>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="322" Column="29" TopLine="304"/>
+      </Position4>
+      <Position5>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="342" Column="1" TopLine="335"/>
+      </Position5>
+      <Position6>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="343" Column="1" TopLine="335"/>
+      </Position6>
+      <Position7>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="331" Column="1" TopLine="312"/>
+      </Position7>
+      <Position8>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="332" Column="1" TopLine="312"/>
+      </Position8>
+      <Position9>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="333" Column="1" TopLine="312"/>
+      </Position9>
+      <Position10>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="334" Column="1" TopLine="312"/>
+      </Position10>
+      <Position11>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="335" Column="1" TopLine="312"/>
+      </Position11>
+      <Position12>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="336" Column="1" TopLine="312"/>
+      </Position12>
+      <Position13>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="338" Column="1" TopLine="312"/>
+      </Position13>
+      <Position14>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="344" Column="1" TopLine="312"/>
+      </Position14>
+      <Position15>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="385" Column="1" TopLine="364"/>
+      </Position15>
+      <Position16>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="386" Column="1" TopLine="364"/>
+      </Position16>
+      <Position17>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="387" Column="1" TopLine="364"/>
+      </Position17>
+      <Position18>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="389" Column="1" TopLine="364"/>
+      </Position18>
+      <Position19>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="390" Column="1" TopLine="364"/>
+      </Position19>
+      <Position20>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="391" Column="1" TopLine="364"/>
+      </Position20>
+      <Position21>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="392" Column="1" TopLine="364"/>
+      </Position21>
+      <Position22>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="342" Column="1" TopLine="323"/>
+      </Position22>
+      <Position23>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="347" Column="1" TopLine="323"/>
+      </Position23>
+      <Position24>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="369" Column="1" TopLine="350"/>
+      </Position24>
+      <Position25>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="138" Column="1" TopLine="119"/>
+      </Position25>
+      <Position26>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="315" Column="35" TopLine="292"/>
+      </Position26>
+      <Position27>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="314" Column="101" TopLine="292"/>
+      </Position27>
+      <Position28>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="101" Column="27" TopLine="85"/>
+      </Position28>
+      <Position29>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="235" Column="71" TopLine="225"/>
+      </Position29>
+      <Position30>
+        <Filename Value="astrolabe1.pas"/>
+        <Caret Line="257" Column="52" TopLine="228"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <Target>
+      <Filename Value="astrolabe"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <UseAnsiStrings Value="False"/>
+      </SyntaxOptions>
+    </Parsing>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dUseCThreads"/>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

@@ -1,0 +1,10 @@
+This directory is to place a copy of the zoneinfo database for system that not ship it by default (MS Windows).
+
+Skychart search zoneinfo at the standard Libc location: /usr/share/zoneinfo or /usr/lib/zoneinfo
+If you use another location for this files please create a logical link here to replace this directory.
+i.e: 
+cd ..
+rm zoneinfo/readme
+rmdir zoneinfo
+ln -s /usr/local/share/zoneinfo zoneinfo
+

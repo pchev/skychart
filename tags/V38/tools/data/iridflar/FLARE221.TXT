@@ -1,0 +1,788 @@
+IRIDFLAR v2.21 by Rob Matson - March 4, 2002
+--------------------------------------------
+
+IRIDFLAR is a PC DOS-based program that produces a chronologically sorted
+list of all Iridium satellite flares visible from an observer's location
+over a user-defined time period meeting all the user's constraints.
+Constraints include:
+
+     1.  Minimum satellite elevation angle
+     2.  Maximum flare angle (the angle off-specular, a.k.a. the
+         mirror angle)
+     3.  Minimum flare brightnesses (day/night)
+     4.  Flare source (sun/moon)
+
+
+System requirements
+-------------------
+
+IRIDFLAR 2.21 has been compiled so that it will run on any PC with at
+least an 80386 processor.  A coprocessor is not required, but it is
+highly recommended due to the large number of computations that are
+performed.
+
+
+Inputs/Configuration File
+-------------------------
+
+All of the necessary control parameters for IRIDFLAR are stored in an
+ASCII text configuration (.CFG) file that looks much like a Microsoft
+Windows .INI file.  When you first start up IRIDFLAR, it reads all these
+input parameters from the configuration file of your choice, and then
+displays a Main Menu showing the current values for all parameters.
+(There are a number of submenus as well).  Menu items are selected by
+using the function keys at the top of your keyboard (e.g. F1, F2, etc.),
+or single alphanumeric keystrokes.  When you exit the program, IRIDFLAR
+will give you the option of updating your configuration file with your
+final parameter values.
+
+The default configuration file is "IRIDFLAR.CFG".  If this file is not
+present at run time, the program will set its own default values.  If
+you wish to run with a configuration file of another name, type that
+name following IRIDFLAR at run time:
+
+C:\ IRIDFLAR myfile.cf1
+
+In the above example, if "myfile.cf1" is not found, the program will
+behave the same as if IRIDFLAR.CFG was not found.  Note that when a
+configuration file is named on the command line, that file (whether
+it exists or not) becomes the default *output* file for storing
+configuration parameters.  (As of version 1.5, you have the option of
+changing the configuration output filename as often as you like, and
+you can also exit the program without updating the configuration
+file).
+
+To save a few keystrokes, if your configuration file has an extension
+of .CFG, you don't have to explicitly type the extension.  For example,
+"IRIDFLAR fred.cfg" and "IRIDFLAR fred" are equivalent.  For upward
+compatibility, IRIDFLAR version 2.2 will recognize and translate
+version 1.x and 2.x configuration files.
+
+Dates/times can be UTC or local time, controlled by a toggle in the
+Date/Time menu.  North latitudes and east longitudes are positive;
+south latitudes and west longitudes are negative.  Altitude and range
+values can be in either metric or English units, controlled by a
+toggle (U) in the Main Menu.
+
+
+ANSI.SYS Driver
+---------------
+
+The ANSI.SYS device driver must be named in your CONFIG.SYS file in
+order to correctly display IRIDFLAR's menus:
+
+               DEVICE = [path\] ansi.sys
+
+                         -or-
+
+               DEVICEHIGH [path\] ansi.sys
+
+For Windows 95, this driver is most likely located in the directory
+C:\win95\command (or C:\windows\command), so the line in CONFIG.SYS
+would read:
+
+               DEVICEHIGH C:\win95\command\ansi.sys
+
+For Windows NT users, the configuration file is called CONFIG.NT.  It
+is not located in the root directory, but rather in a subdirectory
+with a name like C:\WINNT\SYSTEM32\CONFIG.NT.  ANSI.SYS is located in
+this same directory, so the line to be added would be:
+
+               DEVICEHIGH C:\WINNT\SYSTEM32\ansi.sys
+
+You can make the necessary changes to CONFIG.SYS or CONFIG.NT using the
+DOS EDIT program, or a word processing program such as Microsoft Word
+or WordPerfect.  If you use a word processor, be sure to save the file
+in ASCII format.  Once CONFIG has been modified, you will need to reboot
+your system for the change to take effect.
+
+
+Two-Line Element (TLE) File
+---------------------------
+
+The input TLE file can contain just Iridium satellite elements, or any
+superset containing the Iridium satellites of interest.  The program
+automatically searches for all Iridium satellites in your TLE file.
+This file can also have a header in it (e.g. MOLCZAN.TLE); IRIDFLAR
+will read past it.
+
+Since new Iridium satellites are periodically launched, a method for
+identifying and processing these new satellites was added in version 1.3.
+This way, a new version of the program does not need to be released
+for each addition to the Iridium constellation.  To flag any new Iridium
+satellites in your TLE file, make sure the format of the name lines is
+"Iridium XXX ...", where XXX can be any three characters.  These
+characters will appear under the "Ird" column of the output.
+
+As of version 1.62 an Iridium status flag will be output if it appears
+in the TLE file.  The four recognized status flags are: "man", "tum",
+"att" and "?" and may appear anywhere on the satellite name line
+following the Iridium number.  For example:
+
+Iridium 9 tum
+1 24838U 97030C   02061.19373096  .00054051  00000-0  19516-2 0  8427
+2 24838  86.4379 140.3253 0064287 336.3493  23.4820 15.26290759250192
+Iridium 86 ?
+1 25528U 98066B   02062.23847178 -.00000128  00000-0 -34733-4 0  7154
+2 25528  86.5221 164.0550 0002382  54.3770 305.7603 14.54873203176500
+
+Status flags are abbreviated to one character in IRIDFLAR output:
+
+     blank = operational satellite
+     M = maneuvering satellite
+     T = tumbling/spinning satellite
+     A = attitude not accurately maintained
+     ? = not at operational altitude; attitude may not be reliable
+
+As of version 1.62, IRIDFLAR does not make predictions for any of the
+15 Iridium satellites known to have failed or decayed.  As of March 4,
+2002, these are Iridiums 914, 9, 911, 920, 921, 27, 44, 24, 48, 69,
+71, 73, 79, 85 and 2.  (Iridiums 27, 48, 79 & 85 have reentered).  For
+all other satellites, IRIDFLAR will make predictions, and display a
+status flag if one exists.
+
+
+Iridium 920 (#24871)
+--------------------
+
+Thanks to the observing efforts of Richard Keen, Terry Pundiak, Ed
+Cannon, Frank Reed, Don Gardner, Richard McKee, Craig Cholar, Ralph
+McConahy, Walter Nissen, Rick Baldridge, Jari, Jim Nix and myself, I
+have been able to intermittently establish and monitor the rotation
+axis for Iridium 920 (formerly Iridium 20).  In mid-1998, there were
+enough observations to establish the coning angles for four specular
+surfaces.  However, since then the axis has changed drastically.  In
+1999, I calculated a new axis that agreed well with a dozen observa-
+tions, but it has since diverged.  For this reason I have disabled
+flash predictions for Iridium 920 as of version 1.7 until a new stable
+spin axis has been identified.
+
+
+Ambiguous Iridium Names
+-----------------------
+
+At times, USSPACECOM has had different (i.e. incorrect) common names
+for a number of the Iridium satellites.  For example, Iridiums 9 and
+10 were reversed, as were 18 and 20, 24 and 46, and 35 and 37.   To
+avoid confusion with other satellite programs, IRIDFLAR no longer
+attaches its own common name translations to the 5-digit catalogue
+numbers.  Instead, when there is a conflict IRIDFLAR will issue a
+warning, but it will retain whatever Iridium number appears in the
+TLE file.
+
+
+Output
+------
+
+Output is to the screen and optionally to a disk file.  For each flare,
+either one or three lines are generated depending on a user-set parameter.
+In the 3-line mode, the first and third lines are the approximate times
+that all constraints are first met and last met respectively.  The
+second line in each triplet is the time of minimum flare angle and maximum
+brightness.  In single-line mode, only the peak of each flare is output
+to screen and disk.
+ 
+
+Screen Output
+-------------
+
+There are 15 values on each screen output line.  From left to right,
+these are:
+
+ 1. Iridium satellite number (or 3-character code -- see paragraph above)
+ 2. Iridium status flag (M, T, A, ?, or blank)
+ 3. Date in YYYY-MM-DD format (new 4-digit year in version 1.7).  Date is
+    UTC or local depending on user input
+ 4. 24-hour time.  UTC or local, just as for date.
+ 5. Satellite azimuth in degrees, measured clockwise from north; east=90.
+ 6. Satellite elevation angle in degrees (a.k.a. altitude angle)
+ 7. Satellite range (in km or miles, depending on choice of units)
+ 8. Node (A=Ascending, D=Descending)
+ 9. Satellite illumination condition.  Lit=Sunlit, Pnb=Penumbra (sun
+    has partially set as seen by satellite), or Lun=Moonlit but not
+    sunlit.
+10. Elevation of sun at observer's site (in degrees).  Negative when sun
+    is below the horizon.
+11. MMA (Main Mission Antenna) causing the flare.  Code: F=forward,
+    L=left, R=right, or S=solar panel (NEW! in v2.2).
+12. Flare angle (degrees).  This tells you how close the geometry is to
+    satisfying a perfect specular reflection.  Any angle less than 0.25
+    degrees leads to a direct reflection of some portion of the solar
+    disk (or lunar disk, as of version 2.0).  However, flares can still
+    be seen when the flare angle is greater than 0.25 due to diffraction,
+    atmospheric turbulence, and antenna surface contamination and
+    imperfections.  Flare brightness falls off quickly with increasing
+    flare angle; as a rule of thumb, the flare angle needs to be less
+    than 2 degrees for an MMA flare to reach 1st magnitude or brighter.
+13. Visual magnitude.  This is a rough estimate of the flare visual
+    magnitude based on the flare angle, the projected area of the
+    antenna producing the reflection, and the satellite range.  For
+    lunar flares, the magnitude estimate also takes the lunar phase
+    into consideration.  In version 2.2, solar panel flare modeling
+    was also added; the magnitude estimates for solar panel flares will
+    not be as accurate due to looser tolerances on (and hence knowledge
+    of) the solar panel pointing direction.
+14. Flare latitude (degrees).  The geodetic latitude of the current
+    point on the earth that has a flare angle of exactly zero.
+15. Flare longitude (degrees; negative is west, positive is east).
+    The instantaneous longitude of the center of the flare.
+
+The flare latitude and longitude tell you where the maximum flare is
+occurring at that time.  As of version 1.52, the flare lat/long for
+the middle line of each triplet is replaced with the ground distance
+and bearing to the point on the flare centerline closest to your
+location.  This tells you how far you need to drive in order to see
+the maximum flare.  (Bearing is always output as east or west,
+although for locations at very high latitudes the actual bearing
+will have a significant north or south component.)
+
+While IRIDFLAR is calculating and displaying acceptable flares, you
+can pause your display by hitting the space bar.  (Hit any key to
+resume calculating).  The escape key can be used to terminate a
+flare search in progress.
+
+
+Verbose File Output
+-------------------
+
+If you elect to produce an output file (in addition to the screen
+output), then columns will also appear for the satellite right
+ascension and declination, solar azimuth angle, flare peak magnitude
+and flare standard magnitude.
+
+
+Peak Magnitude and Standard Magnitude
+-------------------------------------
+
+In the "verbose" file output, the flare magnitude is immediately
+followed by the peak magnitude and standard magnitude.  The peak
+magnitude is an estimate of what the flare magnitude would be if you
+were located at the coordinates listed for the flare latitude and
+longitude (14. and 15. in the screen output).  From this location,
+the mirror angle is zero, and the MMA (or solar panels) reflect
+the exact center of the sun (i.e. the brightest part of the sun).
+
+The standard magnitude is only of use to modelers who are interested
+in better defining the relationship between flare intensity and mirror
+angle.  It does this by eliminating the two other variables that affect
+flare brightness:  satellite range and MMA/solar-panel projected area.
+The standard magnitude indicates what the flare visual magnitude would
+have been if the satellite was at a range of 1000 km, and the MMA
+causing the flare was perpendicular to the observer-satellite vector.
+The standard magnitude can differ significantly from the regular
+magnitude when the satellite is either low in the sky (i.e. at long
+range), or at a poor phase angle (MMA viewed edge-on), or a combination
+of both.
+
+
+Abbreviated File Output
+-----------------------
+
+The "brief" format has fewer output values (RA, Dec, flare angle, peak
+magnitude and standard magnitude are omitted), fewer digits of
+precision, and more spacing between some columns for better readability.
+This format is intended for the more casual observer and was changed
+slightly in version 1.7 to make room for a 4-digit year.  An example
+appears below:
+
+       Local     Local    Iridium         Sun    Flare   Maximum Flare  Ird
+Day    Date      Time   Azm El Rnge N I Azm Elv MMA Mag Latit.  Longit.  #  S
+-----------------------------------------------------------------------------
+Sat 2000- 1- 1 17:39:35 062 66  527 A L 249  -8  L   3  33.035 -117.845 70   
+Sat 2000- 1- 1 17:39:48 050 63  540 A L 249  -8  L  -2     12.2 mi E    70   
+Sat 2000- 1- 1 17:40:00 041 59  557 A L 249  -8  L   3  34.450 -117.936 70   
+
+
+Satellite Orientation Errors
+----------------------------
+
+Paul Maley of NASA Johnson Space Center has reported that once each
+Iridium satellite reaches its parking orbit, its orientation relative
+to its velocity vector is maintained to within +/- 0.5 degrees in pitch,
++/- 0.4 degrees in roll and +/- 0.5 degrees in yaw.  If orientation
+errors conspire in a worst-case fashion, the minimum flare angle
+(a.k.a. mirror angle) for a particular pass can increase by as much
+as 1.4 degrees (two times the rss of 0.5 and 0.5).  This could change
+the brightness of a best-case pass by almost 7 visual magnitudes (chang-
+ing flare angle from 0 to 1.4).  The effect is not as severe for larger
+flare angles; for example, a change from 1.0 deg to 2.4 decreases the
+theoretical brightness by only 2.3 visual magnitudes.
+
+Since the satellite orientation errors cannot be known apriori, it is
+not possible to reliably predict which flares will be absolute "show
+stoppers."  Of course, orientation errors can work for or against you.
+A predicted flare angle of 1.5 degrees could conceivably be improved
+to 0.1 degrees, transforming a medium brightness flare into a -8
+magnitude searchlight!
+
+
+Anomalous Satellites
+--------------------
+
+As of March 4, 2002, 15 satellites out of 95 that have been launched
+have either failed or decayed:  Iridiums 2, 9, 911, 914, 920, 921,
+24, 27, 44, 48, 69, 71, 73, 79, and 85.  Since their orientations are
+not maintained, and a stable orientation is necessary in order to
+predict flares, I've removed these satellites from the prediction list.
+
+Attempts have been made at establishing rotation axes for the tumbling
+Iridiums so that their flashes can be predicted.  In 1998 and some of
+1999, Iridium 920 (formerly Iridium 20) maintained a somewhat stable
+spin axis which allowed flash predictions.  Alas, it has since diverged
+and a new axis has not been identified.  Flash data has been analyzed
+for Iridiums 911, 914, 24 and 27, and so far none has exhibited a
+sufficiently stable spin axis.
+
+Additional Iridium satellites have occasionally had orientation errors
+exceeding the usual limits, causing erratic flare behavior.  For
+example, Iridiums 5, 36 and 46 have gone through such phases.
+
+
+Questions
+---------
+
+Questions or problems can be e-mailed to matsonr@saic.com.
+
+
+Internal Modeling Details
+-------------------------
+
+Orbital propagator:  SGP4
+Earth geoid:  WGS-84
+Earth equatorial radius:  6378.137 km
+RA/Dec equinox:  Equinox of date
+Refraction at ground site:  Included
+Refraction at satellite:  Included
+
+
+Revision History
+----------------
+
+Version 2.21 (March 2002)
+-------------------------
+
+Internal Iridium names updated (added newly launched Iridium
+satellites 90, 91, 94, 95 and 96, and removed decayed satellite
+Iridium 27).
+
+Fixed command-line parameter passing of configuration file so that
+it doesn't delete the first character of the filename under
+Windows 2000.
+
+
+Version 2.2 (June 2001)
+-----------------------
+
+Added Iridium solar panel articulation model and code to predict
+when solar panel flares are possible.  Preliminary observational
+data used to calibrate solar panel flare brightness vs. off-axis
+angle.  Toggle added to Main Menu to turn solar panel flare
+modeling on or off.
+
+Predictions no longer done for failed satellites Iridium 2 (#25527),
+Iridium 9 (#24838), Iridium 69 (#25319) and Iridium 73 (#25344),
+bringing the total to 15.
+
+
+Version 2.1
+-----------
+
+Internal Iridium names updated (e.g. 911, 914, 920 and 921).
+
+Verbose 1-line mode has been missing the 4th decimal place of the
+latitude in the output file for some time.  Bug fixed.
+
+To avoid confusion, the flare coordinates output are now always the
+instantaneous ground coordinates of the flare center.  In prior
+versions, the flare coordinates for the peak line were replaced with
+the flare centerline coordinates closest to the observer.  The
+difference is minor for bright flares at most latitudes, but for dim
+flares at high latitudes, the difference is quite noticeable and the
+program output is confusing.  The source of the confusion in these
+cases is that the nearest point on the flare centerline is so far
+away that the peak flare there occurs at a quite different time
+than the peak at the observer's location.
+
+
+Version 2.0
+-----------
+
+Lunar flare prediction added to IRIDFLAR.  A toggle has been added to
+the Main Menu (S, for Source) to select either the sun or the moon
+as the flare source.  For lunar flares, IRIDFLAR requires that the
+sun also be blocked by the earth.  (Diffuse solar reflection by
+Iridium is brighter than the brightest lunar specular reflection).
+You will need binoculars or a telescope to see lunar flares.
+
+
+Version 1.7
+-----------
+
+Numerical rounding produced flare azimuth angles of 360 whenever
+the flare azimuth was greater than 359.5.  Program has been changed
+to display 0 instead of 360.
+
+Year expanded from two digits to four, principally to avoid date
+sorting problems at century year transitions.
+
+Per Jay Respler's suggestion, flare MMA and magnitude columns have
+been swapped in the Brief File output to help avoid confusion between
+solar elevation angle and visual magnitude.
+
+Predictions no longer done for failed satellites Iridium 48 (#25107)
+and Iridium 85 (#25529), bringing the total to 11.
+
+Flash predictions for Iridium 20 disabled until a new spin axis can
+be determined.
+
+
+Version 1.65
+------------
+
+The switch to 3-character Iridium names (e.g. Iridium 11A) introduced
+a chronological sorting bug in the output file for satellites with
+status flags (e.g. Iridium 73 man, Iridium 2 ?).  Bug fixed.
+
+
+Version 1.64
+------------
+
+In 3-line mode, replaced flare centerline coordinates on line 2 of
+Brief file output with bearing information.  (Coordinates are also
+replaced with bearing in 1-line mode).  Removed flare angle from
+Brief file output.
+
+Added a third column for the Iridium common name to accommodate
+replacement satellites (e.g. Iridium 11A and 20A).
+
+Added internal naming for launches of Iridiums 2, 3, 76, 77, 79-86,
+11A and 20A.
+
+All internal satellite names (used only for screen warnings) have
+been changed to match the information provided by Motorola.  This
+entailed swapping the names of Iridium 24/46 and 35/37, and correcting
+Iridiums 50, 52, 53 and 54.
+
+Only two specular surfaces now modeled for Iridium 20, identified as
+'1' and '2' in the MMA column.
+
+Predictions are no longer done for the failed satellites Iridium 14
+(#24836), Iridium 44 (#25078), Iridium 71 (#25320) and Iridium 79
+(#25470).
+
+Start times can now be entered with colon delimiters or period
+delimiters (e.g. 20:30 or 20.30).  Allowing periods is helpful
+since the shift key isn't needed, and there is a period on the
+numeric keypad.
+
+
+Version 1.63
+------------
+
+Rotation axis improved for Iridium 20, and modeling added for one of
+the solar panels.
+
+
+Version 1.62
+------------
+
+Flash predictions now performed for the spinning satellite Iridium 20
+(#24871).
+
+To avoid confusion with other programs, Iridium numbers are no longer
+changed internally.  For example, if a TLE file incorrectly has NORAD
+#24871 listed as Iridium 18, the program will no longer switch it to
+its correct name of Iridium 20.  Instead, a warning will be displayed
+and the erroneous name maintained.
+
+Added Iridium status flag to output based on Mike McCants' codes that
+appear in IRIDIUM.TLE.  Flag codes are: M (maneuvering), T (tumbling),
+A (attitude problem), and ? (non-operational altitude).
+
+Predictions are no longer done for the failed satellites Iridium 11
+(#24842) and Iridium 24 (#25105).
+
+Added internal naming for Long March launch of 69 and 71, and May 17th
+Delta 2 launch of Iridium 70 and 72-75.
+
+For single-line mode, added a blank line between flares on different
+days.
+
+Additional bad element set detection added to trap outdated TLEs of
+decayed satellites that contain "Iridium" in their name.
+
+Added the site name to the header of the output file, and a dashed line
+at the end of the file.
+
+
+Version 1.61
+------------
+
+Fixed day-of-week and date bugs in brief file output (Tuesday was
+corrupted, and dates were bad for single-line mode).
+
+
+Version 1.6
+-----------
+
+Day of the week added to the brief file output.
+
+Configuration files can now be loaded from within IRIDFLAR using the
+"L" key in the Main Menu.  The number of lines per flare (1 or 3) is
+now controlled with the "N" key instead of "L".
+
+Toggle added to Main Menu to switch between metric and English units.
+The parameters affected are the site altitude, satellite range and
+maximum flare ground-point range.
+
+Corrected internal naming of NORAD #25170 from Iridium 51 to 56.  Added
+internal naming for recent launches of 51, 55, and 57-68.  Based on
+new information from Motorola via Dr. T.S. Kelso, it appears that the
+names Iridium 9 and 10 are swapped.  I have changed the internal hard-
+coding so that Iridium 9 is #24838 and Iridium 10 is #24839.  Similarly,
+the reported Iridium numbers corresponding to #'s 25169-25173 have
+changed at least twice.  As of April 20 they are named Iridium 50, 56,
+52, 53, and 54 respectively.
+
+Predictions no longer done for Iridium 21 (#24873).
+
+Some users have found ftp sites that provide Iridium two-line element
+sets that have an extra linefeed following the end of each line
+(<CR><LF><LF>).  Worse, this fact may be transparent to the user
+unless he/she happens to open the file in a word processor.  Earlier
+versions of IRIDFLAR would parse such files as being filled with
+comments, and thus no predictions would be made.  Version 1.6 now
+checks for the extra linefeed, and displays a warning if any are
+found.
+
+In 1.52, if a flare's brightest point was cutoff by either the minimum
+elevation constraint or maximum mirror angle, then the program would
+be missing a reference ground point from which to compute the bearing
+to the maximum flare point.  This could lead to a fatal division by
+zero error in some cases, or blank values for the bearing in others.
+Additional program logic has been added to handle this case.
+
+V1.52 failed to check for the existence of the TLE file unless its name
+was changed.  This caused a fatal error when attempting to compute
+flares (since the TLE file could not be opened.)  TLE file existence is
+now verified before computing flares.
+
+
+Version 1.52
+------------
+
+Configuration file format changed to be more consistent with Windows
+.INI files and SkyMap configuration files.  Program now reads parameters
+from [IRIDFLAR] section of configuration file, and ignores any other
+sections that may be present.  This allows users to add comments at
+the beginning of their configuration files, or combine configuration
+sections used by multiple programs.
+
+Automatic recognition and translation of version 1.51, 1.5 and 1.4
+configuration files.  If configuration file is not found or not
+recognized, IRIDFLAR will ask for your latitude, longitude and time
+zone hour, set the start date and time to match your computer's
+current date and time (truncated hour), and set reasonable default
+values for all remaining parameters.
+
+Added City file support (a la SkyMap), so you can enter your site
+name rather than coordinates, assuming it's in SKYMAP.CTY (or
+whatever City File name you use.)
+
+Batch-run support added.  If the line "Batch=Yes" appears in your
+configuration file, then IRIDFLAR will use the settings that appear
+in that file, calculate once, and exit.  In essence, the results
+are the same as if you had run IRIDFLAR with that configuration
+file, typed the <F10> key to calculate, and then hit the <ESC> key
+to exit.
+
+Ground distance and bearing (east/west) to the flare peak added.
+
+Predicted flare magnitude equation modified slightly to better match
+observed flares.  Version 1.52 now predicts brighter flares than
+earlier versions when the mirror angle is greater than 0.25 degrees.
+
+Better filtering of non-Iridium satellites.  Calculations will NOT
+be performed for Iridium 27, Iridium Sim1, Iridium Sim2, or any
+satellite whose name starts with "Iridium" but later contains a
+slash.  (This eliminates unwanted predictions for Iridium rocket
+bodies).
+
+Previously, the ground coordinates given for each flare peak represented
+"instantaneous flare ground-zero."  However, this is not quite the same
+as the point along the flare-line *closest* to the observer.  The latter
+is the more useful, since it tells you the minimum distance you need to
+move in order to see the maximum flare.  (For most latitudes, this point
+will be nearly due east or due west of your location).  So version 1.52
+now calculates this point.  (Note that when displaying three lines per
+flare, the first and third lines are still the instantaneous ground
+flare point.  Only the middle line is the *closest* flare point to the
+observer.)
+
+Maximum mirror angle limit extended from 15 degrees to 30 degrees.
+
+Minor output heading change ("FlrAng" replaced with "Flare" above
+"Angle").
+
+
+Version 1.51 (beta release only)
+--------------------------------
+
+Automatic recognition and translation of version 1.4 configuration
+files.
+
+Flag added to Date/Time Menu which, when set, will automatically load
+the current date as the start date at initial run time.
+
+
+Version 1.5 (beta release only)
+-------------------------------
+
+Maximum sun elevation parameter replaced by a sun-elevation day/night
+transition point.  For passes that occur when the sun is LOWER than
+this elevation, the program will filter out flares dimmer than the
+nighttime magnitude limit.  For passes occurring when the sun is
+HIGHER than the transition angle, the daytime flare magnitude limit
+will be used.  For example, if you set the angle to -7 degrees, your
+daytime flare magnitude limit to -4 and your nighttime magnitude
+limit to +2, the program will find all flares brighter than mag -4,
+and any flares brighter than 2nd magnitude when the sun is more than
+7 degrees below the horizon.
+
+Sequential input of user parameters replaced with menu interface.
+
+Separate visual magnitude filters for daytime and nighttime passes.
+
+Program modified to allow for the possibility of more than one flare
+on a given pass (e.g. separate flares from the forward and left MMAs).
+
+Predictions no longer made for Iridium 27 (#24947).
+
+
+Version 1.4
+-----------
+
+Minimum brightness visual magnitude filter added.
+
+Federico Casazza discovered a bug which causes IRIDFLAR to get caught
+in an endless loop if a satellite happens to enter the earth's umbra
+shortly after a flare peak (and while still above the observer's
+horizon).  This bug can also cause IRIDFLAR to miss flares under
+other special circumstances.  Bug has been found and fixed.
+
+Solar azimuth added to file output.
+
+Peak magnitude added to screen output and verbose file output.
+
+Standard magnitude removed from screen output; only appears now in
+verbose file output.
+
+Headers to output file have been expanded for easier understanding.
+
+Minor bug fixed in the brief file output when "Does not intersect"
+is supposed to appear.  Now replaced with "No intersection".
+
+If seconds portion of time is less than 10, is padded with zero.
+
+Magnitudes reported in brief-format output file now rounded to the
+nearest integer magnitude (instead of truncated).
+
+Formula for predicted magnitude versus mirror angle has been modified
+slightly based on observed flare magnitudes.  Also, IRIDFLAR now
+accurately models the radiance distribution of the solar disk (i.e.,
+the center of the disk is brighter than the limb).  This causes
+predicted flare magnitudes to continue to brighten as the flare
+angle drops below 0.25 degrees.
+
+
+Version 1.31
+------------
+
+Incorrect MMA identified in output.  Bug fixed.
+Hard-coding of Iridium 42 name changed to Iridium 43.
+
+
+Version 1.3
+-----------
+
+Method added for recognizing new Iridium satellites (see above).
+
+Option added for (V)erbose or (B)rief output file format.
+
+Option added for outputting 3 lines per flare or just the peaks.
+
+Standard magnitude (1000-km range, square-on viewing) now calculated
+to assist in refining the relationship between mirror angle and
+visual magnitude.
+
+Specific MMA causing each flare is now output under column "M".  The
+codes are F-forward, L-left and R-right.  Directions are relative
+to a "passenger" on the satellite facing in the direction of motion.
+
+Special handling added for Iridium 11.
+
+TLE file kept open only when running predictions (not while entering
+parameters).  File-sharing of TLE file, configuration file and output
+file now permitted (for multi-tasking environments).
+
+
+Version 1.2
+-----------
+
+Added the maximum flare brightness location (latitude and longitude).
+
+Eliminated screen output of right ascension and declination, and rounded
+the satellite azimuth and elevation to the nearest degree to make room
+for the flare latitude and longitude.  R.A. and declination are still
+output to the file, though.
+
+Eliminated handling of Iridium dummy satellites since these do not
+have the highly reflective main mission antennae that the operational
+Iridiums do.
+
+Improved the flare search algorithm, greatly speeding up the program!
+
+
+Version 1.1
+-----------
+
+Change MM-DD-YY output to YY-MM-DD.
+
+Indicate in the longitude prompt that east longitudes are expected.
+Have added "(- for W, + for E)".
+
+Refraction now included when calculating sun and satellite horizon
+coordinates.
+
+Changed default configuration filename from IRIDDEF.DAT to IRIDFLAR.CFG.
+Configuration filenames other than IRIDFLAR.CFG are allowed.
+
+TLE filename is now included as one of the defaults, and it can be
+changed between runs (just like all the other inputs).
+
+Header added to output file with location coordinates, UTC offset, 
+TLE filename, and configuration filename.
+
+Non-integer timezones are now permitted (e.g. Australia).
+
+Improved calculation of satellite lighting condition.  Now calculates
+lighting the same way that SkyMap does -- 15 km or 20 km tangent height
+extinction (depending on season), with 0.2 or 0.1 degrees of refraction
+respectively.  (Version 1.0 incorrectly assumed that the sun was visible
+from the satellite all the way down to the hard earth, where refraction
+is about 1.2 degrees.  This was far too optimistic, leading to an
+erroneous extension of sunlit times.)  Only two lighting conditions now
+possible in IRIDFLAR output:  Lit or Pnb.
+
+Start times can now be in any of the following formats:  HH:MM:SS,
+HH:MM, or HH, where HH, MM and SS can be one or two digits.
+
+Problem fixed with chronological sort intermixing output lines of two or
+more satellites that happen to be flaring at approximately the same time.
+
+
+Version 1.0
+-----------
+
+[Original release]
+
