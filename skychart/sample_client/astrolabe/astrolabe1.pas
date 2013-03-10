@@ -34,6 +34,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
+  {$ifdef mswindows}
+  Dask,
+  {$endif}
   cu_tcpclient, IniFiles,
   SysUtils, Types, Classes, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, LResources, ComCtrls;
@@ -51,11 +54,14 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    LabelX: TLabel;
+    LabelY: TLabel;
     Memo1: TMemo;
     ConnectRetryTimer: TTimer;
     ExitTimer: TTimer;
     Panel1: TPanel;
     Panel2: TPanel;
+    Panel3: TPanel;
     StaticText1: TStaticText;
     PosTimer: TTimer;
     TrackBarH: TTrackBar;
@@ -75,6 +81,8 @@ type
     ConnectRetry: integer;
     LastPosX, LastPosY, InactiveLoop: integer;
     EncoderX,EncoderY : integer;
+    card: SmallInt;
+    RealEncoder:boolean;
     Function  GetTcpPort:string;
     procedure GetCdCInfo;
     procedure OpenCDC(param:string);
@@ -84,6 +92,7 @@ type
     procedure Disconnect;
     procedure Restart;
     procedure GetEncoder;
+    function InitEncoder: boolean;
   public
     { Public declarations }
     client : TClientThrd;
@@ -100,6 +109,7 @@ const
   CdCCmdTimeout=5;       // cdc response timeout [seconds]
   CdCTcpimeout=100;      // tcp/ip timeout [ms] also act as a delay before to send command
 
+
   {$ifdef linux}
         DefaultCdC='skychart';
         DefaultCdcDir='/usr/bin';
@@ -114,6 +124,9 @@ const
         DefaultCdC='skychart.exe';
         DefaultCdcDir='C:\Program Files\Ciel';
         DefaultCdCconfig='Skychart\skychart.ini';
+        // DASK card
+        cardModel=PCI_7248;  // ADLINK PCI 7248
+        cardNum=1;           // First card
   {$endif}
 
 implementation
@@ -381,6 +394,9 @@ LastPosX:=MaxInt;
 LastPosY:=MaxInt;
 Closing:=false;
 Restarting:=false;
+RealEncoder:=InitEncoder;
+Panel2.Visible:=not RealEncoder;
+Panel3.Visible:=RealEncoder;
 end;
 
 procedure Tf_astrolabe.FormDestroy(Sender: TObject);
@@ -430,11 +446,34 @@ end;
 end;
 
 procedure Tf_astrolabe.GetEncoder;
+var PA,PB,PC,x1,x2,x3: word;
+    va,vb,vc: Cardinal;
 begin
- // read encoder position here
+if RealEncoder then begin
+  // read encoder position here
+  {$ifdef mswindows}
+  DI_ReadPort(card,Channel_P1A,va);
+  PA:=255-va;
+  DI_ReadPort(card,Channel_P1B,vb);
+  PB:=255-vb;
+  DI_ReadPort(card,Channel_P1C,vc);
+  PC:=255-vc;
+  x1:=(PA AND $F);
+  x2:=(PA AND $F0) SHR 4;
+  x3:=PB AND $3;
+  EncoderX:=x1 + 10*x2 + 100*x3 - 180;
+  x1:=(PC AND $F);
+  x2:=(PC AND $F0) SHR 4;
+  x3:=PB SHR 6;
+  EncoderY:=x1 + 10*x2 + 100*x3;
+  LabelX.Caption:=inttostr(EncoderX);
+  LabelY.Caption:=inttostr(EncoderY);
+  {$endif}
+end else begin
  // simulation using two trackbar:
  EncoderX:=TrackBarH.Position;
  EncoderY:=TrackBarD.Position;
+end;
 end;
 
 procedure Tf_astrolabe.PosTimerTimer(Sender: TObject);
@@ -452,20 +491,20 @@ if (EncoderX<>LastPosX)or           // moved AH coder
     LastPosX := EncoderX;
     LastPosY := EncoderY;
     InactiveLoop:=0;
-    if TrackBarD.Position>-450 then begin
+    if EncoderY>-45 then begin
       CdCCmd('PLANETINFO OFF');
-      CdCCmd('MOVESCOPEH '+FormatFloat('0.00',TrackBarH.Position/15/10)+' '+FormatFloat('0.00',TrackBarD.Position/10));
+      CdCCmd('MOVESCOPEH '+FormatFloat('0.00',EncoderX/15)+' '+FormatFloat('0.00',EncoderY));
       CdCCmd('IDSCOPE');
     end
-    else if TrackBarD.Position>-470 then CdCCmd('PLANETINFO 0') // Visibility
-    else if TrackBarD.Position>-510 then CdCCmd('PLANETINFO 1') // Moon
-    else if TrackBarD.Position>-550 then CdCCmd('PLANETINFO 2') // Mercury
-    else if TrackBarD.Position>-590 then CdCCmd('PLANETINFO 3') // Venus
-    else if TrackBarD.Position>-630 then CdCCmd('PLANETINFO 4') // Mars
-    else if TrackBarD.Position>-670 then CdCCmd('PLANETINFO 5') // Jupiter
-    else if TrackBarD.Position>-710 then CdCCmd('PLANETINFO 6') // Saturn
-    else if TrackBarD.Position>-750 then CdCCmd('PLANETINFO 7') // Orbit1
-    else if TrackBarD.Position>-1000 then CdCCmd('PLANETINFO 8') // Orbit2
+    else if EncoderY>-47 then CdCCmd('PLANETINFO 0') // Visibility
+    else if EncoderY>-51 then CdCCmd('PLANETINFO 1') // Moon
+    else if EncoderY>-55 then CdCCmd('PLANETINFO 2') // Mercury
+    else if EncoderY>-59 then CdCCmd('PLANETINFO 3') // Venus
+    else if EncoderY>-63 then CdCCmd('PLANETINFO 4') // Mars
+    else if EncoderY>-67 then CdCCmd('PLANETINFO 5') // Jupiter
+    else if EncoderY>-71 then CdCCmd('PLANETINFO 6') // Saturn
+    else if EncoderY>-75 then CdCCmd('PLANETINFO 7') // Orbit1
+    else if EncoderY>-100 then CdCCmd('PLANETINFO 8') // Orbit2
     else;
     Application.ProcessMessages;
 end;
@@ -474,5 +513,14 @@ PosTimer.Enabled:=true;
 end;
 end;
 
+function Tf_astrolabe.InitEncoder: boolean;
+begin
+{$ifdef mswindows}
+card:=Register_Card(cardModel, cardNum);
+result:=card>=0;
+{$else}
+result:=false;
+{$endif}
+end;
 
 end.

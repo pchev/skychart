@@ -1,15 +1,15 @@
 object f_astrolabe: Tf_astrolabe
-  Left = 62
+  Left = 94
   Height = 439
-  Top = 108
-  Width = 375
+  Top = 122
+  Width = 364
   HorzScrollBar.Range = 331
   HorzScrollBar.Visible = False
   VertScrollBar.Range = 377
   VertScrollBar.Visible = False
   Caption = 'TCP Client'
   ClientHeight = 439
-  ClientWidth = 375
+  ClientWidth = 364
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   KeyPreview = True
@@ -18,12 +18,12 @@ object f_astrolabe: Tf_astrolabe
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnShow = FormShow
-  LCLVersion = '1.0.4.0'
+  LCLVersion = '1.0.6.0'
   object Memo1: TMemo
     Left = 0
-    Height = 261
-    Top = 178
-    Width = 375
+    Height = 211
+    Top = 228
+    Width = 364
     Align = alClient
     ScrollBars = ssVertical
     TabOrder = 0
@@ -32,10 +32,10 @@ object f_astrolabe: Tf_astrolabe
     Left = 0
     Height = 88
     Top = 0
-    Width = 375
+    Width = 364
     Align = alTop
     ClientHeight = 88
-    ClientWidth = 375
+    ClientWidth = 364
     TabOrder = 1
     object Label4: TLabel
       Left = 8
@@ -93,18 +93,26 @@ object f_astrolabe: Tf_astrolabe
     Left = 0
     Height = 90
     Top = 88
-    Width = 375
+    Width = 364
     Align = alTop
     ClientHeight = 90
-    ClientWidth = 375
+    ClientWidth = 364
     TabOrder = 2
+    object StaticText1: TStaticText
+      Left = 56
+      Height = 19
+      Top = 45
+      Width = 98
+      Caption = '| Zone Menu | '
+      TabOrder = 2
+    end
     object TrackBarH: TTrackBar
       Left = 44
       Height = 37
       Top = 4
       Width = 324
-      Max = 1800
-      Min = -1800
+      Max = 180
+      Min = -180
       PageSize = 15
       Position = 0
       TickStyle = tsNone
@@ -115,8 +123,8 @@ object f_astrolabe: Tf_astrolabe
       Height = 37
       Top = 48
       Width = 324
-      Max = 900
-      Min = -900
+      Max = 90
+      Min = -90
       PageSize = 15
       Position = 0
       TickStyle = tsNone
@@ -138,14 +146,31 @@ object f_astrolabe: Tf_astrolabe
       Caption = 'D'
       ParentColor = False
     end
-    object StaticText1: TStaticText
-      Left = 56
-      Height = 18
-      Top = 45
-      Width = 84
-      AutoSize = True
-      Caption = '| Zone Menu |'
-      TabOrder = 2
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 50
+    Top = 178
+    Width = 364
+    Align = alTop
+    ClientHeight = 50
+    ClientWidth = 364
+    TabOrder = 3
+    object LabelX: TLabel
+      Left = 53
+      Height = 15
+      Top = 14
+      Width = 38
+      Caption = 'LabelX'
+      ParentColor = False
+    end
+    object LabelY: TLabel
+      Left = 200
+      Height = 15
+      Top = 14
+      Width = 38
+      Caption = 'LabelY'
+      ParentColor = False
     end
   end
   object ConnectRetryTimer: TTimer
