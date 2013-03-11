@@ -286,13 +286,11 @@ ManualMountType.Items[1]:=rsAltAzMount;
 TelescopeSelect.Caption:=rsSelectTheTel;
 TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
-if TelescopeSelect.Items.Count>4 then begin
-   TelescopeSelect.Items[4]:=rsEncoders;
-   {$ifdef darwin}
-     TelescopeSelect.Items.Delete(4);
-     TelescopeSelect.Items.Delete(3);
-   {$endif}
- end;
+TelescopeSelect.Items[4]:=rsEncoders;
+{$ifdef darwin}
+ TelescopeSelect.Items.Delete(4);
+ TelescopeSelect.Items.Delete(3);
+{$endif}
 {$ifdef mswindows}
 ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 {$else}
