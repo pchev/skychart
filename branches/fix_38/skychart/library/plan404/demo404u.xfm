@@ -1,0 +1,70 @@
+object Form1: TForm1
+  Left = 200
+  Top = 161
+  Width = 442
+  Height = 508
+  HorzScrollBar.Range = 401
+  VertScrollBar.Range = 492
+  ActiveControl = Edit1
+  Caption = 'Form1'
+  Color = clBackground
+  PixelsPerInch = 90
+  TextHeight = 17
+  TextWidth = 7
+  object Edit1: TEdit
+    Left = 16
+    Top = 32
+    Width = 193
+    Height = 25
+    TabOrder = 0
+    Text = '2446431.5'
+  end
+  object Memo1: TMemo
+    Left = 16
+    Top = 80
+    Width = 385
+    Height = 201
+    Font.Color = clBlack
+    Font.Height = 13
+    Font.Name = 'adobe-courier'
+    Font.Pitch = fpFixed
+    Font.Style = []
+    Font.Weight = 0
+    ParentFont = False
+    ScrollBars = ssAutoBoth
+    TabOrder = 1
+  end
+  object Button1: TButton
+    Left = 248
+    Top = 32
+    Width = 75
+    Height = 25
+    Caption = 'GO'
+    TabOrder = 2
+    OnClick = Button1Click
+  end
+  object Label1: TLabel
+    Left = 16
+    Top = 296
+    Width = 385
+    Height = 196
+    Caption = 
+      'Check values:'#13#10'2446431.5'#13#10'        Longitude           Latitude  ' +
+      '    Distance'#13#10'   1:   221d 35'#39' 15.0"      0d 48'#39' 22.9"  4.450469' +
+      'e-01'#13#10'   2:   269d 47'#39' 15.5"   -  0d 46'#39' 40.8"  7.270138e-01'#13#10'EM' +
+      'B :   100d 16'#39' 31.1"      0d 00'#39' 00.0"  9.833008e-01'#13#10'   4:   18' +
+      '9d 21'#39' 12.5"      1d 11'#39' 29.9"  1.637858e+00'#13#10'   5:   325d 10'#39' 0' +
+      '4.5"   -  0d 55'#39' 12.3"  5.035840e+00'#13#10'   6:   241d 54'#39' 58.7"    ' +
+      '  1d 56'#39' 57.5"  9.971607e+00'#13#10'   7:   258d 27'#39' 53.2"   -  0d 03'#39 +
+      ' 37.4"  1.911814e+01'#13#10'   8:   273d 22'#39' 45.1"      1d 05'#39' 48.2"  ' +
+      '3.024889e+01'#13#10'   9:   215d 09'#39' 06.5"     16d 35'#39' 12.1"  2.973803' +
+      'e+01'#13#10'MOON:   155d 04'#39' 04.3"      4d 27'#39' 55.8"  2.570443e-03'#13#10
+    Font.Color = clBlack
+    Font.Height = 13
+    Font.Name = 'adobe-courier'
+    Font.Pitch = fpFixed
+    Font.Style = []
+    Font.Weight = 0
+    ParentFont = False
+  end
+end

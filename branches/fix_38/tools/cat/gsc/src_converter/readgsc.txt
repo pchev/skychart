@@ -1,0 +1,39 @@
+****************************************************************
+
+	Cartes du Ciel, Sky Charts 
+
+	Patrick Chevalley  
+
+        http://www.astrosurf.com/astropc
+	pch@freesurf.ch
+
+****************************************************************
+
+This program convert the HST Guide Star Catalogue from the original FITS format 
+CD-rom for use with "Cartes du Ciel" / "Sky Charts" program. 
+You may run this utility only if you want to put the Guide Star on hard disk, otherwise 
+"Sky Chart" might use the CD-rom directly. 
+The GSC Compact version must be used directly by Cartes du Ciel but not by this 
+program.
+In the first field enter the complete directory path to the zone directory of the original 
+catalogue.
+In the second the individual zone to convert.
+In the third field enter the path where to install the converted catalog , 
+I suggest you keep the default: <Sky Chart path>\cat\gsc
+For the complete catalogue you must have 480 MB free disk space on the destination 
+directory but less if you convert only a few declination zones.
+If you check the box "Remove multiple entries" then only the first occurence of stars 
+with the "multiple" flag will be keep, this save aproximately 30% of space without 
+effect on chart quality.
+If you check the box "Remove non stellar objects" then all object with the "class" 
+code different from 0 or 2 will be rejected, this save 15% of space but may cause the 
+rejection of real stars in crowded fields.
+When the two options are checked this save globaly 40% of space.
+Press "Conversion" key and be patient... 
+Each zone may take from five to thirty minutes to complete, depending on your 
+machine. 
+When it finish press "Exit" key.
+
+
+
+

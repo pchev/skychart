@@ -1,0 +1,77 @@
+object f_config_calendar: Tf_config_calendar
+  Left = 0
+  Height = 529
+  Top = 0
+  Width = 500
+  ClientHeight = 529
+  ClientWidth = 500
+  TabOrder = 0
+  DesignLeft = 380
+  DesignTop = 240
+  object Mainpanel: TPanel
+    Left = 0
+    Height = 529
+    Top = 0
+    Width = 500
+    Align = alClient
+    ClientHeight = 529
+    ClientWidth = 500
+    TabOrder = 0
+    object PageControl1: TPageControl
+      Left = 1
+      Height = 527
+      Top = 1
+      Width = 498
+      ActivePage = TabSheet1
+      Align = alClient
+      ShowTabs = False
+      TabIndex = 0
+      TabOrder = 0
+      object TabSheet1: TTabSheet
+        Caption = 'TabSheet1'
+        ClientHeight = 523
+        ClientWidth = 494
+        object Label1: TLabel
+          Left = 27
+          Height = 16
+          Top = 13
+          Width = 130
+          Caption = 'Calendar graph setting'
+          ParentColor = False
+        end
+        object LongEdit1: TLongEdit
+          Left = 140
+          Height = 23
+          Hint = '100..500'
+          Top = 109
+          Width = 80
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnChange = LongEdit1Change
+          Value = 100
+          MinValue = 100
+          MaxValue = 500
+        end
+        object Label2: TLabel
+          Left = 29
+          Height = 16
+          Top = 113
+          Width = 74
+          Caption = 'Graph height'
+          ParentColor = False
+        end
+        object Label3: TLabel
+          Left = 29
+          Height = 40
+          Top = 45
+          Width = 336
+          AutoSize = False
+          Caption = 'This is a work in progress and this page do not do anything useful at the moment'
+          ParentColor = False
+          WordWrap = True
+        end
+      end
+    end
+  end
+end

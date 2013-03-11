@@ -1,0 +1,168 @@
+/* ================INSTRUCTIONS=================*/ 
+/* By changing the classes below, you can add your own custom banner image and/or custom site title bar. In order for your changes to work though, you MUST include a reference in your HTML pages to both the universal CSS file and custom CSS file in that order.
+
+Instructions are provided below for customizing these classes.
+
+/* ================BANNER=======================*/  
+/* TO DISPLAY A CUSTOM BANNER IMAGE: 
+If you want to display a custom banner, change the "background: url" to point to a local banner, or external, image location.
+
+TO DISPLAY A CUSTOM BANNER COLOR (NO IMAGE): 
+If you would rather display a color instead of a banner image, change the "background: url" to point to "" and set the "background-color" to whatever color you wish to display.
+NOTE: You can use either hexadecimal color codes (i.e. - #000000) or HTML color names (i.e. - "black"). */ 
+.banner { 
+        background: url("/geonames/images/bgn_header_logo.jpg") 178px 0px no-repeat; 
+} 
+DIV.bannerColorBand, DIV.banner { 
+        background-color: #003366; 
+} 
+/* ================SITE TITLE===================*/ 
+/* TO DISPLAY A CUSTOM SITE TITLE BAR: 
+The .siteTitle class is specific to the colored site title bar that lies beneath the USGS identifier. To change the color of this bar, set the "background-color" attribute below to the color you wish to display and change the "color" attribute to set the text color.
+NOTE: You can use either hexadecimal color codes (i.e. - #000000) or HTML color names (i.e. - "black"). */ 
+
+Div.siteTitle, #pTitle { 
+     background-color: #003366; 
+     color: #ffffff; 
+} 
+/* =============STANDARD CONTENT===============*/ 
+/* TO CHANGE THE TEXT SIZE OF THE CONTENT:
+By default, USGS has set the font size to "small" in order to provide a consistent size for content across all pages. If you would prefer not to have a pre-defined font size for your pages, change the "font-size" attributes below to "font-size: 100%;". */
+body {
+	font-size: small;
+}
+th, td {
+	font-size: small;
+}
+
+h1 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: #000000;
+}
+.bg-darkblue {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #003366;
+}
+.menu {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #FFFFFF;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 3px;
+	text-decoration: none;
+}
+.menu:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.menu:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.menu:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #FFFFFF;
+	font-weight: bold;
+	text-decoration: none;
+}
+.menu:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: small;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+.submenu:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-left: 8px;
+	display: block;
+}
+.submenu:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-left: 8px;
+	display: block;
+}
+.submenu:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-left: 8px;
+	display: block;
+}
+.submenu:active {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	color: #FFFFFF;
+	text-decoration: none;
+	padding-left: 8px;
+	display: block;
+}
+.bg-gray1 {
+	background-color: #cccccc;
+}
+.bold {
+	font-weight: bold;
+}
+.bg-white {
+	background-color: #ffffff;
+}
+.subtitles {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: medium;
+	color: #333333;
+	font-weight: bold;
+	border-bottom-width: thin;
+	border-bottom-style: dashed;
+	border-bottom-color: #CCCCCC;
+}
+.red-highlight {
+	color: #FF0000;
+}
+.subtitles-2 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: #000000;
+}
+#metadata_types {
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 2px;
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-color: #CCCCCC;
+	border-right-color: #999999;
+	border-bottom-color: #999999;
+	border-left-color: #CCCCCC;
+	padding: 3px;
+	width: 200px;
+}
+.italics {
+	font-style: italic;
+}
+.bg-orange {
+	background-color: #FF6600;
+}
+.announcement {
+	background-color: #FFFF99;
+	padding: 5px;
+	width: 98%;
+	border: 1px solid #666666;
+}

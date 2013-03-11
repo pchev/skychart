@@ -1,0 +1,1 @@
+option stack=20000 option map=get_dss.map f get_dss.obj, dss.obj, extr_fit.obj, getpiece.obj, hdcmprss.obj, bitinput.obj, decode.obj, dodecode.obj, hinv.obj, platelst.obj, qtreedec.obj
