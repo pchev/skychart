@@ -2432,6 +2432,7 @@ begin
         inc(k);
       end;
     until not ok;
+    CloseGCat;
  end;
  closefile(ixrecf);
  Fprogress.progressbar2.max:=2;
