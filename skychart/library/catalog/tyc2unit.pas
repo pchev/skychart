@@ -429,7 +429,7 @@ OpenRegion(hemis,zone,Smnum,ok);
 ok:=false;
 repeat
     ReadTY2(lin,buf,fok);
-    if lin.gscn=num then begin ok:=true; break; end;
+    if lin.gscn=num then begin ok:=true; end; // set result but finish to read the zone to complete the cache
 until not fok;
 Closeregion;
 end;
