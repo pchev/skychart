@@ -6,8 +6,8 @@ object f_config_observatory: Tf_config_observatory
   ClientHeight = 527
   ClientWidth = 502
   TabOrder = 0
-  DesignLeft = 341
-  DesignTop = 423
+  DesignLeft = 351
+  DesignTop = 256
   object MainPanel: TPanel
     Left = 0
     Height = 527
@@ -427,34 +427,26 @@ object f_config_observatory: Tf_config_observatory
         end
         object GroupBox1: TGroupBox
           Left = 8
-          Height = 121
-          Top = 14
+          Height = 132
+          Top = 4
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 104
+          ClientHeight = 115
           ClientWidth = 453
           TabOrder = 0
-          object hor_l1: TLabel
-            Left = 13
-            Height = 16
-            Top = 45
-            Width = 143
-            Caption = 'Local Horizon File Name : '
-            ParentColor = False
-          end
           object displayhorizon: TCheckBox
             Left = 13
             Height = 23
-            Top = 73
+            Top = 34
             Width = 184
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
             TabOrder = 0
           end
           object horizonfile: TFileNameEdit
-            Left = 197
+            Left = 211
             Height = 23
-            Top = 41
+            Top = 34
             Width = 208
             OnAcceptFileName = horizonfileAcceptFileName
             DialogOptions = []
@@ -469,11 +461,57 @@ object f_config_observatory: Tf_config_observatory
           object fillhorizon: TCheckBox
             Left = 13
             Height = 23
-            Top = 9
+            Top = 8
             Width = 145
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
             TabOrder = 1
+          end
+          object horizonpicturefile: TFileNameEdit
+            Left = 211
+            Height = 23
+            Top = 61
+            Width = 208
+            OnAcceptFileName = horizonpicturefileAcceptFileName
+            DialogOptions = []
+            FilterIndex = 0
+            HideDirectories = False
+            ButtonWidth = 23
+            NumGlyphs = 1
+            MaxLength = 0
+            TabOrder = 3
+            OnChange = horizonpicturefileChange
+          end
+          object displayhorizonpicture: TCheckBox
+            Left = 13
+            Height = 23
+            Top = 61
+            Width = 177
+            Caption = 'Display the horizon picture'
+            OnClick = displayhorizonpictureClick
+            TabOrder = 4
+          end
+          object picturerotation: TFloatEdit
+            Left = 211
+            Height = 23
+            Hint = '-360..360'
+            Top = 88
+            Width = 80
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 5
+            OnChange = picturerotationChange
+            Value = 0
+            MinValue = -360
+            MaxValue = 360
+          end
+          object Label9: TLabel
+            Left = 39
+            Height = 16
+            Top = 92
+            Width = 114
+            Caption = 'Picture angle offset'
+            ParentColor = False
           end
         end
         object GroupBox3: TGroupBox

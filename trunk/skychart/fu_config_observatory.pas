@@ -37,6 +37,10 @@ type
   { Tf_config_observatory }
 
   Tf_config_observatory = class(TFrame)
+    displayhorizonpicture: TCheckBox;
+    picturerotation: TFloatEdit;
+    horizonpicturefile: TFileNameEdit;
+    Label9: TLabel;
     RefDefault: TButton;
     Button5: TButton;
     Button6: TButton;
@@ -96,7 +100,6 @@ type
     GroupBox2: TGroupBox;
     horizonopaque: TCheckBox;
     GroupBox1: TGroupBox;
-    hor_l1: TLabel;
     displayhorizon: TCheckBox;
     GroupBox3: TGroupBox;
     horizondepression: TCheckBox;
@@ -108,12 +111,17 @@ type
     procedure ComboBox1Select(Sender: TObject);
     procedure countrylistSelect(Sender: TObject);
     procedure CountryTZChange(Sender: TObject);
+    procedure displayhorizonpictureClick(Sender: TObject);
     procedure horizonfileAcceptFileName(Sender: TObject; var Value: String);
+    procedure horizonpicturefileAcceptFileName(Sender: TObject;
+      var Value: String);
+    procedure horizonpicturefileChange(Sender: TObject);
     procedure HScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure humidityChange(Sender: TObject);
     procedure Label6Click(Sender: TObject);
     procedure ObsNameChange(Sender: TObject);
+    procedure picturerotationChange(Sender: TObject);
     procedure polarxChange(Sender: TObject);
     procedure polaryChange(Sender: TObject);
     procedure RefDefaultClick(Sender: TObject);
@@ -210,8 +218,9 @@ Page2.caption:=rsHorizon;
 GroupBox2.caption:=rsWantToTrackA;
 horizonopaque.caption:=rsShowObjectBe;
 GroupBox1.caption:=rsLocalHorizon;
-hor_l1.caption:=rsLocalHorizon2;
 displayhorizon.caption:=rsDisplayTheLo;
+displayhorizonpicture.caption:=rsDisplayTheHo;
+label9.Caption:=rsPictureAngle;
 fillhorizon.caption:=rsFillWithHori;
 GroupBox3.caption:=rsDepressionOf;
 Label1.caption:=rsYouLiveOnABi;
@@ -471,11 +480,10 @@ begin
  UpdTZList(Sender);
 end;
 
-procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
-  var Value: String);
+procedure Tf_config_observatory.displayhorizonpictureClick(Sender: TObject);
 begin
- if LockChange then exit;
- cmain.horizonfile:=value;
+  csc.ShowHorizonPicture:=displayhorizonpicture.Checked;
+  if csc.ShowHorizonPicture then displayhorizon.Checked:=false;
 end;
 
 procedure Tf_config_observatory.ObsNameChange(Sender: TObject);
@@ -856,6 +864,10 @@ horizonopaque.checked:=not csc.horizonopaque;
 horizonfile.text:=cmain.horizonfile;
 horizonfile.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
 displayhorizon.Checked:=csc.ShowHorizon;
+horizonpicturefile.text:=cmain.HorizonPictureFile;
+horizonpicturefile.InitialDir:=slash(HomeDir);
+displayhorizonpicture.Checked := csc.ShowHorizonPicture;
+picturerotation.Value:=csc.HorizonPictureRotate;
 fillhorizon.Checked:=csc.FillHorizon;
 horizondepression.Checked:=csc.ShowHorizonDepression;
 end;
@@ -863,6 +875,7 @@ end;
 procedure Tf_config_observatory.displayhorizonClick(Sender: TObject);
 begin
 csc.ShowHorizon:=displayhorizon.Checked;
+if csc.ShowHorizon then displayhorizonpicture.Checked:=false;
 end;
 
 procedure Tf_config_observatory.fillhorizonClick(Sender: TObject);
@@ -880,10 +893,35 @@ begin
 csc.horizonopaque:=not horizonopaque.checked;
 end;
 
+procedure Tf_config_observatory.horizonfileAcceptFileName(Sender: TObject;
+  var Value: String);
+begin
+ if LockChange then exit;
+ cmain.horizonfile:=value;
+end;
+
 procedure Tf_config_observatory.horizonfileChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.horizonfile:=horizonfile.text;
+end;
+
+procedure Tf_config_observatory.horizonpicturefileAcceptFileName(
+  Sender: TObject; var Value: String);
+begin
+if LockChange then exit;
+cmain.HorizonPictureFile:=value;
+end;
+
+procedure Tf_config_observatory.horizonpicturefileChange(Sender: TObject);
+begin
+if LockChange then exit;
+cmain.HorizonPictureFile:=horizonpicturefile.text;
+end;
+
+procedure Tf_config_observatory.picturerotationChange(Sender: TObject);
+begin
+  csc.HorizonPictureRotate := picturerotation.Value;
 end;
 
 end.
