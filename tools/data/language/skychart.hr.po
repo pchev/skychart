@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"POT-Creation-Date: 2013-03-17 18:24+0000\n"
 "PO-Revision-Date: 2012-05-06 22:00+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-09 09:48+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1433,6 +1433,10 @@ msgstr "Prikaži točnost"
 msgid "Display the chart information in the menu bar."
 msgstr "Prikaži informacije o karti na traci izbornika"
 
+#: u_translation.rsdisplaytheho
+msgid "Display the horizon picture"
+msgstr ""
+
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
 msgstr "Prikaži oznake"
@@ -2645,10 +2649,6 @@ msgstr "Učitaj projekt"
 msgid "Local horizon"
 msgstr "Lokalni horizont"
 
-#: u_translation.rslocalhorizon2
-msgid "Local horizon file name: "
-msgstr "Ime datoteke lokalnog horizonta: "
-
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Lokalno zvijezdano vijeme"
@@ -3488,6 +3488,10 @@ msgstr "Fotografska ploča"
 #: u_translation.rsphotographic2
 msgid "Photographic"
 msgstr "Fotografski"
+
+#: u_translation.rspictureangle
+msgid "Picture angle offset"
+msgstr ""
 
 #: u_translation.rspictures
 msgid "Pictures"
