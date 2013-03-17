@@ -474,6 +474,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 208
             OnAcceptFileName = horizonpicturefileAcceptFileName
             DialogOptions = []
+            Filter = '*.png|*.png'
             FilterIndex = 0
             HideDirectories = False
             ButtonWidth = 23
