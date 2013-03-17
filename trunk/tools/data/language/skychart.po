@@ -2698,10 +2698,6 @@ msgstr ""
 msgid "Local horizon"
 msgstr ""
 
-#: u_translation:rslocalhorizon2
-msgid "Local horizon file name: "
-msgstr ""
-
 #: u_translation:rsdisplaythelo
 msgid "Display the local horizon line"
 msgstr ""
@@ -5468,5 +5464,13 @@ msgstr ""
 
 #: u_translation:rswarninglowre
 msgid "Warning! Low resolution mode. Use PostScript instead and print the result file."
+msgstr ""
+
+#: u_translation:rsdisplaytheho
+msgid "Display the horizon picture"
+msgstr ""
+
+#: u_translation:rspictureangle
+msgid "Picture angle offset"
 msgstr ""
 

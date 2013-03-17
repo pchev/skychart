@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-01-27 11:54+0000\n"
+"POT-Creation-Date: 2013-03-17 18:24+0000\n"
 "PO-Revision-Date: 2012-08-25 10:40+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-09 09:49+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1432,6 +1432,10 @@ msgstr "Visningspresisjon"
 msgid "Display the chart information in the menu bar."
 msgstr "Vis kartinformasjonen i menylinjen."
 
+#: u_translation.rsdisplaytheho
+msgid "Display the horizon picture"
+msgstr ""
+
 #: u_translation.rsdisplaythela
 msgid "Display the labels"
 msgstr "Vis påskriftene"
@@ -2644,10 +2648,6 @@ msgstr "Last prosjekt"
 msgid "Local horizon"
 msgstr "Lokal horisont"
 
-#: u_translation.rslocalhorizon2
-msgid "Local horizon file name: "
-msgstr "Filnavn: "
-
 #: u_translation.rslocalsideral
 msgid "Local sidereal time"
 msgstr "Lokal stjernetid"
@@ -3487,6 +3487,10 @@ msgstr "Fotografisk plate"
 #: u_translation.rsphotographic2
 msgid "Photographic"
 msgstr "Fotografisk"
+
+#: u_translation.rspictureangle
+msgid "Picture angle offset"
+msgstr ""
 
 #: u_translation.rspictures
 msgid "Pictures"
