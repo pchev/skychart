@@ -31,7 +31,7 @@ uses
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
     gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit, vocat,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
-    rc3unit,
+    rc3unit, BGRABitmap,
     u_translation, u_constant, u_util, u_projection,
     SysUtils, Classes, Math, Dialogs, Forms;
 
@@ -159,6 +159,7 @@ type
      Procedure LoadConstL(fname:string);
      Procedure LoadConstB(fname:string);
      Procedure LoadHorizon(fname:string; cfgsc:Tconf_skychart);
+     Procedure LoadHorizonPicture(fname:string);
      Procedure LoadStarName(fpath,lang:string);
      function  LongLabelGreek(txt : string) : string;
      function  LongLabelConst(txt : string) : string;
@@ -3336,6 +3337,21 @@ begin
    finally
    closefile(f);
    end;
+end;
+
+Procedure Tcatalog.LoadHorizonPicture(fname:string);
+begin
+try
+if FileExists(fname) then begin
+   cfgshr.horizonpicture.LoadFromFile(fname);
+   cfgshr.horizonpicturevalid:=true;
+end else begin
+   cfgshr.horizonpicture.SetSize(1,1);
+   cfgshr.horizonpicturevalid:=false;
+end;
+except
+ cfgshr.horizonpicturevalid:=false;
+end;
 end;
 
 Procedure Tcatalog.LoadHorizon(fname:string; cfgsc:Tconf_skychart);

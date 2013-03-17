@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses gcatunit,
-  cu_tz, dynlibs,
+  cu_tz, dynlibs, BGRABitmap,
   Classes, Controls, FPCanvas, Graphics;
 
 const
@@ -723,6 +723,8 @@ type
     ConstL: array of Tconstl;
     ConstB: array of Tconstb;
     horizonlist: Thorizonlist;
+    horizonpicture: TBGRABitmap;
+    horizonpicturevalid: Boolean;
     StarName: array of string;
     StarNameHR: array of integer;
     constructor Create;
@@ -763,9 +765,9 @@ type
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
     StyleEcliptic, StyleGalEq: TFPPenStyle;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay,
-    ShowHorizon, FillHorizon, ShowHorizonDepression: boolean;
+    ShowHorizon, ShowHorizonPicture, FillHorizon, ShowHorizonDepression: boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift,
-    TelescopeTurnsX, TelescopeTurnsY, TelescopeJD: double;
+    TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
     DSLforcecolor: boolean;
     LabelOrientation, ManualTelescopeType, CoordType, DSLcolor: integer;
@@ -892,7 +894,7 @@ type
   Tconf_main = class(TObject)    // main form setting
   public
     prtname, language, Constellationpath, ConstLfile, ConstBfile,
-    EarthMapFile, HorizonFile, Planetdir: string;
+    EarthMapFile, HorizonFile, HorizonPictureFile, Planetdir: string;
     db, dbhost, dbuser, dbpass, ImagePath, persdir, prgdir: string;
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor,
@@ -1534,6 +1536,8 @@ end;
 constructor Tconf_shared.Create;
 begin
   inherited Create;
+  horizonpicture:=TBGRABitmap.Create;
+  horizonpicturevalid:=false;
 end;
 
 destructor Tconf_shared.Destroy;
@@ -1544,6 +1548,7 @@ begin
   Setlength(ConstL, 0);
   Setlength(StarName, 0);
   Setlength(StarNameHR, 0);
+  horizonpicture.Free;
   inherited Destroy;
 end;
 
@@ -1618,6 +1623,8 @@ begin
   end;
   for i := 0 to 360 do
     horizonlist[i] := Source.horizonlist[i];
+  horizonpicture.Assign(Source.horizonpicture);
+  horizonpicturevalid := Source.horizonpicturevalid;
 end;
 
 { Tconf_skychart }
@@ -1783,6 +1790,8 @@ begin
   ShowMilkyWay := Source.ShowMilkyWay;
   FillMilkyWay := Source.FillMilkyWay;
   ShowHorizon := Source.ShowHorizon;
+  ShowHorizonPicture := Source.ShowHorizonPicture;
+  HorizonPictureRotate := Source.HorizonPictureRotate;
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
   CurTime := Source.CurTime;
@@ -2184,6 +2193,7 @@ begin
   ConstBfile := Source.ConstBfile;
   EarthMapFile := Source.EarthMapFile;
   HorizonFile := Source.HorizonFile;
+  HorizonPictureFile := Source.HorizonPictureFile;
   Planetdir := Source.Planetdir;
   db := Source.db;
   dbhost := Source.dbhost;

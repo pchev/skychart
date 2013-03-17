@@ -687,7 +687,6 @@ resourcestring
   rsTemperatureC = 'Temperature (Celsius)';
   rsWantToTrackA = 'Do you want to track an object before it rises?';
   rsLocalHorizon = 'Local horizon';
-  rsLocalHorizon2 = 'Local horizon file name: ';
   rsDisplayTheLo = 'Display the local horizon line';
   rsDepressionOf = 'Depression of the visible horizon';
   rsYouLiveOnABi = 'If you observe high on a mountain, the horizon line will be lower than it would be at sea level.';
@@ -1397,6 +1396,8 @@ resourcestring
   rsSolarSystemI = 'Solar System Informations';
   rsWarningLowRe = 'Warning! Low resolution mode. Use PostScript instead and '
     +'print the result file.';
+  rsDisplayTheHo = 'Display the horizon picture';
+  rsPictureAngle = 'Picture angle offset';
 
 implementation
 
