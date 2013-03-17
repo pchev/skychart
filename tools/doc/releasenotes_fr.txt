@@ -2,4 +2,4 @@ Version 3.9 beta Notes de la version
 
 Nouvelles fonctions:
 
-  * Ajout de la possibilité d'afficher une image pour le panorama de l'horizon. L'image doit être un fichier PNG de n'importe quelle taille représentant le panorama sur 360°. L'horizon doit être exactement à mi-hauteur de l'image. La région du ciel doit être transparente. Le côté gauche de l'image est la direction Est. Si vous utilisez une autre orientation vous devez indiquer l'angle de rotation.
+  * Ajout de la possibilité d'afficher une image pour le panorama de l'horizon. L'image doit être un fichier PNG de n'importe quelle taille représentant le panorama sur 360° avec une projection équirectangulaire. L'horizon doit être exactement à mi-hauteur de l'image. La région du ciel doit être transparente. Le côté gauche de l'image est la direction Est. Si vous utilisez une autre orientation vous devez indiquer l'angle de rotation. 
