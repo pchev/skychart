@@ -11,10 +11,15 @@ arch=$(arch)
 # adjuste here the target you want to crossbuild
 # You MUST crosscompile Freepascal and Lazarus for this targets! 
 
+unset extratarget
+
 unset make_linux32
 make_linux32=1
 unset make_linux64
-if [[ $arch == x86_64 ]]; then make_linux64=1;fi
+if [[ $arch == x86_64 ]]; then 
+   make_linux64=1
+   extratarget=",x86_64-linux"
+fi
 unset make_win32
 make_win32=1
 unset make_win64
@@ -56,7 +61,7 @@ if [[ $lastrev -ne $currentrev ]]; then
 
 # make Linux i386 version
 if [[ $make_linux32 ]]; then
-  ./configure $configopt prefix=$builddir target=i386-linux,x86_64-linux
+  ./configure $configopt prefix=$builddir target=i386-linux$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
   make CPU_TARGET=i386 OS_TARGET=linux clean
   make CPU_TARGET=i386 OS_TARGET=linux
@@ -197,7 +202,7 @@ fi
 if [[ $make_win32 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
   export PATH=$mingw32:$save_PATH
-  ./configure $configopt prefix=$builddir/Data target=i386-win32,x86_64-linux
+  ./configure $configopt prefix=$builddir/Data target=i386-win32$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win32 CPU_TARGET=i386 clean
   make OS_TARGET=win32 CPU_TARGET=i386
@@ -246,7 +251,7 @@ fi
 if [[ $make_win64 ]]; then
   rsync -a --exclude=.svn system_integration/Windows/installer/skychart/* $builddir
   export PATH=$mingw64:$save_PATH
-  ./configure $configopt prefix=$builddir/Data target=x86_64-win64,x86_64-linux
+  ./configure $configopt prefix=$builddir/Data target=x86_64-win64$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win64 CPU_TARGET=x86_64 clean
   make OS_TARGET=win64 CPU_TARGET=x86_64
