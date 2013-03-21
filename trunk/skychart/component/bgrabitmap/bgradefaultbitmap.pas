@@ -5058,4 +5058,4 @@ initialization
   ImageHandlers.RegisterImageReader ('X Pixmap', 'xpm', TFPReaderXPM);
 
 end.
-
+
