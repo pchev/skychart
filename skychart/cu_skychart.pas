@@ -236,7 +236,7 @@ end;
 
 function Tskychart.Refresh :boolean;
 var savmag: double;
-    savfilter,saveautofilter,savfillmw,scopemark,drawhorizonfirst:boolean;
+    savfilter,saveautofilter,savfillmw,scopemark:boolean;
     saveplaplot:integer;
 begin
 if VerboseMsg then begin
@@ -281,14 +281,13 @@ end;
   InitCatalog;
   if VerboseMsg then
    WriteTrace('SkyChart '+cfgsc.chartname+': begin drawing');
-  drawhorizonfirst:=(cfgsc.ProjPole<>Altaz)or(not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP and (not cfgsc.ShowHorizonPicture));
   // first the extended object
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
     // EQ grid in ALt/Az mode
     DrawAltAzEqGrid;
     // then the horizon line if transparent
-    if drawhorizonfirst then DrawHorizon;
+    if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture) then DrawHorizon;
     if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
     if cfgsc.showline then begin
        DrawOutline;
@@ -297,7 +296,7 @@ end;
     DrawComet;
   end;
   // then the lines
-  if drawhorizonfirst then DrawGrid;
+  DrawGrid;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawConstL;
     DrawConstB;
@@ -321,27 +320,19 @@ end;
   if cfgsc.ShowArtSat then DrawArtSat;
   // BG image
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.ShowBackgroundImage then DrawBgImages;
-  // the horizon line if not transparent and not bitmap
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and (not drawhorizonfirst) and (not cfgsc.ShowHorizonPicture) then begin
-    DrawHorizon;
-    DrawGrid;
-  end;
 
   // the labels
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
 
-  // the horizon line if not transparent and bitmap
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and (not drawhorizonfirst) and (cfgsc.ShowHorizonPicture) then begin
-    DrawHorizon;
-    DrawGrid;
-  end;
-
-  // the chart legend
-  if cfgsc.showlabel[8] or cfgsc.showlegend then DrawLegend;
+  // the horizon line if not transparent
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque and (not (Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture)) then DrawHorizon;
 
   // the compass and scale
   DrawCompass;
   DrawTarget;
+
+  // the chart legend
+  if cfgsc.showlabel[8] or cfgsc.showlegend then DrawLegend;
 
   // refresh telescope mark
   if scopemark then begin
@@ -3035,6 +3026,31 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
             p[j]:=col1;
          end;
       end;
+
+      // Horizon line
+      first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
+      for i:=1 to 360 do begin
+           az:=deg2rad*rmod(360+i-1-180,360);
+           proj2(-az,0,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
+           WindowXY(x1,y1,xh,yh,cfgsc);
+           if first then begin
+              first:=false;
+              x0h:=xh;
+              y0h:=yh;
+           end else begin
+             if (xh>-5*cfgsc.Xmax)and(xh<5*cfgsc.Xmax)and(yh>-5*cfgsc.Ymax)and(yh<5*cfgsc.Ymax)and((cfgsc.fov<0.1)or(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2))) then begin
+                  Fplot.BGRADrawLine(xph,yph,xh,yh,col2,2,hbmp);
+                  hlplot:=true;
+             end;
+           end;
+           xph:=xh;
+           yph:=yh;
+      end;
+      xph:=x0h; yph:=y0h;
+      if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
+          Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
+
+
       hbmp.InvalidateBitmap;
       // Render bitmap
       Fplot.cbmp.PutImage(0,0,hbmp,dmDrawWithTransparency);
