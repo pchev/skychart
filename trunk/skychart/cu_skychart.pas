@@ -3015,10 +3015,14 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
             x:=-1; y:=-1; h:=1;
             GetAHxy(j,i,az,h,cfgsc);
             if abs(h)<=hlimit then begin
-              Hz2Eq(az,h,hh,de,cfgsc);
-              projection(cfgsc.CurST-hh,de,x2,y2,false,cfgsc);
-              WindowXY(x2,y2,xx2,yy2,cfgsc);
-              if (round(xx2)=j)and(round(yy2)=i) then begin
+              if cfgsc.fov>pi then begin
+                Hz2Eq(az,h,hh,de,cfgsc);
+                projection(cfgsc.CurST-hh,de,x2,y2,false,cfgsc);
+                WindowXY(x2,y2,xx2,yy2,cfgsc);
+                ok:=(round(xx2)=j)and(round(yy2)=i);
+              end
+                else ok:=true;
+              if ok then begin
                  az:=rmod(pid2+pi4+az-cfgsc.HorizonPictureRotate*deg2rad,pi2);
                  x:=round(hsx*az*rad2deg);
                  y:=round(hsy-hsx*h*rad2deg);
