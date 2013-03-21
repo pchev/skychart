@@ -3005,7 +3005,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
     hbmp:=TBGRABitmap.Create;
     hbmp.SetSize(fplot.cfgchart.Width,fplot.cfgchart.Height);
     if cfgsc.ShowHorizonPicture then begin         // use horizon image bitmap
-      hsx:=Fcatalog.cfgshr.horizonpicture.Width/360;
+      hsx:=(Fcatalog.cfgshr.horizonpicture.Width-1)/360;
       hsy:=Fcatalog.cfgshr.horizonpicture.Height/2;
       hlimit:=deg2rad*hsy/hsx;
       col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);
@@ -3028,7 +3028,7 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
                  y:=round(hsy-hsx*h*rad2deg);
               end;
             end;
-            if (x>0)and(x<Fcatalog.cfgshr.horizonpicture.Width)and(y>0)and(y<Fcatalog.cfgshr.horizonpicture.Height) then
+            if (x>=0)and(x<=Fcatalog.cfgshr.horizonpicture.Width)and(y>=0)and(y<=Fcatalog.cfgshr.horizonpicture.Height) then
                 col1:=Fcatalog.cfgshr.horizonpicture.GetPixel(x,y)
             else if h>0 then col1:=BGRAPixelTransparent
             else col1:=col2;
