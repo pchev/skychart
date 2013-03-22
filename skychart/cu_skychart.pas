@@ -3032,7 +3032,7 @@ begin
   end;
   timeout:=now+10/secday;
   repeat
-    Application.ProcessMessages;
+    sleep(10);
     working:=false;
     for i:=0 to n-1 do working:=working or thread[i].working;
   until (not working)or(now>timeout) ;
