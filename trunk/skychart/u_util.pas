@@ -32,7 +32,7 @@ uses Math, SysUtils, Classes, u_constant, LCLType, FileUtil,
   {$ifdef unix}
     unix,baseunix,unixutil,
   {$endif}
-    Controls, Process,
+    Controls, Process, MTPCPU,
     MaskEdit,enhedits,Menus,Spin,CheckLst,Buttons, ExtCtrls,
     Forms,Graphics,StdCtrls,ComCtrls,Dialogs,Grids,PrintersDlgs,Printers;
 
@@ -116,6 +116,7 @@ function TzGMT2UTC(gmttz:string):string;
 function TzUTC2GMT(utctz:string):string;
 function ExtractSubPath(basepath, path: string):string;
 function RoundInt(x:double): integer;
+function GetThreadCount: integer;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2146,6 +2147,11 @@ function RoundInt(x:double): integer;
 const maxi=MaxInt/2;
 begin
 result:=round(sgn(x)*minvalue([maxi,abs(x)]));
+end;
+
+function GetThreadCount: integer;
+begin
+result:=GetSystemThreadCount;
 end;
 
 end.

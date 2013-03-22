@@ -4299,9 +4299,6 @@ end;
 end;
 
 procedure Tf_chart.MenuLoadCircleClick(Sender: TObject);
-var f: textfile;
-    buf1,buf2: string;
-    x: double;
 begin
 if OpenDialog1.InitialDir='' then OpenDialog1.InitialDir:=HomeDir;
 if OpenDialog1.Execute then begin
