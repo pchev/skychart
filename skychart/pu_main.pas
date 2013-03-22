@@ -670,6 +670,7 @@ type
     NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
+    AnimationEnabled: Boolean;
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
@@ -1386,6 +1387,7 @@ if (not firstuse)and(config_version<cdcver) then
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
+AnimationEnabled:=false;
 if not Application.ShowMainForm then InitOK:=true;  // no formshow if --daemon
 except
   on E: Exception do begin
@@ -2525,7 +2527,8 @@ var fs : TSearchRec;
     r: TStringList;
     fn,cmd,logfile: string;
 begin
-AnimationTimer.Enabled:=ToolButton13.Down;
+AnimationEnabled:=ToolButton13.Down;
+AnimationTimer.Enabled:=AnimationEnabled;
 if ToolButton13.Down then begin  // start animation
    if (cfgm.AnimSx>0)and(cfgm.AnimSy>0) then begin
      r:=TStringList.Create;
@@ -2598,8 +2601,8 @@ begin
          SaveChartImage('JPEG',fn,80);
       end;
   end;
-  AnimationTimer.Enabled:=true;
   Application.ProcessMessages;
+  AnimationTimer.Enabled:=AnimationEnabled;
 end;
 
 procedure Tf_main.TimeIncExecute(Sender: TObject);
