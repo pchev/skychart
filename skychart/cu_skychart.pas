@@ -34,6 +34,18 @@ uses u_translation, gcatunit,
 type
   Tint2func = procedure(i,j: integer) of object;
 
+  TDrawHorizonThread = class(TThread)
+    public
+     horizonpicture: TBGRABitmap;
+     hbmp: TBGRABitmap;
+     col2: TBGRAPixel;
+     cfgsc: Tconf_skychart;
+     working: boolean;
+     num,id:integer;
+     procedure Execute; override;
+     constructor Create(CreateSuspended: boolean);
+    end;
+
 Tskychart = class (TComponent)
    private
     Fplot: TSplot;
@@ -55,6 +67,7 @@ Tskychart = class (TComponent)
     procedure DeleteLabel(lnum: integer);
     procedure LabelClick(lnum: integer);
     procedure SetImage(value:TCanvas);
+    procedure DrawHorizonPicture(hbmp:TBGRABitmap);
    public
     cfgsc : Tconf_skychart;
     labels: array[1..maxlabels] of Tobjlabel;
@@ -2946,6 +2959,85 @@ if not cfgsc.ShowOnlyMeridian then begin
 end;
 end;
 
+constructor TDrawHorizonThread.Create(CreateSuspended: boolean);
+begin
+  FreeOnTerminate := True;
+  inherited Create(CreateSuspended);
+  working:=true;
+end;
+
+procedure TDrawHorizonThread.Execute;
+var hsx,hsy,x,y,xx2,yy2 :single;
+    hlimit,az,h,de,hh,x2,y2:double;
+    i,j,startline,endline: integer;
+    col1: TBGRAPixel;
+    p: PBGRAPixel;
+    ok:boolean;
+begin
+ok:=false;
+hsx:=(horizonpicture.Width-1)/360;
+hsy:=horizonpicture.Height/2;
+hlimit:=deg2rad*hsy/hsx;
+i:=hbmp.Height div num;
+startline:=id*i;
+if id=(num-1) then
+  endline:=hbmp.Height-1
+else
+  endline:=(id+1)*i-1;
+for i:=startline to endline do begin
+   p:=hbmp.ScanLine[i];
+   for j:=0 to hbmp.Width-1 do begin
+      x:=-1; y:=-1; h:=1;
+      GetAHxy(j,i,az,h,cfgsc);
+      if abs(h)<=hlimit then begin
+        if cfgsc.fov>pi then begin
+          Hz2Eq(az,h,hh,de,cfgsc);
+          projection(cfgsc.CurST-hh,de,x2,y2,false,cfgsc);
+          WindowXY(x2,y2,xx2,yy2,cfgsc);
+          ok:=(round(xx2)=j)and(round(yy2)=i);
+        end
+          else ok:=true;
+        if ok then begin
+           az:=rmod(pid2+pi4+az-cfgsc.HorizonPictureRotate*deg2rad,pi2);
+           x:=round(hsx*az*rad2deg);
+           y:=round(hsy-hsx*h*rad2deg);
+        end;
+      end;
+      if (x>=0)and(x<=horizonpicture.Width)and(y>=0)and(y<=horizonpicture.Height) then
+          col1:=horizonpicture.GetPixel(x,y)
+      else if h>0 then col1:=BGRAPixelTransparent
+      else col1:=col2;
+      p[j]:=col1;
+   end;
+end;
+working:=false;
+end;
+
+procedure Tskychart.DrawHorizonPicture(hbmp:TBGRABitmap);
+var i,n: integer;
+    working: boolean;
+    timeout: TDateTime;
+    thread: array[0..3] of TDrawHorizonThread;
+begin
+  n:=min(4,GetThreadCount);
+  for i:=0 to n-1 do begin
+    thread[i]:=TDrawHorizonThread.Create(true);
+    thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;
+    thread[i].hbmp:=hbmp;
+    thread[i].col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);;
+    thread[i].cfgsc:=cfgsc;
+    thread[i].num:=n;
+    thread[i].id:=i;
+    thread[i].Start;
+  end;
+  timeout:=now+10/secday;
+  repeat
+    Application.ProcessMessages;
+    working:=false;
+    for i:=0 to n-1 do working:=working or thread[i].working;
+  until (not working)or(now>timeout) ;
+end;
+
 function Tskychart.DrawHorizon:boolean;
 const hdiv=10;
 var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz,fillfov,hh,de : double;
@@ -2953,12 +3045,11 @@ var az,h,hstep,azp,hpstep,x1,y1,hlimit,daz,fillfov,hh,de : double;
     psf: array of TPointF;
     i,j: integer;
     xx,yy: int64;
-    x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1,fillx2,filly2,hsx,hsy :single;
+    x,y,xh,yh,xp,yp,xph,yph,x0h,y0h,fillx1,filly1,fillx2,filly2 :single;
     first,fill,ok,hlplot:boolean;
     hbmp : TBGRABitmap;
     col: TColor;
     col1,col2: TBGRAPixel;
-    p: PBGRAPixel;
     xx2,yy2 :single;
     x2,y2 : double;
 
@@ -2996,38 +3087,11 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
     hbmp:=TBGRABitmap.Create;
     hbmp.SetSize(fplot.cfgchart.Width,fplot.cfgchart.Height);
     if cfgsc.ShowHorizonPicture then begin         // use horizon image bitmap
-      hsx:=(Fcatalog.cfgshr.horizonpicture.Width-1)/360;
-      hsy:=Fcatalog.cfgshr.horizonpicture.Height/2;
-      hlimit:=deg2rad*hsy/hsx;
-      col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);
-      for i:=0 to hbmp.Height-1 do begin
-         p:=hbmp.ScanLine[i];
-         for j:=0 to hbmp.Width-1 do begin
-            x:=-1; y:=-1; h:=1;
-            GetAHxy(j,i,az,h,cfgsc);
-            if abs(h)<=hlimit then begin
-              if cfgsc.fov>pi then begin
-                Hz2Eq(az,h,hh,de,cfgsc);
-                projection(cfgsc.CurST-hh,de,x2,y2,false,cfgsc);
-                WindowXY(x2,y2,xx2,yy2,cfgsc);
-                ok:=(round(xx2)=j)and(round(yy2)=i);
-              end
-                else ok:=true;
-              if ok then begin
-                 az:=rmod(pid2+pi4+az-cfgsc.HorizonPictureRotate*deg2rad,pi2);
-                 x:=round(hsx*az*rad2deg);
-                 y:=round(hsy-hsx*h*rad2deg);
-              end;
-            end;
-            if (x>=0)and(x<=Fcatalog.cfgshr.horizonpicture.Width)and(y>=0)and(y<=Fcatalog.cfgshr.horizonpicture.Height) then
-                col1:=Fcatalog.cfgshr.horizonpicture.GetPixel(x,y)
-            else if h>0 then col1:=BGRAPixelTransparent
-            else col1:=col2;
-            p[j]:=col1;
-         end;
-      end;
+
+      DrawHorizonPicture(hbmp);
 
       // Horizon line
+      col2:=ColorToBGRA(Fplot.cfgplot.Color[12]);
       first:=true; xph:=0;yph:=0;x0h:=0;y0h:=0;
       for i:=1 to 360 do begin
            az:=deg2rad*rmod(360+i-1-180,360);
@@ -3049,7 +3113,6 @@ hlimit:=abs(3/cfgsc.BxGlb); // 3 pixels
       xph:=x0h; yph:=y0h;
       if (xh>-cfgsc.Xmax)and(xh<2*cfgsc.Xmax)and(yh>-cfgsc.Ymax)and(yh<2*cfgsc.Ymax)and(abs(xh-xph)<(cfgsc.xmax/2))and(abs(yh-yph)<(cfgsc.ymax/2)) then
           Fplot.BGRADrawLine(xh,yh,xph,yph,col2,2,hbmp);
-
 
       hbmp.InvalidateBitmap;
       // Render bitmap

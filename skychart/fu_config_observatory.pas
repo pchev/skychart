@@ -263,6 +263,10 @@ end;
 Destructor Tf_config_observatory.Destroy;
 begin
 mycsc.Free;
+myccat.Free;
+mycshr.Free;
+mycplot.Free;
+mycmain.Free;
 countrycode.Free;
 inherited Destroy;
 end;
