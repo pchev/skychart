@@ -2490,7 +2490,7 @@ var ra2000,de2000: double;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
-if cmain.KioskMode then begin f_detail.Height:=330; f_detail.Width:=250; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; f_detail.HTMLViewer1.ScrollBars:=ssNone; end
+if cmain.KioskMode then begin f_detail.Height:=200; f_detail.Width:=350; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; f_detail.HTMLViewer1.ScrollBars:=ssNone; end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
@@ -2564,7 +2564,7 @@ isd2k:=(trim(sc.cfgsc.FindCat)='d2k');
 isvo:=(trim(sc.cfgsc.FindCat)='VO');
 // header
 if NightVision then txt:=html_h_nv
-  else if cmain.SimpleDetail then txt:=html_h_b
+  else if cmain.SimpleDetail then txt:=html_h_b+html_h2
   else txt:=html_h;
 // object type
 p:=pos(tab,desc);
@@ -2591,8 +2591,20 @@ end else begin
    cjd0:=sc.cfgsc.jd0;
    cst:=sc.cfgsc.CurST;
 end;
-buf:=sc.catalog.LongLabelObj(otype);
-txt:=txt+html_h2+buf+htms_h2;
+if cmain.SimpleDetail then begin
+  i:=pos(rsCommonName,desc);
+  if i>0 then begin
+    buf:=copy(desc,i+1,9999);
+    i:=pos(':',buf);
+    buf:=copy(buf,i+1,9999);
+    i:=pos(tab,buf);
+    buf:=trim(copy(buf,1,i-1));
+    if buf>'' then txt:=txt+buf+html_br;
+  end;
+end else begin
+  buf:=sc.catalog.LongLabelObj(otype);
+  txt:=txt+html_h2+buf+htms_h2;
+end;
 buf:=copy(desc,l+1,9999);
 // object name
 i:=pos(tab,buf);
@@ -2610,6 +2622,7 @@ if isStar then begin
 end;
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
+if not cmain.SimpleDetail then begin
 ipla:=0;
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
   for i:=1 to 11 do if pla[i]=oname then ipla:=i;
@@ -2666,33 +2679,6 @@ if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
         end;
   end;
 end;
-if cmain.SimpleDetail and (otype='*') then begin
-  // star picture
-  i:=Round(sc.cfgsc.FindBV*10);
-  case i of
-        -999..-3: ico := 0;
-          -2..-1: ico := 1;
-           0..2 : ico := 2;
-           3..5 : ico := 3;
-           6..8 : ico := 4;
-           9..13: ico := 5;
-         14..900: ico := 6;
-         else ico:=2;
-  end;
-  bmp:=Tbitmap.Create;
-  bmp.SetSize(200,200);
-  bmp.Canvas.Brush.Color:=clBlack;
-  bmp.Canvas.FillRect(0,0,200,200);
-  i:=100-(sc.plot.Astarbmp[ico,0].Width div 2);
-  bmp.Canvas.Draw(i,i,sc.plot.Astarbmp[ico,0]);
-  fn:=slash(systoutf8(TempDir))+'info.bmp';
-  DeleteFileutf8(fn);
-  bmp.SaveToFile(fn);
-  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
-  try
-  finally
-  bmp.Free;
-  end;
 end;
 if not cmain.SimpleDetail then begin
   // source catalog
@@ -2729,7 +2715,17 @@ repeat
   if i>0 then begin
      buf2:=stringreplace(buf2,':',': ',[]);
      if copy(buf2, 1, 5)=rsDesc then buf2:=stringreplace(buf2, ';', html_br+html_sp+html_sp+html_sp, [rfReplaceAll]);
-     if (copy(buf2,1,5)='Dist:') then buf2:=StringReplace(buf2,'[ly]',rsLightYears,[]);
+     if (uppercase(copy(buf2,1,5))='DIST:') then begin
+         buf2:=StringReplace(buf2,'[ly]',rsLightYears,[]);
+         i:=pos('au',buf2);
+         if cmain.SimpleDetail and (i>0) then begin
+           s1:=trim(copy(buf2,6,i-7));
+           a:=StrToFloatDef(s1,0);
+           if a>0 then begin
+              buf2:='Dist: '+FormatFloat(f1, a*km_au/1E6)+blank+rsMillionKm;
+           end;
+         end;
+      end;
      if isvo or isOsr then
         txt:=txt+bold(buf2)
      else
