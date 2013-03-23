@@ -1398,6 +1398,7 @@ resourcestring
     +'print the result file.';
   rsDisplayTheHo = 'Display the horizon picture';
   rsPictureAngle = 'Picture angle offset';
+  rsMillionKm = 'million Km.';
 
 implementation
 
