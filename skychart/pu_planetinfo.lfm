@@ -10,9 +10,8 @@ object f_planetinfo: Tf_planetinfo
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnResize = FormResize
-  OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.4.0'
+  LCLVersion = '1.0.8.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 600
