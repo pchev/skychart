@@ -1,7 +1,7 @@
 object f_astrolabe: Tf_astrolabe
-  Left = 94
+  Left = 92
   Height = 439
-  Top = 122
+  Top = 341
   Width = 364
   HorzScrollBar.Range = 331
   HorzScrollBar.Visible = False
@@ -39,15 +39,15 @@ object f_astrolabe: Tf_astrolabe
     TabOrder = 1
     object Label4: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 59
-      Width = 38
+      Width = 31
       Caption = 'Status'
       ParentColor = False
     end
     object Edit3: TEdit
       Left = 136
-      Height = 22
+      Height = 21
       Top = 55
       Width = 184
       Color = clBtnFace
@@ -56,7 +56,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Edit2: TEdit
       Left = 136
-      Height = 22
+      Height = 21
       Top = 28
       Width = 65
       ReadOnly = True
@@ -65,15 +65,15 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label2: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 32
-      Width = 66
+      Width = 54
       Caption = 'Server Port'
       ParentColor = False
     end
     object Edit1: TEdit
       Left = 136
-      Height = 22
+      Height = 21
       Top = 1
       Width = 89
       ReadOnly = True
@@ -82,9 +82,9 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label1: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 5
-      Width = 104
+      Width = 85
       Caption = 'Server IP address'
       ParentColor = False
     end
@@ -132,7 +132,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label3: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 15
       Width = 9
       Caption = 'H'
@@ -140,7 +140,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label5: TLabel
       Left = 8
-      Height = 15
+      Height = 14
       Top = 62
       Width = 9
       Caption = 'D'
@@ -158,17 +158,17 @@ object f_astrolabe: Tf_astrolabe
     TabOrder = 3
     object LabelX: TLabel
       Left = 53
-      Height = 15
+      Height = 14
       Top = 14
-      Width = 38
+      Width = 34
       Caption = 'LabelX'
       ParentColor = False
     end
     object LabelY: TLabel
       Left = 200
-      Height = 15
+      Height = 14
       Top = 14
-      Width = 38
+      Width = 34
       Caption = 'LabelY'
       ParentColor = False
     end

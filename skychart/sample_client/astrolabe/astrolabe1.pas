@@ -79,7 +79,7 @@ type
     CdCconfig,CdC,CdCDir,ServerIPaddr,ServerIPport: string;
     CdCfound, StartCDC,Connecting,Closing,Restarting : boolean;
     ConnectRetry: integer;
-    LastPosX, LastPosY, InactiveLoop: integer;
+    LastPosX, LastPosY, LastMenu, InactiveLoop: integer;
     EncoderX,EncoderY : integer;
     card: SmallInt;
     RealEncoder:boolean;
@@ -126,7 +126,7 @@ const
         DefaultCdCconfig='Skychart\skychart.ini';
         // DASK card
         cardModel=PCI_7248;  // ADLINK PCI 7248
-        cardNum=1;           // First card
+        cardNum=0;           // First card
   {$endif}
 
 implementation
@@ -392,6 +392,7 @@ ConnectRetry:=0;
 InactiveLoop:=0;
 LastPosX:=MaxInt;
 LastPosY:=MaxInt;
+LastMenu:=-1;
 Closing:=false;
 Restarting:=false;
 RealEncoder:=InitEncoder;
@@ -461,11 +462,20 @@ if RealEncoder then begin
   x1:=(PA AND $F);
   x2:=(PA AND $F0) SHR 4;
   x3:=PB AND $3;
-  EncoderX:=x1 + 10*x2 + 100*x3 - 180;
+  EncoderX:=x1 + 10*x2 + 100*x3;
   x1:=(PC AND $F);
   x2:=(PC AND $F0) SHR 4;
   x3:=PB SHR 6;
   EncoderY:=x1 + 10*x2 + 100*x3;
+  if (EncoderY>90) then begin
+    if (EncoderY<=270) then begin
+     EncoderY:=180-EncoderY;
+     EncoderX:=EncoderX+180;
+  end else begin
+     EncoderY:=EncoderY-360;
+  end;
+  end;
+  EncoderX:=((EncoderX+720) mod 360)-180;
   LabelX.Caption:=inttostr(EncoderX);
   LabelY.Caption:=inttostr(EncoderY);
   {$endif}
@@ -477,7 +487,8 @@ end;
 end;
 
 procedure Tf_astrolabe.PosTimerTimer(Sender: TObject);
-var inactivity: boolean;
+var inactivity,menuup: boolean;
+    menu: integer;
 begin
 try
 PosTimer.Enabled:=false;
@@ -488,24 +499,28 @@ if (EncoderX<>LastPosX)or           // moved AH coder
   (EncoderY<>LastPosY) or           // moved Dec coder
   inactivity                        // one minute inactive,
   then begin
-    LastPosX := EncoderX;
-    LastPosY := EncoderY;
-    InactiveLoop:=0;
-    if EncoderY>-45 then begin
+    // menu area
+    if (EncoderX>=85)and(EncoderX<=110)and(EncoderY>=20)and(EncoderY<=50) then begin
+      if (abs(EncoderX-LastPosX)>=2)or(abs(EncoderY-LastPosY)>=2) then begin
+        menuup:=(EncoderX>LastPosX)or(EncoderY>LastPosY);
+        if menuup then menu:=LastMenu+1
+                  else menu:=LastMenu-1;
+        if menu>8 then menu:=0;
+        if menu<0 then menu:=8;
+        CdCCmd('PLANETINFO '+inttostr(menu));
+        LastPosX := EncoderX;
+        LastPosY := EncoderY;
+        LastMenu:=menu;
+      end;
+    end else begin
       CdCCmd('PLANETINFO OFF');
       CdCCmd('MOVESCOPEH '+FormatFloat('0.00',EncoderX/15)+' '+FormatFloat('0.00',EncoderY));
       CdCCmd('IDSCOPE');
-    end
-    else if EncoderY>-47 then CdCCmd('PLANETINFO 0') // Visibility
-    else if EncoderY>-51 then CdCCmd('PLANETINFO 1') // Moon
-    else if EncoderY>-55 then CdCCmd('PLANETINFO 2') // Mercury
-    else if EncoderY>-59 then CdCCmd('PLANETINFO 3') // Venus
-    else if EncoderY>-63 then CdCCmd('PLANETINFO 4') // Mars
-    else if EncoderY>-67 then CdCCmd('PLANETINFO 5') // Jupiter
-    else if EncoderY>-71 then CdCCmd('PLANETINFO 6') // Saturn
-    else if EncoderY>-75 then CdCCmd('PLANETINFO 7') // Orbit1
-    else if EncoderY>-100 then CdCCmd('PLANETINFO 8') // Orbit2
-    else;
+      LastMenu:=-1;
+      LastPosX := EncoderX;
+      LastPosY := EncoderY;
+    end;
+    InactiveLoop:=0;
     Application.ProcessMessages;
 end;
 finally
