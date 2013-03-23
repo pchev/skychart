@@ -7822,6 +7822,7 @@ if cfgm.KioskMode then begin
   if (key=VK_RETURN)or(Length(kioskpwd)>50) then kioskpwd:='';
   if (key>=VK_A)and(key<=VK_Z) then kioskpwd:=kioskpwd+chr(key);
   if uppercase(kioskpwd)=uppercase(cfgm.KioskPass) then begin
+    ForceClose:=true;
     Close;
     Exit;
   end;

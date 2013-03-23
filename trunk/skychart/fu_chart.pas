@@ -2490,7 +2490,7 @@ var ra2000,de2000: double;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
-if cmain.KioskMode then begin f_detail.Height:=450; f_detail.Width:=300; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; end
+if cmain.KioskMode then begin f_detail.Height:=330; f_detail.Width:=250; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; f_detail.HTMLViewer1.ScrollBars:=ssNone; end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
@@ -2532,15 +2532,15 @@ begin
   else result:=s;
 end;
 function FilterDetail(det:string):boolean;
-const filter='PA: POLEINCL: SUNINCL: EPHEMERIS: DATE: HD: BD: HIP: HR: PMRA: PMDE: PX: COMP: FL: BAYER: MI: SBR: CLASS: DESC:';
+const filter='DIST:';
 var i:integer;
     key:string;
 begin
-result:=false;
+result:=true;
 i:=pos(':',det);
 if i>0 then begin
   key:=uppercase(trim(copy(det,1,i)));
-  if pos(key,filter)>0 then result:=true;
+  if pos(key,filter)>0 then result:=false;
 end;
 end;
 function GetDetailValue(key:string):string;
@@ -2814,7 +2814,8 @@ if not cmain.SimpleDetail then begin
   a:=rmod(a+pi2,pi2);
   txt:=txt+html_b+rsGalactic+blank+htms_b+blank+rsL+': '+detostr(rad2deg*a)+blank+rsB+':'+detostr(rad2deg*h)+html_br;
   txt:=txt+html_br;
-end;
+end
+  else txt:=txt+html_br;
 
 // local position
 if (sc.catalog.cfgshr.Equinoxtype=2) then begin
@@ -2862,7 +2863,8 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
     if culmalt>90 then culmalt:=180-culmalt;
     if culmalt>-1 then culmalt:=min(90,culmalt+sc.cfgsc.ObsRefractionCor*(1.02/tan(deg2rad*(culmalt+10.3/(culmalt+5.11))))/60)
                   else culmalt:=culmalt+0.64658062088;
-    tculmalt:=demtostr(culmalt);
+    if (not cmain.SimpleDetail) then tculmalt:=demtostr(culmalt)
+       else tculmalt:='';
     case i of
     0 : begin
         txt:=txt+html_b+rsRise+':'+htms_b+thr+blank;

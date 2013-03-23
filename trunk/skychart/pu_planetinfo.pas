@@ -61,7 +61,6 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
-    procedure FormShow(Sender: TObject);
     procedure SetPage(Sender: TObject);
   private
     { private declarations }
@@ -70,6 +69,7 @@ type
     xmin,xmax,ymin,ymax: integer;
     Initialized: boolean;
     ActivePage, ActiveDate, ActiveSizeX,ActiveSizeY: integer;
+    TextZoom: single;
     procedure ImgPaint(Sender: TObject);
   public
     { public declarations }
@@ -83,7 +83,7 @@ type
     Procedure PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
     Procedure PlotOrbit1(bmp:TBGRABitmap);
     Procedure PlotOrbit2(bmp:TBGRABitmap);
-    Procedure PlotHeader(bmp:TBGRABitmap; title:string);
+    Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs: boolean);
     property planet: Tplanet read Fplanet write Fplanet;
   end;
 
@@ -106,11 +106,6 @@ begin
 end;
 
 { Tf_planetinfo }
-
-procedure Tf_planetinfo.FormShow(Sender: TObject);
-begin
-
-end;
 
 procedure Tf_planetinfo.SetLang;
 begin
@@ -159,6 +154,7 @@ begin
   ActiveDate:=-1;
   ActiveSizeX:=-1;
   ActiveSizeY:=-1;
+  TextZoom:=1;
   InitImg(Image1,Panel1);
   InitImg(Image2,Panel2);
   InitImg(Image3,Panel3);
@@ -222,8 +218,9 @@ try
 Initialized:=false;
 plbmp.SetSize(TabSheet1.ClientWidth,TabSheet1.ClientHeight);
 plbmp.Fill(ColorToBGRA(clBlack));
-xmin:=marginleft;
-xmax:=plbmp.Width-marginright;
+TextZoom:=TabSheet1.ClientWidth/800;
+xmin:=round(marginleft*TextZoom);
+xmax:=plbmp.Width-round(marginright*TextZoom);
 ymin:=margintop;
 ymax:=plbmp.Height-marginbottom;
 ActivePage:=PageControl1.ActivePageIndex;
@@ -232,41 +229,41 @@ ActiveSizeX:=TabSheet1.ClientWidth;
 ActiveSizeY:=TabSheet1.ClientHeight;
 case PageControl1.ActivePageIndex of
    0: begin
-      PlotHeader(plbmp, rsPlanetVisibi);
+      PlotHeader(plbmp, rsPlanetVisibi, true);
       PlotTwilight(plbmp);
       PlotPlanet(plbmp);
       PlotFrame(plbmp);
    end;
    1: begin
-      PlotHeader(plbmp,pla[11]);
+      PlotHeader(plbmp,pla[11], false);
       PlotPlanetImage(plbmp,11);
       end;
    2: begin
-      PlotHeader(plbmp,pla[1]);
+      PlotHeader(plbmp,pla[1], false);
       PlotPlanetImage(plbmp,1);
       end;
    3: begin
-      PlotHeader(plbmp,pla[2]);
+      PlotHeader(plbmp,pla[2], false);
       PlotPlanetImage(plbmp,2);
       end;
    4: begin
-      PlotHeader(plbmp,pla[4]);
+      PlotHeader(plbmp,pla[4], false);
       PlotPlanetImage(plbmp,4);
       end;
    5: begin
-      PlotHeader(plbmp,pla[5]);
+      PlotHeader(plbmp,pla[5], false);
       PlotPlanetImage(plbmp,5);
       end;
    6: begin
-      PlotHeader(plbmp,pla[6]);
+      PlotHeader(plbmp,pla[6], false);
       PlotPlanetImage(plbmp,6);
       end;
    7: begin
-      PlotHeader(plbmp, rsInnerSolarSy);
+      PlotHeader(plbmp, rsInnerSolarSy, false);
       PlotOrbit1(plbmp);
       end;
    8: begin
-      PlotHeader(plbmp, rsOuterSolarSy);
+      PlotHeader(plbmp, rsOuterSolarSy, false);
       PlotOrbit2(plbmp);
       end;
 end;
@@ -348,7 +345,7 @@ begin
     xt:=xmin+round((ht/24)*(xmax-xmin));
     bmp.DrawVertLine(xt,y,y-5,ColorToBGRA(clYellow));
   end;
-  bmp.FontHeight:=12;
+  bmp.FontHeight:=round(16*TextZoom);
   bmp.FontStyle:=[fsBold];
   bmp.TextOut(xmin-5,y-6,lbl,ColorToBGRA(clWhite),taRightJustify);
   bmp.TextOut(xmax+5,y-5,lbl,ColorToBGRA(clWhite),taLeftJustify);
@@ -396,19 +393,21 @@ for ipla:=1 to 8 do begin
 end;
 end;
 
-Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String);
+Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String; showobs: boolean);
 var c:TBGRAPixel;
     buf: string;
 begin
   c:=ColorToBGRA(clWhite);
-  bmp.FontHeight:=18;
+  bmp.FontHeight:=round(24*TextZoom);
   bmp.FontStyle:=[fsBold];
   bmp.TextOut(bmp.Width div 2,10,title,c,taCenter);
-  bmp.FontHeight:=12;
+  bmp.FontHeight:=round(16*TextZoom);
   buf:=Date2Str(config.CurYear,config.CurMonth,config.CurDay)+blank+'  ( '+TzGMT2UTC(config.tz.ZoneName)+' )';
   bmp.TextOut(20,40,buf,c,taLeftJustify);
-  buf:=config.ObsName;
-  bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
+  if showobs then begin
+    buf:=config.ObsName;
+    bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
+  end;
 end;
 
 Procedure Tf_planetinfo.PlotFrame(bmp:TBGRABitmap);
@@ -416,12 +415,12 @@ var x,y,i: integer;
     c:TBGRAPixel;
 begin
   c:=ColorToBGRA(clWhite);
-  bmp.FontHeight:=12;
+  bmp.FontHeight:=round(12*TextZoom);
   bmp.FontStyle:=[fsBold];
   bmp.Rectangle(xmin,ymin,xmax,ymax,c,dmSet);
   for i:=0 to 24 do begin
       x:=xmin+trunc(i*((xmax-xmin)/24));
-      y:=ymin-5;
+      y:=ymin-round(5*TextZoom);
       bmp.DrawVertLine(x,y,ymin,c);
       if (i mod 2)=0 then bmp.TextOut(x,y-15,inttostr(i),c,taCenter);
   end;
@@ -466,7 +465,7 @@ end;
 
 Procedure Tf_planetinfo.PlotOrbit1(bmp:TBGRABitmap);
 var p: ArrayOfTPointF;
-    s,ipla,txtp,txts: integer;
+    s,ipla,txtp,txts,ps,ss: integer;
     cx,cy,fx: single;
     jdt,sd:double;
     pl: TPlanData;
@@ -490,7 +489,7 @@ const nbstep=100;
       jdt:=jdt+sd;
     end;
     bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
-    bmp.FillEllipseAntialias(p[0].x,p[0].y,4,4,ColorToBGRA(col[ipla]));
+    bmp.FillEllipseAntialias(p[0].x,p[0].y,ps,ps,ColorToBGRA(col[ipla]));
     if ipla=3 then bmp.TextOut(20, txtp+txts*ipla, rsEarth, ColorToBGRA(col[ipla]), taLeftJustify)
               else bmp.TextOut(20,txtp+txts*ipla,pla[ipla],ColorToBGRA(col[ipla]),taLeftJustify);
   end;
@@ -500,9 +499,12 @@ s:=min((xmax-xmin),(ymax-xmin));
 cx:=xmin+(xmax-xmin)/2;
 cy:=ymin+(ymax-ymin)/2;
 fx:=s/3.5;
-txts:=20;
+ps:=round(5*TextZoom);
+ss:=round(8*TextZoom);
+txts:=round(30*TextZoom);
 txtp:=ymax-6*txts;
-bmp.FillEllipseAntialias(cx,cy,6,6,ColorToBGRA(clYellow));  // sun
+bmp.FillEllipseAntialias(cx,cy,ss,ss,ColorToBGRA(clYellow));  // sun
+bmp.FontHeight:=round(24*TextZoom);
 bmp.TextOut(20,txtp,pla[10],ColorToBGRA(clYellow),taLeftJustify);
 SetLength(p,nbstep+1);
 for ipla:=1 to 4 do PlanetOrbit;
@@ -510,7 +512,7 @@ end;
 
 Procedure Tf_planetinfo.PlotOrbit2(bmp:TBGRABitmap);
 var p: ArrayOfTPointF;
-    s,ipla,txtp,txts: integer;
+    s,ipla,txtp,txts,ps,ss: integer;
     cx,cy,fx: single;
     jdt,sd:double;
     pl: TPlanData;
@@ -534,7 +536,7 @@ const nbstep=100;
       jdt:=jdt+sd;
     end;
     bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
-    bmp.FillEllipseAntialias(p[0].x,p[0].y,4,4,ColorToBGRA(col[ipla]));
+    bmp.FillEllipseAntialias(p[0].x,p[0].y,ps,ps,ColorToBGRA(col[ipla]));
     bmp.TextOut(20,txtp+txts*ipla,pla[ipla+4],ColorToBGRA(col[ipla]),taLeftJustify);
   end;
 
@@ -543,9 +545,12 @@ s:=min((xmax-xmin),(ymax-xmin));
 cx:=xmin+(xmax-xmin)/2;
 cy:=ymin+(ymax-ymin)/2;
 fx:=s/65;
-txts:=20;
+ps:=round(5*TextZoom);
+ss:=round(8*TextZoom);
+txts:=round(30*TextZoom);
 txtp:=ymax-7*txts;
-bmp.FillEllipseAntialias(cx,cy,6,6,ColorToBGRA(clYellow));  // sun
+bmp.FillEllipseAntialias(cx,cy,ss,ss,ColorToBGRA(clYellow));  // sun
+bmp.FontHeight:=round(24*TextZoom);
 bmp.TextOut(20,txtp,pla[10],ColorToBGRA(clYellow),taLeftJustify);
 SetLength(p,nbstep+1);
 for ipla:=1 to 5 do PlanetOrbit;
