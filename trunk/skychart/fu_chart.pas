@@ -2622,10 +2622,10 @@ if isStar then begin
 end;
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
-if not cmain.SimpleDetail then begin
 ipla:=0;
 if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
   for i:=1 to 11 do if pla[i]=oname then ipla:=i;
+if not cmain.SimpleDetail then begin
   if ipla>0 then begin
     { TODO : make a global function with almost the same code in cu_plot }
     searchdir:='"'+slash(appdir)+slash('data')+'planet"';
@@ -2844,6 +2844,9 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
        sc.planet.PlanetRiseSet(ipla,cjd0,sc.catalog.cfgshr.AzNorth,thr,tht,ths,tazr,tazs,j1,j2,j3,rar,der,rat,det,ras,des,i,sc.cfgsc);
     end
     else begin // fixed object
+         ra:=sc.cfgsc.FindRA;
+         dec:=sc.cfgsc.FindDec;
+         precession(sc.cfgsc.JDChart,cjd,ra,dec);
          RiseSet(1,cjd0,ra,dec,hr,ht,hs,azr,azs,i,sc.cfgsc);
          if sc.catalog.cfgshr.AzNorth then begin
             Azr:=rmod(Azr+pi,pi2);
