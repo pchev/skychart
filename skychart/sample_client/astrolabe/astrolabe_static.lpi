@@ -14,7 +14,7 @@
       <UseXPManifest Value="True"/>
       <Icon Value="0"/>
     </General>
-    <BuildModes Count="5">
+    <BuildModes Count="2">
       <Item1 Name="release" Default="True"/>
       <Item2 Name="debug">
         <CompilerOptions>
@@ -63,146 +63,6 @@
           </Other>
         </CompilerOptions>
       </Item2>
-      <Item3 Name="debug heap">
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <Checks>
-              <IOChecks Value="True"/>
-              <RangeChecks Value="True"/>
-              <OverflowChecks Value="True"/>
-              <StackChecks Value="True"/>
-            </Checks>
-            <Optimizations>
-              <OptimizationLevel Value="0"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <UseHeaptrc Value="True"/>
-            </Debugging>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CustomOptions Value="-CF64 -dUSEHEAPTRC"/>
-            <CompilerPath Value="$(CompPath)"/>
-          </Other>
-        </CompilerOptions>
-      </Item3>
-      <Item4 Name="windows">
-        <MacroValues Count="1">
-          <Macro1 Name="LCLWidgetType" Value="win32"/>
-        </MacroValues>
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <TargetCPU Value="i386"/>
-            <TargetOS Value="win32"/>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <UseLineInfoUnit Value="False"/>
-              <StripSymbols Value="True"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
-          </Other>
-          <LCLWidgetType Value="win32"/>
-        </CompilerOptions>
-      </Item4>
-      <Item5 Name="custdraw">
-        <MacroValues Count="1">
-          <Macro1 Name="LCLWidgetType" Value="customdrawn"/>
-        </MacroValues>
-        <CompilerOptions>
-          <Version Value="11"/>
-          <Target>
-            <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
-          </Target>
-          <SearchPaths>
-            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
-            <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <CStyleOperator Value="False"/>
-            </SyntaxOptions>
-          </Parsing>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <UseLineInfoUnit Value="False"/>
-              <StripSymbols Value="True"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-          <Other>
-            <Verbosity>
-              <ShowHints Value="False"/>
-            </Verbosity>
-            <CompilerMessages>
-              <UseMsgFile Value="True"/>
-            </CompilerMessages>
-            <CustomOptions Value="-CF64"/>
-            <CompilerPath Value="$(CompPath)"/>
-          </Other>
-          <LCLWidgetType Value="customdrawn"/>
-        </CompilerOptions>
-      </Item5>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -804,9 +664,10 @@
   <CompilerOptions>
     <Version Value="11"/>
     <Target>
-      <Filename Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)/skychart"/>
+      <Filename Value="astrolabe_static"/>
     </Target>
     <SearchPaths>
+      <OtherUnitFiles Value="../.."/>
       <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
       <SrcPath Value="$(LazarusDir)/lcl;$(LazarusDir)/lcl/interfaces/$(LCLWidgetType)"/>
     </SearchPaths>
@@ -835,7 +696,8 @@
       <CompilerMessages>
         <UseMsgFile Value="True"/>
       </CompilerMessages>
-      <CustomOptions Value="-CF64"/>
+      <CustomOptions Value="-CF64
+-dastrolabe_static"/>
       <CompilerPath Value="$(CompPath)"/>
     </Other>
   </CompilerOptions>

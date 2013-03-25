@@ -7,7 +7,7 @@ object f_astrolabe: Tf_astrolabe
   HorzScrollBar.Visible = False
   VertScrollBar.Range = 377
   VertScrollBar.Visible = False
-  Caption = 'TCP Client'
+  Caption = 'Astrolabe'
   ClientHeight = 439
   ClientWidth = 364
   Font.Height = -11
