@@ -740,6 +740,7 @@ type
     CanShowScrollbar: boolean;
     Config_Version : string;
     showsplash: boolean;
+    Closing: boolean;
     procedure ReadChartConfig(filename:string; usecatalog,resizemain:boolean; var cplot:Tconf_plot ;var csc:Tconf_skychart);
     procedure ReadPrivateConfig(filename:string);
     procedure ReadDefault;
@@ -1837,6 +1838,7 @@ if VerboseMsg then
  debugln('Enter f_main.formcreate');
 InitOK:=false;
 ForceClose:=false;
+Closing:=false;
 RestoreState:=false;
 SaveState:=wsNormal;
 UniqueInstance1:=TCdCUniqueInstance.Create(self);
@@ -2176,6 +2178,7 @@ end else begin
           PDSSTimer.Enabled:=false;
           locked:=true;
        end;
+    Closing:=true;
   end;
   except
   end;

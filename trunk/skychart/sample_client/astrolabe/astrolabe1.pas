@@ -37,7 +37,12 @@ uses
   {$ifdef mswindows}
   Dask,
   {$endif}
-  cu_tcpclient, IniFiles,
+  {$ifndef astrolabe_static}
+  cu_tcpclient,
+  {$else}
+  pu_main, u_util, u_constant,
+  {$endif}
+  IniFiles,
   SysUtils, Types, Classes, Controls, Forms,
   Dialogs, StdCtrls, ExtCtrls, LResources, ComCtrls;
 
@@ -46,6 +51,7 @@ type
   { Tf_astrolabe }
 
   Tf_astrolabe = class(TForm)
+    CheckBox1: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
     Label1: TLabel;
@@ -62,10 +68,10 @@ type
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
-    StaticText1: TStaticText;
     PosTimer: TTimer;
     TrackBarH: TTrackBar;
     TrackBarD: TTrackBar;
+    procedure CheckBox1Change(Sender: TObject);
     procedure ConnectRetryTimerTimer(Sender: TObject);
     procedure ExitTimerTimer(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -76,13 +82,14 @@ type
     procedure PosTimerTimer(Sender: TObject);
   private
     { Private declarations }
-    CdCconfig,CdC,CdCDir,ServerIPaddr,ServerIPport: string;
+    ServerIPaddr,ServerIPport: string;
     CdCfound, StartCDC,Connecting,Closing,Restarting : boolean;
     ConnectRetry: integer;
     LastPosX, LastPosY, LastMenu, InactiveLoop: integer;
     EncoderX,EncoderY : integer;
     card: SmallInt;
     RealEncoder:boolean;
+    cmdarg:Tstringlist;
     Function  GetTcpPort:string;
     procedure GetCdCInfo;
     procedure OpenCDC(param:string);
@@ -95,7 +102,11 @@ type
     function InitEncoder: boolean;
   public
     { Public declarations }
+    {$ifndef astrolabe_static}
     client : TClientThrd;
+    {$endif}
+    CdC,CdCDir,CdCconfig: string;
+    procedure Init;
     procedure ShowInfo(Sender: TObject; const messagetext:string);
     procedure ReceiveData(Sender : TObject; const data : string);
   end;
@@ -274,13 +285,16 @@ begin
     Registry1.Free;
   end;
   {$endif}
+  CdCDir:=ExtractFilePath(CdC);
   CdCfound:=FileExists(CdC);
 end;
 end;
 
 procedure Tf_astrolabe.OpenCDC(param:string);
 begin
+{$ifndef astrolabe_static}
     Execnowait(CdC+' '+param);
+{$endif}
 end;
 
 procedure Tf_astrolabe.ShowInfo(Sender: TObject; const messagetext:string);
@@ -293,15 +307,18 @@ end;
 procedure Tf_astrolabe.ReceiveData(Sender : TObject; const data : string);
 begin
 // process here unattended message from Cartes du Ciel.
-  memo1.Lines.Add(Data);
+{$ifndef astrolabe_static}
+  if CheckBox1.Checked then memo1.Lines.Add(Data);
   if (data='Bye!')and(not closing) then   // unexpected failure in CdC
     Restart;
+{$endif}
 end;
 
 procedure Tf_astrolabe.Connect;
 begin
 //Initial connection to CdC
 //Check if CdC is already running
+{$ifndef astrolabe_static}
 edit2.Text:=GetTcpPort;
 if edit2.Text<>'0' then DoConnect  // yes, connect
 else begin
@@ -316,22 +333,32 @@ else begin
      Close;
    end;
 end;
+{$endif}
 end;
 
 procedure Tf_astrolabe.ConnectRetryTimerTimer(Sender: TObject);
 begin
   // wait CdC is started and ready for connection
+{$ifndef astrolabe_static}
   ConnectRetryTimer.Enabled:=false;
   edit3.Text:='Wait Skychart startup ...';
   edit3.Invalidate;
   edit2.Text:=GetTcpPort;
   if edit2.Text<>'0' then DoConnect
      else ConnectRetryTimer.Enabled:=true;
+{$endif}
+end;
+
+procedure Tf_astrolabe.CheckBox1Change(Sender: TObject);
+begin
+//  memo1.Visible:=CheckBox1.Checked;
+memo1.clear;
 end;
 
 procedure Tf_astrolabe.DoConnect;
 begin
 // initialize connection to CdC after it is started
+{$ifndef astrolabe_static}
 if (client=nil)or(client.Terminated) then
    client:=TClientThrd.Create
    else exit;
@@ -347,39 +374,46 @@ sleep(500);
 edit3.Text:='Connected';
 edit3.Invalidate;
 PosTimer.Enabled:=True;
+{$endif}
 end;
 
 procedure Tf_astrolabe.Restart;
 begin
+{$ifndef astrolabe_static}
 Restarting:=true;
 Close;
+{$endif}
 end;
 
 procedure Tf_astrolabe.Disconnect;
 var resp:string;
 begin
 // disconnect from CdC
+{$ifndef astrolabe_static}
 PosTimer.Enabled:=False;
 Closing:=true;
 if (client<>nil)and(not client.Terminated) then begin
    resp:=client.Send('quit');
-   memo1.lines.add(resp);
+   if CheckBox1.Checked then memo1.lines.add(resp);
    client.terminate;
 end;
+{$endif}
 end;
 
 procedure Tf_astrolabe.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+{$ifndef astrolabe_static}
 if not Closing then begin
   Disconnect;                // stop the connection before to close
   ExitTimer.Enabled:=true;
   Action:=caNone;
 end;
+{$endif}
 end;
 
 procedure Tf_astrolabe.FormCreate(Sender: TObject);
 begin
-// prohgram initialisation
+// program initialisation
 DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
@@ -397,16 +431,24 @@ Closing:=false;
 Restarting:=false;
 RealEncoder:=InitEncoder;
 Panel2.Visible:=not RealEncoder;
-Panel3.Visible:=RealEncoder;
+Panel3.Visible:=true;
+{$ifdef astrolabe_static}
+Panel1.Visible:=false;
+{$endif}
+cmdarg:=Tstringlist.Create;
 end;
 
 procedure Tf_astrolabe.FormDestroy(Sender: TObject);
 begin
+cmdarg.free;
+{$ifndef astrolabe_static}
   if Restarting then ExecNoWait(paramstr(0));
+{$endif}
 end;
 
 procedure Tf_astrolabe.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
+{$ifndef astrolabe_static}
   // help small trackbar movement
   case key of
   37 : TrackBarH.Position:=TrackBarH.Position-1;
@@ -414,10 +456,12 @@ begin
   39 : TrackBarH.Position:=TrackBarH.Position+1;
   40 : TrackBarD.Position:=TrackBarD.Position-1;
   end;
+{$endif}
 end;
 
 procedure Tf_astrolabe.ExitTimerTimer(Sender: TObject);
 begin
+{$ifndef astrolabe_static}
   ExitTimer.Enabled:=false;
   if StartCDC then begin
      OpenCDC('--unique --quit');  // close CdC if we start it
@@ -426,24 +470,45 @@ begin
   sleep(1000);
   Application.ProcessMessages;
   Close;                          // return to really close this time
+{$endif}
 end;
 
 procedure Tf_astrolabe.FormShow(Sender: TObject);
 begin
+
+end;
+
+procedure Tf_astrolabe.Init;
+begin
+{$ifndef astrolabe_static}
   // automatic connection at startup
   Connect;
+{$else}
+  f_main.Show;
+  PosTimer.Enabled:=True;
+{$endif}
 end;
 
 function Tf_astrolabe.CdCCmd(cmd:string):string;
 var resp:string;
+    i: integer;
 begin
 // Send command to CdC and wait for response
+{$ifndef astrolabe_static}
 if (client<>nil)and(not client.Terminated) then begin
-   memo1.lines.add(cmd);
+   if CheckBox1.Checked then memo1.lines.add(cmd);
    resp:=client.Send(cmd);
-   memo1.lines.add(resp);
+   if CheckBox1.Checked then memo1.lines.add(resp);
    result:=resp;
 end;
+{$else}
+   if CheckBox1.Checked then memo1.lines.add(cmd);
+   splitarg(cmd,blank,cmdarg);
+   for i:=cmdarg.count to MaxCmdArg do cmdarg.add('');
+   resp:=f_main.ExecuteCmd('',cmdarg);
+   if CheckBox1.Checked then memo1.lines.add(resp);
+   result:=resp;
+{$endif}
 end;
 
 procedure Tf_astrolabe.GetEncoder;
@@ -483,6 +548,8 @@ end else begin
  // simulation using two trackbar:
  EncoderX:=TrackBarH.Position;
  EncoderY:=TrackBarD.Position;
+ LabelX.Caption:=inttostr(EncoderX);
+ LabelY.Caption:=inttostr(EncoderY);
 end;
 end;
 
@@ -490,7 +557,12 @@ procedure Tf_astrolabe.PosTimerTimer(Sender: TObject);
 var inactivity,menuup: boolean;
     menu: integer;
 begin
+{$ifdef astrolabe_static}
+ if f_main.Closing then Close
+   else begin
+{$endif}
 try
+Application.MainForm.SendToBack;
 PosTimer.Enabled:=false;
 inc(InactiveLoop);
 GetEncoder;
@@ -526,6 +598,9 @@ end;
 finally
 PosTimer.Enabled:=true;
 end;
+{$ifdef astrolabe_static}
+end;
+{$endif}
 end;
 
 function Tf_astrolabe.InitEncoder: boolean;
