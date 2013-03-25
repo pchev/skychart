@@ -60,6 +60,7 @@ type
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
+    Label6: TLabel;
     LabelX: TLabel;
     LabelY: TLabel;
     Memo1: TMemo;
@@ -69,6 +70,7 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     PosTimer: TTimer;
+    TimerHide: TTimer;
     TrackBarH: TTrackBar;
     TrackBarD: TTrackBar;
     procedure CheckBox1Change(Sender: TObject);
@@ -80,6 +82,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure PosTimerTimer(Sender: TObject);
+    procedure TimerHideTimer(Sender: TObject);
   private
     { Private declarations }
     ServerIPaddr,ServerIPport: string;
@@ -351,7 +354,7 @@ end;
 
 procedure Tf_astrolabe.CheckBox1Change(Sender: TObject);
 begin
-//  memo1.Visible:=CheckBox1.Checked;
+memo1.Visible:=CheckBox1.Checked;
 memo1.clear;
 end;
 
@@ -430,6 +433,9 @@ LastMenu:=-1;
 Closing:=false;
 Restarting:=false;
 RealEncoder:=InitEncoder;
+Top:=0;
+Left:=0;
+memo1.Visible:=false;
 Panel2.Visible:=not RealEncoder;
 Panel3.Visible:=true;
 {$ifdef astrolabe_static}
@@ -475,7 +481,7 @@ end;
 
 procedure Tf_astrolabe.FormShow(Sender: TObject);
 begin
-
+TimerHide.Enabled:=true;
 end;
 
 procedure Tf_astrolabe.Init;
@@ -562,7 +568,6 @@ begin
    else begin
 {$endif}
 try
-Application.MainForm.SendToBack;
 PosTimer.Enabled:=false;
 inc(InactiveLoop);
 GetEncoder;
@@ -601,6 +606,12 @@ end;
 {$ifdef astrolabe_static}
 end;
 {$endif}
+end;
+
+procedure Tf_astrolabe.TimerHideTimer(Sender: TObject);
+begin
+  TimerHide.Enabled:=false;
+  f_main.BringToFront;
 end;
 
 function Tf_astrolabe.InitEncoder: boolean;
