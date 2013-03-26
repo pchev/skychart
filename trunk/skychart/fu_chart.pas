@@ -583,6 +583,7 @@ end;
 
 procedure Tf_chart.Refresh(setfocus:boolean=true);
 var  savebg:Tcolor;
+     saveantialias: boolean;
      i: integer;
 {$ifdef showtime}
      starttime:TDateTime;
@@ -600,6 +601,8 @@ if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Get refresh lock');
  lock_refresh:=true;
  lastquick:=sc.cfgsc.quick;
+ saveantialias:=sc.plot.cfgplot.AntiAlias;
+ if lastquick then sc.plot.cfgplot.AntiAlias:=false;
  zoomstep:=0;
  if (not frommovecam)and(movecam or moveguide) then begin
    movecam:=false;
@@ -640,6 +643,7 @@ finally
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
  lock_refresh:=false;
+ sc.plot.cfgplot.AntiAlias := saveantialias;
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
