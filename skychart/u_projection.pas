@@ -1333,6 +1333,8 @@ end else begin
    hr:=0;hs:=0;azr:=0;azs:=0;
    if sgn(de)=sgn(c.ObsLatitude) then begin
       m0:=(ar+deg2rad*c.ObsLongitude-hs0)/pi2;     (* circumpolar *)
+      if m0<0 then m0:=m0+1;
+      if m0>1 then m0:=m0-1;
       hsg:= hs0 + deg2rad*360.985647 * m0;
       hl:= hsg - deg2rad*c.ObsLongitude - ar;
       dm:= -(hl / pi2);
