@@ -1084,10 +1084,8 @@ resourcestring
   rsPastel = 'Pastel';
   rsCannotWriteT = 'Cannot write to';
   rsMagnitudeEcl = 'Eclipse magnitude';
-  rsWarningSomeC = 'Warning! Some comet elements are outdated by more than 3 '
-    +'years. Try to find element valid for the current map date.';
-  rsWarningSomeA = 'Warning! Some asteroid elements are outdated by more '
-    +'than 3 years. Try to find element valid for the current map date.';
+  rsWarningSomeC = 'Warning! Some comet elements are outdated. Load element valid for the current map date.';
+  rsWarningSomeA = 'Warning! Some asteroid elements are outdated. Load element valid for the current map date.';
   rsDirectoryNot2 = 'Directory not found! Please install the Skychart '
     +'Pictures package.';
   rsWarning = 'Warning!';
