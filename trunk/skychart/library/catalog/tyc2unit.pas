@@ -402,6 +402,156 @@ Sm := Smlst[curSM];
 OpenRegion(hemis,zone,Sm,ok);
 end;
 
+// No cache for the search function                         //
+
+Procedure OpenRegionNocache(hemis : char ;zone,S : integer ; var ok:boolean);
+var nomzone,nomreg,nomfich1,nomfich2,nombin1,nombin2,nomidx :string;
+    i,j: integer;
+begin
+str(S:4,nomreg);
+str(abs(zone):4,nomzone);
+currec:=0;
+nomfich1:=TY2path+slashchar+'catalog.dat';
+nomfich2:=TY2path+slashchar+'suppl_1.dat';
+nombin1 :=TY2path+slashchar+'tyc2a.dat';
+nombin2 :=TY2path+slashchar+'tyc2b.dat';
+if (not FileExists(nomfich1))and(not FileExists(nombin1)) then begin
+   ok:=false;
+   exit;
+end;
+if FileExists(nombin1) then readbin:=true else readbin:=false;
+FileMode:=0;
+if not fileisopen then begin
+if readbin then begin                        // open binary files
+  nomidx:=TY2path+slashchar+'tyc2idx.dat';
+  AssignFile(fidx2,nomidx);
+  reset(fidx2);
+  AssignFile(fbin,nombin1);
+  reset(fbin);
+  if FileExists(nombin2) then begin
+  if maxcat>1 then begin
+     AssignFile(sbin,nombin2);
+     reset(sbin);
+  end;
+  end else begin
+      maxcat:=1;
+      maxbin:=maxcat;
+  end;
+end else begin                              // open text files
+  maxcat:=2;
+  nomidx:=TY2path+slashchar+'index.dat';
+  AssignFile(fidx2,nomidx);
+  reset(fidx2);
+  AssignFile(ftyc2,nomfich1);
+  AssignFile(fsup1,nomfich2);
+  reset(ftyc2);
+  reset(fsup1);
+end;
+FileisOpen:=true;
+end;
+seek(fidx2,S-1);                           // read index
+read(fidx2,idx);
+t2rec1:=strtoint(idx.rect2);
+s1rec1:=strtoint(idx.recs1);
+read(fidx2,idx);
+t2nrec:=strtoint(idx.rect2)-t2rec1;
+s1nrec:=strtoint(idx.recs1)-s1rec1;
+if readbin then begin
+  i:=t2rec1; t2rec1:=s1rec1; s1rec1:=i;  // inverted  bin index
+  i:=t2nrec; t2nrec:=s1nrec; s1nrec:=i;
+  if maxcat>1 then seek(sbin,s1rec1-1);
+  seek(fbin,t2rec1-1);
+end else begin
+  seek(fsup1,s1rec1-1);
+  seek(ftyc2,t2rec1-1);
+end;
+SMname:=nomreg;
+readsup:=false ;    // begin with first file
+ok:=true;
+end;
+
+Procedure ReadTY2Nocache(var lin : TY2rec; var SMnum : string ; var ok : boolean);
+begin
+inc(currec);
+ok:=true;
+if (not readsup)and(currec>t2nrec) then begin         // end of first data file
+   if maxcat>1 then begin
+      readsup:=true;
+      currec:=1;
+   end else begin
+      ok:=false;
+      inc(currec);
+   end;
+end;
+if readsup and (currec>s1nrec) then begin            // end of second data file
+   ok:=false;
+   inc(currec);
+end;
+if not ok then exit;
+
+if not readsup then begin                                  // read first data file
+if readbin then begin
+    Read(fbin,bin);
+    lin.tycn:=trunc(bin.gscz/10000);
+    lin.gscz:=round(frac(bin.gscz/10000)*10000);
+    lin.gscn:=bin.gscn;
+    lin.ar:=bin.ar/5000000;
+    lin.de:=bin.de/5000000;
+    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
+    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.bt:=((bin.bt and $00000FFF)-200)/100;
+    lin.vt:=((bin.vt and $00000FFF)-200)/100;
+end else begin
+    Read(ftyc2,rec);
+    lin.gscz:=strtoint(rec.gscz);
+    lin.gscn:=strtoint(rec.gscn);
+    lin.tycn:=strtoint(rec.tycn);
+    if trim(rec.arm)>'' then lin.ar:=strtofloat(rec.arm)
+                    else lin.ar:=strtofloat(rec.ar);
+    if trim(rec.dem)>'' then lin.de:=strtofloat(rec.dem)
+                    else lin.de:=strtofloat(rec.de);
+    if trim(rec.pmar)>'' then lin.pmar:=strtofloat(rec.pmar)
+                     else lin.pmar:=0;
+    if trim(rec.pmde)>'' then lin.pmde:=strtofloat(rec.pmde)
+                     else lin.pmde:=0;
+    if trim(rec.bt)>'' then lin.bt:=strtofloat(rec.bt)
+                   else lin.bt:=99;
+    if trim(rec.vt)>'' then lin.vt:=strtofloat(rec.vt)
+                   else lin.vt:=99;
+end;
+end;
+if readsup then begin                                      // read second data file
+ if readbin then begin
+    Read(sbin,bin);
+    lin.tycn:=trunc(bin.gscz/10000);
+    lin.gscz:=round(frac(bin.gscz/10000)*10000);
+    lin.gscn:=bin.gscn;
+    lin.ar:=bin.ar/5000000;
+    lin.de:=bin.de/5000000;
+    lin.pmar:=((word(bin.bt and $0000F000) * 16)+bin.pmar-100000)/10;
+    lin.pmde:=((word(bin.vt and $0000F000) * 16)+bin.pmde-100000)/10;
+    lin.bt:=((bin.bt and $00000FFF)-200)/100;
+    lin.vt:=((bin.vt and $00000FFF)-200)/100;
+  end else begin
+    Read(fsup1,sup);
+    lin.gscz:=strtoint(sup.gscz);
+    lin.gscn:=strtoint(sup.gscn);
+    lin.tycn:=strtoint(sup.tycn);
+    lin.ar:=strtofloat(sup.ar);
+    lin.de:=strtofloat(sup.de);
+    if trim(sup.pmar)>'' then lin.pmar:=strtofloat(sup.pmar)
+                     else lin.pmar:=0;
+    if trim(sup.pmde)>'' then lin.pmde:=strtofloat(sup.pmde)
+                     else lin.pmde:=0;
+    if trim(sup.bt)>'' then lin.bt:=strtofloat(sup.bt)
+                   else lin.bt:=99;
+    if trim(sup.vt)>'' then lin.vt:=strtofloat(sup.vt)
+                   else lin.vt:=99;
+  end;
+  end;
+SMnum:=SMname;
+end;
+
 Procedure FindTYC2num(SMnum,num :Integer; var lin: TY2rec; var ok : boolean);
 var L1,S1,zone,i,j : integer;
     hemis : char;
@@ -425,11 +575,14 @@ i:=j;
 end;
 hemis:=dirlst[i,1];
 zone:=strtoint(copy(dirlst[i],2,4));
-OpenRegion(hemis,zone,Smnum,ok);
+OpenRegionNocache(hemis,zone,Smnum,ok);
 ok:=false;
 repeat
-    ReadTY2(lin,buf,fok);
-    if lin.gscn=num then begin ok:=true; end; // set result but finish to read the zone to complete the cache
+    ReadTY2Nocache(lin,buf,fok);
+    if lin.gscn=num then begin
+       ok:=true;
+       break;
+    end;
 until not fok;
 Closeregion;
 end;
