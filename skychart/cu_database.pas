@@ -1120,7 +1120,7 @@ if db.Rowcount>0 then begin
     end;
     inc(i);
   end;
-  if dt>1000 then begin
+  if dt>180 then begin
      FAstmsg:=rsWarningSomeA;
   end;
   h:=StrToFloatDef(trim(db.Results[j][1]),20);  // H and G not present in file for some poorly observed asteroids
@@ -1170,7 +1170,7 @@ if db.Rowcount>0 then begin
   end;
 
   if dt<FComMindt then begin
-     FComMindt:=round(dt);
+     FComMindt:=round(dt-1);
   end;
   tp:=strtofloat(trim(db.Results[j][1]));
   q:=strtofloat(trim(db.Results[j][2]));

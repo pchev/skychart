@@ -1955,7 +1955,7 @@ if db2.Rowcount>0 then begin
   end;
 end;
 cfgsc.CometNb:=db2.Rowcount;
-if cdb.ComMinDT>1000 then
+if cdb.ComMinDT>180 then
    cfgsc.msg:=cfgsc.msg+blank+rsWarningSomeC;
 finally
   lockdb:=false;
@@ -2108,6 +2108,7 @@ if result then begin
           +'ref:'+ref;
   djd(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab; // ephemeris date
+  if abs(cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5]-cfgsc.CurJDUT)>180 then desc:=desc+rsWarningSomeA+tab;
   cfgsc.TrackType:=3;
   cfgsc.TrackId:=cfgsc.AsteroidName[CurrentAstStep,CurrentAsteroid,1];
   cfgsc.TrackEpoch:=cfgsc.AsteroidLst[CurrentAstStep,CurrentAsteroid,5];
@@ -2200,6 +2201,7 @@ if result then begin
           +'ref:'+elem_id;
   djd(cfgsc.CometLst[CurrentComStep,CurrentComet,8],yy,mm,dd,hh);
   Desc := Desc +'/'+Date2Str(yy,mm,dd)+tab;
+  if abs(cfgsc.CometLst[CurrentComStep,CurrentComet,8]-cfgsc.CurJDUT)>180 then desc:=desc+rsWarningSomeC+tab;
   cfgsc.TrackType:=2;
   cfgsc.TrackId:=cfgsc.CometName[CurrentComStep,CurrentComet,1];
   cfgsc.TrackEpoch:=cfgsc.CometLst[CurrentComStep,CurrentComet,8];
