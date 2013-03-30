@@ -2116,7 +2116,7 @@ begin
          if rec.star.magv<90 then str(rec.star.magv:5:2,txt) else txt:=b5;
          Desc:=Desc+trim(rec.options.flabel[lOffset+vsMagv])+dp+txt+tab;
          for i:=1 to 10 do begin
-            if rec.vstr[i] and rec.options.altname[i] then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
+            if rec.vstr[i] and rec.options.altname[i] and (trim(rec.str[i])>'') then Desc:=Desc+trim(rec.options.flabel[15+i])+dp+rec.str[i]+tab;
          end;
          if rec.star.valid[vsB_v] then begin
             if (rec.star.b_v<90) then str(rec.star.b_v:5:2,txt) else txt:=b5;
