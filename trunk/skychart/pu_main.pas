@@ -765,6 +765,7 @@ type
     Function ListChart:string;
     Function SelectChart(cname:string):string;
     Function HelpCmd(cname:string):string;
+    Function GetSelectedObject:string;
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
     procedure SendInfo(Sender: TObject; origin,str:string);
     function GenericSearch(cname,Num:string):boolean;
@@ -6940,6 +6941,15 @@ end else begin
 end;
 end;
 
+Function Tf_main.GetSelectedObject:string;
+begin
+result:=msgFailed;
+if MultiFrame1.ActiveObject is Tf_chart then begin
+  if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindOK  then
+     result:=msgOK+blank+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindDesc;
+end;
+end;
+
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
 var i,n,w,h : integer;
     cmd:string;
@@ -6977,6 +6987,7 @@ case n of
  15 : result:=LoadDefaultChart(arg[1]);
  16 : result:=SetGCat(arg[1],arg[2],arg[3],arg[4],arg[5]);
  17 : result:=ShowPlanetInfo(arg[1]);
+ 18 : result:=GetSelectedObject;
 else begin
  result:='Bad chart name '+cname;
  if cname='' then begin
