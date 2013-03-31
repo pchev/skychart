@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 18:24+0000\n"
+"POT-Creation-Date: 2013-03-29 14:54+0000\n"
 "PO-Revision-Date: 2013-03-10 08:04+0000\n"
 "Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -2861,6 +2861,10 @@ msgstr "Střední"
 msgid "Milky Way"
 msgstr "Mléčná dráha"
 
+#: u_translation.rsmillionkm
+msgid "million Km."
+msgstr ""
+
 #: u_translation.rsmin
 msgid "m"
 msgstr "'"
@@ -5374,12 +5378,12 @@ msgid "Warning! Low resolution mode. Use PostScript instead and print the result
 msgstr "Varování : Režim nízkého rozlišení, použijte raději PostScript a vytiskněte výsledný soubor."
 
 #: u_translation.rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Varování! Některé elementy asteroidů jsou více než tři roky staré. Pokuste se najít elementy platné pro datum mapy."
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
+msgstr ""
 
 #: u_translation.rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Varování! Některé elementy komet jsou více než tři roky staré. Pokuste se najít elementy platné pro datum mapy."
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
+msgstr ""
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"

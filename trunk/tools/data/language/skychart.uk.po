@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 18:24+0000\n"
+"POT-Creation-Date: 2013-03-29 14:54+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-31 16:20+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2863,6 +2863,10 @@ msgstr ""
 msgid "Milky Way"
 msgstr "Чум.  Шлях"
 
+#: u_translation.rsmillionkm
+msgid "million Km."
+msgstr ""
+
 #: u_translation.rsmin
 msgid "m"
 msgstr "'"
@@ -5376,11 +5380,11 @@ msgid "Warning! Low resolution mode. Use PostScript instead and print the result
 msgstr ""
 
 #: u_translation.rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningthecu
