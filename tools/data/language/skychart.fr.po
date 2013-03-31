@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 18:24+0000\n"
-"PO-Revision-Date: 2013-03-17 18:43+0000\n"
+"POT-Creation-Date: 2013-03-29 14:54+0000\n"
+"PO-Revision-Date: 2013-03-29 14:58+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -2865,6 +2865,10 @@ msgstr "Moyen"
 msgid "Milky Way"
 msgstr "Voie lactée"
 
+#: u_translation.rsmillionkm
+msgid "million Km."
+msgstr "million Km."
+
 #: u_translation.rsmin
 msgid "m"
 msgstr "'"
@@ -5379,12 +5383,12 @@ msgid "Warning! Low resolution mode. Use PostScript instead and print the result
 msgstr "Attention! Mode basse résolution. Utilisez plutôt PostScript et imprimer le fichier résultat."
 
 #: u_translation.rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Attention! Les éléments des astéroïdes sont dépassés de plus de 3 ans. Essayez de trouver des éléments valables pour la date actuelle de la carte."
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
+msgstr "Attention! Les éléments des astéroïdes ne sont plus valable. Chargez des éléments valables pour la date actuelle de la carte."
 
 #: u_translation.rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
-msgstr "Attention! Les éléments des comètes sont dépassés de plus de 3 ans. Essayez de trouver des éléments valables pour la date actuelle de la carte."
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
+msgstr "Attention! Les éléments des comètes ne sont plus valable. Chargez des éléments valables pour la date actuelle de la carte."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"

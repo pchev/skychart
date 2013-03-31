@@ -4283,11 +4283,11 @@ msgid "Eclipse magnitude"
 msgstr ""
 
 #: u_translation:rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation:rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation:rsdirectorynot2
@@ -5472,5 +5472,9 @@ msgstr ""
 
 #: u_translation:rspictureangle
 msgid "Picture angle offset"
+msgstr ""
+
+#: u_translation:rsmillionkm
+msgid "million Km."
 msgstr ""
 

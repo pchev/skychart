@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-17 18:24+0000\n"
+"POT-Creation-Date: 2013-03-29 14:54+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-17 18:44+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-03-31 16:20+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -2917,6 +2917,10 @@ msgstr "Μεσαίο"
 msgid "Milky Way"
 msgstr "Γαλαξίας"
 
+#: u_translation.rsmillionkm
+msgid "million Km."
+msgstr ""
+
 #: u_translation.rsmin
 msgid "m"
 msgstr "'"
@@ -5459,11 +5463,11 @@ msgid "Warning! Low resolution mode. Use PostScript instead and print the result
 msgstr ""
 
 #: u_translation.rswarningsomea
-msgid "Warning! Some asteroid elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningsomec
-msgid "Warning! Some comet elements are outdated by more than 3 years. Try to find element valid for the current map date."
+msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
 msgstr ""
 
 #: u_translation.rswarningthecu
