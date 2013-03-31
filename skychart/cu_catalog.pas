@@ -2191,6 +2191,10 @@ procedure Tcatalog.FormatSAC(lin : SACrec; var rec:GcatRec);
 begin
 rec.ra:=deg2rad*lin.ar;
 rec.dec:=deg2rad*lin.de;
+if (trim(lin.nom2)='NGC  651') then begin
+  lin.nom1:=trim(lin.nom2);
+  lin.nom2:='';
+end;
 rec.neb.messierobject:=(copy(lin.nom1,1,2)='M ');
 rec.neb.dim1:=lin.s1;
 rec.neb.mag:=lin.ma;
