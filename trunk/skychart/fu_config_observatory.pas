@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  u_unzip, pu_observatory_db,
+  u_unzip, pu_observatory_db, IniFiles,
   u_help, u_translation, u_constant, u_util, cu_database, Math, dynlibs,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   Buttons, StdCtrls, ExtCtrls, cu_zoomimage, enhedits, ComCtrls, LResources,
@@ -166,6 +166,7 @@ type
     procedure UpdFavList;
     procedure CountryChange(Sender: TObject);
     procedure ObsChange(Sender: TObject);
+    procedure GetPictureRotation;
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -915,17 +916,39 @@ procedure Tf_config_observatory.horizonpicturefileAcceptFileName(
 begin
 if LockChange then exit;
 cmain.HorizonPictureFile:=value;
+GetPictureRotation;
 end;
 
 procedure Tf_config_observatory.horizonpicturefileChange(Sender: TObject);
 begin
 if LockChange then exit;
 cmain.HorizonPictureFile:=horizonpicturefile.text;
+GetPictureRotation;
 end;
 
 procedure Tf_config_observatory.picturerotationChange(Sender: TObject);
 begin
   csc.HorizonPictureRotate := picturerotation.Value;
+end;
+
+procedure Tf_config_observatory.GetPictureRotation;
+var fn,lstype: string;
+    rot: single;
+    fconfig: TIniFile;
+begin
+fn:=slash(ExtractFilePath(cmain.HorizonPictureFile))+'landscape.ini';
+if FileExists(fn) then begin
+  fconfig:=TIniFile.Create(fn);
+  lstype:=fconfig.ReadString('landscape','type','');
+  if lstype='spherical' then begin
+    rot:=fconfig.ReadFloat('landscape','angle_rotatez',0);
+    rot:=rmod(rot+360,360);
+    csc.HorizonPictureRotate:=rot;
+    picturerotation.Value:=rot;
+  end;
+  fconfig.Free;
+end;
+
 end;
 
 end.
