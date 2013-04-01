@@ -6942,11 +6942,22 @@ end;
 end;
 
 Function Tf_main.GetSelectedObject:string;
+var y,m,d:integer;
+    h,eq:double;
 begin
 result:=msgFailed;
 if MultiFrame1.ActiveObject is Tf_chart then begin
   if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindOK  then
-     result:=msgOK+blank+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindDesc;
+     with MultiFrame1.ActiveObject as Tf_chart do begin
+        result:=msgOK+blank+sc.cfgsc.FindDesc;
+        if sc.cfgsc.FindJD=sc.cfgsc.CurJDUT then
+           result:=result+tab+'Equinox:now'
+        else begin
+           djd(sc.cfgsc.FindJD,y,m,d,h);
+           eq:=y+DayofYear(y,m,d)/365.25;
+           result:=result+tab+'Equinox:J'+FormatFloat(f1,eq);
+        end;
+     end;
 end;
 end;
 
