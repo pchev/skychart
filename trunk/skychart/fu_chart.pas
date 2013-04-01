@@ -2627,9 +2627,9 @@ end;
 txt:=txt+html_b+oname+htms_b+html_br;
 // Planet picture
 ipla:=0;
-if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
-  for i:=1 to 11 do if pla[i]=oname then ipla:=i;
+for i:=1 to 11 do if pla[i]=oname then ipla:=i;
 if not cmain.SimpleDetail then begin
+if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
   if ipla>0 then begin
     { TODO : make a global function with almost the same code in cu_plot }
     searchdir:='"'+slash(appdir)+slash('data')+'planet"';
