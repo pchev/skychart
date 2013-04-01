@@ -2514,7 +2514,7 @@ f_detail.BringToFront;
 end;
 
 function Tf_chart.FormatDesc:string;
-var desc,buf,buf2,otype,oname,txt,s1,s2,s3: string;
+var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     thr,tht,ths,tazr,tazs,tculmalt: string;
     searchdir,cmd,fn: string;
     bmp: Tbitmap;
