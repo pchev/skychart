@@ -3,4 +3,17 @@ Version 3.9 beta release Notes
 New functions:
 
   * Add the capability to display a picture for the horizon panorama. The image must be a PNG file of any size representing the full 360° panorama with an equirectangular projection. The horizon must be exactly at the middle height of the picture. The sky area must be set transparent. The left side of the picture is the East direction. If you use another orientation you must also give the offset angle.
- 
+  * Color option for Catgen nebula catalog.
+  * Update URL option for Catgen text catalog.
+  * Archive downloaded DSS images.
+  * Display images with WCS from FITS archive.
+
+Corrections:
+  * Better picture/map transparency.
+  * More options for picture tone mapping.
+  * Full 16bit processing for pictures.
+  * Multithread for fits mapping.
+  * Add orientation in compass.
+  * New simplified pointer instead of compass.
+  * Galaxy symbol depend on luminosity also in line mode.
+  * DSO label size depend on magnitude.
