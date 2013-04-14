@@ -3,3 +3,18 @@ Version 3.9 beta Notes de la version
 Nouvelles fonctions:
 
   * Ajout de la possibilité d'afficher une image pour le panorama de l'horizon. L'image doit être un fichier PNG de n'importe quelle taille représentant le panorama sur 360° avec une projection équirectangulaire. L'horizon doit être exactement à mi-hauteur de l'image. La région du ciel doit être transparente. Le côté gauche de l'image est la direction Est. Si vous utilisez une autre orientation vous devez indiquer l'angle de rotation. 
+  * Option pour la couleur des nébuleuses dans CatGen.
+  * Option URL de mise à jour dans CatGen.
+  * Archive les images DSS téléchargée.
+  * Affiche les images d'archive FITS avec WCS.
+
+Corrections:
+  * Meilleure transparence image/carte.
+  * Plus d'options pour la tonalité de l'image.
+  * Traitement complet 16 bits des images.
+  * Traitement parallèle pour les images FITS.
+  * Ajout des indications d'orientation sur la boussole.
+  * Nouveau pointeur simplifié au lieu de la boussole.
+  * Indication de la luminosité des galaxies même en mode en ligne.
+  * Taille des labels des nébuleuses selon la magnitude.
+
