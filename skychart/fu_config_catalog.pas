@@ -26,10 +26,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
-  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, math,
-  LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  ExtCtrls, StdCtrls, enhedits, Grids, Buttons, ComCtrls, LResources,
-  EditBtn, LazHelpHTML;
+  pu_catgenadv, pu_progressbar, FileUtil, pu_voconfig, math, LCLIntf, SysUtils,
+  Classes, Graphics, Controls, Forms, Dialogs, ExtCtrls, StdCtrls, enhedits,
+  downloaddialog, Grids, Buttons, ComCtrls, LResources, EditBtn, LazHelpHTML;
 
 type
 
@@ -49,6 +48,7 @@ type
     delcat: TButton;
     CatgenButton: TButton;
     delobj: TButton;
+    DownloadDialog1: TDownloadDialog;
     Fbsc1: TLongEdit;
     Fbsc2: TLongEdit;
     fgcm1: TLongEdit;
@@ -283,6 +283,7 @@ type
     procedure ShowVO;
     procedure ShowUserObjects;
     procedure ReloadVO(fn: string);
+    procedure ReloadCat(path,cat: string);
     procedure EditGCatPath(row : integer);
     procedure DeleteGCatRow(p : integer);
     Procedure DeleteObjRow(p : integer);
@@ -555,6 +556,8 @@ end;
 
 procedure Tf_config_catalog.ShowGCat;
 var i,j,n:integer;
+    ncolor:boolean;
+    caturl:string;
 begin
 stringgrid3.RowCount:=ccat.GCatnum+1;
 stringgrid3.cells[0,0]:='x';
@@ -563,6 +566,7 @@ stringgrid3.Columns[1].Title.Caption:=rsMin2;
 stringgrid3.Columns[2].Title.Caption:=rsMax2;
 stringgrid3.Columns[3].Title.Caption:=rsPath;
 stringgrid3.Columns[5].Title.Caption:=rsColor;
+stringgrid3.Columns[6].Title.Caption:=rsReload;
 CatalogEmpty:=true;
 for j:=0 to ccat.GCatnum-1 do begin
   if catalogempty then catalogempty:=false;
@@ -574,13 +578,17 @@ for j:=0 to ccat.GCatnum-1 do begin
   if ccat.GCatLst[j].actif then stringgrid3.cells[0,i]:='1'
                            else stringgrid3.cells[0,i]:='0';
   n:=catalog.GetCatType(stringgrid3.Cells[4,i],stringgrid3.Cells[1,i]);
-  if (n=4) or (n=5) then begin  // rtneb, rtlin
+  ncolor:=catalog.GetNebColorSet(stringgrid3.Cells[4,i],stringgrid3.Cells[1,i]);
+  if ((n=4)and(not ncolor)) or (n=5) then begin  // rtneb, rtlin
     if ccat.GCatLst[j].ForceColor and (ccat.GCatLst[j].col>0) then
       stringgrid3.cells[6,i]:=inttostr(ccat.GCatLst[j].col)
     else
       stringgrid3.cells[6,i]:='';
   end
   else stringgrid3.cells[6,i]:='N';
+  caturl:=catalog.GetCatURL(stringgrid3.Cells[4,i],stringgrid3.Cells[1,i]);
+  if trim(caturl)>'' then stringgrid3.cells[7,i]:='1'
+     else stringgrid3.cells[7,i]:='0';
 end;
 end;
 
@@ -742,6 +750,13 @@ end else if (Acol=6)and(Arow>0) then begin
     Canvas.Pen.Color := clBtnShadow;
     Canvas.EllipseC(Rect.Left+(abs(Rect.Right-Rect.Left) div 2), Rect.Top+(abs(Rect.Bottom-Rect.Top) div 2), 6, 6 );
   end;
+end else if (Acol=7)and(Arow>0) then begin
+  if (cells[acol,arow]='1')then begin
+    ImageList1.Draw(Canvas,Rect.left+2,Rect.top+2,1);
+  end else begin
+    Canvas.Brush.Color := StringGrid3.Color;
+    Canvas.FillRect(Rect);
+  end;
 end;
 end;
 end;
@@ -774,7 +789,49 @@ case col of
       end;
     end;
     end;
+7 : begin
+    if stringgrid3.Cells[col,row]='1' then begin
+       ReloadCat(stringgrid3.Cells[4,row],stringgrid3.Cells[1,row]);
+    end;
+    end;
 end;
+end;
+
+procedure Tf_config_catalog.ReloadCat(path,cat: string);
+var fn,url:string;
+begin
+fn:=catalog.GetCatTxtFile(path,cat);
+url:=catalog.GetCatURL(path,cat);
+DownloadDialog1.msgDownloadFile:=rsDownloadFile;
+DownloadDialog1.msgCopyfrom:=rsCopyFrom;
+DownloadDialog1.msgtofile:=rsToFile;
+DownloadDialog1.msgDownloadBtn:=rsDownload;
+DownloadDialog1.msgCancelBtn:=rsCancel;
+if cmain.HttpProxy then begin
+  DownloadDialog1.SocksProxy:='';
+  DownloadDialog1.SocksType:='';
+  DownloadDialog1.HttpProxy:=cmain.ProxyHost;
+  DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+  DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+  DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+end else if cmain.SocksProxy then begin
+  DownloadDialog1.HttpProxy:='';
+  DownloadDialog1.SocksType:=cmain.SocksType;
+  DownloadDialog1.SocksProxy:=cmain.ProxyHost;
+  DownloadDialog1.HttpProxyPort:=cmain.ProxyPort;
+  DownloadDialog1.HttpProxyUser:=cmain.ProxyUser;
+  DownloadDialog1.HttpProxyPass:=cmain.ProxyPass;
+end else begin
+  DownloadDialog1.SocksProxy:='';
+  DownloadDialog1.SocksType:='';
+  DownloadDialog1.HttpProxy:='';
+  DownloadDialog1.HttpProxyPort:='';
+  DownloadDialog1.HttpProxyUser:='';
+  DownloadDialog1.HttpProxyPass:='';
+end;
+DownloadDialog1.URL:=url;
+DownloadDialog1.SaveToFile:=slash(path)+fn;
+DownloadDialog1.Execute;
 end;
 
 Procedure Tf_config_catalog.EditGCatPath(row : integer);
@@ -809,7 +866,7 @@ end;
 procedure Tf_config_catalog.StringGrid3SelectCell(Sender: TObject; ACol,
   ARow: Integer; var CanSelect: Boolean);
 begin
-if (Acol=5)or(Acol=6) then canselect:=false else canselect:=true;
+if (Acol=5)or(Acol=6)or(Acol=7) then canselect:=false else canselect:=true;
 end;
 
 procedure Tf_config_catalog.StringGrid3SetEditText(Sender: TObject; ACol,

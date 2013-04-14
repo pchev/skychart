@@ -6,8 +6,8 @@ object f_config_pictures: Tf_config_pictures
   ClientHeight = 524
   ClientWidth = 503
   TabOrder = 0
-  DesignLeft = 114
-  DesignTop = 364
+  DesignLeft = 387
+  DesignTop = 309
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -23,20 +23,30 @@ object f_config_pictures: Tf_config_pictures
       Height = 522
       Top = 1
       Width = 501
-      ActivePage = Page2
+      ActivePage = Page4
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 3
       TabOrder = 0
       OnChange = PageControl1PageChanged
       object Page1: TTabSheet
         Caption = 'Objects'
         ClientHeight = 518
         ClientWidth = 497
+        object Label3: TLabel
+          Left = 17
+          Height = 96
+          Top = 61
+          Width = 399
+          AutoSize = False
+          Caption = 'The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects.  This images are used to replace the DSO symbole on the map'
+          ParentColor = False
+          WordWrap = True
+        end
         object ProgressPanel: TPanel
-          Left = 15
+          Left = 17
           Height = 94
-          Top = 71
+          Top = 157
           Width = 401
           ClientHeight = 94
           ClientWidth = 401
@@ -44,9 +54,9 @@ object f_config_pictures: Tf_config_pictures
           Visible = False
           object ProgressCat: TLabel
             Left = 187
-            Height = 15
+            Height = 16
             Top = 8
-            Width = 31
+            Width = 35
             Caption = 'Other'
             ParentColor = False
           end
@@ -59,48 +69,48 @@ object f_config_pictures: Tf_config_pictures
           end
         end
         object Label50: TLabel
-          Left = 2
-          Height = 15
+          Left = 17
+          Height = 16
           Top = 2
-          Width = 193
+          Width = 197
           Caption = 'Display image of cataloged objects'
           ParentColor = False
         end
         object Label264: TLabel
-          Left = 15
-          Height = 15
-          Top = 46
-          Width = 87
+          Left = 16
+          Height = 16
+          Top = 36
+          Width = 92
           Caption = 'Image Directory'
           ParentColor = False
         end
         object Panel11: TPanel
-          Left = 16
-          Height = 199
-          Top = 168
+          Left = 17
+          Height = 143
+          Top = 254
           Width = 401
-          ClientHeight = 199
+          ClientHeight = 143
           ClientWidth = 401
           TabOrder = 1
           object Label266: TLabel
             Left = 24
-            Height = 15
-            Top = 39
-            Width = 61
+            Height = 16
+            Top = 35
+            Width = 62
             Caption = 'Luminosity'
             ParentColor = False
           end
           object Label268: TLabel
             Left = 24
-            Height = 15
-            Top = 111
-            Width = 48
+            Height = 16
+            Top = 91
+            Width = 52
             Caption = 'Contrast'
             ParentColor = False
           end
           object ImgLumBar: TTrackBar
             Left = 120
-            Height = 45
+            Height = 36
             Top = 15
             Width = 222
             Frequency = 5
@@ -113,8 +123,8 @@ object f_config_pictures: Tf_config_pictures
           end
           object ImgContrastBar: TTrackBar
             Left = 120
-            Height = 45
-            Top = 87
+            Height = 36
+            Top = 71
             Width = 222
             Frequency = 5
             Max = 100
@@ -127,7 +137,7 @@ object f_config_pictures: Tf_config_pictures
           object ResetLum: TButton
             Left = 191
             Height = 25
-            Top = 159
+            Top = 111
             Width = 75
             BorderSpacing.InnerBorder = 4
             Caption = 'Reset'
@@ -137,17 +147,17 @@ object f_config_pictures: Tf_config_pictures
         end
         object ShowImagesBox: TCheckBox
           Left = 31
-          Height = 19
-          Top = 375
-          Width = 202
+          Height = 23
+          Top = 405
+          Width = 219
           Caption = 'Show object pictures on the chart'
           OnClick = ShowImagesBoxClick
           TabOrder = 2
         end
         object imgpath: TDirectoryEdit
-          Left = 150
-          Height = 24
-          Top = 39
+          Left = 151
+          Height = 23
+          Top = 29
           Width = 264
           ShowHidden = False
           ButtonWidth = 23
@@ -157,9 +167,9 @@ object f_config_pictures: Tf_config_pictures
           OnChange = imgpathChange
         end
         object Panel3: TPanel
-          Left = 16
+          Left = 17
           Height = 94
-          Top = 71
+          Top = 157
           Width = 401
           ClientHeight = 94
           ClientWidth = 401
@@ -191,7 +201,7 @@ object f_config_pictures: Tf_config_pictures
         ClientHeight = 518
         ClientWidth = 497
         object Label270: TLabel
-          Left = 0
+          Left = 7
           Height = 16
           Top = 0
           Width = 113
@@ -199,32 +209,32 @@ object f_config_pictures: Tf_config_pictures
           ParentColor = False
         end
         object Label271: TLabel
-          Left = 8
+          Left = 7
           Height = 16
-          Top = 22
+          Top = 44
           Width = 45
           Caption = 'FITS File'
           ParentColor = False
         end
         object backimginfo: TLabel
-          Left = 15
+          Left = 13
           Height = 16
-          Top = 122
-          Width = 7
-          Caption = '  '
+          Top = 189
+          Width = 21
+          Caption = '????'
           ParentColor = False
         end
         object Image1: TImage
-          Left = 7
-          Height = 313
-          Top = 143
-          Width = 481
+          Left = 13
+          Height = 276
+          Top = 205
+          Width = 465
           Stretch = True
         end
         object ShowBackImg: TCheckBox
           Left = 95
           Height = 23
-          Top = 39
+          Top = 64
           Width = 124
           Caption = 'Show this picture'
           OnClick = ShowBackImgClick
@@ -232,11 +242,11 @@ object f_config_pictures: Tf_config_pictures
         end
         object Panel1: TPanel
           Left = 7
-          Height = 48
-          Top = 67
-          Width = 474
-          ClientHeight = 48
-          ClientWidth = 474
+          Height = 88
+          Top = 93
+          Width = 481
+          ClientHeight = 88
+          ClientWidth = 481
           TabOrder = 2
           object ImgTrBar2: TTrackBar
             Left = 304
@@ -304,12 +314,46 @@ object f_config_pictures: Tf_config_pictures
             Caption = 'Transparency'
             ParentColor = False
           end
+          object Button5: TButton
+            Left = 326
+            Height = 25
+            Top = 56
+            Width = 96
+            Caption = 'Reset'
+            OnClick = Button5Click
+            TabOrder = 3
+          end
+          object ImgITT2: TComboBox
+            Left = 155
+            Height = 23
+            Top = 56
+            Width = 137
+            ItemHeight = 0
+            ItemIndex = 1
+            Items.Strings = (
+              'Linear'
+              'Scaled'
+              'Log'
+              'Sqrt'
+            )
+            OnChange = ImgITT2Change
+            TabOrder = 4
+            Text = 'Scaled'
+          end
+          object Label9: TLabel
+            Left = 14
+            Height = 16
+            Top = 60
+            Width = 103
+            Caption = 'Visualisation scale'
+            ParentColor = False
+          end
         end
         object backimg: TFileNameEdit
           Left = 95
           Height = 23
-          Top = 15
-          Width = 360
+          Top = 37
+          Width = 366
           OnAcceptFileName = backimgAcceptFileName
           DialogOptions = []
           Filter = 'FITS Files|*.fit; *.fits; *.fts|All|*.*'
@@ -321,13 +365,22 @@ object f_config_pictures: Tf_config_pictures
           TabOrder = 0
           OnChange = backimgChange
         end
-        object Button5: TButton
-          Left = 359
+        object Label5: TLabel
+          Left = 7
+          Height = 16
+          Top = 17
+          Width = 485
+          AutoSize = False
+          Caption = 'Show a single picture on the map.'
+          ParentColor = False
+        end
+        object Header1: TButton
+          Left = 357
           Height = 25
-          Top = 37
-          Width = 96
-          Caption = 'Reset'
-          OnClick = Button5Click
+          Top = 64
+          Width = 130
+          Caption = 'View header'
+          OnClick = Header1Click
           TabOrder = 3
         end
       end
@@ -335,172 +388,27 @@ object f_config_pictures: Tf_config_pictures
         Caption = 'DSS - Realsky'
         ClientHeight = 518
         ClientWidth = 497
-        object GroupBox3: TGroupBox
-          Left = 1
-          Height = 355
-          Top = 101
-          Width = 481
-          Caption = 'RealSky®'
-          ClientHeight = 338
-          ClientWidth = 477
-          TabOrder = 0
-          object Label72: TLabel
-            Left = 8
-            Height = 15
-            Top = 100
-            Width = 71
-            Caption = 'Auxiliary files'
-            ParentColor = False
-          end
-          object Label73: TLabel
-            Left = 8
-            Height = 15
-            Top = 152
-            Width = 103
-            Caption = 'Data Files, CDrom'
-            ParentColor = False
-          end
-          object Label74: TLabel
-            Left = 8
-            Height = 15
-            Top = 196
-            Width = 75
-            Caption = 'temporary file'
-            ParentColor = False
-          end
-          object Label75: TLabel
-            Left = 416
-            Height = 15
-            Top = 272
-            Width = 33
-            Caption = 'pixels'
-            ParentColor = False
-          end
-          object Label77: TLabel
-            Left = 416
-            Height = 15
-            Top = 308
-            Width = 40
-            Caption = 'MBytes'
-            ParentColor = False
-          end
-          object realskydir: TEdit
-            Left = 196
-            Height = 22
-            Top = 92
-            Width = 169
-            OnChange = realskydirChange
-            TabOrder = 3
-            Text = 'cat\RealSky\'
-          end
-          object realskydrive: TEdit
-            Left = 196
-            Height = 22
-            Top = 144
-            Width = 169
-            OnChange = realskydriveChange
-            TabOrder = 4
-            Text = 'X:\'
-          end
-          object realskyfile: TEdit
-            Left = 196
-            Height = 22
-            Top = 188
-            Width = 169
-            OnChange = realskyfileChange
-            TabOrder = 5
-            Text = 'images\$TEMP.FIT'
-          end
-          object RealSkyNorth: TCheckBox
-            Left = 8
-            Height = 26
-            Top = 26
-            Width = 106
-            Caption = 'RealSky North'
-            OnClick = RealSkyNorthClick
-            TabOrder = 0
-          end
-          object RealSkySouth: TCheckBox
-            Left = 8
-            Height = 26
-            Top = 62
-            Width = 108
-            Caption = 'RealSky South'
-            OnClick = RealSkySouthClick
-            TabOrder = 1
-          end
-          object DSS102CD: TCheckBox
-            Left = 184
-            Height = 26
-            Top = 26
-            Width = 98
-            Caption = '102 CD DSS'
-            OnClick = DSS102CDClick
-            TabOrder = 2
-          end
-          object usesubsample: TCheckBox
-            Left = 8
-            Height = 26
-            Top = 272
-            Width = 242
-            Caption = 'Use subsampling to limit image size to'
-            Checked = True
-            OnClick = usesubsampleClick
-            State = cbChecked
-            TabOrder = 7
-          end
-          object reallist: TCheckBox
-            Left = 8
-            Height = 26
-            Top = 240
-            Width = 139
-            Caption = 'Select plate from list'
-            Checked = True
-            OnClick = reallistClick
-            State = cbChecked
-            TabOrder = 6
-          end
-          object realskymax: TLongEdit
-            Left = 336
-            Height = 22
-            Top = 268
-            Width = 65
-            TabOrder = 8
-            OnChange = realskymaxChange
-            Value = 0
-          end
-          object realskymb: TLongEdit
-            Left = 336
-            Height = 22
-            Top = 304
-            Width = 65
-            Color = clBtnFace
-            ReadOnly = True
-            TabOrder = 9
-            Value = 0
-          end
-        end
         object GroupBox1: TGroupBox
-          Left = 1
-          Height = 85
+          Left = 4
+          Height = 69
           Top = 8
-          Width = 481
+          Width = 484
           Caption = 'Online DSS'
-          ClientHeight = 68
-          ClientWidth = 477
+          ClientHeight = 52
+          ClientWidth = 480
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 26
+            Height = 23
             Top = 20
-            Width = 221
+            Width = 211
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
           end
           object OnlineDSSList: TComboBox
             Left = 292
-            Height = 24
+            Height = 23
             Top = 20
             Width = 176
             ItemHeight = 0
@@ -508,6 +416,315 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 1
             Text = 'OnlineDSSList'
           end
+        end
+        object GroupBox3: TGroupBox
+          Left = 4
+          Height = 280
+          Top = 181
+          Width = 484
+          Caption = 'RealSky®'
+          ClientHeight = 263
+          ClientWidth = 480
+          TabOrder = 0
+          object Panel2: TPanel
+            Left = 4
+            Height = 253
+            Top = 4
+            Width = 470
+            ClientHeight = 253
+            ClientWidth = 470
+            TabOrder = 0
+            object RealSkyNorth: TCheckBox
+              Left = 6
+              Height = 23
+              Top = 8
+              Width = 103
+              Caption = 'RealSky North'
+              OnClick = RealSkyNorthClick
+              TabOrder = 0
+            end
+            object realskymb: TLongEdit
+              Left = 331
+              Height = 23
+              Top = 221
+              Width = 65
+              Color = clBtnFace
+              ReadOnly = True
+              TabOrder = 1
+              Value = 0
+            end
+            object realskymax: TLongEdit
+              Left = 331
+              Height = 23
+              Top = 189
+              Width = 65
+              TabOrder = 2
+              OnChange = realskymaxChange
+              Value = 0
+            end
+            object reallist: TCheckBox
+              Left = 6
+              Height = 23
+              Top = 157
+              Width = 145
+              Caption = 'Select plate from list'
+              Checked = True
+              OnClick = reallistClick
+              State = cbChecked
+              TabOrder = 3
+            end
+            object usesubsample: TCheckBox
+              Left = 6
+              Height = 23
+              Top = 189
+              Width = 242
+              Caption = 'Use subsampling to limit image size to'
+              Checked = True
+              OnClick = usesubsampleClick
+              State = cbChecked
+              TabOrder = 4
+            end
+            object DSS102CD: TCheckBox
+              Left = 196
+              Height = 23
+              Top = 8
+              Width = 90
+              Caption = '102 CD DSS'
+              OnClick = DSS102CDClick
+              TabOrder = 5
+            end
+            object RealSkySouth: TCheckBox
+              Left = 6
+              Height = 23
+              Top = 34
+              Width = 102
+              Caption = 'RealSky South'
+              OnClick = RealSkySouthClick
+              TabOrder = 6
+            end
+            object realskyfile: TEdit
+              Left = 196
+              Height = 23
+              Top = 126
+              Width = 169
+              OnChange = realskyfileChange
+              TabOrder = 7
+              Text = 'images\$TEMP.FIT'
+            end
+            object realskydrive: TEdit
+              Left = 196
+              Height = 23
+              Top = 94
+              Width = 169
+              OnChange = realskydriveChange
+              TabOrder = 8
+              Text = 'X:\'
+            end
+            object realskydir: TEdit
+              Left = 196
+              Height = 23
+              Top = 61
+              Width = 169
+              OnChange = realskydirChange
+              TabOrder = 9
+              Text = 'cat\RealSky\'
+            end
+            object Label77: TLabel
+              Left = 411
+              Height = 16
+              Top = 225
+              Width = 44
+              Caption = 'MBytes'
+              ParentColor = False
+            end
+            object Label75: TLabel
+              Left = 411
+              Height = 16
+              Top = 196
+              Width = 33
+              Caption = 'pixels'
+              ParentColor = False
+            end
+            object Label74: TLabel
+              Left = 11
+              Height = 16
+              Top = 129
+              Width = 81
+              Caption = 'temporary file'
+              ParentColor = False
+            end
+            object Label73: TLabel
+              Left = 11
+              Height = 16
+              Top = 97
+              Width = 102
+              Caption = 'Data Files, CDrom'
+              ParentColor = False
+            end
+            object Label72: TLabel
+              Left = 11
+              Height = 16
+              Top = 64
+              Width = 73
+              Caption = 'Auxiliary files'
+              ParentColor = False
+            end
+          end
+          object Label6: TLabel
+            Left = 12
+            Height = 16
+            Top = 20
+            Width = 37
+            Caption = 'Label6'
+            ParentColor = False
+          end
+        end
+        object GroupBox2: TGroupBox
+          Left = 4
+          Height = 88
+          Top = 85
+          Width = 484
+          Caption = 'Download archive'
+          ClientHeight = 71
+          ClientWidth = 480
+          TabOrder = 2
+          object ArchiveBox: TCheckBox
+            Left = 8
+            Height = 23
+            Top = 9
+            Width = 146
+            Caption = 'Archive to directory : '
+            OnChange = ArchiveBoxChange
+            TabOrder = 0
+          end
+          object ArchiveDirectory1: TDirectoryEdit
+            Left = 191
+            Height = 23
+            Top = 10
+            Width = 256
+            ShowHidden = False
+            ButtonWidth = 23
+            NumGlyphs = 0
+            MaxLength = 0
+            TabOrder = 1
+            OnChange = ArchiveDirectory1Change
+          end
+          object ConfirmArchive: TCheckBox
+            Left = 8
+            Height = 23
+            Top = 41
+            Width = 263
+            Caption = 'Confirmation prompt before to save a file.'
+            OnChange = ConfirmArchiveChange
+            TabOrder = 2
+          end
+        end
+      end
+      object Page4: TTabSheet
+        Caption = 'Image archive'
+        ClientHeight = 518
+        ClientWidth = 497
+        object StringGrid1: TStringGrid
+          Left = 21
+          Height = 296
+          Top = 53
+          Width = 456
+          ColCount = 4
+          Columns = <          
+            item
+              Title.Caption = 'Active'
+              Width = 60
+            end          
+            item
+              Title.Caption = 'Directory'
+              Width = 305
+            end          
+            item
+              Title.Caption = ' '
+              Width = 30
+            end          
+            item
+              Title.Caption = 'Count'
+              Width = 50
+            end>
+          DefaultColWidth = 24
+          DefaultRowHeight = 24
+          FixedCols = 0
+          GridLineWidth = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAlwaysShowEditor]
+          RowCount = 11
+          TabOrder = 0
+          TitleStyle = tsStandard
+          OnDrawCell = StringGrid1DrawCell
+          OnMouseUp = StringGrid1MouseUp
+          OnSelectCell = StringGrid1SelectCell
+          OnSetEditText = StringGrid1SetEditText
+        end
+        object Label7: TLabel
+          Left = 26
+          Height = 16
+          Top = 17
+          Width = 78
+          Caption = 'Image archive'
+          ParentColor = False
+        end
+        object ScanArchive: TButton
+          Left = 341
+          Height = 25
+          Top = 13
+          Width = 128
+          Caption = 'ScanArchive'
+          OnClick = ScanArchiveClick
+          TabOrder = 1
+        end
+        object MaxImg: TComboBox
+          Left = 405
+          Height = 23
+          Top = 368
+          Width = 64
+          ItemHeight = 0
+          ItemIndex = 9
+          Items.Strings = (
+            '1'
+            '2'
+            '3'
+            '4'
+            '5'
+            '6'
+            '7'
+            '8'
+            '9'
+            '10'
+          )
+          OnChange = MaxImgChange
+          TabOrder = 2
+          Text = '10'
+        end
+        object Label8: TLabel
+          Left = 26
+          Height = 16
+          Top = 372
+          Width = 290
+          Caption = 'Maximum number of image to show simultaneously'
+          ParentColor = False
+        end
+        object ShowImageList: TCheckBox
+          Left = 26
+          Height = 23
+          Top = 397
+          Width = 109
+          Caption = 'ShowImageList'
+          OnChange = ShowImageListChange
+          TabOrder = 3
+        end
+        object Button1: TButton
+          Left = 32
+          Height = 25
+          Top = 426
+          Width = 272
+          Caption = 'Adjust the visualisation scale'
+          OnClick = Button1Click
+          TabOrder = 4
         end
       end
     end
@@ -517,6 +734,144 @@ object f_config_pictures: Tf_config_pictures
     Interval = 500
     OnTimer = ImageTimer1Timer
     left = 464
-    top = 56
+  end
+  object ImageList1: TImageList
+    left = 24
+    top = 480
+    Bitmap = {
+      4C69040000001000000010000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000007F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF00000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF00FFFFFFFFFF
+      FFFF00FFFFFFFFFFFFFF7F7F7FFF000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF0000
+      000000000000000000000000000000000000000000007F7F7FFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
+      7FFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FFFFFEFFFBFCFAFFFDFFFEFFF9FCFAFFFAFD
+      FBFFFDFFFEFFFCFFFDFFFDFFFEFFF5F8F6FFFDFFFEFFFFFFFEFFF4F5F3FFFFFF
+      FEFFFEFEFEFFFDFFFF00FBFDFEFFFFFFFFFFF1F1F1FFFDFFFF00FDFFFF00F9FE
+      FDFFFAFFFEFFF9FEFDFFFBFFFFFFF9FBFBFFFDFFFF00FEFEFEFFFFFFFFFFF7F7
+      F7FFFFFFFFFFFDFFFF00FBFDFEFFFEFEFEFFFDFFFF00FBFDFDFFF2F7F6FFF6FB
+      FAFFFBFFFFFFFBFFFFFFF7FCFBFFFDFFFF00FDFFFF00FEFEFEFF9F9F9FFFFFFF
+      FFFFF8F8F8FFFDFFFF00FCFEFFFFFDFFFF00FAFCFDFFFDFFFF00EEF2F3FF8B8F
+      90FF595E5FFF4E5354FF6B7071FF919596FFE4E8E9FFA3A5A6FF525455FFF8FA
+      FBFFFDFFFF00FDFFFF00FCFEFFFFF7F9FAFFFBFFFFFFBEC2C3FF5A5F60FF5C61
+      62FF8A8F90FF999E9FFF919697FF6F7374FF737778FF7D7F80FF6E7071FFFDFF
+      FF00FDFFFF00FDFFFF00FCFEFFFFF8FBFFFFE7EAEEFF6B6E72FF6E7376FFECF1
+      F4FFEFF6F9FFF3FAFDFFF8FFFFFF9A9FA2FF919699FF818488FF797C80FFF8F9
+      FDFFFDFEFFFFFDFFFF00FCFEFFFFF8FBFFFF8D9094FF5F6467FFDADFE2FFF8FF
+      FFFFF4FBFEFFF8FFFFFF9DA4A7FF8D9295FF999EA1FF919498FF828589FFF6F7
+      FBFFFDFEFFFFFDFFFF00FCFEFFFFFBFEFFFF5D6064FF8B9093FFFAFFFFFFEDF4
+      F7FFF8FFFFFF979EA1FF61686BFF7B8083FF72777AFF7A7D81FF676A6EFFFCFD
+      FFFFFDFEFFFFFDFFFF00FDFFFF00FAFDFFFF53565AFF979A9EFFFAFFFFFFFAFF
+      FFFFF3FAFDFFF2F9FCFFF8FFFFFFEAEFF2FFFAFFFFFFF9FCFFFFFBFEFFFFFDFE
+      FFFFF3F4F8FFFDFFFF00FDFFFF00FDFFFF006B6F70FF8B8F90FFF9FEFFFFFAFF
+      FFFFFAFFFFFFFAFFFFFFFAFFFFFFF8FCFDFFFBFFFFFFFDFFFF00F9FBFCFFFDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00959798FF5D5F60FFD2D6D7FFF9FD
+      FEFFF7FCFDFFFAFFFFFFFAFFFFFFF8FCFDFFF4F8F9FFFDFFFF00FDFFFF00F2F4
+      F5FFFDFFFF00FDFFFF00FDFFFF00FFFFFFFFE8EAEAFF757777FF737877FFD4D9
+      D8FFFBFFFFFFF5FAF9FFF7FCFBFFCED0D0FF9B9D9DFFEEEEEEFFFFFFFFFFF8F8
+      F8FFFFFFFFFFFDFFFF00FDFFFF00FFFFFFFFFFFFFFFFC0C2C2FF5B5D5DFF5D62
+      61FF777C7BFF979C9BFF717675FF555757FF525454FFD9D9D9FFFFFFFFFFFFFF
+      FFFFF7F7F7FFFDFFFF00FDFFFF00FFFFFEFFF5F6F4FFFDFFFEFFEEF1EFFF9EA1
+      9FFF707371FF636664FF7C7F7DFFA3A6A4FFF1F4F2FFF8F9F7FFFFFFFEFFFDFB
+      FAFFFFFFFFFFFDFFFF00FDFFFF00FCFCFCFFFFFFFEFFF9FBFBFFFDFFFEFFF9FB
+      FBFFFDFFFEFFFBFDFDFFFDFFFEFFFAFCFCFFFDFFFEFFFFFFFFFFFAFBF9FFFCFC
+      FCFFFFFFFFFFFDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FAFCFDFFFDFFFF00000000000000000000000000000000000000
+      CB0000000000000000000000000000000000000000004848EC00000000000000
+      0000000000000000000000000000000000000000000000000000000000001C1C
+      ED1B6161F39AADADFFE1CFCFFFFF9797FEE84242EEA00000E621000000000000
+      D0000000000000000000000000000000000000000000000000000000D2790B0B
+      D2FF7B7BDEFF9292DDFF8888D7FF8989D9FF6969D8FE0000D0FF0000D0880000
+      00000000BB00000000000000000000000000000000000000BF7B0D0DBEFF8D8D
+      D9FF8787D7FF8181D6FF7D7DD5FF7878D3FF7676D0FF7C7CD0FF1414BFFF0000
+      BD90000000000000000000000000000091000000A71D0000A5FF8181D4FF7A7A
+      D3FF7474D4FF7171D4FF6D6DD3FF6A6AD1FF6464CEFF6161CAFF6565C8FF0101
+      A6FF0000A72F0000920000000000000000000000919A3939AEFE7070CFFF6969
+      D1FF6666D2FF6262D2FF5E5ED2FF5A5AD1FF5555CEFF5050C9FF4B4BC3FF3535
+      ADFE000090AB000000000000000000000000000078E15252BCFF5E5ECCFF5959
+      CFFF5656D2FF5252D4FF4F4FD5FF4B4BD3FF4646CFFF4141C9FF3C3CC0FF4545
+      BAFF000078F1000000000000000000000000000060F94C4CBFFF4D4DC9FF4A4A
+      CFFF4747D4FF4444D8FF4040D9FF3C3CD7FF3737D2FF3131C9FF2929BDFF4C4C
+      C6FF000061FF00000000000000000000000000004DE21F1FA2FF2D2DC0FF3434
+      CDFF3737D7FF3B3BDDFF3636E0FF3131DDFF2D2DD6FF2828CBFF1D1DBCFF0707
+      9EFF00004DF800000000000000000000000000003BA000006DFE0101B3FF0505
+      C6FF0707D8FF0909E4FF0B0BE8FF0A0AE4FF0808D8FF0707C6FF0404B4FF0000
+      76FE00003AB300000000000000000000390000002B26000029FF0202A8FF0707
+      C2FF0B0BD9FF0F0FECFF1010F5FF0F0FECFF0B0BD9FF0707C2FF0202ADFF0000
+      2DFF00002B370000380000000000000000000000000000002B8C00003AFF0305
+      AEFF0807CBFF0E0DE6FF1111FAFF0E0DE5FF0806C9FF0406B3FF000241FF0000
+      2AA20000000000000000000000000000000000002C00000000000003308F0512
+      3FFF0E1B84FE131AB1FF191CC2FF151DB4FF121E89FE091645FF010634A10000
+      000000002C000000000000000000000000000000000000002C00000000000513
+      432B132452AB26385EF23C4E6EFF2F4265F3192B58B1091A4C36000000000005
+      3500000000000000000000000000000000000000000000000000000000000B15
+      430000000000000000000000000000000000000000001A102900000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002CE0
+      900000000000000000000000000000000000000000003AE29700000000000000
+      0000000000000000000000000000000000000000000000CA7000000000001BE2
+      893266EDB1B1AEFDD9F7D1FFEDFF93F9CBF740E79CAE00DD792D0000000000CA
+      70000000000000000000000000000000000000B966000000000000CB6F9A0DCD
+      77FF7ADCB3FE92DEC1FF88D9BBFF89DBBBFF5FD7A4FE00C96CFF00CC6F960000
+      000000B966000000000000000000000000000000000000BC679E0BBD6EFF8BD8
+      BCFF89D8BCFF81D7B9FF7ED5B6FF7AD3B4FF77D0B1FF77D0AFFF0ABD6EFF00BC
+      6796000000000000000000000000009A540000AD5E3500A85AFF80D4B6FF7BD3
+      B4FF76D4B3FF72D4B2FF6ED3B0FF6AD1ADFF65CEA9FF61CAA5FF61C6A1FF00A7
+      5BFF00AC5F2F009A54000000000000000000009953B337B27EFE70CFAEFF69D0
+      ADFF65D2AEFF62D2ADFF5ED2ACFF5AD1A9FF55CEA5FF50C89EFF4BC296FF2CAC
+      76FE009953AB000000000000000000000000008746F951BD94FF5ECCA5FF5AD0
+      A8FF56D2AAFF52D4ABFF4ED5ABFF4AD3A7FF46CFA1FF41C89AFF3BBF8FFF3CB3
+      85FF008746EE00000000000000000000000000753BFF4CBE93FF4DC99EFF4ACF
+      A3FF47D4A8FF44D8ABFF40D9AAFF3CD7A7FF37D1A0FF2FC894FF2ABC87FF47BC
+      8FFF00753BFF000000000000000000000000006535F51CA46CFF2CC08BFF34CD
+      9BFF36D7A7FF39DDADFF35E0ADFF30DCA9FF2DD7A1FF27CA93FF1BBB7FFF0495
+      57FF006637F000000000000000000000000000562DB1007943FE01B36EFF05C6
+      84FF08D898FF09E4A4FF0BE8A9FF0AE3A3FF08D796FF07C583FF03B26EFF0076
+      41FE00562EAC000000000000000000532C0000492634004222FF02A863FF07C2
+      7FFF0BDA99FF0FEDAEFF10F5B6FF0FEBACFF0BD797FF07C07DFF02A460FF0043
+      21FF0049262C00532D0000000000000000000000000000371B9C014021FF05AC
+      69FF06CA86FF0CE5A5FF0FF9B9FF0BE2A2FF06C884FF09AC6AFF024022FF0036
+      1B940000000000000000000000000000000000341A000000000004301A99133D
+      29FF1F7F57FE23AD78FF26BE84FF25AC77FF227F59FE143E2BFF07331E930000
+      000000341A0000000000000000000000000000000000002C1600000000001343
+      2D3020503BAC2C5945F2386451FF315E4AEE24543FA91848322D000000000D37
+      2200000000000000000000000000000000000000000000000000000000001542
+      2C00000000000000000000000000000000000000000026594100000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000
+    }
+  end
+  object SelectDirectoryDialog1: TSelectDirectoryDialog
+    left = 104
+    top = 480
   end
 end

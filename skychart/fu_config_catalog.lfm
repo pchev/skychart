@@ -6,8 +6,8 @@ object f_config_catalog: Tf_config_catalog
   ClientHeight = 521
   ClientWidth = 499
   TabOrder = 0
-  DesignLeft = 113
-  DesignTop = 366
+  DesignLeft = 239
+  DesignTop = 351
   object MainPanel: TPanel
     Left = 0
     Height = 521
@@ -23,10 +23,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 465
       Top = 1
       Width = 497
-      ActivePage = Page1a
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 2
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
@@ -898,18 +898,18 @@ object f_config_catalog: Tf_config_catalog
         ClientWidth = 493
         object Label37: TLabel
           Left = 15
-          Height = 18
+          Height = 16
           Top = 19
-          Width = 273
+          Width = 238
           Caption = 'Stars and Nebulae catalogs prepared with '
           ParentColor = False
         end
         object StringGrid3: TStringGrid
-          Left = 9
+          Left = 5
           Height = 345
-          Top = 48
+          Top = 45
           Width = 482
-          ColCount = 7
+          ColCount = 8
           Columns = <          
             item
               Title.Caption = 'Cat'
@@ -931,7 +931,7 @@ object f_config_catalog: Tf_config_catalog
                 '10'
               )
               Title.Caption = 'Min'
-              Width = 50
+              Width = 40
             end          
             item
               ButtonStyle = cbsPickList
@@ -949,20 +949,25 @@ object f_config_catalog: Tf_config_catalog
                 '10'
               )
               Title.Caption = 'Max'
-              Width = 50
+              Width = 40
             end          
             item
+              MaxSize = 140
               Title.Caption = 'Path'
-              Width = 222
+              Width = 165
             end          
             item
               ButtonStyle = cbsNone
               Title.Caption = ' '
-              Width = 40
+              Width = 30
             end          
             item
               Title.Caption = 'Color'
-              Width = 40
+              Width = 50
+            end          
+            item
+              Title.Caption = 'Refresh'
+              Width = 55
             end>
           DefaultColWidth = 24
           DefaultRowHeight = 24
@@ -1034,12 +1039,12 @@ object f_config_catalog: Tf_config_catalog
             item
               ButtonStyle = cbsNone
               Title.Caption = 'File'
-              Width = 200
+              Width = 195
             end          
             item
               ButtonStyle = cbsButton
               Title.Caption = 'Refresh'
-              Width = 50
+              Width = 55
             end>
           DefaultColWidth = 24
           DefaultRowHeight = 24
@@ -2325,5 +2330,13 @@ object f_config_catalog: Tf_config_catalog
   object OpenDialog2: TOpenDialog
     left = 205
     top = 528
+  end
+  object DownloadDialog1: TDownloadDialog
+    Timeout = 90000
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = True
+    left = 416
+    top = 416
   end
 end

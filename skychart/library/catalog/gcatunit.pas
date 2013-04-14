@@ -32,7 +32,7 @@ const
  vsId=1; vsMagv=2; vsB_v=3; vsMagb=4; vsMagr=5; vsSp=6; vsPmra=7; vsPmdec=8; vsEpoch=9; vsPx=10; vsComment=11; vsGreekSymbol=12;
  vvId=1; vvMagmax=2; vvMagmin=3; vvPeriod=4; vvVartype=5; vvMaxepoch=6; vvRisetime=7;  vvSp=8; vvMagcode=9; vvComment=10;
  vdId=1; vdMag1=2; vdMag2=3; vdSep=4; vdPa=5; vdEpoch=6; vdCompname=7; vdSp1=8; vdSp2=9; vdComment=10;
- vnId=1; vnNebtype=2; vnMag=3; vnSbr=4; vnDim1=5; vnDim2=6; vnNebunit=7; vnPa=8; vnRv=9; vnMorph=10; vnComment=11;
+ vnId=1; vnNebtype=2; vnMag=3; vnSbr=4; vnDim1=5; vnDim2=6; vnNebunit=7; vnPa=8; vnRv=9; vnMorph=10; vnComment=11;vnColor=12;
  vlId=1; vlLinecolor=2; vlLineoperation=3; vlLinewidth=4; vlLinetype=5; vlComment=6;
  lOffset=2;
  lOffsetStr=15;
@@ -46,7 +46,7 @@ Type
 TVstar = array[1..12] of boolean;
 TVvar  = array[1..10] of boolean;
 TVdbl  = array[1..10] of boolean;
-TVneb  = array[1..11] of boolean;
+TVneb  = array[1..12] of boolean;
 TVlin  = array[1..6] of boolean;
 TValid = array[1..10] of boolean;
 Tlabellst = array[1..35] of shortstring;
@@ -183,6 +183,7 @@ TCatHdrInfo = record
          Colorlst: array[1..10] of shortstring;
          Color: array[1..10] of Cardinal;
          calc : array[0..40,1..2] of double;
+         caturl : shortstring;
          end;
 
 type Tstarcache = packed record
@@ -204,7 +205,7 @@ const CacheInc=1000;
       MaxCache=10;
 
 procedure SetGCatpath(path,catshortname : string);
-procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean);
+procedure GetGCatInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
 Procedure OpenGCat(ar1,ar2,de1,de2: double ; var ok : boolean);
 Procedure OpenGCatwin(var ok : boolean);
 Procedure ReadGCat(var lin : GCatrec; var ok : boolean; MultiRegion: boolean=true);
@@ -315,6 +316,7 @@ begin
       if catheader.flen[11]>0 then emptyrec.neb.valid[vnRv]:=true;
       if catheader.flen[12]>0 then emptyrec.neb.valid[vnMorph]:=true;
       if catheader.flen[13]>0 then emptyrec.neb.valid[vnComment]:=true;
+      if catheader.flen[14]>0 then emptyrec.neb.valid[vnColor]:=true;
       end;
   rtlin : begin  // outlines
       if catheader.flen[3]>0 then emptyrec.outlines.valid[vlId]:=true;
@@ -518,23 +520,25 @@ begin
  if buf='CDCLINE' then catversion:=rtLin;
  buf:=copy(catheader.version,8,1);
  cattype:=strtointdef(buf,0);
+ fillchar(catinfo,sizeof(catinfo),0);
  if cattype=ctText then begin
     if fileexists(Gcatpath+slashchar+catname+'.info2') then begin
        filemode:=0;
        assignfile(fh,Gcatpath+slashchar+catname+'.info2');
        reset(fh,1);
        blockread(fh,catinfo,sizeof(catinfo),n);
-       result:=result and (n=sizeof(catinfo));
+       result:=result and (n>0);
        closefile(fh);
     end;
  end;
 end;
 
-procedure GetGCatInfo(var h : TCatHeader; var version : integer; var filter,ok : boolean);
+procedure GetGCatInfo(var h : TCatHeader; var info:TCatHdrInfo; var version : integer; var filter,ok : boolean);
 begin
 ok:=ReadCatheader;
 h:=catheader;
 version:=catversion;
+info:=catinfo;
 //?? some star catalog not sorted by mag or missing mag ??
 // filter mean open next catalog file if the read mag if fainter than limit
 // otherwise it finish to read the file.
@@ -906,6 +910,7 @@ ctBin : begin  // binary catalog
         if catheader.flen[11]>0 then lin.neb.rv:=GetRecSingle(11);
         if catheader.flen[12]>0 then lin.neb.morph:=GetRecString(12);
         if catheader.flen[13]>0 then lin.neb.comment:=GetRecString(13);
+        if catheader.flen[14]>0 then lin.neb.color:=GetRecCard(14);
         end;
     rtlin : begin  // outlines 1
         if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
@@ -1028,6 +1033,7 @@ ctText: begin // text file, positional
         if catheader.flen[11]>0 then lin.neb.rv:=Getfloat2(11,0);
         if catheader.flen[12]>0 then lin.neb.morph:=GetString2(12);
         if catheader.flen[13]>0 then lin.neb.comment:=GetString2(13);
+        if catheader.flen[14]>0 then lin.neb.color:=GetColor2(14);
         end;
     rtlin : begin  // outlines 2
         if catheader.flen[3]>0 then lin.outlines.id:=GetString2(3);
@@ -1215,6 +1221,7 @@ if ok then begin
         if catheader.flen[11]>0 then lin.neb.rv:=GetRecSingle(11);
         if catheader.flen[12]>0 then lin.neb.morph:=GetRecString(12);
         if catheader.flen[13]>0 then lin.neb.comment:=GetRecString(13);
+        if catheader.flen[14]>0 then lin.neb.color:=GetRecCard(14);
         end;
     rtlin : begin  // outlines 1
         if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);

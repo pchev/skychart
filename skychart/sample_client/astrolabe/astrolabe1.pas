@@ -95,6 +95,7 @@ type
     cmdarg:Tstringlist;
     Function  GetTcpPort:string;
     procedure GetCdCInfo;
+    procedure GetDaskInfo;
     procedure OpenCDC(param:string);
     function CdCCmd(cmd:string):string;
     procedure Connect;
@@ -128,19 +129,30 @@ const
         DefaultCdC='skychart';
         DefaultCdcDir='/usr/bin';
         DefaultCdCconfig='~/.skychart/skychart.ini';
+   var  cardModel: integer = 9;
+        cardNum: integer = 0;
+        Hoffset: integer = 0;           // Encoder offset, hour angle
+        Doffset: integer = 0;           // Encoder offset, declination
   {$endif}
   {$ifdef darwin}
         DefaultCdC='skychart';
         DefaultCdcDir='/Applications/Cartes du Ciel/skychart.app/Contents/MacOS';
         DefaultCdCconfig='~/Library/Application Support/skychart/skychart.ini';
+   var  cardModel: integer = 9;
+        cardNum: integer = 0;
+        Hoffset: integer = 0;           // Encoder offset, hour angle
+        Doffset: integer = 0;           // Encoder offset, declination
   {$endif}
   {$ifdef mswindows}
         DefaultCdC='skychart.exe';
         DefaultCdcDir='C:\Program Files\Ciel';
         DefaultCdCconfig='Skychart\skychart.ini';
-        // DASK card
-        cardModel=PCI_7248;  // ADLINK PCI 7248
-        cardNum=0;           // First card
+   var
+        // Default DASK card, can be replaced in dask.ini
+        cardModel: integer = PCI_7248;  // ADLINK PCI 7248
+        cardNum: integer = 0;           // First card
+        Hoffset: integer = 0;           // Encoder offset, hour angle
+        Doffset: integer = 0;           // Encoder offset, declination
   {$endif}
 
 implementation
@@ -219,6 +231,25 @@ end;
 
 
 ////////////////////////////////
+
+procedure Tf_astrolabe.GetDaskInfo;
+var cdir,daskconfig: string;
+    inif: TMemIniFile;
+begin
+cdir:=GetCurrentDir;
+daskconfig:=slash(cdir)+'dask.ini';
+if FileExists(daskconfig) then begin
+  inif := TMeminifile.Create(daskconfig);
+  try
+    cardModel := inif.ReadInteger('dask', 'model', cardModel);
+    cardNum   := inif.ReadInteger('dask', 'number', cardNum);
+    Hoffset   := inif.ReadInteger('encoder', 'Hoffset', Hoffset);
+    Doffset   := inif.ReadInteger('encoder', 'Doffset', Doffset);
+  finally
+    inif.Free;
+  end;
+end;
+end;
 
 procedure Tf_astrolabe.GetCdCInfo;
 var
@@ -422,6 +453,7 @@ DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
 DefaultFormatSettings.TimeSeparator:=':';
 GetCdCInfo;
+GetDaskInfo;
 edit1.Text:=ServerIPaddr;
 edit2.Text:=ServerIPport;
 PosTimer.Interval:=EncoderPooling;
@@ -520,6 +552,22 @@ end;
 procedure Tf_astrolabe.GetEncoder;
 var PA,PB,PC,x1,x2,x3: word;
     va,vb,vc: Cardinal;
+procedure FixRange;
+begin
+  // apply offset from ini file
+  EncoderX:=(EncoderX+Hoffset+720) mod 360;
+  EncoderY:=(EncoderY+Doffset+720+90) mod 360;
+  // convert 0-360 range to valid HA/DEC
+  if (EncoderY>90) then begin
+    if (EncoderY<=270) then begin
+     EncoderY:=180-EncoderY;
+     EncoderX:=EncoderX+180;
+  end else begin
+     EncoderY:=EncoderY-360;
+  end;
+  end;
+  EncoderX:=((EncoderX+720) mod 360)-180;
+end;
 begin
 if RealEncoder then begin
   // read encoder position here
@@ -538,15 +586,7 @@ if RealEncoder then begin
   x2:=(PC AND $F0) SHR 4;
   x3:=PB SHR 6;
   EncoderY:=x1 + 10*x2 + 100*x3;
-  if (EncoderY>90) then begin
-    if (EncoderY<=270) then begin
-     EncoderY:=180-EncoderY;
-     EncoderX:=EncoderX+180;
-  end else begin
-     EncoderY:=EncoderY-360;
-  end;
-  end;
-  EncoderX:=((EncoderX+720) mod 360)-180;
+  FixRange;
   LabelX.Caption:=inttostr(EncoderX);
   LabelY.Caption:=inttostr(EncoderY);
   {$endif}
@@ -554,6 +594,7 @@ end else begin
  // simulation using two trackbar:
  EncoderX:=TrackBarH.Position;
  EncoderY:=TrackBarD.Position;
+ FixRange;
  LabelX.Caption:=inttostr(EncoderX);
  LabelY.Caption:=inttostr(EncoderY);
 end;

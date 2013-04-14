@@ -44,6 +44,7 @@ type
     Button7: TButton;
     Button8: TButton;
     CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
     MessierBox: TCheckBox;
     epoch2: TFloatEdit;
     ExpertMode: TCheckBox;
@@ -264,6 +265,7 @@ type
     procedure Button7Click(Sender: TObject);
     procedure Button8Click(Sender: TObject);
     procedure CheckBox1Change(Sender: TObject);
+    procedure CheckBox2Click(Sender: TObject);
     procedure ExpertModeClick(Sender: TObject);
     procedure CheckBox13Click(Sender: TObject);
     procedure CoordTypeClick(Sender: TObject);
@@ -399,6 +401,7 @@ CoordType.Caption:=rsTypeOfCoordi;
 Button2.Caption:=rsDefault;
 Label4.caption:=rsCompassRoseS;
 CheckBox13.caption:=rsShowCompass;
+CheckBox2.Caption:=rsUseASimplePo;
 CheckBox1.Caption:=rsRotateCylind+crlf+'(HAI, CAR, MER)';
 SetHelp(self,hlpCfgChart);
 SetValidCoordtype;
@@ -472,6 +475,7 @@ end;
 procedure Tf_config_chart.ShowGridSpacing;
 begin
   CheckBox13.Checked:=cshr.ShowCRose;
+  CheckBox2.Checked := cshr.SimplePointer;
   TrackBar1.Position:=cshr.CRoseSz;
   RaDec1.value:=cshr.DegreeGridSpacing[0];
   RaDec2.value:=cshr.DegreeGridSpacing[1];
@@ -995,6 +999,12 @@ procedure Tf_config_chart.CheckBox1Change(Sender: TObject);
 begin
 if LockChange then exit;
   csc.ProjEquatorCentered := CheckBox1.Checked;
+end;
+
+procedure Tf_config_chart.CheckBox2Click(Sender: TObject);
+begin
+if LockChange then exit;
+  cshr.SimplePointer:=CheckBox2.Checked;
 end;
 
 

@@ -4790,6 +4790,10 @@ object f_main: Tf_main
         }
         OnClick = listobjExecute
       end
+      object MenuListImg: TMenuItem
+        Caption = 'imglist'
+        OnClick = MenuListImgClick
+      end
       object MenuBlinkImage: TMenuItem
         Action = BlinkImage
         Bitmap.Data = {

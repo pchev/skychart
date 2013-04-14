@@ -1,7 +1,7 @@
 object f_detail: Tf_detail
-  Left = 428
+  Left = 345
   Height = 461
-  Top = 257
+  Top = 401
   Width = 393
   ActiveControl = Panel1
   Caption = 'Details'
@@ -10,7 +10,20 @@ object f_detail: Tf_detail
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.8.0'
+  object Memo1: TMemo
+    Left = 0
+    Height = 425
+    Top = 36
+    Width = 393
+    Align = alClient
+    Lines.Strings = (
+      'Memo1'
+    )
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 1
+  end
   object Panel1: TPanel
     Left = 0
     Height = 36
@@ -53,43 +66,23 @@ object f_detail: Tf_detail
       TabOrder = 1
     end
   end
-  object HTMLViewer1: THTMLViewer
+  object IpHtmlPanel1: TIpHtmlPanel
     Left = 0
     Height = 425
     Top = 36
     Width = 393
-    OnHotSpotClick = HTMLViewer1HotSpotClick
-    OnImageRequest = HTMLViewer1ImageRequest
-    TabOrder = 1
     Align = alClient
+    FixedTypeface = 'Courier New'
+    DefaultTypeFace = 'default'
+    DefaultFontSize = 12
+    FlagErrors = False
     PopupMenu = PopupMenu1
-    DefBackground = 14737632
-    BorderStyle = htNone
-    HistoryMaxCount = 0
-    DefFontName = 'Times New Roman'
-    DefPreFontName = 'Courier New'
-    DefFontSize = 10
-    DefFontColor = clBlack
-    NoSelect = False
-    CharSet = DEFAULT_CHARSET
-    PrintMarginLeft = 2
-    PrintMarginRight = 2
-    PrintMarginTop = 2
-    PrintMarginBottom = 2
-    PrintScale = 1
-  end
-  object Memo1: TMemo
-    Left = 0
-    Height = 425
-    Top = 36
-    Width = 393
-    Align = alClient
-    Lines.Strings = (
-      'Memo1'
-    )
-    ReadOnly = True
-    ScrollBars = ssAutoVertical
+    PrintSettings.MarginLeft = 0.5
+    PrintSettings.MarginTop = 0.5
+    PrintSettings.MarginRight = 0.5
+    PrintSettings.MarginBottom = 0.5
     TabOrder = 2
+    OnHotClick = IpHtmlPanel1HotClick
   end
   object ActionList1: TActionList
     left = 72

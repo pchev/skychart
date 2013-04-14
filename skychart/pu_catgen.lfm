@@ -11,7 +11,7 @@ object f_catgen: Tf_catgen
   OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.1.3'
+  LCLVersion = '1.0.8.0'
   object Image1: TImage
     Left = 0
     Height = 438
@@ -2899,10 +2899,10 @@ object f_catgen: Tf_catgen
     Height = 438
     Top = 0
     Width = 389
-    ActivePage = TabSheet4
+    ActivePage = TabSheet1
     Align = alClient
     ShowTabs = False
-    TabIndex = 3
+    TabIndex = 0
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -2945,7 +2945,7 @@ object f_catgen: Tf_catgen
       object SpeedButton1: TSpeedButton
         Left = 102
         Height = 25
-        Top = 248
+        Top = 245
         Width = 25
         Glyph.Data = {
           0E060000424D0E06000000000000360000002800000016000000160000000100
@@ -3050,7 +3050,7 @@ object f_catgen: Tf_catgen
       object Edit5: TEdit
         Left = 145
         Height = 23
-        Top = 188
+        Top = 186
         Width = 201
         MaxLength = 50
         TabOrder = 2
@@ -3058,7 +3058,7 @@ object f_catgen: Tf_catgen
       object ListBox1: TListBox
         Left = 145
         Height = 56
-        Top = 220
+        Top = 214
         Width = 201
         ItemHeight = 0
         OnDblClick = SpeedButton1Click
@@ -3068,8 +3068,8 @@ object f_catgen: Tf_catgen
       end
       object binarycat: TRadioGroup
         Left = 14
-        Height = 56
-        Top = 296
+        Height = 48
+        Top = 302
         Width = 347
         AutoFill = True
         Caption = 'Output Catalog Type'
@@ -3081,7 +3081,7 @@ object f_catgen: Tf_catgen
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 2
-        ClientHeight = 39
+        ClientHeight = 31
         ClientWidth = 343
         Columns = 2
         ItemIndex = 0
@@ -3092,147 +3092,29 @@ object f_catgen: Tf_catgen
         OnClick = binarycatChange
         TabOrder = 4
       end
+      object Edit6: TEdit
+        Left = 145
+        Height = 23
+        Top = 276
+        Width = 201
+        TabOrder = 5
+        Visible = False
+      end
+      object Label23: TLabel
+        Left = 14
+        Height = 16
+        Top = 280
+        Width = 73
+        Caption = 'Update URL :'
+        ParentColor = False
+        Visible = False
+      end
     end
     object TabSheet2: TTabSheet
       Caption = '2'
       ClientHeight = 434
       ClientWidth = 385
       ImageIndex = 4
-      object Label2: TLabel
-        Left = 16
-        Height = 14
-        Top = 8
-        Width = 125
-        Caption = 'General catalog options'
-        ParentColor = False
-      end
-      object GroupBox5: TGroupBox
-        Left = 16
-        Height = 192
-        Top = 224
-        Width = 345
-        Caption = 'Default Nebulae parameters'
-        ClientHeight = 175
-        ClientWidth = 341
-        TabOrder = 5
-        object Label11: TLabel
-          Left = 8
-          Height = 14
-          Top = 17
-          Width = 109
-          Caption = 'Dimension and Units'
-          ParentColor = False
-        end
-        object Label12: TLabel
-          Left = 8
-          Height = 14
-          Top = 88
-          Width = 60
-          Caption = 'Object type'
-          ParentColor = False
-        end
-        object Label15: TLabel
-          Left = 9
-          Height = 14
-          Top = 120
-          Width = 229
-          Caption = 'Recognize Units or Object type from the file:'
-          ParentColor = False
-        end
-        object Label16: TLabel
-          Left = 134
-          Height = 14
-          Top = 48
-          Width = 136
-          Caption = '(useful to represent a flux)'
-          ParentColor = False
-          WordWrap = True
-        end
-        object ComboBox1: TComboBox
-          Left = 204
-          Height = 23
-          Top = 12
-          Width = 89
-          ItemHeight = 0
-          Items.Strings = (
-            'Degree'
-            'Minute'
-            'Second'
-          )
-          OnChange = ComboBox1Change
-          TabOrder = 1
-        end
-        object LongEdit1: TLongEdit
-          Left = 140
-          Height = 21
-          Hint = '0..3600'
-          Top = 12
-          Width = 41
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          Value = 0
-          MaxValue = 3600
-        end
-        object CheckBox1: TCheckBox
-          Left = 4
-          Height = 19
-          Top = 40
-          Width = 108
-          Caption = 'Logarithmic scale'
-          TabOrder = 2
-        end
-        object ComboBox3: TComboBox
-          Left = 120
-          Height = 23
-          Top = 80
-          Width = 113
-          ItemHeight = 0
-          ItemIndex = 14
-          Items.Strings = (
-            'Galaxy'
-            'Galaxy Cluster'
-            'Open Cluster'
-            'Globular Cluster'
-            'Planetary Nebula'
-            'Nebula'
-            'Dark Nebula'
-            'Cluster and Nebula'
-            'Knot'
-            'Star'
-            'Double Star'
-            'Triple star'
-            'Asterism '
-            'Non Existant'
-            'Unknow'
-            'Circle'
-            'Square'
-            'Losange'
-          )
-          TabOrder = 3
-          Text = 'Unknow'
-        end
-        object Button3: TButton
-          Left = 9
-          Height = 25
-          Top = 136
-          Width = 123
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Edit Object Types'
-          OnClick = Button3Click
-          TabOrder = 4
-        end
-        object Button6: TButton
-          Left = 156
-          Height = 25
-          Top = 136
-          Width = 121
-          BorderSpacing.InnerBorder = 4
-          Caption = 'Edit Units'
-          OnClick = Button6Click
-          TabOrder = 5
-        end
-      end
       object GroupBox7: TGroupBox
         Left = 16
         Height = 192
@@ -3244,17 +3126,17 @@ object f_catgen: Tf_catgen
         TabOrder = 6
         object Label18: TLabel
           Left = 148
-          Height = 14
+          Height = 16
           Top = 80
-          Width = 58
+          Width = 62
           Caption = 'Line width '
           ParentColor = False
         end
         object Label19: TLabel
           Left = 156
-          Height = 14
+          Height = 16
           Top = 152
-          Width = 32
+          Width = 34
           Caption = 'Color '
           ParentColor = False
         end
@@ -3277,7 +3159,7 @@ object f_catgen: Tf_catgen
         end
         object LongEdit2: TLongEdit
           Left = 220
-          Height = 21
+          Height = 23
           Hint = '0..99'
           Top = 75
           Width = 41
@@ -3325,13 +3207,157 @@ object f_catgen: Tf_catgen
         end
         object CheckBox7: TCheckBox
           Left = 4
-          Height = 19
+          Height = 23
           Top = 72
-          Width = 99
+          Width = 112
           Caption = 'Closed contour'
           Checked = True
           State = cbChecked
           TabOrder = 4
+        end
+      end
+      object Label2: TLabel
+        Left = 16
+        Height = 16
+        Top = 8
+        Width = 135
+        Caption = 'General catalog options'
+        ParentColor = False
+      end
+      object GroupBox5: TGroupBox
+        Left = 16
+        Height = 192
+        Top = 224
+        Width = 345
+        Caption = 'Default Nebulae parameters'
+        ClientHeight = 175
+        ClientWidth = 341
+        TabOrder = 5
+        object Label11: TLabel
+          Left = 8
+          Height = 16
+          Top = 17
+          Width = 117
+          Caption = 'Dimension and Units'
+          ParentColor = False
+        end
+        object Label12: TLabel
+          Left = 8
+          Height = 16
+          Top = 88
+          Width = 68
+          Caption = 'Object type'
+          ParentColor = False
+        end
+        object Label15: TLabel
+          Left = 9
+          Height = 16
+          Top = 120
+          Width = 256
+          Caption = 'Recognize Units or Object type from the file:'
+          ParentColor = False
+        end
+        object Label16: TLabel
+          Left = 134
+          Height = 16
+          Top = 48
+          Width = 154
+          Caption = '(useful to represent a flux)'
+          ParentColor = False
+          WordWrap = True
+        end
+        object ComboBox1: TComboBox
+          Left = 204
+          Height = 23
+          Top = 12
+          Width = 89
+          ItemHeight = 0
+          Items.Strings = (
+            'Degree'
+            'Minute'
+            'Second'
+          )
+          OnChange = ComboBox1Change
+          TabOrder = 1
+        end
+        object LongEdit1: TLongEdit
+          Left = 140
+          Height = 23
+          Hint = '0..3600'
+          Top = 12
+          Width = 41
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          Value = 0
+          MaxValue = 3600
+        end
+        object CheckBox1: TCheckBox
+          Left = 4
+          Height = 23
+          Top = 40
+          Width = 125
+          Caption = 'Logarithmic scale'
+          TabOrder = 2
+        end
+        object ComboBox3: TComboBox
+          Left = 120
+          Height = 23
+          Top = 80
+          Width = 113
+          ItemHeight = 0
+          ItemIndex = 14
+          Items.Strings = (
+            'Galaxy'
+            'Galaxy Cluster'
+            'Open Cluster'
+            'Globular Cluster'
+            'Planetary Nebula'
+            'Nebula'
+            'Dark Nebula'
+            'Cluster and Nebula'
+            'Knot'
+            'Star'
+            'Double Star'
+            'Triple star'
+            'Asterism '
+            'Non Existant'
+            'Unknow'
+            'Circle'
+            'Square'
+            'Losange'
+          )
+          TabOrder = 3
+          Text = 'Unknow'
+        end
+        object Button3: TButton
+          Left = 9
+          Height = 25
+          Top = 136
+          Width = 123
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Edit Object Types'
+          OnClick = Button3Click
+          TabOrder = 4
+        end
+        object Button6: TButton
+          Left = 138
+          Height = 25
+          Top = 136
+          Width = 86
+          BorderSpacing.InnerBorder = 4
+          Caption = 'Edit Units'
+          OnClick = Button6Click
+          TabOrder = 5
+        end
+        object Button13: TButton
+          Left = 234
+          Height = 25
+          Top = 135
+          Width = 94
+          Caption = 'Edit Color'
+          OnClick = Button11Click
+          TabOrder = 6
         end
       end
       object RadioGroup2: TRadioGroup
@@ -3398,7 +3424,7 @@ object f_catgen: Tf_catgen
         TabOrder = 2
         object FloatEdit1: TFloatEdit
           Left = 8
-          Height = 21
+          Height = 23
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3418,7 +3444,7 @@ object f_catgen: Tf_catgen
         TabOrder = 4
         object FloatEdit2: TFloatEdit
           Left = 12
-          Height = 21
+          Height = 23
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3438,7 +3464,7 @@ object f_catgen: Tf_catgen
         TabOrder = 3
         object FloatEdit3: TFloatEdit
           Left = 8
-          Height = 21
+          Height = 23
           Top = 12
           Width = 57
           TabOrder = 0
@@ -3494,11 +3520,10 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 0
+        ItemHeight = 21
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
-        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3776,7 +3801,7 @@ object f_catgen: Tf_catgen
         Left = 30
         Height = 16
         Top = 40
-        Width = 271
+        Width = 245
         Caption = 'Indicate the string for each draw operation'
         ParentColor = False
       end
@@ -3815,9 +3840,9 @@ object f_catgen: Tf_catgen
       ImageIndex = 7
       object Label20: TLabel
         Left = 70
-        Height = 14
+        Height = 16
         Top = 24
-        Width = 157
+        Width = 189
         Caption = 'Indicate the string for each color'
         ParentColor = False
       end
@@ -3902,9 +3927,9 @@ object f_catgen: Tf_catgen
       end
       object Label21: TLabel
         Left = 6
-        Height = 14
+        Height = 16
         Top = 64
-        Width = 122
+        Width = 146
         Caption = 'Click to change the color '
         ParentColor = False
       end

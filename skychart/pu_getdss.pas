@@ -31,7 +31,7 @@ interface
 uses u_help, u_translation,
   dynlibs, u_constant, u_util, Math,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML, Htmlview;
+  StdCtrls, Buttons, LResources, downloaddialog, LazHelpHTML;
 
 // GetDss.dll interface
   type
@@ -70,11 +70,11 @@ type
 
   Tf_getdss = class(TForm)
     DownloadDialog1: TDownloadDialog;
-    HTMLViewer1: THTMLViewer;
     ListBox1: TListBox;
     Label1: TLabel;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    Memo1: TMemo;
     procedure BitBtn2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -145,7 +145,7 @@ end;
 
 procedure Tf_getdss.BitBtn2Click(Sender: TObject);
 begin
-  if HTMLViewer1.Visible then close;
+  if memo1.Visible then close;
 end;
 
 procedure Tf_getdss.FormDestroy(Sender: TObject);
@@ -174,7 +174,7 @@ var i : SImageConfig;
     gzbuf : array[0..4095]of char;
 begin
 try
-HTMLViewer1.visible:=false;
+memo1.visible:=false;
 ListBox1.Visible:=true;
 BitBtn1.Visible:=true;
 hide;
@@ -273,11 +273,12 @@ if cfgdss.OnlineDSS and zlibok then begin // Online DSS
      caption:=rsError;
      Label1.Caption:=DownloadDialog1.ResponseText;
      RenameFile(ExpandFileName(cfgdss.dssfile),ExpandFileName(cfgdss.dssfile)+'.txt');
-     HTMLViewer1.visible:=true;
+     memo1.visible:=true;
      ListBox1.Visible:=false;
      BitBtn1.Visible:=false;
-     HTMLViewer1.Clear;
-     HTMLViewer1.LoadFromFile(ExpandFileName(cfgdss.dssfile)+'.txt');
+     memo1.Clear;
+     memo1.Lines.LoadFromFile((ExpandFileName(cfgdss.dssfile)+'.txt'));
+     memo1.Text:='Response from server:'+crlf+striphtml(memo1.Text);
      show;
   end;
 

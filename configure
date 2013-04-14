@@ -15,7 +15,6 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/libsql \
      skychart/component/mrecsort \
      skychart/component/uniqueinstance \
-     skychart/component/thtmlport/package \
      skychart/component/xmlparser \
      skychart/component/bgrabitmap \
      skychart/component/enhedits \

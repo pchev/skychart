@@ -38,9 +38,12 @@ type
   { Tf_catgen }
 
   Tf_catgen = class(TForm)
+    Button13: TButton;
     CheckBox8: TCheckBox;
     CheckBox9: TCheckBox;
+    Edit6: TEdit;
     Label22: TLabel;
+    Label23: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
     PageControl1: TPageControl;
@@ -198,7 +201,7 @@ type
     Ft : textfile;
     catrec,catsize : integer;
     colorlst : array[1..10] of string;
-    Linelst : array[1..3] of string;
+    Linelst : array[1..4] of string;
     neblst  : array[1..15] of string;
     nebunit : array[1..3]  of string;
     altname : array[1..l_sup] of byte;
@@ -286,18 +289,18 @@ const
   etoiles : array[0..10] of string = ('Catalog ID','[Magnitude (mag)]','B-V (mag)','Magnitude B (mag)','Magnitude R (mag)','Spectral class','Proper motion RA (arcsec/yr)','Proper motion DEC (arcsec/yr)','Position Epoch (year)','Parallax (arcsec)','Comments');
   variable: array[0..9] of string = ('Catalog ID','Magnitude max (mag)','Magnitude min (mag)','Period (days)','Variable Type','Maxima Epoch (JD)','Rise Time (%period)','Spectral class','Magnitude code','Comments');
   doubles : array[0..9] of string = ('Catalog ID','[Magnitude component 1 (mag)]','Magnitude component 2 (mag)','[Separation (arcsec)]','Position angle (degrees)','Epoch (year)','Component name','Spectral class component 1','Spectral class component 2','Comments');
-  nebuleuse: array[0..10] of string =('Catalog ID','Nebula type','Magnitude (mag)','Surface brigtness (mag/arcmin2)','Largest dimension (as defined)','Smallest dimension (as defined)','Dimension Unit','Position angle (degrees)','Radial velocity (km/s)','Morphological class','Comments');
+  nebuleuse: array[0..11] of string =('Catalog ID','Nebula type','Magnitude (mag)','Surface brigtness (mag/arcmin2)','Largest dimension (as defined)','Smallest dimension (as defined)','Dimension Unit','Position angle (degrees)','Radial velocity (km/s)','Morphological class','Comments','Color');
   outlines: array[0..5] of string =('Catalog ID (only for Start operation)','[Line operation]','Line width (only for Start operation)','Line color (only for Start operation)','Drawing Type (only for Start operation)','Comments');
   sup_string: array[0..9] of string = ('String 1','String 2','String 3','String 4','String 5','String 6','String 7','String 8','String 9','String 10');
   sup_num : array[0..9] of string = ('Numeric 1','Numeric 2','Numeric 3','Numeric 4','Numeric 5','Numeric 6','Numeric 7','Numeric 8','Numeric 9','Numeric 10');
   l_rahms = 3; l_rah = 1; l_radms = 3; l_rad = 1;
   l_dedms = 4; l_ded = 1; l_despd = 1;
-  l_base = 2; l_etoiles = 11; l_variable = 10; l_double = 10; l_nebuleuse = 11; l_outlines = 6;
+  l_base = 2; l_etoiles = 11; l_variable = 10; l_double = 10; l_nebuleuse = 12; l_outlines = 6;
   lab_base : array[1..2] of string = ('RA','DEC');
   lab_etoiles : array[1..l_etoiles] of string = ('Id','mV','b-v','mB','mR','sp','pmRA','pmDE','date','px','desc');
   lab_var     : array[1..l_variable] of string = ('Id','mMax','mMin','P','T','Mepoch','rise','sp','band','desc');
   lab_double  : array[1..l_double] of string = ('Id','m1','m2','sep','pa','date','Comp','sp','sp','desc');
-  lab_neb     : array[1..l_nebuleuse] of string = ('Id','NebTyp','m','sbr','D','D','Unit','pa','rv','class','desc');
+  lab_neb     : array[1..l_nebuleuse] of string = ('Id','NebTyp','m','sbr','D','D','Unit','pa','rv','class','desc','color');
   lab_outlines : array[1..l_outlines] of string = ('Id','LineOp','LineWidth','LineColor','Drawing','desc');
   lab_string  : array[1..l_sup] of string = ('Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10');
   lab_num     : array[1..l_sup] of string = ('Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
@@ -1039,7 +1042,7 @@ case radiogroup1.itemindex of
        inc(n);
        nextpos:=nextpos+10;
      end;
-//9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments');
+//9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments','Color');
  3 : begin     // Nebulae
        if CheckListBox1.Checked[nextpos+0] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+0,2]; end;// ID
        ixlen:=catheader.flen[n]; if ixlen>0 then begin usealt[0].i:=nextpos; if CatPrefix then usealt[0].l:=trim(edit4.text) else usealt[0].l:=''; ixlen:=ixlen+length(usealt[0].l) end;
@@ -1065,9 +1068,10 @@ case radiogroup1.itemindex of
        curpos:=curpos+catheader.flen[n]; inc(n);
        if CheckListBox1.Checked[nextpos+10] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+10,2]; end;// Comment
        curpos:=curpos+catheader.flen[n]; inc(n);
+       if CheckListBox1.Checked[nextpos+11] then begin catheader.fpos[n]:=curpos;  catheader.flen[n]:=textpos[nextpos+11,2]; end;// Color
+       curpos:=curpos+catheader.flen[n]; inc(n);
        inc(n);
-       inc(n);
-       nextpos:=nextpos+11;
+       nextpos:=nextpos+12;
      end;
 //5 ('Catalog ID','[Line op]','Line width','Line color','use spline','Comments');
  4 : begin     // Outlines
@@ -1134,10 +1138,10 @@ var i,j,n : integer;
     buf : shortstring;
 begin
 for i:=1 to 10 do catheader.Spare1[i]:=0;
-for i:=1 to 20 do catheader.Spare2[i]:=0;
-for i:=1 to 20 do catheader.Spare3[i]:=0;
-for i:=1 to 35 do catheader.fpos[i]:=0;
-for i:=1 to 35 do catheader.flen[i]:=0;
+for i:=1 to 15 do catheader.Spare2[i]:=0;
+for i:=1 to 15 do catheader.Spare3[i]:=0;
+for i:=1 to 40 do catheader.fpos[i]:=0;
+for i:=1 to 40 do catheader.flen[i]:=0;
 n:=l_base;
 case radiogroup1.itemindex of
  0 : begin catheader.version:='CDCSTAR2'; n:=n+l_etoiles; end;
@@ -1252,13 +1256,13 @@ case radiogroup1.itemindex of
        inc(n);
        inc(n);
      end;
-//9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Units','Position angle','Radial velocity','Morphological class','Comments');
+//9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Units','Position angle','Radial velocity','Morphological class','Comments','Color');
  3 : begin     // Nebulae
-       for i:=1 to 11 do begin
+       for i:=1 to 12 do begin
          if CheckListBox1.Checked[curpos] then begin catheader.fpos[n]:=textpos[curpos,1];  catheader.flen[n]:=textpos[curpos,2]; end;
          inc(curpos); inc(n);
        end;
-       inc(n,2); // skip 2
+       inc(n); // skip 1
      end;
 //5 ('Catalog ID','[Line op]','Line width','Line color','use spline','Comments');
  4 : begin     // Outlines
@@ -1580,6 +1584,7 @@ for i:=0 to 40 do begin
   catinfo.calc[i,1]:=calc[i,1];
   catinfo.calc[i,2]:=calc[i,2];
 end;
+catinfo.caturl:=trim(edit6.Text);
 assignfile(f,destdir+lowercase(trim(catheader.ShortName))+'.info2');
 rewrite(f,1);
 blockwrite(f,catinfo,sizeof(catinfo),n);
@@ -1743,9 +1748,6 @@ repeat
         inc(nextpos);
         if catheader.flen[12]>0 then PutRecString(GetString(nextpos),12);  // com
         inc(nextpos);
-//        inc(nextpos);
-//        inc(nextpos);
-//        inc(nextpos);
   end;
 //9 ('Catalog ID','[Magnitude component 1]','Magnitude component 2','[Separation]','Position angle','Epoch','Component name','Spectral class 1','Spectral class 2','Comments');
   2 : begin     // Doubles Stars
@@ -1770,7 +1772,7 @@ repeat
         if catheader.flen[12]>0 then PutRecString(GetString(nextpos),12); // com
         inc(nextpos);
   end;
-  //9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments');
+  //9 ('ID number','Nebula type','Magnitude','Surface brigtness','Largest dimension','Smallest diemnsion','Position angle','Radial velocity','Morphological class','Comments','Color');
   3 : begin     // Nebulae
         if catheader.flen[3]>0 then PutRecString(GetString(nextpos),3);  // id
         inc(nextpos);
@@ -1793,6 +1795,8 @@ repeat
         if catheader.flen[12]>0 then PutRecString(GetString(nextpos),12); // class
         inc(nextpos);
         if catheader.flen[13]>0 then PutRecString(GetString(nextpos),13); // com
+        inc(nextpos);
+        if catheader.flen[14]>0 then PutRecCard(Getcolor(nextpos),14);   // color
         inc(nextpos);
      end;
 //5 ('Catalog ID','[Line op]','Line width','Line color','use spline','Comments');
@@ -2092,6 +2096,7 @@ if savedialog1.execute then begin
   ini.writeInteger('Page1','numfiles',ListBox1.Items.count);
   for i:=0 to ListBox1.Items.count-1 do
      ini.writeString('Page1','inputfiles'+inttostr(i),ExtractRelativepath(prjdir,ListBox1.Items[i]));
+  ini.writeString('Page1','caturl',edit6.text);
   ini.writeInteger('Page2','ratype',RadioGroup2.itemindex);
   ini.writeInteger('Page2','dectype',RadioGroup3.itemindex);
   ini.writeFloat('Page2','equinox',FloatEdit1.value);
@@ -2168,6 +2173,7 @@ if opendialog1.execute then begin
   RadioGroup1.itemindex:=ini.ReadInteger('Page1','type',RadioGroup1.itemindex);
   edit4.text:=ini.readString('Page1','shortname',edit4.text);
   edit5.text:=ini.readString('Page1','longname',edit5.text);
+  edit6.text:=ini.readString('Page1','caturl','');
   n:=ini.readInteger('Page1','numfiles',0);
   ListBox1.Items.clear;
   chdir(prjdir);
@@ -2258,6 +2264,8 @@ begin
   RadioGroup4.Visible:=binarycat.ItemIndex=0;
   GroupBox6.Visible:=binarycat.ItemIndex=0;
   CheckBox6.Visible:=binarycat.ItemIndex=0;
+  edit6.Visible:=binarycat.ItemIndex=1;
+  label23.Visible:=binarycat.ItemIndex=1;
 end;
 
 procedure Tf_catgen.FormShow(Sender: TObject);

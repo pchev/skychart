@@ -70,7 +70,6 @@ resourcestring
   rsShowLines = 'Show lines';
   rsShowPictures = 'Show pictures';
   rsGetDSSImage = 'Get the DSS image';
-  rsChangePictur = 'Change the displayed picture';
   rsShowPlanets = 'Show planets';
   rsShowAsteroid = 'Show asteroids';
   rsShowComets = 'Show comets';
@@ -698,7 +697,6 @@ resourcestring
   rsThisActionRe = 'This action overwrites all the database content for the country %s, using fresh data from NGA and GNIS.%sAll your editing for this country will be lost, only locations that you added with a new name will be kept.%sDo you want to continue?';
   rsCancel2 = 'Cancel %s';
   rsCancelWrongZ = 'Cancel, wrong zip file ?? %s';
-  rsObjects = 'Objects';
   rsDisplayImage = 'Display images of catalogued objects';
   rsImageDirecto = 'Image directory';
   rsThereAreCata = 'There are %s catalogued images';
@@ -1397,6 +1395,31 @@ resourcestring
   rsDisplayTheHo = 'Display the horizon picture';
   rsPictureAngle = 'Picture angle offset';
   rsMillionKm = 'million Km.';
+  rsDSOCatalogPi = 'DSO Catalog pictures';
+  rsTheImageDire = 'The image directory contain sub-directories with the same '
+    +'name as the DSO catalog. Each sub-directory contain FITS files with the '
+    +'name of the catalog objects. This images are used to replace the DSO symbole on the map';
+  rsShowASingleP = 'Show a single picture on the map.';
+  rsViewHeader = 'View header';
+  rsRealskyCDRom = 'Realsky CD-rom cannot be used on a 64 bit system.';
+  rsImageArchive = 'Image archive';
+  rsDownloadArch = 'Download archive';
+  rsArchiveToDir = 'Archive to directory:';
+  rsImageList = 'Image list';
+  rsArchiveThisI = 'Archive this image?';
+  rsFilenameWith = 'Filename without path or extention';
+  rsVisualisatio = 'Visualisation scale';
+  rsLinear = 'Linear';
+  rsScaled = 'Scaled';
+  rsLog = 'Log';
+  rsSqrt = 'Sqrt';
+  rsConfirmation = 'Confirmation prompt before to save a file.';
+  rsCount = 'Count';
+  rsScanArchives = 'Scan archives';
+  rsMaximumNumbe = 'Maximum number of image to show simultaneously';
+  rsShowTheImage = 'Show the images on the map';
+  rsAdjustTheVis = 'Adjust the visualisation scale';
+  rsUseASimplePo = 'Use a simple pointer';
 
 implementation
 

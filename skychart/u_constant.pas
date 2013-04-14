@@ -38,12 +38,13 @@ type
   Starcolarray = array [0..Maxcolor] of Tcolor;
   // 0:sky, 1-10:object, 11:not sky, 12:AzGrid, 13:EqGrid, 14:orbit, 15:misc, 16:constl, 17:constb, 18:eyepiece, 19:horizon, 20:asteroid  23-35: dso
   TSkycolor = array[0..7] of Tcolor;
+  Titt = (ittlinear,ittramp,ittlog,ittsqrt);
 
 {$i revision.inc}
 
 const
   cdcversion = 'Version 3.9-svn';
-  cdcver = '3.9a';
+  cdcver = '3.9b';
   cdccpy = 'Copyright (C) 2002-2013 Patrick Chevalley';
   cdcauthors = 'Patrick Chevalley, pch@ap-i.net' + crlf +
     'Peter Dean,' + crlf + 'John Sunderland' + crlf  + 'Anat Ruangrassamee';
@@ -228,6 +229,7 @@ const
   numfont = 7;
   NumSimObject = 13;
   MaxField = 10;
+  MaxArchiveDir = 10;
   Equat = 0;
   Altaz = 1;
   Gal = 2;
@@ -605,7 +607,7 @@ type
 
   Tobjlabel = record
     id: integer;
-    x, y, r, orientation: single;
+    x, y, r, orientation, lsize: single;
     px,py: integer;
     labelnum, fontnum,priority: byte;
     optimizable,optimized: boolean;
@@ -710,7 +712,7 @@ type
     // Limiting size for each field
     HourGridSpacing: array [0..MaxField] of double;
     DegreeGridSpacing: array [0..MaxField] of double;
-    ShowCRose: boolean; //  compass rose
+    ShowCRose, SimplePointer: boolean; //  compass rose
     CRoseSz: integer;
     EquinoxType: integer;
     DefaultJDchart: double;
@@ -775,9 +777,12 @@ type
     IndiDriver, IndiPort, IndiDevice: string;
     IndiAutostart, ShowCircle, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
-    ShowBackgroundImage, showstars, shownebulae, showline,
+    ShowImageList, ShowBackgroundImage, showstars, shownebulae, showline,
     showlabelall, Editlabels, OptimizeLabels: boolean;
     BackgroundImage: string;
+    MaxArchiveImg: integer;
+    ArchiveDir: array[1..MaxArchiveDir] of string;
+    ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
     ShowEarthShadowValid, ShowEclipticValid: boolean;
@@ -801,6 +806,7 @@ type
     EquinoxName, TargetName, TrackName, TrackId, FindName,
     FindDesc, FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
+    BGitt: Titt;
     BGmin_sigma, BGmax_sigma, NEBmin_sigma, NEBmax_sigma: double;
     IridiumRA, IridiumDE, IridiumMA: double;
     IridiumName, IridiumDist: string;
@@ -925,8 +931,8 @@ type
 
   Tconf_dss = class(TObject)    // DSS image setting
   public
-    dssdir, dssdrive, dssfile: string;
-    dss102, dssnorth, dsssouth, dsssampling, dssplateprompt: boolean;
+    dssdir, dssdrive, dssfile,dssarchivedir: string;
+    dss102, dssnorth, dsssouth, dsssampling, dssplateprompt,dssarchive,dssarchiveprompt: boolean;
     dssmaxsize: integer;
     OnlineDSS: boolean;
     OnlineDSSid: integer;
@@ -1007,10 +1013,10 @@ type
     wp, hp, sysout: integer;
   end;
   PcdcWCSinfo = ^TcdcWCSinfo;
-  Tcdcwcs_initfitsfile = function(fn: PChar): integer; cdecl;
-  Tcdcwcs_release = function(): integer; cdecl;
-  Tcdcwcs_sky2xy = function(p: PcdcWCScoord): integer; cdecl;
-  Tcdcwcs_getinfo = function(p: PcdcWCSinfo): integer; cdecl;
+  Tcdcwcs_initfitsfile = function(fn: PChar; wcsnum:integer): integer; cdecl;
+  Tcdcwcs_release = function(wcsnum:integer): integer; cdecl;
+  Tcdcwcs_sky2xy = function(p: PcdcWCScoord; wcsnum:integer): integer; cdecl;
+  Tcdcwcs_getinfo = function(p: PcdcWCSinfo; wcsnum:integer): integer; cdecl;
 
 var
   cdcwcslib: TLibHandle;
@@ -1018,6 +1024,9 @@ var
   cdcwcs_release: Tcdcwcs_release;
   cdcwcs_getinfo: Tcdcwcs_getinfo;
   cdcwcs_sky2xy: Tcdcwcs_sky2xy;
+
+const
+  maxfitslist=15;  // must corespond to value in cdcwcs.c
 
 //  zlib
 type
@@ -1055,12 +1064,13 @@ type
 
 // pseudo-constant only here
 var
-  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir,
+  ConfigAppdir, ConfigPrivateDir, Appdir, PrivateDir, SampleDir, SatDir, ArchiveDir,
   TempDir, ZoneDir, HomeDir, VODir: string;
   VarObs, CdC, MPCDir, DBDir, PictureDir: string;
   ForceConfig, ForceUserDir, Configfile, Lang: string;
   compile_time, compile_version, compile_system, lclver: string;
   ldeg, lmin, lsec: string;
+  MaxThreadCount: integer;
   ImageListCount: integer;
   nightvision: boolean;
   isWin98: boolean;
@@ -1361,7 +1371,7 @@ const
     'name varchar(27) NOT NULL default "", equinox smallint(4) NOT NULL default "0",' +
     'elem_id smallint(6) NOT NULL default "0", PRIMARY KEY (id,epoch))', ''),
     ('cdc_fits', ' (filename varchar(255) NOT NULL default "", ' +
-    'catalogname varchar(5)  NOT NULL default "", ' +
+    'catalogname varchar(255)  NOT NULL default "", ' +
     'objectname varchar(25) NOT NULL default "", ' +
     'ra double NOT NULL default "0",' +
     'de double NOT NULL default "0", ' +
@@ -1577,6 +1587,7 @@ begin
   for i := 0 to MaxField do
     DegreeGridSpacing[i] := Source.DegreeGridSpacing[i];
   ShowCRose := Source.ShowCRose;
+  SimplePointer := Source.SimplePointer;
   CRoseSz := Source.CRoseSz;
   EquinoxType := Source.EquinoxType;
   DefaultJDchart := Source.DefaultJDchart;
@@ -1825,6 +1836,7 @@ begin
   ManualTelescope := Source.ManualTelescope;
   ShowImages := Source.ShowImages;
   ShowBackgroundImage := Source.ShowBackgroundImage;
+  ShowImageList := Source.ShowImageList;
   showstars := Source.showstars;
   shownebulae := Source.shownebulae;
   showline := Source.showline;
@@ -1958,6 +1970,7 @@ begin
   ShowEarthShadowValid := Source.ShowEarthShadowValid;
   ShowEclipticValid := Source.ShowEclipticValid;
   BGalpha := Source.BGalpha;
+  BGitt := Source.BGitt;
   BGmin_sigma := Source.BGmin_sigma;
   BGmax_sigma := Source.BGmax_sigma;
   NEBmin_sigma := Source.NEBmin_sigma;
@@ -2056,6 +2069,9 @@ begin
     for j := 1 to Source.CometNb do
       for k := 1 to 2 do
         CometName[i, j, k] := Source.CometName[i, j, k];
+  MaxArchiveImg := Source.MaxArchiveImg;
+  for i:=1 to MaxArchiveDir do ArchiveDir[i]:=Source.ArchiveDir[i];
+  for i:=1 to MaxArchiveDir do ArchiveDirActive[i]:=Source.ArchiveDirActive[i];
 end;
 
 { Tconf_plot }
@@ -2310,6 +2326,9 @@ begin
   dssmaxsize := Source.dssmaxsize;
   OnlineDSS := Source.OnlineDSS;
   OnlineDSSid := Source.OnlineDSSid;
+  dssarchive := Source.dssarchive;
+  dssarchiveprompt := Source.dssarchiveprompt;
+  dssarchivedir := Source.dssarchivedir;
   for i := 1 to MaxDSSurl do
     for j := 0 to 1 do
       DSSurl[i, j] := Source.DSSurl[i, j];

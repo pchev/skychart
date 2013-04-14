@@ -53,6 +53,7 @@ procedure Splitarg(buf,sep:string; var arg: TStringList);
 procedure SplitRec(buf,sep:string; var arg: TStringList);
 Procedure SplitCmd(S : String; List : TStringList);
 function ExpandTab(str:string; tabwidth:integer):string;
+function striphtml(html:string):string;
 function words(str,sep : string; p,n : integer; isep:char=blank) : string;
 function wordspace(str:string):string;
 function pos2(sub,str:string;i:integer):integer;
@@ -535,6 +536,33 @@ for i:=1 to n do begin
  if j=0 then j:=length(str)+1;
  result:=result+trim(copy(str,1,j))+sep;
  str:=trim(copy(str,j,length(str)));
+end;
+end;
+
+function striphtml(html:string):string;
+var i : integer;
+    c : char;
+    intag: boolean;
+    tag: string;
+begin
+result:='';
+for i:=1 to length(html) do begin
+  c:=html[i];
+  case c of
+   '<': begin
+        intag:=true;
+        tag:='';
+        end;
+   '>': begin
+        intag:=false;
+        if tag='p'  then result:=result+crlf;
+        if tag='br' then result:=result+crlf;
+        end;
+   else begin
+          if intag then tag:=tag+c
+                   else result:=result+c;
+        end;
+   end;
 end;
 end;
 

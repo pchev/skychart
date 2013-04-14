@@ -26,12 +26,12 @@ interface
 
 uses u_translation,
   u_util, u_constant, u_projection, SysUtils, Classes,  passql, pasmysql, passqlite, StrUtils,
-  Graphics,Math, FPImage, LCLType, IntfGraphics;
+  Graphics,Math, FPImage, Controls, LCLType, Forms, StdCtrls, ComCtrls, ExtCtrls, Buttons, IntfGraphics;
 
 type Tfitsheader = record
                 bitpix,naxis,naxis1,naxis2,naxis3 : integer;
                 bzero,bscale,dmax,dmin,blank,equinox : double;
-                ctype1,ctype2,radecsys : string;
+                ctype1,ctype2,radecsys,objects : string;
                 rotaok,cdok,pcok,valid,coordinate_valid : boolean;
                 crpix1,crpix2,crval1,crval2,cdelt1,cdelt2,crota1,crota2 : double;
                 cd1_1,cd1_2,cd2_1,cd2_2 : double;
@@ -42,6 +42,37 @@ Timai16 = array of array of array of smallint; TPimai16 = ^Timai16;
 Timai32 = array of array of array of longint; TPimai32 = ^Timai32;
 Timar32 = array of array of array of single; TPimar32 = ^Timar32;
 Timar64 = array of array of array of double; TPimar64 = ^Timar64;
+
+TDrawProjThread = class(TThread)
+  public
+   IntfImg,ProjImg: TLazIntfImage;
+   ra_offset,de_offset,imgjd: double;
+   cfgsc: Tconf_skychart;
+   working, smallfov: boolean;
+   num,id,Fw,Fh:integer;
+   procedure Execute; override;
+   constructor Create(CreateSuspended: boolean);
+  end;
+
+TDrawListImg=array[0..maxfitslist] of TLazIntfImage;
+TDrawListDouble=array[0..maxfitslist] of double;
+TDrawListInteger=array[0..maxfitslist] of integer;
+TDrawListThread = class(TThread)
+  public
+   IntfImg: TDrawListImg;
+   ProjImg: TLazIntfImage;
+   ra_offset,de_offset: TDrawListDouble;
+   imgjd: double;
+   lstjd: TDrawListDouble;
+   cfgsc: Tconf_skychart;
+   working: boolean;
+   smallfov, samejd: boolean;
+   Fw,Fh : TDrawListInteger;
+   num,id,filecount:integer;
+   procedure Execute; override;
+   constructor Create(CreateSuspended: boolean);
+  end;
+
 
 const    maxl = 4000;
 
@@ -60,23 +91,26 @@ type
     Fheader : Tfitsheader;
     FFileName : String;
     n_axis,cur_axis,Fwidth,Fheight,hdr_end,colormode,current_result : Integer;
-    Fimg_width,Fimg_Height,Fra,Fde,Frotation : double;
+    Fimg_width,Fimg_Height,Fjd,Fra,Fde,Frotation : double;
     FWCSvalid: boolean;
     Fprojection : string;
     Fmean,Fsigma,dmin,dmax,Fmin_sigma,Fmax_sigma : double;
-    itt : array[0..255] of byte;
+    Fitt : Titt;
     procedure SetFile(value:string);
     procedure Readfitsheader;
     Procedure FITSCoord ;
     Procedure ReadFitsImage;
-    procedure SetITT;
-    procedure pixelatcoord(ra,de: double; var x,y: integer);
+    function Citt(value: Word):Word;
   protected
     { Protected declarations }
   public
     { Public declarations }
-    db1 : TSqlDB;
+     db1 : TSqlDB;
      dbconnected, invertx, inverty : boolean;
+     fitslist: TStringList;
+     fitslistactive: array of boolean;
+     fitslistmodified: boolean;
+     fitslistra,fitslistdec: double;
      constructor Create(AOwner:TComponent); override;
      destructor  Destroy; override;
      Function ConnectDB(host,db,user,pass:string; port:integer):boolean;
@@ -87,10 +121,12 @@ type
      Function ImagesForCatalog(catname:string):boolean;
      Function GetFileName(catname,objectname:string; var filename:string):boolean;
      Procedure GetAllHeader(var result:Tstringlist);
+     Procedure ViewHeaders;
      procedure GetBitmap(var imabmp:Tbitmap);
      procedure GetIntfImg(var IntfImg: TLazIntfImage);
      Procedure InfoWCScoord;
      procedure GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
+     procedure GetProjList(var imabmp:Tbitmap; c:Tconf_skychart);
      Property Header : Tfitsheader read Fheader;
      Property FileName : string read FFileName write SetFile;
      Property Center_RA : double read Fra;
@@ -102,6 +138,7 @@ type
      Property Projection : string read Fprojection;
      Property min_sigma  : double read Fmin_sigma write Fmin_sigma;
      Property max_sigma  : double read Fmax_sigma write Fmax_sigma;
+     property itt : Titt read Fitt write Fitt;
   end;
 
 implementation
@@ -109,17 +146,20 @@ implementation
 constructor TFits.Create(AOwner:TComponent);
 begin
 inherited Create(AOwner);
-SetITT;
+Fitt:=ittramp;
 if DBtype=mysql then
    db1:=TMyDB.create(self)
 else if DBtype=sqlite then
    db1:=TLiteDB.create(self);
 dbconnected:=false;
+fitslist:=TStringList.Create;
+fitslistmodified:=false;
 end;
 
 destructor  TFits.Destroy; 
 begin
 try
+fitslist.Free;
 db1.Free;
 setlength(imar64,0,0,0);
 setlength(imar32,0,0,0);
@@ -154,6 +194,51 @@ if fileexists(value) and (rightstr(value,1)<>PathDelim) then begin
 end; 
 except
 Fheader.valid:=false;
+end;
+end;
+
+Procedure TFits.ViewHeaders;
+var hdr: Tstringlist;
+    f: TForm;
+    m: TMemo;
+    p: TPanel;
+    b: TButton;
+begin
+f:=TForm.create(self);
+m:=Tmemo.create(f);
+p:=TPanel.Create(f);
+b:=Tbutton.Create(f);
+hdr:=Tstringlist.Create;
+try
+f.Width:=600;
+f.Height:=450;
+p.Parent:=f;
+p.Caption:='';
+p.Height:=b.Height+8;
+p.Align:=alBottom;
+m.Parent:=f;
+m.Align:=alClient;
+m.font.Name:='courier';
+m.ReadOnly:=true;
+m.WordWrap:=false;
+m.ScrollBars:=ssAutoBoth;
+b.Parent:=p;
+b.Caption:=rsClose;
+b.Top:=4;
+b.Left:=40;
+b.ModalResult:=mrOK;
+b.Default:=true;
+GetAllHeader(hdr);
+m.Lines:=hdr;
+FormPos(f,mouse.CursorPos.X,mouse.CursorPos.Y);
+f.Caption:=FFileName;
+f.ShowModal;
+finally
+hdr.free;
+b.free;
+p.free;
+m.free;
+f.free;
 end;
 end;
 
@@ -202,7 +287,7 @@ with FHeader do begin
 coordinate_valid:=false;
 valid:=false;eoh:=false; naxis1:=0 ; naxis2:=0 ; naxis3:=1; bitpix:=0 ; dmin:=0 ; dmax := 0; blank:=0;
 bzero:=0 ; bscale:=1;
-ctype1:='' ;ctype2:='';
+ctype1:='' ;ctype2:=''; objects:='';
 crpix1:=0;crpix2:=0;crval1:=0;crval2:=0;cdelt1:=0;cdelt2:=0;crota1:=0;crota2:=0;
 cd1_1:=0;cd2_2:=0;cd1_2:=0;cd2_1:=0;
 pc[1,1]:=1;pc[1,2]:=0;pc[2,1]:=0;pc[2,2]:=1;
@@ -233,6 +318,7 @@ repeat
       if (keyword='THRESH') then dmax:=strtofloat(buf);
       if (keyword='THRESL') then dmin:=strtofloat(buf);
       if (keyword='BLANK') then blank:=strtofloat(buf);
+      if (keyword='OBJECT') then objects:=trim(buf);
       if (keyword='CTYPE1') then ctype1:=buf;
       if (keyword='CTYPE2') then ctype2:=buf;
       if (keyword='CRPIX1') then crpix1:=strtofloat(buf);
@@ -292,16 +378,21 @@ end;
 
 Procedure TFits.InfoWCScoord;
 var n: integer;
+    y,m,d: word;
     i: TcdcWCSinfo;
 begin
 try
-n:=cdcwcs_initfitsfile(pchar(FFileName));
-n:=cdcwcs_getinfo(addr(i));
+n:=cdcwcs_initfitsfile(pchar(FFileName),0);
+n:=cdcwcs_getinfo(addr(i),0);
 if VerboseMsg then
  WriteTrace('cdcwcs_getinfo '+inttostr(n)+' ra:'+formatfloat(f5,i.cra)+' de:'+formatfloat(f5,i.cdec)+' w:'+inttostr(i.wp)+' h:'+inttostr(i.hp)+' s:'+formatfloat(f6,i.secpix) );
 if (n=0)and(i.secpix<>0) then begin
   Fra:=deg2rad*i.cra;
   Fde:=deg2rad*i.cdec;
+  y:=trunc(i.eqout);
+  m:=trunc(frac(i.eqout)*12)+1;
+  d:=trunc(frac(frac(i.eqout)*12)*30)+1;
+  Fjd:=jd(y,m,d,12.0);
   Fimg_width:=deg2rad*i.wp*i.secpix/3600;
   Fimg_Height:=deg2rad*i.hp*i.secpix/3600;
   Frotation:=deg2rad*i.rot;
@@ -614,28 +705,50 @@ closefile(f);
 Fmean:=sum/ni;
 Fsigma:=sqrt( (sum2/ni)-(Fmean*Fmean) );
 if (Fheader.dmin=0)and(Fheader.dmax=0) then begin
-  Fheader.dmin:=max(dmin,Fmean-5*Fsigma);
-  Fheader.dmax:=min(dmax,Fmean+5*Fsigma);
+  if Fitt=ittramp then begin
+     Fheader.dmin:=max(dmin,Fmean-5*Fsigma);
+     Fheader.dmax:=min(dmax,Fmean+5*Fsigma);
+  end else begin
+     Fheader.dmin:=dmin;
+     Fheader.dmax:=dmax;
+  end;
 end;
 end;
 
-procedure TFits.SetITT;
+function TFits.Citt(value: Word):Word;
 var
   i: Integer;
+  c:double;
 begin
-
-// Ramp
-  for i := 0 to 255 do begin
-       itt[i]:=i;
-  end;
-
+case Fitt of
+ittlinear: begin
+          // Linear
+         result:=value;
+         end;
+ittramp: begin
+          // Ramp
+          result:=value;
+         end;
+ittsqrt: begin
+          // sqrt
+          c:=MaxWord/sqrt(MaxWord);
+          if value=0 then result:=0
+          else result:=round(c*sqrt(value));
+         end;
+ittlog:  begin
+          // Log
+          c:=MaxWord/ln(MaxWord);
+          if value=0 then result:=0
+          else result:=round(c*ln(value));
+          end;
+end;
 end;
 
 procedure TFits.GetIntfImg(var IntfImg: TLazIntfImage);
 var i,j,row : integer;
-    x,R,G,B : integer;
+    x : word;
     xx: extended;
-    c : double;
+    c: double;
     color: TFPColor;
 begin
 ReadFitsImage;
@@ -643,7 +756,7 @@ IntfImg.SetSize(Fwidth,Fheight);
 dmin:=Fheader.dmin+Fmin_sigma*Fsigma;
 dmax:=Fheader.dmax-Fmax_sigma*Fsigma;
 if dmin>=dmax then dmax:=dmin+1;
-c:=255/(dmax-dmin);
+c:=MaxWord/(dmax-dmin);
 color.alpha:=65535;
 case Fheader.bitpix of
      -64 : for i:=0 to Fheight-1 do begin
@@ -651,22 +764,19 @@ case Fheader.bitpix of
                       else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imar64[0,i,j];
-               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-               R:=itt[x];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt(x);
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imar64[1,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 G:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt(x);
                  xx:=Fheader.bzero+Fheader.bscale*imar64[2,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 B:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt(x);
                end else begin
-                 G:=R;
-                 B:=R;
+                 color.green:=color.red;
+                 color.blue:=color.red;
                end;
-               color.red:=R*256;
-               color.green:=G*256;
-               color.blue:=B*256;
                if invertX then begin
                   IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
@@ -679,22 +789,19 @@ case Fheader.bitpix of
                       else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imar32[0,i,j];
-               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-               R:=itt[x];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt(x);
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imar32[1,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 G:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt(x);
                  xx:=Fheader.bzero+Fheader.bscale*imar32[2,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 B:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt(x);
                end else begin
-                 G:=R;
-                 B:=R;
+                 color.green:=color.red;
+                 color.blue:=color.red;
                end;
-               color.red:=R*256;
-               color.green:=G*256;
-               color.blue:=B*256;
                if invertX then begin
                   IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
@@ -707,22 +814,19 @@ case Fheader.bitpix of
                       else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai8[0,i,j];
-               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-               R:=itt[x];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt(x);
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai8[1,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 G:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt(x);
                  xx:=Fheader.bzero+Fheader.bscale*imai8[2,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 B:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt(x);
                end else begin
-                 G:=R;
-                 B:=R;
+                 color.green:=color.red;
+                 color.blue:=color.red;
                end;
-               color.red:=R*256;
-               color.green:=G*256;
-               color.blue:=B*256;
                if invertX then begin
                   IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
@@ -735,22 +839,19 @@ case Fheader.bitpix of
                       else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai16[0,i,j];
-               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-               R:=itt[x];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt(x);
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai16[1,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 G:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt(x);
                  xx:=Fheader.bzero+Fheader.bscale*imai16[2,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 B:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt(x);
                end else begin
-                 G:=R;
-                 B:=R;
+                 color.green:=color.red;
+                 color.blue:=color.red;
                end;
-               color.red:=R*256;
-               color.green:=G*256;
-               color.blue:=B*256;
                if invertX then begin
                   IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
@@ -763,22 +864,19 @@ case Fheader.bitpix of
                       else row:=i;
            for j := 0 to Fwidth-1 do begin
                xx:=Fheader.bzero+Fheader.bscale*imai32[0,i,j];
-               x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-               R:=itt[x];
+               x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+               color.red:=Citt(x);
                if n_axis=3 then begin
                  xx:=Fheader.bzero+Fheader.bscale*imai32[1,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 G:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.green:=Citt(x);
                  xx:=Fheader.bzero+Fheader.bscale*imai32[2,i,j];
-                 x:=trunc(max(0,min(255,(xx-dmin) * c )) );
-                 B:=itt[x];
+                 x:=trunc(max(0,min(MaxWord,(xx-dmin) * c )) );
+                 color.blue:=Citt(x);
                end else begin
-                 G:=R;
-                 B:=R;
+                 color.green:=color.red;
+                 color.blue:=color.red;
                end;
-               color.red:=R*256;
-               color.green:=G*256;
-               color.blue:=B*256;
                if invertX then begin
                   IntfImg.Colors[Fwidth-j,row]:=color;
                end else begin
@@ -807,11 +905,73 @@ if Fheader.naxis1>0 then begin
 end;
 end;
 
+procedure pixelatcoord(ra,de: double; var x,y: integer; wcsnum:integer=0);
+var  p: TcdcWCScoord;
+begin
+try
+p.ra:=rad2deg*ra;
+p.dec:=rad2deg*de;
+cdcwcs_sky2xy(addr(p),wcsnum);
+if p.n=0 then begin
+  x:=round(p.x);
+  y:=round(p.y);
+end else begin
+  x:=-1;
+  y:=-1;
+end;
+except
+  x:=-1;
+  y:=-1;
+end;
+end;
+
+constructor TDrawProjThread.Create(CreateSuspended: boolean);
+begin
+  FreeOnTerminate := True;
+  inherited Create(CreateSuspended);
+  working:=true;
+end;
+
+procedure TDrawProjThread.Execute;
+var
+    ra,dec:double;
+    i,j,startline,endline,x,y: integer;
+begin
+i:=cfgsc.ymax div num;
+startline:=id*i;
+if id=(num-1) then
+  endline:=cfgsc.ymax-1
+else
+  endline:=(id+1)*i-1;
+for i:=startline to endline do begin
+   for j:=0 to cfgsc.xmax-1 do begin
+      if Terminated then exit;
+      getadxy(j,i,ra,dec,cfgsc);
+      if smallfov then begin
+        ra:=ra+ra_offset;
+        dec:=dec+de_offset;
+      end else begin
+        if cfgsc.ApparentPos then mean_equatorial(ra,dec,cfgsc,true,true);
+        Precession(cfgsc.JDChart,imgjd,ra,dec);
+      end;
+      pixelatcoord(ra,dec,x,y);
+      if (x>=0)and(x<Fw)and(y>=0)and(y<Fh) then
+         ProjImg.Colors[j,i]:=IntfImg.Colors[x,Fh-y]
+      else
+         ProjImg.Colors[j,i]:=colTransparent;
+   end;
+end;
+working:=false;
+end;
+
 procedure TFits.GetProjBitmap(var imabmp:Tbitmap; c:Tconf_skychart);
 var IntfImg,ProjImg: TLazIntfImage;
     ImgHandle,ImgMaskHandle: HBitmap;
-    i,j,x,y: integer;
-    ra,dec,ra_offset,de_offset: double;
+    i,n: integer;
+    ra_offset,de_offset: double;
+    working,timeout: boolean;
+    timelimit: TDateTime;
+    thread: array[0..3] of TDrawProjThread;
 begin
 try
 imabmp.freeimage;
@@ -827,50 +987,198 @@ if FWCSvalid and(Fheader.naxis1>0) then begin
   ProjImg.SetSize(c.xmax,c.ymax);
   ra_offset:=Fra;
   de_offset:=Fde;
-  Precession(jd2000,c.JDChart,ra_offset,de_offset);
-  if c.ApparentPos then apparent_equatorial(ra_offset,de_offset,c,true,true);
+  if c.ApparentPos then mean_equatorial(ra_offset,de_offset,c,true,true);
+  Precession(c.JDChart,Fjd,ra_offset,de_offset);
   ra_offset:=ra_offset-Fra;
   de_offset:=de_offset-Fde;
-  for i:=0 to c.ymax-1 do begin
-     for j:=0 to c.xmax-1 do begin
-        getadxy(j,i,ra,dec,c);
-        ra:=ra-ra_offset;
-        dec:=dec-de_offset;
-        pixelatcoord(ra,dec,x,y);
-        if (x>=0)and(x<Fwidth)and(y>=0)and(y<Fheight) then
-           ProjImg.Colors[j,i]:=IntfImg.Colors[x,Fheight-y]
-        else
-           ProjImg.Colors[j,i]:=colTransparent;
-     end;
+  n:=min(4,MaxThreadCount);
+  for i:=0 to n-1 do begin
+    thread[i]:=TDrawProjThread.Create(true);
+    thread[i].IntfImg:=IntfImg;
+    thread[i].ProjImg:=ProjImg;
+    thread[i].ra_offset:=ra_offset;
+    thread[i].de_offset:=de_offset;
+    thread[i].imgjd:=Fjd;
+    thread[i].Fw:=Fwidth;
+    thread[i].Fh:=Fheight;
+    thread[i].smallfov:=(rad2deg*Fimg_width)<1;
+    thread[i].cfgsc:=c;
+    thread[i].num:=n;
+    thread[i].id:=i;
+    thread[i].Start;
+  end;
+  timelimit:=now+10/secday;
+  repeat
+    sleep(10);
+    working:=false;
+    for i:=0 to n-1 do working:=working or thread[i].working;
+    timeout:=(now>timelimit);
+  until (not working)or timeout;
+  if timeout then begin
+    for i:=0 to n-1 do thread[i].Terminate;
+    sleep(10);
   end;
   ProjImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
   imabmp.freeimage;
   imabmp.SetHandles(ImgHandle,ImgMaskHandle);
   IntfImg.Free;
   ProjImg.Free;
-  cdcwcs_release();
+  cdcwcs_release(0);
 end;
 except
 end;
 end;
 
-procedure TFits.pixelatcoord(ra,de: double; var x,y: integer);
-var  p: TcdcWCScoord;
+
+constructor TDrawListThread.Create(CreateSuspended: boolean);
+begin
+  FreeOnTerminate := True;
+  inherited Create(CreateSuspended);
+  working:=true;
+end;
+
+procedure TDrawListThread.Execute;
+var
+    ra,dec,ra0,dec0:double;
+    i,j,k,startline,endline,x,y: integer;
+begin
+i:=cfgsc.ymax div num;
+startline:=id*i;
+if id=(num-1) then
+  endline:=cfgsc.ymax-1
+else
+  endline:=(id+1)*i-1;
+for i:=startline to endline do begin
+   for j:=0 to cfgsc.xmax-1 do begin
+      if Terminated then exit;
+      getadxy(j,i,ra0,dec0,cfgsc);
+      if samejd and (not smallfov) then begin
+        ra:=ra0; dec:=dec0;
+        if cfgsc.ApparentPos then mean_equatorial(ra,dec,cfgsc,true,true);
+        Precession(cfgsc.JDChart,imgjd,ra,dec);
+      end;
+      for k:=0 to filecount-1 do begin
+          if k>maxfitslist then break;
+          if smallfov then begin
+            ra:=ra0+ra_offset[k];
+            dec:=dec0+de_offset[k];
+          end
+          else if (not samejd) then begin
+              ra:=ra0; dec:=dec0;
+              if cfgsc.ApparentPos then mean_equatorial(ra,dec,cfgsc,true,true);
+              Precession(cfgsc.JDChart,imgjd,ra,dec);
+          end;
+          pixelatcoord(ra,dec,x,y,k);
+          if (x>=0)and(x<Fw[k])and(y>=0)and(y<Fh[k]) then
+             ProjImg.Colors[j,i]:=IntfImg[k].Colors[x,Fh[k]-y];
+      end;
+   end;
+end;
+working:=false;
+end;
+
+procedure TFits.GetProjList(var imabmp:Tbitmap; c:Tconf_skychart);
+var IntfImg: TDrawListImg;
+    ra_offset,de_offset,ljd : TDrawListdouble;
+    iwidth,iheight: TDrawListInteger;
+    iwcs: TcdcWCSinfo;
+    smallfov,samejd: boolean;
+    ijd:double;
+    ProjImg: TLazIntfImage;
+    ImgHandle,ImgMaskHandle: HBitmap;
+    i,n,r,imgloaded: integer;
+    y,m,d: word;
+    working,timeout: boolean;
+    timelimit: TDateTime;
+    thread: array[0..3] of TDrawListThread;
 begin
 try
-p.ra:=rad2deg*ra;
-p.dec:=rad2deg*de;
-cdcwcs_sky2xy(addr(p));
-if p.n=0 then begin
-  x:=round(p.x);
-  y:=round(p.y);
-end else begin
-  x:=-1;
-  y:=-1;
+imabmp.freeimage;
+imabmp.height:=1;
+imabmp.width:=1;
+ProjImg:=TLazIntfImage.Create(0,0);
+ProjImg.LoadFromBitmap(imabmp.Handle,0);
+ProjImg.SetSize(c.xmax,c.ymax);
+ProjImg.FillPixels(colTransparent);
+smallfov:=true;
+samejd:=true;
+
+n:=0;
+for i:=0 to fitslist.Count-1 do begin
+ if n>maxfitslist then break;
+ if fitslistactive[i] then begin
+   r:=cdcwcs_initfitsfile(pchar(fitslist[i]),n);
+   r:=cdcwcs_getinfo(addr(iwcs),n);
+   if (r=0)and(iwcs.secpix<>0) then begin
+    if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': load '+fitslist[i]);
+    FileName:=fitslist[i];
+    IntfImg[n]:=TLazIntfImage.Create(0,0);
+    IntfImg[n].LoadFromBitmap(imabmp.Handle,0);
+    GetIntfImg(IntfImg[n]);
+    y:=trunc(iwcs.eqout);
+    m:=trunc(frac(iwcs.eqout)*12)+1;
+    d:=trunc(frac(frac(iwcs.eqout)*12)*30)+1;
+    ljd[n]:=jd(y,m,d,12.0);
+    if n=0 then
+       ijd:=ljd[n]
+    else
+       if ijd<>ljd[n] then samejd:=false;
+    ra_offset[n]:=deg2rad*iwcs.cra;
+    de_offset[n]:=deg2rad*iwcs.cdec;
+    if c.ApparentPos then mean_equatorial(ra_offset[n],de_offset[n],c,true,true);
+    Precession(c.JDChart,ljd[n],ra_offset[n],de_offset[n]);
+    ra_offset[n]:=ra_offset[n]-deg2rad*iwcs.cra;
+    de_offset[n]:=de_offset[n]-deg2rad*iwcs.cdec;
+    iwidth[n]:=Fwidth;
+    iheight[n]:=Fheight;
+    smallfov:=smallfov and ((iwcs.wp*iwcs.secpix/3600)<1);
+    inc(n);
+  end;
+ end;
 end;
+imgloaded:=n;
+r:=min(4,MaxThreadCount);
+if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': start thread');
+for i:=0 to r-1 do begin
+  thread[i]:=TDrawListThread.Create(true);
+  thread[i].IntfImg:=IntfImg;
+  thread[i].ProjImg:=ProjImg;
+  thread[i].ra_offset:=ra_offset;
+  thread[i].de_offset:=de_offset;
+  thread[i].imgjd:=ijd;
+  thread[i].lstjd:=ljd;
+  thread[i].samejd:=samejd;
+  thread[i].Fw:=iwidth;
+  thread[i].Fh:=iheight;
+  thread[i].smallfov:=smallfov;
+  thread[i].filecount:=fitslist.Count;
+  thread[i].cfgsc:=c;
+  thread[i].num:=r;
+  thread[i].id:=i;
+  thread[i].Start;
+end;
+timelimit:=now+10/secday;
+repeat
+  sleep(10);
+  working:=false;
+  for i:=0 to r-1 do working:=working or thread[i].working;
+  timeout:=(now>timelimit);
+until (not working)or timeout;
+if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': end thread');
+if timeout then begin
+  for i:=0 to r-1 do thread[i].Terminate;
+  sleep(10);
+end;
+ProjImg.CreateBitmaps(ImgHandle,ImgMaskHandle,false);
+imabmp.freeimage;
+imabmp.SetHandles(ImgHandle,ImgMaskHandle);
+for i:=0 to imgloaded-1 do begin
+  if i>maxfitslist then break;
+  IntfImg[i].Free;
+  cdcwcs_release(i);
+end;
+ProjImg.Free;
 except
-  x:=-1;
-  y:=-1;
 end;
 end;
 

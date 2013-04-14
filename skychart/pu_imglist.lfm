@@ -1,0 +1,76 @@
+object f_imglist: Tf_imglist
+  Left = 297
+  Height = 319
+  Top = 211
+  Width = 497
+  Caption = 'f_imglist'
+  ClientHeight = 319
+  ClientWidth = 497
+  OnShow = FormShow
+  LCLVersion = '1.0.8.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 269
+    Width = 497
+    Align = alBottom
+    ClientHeight = 50
+    ClientWidth = 497
+    TabOrder = 0
+    object Button1: TButton
+      Left = 408
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'OK'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 112
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 1
+    end
+    object Button3: TButton
+      Left = 304
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'Setup'
+      ModalResult = 6
+      TabOrder = 2
+    end
+    object Button4: TButton
+      Left = 208
+      Height = 25
+      Top = 11
+      Width = 75
+      Caption = 'View header'
+      OnClick = ViewHeaderClick
+      TabOrder = 3
+    end
+  end
+  object CheckListBox1: TCheckListBox
+    Left = 0
+    Height = 269
+    Top = 0
+    Width = 497
+    Align = alClient
+    ItemHeight = 0
+    OnMouseDown = CheckListBox1MouseDown
+    TabOrder = 1
+    TopIndex = -1
+  end
+  object PopupMenu1: TPopupMenu
+    left = 64
+    top = 104
+    object ViewHeader: TMenuItem
+      Caption = 'ViewHeader'
+      OnClick = ViewHeaderClick
+    end
+  end
+end
