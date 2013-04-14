@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-29 14:54+0000\n"
+"POT-Creation-Date: 2013-04-14 14:46+0000\n"
 "PO-Revision-Date: 2012-06-26 09:18+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -144,6 +144,10 @@ msgstr "Bæta viðbótarnöfnunum við efnisyfirlitið"
 msgid "Adjust colour brightness"
 msgstr "Breyta litastyrk"
 
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Þróað"
@@ -259,6 +263,14 @@ msgstr "Virkja"
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
 msgstr "Virkja breytingu fyrir öll kort"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -648,10 +660,6 @@ msgstr "Miðja"
 msgid "Change drawing mode"
 msgstr "Breyta teikniham"
 
-#: u_translation.rschangepictur
-msgid "Change the displayed picture"
-msgstr "Breyta birtingu mynda"
-
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Breyting yfir í þessa stillingu endurræsir forritið núna!"
@@ -852,6 +860,10 @@ msgstr ""
 msgid "Configure the program"
 msgstr "Stilla forritið"
 
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
 msgstr ""
@@ -983,6 +995,10 @@ msgstr "Tengt"
 #: u_translation.rscouldnotload
 msgid "Could not load library "
 msgstr "Gat ekki hlaðið inn safni "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr ""
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1480,6 +1496,10 @@ msgstr "Ná í"
 msgid "Download %s"
 msgstr "Ná í %s"
 
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
 msgstr ""
@@ -1551,6 +1571,10 @@ msgstr ""
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "Henda gagnagrunni"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1855,6 +1879,10 @@ msgstr "Of stórt svæði! Hámarkið er %s"
 #: u_translation.rsfile
 msgid "File"
 msgstr "Skrá"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2256,9 +2284,17 @@ msgstr "Uppl."
 msgid "Illuminated fraction"
 msgstr "Hluti sem er upplýstur"
 
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr ""
+
 #: u_translation.rsimagedirecto
 msgid "Image directory"
 msgstr "Myndasvæði"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2576,6 +2612,10 @@ msgstr "Stærðarmörk (bogmínútur) :"
 msgid "Line"
 msgstr "Lína"
 
+#: u_translation.rslinear
+msgid "Linear"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "Línuhamur"
@@ -2659,6 +2699,10 @@ msgstr "Staðarlykill"
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Læsa á %s"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -2791,6 +2835,10 @@ msgstr "Hámarka"
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr "Hæsta birtustig"
+
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3255,10 +3303,6 @@ msgstr "Nafn fyrirbæris"
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr "Staðsetning fyrirbæris finnst í skrá, en nánari upplýsingar finnast ekki í virkri skrá"
-
-#: u_translation.rsobjects
-msgid "Objects"
-msgstr "Fyrirbæri"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3888,6 +3932,10 @@ msgstr "Raunsæjar myndir"
 msgid "REALLY park and disconnect the telescope?"
 msgstr ""
 
+#: u_translation.rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
 msgstr "RealSky norður"
@@ -4184,6 +4232,14 @@ msgstr "Vista núverandi kort"
 msgid "Save to file"
 msgstr "Vista í skrá"
 
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr ""
+
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "Fara yfir möppu"
@@ -4392,6 +4448,10 @@ msgstr "K"
 msgid "Show all sky"
 msgstr "Sýna allan himininn"
 
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
 msgstr "Sýna smástirni"
@@ -4535,6 +4595,10 @@ msgstr "Sýna stöðu í titillínu"
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Birta stjörnur"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4711,6 +4775,10 @@ msgstr "Líklega er ekki búið að setja inn hugbúnað fyrir SQL-grunn!"
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
 msgstr "Sqlite gagnagrunnur"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4939,6 +5007,10 @@ msgstr "Textagrunnur"
 #: u_translation.rstextsize
 msgid "Text size"
 msgstr "Stærð texta"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5220,6 +5292,10 @@ msgstr "Nota annað TT-UT gildi"
 msgid "Use a preset colour scheme:"
 msgstr "Nota tilbúið litakort :"
 
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr ""
+
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(gagnlegt til þess að sýna streymi)"
@@ -5332,6 +5408,10 @@ msgstr "Nágr."
 msgid "View"
 msgstr "Útsýni"
 
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr ""
+
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Sjóndeildarhringur"
@@ -5347,6 +5427,10 @@ msgstr ""
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "Það sem sést frá athugunarstaðnum"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"

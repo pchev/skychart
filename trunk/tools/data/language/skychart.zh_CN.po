@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-03-29 14:54+0000\n"
+"POT-Creation-Date: 2013-04-14 14:46+0000\n"
 "PO-Revision-Date: 2013-03-05 05:07+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -144,6 +144,10 @@ msgstr "向索引添加替代名称"
 msgid "Adjust colour brightness"
 msgstr "调整色彩亮度"
 
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "高级"
@@ -259,6 +263,14 @@ msgstr "应用"
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
 msgstr "将修改应用到所有星图"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -648,10 +660,6 @@ msgstr "置中"
 msgid "Change drawing mode"
 msgstr "更改绘制模式"
 
-#: u_translation.rschangepictur
-msgid "Change the displayed picture"
-msgstr "更换已显示图片"
-
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "更改这个设置会立刻重启程序!"
@@ -852,6 +860,10 @@ msgstr "设置"
 msgid "Configure the program"
 msgstr "程序配置"
 
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
 msgstr "确认文件删除: "
@@ -983,6 +995,10 @@ msgstr ""
 #: u_translation.rscouldnotload
 msgid "Could not load library "
 msgstr "无法加载库 "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr ""
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1480,6 +1496,10 @@ msgstr "下载"
 msgid "Download %s"
 msgstr "下载%s"
 
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
 msgstr "下载星表"
@@ -1551,6 +1571,10 @@ msgstr "驱动选择"
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "删除数据库(Drop database)"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1855,6 +1879,10 @@ msgstr "视场过大！最大视场 %s"
 #: u_translation.rsfile
 msgid "File"
 msgstr "文件"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2256,9 +2284,17 @@ msgstr "照明度"
 msgid "Illuminated fraction"
 msgstr "被照亮的部分"
 
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr ""
+
 #: u_translation.rsimagedirecto
 msgid "Image directory"
 msgstr "图片目录"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2576,6 +2612,10 @@ msgstr "极限大小（弧分）"
 msgid "Line"
 msgstr "实线"
 
+#: u_translation.rslinear
+msgid "Linear"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "线模式"
@@ -2659,6 +2699,10 @@ msgstr "位置代码"
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "锁定在 %s"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -2791,6 +2835,10 @@ msgstr "最大化"
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr "最大星等"
+
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3255,10 +3303,6 @@ msgstr "对象名称"
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr "天体位置已在索引中找到，但未在活动的星表中找到任何细节信息"
-
-#: u_translation.rsobjects
-msgid "Objects"
-msgstr "天体"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3888,6 +3932,10 @@ msgstr "逼真的图像"
 msgid "REALLY park and disconnect the telescope?"
 msgstr "确定要停止并断连望远镜?"
 
+#: u_translation.rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
 msgstr "RealSky北半球"
@@ -4184,6 +4232,14 @@ msgstr "保存当前星图"
 msgid "Save to file"
 msgstr "保存到文件"
 
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr ""
+
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "扫描目录"
@@ -4392,6 +4448,10 @@ msgstr "时"
 msgid "Show all sky"
 msgstr "显示全天"
 
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
 msgstr "显示小行星"
@@ -4535,6 +4595,10 @@ msgstr "在标题栏显示位置"
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "显示恒星"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4711,6 +4775,10 @@ msgstr "可能没有安装SQL数据库软件！"
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
 msgstr "SQLite数据库"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4939,6 +5007,10 @@ msgstr "文本文件星表"
 #: u_translation.rstextsize
 msgid "Text size"
 msgstr "文本大小"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5220,6 +5292,10 @@ msgstr "使用其他TT-UT数值"
 msgid "Use a preset colour scheme:"
 msgstr "使用预设的配色方案"
 
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr ""
+
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr ""
@@ -5332,6 +5408,10 @@ msgstr "附近"
 msgid "View"
 msgstr "查看"
 
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr ""
+
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "显示地平线"
@@ -5347,6 +5427,10 @@ msgstr "虚拟天文台目录"
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "所在观测地点的可见性"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"

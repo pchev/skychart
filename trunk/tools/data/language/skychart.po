@@ -234,10 +234,6 @@ msgstr ""
 msgid "Get the DSS image"
 msgstr ""
 
-#: u_translation:rschangepictur
-msgid "Change the displayed picture"
-msgstr ""
-
 #: u_translation:rsshowplanets
 msgid "Show planets"
 msgstr ""
@@ -2740,10 +2736,6 @@ msgstr ""
 
 #: u_translation:rscancelwrongz
 msgid "Cancel, wrong zip file ?? %s"
-msgstr ""
-
-#: u_translation:rsobjects
-msgid "Objects"
 msgstr ""
 
 #: u_translation:rsdisplayimage
@@ -5476,5 +5468,97 @@ msgstr ""
 
 #: u_translation:rsmillionkm
 msgid "million Km."
+msgstr ""
+
+#: u_translation:rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
+
+#: u_translation:rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
+
+#: u_translation:rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
+#: u_translation:rsviewheader
+msgid "View header"
+msgstr ""
+
+#: u_translation:rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
+#: u_translation:rsimagearchive
+msgid "Image archive"
+msgstr ""
+
+#: u_translation:rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
+#: u_translation:rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
+
+#: u_translation:rsimagelist
+msgid "Image list"
+msgstr ""
+
+#: u_translation:rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation:rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
+
+#: u_translation:rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
+
+#: u_translation:rslinear
+msgid "Linear"
+msgstr ""
+
+#: u_translation:rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation:rslog
+msgid "Log"
+msgstr ""
+
+#: u_translation:rssqrt
+msgid "Sqrt"
+msgstr ""
+
+#: u_translation:rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
+#: u_translation:rscount
+msgid "Count"
+msgstr ""
+
+#: u_translation:rsscanarchives
+msgid "Scan archives"
+msgstr ""
+
+#: u_translation:rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
+
+#: u_translation:rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
+
+#: u_translation:rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
+#: u_translation:rsuseasimplepo
+msgid "Use a simple pointer"
 msgstr ""
 

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.no\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-29 14:54+0000\n"
+"POT-Creation-Date: 2013-04-14 14:46+0000\n"
 "PO-Revision-Date: 2012-08-25 10:40+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -144,6 +144,10 @@ msgstr "Legg til de alternative navnene i indeksen"
 msgid "Adjust colour brightness"
 msgstr "Juster fargelysstyrken"
 
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avansert"
@@ -259,6 +263,14 @@ msgstr "Bruk"
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
 msgstr "Bruk endringer på alle kart"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -648,10 +660,6 @@ msgstr "Sentrer"
 msgid "Change drawing mode"
 msgstr "Endre tegnemodus"
 
-#: u_translation.rschangepictur
-msgid "Change the displayed picture"
-msgstr "Endre det viste bildet"
-
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Endring til denne innstilling vil starte programmet på nytt nå!"
@@ -852,6 +860,10 @@ msgstr "Still inn"
 msgid "Configure the program"
 msgstr "Programinnstillinger"
 
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
 msgstr "Bekreft filsletting: "
@@ -983,6 +995,10 @@ msgstr "Korrelert"
 #: u_translation.rscouldnotload
 msgid "Could not load library "
 msgstr "Kunne ikke laste bibliotek "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr ""
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1480,6 +1496,10 @@ msgstr "Last ned"
 msgid "Download %s"
 msgstr "Last ned %s"
 
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
 msgstr "Last ned katalog"
@@ -1551,6 +1571,10 @@ msgstr "Driver-valg"
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "Lukk database"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1855,6 +1879,10 @@ msgstr "Felt for bredt! Maksimum er %s"
 #: u_translation.rsfile
 msgid "File"
 msgstr "Fil"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2256,9 +2284,17 @@ msgstr "Belys."
 msgid "Illuminated fraction"
 msgstr "Belyst del"
 
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr ""
+
 #: u_translation.rsimagedirecto
 msgid "Image directory"
 msgstr "Bildemappe"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2576,6 +2612,10 @@ msgstr "Grensestørrelse (bueminutter):"
 msgid "Line"
 msgstr "Linje"
 
+#: u_translation.rslinear
+msgid "Linear"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "Linjemodus"
@@ -2659,6 +2699,10 @@ msgstr "Stedskode"
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Lås på %s"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -2791,6 +2835,10 @@ msgstr "Maksimer"
 #: u_translation.rsmaximummagni
 msgid "Maximum magnitude"
 msgstr "Maksimum magnitude"
+
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -3255,10 +3303,6 @@ msgstr "Objektnavn"
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr "Objekt-posisjon funnet i indeks, men ingen detaljer funnet i noen aktiv katalog"
-
-#: u_translation.rsobjects
-msgid "Objects"
-msgstr "Objekter"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3888,6 +3932,10 @@ msgstr "Realistisk bilde"
 msgid "REALLY park and disconnect the telescope?"
 msgstr "Parkere og frakoble teleskopet?"
 
+#: u_translation.rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
 msgstr "RealSky nord"
@@ -4184,6 +4232,14 @@ msgstr "Lagre aktive kart"
 msgid "Save to file"
 msgstr "Lagre til fil"
 
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr ""
+
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "Skann mappe"
@@ -4392,6 +4448,10 @@ msgstr "T"
 msgid "Show all sky"
 msgstr "Vis hele himmelen"
 
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
 msgstr "Vis asteroider"
@@ -4535,6 +4595,10 @@ msgstr "Vis posisjon i tittellinje"
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Vis stjerner"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4711,6 +4775,10 @@ msgstr "SQL-databaseprogram er trolig ikke installert!"
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
 msgstr "SQLite-database"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4939,6 +5007,10 @@ msgstr "Tekstfilkatalog"
 #: u_translation.rstextsize
 msgid "Text size"
 msgstr "Tekststørrelse"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5220,6 +5292,10 @@ msgstr "Bruk en annen verdi for TT-UT"
 msgid "Use a preset colour scheme:"
 msgstr "Bruk et predefinert fargeskjema:"
 
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr ""
+
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(brukbar til å representere en fluks)"
@@ -5332,6 +5408,10 @@ msgstr "Nærhet"
 msgid "View"
 msgstr "Vis"
 
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr ""
+
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Vis horisont"
@@ -5347,6 +5427,10 @@ msgstr "Det virtuelle observatoriets katalog"
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "Sikt for observasjonsstedet"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
