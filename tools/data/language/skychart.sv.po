@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-03-29 14:54+0000\n"
-"PO-Revision-Date: 2013-03-17 20:11+0000\n"
+"POT-Creation-Date: 2013-04-14 14:46+0000\n"
+"PO-Revision-Date: 2013-04-03 12:02+0000\n"
 "Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-31 16:21+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -144,6 +144,10 @@ msgstr "Lägg till alternativa namn till indexet"
 msgid "Adjust colour brightness"
 msgstr "Justera färgintensitet"
 
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avancerat"
@@ -259,6 +263,14 @@ msgstr "Använd"
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
 msgstr "Använd ändringar på alla kartor"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -648,10 +660,6 @@ msgstr "Centrera på"
 msgid "Change drawing mode"
 msgstr "Ändra visningsalternativ"
 
-#: u_translation.rschangepictur
-msgid "Change the displayed picture"
-msgstr "Ändra visad bild"
-
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Ändring till denna inställning kommer att starta om programmet nu!"
@@ -852,6 +860,10 @@ msgstr "Inställningar"
 msgid "Configure the program"
 msgstr "Konfigurera programmet"
 
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
 msgstr "Bekräfta borttagning av fil: "
@@ -983,6 +995,10 @@ msgstr "Korrelerad"
 #: u_translation.rscouldnotload
 msgid "Could not load library "
 msgstr "Kunde inte ladda bibliotek "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr ""
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1480,6 +1496,10 @@ msgstr "Hämta"
 msgid "Download %s"
 msgstr "Hämta %s"
 
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
 msgstr "Hämta katalog"
@@ -1551,6 +1571,10 @@ msgstr "Val av drivrutin"
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "Makulera databas"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1855,6 +1879,10 @@ msgstr "Fältet är för stort! Max är %s"
 #: u_translation.rsfile
 msgid "File"
 msgstr "Arkiv"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2256,9 +2284,17 @@ msgstr "Ljus"
 msgid "Illuminated fraction"
 msgstr "Belyst del"
 
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr ""
+
 #: u_translation.rsimagedirecto
 msgid "Image directory"
 msgstr "Bildkatalog"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2576,6 +2612,10 @@ msgstr "Storleksgräns (bågminuter)"
 msgid "Line"
 msgstr "Linje"
 
+#: u_translation.rslinear
+msgid "Linear"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "Linje-mode"
@@ -2659,6 +2699,10 @@ msgstr "Platskod"
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Lås på %s"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -2792,6 +2836,10 @@ msgstr "Maximera"
 msgid "Maximum magnitude"
 msgstr "Maximum magnitud"
 
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
+
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
 msgstr "Max antal rader"
@@ -2862,7 +2910,7 @@ msgstr "Vintergatan"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr ""
+msgstr "miljon(er) km."
 
 #: u_translation.rsmin
 msgid "m"
@@ -3255,10 +3303,6 @@ msgstr "Objektets namn"
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr "Objektets position hittades i index, men ingen information i någon aktiv katalag"
-
-#: u_translation.rsobjects
-msgid "Objects"
-msgstr "Objekt"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3888,6 +3932,10 @@ msgstr "Riktiga bilder"
 msgid "REALLY park and disconnect the telescope?"
 msgstr "SÄKERT att teleskopet skall parkeras och kopplas från?"
 
+#: u_translation.rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
 msgstr "RealSky Norr"
@@ -4184,6 +4232,14 @@ msgstr "Spara aktiv karta"
 msgid "Save to file"
 msgstr "Spara till fil"
 
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr ""
+
 #: u_translation.rsscandirector
 msgid "Scan directory"
 msgstr "Skanna katalogen"
@@ -4392,6 +4448,10 @@ msgstr "T"
 msgid "Show all sky"
 msgstr "Visa hela himlen"
 
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
 msgstr "Visa asteroider"
@@ -4535,6 +4595,10 @@ msgstr "Visa position i huvudfältet"
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Visa stjärnor"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4711,6 +4775,10 @@ msgstr "SQL-databasprogram är förmodligen inte installerat!"
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
 msgstr "SQLite databas"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4939,6 +5007,10 @@ msgstr "Textbaserad katalog"
 #: u_translation.rstextsize
 msgid "Text size"
 msgstr "Textstorlek"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5220,6 +5292,10 @@ msgstr "Använd ett annat värde för TT - UT"
 msgid "Use a preset colour scheme:"
 msgstr "Använd ett fördefinierat färgschema:"
 
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr ""
+
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
 msgstr "(användbart för att representera ett flöde)"
@@ -5332,6 +5408,10 @@ msgstr "Omgivning"
 msgid "View"
 msgstr "Visningsalternativ"
 
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr ""
+
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Visa horisonten"
@@ -5347,6 +5427,10 @@ msgstr "Katalog för Virtuellt observatorium"
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "Synlighet från ditt observatorium"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
@@ -5378,11 +5462,11 @@ msgstr "Varning! Lågupplösningsläge. Använd PostScript istället och skriv u
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "Varning! Vissa asteroidelement är föråldrade. Läs in element som är giltiga för det aktuella kartdatumet."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "Varning! Vissa kometelement är föråldrade. Läs in element som är giltiga för det aktuella kartdatumet."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"

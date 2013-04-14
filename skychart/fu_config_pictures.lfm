@@ -645,7 +645,7 @@ object f_config_pictures: Tf_config_pictures
             end          
             item
               Title.Caption = 'Count'
-              Width = 50
+              Width = 55
             end>
           DefaultColWidth = 24
           DefaultRowHeight = 24

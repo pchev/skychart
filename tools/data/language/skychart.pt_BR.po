@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-29 14:54+0000\n"
-"PO-Revision-Date: 2013-03-18 15:01+0000\n"
-"Last-Translator: Angelo Rober Pulici <Unknown>\n"
+"POT-Creation-Date: 2013-04-14 14:46+0000\n"
+"PO-Revision-Date: 2013-04-14 14:03+0000\n"
+"Last-Translator: Neliton Pereira Jr. <nelitonpjr@gmail.com>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-31 16:20+0000\n"
-"X-Generator: Launchpad (build 16546)\n"
+"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
+"X-Generator: Launchpad (build 16564)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -146,6 +146,10 @@ msgstr "Adicionar nomes aternativos para o índice"
 msgid "Adjust colour brightness"
 msgstr "Ajuste brilho de cor"
 
+#: u_translation.rsadjustthevis
+msgid "Adjust the visualisation scale"
+msgstr ""
+
 #: u_translation.rsadvanced
 msgid "Advanced"
 msgstr "Avançado"
@@ -208,7 +212,7 @@ msgstr "Alt/AZ Coord."
 
 #: u_translation.rsaltazcoordin
 msgid "Alt-Az coordinates"
-msgstr "Alt-Az Coordenada"
+msgstr "Coordenada Alt-Az"
 
 #: u_translation.rsaltazmount
 msgid "Alt/Az mount"
@@ -261,6 +265,14 @@ msgstr "Aplicar"
 #: u_translation.rsapplychanget
 msgid "Apply changes to all charts"
 msgstr "Aplicar alteração a toda carta"
+
+#: u_translation.rsarchivethisi
+msgid "Archive this image?"
+msgstr ""
+
+#: u_translation.rsarchivetodir
+msgid "Archive to directory:"
+msgstr ""
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -352,7 +364,7 @@ msgstr "Reinício Automático"
 
 #: u_translation.rsautorefreshe
 msgid "Auto-refresh every "
-msgstr "Reinicie automaticamente em "
+msgstr "Atualização automática em "
 
 #: u_translation.rsauxiliaryfil
 msgid "Auxiliary files"
@@ -600,7 +612,7 @@ msgstr "Céu Profundo CdC"
 
 #: u_translation.rscdcnebulaeca
 msgid "CdC deep sky catalogs and settings"
-msgstr "Inserindo Catálogo do Céu Profundo CdC"
+msgstr "Catálogos de céu profundo do CdC e configurações"
 
 #: u_translation.rscdcobsoletec
 msgid "Obsolete CdC catalogs and settings (you can still use them)"
@@ -612,7 +624,7 @@ msgstr "Estrelas CdC"
 
 #: u_translation.rscdcstarscata
 msgid "CdC star catalogs and settings"
-msgstr "Inserindo Catálogo de Estrelas CdC"
+msgstr "Catálogos de estrelas do CdC e configurações"
 
 #: u_translation.rscdctranslator
 msgid "Patrick Chevalley, Marc Fokker"
@@ -650,10 +662,6 @@ msgstr "Centro"
 msgid "Change drawing mode"
 msgstr "Alteração do modo desenho"
 
-#: u_translation.rschangepictur
-msgid "Change the displayed picture"
-msgstr "Exibição das imagens alteradas"
-
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Mudar para esta configuração reiniciará o programa agora!"
@@ -688,7 +696,7 @@ msgstr "Cartas"
 
 #: u_translation.rschartsetting
 msgid "Chart settings"
-msgstr "Inserindo a Carta"
+msgstr "Configurações da carta"
 
 #: u_translation.rschart_
 msgid "Chart_"
@@ -854,6 +862,10 @@ msgstr "Configure"
 msgid "Configure the program"
 msgstr "Configurar o programa"
 
+#: u_translation.rsconfirmation
+msgid "Confirmation prompt before to save a file."
+msgstr ""
+
 #: u_translation.rsconfirmfiled
 msgid "Confirm file delete: "
 msgstr "Confirmar exclusão de arquivo: "
@@ -985,6 +997,10 @@ msgstr "Correlacionado"
 #: u_translation.rscouldnotload
 msgid "Could not load library "
 msgstr "Não carregou a biblioteca "
+
+#: u_translation.rscount
+msgid "Count"
+msgstr ""
 
 #: u_translation.rscountrytimez
 msgid "Country timezone"
@@ -1483,6 +1499,10 @@ msgstr "Baixar"
 msgid "Download %s"
 msgstr "Carrege %s"
 
+#: u_translation.rsdownloadarch
+msgid "Download archive"
+msgstr ""
+
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
 msgstr "Baixar catálogo"
@@ -1554,6 +1574,10 @@ msgstr "Selecionar Driver"
 #: u_translation.rsdropdatabase
 msgid "Drop database"
 msgstr "Derrube o Banco de dados"
+
+#: u_translation.rsdsocatalogpi
+msgid "DSO Catalog pictures"
+msgstr ""
 
 #: u_translation.rsdssrealsky
 msgid "DSS RealSky"
@@ -1761,7 +1785,7 @@ msgstr "Crepúsculo da noite"
 
 #: u_translation.rsevery
 msgid "every "
-msgstr "cada "
+msgstr "a cada "
 
 #: u_translation.rseverypositio
 msgid "Every position"
@@ -1833,7 +1857,7 @@ msgstr "Número do Campo"
 
 #: u_translation.rsfieldofvisio
 msgid "Field of vision"
-msgstr "Visão do Campo"
+msgstr "Campo de visão"
 
 #: u_translation.rsfieldofvisio2
 msgid "Field of vision too wide for ARC projection, hiding the object below the horizon"
@@ -1841,11 +1865,11 @@ msgstr "Campo de visão muito grande para a projeção ARC, ocultando o objeto a
 
 #: u_translation.rsfieldofvisio3
 msgid "Field of vision settings"
-msgstr "Configurando a Visão do Campo"
+msgstr "Configuração do campo de visão"
 
 #: u_translation.rsfieldofvisio5
 msgid "Field of vision number :"
-msgstr "Visão do Campo número :"
+msgstr "Número do campo:"
 
 #: u_translation.rsfieldrotatio
 msgid "Field Rotation"
@@ -1858,6 +1882,10 @@ msgstr "Campo vasto! Máximo é %s"
 #: u_translation.rsfile
 msgid "File"
 msgstr "Arquivo"
+
+#: u_translation.rsfilenamewith
+msgid "Filename without path or extention"
+msgstr ""
 
 #: u_translation.rsfilenotfound
 msgid "File not found!"
@@ -2259,9 +2287,17 @@ msgstr "Illum."
 msgid "Illuminated fraction"
 msgstr "Fração Iluminada"
 
+#: u_translation.rsimagearchive
+msgid "Image archive"
+msgstr ""
+
 #: u_translation.rsimagedirecto
 msgid "Image directory"
 msgstr "Diretório de Imagem"
+
+#: u_translation.rsimagelist
+msgid "Image list"
+msgstr ""
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -2493,7 +2529,7 @@ msgstr "Paisagem"
 
 #: u_translation.rslanguage
 msgid "Internal language"
-msgstr "Português Brasileiro"
+msgstr "Idioma interno"
 
 #: u_translation.rslanguage2
 msgid "Language"
@@ -2579,6 +2615,10 @@ msgstr "Tamanho Limite (arcominutos) :"
 msgid "Line"
 msgstr "Linha"
 
+#: u_translation.rslinear
+msgid "Linear"
+msgstr ""
+
 #: u_translation.rslinemode
 msgid "Line mode"
 msgstr "Modo da Linha"
@@ -2662,6 +2702,10 @@ msgstr "Código de localização"
 #: u_translation.rslockon
 msgid "Lock on %s"
 msgstr "Bloquear em %s"
+
+#: u_translation.rslog
+msgid "Log"
+msgstr ""
 
 #: u_translation.rslogarithmics
 msgid "Logarithmic scale"
@@ -2795,6 +2839,10 @@ msgstr "Maximizar"
 msgid "Maximum magnitude"
 msgstr "Magnitude máxima"
 
+#: u_translation.rsmaximumnumbe
+msgid "Maximum number of image to show simultaneously"
+msgstr ""
+
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
 msgstr "Máximo de linhas"
@@ -2865,7 +2913,7 @@ msgstr "Via Láctea"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr ""
+msgstr "milhões de Km."
 
 #: u_translation.rsmin
 msgid "m"
@@ -3089,7 +3137,7 @@ msgstr "Tecla de Visão Noturna"
 
 #: u_translation.rsnightvisionc
 msgid "Night vision color"
-msgstr "Cor da Visão Noturna"
+msgstr ""
 
 #: u_translation.rsno
 msgid "No."
@@ -3258,10 +3306,6 @@ msgstr "Nome do objeto"
 #: u_translation.rsobjectpositi
 msgid "Object position found in index, but no detail found in any active catalog"
 msgstr "Posição do objeto encontrado no índice, mas nenhum detalhe encontrado em qualquer catálogo ativo"
-
-#: u_translation.rsobjects
-msgid "Objects"
-msgstr "Objetos"
 
 #: u_translation.rsobjectsizeun
 msgid "Object size unit"
@@ -3891,6 +3935,10 @@ msgstr "Imagens Realísticas"
 msgid "REALLY park and disconnect the telescope?"
 msgstr "Estacionar e desconectar o telescópio?"
 
+#: u_translation.rsrealskycdrom
+msgid "Realsky CD-rom cannot be used on a 64 bit system."
+msgstr ""
+
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
 msgstr "RealSky Norte"
@@ -4025,11 +4073,11 @@ msgstr "Restaurar"
 
 #: u_translation.rsresetalllabe
 msgid "Reset all labels"
-msgstr "Restaurar Todas as Etiquetas"
+msgstr "Reiniciar todas as etiquetas"
 
 #: u_translation.rsresetchart
 msgid "Reset chart"
-msgstr "Restaurar a Carta"
+msgstr "Reiniciar carta"
 
 #: u_translation.rsresetchartan
 msgid "Reset chart and options"
@@ -4037,15 +4085,15 @@ msgstr "Reiniciar carta e opções"
 
 #: u_translation.rsresetinitial
 msgid "Reset initial default and restart"
-msgstr "Redefinir o padrão inicial e reinicie"
+msgstr "Redefinir o padrão inicial e reiniciar"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr "Restaurar rotação"
+msgstr "Reiniciar rotação"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
-msgstr "Voltar para última vez que a carta foi salva"
+msgstr "Restaurar a última vez que a carta foi salva"
 
 #: u_translation.rsresolution
 msgid "Resolution:"
@@ -4186,6 +4234,14 @@ msgstr "Salvar a Carta Atual"
 #: u_translation.rssavetofile
 msgid "Save to file"
 msgstr "Salvar para o Arquivo"
+
+#: u_translation.rsscaled
+msgid "Scaled"
+msgstr ""
+
+#: u_translation.rsscanarchives
+msgid "Scan archives"
+msgstr ""
 
 #: u_translation.rsscandirector
 msgid "Scan directory"
@@ -4395,6 +4451,10 @@ msgstr "H"
 msgid "Show all sky"
 msgstr "Mostrar Todo o Céu"
 
+#: u_translation.rsshowasinglep
+msgid "Show a single picture on the map."
+msgstr ""
+
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
 msgstr "Mostrar Asteroides"
@@ -4538,6 +4598,10 @@ msgstr "Mostrar a posição na barra de título"
 #: u_translation.rsshowstars
 msgid "Show stars"
 msgstr "Mostrar Estrelas"
+
+#: u_translation.rsshowtheimage
+msgid "Show the images on the map"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4714,6 +4778,10 @@ msgstr "Software do Banco de Dados SQL provavelmente não está instalado!"
 #: u_translation.rssqlitedataba
 msgid "SQLite database"
 msgstr "Banco de Dados Sqlite"
+
+#: u_translation.rssqrt
+msgid "Sqrt"
+msgstr ""
 
 #: u_translation.rssquare
 msgid "Square"
@@ -4942,6 +5010,10 @@ msgstr "Catálogo do arquivo texto"
 #: u_translation.rstextsize
 msgid "Text size"
 msgstr "Tamanho do Texto"
+
+#: u_translation.rstheimagedire
+msgid "The image directory contain sub-directories with the same name as the DSO catalog. Each sub-directory contain FITS files with the name of the catalog objects. This images are used to replace the DSO symbole on the map"
+msgstr ""
 
 #: u_translation.rstheinterface
 msgid "The interface is either not connected or not initialized"
@@ -5221,7 +5293,11 @@ msgstr "Use outro valor TT-UT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
-msgstr "Usar um ajuste de cor :"
+msgstr "Usar esquema de cor pré-definido"
+
+#: u_translation.rsuseasimplepo
+msgid "Use a simple pointer"
+msgstr ""
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5335,6 +5411,10 @@ msgstr "Vizinhança"
 msgid "View"
 msgstr "Visualizar"
 
+#: u_translation.rsviewheader
+msgid "View header"
+msgstr ""
+
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Vista do Horizonte"
@@ -5350,6 +5430,10 @@ msgstr "Catálogo do Observatório Virtual"
 #: u_translation.rsvisibilityfo
 msgid "Visibility for your observatory"
 msgstr "Visibilidade para o observatório"
+
+#: u_translation.rsvisualisatio
+msgid "Visualisation scale"
+msgstr ""
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
@@ -5381,11 +5465,11 @@ msgstr "Atenção! Modo de baixa resolução. Use PostScript em vez disso e impr
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "Aviso! Alguns elementos de asteroides estão desatualizados. Carregue elemento válido para data do mapa atual."
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "Aviso! Alguns elementos de cometas estão desatualizados. Carregue elemento válido para data do mapa atual."
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
