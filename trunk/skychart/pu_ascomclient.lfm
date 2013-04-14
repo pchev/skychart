@@ -1,7 +1,7 @@
 object pop_scope: Tpop_scope
-  Left = 122
+  Left = 216
   Height = 467
-  Top = 141
+  Top = 193
   Width = 305
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -13,8 +13,8 @@ object pop_scope: Tpop_scope
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  Position = poDefault
-  LCLVersion = '1.0.1.3'
+  Position = poDefaultPosOnly
+  LCLVersion = '1.0.8.0'
   object GroupBox3: TGroupBox
     Left = 8
     Height = 104
