@@ -191,6 +191,11 @@ object f_chart: Tf_chart
       Caption = 'switchstar'
       OnExecute = switchstarExecute
     end
+    object imglist: TAction
+      Category = 'images'
+      Caption = 'imglist'
+      OnExecute = imglistExecute
+    end
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
@@ -333,6 +338,9 @@ object f_chart: Tf_chart
         Caption = 'TrackTelescope'
         OnClick = TrackTelescopeClick
       end
+    end
+    object ImgList1: TMenuItem
+      Action = imglist
     end
     object N3: TMenuItem
       Caption = '-'

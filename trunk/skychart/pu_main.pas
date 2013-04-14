@@ -47,6 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuListImg: TMenuItem;
     PlanetInfo: TMenuItem;
     SetupCalendar: TAction;
     EditTimeVal: TEdit;
@@ -476,6 +477,7 @@ type
     procedure MenuChartLegendClick(Sender: TObject);
     procedure MenuItem33Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
+    procedure MenuListImgClick(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PlanetInfoClick(Sender: TObject);
@@ -667,7 +669,7 @@ type
     ConfigCatalog: Tf_configcatalog;
     ConfigCalendar: Tf_configcalendar;
     cryptedpwd,basecaption,kioskpwd :string;
-    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose : Boolean;
+    NeedRestart,NeedToInitializeDB,ConfirmSaveConfig,InitOK,RestoreState,ForceClose,SaveBlinkBG : Boolean;
     InitialChartNum, Animcount: integer;
     AutoRefreshLock: Boolean;
     AnimationEnabled: Boolean;
@@ -775,7 +777,7 @@ type
     procedure showdetailinfo(chart:string;ra,dec:double;cat,nm,desc:string);
     procedure CenterFindObj(chart:string);
     procedure NeighborObj(chart:string);
-    procedure ConnectDB;
+    procedure ConnectDB(updversion:string='');
     procedure ImageSetFocus(Sender: TObject);
     procedure ListInfo(buf,msg:string);
     function  TCPClientConnected: boolean;
@@ -792,6 +794,7 @@ type
     Procedure InitDS2000;
     function PrepareAsteroid(jdt:double; msg:Tstrings):boolean;
     procedure ChartMove(Sender: TObject);
+    procedure ImageSetup(Sender: TObject);
     procedure GetActiveChart(var active_chart: string);
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
@@ -894,6 +897,7 @@ begin
   Child.onShowTitleMessage:=SetTitleMessage;
   Child.OnUpdateBtn:=UpdateBtn;
   Child.OnChartMove:=ChartMove;
+  Child.OnImageSetup:=ImageSetup;
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
@@ -1273,7 +1277,7 @@ if VerboseMsg then
  catalog.LoadConstL(cfgm.ConstLfile);
  catalog.LoadConstB(cfgm.ConstBfile);
  catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
- catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
+ if def_cfgsc.ShowHorizonPicture then catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
  catalog.LoadStarName(slash(appdir)+slash('data')+slash('common_names'),Lang);
  f_search.cfgshr:=catalog.cfgshr;
  f_search.showpluto:=def_cfgsc.ShowPluto;
@@ -1282,7 +1286,7 @@ if VerboseMsg then
  f_search.Init;
 if VerboseMsg then
  WriteTrace('Connect DB');
- ConnectDB;
+ ConnectDB(Config_Version);
 if VerboseMsg then
  WriteTrace('Cursor');
  if (not isWin98) and fileexists(slash(appdir)+slash('data')+slash('Themes')+slash('default')+'retic.cur') then begin
@@ -1379,7 +1383,7 @@ if VerboseMsg then
  WriteTrace('Add signal handler');
 CdcSigAction(@RecvSignal);
 {$endif}
-if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages=0) then begin
+if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages('SAC')=0) then begin
   if VerboseMsg then
    WriteTrace('Init picture DB');
   SetupPicturesPage(0,1);
@@ -1519,6 +1523,11 @@ end;
 procedure Tf_main.MenuItem7Click(Sender: TObject);
 begin
   SetupPicturesPage(1);
+end;
+
+procedure Tf_main.MenuListImgClick(Sender: TObject);
+begin
+  with MultiFrame1.ActiveObject as Tf_chart do imglist.execute;
 end;
 
 procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);
@@ -1748,6 +1757,9 @@ if not directoryexists(TempDir) then forcedirectories(TempDir);
 SatDir:=slash(privatedir)+'satellites';
 if not directoryexists(SatDir) then CreateDir(SatDir);
 if not directoryexists(SatDir) then forcedirectories(SatDir);
+ArchiveDir:=slash(PrivateDir)+'Archive';
+if not directoryexists(ArchiveDir) then CreateDir(ArchiveDir);
+if not directoryexists(ArchiveDir) then forcedirectories(ArchiveDir);
 if VerboseMsg then
  debugln('appdir='+appdir);
 // Be sur the data directory exists
@@ -1860,6 +1872,7 @@ NeedRestart:=false;
 showsplash:=true;
 ConfirmSaveConfig:=true;
 ImageListCount:=ImageNormal.Count;
+MaxThreadCount:=GetThreadCount;
 DisplayIs32bpp:=true;
 isWin98:=false;
 isWOW64:=false;
@@ -2018,7 +2031,7 @@ def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
 
 // Hide unfinished config calendar
 { TODO : config calendar }
-MenuItem33.Visible:=false;
+//MenuItem33.Visible:=false;
 
 except
   on E: Exception do begin
@@ -2697,10 +2710,10 @@ end;
 procedure Tf_main.ShowBackgroundImageExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
-   if sc.cfgsc.ShowBackgroundImage then
+   if sc.cfgsc.ShowImageList then
       cmd_SetBGimage('OFF')
    else
-      cmd_SetBGimage('ON');
+      cmd_SetBGimage('ON',false);
    if VerboseMsg then WriteTrace('ShowBackgroundImageExecute');
 end;
 end;
@@ -2709,8 +2722,7 @@ procedure Tf_main.DSSImageExecute(Sender: TObject);
 begin
 if (MultiFrame1.ActiveObject is Tf_chart) and (Fits.dbconnected)
   then with MultiFrame1.ActiveObject as Tf_chart do begin
-      if VerboseMsg then
-       WriteTrace('DSSImageExecute');
+      if VerboseMsg then WriteTrace('DSSImageExecute');
       cmd_PDSS('','','','');
   end;
 end;
@@ -2721,14 +2733,15 @@ if (MultiFrame1.ActiveObject is Tf_chart)
   then with MultiFrame1.ActiveObject as Tf_chart do begin
      if BlinkTimer.enabled then begin
         BlinkTimer.enabled:=false;
-        sc.cfgsc.ShowBackgroundImage:=true;
-if VerboseMsg then
- WriteTrace('BlinkImageExecute');
+        sc.cfgsc.ShowImageList:=true;
+        sc.cfgsc.ShowBackgroundImage:=SaveBlinkBG;
+        if VerboseMsg then WriteTrace('BlinkImageExecute');
         Refresh;
      end else begin
-        if sc.cfgsc.ShowBackgroundImage then
-           BlinkTimer.enabled:=true
-        else begin
+        if sc.cfgsc.ShowImageList then begin
+           SaveBlinkBG := sc.cfgsc.ShowBackgroundImage;
+           BlinkTimer.enabled:=true;
+        end else begin
            BlinkTimer.enabled:=false;
            ToolButtonBlink.Down:=false;
         end;
@@ -3634,6 +3647,7 @@ ConfigPictures.f_config_pictures1.csc.Assign(def_cfgsc);
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
    ConfigPictures.f_config_pictures1.csc.Assign(sc.cfgsc);
    ConfigPictures.f_config_pictures1.cplot.Assign(sc.plot.cfgplot);
+   sc.bgsettingchange:=true;
 end;
 cfgm.prgdir:=appdir;
 cfgm.persdir:=privatedir;
@@ -4002,7 +4016,7 @@ begin
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
-    catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
+    if csc.ShowHorizonPicture then catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
     f_search.init;
     if dbchange then ConnectDB;
     if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
@@ -4440,10 +4454,15 @@ def_cfgplot.DSOColorFillGL:=true;
 def_cfgplot.DSOColorFillNE:=true;
 def_cfgplot.MinDsoSize:=3;
 def_cfgsc.BGalpha:=200;
+def_cfgsc.BGitt:=ittramp;
 def_cfgsc.BGmin_sigma:=0;
 def_cfgsc.BGmax_sigma:=0;
 def_cfgsc.NEBmin_sigma:=0;
 def_cfgsc.NEBmax_sigma:=0;
+def_cfgsc.MaxArchiveImg:=5;
+for i:=1 to MaxArchiveDir do def_cfgsc.ArchiveDir[i]:='';
+for i:=1 to MaxArchiveDir do def_cfgsc.ArchiveDirActive[i]:=false;
+def_cfgsc.ArchiveDir[1]:=ArchiveDir;
 def_cfgsc.winx:=clientwidth;
 def_cfgsc.winy:=clientheight;
 def_cfgsc.UseSystemTime:=true;
@@ -4549,6 +4568,7 @@ def_cfgsc.ShowAsteroid:=true;
 def_cfgsc.DSLforcecolor:=false;
 def_cfgsc.DSLcolor:=0;
 def_cfgsc.ShowImages:=true;
+def_cfgsc.ShowImageList:=false;
 def_cfgsc.ShowBackgroundImage:=false;
 def_cfgsc.BackgroundImage:='';
 def_cfgsc.AstSymbol:=0;
@@ -4773,6 +4793,7 @@ catalog.cfgshr.FieldNum[8]:=180;
 catalog.cfgshr.FieldNum[9]:=310;
 catalog.cfgshr.FieldNum[10]:=360;
 catalog.cfgshr.ShowCRose:=false;
+catalog.cfgshr.SimplePointer:=false;
 catalog.cfgshr.CRoseSz:=80;
 catalog.cfgshr.DegreeGridSpacing[0]:=5/60;
 catalog.cfgshr.DegreeGridSpacing[1]:=10/60;
@@ -5038,6 +5059,7 @@ end;
 try
 section:='grid';
 catalog.cfgshr.ShowCRose:=ReadBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
+catalog.cfgshr.SimplePointer:=ReadBool(section,'SimplePointer',catalog.cfgshr.SimplePointer);
 catalog.cfgshr.CRoseSz:=ReadInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do catalog.cfgshr.HourGridSpacing[i]:=ReadFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do begin
@@ -5143,6 +5165,7 @@ csc.ShowImages:=ReadBool(section,'ShowImages',csc.ShowImages);
 csc.showstars:=ReadBool(section,'ShowStars',csc.showstars);
 csc.shownebulae:=ReadBool(section,'ShowNebulae',csc.shownebulae);
 csc.showline:=ReadBool(section,'ShowLine',csc.showline);
+csc.ShowImageList:=ReadBool(section,'ShowImageList',csc.ShowImageList);
 csc.ShowBackgroundImage:=ReadBool(section,'ShowBackgroundImage',csc.ShowBackgroundImage);
 buf:=ReadString(section,'BackgroundImage',csc.BackgroundImage);
 if (ConfigPrivateDir='')or(ConfigPrivateDir=PrivateDir)or(pos(ConfigPrivateDir,buf)=0) then
@@ -5176,10 +5199,14 @@ csc.StyleConstB:=TPenStyle(ReadInteger(section,'StyleConstB',ord(csc.StyleConstB
 csc.StyleEcliptic:=TPenStyle(ReadInteger(section,'StyleEcliptic',ord(csc.StyleEcliptic)));
 csc.StyleGalEq:=TPenStyle(ReadInteger(section,'StyleGalEq',ord(csc.StyleGalEq)));
 csc.BGalpha:=ReadInteger(section,'BGalpha',csc.BGalpha);
+csc.BGitt:=Titt(ReadInteger(section,'BGitt',ord(csc.BGitt)));
 csc.BGmin_sigma:=ReadFloat(section,'BGmin_sigma',csc.BGmin_sigma);
 csc.BGmax_sigma:=ReadFloat(section,'BGmax_sigma',csc.BGmax_sigma);
 csc.NEBmin_sigma:=ReadFloat(section,'NEBmin_sigma',csc.NEBmin_sigma);
 csc.NEBmax_sigma:=ReadFloat(section,'NEBmax_sigma',csc.NEBmax_sigma);
+csc.MaxArchiveImg:=ReadInteger(section,'MaxArchiveImg',csc.MaxArchiveImg);
+for i:=1 to MaxArchiveDir do csc.ArchiveDir[i]:=ReadString(section,'ArchiveDir'+inttostr(i),csc.ArchiveDir[i]);
+for i:=1 to MaxArchiveDir do csc.ArchiveDirActive[i]:=ReadBool(section,'ArchiveDirActive'+inttostr(i),csc.ArchiveDirActive[i]);
 csc.Simnb:=ReadInteger(section,'Simnb',csc.Simnb);
 csc.SimLabel:=ReadInteger(section,'SimLabel',csc.SimLabel);
 if csc.SimLabel>3 then csc.SimLabel:=3;
@@ -5550,6 +5577,9 @@ f_getdss.cfgdss.dsssouth:=ReadBool(section,'dsssouth',false);
 f_getdss.cfgdss.dss102:=ReadBool(section,'dss102',false);
 f_getdss.cfgdss.dsssampling:=ReadBool(section,'dsssampling',true);
 f_getdss.cfgdss.dssplateprompt:=ReadBool(section,'dssplateprompt',true);
+f_getdss.cfgdss.dssarchive:=ReadBool(section,'dssarchive',false);
+f_getdss.cfgdss.dssarchiveprompt:=ReadBool(section,'dssarchiveprompt',true);
+f_getdss.cfgdss.dssarchivedir:=ReadString(section,'dssarchivedir',ArchiveDir);
 f_getdss.cfgdss.dssmaxsize:=ReadInteger(section,'dssmaxsize',2048);
 f_getdss.cfgdss.dssdir:=ReadString(section,'dssdir',slash('cat')+'RealSky');
 f_getdss.cfgdss.dssdrive:=ReadString(section,'dssdrive',default_dssdrive);
@@ -5862,6 +5892,7 @@ for i:=1 to numlabtype do begin
 end;
 section:='grid';
 WriteBool(section,'ShowCRose',catalog.cfgshr.ShowCRose);
+WriteBool(section,'SimplePointer',catalog.cfgshr.SimplePointer);
 WriteInteger(section,'CRoseSz',catalog.cfgshr.CRoseSz);
 for i:=0 to maxfield do WriteFloat(section,'HourGridSpacing'+inttostr(i),catalog.cfgshr.HourGridSpacing[i] );
 for i:=0 to maxfield do WriteFloat(section,'DegreeGridSpacing'+inttostr(i),catalog.cfgshr.DegreeGridSpacing[i] );
@@ -5950,6 +5981,7 @@ WriteBool(section,'ShowImages',csc.ShowImages);
 WriteBool(section,'ShowStars',csc.showstars);
 WriteBool(section,'ShowNebulae',csc.shownebulae);
 WriteBool(section,'ShowLine',csc.showline);
+WriteBool(section,'ShowImageList',csc.ShowImageList);
 WriteBool(section,'ShowBackgroundImage',csc.ShowBackgroundImage);
 WriteString(section,'BackgroundImage',csc.BackgroundImage);
 WriteInteger(section,'AstSymbol',csc.AstSymbol);
@@ -5977,10 +6009,14 @@ WriteInteger(section,'StyleConstB',ord(csc.StyleConstB));
 WriteInteger(section,'StyleEcliptic',ord(csc.StyleEcliptic));
 WriteInteger(section,'StyleGalEq',ord(csc.StyleGalEq));
 WriteInteger(section,'BGalpha',csc.BGalpha);
+WriteInteger(section,'BGitt',ord(csc.BGitt));
 WriteFloat(section,'BGmin_sigma',csc.BGmin_sigma);
 WriteFloat(section,'BGmax_sigma',csc.BGmax_sigma);
 WriteFloat(section,'NEBmin_sigma',csc.NEBmin_sigma);
 WriteFloat(section,'NEBmax_sigma',csc.NEBmax_sigma);
+WriteInteger(section,'MaxArchiveImg',csc.MaxArchiveImg);
+for i:=1 to MaxArchiveDir do WriteString(section,'ArchiveDir'+inttostr(i),csc.ArchiveDir[i]);
+for i:=1 to MaxArchiveDir do WriteBool(section,'ArchiveDirActive'+inttostr(i),csc.ArchiveDirActive[i]);
 WriteInteger(section,'Simnb',csc.Simnb);
 WriteInteger(section,'SimLabel',csc.SimLabel);
 WriteBool(section,'SimNameLabel',csc.SimNameLabel);
@@ -6231,6 +6267,9 @@ WriteBool(section,'dsssouth',f_getdss.cfgdss.dsssouth);
 WriteBool(section,'dss102',f_getdss.cfgdss.dss102);
 WriteBool(section,'dsssampling',f_getdss.cfgdss.dsssampling);
 WriteBool(section,'dssplateprompt',f_getdss.cfgdss.dssplateprompt);
+WriteBool(section,'dssarchive',f_getdss.cfgdss.dssarchive);
+WriteBool(section,'dssarchiveprompt',f_getdss.cfgdss.dssarchiveprompt);
+WriteString(section,'dssarchivedir',f_getdss.cfgdss.dssarchivedir);
 WriteInteger(section,'dssmaxsize',f_getdss.cfgdss.dssmaxsize);
 WriteString(section,'dssdir',f_getdss.cfgdss.dssdir);
 WriteString(section,'dssdrive',f_getdss.cfgdss.dssdrive);
@@ -6417,7 +6456,7 @@ menublinkimage.Caption:='&'+rsBlinkingPict;
 PlanetInfo.Caption:=rsSolarSystemI;
 ToolButtonDSS.hint:=rsGetDSSImage;
 MenuDSS.Caption:='&'+rsGetDSSImage+Ellipsis;
-ToolButtonShowBackgroundImage.hint:=rsChangePictur;
+ToolButtonShowBackgroundImage.hint:=rsShowTheImage;
 ToolButtonShowPlanets.hint:=rsShowPlanets;
 ToolButtonShowAsteroids.hint:=rsShowAsteroid;
 ToolButtonShowComets.hint:=rsShowComets;
@@ -6566,6 +6605,7 @@ MenuLessNeb.Caption:='&'+rsLessNebulae;
 MenuStarNum.Caption:='&'+rsNumberOfStar;
 MenuNebNum.Caption:='&'+rsNumberOfNebu;
 ResetAllLabels1.caption:='&'+rsResetAllLabe;
+MenuListImg.Caption:='&'+rsImageList;
 quicksearch.Hint:=rsSearch;
 TimeVal.Hint:=rsTime;
 TimeU.Hint:=rsTimeUnits;
@@ -6757,7 +6797,9 @@ if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
     ToolButtonUObj.Down:=catalog.cfgcat.nebcatdef[uneb-BaseNeb];
     toolbuttonShowPictures.down:=sc.cfgsc.ShowImages;
     ShowPictures1.checked:=sc.cfgsc.ShowImages;
-    ToolButtonShowBackgroundImage.down:=sc.cfgsc.ShowBackgroundImage;
+    ToolButtonShowBackgroundImage.down:=sc.cfgsc.ShowImageList;
+    imglist.Enabled:=sc.cfgsc.ShowImageList;
+    MenuListImg.Enabled:=sc.cfgsc.ShowImageList;
     toolbuttonShowLines.down:=sc.cfgsc.ShowLine;
     ShowLines1.checked:=sc.cfgsc.ShowLine;
     toolbuttonShowAsteroids.down:=sc.cfgsc.ShowAsteroid;
@@ -6873,6 +6915,11 @@ if MultiFrame1.ActiveObject=sender then begin   // active chart refresh
 //  application.processmessages;
   if cfgm.SyncChart then SyncChild;
 end;
+end;
+
+procedure Tf_main.ImageSetup(Sender: TObject);
+begin
+SetupPicturesPage(3);
 end;
 
 Function Tf_main.NewChart(cname:string):string;
@@ -7414,7 +7461,7 @@ for i:=0 to Params.Count-1 do begin
 end;
 end;
 
-procedure Tf_main.ConnectDB;
+procedure Tf_main.ConnectDB(updversion:string='');
 var dbpath:string;
 begin
 try
@@ -7430,7 +7477,7 @@ try
     if cdcdb.CheckDB then begin
          if VerboseMsg then
           WriteTrace('DB connected');
-          if not NeedToInitializeDB then cdcdb.CheckForUpgrade(f_info.ProgressMemo);
+          if not NeedToInitializeDB then cdcdb.CheckForUpgrade(f_info.ProgressMemo,updversion);
           planet.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           Fits.ConnectDB(cfgm.dbhost,cfgm.db,cfgm.dbuser,cfgm.dbpass,cfgm.dbport);
           SetLpanel1(Format(rsConnectedToS, [cfgm.db]));

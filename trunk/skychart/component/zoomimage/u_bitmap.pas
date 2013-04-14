@@ -124,7 +124,7 @@ begin
 //diff size bitmaps have diff resolution of angle, ie r*sin(theta)<1 pixel
 //use the small angle approx: sin(theta) ~~ theta   //11/7/00
 // NO! we just compute the real sintheta above! and 6.28 is a small angle ! // pch 07/15/2005 
-  if (abs(sinTheta*MAX( OriginalIntfImg.width,OriginalIntfImg.height)) ) > 1 then
+  if ((abs(sinTheta*MAX( OriginalIntfImg.width,OriginalIntfImg.height)) )>1)or((theta>0.1)and(theta<6.1)) then
   begin//non-zero rotation
 
 //set output bitmap formats; we do not assume a fixed format or size 1/6/00

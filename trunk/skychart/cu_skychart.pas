@@ -57,10 +57,12 @@ Tskychart = class (TComponent)
     fsat: textfile;
     constlabelindex:integer;
     bgcra,bgcde,bgfov,bgmis,bgmas,bgrot: double;
+    bgvalid: boolean;
     bgw,bgh,bgproj,bgflipx,bgflipy: integer;
+    nebmagmin,nebmagmax: single;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
-    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true);
+    procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
     procedure EditLabelPos(lnum,x,y: integer;moderadec:boolean);
     procedure EditLabelTxt(lnum,x,y: integer;mode:boolean);
     procedure DefaultLabel(lnum: integer);
@@ -75,6 +77,7 @@ Tskychart = class (TComponent)
     dsopos: array[1..maxlabels] of TPoint;
     numdsopos: integer;
     bgbmp:Tbitmap;
+    bgsettingchange: Boolean;
     procedure ResetAllLabel;
     procedure AddNewLabel(ra,dec: double);
     procedure SetLang;
@@ -100,7 +103,7 @@ Tskychart = class (TComponent)
     function DrawDblStars :boolean;
     function DrawDeepSkyObject :boolean;
     //function DrawNebulae :boolean;
-    function DrawBgImages :boolean;
+    function DrawImagesList :boolean;
     function DrawOutline :boolean;
     function DrawDSL :boolean;
     function DrawMilkyWay :boolean;
@@ -217,6 +220,8 @@ begin
  Fplot.OnDeleteAllLabel:=@ResetAllLabel;
  Fplot.OnLabelClick:=@LabelClick;
  bgbmp:=Tbitmap.Create;
+ bgsettingchange:=false;
+ bgvalid:=false;
 end;
 
 destructor Tskychart.Destroy;
@@ -267,8 +272,7 @@ saveplaplot:=Fplot.cfgplot.plaplot;
 try
   chdir(appdir);
   // initialize chart value
-  if VerboseMsg then
-  WriteTrace('SkyChart '+cfgsc.chartname+': Init');
+  if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Init');
   cfgsc.msg:='';
 {$ifdef mswindows}
 if isWin98 and (Fplot.cfgplot.starplot=1) then begin
@@ -288,12 +292,10 @@ end;
   end;
   InitColor; // after ComputePlanet
   // draw objects
-  if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': Open catalogs');
+  if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': Open catalogs');
   Fcatalog.OpenCat(cfgsc);
   InitCatalog;
-  if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': begin drawing');
+  if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': begin drawing');
   // first the extended object
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawMilkyWay; // most extended first
@@ -332,7 +334,7 @@ end;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
   // BG image
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.ShowBackgroundImage then DrawBgImages;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.ShowImageList then DrawImagesList;
 
   // the labels
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
@@ -354,8 +356,7 @@ end;
   // Draw the chart border
   DrawBorder;
   result:=true;
-if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
+if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
 finally
   Fcatalog.CloseCat;
   if cfgsc.quick and FPlot.cfgplot.red_move then begin
@@ -367,8 +368,7 @@ finally
   cfgsc.FillMilkyWay:=savfillmw;
   cfgsc.quick:=false;
 end;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': end Refresh');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': end Refresh');
 end;
 
 function Tskychart.InitCatalog:boolean;
@@ -421,8 +421,7 @@ var i:integer;
   end;
 
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init catalogs');
 vostar_magmax:=Fcatalog.GetVOstarmag;
 if Fcatalog.cfgshr.AutoStarFilter then begin
    if (cfgsc.fov>(0.5*deg2rad)) or cfgsc.Quick then
@@ -502,8 +501,7 @@ end;
 function Tskychart.InitTime:boolean;
 var xp,yp,MJD,A,C : double;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
 if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
 cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
 cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
@@ -559,8 +557,7 @@ const ratio = 0.99664719;
       SOLSID=1.00273790935;  // Ratio between solar and sidereal time
       C=173.14463331;        // Speed of light (AU per day)
 begin
-  if VerboseMsg then
-  WriteTrace('SkyChart '+cfgsc.chartname+': Init observatory');
+  if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Init observatory');
    p:=deg2rad*cfgsc.ObsLatitude;
    u:=arctan(ratio*tan(p));
    cfgsc.ObsRoSinPhi:=ratio*sin(u)+(cfgsc.ObsAltitude/H0)*sin(p);
@@ -577,8 +574,7 @@ function Tskychart.InitChart(full: boolean=true):boolean;
 var w,h:double;
 begin
 // do not add more function here as this is also called at the chart create
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init chart');
 if full then begin
   // we must know the projection now
   w := cfgsc.fov;
@@ -615,8 +611,7 @@ end;
 function Tskychart.InitColor:boolean;
 var i : integer;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': Init colors');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init colors');
 if Fplot.cfgplot.color[0]>Fplot.cfgplot.color[11] then begin // white background
    Fplot.cfgplot.AutoSkyColor:=false;
    Fplot.cfgplot.autoskycolorValid:=false;
@@ -679,8 +674,7 @@ var w,h,a,d,dist,v1,v2,v3,v4,v5,v6,v7,v8,v9,v10,v11,v12,saveaz : double;
     TrackAltAz: boolean;
     outr: integer;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': Init coordinates');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init coordinates');
 TrackAltAz:=false;
 cfgsc.scopemark:=false;
 cfgsc.RefractionOffset:=0;
@@ -828,8 +822,7 @@ end;
          // fits image
          cfgsc.TrackOn:=false;
          if FFits.Header.valid and Fits.WCSvalid then begin
-           if VerboseMsg then
-            WriteTrace('Center to FITS image '+' ra:'+formatfloat(f5,rad2deg*FFits.Center_RA)+' de:'+formatfloat(f5,rad2deg*FFits.Center_DE)+' fov:'+formatfloat(f6,rad2deg*FFits.Img_Width) );
+            if VerboseMsg then WriteTrace('Center to FITS image '+' ra:'+formatfloat(f5,rad2deg*FFits.Center_RA)+' de:'+formatfloat(f5,rad2deg*FFits.Center_DE)+' fov:'+formatfloat(f6,rad2deg*FFits.Img_Width) );
             cfgsc.lastJDchart:=cfgsc.JDChart;
             v1:=FFits.Center_RA;
             v2:=FFits.Center_DE;
@@ -973,8 +966,7 @@ var rec:GcatRec;
   al: TLabelAlign;
   p: coordvector;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw stars');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw stars');
 fillchar(rec,sizeof(rec),0);
 if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay)/365.25
                  else cyear:=cfgsc.YPmon;
@@ -1063,8 +1055,7 @@ var rec:GcatRec;
   lid: integer;
   lis:string;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenVarStar then
@@ -1095,8 +1086,7 @@ var rec:GcatRec;
   lid: integer;
   lis,buf:string;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
 fillchar(rec,sizeof(rec),0);
 try
 if Fcatalog.OpenDblStar then
@@ -1196,9 +1186,10 @@ var rec:GcatRec;
     end;
 
   begin
-    if VerboseMsg then
-     WriteTrace('SkyChart '+cfgsc.chartname+': draw deepsky objects');
+    if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': draw deepsky objects');
     CurrentCat:='';
+    nebmagmax:=0;
+    nebmagmin:=99;
     imageok:=false;
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
@@ -1264,16 +1255,15 @@ var rec:GcatRec;
                   begin
                     Drawing;
                   end;
+              // label
               if rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
-                 if rec.options.ShortName='SAC' then begin
-                       al:=alsac;
-                       if alsac>=laBottomRight then alsac:=laTopLeft
-                          else inc(alsac);
-                   end else al:=laRight;
+                 al:=laRight;
                  if rec.neb.messierobject then lp:=2
                    else if (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]*2) then lp:=3
                    else lp:=4;
-                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al,0,lp);
+                 nebmagmax:=max(nebmagmax,rec.neb.mag);
+                 nebmagmin:=min(nebmagmin,rec.neb.mag);
+                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al,0,lp,true,rec.neb.mag);
               end;
             end;
         end;
@@ -1284,77 +1274,116 @@ var rec:GcatRec;
     end;
 end;
 
-function Tskychart.DrawBgImages :boolean;
+function Tskychart.DrawImagesList :boolean;
 var
   filename,objname : string;
   ra,de,width,height,dw,dh: double;
   cosr,sinr: extended;
   x1,y1,x2,y2,rot,ra2000,de2000: Double;
   xx,yy:single;
+  i,n: integer;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw background image');
-result:=false;
-try
-ra2000:=cfgsc.racentre;
-de2000:=cfgsc.decentre;
-if cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,cfgsc,true,true);
-precession(cfgsc.JDChart,jd2000,ra2000,de2000);
-if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
-  x1:=0;
-  x2:=pi2;
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': DrawImagesList');
+if bgvalid and (not bgsettingchange) and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)
+   and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)
+   and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)
+   and(bgrot=cfgsc.theta)and(bgflipx=cfgsc.FlipX)and(bgflipy=cfgsc.FlipY) then begin
+      //cache bgbmp
+      Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
 end else begin
-  x1 := NormRA(ra2000-cfgsc.fov/cos(de2000)-deg2rad);
-  x2 := NormRA(ra2000+cfgsc.fov/cos(de2000)+deg2rad);
-end;
-y1 := maxvalue([-pid2,de2000-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
-y2 := minvalue([pid2,de2000+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
-if FFits.OpenDB('other',x1,x2,y1,y2) then
-  while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
-    if (objname='BKG') and (not cfgsc.ShowBackgroundImage) then continue;
-    if (objname='BKG')and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)
-       and(bgfov=cfgsc.fov)and(bgmis=cfgsc.BGmin_sigma)and(bgmas=cfgsc.BGmax_sigma)
-       and(bgw=cfgsc.xmax)and(bgh=cfgsc.ymax)and(bgproj=cfgsc.ProjPole)
-       and(bgrot=cfgsc.theta)and(bgflipx=cfgsc.FlipX)and(bgflipy=cfgsc.FlipY) then begin
-          //cache bgbmp
-          Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+  bgcra:=cfgsc.racentre;
+  bgcde:=cfgsc.decentre;
+  bgfov:=cfgsc.fov;
+  bgrot:=cfgsc.theta;
+  bgflipx:=cfgsc.FlipX;
+  bgflipy:=cfgsc.FlipY;
+  bgmis:=cfgsc.BGmin_sigma;
+  bgmas:=cfgsc.BGmax_sigma;
+  bgw:=cfgsc.xmax;
+  bgh:=cfgsc.ymax;
+  bgproj:=cfgsc.ProjPole;
+  bgvalid:=false;
+  bgsettingchange:=false;
+  if (not fits.fitslistmodified)or(fits.fitslistra<>cfgsc.racentre)or(fits.fitslistdec<>cfgsc.decentre) then begin
+    cfgsc.MaxArchiveImg:=min(cfgsc.MaxArchiveImg,maxfitslist);
+    fits.fitslist.Clear;
+    setlength(fits.fitslistactive,10);
+    fits.fitslistmodified:=false;
+    fits.fitslistra:=cfgsc.racentre;
+    fits.fitslistdec:=cfgsc.decentre;
+    n:=0;
+    result:=false;
+    try
+    ra2000:=cfgsc.racentre;
+    de2000:=cfgsc.decentre;
+    if cfgsc.ApparentPos then mean_equatorial(ra2000,de2000,cfgsc,true,true);
+    precession(cfgsc.JDChart,jd2000,ra2000,de2000);
+    if northpoleinmap(cfgsc) or southpoleinmap(cfgsc) then begin
+      x1:=0;
+      x2:=pi2;
     end else begin
-      sincos(rot,sinr,cosr);
-      precession(jd2000,cfgsc.JDChart,ra,de);
-      if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
-      projection(ra,de,x1,y1,true,cfgsc) ;
-      WindowXY(x1,y1,xx,yy,cfgsc);
-      dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
-      dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
-      if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
-          and (abs(max(width,height)*cfgsc.BxGlb)>10)
-      then begin
-         result:=true;
-         FFits.FileName:=filename;
-         FFits.InfoWCScoord;
-         if FFits.Header.valid and FFits.WCSvalid then begin
-            FFits.min_sigma:=cfgsc.BGmin_sigma;
-            FFits.max_sigma:=cfgsc.BGmax_sigma;
-            FFits.GetProjBitmap(bgbmp,cfgsc);
-            Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
-            bgcra:=cfgsc.racentre;
-            bgcde:=cfgsc.decentre;
-            bgfov:=cfgsc.fov;
-            bgrot:=cfgsc.theta;
-            bgflipx:=cfgsc.FlipX;
-            bgflipy:=cfgsc.FlipY;
-            bgmis:=cfgsc.BGmin_sigma;
-            bgmas:=cfgsc.BGmax_sigma;
-            bgw:=cfgsc.xmax;
-            bgh:=cfgsc.ymax;
-            bgproj:=cfgsc.ProjPole;
+      x1 := NormRA(ra2000-cfgsc.fov/cos(de2000)-deg2rad);
+      x2 := NormRA(ra2000+cfgsc.fov/cos(de2000)+deg2rad);
+    end;
+    y1 := maxvalue([-pid2,de2000-cfgsc.fov/cfgsc.WindowRatio-deg2rad]);
+    y2 := minvalue([pid2,de2000+cfgsc.fov/cfgsc.WindowRatio+deg2rad]);
+    for i:=1 to MaxArchiveDir do
+    if cfgsc.ArchiveDirActive[i] then begin
+       if FFits.OpenDB(cfgsc.ArchiveDir[i],x1,x2,y1,y2) then
+        while FFits.GetDB(filename,objname,ra,de,width,height,rot) do begin
+          sincos(rot,sinr,cosr);
+          precession(jd2000,cfgsc.JDChart,ra,de);
+          if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
+          projection(ra,de,x1,y1,true,cfgsc) ;
+          WindowXY(x1,y1,xx,yy,cfgsc);
+          dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
+          dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
+          if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
+              and (abs(max(width,height)*cfgsc.BxGlb)>10)
+          then begin
+             fits.fitslist.Add(filename);
+             if n<cfgsc.MaxArchiveImg then fits.fitslistactive[n]:=true
+                                else fits.fitslistactive[n]:=false;
+             inc(n);
+             if n>=Length(fits.fitslistactive) then SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+          end;
+
+        end;
+    end;
+    finally
+    end;
+    if cfgsc.ShowBackgroundImage then begin
+     if FFits.OpenDB('other',x1,x2,y1,y2) then
+      while FFits.GetDB(filename,objname,ra,de,width,height,rot) do
+       if objname='BKG' then begin
+         sincos(rot,sinr,cosr);
+         precession(jd2000,cfgsc.JDChart,ra,de);
+         if cfgsc.ApparentPos then apparent_equatorial(ra,de,cfgsc,true,true);
+         projection(ra,de,x1,y1,true,cfgsc) ;
+         WindowXY(x1,y1,xx,yy,cfgsc);
+         dw:=abs((width*cosr+height*sinr)*abs(cfgsc.BxGlb)/2);
+         dh:=abs((height*cosr+width*sinr)*abs(cfgsc.ByGlb)/2);
+         if ((xx+dw)>cfgsc.Xmin) and ((xx-dw)<cfgsc.Xmax) and ((yy+dh)>cfgsc.Ymin) and ((yy-dh)<cfgsc.Ymax)
+             and (abs(max(width,height)*cfgsc.BxGlb)>10)
+         then begin
+            fits.fitslist.Add(filename);
+            fits.fitslistactive[n]:=true;
+            inc(n);
+            if n>=Length(fits.fitslistactive) then SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
          end;
-      end;
+       end;
     end;
   end;
-finally
-
+  if fits.fitslist.Count>0 then begin
+    FFits.min_sigma:=cfgsc.BGmin_sigma;
+    FFits.max_sigma:=cfgsc.BGmax_sigma;
+    FFits.itt:=cfgsc.BGitt;
+    FFits.GetProjList(bgbmp,cfgsc);
+    Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+    bgvalid:=true;
+  end;
 end;
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': DrawImagesList end');
 end;
 
 function Tskychart.DrawOutline :boolean;
@@ -1363,8 +1392,7 @@ var rec:GcatRec;
   xx,yy: single;
   op,lw,col,fs: integer;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw outlines');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw outlines');
 if Fcatalog.OpenLin then begin
     fillchar(rec,sizeof(rec),0);
     try
@@ -1395,8 +1423,7 @@ var rec:GcatRec;
   xx,yy: single;
   op,lw,col,fs: integer;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw nebula outlines');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw nebula outlines');
 if Fcatalog.OpenDSL(cfgsc.DSLforcecolor,cfgsc.DSLcolor) then begin
    fillchar(rec,sizeof(rec),0);
    try
@@ -1431,8 +1458,7 @@ begin
 result:=false;
 if not cfgsc.ShowMilkyWay then exit;
 if cfgsc.fov<(deg2rad*2) then exit;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw milky way');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw milky way');
 fillchar(rec,sizeof(rec),0);
 first:=true;
 lw:=1;fs:=1;
@@ -1474,8 +1500,7 @@ var
   draworder : array[1..11] of integer;
   ltxt,lis: string;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw planets');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw planets');
 fov:=rad2deg*cfgsc.fov;
 pixscale:=abs(cfgsc.BxGlb)*deg2rad/3600;
 for j:=0 to cfgsc.SimNb-1 do begin
@@ -1628,8 +1653,7 @@ var
   ltxt,lis:string;
 begin
 if cfgsc.ShowAsteroidValid then begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
   Fplanet.ComputeAsteroid(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
@@ -1692,8 +1716,7 @@ var
   ltxt,lis:string;
 begin
 if cfgsc.ShowCometValid then begin
-  if VerboseMsg then
-  WriteTrace('SkyChart '+cfgsc.chartname+': draw comets');
+  if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw comets');
   Fplanet.ComputeComet(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[13]) then break;
@@ -1932,8 +1955,7 @@ var i,j,color : integer;
     x1,y1 : double;
     xx,yy,xp,yp,dx,dy:single;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw orbit path');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw orbit path');
 case trunc(rad2deg*cfgsc.fov) of
   0..1: begin dx:=100*cfgsc.xmax; dy:=100*cfgsc.ymax; end;
   2..5: begin dx:=20*cfgsc.xmax; dy:=20*cfgsc.ymax; end;
@@ -2587,8 +2609,7 @@ end;
 Procedure Tskychart.DrawGrid;
 begin
 if (cfgsc.ShowOnlyMeridian)or((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
-    if VerboseMsg then
-     WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
+    if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw grid');
     if cfgsc.ShowGrid then begin
        case cfgsc.ProjPole of
        Equat  :  DrawEqGrid;
@@ -2605,8 +2626,7 @@ end;
 Procedure Tskychart.DrawAltAzEqGrid;
 begin
 if ((deg2rad*Fcatalog.cfgshr.DegreeGridSpacing[cfgsc.FieldNum])<=(cfgsc.fov/2)) then begin
-    if VerboseMsg then
-     WriteTrace('SkyChart '+cfgsc.chartname+': draw alt/az EQ grid');
+    if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw alt/az EQ grid');
     if Fplot.cfgplot.UseBMP and cfgsc.horizonopaque and (cfgsc.ProjPole=AltAz) and cfgsc.ShowEqGrid then DrawEqGrid;
 end;
 end;
@@ -2649,8 +2669,7 @@ var fv,u:double;
     l1,l2:string;
 const sticksize=10;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw scale line');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw scale line');
 DrawPole(cfgsc.ProjPole);
 fv:=rad2deg*cfgsc.fov/3;
 if trunc(fv)>20 then begin l1:='5'+ldeg; n:=trunc(fv/5); l2:=inttostr(n*5)+ldeg; s:=5; u:=deg2rad; end
@@ -2679,8 +2698,7 @@ end;
 
 Procedure Tskychart.DrawBorder;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw chart border');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw chart border');
 Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin);
 end;
 
@@ -2987,6 +3005,7 @@ else
 for i:=startline to endline do begin
    p:=hbmp.ScanLine[i];
    for j:=0 to hbmp.Width-1 do begin
+      if Terminated then exit;
       x:=-1; y:=-1; h:=1;
       GetAHxy(j,i,az,h,cfgsc);
       if abs(h)<=hlimit then begin
@@ -3015,27 +3034,32 @@ end;
 
 procedure Tskychart.DrawHorizonPicture(hbmp:TBGRABitmap);
 var i,n: integer;
-    working: boolean;
-    timeout: TDateTime;
+    working,timeout: boolean;
+    timelimit: TDateTime;
     thread: array[0..3] of TDrawHorizonThread;
 begin
-  n:=min(4,GetThreadCount);
+  n:=min(4,MaxThreadCount);
   for i:=0 to n-1 do begin
     thread[i]:=TDrawHorizonThread.Create(true);
     thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;
     thread[i].hbmp:=hbmp;
-    thread[i].col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);;
+    thread[i].col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc:=cfgsc;
     thread[i].num:=n;
     thread[i].id:=i;
     thread[i].Start;
   end;
-  timeout:=now+10/secday;
+  timelimit:=now+10/secday;
   repeat
     sleep(10);
     working:=false;
     for i:=0 to n-1 do working:=working or thread[i].working;
-  until (not working)or(now>timeout) ;
+    timeout:=(now>timelimit);
+  until (not working)or timeout;
+  if timeout then begin
+    for i:=0 to n-1 do thread[i].Terminate;
+    sleep(10);
+  end;
 end;
 
 function Tskychart.DrawHorizon:boolean;
@@ -3070,8 +3094,7 @@ end;
 begin
 // Only with Alt/Az display
 if cfgsc.ProjPole=Altaz then begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw horizon');
 fillx1:=0;
 filly1:=0;
 hlplot:=false;
@@ -3634,8 +3657,7 @@ var
 begin
 result:=false;
 if not cfgsc.ShowConstl then exit;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation figures');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation figures');
 color := Fplot.cfgplot.Color[16];
 for i:=0 to Fcatalog.cfgshr.ConstLnum-1 do begin
   ra1:=Fcatalog.cfgshr.ConstL[i].ra1;
@@ -3666,8 +3688,7 @@ var
 begin
 result:=false;
 if not cfgsc.ShowConstB then exit;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation boundaries');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw constellation boundaries');
 dm:=max(cfgsc.fov,0.1);
 color := Fplot.cfgplot.Color[17];
 x1:=0; y1:=0;
@@ -3698,8 +3719,7 @@ var l,b,e,ar,de,xx,yy : double;
 begin
 result:=false;
 if not cfgsc.ShowEclipticValid then exit;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw ecliptic line');
 e:=cfgsc.ecl;
 b:=0;
 first:=true;
@@ -3735,8 +3755,7 @@ var l,b,ar,de,xx,yy : double;
 begin
 result:=false;
 if not cfgsc.ShowGalactic then exit;
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw galactic line');
+if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw galactic line');
 b:=0;
 first:=true;
 color := Fplot.cfgplot.Color[15];
@@ -3769,8 +3788,7 @@ var i,lid : integer;
     ra,de,x1,y1:double;
     lis:string;
 begin
-  if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': Init labels');
+  if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init labels');
   numlabels:=0;
   numdsopos:=0;
   for i:=0 to Fcatalog.cfgshr.ConstelNum-1 do begin
@@ -3787,7 +3805,7 @@ begin
   constlabelindex:=numlabels;
 end;
 
-procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true);
+procedure Tskychart.SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
 begin
 { Label priority is used during placement optimization.
   0 : Constellation
@@ -3802,6 +3820,7 @@ if (cfgsc.ShowLabel[labelnum])and(numlabels<maxlabels)and(trim(txt)<>'')and(xx>=
   try
   labels[numlabels].id:=id;
   labels[numlabels].priority:=priority;
+  labels[numlabels].lsize:=lsize;
   labels[numlabels].x:=xx;
   labels[numlabels].y:=yy;
   labels[numlabels].r:=radius;
@@ -3942,8 +3961,7 @@ if f1.ShowModal=mrOK then begin
    cfgsc.modlabels[i].fontnum:=fontnum;
    cfgsc.modlabels[i].id:=id;
    cfgsc.modlabels[i].hiden:=false;
-if VerboseMsg then
- WriteTrace('EditLabelTxt');
+   if VerboseMsg then WriteTrace('EditLabelTxt');
    Refresh;
 end;
 finally
@@ -3985,8 +4003,7 @@ if f_addlabel.ShowModal=mrOK then begin
    lid:=rshash(lis,$7FFFFFFF);
    SetLabel(lid,x,y,0,fontnum,cfgsc.customlabels[i].labelnum,txt,cfgsc.customlabels[i].align);
    DrawLabels;
-if VerboseMsg then
- WriteTrace('AddNewLabel');
+   if VerboseMsg then WriteTrace('AddNewLabel');
    Refresh;
 end;
 end;
@@ -4140,8 +4157,7 @@ begin
 result:=((p.X>=r.Left)and(p.X<=r.Right))and((p.Y>=r.Top)and(p.Y<=r.Bottom));
 end;
 begin
-if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': Optimize labels');
+if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Optimize labels');
 obmp:=TBitmap.Create;
 lsp:=labspacing*Fplot.cfgchart.drawpen;
 // give high priority to moved or custom labels
@@ -4238,13 +4254,12 @@ for i:=1 to numlabels do begin
     labels[i].x:=-1000;
   end;
 end;
-if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': Labels optimized');
+if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Labels optimized');
 end;
 
 function Tskychart.DrawLabels:boolean;
 var i,j: integer;
-    x,y,r,x0,y0,orient: single;
+    x,y,r,x0,y0,orient,lsize: single;
     x1,y1: double;
     labelnum,fontnum:byte;
     txt:string;
@@ -4252,11 +4267,11 @@ var i,j: integer;
     al,av: TLabelAlign;
     ts:TSize;
 begin
-if VerboseMsg then
-   WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
+if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': draw labels');
 Fplot.InitLabel;
 DrawCustomlabel;
 if cfgsc.OptimizeLabels then OptimizeLabels;
+nebmagmin:=max(4,nebmagmin);
 for i:=1 to numlabels do begin
   if labels[i].x<-900 then continue; // label removed by optimization
   skiplabel:=false;
@@ -4313,14 +4328,20 @@ for i:=1 to numlabels do begin
         if (cfgsc.modlabels[j].dx<>0)or(cfgsc.modlabels[j].dy<>0) then r:=-1;
         break;
      end;
-  if not skiplabel then begin
-      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt,labels[i].px,labels[i].py);
+    if not skiplabel then begin
+      if (labels[i].lsize>0)and((nebmagmax-nebmagmin)>=2) then begin
+         if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)/4)) then lsize:=0.8
+         else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*2/4)) then lsize:=0.9
+         else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*3/4)) then lsize:=1
+         else lsize:=1.1
+      end else lsize:=1;
+      Fplot.PlotLabel(i,labelnum,fontnum,x,y,r,orient,al,av,cfgsc.WhiteBg,(not cfgsc.Editlabels),txt,labels[i].px,labels[i].py,false,lsize);
       if cfgsc.MovedLabelLine and (i>constlabelindex)and(sqrt((x-x0)*(x-x0)+(y-y0)*(y-y0))>30) then begin
         if Fplot.cfgplot.UseBMP then ts:=Fplot.cbmp.TextSize(txt)
            else ts:=Fplot.cnv.TextExtent(txt);
         Fplot.PlotLine(x0,y0,x+ts.cx/2,y+ts.cy/2,Fplot.cfgplot.color[15],1,psdot);
       end;
-  end;
+    end;
 end;
 //if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
@@ -4617,8 +4638,7 @@ var i : integer;
 begin
 //center mark
 if cfgsc.ShowCircle then begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw circle');
+ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw circle');
  DrawFinderMark(cfgsc.racentre,cfgsc.decentre,false,-1);
 end;
 //listed mark
@@ -4719,8 +4739,7 @@ var rosex,rosey,roserd: integer;
     tx,ty: single;
     ar,de,a,h,l,b,x1,y1,x2,y2,rot,rar,rde: double;
 begin
-if VerboseMsg then
- WriteTrace('SkyChart '+cfgsc.chartname+': draw compass');
+ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw compass');
  roserd:=round(Fcatalog.cfgshr.CRoseSz*fplot.cfgchart.drawsize / 2);
  rosex:=cfgsc.xmin+10+roserd;
  rosey:=cfgsc.ymax-10-roserd;
@@ -4730,27 +4749,31 @@ if VerboseMsg then
  if (round(tx)<>rosex)or(round(ty)<>rosey) then exit; // reversibilty test, the rose is outside of valid coordinates
  projection(rar,rde+0.001,x2,y2,false,cfgsc);
  rot:=-arctan2((x2-x1),(y2-y1));
- Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,1);
- if cfgsc.ProjPole=Altaz then begin
-   Eq2Hz(cfgsc.CurST-rar,rde,a,h,cfgsc) ;
-   Hz2Eq(a,h+0.001,ar,de,cfgsc);
-   projection(cfgsc.CurST-ar,de,x2,y2,false,cfgsc) ;
-   rot:=-arctan2((x2-x1),(y2-y1));
-   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
- end;
- if cfgsc.ProjPole=Ecl then begin
-   Eq2Ecl(rar,rde,cfgsc.ecl,l,b);
-   Ecl2eq(l,b+0.001,cfgsc.ecl,ar,de);
-   projection(ar,de,x2,y2,false,cfgsc) ;
-   rot:=-arctan2((x2-x1),(y2-y1));
-   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
- end;
- if cfgsc.ProjPole=Gal then begin
-   Eq2Gal(rar,rde,l,b,cfgsc);
-   gal2eq(l,b+0.001,ar,de,cfgsc);
-   projection(ar,de,x2,y2,false,cfgsc) ;
-   rot:=-arctan2((x2-x1),(y2-y1));
-   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+ if Fcatalog.cfgshr.SimplePointer then begin
+    Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,3);
+ end else begin
+   Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,1);
+   if cfgsc.ProjPole=Altaz then begin
+     Eq2Hz(cfgsc.CurST-rar,rde,a,h,cfgsc) ;
+     Hz2Eq(a,h+0.001,ar,de,cfgsc);
+     projection(cfgsc.CurST-ar,de,x2,y2,false,cfgsc) ;
+     rot:=-arctan2((x2-x1),(y2-y1));
+     Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+   end;
+   if cfgsc.ProjPole=Ecl then begin
+     Eq2Ecl(rar,rde,cfgsc.ecl,l,b);
+     Ecl2eq(l,b+0.001,cfgsc.ecl,ar,de);
+     projection(ar,de,x2,y2,false,cfgsc) ;
+     rot:=-arctan2((x2-x1),(y2-y1));
+     Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+   end;
+   if cfgsc.ProjPole=Gal then begin
+     Eq2Gal(rar,rde,l,b,cfgsc);
+     gal2eq(l,b+0.001,ar,de,cfgsc);
+     projection(ar,de,x2,y2,false,cfgsc) ;
+     rot:=-arctan2((x2-x1),(y2-y1));
+     Fplot.PlotCRose(rosex,rosey,roserd,rot,cfgsc.FlipX,cfgsc.FlipY,cfgsc.WhiteBg,2);
+   end;
  end;
 end;
 
@@ -4780,8 +4803,7 @@ if (dist>cfgsc.fov/4)and(cfgsc.TrackOn) then begin
         cfgsc.TrackDec:=dec;
       end;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
-if VerboseMsg then
- WriteTrace('TelescopeMove');
+      if VerboseMsg then WriteTrace('TelescopeMove');
       Refresh;
       cfgsc.scopelock:=false;
    end;

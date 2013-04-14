@@ -28,7 +28,7 @@ interface
 uses u_help, u_translation, u_constant, u_util, cu_fits, cu_database,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs, FileUtil,
   StdCtrls, ComCtrls, ExtCtrls, Buttons, enhedits, LResources,
-  EditBtn, LazHelpHTML;
+  EditBtn, LazHelpHTML, Grids;
 
 type
 
@@ -36,9 +36,27 @@ type
 
   Tf_config_pictures = class(TFrame)
     backimg: TFileNameEdit;
+    ArchiveBox: TCheckBox;
+    ArchiveDirectory1: TDirectoryEdit;
+    Button1: TButton;
+    ConfirmArchive: TCheckBox;
+    ImgITT2: TComboBox;
+    Label9: TLabel;
+    ShowImageList: TCheckBox;
+    Label8: TLabel;
+    MaxImg: TComboBox;
+    ScanArchive: TButton;
+    GroupBox2: TGroupBox;
+    Header1: TButton;
     Button5: TButton;
+    ImageList1: TImageList;
     ImgTrBar2: TTrackBar;
+    Label3: TLabel;
     Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Panel2: TPanel;
     Panel3: TPanel;
     ResetLum: TButton;
     OnlineDSS: TCheckBox;
@@ -61,6 +79,7 @@ type
     ProgressPanel: TPanel;
     ProgressCat: TLabel;
     ProgressBar1: TProgressBar;
+    SelectDirectoryDialog1: TSelectDirectoryDialog;
     ShowImagesBox: TCheckBox;
     Label270: TLabel;
     Label271: TLabel;
@@ -85,22 +104,33 @@ type
     RealSkyNorth: TCheckBox;
     RealSkySouth: TCheckBox;
     DSS102CD: TCheckBox;
+    Page4: TTabSheet;
+    StringGrid1: TStringGrid;
     usesubsample: TCheckBox;
     reallist: TCheckBox;
     realskymax: TLongEdit;
     realskymb: TLongEdit;
     PageControl1: TPageControl;
+    procedure ArchiveBoxChange(Sender: TObject);
+    procedure ArchiveDirectory1Change(Sender: TObject);
     procedure backimgAcceptFileName(Sender: TObject; var Value: String);
+    procedure Button1Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
+    procedure ConfirmArchiveChange(Sender: TObject);
+    procedure Header1Click(Sender: TObject);
+    procedure ImgITT2Change(Sender: TObject);
     procedure ImgTrBar2Change(Sender: TObject);
+    procedure MaxImgChange(Sender: TObject);
     procedure ResetLumClick(Sender: TObject);
     procedure PageControl1PageChanged(Sender: TObject);
     procedure imgpathChange(Sender: TObject);
     procedure OnlineDSSChange(Sender: TObject);
     procedure OnlineDSSListChange(Sender: TObject);
+    procedure ScanArchiveClick(Sender: TObject);
     procedure ScanImagesClick(Sender: TObject);
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
+    procedure ShowImageListChange(Sender: TObject);
     procedure ShowImagesBoxClick(Sender: TObject);
     procedure backimgChange(Sender: TObject);
     procedure ShowBackImgClick(Sender: TObject);
@@ -115,6 +145,14 @@ type
     procedure realskydriveChange(Sender: TObject);
     procedure realskyfileChange(Sender: TObject);
     procedure reallistClick(Sender: TObject);
+    procedure StringGrid1DrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+    procedure StringGrid1MouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure StringGrid1SelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
+    procedure StringGrid1SetEditText(Sender: TObject; ACol, ARow: Integer;
+      const Value: string);
     procedure usesubsampleClick(Sender: TObject);
   private
     { Private declarations }
@@ -124,6 +162,7 @@ type
     InitialTimer: boolean;
     procedure ShowImages;
     procedure RefreshImage;
+    Procedure EditArchivePath(row : integer);
   public
     { Public declarations }
     cdb: Tcdcdb;
@@ -154,19 +193,27 @@ implementation
 procedure Tf_config_pictures.SetLang;
 begin
 Caption:=rsPictures;
-Page1.caption:=rsObjects;
+Page1.caption:=rsDSOCatalogPi;
 Label50.caption:=rsDisplayImage;
 Label264.caption:=rsImageDirecto;
+Label3.Caption:=rsTheImageDire;
 ScanImages.caption:=rsScanDirector;
 Label266.caption:=rsLuminosity;
 Label268.caption:=rsContrast;
-ResetLum.caption:=rsReset;
-Button5.Caption:=rsReset;
+ResetLum.caption:=rsDefault;
+Button5.Caption:=rsDefault;
 ShowImagesBox.caption:=rsShowObjectPi;
 ProgressCat.caption:=rsOther;
 Page2.caption:=rsBackground;
 Label270.caption:=rsBackgroundPi;
 Label271.caption:=rsFITSFile;
+Label5.Caption:=rsShowASingleP;
+Header1.Caption:=rsViewHeader;
+label9.Caption:=rsVisualisatio;
+ImgITT2.Items[0]:=rsLinear;
+ImgITT2.Items[1]:=rsScaled;
+ImgITT2.Items[2]:=rsLog;
+ImgITT2.Items[3]:=rsSqrt;
 ShowBackImg.caption:=rsShowThisPict;
 Label1.caption:=rsLuminosity;
 Label2.caption:=rsContrast;
@@ -184,34 +231,51 @@ usesubsample.caption:=rsUseSubsampli;
 reallist.caption:=rsSelectPlateF;
 GroupBox1.caption:=rsOnlineDSS;
 OnlineDSS.caption:=rsUseOnlineDSS;
+groupbox2.Caption:=rsDownloadArch;
+ArchiveBox.Caption:=rsArchiveToDir;
+ConfirmArchive.Caption:=rsConfirmation;
 SetHelp(self,hlpCfgPict);
+Page4.Caption:=rsImageArchive;
+label7.Caption:=rsImageArchive;
+ScanArchive.Caption:=rsScanArchives+'...';
+stringgrid1.Columns[0].Title.Caption:='x';
+stringgrid1.Columns[1].Title.Caption:=rsPath;
+stringgrid1.Columns[2].Title.Caption:=rsCount;
+label8.Caption:=rsMaximumNumbe;
+ShowImageList.Caption:=rsShowTheImage;
+Button1.Caption:=rsAdjustTheVis;
 end;
 
 constructor Tf_config_pictures.Create(AOwner:TComponent);
 begin
- mycsc:=Tconf_skychart.Create;
- myccat:=Tconf_catalog.Create;
- mycshr:=Tconf_shared.Create;
- mycplot:=Tconf_plot.Create;
- mycmain:=Tconf_main.Create;
- mycdss:=Tconf_DSS.Create;
- csc:=mycsc;
- ccat:=myccat;
- cshr:=mycshr;
- cplot:=mycplot;
- cmain:=mycmain;
- cdss:=mycdss;
- inherited Create(AOwner);
- SetLang;
+  mycsc:=Tconf_skychart.Create;
+  myccat:=Tconf_catalog.Create;
+  mycshr:=Tconf_shared.Create;
+  mycplot:=Tconf_plot.Create;
+  mycmain:=Tconf_main.Create;
+  mycdss:=Tconf_DSS.Create;
+  csc:=mycsc;
+  ccat:=myccat;
+  cshr:=mycshr;
+  cplot:=mycplot;
+  cmain:=mycmain;
+  cdss:=mycdss;
+  inherited Create(AOwner);
+  SetLang;
   LockChange:=true;
   backimginfo.caption:=rsNoPicture;
   ShowBackImg.checked:=false;
   Image1.canvas.brush.color:=clBlack;
   Image1.canvas.pen.color:=clBlack;
   Image1.canvas.rectangle(0,0,Image1.width,Image1.Height);
+  label6.Visible:=false;
+  StringGrid1.RowCount:=MaxArchiveDir+1;
   {$ifdef CPU64}
-  GroupBox3.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
+  Panel2.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
   OnlineDSS.Enabled:=false;
+  label6.Caption:=rsRealskyCDRom;
+  label6.Visible:=true;
+  label6.BringToFront;
   {$endif}
 end;
 
@@ -245,8 +309,10 @@ ImgLumBar.position:=-round(100*csc.NEBmin_sigma);
 ImgContrastBar.position:=round(100*csc.NEBmax_sigma);
 ImgLumBar2.position:=-round(10*csc.BGmin_sigma);
 ImgContrastBar2.position:=round(10*csc.BGmax_sigma);
+ImgTrBar2.position := csc.BGalpha;
+ImgITT2.ItemIndex:=ord(csc.BGitt);
 ShowImagesBox.checked:=csc.ShowImages;
-nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
+nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages('SAC'))]);
 save:=csc.ShowBackgroundImage;
 backimg.filename:=SysToUTF8(csc.BackgroundImage);
 backimg.InitialDir:=ExtractFilePath(backimg.filename);
@@ -268,6 +334,14 @@ for i:=1 to MaxDSSurl do
   if cdss.DSSurl[i,1]<>'' then
      OnlineDSSList.Items.Add(cdss.DSSurl[i,0]);
 OnlineDSSList.ItemIndex:=cdss.OnlineDSSid-1;
+ArchiveBox.Checked:=cdss.dssarchive;
+ArchiveDirectory1.Directory:=cdss.dssarchivedir;
+ConfirmArchive.Checked := cdss.dssarchiveprompt;
+MaxImg.ItemIndex:=csc.MaxArchiveImg-1;
+ShowImageList.Checked := csc.ShowImageList;
+for i:=1 to MaxArchiveDir do StringGrid1.Cells[1,i]:=csc.ArchiveDir[i];
+for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[0,i]:='1' else StringGrid1.Cells[0,i]:='0';
+for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[3,i]:=inttostr(cdb.CountImages(csc.ArchiveDir[i]));
 end;
 
 procedure Tf_config_pictures.imgpathChange(Sender: TObject);
@@ -296,13 +370,20 @@ try
 ImgContrastBar2.position:=0;
 ImgLumBar2.position:=0;
 ImgTrBar2.Position:=200;
+ImgITT2.ItemIndex:=ord(ittramp);
 csc.BGmin_sigma:=0;
 csc.BGmax_sigma:=0;
 csc.BGalpha:=200;
+csc.BGitt:=ittramp;
 ImageTimer1.enabled:=true;
 finally
 LockChange:=false;
 end;
+end;
+
+procedure Tf_config_pictures.Header1Click(Sender: TObject);
+begin
+Fits.ViewHeaders;
 end;
 
 procedure Tf_config_pictures.Lock;
@@ -312,6 +393,13 @@ end;
 
 procedure Tf_config_pictures.PageControl1PageChanged(Sender: TObject);
 begin
+{$ifdef CPU64}
+Panel2.Visible:=false;  { TODO : Realsky libgetdss do not work on 64bit system }
+OnlineDSS.Enabled:=false;
+label6.Caption:=rsRealskyCDRom;
+label6.Visible:=true;
+label6.BringToFront;
+{$endif}
 if PageControl1.PageIndex=1 then backimgChange(Sender);
 end;
 
@@ -325,7 +413,7 @@ Cdb.ScanImagesDirectory(cmain.ImagePath,ProgressCat,ProgressBar1 );
 ShowImagesBox.checked:=true;
 screen.cursor:=crDefault;
 ProgressPanel.visible:=false;
-nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages)]);
+nimages.caption:=Format(rsThereAreCata, [inttostr(cdb.CountImages('SAC'))]);
 end else begin
   nimages.Caption:=rsDirectoryNot2;
 end;
@@ -342,6 +430,11 @@ procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.NEBmax_sigma:=ImgContrastBar.position/100;
+end;
+
+procedure Tf_config_pictures.ShowImageListChange(Sender: TObject);
+begin
+  csc.ShowImageList:=ShowImageList.Checked;
 end;
 
 procedure Tf_config_pictures.ShowImagesBoxClick(Sender: TObject);
@@ -370,6 +463,21 @@ begin
 if LockChange then exit;
 csc.BGalpha:=ImgTrBar2.position;
 //ImageTimer1.enabled:=true;
+end;
+
+procedure Tf_config_pictures.ImgITT2Change(Sender: TObject);
+begin
+if LockChange then exit;
+csc.BGitt:=titt(ImgITT2.ItemIndex);
+FFits.itt:=csc.BGitt;
+ImageTimer1.enabled:=true;
+end;
+
+
+
+procedure Tf_config_pictures.MaxImgChange(Sender: TObject);
+begin
+  csc.MaxArchiveImg:=MaxImg.ItemIndex+1;
 end;
 
 procedure Tf_config_pictures.ImageTimer1Timer(Sender: TObject);
@@ -438,6 +546,26 @@ end;
 {$endif}
 end;
 
+procedure Tf_config_pictures.Button1Click(Sender: TObject);
+begin
+  PageControl1.ActivePage:=Page2;
+end;
+
+procedure Tf_config_pictures.ArchiveBoxChange(Sender: TObject);
+begin
+  cdss.dssarchive := ArchiveBox.Checked;
+end;
+
+procedure Tf_config_pictures.ArchiveDirectory1Change(Sender: TObject);
+begin
+  cdss.dssarchivedir := ArchiveDirectory1.Directory;
+end;
+
+procedure Tf_config_pictures.ConfirmArchiveChange(Sender: TObject);
+begin
+  cdss.dssarchiveprompt:=ConfirmArchive.Checked;
+end;
+
 //////////////////////////
 
 Procedure  Tf_config_pictures.RefreshImage;
@@ -474,6 +602,7 @@ end;
 procedure Tf_config_pictures.ShowBackImgClick(Sender: TObject);
 begin
 csc.ShowBackgroundImage:=ShowBackImg.checked;
+if csc.ShowBackgroundImage then ShowImageList.Checked:=true;
 cmain.NewBackgroundImage:=csc.ShowBackgroundImage;
 backimgChange(Sender);
 end;
@@ -539,6 +668,81 @@ if LockChange then exit;
 cdss.dssplateprompt:=reallist.checked;
 end;
 
+procedure Tf_config_pictures.StringGrid1DrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+with Sender as TStringGrid do begin
+  if (Acol=0)and(Arow>0) then begin
+    csc.ArchiveDirActive[arow]:=cells[acol,arow]='1';
+    Canvas.Brush.style := bssolid;
+    if (cells[acol,arow]='1')then begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,3);
+    end else begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
+    end;
+  end else if (Acol=1)and(Arow>0) then begin
+    csc.ArchiveDir[arow]:=cells[acol,arow];
+  end else if (Acol=2)and(Arow>0) then begin
+    ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,0);
+  end;
+end;
+end;
+
+Procedure Tf_config_pictures.EditArchivePath(row : integer);
+begin
+    chdir(appdir);
+    if trim(stringgrid1.Cells[1,row])<>'' then SelectDirectoryDialog1.InitialDir:=ExpandFileName(stringgrid1.Cells[1,row])
+                                          else SelectDirectoryDialog1.InitialDir:=slash(HomeDir);
+    try
+    if SelectDirectoryDialog1.execute then begin
+       stringgrid1.Cells[1,row]:=SelectDirectoryDialog1.FileName;
+       stringgrid1.Cells[0,row]:='1';
+    end;
+    finally
+    chdir(appdir);
+    end;
+end;
+
+procedure Tf_config_pictures.StringGrid1MouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var Col,Row: integer;
+begin
+StringGrid1.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+0 : begin
+    if stringgrid1.Cells[col,row]='1' then stringgrid1.Cells[col,row]:='0'
+       else
+       if (trim(stringgrid1.cells[1,row])>'')and DirectoryExistsUTF8(slash(stringgrid1.cells[1,row])) then stringgrid1.Cells[col,row]:='1'
+          else  stringgrid1.Cells[col,row]:='0';
+    end;
+2 : begin
+    EditArchivePath(row);
+    end;
+end;
+end;
+
+procedure Tf_config_pictures.StringGrid1SelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+begin
+if (Acol=1) then canselect:=true else canselect:=false;
+end;
+
+procedure Tf_config_pictures.StringGrid1SetEditText(Sender: TObject; ACol,
+  ARow: Integer; const Value: string);
+begin
+if (Acol=1)and(Arow>0) then
+  if not DirectoryExistsUTF8(slash(stringgrid1.cells[1,arow])) then begin
+    StringGrid1.Canvas.Brush.Color := clRed;
+    StringGrid1.Canvas.FillRect(StringGrid1.CellRect(ACol, ARow));
+    StringGrid1.cells[0,arow]:='0';
+  end;
+end;
+
 procedure Tf_config_pictures.usesubsampleClick(Sender: TObject);
 begin
 if LockChange then exit;
@@ -555,6 +759,22 @@ procedure Tf_config_pictures.OnlineDSSListChange(Sender: TObject);
 begin
 if LockChange then exit;
 cdss.OnlineDSSid:=OnlineDSSList.ItemIndex+1;
+end;
+
+procedure Tf_config_pictures.ScanArchiveClick(Sender: TObject);
+var i,count: integer;
+begin
+screen.Cursor:=crHourGlass;
+try
+for i:=1 to MaxArchiveDir do begin
+  if (csc.ArchiveDirActive[i])and(csc.ArchiveDir[i]>'')and DirectoryExistsUTF8(csc.ArchiveDir[i]) then begin
+     Cdb.ScanArchiveDirectory(csc.ArchiveDir[i],count);
+     StringGrid1.Cells[3,i]:=inttostr(count);
+  end;
+end;
+finally
+screen.Cursor:=crDefault;
+end;
 end;
 
 end.

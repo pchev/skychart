@@ -154,6 +154,9 @@ type
      function GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
      function GetMaxField(path,cat: string):string;
      function GetCatType(path,cat: string):integer;
+     function GetNebColorSet(path,cat: string):boolean;
+     function GetCatURL(path,cat: string):string;
+     function GetCatTxtFile(path,cat: string):string;
      function GetVOstarmag: double;
      Procedure LoadConstellation(fpath,lang:string);
      Procedure LoadConstL(fname:string);
@@ -721,13 +724,14 @@ end;
 
 function Tcatalog.OpenMilkyWay(fill:boolean):boolean;
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
 begin
  if fill then
     SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwf')
  else
     SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'milkyway','mwl');
- GetGCatInfo(GcatH,v,GCatFilter,result);
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
  if result then result:=(v=rtLin);
  if result then OpenGCatWin(result);
 end;
@@ -752,12 +756,13 @@ end;
 
 function Tcatalog.OpenDSL(forcecolor: boolean; col:integer):boolean;
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
 begin
  DSLForceColor:=forcecolor;
  DSLcolor:=col;
  SetGcatPath(slash(appdir)+pathdelim+'cat'+pathdelim+'DSoutlines','dsl');
- GetGCatInfo(GcatH,v,GCatFilter,result);
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
  if result then result:=(v=rtLin);
  if result then OpenGCatWin(result);
 end;
@@ -786,10 +791,11 @@ end;
 
 function Tcatalog.OpenDefaultStars:boolean;
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
 begin
  SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
- GetGCatInfo(GcatH,v,GCatFilter,result);
+ GetGCatInfo(GcatH,info,v,GCatFilter,result);
  // files are sorted
  GCatFilter:=true;
  if result then result:=(v=rtStar);
@@ -798,10 +804,11 @@ end;
 
 Procedure Tcatalog.OpenDefaultStarsPos(ar1,ar2,de1,de2: double ; var ok : boolean);
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
 begin
  SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
- GetGCatInfo(GcatH,v,GCatFilter,ok);
+ GetGCatInfo(GcatH,info,v,GCatFilter,ok);
  // files are sorted
  GCatFilter:=true;
  if ok then ok:=(v=rtStar);
@@ -822,6 +829,7 @@ end;
 procedure Tcatalog.FindDefaultStars(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
 var
    H : TCatHeader;
+   info:TCatHdrInfo;
    rec:GCatrec;
    version : integer;
    iid:string;
@@ -829,7 +837,7 @@ begin
 ok:=false;
 iid:=id;
 SetGcatPath(cfgcat.starcatpath[DefStar-BaseStar],'star');
-GetGCatInfo(H,version,GCatFilter,ok);
+GetGCatInfo(H,info,version,GCatFilter,ok);
 GCatFilter:=true;
 if fileexists(slash(cfgcat.starcatpath[DefStar-BaseStar])+'star'+'.ixr') then begin
    if ok then FindNumGcatRec(cfgcat.starcatpath[DefStar-BaseStar],'star',iid,H.ixkeylen,rec,ok);
@@ -1363,6 +1371,7 @@ end;
 
 function Tcatalog.NewGCat:boolean;
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
 begin
 repeat
@@ -1373,7 +1382,7 @@ repeat
    end;
    if cfgcat.GCatLst[CurGCat-1].CatOn then begin
      SetGcatPath(cfgcat.GCatLst[CurGCat-1].path,cfgcat.GCatLst[CurGCat-1].shortname);
-     GetGCatInfo(GcatH,v,GCatFilter,result);
+     GetGCatInfo(GcatH,info,v,GCatFilter,result);
    end else
      result:=false;
 until result and (v=VerGCat);
@@ -1381,9 +1390,10 @@ end;
 
 function Tcatalog.GetInfo(path,shortname:string; var magmax:single;var v:integer; var version,longname:string):boolean;
 var GcatH : TCatHeader;
+    info:TCatHdrInfo;
 begin
 SetGcatPath(path,shortname);
-GetGCatInfo(GcatH,v,GCatFilter,result);
+GetGCatInfo(GcatH,info,v,GCatFilter,result);
 magmax:=GcatH.MagMax;
 version:=GcatH.version;
 longname:=GcatH.LongName;
@@ -1391,11 +1401,12 @@ end;
 
 function Tcatalog.GetMaxField(path,cat: string):string;
 var GCatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
     ok : boolean;
 begin
 SetGcatPath(path,cat);
-GetGCatInfo(GcatH,v,GCatFilter,ok);
+GetGCatInfo(GcatH,info,v,GCatFilter,ok);
 case GcatH.FileNum of
   1    : result:='10';
   50   : result:='10';
@@ -1408,13 +1419,47 @@ end;
 
 function Tcatalog.GetCatType(path,cat: string):integer;
 var GCatH : TCatHeader;
+    info:TCatHdrInfo;
     v : integer;
     ok : boolean;
 begin
 SetGcatPath(path,cat);
-GetGCatInfo(GcatH,v,GCatFilter,ok);
+GetGCatInfo(GcatH,info,v,GCatFilter,ok);
 if ok then result:=v
    else result:=-1;
+end;
+
+function Tcatalog.GetNebColorSet(path,cat: string):boolean;
+var GCatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+    ok : boolean;
+begin
+SetGcatPath(path,cat);
+GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+result:=ok and (v=rtNeb) and (GCatH.flen[14]>0);
+end;
+
+function Tcatalog.GetCatURL(path,cat: string):string;
+var GCatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+    ok : boolean;
+begin
+SetGcatPath(path,cat);
+GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+result:=info.caturl;
+end;
+
+function Tcatalog.GetCatTxtFile(path,cat: string):string;
+var GCatH : TCatHeader;
+    info:TCatHdrInfo;
+    v : integer;
+    ok : boolean;
+begin
+SetGcatPath(path,cat);
+GetGCatInfo(GcatH,info,v,GCatFilter,ok);
+result:=GCatH.TxtFileName;
 end;
 
 function Tcatalog.GetVOstarmag: double;
@@ -1611,9 +1656,13 @@ repeat
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   rec.ra:=deg2rad*rec.ra;
   rec.dec:=deg2rad*rec.dec;
-  if cfgcat.GCatLst[CurGCat-1].ForceColor then begin
-    rec.options.UseColor:=1;
-    rec.neb.color:=cfgcat.GCatLst[CurGCat-1].col;
+  if rec.neb.valid[vnColor] then begin
+     rec.options.UseColor:=1;
+  end else begin
+    if cfgcat.GCatLst[CurGCat-1].ForceColor then begin
+      rec.options.UseColor:=1;
+      rec.neb.color:=cfgcat.GCatLst[CurGCat-1].col;
+    end;
   end;
   break;
 until not result;
@@ -1639,6 +1688,7 @@ end;
 procedure Tcatalog.FindNGCat(id:shortstring; var ar,de:double ; var ok:boolean; ctype:integer=-1);
 var
    H : TCatHeader;
+   info:TCatHdrInfo;
    rec:GCatrec;
    i,version : integer;
    iid:string;
@@ -1649,7 +1699,7 @@ iid:=id;
 for i:=0 to cfgcat.GCatNum-1 do begin
   if ((ctype=-1)or(cfgcat.GCatLst[i].cattype=ctype)) then begin
    SetGcatPath(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname);
-   GetGCatInfo(H,version,GCatFilter,catok);
+   GetGCatInfo(H,info,version,GCatFilter,catok);
    if catok and fileexists(slash(cfgcat.GCatLst[i].path)+cfgcat.GCatLst[i].shortname+'.ixr') then begin
      FindNumGcatRec(cfgcat.GCatLst[i].path,cfgcat.GCatLst[i].shortname,iid,H.ixkeylen,rec,ok);
      if ok then begin
@@ -3346,6 +3396,7 @@ end;
 Procedure Tcatalog.LoadHorizonPicture(fname:string);
 begin
 try
+if ExtractFilePath(fname)='' then fname:=slash(Appdir)+fname;
 if FileExists(fname) then begin
    cfgshr.horizonpicture.LoadFromFile(fname);
    cfgshr.horizonpicturevalid:=true;

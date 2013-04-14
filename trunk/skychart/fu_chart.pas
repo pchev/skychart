@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-     pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss,
+     pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss, pu_imglist,
      u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit,
      u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
@@ -59,6 +59,7 @@ type
   Tf_chart = class(TFrame)
     About2: TMenuItem;
     About1: TMenuItem;
+    imglist: TAction;
     AddLabel1: TMenuItem;
     DownloadDialog1: TDownloadDialog;
     CopyCoord1: TMenuItem;
@@ -66,6 +67,7 @@ type
     Identlabel: TImage;
     MenuFinderCircle: TMenuItem;
     AllAtThisPos: TMenuItem;
+    ImgList1: TMenuItem;
     nsearch1: TMenuItem;
     nsearch2: TMenuItem;
     nsearch3: TMenuItem;
@@ -140,6 +142,7 @@ type
     procedure ChartResize(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
+    procedure imglistExecute(Sender: TObject);
     procedure MenuLoadCircleClick(Sender: TObject);
     procedure MenuSaveCircleClick(Sender: TObject);
     procedure nsearch1Click(Sender: TObject);
@@ -199,10 +202,11 @@ type
     FShowCoord: Tstr1func;
     FListInfo: Tstr12func;
     FChartMove: TnotifyEvent;
+    FImageSetup: TNotifyEvent;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
     MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam,printing: Boolean;
-    LockMouseWheel: Boolean;
+    LockMouseWheel,lockblink: Boolean;
     SaveColor: Starcolarray;
     SaveLabelColor: array[1..numlabtype] of Tcolor;
     PrintPreview: Tf_image;
@@ -319,7 +323,7 @@ type
     function cmd_GetObs:string;
     function cmd_SetTZ(tz:string):string;
     function cmd_GetTZ:string;
-    function cmd_SetBGimage(onoff:string):string;
+    function cmd_SetBGimage(onoff:string;loadnew:boolean=true):string;
     function cmd_LoadBGimage(fn:string):string;
     function cmd_SetShowPicture(onoff:string):string;
     function cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
@@ -349,6 +353,7 @@ type
     property OnShowCoord: Tstr1func read FShowCoord write FShowCoord;
     property OnListInfo: Tstr12func read FListInfo write FListInfo;
     property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
+    property OnImageSetup: TNotifyEvent read FImageSetup write FImageSetup;
     property NightVision: Boolean read FNightVision write SetNightVision;
   end;
 
@@ -390,6 +395,7 @@ Connect1.caption:=rsConnectTeles;
 AbortSlew1.caption:=rsAbortSlew;
 TrackOff1.caption:=rsUnlockChart;
 AllAtThisPos.Caption:=rsAllObjectsAt;
+imglist.Caption:=rsImageList;
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;
 DownloadDialog1.msgtofile:=rsToFile;
@@ -501,6 +507,7 @@ try
    if Connect1.Checked then Fpop_encoder.ScopeDisconnect(ok);
    Fpop_encoder.Free;
  end;
+ if f_imglist<>nil then f_imglist.Free;
  for i:=1 to maxundo do undolist[i].Free;
  inherited Destroy;
  if VerboseMsg then
@@ -624,6 +631,7 @@ if VerboseMsg then
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
  if sc.plot.cfgplot.plaplot=2 then GetSunImage;
+ if sc.cfgsc.ShowBackgroundImage then sc.cfgsc.ShowImageList:=true;
  sc.Refresh;
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
@@ -2470,12 +2478,16 @@ end;
 
 procedure Tf_chart.BlinkTimerTimer(Sender: TObject);
 begin
-  BlinkTimer.Enabled:=false;
-  sc.cfgsc.ShowBackgroundImage:=not sc.cfgsc.ShowBackgroundImage;
-if VerboseMsg then
- WriteTrace(caption+' BlinkTimerTimer');
+  if lockblink then exit;
+  try
+  lockblink:=true;
+  sc.cfgsc.ShowImageList:=not sc.cfgsc.ShowImageList;
+  sc.cfgsc.ShowBackgroundImage:=sc.cfgsc.ShowImageList;
+  if VerboseMsg then WriteTrace(caption+' BlinkTimerTimer');
   Refresh;
-  BlinkTimer.Enabled:=true;
+  finally
+  lockblink:=false;
+  end;
 end;
 
 procedure Tf_chart.Cleanupmap1Click(Sender: TObject);
@@ -2494,7 +2506,7 @@ var ra2000,de2000: double;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
-if cmain.KioskMode then begin f_detail.Height:=200; f_detail.Width:=350; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; f_detail.HTMLViewer1.ScrollBars:=ssNone; end
+if cmain.KioskMode then begin f_detail.Height:=250; f_detail.Width:=400; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; {f_detail.IpHtmlPanel1.ScrollBars:=ssNone;} end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
@@ -2504,8 +2516,8 @@ precession(sc.cfgsc.JDChart,jd2000,ra2000,de2000);
 f_detail.ra:=ra2000;
 f_detail.de:=de2000;
 f_detail.objname:=sc.cfgsc.FindName;
-f_detail.HTMLViewer1.DefFontSize:=sc.plot.cfgplot.FontSize[4];
-f_detail.HTMLViewer1.DefFontName:=sc.plot.cfgplot.FontName[4];
+f_detail.IpHtmlPanel1.DefaultFontSize:=sc.plot.cfgplot.FontSize[4];
+f_detail.IpHtmlPanel1.DefaultTypeFace:=sc.plot.cfgplot.FontName[4];
 f_detail.TextOnly:=cmain.TextOnlyDetail;
 f_detail.show;
 f_detail.text:=FormatDesc;
@@ -2519,7 +2531,7 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     searchdir,cmd,fn: string;
     bmp: Tbitmap;
     ipla:integer;
-    i,p,l,y,m,d,precision,ico : integer;
+    i,p,l,y,m,d,precision : integer;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
     ra,dec,q,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
@@ -2652,7 +2664,7 @@ if (otype='P')or((otype='Ps')and(oname=pla[11])) then begin
    if ipla=5 then cmd:=cmd+' -grs_longitude '+formatfloat(f1,sc.planet.JupGRS(sc.cfgsc.GRSlongitude,sc.cfgsc.GRSdrift,sc.cfgsc.GRSjd,cjd));
    DeleteFile(slash(Tempdir)+'info.png');
    i:=exec(cmd);
-   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200">'+html_br;
+   if i=0 then txt:=txt+'<img src="'+slash(TempDir)+'info.png" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
  end;
 end;
 // Sun picture
@@ -2661,7 +2673,7 @@ if (otype='S*')and(oname=pla[10]) then begin
   if not FileExistsutf8(fn) then begin  // use default image
     fn:=slash(systoutf8(appdir))+slash('data')+slash('planet')+'sun-0.jpg';
   end;
-  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
+  if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
 end;
 // DSO picture
 if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
@@ -2676,7 +2688,7 @@ if sc.Fits.GetFileName(sc.cfgsc.FindCat,oname,fn) then begin
          fn:=slash(systoutf8(TempDir))+'info.bmp';
          DeleteFileutf8(fn);
          bmp.SaveToFile(fn);
-         if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200">'+html_br;
+         if FileExistsutf8(fn) then txt:=txt+'<img src="'+utf8tosys(fn)+'" alt="'+oname+'" border="0" width="200" height="200">'+html_br;
          finally
          bmp.Free;
          end;
@@ -2965,17 +2977,19 @@ begin
 result:=msgOK+blank+inttostr(xcursor)+blank+inttostr(ycursor);
 end;
 
-function Tf_Chart.cmd_SetBGimage(onoff:string):string;
+function Tf_Chart.cmd_SetBGimage(onoff:string;loadnew:boolean=true):string;
 begin
 result:=msgOK;
-sc.cfgsc.ShowBackgroundImage:=(uppercase(onoff)='ON');
+sc.cfgsc.ShowImageList:=(uppercase(onoff)='ON');
+if (not sc.cfgsc.ShowImageList) or loadnew then sc.cfgsc.ShowBackgroundImage := sc.cfgsc.ShowImageList;
 if sc.cfgsc.ShowBackgroundImage and (not sc.Fits.dbconnected) then begin
    sc.cfgsc.ShowBackgroundImage:=false;
+   sc.cfgsc.ShowImageList:=false;
    WriteTrace(rsErrorPleaseC);
    result:=msgFailed;
    exit;
 end;
-if sc.cfgsc.ShowBackgroundImage and (not sc.Fits.Header.valid) then begin
+if loadnew and sc.cfgsc.ShowBackgroundImage and (not sc.Fits.Header.valid) then begin
   sc.Fits.Filename:=sc.cfgsc.BackgroundImage;
   sc.Fits.InfoWCScoord;
   if sc.Fits.Header.valid then begin
@@ -3623,8 +3637,40 @@ begin
  result:=msgOK+blank+sc.cfgsc.ObsTZ;
 end;
 
+procedure Tf_chart.imglistExecute(Sender: TObject);
+var i: integer;
+begin
+ if f_imglist=nil then begin
+  f_imglist:=Tf_imglist.Create(self);
+  f_imglist.Fits:=sc.Fits;
+end;
+f_imglist.CheckListBox1.Clear;
+for i:=0 to sc.Fits.fitslist.Count-1 do begin
+   f_imglist.CheckListBox1.Items.Add(sc.Fits.fitslist[i]);
+   f_imglist.CheckListBox1.Checked[i]:=sc.Fits.fitslistactive[i];
+end;
+f_imglist.ShowModal;
+if f_imglist.ModalResult=mrOK then begin
+ sc.bgsettingchange:=true;
+ for i:=0 to sc.Fits.fitslist.Count-1 do begin
+    sc.Fits.fitslistactive[i] := f_imglist.CheckListBox1.Checked[i];
+ end;
+ sc.Fits.fitslistmodified:=true;
+ Refresh;
+end else if f_imglist.ModalResult=mrYes then begin
+  if assigned(FImageSetup) then FImageSetup(self);
+end;
+end;
+
 function Tf_chart.cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
 var ra2000,de2000: double;
+    archivefile,buf: string;
+    archiveit : boolean;
+    i: integer;
+    f1:Tform;
+    e1:Tedit;
+    l1,l2:TLabel;
+    b1,b2:Tbutton;
 begin
 f_getdss.cmain:=cmain;
 ra2000:=sc.cfgsc.racentre;
@@ -3643,6 +3689,75 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
       sc.cfgsc.BackgroundImage:=sc.Fits.Filename;
       sc.cfgsc.ShowBackgroundImage:=true;
       Refresh;
+      if f_getdss.cfgdss.dssarchive then begin
+       if f_getdss.cfgdss.OnlineDSS then begin
+          buf:=trim(f_getdss.cfgdss.DSSurl[f_getdss.cfgdss.OnlineDSSid,0]);
+          buf:=StringReplace(buf,' ','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,'/','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,'\','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,';','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,':','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,',','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,'.','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,'(','_',[rfReplaceAll]);
+          buf:=StringReplace(buf,')','_',[rfReplaceAll]);
+          archivefile:=buf;
+       end
+       else
+          archivefile:=archivefile+'realsky';
+       archivefile:=archivefile+'_'+ARToStr3(rad2deg*ra2000/15)+DEToStr3(rad2deg*de2000);
+       archiveit:=true;
+       if f_getdss.cfgdss.dssarchiveprompt then begin
+         f1:=Tform.Create(self);
+         e1:=Tedit.Create(f1); l1:=Tlabel.Create(f1); l2:=Tlabel.Create(f1);
+         b1:=Tbutton.Create(f1); b2:=Tbutton.Create(f1);
+         try
+         l1.Parent:=f1; l2.Parent:=f1; e1.Parent:=f1; b1.Parent:=f1; b2.Parent:=f1;
+         l1.Top:=8; l1.Left:=8;
+         l1.Caption:=rsFilenameWith;
+         e1.Top:=l1.Top+l1.Height+4; e1.Left:=8;
+         e1.Width:=350;
+         e1.Text:=archivefile;
+         l2.Top:=e1.Top+e1.Height+8; l2.Left:=8;
+         l2.Caption:=rsArchiveThisI;
+         b1.Width:=65; b2.Width:=65;
+         b1.Top:=l2.Top+l2.Height+8; b1.Left:=8;
+         b2.Top:=b1.Top; b2.Left:=b1.Left+b2.Width+8;
+         b1.Caption:=rsOK; b1.ModalResult:=mrOk; b1.Default:=true;
+         b2.Caption:=rsCancel; b2.ModalResult:=mrCancel; b2.Cancel:=true;
+         f1.ClientWidth:=max(e1.Width,l1.Width)+16;
+         f1.ClientHeight:=b1.top+b1.Height+8;
+         f1.BorderStyle:=bsDialog;
+         f1.Caption:=rsImageArchive;
+         formpos(f1,mouse.CursorPos.X,mouse.CursorPos.Y);
+         if f1.ShowModal=mrOK then begin
+            archiveit:=true;
+            archivefile:=trim(e1.Text);
+         end
+           else archiveit:=false;
+         finally
+          l1.Free; e1.Free; b1.Free; b2.Free; f1.Free;
+         end;
+       end;
+       if archiveit then begin
+         archivefile:=slash(f_getdss.cfgdss.dssarchivedir)+ExtractFileNameOnly(archivefile);
+         i:=0;
+         buf:=archivefile+'.fits';
+         while FileExists(buf) do begin
+            inc(i);
+            buf:=archivefile+'_'+inttostr(i)+'.fits';
+         end;
+         archivefile:=buf;
+         try
+         CopyFile(sc.Fits.Filename,archivefile,false);
+         except
+          on E: Exception do begin
+           WriteTrace('CopyFile error: '+E.Message);
+           if f_getdss.cfgdss.dssarchiveprompt then MessageDlg('CopyFile error: '+E.Message, mtError, [mbClose], 0);
+          end;
+         end;
+       end;
+      end;
       result:=msgOK;
    end;
 end;

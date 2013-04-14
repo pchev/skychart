@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 {$mode objfpc}{$H+}
 interface
 
-uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits,
+uses passql, pasmysql, passqlite, u_constant, u_util, u_projection, cu_fits, FileUtil,
   Forms, Stdctrls, ComCtrls, Classes, Dialogs, Sysutils, StrUtils, u_translation;
 
 
@@ -46,7 +46,7 @@ type
      function dropDB(cmain: Tconf_main): string;
      function checkDBConfig(cmain: Tconf_main): string;
      Function ConnectDB(host,dbn,user,pass:string; port:integer):boolean;
-     function CheckForUpgrade(memo:Tmemo):boolean;
+     function CheckForUpgrade(memo:Tmemo; updversion:string):boolean;
      function CheckDB:boolean;
      function LoadCountryList(locfile:string; memo:Tmemo):boolean;
      function LoadWorldLocation(locfile,country:string; city_only:boolean; memo:Tmemo):boolean;
@@ -82,8 +82,9 @@ type
      Function GetComElem(id: string; epoch:double; var tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
      Function GetComElemEpoch(id:string; jd:double; var epoch,tp,q,ec,ap,an,ic,h,g,eq: double; var nam,elem_id:string):boolean;
      procedure LoadSampleData(memo:Tmemo; cmain: Tconf_main);
-     function CountImages:integer;
+     function CountImages(catname:string):integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
+     procedure ScanArchiveDirectory(ArchivePath:string; var count:integer );
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
      property AstMsg : string read FAstmsg write FAstmsg;
      property ComMinDT : integer read FComMinDT write FComMinDT;
@@ -166,7 +167,7 @@ end
 if creatednow and (Assigned(FInitializeDB)) then FInitializeDB(self);
 end;
 
-function TCDCdb.CheckForUpgrade(memo:Tmemo):boolean;
+function TCDCdb.CheckForUpgrade(memo:Tmemo; updversion:string):boolean;
 var updcountry:boolean;
     i,k: integer;
     buf: string;
@@ -218,6 +219,16 @@ if db.Active then begin
      writetrace('Create table '+sqltable[dbtype,8,1]+' ...  '+db.ErrorMessage);
      k:=2;
      db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
+  end;
+  // change catalogname field length
+  if (DBtype=mysql)and(updversion<cdcver)and(updversion<'3.9b') then begin
+    db.Query('drop table cdc_fits');
+    writetrace('Drop table cdc_fits ... '+db.ErrorMessage);
+    db.Commit;
+    db.Query('CREATE TABLE '+sqltable[dbtype,8,1]+sqltable[dbtype,8,2]);
+    writetrace('Create table '+sqltable[dbtype,8,1]+' ...  '+db.ErrorMessage);
+    k:=2;
+    db.Query('CREATE INDEX '+sqlindex[dbtype,k,1]+' on '+sqlindex[dbtype,k,2]);
   end;
 end;
 end;
@@ -1192,11 +1203,11 @@ except
 end;
 end;
 
-function TCDCdb.CountImages:integer;
+function TCDCdb.CountImages(catname:string):integer;
 begin
 try
 if db.Active then begin
-  result:=strtointdef(db.QueryOne('select count(*) from cdc_fits'),0);
+  result:=strtointdef(db.QueryOne('select count(*) from cdc_fits where catalogname="'+uppercase(catname)+'"'),0);
 end
 else result:=0;
 finally
@@ -1216,10 +1227,6 @@ try
 if db.Active then begin
 ProgressCat.caption:='';
 ProgressBar.position:=0;
-db.UnLockTables;
-db.starttransaction;
-db.TruncateTable('cdc_fits');
-db.commit;
 j:=findfirst(slash(ImagePath)+'*',faDirectory,c);
 while j=0 do begin
   if ((c.attr and faDirectory)<>0)and(c.Name<>'.')and(c.Name<>'..') then begin
@@ -1227,6 +1234,11 @@ while j=0 do begin
   ProgressCat.caption:=c.Name;
   ProgressBar.position:=0;
   Application.processmessages;
+  db.UnLockTables;
+  db.starttransaction;
+  cmd:='delete from cdc_fits where catalogname="'+uppercase(c.Name)+'"';
+  db.query(cmd);
+  db.commit;
   i:=findfirst(slash(catdir)+'*.*',0,f);
   n:=1;
   while i=0 do begin
@@ -1296,6 +1308,70 @@ end;
 end else begin
   ProgressCat.Caption:='Directory not found!';
 end;
+except
+end;
+end;
+
+procedure TCDCdb.ScanArchiveDirectory(ArchivePath:string; var count:integer );
+var f : tsearchrec;
+    i,n,p:integer;
+    objn,fname,cmd:string;
+    ra,de,w,h,r: double;
+begin
+n:=0;
+try
+if DirectoryExistsUTF8(ArchivePath) then begin
+  if db.Active then begin
+    db.UnLockTables;
+    db.starttransaction;
+    cmd:='delete from cdc_fits where catalogname="'+uppercase(ArchivePath)+'"';
+    db.query(cmd);
+    db.commit;
+    i:=findfirst(slash(ArchivePath)+'*.*',0,f);
+    db.starttransaction;
+    while i=0 do begin
+        FFits.FileName:=slash(ArchivePath)+f.Name;
+        ra:=FFits.Center_RA;
+        de:=FFits.Center_DE;
+        w:=FFits.Img_Width;
+        h:=FFits.img_Height;
+        r:=FFits.Rotation;
+        fname:=FFits.FileName;
+        if FFits.header.valid then begin
+          inc(n);
+          objn:=FFits.header.objects;
+          if objn>'' then begin
+            objn:=StringReplace(objn,'''','',[rfReplaceAll]);
+            p:=pos(',',objn);
+            if p>0 then objn:=copy(objn,1,p-1);
+          end else begin
+            objn:=extractfilename(f.Name);
+            p:=pos(extractfileext(objn),objn);
+            objn:=copy(objn,1,p-1);
+            objn:=uppercase(stringreplace(objn,blank,'',[rfReplaceAll]));
+          end;
+          cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
+            +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
+            +',"'+uppercase(ArchivePath)+'"'
+            +',"'+uppercase(objn)+'"'
+            +',"'+formatfloat(f5,ra)+'"'
+            +',"'+formatfloat(f5,de)+'"'
+            +',"'+formatfloat(f5,w)+'"'
+            +',"'+formatfloat(f5,h)+'"'
+            +',"'+formatfloat(f5,r)+'"'
+            +')';
+          if not db.query(cmd) then
+             writetrace(Format(rsDBInsertFail, [f.Name, db.ErrorMessage]));
+        end
+        else writetrace(Format(rsInvalidFITSF, [f.Name]));
+        i:=findnext(f);
+    end;
+    db.commit;
+    findclose(f);
+    db.flush('tables');
+  end;
+end;
+count:=n;
 except
 end;
 end;

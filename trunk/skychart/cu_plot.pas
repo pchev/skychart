@@ -89,6 +89,7 @@ type
      procedure InitXPlanetRender;
      procedure SetImage(value:TCanvas);
      procedure InitStarBmp;
+     procedure SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false; forcealpha:integer=0; blacklevel:integer=0);
      Procedure PlotDSOOcl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
      procedure PlotDSOPNe(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
      procedure PlotDSOGCl(Ax,Ay: single; Adim,Ama,Asbr,Apixscale : Double ; Atyp : Integer;Amorph:string; forcecolor:boolean; col:Tcolor);
@@ -141,7 +142,7 @@ type
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
-     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false):integer;
+     function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false;sizex:single=1):integer;
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
@@ -498,13 +499,15 @@ except
 end;
 end;
 
-procedure SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false; forcealpha:integer=0);
+procedure TSplot.SetBGRATransparencyFromLuminance(bmp:TBGRABitmap; method: integer; whitebg:boolean=false; forcealpha:integer=0; blacklevel:integer=0);
 var
   i: Integer;
   newalpha: byte;
   p: PBGRAPixel;
+  whitetr: boolean;
 begin
 if (bmp.Width<2)or(bmp.Height<2) then exit;
+whitetr:=blacklevel>128;
 p := bmp.Data;
 for i := bmp.NbPixels-1 downto 0 do
 begin
@@ -519,7 +522,7 @@ begin
          newalpha:=0
       else
          newalpha:=255;
-  3 : if newalpha>0 then newalpha:=forcealpha; // 3: fixed transparency, except black transparent
+  3 : if (whitetr and(newalpha<blacklevel))or((not whitetr)and(newalpha>blacklevel)) then newalpha:=forcealpha else newalpha:=0; // 3: fixed transparency, except bg transparent
   end;
   if whitebg then begin
     p^.red:=255-p^.red;
@@ -1349,20 +1352,30 @@ end;
 Procedure TSplot.PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
 var outbmp:TBGRABitmap;
     memstream: TMemoryStream;
+    blacklevel:byte;
 begin
    if cfgplot.UseBMP then begin
       memstream:=TMemoryStream.Create;
+      outbmp:=TBGRABitmap.Create;
       try
       ibmp.SaveToStream(memstream);
       memstream.position := 0;
-      outbmp:=TBGRABitmap.Create;
       outbmp.LoadFromStream(memstream,bmpreader);
       memstream.Clear;
-      SetBGRATransparencyFromLuminance(outbmp,3,WhiteBg,alpha);
-      cbmp.PutImage(0,0,outbmp,dmDrawWithTransparency);
-      outbmp.free;
+      blacklevel:=MaxIntValue([cfgplot.backgroundcolor and $FF ,(cfgplot.backgroundcolor div $100) and $FF ,(cfgplot.backgroundcolor div $10000) and $FF]);
+      if whitebg then begin
+        // invert picture
+        SetBGRATransparencyFromLuminance(outbmp,3,WhiteBg,255,-1);
+      end;
+      // set map transparency
+      SetBGRATransparencyFromLuminance(cbmp,3,false,alpha,blacklevel);
+      // draw transparent map over the picture
+      outbmp.PutImage(0,0,cbmp,dmDrawWithTransparency);
+      // draw the result back to the map
+      cbmp.PutImage(0,0,outbmp,dmSet);
       finally
         memstream.Free;
+        outbmp.free;
       end;
    end else begin
      if DisplayIs32bpp then SetTransparencyFromLuminance(ibmp,0)
@@ -1953,7 +1966,7 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
-function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false):integer;
+function TSplot.PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false;sizex:single=1):integer;
 var ts:TSize;
     mp:TRect;
     ATextStyle: TTextStyle;
@@ -1979,7 +1992,7 @@ if cfgplot.UseBMP then begin;
   if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
   if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
   if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
-  cbmp.FontHeight:=trunc(cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
+  cbmp.FontHeight:=trunc(sizex*cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72);
   ts:=cbmp.TextSize(txt);
   if r>=0 then begin
   case Xalign of
@@ -2439,14 +2452,98 @@ end;
 
 
 Procedure TSplot.PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
-var c,s: extended;
+var c,s,c1,s1,c2,s2,rote: extended;
+    td:single;
     i: integer;
     col: TBGRAPixel;
+    ts:TSize;
 begin
-if (cfgplot.nebplot>0)and(compassrose<>nil)and(compassrose.width>0)and(compassarrow<>nil)and(compassarrow.width>0)
+if RoseType=3 then begin     // simple arrow
+  if cfgplot.usebmp then begin
+     td:=roserd*0.9;
+     rote:=rot+pid2;
+     if FlipY<0 then rot:=pi-rot;
+     if FlipX<0 then rot:=-rot;
+     sincos(rot,c,s);
+     sincos(rot-pid4,c1,s1);
+     sincos(rot+pid4,c2,s2);
+     col:=ColorToBGRA(cfgplot.Color[12]);
+     BGRADrawLine(rosex,rosey,rosex-(roserd*c),rosey-(roserd*s),col,cfgchart.drawpen,cbmp);
+     BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8), col,cfgchart.drawpen,cbmp);
+     BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8), col,cfgchart.drawpen,cbmp);
+     col:=ColorToBGRA(cfgplot.LabelColor[7]);
+     BGRATextOut((rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8),rad2deg*rot,'N',col,cbmp);
+     if FlipY<0 then rote:=pi-rote;
+     if FlipX<0 then rote:=-rote;
+     sincos(rote,c,s);
+     sincos(rote-pid4,c1,s1);
+     sincos(rote+pid4,c2,s2);
+     col:=ColorToBGRA(cfgplot.Color[12]);
+     BGRADrawLine(rosex,rosey,rosex-(roserd*c),rosey-(roserd*s),col,cfgchart.drawpen,cbmp);
+     BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8), col,cfgchart.drawpen,cbmp);
+     BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8), col,cfgchart.drawpen,cbmp);
+     col:=ColorToBGRA(cfgplot.LabelColor[7]);
+     BGRATextOut((rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8),rad2deg*rote-90,'E',col,cbmp);
+  end else if cnv<>nil then with cnv do begin
+     Pen.Width:=cfgchart.drawpen;
+     Pen.Mode:=pmCopy;
+     Brush.Style:=bsClear;
+     Font.Name:=cfgplot.FontName[1];
+     Font.Color:=clWhite;
+     if WhiteBg then Font.Color:=clBlack;
+     Font.Size:=cfgplot.FontSize[1]*cfgchart.fontscale;
+     td:=roserd*0.9;
+     rote:=rot+pid2;
+     if FlipY<0 then rot:=pi-rot;
+     if FlipX<0 then rot:=-rot;
+     sincos(rot,c,s);
+     sincos(rot-pid4,c1,s1);
+     sincos(rot+pid4,c2,s2);
+     Pen.Color:=cfgplot.Color[12];
+     MoveTo(round(rosex),round(rosey));
+     LineTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     MoveTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     LineTo(round((rosex-(roserd*c))+(roserd*c1/8)),round((rosey-(roserd*s))+(roserd*s1/8)));
+     MoveTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     LineTo(round((rosex-(roserd*c))+(roserd*c2/8)),round((rosey-(roserd*s))+(roserd*s2/8)));
+     TextOut(round((rosex-(roserd*c))+(roserd*c2/8)),round((rosey-(roserd*s))+(roserd*s2/8)),'N');
+     if FlipY<0 then rote:=pi-rote;
+     if FlipX<0 then rote:=-rote;
+     sincos(rote,c,s);
+     sincos(rote-pid4,c1,s1);
+     sincos(rote+pid4,c2,s2);
+     MoveTo(round(rosex),round(rosey));
+     LineTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     MoveTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     LineTo(round((rosex-(roserd*c))+(roserd*c1/8)),round((rosey-(roserd*s))+(roserd*s1/8)));
+     MoveTo(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
+     LineTo(round((rosex-(roserd*c))+(roserd*c2/8)),round((rosey-(roserd*s))+(roserd*s2/8)));
+     TextOut(round((rosex-(roserd*c))+(roserd*c2/8)),round((rosey-(roserd*s))+(roserd*s2/8)),'E');
+     Pen.Mode:=pmCopy;
+     brush.Style:=bsSolid;
+  end;
+end else begin    // compass
+if (cfgplot.nebplot>0)and(cfgplot.usebmp)and(compassrose<>nil)and(compassrose.width>0)and(compassarrow<>nil)and(compassarrow.width>0)
  then begin
    case RoseType of
-    1: PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassrose,2);
+    1: begin
+         PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassrose,2);
+         td:=roserd*0.6;
+         rote:=rot+pid2;
+         if FlipY<0 then rot:=pi-rot;
+         if FlipX<0 then rot:=-rot;
+         sincos(rot,c,s);
+         col:=ColorToBGRA(cfgplot.LabelColor[7]);
+         cbmp.FontName:=cfgplot.FontName[1];
+         cbmp.FontHeight:=trunc(cfgplot.FontSize[1]*cfgchart.fontscale*96/72);
+         ts:=cbmp.TextSize('N');
+         BGRATextOut((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c,(rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s,rad2deg*rot,'N',col,cbmp);
+         if FlipY<0 then rote:=pi-rote;
+         if FlipX<0 then rote:=-rote;
+         sincos(rote,c,s);
+         ts:=cbmp.TextSize('E');
+         BGRATextOut((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c,(rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s,rad2deg*rote,'E',col,cbmp);
+       end;
     2: PlotImage(rosex,rosey,2*roserd,2*roserd,rot,flipx,flipy,WhiteBg,true,compassarrow,2);
    end;
 end else begin
@@ -2455,7 +2552,9 @@ end else begin
   if cfgplot.usebmp then begin
     case RoseType of
     1: begin
-       col:=ColorToBGRA(cfgplot.Color[13]);
+       td:=roserd*0.6;
+       rote:=rot+pid2;
+       col:=ColorToBGRA(cfgplot.Color[12]);
        cbmp.EllipseAntialias(rosex,rosey,roserd,roserd,col,cfgchart.drawpen);
        sincos(rot,c,s);
        if not WhiteBg then col:=ColorToBGRA(clRed);
@@ -2465,11 +2564,25 @@ end else begin
        if not WhiteBg then col:=ColorToBGRA(clBlue);
        BGRADrawLine(rosex+(roserd*s/8),rosey-(roserd/8*c),rosex+(roserd*c),rosey+(roserd*s),col,cfgchart.drawpen,cbmp);
        BGRADrawLine(rosex+(roserd*c),rosey+(roserd*s),rosex-(roserd*s/8),rosey+(roserd/8*c),col,cfgchart.drawpen,cbmp);
-       col:=ColorToBGRA(cfgplot.Color[13]);
+       col:=ColorToBGRA(cfgplot.Color[12]);
        for i:=1 to 7 do begin
            sincos(rot+i*pi/4,c,s);
            BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),rosex-(0.9*roserd*c),rosey-(0.9*roserd*s),col,cfgchart.drawpen,cbmp);
        end;
+       if WhiteBg then col:=ColorToBGRA(clBlack)
+          else col:=ColorToBGRA(clWhite);
+       if FlipY<0 then rot:=pi-rot;
+       if FlipX<0 then rot:=-rot;
+       sincos(rot,c,s);
+       cbmp.FontName:=cfgplot.FontName[1];
+       cbmp.FontHeight:=trunc(cfgplot.FontSize[1]*cfgchart.fontscale*96/72);
+       ts:=cbmp.TextSize('N');
+       BGRATextOut((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c,(rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s,rad2deg*rot,'N',col,cbmp);
+       if FlipY<0 then rote:=pi-rote;
+       if FlipX<0 then rote:=-rote;
+       sincos(rote,c,s);
+       ts:=cbmp.TextSize('E');
+       BGRATextOut((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c,(rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s,rad2deg*rote,'E',col,cbmp);
        end;
     2: begin
        col:=ColorToBGRA(cfgplot.Color[12]);
@@ -2480,6 +2593,8 @@ end else begin
        end;
     end;
   end else if cnv<>nil then with cnv do begin
+    td:=roserd*0.6;
+    rote:=rot+pid2;
     Pen.Width:=cfgchart.drawpen;
     Pen.Mode:=pmCopy;
     Brush.Style:=bsClear;
@@ -2506,9 +2621,23 @@ end else begin
            moveto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
            lineto(round(rosex-(0.9*roserd*c)),round(rosey-(0.9*roserd*s)));
        end;
+       Font.Name:=cfgplot.FontName[1];
+       Font.Color:=clWhite;
+       if WhiteBg then Font.Color:=clBlack;
+       Font.Size:=cfgplot.FontSize[1]*cfgchart.fontscale;
+       if FlipY<0 then rot:=pi-rot;
+       if FlipX<0 then rot:=-rot;
+       sincos(rot,c,s);
+       ts:=TextExtent('N');
+       TextOut(round((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c),round((rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s),'N');
+       if FlipY<0 then rote:=pi-rote;
+       if FlipX<0 then rote:=-rote;
+       sincos(rote,c,s);
+       ts:=TextExtent('E');
+       TextOut(round((rosex-(td*c))-(ts.cx div 2)*s-(ts.cy div 2)*c),round((rosey-(td*s))+(ts.cx div 2)*c-(ts.cy div 2)*s),'E');
        end;
     2: begin
-       Pen.Color:=cfgplot.Color[12];
+       Pen.Color:=cfgplot.Color[13];
        sincos(rot,c,s);
        moveto(round(rosex+(roserd*s/8)),round(rosey-(roserd/8*c)));
        lineto(round(rosex-(roserd*c)),round(rosey-(roserd*s)));
@@ -2521,6 +2650,7 @@ end else begin
     Pen.Mode:=pmCopy;
     brush.Style:=bsSolid;
   end;
+end;
 end;
 end;
 
@@ -2565,7 +2695,8 @@ var
   elpf : array [1..44] of Tpointf;
   nebcolor : Tcolor;
   icol,r,g,b : byte;
-
+  Nebbright,Nebgray: integer;
+  lw: single;
 begin
   if not forcecolor then col:=cfgplot.Color[31];
   xx:=round(Ax);
@@ -2573,24 +2704,28 @@ begin
   if Ar2=0 then Ar2:=Ar1/2;
   ds1:=round(max(Apixscale*Ar1/2,cfgchart.drawpen))+cfgchart.drawpen;
   ds2:=round(max(Apixscale*Ar2/2,cfgchart.drawpen))+cfgchart.drawpen;
-  nebcolor:=col;                           // Fix Color
-  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGxy then // SBR Color
-      begin
-        if Asbr<0 then
-          begin
-            if Ar1<=0 then Ar1:=1;
-            if Ar2<=0 then Ar2:=Ar1;
-            Asbr:= Ama + 2.5*log10(Ar1*Ar2) - 0.26;
-          end;
-        icol := maxintvalue([cfgplot.Nebgray,minintvalue([cfgplot.Nebbright,
-                      trunc(cfgplot.Nebbright-((Asbr-11)/4)*
-                           (cfgplot.Nebbright-cfgplot.Nebgray))])]);
-        r:=col and $FF;
-        g:=(col shr 8) and $FF;
-        b:=(col shr 16) and $FF;
-        Nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
-        NebColor := Addcolor(Nebcolor,cfgplot.backgroundcolor);
-      end;
+  if (cfgplot.nebplot=1)and cfgplot.DSOColorFillGxy then begin
+    Nebbright:=cfgplot.Nebbright;
+    Nebgray:=cfgplot.Nebgray;
+  end else begin
+    Nebbright:=max(200,cfgplot.Nebbright); // not too faint in line mode
+    Nebgray:=max(50,cfgplot.Nebgray);
+  end;
+  // always compute an approximative but homogeneous sbr
+  if Ar1<=0 then Ar1:=1;
+  if Ar2<=0 then Ar2:=Ar1;
+  Asbr:= Ama + 2.5*log10(Ar1*Ar2) - 0.26;
+  Asbr:=max(Asbr,Ama); // do not overbright small objects
+  icol := maxintvalue([Nebgray,minintvalue([Nebbright,
+                trunc(Nebbright-((Asbr-12)/4)*(Nebbright-Nebgray))]
+                )]);
+  if icol>200 then lw:=2*cfgchart.drawpen
+  else if icol>150 then lw:=1.5*cfgchart.drawpen
+  else lw:=cfgchart.drawpen;
+  r:=col and $FF;
+  g:=(col shr 8) and $FF;
+  b:=(col shr 16) and $FF;
+  Nebcolor:=(r*icol div 255)+256*(g*icol div 255)+65536*(b*icol div 255);
   if cfgplot.UseBMP then begin
     th:=0;
     for n:=1 to 44 do
@@ -2603,11 +2738,11 @@ begin
         th:=th+0.15;
       end;
     if (cfgplot.nebplot=0)or not cfgplot.DSOColorFillGxy then // line mode
-      cbmp.DrawPolygonAntialias(elpf, ColorToBGRA(nebcolor), cfgchart.drawpen)
+      cbmp.DrawPolygonAntialias(elpf, ColorToBGRA(nebcolor), lw)
     else
       cbmp.FillPolyAntialias(elpf, ColorToBGRA(nebcolor));
   end else begin
-      cnv.Pen.Width := cfgchart.drawpen;
+      cnv.Pen.Width := round(lw);
       cnv.Pen.Mode:=pmCopy;
       cnv.Pen.Color:=nebcolor;
       if (cfgplot.nebplot=0)or(not cfgplot.DSOColorFillGxy)or(cfgchart.onprinter) then begin// line mode

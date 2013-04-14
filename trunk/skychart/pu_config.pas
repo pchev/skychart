@@ -193,20 +193,21 @@ TreeView1.items[37].text:='7- '+rsPictures;
 TreeView1.items[38].text:='1- '+rsObject;
 TreeView1.items[39].text:='2- '+rsBackground;
 TreeView1.items[40].text:='3- '+rsDSSRealSky;
-TreeView1.items[41].text:='8- '+rsSystem;
-TreeView1.items[42].text:='1- '+rsSystem;
-TreeView1.items[43].text:='2- '+rsServer;
-TreeView1.items[44].text:='3- '+rsTelescope;
-TreeView1.items[45].text:='4- '+rsLanguage2;
-TreeView1.items[46].text:='9- '+rsInternet;
-TreeView1.items[47].text:='1- '+rsProxy;
-TreeView1.items[48].text:='2- '+rsOrbitalEleme;
-TreeView1.items[49].text:='3- '+rsOnlineDSSPic;
+TreeView1.items[41].text:='4- '+rsImageArchive;
+TreeView1.items[42].text:='8- '+rsSystem;
+TreeView1.items[43].text:='1- '+rsSystem;
+TreeView1.items[44].text:='2- '+rsServer;
+TreeView1.items[45].text:='3- '+rsTelescope;
+TreeView1.items[46].text:='4- '+rsLanguage2;
+TreeView1.items[47].text:='9- '+rsInternet;
+TreeView1.items[48].text:='1- '+rsProxy;
+TreeView1.items[49].text:='2- '+rsOrbitalEleme;
+TreeView1.items[50].text:='3- '+rsOnlineDSSPic;
 
 // Hide unfinished config calendar
 { TODO : config calendar }
-//TreeView1.items[50].text:='10- '+rsCalendar;
-//TreeView1.items[51].text:='1- '+rsGraphs;
+TreeView1.items[51].text:='10- '+rsCalendar;
+TreeView1.items[52].text:='1- '+rsGraphs;
 
 Applyall.caption:=rsApplyChangeT;
 Apply.Caption:=rsApply;
@@ -230,8 +231,8 @@ procedure Tf_config.FormCreate(Sender: TObject);
 begin
 // Hide unfinished config calendar
 { TODO : config calendar }
-TreeView1.Items.Item[51].Delete;
-TreeView1.Items.Item[50].Delete;
+//TreeView1.Items.Item[52].Delete;
+//TreeView1.Items.Item[51].Delete;
 
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
@@ -242,7 +243,7 @@ Fcdss:=Tconf_dss.Create;
 SetLang;
 compage:=25;
 astpage:=26;
-dbpage:=42;
+dbpage:=43;
 Fnightvision:=false;
 f_config_solsys1.onShowDB:=ShowDBSetting;
 f_config_solsys1.onPrepareAsteroid:=SolSysPrepareAsteroid;

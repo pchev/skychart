@@ -78,14 +78,14 @@
     </RunParams>
     <RequiredPackages Count="19">
       <Item1>
-        <PackageName Value="MultiFramePackage"/>
+        <PackageName Value="TurboPowerIPro"/>
       </Item1>
       <Item2>
-        <PackageName Value="lazvo"/>
-        <MinVersion Minor="1" Valid="True"/>
+        <PackageName Value="MultiFramePackage"/>
       </Item2>
       <Item3>
-        <PackageName Value="HtmlComp"/>
+        <PackageName Value="lazvo"/>
+        <MinVersion Minor="1" Valid="True"/>
       </Item3>
       <Item4>
         <PackageName Value="bgrabitmappack"/>
@@ -148,7 +148,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item19>
     </RequiredPackages>
-    <Units Count="72">
+    <Units Count="73">
       <Unit0>
         <Filename Value="astrolabe_static.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -659,6 +659,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="astrolabe1"/>
       </Unit71>
+      <Unit72>
+        <Filename Value="Dask.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Dask"/>
+      </Unit72>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

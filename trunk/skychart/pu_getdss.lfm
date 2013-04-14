@@ -11,26 +11,18 @@ object f_getdss: Tf_getdss
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   ParentFont = True
-  LCLVersion = '1.0.1.3'
-  object HTMLViewer1: THTMLViewer
+  LCLVersion = '1.0.8.0'
+  object Memo1: TMemo
     Left = 8
     Height = 232
     Top = 32
-    Width = 401
+    Width = 406
+    Lines.Strings = (
+      'Memo1'
+    )
+    ScrollBars = ssAutoBoth
     TabOrder = 3
-    DefBackground = clWindow
-    BorderStyle = htFocused
-    HistoryMaxCount = 0
-    DefFontName = 'Times New Roman'
-    DefPreFontName = 'Courier New'
-    DefFontColor = clWindowText
-    NoSelect = False
-    CharSet = DEFAULT_CHARSET
-    PrintMarginLeft = 2
-    PrintMarginRight = 2
-    PrintMarginTop = 2
-    PrintMarginBottom = 2
-    PrintScale = 1
+    Visible = False
   end
   object ListBox1: TListBox
     Left = 8
