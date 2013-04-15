@@ -165,20 +165,21 @@ const
   PaperHeight: array[1..PaperNumber] of
     single = (8.27, 11.69, 16.54, 23.39, 33.11, 46.81, 11.0, 14.0, 17.0);
 
-  greek: array[1..2, 1..24] of
+  maxgreek=25;
+  greek: array[1..2, 1..maxgreek] of
     string = (('Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta',
     'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho',
-    'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega'),
+    'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega','Xi'),
     ('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot',
-    'kap', 'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome'));
-  greeksymbol: array[1..2, 1..24] of
+    'kap', 'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome','ksi'));
+  greeksymbol: array[1..2, 1..maxgreek] of
     string = (('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot', 'kap',
-    'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome'),
+    'lam', 'mu', 'nu', 'xi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome', 'ksi'),
     ('a', 'b', 'g', 'd', 'e', 'z', 'h', 'q', 'i', 'k', 'l', 'm',
-    'n', 'x', 'o', 'p', 'r', 's', 't', 'u', 'f', 'c', 'y', 'w'));
-  greekUTF8: array[1..24] of
+    'n', 'x', 'o', 'p', 'r', 's', 't', 'u', 'f', 'c', 'y', 'w', 'x'));
+  greekUTF8: array[1..maxgreek] of
     word = ($CEB1, $CEB2, $CEB3, $CEB4, $CEB5, $CEB6, $CEB7, $CEB8, $CEB9, $CEBA,
-    $CEBB, $CEBC, $CEBD, $CEBE, $CEBF, $CF80, $CF81, $CF83, $CF84, $CF85, $CF86, $CF87, $CF88, $CF89);
+    $CEBB, $CEBC, $CEBD, $CEBE, $CEBF, $CF80, $CF81, $CF83, $CF84, $CF85, $CF86, $CF87, $CF88, $CF89, $CEBE);
   pla: array[1..32] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
