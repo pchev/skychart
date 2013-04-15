@@ -3036,9 +3036,9 @@ procedure Tskychart.DrawHorizonPicture(hbmp:TBGRABitmap);
 var i,n: integer;
     working,timeout: boolean;
     timelimit: TDateTime;
-    thread: array[0..3] of TDrawHorizonThread;
+    thread: array[0..7] of TDrawHorizonThread;
 begin
-  n:=min(4,MaxThreadCount);
+  n:=min(8,MaxThreadCount);
   for i:=0 to n-1 do begin
     thread[i]:=TDrawHorizonThread.Create(true);
     thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;

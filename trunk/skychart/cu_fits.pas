@@ -1090,7 +1090,7 @@ var IntfImg: TDrawListImg;
     y,m,d: word;
     working,timeout: boolean;
     timelimit: TDateTime;
-    thread: array[0..3] of TDrawListThread;
+    thread: array[0..7] of TDrawListThread;
 begin
 try
 imabmp.freeimage;
@@ -1137,7 +1137,7 @@ for i:=0 to fitslist.Count-1 do begin
  end;
 end;
 imgloaded:=n;
-r:=min(4,MaxThreadCount);
+r:=min(8,MaxThreadCount);
 if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': start thread');
 for i:=0 to r-1 do begin
   thread[i]:=TDrawListThread.Create(true);
