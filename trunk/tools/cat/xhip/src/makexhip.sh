@@ -16,19 +16,19 @@ if [[ ! -e bsc_catalog.dat ]]; then
 fi
 
 if [[ ! -e xhip_main.dat ]]; then 
-  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137/main.dat.gz
+  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137D/main.dat.gz
   gunzip main.dat.gz
   mv main.dat xhip_main.dat
 fi
 
 if [[ ! -e xhip_photo.dat ]]; then 
-  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137/photo.dat.gz
+  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137D/photo.dat.gz
   gunzip photo.dat.gz
   mv photo.dat xhip_photo.dat
 fi
 
 if [[ ! -e xhip_biblio.dat ]]; then 
-  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137/biblio.dat.gz
+  wget ftp://cdsarc.u-strasbg.fr/pub/cats/V/137D/biblio.dat.gz
   gunzip biblio.dat.gz
   mv biblio.dat xhip_biblio.dat
 fi

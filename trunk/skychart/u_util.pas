@@ -173,7 +173,7 @@ begin
 c:=lowercase(trim(copy(v,1,1)));
 n:=trim(copy(v,2,1));
 result:=v;
-for i:=1 to 24 do begin
+for i:=1 to maxgreek do begin
   if c=greeksymbol[2,i] then begin
      result:=chr(hi(greekUTF8[i]))+chr(lo(greekUTF8[i]))+n;
      break;
@@ -1598,7 +1598,7 @@ end else begin
 end;
 buf:=lowercase(trim(copy(buf,1,3)));
 buf:=StringReplace(buf,'.','',[]);
-for i:=1 to 24 do begin
+for i:=1 to maxgreek do begin
   if buf=greeksymbol[1,i] then begin
      result:=greeksymbol[2,i]+num; // ome2 -> w2
      break;
