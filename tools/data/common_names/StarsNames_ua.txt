@@ -60,7 +60,7 @@
  7602    Альшайн: Alshain; Alschairn
  7773    Альшат: Alshat
  2827    Алюдра: Aludra
- 4375    Алюля Аустраліс: Alula Australis
+ 4374    Алюля Аустраліс: Alula Australis
  4377    Алюля Бореаліс: Alula Borealis
   850    Ангетенар: Angetenar; Al Anchat Al Nahr; Anchat
    99    Анкаа: Ankaa; Nair Al Zaurak; Cymbae; Lucida Cymbae; Head Of Phoenix

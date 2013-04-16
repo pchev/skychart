@@ -61,7 +61,7 @@
  3249    Altarf; Al Tarf
  3773    Alterf
  2827    Aludra
- 4375    Alula Australis
+ 4374    Alula Australis
  4377    Alula Borealis
  7141    Alya; Alga
  2484    Alzirr
