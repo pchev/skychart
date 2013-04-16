@@ -28,7 +28,7 @@
  8974    Алраи; Alrai; Arrai; Errai; Er Rai
   596    Алриша; Alrisha; Alrischa; Alrescha; El Rischa; Al Richa; Rescha; Okda; Kaitain
  2827    Алудра; Aludra
- 4375    Алула Аустралис; Alula Australis
+ 4374    Алула Аустралис; Alula Australis
  4377    Алула Бореалис; Alula Borealis
  7950    Альбали; Albali; Al Bali
  7264    Альбальдах; Albaldah; Al Baldah
