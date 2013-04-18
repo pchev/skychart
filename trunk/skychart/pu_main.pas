@@ -4016,7 +4016,7 @@ begin
     catalog.LoadConstL(cfgm.ConstLfile);
     catalog.LoadConstB(cfgm.ConstBfile);
     catalog.LoadHorizon(cfgm.horizonfile,def_cfgsc);
-    if csc.ShowHorizonPicture then catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
+    if (csc<>nil)and(cfgm<>nil)and csc.ShowHorizonPicture then catalog.LoadHorizonPicture(cfgm.HorizonPictureFile);
     f_search.init;
     if dbchange then ConnectDB;
     if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin

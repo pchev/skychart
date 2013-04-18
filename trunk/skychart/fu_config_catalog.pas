@@ -798,9 +798,10 @@ end;
 end;
 
 procedure Tf_config_catalog.ReloadCat(path,cat: string);
-var fn,url:string;
+var fn,fntmp,url:string;
 begin
 fn:=catalog.GetCatTxtFile(path,cat);
+fntmp:=fn+'.tmp';
 url:=catalog.GetCatURL(path,cat);
 DownloadDialog1.msgDownloadFile:=rsDownloadFile;
 DownloadDialog1.msgCopyfrom:=rsCopyFrom;
@@ -830,8 +831,11 @@ end else begin
   DownloadDialog1.HttpProxyPass:='';
 end;
 DownloadDialog1.URL:=url;
-DownloadDialog1.SaveToFile:=slash(path)+fn;
-DownloadDialog1.Execute;
+DownloadDialog1.SaveToFile:=slash(path)+fntmp;
+if DownloadDialog1.Execute then begin
+   DeleteFile(slash(path)+fn);
+   RenameFile(slash(path)+fntmp,slash(path)+fn);
+end else ShowMessage(rsErrorFileNot+crlf+DownloadDialog1.ResponseText);
 end;
 
 Procedure Tf_config_catalog.EditGCatPath(row : integer);

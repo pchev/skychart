@@ -1420,6 +1420,7 @@ resourcestring
   rsShowTheImage = 'Show the images on the map';
   rsAdjustTheVis = 'Adjust the visualisation scale';
   rsUseASimplePo = 'Use a simple pointer';
+  rsErrorFileNot = 'Error, file not downloaded:';
 
 implementation
 
