@@ -3018,12 +3018,12 @@ for i:=startline to endline do begin
           else ok:=true;
         if ok then begin
            az:=rmod(pid2+pi4+az-cfgsc.HorizonPictureRotate*deg2rad,pi2);
-           x:=round(hsx*az*rad2deg);
-           y:=round(hsy-hsx*h*rad2deg);
+           x:=hsx*az*rad2deg;
+           y:=hsy-hsx*h*rad2deg;
         end;
       end;
       if (x>=0)and(x<=horizonpicture.Width)and(y>=0)and(y<=horizonpicture.Height) then
-          col1:=horizonpicture.GetPixel(x,y)
+          col1:=horizonpicture.GetPixel(x,y,rfBestQuality)
       else if h>0 then col1:=BGRAPixelTransparent
       else col1:=col2;
       p[j]:=col1;
