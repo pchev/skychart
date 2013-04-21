@@ -52,7 +52,7 @@ currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
   # install astrolabe
   destdir=$builddir/Data
   i386-win32-strip -v -o $destdir/astrolabe.exe skychart/sample_client/astrolabe/astrolabe_static.exe
-  install -v -m 644 skychart/sample_client/astrolabe/Pci-Dask.dll $destdir/
+  install -v -m 644 skychart/sample_client/astrolabe/PCI-Dask.dll $destdir/
   install -v -m 644 skychart/sample_client/astrolabe/astrolabe.png  $destdir/
   install -v -m 644 skychart/sample_client/astrolabe/astrolabe.ini  $destdir/
   install -v -m 644 skychart/sample_client/astrolabe/dask.ini  $destdir/
