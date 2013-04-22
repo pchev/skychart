@@ -37,6 +37,7 @@ type
   { Tf_config_observatory }
 
   Tf_config_observatory = class(TFrame)
+    HorizonQuality: TCheckBox;
     displayhorizonpicture: TCheckBox;
     picturerotation: TFloatEdit;
     horizonpicturefile: TFileNameEdit;
@@ -116,6 +117,7 @@ type
     procedure horizonpicturefileAcceptFileName(Sender: TObject;
       var Value: String);
     procedure horizonpicturefileChange(Sender: TObject);
+    procedure HorizonQualityClick(Sender: TObject);
     procedure HScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure humidityChange(Sender: TObject);
@@ -221,6 +223,7 @@ horizonopaque.caption:=rsShowObjectBe;
 GroupBox1.caption:=rsLocalHorizon;
 displayhorizon.caption:=rsDisplayTheLo;
 displayhorizonpicture.caption:=rsDisplayTheHo;
+HorizonQuality.Caption:=rsHighQuality;
 label9.Caption:=rsPictureAngle;
 fillhorizon.caption:=rsFillWithHori;
 GroupBox3.caption:=rsDepressionOf;
@@ -872,6 +875,7 @@ displayhorizon.Checked:=csc.ShowHorizon;
 horizonpicturefile.text:=cmain.HorizonPictureFile;
 horizonpicturefile.InitialDir:=slash(HomeDir);
 displayhorizonpicture.Checked := csc.ShowHorizonPicture;
+HorizonQuality.Checked := not csc.HorizonPictureLowQuality;
 picturerotation.Value:=csc.HorizonPictureRotate;
 fillhorizon.Checked:=csc.FillHorizon;
 horizondepression.Checked:=csc.ShowHorizonDepression;
@@ -924,6 +928,11 @@ begin
 if LockChange then exit;
 cmain.HorizonPictureFile:=horizonpicturefile.text;
 GetPictureRotation;
+end;
+
+procedure Tf_config_observatory.HorizonQualityClick(Sender: TObject);
+begin
+  csc.HorizonPictureLowQuality := not HorizonQuality.Checked;
 end;
 
 procedure Tf_config_observatory.picturerotationChange(Sender: TObject);

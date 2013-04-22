@@ -1421,6 +1421,7 @@ resourcestring
   rsAdjustTheVis = 'Adjust the visualisation scale';
   rsUseASimplePo = 'Use a simple pointer';
   rsErrorFileNot = 'Error, file not downloaded:';
+  rsHighQuality = 'High quality';
 
 implementation
 
