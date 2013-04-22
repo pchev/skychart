@@ -318,19 +318,20 @@ end;
     DrawEcliptic;
     DrawGalactic;
   end;
-  DrawCircle;
   // the stars
   if cfgsc.showstars then DrawStars;
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     if cfgsc.showstars then DrawDblStars;
     if cfgsc.showstars then DrawVarStars;
   end;
-  // finally the planets
+  // the planets
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
     DrawAsteroid;
     if cfgsc.SimLine then DrawOrbitPath;
   end;
   if cfgsc.ShowPlanetValid then DrawPlanet;
+  // Finder mark
+  DrawCircle;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
   // BG image
