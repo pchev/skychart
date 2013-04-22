@@ -40,7 +40,7 @@ type
      hbmp: TBGRABitmap;
      col2: TBGRAPixel;
      cfgsc: Tconf_skychart;
-     working: boolean;
+     working,lowquality: boolean;
      num,id:integer;
      procedure Execute; override;
      constructor Create(CreateSuspended: boolean);
@@ -2989,8 +2989,9 @@ var hsx,hsy,x,y,xx2,yy2 :single;
     hlimit,az,h,de,hh,x2,y2:double;
     i,j,startline,endline: integer;
     col1: TBGRAPixel;
-    p: PBGRAPixel;
+    p,p2: PBGRAPixel;
     ok:boolean;
+    p2line,p2col: boolean;
 begin
 ok:=false;
 hsx:=(horizonpicture.Width-1)/360;
@@ -3002,10 +3003,27 @@ if id=(num-1) then
   endline:=hbmp.Height-1
 else
   endline:=(id+1)*i-1;
+p2line:=false;
 for i:=startline to endline do begin
    p:=hbmp.ScanLine[i];
+   if lowquality and (i<endline) then begin
+      if p2line then begin
+        p2line:=false;
+        continue;
+      end;
+      p2line:=true;
+      p2:=hbmp.ScanLine[i+1];
+   end;
+   p2col:=false;
    for j:=0 to hbmp.Width-1 do begin
       if Terminated then exit;
+      if p2line then begin
+         if p2col then begin
+           p2col:=false;
+           continue;
+         end;
+         p2col:=true;
+      end;
       x:=-1; y:=-1; h:=1;
       GetAHxy(j,i,az,h,cfgsc);
       if abs(h)<=hlimit then begin
@@ -3027,6 +3045,13 @@ for i:=startline to endline do begin
       else if h>0 then col1:=BGRAPixelTransparent
       else col1:=col2;
       p[j]:=col1;
+      if p2col then begin
+        p2[j]:=col1;
+        if j<(hbmp.Width-1) then begin
+          p[j+1]:=col1;
+          p2[j+1]:=col1;
+        end;
+      end;
    end;
 end;
 working:=false;
@@ -3045,6 +3070,7 @@ begin
     thread[i].hbmp:=hbmp;
     thread[i].col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc:=cfgsc;
+    thread[i].lowquality:=cfgsc.HorizonPictureLowQuality;
     thread[i].num:=n;
     thread[i].id:=i;
     thread[i].Start;

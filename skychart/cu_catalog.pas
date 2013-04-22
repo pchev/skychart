@@ -3397,15 +3397,19 @@ Procedure Tcatalog.LoadHorizonPicture(fname:string);
 begin
 try
 if ExtractFilePath(fname)='' then fname:=slash(Appdir)+fname;
+if cfgshr.horizonpicturevalid and (fname=cfgshr.horizonpicturename) then exit;
 if FileExists(fname) then begin
    cfgshr.horizonpicture.LoadFromFile(fname);
    cfgshr.horizonpicturevalid:=true;
+   cfgshr.horizonpicturename:=fname;
 end else begin
    cfgshr.horizonpicture.SetSize(1,1);
    cfgshr.horizonpicturevalid:=false;
+   cfgshr.horizonpicturename:='';
 end;
 except
  cfgshr.horizonpicturevalid:=false;
+ cfgshr.horizonpicturename:='';
 end;
 end;
 

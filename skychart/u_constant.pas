@@ -727,6 +727,7 @@ type
     ConstB: array of Tconstb;
     horizonlist: Thorizonlist;
     horizonpicture: TBGRABitmap;
+    horizonpicturename: string;
     horizonpicturevalid: Boolean;
     StarName: array of string;
     StarNameHR: array of integer;
@@ -768,7 +769,7 @@ type
     StyleGrid, StyleEqGrid, StyleConstL, StyleConstB,
     StyleEcliptic, StyleGalEq: TFPPenStyle;
     ShowEcliptic, ShowGalactic, ShowMilkyWay, FillMilkyWay,
-    ShowHorizon, ShowHorizonPicture, FillHorizon, ShowHorizonDepression: boolean;
+    ShowHorizon, ShowHorizonPicture, HorizonPictureLowQuality, FillHorizon, ShowHorizonDepression: boolean;
     CurTime, DT_UT_val, GRSlongitude, GRSjd, GRSdrift,
     TelescopeTurnsX, TelescopeTurnsY, TelescopeJD, HorizonPictureRotate: double;
     PMon, DrawPMon, ApparentPos, CoordExpertMode, SunOnline,
@@ -1638,6 +1639,7 @@ begin
     horizonlist[i] := Source.horizonlist[i];
   horizonpicture.Assign(Source.horizonpicture);
   horizonpicturevalid := Source.horizonpicturevalid;
+  horizonpicturename := Source.horizonpicturename;
 end;
 
 { Tconf_skychart }
@@ -1804,6 +1806,7 @@ begin
   FillMilkyWay := Source.FillMilkyWay;
   ShowHorizon := Source.ShowHorizon;
   ShowHorizonPicture := Source.ShowHorizonPicture;
+  HorizonPictureLowQuality := Source.HorizonPictureLowQuality;
   HorizonPictureRotate := Source.HorizonPictureRotate;
   FillHorizon := Source.FillHorizon;
   ShowHorizonDepression := Source.ShowHorizonDepression;
