@@ -3071,7 +3071,7 @@ begin
     thread[i].hbmp:=hbmp;
     thread[i].col2:=ColorToBGRA(FPlot.cfgplot.Color[19]);
     thread[i].cfgsc:=cfgsc;
-    thread[i].lowquality:=cfgsc.HorizonPictureLowQuality;
+    thread[i].lowquality:=cfgsc.HorizonPictureLowQuality or ((pi2/Fcatalog.cfgshr.horizonpicture.Width)>(2*cfgsc.fov/hbmp.Width));
     thread[i].num:=n;
     thread[i].id:=i;
     thread[i].Start;
