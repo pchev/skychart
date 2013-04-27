@@ -2483,7 +2483,7 @@ if RoseType=3 then begin     // simple arrow
      BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8), col,cfgchart.drawpen,cbmp);
      BGRADrawLine(rosex-(roserd*c),rosey-(roserd*s),(rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8), col,cfgchart.drawpen,cbmp);
      col:=ColorToBGRA(cfgplot.LabelColor[7]);
-     BGRATextOut((rosex-(roserd*c))+(roserd*c1/8),(rosey-(roserd*s))+(roserd*s1/8),rad2deg*rote-90,'E',col,cbmp);
+     BGRATextOut((rosex-(roserd*c))+(roserd*c2/8),(rosey-(roserd*s))+(roserd*s2/8),rad2deg*rote,'E',col,cbmp);
   end else if cnv<>nil then with cnv do begin
      Pen.Width:=cfgchart.drawpen;
      Pen.Mode:=pmCopy;
