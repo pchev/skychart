@@ -540,6 +540,11 @@ obsdetail.tz:=csc.ObsTZ;
 obsdetail.lat:=csc.ObsLatitude;
 obsdetail.lon:=csc.ObsLongitude;
 obsdetail.alt:=csc.ObsAltitude;
+obsdetail.horizonfn:=cmain.HorizonFile;
+obsdetail.horizonpictfn:=cmain.HorizonPictureFile;
+obsdetail.pictureangleoffset:=csc.HorizonPictureRotate;
+obsdetail.showhorizonline:=csc.ShowHorizon;
+obsdetail.showhorizonpicture:=csc.ShowHorizonPicture;
 if cmain.ObsNameList.Find(csc.ObsName,i) then begin
    cmain.ObsNameList.Objects[i].Free;
    cmain.ObsNameList.Objects[i]:=obsdetail;
@@ -625,10 +630,16 @@ begin
   csc.ObsLatitude  := TObsDetail(cmain.ObsNameList.Objects[i]).lat;
   csc.ObsLongitude := TObsDetail(cmain.ObsNameList.Objects[i]).lon;
   csc.ObsAltitude  := TObsDetail(cmain.ObsNameList.Objects[i]).alt;
+  cmain.HorizonFile        := TObsDetail(cmain.ObsNameList.Objects[i]).horizonfn;
+  cmain.HorizonPictureFile := TObsDetail(cmain.ObsNameList.Objects[i]).horizonpictfn;
+  csc.HorizonPictureRotate := TObsDetail(cmain.ObsNameList.Objects[i]).pictureangleoffset;
+  csc.ShowHorizon          := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonline;
+  csc.ShowHorizonPicture   := TObsDetail(cmain.ObsNameList.Objects[i]).showhorizonpicture;
   f_observatory_db.csc.ObsCountry := csc.ObsCountry;
   f_observatory_db.ShowObservatory;
   ObsName.text:=csc.obsname;
   ShowObsCoord;
+  ShowHorizon;
   SetObsPos;
   CenterObs;
   ShowCountryList;

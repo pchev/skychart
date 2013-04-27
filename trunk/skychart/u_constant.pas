@@ -894,9 +894,9 @@ type
   end;
 
   TObsDetail = class(TObject)
-    country,tz: string;
-    lat, lon, alt: double;
-    countrytz: boolean;
+    country,tz,horizonfn,horizonpictfn: string;
+    lat, lon, alt,pictureangleoffset: double;
+    countrytz,showhorizonline,showhorizonpicture: boolean;
   end;
 
   Tconf_main = class(TObject)    // main form setting

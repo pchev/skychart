@@ -23,10 +23,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 525
       Top = 1
       Width = 500
-      ActivePage = Page2
+      ActivePage = Page1
       Align = alClient
       ShowTabs = False
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
@@ -108,7 +108,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 185
           Caption = 'Latitude'
-          ClientHeight = 50
+          ClientHeight = 51
           ClientWidth = 181
           TabOrder = 0
           object Label58: TLabel
@@ -185,7 +185,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 185
           Caption = 'Longitude'
-          ClientHeight = 50
+          ClientHeight = 51
           ClientWidth = 181
           TabOrder = 1
           object Label61: TLabel
@@ -262,7 +262,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 77
           Width = 81
           Caption = 'Altitude'
-          ClientHeight = 50
+          ClientHeight = 51
           ClientWidth = 77
           TabOrder = 2
           object Label70: TLabel
@@ -294,7 +294,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 149
           Width = 449
           Caption = 'Time Zone'
-          ClientHeight = 62
+          ClientHeight = 63
           ClientWidth = 445
           TabOrder = 3
           object TZComboBox: TComboBox
@@ -412,14 +412,14 @@ object f_config_observatory: Tf_config_observatory
           Top = 142
           Width = 457
           Caption = 'Want to track an object before it rise ?'
-          ClientHeight = 47
+          ClientHeight = 48
           ClientWidth = 453
           TabOrder = 1
           object horizonopaque: TCheckBox
             Left = 13
             Height = 23
             Top = 13
-            Width = 215
+            Width = 199
             Caption = 'Show Object below the horizon'
             OnClick = horizonopaqueClick
             TabOrder = 0
@@ -431,21 +431,21 @@ object f_config_observatory: Tf_config_observatory
           Top = 4
           Width = 457
           Caption = 'Local Horizon'
-          ClientHeight = 114
+          ClientHeight = 115
           ClientWidth = 453
           TabOrder = 0
           object displayhorizon: TCheckBox
             Left = 4
             Height = 23
             Top = 34
-            Width = 200
+            Width = 184
             Caption = 'Display the local horizon line'
             OnClick = displayhorizonClick
             TabOrder = 0
           end
           object horizonfile: TFileNameEdit
             Left = 211
-            Height = 24
+            Height = 23
             Top = 34
             Width = 208
             OnAcceptFileName = horizonfileAcceptFileName
@@ -462,14 +462,14 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 23
             Top = 8
-            Width = 155
+            Width = 145
             Caption = 'Fill with horizon color'
             OnClick = fillhorizonClick
             TabOrder = 1
           end
           object horizonpicturefile: TFileNameEdit
             Left = 211
-            Height = 24
+            Height = 23
             Top = 61
             Width = 208
             OnAcceptFileName = horizonpicturefileAcceptFileName
@@ -487,14 +487,14 @@ object f_config_observatory: Tf_config_observatory
             Left = 4
             Height = 23
             Top = 61
-            Width = 189
+            Width = 177
             Caption = 'Display the horizon picture'
             OnClick = displayhorizonpictureClick
             TabOrder = 4
           end
           object picturerotation: TFloatEdit
             Left = 211
-            Height = 24
+            Height = 23
             Hint = '-360..360'
             Top = 88
             Width = 80
@@ -508,9 +508,9 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label9: TLabel
             Left = 28
-            Height = 17
+            Height = 16
             Top = 92
-            Width = 123
+            Width = 114
             Caption = 'Picture angle offset'
             ParentColor = False
           end
@@ -518,7 +518,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 307
             Height = 23
             Top = 89
-            Width = 98
+            Width = 90
             Caption = 'High quality'
             OnClick = HorizonQualityClick
             TabOrder = 6
@@ -530,7 +530,7 @@ object f_config_observatory: Tf_config_observatory
           Top = 213
           Width = 457
           Caption = 'Depression of the visible horizon'
-          ClientHeight = 87
+          ClientHeight = 88
           ClientWidth = 453
           TabOrder = 2
           object Label1: TLabel
@@ -547,7 +547,7 @@ object f_config_observatory: Tf_config_observatory
             Left = 13
             Height = 23
             Top = 65
-            Width = 280
+            Width = 261
             Caption = 'Draw the apparent depressed horizon line'
             OnClick = horizondepressionClick
             TabOrder = 0
@@ -559,28 +559,28 @@ object f_config_observatory: Tf_config_observatory
           Top = 325
           Width = 457
           Caption = 'Atmospheric Refraction'
-          ClientHeight = 86
+          ClientHeight = 87
           ClientWidth = 453
           TabOrder = 3
           object Label82: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 7
-            Width = 110
+            Width = 103
             Caption = 'Pressure (millibar)'
             ParentColor = False
           end
           object Label83: TLabel
             Left = 171
-            Height = 17
+            Height = 16
             Top = 7
-            Width = 134
+            Width = 126
             Caption = 'Temperature (Celsius)'
             ParentColor = False
           end
           object pressure: TFloatEdit
             Left = 13
-            Height = 24
+            Height = 23
             Hint = '0..1500'
             Top = 25
             Width = 65
@@ -596,7 +596,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object temperature: TFloatEdit
             Left = 171
-            Height = 24
+            Height = 23
             Hint = '-100..100'
             Top = 25
             Width = 65
@@ -611,7 +611,7 @@ object f_config_observatory: Tf_config_observatory
           end
           object humidity: TFloatEdit
             Left = 341
-            Height = 24
+            Height = 23
             Hint = '0..100'
             Top = 25
             Width = 65
@@ -625,15 +625,15 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label4: TLabel
             Left = 341
-            Height = 17
+            Height = 16
             Top = 7
-            Width = 69
+            Width = 64
             Caption = 'Humidity %'
             ParentColor = False
           end
           object tlrate: TFloatEdit
             Left = 341
-            Height = 24
+            Height = 23
             Hint = '5..7.5'
             Top = 57
             Width = 65
@@ -648,16 +648,16 @@ object f_config_observatory: Tf_config_observatory
           end
           object Label5: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 60
-            Width = 268
+            Width = 250
             Caption = 'Troposphere temperature lapse rate (K/km)'
             ParentColor = False
           end
         end
         object polary: TFloatEdit
           Left = 311
-          Height = 24
+          Height = 23
           Hint = '-0.5..0.5'
           Top = 437
           Width = 65
@@ -672,7 +672,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object Label8: TLabel
           Left = 293
-          Height = 17
+          Height = 16
           Top = 440
           Width = 11
           Caption = 'Y:'
@@ -680,7 +680,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object polarx: TFloatEdit
           Left = 205
-          Height = 24
+          Height = 23
           Hint = '-0.5..0.5'
           Top = 437
           Width = 65
@@ -695,7 +695,7 @@ object f_config_observatory: Tf_config_observatory
         end
         object Label7: TLabel
           Left = 189
-          Height = 17
+          Height = 16
           Top = 440
           Width = 11
           Caption = 'X:'
@@ -704,9 +704,9 @@ object f_config_observatory: Tf_config_observatory
         object Label6: TLabel
           Cursor = crHandPoint
           Left = 21
-          Height = 17
+          Height = 16
           Top = 440
-          Width = 133
+          Width = 125
           Caption = 'polar motion (arc sec)'
           Font.Color = clBlue
           Font.Style = [fsUnderline]

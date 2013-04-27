@@ -5499,6 +5499,11 @@ if j>0 then for i:=0 to j-1 do begin
   obsdetail.lat:=ReadFloat(section,'ObsLat'+inttostr(i),0);
   obsdetail.lon:=ReadFloat(section,'ObsLon'+inttostr(i),0);
   obsdetail.alt:=ReadFloat(section,'ObsAlt'+inttostr(i),0);
+  obsdetail.horizonfn:=ReadString(section,'Obshorizonfn'+inttostr(i),'');
+  obsdetail.horizonpictfn:=ReadString(section,'Obshorizonpictfn'+inttostr(i),'');
+  obsdetail.pictureangleoffset:=ReadFloat(section,'Obspictureangleoffset'+inttostr(i),0);
+  obsdetail.showhorizonline:=ReadBool(section,'Obsshowhorizonline'+inttostr(i),false);
+  obsdetail.showhorizonpicture:=ReadBool(section,'Obsshowhorizonpicture'+inttostr(i),false);
   cfgm.ObsNameList.AddObject(ReadString(section,'ObsName'+inttostr(i),''),obsdetail);
 end;
 catalog.cfgshr.AzNorth:=ReadBool(section,'AzNorth',catalog.cfgshr.AzNorth);
@@ -6227,6 +6232,11 @@ if j>0 then for i:=0 to j-1 do begin
     WriteFloat(section,'ObsLat'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lat);
     WriteFloat(section,'ObsLon'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).lon);
     WriteFloat(section,'ObsAlt'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).alt);
+    WriteString(section,'Obshorizonfn'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).horizonfn);
+    WriteString(section,'Obshorizonpictfn'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).horizonpictfn);
+    WriteFloat(section,'Obspictureangleoffset'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).pictureangleoffset);
+    WriteBool(section,'Obsshowhorizonline'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).showhorizonline);
+    WriteBool(section,'Obsshowhorizonpicture'+inttostr(i),TObsDetail(cfgm.ObsNameList.Objects[i]).showhorizonpicture);
     WriteString(section,'ObsName'+inttostr(i),cfgm.ObsNameList[i]);
   end;
 end;
