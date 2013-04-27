@@ -65,6 +65,7 @@ type
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
     TabControl1: TTabControl;
+    ToolButton14: TToolButton;
     ToolButtonRot180: TToolButton;
     ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
@@ -6449,6 +6450,7 @@ MenuPosition.Caption:='&'+rsPosition+Ellipsis;
 ToolButtonListObj.hint:=rsObjectList;
 MenuListObj.Caption:='&'+rsObjectList+Ellipsis;
 ToolButtonCal.hint:=rsEphemerisCal;
+ToolButton14.Hint:=rsSolarSystemI;
 ToolButtonTdec.hint:=rsDecrementTim;
 ToolButtonTnow.hint:=rsNow;
 ToolButtonTinc.hint:=rsIncrementTim;

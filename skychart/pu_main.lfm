@@ -589,60 +589,60 @@ object f_main: Tf_main
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 498
+        Left = 521
         Top = 2
         Width = 5
         ImageIndex = 8
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 503
+        Left = 526
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 526
+        Left = 549
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 549
+        Left = 572
         Top = 2
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 737
+        Left = 760
         Top = 2
         Width = 5
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 742
+        Left = 765
         Top = 2
         Action = TelescopeConnect
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 788
+        Left = 811
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
-        Left = 765
+        Left = 788
         Top = 2
         Action = TelescopeSync
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 811
+        Left = 834
         Top = 2
         Width = 5
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 816
+        Left = 873
         Top = 2
         Width = 10
         AutoSize = True
@@ -655,13 +655,13 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 652
+        Left = 675
         Top = 2
         Width = 5
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 647
+        Left = 670
         Top = 2
         Width = 5
         Style = tbsDivider
@@ -814,7 +814,7 @@ object f_main: Tf_main
         end
       end
       object TimeU: TComboBox
-        Left = 657
+        Left = 680
         Height = 25
         Hint = 'Time Units'
         Top = 2
@@ -860,7 +860,7 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TUpDown
-        Left = 630
+        Left = 653
         Height = 22
         Top = 2
         Width = 17
@@ -873,20 +873,27 @@ object f_main: Tf_main
         Wrap = False
       end
       object EditTimeVal: TEdit
-        Left = 595
+        Left = 618
         Height = 23
         Top = 2
         Width = 35
         TabOrder = 5
       end
       object ToolButton13: TToolButton
-        Left = 572
+        Left = 595
         Top = 2
         Caption = '>>'
         ImageIndex = 88
         OnClick = ToolButton13Click
         OnMouseUp = ToolButton13MouseUp
         Style = tbsCheck
+      end
+      object ToolButton14: TToolButton
+        Left = 498
+        Top = 2
+        Caption = 'ToolButton14'
+        ImageIndex = 94
+        OnClick = PlanetInfoClick
       end
     end
     object ToolBar4: TToolBar
@@ -7552,7 +7559,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695E0000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
+      4C695F0000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFF945A
@@ -10560,7 +10567,39 @@ object f_main: Tf_main
       EBFFEBEBEBFF050516FF4D4DD6FF4D4DD6FF03030EFFEBEBEBFFEBEBEBFFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEB
       EBFFEBEBEBFFEBEBEBFF050516FF03030EFFEBEBEBFFEBEBEBFFEBEBEBFFEBEB
-      EBFFEBEBEBFFEBEBEBFFEBEBEBFF
+      EBFFEBEBEBFFEBEBEBFFEBEBEBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0000
+      00FF6D0215FF780000FF901C1CFFC93134FFCF372BFF0087FFFF06F0F7FF09F6
+      F6FF08F6F6FF08F6F6FFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0004
+      02FF4F4D5CFF7B0000FF8F1D1DFFC93134FFCF372BFF0098FFFF00FFFFFF00FF
+      FFFF00FFFFFF00FFFFFFFFFFFFFFFFFFFFFF000101FF000101FF000101FF0008
+      06FF3A838EFF7C0000FF8E1F1FFFC83235FFD13529FF670E94FFD32027FFD921
+      21FFD92121FFD92121FFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0000
+      00FF3E7C88FF880000FF9B0B0BFFDB2023FFE42216FF671096FFD32027FFD921
+      21FFD92121FFD92121FFFFFFFFFFFFFFFFFF00FFFFFF00FFFFFF00FFFFFF01FF
+      FFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0082FFFF00FFFFFF00FF
+      FFFF00FFFFFF00FFFFFFFFFFFFFFFFFFFFFF00F4F4FF00F4F4FF00F4F4FF00F4
+      F4FF05F4F5FF05F4F4FF06F5F5FF09F4F6FF09FFF6FF0475FBFF08F0F7FF08F6
+      F6FF08F6F6FF08F6F6FFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0000
+      00FF730009FF7E0000FF971212FFD2282BFFDB2B1FFF651299FFD22128FFD722
+      22FFD72222FFD72222FFFFFFFFFFFFFFFFFF004747FF004747FF004747FF0047
+      46FF4F4755FF574646FF685B5BFF916A6DFF987064FF5C27ADFFC42D34FFC832
+      32FFC83232FFC83232FFFFFFFFFFFFFFFFFF00FFFFFF00FFFFFF00FFFFFF00FF
+      FFFF00FFFFFF00FFFFFF00FFFFFF00FDFFFF00FFFFFF0789FFFFD41B21FFC733
+      33FFC83232FFC83232FFFFFFFFFFFFFFFFFF006C6CFF006C6CFF006C6CFF006C
+      6BFF3F6C77FF456C6BFF537C7CFF74878AFF798F83FF5A30B6FFC52B32FFC832
+      32FFC83232FFC83232FFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0000
+      00FF70000FFF7A0000FF931818FFCD2E31FFD53024FF62159BFFCC272EFFD129
+      29FFD12929FFD12929FFFFFFFFFFFFFFFFFF008585FF00DDDDFF00D9D9FF00D9
+      D9FF10D9DCFF12D9D9FF15DDDDFF1EDEE1FF1FEBDFFF0E6AF1FF1DDBE1FF1EE1
+      E1FF1EE1E1FF1EE1E1FFFFFFFFFFFFFFFFFF00E1E1FF00FFFFFF00FFFFFF01FF
+      FFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0080FFFF00FFFFFF00FF
+      FFFF00FFFFFF00FFFFFFFFFFFFFFFFFFFFFF000000FF000000FF000000FF0000
+      00FF72000BFF7C0000FF951414FFD02A2DFFD92D21FF62149AFFCA2A30FFCF2B
+      2BFFCF2B2BFFCF2B2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFF
     }
   end
   object PopupMenu1: TPopupMenu
