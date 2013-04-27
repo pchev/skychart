@@ -2506,7 +2506,7 @@ var ra2000,de2000: double;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
-if cmain.KioskMode then begin f_detail.Height:=250; f_detail.Width:=400; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; {f_detail.IpHtmlPanel1.ScrollBars:=ssNone;} end
+if cmain.KioskMode then begin f_detail.Height:=280{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}; f_detail.Width:=400{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}; f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
