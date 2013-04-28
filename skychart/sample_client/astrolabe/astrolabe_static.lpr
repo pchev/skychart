@@ -33,6 +33,9 @@ uses
   {$ENDIF}{$ENDIF}
   Interfaces, // this includes the LCL widgetset
   InterfaceBase, LCLVersion, // version number
+  {$ifdef  mswindows}
+   Dask,
+  {$endif}
   Forms, Classes, Sysutils, Dialogs, cu_catalog, cu_skychart, cu_plot,
   cu_planet, cu_indiprotocol, cu_fits, cu_database, pu_info, pu_image,
   pu_getdss, pu_detail, fu_chart, pu_calendar, pu_zoom, pu_search,
@@ -49,7 +52,7 @@ uses
   bgrabitmappack, lazvo, multiframepackage, fu_config_time, fu_config_catalog,
   fu_config_chart, fu_config_display, fu_config_internet, fu_config_observatory,
   fu_config_pictures, fu_config_solsys, fu_config_system, fu_config_calendar,
-  pu_config_calendar, pu_planetinfo, astrolabe1, Dask;
+  pu_config_calendar, pu_planetinfo, astrolabe1;
   
 var i : integer;
     buf, p, step : string;
