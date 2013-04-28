@@ -1801,7 +1801,6 @@ var x,y : integer;
 begin
 if locked then exit;
 if sc.cfgsc.FindOK and (not cmain.SimpleDetail) then begin
-   sc.cfgsc.scopemark:=false;
    sc.plot.FlushCnv;
    identlabel.Visible:=false;
    Identlabel.Picture.Bitmap.Canvas.Brush.Color:=sc.plot.cfgplot.color[0];
@@ -4747,6 +4746,7 @@ var ra,dec:double;
 begin
 try
 TelescopeTimer.Enabled:=false;
+ok:=false;
 if VerboseMsg then
  WriteTrace(caption+' TelescopeTimerTimer');
 newconnection:=Connect1.checked;
@@ -4792,7 +4792,6 @@ if Connect1.checked then begin
        else precession(sc.cfgsc.TelescopeJD,sc.cfgsc.JDChart,ra,dec);
     if sc.TelescopeMove(ra,dec) then identlabel.Visible:=false;
     if sc.cfgsc.moved then begin
-       Image1.Invalidate;
        if assigned(FChartMove) then FChartMove(self);
     end;
     if (sc.cfgsc.TrackName=rsTelescope)and (not sc.cfgsc.TrackOn) then begin
@@ -4801,6 +4800,8 @@ if Connect1.checked then begin
       sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
       sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
     end;
+    sc.cfgsc.scopemark:=true;
+    Image1.Invalidate;
  end;
  TelescopeTimer.Interval:=500;
  TelescopeTimer.Enabled:=true;
