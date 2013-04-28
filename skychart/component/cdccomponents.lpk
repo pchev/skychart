@@ -19,7 +19,7 @@
     </CompilerOptions>
     <Description Value="Requires packages for Cartes du Ciel"/>
     <Type Value="RunAndDesignTime"/>
-    <RequiredPkgs Count="15">
+    <RequiredPkgs Count="14">
       <Item1>
         <PackageName Value="MultiFramePackage"/>
         <DefaultFilename Value="multiframe/multiframepackage.lpk"/>
@@ -29,57 +29,53 @@
         <DefaultFilename Value="bgrabitmap/bgrabitmappack.lpk"/>
       </Item2>
       <Item3>
-        <PackageName Value="HtmlComp"/>
-        <DefaultFilename Value="thtmlport/package/htmlcomp.lpk"/>
-      </Item3>
-      <Item4>
         <PackageName Value="lazvo"/>
         <DefaultFilename Value="vo/lazvo.lpk"/>
-      </Item4>
-      <Item5>
+      </Item3>
+      <Item4>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="zoomimage/zoomimage.lpk"/>
-      </Item5>
-      <Item6>
+      </Item4>
+      <Item5>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="xmlparser/xmlparser.lpk"/>
-      </Item6>
-      <Item7>
+      </Item5>
+      <Item6>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="synapse/source/lib/synapse.lpk"/>
-      </Item7>
-      <Item8>
+      </Item6>
+      <Item7>
         <PackageName Value="radec"/>
         <DefaultFilename Value="radec/radec.lpk"/>
-      </Item8>
-      <Item9>
+      </Item7>
+      <Item8>
         <PackageName Value="mrecsort"/>
         <DefaultFilename Value="mrecsort/mrecsort.lpk"/>
-      </Item9>
-      <Item10>
+      </Item8>
+      <Item9>
         <PackageName Value="libsql"/>
         <DefaultFilename Value="libsql/libsql.lpk"/>
-      </Item10>
-      <Item11>
+      </Item9>
+      <Item10>
         <PackageName Value="FCL"/>
         <MinVersion Major="1" Valid="True"/>
-      </Item11>
-      <Item12>
+      </Item10>
+      <Item11>
         <PackageName Value="enhedit"/>
         <DefaultFilename Value="enhedits/enhedit.lpk"/>
-      </Item12>
-      <Item13>
+      </Item11>
+      <Item12>
         <PackageName Value="downldialog"/>
         <DefaultFilename Value="downloaddialog/downldialog.lpk"/>
-      </Item13>
-      <Item14>
+      </Item12>
+      <Item13>
         <PackageName Value="CDCjdcalendar"/>
         <DefaultFilename Value="jdcalendar/cdcjdcalendar.lpk"/>
-      </Item14>
-      <Item15>
+      </Item13>
+      <Item14>
         <PackageName Value="uniqueinstance_package"/>
         <DefaultFilename Value="uniqueinstance/uniqueinstance_package.lpk"/>
-      </Item15>
+      </Item14>
     </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)/"/>
