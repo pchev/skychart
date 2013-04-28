@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-04-14 14:46+0000\n"
+"POT-Creation-Date: 2013-04-28 16:39+0000\n"
 "PO-Revision-Date: 2013-03-05 05:07+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
-"X-Generator: Launchpad (build 16564)\n"
+"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1740,6 +1740,10 @@ msgstr "错误"
 msgid "%sError creating table %s"
 msgstr "%s创建表格错误 %s"
 
+#: u_translation.rserrorfilenot
+msgid "Error, file not downloaded:"
+msgstr ""
+
 #: u_translation.rserroropening
 msgid "Error opening %s"
 msgstr "打开%s错误"
@@ -2219,6 +2223,10 @@ msgstr "最快"
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
 msgstr "高精确指向"
+
+#: u_translation.rshighquality
+msgid "High quality"
+msgstr ""
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
