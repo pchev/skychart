@@ -125,7 +125,11 @@ const
   CRLF = CR + LF;
   cSerialChunk = 8192;
 
+  {$IFDEF DARWIN}
+  LockfileDirectory = '/tmp';
+  {$ELSE}
   LockfileDirectory = '/var/lock'; {HGJ}
+  {$ENDIF}
   PortIsClosed = -1;               {HGJ}
   ErrAlreadyOwned = 9991;          {HGJ}
   ErrAlreadyInUse = 9992;          {HGJ}
@@ -749,6 +753,10 @@ type
 function GetSerialPortNames: string;
 
 implementation
+
+{$IFDEF DARWIN}
+ function real_tcflush(fd,qsel: cint): cint; cdecl; external name 'tcflush';
+{$ENDIF}
 
 constructor TBlockSerial.Create;
 begin
@@ -1935,6 +1943,13 @@ begin
   ExceptCheck;
 end;
 
+{$IFDEF DARWIN}
+ Function TCFlush(fd,qsel:cint):cint;  {$ifdef VER2_0}inline;{$endif}
+  begin
+   TCFlush:=real_tcflush(fd,qsel);
+  end;
+{$ENDIF}
+
 {$IFNDEF MSWINDOWS}
 procedure TBlockSerial.Purge;
 begin
@@ -1942,7 +1957,7 @@ begin
   SerialCheck(ioctl(FHandle, TCFLSH, TCIOFLUSH));
   {$ELSE}
     {$IFDEF DARWIN}
-    SerialCheck(fpioctl(FHandle, TCIOflush, Pointer(PtrInt(TCIOFLUSH))));
+    SerialCheck(TCFlush(FHandle, TCIOFLUSH));
     {$ELSE}
     SerialCheck(fpioctl(FHandle, TCFLSH, Pointer(PtrInt(TCIOFLUSH))));
     {$ENDIF}
@@ -2254,6 +2269,7 @@ begin
   // Make sure, the Lock Files Directory exists. We need it.
   if not DirectoryExists(LockfileDirectory) then
     CreateDir(LockfileDirectory);
+  DeleteFile(Filename); // always delete stupid lock
   // Check the Lockfile
   if not FileExists (Filename) then
   begin // comport is not locked. Lock it for us.
@@ -2342,4 +2358,4 @@ begin
 end;
 {$ENDIF}
 
-end.
+end.Index: skychart/fu_chart.pas

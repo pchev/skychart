@@ -288,11 +288,7 @@ TelescopeSelect.Items[0]:=rsINDIDriver;
 TelescopeSelect.Items[1]:=rsManualMount;
 if TelescopeSelect.Items.Count>4 then begin
    TelescopeSelect.Items[4]:=rsEncoders;
-   {$ifdef darwin}
-     TelescopeSelect.Items.Delete(4);
-     TelescopeSelect.Items.Delete(3);
-   {$endif}
- end;
+end;
 {$ifdef mswindows}
 ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 {$else}
@@ -450,19 +446,11 @@ RevertTurnsAz.checked:=csc.TelescopeTurnsX<0;
 RevertTurnsAlt.checked:=csc.TelescopeTurnsY<0;
 ManualMountType.itemindex:=csc.ManualTelescopeType;
 ManualMountTypeClick(nil);
-{$ifdef darwin}
-if csc.IndiTelescope then Telescopeselect.itemindex:=0
-   else if csc.EncoderTelescope then Telescopeselect.itemindex:=0
-   else if csc.LX200Telescope then Telescopeselect.itemindex:=0
-   else if csc.ASCOMTelescope then Telescopeselect.itemindex:=2
-   else Telescopeselect.itemindex:=1;
-{$else}
 if csc.IndiTelescope then Telescopeselect.itemindex:=0
    else if csc.EncoderTelescope then Telescopeselect.itemindex:=4
    else if csc.LX200Telescope then Telescopeselect.itemindex:=3
    else if csc.ASCOMTelescope then Telescopeselect.itemindex:=2
    else Telescopeselect.itemindex:=1;
-{$endif}
 TelescopeselectClick(self);
 IndiPort.text:=csc.IndiPort;
 NumIndiDriver:=0;

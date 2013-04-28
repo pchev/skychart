@@ -218,13 +218,25 @@ p.clear;
   findclose(fs);
 {$endif}
 {$ifdef darwin}
-  i:=findfirst('/dev/tty.serial*',faSysFile,fs);
+  i:=findfirst('/dev/cu.usbserial*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+  i:=findfirst('/dev/cu.serial*',faSysFile,fs);
   while i=0 do begin
     p.Add('/dev/'+fs.Name);
     i:=findnext(fs);
   end;
   findclose(fs);
   i:=findfirst('/dev/tty.usbserial*',faSysFile,fs);
+  while i=0 do begin
+    p.Add('/dev/'+fs.Name);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+    i:=findfirst('/dev/tty.serial*',faSysFile,fs);
   while i=0 do begin
     p.Add('/dev/'+fs.Name);
     i:=findnext(fs);
