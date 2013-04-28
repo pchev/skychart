@@ -5562,3 +5562,11 @@ msgstr ""
 msgid "Use a simple pointer"
 msgstr ""
 
+#: u_translation:rserrorfilenot
+msgid "Error, file not downloaded:"
+msgstr ""
+
+#: u_translation:rshighquality
+msgid "High quality"
+msgstr ""
+

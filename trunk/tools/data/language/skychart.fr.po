@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-14 14:46+0000\n"
-"PO-Revision-Date: 2013-04-14 14:59+0000\n"
+"POT-Creation-Date: 2013-04-28 16:39+0000\n"
+"PO-Revision-Date: 2013-04-28 16:42+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-14 15:01+0000\n"
-"X-Generator: Launchpad (build 16564)\n"
+"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1744,6 +1744,10 @@ msgstr "Erreur"
 msgid "%sError creating table %s"
 msgstr "%sErreur lors de la création de la table %s"
 
+#: u_translation.rserrorfilenot
+msgid "Error, file not downloaded:"
+msgstr "Erreur, fichier non téléchargé:"
+
 #: u_translation.rserroropening
 msgid "Error opening %s"
 msgstr "Erreur à l'ouverture de %s"
@@ -2224,6 +2228,10 @@ msgstr "Le plus haut"
 #: u_translation.rshighprecisio
 msgid "High Precision Pointing"
 msgstr "Pointage de haute précision"
+
+#: u_translation.rshighquality
+msgid "High quality"
+msgstr "Haute qualité"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
