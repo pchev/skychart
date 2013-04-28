@@ -29,6 +29,7 @@ PJ Pallez Nov 1999
 Patrick Chevalley Oct 2000
 Renato Bonomini Jul 2004
 Lazarus version, Patrick Chevalley Jun 2011
+Tomas Mandys Apr 2013
 -------------------------------------------------------------------------------}
 
 interface
@@ -59,7 +60,7 @@ function LX200_SetTimeDate : boolean;
 function LX200_Parkscope : boolean;
 // Renato Bonomini:
 Procedure LX200_SimpleCmd(cmd: string);
-Function LX200_QueryGV(query: string; chartoread: integer) : string;
+Function LX200_QueryGV(query: string) : string;
 Function LX200_QueryFirmwareID : string;
 Function LX200_QueryProductID : string;
 Function LX200_QueryFirmwareTime : string;
@@ -255,9 +256,8 @@ if OpenCom(LX200_port,commport,baud,parity,data,stop,timeout,inttimeout) then be
          buf:='#:GD#';
          count:=length(buf);
          if WriteCom(LX200_port,buf,count)= false then exit;
-         count:=20;
-         if ReadCom(LX200_port,buf,count) = false then exit;
-         if count<6 then exit;
+         if ReadComTerm(LX200_port,buf) = false then exit;
+         if length(buf)<6 then exit;
          buf:='P';
          LX200_mode:=buf;
          LX200_opened:=true;
@@ -267,9 +267,8 @@ if OpenCom(LX200_port,commport,baud,parity,data,stop,timeout,inttimeout) then be
          buf:='#:GC#';
          count:=length(buf);
          if WriteCom(LX200_port,buf,count)= false then exit;
-         count:=9;
-         if ReadCom(LX200_port,buf,count) = false then exit;
-         if count<9 then exit;
+         if ReadComTerm(LX200_port,buf) = false then exit;
+         if length(buf)<9 then exit;
          LX200_mode:='P';
          LX200_opened:=true;
          result:=true;
@@ -289,8 +288,7 @@ begin
    buf:='#:GD#';
    count:=length(buf);
    if WriteCom(LX200_port,buf,count)= false then exit;
-   count:=20;
-   if ReadCom(LX200_port,buf,count) = false then exit;
+   if ReadComTerm(LX200_port,buf) = false then exit;
    if length(trim(buf))>7 then f:=1 else f:=0;
    if f<>format then begin
        buf:='#:U#';          // switch format
@@ -312,7 +310,7 @@ result:=true;
 end;
 
 Function LX200_QueryEQ(var RA,DEC : double) : boolean;
-var buf : string;
+var buf, buf2 : string;
     a,b,c : double;
     count,p,i : integer;
 begin
@@ -323,8 +321,7 @@ case LX200_type of
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
-    count:=20;
-    if ReadCom(LX200_port,buf,count) = false then exit;
+    if ReadComTerm(LX200_port,buf) = false then exit;
     case LX200_format of
     0 : begin
         //1234567890123456
@@ -355,8 +352,7 @@ case LX200_type of
     count:=length(buf);
     PurgeBuffer(LX200_port);
     if WriteCom(LX200_port,buf,count)= false then exit;
-    count:=20;
-    if ReadCom(LX200_port,buf,count) = false then exit;
+    if ReadComTerm(LX200_port,buf) = false then exit;
     case LX200_format of
     0 : begin
         //1234567890123456
@@ -383,8 +379,9 @@ case LX200_type of
   count:=length(buf);
   PurgeBuffer(LX200_port);
   if WriteCom(LX200_port,buf,count)= false then exit;
-  count:=20;
-  if ReadCom(LX200_port,buf,count) = false then exit;
+  if ReadComTerm(LX200_port,buf) = false then exit;
+  if ReadComTerm(LX200_port,buf2) = false then exit;
+  buf:= buf + '#' + buf2;
   case LX200_format of
   0 : begin
       //1234567890123456
@@ -428,7 +425,7 @@ result:=true;
 end;
 
 Function LX200_QueryAZ(var Az,Al : double) : boolean;
-var buf : string;
+var buf, buf2 : string;
     a,b,c : double;
     count,p : integer;
 begin
@@ -439,8 +436,7 @@ buf:='#:GZ#';
 count:=length(buf);
 PurgeBuffer(LX200_port);
 if WriteCom(LX200_port,buf,count)= false then exit;
-count:=20;
-if ReadCom(LX200_port,buf,count) = false then exit;
+if ReadComTerm(LX200_port,buf) = false then exit;
 case LX200_format of
 0 : begin
     //1234567890123456
@@ -462,8 +458,7 @@ buf:='#:GA#';
 count:=length(buf);
 PurgeBuffer(LX200_port);
 if WriteCom(LX200_port,buf,count)= false then exit;
-count:=20;
-if ReadCom(LX200_port,buf,count) = false then exit;
+if ReadComTerm(LX200_port,buf) = false then exit;
 case LX200_format of
 0 : begin
     //1234567890123456
@@ -489,8 +484,9 @@ buf:='#:GZ#:GA#';
 count:=length(buf);
 PurgeBuffer(LX200_port);
 if WriteCom(LX200_port,buf,count)= false then exit;
-count:=20;
-if ReadCom(LX200_port,buf,count) = false then exit;
+if ReadComTerm(LX200_port,buf) = false then exit;
+if ReadComTerm(LX200_port,buf2) = false then exit;
+buf:= buf + '#' +buf2;
 case LX200_format of
 0 : begin
     //1234567890123456
@@ -777,7 +773,7 @@ result:=trim(buf);
 LX200_UseHPP:=result='HIGH PRECISION';
 end;
 
-Function LX200_QueryGV(query: string; chartoread: integer) : string;
+Function LX200_QueryGV(query: string) : string;
 var count : integer;
 begin
 // Renato Bonomini:
@@ -785,85 +781,39 @@ result:='Error';
 PurgeBuffer(LX200_port);
 count:=length(query);
 if WriteCom(LX200_port,query,count)= false then exit;
-if ReadCom(LX200_port,query,chartoread) = false then exit;
-Result:=trim(LeftStr(query, length(query)-1));
+if ReadComTerm(LX200_port,query) = false then exit;
+Result:=trim(query);
 end;
 
 Function LX200_QueryFirmwareID : string;
-var count : integer;
-character: string;
-query: string;
-maxtries: integer;
 begin
-// GVF variabile string length:
-query:=':GVF#';
-result:='Error';
-PurgeBuffer(LX200_port);
-count:=length(query);
-if WriteCom(LX200_port,query,count)= false then exit;
-// Read one character at a time, max characters 20,
-// read until we receive a #
-PurgeBuffer(LX200_port);
-count:=1;
-character:='';
-query:='';
-maxtries:=0;
-while (character <> '#') and (maxtries <20) do
-begin
-        if ReadCom(LX200_port,character,count) = false then exit;
-        query:=query+character;
-        maxtries:=maxtries+1;
-end;
-Result:=trim(LeftStr(query, maxtries-1));
+  Result:=LX200_QueryGV(':GVF#');
 end;
 
 Function LX200_QueryProductID : string;
-var count : integer;
-character: string;
-query: string;
-maxtries: integer;
 begin
-// GVP variabile string length:
-query:=':GVP#';
-result:='Error';
-PurgeBuffer(LX200_port);
-count:=length(query);
-if WriteCom(LX200_port,query,count)= false then exit;
-// Read one character at a time, max characters 20,
-// read until we receive a #
-PurgeBuffer(LX200_port);
-count:=1;
-character:='';
-query:='';
-maxtries:=0;
-while (character <> '#') and (maxtries <20) do
-begin
-        if ReadCom(LX200_port,character,count) = false then exit;
-        query:=query+character;
-        maxtries:=maxtries+1;
-end;
-Result:=trim(LeftStr(query, maxtries-1));
+  Result:=LX200_QueryGV(':GVP#');
 end;
 
 Function LX200_QueryFirmwareDate : string;
 begin
 // Renato Bonomini:
 // GVD Get Telescope Firmware Date
-Result:=LX200_QueryGV(':GVD#',12);
+Result:=LX200_QueryGV(':GVD#');
 end;
 
 Function LX200_QueryFirmwareNumber : string;
 begin
 // Renato Bonomini:
 // GVD Get Telescope Firmware Number
-Result:=LX200_QueryGV(':GVN#',5);
+Result:=LX200_QueryGV(':GVN#');
 end;
 
 Function LX200_QueryFirmwareTime : string;
 begin
 // Renato Bonomini:
 // GVD Get Telescope Firmware Time
-Result:=LX200_QueryGV(':GVT#',9);
+Result:=LX200_QueryGV(':GVT#');
 end;
 
 Function LX200_SetFocusSteep(speed:char):boolean;
@@ -915,11 +865,13 @@ begin
         // read ok response
         count:=1;
         ReadCom(LX200_port,buf,count);
-        // read planetary update response
-        count:=50;
-        ReadCom(LX200_port,buf,count);
-        count:=50;
-        ReadCom(LX200_port,buf,count);
+
+        if (count = 1) then
+        begin
+          // read planetary update response
+          ReadComTerm(LX200_port,buf);
+          ReadComTerm(LX200_port,buf);
+        end;
 
         //Set Time
         DefaultFormatSettings.ShortTimeFormat := 'hh:mm:ss';
@@ -936,30 +888,22 @@ begin
         buf := '#:GM#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
-        count := 50;
-        if ReadCom(LX200_port,site,count) = false then goto exit;
-        site := stringreplace(trim(site),'#','',[rfReplaceAll]);
+        if ReadComTerm(LX200_port,site) = false then goto exit;
 
         buf := '#:GC#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
-        count := 10;
-        if ReadCom(LX200_port,dt,count) = false then goto exit;
-        dt := stringreplace(trim(dt),'#','',[rfReplaceAll]);
+        if ReadComTerm(LX200_port,dt) = false then goto exit;
 
         buf := '#:GL#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
-        count := 10;
-        if ReadCom(LX200_port,tm,count) = false then goto exit;
-        tm := stringreplace(trim(tm),'#','',[rfReplaceAll]);
+        if ReadComTerm(LX200_port,tm) = false then goto exit;
 
         buf := '#:GG#';
         count:=length(buf);
         if WriteCom(LX200_port,buf,count)= false then goto exit;
-        count := 10;
-        if ReadCom(LX200_port,tz,count) = false then goto exit;
-        tz := stringreplace(trim(tz),'#','',[rfReplaceAll]);
+        if ReadComTerm(LX200_port,tz) = false then goto exit;
 
         result := true;
         ShowMessage('Telescope setting is now:'+crlf+'Site: ' + site + crlf+'Date: ' + dt + crlf+'Time: ' + tm +crlf+'Time zone: ' + tz+ '.');
@@ -1054,9 +998,8 @@ PurgeBuffer(LX200_port);
 buf:=':GT#';
 count:=length(buf);
 if WriteCom(LX200_port,buf,count)= false then exit;
-count:=5;
-if ReadCom(LX200_port,buf,count) = false then exit;
-Result:=StrToFloat(LeftStr(trim(buf),4));
+if ReadComTerm(LX200_port,buf) = false then exit;
+Result:= StrToFloat(LeftStr(trim(buf),4));
 end;
 
 Procedure LX200_TrackingDefaultRate;

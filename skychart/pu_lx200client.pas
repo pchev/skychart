@@ -29,7 +29,7 @@ PJ Pallez Nov 1999
 Patrick Chevalley Oct 2000
 Renato Bonomini Jul 2004
 Lazarus version, Patrick Chevalley Jun 2011
-
+Tomas Mandys Apr 2013
 
 will work with all systems using same protocol
 (LX200,AutoStar,..)
@@ -444,7 +444,8 @@ timer1.enabled:=false;
 ok:=false;
 if LX200_Open(trim(cbo_type.text),trim(cbo_port.text),PortSpeedbox.text,Paritybox.text,DatabitBox.text,StopbitBox.text,TimeOutBox.text,IntTimeOutBox.text) then begin
    LX200_SetFormat(radiogroup2.ItemIndex);
-   ShowCoordinates;
+   if not CoordLock then   // TMa
+     ShowCoordinates;
    led.color:=clLime;
    ok:=true;
    timer1.enabled:=true;
@@ -1267,7 +1268,7 @@ end;
 
 procedure Tpop_lx200.SpeedButton8Click(Sender: TObject);
 begin
- if ScopeConnected then begin
+ if ScopeConnected and not CoordLock then begin
      CoordLock := true;
      try
      if not LX200_SetTimeDate then
@@ -1308,13 +1309,21 @@ procedure Tpop_lx200.QueryFirmwareButtonClick(Sender: TObject);
 var ok : boolean;
     alreadyconnected: boolean;
 begin
-alreadyconnected:=ScopeConnected;
-if alreadyconnected <> true then begin
-ScopeConnect(ok);
-end;
-showmessage('Controller returned'+crlf+crlf+'Product Id : '+LX200_QueryProductID+crlf+'Firmware ID-Revision : '+LX200_QueryFirmwareID+LX200_QueryFirmwareNumber+crlf+'Firmware Date-Time : '+LX200_QueryFirmwareTime+LX200_QueryFirmwareDate);
-if alreadyconnected <> true then begin
-ScopeDisconnect(ok);
+if CoordLock then Exit;
+CoordLock := true;
+try   // TMa not to interfere with Timer's show coordinates
+  alreadyconnected:= ScopeConnected;
+  if alreadyconnected <> true then begin
+  ScopeConnect(ok);
+  end;
+  showmessage('Controller returned'+crlf+crlf+'Product Id : '+LX200_QueryProductID+crlf+'Firmware ID-Revision : '+LX200_QueryFirmwareID+' '+LX200_QueryFirmwareNumber+crlf+'Firmware Date-Time : '+LX200_QueryFirmwareTime+' '+LX200_QueryFirmwareDate);
+
+  if alreadyconnected <> true then
+  begin
+    ScopeDisconnect(ok);
+  end;
+finally
+  CoordLock := false;
 end;
 end;
 
