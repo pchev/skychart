@@ -244,7 +244,7 @@ type
     ChartCursor: TCursor;
     sc: Tskychart;
     cmain: Tconf_main;
-    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove,MeasureOn :boolean;
+    locked,LockTrackCursor,LockKeyboard,lastquick,lock_refresh,lockscrollbar,TrackCursorMove,lockmove,TelescopeLock,MeasureOn :boolean;
     undolist : array[1..maxundo] of Tconf_skychart;
     lastundo,curundo,validundo, lastx,lasty,lastyzoom  : integer;
     lastl,lastb,MeasureRa,MeasureDe: double;
@@ -487,7 +487,9 @@ if VerboseMsg then
  WriteTrace('Destroy chart '+sc.cfgsc.chartname);
 try
  locked:=true;
+ while lock_refresh do Application.ProcessMessages;
  RefreshTimer.Enabled:=false;
+ while TelescopeLock do Application.ProcessMessages;
  TelescopeTimer.Enabled:=false;
  if sc<>nil then sc.free;
  Image1.Free;
@@ -851,7 +853,7 @@ end;
 
 procedure Tf_chart.Image1Paint(Sender: TObject);
 begin
-if printing then exit;
+if printing or locked then exit;
 if VerboseMsg then
  WriteTrace(caption+' Paint');
 sc.plot.FlushCnv;
@@ -4744,8 +4746,11 @@ procedure Tf_chart.TelescopeTimerTimer(Sender: TObject);
 var ra,dec:double;
     ok, newconnection: boolean;
 begin
-try
+if locked then exit;
 TelescopeTimer.Enabled:=false;
+try
+TelescopeLock:=true;
+try
 ok:=false;
 if VerboseMsg then
  WriteTrace(caption+' TelescopeTimerTimer');
@@ -4816,8 +4821,12 @@ if Connect1.checked then begin
 end;
 if assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
 except
+ TelescopeLock:=false;
  TelescopeTimer.Enabled:=false;
  Connect1.checked:=false;
+end;
+finally
+TelescopeLock:=false;
 end;
 end;
 
