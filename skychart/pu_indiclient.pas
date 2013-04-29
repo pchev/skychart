@@ -132,6 +132,7 @@ pos_x.text:='';
 pos_y.text:='';
 if trim(edit1.text)='' then exit;
 if (indi1<>nil) then begin
+   indi1.exiting:=true;
    indi1.terminate;
 end;
 timer1.Enabled:=false;
