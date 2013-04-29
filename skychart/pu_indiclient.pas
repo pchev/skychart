@@ -85,7 +85,7 @@ type
     Procedure ScopeShow;
     Procedure ScopeShowModal(var ok : boolean);
     Procedure ScopeConnect(var ok : boolean);
-    Procedure ScopeDisconnect(var ok : boolean);
+    Procedure ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
     Procedure ScopeGetInfo(var scName : shortstring; var QueryOK,SyncOK,GotoOK : boolean; var refreshrate : integer);
     Procedure ScopeGetEqSys(var EqSys : double);
     Procedure ScopeSetObs(la,lo : double);
@@ -126,13 +126,13 @@ except
 end;
 end;
 
-Procedure Tpop_indi.ScopeDisconnect(var ok : boolean);
+Procedure Tpop_indi.ScopeDisconnect(var ok : boolean; updstatus:boolean=true);
 begin
 pos_x.text:='';
 pos_y.text:='';
 if trim(edit1.text)='' then exit;
 if (indi1<>nil) then begin
-   indi1.exiting:=true;
+   if not updstatus then indi1.exiting:=true;
    indi1.terminate;
 end;
 timer1.Enabled:=false;
