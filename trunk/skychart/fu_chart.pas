@@ -495,7 +495,7 @@ try
  Image1.Free;
  if Fpop_indi<>nil then begin
    if Connect1.Checked then begin
-     Fpop_indi.ScopeDisconnect(ok);
+     Fpop_indi.ScopeDisconnect(ok,false);
      Application.ProcessMessages;
      sleep(500);
    end;
