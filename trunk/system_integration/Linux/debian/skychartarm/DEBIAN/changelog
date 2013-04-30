@@ -1,0 +1,11 @@
+skychart (3.9) experimental; urgency=low
+
+  * unstable version
+    First version for ARM cpu.
+    For the full change log, see :
+    http://www.ap-i.net/mantis/changelog_page.php?version_id=34
+
+ -- Patrick Chevalley <pch@ap-i.net>  Sat Mar  9 18:30:00 CET 2013
+
+
+
