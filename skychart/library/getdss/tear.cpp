@@ -104,7 +104,7 @@ void ThrowTearException(int nCode)
 /////////////////////////////////////////////////////////////////////////////
 // The main() Thang
 int grab_via_http( const char *url, const char *output_file_name,
-                           int32_t *bytes_read)
+                           long *bytes_read)
 {
    int nRetCode = 0;
 
