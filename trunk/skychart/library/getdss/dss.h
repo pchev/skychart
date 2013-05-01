@@ -1,6 +1,3 @@
-#ifndef int32_t
-   #define int32_t long
-#endif
 
 #define HEADER struct header
 

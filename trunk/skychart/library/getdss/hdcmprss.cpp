@@ -1,9 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#ifndef int32_t
-   #define int32_t long
-#endif
-
 
 extern int hinv( int a[], const int nx, const int ny);
 int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
