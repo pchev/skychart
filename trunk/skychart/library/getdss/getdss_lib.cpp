@@ -22,7 +22,6 @@
 ** code.
 */
 
-#include <locale.h>
 #include <stdio.h>
 #include <ctype.h>
 #define   getch()   getchar()
@@ -52,10 +51,6 @@ int stricmp( const char *s1, const char *s2)
       }
    return( 0);
 }
-
-// saves name of current locale
-static char m_Saved_Locale[100];
-
 #endif
 
 /* The following ImageExtract( ) code takes on a set of higher-level tasks. */
@@ -122,12 +117,6 @@ extern "C" int ImageExtract( SImageConfig *pConfig )
    char szTemp[64];                  /* text buffer                         */
    ENVIRONMENT_DATA edata;               /* configuration psrameters        */
 
-   #ifdef UNIX
-   // get the name of the current locale
-   strcpy (m_Saved_Locale, setlocale (LC_ALL, NULL));
-   setlocale (LC_ALL, "C");  // ensure correct decimal separator
-   #endif
-   
    /* Create a debugging file to log progress and errors to.                */
 
    debug_file = fopen( "debug.dat", "wt");
@@ -258,11 +247,6 @@ extern "C" int ImageExtract( SImageConfig *pConfig )
       free(pdata);
    }
    
-   	
-   #ifdef UNIX
-   setlocale (LC_ALL, m_Saved_Locale);   // restore original locale
-   #endif
-
    /* Close the debug file and return the result code. */
 
    t = time( NULL);
@@ -294,12 +278,6 @@ extern "C" int GetPlateList( SImageConfig *pConfig , SPlateData *pd)
    ENVIRONMENT_DATA edata;               /* configuration psrameters     */
    char hdrl[81], value[21] ; /* pour lire le header                     */
 
-   #ifdef UNIX
-   // get the name of the current locale
-   strcpy (m_Saved_Locale, setlocale (LC_ALL, NULL));
-   setlocale (LC_ALL, "C");  // ensure correct decimal separator
-   #endif
-   
    /* Create a debugging file to log progress and errors to. */
 
    debug_file = fopen( "debug.dat", "wt");
@@ -430,10 +408,6 @@ extern "C" int GetPlateList( SImageConfig *pConfig , SPlateData *pd)
       rval = 0;
    }
    
-   #ifdef UNIX
-   setlocale (LC_ALL, m_Saved_Locale);   // restore original locale
-   #endif 
-
    /* Close the debug file and return the result code.   */
 
    t = time( NULL);
@@ -465,12 +439,6 @@ extern "C" int ImageExtractFromPlate( SImageConfig *pConfig ,char *ReqPlateName 
    char szTemp[64];                  /* text buffer */
    ENVIRONMENT_DATA edata;               /* configuration parameters */
 
-   #ifdef UNIX
-   // get the name of the current locale
-   strcpy (m_Saved_Locale, setlocale (LC_ALL, NULL));
-   setlocale (LC_ALL, "C");  // ensure correct decimal separator
-   #endif
-   
    /* Create a debugging file to log progress and errors to.  */
 
    debug_file = fopen( "debug.dat", "wt");
@@ -605,10 +573,6 @@ extern "C" int ImageExtractFromPlate( SImageConfig *pConfig ,char *ReqPlateName 
       free(pdata);
    }
 
-   #ifdef UNIX
-   setlocale (LC_ALL, m_Saved_Locale);   // restore original locale
-   #endif
-   
    /* Close the debug file and return the result code.   */
 
    t = time( NULL);

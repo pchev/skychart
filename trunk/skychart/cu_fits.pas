@@ -1123,12 +1123,12 @@ for i:=0 to fitslist.Count-1 do begin
        ijd:=ljd[n]
     else
        if ijd<>ljd[n] then samejd:=false;
-    ra_offset[n]:=deg2rad*iwcs.cra;
-    de_offset[n]:=deg2rad*iwcs.cdec;
+    ra_offset[n]:=c.racentre;
+    de_offset[n]:=c.decentre;
     if c.ApparentPos then mean_equatorial(ra_offset[n],de_offset[n],c,true,true);
     Precession(c.JDChart,ljd[n],ra_offset[n],de_offset[n]);
-    ra_offset[n]:=ra_offset[n]-deg2rad*iwcs.cra;
-    de_offset[n]:=de_offset[n]-deg2rad*iwcs.cdec;
+    ra_offset[n]:=ra_offset[n]-c.racentre;
+    de_offset[n]:=de_offset[n]-c.decentre;
     iwidth[n]:=Fwidth;
     iheight[n]:=Fheight;
     smallfov:=smallfov and ((iwcs.wp*iwcs.secpix/3600)<1);

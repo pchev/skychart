@@ -179,8 +179,8 @@ int DLL_FUNC get_environment_data( ENVIRONMENT_DATA *edata, const char *filename
 int DLL_FUNC create_image_line( char *oline, ENVIRONMENT_DATA *edata)
 {
    char dec_sign = '+';
-   long ra = (long)( edata->image_ra * (12. / PI) * 3600. * 100.);
-   long dec = (long)( edata->image_dec * (180. / PI) * 3600. * 10.);
+   int32_t ra = (int32_t)( edata->image_ra * (12. / PI) * 3600. * 100.);
+   int32_t dec = (int32_t)( edata->image_dec * (180. / PI) * 3600. * 10.);
 
    if( dec < 0L)
       {
@@ -293,6 +293,12 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 ** June 5 1999
 ** Add WCS keywords
 **/
+/* 28 Aug 2006:  Wouter van Reeven pointed out that the output isn't    */
+/* necessarily a multiple of 2880 bytes int32_t,  and that it ought to be  */
+/* padded to bring it up to size.  He's right,  of course,  though few  */
+/* programs are insistent on this point,  and plenty of FITS files just */
+/* stop when the data's done... still,  it's easy enough to do this     */
+/* correctly;  see code beginning at ' const short pad_word'.           */
 
 #define N_ADDED_LINES 20
 #ifdef __WATCOMC__
@@ -301,7 +307,7 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 #define ZKEY_CLOCK  0
 #endif
 
-long times[20];
+int32_t times[20];
 
 int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                                           const ENVIRONMENT_DATA *edata)
@@ -316,15 +322,15 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    int xsize_out = edata->pixels_wide;
    int ysize_out = edata->pixels_high;
    FILE *ofile, *ifile, *img_data_file;
-   long *histogram, total_pixels;
+   int32_t *histogram, total_pixels;
    unsigned short bins[100];
    int rval;
-   long t0;
+   int32_t t0;
    double ra_center, dec_center, new_wcs_matrix[4] ;
    int crpix1, crpix2 ;
    time_t curr_t = time( NULL);
 
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
    _PNH old_handler;
 
@@ -406,7 +412,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
             else
                {
                free( header);
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
                _set_new_handler( old_handler);
 #endif
@@ -446,7 +452,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       if( !ofile)
          {
          dss_debug_printf( "Couldn't open '%s'\n", edata->output_file_name);
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
          _set_new_handler( old_handler);
 #endif
@@ -457,7 +463,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       dss_debug_printf( "%d lines written to output file '%s'\n",
                      n_lines_written, edata->output_file_name);
       t0 = ZKEY_CLOCK;
-      histogram = (long *)calloc( 65536, sizeof( long));
+      histogram = (int32_t *)calloc( 65536, sizeof( int32_t));
       if( !histogram)
          {
          dss_debug_printf( "Couldn't allocate histogram data\n");
@@ -467,7 +473,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
          fclose( ofile);
          free( header);
          unlink( edata->output_file_name);
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
          _set_new_handler( old_handler);
 #endif
@@ -492,7 +498,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
          free( header);
          free( histogram);
          unlink( edata->output_file_name);
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
          _set_new_handler( old_handler);
 #endif
@@ -506,8 +512,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       for( max_pixel_value = 65535; !histogram[max_pixel_value]; max_pixel_value--)
          ;
       curr_bin = 0;
-      total_pixels = (long)xsize_out * (long)ysize_out;
-      total_pixels /= (long)( edata->subsamp * edata->subsamp);
+      total_pixels = (int32_t)xsize_out * (int32_t)ysize_out;
+      total_pixels /= (int32_t)( edata->subsamp * edata->subsamp);
       for( i = 1; i < 65536; i++)
          {
          int new_bin;
@@ -578,7 +584,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                edata->low_contrast, edata->high_contrast,
                xsize_out / edata->subsamp,
                ysize_out / edata->subsamp,
-               (long)n_lines_written * 80L, edata->output_file_name);
+               (int32_t)n_lines_written * 80L, edata->output_file_name);
       fclose( img_data_file);
       }
 
@@ -632,20 +638,20 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       amdpos( &h, (double)( xpixel_int + crpix1 * edata->subsamp + 1 - i),
                   (double)( ypixel_int + crpix2 * edata->subsamp + i),
                   &ra_2, &dec_2);
-      delta_ra  = (ra_2 - ra_center) * cos( dec_center);
-      delta_dec = dec_2 - dec_center;
+      delta_ra  = (ra_2 - ra_center) * cos( dec_center) * edata->subsamp;
+      delta_dec = (dec_2 - dec_center) * edata->subsamp;
       dist = sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
       if( !i)     /* CDELT1 is negative... don't really understand why */
          dist = -dist;
-      sprintf( tptr, "CDELT%d  = %21.13E", i + 1, (180. / PI) * dist * edata->subsamp);
+      sprintf( tptr, "CDELT%d  = %21.13E", i + 1, (180. / PI) * dist);
       tptr += 80;
       crota = -atan2( delta_ra, delta_dec);
       if( !i)
          crota -= PI / 2.;
       sprintf( tptr, "CROTA%d  = %11.9lf", i + 1, crota * 180 / PI);
       tptr += 80;
-      new_wcs_matrix[i * 2    ] = delta_ra * 180. / PI * edata->subsamp;
-      new_wcs_matrix[i * 2 + 1] = delta_dec * 180. / PI * edata->subsamp;
+      new_wcs_matrix[i * 2    ] = delta_ra * 180. / PI;
+      new_wcs_matrix[i * 2 + 1] = delta_dec * 180. / PI;
       }
    /* end old-style WCS keywords */
    /* begin new-style WCS keywords: */
@@ -670,12 +676,22 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
          header[i] = ' ';
    if( ofile)
       {
+      const short pad_word = 0;
+      int32_t n_pad_bytes = 2880 - ftell( ofile) % 2880;
+
+      if( n_pad_bytes == 2880)      /* we came out even after all */
+         n_pad_bytes = 0;
+      while( n_pad_bytes)
+         {
+         fwrite( &pad_word, 1, sizeof( pad_word), ofile);
+         n_pad_bytes -= sizeof( pad_word);      /* i.e,  two bytes */
+         }
       fseek( ofile, 0L, SEEK_SET);        /* go back to redo the header */
       fwrite( header, n_lines_written, 80, ofile);
       fclose( ofile);
       }
    free( header);
-#ifdef _WINDOWS
+#ifdef _WIN32
 #ifndef _CONSOLE
    _set_new_handler( old_handler);
 #endif

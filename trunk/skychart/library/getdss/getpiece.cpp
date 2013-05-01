@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
 #include "platelst.h"
 #include "get_dss.h"
@@ -12,8 +13,79 @@ int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
    /* The following two globals are for use in providing a 'status' */
    /* indicator for the Windows version. */
 int get_dss_tiles_done, get_dss_tiles_total;
+int median_nth_pixel = -1;
 
 #define PIXEL unsigned short
+
+static PIXEL find_nth_pixel( PIXEL *pixels, int n_pixels, int nth)
+{
+   while( n_pixels > 1)
+      {
+      int i, j = n_pixels - 1, tval;
+
+      if( n_pixels > 10)
+         {
+         const int mid = n_pixels / 2, end = j;
+         int pivot = 0;
+
+         if( pixels[0] > pixels[mid])
+            {
+            if( pixels[mid] > pixels[end])
+               pivot = mid;
+            else if( pixels[end] < pixels[0])
+               pivot = end;
+            }
+         else
+            {
+            if( pixels[mid] < pixels[end])
+               pivot = mid;
+            else if( pixels[end] > pixels[0])
+               pivot = end;
+            }
+         if( pivot)
+            {
+            tval = pixels[pivot];
+            pixels[pivot] = pixels[0];
+            pixels[0] = tval;
+            }
+         if( pixels[0] == pixels[j] && pixels[0] == pixels[mid])
+            {
+            for( i = 1; i < n_pixels && pixels[i] == pixels[0]; i++)
+               ;
+            if( i == n_pixels)      /* they're all the same! */
+               return( pixels[0]);
+            }
+         }
+      i = 1;
+      while( i <= j)
+         {
+         while( i <= j && pixels[i] <= pixels[0])
+            i++;
+         while( i <= j && pixels[j] > pixels[0])
+            j--;
+         if( i < j)
+            {
+            tval = pixels[i];
+            pixels[i] = pixels[j];
+            pixels[j] = tval;
+            }
+         }
+      if( i == nth + 1)
+         return( pixels[0]);
+      else if( i > nth + 1)
+         {
+         pixels++;
+         n_pixels = i - 1;
+         }
+      else
+         {
+         pixels += i;
+         n_pixels -= i;
+         nth -= i;
+         }
+      }
+   return( pixels[0]);
+}
 
 /* Normally,  with subsamp=1 (every pixel used),  this function isn't    */
 /* called.  When it _is_ called,  it currently takes the median value    */
@@ -25,39 +97,53 @@ int get_dss_tiles_done, get_dss_tiles_total;
 /* good idea,  maybe throwing in some code so that the user can specify  */
 /* the method to be used.)                                               */
 
-static void subsamp_row( PIXEL *curr, const int xsize, const int subsamp)
+static void subsamp_row( PIXEL *tbuff, PIXEL *curr,
+                                        const int xsize, const int subsamp)
 {
    int k;
-#ifndef AVERAGING
    const int subsamp2 = subsamp * subsamp;
-#else
    const int offset1 = subsamp / 2;
    const int offset2 = offset1 * xsize;
    const int offset3 = offset2 + offset1;
-#endif
    PIXEL *iloc = curr;
 
    for( k = xsize / subsamp; k; k--, iloc += subsamp)
       {
-#ifndef AVERAGING
-      int oval = 0, i, j;
-      PIXEL *tptr = iloc;
+      if( median_nth_pixel == -1)         /* averaging */
+         {
+         int oval = 0, i, j;
+         PIXEL *tptr = iloc;
 
-      for( i = subsamp; i; i--, tptr += xsize - subsamp)
-         for( j = subsamp; j; j--)
-            oval += (int)*tptr++;
-      *curr++ = (PIXEL)( oval / subsamp2);
-#else
-      PIXEL oval = *iloc;
+         for( i = subsamp; i; i--, tptr += xsize - subsamp)
+            for( j = subsamp; j; j--)
+               oval += (int)*tptr++;
+         *curr++ = (PIXEL)( oval / subsamp2);
+         }
+      else if( median_nth_pixel == -2)    /* quick & dirty lowest value */
+         {
+         PIXEL oval = *iloc;
 
-      if( oval < iloc[offset1])
-         oval = iloc[offset1];
-      if( oval < iloc[offset2])
-         oval = iloc[offset2];
-      if( oval < iloc[offset3])
-         oval = iloc[offset3];
-      *curr++ = oval;
-#endif
+         if( oval > iloc[offset1])
+            oval = iloc[offset1];
+         if( oval > iloc[offset2])
+            oval = iloc[offset2];
+         if( oval > iloc[offset3])
+            oval = iloc[offset3];
+         *curr++ = oval;
+         }
+      else        /* a "true" median search */
+         {
+         int i;
+         PIXEL *tptr = iloc, *median_ptr = tbuff;
+
+         for( i = subsamp; i; i--)
+            {
+            memcpy( median_ptr, tptr, subsamp * sizeof( PIXEL));
+            tptr += xsize;
+            median_ptr += subsamp;
+            }
+         *curr++ = find_nth_pixel( tbuff, subsamp2, median_nth_pixel);
+         }
       }
 }
 
@@ -86,7 +172,7 @@ static void subsamp_row( PIXEL *curr, const int xsize, const int subsamp)
 int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                                const int x1, const int y1,
                                const int x2, const int y2,
-                               FILE *ofile, int subsamp, long *histogram)
+                               FILE *ofile, int subsamp, int32_t *histogram)
 {
    int xsize = x2 - x1, ytile, xtile, x, y, err_code = 0;
    PIXEL *tbuff = (PIXEL *)calloc( xsize, 500 * sizeof( PIXEL));
@@ -98,7 +184,11 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
    int n_tiles = (xtile_end - xtile_start) * (ytile_end - ytile_start);
    int counter = 0;
    char filename[256];   /*2001-12-10mn*/
-/*   char filename[40];   */
+   PIXEL *median_buff = NULL;
+#ifdef _CONSOLE
+   clock_t t0 = clock( );
+   double t_elapsed, prev_t_elapsed = -100;
+#endif
 
    get_dss_tiles_done = 0;            /* This is a global! */
    get_dss_tiles_total = n_tiles;     /* So is this        */
@@ -106,6 +196,8 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
    if( !tbuff)       /* The above is apt to be an ENORMOUS buffer,  and */
       return( DSS_IMG_ERR_BIG_BUFFER);   /* can easily trip out memory */
    dss_debug_printf( "Buffer allocated; %d tiles needed\n", n_tiles);
+   if( subsamp > 1 && median_nth_pixel)
+      median_buff = (PIXEL *)calloc( subsamp * subsamp, sizeof( PIXEL));
    if( y1 < 0)                   /* Some blank lines at the top: */
       for( y = y1 / subsamp; y; y++)
          fwrite( tbuff, xsize / subsamp, sizeof( PIXEL), ofile);
@@ -136,10 +228,10 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
 
             if( lump_file)
                {
-               long loc[2];
+               int32_t loc[2];
 
                fseek( lump_file, 4L * (xtile + ytile * 28L), SEEK_SET);
-               fread( loc, 2, sizeof( long), lump_file);
+               fread( loc, 2, sizeof( int32_t), lump_file);
                filesize = loc[1] - loc[0];
                fseek( lump_file, loc[0], SEEK_SET);
                }
@@ -211,8 +303,9 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                      /* 2 Jul 98:  Fix added to handle the last row of */
                      /* tiles,  where ny = 499,  after Chris Marriott */
                      /* pointed out a bug here */
-	 for( y = 0; !err_code && y < 500; y++)
-            if( y + ypixel >= y1 && y + ypixel < y2 && !(y % subsamp))
+         for( y = 0; !err_code && y < 500; y++)
+//          if( y + ypixel >= y1 && y + ypixel < y2 && !(y % subsamp))
+            if( y + ypixel >= y1 && y + ypixel < y2)
                {
                PIXEL *tptr = tbuff + y * xsize + tbuff_start;
                const PIXEL off_plate_pixel = 0;
@@ -239,7 +332,15 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
             free( data);
          counter++;
 #ifdef _CONSOLE
-         printf( "%2d%% completed\r", counter * 100 / n_tiles);
+         t_elapsed = (double)( clock( ) - t0) / (double)CLOCKS_PER_SEC;
+         if( t_elapsed > prev_t_elapsed + 1.)
+            {
+            prev_t_elapsed = t_elapsed;
+            printf( "%2d%% completed; %d seconds elapsed, %d remain; tile %d  \r",
+              counter * 100 / n_tiles, (int)t_elapsed,
+              (int)(t_elapsed * (double)( n_tiles - counter) / (double)counter),
+              counter);
+            }
 #endif
          get_dss_tiles_done++;
          }
@@ -253,7 +354,7 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
 #endif
 
             if( subsamp != 1)
-               subsamp_row( curr, xsize, subsamp);
+               subsamp_row( median_buff, curr, xsize, subsamp);
             if( histogram)
                for( tptr = curr, x = out_xsize; x; x--, tptr++)
                   histogram[*tptr]++;
@@ -277,5 +378,7 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
    free( tbuff);
    if( lump_file)
       fclose( lump_file);
+   if( median_buff)
+      free( median_buff);
    return( err_code);          /* success */
 }

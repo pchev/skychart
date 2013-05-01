@@ -5599,7 +5599,7 @@ for i:=1 to MaxDSSurl do begin
 end;
 f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 {$ifdef CPU64}
-f_getdss.cfgdss.OnlineDSS:=true;  { TODO : Realsky libgetdss do not work on 64bit system }
+//f_getdss.cfgdss.OnlineDSS:=true;  { TODO : Realsky libgetdss do not work on 64bit system }
 {$endif}
 f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 except

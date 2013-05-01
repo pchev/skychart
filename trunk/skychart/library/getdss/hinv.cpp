@@ -18,8 +18,10 @@
 #include <string.h>
 #include "errcode.h"
 
-static int xunshuffle( int *a, const int nx, const int ny, const int nydim);
-static int yunshuffle( int *a, const int nx, const int ny, const int nydim);
+static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
+                                                        const int nydim);
+static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
+                                                        const int nydim);
 
 #ifdef __WATCOMC__
 #define ZKEY_CLOCK  (*(long *)((long)0x46c))
@@ -27,16 +29,16 @@ static int yunshuffle( int *a, const int nx, const int ny, const int nydim);
 #define ZKEY_CLOCK  0
 #endif
 
-extern long times[];
+extern int32_t times[];
 
 extern int hinv( int a[], const int nx, const int ny)
 {
    int log2n, i, k;
    int nxtop,nytop,nxf,nyf,c;
    int h0, hx, hy, hc, sum1, sum2;
-   int *p00, *p10, *pend;
+   int *p00, *p10, *pend, *shuffle_tmp;
    const int nmax = (nx>ny) ? nx : ny;
-  
+
    /* log2n is log2 of max(nx,ny) rounded up to next power of 2    */
    log2n = 0;
    while( nmax > (1 << log2n))
@@ -52,6 +54,9 @@ extern int hinv( int a[], const int nx, const int ny)
    nxf = nx;
    nyf = ny;
    c = 1 << log2n;
+   shuffle_tmp = (int *) malloc(2*ny*sizeof(int) + nx);
+   if( !shuffle_tmp)
+      return( DSS_IMG_ERR_XUNSHUFFLE);
    for( k = log2n-1; k > 0; k--)
       {
       /*
@@ -72,10 +77,8 @@ extern int hinv( int a[], const int nx, const int ny)
       /*
        * unshuffle in each dimension to interleave coefficients
        */
-      if( xunshuffle(a,nxtop,nytop,ny))
-        return( DSS_IMG_ERR_XUNSHUFFLE);
-      if( yunshuffle(a,nxtop,nytop,ny))
-        return( DSS_IMG_ERR_YUNSHUFFLE);
+      xunshuffle( shuffle_tmp, a, nxtop, nytop, ny);
+      yunshuffle( shuffle_tmp, a, nxtop, nytop, ny);
       for( i = 0; i<nxtop-1; i += 2)
          {
          pend = &a[ny*i+nytop-1];
@@ -159,14 +162,16 @@ extern int hinv( int a[], const int nx, const int ny)
    else
       nyf -= c;
    if (nxtop != nx || nytop != ny)
+      {
+      free( shuffle_tmp);
       return( DSS_IMG_ERR_HINV);
+      }
    /*
     * unshuffle in each dimension to interleave coefficients
     */
-   if( xunshuffle(a,nx,ny,ny))
-      return( DSS_IMG_ERR_XUNSHUFFLE);
-   if( yunshuffle(a,nx,ny,ny))
-      return( DSS_IMG_ERR_YUNSHUFFLE);
+   xunshuffle( shuffle_tmp, a, nx, ny, ny);
+   yunshuffle( shuffle_tmp, a, nx, ny, ny);
+   free( shuffle_tmp);
    for (i = 0; i<nx-1; i += 2)
       {
       pend = &a[ny*i+ny-1];
@@ -223,23 +228,19 @@ extern int hinv( int a[], const int nx, const int ny)
    return( 0);
 }
 
+/* int *tmp;   temporary space for shuffling elements */
 /* int a[];    array to unshuffle                   */
 /* int nx;     number of elements in column         */
 /* int ny;     number of elements in row            */
 /* int nydim;  physical length of row in array      */
-static int xunshuffle(int *a, const int nx, const int ny, const int nydim)
+static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
+                                                        const int nydim)
 {
    int j;
    int nhalf;
-   int *p1, *p2, *pt, *pend, *tmp;
-   long t0 = ZKEY_CLOCK;
+   int *p1, *p2, *pt, *pend;
+   int32_t t0 = ZKEY_CLOCK;
 
-        /*
-         * get temporary storage for shuffling elements
-         */
-   tmp = (int *) malloc(((ny+1)/2)*sizeof(int));
-   if( !tmp)
-      return( -1);
    nhalf = (ny+1)>>1;
    for (j = 0; j<nx; j++)
       {
@@ -248,7 +249,7 @@ static int xunshuffle(int *a, const int nx, const int ny, const int nydim)
       /*
        * copy 2nd half of array to tmp
        */
-      memcpy(tmp, &a[j*nydim+nhalf], (ny-nhalf)*sizeof(int));    
+      memcpy(tmp, &a[j*nydim+nhalf], (ny-nhalf)*sizeof(int));
       /*
        * distribute 1st half of array to even elements
        */
@@ -263,9 +264,7 @@ static int xunshuffle(int *a, const int nx, const int ny, const int nydim)
       for (pt = tmp, p1 = &a[j*nydim+1]; p1<pend; p1 += 2)
           *p1 = *pt++;
       }
-   free(tmp);
 //   times[5] += ZKEY_CLOCK - t0;
-   return( 0);
 }
 
 /*
@@ -278,23 +277,19 @@ static int xunshuffle(int *a, const int nx, const int ny, const int nydim)
  * are accessed.
  */
 
+/* int *tmp;   temporary space for shuffling elements */
 /* int a[];    array to unshuffle                           */
 /* int nx;     number of elements in column         */
 /* int ny;     number of elements in row            */
 /* int nydim;  actual length of row in array        */
 
-static int yunshuffle( int *a, const int nx, const int ny, const int nydim)
+static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
+                                                        const int nydim)
 {
-   int j, k, oddoffset, *tmp, *swap;
+   int j, k, oddoffset, *swap;
    unsigned char *flag;
-   long t0 = ZKEY_CLOCK;
+   int32_t t0 = ZKEY_CLOCK;
 
-   /*
-    * get temporary storage for shuffling elements
-    */
-   tmp = (int *) malloc(2*ny*sizeof(int) + nx);
-   if( !tmp)
-      return( -1);
    swap = tmp + ny;
    flag = (unsigned char *)( swap + ny);
    /*
@@ -311,7 +306,7 @@ static int yunshuffle( int *a, const int nx, const int ny, const int nydim)
          {
          flag[j] = 0;
          /*
-          * where does this row belong?
+          * where does this row beint32_t?
           */
          if (j >= oddoffset)     /* odd row */
             k = ((j-oddoffset)<<1) + 1;
@@ -340,11 +335,9 @@ static int yunshuffle( int *a, const int nx, const int ny, const int nydim)
                 * this should always end up with j=k
                 */
             memcpy(&a[nydim*k],tmp,ny*sizeof(int));
-            if (j != k)
-               return( -2);
+/*          if (j != k)                */
+/*             return( -2);            */
             }
          }
-   free(tmp);
 //   times[6] += ZKEY_CLOCK - t0;
-   return( 0);
 }

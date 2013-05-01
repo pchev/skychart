@@ -3,15 +3,12 @@
       /* 10 Dec 2001:  Nozomu Muto:  supplied Unix #includes and added */
       /* the missing strlwr() function                                 */
 #include <ctype.h>
-
-/* Comment the following function in case of duplicate */
 void    strlwr(char *str)
 {       int     c;
         while(c = *str){
                 *str++ = tolower(c);
         }
 }
-
 #else   /*UNIX*/
 #include <conio.h>
 #endif  /*UNIX*/
@@ -55,7 +52,7 @@ static int get_hhh_data( const char *szDataDir, const char *header_file_name,
    char szPath[260];
    FILE *ifile;
    int i, nlines = 0;
-   long offset;
+   int32_t offset;
    char lower_name[20], filename[20];
 
    strcpy( filename, "hhh.dat");
@@ -123,7 +120,6 @@ static int get_hhh_data( const char *szDataDir, const char *header_file_name,
    hdr[nlines * 80] = '\0';         /* ensure null termination */
 
    fclose( ifile);
- 
    return( nlines);
 }
 
@@ -213,6 +209,7 @@ PLATE_DATA * DLL_FUNC get_plate_list( const char *szDataDir,
                double x, y;
                int x1, y1, x2, y2;
                HEADER h;
+
                setup_header_from_text( &h, header);
                amdinv( &h, ra, dec, &x, &y);
                x1 = (int)( x - width / 2);

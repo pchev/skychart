@@ -85,7 +85,7 @@ int main( int argc, char **argv)
          printf( "Error in ENVIRON.DAT!  Code: %d\n", err_code);
       printf( "Hit any key:\n");
       getch( );
-      exit( 0);
+      return( -1);
       }
 
    edata.add_line_to_realsky_dot_dat = 1;
@@ -136,6 +136,14 @@ int main( int argc, char **argv)
                printf( "Clip_image set to %d\n",
                                           edata.clip_image);
                break;
+            case 'm':
+               {
+               extern int median_nth_pixel;
+
+               median_nth_pixel = atoi( argv[i] + 2);
+               printf( "Looking for %d-th value\n", median_nth_pixel);
+               }
+               break;
             case 'n':
                {
                char *output_filename = "ofile";
@@ -169,7 +177,7 @@ int main( int argc, char **argv)
       printf( "Couldn't open IFILE!\n");
       printf( "Hit any key:\n");
       getch( );
-      exit( 0);
+      return( -2);
       }
    printf( "IFILE opened\n");
    while( !err_code && fgets( buff, sizeof( buff), ifile))
@@ -254,7 +262,7 @@ do you wish to use?\n", n_plates);
             if( err_code == DSS_IMG_ERR_WRONG_CD &&
                                  !prompt_for_correct_realsky_cd)
                err_code = 0;        /* suppress the error */
-	       
+
             free( pdata);
             }
          else
@@ -268,7 +276,6 @@ do you wish to use?\n", n_plates);
                err_code = -999;
          }
       }
-
    fclose( ifile);
    if( err_code)
       {
@@ -300,4 +307,5 @@ do you wish to use?\n", n_plates);
    t = time( NULL);
    printf( "GET_DSS done at %s\n", ctime( &t));
    set_debug_file( NULL);
+   return( 0);
 }

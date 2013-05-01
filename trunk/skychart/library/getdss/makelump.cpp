@@ -10,9 +10,9 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
    char filename[40], *xfer_buff;
    FILE *outfile;
    int i, err_code = 0;
-   long *index;
+   int32_t *index;
 
-   index = (long *)calloc( 28 * 28 + 1, sizeof( long));
+   index = (int32_t *)calloc( 28 * 28 + 1, sizeof( int32_t));
    xfer_buff = (char *)malloc( XFER_BUFF_SIZE);
    if( !index || !xfer_buff)
       {
@@ -32,18 +32,14 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
       }
 
             /* First tile will start right after the index: */
-   index[0] = (28 * 28 + 1) * sizeof( long);
+   index[0] = (28 * 28 + 1) * sizeof( int32_t);
    fwrite( index, (size_t)index[0], 1, outfile);
    for( i = 0; !err_code && i < 28 * 28; i++)
       {
       const char *letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
       FILE *ifile;
 
-#ifdef UNIX
-      sprintf( filename, "%c://%s//%s.%c%c", cd_drive_letter,
-#else
-      sprintf( filename, "%c:\\%s\\%s.%c%c", cd_drive_letter,
-#endif
+      sprintf( filename, "%c:/%s/%s.%c%c", cd_drive_letter,
                       plate_name, plate_name,
                       letters[i / 28], letters[i % 28]);
       ifile = fopen( filename, "rb");
@@ -51,7 +47,7 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
          err_code = -3;
       else
          {
-         long bytes_transferred = 0;
+         int32_t bytes_transferred = 0;
          unsigned read_size;
 
          while( !err_code &&
@@ -105,11 +101,7 @@ int lump_entire_cd( const char cd_drive_letter)
          else
             sprintf( plate_name, "XX%03d", i - 765 - 896 - 881);
 
-#ifdef UNIX
-         sprintf( filename, "%c://%s//%s.00", cd_drive_letter,
-#else
-         sprintf( filename, "%c:\\%s\\%s.00", cd_drive_letter,
-#endif
+         sprintf( filename, "%c:/%s/%s.00", cd_drive_letter,
                       plate_name, plate_name);
          test_open = fopen( filename, "rb");
 
@@ -118,15 +110,15 @@ int lump_entire_cd( const char cd_drive_letter)
             fclose( test_open);
             if( pass)
                {
-               long dt = time( NULL) - t0;
+               int32_t dt = time( NULL) - t0;
 
                plates_done++;
                printf( "Lumping plate %d of %d; %ld seconds elapsed",
                           plates_done, n_plates, dt);
                if( plates_done > 1)
                   printf( ", %ld remain",
-                               dt * (long)( n_plates - plates_done + 1) /
-                                    (long)( plates_done - 1));
+                               dt * (int32_t)( n_plates - plates_done + 1) /
+                                    (int32_t)( plates_done - 1));
                printf( "\r");
                make_real_sky_plate_lump( cd_drive_letter, plate_name);
                }
@@ -137,13 +129,21 @@ int lump_entire_cd( const char cd_drive_letter)
    return( n_plates);
 }
 
-void main( int argc, char **argv)
+int main( const int argc, const char **argv)
 {
-   int err_code;
+   int err_code = -99;
 
    if( argc == 3)             /* just lumping _one_ plate */
       err_code = make_real_sky_plate_lump( argv[1][0], argv[2]);
-   else
+   else if( argc == 2)        /* lumping all plates on one CD */
       err_code = lump_entire_cd( argv[1][0]);
+   else
+      {
+      printf( "makelump requires the CD-ROM drive letter as a command\n");
+      printf( "line argument.  Optionally,  you can specify a single\n");
+      printf( "plate to be extracted as well (instead of having all\n");
+      printf( "plates on the CD processed).\n");
+      }
    printf( "Err code: %d\n", err_code);
+   return( 0);
 }
