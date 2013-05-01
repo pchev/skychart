@@ -1,7 +1,7 @@
 ; getdss.def : Declares the module parameters for the DLL.
 
-LIBRARY      "libgetdss"
-DESCRIPTION  'libgetdss Windows Dynamic Link Library'
+LIBRARY      "getdss"
+DESCRIPTION  'getdss Windows Dynamic Link Library'
 
 EXPORTS
     ; Explicit exports can go here

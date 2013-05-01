@@ -51,7 +51,7 @@ uses u_help, u_translation,
      pPrompt1 : Pchar;
      pPrompt2 : Pchar;
   end;
-  Plate_data = packed record
+  Plate_data = record
    nplate : integer;
    plate_name, gsc_plate_name : array[1..10]of Pchar;
    dist_from_edge, cd_number, is_uk_survey : array[1..10]of integer;
@@ -165,13 +165,13 @@ end;
 function Tf_getdss.GetDss(ra,de,fov,ratio:double; imgx:integer):boolean;
 var i : SImageConfig;
     pl: Plate_data;
+    gzbuf : array[0..4095]of char;
     rc,datasource,subsample,n,l,imgy : integer;
     width,height,npix,imgsize,fovx,fovy : double;
     ima,app,platename,buf,dd,mm,ss : string;
     firstrec: boolean;
     gzf:pointer;
     fitsfile:file;
-    gzbuf : array[0..4095]of char;
 begin
 try
 memo1.visible:=false;

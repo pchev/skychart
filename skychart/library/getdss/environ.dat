@@ -1,2 +1,11 @@
-DSS_DIR=/mnt/win_f/data/RealSky/
-
+DSS_EXTN=hhh
+DSS_PLTL=lo_comp.lis
+DSS_PLTL2=hi_comp.lis
+DSS_MNT=dir /p
+DSS_DMNT=dir /p
+DSS_HDRS=
+DSS_DIR=h:\
+DSS_DEV=h:\*.z
+DSS_MTPT=h:\
+HHH_DAT_DIR=h:
+GUIDE5=dir h:

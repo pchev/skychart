@@ -43,7 +43,7 @@ extern "C" {
 int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                                const int x1, const int y1,
                                const int x2, const int y2,
-                               FILE *ofile, int subsamp, long *histogram);
+                               FILE *ofile, int subsamp, int32_t *histogram);
 int DLL_FUNC get_environment_data( ENVIRONMENT_DATA *edata,
                                    const char *filename);
 int DLL_FUNC create_image_line( char *oline, ENVIRONMENT_DATA *edata);
