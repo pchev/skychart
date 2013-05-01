@@ -9,6 +9,10 @@ an 'hWnd' parameter to extract_realsky_as_fits( ).
 prompt_for_correct_realsky_cd options could be safely placed in the _calling_
 function instead of within the GET_DSS library.
 */
+#ifndef int32_t
+   #define int32_t long
+#endif
+
 
 ENVIRONMENT_DATA
    {
