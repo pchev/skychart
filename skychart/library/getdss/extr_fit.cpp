@@ -294,11 +294,19 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 ** Add WCS keywords
 **/
 /* 28 Aug 2006:  Wouter van Reeven pointed out that the output isn't    */
-/* necessarily a multiple of 2880 bytes int32_t,  and that it ought to be  */
+/* necessarily a multiple of 2880 bytes long,  and that it ought to be  */
 /* padded to bring it up to size.  He's right,  of course,  though few  */
 /* programs are insistent on this point,  and plenty of FITS files just */
 /* stop when the data's done... still,  it's easy enough to do this     */
 /* correctly;  see code beginning at ' const short pad_word'.           */
+/*
+ * Changed the datatype of crpix1 and crpix2 to float to agree with
+ * getImage 3.0 software, and fixed calculations for image center
+ * to be the center of the middle pixel for odd numbers of pixels,
+ * and to be the boundary separating the two middle pixels for even rows.
+ * 30-April-2013
+ * Skip Gaede
+ */
 
 #define N_ADDED_LINES 20
 #ifdef __WATCOMC__
@@ -327,7 +335,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    int rval;
    int32_t t0;
    double ra_center, dec_center, new_wcs_matrix[4] ;
-   int crpix1, crpix2 ;
+   /* 30-Apr-2013 Changed datatype from int to float match getImage 3.0 code: SG   */
+   float crpix1, crpix2 ;
    time_t curr_t = time( NULL);
 
 #ifdef _WIN32
@@ -609,23 +618,25 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    tptr += 80;
    sprintf( tptr, "EQUINOX = 2000.0");
    tptr += 80;
-   crpix1 = xsize_out / edata->subsamp / 2  ; /* reference pixel at center */
-   crpix2 = ysize_out / edata->subsamp / 2  ;
+   /* 30-Apr-2013 Converted to floating point: SG */
+   crpix1 = (float)(xsize_out+1) /(float) edata->subsamp / 2.0  ; /* reference pixel at center */
+   crpix2 = (float)(ysize_out+1) /(float) edata->subsamp / 2.0  ;
    sprintf( tptr, "CTYPE1  = 'RA---TAN'");
    tptr += 80;
    sprintf( tptr, "CTYPE2  = 'DEC--TAN'");
    tptr += 80;
-   amdpos( &h, (double)( xpixel_int + crpix1 * edata->subsamp), /* true pixel center if subsampling */
-               (double)( ypixel_int + crpix2 * edata->subsamp),
+   amdpos( &h, (double)( (float) xpixel_int + crpix1 * (float) edata->subsamp), /* true pixel center if subsampling */
+               (double)( (float) ypixel_int + crpix2 * (float) edata->subsamp),
                &ra_center, &dec_center);
    sprintf( tptr, "CRVAL1  = %11.9lf", ra_center * 180 / PI);
    tptr += 80;
    sprintf( tptr, "CRVAL2  = %11.9lf", dec_center * 180 / PI);
    tptr += 80;
                /* 20 Dec 2001:  added .5 to x, 1 to y:  BJG */
-   sprintf( tptr, "CRPIX1  = %d.5", crpix1 );
+              /* 30 Apr 2013:  use floating point solution: SG */
+   sprintf( tptr, "CRPIX1  = %12.6f", crpix1);
    tptr += 80;
-   sprintf( tptr, "CRPIX2  = %d", crpix2 + 1 );
+   sprintf( tptr, "CRPIX2  = %12.6f", crpix2);
    tptr += 80;
    /* hard to convert polynomial plate solution directly to rotation.
       use very simple but efficient method to find rotation at image center.
@@ -638,8 +649,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       amdpos( &h, (double)( xpixel_int + crpix1 * edata->subsamp + 1 - i),
                   (double)( ypixel_int + crpix2 * edata->subsamp + i),
                   &ra_2, &dec_2);
-      delta_ra  = (ra_2 - ra_center) * cos( dec_center) * edata->subsamp;
-      delta_dec = (dec_2 - dec_center) * edata->subsamp;
+      delta_ra  = (ra_2 - ra_center) * cos( dec_center);
+      delta_dec = (dec_2 - dec_center);
       dist = sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
       if( !i)     /* CDELT1 is negative... don't really understand why */
          dist = -dist;
