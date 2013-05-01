@@ -33,10 +33,6 @@
 
 #include "getdss_lib.h"
 
-#ifndef int32_t
-   #define int32_t long
-#endif
-
 /* Global data: */
 
 extern FILE *debug_file;               /* debug file handle       */

@@ -17,10 +17,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "errcode.h"
-#ifndef int32_t
-   #define int32_t long
-#endif
-
 
 static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
                                                         const int nydim);
