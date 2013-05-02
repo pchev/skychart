@@ -1,3 +1,5 @@
+   (See 'improve.txt' for details on further changes.)
+
    The enclosed GET_DSS code is the "latest" (2 Jun 98) version.  It's
 (very loosely!) based on the original STScI GETIMAGE code,  version 2.0,
 available at

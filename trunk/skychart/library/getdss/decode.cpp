@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include "bitfile.h"
@@ -8,9 +9,9 @@ int dodecode( BITFILE *infile, int *a, const int nx, const int ny,
                                            const unsigned char *nbitplanes);
 int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
 
-static int readint( BITFILE *bfile)
+static int32_t readint32( BITFILE *bfile)
 {
-   unsigned char b[4];
+   uint8_t b[4];
 
 #ifdef WRONG_WAY_BYTE_ORDER
                /* For Suns and similar wrong-endian computers */
@@ -24,7 +25,7 @@ static int readint( BITFILE *bfile)
     b[1] = *bfile->loc++;
     b[0] = *bfile->loc++;
 #endif
-    return( *(int *)b);
+    return( *(int32_t *)b);
 }
 
 /* int **a;             address of output array [nx][ny]     */
@@ -51,9 +52,9 @@ int decode( int filesize, char *file_buff,
    bfile.endptr = bfile.buff + bfile.length;
    bfile.error_code = 0;
 
-   *nx = readint( &bfile);    /* x size of image               */
-   *ny = readint( &bfile);    /* y size of image               */
-   *scale = readint( &bfile); /* scale factor for digitization */
+   *nx = readint32( &bfile);    /* x size of image               */
+   *ny = readint32( &bfile);    /* y size of image               */
+   *scale = readint32( &bfile); /* scale factor for digitization */
    dss_debug_printf( "getting a %dx%d block, ", *nx, *ny);
    /*
     * allocate memory for array
@@ -62,7 +63,7 @@ int decode( int filesize, char *file_buff,
    if( !a)
       return( DSS_IMG_ERR_ALLOC_TILE);
    dss_debug_printf( "alloced, ");
-   sumall = readint( &bfile);                     /* sum of all pixels  */
+   sumall = readint32( &bfile);                     /* sum of all pixels  */
    memcpy( nbitplanes, bfile.loc, sizeof(nbitplanes));
    bfile.loc += sizeof(nbitplanes);
    bfile.bit_loc = 0;

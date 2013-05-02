@@ -2,9 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <assert.h>
+#include <stdint.h>
 #include "platelst.h"
 #include "get_dss.h"
 #include "errcode.h"
+
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
+#define _CONSOLE
+#endif
 
 extern int hdecompress( int **a, int *nx, int *ny, int filesize,
                             char *file_buff);
@@ -15,7 +21,7 @@ int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
 int get_dss_tiles_done, get_dss_tiles_total;
 int median_nth_pixel = -1;
 
-#define PIXEL unsigned short
+#define PIXEL uint16_t
 
 static PIXEL find_nth_pixel( PIXEL *pixels, int n_pixels, int nth)
 {
@@ -172,7 +178,7 @@ static void subsamp_row( PIXEL *tbuff, PIXEL *curr,
 int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                                const int x1, const int y1,
                                const int x2, const int y2,
-                               FILE *ofile, int subsamp, int32_t *histogram)
+                               FILE *ofile, int subsamp, long *histogram)
 {
    int xsize = x2 - x1, ytile, xtile, x, y, err_code = 0;
    PIXEL *tbuff = (PIXEL *)calloc( xsize, 500 * sizeof( PIXEL));
@@ -224,14 +230,16 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
          if( xtile >= 0 && ytile >= 0 && xtile < 28 && ytile < 28)
             {
             FILE *ifile = NULL;
-            int filesize = 0;
+            size_t filesize = 0;
 
             if( lump_file)
                {
-               int32_t loc[2];
+               uint32_t loc[2];
+               size_t n_read;
 
                fseek( lump_file, 4L * (xtile + ytile * 28L), SEEK_SET);
-               fread( loc, 2, sizeof( int32_t), lump_file);
+               n_read = fread( loc, sizeof( uint32_t), 2, lump_file);
+               assert( n_read == 2);
                filesize = loc[1] - loc[0];
                fseek( lump_file, loc[0], SEEK_SET);
                }
@@ -240,14 +248,15 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                const char *letters = "0123456789abcdefghijklmnopqrstuvwxyz";
                int iter;
 
-#ifdef   UNIX
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
                sprintf( filename, "%s/%s/%s.%c%c", szDrive, plate, plate,
                                  letters[ytile], letters[xtile]);
-#else   /*UNIX*/
+#else   /* DOS/Windows version: */
                sprintf( filename, "%s%s\\%s.%c%c", szDrive, plate, plate,
                                  letters[ytile], letters[xtile]);
-#endif   /*UNIX*/
+#endif
                ifile = fopen( filename, "rb");
+               assert( ifile);
                for( iter = 3; iter && !ifile; iter--)
                   {
                   time_t t = time( NULL);
@@ -275,7 +284,10 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                   err_code = DSS_IMG_ERR_TILE_MEM;
                else
                   {
-                  fread( buff, filesize, 1, lump_file ? lump_file : ifile);
+                  const size_t n_read = fread( buff, 1, filesize,
+                                                   lump_file ? lump_file : ifile);
+
+                  assert( n_read == filesize);
                     /* The definition of hdecompress( ) is a little    */
                     /* confusing,  since ny and nx are 'reversed' from */
                     /* the form most people would expect! */

@@ -1,4 +1,3 @@
-
 #define HEADER struct header
 
 HEADER

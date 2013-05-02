@@ -2,7 +2,7 @@
 
 BITFILE
    {
-   unsigned char *buff, *loc, *endptr;
+   uint8_t *buff, *loc, *endptr;
    unsigned bit_loc, length;
    int error_code;
    };
