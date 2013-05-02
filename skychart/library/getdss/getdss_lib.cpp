@@ -28,6 +28,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
+#define UNIX
+#define _CONSOLE
+#include <unistd.h>            /* for unlink( ) prototype */
+#endif
+
 #include "platelst.h"
 #include "get_dss.h"
 

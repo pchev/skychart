@@ -5,9 +5,12 @@
 #include <math.h>
 #include <time.h>
 
-#ifdef UNIX
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
+#define UNIX
+#define _CONSOLE
 #include <unistd.h>            /* for unlink( ) prototype */
-#endif   /* UNIX */
+#endif
+
 #include "dss.h"
 #include "platelst.h"
 #include "get_dss.h"
@@ -179,8 +182,8 @@ int DLL_FUNC get_environment_data( ENVIRONMENT_DATA *edata, const char *filename
 int DLL_FUNC create_image_line( char *oline, ENVIRONMENT_DATA *edata)
 {
    char dec_sign = '+';
-   int32_t ra = (int32_t)( edata->image_ra * (12. / PI) * 3600. * 100.);
-   int32_t dec = (int32_t)( edata->image_dec * (180. / PI) * 3600. * 10.);
+   long ra = (long)( edata->image_ra * (12. / PI) * 3600. * 100.);
+   long dec = (long)( edata->image_dec * (180. / PI) * 3600. * 10.);
 
    if( dec < 0L)
       {
@@ -293,12 +296,6 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 ** June 5 1999
 ** Add WCS keywords
 **/
-/* 28 Aug 2006:  Wouter van Reeven pointed out that the output isn't    */
-/* necessarily a multiple of 2880 bytes long,  and that it ought to be  */
-/* padded to bring it up to size.  He's right,  of course,  though few  */
-/* programs are insistent on this point,  and plenty of FITS files just */
-/* stop when the data's done... still,  it's easy enough to do this     */
-/* correctly;  see code beginning at ' const short pad_word'.           */
 /*
  * Changed the datatype of crpix1 and crpix2 to float to agree with
  * getImage 3.0 software, and fixed calculations for image center
@@ -306,7 +303,13 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
  * and to be the boundary separating the two middle pixels for even rows.
  * 30-April-2013
  * Skip Gaede
- */
+**/
+/* 28 Aug 2006:  Wouter van Reeven pointed out that the output isn't    */
+/* necessarily a multiple of 2880 bytes long,  and that it ought to be  */
+/* padded to bring it up to size.  He's right,  of course,  though few  */
+/* programs are insistent on this point,  and plenty of FITS files just */
+/* stop when the data's done... still,  it's easy enough to do this     */
+/* correctly;  see code beginning at ' const short pad_word'.           */
 
 #define N_ADDED_LINES 20
 #ifdef __WATCOMC__
@@ -315,7 +318,7 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 #define ZKEY_CLOCK  0
 #endif
 
-int32_t times[20];
+long times[20];
 
 int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                                           const ENVIRONMENT_DATA *edata)
@@ -330,13 +333,13 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    int xsize_out = edata->pixels_wide;
    int ysize_out = edata->pixels_high;
    FILE *ofile, *ifile, *img_data_file;
-   int32_t *histogram, total_pixels;
-   unsigned short bins[100];
+   long *histogram, total_pixels;
+   unsigned bins[100];
    int rval;
-   int32_t t0;
+   long t0;
    double ra_center, dec_center, new_wcs_matrix[4] ;
    /* 30-Apr-2013 Changed datatype from int to float match getImage 3.0 code: SG   */
-   float crpix1, crpix2 ;
+   double crpix1, crpix2 ;
    time_t curr_t = time( NULL);
 
 #ifdef _WIN32
@@ -472,7 +475,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       dss_debug_printf( "%d lines written to output file '%s'\n",
                      n_lines_written, edata->output_file_name);
       t0 = ZKEY_CLOCK;
-      histogram = (int32_t *)calloc( 65536, sizeof( int32_t));
+      histogram = (long *)calloc( 65536, sizeof( long));
       if( !histogram)
          {
          dss_debug_printf( "Couldn't allocate histogram data\n");
@@ -496,7 +499,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                xpixel_int + xsize_out,
                ypixel_int + ysize_out, ofile,
                edata->subsamp, histogram);
-//      times[4] += ZKEY_CLOCK - t0;
+      times[4] += ZKEY_CLOCK - t0;
       if( rval)
          {
          dss_debug_printf( "Error code %d returned!\n", rval);
@@ -521,8 +524,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       for( max_pixel_value = 65535; !histogram[max_pixel_value]; max_pixel_value--)
          ;
       curr_bin = 0;
-      total_pixels = (int32_t)xsize_out * (int32_t)ysize_out;
-      total_pixels /= (int32_t)( edata->subsamp * edata->subsamp);
+      total_pixels = (long)xsize_out * (long)ysize_out;
+      total_pixels /= (long)( edata->subsamp * edata->subsamp);
       for( i = 1; i < 65536; i++)
          {
          int new_bin;
@@ -593,7 +596,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                edata->low_contrast, edata->high_contrast,
                xsize_out / edata->subsamp,
                ysize_out / edata->subsamp,
-               (int32_t)n_lines_written * 80L, edata->output_file_name);
+               (long)n_lines_written * 80L, edata->output_file_name);
       fclose( img_data_file);
       }
 
@@ -618,15 +621,16 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    tptr += 80;
    sprintf( tptr, "EQUINOX = 2000.0");
    tptr += 80;
-   /* 30-Apr-2013 Converted to floating point: SG */
-   crpix1 = (float)(xsize_out+1) /(float) edata->subsamp / 2.0  ; /* reference pixel at center */
-   crpix2 = (float)(ysize_out+1) /(float) edata->subsamp / 2.0  ;
+   /* 30-Apr-2013 Converted to floating point: SG     reference pixel at center */
+   crpix1 = (double)( xsize_out + 1) / (double)( edata->subsamp * 2);
+   crpix2 = (double)( ysize_out + 1) / (double)( edata->subsamp * 2);
    sprintf( tptr, "CTYPE1  = 'RA---TAN'");
    tptr += 80;
    sprintf( tptr, "CTYPE2  = 'DEC--TAN'");
    tptr += 80;
-   amdpos( &h, (double)( (float) xpixel_int + crpix1 * (float) edata->subsamp), /* true pixel center if subsampling */
-               (double)( (float) ypixel_int + crpix2 * (float) edata->subsamp),
+                        /* true pixel center if subsampling: */
+   amdpos( &h, (double)xpixel_int + crpix1 * (double) edata->subsamp,
+               (double)ypixel_int + crpix2 * (double) edata->subsamp,
                &ra_center, &dec_center);
    sprintf( tptr, "CRVAL1  = %11.9lf", ra_center * 180 / PI);
    tptr += 80;
@@ -634,6 +638,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    tptr += 80;
                /* 20 Dec 2001:  added .5 to x, 1 to y:  BJG */
               /* 30 Apr 2013:  use floating point solution: SG */
+
    sprintf( tptr, "CRPIX1  = %12.6f", crpix1);
    tptr += 80;
    sprintf( tptr, "CRPIX2  = %12.6f", crpix2);
@@ -650,7 +655,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                   (double)( ypixel_int + crpix2 * edata->subsamp + i),
                   &ra_2, &dec_2);
       delta_ra  = (ra_2 - ra_center) * cos( dec_center);
-      delta_dec = (dec_2 - dec_center);
+      delta_dec = dec_2 - dec_center;
       dist = sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
       if( !i)     /* CDELT1 is negative... don't really understand why */
          dist = -dist;
@@ -688,7 +693,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    if( ofile)
       {
       const short pad_word = 0;
-      int32_t n_pad_bytes = 2880 - ftell( ofile) % 2880;
+      long n_pad_bytes = 2880 - ftell( ofile) % 2880;
 
       if( n_pad_bytes == 2880)      /* we came out even after all */
          n_pad_bytes = 0;

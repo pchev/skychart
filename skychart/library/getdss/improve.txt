@@ -1,3 +1,11 @@
+   -- 1 Apr 2013:  Skip Gaede provided fixes for the WCS keywords to
+allow them to replicate the values provided by Getimage 3.0,  as well
+as some fixes to ensure that cross-platform compiling would work.
+Patrick Chevalley pointed out that the use of 'long' integers could
+cause trouble when compiling on 64-bit machines;  there are instances
+(in the indexing of .rsl "RealSky Lump" files) where int32_t should be
+used,  because actual four-byte integers are read and written.
+
    -- 31 Mar 2012:  revised 'makelump.cpp' to produce better error
 messages.  When it works,  it'll work just as it always did;  but it
 will give more user-friendly messages when things go wrong.

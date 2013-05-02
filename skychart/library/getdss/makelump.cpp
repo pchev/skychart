@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <time.h>
 
 #define XFER_BUFF_SIZE 16384
@@ -10,9 +11,9 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
    char filename[40], *xfer_buff;
    FILE *outfile;
    int i, err_code = 0;
-   int32_t *index;
+   uint32_t *index;
 
-   index = (int32_t *)calloc( 28 * 28 + 1, sizeof( int32_t));
+   index = (uint32_t *)calloc( 28 * 28 + 1, sizeof( uint32_t));
    xfer_buff = (char *)malloc( XFER_BUFF_SIZE);
    if( !index || !xfer_buff)
       {
@@ -32,7 +33,7 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
       }
 
             /* First tile will start right after the index: */
-   index[0] = (28 * 28 + 1) * sizeof( int32_t);
+   index[0] = (28 * 28 + 1) * sizeof( uint32_t);
    fwrite( index, (size_t)index[0], 1, outfile);
    for( i = 0; !err_code && i < 28 * 28; i++)
       {
@@ -47,7 +48,7 @@ int make_real_sky_plate_lump( const char cd_drive_letter,
          err_code = -3;
       else
          {
-         int32_t bytes_transferred = 0;
+         uint32_t bytes_transferred = 0;
          unsigned read_size;
 
          while( !err_code &&
@@ -110,15 +111,15 @@ int lump_entire_cd( const char cd_drive_letter)
             fclose( test_open);
             if( pass)
                {
-               int32_t dt = time( NULL) - t0;
+               long dt = time( NULL) - t0;
 
                plates_done++;
                printf( "Lumping plate %d of %d; %ld seconds elapsed",
                           plates_done, n_plates, dt);
                if( plates_done > 1)
                   printf( ", %ld remain",
-                               dt * (int32_t)( n_plates - plates_done + 1) /
-                                    (int32_t)( plates_done - 1));
+                               dt * (long)( n_plates - plates_done + 1) /
+                                    (long)( plates_done - 1));
                printf( "\r");
                make_real_sky_plate_lump( cd_drive_letter, plate_name);
                }

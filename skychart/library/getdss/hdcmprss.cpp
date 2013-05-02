@@ -12,7 +12,7 @@ int decode( int filesize, char *file_buff,
 #define ZKEY_CLOCK  0
 #endif
 
-extern int32_t times[];
+extern long times[];
 
         /* (*a)[nx][ny] is the image array  */
         /* Note that ny is the fast-varying dimension   */
@@ -22,12 +22,12 @@ extern int hdecompress( int **a, int *nx, int *ny, int filesize,
                             char *file_buff)
 {
    int scale, rval;
-   int32_t t0;
+   long t0;
 
    t0 = ZKEY_CLOCK;
    dss_debug_printf( "decode, ");
    rval = decode( filesize, file_buff, a, nx, ny, &scale);
-//   times[1] += ZKEY_CLOCK - t0;
+   times[1] += ZKEY_CLOCK - t0;
    if( rval)
       return( rval);
 
@@ -40,12 +40,12 @@ extern int hdecompress( int **a, int *nx, int *ny, int filesize,
       while( p < endptr)
          *p++ *= scale;
       }
-//   times[2] += ZKEY_CLOCK - t0;
+   times[2] += ZKEY_CLOCK - t0;
 
    dss_debug_printf( "hinv, ");
    t0 = ZKEY_CLOCK;
    rval = hinv( *a,*nx,*ny);           /* Inverse H-transform  */
-//   times[3] += ZKEY_CLOCK - t0;
+   times[3] += ZKEY_CLOCK - t0;
    dss_debug_printf( "done. ");
    return( rval);
 }

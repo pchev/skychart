@@ -29,7 +29,7 @@ static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
 #define ZKEY_CLOCK  0
 #endif
 
-extern int32_t times[];
+extern long times[];
 
 extern int hinv( int a[], const int nx, const int ny)
 {
@@ -239,7 +239,7 @@ static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
    int j;
    int nhalf;
    int *p1, *p2, *pt, *pend;
-   int32_t t0 = ZKEY_CLOCK;
+   long t0 = ZKEY_CLOCK;
 
    nhalf = (ny+1)>>1;
    for (j = 0; j<nx; j++)
@@ -264,7 +264,7 @@ static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
       for (pt = tmp, p1 = &a[j*nydim+1]; p1<pend; p1 += 2)
           *p1 = *pt++;
       }
-//   times[5] += ZKEY_CLOCK - t0;
+   times[5] += ZKEY_CLOCK - t0;
 }
 
 /*
@@ -288,7 +288,7 @@ static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
 {
    int j, k, oddoffset, *swap;
    unsigned char *flag;
-   int32_t t0 = ZKEY_CLOCK;
+   long t0 = ZKEY_CLOCK;
 
    swap = tmp + ny;
    flag = (unsigned char *)( swap + ny);
@@ -306,7 +306,7 @@ static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
          {
          flag[j] = 0;
          /*
-          * where does this row beint32_t?
+          * where does this row belong?
           */
          if (j >= oddoffset)     /* odd row */
             k = ((j-oddoffset)<<1) + 1;
@@ -339,5 +339,5 @@ static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
 /*             return( -2);            */
             }
          }
-//   times[6] += ZKEY_CLOCK - t0;
+   times[6] += ZKEY_CLOCK - t0;
 }

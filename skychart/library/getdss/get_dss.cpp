@@ -1,10 +1,12 @@
 #include <stdio.h>
-#ifdef   UNIX
-#include <ctype.h>
-#define   getch()   getchar()
-#else    /*UNIX*/
-#include <conio.h>
-#endif   /*UNIX*/
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
+   #include <ctype.h>
+   #define   getch()   getchar()
+#elif defined( _WIN32) || defined( _WIN64) || defined( __WATCOMC__)
+   #include <conio.h>
+#else
+   #error "Unknown platform; please report so it can be fixed!"
+#endif
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -146,7 +148,7 @@ int main( int argc, char **argv)
                break;
             case 'n':
                {
-               char *output_filename = "ofile";
+               const char *output_filename = "ofile";
 
                cd_count = (int *)calloc( MAX_CD, sizeof( int));
                output_list_file = fopen( output_filename, "wb");
@@ -182,7 +184,7 @@ int main( int argc, char **argv)
    printf( "IFILE opened\n");
    while( !err_code && fgets( buff, sizeof( buff), ifile))
       {
-      printf( buff);
+      printf( "%s", buff);
       if( !parse_image_line( &edata, buff))
          {
          PLATE_DATA *pdata = NULL;
@@ -244,7 +246,7 @@ do you wish to use?\n", n_plates);
                      ;
                   sprintf( buff + i, "%4d %s\n", pdata->cd_number,
                                                 pdata->plate_name);
-                  fprintf( output_list_file, buff);
+                  fprintf( output_list_file, "%s", buff);
                   }
                }
             else
@@ -300,8 +302,8 @@ do you wish to use?\n", n_plates);
                                      cd_count[i], i);
             else
                sprintf( buff, "%d images fell on no plate\n", cd_count[0]);
-            printf( buff);
-            printf( buff);
+            printf( "%s", buff);
+            printf( "%s", buff);
             }
 
    t = time( NULL);

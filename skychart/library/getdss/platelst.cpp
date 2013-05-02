@@ -1,24 +1,28 @@
 #include <stdio.h>
-#ifdef  UNIX
+#include <assert.h>
+
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
       /* 10 Dec 2001:  Nozomu Muto:  supplied Unix #includes and added */
       /* the missing strlwr() function                                 */
-#include <ctype.h>
-void    strlwr(char *str)
-{       int     c;
-        while(c = *str){
-                *str++ = tolower(c);
-        }
-}
-#else   /*UNIX*/
-#include <conio.h>
-#endif  /*UNIX*/
+    #include <ctype.h>
+    void    strlwr(char *str)
+    {       int     c;
+            while( (c = *str))
+                 *str++ = tolower(c);
+    }
+#elif defined( _WIN32) || defined( _WIN64) || defined( __WATCOMC__)
+   #include <conio.h>
+#else
+   #error "Unknown platform; please report so it can be fixed!"
+#endif
+
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
 #include "dss.h"
 #include "platelst.h"
 
-#define PI 3.14159265358979323
+#define PI 3.141592653589793238462643383279502884197169399375
 
 int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
 
@@ -28,7 +32,8 @@ int dss_debug_printf( const char *format, ...);        /* extr_fit.cpp */
 /* with extension .HHH.  Because you may need about a thousand of them,   */
 /* and because minimum disk cluster sizes are often 64 KBytes,  one can   */
 /* consume between 8 and 64 MBytes of hard drive space with the STScI     */
-/* approach.  I did not consider that to be particularly practical,       */
+/* approach.  I did not consider that to be particularly practical (this  */
+/* was back in 1998 or so when 64 MBytes was real hard drive space),      */
 /* so I worked out a way to compress all the .HHH files for RS North      */
 /* into one 515720-byte file,  HHH.DAT,  distributed on the Guide 6.0 CDs */
 /* in the REALSKY directory.  Later,  when I received RealSky South,  I   */
@@ -50,26 +55,27 @@ static int get_hhh_data( const char *szDataDir, const char *header_file_name,
                        char *hdr)
 {
    char szPath[260];
+   size_t n_read;
    FILE *ifile;
-   int i, nlines = 0;
-   int32_t offset;
+   unsigned i, n_lines = 0;
+   long offset;
    char lower_name[20], filename[20];
 
    strcpy( filename, "hhh.dat");
    strcpy( lower_name, header_file_name);
    strlwr( lower_name);
-   if( (lower_name[0] == 's' || lower_name[1] == 'v') &&
-                     strcmp( lower_name, "xx005") ||
+   if( ((lower_name[0] == 's' || lower_name[1] == 'v') &&
+                     strcmp( lower_name, "xx005")) ||
                      !strcmp( lower_name, "xx001") ||
                      !strcmp( lower_name, "xx002"))
       {
       filename[2] = '2';                 /* RealSky South */
-      nlines = 99;
+      n_lines = 99;
       offset = 0L;
       }
    else
       {
-      nlines = 97;
+      n_lines = 97;
       offset = atol( header_file_name + 2);
       if( lower_name[1] == 'x')
          offset = 0;
@@ -94,33 +100,38 @@ static int get_hhh_data( const char *szDataDir, const char *header_file_name,
       return( -1);
       }
 
-   fread( hdr, nlines, 80, ifile);
+   n_read = fread( hdr, 80, n_lines, ifile);
+   assert( n_read == n_lines);
 
-   if( nlines == 99)         /* for RealSky South,  gotta find hdr: */
+   if( n_lines == 99)         /* for RealSky South,  gotta find hdr: */
       for( i = 0; i < 896 && !offset; i++)
          {
          char tbuff[6];
 
-         fread( tbuff, 6, 1, ifile);
+         n_read = fread( tbuff, 6, 1, ifile);
+         assert( n_read == 1);
          if( !strcmp( tbuff, lower_name))
             offset = i * 494L + 7920L + 6L * 896L;
          }
    fseek( ifile, offset, SEEK_SET);
-   for( i = 0; i < nlines * 80; i++)
+   for( i = 0; i < n_lines * 80; i++)
       if( hdr[i] == '!')
-         fread( hdr + i, 1, 1, ifile);
+         {
+         n_read = fread( hdr + i, 1, 1, ifile);
+         assert( n_read == 1);
+         }
 
    if( !strcmp( lower_name, "xe524"))
       {
-      strcpy( hdr + nlines * 80, "END");
-      memset( hdr + nlines * 80 + 3, ' ', 77);
-      nlines++;
+      strcpy( hdr + n_lines * 80, "END");
+      memset( hdr + n_lines * 80 + 3, ' ', 77);
+      n_lines++;
       }
 
-   hdr[nlines * 80] = '\0';         /* ensure null termination */
+   hdr[n_lines * 80] = '\0';         /* ensure null termination */
 
    fclose( ifile);
-   return( nlines);
+   return( n_lines);
 }
 
 int setup_header_from_text( HEADER *h, const char *header)
@@ -234,8 +245,8 @@ PLATE_DATA * DLL_FUNC get_plate_list( const char *szDataDir,
                   rval = temp_pdata;
                   temp_pdata = rval + (*n_found) - 1;
                   strcpy( temp_pdata->header_text, header);
-                  sscanf( buff, "%s %s", &temp_pdata->plate_name,
-                                         &temp_pdata->gsc_plate_name);
+                  sscanf( buff, "%s %s", temp_pdata->plate_name,
+                                         temp_pdata->gsc_plate_name);
                   strlwr( temp_pdata->plate_name);   /* 10 Dec 2001:  BJG */
                   edge_dists[0] = min_dist = x1;
                   edge_dists[1] = 14000 - x2;

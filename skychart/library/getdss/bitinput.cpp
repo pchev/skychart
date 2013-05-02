@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "bitfile.h"
 
 /* INPUT A BIT */
@@ -11,6 +12,7 @@ int input_bit( BITFILE *infile)
    int rval;
 
    if( !infile->bit_loc)      /* gotta read the next byte */
+      {
       if( infile->loc == infile->endptr - 1)
                            /* attempt to read past EOF */
          infile->error_code = -1;
@@ -19,6 +21,7 @@ int input_bit( BITFILE *infile)
          infile->bit_loc = 8;
          infile->loc++;
          }
+      }
    if( infile->error_code)
       {
       dss_debug_printf( "DANGER! (1)\n");

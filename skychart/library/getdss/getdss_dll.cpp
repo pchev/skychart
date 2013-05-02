@@ -42,7 +42,7 @@ HCURSOR hOldCursor;                     /* previous cursor handle */
 
 /* Added 6 Dec 2001:  Unix generally lacks the 'stricmp' command: */
 
-#ifdef UNIX
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
 int stricmp( const char *s1, const char *s2)
 {
    int c1, c2;
