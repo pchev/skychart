@@ -499,7 +499,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                xpixel_int + xsize_out,
                ypixel_int + ysize_out, ofile,
                edata->subsamp, histogram);
-      times[4] += ZKEY_CLOCK - t0;
+//      times[4] += ZKEY_CLOCK - t0;
       if( rval)
          {
          dss_debug_printf( "Error code %d returned!\n", rval);

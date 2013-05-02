@@ -264,7 +264,7 @@ static void xunshuffle( int *tmp, int *a, const int nx, const int ny,
       for (pt = tmp, p1 = &a[j*nydim+1]; p1<pend; p1 += 2)
           *p1 = *pt++;
       }
-   times[5] += ZKEY_CLOCK - t0;
+//   times[5] += ZKEY_CLOCK - t0;
 }
 
 /*
@@ -339,5 +339,5 @@ static void yunshuffle( int *tmp, int *a, const int nx, const int ny,
 /*             return( -2);            */
             }
          }
-   times[6] += ZKEY_CLOCK - t0;
+//   times[6] += ZKEY_CLOCK - t0;
 }
