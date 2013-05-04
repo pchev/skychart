@@ -1,0 +1,27 @@
+# Common flags
+CC=x86_64-w64-mingw32-c++
+CFLAGS        = -O3 -D_CONSOLE
+SO_Name       = libgetdss.dll
+LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lm -lstdc++
+
+.PHONY: clean
+
+# Source files
+SRC = getdss_lib.cpp dss.cpp extr_fit.cpp getpiece.cpp \
+	hdcmprss.cpp bitinput.cpp decode.cpp dodecode.cpp hinv.cpp \
+	platelst.cpp qtreedec.cpp
+
+# Object files
+OBJ_DIR = .
+OBJ := $(patsubst %.cpp,$(OBJ_DIR)/%.o,$(SRC))
+
+all: $(SO_Name)
+
+$(OBJ_DIR)/%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(SO_Name): $(OBJ)
+	$(CC) $(CFLAGS) $(LIBFLAGS) -o $@ $(OBJ)
+
+clean:
+	rm -f $(OBJ) $(SO_Name)

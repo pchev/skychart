@@ -1,4 +1,4 @@
-CPPFLAGS=-I. -O3 -fPIC $(arch_flags)
+CPPFLAGS=-g -O0 -I. -fPIC $(arch_flags)
 #### For Suns and similar wrong-endian computers, add -DWRONG_WAY_BYTE_ORDER.
 CC            = gcc
 OSTYPE = $(shell uname)
@@ -7,12 +7,12 @@ SO_Name = libgetdss.dylib
 LDFLAGS=  -Wl,-single_module -dynamiclib  -lc -lm -lstdc++
 else
 SO_Name = libgetdss.so
-LDFLAGS= -shared -Wl,-soname,$(SO_Name) $(arch_flags)
+LDFLAGS= -g -shared -Wl,-soname,$(SO_Name) $(arch_flags)
 endif
 
 OBJS = getdss_lib.o dss.o extr_fit.o getpiece.o \
 	hdcmprss.o bitinput.o decode.o dodecode.o hinv.o \
-	platelst.o qtreedec.o
+	platelst.o qtreedec.o 
 LIBS = -lm -lstdc++
 
 all: $(SO_Name)
