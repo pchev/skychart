@@ -2079,7 +2079,10 @@ if CursorImage1<>nil then begin
   if lclver<'0.9.29' then CursorImage1.FreeImage;
   CursorImage1.Free;
 end;
-if TCPDaemon<>nil then TCPDaemon.Free;
+///////////////////////////////////////////////
+// removed as this crash on Windows and memleak is very small
+// if TCPDaemon<>nil then TCPDaemon.Free;
+///////////////////////////////////////////////
 if VerboseMsg then
  WriteTrace('Destroy end');
 except
