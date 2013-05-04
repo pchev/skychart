@@ -2,7 +2,7 @@
 CC=x86_64-w64-mingw32-c++
 CFLAGS        = -O3 -D_CONSOLE
 SO_Name       = libgetdss.dll
-LIBFLAGS      = -shared -Wl,-soname,$(SO_Name) -lm -lstdc++
+LIBFLAGS      = -shared -static-libgcc -Wl,-soname,$(SO_Name) -lm -lstdc++
 
 .PHONY: clean
 
