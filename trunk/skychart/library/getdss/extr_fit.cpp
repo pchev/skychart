@@ -651,8 +651,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       {
       double ra_2, dec_2, crota, delta_ra, delta_dec, dist;
 
-      amdpos( &h, (double)( xpixel_int + crpix1 * edata->subsamp + 1 - i),
-                  (double)( ypixel_int + crpix2 * edata->subsamp + i),
+      amdpos( &h, (double)xpixel_int + ( crpix1+(double)(1 - i) ) * (double) edata->subsamp,
+                  (double)ypixel_int + ( crpix2+(double)i ) * (double) edata->subsamp,
                   &ra_2, &dec_2);
       delta_ra  = (ra_2 - ra_center) * cos( dec_center);
       delta_dec = dec_2 - dec_center;
