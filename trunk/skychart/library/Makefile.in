@@ -15,10 +15,12 @@ dirs= catalog \
 
 all: catalog_all satxy_all
 ifeq ($(OS_TARGET),win32)
+        $(MAKE) -C getdss -f Makefile.win32 all 
         $(MAKE) -C plan404 -f Makefile.win32 all 
         $(MAKE) -C wcs -f Makefile.win32 all
  else
  ifeq ($(OS_TARGET),win64)
+        $(MAKE) -C getdss -f Makefile.win64 all 
         $(MAKE) -C plan404 -f Makefile.win64 all 
         $(MAKE) -C wcs -f Makefile.win64 all
  else
@@ -42,10 +44,12 @@ endif
 
 clean: catalog_clean satxy_clean
 ifeq ($(OS_TARGET),win32)
+        $(MAKE) -C getdss -f Makefile.win32 clean
         $(MAKE) -C plan404 -f Makefile.win32 clean
         $(MAKE) -C wcs -f Makefile.win32 clean
 else
 ifeq ($(OS_TARGET),win64)
+        $(MAKE) -C getdss -f Makefile.win64 clean 
         $(MAKE) -C plan404 -f Makefile.win64 clean
         $(MAKE) -C wcs -f Makefile.win64 clean
 else
