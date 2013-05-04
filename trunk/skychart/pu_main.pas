@@ -5554,6 +5554,8 @@ RightBar1.checked:=PanelRight.visible;
 ViewToolsBar1.checked:=(MainBar1.checked and ObjectBar1.checked and LeftBar1.checked and RightBar1.checked);
 ViewTopPanel;
 InitialChartNum:=ReadInteger(section,'NumChart',0);
+f_detail.Width:=ReadInteger(section,'Detail_Width',f_detail.Width);
+f_detail.Height:=ReadInteger(section,'Detail_Height',f_detail.Height);
 except
   ShowError('Error reading '+filename+' main');
 end;
@@ -6266,6 +6268,8 @@ WriteBool(section,'ViewObjectBar',toolbar4.visible);
 WriteBool(section,'ViewScrollBar',ViewScrollBar1.Checked);
 WriteBool(section,'ViewStatusBar',ViewStatusBar1.Checked);
 WriteInteger(section,'NumChart',MultiFrame1.ChildCount);
+WriteInteger(section,'Detail_Width',f_detail.Width);
+WriteInteger(section,'Detail_Height',f_detail.Height);
 section:='catalog';
 for i:=1 to maxstarcatalog do begin
    WriteString(section,'starcatpath'+inttostr(i),catalog.cfgcat.starcatpath[i]);
