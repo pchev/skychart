@@ -1422,6 +1422,9 @@ resourcestring
   rsUseASimplePo = 'Use a simple pointer';
   rsErrorFileNot = 'Error, file not downloaded:';
   rsHighQuality = 'High quality';
+  rsDarkNight = 'Dark night';
+  rsStart = 'Start';
+  rsEnd = 'End';
 
 implementation
 
