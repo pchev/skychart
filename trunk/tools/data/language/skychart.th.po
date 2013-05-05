@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-04-28 16:39+0000\n"
-"PO-Revision-Date: 2013-04-12 03:28+0000\n"
+"POT-Creation-Date: 2013-05-05 12:39+0000\n"
+"PO-Revision-Date: 2013-05-04 01:40+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-05 12:57+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1056,6 +1056,10 @@ msgstr "%sตามเข็มนาฬิกา"
 msgid "Dark nebula"
 msgstr "เนบิวลามืด"
 
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr ""
+
 #: u_translation.rsdash1
 msgid "Dash"
 msgstr "เส้นประ"
@@ -1664,6 +1668,10 @@ msgstr ""
 msgid "Encoders"
 msgstr "ตัวเข้ารหัส"
 
+#: u_translation.rsend
+msgid "End"
+msgstr ""
+
 #: u_translation.rsendofobject
 msgid "End of object"
 msgstr "จุดสิ้นสุดของวัตถุ"
@@ -1742,7 +1750,7 @@ msgstr "%sเกิดข้อผิดพลาดในการสร้า�
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
+msgstr "เกิดข้อผิดพลาด, ดาวน์โหลดแฟ้มข้อมูลไม่สำเร็จ:"
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
@@ -2226,7 +2234,7 @@ msgstr "ชี้เป้าด้วยความแม่นยำสูง
 
 #: u_translation.rshighquality
 msgid "High quality"
-msgstr ""
+msgstr "คุณภาพสูง"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -2302,7 +2310,7 @@ msgstr "ไดเรกทอรีของภาพ"
 
 #: u_translation.rsimagelist
 msgid "Image list"
-msgstr ""
+msgstr "รายการภาพ"
 
 #: u_translation.rsimageoptions
 msgid "Image options"
@@ -3942,7 +3950,7 @@ msgstr "แน่ใจว่าต้องการพักและตัด
 
 #: u_translation.rsrealskycdrom
 msgid "Realsky CD-rom cannot be used on a 64 bit system."
-msgstr ""
+msgstr "ซีดีรอม Realsky ไม่สามารถใช้ได้บนระบบ 64 บิต"
 
 #: u_translation.rsrealskynorth
 msgid "RealSky North"
@@ -4458,7 +4466,7 @@ msgstr "แสดงท้องฟ้าทั้งหมด"
 
 #: u_translation.rsshowasinglep
 msgid "Show a single picture on the map."
-msgstr ""
+msgstr "แสดงภาพเดียวบนแผนที่"
 
 #: u_translation.rsshowasteroid
 msgid "Show asteroids"
@@ -4606,7 +4614,7 @@ msgstr "แสดงดาวฤกษ์"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
-msgstr ""
+msgstr "แสดงภาพบนแผนที่"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -4839,6 +4847,10 @@ msgstr "ตัวกรองดาวฤกษ์"
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
 msgstr "ตัวเลือกการเคลื่อนที่เฉพาะ (ถ้ามีในแค็ตตาล็อก)"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr ""
 
 #: u_translation.rsstartmonth
 msgid "Start month"

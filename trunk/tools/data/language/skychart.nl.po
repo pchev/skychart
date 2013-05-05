@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-28 16:39+0000\n"
+"POT-Creation-Date: 2013-05-05 12:39+0000\n"
 "PO-Revision-Date: 2013-03-10 17:11+0000\n"
 "Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-05 12:56+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -1056,6 +1056,10 @@ msgstr "%smet de klok mee"
 msgid "Dark nebula"
 msgstr "Donkere nevel"
 
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr ""
+
 #: u_translation.rsdash1
 msgid "Dash"
 msgstr "Streep"
@@ -1664,6 +1668,10 @@ msgstr "Encoder initializatie hoek"
 #: u_translation.rsencoders
 msgid "Encoders"
 msgstr "Encoders"
+
+#: u_translation.rsend
+msgid "End"
+msgstr ""
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -4840,6 +4848,10 @@ msgstr "Sterrenfilter"
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
 msgstr "Sterren eigenbeweging opties (indien beschikbaar in catalogus)"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr ""
 
 #: u_translation.rsstartmonth
 msgid "Start month"
