@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-28 16:39+0000\n"
-"PO-Revision-Date: 2013-04-28 16:42+0000\n"
+"POT-Creation-Date: 2013-05-05 12:39+0000\n"
+"PO-Revision-Date: 2013-05-05 12:49+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-05 12:57+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -1058,6 +1058,10 @@ msgstr "%sà droite"
 msgid "Dark nebula"
 msgstr "Nébuleuse obscure"
 
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr "Nuit noir"
+
 #: u_translation.rsdash1
 msgid "Dash"
 msgstr "Trait"
@@ -1667,6 +1671,10 @@ msgstr "Angle d'initialisation"
 #: u_translation.rsencoders
 msgid "Encoders"
 msgstr "Encodeurs"
+
+#: u_translation.rsend
+msgid "End"
+msgstr "Fin"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -4845,6 +4853,10 @@ msgstr "Filtre des étoiles"
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
 msgstr "Options du mouvement propre des étoiles (si disponible)"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr "Début"
 
 #: u_translation.rsstartmonth
 msgid "Start month"

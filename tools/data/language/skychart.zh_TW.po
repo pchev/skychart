@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-28 16:39+0000\n"
+"POT-Creation-Date: 2013-05-05 12:39+0000\n"
 "PO-Revision-Date: 2012-11-20 22:42+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-05 12:57+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -1058,6 +1058,10 @@ msgstr "%s正轉"
 msgid "Dark nebula"
 msgstr "暗星雲"
 
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr ""
+
 #: u_translation.rsdash1
 msgid "Dash"
 msgstr "破折號"
@@ -1665,6 +1669,10 @@ msgstr ""
 
 #: u_translation.rsencoders
 msgid "Encoders"
+msgstr ""
+
+#: u_translation.rsend
+msgid "End"
 msgstr ""
 
 #: u_translation.rsendofobject
@@ -4842,6 +4850,10 @@ msgstr "恆星篩選"
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
 msgstr "恆星自行選項（如果星表可用）"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr ""
 
 #: u_translation.rsstartmonth
 msgid "Start month"

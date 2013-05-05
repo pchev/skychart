@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-28 16:39+0000\n"
+"POT-Creation-Date: 2013-05-05 12:39+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-28 16:46+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-05 12:56+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1059,6 +1059,10 @@ msgstr "%sCW"
 msgid "Dark nebula"
 msgstr "Темна Туманність"
 
+#: u_translation.rsdarknight
+msgid "Dark night"
+msgstr ""
+
 #: u_translation.rsdash1
 msgid "Dash"
 msgstr "Тире"
@@ -1665,6 +1669,10 @@ msgstr ""
 
 #: u_translation.rsencoders
 msgid "Encoders"
+msgstr ""
+
+#: u_translation.rsend
+msgid "End"
 msgstr ""
 
 #: u_translation.rsendofobject
@@ -4842,6 +4850,10 @@ msgstr "Фільтр зірок"
 #: u_translation.rsstarsproperm
 msgid "Stars proper motion options (if available in the catalog)"
 msgstr "Настанови власного руху зірок (при наявності в каталозі)"
+
+#: u_translation.rsstart
+msgid "Start"
+msgstr ""
 
 #: u_translation.rsstartmonth
 msgid "Start month"

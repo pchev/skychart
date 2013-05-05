@@ -5570,3 +5570,15 @@ msgstr ""
 msgid "High quality"
 msgstr ""
 
+#: u_translation:rsdarknight
+msgid "Dark night"
+msgstr ""
+
+#: u_translation:rsstart
+msgid "Start"
+msgstr ""
+
+#: u_translation:rsend
+msgid "End"
+msgstr ""
+
