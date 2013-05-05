@@ -521,11 +521,15 @@ cells[1,0]:=appmsg[9];
 cells[2,0]:='';
 cells[3,0]:=appmsg[10];
 cells[4,0]:='';
+cells[5, 0]:=rsDarkNight;
+cells[6,0]:='';
 cells[0,1]:=appmsg[11];
 cells[1,1]:=appmsg[12];
 cells[2,1]:=appmsg[13];
 cells[3,1]:=appmsg[13];
 cells[4,1]:=appmsg[12];
+cells[5, 1]:=rsStart;
+cells[6, 1]:=rsEnd;
 end;
 end;
 
@@ -1119,9 +1123,14 @@ begin
 end;
 
 procedure Tf_calendar.RefreshTwilight;
-var jda,jd0,jd1,jd2,h,hh : double;
+type tttr= record t: double; tr:word; end;
+var jda,jd0,jd1,jd2,h,hh,tat1,tat2,tmr,tms,tds,tde : double;
     hp1,hp2,ars,des,dist,diam,jdt_ut :Double;
-    a,m,d,s,i,nj : integer;
+    jdr,jdt,jds,rar,der,rat,det,ras : double;
+    a,m,d,s,i,nj,irc,j : integer;
+    mr,mt,ms,azr,azs : string;
+    ttr: array[0..5] of tttr;  ctr:tttr;
+    ttrsorted,night,moonup,dark,newdark: boolean;
 begin
 screen.cursor:=crHourglass;
 try
@@ -1177,19 +1186,87 @@ with TwilightGrid do begin
   // crepuscule astro
   Time_Alt(jd0,ars,des,-18,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
   if hp1>-99 then begin
-     cells[1,i]:=armtostr(rmod(hp1+config.timezone+24,24));
+     tat1:=rmod(hp1+config.timezone+24,24);
+     cells[1,i]:=armtostr(tat1);
      objects[1,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
   end else begin
+     tat1:=-99;
      cells[1,i]:='-';
      objects[1,i]:=nil;
   end;
   if hp1>-99 then begin
-     cells[4,i]:=armtostr(rmod(hp2+config.timezone+24,24));
+     tat2:=rmod(hp2+config.timezone+24,24);
+     cells[4,i]:=armtostr(tat2);
      objects[4,i]:=SetObjCoord(jda+(hp2-h)/24,-999,-999);
   end else begin
+     tat2:=-99;
      cells[4,i]:='-';
      objects[4,i]:=nil;
   end;
+  // Moon visibility
+  Planet.PlanetRiseSet(11,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,config);
+  case irc of
+   0 : begin  // moon rise and set
+       if (tat1>-99) and (tat2>-99) then begin
+         tmr:=rmod((jdr-jd0)*24+config.TimeZone+24,24);
+         tms:=rmod((jds-jd0)*24+config.TimeZone+24,24);
+         ttr[0].t:=0; ttr[0].tr:=0;    // 0h , no transition
+         ttr[1].t:=tat1; ttr[1].tr:=1; // morning twilight night->day
+         ttr[2].t:=tat2; ttr[2].tr:=2; // evening twilight day->night
+         ttr[3].t:=tmr; ttr[3].tr:=3;  // moon rise night->day
+         ttr[4].t:=tms; ttr[4].tr:=4;  // moon set day->night
+         ttr[5].t:=24; ttr[5].tr:=0;    // 24h , no transition
+         // sort by time
+         repeat
+           ttrsorted:=true;
+           for j:=1 to 5 do begin
+             if ttr[j-1].t > ttr[j].t then begin
+               ctr:=ttr[j-1];
+               ttr[j-1]:=ttr[j];
+               ttr[j]:=ctr;
+               ttrsorted:=false;
+             end;
+           end;
+         until ttrsorted;
+         // state at 0h
+         for j:=1 to 4 do begin
+           if ttr[j].tr=1 then begin night:=true; break; end;
+           if ttr[j].tr=2 then begin night:=false; break; end;
+         end;
+         for j:=1 to 4 do begin
+           if ttr[j].tr=3 then begin moonup:=false; break; end;
+           if ttr[j].tr=4 then begin moonup:=true; break; end;
+         end;
+         // search transitions
+         tds:=-1 ; tde:=-1;
+         for j:=1 to 4 do begin
+           dark:= night and (not moonup);
+           if ttr[j].tr=1 then night:=false;
+           if ttr[j].tr=2 then night:=true;
+           if ttr[j].tr=3 then moonup:=true;
+           if ttr[j].tr=4 then moonup:=false;
+           newdark:= night and (not moonup);
+           if dark<>newdark then begin
+              if newdark then tds:=ttr[j].t
+                         else tde:=ttr[j].t;
+           end;
+         end;
+         if (tds>0) then cells[5,i]:=armtostr(tds) else cells[5,i]:='-';
+         if (tde>0) then cells[6,i]:=armtostr(tde) else cells[6,i]:='-';
+        end else begin
+         cells[5,i]:='-';
+         cells[6,i]:='-';
+        end;
+       end;
+   1 : begin // moon circumpolar
+        cells[5,i]:='-';
+        cells[6,i]:='-';
+       end;
+   2 : begin // no moon rise
+        cells[5,i]:=cells[4,i];
+        cells[6,i]:=cells[1,i];
+       end;
+   end;
 end;
 jda:=jda+s;
 i:=i+1;
