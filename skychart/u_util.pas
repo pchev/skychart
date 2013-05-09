@@ -1240,15 +1240,15 @@ else begin
                 result:=(63.86+t*(0.3345+t*(-0.060374+t*(0.0017275+t*(0.000651814+t*(0.00002373599))))))/3600;
                 end;
   // adjustement for measured values after 2005 :
-  // linear adjustement from 2005.0 value to 67 sec. reached by 2014.0
+  // linear adjustement from 2005.0 value to 67 sec. reached by 2012.5
   // factor up to 2150 are adjusted to avoid a discontinuity.
-  2005..2013  : begin
+  2005..2012  : begin
                 t:=y-2005;
-                result:=(64.69+t*0.256667)/3600;
+                result:=(64.69+t*0.3080)/3600;  // (67-64.69)/7.5 = 0.3080
                 end;
-  2014..2049  : begin
+  2013..2049  : begin
                 t:=y-2000;
-                result:=(61.4+t*(0.32217+t*(0.005589)))/3600;
+                result:=(62.099+t*(0.32217+t*(0.005589)))/3600;   // 67-12.5*(0.32217+12.5*(0.005589))=62.099
                 //result:=(62.92+t*(0.32217+t*(0.005589)))/3600;
                 end;
   2050..2149  : begin
