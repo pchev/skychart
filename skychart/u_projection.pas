@@ -933,7 +933,7 @@ if flag then begin   // true -> apparent
           END;
           h:=pid2-h;
        end
-        else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(h1+90)/89;
+        else h:=h+deg2rad*c.ObsRefractionCor*0.64658062088*(rad2deg*h+90)/89;
       end;
    end;
 end
@@ -959,7 +959,7 @@ else begin      // apparent -> true
           h1:=h1+R;
           h:=pid2-h1;
        end
-        else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(h1+90)/89.64658;
+        else h:=h-deg2rad*c.ObsRefractionCor*0.65705159*(rad2deg*h+90)/89.64658;
       end;
    end;
 end;
