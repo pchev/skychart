@@ -171,11 +171,13 @@ begin
 end;
 
 procedure Tf_detail.HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
+var urlutf8: UTF8String;
 begin
-if FileExistsUTF8(URL) then begin
+  urlutf8:=SysToUTF8(URL);
+if FileExistsUTF8(urlutf8) then begin
   if Picture=nil then Picture:=TPicture.Create;
   try
-    Picture.LoadFromFile(URL);
+    Picture.LoadFromFile(urlutf8);
     // disable transparency
     Picture.Bitmap.TransparentMode:=tmFixed;
     Picture.Bitmap.TransparentColor:=clNone;
