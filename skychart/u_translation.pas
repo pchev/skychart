@@ -1425,6 +1425,7 @@ resourcestring
   rsDarkNight = 'Dark night';
   rsStart = 'Start';
   rsEnd = 'End';
+  rsStartGraphAt = 'Start graph at local noon';
 
 implementation
 

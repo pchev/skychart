@@ -1574,14 +1574,19 @@ begin
      pt.X:=0; pt.Y:=0;
      pt:=self.ClientToScreen(pt);
      f_planetinfo.BorderStyle:=bsNone;
+     f_planetinfo.PanelTop.Visible:=false;
+     f_planetinfo.ShowCurrentObject:=false;
      f_planetinfo.Show;
      f_planetinfo.Width:=Width;
      f_planetinfo.Height:=Height;
      f_planetinfo.top:=pt.Y; f_planetinfo.left:=pt.X;
      Application.ProcessMessages;
-  end else
-     if cursorpos then
+  end else begin
+     if cursorpos and (not f_planetinfo.Visible) then
         formpos(f_planetinfo,mouse.cursorpos.x,mouse.cursorpos.y);
+     f_planetinfo.ActivePage:=-1;
+  end;
+  f_planetinfo.CenterAtNoon:=cfgm.CenterAtNoon;
   f_planetinfo.Show;
   f_planetinfo.PageControl1.ActivePageIndex:=pg;
   f_planetinfo.RefreshInfo;
@@ -4301,6 +4306,7 @@ cfgm.maximized:=true;
 cfgm.KioskMode:=false;
 cfgm.KioskDebug:=false;
 cfgm.KioskPass:='';
+cfgm.CenterAtNoon:=true;
 cfgm.updall:=true;
 cfgm.AutoRefreshDelay:=60;
 cfgm.ServerIPaddr:='127.0.0.1';
@@ -5408,6 +5414,7 @@ cfgm.KioskPass:=ReadString(section,'KioskPass','');
 cfgm.KioskDebug:=ReadBool(section,'KioskDebug',false);
 cfgm.KioskMode:=(cfgm.KioskPass>'');
 cfgm.SimpleDetail:=cfgm.KioskMode;
+cfgm.CenterAtNoon:=ReadBool(section,'CenterAtNoon',cfgm.CenterAtNoon);
 if (ReadBool(section,'WinMaximize',true)) then f_main.WindowState:=wsMaximized;
 cfgm.autorefreshdelay:=ReadInteger(section,'autorefreshdelay',cfgm.autorefreshdelay);
 buf:=ReadString(section,'ConstLfile',cfgm.ConstLfile);
@@ -6146,6 +6153,7 @@ WriteBool(section,'ConfirmSaveConfig',ConfirmSaveConfig);
 WriteBool(section,'NightVision',NightVision);
 WriteString(section,'language',cfgm.language);
 if f_clock<>nil then WriteInteger(section,'ClockColor',f_clock.Font.Color);
+if f_planetinfo<>nil then WriteBool(section,'CenterAtNoon',f_planetinfo.CenterAtNoon);
 WriteInteger(section,'SesameUrlNum',f_search.SesameUrlNum);
 WriteInteger(section,'SesameCatNum',f_search.SesameCatNum);
 WriteString(section,'prtname',cfgm.prtname);

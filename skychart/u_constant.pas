@@ -907,14 +907,13 @@ type
     starshape_file, KioskPass: string;
     Paper, PrinterResolution, PrintMethod, PrintColor,
     configpage, configpage_i, configpage_j, autorefreshdelay, MaxChildID, dbport: integer;
-    PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin,
-    PrintCopies: integer;
+    PrtLeftMargin, PrtRightMargin, PrtTopMargin, PrtBottomMargin, PrintCopies: integer;
     savetop, saveleft, saveheight, savewidth: integer;
     ButtonStandard, ButtonNight, AnimDelay, AnimSx, AnimSy,
     AnimSize, VOurl, VOmaxrecord: integer;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
-    TextOnlyDetail, SimpleDetail, KioskMode, KioskDebug: boolean;
+    TextOnlyDetail, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
     AnimOpt, Animffmpeg: string;

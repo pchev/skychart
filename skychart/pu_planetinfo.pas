@@ -6,7 +6,7 @@ interface
 
 uses u_constant, u_translation, Math, u_util, cu_planet, u_projection,
   BGRABitmap, BGRABitmapTypes, Classes, SysUtils, FileUtil, Forms, Controls,
-  Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
+  Types, Graphics, Dialogs, ComCtrls, ExtCtrls, Buttons, StdCtrls;
 
 type
   TChartDrawingControl = class(TCustomControl)
@@ -23,6 +23,8 @@ type
   { Tf_planetinfo }
 
   Tf_planetinfo = class(TForm)
+    CheckBox1: TCheckBox;
+    HeaderControl1: THeaderControl;
     Next2: TStaticText;
     Next3: TStaticText;
     Next4: TStaticText;
@@ -33,6 +35,7 @@ type
     Next1: TStaticText;
     PageControl1: TPageControl;
     Panel1: TPanel;
+    PanelTop: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -58,32 +61,40 @@ type
     TabSheet7: TTabSheet;
     TabSheet8: TTabSheet;
     TabSheet9: TTabSheet;
+    procedure CheckBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormResize(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure HeaderControl1SectionClick(HeaderControl: TCustomHeaderControl;
+      Section: THeaderSection);
     procedure SetPage(Sender: TObject);
   private
     { private declarations }
     Image1,Image2,Image3,Image4,Image5,Image6,Image7,Image8,Image9 : TChartDrawingControl;
     Fplanet : Tplanet;
     xmin,xmax,ymin,ymax: integer;
-    Initialized: boolean;
-    ActivePage, ActiveDate, ActiveSizeX,ActiveSizeY: integer;
+    Initialized, ActiveNoon: boolean;
+    ActiveDate, ActiveSizeX,ActiveSizeY: integer;
     TextZoom: single;
     procedure ImgPaint(Sender: TObject);
   public
     { public declarations }
     config: Tconf_skychart;
     plbmp: TBGRABitmap;
+    CenterAtNoon, ShowCurrentObject: boolean;
+    ActivePage: integer;
     Procedure SetLang;
     Procedure RefreshInfo;
+    procedure PlotLine(bmp:TBGRABitmap; lbl:string; y:integer; des,h1,h2,ht:double);
     Procedure PlotTwilight(bmp:TBGRABitmap);
     Procedure PlotPlanet(bmp:TBGRABitmap);
+    Procedure PlotSelection(bmp:TBGRABitmap);
     Procedure PlotFrame(bmp:TBGRABitmap);
     Procedure PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
     Procedure PlotOrbit1(bmp:TBGRABitmap);
     Procedure PlotOrbit2(bmp:TBGRABitmap);
-    Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs: boolean);
+    Procedure PlotHeader(bmp:TBGRABitmap; title:string; showobs,showtime: boolean);
     property planet: Tplanet read Fplanet write Fplanet;
   end;
 
@@ -126,6 +137,18 @@ Prev6.caption:=rsPrev;
 Prev7.caption:=rsPrev;
 Prev8.caption:=rsPrev;
 Prev9.caption:=rsPrev;
+CheckBox1.Caption:=rsStartGraphAt;
+HeaderControl1.Sections[0].Text:=rsPlanetVisibi;
+HeaderControl1.Sections[1].Text:=pla[11];
+HeaderControl1.Sections[2].Text:=pla[1];
+HeaderControl1.Sections[3].Text:=pla[2];
+HeaderControl1.Sections[4].Text:=pla[4];
+HeaderControl1.Sections[5].Text:=pla[5];
+HeaderControl1.Sections[6].Text:=pla[6];
+HeaderControl1.Sections[7].Text:=rsInnerSolarSy;
+HeaderControl1.Sections[8].Text:=rsOuterSolarSy;
+HeaderControl1.Invalidate;
+FormResize(self);
 end;
 
 procedure Tf_planetinfo.SetPage(Sender: TObject);
@@ -149,11 +172,14 @@ begin
   Initialized:=false;
   config:=Tconf_skychart.Create;
   plbmp:=TBGRABitmap.Create;
+  CenterAtNoon:=true;
+  ShowCurrentObject:=true;
   setlang;
   ActivePage:=-1;
   ActiveDate:=-1;
   ActiveSizeX:=-1;
   ActiveSizeY:=-1;
+  ActiveNoon:=false;
   TextZoom:=1;
   InitImg(Image1,Panel1);
   InitImg(Image2,Panel2);
@@ -164,6 +190,12 @@ begin
   InitImg(Image7,Panel7);
   InitImg(Image8,Panel8);
   InitImg(Image9,Panel9);
+end;
+
+procedure Tf_planetinfo.CheckBox1Change(Sender: TObject);
+begin
+  CenterAtNoon := not CheckBox1.Checked;
+  RefreshInfo;
 end;
 
 procedure Tf_planetinfo.FormDestroy(Sender: TObject);
@@ -197,17 +229,36 @@ begin
 end;
 
 procedure Tf_planetinfo.FormResize(Sender: TObject);
+var i:integer;
+    ts: tsize;
 begin
-plbmp.SetSize(TabSheet1.ClientWidth,TabSheet1.ClientHeight);
+for i:=0 to HeaderControl1.Sections.Count-1 do begin
+  ts:=canvas.TextExtent(HeaderControl1.Sections[i].Text);
+  HeaderControl1.Sections[i].MinWidth:=ts.cx+8;
+end;
+plbmp.SetSize(PageControl1.ClientWidth,PageControl1.ClientHeight);
 if Initialized then RefreshInfo;
+end;
+
+procedure Tf_planetinfo.FormShow(Sender: TObject);
+begin
+    ActivePage:=-1;
+end;
+
+procedure Tf_planetinfo.HeaderControl1SectionClick(
+  HeaderControl: TCustomHeaderControl; Section: THeaderSection);
+begin
+  PageControl1.ActivePageIndex:=Section.OriginalIndex;
+  RefreshInfo;
 end;
 
 procedure Tf_planetinfo.RefreshInfo;
 begin
 if (ActivePage=PageControl1.ActivePageIndex) and
    (ActiveDate=trunc(config.CurJDTT)) and
-   (ActiveSizeX=TabSheet1.ClientWidth) and
-   (ActiveSizeY=TabSheet1.ClientHeight) and
+   (ActiveNoon=CenterAtNoon) and
+   (ActiveSizeX=PageControl1.ClientWidth) and
+   (ActiveSizeY=PageControl1.ClientHeight) and
    (ActiveSizeX=plbmp.Width) and
    (ActiveSizeY=plbmp.Height) then begin
      BringToFront;
@@ -216,7 +267,7 @@ if (ActivePage=PageControl1.ActivePageIndex) and
 
 try
 Initialized:=false;
-plbmp.SetSize(TabSheet1.ClientWidth,TabSheet1.ClientHeight);
+plbmp.SetSize(PageControl1.ClientWidth,PageControl1.ClientHeight);
 plbmp.Fill(ColorToBGRA(clBlack));
 TextZoom:=TabSheet1.ClientWidth/800;
 xmin:=round(marginleft*TextZoom);
@@ -225,48 +276,52 @@ ymin:=margintop;
 ymax:=plbmp.Height-marginbottom;
 ActivePage:=PageControl1.ActivePageIndex;
 ActiveDate:=trunc(config.CurJDTT);
-ActiveSizeX:=TabSheet1.ClientWidth;
-ActiveSizeY:=TabSheet1.ClientHeight;
+ActiveNoon:=CenterAtNoon;
+ActiveSizeX:=PageControl1.ClientWidth;
+ActiveSizeY:=PageControl1.ClientHeight;
 case PageControl1.ActivePageIndex of
    0: begin
-      PlotHeader(plbmp, rsPlanetVisibi, true);
+      PlotHeader(plbmp, rsPlanetVisibi, true, false);
       PlotTwilight(plbmp);
       PlotPlanet(plbmp);
+      PlotSelection(plbmp);
       PlotFrame(plbmp);
    end;
    1: begin
-      PlotHeader(plbmp,pla[11], false);
+      PlotHeader(plbmp,pla[11], false, true);
       PlotPlanetImage(plbmp,11);
       end;
    2: begin
-      PlotHeader(plbmp,pla[1], false);
+      PlotHeader(plbmp,pla[1], false, true);
       PlotPlanetImage(plbmp,1);
       end;
    3: begin
-      PlotHeader(plbmp,pla[2], false);
+      PlotHeader(plbmp,pla[2], false, true);
       PlotPlanetImage(plbmp,2);
       end;
    4: begin
-      PlotHeader(plbmp,pla[4], false);
+      PlotHeader(plbmp,pla[4], false, true);
       PlotPlanetImage(plbmp,4);
       end;
    5: begin
-      PlotHeader(plbmp,pla[5], false);
+      PlotHeader(plbmp,pla[5], false, true);
       PlotPlanetImage(plbmp,5);
       end;
    6: begin
-      PlotHeader(plbmp,pla[6], false);
+      PlotHeader(plbmp,pla[6], false, true);
       PlotPlanetImage(plbmp,6);
       end;
    7: begin
-      PlotHeader(plbmp, rsInnerSolarSy, false);
+      PlotHeader(plbmp, rsInnerSolarSy, false, false);
       PlotOrbit1(plbmp);
       end;
    8: begin
-      PlotHeader(plbmp, rsOuterSolarSy, false);
+      PlotHeader(plbmp, rsOuterSolarSy, false, false);
       PlotOrbit2(plbmp);
       end;
 end;
+CheckBox1.Checked:=not CenterAtNoon;
+CheckBox1.Visible:=PageControl1.ActivePageIndex=0;
 finally
 Initialized:=true;
 Invalidate;
@@ -281,8 +336,13 @@ var ars,des,dist,diam,hp1,hp2,h : double;
   var x1,x2: integer;
   begin
   if h1>-99 then begin
-    h1:=rmod(h1+config.timezone+24,24);
-    h2:=rmod(h2+config.timezone+24,24);
+    if CenterAtNoon then begin
+      h1:=rmod(h1+config.timezone+24,24);
+      h2:=rmod(h2+config.timezone+24,24);
+    end else begin
+      h1:=rmod(h1+config.timezone+24+12,24);
+      h2:=rmod(h2+config.timezone+24+12,24);
+    end;
     x1:=xmin+round((h1/24)*(xmax-xmin));
     x2:=xmin+round((h2/24)*(xmax-xmin));
     if h2>=h1 then begin
@@ -320,14 +380,20 @@ begin
   PlotRect(des,h,hp1,hp2,2);
 end;
 
-Procedure Tf_planetinfo.PlotPlanet(bmp:TBGRABitmap);
-var ipla,yc,ys,i:integer;
-    ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,hp1,hp2,ht,azr,azs: double;
-
-procedure PlotLine(lbl:string; y:integer; des,h1,h2,ht:double);
+procedure Tf_planetinfo.PlotLine(bmp:TBGRABitmap; lbl:string; y:integer; des,h1,h2,ht:double);
 var x1,x2,xt:integer;
+    ts : Tsize;
 begin
   if h1>-99 then begin
+    if (h1<>0)or(h2<>24) then begin
+      if CenterAtNoon then begin
+        h1:=rmod(h1+24,24);
+        h2:=rmod(h2+24,24);
+      end else begin
+        h1:=rmod(h1+24+12,24);
+        h2:=rmod(h2+24+12,24);
+      end;
+    end;
     x1:=xmin+round((h1/24)*(xmax-xmin));
     x2:=xmin+round((h2/24)*(xmax-xmin));
     if h2>=h1 then begin
@@ -342,17 +408,32 @@ begin
     end;
   end;
   if ht>-99 then begin
+    if CenterAtNoon then begin
+      ht:=rmod(ht+24,24);
+    end else begin
+      ht:=rmod(ht+24+12,24);
+    end;
     xt:=xmin+round((ht/24)*(xmax-xmin));
     bmp.DrawVertLine(xt,y,y-5,ColorToBGRA(clYellow));
   end;
   bmp.FontHeight:=round(16*TextZoom);
   bmp.FontStyle:=[fsBold];
+  repeat
+    ts:=bmp.TextSize(lbl);
+    if (ts.cx>xmin-5) then bmp.FontHeight:=bmp.FontHeight-1;
+  until (ts.cx<=xmin-5)or(bmp.FontHeight<8);
   bmp.TextOut(xmin-5,y-6,lbl,ColorToBGRA(clWhite),taRightJustify);
   bmp.TextOut(xmax+5,y-5,lbl,ColorToBGRA(clWhite),taLeftJustify);
 end;
 
+Procedure Tf_planetinfo.PlotPlanet(bmp:TBGRABitmap);
+var ipla,yc,ys,i:integer;
+    ar,de,dist,diam,dkm,phase,illum,magn,dp,xp,yp,zp,vel,hp1,hp2,ht,azr,azs: double;
 begin
-ys:=trunc((ymax-ymin)/10);
+if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then
+  ys:=trunc((ymax-ymin)/11)
+else
+  ys:=trunc((ymax-ymin)/10);
 yc:=ymin+ys;
 // sun first
 ipla:=10;
@@ -361,9 +442,9 @@ precession(jd2000,config.CurJDUT,ar,de);
 if (ar<0) then ar:=ar+pi2;
 RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
 case i of
-  0: PlotLine(pla[ipla],yc,de,hp1,hp2,ht);
-  1: PlotLine(pla[ipla],yc,de,0,24,ht);
-  2: PlotLine(pla[ipla],yc,de,-100,-100,-100);
+  0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
+  1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
+  2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
 end;
 // moon second
 ipla:=11;
@@ -373,9 +454,9 @@ precession(jd2000,config.CurJDUT,ar,de);
 if (ar<0) then ar:=ar+pi2;
 RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
 case i of
-  0: PlotLine(pla[ipla],yc,de,hp1,hp2,ht);
-  1: PlotLine(pla[ipla],yc,de,0,24,ht);
-  2: PlotLine(pla[ipla],yc,de,-100,-100,-100);
+  0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
+  1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
+  2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
 end;
 // other planets
 for ipla:=1 to 8 do begin
@@ -386,14 +467,31 @@ for ipla:=1 to 8 do begin
   if (ar<0) then ar:=ar+pi2;
   RiseSet(1,config.jd0,ar,de,hp1,ht,hp2,azr,azs,i,config);
   case i of
-    0: PlotLine(pla[ipla],yc,de,hp1,hp2,ht);
-    1: PlotLine(pla[ipla],yc,de,0,24,ht);
-    2: PlotLine(pla[ipla],yc,de,-100,-100,-100);
+    0: PlotLine(bmp,pla[ipla],yc,de,hp1,hp2,ht);
+    1: PlotLine(bmp,pla[ipla],yc,de,0,24,ht);
+    2: PlotLine(bmp,pla[ipla],yc,de,-100,-100,-100);
   end;
 end;
 end;
 
-Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String; showobs: boolean);
+Procedure Tf_planetinfo.PlotSelection(bmp:TBGRABitmap);
+var yc,ys,i:integer;
+    hp1,hp2,ht,azr,azs: double;
+
+begin
+if ShowCurrentObject and config.FindOK and (config.FindType<>ftPla) then begin
+  ys:=trunc((ymax-ymin)/11);
+  yc:=ymax-ys;
+  RiseSet(1,config.jd0,config.FindRA,config.FindDec,hp1,ht,hp2,azr,azs,i,config);
+  case i of
+    0: PlotLine(bmp,config.FindName,yc,config.FindDec,hp1,hp2,ht);
+    1: PlotLine(bmp,config.FindName,yc,config.FindDec,0,24,ht);
+    2: PlotLine(bmp,config.FindName,yc,config.FindDec,-100,-100,-100);
+  end;
+end;
+end;
+
+Procedure Tf_planetinfo.PlotHeader(bmp:TBGRABitmap; title:String; showobs,showtime: boolean);
 var c:TBGRAPixel;
     buf: string;
 begin
@@ -407,11 +505,16 @@ begin
   if showobs then begin
     buf:=config.ObsName;
     bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
-  end;
+  end else
+   if showtime then begin
+     buf:=ArmToStr(config.CurTime);
+     bmp.TextOut(bmp.Width-20,40,buf,c,taRightJustify);
+   end;
 end;
 
 Procedure Tf_planetinfo.PlotFrame(bmp:TBGRABitmap);
 var x,y,i: integer;
+    l: string;
     c:TBGRAPixel;
 begin
   c:=ColorToBGRA(clWhite);
@@ -422,9 +525,12 @@ begin
       x:=xmin+trunc(i*((xmax-xmin)/24));
       y:=ymin-round(5*TextZoom);
       bmp.DrawVertLine(x,y,ymin,c);
-      if (i mod 2)=0 then bmp.TextOut(x,y-15,inttostr(i),c,taCenter);
+      if CenterAtNoon then l:=inttostr(i)
+         else l:=inttostr((i+12) mod 24);
+      if (i mod 2)=0 then bmp.TextOut(x,y-15,l,c,taCenter);
   end;
-  x:=xmin+trunc(config.CurTime*((xmax-xmin)/24));
+  if CenterAtNoon then x:=xmin+trunc(config.CurTime*((xmax-xmin)/24))
+                  else x:=xmin+trunc(rmod(config.CurTime+12,24)*((xmax-xmin)/24));
   bmp.DrawVertLine(x,ymin,ymax,ColorToBGRA(clRed));
 end;
 
@@ -517,8 +623,8 @@ var p: ArrayOfTPointF;
     jdt,sd:double;
     pl: TPlanData;
 const nbstep=100;
-      per: array[1..5] of integer = (4332,10760,30590,59799,90553);
-      col: array[1..5] of TColor = (clOlive,clWhite,clAqua,clBlue,clGray);
+      per: array[1..6] of integer = (687,4332,10760,30590,59799,90553);
+      col: array[1..6] of TColor = (clred,clOlive,clWhite,clAqua,clBlue,clGray);
 
   Procedure PlanetOrbit;
   var i:integer;
@@ -527,7 +633,7 @@ const nbstep=100;
     sd:=per[ipla]/nbstep;
     jdt:=config.CurJDTT;
     for i:=0 to nbstep do begin
-      planet.Plan(ipla+4,jdt,pl);
+      planet.Plan(ipla+3,jdt,pl);
       // rotate equatorial to ecliptic
       px:=pl.x;
       py:= coseps2k*pl.y + sineps2k*pl.z;
@@ -537,7 +643,7 @@ const nbstep=100;
     end;
     bmp.DrawPolyLineAntialias(p,ColorToBGRA(clGray),0.5,true);
     bmp.FillEllipseAntialias(p[0].x,p[0].y,ps,ps,ColorToBGRA(col[ipla]));
-    bmp.TextOut(20,txtp+txts*ipla,pla[ipla+4],ColorToBGRA(col[ipla]),taLeftJustify);
+    bmp.TextOut(20,txtp+txts*ipla,pla[ipla+3],ColorToBGRA(col[ipla]),taLeftJustify);
   end;
 
 begin
@@ -553,7 +659,7 @@ bmp.FillEllipseAntialias(cx,cy,ss,ss,ColorToBGRA(clYellow));  // sun
 bmp.FontHeight:=round(24*TextZoom);
 bmp.TextOut(20,txtp,pla[10],ColorToBGRA(clYellow),taLeftJustify);
 SetLength(p,nbstep+1);
-for ipla:=1 to 5 do PlanetOrbit;
+for ipla:=1 to 6 do PlanetOrbit;
 end;
 
 end.
