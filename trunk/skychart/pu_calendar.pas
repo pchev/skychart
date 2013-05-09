@@ -530,6 +530,8 @@ cells[3,1]:=appmsg[13];
 cells[4,1]:=appmsg[12];
 cells[5, 1]:=rsStart;
 cells[6, 1]:=rsEnd;
+cells[7,0]:=rsMoon;
+cells[7,1]:=rsIllum;
 end;
 end;
 
@@ -1126,7 +1128,8 @@ procedure Tf_calendar.RefreshTwilight;
 type tttr= record t: double; tr:word; end;
 var jda,jd0,jd1,jd2,h,hh,tat1,tat2,tmr,tms,tds,tde : double;
     hp1,hp2,ars,des,dist,diam,jdt_ut :Double;
-    jdr,jdt,jds,rar,der,rat,det,ras : double;
+    jdr,jdt,jds,jdm,rar,der,rat,det,ras : double;
+    dkm,phase,illum : double;
     a,m,d,s,i,nj,irc,j : integer;
     mr,mt,ms,azr,azs : string;
     ttr: array[0..5] of tttr;  ctr:tttr;
@@ -1207,6 +1210,7 @@ with TwilightGrid do begin
   Planet.PlanetRiseSet(11,jd0,AzNorth,mr,mt,ms,azr,azs,jdr,jdt,jds,rar,der,rat,det,ras,des,irc,config);
   case irc of
    0 : begin  // moon rise and set
+       jdm:=jdt;
        if (tat1>-99) and (tat2>-99) then begin
          tmr:=rmod((jdr-jd0)*24+config.TimeZone+24,24);
          tms:=rmod((jds-jd0)*24+config.TimeZone+24,24);
@@ -1251,22 +1255,33 @@ with TwilightGrid do begin
                          else tde:=ttr[j].t;
            end;
          end;
-         if (tds>0) then cells[5,i]:=armtostr(tds) else cells[5,i]:='-';
-         if (tde>0) then cells[6,i]:=armtostr(tde) else cells[6,i]:='-';
+         if (tds>0) then begin
+           cells[5,i]:=armtostr(tds);
+           objects[5,i]:=SetObjCoord(jda+(tds-h-config.timezone)/24,-999,-999);
+         end else cells[5,i]:='-';
+         if (tde>0) then begin
+           cells[6,i]:=armtostr(tde);
+           objects[6,i]:=SetObjCoord(jda+(tde-h-config.timezone)/24,-999,-999);
+         end else cells[6,i]:='-';
         end else begin
          cells[5,i]:='-';
          cells[6,i]:='-';
         end;
        end;
    1 : begin // moon circumpolar
+        jdm:=jdt;
         cells[5,i]:='-';
         cells[6,i]:='-';
        end;
    2 : begin // no moon rise
+        jdm:=jd0;
         cells[5,i]:=cells[4,i];
         cells[6,i]:=cells[1,i];
        end;
    end;
+   // Moon illumination
+   Planet.Moon(jdm,rat,det,dist,dkm,diam,phase,illum);
+   cells[7,i]:=FormatFloat(f2,illum);
 end;
 jda:=jda+s;
 i:=i+1;
