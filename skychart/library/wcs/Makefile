@@ -1,4 +1,4 @@
-CFLAGS= -g -w -fPIC $(arch_flags)
+CFLAGS= -O3 -w -fPIC $(arch_flags)
 CC= gcc
 
 OSTYPE = $(shell uname)

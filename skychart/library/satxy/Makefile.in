@@ -12,7 +12,7 @@ version=0.0
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
 unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
 includedir=./
-options= -CF64 -O1 -MObjFPC -Sgi
+options= $(fpcopts) -CF64 -MObjFPC -Sgi
 
 [target]
 units=satxy.pas
@@ -25,6 +25,10 @@ files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
       $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
 [prerules]
 LAZDIR=%LAZDIR%
+# Compiler options
+ifndef fpcopts 
+fpcopts=-O3 -OoREGVAR -Ch524288 -CX -XX -Xs 
+endif
 # LCL Platform
 ifndef LCL_PLATFORM
 ifeq ($(OS_TARGET),win32)
