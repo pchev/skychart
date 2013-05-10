@@ -112,6 +112,11 @@ if [[ $make_linux32 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   #debug
   cd $wd
+  rm -rf $builddir
+  make CPU_TARGET=i386 OS_TARGET=linux clean
+  fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=i386 OS_TARGET=linux
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  mkdir $builddir
   mkdir $builddir/debug
   cp skychart/cdc $builddir/debug/skychart
   cp skychart/cdcicon $builddir/debug/
@@ -183,6 +188,11 @@ if [[ $make_linux64 ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   #debug
   cd $wd
+  rm -rf $builddir
+  make CPU_TARGET=x86_64 OS_TARGET=linux clean
+  fpcopts="-O1 -g -gl -Ci -Co -Ct" make CPU_TARGET=x86_64 OS_TARGET=linux
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  mkdir $builddir
   mkdir $builddir/debug
   cp skychart/cdc $builddir/debug/skychart
   cp skychart/cdcicon $builddir/debug/
@@ -232,6 +242,11 @@ if [[ $make_win32 ]]; then
   mv $builddir/skychart*.exe $wd
   #debug
   cd $wd
+  rm -rf $builddir
+  make  OS_TARGET=win32 CPU_TARGET=i386 clean
+  fpcopts="-O1 -g -gl -Ci -Co -Ct" make  OS_TARGET=win32 CPU_TARGET=i386
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  mkdir $builddir
   mkdir $builddir/debug
   cp skychart/cdc.exe $builddir/debug/skychart.exe
   cp skychart/cdcicon.exe $builddir/debug/
@@ -279,6 +294,11 @@ if [[ $make_win64 ]]; then
   mv $builddir/skychart*.exe $wd
   #debug
   cd $wd
+  rm -rf $builddir
+  make OS_TARGET=win64 CPU_TARGET=x86_64 clean
+  fpcopts="-O1 -g -gl -Ci -Co -Ct" make OS_TARGET=win64 CPU_TARGET=x86_64
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  mkdir $builddir
   mkdir $builddir/debug
   cp skychart/cdc.exe $builddir/debug/skychart.exe
   cp skychart/cdcicon.exe $builddir/debug/

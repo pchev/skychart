@@ -60,6 +60,11 @@ if [[ $lastrev -ne $currentrev ]]; then
   if [[ $? -ne 0 ]]; then exit 1;fi
   #debug
   cd $wd
+  rm -rf $basedir
+  make clean
+  fpcopts="-O1 -g -gl -Ci -Co -Ct" make
+  if [[ $? -ne 0 ]]; then exit 1;fi
+  mkdir $basedir
   mkdir $basedir/debug
   cp skychart/cdc $basedir/debug/skychart
   cp varobs/varobs $basedir/debug/

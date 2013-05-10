@@ -1,5 +1,5 @@
 CC=x86_64-w64-mingw32-gcc
-CFLAGS= -g -w -fPIC $(arch_flags)
+CFLAGS= -O3 -w -fPIC $(arch_flags)
 
 SO_Name       = libcdcwcs.dll
 LIBFLAGS      = -shared -Wl,-soname,$(SO_Name)  -lm
