@@ -5,7 +5,7 @@ object f_main: Tf_main
   Width = 873
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 529
+  ClientHeight = 526
   ClientWidth = 873
   KeyPreview = True
   Menu = MainMenu1
@@ -20,12 +20,12 @@ object f_main: Tf_main
   LCLVersion = '1.0.8.0'
   object PanelLeft: TPanel
     Left = 0
-    Height = 417
+    Height = 414
     Top = 78
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 417
+    ClientHeight = 414
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -33,7 +33,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 417
+      Height = 414
       Top = 0
       Width = 28
       Align = alClient
@@ -135,18 +135,18 @@ object f_main: Tf_main
   end
   object PanelRight: TPanel
     Left = 845
-    Height = 417
+    Height = 414
     Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 417
+    ClientHeight = 414
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 167
+      Height = 164
       Top = 250
       Width = 28
       Align = alClient
@@ -375,7 +375,7 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 495
+    Top = 492
     Width = 873
     Align = alBottom
     BevelOuter = bvNone
@@ -668,7 +668,7 @@ object f_main: Tf_main
       end
       object quicksearch: TComboBox
         Left = 311
-        Height = 23
+        Height = 22
         Hint = 'Search'
         Top = 2
         Width = 90
@@ -677,7 +677,7 @@ object f_main: Tf_main
         AutoCompleteText = [cbactEnabled, cbactEndOfLineComplete, cbactSearchAscending]
         AutoSize = False
         DropDownCount = 15
-        ItemHeight = 15
+        ItemHeight = 0
         OnCloseUp = quicksearchClick
         OnDblClick = quicksearchClick
         OnKeyDown = quicksearchKeyDown
@@ -815,14 +815,14 @@ object f_main: Tf_main
       end
       object TimeU: TComboBox
         Left = 680
-        Height = 23
+        Height = 25
         Hint = 'Time Units'
         Top = 2
         Width = 80
         AutoCompleteText = [cbactSearchAscending]
         DropDownCount = 11
         Font.CharSet = ANSI_CHARSET
-        ItemHeight = 15
+        ItemHeight = 0
         ParentFont = False
         Style = csDropDownList
         TabOrder = 2

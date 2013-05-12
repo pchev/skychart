@@ -4470,7 +4470,7 @@ def_cfgsc.BGmin_sigma:=0;
 def_cfgsc.BGmax_sigma:=0;
 def_cfgsc.NEBmin_sigma:=0;
 def_cfgsc.NEBmax_sigma:=0;
-def_cfgsc.MaxArchiveImg:=5;
+def_cfgsc.MaxArchiveImg:=1;
 for i:=1 to MaxArchiveDir do def_cfgsc.ArchiveDir[i]:='';
 for i:=1 to MaxArchiveDir do def_cfgsc.ArchiveDirActive[i]:=false;
 def_cfgsc.ArchiveDir[1]:=ArchiveDir;
