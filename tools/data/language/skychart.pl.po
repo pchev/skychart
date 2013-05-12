@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-05 12:39+0000\n"
-"PO-Revision-Date: 2013-04-15 20:14+0000\n"
+"POT-Creation-Date: 2013-05-12 10:01+0000\n"
+"PO-Revision-Date: 2013-05-05 16:15+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-05 12:57+0000\n"
+"X-Launchpad-Export-Date: 2013-05-12 10:12+0000\n"
 "X-Generator: Launchpad (build 16598)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -1063,7 +1063,7 @@ msgstr "Mgławice ciemne"
 
 #: u_translation.rsdarknight
 msgid "Dark night"
-msgstr ""
+msgstr "Ciemna noc"
 
 #: u_translation.rsdash1
 msgid "Dash"
@@ -1675,7 +1675,7 @@ msgstr "Kodery"
 
 #: u_translation.rsend
 msgid "End"
-msgstr ""
+msgstr "Koniec"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1755,7 +1755,7 @@ msgstr "%sBłąd tworzenia tablicy %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
+msgstr "Błąd, plik nie został pobrany:"
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
@@ -2239,7 +2239,7 @@ msgstr "Wskazywnie wysokiej dokładności"
 
 #: u_translation.rshighquality
 msgid "High quality"
-msgstr ""
+msgstr "Wysoka jakość"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -4855,6 +4855,10 @@ msgstr "Opcje ruchu własnego gwiazd (jeśli dostępne są w katalogu)"
 
 #: u_translation.rsstart
 msgid "Start"
+msgstr "Początek"
+
+#: u_translation.rsstartgraphat
+msgid "Start graph at local noon"
 msgstr ""
 
 #: u_translation.rsstartmonth
