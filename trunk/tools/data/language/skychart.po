@@ -5582,3 +5582,7 @@ msgstr ""
 msgid "End"
 msgstr ""
 
+#: u_translation:rsstartgraphat
+msgid "Start graph at local noon"
+msgstr ""
+
