@@ -85,6 +85,7 @@ type
      function CountImages(catname:string):integer;
      procedure ScanImagesDirectory(ImagePath:string; ProgressCat:Tlabel; ProgressBar:TProgressBar );
      procedure ScanArchiveDirectory(ArchivePath:string; var count:integer );
+     function AddFitsArchiveFile(ArchivePath,fn:string):boolean;
      property onInitializeDB: TNotifyEvent read FInitializeDB write FInitializeDB;
      property AstMsg : string read FAstmsg write FAstmsg;
      property ComMinDT : integer read FComMinDT write FComMinDT;
@@ -1312,62 +1313,71 @@ except
 end;
 end;
 
+function TCDCdb.AddFitsArchiveFile(ArchivePath,fn:string):boolean;
+var ra,de,w,h,r: double;
+    p:integer;
+    cmd,objn,fname: string;
+begin
+  result:=false;
+  FFits.FileName:=slash(ArchivePath)+fn;
+  ra:=FFits.Center_RA;
+  de:=FFits.Center_DE;
+  w:=FFits.Img_Width;
+  h:=FFits.img_Height;
+  r:=FFits.Rotation;
+  fname:=FFits.FileName;
+  if FFits.header.valid then begin
+    objn:=FFits.header.objects;
+    if objn>'' then begin
+      objn:=StringReplace(objn,'''','',[rfReplaceAll]);
+      p:=pos(',',objn);
+      if p>0 then objn:=copy(objn,1,p-1);
+    end else begin
+      objn:=extractfilename(fn);
+      p:=pos(extractfileext(objn),objn);
+      objn:=copy(objn,1,p-1);
+      objn:=uppercase(stringreplace(objn,blank,'',[rfReplaceAll]));
+    end;
+    cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
+      +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
+      +',"'+uppercase(ArchivePath)+'"'
+      +',"'+uppercase(objn)+'"'
+      +',"'+formatfloat(f5,ra)+'"'
+      +',"'+formatfloat(f5,de)+'"'
+      +',"'+formatfloat(f5,w)+'"'
+      +',"'+formatfloat(f5,h)+'"'
+      +',"'+formatfloat(f5,r)+'"'
+      +')';
+    if db.query(cmd) then
+       result:=true
+      else
+       writetrace(Format(rsDBInsertFail, [fn, db.ErrorMessage]));
+  end
+  else writetrace(Format(rsInvalidFITSF, [fn]));
+end;
+
 procedure TCDCdb.ScanArchiveDirectory(ArchivePath:string; var count:integer );
 var f : tsearchrec;
-    i,n,p:integer;
-    objn,fname,cmd:string;
-    ra,de,w,h,r: double;
+    i,n:integer;
+    cmd:string;
 begin
 n:=0;
 try
 if DirectoryExists(ArchivePath) then begin
   if db.Active then begin
     db.UnLockTables;
-    db.starttransaction;
+    db.StartTransaction;
     cmd:='delete from cdc_fits where catalogname="'+uppercase(ArchivePath)+'"';
     db.query(cmd);
-    db.commit;
+    db.Commit;
     i:=findfirst(slash(ArchivePath)+'*.*',0,f);
-    db.starttransaction;
+    db.StartTransaction;
     while i=0 do begin
-        FFits.FileName:=slash(ArchivePath)+f.Name;
-        ra:=FFits.Center_RA;
-        de:=FFits.Center_DE;
-        w:=FFits.Img_Width;
-        h:=FFits.img_Height;
-        r:=FFits.Rotation;
-        fname:=FFits.FileName;
-        if FFits.header.valid then begin
-          inc(n);
-          objn:=FFits.header.objects;
-          if objn>'' then begin
-            objn:=StringReplace(objn,'''','',[rfReplaceAll]);
-            p:=pos(',',objn);
-            if p>0 then objn:=copy(objn,1,p-1);
-          end else begin
-            objn:=extractfilename(f.Name);
-            p:=pos(extractfileext(objn),objn);
-            objn:=copy(objn,1,p-1);
-            objn:=uppercase(stringreplace(objn,blank,'',[rfReplaceAll]));
-          end;
-          cmd:='INSERT INTO cdc_fits (filename,catalogname,objectname,ra,de,width,height,rotation) VALUES ('
-            +'"'+stringreplace(fname,'\','\\',[rfReplaceAll])+'"'
-            +',"'+uppercase(ArchivePath)+'"'
-            +',"'+uppercase(objn)+'"'
-            +',"'+formatfloat(f5,ra)+'"'
-            +',"'+formatfloat(f5,de)+'"'
-            +',"'+formatfloat(f5,w)+'"'
-            +',"'+formatfloat(f5,h)+'"'
-            +',"'+formatfloat(f5,r)+'"'
-            +')';
-          if not db.query(cmd) then
-             writetrace(Format(rsDBInsertFail, [f.Name, db.ErrorMessage]));
-        end
-        else writetrace(Format(rsInvalidFITSF, [f.Name]));
+        if AddFitsArchiveFile(ArchivePath,f.Name) then inc(n);
         i:=findnext(f);
     end;
-    db.commit;
     findclose(f);
+    db.Commit;
     db.flush('tables');
   end;
 end;
