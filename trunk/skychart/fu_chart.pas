@@ -3751,6 +3751,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
          archivefile:=buf;
          try
          CopyFile(systoutf8(sc.Fits.Filename),systoutf8(archivefile),false);
+         sc.cdb.AddFitsArchiveFile(f_getdss.cfgdss.dssarchivedir,archivefile);
          except
           on E: Exception do begin
            WriteTrace('CopyFile error: '+E.Message);
