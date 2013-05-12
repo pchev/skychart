@@ -2581,7 +2581,7 @@ end else begin                   // end animation
       repeat
         inc(i);
         fn:=slash(cfgm.AnimRecDir)+cfgm.AnimRecPrefix+inttostr(i)+cfgm.AnimRecExt;
-      until (not FileExists(fn))or(i>1000);
+      until (not FileExistsutf8(fn))or(i>1000);
       cmd:=cfgm.Animffmpeg+' -r '+formatfloat(f1,cfgm.AnimFps)+' '+cfgm.AnimOpt+' -i "'+slash(TempDir)+'%06d.jpg" "'+utf8tosys(fn)+'"';
       rc:=ExecProcess(cmd,r,true);
       logfile:=slash(TempDir)+'ffmpeg.log';

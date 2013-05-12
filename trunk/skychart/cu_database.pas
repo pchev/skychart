@@ -1320,7 +1320,7 @@ var f : tsearchrec;
 begin
 n:=0;
 try
-if DirectoryExistsUTF8(ArchivePath) then begin
+if DirectoryExists(ArchivePath) then begin
   if db.Active then begin
     db.UnLockTables;
     db.starttransaction;

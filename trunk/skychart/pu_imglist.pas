@@ -68,7 +68,7 @@ procedure Tf_imglist.ViewHeaderClick(Sender: TObject);
 begin
 if ListIndex>=CheckListBox1.Items.Count then ListIndex:=CheckListBox1.Items.Count-1;
 if (ListIndex<0) then exit;
-FFits.FileName:=CheckListBox1.Items[ListIndex];
+FFits.FileName:=utf8tosys(CheckListBox1.Items[ListIndex]);
 FFits.ViewHeaders;
 end;
 

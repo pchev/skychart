@@ -3647,7 +3647,7 @@ begin
 end;
 f_imglist.CheckListBox1.Clear;
 for i:=0 to sc.Fits.fitslist.Count-1 do begin
-   f_imglist.CheckListBox1.Items.Add(sc.Fits.fitslist[i]);
+   f_imglist.CheckListBox1.Items.Add(systoutf8(sc.Fits.fitslist[i]));
    f_imglist.CheckListBox1.Checked[i]:=sc.Fits.fitslistactive[i];
 end;
 f_imglist.ShowModal;
@@ -3750,7 +3750,7 @@ if f_getdss.GetDss(ra2000,de2000,sc.cfgsc.fov,sc.cfgsc.windowratio,image1.width)
          end;
          archivefile:=buf;
          try
-         CopyFile(sc.Fits.Filename,archivefile,false);
+         CopyFile(systoutf8(sc.Fits.Filename),systoutf8(archivefile),false);
          except
           on E: Exception do begin
            WriteTrace('CopyFile error: '+E.Message);

@@ -6,8 +6,8 @@ object f_config_pictures: Tf_config_pictures
   ClientHeight = 524
   ClientWidth = 503
   TabOrder = 0
-  DesignLeft = 387
-  DesignTop = 309
+  DesignLeft = 548
+  DesignTop = 212
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -328,7 +328,7 @@ object f_config_pictures: Tf_config_pictures
             Height = 23
             Top = 56
             Width = 137
-            ItemHeight = 0
+            ItemHeight = 15
             ItemIndex = 1
             Items.Strings = (
               'Linear'
@@ -386,22 +386,22 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page3: TTabSheet
         Caption = 'DSS - Realsky'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 514
+        ClientWidth = 493
         object GroupBox1: TGroupBox
           Left = 4
           Height = 69
           Top = 8
           Width = 484
           Caption = 'Online DSS'
-          ClientHeight = 52
+          ClientHeight = 51
           ClientWidth = 480
           TabOrder = 1
           object OnlineDSS: TCheckBox
             Left = 8
-            Height = 23
+            Height = 19
             Top = 20
-            Width = 211
+            Width = 196
             Caption = 'Use online DSS instead of RealSky'
             OnChange = OnlineDSSChange
             TabOrder = 0
@@ -411,7 +411,7 @@ object f_config_pictures: Tf_config_pictures
             Height = 23
             Top = 20
             Width = 176
-            ItemHeight = 0
+            ItemHeight = 15
             OnSelect = OnlineDSSListChange
             TabOrder = 1
             Text = 'OnlineDSSList'
@@ -423,7 +423,7 @@ object f_config_pictures: Tf_config_pictures
           Top = 181
           Width = 484
           Caption = 'RealSky®'
-          ClientHeight = 263
+          ClientHeight = 262
           ClientWidth = 480
           TabOrder = 0
           object Panel2: TPanel
@@ -436,9 +436,9 @@ object f_config_pictures: Tf_config_pictures
             TabOrder = 0
             object RealSkyNorth: TCheckBox
               Left = 6
-              Height = 23
+              Height = 19
               Top = 8
-              Width = 103
+              Width = 94
               Caption = 'RealSky North'
               OnClick = RealSkyNorthClick
               TabOrder = 0
@@ -464,9 +464,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object reallist: TCheckBox
               Left = 6
-              Height = 23
+              Height = 19
               Top = 157
-              Width = 145
+              Width = 127
               Caption = 'Select plate from list'
               Checked = True
               OnClick = reallistClick
@@ -475,9 +475,9 @@ object f_config_pictures: Tf_config_pictures
             end
             object usesubsample: TCheckBox
               Left = 6
-              Height = 23
+              Height = 19
               Top = 189
-              Width = 242
+              Width = 223
               Caption = 'Use subsampling to limit image size to'
               Checked = True
               OnClick = usesubsampleClick
@@ -486,18 +486,18 @@ object f_config_pictures: Tf_config_pictures
             end
             object DSS102CD: TCheckBox
               Left = 196
-              Height = 23
+              Height = 19
               Top = 8
-              Width = 90
+              Width = 80
               Caption = '102 CD DSS'
               OnClick = DSS102CDClick
               TabOrder = 5
             end
             object RealSkySouth: TCheckBox
               Left = 6
-              Height = 23
+              Height = 19
               Top = 34
-              Width = 102
+              Width = 94
               Caption = 'RealSky South'
               OnClick = RealSkySouthClick
               TabOrder = 6
@@ -533,7 +533,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 411
               Height = 16
               Top = 225
-              Width = 44
+              Width = 40
               Caption = 'MBytes'
               ParentColor = False
             end
@@ -541,7 +541,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 411
               Height = 16
               Top = 196
-              Width = 33
+              Width = 30
               Caption = 'pixels'
               ParentColor = False
             end
@@ -549,7 +549,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 129
-              Width = 81
+              Width = 75
               Caption = 'temporary file'
               ParentColor = False
             end
@@ -557,7 +557,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 97
-              Width = 102
+              Width = 95
               Caption = 'Data Files, CDrom'
               ParentColor = False
             end
@@ -565,7 +565,7 @@ object f_config_pictures: Tf_config_pictures
               Left = 11
               Height = 16
               Top = 64
-              Width = 73
+              Width = 70
               Caption = 'Auxiliary files'
               ParentColor = False
             end
@@ -574,7 +574,7 @@ object f_config_pictures: Tf_config_pictures
             Left = 12
             Height = 16
             Top = 20
-            Width = 37
+            Width = 35
             Caption = 'Label6'
             ParentColor = False
           end
@@ -585,14 +585,14 @@ object f_config_pictures: Tf_config_pictures
           Top = 85
           Width = 484
           Caption = 'Download archive'
-          ClientHeight = 71
+          ClientHeight = 70
           ClientWidth = 480
           TabOrder = 2
           object ArchiveBox: TCheckBox
             Left = 8
-            Height = 23
+            Height = 19
             Top = 9
-            Width = 146
+            Width = 133
             Caption = 'Archive to directory : '
             OnChange = ArchiveBoxChange
             TabOrder = 0
@@ -611,9 +611,9 @@ object f_config_pictures: Tf_config_pictures
           end
           object ConfirmArchive: TCheckBox
             Left = 8
-            Height = 23
+            Height = 19
             Top = 41
-            Width = 263
+            Width = 242
             Caption = 'Confirmation prompt before to save a file.'
             OnChange = ConfirmArchiveChange
             TabOrder = 2
@@ -622,8 +622,8 @@ object f_config_pictures: Tf_config_pictures
       end
       object Page4: TTabSheet
         Caption = 'Image archive'
-        ClientHeight = 518
-        ClientWidth = 497
+        ClientHeight = 514
+        ClientWidth = 493
         object StringGrid1: TStringGrid
           Left = 21
           Height = 296
@@ -664,7 +664,7 @@ object f_config_pictures: Tf_config_pictures
           Left = 26
           Height = 16
           Top = 17
-          Width = 78
+          Width = 75
           Caption = 'Image archive'
           ParentColor = False
         end
@@ -682,7 +682,7 @@ object f_config_pictures: Tf_config_pictures
           Height = 23
           Top = 368
           Width = 64
-          ItemHeight = 0
+          ItemHeight = 15
           ItemIndex = 9
           Items.Strings = (
             '1'
@@ -704,15 +704,15 @@ object f_config_pictures: Tf_config_pictures
           Left = 26
           Height = 16
           Top = 372
-          Width = 290
+          Width = 278
           Caption = 'Maximum number of image to show simultaneously'
           ParentColor = False
         end
         object ShowImageList: TCheckBox
           Left = 26
-          Height = 23
+          Height = 19
           Top = 397
-          Width = 109
+          Width = 100
           Caption = 'ShowImageList'
           OnChange = ShowImageListChange
           TabOrder = 3
