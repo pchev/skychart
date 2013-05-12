@@ -322,9 +322,9 @@ ImageTimer1.enabled:=false;
 RealSkyNorth.Checked:=cdss.dssnorth;
 RealSkySouth.Checked:=cdss.dsssouth;
 DSS102CD.Checked:=cdss.dss102;
-realskydir.text:=cdss.dssdir;
-realskydrive.text:=cdss.dssdrive;
-realskyfile.text:=cdss.dssfile;
+realskydir.text:=SysToUTF8(cdss.dssdir);
+realskydrive.text:=SysToUTF8(cdss.dssdrive);
+realskyfile.text:=SysToUTF8(cdss.dssfile);
 reallist.checked:=cdss.dssplateprompt;
 usesubsample.checked:=cdss.dsssampling;
 realskymax.value:=cdss.dssmaxsize;
@@ -335,11 +335,11 @@ for i:=1 to MaxDSSurl do
      OnlineDSSList.Items.Add(cdss.DSSurl[i,0]);
 OnlineDSSList.ItemIndex:=cdss.OnlineDSSid-1;
 ArchiveBox.Checked:=cdss.dssarchive;
-ArchiveDirectory1.Directory:=cdss.dssarchivedir;
+ArchiveDirectory1.Directory:=SysToUTF8(cdss.dssarchivedir);
 ConfirmArchive.Checked := cdss.dssarchiveprompt;
 MaxImg.ItemIndex:=csc.MaxArchiveImg-1;
 ShowImageList.Checked := csc.ShowImageList;
-for i:=1 to MaxArchiveDir do StringGrid1.Cells[1,i]:=csc.ArchiveDir[i];
+for i:=1 to MaxArchiveDir do StringGrid1.Cells[1,i]:=SysToUTF8(csc.ArchiveDir[i]);
 for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[0,i]:='1' else StringGrid1.Cells[0,i]:='0';
 for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[3,i]:=inttostr(cdb.CountImages(csc.ArchiveDir[i]));
 end;
@@ -558,7 +558,7 @@ end;
 
 procedure Tf_config_pictures.ArchiveDirectory1Change(Sender: TObject);
 begin
-  cdss.dssarchivedir := ArchiveDirectory1.Directory;
+  cdss.dssarchivedir := utf8tosys(ArchiveDirectory1.Directory);
 end;
 
 procedure Tf_config_pictures.ConfirmArchiveChange(Sender: TObject);
@@ -643,7 +643,7 @@ end;
 procedure Tf_config_pictures.realskydirChange(Sender: TObject);
 begin
 if LockChange then exit;
-cdss.dssdir:=realskydir.text;
+cdss.dssdir:=utf8tosys(realskydir.text);
 if fileexists(slash(cdss.dssdir)+'hi_comp.lis') then
    realskydir.color:=realskydrive.color
 else
@@ -653,13 +653,13 @@ end;
 procedure Tf_config_pictures.realskydriveChange(Sender: TObject);
 begin
 if LockChange then exit;
-cdss.dssdrive:=realskydrive.text;
+cdss.dssdrive:=utf8tosys(realskydrive.text);
 end;
 
 procedure Tf_config_pictures.realskyfileChange(Sender: TObject);
 begin
 if LockChange then exit;
-cdss.dssfile:=realskyfile.text;
+cdss.dssfile:=utf8tosys(realskyfile.text);
 end;
 
 procedure Tf_config_pictures.reallistClick(Sender: TObject);
@@ -685,7 +685,7 @@ with Sender as TStringGrid do begin
       ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
     end;
   end else if (Acol=1)and(Arow>0) then begin
-    csc.ArchiveDir[arow]:=cells[acol,arow];
+    csc.ArchiveDir[arow]:=utf8tosys(cells[acol,arow]);
   end else if (Acol=2)and(Arow>0) then begin
     ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,0);
   end;
@@ -767,7 +767,7 @@ begin
 screen.Cursor:=crHourGlass;
 try
 for i:=1 to MaxArchiveDir do begin
-  if (csc.ArchiveDirActive[i])and(csc.ArchiveDir[i]>'')and DirectoryExistsUTF8(csc.ArchiveDir[i]) then begin
+  if (csc.ArchiveDirActive[i])and(csc.ArchiveDir[i]>'')and DirectoryExists(csc.ArchiveDir[i]) then begin
      Cdb.ScanArchiveDirectory(csc.ArchiveDir[i],count);
      StringGrid1.Cells[3,i]:=inttostr(count);
   end;

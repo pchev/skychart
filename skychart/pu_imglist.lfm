@@ -63,7 +63,6 @@ object f_imglist: Tf_imglist
     ItemHeight = 0
     OnMouseDown = CheckListBox1MouseDown
     TabOrder = 1
-    TopIndex = -1
   end
   object PopupMenu1: TPopupMenu
     left = 64
