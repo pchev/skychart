@@ -3396,6 +3396,9 @@ end;
 Procedure Tcatalog.LoadHorizonPicture(fname:string);
 begin
 try
+cfgshr.horizonpicturevalid:=false;
+cfgshr.horizonpicturename:='';
+if fname='' then exit;
 if ExtractFilePath(fname)='' then fname:=slash(Appdir)+fname;
 if cfgshr.horizonpicturevalid and (fname=cfgshr.horizonpicturename) then exit;
 if FileExists(fname) then begin
