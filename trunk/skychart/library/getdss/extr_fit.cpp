@@ -629,8 +629,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    sprintf( tptr, "CTYPE2  = 'DEC--TAN'");
    tptr += 80;
                         /* true pixel center if subsampling: */
-   amdpos( &h, (double)xpixel_int + crpix1 * (double) edata->subsamp,
-               (double)ypixel_int + crpix2 * (double) edata->subsamp,
+   amdpos( &h, (double)xpixel_int + crpix1 * (double) edata->subsamp + (double)( edata->subsamp) / 2,
+               (double)ypixel_int + crpix2 * (double) edata->subsamp - (double)( edata->subsamp) / 2,
                &ra_center, &dec_center);
    sprintf( tptr, "CRVAL1  = %11.9lf", ra_center * 180 / PI);
    tptr += 80;
@@ -651,8 +651,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       {
       double ra_2, dec_2, crota, delta_ra, delta_dec, dist;
 
-      amdpos( &h, (double)xpixel_int + ( crpix1+(double)(1 - i) ) * (double) edata->subsamp,
-                  (double)ypixel_int + ( crpix2+(double)i ) * (double) edata->subsamp,
+      amdpos( &h, (double)xpixel_int + ( crpix1+(double)(1 - i) ) * (double) edata->subsamp  + (double)( edata->subsamp) / 2,
+                  (double)ypixel_int + ( crpix2+(double)i ) * (double) edata->subsamp  - (double)( edata->subsamp) / 2,
                   &ra_2, &dec_2);
       delta_ra  = (ra_2 - ra_center) * cos( dec_center);
       delta_dec = dec_2 - dec_center;
