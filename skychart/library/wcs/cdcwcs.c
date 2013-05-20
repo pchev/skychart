@@ -73,6 +73,8 @@ int wcsnum;
     fprintf (stderr, "Invalid header in image file %s\n", fn);
     return (1);
   }
+  sysout = 0;
+  eqout = 0.0;
   wcs[wcsnum] = GetFITSWCS (fn,header[wcsnum],verbose,&cra,&cdec,&dra,&ddec,&secpix,&wp, &hp, &sysout, &eqout); 
   if (nowcs (wcs[wcsnum])) {
     fprintf (stderr, "No WCS in image file %s\n", fn);
