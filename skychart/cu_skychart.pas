@@ -2993,6 +2993,7 @@ var hsx,hsy,x,y,xx2,yy2 :single;
     p,p2: PBGRAPixel;
     ok:boolean;
     p2line,p2col: boolean;
+    mi: byte;
 begin
 ok:=false;
 hsx:=(horizonpicture.Width-1)/360;
@@ -3041,8 +3042,15 @@ for i:=startline to endline do begin
            y:=hsy-hsx*h*rad2deg;
         end;
       end;
-      if (x>=0)and(x<=horizonpicture.Width)and(y>=0)and(y<=horizonpicture.Height) then
-          col1:=horizonpicture.GetPixel(x,y,rfBestQuality)
+      if (x>=0)and(x<=horizonpicture.Width)and(y>=0)and(y<=horizonpicture.Height) then begin
+          col1:=horizonpicture.GetPixel(x,y,rfBestQuality);
+          if cfgsc.WhiteBg then begin
+            mi:=MaxIntValue([col1.red,col1.blue,col1.green]);
+            col1.red:=mi;
+            col1.green:=mi;
+            col1.blue:=mi;
+          end;
+      end
       else if h>0 then col1:=BGRAPixelTransparent
       else col1:=col2;
       p[j]:=col1;
