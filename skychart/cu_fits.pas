@@ -913,8 +913,8 @@ p.ra:=rad2deg*ra;
 p.dec:=rad2deg*de;
 cdcwcs_sky2xy(addr(p),wcsnum);
 if p.n=0 then begin
-  x:=round(p.x);
-  y:=round(p.y);
+  x:=round(p.x-0.5);
+  y:=round(p.y+0.5);
 end else begin
   x:=-1;
   y:=-1;
