@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-#include <string.h>
 #include <math.h>
 #include <time.h>
+#include <string.h>
 
 #if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
 #define UNIX
@@ -27,11 +27,13 @@
 #include "new.h"
 #endif
 
+#ifndef PI
 #define PI 3.14159265358979323
+#endif
 
 FILE *debug_file;
 
-int setup_header_from_text( HEADER *h, const char *header); /* platelst.c */
+int setup_header_from_text( HEADER *h, const char *_header); /* platelst.c */
 
 #ifndef _CONSOLE
 int my_new_handler( size_t size)
@@ -97,6 +99,7 @@ void DLL_FUNC remount_drive( const char *pDrive )
    printf( "Volume name: %s\n", c_file.name);
 #endif
 #else
+#if defined( __linux__) || defined( __unix__) || defined( __APPLE__)
  char szVolumeName[_MAX_PATH];   /* volume name buffer */
  char szFileSystemName[_MAX_PATH];  /* name of file system */
  DWORD dwMaxFilename;     /* max filename length */
@@ -112,7 +115,25 @@ void DLL_FUNC remount_drive( const char *pDrive )
         &dwFlags,
         szFileSystemName,
         _MAX_PATH );
-#endif
+#else
+ char szVolumeName[_MAX_PATH];   /* volume name buffer */
+ char szFileSystemName[_MAX_PATH];  /* name of file system */
+ DWORD dwMaxFilename;     /* max filename length */
+ DWORD dwFlags;       /* file system flags */
+
+ /* Read volume info. */
+
+ GetVolumeInformationA( pDrive,
+                    szVolumeName,
+        _MAX_PATH,
+        NULL,
+        &dwMaxFilename,
+        &dwFlags,
+        szFileSystemName,
+        _MAX_PATH );
+
+#endif	/* Unix/Windows */
+#endif	/* Watcom */
 }
 
 
@@ -133,7 +154,10 @@ int DLL_FUNC get_environment_data( ENVIRONMENT_DATA *edata, const char *filename
    if( !ifile)
       return( DSS_IMG_ERR_OPEN_EDATA);
    strcpy( edata->plate_list_name, "Hi_comp.lis");
+
+   /* Set to 2,4,... for testing if desired. */
    edata->subsamp = 1;
+
    edata->low_contrast = 1500;
    edata->high_contrast = 12000;
    edata->szDrive[0] = '\0';            /*fix2001-12-06mn*/
@@ -296,20 +320,25 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 ** June 5 1999
 ** Add WCS keywords
 **/
-/*
- * Changed the datatype of crpix1 and crpix2 to float to agree with
- * getImage 3.0 software, and fixed calculations for image center
- * to be the center of the middle pixel for odd numbers of pixels,
- * and to be the boundary separating the two middle pixels for even rows.
- * 30-April-2013
- * Skip Gaede
-**/
 /* 28 Aug 2006:  Wouter van Reeven pointed out that the output isn't    */
 /* necessarily a multiple of 2880 bytes long,  and that it ought to be  */
 /* padded to bring it up to size.  He's right,  of course,  though few  */
 /* programs are insistent on this point,  and plenty of FITS files just */
 /* stop when the data's done... still,  it's easy enough to do this     */
 /* correctly;  see code beginning at ' const short pad_word'.           */
+/*                                                                      */
+/* 2013-6-5 Han Kleijn=HK                                                */
+/* Changed the datatype of crpix1 and crpix2 to float and revised           */
+/* the old WCS and new WCS calculation to be accurate on sub pixel level    */
+/* for subsample=1 but also for subsample=2,4 ....					        */
+/* Brought the CRPIX1, 2 value to exact centre.								*/
+/* Corrected for difference in origin for plate postion at (0.0,0.0) and    */
+/* FITS origin at (0.5,0.5). This introduced in previous versions a 1.7/2   */ 
+/* arc seconds error in the WCS RA or DEC readings.                         */
+/* Note that calls to AMDPOS are based on plate coordinates with origin     */
+/* (0.0,0.0)  and not on FITS coordinates with origin (0.5,0.5)             */
+/* Included the correct cos and sin corrections in CD matrix calculation    */
+ 
 
 #define N_ADDED_LINES 20
 #ifdef __WATCOMC__
@@ -319,6 +348,50 @@ int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline)
 #endif
 
 long times[20];
+
+#ifdef FIX_3DIGIT_EXPS
+
+char *sptr;
+
+/* Use the following for space instead of + sign */
+// sprintf( bptr,"%s  = %s%19.12E", keyword, ((val) >= 0.0) ? " " : "", (val));
+ #define dss_sprintf_E19_12(bptr, keyword, val)\
+	sprintf( bptr,"%s  = %+19.12E", keyword, (val));\
+	sptr = strchr( strchr(bptr, '='),'E');\
+	sptr += 2; /* 1st char after E and sign */\
+	if ((strlen(sptr) == 3) && (*sptr == '0'))\
+	{\
+		*sptr = *(sptr+1); sptr++;\
+		*sptr = *(sptr+1); sptr++;\
+		*sptr = *(sptr+1); sptr++;\
+	}\
+	strcpy(tptr, bptr);\
+   tptr += 80
+
+ #define dss_fmt_2digitE(bptr, fmt, val)\
+	sprintf(bptr, fmt, (val));\
+	sptr = strchr( bptr,'E');\
+	sptr += 2; /* 1st char after E and sign */\
+	if ((strlen(sptr) == 3) && (*sptr == '0'))\
+	{\
+		*sptr = *(sptr+1); sptr++;\
+		*sptr = *(sptr+1); sptr++;\
+		*sptr = *(sptr+1); sptr++;\
+	}\
+
+#else /* FIX_3DIGIT */
+
+/* Use the following for space instead of + sign */
+//	sprintf( bptr,"%s  = %s%19.12E", keyword, ((val) >= 0.0) ? " " : "", (val));
+ #define dss_sprintf_E19_12(bptr, keyword, val)\
+	sprintf( bptr,"%s  = %+19.12E", keyword, (val));\
+	strcpy(tptr, bptr);\
+   tptr += 80
+
+ #define dss_fmt_2digitE(bptr, fmt, val)\
+	sprintf(bptr, fmt, (val));
+
+#endif /* FIX_3DIGIT */
 
 int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                                           const ENVIRONMENT_DATA *edata)
@@ -336,10 +409,11 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
    long *histogram, total_pixels;
    unsigned bins[100];
    int rval;
-   long t0;
-   double ra_center, dec_center, new_wcs_matrix[4] ;
-   /* 30-Apr-2013 Changed datatype from int to float match getImage 3.0 code: SG   */
    double crpix1, crpix2 ;
+   double ra_center, dec_center, cd[4];
+   long t0;
+	char str[30];
+	char *pstr = &(str[0]);
    time_t curr_t = time( NULL);
 
 #ifdef _WIN32
@@ -350,104 +424,119 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
 #endif
 #endif
 
-   dss_debug_printf( "Field is %d x %d pixels\n",
+	dss_debug_printf( "Field is %d x %d pixels\n",
                            xsize_out, ysize_out);
 
    strcpy( header, pdata->header_text);
 
    setup_header_from_text( &h, header);
    dss_debug_printf( "Header set up from text\n");
+
    xpixel_int = pdata->xpixel - xsize_out / 2;
    ypixel_int = pdata->ypixel - ysize_out / 2;
 
-            /* Round off for subsampling: */
-   xpixel_int -= xpixel_int % edata->subsamp;
-   ypixel_int -= ypixel_int % edata->subsamp;
-   if( edata->clip_image)
-      {
-      if( xpixel_int < 0)
-         {
-         xsize_out += xpixel_int;
-         xpixel_int = 0;
-         }
-      if( ypixel_int < 0)
-         {
-         ysize_out += ypixel_int;
-         ypixel_int = 0;
-         }
-      if( xpixel_int + xsize_out > 14000)
-         xsize_out = 14000 - xpixel_int;
-      if( ypixel_int + ysize_out > 14000)
-         ysize_out = 14000 - ypixel_int;
-      }
-
-   n_lines = strlen( header) / 80;
-
-   if( *edata->szDrive)
-      {
-      dss_debug_printf( "Gonna use plate %s on disk %d\n",
-                                      pdata->plate_name, pdata->cd_number);
-      sprintf( szPath, "%s.rsl", pdata->plate_name);
-      dss_debug_printf( "Hunting for file %s\n", szPath);
-      ifile = fopen( szPath, "rb");
-      if( ifile)
-         {
-         dss_debug_printf( "Using the .RSL file\n");
-         fclose( ifile);
-         }
-      else
-         {
-         /* try to find the .RSL at the szDrive location */
-         sprintf( szPath, "%s%s.rsl",edata->szDrive,pdata->plate_name);
-         dss_debug_printf( "Hunting for file %s\n", szPath);
-         ifile = fopen( szPath, "rb");
-         if( ifile)
-            {
-            dss_debug_printf( "Using .RSL file from path\n");
-            fclose( ifile);
-            }
-         else
-            {
-            remount_drive( edata->szDrive);
-               /* test to see if you can get the desired plate... */
-#ifdef  UNIX
-            sprintf( szPath, "%s/%s/%s.00", edata->szDrive,
-                                pdata->plate_name, pdata->plate_name);
-#else   /*UNIX*/
-            sprintf( szPath, "%s%s\\%s.00", edata->szDrive,
-                                pdata->plate_name, pdata->plate_name);
-#endif  /*UNIX*/
-            dss_debug_printf( "Hunting for file %s\n", szPath);
-            ifile = fopen( szPath, "rb");
-            if( ifile)
-               fclose( ifile);         /* already found the right one... */
-            else
-               {
-               free( header);
-#ifdef _WIN32
-#ifndef _CONSOLE
-               _set_new_handler( old_handler);
-#endif
-#endif
-               return( DSS_IMG_ERR_WRONG_CD);
-               }
-            }
-         }
-      }
-   dss_debug_printf( "Initializing the output FITS header\n");
-   tptr = strstr( header, "NAXIS1");
-   sprintf( tptr + 25, "%5d", xsize_out / edata->subsamp);
-   tptr[30] = ' ';
-   tptr = strstr( header, "NAXIS2");
-   sprintf( tptr + 25, "%5d", ysize_out / edata->subsamp);
-   tptr[30] = ' ';
-   tptr = strstr( header, "CNPIX1");
-   sprintf( tptr + 25, "%5d", xpixel_int);
-   tptr[30] = ' ';
+	dss_debug_printf( "Pre-initializing the output FITS header\n");
+	tptr = strstr( header, "NAXIS1");
+	sprintf( tptr + 25, "%5d", xsize_out );
+	tptr[30] = ' ';
+	tptr = strstr( header, "NAXIS2");
+	sprintf( tptr + 25, "%5d", ysize_out );
+	tptr[30] = ' ';
+	tptr = strstr( header, "CNPIX1");
+	sprintf( tptr + 25, "%5d", xpixel_int);
+	tptr[30] = ' ';
    tptr = strstr( header, "CNPIX2");
    sprintf( tptr + 25, "%5d", ypixel_int);
    tptr[30] = ' ';
 
+	/* Round off for subsampling now: */
+	xpixel_int -= xpixel_int % edata->subsamp;
+	ypixel_int -= ypixel_int % edata->subsamp;
+	if( edata->clip_image)
+   {
+		if( xpixel_int < 0)
+		{
+			xsize_out += xpixel_int;
+			xpixel_int = 0;
+		}
+		if( ypixel_int < 0)
+		{
+			ysize_out += ypixel_int;
+			ypixel_int = 0;
+		}
+		if( xpixel_int + xsize_out > 14000)
+			xsize_out = 14000 - xpixel_int;
+		if( ypixel_int + ysize_out > 14000)
+			ysize_out = 14000 - ypixel_int;
+	}
+   n_lines = strlen( header) / 80;
+
+   if( *edata->szDrive)
+   {
+      dss_debug_printf( "Gonna use plate %s on disk %d\n",
+                         pdata->plate_name, pdata->cd_number);
+      sprintf( szPath, "%s.rsl", pdata->plate_name);
+      dss_debug_printf( "Hunting for file %s\n", szPath);
+      ifile = fopen( szPath, "rb");
+      if( ifile)
+      {
+        	dss_debug_printf( "Using the .RSL file\n");
+        	fclose( ifile);
+      }
+      else
+      {
+        	/* try to find the .RSL at the szDrive location */
+        	sprintf( szPath, "%s%s.rsl",edata->szDrive,pdata->plate_name);
+        	dss_debug_printf( "Hunting for file %s\n", szPath);
+        	ifile = fopen( szPath, "rb");
+        	if( ifile)
+        	{
+           	dss_debug_printf( "Using .RSL file from path\n");
+           	fclose( ifile);
+        	}
+        	else
+        	{
+           	remount_drive( edata->szDrive);
+            /* test to see if you can get the desired plate... */
+#ifdef  UNIX
+           	sprintf( szPath, "%s/%s/%s.00", edata->szDrive,
+                     pdata->plate_name, pdata->plate_name);
+#else   /*UNIX*/
+           	sprintf( szPath, "%s%s\\%s.00", edata->szDrive,
+                     pdata->plate_name, pdata->plate_name);
+#endif  /*UNIX*/
+            dss_debug_printf( "Hunting for file %s\n", szPath);
+            ifile = fopen( szPath, "rb");
+            if( ifile)
+              	fclose( ifile);         /* already found the right one... */
+            else
+            {
+              	free( header);
+#ifdef _WIN32
+#ifndef _CONSOLE
+     				_set_new_handler( old_handler);
+#endif
+#endif
+               return( DSS_IMG_ERR_WRONG_CD);
+            }
+         }
+      }
+   }
+
+
+	dss_debug_printf( "Initializing the output FITS header\n");
+	tptr = strstr( header, "NAXIS1");
+	sprintf( tptr + 25, "%5d", xsize_out / edata->subsamp);
+	tptr[30] = ' ';
+	tptr = strstr( header, "NAXIS2");
+	sprintf( tptr + 25, "%5d", ysize_out / edata->subsamp);
+	tptr[30] = ' ';
+	tptr = strstr( header, "CNPIX1");
+	sprintf( tptr + 25, "%5d", xpixel_int);
+	tptr[30] = ' ';
+   tptr = strstr( header, "CNPIX2");
+   sprintf( tptr + 25, "%5d", ypixel_int);
+   tptr[30] = ' ';
    tptr = header + (n_lines - 1) * 80;
    if( edata->subsamp != 1)
       n_added_lines++;
@@ -459,10 +548,10 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                                 /* contrast lines and eight 'corners' lines */
    n_lines_written = ((n_lines + 35) / 36) * 36;
    if( *edata->output_file_name && *edata->szDrive)
-      {
+   {
       ofile = fopen( edata->output_file_name, "wb");
       if( !ofile)
-         {
+      {
          dss_debug_printf( "Couldn't open '%s'\n", edata->output_file_name);
 #ifdef _WIN32
 #ifndef _CONSOLE
@@ -470,14 +559,14 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
 #endif
 #endif
          return( DSS_IMG_ERR_OPEN_OUTPUT);
-         }
+      }
       fwrite( header, n_lines_written, 80, ofile);
       dss_debug_printf( "%d lines written to output file '%s'\n",
                      n_lines_written, edata->output_file_name);
       t0 = ZKEY_CLOCK;
       histogram = (long *)calloc( 65536, sizeof( long));
       if( !histogram)
-         {
+      {
          dss_debug_printf( "Couldn't allocate histogram data\n");
 #ifdef _CONSOLE
          printf( "Not enough memory to process this image!\n");
@@ -491,7 +580,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
 #endif
 #endif
          return( DSS_IMG_ERR_ALLOC_HISTOGRAM);
-         }
+      }
       else
          dss_debug_printf( "Histogram allocated\n");
       rval = grab_realsky_chunk( edata->szDrive, pdata->plate_name,
@@ -499,9 +588,9 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                xpixel_int + xsize_out,
                ypixel_int + ysize_out, ofile,
                edata->subsamp, histogram);
-//      times[4] += ZKEY_CLOCK - t0;
+      times[4] += ZKEY_CLOCK - t0;
       if( rval)
-         {
+      {
          dss_debug_printf( "Error code %d returned!\n", rval);
 #ifdef _CONSOLE
          printf( "Error code %d returned!\n", rval);
@@ -516,7 +605,7 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
 #endif
 #endif
          return( rval);
-         }
+      }
 
       dss_debug_printf( "Image successfully extracted\n");
       for( min_pixel_value = 0; !histogram[min_pixel_value]; min_pixel_value++)
@@ -527,14 +616,14 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       total_pixels = (long)xsize_out * (long)ysize_out;
       total_pixels /= (long)( edata->subsamp * edata->subsamp);
       for( i = 1; i < 65536; i++)
-         {
+      {
          int new_bin;
 
          histogram[i] += histogram[i - 1];
          new_bin = (int)( histogram[i] * 100L / total_pixels);
          while( curr_bin < new_bin)
             bins[curr_bin++] = i;
-         }
+      }
       free( histogram);
 
       sprintf( tptr, "DATAMAX =                %5d /Maximum data value",
@@ -543,24 +632,25 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       sprintf( tptr, "DATAMIN =                %5d /Minimum data value",
                min_pixel_value);
       tptr += 80;
-      }
+   }
    else
       ofile = NULL;
 
    if( edata->add_line_to_realsky_dot_dat)
-      {
+   {
       img_data_file = fopen( "realsky.dat", "a");  /* ...in TEXT mode.. */
       fprintf( img_data_file, " ");
-      }
+   }
    else
       img_data_file = NULL;
 
    for( i = 0; i < 4; i++)
-      {
+   {
       double ra_corner, dec_corner;
 
-      amdpos( &h, (double)( xpixel_int + ((i & 1) ? xsize_out : 0)),
-                  (double)( ypixel_int + ((i < 2) ? ysize_out : 0)),
+
+      amdpos( &h, (double)( xpixel_int  + ((i & 1) ? xsize_out : 0)),
+                  (double)( ypixel_int  + ((i < 2) ? ysize_out : 0)),
                   &ra_corner, &dec_corner);
       sprintf( tptr, "CORN%dRA = %11.9lf", i + 1, ra_corner * 180 / PI);
       tptr += 80;
@@ -569,18 +659,18 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       if( img_data_file)
          fprintf( img_data_file, "%8.4lf %8.4lf  ",
                   ra_corner * 180. / PI, dec_corner * 180 / PI);
-      }
+   }
    if( img_data_file)
-      {
+   {
       int is_gif = (strstr( edata->output_file_name, ".gif") != NULL);
 
       if( is_gif)
          n_lines_written = 0;
       else if( !*edata->szDrive)       /* read the FITS file to find out */
-         {                             /* the real header size */
+      {											/* the real header size */
          ifile = fopen( edata->output_file_name, "rb");
          if( ifile)
-            {
+         {
             char buff[80];
 
             n_lines_written = 0;
@@ -589,8 +679,8 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                n_lines_written++;
             fclose( ifile);
             n_lines_written = ((n_lines_written + 35) / 36) * 36;
-            }
          }
+      }
 
       fprintf( img_data_file, "%5u %5u  %5d %5d %9ld 1 %s\n",
                edata->low_contrast, edata->high_contrast,
@@ -598,87 +688,114 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
                ysize_out / edata->subsamp,
                (long)n_lines_written * 80L, edata->output_file_name);
       fclose( img_data_file);
-      }
+   }
 
    for( i = 0; i < 10; i++, tptr += 80)
-      {
+   {
       int j;
 
       sprintf( tptr, "CONTRAS%d =", i);
       for( j = 0; j < 10; j++)
          sprintf( tptr + 10 + j * 6, "%6u", bins[j + i * 10]);
-      }
+   }
    if( edata->subsamp != 1)
-      {
+   {
       sprintf( tptr, "SUBSAMP = %11d", edata->subsamp);
       tptr += 80;
-      }
+   }
 
    /* "AIPS like" WCS keywords ( first approximation ) */
-   sprintf( tptr, "COMMENT   Simplified WCS added for use with standard image processing system");
+   sprintf( tptr, "COMMENT   Simple WCS added for use with standard image processing system");
    tptr += 80;
-   sprintf( tptr, "RADESYS = 'FK5 '");
-   tptr += 80;
-   sprintf( tptr, "EQUINOX = 2000.0");
-   tptr += 80;
-   /* 30-Apr-2013 Converted to floating point: SG     reference pixel at center */
-   crpix1 = (double)( xsize_out + 1) / (double)( edata->subsamp * 2);
-   crpix2 = (double)( ysize_out + 1) / (double)( edata->subsamp * 2);
-   sprintf( tptr, "CTYPE1  = 'RA---TAN'");
-   tptr += 80;
-   sprintf( tptr, "CTYPE2  = 'DEC--TAN'");
-   tptr += 80;
-                        /* true pixel center if subsampling: */
-   amdpos( &h, (double)xpixel_int + crpix1 * (double) edata->subsamp + (double)( edata->subsamp) / 2,
-               (double)ypixel_int + crpix2 * (double) edata->subsamp - (double)( edata->subsamp) / 2,
-               &ra_center, &dec_center);
-   sprintf( tptr, "CRVAL1  = %11.9lf", ra_center * 180 / PI);
-   tptr += 80;
-   sprintf( tptr, "CRVAL2  = %11.9lf", dec_center * 180 / PI);
-   tptr += 80;
-               /* 20 Dec 2001:  added .5 to x, 1 to y:  BJG */
-              /* 30 Apr 2013:  use floating point solution: SG */
+  	sprintf( tptr, "RADESYS = 'FK5 '");
+  	tptr += 80;
+  	sprintf( tptr, "EQUINOX = 2000.0");
+  	tptr += 80;
+  	sprintf( tptr, "CTYPE1  = 'RA---TAN'");
+  	tptr += 80;
+  	sprintf( tptr, "CTYPE2  = 'DEC--TAN'");
+  	tptr += 80;
 
-   sprintf( tptr, "CRPIX1  = %12.6f", crpix1);
+   // 04 june-2013,HK  several corrections to prevent 0.5 pixel errors due to plate coordinate system with left bottom corner at (0.0,0.0) 
+   //                                                                   versus FITS coordinate system with left bottom corner at (0.5,0.5)
+   // 04 june-2013,HK  Note AMDPOS is using plate coordinate system with left bottom at (0,0)
+   // 2013-6-5, HK: enter 2 with decimals 2.0000 to force compiler to use float instead of integer
+    amdpos( &h, (double)xpixel_int + (double) (xsize_out/ 2.0000),
+                (double)ypixel_int + (double) (ysize_out/ 2.0000),
+                &ra_center, &dec_center);
+
+   
+	dss_sprintf_E19_12( pstr,"CRVAL1", ra_center * 180.0 / PI);
+	dss_sprintf_E19_12( pstr,"CRVAL2", dec_center * 180.0 / PI);
+ 
+   // HK: Calculate FITS centre for FITS coordinate system with left bottom at (0.5, 0.5)
+   crpix1 = 0.5 + (double)( xsize_out ) / (double)( edata->subsamp * 2);
+   crpix2 = 0.5 + (double)( ysize_out ) / (double)( edata->subsamp * 2);
+ 
+   sprintf( tptr, "CRPIX1  = %12.6lf", crpix1);
    tptr += 80;
-   sprintf( tptr, "CRPIX2  = %12.6f", crpix2);
+   sprintf( tptr, "CRPIX2  = %12.6lf", crpix2);
    tptr += 80;
    /* hard to convert polynomial plate solution directly to rotation.
       use very simple but efficient method to find rotation at image center.
       1 pixel -> 1.7 arcseconds we can ignore safely spherical effects.
       Check out one pixel just to the left and one just above the crpix: */
-   for( i = 0; i < 2; i++)
-      {
-      double ra_2, dec_2, crota, delta_ra, delta_dec, dist;
+   // 05 june-2013,HK, WCS calculation heavily modified to add missing cos and sin terms in the CD matrix calculation. 
+   //                  Corrected for orgin error by using plate coordinate system with 0,0 origin for centre calculation.
 
-      amdpos( &h, (double)xpixel_int + ( crpix1+(double)(1 - i) ) * (double) edata->subsamp  + (double)( edata->subsamp) / 2,
-                  (double)ypixel_int + ( crpix2+(double)i ) * (double) edata->subsamp  - (double)( edata->subsamp) / 2,
-                  &ra_2, &dec_2);
-      delta_ra  = (ra_2 - ra_center) * cos( dec_center);
-      delta_dec = dec_2 - dec_center;
-      dist = sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
-      if( !i)     /* CDELT1 is negative... don't really understand why */
-         dist = -dist;
-      sprintf( tptr, "CDELT%d  = %21.13E", i + 1, (180. / PI) * dist);
-      tptr += 80;
-      crota = -atan2( delta_ra, delta_dec);
-      if( !i)
-         crota -= PI / 2.;
-      sprintf( tptr, "CROTA%d  = %11.9lf", i + 1, crota * 180 / PI);
-      tptr += 80;
-      new_wcs_matrix[i * 2    ] = delta_ra * 180. / PI;
-      new_wcs_matrix[i * 2 + 1] = delta_dec * 180. / PI;
-      }
+   double ra_2, dec_2, crota1, crota2, delta_ra, delta_dec, cdelt1,cdelt2;
+
+   // 2013-6-5, HK: enter "2" with decimals as 2.0000 to force compiler to use float instead of integer. 
+   //           Otherwise Microsoft compiler v6 skips half pixels for uneven values of xsize_out when >=391   
+   amdpos( &h, (double)( xpixel_int)  +  (double)( xsize_out) / 2.0000 - 1.0,
+               (double)( ypixel_int)  +  (double)( ysize_out) / 2.0000,
+                &ra_2, &dec_2);
+
+   // HK: this doesn't work around ra=0 and dec=+ or -90 but practically no problem
+   delta_ra  = (ra_2 - ra_center) * cos( dec_center);
+   delta_dec = dec_2 - dec_center;
+    
+   cdelt1 = -(double) edata->subsamp * sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
+
+   dss_sprintf_E19_12( pstr, "CDELT1", cdelt1 * 180.0 / PI);
+
+   crota1 = atan2( delta_dec, delta_ra);
+   dss_sprintf_E19_12( pstr, "CROTA1", crota1 * 180.0 / PI);
+
+   // 2013-6-5, HK: enter "2" with decimals as 2.0000 to force compiler to use float instead of integer. 
+   //           Otherwise Microsoft compiler v6 skips half pixels for uneven values of xsize_out when >=391   
+   amdpos( &h, (double)( xpixel_int)  +  (double)( xsize_out) / 2.0000,
+               (double)( ypixel_int)  +  (double)( ysize_out) / 2.0000 + 1.0,
+                &ra_2, &dec_2);
+
+   delta_ra  = (ra_2 - ra_center) * cos( dec_center);
+   delta_dec = dec_2 - dec_center;
+   cdelt2 = (double) edata->subsamp * sqrt( delta_ra * delta_ra + delta_dec * delta_dec);
+
+   dss_sprintf_E19_12( pstr, "CDELT2", cdelt2 * 180.0 / PI); 
+		
+   crota2 = -atan2( delta_ra, delta_dec);
+	
+   dss_sprintf_E19_12( pstr, "CROTA2", crota2 * 180.0 / PI);
    /* end old-style WCS keywords */
-   /* begin new-style WCS keywords: */
-   for( i = 0; i < 4; i++)
-      {
-      sprintf( tptr, "CD%d_%d   = %21.13E", (i / 2) + 1, (i % 2) + 1,
-                             new_wcs_matrix[i]);
-      tptr += 80;
-      }
 
-         /* 19 Dec 2001:  added two header lines for date/time and version. */
+
+   /* begin new-style WCS keywords: */
+   cd[0] = +cdelt1 * (180 / PI) * + cos (crota1); //cd1_1, note cdelt1 & cdelt2 should be in degrees.
+   cd[1] = +cdelt2 * (180 / PI) * - sin (crota1); //cd1_2
+
+   cd[2] = +cdelt1 * (180 / PI) * + sin (crota2); //cd2_1
+   cd[3] = +cdelt2 * (180 / PI) * + cos (crota2); //cd2_2
+	
+   for( i = 0; i < 4; i++)
+   {					
+      // 2013-6-5 HK:, don't make the floats too long, maximum 20 equals 19 plus sign. Otherwise in header comment area
+      dss_fmt_2digitE( pstr, "%+19.12E", cd[i]);
+		sprintf( tptr, "CD%d_%d   = %s", (i / 2) + 1, (i % 2) + 1, pstr);
+      tptr += 80;
+   }
+
+   /* 19 Dec 2001:  added two header lines for date/time and version. */
    sprintf( tptr, "COMMENT   Extracted with Get_DSS library %s %s",
                                        __DATE__, __TIME__);
    tptr += 80;
@@ -691,21 +808,21 @@ int DLL_FUNC extract_realsky_as_fits( const PLATE_DATA *pdata,
       if( !header[i])
          header[i] = ' ';
    if( ofile)
-      {
+   {
       const short pad_word = 0;
       long n_pad_bytes = 2880 - ftell( ofile) % 2880;
 
       if( n_pad_bytes == 2880)      /* we came out even after all */
          n_pad_bytes = 0;
       while( n_pad_bytes)
-         {
+      {
          fwrite( &pad_word, 1, sizeof( pad_word), ofile);
          n_pad_bytes -= sizeof( pad_word);      /* i.e,  two bytes */
-         }
+      }
       fseek( ofile, 0L, SEEK_SET);        /* go back to redo the header */
       fwrite( header, n_lines_written, 80, ofile);
       fclose( ofile);
-      }
+   }
    free( header);
 #ifdef _WIN32
 #ifndef _CONSOLE
