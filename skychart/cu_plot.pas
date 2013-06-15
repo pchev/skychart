@@ -347,17 +347,28 @@ end;
 
 Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
 var xmin,xmax,ymin,ymax: integer;
+    c: TBGRAPixel;
 begin
-  if (not cfgplot.UseBMP)and((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
+if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
+  xmin:=0; ymin:=0;
+  xmax:=cfgchart.width;
+  ymax:=cfgchart.height;
+  if cfgplot.UseBMP then begin
+     c:=ColorToBGRA(clWhite,0);
+     cbmp.Rectangle(xmin,ymin,xmin+LeftMargin,ymax,c,c,dmSet);
+     cbmp.Rectangle(xmax-RightMargin,ymin,xmax,ymax,c,c,dmSet);
+     cbmp.Rectangle(xmin,ymin,xmax,ymin+TopMargin,c,c,dmSet);
+     cbmp.Rectangle(xmin,ymax-BottomMargin,xmax,ymax,c,c,dmSet);
+     c:=ColorToBGRA(clBlack,0);
+     cbmp.Rectangle(xmin+LeftMargin,ymin+TopMargin,xmax-RightMargin,ymax-BottomMargin,c,dmSet);
+  end
+  else begin
        if cnv<>nil then with cnv do begin
         Pen.Color := clWhite;
         Pen.Width := 1;
         Pen.Mode := pmCopy;
         Brush.Color := clWhite;
         Brush.Style := bsSolid;
-        xmin:=0; ymin:=0;
-        xmax:=cfgchart.width;
-        ymax:=cfgchart.height;
         Rectangle(xmin,ymin,xmin+LeftMargin,ymax);
         Rectangle(xmax-RightMargin,ymin,xmax,ymax);
         Rectangle(xmin,ymin,xmax,ymin+TopMargin);
@@ -375,6 +386,7 @@ begin
         lineto(xmin+LeftMargin,ymin+TopMargin);
       end;
   end;
+end;
 end;
 
 procedure TSplot.InitXPlanetRender;
