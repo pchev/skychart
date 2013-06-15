@@ -1239,10 +1239,10 @@ try
      sc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
      sc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
      sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
-     sc.cfgsc.LeftMargin:=0;
-     sc.cfgsc.RightMargin:=0;   // No margin on bitmap file
-     sc.cfgsc.TopMargin:=0;
-     sc.cfgsc.BottomMargin:=0;
+     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
+     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
+     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
+     sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
      sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
      sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
      sc.plot.init(w,h);
