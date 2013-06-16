@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-05-12 10:01+0000\n"
-"PO-Revision-Date: 2013-05-05 16:15+0000\n"
+"PO-Revision-Date: 2013-06-07 17:18+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-12 10:12+0000\n"
-"X-Generator: Launchpad (build 16598)\n"
+"X-Launchpad-Export-Date: 2013-06-16 08:52+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -1907,7 +1907,7 @@ msgstr "Pliku nie odnaleziono!"
 
 #: u_translation.rsfilespath
 msgid "Files path"
-msgstr "Ścieżka dostępu plików"
+msgstr "Ścieżka dostępu"
 
 #: u_translation.rsfill
 msgid "Fill?"
@@ -2971,7 +2971,7 @@ msgstr "Różne linie"
 
 #: u_translation.rsmodebuttonsi
 msgid "Mode Button Simulator"
-msgstr ""
+msgstr "Symulator trybu"
 
 #: u_translation.rsmodel
 msgid "Model"
@@ -3511,7 +3511,7 @@ msgstr "Ścieżka"
 
 #: u_translation.rspathtosaveth
 msgid "Path to save the file:"
-msgstr "Ścieżka do zapisu pliku:"
+msgstr "Ścieżka zapisu:"
 
 #: u_translation.rspathwidth
 msgid "Path width"
@@ -4859,7 +4859,7 @@ msgstr "Początek"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr ""
+msgstr "Początek wykresu od lokalnego południa"
 
 #: u_translation.rsstartmonth
 msgid "Start month"
