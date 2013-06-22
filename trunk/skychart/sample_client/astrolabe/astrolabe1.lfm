@@ -192,20 +192,26 @@ object f_astrolabe: Tf_astrolabe
   object ExitTimer: TTimer
     Enabled = False
     OnTimer = ExitTimerTimer
-    left = 160
+    left = 152
     top = 384
   end
   object PosTimer: TTimer
     Enabled = False
     Interval = 100
     OnTimer = PosTimerTimer
-    left = 240
+    left = 232
     top = 384
   end
   object TimerHide: TTimer
     Enabled = False
     OnTimer = TimerHideTimer
-    left = 304
+    left = 296
     top = 384
+  end
+  object TimerBlankScreen: TTimer
+    Enabled = False
+    OnTimer = TimerBlankScreenTimer
+    left = 56
+    top = 328
   end
 end
