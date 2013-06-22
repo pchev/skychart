@@ -253,6 +253,7 @@ begin
 end;
 
 procedure Tf_planetinfo.RefreshInfo;
+var yy: integer;
 begin
 if (ActivePage=PageControl1.ActivePageIndex) and
    (ActiveDate=trunc(config.CurJDTT)) and
@@ -272,8 +273,14 @@ plbmp.Fill(ColorToBGRA(clBlack));
 TextZoom:=TabSheet1.ClientWidth/800;
 xmin:=round(marginleft*TextZoom);
 xmax:=plbmp.Width-round(marginright*TextZoom);
-ymin:=margintop;
-ymax:=plbmp.Height-marginbottom;
+if  PageControl1.ClientWidth>PageControl1.ClientHeight then begin
+  ymin:=margintop;
+  ymax:=plbmp.Height-marginbottom;
+end else begin
+  yy:=(PageControl1.ClientHeight-PageControl1.ClientWidth) div 2;
+  ymin:=margintop+yy;
+  ymax:=plbmp.Height-marginbottom-yy;
+end;
 ActivePage:=PageControl1.ActivePageIndex;
 ActiveDate:=trunc(config.CurJDTT);
 ActiveNoon:=CenterAtNoon;
