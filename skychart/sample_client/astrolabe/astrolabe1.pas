@@ -70,6 +70,7 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     PosTimer: TTimer;
+    TimerBlankScreen: TTimer;
     TimerHide: TTimer;
     TrackBarH: TTrackBar;
     TrackBarD: TTrackBar;
@@ -82,16 +83,18 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure PosTimerTimer(Sender: TObject);
+    procedure TimerBlankScreenTimer(Sender: TObject);
     procedure TimerHideTimer(Sender: TObject);
   private
     { Private declarations }
     ServerIPaddr,ServerIPport: string;
     CdCfound, StartCDC,Connecting,Closing,Restarting : boolean;
-    ConnectRetry: integer;
+    ConnectRetry, ScreenTimeout: integer;
     LastPosX, LastPosY, LastMenu, InactiveLoop: integer;
     EncoderX,EncoderY : integer;
     card: SmallInt;
     RealEncoder:boolean;
+    ScreenOn: boolean;
     cmdarg:Tstringlist;
     Function  GetTcpPort:string;
     procedure GetCdCInfo;
@@ -104,6 +107,7 @@ type
     procedure Restart;
     procedure GetEncoder;
     function InitEncoder: boolean;
+    procedure TurnScreen(onoff:boolean);
   public
     { Public declarations }
     {$ifndef astrolabe_static}
@@ -245,6 +249,7 @@ if FileExists(daskconfig) then begin
     cardNum   := inif.ReadInteger('dask', 'number', cardNum);
     Hoffset   := inif.ReadInteger('encoder', 'Hoffset', Hoffset);
     Doffset   := inif.ReadInteger('encoder', 'Doffset', Doffset);
+    ScreenTimeout:=inif.ReadInteger('screen', 'ScreenTimeout', ScreenTimeout);
   finally
     inif.Free;
   end;
@@ -443,6 +448,7 @@ if not Closing then begin
   Action:=caNone;
 end;
 {$endif}
+if not ScreenOn then TurnScreen(true);
 end;
 
 procedure Tf_astrolabe.FormCreate(Sender: TObject);
@@ -452,6 +458,8 @@ DefaultFormatSettings.DecimalSeparator:='.';
 DefaultFormatSettings.ThousandSeparator:=',';
 DefaultFormatSettings.DateSeparator:='/';
 DefaultFormatSettings.TimeSeparator:=':';
+ScreenTimeout:=-1;
+ScreenOn:=true;
 GetCdCInfo;
 GetDaskInfo;
 edit1.Text:=ServerIPaddr;
@@ -514,6 +522,10 @@ end;
 procedure Tf_astrolabe.FormShow(Sender: TObject);
 begin
 TimerHide.Enabled:=true;
+if ScreenTimeout>0 then begin
+  TimerBlankScreen.Interval:=1000*ScreenTimeout;
+  TimerBlankScreen.Enabled:=true;
+end;
 end;
 
 procedure Tf_astrolabe.Init;
@@ -612,6 +624,14 @@ try
 PosTimer.Enabled:=false;
 inc(InactiveLoop);
 GetEncoder;
+if (ScreenTimeout>0) and
+   ((EncoderX<>LastPosX) or
+   (EncoderY<>LastPosY))
+  then begin
+    TimerBlankScreen.Enabled:=false;
+    TimerBlankScreen.Enabled:=true;
+    if not ScreenOn then TurnScreen(true);
+end;
 inactivity:=(InactiveLoop*PosTimer.Interval/1000>60);
 if (EncoderX<>LastPosX)or           // moved AH coder
   (EncoderY<>LastPosY) or           // moved Dec coder
@@ -662,6 +682,29 @@ card:=Register_Card(cardModel, cardNum);
 result:=card>=0;
 {$else}
 result:=false;
+{$endif}
+end;
+
+procedure Tf_astrolabe.TimerBlankScreenTimer(Sender: TObject);
+begin
+TurnScreen(false);
+end;
+
+procedure Tf_astrolabe.TurnScreen(onoff:boolean);
+const SC_MONITORPOWER = $F170;
+      WM_SYSCOMMAND = $0112;
+      MONITOR_ON = -1;
+      MONITOR_OFF = 2;
+begin
+{$ifdef mswindows}
+if onoff then begin
+ ScreenOn:=true;
+ SendMessage(f_astrolabe.Handle,WM_SYSCOMMAND, SC_MONITORPOWER, MONITOR_ON);
+end else begin
+  ScreenOn:=false;
+  SendMessage(f_astrolabe.Handle,WM_SYSCOMMAND, SC_MONITORPOWER, MONITOR_OFF);
+end;
+Application.ProcessMessages;
 {$endif}
 end;
 

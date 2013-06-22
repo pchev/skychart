@@ -2185,7 +2185,7 @@ end else begin
      end else
        SaveDefault;
   end else begin
-     if not NeedRestart then SaveQuickSearch(configfile);
+     if (not NeedRestart)and(not cfgm.KioskMode) then SaveQuickSearch(configfile);
   end;
   if Action<>caNone then begin
     {$ifdef mswindows}
