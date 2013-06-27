@@ -49,14 +49,14 @@ echo $lastrev ' - ' $currentrev
 if [[ $lastrev -ne $currentrev ]]; then
 
 # delete old files
-  rm skychart*.bz2
+  rm skychart*.xz
   rm skychart*.deb
   rm skychart*.rpm
   rm skychart*.zip
   rm skychart*.exe
   rm update-bin-*.zip
   rm bin-*.zip
-  rm bin-*.bz2
+  rm bin-*.xz
   rm -rf $builddir
 
 # make Linux i386 version
@@ -77,9 +77,9 @@ if [[ $make_linux32 ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvjf skychart-$version-$currentrev-linux_i386.tar.bz2 skychart
+  tar cvJf skychart-$version-$currentrev-linux_i386.tar.xz skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv skychart*.tar.bz2 $wd
+  mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # deb
   cd $wd
@@ -92,7 +92,7 @@ if [[ $make_linux32 ]]; then
   cp $wd/system_integration/Linux/bin/skychart debian/skychart/usr/bin/skychart
   cd debian
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart/DEBIAN/control
-  fakeroot dpkg-deb --build skychart .
+  fakeroot dpkg-deb -Zxz --build skychart .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -106,7 +106,7 @@ if [[ $make_linux32 ]]; then
   cd rpm
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart.spec
-  setarch i386 fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" --define "_topdir $builddir/rpm/" -bb SPECS/skychart.spec
+  setarch i386 fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" --define "_topdir $builddir/rpm/" --define "_binary_payload w7.xzdio" -bb SPECS/skychart.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/i386/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -123,9 +123,9 @@ if [[ $make_linux32 ]]; then
   cp varobs/varobs $builddir/debug/
   cp varobs/varobs_lpv_bulletin $builddir/debug/
   cd $builddir
-  tar cvjf bin-linux_i386-debug-$currentrev.tar.bz2 debug
+  tar cvJf bin-linux_i386-debug-$currentrev.tar.xz debug
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.bz2 $wd
+  mv bin-*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
@@ -150,9 +150,9 @@ if [[ $make_linux64 ]]; then
   # tar
   cd $builddir
   cd ..
-  tar cvjf skychart-$version-$currentrev-linux_x86_64.tar.bz2 skychart
+  tar cvJf skychart-$version-$currentrev-linux_x86_64.tar.xz skychart
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv skychart*.tar.bz2 $wd
+  mv skychart*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
   # deb
   cd $wd
@@ -165,7 +165,7 @@ if [[ $make_linux64 ]]; then
   cp $wd/system_integration/Linux/bin/skychart debian/skychart64/usr/bin/skychart
   cd debian
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart64/DEBIAN/control
-  fakeroot dpkg-deb --build skychart64 .
+  fakeroot dpkg-deb -Zxz --build skychart64 .
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv skychart*.deb $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -182,7 +182,7 @@ if [[ $make_linux64 ]]; then
   sed -i "/Version:/ s/3/$version/"  SPECS/skychart64.spec
   sed -i "/Release:/ s/1/$currentrev/" SPECS/skychart64.spec
 # rpm 4.7
-  fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" --define "_topdir $builddir/rpm/" -bb SPECS/skychart64.spec
+  fakeroot rpmbuild  --buildroot "$builddir/rpm/skychart" --define "_topdir $builddir/rpm/" --define "_binary_payload w7.xzdio"  -bb SPECS/skychart64.spec
   if [[ $? -ne 0 ]]; then exit 1;fi
   mv RPMS/x86_64/skychart*.rpm $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -199,9 +199,9 @@ if [[ $make_linux64 ]]; then
   cp varobs/varobs $builddir/debug/
   cp varobs/varobs_lpv_bulletin $builddir/debug/
   cd $builddir
-  tar cvjf bin-linux_x86_64-debug-$currentrev.tar.bz2 debug
+  tar cvJf bin-linux_x86_64-debug-$currentrev.tar.xz debug
   if [[ $? -ne 0 ]]; then exit 1;fi
-  mv bin-*.tar.bz2 $wd
+  mv bin-*.tar.xz $wd
   if [[ $? -ne 0 ]]; then exit 1;fi
 
   cd $wd
