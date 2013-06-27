@@ -2,7 +2,7 @@
 
 # Script to make the full source tar for release
 
-version=3.7
+version=3.9
 pkg=trunk
 #pkg=tags/V36
 repo=http://svn.code.sf.net/p/skychart/code
@@ -38,9 +38,9 @@ wget http://sourceforge.net/projects/skychart/files/4-source_data/data_jpleph.tg
 cd -
 
 # tar files
-tar cvjf $verdir.tar.bz2 $verdir
+tar cvJf $verdir.tar.xz $verdir
 
-mv $verdir.tar.bz2 $wd/
+mv $verdir.tar.xz $wd/
 
 cd $wd
 rm -rf $builddir
