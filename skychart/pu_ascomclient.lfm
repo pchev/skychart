@@ -159,7 +159,7 @@ object pop_scope: Tpop_scope
       Left = 26
       Height = 16
       Top = 10
-      Width = 19
+      Width = 20
       Caption = 'RA '
       ParentColor = False
     end
@@ -175,7 +175,7 @@ object pop_scope: Tpop_scope
       Left = 26
       Height = 16
       Top = 34
-      Width = 15
+      Width = 16
       Caption = 'AZ'
       ParentColor = False
     end

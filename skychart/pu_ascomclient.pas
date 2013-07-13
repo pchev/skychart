@@ -566,22 +566,14 @@ try
     V := CreateOleObject('DriverHelper.Chooser');
   end;
   V.DeviceType:=widestring('Telescope');
-  {$ifdef  win64}
-  edit1.text:=V.Choose('');
-  {$else}
-  edit1.text:=V.Choose(widestring(edit1.text));
-  {$endif}
+  edit1.text:=widestring(V.Choose(widestring(edit1.text)));
   V:=Unassigned;
   SaveConfig;
   UpdTrackingButton;
   except
     on E: Exception do begin
       err:='ASCOM exception:'+E.Message;
-     {$ifdef  win64}
-      Showmessage(err+crlf+'The ASCOM telescope chooser do not work well with a 64 bits application.'+crlf+'Please configure your telescope in POTH.Telescope until this is fixed.');
-     {$else}
       Showmessage(err+crlf+rsPleaseEnsure+crlf+Format(rsSeeHttpAscom,['http://ascom-standards.org']));
-     {$endif}
     end;
   end;
 {$endif}

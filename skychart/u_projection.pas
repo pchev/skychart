@@ -75,7 +75,7 @@ procedure nutationme(j:double; var nutl,nuto:double);
 procedure aberrationme(j:double; var abe,abp:double);
 procedure apparent_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
 procedure apparent_equatorialV(var p1:coordvector; c: Tconf_skychart; aberration,lightdeflection:boolean);
-procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration,lightdeflection:boolean);
+procedure mean_equatorial(var ra,de:double; c: Tconf_skychart; aberration:boolean=true; lightdeflection:boolean=true);
 Procedure StarParallax(var ra,de:double; px:double; eb: coordvector);
 Procedure Ecl2Eq(l,b,e: double; var ar,de : double);
 Procedure Eq2Ecl(ar,de,e: double; var l,b: double);
