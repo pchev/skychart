@@ -276,6 +276,122 @@ object f_chart: Tf_chart
     end
     object MenuFinderCircle: TMenuItem
       Caption = 'Finder Circle'
+      object SelectCircle: TMenuItem
+        Caption = 'Select Circle'
+        object MenuCircle1: TMenuItem
+          Tag = 1
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle2: TMenuItem
+          Tag = 2
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle3: TMenuItem
+          Tag = 3
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle4: TMenuItem
+          Tag = 4
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle5: TMenuItem
+          Tag = 5
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle6: TMenuItem
+          Tag = 6
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle7: TMenuItem
+          Tag = 7
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle8: TMenuItem
+          Tag = 8
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle9: TMenuItem
+          Tag = 9
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+        object MenuCircle10: TMenuItem
+          Tag = 10
+          ShowAlwaysCheckable = True
+          OnClick = MenuCircleClick
+        end
+      end
+      object SelectRectangle: TMenuItem
+        Caption = 'Select Rectangle'
+        object MenuRectangle1: TMenuItem
+          Tag = 1
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle2: TMenuItem
+          Tag = 2
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle3: TMenuItem
+          Tag = 3
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle4: TMenuItem
+          Tag = 4
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle5: TMenuItem
+          Tag = 5
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle6: TMenuItem
+          Tag = 6
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle7: TMenuItem
+          Tag = 7
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle8: TMenuItem
+          Tag = 8
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle9: TMenuItem
+          Tag = 9
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+        object MenuRectangle10: TMenuItem
+          Tag = 10
+          Caption = ' '
+          ShowAlwaysCheckable = True
+          OnClick = MenuRectangleClick
+        end
+      end
       object NewFinderCircle1: TMenuItem
         Caption = 'New Finder Circle'
         OnClick = NewFinderCircle1Click
