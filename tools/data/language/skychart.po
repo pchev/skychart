@@ -5586,3 +5586,11 @@ msgstr ""
 msgid "Start graph at local noon"
 msgstr ""
 
+#: u_translation:rsselectcircle
+msgid "Select Circle"
+msgstr ""
+
+#: u_translation:rsselectrectan
+msgid "Select Rectangle"
+msgstr ""
+

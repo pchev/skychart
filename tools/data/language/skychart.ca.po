@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-12 10:01+0000\n"
+"POT-Creation-Date: 2013-07-20 09:33+0000\n"
 "PO-Revision-Date: 2013-06-17 09:45+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-07 15:44+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Country: CATALONIA\n"
 
@@ -4341,6 +4341,10 @@ msgstr "Selecciona-ho tot"
 msgid "Select Catalog"
 msgstr "Tria un catàleg"
 
+#: u_translation.rsselectcircle
+msgid "Select Circle"
+msgstr ""
+
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
 msgstr "Trieu un color (negre per al catàleg per omissió)"
@@ -4352,6 +4356,10 @@ msgstr "Trieu el lloc de xarxa mirall"
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
 msgstr "Trieu una placa de la llista"
+
+#: u_translation.rsselectrectan
+msgid "Select Rectangle"
+msgstr ""
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
