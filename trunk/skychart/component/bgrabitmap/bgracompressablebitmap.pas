@@ -62,7 +62,7 @@ type
      destructor Destroy; override;
      property Width : Integer read FWidth;
      property Height: Integer read FHeight;
-     property Caption : string read FCaption;
+     property Caption : string read FCaption write FCaption;
 
    end;
 
@@ -208,7 +208,11 @@ begin
   FHeight := WinReadLongint(AStream);
   setlength(FCaption,WinReadLongint(AStream));
   AStream.Read(FCaption[1],length(FCaption));
-  if (FWidth=0) or (FHeight = 0) then exit;
+  if (FWidth=0) or (FHeight = 0) then
+  begin
+    FUncompressedData := TMemoryStream.Create;
+    exit;
+  end;
 
   FBounds.Left := WinReadLongint(AStream);
   FBounds.Top := WinReadLongint(AStream);
@@ -223,6 +227,9 @@ begin
     FCompressedDataArray[i] := TMemoryStream.Create;
     FCompressedDataArray[i].CopyFrom(AStream,size);
   end;
+
+  if FCompressedDataArray = nil then
+    FUncompressedData := TMemoryStream.Create;
 end;
 
 procedure TBGRACompressableBitmap.Decompress;
