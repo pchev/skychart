@@ -237,6 +237,7 @@ object f_config: Tf_config
       RightClickSelect = True
       RowSelect = True
       ScrollBars = ssNone
+      SelectionColor = clBtnFace
       SortType = stBoth
       TabOrder = 0
       OnChange = TreeView1Change
@@ -553,6 +554,8 @@ object f_config: Tf_config
               ActivePage = f_config_catalog1.Page2
               TabIndex = 0
               inherited Page2: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
                 inherited Label2: TLabel
                   Height = 17
                   Width = 162
@@ -651,6 +654,8 @@ object f_config: Tf_config
                 end
               end
               inherited Page3: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
                 inherited PanelDef: TPanel
                   ClientHeight = 41
                   ClientWidth = 484
@@ -663,6 +668,26 @@ object f_config: Tf_config
                   ClientHeight = 246
                   ClientWidth = 484
                 end
+              end
+              inherited Page1: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
+              end
+              inherited Page1a: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
+              end
+              inherited Page1b: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
+              end
+              inherited Page5: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
+              end
+              inherited Page4: TTabSheet
+                ClientHeight = 461
+                ClientWidth = 493
               end
             end
             inherited FOVPanel: TPanel
@@ -917,13 +942,14 @@ object f_config: Tf_config
               ActivePage = nil
               TabIndex = -1
               inherited Page1: TTabSheet
+                ClientHeight = 518
                 ClientWidth = 491
                 inherited ProgressPanel: TPanel
                   ClientHeight = 90
                   ClientWidth = 397
                 end
                 inherited Panel11: TPanel
-                  ClientHeight = 171
+                  ClientHeight = 139
                   ClientWidth = 397
                 end
                 inherited Panel3: TPanel
@@ -932,23 +958,37 @@ object f_config: Tf_config
                 end
               end
               inherited Page2: TTabSheet
+                ClientHeight = 518
                 ClientWidth = 491
                 inherited Panel1: TPanel
-                  ClientHeight = 44
+                  ClientHeight = 84
                   ClientWidth = 477
+                  inherited ImgITT2: TComboBox
+                    ItemHeight = 0
+                  end
                 end
               end
               inherited Page3: TTabSheet
+                ClientHeight = 518
                 ClientWidth = 491
+                inherited GroupBox1: TGroupBox
+                  inherited OnlineDSSList: TComboBox
+                    ItemHeight = 0
+                  end
+                end
                 inherited GroupBox3: TGroupBox
                   inherited Panel2: TPanel
-                    ClientHeight = 289
+                    ClientHeight = 249
                     ClientWidth = 466
                   end
                 end
               end
               inherited Page4: TTabSheet
+                ClientHeight = 518
                 ClientWidth = 491
+                inherited MaxImg: TComboBox
+                  ItemHeight = 0
+                end
               end
             end
           end
