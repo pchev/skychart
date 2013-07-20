@@ -1426,6 +1426,8 @@ resourcestring
   rsStart = 'Start';
   rsEnd = 'End';
   rsStartGraphAt = 'Start graph at local noon';
+  rsSelectCircle = 'Select Circle';
+  rsSelectRectan = 'Select Rectangle';
 
 implementation
 

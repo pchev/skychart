@@ -68,6 +68,28 @@ type
     MenuFinderCircle: TMenuItem;
     AllAtThisPos: TMenuItem;
     ImgList1: TMenuItem;
+    MenuCircle1: TMenuItem;
+    MenuCircle9: TMenuItem;
+    MenuCircle10: TMenuItem;
+    MenuRectangle2: TMenuItem;
+    MenuRectangle10: TMenuItem;
+    MenuRectangle1: TMenuItem;
+    MenuCircle2: TMenuItem;
+    MenuCircle3: TMenuItem;
+    MenuCircle4: TMenuItem;
+    MenuCircle5: TMenuItem;
+    MenuCircle6: TMenuItem;
+    MenuCircle7: TMenuItem;
+    MenuCircle8: TMenuItem;
+    MenuRectangle3: TMenuItem;
+    MenuRectangle4: TMenuItem;
+    MenuRectangle5: TMenuItem;
+    MenuRectangle6: TMenuItem;
+    MenuRectangle7: TMenuItem;
+    MenuRectangle8: TMenuItem;
+    MenuRectangle9: TMenuItem;
+    SelectCircle: TMenuItem;
+    SelectRectangle: TMenuItem;
     nsearch1: TMenuItem;
     nsearch2: TMenuItem;
     nsearch3: TMenuItem;
@@ -143,7 +165,9 @@ type
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure imglistExecute(Sender: TObject);
+    procedure MenuCircleClick(Sender: TObject);
     procedure MenuLoadCircleClick(Sender: TObject);
+    procedure MenuRectangleClick(Sender: TObject);
     procedure MenuSaveCircleClick(Sender: TObject);
     procedure nsearch1Click(Sender: TObject);
     procedure PDSSTimerTimer(Sender: TObject);
@@ -367,6 +391,8 @@ Centre1.caption:=rsCentre;
 Zoom1.caption:=rsZoomCentre;
 Zoom2.caption:=rsZoomCentre2;
 MenuFinderCircle.Caption:=rsFinderCircle2;
+SelectCircle.Caption:=rsSelectCircle;
+SelectRectangle.Caption:=rsSelectRectan;
 NewFinderCircle1.caption:=rsNewFinderCir;
 RemoveLastCircle1.caption:=rsRemoveLastCi;
 RemoveAllCircles1.caption:=rsRemoveAllCir;
@@ -1682,6 +1708,7 @@ end;
 end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
+var i:integer;
 begin
  if assigned(FImageSetFocus) then FImageSetFocus(self);
  xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
@@ -1720,6 +1747,47 @@ begin
     Telescope1.Visible:=false
  else
     Telescope1.Visible:=true;
+ MenuCircle1.checked:=sc.cfgsc.circleok[1];
+ MenuCircle2.checked:=sc.cfgsc.circleok[2];
+ MenuCircle3.checked:=sc.cfgsc.circleok[3];
+ MenuCircle4.checked:=sc.cfgsc.circleok[4];
+ MenuCircle5.checked:=sc.cfgsc.circleok[5];
+ MenuCircle6.checked:=sc.cfgsc.circleok[6];
+ MenuCircle7.checked:=sc.cfgsc.circleok[7];
+ MenuCircle8.checked:=sc.cfgsc.circleok[8];
+ MenuCircle9.checked:=sc.cfgsc.circleok[9];
+ MenuCircle10.checked:=sc.cfgsc.circleok[10];
+ MenuCircle1.Caption:=formatfloat(f2,sc.cfgsc.circle[1,1])+lmin+blank+sc.cfgsc.circlelbl[1];
+ MenuCircle2.Caption:=formatfloat(f2,sc.cfgsc.circle[2,1])+lmin+blank+sc.cfgsc.circlelbl[2];
+ MenuCircle3.Caption:=formatfloat(f2,sc.cfgsc.circle[3,1])+lmin+blank+sc.cfgsc.circlelbl[3];
+ MenuCircle4.Caption:=formatfloat(f2,sc.cfgsc.circle[4,1])+lmin+blank+sc.cfgsc.circlelbl[4];
+ MenuCircle5.Caption:=formatfloat(f2,sc.cfgsc.circle[5,1])+lmin+blank+sc.cfgsc.circlelbl[5];
+ MenuCircle6.Caption:=formatfloat(f2,sc.cfgsc.circle[6,1])+lmin+blank+sc.cfgsc.circlelbl[6];
+ MenuCircle7.Caption:=formatfloat(f2,sc.cfgsc.circle[7,1])+lmin+blank+sc.cfgsc.circlelbl[7];
+ MenuCircle8.Caption:=formatfloat(f2,sc.cfgsc.circle[8,1])+lmin+blank+sc.cfgsc.circlelbl[8];
+ MenuCircle9.Caption:=formatfloat(f2,sc.cfgsc.circle[9,1])+lmin+blank+sc.cfgsc.circlelbl[9];
+ MenuCircle10.Caption:=formatfloat(f2,sc.cfgsc.circle[10,1])+lmin+blank+sc.cfgsc.circlelbl[10];
+
+ MenuRectangle1.checked:=sc.cfgsc.rectangleok[1];
+ MenuRectangle2.checked:=sc.cfgsc.rectangleok[2];
+ MenuRectangle3.checked:=sc.cfgsc.rectangleok[3];
+ MenuRectangle4.checked:=sc.cfgsc.rectangleok[4];
+ MenuRectangle5.checked:=sc.cfgsc.rectangleok[5];
+ MenuRectangle6.checked:=sc.cfgsc.rectangleok[6];
+ MenuRectangle7.checked:=sc.cfgsc.rectangleok[7];
+ MenuRectangle8.checked:=sc.cfgsc.rectangleok[8];
+ MenuRectangle9.checked:=sc.cfgsc.rectangleok[9];
+ MenuRectangle10.checked:=sc.cfgsc.rectangleok[10];
+ MenuRectangle1.Caption:=formatfloat(f2,sc.cfgsc.rectangle[1,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[1,2])+lmin+blank+sc.cfgsc.rectanglelbl[1];
+ MenuRectangle2.Caption:=formatfloat(f2,sc.cfgsc.rectangle[2,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[2,2])+lmin+blank+sc.cfgsc.rectanglelbl[2];
+ MenuRectangle3.Caption:=formatfloat(f2,sc.cfgsc.rectangle[3,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[3,2])+lmin+blank+sc.cfgsc.rectanglelbl[3];
+ MenuRectangle4.Caption:=formatfloat(f2,sc.cfgsc.rectangle[4,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[4,2])+lmin+blank+sc.cfgsc.rectanglelbl[4];
+ MenuRectangle5.Caption:=formatfloat(f2,sc.cfgsc.rectangle[5,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[5,2])+lmin+blank+sc.cfgsc.rectanglelbl[5];
+ MenuRectangle6.Caption:=formatfloat(f2,sc.cfgsc.rectangle[6,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[6,2])+lmin+blank+sc.cfgsc.rectanglelbl[6];
+ MenuRectangle7.Caption:=formatfloat(f2,sc.cfgsc.rectangle[7,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[7,2])+lmin+blank+sc.cfgsc.rectanglelbl[7];
+ MenuRectangle8.Caption:=formatfloat(f2,sc.cfgsc.rectangle[8,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[8,2])+lmin+blank+sc.cfgsc.rectanglelbl[8];
+ MenuRectangle9.Caption:=formatfloat(f2,sc.cfgsc.rectangle[9,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[9,2])+lmin+blank+sc.cfgsc.rectanglelbl[9];
+ MenuRectangle10.Caption:=formatfloat(f2,sc.cfgsc.rectangle[10,1])+lmin+'x'+formatfloat(f2,sc.cfgsc.rectangle[10,2])+lmin+blank+sc.cfgsc.rectanglelbl[10];
 end;
 
 procedure Tf_chart.TrackOn1Click(Sender: TObject);
@@ -3661,6 +3729,24 @@ if f_imglist.ModalResult=mrOK then begin
 end else if f_imglist.ModalResult=mrYes then begin
   if assigned(FImageSetup) then FImageSetup(self);
 end;
+end;
+
+procedure Tf_chart.MenuCircleClick(Sender: TObject);
+begin
+with sender as TMenuItem do begin
+  checked:=not checked;
+  sc.cfgsc.circleok[tag]:=checked;
+end;
+Refresh;
+end;
+
+procedure Tf_chart.MenuRectangleClick(Sender: TObject);
+begin
+with sender as TMenuItem do begin
+  checked:=not checked;
+  sc.cfgsc.rectangleok[tag]:=checked;
+end;
+Refresh;
 end;
 
 function Tf_chart.cmd_PDSS(DssDir,ImagePath,ImageName, useexisting: string):string;
