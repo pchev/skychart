@@ -1,12 +1,12 @@
 object f_main: Tf_main
-  Left = 221
+  Left = 296
   Height = 549
-  Top = 139
-  Width = 873
+  Top = 120
+  Width = 904
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
   ClientHeight = 526
-  ClientWidth = 873
+  ClientWidth = 904
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -134,7 +134,7 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 845
+    Left = 876
     Height = 414
     Top = 78
     Width = 28
@@ -376,11 +376,11 @@ object f_main: Tf_main
     Left = 0
     Height = 34
     Top = 492
-    Width = 873
+    Width = 904
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 873
+    ClientWidth = 904
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -430,30 +430,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 651
+      Width = 682
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 651
+      ClientWidth = 682
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 651
+        Width = 682
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 651
+        ClientWidth = 682
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 651
+          Width = 682
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -465,11 +465,11 @@ object f_main: Tf_main
     Left = 0
     Height = 78
     Top = 0
-    Width = 873
+    Width = 904
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 78
-    ClientWidth = 873
+    ClientWidth = 904
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -477,7 +477,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 25
-      Width = 873
+      Width = 904
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -636,13 +636,13 @@ object f_main: Tf_main
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 834
+        Left = 857
         Top = 2
         Width = 5
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 873
+        Left = 862
         Top = 2
         Width = 10
         AutoSize = True
@@ -828,7 +828,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 843
+        Left = 874
         Height = 23
         Top = 2
         Width = 30
@@ -895,12 +895,18 @@ object f_main: Tf_main
         ImageIndex = 94
         OnClick = PlanetInfoClick
       end
+      object TAbortSlew: TToolButton
+        Left = 834
+        Top = 2
+        Action = TelescopeAbortSlew
+        OnMouseUp = TConnectMouseUp
+      end
     end
     object ToolBar4: TToolBar
       Left = 0
       Height = 28
       Top = 50
-      Width = 873
+      Width = 904
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
@@ -1128,7 +1134,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 873
+      Width = 904
       TabStop = False
       OnChange = TabControl1Change
       Align = alTop
@@ -6580,6 +6586,9 @@ object f_main: Tf_main
         }
         OnClick = TelescopeSlewExecute
       end
+      object telescopeabortslew1: TMenuItem
+        Action = TelescopeAbortSlew
+      end
       object telescopeSync1: TMenuItem
         Action = TelescopeSync
         Bitmap.Data = {
@@ -7537,6 +7546,14 @@ object f_main: Tf_main
       Caption = 'SetupCalendar'
       OnExecute = SetupCalendarExecute
     end
+    object TelescopeAbortSlew: TAction
+      Category = 'Telescope'
+      Caption = 'Abort Slew'
+      Hint = 'Abort slew'
+      ImageIndex = 95
+      OnExecute = TelescopeAbortSlewExecute
+      ShortCut = 16459
+    end
   end
   object SaveDialog: TSaveDialog
     FilterIndex = 0
@@ -7559,7 +7576,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C695F0000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
+      4C69600000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFF945A
@@ -10599,7 +10616,39 @@ object f_main: Tf_main
       00FF72000BFF7C0000FF951414FFD02A2DFFD92D21FF62149AFFCA2A30FFCF2B
       2BFFCF2B2BFFCF2B2BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFFADD6E7FF85AFD7FF5B67D7FF5B67D7FF85AFD7FFADD6E7FFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADD6E7FF2947
+      D6FF0029E7FF2947D6FF2947D6FF2947D6FF2947D6FF2947D6FF5B67D7FFADD6
+      E7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF85AFD7FF0029E7FF0029
+      E7FF0029E7FF5B67D7FF5B67D7FF85AFD7FF5B67D7FF2947D6FF2947D6FF2947
+      D6FF85AFD7FFFFFFFFFFFFFFFFFFFFFFFFFFADD6E7FF0029E7FF0029E7FF2947
+      D6FFC7E7F7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFADD6E7FF2947D6FF2947
+      D6FF2947D6FFADD6E7FFFFFFFFFFFFFFFFFF2F46C6FF0029E7FF2947D6FFEBEB
+      EBFFFFFFFFFFFFFFFFFFFFFFFFFF4F8DB7FF2E81B4FF2141B5FF2947D6FF2947
+      D6FF2947D6FF5B67D7FFFFFFFFFFADD6E7FF2F46C6FF0029E7FFADD6E7FFFFFF
+      FFFFFFFFFFFFCEEFE6FFFFDFCFFF1699D6FF047ED2FF003E7AFF1F57D7FF85AF
+      D7FF2947D6FF2947D6FFADD6E7FF5B67D7FF0029E7FF2F46C6FFEBEBEBFFFFFF
+      FFFFFFFFFFFFEBEBEBFF1668A6FF04468AFF006BC4FF001228FF16558EFFADD6
+      E6FF5B67D7FF0029E7FF5B67D7FF5B67D7FF0029E7FF5B67D7FFEBEBEBFFFFFF
+      FFFFFFFFFFFF177AB8FF0057A9FF0062BCFF0084A4FF14A5C9FF1D5D94FF1F51
+      85FF2B6BC2FF0059B8FF2F78D2FF5B67D7FF0029E7FF5B67D7FFEBEBEBFFFFFF
+      FFFF77A7BFFF0579C8FF0067BCFF00469CFF0F6166FF27D6CEFF2BD6F6FF1E6F
+      A5FF0A397AFF0059A3FF0A4992FF5B67D7FF0029E7FF2F46C6FFEBEBEBFFD6D7
+      D7FF2F46C6FF005ECCFF0063B1FF115C61FF1D7FC7FF1D94CFFF27BEDDFF35DD
+      FFFF056FB7FF00317CFF0A306EFF94BFD7FF2F46C6FF0029E7FF85AFD7FF2F46
+      C6FF0029E7FF0029E7FF39B4BCFF3BCDCFFF2B7EB6FF1D72B7FF1D8B5AFF1BB1
+      B1FF00B4E2FF0086D2FF10467AFFFFFFFFFF2F46C6FF1D4A87FF1D4A87FF1D4A
+      87FF1D4A87FF85AFD7FFFFFFFFFFA7DECFFF3FD6CEFF2F8CBFFF1A5B8CFF056A
+      6CFF03869EFF04B0D2FF1A91D3FFFFFFFFFF94BFD7FF1D4A87FF1D4273FF1D42
+      73FF5B67D7FFEBEBEBFFFFFFFFFFFFFFFFFF9FE1D9FF1D80C1FF0823BBFF0349
+      76FF035A81FF1068AAFF1D93D7FFFFFFFFFFFFFFFFFF739CC7FF1D4A87FF1D42
+      73FF1D4273FF2F46C6FF5B67D7FF5B67D7FF1B60C5FF033977FF034D94FF042A
+      C2FF10587CFF1D4B7AFF5E9FC6FFFFFFFFFFFFFFFFFFFFFFFFFF94BFD7FF1D4A
+      87FF1D4273FF1D4273FF1D4273FF1D4273FF125A7BFF033D81FF033E80FF0F5D
+      A2FF5B67D7FF6A42BDFF739CC7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF85AFD7FF6B42BDFF2F46C6FF2F46C6FF1F4E9BFF0D478DFF1A4785FF2776
+      B5FF9CD7D7FF85AFD6FF84EFDEFF
     }
   end
   object PopupMenu1: TPopupMenu

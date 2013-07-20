@@ -47,6 +47,8 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    telescopeabortslew1: TMenuItem;
+    TelescopeAbortSlew: TAction;
     MenuListImg: TMenuItem;
     PlanetInfo: TMenuItem;
     SetupCalendar: TAction;
@@ -66,6 +68,7 @@ type
     InitTimer: TTimer;
     TabControl1: TTabControl;
     ToolButton14: TToolButton;
+    TAbortSlew: TToolButton;
     ToolButtonRot180: TToolButton;
     ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
@@ -487,6 +490,7 @@ type
     procedure ResetRotClick(Sender: TObject);
     procedure rot180Click(Sender: TObject);
     procedure SetupCalendarExecute(Sender: TObject);
+    procedure TelescopeAbortSlewExecute(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
     procedure NextChild1Click(Sender: TObject);
     procedure Print1Execute(Sender: TObject);
@@ -2420,6 +2424,11 @@ end;
 procedure Tf_main.TelescopeSlewExecute(Sender: TObject);
 begin
 if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do Slew1Click(Sender);
+end;
+
+procedure Tf_main.TelescopeAbortSlewExecute(Sender: TObject);
+begin
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do AbortSlew1Click(Sender);
 end;
 
 procedure Tf_main.TelescopeSyncExecute(Sender: TObject);
@@ -6609,6 +6618,8 @@ TelescopeSetup1.Caption:='&'+rsTelescopeSet+Ellipsis;
 telescope1.caption:='&'+rsTelescope;
 ControlPanel1.caption:='&'+rsControlPanel+Ellipsis;
 telescopeSlew1.caption:='&'+rsSlew;
+TelescopeAbortSlew.Caption:=rsAbortSlew;
+TelescopeAbortSlew.Hint:=rsAbortSlew;
 telescopeSync1.caption:='&'+rsSync;
 Window1.caption:='&'+rsWindow;
 WindowCascadeItem.caption:='&'+rsCascade;
