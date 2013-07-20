@@ -14,6 +14,9 @@ type
   TBGRALayeredBitmap = class;
   TBGRALayeredBitmapClass = class of TBGRALayeredBitmap;
 
+  TBGRALayeredBitmapSaveToStreamProc = procedure(AStream: TStream; ALayers: TBGRACustomLayeredBitmap);
+  TBGRALayeredBitmapLoadFromStreamProc = function(AStream: TStream): TBGRALayeredBitmap;
+
   { TBGRACustomLayeredBitmap }
 
   TBGRACustomLayeredBitmap = class(TGraphic)
@@ -35,9 +38,9 @@ type
     function GetLayerOpacity(layer: integer): byte; virtual; abstract;
     function GetLayerName(layer: integer): string; virtual;
     function GetLayerOffset(layer: integer): TPoint; virtual;
-    function GetLayerBitmapDirectly(layer: integer): TBGRABitmap; virtual;
     function GetLayerFrozenRange(layer: integer): integer;
     function GetLayerFrozen(layer: integer): boolean; virtual;
+    function GetLayerUniqueId(layer: integer): integer; virtual;
     procedure SetLayerFrozen(layer: integer; AValue: boolean); virtual;
     function RangeIntersect(first1,last1,first2,last2: integer): boolean;
     procedure RemoveFrozenRange(index: integer);
@@ -54,6 +57,7 @@ type
     constructor Create; override;
     destructor Destroy; override;
     function ToString: ansistring; override;
+    function GetLayerBitmapDirectly(layer: integer): TBGRABitmap; virtual;
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; virtual; abstract;
     function ComputeFlatImage: TBGRABitmap; overload;
     function ComputeFlatImage(firstLayer, lastLayer: integer): TBGRABitmap; overload;
@@ -79,6 +83,7 @@ type
     property LayerName[layer: integer]: string read GetLayerName;
     property LayerOffset[layer: integer]: TPoint read GetLayerOffset;
     property LayerFrozen[layer: integer]: boolean read GetLayerFrozen;
+    property LayerUniqueId[layer: integer]: integer read GetLayerUniqueId;
     property LinearBlend: boolean read GetLinearBlend write SetLinearBlend; //use linear blending unless specified
     property DefaultBlendingOperation: TBlendOperation read GetDefaultBlendingOperation;
   end;
@@ -102,8 +107,6 @@ type
     FNbLayers: integer;
     FLayers: array of TBGRALayerInfo;
     FWidth,FHeight: integer;
-    function GetLayerUniqueId(layer: integer): integer;
-    procedure SetLayerUniqueId(layer: integer; AValue: integer);
 
   protected
     function GetWidth: integer; override;
@@ -121,7 +124,8 @@ type
     procedure SetLayerOffset(layer: integer; AValue: TPoint);
     procedure SetLayerName(layer: integer; AValue: string);
     procedure SetLayerFrozen(layer: integer; AValue: boolean); override;
-    function GetLayerBitmapDirectly(layer: integer): TBGRABitmap; override;
+    function GetLayerUniqueId(layer: integer): integer; override;
+    procedure SetLayerUniqueId(layer: integer; AValue: integer);
 
   public
     procedure LoadFromFile(const filename: string); override;
@@ -156,6 +160,7 @@ type
     destructor Destroy; override;
     constructor Create; override;
     constructor Create(AWidth, AHeight: integer);
+    function GetLayerBitmapDirectly(layer: integer): TBGRABitmap; override;
     function GetLayerBitmapCopy(layer: integer): TBGRABitmap; override;
     function GetLayerIndexFromId(AIdentifier: integer): integer;
     function Duplicate(ASharedLayerIds: boolean = false): TBGRALayeredBitmap;
@@ -182,6 +187,10 @@ type
 
 procedure RegisterLayeredBitmapWriter(AExtension: string; AWriter: TBGRALayeredBitmapClass);
 procedure RegisterLayeredBitmapReader(AExtension: string; AReader: TBGRACustomLayeredBitmapClass);
+
+var
+  LayeredBitmapSaveToStreamProc : TBGRALayeredBitmapSaveToStreamProc;
+  LayeredBitmapLoadFromStreamProc : TBGRALayeredBitmapLoadFromStreamProc;
 
 type
   TOnLayeredBitmapLoadStartProc = procedure(AFilename: string) of object;
@@ -430,7 +439,18 @@ end;
 procedure TBGRALayeredBitmap.LoadFromStream(stream: TStream);
 var bmp: TBGRABitmap;
    index: integer;
+   temp: TBGRALayeredBitmap;
 begin
+  if Assigned(LayeredBitmapLoadFromStreamProc) then
+  begin
+    temp := LayeredBitmapLoadFromStreamProc(Stream);
+    if temp <> nil then
+    begin
+      Assign(temp);
+      temp.Free;
+      exit;
+    end;
+  end;
   bmp := TBGRABitmap.Create(stream);
   Clear;
   SetSize(bmp.Width,bmp.Height);
@@ -867,6 +887,11 @@ begin
   result := false;
 end;
 
+function TBGRACustomLayeredBitmap.GetLayerUniqueId(layer: integer): integer;
+begin
+  result := layer;
+end;
+
 procedure TBGRACustomLayeredBitmap.SetLayerFrozen(layer: integer;
   AValue: boolean);
 begin
@@ -957,7 +982,10 @@ end;
 
 procedure TBGRACustomLayeredBitmap.SaveToStream(Stream: TStream);
 begin
-  raise exception.Create('Not implemented');
+  if Assigned(LayeredBitmapSaveToStreamProc) then
+    LayeredBitmapSaveToStreamProc(Stream, self)
+  else
+    raise exception.Create('Call BGRAStreamLayers.RegisterStreamLayers first');
 end;
 
 constructor TBGRACustomLayeredBitmap.Create;
