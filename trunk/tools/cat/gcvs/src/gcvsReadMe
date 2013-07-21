@@ -1,6 +1,6 @@
-B/gcvs              General Catalogue of Variable Stars   (Samus+ 2007-2010)
+B/gcvs              General Catalogue of Variable Stars   (Samus+ 2007-2013)
 ================================================================================
-General Catalog of Variable Stars (GCVS database, Version 2010Jan)
+General Catalog of Variable Stars (GCVS database, Version 2012Apr)
      Samus N.N., Durlevich O.V., et al.
     <Institute of Astronomy of Russian Academy of Sciences and Sternberg
      State Astronomical Institute of the Moscow State University >
@@ -23,7 +23,6 @@ Introduction:
     combined with Name-Lists of Variable Stars Nos.67-79 and NSV catalogue
     and supplement
     is also available from Sternberg Institute of Moscow University,
-    at ftp://ftp.sai.msu.su/pub/groups/cluster/gcvs/gcvs
     or http://www.sai.msu.su/gcvs/gcvs/
 
     gcvs_cat.dat is the combined computer-readable version of the GCVS4.2
@@ -55,22 +54,22 @@ File Summary:
  FileName    Lrecl    Records    Explanations
 --------------------------------------------------------------------------------
 ReadMe         80        .   This file
-gcvs_cat.dat  162    41639   The GCVS Catalog (Vol. I-III, version 2010-Jan)
-gcvs_rem.dat   94    12464   Remarks on GCVS stars
+gcvs_cat.dat  174    47969   The GCVS Catalog (Vol. I-III, version 2013-04-30)
+gcvs_rem.dat   94    14165   Remarks on GCVS stars
 vartype.txt   121     1037   Description of GCVS Variability Types
 constel.txt    72       32   Numerical Codes for Constellations and Letters
-crossid.dat    48   179173   Cross-identifications (Vol. IV)
+crossid.dat    48   192612   Cross-identifications (Vol. IV)
 abbrev.txt     77      256   Abbreviations of catalogues used in crossid.dat
-nsv_cat.dat   132    26017   The Suspected Variable stars and Supplement (2010)
-nsv_rem.dat    80    10782   Remarks on NSV (and Supplement) stars
+nsv_cat.dat   132    26017   The Suspected Variable stars and Supplement (2011)
+nsv_rem.dat    80    10768   Remarks on NSV (and Supplement) stars
 evs_cat.dat   160    10979   Extragalactic Variable Stars. Catalogue (Vol. V)
 evs_rem.dat    80     1936   Extragalactic Variable Stars. Remarks
-refs.dat       80    21673   References for all variables (GCVS, NSV, EVS)
+refs.dat       80    22805   References for all variables (GCVS, NSV, EVS)
 ref_abbr.txt  264      318   Abbreviations used for references
 --------------------------------------------------------------------------------
 
 See also:
-   http://www.sai.msu.su/groups/cluster/gcvs/gcvs/ : the GCVS Group Home Page
+   http://www.sai.msu.su/gcvs/gcvs/ : the GCVS Group Home Page
    B/sn   : Asiago Supernova Catalogue (Barbon et al., 1999-2008)
    II/256 : Sternberg Supernova Catalogue, 2004 version (Tsvetkov+, 2004)
 
@@ -96,27 +95,32 @@ Byte-by-byte Description of file: gcvs_cat.dat
   50- 55  F6.3  mag    magMax    ? Magnitude at maximum brightness
       56  A1    ---  u_magMax    Uncertainty flag (:) on magMax
       57  A1    ---    ---       [)] ")" if magMax is an amplitude
-      59  A1    ---  l_magMin    [<(] Limit or amplitude symbol on magMin (G3)
-  60- 65  F6.3  mag    magMin    ? Minimum magnitude or amplitude
-      66  A1    ---  u_magMin    Uncertainty flag (:) on magMin
-  67- 68  A2    ---  n_magMin    Alternative photometric system for magMin (G4)
-      69  A1    ---    ---       [)] ")" if magMin is an amplitude
-  71- 72  A2    ---    flt       The photometric system for magnitudes (G4)
-  74- 86  F13.5 d      Epoch     ? Epoch for maximum light, Julian days (G5)
-      87  A1    ---  u_Epoch     [:+-] Uncertainty flag on Epoch (4)
-  89- 92  A4    ---    Year      Year of outburst for nova or supernova
-      93  A1    ---  u_Year      [:] Uncertainty flag on Year of outburst
-      95  A1    ---  l_Period    [<>(] Code for upper or lower limits (5)
-  96-111 F16.10 d      Period    ? Period of the variable star
- 112-114  A3    ---  u_Period    [*/N)2: ] Uncertainties on Period (6)
- 116-118  A3    %      M-m/D     ? Rising time or duration of eclipse (G6)
-     119  A1    ---  u_M-m/D     Uncertainty flag (:) on M-m/D
-     120  A1    ---  n_M-m/D     [*:] Note for eclipsing variable (G6)
- 122-138  A17   ---    SpType    MK Spectral type
- 140-144  A5    ---    Ref1      Reference to a study of the star (G7)
- 146-150  A5    ---    Ref2      Reference to a chart or photograph (G7)
-     152  A1    ---  f_GCVS      [=N+] "N" if the star does not exist (7)
- 153-162  A10   ---    VarName   Alternative name of the variable (G8)
+      59  A1    ---  l_Min1      [<(] Limit or amplitude symbol on Min1 (G3)
+  60- 65  F6.3  mag    Min1      ? Minimum magnitude or amplitude
+      66  A1    ---  u_Min1      Uncertainty flag (:) on Min1
+  67- 68  A2    ---  n_Min1      Alternative photometric system for Min1 (G4)
+      69  A1    ---    ---       [)] ")" if Min1 is an amplitude
+      71  A1    ---  l_Min2      [<(] Limit or amplitude symbol on Min2 (G3)
+  72- 77  F6.3  mag    Min2      ? Secondary minimum magnitude or amplitude
+      78  A1    ---  u_Min2      Uncertainty flag (:) on Min2
+  79- 80  A2    ---  n_Min2      Alternative photometric system for Min2 (G4)
+      81  A1    ---    ---       [)] ")" if Min2 is an amplitude
+  83- 84  A2    ---    flt       The photometric system for magnitudes (G4)
+  86- 98  F13.5 d      Epoch     ? Epoch for maximum light, Julian days (G5)
+      99  A1    ---  u_Epoch     [:+-] Uncertainty flag on Epoch (4)
+ 101-104  A4    ---    Year      Year of outburst for nova or supernova
+     105  A1    ---  u_Year      [:] Uncertainty flag on Year of outburst
+     107  A1    ---  l_Period    [<>(] Code for upper or lower limits (5)
+ 108-123 F16.10 d      Period    ? Period of the variable star
+ 124-126  A3    ---  u_Period    [*/N)2: ] Uncertainties on Period (6)
+ 128-129  I2    %      M-m/D     ? Rising time or duration of eclipse (G6)
+     130  A1    ---  u_M-m/D     Uncertainty flag (:) on M-m/D
+     131  A1    ---  n_M-m/D     [*] Note for eclipsing variable (G6)
+ 134-150  A17   ---    SpType    MK Spectral type
+ 152-156  A5    ---    Ref1      Reference to a study of the star (G7)
+ 158-162  A5    ---    Ref2      Reference to a chart or photograph (G7)
+     164  A1    ---  f_GCVS      [=N+] "N" if the star does not exist (7)
+ 165-174  A10   ---    VarName   Alternative name of the variable (G8)
 --------------------------------------------------------------------------------
 
 Note (1): designations of components of double/multiple stars :
@@ -276,7 +280,7 @@ Byte-by-byte Description of file: evs_cat.dat
   34- 35  I2    arcmin  DEm       (arc minutes)
   36- 39  F4.1  arcsec  DEs       (arc seconds)
       40  A1    ---   u_DEs       [":*!] accuracy flags on position (G2)
-  41- 48  A8    ---     VarType   Type of variability (see file vartype.txt)
+  41- 48  A8    ---     VarType   Type of variability (see file "vartype.txt")
   49- 53  F5.2  mag     magMax    ? Magnitude at maximum brightness
       54  A1    ---   u_magMax    Uncertainty flag (:) on magMax
       55  A1    ---   l_magMin    [<(] Limit or amplitude symbol on magMax (G3)
@@ -456,5 +460,23 @@ History of the Catalogue:
   * 22-Nov-2009: Version 2009-Sep (corrections in gcvs_cat.dat crossid.dat)
   * 31-Jan-2010: Version 2010-Jan (corrections in gcvs, crossid and nsv)
   * 25-Jul-2010: Version 2010-Jul (corrections in gcvs_cat, gcvs_rem and refs)
+  * 26-Sep-2010: Version 2010-Sep (corrections in gcvs_cat, crossid, nsv_rem)
+  * 31-Oct-2010: Version 2010-Sep (corrections in gcvs_cat, crossid)
+  * 19-Dec-2010: Version 2010-Dec (corrections in crossid)
+  * 23-Jan-2011: Version 2011-Jan (changes in remarks, references)
+  * 23-Feb-2011: File "nsv_cat.dat" for NSV 11783: removed "1 3" in
+                 the "SpType" column (error communicated by Edward J. Sabol)
+  * 20-Mar-2011: Version 2011-Mar (corrections in gcvs_cat, crossid, nsv)
+  * 03-Apr-2011: Version 43675 variables
+  * 15-Apr-2011: Version 2011-Apr (corrections in crossid)
+  * 26-May-2011: Version 2011-May (corrections in crossid)
+  * 17-Jul-2011: Version 2011-Jul (corrections in crossid + cat_nsv)
+  * 15-Jan-2012: Version 2012-Jan (corrections in crossid + gcvs_rem)
+  * 26-Feb-2012: Version 2012-Feb (45835 variables in gcvs_cat.dat)
+  * 11-Mar-2012: Version 2012-Mar (additions & correction in crossid + gcvs_rem)
+  * 15-Apr-2012: Minor changes in gcvs_cat.dat and crossid.dat
+  * 30-Apr-2013: the "gcvs_cat.dat" file contains new columns with the
+           secondary minimum characteristics. The catalog includes the
+           Name List #80 part#3, for a total of 47969 variables (+2134)
 ================================================================================
 (End)  N.N. Samus [Moscow Inst. Astron.], Francois Ochsenbein [CDS]  18-Jan-2009

@@ -38,6 +38,13 @@ Type
                      s8  : char;
                      s8a  : char;
                      fmin:char;
+                     lmin2 : char;
+                     min2 : array[1..6] of char;
+                     s72  : char;
+                     s82  : char;
+                     s82a  : char;
+                     fmin2:char;
+                     s82b  : char;
                      s8b  : char;
                      mcode : char;
                      s8c  : char;
