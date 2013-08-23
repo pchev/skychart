@@ -1,0 +1,90 @@
+object ConvForm: TConvForm
+  Left = 442
+  Height = 319
+  Top = 126
+  Width = 243
+  Caption = 'Constellation Figures'
+  ClientHeight = 319
+  ClientWidth = 243
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.1'
+  object BitBtn1: TBitBtn
+    Left = 16
+    Height = 25
+    Hint = 'Run the convertion program'
+    Top = 224
+    Width = 91
+    Caption = 'Convert'
+    OnClick = BitBtn1Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+  end
+  object GroupBox1: TGroupBox
+    Left = 16
+    Height = 65
+    Hint = 'Select here your modified constellation figure file.'
+    Top = 8
+    Width = 185
+    Caption = 'Input File'
+    ClientHeight = 49
+    ClientWidth = 181
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+    object FilenameEdit1: TEdit
+      Left = 22
+      Height = 22
+      Top = 10
+      Width = 121
+      TabOrder = 0
+      Text = 'FilenameEdit1'
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 16
+    Height = 65
+    Hint = 'Do not change this value if you want your constellation figure to be used directly with Cartes du Ciel'
+    Top = 80
+    Width = 185
+    Caption = 'Output File'
+    ClientHeight = 49
+    ClientWidth = 181
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
+    object FilenameEdit2: TEdit
+      Left = 22
+      Height = 22
+      Top = 10
+      Width = 121
+      TabOrder = 0
+      Text = 'FilenameEdit2'
+    end
+  end
+  object BitBtn2: TBitBtn
+    Left = 124
+    Height = 25
+    Hint = 'Exit without running the program'
+    Top = 224
+    Width = 75
+    Caption = 'Close'
+    OnClick = BitBtn2Click
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 3
+  end
+  object Label1: TLabel
+    Left = 23
+    Height = 14
+    Top = 176
+    Width = 37
+    Caption = 'Label1'
+    ParentColor = False
+  end
+end
