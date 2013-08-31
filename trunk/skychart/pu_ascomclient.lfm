@@ -1,7 +1,7 @@
 object pop_scope: Tpop_scope
-  Left = 216
+  Left = 300
   Height = 467
-  Top = 193
+  Top = 120
   Width = 305
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
@@ -17,43 +17,43 @@ object pop_scope: Tpop_scope
   LCLVersion = '1.0.8.0'
   object GroupBox3: TGroupBox
     Left = 8
-    Height = 104
-    Top = 344
+    Height = 88
+    Top = 360
     Width = 290
-    ClientHeight = 100
+    ClientHeight = 84
     ClientWidth = 286
     TabOrder = 0
     object SpeedButton1: TSpeedButton
-      Left = 8
+      Left = 5
       Height = 25
-      Top = 11
+      Top = 6
       Width = 73
       Caption = 'Connect'
       NumGlyphs = 0
       OnClick = setresClick
     end
     object SpeedButton2: TSpeedButton
-      Left = 214
+      Left = 211
       Height = 25
-      Top = 11
+      Top = 6
       Width = 65
       Caption = 'Hide'
       NumGlyphs = 0
       OnClick = SpeedButton2Click
     end
     object SpeedButton5: TSpeedButton
-      Left = 118
+      Left = 115
       Height = 25
-      Top = 11
+      Top = 6
       Width = 84
       Caption = 'Disconnect'
       NumGlyphs = 0
       OnClick = SpeedButton5Click
     end
     object led: TEdit
-      Left = 86
+      Left = 83
       Height = 25
-      Top = 12
+      Top = 7
       Width = 25
       AutoSize = False
       Color = clRed
@@ -62,17 +62,17 @@ object pop_scope: Tpop_scope
       TabOrder = 0
     end
     object WarningLabel: TLabel
-      Left = 9
+      Left = 6
       Height = 16
-      Top = 46
+      Top = 41
       Width = 76
       Caption = 'WarningLabel'
       ParentColor = False
     end
     object SpeedButton4: TSpeedButton
-      Left = 214
+      Left = 211
       Height = 25
-      Top = 46
+      Top = 41
       Width = 65
       Caption = 'Help'
       NumGlyphs = 0
@@ -81,11 +81,11 @@ object pop_scope: Tpop_scope
   end
   object GroupBox5: TGroupBox
     Left = 8
-    Height = 104
-    Top = 120
+    Height = 96
+    Top = 144
     Width = 288
     Caption = 'Observatory '
-    ClientHeight = 87
+    ClientHeight = 79
     ClientWidth = 284
     TabOrder = 1
     object Label15: TLabel
@@ -150,7 +150,7 @@ object pop_scope: Tpop_scope
   object Panel1: TPanel
     Left = 8
     Height = 112
-    Top = 232
+    Top = 248
     Width = 288
     ClientHeight = 112
     ClientWidth = 288
@@ -267,11 +267,11 @@ object pop_scope: Tpop_scope
   end
   object GroupBox1: TGroupBox
     Left = 8
-    Height = 105
+    Height = 136
     Top = 0
     Width = 288
     Caption = 'Driver Selection'
-    ClientHeight = 88
+    ClientHeight = 119
     ClientWidth = 284
     TabOrder = 3
     object SpeedButton3: TSpeedButton
@@ -310,20 +310,20 @@ object pop_scope: Tpop_scope
       OnClick = SpeedButton11Click
     end
     object Edit1: TEdit
-      Left = 8
+      Left = 2
       Height = 23
       Top = 15
-      Width = 166
+      Width = 172
       Color = clBtnFace
       ReadOnly = True
       TabStop = False
       TabOrder = 0
     end
     object ReadIntBox: TComboBox
-      Left = 118
+      Left = 110
       Height = 23
       Top = 52
-      Width = 56
+      Width = 64
       ItemHeight = 0
       ItemIndex = 3
       Items.Strings = (
@@ -336,6 +336,15 @@ object pop_scope: Tpop_scope
       OnChange = ReadIntBoxChange
       TabOrder = 1
       Text = '1000'
+    end
+    object SpeedButton10: TSpeedButton
+      Left = 110
+      Height = 22
+      Top = 88
+      Width = 169
+      Caption = 'Advanced setting'
+      NumGlyphs = 0
+      OnClick = SpeedButton10Click
     end
   end
   object Timer1: TTimer
