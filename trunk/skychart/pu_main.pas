@@ -6728,7 +6728,7 @@ end else begin
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    catalog.ClearSearch;
-   if sc.cfgsc.shownebulae then begin
+   if sc.cfgsc.shownebulae or catalog.cfgcat.nebcatdef[uneb-BaseNeb] then begin
      stype:='N';  itype:=ftNeb;
      ok:=catalog.SearchNebulae(Num,ar1,de1) ;
      if ok then goto findit;

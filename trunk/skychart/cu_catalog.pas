@@ -3174,8 +3174,9 @@ var
 begin
 ok:=false;
 nextobj:=false;
-if cfgsc.shownebulae and ((ftype=ftAll)or(ftype=ftNeb)) then begin
+if cfgcat.NebCatOn[uneb-BaseNeb] then
   ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+if cfgsc.shownebulae and ((ftype=ftAll)or(ftype=ftNeb)) then begin
   if (not ok) and cfgcat.nebcaton[voneb-BaseNeb] then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
   if (not ok) then begin ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then begin ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSAC; end;
