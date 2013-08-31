@@ -5594,3 +5594,15 @@ msgstr ""
 msgid "Select Rectangle"
 msgstr ""
 
+#: u_translation:rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
+
+#: u_translation:rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
+#: u_translation:rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
+

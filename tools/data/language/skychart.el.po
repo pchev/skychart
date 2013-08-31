@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -159,6 +159,10 @@ msgstr "Προχωρημένη αναζήτηση"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
+msgstr ""
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
 msgstr ""
 
 #: u_translation.rsage
@@ -1508,6 +1512,10 @@ msgstr "Μέτρηση αποστάσεων"
 msgid "Distance to the last object"
 msgstr "Απόσταση προς το τελευταίο αντικείμενο"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Να μην φιλτράρονται τα αντικείμενα Messier"
@@ -2030,6 +2038,10 @@ msgstr "Γραμματοσειρές"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Για έναν μεγάλο κατάλογο, πάντα να επιλέγετε Binary (δυαδικό). Για πιο μικρά δεδομένα, να επιλέγετε text (κείμενο). Αυτό σας επιτρέπει να τροποποιείτε το αρχείο και να βλέπετε το αποτέλεσμα αμέσως χωρίς να ξανατρέξετε αυτό το εργαλείο."
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
