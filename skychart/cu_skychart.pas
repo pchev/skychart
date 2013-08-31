@@ -303,7 +303,7 @@ end;
     DrawAltAzEqGrid;
     // then the horizon line if transparent
     if (not cfgsc.horizonopaque)or(Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture) then DrawHorizon;
-    if cfgsc.shownebulae or cfgsc.ShowImages then DrawDeepSkyObject;
+    DrawDeepSkyObject;
     if cfgsc.showline then begin
        DrawOutline;
        DrawDSL;
@@ -455,16 +455,21 @@ InitStarC(vostar,vostar_magmax);
 { activate the other catalog }
 InitVarC(gcvs);
 InitDblC(wds);
-InitNebC(uneb);
-InitNebC(voneb);
-InitNebC(sac);
-InitNebC(ngc);
-InitNebC(lbn);
-InitNebC(rc3);
-InitNebC(pgc);
-InitNebC(ocl);
-InitNebC(gcm);
-InitNebC(gpn);
+for i:=1 to MaxNebCatalog do
+    Fcatalog.cfgcat.nebcaton[i]:=false;
+if Fcatalog.cfgcat.nebcatdef[uneb-BaseNeb] then
+  InitNebC(uneb);
+if cfgsc.shownebulae then begin
+  InitNebC(voneb);
+  InitNebC(sac);
+  InitNebC(ngc);
+  InitNebC(lbn);
+  InitNebC(rc3);
+  InitNebC(pgc);
+  InitNebC(ocl);
+  InitNebC(gcm);
+  InitNebC(gpn);
+end;
 Fcatalog.cfgcat.starcaton[gcstar-BaseStar]:=false;
 Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=false;
 Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=false;
@@ -485,7 +490,7 @@ for i:=1 to Fcatalog.cfgcat.GCatNum do
                   end;
           rtvar : Fcatalog.cfgcat.varstarcaton[gcvar-Basevar]:=true;
           rtdbl : Fcatalog.cfgcat.dblstarcaton[gcdbl-Basedbl]:=true;
-          rtneb : Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=true;
+          rtneb : if cfgsc.shownebulae then Fcatalog.cfgcat.nebcaton[gcneb-Baseneb]:=true;
           rtlin : Fcatalog.cfgcat.lincaton[gclin-Baselin]:=true;
          end;
   end else Fcatalog.cfgcat.GCatLst[i-1].CatOn:=false;
@@ -1252,7 +1257,7 @@ var rec:GcatRec;
                  end;
                 end
               else
-                if cfgsc.shownebulae then
+                if cfgsc.shownebulae or Fcatalog.cfgcat.nebcatdef[uneb-BaseNeb] then
                   begin
                     Drawing;
                   end;
