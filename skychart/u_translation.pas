@@ -1428,6 +1428,9 @@ resourcestring
   rsStartGraphAt = 'Start graph at local noon';
   rsSelectCircle = 'Select Circle';
   rsSelectRectan = 'Select Rectangle';
+  rsAdvancedSett2 = 'Advanced setting';
+  rsDoNotChangeA = 'Do not change anything here if you are not sure what you do!';
+  rsForceEqSys = 'Force EqSys';
 
 implementation
 

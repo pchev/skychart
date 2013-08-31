@@ -42,6 +42,7 @@ type
 
   Tpop_scope = class(TForm)
     GroupBox3: TGroupBox;
+    SpeedButton10: TSpeedButton;
     WarningLabel: TLabel;
     trackingled: TEdit;
     SpeedButton1: TSpeedButton;
@@ -79,6 +80,7 @@ type
     {Utility and form functions}
     procedure FormCreate(Sender: TObject);
     procedure kill(Sender: TObject; var CanClose: Boolean);
+    procedure SpeedButton10Click(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure setresClick(Sender: TObject);
     procedure SaveConfig;
@@ -97,9 +99,13 @@ type
     procedure SpeedButton11Click(Sender: TObject);
   private
     { Private declarations }
+    feqsys: TCheckBox;
+    leqsys: TComboBox;
     FConfig: string;
     CoordLock : boolean;
     Initialized : boolean;
+    ForceEqSys : boolean;
+    EqSysVal: integer;
     T : Variant;
     Longitude : single;                 // Observatory longitude (Negative East of Greenwich}
     Latitude : single;                  // Observatory latitude
@@ -107,6 +113,7 @@ type
     curdeg_x,  curdeg_y :double;        // current equatorial position in degrees
     cur_az,  cur_alt :double;           // current alt-az position in degrees
     {$endif}
+    procedure SetDef(Sender: TObject);
   public
     { Public declarations }
     procedure SetLang;
@@ -355,6 +362,14 @@ end;
 Procedure Tpop_scope.ScopeGetEqSys(var EqSys : double);
 var i: integer;
 begin
+if ForceEqSys then begin
+  case EqSysVal of
+  0 : EqSys:=0;
+  1 : EqSys:=1950;
+  2 : EqSys:=2000;
+  3 : EqSys:=2050;
+  end;
+end else begin
    if ScopeConnected then begin
       try
          i:=T.EquatorialSystem;
@@ -369,6 +384,7 @@ begin
    3 : EqSys:=2050;
    4 : EqSys:=1950;
    end;
+end;
 end;
 
 Procedure Tpop_scope.ScopeReset;
@@ -443,6 +459,8 @@ SpeedButton4.Caption:=rsHelp;
 SpeedButton1.Caption:=rsConnect;
 SpeedButton5.Caption:=rsDisconnect;
 SpeedButton2.Caption:=rsHide;
+SpeedButton10.Caption:=rsAdvancedSett2;
+
 {$ifdef mswindows}
    WarningLabel.Caption:='';
 {$else}
@@ -464,6 +482,8 @@ ini:=tinifile.create(FConfig);
 nom:= ini.readstring('Ascom','name','');
 if trim(nom)='' then nom:='POTH.Telescope';
 edit1.text:=nom;
+EqSysVal:=ini.ReadInteger('Ascom','EqSys',0);
+ForceEqSys:=ini.ReadBool('Ascom','ForceEqSys',false);
 ShowAltAz.Checked:=ini.ReadBool('Ascom','AltAz',false);
 ReadIntBox.text:=ini.readstring('Ascom','read_interval','1000');
 lat.text:=ini.readstring('observatory','latitude','0');
@@ -479,6 +499,83 @@ Saveconfig;
 if ScopeConnected then begin
    canclose:=false;
    hide;
+end;
+end;
+
+procedure Tpop_scope.SpeedButton10Click(Sender: TObject);
+var f: TForm;
+    l: Tlabel;
+    btok,btcan,btdef: Tbutton;
+begin
+f:=TForm.Create(self);
+f.AutoSize:=false;
+f.Caption:='ASCOM '+rsAdvancedSett2;
+l:=TLabel.Create(f);
+l.WordWrap:=true;
+l.AutoSize:=false;
+l.Width:=350;
+l.Height:=round(2.2*l.Height);
+l.Caption:=rsDoNotChangeA;
+l.ParentFont:=true;
+l.Top:=8;
+l.Left:=8;
+feqsys:=TCheckBox.Create(l);
+leqsys:=TComboBox.Create(l);
+feqsys.Caption:=rsForceEqSys;
+feqsys.Left:=8;
+feqsys.Top:=l.Top+l.Height+8;
+leqsys.Left:=feqsys.Left+feqsys.Width+8;
+leqsys.Top:=feqsys.Top;
+leqsys.Items.Add('Local');
+leqsys.Items.Add('1950');
+leqsys.Items.Add('2000');
+leqsys.Items.Add('2050');
+btok:=Tbutton.Create(f);
+btcan:=Tbutton.Create(f);
+btdef:=Tbutton.Create(f);
+btok.ModalResult:=mrOK;
+btok.Caption:=rsOK;
+btcan.ModalResult:=mrCancel;
+btcan.Caption:=rsCancel;
+btdef.OnClick:=@SetDef;
+btdef.Caption:=rsDefault;
+btok.Left:=8;
+btok.Top:=leqsys.Top+leqsys.Height+8;
+btcan.Left:=btok.Left+btok.Width+8;
+btcan.Top:=btok.Top;
+btdef.Left:=btcan.Left+btcan.Width+8;
+btdef.Top:=btok.Top;
+l.Parent:=f;
+feqsys.Parent:=f;
+leqsys.Parent:=f;
+btok.Parent:=f;
+btcan.Parent:=f;
+btdef.Parent:=f;
+f.AutoSize:=true;
+FormPos(f,mouse.cursorpos.x,mouse.cursorpos.y);
+feqsys.Checked:=ForceEqSys;
+leqsys.ItemIndex:=EqSysVal;
+f.showmodal;
+if f.ModalResult=mrOK then begin
+  ForceEqSys := feqsys.Checked;
+  EqSysVal   := leqsys.ItemIndex;
+end;
+btok.Free;
+btcan.Free;
+btdef.Free;
+feqsys.Free;
+leqsys.Free;
+l.Free;
+f.Free;
+leqsys:=nil;
+feqsys:=nil;
+end;
+
+procedure Tpop_scope.SetDef(Sender: TObject);
+begin
+if (feqsys<>nil) and (leqsys<>nil) then begin
+ feqsys.Checked:=false;
+ leqsys.ItemIndex:=0;
 end;
 end;
 
@@ -518,6 +615,8 @@ begin
 ini:=tinifile.create(FConfig);
 ini.writestring('Ascom','name',edit1.text);
 ini.writestring('Ascom','read_interval',ReadIntBox.text);
+ini.writeInteger('Ascom','EqSys',EqSysVal);
+ini.writeBool('Ascom','ForceEqSys',ForceEqSys);
 ini.writeBool('Ascom','AltAz',ShowAltAz.Checked);
 ini.writestring('observatory','latitude',lat.text);
 ini.writestring('observatory','longitude',long.text);
