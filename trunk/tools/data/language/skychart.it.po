@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
 "PO-Revision-Date: 2013-06-23 15:35+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -160,6 +160,10 @@ msgstr "Ricerca avanzata"
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
 msgstr "Impostazioni avanzate per Scope.exe"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -1478,6 +1482,10 @@ msgstr "Misura distanza"
 msgid "Distance to the last object"
 msgstr "Distanza dall'ultimo oggetto"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Non filtrare oggetti Messier"
@@ -1989,6 +1997,10 @@ msgstr "Caratteri"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Per un grosso catalogo scegli Binario. Per uno piccolo che sarà modificato spesso scegli Testo, ciò ti permetterà di modificare il file e vedere immediatamente il risultato sulla cartina senza rieseguire questa utility."
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"

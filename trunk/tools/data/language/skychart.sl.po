@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
 "PO-Revision-Date: 2012-03-10 15:25+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -160,6 +160,10 @@ msgstr "Napredno iskanje"
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
 msgstr "Napredne nastavitve za Scope.exe"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -1477,6 +1481,10 @@ msgstr "Mera razdalje"
 msgid "Distance to the last object"
 msgstr "Razdalja do zadnjega predmeta"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr ""
@@ -1988,6 +1996,10 @@ msgstr "Pisave"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Za velik katalog, vedno izberite Dvojiški. Za kratke nize, ki se pogosto  spreminjajo, izberite Besedilne. Kar vam omogoča, da uredite datoteko in takoj vidite spremembe na karti brez, da ponovno zaženete orodje."
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"

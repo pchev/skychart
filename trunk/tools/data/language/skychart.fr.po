@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
-"PO-Revision-Date: 2013-07-20 09:50+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
+"PO-Revision-Date: 2013-08-31 12:15+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:57+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -160,6 +160,10 @@ msgstr "Recherche avancée"
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
 msgstr "Configuration avancée pour Scope.exe"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr "Paramètres avancés"
 
 #: u_translation.rsage
 msgid "Age"
@@ -1480,6 +1484,10 @@ msgstr "Mesure de la distance"
 msgid "Distance to the last object"
 msgstr "Distance à l'objet précédent"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr "Ne changez rien si vous n'êtes pas sûr de ce que vous faites!"
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Ne pas filtrer les objets Messier"
@@ -1992,6 +2000,10 @@ msgstr "Police de caractères"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Pour un gros catalogue toujours choisir Binaire. Pour un petit dont les données changent fréquement choisir Texte, cela permet de modifier le fichier et de voir immédiatement le résultat sans avoir à le retraiter."
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr "Forcer EqSys"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"

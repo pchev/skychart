@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
-"PO-Revision-Date: 2013-01-24 16:29+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
+"PO-Revision-Date: 2013-07-21 05:56+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:17+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -162,6 +162,10 @@ msgstr "Részletes keresés"
 
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
+msgstr ""
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
 msgstr ""
 
 #: u_translation.rsage
@@ -594,7 +598,7 @@ msgstr "Nem lehet írni a"
 
 #: u_translation.rscartesian
 msgid "Cartesian"
-msgstr ""
+msgstr "Descartes-féle"
 
 #: u_translation.rscascade
 msgid "Cascade"
@@ -1576,6 +1580,10 @@ msgstr "Távolságmérés"
 msgid "Distance to the last object"
 msgstr "Távolsága a legutóbbi objektumtól"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr ""
@@ -1667,7 +1675,7 @@ msgstr "A horizont látszólagos süllyedésének mutatása"
 
 #: u_translation.rsdrift
 msgid "Yearly drift"
-msgstr ""
+msgstr "Éves eltolódás"
 
 #: u_translation.rsdrivername
 msgid "Driver name"
@@ -1696,7 +1704,7 @@ msgstr "Időtartam"
 
 #: u_translation.rsearth
 msgid "Earth"
-msgstr ""
+msgstr "Föld"
 
 #: u_translation.rsearthshadow
 msgid "Earth shadow"
@@ -2115,6 +2123,10 @@ msgstr "Betütípus"
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Nagyobb katalógusok esetén mindig válaszd a bináris típust. Kisebb, gyakran használt adatmennyiség esetén válaszd a szövegfájl típust. Ez lehetőséget ad az eredmény azonnali ellenőrzésére a térképen."
 
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
+
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
 msgstr ""
@@ -2324,7 +2336,7 @@ msgstr "Állj 1000 hiba után"
 
 #: u_translation.rshammeraitoff
 msgid "Hammer-Aitoff"
-msgstr ""
+msgstr "Hammer-Aitoff"
 
 #: u_translation.rshandpadmodes
 msgid "HandPad Mode Selection"
@@ -2421,7 +2433,7 @@ msgstr "HTTP Proxy"
 
 #: u_translation.rshumidity
 msgid "Humidity %"
-msgstr ""
+msgstr "Pára %"
 
 #: u_translation.rsiconclickact
 #| msgid "Icon Click Action"
@@ -2462,7 +2474,7 @@ msgstr "Képek könyvtára"
 
 #: u_translation.rsimagelist
 msgid "Image list"
-msgstr ""
+msgstr "Képlista"
 
 #: u_translation.rsimageoptions
 #| msgid "Image Options"
@@ -3090,7 +3102,7 @@ msgstr "Középhely"
 
 #: u_translation.rsmercator
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator"
 
 #: u_translation.rsmercury
 msgid "Mercury"
@@ -3114,7 +3126,7 @@ msgstr "Tejút"
 
 #: u_translation.rsmillionkm
 msgid "million Km."
-msgstr ""
+msgstr "millió km"
 
 #: u_translation.rsmin
 msgid "m"
@@ -3816,7 +3828,7 @@ msgstr "Bolygók beállítása"
 
 #: u_translation.rsplanetvisibi
 msgid "Planet visibility"
-msgstr ""
+msgstr "Bolygó láthatósága"
 
 #: u_translation.rsplatedefect
 msgid "Plate defect"
@@ -4365,7 +4377,7 @@ msgstr "Kezdeti értékek visszaállítása"
 
 #: u_translation.rsresetrotatio
 msgid "Reset rotation"
-msgstr ""
+msgstr "Forgatás alaphelyzetbe"
 
 #: u_translation.rsresettolastt
 msgid "Reset to last time the chart was saved"
@@ -4429,7 +4441,7 @@ msgstr "Kelés ideje"
 
 #: u_translation.rsrotateby180d
 msgid "Rotate by 180 degrees"
-msgstr ""
+msgstr "Elforgatás 180 fokkal"
 
 #: u_translation.rsrotatecylind
 msgid "Use oblique cylindrical projections"
@@ -5803,7 +5815,7 @@ msgstr "Nézet"
 
 #: u_translation.rsviewheader
 msgid "View header"
-msgstr ""
+msgstr "Fejléc"
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"

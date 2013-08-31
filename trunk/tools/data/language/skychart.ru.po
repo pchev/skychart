@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ru\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
 "PO-Revision-Date: 2012-12-14 15:48+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclub@ua.fm, http://astroclub.zp.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "Language: ru_UA\n"
 
 #: u_translation.rs102cddss
@@ -160,6 +160,10 @@ msgstr "Быстрый поиск"
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
 msgstr "Дополнительные параметры для Scope.exe"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -1477,6 +1481,10 @@ msgstr "Измерение расстояния"
 msgid "Distance to the last object"
 msgstr "Расстояние к предыдущему объекту"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Не фильтровать объекты Мессье"
@@ -1988,6 +1996,10 @@ msgstr "Шрифты"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Для большого каталога всегда выбирайте двоичный тип. Для малых, часто изменяемых каталогов выберите текстовый тип, что позволит вам редактировать файл и видеть результат непосредственно на карте, без необходимости повторного обращения к CatGen 3.0"
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"

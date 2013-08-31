@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
-"PO-Revision-Date: 2013-06-17 16:08+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
+"PO-Revision-Date: 2013-08-12 00:44+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:57+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:17+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
 
@@ -161,6 +161,10 @@ msgstr "Pesquisa avançada"
 #: u_translation.rsadvancedsett
 msgid "Advanced Settings for Scope.exe"
 msgstr "Configurações avançadas"
+
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
@@ -1479,6 +1483,10 @@ msgstr "Medição da distância"
 msgid "Distance to the last object"
 msgstr "Distância ao último objeto"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "Não filtrar objetos Messier"
@@ -1990,6 +1998,10 @@ msgstr "Fontes"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Para catálogos grandes, selecione Binário. Para poucos dados, alterados com frequência, selecione Texto. Isto permite editar o arquivo e ver o resultado imediato na carta, sem a necessidade de reiniciar o programa."
+
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
@@ -4341,7 +4353,7 @@ msgstr "Selecionar Catálogos"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
-msgstr ""
+msgstr "Selecionar Círculo"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
@@ -4357,7 +4369,7 @@ msgstr "Selecionar foto da lista"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
-msgstr ""
+msgstr "Selecionar Retângulo"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"

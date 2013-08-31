@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-20 09:33+0000\n"
-"PO-Revision-Date: 2013-07-16 00:59+0000\n"
+"POT-Creation-Date: 2013-08-31 12:06+0000\n"
+"PO-Revision-Date: 2013-08-13 02:15+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-20 09:56+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -160,6 +160,10 @@ msgstr "ค้นหาขั้นสูง"
 msgid "Advanced Settings for Scope.exe"
 msgstr "ตั้งค่า Scope.exe ขั้นสูง"
 
+#: u_translation.rsadvancedsett2
+msgid "Advanced setting"
+msgstr ""
+
 #: u_translation.rsage
 msgid "Age"
 msgstr "อายุ"
@@ -266,11 +270,11 @@ msgstr "ทำการเปลี่ยนแปลงกับทุกแผ
 
 #: u_translation.rsarchivethisi
 msgid "Archive this image?"
-msgstr ""
+msgstr "เก็บภาพนี้?"
 
 #: u_translation.rsarchivetodir
 msgid "Archive to directory:"
-msgstr ""
+msgstr "เก็บภาพในไดเร็กทอรี:"
 
 #: u_translation.rsargumentofpe
 msgid "Argument of perihelion"
@@ -1038,7 +1042,7 @@ msgstr "ขึ้นถึงจุดสูงสุด"
 
 #: u_translation.rscurrentdate
 msgid "Date of validity"
-msgstr "วันที่และเวลา"
+msgstr "วันที่ใช้งานได้"
 
 #: u_translation.rscurrentdrive
 msgid "Current driver"
@@ -1306,7 +1310,7 @@ msgstr "กำลังลบออกจากตาราง..."
 
 #: u_translation.rsdeletefromel2
 msgid "Deleting from the element list..."
-msgstr ""
+msgstr "กำลังลบออกจากรายการข้อมูล..."
 
 #: u_translation.rsdeletefrommo
 msgid "Deleting from the monthly table ..."
@@ -1476,6 +1480,10 @@ msgstr "การวัดระยะห่าง"
 msgid "Distance to the last object"
 msgstr "ระยะห่างจากวัตถุที่แล้ว"
 
+#: u_translation.rsdonotchangea
+msgid "Do not change anything here if you are not sure what you do!"
+msgstr ""
+
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
 msgstr "ไม่ต้องกรองวัตถุเมซีเย"
@@ -1502,7 +1510,7 @@ msgstr "ดาวน์โหลด %s"
 
 #: u_translation.rsdownloadarch
 msgid "Download archive"
-msgstr ""
+msgstr "ดาวน์โหลดภาพจากคลัง"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
@@ -1988,6 +1996,10 @@ msgstr "แบบอักษร"
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "สำหรับแค็ตตาล็อกขนาดใหญ่ ให้เลือกไบนารีเสมอ ส่วนชุดข้อมูลขนาดเล็กที่มีการเปลี่ยนแปลงบ่อย ๆ ให้เลือกข้อความ วิธีนี้จะช่วยให้คุณสามารถแก้ไขแฟ้มและเห็นผลบนแผนที่ในทันที โดยไม่จำเป็นต้องใช้เครื่องมือนี้อีกครั้ง"
 
+#: u_translation.rsforceeqsys
+msgid "Force EqSys"
+msgstr ""
+
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
 msgstr ""
@@ -2302,7 +2314,7 @@ msgstr "ส่วนสว่าง"
 
 #: u_translation.rsimagearchive
 msgid "Image archive"
-msgstr ""
+msgstr "คลังภาพ"
 
 #: u_translation.rsimagedirecto
 msgid "Image directory"
@@ -2534,7 +2546,7 @@ msgstr "ป้ายชื่อ"
 
 #: u_translation.rslabeltext
 msgid "Label text"
-msgstr ""
+msgstr "ข้อความป้าย"
 
 #: u_translation.rslandscape
 msgid "Landscape"
@@ -2630,7 +2642,7 @@ msgstr "เส้น"
 
 #: u_translation.rslinear
 msgid "Linear"
-msgstr ""
+msgstr "เชิงเส้น"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3070,7 +3082,7 @@ msgstr "ตาเปล่า"
 
 #: u_translation.rsnakedeyerefe
 msgid "Naked eye reference"
-msgstr "อ้างอิงตาเปล่า"
+msgstr "โชติมาตรจางที่สุดที่เห็นด้วยตาเปล่า"
 
 #: u_translation.rsname
 msgid "Name"
@@ -3206,7 +3218,7 @@ msgstr "ไม่พบเครื่องพิมพ์!"
 
 #: u_translation.rsnopropermo
 msgid "(uncorrected for proper motion, no pm data available from this catalog)"
-msgstr ""
+msgstr "(ไม่มีการปรับแก้การเคลื่อนที่เฉพาะ, ไม่มีข้อมูลการเคลื่อนที่เฉพาะจากบัญชีดาวนี้)"
 
 #: u_translation.rsnormalcolor
 msgid "Normal (colour)"
@@ -4250,7 +4262,7 @@ msgstr "บันทึกเป็นแฟ้ม"
 
 #: u_translation.rsscaled
 msgid "Scaled"
-msgstr ""
+msgstr "ตามมาตราส่วน"
 
 #: u_translation.rsscanarchives
 msgid "Scan archives"
@@ -4338,7 +4350,7 @@ msgstr "เลือกแค็ตตาเล็อก"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
-msgstr ""
+msgstr "เลือกวงกลม"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
@@ -4354,7 +4366,7 @@ msgstr "เลือกเพลตจากรายชื่อ"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
-msgstr ""
+msgstr "เลือกสี่เหลี่ยม"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
@@ -5218,7 +5230,7 @@ msgstr "อ"
 
 #: u_translation.rsturnsdegree
 msgid "turns / degree"
-msgstr ""
+msgstr "ครั้ง/องศา"
 
 #: u_translation.rsturnshour
 msgid "turns / hour"
@@ -5326,7 +5338,7 @@ msgstr "ใช้กลุ่มสีที่กำหนดไว้"
 
 #: u_translation.rsuseasimplepo
 msgid "Use a simple pointer"
-msgstr ""
+msgstr "ใช้ตัวชี้อย่างง่าย"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5462,7 +5474,7 @@ msgstr "การมองเห็นจากสถานที่สังเ
 
 #: u_translation.rsvisualisatio
 msgid "Visualisation scale"
-msgstr ""
+msgstr "มาตราส่วนในการแสดงภาพ"
 
 #: u_translation.rsvisualmagnit
 msgid "Visual magnitude"
@@ -5494,11 +5506,11 @@ msgstr "คำเตือน! อยู่ในโหมดความละ�
 
 #: u_translation.rswarningsomea
 msgid "Warning! Some asteroid elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "คำเตือน! ข้อมูลดาวเคราะห์น้อยบางดวงล้าสมัยแล้ว ให้โหลดข้อมูลที่ถูกต้องสำหรับวันในแผนที่ปัจจุบัน"
 
 #: u_translation.rswarningsomec
 msgid "Warning! Some comet elements are outdated. Load element valid for the current map date."
-msgstr ""
+msgstr "คำเตือน! ข้อมูลดาวหางบางดวงล้าสมัยแล้ว ให้โหลดข้อมูลที่ถูกต้องสำหรับวันในแผนที่ปัจจุบัน"
 
 #: u_translation.rswarningthecu
 msgid "Warning! The used date or your observatory location have been changed from the previous settings. You can reply No now, and use the %s button to return to your original date/time and observation location, otherwise the changes will be applied. Do you want to continue?"
@@ -5510,7 +5522,7 @@ msgstr "คำเตือน!%sคุณกำลังจะทำลายฐ
 
 #: u_translation.rswarningyouar2
 msgid "Warning! you are using multiple catalogs as sources for identical objects. You risk the display of duplicates. Be sure that this is what you want."
-msgstr ""
+msgstr "คำเตือน! คุณกำลังใช้แค็ตตาล็อกหลายแค็ตตาล็อกเป็นแหล่งข้อมูล ซึ่งเสี่ยงต่อการแสดงวัตถุซ้ำซ้อนกัน โปรดแน่ใจว่านี่คือสิ่งที่คุณต้องการ"
 
 #: u_translation.rswarningyouha
 msgid "WARNING !%sYou have chosen to append the data to an existing catalog.%sThis existing catalog and index must be exactly of the same format, otherwise the catalog will be corrupted.%sIt is a good idea to backup the actual files before proceeding this operation.%sDo you want to continue?"
