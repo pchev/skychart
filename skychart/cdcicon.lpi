@@ -15,8 +15,55 @@
     <VersionInfo>
       <StringTable ProductVersion=""/>
     </VersionInfo>
-    <BuildModes Count="1">
+    <BuildModes Count="2">
       <Item1 Name="default" Default="True"/>
+      <Item2 Name="windows">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="win32"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <SearchPaths>
+            <UnitOutputDirectory Value="units/$(TargetCPU)-$(TargetOS)-$(LCLWidgetType)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <CStyleOperator Value="False"/>
+              <UseAnsiStrings Value="False"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
+            <Optimizations>
+              <OptimizationLevel Value="2"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <StripSymbols Value="True"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+          <Other>
+            <Verbosity>
+              <ShowHints Value="False"/>
+            </Verbosity>
+            <CompilerMessages>
+              <UseMsgFile Value="True"/>
+            </CompilerMessages>
+            <CompilerPath Value="$(CompPath)"/>
+          </Other>
+          <LCLWidgetType Value="win32"/>
+        </CompilerOptions>
+      </Item2>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -31,31 +78,34 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="8">
+    <RequiredPackages Count="9">
       <Item1>
-        <PackageName Value="zoomimage"/>
+        <PackageName Value="BGRABitmapPack"/>
       </Item1>
       <Item2>
-        <PackageName Value="CDCjdcalendar"/>
+        <PackageName Value="zoomimage"/>
       </Item2>
       <Item3>
-        <PackageName Value="libsql"/>
+        <PackageName Value="CDCjdcalendar"/>
       </Item3>
       <Item4>
-        <PackageName Value="satxy"/>
+        <PackageName Value="libsql"/>
       </Item4>
       <Item5>
-        <PackageName Value="Printer4Lazarus"/>
+        <PackageName Value="satxy"/>
       </Item5>
       <Item6>
-        <PackageName Value="enhedit"/>
+        <PackageName Value="Printer4Lazarus"/>
       </Item6>
       <Item7>
-        <PackageName Value="cdccatalog"/>
+        <PackageName Value="enhedit"/>
       </Item7>
       <Item8>
-        <PackageName Value="LCL"/>
+        <PackageName Value="cdccatalog"/>
       </Item8>
+      <Item9>
+        <PackageName Value="LCL"/>
+      </Item9>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

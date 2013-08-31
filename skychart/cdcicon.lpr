@@ -10,7 +10,7 @@ uses
   Forms
   { you can add units after this }, pu_tray, pu_clock, cdccatalog, enhedit,
   Printer4Lazarus, satxy, libsql, pu_calendar,
-  CDCjdcalendar, zoomimage;
+  CDCjdcalendar, zoomimage, bgrabitmappack;
 
 {$R *.res}
 

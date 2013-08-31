@@ -364,6 +364,11 @@ end;
 
 procedure Tf_tray.FormCreate(Sender: TObject);
 begin
+  Application.UpdateFormatSettings := False;
+  DefaultFormatSettings.DecimalSeparator:='.';
+  DefaultFormatSettings.ThousandSeparator:=',';
+  DefaultFormatSettings.DateSeparator:='/';
+  DefaultFormatSettings.TimeSeparator:=':';
   WantClose:=false;
   bmp:=TBitmap.Create;
   SysTray.PopUpMenu:=PopupMenu1;
