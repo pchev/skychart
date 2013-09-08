@@ -7,6 +7,8 @@ Nouvelles fonctions:
   * Option URL de mise à jour dans CatGen.
   * Archive les images DSS téléchargée.
   * Affiche les images d'archive FITS avec WCS.
+  * La page crépuscule du calendrier montre également des informations sur les nuits sans lune.
+  * Ajout d'un bouton du calendrier pour afficher les comètes les plus brillantes.
 
 Corrections:
   * Meilleure transparence image/carte.

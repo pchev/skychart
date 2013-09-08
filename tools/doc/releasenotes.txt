@@ -7,6 +7,8 @@ New functions:
   * Update URL option for Catgen text catalog.
   * Archive downloaded DSS images.
   * Display images with WCS from FITS archive.
+  * Calendar Twilight panel also show moonless night information.
+  * Add a button in Calendar to display the brightest comets first.
 
 Corrections:
   * Better picture/map transparency.

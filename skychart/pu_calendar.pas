@@ -41,7 +41,7 @@ type
               end;
 
 const nummsg = 47;
-      maxcombo = 500;
+      maxcombo = 1000;
 
 type
 
@@ -57,6 +57,7 @@ type
     BtnPrint: TButton;
     BtnReset: TButton;
     Button3: TButton;
+    Button4: TButton;
     dgPlanet: TDrawGrid;
     IridiumBox:TCheckBox;
     fullday:TCheckBox;
@@ -130,6 +131,7 @@ type
     SaveDialog1: TSaveDialog;
     procedure BtnCopyClipClick(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
     procedure dgPlanetDrawCell(Sender: TObject; aCol, aRow: Integer;
       aRect: TRect; aState: TGridDrawState);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -397,6 +399,7 @@ Asteroids.caption:=rsAsteroid;
 Button1.caption:=rsFilter;
 Button2.caption:=rsFilter;
 Button3.Caption:=rsDownloadTLE;
+Button4.caption:='<- '+rsBrightest;
 Solar.caption:=rsSolarEclipse;
 Lunar.caption:=rsLunarEclipse;
 Satellites.caption:=rsArtificialSa;
@@ -2117,13 +2120,17 @@ case pagecontrol1.ActivePage.TabIndex of
          Dategroup1(true);
          Dategroup2(true);
          if (cometgrid.Cells[0,2]<>'')and((dat31<>date1.jd)or(dat32<>date2.jd)or(dat33<>time.time)or(dat34<>step.text)) then
-            RefreshComet;
+            RefreshComet
+           else
+            if ComboBox1.Items.Count=0 then Button4Click(self);
          end;
      3 : begin
          Dategroup1(true);
          Dategroup2(true);
          if (asteroidgrid.Cells[0,2]<>'')and((dat71<>date1.jd)or(dat72<>date2.jd)or(dat73<>time.time)or(dat74<>step.text)) then
-            RefreshAsteroid;
+            RefreshAsteroid
+           else
+            if ComboBox2.Items.Count=0 then Button2Click(self);
          end;
      4 : begin
          Dategroup1(false);
@@ -2398,6 +2405,86 @@ Combobox1.Items.Assign(list);
 Combobox1.ItemIndex:=0;
 RefreshComet;
 end;
+
+procedure Tf_calendar.Button4Click(Sender: TObject);
+type Tmaglist = record mag: integer; cname,cid: string; end;
+var list: TStringList;
+    maglist: array[1..maxcombo+1] of Tmaglist;
+    i,n: integer;
+    epoch,jda,tp,q,ec,ap,an,ic,hh,g,eq: double;
+    ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc: double;
+    nam,elem_id: string;
+    Left, Right, SubArray, SubLeft, SubRight: integer;
+    Temp, Pivot: Tmaglist;
+    Stack: array[1..32]of record First, Last: integer;
+    end;
+function SorCompare(c1,c2:Tmaglist):integer;
+    begin
+     if c1.mag<c2.mag then result:=-1
+     else if c1.mag=c2.mag then result:=0
+     else if c1.mag>c2.mag then result:=1;
+    end;
+begin
+list:=TStringList.Create;
+Cdb.GetCometList('',maxcombo,list,cometid);
+jda:=date1.JD;
+n:=list.Count;
+for i:=0 to n-1 do begin
+ maglist[i+1].cname:=list[i];
+ maglist[i+1].cid:=cometid[i];
+ epoch:=cdb.GetCometEpoch(cometid[i],jda);
+ if cdb.GetComElem(cometid[i],epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
+   Fplanet.InitComet(tp,q,ec,ap,an,ic,hh,g,eq,nam);
+   Fplanet.Comet(jda,false,ra,de,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
+   maglist[i+1].mag:=round(100*magn);
+ end
+ else begin
+    maglist[i+1].mag:=9999;
+ end;
+end;
+SubArray:=1;
+Stack[SubArray].First:=1;
+Stack[SubArray].Last:=n;
+repeat
+  Left:=Stack[SubArray].First;
+  Right:=Stack[SubArray].Last;
+  Dec(SubArray);
+  repeat
+    SubLeft:=Left;
+    SubRight:=Right;
+    Pivot:=maglist[(Left+Right)shr 1];
+    repeat
+      while SorCompare(maglist[SubLeft], Pivot)<0 do Inc(SubLeft);
+      while SorCompare(maglist[SubRight], Pivot)>0 do Dec(SubRight);
+      IF SubLeft<=SubRight then
+      begin
+        Temp:=maglist[SubLeft];
+        maglist[SubLeft]:=maglist[SubRight];
+        maglist[SubRight]:=Temp;
+        Inc(SubLeft);
+        Dec(SubRight);
+      end;
+    until SubLeft>SubRight;
+    IF SubLeft<Right then
+    begin
+      Inc(SubArray);
+      Stack[SubArray].First:=SubLeft;
+      Stack[SubArray].Last:=Right;
+    end;
+    Right:=SubRight;
+  until Left>=Right;
+until SubArray=0;
+list.Clear;
+for i:=1 to n do begin
+  if maglist[i].mag>=round(100*config.CommagMax) then break;
+  list.Add(maglist[i].cname);
+  cometid[i-1]:=maglist[i].cid;
+end;
+Combobox1.Items.Assign(list);
+Combobox1.ItemIndex:=0;
+RefreshComet;
+end;
+
 
 procedure Tf_calendar.ComboBox1Change(Sender: TObject);
 begin

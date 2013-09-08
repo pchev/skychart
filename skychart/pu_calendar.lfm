@@ -1,7 +1,7 @@
 object f_calendar: Tf_calendar
-  Left = 421
+  Left = 482
   Height = 455
-  Top = 111
+  Top = 89
   Width = 835
   ActiveControl = Panel1
   Caption = 'f_calendar'
@@ -192,7 +192,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date1Change
       TabOrder = 0
-      Text = '2013.05.09.01'
+      Text = '2013.09.08.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -254,7 +254,7 @@ object f_calendar: Tf_calendar
       NumGlyphs = 1
       OnChange = Date2Change
       TabOrder = 1
-      Text = '2013.05.09.01'
+      Text = '2013.09.08.01'
       Caption = 'JD calendar'
       JD = 2453767.5
     end
@@ -636,9 +636,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 2
       object CometGrid: TStringGrid
         Left = 0
-        Height = 247
+        Height = 313
         Top = 43
-        Width = 834
+        Width = 831
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 13
@@ -655,10 +655,10 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 43
         Top = 0
-        Width = 834
+        Width = 831
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 834
+        ClientWidth = 831
         TabOrder = 1
         object Button1: TButton
           Left = 134
@@ -672,20 +672,29 @@ object f_calendar: Tf_calendar
         end
         object CometFilter: TEdit
           Left = 8
-          Height = 21
+          Height = 23
           Top = 9
           Width = 121
           TabOrder = 1
         end
         object ComboBox1: TComboBox
           Left = 216
-          Height = 24
+          Height = 25
           Top = 9
           Width = 169
           ItemHeight = 0
           OnSelect = ComboBox1Change
           Style = csDropDownList
           TabOrder = 2
+        end
+        object Button4: TButton
+          Left = 414
+          Height = 24
+          Top = 8
+          Width = 123
+          Caption = '<- Brightest'
+          OnClick = Button4Click
+          TabOrder = 3
         end
       end
     end
@@ -696,9 +705,9 @@ object f_calendar: Tf_calendar
       ImageIndex = 6
       object AsteroidGrid: TStringGrid
         Left = 0
-        Height = 244
+        Height = 313
         Top = 43
-        Width = 666
+        Width = 831
         Align = alClient
         Anchors = [akLeft, akRight, akBottom]
         ColCount = 9
@@ -715,14 +724,14 @@ object f_calendar: Tf_calendar
         Left = 0
         Height = 43
         Top = 0
-        Width = 666
+        Width = 831
         Align = alTop
         ClientHeight = 43
-        ClientWidth = 666
+        ClientWidth = 831
         TabOrder = 1
         object ComboBox2: TComboBox
           Left = 216
-          Height = 21
+          Height = 25
           Top = 13
           Width = 169
           ItemHeight = 0
