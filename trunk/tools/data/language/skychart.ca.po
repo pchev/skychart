@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-31 12:06+0000\n"
-"PO-Revision-Date: 2013-08-23 09:29+0000\n"
+"POT-Creation-Date: 2013-09-08 15:46+0000\n"
+"PO-Revision-Date: 2013-09-06 09:26+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-08 15:56+0000\n"
+"X-Generator: Launchpad (build 16760)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -163,7 +163,7 @@ msgstr "Configuració avançada per a Scope.exe"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
-msgstr ""
+msgstr "Configuració avançada"
 
 #: u_translation.rsage
 msgid "Age"
@@ -488,6 +488,10 @@ msgstr "Límit"
 #: u_translation.rsbrighter
 msgid "Brighter"
 msgstr "Més brillant"
+
+#: u_translation.rsbrightest
+msgid "Brightest"
+msgstr ""
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -1487,7 +1491,7 @@ msgstr "Distància a l'objecte precedent"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "No canvieu res aquí si no esteu segurs del què feu!"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -2003,7 +2007,7 @@ msgstr "Per a un catàleg gran escolliu sempre Binari. Per a un de petit amb can
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
+msgstr "Obligueu equatorials"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
