@@ -5606,3 +5606,7 @@ msgstr ""
 msgid "Force EqSys"
 msgstr ""
 
+#: u_translation:rsbrightest
+msgid "Brightest"
+msgstr ""
+

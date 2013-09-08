@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-31 12:06+0000\n"
+"POT-Creation-Date: 2013-09-08 15:46+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-08 15:56+0000\n"
+"X-Generator: Launchpad (build 16760)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -493,6 +493,10 @@ msgstr "Σύνορο"
 #: u_translation.rsbrighter
 msgid "Brighter"
 msgstr "Λαμπρότερο"
+
+#: u_translation.rsbrightest
+msgid "Brightest"
+msgstr ""
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"

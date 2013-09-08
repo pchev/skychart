@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-31 12:06+0000\n"
-"PO-Revision-Date: 2013-06-23 15:35+0000\n"
+"POT-Creation-Date: 2013-09-08 15:46+0000\n"
+"PO-Revision-Date: 2013-09-01 15:38+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-31 12:16+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-08 15:56+0000\n"
+"X-Generator: Launchpad (build 16760)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -163,7 +163,7 @@ msgstr "Impostazioni avanzate per Scope.exe"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
-msgstr ""
+msgstr "Impostazioni avanzate"
 
 #: u_translation.rsage
 msgid "Age"
@@ -488,6 +488,10 @@ msgstr "Confine"
 #: u_translation.rsbrighter
 msgid "Brighter"
 msgstr "Più luminoso"
+
+#: u_translation.rsbrightest
+msgid "Brightest"
+msgstr ""
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -1484,7 +1488,7 @@ msgstr "Distanza dall'ultimo oggetto"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "Non modificare nulla se non sei sicuro di quello che stai facendo!"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -2000,7 +2004,7 @@ msgstr "Per un grosso catalogo scegli Binario. Per uno piccolo che sarà modific
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
+msgstr "Forza EqSys"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
@@ -4352,7 +4356,7 @@ msgstr "Seleziona catalogo"
 
 #: u_translation.rsselectcircle
 msgid "Select Circle"
-msgstr ""
+msgstr "Seleziona cerchio"
 
 #: u_translation.rsselectcolorb
 msgid "Select color (black for catalog default)"
@@ -4368,7 +4372,7 @@ msgstr "Seleziona lastra dalla lista"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
-msgstr ""
+msgstr "Seleziona rettangolo"
 
 #: u_translation.rsselectthefie
 msgid "Select the fields to use and their position in the text file"
