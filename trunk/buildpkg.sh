@@ -215,7 +215,7 @@ if [[ $make_win32 ]]; then
   ./configure $configopt prefix=$builddir/Data target=i386-win32$extratarget
   if [[ $? -ne 0 ]]; then exit 1;fi
   make OS_TARGET=win32 CPU_TARGET=i386 clean
-  make OS_TARGET=win32 CPU_TARGET=i386
+  fpcopts="-O1 -Ch524288 -CX -XX -Xs" make OS_TARGET=win32 CPU_TARGET=i386
   if [[ $? -ne 0 ]]; then exit 1;fi
   make install_win
   if [[ $? -ne 0 ]]; then exit 1;fi
