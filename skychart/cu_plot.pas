@@ -535,6 +535,7 @@ begin
       else
          newalpha:=255;
   3 : if (whitetr and(newalpha<blacklevel))or((not whitetr)and(newalpha>blacklevel)) then newalpha:=forcealpha else newalpha:=0; // 3: fixed transparency, except bg transparent
+  4 : newalpha:=p^.alpha;
   end;
   if whitebg then begin
     p^.red:=255-p^.red;
@@ -1482,7 +1483,7 @@ end;
 
 procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
 var symbol: string;
-    ds,mode : integer;
+    ds,mode,flipy : integer;
     spng: TPortableNetworkGraphic;
     sbmp: TBitmap;
 begin
@@ -1503,9 +1504,15 @@ begin
    planetbmpjd:=MaxInt;
    planetbmprot:=999;
    ds:=planetbmp.Width;
+   flipy:=1;
    if cfgplot.TransparentPlanet then mode:=0
-       else mode:=2;
-   PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,planetbmp,mode);
+       else
+        if ds=20 then mode:=2
+           else begin
+             mode:=4;
+             flipy:=-1;
+           end;
+   PlotImage(xx,yy,ds,ds,0,1,flipy,WhiteBg,true,planetbmp,mode);
  end;
 end;
 
