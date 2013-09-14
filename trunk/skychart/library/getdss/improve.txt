@@ -1,10 +1,56 @@
+   -- 2013 Sep 3:  Numerous changes made by Han Kleijn and Skip Gaede
+to improve the accuracy of WCS keywords,  as described in the following
+e-mail from Han:
+
+------------------- quote begins -------------------
+Bill,
+
+Skip and myself have reviewed  the WCS code previously send to you on 5
+of June 2013 and we both agree that  the math is sound and correct .
+Attached our final version. The results are the same as the previous
+version but the formatting  of the numbers in the header is improved.
+Skip introduced a part to make it possible to produce exponents with two
+digits instead of the default three.
+
+The difference compared to the original 1.1 version is that the AMDPOS
+calls are now using correctly plate positions with origin (0.0,0.0)
+rather then FITS pixel positions with origin (0.5,0.5). Usage of plate
+positions makes the code much simpler and prevents 0.5 pixel errors.
+Conversion from plate position to CRPIX1 and CRPIX2 in FITS coordinates
+is only done in the  final string conversion step where a 0.5 pixel
+correction and subsampling factor are applied. The calculation of the
+pixel size, rotation in x, y for the factors CDELT1, CDELT2, CROTA1 and
+CROTA2 is done in two separate pieces of line code to keep it clean and
+transparent. For the  CD matrix calculation, the correct sin and cos
+terms where added. Comparison between positions calculated by  the
+polynominal solution, old WCS and new WCS are consistent and correct for
+sub sampling 1,  but also for 2,4, 5... Only very small position errors
+in the WCS solution occur away from the FITS centre due to the non
+linearity of Schmidt plates.  These WCS errors are very small and could
+rise to about 0.5 arc seconds maximum at a 750 pixel distance from the
+FITS centre.
+
+Kind regards, Han Kleijn
+------------------- quote ends -------------------
+
+   -- 11 May 2013:  added a 'set_environment_data' function,  the
+complement to 'get_environment_data'.  I had a situation where the
+Windows GUI extraction software needed to be able to set certain
+parameters in 'environ.dat'.
+
+   -- 29 Apr 2013:  revised several files for 64-bit OSes.  I won't
+guarantee that I got everything to work,  but definitely fixed some
+things that would,  without question,  have caused trouble.  Also
+cleaned up g++ warning messages (almost all cosmetic).
+
    -- 1 Apr 2013:  Skip Gaede provided fixes for the WCS keywords to
 allow them to replicate the values provided by Getimage 3.0,  as well
 as some fixes to ensure that cross-platform compiling would work.
 Patrick Chevalley pointed out that the use of 'long' integers could
 cause trouble when compiling on 64-bit machines;  there are instances
 (in the indexing of .rsl "RealSky Lump" files) where int32_t should be
-used,  because actual four-byte integers are read and written.
+used,  because actual four-byte integers are read and written.  (Fixed
+29 April.)
 
    -- 31 Mar 2012:  revised 'makelump.cpp' to produce better error
 messages.  When it works,  it'll work just as it always did;  but it

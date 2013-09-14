@@ -27,7 +27,7 @@ extern int hdecompress( int **a, int *nx, int *ny, int filesize,
    t0 = ZKEY_CLOCK;
    dss_debug_printf( "decode, ");
    rval = decode( filesize, file_buff, a, nx, ny, &scale);
-//   times[1] += ZKEY_CLOCK - t0;
+   times[1] += ZKEY_CLOCK - t0;
    if( rval)
       return( rval);
 
@@ -40,12 +40,12 @@ extern int hdecompress( int **a, int *nx, int *ny, int filesize,
       while( p < endptr)
          *p++ *= scale;
       }
-//   times[2] += ZKEY_CLOCK - t0;
+   times[2] += ZKEY_CLOCK - t0;
 
    dss_debug_printf( "hinv, ");
    t0 = ZKEY_CLOCK;
    rval = hinv( *a,*nx,*ny);           /* Inverse H-transform  */
-//   times[3] += ZKEY_CLOCK - t0;
+   times[3] += ZKEY_CLOCK - t0;
    dss_debug_printf( "done. ");
    return( rval);
 }
