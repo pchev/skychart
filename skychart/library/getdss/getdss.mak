@@ -1,7 +1,7 @@
-# Microsoft Developer Studio Generated NMAKE File, Based on GETDSS.DSP
+# Microsoft Developer Studio Generated NMAKE File, Based on getdss.dsp
 !IF "$(CFG)" == ""
-CFG=getdss - Win32 Debug
-!MESSAGE No configuration specified. Defaulting to getdss - Win32 Debug.
+CFG=getdss - Win32 Release
+!MESSAGE No configuration specified. Defaulting to getdss - Win32 Release.
 !ENDIF 
 
 !IF "$(CFG)" != "getdss - Win32 Release" && "$(CFG)" != "getdss - Win32 Debug"
@@ -9,7 +9,7 @@ CFG=getdss - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "GETDSS.MAK" CFG="getdss - Win32 Debug"
+!MESSAGE NMAKE /f "getdss.mak" CFG="getdss - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
@@ -29,107 +29,88 @@ NULL=nul
 
 OUTDIR=.\Release
 INTDIR=.\Release
-# Begin Custom Macros
-OutDir=.\Release
-# End Custom Macros
 
-!IF "$(RECURSE)" == "0" 
+ALL : "..\Release\getdss.dll"
 
-ALL : "$(OUTDIR)\GETDSS.dll"
-
-!ELSE 
-
-ALL : "$(OUTDIR)\GETDSS.dll"
-
-!ENDIF 
 
 CLEAN :
-	-@erase "$(INTDIR)\Bitinput.obj"
-	-@erase "$(INTDIR)\Decode.obj"
-	-@erase "$(INTDIR)\Dodecode.obj"
-	-@erase "$(INTDIR)\Dss.obj"
-	-@erase "$(INTDIR)\Extr_fit.obj"
+	-@erase "$(INTDIR)\bitinput.obj"
+	-@erase "$(INTDIR)\decode.obj"
+	-@erase "$(INTDIR)\dodecode.obj"
+	-@erase "$(INTDIR)\dss.obj"
+	-@erase "$(INTDIR)\extr_fit.obj"
 	-@erase "$(INTDIR)\getdss_dll.obj"
-	-@erase "$(INTDIR)\Getpiece.obj"
-	-@erase "$(INTDIR)\Hdcmprss.obj"
-	-@erase "$(INTDIR)\Hinv.obj"
-	-@erase "$(INTDIR)\Makelump.obj"
-	-@erase "$(INTDIR)\Platelst.obj"
-	-@erase "$(INTDIR)\Qtreedec.obj"
-	-@erase "$(INTDIR)\vc50.idb"
-	-@erase "$(OUTDIR)\GETDSS.dll"
-	-@erase "$(OUTDIR)\GETDSS.exp"
-	-@erase "$(OUTDIR)\GETDSS.lib"
+	-@erase "$(INTDIR)\getpiece.obj"
+	-@erase "$(INTDIR)\hdcmprss.obj"
+	-@erase "$(INTDIR)\hinv.obj"
+	-@erase "$(INTDIR)\platelst.obj"
+	-@erase "$(INTDIR)\qtreedec.obj"
+	-@erase "$(INTDIR)\vc60.idb"
+	-@erase "$(OUTDIR)\getdss.exp"
+	-@erase "$(OUTDIR)\getdss.lib"
+	-@erase "..\Release\getdss.dll"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
 CPP=cl.exe
-CPP_PROJ=/nologo /Zp1 /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS"\
- /Fp"$(INTDIR)\GETDSS.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
-CPP_OBJS=.\Release/
-CPP_SBRS=.
+CPP_PROJ=/nologo /Zp1 /MD /W3 /GX /O2 /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "GETDSS_EXPORTS" /D "FIX_3DIGIT_EXPS" /Fp"$(INTDIR)\getdss.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
 
-.c{$(CPP_OBJS)}.obj::
+.c{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cpp{$(CPP_OBJS)}.obj::
+.cpp{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cxx{$(CPP_OBJS)}.obj::
+.cxx{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.c{$(CPP_SBRS)}.sbr::
+.c{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cpp{$(CPP_SBRS)}.sbr::
+.cpp{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cxx{$(CPP_SBRS)}.sbr::
+.cxx{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
 MTL=midl.exe
-MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /o NUL /win32 
+MTL_PROJ=/nologo /D "NDEBUG" /mktyplib203 /win32 
 RSC=rc.exe
 BSC32=bscmake.exe
-BSC32_FLAGS=/nologo /o"$(OUTDIR)\GETDSS.bsc" 
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\getdss.bsc" 
 BSC32_SBRS= \
 	
 LINK32=link.exe
-LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib\
- advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib\
- odbccp32.lib /nologo /subsystem:windows /dll /incremental:no\
- /pdb:"$(OUTDIR)\GETDSS.pdb" /machine:I386 /def:".\getdss.def"\
- /out:"$(OUTDIR)\GETDSS.dll" /implib:"$(OUTDIR)\GETDSS.lib" 
+LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:no /pdb:"$(OUTDIR)\getdss.pdb" /machine:I386 /def:"..\..\get_dss\getdss.def" /out:"../Release/getdss.dll" /implib:"$(OUTDIR)\getdss.lib" 
 DEF_FILE= \
-	".\getdss.def"
+	"..\..\get_dss\getdss.def"
 LINK32_OBJS= \
-	"$(INTDIR)\Bitinput.obj" \
-	"$(INTDIR)\Decode.obj" \
-	"$(INTDIR)\Dodecode.obj" \
-	"$(INTDIR)\Dss.obj" \
-	"$(INTDIR)\Extr_fit.obj" \
+	"$(INTDIR)\bitinput.obj" \
+	"$(INTDIR)\decode.obj" \
+	"$(INTDIR)\dodecode.obj" \
+	"$(INTDIR)\dss.obj" \
 	"$(INTDIR)\getdss_dll.obj" \
-	"$(INTDIR)\Getpiece.obj" \
-	"$(INTDIR)\Hdcmprss.obj" \
-	"$(INTDIR)\Hinv.obj" \
-	"$(INTDIR)\Makelump.obj" \
-	"$(INTDIR)\Platelst.obj" \
-	"$(INTDIR)\Qtreedec.obj"
+	"$(INTDIR)\getpiece.obj" \
+	"$(INTDIR)\hdcmprss.obj" \
+	"$(INTDIR)\hinv.obj" \
+	"$(INTDIR)\platelst.obj" \
+	"$(INTDIR)\qtreedec.obj" \
+	"$(INTDIR)\extr_fit.obj"
 
-"$(OUTDIR)\GETDSS.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
+"..\Release\getdss.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
     $(LINK32) @<<
   $(LINK32_FLAGS) $(LINK32_OBJS)
 <<
@@ -138,111 +119,91 @@ LINK32_OBJS= \
 
 OUTDIR=.\Debug
 INTDIR=.\Debug
-# Begin Custom Macros
-OutDir=.\Debug
-# End Custom Macros
 
-!IF "$(RECURSE)" == "0" 
+ALL : "..\Debug\getdss.dll"
 
-ALL : "$(OUTDIR)\GETDSS.dll"
-
-!ELSE 
-
-ALL : "$(OUTDIR)\GETDSS.dll"
-
-!ENDIF 
 
 CLEAN :
-	-@erase "$(INTDIR)\Bitinput.obj"
-	-@erase "$(INTDIR)\Decode.obj"
-	-@erase "$(INTDIR)\Dodecode.obj"
-	-@erase "$(INTDIR)\Dss.obj"
-	-@erase "$(INTDIR)\Extr_fit.obj"
+	-@erase "$(INTDIR)\bitinput.obj"
+	-@erase "$(INTDIR)\decode.obj"
+	-@erase "$(INTDIR)\dodecode.obj"
+	-@erase "$(INTDIR)\dss.obj"
+	-@erase "$(INTDIR)\extr_fit.obj"
 	-@erase "$(INTDIR)\getdss_dll.obj"
-	-@erase "$(INTDIR)\Getpiece.obj"
-	-@erase "$(INTDIR)\Hdcmprss.obj"
-	-@erase "$(INTDIR)\Hinv.obj"
-	-@erase "$(INTDIR)\Makelump.obj"
-	-@erase "$(INTDIR)\Platelst.obj"
-	-@erase "$(INTDIR)\Qtreedec.obj"
-	-@erase "$(INTDIR)\vc50.idb"
-	-@erase "$(INTDIR)\vc50.pdb"
-	-@erase "$(OUTDIR)\GETDSS.dll"
-	-@erase "$(OUTDIR)\GETDSS.exp"
-	-@erase "$(OUTDIR)\GETDSS.ilk"
-	-@erase "$(OUTDIR)\GETDSS.lib"
-	-@erase "$(OUTDIR)\GETDSS.pdb"
+	-@erase "$(INTDIR)\getpiece.obj"
+	-@erase "$(INTDIR)\hdcmprss.obj"
+	-@erase "$(INTDIR)\hinv.obj"
+	-@erase "$(INTDIR)\platelst.obj"
+	-@erase "$(INTDIR)\qtreedec.obj"
+	-@erase "$(INTDIR)\vc60.idb"
+	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\getdss.exp"
+	-@erase "$(OUTDIR)\getdss.lib"
+	-@erase "$(OUTDIR)\getdss.pdb"
+	-@erase "..\Debug\getdss.dll"
+	-@erase "..\Debug\getdss.ilk"
 
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
 CPP=cl.exe
-CPP_PROJ=/nologo /Zp1 /MDd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D\
- "_WINDOWS" /Fp"$(INTDIR)\GETDSS.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD\
- /c 
-CPP_OBJS=.\Debug/
-CPP_SBRS=.
+CPP_PROJ=/nologo /Zp1 /ML /W3 /Gm /GX /ZI /Od /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "GETDSS_EXPORTS" /D "FIX_3DIGIT_EXPS" /Fp"$(INTDIR)\getdss.pch" /YX /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
 
-.c{$(CPP_OBJS)}.obj::
+.c{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cpp{$(CPP_OBJS)}.obj::
+.cpp{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cxx{$(CPP_OBJS)}.obj::
+.cxx{$(INTDIR)}.obj::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.c{$(CPP_SBRS)}.sbr::
+.c{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cpp{$(CPP_SBRS)}.sbr::
+.cpp{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
-.cxx{$(CPP_SBRS)}.sbr::
+.cxx{$(INTDIR)}.sbr::
    $(CPP) @<<
    $(CPP_PROJ) $< 
 <<
 
 MTL=midl.exe
-MTL_PROJ=/nologo /D "_DEBUG" /mktyplib203 /o NUL /win32 
+MTL_PROJ=/nologo /D "_DEBUG" /mktyplib203 /win32 
 RSC=rc.exe
 BSC32=bscmake.exe
-BSC32_FLAGS=/nologo /o"$(OUTDIR)\GETDSS.bsc" 
+BSC32_FLAGS=/nologo /o"$(OUTDIR)\getdss.bsc" 
 BSC32_SBRS= \
 	
 LINK32=link.exe
-LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib\
- advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib\
- odbccp32.lib /nologo /subsystem:windows /dll /incremental:yes\
- /pdb:"$(OUTDIR)\GETDSS.pdb" /debug /machine:I386 /def:".\getdss.def"\
- /out:"$(OUTDIR)\GETDSS.dll" /implib:"$(OUTDIR)\GETDSS.lib" /pdbtype:sept 
+LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /incremental:yes /pdb:"$(OUTDIR)\getdss.pdb" /debug /machine:I386 /def:"..\..\get_dss\getdss.def" /out:"../Debug/getdss.dll" /implib:"$(OUTDIR)\getdss.lib" /pdbtype:sept 
 DEF_FILE= \
-	".\getdss.def"
+	"..\..\get_dss\getdss.def"
 LINK32_OBJS= \
-	"$(INTDIR)\Bitinput.obj" \
-	"$(INTDIR)\Decode.obj" \
-	"$(INTDIR)\Dodecode.obj" \
-	"$(INTDIR)\Dss.obj" \
-	"$(INTDIR)\Extr_fit.obj" \
+	"$(INTDIR)\bitinput.obj" \
+	"$(INTDIR)\decode.obj" \
+	"$(INTDIR)\dodecode.obj" \
+	"$(INTDIR)\dss.obj" \
 	"$(INTDIR)\getdss_dll.obj" \
-	"$(INTDIR)\Getpiece.obj" \
-	"$(INTDIR)\Hdcmprss.obj" \
-	"$(INTDIR)\Hinv.obj" \
-	"$(INTDIR)\Makelump.obj" \
-	"$(INTDIR)\Platelst.obj" \
-	"$(INTDIR)\Qtreedec.obj"
+	"$(INTDIR)\getpiece.obj" \
+	"$(INTDIR)\hdcmprss.obj" \
+	"$(INTDIR)\hinv.obj" \
+	"$(INTDIR)\platelst.obj" \
+	"$(INTDIR)\qtreedec.obj" \
+	"$(INTDIR)\extr_fit.obj"
 
-"$(OUTDIR)\GETDSS.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
+"..\Debug\getdss.dll" : "$(OUTDIR)" $(DEF_FILE) $(LINK32_OBJS)
     $(LINK32) @<<
   $(LINK32_FLAGS) $(LINK32_OBJS)
 <<
@@ -250,107 +211,80 @@ LINK32_OBJS= \
 !ENDIF 
 
 
+!IF "$(NO_EXTERNAL_DEPS)" != "1"
+!IF EXISTS("getdss.dep")
+!INCLUDE "getdss.dep"
+!ELSE 
+!MESSAGE Warning: cannot find "getdss.dep"
+!ENDIF 
+!ENDIF 
+
+
 !IF "$(CFG)" == "getdss - Win32 Release" || "$(CFG)" == "getdss - Win32 Debug"
-SOURCE=.\Bitinput.cpp
-DEP_CPP_BITIN=\
-	".\Bitfile.h"\
-	
+SOURCE=..\..\get_dss\bitinput.cpp
 
-"$(INTDIR)\Bitinput.obj" : $(SOURCE) $(DEP_CPP_BITIN) "$(INTDIR)"
+"$(INTDIR)\bitinput.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Decode.cpp
-DEP_CPP_DECOD=\
-	".\Bitfile.h"\
-	".\Errcode.h"\
-	
+SOURCE=..\..\get_dss\decode.cpp
 
-"$(INTDIR)\Decode.obj" : $(SOURCE) $(DEP_CPP_DECOD) "$(INTDIR)"
+"$(INTDIR)\decode.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Dodecode.cpp
-DEP_CPP_DODEC=\
-	".\Bitfile.h"\
-	".\Errcode.h"\
-	
+SOURCE=..\..\get_dss\dodecode.cpp
 
-"$(INTDIR)\Dodecode.obj" : $(SOURCE) $(DEP_CPP_DODEC) "$(INTDIR)"
+"$(INTDIR)\dodecode.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Dss.cpp
-DEP_CPP_DSS_C=\
-	".\Dss.h"\
-	
+SOURCE=..\..\get_dss\dss.cpp
 
-"$(INTDIR)\Dss.obj" : $(SOURCE) $(DEP_CPP_DSS_C) "$(INTDIR)"
+"$(INTDIR)\dss.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Extr_fit.cpp
-DEP_CPP_EXTR_=\
-	".\Dss.h"\
-	".\Errcode.h"\
-	".\Get_dss.h"\
-	".\Platelst.h"\
-	
+SOURCE=..\..\get_dss\extr_fit.cpp
 
-"$(INTDIR)\Extr_fit.obj" : $(SOURCE) $(DEP_CPP_EXTR_) "$(INTDIR)"
+"$(INTDIR)\extr_fit.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\getdss_dll.cpp
-DEP_CPP_GETDS=\
-	".\Errcode.h"\
-	".\Get_dss.h"\
-	".\getdss.h"\
-	".\Platelst.h"\
-	
+SOURCE=..\..\get_dss\getdss_dll.cpp
 
-"$(INTDIR)\getdss_dll.obj" : $(SOURCE) $(DEP_CPP_GETDS) "$(INTDIR)"
+"$(INTDIR)\getdss_dll.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Getpiece.cpp
-DEP_CPP_GETPI=\
-	".\Errcode.h"\
-	".\Get_dss.h"\
-	".\Platelst.h"\
-	
+SOURCE=..\..\get_dss\getpiece.cpp
 
-"$(INTDIR)\Getpiece.obj" : $(SOURCE) $(DEP_CPP_GETPI) "$(INTDIR)"
+"$(INTDIR)\getpiece.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Hdcmprss.cpp
+SOURCE=..\..\get_dss\hdcmprss.cpp
 
-"$(INTDIR)\Hdcmprss.obj" : $(SOURCE) "$(INTDIR)"
-
-
-SOURCE=.\Hinv.cpp
-DEP_CPP_HINV_=\
-	".\Errcode.h"\
-	
-
-"$(INTDIR)\Hinv.obj" : $(SOURCE) $(DEP_CPP_HINV_) "$(INTDIR)"
+"$(INTDIR)\hdcmprss.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Makelump.cpp
+SOURCE=..\..\get_dss\hinv.cpp
 
-"$(INTDIR)\Makelump.obj" : $(SOURCE) "$(INTDIR)"
-
-
-SOURCE=.\Platelst.cpp
-DEP_CPP_PLATE=\
-	".\Dss.h"\
-	".\Platelst.h"\
-	
-
-"$(INTDIR)\Platelst.obj" : $(SOURCE) $(DEP_CPP_PLATE) "$(INTDIR)"
+"$(INTDIR)\hinv.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
-SOURCE=.\Qtreedec.cpp
-DEP_CPP_QTREE=\
-	".\Bitfile.h"\
-	".\Errcode.h"\
-	
+SOURCE=..\..\get_dss\platelst.cpp
 
-"$(INTDIR)\Qtreedec.obj" : $(SOURCE) $(DEP_CPP_QTREE) "$(INTDIR)"
+"$(INTDIR)\platelst.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
+
+
+SOURCE=..\..\get_dss\qtreedec.cpp
+
+"$(INTDIR)\qtreedec.obj" : $(SOURCE) "$(INTDIR)"
+	$(CPP) $(CPP_PROJ) $(SOURCE)
 
 
 

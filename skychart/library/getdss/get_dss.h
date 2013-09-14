@@ -46,6 +46,8 @@ int DLL_FUNC grab_realsky_chunk( const char *szDrive, const char *plate,
                                FILE *ofile, int subsamp, long *histogram);
 int DLL_FUNC get_environment_data( ENVIRONMENT_DATA *edata,
                                    const char *filename);
+int DLL_FUNC set_environment_data( const ENVIRONMENT_DATA *edata,
+                                   const char *filename);
 int DLL_FUNC create_image_line( char *oline, ENVIRONMENT_DATA *edata);
 int DLL_FUNC parse_image_line( ENVIRONMENT_DATA *edata, const char *iline);
 void DLL_FUNC remount_drive( const char *pDrive );
