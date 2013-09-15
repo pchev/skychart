@@ -1483,7 +1483,7 @@ end;
 
 procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
 var symbol: string;
-    ds,mode,flipy : integer;
+    ds,mode: integer;
     spng: TPortableNetworkGraphic;
     sbmp: TBitmap;
 begin
@@ -1504,15 +1504,11 @@ begin
    planetbmpjd:=MaxInt;
    planetbmprot:=999;
    ds:=planetbmp.Width;
-   flipy:=1;
    if cfgplot.TransparentPlanet then mode:=0
        else
         if ds=20 then mode:=2
-           else begin
-             mode:=4;
-             flipy:=-1;
-           end;
-   PlotImage(xx,yy,ds,ds,0,1,flipy,WhiteBg,true,planetbmp,mode);
+           else mode:=4;
+   PlotImage(xx,yy,ds,ds,0,1,1,WhiteBg,true,planetbmp,mode);
  end;
 end;
 
