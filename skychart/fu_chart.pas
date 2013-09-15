@@ -1664,6 +1664,10 @@ else begin
             sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
             Refresh;
           end;
+     'L' : begin                                        // ctrl+l
+            sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
+            Refresh;
+           end;
     end;
   end else begin
     // Numeric keys handling
