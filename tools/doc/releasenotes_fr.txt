@@ -9,7 +9,7 @@ Nouvelles fonctions:
   * Affiche les images d'archive FITS avec WCS.
   * La page crépuscule du calendrier montre également des informations sur les nuits sans lune.
   * Ajout d'un bouton du calendrier pour afficher les comètes les plus brillantes.
-  * Ajout du racourci Ctrl+L pour contrôler l'affichage de la légende.
+  * Ajout des racourcis Ctrl+L et Ctrl+Shift+L pour contrôler l'affichage de la légende.
 
 Corrections:
   * Meilleure transparence image/carte.

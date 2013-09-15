@@ -1669,6 +1669,14 @@ else begin
             Refresh;
            end;
     end;
+  end else if (Shift=[ssCtrl,ssShift])and (key<>17) then begin
+    // Ctrl + Shift + key handling
+    case ckey of
+     'L' : begin                                        // ctrl+shift+l
+            sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
+            Refresh;
+           end;
+    end;
   end else begin
     // Numeric keys handling
     if shift=[] then begin

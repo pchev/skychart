@@ -9,7 +9,7 @@ New functions:
   * Display images with WCS from FITS archive.
   * Calendar Twilight panel also show moonless night information.
   * Add a button in Calendar to display the brightest comets first.
-  * Add Ctrl+L shortcut to switch the chart legend.
+  * Add Ctrl+L and Ctrl+Shift+L shortcuts to switch the chart legend.
 
 Corrections:
   * Better picture/map transparency.
