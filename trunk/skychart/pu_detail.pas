@@ -61,6 +61,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure EditCopyExecute(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure HTMLGetImageX(Sender: TIpHtmlNode; const URL: string; var Picture: TPicture);
     procedure IpHtmlPanel1HotClick(Sender: TObject);
@@ -73,6 +74,7 @@ type
     FNeighbor : Tstr1func;
     FHTMLText: String;
     FTextOnly: boolean;
+    Fkeydown: TKeyEvent;
     procedure SetHTMLText(const value: string);
   public
     { Public declarations }
@@ -84,6 +86,7 @@ type
     property TextOnly: boolean read FTextOnly write FTextOnly;
     property OnCenterObj: Tstr1func read FCenter write FCenter;
     property OnNeighborObj: Tstr1func read FNeighbor write FNeighbor;
+    property OnKeydown: TKeyEvent read Fkeydown write Fkeydown;
     procedure SetLang;
   end;
 
@@ -159,6 +162,11 @@ procedure Tf_detail.EditCopyExecute(Sender: TObject);
 var buf: string;
 begin
   IpHtmlPanel1.CopyToClipboard;
+end;
+
+procedure Tf_detail.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if assigned(Fkeydown) then Fkeydown(Sender,Key,Shift);
 end;
 
 procedure Tf_detail.FormShow(Sender: TObject);

@@ -8,6 +8,7 @@ object f_detail: Tf_detail
   ClientHeight = 461
   ClientWidth = 393
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   OnShow = FormShow
   ParentFont = True
   LCLVersion = '1.0.8.0'

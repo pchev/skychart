@@ -1248,6 +1248,7 @@ if VerboseMsg then
  f_info.OnShowDetail:=showdetailinfo;
  f_detail.OnCenterObj:=CenterFindObj;
  f_detail.OnNeighborObj:=NeighborObj;
+ f_detail.OnKeydown:=FormKeyDown;
 if VerboseMsg then
  WriteTrace('SetDefault');
  SetDefault;
@@ -7941,7 +7942,8 @@ if cfgm.KioskMode then begin
     Exit;
   end;
 end;
-if (Activecontrol=quicksearch) or
+if cfgm.KioskMode or
+   (Activecontrol=quicksearch) or
    (Activecontrol=EditTimeVal) or
    (Activecontrol=TimeVal) or
    (Activecontrol=TimeU) then exit

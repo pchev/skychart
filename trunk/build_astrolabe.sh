@@ -56,6 +56,7 @@ currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
   install -v -m 644 skychart/sample_client/astrolabe/astrolabe.png  $destdir/
   install -v -m 644 skychart/sample_client/astrolabe/astrolabe.ini  $destdir/
   install -v -m 644 skychart/sample_client/astrolabe/dask.ini  $destdir/
+  install -v -m 644 skychart/sample_client/astrolabe/symbols/symbol{1..11}.png $destdir/data/planet/
   #
   # zip
   cd $builddir/Data

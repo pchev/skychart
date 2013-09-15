@@ -2856,7 +2856,7 @@ var x1,y1,al:double;
     plotok:boolean;
 begin
 if (abs(a)<musec)or(abs(a-pi2)<musec)or(abs(a-pi)<musec) then begin
-   w:=2;
+   w:=WideLine;
    col := Fplot.cfgplot.Color[15];
 end else begin
    if cfgsc.ShowOnlyMeridian then begin
@@ -2909,7 +2909,7 @@ var x1,y1:double;
     xx,yy,xxp,yyp:single;
     plotok:boolean;
 begin
-if h=0 then w:=2 else w:=0;
+if h=0 then w:=WideLine else w:=0;
 proj2(-a,h,-cfgsc.acentre,cfgsc.hcentre,x1,y1,cfgsc) ;
 WindowXY(x1,y1,xxp,yyp,cfgsc);
 n:=0;
@@ -4833,7 +4833,7 @@ cfgsc.ScopeRa:=ra;
 cfgsc.ScopeDec:=dec;
 cfgsc.scopemark:=true;
 dist:=angulardistance(cfgsc.racentre,cfgsc.decentre,ra,dec);
-if (dist>cfgsc.fov/4)and(cfgsc.TrackOn) then begin
+if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
    if not cfgsc.scopelock then begin
       result:=true;
       cfgsc.scopelock:=true;
