@@ -38,7 +38,9 @@ currentrev=$(LANG=C svn info . | grep Revision: | sed 's/Revision: //')
   if [[ $? -ne 0 ]]; then exit 1;fi
   # compile astrolabe_static
   cd $wd/skychart/sample_client/astrolabe
+  rm astrolabe_static.exe
   $lazdir/lazbuild --os=win32 --cpu=i386 --ws=win32 astrolabe_static.lpi  
+  if [[ $? -ne 0 ]]; then exit 1;fi
   cd -
   ##
   make install_win
