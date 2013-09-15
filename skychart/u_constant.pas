@@ -1086,6 +1086,8 @@ var
   NumIndiDriver: integer;
   IndiDriverLst: array of array of string;
   VerboseMsg: boolean = False;
+  WideLine: integer = 2;
+  MarkWidth: integer = 1;
 
 {$ifdef darwin}
   OpenFileCMD: string = 'open';

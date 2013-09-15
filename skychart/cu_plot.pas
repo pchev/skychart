@@ -2452,9 +2452,9 @@ if cfgplot.UseBMP and (not moving) then begin
  x:=(x1+x2)/2;
  y:=(y1+y2)/2;
  r:=abs(x1-x2)/2;
- cbmp.EllipseAntialias(x,y,r,r,ColorToBGRA(lcolor),cfgchart.drawpen);
+ cbmp.EllipseAntialias(x,y,r,r,ColorToBGRA(lcolor),MarkWidth*cfgchart.drawpen);
 end else if cnv<>nil then with cnv do begin
-  Pen.Width:=cfgchart.drawpen;
+  Pen.Width:=MarkWidth*cfgchart.drawpen;
   if moving then begin
      Pen.Color:=clWhite;
      Pen.Mode:=pmXor;
