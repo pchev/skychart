@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 296
+  Left = 310
   Height = 549
   Top = 120
   Width = 904
@@ -44,7 +44,6 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Wrapable = False
       object ToolButton8: TToolButton
         Left = 1
         Top = 23
@@ -163,7 +162,6 @@ object f_main: Tf_main
       ParentShowHint = False
       ShowHint = True
       TabOrder = 0
-      Wrapable = False
       object ToolButtonAllSky: TToolButton
         Left = 1
         Top = 0
