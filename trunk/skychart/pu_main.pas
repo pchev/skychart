@@ -35,7 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo,
+  pu_config_calendar, pu_planetinfo, cu_sampclient,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -47,6 +47,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuItem34: TMenuItem;
+    MenuItem35: TMenuItem;
+    MenuItem36: TMenuItem;
+    MenuItem37: TMenuItem;
+    MenuItem38: TMenuItem;
     telescopeabortslew1: TMenuItem;
     TelescopeAbortSlew: TAction;
     MenuListImg: TMenuItem;
@@ -67,6 +72,7 @@ type
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
     TabControl1: TTabControl;
+    SAMPClientTimer: TTimer;
     ToolButton14: TToolButton;
     TAbortSlew: TToolButton;
     ToolButtonRot180: TToolButton;
@@ -480,6 +486,10 @@ type
     procedure MenuChartInfoClick(Sender: TObject);
     procedure MenuChartLegendClick(Sender: TObject);
     procedure MenuItem33Click(Sender: TObject);
+    procedure MenuItem35Click(Sender: TObject);
+    procedure MenuItem36Click(Sender: TObject);
+    procedure MenuItem37Click(Sender: TObject);
+    procedure MenuItem38Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure MenuListImgClick(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
@@ -489,6 +499,7 @@ type
     procedure ResetLanguageClick(Sender: TObject);
     procedure ResetRotClick(Sender: TObject);
     procedure rot180Click(Sender: TObject);
+    procedure SAMPClientTimerTimer(Sender: TObject);
     procedure SetupCalendarExecute(Sender: TObject);
     procedure TelescopeAbortSlewExecute(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -681,6 +692,7 @@ type
     compass,arrow: TBitmap;
     CursorImage1: TCursorImage;
     SaveState: TWindowState;
+    samp: TSampClient;
   {$ifdef mswindows}
     savwincol  : array[0..25] of Tcolor;
   {$endif}
@@ -729,6 +741,17 @@ type
     function ShowPlanetInfo(pg: string): string;
     procedure PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
     function SetGCat(path,shortname,active,min,max: string): string;
+    procedure UpdateSAMPmenu;
+    procedure SAMPStart;
+    procedure SAMPStop;
+    procedure SAMPurlToFile(url: string; var fn: string);
+    procedure SAMPClientChange(Sender: TObject);
+    procedure SAMPcoordpointAtsky(ra,dec:double);
+    procedure SAMPImageLoadFits(image_name,image_id,url:string);
+    procedure SAMPTableLoadVotable(table_name,table_id,url:string);
+    procedure SAMPTableHighlightRow(table_id,url,row:string);
+    procedure SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
+
   {$ifdef mswindows}
     Procedure SaveWinColor;
     Procedure ResetWinColor;
@@ -2196,6 +2219,7 @@ end else begin
     {$ifdef mswindows}
     if nightvision then ResetWinColor;
     {$endif}
+    SAMPstop;
     StopServer;
     writetrace(rsExiting);
     Autorefresh.Enabled:=false;
@@ -6787,6 +6811,7 @@ procedure Tf_main.UpdateBtn(fx,fy:integer;tc:boolean;sender:TObject);
 var cname:string;
     i: integer;
 begin
+UpdateSAMPmenu;
 if (sender<>nil)and(MultiFrame1.ActiveObject=sender) then begin
   if fx>0 then begin FlipButtonX.ImageIndex:=15 ; Flipx1.checked:=false; end
           else begin FlipButtonX.ImageIndex:=16 ; Flipx1.checked:=true;  end;
@@ -8147,6 +8172,165 @@ begin
   def_cfgsc.tz.JD:=jd0;
   ht:=rmod(astroe+def_cfgsc.tz.SecondsOffset/3600+24,24);
 end;
+
+procedure Tf_main.MenuItem35Click(Sender: TObject);
+begin
+  if (samp=nil)or(not samp.Connected) then SAMPStart;
+  UpdateSAMPmenu;
+end;
+
+procedure Tf_main.MenuItem36Click(Sender: TObject);
+begin
+  if (samp<>nil) then samp.SampHubDisconnect;
+  UpdateSAMPmenu;
+end;
+
+procedure Tf_main.MenuItem37Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tf_main.MenuItem38Click(Sender: TObject);
+begin
+
+end;
+
+procedure Tf_main.UpdateSAMPmenu;
+begin
+if samp=nil then begin
+ MenuItem35.Enabled:=true;
+ MenuItem36.Enabled:=false;
+ MenuItem37.Enabled:=false;
+ MenuItem38.Enabled:=false;
+end
+else begin
+ MenuItem35.Enabled:=not samp.Connected;
+ MenuItem36.Enabled:=samp.Connected;
+ MenuItem37.Enabled:=samp.Connected;
+ MenuItem38.Enabled:=samp.Connected;
+end;
+end;
+
+procedure Tf_main.SAMPStart;
+begin
+WriteTrace('start SAMP client');
+if samp=nil then samp:=TSampClient.Create;
+samp.onClientChange:=SAMPClientChange;
+samp.oncoordpointAtsky:=SAMPcoordpointAtsky;
+samp.onImageLoadFits:=SAMPImageLoadFits;
+samp.onTableLoadVotable:=SAMPTableLoadVotable;
+samp.onTableHighlightRow:=SAMPTableHighlightRow;
+samp.onTableSelectRowlist:=SAMPTableSelectRowlist;
+if samp.SampReadProfile then begin
+  if not samp.SampHubConnect then WriteTrace(samp.LastError);
+  if samp.Connected then begin
+    WriteTrace('Connected to '+samp.HubUrl);
+    if not samp.SampHubSendMetadata then WriteTrace(samp.LastError);
+    if not samp.SampSubscribe then WriteTrace(samp.LastError);
+    WriteTrace('Listen on port '+inttostr(samp.ListenPort));
+  end;
+end else begin
+    WriteTrace(samp.LastError);
+    ShowMessage('SAMP: '+samp.LastError);
+end;
+end;
+
+procedure Tf_main.SAMPStop;
+begin
+if (samp<>nil)and samp.Connected then begin
+  WriteTrace('stop SAMP client');
+  samp.SampHubDisconnect;
+end;
+end;
+
+procedure Tf_main.SAMPClientChange(Sender: TObject);
+begin
+  SAMPClientTimer.Enabled:=true;
+end;
+
+procedure Tf_main.SAMPClientTimerTimer(Sender: TObject);
+begin
+  SAMPClientTimer.Enabled:=false;
+  samp.SampHubGetClientList;
+end;
+
+procedure Tf_main.SAMPurlToFile(url: string; var fn: string);
+var i: integer;
+begin
+i:=pos('file://',url);
+if i>=0 then begin
+  delete(url,i,i+6);
+  i:=pos('localhost',url);
+  if i>=0 then begin
+    delete(url,i,i+8);
+  end;
+  fn:=StringReplace(url,'%7E','~',[rfReplaceAll]);
+end;
+i:=pos('http://',url);
+if i>=0 then begin
+   // download
+end;
+end;
+
+procedure Tf_main.SAMPcoordpointAtsky(ra,dec:double);
+var cname:string; arg:Tstringlist;
+begin
+ cname:=MultiFrame1.ActiveChild.Caption;
+ ra:=deg2rad*ra;
+ dec:=deg2rad*dec;
+ Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra,dec);
+ ra:=rad2deg*ra;
+ dec:=rad2deg*dec;
+ arg:=Tstringlist.Create;
+ arg.Add('SETRA');
+ arg.Add(formatfloat(f5,ra/15));
+ ExecuteCmd(cname,arg);
+ arg.Clear;
+ arg.Add('SETDEC');
+ arg.Add(formatfloat(f5,dec));
+ ExecuteCmd(cname,arg);
+ arg.Clear;
+ arg.Add('REDRAW');
+ ExecuteCmd(cname,arg);
+ arg.Free;
+end;
+
+procedure Tf_main.SAMPImageLoadFits(image_name,image_id,url:string);
+var cname,fn:string;
+    arg:Tstringlist;
+    i:integer;
+begin
+SAMPurlToFile(url,fn);
+cname:=MultiFrame1.ActiveChild.Caption;
+arg:=Tstringlist.Create;
+arg.Add('LOADBGIMAGE');
+arg.Add(fn);
+ExecuteCmd(cname,arg);
+arg.Clear;
+arg.Add('SHOWBGIMAGE');
+arg.Add('ON');
+ExecuteCmd(cname,arg);
+arg.Free;
+end;
+
+procedure Tf_main.SAMPTableLoadVotable(table_name,table_id,url:string);
+begin
+ //  memo1.Lines.Add('TableLoadVotable '+table_name+chr(13)+table_id+chr(13)+url);
+end;
+
+procedure Tf_main.SAMPTableHighlightRow(table_id,url,row:string);
+begin
+ // memo1.Lines.Add('TableHighlightRow '+table_id+chr(13)+url+chr(13)+row);
+end;
+
+procedure Tf_main.SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
+var i:integer;
+begin
+//  memo1.Lines.Add('TableSelectRowlist '+table_id+chr(13)+url+chr(13));
+//  for i:=0 to rowlist.Count-1 do memo1.Lines.Add(rowlist[i]);
+end;
+
+///////////////////////////////////////////////////////////////////////////////////
 
 // one time use function to extract all text to translate from component object
 //uses pu_addlabel, pu_catgen, pu_catgenadv, pu_config_chart, pu_config_internet, pu_config_solsys, pu_config_system,pu_image, pu_progressbar,

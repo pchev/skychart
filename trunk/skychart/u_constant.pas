@@ -220,6 +220,7 @@ const
   f1s = '0.#';
   f2 = '0.00';
   f2s = '0.##';
+  f3 = '0.000';
   f5 = '0.00000';
   f6 = '0.000000';
   f13 = '0.0000000000000';
@@ -1199,8 +1200,8 @@ const
     ('REDO', '25', ''),
     ('SETPROJ', '26', 'ALTAZ/EQUAT/GALACTIC/ECLIPTIC'),
     ('SETFOV', '27', '00d00m00s or 00.00'),
-    ('SETRA', '28', 'RA:00h00m00s or RA:00.00'),
-    ('SETDEC', '29', 'DEC:+00d00m00s or DEC:00.00'),
+    ('SETRA', '28', 'RA:00h00m00s or 00.00'),
+    ('SETDEC', '29', 'DEC:+00d00m00s or 00.00'),
     ('SETOBS', '30', 'LAT:+00d00m00sLON:+000d00m00sALT:000mOBS:name'),
     ('IDCURSOR', '31', ''),
     ('SAVEIMG', '32', 'PNG/JPEG/BMP filename quality'),
