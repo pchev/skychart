@@ -42,6 +42,7 @@ TSampClient = class(TObject)
     Doc: TXMLDocument;
     HttpServer:TTCPHttpDaemon;
     procedure StartHTTPServer;
+    procedure StopHTTPServer;
     function FindNode(ScopeObject:TDOMNode; ANodeName: string): TDOMNode;
     function FindNode2(StartNode:TDOMNode; ANodeName: string): TDOMNode;
     function CheckResponse(response: TMemoryStream): boolean;
@@ -117,6 +118,12 @@ procedure TSampClient.StartHTTPServer;
 begin
  HttpServer:=TTCPHttpDaemon.create;
  HttpServer.onProcessNotification:=@SampNotification;
+end;
+
+procedure TSampClient.StopHTTPServer;
+begin
+ HttpServer.Terminate;
+ sleep(1200);
 end;
 
 function TSampClient.doRpcCall(p:string):boolean;
@@ -317,6 +324,7 @@ var node:TDOMNode;
 begin
  result:=false;
  response.Position := 0;
+ Doc.Free;
  ReadXMLFile(Doc, response);
    //  <methodResponse> <params>
    //  <methodResponse> <fault>
@@ -410,6 +418,7 @@ function TSampClient.SampHubDisconnect:boolean;
 begin
   result:=SampCall('samp.hub.unregister',samp_private_key);
   Fconnected:=false;
+  StopHTTPServer;
 end;
 
 function TSampClient.SampHubSendMetadata:boolean;
@@ -643,6 +652,7 @@ begin
     map[1].value:='<struct></struct>';
     SampReply(msg_id,map);
  end;
+ NotifyDoc.Free;
 end;
 
 end.
