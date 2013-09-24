@@ -91,6 +91,8 @@ if [[ $make_linux32 ]]; then
   mv debian/skychart/usr/bin/skychart debian/skychart/usr/bin/skychart-bin
   cp $wd/system_integration/Linux/bin/skychart debian/skychart/usr/bin/skychart
   cd debian
+  sz=$(du -s skychart/usr | cut -f1)
+  sed -i "s/%size%/$sz/" skychart/DEBIAN/control
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart/DEBIAN/control
   fakeroot dpkg-deb -Zxz --build skychart .
   if [[ $? -ne 0 ]]; then exit 1;fi
@@ -164,6 +166,8 @@ if [[ $make_linux64 ]]; then
   mv debian/skychart64/usr/bin/skychart debian/skychart64/usr/bin/skychart-bin
   cp $wd/system_integration/Linux/bin/skychart debian/skychart64/usr/bin/skychart
   cd debian
+  sz=$(du -s skychart64/usr | cut -f1)
+  sed -i "s/%size%/$sz/" skychart64/DEBIAN/control
   sed -i "/Version:/ s/3/$version-$currentrev/" skychart64/DEBIAN/control
   fakeroot dpkg-deb -Zxz --build skychart64 .
   if [[ $? -ne 0 ]]; then exit 1;fi
