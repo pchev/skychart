@@ -12,6 +12,10 @@ uses
 {$R *.res}
 
 begin
+  {$ifdef USEHEAPTRC}
+  SetHeapTraceOutput('/tmp/samptest_heap.trc');
+  {$endif}
+
   RequireDerivedFormResource := True;
   Application.Initialize;
   Application.CreateForm(TForm1, Form1);
