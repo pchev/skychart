@@ -1,0 +1,53 @@
+#   Makefile.fpc for vosamp 0.0
+#
+
+[package]
+name=vosamp
+version=0.0
+
+[compiler]
+unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)
+unitdir=../synapse/source/lib/lib/$(CPU_TARGET)-$(OS_TARGET)-$(LCL_PLATFORM)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/lcl/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM)/ $(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET) $(LAZDIR)/ideintf/units/$(CPU_TARGET)-$(OS_TARGET)/$(LCL_PLATFORM) ./
+includedir=./
+options= $(fpcopts) -dLCL -dLCL$(LCL_PLATFORM) -O1 -MObjFPC -Sgi
+
+[target]
+units=vosamp.pas
+
+[clean]
+files=$(wildcard $(COMPILER_UNITTARGETDIR)/*$(OEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(PPUEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*$(RSTEXT)) \
+      $(wildcard $(COMPILER_UNITTARGETDIR)/*.compiled) \
+      $(wildcard *$(OEXT)) $(wildcard *$(PPUEXT)) $(wildcard *$(RSTEXT))
+[prerules]
+LAZDIR=%LAZDIR%
+# Compiler options
+ifndef fpcopts 
+fpcopts=-O3 -OoREGVAR -Ch524288 -CX -XX -Xs 
+endif
+# LCL Platform
+ifndef LCL_PLATFORM
+ifeq ($(OS_TARGET),win32)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),win64)
+LCL_PLATFORM=win32
+else
+ifeq ($(OS_TARGET),darwin)
+LCL_PLATFORM=carbon
+else
+LCL_PLATFORM=gtk2
+endif
+endif
+endif
+endif
+export LCL_PLATFORM
+
+[rules]
+.PHONY: cleartarget all
+
+cleartarget:
+        -$(DEL) $(COMPILER_UNITTARGETDIR)/vosamp$(PPUEXT)
+
+all: cleartarget $(COMPILER_UNITTARGETDIR) vosamp$(PPUEXT)
