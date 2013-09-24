@@ -123,7 +123,7 @@ end;
 procedure TSampClient.StopHTTPServer;
 begin
  HttpServer.Terminate;
- sleep(1200);
+ sleep(500);
 end;
 
 function TSampClient.doRpcCall(p:string):boolean;

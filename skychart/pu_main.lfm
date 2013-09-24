@@ -6492,6 +6492,25 @@ object f_main: Tf_main
         OnClick = DSSImageExecute
       end
     end
+    object MenuItem34: TMenuItem
+      Caption = 'Interop'
+      object MenuItem35: TMenuItem
+        Caption = 'Connect to SAMP HUB'
+        OnClick = MenuItem35Click
+      end
+      object MenuItem36: TMenuItem
+        Caption = 'Disconnect from SAMP'
+        OnClick = MenuItem36Click
+      end
+      object MenuItem37: TMenuItem
+        Caption = 'SAMP status'
+        OnClick = MenuItem37Click
+      end
+      object MenuItem38: TMenuItem
+        Caption = 'SAMP setup'
+        OnClick = MenuItem38Click
+      end
+    end
     object telescope1: TMenuItem
       Caption = '&Telescope'
       GroupIndex = 2
@@ -10788,5 +10807,11 @@ object f_main: Tf_main
     OnTimer = InitTimerTimer
     left = 96
     top = 428
+  end
+  object SAMPClientTimer: TTimer
+    Enabled = False
+    OnTimer = SAMPClientTimerTimer
+    left = 400
+    top = 424
   end
 end

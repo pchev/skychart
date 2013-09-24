@@ -333,6 +333,8 @@ type
     procedure SetDateUT(y,m,d,h,n,s:integer);
     procedure SetJD(njd:double);
     procedure SwitchCompass(Sender: TObject);
+    procedure CoordJ2000toChart(var ra,de: double);
+    procedure CoordCharttoJ2000(var ra,de: double);
     function cmd_GetProjection:string;
     function cmd_GetSkyMode:string;
     function cmd_GetNebMode:string;
@@ -4927,6 +4929,18 @@ end;
 finally
 TelescopeLock:=false;
 end;
+end;
+
+procedure Tf_chart.CoordJ2000toChart(var ra,de: double);
+begin
+precession(jd2000,sc.cfgsc.JDchart,ra,de);
+if sc.cfgsc.ApparentPos then apparent_equatorial(ra,de,sc.cfgsc,true,true);
+end;
+
+procedure Tf_chart.CoordCharttoJ2000(var ra,de: double);
+begin
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc,true,true);
+precession(sc.cfgsc.JDChart,jd2000,ra,de);
 end;
 
 end.
