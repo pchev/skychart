@@ -300,21 +300,22 @@ object f_config: Tf_config
         0000000D000000322D204261636B67726F756E640000000000000000FFFFFFFF
         FFFFFFFF0000000000000000000E000000332D20445353205265616C536B79FF
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000010000000342D2049
-        6D6167652061726368697665FFFFFFFFFFFFFFFFA0A975410000000004000000
+        6D6167652061726368697665FFFFFFFFFFFFFFFFA0A975410000000005000000
         000000000109000000382D2053797374656D0000000000000000FFFFFFFFFFFF
         FFFF00000000000000000009000000312D2053797374656DFFFFFFFFFFFFFFFF
         A0A975410000000000000000000000000009000000322D205365727665720000
         000000000000FFFFFFFFFFFFFFFF0000000000000000000C000000332D205465
         6C6573636F70650000000000000000FFFFFFFFFFFFFFFF000000000000000000
-        0B000000342D204C616E67756167650000000000000000FFFFFFFFFFFFFFFF03
-        00000000000000010B000000392D20496E7465726E65740000000000000000FF
-        FFFFFFFFFFFFFF00000000000000000008000000312D2050726F787900000000
-        00000000FFFFFFFFFFFFFFFF00000000000000000013000000322D204F726269
-        74616C20456C656D656E74730000000000000000FFFFFFFFFFFFFFFF00000000
-        000000000016000000332D204F6E6C696E6520445353207069637475726573FF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010C00000031302D20
-        43616C656E646172FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000000000000000
-        0008000000312D204772617068
+        0B000000342D204C616E6775616765FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
+        000000000000000007000000352D2053414D500000000000000000FFFFFFFFFF
+        FFFFFF0300000000000000010B000000392D20496E7465726E65740000000000
+        000000FFFFFFFFFFFFFFFF00000000000000000008000000312D2050726F7879
+        0000000000000000FFFFFFFFFFFFFFFF00000000000000000013000000322D20
+        4F72626974616C20456C656D656E74730000000000000000FFFFFFFFFFFFFFFF
+        00000000000000000016000000332D204F6E6C696E6520445353207069637475
+        726573FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0100000000000000010C000000
+        31302D2043616C656E646172FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000
+        000000000008000000312D204772617068
       }
     end
     object Panel3: TPanel
@@ -1011,7 +1012,6 @@ object f_config: Tf_config
               ActivePage = nil
               TabIndex = -1
               inherited Page1: TTabSheet
-                ClientHeight = 518
                 ClientWidth = 491
                 inherited MysqlBox: TPanel
                   ClientHeight = 93
@@ -1021,51 +1021,59 @@ object f_config: Tf_config
                   ClientHeight = 93
                   ClientWidth = 448
                 end
+                inherited GroupBox1: TGroupBox
+                  ClientHeight = 81
+                end
               end
               inherited Page2: TTabSheet
-                ClientHeight = 518
                 ClientWidth = 491
               end
               inherited Page3: TTabSheet
-                ClientHeight = 518
                 ClientWidth = 491
                 inherited PageControl2: TPageControl
                   ActivePage = nil
                   TabIndex = -1
                   inherited TabSheet1: TTabSheet
-                    ClientHeight = 348
-                    ClientWidth = 470
+                    inherited INDI: TPanel
+                      ClientHeight = 324
+                      ClientWidth = 446
+                      inherited Panel2: TPanel
+                        ClientHeight = 88
+                        ClientWidth = 440
+                      end
+                    end
                   end
                   inherited TabSheet2: TTabSheet
-                    ClientHeight = 348
-                    ClientWidth = 470
                     inherited TelescopeManual: TPanel
+                      ClientHeight = 326
+                      ClientWidth = 446
+                      inherited ManualMountType: TRadioGroup
+                        ClientHeight = 24
+                      end
                       inherited PageControl3: TPageControl
                         ActivePage = nil
                         TabIndex = -1
-                        inherited TabSheet5: TTabSheet
-                          ClientHeight = 173
-                          ClientWidth = 382
-                        end
-                        inherited TabSheet6: TTabSheet
-                          ClientHeight = 173
-                          ClientWidth = 382
-                        end
                       end
                     end
                   end
                   inherited TabSheet4: TTabSheet
-                    ClientHeight = 348
-                    ClientWidth = 470
+                    inherited ASCOMPanel: TPanel
+                      ClientHeight = 324
+                      ClientWidth = 448
+                    end
                   end
                   inherited TabSheet3: TTabSheet
-                    ClientHeight = 348
-                    ClientWidth = 470
+                    inherited InterfacePanel: TPanel
+                      ClientHeight = 324
+                      ClientWidth = 448
+                    end
                   end
                 end
               end
               inherited Page4: TTabSheet
-                ClientHeight = 518
+                ClientWidth = 491
+              end
+              inherited Page5: TTabSheet
                 ClientWidth = 491
               end
             end

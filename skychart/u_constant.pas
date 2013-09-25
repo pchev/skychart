@@ -927,6 +927,7 @@ type
     ObsNameList: TStringList;
     SesameUrlNum, SesameCatNum: integer;
     ClockColor: TColor;
+    SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -1091,7 +1092,7 @@ var
   WideLine: integer = 2;
   MarkWidth: integer = 1;
   MarkType: integer = 1;
-  SampConnected,SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
+  SampConnected: boolean;
   SampClientId,SampClientName,SampClientDesc: Tstringlist;
   SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
 {$ifdef darwin}
@@ -2213,6 +2214,9 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: integer;
 begin
+  SampConfirmCoord:=Source.SampConfirmCoord;
+  SampConfirmImage:=Source.SampConfirmImage;
+  SampConfirmTable:=Source.SampConfirmTable;
   ClockColor := Source.ClockColor;
   SesameUrlNum := Source.SesameUrlNum;
   SesameCatNum := Source.SesameCatNum;

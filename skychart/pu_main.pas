@@ -2072,9 +2072,6 @@ SampClientDesc:=Tstringlist.Create;
 SampClientCoordpointAtsky:=TStringList.Create;
 SampClientImageLoadFits:=TStringList.Create;
 SampClientTableLoadVotable:=TStringList.Create;
-SampConfirmCoord:=true;
-SampConfirmImage:=true;
-SampConfirmTable:=true;
 // Hide unfinished config calendar
 { TODO : config calendar }
 //MenuItem33.Visible:=false;
@@ -4411,6 +4408,9 @@ cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements3);
 cfgm.starshape_file:='';
+cfgm.SampConfirmCoord:=true;
+cfgm.SampConfirmImage:=true;
+cfgm.SampConfirmTable:=true;
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:='';
   f_getdss.cfgdss.DSSurl[i,1]:='';
@@ -8222,7 +8222,7 @@ end;
 
 procedure Tf_main.MenuItem38Click(Sender: TObject);
 begin
-
+  SetupSystemPage(4);
 end;
 
 procedure Tf_main.UpdateSAMPmenu;
@@ -8231,15 +8231,15 @@ if samp=nil then begin
  SampConnected:=false;
  MenuItem35.Enabled:=true;
  MenuItem36.Enabled:=false;
- MenuItem37.Enabled:=false;
- MenuItem38.Enabled:=false;
+ MenuItem37.Enabled:=true;
+ MenuItem38.Enabled:=true;
 end
 else begin
  SampConnected:=samp.Connected;
  MenuItem35.Enabled:=not samp.Connected;
  MenuItem36.Enabled:=samp.Connected;
- MenuItem37.Enabled:=samp.Connected;
- MenuItem38.Enabled:=samp.Connected;
+ MenuItem37.Enabled:=true;
+ MenuItem38.Enabled:=true;
 end;
 end;
 
@@ -8325,7 +8325,7 @@ end;
 procedure Tf_main.SAMPcoordpointAtsky(ra,dec:double);
 var cname:string; arg:Tstringlist;
 begin
- if SampConfirmCoord then begin
+ if cfgm.SampConfirmCoord then begin
    if MessageDlg('SAMP Confirmation',
       'A SAMP request is made to move to coordinates:'+crlf+'RA:'+ARToStr(ra/15)+' DEC:'+DEToStr(dec),
       mtConfirmation, [mbYes, mbNo], 0) = mrNo
@@ -8351,7 +8351,7 @@ var cname,fn:string;
     arg:Tstringlist;
     i:integer;
 begin
-if SampConfirmImage then begin
+if cfgm.SampConfirmImage then begin
    if MessageDlg('SAMP Confirmation',
       'A SAMP request is made to load the image:'+crlf+image_name,
       mtConfirmation, [mbYes, mbNo], 0) = mrNo

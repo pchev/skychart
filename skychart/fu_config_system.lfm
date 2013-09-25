@@ -6,8 +6,8 @@ object f_config_system: Tf_config_system
   ClientHeight = 524
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 115
-  DesignTop = 362
+  DesignLeft = 377
+  DesignTop = 219
   object MainPanel: TPanel
     Left = 0
     Height = 524
@@ -441,7 +441,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 16
           Top = 0
-          Width = 103
+          Width = 104
           Caption = 'Telescope Setting'
           ParentColor = False
         end
@@ -491,8 +491,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 324
-              ClientWidth = 446
+              ClientHeight = 328
+              ClientWidth = 450
               TabOrder = 0
               object PanelCmd: TEdit
                 Left = 176
@@ -539,7 +539,7 @@ object f_config_system: Tf_config_system
                 Left = 8
                 Height = 16
                 Top = 64
-                Width = 86
+                Width = 87
                 Caption = 'Telescope type'
                 ParentColor = False
               end
@@ -555,7 +555,7 @@ object f_config_system: Tf_config_system
                 Left = 8
                 Height = 16
                 Top = 36
-                Width = 96
+                Width = 97
                 Caption = 'INDI Server Host '
                 ParentColor = False
               end
@@ -572,8 +572,8 @@ object f_config_system: Tf_config_system
                 Height = 92
                 Top = 128
                 Width = 444
-                ClientHeight = 88
-                ClientWidth = 440
+                ClientHeight = 92
+                ClientWidth = 444
                 TabOrder = 5
                 Visible = False
                 object Label258: TLabel
@@ -666,8 +666,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 326
-              ClientWidth = 446
+              ClientHeight = 330
+              ClientWidth = 450
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -683,7 +683,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 24
+                ClientHeight = 37
                 ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
@@ -908,8 +908,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 324
-              ClientWidth = 448
+              ClientHeight = 328
+              ClientWidth = 452
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -932,8 +932,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 324
-              ClientWidth = 448
+              ClientHeight = 328
+              ClientWidth = 452
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21
@@ -955,21 +955,92 @@ object f_config_system: Tf_config_system
         ClientWidth = 494
         object Label14: TLabel
           Left = 19
-          Height = 14
+          Height = 16
           Top = 24
-          Width = 111
+          Width = 110
           Caption = 'Language selection'
           ParentColor = False
         end
         object LanguageList: TComboBox
           Left = 17
-          Height = 20
+          Height = 25
           Top = 82
           Width = 260
           ItemHeight = 0
           OnSelect = LanguageListSelect
           Style = csDropDownList
           TabOrder = 0
+        end
+      end
+      object Page5: TTabSheet
+        Caption = 'Page5'
+        ClientHeight = 518
+        ClientWidth = 494
+        object Label15: TLabel
+          Left = 19
+          Height = 16
+          Top = 24
+          Width = 83
+          Caption = 'SAMP settings'
+          ParentColor = False
+        end
+        object Label16: TLabel
+          Left = 21
+          Height = 90
+          Top = 59
+          Width = 384
+          AutoSize = False
+          Caption = 'SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.'#10'Skychart can send and receive coordinates position, FITS images and VO tables.'
+          ParentColor = False
+          WordWrap = True
+        end
+        object Label17: TLabel
+          Left = 21
+          Height = 16
+          Top = 165
+          Width = 154
+          Caption = 'For more information, see :'
+          ParentColor = False
+        end
+        object Label18: TLabel
+          Cursor = crHandPoint
+          Left = 189
+          Height = 16
+          Top = 165
+          Width = 225
+          Caption = 'http://www.ivoa.net/documents/SAMP/'
+          Font.Color = clBlue
+          Font.Style = [fsUnderline]
+          ParentColor = False
+          ParentFont = False
+          OnClick = Label18Click
+        end
+        object CheckBox1: TCheckBox
+          Left = 45
+          Height = 23
+          Top = 213
+          Width = 328
+          Caption = ' Confirmation before to jump to received coordinates'
+          OnChange = CheckBox1Change
+          TabOrder = 0
+        end
+        object CheckBox2: TCheckBox
+          Left = 45
+          Height = 23
+          Top = 254
+          Width = 236
+          Caption = 'Confirmation before to load an image'
+          OnChange = CheckBox2Change
+          TabOrder = 1
+        end
+        object CheckBox3: TCheckBox
+          Left = 45
+          Height = 23
+          Top = 294
+          Width = 224
+          Caption = 'Confirmation before to load a table'
+          OnChange = CheckBox3Change
+          TabOrder = 2
         end
       end
     end
