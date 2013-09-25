@@ -246,6 +246,13 @@ object f_chart: Tf_chart
         OnClick = search1Click
       end
     end
+    object MenuSAMP: TMenuItem
+      Caption = 'SAMP send coordinates'
+      object SAMPbroadcastcoord: TMenuItem
+        Caption = 'Broadcast position'
+        OnClick = SAMPsendcoordClick
+      end
+    end
     object About2: TMenuItem
       Caption = '-'
       Visible = False

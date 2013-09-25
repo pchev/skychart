@@ -47,11 +47,11 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
-    MenuItem34: TMenuItem;
     MenuItem35: TMenuItem;
     MenuItem36: TMenuItem;
     MenuItem37: TMenuItem;
     MenuItem38: TMenuItem;
+    MenuItemSAMP: TMenuItem;
     telescopeabortslew1: TMenuItem;
     TelescopeAbortSlew: TAction;
     MenuListImg: TMenuItem;
@@ -827,6 +827,7 @@ type
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
     procedure GetTwilight(jd0: double; out ht: double);
+    procedure SendCoordpointAtsky(client: integer; ra,de: double);
   end;
 
 var
@@ -881,6 +882,7 @@ begin
     cfg1.Assign((MultiFrame1.Activeobject as Tf_chart).sc.cfgsc);
     cfgp.Assign((MultiFrame1.Activeobject as Tf_chart).sc.plot.cfgplot);
     cfg1.scopemark:=false;
+    cfg1.scope2mark:=false;
     maxi:=MultiFrame1.maximized;
     w:=MultiFrame1.ActiveChild.width;
     h:=MultiFrame1.ActiveChild.height;
@@ -929,6 +931,7 @@ begin
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
+  child.onSendCoordpointAtsky:=SendCoordpointAtsky;
   if (not Child.sc.cfgsc.TrackOn)and(Child.sc.cfgsc.Projpole=Altaz) then begin
      Child.sc.cfgsc.TrackOn:=true;
      Child.sc.cfgsc.TrackType:=4;
@@ -2062,7 +2065,16 @@ end;
 if VerboseMsg then
  WriteTrace(step);
 def_cfgsc.tz.LoadZoneTab(ZoneDir+'zone.tab');
-
+SampConnected:=false;
+SampClientId:=Tstringlist.Create;
+SampClientName:=Tstringlist.Create;
+SampClientDesc:=Tstringlist.Create;
+SampClientCoordpointAtsky:=TStringList.Create;
+SampClientImageLoadFits:=TStringList.Create;
+SampClientTableLoadVotable:=TStringList.Create;
+SampConfirmCoord:=true;
+SampConfirmImage:=true;
+SampConfirmTable:=true;
 // Hide unfinished config calendar
 { TODO : config calendar }
 //MenuItem33.Visible:=false;
@@ -2105,6 +2117,12 @@ def_cfgplot.Free;
 cfgp.Free;
 compass.free;
 arrow.free;
+SampClientId.Free;
+SampClientName.Free;
+SampClientDesc.Free;
+SampClientCoordpointAtsky.Free;
+SampClientImageLoadFits.Free;
+SampClientTableLoadVotable.Free;
 if NeedRestart then ExecNoWait(paramstr(0));
 if VerboseMsg then
  WriteTrace('Destroy Cursor');
@@ -8186,8 +8204,20 @@ begin
 end;
 
 procedure Tf_main.MenuItem37Click(Sender: TObject);
+var buf: string;
+    i: integer;
 begin
-
+buf:='SAMP Status: ';
+if SampConnected then begin
+  buf:=buf+'Connected'+crlf;
+  buf:=buf+'Client list:'+crlf;
+  for i:=0 to samp.Clients.Count-1 do begin
+    buf:=buf+' - '+samp.ClientNames[i]+', '+samp.ClientDesc[i]+crlf;
+  end;
+end else begin
+  buf:=buf+'Disconnected'+crlf;
+end;
+ShowMessage(buf);
 end;
 
 procedure Tf_main.MenuItem38Click(Sender: TObject);
@@ -8198,12 +8228,14 @@ end;
 procedure Tf_main.UpdateSAMPmenu;
 begin
 if samp=nil then begin
+ SampConnected:=false;
  MenuItem35.Enabled:=true;
  MenuItem36.Enabled:=false;
  MenuItem37.Enabled:=false;
  MenuItem38.Enabled:=false;
 end
 else begin
+ SampConnected:=samp.Connected;
  MenuItem35.Enabled:=not samp.Connected;
  MenuItem36.Enabled:=samp.Connected;
  MenuItem37.Enabled:=samp.Connected;
@@ -8233,6 +8265,7 @@ end else begin
     WriteTrace(samp.LastError);
     ShowMessage('SAMP: '+samp.LastError);
 end;
+SampConnected:=samp.Connected;
 end;
 
 procedure Tf_main.SAMPStop;
@@ -8240,6 +8273,7 @@ begin
 if (samp<>nil)and samp.Connected then begin
   WriteTrace('stop SAMP client');
   samp.SampHubDisconnect;
+  SampConnected:=samp.Connected;
 end;
 end;
 
@@ -8249,9 +8283,25 @@ begin
 end;
 
 procedure Tf_main.SAMPClientTimerTimer(Sender: TObject);
+var i: integer;
 begin
-  SAMPClientTimer.Enabled:=false;
-  samp.SampHubGetClientList;
+SAMPClientTimer.Enabled:=false;
+if samp.SampHubGetClientList then begin
+   SampClientId.Clear;
+   SampClientName.Clear;
+   SampClientDesc.Clear;
+   SampClientCoordpointAtsky.Clear;
+   SampClientImageLoadFits.Clear;
+   SampClientTableLoadVotable.Clear;
+   for i:=0 to samp.Clients.Count-1 do begin
+      SampClientId.Add(samp.Clients[i]);
+      SampClientName.Add(samp.ClientNames[i]);
+      SampClientDesc.Add(samp.ClientDesc[i]);
+      if coord_pointAt_sky in samp.ClientSubscriptions[i] then SampClientCoordpointAtsky.Add('1') else SampClientCoordpointAtsky.Add('');
+      if image_load_fits in samp.ClientSubscriptions[i] then SampClientImageLoadFits.Add('1') else SampClientImageLoadFits.Add('');
+      if table_load_votable in samp.ClientSubscriptions[i] then SampClientTableLoadVotable.Add('1') else SampClientTableLoadVotable.Add('');
+   end;
+end
 end;
 
 procedure Tf_main.SAMPurlToFile(url: string; var fn: string);
@@ -8275,6 +8325,12 @@ end;
 procedure Tf_main.SAMPcoordpointAtsky(ra,dec:double);
 var cname:string; arg:Tstringlist;
 begin
+ if SampConfirmCoord then begin
+   if MessageDlg('SAMP Confirmation',
+      'A SAMP request is made to move to coordinates:'+crlf+'RA:'+ARToStr(ra/15)+' DEC:'+DEToStr(dec),
+      mtConfirmation, [mbYes, mbNo], 0) = mrNo
+      then exit;
+ end;
  cname:=MultiFrame1.ActiveChild.Caption;
  ra:=deg2rad*ra;
  dec:=deg2rad*dec;
@@ -8282,15 +8338,10 @@ begin
  ra:=rad2deg*ra;
  dec:=rad2deg*dec;
  arg:=Tstringlist.Create;
- arg.Add('SETRA');
+ arg.Clear;
+ arg.Add('MOVESCOPE');
  arg.Add(formatfloat(f5,ra/15));
- ExecuteCmd(cname,arg);
- arg.Clear;
- arg.Add('SETDEC');
  arg.Add(formatfloat(f5,dec));
- ExecuteCmd(cname,arg);
- arg.Clear;
- arg.Add('REDRAW');
  ExecuteCmd(cname,arg);
  arg.Free;
 end;
@@ -8300,6 +8351,12 @@ var cname,fn:string;
     arg:Tstringlist;
     i:integer;
 begin
+if SampConfirmImage then begin
+   if MessageDlg('SAMP Confirmation',
+      'A SAMP request is made to load the image:'+crlf+image_name,
+      mtConfirmation, [mbYes, mbNo], 0) = mrNo
+      then exit;
+end;
 SAMPurlToFile(url,fn);
 cname:=MultiFrame1.ActiveChild.Caption;
 arg:=Tstringlist.Create;
@@ -8328,6 +8385,15 @@ var i:integer;
 begin
 //  memo1.Lines.Add('TableSelectRowlist '+table_id+chr(13)+url+chr(13));
 //  for i:=0 to rowlist.Count-1 do memo1.Lines.Add(rowlist[i]);
+end;
+
+procedure Tf_main.SendCoordpointAtsky(client: integer; ra,de: double);
+var cl: string;
+begin
+  cl:='';
+  ra:=rad2deg*ra;
+  de:=rad2deg*de;
+  samp.SampSendCoord(cl,ra,de);
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////

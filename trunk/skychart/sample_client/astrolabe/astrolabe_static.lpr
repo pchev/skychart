@@ -87,7 +87,7 @@ begin
   debugln('Program compiled: '+compile_time);
   debugln('Compiler version: '+compile_version);
   end;
-  Application.Title:='Skychart';
+  Application.Title:='Astrolabe';
   if VerboseMsg then debugln('Initialize');
   Application.Initialize;
   try

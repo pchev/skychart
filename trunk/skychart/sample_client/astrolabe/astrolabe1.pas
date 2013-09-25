@@ -477,6 +477,7 @@ Top:=0;
 Left:=0;
 WideLine:=5;
 MarkWidth:=3;
+MarkType:=2;
 memo1.Visible:=false;
 Panel2.Visible:=not RealEncoder;
 Panel3.Visible:=true;
