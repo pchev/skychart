@@ -40,13 +40,14 @@ uses
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
   ActnList, IniFiles, Spin, Clipbrd, MultiFrame, ChildFrame,
-  LResources, uniqueinstance, enhedits, LazHelpHTML, ButtonPanel;
+  LResources, uniqueinstance, enhedits, downloaddialog, LazHelpHTML, ButtonPanel;
 
 type
 
   { Tf_main }
 
   Tf_main = class(TForm)
+    SampDownload: TDownloadDialog;
     MenuItem35: TMenuItem;
     MenuItem36: TMenuItem;
     MenuItem37: TMenuItem;
@@ -72,7 +73,6 @@ type
     ResetLanguage: TMenuItem;
     InitTimer: TTimer;
     TabControl1: TTabControl;
-    SAMPClientTimer: TTimer;
     ToolButton14: TToolButton;
     TAbortSlew: TToolButton;
     ToolButtonRot180: TToolButton;
@@ -499,7 +499,6 @@ type
     procedure ResetLanguageClick(Sender: TObject);
     procedure ResetRotClick(Sender: TObject);
     procedure rot180Click(Sender: TObject);
-    procedure SAMPClientTimerTimer(Sender: TObject);
     procedure SetupCalendarExecute(Sender: TObject);
     procedure TelescopeAbortSlewExecute(Sender: TObject);
     procedure TelescopeSetup1Click(Sender: TObject);
@@ -744,7 +743,7 @@ type
     procedure UpdateSAMPmenu;
     procedure SAMPStart;
     procedure SAMPStop;
-    procedure SAMPurlToFile(url: string; var fn: string);
+    procedure SAMPurlToFile(url,nam,typ: string; var fn: string);
     procedure SAMPClientChange(Sender: TObject);
     procedure SAMPcoordpointAtsky(ra,dec:double);
     procedure SAMPImageLoadFits(image_name,image_id,url:string);
@@ -8278,14 +8277,8 @@ end;
 end;
 
 procedure Tf_main.SAMPClientChange(Sender: TObject);
-begin
-  SAMPClientTimer.Enabled:=true;
-end;
-
-procedure Tf_main.SAMPClientTimerTimer(Sender: TObject);
 var i: integer;
 begin
-SAMPClientTimer.Enabled:=false;
 if samp.SampHubGetClientList then begin
    SampClientId.Clear;
    SampClientName.Clear;
@@ -8304,21 +8297,31 @@ if samp.SampHubGetClientList then begin
 end
 end;
 
-procedure Tf_main.SAMPurlToFile(url: string; var fn: string);
+procedure Tf_main.SAMPurlToFile(url,nam,typ: string; var fn: string);
 var i: integer;
 begin
 i:=pos('file://',url);
-if i>=0 then begin
+if i>0 then begin
   delete(url,i,i+6);
   i:=pos('localhost',url);
   if i>=0 then begin
     delete(url,i,i+8);
   end;
-  fn:=StringReplace(url,'%7E','~',[rfReplaceAll]);
-end;
-i:=pos('http://',url);
-if i>=0 then begin
-   // download
+  fn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
+ end else begin
+  i:=pos('http://',url);
+  if i>0 then begin
+     if typ='xml' then
+        fn:=slash(VODir)+TrimFilename(nam)+'.'+typ;
+     if typ='fits' then
+        fn:=slash(PictureDir)+TrimFilename(nam)+'.'+typ;
+     SampDownload.URL:=url;
+     SampDownload.SaveToFile:=fn;
+     SampDownload.ConfirmDownload:=false;
+     if not(SampDownload.Execute and FileExists(fn)) then begin
+        fn:='';
+     end;
+  end;
 end;
 end;
 
@@ -8357,22 +8360,28 @@ if cfgm.SampConfirmImage then begin
       mtConfirmation, [mbYes, mbNo], 0) = mrNo
       then exit;
 end;
-SAMPurlToFile(url,fn);
-cname:=MultiFrame1.ActiveChild.Caption;
-arg:=Tstringlist.Create;
-arg.Add('LOADBGIMAGE');
-arg.Add(fn);
-ExecuteCmd(cname,arg);
-arg.Clear;
-arg.Add('SHOWBGIMAGE');
-arg.Add('ON');
-ExecuteCmd(cname,arg);
-arg.Free;
+SAMPurlToFile(url,image_name,'fits',fn);
+if FileExists(fn) then begin
+  cname:=MultiFrame1.ActiveChild.Caption;
+  arg:=Tstringlist.Create;
+  arg.Add('LOADBGIMAGE');
+  arg.Add(fn);
+  ExecuteCmd(cname,arg);
+  arg.Clear;
+  arg.Add('SHOWBGIMAGE');
+  arg.Add('ON');
+  ExecuteCmd(cname,arg);
+  arg.Free;
+end;
 end;
 
 procedure Tf_main.SAMPTableLoadVotable(table_name,table_id,url:string);
+var fn: string;
 begin
- //  memo1.Lines.Add('TableLoadVotable '+table_name+chr(13)+table_id+chr(13)+url);
+SAMPurlToFile(url,table_name,'xml',fn);
+if FileExists(fn) then begin
+
+end;
 end;
 
 procedure Tf_main.SAMPTableHighlightRow(table_id,url,row:string);

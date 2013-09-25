@@ -10808,10 +10808,12 @@ object f_main: Tf_main
     left = 96
     top = 428
   end
-  object SAMPClientTimer: TTimer
-    Enabled = False
-    OnTimer = SAMPClientTimerTimer
-    left = 400
+  object SampDownload: TDownloadDialog
+    Timeout = 5000
+    FtpFwMode = 0
+    FtpFwPassive = True
+    ConfirmDownload = False
+    left = 384
     top = 424
   end
 end

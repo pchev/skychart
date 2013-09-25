@@ -4,7 +4,7 @@ unit cu_sampclient;
 
 interface
 
-uses cu_sampserver,
+uses cu_sampserver, ExtCtrls,
   Classes, SysUtils,FileUtil,HTTPSend, synautil, XMLRead, DOM, XMLUtils;
 
 type
@@ -14,6 +14,7 @@ Tmap = array of Tmapvalue;
 Subscription = (coord_pointAt_sky,table_load_votable,image_load_fits);
 Subscriptions = set of Subscription;
 TSubscriptionsList = array of Subscriptions;
+TSampAsyncEvent = (ClientChange,TableLoadVoTable,ImageLoadFits);
 TcoordpointAtsky = procedure(ra,dec:double) of object;
 TImageLoadFits = procedure(image_name,image_id,url:string) of object;
 TTableLoadVotable = procedure(table_name,table_id,url:string) of object;
@@ -38,9 +39,13 @@ TSampClient = class(TObject)
     FTableSelectRowlist: TTableSelectRowlist;
     FClientChange: TNotifyEvent;
     Flistenport: integer;
+    SampAsyncEvent:TSampAsyncEvent;
+    SampAsyncP1,SampAsyncP2,SampAsyncP3: string;
+    SampAsyncTimer: TTimer;
     aHTTP: THTTPSend;
     Doc: TXMLDocument;
     HttpServer:TTCPHttpDaemon;
+    procedure SampAsyncTimerTimer(Sender: TObject);
     procedure StartHTTPServer;
     procedure StopHTTPServer;
     function FindNodeName(StartNode:TDOMNode; ANodeName: string): TDOMNode;
@@ -102,6 +107,10 @@ begin
   FClients:=Tstringlist.Create;
   FClientNames:=Tstringlist.Create;
   FClientDesc:=Tstringlist.Create;
+  SampAsyncTimer:=TTimer.Create(nil);
+  SampAsyncTimer.Enabled:=false;
+  SampAsyncTimer.Interval:=500;
+  SampAsyncTimer.OnTimer:=@SampAsyncTimerTimer;
   StartHTTPServer;
 end;
 
@@ -111,6 +120,7 @@ begin
   FClients.Free;
   FClientNames.Free;
   FClientDesc.Free;
+  SampAsyncTimer.Free;
   inherited Destroy;
 end;
 
@@ -603,21 +613,25 @@ begin
           result:=true;
        end else if mtype='image.load.fits' then begin
          node:=FindNodeName(pnode,'name');
-         if node<>nil then p1:=node.TextContent;
+         if node<>nil then SampAsyncP1:=node.TextContent;
          node:=FindNodeName(pnode,'image-id');
-         if node<>nil then p2:=node.TextContent;
+         if node<>nil then SampAsyncP2:=node.TextContent;
          node:=FindNodeName(pnode,'url');
-         if node<>nil then p3:=node.TextContent;
-         if Assigned(FImageLoadFits) then FImageLoadFits(p1,p2,p3);
+         if node<>nil then SampAsyncP3:=node.TextContent;
+         SampAsyncEvent:=ImageLoadFits;
+         SampAsyncTimer.Enabled:=false;
+         SampAsyncTimer.Enabled:=true;
          result:=true;
        end else if mtype='table.load.votable' then begin
          node:=FindNodeName(pnode,'name');
-         if node<>nil then p1:=node.TextContent;
+         if node<>nil then SampAsyncP1:=node.TextContent;
          node:=FindNodeName(pnode,'table-id');
-         if node<>nil then p2:=node.TextContent;
+         if node<>nil then SampAsyncP2:=node.TextContent;
          node:=FindNodeName(pnode,'url');
-         if node<>nil then p3:=node.TextContent;
-         if Assigned(FTableLoadVotable) then FTableLoadVotable(p1,p2,p3);
+         if node<>nil then SampAsyncP3:=node.TextContent;
+         SampAsyncEvent:=TableLoadVoTable;
+         SampAsyncTimer.Enabled:=false;
+         SampAsyncTimer.Enabled:=true;
          result:=true;
        end else if mtype='table.highlight.row' then begin
          node:=FindNodeName(pnode,'table-id');
@@ -652,13 +666,19 @@ begin
          SampHubDisconnect;
          result:=true;
        end else if mtype='samp.hub.event.register' then begin
-         if Assigned(FClientChange) then FClientChange(self);
+         SampAsyncEvent:=ClientChange;
+         SampAsyncTimer.Enabled:=false;
+         SampAsyncTimer.Enabled:=true;
          result:=true;
        end else if mtype='samp.hub.event.unregister' then begin
-         if Assigned(FClientChange) then FClientChange(self);
+         SampAsyncEvent:=ClientChange;
+         SampAsyncTimer.Enabled:=false;
+         SampAsyncTimer.Enabled:=true;
          result:=true;
        end else if mtype='samp.hub.event.metadata' then begin
-         if Assigned(FClientChange) then FClientChange(self);
+         SampAsyncEvent:=ClientChange;
+         SampAsyncTimer.Enabled:=false;
+         SampAsyncTimer.Enabled:=true;
          result:=true;
        end else if mtype='samp.app.ping' then begin
          result:=true;
@@ -674,6 +694,16 @@ begin
     SampReply(msg_id,map);
  end;
  NotifyDoc.Free;
+end;
+
+procedure TSampClient.SampAsyncTimerTimer(Sender: TObject);
+begin
+ SampAsyncTimer.Enabled:=false;
+ case SampAsyncEvent of
+    ClientChange     : if Assigned(FClientChange) then FClientChange(self);
+    TableLoadVoTable : if Assigned(FTableLoadVotable) then FTableLoadVotable(SampAsyncP1,SampAsyncP2,SampAsyncP3);
+    ImageLoadFits    : if Assigned(FImageLoadFits) then FImageLoadFits(SampAsyncP1,SampAsyncP2,SampAsyncP3);
+ end;
 end;
 
 end.
