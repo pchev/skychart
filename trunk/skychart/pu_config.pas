@@ -199,10 +199,11 @@ TreeView1.items[43].text:='1- '+rsSystem;
 TreeView1.items[44].text:='2- '+rsServer;
 TreeView1.items[45].text:='3- '+rsTelescope;
 TreeView1.items[46].text:='4- '+rsLanguage2;
-TreeView1.items[47].text:='9- '+rsInternet;
-TreeView1.items[48].text:='1- '+rsProxy;
-TreeView1.items[49].text:='2- '+rsOrbitalEleme;
-TreeView1.items[50].text:='3- '+rsOnlineDSSPic;
+TreeView1.items[47].text:='5- '+'SAMP';
+TreeView1.items[48].text:='9- '+rsInternet;
+TreeView1.items[49].text:='1- '+rsProxy;
+TreeView1.items[50].text:='2- '+rsOrbitalEleme;
+TreeView1.items[51].text:='3- '+rsOnlineDSSPic;
 
 // Hide unfinished config calendar
 { TODO : config calendar }

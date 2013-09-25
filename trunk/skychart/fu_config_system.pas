@@ -34,6 +34,9 @@ type
   { Tf_config_system }
 
   Tf_config_system = class(TFrame)
+    CheckBox1: TCheckBox;
+    CheckBox2: TCheckBox;
+    CheckBox3: TCheckBox;
     InterfaceLabel: TLabel;
     InterfacePanel: TPanel;
     Button5: TButton;
@@ -42,6 +45,10 @@ type
     INDILabel: TLabel;
     ASCOMLabel: TLabel;
     IndiServerCmd: TEdit;
+    Label15: TLabel;
+    Label16: TLabel;
+    Label17: TLabel;
+    Label18: TLabel;
     Label258: TLabel;
     MysqlBoxLabel: TLabel;
     MysqlBox: TPanel;
@@ -57,6 +64,7 @@ type
     TabSheet4: TTabSheet;
     TabSheet5: TTabSheet;
     TabSheet6: TTabSheet;
+    Page5: TTabSheet;
     TelescopeManualLabel: TLabel;
     LanguageList: TComboBox;
     Label14: TLabel;
@@ -140,7 +148,11 @@ type
     RevertTurnsAlt: TCheckBox;
     PageControl1: TPageControl;
     procedure Button5Click(Sender: TObject);
+    procedure CheckBox1Change(Sender: TObject);
+    procedure CheckBox2Change(Sender: TObject);
+    procedure CheckBox3Change(Sender: TObject);
     procedure IndiDevOtherChange(Sender: TObject);
+    procedure Label18Click(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
     procedure LinuxCmdChange(Sender: TObject);
     procedure LinuxDesktopBoxChange(Sender: TObject);
@@ -228,6 +240,7 @@ Page1.caption:=rsSystem;
 Page2.caption:=rsServer;
 Page3.caption:=rsTelescope;
 Page4.caption:=rsLanguage2;
+Page5.Caption:='SAMP';
 Label153.caption:=rsSystemSettin;
 MysqlBoxLabel.caption:=rsMySQLDatabas;
 Label77.caption:=rsDBName;
@@ -422,6 +435,9 @@ ipaddr.text:=cmain.ServerIPaddr;
 ipport.text:=cmain.ServerIPport;
 useipserver.checked:=cmain.autostartserver;
 keepalive.checked:=cmain.keepalive;
+CheckBox1.Checked:=cmain.SampConfirmCoord;
+CheckBox2.Checked:=cmain.SampConfirmImage;
+CheckBox3.Checked:=cmain.SampConfirmTable;
 end;
 
 procedure Tf_config_system.ShowTelescope;
@@ -697,6 +713,11 @@ begin
   csc.IndiDevice:=IndiDevOther.Text;
 end;
 
+procedure Tf_config_system.Label18Click(Sender: TObject);
+begin
+  ExecuteFile(Label18.Caption);
+end;
+
 procedure Tf_config_system.LanguageListSelect(Sender: TObject);
 begin
 if LockChange then exit;
@@ -713,6 +734,21 @@ procedure Tf_config_system.Button5Click(Sender: TObject);
 begin
   IndiPort.Text:='/dev/ttyS0';
   IndiServerCmd.Text:='indiserver';
+end;
+
+procedure Tf_config_system.CheckBox1Change(Sender: TObject);
+begin
+cmain.SampConfirmCoord := CheckBox1.Checked;
+end;
+
+procedure Tf_config_system.CheckBox2Change(Sender: TObject);
+begin
+cmain.SampConfirmImage := CheckBox1.Checked;
+end;
+
+procedure Tf_config_system.CheckBox3Change(Sender: TObject);
+begin
+cmain.SampConfirmTable := CheckBox1.Checked;
 end;
 
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);
