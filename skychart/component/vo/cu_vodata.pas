@@ -59,8 +59,6 @@ type
     procedure XmlEndTag(Sender: TObject; TagName: String);
     procedure XmlEmptyTag(Sender: TObject; TagName: String; Attributes: TAttrList);
     procedure XmlLoadExternal(Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : TXmlParser);
-    procedure LoadData;
-    procedure ClearData;
   protected
     Fproxy,Fproxyport,Fproxyuser,Fproxypass : string;
     FSocksproxy,FSockstype : string;
@@ -70,6 +68,8 @@ type
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
+    procedure LoadData;
+    procedure ClearData;
     procedure GetData(Table,objtype:string; preview: boolean=false);
     property Columns: TStringArray read FColumns;
     property Cols: Integer read Fncol;
@@ -85,7 +85,7 @@ type
     property BaseUrl: string read Fbaseurl write Fbaseurl;
     property vo_type: Tvo_type read Fvo_type write Fvo_type;
     property CachePath: string read Fvopath write Fvopath;
-    property Datafile: string read Fvo_data;
+    property Datafile: string read Fvo_data write Fvo_data;
     property SelectCoord: boolean read FSelectCoord write FSelectCoord;
     property Ra: double read Fra write Fra;
     property Dec: double read Fde write Fde;

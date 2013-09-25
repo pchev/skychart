@@ -35,7 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -8376,11 +8376,22 @@ end;
 end;
 
 procedure Tf_main.SAMPTableLoadVotable(table_name,table_id,url:string);
-var fn: string;
+var fn,buf: string;
+    i: integer;
+    VO_TableData: TVO_TableData;
 begin
 SAMPurlToFile(url,table_name,'xml',fn);
 if FileExists(fn) then begin
+   VO_TableData:=TVO_TableData.Create(self);
+   VO_TableData.CachePath:=ExtractFilePath(fn);
+   VO_TableData.Datafile:=ExtractFileName(fn);
+   VO_TableData.ClearData;
+   VO_TableData.LoadData;
+   for i:=0 to length(VO_TableData.Columns)-1 do
+       buf:=VO_TableData.Columns[i];
 
+   VO_TableData.ClearData;
+   VO_TableData.free;
 end;
 end;
 
