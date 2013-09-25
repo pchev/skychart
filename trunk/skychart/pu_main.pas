@@ -8168,12 +8168,12 @@ begin
 if cfgm.KioskMode then FullScreen1.Checked:=true
                   else FullScreen1.Checked:=not FullScreen1.Checked;
 {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
-{ TODO : fullscreen showmodal do not work with Gnome }
+{ TODO : fullscreen showmodal do not work with Gnome }   {try again ...}
  SetWindowFullScreen(f_main,FullScreen1.Checked);
- if FullScreen1.Checked then
+{ if FullScreen1.Checked then
     WindowState:=wsMaximized
  else
-    WindowState:=wsNormal;
+    WindowState:=wsNormal;  }
 {$else}
  if FullScreen1.Checked then
     WindowState:=wsMaximized
