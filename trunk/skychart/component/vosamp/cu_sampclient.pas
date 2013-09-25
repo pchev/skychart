@@ -43,8 +43,8 @@ TSampClient = class(TObject)
     HttpServer:TTCPHttpDaemon;
     procedure StartHTTPServer;
     procedure StopHTTPServer;
-    function FindNode(ScopeObject:TDOMNode; ANodeName: string): TDOMNode;
-    function FindNode2(StartNode:TDOMNode; ANodeName: string): TDOMNode;
+    function FindNodeName(StartNode:TDOMNode; ANodeName: string): TDOMNode;
+    function FindItem(StartNode:TDOMNode; ItemName: string): TDOMNode;
     function CheckResponse(response: TMemoryStream): boolean;
     function doRpcCall(p: string):boolean;
     function SampCall(m,p: string):boolean;overload;
@@ -89,7 +89,7 @@ const
   {$else}
     Default_SAMP_HUB = '~/.samp';
   {$endif}
-  f5 = '0.00000';
+  f7 = '0.0000000';
 
 constructor TSampClient.Create ;
 begin
@@ -260,18 +260,20 @@ begin
   result:=doRpcCall(cmd);
 end;
 
-function TSampClient.FindNode2(StartNode:TDOMNode; ANodeName: string): TDOMNode;
+function TSampClient.FindItem(StartNode:TDOMNode; ItemName: string): TDOMNode;
 var tmpNode : TDOMNode;
     chilNodes : TDOMNodeList;
     i: integer;
+    buf:string;
 begin
  result:=nil;
  if StartNode<>nil then begin
-   tmpNode:=FindNode(StartNode,ANodeName);
+   if StartNode.NodeName=ItemName then tmpNode:=StartNode
+      else tmpNode:=StartNode.FindNode(ItemName);
    if (tmpNode=nil)and(StartNode.HasChildNodes) then begin
       chilNodes:=StartNode.ChildNodes;
       for i := 0 to chilNodes.Count-1 do begin
-          tmpNode:=FindNode2(chilNodes[i],ANodeName);
+          tmpNode:=FindItem(chilNodes[i],ItemName);
           if tmpNode<>nil then break;
       end;
    end;
@@ -279,67 +281,91 @@ begin
  end;
 end;
 
-function TSampClient.FindNode(ScopeObject:TDOMNode; ANodeName: string): TDOMNode;
-var
-  memberNode, tmpNode : TDOMNode;
-  i : Integer;
-  chilNodes : TDOMNodeList;
-  nodeFound : Boolean;
-const
-  sNAME = 'name';
-  sVALUE = 'value';
-begin
-  Result := nil;
-  if (ScopeObject<>nil)and(ScopeObject.HasChildNodes()) then begin
-    nodeFound := False;
-    memberNode := ScopeObject.FirstChild;
-    while ( not nodeFound ) and ( memberNode <> nil ) do begin
-      if memberNode.HasChildNodes() then begin
-        chilNodes := memberNode.ChildNodes;
-        for i := 0 to chilNodes.Count-1 do begin
-          tmpNode := chilNodes.Item[i];
-          if AnsiSameText(sNAME,tmpNode.NodeName) and
-             ( tmpNode.FirstChild <> nil ) and
-             AnsiSameText(ANodeName,tmpNode.FirstChild.NodeValue)
-          then begin
-            nodeFound := True;
-            Break;
+function TSampClient.FindNodeName(StartNode:TDOMNode; ANodeName: string): TDOMNode;
+var tmpNode : TDOMNode;
+    chilNodes : TDOMNodeList;
+    i: integer;
+
+    function FindNode1(ScopeObject:TDOMNode; ANodeName: string): TDOMNode;
+    var
+      memberNode, tmpNode : TDOMNode;
+      i : Integer;
+      chilNodes : TDOMNodeList;
+      nodeFound : Boolean;
+    const
+      sNAME = 'name';
+      sVALUE = 'value';
+    begin
+      Result := nil;
+      if (ScopeObject<>nil)and(ScopeObject.HasChildNodes()) then begin
+        nodeFound := False;
+        memberNode := ScopeObject.FirstChild;
+        while ( not nodeFound ) and ( memberNode <> nil ) do begin
+          if memberNode.HasChildNodes() then begin
+            chilNodes := memberNode.ChildNodes;
+            for i := 0 to chilNodes.Count-1 do begin
+              tmpNode := chilNodes.Item[i];
+              if AnsiSameText(sNAME,tmpNode.NodeName) and
+                 ( tmpNode.FirstChild <> nil ) and
+                 AnsiSameText(ANodeName,tmpNode.FirstChild.NodeValue)
+              then begin
+                nodeFound := True;
+                Break;
+              end;
+            end;
+            if nodeFound then begin
+              tmpNode := memberNode.FindNode(sVALUE);
+              if ( tmpNode <> nil ) and ( tmpNode.FirstChild <> nil ) then begin
+                Result := tmpNode.FirstChild;
+                Break;
+              end;
+            end;
           end;
-        end;
-        if nodeFound then begin
-          tmpNode := memberNode.FindNode(sVALUE);
-          if ( tmpNode <> nil ) and ( tmpNode.FirstChild <> nil ) then begin
-            Result := tmpNode.FirstChild;
-            Break;
-          end;
+          memberNode := memberNode.NextSibling;
         end;
       end;
-      memberNode := memberNode.NextSibling;
     end;
-  end;
+
+begin
+ result:=nil;
+ if StartNode<>nil then begin
+   tmpNode:=FindNode1(StartNode,ANodeName);
+   if (tmpNode=nil)and(StartNode.HasChildNodes) then begin
+      chilNodes:=StartNode.ChildNodes;
+      for i := 0 to chilNodes.Count-1 do begin
+          tmpNode:=FindNodeName(chilNodes[i],ANodeName);
+          if tmpNode<>nil then break;
+      end;
+   end;
+   result:=tmpNode;
+ end;
 end;
 
 function TSampClient.CheckResponse(response: TMemoryStream):boolean;
-var node:TDOMNode;
+var node,pnode,fnode:TDOMNode;
 begin
  result:=false;
  response.Position := 0;
  Doc.Free;
  ReadXMLFile(Doc, response);
-   //  <methodResponse> <params>
-   //  <methodResponse> <fault>
-   node:=doc.FirstChild.FirstChild;
-   if node.NodeName='params' then begin
+   node:=FindItem(Doc,'methodResponse');
+   if node<>nil then begin
+      pnode:=FindItem(node,'params');
+      fnode:=FindItem(node,'fault');
+   end;
+   if pnode<>nil then begin
      Ferrorcode:=0;
      Ferrortext:='';
      result:=true;
    end else begin
      Ferrorcode:=1;
-     Ferrortext:='Error';
-     node:=FindNode2(doc.FirstChild,'faultCode');
-     if node<>nil then Ferrorcode:=strtointdef(node.TextContent,1);
-     node:=FindNode2(doc.FirstChild,'faultString');
-     if node<>nil then Ferrortext:=node.TextContent;
+     Ferrortext:='Unknow error';
+     if fnode<>nil then begin
+       node:=FindNodeName(fnode,'faultCode');
+       if node<>nil then Ferrorcode:=strtointdef(node.TextContent,1);
+       node:=FindNodeName(fnode,'faultString');
+       if node<>nil then Ferrortext:=node.TextContent;
+     end;
    end;
 end;
 
@@ -405,7 +431,7 @@ begin
  result:=false;
  if SampCall('samp.hub.register',samp_secret) then
  begin
-   node:=FindNode2(doc.FirstChild,'samp.private-key');
+   node:=FindNodeName(doc.FirstChild,'samp.private-key');
    if node<> nil then begin
      samp_private_key:=node.TextContent;
      Fconnected:=true;
@@ -447,8 +473,10 @@ begin
   setlength(FClientSubscriptions,0);
   result:=SampCall('samp.hub.getRegisteredClients',samp_private_key);
   if result then begin
-    //  <methodResponse>  <params>    <param>    <value>    <array>     <data>  <value>
-    node:=doc.FirstChild.FirstChild.FirstChild.FirstChild.FirstChild.FirstChild.FirstChild;
+    node:=FindItem(doc,'methodResponse');
+    if node<>nil then node:=FindItem(node,'params');
+    if node<>nil then node:=FindItem(node,'array');
+    if node<>nil then node:=FindItem(node,'value');
     while node<>nil do begin
        FClients.Add(node.TextContent);
        node:=node.NextSibling;
@@ -457,21 +485,21 @@ begin
   setlength(FClientSubscriptions,FClients.Count);
   if FClients.Count>0 then for i:=0 to FClients.Count-1 do begin
      SampCall('samp.hub.getMetadata',samp_private_key,FClients[i]);
-     node:=FindNode2(doc.FirstChild,'samp.name');
+     node:=FindNodeName(doc.FirstChild,'samp.name');
      if node=nil then buf:=''
         else buf:=node.TextContent;
      FClientNames.Add(buf);
-     node:=FindNode2(doc.FirstChild,'samp.description.text');
+     node:=FindNodeName(doc.FirstChild,'samp.description.text');
      if node=nil then buf:=''
         else buf:=node.TextContent;
      FClientDesc.Add(buf);
      FClientSubscriptions[i]:=[];
      SampCall('samp.hub.getSubscriptions',samp_private_key,FClients[i]);
-     node:=FindNode2(doc.FirstChild,'coord.pointAt.sky');
+     node:=FindNodeName(doc.FirstChild,'coord.pointAt.sky');
      if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[coord_pointAt_sky];
-     node:=FindNode2(doc.FirstChild,'table.load.votable');
+     node:=FindNodeName(doc.FirstChild,'table.load.votable');
      if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[table_load_votable];
-     node:=FindNode2(doc.FirstChild,'image.load.fits');
+     node:=FindNodeName(doc.FirstChild,'image.load.fits');
      if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[image_load_fits];
   end;
 end;
@@ -481,9 +509,9 @@ var map:Tmap;
 begin
   SetLength(map,2);
   map[0].name:='ra';
-  map[0].value:=FormatFloat(f5,ra);
+  map[0].value:=FormatFloat(f7,ra);
   map[1].name:='dec';
-  map[1].value:=FormatFloat(f5,de);
+  map[1].value:=FormatFloat(f7,de);
   if client='' then
      result:=SampCall('samp.hub.notifyAll',samp_private_key,'coord.pointAt.sky',map)
   else
@@ -544,83 +572,76 @@ var NotifyDoc: TXMLDocument;
     node,pnode: TDOMNode;
     cmd,mtype,p1,p2,p3: string;
     plist: Tstringlist;
-    sender_id,msg_id: string;
+    key,sender_id,msg_id: string;
     map: Tmap;
 begin
  result:=false;
  sender_id:=''; msg_id:='';
  data.Position := 0;
  ReadXMLFile(NotifyDoc, data);
- node:=NotifyDoc.FirstChild.FirstChild;
- cmd:=node.TextContent;
+ node:=FindItem(NotifyDoc,'methodName');
+ if node<>nil then cmd:=node.TextContent;
  if cmd='samp.client.receiveCall' then begin
-    node:=node.NextSibling.FirstChild;
+    node:=FindItem(NotifyDoc,'param');
+    key:=node.TextContent;
     node:=node.NextSibling;
     sender_id:=node.TextContent;
     node:=node.NextSibling;
     msg_id:=node.TextContent;
  end;
  if (cmd='samp.client.receiveNotification')or(cmd='samp.client.receiveCall') then begin
-    node:=FindNode2(NotifyDoc.FirstChild,'samp.mtype');
+    node:=FindNodeName(NotifyDoc.FirstChild,'samp.mtype');
     if node<>nil then begin
        mtype:=node.TextContent;
-       pnode:=FindNode2(NotifyDoc.FirstChild,'samp.params');
+       pnode:=FindNodeName(NotifyDoc.FirstChild,'samp.params');
        if mtype='coord.pointAt.sky' then begin
-          node:=FindNode2(pnode,'ra');
+          node:=FindNodeName(pnode,'ra');
           if node<>nil then p1:=node.TextContent;
-          node:=FindNode2(pnode,'dec');
+          node:=FindNodeName(pnode,'dec');
           if node<>nil then p2:=node.TextContent;
           if Assigned(FcoordpointAtsky) then FcoordpointAtsky(StrToFloatDef(p1,0),StrToFloatDef(p2,0));
           result:=true;
        end else if mtype='image.load.fits' then begin
-         node:=FindNode2(pnode,'name');
+         node:=FindNodeName(pnode,'name');
          if node<>nil then p1:=node.TextContent;
-         node:=FindNode2(pnode,'image-id');
+         node:=FindNodeName(pnode,'image-id');
          if node<>nil then p2:=node.TextContent;
-         node:=FindNode2(pnode,'url');
+         node:=FindNodeName(pnode,'url');
          if node<>nil then p3:=node.TextContent;
          if Assigned(FImageLoadFits) then FImageLoadFits(p1,p2,p3);
          result:=true;
        end else if mtype='table.load.votable' then begin
-         node:=FindNode2(pnode,'name');
+         node:=FindNodeName(pnode,'name');
          if node<>nil then p1:=node.TextContent;
-         node:=FindNode2(pnode,'table-id');
+         node:=FindNodeName(pnode,'table-id');
          if node<>nil then p2:=node.TextContent;
-         node:=FindNode2(pnode,'url');
+         node:=FindNodeName(pnode,'url');
          if node<>nil then p3:=node.TextContent;
          if Assigned(FTableLoadVotable) then FTableLoadVotable(p1,p2,p3);
          result:=true;
        end else if mtype='table.highlight.row' then begin
-         node:=FindNode2(pnode,'table-id');
+         node:=FindNodeName(pnode,'table-id');
          if node<>nil then p1:=node.TextContent;
-         node:=FindNode2(pnode,'url');
+         node:=FindNodeName(pnode,'url');
          if node<>nil then p2:=node.TextContent;
-         node:=FindNode2(pnode,'row');
+         node:=FindNodeName(pnode,'row');
          if node<>nil then p3:=node.TextContent;
          if Assigned(FTableHighlightRow) then FTableHighlightRow(p1,p2,p3);
          result:=true;
        end else if mtype='table.select.rowList' then begin
          plist:=TStringList.Create;
-         node:=FindNode2(pnode,'table-id');
+         node:=FindNodeName(pnode,'table-id');
          if node<>nil then p1:=node.TextContent;
-         node:=FindNode2(pnode,'url');
+         node:=FindNodeName(pnode,'url');
          if node<>nil then p2:=node.TextContent;
-         node:=FindNode2(pnode,'row-list');
-         if node<>nil then begin
-            node:=node.FirstChild;
-            if node<>nil then begin
-              p3:=node.nodename;
-              node:=node.FirstChild;
-               if node<>nil then begin
-                p3:=node.nodename;
-                while node<>nil do begin
-                  p3:=node.FirstChild.NodeValue;
-                  plist.Add(p3);
-                  node:=node.NextSibling;
-                end;
-               end;
-            end;
-         end;
+         node:=FindNodeName(pnode,'row-list');
+         if node<>nil then node:=FindItem(node,'array');
+         if node<>nil then node:=FindItem(node,'value');
+          while node<>nil do begin
+            p3:=node.FirstChild.NodeValue;
+            plist.Add(p3);
+            node:=node.NextSibling;
+          end;
          if Assigned(FTableSelectRowlist) then FTableSelectRowlist(p1,p2,plist);
          plist.Free;
          result:=true;
