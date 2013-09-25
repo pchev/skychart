@@ -1617,8 +1617,6 @@ if VerboseMsg then
 end;
 
 procedure Tf_chart.CKeyDown(Key: Word; Shift: TShiftState);
-var ckey : char;
-    buf: string;
 begin
 if LockKeyboard then exit;
 try
@@ -1650,51 +1648,50 @@ VK_DELETE     : Cleanupmap1Click(nil);
 VK_ADD,VK_OEM_PLUS        : Zoomplus.execute;
 VK_SUBTRACT,VK_OEM_MINUS  : Zoomminus.execute;
 else begin
-  ckey:=chr(key);
-  if (Shift=[ssCtrl])and (key<>17) then begin
+  if (Shift=[ssCtrl])and (key<>VK_CONTROL) then begin
     // Ctrl + key handling
-    case ckey of
-     'Q' : if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
+    case key of
+     VK_Q: if sc.plot.cfgplot.partsize<=4.8 then begin  // ctrl+q
             sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize+0.2;
             Refresh;
           end;
-     'A' : if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
+     VK_A: if sc.plot.cfgplot.partsize>=0.3 then begin  // ctrl+a
             sc.plot.cfgplot.partsize:=sc.plot.cfgplot.partsize-0.2;
             Refresh;
           end;
-     'W' : if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
+     VK_W: if sc.plot.cfgplot.magsize<=9.5  then begin   // ctrl+w
             sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize+0.5;
             Refresh;
           end;
-     'S' : if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
+     VK_S: if sc.plot.cfgplot.magsize>=1.5   then begin   // ctrl+s
             sc.plot.cfgplot.magsize:=sc.plot.cfgplot.magsize-0.5;
             Refresh;
           end;
-     'E' : if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
+     VK_E: if sc.plot.cfgplot.contrast<=980 then begin   // ctrl+e
             sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast+20;
             Refresh;
           end;
-     'D' : if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
+     VK_D: if sc.plot.cfgplot.contrast>=120  then begin   // ctrl+d
             sc.plot.cfgplot.contrast:=sc.plot.cfgplot.contrast-20;
             Refresh;
           end;
-     'R' : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
+     VK_R : if sc.plot.cfgplot.saturation<=250 then begin  // ctrl+r
             sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation+20;
             Refresh;
           end;
-     'F' : if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
+     VK_F: if sc.plot.cfgplot.saturation>=5 then begin  // ctrl+f
             sc.plot.cfgplot.saturation:=sc.plot.cfgplot.saturation-20;
             Refresh;
           end;
-     'L' : begin                                        // ctrl+l
+     VK_L: begin                                        // ctrl+l
             sc.cfgsc.ShowLabel[8]:=not sc.cfgsc.ShowLabel[8];
             Refresh;
            end;
     end;
-  end else if (Shift=[ssCtrl,ssShift])and (key<>17) then begin
+  end else if (Shift=[ssCtrl,ssShift])and (key<>VK_CONTROL) then begin
     // Ctrl + Shift + key handling
-    case ckey of
-     'L' : begin                                        // ctrl+shift+l
+    case key of
+     VK_L: begin                                        // ctrl+shift+l
             sc.cfgsc.ShowLegend:=not sc.cfgsc.ShowLegend;
             Refresh;
            end;
@@ -1702,36 +1699,38 @@ else begin
   end else begin
     // Numeric keys handling
     if shift=[] then begin
-    case ckey of
-     '1' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
-     '2' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
-     '3' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
-     '4' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[3]);
-     '5' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[4]);
-     '6' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[5]);
-     '7' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[6]);
-     '8' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[7]);
-     '9' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[8]);
-     '0' : SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
+    case key of
+     VK_1: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[0]);
+     VK_2: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[1]);
+     VK_3: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[2]);
+     VK_4: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[3]);
+     VK_5: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[4]);
+     VK_6: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[5]);
+     VK_7: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[6]);
+     VK_8: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[7]);
+     VK_9: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[8]);
+     VK_0: SetField(deg2rad*sc.catalog.cfgshr.FieldNum[9]);
     end;
     end;
     // Alpha keys handling
-    if ssShift in Shift then buf:=UpperCase(ckey)
-       else buf:=LowerCase(ckey);
-    ckey:=buf[1];
-    case ckey of
-    'a' : SetZenit(deg2rad*200);
-    'e' : SetAz(deg2rad*270);
-    'n' : SetAz(deg2rad*180);
-    's' : SetAz(0);
-    'w' : SetAz(deg2rad*90);
-    'z' : SetZenit(0);
-    'C' : SetCameraRotation(1);
-    'G' : SetCameraRotation(2);
-    'S' : SetCameraRotation(0);
-    end;
+    if ssShift in Shift then begin
+      case key of
+      VK_C: SetCameraRotation(1);
+      VK_G: SetCameraRotation(2);
+      VK_S: SetCameraRotation(0);
+      end;
+    end else begin
+      case key of
+      VK_A: SetZenit(deg2rad*200);
+      VK_E: SetAz(deg2rad*270);
+      VK_N: SetAz(deg2rad*180);
+      VK_S: SetAz(0);
+      VK_W: SetAz(deg2rad*90);
+      VK_Z: SetZenit(0);
+      end;
     end;
   end;
+end;
 end;
 movefactor:=4;
 zoomfactor:=2;
