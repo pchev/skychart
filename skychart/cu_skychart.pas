@@ -133,12 +133,13 @@ Tskychart = class (TComponent)
     function DrawLabels:boolean;
     Procedure DrawLegend;
     Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
-    procedure DrawFinderMark(ra,de :double; moving:boolean; num:integer) ;
+    procedure DrawFinderMark(ra,de :double; moving:boolean; num:integer;mark:integer=0) ;
     procedure DrawCircle;
     Procedure DrawTarget;
     Procedure DrawCompass;
     procedure DrawCRose;
     function TelescopeMove(ra,dec:double):boolean;
+    function Telescope2Move(ra,dec:double):boolean;
     procedure GetCoord(x,y: integer; var ra,dec,a,h,l,b,le,be:double);
     procedure MoveCenter(loffset,boffset:double);
     procedure MoveChart(ns,ew:integer; movefactor:double);
@@ -351,9 +352,7 @@ end;
   if cfgsc.showlabel[8] or cfgsc.showlegend then DrawLegend;
 
   // refresh telescope mark
-  if scopemark then begin
-     cfgsc.ScopeMark:=true;
-  end;
+  if scopemark then cfgsc.ScopeMark:=true;
   // Draw the chart border
   DrawBorder;
   result:=true;
@@ -847,6 +846,13 @@ end;
          cfgsc.decentre:=cfgsc.TrackDec;
          end;
    end;
+  end
+  else begin
+      if cfgsc.TrackName=rsTelescope+'-2' then begin
+        if cfgsc.scope2mark then DrawFinderMark(cfgsc.Scope2Ra,cfgsc.Scope2Dec,true,-1,MarkType);
+        cfgsc.scope2mark:=false;
+        cfgsc.TrackName:='';
+      end;
   end;
 // find the current field number and projection (a second time if fov is adjusted to the image size)
 w := cfgsc.fov;
@@ -4586,7 +4592,7 @@ Fplot.cfgplot.UseBMP:=saveusebmp;
 end;
 end;
 
-Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean; num:integer) ;
+Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean; num:integer;mark:integer=0) ;
 var x1,y1,x2,y2,r : double;
     i,lid,sz : integer;
     xa,ya,xb,yb,xla,yla:single;
@@ -4596,6 +4602,20 @@ var x1,y1,x2,y2,r : double;
     col: TColor;
     lbl,lis: string;
 begin
+if mark>0 then begin
+   col:=Fplot.cfgplot.Color[18];
+   projection(ra,de,x1,y1,false,cfgsc) ;
+   WindowXY(x1,y1,xx1,yy1,cfgsc);
+   if mark=1 then begin
+     xa:=xx1-10; xb:=xx1+10; ya:=yy1-10; yb:=yy1+10;
+     Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
+   end else begin
+     xa:=xx1-20; xb:=xx1+20; ya:=yy1-20; yb:=yy1+20;
+     Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
+     xa:=xx1-50; xb:=xx1+50; ya:=yy1-50; yb:=yy1+50;
+     Fplot.PlotCircle(xa,ya,xb,yb,col,moving);
+   end;
+end else begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
 rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
@@ -4671,6 +4691,7 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
       end;
     end;
   end;
+end;
 end;
 
 Procedure Tskychart.DrawCircle;
@@ -4844,6 +4865,37 @@ if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
       end;
       MovetoRaDec(cfgsc.ScopeRa,cfgsc.ScopeDec);
       if VerboseMsg then WriteTrace('TelescopeMove');
+      Refresh;
+      cfgsc.scopelock:=false;
+   end;
+end;
+end;
+end;
+
+function Tskychart.Telescope2Move(ra,dec:double):boolean;
+var dist:double;
+begin
+// external telescope driven by the MOVESCOPE command
+result:=false;
+cfgsc.moved:=false;
+if (ra<>cfgsc.Scope2Ra)or(dec<>cfgsc.Scope2Dec) then begin
+if cfgsc.scope2mark then DrawFinderMark(cfgsc.Scope2Ra,cfgsc.Scope2Dec,true,-1,MarkType);
+DrawFinderMark(ra,dec,true,-1,MarkType);
+cfgsc.Scope2Ra:=ra;
+cfgsc.Scope2Dec:=dec;
+cfgsc.scope2mark:=true;
+dist:=angulardistance(cfgsc.racentre,cfgsc.decentre,ra,dec);
+if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
+   if not cfgsc.scopelock then begin
+      result:=true;
+      cfgsc.scopelock:=true;
+      if cfgsc.TrackOn and (cfgsc.TrackName=rsTelescope+'-2') then begin
+        cfgsc.TrackType:=6;
+        cfgsc.TrackRA:=ra;
+        cfgsc.TrackDec:=dec;
+      end;
+      MovetoRaDec(cfgsc.Scope2Ra,cfgsc.Scope2Dec);
+      if VerboseMsg then WriteTrace('Telescope2Move');
       Refresh;
       cfgsc.scopelock:=false;
    end;

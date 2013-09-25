@@ -45,7 +45,7 @@ type
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
   Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='') of object;
-
+  TSendCoordpointAtsky = procedure(client: integer; ra,de: double) of object;
 type
   TChartDrawingControl = class(TCustomControl)
   public
@@ -71,6 +71,8 @@ type
     MenuCircle1: TMenuItem;
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
+    MenuSAMP: TMenuItem;
+    SAMPbroadcastcoord: TMenuItem;
     MenuRectangle2: TMenuItem;
     MenuRectangle10: TMenuItem;
     MenuRectangle1: TMenuItem;
@@ -174,6 +176,7 @@ type
     procedure RefreshTimerTimer(Sender: TObject);
     procedure RemoveAllLabel1Click(Sender: TObject);
     procedure RemoveLastLabel1Click(Sender: TObject);
+    procedure SAMPsendcoordClick(Sender: TObject);
     procedure search1Click(Sender: TObject);
     procedure SlewCursorClick(Sender: TObject);
     procedure Target1Click(Sender: TObject);
@@ -227,6 +230,7 @@ type
     FListInfo: Tstr12func;
     FChartMove: TnotifyEvent;
     FImageSetup: TNotifyEvent;
+    FSendCoordpointAtsky: TSendCoordpointAtsky;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
     MovingCircle,FNightVision,StartCircle,lockkey,movecam,moveguide,frommovecam,printing: Boolean;
@@ -381,6 +385,8 @@ type
     property OnChartMove: TNotifyEvent read FChartMove write FChartMove;
     property OnImageSetup: TNotifyEvent read FImageSetup write FImageSetup;
     property NightVision: Boolean read FNightVision write SetNightVision;
+    property onSendCoordpointAtsky: TSendCoordpointAtsky read FSendCoordpointAtsky write FSendCoordpointAtsky;
+
   end;
 
 implementation
@@ -903,6 +909,9 @@ end;
 if sc.cfgsc.scopemark then begin
    sc.DrawFinderMark(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,true,-1);
 end;
+if sc.cfgsc.scope2mark then begin
+   sc.DrawFinderMark(sc.cfgsc.Scope2Ra,sc.cfgsc.Scope2Dec,true,-1,MarkType);
+end;
 if (((sc.cfgsc.Trackon)and(sc.cfgsc.TrackType>=1)and(sc.cfgsc.TrackType<=3))or((abs(sc.cfgsc.FindJD-sc.cfgsc.JDchart)<0.001 )))and(sc.cfgsc.TrackName<>rsTelescope)and(sc.cfgsc.TrackName<>'') then begin
    sc.DrawSearchMark(sc.cfgsc.TrackRA,sc.cfgsc.TrackDec,false);
 end;
@@ -944,6 +953,17 @@ if sc.cfgsc.poscustomlabels>0 then begin
   sc.cfgsc.poscustomlabels:=sc.cfgsc.numcustomlabels;
 end;
 Refresh;
+end;
+
+procedure Tf_chart.SAMPsendcoordClick(Sender: TObject);
+var client: integer;
+    ra,de,a,h,l,b,le,be:double;
+begin
+client:=TMenuItem(sender).tag;
+sc.GetCoord(xcursor,ycursor,ra,de,a,h,l,b,le,be);
+if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc,true,true);
+precession(sc.cfgsc.JDChart,jd2000,ra,de);
+if assigned(FSendCoordpointAtsky) then FSendCoordpointAtsky(client,ra,de);
 end;
 
 procedure Tf_chart.search1Click(Sender: TObject);
@@ -1723,6 +1743,7 @@ end;
 
 procedure Tf_chart.PopupMenu1Popup(Sender: TObject);
 var i:integer;
+    MenuItem: TMenuItem;
 begin
  if assigned(FImageSetFocus) then FImageSetFocus(self);
  xcursor:=Image1.ScreenToClient(mouse.cursorpos).x;
@@ -1761,6 +1782,24 @@ begin
     Telescope1.Visible:=false
  else
     Telescope1.Visible:=true;
+ MenuSAMP.Visible:=SampConnected;
+ if SampConnected then begin
+    while MenuSAMP.Count>0 do MenuSAMP.Delete(0);
+    MenuItem:=TMenuItem.Create(self);
+    MenuItem.Caption:='Broadcast all';
+    MenuItem.Tag:=0;
+    MenuItem.OnClick:=SAMPsendcoordClick;
+    MenuSAMP.Add(MenuItem);
+    for i:=0 to SampClientName.Count-1 do begin
+       if SampClientCoordpointAtsky[i]='1' then begin
+         MenuItem:=TMenuItem.Create(self);
+         MenuItem.Caption:=SampClientName[i];
+         MenuItem.Tag:=i;
+         MenuItem.OnClick:=SAMPsendcoordClick;
+         MenuSAMP.Add(MenuItem);
+       end;
+    end;
+ end;
  MenuCircle1.checked:=sc.cfgsc.circleok[1];
  MenuCircle2.checked:=sc.cfgsc.circleok[2];
  MenuCircle3.checked:=sc.cfgsc.circleok[3];
@@ -3445,9 +3484,9 @@ if (abs(r)<=360)and(abs(d)<=90) then begin
  r:=deg2rad*r;
  sc.cfgsc.TrackOn:=true;
  sc.cfgsc.TrackType:=6;
- sc.cfgsc.TrackName:=rsTelescope;
+ sc.cfgsc.TrackName:=rsTelescope+'-2';
  sc.cfgsc.scopelock:=false;
- if sc.TelescopeMove(r,d) then Refresh;
+ if sc.Telescope2Move(r,d) then Refresh;
  result:=msgOK;
 end
 else result:=msgFailed+' out of range';
@@ -3463,9 +3502,9 @@ if (abs(hh)<=180)and(abs(dd)<=90) then begin
  ra:=sc.cfgsc.CurST-deg2rad*hh;
  sc.cfgsc.TrackOn:=true;
  sc.cfgsc.TrackType:=6;
- sc.cfgsc.TrackName:=rsTelescope;
+ sc.cfgsc.TrackName:=rsTelescope+'-2';
  sc.cfgsc.scopelock:=false;
- if sc.TelescopeMove(ra,de) then Refresh;
+ if sc.Telescope2Move(ra,de) then Refresh;
  result:=msgOK;
 end
 else result:=msgFailed+' out of range';
@@ -3476,11 +3515,19 @@ begin
 if onoff='ON' then begin
     sc.cfgsc.TrackOn:=true;
     sc.cfgsc.TrackType:=6;
-    sc.cfgsc.TrackName:=rsTelescope;
-    sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
-    sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
-    sc.cfgsc.scopemark:=true;
-    sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
+    if Connect1.checked then begin
+      sc.cfgsc.TrackName:=rsTelescope;
+      sc.cfgsc.TrackRA:=sc.cfgsc.ScopeRa;
+      sc.cfgsc.TrackDec:=sc.cfgsc.ScopeDec;
+      sc.cfgsc.scopemark:=true;
+      sc.MovetoRaDec(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec);
+    end else begin
+      sc.cfgsc.TrackName:=rsTelescope+'-2';
+      sc.cfgsc.TrackRA:=sc.cfgsc.Scope2Ra;
+      sc.cfgsc.TrackDec:=sc.cfgsc.Scope2Dec;
+      sc.cfgsc.scope2mark:=true;
+      sc.MovetoRaDec(sc.cfgsc.Scope2Ra,sc.cfgsc.Scope2Dec);
+    end;
     Refresh;
 end else begin
     sc.cfgsc.TrackOn:=false;

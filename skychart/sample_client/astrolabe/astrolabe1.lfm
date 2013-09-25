@@ -1,5 +1,5 @@
 object f_astrolabe: Tf_astrolabe
-  Left = 144
+  Left = 150
   Height = 439
   Top = 263
   Width = 364
@@ -41,15 +41,15 @@ object f_astrolabe: Tf_astrolabe
     TabOrder = 1
     object Label4: TLabel
       Left = 8
-      Height = 14
+      Height = 15
       Top = 59
-      Width = 31
+      Width = 38
       Caption = 'Status'
       ParentColor = False
     end
     object Edit3: TEdit
       Left = 136
-      Height = 21
+      Height = 22
       Top = 55
       Width = 184
       Color = clBtnFace
@@ -58,7 +58,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Edit2: TEdit
       Left = 136
-      Height = 21
+      Height = 22
       Top = 28
       Width = 65
       ReadOnly = True
@@ -67,15 +67,15 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label2: TLabel
       Left = 8
-      Height = 14
+      Height = 15
       Top = 32
-      Width = 54
+      Width = 66
       Caption = 'Server Port'
       ParentColor = False
     end
     object Edit1: TEdit
       Left = 136
-      Height = 21
+      Height = 22
       Top = 1
       Width = 89
       ReadOnly = True
@@ -84,9 +84,9 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label1: TLabel
       Left = 8
-      Height = 14
+      Height = 15
       Top = 5
-      Width = 85
+      Width = 104
       Caption = 'Server IP address'
       ParentColor = False
     end
@@ -124,7 +124,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label3: TLabel
       Left = 8
-      Height = 14
+      Height = 15
       Top = 15
       Width = 9
       Caption = 'H'
@@ -132,7 +132,7 @@ object f_astrolabe: Tf_astrolabe
     end
     object Label5: TLabel
       Left = 8
-      Height = 14
+      Height = 15
       Top = 62
       Width = 9
       Caption = 'D'
@@ -150,34 +150,34 @@ object f_astrolabe: Tf_astrolabe
     TabOrder = 3
     object LabelX: TLabel
       Left = 24
-      Height = 14
+      Height = 15
       Top = 8
-      Width = 34
+      Width = 38
       Caption = 'LabelX'
       ParentColor = False
     end
     object LabelY: TLabel
       Left = 96
-      Height = 14
+      Height = 15
       Top = 8
-      Width = 34
+      Width = 38
       Caption = 'LabelY'
       ParentColor = False
     end
     object CheckBox1: TCheckBox
       Left = 24
-      Height = 19
+      Height = 23
       Top = 22
-      Width = 101
+      Width = 119
       Caption = 'Show commands'
       OnChange = CheckBox1Change
       TabOrder = 0
     end
     object Label6: TLabel
       Left = 144
-      Height = 14
+      Height = 15
       Top = 6
-      Width = 4
+      Width = 5
       Caption = '.'
       ParentColor = False
     end

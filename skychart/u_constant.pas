@@ -803,9 +803,10 @@ type
     JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
     ScopeDec, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
     FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
+    Scope2Ra,Scope2Dec: double;
     DrawAllStarLabel, MovedLabelLine, StarFilter, NebFilter,
     FindOK, WhiteBg, ShowLegend, MagLabel, NameLabel, ConstFullLabel, ConstLatinLabel,
-    ScopeMark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
+    ScopeMark, Scope2Mark, ScopeLock, FindPM, FindStarPM, FindPMfullmotion, AstNEO: boolean;
     EquinoxName, TargetName, TrackName, TrackId, FindName,
     FindDesc, FindDesc2, FindNote, FindCat, FindCatname, FindId: string;
     BGalpha: integer;
@@ -1089,7 +1090,10 @@ var
   VerboseMsg: boolean = False;
   WideLine: integer = 2;
   MarkWidth: integer = 1;
-
+  MarkType: integer = 1;
+  SampConnected,SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
+  SampClientId,SampClientName,SampClientDesc: Tstringlist;
+  SampClientCoordpointAtsky,SampClientImageLoadFits,SampClientTableLoadVotable: Tstringlist;
 {$ifdef darwin}
   OpenFileCMD: string = 'open';
 {$else}
@@ -1934,6 +1938,8 @@ begin
   CurMoonIllum := Source.CurMoonIllum;
   ScopeRa := Source.ScopeRa;
   ScopeDec := Source.ScopeDec;
+  Scope2Ra := Source.Scope2Ra;
+  Scope2Dec := Source.Scope2Dec;
   TrackEpoch := Source.TrackEpoch;
   TrackRA := Source.TrackRA;
   TrackDec := Source.TrackDec;
@@ -1948,6 +1954,7 @@ begin
   MovedLabelLine := Source.MovedLabelLine;
   ConstLatinLabel := Source.ConstLatinLabel;
   ScopeMark := Source.ScopeMark;
+  Scope2Mark := Source.Scope2Mark;
   ScopeLock := Source.ScopeLock;
   EquinoxName := Source.EquinoxName;
   TrackName := Source.TrackName;

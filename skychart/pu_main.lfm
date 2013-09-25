@@ -1,5 +1,5 @@
 object f_main: Tf_main
-  Left = 310
+  Left = 316
   Height = 549
   Top = 120
   Width = 904
@@ -3971,6 +3971,25 @@ object f_main: Tf_main
       object VariableStar1: TMenuItem
         OnClick = VariableStar1Click
       end
+      object MenuItemSAMP: TMenuItem
+        Caption = 'SAMP'
+        object MenuItem35: TMenuItem
+          Caption = 'Connect to SAMP HUB'
+          OnClick = MenuItem35Click
+        end
+        object MenuItem36: TMenuItem
+          Caption = 'Disconnect from SAMP'
+          OnClick = MenuItem36Click
+        end
+        object MenuItem37: TMenuItem
+          Caption = 'SAMP status'
+          OnClick = MenuItem37Click
+        end
+        object MenuItem38: TMenuItem
+          Caption = 'SAMP setup'
+          OnClick = MenuItem38Click
+        end
+      end
       object N2: TMenuItem
         Caption = '-'
       end
@@ -6490,25 +6509,6 @@ object f_main: Tf_main
           0000000000000000000000000000000000000000000000000000
         }
         OnClick = DSSImageExecute
-      end
-    end
-    object MenuItem34: TMenuItem
-      Caption = 'Interop'
-      object MenuItem35: TMenuItem
-        Caption = 'Connect to SAMP HUB'
-        OnClick = MenuItem35Click
-      end
-      object MenuItem36: TMenuItem
-        Caption = 'Disconnect from SAMP'
-        OnClick = MenuItem36Click
-      end
-      object MenuItem37: TMenuItem
-        Caption = 'SAMP status'
-        OnClick = MenuItem37Click
-      end
-      object MenuItem38: TMenuItem
-        Caption = 'SAMP setup'
-        OnClick = MenuItem38Click
       end
     end
     object telescope1: TMenuItem
