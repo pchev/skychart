@@ -68,6 +68,7 @@ TSampClient = class(TObject)
     function SampHubSendMetadata:boolean;
     function SampHubGetClientList:boolean;
     function SampSendCoord(client:string;ra,de: double):boolean;
+    function SampSendVoTable(client,tname,table_id,url:string):boolean;
     function SampSubscribe:boolean;
     property LastErrorcode: integer read Ferrorcode;
     property LastError: string read Ferrortext;
@@ -528,6 +529,22 @@ begin
      result:=SampCall('samp.hub.notifyAll',samp_private_key,'coord.pointAt.sky',map)
   else
      result:=SampCall('samp.hub.notify',samp_private_key,client,'coord.pointAt.sky',map);
+end;
+
+function TSampClient.SampSendVoTable(client,tname,table_id,url:string):boolean;
+var map:Tmap;
+begin
+  SetLength(map,3);
+  map[0].name:='name';
+  map[0].value:=tname;
+  map[1].name:='table-id';
+  map[1].value:=table_id;
+  map[2].name:='url';
+  map[2].value:=url;
+  if client='' then
+     result:=SampCall('samp.hub.notifyAll',samp_private_key,'table.load.votable',map)
+  else
+     result:=SampCall('samp.hub.notify',samp_private_key,client,'table.load.votable',map);
 end;
 
 function TSampClient.SampSubscribe:boolean;

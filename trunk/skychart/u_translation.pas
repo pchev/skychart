@@ -1432,6 +1432,7 @@ resourcestring
   rsDoNotChangeA = 'Do not change anything here if you are not sure what you do!';
   rsForceEqSys = 'Force EqSys';
   rsBrightest = 'Brightest';
+  rsAllSAMPClien = 'All SAMP clients';
 
 implementation
 

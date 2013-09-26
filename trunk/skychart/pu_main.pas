@@ -827,7 +827,8 @@ type
     procedure TCPShowError(var msg: string);
     procedure TCPShowSocket(var msg: string);
     procedure GetTwilight(jd0: double; out ht: double);
-    procedure SendCoordpointAtsky(client: integer; ra,de: double);
+    procedure SendCoordpointAtsky(client: string; ra,de: double);
+    procedure SendVoTable(client,tname,tid,url: string);
   end;
 
 var
@@ -3800,6 +3801,7 @@ if ConfigCatalog=nil then begin
    ConfigCatalog.f_config_catalog1.PageControl1.ShowTabs:=true;
    ConfigCatalog.f_config_catalog1.PageControl1.PageIndex:=0;
    ConfigCatalog.f_config_catalog1.onApplyConfig:=ApplyConfigCatalog;
+   ConfigCatalog.f_config_catalog1.onSendVoTable:=SendVoTable;
 end;
 {$ifdef mswindows}SetFormNightVision(ConfigCatalog,nightvision);{$endif}
 ConfigCatalog.f_config_catalog1.ccat.Assign(catalog.cfgcat);
@@ -8452,13 +8454,16 @@ begin
 //  for i:=0 to rowlist.Count-1 do memo1.Lines.Add(rowlist[i]);
 end;
 
-procedure Tf_main.SendCoordpointAtsky(client: integer; ra,de: double);
-var cl: string;
+procedure Tf_main.SendCoordpointAtsky(client: string; ra,de: double);
 begin
-  cl:='';
   ra:=rad2deg*ra;
   de:=rad2deg*de;
-  samp.SampSendCoord(cl,ra,de);
+  samp.SampSendCoord(client,ra,de);
+end;
+
+procedure Tf_main.SendVoTable(client,tname,tid,url: string);
+begin
+  samp.SampSendVoTable(client,tname,tid,url);
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////

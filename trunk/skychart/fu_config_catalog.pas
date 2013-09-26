@@ -32,6 +32,8 @@ uses  XMLConf, u_help, u_translation, u_constant, u_util, cu_catalog, pu_catgen,
 
 type
 
+  TSendVoTable = procedure(client,tname,tid,url: string) of object;
+
   { Tf_config_catalog }
 
   Tf_config_catalog = class(TFrame)
@@ -39,12 +41,14 @@ type
     addcat: TButton;
     bsc3: TDirectoryEdit;
     BSCbox: TCheckBox;
+    Button1: TButton;
     Button5: TButton;
     Button6: TButton;
     Button7: TButton;
     Button8: TButton;
     Button9: TButton;
     ColorDialog1: TColorDialog;
+    ComboBox1: TComboBox;
     delcat: TButton;
     CatgenButton: TButton;
     delobj: TButton;
@@ -215,6 +219,7 @@ type
     OpenDialog1: TOpenDialog;
     PageControl1: TPageControl;
     procedure addobjClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure Button5Click(Sender: TObject);
     procedure Button6Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
@@ -275,6 +280,7 @@ type
     HintX, HintY: integer;
     catalogempty, LockChange,LockCatPath,LockActivePath: boolean;
     FApplyConfig: TNotifyEvent;
+    FSendVoTable: TSendVoTable;
     FCatGen: Tf_catgen;
     textcolor: TColor; // clWindow replacement hack
     procedure ShowGCat;
@@ -308,6 +314,7 @@ type
     procedure Lock; // old FormClose
     procedure SetLang;
     property onApplyConfig: TNotifyEvent read FApplyConfig write FApplyConfig;
+    property onSendVoTable: TSendVoTable read FSendVoTable write FSendVoTable;
   end;
 
 implementation
@@ -1329,6 +1336,42 @@ for j in [1,2,3] do begin
   end;
   findclose(fs);
 end;
+if SampConnected then begin
+  ComboBox1.Enabled:=true;
+  button1.Enabled:=true;
+  ComboBox1.Clear;
+  ComboBox1.Items.Add(rsAllSAMPClien);
+  for i:=0 to SampClientName.Count-1 do begin
+     if SampClientTableLoadVotable[i]='1' then begin
+       ComboBox1.Items.Add(SampClientName[i]);
+     end;
+  end;
+  ComboBox1.ItemIndex:=0;
+end else begin
+  ComboBox1.Clear;
+  ComboBox1.Items.Add(rsAllSAMPClien);
+  ComboBox1.ItemIndex:=0;
+  ComboBox1.Enabled:=false;
+  button1.Enabled:=false;
+end;
+end;
+
+procedure Tf_config_catalog.Button1Click(Sender: TObject);
+var cn,client,tname,tid,url: string;
+    i,p: integer;
+begin
+cn:=ComboBox1.Text;
+for i:=0 to SampClientName.Count-1 do begin
+    if SampClientName[i]=cn then begin
+      client:=SampClientId[i];
+      break;
+    end;
+end;
+p:=stringgrid4.selection.top;
+tname:=stringgrid4.cells[1,p];
+tid:='skychart_'+ExtractFileNameOnly(stringgrid4.cells[2,p]);
+url:='file://'+slash(VODir)+stringgrid4.cells[2,p];
+if assigned(FSendVoTable) then FSendVoTable(client,tname,tid,url);
 end;
 
 procedure Tf_config_catalog.StringGrid1DrawCell(Sender: TObject; aCol,
