@@ -36,6 +36,33 @@ end;
 
 const CacheInc=1000;
       MaxCache=10;
+      numucdtr=25;
+      ucdtr : array [1..numucdtr] of array[1..2] of string =
+      (('POS_ANG_DIST_GENERAL', 'pos.angDistance'),
+      ('POS_EQ_RA_MAIN', 'pos.eq.ra;meta.main'),
+      ('POS_EQ_DEC_MAIN', 'pos.eq.dec;meta.main'),
+      ('ID_MAIN', 'meta.id;meta.main'),
+      ('POS_EQ_RA', 'pos.eq.ra'),
+      ('POS_EQ_DEC', 'pos.eq.dec'),
+      ('POS_EQ_RA_OTHER', 'pos.eq.ra'),
+      ('POS_EQ_DEC_OTHER', 'pos.eq.dec'),
+      ('POS_EQ_PMRA', 'pos.pm;pos.eq.ra'),
+      ('POS_EQ_PMDEC', 'pos.pm;pos.eq.dec'),
+      ('PHOT_MAG_OPTICAL', 'phot.mag;em.opt'),
+      ('PHOT_JHN_J', 'phot.mag;em.IR.J'),
+      ('PHOT_JHN_K', 'phot.mag;em.IR.K'),
+      ('PHOT_MAG_B', 'phot.mag;em.opt.B'),
+      ('PHOT_MAG_V', 'phot.mag;em.opt.V'),
+      ('PHOT_MAG_R', 'phot.mag;em.opt.R'),
+      ('PHOT_MAG_I', 'phot.mag;em.opt.I'),
+      ('CODE_MULT_INDEX', 'meta.code.multip'),
+      ('CLASS_OBJECT', 'src.class'),
+      ('POS_PLATE_X', 'pos.cartesian.x;instr.plate'),
+      ('POS_PLATE_Y', 'pos.cartesian.y;instr.plate'),
+      ('PHOT_MAG_UNDEF', 'phot.mag'),
+      ('REFER_CODE', 'meta.bib'),
+      ('CODE_MISC', 'meta.code'),
+      ('NOTE', 'meta.note'));
 
 var
    VOobject, VOname : string;
@@ -249,7 +276,7 @@ rtStar: begin
           CurStarCache:=-1;
           for i:=0 to MaxCache-1 do begin
             if StarCacheIndex[i]=catname then begin
-              if StarOptionCache[i].vofiledate=FileAge(catfile)then begin
+              if StarOptionCache[i].vofiledate=max(FileAge(catfile),FileAge(deffile))then begin
                CurStarCache:=i;
                result:=true;
                break;
@@ -264,7 +291,7 @@ rtNeb : begin
           CurNebCache:=-1;
           for i:=0 to MaxCache-1 do begin
             if NebCacheIndex[i]=catname then begin
-              if NebOptionCache[i].vofiledate=FileAge(catfile)then begin
+              if NebOptionCache[i].vofiledate=max(FileAge(catfile),FileAge(deffile))then begin
                CurNebCache:=i;
                result:=true;
                break;
@@ -342,9 +369,9 @@ end;
 end;
 
 Function ReadVOHeader: boolean;
-var buf,k:string;
+var buf,k,ucd:string;
     u: double;
-    i,j: integer;
+    i,j,p: integer;
     fieldnode: TDOMNode;
     fielddata: TFieldData;
     config: TXMLConfig;
@@ -404,7 +431,19 @@ end else begin
       if fieldnode<>nil then k:=fieldnode.NodeValue;
       fielddata.name:=k;
       fieldnode:=VoNode.Attributes.GetNamedItem('ucd');
-      if fieldnode<>nil then fielddata.ucd:=fieldnode.NodeValue;
+      if fieldnode<>nil then begin
+        ucd:=fieldnode.NodeValue;
+        p:=pos(':',ucd);
+        if p>0 then delete(ucd,1,p);
+        p:=pos('_',ucd);
+        if p>0 then
+           for p:=1 to numucdtr do
+              if ucd=ucdtr[p,1] then begin
+                 ucd:=ucdtr[p,2];
+                 break;
+              end;
+        fielddata.ucd:=ucd;
+      end;
       fieldnode:=VoNode.Attributes.GetNamedItem('datatype');
       if fieldnode<>nil then fielddata.datatype:=fieldnode.NodeValue;
       fieldnode:=VoNode.Attributes.GetNamedItem('unit');
@@ -454,11 +493,11 @@ end else begin
         case catversion of
            rtStar: begin
                     StarOptionCache[CurStarCache].option:=emptyrec.options;
-                    StarOptionCache[CurStarCache].vofiledate:=FileAge(catfile);
+                    StarOptionCache[CurStarCache].vofiledate:=max(FileAge(catfile),FileAge(deffile));
                    end;
            rtNeb:  begin
                     NebOptionCache[CurNebCache].option:=emptyrec.options;
-                    NebOptionCache[CurNebCache].vofiledate:=FileAge(catfile);
+                    NebOptionCache[CurNebCache].vofiledate:=max(FileAge(catfile),FileAge(deffile));
                    end;
            else DeleteCache;
         end;
@@ -502,6 +541,15 @@ while i=0 do begin
   i:=findnext(fs);
 end;
 findclose(fs);
+if VOobject='dso' then begin
+  i:=findfirst(slash(VOCatpath)+'vo_samp_*.xml',0,fs);
+  while i=0 do begin
+    VOcatlist.Add(fs.Name);
+    inc(Ncat);
+    i:=findnext(fs);
+  end;
+  findclose(fs);
+end;
 CurCat:=-1;
 VOopen:=true;
 NextVOCat(ok);

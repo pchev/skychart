@@ -458,8 +458,9 @@ for i:=1 to MaxNebCatalog do
     Fcatalog.cfgcat.nebcaton[i]:=false;
 if Fcatalog.cfgcat.nebcatdef[uneb-BaseNeb] then
   InitNebC(uneb);
-if cfgsc.shownebulae then begin
+if Fcatalog.cfgcat.nebcatdef[voneb-BaseNeb] then
   InitNebC(voneb);
+if cfgsc.shownebulae then begin
   InitNebC(sac);
   InitNebC(ngc);
   InitNebC(lbn);

@@ -435,7 +435,7 @@ end;
 
 procedure Tf_voconfig.UpdateCatalog(cn: string);
 var i,j,n: integer;
-    buf,table,baseurl: string;
+    buf,tablen,baseurl: string;
     fullcat:boolean;
     dt,dc,ds,dm,fc: integer;
     tb:TTabsheet;
@@ -452,7 +452,7 @@ try
   config:=TXMLConfig.Create(self);
   config.Filename:=cn;
   CatName:=config.GetValue('VOcat/catalog/name','');
-  table:=config.GetValue('VOcat/catalog/table','');
+  tablen:=config.GetValue('VOcat/catalog/table','');
   baseurl:=config.GetValue('VOcat/update/baseurl','');
   votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
   fullcat:=config.GetValue('VOcat/update/fullcat',false);
@@ -469,11 +469,13 @@ try
   end;
   config.Flush;
   config.free;
-  VO_Detail1.onDownloadFeedback:=DownloadFeedback1;
-  VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
-  VO_Detail1.BaseUrl:=baseurl;
-  VO_Detail1.vo_type:=votype;
-  VO_Detail1.Update(table,false);
+  if baseurl<>'' then begin
+    VO_Detail1.onDownloadFeedback:=DownloadFeedback1;
+    VO_Detail1.CachePath:=VO_Catalogs1.CachePath;
+    VO_Detail1.BaseUrl:=baseurl;
+    VO_Detail1.vo_type:=votype;
+    VO_Detail1.Update(tablen,false);
+  end;
   for n:=0 to Pagecontrol2.PageCount-1 do
       Pagecontrol2.Pages[0].Free;
   n:=0;
@@ -500,40 +502,63 @@ try
      Grid.Cells[3, 0]:=rsDataType;
      Grid.Cells[4, 0]:=rsUnits;
      Grid.Cells[5, 0]:=rsDescription;
-     Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
-     for i:=1 to VO_Detail1.RecName[n].Count do begin
-       buf:=VO_Detail1.RecName[n][i-1];
-       Grid.Cells[0,i]:='';
-       for j:=0 to ActiveFields.Count-1 do begin
-         if ActiveFields[j]=buf then begin
-              Grid.Cells[0,i]:='x';
-              break;
+     if baseurl<>'' then begin
+       Grid.RowCount:=VO_Detail1.RecName[n].Count+1;
+       for i:=1 to VO_Detail1.RecName[n].Count do begin
+         buf:=VO_Detail1.RecName[n][i-1];
+         Grid.Cells[0,i]:='';
+         for j:=0 to ActiveFields.Count-1 do begin
+           if ActiveFields[j]=buf then begin
+                Grid.Cells[0,i]:='x';
+                break;
+           end;
          end;
+         Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
+         Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
+         Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
+         Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
+         Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
        end;
-       Grid.Cells[1,i]:=VO_Detail1.RecName[n][i-1];
-       Grid.Cells[2,i]:=VO_Detail1.RecUCD[n][i-1];
-       Grid.Cells[3,i]:=VO_Detail1.RecDatatype[n][i-1];
-       Grid.Cells[4,i]:=VO_Detail1.RecUnits[n][i-1];
-       Grid.Cells[5,i]:=VO_Detail1.RecDescription[n][i-1];
+       SelectAll:=true;
+       tn.Text:=VO_Detail1.TableName[n];
+       tb.Caption:=VO_Detail1.TableName[n];
+       tr.value:=VO_Detail1.Rows[n];
+       if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
+          else desc.text:=CatName;
+       if not VO_Detail1.HasCoord[n] then
+          RadioGroup1.ItemIndex:=0
+       else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
+          RadioGroup1.ItemIndex:=2
+       else
+          RadioGroup1.ItemIndex:=1;
+       RadioGroup1Click(self);
+       FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
+     end else begin
+       Grid.RowCount:=ActiveFieldNum;
+       for i:=0 to ActiveFieldNum-1 do begin
+          Grid.Cells[0,i]:='x';
+          Grid.Cells[1,i]:=ActiveFields[i];
+       end;
+       Grid.OnMouseUp:=nil;
+       SelectAll:=true;
+       tn.Text:=tablen;
+       tb.Caption:=tablen;
+       tr.value:=-1;
+       tr.Visible:=false;
+       Rows.Visible:=false;
+       desc.text:=CatName;
+       RadioGroup1.ItemIndex:=2;
+       RadioGroup1Click(self);
+       FullDownload.Checked:=true;
+       RadioGroup1.Enabled:=false;
+       FullDownload.Enabled:=false;
+       button2.Visible:=false;
      end;
-     SelectAll:=true;
-     tn.Text:=VO_Detail1.TableName[n];
-     tb.Caption:=VO_Detail1.TableName[n];
-     tr.value:=VO_Detail1.Rows[n];
-     if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
-        else desc.text:=CatName;
-     if not VO_Detail1.HasCoord[n] then
-        RadioGroup1.ItemIndex:=0
-     else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
-        RadioGroup1.ItemIndex:=2
-     else
-        RadioGroup1.ItemIndex:=1;
-     RadioGroup1Click(self);
-     FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
    end;
    if Pagecontrol2.PageCount=0 then begin
       ClearCatalog;
    end;
+   fr.ButtonBack.Visible:=false;
    fr.FullDownload.Checked:=fullcat;
    fr.DefMag.Value:=dm;
    fr.DefSize.Value:=ds;

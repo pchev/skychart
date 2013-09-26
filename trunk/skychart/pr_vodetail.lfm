@@ -10,7 +10,7 @@ object f_vodetail: Tf_vodetail
   ClientHeight = 458
   ClientWidth = 759
   OnCreate = FormCreate
-  LCLVersion = '0.9.30.1'
+  LCLVersion = '1.0.8.0'
   object MainPanel: TPanel
     Left = 0
     Height = 458
@@ -31,7 +31,7 @@ object f_vodetail: Tf_vodetail
       TabOrder = 0
       object Table: TLabel
         Left = 7
-        Height = 15
+        Height = 16
         Top = 13
         Width = 31
         Caption = 'Table'
@@ -39,15 +39,15 @@ object f_vodetail: Tf_vodetail
       end
       object Rows: TLabel
         Left = 175
-        Height = 15
+        Height = 16
         Top = 13
-        Width = 33
+        Width = 31
         Caption = 'Rows'
         ParentColor = False
       end
       object tn: TEdit
         Left = 56
-        Height = 22
+        Height = 23
         Top = 9
         Width = 113
         Color = clBtnFace
@@ -96,32 +96,32 @@ object f_vodetail: Tf_vodetail
         ClientHeight = 90
         ClientWidth = 205
         Items.Strings = (
-          'Cannot draw'
-          'Draw as star'
-          'Draw as DSO'
+          'Cannot draw                        .'
+          'Draw as star                        .'
+          'Draw as DSO                        .'
         )
         OnClick = RadioGroup1Click
         TabOrder = 3
       end
       object Label9: TLabel
         Left = 7
-        Height = 15
+        Height = 16
         Top = 102
-        Width = 70
+        Width = 75
         Caption = 'Default size '''
         ParentColor = False
       end
       object Label10: TLabel
         Left = 7
-        Height = 15
+        Height = 16
         Top = 48
-        Width = 102
+        Width = 108
         Caption = 'Default magnitude'
         ParentColor = False
       end
       object FullDownload: TCheckBox
         Left = 559
-        Height = 26
+        Height = 23
         Top = 24
         Width = 146
         Caption = 'Download full catalog'
@@ -130,15 +130,15 @@ object f_vodetail: Tf_vodetail
       end
       object Label1: TLabel
         Left = 7
-        Height = 15
+        Height = 16
         Top = 77
-        Width = 61
+        Width = 68
         Caption = 'Object type'
         ParentColor = False
       end
       object ComboBox1: TComboBox
         Left = 157
-        Height = 26
+        Height = 25
         Top = 72
         Width = 164
         ItemHeight = 0
@@ -178,7 +178,7 @@ object f_vodetail: Tf_vodetail
       end
       object tr: TLongEdit
         Left = 239
-        Height = 22
+        Height = 23
         Top = 9
         Width = 80
         TabOrder = 7
@@ -186,7 +186,7 @@ object f_vodetail: Tf_vodetail
       end
       object DefMag: TLongEdit
         Left = 159
-        Height = 22
+        Height = 23
         Top = 44
         Width = 80
         TabOrder = 8
@@ -194,15 +194,14 @@ object f_vodetail: Tf_vodetail
       end
       object DefSize: TLongEdit
         Left = 159
-        Height = 22
-        Hint = '1..36000'
+        Height = 23
+        Hint = '0..36000'
         Top = 98
         Width = 80
         ParentShowHint = False
         ShowHint = True
         TabOrder = 9
         Value = 60
-        MinValue = 1
         MaxValue = 36000
       end
       object Button2: TButton
@@ -224,7 +223,7 @@ object f_vodetail: Tf_vodetail
       end
       object CheckBox1: TCheckBox
         Left = 7
-        Height = 26
+        Height = 23
         Top = 125
         Width = 89
         Caption = 'Force color'
