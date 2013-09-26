@@ -1296,7 +1296,7 @@ var i,j,r: integer;
     VOobject,configfile,cname: string;
     config: TXMLConfig;
     active,fullcat: boolean;
-const VOo : array[1..2] of string = ('star','dso');
+const VOo : array[1..3] of string = ('star','dso','samp');
 begin
 maxrows.Value:=cmain.VOmaxrecord;
 StringGrid4.RowCount:=1;
@@ -1304,7 +1304,7 @@ stringgrid4.cells[0,0]:='x';
 stringgrid4.Columns[0].Title.Caption:=rsName;
 stringgrid4.Columns[1].Title.Caption:=rsFile;
 stringgrid4.Columns[2].Title.Caption:=rsReload;
-for j in [1,2] do begin
+for j in [1,2,3] do begin
   VOobject:=VOo[j];
   i:=findfirst(slash(VODir)+'vo_'+VOobject+'_*.xml',0,fs);
   while i=0 do begin

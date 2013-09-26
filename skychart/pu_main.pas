@@ -8316,7 +8316,7 @@ var i: integer;
     sfn:string;
 begin
 if typ='xml' then
-   fn:=slash(VODir)+'vo_dso_'+TrimFilename(nam)+'.'+typ;
+   fn:=slash(VODir)+'vo_samp_'+TrimFilename(nam)+'.'+typ;
 if typ='fits' then
    fn:=slash(PictureDir)+TrimFilename(nam)+'.'+typ;
 fn:=TrimFilename(StringReplace(fn,'%7E','~',[rfReplaceAll]));
@@ -8421,11 +8421,11 @@ if FileExists(fn) then begin
    config.SetValue('VOcat/update/votype',0);
    config.SetValue('VOcat/plot/active',true);
    config.SetValue('VOcat/plot/maxmag',-99);
-   config.SetValue('VOcat/plot/drawtype',14);
-   config.SetValue('VOcat/plot/drawcolor',8421504);
-   config.SetValue('VOcat/plot/forcecolor',0);
-   config.SetValue('VOcat/default/defsize',60);
-   config.SetValue('VOcat/default/defmag',12);
+   config.SetValue('VOcat/plot/drawtype',15);
+   config.SetValue('VOcat/plot/drawcolor',clRed);
+   config.SetValue('VOcat/plot/forcecolor',1);
+   config.SetValue('VOcat/default/defsize',0);
+   config.SetValue('VOcat/default/defmag',8);
    config.SetValue('VOcat/fields/fieldcount',length(VO_TableData.Columns));
    for i:=0 to length(VO_TableData.Columns)-1 do
        config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData.Columns[i]);
