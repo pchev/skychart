@@ -45,7 +45,7 @@ type
   Tint2func = procedure(i1,i2:integer) of object;
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
   Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='') of object;
-  TSendCoordpointAtsky = procedure(client: integer; ra,de: double) of object;
+  TSendCoordpointAtsky = procedure(client: string; ra,de: double) of object;
 type
   TChartDrawingControl = class(TCustomControl)
   public
@@ -956,10 +956,17 @@ Refresh;
 end;
 
 procedure Tf_chart.SAMPsendcoordClick(Sender: TObject);
-var client: integer;
+var cn,client: string;
+    i:integer;
     ra,de,a,h,l,b,le,be:double;
 begin
-client:=TMenuItem(sender).tag;
+cn:=TMenuItem(sender).Caption;
+for i:=0 to SampClientName.Count-1 do begin
+    if SampClientName[i]=cn then begin
+      client:=SampClientId[i];
+      break;
+    end;
+end;
 sc.GetCoord(xcursor,ycursor,ra,de,a,h,l,b,le,be);
 if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc,true,true);
 precession(sc.cfgsc.JDChart,jd2000,ra,de);
@@ -1785,7 +1792,7 @@ begin
  if SampConnected then begin
     while MenuSAMP.Count>0 do MenuSAMP.Delete(0);
     MenuItem:=TMenuItem.Create(self);
-    MenuItem.Caption:='Broadcast all';
+    MenuItem.Caption:=rsAllSAMPClien;
     MenuItem.Tag:=0;
     MenuItem.OnClick:=SAMPsendcoordClick;
     MenuSAMP.Add(MenuItem);

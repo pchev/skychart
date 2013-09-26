@@ -23,10 +23,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 465
       Top = 1
       Width = 497
-      ActivePage = Page2
+      ActivePage = Page1a
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 3
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
@@ -1025,7 +1025,7 @@ object f_config_catalog: Tf_config_catalog
         end
         object StringGrid4: TStringGrid
           Left = 0
-          Height = 323
+          Height = 309
           Top = 48
           Width = 482
           ColCount = 4
@@ -1060,9 +1060,9 @@ object f_config_catalog: Tf_config_catalog
           OnSelectCell = StringGrid4SelectCell
         end
         object Button5: TButton
-          Left = 80
+          Left = 77
           Height = 25
-          Top = 400
+          Top = 381
           Width = 95
           Caption = 'Add'
           OnClick = Button5Click
@@ -1071,7 +1071,7 @@ object f_config_catalog: Tf_config_catalog
         object Button6: TButton
           Left = 320
           Height = 25
-          Top = 400
+          Top = 381
           Width = 95
           Caption = 'Delete'
           OnClick = Button6Click
@@ -1080,7 +1080,7 @@ object f_config_catalog: Tf_config_catalog
         object LabelDownload: TLabel
           Left = 15
           Height = 15
-          Top = 376
+          Top = 357
           Width = 464
           Alignment = taCenter
           AutoSize = False
@@ -1112,11 +1112,29 @@ object f_config_catalog: Tf_config_catalog
         object Button7: TButton
           Left = 199
           Height = 25
-          Top = 400
+          Top = 381
           Width = 95
           Caption = 'Update'
           OnClick = Button7Click
           TabOrder = 4
+        end
+        object ComboBox1: TComboBox
+          Left = 253
+          Height = 23
+          Top = 415
+          Width = 162
+          ItemHeight = 0
+          Style = csDropDownList
+          TabOrder = 5
+        end
+        object Button1: TButton
+          Left = 77
+          Height = 25
+          Top = 414
+          Width = 160
+          Caption = 'Send table to'
+          OnClick = Button1Click
+          TabOrder = 6
         end
       end
       object Page1b: TTabSheet
