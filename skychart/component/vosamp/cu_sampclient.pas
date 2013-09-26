@@ -37,7 +37,7 @@ TSampClient = class(TObject)
     FTableLoadVotable: TTableLoadVotable;
     FTableHighlightRow: TTableHighlightRow;
     FTableSelectRowlist: TTableSelectRowlist;
-    FClientChange: TNotifyEvent;
+    FClientChange, FDisconnect: TNotifyEvent;
     Flistenport: integer;
     SampAsyncEvent:TSampAsyncEvent;
     SampAsyncP1,SampAsyncP2,SampAsyncP3: string;
@@ -79,6 +79,7 @@ TSampClient = class(TObject)
     property ClientDesc: Tstringlist read FClientDesc;
     property ClientSubscriptions: TSubscriptionsList read FClientSubscriptions;
     property onClientChange: TNotifyEvent read FClientChange write FClientChange;
+    property onDisconnect: TNotifyEvent read FDisconnect write FDisconnect;
     property oncoordpointAtsky: TcoordpointAtsky read FcoordpointAtsky write FcoordpointAtsky;
     property onImageLoadFits: TImageLoadFits read FImageLoadFits write FImageLoadFits;
     property onTableLoadVotable: TTableLoadVotable read FTableLoadVotable write FTableLoadVotable;
@@ -455,6 +456,7 @@ begin
   result:=SampCall('samp.hub.unregister',samp_private_key);
   Fconnected:=false;
   StopHTTPServer;
+  if assigned(FDisconnect) then FDisconnect(self);
 end;
 
 function TSampClient.SampHubSendMetadata:boolean;

@@ -46,6 +46,7 @@ type
     FColumns: TStringArray;
     FFieldList: TStringList;
     Fncol: Integer;
+    MetaOnly: boolean;
     http: THTTPSend;
     XmlScanner: TEasyXmlScanner;
     votable,table,description,definition,resource,field,data,tabledata,tr,td : boolean;
@@ -65,11 +66,12 @@ type
     Sockreadcount, LastRead: integer;
     FDownloadFeedback: TDownloadFeedback;
     procedure httpstatus(Sender: TObject; Reason: THookSocketReason; const Value: String);
+    procedure LoadData;
+    procedure ClearData;
   public
     constructor Create(AOwner:TComponent); override;
     destructor  Destroy; override;
-    procedure LoadData;
-    procedure ClearData;
+    procedure LoadMeta;
     procedure GetData(Table,objtype:string; preview: boolean=false);
     property Columns: TStringArray read FColumns;
     property Cols: Integer read Fncol;
@@ -160,6 +162,15 @@ procedure TVO_TableData.LoadData;
 begin
    ClearData;
    XmlScanner.LoadFromFile(slash(Fvopath)+Fvo_data);
+   MetaOnly:=false;
+   XmlScanner.Execute;
+end;
+
+procedure TVO_TableData.LoadMeta;
+begin
+   ClearData;
+   XmlScanner.LoadFromFile(slash(Fvopath)+Fvo_data);
+   MetaOnly:=true;
    XmlScanner.Execute;
 end;
 
@@ -274,11 +285,16 @@ else if resource and (TagName='FIELD') then begin
         XmlEmptyTag(Sender,TagName,Attributes);
      end
 else if resource and (TagName='TABLEDATA') then begin
-        tabledata:=true;
-        setlength(FData,fieldnum);
-        currentfield:=-1;
-        Fncol:=fieldnum;
-        if assigned(FColsDef) then FColsDef(self);
+        if MetaOnly then begin
+           XmlScanner.StopParser:=true;
+        end
+        else begin
+          tabledata:=true;
+          setlength(FData,fieldnum);
+          currentfield:=-1;
+          Fncol:=fieldnum;
+          if assigned(FColsDef) then FColsDef(self);
+        end;
      end
 else if tabledata and (TagName='TR') then begin
         tr:=true;

@@ -35,7 +35,7 @@ uses
   lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, XMLConf,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -745,6 +745,7 @@ type
     procedure SAMPStop;
     procedure SAMPurlToFile(url,nam,typ: string; var fn: string);
     procedure SAMPClientChange(Sender: TObject);
+    procedure SAMPDisconnect(Sender: TObject);
     procedure SAMPcoordpointAtsky(ra,dec:double);
     procedure SAMPImageLoadFits(image_name,image_id,url:string);
     procedure SAMPTableLoadVotable(table_name,table_id,url:string);
@@ -4301,12 +4302,17 @@ if PPanels0.Width<P0L1.width then PPanels0.Width:=P0L1.width+8;
 end;
 
 Procedure Tf_main.SetTopMessage(txt:string;sender:TObject);
+var status:string;
 begin
+status:='';
+if SampConnected then begin
+  status:='* ';
+end;
 // set the message that appear in the menu bar
 if MultiFrame1.ActiveObject=sender then begin
   topmsg:=txt;
-  if cfgm.ShowChartInfo then topmessage.caption:=topmsg
-     else topmessage.caption:=' ';
+  if cfgm.ShowChartInfo then topmessage.caption:=status+topmsg
+     else topmessage.caption:=status+' ';
 end;
 end;
 
@@ -8247,6 +8253,7 @@ begin
 WriteTrace('start SAMP client');
 if samp=nil then samp:=TSampClient.Create;
 samp.onClientChange:=SAMPClientChange;
+samp.onDisconnect:=SAMPDisconnect;
 samp.oncoordpointAtsky:=SAMPcoordpointAtsky;
 samp.onImageLoadFits:=SAMPImageLoadFits;
 samp.onTableLoadVotable:=SAMPTableLoadVotable;
@@ -8265,6 +8272,7 @@ end else begin
     ShowMessage('SAMP: '+samp.LastError);
 end;
 SampConnected:=samp.Connected;
+SetTopMessage(topmsg,MultiFrame1.ActiveObject);
 end;
 
 procedure Tf_main.SAMPStop;
@@ -8274,6 +8282,12 @@ if (samp<>nil)and samp.Connected then begin
   samp.SampHubDisconnect;
   SampConnected:=samp.Connected;
 end;
+end;
+
+procedure Tf_main.SAMPDisconnect(Sender: TObject);
+begin
+  UpdateSAMPmenu;
+  SetTopMessage(topmsg,MultiFrame1.ActiveObject);
 end;
 
 procedure Tf_main.SAMPClientChange(Sender: TObject);
@@ -8299,7 +8313,13 @@ end;
 
 procedure Tf_main.SAMPurlToFile(url,nam,typ: string; var fn: string);
 var i: integer;
+    sfn:string;
 begin
+if typ='xml' then
+   fn:=slash(VODir)+'vo_dso_'+TrimFilename(nam)+'.'+typ;
+if typ='fits' then
+   fn:=slash(PictureDir)+TrimFilename(nam)+'.'+typ;
+fn:=TrimFilename(StringReplace(fn,'%7E','~',[rfReplaceAll]));
 i:=pos('file://',url);
 if i>0 then begin
   delete(url,i,i+6);
@@ -8307,14 +8327,11 @@ if i>0 then begin
   if i>=0 then begin
     delete(url,i,i+8);
   end;
-  fn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
+  sfn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
+  CopyFile(sfn,fn);
  end else begin
   i:=pos('http://',url);
   if i>0 then begin
-     if typ='xml' then
-        fn:=slash(VODir)+TrimFilename(nam)+'.'+typ;
-     if typ='fits' then
-        fn:=slash(PictureDir)+TrimFilename(nam)+'.'+typ;
      SampDownload.URL:=url;
      SampDownload.SaveToFile:=fn;
      SampDownload.ConfirmDownload:=false;
@@ -8376,22 +8393,50 @@ end;
 end;
 
 procedure Tf_main.SAMPTableLoadVotable(table_name,table_id,url:string);
-var fn,buf: string;
+var fn,cfn,buf: string;
     i: integer;
     VO_TableData: TVO_TableData;
+    config: TXMLConfig;
 begin
+if cfgm.SampConfirmTable then begin
+   if MessageDlg('SAMP Confirmation',
+      'A SAMP request is made to load the table:'+crlf+table_name,
+      mtConfirmation, [mbYes, mbNo], 0) = mrNo
+      then exit;
+end;
 SAMPurlToFile(url,table_name,'xml',fn);
 if FileExists(fn) then begin
    VO_TableData:=TVO_TableData.Create(self);
    VO_TableData.CachePath:=ExtractFilePath(fn);
    VO_TableData.Datafile:=ExtractFileName(fn);
-   VO_TableData.ClearData;
-   VO_TableData.LoadData;
+   VO_TableData.LoadMeta;
+   cfn:=ChangeFileExt(fn,'.config');
+   config:=TXMLConfig.Create(self);
+   config.Filename:=cfn;
+   config.SetValue('VOcat/catalog/name',table_id);
+   config.SetValue('VOcat/catalog/table',table_name);
+   config.SetValue('VOcat/catalog/objtype','dso');
+   config.SetValue('VOcat/update/fullcat',true);
+   config.SetValue('VOcat/update/baseurl','');
+   config.SetValue('VOcat/update/votype',0);
+   config.SetValue('VOcat/plot/active',true);
+   config.SetValue('VOcat/plot/maxmag',-99);
+   config.SetValue('VOcat/plot/drawtype',14);
+   config.SetValue('VOcat/plot/drawcolor',8421504);
+   config.SetValue('VOcat/plot/forcecolor',0);
+   config.SetValue('VOcat/default/defsize',60);
+   config.SetValue('VOcat/default/defmag',12);
+   config.SetValue('VOcat/fields/fieldcount',length(VO_TableData.Columns));
    for i:=0 to length(VO_TableData.Columns)-1 do
-       buf:=VO_TableData.Columns[i];
-
-   VO_TableData.ClearData;
+       config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData.Columns[i]);
+   config.Flush;
+   config.free;
    VO_TableData.free;
+   if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+      sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=true;
+      sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=true;
+      Refresh;
+   end;
 end;
 end;
 
