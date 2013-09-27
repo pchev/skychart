@@ -23,10 +23,10 @@ object f_config_system: Tf_config_system
       Height = 522
       Top = 1
       Width = 498
-      ActivePage = Page1
+      ActivePage = Page5
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 4
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Page1'
@@ -42,7 +42,7 @@ object f_config_system: Tf_config_system
           TabOrder = 5
           object dbpass: TEdit
             Left = 348
-            Height = 23
+            Height = 24
             Top = 64
             Width = 100
             EchoMode = emPassword
@@ -53,7 +53,7 @@ object f_config_system: Tf_config_system
           end
           object dbuser: TEdit
             Left = 125
-            Height = 23
+            Height = 24
             Top = 64
             Width = 100
             OnChange = dbuserChange
@@ -62,7 +62,7 @@ object f_config_system: Tf_config_system
           end
           object dbhost: TEdit
             Left = 250
-            Height = 23
+            Height = 24
             Top = 24
             Width = 65
             OnChange = dbhostChange
@@ -71,7 +71,7 @@ object f_config_system: Tf_config_system
           end
           object dbport: TLongEdit
             Left = 391
-            Height = 23
+            Height = 24
             Top = 24
             Width = 57
             TabOrder = 3
@@ -80,7 +80,7 @@ object f_config_system: Tf_config_system
           end
           object dbname: TEdit
             Left = 80
-            Height = 23
+            Height = 24
             Top = 24
             Width = 65
             OnChange = dbnameChange
@@ -108,7 +108,7 @@ object f_config_system: Tf_config_system
             Left = 362
             Height = 16
             Top = 28
-            Width = 29
+            Width = 30
             Caption = 'Port:'
             ParentColor = False
           end
@@ -116,7 +116,7 @@ object f_config_system: Tf_config_system
             Left = 178
             Height = 16
             Top = 28
-            Width = 67
+            Width = 70
             Caption = 'Host Name:'
             ParentColor = False
           end
@@ -124,7 +124,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 16
             Top = 28
-            Width = 57
+            Width = 58
             Caption = 'DB Name:'
             ParentColor = False
           end
@@ -132,7 +132,7 @@ object f_config_system: Tf_config_system
             Left = 16
             Height = 16
             Top = 3
-            Width = 83
+            Width = 93
             Caption = 'MysqlBoxLabel'
             ParentColor = False
           end
@@ -147,7 +147,7 @@ object f_config_system: Tf_config_system
           TabOrder = 4
           object dbnamesqlite: TEdit
             Left = 125
-            Height = 23
+            Height = 24
             Top = 32
             Width = 281
             Color = clBtnFace
@@ -169,7 +169,7 @@ object f_config_system: Tf_config_system
             Left = 13
             Height = 16
             Top = 12
-            Width = 83
+            Width = 93
             Caption = 'SqliteBoxLabel'
             ParentColor = False
           end
@@ -178,7 +178,7 @@ object f_config_system: Tf_config_system
           Left = 0
           Height = 16
           Top = 0
-          Width = 87
+          Width = 93
           Caption = 'System Setting'
           ParentColor = False
         end
@@ -211,7 +211,7 @@ object f_config_system: Tf_config_system
           end
           object prgdir: TDirectoryEdit
             Left = 179
-            Height = 23
+            Height = 24
             Top = 3
             Width = 240
             ShowHidden = False
@@ -223,7 +223,7 @@ object f_config_system: Tf_config_system
           end
           object persdir: TDirectoryEdit
             Left = 179
-            Height = 23
+            Height = 24
             Top = 42
             Width = 240
             ShowHidden = False
@@ -336,13 +336,13 @@ object f_config_system: Tf_config_system
             Left = 203
             Height = 16
             Top = 8
-            Width = 122
+            Width = 129
             Caption = 'URL launch command'
             ParentColor = False
           end
           object LinuxDesktopBox: TComboBox
             Left = 20
-            Height = 23
+            Height = 24
             Top = 33
             Width = 102
             AutoCompleteText = [cbactSearchAscending]
@@ -357,7 +357,7 @@ object f_config_system: Tf_config_system
           end
           object LinuxCmd: TEdit
             Left = 204
-            Height = 23
+            Height = 24
             Top = 33
             Width = 194
             OnChange = LinuxCmdChange
@@ -491,8 +491,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 450
-              ClientHeight = 328
-              ClientWidth = 450
+              ClientHeight = 324
+              ClientWidth = 446
               TabOrder = 0
               object PanelCmd: TEdit
                 Left = 176
@@ -572,8 +572,8 @@ object f_config_system: Tf_config_system
                 Height = 92
                 Top = 128
                 Width = 444
-                ClientHeight = 92
-                ClientWidth = 444
+                ClientHeight = 88
+                ClientWidth = 440
                 TabOrder = 5
                 Visible = False
                 object Label258: TLabel
@@ -666,8 +666,8 @@ object f_config_system: Tf_config_system
               Height = 330
               Top = 8
               Width = 450
-              ClientHeight = 330
-              ClientWidth = 450
+              ClientHeight = 326
+              ClientWidth = 446
               TabOrder = 0
               object ManualMountType: TRadioGroup
                 Left = 24
@@ -683,7 +683,7 @@ object f_config_system: Tf_config_system
                 ChildSizing.ShrinkVertical = crsScaleChilds
                 ChildSizing.Layout = cclLeftToRightThenTopToBottom
                 ChildSizing.ControlsPerLine = 2
-                ClientHeight = 37
+                ClientHeight = 24
                 ClientWidth = 357
                 Columns = 2
                 Items.Strings = (
@@ -908,8 +908,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object ASCOMLabel: TLabel
                 Left = 21
@@ -932,8 +932,8 @@ object f_config_system: Tf_config_system
               Height = 328
               Top = 8
               Width = 452
-              ClientHeight = 328
-              ClientWidth = 452
+              ClientHeight = 324
+              ClientWidth = 448
               TabOrder = 0
               object InterfaceLabel: TLabel
                 Left = 21
@@ -980,12 +980,12 @@ object f_config_system: Tf_config_system
           Left = 19
           Height = 16
           Top = 24
-          Width = 83
-          Caption = 'SAMP settings'
+          Width = 102
+          Caption = 'VO SAMP settings'
           ParentColor = False
         end
         object Label16: TLabel
-          Left = 21
+          Left = 19
           Height = 90
           Top = 59
           Width = 384
@@ -995,9 +995,9 @@ object f_config_system: Tf_config_system
           WordWrap = True
         end
         object Label17: TLabel
-          Left = 21
+          Left = 19
           Height = 16
-          Top = 165
+          Top = 157
           Width = 154
           Caption = 'For more information, see :'
           ParentColor = False
@@ -1006,7 +1006,7 @@ object f_config_system: Tf_config_system
           Cursor = crHandPoint
           Left = 189
           Height = 16
-          Top = 165
+          Top = 157
           Width = 225
           Caption = 'http://www.ivoa.net/documents/SAMP/'
           Font.Color = clBlue
@@ -1018,29 +1018,83 @@ object f_config_system: Tf_config_system
         object CheckBox1: TCheckBox
           Left = 45
           Height = 23
-          Top = 213
-          Width = 328
-          Caption = ' Confirmation before to jump to received coordinates'
+          Top = 261
+          Width = 315
+          Caption = 'Ask for confirmation before to jump to coordinates'
           OnChange = CheckBox1Change
           TabOrder = 0
         end
         object CheckBox2: TCheckBox
           Left = 45
           Height = 23
-          Top = 254
-          Width = 236
-          Caption = 'Confirmation before to load an image'
+          Top = 325
+          Width = 284
+          Caption = 'Ask for confirmation before to load the image'
           OnChange = CheckBox2Change
           TabOrder = 1
         end
         object CheckBox3: TCheckBox
           Left = 45
           Height = 23
-          Top = 294
-          Width = 224
-          Caption = 'Confirmation before to load a table'
+          Top = 413
+          Width = 279
+          Caption = 'Ask for confirmation before to load the table'
           OnChange = CheckBox3Change
           TabOrder = 2
+        end
+        object CheckBox4: TCheckBox
+          Left = 19
+          Height = 23
+          Top = 237
+          Width = 277
+          Caption = 'Receive coordinates from other applications'
+          OnChange = CheckBox4Change
+          TabOrder = 3
+        end
+        object CheckBox5: TCheckBox
+          Left = 19
+          Height = 23
+          Top = 301
+          Width = 274
+          Caption = 'Receive FITS images from other applications'
+          OnChange = CheckBox5Change
+          TabOrder = 4
+        end
+        object CheckBox6: TCheckBox
+          Left = 19
+          Height = 23
+          Top = 389
+          Width = 285
+          Caption = 'Receive VO table data from other applications'
+          OnChange = CheckBox6Change
+          TabOrder = 5
+        end
+        object CheckBox7: TCheckBox
+          Left = 19
+          Height = 23
+          Top = 197
+          Width = 361
+          Caption = 'Try to auto-connect to a SAMP hub when the program start'
+          OnChange = CheckBox7Change
+          TabOrder = 6
+        end
+        object CheckBox8: TCheckBox
+          Left = 45
+          Height = 23
+          Top = 444
+          Width = 207
+          Caption = 'Keep tables on exit for later use'
+          OnChange = CheckBox8Change
+          TabOrder = 7
+        end
+        object CheckBox9: TCheckBox
+          Left = 45
+          Height = 23
+          Top = 349
+          Width = 212
+          Caption = 'Keep images on exit for later use'
+          OnChange = CheckBox9Change
+          TabOrder = 8
         end
       end
     end

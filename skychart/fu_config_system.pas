@@ -37,6 +37,12 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
+    CheckBox6: TCheckBox;
+    CheckBox7: TCheckBox;
+    CheckBox8: TCheckBox;
+    CheckBox9: TCheckBox;
     InterfaceLabel: TLabel;
     InterfacePanel: TPanel;
     Button5: TButton;
@@ -151,6 +157,12 @@ type
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
+    procedure CheckBox4Change(Sender: TObject);
+    procedure CheckBox5Change(Sender: TObject);
+    procedure CheckBox6Change(Sender: TObject);
+    procedure CheckBox7Change(Sender: TObject);
+    procedure CheckBox8Change(Sender: TObject);
+    procedure CheckBox9Change(Sender: TObject);
     procedure IndiDevOtherChange(Sender: TObject);
     procedure Label18Click(Sender: TObject);
     procedure LanguageListSelect(Sender: TObject);
@@ -438,6 +450,17 @@ keepalive.checked:=cmain.keepalive;
 CheckBox1.Checked:=cmain.SampConfirmCoord;
 CheckBox2.Checked:=cmain.SampConfirmImage;
 CheckBox3.Checked:=cmain.SampConfirmTable;
+CheckBox4.Checked:=cmain.SampSubscribeCoord;
+CheckBox5.Checked:=cmain.SampSubscribeImage;
+CheckBox6.Checked:=cmain.SampSubscribeTable;
+CheckBox7.Checked:=cmain.SampAutoconnect;
+CheckBox8.Checked:=cmain.SampKeepTables;
+CheckBox9.Checked:=cmain.SampKeepImages;
+CheckBox1.Enabled:=cmain.SampSubscribeCoord;
+CheckBox2.Enabled:=cmain.SampSubscribeImage;
+CheckBox9.Enabled:=cmain.SampSubscribeImage;
+CheckBox3.Enabled:=cmain.SampSubscribeTable;
+CheckBox8.Enabled:=cmain.SampSubscribeTable;
 end;
 
 procedure Tf_config_system.ShowTelescope;
@@ -749,6 +772,41 @@ end;
 procedure Tf_config_system.CheckBox3Change(Sender: TObject);
 begin
 cmain.SampConfirmTable := CheckBox1.Checked;
+end;
+
+procedure Tf_config_system.CheckBox4Change(Sender: TObject);
+begin
+cmain.SampSubscribeCoord:=CheckBox4.Checked;
+CheckBox1.Enabled:=cmain.SampSubscribeCoord;
+end;
+
+procedure Tf_config_system.CheckBox5Change(Sender: TObject);
+begin
+cmain.SampSubscribeImage:=CheckBox5.Checked;
+CheckBox2.Enabled:=cmain.SampSubscribeImage;
+CheckBox9.Enabled:=cmain.SampSubscribeImage;
+end;
+
+procedure Tf_config_system.CheckBox6Change(Sender: TObject);
+begin
+cmain.SampSubscribeTable:=CheckBox6.Checked;
+CheckBox3.Enabled:=cmain.SampSubscribeTable;
+CheckBox8.Enabled:=cmain.SampSubscribeTable;
+end;
+
+procedure Tf_config_system.CheckBox7Change(Sender: TObject);
+begin
+  cmain.SampAutoconnect := CheckBox7.Checked;
+end;
+
+procedure Tf_config_system.CheckBox8Change(Sender: TObject);
+begin
+  cmain.SampKeepTables := CheckBox8.Checked;
+end;
+
+procedure Tf_config_system.CheckBox9Change(Sender: TObject);
+begin
+cmain.SampKeepImages := CheckBox9.Checked;
 end;
 
 procedure Tf_config_system.UseIPserverClick(Sender: TObject);

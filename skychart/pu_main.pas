@@ -741,7 +741,7 @@ type
     procedure PlanetInfoPage(pg:Integer;cursorpos:boolean=false);
     function SetGCat(path,shortname,active,min,max: string): string;
     procedure UpdateSAMPmenu;
-    procedure SAMPStart;
+    procedure SAMPStart(auto:boolean=false);
     procedure SAMPStop;
     procedure SAMPurlToFile(url,nam,typ: string; var fn: string);
     procedure SAMPClientChange(Sender: TObject);
@@ -1427,6 +1427,9 @@ if DirectoryExists(cfgm.ImagePath+'sac')and(cdcdb.CountImages('SAC')=0) then beg
 end;
 if (not firstuse)and(config_version<cdcver) then
    ShowReleaseNotes(false);
+if cfgm.SampAutoconnect then begin
+  SAMPStart(true);
+end;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
 Autorefresh.enabled:=true;
@@ -4419,9 +4422,15 @@ cfgm.AsteroidUrlList.Add(URL_CDCAsteroidElements);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements2);
 cfgm.AsteroidUrlList.Add(URL_HTTPAsteroidElements3);
 cfgm.starshape_file:='';
+cfgm.SampAutoconnect:=false;
+cfgm.SampKeepTables:=false;
+cfgm.SampKeepImages:=false;
 cfgm.SampConfirmCoord:=true;
 cfgm.SampConfirmImage:=true;
 cfgm.SampConfirmTable:=true;
+cfgm.SampSubscribeCoord:=true;
+cfgm.SampSubscribeImage:=true;
+cfgm.SampSubscribeTable:=true;
 for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,0]:='';
   f_getdss.cfgdss.DSSurl[i,1]:='';
@@ -5523,6 +5532,15 @@ cfgm.ButtonStandard:=ReadInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 cfgm.ButtonNight:=ReadInteger(section,'ButtonNight',cfgm.ButtonNight);
 cfgm.VOurl:=ReadInteger(section,'VOurl',cfgm.VOurl);
 cfgm.VOmaxrecord:=ReadInteger(section,'VOmaxrecord',cfgm.VOmaxrecord);
+cfgm.SampAutoconnect:=ReadBool(section,'SampAutoconnect',cfgm.SampAutoconnect);
+cfgm.SampKeepTables:=ReadBool(section,'SampKeepTables',cfgm.SampKeepTables);
+cfgm.SampKeepImages:=ReadBool(section,'SampKeepImages',cfgm.SampKeepImages);
+cfgm.SampConfirmCoord:=ReadBool(section,'SampConfirmCoord',cfgm.SampConfirmCoord);
+cfgm.SampConfirmImage:=ReadBool(section,'SampConfirmImage',cfgm.SampConfirmImage);
+cfgm.SampConfirmTable:=ReadBool(section,'SampConfirmTable',cfgm.SampConfirmTable);
+cfgm.SampSubscribeCoord:=ReadBool(section,'SampSubscribeCoord',cfgm.SampSubscribeCoord);
+cfgm.SampSubscribeImage:=ReadBool(section,'SampSubscribeImage',cfgm.SampSubscribeImage);
+cfgm.SampSubscribeTable:=ReadBool(section,'SampSubscribeTable',cfgm.SampSubscribeTable);
 cfgm.AnimDelay:=ReadInteger(section,'AnimDelay',cfgm.AnimDelay);
 AnimationTimer.Interval:=max(10,cfgm.AnimDelay);
 cfgm.AnimFps:=ReadFloat(section,'AnimFps',cfgm.AnimFps);
@@ -6267,6 +6285,15 @@ WriteInteger(section,'ButtonStandard',cfgm.ButtonStandard);
 WriteInteger(section,'ButtonNight',cfgm.ButtonNight);
 WriteInteger(section,'VOurl',cfgm.VOurl);
 WriteInteger(section,'VOmaxrecord',cfgm.VOmaxrecord);
+WriteBool(section,'SampAutoconnect',cfgm.SampAutoconnect);
+WriteBool(section,'SampKeepTables',cfgm.SampKeepTables);
+WriteBool(section,'SampKeepImages',cfgm.SampKeepImages);
+WriteBool(section,'SampConfirmCoord',cfgm.SampConfirmCoord);
+WriteBool(section,'SampConfirmImage',cfgm.SampConfirmImage);
+WriteBool(section,'SampConfirmTable',cfgm.SampConfirmTable);
+WriteBool(section,'SampSubscribeCoord',cfgm.SampSubscribeCoord);
+WriteBool(section,'SampSubscribeImage',cfgm.SampSubscribeImage);
+WriteBool(section,'SampSubscribeTable',cfgm.SampSubscribeTable);
 WriteInteger(section,'AnimDelay',cfgm.AnimDelay);
 WriteFloat(section,'AnimFps',cfgm.AnimFps);
 //WriteBool(section,'AnimRec',cfgm.AnimRec);
@@ -8232,8 +8259,14 @@ ShowMessage(buf);
 end;
 
 procedure Tf_main.MenuItem38Click(Sender: TObject);
+var b1,b2,b3: boolean;
 begin
+  b1:=cfgm.SampSubscribeCoord;
+  b2:=cfgm.SampSubscribeImage;
+  b3:=cfgm.SampSubscribeTable;
   SetupSystemPage(4);
+  if SampConnected and((b1<>cfgm.SampSubscribeCoord)or(b2<>cfgm.SampSubscribeImage)or(b3<>cfgm.SampSubscribeTable)) then
+     samp.SampSubscribe(cfgm.SampSubscribeCoord,cfgm.SampSubscribeImage,cfgm.SampSubscribeTable);
 end;
 
 procedure Tf_main.UpdateSAMPmenu;
@@ -8254,7 +8287,7 @@ else begin
 end;
 end;
 
-procedure Tf_main.SAMPStart;
+procedure Tf_main.SAMPStart(auto:boolean=false);
 begin
 WriteTrace('start SAMP client');
 if samp=nil then samp:=TSampClient.Create;
@@ -8270,23 +8303,42 @@ if samp.SampReadProfile then begin
   if samp.Connected then begin
     WriteTrace('Connected to '+samp.HubUrl);
     if not samp.SampHubSendMetadata then WriteTrace(samp.LastError);
-    if not samp.SampSubscribe then WriteTrace(samp.LastError);
+    if not samp.SampSubscribe(cfgm.SampSubscribeCoord,cfgm.SampSubscribeImage,cfgm.SampSubscribeTable) then WriteTrace(samp.LastError);
     WriteTrace('Listen on port '+inttostr(samp.ListenPort));
   end;
 end else begin
     WriteTrace(samp.LastError);
-    ShowMessage('SAMP: '+samp.LastError);
+    if auto then SetLPanel1('SAMP: '+samp.LastError)
+       else ShowMessage('SAMP: '+samp.LastError);
 end;
 SampConnected:=samp.Connected;
 SetTopMessage(topmsg,MultiFrame1.ActiveObject);
 end;
 
 procedure Tf_main.SAMPStop;
+var fs:TSearchRec;
+    i:integer;
 begin
 if (samp<>nil)and samp.Connected then begin
   WriteTrace('stop SAMP client');
   samp.SampHubDisconnect;
   SampConnected:=samp.Connected;
+  if not cfgm.SampKeepTables then begin
+    i:=findfirst(slash(VODir)+'vo_samp*',0,fs);
+     while i=0 do begin
+       DeleteFile(slash(VODir)+fs.name);
+       i:=findnext(fs);
+     end;
+     findclose(fs);
+   end;
+   if not cfgm.SampKeepImages then begin
+     i:=findfirst(slash(PictureDir)+'samp_*',0,fs);
+      while i=0 do begin
+         DeleteFile(slash(PictureDir)+fs.name);
+         i:=findnext(fs);
+      end;
+     findclose(fs);
+   end;
 end;
 end;
 
@@ -8324,8 +8376,9 @@ begin
 if typ='xml' then
    fn:=slash(VODir)+'vo_samp_'+TrimFilename(nam)+'.'+typ;
 if typ='fits' then
-   fn:=slash(PictureDir)+TrimFilename(nam)+'.'+typ;
+   fn:=slash(PictureDir)+'samp_'+TrimFilename(nam)+'.'+typ;
 fn:=TrimFilename(StringReplace(fn,'%7E','~',[rfReplaceAll]));
+// file:
 i:=pos('file://',url);
 if i>0 then begin
   delete(url,i,i+6);
@@ -8336,6 +8389,7 @@ if i>0 then begin
   sfn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
   CopyFile(sfn,fn);
  end else begin
+  // http:
   i:=pos('http://',url);
   if i>0 then begin
      SampDownload.URL:=url;
@@ -8421,6 +8475,8 @@ if FileExists(fn) then begin
    config.Filename:=cfn;
    config.SetValue('VOcat/catalog/name',table_id);
    config.SetValue('VOcat/catalog/table',table_name);
+   buf:=table_id;
+   config.SetValue('VOcat/catalog/sampid',buf);
    config.SetValue('VOcat/catalog/sampurl',url);
    config.SetValue('VOcat/catalog/objtype','dso');
    config.SetValue('VOcat/update/fullcat',true);
@@ -8457,7 +8513,9 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    sc.catalog.cfgcat.SampSelectedNum:=1;
    SetLength(sc.catalog.cfgcat.SampSelectedRec,sc.catalog.cfgcat.SampSelectedNum+1);
    sc.catalog.cfgcat.SampSelectedRec[0]:=StrToIntDef(row,0);
+   samp.LockTableSelectRow:=true;
    Refresh;
+   samp.LockTableSelectRow:=false;
 end;
 end;
 
@@ -8475,30 +8533,42 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    for i:=0 to rowlist.Count-1 do
       sc.catalog.cfgcat.SampSelectedRec[i]:=StrToIntDef(rowlist[i],0);
    Refresh;
+   samp.LockTableSelectRow:=true;
    if sc.catalog.cfgcat.SampSelectFirst then IdentXY(sc.catalog.cfgcat.SampSelectX,sc.catalog.cfgcat.SampSelectY);
+   samp.LockTableSelectRow:=false;
 end;
 end;
 
 procedure Tf_main.SendCoordpointAtsky(client: string; ra,de: double);
 begin
-  ra:=rad2deg*ra;
-  de:=rad2deg*de;
-  samp.SampSendCoord(client,ra,de);
+ra:=rad2deg*ra;
+de:=rad2deg*de;
+if not samp.SampSendCoord(client,ra,de) then begin
+  SetLPanel1(samp.LastError);
+end;
 end;
 
 procedure Tf_main.SendVoTable(client,tname,tid,url: string);
 begin
-  samp.SampSendVoTable(client,tname,tid,url);
+if not samp.SampSendVoTable(client,tname,tid,url) then begin
+  SetLPanel1(samp.LastError);
+end;
 end;
 
 procedure Tf_main.SendSelectRow(tableid,url,row: string);
 begin
-  samp.SampSelectRow('',tableid,url,row);
+if not samp.LockTableSelectRow then begin
+if not samp.SampSelectRow('',tableid,url,row) then begin
+  SetLPanel1(samp.LastError);
+end;
+end;
 end;
 
 procedure Tf_main.SendImageFits(client,imgname,imgid,url: string);
 begin
-  samp.SampSendImageFits(client,imgname,imgid,url);
+if not samp.SampSendImageFits(client,imgname,imgid,url) then begin
+  SetLPanel1(samp.LastError);
+end;
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////
