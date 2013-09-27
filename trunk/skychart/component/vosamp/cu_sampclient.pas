@@ -39,6 +39,7 @@ TSampClient = class(TObject)
     FTableSelectRowlist: TTableSelectRowlist;
     FClientChange, FDisconnect: TNotifyEvent;
     Flistenport: integer;
+    FLockTableSelectRow: boolean;
     SampAsyncEvent:TSampAsyncEvent;
     SampAsyncP1,SampAsyncP2,SampAsyncP3: string;
     SampAsyncTimer: TTimer;
@@ -71,7 +72,7 @@ TSampClient = class(TObject)
     function SampSendVoTable(client,tname,table_id,url:string):boolean;
     function SampSelectRow(client,tableid,url,row: string):boolean;
     function SampSendImageFits(client,imgname,imgid,url:string):boolean;
-    function SampSubscribe:boolean;
+    function SampSubscribe(SubscribeCoord,SubscribeImage,SubscribeTable: boolean):boolean;
     property LastErrorcode: integer read Ferrorcode;
     property LastError: string read Ferrortext;
     property Connected: boolean read Fconnected;
@@ -81,6 +82,7 @@ TSampClient = class(TObject)
     property ClientNames: Tstringlist read FClientNames;
     property ClientDesc: Tstringlist read FClientDesc;
     property ClientSubscriptions: TSubscriptionsList read FClientSubscriptions;
+    property LockTableSelectRow: boolean read FLockTableSelectRow write FLockTableSelectRow;
     property onClientChange: TNotifyEvent read FClientChange write FClientChange;
     property onDisconnect: TNotifyEvent read FDisconnect write FDisconnect;
     property oncoordpointAtsky: TcoordpointAtsky read FcoordpointAtsky write FcoordpointAtsky;
@@ -552,7 +554,8 @@ end;
 function TSampClient.SampSelectRow(client,tableid,url,row: string):boolean;
 var map:Tmap;
 begin
-  SetLength(map,3);
+//  tableid:=StringReplace(tableid,'&','&amp;',[rfReplaceAll]);
+  SetLength(map,2);
   map[0].name:='table-id';
   map[0].value:=tableid;
   map[1].name:='row-list';
@@ -579,7 +582,7 @@ begin
      result:=SampCall('samp.hub.notify',samp_private_key,client,'image.load.fits',map);
 end;
 
-function TSampClient.SampSubscribe:boolean;
+function TSampClient.SampSubscribe(SubscribeCoord,SubscribeImage,SubscribeTable: boolean):boolean;
 var map:Tmap;
     i: integer;
 begin
@@ -606,21 +609,27 @@ begin
     map[i].name:='samp.hub.event.metadata';
     map[i].value:='<struct></struct>';
     inc(i);
-    map[i].name:='coord.pointAt.sky';
-    map[i].value:='<struct></struct>';
-    inc(i);
-    map[i].name:='image.load.fits';
-    map[i].value:='<struct></struct>';
-    inc(i);
-    map[i].name:='table.load.votable';
-    map[i].value:='<struct></struct>';
-    inc(i);
-    map[i].name:='table.highlight.row';
-    map[i].value:='<struct></struct>';
-    inc(i);
-    map[i].name:='table.select.rowList';
-    map[i].value:='<struct></struct>';
-    inc(i);
+    if SubscribeCoord then begin
+      map[i].name:='coord.pointAt.sky';
+      map[i].value:='<struct></struct>';
+      inc(i);
+    end;
+    if SubscribeImage then begin
+      map[i].name:='image.load.fits';
+      map[i].value:='<struct></struct>';
+      inc(i);
+    end;
+    if SubscribeTable then begin
+      map[i].name:='table.load.votable';
+      map[i].value:='<struct></struct>';
+      inc(i);
+      map[i].name:='table.highlight.row';
+      map[i].value:='<struct></struct>';
+      inc(i);
+      map[i].name:='table.select.rowList';
+      map[i].value:='<struct></struct>';
+      inc(i);
+    end;
     SetLength(map,i);
     result:=SampCall('samp.hub.declareSubscriptions',samp_private_key,map);
     if Assigned(FClientChange) then FClientChange(self);
@@ -639,7 +648,6 @@ begin
  result:=false;
  sender_id:=''; msg_id:='';
  data.Position := 0;
-// data.SaveToFile('/tmp/aa');
  ReadXMLFile(NotifyDoc, data);
  node:=FindItem(NotifyDoc,'methodName');
  if node<>nil then cmd:=node.TextContent;
@@ -679,6 +687,7 @@ begin
          if node<>nil then SampAsyncP1:=node.TextContent;
          node:=FindNodeName(pnode,'table-id');
          if node<>nil then SampAsyncP2:=node.TextContent;
+         SampAsyncP2:=StringReplace(SampAsyncP2,'&','&amp;',[rfReplaceAll]);
          node:=FindNodeName(pnode,'url');
          if node<>nil then SampAsyncP3:=node.TextContent;
          SampAsyncEvent:=TableLoadVoTable;
@@ -688,6 +697,7 @@ begin
        end else if mtype='table.highlight.row' then begin
          node:=FindNodeName(pnode,'table-id');
          if node<>nil then p1:=node.TextContent;
+         p1:=StringReplace(p1,'&','&amp;',[rfReplaceAll]);
          node:=FindNodeName(pnode,'url');
          if node<>nil then p2:=node.TextContent;
          node:=FindNodeName(pnode,'row');
@@ -698,6 +708,7 @@ begin
          plist:=TStringList.Create;
          node:=FindNodeName(pnode,'table-id');
          if node<>nil then p1:=node.TextContent;
+         p1:=StringReplace(p1,'&','&amp;',[rfReplaceAll]);
          node:=FindNodeName(pnode,'url');
          if node<>nil then p2:=node.TextContent;
          node:=FindNodeName(pnode,'row-list');

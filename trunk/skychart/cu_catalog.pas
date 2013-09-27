@@ -1495,7 +1495,7 @@ repeat
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
-  if (cfgcat.SampSelectedNum>0)and(cfgcat.SampSelectedTable=vocat.VOname) then begin
+  if (cfgcat.SampSelectedNum>0)and(cfgcat.SampSelectedTable=vocat.SAMPid) then begin
      for i:=0 to cfgcat.SampSelectedNum-1 do
        if cfgcat.SampSelectedRec[i]=vocat.VOcatrec then begin
           cfgcat.SampSelectIdent:=(cfgcat.SampSelectFirst and (i=0));
@@ -3152,7 +3152,7 @@ repeat
     if not found then continue;
   end;
   if SampConnected and(cat=voneb)and(pos('vo_samp',vocat.catname)=1) then begin
-     cfgcat.SampFindTable:=rec.options.LongName;
+     cfgcat.SampFindTable:=vocat.SAMPid;
      cfgcat.SampFindURL:=vocat.SAMPurl;
      cfgcat.SampFindRec:=vocat.VOcatrec;
   end else
@@ -3193,8 +3193,9 @@ ok:=false;
 nextobj:=false;
 if cfgcat.NebCatOn[uneb-BaseNeb] then
   ok:=FindAtPos(uneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec);
+if (not ok) and cfgcat.NebCatOn[voneb-BaseNeb] then begin
+  ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
 if cfgsc.shownebulae and ((ftype=ftAll)or(ftype=ftNeb)) then begin
-  if (not ok) and cfgcat.nebcaton[voneb-BaseNeb] then begin ok:=FindAtPos(voneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseVOCat; end;
   if (not ok) then begin ok:=FindAtPos(gcneb,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseGcat; end;
   if (not ok) and cfgcat.nebcaton[sac-BaseNeb] then begin ok:=FindAtPos(sac,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseSAC; end;
   if (not ok) and cfgcat.nebcaton[ngc-BaseNeb] then begin ok:=FindAtPos(ngc,x1,y1,x2,y2,nextobj,true,searchcenter,cfgsc,rec); CloseNGC; end;

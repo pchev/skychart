@@ -65,10 +65,11 @@ const CacheInc=1000;
       ('NOTE', 'meta.note'));
 
 var
-   VOobject, VOname : string;
+   VOobject : string;
+   VOname: string;
    VOCatpath : string ='';
    VOcatrec: integer;
-   deffile,catfile,SAMPurl: string;
+   deffile,catfile,SAMPurl,SAMPid: string;
    Defsize: integer;
    Defmag: double;
    active,VODocOK: boolean;
@@ -379,7 +380,7 @@ var buf,k,ucd:string;
     fielddata: TFieldData;
     config: TXMLConfig;
     l,c: boolean;
-begin
+ begin
 result:=false;
 VODocOK:=false;
 fillchar(EmptyRec,sizeof(GcatRec),0);
@@ -392,6 +393,7 @@ try
 config.Filename:=deffile;
 VOName:=config.GetValue('VOcat/catalog/name','');
 VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
+SAMPid:=config.GetValue('VOcat/catalog/sampid','');
 SAMPurl:=config.GetValue('VOcat/catalog/sampurl','');
 active:=config.GetValue('VOcat/plot/active',false);
 drawtype:=config.GetValue('VOcat/plot/drawtype',14);

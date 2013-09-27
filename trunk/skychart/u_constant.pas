@@ -931,7 +931,9 @@ type
     ObsNameList: TStringList;
     SesameUrlNum, SesameCatNum: integer;
     ClockColor: TColor;
+    SampAutoconnect,SampKeepTables,SampKeepImages: boolean;
     SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
+    SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2225,9 +2227,15 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: integer;
 begin
+  SampAutoconnect:=Source.SampAutoconnect;
+  SampKeepTables:=Source.SampKeepTables;
+  SampKeepImages:=Source.SampKeepImages;
   SampConfirmCoord:=Source.SampConfirmCoord;
   SampConfirmImage:=Source.SampConfirmImage;
   SampConfirmTable:=Source.SampConfirmTable;
+  SampSubscribeCoord:=Source.SampSubscribeCoord;
+  SampSubscribeImage:=Source.SampSubscribeImage;
+  SampSubscribeTable:=Source.SampSubscribeTable;
   ClockColor := Source.ClockColor;
   SesameUrlNum := Source.SesameUrlNum;
   SesameCatNum := Source.SesameCatNum;
