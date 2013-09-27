@@ -4,11 +4,13 @@ unit pu_imglist;
 
 interface
 
-uses u_translation, cu_fits,
+uses u_translation, cu_fits, u_constant,
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   CheckLst, StdCtrls, Menus;
 
 type
+
+    TSendImageFits = procedure(client,imgname,imgid,url: string) of object;
 
   { Tf_imglist }
 
@@ -17,10 +19,13 @@ type
     Button2: TButton;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
     CheckListBox1: TCheckListBox;
+    ComboBox1: TComboBox;
     ViewHeader: TMenuItem;
     Panel1: TPanel;
     PopupMenu1: TPopupMenu;
+    procedure Button5Click(Sender: TObject);
     procedure CheckListBox1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
@@ -29,10 +34,12 @@ type
     { private declarations }
     FFits: TFits;
     ListIndex: integer;
+    FSendImageFits: TSendImageFits;
   public
     { public declarations }
     procedure SetLang;
     property Fits: TFits read FFits write FFits;
+    property onSendImageFits: TSendImageFits read FSendImageFits write FSendImageFits;
   end;
 
 var
@@ -59,9 +66,47 @@ if Button = mbRight then begin
 end;
 end;
 
+procedure Tf_imglist.Button5Click(Sender: TObject);
+var cn,client,imgname,imgid,url: string;
+    i,p: integer;
+begin
+cn:=ComboBox1.Text;
+for i:=0 to SampClientName.Count-1 do begin
+    if SampClientName[i]=cn then begin
+      client:=SampClientId[i];
+      break;
+    end;
+end;
+if ListIndex>=CheckListBox1.Items.Count then ListIndex:=CheckListBox1.Items.Count-1;
+if (ListIndex<0) then exit;
+imgname:=ExtractFileNameOnly(CheckListBox1.Items[ListIndex]);
+imgid:='skychart_'+imgname;
+url:='file://'+CheckListBox1.Items[ListIndex];
+if assigned(FSendImageFits) then FSendImageFits(client,imgname,imgid,url);
+end;
+
 procedure Tf_imglist.FormShow(Sender: TObject);
+var i: integer;
 begin
   ListIndex:=0;
+  if SampConnected then begin
+    ComboBox1.Enabled:=true;
+    button5.Enabled:=true;
+    ComboBox1.Clear;
+    ComboBox1.Items.Add(rsAllSAMPClien);
+    for i:=0 to SampClientName.Count-1 do begin
+       if SampClientTableLoadVotable[i]='1' then begin
+         ComboBox1.Items.Add(SampClientName[i]);
+       end;
+    end;
+    ComboBox1.ItemIndex:=0;
+   end else begin
+      ComboBox1.Clear;
+      ComboBox1.Items.Add(rsAllSAMPClien);
+      ComboBox1.ItemIndex:=0;
+      ComboBox1.Enabled:=false;
+      button5.Enabled:=false;
+  end;
 end;
 
 procedure Tf_imglist.ViewHeaderClick(Sender: TObject);

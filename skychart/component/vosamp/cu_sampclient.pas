@@ -69,6 +69,8 @@ TSampClient = class(TObject)
     function SampHubGetClientList:boolean;
     function SampSendCoord(client:string;ra,de: double):boolean;
     function SampSendVoTable(client,tname,table_id,url:string):boolean;
+    function SampSelectRow(client,tableid,url,row: string):boolean;
+    function SampSendImageFits(client,imgname,imgid,url:string):boolean;
     function SampSubscribe:boolean;
     property LastErrorcode: integer read Ferrorcode;
     property LastError: string read Ferrortext;
@@ -547,6 +549,36 @@ begin
      result:=SampCall('samp.hub.notify',samp_private_key,client,'table.load.votable',map);
 end;
 
+function TSampClient.SampSelectRow(client,tableid,url,row: string):boolean;
+var map:Tmap;
+begin
+  SetLength(map,3);
+  map[0].name:='table-id';
+  map[0].value:=tableid;
+  map[1].name:='row-list';
+  map[1].value:='<array><data><value>'+row+'</value></data></array>';
+  if client='' then
+     result:=SampCall('samp.hub.notifyAll',samp_private_key,'table.select.rowList',map)
+  else
+     result:=SampCall('samp.hub.notify',samp_private_key,client,'table.select.rowList',map);
+end;
+
+function TSampClient.SampSendImageFits(client,imgname,imgid,url:string):boolean;
+var map:Tmap;
+begin
+  SetLength(map,3);
+  map[0].name:='name';
+  map[0].value:=imgname;
+  map[1].name:='image-id';
+  map[1].value:=imgid;
+  map[2].name:='url';
+  map[2].value:=url;
+  if client='' then
+     result:=SampCall('samp.hub.notifyAll',samp_private_key,'image.load.fits',map)
+  else
+     result:=SampCall('samp.hub.notify',samp_private_key,client,'image.load.fits',map);
+end;
+
 function TSampClient.SampSubscribe:boolean;
 var map:Tmap;
     i: integer;
@@ -607,6 +639,7 @@ begin
  result:=false;
  sender_id:=''; msg_id:='';
  data.Position := 0;
+// data.SaveToFile('/tmp/aa');
  ReadXMLFile(NotifyDoc, data);
  node:=FindItem(NotifyDoc,'methodName');
  if node<>nil then cmd:=node.TextContent;

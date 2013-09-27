@@ -829,6 +829,8 @@ type
     procedure GetTwilight(jd0: double; out ht: double);
     procedure SendCoordpointAtsky(client: string; ra,de: double);
     procedure SendVoTable(client,tname,tid,url: string);
+    procedure SendImageFits(client,imgname,imgid,url: string);
+    procedure SendSelectRow(tableid,url,row: string);
   end;
 
 var
@@ -932,7 +934,9 @@ begin
   Child.onShowInfo:=SetLpanel1;
   Child.onShowCoord:=SetLpanel0;
   Child.onListInfo:=ListInfo;
-  child.onSendCoordpointAtsky:=SendCoordpointAtsky;
+  Child.onSendCoordpointAtsky:=SendCoordpointAtsky;
+  Child.onSendImageFits:=SendImageFits;
+  Child.onSendSelectRow:=SendSelectRow;
   if (not Child.sc.cfgsc.TrackOn)and(Child.sc.cfgsc.Projpole=Altaz) then begin
      Child.sc.cfgsc.TrackOn:=true;
      Child.sc.cfgsc.TrackType:=4;
@@ -8417,6 +8421,7 @@ if FileExists(fn) then begin
    config.Filename:=cfn;
    config.SetValue('VOcat/catalog/name',table_id);
    config.SetValue('VOcat/catalog/table',table_name);
+   config.SetValue('VOcat/catalog/sampurl',url);
    config.SetValue('VOcat/catalog/objtype','dso');
    config.SetValue('VOcat/update/fullcat',true);
    config.SetValue('VOcat/update/baseurl','');
@@ -8444,14 +8449,34 @@ end;
 
 procedure Tf_main.SAMPTableHighlightRow(table_id,url,row:string);
 begin
- // memo1.Lines.Add('TableHighlightRow '+table_id+chr(13)+url+chr(13)+row);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=true;
+   sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=true;
+   sc.catalog.cfgcat.SampSelectedTable:=table_id;
+   sc.catalog.cfgcat.SampSelectFirst:=false;
+   sc.catalog.cfgcat.SampSelectedNum:=1;
+   SetLength(sc.catalog.cfgcat.SampSelectedRec,sc.catalog.cfgcat.SampSelectedNum+1);
+   sc.catalog.cfgcat.SampSelectedRec[0]:=StrToIntDef(row,0);
+   Refresh;
+end;
 end;
 
 procedure Tf_main.SAMPTableSelectRowlist(table_id,url:string;rowlist:Tstringlist);
 var i:integer;
 begin
-//  memo1.Lines.Add('TableSelectRowlist '+table_id+chr(13)+url+chr(13));
-//  for i:=0 to rowlist.Count-1 do memo1.Lines.Add(rowlist[i]);
+if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf_chart do begin
+   sc.catalog.cfgcat.starcatdef[vostar-BaseStar]:=true;
+   sc.catalog.cfgcat.nebcatdef[voneb-BaseNeb]:=true;
+   sc.catalog.cfgcat.SampSelectedTable:=table_id;
+   sc.catalog.cfgcat.SampSelectedNum:=rowlist.Count;
+   if sc.catalog.cfgcat.SampSelectedNum=1 then sc.catalog.cfgcat.SampSelectFirst:=true
+      else sc.catalog.cfgcat.SampSelectFirst:=false;
+   SetLength(sc.catalog.cfgcat.SampSelectedRec,sc.catalog.cfgcat.SampSelectedNum+1);
+   for i:=0 to rowlist.Count-1 do
+      sc.catalog.cfgcat.SampSelectedRec[i]:=StrToIntDef(rowlist[i],0);
+   Refresh;
+   if sc.catalog.cfgcat.SampSelectFirst then IdentXY(sc.catalog.cfgcat.SampSelectX,sc.catalog.cfgcat.SampSelectY);
+end;
 end;
 
 procedure Tf_main.SendCoordpointAtsky(client: string; ra,de: double);
@@ -8464,6 +8489,16 @@ end;
 procedure Tf_main.SendVoTable(client,tname,tid,url: string);
 begin
   samp.SampSendVoTable(client,tname,tid,url);
+end;
+
+procedure Tf_main.SendSelectRow(tableid,url,row: string);
+begin
+  samp.SampSelectRow('',tableid,url,row);
+end;
+
+procedure Tf_main.SendImageFits(client,imgname,imgid,url: string);
+begin
+  samp.SampSendImageFits(client,imgname,imgid,url);
 end;
 
 ///////////////////////////////////////////////////////////////////////////////////

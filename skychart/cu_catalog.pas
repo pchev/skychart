@@ -1479,12 +1479,13 @@ until not result;
 end;
 
 function Tcatalog.GetVOCatN(var rec:GcatRec):boolean;
+var i: integer;
 begin
 repeat
   ReadVOCat(rec,result);
+  cfgcat.SampSelectIdent:=false;
   if not result then break;
   if not rec.neb.valid[vnMag] then rec.neb.mag:=rec.options.MagMax;
-
   if cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
     (rec.neb.mag>cfgcat.NebMagMax) then continue;
@@ -1494,6 +1495,15 @@ repeat
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
+  if (cfgcat.SampSelectedNum>0)and(cfgcat.SampSelectedTable=vocat.VOname) then begin
+     for i:=0 to cfgcat.SampSelectedNum-1 do
+       if cfgcat.SampSelectedRec[i]=vocat.VOcatrec then begin
+          cfgcat.SampSelectIdent:=(cfgcat.SampSelectFirst and (i=0));
+          if rec.neb.color=$00FF00 then rec.neb.color:=$FF00FF
+            else rec.neb.color:=$00FF00;
+          rec.options.UseColor:=1;
+       end;
+  end;
   break;
 until not result;
 end;
@@ -2914,6 +2924,7 @@ var
    xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,rac,epoch : double;
    p: coordvector;
    ok,found,fullmotion : boolean;
+   i: integer;
 begin
 if x2>pi2 then rac:=pi2 else rac:=0;
 xxc:=(x1+x2)/2;
@@ -3140,6 +3151,12 @@ repeat
     end;
     if not found then continue;
   end;
+  if SampConnected and(cat=voneb)and(pos('vo_samp',vocat.catname)=1) then begin
+     cfgcat.SampFindTable:=rec.options.LongName;
+     cfgcat.SampFindURL:=vocat.SAMPurl;
+     cfgcat.SampFindRec:=vocat.VOcatrec;
+  end else
+     cfgcat.SampFindTable:='';
   if (rec.options.rectype=rtStar) and rec.star.valid[vsB_v] then
     cfgsc.FindBV:=rec.star.b_v
   else
