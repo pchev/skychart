@@ -67,7 +67,8 @@ const CacheInc=1000;
 var
    VOobject, VOname : string;
    VOCatpath : string ='';
-   deffile,catfile: string;
+   VOcatrec: integer;
+   deffile,catfile,SAMPurl: string;
    Defsize: integer;
    Defmag: double;
    active,VODocOK: boolean;
@@ -215,6 +216,8 @@ end;
 Procedure InitRec;
 var n : integer;
 begin
+  emptyrec.ra:=-999;
+  emptyrec.dec:=-999;
   emptyrec.options.rectype:=catversion;
   emptyrec.options.Equinox:=2000;
   emptyrec.options.EquinoxJD:=jd2000;
@@ -389,6 +392,7 @@ try
 config.Filename:=deffile;
 VOName:=config.GetValue('VOcat/catalog/name','');
 VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
+SAMPurl:=config.GetValue('VOcat/catalog/sampurl','');
 active:=config.GetValue('VOcat/plot/active',false);
 drawtype:=config.GetValue('VOcat/plot/drawtype',14);
 drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);
@@ -555,6 +559,41 @@ VOopen:=true;
 NextVOCat(ok);
 end;
 
+Function StrToDeg(dms : string) : double;
+var s,p : integer;
+    t,sep : string;
+begin
+try
+dms:=trim(dms);
+if copy(dms,1,1)='-' then s:=-1 else s:=1;
+sep:=' ';
+p:=pos(sep,dms);
+if p=0 then begin
+  sep:=':';
+  p:=pos(sep,dms);
+end;
+if p=0 then
+  result:=StrToFloatDef(dms,0)
+else begin
+  t:=copy(dms,1,p-1); delete(dms,1,p);
+  result:=StrToIntDef(trim(t),0);
+  dms:=trim(dms);
+  if dms>'' then begin
+    p:=pos(sep,dms);
+    t:=copy(dms,1,p-1); delete(dms,1,p);
+    result:=result+ s * StrToIntDef(trim(t),0) / 60;
+    dms:=trim(dms);
+    if dms>'' then begin
+      t:=dms;
+      result:=result+ s * StrToFloatDef(trim(t),0) / 3600;
+    end;
+  end;
+end;
+except
+result:=0;
+end;
+end;
+
 Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 var cell: TDOMNode;
     buf,recno: string;
@@ -562,6 +601,7 @@ var cell: TDOMNode;
 begin
 ok:=false;
 lin:=emptyrec;
+inc(VOcatrec);
 if OnCache then begin
 // read form cache
 inc(CurCacheRec);
@@ -600,9 +640,23 @@ if Assigned(VoNode) then begin
   end;
   while Assigned(cell) do begin
     buf:=cell.TextContent;
-    // always ask vizier to add j2000 coordinates.   TODO: process general case coordinates
+    // always ask vizier to add j2000 coordinates.
     if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
     if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
+    if ((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
+       (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1)
+        then begin
+           if pos('h:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
+              lin.ra:=deg2rad*15*StrToDeg(buf)
+            else lin.ra:=deg2rad*StrToFloatDef(buf,0);
+    end;
+    if ((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
+       (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1)
+        then begin
+           if pos('d:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
+              lin.dec:=deg2rad*StrToDeg(buf)
+            else lin.dec:=deg2rad*StrToFloatDef(buf,0);
+    end;
     if (buf<>'')and(pos('meta.record',TFieldData(VOFields.Objects[i]).ucd)=1) then recno:=buf;
     case catversion of
     rtStar: begin
@@ -730,6 +784,7 @@ if CurCat<Ncat then begin
    deffile:=ChangeFileExt(catfile,'.config');
    if (CurCat>0) and VODocOK then VODoc.Free;
    ok:=ReadVOHeader;
+   VOcatrec:=-1;
    if (not active)or(not ok) then NextVOCat(ok);
 end;
 end;

@@ -46,6 +46,8 @@ type
   Tbtnfunc = procedure(i1,i2:integer;b1:boolean;sender:TObject) of object;
   Tshowinfo = procedure(txt:string; origin:string='';sendmsg:boolean=false; Sender: TObject=nil; txt2:string='') of object;
   TSendCoordpointAtsky = procedure(client: string; ra,de: double) of object;
+  TSendSelectRow = procedure(tableid,url,row: string) of object;
+
 type
   TChartDrawingControl = class(TCustomControl)
   public
@@ -242,6 +244,8 @@ type
     Fpop_encoder: Tpop_encoder;
     Fpop_lx200: Tpop_lx200;
     Fpop_scope: Tpop_scope;
+    FSendImageFits: TSendImageFits;
+    FSendSelectRow: TSendSelectRow;
     procedure ConnectINDI(Sender: TObject);
     procedure SlewINDI(Sender: TObject);
     procedure SyncINDI(Sender: TObject);
@@ -386,7 +390,8 @@ type
     property OnImageSetup: TNotifyEvent read FImageSetup write FImageSetup;
     property NightVision: Boolean read FNightVision write SetNightVision;
     property onSendCoordpointAtsky: TSendCoordpointAtsky read FSendCoordpointAtsky write FSendCoordpointAtsky;
-
+    property onSendImageFits: TSendImageFits read FSendImageFits write FSendImageFits;
+    property onSendSelectRow: TSendSelectRow read FSendSelectRow write FSendSelectRow;
   end;
 
 implementation
@@ -2063,6 +2068,9 @@ if sc.cfgsc.TrackOn then begin
   sc.cfgsc.TrackName:=lasttrname;
 end;
 if result and assigned(Fshowinfo) then Fshowinfo(sc.cfgsc.FindDesc,caption,true,self,sc.cfgsc.FindDesc2);
+if result and SampConnected and (sc.Catalog.cfgcat.SampFindTable>'') then begin
+  if assigned(FSendSelectRow) then FSendSelectRow(sc.Catalog.cfgcat.SampFindTable,sc.Catalog.cfgcat.SampFindUrl,inttostr(sc.Catalog.cfgcat.SampFindRec));
+end;
 end;
 
 procedure Tf_chart.IdentSearchResult(num,stype:string; itype:integer; ar1,de1:double; sr:string='';sn:string='';sd:string='');
@@ -3779,6 +3787,7 @@ begin
  if f_imglist=nil then begin
   f_imglist:=Tf_imglist.Create(self);
   f_imglist.Fits:=sc.Fits;
+  f_imglist.onSendImageFits:=FSendImageFits;
 end;
 f_imglist.CheckListBox1.Clear;
 for i:=0 to sc.Fits.fitslist.Count-1 do begin

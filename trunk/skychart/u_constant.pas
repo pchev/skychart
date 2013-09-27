@@ -655,6 +655,10 @@ type
     GCatNum: integer;
     UserObjects: array of TUserObjects;
     StarmagMax, NebMagMax, NebSizeMin: double;
+    SampSelectedTable,SampFindTable,SampFindUrl: string;
+    SampSelectedNum,SampSelectX,SampSelectY,SampFindRec: integer;
+    SampSelectedRec: array of integer;
+    SampSelectFirst,SampSelectIdent: boolean;
     // limit to extract from catalog
     StarCatPath: array [1..MaxStarCatalog] of string;
     // path to each catalog
@@ -1490,6 +1494,8 @@ implementation
 constructor Tconf_catalog.Create;
 begin
   inherited Create;
+  SampSelectIdent:=false;
+  SampSelectedNum:=0;
 end;
 
 destructor Tconf_catalog.Destroy;
@@ -1513,6 +1519,11 @@ begin
   StarmagMax := Source.StarmagMax;
   NebMagMax := Source.NebMagMax;
   NebSizeMin := Source.NebSizeMin;
+  SampSelectedTable:=Source.SampSelectedTable;
+  SampSelectedNum:=Source.SampSelectedNum;
+  SetLength(SampSelectedRec,SampSelectedNum+1);
+  if SampSelectedNum>0 then for i:=0 to SampSelectedNum do
+     SampSelectedRec[i]:=Source.SampSelectedRec[i];
   for i := 1 to MaxStarCatalog do
   begin
     StarCatPath[i] := Source.StarCatPath[i];

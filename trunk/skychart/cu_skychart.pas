@@ -102,7 +102,6 @@ Tskychart = class (TComponent)
     function DrawVarStars :boolean;
     function DrawDblStars :boolean;
     function DrawDeepSkyObject :boolean;
-    //function DrawNebulae :boolean;
     function DrawImagesList :boolean;
     function DrawOutline :boolean;
     function DrawDSL :boolean;
@@ -1220,6 +1219,10 @@ var rec:GcatRec;
           if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
           if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
           sz:=(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit)*(rec.neb.dim1/2);
+          if Fcatalog.cfgcat.SampSelectIdent then begin
+             Fcatalog.cfgcat.SampSelectX:=round(xx);
+             Fcatalog.cfgcat.SampSelectY:=round(yy);
+          end;
           if ((xx+sz)>cfgsc.Xmin) and
              ((xx-sz)<cfgsc.Xmax) and
              ((yy+sz)>cfgsc.Ymin) and
