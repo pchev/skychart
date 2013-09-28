@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"POT-Creation-Date: 2013-09-28 12:43+0000\n"
 "PO-Revision-Date: 2013-07-26 05:09+0000\n"
 "Last-Translator: mbid <mbid2010@aol.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: u_translation.rs102cddss
@@ -936,6 +936,10 @@ msgstr ""
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr ""
 
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr ""
+
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
 msgstr ""
@@ -1458,6 +1462,10 @@ msgstr ""
 
 #: u_translation.rsdisconnect
 msgid "Disconnect"
+msgstr ""
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
 msgstr ""
 
 #: u_translation.rsdisconnectte
@@ -4276,8 +4284,12 @@ msgstr ""
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr ""
+
 #: u_translation.rssampstatus
-msgid "SAMP Status"
+msgid "SAMP status"
 msgstr ""
 
 #: u_translation.rssaros

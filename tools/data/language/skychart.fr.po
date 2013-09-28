@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 11:36+0000\n"
-"PO-Revision-Date: 2013-09-28 11:49+0000\n"
+"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"PO-Revision-Date: 2013-09-28 12:45+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 "Language: fr\n"
 
@@ -938,6 +938,10 @@ msgstr "Connecte le télescope"
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr "Connexion $ %s, %s erreur! %sContrôlez que le serveur MySQL est lancé et verfiiez le mot de passe"
 
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr "Connection au hub SAMP"
+
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
 msgstr "Connecté à %s, %s avec succès.%s"
@@ -1463,6 +1467,10 @@ msgstr "Répertoire introuvable! Veuillez installer le paquet Skychart Pictures.
 #: u_translation.rsdisconnect
 msgid "Disconnect"
 msgstr "Déconnecter"
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
+msgstr "Déconnection du hub SAMP"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -4282,9 +4290,13 @@ msgstr "Confirmation SAMP"
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr "SAMP est un protocole de messagerie qui permet aux logiciels d'astronomie d'interagir ensembles.%sSkychart peut envoyer et recevoir des coordonnées, des images FITS et des tables VO."
 
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr "Configuration de SAMP"
+
 #: u_translation.rssampstatus
-msgid "SAMP Status"
-msgstr "État SAMP"
+msgid "SAMP status"
+msgstr "État de SAMP"
 
 #: u_translation.rssaros
 msgid "Saros"

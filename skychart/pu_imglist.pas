@@ -89,6 +89,7 @@ end;
 procedure Tf_imglist.FormShow(Sender: TObject);
 var i: integer;
 begin
+  SetLang;
   ListIndex:=0;
   if SampConnected then begin
     ComboBox1.Enabled:=true;
