@@ -378,6 +378,7 @@ addobj.Caption:=rsAdd;
 delobj.Caption:=rsDelete;
 button8.Caption:=rsSaveAs;
 button9.Caption:=rsLoad;
+button1.Caption:=rsSendTableTo;
 StringGrid1.Columns[0].PickList.Clear;
 StringGrid1.Columns[0].PickList.Add(rsUnknowObject);
 StringGrid1.Columns[0].PickList.Add(rsGalaxy);
@@ -1360,6 +1361,7 @@ procedure Tf_config_catalog.Button1Click(Sender: TObject);
 var cn,client,tname,tid,url: string;
     i,p: integer;
 begin
+client:='';
 cn:=ComboBox1.Text;
 for i:=0 to SampClientName.Count-1 do begin
     if SampClientName[i]=cn then begin

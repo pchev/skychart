@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 15:46+0000\n"
+"POT-Creation-Date: 2013-09-28 11:36+0000\n"
 "PO-Revision-Date: 2012-03-10 15:25+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-08 15:56+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 "Language: en_US\n"
 
 #: u_translation.rs102cddss
@@ -185,6 +185,10 @@ msgstr "Vse nastavitve"
 msgid "All the objects at this position"
 msgstr ""
 
+#: u_translation.rsallsampclien
+msgid "All SAMP clients"
+msgstr ""
+
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
 msgstr "%s obstoja sestave vseh tabel."
@@ -293,6 +297,18 @@ msgstr "Umetni sateliti"
 msgid "Artificial satellite"
 msgstr "Umetni satelit"
 
+#: u_translation.rsasampapplica
+msgid "A SAMP application send a table to load"
+msgstr ""
+
+#: u_translation.rsasampapplica2
+msgid "A SAMP application send an image to load"
+msgstr ""
+
+#: u_translation.rsasampapplica3
+msgid "A SAMP application send coordinates location"
+msgstr ""
+
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
 msgstr "Vmesnik teleskopa ASCOM"
@@ -300,6 +316,18 @@ msgstr "Vmesnik teleskopa ASCOM"
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Zahtevaj potrditev pred dostopom do interneta"
+
+#: u_translation.rsaskforconfir
+msgid "Ask for confirmation before to jump to coordinates"
+msgstr ""
+
+#: u_translation.rsaskforconfir2
+msgid "Ask for confirmation before to load the image"
+msgstr ""
+
+#: u_translation.rsaskforconfir3
+msgid "Ask for confirmation before to load the table"
+msgstr ""
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -748,6 +776,10 @@ msgstr "Klikni za spremembo barve "
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
 msgstr "Odjemalčeva povezava je živa"
+
+#: u_translation.rsclientlist
+msgid "Client list"
+msgstr ""
 
 #: u_translation.rsclock
 msgid "Clock"
@@ -1541,6 +1573,14 @@ msgstr "Prenesi zadnje poti satelita"
 msgid "Download TLE"
 msgstr "Prejmi TLE"
 
+#: u_translation.rsdoyouwanttol
+msgid "Do you want to load it?"
+msgstr ""
+
+#: u_translation.rsdoyouwanttom
+msgid "Do you want to move the chart there?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Hočete sedaj shraniti nastavitve programa?"
@@ -2008,6 +2048,10 @@ msgstr ""
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
 msgstr "Obrazec vedno viden"
+
+#: u_translation.rsformoreinfor
+msgid "For more information, see :"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2520,6 +2564,14 @@ msgstr "Jupiter"
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
 msgstr "Jupitrova GRS longituda:"
+
+#: u_translation.rskeepimageson
+msgid "Keep images on exit for later use"
+msgstr ""
+
+#: u_translation.rskeeptableson
+msgid "Keep tables on exit for later use"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
@@ -3981,6 +4033,18 @@ msgstr "RealSky jug"
 msgid "Real time options"
 msgstr "Nastavitve v realnem času"
 
+#: u_translation.rsreceivecoord
+msgid "Receive coordinates from other applications"
+msgstr ""
+
+#: u_translation.rsreceivefitsi
+msgid "Receive FITS images from other applications"
+msgstr ""
+
+#: u_translation.rsreceivevotab
+msgid "Receive VO table data from other applications"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Iz datoteke prepoznaj enote ali tip predmeta:"
@@ -4205,6 +4269,18 @@ msgstr "Vrtenje"
 msgid "Rows"
 msgstr "Vrstice"
 
+#: u_translation.rssampconfirma
+msgid "SAMP Confirmation"
+msgstr ""
+
+#: u_translation.rssampisamessa
+msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
+msgstr ""
+
+#: u_translation.rssampstatus
+msgid "SAMP Status"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Saros"
@@ -4400,6 +4476,14 @@ msgstr "Polovico velika os"
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
 msgstr "Pošlji karto na tiskalnik."
+
+#: u_translation.rssendimageto
+msgid "Send image to"
+msgstr ""
+
+#: u_translation.rssendtableto
+msgid "Send table to"
+msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -5225,6 +5309,10 @@ msgstr "Resnično sončen"
 msgid "Trumpler class"
 msgstr "Trumplerjev razred"
 
+#: u_translation.rstrytoautocon
+msgid "Try to auto-connect to a SAMP hub when the program start"
+msgstr ""
+
 #: u_translation.rsttut
 msgid "TT - UT: "
 msgstr "TT - UT: "
@@ -5492,6 +5580,10 @@ msgstr "VO katalog"
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
 msgstr "VO kataloški brskalnik"
+
+#: u_translation.rsvosampsettin
+msgid "VO SAMP settings"
+msgstr ""
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"

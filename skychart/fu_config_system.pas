@@ -314,6 +314,19 @@ TelescopeSelect.Items[1]:=rsManualMount;
 if TelescopeSelect.Items.Count>4 then begin
    TelescopeSelect.Items[4]:=rsEncoders;
 end;
+label15.Caption:=rsVOSAMPSettin;
+label16.Caption:=Format(rsSAMPIsAMessa, [crlf]);
+label17.Caption:=rsForMoreInfor;
+label18.Caption:=URL_IVOASAMP;
+CheckBox1.Caption:=rsAskForConfir;
+CheckBox2.Caption:=rsAskForConfir2;
+CheckBox3.Caption:=rsAskForConfir3;
+CheckBox4.Caption:=rsReceiveCoord;
+CheckBox5.Caption:=rsReceiveFITSI;
+CheckBox6.Caption:=rsReceiveVOTab;
+CheckBox7.Caption:=rsTryToAutoCon;
+CheckBox8.Caption:=rsKeepTablesOn;
+CheckBox9.Caption:=rsKeepImagesOn;
 {$ifdef mswindows}
 ASCOMLabel.Caption:=rsASCOMTelesc+crlf+Format(rsUseTheMenuOr, [rsConnectTeles]);
 {$else}

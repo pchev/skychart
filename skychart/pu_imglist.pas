@@ -70,6 +70,7 @@ procedure Tf_imglist.Button5Click(Sender: TObject);
 var cn,client,imgname,imgid,url: string;
     i,p: integer;
 begin
+client:='';
 cn:=ComboBox1.Text;
 for i:=0 to SampClientName.Count-1 do begin
     if SampClientName[i]=cn then begin
@@ -122,6 +123,9 @@ begin
 Caption:=rsImageList;
 Button1.Caption:=rsOK;
 Button2.Caption:=rsCancel;
+Button3.Caption:=rsSetup;
+Button4.Caption:=rsViewHeader;
+Button5.Caption:=rsSendImageTo;
 ViewHeader.Caption:=rsViewHeader;
 end;
 

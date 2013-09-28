@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 15:46+0000\n"
-"PO-Revision-Date: 2013-07-23 22:34+0000\n"
+"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"PO-Revision-Date: 2013-09-18 14:28+0000\n"
 "Last-Translator: Luis Castedo <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-08 15:56+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 "Language: es\n"
 
 #: u_translation.rs102cddss
@@ -163,7 +163,7 @@ msgstr "Ajustes avanzados para Scope.exe"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
-msgstr ""
+msgstr "Ajustes avanzados"
 
 #: u_translation.rsage
 msgid "Age"
@@ -184,6 +184,10 @@ msgstr "Acceder a todos los ajustes"
 #: u_translation.rsallobjectsat
 msgid "All the objects at this position"
 msgstr "Todos los objetos en esta posición"
+
+#: u_translation.rsallsampclien
+msgid "All SAMP clients"
+msgstr ""
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -293,6 +297,18 @@ msgstr "Satélites artificiales"
 msgid "Artificial satellite"
 msgstr "Satélite artificial"
 
+#: u_translation.rsasampapplica
+msgid "A SAMP application send a table to load"
+msgstr ""
+
+#: u_translation.rsasampapplica2
+msgid "A SAMP application send an image to load"
+msgstr ""
+
+#: u_translation.rsasampapplica3
+msgid "A SAMP application send coordinates location"
+msgstr ""
+
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
 msgstr "Interfaz de telescopio ASCOM"
@@ -300,6 +316,18 @@ msgstr "Interfaz de telescopio ASCOM"
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Preguntar antes de cualquier conexión a Internet"
+
+#: u_translation.rsaskforconfir
+msgid "Ask for confirmation before to jump to coordinates"
+msgstr ""
+
+#: u_translation.rsaskforconfir2
+msgid "Ask for confirmation before to load the image"
+msgstr ""
+
+#: u_translation.rsaskforconfir3
+msgid "Ask for confirmation before to load the table"
+msgstr ""
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -491,7 +519,7 @@ msgstr "Más brillante"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr ""
+msgstr "Más brillante"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -748,6 +776,10 @@ msgstr "Click para cambiar el color "
 #: u_translation.rsclientconnec
 msgid "Client connection keep alive"
 msgstr "Mantener viva la conexión con el cliente"
+
+#: u_translation.rsclientlist
+msgid "Client list"
+msgstr ""
 
 #: u_translation.rsclock
 msgid "Clock"
@@ -1488,7 +1520,7 @@ msgstr "Distancia al último objeto"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "¡No cambie nada aquí si no está seguro de lo que hace!"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1541,6 +1573,14 @@ msgstr "Descargar los elementos orbitales más recientes"
 #: u_translation.rsdownloadtle
 msgid "Download TLE"
 msgstr "Descargar TLE"
+
+#: u_translation.rsdoyouwanttol
+msgid "Do you want to load it?"
+msgstr ""
+
+#: u_translation.rsdoyouwanttom
+msgid "Do you want to move the chart there?"
+msgstr ""
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -2004,11 +2044,15 @@ msgstr "Para un catálogo grande seleccione siempre Binario. Para un conjunto de
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
+msgstr "Forzar EqSys"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
 msgstr "Formulario siempre visible"
+
+#: u_translation.rsformoreinfor
+msgid "For more information, see :"
+msgstr ""
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2521,6 +2565,14 @@ msgstr "Júpiter"
 #: u_translation.rsjupitergrslo
 msgid "Jupiter GRS longitude:"
 msgstr "Longitud GMR de Júpiter:"
+
+#: u_translation.rskeepimageson
+msgid "Keep images on exit for later use"
+msgstr ""
+
+#: u_translation.rskeeptableson
+msgid "Keep tables on exit for later use"
+msgstr ""
 
 #: u_translation.rskm
 msgid "Km."
@@ -3982,6 +4034,18 @@ msgstr "RealSky Sur"
 msgid "Real time options"
 msgstr "Opciones de tiempo real"
 
+#: u_translation.rsreceivecoord
+msgid "Receive coordinates from other applications"
+msgstr ""
+
+#: u_translation.rsreceivefitsi
+msgid "Receive FITS images from other applications"
+msgstr ""
+
+#: u_translation.rsreceivevotab
+msgid "Receive VO table data from other applications"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
 msgstr "Reconocer unidades o tipo de objeto del archivo:"
@@ -4206,6 +4270,18 @@ msgstr "Rotación"
 msgid "Rows"
 msgstr "Filas"
 
+#: u_translation.rssampconfirma
+msgid "SAMP Confirmation"
+msgstr ""
+
+#: u_translation.rssampisamessa
+msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
+msgstr ""
+
+#: u_translation.rssampstatus
+msgid "SAMP Status"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Saros"
@@ -4401,6 +4477,14 @@ msgstr "Eje semimayor"
 #: u_translation.rssendcharttop
 msgid "Send the chart to the printer."
 msgstr "Enviar carta a la impresora."
+
+#: u_translation.rssendimageto
+msgid "Send image to"
+msgstr ""
+
+#: u_translation.rssendtableto
+msgid "Send table to"
+msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -5226,6 +5310,10 @@ msgstr "Solar verdadera"
 msgid "Trumpler class"
 msgstr "Clase Trumpler"
 
+#: u_translation.rstrytoautocon
+msgid "Try to auto-connect to a SAMP hub when the program start"
+msgstr ""
+
 #: u_translation.rsttut
 msgid "TT - UT: "
 msgstr "TT - UT: "
@@ -5493,6 +5581,10 @@ msgstr "Catálogo OV"
 #: u_translation.rsvocatalogbro
 msgid "VO Catalog Browser"
 msgstr "Navegador Catálogo OV"
+
+#: u_translation.rsvosampsettin
+msgid "VO SAMP settings"
+msgstr ""
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"
