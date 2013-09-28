@@ -247,13 +247,13 @@ implementation
 
 procedure Tf_config_system.SetLang;
 begin
-Caption:=rsSystem;
-Page1.caption:=rsSystem;
+Caption:=rsGeneral;
+Page1.caption:=rsGeneral;
 Page2.caption:=rsServer;
 Page3.caption:=rsTelescope;
 Page4.caption:=rsLanguage2;
 Page5.Caption:='SAMP';
-Label153.caption:=rsSystemSettin;
+Label153.caption:=rsGeneralSetti;
 MysqlBoxLabel.caption:=rsMySQLDatabas;
 Label77.caption:=rsDBName;
 Label84.caption:=rsHostName;

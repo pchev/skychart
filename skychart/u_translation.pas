@@ -522,7 +522,6 @@ resourcestring
   rsObject = 'Object';
   rsBackground = 'Background';
   rsDSSRealSky = 'DSS RealSky';
-  rsSystem = 'System';
   rsServer = 'Server';
   rsInternet = 'Internet';
   rsProxy = 'Proxy';
@@ -779,7 +778,6 @@ resourcestring
   rsToUseThisNew = 'Before you can use the new orbital elements, you must compute the monthly data.';
   rsNoAsteroidDa = 'No asteroids data found!%sPlease load a MPC file first.';
   rsYouAreNowRea = 'You are now ready to display the asteroid for this time period.';
-  rsSystemSettin = 'System settings';
   rsMySQLDatabas = 'MySQL database';
   rsDBName = 'DB Name:';
   rsHostName = 'Hostname:';

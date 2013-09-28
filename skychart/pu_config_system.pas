@@ -57,7 +57,7 @@ implementation
 
 procedure Tf_configsystem.SetLang;
 begin
-Caption:=rsSystem;
+Caption:=rsGeneral;
 Button1.caption:=rsOK;
 Button2.caption:=rsApply;
 Button3.caption:=rsCancel;
