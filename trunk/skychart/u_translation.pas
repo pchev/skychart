@@ -1433,6 +1433,29 @@ resourcestring
   rsForceEqSys = 'Force EqSys';
   rsBrightest = 'Brightest';
   rsAllSAMPClien = 'All SAMP clients';
+  rsSAMPConfirma = 'SAMP Confirmation';
+  rsASAMPApplica = 'A SAMP application send a table to load';
+  rsASAMPApplica2 = 'A SAMP application send an image to load';
+  rsASAMPApplica3 = 'A SAMP application send coordinates location';
+  rsDoYouWantToL = 'Do you want to load it?';
+  rsDoYouWantToM = 'Do you want to move the chart there?';
+  rsSAMPStatus = 'SAMP Status';
+  rsClientList = 'Client list';
+  rsSAMPIsAMessa = 'SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate'
+    +'.%sSkychart can send and receive coordinates position, FITS images and VO tables.';
+  rsVOSAMPSettin = 'VO SAMP settings';
+  rsForMoreInfor = 'For more information, see :';
+  rsAskForConfir = 'Ask for confirmation before to jump to coordinates';
+  rsAskForConfir2 = 'Ask for confirmation before to load the image';
+  rsAskForConfir3 = 'Ask for confirmation before to load the table';
+  rsReceiveCoord = 'Receive coordinates from other applications';
+  rsReceiveFITSI = 'Receive FITS images from other applications';
+  rsReceiveVOTab = 'Receive VO table data from other applications';
+  rsTryToAutoCon = 'Try to auto-connect to a SAMP hub when the program start';
+  rsKeepTablesOn = 'Keep tables on exit for later use';
+  rsKeepImagesOn = 'Keep images on exit for later use';
+  rsSendTableTo = 'Send table to';
+  rsSendImageTo = 'Send image to';
 
 implementation
 

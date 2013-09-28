@@ -374,6 +374,8 @@ const
   URL_MPCORBAsteroidElements2 = '**';
   URL_CDCAsteroidElements = 'http://www.ap-i.net/pub/skychart/mpc/mpc5000.dat';
 
+  URL_IVOASAMP = 'http://www.ivoa.net/documents/SAMP/';
+
   URL_DSS_NAME1 = 'DSS 1';
   URL_DSS1 =
     'http://archive.eso.org/dss/dss/image?ra=$RAH+$RAM+$RAS&dec=+$DED+$DEM+$DES&equinox=J2000&x=$XSZ&y=$YSZ&Sky-Survey=DSS1&mime-type=display/gz-fits';

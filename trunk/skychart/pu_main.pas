@@ -32,10 +32,10 @@ uses
   {$ifdef mswindows}
     Windows, ShlObj, Registry,
   {$endif}
-  lclstrconsts, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
+  lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, XMLConf,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -8245,15 +8245,15 @@ procedure Tf_main.MenuItem37Click(Sender: TObject);
 var buf: string;
     i: integer;
 begin
-buf:='SAMP Status: ';
+buf:=rsSAMPStatus+':'+blank;
 if SampConnected then begin
-  buf:=buf+'Connected'+crlf;
-  buf:=buf+'Client list:'+crlf;
+  buf:=buf+rsConnected+crlf;
+  buf:=buf+rsClientList+':'+crlf;
   for i:=0 to samp.Clients.Count-1 do begin
     buf:=buf+' - '+samp.ClientNames[i]+', '+samp.ClientDesc[i]+crlf;
   end;
 end else begin
-  buf:=buf+'Disconnected'+crlf;
+  buf:=buf+rsDiconnected+crlf;
 end;
 ShowMessage(buf);
 end;
@@ -8406,8 +8406,8 @@ procedure Tf_main.SAMPcoordpointAtsky(ra,dec:double);
 var cname:string; arg:Tstringlist;
 begin
  if cfgm.SampConfirmCoord then begin
-   if MessageDlg('SAMP Confirmation',
-      'A SAMP request is made to move to coordinates:'+crlf+'RA:'+ARToStr(ra/15)+' DEC:'+DEToStr(dec),
+   if MessageDlg(rsSAMPConfirma,
+      rsASAMPApplica3+':'+crlf+rsRA+':'+ARToStr(ra/15)+blank+rsDEC+':'+DEToStr(dec)+crlf+rsDoYouWantToM,
       mtConfirmation, [mbYes, mbNo], 0) = mrNo
       then exit;
  end;
@@ -8432,8 +8432,8 @@ var cname,fn:string;
     i:integer;
 begin
 if cfgm.SampConfirmImage then begin
-   if MessageDlg('SAMP Confirmation',
-      'A SAMP request is made to load the image:'+crlf+image_name,
+   if MessageDlg(rsSAMPConfirma,
+      rsASAMPApplica2+':'+crlf+image_name+crlf+rsDoYouWantToL,
       mtConfirmation, [mbYes, mbNo], 0) = mrNo
       then exit;
 end;
@@ -8459,8 +8459,8 @@ var fn,cfn,buf: string;
     config: TXMLConfig;
 begin
 if cfgm.SampConfirmTable then begin
-   if MessageDlg('SAMP Confirmation',
-      'A SAMP request is made to load the table:'+crlf+table_name,
+   if MessageDlg(rsSAMPConfirma,
+      rsASAMPApplica+':'+crlf+table_name+crlf+rsDoYouWantToL,
       mtConfirmation, [mbYes, mbNo], 0) = mrNo
       then exit;
 end;

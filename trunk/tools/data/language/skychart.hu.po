@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-08 15:46+0000\n"
-"PO-Revision-Date: 2013-07-21 05:56+0000\n"
+"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"PO-Revision-Date: 2013-09-22 05:28+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-08 15:57+0000\n"
-"X-Generator: Launchpad (build 16760)\n"
+"X-Launchpad-Export-Date: 2013-09-28 11:56+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -188,6 +188,10 @@ msgstr "Minden beállítás"
 msgid "All the objects at this position"
 msgstr "Minden objektum ebben a pozícióban"
 
+#: u_translation.rsallsampclien
+msgid "All SAMP clients"
+msgstr ""
+
 #: u_translation.rsalltablesstr
 #| msgid "%sAll tables structure exists."
 msgid "%sAll table structures exist."
@@ -304,6 +308,18 @@ msgstr "Műholdak"
 msgid "Artificial satellite"
 msgstr "Műhold"
 
+#: u_translation.rsasampapplica
+msgid "A SAMP application send a table to load"
+msgstr ""
+
+#: u_translation.rsasampapplica2
+msgid "A SAMP application send an image to load"
+msgstr ""
+
+#: u_translation.rsasampapplica3
+msgid "A SAMP application send coordinates location"
+msgstr ""
+
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
 msgstr "ASCOM telescope interface"
@@ -311,6 +327,18 @@ msgstr "ASCOM telescope interface"
 #: u_translation.rsaskconfirmat
 msgid "Ask confirmation before any Internet connection"
 msgstr "Megerősítés kérése internet kapcsolat létesítése esetén"
+
+#: u_translation.rsaskforconfir
+msgid "Ask for confirmation before to jump to coordinates"
+msgstr ""
+
+#: u_translation.rsaskforconfir2
+msgid "Ask for confirmation before to load the image"
+msgstr ""
+
+#: u_translation.rsaskforconfir3
+msgid "Ask for confirmation before to load the table"
+msgstr ""
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -793,6 +821,10 @@ msgstr "Szín megváltoztatása "
 msgid "Client connection keep alive"
 msgstr "Kliens kapcsolatok fenntartása"
 
+#: u_translation.rsclientlist
+msgid "Client list"
+msgstr ""
+
 #: u_translation.rsclock
 msgid "Clock"
 msgstr "Óra"
@@ -1077,7 +1109,7 @@ msgstr "A könyvtár betöltése nem lehetséges "
 
 #: u_translation.rscount
 msgid "Count"
-msgstr ""
+msgstr "Darabszám"
 
 #: u_translation.rscountrytimez
 #| msgid "Country Timezone"
@@ -1139,7 +1171,7 @@ msgstr "Sötétköd"
 
 #: u_translation.rsdarknight
 msgid "Dark night"
-msgstr ""
+msgstr "Sötét éjszaka"
 
 #: u_translation.rsdash1
 msgid "Dash"
@@ -1590,7 +1622,7 @@ msgstr ""
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
-msgstr ""
+msgstr "A Messier objektumokat ne szűrje"
 
 #: u_translation.rsdot1
 msgid "Dot"
@@ -1615,7 +1647,7 @@ msgstr "Letöltés %s"
 
 #: u_translation.rsdownloadarch
 msgid "Download archive"
-msgstr ""
+msgstr "Archívum letöltése"
 
 #: u_translation.rsdownloadcata
 msgid "Download catalog"
@@ -1641,6 +1673,14 @@ msgstr "Legfrissebb pályaelemek letöltése"
 msgid "Download TLE"
 msgstr "TLE letöltése"
 
+#: u_translation.rsdoyouwanttol
+msgid "Do you want to load it?"
+msgstr ""
+
+#: u_translation.rsdoyouwanttom
+msgid "Do you want to move the chart there?"
+msgstr ""
+
 #: u_translation.rsdoyouwanttos
 #| msgid "Do you want to save the program setting now?"
 msgid "Do you want to save the program settings now?"
@@ -1657,7 +1697,7 @@ msgstr ""
 
 #: u_translation.rsdrawasstar
 msgid "Draw as star"
-msgstr ""
+msgstr "Rajzolás csillagként"
 
 #: u_translation.rsdrawingtype
 #| msgid "Drawing Type"
@@ -1792,7 +1832,7 @@ msgstr "Enkóder"
 
 #: u_translation.rsend
 msgid "End"
-msgstr ""
+msgstr "Befejezés"
 
 #: u_translation.rsendofobject
 msgid "End of object"
@@ -1877,7 +1917,7 @@ msgstr "%sHiba a táblázat készítésekor %s"
 
 #: u_translation.rserrorfilenot
 msgid "Error, file not downloaded:"
-msgstr ""
+msgstr "Hiba, a fájl nem töltődött le:"
 
 #: u_translation.rserroropening
 msgid "Error opening %s"
@@ -2133,6 +2173,10 @@ msgstr ""
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
+msgstr ""
+
+#: u_translation.rsformoreinfor
+msgid "For more information, see :"
 msgstr ""
 
 #: u_translation.rsfov
@@ -2394,7 +2438,7 @@ msgstr ""
 
 #: u_translation.rshighquality
 msgid "High quality"
-msgstr ""
+msgstr "Magas minőség"
 
 #: u_translation.rshighsurfaceb
 msgid "High surface brightness"
@@ -2469,7 +2513,7 @@ msgstr "Megvilágított hányad"
 
 #: u_translation.rsimagearchive
 msgid "Image archive"
-msgstr ""
+msgstr "Képarchívum"
 
 #: u_translation.rsimagedirecto
 #| msgid "Image Directory"
@@ -2687,6 +2731,14 @@ msgstr "Jupiter"
 msgid "Jupiter GRS longitude:"
 msgstr "Jupiter \"VörösFolt\" hosszúsága:"
 
+#: u_translation.rskeepimageson
+msgid "Keep images on exit for later use"
+msgstr ""
+
+#: u_translation.rskeeptableson
+msgid "Keep tables on exit for later use"
+msgstr ""
+
 #: u_translation.rskm
 msgid "Km."
 msgstr "Km."
@@ -2822,7 +2874,7 @@ msgstr "Vonal"
 
 #: u_translation.rslinear
 msgid "Linear"
-msgstr ""
+msgstr "Lineáris"
 
 #: u_translation.rslinemode
 msgid "Line mode"
@@ -3058,7 +3110,7 @@ msgstr "Maximum magnitúdó"
 
 #: u_translation.rsmaximumnumbe
 msgid "Maximum number of image to show simultaneously"
-msgstr ""
+msgstr "Ennyi kép mutatása egyszerre"
 
 #: u_translation.rsmaximumrows
 msgid "Maximum rows"
@@ -4233,6 +4285,18 @@ msgstr "RealSky South"
 msgid "Real time options"
 msgstr "Valósidejű opciók"
 
+#: u_translation.rsreceivecoord
+msgid "Receive coordinates from other applications"
+msgstr ""
+
+#: u_translation.rsreceivefitsi
+msgid "Receive FITS images from other applications"
+msgstr ""
+
+#: u_translation.rsreceivevotab
+msgid "Receive VO table data from other applications"
+msgstr ""
+
 #: u_translation.rsrecognizeuni
 #| msgid "Recognize Units or Object type from the file:"
 msgid "Recognize units or object type from the file:"
@@ -4469,6 +4533,18 @@ msgstr "Forgatás"
 msgid "Rows"
 msgstr "Sorok"
 
+#: u_translation.rssampconfirma
+msgid "SAMP Confirmation"
+msgstr ""
+
+#: u_translation.rssampisamessa
+msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
+msgstr ""
+
+#: u_translation.rssampstatus
+msgid "SAMP Status"
+msgstr ""
+
 #: u_translation.rssaros
 msgid "Saros"
 msgstr "Szárosz"
@@ -4537,7 +4613,7 @@ msgstr "Mentés fájlba"
 
 #: u_translation.rsscaled
 msgid "Scaled"
-msgstr ""
+msgstr "Skálázott"
 
 #: u_translation.rsscanarchives
 msgid "Scan archives"
@@ -4639,7 +4715,7 @@ msgstr "Tükörszerver választása"
 
 #: u_translation.rsselectplatef
 msgid "Select a plate from the list"
-msgstr ""
+msgstr "Válasszon lemezt a listából"
 
 #: u_translation.rsselectrectan
 msgid "Select Rectangle"
@@ -4675,6 +4751,14 @@ msgstr "Fél nagytengely - a"
 #| msgid "Send chart to printer."
 msgid "Send the chart to the printer."
 msgstr "Térkép a nyomtatóra"
+
+#: u_translation.rssendimageto
+msgid "Send image to"
+msgstr ""
+
+#: u_translation.rssendtableto
+msgid "Send table to"
+msgstr ""
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4942,7 +5026,7 @@ msgstr "Csillagok mutatása"
 
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
-msgstr ""
+msgstr "Képek mutatása a térképen"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5135,7 +5219,7 @@ msgstr "SQLite adatbázis"
 
 #: u_translation.rssqrt
 msgid "Sqrt"
-msgstr ""
+msgstr "Négyzetgyök"
 
 #: u_translation.rssquare
 msgid "Square"
@@ -5198,11 +5282,11 @@ msgstr "Csillagok sajátmozgása opció (ha rendelkezésre áll a katalógusban)
 
 #: u_translation.rsstart
 msgid "Start"
-msgstr ""
+msgstr "Indítás"
 
 #: u_translation.rsstartgraphat
 msgid "Start graph at local noon"
-msgstr ""
+msgstr "Kezdés délben"
 
 #: u_translation.rsstartmonth
 #| msgid "Start Month"
@@ -5572,6 +5656,10 @@ msgstr "Valódi szoláris"
 msgid "Trumpler class"
 msgstr "Trumpler osztály"
 
+#: u_translation.rstrytoautocon
+msgid "Try to auto-connect to a SAMP hub when the program start"
+msgstr ""
+
 #: u_translation.rsttut
 msgid "TT - UT: "
 msgstr "TT-UT: "
@@ -5697,7 +5785,7 @@ msgstr "Előre beállított szín séma:"
 
 #: u_translation.rsuseasimplepo
 msgid "Use a simple pointer"
-msgstr ""
+msgstr "Egyszerű mutató"
 
 #: u_translation.rsusefultorepr
 msgid "(useful to represent a flux)"
@@ -5855,6 +5943,10 @@ msgstr ""
 msgid "VO Catalog Browser"
 msgstr ""
 
+#: u_translation.rsvosampsettin
+msgid "VO SAMP settings"
+msgstr ""
+
 #: u_translation.rswanttotracka
 #| msgid "Want to track an object before it rise ?"
 msgid "Do you want to track an object before it rises?"
@@ -5989,7 +6081,7 @@ msgstr "Nagyítás be"
 
 #: u_translation.rszoommoretovi
 msgid "Zoom more to view the object"
-msgstr ""
+msgstr "Közelítés az objektumhoz"
 
 #: u_translation.rszoomout
 #| msgid "Zoom Out"
