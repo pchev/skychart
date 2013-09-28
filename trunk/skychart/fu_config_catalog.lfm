@@ -6,8 +6,8 @@ object f_config_catalog: Tf_config_catalog
   ClientHeight = 521
   ClientWidth = 499
   TabOrder = 0
-  DesignLeft = 246
-  DesignTop = 394
+  DesignLeft = 935
+  DesignTop = 425
   object MainPanel: TPanel
     Left = 0
     Height = 521
@@ -23,10 +23,10 @@ object f_config_catalog: Tf_config_catalog
       Height = 465
       Top = 1
       Width = 497
-      ActivePage = Page1a
+      ActivePage = Page3
       Align = alClient
       ShowTabs = False
-      TabIndex = 3
+      TabIndex = 1
       TabOrder = 1
       object Page2: TTabSheet
         Caption = 'CdC Stars'
@@ -353,7 +353,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 9
           Height = 16
           Top = 7
-          Width = 183
+          Width = 166
           Caption = 'CDC Nebulae Catalog Setting'
           ParentColor = False
         end
@@ -361,7 +361,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 279
           Height = 16
           Top = 0
-          Width = 81
+          Width = 74
           Alignment = taRightJustify
           Caption = 'Field number'
           ParentColor = False
@@ -370,7 +370,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 279
           Height = 16
           Top = 16
-          Width = 27
+          Width = 25
           Caption = ' min'
           ParentColor = False
         end
@@ -378,7 +378,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 319
           Height = 16
           Top = 16
-          Width = 30
+          Width = 27
           Caption = ' max'
           ParentColor = False
         end
@@ -386,7 +386,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 361
           Height = 16
           Top = 16
-          Width = 60
+          Width = 55
           Caption = 'Files Path'
           ParentColor = False
         end
@@ -394,7 +394,7 @@ object f_config_catalog: Tf_config_catalog
           Left = 9
           Height = 16
           Top = 389
-          Width = 392
+          Width = 354
           Alignment = taCenter
           Caption = 'Use only catalog from one of the three block at the same time'
           ParentColor = False
@@ -423,17 +423,17 @@ object f_config_catalog: Tf_config_catalog
             Left = 9
             Height = 16
             Top = 19
-            Width = 46
+            Width = 44
             Caption = 'Default'
             ParentColor = False
           end
           object SACbox: TCheckBox
             Tag = 1
             Left = 92
-            Height = 21
+            Height = 23
             Hint = 'Saguaro Astronomy Club Database  8.1'
             Top = 16
-            Width = 51
+            Width = 49
             HelpContext = 107
             Caption = 'SAC '
             OnClick = CDCNebSelClick
@@ -496,17 +496,17 @@ object f_config_catalog: Tf_config_catalog
             Left = 9
             Height = 16
             Top = 14
-            Width = 50
+            Width = 44
             Caption = 'General'
             ParentColor = False
           end
           object NGCbox: TCheckBox
             Tag = 2
             Left = 92
-            Height = 21
+            Height = 23
             Hint = 'New General Catalogue of Nebulae and Cluster of Stars (Dreyer 1888) (Sky Pub. Corp. 1988)'
             Top = 11
-            Width = 154
+            Width = 142
             HelpContext = 107
             Caption = 'New General Catalog'
             OnClick = CDCNebSelClick
@@ -618,10 +618,10 @@ object f_config_catalog: Tf_config_catalog
           object OCLbox: TCheckBox
             Tag = 6
             Left = 93
-            Height = 21
+            Height = 23
             Hint = 'Open Cluster Data 5th Edition    (Lynga 1987)'
             Top = 105
-            Width = 138
+            Width = 130
             HelpContext = 110
             Caption = 'Open Cluster Data'
             OnClick = CDCNebSelClick
@@ -632,10 +632,10 @@ object f_config_catalog: Tf_config_catalog
           object GCMbox: TCheckBox
             Tag = 7
             Left = 93
-            Height = 21
+            Height = 23
             Hint = 'Globular Clusters in the Milky Way (Harris, 1997)'
             Top = 153
-            Width = 195
+            Width = 179
             HelpContext = 111
             Caption = 'Globular Cl. in the Milky Way'
             OnClick = CDCNebSelClick
@@ -646,10 +646,10 @@ object f_config_catalog: Tf_config_catalog
           object GPNbox: TCheckBox
             Tag = 8
             Left = 93
-            Height = 21
+            Height = 23
             Hint = 'Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)'
             Top = 201
-            Width = 202
+            Width = 184
             HelpContext = 112
             Caption = 'Cat, Galactic Planetary Neb. '
             OnClick = CDCNebSelClick
@@ -660,10 +660,10 @@ object f_config_catalog: Tf_config_catalog
           object LBNbox: TCheckBox
             Tag = 3
             Left = 93
-            Height = 21
+            Height = 23
             Hint = 'Lynds'' Catalogue of Bright Nebulae    (Lynds 1965)'
             Top = 9
-            Width = 154
+            Width = 144
             HelpContext = 108
             Caption = 'Lynds Bright Nebulae'
             OnClick = CDCNebSelClick
@@ -674,10 +674,10 @@ object f_config_catalog: Tf_config_catalog
           object PGCBox: TCheckBox
             Tag = 5
             Left = 93
-            Height = 21
+            Height = 23
             Hint = 'PGC/LEDA  (Paturel+ 2009)'
             Top = 58
-            Width = 91
+            Width = 88
             HelpContext = 116
             Caption = 'PGC / LEDA'
             OnClick = CDCNebSelClick
