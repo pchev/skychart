@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"POT-Creation-Date: 2013-09-28 12:43+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: u_translation.rs102cddss
@@ -954,6 +954,10 @@ msgstr "Σύνδεση Τηλεσκοπίου"
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr "Η σύνδεση στο %s, %s απέτυχε! %sΕπιβεβαιώστε αν ο server MySQL τρέχει και ελέγξτε όνομα και κωδικό χρήστη."
 
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr ""
+
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
 msgstr "Σύνδεση σε %s, %s επιτυχής.%s"
@@ -1491,6 +1495,10 @@ msgstr "Δε βρέθηκε ο κατάλογος. Παρακαλώ εγκατα
 #: u_translation.rsdisconnect
 msgid "Disconnect"
 msgstr "Αποσύνδεση"
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
+msgstr ""
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -4336,8 +4344,12 @@ msgstr ""
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr ""
+
 #: u_translation.rssampstatus
-msgid "SAMP Status"
+msgid "SAMP status"
 msgstr ""
 
 #: u_translation.rssaros

@@ -1439,7 +1439,7 @@ resourcestring
   rsASAMPApplica3 = 'A SAMP application send coordinates location';
   rsDoYouWantToL = 'Do you want to load it?';
   rsDoYouWantToM = 'Do you want to move the chart there?';
-  rsSAMPStatus = 'SAMP Status';
+  rsSAMPStatus = 'SAMP status';
   rsClientList = 'Client list';
   rsSAMPIsAMessa = 'SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate'
     +'.%sSkychart can send and receive coordinates position, FITS images and VO tables.';
@@ -1456,6 +1456,9 @@ resourcestring
   rsKeepImagesOn = 'Keep images on exit for later use';
   rsSendTableTo = 'Send table to';
   rsSendImageTo = 'Send image to';
+  rsSAMPSetup = 'SAMP setup';
+  rsConnectToSAM = 'Connect to SAMP hub';
+  rsDisconnectFr = 'Disconnect from SAMP';
 
 implementation
 

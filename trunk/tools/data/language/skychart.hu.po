@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"POT-Creation-Date: 2013-09-28 12:43+0000\n"
 "PO-Revision-Date: 2013-09-22 05:28+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 11:56+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 
 #: u_translation.rs102cddss
@@ -997,6 +997,10 @@ msgstr "Vezérlőpult"
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr "Kapcsolódás %s-hoz, %s sikertelen! %s Ellenőrizd hogy a MySQL szerver üzemel, valamint a felhasználónevet és jelszót."
 
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr ""
+
 #: u_translation.rsconnecttosuc
 #| msgid "Connect to %s, %s successful.%s"
 msgid "Connection to %s, %s successful.%s"
@@ -1556,6 +1560,10 @@ msgstr "A könyvtár nem található! installáld a Skychart Pictures csomagot."
 #: u_translation.rsdisconnect
 msgid "Disconnect"
 msgstr "A kapcsolat bontása"
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
+msgstr ""
 
 #: u_translation.rsdisconnectte
 #| msgid "Disconnect Telescope"
@@ -4541,8 +4549,12 @@ msgstr ""
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr ""
+
 #: u_translation.rssampstatus
-msgid "SAMP Status"
+msgid "SAMP status"
 msgstr ""
 
 #: u_translation.rssaros

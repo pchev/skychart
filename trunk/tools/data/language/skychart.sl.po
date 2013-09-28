@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 11:36+0000\n"
+"POT-Creation-Date: 2013-09-28 12:43+0000\n"
 "PO-Revision-Date: 2012-03-10 15:25+0000\n"
 "Last-Translator: grofaty <Unknown>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 11:57+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 "Language: en_US\n"
 
@@ -937,6 +937,10 @@ msgstr "Priključi teleskop"
 msgid "Connection to %s, %s failed! %sVerify if the MySQL server is running, and control the userid/password."
 msgstr "Povezava do %s, %s je spodletela! %sPreveri ali MySQL strežnič teče in preveri uporabniško ime / geslo"
 
+#: u_translation.rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr ""
+
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
 msgstr "Prijava %s, %s uspešna.%s"
@@ -1460,6 +1464,10 @@ msgstr "Mape ni mogoče najti! Prosim namestite SkyChart Picture paket."
 #: u_translation.rsdisconnect
 msgid "Disconnect"
 msgstr "Odjavi"
+
+#: u_translation.rsdisconnectfr
+msgid "Disconnect from SAMP"
+msgstr ""
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -4277,8 +4285,12 @@ msgstr ""
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
 msgstr ""
 
+#: u_translation.rssampsetup
+msgid "SAMP setup"
+msgstr ""
+
 #: u_translation.rssampstatus
-msgid "SAMP Status"
+msgid "SAMP status"
 msgstr ""
 
 #: u_translation.rssaros

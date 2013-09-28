@@ -5639,7 +5639,7 @@ msgid "Do you want to move the chart there?"
 msgstr ""
 
 #: u_translation:rssampstatus
-msgid "SAMP Status"
+msgid "SAMP status"
 msgstr ""
 
 #: u_translation:rsclientlist
@@ -5700,5 +5700,17 @@ msgstr ""
 
 #: u_translation:rssendimageto
 msgid "Send image to"
+msgstr ""
+
+#: u_translation:rssampsetup
+msgid "SAMP setup"
+msgstr ""
+
+#: u_translation:rsconnecttosam
+msgid "Connect to SAMP hub"
+msgstr ""
+
+#: u_translation:rsdisconnectfr
+msgid "Disconnect from SAMP"
 msgstr ""
 
