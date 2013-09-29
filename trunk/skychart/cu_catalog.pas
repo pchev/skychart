@@ -1492,6 +1492,7 @@ repeat
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if not rec.neb.valid[vnDim1] then rec.neb.dim1:=rec.options.Size;
   if cfgshr.NebFilter and
+     (not rec.neb.valid[vnDim1] and (rec.neb.dim1<>0)) and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
   if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
