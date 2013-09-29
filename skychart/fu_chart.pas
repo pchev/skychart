@@ -2058,9 +2058,6 @@ if result and showdist then begin
    end;
 end;
 if sc.cfgsc.TrackOn then begin
-//  sc.cfgsc.FindRA:=lastra;
-//  sc.cfgsc.FindDEC:=lastdec;
-//  sc.cfgsc.FindName:=lastname;
   sc.cfgsc.TrackRA:=lasttrra;
   sc.cfgsc.TrackDEC:=lasttrde;
   sc.cfgsc.TrackType:=lasttype;

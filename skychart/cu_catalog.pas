@@ -3151,7 +3151,7 @@ repeat
     end;
     if not found then continue;
   end;
-  if SampConnected and(cat=voneb)and(pos('vo_samp',vocat.catname)=1) then begin
+  if SampConnected and(cat=voneb) then begin
      cfgcat.SampFindTable:=vocat.SAMPid;
      cfgcat.SampFindURL:=vocat.SAMPurl;
      cfgcat.SampFindRec:=vocat.VOcatrec;
