@@ -4,8 +4,8 @@ unit cu_sampclient;
 
 interface
 
-uses cu_sampserver, ExtCtrls,
-  Classes, SysUtils,FileUtil,HTTPSend, synautil, XMLRead, DOM, XMLUtils;
+uses cu_sampserver, ExtCtrls, LibXmlParser, LibXmlComps, Math,
+  Classes, SysUtils,FileUtil,HTTPSend, synautil;
 
 type
 
@@ -32,6 +32,7 @@ TSampClient = class(TObject)
     Ferrortext: string;
     FClients,FClientNames,FClientDesc: Tstringlist;
     FClientSubscriptions: TSubscriptionsList;
+    FClientSubscriptionsPos: integer;
     FcoordpointAtsky: TcoordpointAtsky;
     FImageLoadFits: TImageLoadFits;
     FTableLoadVotable: TTableLoadVotable;
@@ -42,16 +43,24 @@ TSampClient = class(TObject)
     FLockTableSelectRow: boolean;
     SampAsyncEvent:TSampAsyncEvent;
     SampAsyncP1,SampAsyncP2,SampAsyncP3: string;
+    methodResponse,xfault,xparams,xparam,xarray,xdata,xarrayvalue,xmember,xparamn,xparamv: boolean;
+    xparamname,xmethodname:string;
+    methodCall,cmethodn,creceiveCall,creceiveNotification,cparams,cparam,cparamdata,cvalue,cmember,cparamn,cparamv,cparamarray : boolean;
+    cmethodName,key,sender_id,msg_id,cparamname,cmtype,cname,ctable_id,cimage_id,curl,crow,cra,cdec: string;
+    crowlist:TStringList;
+    cparampos: integer;
     SampAsyncTimer: TTimer;
     aHTTP: THTTPSend;
-    Doc: TXMLDocument;
+    XmlScanner: TEasyXmlScanner;
     HttpServer:TTCPHttpDaemon;
+    procedure InitScanner;
+    procedure XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
+    procedure XmlContent(Sender: TObject; Content: String);
+    procedure XmlEndTag(Sender: TObject; TagName: String);
+    procedure XmlLoadExternal(Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : TXmlParser);
     procedure SampAsyncTimerTimer(Sender: TObject);
     procedure StartHTTPServer;
     procedure StopHTTPServer;
-    function FindNodeName(StartNode:TDOMNode; ANodeName: string): TDOMNode;
-    function FindItem(StartNode:TDOMNode; ItemName: string): TDOMNode;
-    function CheckResponse(response: TMemoryStream): boolean;
     function doRpcCall(p: string):boolean;
     function SampCall(m,p: string):boolean;overload;
     function SampCall(m,p1,p2: string):boolean;overload;
@@ -113,10 +122,16 @@ begin
   FClients:=Tstringlist.Create;
   FClientNames:=Tstringlist.Create;
   FClientDesc:=Tstringlist.Create;
+  crowlist:=TStringList.Create;
   SampAsyncTimer:=TTimer.Create(nil);
   SampAsyncTimer.Enabled:=false;
   SampAsyncTimer.Interval:=500;
   SampAsyncTimer.OnTimer:=@SampAsyncTimerTimer;
+  XmlScanner:=TEasyXmlScanner.Create(nil);
+  XmlScanner.OnStartTag:=@XmlStartTag;
+  XmlScanner.OnContent:=@XmlContent;
+  XmlScanner.OnEndTag:=@XmlEndTag;
+  XmlScanner.OnLoadExternal:=@XmlLoadExternal;
   StartHTTPServer;
 end;
 
@@ -126,7 +141,9 @@ begin
   FClients.Free;
   FClientNames.Free;
   FClientDesc.Free;
+  crowlist.Free;
   SampAsyncTimer.Free;
+  XmlScanner.Free;
   inherited Destroy;
 end;
 
@@ -142,21 +159,44 @@ begin
  sleep(500);
 end;
 
+procedure TSampClient.InitScanner;
+begin
+methodCall:=false; cmethodn:=false; creceiveCall:=false; creceiveNotification:=false; cparams:=false;
+cparam:=false; cparamdata:=false; cvalue:=false; cmember:=false; cparamn:=false; cparamv:=false; cparamarray:=false;
+methodResponse:=false; xfault:=false; xparams:=false; xarray:=false; xdata:=false; xarrayvalue:=false;
+xparam:=false; xmember:=false; xparamn:=false; xparamv:=false;
+xparamname:=''; SampAsyncP1:=''; SampAsyncP2:=''; SampAsyncP3:='';
+cmethodName:=''; key:=''; sender_id:=''; msg_id:=''; cparamname:=''; cmtype:=''; cname:='';
+ctable_id:=''; cimage_id:=''; curl:=''; crow:=''; cra:=''; cdec:='';
+crowlist.Clear;
+cparampos:=0;
+end;
+
 function TSampClient.doRpcCall(p:string):boolean;
+var buf:array [0..8192] of char;
+    i: integer;
 begin
   aHTTP.Clear;
   WriteStrToStream(aHTTP.Document, p);
   aHTTP.MimeType := 'application/xml';
   aHTTP.HTTPMethod('POST', samp_hub_xmlrpc_url);
-  result:=CheckResponse(aHTTP.Document);
+  InitScanner;
+  i:=min(aHTTP.Document.Size,SizeOf(buf));
+  FillByte(buf,SizeOf(buf),0);
+  aHTTP.Document.Position:=0;
+  aHTTP.Document.Read(buf,i);
+  XmlScanner.LoadFromBuffer(@buf);
+  XmlScanner.Execute;
+  result:=(Ferrorcode=0);
 end;
 
 function TSampClient.SampReply(mid:string;map:Tmap):boolean;
 var i: integer;
     cmd: string;
 begin
+  xmethodname:='samp.hub.reply';
   cmd:='<methodCall>'+
-           '<methodName>samp.hub.reply</methodName>'+
+           '<methodName>'+xmethodname+'</methodName>'+
            '<params>'+
               '<param><value>'+samp_private_key+'</value></param>'+
               '<param><value>'+mid+'</value></param>'+
@@ -175,6 +215,7 @@ end;
 
 function TSampClient.SampCall(m,p: string):boolean;overload;
 begin
+  xmethodname:=m;
   result:=doRpcCall('<methodCall>'+
              '<methodName>'+m+'</methodName>'+
              '<params>'+
@@ -185,6 +226,7 @@ end;
 
 function TSampClient.SampCall(m,p1,p2: string):boolean;overload;
 begin
+  xmethodname:=m;
   result:=doRpcCall('<methodCall>'+
              '<methodName>'+m+'</methodName>'+
              '<params>'+
@@ -198,6 +240,7 @@ function TSampClient.SampCall(m,p: string; map:Tmap):boolean;overload;
 var i: integer;
     cmd: string;
 begin
+  xmethodname:=m;
   cmd:='<methodCall>'+
              '<methodName>'+m+'</methodName>'+
              '<params>'+
@@ -219,6 +262,7 @@ function TSampClient.SampCall(m,p,mt: string; map:Tmap):boolean;overload;
 var i: integer;
     cmd: string;
 begin
+  xmethodname:=m;
   cmd:='<methodCall>'+
              '<methodName>'+m+'</methodName>'+
              '<params>'+
@@ -249,6 +293,7 @@ function TSampClient.SampCall(m,p1,p2,mt: string; map:Tmap):boolean;overload;
 var i: integer;
     cmd: string;
 begin
+  xmethodname:=m;
   cmd:='<methodCall>'+
              '<methodName>'+m+'</methodName>'+
              '<params>'+
@@ -274,115 +319,6 @@ begin
            '</params>'+
        '</methodCall>';
   result:=doRpcCall(cmd);
-end;
-
-function TSampClient.FindItem(StartNode:TDOMNode; ItemName: string): TDOMNode;
-var tmpNode : TDOMNode;
-    chilNodes : TDOMNodeList;
-    i: integer;
-    buf:string;
-begin
- result:=nil;
- if StartNode<>nil then begin
-   if StartNode.NodeName=ItemName then tmpNode:=StartNode
-      else tmpNode:=StartNode.FindNode(ItemName);
-   if (tmpNode=nil)and(StartNode.HasChildNodes) then begin
-      chilNodes:=StartNode.ChildNodes;
-      for i := 0 to chilNodes.Count-1 do begin
-          tmpNode:=FindItem(chilNodes[i],ItemName);
-          if tmpNode<>nil then break;
-      end;
-   end;
-   result:=tmpNode;
- end;
-end;
-
-function TSampClient.FindNodeName(StartNode:TDOMNode; ANodeName: string): TDOMNode;
-var tmpNode : TDOMNode;
-    chilNodes : TDOMNodeList;
-    i: integer;
-
-    function FindNode1(ScopeObject:TDOMNode; ANodeName: string): TDOMNode;
-    var
-      memberNode, tmpNode : TDOMNode;
-      i : Integer;
-      chilNodes : TDOMNodeList;
-      nodeFound : Boolean;
-    const
-      sNAME = 'name';
-      sVALUE = 'value';
-    begin
-      Result := nil;
-      if (ScopeObject<>nil)and(ScopeObject.HasChildNodes()) then begin
-        nodeFound := False;
-        memberNode := ScopeObject.FirstChild;
-        while ( not nodeFound ) and ( memberNode <> nil ) do begin
-          if memberNode.HasChildNodes() then begin
-            chilNodes := memberNode.ChildNodes;
-            for i := 0 to chilNodes.Count-1 do begin
-              tmpNode := chilNodes.Item[i];
-              if AnsiSameText(sNAME,tmpNode.NodeName) and
-                 ( tmpNode.FirstChild <> nil ) and
-                 AnsiSameText(ANodeName,tmpNode.FirstChild.NodeValue)
-              then begin
-                nodeFound := True;
-                Break;
-              end;
-            end;
-            if nodeFound then begin
-              tmpNode := memberNode.FindNode(sVALUE);
-              if ( tmpNode <> nil ) and ( tmpNode.FirstChild <> nil ) then begin
-                Result := tmpNode.FirstChild;
-                Break;
-              end;
-            end;
-          end;
-          memberNode := memberNode.NextSibling;
-        end;
-      end;
-    end;
-
-begin
- result:=nil;
- if StartNode<>nil then begin
-   tmpNode:=FindNode1(StartNode,ANodeName);
-   if (tmpNode=nil)and(StartNode.HasChildNodes) then begin
-      chilNodes:=StartNode.ChildNodes;
-      for i := 0 to chilNodes.Count-1 do begin
-          tmpNode:=FindNodeName(chilNodes[i],ANodeName);
-          if tmpNode<>nil then break;
-      end;
-   end;
-   result:=tmpNode;
- end;
-end;
-
-function TSampClient.CheckResponse(response: TMemoryStream):boolean;
-var node,pnode,fnode:TDOMNode;
-begin
- result:=false;
- response.Position := 0;
- Doc.Free;
- ReadXMLFile(Doc, response);
-   node:=FindItem(Doc,'methodResponse');
-   if node<>nil then begin
-      pnode:=FindItem(node,'params');
-      fnode:=FindItem(node,'fault');
-   end;
-   if pnode<>nil then begin
-     Ferrorcode:=0;
-     Ferrortext:='';
-     result:=true;
-   end else begin
-     Ferrorcode:=1;
-     Ferrortext:='Unknow error';
-     if fnode<>nil then begin
-       node:=FindNodeName(fnode,'faultCode');
-       if node<>nil then Ferrorcode:=strtointdef(node.TextContent,1);
-       node:=FindNodeName(fnode,'faultString');
-       if node<>nil then Ferrortext:=node.TextContent;
-     end;
-   end;
 end;
 
 function TSampClient.SampReadProfile:boolean;
@@ -442,17 +378,14 @@ begin
 end;
 
 function TSampClient.SampHubConnect:boolean;
-var node:TDOMNode;
 begin
  result:=false;
- if SampCall('samp.hub.register',samp_secret) then
- begin
-   node:=FindNodeName(doc.FirstChild,'samp.private-key');
-   if node<> nil then begin
-     samp_private_key:=node.TextContent;
-     Fconnected:=true;
-     result:=true;
-   end;
+ samp_private_key:='';
+ if SampCall('samp.hub.register',samp_secret) then begin
+    if samp_private_key<>'' then begin
+      Fconnected:=true;
+      result:=true;
+    end;
  end;
 end;
 
@@ -480,44 +413,19 @@ begin
 end;
 
 function TSampClient.SampHubGetClientList:boolean;
-var node:TDOMNode;
-    buf:string;
-    i: integer;
+var i,j: integer;
 begin
   FClients.Clear;
   FClientNames.Clear;
   FClientDesc.Clear;
   setlength(FClientSubscriptions,0);
   result:=SampCall('samp.hub.getRegisteredClients',samp_private_key);
-  if result then begin
-    node:=FindItem(doc,'methodResponse');
-    if node<>nil then node:=FindItem(node,'params');
-    if node<>nil then node:=FindItem(node,'array');
-    if node<>nil then node:=FindItem(node,'value');
-    while node<>nil do begin
-       FClients.Add(node.TextContent);
-       node:=node.NextSibling;
-    end;
-  end;
   setlength(FClientSubscriptions,FClients.Count);
   if FClients.Count>0 then for i:=0 to FClients.Count-1 do begin
      SampCall('samp.hub.getMetadata',samp_private_key,FClients[i]);
-     node:=FindNodeName(doc.FirstChild,'samp.name');
-     if node=nil then buf:=''
-        else buf:=node.TextContent;
-     FClientNames.Add(buf);
-     node:=FindNodeName(doc.FirstChild,'samp.description.text');
-     if node=nil then buf:=''
-        else buf:=node.TextContent;
-     FClientDesc.Add(buf);
      FClientSubscriptions[i]:=[];
+     FClientSubscriptionsPos:=i;
      SampCall('samp.hub.getSubscriptions',samp_private_key,FClients[i]);
-     node:=FindNodeName(doc.FirstChild,'coord.pointAt.sky');
-     if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[coord_pointAt_sky];
-     node:=FindNodeName(doc.FirstChild,'table.load.votable');
-     if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[table_load_votable];
-     node:=FindNodeName(doc.FirstChild,'image.load.fits');
-     if node<>nil then FClientSubscriptions[i]:=FClientSubscriptions[i]+[image_load_fits];
   end;
 end;
 
@@ -554,7 +462,12 @@ end;
 function TSampClient.SampSelectRow(client,tableid,url,row: string):boolean;
 var map:Tmap;
 begin
-//  tableid:=StringReplace(tableid,'&','&amp;',[rfReplaceAll]);
+  // replaces general entity
+  tableid:=StringReplace(tableid,'&','&amp;',[rfReplaceAll]);
+  tableid:=StringReplace(tableid,'<','&lt;',[rfReplaceAll]);
+  tableid:=StringReplace(tableid,'>','&gt;',[rfReplaceAll]);
+  tableid:=StringReplace(tableid,'''','&apos;',[rfReplaceAll]);
+  tableid:=StringReplace(tableid,'"','&quote;',[rfReplaceAll]);
   SetLength(map,2);
   map[0].name:='table-id';
   map[0].value:=tableid;
@@ -636,127 +549,88 @@ begin
   end;
 end;
 
-
 function TSampClient.SampNotification(data:TMemoryStream):boolean;
-var NotifyDoc: TXMLDocument;
-    node,pnode: TDOMNode;
-    cmd,mtype,p1,p2,p3: string;
-    plist: Tstringlist;
-    key,sender_id,msg_id: string;
+var buf:array [0..8192] of char;
+    i: integer;
     map: Tmap;
 begin
- result:=false;
- sender_id:=''; msg_id:='';
- data.Position := 0;
- ReadXMLFile(NotifyDoc, data);
- node:=FindItem(NotifyDoc,'methodName');
- if node<>nil then cmd:=node.TextContent;
- if cmd='samp.client.receiveCall' then begin
-    node:=FindItem(NotifyDoc,'param');
-    key:=node.TextContent;
-    node:=node.NextSibling;
-    sender_id:=node.TextContent;
-    node:=node.NextSibling;
-    msg_id:=node.TextContent;
- end;
- if (cmd='samp.client.receiveNotification')or(cmd='samp.client.receiveCall') then begin
-    node:=FindNodeName(NotifyDoc.FirstChild,'samp.mtype');
-    if node<>nil then begin
-       mtype:=node.TextContent;
-       pnode:=FindNodeName(NotifyDoc.FirstChild,'samp.params');
-       if mtype='coord.pointAt.sky' then begin
-          node:=FindNodeName(pnode,'ra');
-          if node<>nil then p1:=node.TextContent;
-          node:=FindNodeName(pnode,'dec');
-          if node<>nil then p2:=node.TextContent;
-          if Assigned(FcoordpointAtsky) then FcoordpointAtsky(StrToFloatDef(p1,0),StrToFloatDef(p2,0));
-          result:=true;
-       end else if mtype='image.load.fits' then begin
-         node:=FindNodeName(pnode,'name');
-         if node<>nil then SampAsyncP1:=node.TextContent;
-         node:=FindNodeName(pnode,'image-id');
-         if node<>nil then SampAsyncP2:=node.TextContent;
-         node:=FindNodeName(pnode,'url');
-         if node<>nil then SampAsyncP3:=node.TextContent;
-         SampAsyncEvent:=ImageLoadFits;
-         SampAsyncTimer.Enabled:=false;
-         SampAsyncTimer.Enabled:=true;
-         result:=true;
-       end else if mtype='table.load.votable' then begin
-         node:=FindNodeName(pnode,'name');
-         if node<>nil then SampAsyncP1:=node.TextContent;
-         node:=FindNodeName(pnode,'table-id');
-         if node<>nil then SampAsyncP2:=node.TextContent;
-         SampAsyncP2:=StringReplace(SampAsyncP2,'&','&amp;',[rfReplaceAll]);
-         node:=FindNodeName(pnode,'url');
-         if node<>nil then SampAsyncP3:=node.TextContent;
-         SampAsyncEvent:=TableLoadVoTable;
-         SampAsyncTimer.Enabled:=false;
-         SampAsyncTimer.Enabled:=true;
-         result:=true;
-       end else if mtype='table.highlight.row' then begin
-         node:=FindNodeName(pnode,'table-id');
-         if node<>nil then p1:=node.TextContent;
-         p1:=StringReplace(p1,'&','&amp;',[rfReplaceAll]);
-         node:=FindNodeName(pnode,'url');
-         if node<>nil then p2:=node.TextContent;
-         node:=FindNodeName(pnode,'row');
-         if node<>nil then p3:=node.TextContent;
-         if Assigned(FTableHighlightRow) then FTableHighlightRow(p1,p2,p3);
-         result:=true;
-       end else if mtype='table.select.rowList' then begin
-         plist:=TStringList.Create;
-         node:=FindNodeName(pnode,'table-id');
-         if node<>nil then p1:=node.TextContent;
-         p1:=StringReplace(p1,'&','&amp;',[rfReplaceAll]);
-         node:=FindNodeName(pnode,'url');
-         if node<>nil then p2:=node.TextContent;
-         node:=FindNodeName(pnode,'row-list');
-         if node<>nil then node:=FindItem(node,'array');
-         if node<>nil then node:=FindItem(node,'value');
-          while node<>nil do begin
-            p3:=node.FirstChild.NodeValue;
-            plist.Add(p3);
-            node:=node.NextSibling;
-          end;
-         if Assigned(FTableSelectRowlist) then FTableSelectRowlist(p1,p2,plist);
-         plist.Free;
-         result:=true;
-       end else if mtype='samp.hub.event.shutdown' then begin
+  InitScanner;
+  i:=min(data.Size,SizeOf(buf));
+  FillByte(buf,SizeOf(buf),0);
+  data.Position:=0;
+  data.Read(buf,i);
+  XmlScanner.LoadFromBuffer(@buf);
+  XmlScanner.Execute;
+  result:=(Ferrorcode=0);
+  if (cmethodName='samp.client.receiveNotification')or(cmethodName='samp.client.receiveCall') then begin
+     if cmtype='coord.pointAt.sky' then begin
+       if Assigned(FcoordpointAtsky) then FcoordpointAtsky(StrToFloatDef(cra,0),StrToFloatDef(cdec,0));
+       result:=true;
+     end
+     else if cmtype='image.load.fits' then begin
+       SampAsyncP1:=cname;
+       SampAsyncP2:=cimage_id;
+       SampAsyncP3:=curl;
+       SampAsyncEvent:=ImageLoadFits;
+       SampAsyncTimer.Enabled:=false;
+       SampAsyncTimer.Enabled:=true;
+       result:=true;
+     end
+     else if cmtype='table.load.votable' then begin
+       SampAsyncP1:=cname;
+       SampAsyncP2:=ctable_id;
+       SampAsyncP3:=curl;
+       SampAsyncEvent:=TableLoadVoTable;
+       SampAsyncTimer.Enabled:=false;
+       SampAsyncTimer.Enabled:=true;
+       result:=true;
+     end
+     else if cmtype='table.highlight.row' then begin
+       if Assigned(FTableHighlightRow) then FTableHighlightRow(ctable_id,curl,crow);
+       result:=true;
+     end
+     else if cmtype='table.select.rowList' then begin
+       if Assigned(FTableSelectRowlist) then FTableSelectRowlist(ctable_id,curl,crowlist);
+       result:=true;
+     end
+     else if cmtype='samp.hub.event.shutdown' then begin
          SampHubDisconnect;
          result:=true;
-       end else if mtype='samp.hub.disconnect' then begin
+     end
+     else if cmtype='samp.hub.disconnect' then begin
          SampHubDisconnect;
          result:=true;
-       end else if mtype='samp.hub.event.register' then begin
+     end
+     else if cmtype='samp.hub.event.register' then begin
          SampAsyncEvent:=ClientChange;
          SampAsyncTimer.Enabled:=false;
          SampAsyncTimer.Enabled:=true;
          result:=true;
-       end else if mtype='samp.hub.event.unregister' then begin
+     end
+     else if cmtype='samp.hub.event.unregister' then begin
          SampAsyncEvent:=ClientChange;
          SampAsyncTimer.Enabled:=false;
          SampAsyncTimer.Enabled:=true;
          result:=true;
-       end else if mtype='samp.hub.event.metadata' then begin
+     end
+     else if cmtype='samp.hub.event.metadata' then begin
          SampAsyncEvent:=ClientChange;
          SampAsyncTimer.Enabled:=false;
          SampAsyncTimer.Enabled:=true;
          result:=true;
-       end else if mtype='samp.app.ping' then begin
+     end
+     else if cmtype='samp.app.ping' then begin
          result:=true;
-       end;
-    end;
- end;
- if (cmd='samp.client.receiveCall')and(msg_id<>'') then begin
-    SetLength(map,2);
-    map[0].name:='samp.status';
-    map[0].value:='samp.ok';
-    map[1].name:='samp.result';
-    map[1].value:='<struct></struct>';
-    SampReply(msg_id,map);
- end;
- NotifyDoc.Free;
+     end;
+end;
+if (cmethodName='samp.client.receiveCall')and(msg_id<>'') then begin
+  SetLength(map,2);
+  map[0].name:='samp.status';
+  map[0].value:='samp.ok';
+  map[1].name:='samp.result';
+  map[1].value:='<struct></struct>';
+  SampReply(msg_id,map);
+end;
 end;
 
 procedure TSampClient.SampAsyncTimerTimer(Sender: TObject);
@@ -767,6 +641,134 @@ begin
     TableLoadVoTable : if Assigned(FTableLoadVotable) then FTableLoadVotable(SampAsyncP1,SampAsyncP2,SampAsyncP3);
     ImageLoadFits    : if Assigned(FImageLoadFits) then FImageLoadFits(SampAsyncP1,SampAsyncP2,SampAsyncP3);
  end;
+end;
+
+
+procedure TSampClient.XmlStartTag(Sender: TObject; TagName: String; Attributes: TAttrList);
+var buf: string;
+begin
+if TagName='methodResponse' then methodResponse:=true
+else if methodResponse and(TagName='params') then begin
+  xparams:=true;
+  Ferrorcode:=0;
+  Ferrortext:='';
+end
+else if methodResponse and(TagName='fault') then begin
+  xfault:=true;
+  Ferrorcode:=0;
+  Ferrortext:='Unknow error';
+end
+else if xparams and(TagName='param') then xparam:=true
+else if (xparam or xfault) and(TagName='member') then xmember:=true
+else if xmember and(TagName='name') then xparamn:=true
+else if xmember and(TagName='value') then xparamv:=true
+else if xparam and(TagName='array') then xarray:=true
+else if xarray and(TagName='data') then xdata:=true
+else if xdata and(TagName='value') then xarrayvalue:=true
+else if TagName='methodCall' then methodCall:=true
+else if methodCall and (TagName='methodName') then cmethodn:=true
+else if methodCall and ((TagName='params')) then cparams:=true
+else if cparams and(TagName='param') then begin
+   cparam:=true;
+   inc(cparampos);
+   if creceiveCall and (cparampos>=4) then cparamdata:=true;
+   if creceiveNotification and (cparampos>=3) then cparamdata:=true;
+   end
+else if cparam and (not cparamdata)and(TagName='value') then cvalue:=true
+else if cparamdata and(TagName='member') then cmember:=true
+else if cmember and(TagName='name') then cparamn:=true
+else if cmember and(TagName='value') then cparamv:=true
+else if cmember and cparamv and (TagName='array') then cparamarray:=true;
+end;
+
+procedure TSampClient.XmlContent(Sender: TObject; Content: String);
+var buf: string;
+begin
+if xparamn then xparamname:=content
+else if xparamv then begin
+  if xparamname='faultCode' then Ferrorcode:=StrToIntDef(Content,1)
+  else if xparamname='faultString' then Ferrortext:=Content
+  else if (xmethodname='samp.hub.register')and(xparamname='samp.private-key') then samp_private_key:=Content
+  else if xmethodname='samp.hub.getMetadata' then begin
+         if xparamname='samp.name' then FClientNames.Add(Content)
+         else if xparamname='samp.description.text' then FClientDesc.Add(Content);
+  end
+  else if xmethodname='samp.hub.getSubscriptions' then begin
+         // value not used in samp 1.3
+         if xparamname='coord.pointAt.sky' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[coord_pointAt_sky];
+         if xparamname='table.load.votable' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[table_load_votable];
+         if xparamname='image.load.fits' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[image_load_fits];
+  end
+  else
+     buf:=Content;
+  end
+else if xarrayvalue then begin
+  if xmethodname='samp.hub.getRegisteredClients' then FClients.Add(Content);
+  end
+else if cmethodn then begin
+  cmethodName:=Content;
+  if cmethodName='samp.client.receiveCall' then creceiveCall:=true;
+  if cmethodName='samp.client.receiveNotification' then creceiveNotification:=true;
+  end
+else if cvalue then begin
+  if creceiveCall then begin
+    case cparampos of
+      1 : key:=Content;
+      2 : sender_id:=Content;
+      3 : msg_id:=Content;
+    end;
+  end
+  else if creceiveNotification then begin
+    case cparampos of
+      1 : key:=Content;
+      2 : sender_id:=Content;
+    end;
+  end
+  end
+else if cparamn then cparamname:=content
+else if cparamv then begin
+     if cparamarray then begin
+       if cparamname='row-list' then crowlist.Add(content);
+     end
+     else begin
+       if cparamname='samp.mtype' then cmtype:=content
+       else if cparamname='name' then cname:=content
+       else if cparamname='table-id' then ctable_id:=content
+       else if cparamname='image-id' then cimage_id:=content
+       else if cparamname='url' then curl:=content
+       else if cparamname='ra' then cra:=content
+       else if cparamname='dec' then cdec:=content
+       else if cparamname='row' then crow:=content;
+     end;
+  end
+end;
+
+procedure TSampClient.XmlEndTag(Sender: TObject; TagName: String);
+begin
+if TagName='methodResponse' then methodResponse:=false
+else if methodResponse and (TagName='fault') then xfault:=false
+else if methodResponse and (TagName='params') then xparams:=false
+else if methodResponse and (TagName='param') then xparam:=false
+else if methodResponse and (TagName='array') then xarray:=false
+else if methodResponse and (TagName='data') then xdata:=false
+else if xdata and (TagName='value') then xarrayvalue:=false
+else if methodResponse and (TagName='member') then xmember:=false
+else if methodResponse and (TagName='name') then xparamn:=false
+else if methodResponse and (TagName='value') then xparamv:=false
+else if TagName='methodCall' then methodCall:=false
+else if methodCall and (TagName='methodName') then cmethodn:=false
+else if methodCall and ((TagName='params')) then cparams:=false
+else if cparams and(TagName='param') then cparam:=false
+else if cparam and(TagName='value') then cvalue:=false
+else if cparamdata and(TagName='name') then cparamn:=false
+else if cparamdata and(TagName='value') then cparamv:=false
+else if cmember and cparamv and (TagName='array') then cparamarray:=false;
+end;
+
+procedure TSampClient.XmlLoadExternal(Sender : TObject; SystemId, PublicId, NotationId : STRING; VAR Result : TXmlParser);
+// do not try to load external resources
+begin
+Result := TXmlParser.Create;
 end;
 
 end.

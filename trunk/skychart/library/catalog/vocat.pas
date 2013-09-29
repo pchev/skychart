@@ -5,7 +5,7 @@ unit vocat;
 interface
 
 uses  skylibcat, gcatunit, XMLRead, DOM, math, XMLConf,
-  Classes, SysUtils; 
+  Classes, SysUtils, FileUtil ;
 
 procedure SetVOCatpath(path:string);
 Procedure OpenVOCat(ar1,ar2,de1,de2: double ; var ok : boolean);
@@ -391,10 +391,10 @@ catname:=ExtractFileName(catfile);
 config:=TXMLConfig.Create(nil);
 try
 config.Filename:=deffile;
-VOName:=config.GetValue('VOcat/catalog/name','');
+VOname:=config.GetValue('VOcat/catalog/name','');
 VOobject:=config.GetValue('VOcat/catalog/objtype',VOobject);
-SAMPid:=config.GetValue('VOcat/catalog/sampid','');
-SAMPurl:=config.GetValue('VOcat/catalog/sampurl','');
+SAMPid:=config.GetValue('VOcat/catalog/sampid','skychart_'+ExtractFileNameOnly(catfile));
+SAMPurl:=config.GetValue('VOcat/catalog/sampurl','file://'+catfile);
 active:=config.GetValue('VOcat/plot/active',false);
 drawtype:=config.GetValue('VOcat/plot/drawtype',14);
 drawcolor:=config.GetValue('VOcat/plot/drawcolor',$808080);

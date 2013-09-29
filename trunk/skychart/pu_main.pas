@@ -8364,8 +8364,8 @@ if samp.SampHubGetClientList then begin
    SampClientTableLoadVotable.Clear;
    for i:=0 to samp.Clients.Count-1 do begin
       SampClientId.Add(samp.Clients[i]);
-      SampClientName.Add(samp.ClientNames[i]);
-      SampClientDesc.Add(samp.ClientDesc[i]);
+      if i<samp.ClientNames.Count then SampClientName.Add(samp.ClientNames[i]) else SampClientName.Add(samp.Clients[i]);
+      if i<samp.ClientDesc.Count then SampClientDesc.Add(samp.ClientDesc[i]) else SampClientDesc.Add('');
       if coord_pointAt_sky in samp.ClientSubscriptions[i] then SampClientCoordpointAtsky.Add('1') else SampClientCoordpointAtsky.Add('');
       if image_load_fits in samp.ClientSubscriptions[i] then SampClientImageLoadFits.Add('1') else SampClientImageLoadFits.Add('');
       if table_load_votable in samp.ClientSubscriptions[i] then SampClientTableLoadVotable.Add('1') else SampClientTableLoadVotable.Add('');
@@ -8426,6 +8426,10 @@ begin
  arg.Add('MOVESCOPE');
  arg.Add(formatfloat(f5,ra/15));
  arg.Add(formatfloat(f5,dec));
+ ExecuteCmd(cname,arg);
+ arg.Clear;
+ arg.Add('TRACKTELESCOPE');
+ arg.Add('OFF');
  ExecuteCmd(cname,arg);
  arg.Free;
 end;
@@ -8518,6 +8522,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    SetLength(sc.catalog.cfgcat.SampSelectedRec,sc.catalog.cfgcat.SampSelectedNum+1);
    sc.catalog.cfgcat.SampSelectedRec[0]:=StrToIntDef(row,0);
    samp.LockTableSelectRow:=true;
+   sc.cfgsc.FindOK:=false;
    Refresh;
    samp.LockTableSelectRow:=false;
 end;
@@ -8536,6 +8541,7 @@ if MultiFrame1.ActiveObject is Tf_chart then with MultiFrame1.ActiveObject as Tf
    SetLength(sc.catalog.cfgcat.SampSelectedRec,sc.catalog.cfgcat.SampSelectedNum+1);
    for i:=0 to rowlist.Count-1 do
       sc.catalog.cfgcat.SampSelectedRec[i]:=StrToIntDef(rowlist[i],0);
+   sc.cfgsc.FindOK:=false;
    Refresh;
    samp.LockTableSelectRow:=true;
    if sc.catalog.cfgcat.SampSelectFirst then IdentXY(sc.catalog.cfgcat.SampSelectX,sc.catalog.cfgcat.SampSelectY);
