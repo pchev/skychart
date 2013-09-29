@@ -165,7 +165,7 @@ methodCall:=false; cmethodn:=false; creceiveCall:=false; creceiveNotification:=f
 cparam:=false; cparamdata:=false; cvalue:=false; cmember:=false; cparamn:=false; cparamv:=false; cparamarray:=false;
 methodResponse:=false; xfault:=false; xparams:=false; xarray:=false; xdata:=false; xarrayvalue:=false;
 xparam:=false; xmember:=false; xparamn:=false; xparamv:=false;
-xparamname:=''; SampAsyncP1:=''; SampAsyncP2:=''; SampAsyncP3:='';
+xparamname:='';
 cmethodName:=''; key:=''; sender_id:=''; msg_id:=''; cparamname:=''; cmtype:=''; cname:='';
 ctable_id:=''; cimage_id:=''; curl:=''; crow:=''; cra:=''; cdec:='';
 crowlist.Clear;
@@ -349,7 +349,7 @@ begin
   {$endif}
  end;
  if FileExistsUTF8(lockfile) then begin
-    str.LoadFromFile(lockfile);
+    str.LoadFromFile(UTF8ToSys(lockfile));
     for i:=0 to str.Count-1 do begin
        buf:=trim(str[i]);
        p:=pos('=',buf);
