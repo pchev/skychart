@@ -181,7 +181,6 @@ begin
   aHTTP.MimeType := 'application/xml';
   aHTTP.HTTPMethod('POST', samp_hub_xmlrpc_url);
   InitScanner;
-  aHTTP.Document.SaveToFile('/tmp/aa');
   i:=min(aHTTP.Document.Size,SizeOf(buf));
   FillByte(buf,SizeOf(buf),0);
   aHTTP.Document.Position:=0;
