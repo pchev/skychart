@@ -8241,7 +8241,7 @@ end;
 
 procedure Tf_main.MenuItem36Click(Sender: TObject);
 begin
-  if (samp<>nil) then samp.SampHubDisconnect;
+  SAMPStop;
   UpdateSAMPmenu;
 end;
 
