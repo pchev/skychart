@@ -435,7 +435,7 @@ end;
 
 procedure Tf_voconfig.UpdateCatalog(cn: string);
 var i,j,n: integer;
-    buf,tablen,baseurl: string;
+    buf,tablen,baseurl,objtype: string;
     fullcat:boolean;
     dt,dc,ds,dm,fc: integer;
     tb:TTabsheet;
@@ -453,6 +453,7 @@ try
   config.Filename:=cn;
   CatName:=config.GetValue('VOcat/catalog/name','');
   tablen:=config.GetValue('VOcat/catalog/table','');
+  objtype:=config.GetValue('VOcat/catalog/objtype','');
   baseurl:=config.GetValue('VOcat/update/baseurl','');
   votype:=Tvo_type(config.GetValue('VOcat/update/votype',0));
   fullcat:=config.GetValue('VOcat/update/fullcat',false);
@@ -525,12 +526,18 @@ try
        tr.value:=VO_Detail1.Rows[n];
        if trim(VO_Detail1.description[n])>'' then desc.text:=dedupstr(VO_Detail1.description[n])
           else desc.text:=CatName;
-       if not VO_Detail1.HasCoord[n] then
-          RadioGroup1.ItemIndex:=0
-       else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
-          RadioGroup1.ItemIndex:=2
-       else
-          RadioGroup1.ItemIndex:=1;
+       if objtype='' then begin
+         if not VO_Detail1.HasCoord[n] then
+            RadioGroup1.ItemIndex:=0
+         else if (VO_Detail1.HasSize[n])or(not VO_Detail1.HasMag[n]) then
+            RadioGroup1.ItemIndex:=2
+         else
+            RadioGroup1.ItemIndex:=1;
+       end else begin
+         if objtype='star' then RadioGroup1.ItemIndex:=1
+         else if objtype='dso' then RadioGroup1.ItemIndex:=2
+         else RadioGroup1.ItemIndex:=0;
+       end;
        RadioGroup1Click(self);
        FullDownload.Checked:=(tr.Value<=Fvo_maxrecord);
      end else begin
