@@ -10,7 +10,7 @@ version=0.0
 
 [compiler]
 unittargetdir=lib/$(CPU_TARGET)-$(OS_TARGET)
-unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ ./
+unitdir=$(LAZDIR)/packager/units/$(CPU_TARGET)-$(OS_TARGET)/ $(LAZDIR)/components/lazutils/lib/$(CPU_TARGET)-$(OS_TARGET) ./
 includedir=./
 options= $(fpcopts) -CF64 -MObjFPC -Sgi
 
