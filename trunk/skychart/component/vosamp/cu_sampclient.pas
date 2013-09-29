@@ -181,6 +181,7 @@ begin
   aHTTP.MimeType := 'application/xml';
   aHTTP.HTTPMethod('POST', samp_hub_xmlrpc_url);
   InitScanner;
+  aHTTP.Document.SaveToFile('/tmp/aa');
   i:=min(aHTTP.Document.Size,SizeOf(buf));
   FillByte(buf,SizeOf(buf),0);
   aHTTP.Document.Position:=0;
@@ -684,7 +685,15 @@ end;
 procedure TSampClient.XmlContent(Sender: TObject; Content: String);
 var buf: string;
 begin
-if xparamn then xparamname:=content
+if xparamn then begin
+  xparamname:=content;
+  if xmethodname='samp.hub.getSubscriptions' then begin
+         // value not used in samp 1.3
+         if xparamname='coord.pointAt.sky' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[coord_pointAt_sky];
+         if xparamname='table.load.votable' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[table_load_votable];
+         if xparamname='image.load.fits' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[image_load_fits];
+  end;
+end
 else if xparamv then begin
   if xparamname='faultCode' then Ferrorcode:=StrToIntDef(Content,1)
   else if xparamname='faultString' then Ferrortext:=Content
@@ -692,15 +701,7 @@ else if xparamv then begin
   else if xmethodname='samp.hub.getMetadata' then begin
          if xparamname='samp.name' then FClientNames.Add(Content)
          else if xparamname='samp.description.text' then FClientDesc.Add(Content);
-  end
-  else if xmethodname='samp.hub.getSubscriptions' then begin
-         // value not used in samp 1.3
-         if xparamname='coord.pointAt.sky' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[coord_pointAt_sky];
-         if xparamname='table.load.votable' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[table_load_votable];
-         if xparamname='image.load.fits' then FClientSubscriptions[FClientSubscriptionsPos]:=FClientSubscriptions[FClientSubscriptionsPos]+[image_load_fits];
-  end
-  else
-     buf:=Content;
+  end;
   end
 else if xarrayvalue then begin
   if xmethodname='samp.hub.getRegisteredClients' then FClients.Add(Content);
