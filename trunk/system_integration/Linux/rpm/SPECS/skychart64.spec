@@ -24,6 +24,7 @@ Planetarium software for the advanced amateur astronomer.
 /usr/lib64/libplan404.so
 /usr/lib64/libgetdss.so
 /usr/lib64/libcdcwcs.so
+/usr/share/appdata/skychart.appdata.xml
 /usr/share/applications/skychart.desktop
 /usr/share/pixmaps/skychart.png
 /usr/share/icons/hicolor/48x48/apps/skychart.png
