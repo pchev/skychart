@@ -2668,7 +2668,7 @@ var desc,buf,buf2,otype,oname,txt,s1,s2,s3: UTF8String;
     isStar, isSolarSystem, isd2k, isvo, isOsr, isArtSat: boolean;
     ApparentValid:boolean;
     ra,dec,q,a,h,hr,ht,hs,azr,azs,j1,j2,j3,rar,der,rat,det,ras,des,culmalt :double;
-    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst: double;
+    ra2000,de2000,radate,dedate,raapp,deapp,cjd,cjd0,cst,err: double;
 
 function Bold(s:string):string;
 var k:integer;
@@ -2971,6 +2971,14 @@ if (sc.catalog.cfgshr.Equinoxtype=2) then begin
   djd(cjd-sc.cfgsc.DT_UT/24,y,m,d,h);
   txt:=txt+html_b+rsUniversalTim+':'+htms_b+blank+date2str(y,m,d)+'T'+timtostr(h);
   txt:=txt+blank+'JD='+formatfloat(f5,cjd-sc.cfgsc.DT_UT/24)+html_br;
+
+  err:=DTminusUTError(y,m,d,sc.cfgsc);
+  if abs(err)>60 then begin
+    txt:=txt+html_b+rsDeltaTError+':'+htms_b+blank+plusminus+ARmtoStr(err/3600)+html_br;
+  end else if abs(err)>10 then begin
+    txt:=txt+html_b+rsDeltaTError+':'+htms_b+blank+plusminus+inttostr(round(err))+blank+rsSec2+html_br;
+  end;
+
   ra:=sc.cfgsc.FindRA;
   dec:=sc.cfgsc.FindDec;
   precession(sc.cfgsc.JDChart,cjd-sc.cfgsc.DT_UT/24,ra,dec);
