@@ -204,11 +204,8 @@ TreeView1.items[48].text:='9- '+rsInternet;
 TreeView1.items[49].text:='1- '+rsProxy;
 TreeView1.items[50].text:='2- '+rsOrbitalEleme;
 TreeView1.items[51].text:='3- '+rsOnlineDSSPic;
-
-// Hide unfinished config calendar
-{ TODO : config calendar }
-TreeView1.items[51].text:='10- '+rsCalendar;
-TreeView1.items[52].text:='1- '+rsGraphs;
+TreeView1.items[52].text:='10- '+rsCalendar;
+TreeView1.items[53].text:='1- '+rsGraphs;
 
 Applyall.caption:=rsApplyChangeT;
 Apply.Caption:=rsApply;
