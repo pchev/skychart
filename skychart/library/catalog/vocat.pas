@@ -600,8 +600,10 @@ Procedure ReadVOCat(out lin : GCatrec; var ok : boolean);
 var cell: TDOMNode;
     buf,recno: string;
     i: integer;
+    raok,decok: boolean;
 begin
 ok:=false;
+raok:=false; decok:=false;
 lin:=emptyrec;
 inc(VOcatrec);
 if OnCache then begin
@@ -643,17 +645,23 @@ if Assigned(VoNode) then begin
   while Assigned(cell) do begin
     buf:=cell.TextContent;
     // always ask vizier to add j2000 coordinates.
-    if VOFields[i]='_RAJ2000' then lin.ra:=deg2rad*StrToFloatDef(buf,0);
-    if VOFields[i]='_DEJ2000' then lin.dec:=deg2rad*StrToFloatDef(buf,0);
-    if ((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
-       (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1)
+    if VOFields[i]='_RAJ2000' then begin
+       lin.ra:=deg2rad*StrToFloatDef(buf,0);
+       raok:=true;
+    end;
+    if VOFields[i]='_DEJ2000' then begin
+       lin.dec:=deg2rad*StrToFloatDef(buf,0);
+       decok:=true;
+    end;
+    if (not raok)and(((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
+       (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
            if pos('h:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
               lin.ra:=deg2rad*15*StrToDeg(buf)
             else lin.ra:=deg2rad*StrToFloatDef(buf,0);
     end;
-    if ((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
-       (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1)
+    if (not decok)and(((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
+       (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
            if pos('d:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
               lin.dec:=deg2rad*StrToDeg(buf)
