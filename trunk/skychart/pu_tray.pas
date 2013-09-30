@@ -454,7 +454,7 @@ end else begin
   f_calendar.config.CurTime:=frac(now)*24;
   f_calendar.config.JDChart:=jd(y,m,d,0);
   f_calendar.config.Force_DT_UT:=false;
-  f_calendar.config.DT_UT:=DTminusUT(y,m,f_calendar.config);
+  f_calendar.config.DT_UT:=DTminusUT(y,m,d,f_calendar.config);
   f_calendar.config.CurJDUT:=f_calendar.config.JDChart;
   f_calendar.config.CurJDTT:=f_calendar.config.JDChart+f_calendar.config.DT_UT/24;
   f_calendar.config.PlanetParalaxe:=true;
