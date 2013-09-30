@@ -67,13 +67,13 @@ const
   jd1900 = 2415020.3135;
   minjd = -71328942; //-200000 years  // limit for precession calculation
   maxjd = 74769560;  //+200000 years
-  minjddt = 260423.5;
-  // -4000    // limit for DeltaT calculation, no JPL ephemeris after this date
-  maxjddt = 3182029.5; // +4000
-  minyeardt = -4000;
-  maxyeardt = 4000;
-  minjdabe = 2378496.5;
+  // -13200 +17191    // limit for DeltaT calculation, same as JPL DE431
+  minjddt = -3100015.5;
+  maxjddt = 8000016.5; // +17191
+  minyeardt = -13200;
+  maxyeardt = 17191;
   // 1800   //limit for abberation calculation using Meeus function
+  minjdabe = 2378496.5;
   maxjdabe = 2524593.5; // 2200
   minjdnut = 2378496.5; // 1800   //limit for nutation calculation using Meeus function
   maxjdnut = 2524593.5; // 2200
@@ -206,8 +206,8 @@ const
   D0jup: array [1..4] of double = (1821, 1565, 2634, 2403);
   D0sat: array [1..8] of double = (199, 249, 530, 560, 764, 2575, 143, 718);
   D0ura: array [1..5] of double = (236, 581, 585, 789, 761);
-  nJPL_DE = 7;
-  JPL_DE: array [1..nJPL_DE] of integer = (423, 421, 422, 405, 406, 403, 200);
+  nJPL_DE = 9;
+  JPL_DE: array [1..nJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
   // JPL ephemeris to try, order by preference
 
   blank15 = '               ';
@@ -805,7 +805,7 @@ type
     ObsRoSinPhi, ObsRoCosPhi, StarmagMax, NebMagMax, FindRA,
     FindDec, FindRA2000, FindDec2000, FindPX, FindSize, FindX, FindY, FindZ,
     FindSimjd, AstmagMax, AstMagDiff, CommagMax, Commagdiff: double;
-    TimeZone, DT_UT, CurST, CurJDTT, CurJDUT, LastJD, jd0,
+    TimeZone, DT_UT, DT_UTerr, CurST, CurJDTT, CurJDUT, LastJD, jd0,
     JDChart, YPmon, LastJDChart, FindJD, CurSunH, CurMoonH, CurMoonIllum, ScopeRa,
     ScopeDec, TrackEpoch, TrackRA, TrackDec, TargetRA, TargetDec, FindPMra,
     FindPMde, FindPMEpoch, FindPMpx, FindPMrv, FindDist, FindBV, FindMag: double;
@@ -1940,6 +1940,7 @@ begin
   Commagdiff := Source.Commagdiff;
   TimeZone := Source.TimeZone;
   DT_UT := Source.DT_UT;
+  DT_UTerr := Source.DT_UTerr;
   CurST := Source.CurST;
   CurJDTT := Source.CurJDTT;
   CurJDUT := Source.CurJDUT;

@@ -91,7 +91,8 @@ function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
 Function LONToStr(l: Double) : string;
 function SetCurrentTime(cfgsc:Tconf_skychart):boolean;
-function DTminusUT(year,month : integer; c:Tconf_skychart) : double;
+function DTminusUT(year,month,day : integer; c:Tconf_skychart) : double;
+function DTminusUTError(year,month,day : integer; c:Tconf_skychart) : double;
 Procedure FormPos(form : Tform; x,y : integer);
 Function ExecProcess(cmd: string; output: TStringList; ShowConsole:boolean=false): integer;
 Function Exec(cmd: string; hide: boolean=true): integer;
@@ -1178,7 +1179,7 @@ cfgsc.TimeZone:=cfgsc.tz.SecondsOffset/3600;
 result:=true;
 end;
 
-function DTminusUT(year,month : integer; c:Tconf_skychart) : double;
+function DTminusUT(year,month,day : integer; c:Tconf_skychart) : double;
 var y,u,t : double;
 begin
 if c.Force_DT_UT then
@@ -1186,12 +1187,16 @@ if c.Force_DT_UT then
 else begin
   { Reference  :
   NASA TP-2006-214141
-  Five Millennium Canon of Solar Eclipses: 1999 to +3000 (2000 BCE to 3000 CE)
+  Five Millennium Canon of Solar Eclipses: -1999 to +3000 (2000 BCE to 3000 CE)
   Fred Espenak and Jean Meeus
   }
-  y:=year+(month-0.5)/12;
+  y:=year+(month-1)/12+(day-1)/365.25;
   case year of
-  minyeardt..-501:begin
+  minyeardt..-2000:begin    // use JPL Horizon value
+                u:=(y-1820)/100;
+                result:=(31*u*u)/3600;
+                end;
+  -1999..-501:begin         // Use Espenak value
                 u:=(y-1820)/100;
                 result:=(-20+32*u*u)/3600;
                 end;
@@ -1257,12 +1262,42 @@ else begin
                 result:=(-20+32*u*u-0.5788*t)/3600;
                 //result:=(-20+32*u*u-0.5628*t)/3600;
                 end;
-  2150..maxyeardt: begin
+  2150..2999: begin        // End of Espenak range
                 u:=(y-1820)/100;
                 result:=(-20+32*u*u)/3600;
                 end;
+  3000..maxyeardt:begin    // use JPL Horizon value
+                u:=(y-1820)/100;
+                result:=(31*u*u)/3600;
+                end;
   else  result:=0; // we don't need deltat for very distant epoch as there is no available ephemeris
   end;
+end;
+end;
+
+function DTminusUTError(year,month,day : integer; c:Tconf_skychart) : double;
+const M=2500;
+      Q=0.058;
+var n,y: double;
+
+begin
+y:=year+(month-1)/12+(day-1)/365.25;
+case year of
+minyeardt..-501: begin
+                   n:=abs(y+500);
+                   result:=365.25*n*sqrt((n*Q/3)*(1+n/M))/1000;
+                 end;
+-500..1800     : begin
+                   n:=abs(y-1820)/100;
+                   result:=0.8*n*n;
+                 end;
+1801..2050     : begin
+                   result:=0;
+                 end;
+2051..maxyeardt: begin
+                   n:=abs(y-2000);
+                   result:=365.25*n*sqrt((n*Q/3)*(1+n/M))/1000;
+                 end;
 end;
 end;
 

@@ -47,6 +47,7 @@ type
     CheckGroup2: TCheckGroup;
     ComboBox1: TComboBox;
     Label11: TLabel;
+    dterr: TLabel;
     LongEdit1: TLongEdit;
     fpsedit: TLongEdit;
     nbstep: TLongEdit;
@@ -373,7 +374,7 @@ end;
 
 procedure Tf_config_time.ShowUTTime;
 var y,m,d:integer;
-    h: double;
+    h,err: double;
     s:string;
 begin
 djd(JDEdit.Value,y,m,d,h);
@@ -382,6 +383,13 @@ h:=csc.tz.SecondsOffset/3600;
 if h=0 then s:=''
 else if h>0 then s:='+' else s:='-';
 tzlabel.caption:=TzGMT2UTC(csc.tz.ZoneName)+blank+'('+rsUT+s+timtostr(abs(h))+')';
+err:=DTminusUTError(y,m,d,csc);
+if abs(err)>10 then begin
+  dterr.Caption:='DetlaT error:'+ARtoStr(err/3600);
+  dterr.Visible:=true;
+end else begin
+  dterr.Visible:=false;
+end;
 end;
 
 procedure Tf_config_time.ShowTime;
@@ -507,7 +515,7 @@ try
 LockChange:=true;
 csc.UseSystemTime:=checkbox1.checked;
 SetCurrentTime(csc);
-csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
+csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc.CurDay,csc);
 ShowTime;
 Application.ProcessMessages;
 finally
@@ -704,7 +712,7 @@ d_day.max:=MonthDays[leapYear(csc.curyear),csc.curmonth];
 csc.curday:=d_day.Position;
 csc.tz.JD:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
 csc.TimeZone:=csc.tz.SecondsOffset/3600;
-csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
+csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc.CurDay,csc);
 Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 JDEdit.Value:=Jd(csc.curyear,csc.curmonth,csc.curday,csc.curtime-csc.timezone);
@@ -899,7 +907,7 @@ procedure Tf_config_time.CheckBox4Click(Sender: TObject);
 begin
 csc.Force_DT_UT:=checkbox4.checked;
 dt_ut.enabled:=csc.Force_DT_UT;
-csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc);
+csc.DT_UT:=DTminusUT(csc.CurYear,csc.CurMonth,csc.CurDay,csc);
 Tdt_Ut.caption:=formatfloat(f1,(csc.DT_UT*3600));
 dt_ut.text:=Tdt_Ut.caption;
 end;
