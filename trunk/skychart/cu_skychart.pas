@@ -508,7 +508,8 @@ var xp,yp,MJD,A,C : double;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': Init time');
 if cfgsc.UseSystemTime and (not cfgsc.quick) then SetCurrentTime(cfgsc);
-cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc);
+cfgsc.DT_UT:=DTminusUT(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc);
+cfgsc.DT_UTerr:=DTminusUTError(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc);
 cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone+cfgsc.DT_UT);  // TT
 cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);

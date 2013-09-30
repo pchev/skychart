@@ -1150,7 +1150,7 @@ s:=step.Value;
 djd(date1.JD,a,m,d,hh);
 config.tz.JD:=date1.JD;
 config.TimeZone:=config.tz.SecondsOffset/3600;
-jdt_ut:=DTminusUT(a,m,config)/24;
+jdt_ut:=DTminusUT(a,m,d,config)/24;
 h:=12-config.TimeZone;
 jd1:=jd(a,m,d,h);
 djd(date2.JD,a,m,d,hh);
@@ -1438,7 +1438,7 @@ FreeCoord(PlutonGrid);
 repeat
 djd(jda,a,m,d,h);
 jd0:=jd(a,m,d,0);
-jdt_ut:=DTminusUT(a,m,config)/24;
+jdt_ut:=DTminusUT(a,m,d,config)/24;
 st0:=SidTim(jd0,h,config.ObsLongitude);
 config.tz.JD:=jda;
 config.TimeZone:=config.tz.SecondsOffset/3600;

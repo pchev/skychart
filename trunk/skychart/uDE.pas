@@ -259,6 +259,20 @@ begin
                      end;
                   end else exit;
               end;
+        430:  begin  //1549 to 2650 - 1 file
+                    jdstart:= 2287184.5;
+                    jdend:= 2688976.5;
+                    if InRange(jd, jdstart, jdend) then begin
+                      de_file:='linkp1550p2650.430';
+                    end else exit;
+              end;
+        431:  begin  //-13200 to 17191 - 1 file
+                    jdstart:= -3100015.5;
+                    jdend:= 8000016.5;
+                    if InRange(jd, jdstart, jdend) then begin
+                      de_file:='lnxm13000p17000.431';
+                    end else exit;
+              end;
     end;
 
     //if file is not already loaded then load

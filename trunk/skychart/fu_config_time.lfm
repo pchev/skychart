@@ -64,7 +64,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 16
             Top = 80
-            Width = 53
+            Width = 54
             Caption = 'TT - UT  : '
             ParentColor = False
           end
@@ -88,7 +88,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 16
             Top = 56
-            Width = 315
+            Width = 316
             Caption = 'Difference between Terrestrial Time and Universal Time'
             ParentColor = False
           end
@@ -96,7 +96,7 @@ object f_config_time: Tf_config_time
             Left = 8
             Height = 23
             Top = 109
-            Width = 161
+            Width = 162
             Caption = 'Use another TT-UT value'
             OnClick = CheckBox4Click
             TabOrder = 0
@@ -150,7 +150,7 @@ object f_config_time: Tf_config_time
           MaxValue = 86400
         end
         object Panel9: TPanel
-          Left = 32
+          Left = 30
           Height = 200
           Top = 86
           Width = 417
@@ -224,7 +224,7 @@ object f_config_time: Tf_config_time
           object Label1: TLabel
             Left = 8
             Height = 16
-            Top = 112
+            Top = 102
             Width = 19
             Caption = 'JD:'
             ParentColor = False
@@ -264,7 +264,7 @@ object f_config_time: Tf_config_time
           object JDEdit: TFloatEdit
             Left = 54
             Height = 23
-            Top = 109
+            Top = 99
             Width = 131
             TabOrder = 1
             OnChange = JDEditChange
@@ -307,7 +307,7 @@ object f_config_time: Tf_config_time
           object BitBtn1: TBitBtn
             Left = 192
             Height = 30
-            Top = 106
+            Top = 96
             Width = 32
             Glyph.Data = {
               76050000424D7605000000000000360000002800000015000000150000000100
@@ -507,9 +507,17 @@ object f_config_time: Tf_config_time
           object UTLabel: TLabel
             Left = 236
             Height = 16
-            Top = 112
+            Top = 102
             Width = 45
             Caption = 'UTLabel'
+            ParentColor = False
+          end
+          object dterr: TLabel
+            Left = 236
+            Height = 16
+            Top = 128
+            Width = 31
+            Caption = 'dterr'
             ParentColor = False
           end
         end
