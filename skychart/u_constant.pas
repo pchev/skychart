@@ -215,6 +215,7 @@ const
   tab = #09;
   Ellipsis = '...';
   deftxt = '?';
+  plusminus=#$0b1;
   f0 = '0';
   f1 = '0.0';
   f1s = '0.#';

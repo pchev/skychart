@@ -513,7 +513,7 @@ object f_config_time: Tf_config_time
             ParentColor = False
           end
           object dterr: TLabel
-            Left = 236
+            Left = 8
             Height = 16
             Top = 128
             Width = 31

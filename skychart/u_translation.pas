@@ -827,8 +827,8 @@ resourcestring
   rsSeconds = 'Seconds';
   rsAutoRefreshE = 'Auto-refresh every ';
   rsDifferenceBe = 'Difference between Terrestrial Time and Universal Time';
-  rsTTUT = 'TT - UT: ';
-  rsUseAnotherTT = 'Use another TT-UT value';
+  rsTTUT = 'DeltaT: ';
+  rsUseAnotherTT = 'Use another DeltaT value';
   rsSHour = 'H';
   rsSMinute = 'M';
   rsSSecond = 'S';
@@ -1457,6 +1457,7 @@ resourcestring
   rsSAMPSetup = 'SAMP setup';
   rsConnectToSAM = 'Connect to SAMP hub';
   rsDisconnectFr = 'Disconnect from SAMP';
+  rsDeltaTError = 'DeltaT uncertainty';
 
 implementation
 

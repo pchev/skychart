@@ -384,9 +384,12 @@ if h=0 then s:=''
 else if h>0 then s:='+' else s:='-';
 tzlabel.caption:=TzGMT2UTC(csc.tz.ZoneName)+blank+'('+rsUT+s+timtostr(abs(h))+')';
 err:=DTminusUTError(y,m,d,csc);
-if abs(err)>10 then begin
-  dterr.Caption:='DetlaT error:'+ARtoStr(err/3600);
+if abs(err)>60 then begin
+  dterr.Caption:=rsDeltaTError+': '+plusminus+trim(ARmtoStr(err/3600));
   dterr.Visible:=true;
+end else if abs(err)>10 then begin
+    dterr.Caption:=rsDeltaTError+': '+plusminus+inttostr(round(err))+blank+rsSec2;
+    dterr.Visible:=true;
 end else begin
   dterr.Visible:=false;
 end;
