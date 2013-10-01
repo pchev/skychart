@@ -266,9 +266,9 @@ begin
                       de_file:='linkp1550p2650.430';
                     end else exit;
               end;
-        431:  begin  //-13200 to 17191 - 1 file
-                    jdstart:= -3100015.5;
-                    jdend:= 8000016.5;
+        431:  begin  //-13000 to 17000 - 1 file
+                    jdstart:= -3026826.5;
+                    jdend:= 7930182.5;
                     if InRange(jd, jdstart, jdend) then begin
                       de_file:='lnxm13000p17000.431';
                     end else exit;

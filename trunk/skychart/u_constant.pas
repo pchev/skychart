@@ -67,11 +67,11 @@ const
   jd1900 = 2415020.3135;
   minjd = -71328942; //-200000 years  // limit for precession calculation
   maxjd = 74769560;  //+200000 years
-  // -13200 +17191    // limit for DeltaT calculation, same as JPL DE431
-  minjddt = -3100015.5;
-  maxjddt = 8000016.5; // +17191
-  minyeardt = -13200;
-  maxyeardt = 17191;
+  // -15000 +18000    // limit for DeltaT calculation, include JPL DE431
+  minjddt = -3757326.5;
+  maxjddt = 8295424.5;
+  minyeardt = -15000;
+  maxyeardt = 18000;
   // 1800   //limit for abberation calculation using Meeus function
   minjdabe = 2378496.5;
   maxjdabe = 2524593.5; // 2200
