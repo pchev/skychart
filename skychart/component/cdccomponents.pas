@@ -1,20 +1,21 @@
 { This file was automatically created by Lazarus. Do not edit!
-This source is only used to compile and install the package.
+  This source is only used to compile and install the package.
  }
 
-unit CDCcomponents; 
+unit CDCcomponents;
 
 interface
 
 uses
-  LazarusPackageIntf; 
+  cdc_version, LazarusPackageIntf;
 
 implementation
 
-procedure Register; 
+procedure Register;
 begin
-end; 
+  RegisterUnit('cdc_version', @cdc_version.Register);
+end;
 
 initialization
-  RegisterPackage('CDCcomponents', @Register); 
+  RegisterPackage('CDCcomponents', @Register);
 end.
