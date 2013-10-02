@@ -1086,9 +1086,9 @@ var IntfImg: TDrawListImg;
     ijd:double;
     ProjImg: TLazIntfImage;
     ImgHandle,ImgMaskHandle: HBitmap;
-    i,n,r,imgloaded: integer;
+    i,n,r,imgloaded,timeout: integer;
     y,m,d: word;
-    working,timeout: boolean;
+    working,timingout: boolean;
     timelimit: TDateTime;
     thread: array[0..7] of TDrawListThread;
 begin
@@ -1138,7 +1138,8 @@ for i:=0 to fitslist.Count-1 do begin
 end;
 imgloaded:=n;
 r:=min(8,MaxThreadCount);
-if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': start thread');
+timeout:=round(max(10,c.xmax*c.ymax/r/100000));
+if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': start FITS thread, timeout:'+inttostr(timeout));
 for i:=0 to r-1 do begin
   thread[i]:=TDrawListThread.Create(true);
   thread[i].IntfImg:=IntfImg;
@@ -1157,15 +1158,15 @@ for i:=0 to r-1 do begin
   thread[i].id:=i;
   thread[i].Start;
 end;
-timelimit:=now+10/secday;
+timelimit:=now+timeout/secday;
 repeat
-  sleep(10);
+  sleep(100);
   working:=false;
   for i:=0 to r-1 do working:=working or thread[i].working;
-  timeout:=(now>timelimit);
-until (not working)or timeout;
+  timingout:=(now>timelimit);
+until (not working)or timingout;
 if VerboseMsg then WriteTrace('SkyChart '+c.chartname+': end thread');
-if timeout then begin
+if timingout then begin
   for i:=0 to r-1 do thread[i].Terminate;
   sleep(10);
 end;

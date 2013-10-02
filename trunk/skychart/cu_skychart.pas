@@ -3083,12 +3083,13 @@ working:=false;
 end;
 
 procedure Tskychart.DrawHorizonPicture(hbmp:TBGRABitmap);
-var i,n: integer;
-    working,timeout: boolean;
+var i,n,timeout: integer;
+    working,timingout: boolean;
     timelimit: TDateTime;
     thread: array[0..7] of TDrawHorizonThread;
 begin
   n:=min(8,MaxThreadCount);
+  timeout:=round(max(10,hbmp.Width*hbmp.Height/n/100000));
   for i:=0 to n-1 do begin
     thread[i]:=TDrawHorizonThread.Create(true);
     thread[i].horizonpicture:=Fcatalog.cfgshr.horizonpicture;
@@ -3100,14 +3101,14 @@ begin
     thread[i].id:=i;
     thread[i].Start;
   end;
-  timelimit:=now+10/secday;
+  timelimit:=now+timeout/secday;
   repeat
-    sleep(10);
+    sleep(100);
     working:=false;
     for i:=0 to n-1 do working:=working or thread[i].working;
-    timeout:=(now>timelimit);
-  until (not working)or timeout;
-  if timeout then begin
+    timingout:=(now>timelimit);
+  until (not working)or timingout;
+  if timingout then begin
     for i:=0 to n-1 do thread[i].Terminate;
     sleep(10);
   end;
