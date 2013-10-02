@@ -44,6 +44,7 @@ type
     procedure Button2Click(Sender: TObject);
     procedure Button7Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -79,6 +80,11 @@ procedure Tf_configtime.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
   f_config_time1.Lock;
+end;
+
+procedure Tf_configtime.FormCreate(Sender: TObject);
+begin
+  SetLang;
 end;
 
 procedure Tf_configtime.FormShow(Sender: TObject);
