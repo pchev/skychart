@@ -1091,7 +1091,7 @@ procedure Tf_chart.PrintChart(printlandscape:boolean; printcolor,printmethod,pri
 var savecolor: Starcolarray;
     savesplot,savenplot,savepplot,savebgcolor,savedsosize,resol,rp: integer;
     rs: single;
-    saveskycolor,savebgimage,printok: boolean;
+    saveskycolor,savebgimage,saveUseSystemTime, printok: boolean;
     saveLabelColor : array[1..numlabtype] of Tcolor;
     prtname:string;
     fname:WideString;
@@ -1132,9 +1132,11 @@ if VerboseMsg then
  savebgcolor:=sc.plot.cfgplot.bgColor;
  savedsosize:=sc.plot.cfgplot.MinDsoSize;
  savebgimage:=sc.cfgsc.ShowBackgroundImage;
+ saveUseSystemTime:=sc.cfgsc.UseSystemTime;
  for i:=1 to numlabtype do saveLabelColor[i]:=sc.plot.cfgplot.LabelColor[i];
 try
  printing:=true;
+ sc.cfgsc.UseSystemTime:=false; // same time as current chart
  screen.cursor:=crHourGlass;
  Case PrintMethod of
  0: begin    // to printer
@@ -1337,6 +1339,7 @@ finally
  sc.plot.cfgplot.bgColor:=savebgcolor;
  sc.plot.cfgplot.MinDsoSize := savedsosize;
  sc.cfgsc.ShowBackgroundImage := savebgimage;
+ sc.cfgsc.UseSystemTime:=saveUseSystemTime;
  for i:=1 to numlabtype do sc.plot.cfgplot.LabelColor[i]:=saveLabelColor[i];
  sc.cfgsc.xshift:=0;
  sc.cfgsc.yshift:=0;
