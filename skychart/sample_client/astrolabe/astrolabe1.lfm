@@ -101,18 +101,19 @@ object f_astrolabe: Tf_astrolabe
     ClientWidth = 364
     TabOrder = 2
     object TrackBarH: TTrackBar
-      Left = 44
+      Left = 40
       Height = 37
       Top = 4
       Width = 324
-      Max = 360
+      Max = 180
+      Min = -180
       PageSize = 15
       Position = 0
       TickStyle = tsNone
       TabOrder = 0
     end
     object TrackBarD: TTrackBar
-      Left = 44
+      Left = 40
       Height = 37
       Top = 48
       Width = 324
