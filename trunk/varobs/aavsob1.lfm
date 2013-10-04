@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 187
+  Left = 205
   Height = 406
-  Top = 164
+  Top = 185
   Width = 420
   ActiveControl = Button1
   Caption = 'AAVSO Bulletin'
@@ -12,13 +12,13 @@ object Form1: TForm1
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poDefaultPosOnly
-  LCLVersion = '0.9.30.3'
+  LCLVersion = '1.0.8.0'
   object Label2: TLabel
     Left = 32
     Height = 15
     Top = 224
-    Width = 325
-    Caption = 'AAVSO LPV Bulletin Single file, Plain Text - By designation'
+    Width = 196
+    Caption = 'AAVSO LPV Bulletin Single CSV file'
     ParentColor = False
   end
   object Label3: TLabel
@@ -52,8 +52,8 @@ object Form1: TForm1
     Left = 32
     Height = 15
     Top = 144
-    Width = 243
-    Caption = 'http://www.aavso.org/publications/bulletin/'
+    Width = 205
+    Caption = 'http://www.aavso.org/aavso-bulletin'
     Color = clBtnFace
     Font.Color = clBlue
     Font.Height = -11
@@ -67,8 +67,8 @@ object Form1: TForm1
     Left = 32
     Height = 15
     Top = 120
-    Width = 293
-    Caption = 'Get the AAVSO Validation file and LPV Bulletin from:'
+    Width = 273
+    Caption = 'Get the AAVSO LPV Bulletin in CSV format from:'
     ParentColor = False
   end
   object Label1: TLabel
