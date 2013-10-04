@@ -30,7 +30,7 @@ uses
   Windows,
 {$endif}
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ComCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
+  StdCtrls, LResources, EditBtn, Fileutil, u_param, u_util2, Spin;
 
 type
 
@@ -61,8 +61,17 @@ type
 
 var
   Form1: TForm1;
-  lpvlst,pulslst : array[1..1000] of string;
-  nLPV,curvar : integer;
+
+const constel : array[1..88] of string = ('And','Ant','Aps','Aql','Aqr','Ara',
+              'Ari','Aur','Boo','Cae','Cam','Cap','Car','Cas','Cen','Cep','Cet',
+              'Cha','Cir','CMa','CMi','Cnc','Col','Com','CrA','CrB','Crt','Cru',
+              'Crv','CVn','Cyg','Del','Dor','Dra','Equ','Eri','For','Gem','Gru',
+              'Her','Hor','Hya','Hyi','Ind','Lac','Leo','Lep','Lib','LMi','Lup',
+              'Lyn','Lyr','Men','Mic','Mon','Mus','Nor','Oct','Oph','Ori','Pav',
+              'Peg','Per','Phe','Pic','PsA','Psc','Pup','Pyx','Ret','Scl','Sco',
+              'Sct','Ser','Sex','Sge','Sgr','Tau','Tel','TrA','Tri','Tuc','UMa',
+              'UMi','Vel','Vir','Vol','Vul');
+
 
 implementation
 {$R *.lfm}
@@ -172,18 +181,10 @@ end;
 while length(result)<5 do result:=' '+result;
 end;
 
-Function CleanDat(dat:string):string;
-begin
-result:=stringreplace(dat,'|','',[rfReplaceAll]);
-result:=stringreplace(result,'+','',[rfReplaceAll]);
-result:=stringreplace(result,'-','',[rfReplaceAll]);
-result:=stringreplace(result,' ','',[rfReplaceAll]);
-end;
-
 Procedure GetGCVSInfo(nom : string; out vartype,per,slope,jdt : string);
 var f : textfile;
-    buf,id1,id2,constel : string;
-    p : integer;
+    buf,id1,id2,cons : string;
+    i,p : integer;
 begin
 vartype:='          ';
 per:='         ';
@@ -192,10 +193,16 @@ jdt:='             ';
 buf:=trim(nom);
 p:=pos(' ',buf);
 id1:=uppercase(copy(buf,1,p-1));
-constel:=copy(buf,p+1,99);
-if constel='*' then exit;
-constel:=stringreplace(constel,'?','',[]);
-buf:=slash(form1.DirectoryEdit1.Directory)+constel+'.dat';
+cons:=copy(buf,p+1,99);
+if cons='*' then exit;
+cons:=stringreplace(cons,'?','',[]);
+for i:=1 to 88 do begin
+  if uppercase(cons)=uppercase(constel[i]) then begin
+     cons:=constel[i];
+     break;
+  end;
+end;
+buf:=slash(form1.DirectoryEdit1.Directory)+cons+'.dat';
 if not fileexists(buf) then exit;
 assignfile(f,buf);
 reset(f);
@@ -218,12 +225,11 @@ end;
 
 Procedure Tform1.ConvAAVSOb;
 var fb,f : textfile;
-    buf,design,nom,mag,dat,mag1,mag2,datm,vartype,jdt,per,slope,puls,j1 : string;
-    i,n,p,year1,year,mois,jour : integer;
+    buf,nom,mag,dat,mag1,mag2,vartype,jdt,p1,per,slope,puls,j1 : string;
+    j,p,year1,year,mois,jour : integer;
     jdm : double;
+    rec: TStringList;
 begin
-i:=0;
-n:=1;
 year1:=SpinEdit1.Value;
 buf:=FileNameEdit1.FileName;
 assignfile(fb,buf);
@@ -231,27 +237,36 @@ reset(fb);
 buf:=slash(privatedir)+'aavso'+inttostr(year1)+'.dat';
 assignfile(f,buf);
 rewrite(f);
+rec:=TStringList.Create;
 try
 repeat
- inc(i);
- label3.caption:='Progress: '+inttostr(i);
- application.processmessages;
  readln(fb,buf);
- design:=copy(buf,7,8);
- if (trim(design)='')or(design='DESIGN. ')or(design='--------') then continue;
- nom:=copy(buf,16,9);
- mag:=copy(buf,28,11);
- dat:=copy(buf,40,999);
+ SplitRec(buf,',',rec);
+ // 0    1       2      3      4        5        6        7      8     9      10  11  12  13  14  15  16  17  18  19  20  21  22  23
+ // NAME,RA.HOUR,RA.MIN,RA.SEC,DECL.DEG,DECL.MIN,DECL.SEC,PERIOD,RANGE,N(OBS),JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC,JAN,FEB
+ // U AND,1,15,29.7,40,43,8.4,346.55,<9.9-14.3>,32,min(21),rising,rising,rising,rising,MAX(19),fading,fading,fading,fading,fading,fading,min(3),rising
+ nom:=rec[0];
+ if nom='NAME' then continue;
+ mag:=rec[8];
  p:=pos('-',mag);
  mag1:=cleanmag(copy(mag,1,p-1));
  mag2:=cleanmag(copy(mag,p+1,99));
- p:=pos('M',dat);
- if p<=0 then continue;
- p:=p-2;
- datm:=cleandat(copy(dat,p,2));
- jour:=strtoint(datm);
- if length(datm)=1 then p:=p+1;
- mois:=1+( (p-2) div 6 );
+ per:=rec[7];
+ dat:='';
+ for j:=10 to 23 do begin
+   p:=pos('MAX',rec[j]);
+   if p>0 then begin
+      dat:=rec[j];
+      p:=pos('(',dat);
+      delete(dat,1,p);
+      p:=pos(')',dat);
+      dat:=copy(dat,1,p-1);
+      mois:=j-9;
+      break;
+    end;
+ end;
+ if dat='' then continue;
+ jour:=strtoint(dat);
  year:=year1;
  if mois>12 then begin
     mois:=mois-12;
@@ -259,34 +274,17 @@ repeat
  end;
  jdm:=jd(year,mois,jour,12);
  str(jdm:10:1,jdt);
- GetGCVSinfo(nom,vartype,per,slope,j1);
- puls:=nom+', '+vartype+', '+mag1+', '+mag2+', '+jdt+', '+per+', '+slope+', '+design;
+ GetGCVSinfo(nom,vartype,p1,slope,j1);
+ puls:=nom+', '+vartype+', '+mag1+', '+mag2+', '+jdt+', '+per+', '+slope;
  writeln(f,puls);
- lpvlst[n]:=trim(design);
- pulslst[n]:=puls;
- inc(n);
 until eof(fb);
-nLPV:=n-1;
 closefile(f);
 closefile(fb);
 label3.caption:='Finished';
+rec.free;
 except
 showmessage('Error for line :'+buf);
 raise;
-end;
-end;
-
-Function IsLPV(design : string):boolean;
-var i : integer;
-begin
-result:=false;
-design:=trim(design);
-for i:=1 to nLPV do begin
-  if design=lpvlst[i] then begin
-     curvar:=i;
-     result:=true;
-     break;
-  end;
 end;
 end;
 
@@ -305,8 +303,8 @@ begin
 GetAppDir;
 OpenFileCmd:=DefaultOpenFileCMD;
 DirectoryEdit1.Directory:=slash(appdir)+slash('data')+slash('varobs');
-SpinEdit1.Text:=formatdatetime('yyyy',now);
-FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+formatdatetime('yy',now)+'.TXT';
+SpinEdit1.Value:=StrToInt(formatdatetime('yyyy',now));
+FileNameEdit1.FileName:=slash(privatedir)+'Bulletin'+formatdatetime('yyyy',now)+'.csv';
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -321,7 +319,7 @@ end;
 
 procedure TForm1.SpinEdit1Change(Sender: TObject);
 begin
-FileNameEdit1.FileName:=slash(privatedir)+'BULLET'+copy(SpinEdit1.text,3,2)+'.TXT';
+FileNameEdit1.FileName:=slash(privatedir)+'Bulletin'+SpinEdit1.Text+'.csv';
 end;
 
 end.
