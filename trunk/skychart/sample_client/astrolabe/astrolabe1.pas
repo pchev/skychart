@@ -91,7 +91,7 @@ type
     CdCfound, StartCDC,Connecting,Closing,Restarting : boolean;
     ConnectRetry, ScreenTimeout: integer;
     LastPosX, LastPosY, LastMenu, InactiveLoop: integer;
-    EncoderX,EncoderY : integer;
+    EncoderX,EncoderY,Hflip,Dflip : integer;
     card: SmallInt;
     RealEncoder:boolean;
     ScreenOn: boolean;
@@ -137,6 +137,8 @@ const
         cardNum: integer = 0;
         Hoffset: integer = 0;           // Encoder offset, hour angle
         Doffset: integer = 0;           // Encoder offset, declination
+        Hdirection: string = '+';       // Encoder rotation direction, hour angle
+        Ddirection: string = '+';       // Encoder rotation direction, declination
   {$endif}
   {$ifdef darwin}
         DefaultCdC='skychart';
@@ -146,6 +148,8 @@ const
         cardNum: integer = 0;
         Hoffset: integer = 0;           // Encoder offset, hour angle
         Doffset: integer = 0;           // Encoder offset, declination
+        Hdirection: string = '+';       // Encoder rotation direction, hour angle
+        Ddirection: string = '+';       // Encoder rotation direction, declination
   {$endif}
   {$ifdef mswindows}
         DefaultCdC='skychart.exe';
@@ -157,6 +161,8 @@ const
         cardNum: integer = 0;           // First card
         Hoffset: integer = 0;           // Encoder offset, hour angle
         Doffset: integer = 0;           // Encoder offset, declination
+        Hdirection: string = '+';       // Encoder rotation direction, hour angle
+        Ddirection: string = '+';       // Encoder rotation direction, declination
   {$endif}
 
 implementation
@@ -249,10 +255,14 @@ if FileExists(daskconfig) then begin
     cardNum   := inif.ReadInteger('dask', 'number', cardNum);
     Hoffset   := inif.ReadInteger('encoder', 'Hoffset', Hoffset);
     Doffset   := inif.ReadInteger('encoder', 'Doffset', Doffset);
+    Hdirection:= inif.ReadString('encoder', 'Hdirection', Hdirection);
+    Ddirection:= inif.ReadString('encoder', 'Ddirection', Ddirection);
     ScreenTimeout:=inif.ReadInteger('screen', 'ScreenTimeout', ScreenTimeout);
   finally
     inif.Free;
   end;
+  if Hdirection='+' then Hflip:=1 else Hflip:=-1;
+  if Ddirection='+' then Dflip:=1 else Dflip:=-1;
 end;
 end;
 
@@ -460,6 +470,8 @@ DefaultFormatSettings.DateSeparator:='/';
 DefaultFormatSettings.TimeSeparator:=':';
 ScreenTimeout:=-1;
 ScreenOn:=true;
+Hflip:=1;
+Dflip:=1;
 GetCdCInfo;
 GetDaskInfo;
 edit1.Text:=ServerIPaddr;
@@ -570,8 +582,8 @@ var PA,PB,PC,x1,x2,x3: word;
 procedure FixRange;
 begin
   // apply offset from ini file
-  EncoderX:=(EncoderX+Hoffset+720) mod 360;
-  EncoderY:=(EncoderY+Doffset+720+90) mod 360;
+  EncoderX:=(Hflip*EncoderX+Hoffset+720) mod 360;
+  EncoderY:=(Dflip*EncoderY+Doffset+720+90) mod 360;
   // convert 0-360 range to valid HA/DEC
   if (EncoderY>90) then begin
     if (EncoderY<=270) then begin
