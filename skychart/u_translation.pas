@@ -1458,6 +1458,7 @@ resourcestring
   rsConnectToSAM = 'Connect to SAMP hub';
   rsDisconnectFr = 'Disconnect from SAMP';
   rsDeltaTError = 'DeltaT uncertainty';
+  rsShowImageNam = 'Show image name label';
 
 implementation
 

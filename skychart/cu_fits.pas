@@ -73,6 +73,9 @@ TDrawListThread = class(TThread)
    constructor Create(CreateSuspended: boolean);
   end;
 
+Tfitslistlabel = record lid: longword;
+                        lra,lde,rot: single;
+                 end;
 
 const    maxl = 4000;
 
@@ -109,6 +112,7 @@ type
      dbconnected, invertx, inverty : boolean;
      fitslist: TStringList;
      fitslistactive: array of boolean;
+     fitslistlabel: array of Tfitslistlabel;
      fitslistmodified: boolean;
      fitslistra,fitslistdec: double;
      constructor Create(AOwner:TComponent); override;

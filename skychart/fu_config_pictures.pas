@@ -39,6 +39,7 @@ type
     ArchiveBox: TCheckBox;
     ArchiveDirectory1: TDirectoryEdit;
     Button1: TButton;
+    ShowImageLabel: TCheckBox;
     ConfirmArchive: TCheckBox;
     ImgITT2: TComboBox;
     Label9: TLabel;
@@ -130,6 +131,7 @@ type
     procedure ScanImagesClick(Sender: TObject);
     procedure ImgLumBarChange(Sender: TObject);
     procedure ImgContrastBarChange(Sender: TObject);
+    procedure ShowImageLabelChange(Sender: TObject);
     procedure ShowImageListChange(Sender: TObject);
     procedure ShowImagesBoxClick(Sender: TObject);
     procedure backimgChange(Sender: TObject);
@@ -243,6 +245,7 @@ stringgrid1.Columns[1].Title.Caption:=rsPath;
 stringgrid1.Columns[3].Title.Caption:=rsCount;
 label8.Caption:=rsMaximumNumbe;
 ShowImageList.Caption:=rsShowTheImage;
+ShowImageLabel.Caption:=rsShowImageNam;
 Button1.Caption:=rsAdjustTheVis;
 end;
 
@@ -339,6 +342,7 @@ ArchiveDirectory1.Directory:=SysToUTF8(cdss.dssarchivedir);
 ConfirmArchive.Checked := cdss.dssarchiveprompt;
 MaxImg.ItemIndex:=csc.MaxArchiveImg-1;
 ShowImageList.Checked := csc.ShowImageList;
+ShowImageLabel.Checked := csc.ShowImageLabel;
 for i:=1 to MaxArchiveDir do StringGrid1.Cells[1,i]:=SysToUTF8(csc.ArchiveDir[i]);
 for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[0,i]:='1' else StringGrid1.Cells[0,i]:='0';
 for i:=1 to MaxArchiveDir do if csc.ArchiveDirActive[i] then StringGrid1.Cells[3,i]:=inttostr(cdb.CountImages(csc.ArchiveDir[i]));
@@ -430,6 +434,11 @@ procedure Tf_config_pictures.ImgContrastBarChange(Sender: TObject);
 begin
 if LockChange then exit;
 csc.NEBmax_sigma:=ImgContrastBar.position/100;
+end;
+
+procedure Tf_config_pictures.ShowImageLabelChange(Sender: TObject);
+begin
+  csc.ShowImageLabel:=ShowImageLabel.Checked;
 end;
 
 procedure Tf_config_pictures.ShowImageListChange(Sender: TObject);
