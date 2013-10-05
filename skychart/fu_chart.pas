@@ -3982,7 +3982,10 @@ var x,y : integer;
     ok: boolean;
 begin
 try
-projection(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,x1,y1,false,sc.cfgsc) ;
+if Connect1.checked then
+  projection(sc.cfgsc.ScopeRa,sc.cfgsc.ScopeDec,x1,y1,false,sc.cfgsc)
+else
+  projection(sc.cfgsc.Scope2Ra,sc.cfgsc.Scope2Dec,x1,y1,false,sc.cfgsc);
 WindowXY(x1,y1,xx,yy,sc.cfgsc);
 x:=round(xx);
 y:=round(yy);
