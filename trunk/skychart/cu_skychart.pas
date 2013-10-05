@@ -1413,6 +1413,13 @@ end else begin
          then begin
             fits.fitslist.Add(filename);
             fits.fitslistactive[n]:=true;
+            projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+            fits.fitslistlabel[n].rot:=rot+RotationAngle(x1,y1,x2,y2,cfgsc);
+            XYWindow(round(xx),round(yy+dh),x2,y2,cfgsc);
+            InvProj(x2,y2,lra,lde,cfgsc);
+            fits.fitslistlabel[n].lra:=lra;
+            fits.fitslistlabel[n].lde:=lde;
+            fits.fitslistlabel[n].lid:=rshash(filename+FormatFloat(f6,lra)+FormatFloat(f6,lde),$7FFFFFFF);
             inc(n);
             if n>=Length(fits.fitslistactive) then SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
          end;
