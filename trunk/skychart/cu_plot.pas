@@ -75,7 +75,7 @@ type
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
      procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
-     procedure PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
+     procedure PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
      procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
@@ -940,7 +940,7 @@ begin
           16 : // lozenge
             PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           101..111: // Planet from ds2000
-            PlotPlanet4(round(Axx),round(Ayy),Atyp-100,Apixscale,WhiteBg);
+            PlotPlanet4(round(Axx),round(Ayy),Atyp-100,Apixscale,0,WhiteBg);
           112:  // Asteroid from ds2000
             PlotAsteroid(Axx,Ayy,0,Ama);
           113: // Comet from ds2000
@@ -1190,7 +1190,7 @@ if not cfgplot.Invisible then begin
           end;
           end;
       3 : begin // symbol
-          PlotPlanet4(xx,yy,ipla,pixscale,WhiteBg);
+          PlotPlanet4(xx,yy,ipla,pixscale,phase,WhiteBg);
           end;
   end;
  end; 
@@ -1481,13 +1481,23 @@ begin
  PlotImage(xx,yy,ds,ds,rot,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
-procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale:double;WhiteBg:boolean);
-var symbol: string;
+procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
+var symbol,ph: string;
     ds,mode: integer;
     spng: TPortableNetworkGraphic;
     sbmp: TBitmap;
 begin
- symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
+ if ipla=11 then begin
+   ph:='';
+   if (phase>165)and(phase<195) then ph:='_n'
+   else if (phase>50)and(phase<=165) then ph:='_fq'
+   else if (phase<=50)or(phase>310) then ph:='_f'
+   else ph:='_lq';
+   symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+ph+'.png';
+   if not fileexists(symbol) then symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
+ end else begin
+   symbol:=slash(appdir)+slash('data')+slash('planet')+'symbol'+inttostr(ipla)+'.png';
+ end;
  if fileexists(symbol) then begin
    spng:=TPortableNetworkGraphic.Create;
    sbmp:=TBitmap.Create;
