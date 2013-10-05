@@ -1294,11 +1294,28 @@ end;
 function Tskychart.DrawImagesList :boolean;
 var
   filename,objname : string;
-  ra,de,width,height,dw,dh: double;
+  ra,de,width,height,dw,dh,lra,lde: double;
   cosr,sinr: extended;
   x1,y1,x2,y2,rot,ra2000,de2000: Double;
   xx,yy:single;
   i,n: integer;
+
+  procedure drawfitslabel;
+  var ii: integer;
+      xx1,yy1: double;
+      xla,yla: single;
+  begin
+    if cfgsc.ShowImageLabel and (fits.fitslist.Count>0) then begin
+     for ii:=0 to fits.fitslist.Count-1 do begin
+       if fits.fitslistactive[ii] then begin
+          projection(fits.fitslistlabel[ii].lra,fits.fitslistlabel[ii].lde,xx1,yy1,true,cfgsc) ;
+          WindowXY(xx1,yy1,xla,yla,cfgsc);
+          SetLabel(fits.fitslistlabel[ii].lid,xla,yla,0,2,7,ExtractFileName(fits.fitslist[ii]),laCenter,rad2deg*fits.fitslistlabel[ii].rot,5,false);
+       end;
+     end;
+    end;
+  end;
+
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': DrawImagesList');
 if bgvalid and (not bgsettingchange) and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.decentre)
@@ -1307,6 +1324,7 @@ if bgvalid and (not bgsettingchange) and(bgcra=cfgsc.racentre)and(bgcde=cfgsc.de
    and(bgrot=cfgsc.theta)and(bgflipx=cfgsc.FlipX)and(bgflipy=cfgsc.FlipY) then begin
       //cache bgbmp
       Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+      drawfitslabel;
 end else begin
   bgcra:=cfgsc.racentre;
   bgcde:=cfgsc.decentre;
@@ -1325,6 +1343,7 @@ end else begin
     cfgsc.MaxArchiveImg:=min(cfgsc.MaxArchiveImg,maxfitslist);
     fits.fitslist.Clear;
     setlength(fits.fitslistactive,10);
+    setlength(fits.fitslistlabel,10);
     fits.fitslistmodified:=false;
     fits.fitslistra:=cfgsc.racentre;
     fits.fitslistdec:=cfgsc.decentre;
@@ -1360,11 +1379,20 @@ end else begin
           then begin
              fits.fitslist.Add(filename);
              if n<cfgsc.MaxArchiveImg then fits.fitslistactive[n]:=true
-                                else fits.fitslistactive[n]:=false;
+                                      else fits.fitslistactive[n]:=false;
+             projection(ra,de+0.001,x2,y2,false,cfgsc) ;
+             fits.fitslistlabel[n].rot:=rot+RotationAngle(x1,y1,x2,y2,cfgsc);
+             XYWindow(round(xx),round(yy+dh),x2,y2,cfgsc);
+             InvProj(x2,y2,lra,lde,cfgsc);
+             fits.fitslistlabel[n].lra:=lra;
+             fits.fitslistlabel[n].lde:=lde;
+             fits.fitslistlabel[n].lid:=rshash(filename+FormatFloat(f6,lra)+FormatFloat(f6,lde),$7FFFFFFF);
              inc(n);
-             if n>=Length(fits.fitslistactive) then SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+             if n>=Length(fits.fitslistactive) then begin
+               SetLength(fits.fitslistactive,Length(fits.fitslistactive)+10);
+               SetLength(fits.fitslistlabel,Length(fits.fitslistlabel)+10);
+             end;
           end;
-
         end;
     end;
     finally
@@ -1397,6 +1425,7 @@ end else begin
     FFits.itt:=cfgsc.BGitt;
     FFits.GetProjList(bgbmp,cfgsc);
     Fplot.PlotBGImage(bgbmp, cfgsc.WhiteBg, cfgsc.BGalpha);
+    drawfitslabel;
     bgvalid:=true;
   end;
 end;
@@ -4693,7 +4722,7 @@ for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2
         sz:=Max(abs(p[0].X-p[1].X),abs(p[0].Y-p[1].Y));
         lis:=cfgsc.rectanglelbl[i]+FormatFloat(f6,ra)+FormatFloat(f6,de);
         lid:=rshash(lis,$7FFFFFFF);
-        if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom);
+        if sz>=20 then SetLabel(lid,xla,yla,0,2,7,lbl,laBottom,rad2deg*(pa+rot));
       end;
     end;
   end;

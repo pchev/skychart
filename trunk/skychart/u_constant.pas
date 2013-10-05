@@ -787,7 +787,7 @@ type
     IndiDriver, IndiPort, IndiDevice: string;
     IndiAutostart, ShowCircle, IndiTelescope, ASCOMTelescope,
     LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
-    ShowImageList, ShowBackgroundImage, showstars, shownebulae, showline,
+    ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
     showlabelall, Editlabels, OptimizeLabels: boolean;
     BackgroundImage: string;
     MaxArchiveImg: integer;
@@ -1864,6 +1864,7 @@ begin
   ShowImages := Source.ShowImages;
   ShowBackgroundImage := Source.ShowBackgroundImage;
   ShowImageList := Source.ShowImageList;
+  ShowImageLabel := Source.ShowImageLabel;
   showstars := Source.showstars;
   shownebulae := Source.shownebulae;
   showline := Source.showline;
