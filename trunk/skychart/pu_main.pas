@@ -8392,6 +8392,9 @@ if i>0 then begin
   i:=pos('localhost',url);
   if i>=0 then begin
     delete(url,i,i+8);
+    {$ifdef mswindows}
+    if copy(url,1,1)='/' then delete(url,1,1);
+    {$endif}
   end;
   sfn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
   CopyFile(sfn,fn);
