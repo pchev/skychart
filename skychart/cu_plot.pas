@@ -73,7 +73,7 @@ type
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
-     procedure PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double);
+     procedure PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,phase,pa,rot,poleincl,sunincl:double);
      procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
      procedure PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
      procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
@@ -1178,7 +1178,7 @@ if not cfgplot.Invisible then begin
           PlotStar(x,y,magn,b_v);
           end;
       1 : begin // diam
-          PlotPlanet1(xx,yy,ipla,pixscale,diam);
+          PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,phase,pa,rot,poleincl,sunincl);
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
@@ -1197,9 +1197,15 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-procedure TSplot.PlotPlanet1(xx,yy,ipla:integer; pixscale,diam:double); // ellipse
+procedure TSplot.PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,phase,pa,rot,poleincl,sunincl:double); // ellipse
 var ds,ico : integer;
     col:TBGRAPixel;
+    p : array[0..23] of TPointF;
+    pp: array[0..23] of TPoint;
+    ds1,ds2,n,ex1,ey1,fx,fy : integer;
+    th,ex,ey,sph : double;
+    ci,si: extended;
+    plotphase,fillphase: boolean;
 begin
 ds:=round(max(diam*pixscale/2,2*cfgchart.drawpen));
 case Ipla of
@@ -1216,6 +1222,62 @@ case Ipla of
  11:begin ico := 2; end;
  else begin ico:=2; end;
 end;
+plotphase:=false;
+fillphase:=false;
+if (ipla=11)and(phase>-900) then begin
+  ds1:=ds;
+  ds2:=round(-cos(deg2rad*phase)*ds1);
+  sincos(-(rot+deg2rad*(pa+sunincl)),si,ci);
+  th:=pi/2;
+  if phase<180 then begin
+      sph:=-1;
+   end else begin
+      sph:=1;
+   end;
+   for n:=1 to 22 do begin
+     ex:=sph*ds2*cos(th);
+     ey:=ds1*sin(th);
+     ey1:=round(ex*si - ey*ci)+yy ;
+     ex1:=round(ex*ci + ey*si)+xx ;
+     p[n]:=PointF(ex1,ey1);
+     th:=th+0.15;
+   end;
+   p[0]:=p[1];
+   p[23]:=p[22];
+   if (phase>180) then begin
+     sincos(-(rot+deg2rad*(pa+sunincl)),si,ci);
+     fx:=round(xx+ds1*ci);
+     fy:=round(yy+ds1*si);
+   end else begin
+     sincos(pi-(rot+deg2rad*(pa+sunincl)),si,ci);
+     fx:=round(xx+ds1*ci);
+     fy:=round(yy+ds1*si);
+   end;
+   ex:=fx-p[11].x;
+   ey:=fy-p[11].y;
+   if sqrt(ex*ex+ey*ey)>6 then begin
+     fillphase:=true;
+     fx:=round(fx-ex/2);
+     fy:=round(fy-ey/2);
+   end else begin
+     fillphase:=false;
+   end;
+   if flipx<>flipy then begin
+     if flipx<0 then begin
+       fx:=2*xx-fx;
+       for n:=0 to 23 do begin
+         p[n].X:=2*xx-p[n].X;
+       end;
+     end;
+     if flipy<0 then begin
+       fy:=2*yy-fy;
+       for n:=0 to 23 do begin
+         p[n].Y:=2*yy-p[n].Y;
+       end;
+     end;
+   end;
+   plotphase:=true;
+end;
 if cfgplot.UseBMP then begin
    if cfgplot.Color[11]>cfgplot.BgColor then begin
      col := ColorToBGRA(cfgplot.Color[ico+1]) ;
@@ -1226,6 +1288,11 @@ if cfgplot.UseBMP then begin
                                 else col.alpha:=255;
    cbmp.EllipseAntialias(xx,yy,ds,ds,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
    cbmp.FillEllipseAntialias(xx,yy,ds,ds,col);
+   if plotphase then begin
+     col:=ColorToBGRA(clGray);
+     cbmp.DrawPolyLineAntialias(p,col,2);
+     if fillphase then cbmp.FloodFill(fx,fy,col,fmSet);
+   end;
 end else if cnv<>nil then with cnv do begin
    if cfgplot.Color[11]>cfgplot.BgColor then begin
      Brush.Color := cfgplot.Color[ico+1] ;
@@ -1242,6 +1309,14 @@ end else if cnv<>nil then with cnv do begin
    Brush.style:=bsclear;
    ds:=ds+cfgchart.drawpen;
    Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+   if plotphase then begin
+     Pen.Color := clGray;
+     for n:=0 to 23 do begin
+        pp[n].X:=round(p[n].X);
+        pp[n].Y:=round(p[n].Y);
+     end;
+     Polyline(pp);
+   end;
 end;
 end;
 
@@ -1439,7 +1514,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  end
  else begin // something go wrong with xplanet
     writetrace('Return code '+inttostr(i)+' from '+cmd);
-    PlotPlanet1(xx,yy,ipla,pixscale,diam);
+    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,-999,0,0,0,0);
     ok:=false;
     planetbmpjd:=0;
  end;
@@ -1461,7 +1536,7 @@ begin
    size:=1024; margin:=107;
  end;
  if not FileExists(fn) then begin
-   PlotPlanet1(xx,yy,ipla,pixscale,diam);
+   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,-999,0,0,0,0);
    exit;
  end;
  ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
