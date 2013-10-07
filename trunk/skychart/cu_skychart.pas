@@ -2341,17 +2341,23 @@ begin
             str(cfgsc.FindSize:5:1,txt);
             buf:=trim(rec.options.flabel[lOffset+vnDim1]);
             if buf='' then buf:='Dim';
-            Desc:=Desc+buf+dp+txt;
-            if rec.neb.valid[vnDim2] and (rec.neb.dim2>0) then str(rec.neb.dim2:5:1,txt);
-            Desc:=Desc+' x'+txt+b;
-            if rec.neb.valid[vnNebunit] then i:=rec.neb.nebunit
-                                        else i:=rec.options.Units;
-            if i=0 then i:=1;                            
-            cfgsc.FindSize:=deg2rad*cfgsc.FindSize/i;
-            case i of
-            1    : Desc:=Desc+ldeg;
-            60   : Desc:=Desc+lmin;
-            3600 : Desc:=Desc+lsec;
+            if buf='No size' then begin
+               Desc:=Desc+buf+dp;
+               cfgsc.FindSize:=0;
+            end
+            else begin
+              Desc:=Desc+buf+dp+txt;
+              if rec.neb.valid[vnDim2] and (rec.neb.dim2>0) then str(rec.neb.dim2:5:1,txt);
+              Desc:=Desc+' x'+txt+b;
+              if rec.neb.valid[vnNebunit] then i:=rec.neb.nebunit
+                                          else i:=rec.options.Units;
+              if i=0 then i:=1;
+              cfgsc.FindSize:=deg2rad*cfgsc.FindSize/i;
+              case i of
+              1    : Desc:=Desc+ldeg;
+              60   : Desc:=Desc+lmin;
+              3600 : Desc:=Desc+lsec;
+              end;
             end;
             Desc:=Desc+tab;
          end else begin

@@ -53,8 +53,8 @@ type
      function OpenStarCat:boolean;
      function CloseStarCat:boolean;
      function NewGCat:boolean;
-     function GetVOCatS(var rec:GcatRec):boolean;
-     function GetVOCatN(var rec:GcatRec):boolean;
+     function GetVOCatS(var rec:GcatRec; filter:boolean=true):boolean;
+     function GetVOCatN(var rec:GcatRec; filter:boolean=true):boolean;
      function GetUObjN(var rec:GcatRec):boolean;
      function GetGCatS(var rec:GcatRec):boolean;
      function GetGCatV(var rec:GcatRec):boolean;
@@ -1468,17 +1468,17 @@ SetVOCatpath(slash(VODir));
 result:=GetVOMagmax;
 end;
 
-function Tcatalog.GetVOCatS(var rec:GcatRec):boolean;
+function Tcatalog.GetVOCatS(var rec:GcatRec; filter:boolean=true):boolean;
 begin
 repeat
   ReadVOCat(rec,result);
   if not result then break;
-  if cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then continue;
+  if filter and cfgshr.StarFilter and (rec.star.magv>cfgcat.StarMagMax) then continue;
   break;
 until not result;
 end;
 
-function Tcatalog.GetVOCatN(var rec:GcatRec):boolean;
+function Tcatalog.GetVOCatN(var rec:GcatRec; filter:boolean=true):boolean;
 var i: integer;
 begin
 repeat
@@ -1486,16 +1486,17 @@ repeat
   cfgcat.SampSelectIdent:=false;
   if not result then break;
   if not rec.neb.valid[vnMag] then rec.neb.mag:=rec.options.MagMax;
-  if cfgshr.NebFilter and
+  if filter and cfgshr.NebFilter and
      rec.neb.valid[vnMag] and
+    (rec.neb.mag<99) and
     (rec.neb.mag>cfgcat.NebMagMax) then continue;
   if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
   if not rec.neb.valid[vnDim1] then rec.neb.dim1:=rec.options.Size;
-  if cfgshr.NebFilter and
+  if filter and cfgshr.NebFilter and
      (not rec.neb.valid[vnDim1] and (rec.neb.dim1<>0)) and
      (rec.neb.dim1*60/rec.neb.nebunit<cfgcat.NebSizeMin) then continue;
   if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-  if cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
+  if filter and cfgshr.NebFilter and cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue; // filter big object except M31, LMC, SMC
   if (cfgcat.SampSelectedNum>0)and(cfgcat.SampSelectedTable=vocat.SAMPid) then begin
      for i:=0 to cfgcat.SampSelectedNum-1 do
        if cfgcat.SampSelectedRec[i]=vocat.VOcatrec then begin
@@ -2711,17 +2712,40 @@ end;
 function Tcatalog.SearchNebulae(Num:string; var ar1,de1: double): boolean;
 var buf : string;
     i:integer;
+    rec: Gcatrec;
+    ok: boolean;
 begin
    if cfgcat.nebcatdef[uneb-BaseNeb] then begin
      buf:=uppercase(Num);
      for i:=0 to Length(cfgcat.UserObjects)-1 do begin
-       if cfgcat.UserObjects[i].active and (UpperCase(cfgcat.UserObjects[i].oname)=buf) then begin
+       if cfgcat.UserObjects[i].active and (pos(buf,UpperCase(cfgcat.UserObjects[i].oname))>0) then begin
           ar1:= cfgcat.UserObjects[i].ra;
           de1:= cfgcat.UserObjects[i].dec;
           result:=true;
           exit;
        end;
      end;
+   end;
+   if cfgcat.nebcatdef[voneb-BaseNeb] then begin
+     buf:=uppercase(Num);
+     VOobject:='dso';
+     SetVOCatpath(slash(VODir));
+     OpenVOCatwin(ok);
+     result:=false;
+     if ok then
+      repeat
+       ok:=GetVOcatN(rec, false);
+       if ok and (pos(buf,UpperCase(rec.neb.id))>0) then begin
+         ar1:=rec.ra ;
+         de1:=rec.dec;
+         FFindId:=rec.star.id;
+         FFindRecOK:=true;
+         FFindRec:=rec;
+         result:=true;
+       end;
+      until result or (not ok);
+     CloseVOCat;
+     if result then exit;
    end;
    result:=FindNum(S_SAC,Num,ar1,de1) ;
    if result then exit;
@@ -2781,8 +2805,32 @@ end;
 
 function Tcatalog.SearchStar(Num:string; var ar1,de1: double): boolean;
 var buf : string;
+    rec: Gcatrec;
+    ok: boolean;
 begin
-   // first the id not in the default catalog
+// first the VO catalog
+   if cfgcat.StarCatDef[vostar-BaseStar] then begin
+     buf:=uppercase(Num);
+     VOobject:='star';
+     SetVOCatpath(slash(VODir));
+     OpenVOCatwin(ok);
+     result:=false;
+     if ok then
+      repeat
+       ok:=GetVOcatN(rec, false);
+       if ok and (pos(buf,UpperCase(rec.star.id))>0) then begin
+         ar1:=rec.ra ;
+         de1:=rec.dec;
+         FFindId:=rec.star.id;
+         FFindRecOK:=true;
+         FFindRec:=rec;
+         result:=true;
+       end;
+      until result or (not ok);
+     CloseVOCat;
+     if result then exit;
+   end;
+   // then the id not in the default catalog
    if uppercase(copy(Num,1,2))='GC' then begin
       buf:=StringReplace(Num,'gc','',[rfReplaceAll,rfIgnoreCase]);
       result:=FindNum(S_GC,buf,ar1,de1) ;
