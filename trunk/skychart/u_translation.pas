@@ -1459,6 +1459,8 @@ resourcestring
   rsDisconnectFr = 'Disconnect from SAMP';
   rsDeltaTError = 'DeltaT uncertainty';
   rsShowImageNam = 'Show image name label';
+  rsCalendarGrap = 'Calendar graph setting';
+  rsGraphHeight = 'Graph height';
 
 implementation
 

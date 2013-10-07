@@ -297,6 +297,11 @@ if Fnightvision<>nightvision then begin
    PageControl1.Invalidate;
 end;
 {$endif}
+// apply graph setting (config is not available in formcreate)
+dgPlanet.DefaultRowHeight:=config.CalGraphHeight;
+for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
+  PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
+end;
 if initial then begin
   date1.JD:=jd(config.CurYear,config.CurMonth,config.CurDay,0);
   date2.JD:=date1.JD+5;
@@ -311,11 +316,6 @@ if cdb=nil then begin
    comet.TabVisible:=false;
    Asteroids.TabVisible:=false;
 end;
-// apply graph setting (config is not available in formcreate)
-dgPlanet.DefaultRowHeight:=config.CalGraphHeight;
-for i := low(PlanetGraphs) to high(PlanetGraphs) do begin
-  PlanetGraphs[i].SetSize(dgPlanet.DefaultColWidth, dgPlanet.DefaultRowHeight);
- end;
 lockclick:=true;
 end;
 
