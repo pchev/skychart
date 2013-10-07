@@ -6816,7 +6816,7 @@ end else begin
 end;
 if chart is Tf_chart then with chart as Tf_chart do begin
    catalog.ClearSearch;
-   if sc.cfgsc.shownebulae or catalog.cfgcat.nebcatdef[uneb-BaseNeb] then begin
+   if sc.cfgsc.shownebulae or catalog.cfgcat.nebcatdef[uneb-BaseNeb] or catalog.cfgcat.nebcatdef[voneb-BaseNeb] then begin
      stype:='N';  itype:=ftNeb;
      ok:=catalog.SearchNebulae(Num,ar1,de1) ;
      if ok then goto findit;
@@ -6831,7 +6831,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
      ok:=catalog.SearchDblStar(Num,ar1,de1) ;
      if ok then goto findit;
    end;
-   if sc.cfgsc.showstars then begin
+   if sc.cfgsc.showstars or catalog.cfgcat.StarCatDef[vostar-BaseStar] then begin
      stype:='*';  itype:=ftStar;
      ok:=catalog.SearchStar(Num,ar1,de1) ;
      if ok then goto findit;
@@ -8502,7 +8502,7 @@ if FileExists(fn) then begin
    config.SetValue('VOcat/plot/drawcolor',clRed);
    config.SetValue('VOcat/plot/forcecolor',1);
    config.SetValue('VOcat/default/defsize',0);
-   config.SetValue('VOcat/default/defmag',8);
+   config.SetValue('VOcat/default/defmag',99);
    config.SetValue('VOcat/fields/fieldcount',length(VO_TableData.Columns));
    for i:=0 to length(VO_TableData.Columns)-1 do
        config.SetValue('VOcat/fields/field_'+inttostr(i),VO_TableData.Columns[i]);
