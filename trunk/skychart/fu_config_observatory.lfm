@@ -23,10 +23,10 @@ object f_config_observatory: Tf_config_observatory
       Height = 525
       Top = 1
       Width = 500
-      ActivePage = Page1
+      ActivePage = Page2
       Align = alClient
       ShowTabs = False
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Observatory'
@@ -474,7 +474,7 @@ object f_config_observatory: Tf_config_observatory
             Width = 208
             OnAcceptFileName = horizonpicturefileAcceptFileName
             DialogOptions = []
-            Filter = '*.png|*.png'
+            Filter = '*.png|*.png|*.bmp|*.bmp'
             FilterIndex = 0
             HideDirectories = False
             ButtonWidth = 23

@@ -885,6 +885,10 @@ horizonfile.InitialDir:=slash(appdir)+'data'+pathdelim+'horizon';
 displayhorizon.Checked:=csc.ShowHorizon;
 horizonpicturefile.text:=cmain.HorizonPictureFile;
 horizonpicturefile.InitialDir:=slash(HomeDir);
+if uppercase(ExtractFileExt(cmain.HorizonPictureFile))='.BMP' then
+  horizonpicturefile.FilterIndex:=1
+else
+  horizonpicturefile.FilterIndex:=0;
 displayhorizonpicture.Checked := csc.ShowHorizonPicture;
 HorizonQuality.Checked := not csc.HorizonPictureLowQuality;
 picturerotation.Value:=csc.HorizonPictureRotate;
