@@ -6,8 +6,8 @@ object f_config_calendar: Tf_config_calendar
   ClientHeight = 529
   ClientWidth = 500
   TabOrder = 0
-  DesignLeft = 380
-  DesignTop = 240
+  DesignLeft = 302
+  DesignTop = 210
   object Mainpanel: TPanel
     Left = 0
     Height = 529
@@ -31,45 +31,37 @@ object f_config_calendar: Tf_config_calendar
         Caption = 'TabSheet1'
         ClientHeight = 523
         ClientWidth = 494
-        object Label1: TLabel
-          Left = 27
-          Height = 16
-          Top = 13
-          Width = 130
+        object GroupBox1: TGroupBox
+          Left = 21
+          Height = 209
+          Top = 29
+          Width = 377
           Caption = 'Calendar graph setting'
-          ParentColor = False
-        end
-        object LongEdit1: TLongEdit
-          Left = 140
-          Height = 23
-          Hint = '100..500'
-          Top = 109
-          Width = 80
-          ParentShowHint = False
-          ShowHint = True
+          ClientHeight = 192
+          ClientWidth = 373
           TabOrder = 0
-          OnChange = LongEdit1Change
-          Value = 100
-          MinValue = 100
-          MaxValue = 500
-        end
-        object Label2: TLabel
-          Left = 29
-          Height = 16
-          Top = 113
-          Width = 74
-          Caption = 'Graph height'
-          ParentColor = False
-        end
-        object Label3: TLabel
-          Left = 29
-          Height = 40
-          Top = 45
-          Width = 336
-          AutoSize = False
-          Caption = 'This is a work in progress and this page do not do anything useful at the moment'
-          ParentColor = False
-          WordWrap = True
+          object LongEdit1: TLongEdit
+            Left = 125
+            Height = 23
+            Hint = '100..500'
+            Top = 57
+            Width = 80
+            ParentShowHint = False
+            ShowHint = True
+            TabOrder = 0
+            OnChange = LongEdit1Change
+            Value = 100
+            MinValue = 100
+            MaxValue = 500
+          end
+          object Label2: TLabel
+            Left = 14
+            Height = 16
+            Top = 61
+            Width = 74
+            Caption = 'Graph height'
+            ParentColor = False
+          end
         end
       end
     end

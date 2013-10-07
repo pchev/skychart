@@ -12,9 +12,8 @@ type
   { Tf_config_calendar }
 
   Tf_config_calendar = class(TFrame)
-    Label1: TLabel;
+    GroupBox1: TGroupBox;
     Label2: TLabel;
-    Label3: TLabel;
     LongEdit1: TLongEdit;
     Mainpanel: TPanel;
     PageControl1: TPageControl;
@@ -47,7 +46,8 @@ end;
 
 procedure Tf_config_calendar.SetLang;
 begin
-
+ GroupBox1.Caption:=rsCalendarGrap;
+ label2.Caption:=rsGraphHeight;
 end;
 
 constructor Tf_config_calendar.Create(AOwner:TComponent);
