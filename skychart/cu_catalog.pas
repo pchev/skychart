@@ -31,7 +31,7 @@ uses
     bscunit, dscat, findunit, gcatunit, gcmunit, gcvunit, gpnunit, gsccompact,
     gscfits, gscunit, lbnunit, microcatunit, ngcunit, oclunit, pgcunit, vocat,
     sacunit, skylibcat, skyunit, ticunit, tyc2unit, tycunit, usnoaunit, wdsunit,
-    rc3unit, BGRABitmap,
+    rc3unit, BGRABitmap, BGRABitmapTypes, Graphics,
     u_translation, u_constant, u_util, u_projection,
     SysUtils, Classes, Math, Dialogs, Forms;
 
@@ -3464,13 +3464,15 @@ end;
 Procedure Tcatalog.LoadHorizonPicture(fname:string);
 begin
 try
+if cfgshr.horizonpicturevalid and (fname=cfgshr.horizonpicturename) then exit;
 cfgshr.horizonpicturevalid:=false;
 cfgshr.horizonpicturename:='';
 if fname='' then exit;
 if ExtractFilePath(fname)='' then fname:=slash(Appdir)+fname;
-if cfgshr.horizonpicturevalid and (fname=cfgshr.horizonpicturename) then exit;
 if FileExists(fname) then begin
    cfgshr.horizonpicture.LoadFromFile(fname);
+   if uppercase(ExtractFileExt(fname))='.BMP' then
+      cfgshr.horizonpicture.ReplaceColor(ColorToBGRA(clFuchsia),BGRAPixelTransparent);
    cfgshr.horizonpicturevalid:=true;
    cfgshr.horizonpicturename:=fname;
 end else begin
