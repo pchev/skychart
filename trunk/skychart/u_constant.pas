@@ -1093,7 +1093,7 @@ var
   LinuxDesktop: integer = 0;  // FreeDesktop=0, Other=1
   crRetic: TCursor = 5;
   Params: TStringList;
-  de_folder: string;
+  de_folder,de_filename: string;
   de_type, de_year: integer;
   NumIndiDriver: integer;
   IndiDriverLst: array of array of string;
