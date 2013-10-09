@@ -1583,7 +1583,7 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>
  end;
  except
  end;
- if (p.ExitStatus=0)and(FileExistsUTF8(slash(Tempdir)+'planet.png')) then begin
+ if (p.ExitStatus=0)and(FileExists(slash(Tempdir)+'planet.png')) then begin
    xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
    chdir(appdir);
    if flatten=1 then begin

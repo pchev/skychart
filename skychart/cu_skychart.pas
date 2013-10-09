@@ -1544,8 +1544,8 @@ end;
 
 function Tskychart.DrawPlanet :boolean;
 var
-  x1,y1,x2,y2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
-  ppa,poleincl,sunincl,w1,w2,w3,a,h,dh,h1,h2,flatten : double;
+  x1,y1,xx1,yy1,xx2,yy2,pixscale,ra,dec,jdt,diam,magn,phase,fov,pa,rot,r1,r2,be,dist: Double;
+  ppa,poleincl,sunincl,w1,w2,w3,a,h,dh,h1,h2,flatten,saverefraction : double;
   xx,yy,lori:single;
   lopt: boolean;
   lalign: TLabelAlign;
@@ -1591,7 +1591,6 @@ for j:=0 to cfgsc.SimNb-1 do begin
     diam:=cfgsc.Planetlst[j,ipla,4];
     magn:=cfgsc.Planetlst[j,ipla,5];
     phase:=cfgsc.Planetlst[j,ipla,7];
-    projection(ra,dec,x1,y1,true,cfgsc) ;
     if cfgsc.ProjPole=Altaz then begin
       Eq2Hz(cfgsc.CurST-ra,dec,a,h,cfgsc,0) ;
       dh:=abs(deg2rad*diam/3600);
@@ -1604,10 +1603,18 @@ for j:=0 to cfgsc.SimNb-1 do begin
       if (flatten<0.7) then flatten:=0.7;
     end
       else flatten:=1;
+    projection(ra,dec,x1,y1,true,cfgsc) ;
     WindowXY(x1,y1,xx,yy,cfgsc);
     if (xx>-5*cfgsc.Xmax) and (xx<6*cfgsc.Xmax) and (yy>-5*cfgsc.Ymax) and (yy<6*cfgsc.Ymax) then begin
-      projection(ra,dec+0.001,x2,y2,false,cfgsc) ;
-      rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+      saverefraction:=cfgsc.ObsRefractionCor;
+      try
+       cfgsc.ObsRefractionCor:=0;        // rotation without refraction
+       projection(ra,dec,xx1,yy1,false,cfgsc) ;
+       projection(ra,dec+0.001,xx2,yy2,false,cfgsc) ;
+       rot:=RotationAngle(xx1,yy1,xx2,yy2,cfgsc);
+      finally
+       cfgsc.ObsRefractionCor:=saverefraction;
+      end;
       if (ipla<>3)and(ipla<=10) then Fplanet.PlanetOrientation(jdt,ipla,ppa,poleincl,sunincl,w1,w2,w3);
       if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(ipla<=11) then begin
         if (cfgsc.SimNb=1)or(not cfgsc.SimObject[ipla]) then begin
@@ -1627,8 +1634,8 @@ for j:=0 to cfgsc.SimNb-1 do begin
             if ipla=11 then ltxt:=ltxt+formatfloat(f1,Fplanet.MoonMag(phase))
                else ltxt:=ltxt+formatfloat(f1,magn);
          if j<cfgsc.SimNb-1 then jj:=j+1 else jj:=j-1;
-         projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],x2,y2,true,cfgsc) ;
-         lori:=rmod(rad2deg*RotationAngle(x2,y2,x1,y1,cfgsc)+360,360);
+         projection(cfgsc.Planetlst[jj,ipla,1],cfgsc.Planetlst[jj,ipla,2],xx2,yy2,true,cfgsc) ;
+         lori:=rmod(rad2deg*RotationAngle(xx2,yy2,x1,y1,cfgsc)+360,360);
          if (lori<90)or(lori>270) then begin
             lalign:=laLeft;
          end else begin
