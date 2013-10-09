@@ -73,10 +73,10 @@ type
      Procedure PlotStar0(x,y: single; ma,b_v : Double);
      Procedure PlotStar1(x,y: single; ma,b_v : Double);
      Procedure PlotStar2(x,y: single; ma,b_v : Double);
-     procedure PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,phase,pa,rot,poleincl,sunincl:double);
-     procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
+     procedure PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,flatten,phase,pa,rot,poleincl,sunincl:double);
+     procedure PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
      procedure PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
-     procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
+     procedure PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,rot:double;WhiteBg:boolean; size,margin:integer);
      procedure PlotSatRing1(xx,yy:integer; pixscale,pa,rot,r1,r2,diam,be : double; WhiteBg:boolean);
      procedure BezierSpline(pts : array of Tpoint;n : integer);
      function  ClipVector(var x1,y1,x2,y2: integer;var clip1,clip2:boolean):boolean;
@@ -137,7 +137,7 @@ type
      Procedure PlotLine(x1,y1,x2,y2:single; lcolor,lwidth: integer; style:TFPPenStyle=psSolid);
      Procedure PlotImage(xx,yy: single; iWidth,iHeight,Rotation : double; flipx, flipy :integer; WhiteBg, iTransparent : boolean;var ibmp:TBitmap; TransparentMode:integer=0; forcealpha:integer=0);
      Procedure PlotBGImage( ibmp:TBitmap; WhiteBg: boolean; alpha:integer=200);
-     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
+     procedure PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
      procedure PlotEarthShadow(x,y: single; r1,r2,pixscale: double);
      procedure PlotSatel(x,y:single;ipla:integer; pixscale,ma,diam : double; hidesat, showhide : boolean);
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
@@ -1159,7 +1159,7 @@ end else begin
 end;
 end;
 
-procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
+procedure TSplot.PlotPlanet(x,y: single;flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,magn,phase,pa,rot,poleincl,sunincl,w,r1,r2,be:double;WhiteBg:boolean;size:integer=0;margin:integer=0);
 var b_v:double;
     ds,n,xx,yy : integer;
 begin
@@ -1178,15 +1178,15 @@ if not cfgplot.Invisible then begin
           PlotStar(x,y,magn,b_v);
           end;
       1 : begin // diam
-          PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,phase,pa,rot,poleincl,sunincl);
+          PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,phase,pa,rot,poleincl,sunincl);
           if ipla=6 then PlotSatRing1(xx,yy,pixscale,pa,rot,r1,r2,diam,flipy*be,WhiteBg );
           end;
       2 : begin // image
           rot:=rot*FlipX*FlipY;
           if (ipla=10)and(size>0) then begin
-             PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,rot,WhiteBg,size,margin)
+             PlotPlanet5(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,flatten,rot,WhiteBg,size,margin)
           end else begin
-             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,pa+rad2deg*rot,r1,WhiteBg)
+             PlotPlanet3(xx,yy,flipx,flipy,ipla,jdt,pixscale,diam,flatten,pa+rad2deg*rot,r1,WhiteBg)
           end;
           end;
       3 : begin // symbol
@@ -1197,7 +1197,7 @@ if not cfgplot.Invisible then begin
 end;
 end;
 
-procedure TSplot.PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,phase,pa,rot,poleincl,sunincl:double); // ellipse
+procedure TSplot.PlotPlanet1(xx,yy,flipx,flipy,ipla:integer; pixscale,diam,flatten,phase,pa,rot,poleincl,sunincl:double); // ellipse
 var ds,ico : integer;
     col:TBGRAPixel;
     p : array[0..23] of TPointF;
@@ -1237,7 +1237,7 @@ if (ipla=11)and(phase>-900) then begin
    for n:=1 to 22 do begin
      ex:=sph*ds2*cos(th);
      ey:=ds1*sin(th);
-     ey1:=round(ex*si - ey*ci)+yy ;
+     ey1:=round((ex*si - ey*ci)*flatten)+yy ;
      ex1:=round(ex*ci + ey*si)+xx ;
      p[n]:=PointF(ex1,ey1);
      th:=th+0.15;
@@ -1286,8 +1286,8 @@ if cfgplot.UseBMP then begin
                               else col := ColorToBGRA(cfgplot.Color[11]);
    if cfgplot.TransparentPlanet then col.alpha:=128
                                 else col.alpha:=255;
-   cbmp.EllipseAntialias(xx,yy,ds,ds,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
-   cbmp.FillEllipseAntialias(xx,yy,ds,ds,col);
+   cbmp.EllipseAntialias(xx,yy,ds,ds*flatten,ColorToBGRA(cfgplot.Color[11]),cfgchart.drawpen);
+   cbmp.FillEllipseAntialias(xx,yy,ds,ds*flatten,col);
    if plotphase then begin
      col:=ColorToBGRA(clGray);
      cbmp.DrawPolyLineAntialias(p,col,2);
@@ -1304,11 +1304,11 @@ end else if cnv<>nil then with cnv do begin
    Pen.Width := cfgchart.drawpen;
    Pen.Color := cfgplot.Color[11];
    Pen.Mode:=pmCopy;
-   Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+   Ellipse(xx-ds,yy-round(ds*flatten),xx+ds,yy+round(ds*flatten));
    Pen.Color := cfgplot.Color[0];
    Brush.style:=bsclear;
    ds:=ds+cfgchart.drawpen;
-   Ellipse(xx-ds,yy-ds,xx+ds,yy+ds);
+   Ellipse(xx-ds,yy-round(ds*flatten),xx+ds,yy+round(ds*flatten));
    if plotphase then begin
      Pen.Color := clGray;
      for n:=0 to 23 do begin
@@ -1473,7 +1473,7 @@ begin
    end;
 end;
 
-procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,pa,gw:double;WhiteBg:boolean);
+procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
 var ds,i,mode : integer;
     cmd, searchdir, bsize: string;
     ok: boolean;
@@ -1507,26 +1507,32 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000695)or(abs(planetbmprot-pa)>
  if i=0 then begin
    xplanetimg.LoadFromFile(SysToUTF8(slash(Tempdir)+'planet.png'));
    chdir(appdir);
-   planetbmp.Assign(xplanetimg.Bitmap);
+   if flatten=1 then begin
+     planetbmp.Assign(xplanetimg.Bitmap);
+   end else begin
+     planetbmp.Height:=round(flatten*planetbmp.Width);
+     PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
+   end;
    planetbmppla:=ipla;
    planetbmpjd:=jdt;
    planetbmprot:=pa;
  end
  else begin // something go wrong with xplanet
     writetrace('Return code '+inttostr(i)+' from '+cmd);
-    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,-999,0,0,0,0);
+    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
     ok:=false;
     planetbmpjd:=0;
  end;
 end;
 if cfgplot.TransparentPlanet then mode:=0
    else mode:=2;
-if ok then PlotImage(xx,yy,ds,ds,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
+if ok then PlotImage(xx,yy,ds,ds*flatten,0,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
-procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,rot:double;WhiteBg:boolean; size,margin:integer);
-var ds,mode : integer;
+procedure TSplot.PlotPlanet5(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,rot:double;WhiteBg:boolean; size,margin:integer);
+var ds,mode,dx,dy : integer;
     jpg:TJPEGImage;
+    rbmp:TBitmap;
     fn:string;
 begin
  if size=0 then exit;
@@ -1536,7 +1542,7 @@ begin
    size:=1024; margin:=107;
  end;
  if not FileExists(fn) then begin
-   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,-999,0,0,0,0);
+   PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
    exit;
  end;
  ds:=round(max(diam*pixscale,4*cfgchart.drawpen)*size/(size-2*margin));
@@ -1544,7 +1550,20 @@ begin
  try
  jpg.LoadFromFile(SysToUTF8(fn));
  chdir(appdir);
- planetbmp.Assign(jpg);
+ if flatten=1 then begin
+   planetbmp.Assign(jpg);
+ end else begin
+   planetbmp.Assign(jpg);
+   rbmp:=TBitmap.Create;
+   BitmapRotation(planetbmp,rbmp,rot,WhiteBg);
+   dx:=(rbmp.Width-planetbmp.Width)div 2;
+   dy:=(rbmp.Height-planetbmp.Height)div 2;
+   rot:=0;
+   planetbmp.Width:=size;
+   planetbmp.Height:=round(flatten*planetbmp.Width);
+   PlanetBMP.Canvas.StretchDraw(rect(-dx,-dy,planetbmp.Width+dx,planetbmp.Height+dy),rbmp);
+   rbmp.free;
+ end;
  finally
   jpg.free;
  end;
@@ -1553,7 +1572,7 @@ begin
  planetbmprot:=0;
  if cfgplot.TransparentPlanet then mode:=0
     else mode:=2;
- PlotImage(xx,yy,ds,ds,rot,flipx,flipy,WhiteBg,true,planetbmp,mode);
+ PlotImage(xx,yy,ds,ds*flatten,rot,flipx,flipy,WhiteBg,true,planetbmp,mode);
 end;
 
 procedure TSplot.PlotPlanet4(xx,yy,ipla:integer; pixscale,phase:double;WhiteBg:boolean);
