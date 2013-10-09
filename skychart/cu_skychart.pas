@@ -1572,7 +1572,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
     end;
   end;
   DeleteFile(slash(Tempdir)+'origin.txt');
-  if (Fplot.cfgplot.plaplot=2) and cfgsc.PlanetParalaxe then begin
+  if (Fplot.cfgplot.plaplot=2) and cfgsc.PlanetParalaxe and (cfgsc.CurYear>1000) then begin
     buf:=jddate2(cfgsc.Planetlst[j,10,3]);
     buf:=buf+' 1.0 '+formatfloat(f5,cfgsc.ObsLatitude)+blank+formatfloat(f5,-cfgsc.ObsLongitude);
     AssignFile(ft,slash(Tempdir)+'origin.txt');
