@@ -2497,7 +2497,7 @@ end else begin
   result:=false;
   de_type:=0;
   for i:=1 to nJPL_DE do begin
-     if load_de_file(t,de_folder,JPL_DE[i],jdstart,jdend) then begin
+     if load_de_file(t,de_folder,JPL_DE[i],de_filename,jdstart,jdend) then begin
        result:=true;
        de_type:=JPL_DE[i];
        break;

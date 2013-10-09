@@ -94,7 +94,7 @@ function Calc_Planet_de(julian_date: double; planet_id: integer; var planet_arr:
                         in_au: boolean; planet_center: integer; velocity: boolean): boolean;
 
 //first must load the de file
-function load_de_file(jd: double; de_folder: string; de_type: integer; var jdstart,jdend: double): boolean;
+function load_de_file(jd: double; de_folder: string; de_type: integer; var de_filename:string; var jdstart,jdend: double): boolean;
 
 //init the file into the stream
 function init_de_file(ephemeris_filename: string): boolean;
@@ -166,9 +166,9 @@ annee:=round(u3+floor((u4-2)/12)-4800);
 heure:=(jd-floor(jd+0.5)+0.5)*24;
 end;
 
-function load_de_file(jd: double; de_folder: string; de_type: integer; var jdstart,jdend: double): boolean;
+function load_de_file(jd: double; de_folder: string; de_type: integer; var de_filename:string; var jdstart,jdend: double): boolean;
 var
-    de_file, de_filename : string;
+    de_file : string;
     de_y,y,m,d : integer;
     hour: double;
 begin

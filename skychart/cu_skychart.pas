@@ -1551,7 +1551,8 @@ var
   lalign: TLabelAlign;
   i,j,jj,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
-  ltxt,lis: string;
+  ltxt,lis,buf: string;
+  ft: textfile;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw planets');
 fov:=rad2deg*cfgsc.fov;
@@ -1569,6 +1570,15 @@ for j:=0 to cfgsc.SimNb-1 do begin
        until (i=1)or(cfgsc.Planetlst[j,n,6]<=cfgsc.Planetlst[j,draworder[i-1],6]);
        draworder[i]:=n;
     end;
+  end;
+  DeleteFile(slash(Tempdir)+'origin.txt');
+  if (Fplot.cfgplot.plaplot=2) and cfgsc.PlanetParalaxe then begin
+    buf:=jddate2(cfgsc.Planetlst[j,10,3]);
+    buf:=buf+' 1.0 '+formatfloat(f5,cfgsc.ObsLatitude)+blank+formatfloat(f5,-cfgsc.ObsLongitude);
+    AssignFile(ft,slash(Tempdir)+'origin.txt');
+    rewrite(ft);
+    writeln(ft,buf);
+    CloseFile(ft);
   end;
   for n:=1 to 11 do begin
     ipla:=draworder[n];

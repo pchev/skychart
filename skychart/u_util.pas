@@ -71,7 +71,7 @@ Function DEToStrmin(de: Double) : string;
 Function ARmtoStr(ar: Double) : string;
 Function DEpToStr(de: Double; precision:integer=1) : string;
 Function ARptoStr(ar: Double; precision:integer=1) : string;
-Function TimToStr(tim: Double) : string;
+Function TimToStr(tim: Double; sep:string=':') : string;
 Function YearADBC(year : integer) : string;
 Function Date2Str(y,m,d:integer):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
@@ -86,6 +86,7 @@ function isodate(a,m,d : integer) : string;
 function LeapYear(Year: longint): boolean;
 function DayofYear(y,m,d: integer):integer;
 function jddate(jd: double) : string;
+function jddate2(jd: double) : string;
 function jddatetime(jd: double;fy,fm,fd,fh,fn,fs:boolean) : string;
 function DateTimetoJD(Date: Tdatetime): double;
 Function LONmToStr(l: Double) : string;
@@ -730,7 +731,7 @@ begin
     result := d+'°'+m+''''+s+'"';
 end;
 
-Function TimToStr(tim: Double) : string;
+Function TimToStr(tim: Double; sep:string=':') : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
 begin
@@ -752,7 +753,7 @@ begin
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
-    result := d+':'+m+':'+s;
+    result := d+sep+m+sep+s;
 end;
 
 Function Date2Str(y,m,d:integer):string;
@@ -1097,6 +1098,14 @@ var a,m,d : integer;
 begin
 djd(jd,a,m,d,h);
 result:=isodate(a,m,d);
+end;
+
+function jddate2(jd: double) : string;
+var a,m,d : integer;
+    h:double;
+begin
+djd(jd,a,m,d,h);
+result:=inttostr(a)+padzeros(inttostr(m),2)+padzeros(inttostr(d),2)+'.'+TimToStr(h,'');
 end;
 
 function LeapYear(Year: longint): boolean;
