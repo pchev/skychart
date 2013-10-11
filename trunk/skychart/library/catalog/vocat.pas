@@ -455,7 +455,7 @@ end else begin
       fieldnode:=VoNode.Attributes.GetNamedItem('unit');
       if fieldnode<>nil then fielddata.units:=fieldnode.NodeValue;
       j:=VOFields.AddObject(k,fielddata);
-      if pos('pos.pm',fielddata.ucd)=1 then begin
+      if (pos('pos.pm',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0) then begin
         if (pos('pos.eq.ra',fielddata.ucd)>0) then begin
             u:=pmunits(fielddata.units,l,c);
             if (u>0) then begin
@@ -476,7 +476,7 @@ end else begin
             end;
          end;
       end;
-      if (pos('phys.angSize',fielddata.ucd)=1)and(field_size=-1) then begin  //first dimmension
+      if (pos('phys.angSize',fielddata.ucd)=1)and(pos('error',fielddata.ucd)=0)and(field_size=-1) then begin  //first dimmension
         u:=angleunits(fielddata.units,l);
         if (u>0) then begin
            field_size:=j;
@@ -653,14 +653,14 @@ if Assigned(VoNode) then begin
        lin.dec:=deg2rad*StrToFloatDef(buf,0);
        decok:=true;
     end;
-    if (not raok)and(((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
+    if (not raok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.ra=-999) and (pos('pos.eq.ra',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.ra;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
            if pos('h:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
               lin.ra:=deg2rad*15*StrToDeg(buf)
             else lin.ra:=deg2rad*StrToFloatDef(buf,0);
     end;
-    if (not decok)and(((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
+    if (not decok)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0)and(((lin.dec=-999) and (pos('pos.eq.dec',TFieldData(VOFields.Objects[i]).ucd)=1))or
        (pos('pos.eq.dec;meta.main',TFieldData(VOFields.Objects[i]).ucd)=1))
         then begin
            if pos('d:m:s',TFieldData(VOFields.Objects[i]).units)>0 then
@@ -678,7 +678,7 @@ if Assigned(VoNode) then begin
                                         else lin.star.id:=lin.star.id+'-'+buf;
                   end else lin.star.id:=buf;
             end;
-            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1) then begin
+            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
               lin.star.valid[vsMagv]:=true;
               if (lin.star.magv=99)or(pos('em.opt.V',TFieldData(VOFields.Objects[i]).ucd)>0) then begin
                  lin.options.flabel[lOffset+vsMagv]:=VOFields[i];
@@ -697,7 +697,7 @@ if Assigned(VoNode) then begin
                                         else lin.neb.id:=lin.neb.id+'-'+buf;
                   end else lin.neb.id:=buf;
             end;
-            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('phot.mag.',TFieldData(VOFields.Objects[i]).ucd)=0)and(lin.neb.mag=-99) then begin
+            if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('phot.mag.',TFieldData(VOFields.Objects[i]).ucd)=0)and(lin.neb.mag=-99)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
                lin.options.flabel[lOffset+vnMag]:=VOFields[i];
                lin.neb.mag:=StrToFloatDef(buf,Defmag);;
                lin.neb.valid[vnMag]:=true;
