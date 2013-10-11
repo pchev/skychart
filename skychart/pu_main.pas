@@ -8379,12 +8379,36 @@ end;
 procedure Tf_main.SAMPurlToFile(url,nam,typ: string; var fn: string);
 var i: integer;
     sfn:string;
+
+function cleanname(s:string):string;
+var p,k: integer;
+    buf,n,c:string;
+begin
+result:='';
+p:=1;
+while p<=length(s) do begin
+  buf:=copy(s,p,1);
+  if buf='%' then begin
+     n:=copy(s,p+1,2);
+     k:=strtointdef('$'+n,-1);
+     if k>0 then begin
+       result:=result+char(k);
+       inc(p,2);
+     end
+     else
+       result:=result+buf;
+  end
+  else result:=result+buf;
+  inc(p);
+end;
+end;
+
 begin
 if typ='xml' then
    fn:=slash(VODir)+'vo_samp_'+TrimFilename(nam)+'.'+typ;
 if typ='fits' then
    fn:=slash(PictureDir)+'samp_'+TrimFilename(nam)+'.'+typ;
-fn:=TrimFilename(StringReplace(fn,'%7E','~',[rfReplaceAll]));
+fn:=TrimFilename(cleanname(fn));
 // file:
 i:=pos('file://',url);
 if i>0 then begin
@@ -8396,7 +8420,7 @@ if i>0 then begin
     if copy(url,1,1)='/' then delete(url,1,1);
     {$endif}
   end;
-  sfn:=TrimFilename(StringReplace(url,'%7E','~',[rfReplaceAll]));
+  sfn:=TrimFilename(cleanname(url));
   CopyFile(sfn,fn);
  end else begin
   // http:
