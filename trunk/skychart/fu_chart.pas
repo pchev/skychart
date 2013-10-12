@@ -2226,8 +2226,8 @@ end
 else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ZoomBox(4,0,0);
    ListXY(x,y);
-end
-else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
+end;
+if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or((button=mbLeft)and cmain.SimpleMove) then begin
    if TrackCursorMove then TrackCursor(X,Y);
    Image1.Cursor:=ChartCursor;
    Refresh;
