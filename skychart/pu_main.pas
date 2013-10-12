@@ -4337,6 +4337,7 @@ end;
 procedure Tf_main.FormResize(Sender: TObject);
 begin
 SaveState:=WindowState;
+quicksearch.Width:=min(300,max(90,(quicksearch.Width+ChildControl.left-ToolButton7.Left-ToolButton7.Width)));
 end;
 
 procedure Tf_main.SetDefault;
