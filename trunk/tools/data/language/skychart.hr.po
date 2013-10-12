@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
 "PO-Revision-Date: 2012-05-06 22:00+0000\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -565,6 +565,10 @@ msgstr ""
 msgid "Calendar"
 msgstr "Kalendar"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Odustani"
@@ -696,6 +700,10 @@ msgstr "Centriraj na"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Promijeni način iscrtavanja"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1384,6 +1392,10 @@ msgstr "Obriši prijašnje podatke za ovaj datum."
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Obriši trenutnu lokaciju iz baze podataka?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2184,6 +2196,10 @@ msgstr ""
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" Napredne postavke"
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4657,6 +4673,10 @@ msgstr "Prikaži oznake mreže"
 msgid "Show/hide DSS image"
 msgstr "Prikaži/sakrij DSS fotografiju"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "Prikaži IR varijabilne"
@@ -5073,17 +5093,9 @@ msgstr "Sinkronizacija"
 msgid "Synodic month"
 msgstr "Sinodički mjesec"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Sistem"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Sistemski pisač"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Postavke sistema"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5326,7 +5338,7 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr ""
 
 #: u_translation.rsttut
-msgid "TT - UT: "
+msgid "DeltaT: "
 msgstr ""
 
 #: u_translation.rstuesday
@@ -5434,7 +5446,7 @@ msgid "URL launch command"
 msgstr ""
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
+msgid "Use another DeltaT value"
 msgstr ""
 
 #: u_translation.rsuseapresetco

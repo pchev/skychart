@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
-"PO-Revision-Date: 2013-09-06 09:26+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
+"PO-Revision-Date: 2013-10-03 11:59+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -187,7 +187,7 @@ msgstr "Tots els objectes en aquesta posició"
 
 #: u_translation.rsallsampclien
 msgid "All SAMP clients"
-msgstr ""
+msgstr "Tots els clients SAMP"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -299,15 +299,15 @@ msgstr "Satèl·lit artificial"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
-msgstr ""
+msgstr "Una aplicació SAMP envia una taula per carregar"
 
 #: u_translation.rsasampapplica2
 msgid "A SAMP application send an image to load"
-msgstr ""
+msgstr "Una aplicació SAMP envia una imatge per carregar"
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
-msgstr ""
+msgstr "Una aplicació SAMP envia coordenades del lloc"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -319,15 +319,15 @@ msgstr "Demana confirmació abans de connectar a Internet"
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
-msgstr ""
+msgstr "Demana confirmació abans d'anar a les coordenades"
 
 #: u_translation.rsaskforconfir2
 msgid "Ask for confirmation before to load the image"
-msgstr ""
+msgstr "Demana confirmació abans de carregar la imatge"
 
 #: u_translation.rsaskforconfir3
 msgid "Ask for confirmation before to load the table"
-msgstr ""
+msgstr "Demana confirmació abans de carregar la taula"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -519,7 +519,7 @@ msgstr "Més brillant"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr ""
+msgstr "Més brillant"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -564,6 +564,10 @@ msgstr "Pel nom"
 #: u_translation.rscalendar
 msgid "Calendar"
 msgstr "Calendari"
+
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -699,6 +703,10 @@ msgstr "Centra-ho"
 msgid "Change drawing mode"
 msgstr "Modifica el mode de dibuix"
 
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
+
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Canviar a aquesta configuració reiniciarà el programa ara!"
@@ -781,7 +789,7 @@ msgstr "Manté la connexió client"
 
 #: u_translation.rsclientlist
 msgid "Client list"
-msgstr ""
+msgstr "Lliesta de client"
 
 #: u_translation.rsclock
 msgid "Clock"
@@ -941,7 +949,7 @@ msgstr "Connexió a  %s, %s fallida! %sComproveu que el servidor MySQL està eng
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr ""
+msgstr "Connecta't al SAMP"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1389,6 +1397,10 @@ msgstr "Suprimeix les dades anteriors a aquesta data."
 msgid "Delete the current location from the database?"
 msgstr "Voleu suprimir el lloc actual de la base de dades?"
 
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
+
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
 msgstr "Depressió de l'horitzó"
@@ -1471,7 +1483,7 @@ msgstr "Desconnecta"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr ""
+msgstr "Desconnecta't del SAMP"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1587,11 +1599,11 @@ msgstr "Descarrega TLE"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
-msgstr ""
+msgstr "Ho voleu carregar?"
 
 #: u_translation.rsdoyouwanttom
 msgid "Do you want to move the chart there?"
-msgstr ""
+msgstr "Voleu moure el mapa allí?"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -2063,7 +2075,7 @@ msgstr "Forma sempre visible"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr ""
+msgstr "Per a més informació vegeu:"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2188,6 +2200,10 @@ msgstr "Gnomònica"
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Config. avançada GPS-16\""
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2579,11 +2595,11 @@ msgstr "Longitud de la Gran Taca Roja"
 
 #: u_translation.rskeepimageson
 msgid "Keep images on exit for later use"
-msgstr ""
+msgstr "Desa les imatges en sortir per a ús posterior"
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
-msgstr ""
+msgstr "Guarda les taules en sortir per a ús posterior"
 
 #: u_translation.rskm
 msgid "Km."
@@ -4047,15 +4063,15 @@ msgstr "Opcions de temps real"
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
-msgstr ""
+msgstr "Rep coordenades d'altres aplicacions"
 
 #: u_translation.rsreceivefitsi
 msgid "Receive FITS images from other applications"
-msgstr ""
+msgstr "Rep imatges FITS d'altres aplicacions"
 
 #: u_translation.rsreceivevotab
 msgid "Receive VO table data from other applications"
-msgstr ""
+msgstr "Rep dades de taules VO d'altres aplicacions"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -4283,19 +4299,19 @@ msgstr "Files"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
-msgstr ""
+msgstr "Confirmació SAMP"
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr ""
+msgstr "SAMP és un protocol de missatgeria que permet a les eines de programari d'astronomia comunicar i interoperar. %Skychart pot enviar i rebre coordenades de posició, imatges FITS i taules VO."
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
-msgstr ""
+msgstr "Configuració del SAMP"
 
 #: u_translation.rssampstatus
 msgid "SAMP status"
-msgstr ""
+msgstr "Estat del SAMP"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4495,11 +4511,11 @@ msgstr "Envia el mapa a la impressora"
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "Envia la imatge a"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr ""
+msgstr "Envia la taula a"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4660,6 +4676,10 @@ msgstr "Valors a les graelles"
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
 msgstr "Mostra/Amaga les imatges DSS"
+
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -5077,17 +5097,9 @@ msgstr "Sincronitza"
 msgid "Synodic month"
 msgstr "Mes sinòdic"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Sistema"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Impressora del sistema"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Paràmetres sistema"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5327,11 +5339,11 @@ msgstr "Classe de Trumpler"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
-msgstr ""
+msgstr "Prova de connectar-te al SAMP en engegar el programa"
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT - UT: "
+msgid "DeltaT: "
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5438,8 +5450,8 @@ msgid "URL launch command"
 msgstr "Obre una URL"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Usa un altre valor de TT-TU"
+msgid "Use another DeltaT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5599,7 +5611,7 @@ msgstr "Navegador del catàleg OV"
 
 #: u_translation.rsvosampsettin
 msgid "VO SAMP settings"
-msgstr ""
+msgstr "Configuració de SAMP VO"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"

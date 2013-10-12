@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
-"PO-Revision-Date: 2013-09-28 12:45+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
+"PO-Revision-Date: 2013-10-12 16:48+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -565,6 +565,10 @@ msgstr "Par nom"
 msgid "Calendar"
 msgstr "Calendrier"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr "Configuration des graphiques du calendrier"
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Annuler"
@@ -697,6 +701,10 @@ msgstr "Centrer sur"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Modifie le mode de dessin"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr "Changer le mode de la souris"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1387,6 +1395,10 @@ msgstr "Suppression des données antérieur pour cette date."
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Supprimer la localisation courante de la base de donnée ?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr "Incertitude sur DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2188,6 +2200,10 @@ msgstr "Gnomonique"
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" Adv. Settings"
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr "Hauteur des graphiques"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4662,6 +4678,10 @@ msgstr "Voir les labels des grilles"
 msgid "Show/hide DSS image"
 msgstr "Voir/Cacher les images DSS"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr "Affiche le nom de l'image en label"
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "Voir les variables IR"
@@ -5078,17 +5098,9 @@ msgstr "Sync"
 msgid "Synodic month"
 msgstr "Mois Synodique"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Système"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Imprimante du système"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Paramètres système"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5331,8 +5343,8 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr "Essayer de se connecter à un hub SAMP au lancement du programme"
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT-TU: "
+msgid "DeltaT: "
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5439,8 +5451,8 @@ msgid "URL launch command"
 msgstr "Lancement d'une URL"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Utilise une autre valeur de TT-TU"
+msgid "Use another DeltaT value"
+msgstr "Utilise une autre valeur de DeltaT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

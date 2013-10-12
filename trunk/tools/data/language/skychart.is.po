@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
 "PO-Revision-Date: 2012-06-26 09:18+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -564,6 +564,10 @@ msgstr ""
 msgid "Calendar"
 msgstr "Dagatal"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Hætta"
@@ -695,6 +699,10 @@ msgstr "Miðja"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Breyta teikniham"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1383,6 +1391,10 @@ msgstr "Eyða fyrri gögnum fyrir þessa dagsetningu"
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Eyða núverandi stöðu úr gagnagrunninum ?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2182,6 +2194,10 @@ msgstr ""
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
+msgstr ""
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
 msgstr ""
 
 #: u_translation.rsgraphic
@@ -4656,6 +4672,10 @@ msgstr "Birta tölur hnitak."
 msgid "Show/hide DSS image"
 msgstr "Birta/fela DSS mynd"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "Birta óreglul. br.stj."
@@ -5072,17 +5092,9 @@ msgstr "Samstilla"
 msgid "Synodic month"
 msgstr "Tunglmánuður"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Kerfi"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Prentari"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Kerfisstillingar"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5325,8 +5337,8 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr ""
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT - UT: "
+msgid "DeltaT: "
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5433,8 +5445,8 @@ msgid "URL launch command"
 msgstr "Fara á vefslóð"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Nota annað TT-UT gildi"
+msgid "Use another DeltaT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

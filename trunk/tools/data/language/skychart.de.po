@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
 "PO-Revision-Date: 2013-05-27 09:25+0000\n"
 "Last-Translator: Reinhart Grüssl <ikarus1969@gmx.at>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -564,6 +564,10 @@ msgstr "Nach  Name"
 msgid "Calendar"
 msgstr "Kalender"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -696,6 +700,10 @@ msgstr "Zentrieren"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Anzeigemodus ändern"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1384,6 +1392,10 @@ msgstr "Lösche bisherige Daten für dieses Datum."
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Aktuellen Ort aus der Datenbank löschen?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2184,6 +2196,10 @@ msgstr "Gnomonisch"
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" Erw. Einstellungen"
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4657,6 +4673,10 @@ msgstr "Gitter beschriften"
 msgid "Show/hide DSS image"
 msgstr "DSS-Bild anzeigen/ausblenden"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "IR Veränderliche"
@@ -5073,17 +5093,9 @@ msgstr "Synchronisieren"
 msgid "Synodic month"
 msgstr "Synodischer Monat"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "System"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Systemdrucker"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Systemeinstellungen"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5326,8 +5338,8 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr ""
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT - UT: "
+msgid "DeltaT: "
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5434,8 +5446,8 @@ msgid "URL launch command"
 msgstr "URL Startkommando"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Anderen TT-UT Wert nutzen"
+msgid "Use another DeltaT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
