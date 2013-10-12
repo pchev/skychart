@@ -75,6 +75,7 @@ type
     TabControl1: TTabControl;
     ToolButton14: TToolButton;
     TAbortSlew: TToolButton;
+    ToolButton15: TToolButton;
     ToolButtonRot180: TToolButton;
     ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
@@ -524,6 +525,7 @@ type
     procedure ToolButton13Click(Sender: TObject);
     procedure ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
+    procedure ToolButton15Click(Sender: TObject);
     procedure ToolButtonRot180MouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure ToolButtonCompassClick(Sender: TObject);
@@ -2665,6 +2667,13 @@ procedure Tf_main.ToolButton13MouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button=mbRight then SetupTimePage(2);
+end;
+
+procedure Tf_main.ToolButton15Click(Sender: TObject);
+begin
+  cfgm.SimpleMove:=ToolButton15.Down;
+  if cfgm.SimpleMove then ToolButton15.ImageIndex:=97
+     else ToolButton15.ImageIndex:=96;
 end;
 
 
@@ -6597,6 +6606,7 @@ ToolButtonGrid.hint:=rsShowCoordina;
 ToolButtonGridEq.hint:=rsAddEquatoria;
 ToolButtonCompass.Hint:=rsShowCompass;
 Compass1.Caption:=rsShowCompass;
+ToolButton15.Hint:=rsChangeMouseM;
 ToolButtonShowConstellationLine.hint:=rsShowConstell;
 ToolButtonShowConstellationLimit.hint:=rsShowConstell2;
 ToolButtonShowGalacticEquator.hint:=rsShowGalactic;

@@ -449,6 +449,8 @@ data/Themes/default/icon_blue/i92.png
 data/Themes/default/icon_blue/i93.png
 data/Themes/default/icon_blue/i94.png
 data/Themes/default/icon_blue/i95.png
+data/Themes/default/icon_blue/i96.png
+data/Themes/default/icon_blue/i97.png
 data/Themes/default/icon_color
 data/Themes/default/icon_color/a1.png
 data/Themes/default/icon_color/b1.png
@@ -549,6 +551,8 @@ data/Themes/default/icon_color/i92.png
 data/Themes/default/icon_color/i93.png
 data/Themes/default/icon_color/i94.png
 data/Themes/default/icon_color/i95.png
+data/Themes/default/icon_color/i96.png
+data/Themes/default/icon_color/i97.png
 data/Themes/default/icon_green
 data/Themes/default/icon_green/a1.png
 data/Themes/default/icon_green/b1.png
@@ -649,6 +653,8 @@ data/Themes/default/icon_green/i92.png
 data/Themes/default/icon_green/i93.png
 data/Themes/default/icon_green/i94.png
 data/Themes/default/icon_green/i95.png
+data/Themes/default/icon_green/i96.png
+data/Themes/default/icon_green/i97.png
 data/Themes/default/icon_red
 data/Themes/default/icon_red/a1.png
 data/Themes/default/icon_red/b1.png
@@ -749,6 +755,8 @@ data/Themes/default/icon_red/i92.png
 data/Themes/default/icon_red/i93.png
 data/Themes/default/icon_red/i94.png
 data/Themes/default/icon_red/i95.png
+data/Themes/default/icon_red/i96.png
+data/Themes/default/icon_red/i97.png
 data/varobs/And.dat
 data/varobs/Ant.dat
 data/varobs/Aps.dat

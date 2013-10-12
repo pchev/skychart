@@ -1461,6 +1461,7 @@ resourcestring
   rsShowImageNam = 'Show image name label';
   rsCalendarGrap = 'Calendar graph setting';
   rsGraphHeight = 'Graph height';
+  rsChangeMouseM = 'Change mouse mode';
 
 implementation
 
