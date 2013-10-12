@@ -9,26 +9,22 @@ AppSupportURL=http://www.ap-i.net/skychart
 AppUpdatesURL=http://www.ap-i.net/skychart
 DefaultDirName={reg:HKCU\Software\Astro_PC\Ciel,Install_Dir|{pf}\Ciel}
 UsePreviousAppDir=false
-DefaultGroupName=Cartes du Ciel
+DefaultGroupName=Astrolabe Val de Reuil
 AllowNoIcons=true
-InfoBeforeFile=Presetup\readme.txt
+InfoBeforeFile=Presetup\readme_astrolabe.txt
 OutputDir=.\
-OutputBaseFilename=skychart-windows
+OutputBaseFilename=cdcvaldereuil_windows
 Compression=lzma
 SolidCompression=true
 Uninstallable=true
 UninstallLogMode=append
 DirExistsWarning=no
-ShowLanguageDialog=yes
+ShowLanguageDialog=no
+LanguageDetectionMethod=none
 AppID={{A261F28E-6053-4414-9B84-AA8FE5F47AD4}
 
-[CustomMessages]
-CreateStartupIcon=Launch Skychart Clock automatically on Windows startup
-
-[Tasks]
-Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}
-Name: quicklaunchicon; Description: {cm:CreateQuickLaunchIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
-Name: startupicon; Description: {cm:CreateStartupIcon}; GroupDescription: {cm:AdditionalIcons}; Flags: unchecked
+[Languages] 
+Name: "fr"; MessagesFile: "compiler:Languages/French.isl"
 
 [InstallDelete]
 Name: {app}\cdc.exe; Type: files; Components: ; Tasks:
@@ -52,7 +48,7 @@ Name: {app}\doc\wiki_doc\*; Type: filesandordirs; Components: ; Tasks:
 
 [Files]
 Source: Data\*; DestDir: {app}; Flags: ignoreversion recursesubdirs createallsubdirs restartreplace
-Source: PrivateFiles\*; DestDir: {localappdata}\skychart\; Flags: onlyifdoesntexist 
+Source: PrivateFiles\*; DestDir: {localappdata}\skychart\; Flags: ignoreversion 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
@@ -61,9 +57,5 @@ Root: HKCU; Subkey: Software\Astro_PC\VarObs; ValueType: string; ValueName: Inst
 
 [Icons]
 Name: {group}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}
-Name: {group}\Variables Stars; Filename: {app}\varobs.exe; WorkingDir: {app}
-Name: {group}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; 
-Name: {userdesktop}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: desktopicon
-Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks: quicklaunchicon
-Name: {userstartup}\Cartes du Ciel Clock; Filename: {app}\cdcicon.exe; WorkingDir: {app}; Tasks: startupicon
+Name: {userdesktop}\Cartes du Ciel; Filename: {app}\skychart.exe; WorkingDir: {app}; Tasks:
  

@@ -922,7 +922,7 @@ type
     AnimSize, VOurl, VOmaxrecord: integer;
     PrintLandscape, ShowChartInfo, ShowTitlePos, SyncChart, AnimRec: boolean;
     maximized, updall, AutostartServer, keepalive, NewBackgroundImage: boolean;
-    TextOnlyDetail, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
+    TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
     AnimOpt, Animffmpeg: string;
@@ -2241,6 +2241,12 @@ begin
   SampSubscribeCoord:=Source.SampSubscribeCoord;
   SampSubscribeImage:=Source.SampSubscribeImage;
   SampSubscribeTable:=Source.SampSubscribeTable;
+  SimpleMove:=Source.SimpleMove;
+  SimpleDetail:=Source.SimpleDetail;
+  KioskPass:=Source.KioskPass;
+  KioskMode:=Source.KioskMode;
+  KioskDebug:=Source.KioskDebug;
+  CenterAtNoon:=Source.CenterAtNoon;
   ClockColor := Source.ClockColor;
   SesameUrlNum := Source.SesameUrlNum;
   SesameCatNum := Source.SesameCatNum;
