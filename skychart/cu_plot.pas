@@ -1589,14 +1589,6 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>
    if flatten=1 then begin
      planetbmp.Assign(xplanetimg.Bitmap);
    end else begin
-     r:=TStringList.Create;
-     r.LoadFromStream(p.Output);
-     if r.Count>0 then for j:=0 to r.Count-1 do begin
-      buf:=buf+r[j]+crlf;
-     end;
-     r.free;
-     writetrace('Return code '+inttostr(p.ExitStatus)+' from xplanet');
-     writetrace(buf);
      planetbmp.Height:=round(flatten*planetbmp.Width);
      PlanetBMP.Canvas.StretchDraw(rect(0,0,planetbmp.Width,planetbmp.Height),XplanetImg.Bitmap);
    end;
@@ -1605,9 +1597,17 @@ if (planetBMPpla<>ipla)or(abs(planetbmpjd-jdt)>0.000693)or(abs(planetbmprot-pa)>
    planetbmprot:=pa;
  end
  else begin // something go wrong with xplanet
-    PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
-    ok:=false;
-    planetbmpjd:=0;
+     r:=TStringList.Create;
+     r.LoadFromStream(p.Output);
+     if r.Count>0 then for j:=0 to r.Count-1 do begin
+      buf:=buf+r[j]+crlf;
+     end;
+     r.free;
+     writetrace('Return code '+inttostr(p.ExitStatus)+' from xplanet');
+     writetrace(buf);
+     PlotPlanet1(xx,yy,flipx,flipy,ipla,pixscale,diam,flatten,-999,0,0,0,0);
+     ok:=false;
+     planetbmpjd:=0;
  end;
  p.free;
 end;

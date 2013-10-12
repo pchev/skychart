@@ -232,6 +232,7 @@ type
     FListInfo: Tstr12func;
     FChartMove: TnotifyEvent;
     FImageSetup: TNotifyEvent;
+    FPlanetInfo: TNotifyEvent;
     FSendCoordpointAtsky: TSendCoordpointAtsky;
     movefactor,zoomfactor: double;
     xcursor,ycursor,skipmove,movecamnum,moveguidetype,moveguidenum : integer;
@@ -392,6 +393,7 @@ type
     property onSendCoordpointAtsky: TSendCoordpointAtsky read FSendCoordpointAtsky write FSendCoordpointAtsky;
     property onSendImageFits: TSendImageFits read FSendImageFits write FSendImageFits;
     property onSendSelectRow: TSendSelectRow read FSendSelectRow write FSendSelectRow;
+    property onPlanetInfo: TNotifyEvent read FPlanetInfo write FPlanetInfo;
   end;
 
 implementation
@@ -1980,7 +1982,7 @@ else identlabel.Visible:=false;
 end;
 
 function Tf_chart.IdentXY(X, Y: Integer;searchcenter: boolean= true; showlabel: boolean=true;ftype:integer=ftAll;radius:integer=2):boolean;
-var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds:double;
+var ra,dec,a,h,a1,h1,l,b,le,be,dx,dy,lastra,lastdec,lasttrra,lasttrde,lastx,lasty,lastz,dist,ds,ax,ay:double;
     pa,lasttype,lastobj: integer;
     txt,lastname,lasttrname,buf: string;
     showdist,solsys,lastsolsys:boolean;
@@ -2002,63 +2004,71 @@ lastZ:=sc.cfgsc.FindZ;
 sc.cfgsc.TrackName:='';
 lastsolsys:=((sc.cfgsc.Findtype=ftAst)or(sc.cfgsc.Findtype=ftCom)or(sc.cfgsc.Findtype=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
 sc.GetCoord(x,y,ra,dec,a,h,l,b,le,be);
-ra:=rmod(ra+pi2,pi2);
-dx:=abs(radius/sc.cfgsc.BxGlb); // search a 2 pixel radius
-result:=sc.FindatRaDec(ra,dec,dx,searchcenter,false,ftype);
-if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter,false,ftype);  //else 6 pixel
-if showlabel then ShowIdentLabel;
-if result and showdist then begin
-   ra:=sc.cfgsc.FindRA;
-   dec:=sc.cfgsc.FindDEC;
-   solsys:=((sc.cfgsc.FindType=ftAst)or(sc.cfgsc.FindType=ftCom)or(sc.cfgsc.FindType=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
-   dist := rad2deg*angulardistance(ra,dec,lastra,lastdec);
-   if dist>0 then begin
-      pa:=round(rmod(rad2deg*PositionAngle(lastra,lastdec,ra,dec)+360,360));
-      txt:=DEptoStr(dist)+' PA:'+inttostr(pa)+ldeg;
-      dx:=rmod((rad2deg*(ra-lastra)/15)+24,24);
-      if dx>12 then dx:=dx-24;
-      dy:=rad2deg*(dec-lastdec);
-      txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
-      if assigned(Fshowcoord) then Fshowcoord(txt);
-      buf:=rsFrom+':  "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
-      txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
-      if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
-      if solsys and lastsolsys then begin
-         ds:=sqrt((lastX-sc.cfgsc.FindX)*(lastX-sc.cfgsc.FindX)+(lastY-sc.cfgsc.FindY)*(lastY-sc.cfgsc.FindY)+(lastZ-sc.cfgsc.FindZ)*(lastZ-sc.cfgsc.FindZ));
-         txt:=txt+tab+rsDistance+': '+FormatFloat(f5,ds)+'au';
-      end;
-      if sc.cfgsc.ManualTelescope then begin
-        case sc.cfgsc.ManualTelescopeType of
-         0 : begin
-             txt:=Format(rsRATurns2, [txt+tab]);
-             txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
-             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
-                else txt:=Format(rsCCW, [txt]);
-             txt:=Format(rsDECTurns2, [txt+tab]);
-             txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
-             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
-                else txt:=Format(rsCCW, [txt]);
-             end;
-         1 : begin
-             Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
-             Eq2Hz(sc.cfgsc.CurSt-lastra,lastdec,a1,h1,sc.cfgsc) ;
-             dx:=rmod((rad2deg*(a-a1))+360,360);
-             if dx>180 then dx:=dx-360;
-             dy:=rad2deg*(h-h1);
-             txt:=Format(rsAzTurns, [txt+tab]);
-             txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
-             if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
-                else txt:=Format(rsCCW, [txt]);
-             txt:=Format(rsAltTurns, [txt+tab]);
-             txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
-             if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
-                else txt:=Format(rsCCW, [txt]);
-             end;
-          end;
-      end;
-      sc.cfgsc.FindNote:=txt+tab+sc.cfgsc.FindNote;
-      skipmove:=10;
-   end;
+ax:=rmod(rad2deg*(sc.cfgsc.CurST-ra)+720,360);
+ay:=rad2deg*dec;
+if cmain.SimpleDetail and (ax>=85)and(ax<=110)and(ay>=20)and(ay<=50) then begin // astrolabe planet info
+  result:=false;
+  if Assigned(FPlanetInfo) then FPlanetInfo(self);
+end
+else begin
+  ra:=rmod(ra+pi2,pi2);
+  dx:=abs(radius/sc.cfgsc.BxGlb); // search a 2 pixel radius
+  result:=sc.FindatRaDec(ra,dec,dx,searchcenter,false,ftype);
+  if (not result) then result:=sc.FindatRaDec(ra,dec,3*dx,searchcenter,false,ftype);  //else 6 pixel
+  if showlabel then ShowIdentLabel;
+  if result and showdist then begin
+     ra:=sc.cfgsc.FindRA;
+     dec:=sc.cfgsc.FindDEC;
+     solsys:=((sc.cfgsc.FindType=ftAst)or(sc.cfgsc.FindType=ftCom)or(sc.cfgsc.FindType=ftPla))and((sc.cfgsc.FindX+sc.cfgsc.FindY+sc.cfgsc.FindZ)<>0);
+     dist := rad2deg*angulardistance(ra,dec,lastra,lastdec);
+     if dist>0 then begin
+        pa:=round(rmod(rad2deg*PositionAngle(lastra,lastdec,ra,dec)+360,360));
+        txt:=DEptoStr(dist)+' PA:'+inttostr(pa)+ldeg;
+        dx:=rmod((rad2deg*(ra-lastra)/15)+24,24);
+        if dx>12 then dx:=dx-24;
+        dy:=rad2deg*(dec-lastdec);
+        txt:=txt+crlf+artostr(dx)+blank+detostr(dy);
+        if assigned(Fshowcoord) then Fshowcoord(txt);
+        buf:=rsFrom+':  "'+lastname+'" '+rsTo+' "'+sc.cfgsc.FindName+'"'+tab+rsSeparation+': '+txt;
+        txt:=stringreplace(buf,crlf,tab+rsOffset+':',[]);
+        if assigned(Fshowinfo) then Fshowinfo(txt,caption,true,self);
+        if solsys and lastsolsys then begin
+           ds:=sqrt((lastX-sc.cfgsc.FindX)*(lastX-sc.cfgsc.FindX)+(lastY-sc.cfgsc.FindY)*(lastY-sc.cfgsc.FindY)+(lastZ-sc.cfgsc.FindZ)*(lastZ-sc.cfgsc.FindZ));
+           txt:=txt+tab+rsDistance+': '+FormatFloat(f5,ds)+'au';
+        end;
+        if sc.cfgsc.ManualTelescope then begin
+          case sc.cfgsc.ManualTelescopeType of
+           0 : begin
+               txt:=Format(rsRATurns2, [txt+tab]);
+               txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
+               if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
+                  else txt:=Format(rsCCW, [txt]);
+               txt:=Format(rsDECTurns2, [txt+tab]);
+               txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
+               if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
+                  else txt:=Format(rsCCW, [txt]);
+               end;
+           1 : begin
+               Eq2Hz(sc.cfgsc.CurSt-ra,dec,a,h,sc.cfgsc) ;
+               Eq2Hz(sc.cfgsc.CurSt-lastra,lastdec,a1,h1,sc.cfgsc) ;
+               dx:=rmod((rad2deg*(a-a1))+360,360);
+               if dx>180 then dx:=dx-360;
+               dy:=rad2deg*(h-h1);
+               txt:=Format(rsAzTurns, [txt+tab]);
+               txt:=txt+blank+formatfloat(f2,abs(dx*sc.cfgsc.TelescopeTurnsX))+blank;
+               if (dx*sc.cfgsc.TelescopeTurnsX)>0 then txt:=Format(rsCW, [txt])
+                  else txt:=Format(rsCCW, [txt]);
+               txt:=Format(rsAltTurns, [txt+tab]);
+               txt:=txt+blank+formatfloat(f2,abs(dy*sc.cfgsc.TelescopeTurnsY))+blank;
+               if (dy*sc.cfgsc.TelescopeTurnsY)>0 then txt:=Format(rsCW, [txt])
+                  else txt:=Format(rsCCW, [txt]);
+               end;
+            end;
+        end;
+        sc.cfgsc.FindNote:=txt+tab+sc.cfgsc.FindNote;
+        skipmove:=10;
+     end;
+  end;
 end;
 if sc.cfgsc.TrackOn then begin
   sc.cfgsc.TrackRA:=lasttrra;
@@ -2198,15 +2208,16 @@ end
 else if (button=mbLeft)and sc.cfgsc.ShowScale then begin
    MeasureDistance(3,X,Y);
 end
-else if (button=mbLeft)and((shift=[])or(shift=[ssLeft])) then begin
+else if (button=mbLeft)and((shift=[])or(shift=[ssLeft]))then begin
    if zoomstep>0 then begin
      ZoomBox(3,X,Y);
    end
    else begin
+     Image1.Cursor:=ChartCursor;
      IdentXY(x,y);
      xcursor:=x;
      ycursor:=y;
-     if cmain.KioskMode and sc.cfgsc.FindOK then identlabelClick(self);
+     if cmain.SimpleDetail and sc.cfgsc.FindOK then identlabelClick(self);
    end;
 end
 else if (button=mbLeft)and(ssCtrl in shift) then begin
@@ -2216,7 +2227,7 @@ else if (button=mbLeft)and(ssShift in shift)and(not lastquick) then begin
    ZoomBox(4,0,0);
    ListXY(x,y);
 end
-else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift)) then begin
+else if (button=mbMiddle)or((button=mbLeft)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
    if TrackCursorMove then TrackCursor(X,Y);
    Image1.Cursor:=ChartCursor;
    Refresh;
@@ -2235,7 +2246,8 @@ TrackCursorMove:=false;
 GetCoordxy(x,y,lastl,lastb,sc.cfgsc);
 lastyzoom:=y;
 case Button of
-   mbLeft  : if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
+   mbLeft  : if cmain.SimpleMove then image1.cursor:=crHandPoint
+              else if sc.cfgsc.ShowScale then  MeasureDistance(1,X,Y)
                else ZoomBox(1,X,Y);
    mbMiddle: image1.cursor:=crHandPoint;
 end;
@@ -2261,10 +2273,10 @@ if MovingCircle then begin
    sc.DrawFinderMark(sc.cfgsc.CircleLst[0,1],sc.cfgsc.CircleLst[0,2],true,-1);
    Image1.Invalidate;
 end else
-if (ssLeft in shift)and(not(ssShift in shift)) then begin
+if (ssLeft in shift)and(not(ssShift in shift))and(not cmain.SimpleMove) then begin
    if sc.cfgsc.ShowScale then  MeasureDistance(2,X,Y)
                else ZoomBox(2,X,Y);
-end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift)) then begin
+end else if ((ssMiddle in shift)and(not(ssCtrl in Shift)))or((ssLeft in shift)and(ssShift in shift))or(cmain.SimpleMove and (ssLeft in shift)) then begin
      TrackCursor(X,Y);
 end else if Shift=[ssCtrl] then begin
      try
@@ -2642,7 +2654,7 @@ var ra2000,de2000: double;
 begin
 pt.X:=0; pt.Y:=0;
 pt:=self.ClientToScreen(pt);
-if cmain.KioskMode then begin f_detail.Height:=round(280{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}); f_detail.Width:=round(400{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}); f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; end
+if cmain.SimpleDetail then begin f_detail.Height:=round(280{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}); f_detail.Width:=round(400{$ifdef mswindows} * Screen.PixelsPerInch/96 {$endif}); f_detail.top:=pt.Y; f_detail.left:=pt.X; f_detail.BorderStyle:=bsNone; f_detail.Panel1.Visible:=false; end
    else if (sender<>nil)and(not f_detail.visible) then formpos(f_detail,mouse.cursorpos.x,mouse.cursorpos.y);
 f_detail.source_chart:=caption;
 ra2000:=sc.cfgsc.FindRA;
