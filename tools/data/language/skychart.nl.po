@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
-"PO-Revision-Date: 2013-07-22 13:31+0000\n"
-"Last-Translator: Marc Fokker <marc@marcfokker.nl>\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
+"PO-Revision-Date: 2013-10-11 14:24+0000\n"
+"Last-Translator: Balaam's Miracle <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -162,7 +162,7 @@ msgstr "Geavanceerde instellingen voor Scope"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
-msgstr ""
+msgstr "Geavanceerde instelling"
 
 #: u_translation.rsage
 msgid "Age"
@@ -186,7 +186,7 @@ msgstr "Alle objecten van deze positie"
 
 #: u_translation.rsallsampclien
 msgid "All SAMP clients"
-msgstr ""
+msgstr "Alle SAMP clients"
 
 #: u_translation.rsalltablesstr
 msgid "%sAll table structures exist."
@@ -298,15 +298,15 @@ msgstr "Kunstmatige satelliet"
 
 #: u_translation.rsasampapplica
 msgid "A SAMP application send a table to load"
-msgstr ""
+msgstr "Een SAMP applicatie stuurt een tabel om te laden"
 
 #: u_translation.rsasampapplica2
 msgid "A SAMP application send an image to load"
-msgstr ""
+msgstr "Een SAMP applicatie stuurt een afbeelding om te laden"
 
 #: u_translation.rsasampapplica3
 msgid "A SAMP application send coordinates location"
-msgstr ""
+msgstr "Een SAMP applicatie stuurt de lokatie coördinaten"
 
 #: u_translation.rsascomtelesc
 msgid "ASCOM telescope interface"
@@ -318,15 +318,15 @@ msgstr "Vraag bevestiging voor iedere Internet verbinding"
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
-msgstr ""
+msgstr "Vraag om bevestiging voor naar coördinaten te gaan"
 
 #: u_translation.rsaskforconfir2
 msgid "Ask for confirmation before to load the image"
-msgstr ""
+msgstr "Vraag om bevestiging alvorens afbeelding te laden"
 
 #: u_translation.rsaskforconfir3
 msgid "Ask for confirmation before to load the table"
-msgstr ""
+msgstr "Vraag om bevestiging alvorens tabel te laden"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -518,7 +518,7 @@ msgstr "Helderder"
 
 #: u_translation.rsbrightest
 msgid "Brightest"
-msgstr ""
+msgstr "Helderste"
 
 #: u_translation.rsbrighteststa
 msgid "Brightest star magnitude"
@@ -563,6 +563,10 @@ msgstr "Op naam"
 #: u_translation.rscalendar
 msgid "Calendar"
 msgstr "Kalender"
+
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -696,6 +700,10 @@ msgstr "Centreer"
 msgid "Change drawing mode"
 msgstr "Verander weergavemodus"
 
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
+
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
 msgstr "Veranderen naar deze instelling zal het programma herstarten!"
@@ -778,7 +786,7 @@ msgstr "Client verbinding 'Keep Allive'"
 
 #: u_translation.rsclientlist
 msgid "Client list"
-msgstr ""
+msgstr "Client lijst"
 
 #: u_translation.rsclock
 msgid "Clock"
@@ -938,7 +946,7 @@ msgstr "Verbinding naar %s, %s, mislukt! %sControleer of de MySQL Server draait 
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr ""
+msgstr "Koppel met SAMP hub"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1385,6 +1393,10 @@ msgstr "Verwijderen van voorgaande gevevens van deze datum."
 msgid "Delete the current location from the database?"
 msgstr "Verwijder de huidige locatie uit de database?"
 
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
+
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
 msgstr "Verlaging van de zichtbare horizon"
@@ -1467,7 +1479,7 @@ msgstr "Ontkoppel"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr ""
+msgstr "Ontkoppel van SAMP"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1527,7 +1539,7 @@ msgstr "Afstand tot vorig object"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "Verander hier niets wanneer je onzeker bent over wat je doet!"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1583,11 +1595,11 @@ msgstr "Download TLE"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
-msgstr ""
+msgstr "Wil je dit laden?"
 
 #: u_translation.rsdoyouwanttom
 msgid "Do you want to move the chart there?"
-msgstr ""
+msgstr "Wil je de kaart hier naar toe bewegen?"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
@@ -2051,7 +2063,7 @@ msgstr "Selecteer voor een grote catalogus altijd 'binair geïndiceerde catalogu
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
-msgstr ""
+msgstr "Forceer EqSys"
 
 #: u_translation.rsformalwaysvi
 msgid "Form always visible"
@@ -2059,7 +2071,7 @@ msgstr "Vorm altijd zichtbaar"
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr ""
+msgstr "Voor meer informatie zie:"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2184,6 +2196,10 @@ msgstr "Gnomonisch"
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Gps-16\" geavanceerde instellingen"
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2575,11 +2591,11 @@ msgstr "Jupiter GRV lengtegraad:"
 
 #: u_translation.rskeepimageson
 msgid "Keep images on exit for later use"
-msgstr ""
+msgstr "Bewaar afbeeldingen bij afsluiten voor later gebruik"
 
 #: u_translation.rskeeptableson
 msgid "Keep tables on exit for later use"
-msgstr ""
+msgstr "Bewaar tabellen bij afsluiten voor later gebruik"
 
 #: u_translation.rskm
 msgid "Km."
@@ -3571,7 +3587,7 @@ msgstr "Gedeeltelijk"
 
 #: u_translation.rspassword
 msgid "Password"
-msgstr "Paswoord"
+msgstr "Wachtwoord"
 
 #: u_translation.rspastel
 msgid "Pastel"
@@ -4043,15 +4059,15 @@ msgstr "Real time opties"
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
-msgstr ""
+msgstr "Ontvang coördinaten van andere applicaties"
 
 #: u_translation.rsreceivefitsi
 msgid "Receive FITS images from other applications"
-msgstr ""
+msgstr "Ontvang FITS afbeeldingen van andere applicaties"
 
 #: u_translation.rsreceivevotab
 msgid "Receive VO table data from other applications"
-msgstr ""
+msgstr "Ontvang VO tabel-gegevens van andere applicaties"
 
 #: u_translation.rsrecognizeuni
 msgid "Recognize units or object type from the file:"
@@ -4279,19 +4295,19 @@ msgstr "Rijen"
 
 #: u_translation.rssampconfirma
 msgid "SAMP Confirmation"
-msgstr ""
+msgstr "SAMP Bevestiging"
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr ""
+msgstr "SAMP is een berichten protocol dat verschillende astronomische software in staat stelt met elkaar samen te werken en te communiceren. %sSkychart kan de positie-coördinaten, FITS afbeeldingen en VO tabellen verzenden en ontvangen."
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
-msgstr ""
+msgstr "SAMP instellingen"
 
 #: u_translation.rssampstatus
 msgid "SAMP status"
-msgstr ""
+msgstr "SAMP status"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4491,11 +4507,11 @@ msgstr "Stuur kaart naar printer."
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "Stuur afbeeldingen naar"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr ""
+msgstr "Stuur tabellen naar"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4656,6 +4672,10 @@ msgstr "Toon rooster label"
 #: u_translation.rsshowhidedssi
 msgid "Show/hide DSS image"
 msgstr "Toon/verberg DSS beeld"
+
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -5073,17 +5093,9 @@ msgstr "Synchroniseer telescoop"
 msgid "Synodic month"
 msgstr "Synodische maand"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Systeem"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Systeemprinter"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Systeem instelling"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5323,11 +5335,11 @@ msgstr "Trumpler klasse"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
-msgstr ""
+msgstr "Probeer automatisch te verbinden met een SAMP hub bij opstarten van programma"
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT - UT "
+msgid "DeltaT: "
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5434,8 +5446,8 @@ msgid "URL launch command"
 msgstr "URL voer commando uit"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Gebruik een andere TT-UT waarde"
+msgid "Use another DeltaT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5595,7 +5607,7 @@ msgstr "VD Catalogus Browser"
 
 #: u_translation.rsvosampsettin
 msgid "VO SAMP settings"
-msgstr ""
+msgstr "VO SAMP instellingen"
 
 #: u_translation.rswanttotracka
 msgid "Do you want to track an object before it rises?"

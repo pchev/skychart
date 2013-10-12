@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
 "PO-Revision-Date: 2013-03-10 08:04+0000\n"
 "Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -565,6 +565,10 @@ msgstr "Podle názvu"
 msgid "Calendar"
 msgstr "Kalendář"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Storno"
@@ -696,6 +700,10 @@ msgstr "Centrovat"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Změnit způsob vykreslování"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1384,6 +1392,10 @@ msgstr "Smazat starší data od dneška."
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Smazat současnou pozici z databáze?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2184,6 +2196,10 @@ msgstr "Gnómonická"
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
 msgstr "Nastavení GPS-16\" Adv."
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
+msgstr ""
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4657,6 +4673,10 @@ msgstr "Zobrazit popisky sítě"
 msgid "Show/hide DSS image"
 msgstr "Zobrazit/skrýt obrázek DSS"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "Zobrazit proměnné hvězdy (IR)"
@@ -5073,17 +5093,9 @@ msgstr "Synchronizovat"
 msgid "Synodic month"
 msgstr "Synodický měsíc"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Systém"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Tiskárna"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Nastavení"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5326,8 +5338,8 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr ""
 
 #: u_translation.rsttut
-msgid "TT - UT: "
-msgstr "TT - UT: "
+msgid "DeltaT: "
+msgstr ""
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5434,8 +5446,8 @@ msgid "URL launch command"
 msgstr "Spouštěcí příkaz URL"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
-msgstr "Použít jinou hodnotu TT-UT"
+msgid "Use another DeltaT value"
+msgstr ""
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

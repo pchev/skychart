@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-28 12:43+0000\n"
+"POT-Creation-Date: 2013-10-12 16:42+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 12:48+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -567,6 +567,10 @@ msgstr ""
 msgid "Calendar"
 msgstr "Календар"
 
+#: u_translation.rscalendargrap
+msgid "Calendar graph setting"
+msgstr ""
+
 #: u_translation.rscancel
 msgid "Cancel"
 msgstr "Скасувати"
@@ -698,6 +702,10 @@ msgstr "Центр"
 #: u_translation.rschangedrawin
 msgid "Change drawing mode"
 msgstr "Зміна типу рисування"
+
+#: u_translation.rschangemousem
+msgid "Change mouse mode"
+msgstr ""
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1386,6 +1394,10 @@ msgstr "Видалення попередніх даних на цю дату."
 #: u_translation.rsdeletethecur
 msgid "Delete the current location from the database?"
 msgstr "Видалити поточне місцезнаходження із бази даних?"
+
+#: u_translation.rsdeltaterror
+msgid "DeltaT uncertainty"
+msgstr ""
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2185,6 +2197,10 @@ msgstr ""
 
 #: u_translation.rsgps16advsett
 msgid "Gps-16\" Adv. Settings"
+msgstr ""
+
+#: u_translation.rsgraphheight
+msgid "Graph height"
 msgstr ""
 
 #: u_translation.rsgraphic
@@ -4659,6 +4675,10 @@ msgstr "Показати позначки на сітці"
 msgid "Show/hide DSS image"
 msgstr "Показати/приховати DSS зображення"
 
+#: u_translation.rsshowimagenam
+msgid "Show image name label"
+msgstr ""
+
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
 msgstr "Показати ІЧ змінні"
@@ -5075,17 +5095,9 @@ msgstr "Синхронізувати"
 msgid "Synodic month"
 msgstr "Синодичний місяць"
 
-#: u_translation.rssystem
-msgid "System"
-msgstr "Система"
-
 #: u_translation.rssystemprinte
 msgid "System printer"
 msgstr "Системний принтер"
-
-#: u_translation.rssystemsettin
-msgid "System settings"
-msgstr "Настанови системи"
 
 #: u_translation.rssytemstatus
 msgid "Sytem status:"
@@ -5328,7 +5340,7 @@ msgid "Try to auto-connect to a SAMP hub when the program start"
 msgstr ""
 
 #: u_translation.rsttut
-msgid "TT - UT: "
+msgid "DeltaT: "
 msgstr ""
 
 #: u_translation.rstuesday
@@ -5436,7 +5448,7 @@ msgid "URL launch command"
 msgstr "Команда запуску URL"
 
 #: u_translation.rsuseanothertt
-msgid "Use another TT-UT value"
+msgid "Use another DeltaT value"
 msgstr ""
 
 #: u_translation.rsuseapresetco
