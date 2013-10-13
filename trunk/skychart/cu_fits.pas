@@ -77,7 +77,7 @@ Tfitslistlabel = record lid: longword;
                         lra,lde,rot: single;
                  end;
 
-const    maxl = 4000;
+const    maxl = 20000;
 
 type
   TFits = class(TComponent)
