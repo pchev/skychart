@@ -29,15 +29,18 @@ are the same.
 
 interface
 
-uses u_util;
+uses Math, u_util;
 
 type
-double8 = array[1..8] of double;
+double20 = array[1..20] of double;
 
-function MarSatAll(jde: double; var xsat,ysat,zsat : double8):integer;
-function JupSatAll(jde: double; var xsat,ysat,zsat : double8):integer;
+function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 
 implementation
+
+{$I tass17.inc}
 
 type
 Tbody =(
@@ -149,6 +152,7 @@ begin
         K := (327.90 - 0.435330 * td) * deg_to_rad;
         N := (47.386 - 0.00140 * ty) * deg_to_rad;
         J := (37.271 + 0.00080 * ty) * deg_to_rad;
+        result:=true;
        end;
     DEIMOS: begin
         a := 23461.13;
@@ -159,48 +163,50 @@ begin
         K := (240.38 - 0.018008 * td) * deg_to_rad;
         N := (46.367 - 0.00138 * ty) * deg_to_rad;
         J := (36.623 + 0.00079 * ty) * deg_to_rad;
-
         dL := -0.274 * sin(K - 43.83 * deg_to_rad) * deg_to_rad;
         L += dL;
+        result:=true;
         end;
     else
         result:=false;
     end;
-    ma := L - P;
-    EE := kepler(e, ma);
+    if result then begin
+      ma := L - P;
+      EE := kepler(e, ma);
 
-    // convert semi major axis from km to AU
-    a /= AU_to_km;
+      // convert semi major axis from km to AU
+      a /= AU_to_km;
 
-    // rectangular coordinates on the orbit plane, x-axis is toward
-    // pericenter
-    X := a * (cos(EE) - e);
-    Y := a * sqrt(1 - e*e) * sin(EE);
-    Z := 0;
+      // rectangular coordinates on the orbit plane, x-axis is toward
+      // pericenter
+      X := a * (cos(EE) - e);
+      Y := a * sqrt(1 - e*e) * sin(EE);
+      Z := 0;
 
-    // longitude of pericenter measured from ascending node of the
-    // orbit on the Laplacian plane
-    omega := P - (K + N);
+      // longitude of pericenter measured from ascending node of the
+      // orbit on the Laplacian plane
+      omega := P - (K + N);
 
-    // rotate towards ascending node of the orbit on the Laplacian
-    // plane
-    rotateZ(X, Y, Z, -omega);
+      // rotate towards ascending node of the orbit on the Laplacian
+      // plane
+      rotateZ(X, Y, Z, -omega);
 
-    // rotate towards Laplacian plane
-    rotateX(X, Y, Z, -I);
+      // rotate towards Laplacian plane
+      rotateX(X, Y, Z, -I);
 
-    // rotate towards ascending node of the Laplacian plane on the
-    // Earth equator B1950
-    rotateZ(X, Y, Z, -K);
+      // rotate towards ascending node of the Laplacian plane on the
+      // Earth equator B1950
+      rotateZ(X, Y, Z, -K);
 
-    // rotate towards Earth equator B1950
-    rotateX(X, Y, Z, -J);
+      // rotate towards Earth equator B1950
+      rotateX(X, Y, Z, -J);
 
-    // rotate to vernal equinox
-    rotateZ(X, Y, Z, -N);
+      // rotate to vernal equinox
+      rotateZ(X, Y, Z, -N);
 
-    // precess to J2000
-    precessB1950J2000(X, Y, Z);
+      // precess to J2000
+      precessB1950J2000(X, Y, Z);
+    end;
 end;
 
 
@@ -816,7 +822,279 @@ begin
     end;
 end;
 
-function MarSatAll(jde: double; var xsat,ysat,zsat : double8):integer;
+
+
+
+
+
+procedure SatcalcLon(jd: double; var lon: array of double);
+var t: double;
+    ii,i: integer;
+begin
+    t := (jd - 2444240)/365.25;
+
+    for ii := 0 to 6 do begin
+        lon[ii] := 0;
+        for i := 0 to ntr[ii,4]-1 do
+            lon[ii] += series[ii][1][i][0] * sin(series[ii][1][i][1] + t * series[ii][1][i][2]);
+    end;
+end;
+
+procedure SatcalcElem(jd: double; ii: integer; lon: array of double; var elem: array of double);
+var t,s,phase,s1,s2: double;
+    i,j: integer;
+begin
+
+    t := (jd - 2444240)/365.25;
+
+    s := 0;
+
+    for i := 0 to ntr[ii][0]-1 do begin
+        phase := series[ii][0][i][1];
+        for j := 0 to 6 do
+            phase += iks[ii][0][i][j] * lon[j];
+        s += series[ii][0][i][0] * cos(phase + t*series[ii][0][i][2]);
+    end;
+
+    elem[0] := s;
+
+    s := lon[ii] + al0[ii];
+    for i := ntr[ii][4] to ntr[ii][1]-1 do begin
+        phase := series[ii][1][i][1];
+        for j := 0 to 6 do
+            phase += iks[ii][1][i][j] * lon[j];
+        s += series[ii][1][i][0] * sin(phase + t*series[ii][1][i][2]);
+    end;
+    s += an0[ii]*t;
+    elem[1] := arctan2(sin(s), cos(s));
+
+    s1 := 0;
+    s2 := 0;
+    for i := 0 to ntr[ii][2]-1 do begin
+        phase := series[ii][2][i][1];
+        for j := 0 to 6 do
+            phase += iks[ii][2][i][j] * lon[j];
+        s1 += series[ii][2][i][0] * cos(phase + t*series[ii][2][i][2]);
+        s2 += series[ii][2][i][0] * sin(phase + t*series[ii][2][i][2]);
+    end;
+    elem[2] := s1;
+    elem[3] := s2;
+
+    s1 := 0;
+    s2 := 0;
+    for i := 0 to ntr[ii][3]-1 do begin
+        phase := series[ii][3][i][1];
+        for j := 0 to 6 do
+            phase += iks[ii][3][i][j] * lon[j];
+        s1 += series[ii][3][i][0] * cos(phase + t*series[ii][3][i][2]);
+        s2 += series[ii][3][i][0] * sin(phase + t*series[ii][3][i][2]);
+    end;
+    elem[4] := s1;
+    elem[5] := s2;
+end;
+
+procedure SatelemHyperion(jd: double; var elem: array of double);
+var T0,AMM7,T,wt : double;
+    i: integer;
+begin
+    T0 := 2451545.0;
+    AMM7 := 0.2953088138695055;
+
+    T := jd - T0;
+
+    elem[0] := -0.1574686065780747e-02;
+    for i := 0 to NBTP-1 do begin
+        wt := T*P[i][2] + P[i][1];
+        elem[0] += P[i][0] * cos(wt);
+    end;
+
+    elem[1] := 0.4348683610500939e+01;
+    for i := 0 to NBTQ-1 do begin
+        wt := T*Q[i][2] + Q[i][1];
+        elem[1] += Q[i][0] * sin(wt);
+    end;
+
+    elem[1] += AMM7*T;
+    elem[1] := rmod(elem[1], 2*PI);
+    if (elem[1] < 0) then elem[1] += 2*PI;
+
+    for i := 0 to NBTZ-1 do begin
+        wt := T*Z[i][2] + Z[i][1];
+        elem[2] += Z[i][0] * cos(wt);
+        elem[3] += Z[i][0] * sin(wt);
+    end;
+
+    for i := 0 to NBTZT-1 do begin
+        wt := T*ZT[i][2] + ZT[i][1];
+        elem[4] += ZT[i][0] * cos(wt);
+        elem[5] += ZT[i][0] * sin(wt);
+    end;
+
+end;
+
+function satsat(jd:double; b:Tbody; var X,Y,Z: double):boolean;
+{
+  The TASS theory of motion by Vienne and Duriez is described in
+  (1995, A&A 297, 588-605) for the inner six satellites and Iapetus
+  and in (1997, A&A 324, 366-380) for Hyperion.  Much of this code is
+  translated from the TASS17 FORTRAN code which is at
+  ftp://ftp.bdl.fr/pub/ephem/satel/tass17
+
+  Orbital elements for Phoebe are from the Explanatory Supplement and
+  originally come from Zadunaisky (1954).
+}
+var elem: array [0..5] of double = ( 0, 0, 0, 0, 0, 0 );
+    lon: array [0..6] of double;
+    aam: double;   // mean motion, in radians per day
+    tmas: double;  // mass, in Saturn masses
+    t,TT,axis,lambda,e,lp,i,omega : double;
+    M,EE,eps : double;
+    GK,TAS,GK1,amo,rmu,dga,rl,rk,rh,corf,fle,cf,sf: double;
+    dlf, rsam1,asr,phi,psi,x1,y1,vx1,vy1,dwho,rtp,rtq,rdg,XX1,YY1,ZZ1: double;
+    AIA,OMA,ci,si,co,so: double;
+    index: integer;
+begin
+    if (b = PHOEBE) then begin
+        t := jd - 2433282.5;
+        TT := t/365.25;
+
+        axis := 0.0865752;
+        lambda := (277.872 - 0.6541068 * t) * deg_to_rad;
+        e := 0.16326;
+        lp := (280.165 - 0.19586 * TT) * deg_to_rad;
+        i := (173.949 - 0.020 * TT) * deg_to_rad - PI;  // retrograde orbit
+        omega := (245.998 - 0.41353 * TT) * deg_to_rad;
+
+        M := lambda - lp;
+        EE := kepler(e, M);
+
+        // rectangular coordinates on the orbit plane, x-axis is toward
+        // pericenter
+        X := axis * (cos(EE) - e);
+        Y := axis * sqrt(1 - e*e) * sin(EE);
+        Z := 0;
+
+        // rotate towards ascending node of the orbit on the ecliptic
+        // and equinox of 1950
+        rotateZ(X, Y, Z, -(lp - omega));
+
+        // rotate towards ecliptic
+        rotateX(X, Y, Z, -i);
+
+        // rotate to vernal equinox
+        rotateZ(X, Y, Z, -omega);
+
+        // rotate to earth equator B1950
+        eps := 23.4457889 * deg_to_rad;
+        rotateX(X, Y, Z, -eps);
+
+        // precess to J2000
+        precessB1950J2000(X, Y, Z);
+        result:=true;
+    end
+    else if (b = HYPERION) then begin
+        SatelemHyperion(jd, elem);
+        aam := 0.2953088138695000E+00 * 365.25;
+        tmas := 1/0.3333333333333000E+08;
+        result:=true;
+    end
+    else begin
+        index := 0;
+        result:=true;
+        case b of
+         MIMAS:       index := 0;
+         ENCELADUS:   index := 1;
+         TETHYS:      index := 2;
+         DIONE:       index := 3;
+         RHEA:        index := 4;
+         TITAN:       index := 5;
+         IAPETUS:     index := 6;
+        else
+            result:=false;
+        end;
+
+        SatcalcLon(jd, lon);
+        SatcalcElem(jd, index, lon, elem);
+
+        aam := am[index] * 365.25;
+        tmas := 1/tam[index];
+    end;
+
+    if (b <> PHOEBE) then begin
+        GK := 0.01720209895;
+        TAS := 3498.790;
+        GK1 := (GK * 365.25) * (GK * 365.25) / TAS;
+
+        amo := aam * (1 + elem[0]);
+        rmu := GK1 * (1 + tmas);
+        dga := power(rmu/(amo*amo), 1.0/3.0);
+        rl := elem[1];
+        rk := elem[2];
+        rh := elem[3];
+
+        corf := 1;
+        fle := rl - rk * sin(rl) + rh * cos(rl);
+        while (abs(corf) > 1e-14) do begin
+            cf := cos(fle);
+            sf := sin(fle);
+            corf := (rl - fle + rk*sf - rh*cf)/(1 - rk*cf - rh*sf);
+            fle += corf;
+        end;
+
+        cf := cos(fle);
+        sf := sin(fle);
+
+        dlf := -rk * sf + rh * cf;
+        rsam1 := -rk * cf - rh * sf;
+        asr := 1/(1 + rsam1);
+        phi := sqrt(1 - rk*rk - rh*rh);
+        psi := 1/(1+phi);
+
+        x1 := dga * (cf - rk - psi * rh * dlf);
+        y1 := dga * (sf - rh + psi * rk * dlf);
+        vx1 := amo * asr * dga * (-sf - psi * rh * rsam1);
+        vy1 := amo * asr * dga * ( cf + psi * rk * rsam1);
+
+        dwho := 2 * sqrt(1 - elem[5] * elem[5] - elem[4] * elem[4]);
+        rtp := 1 - 2 * elem[5] * elem[5];
+        rtq := 1 - 2 * elem[4] * elem[4];
+        rdg := 2 * elem[5] * elem[4];
+
+        XX1 := x1 * rtp + y1 * rdg;
+        YY1 := x1 * rdg + y1 * rtq;
+        ZZ1 := (-x1 * elem[5] + y1 * elem[4]) * dwho;
+
+        AIA := 28.0512 * deg_to_rad;
+        OMA := 169.5291 * deg_to_rad;
+
+        ci := cos(AIA);
+        si := sin(AIA);
+        co := cos(OMA);
+        so := sin(OMA);
+
+        X := co * XX1 - so * ci * YY1 + so * si * ZZ1;
+        Y := so * XX1 + co * ci * YY1 - co * si * ZZ1;
+        Z := si * YY1 + ci * ZZ1;
+
+        // rotate to earth equator J2000
+        eps := 23.4392911 * deg_to_rad;
+        rotateX(X, Y, Z, -eps);
+{
+        const double VX1 = vx1 * rtp + vy1 * rdg;
+        const double VY1 = vx1 * rdg + vy1 * rtq;
+        const double VZ1 = (-vx1 * elem[5] + vy1 * elem[4]) * dwho;
+
+        Vx = co * VX1 - so * ci * VY1 + so * si * VZ1;
+        Vy = so * VX1 + co * ci * VY1 - co * si * VZ1;
+        Vz = si * VY1 + ci * VZ1;
+}
+    end;
+end;
+
+
+
+
+function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 var i: integer;
     X,Y,Z: double;
 begin
@@ -831,13 +1109,28 @@ for i:=1 to 2 do begin
 end;
 end;
 
-function JupSatAll(jde: double; var xsat,ysat,zsat : double8):integer;
+function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 var i: integer;
     X,Y,Z: double;
 begin
 result:=0;
 for i:=1 to 4 do begin
   if jupsat(jde, tbody(ord(JUPITER)+i), X,Y,Z) then begin
+    xsat[i]:=X;
+    ysat[i]:=Y;
+    zsat[i]:=Z;
+  end
+  else result:=1;
+end;
+end;
+
+function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+var i: integer;
+    X,Y,Z: double;
+begin
+result:=0;
+for i:=1 to 9 do begin
+  if satsat(jde, tbody(ord(SATURN)+i), X,Y,Z) then begin
     xsat[i]:=X;
     ysat[i]:=Y;
     zsat[i]:=Z;

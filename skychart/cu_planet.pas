@@ -41,7 +41,7 @@ type Tcomelem = record
   Oaa,Obb,Occ,Oa,Ob,Oc,equinox,Ot,Oq,Oe,Oomi,Oh,Og : Double;
   CometName: string;
   end;
-type bool8=array[1..8] of boolean;
+type bool20=array[1..20] of boolean;
 
 type
   TPlanet = class(TComponent)
@@ -81,10 +81,10 @@ type
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
-     Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
-     Function JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
-     Function SatSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
-     Function UraSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
+     Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
+     Function JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
+     Function SatSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
+     Function UraSat(jde,diam : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
      Function JupGRS(lon,drift,jdref,jdnow: double):double;
      Procedure Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double);
@@ -128,12 +128,6 @@ begin
  Feph_method:='';
  de_type:=0;
  de_year:=-999999;
-{ satxyok:=true;
- satxylib:=LoadLibrary(libsatxy);
- if satxylib<>0 then begin
-    satxyfm:= TSatxyfm(GetProcedureAddress(satxylib,libsatxyfm));
-   if addr(satxyfm)<>nil then satxyok:=true;
- end;}
  if DBtype=mysql then begin
    db1:=TMyDB.create(self);
    db2:=TMyDB.create(self);
@@ -146,7 +140,6 @@ end;
 destructor TPlanet.Destroy;
 begin
 try
-// if satxyok then dlclose(satxylib);
  db1.Free;
  db2.Free;
  if de_created then close_de_file;
@@ -359,10 +352,10 @@ begin
 result:=rmod(x+3600000000,360);
 end;
 
-Function TPlanet.MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
+Function TPlanet.MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
 var i : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
-    xst,yst,zst : double8;
+    xst,yst,zst : double20;
 begin
 result:=MarSatAll(jde-lighttime,xst,yst,zst);
 if result=0 then begin
@@ -387,10 +380,10 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
+Function TPlanet.JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
 var i : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
-    xst,yst,zst : double8;
+    xst,yst,zst : double20;
 begin
 result:=JupSatAll(jde-lighttime,xst,yst,zst);
 if result=0 then begin
@@ -415,21 +408,35 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.SatSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
+Function TPlanet.SatSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
 var i : integer;
-    x2,y2 : double8;
+    xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
+    xst,yst,zst : double20;
 begin
-//if not satxyok then begin result:=1; exit; end;
-result:=satxyfm(jde,6,addr(xsat),addr(ysat));
+result:=SatSatAll(jde-lighttime,xst,yst,zst);
 if result=0 then begin
-satxyfm(jde+0.02,6,addr(x2),addr(y2));
-for i:=1 to 8 do begin
-  supconj[i-1] := xsat[i]<x2[i];
-end;
+  SunRect(jde,false,xs,ys,zs);
+  x:=xp+xs;
+  y:=yp+ys;
+  z:=zp+zs;
+  d1:=sqrt(x*x+y*y+z*z);
+  for i:=1 to 9 do begin
+    x:=xp+xst[i]+xs;
+    y:=yp+yst[i]+ys;
+    z:=zp+zst[i]+zs;
+    d2:=sqrt(x*x+y*y+z*z);
+    alpha:=arctan2(y,x);
+    if (alpha<0) then alpha:=alpha+2*pi;
+    qr:=sqrt(x*x+y*y);
+    if qr<>0 then delta:=arctan(z/qr);
+    xsat[i]:=alpha;
+    ysat[i]:=delta;
+    supconj[i]:=(d2>d1);
+  end;
 end;
 end;
 
-Function TPlanet.UraSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
+Function TPlanet.UraSat(jde,diam : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
 var i : integer;
     x2,y2 : double8;
 begin
@@ -717,9 +724,9 @@ end;
 
 function TPlanet.ComputePlanet(cfgsc: Tconf_skychart):boolean;
 var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,vel : double;
-  ipla,j,i,ierr: integer;
-  satx,saty : double8;
-  supconj : bool8;
+  ipla,k,j,i,ierr: integer;
+  satx,saty : double20;
+  supconj : bool20;
   ars,des : double;
 begin
 result:=true;
@@ -834,23 +841,32 @@ for j:=0 to cfgsc.SimNb-1 do begin
        end;
     end;
     if ipla=6 then begin
-       ierr:=Satsat(jdt,diam,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 8 do cfgsc.PlanetLst[j,i+15,6]:=99
-       else for i:=1 to 8 do begin
-           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
-           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+15,8]:=NormRA(ars);
-           cfgsc.PlanetLst[j,i+15,9]:=des;
-           cfgsc.PlanetLst[j,i+15,10]:=cfgsc.PlanetLst[j,ipla,10];
-           ars:=ar+secarc*satx[i]/cos(de);
-           des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+15,1]:=NormRA(ars);
-           cfgsc.PlanetLst[j,i+15,2]:=des;
-           cfgsc.PlanetLst[j,i+15,3]:=jdt;
-           cfgsc.PlanetLst[j,i+15,4]:=rad2deg*(2*D0sat[i]/km_au/dist)*3600;
-           cfgsc.PlanetLst[j,i+15,5]:=V0sat[i]+5*log10(dp*dist)+0.044*pha;
-           if supconj[i] then cfgsc.PlanetLst[j,i+15,6]:=10
-                         else cfgsc.PlanetLst[j,i+15,6]:=0;
+       ierr:=Satsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
+       if ierr>0 then begin
+          for i:=1 to 8 do cfgsc.PlanetLst[j,i+15,6]:=99;
+          cfgsc.PlanetLst[j,33,6]:=99
+       end
+       else for i:=1 to 9 do begin
+           if i=9 then k:=33
+                  else k:=i+15;
+           ars:=satx[i];
+           des:=saty[i];
+           cfgsc.PlanetLst[j,k,8]:=NormRA(ars); //J2000
+           cfgsc.PlanetLst[j,k,9]:=des;
+           cfgsc.PlanetLst[j,k,10]:=cfgsc.PlanetLst[j,ipla,10];
+           precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+           if cfgsc.PlanetParalaxe then begin
+              Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+           end;
+           if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+           ars:=rmod(ars,pi2);
+           cfgsc.PlanetLst[j,k,1]:=ars;
+           cfgsc.PlanetLst[j,k,2]:=des;
+           cfgsc.PlanetLst[j,k,3]:=jdt;
+           cfgsc.PlanetLst[j,k,4]:=rad2deg*(2*D0sat[i]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,k,5]:=V0sat[i]+5*log10(dp*dist)+0.044*pha;
+           if supconj[i] then cfgsc.PlanetLst[j,k,6]:=10
+                         else cfgsc.PlanetLst[j,k,6]:=0;
        end;
        SatRing(jdt,P,a,b,be);
        cfgsc.PlanetLst[j,31,1]:=P;
@@ -922,7 +938,7 @@ end;
 Procedure TPlanet.FindNumPla(id: Integer ;var ar,de:double; var ok:boolean;cfgsc: Tconf_skychart);
 begin
 ok:=false;
-if (not cfgsc.ephvalid) or (id<1) or (id>30) then exit;
+if (not cfgsc.ephvalid) or (id<1) or (id>MaxPla)or(id=31)or(id=32) then exit;
 ok:=true;
 ar:=cfgsc.Planetlst[0,id,1];
 de:=cfgsc.Planetlst[0,id,2];
@@ -935,7 +951,9 @@ function TPlanet.FindPlanetName(planetname: String; var ra,de:double; cfgsc: Tco
 var i : integer;
 begin
 result:=false;
-if cfgsc.ephvalid then  for i:=1 to 30 do begin
+if cfgsc.ephvalid then  for i:=1 to MaxPla do begin
+     if i=31 then continue;
+     if i=32 then continue;
      if (i=9) and (not cfgsc.ShowPluto) then continue;
      if (uppercase(trim(planetname))=uppercase(trim(pla[i]))) then begin
          FindNumPla(i,ra,de,result,cfgsc);
@@ -951,7 +969,7 @@ var
    dist,illum,phase,diam,jdt,magn,dkm,hh,dp,p,pde,pds,w1,w2,w3,jd0,st0,q,distmin,xp,yp,zp,vel : double;
    sar,sde,sdist,sillum,sphase,sdiam,smagn,shh,sdp : string;
    directfind: boolean;
-   distancetocenter: array[1..31] of double;
+   distancetocenter: array[1..maxpla] of double;
 const d1='0.0'; d2='0.00';
 begin
 ar:=(x2+x1)/2;
@@ -959,7 +977,7 @@ de:=(y2+y1)/2;
 if not nextobj then  begin
    CurrentStep:=0;
    CurrentPlanet:=0;
-   for i:=1 to 31 do distancetocenter[i]:=maxdouble;
+   for i:=1 to maxpla do distancetocenter[i]:=maxdouble;
 end;
 result := false;
 directfind := false;
@@ -971,7 +989,7 @@ if cfgsc.ephvalid then repeat
   if (CurrentPlanet=9) and (not cfgsc.ShowPluto) then continue; // skip Pluto
   if CurrentPlanet=31 then continue;   // skip Saturn ring
   if (CurrentPlanet=32)and not cfgsc.ShowEarthShadowValid then continue;
-  if CurrentPlanet>32 then begin
+  if CurrentPlanet>MaxPla then begin
      inc(CurrentStep);
      if nextobj or (CurrentStep>=cfgsc.SimNb) then begin
         dec(CurrentStep);
@@ -982,7 +1000,7 @@ if cfgsc.ephvalid then repeat
      end;
   end;
   // not planetary satellites for large field of vision or if hiden by the planet
-  if (currentplanet>11) and (currentplanet<32) and((rad2deg*cfgsc.fov>1.5) or (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
+  if (currentplanet>11) and (currentplanet<=MaxPla) and((rad2deg*cfgsc.fov>5) or (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) then continue;
   tar:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,1]);
   tde:=cfgsc.PlanetLst[CurrentStep,CurrentPlanet,2];
   cfgsc.FindRA2000:=NormRa(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,8]);
@@ -992,12 +1010,12 @@ if cfgsc.ephvalid then repeat
   if ( trunc ) and (
      (tar<x1) or (tar>x2) or
      (tde<y1) or (tde>y2) or
-     ((CurrentPlanet>11)and (currentplanet<32)and(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90))or
-     ((CurrentPlanet>11)and (currentplanet<32)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax)) )
+     ((CurrentPlanet>11)and (currentplanet<=MaxPla)and(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,6]>90)) )
+//     ((CurrentPlanet>11)and (currentplanet<=MaxPla)and cfgsc.StarFilter and (cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]>cfgsc.StarMagMax)) )
      then begin
         // no
         // but ok if the cursor is inside the planetary disk
-        if (CurrentPlanet<32) then begin
+        if (CurrentPlanet<=MaxPla) then begin
            distancetocenter[CurrentPlanet]:=3600*rad2deg*angulardistance(ar,de,tar,tde);
            if distancetocenter[CurrentPlanet]<=(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]/2)
               then result:=true
@@ -1014,8 +1032,8 @@ cfgsc.FindOK:=result;
 if result then begin
   if not directfind then begin // search the planet nearest to position
      distmin:=maxdouble;
-     for i:=1 to 31 do begin
-       if distancetocenter[i]<distmin then begin
+     for i:=1 to MaxPla do begin
+       if (i<>31)and(i<>32)and(distancetocenter[i]<distmin) then begin
           distmin:=distancetocenter[i];
           CurrentPlanet:=i;
        end;
@@ -1199,6 +1217,17 @@ if result and (currentplanet>23) and (currentplanet<=28) then begin
           +date+tab;
 end;
 if result and (currentplanet>28) and (currentplanet<=30) then begin
+  nom:=pla[CurrentPlanet];
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
+  str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
+  ma:=smagn;
+  Desc := sar+tab+sde+tab
+          +' Ps'+tab+nom+tab
+          +'m:'+smagn+tab
+          +'diam:'+sdiam+blank+lsec+tab
+          +date+tab;
+end;
+if result and (currentplanet>32) and (currentplanet<=MaxPla) then begin
   nom:=pla[CurrentPlanet];
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,5]:5:1,smagn);
   str(cfgsc.PlanetLst[CurrentStep,CurrentPlanet,4]:5:3,sdiam);
@@ -2246,7 +2275,10 @@ case pla of
   16..23 : pla:=6; //sat sat ;
   24..28 : pla:=7; //ura sat ;
   29..30 : pla:=4; //mar sat ;
-  31 : pla:=6; //sat ring ;
+  31 : pla:=6;     //sat ring ;
+  33 : pla:=6;
+  34..35: pla:=8; // nep sat
+  36: pla:=9;     // pluto sat
 end;
 case pla of
 1..9: ho:=-0.5667;

@@ -53,7 +53,7 @@ const
   MaxComet = 500;
   MaxAsteroid = 10000;
   NEO_dist = 0.1; // distance to always take account of NEO
-  MaxPla = 32;
+  MaxPla = 36;
   MaxQuickSearch = 15;
   MaxWindow = 10;  // maximum number of chart window
   maxlabels = 1000; //maximum number of label to a chart
@@ -180,31 +180,34 @@ const
   greekUTF8: array[1..maxgreek] of
     word = ($CEB1, $CEB2, $CEB3, $CEB4, $CEB5, $CEB6, $CEB7, $CEB8, $CEB9, $CEBA,
     $CEBB, $CEBC, $CEBD, $CEBE, $CEBF, $CF80, $CF81, $CF83, $CF84, $CF85, $CF86, $CF87, $CF88, $CF89, $CEBE);
-  pla: array[1..32] of string =
+  pla: array[1..MaxPla] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
     'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Encelade',
     'Tethys  ', 'Dione   ',
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',
-    'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow');
+    'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
+    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ');
+
   // the same but always with English name
-  epla: array[1..32] of string[8] =
+  epla: array[1..MaxPla] of string[8] =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
     'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Encelade',
     'Tethys  ', 'Dione   ',
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',
-    'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow');
+    'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
+    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ');
   planetcolor: array[1..11] of double = (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
   V0mar: array [1..2] of double = (11.80, 12.89);
   V0jup: array [1..4] of double = (-1.68, -1.41, -2.09, -1.05);
-  V0sat: array [1..8] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50);
+  V0sat: array [1..9] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50, 6.7);
   V0ura: array [1..5] of double = (3.60, 1.45, 2.10, 1.02, 1.23);
   D0mar: array [1..2] of double = (11, 6);
   D0jup: array [1..4] of double = (1821, 1565, 2634, 2403);
-  D0sat: array [1..8] of double = (199, 249, 530, 560, 764, 2575, 143, 718);
+  D0sat: array [1..9] of double = (199, 249, 530, 560, 764, 2575, 143, 718, 110);
   D0ura: array [1..5] of double = (236, 581, 585, 789, 761);
   nJPL_DE = 9;
   JPL_DE: array [1..nJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
@@ -581,7 +584,8 @@ const
 
 type
   Tplanetlst = array[0..MaxPlSim, 1..MaxPla, 1..10] of double;
-  // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ; 24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ;
+  // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ;
+  //24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ; 33:Phoebe; 34:Triton; 35: Nereid; 36: Charon
   Tcometlst = array of array[1..MaxComet, 1..10] of double;
   // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch, ra2000, dec2000
   TcometName = array of array[1..MaxComet, 1..2] of string[27];   // id, name
