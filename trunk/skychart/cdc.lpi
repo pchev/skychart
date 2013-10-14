@@ -341,7 +341,7 @@
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
       </Item20>
     </RequiredPackages>
-    <Units Count="72">
+    <Units Count="73">
       <Unit0>
         <Filename Value="cdc.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -852,6 +852,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="pu_imglist"/>
       </Unit71>
+      <Unit72>
+        <Filename Value="cu_plansat.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="cu_plansat"/>
+      </Unit72>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
