@@ -86,6 +86,7 @@ type
      Function SatSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Function UraSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Function NepSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
+     Function PluSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
      Function JupGRS(lon,drift,jdref,jdnow: double):double;
      Procedure Moon(t0 : double; var alpha,delta,dist,dkm,diam,phase,illum : double);
@@ -478,6 +479,34 @@ if result=0 then begin
   z:=zp+zs;
   d1:=sqrt(x*x+y*y+z*z);
   for i:=1 to 2 do begin
+    x:=xp+xst[i]+xs;
+    y:=yp+yst[i]+ys;
+    z:=zp+zst[i]+zs;
+    d2:=sqrt(x*x+y*y+z*z);
+    alpha:=arctan2(y,x);
+    if (alpha<0) then alpha:=alpha+2*pi;
+    qr:=sqrt(x*x+y*y);
+    if qr<>0 then delta:=arctan(z/qr);
+    xsat[i]:=alpha;
+    ysat[i]:=delta;
+    supconj[i]:=(d2>d1);
+  end;
+end;
+end;
+
+Function TPlanet.PluSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
+var i : integer;
+    xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
+    xst,yst,zst : double20;
+begin
+result:=PluSatAll(jde-lighttime,xst,yst,zst);
+if result=0 then begin
+  SunRect(jde,false,xs,ys,zs);
+  x:=xp+xs;
+  y:=yp+ys;
+  z:=zp+zs;
+  d1:=sqrt(x*x+y*y+z*z);
+  for i:=1 to 1 do begin
     x:=xp+xst[i]+xs;
     y:=yp+yst[i]+ys;
     z:=zp+zst[i]+zs;
@@ -966,6 +995,30 @@ for j:=0 to cfgsc.SimNb-1 do begin
             cfgsc.PlanetLst[j,i+33,5]:=V0nep[i]+5*log10(dp*dist);
             if supconj[i] then cfgsc.PlanetLst[j,i+33,6]:=10
                           else cfgsc.PlanetLst[j,i+33,6]:=0;
+        end;
+     end;
+     if ipla=9 then begin
+        ierr:=Plusat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
+        if ierr>0 then for i:=1 to 1 do cfgsc.PlanetLst[j,i+35,6]:=99
+        else for i:=1 to 1 do begin
+            ars:=satx[i];
+            des:=saty[i];
+            cfgsc.PlanetLst[j,i+35,8]:=NormRA(ars); //J2000
+            cfgsc.PlanetLst[j,i+35,9]:=des;
+            cfgsc.PlanetLst[j,i+35,10]:=cfgsc.PlanetLst[j,ipla,10];
+            precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+            if cfgsc.PlanetParalaxe then begin
+               Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+            end;
+            if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+            ars:=rmod(ars,pi2);
+            cfgsc.PlanetLst[j,i+35,1]:=ars;
+            cfgsc.PlanetLst[j,i+35,2]:=des;
+            cfgsc.PlanetLst[j,i+35,3]:=jdt;
+            cfgsc.PlanetLst[j,i+35,4]:=rad2deg*(2*D0plu[i]/km_au/dist)*3600;
+            cfgsc.PlanetLst[j,i+35,5]:=V0plu[i]+5*log10(dp*dist);
+            if supconj[i] then cfgsc.PlanetLst[j,i+35,6]:=10
+                          else cfgsc.PlanetLst[j,i+35,6]:=0;
         end;
      end;
  end;
