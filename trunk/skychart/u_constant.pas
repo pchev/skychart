@@ -206,11 +206,13 @@ const
   V0sat: array [1..9] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50, 6.7);
   V0ura: array [1..5] of double = (3.60, 1.45, 2.10, 1.02, 1.23);
   V0nep: array [1..2] of double = (-1.22, 4.0);
+  V0plu: array [1..1] of double = (1.0);
   D0mar: array [1..2] of double = (11, 6);
   D0jup: array [1..4] of double = (1821, 1565, 2634, 2403);
   D0sat: array [1..9] of double = (199, 249, 530, 560, 764, 2575, 143, 718, 110);
   D0ura: array [1..5] of double = (236, 581, 585, 789, 761);
   D0nep: array [1..2] of double = (1350, 170);
+  D0plu: array [1..1] of double = (605);
   nJPL_DE = 9;
   JPL_DE: array [1..nJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
   // JPL ephemeris to try, order by preference

@@ -39,6 +39,7 @@ function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function UraSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function NepSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function PluSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 
 implementation
 
@@ -1710,6 +1711,38 @@ begin
     end;
 end;
 
+function plusat(jd:double; b:Tbody; var X,Y,Z: double):boolean;
+{
+  Ephemeris for Charon is from Tholen, D.J. (1985) Astron. J., 90,  2353-2359
+}
+var td,a,n,E,i,o: double;
+begin
+    td := jd - 2445000.5;               // Julian days from
+                                        // reference date
+    a := 19130 / AU_to_km;              // semimajor axis (km)
+
+    n := 360 / 6.38723;                  // mean motion (degrees/day)
+    E := (78.6 + n * td) * deg_to_rad;   // eccentric anomaly
+    i := 94.3 * deg_to_rad;              // inclination of orbit
+    o := 223.7 * deg_to_rad;             // longitude of ascending node
+
+    // rectangular coordinates on the orbit plane, x-axis is toward
+    // pericenter
+    X := a * cos(E);
+    Y := a * sin(E);
+    Z := 0;
+
+    // rotate towards Earth equator B1950
+    rotateX(X, Y, Z, -i);
+
+    // rotate to vernal equinox
+    rotateZ(X, Y, Z, -o);
+
+    // precess to J2000
+    precessB1950J2000(X, Y, Z);
+end;
+
+
 
 function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 var i: integer;
@@ -1778,6 +1811,21 @@ begin
 result:=0;
 for i:=1 to 2 do begin
   if nepsat(jde, tbody(ord(NEPTUNE)+i), X,Y,Z) then begin
+    xsat[i]:=X;
+    ysat[i]:=Y;
+    zsat[i]:=Z;
+  end
+  else result:=1;
+end;
+end;
+
+function PluSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+var i: integer;
+    X,Y,Z: double;
+begin
+result:=0;
+for i:=1 to 1 do begin
+  if plusat(jde, tbody(ord(PLUTO)+i), X,Y,Z) then begin
     xsat[i]:=X;
     ysat[i]:=Y;
     zsat[i]:=Z;

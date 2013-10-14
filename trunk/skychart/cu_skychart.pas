@@ -1683,6 +1683,11 @@ for j:=0 to cfgsc.SimNb-1 do begin
               Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,flatten,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
               if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then for i:=1 to 2 do DrawSatel(j,i+33,cfgsc.Planetlst[j,i+33,1],cfgsc.Planetlst[j,i+33,2],cfgsc.Planetlst[j,i+33,5],cfgsc.Planetlst[j,i+33,4],pixscale,cfgsc.Planetlst[j,i+33,6]>1.0,false);
              end;
+        9 :  begin
+              if (fov<=5) and (cfgsc.Planetlst[j,36,6]<90) then for i:=1 to 1 do DrawSatel(j,i+35,cfgsc.Planetlst[j,i+35,1],cfgsc.Planetlst[j,i+35,2],cfgsc.Planetlst[j,i+35,5],cfgsc.Planetlst[j,i+35,4],pixscale,cfgsc.Planetlst[j,i+35,6]>1.0,true);
+              Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,flatten,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
+              if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then for i:=1 to 1 do DrawSatel(j,i+35,cfgsc.Planetlst[j,i+35,1],cfgsc.Planetlst[j,i+35,2],cfgsc.Planetlst[j,i+35,5],cfgsc.Planetlst[j,i+35,4],pixscale,cfgsc.Planetlst[j,i+35,6]>1.0,false);
+             end;
         10 : begin
               if cfgsc.SunOnline or use_xplanet then sunsize:=cfgsc.sunurlsize
                  else sunsize:=0;
