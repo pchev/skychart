@@ -38,6 +38,7 @@ function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 function UraSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function NepSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 
 implementation
 
@@ -1599,6 +1600,117 @@ begin
     end;
 end;
 
+function nepsat(jd:double; b:Tbody; var X,Y,Z: double):boolean;
+{
+  Ephemerides for Triton and Nereid are described in Jacobson,
+  Astron. Astrophys. 231, 241-250 (1990)
+}
+var
+    td: double;       // Julian days from reference date
+    ty: double;       // Julian years from reference date
+    tc: double;       // Julian centuries from reference date
+
+    a: double;        // semimajor axis
+    L: double;        // mean longitude
+    e: double;        // eccentricity
+    w: double;        // longitude of periapse
+    i: double;        // inclination of orbit
+    o: double;        // longitude of ascending node
+
+    ma: double;       // mean anomaly
+
+    N: double;        // node of the orbital reference plane on the
+                      // Earth equator B1950
+    J: double;        // inclination of orbital reference plane with
+                      // respect to the Earth equator B1950
+    EE: double;
+begin
+
+    case b of
+    TRITON: begin
+        td := jd - 2433282.5;
+        ty := td/365.25;
+        tc := ty/100;
+
+        a := 354611.773;
+        L := (49.85334766 + 61.25726751 * td) * deg_to_rad;
+        e := 0.0004102259410;
+        i := 157.6852321 * deg_to_rad;
+        o := (151.7973992 + 0.5430763965 * ty) * deg_to_rad;
+
+        w := (236.7318362 + 0.5295275852 * ty) * deg_to_rad;
+
+        ma := L - w;
+
+        w += o;
+
+        // inclination and node of the invariable plane on the Earth
+        // equator of 1950
+        J := (90 - 42.51071244) * deg_to_rad;
+        N := (90 + 298.3065940) * deg_to_rad;
+
+        result:=true;
+    end;
+    NEREID: begin
+        td := jd - 2433680.5;
+        tc := td/36525;
+
+        a := 5511233.255;
+        L := (251.14984688 + 0.9996465329 * td) * deg_to_rad;
+        e := 0.750876291;
+        i := 6.748231850 * deg_to_rad;
+        o := (315.9958928 - 3.650272562 * tc) * deg_to_rad;
+
+        w := (251.7242240 + 0.8696048083 * tc) * deg_to_rad;
+
+        ma := L - w;
+
+        w -= o;
+
+        // inclination and node of Neptune's orbit on the Earth
+        // equator of 1950
+        J := 22.313 * deg_to_rad;
+        N := 3.522 * deg_to_rad;
+        result:=true;
+    end;
+    else
+        result:=false;
+    end;
+
+    if result then begin
+      EE := kepler(e, ma);
+
+      // convert semi major axis from km to AU
+      a /= AU_to_km;
+
+      // rectangular coordinates on the orbit plane, x-axis is toward
+      // pericenter
+      X := a * (cos(EE) - e);
+      Y := a * sqrt(1 - e*e) * sin(EE);
+      Z := 0;
+
+      // rotate towards ascending node of the orbit
+      rotateZ(X, Y, Z, -w);
+
+      // rotate towards orbital reference plane
+      rotateX(X, Y, Z, -i);
+
+      // rotate towards ascending node of the orbital reference plane on
+      // the Earth equator B1950
+      rotateZ(X, Y, Z, -o);
+
+      // rotate towards Earth equator B1950
+      rotateX(X, Y, Z, -J);
+
+      // rotate to vernal equinox
+      rotateZ(X, Y, Z, -N);
+
+      // precess to J2000
+      precessB1950J2000(X, Y, Z);
+    end;
+end;
+
+
 function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 var i: integer;
     X,Y,Z: double;
@@ -1651,6 +1763,21 @@ begin
 result:=0;
 for i:=1 to 5 do begin
   if urasat(jde, tbody(ord(URANUS)+i), X,Y,Z) then begin
+    xsat[i]:=X;
+    ysat[i]:=Y;
+    zsat[i]:=Z;
+  end
+  else result:=1;
+end;
+end;
+
+function NepSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+var i: integer;
+    X,Y,Z: double;
+begin
+result:=0;
+for i:=1 to 2 do begin
+  if nepsat(jde, tbody(ord(NEPTUNE)+i), X,Y,Z) then begin
     xsat[i]:=X;
     ysat[i]:=Y;
     zsat[i]:=Z;
