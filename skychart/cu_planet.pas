@@ -28,6 +28,7 @@ interface
 uses
   satxymain,    // satxy statically linked
   uDE,
+  cu_plansat,
   u_translation, cu_database, u_constant, u_util, u_projection,
   Classes, Sysutils, passql, pasmysql, passqlite, Forms, Math;
 
@@ -40,6 +41,7 @@ type Tcomelem = record
   Oaa,Obb,Occ,Oa,Ob,Oc,equinox,Ot,Oq,Oe,Oomi,Oh,Og : Double;
   CometName: string;
   end;
+type bool8=array[1..8] of boolean;
 
 type
   TPlanet = class(TComponent)
@@ -63,7 +65,6 @@ type
     satxylib: TLibHandle;}
   protected
     { Protected declarations }
-     Procedure JupSatInt(jde : double;var P : double; var xsat,ysat : array of double; var supconj : array of boolean);
   public
     { Public declarations }
      cdb: TCdcDb;
@@ -80,8 +81,8 @@ type
      Procedure SunRect(t0 : double ; astrometric : boolean; var x,y,z : double;barycenter:boolean=true);
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
-     Function MarSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
-     Function JupSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
+     Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
+     Function JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
      Function SatSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Function UraSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
@@ -358,115 +359,59 @@ begin
 result:=rmod(x+3600000000,360);
 end;
 
-Procedure TPlanet.JupSatInt(jde : double;var P : double; var xsat,ysat : array of double; var supconj : array of boolean);
-var pl :TPlanData;
-    d,V1,M1,N1,J1,A1,B1,K1,Re,Rj,pha : double;
-    d2,T0,T1,A0,D0,l0,b0,r0,l,b,r,x,y,z,del,eps,ceps,seps,u,v,aa,dd,DE : double;
-    u1,u2,u3,u4,G,H,r1,r2,r3,r4,sDe : double;
+Function TPlanet.MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
+var i : integer;
+    xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
+    xst,yst,zst : double8;
 begin
-//  meeus 42.low
-d := jde - 2451545.0;
-V1 := to360(172.74 + 0.00111588 * d);
-M1 := to360(357.529 + 0.9856003 * d);
-N1 := to360(20.020 + 0.0830853 * d + 0.329 * sin(degtorad(V1)));
-J1 := to360(66.115 + 0.9025179 * d - 0.329 * sin(degtorad(V1)));
-A1 := to360(1.915 * sin(degtorad(M1)) + 0.020 * sin(degtorad(2*M1)));
-B1 := to360(5.555 * sin(degtorad(N1)) + 0.168 * sin(degtorad(2*N1)));
-K1 := J1 + A1 - B1;
-Re := 1.00014 - 0.01671 * cos(degtorad(M1)) - 0.00014 * cos(degtorad(2*M1));
-Rj := 5.20872 - 0.25208 * cos(degtorad(N1)) - 0.00611 * cos(degtorad(2*N1));
-del := sqrt(Rj*Rj + Re*Re - 2*Rj*Re * cos(degtorad(K1)));
-pha := radtodeg(arcsin(Re * sin(degtorad(K1)) / del));
-//  meeus 42.
-d2 := jde - 2433282.5;
-T1 := d2/36525;
-T0 := (jde - 2451545.0)/36525;
-A0 := 268.00 + 0.1061 * T1;
-D0 := 64.50 - 0.0164 * T1;
-//WW1 := to360(17.710 + 877.90003539 * d2);
-//WW2 := to360(16.838 + 870.27003539 * d2);
-Plan(3,jde,pl);
-l0:=pl.l; b0:=pl.b; r0:=pl.r;
-Plan(5,jde,pl);
-l:=pl.l; b:=pl.b; r:=pl.r;
-x := r * cos(b) * cos(l) - r0 * cos(l0);
-y := r * cos(b) * sin(l) - r0 * sin(l0);
-z := r * sin(b) - r0 * sin(b0);
-del := sqrt( x*x + y*y + z*z);
-l := l - degtorad(0.012990 * del / (r*r) );
-x := r * cos(b) * cos(l) - r0 * cos(l0);
-y := r * cos(b) * sin(l) - r0 * sin(l0);
-z := r * sin(b) - r0 * sin(b0);
-del := sqrt( x*x + y*y + z*z);
-eps := 23.439291111 - 0.0130042 * T0 - 1.64e-7 * T0*T0 + 5.036e-7 *T0*T0*T0;
-ceps := cos(degtorad(eps));
-seps := sin(degtorad(eps));
-//AlpS := radtodeg(arctan2(ceps*sin(l)-seps*tan(b),cos(l)));
-//DelS := radtodeg(arcsin(ceps*sin(b)+seps*cos(b)*sin(l)));
-//DS := radtodeg(arcsin(-sin(degtorad(D0))*sin(degtorad(DelS))-cos(degtorad(D0))*cos(degtorad(DelS))*cos(degtorad(A0-AlpS))));
-u := y * ceps - z * seps;
-v := y * seps + z * ceps;
-aa := radtodeg(arctan2(u,x));
-dd := radtodeg(arctan(v/sqrt(x*x+u*u)));
-//k := radtodeg(arctan2(sin(degtorad(D0))*cos(degtorad(dd))*cos(degtorad(A0-aa))-sin(degtorad(dd))*cos(degtorad(D0)),cos(degtorad(dd))*sin(degtorad(A0-aa))));
-DE := radtodeg(arcsin(-sin(degtorad(D0))*sin(degtorad(dd))-cos(degtorad(d0))*cos(degtorad(dd))*cos(degtorad(A0-aa))));
-//w1 := to360(WW1 - k - 5.07033 * del);
-//w2 := to360(WW2 - k - 5.02626 * del);
-P := radtodeg(arctan2(cos(degtorad(D0))*sin(degtorad(A0-aa)),sin(degtorad(D0))*cos(degtorad(dd))-cos(degtorad(D0))*sin(degtorad(dd))*cos(degtorad(A0-aa))));
-// meeus 43.low
-u1 := to360(163.8067 + 203.4058643 * (d-del/173) + pha - B1);
-u2 := to360(358.4108 + 101.2916334 * (d-del/173) + pha - B1);
-u3 := to360(5.7129 + 50.2345179 * (d-del/173) + pha - B1);
-u4 := to360(224.8151 + 21.4879801 * (d-del/173) + pha - B1);
-G := to360(331.18 + 50.310482 * (d -del/173));
-H := to360(87.40 + 21.569231 * (d -del/173));
-r1 := 5.9073 - 0.0244 * cos(degtorad(2*(u1-u2)));
-r2 := 9.3991 - 0.0882 * cos(degtorad(2*(u2-u3)));
-r3 := 14.9924 - 0.0216 * cos(degtorad(G));
-r4 := 26.3699 - 0.1935 * cos(degtorad(H));
-u1 := degtorad(u1 + 0.473 * sin(degtorad(2*(u1-u2))));
-u2 := degtorad(u2 + 1.0653 * sin(degtorad(2*(u2-u3))));
-u3 := degtorad(u3 + 0.165 * sin(degtorad(G)));
-u4 := degtorad(u4 + 0.841 * sin(degtorad(H)));
-sDe:=sin(degtorad(De));
-xsat[0] := r1 * sin(u1);
-ysat[0] := -r1 * cos(u1)*sDe;
-xsat[1] := r2 * sin(u2);
-ysat[1] := -r2 * cos(u2)*sDe;
-xsat[2] := r3 * sin(u3);
-ysat[2] := -r3 * cos(u3)*sDe;
-xsat[3] := r4 * sin(u4);
-ysat[3] := -r4 * cos(u4)*sDe;
-supconj[0] := (u1>(pi/2))and(u1<(3*pi/2));
-supconj[1] := (u2>(pi/2))and(u2<(3*pi/2));
-supconj[2] := (u3>(pi/2))and(u3<(3*pi/2));
-supconj[3] := (u4>(pi/2))and(u4<(3*pi/2));
+result:=MarSatAll(jde-lighttime,xst,yst,zst);
+if result=0 then begin
+  SunRect(jde,false,xs,ys,zs);
+  x:=xp+xs;
+  y:=yp+ys;
+  z:=zp+zs;
+  d1:=sqrt(x*x+y*y+z*z);
+  for i:=1 to 2 do begin
+    x:=xp+xst[i]+xs;
+    y:=yp+yst[i]+ys;
+    z:=zp+zst[i]+zs;
+    d2:=sqrt(x*x+y*y+z*z);
+    alpha:=arctan2(y,x);
+    if (alpha<0) then alpha:=alpha+2*pi;
+    qr:=sqrt(x*x+y*y);
+    if qr<>0 then delta:=arctan(z/qr);
+    xsat[i]:=alpha;
+    ysat[i]:=delta;
+    supconj[i]:=(d2>d1);
+  end;
+end;
 end;
 
-
-Function TPlanet.JupSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
+Function TPlanet.JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double8; var supconj: bool8):integer;
 var i : integer;
-    sp,cp,xs,ys,P : double;
-    x2,y2 : double8;
+    xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
+    xst,yst,zst : double8;
 begin
-{if not satxyok then result:=1
-               else }result:=satxyfm(jde,5,addr(xsat),addr(ysat));
-if result>0 then begin
-   jupsatInt(jde,P,xsat,ysat,supconj);
-   sp:=sin(degtorad(P));
-   cp:=cos(degtorad(P));
-   for i:=1 to 4 do begin
-       xs:=xsat[i]*diam/2;
-       ys:=ysat[i]*diam/2;
-       xsat[i]:=-xs*cp+ys*sp;
-       ysat[i]:=+xs*sp+ys*cp;
-   end;
-   result:=0;
-end else begin
-   satxyfm(jde+0.02,5,addr(x2),addr(y2));
-   for i:=1 to 4 do begin
-   supconj[i-1] := xsat[i]<x2[i];
-   end;
+result:=JupSatAll(jde-lighttime,xst,yst,zst);
+if result=0 then begin
+  SunRect(jde,false,xs,ys,zs);
+  x:=xp+xs;
+  y:=yp+ys;
+  z:=zp+zs;
+  d1:=sqrt(x*x+y*y+z*z);
+  for i:=1 to 4 do begin
+    x:=xp+xst[i]+xs;
+    y:=yp+yst[i]+ys;
+    z:=zp+zst[i]+zs;
+    d2:=sqrt(x*x+y*y+z*z);
+    alpha:=arctan2(y,x);
+    if (alpha<0) then alpha:=alpha+2*pi;
+    qr:=sqrt(x*x+y*y);
+    if qr<>0 then delta:=arctan(z/qr);
+    xsat[i]:=alpha;
+    ysat[i]:=delta;
+    supconj[i]:=(d2>d1);
+  end;
 end;
 end;
 
@@ -493,20 +438,6 @@ result:=satxyfm(jde,7,addr(xsat),addr(ysat));
 if result=0 then begin
 satxyfm(jde+0.02,7,addr(x2),addr(y2));
 for i:=1 to 5 do begin
-  supconj[i-1] := xsat[i]<x2[i];
-end;
-end;
-end;
-
-Function TPlanet.MarSat(jde,diam : double; var xsat,ysat : double8; var supconj : array of boolean):integer;
-var i : integer;
-    x2,y2 : double8;
-begin
-//if not satxyok then begin result:=1; exit; end;
-result:=satxyfm(jde,4,addr(xsat),addr(ysat));
-if result=0 then begin
-satxyfm(jde+0.02,4,addr(x2),addr(y2));
-for i:=1 to 2 do begin
   supconj[i-1] := xsat[i]<x2[i];
 end;
 end;
@@ -788,7 +719,7 @@ function TPlanet.ComputePlanet(cfgsc: Tconf_skychart):boolean;
 var ar,de,dist,illum,phase,diam,jdt,magn,st0,dkm,q,P,a,b,be,dp,sb,pha,xp,yp,zp,vel : double;
   ipla,j,i,ierr: integer;
   satx,saty : double8;
-  supconj : array[1..8] of boolean;
+  supconj : bool8;
   ars,des : double;
 begin
 result:=true;
@@ -855,37 +786,45 @@ for j:=0 to cfgsc.SimNb-1 do begin
    cfgsc.PlanetLst[j,ipla,7]:=phase;
    pha:=abs(phase);
     if ipla=4 then begin
-       ierr:=Marsat(jdt,diam,satx,saty,supconj);
+       ierr:=Marsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
        if ierr>0 then for i:=1 to 2 do cfgsc.PlanetLst[j,i+28,6]:=99
        else for i:=1 to 2 do begin
-           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
-           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+28,8]:=NormRA(ars);
-           cfgsc.PlanetLst[j,i+28,9]:=des;
-           cfgsc.PlanetLst[j,i+28,10]:=cfgsc.PlanetLst[j,ipla,10];
-           ars:=ar+secarc*satx[i]/cos(de);
-           des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+28,1]:=NormRA(ars);
-           cfgsc.PlanetLst[j,i+28,2]:=des;
-           cfgsc.PlanetLst[j,i+28,3]:=jdt;
-           cfgsc.PlanetLst[j,i+28,4]:=rad2deg*(2*D0mar[i]/km_au/dist)*3600;
-           cfgsc.PlanetLst[j,i+28,5]:=V0mar[i]+5*log10(dp*dist)+pha*(0.0380+pha*(-0.000273+pha*2e-6));
-           if supconj[i] then cfgsc.PlanetLst[j,i+28,6]:=10
-                         else cfgsc.PlanetLst[j,i+28,6]:=0;
+         ars:=satx[i];
+         des:=saty[i];
+         cfgsc.PlanetLst[j,i+28,8]:=NormRA(ars); //J2000
+         cfgsc.PlanetLst[j,i+28,9]:=des;
+         cfgsc.PlanetLst[j,i+28,10]:=cfgsc.PlanetLst[j,ipla,10];
+         precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+         if cfgsc.PlanetParalaxe then begin
+            Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+         end;
+         if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+         ars:=rmod(ars,pi2);
+         cfgsc.PlanetLst[j,i+28,1]:=ars;
+         cfgsc.PlanetLst[j,i+28,2]:=des;
+         cfgsc.PlanetLst[j,i+28,3]:=jdt;
+         cfgsc.PlanetLst[j,i+28,4]:=rad2deg*(2*D0mar[i]/km_au/dist)*3600;
+         cfgsc.PlanetLst[j,i+28,5]:=V0mar[i]+5*log10(dp*dist)+pha*(0.0380+pha*(-0.000273+pha*2e-6));
+         if supconj[i] then cfgsc.PlanetLst[j,i+28,6]:=10
+                       else cfgsc.PlanetLst[j,i+28,6]:=0;
        end;
     end;
     if ipla=5 then begin
-       ierr:=jupsat(jdt,diam,satx,saty,supconj);
+       ierr:=jupsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
        if ierr>0 then for i:=1 to 4 do cfgsc.PlanetLst[j,i+11,6]:=99
        else for i:=1 to 4 do begin
-           ars:=cfgsc.PlanetLst[j,ipla,8]+secarc*satx[i]/cos(cfgsc.PlanetLst[j,ipla,9]);
-           des:=cfgsc.PlanetLst[j,ipla,9]+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+11,8]:=NormRA(ars);
+           ars:=satx[i];
+           des:=saty[i];
+           cfgsc.PlanetLst[j,i+11,8]:=NormRA(ars); //J2000
            cfgsc.PlanetLst[j,i+11,9]:=des;
            cfgsc.PlanetLst[j,i+11,10]:=cfgsc.PlanetLst[j,ipla,10];
-           ars:=ar+secarc*satx[i]/cos(de);
-           des:=de+secarc*saty[i];
-           cfgsc.PlanetLst[j,i+11,1]:=NormRA(ars);
+           precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+           if cfgsc.PlanetParalaxe then begin
+              Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+           end;
+           if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+           ars:=rmod(ars,pi2);
+           cfgsc.PlanetLst[j,i+11,1]:=ars;
            cfgsc.PlanetLst[j,i+11,2]:=des;
            cfgsc.PlanetLst[j,i+11,3]:=jdt;
            cfgsc.PlanetLst[j,i+11,4]:=rad2deg*(2*D0jup[i]/km_au/dist)*3600;
