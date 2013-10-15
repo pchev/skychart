@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 16:42+0000\n"
-"PO-Revision-Date: 2013-09-29 17:26+0000\n"
+"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"PO-Revision-Date: 2013-10-14 01:02+0000\n"
 "Last-Translator: Angelo Rober Pulici <Unknown>\n"
 "Language-Team: Angelo Rober Pulici <apulici@terra.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-Language: Portuguese\n"
@@ -568,7 +568,7 @@ msgstr "Calendário"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "Ajuste gráfico do Calendário"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -704,7 +704,7 @@ msgstr "Alterar do modo desenho"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "Alterar o modo do mouse"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1397,7 +1397,7 @@ msgstr "Excluir a localização atual do banco de dados?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "Incerteza DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2201,7 +2201,7 @@ msgstr "Configurações Adv. Gps-16\""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "Altura do Gráfico"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4677,7 +4677,7 @@ msgstr "Exibir/Ocultar imagem DSS"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "Mostrar rótulo do nome da imagem"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4758,6 +4758,10 @@ msgstr "Mostrar estrelas"
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
 msgstr "Mostrar as imagens no mapa"
+
+#: u_translation.rsshowthesmall
+msgid "Show the faint satellites of the outer planets"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5341,7 +5345,7 @@ msgstr "Tente auto-conectar a um SAMP hub quando o programa iniciar"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5449,7 +5453,7 @@ msgstr "Comando URL de inicialização"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Use outro valor DeltaT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

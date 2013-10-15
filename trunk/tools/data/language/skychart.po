@@ -5726,3 +5726,7 @@ msgstr ""
 msgid "Change mouse mode"
 msgstr ""
 
+#: u_translation:rsshowthesmall
+msgid "Show the faint satellites of the outer planets"
+msgstr ""
+
