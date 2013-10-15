@@ -832,7 +832,7 @@ end;
 
 procedure Tf_config_solsys.BitBtn37Click(Sender: TObject);
 begin
-ExecuteFile('http://jupos.privat.t-online.de/');
+ExecuteFile(URL_GRS);
 end;
 
 procedure Tf_config_solsys.UpdComList;

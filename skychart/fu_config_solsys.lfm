@@ -120,9 +120,9 @@ object f_config_solsys: Tf_config_solsys
         ClientWidth = 496
         object Label5: TLabel
           Left = 0
-          Height = 17
+          Height = 16
           Top = 17
-          Width = 95
+          Width = 88
           Caption = 'Planets Setting'
           ParentColor = False
         end
@@ -131,7 +131,7 @@ object f_config_solsys: Tf_config_solsys
           Height = 23
           Hint = 'Planetary Ephemerides     (Chapront+ 1996)'
           Top = 39
-          Width = 181
+          Width = 168
           HelpContext = 107
           Caption = 'Show Planet on the Chart'
           Checked = True
@@ -171,7 +171,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 18
           Height = 23
           Top = 391
-          Width = 243
+          Width = 227
           Caption = 'Show Earth Shadow  (Lunar eclipses)'
           OnClick = PlanetBox3Click
           TabOrder = 2
@@ -180,7 +180,7 @@ object f_config_solsys: Tf_config_solsys
           Left = 18
           Height = 23
           Top = 419
-          Width = 241
+          Width = 228
           Caption = 'Transparent line mode (occultation)'
           OnClick = TransparentPlanetClick
           TabOrder = 3
@@ -205,15 +205,15 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label4: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 44
-            Width = 106
+            Width = 100
             Caption = 'Sun image source'
             ParentColor = False
           end
           object ComboBox1: TComboBox
             Left = 171
-            Height = 26
+            Height = 25
             Top = 40
             Width = 176
             ItemHeight = 0
@@ -223,15 +223,15 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label6: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 76
-            Width = 127
+            Width = 116
             Caption = 'Refresh image every'
             ParentColor = False
           end
           object ComboBox2: TComboBox
             Left = 171
-            Height = 26
+            Height = 25
             Top = 72
             Width = 60
             ItemHeight = 0
@@ -250,9 +250,9 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label8: TLabel
             Left = 243
-            Height = 17
+            Height = 16
             Top = 76
-            Width = 35
+            Width = 33
             Caption = 'hours'
             ParentColor = False
           end
@@ -267,15 +267,15 @@ object f_config_solsys: Tf_config_solsys
           TabOrder = 5
           object Label89: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 8
-            Width = 140
+            Width = 130
             Caption = 'Jupiter GRS longitude :'
             ParentColor = False
           end
           object GRS: TFloatEdit
             Left = 171
-            Height = 24
+            Height = 23
             Hint = '0..360'
             Top = 4
             Width = 41
@@ -380,15 +380,15 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label9: TLabel
             Left = 219
-            Height = 17
+            Height = 16
             Top = 8
-            Width = 68
+            Width = 63
             Caption = 'Yearly drift'
             ParentColor = False
           end
           object GRSdrift: TFloatEdit
             Left = 307
-            Height = 24
+            Height = 23
             Hint = '-90..90'
             Top = 4
             Width = 40
@@ -404,7 +404,7 @@ object f_config_solsys: Tf_config_solsys
           end
           object GRSJDDate: TJDDatePicker
             Left = 171
-            Height = 24
+            Height = 23
             Top = 29
             Width = 80
             ButtonWidth = 23
@@ -466,9 +466,9 @@ object f_config_solsys: Tf_config_solsys
           end
           object Label10: TLabel
             Left = 13
-            Height = 17
+            Height = 16
             Top = 33
-            Width = 31
+            Width = 29
             Caption = 'Date'
             ParentColor = False
           end
