@@ -999,8 +999,6 @@ const
   lib404 = 'libplan404.so';
   libcdcwcs = 'libcdcwcs.so';
   libz = 'libz.so.1';
-  //      libsatxy = 'libsatxy.so';
-  //      libsatxyfm='Satxyfm';
 {$endif}
 {$ifdef darwin}
   lib404 = 'libplan404.dylib';
@@ -1011,8 +1009,6 @@ const
   lib404 = 'libplan404.dll';
   libcdcwcs = 'libcdcwcs.dll';
   libz = 'zlib1.dll';
-//      libsatxy = 'libsatxy.dll';
-//      libsatxyfm='Satxyfm';
 {$endif}
 
 // libplan404

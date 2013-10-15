@@ -26,7 +26,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 interface
 
 uses
-  satxymain,    // satxy statically linked
   uDE,
   cu_plansat,
   u_translation, cu_database, u_constant, u_util, u_projection,
@@ -60,9 +59,6 @@ type
     CurrentComStep,CurrentComet : integer;
     astelem : Tastelem;
     comelem : Tcomelem;
-{    satxyok : boolean;
-    satxyfm : TSatxyfm;
-    satxylib: TLibHandle;}
   protected
     { Protected declarations }
   public

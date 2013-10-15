@@ -9,7 +9,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms
   { you can add units after this }, pu_tray, pu_clock, cdccatalog, enhedit,
-  Printer4Lazarus, satxy, libsql, pu_calendar,
+  Printer4Lazarus, libsql, pu_calendar,
   CDCjdcalendar, zoomimage, bgrabitmappack;
 
 {$R *.res}
