@@ -4244,10 +4244,11 @@ procedure Tskychart.OptimizeLabels;
 var labbox: array [0..maxlabels,1..8] of TRect;
     obmp: TBitmap;
     ts: TSize;
-    pass,i,j,k,l,lsp: integer;
+    pass,i,j,k,l,lsp,maxtl: integer;
     x,y,r,dist: single;
     collision: boolean;
-const safedistance=200.0;
+    safedistance: single;
+const
       al:array[1..4]of TLabelAlign=(laTopLeft, laBottomLeft, laTopRight, laBottomRight);
 function SorCompare(l1,l2:Tobjlabel):integer;
 begin
@@ -4315,10 +4316,12 @@ function pointinrectangle(p:Tpoint; r: trect):boolean;
 begin
 result:=((p.X>=r.Left)and(p.X<=r.Right))and((p.Y>=r.Top)and(p.Y<=r.Bottom));
 end;
+
 begin
 if VerboseMsg then  WriteTrace('SkyChart '+cfgsc.chartname+': Optimize labels');
 obmp:=TBitmap.Create;
-lsp:=labspacing*Fplot.cfgchart.drawpen;
+lsp:=labspacing*Fplot.cfgchart.drawsize;
+maxtl:=0;
 // give high priority to moved or custom labels
 for j:=1 to cfgsc.nummodlabels do
   for i:=1 to numlabels do
@@ -4337,11 +4340,12 @@ for i:=1 to numlabels do begin
     if FPlot.cfgplot.UseBMP then
      obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72)
     else
-     obmp.canvas.Font.Size:=Fplot.cfgchart.drawpen*FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale;
+     obmp.canvas.Font.Height:=Fplot.cfgchart.drawsize*FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale;
   end
   else
      obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72);
   ts:=obmp.Canvas.TextExtent(labels[i].txt);
+  maxtl:=max(maxtl,ts.cx);
   if labels[i].optimizable then begin
     labels[i].align:=al[1];  // reset default position
     labels[i].r:=labels[i].r/1.414; // label always in corner
@@ -4352,26 +4356,27 @@ for i:=1 to numlabels do begin
   y:=labels[i].y;
     // TopLeft
   labbox[i,1].Top:=round(y-ts.cy-r)-1;
-  labbox[i,1].Bottom:=round(y-r)+1;
+  labbox[i,1].Bottom:=round(y+r)+1;
   labbox[i,1].Left:=round(x+r)-1;
   labbox[i,1].Right:=round(x+ts.cx+r)+1;
   // BottomLeft
-  labbox[i,2].Top:=round(y+r)-1;
+  labbox[i,2].Top:=round(y-r)-1;
   labbox[i,2].Bottom:=round(y+ts.cy+r)+1;
   labbox[i,2].Left:=round(x+r)-1;
   labbox[i,2].Right:=round(x+ts.cx+r)+1;
   // TopRight
   labbox[i,3].Top:=round(y-ts.cy-r)-1;
-  labbox[i,3].Bottom:=round(y-r)+1;
+  labbox[i,3].Bottom:=round(y+r)+1;
   labbox[i,3].Left:=round(x-ts.cx-r)-1;
   labbox[i,3].Right:=round(x-r)+1;
   // BottomRight
-  labbox[i,4].Top:=round(y+r)-1;
+  labbox[i,4].Top:=round(y-r)-1;
   labbox[i,4].Bottom:=round(y+ts.cy+r)+1;
   labbox[i,4].Left:=round(x-ts.cx-r)-1;
   labbox[i,4].Right:=round(x-r)+1;
 end;
 obmp.Free;
+safedistance:=max(2*maxtl,200.0*Fplot.cfgchart.drawpen);
 // label position and exclusion
 // pass 1 for high priority (>2) labels only
 for pass:=1 to 2 do
