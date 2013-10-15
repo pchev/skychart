@@ -373,6 +373,9 @@ const
   URL_TLE = 'https://www.space-track.org';
   URL_QUICKSAT = 'http://www.prismnet.com/~mmccants/';
 
+  URL_GRS = 'http://jupos.privat.t-online.de/rGrs.htm';
+  URL_JUPOS = 'http://jupos.org';
+
   URL_IERSBulletins = 'http://www.iers.org/IERS/EN/Publications/Bulletins/bulletins.html';
 
   URL_HTTPCometElements =
