@@ -78,7 +78,7 @@
         <WorkingDirectory Value="/usr/local/bin"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="9">
+    <RequiredPackages Count="8">
       <Item1>
         <PackageName Value="BGRABitmapPack"/>
       </Item1>
@@ -92,20 +92,17 @@
         <PackageName Value="libsql"/>
       </Item4>
       <Item5>
-        <PackageName Value="satxy"/>
+        <PackageName Value="Printer4Lazarus"/>
       </Item5>
       <Item6>
-        <PackageName Value="Printer4Lazarus"/>
+        <PackageName Value="enhedit"/>
       </Item6>
       <Item7>
-        <PackageName Value="enhedit"/>
+        <PackageName Value="cdccatalog"/>
       </Item7>
       <Item8>
-        <PackageName Value="cdccatalog"/>
-      </Item8>
-      <Item9>
         <PackageName Value="LCL"/>
-      </Item9>
+      </Item8>
     </RequiredPackages>
     <Units Count="4">
       <Unit0>

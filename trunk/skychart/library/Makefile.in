@@ -7,13 +7,12 @@ name=cdclibrary
 version=0.0
 
 [target]
-dirs= catalog \
-     satxy 
+dirs= catalog
 
 [rules]
 .PHONY: all
 
-all: catalog_all satxy_all
+all: catalog_all
 ifeq ($(OS_TARGET),win32)
         $(MAKE) -C getdss -f Makefile.win32 all 
         $(MAKE) -C plan404 -f Makefile.win32 all 
@@ -42,7 +41,7 @@ ifeq ($(OS_TARGET),win32)
  endif
 endif
 
-clean: catalog_clean satxy_clean
+clean: catalog_clean
 ifeq ($(OS_TARGET),win32)
         $(MAKE) -C getdss -f Makefile.win32 clean
         $(MAKE) -C plan404 -f Makefile.win32 clean
