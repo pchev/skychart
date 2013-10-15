@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-12 16:42+0000\n"
-"PO-Revision-Date: 2013-10-01 20:04+0000\n"
+"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"PO-Revision-Date: 2013-10-14 13:54+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-12 16:52+0000\n"
+"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
@@ -571,7 +571,7 @@ msgstr "Kalendarz"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "Ustawienia wykresu kalendarza"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -707,7 +707,7 @@ msgstr "Zmień tryb rysowania"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "Zmień tryb pracy myszy"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1399,7 +1399,7 @@ msgstr "Usunąć akutalną lokalizację z bazy danych?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "niepewność DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -2203,7 +2203,7 @@ msgstr "Gps-16\" Ustawienia zaaw."
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "Wysokość wykresu"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -4303,7 +4303,7 @@ msgstr "Potwierdzenie SAMP"
 
 #: u_translation.rssampisamessa
 msgid "SAMP is a messaging protocol that enables astronomy software tools to interoperate and communicate.%sSkychart can send and receive coordinates position, FITS images and VO tables."
-msgstr "SAMP jest protokołem przekazywania komunikatów który umożliwia aplikacjom astronomicznym komunikację i współpracę.%sSkychart może wysyłać i odbierać współrzędne, obrazy FITS oraz tabele VO."
+msgstr "SAMP jest protokołem przekazywania komunikatów, który umożliwia aplikacjom astronomicznym komunikację i współpracę.%sSkychart może wysyłać i odbierać współrzędne, obrazy FITS oraz tabele VO."
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
@@ -4679,7 +4679,7 @@ msgstr "Pokaż/Ukryj obraz DSS"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "Pokaż etykietę obrazu"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4760,6 +4760,10 @@ msgstr "Pokaż gwiazdy"
 #: u_translation.rsshowtheimage
 msgid "Show the images on the map"
 msgstr "Pokaż obrazy na mapie"
+
+#: u_translation.rsshowthesmall
+msgid "Show the faint satellites of the outer planets"
+msgstr ""
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5451,7 +5455,7 @@ msgstr "Uruchaminanie polecenia URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Użyj innej wartości DeltaT"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"

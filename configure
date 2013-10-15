@@ -27,7 +27,6 @@ dirs="skychart/component/synapse/source/lib \
      skychart/component/vosamp \
      skychart/component \
      skychart/library/catalog \
-     skychart/library/satxy \
      skychart/library \
      skychart \
      varobs \
