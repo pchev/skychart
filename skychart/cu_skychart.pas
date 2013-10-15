@@ -1655,14 +1655,21 @@ for j:=0 to cfgsc.SimNb-1 do begin
               if (fov<=5) and (cfgsc.Planetlst[j,29,6]<90) then for i:=1 to 2 do DrawSatel(j,i+28,cfgsc.Planetlst[j,i+28,1],cfgsc.Planetlst[j,i+28,2],cfgsc.Planetlst[j,i+28,5],cfgsc.Planetlst[j,i+28,4],pixscale,cfgsc.Planetlst[j,i+28,6]>1.0,false);
              end;
         5 :  begin
-              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
+              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then begin
+                for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,true);
+                if cfgsc.SmallSatActive then for i:=1 to 4 do DrawSatel(j,i+36,cfgsc.Planetlst[j,i+36,1],cfgsc.Planetlst[j,i+36,2],cfgsc.Planetlst[j,i+36,5],cfgsc.Planetlst[j,i+36,4],pixscale,cfgsc.Planetlst[j,i+36,6]>1.0,true);
+              end;
               Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,flatten,magn,phase,ppa,rot,poleincl,sunincl,w2, Fplanet.JupGRS(cfgsc.GRSlongitude,cfgsc.GRSdrift,cfgsc.GRSjd,cfgsc.CurJDTT),0,0,cfgsc.WhiteBg);
-              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
+              if (fov<=5) and (cfgsc.Planetlst[j,12,6]<90) then begin
+                for i:=1 to 4 do DrawSatel(j,i+11,cfgsc.Planetlst[j,i+11,1],cfgsc.Planetlst[j,i+11,2],cfgsc.Planetlst[j,i+11,5],cfgsc.Planetlst[j,i+11,4],pixscale,cfgsc.Planetlst[j,i+11,6]>1.0,false);
+                if cfgsc.SmallSatActive then for i:=1 to 4 do DrawSatel(j,i+36,cfgsc.Planetlst[j,i+36,1],cfgsc.Planetlst[j,i+36,2],cfgsc.Planetlst[j,i+36,5],cfgsc.Planetlst[j,i+36,4],pixscale,cfgsc.Planetlst[j,i+36,6]>1.0,false);
+              end;
              end;
         6 :  begin
               if (fov<=5) and (cfgsc.Planetlst[j,16,6]<90) then begin
                  for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,true);
                  DrawSatel(j,33,cfgsc.Planetlst[j,33,1],cfgsc.Planetlst[j,33,2],cfgsc.Planetlst[j,33,5],cfgsc.Planetlst[j,33,4],pixscale,cfgsc.Planetlst[j,33,6]>1.0,true);
+                 if cfgsc.SmallSatActive then for i:=1 to 10 do DrawSatel(j,i+40,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+40,2],cfgsc.Planetlst[j,i+40,5],cfgsc.Planetlst[j,i+40,4],pixscale,cfgsc.Planetlst[j,i+40,6]>1.0,true);
               end;
               r1:=cfgsc.Planetlst[j,31,2];
               r2:=cfgsc.Planetlst[j,31,3];
@@ -1671,17 +1678,30 @@ for j:=0 to cfgsc.SimNb-1 do begin
               if (fov<=5) and (cfgsc.Planetlst[j,16,6]<90) then begin
                 for i:=1 to 8 do DrawSatel(j,i+15,cfgsc.Planetlst[j,i+15,1],cfgsc.Planetlst[j,i+15,2],cfgsc.Planetlst[j,i+15,5],cfgsc.Planetlst[j,i+15,4],pixscale,cfgsc.Planetlst[j,i+15,6]>1.0,false);
                 DrawSatel(j,33,cfgsc.Planetlst[j,33,1],cfgsc.Planetlst[j,33,2],cfgsc.Planetlst[j,33,5],cfgsc.Planetlst[j,33,4],pixscale,cfgsc.Planetlst[j,33,6]>1.0,false);
+                if cfgsc.SmallSatActive then for i:=1 to 10 do DrawSatel(j,i+40,cfgsc.Planetlst[j,i+40,1],cfgsc.Planetlst[j,i+40,2],cfgsc.Planetlst[j,i+40,5],cfgsc.Planetlst[j,i+40,4],pixscale,cfgsc.Planetlst[j,i+40,6]>1.0,false);
               end;
              end;
         7 :  begin
-              if (fov<=5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
+              if (fov<=5) and (cfgsc.Planetlst[j,24,6]<90) then begin
+                for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,true);
+                if cfgsc.SmallSatActive then for i:=1 to 13 do DrawSatel(j,i+50,cfgsc.Planetlst[j,i+50,1],cfgsc.Planetlst[j,i+50,2],cfgsc.Planetlst[j,i+50,5],cfgsc.Planetlst[j,i+50,4],pixscale,cfgsc.Planetlst[j,i+50,6]>1.0,true);
+              end;
               Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,flatten,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
-              if (fov<=5) and (cfgsc.Planetlst[j,24,6]<90) then for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
+              if (fov<=5) and (cfgsc.Planetlst[j,24,6]<90) then begin
+                for i:=1 to 5 do DrawSatel(j,i+23,cfgsc.Planetlst[j,i+23,1],cfgsc.Planetlst[j,i+23,2],cfgsc.Planetlst[j,i+23,5],cfgsc.Planetlst[j,i+23,4],pixscale,cfgsc.Planetlst[j,i+23,6]>1.0,false);
+                if cfgsc.SmallSatActive then for i:=1 to 13 do DrawSatel(j,i+50,cfgsc.Planetlst[j,i+50,1],cfgsc.Planetlst[j,i+50,2],cfgsc.Planetlst[j,i+50,5],cfgsc.Planetlst[j,i+50,4],pixscale,cfgsc.Planetlst[j,i+50,6]>1.0,false);
+              end;
              end;
         8 :  begin
-              if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then for i:=1 to 2 do DrawSatel(j,i+33,cfgsc.Planetlst[j,i+33,1],cfgsc.Planetlst[j,i+33,2],cfgsc.Planetlst[j,i+33,5],cfgsc.Planetlst[j,i+33,4],pixscale,cfgsc.Planetlst[j,i+33,6]>1.0,true);
+              if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then begin
+                for i:=1 to 2 do DrawSatel(j,i+33,cfgsc.Planetlst[j,i+33,1],cfgsc.Planetlst[j,i+33,2],cfgsc.Planetlst[j,i+33,5],cfgsc.Planetlst[j,i+33,4],pixscale,cfgsc.Planetlst[j,i+33,6]>1.0,true);
+                if cfgsc.SmallSatActive then for i:=1 to 6 do DrawSatel(j,i+63,cfgsc.Planetlst[j,i+63,1],cfgsc.Planetlst[j,i+63,2],cfgsc.Planetlst[j,i+63,5],cfgsc.Planetlst[j,i+63,4],pixscale,cfgsc.Planetlst[j,i+63,6]>1.0,true);
+              end;
               Fplot.PlotPlanet(xx,yy,cfgsc.FlipX,cfgsc.FlipY,ipla,jdt,pixscale,diam,flatten,magn,phase,ppa,rot,poleincl,sunincl,w1,0,0,0,cfgsc.WhiteBg);
-              if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then for i:=1 to 2 do DrawSatel(j,i+33,cfgsc.Planetlst[j,i+33,1],cfgsc.Planetlst[j,i+33,2],cfgsc.Planetlst[j,i+33,5],cfgsc.Planetlst[j,i+33,4],pixscale,cfgsc.Planetlst[j,i+33,6]>1.0,false);
+              if (fov<=5) and (cfgsc.Planetlst[j,34,6]<90) then begin
+                for i:=1 to 2 do DrawSatel(j,i+33,cfgsc.Planetlst[j,i+33,1],cfgsc.Planetlst[j,i+33,2],cfgsc.Planetlst[j,i+33,5],cfgsc.Planetlst[j,i+33,4],pixscale,cfgsc.Planetlst[j,i+33,6]>1.0,false);
+                if cfgsc.SmallSatActive then for i:=1 to 6 do DrawSatel(j,i+63,cfgsc.Planetlst[j,i+63,1],cfgsc.Planetlst[j,i+63,2],cfgsc.Planetlst[j,i+63,5],cfgsc.Planetlst[j,i+63,4],pixscale,cfgsc.Planetlst[j,i+63,6]>1.0,false);
+              end;
              end;
         9 :  begin
               if (fov<=5) and (cfgsc.Planetlst[j,36,6]<90) then for i:=1 to 1 do DrawSatel(j,i+35,cfgsc.Planetlst[j,i+35,1],cfgsc.Planetlst[j,i+35,2],cfgsc.Planetlst[j,i+35,5],cfgsc.Planetlst[j,i+35,4],pixscale,cfgsc.Planetlst[j,i+35,6]>1.0,true);

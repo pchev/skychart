@@ -82,10 +82,10 @@ type
      Procedure Sun(t0 : double; var alpha,delta,dist,diam : double);
      Procedure SunEcl(t0 : double ; var l,b : double);
      Function MarSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
-     Function JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
-     Function SatSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
-     Function UraSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
-     Function NepSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
+     Function JupSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj: bool20):integer;
+     Function SatSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
+     Function UraSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
+     Function NepSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Function PluSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
      Procedure SatRing(jde : double; var P,a,b,be : double);
      Function JupGRS(lon,drift,jdref,jdnow: double):double;
@@ -382,19 +382,20 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.JupSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj: bool20):integer;
-var i : integer;
+Function TPlanet.JupSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj: bool20):integer;
+var i,n : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
     xst,yst,zst : double20;
 begin
-result:=JupSatAll(jde-lighttime,xst,yst,zst);
+if smallsat then n:=8 else n:=4;
+result:=JupSatAll(jde-lighttime,smallsat, xst,yst,zst);
 if result=0 then begin
   SunRect(jde,false,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
   d1:=sqrt(x*x+y*y+z*z);
-  for i:=1 to 4 do begin
+  for i:=1 to n do begin
     x:=xp+xst[i]+xs;
     y:=yp+yst[i]+ys;
     z:=zp+zst[i]+zs;
@@ -410,19 +411,20 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.SatSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
-var i : integer;
+Function TPlanet.SatSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
+var i,n : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
     xst,yst,zst : double20;
 begin
-result:=SatSatAll(jde-lighttime,xst,yst,zst);
+if smallsat then n:=19 else n:=9;
+result:=SatSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
   SunRect(jde,false,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
   d1:=sqrt(x*x+y*y+z*z);
-  for i:=1 to 9 do begin
+  for i:=1 to n do begin
     x:=xp+xst[i]+xs;
     y:=yp+yst[i]+ys;
     z:=zp+zst[i]+zs;
@@ -438,19 +440,20 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.UraSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
-var i : integer;
+Function TPlanet.UraSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
+var i,n : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
     xst,yst,zst : double20;
 begin
-result:=UraSatAll(jde-lighttime,xst,yst,zst);
+if smallsat then n:=18 else n:=5;
+result:=UraSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
   SunRect(jde,false,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
   d1:=sqrt(x*x+y*y+z*z);
-  for i:=1 to 5 do begin
+  for i:=1 to n do begin
     x:=xp+xst[i]+xs;
     y:=yp+yst[i]+ys;
     z:=zp+zst[i]+zs;
@@ -466,19 +469,20 @@ if result=0 then begin
 end;
 end;
 
-Function TPlanet.NepSat(jde,lighttime,xp,yp,zp : double; var xsat,ysat : double20; var supconj : array of boolean):integer;
-var i : integer;
+Function TPlanet.NepSat(jde,lighttime,xp,yp,zp : double; smallsat: boolean; var xsat,ysat : double20; var supconj : array of boolean):integer;
+var i,n : integer;
     xs,ys,zs,x,y,z,alpha,delta,qr,d1,d2 : double;
     xst,yst,zst : double20;
 begin
-result:=NepSatAll(jde-lighttime,xst,yst,zst);
+if smallsat then n:=8 else n:=2;
+result:=NepSatAll(jde-lighttime,smallsat,xst,yst,zst);
 if result=0 then begin
   SunRect(jde,false,xs,ys,zs);
   x:=xp+xs;
   y:=yp+ys;
   z:=zp+zs;
   d1:=sqrt(x*x+y*y+z*z);
-  for i:=1 to 2 do begin
+  for i:=1 to n do begin
     x:=xp+xst[i]+xs;
     y:=yp+yst[i]+ys;
     z:=zp+zst[i]+zs;
@@ -804,6 +808,7 @@ begin
 result:=true;
 try
 while lockpla do application.ProcessMessages; lockpla:=true;
+cfgsc.SmallSatActive:=cfgsc.ShowSmallsat and (cfgsc.CurYear>1900) and (cfgsc.CurYear<2100);
 cfgsc.SimNb:=min(cfgsc.SimNb,MaxPlSim);
 for j:=0 to cfgsc.SimNb-1 do begin
  jdt:=cfgsc.CurJDTT+j*cfgsc.SimD+j*cfgsc.SimH/24+j*cfgsc.SimM/60/24+j*cfgsc.SimS/3600/24;
@@ -889,9 +894,13 @@ for j:=0 to cfgsc.SimNb-1 do begin
        end;
     end;
     if ipla=5 then begin
-       ierr:=jupsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 4 do cfgsc.PlanetLst[j,i+11,6]:=99
-       else for i:=1 to 4 do begin
+       ierr:=jupsat(jdt,dist*tlight,xp,yp,zp,cfgsc.SmallSatActive,satx,saty,supconj);
+       if ierr>0 then begin
+          for i:=1 to 4 do cfgsc.PlanetLst[j,i+11,6]:=99;
+          if cfgsc.SmallSatActive then for i:=1 to 4 do cfgsc.PlanetLst[j,i+36,6]:=99;
+       end
+       else begin
+         for i:=1 to 4 do begin
            ars:=satx[i];
            des:=saty[i];
            cfgsc.PlanetLst[j,i+11,8]:=NormRA(ars); //J2000
@@ -910,15 +919,38 @@ for j:=0 to cfgsc.SimNb-1 do begin
            cfgsc.PlanetLst[j,i+11,5]:=V0jup[i]+5*log10(dp*dist)+0.005*pha;
            if supconj[i] then cfgsc.PlanetLst[j,i+11,6]:=10
                          else cfgsc.PlanetLst[j,i+11,6]:=0;
+         end;
+         if cfgsc.SmallSatActive then for i:=1 to 4 do begin
+           ars:=satx[4+i];
+           des:=saty[4+i];
+           cfgsc.PlanetLst[j,i+36,8]:=NormRA(ars); //J2000
+           cfgsc.PlanetLst[j,i+36,9]:=des;
+           cfgsc.PlanetLst[j,i+36,10]:=cfgsc.PlanetLst[j,ipla,10];
+           precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+           if cfgsc.PlanetParalaxe then begin
+              Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+           end;
+           if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+           ars:=rmod(ars,pi2);
+           cfgsc.PlanetLst[j,i+36,1]:=ars;
+           cfgsc.PlanetLst[j,i+36,2]:=des;
+           cfgsc.PlanetLst[j,i+36,3]:=jdt;
+           cfgsc.PlanetLst[j,i+36,4]:=rad2deg*(2*D0jup[i+4]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+36,5]:=V0jup[i+4]+5*log10(dp*dist)+0.005*pha;
+           if supconj[i] then cfgsc.PlanetLst[j,i+36,6]:=10
+                         else cfgsc.PlanetLst[j,i+36,6]:=0;
+         end;
        end;
     end;
     if ipla=6 then begin
-       ierr:=Satsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
+       ierr:=Satsat(jdt,dist*tlight,xp,yp,zp,cfgsc.SmallSatActive,satx,saty,supconj);
        if ierr>0 then begin
           for i:=1 to 8 do cfgsc.PlanetLst[j,i+15,6]:=99;
-          cfgsc.PlanetLst[j,33,6]:=99
+          cfgsc.PlanetLst[j,33,6]:=99;
+          if cfgsc.SmallSatActive then for i:=1 to 10 do cfgsc.PlanetLst[j,i+40,6]:=99;
        end
-       else for i:=1 to 9 do begin
+       else begin
+         for i:=1 to 9 do begin
            if i=9 then k:=33
                   else k:=i+15;
            ars:=satx[i];
@@ -939,6 +971,27 @@ for j:=0 to cfgsc.SimNb-1 do begin
            cfgsc.PlanetLst[j,k,5]:=V0sat[i]+5*log10(dp*dist)+0.044*pha;
            if supconj[i] then cfgsc.PlanetLst[j,k,6]:=10
                          else cfgsc.PlanetLst[j,k,6]:=0;
+         end;
+         if cfgsc.SmallSatActive then for i:=1 to 10 do begin
+           ars:=satx[9+i];
+           des:=saty[9+i];
+           cfgsc.PlanetLst[j,i+40,8]:=NormRA(ars); //J2000
+           cfgsc.PlanetLst[j,i+40,9]:=des;
+           cfgsc.PlanetLst[j,i+40,10]:=cfgsc.PlanetLst[j,ipla,10];
+           precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+           if cfgsc.PlanetParalaxe then begin
+              Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+           end;
+           if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+           ars:=rmod(ars,pi2);
+           cfgsc.PlanetLst[j,i+40,1]:=ars;
+           cfgsc.PlanetLst[j,i+40,2]:=des;
+           cfgsc.PlanetLst[j,i+40,3]:=jdt;
+           cfgsc.PlanetLst[j,i+40,4]:=rad2deg*(2*D0sat[i+9]/km_au/dist)*3600;
+           cfgsc.PlanetLst[j,i+40,5]:=V0sat[i+9]+5*log10(dp*dist)+0.044*pha;
+           if supconj[i] then cfgsc.PlanetLst[j,i+40,6]:=10
+                         else cfgsc.PlanetLst[j,i+40,6]:=0;
+         end;
        end;
        SatRing(jdt,P,a,b,be);
        cfgsc.PlanetLst[j,31,1]:=P;
@@ -950,9 +1003,13 @@ for j:=0 to cfgsc.SimNb-1 do begin
        cfgsc.PlanetLst[j,ipla,5]:=cfgsc.PlanetLst[j,ipla,5]-2.6*sb+1.25*sb*sb;
     end;
     if ipla=7 then begin
-       ierr:=Urasat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
-       if ierr>0 then for i:=1 to 5 do cfgsc.PlanetLst[j,i+23,6]:=99
-       else for i:=1 to 5 do begin
+       ierr:=Urasat(jdt,dist*tlight,xp,yp,zp,cfgsc.SmallSatActive,satx,saty,supconj);
+       if ierr>0 then begin
+         for i:=1 to 5 do cfgsc.PlanetLst[j,i+23,6]:=99;
+         if cfgsc.SmallSatActive then for i:=1 to 13 do cfgsc.PlanetLst[j,i+50,6]:=99;
+       end
+       else begin
+         for i:=1 to 5 do begin
            ars:=satx[i];
            des:=saty[i];
            cfgsc.PlanetLst[j,i+23,8]:=NormRA(ars); //J2000
@@ -971,12 +1028,38 @@ for j:=0 to cfgsc.SimNb-1 do begin
            cfgsc.PlanetLst[j,i+23,5]:=V0ura[i]+5*log10(dp*dist);
            if supconj[i] then cfgsc.PlanetLst[j,i+23,6]:=10
                          else cfgsc.PlanetLst[j,i+23,6]:=0;
+         end;
+         if cfgsc.SmallSatActive then for i:=1 to 13 do begin
+            ars:=satx[5+i];
+            des:=saty[5+i];
+            cfgsc.PlanetLst[j,i+50,8]:=NormRA(ars); //J2000
+            cfgsc.PlanetLst[j,i+50,9]:=des;
+            cfgsc.PlanetLst[j,i+50,10]:=cfgsc.PlanetLst[j,ipla,10];
+            precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+            if cfgsc.PlanetParalaxe then begin
+               Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+            end;
+            if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+            ars:=rmod(ars,pi2);
+            cfgsc.PlanetLst[j,i+50,1]:=ars;
+            cfgsc.PlanetLst[j,i+50,2]:=des;
+            cfgsc.PlanetLst[j,i+50,3]:=jdt;
+            cfgsc.PlanetLst[j,i+50,4]:=rad2deg*(2*D0ura[i+5]/km_au/dist)*3600;
+            cfgsc.PlanetLst[j,i+50,5]:=V0ura[i+5]+5*log10(dp*dist);
+            if supconj[i] then cfgsc.PlanetLst[j,i+50,6]:=10
+                          else cfgsc.PlanetLst[j,i+50,6]:=0;
+          end;
+
        end;
     end;
      if ipla=8 then begin
-        ierr:=Nepsat(jdt,dist*tlight,xp,yp,zp,satx,saty,supconj);
-        if ierr>0 then for i:=1 to 2 do cfgsc.PlanetLst[j,i+33,6]:=99
-        else for i:=1 to 2 do begin
+        ierr:=Nepsat(jdt,dist*tlight,xp,yp,zp,cfgsc.SmallSatActive,satx,saty,supconj);
+        if ierr>0 then begin
+          for i:=1 to 2 do cfgsc.PlanetLst[j,i+33,6]:=99;
+          if cfgsc.SmallSatActive then for i:=1 to 6 do cfgsc.PlanetLst[j,i+63,6]:=99;
+        end
+        else begin
+          for i:=1 to 2 do begin
             ars:=satx[i];
             des:=saty[i];
             cfgsc.PlanetLst[j,i+33,8]:=NormRA(ars); //J2000
@@ -995,6 +1078,27 @@ for j:=0 to cfgsc.SimNb-1 do begin
             cfgsc.PlanetLst[j,i+33,5]:=V0nep[i]+5*log10(dp*dist);
             if supconj[i] then cfgsc.PlanetLst[j,i+33,6]:=10
                           else cfgsc.PlanetLst[j,i+33,6]:=0;
+        end;
+        if cfgsc.SmallSatActive then for i:=1 to 6 do begin
+              ars:=satx[2+i];
+              des:=saty[2+i];
+              cfgsc.PlanetLst[j,i+63,8]:=NormRA(ars); //J2000
+              cfgsc.PlanetLst[j,i+63,9]:=des;
+              cfgsc.PlanetLst[j,i+63,10]:=cfgsc.PlanetLst[j,ipla,10];
+              precession(jd2000,cfgsc.JDChart,ars,des);     // equinox require for the chart
+              if cfgsc.PlanetParalaxe then begin
+                 Paralaxe(st0,dist,ars,des,ars,des,q,cfgsc);
+              end;
+              if cfgsc.ApparentPos then apparent_equatorial(ars,des,cfgsc,true,false);
+              ars:=rmod(ars,pi2);
+              cfgsc.PlanetLst[j,i+63,1]:=ars;
+              cfgsc.PlanetLst[j,i+63,2]:=des;
+              cfgsc.PlanetLst[j,i+63,3]:=jdt;
+              cfgsc.PlanetLst[j,i+63,4]:=rad2deg*(2*D0nep[i+2]/km_au/dist)*3600;
+              cfgsc.PlanetLst[j,i+63,5]:=V0nep[i+2]+5*log10(dp*dist);
+              if supconj[i] then cfgsc.PlanetLst[j,i+63,6]:=10
+                            else cfgsc.PlanetLst[j,i+63,6]:=0;
+          end;
         end;
      end;
      if ipla=9 then begin
@@ -1020,7 +1124,7 @@ for j:=0 to cfgsc.SimNb-1 do begin
             if supconj[i] then cfgsc.PlanetLst[j,i+35,6]:=10
                           else cfgsc.PlanetLst[j,i+35,6]:=0;
         end;
-     end;
+ end;
  end;
  ipla:=11;
  Moon(jdt,ar,de,dist,dkm,diam,phase,illum);
@@ -1108,12 +1212,14 @@ directfind := false;
 desc:='';tar:=1;tde:=1;jdt:=0;
 if cfgsc.ephvalid then repeat
   inc(CurrentPlanet);
+  if CurrentPlanet=44 then
+     CurrentPlanet:=44 ;
   if (CurrentStep>0)and(CurrentPlanet<=11)and(not cfgsc.SimObject[CurrentPlanet]) then continue;
   if CurrentPlanet=3 then continue;    // skip Earth
   if (CurrentPlanet=9) and (not cfgsc.ShowPluto) then continue; // skip Pluto
   if CurrentPlanet=31 then continue;   // skip Saturn ring
   if (CurrentPlanet=32)and not cfgsc.ShowEarthShadowValid then continue;
-  if CurrentPlanet>MaxPla then begin
+  if (CurrentPlanet>MaxPla)or((not cfgsc.SmallSatActive)and(CurrentPlanet>36)) then begin
      inc(CurrentStep);
      if nextobj or (CurrentStep>=cfgsc.SimNb) then begin
         dec(CurrentStep);
