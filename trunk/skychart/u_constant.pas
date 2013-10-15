@@ -53,7 +53,7 @@ const
   MaxComet = 500;
   MaxAsteroid = 10000;
   NEO_dist = 0.1; // distance to always take account of NEO
-  MaxPla = 36;
+  MaxPla = 69;
   MaxQuickSearch = 15;
   MaxWindow = 10;  // maximum number of chart window
   maxlabels = 1000; //maximum number of label to a chart
@@ -188,10 +188,15 @@ const
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',
     'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
-    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ');
+    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ',
+    'Amalthea', 'Thebe   ', 'Adrastea', 'Metis   ',
+    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas', 'Prometheus', 'Pandora', 'Pan', 'Daphnis',
+    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet', 'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
+    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
+
 
   // the same but always with English name
-  epla: array[1..MaxPla] of string[8] =
+  epla: array[1..MaxPla] of string =
     ('Mercury ', 'Venus   ', '*       ', 'Mars    ', 'Jupiter ',
     'Saturn  ', 'Uranus  ', 'Neptune ', 'Pluto   ', 'Sun     ', 'Moon    ',
     'Io      ', 'Europa  ', 'Ganymede', 'Callisto', 'Mimas   ', 'Encelade',
@@ -199,19 +204,23 @@ const
     'Rhea    ', 'Titan   ', 'Hyperion', 'Iapetus ', 'Miranda ', 'Ariel   ',
     'Umbriel ', 'Titania ',
     'Oberon  ', 'Phobos  ', 'Deimos  ', 'Sat.Ring', 'E.Shadow',
-    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ');
+    'Phoebe  ', 'Triton  ', 'Nereid  ', 'Charon  ',
+    'Amalthea', 'Thebe   ', 'Adrastea', 'Metis   ',
+    'Janus   ', 'Epimetheus', 'Helene', 'Telesto', 'Calypso', 'Atlas', 'Prometheus', 'Pandora', 'Pan', 'Daphnis',
+    'Cordelia', 'Ophelia', 'Bianca', 'Cressida', 'Desdemona', 'Juliet', 'Portia', 'Rosalind', 'Belinda', 'Puck', 'Perdita', 'Mab', 'Cupid',
+    'Naiad', 'Thalassa', 'Despina', 'Galatea', 'Larissa', 'Proteus');
   planetcolor: array[1..11] of double = (0.7, 0, 0, 1.5, 0.7, 0.7, -1.5, -1.5, 0, 0.7, 0);
   V0mar: array [1..2] of double = (11.80, 12.89);
-  V0jup: array [1..4] of double = (-1.68, -1.41, -2.09, -1.05);
-  V0sat: array [1..9] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50, 6.7);
-  V0ura: array [1..5] of double = (3.60, 1.45, 2.10, 1.02, 1.23);
-  V0nep: array [1..2] of double = (-1.22, 4.0);
+  V0jup: array [1..8] of double = (-1.68, -1.41, -2.09, -1.05,7.4,9.0,12.4,10.8);
+  V0sat: array [1..19] of double = (3.30, 2.10, 0.60, 0.80, 0.10, -1.28, 4.63, 1.50, 6.7,4.9,6.1,8.8,9.1,9.4,9.5,6.2,6.9,12,13);
+  V0ura: array [1..18] of double = (3.60, 1.45, 2.10, 1.02, 1.23,11.4,11.1,10.3,9.5,9.8,8.8,8.3,9.8,9.4,7.5,15,15,15);
+  V0nep: array [1..8] of double = (-1.22, 4.0,10.0,9.1,7.9,7.6,7.3,5.6);
   V0plu: array [1..1] of double = (1.0);
   D0mar: array [1..2] of double = (11, 6);
-  D0jup: array [1..4] of double = (1821, 1565, 2634, 2403);
-  D0sat: array [1..9] of double = (199, 249, 530, 560, 764, 2575, 143, 718, 110);
-  D0ura: array [1..5] of double = (236, 581, 585, 789, 761);
-  D0nep: array [1..2] of double = (1350, 170);
+  D0jup: array [1..8] of double = (1821, 1565, 2634, 2403,125,58,10,20);
+  D0sat: array [1..19] of double = (199, 249, 530, 560, 764, 2575, 143, 718, 110,97,69,16,15,15,18.5,74,55,10,4);
+  D0ura: array [1..18] of double = (236, 581, 585, 789, 761,13,16,22,33,29,42,55,29,34,77,5,5,5);
+  D0nep: array [1..8] of double = (1350, 170,29,40,74,79,104,218);
   D0plu: array [1..1] of double = (605);
   nJPL_DE = 9;
   JPL_DE: array [1..nJPL_DE] of integer = (430, 431 ,423, 421, 422, 405, 406, 403, 200);
@@ -590,6 +599,10 @@ type
   Tplanetlst = array[0..MaxPlSim, 1..MaxPla, 1..10] of double;
   // 1..9 : planet ; 10 : soleil ; 11 : lune ; 12..15 : jup sat ; 16..23 : sat sat ;
   //24..28 : ura sat ; 29..30 : mar sat ; 31 : sat ring ; 32 : earth shadow ; 33:Phoebe; 34:Triton; 35: Nereid; 36: Charon
+  //37:Amalthea, 38:Thebe, 39:Adrastea 40: Metis
+  //41:Janus 42:Epimetheus 43:Helene 44:Telesto 45:Calypso 46:Atlas 47:Prometheus 48:Pandora 49:Pan 50:Daphnis
+  //51:Cordelia 52:Ophelia 53:Bianca 54:Cressida 55:Desdemona 56:Juliet 57:Portia 58:Rosalind 59:Belinda 60:Puck 61:Perdita 62:Mab 63:Cupid
+  //64:Naiad 65:Thalassa 66:Despina 67:Galatea 68:Larissa 69:Proteus
   Tcometlst = array of array[1..MaxComet, 1..10] of double;
   // ra, dec, magn, diam, tail_ra, tail_dec, jd, epoch, ra2000, dec2000
   TcometName = array of array[1..MaxComet, 1..2] of string[27];   // id, name
@@ -770,7 +783,7 @@ type
     SimNb, SimD, SimH, SimM, SimS, SimLabel: integer;
     SimObject: array[1..NumSimObject] of boolean;
     SimLine, SimDateLabel, SimNameLabel, SimMagLabel, ShowPlanet,
-    PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat: boolean;
+    PlanetParalaxe, ShowEarthShadow, ShowAsteroid, ShowComet, ShowArtSat, NewArtSat, ShowSmallsat: boolean;
     SimDateYear, SimDateMonth, SimDateDay, SimDateHour,
     SimDateMinute, SimDateSecond: boolean;
     ObsLatitude, ObsLongitude, ObsAltitude,ObsXP,ObsYP,ObsRH,ObsTlr: double;
@@ -802,7 +815,7 @@ type
     ArchiveDir: array[1..MaxArchiveDir] of string;
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     // working variable
-    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid,
+    ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid, SmallSatActive,
     ShowEarthShadowValid, ShowEclipticValid: boolean;
     HorizonMax, rap2000, dep2000, RefractionOffset,ObsRAU,ObsZAU,Diurab: double;
     haicx,haicy,ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression, ObsELONG,ObsPHI,ObsDAZ: double;
@@ -1783,6 +1796,7 @@ begin
   PlanetParalaxe := Source.PlanetParalaxe;
   ShowEarthShadow := Source.ShowEarthShadow;
   ShowAsteroid := Source.ShowAsteroid;
+  ShowSmallsat := Source.ShowSmallsat;
   ShowComet := Source.ShowComet;
   ShowArtSat := Source.ShowArtSat;
   NewArtSat := Source.NewArtSat;
@@ -2009,6 +2023,7 @@ begin
   ShowAsteroidValid := Source.ShowAsteroidValid;
   ShowEarthShadowValid := Source.ShowEarthShadowValid;
   ShowEclipticValid := Source.ShowEclipticValid;
+  SmallSatActive := Source.SmallSatActive;
   BGalpha := Source.BGalpha;
   BGitt := Source.BGitt;
   BGmin_sigma := Source.BGmin_sigma;

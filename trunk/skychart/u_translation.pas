@@ -1462,6 +1462,7 @@ resourcestring
   rsCalendarGrap = 'Calendar graph setting';
   rsGraphHeight = 'Graph height';
   rsChangeMouseM = 'Change mouse mode';
+  rsShowTheSmall = 'Show the small satellites of the outer planets';
 
 implementation
 

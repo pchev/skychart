@@ -35,6 +35,7 @@ type
   { Tf_config_solsys }
 
   Tf_config_solsys = class(TFrame)
+    smallsat: TCheckBox;
     ComboBox2: TComboBox;
     AstNeo: TCheckBox;
     GRSdrift: TFloatEdit;
@@ -246,6 +247,7 @@ type
     procedure deldateastClick(Sender: TObject);
     procedure delallastClick(Sender: TObject);
     procedure AddastClick(Sender: TObject);
+    procedure smallsatChange(Sender: TObject);
     procedure SunOnlineClick(Sender: TObject);
     procedure TransparentPlanetClick(Sender: TObject);
   private
@@ -322,6 +324,7 @@ PlanetMode.Items[2]:=PlanetMode.Items[2]+blank+rsRequireXplan;
 PlanetBox3.caption:=rsShowEarthSha;
 TransparentPlanet.caption:=rsTransparentL;
 SunOnline.Caption:=rsUseOnlineSun;
+smallsat.Caption:=rsShowTheSmall;
 Label4.Caption:=rsSunImageSour;
 Label6.Caption:=rsRefreshImage;
 Label8.Caption:=rsHours;
@@ -491,6 +494,7 @@ begin
 if csc.PlanetParalaxe then PlaParalaxe.itemindex:=1
                       else PlaParalaxe.itemindex:=0;
 CheckBoxPluto.checked:=csc.ShowPluto;
+smallsat.checked := csc.ShowSmallsat;
 PlanetBox.checked:=csc.ShowPlanet;
 PlanetMode.itemindex:=cplot.plaplot;
 grs.value:=csc.GRSlongitude;
@@ -1017,6 +1021,12 @@ begin
 msg:=Cdb.AddAsteroid(astid.text,asth.text,astg.text,astep.text,astma.text,astperi.text,astnode.text,asti.text,astec.text,astax.text,astref.text,astnam.text,asteq.text);
 UpdAstList;
 if msg<>'' then showmessage(msg);
+end;
+
+procedure Tf_config_solsys.smallsatChange(Sender: TObject);
+begin
+if LockChange then exit;
+  csc.ShowSmallsat:=smallsat.checked;
 end;
 
 procedure Tf_config_solsys.SunOnlineClick(Sender: TObject);

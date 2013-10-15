@@ -29,16 +29,16 @@ are the same.
 
 interface
 
-uses Math, u_util;
+uses Math, u_util, cu_smallsat;
 
 type
 double20 = array[1..20] of double;
 
 function MarSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
-function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
-function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
-function UraSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
-function NepSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function JupSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+function SatSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+function UraSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+function NepSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
 function PluSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
 
 implementation
@@ -1759,9 +1759,12 @@ for i:=1 to 2 do begin
 end;
 end;
 
-function JupSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function JupSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+const nrocks=4;
+      rocks: array[1..nrocks] of integer = (505,514,515,516);
 var i: integer;
     X,Y,Z: double;
+    vect: array [0..2] of double;
 begin
 result:=0;
 for i:=1 to 4 do begin
@@ -1772,11 +1775,22 @@ for i:=1 to 4 do begin
   end
   else result:=1;
 end;
+if smallsat then for i:=1 to nrocks do begin
+  if evaluate_rock( jde,rocks[i],vect) then begin
+    xsat[4+i]:=vect[0]/AU_to_km;
+    ysat[4+i]:=vect[1]/AU_to_km;
+    zsat[4+i]:=vect[2]/AU_to_km;
+  end
+  else begin xsat[4+i]:=0;ysat[4+i]:=0;zsat[4+i]:=0;end;
+end;
 end;
 
-function SatSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function SatSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+const nrocks=10;
+      rocks: array[1..nrocks] of integer = (610,611,612,613,614,615,616,617,618,635);
 var i: integer;
     X,Y,Z: double;
+    vect: array [0..2] of double;
 begin
 result:=0;
 for i:=1 to 9 do begin
@@ -1787,11 +1801,22 @@ for i:=1 to 9 do begin
   end
   else result:=1;
 end;
+if smallsat then for i:=1 to nrocks do begin
+  if evaluate_rock( jde,rocks[i],vect) then begin
+    xsat[9+i]:=vect[0]/AU_to_km;
+    ysat[9+i]:=vect[1]/AU_to_km;
+    zsat[9+i]:=vect[2]/AU_to_km;
+  end
+  else begin xsat[9+i]:=0;ysat[9+i]:=0;zsat[9+i]:=0;end;
+end;
 end;
 
-function UraSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function UraSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+const nrocks=13;
+      rocks: array[1..nrocks] of integer = (706,707,708,709,710,711,712,713,714,715,725,726,727);
 var i: integer;
     X,Y,Z: double;
+    vect: array [0..2] of double;
 begin
 result:=0;
 for i:=1 to 5 do begin
@@ -1802,11 +1827,22 @@ for i:=1 to 5 do begin
   end
   else result:=1;
 end;
+if smallsat then for i:=1 to nrocks do begin
+  if evaluate_rock( jde,rocks[i],vect) then begin
+    xsat[5+i]:=vect[0]/AU_to_km;
+    ysat[5+i]:=vect[1]/AU_to_km;
+    zsat[5+i]:=vect[2]/AU_to_km;
+  end
+  else begin xsat[5+i]:=0;ysat[5+i]:=0;zsat[5+i]:=0;end;
+end;
 end;
 
-function NepSatAll(jde: double; var xsat,ysat,zsat : double20):integer;
+function NepSatAll(jde: double; smallsat: boolean; var xsat,ysat,zsat : double20):integer;
+const nrocks=6;
+      rocks: array[1..nrocks] of integer = (803,804,805,806,807,808);
 var i: integer;
     X,Y,Z: double;
+    vect: array [0..2] of double;
 begin
 result:=0;
 for i:=1 to 2 do begin
@@ -1816,6 +1852,14 @@ for i:=1 to 2 do begin
     zsat[i]:=Z;
   end
   else result:=1;
+end;
+if smallsat then for i:=1 to nrocks do begin
+  if evaluate_rock( jde,rocks[i],vect) then begin
+    xsat[2+i]:=vect[0]/AU_to_km;
+    ysat[2+i]:=vect[1]/AU_to_km;
+    zsat[2+i]:=vect[2]/AU_to_km;
+  end
+  else begin xsat[2+i]:=0;ysat[2+i]:=0;zsat[2+i]:=0;end;
 end;
 end;
 
