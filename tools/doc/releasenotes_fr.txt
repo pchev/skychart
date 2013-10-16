@@ -2,14 +2,19 @@ Version 3.9 beta Notes de la version
 
 Nouvelles fonctions:
 
-  * Ajout de la possibilité d'afficher une image pour le panorama de l'horizon. L'image doit être un fichier PNG de n'importe quelle taille représentant le panorama sur 360° avec une projection équirectangulaire. L'horizon doit être exactement à mi-hauteur de l'image. La région du ciel doit être transparente. Le côté gauche de l'image est la direction Est. Si vous utilisez une autre orientation vous devez indiquer l'angle de rotation. 
+  * Ajout de la possibilité d'afficher une image pour le panorama de l'horizon. L'image doit être un fichier PNG ou BMP de n'importe quelle taille représentant le panorama sur 360° avec une projection équirectangulaire. L'horizon doit être exactement à mi-hauteur de l'image. La région du ciel doit être transparente (#FF00FF pour BMP). Le côté gauche de l'image est la direction Est. Si vous utilisez une autre orientation vous devez indiquer l'angle de rotation. 
+  * Interopérabilité VO SAMP, permet d'envoyer et de recevoir la position d'un clic, des images FITS, des tables VO, des sélections de lignes de tables, provenant d'autres applications comme Aladin ou Topcat.
+  * Ajout du support pour JPL DE430 et DE431, vous pouvez maintenant afficher l'emplacement des planètes entre 13000BC et 17000AD.
+  * Nouveau calcul pour les satellites planétaires, ajout de Phoebe, Triton, Néréide, Charon et 33 petits satellites.
   * Option pour la couleur des nébuleuses dans CatGen.
   * Option URL de mise à jour dans CatGen.
   * Archive les images DSS téléchargée.
   * Affiche les images d'archive FITS avec WCS.
+  * Ajout d'un label avec le nom des images FITS.
   * La page crépuscule du calendrier montre également des informations sur les nuits sans lune.
   * Ajout d'un bouton du calendrier pour afficher les comètes les plus brillantes.
   * Ajout des racourcis Ctrl+L et Ctrl+Shift+L pour contrôler l'affichage de la légende.
+  * Ajout d'un bouton pour modifier le comportement du clic gauche de la souris: zoom ou déplacer.
 
 Corrections:
   * Meilleure transparence image/carte.
@@ -20,4 +25,7 @@ Corrections:
   * Nouveau pointeur simplifié au lieu de la boussole.
   * Indication de la luminosité des galaxies même en mode en ligne.
   * Taille des labels des nébuleuses selon la magnitude.
-
+  * Correction de varobs_lpv_bulletin pour utiliser le nouveau format csv du bulletin.
+  * Recherche dans les données des catalogues VO locaux.
+  * Déformation des planètes due à la réfraction près de l'horizon.
+  * Configure Xplanet pour utiliser les même éphémérides JPL que CdC.
