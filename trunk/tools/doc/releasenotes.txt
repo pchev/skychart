@@ -2,14 +2,19 @@ Version 3.9 beta release Notes
 
 New functions:
 
-  * Add the capability to display a picture for the horizon panorama. The image must be a PNG file of any size representing the full 360° panorama with an equirectangular projection. The horizon must be exactly at the middle height of the picture. The sky area must be set transparent. The left side of the picture is the East direction. If you use another orientation you must also give the offset angle.
+  * Add the capability to display a picture for the horizon panorama. The image must be a PNG or BMP file of any size representing the full 360° panorama with an equirectangular projection. The horizon must be exactly at the middle height of the picture. The sky area must be set transparent (#FF00FF for BMP). The left side of the picture is the East direction. If you use another orientation you must also give the offset angle.
+  * VO SAMP interoperability, allow to send and receive position click, FITS images, VO tables, VO tables row selections from other application like Aladin or Topcat.
+  * Add support for JPL DE430 and DE431, you can now display the planet location between 13000BC and 17000AD.
+  * New computation for the planetary satellites, add Phoebe, Triton, Nereid, Charon and 33 faint satellites.
   * Color option for Catgen nebula catalog.
   * Update URL option for Catgen text catalog.
   * Archive downloaded DSS images.
   * Display images with WCS from FITS archive.
+  * Add a labels with FITS image name.
   * Calendar Twilight panel also show moonless night information.
   * Add a button in Calendar to display the brightest comets first.
   * Add Ctrl+L and Ctrl+Shift+L shortcuts to switch the chart legend.
+  * Add a button to change the left mouse click behavior from zoom to move.
 
 Corrections:
   * Better picture/map transparency.
@@ -20,3 +25,7 @@ Corrections:
   * New simplified pointer instead of compass.
   * Galaxy symbol depend on luminosity also in line mode.
   * DSO label size depend on magnitude.
+  * Fix varobs_lpv_bulletin to use the new csv bulletin format.
+  * Search in local VO catalog data.
+  * Planet deformation due to the refraction near the horizon.
+  * Tell Xplanet to use the same JPL ephemeris than CdC.
