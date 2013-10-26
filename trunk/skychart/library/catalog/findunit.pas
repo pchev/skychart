@@ -33,8 +33,8 @@ Procedure FindNumGSCF(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGSCC(id : string ;var ar,de:double; var ok:boolean);
 Procedure FindNumGC(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean);
-Procedure FindNumBayer(id:string ;var ar,de:double; var ok:boolean);
-Procedure FindNumFlam(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumBayer(var id:string ;var ra,dec: double; var ok:boolean);
+Procedure FindNumFlam(var id:string ;var ra,dec: double; var ok:boolean);
 Procedure FindNumHD(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumSAO(id:Integer ;var ar,de:double; var ok:boolean);
 Procedure FindNumBD(id:string ;var ar,de:double; var ok:boolean);
@@ -343,19 +343,180 @@ end;
 
 Procedure FindNumHR(id:Integer ;var ar,de:double; var ok:boolean);
 var buf:string;
+    rec: GCatrec;
 begin
 buf:='HR'+inttostr(id);
-FindNumGcat(XHIPpath,'ixhr',buf,9,ar,de,ok);
+FindNumGcatRec(XHIPpath,'star',buf,11,rec,ok);
+ar:=rec.ra;
+de:=rec.dec;
 end;
 
-Procedure FindNumBayer(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumBayer(var id:string ;var ra,dec: double; var ok:boolean);
+const
+  maxgreek=25;
+  greek: array[1..2, 1..maxgreek] of
+    string = (('ALPHA', 'BETA', 'GAMMA', 'DELTA', 'EPSILON', 'ZETA', 'ETA',
+    'THETA', 'IOTA', 'KAPPA', 'LAMBDA', 'MU', 'NU', 'XI', 'OMICRON', 'PI', 'RHO',
+    'SIGMA', 'TAU', 'UPSILON', 'PHI', 'CHI', 'PSI', 'OMEGA','KSI'),
+    ('alp', 'bet', 'gam', 'del', 'eps', 'zet', 'eta', 'the', 'iot',
+    'kap', 'lam', 'mu', 'nu', 'ksi', 'omi', 'pi', 'rho', 'sig', 'tau', 'ups', 'phi', 'chi', 'psi', 'ome','ksi'));
+  maxconst=90;
+  constel: array[1..maxconst,1..3] of string =(
+  ('AND','ANDROMEDA','ANDROMEDAE'),
+  ('ANT','ANTLIA','ANTLIAE'),
+  ('APS','APUS','APODIS'),
+  ('AQR','AQUARIUS','AQUARII'),
+  ('AQL','AQUILA','AQUILAE'),
+  ('ARA','ARA','ARAE'),
+  ('ARI','ARIES','ARIETIS'),
+  ('AUR','AURIGA','AURIGAE'),
+  ('BOO','BOOTES','BOOTIS'),
+  ('CAE','CAELUM','CAELI'),
+  ('CAM','CAMELOPARDALIS','CAMELOPARDALIS'),
+  ('CNC','CANCER','CANCRI'),
+  ('CVN','CANES VENATICI','CANUM VENATICORUM'),
+  ('CMA','CANIS MAJOR','CANIS MAJORIS'),
+  ('CMI','CANIS MINOR','CANIS MINORIS'),
+  ('CAP','CAPRICORNUS','CAPRICORNI'),
+  ('CAR','CARINA','CARINAE'),
+  ('CAS','CASSIOPEIA','CASSIOPEIAE'),
+  ('CEN','CENTAURUS','CENTAURI'),
+  ('CEP','CEPHEUS','CEPHEI'),
+  ('CET','CETUS','CETI'),
+  ('CHA','CHAMAELEON','CHAMAELEONTIS'),
+  ('CIR','CIRCINUS','CIRCINI'),
+  ('COL','COLUMBA','COLUMBAE'),
+  ('COM','COMA BERENICES','COMAE BERENICES'),
+  ('CRA','CORONA AUSTRALIS','CORONAE AUSTRALIS'),
+  ('CRB','CORONA BOREALIS','CORONAE BOREALIS'),
+  ('CRV','CORVUS','CORVI'),
+  ('CRT','CRATER','CRATERIS'),
+  ('CRU','CRUX','CRUCIS'),
+  ('CYG','CYGNUS','CYGNI'),
+  ('DEL','DELPHINUS','DELPHINI'),
+  ('DOR','DORADO','DORADUS'),
+  ('DRA','DRACO','DRACONIS'),
+  ('EQU','EQUULEUS','EQUULEI'),
+  ('ERI','ERIDANUS','ERIDANI'),
+  ('FOR','FORNAX','FORNACIS'),
+  ('GEM','GEMINI','GEMINORUM'),
+  ('GRU','GRUS','GRUIS'),
+  ('HER','HERCULES','HERCULIS'),
+  ('HOR','HOROLOGIUM','HOROLOGII'),
+  ('HYA','HYDRA','HYDRAE'),
+  ('HYI','HYDRUS','HYDRI'),
+  ('IND','INDUS','INDI'),
+  ('LAC','LACERTA','LACERTAE'),
+  ('LEO','LEO','LEONIS'),
+  ('LMI','LEO MINOR','LEONIS MINORIS'),
+  ('LEP','LEPUS','LEPORIS'),
+  ('LIB','LIBRA','LIBRAE'),
+  ('LUP','LUPUS','LUPI'),
+  ('LYN','LYNX','LYNCIS'),
+  ('LYR','LYRA','LYRAE'),
+  ('MEN','MENSA','MENSAE'),
+  ('MIC','MICROSCOPIUM','MICROSCOPII'),
+  ('MON','MONOCEROS','MONOCEROTIS'),
+  ('MUS','MUSCA','MUSCAE'),
+  ('NOR','NORMA','NORMAE'),
+  ('OCT','OCTANS','OCTANTIS'),
+  ('OPH','OPHIUCHUS','OPHIUCHI'),
+  ('ORI','ORION','ORIONIS'),
+  ('PAV','PAVO','PAVONI'),
+  ('PEG','PEGASUS','PEGASI'),
+  ('PER','PERSEUS','PERSEI'),
+  ('PHE','PHOENIX','PHOENICIS'),
+  ('PIC','PICTOR','PICTORIS'),
+  ('PSC','PISCES','PISCIUM'),
+  ('PSA','PISCIS AUSTRINUS','PISCIS AUSTRINI'),
+  ('PUP','PUPPIS','PUPPIS'),
+  ('PYX','PYXIS','PYXIDIS'),
+  ('RET','RETICULUM','RETICULI'),
+  ('SGE','SAGITTA','SAGITTAE'),
+  ('SGR','SAGITTARIUS','SAGITTARII'),
+  ('SCO','SCORPIUS','SCORPII'),
+  ('SCL','SCULPTOR','SCULPTORIS'),
+  ('SCT','SCUTUM','SCUTI'),
+  ('SER','SERPENS CAPUT','SERPENS CAPUT'),
+  ('SER','SERPENS CAUDA','SERPENS CAUDA'),
+  ('SER','SERPENS','SERPENTIS'),
+  ('SEX','SEXTANS','SEXTANTIS'),
+  ('TAU','TAURUS','TAURI'),
+  ('TEL','TELESCOPIUM','TELESCOPII'),
+  ('TRI','TRIANGULUM','TRIANGULI'),
+  ('TRA','TRIANGULUM AUSTRALE','TRIANGULI AUSTRALIS'),
+  ('TUC','TUCANA','TUCANAE'),
+  ('UMA','URSA MAJOR','URSAE MAJORIS'),
+  ('UMI','URSA MINOR','URSAE MINORIS'),
+  ('VEL','VELA','VELORUM'),
+  ('VIR','VIRGO','VIRGINIS'),
+  ('VOL','VOLANS','VOLANTIS'),
+  ('VUL','VULPECULA','VULPECULAE')
+  );
+var buf,b0,b1,b,n,c: string;
+    i,p: integer;
+    H : TCatHeader;
+    info:TCatHdrInfo;
+    version : integer;
+    rec: GCatrec;
+    GCatFilter: boolean;
 begin
-FindNumGcat(XHIPpath,'ixhr',id,9,ar,de,ok);
+b0:='';
+p:=pos(' ',id);
+if p>0 then begin      // must be at least two words (alpha cygni)
+  b1:=copy(id,1,p-1);
+  c:=copy(id,p+1,999);
+  b:=''; n:='';
+  for p:=1 to length(b1) do begin    // separate the numeric part (alpha2 Librae)
+   buf:=copy(b1,p,1);
+   if (buf>='0')and(buf<='9') then n:=n+buf
+                              else b:=b+buf;
+  end;
+  b:=trim(uppercase(b));
+  for i:=1 to maxgreek do begin     // replace full greek letter by abrev.
+    if b=greek[1,i] then begin
+      b:=greek[2,i];
+      break;
+    end;
+  end;
+  if b>'' then begin
+    b0:=b;
+    if n>'' then begin             // bayer+num case
+      p:=StrToIntDef(n,-1);
+      if p>=0 then begin
+        b:=b+FormatFloat('00',p);  // format with two digits
+      end
+      else b:=b+n;
+    end;
+  end
+  else b:=n;                      // flamsteed num case
+  c:=trim(uppercase(c));
+  for i:=1 to maxconst do begin    // replace full constellation name by abrev.
+    if (c=constel[i,2])or(c=constel[i,3]) then begin // also test genitive form
+      c:=constel[i,1];
+      break;
+    end;
+  end;
+  id:=b+' '+c;      // star name as in index
+end;
+SetGcatPath(XHIPpath,'star');
+GetGCatInfo(H,info,version,GCatFilter,ok);
+FindNumGcatRec(XHIPpath,'star',id,H.ixkeylen,rec,ok);
+if (not ok)and(b0>'')and(c>'') then begin
+  if n>'' then id:=b0+' '+c                       // try without numeric index
+          else id:=b0+'01 '+c;                 // try with first numeric index
+  FindNumGcatRec(XHIPpath,'star',id,H.ixkeylen,rec,ok);
+end;
+if ok then begin
+  ra:=rec.ra/15;
+  dec:=rec.dec;
+end;
 end;
 
-Procedure FindNumFlam(id:string ;var ar,de:double; var ok:boolean);
+Procedure FindNumFlam(var id:string ;var ra,dec: double; var ok:boolean);
 begin
-FindNumGcat(XHIPpath,'ixhr',id,9,ar,de,ok);
+// now using the same index
+FindNumBayer(id,ra,dec,ok);
 end;
 
 Procedure FindNumWDS(id:string ; var lin:WDSrec; var ok:boolean);
