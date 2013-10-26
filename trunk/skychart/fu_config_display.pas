@@ -50,6 +50,10 @@ type
     CheckBox4: TCheckBox;
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
+    Edit14: TEdit;
+    Label15: TLabel;
+    labelcolorobslist: TShape;
+    labelsizeobslist: TUpDown;
     OptLabels: TCheckBox;
     Label10: TLabel;
     Label14: TLabel;
@@ -1261,7 +1265,6 @@ end;
 
 procedure Tf_config_display.showlabelcolor;
 begin
-
  labelcolorStar.brush.color:=cplot.labelcolor[1];
  labelcolorVar.brush.color:=cplot.labelcolor[2];
  labelcolorMult.brush.color:=cplot.labelcolor[3];
@@ -1270,6 +1273,7 @@ begin
  labelcolorConst.brush.color:=cplot.labelcolor[6];
  labelcolorMisc.brush.color:=cplot.labelcolor[7];
  labelcolorChartInfo.brush.color:=cplot.labelcolor[8];
+ labelcolorobslist.brush.color:=cplot.labelcolor[9];
 end;
 
 procedure Tf_config_display.showlabel;
@@ -1295,6 +1299,7 @@ begin
  labelsizeConst.position:=cplot.labelsize[6];
  labelsizeMisc.position:=cplot.labelsize[7];
  labelsizeChartInfo.position:=cplot.labelsize[8];
+ labelsizeobslist.position:=cplot.labelsize[9];
  showlabelcolor;
  if csc.NameLabel then MagLabel.ItemIndex:=1
  else if csc.MagLabel then MagLabel.ItemIndex:=2
@@ -1853,6 +1858,10 @@ csc.LabelMagDiff[5]:=2;
 cplot.LabelColor[6]:=clYellow;
 cplot.LabelColor[7]:=clSilver;
 cplot.LabelSize[6]:=cplot.LabelSize[6]+2;
+cplot.LabelColor[9]:=clLime;
+cplot.LabelSize[9]:=DefaultFontSize+1;
+csc.LabelMagDiff[9]:=0;
+csc.ShowLabel[9]:=true;
 csc.Showlabelall:=true;
 cmain.ShowChartInfo:=false;
 cmain.ShowTitlePos:=false;

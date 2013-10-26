@@ -31,7 +31,7 @@ interface
 
 uses
      pu_ascomclient, pu_lx200client, pu_encoderclient, pu_indiclient, pu_getdss, pu_imglist,
-     u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit,
+     u_translation, pu_detail, cu_skychart,  u_constant, u_util,pu_image, gcatunit, pu_obslist,
      u_projection, Printers, Math, downloaddialog, IntfGraphics, contnrs, LCLType,
      PostscriptCanvas, FileUtil, Clipbrd, LCLIntf, Classes, Graphics, Dialogs, Types,
      Forms, Controls, StdCtrls, ExtCtrls, Menus, ActnList, SysUtils, LResources;
@@ -73,6 +73,13 @@ type
     MenuCircle1: TMenuItem;
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
+    MenuObslistFirst: TMenuItem;
+    MenuObslistNext: TMenuItem;
+    MenuObslistPrev: TMenuItem;
+    MenuObslistLast: TMenuItem;
+    MenuObslist: TMenuItem;
+    MenuAddToObsList: TMenuItem;
+    MenuViewObsList: TMenuItem;
     MenuSAMP: TMenuItem;
     SAMPbroadcastcoord: TMenuItem;
     MenuRectangle2: TMenuItem;
@@ -170,6 +177,12 @@ type
       var ScrollPos: Integer);
     procedure imglistExecute(Sender: TObject);
     procedure MenuCircleClick(Sender: TObject);
+    procedure MenuAddToObsListClick(Sender: TObject);
+    procedure MenuObslistFirstClick(Sender: TObject);
+    procedure MenuObslistLastClick(Sender: TObject);
+    procedure MenuObslistNextClick(Sender: TObject);
+    procedure MenuObslistPrevClick(Sender: TObject);
+    procedure MenuViewObsListClick(Sender: TObject);
     procedure MenuLoadCircleClick(Sender: TObject);
     procedure MenuRectangleClick(Sender: TObject);
     procedure MenuSaveCircleClick(Sender: TObject);
@@ -417,6 +430,12 @@ MenuLabel.Caption:=rsLabels;
 AddLabel1.caption:=rsNewLabel;
 RemoveLastLabel1.caption:=rsRemoveLastLa;
 RemoveAllLabel1.caption:=rsRemoveAllLab;
+MenuObslist.Caption:=rsObservingLis;
+MenuViewObsList.Caption:=rsViewObservin;
+MenuObslistFirst.Caption:=rsFirst;
+MenuObslistLast.Caption:=rsLast;
+MenuObslistNext.Caption:=rsNext2;
+MenuObslistPrev.Caption:=rsPrevious;
 SearchName1.Caption:=rsSearchByName;
 nsearch1.Caption:=infoname_url[1,2];
 nsearch2.Caption:=infoname_url[2,2];
@@ -675,6 +694,8 @@ if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
  if sc.plot.cfgplot.plaplot=2 then GetSunImage;
  if sc.cfgsc.ShowBackgroundImage then sc.cfgsc.ShowImageList:=true;
+ if sc.cfgsc.quick then sc.ObjectListLabels:=f_obslist.EmptyObjLabels
+   else sc.ObjectListLabels:=f_obslist.ObjLabels;
  sc.Refresh;
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
@@ -1783,16 +1804,30 @@ begin
   end else begin
     Target1.Caption:=rsNoTargetObje;
  end;
+ if f_obslist.RowCount>0 then begin
+   MenuObslistFirst.Visible:=true;
+   MenuObslistLast.Visible:=true;
+   MenuObslistNext.Visible:=true;
+   MenuObslistPrev.Visible:=true;
+ end else begin
+   MenuObslistFirst.Visible:=false;
+   MenuObslistLast.Visible:=false;
+   MenuObslistNext.Visible:=false;
+   MenuObslistPrev.Visible:=false;
+ end;
  if sc.cfgsc.FindName>'' then begin
    About1.Caption:=Format(rsAbout2, [sc.cfgsc.FindName]);
    About1.visible:=true;
    About2.visible:=true;
    SearchName1.Visible:=true;
+   MenuAddToObsList.Caption:=Format(rsAddToObservi, [sc.cfgsc.FindName]);
+   MenuAddToObsList.Visible:=true;
  end
  else begin
-   About1.visible:=false;
-   About2.visible:=false;
+   About1.visible:=False;
+   About2.visible:=False;
    SearchName1.Visible:=False;
+   MenuAddToObsList.Visible:=False;
  end;
  if sc.cfgsc.ManualTelescope then
     Telescope1.Visible:=false
@@ -2766,7 +2801,8 @@ if cmain.SimpleDetail then begin
     if buf>'' then txt:=txt+buf+html_br;
   end;
 end else begin
-  buf:=sc.catalog.LongLabelObj(otype);
+  if isStar and (trim(GetDetailValue('Comp:'))>'') then buf:=sc.catalog.LongLabelObj('D*')
+     else buf:=sc.catalog.LongLabelObj(otype);
   txt:=txt+html_h2+buf+htms_h2;
 end;
 buf:=copy(desc,l+1,9999);
@@ -3834,6 +3870,38 @@ with sender as TMenuItem do begin
   sc.cfgsc.circleok[tag]:=checked;
 end;
 Refresh;
+end;
+
+procedure Tf_chart.MenuAddToObsListClick(Sender: TObject);
+begin
+ f_obslist.Add(sc.cfgsc.FindName,rad2deg*sc.cfgsc.FindRA2000,rad2deg*sc.cfgsc.FindDec2000);
+end;
+
+procedure Tf_chart.MenuObslistFirstClick(Sender: TObject);
+begin
+  f_obslist.FirstObj;
+end;
+
+procedure Tf_chart.MenuObslistLastClick(Sender: TObject);
+begin
+  f_obslist.LastObj;
+end;
+
+procedure Tf_chart.MenuObslistNextClick(Sender: TObject);
+begin
+  f_obslist.NextObj;
+end;
+
+procedure Tf_chart.MenuObslistPrevClick(Sender: TObject);
+begin
+  f_obslist.PrevObj;
+end;
+
+procedure Tf_chart.MenuViewObsListClick(Sender: TObject);
+begin
+ f_obslist.cfgsc.Assign(sc.cfgsc);
+ formpos(f_obslist,mouse.CursorPos.X,mouse.CursorPos.Y);
+ f_obslist.Show;
 end;
 
 procedure Tf_chart.MenuRectangleClick(Sender: TObject);

@@ -721,7 +721,6 @@ end;
 
 function TFits.Citt(value: Word):Word;
 var
-  i: Integer;
   c:double;
 begin
 case Fitt of

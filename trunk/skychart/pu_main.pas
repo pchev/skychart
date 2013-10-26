@@ -35,7 +35,7 @@ uses
   lclstrconsts, XMLConf, u_help, u_translation, cu_catalog, cu_planet, cu_fits, cu_database, fu_chart,
   cu_tcpserver, pu_config_time, pu_config_observatory, pu_config_display, pu_config_pictures,
   pu_config_catalog, pu_config_solsys, pu_config_chart, pu_config_system, pu_config_internet,
-  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata,
+  pu_config_calendar, pu_planetinfo, cu_sampclient, cu_vodata, pu_obslist,
   u_constant, u_util, blcksock, synsock, dynlibs, FileUtil, LCLVersion, LCLType,
   LCLIntf, SysUtils, Classes, Graphics, Forms, Controls, Menus, Math,
   StdCtrls, Dialogs, Buttons, ExtCtrls, ComCtrls, StdActns, types,
@@ -47,6 +47,7 @@ type
   { Tf_main }
 
   Tf_main = class(TForm)
+    MenuObslist: TMenuItem;
     SampDownload: TDownloadDialog;
     MenuItem35: TMenuItem;
     MenuItem36: TMenuItem;
@@ -493,6 +494,7 @@ type
     procedure MenuItem38Click(Sender: TObject);
     procedure MenuItem7Click(Sender: TObject);
     procedure MenuListImgClick(Sender: TObject);
+    procedure MenuObslistClick(Sender: TObject);
     procedure MultiFrame1CreateChild(Sender: TObject);
     procedure MultiFrame1DeleteChild(Sender: TObject);
     procedure PlanetInfoClick(Sender: TObject);
@@ -800,7 +802,10 @@ type
     Function GetSelectedObject:string;
     function ExecuteCmd(cname:string; arg:Tstringlist):string;
     procedure SendInfo(Sender: TObject; origin,str:string);
-    function GenericSearch(cname,Num:string):boolean;
+    function GenericSearch(cname,Num:string; var ar1,de1: double; idresult:boolean=true):boolean;
+    procedure ObsListSearch(obj:string; ra,de:double);
+    procedure GetObjectCoord(obj:string; var lbl:string; var ra,de:double);
+    procedure ObsListChange(Sender: TObject);
     procedure StartServer;
     procedure StopServer;
     function GetUniqueName(cname:string; forcenumeric:boolean):string;
@@ -1276,6 +1281,8 @@ try
 if VerboseMsg then
  WriteTrace('Enter Tf_main.Init');
  // some initialisation that need to be done after all the forms are created.
+ planet:=Tplanet.Create(self);
+ Fits:=TFits.Create(self);
  f_info.onGetTCPinfo:=GetTCPInfo;
  f_info.onKillTCP:=KillTCPClient;
  f_info.onPrintSetup:=PrintSetup;
@@ -1283,6 +1290,11 @@ if VerboseMsg then
  f_detail.OnCenterObj:=CenterFindObj;
  f_detail.OnNeighborObj:=NeighborObj;
  f_detail.OnKeydown:=FormKeyDown;
+ f_obslist.planet:=planet;
+ f_obslist.onSelectObject:=ObsListSearch;
+ f_obslist.onGetObjectCoord:=GetObjectCoord;
+ f_obslist.onObjLabelChange:=ObsListChange;
+ f_obslist.FileNameEdit1.FileName:=slash(HomeDir)+'NewObsList.txt';
 if VerboseMsg then
  WriteTrace('SetDefault');
  SetDefault;
@@ -1300,8 +1312,6 @@ if VerboseMsg then
 if VerboseMsg then
  WriteTrace('Create DB');
  cdcdb:=TCDCdb.Create(self);
- planet:=Tplanet.Create(self);
- Fits:=TFits.Create(self);
  cdcdb.onInitializeDB:=InitializeDB;
  planet.cdb:=cdcdb;
  f_search.cdb:=cdcdb;
@@ -1436,6 +1446,14 @@ if (not firstuse)and(config_version<cdcver) then
    ShowReleaseNotes(false);
 if cfgm.SampAutoconnect then begin
   SAMPStart(true);
+end;
+f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
+f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
+f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
+f_obslist.CheckBox3.Checked:=cfgm.ObslistMark;
+if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
+  f_obslist.FileNameEdit1.FileName:=cfgm.InitObsList;
+
 end;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
@@ -1575,6 +1593,11 @@ end;
 procedure Tf_main.MenuListImgClick(Sender: TObject);
 begin
   with MultiFrame1.ActiveObject as Tf_chart do imglist.execute;
+end;
+
+procedure Tf_main.MenuObslistClick(Sender: TObject);
+begin
+  with MultiFrame1.ActiveObject as Tf_chart do MenuViewObsListClick(self);
 end;
 
 procedure Tf_main.MultiFrame1CreateChild(Sender: TObject);
@@ -2675,7 +2698,6 @@ begin
   if cfgm.SimpleMove then ToolButton15.ImageIndex:=97
      else ToolButton15.ImageIndex:=96;
 end;
-
 
 procedure Tf_main.ToolButtonScaleClick(Sender: TObject);
 begin
@@ -4509,6 +4531,10 @@ def_cfgsc.LabelMagDiff[5]:=2;
 def_cfgplot.LabelColor[6]:=clYellow;
 def_cfgplot.LabelColor[7]:=clSilver;
 def_cfgplot.LabelSize[6]:=def_cfgplot.LabelSize[6]+2;
+def_cfgplot.LabelColor[9]:=clLime;
+def_cfgplot.LabelSize[9]:=DefaultFontSize+1;
+def_cfgsc.LabelMagDiff[9]:=0;
+def_cfgsc.ShowLabel[9]:=true;
 def_cfgplot.contrast:=450;
 def_cfgplot.partsize:=1.2;
 def_cfgplot.red_move:=true;
@@ -5712,10 +5738,14 @@ for i:=1 to MaxDSSurl do begin
   f_getdss.cfgdss.DSSurl[i,1]:=ReadString(section,'DSSurl'+inttostr(i),f_getdss.cfgdss.DSSurl[i,1]);
 end;
 f_getdss.cfgdss.OnlineDSS:=ReadBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
-{$ifdef CPU64}
-//f_getdss.cfgdss.OnlineDSS:=true;  { TODO : Realsky libgetdss do not work on 64bit system }
-{$endif}
 f_getdss.cfgdss.OnlineDSSid:=ReadInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
+section:='obslist';
+cfgm.InitObsList:=ReadString(section,'listname','');
+cfgm.ObslistAirmass:=ReadString(section,'airmass',f_obslist.AirmassCombo.Text);
+cfgm.ObslistAirmassLimit1:=ReadBool(section,'airmasslimit1',f_obslist.CheckBox1.Checked);
+cfgm.ObslistAirmassLimit2:=ReadBool(section,'airmasslimit2',f_obslist.CheckBox2.Checked);
+cfgm.ObslistMark:=ReadBool(section,'markonchart',f_obslist.CheckBox3.Checked);
+
 except
   ShowError('Error reading '+filename+' dss');
 end;
@@ -6238,7 +6268,7 @@ end;
 procedure Tf_main.SavePrivateConfig(filename:string);
 var i,j:integer;
     inif: TMemIniFile;
-    section : string;
+    section,buf : string;
 begin
 try
 inif:=TMeminifile.create(filename);
@@ -6422,6 +6452,16 @@ for i:=1 to MaxDSSurl do begin
 end;
 WriteBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 WriteInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
+section:='obslist';
+buf:=f_obslist.FileNameEdit1.FileName;
+if (buf<>'')and(FileExists(buf)) then begin
+  WriteString(section,'listname',buf);
+end;
+WriteString(section,'airmass',f_obslist.AirmassCombo.Text);
+WriteBool(section,'airmasslimit1',f_obslist.CheckBox1.Checked);
+WriteBool(section,'airmasslimit2',f_obslist.CheckBox2.Checked);
+WriteBool(section,'markonchart',f_obslist.CheckBox3.Checked);
+
 Updatefile;
 end;
 finally
@@ -6637,6 +6677,7 @@ SaveImage1.caption:='&'+rsSaveImage;
 FileCloseItem.caption:='&'+rsCloseChart;
 ResetDefaultChart.Caption:='&'+rsResetChartAn+Ellipsis;
 Calendar1.caption:='&'+rsCalendar+Ellipsis;
+MenuObslist.Caption:='&'+rsObservingLis;
 VariableStar1.Caption:='&'+rsVariableStar2+Ellipsis;
 MenuItem35.Caption:=rsConnectToSAM;
 MenuItem36.Caption:=rsDisconnectFr;
@@ -6796,11 +6837,12 @@ end;
 procedure Tf_main.quicksearchKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 var ok : Boolean;
     num : string;
+    var ra,de: double;
     i : integer;
 begin
 if key<>VK_RETURN then exit;  // wait press Enter
 Num:=trim(quicksearch.text);
-ok:=GenericSearch('',num);
+ok:=GenericSearch('',num,ra,de);
 if ok then begin
       i:=quicksearch.Items.IndexOf(Num);
       if (i<0)and(quicksearch.Items.Count>=MaxQuickSearch) then i:=MaxQuickSearch-1;
@@ -6813,10 +6855,58 @@ if ok then begin
    end;
 end;
 
+procedure Tf_main.GetObjectCoord(obj:string; var lbl:string; var ra,de:double);
+var ok: boolean;
+begin
+ ok:=GenericSearch('',obj,ra,de,false);
+ if ok then begin
+   ra:=rmod(rad2deg*ra+360,360);
+   de:=rad2deg*de;
+   lbl:=catalog.FindId
+ end
+  else begin
+    ra:=-1;
+    lbl:='';
+  end;
+end;
 
-function Tf_main.GenericSearch(cname,Num:string):boolean;
+procedure Tf_main.ObsListChange(Sender: TObject);
+begin
+  Tf_chart(MultiFrame1.ActiveObject).Refresh;
+end;
+
+procedure Tf_main.ObsListSearch(obj:string; ra,de:double);
+var ok: boolean;
+    cname: string;
+    ar1,de1: double;
+    arg:Tstringlist;
+begin
+  ok:=GenericSearch('',obj,ar1,de1);
+  if (not ok)and(ra>=0) then begin
+    cname:=MultiFrame1.ActiveChild.Caption;
+    ra:=deg2rad*ra;
+    de:=deg2rad*de;
+    Tf_chart(MultiFrame1.ActiveObject).CoordJ2000toChart(ra,de);
+    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.Scope2Ra:=-1;
+    Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.Scope2Dec:=0;
+    ra:=rad2deg*ra;
+    de:=rad2deg*de;
+    arg:=Tstringlist.Create;
+    arg.Clear;
+    arg.Add('MOVESCOPE');
+    arg.Add(formatfloat(f5,ra/15));
+    arg.Add(formatfloat(f5,de));
+    ExecuteCmd(cname,arg);
+    arg.Clear;
+    arg.Add('TRACKTELESCOPE');
+    arg.Add('OFF');
+    ExecuteCmd(cname,arg);
+    arg.Free;
+  end;
+end;
+
+function Tf_main.GenericSearch(cname,Num:string; var ar1,de1: double; idresult:boolean=true):boolean;
 var ok : Boolean;
-    ar1,de1 : Double;
     i : integer;
     chart:TFrame;
     stype: string;
@@ -6885,7 +6975,7 @@ if chart is Tf_chart then with chart as Tf_chart do begin
 
 Findit:
    result:=ok;
-   if ok then begin
+   if ok and idresult then begin
       IdentSearchResult(num,stype,itype,ar1,de1);
    end;
 end;
@@ -7163,6 +7253,7 @@ end;
 function Tf_main.ExecuteCmd(cname:string; arg:Tstringlist):string;
 var i,n,w,h : integer;
     cmd:string;
+    ar1,de1: double;
     chart:TFrame;
     child:TChildFrame;
 begin
@@ -7184,7 +7275,7 @@ case n of
  2 : result:=CloseChart(arg[1]);
  3 : result:=SelectChart(arg[1]);
  4 : result:=ListChart;
- 5 : if Genericsearch(cname,arg[1]) then result:=msgOK else result:=msgNotFound;
+ 5 : if Genericsearch(cname,arg[1],ar1,de1) then result:=msgOK else result:=msgNotFound;
  6 : result:=msgOK+blank+P1L1.Caption;
  7 : result:=msgOK+blank+P0L1.Caption;
  8 : result:=msgOK+blank+topmsg;
@@ -8403,7 +8494,7 @@ var i: integer;
 
 function cleanname(s:string):string;
 var p,k: integer;
-    buf,n,c:string;
+    buf,n:string;
 begin
 result:='';
 p:=1;
@@ -8488,7 +8579,6 @@ end;
 procedure Tf_main.SAMPImageLoadFits(image_name,image_id,url:string);
 var cname,fn:string;
     arg:Tstringlist;
-    i:integer;
 begin
 if cfgm.SampConfirmImage then begin
    if MessageDlg(rsSAMPConfirma,

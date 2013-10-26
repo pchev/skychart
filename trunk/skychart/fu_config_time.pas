@@ -885,7 +885,7 @@ if assigned(FGetTwilight) then begin
    d_month.Position:=m;
    d_day.Position:=d;
    FGetTwilight(jd(y,m,d,0),ht);
-   if ht>0 then begin
+   if abs(ht)<90 then begin
      artostr2(ht,h,n,s);
      t_hour.Position:=strtoint(h);
      t_min.Position:=strtoint(n);

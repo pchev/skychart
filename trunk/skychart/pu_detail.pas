@@ -159,7 +159,6 @@ end;
 
 
 procedure Tf_detail.EditCopyExecute(Sender: TObject);
-var buf: string;
 begin
   IpHtmlPanel1.CopyToClipboard;
 end;

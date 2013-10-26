@@ -1175,14 +1175,14 @@ with TwilightGrid do begin
   objects[0,i]:=SetObjCoord(jda,-999,-999);
   // crepuscule nautique
   Time_Alt(jd0,ars,des,-12,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
-  if hp1>-99 then begin
+  if abs(hp1)<90 then begin
      cells[2,i]:=armtostr(rmod(hp1+config.timezone+24,24));
      objects[2,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
   end else  begin
      cells[2,i]:='-';
      objects[2,i]:=nil;
   end;
-  if hp1>-99 then begin
+  if abs(hp1)<90 then begin
      cells[3,i]:=armtostr(rmod(hp2+config.timezone+24,24));
      objects[3,i]:=SetObjCoord(jda+(hp2-h)/24,-999,-999);
   end else  begin
@@ -1191,7 +1191,7 @@ with TwilightGrid do begin
   end;
   // crepuscule astro
   Time_Alt(jd0,ars,des,-18,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
-  if hp1>-99 then begin
+  if abs(hp1)<90 then begin
      tat1:=rmod(hp1+config.timezone+24,24);
      cells[1,i]:=armtostr(tat1);
      objects[1,i]:=SetObjCoord(jda+(hp1-h)/24,-999,-999);
@@ -1200,7 +1200,7 @@ with TwilightGrid do begin
      cells[1,i]:='-';
      objects[1,i]:=nil;
   end;
-  if hp1>-99 then begin
+  if abs(hp1)<90 then begin
      tat2:=rmod(hp2+config.timezone+24,24);
      cells[4,i]:=armtostr(tat2);
      objects[4,i]:=SetObjCoord(jda+(hp2-h)/24,-999,-999);
@@ -1481,8 +1481,8 @@ procedure DrawGraph(bm: TBitmap; gr:TStringGrid; iPl: Integer); {of RefreshPlane
 // bm is the bit map of the draw grid for this planet.
 var
   xts, xte: Integer;  {x pos of start and end of rise/set area}
-  xmidday,
-  xmiddnight  : Integer;   { the x positon that midday would have if shown}
+  //xmidday,
+  //xmiddnight  : Integer;   { the x positon that midday would have if shown}
 //  tFst, tLst: Double; {first and last times of Graph Axis}
   ygtop, ygbtm: Integer; {y pos of top and bottom of graph area}
   i, ix, iy, ily: Integer;
@@ -1493,7 +1493,7 @@ var
   xtick, yskip: Integer; {skip is a ratio - 1 = all, 2 = ev 2nd}
   xSStrt, xSInc: Double;
   tstrt, tsc: Double; {to get graph x, sub tstrt, * by tsc}
-  LineEnds: TLine; {Start and end point of a line drawn by TimeLine}
+  //LineEnds: TLine; {Start and end point of a line drawn by TimeLine}
 {Scaled Time takes a time from the objects of the specified StringGrid and
  column, and converts it to an x value on the graph.}
 function ScaledTime(grd: TStringGrid; C, R: Integer; var x: integer):Boolean;
@@ -1539,8 +1539,8 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
     cv.MoveTo(lix, liy);
   y := liy;
   {line end start - this is a bit of a guess, check this later 201103}
-  LineEnds.P1.x := lix;
-  LineEnds.P1.y := liy;
+//  LineEnds.P1.x := lix;
+//  LineEnds.P1.y := liy;
   inc(i);
   repeat  {late note - can't see how this stays in sync if there are missing points 201103}
     y := y + ytick; iy := trunc(y);
@@ -1567,8 +1567,8 @@ begin {TimeLine of DrawGraph of RefreshPlanetGraph}
     inc(i);
   until i >= Grd.RowCount;
   {record last point drawn - also a bit of a guess, 201103}
-  LineEnds.P2.x:= ix;
-  LineEnds.P2.y:= iy;
+//  LineEnds.P2.x:= ix;
+//  LineEnds.P2.y:= iy;
   if ir then begin
     cv.LineTo(ix, ygbtm);
     if s <> '' then begin
@@ -1585,7 +1585,7 @@ end; {TimeLine of of DrawGraph RefreshPlanetGraph}
 procedure DrawZone( cv: TCanvas);
 var
  crow, lrow: TPGScaledTimeRow;
- rowcount, k, i: integer;
+ rowcount, k{, i}: integer;
  grdrw: Integer;
 {dzScaled time calls ScaledTime and "tidies up", forcing times outside the graph
  back to the edge of the graph}
@@ -1598,7 +1598,7 @@ end;{dzReadRow of DrawZone of of DrawGraph of RefreshPlanetGraph}
 procedure dzReadRow(rw: Integer; var r: TPGScaledTimeRow);
 var
  i: integer;
- a: double;
+ //a: double;
  ai: integer;
 begin {dzReadRow of DrawZone of of DrawGraph of RefreshPlanetGraph}
   {LeftEdge}
@@ -1714,7 +1714,7 @@ begin {DrawGraph of RefreshPlanetGraph}
     xSStrt:= 17/24;  // 5 pm
     tstrt := xSStrt;
     tsc   := xtick / xSInc;
-    xmidday := trunc((0.5 - tstrt) * tsc);
+//    xmidday := trunc((0.5 - tstrt) * tsc);
 
     //Set up the canvas - first darw the whole canvas black
     Pen.Style := psClear;
@@ -2591,7 +2591,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          precession(jd2000,config.jdchart,ars,des);
          // crepuscule nautique
          Time_Alt(jd0,ars,des,-12,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
-         if hp1>-99 then begin
+         if abs(hp1)<90 then begin
             jdt:=jd(a,m,d,hp1);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
@@ -2605,7 +2605,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
             cells[10,i]:='-';
             objects[10,i]:=nil;
          end;
-         if hp2>-99 then begin
+         if abs(hp2)<90 then begin
             jdt:=jd(a,m,d,hp2);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
@@ -2621,7 +2621,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
          end;
          // crepuscule astro
          Time_Alt(jd0,ars,des,-18,hp1,hp2,config.ObsLatitude,config.ObsLongitude);
-         if hp1>-99 then begin
+         if abs(hp1)<90 then begin
             jdt:=jd(a,m,d,hp1);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);
@@ -2635,7 +2635,7 @@ if cdb.GetComElem(id,epoch,tp,q,ec,ap,an,ic,hh,g,eq,nam,elem_id) then begin
             cells[9,i]:='-';
             objects[9,i]:=nil;
          end;
-         if hp2>-99 then begin
+         if abs(hp2)<90 then begin
             jdt:=jd(a,m,d,hp2);
             Fplanet.Comet(jdt,false,ra,dec,dist,r,elong,phase,magn,diam,lc,car,cde,rc,xc,yc,zc);
             precession(jd2000,config.jdchart,ra,dec);

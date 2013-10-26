@@ -60,6 +60,7 @@ Tskychart = class (TComponent)
     bgvalid: boolean;
     bgw,bgh,bgproj,bgflipx,bgflipy: integer;
     nebmagmin,nebmagmax: single;
+    FObjectListLabels: TStringList;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
@@ -89,6 +90,7 @@ Tskychart = class (TComponent)
     property planet: Tplanet read Fplanet write Fplanet;
     property cdb: Tcdcdb read Fcdb write Fcdb;
     property Fits: TFits read FFits write FFits;
+    property ObjectListLabels: TStringList read FObjectListLabels write FObjectListLabels;
     function Refresh : boolean;
     function InitCatalog : boolean;
     function InitTime : boolean;
@@ -970,10 +972,10 @@ end;
 
 function Tskychart.DrawStars :boolean;
 var rec:GcatRec;
-  x1,y1,cyear,dyear,pra,pdec: Double;
+  x1,y1,cyear,dyear,pra,pdec,timelimit: Double;
   xx,yy,xxp,yyp : single;
-  j,lid,saveplot : integer;
-  first: boolean;
+  j,lid,saveplot,n,lnum,lp : integer;
+  first,forcelabel,savefilter: boolean;
   firstcat:TSname;
   gk,lis: string;
   al: TLabelAlign;
@@ -986,6 +988,8 @@ if cfgsc.YPmon=0 then cyear:=cfgsc.CurYear+DayofYear(cfgsc.CurYear,cfgsc.CurMont
 dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot.starplot;
+savefilter:=catalog.cfgshr.StarFilter;
+if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
 if (not Fplot.cfgplot.UseBMP) and cfgsc.DrawPMon and (Fplot.cfgplot.starplot=2) then Fplot.cfgplot.starplot:=1;
 try
 for j:=0 to Fcatalog.cfgcat.GCatNum-1 do  begin
@@ -998,8 +1002,22 @@ if first and Fcatalog.cfgcat.starcaton[bsc-BaseStar] then begin
   firstcat:='BSC';
   first:=false;
 end;
+timelimit:=now+10/secday;
 if Fcatalog.OpenStar then
  while Fcatalog.readstar(rec) do begin
+ if now>timelimit then begin
+   cfgsc.msg:=Format(rsItTakeTooLon, [rsStars, trim(rec.options.LongName)]);
+   break;
+ end;
+ forcelabel:=false; lnum:=1; lp:=2;
+ if FObjectListLabels.Count>0 then begin
+  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.star.id))),n) then begin
+     forcelabel:=true;
+     lp:=0;
+     lnum:=9;
+  end;
+  if (not forcelabel) and savefilter and (rec.star.magv>catalog.cfgcat.StarMagMax) then continue;
+ end;
  if first then begin
     firstcat:=rec.options.ShortName;
     first:=false;
@@ -1032,30 +1050,34 @@ if Fcatalog.OpenStar then
        Fplot.PlotLine(xx,yy,xxp,yyp,Fplot.cfgplot.Color[15],1);
     end;
     Fplot.PlotStar(xx,yy,rec.star.magv,rec.star.b_v);
-    if (cfgsc.DrawAllStarLabel or(rec.options.ShortName=firstcat)) and (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1]) then begin
+    if forcelabel or ((cfgsc.DrawAllStarLabel or(rec.options.ShortName=firstcat)) and (rec.star.magv<cfgsc.StarmagMax-cfgsc.LabelMagDiff[1])) then begin
        if (rec.options.ShortName=firstcat) then al:=laBottomLeft
                                            else al:=laBottomRight;
        if (rec.star.b_v>0.28)and(rec.star.b_v<0.30) then begin
           y1:=0;
        end;
-       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,1,formatfloat(f2,rec.star.magv),al,0,4)
-       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, 1, rec.str[3],al,0,2)
+       if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.star.magv),al,0,4,true)
+       else if ((cfgsc.NameLabel) and rec.vstr[3] and (trim(copy(rec.options.flabel[18],1,8))=trim(copy(rsCommonName,1,8)))) then SetLabel(lid, xx, yy, 0, 2, lnum, rec.str[3],al,0,lp,true)
        else if rec.star.valid[vsGreekSymbol] then begin
           gk:=GreekSymbolUtf8(rec.star.greeksymbol);
           {$ifdef mswindows}
-          SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
+          SetLabel(lid,xx,yy,0,7,1,gk,al,0,lp,true);
           {$else}
           if plot.cfgchart.onprinter and (not plot.cfgplot.UseBMP) then begin
             plot.cfgplot.FontName[7]:='symbol';
-            SetLabel(lid,xx,yy,0,7,1,gk,al,0,2);
-          end else SetLabel(lid,xx,yy,0,2,1,gk,al,0,2);
+            SetLabel(lid,xx,yy,0,7,lnum,gk,al,0,lp,true);
+          end else SetLabel(lid,xx,yy,0,2,lnum,gk,al,0,lp,true);
           {$endif}
-        end else SetLabel(lid,xx,yy,0,2,1,rec.star.id,al,0,4);
+        end else begin
+           if lp>0 then lp:=4;
+           SetLabel(lid,xx,yy,0,2,lnum,rec.star.id,al,0,lp,true);
+        end;
     end;
  end;
 end;
 result:=true;
 finally
+  catalog.cfgshr.StarFilter:=savefilter;
   Fcatalog.CloseStar;
   Fplot.cfgplot.starplot:=saveplot;
 end;
@@ -1063,16 +1085,33 @@ end;
 
 function Tskychart.DrawVarStars :boolean;
 var rec:GcatRec;
-  x1,y1: Double;
+  x1,y1,timelimit: Double;
   xx,yy:single;
-  lid: integer;
+  lid,n,lnum,lp: integer;
+  forcelabel,savefilter: boolean;
   lis:string;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
 fillchar(rec,sizeof(rec),0);
+savefilter:=catalog.cfgshr.StarFilter;
+if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
 try
+timelimit:=now+10/secday;
 if Fcatalog.OpenVarStar then
  while Fcatalog.readvarstar(rec) do begin
+  if now>timelimit then begin
+    cfgsc.msg:=Format(rsItTakeTooLon, [rsVariableStar2, trim(rec.options.LongName)]);
+    break;
+  end;
+ forcelabel:=false; lnum:=2; lp:=2;
+ if FObjectListLabels.Count>0 then begin
+  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.variable.id))),n) then begin
+     forcelabel:=true;
+     lp:=0;
+     lnum:=9;
+  end;
+  if (not forcelabel) and savefilter and (rec.variable.magmax>catalog.cfgcat.StarMagMax) then continue;
+ end;
  lis:=rec.variable.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
  lid:=rshash(lis,$7FFFFFFF);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
@@ -1081,29 +1120,48 @@ if Fcatalog.OpenVarStar then
  WindowXY(x1,y1,xx,yy,cfgsc);
  if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
     Fplot.PlotVarStar(xx,yy,rec.variable.magmax,rec.variable.magmin);
-    if rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,2,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
-       else SetLabel(lid,xx,yy,0,2,2,rec.variable.id,laTopLeft,0,2);
+    if forcelabel or (rec.variable.magmax<cfgsc.StarmagMax-cfgsc.LabelMagDiff[2]) then begin
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.variable.magmax)+'-'+formatfloat(f2,rec.variable.magmin),laTopLeft,0,4)
+         else SetLabel(lid,xx,yy,0,2,lnum,rec.variable.id,laTopLeft,0,lp);
+    end;
  end;
 end;
 result:=true;
 finally
+  catalog.cfgshr.StarFilter := savefilter;
   Fcatalog.CloseVarStar;
 end;
 end;
 
 function Tskychart.DrawDblStars :boolean;
 var rec:GcatRec;
-  x1,y1,x2,y2,rot: Double;
+  x1,y1,x2,y2,rot,timelimit: Double;
   xx,yy:single;
-  lid: integer;
+  lid,n,lnum,lp: integer;
+  forcelabel,savefilter: boolean;
   lis,buf:string;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
 fillchar(rec,sizeof(rec),0);
+savefilter:=catalog.cfgshr.StarFilter;
+if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
 try
+timelimit:=now+10/secday;
 if Fcatalog.OpenDblStar then
  while Fcatalog.readdblstar(rec) do begin
+ if now>timelimit then begin
+   cfgsc.msg:=Format(rsItTakeTooLon, [rsDoubleStar, trim(rec.options.LongName)]);
+   break;
+ end;
+ forcelabel:=false; lnum:=3; lp:=2;
+ if FObjectListLabels.Count>0 then begin
+  if FObjectListLabels.Find(uppercase(trim(wordspace(rec.double.id))),n) then begin
+     forcelabel:=true;
+     lp:=0;
+     lnum:=9;
+  end;
+  if (not forcelabel) and savefilter and (rec.double.mag1>catalog.cfgcat.StarMagMax) then continue;
+ end;
  lis:=rec.double.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
  lid:=rshash(lis,$7FFFFFFF);
  precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
@@ -1119,17 +1177,19 @@ if Fcatalog.OpenDblStar then
     if cfgsc.FlipY<0 then rec.double.pa:=180-rec.double.pa;
     rec.double.pa:=Deg2Rad*rec.double.pa+rot;
     Fplot.PlotDblStar(xx,yy,abs(rec.double.sep*secarc*cfgsc.BxGlb),rec.double.mag1,rec.double.sep,rec.double.pa,0);
-    if rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3] then
-    if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,3,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
-    else begin
-      buf:=rec.double.id;
-      if trim(rec.double.compname)>'' then buf:=trim(buf)+blank+trim(rec.double.compname);
-      SetLabel(lid,xx,yy,0,2,3,buf,laTopRight,0,2);
+    if forcelabel or (rec.double.mag1<cfgsc.StarmagMax-cfgsc.LabelMagDiff[3]) then begin
+      if cfgsc.MagLabel then SetLabel(lid,xx,yy,0,2,lnum,formatfloat(f2,rec.double.mag1),laTopRight,0,4)
+      else begin
+        buf:=rec.double.id;
+        if trim(rec.double.compname)>'' then buf:=trim(buf)+blank+trim(rec.double.compname);
+        SetLabel(lid,xx,yy,0,2,lnum,buf,laTopRight,0,lp);
+      end;
     end;
  end;
 end;
 result:=true;
 finally
+  catalog.cfgshr.StarFilter := savefilter;
   Fcatalog.CloseDblStar;
 end;
 end;
@@ -1149,14 +1209,14 @@ end;
 
 function Tskychart.DrawDeepSkyObject :boolean;
 var rec:GcatRec;
-  x1,y1,x2,y2,rot,ra,de: Double;
-  x,y,xx,yy,sz:single;
-  lid, save_nebplot,lp: integer;
+  x1,y1,x2,y2,rot,ra,de,timelimit: Double;
+  x,y,xx,yy,sz,lsize:single;
+  lid, save_nebplot,lp,n,lnum: integer;
   imgfile,CurrentCat,lis: string;
   bmp:Tbitmap;
   save_col: Starcolarray;
-  al,alsac: TLabelAlign;
-  imageok: boolean;
+  al: TLabelAlign;
+  imageok,forcelabel,savefilter: boolean;
 
   Procedure Drawing;
     begin
@@ -1206,11 +1266,30 @@ var rec:GcatRec;
     imageok:=false;
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
+    savefilter:=catalog.cfgshr.NebFilter;
+    if FObjectListLabels.Count>0 then catalog.cfgshr.NebFilter:=false;
     try
-    alsac:=laTopLeft;
+    timelimit:=now+10/secday;
     if Fcatalog.OpenNeb then
       while Fcatalog.readneb(rec) do
         begin
+          if now>timelimit then begin
+            cfgsc.msg:=Format(rsItTakeTooLon, [rsNebula, trim(rec.options.LongName)]);
+            break;
+          end;
+          forcelabel:=false; lnum:=4;
+          if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
+          if FObjectListLabels.Count>0 then begin
+           if FObjectListLabels.Find(uppercase(trim(wordspace(rec.neb.id))),n) then begin
+              forcelabel:=true;
+              lnum:=9;
+           end;
+           if (not forcelabel) and savefilter then begin
+             if rec.neb.valid[vnMag] and (rec.neb.mag>catalog.cfgcat.NebMagMax) then continue;
+             if rec.neb.valid[vnDim1] and (rec.neb.dim1*60/rec.neb.nebunit<catalog.cfgcat.NebSizeMin) then continue;
+             if catalog.cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=catalog.cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue;
+           end;
+          end;
           lis:=rec.neb.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
           lid:=rshash(lis,$7FFFFFFF);
           precession(rec.options.EquinoxJD,cfgsc.JDChart,rec.ra,rec.dec);
@@ -1218,7 +1297,6 @@ var rec:GcatRec;
           projection(rec.ra,rec.dec,x1,y1,true,cfgsc) ;
           WindowXY(x1,y1,xx,yy,cfgsc);
           if not rec.neb.valid[vnNebtype] then rec.neb.nebtype:=rec.options.ObjType;
-          if not rec.neb.valid[vnNebunit] then rec.neb.nebunit:=rec.options.Units;
           sz:=(abs(cfgsc.BxGlb)*deg2rad/rec.neb.nebunit)*(rec.neb.dim1/2);
           if Fcatalog.cfgcat.SampSelectIdent then begin
              Fcatalog.cfgcat.SampSelectX:=round(xx);
@@ -1273,19 +1351,27 @@ var rec:GcatRec;
                     Drawing;
                   end;
               // label
-              if rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
+              if forcelabel or rec.neb.messierobject or (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]) then begin
                  al:=laRight;
-                 if rec.neb.messierobject then lp:=2
+                 if forcelabel then begin
+                     lp:=0;
+                     lsize:=-1;
+                 end
+                 else begin
+                   lsize:=rec.neb.mag;
+                   if rec.neb.messierobject then lp:=2
                    else if (min(40,rec.neb.mag)<cfgsc.NebmagMax-cfgsc.LabelMagDiff[4]*2) then lp:=3
                    else lp:=4;
+                 end;
                  nebmagmax:=max(nebmagmax,rec.neb.mag);
                  nebmagmin:=min(nebmagmin,rec.neb.mag);
-                 SetLabel(lid,xx,yy,round(sz),2,4,rec.neb.id,al,0,lp,true,rec.neb.mag);
+                 SetLabel(lid,xx,yy,round(sz),2,lnum,rec.neb.id,al,0,lp,true,lsize);
               end;
             end;
         end;
       result:=true;
     finally
+      catalog.cfgshr.NebFilter:=savefilter;
       Fcatalog.CloseNeb;
       bmp.Free;
     end;
@@ -2299,8 +2385,8 @@ begin
          if rec.variable.valid[vvId] then txt:=rec.variable.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          cfgsc.FindId:=txt;
-         txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
+         txt:=rec.options.ShortName+b+txt;
          Desc:=Desc+' V*'+tab+txt+tab;
          if rec.variable.valid[vvMagmax] then begin
             if (rec.variable.magmax<90) then str(rec.variable.magmax:5:2,txt) else txt:=b5;
@@ -2334,8 +2420,8 @@ begin
          if rec.double.valid[vdId] then txt:=rec.double.id else txt:='';
          if trim(txt)='' then Fcatalog.GetAltName(rec,txt);
          cfgsc.FindId:=txt;
-         txt:=rec.options.ShortName+b+txt;
          cfgsc.FindName:=txt;
+         txt:=rec.options.ShortName+b+txt;
          Desc:=Desc+' D*'+tab+txt+tab;
          if rec.double.valid[vdMag1] then begin
             if (rec.double.mag1<90) then str(rec.double.mag1:5:2,txt) else txt:=b5;
@@ -5003,20 +5089,18 @@ cfgsc.Scope2Ra:=ra;
 cfgsc.Scope2Dec:=dec;
 cfgsc.scope2mark:=true;
 dist:=angulardistance(cfgsc.racentre,cfgsc.decentre,ra,dec);
-if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then begin
-   if not cfgsc.scopelock then begin
-      result:=true;
-      cfgsc.scopelock:=true;
-      if cfgsc.TrackOn and (cfgsc.TrackName=rsTelescope+'-2') then begin
-        cfgsc.TrackType:=6;
-        cfgsc.TrackRA:=ra;
-        cfgsc.TrackDec:=dec;
-      end;
-      MovetoRaDec(cfgsc.Scope2Ra,cfgsc.Scope2Dec);
-      if VerboseMsg then WriteTrace('Telescope2Move');
-      Refresh;
-      cfgsc.scopelock:=false;
-   end;
+if not cfgsc.scopelock then begin
+  result:=true;
+  cfgsc.scopelock:=true;
+  if cfgsc.TrackOn and (cfgsc.TrackName=rsTelescope+'-2') then begin
+    cfgsc.TrackType:=6;
+    cfgsc.TrackRA:=ra;
+    cfgsc.TrackDec:=dec;
+  end;
+  if (dist>cfgsc.fov/10)and(cfgsc.TrackOn) then MovetoRaDec(cfgsc.Scope2Ra,cfgsc.Scope2Dec);
+  if VerboseMsg then WriteTrace('Telescope2Move');
+  Refresh;
+  cfgsc.scopelock:=false;
 end;
 end;
 end;

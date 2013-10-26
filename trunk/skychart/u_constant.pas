@@ -244,7 +244,7 @@ const
   s6 = '+0.000000;-0.000000;+0.000000';
   dateiso = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
   labspacing = 10;
-  numlabtype = 8;
+  numlabtype = 9;
   numfont = 7;
   NumSimObject = 13;
   MaxField = 10;
@@ -961,6 +961,8 @@ type
     SampAutoconnect,SampKeepTables,SampKeepImages: boolean;
     SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
     SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
+    InitObsList,ObslistAirmass: string;
+    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistMark: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2254,6 +2256,11 @@ procedure Tconf_main.Assign(Source: Tconf_main);
 var
   i: integer;
 begin
+  InitObsList:=Source.InitObsList;
+  ObslistAirmass:=Source.ObslistAirmass;
+  ObslistAirmassLimit1:=Source.ObslistAirmassLimit1;
+  ObslistAirmassLimit2:=Source.ObslistAirmassLimit2;
+  ObslistMark:=Source.ObslistMark;
   SampAutoconnect:=Source.SampAutoconnect;
   SampKeepTables:=Source.SampKeepTables;
   SampKeepImages:=Source.SampKeepImages;

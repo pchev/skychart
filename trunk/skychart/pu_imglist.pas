@@ -68,7 +68,7 @@ end;
 
 procedure Tf_imglist.Button5Click(Sender: TObject);
 var cn,client,imgname,imgid,url: string;
-    i,p: integer;
+    i: integer;
 begin
 client:='';
 cn:=ComboBox1.Text;
