@@ -1463,6 +1463,24 @@ resourcestring
   rsGraphHeight = 'Graph height';
   rsChangeMouseM = 'Change mouse mode';
   rsShowTheSmall = 'Show the faint satellites of the outer planets';
+  rsAlways = 'always';
+  rsNever = 'never';
+  rsTitle = 'Title';
+  rsAirmass = 'Airmass';
+  rsAddToObservi = 'Add %s to observing list';
+  rsViewObservin = 'View observing list';
+  rsObservingLis = 'Observing list';
+  rsTheObserving = 'The observing list %s was modified.';
+  rsDoYouWantToS2 = 'Do you want to save it?';
+  rsItTakeTooLon = 'It take too long to draw the %s from catalog %s, please '
+    +'consider to not use this catalog for this FOV.';
+  rsOnlyObjectsW = 'Only objects within airmass limits tonight';
+  rsOnlyObjectsW2 = 'Only objects within airmass limits now';
+  rsMarkObjectsO = 'Mark objects on the chart';
+  rsFirst = 'First';
+  rsLast = 'Last';
+  rsNext2 = 'Next';
+  rsPrevious = 'Previous';
 
 implementation
 

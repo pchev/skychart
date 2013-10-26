@@ -406,7 +406,7 @@ end;
 
 Procedure OpenRegionNocache(hemis : char ;zone,S : integer ; var ok:boolean);
 var nomzone,nomreg,nomfich1,nomfich2,nombin1,nombin2,nomidx :string;
-    i,j: integer;
+    i: integer;
 begin
 str(S:4,nomreg);
 str(abs(zone):4,nomzone);

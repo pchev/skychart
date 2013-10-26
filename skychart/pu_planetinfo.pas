@@ -543,7 +543,7 @@ end;
 
 Procedure Tf_planetinfo.PlotPlanetImage(bmp:TBGRABitmap; ipla:integer);
 var searchdir,sz,buf : string;
-    i,s,j: integer;
+    s,j: integer;
     b: TBGRABitmap;
     p:TProcess;
     r:TStringList;
@@ -605,6 +605,7 @@ begin
   end else begin // something go wrong with xplanet
      r:=TStringList.Create;
      r.LoadFromStream(p.Output);
+     buf:='';
      if r.Count>0 then for j:=0 to r.Count-1 do begin
       buf:=buf+r[j]+crlf;
      end;

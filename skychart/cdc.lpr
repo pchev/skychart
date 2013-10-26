@@ -40,7 +40,7 @@ uses
   u_util, enhedit, pu_config_catalog, pu_config_system, pu_config_solsys,
   pu_config_pictures, pu_config_observatory, pu_config_display, pu_config_chart,
   pu_config_internet, libsql, radec, XmlParser, zoomimage, CDCjdcalendar,
-  cdccatalog, Printer4Lazarus, downldialog, synapse, pu_catgen,
+  cdccatalog, Printer4Lazarus, downldialog, synapse, pu_catgen, pu_obslist,
   pu_catgenadv, pu_progressbar, mrecsort, pu_addlabel, pu_print, u_translation,
   pu_splash, pu_about, cu_tz, uniqueinstance_package, u_help, LCLProc, pu_clock,
   u_unzip, cu_tcpserver, pu_indiclient, u_satellite, pu_main, pu_observatory_db,
@@ -130,6 +130,9 @@ begin
   step:='Create f_print';
   if VerboseMsg then WriteTrace(step);
   Application.CreateForm(Tf_print, f_print);
+  step:='Create f_obslist';
+  if VerboseMsg then WriteTrace(step);
+  Application.CreateForm(Tf_obslist, f_obslist);
   step:='Main Init';
   if VerboseMsg then WriteTrace(step);
   f_main.init;

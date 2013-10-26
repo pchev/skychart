@@ -1508,9 +1508,7 @@ begin
 end;
 
 procedure TSplot.PlotPlanet3(xx,yy,flipx,flipy,ipla:integer; jdt,pixscale,diam,flatten,pa,gw:double;WhiteBg:boolean);
-var ds,i,j,mode : integer;
-    a,m,d : integer;
-    h:double;
+var ds,j,mode : integer;
     buf, searchdir, bsize: string;
     p:TProcess;
     r:TStringList;

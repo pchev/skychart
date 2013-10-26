@@ -420,6 +420,33 @@ object f_chart: Tf_chart
         OnClick = MenuLoadCircleClick
       end
     end
+    object MenuObslist: TMenuItem
+      Caption = 'Observing list'
+      object MenuObslistNext: TMenuItem
+        Caption = 'Next'
+        OnClick = MenuObslistNextClick
+      end
+      object MenuObslistPrev: TMenuItem
+        Caption = 'Prev'
+        OnClick = MenuObslistPrevClick
+      end
+      object MenuObslistFirst: TMenuItem
+        Caption = 'First'
+        OnClick = MenuObslistFirstClick
+      end
+      object MenuObslistLast: TMenuItem
+        Caption = 'Last'
+        OnClick = MenuObslistLastClick
+      end
+      object MenuViewObsList: TMenuItem
+        Caption = 'View observing list'
+        OnClick = MenuViewObsListClick
+      end
+      object MenuAddToObsList: TMenuItem
+        Caption = 'Add object'
+        OnClick = MenuAddToObsListClick
+      end
+    end
     object MenuLabel: TMenuItem
       Caption = 'Labels'
       object AddLabel1: TMenuItem

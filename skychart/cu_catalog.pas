@@ -2702,6 +2702,7 @@ try
                      FindNumUSNOA(id,ra,dec,result) ;
                      end;
    end;
+   if result then FFindId:=id;
    ra:=deg2rad*15*ra;
    dec:=deg2rad*dec;
 finally
@@ -2896,9 +2897,7 @@ begin
       result:=FindNum(S_HR,buf,ar1,de1) ;
       if result then exit;
    end;
-   result:=FindNum(S_Bayer,Num,ar1,de1) ;
-   if result then exit;
-   result:=FindNum(S_Flam,Num,ar1,de1) ;
+   result:=FindNum(S_Bayer,Num,ar1,de1) ; // also do Flamsteed
    if result then exit;
 end;
 
@@ -2973,7 +2972,6 @@ var
    xx1,xx2,yy1,yy2,xxc,yyc,cyear,dyear,radius,rac,epoch : double;
    p: coordvector;
    ok,found,fullmotion : boolean;
-   i: integer;
 begin
 if x2>pi2 then rac:=pi2 else rac:=0;
 xxc:=(x1+x2)/2;

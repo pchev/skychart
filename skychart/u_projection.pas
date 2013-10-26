@@ -1469,8 +1469,13 @@ if abs(hh)<=1 then begin
      st := rad2deg*(ar+hh)/15 ;
      hp2 := rmod((st-st0)/1.002737908+24,24) ;
 end else begin
+   if hh>0 then begin
      hp1:=-99;
      hp2:=-99;
+   end else begin
+      hp1:=99;
+      hp2:=99;
+   end;
 end;
 END;
 

@@ -71,7 +71,7 @@ Function DEToStrmin(de: Double) : string;
 Function ARmtoStr(ar: Double) : string;
 Function DEpToStr(de: Double; precision:integer=1) : string;
 Function ARptoStr(ar: Double; precision:integer=1) : string;
-Function TimToStr(tim: Double; sep:string=':') : string;
+Function TimToStr(tim: Double; sep:string=':'; showsec:boolean=true) : string;
 Function YearADBC(year : integer) : string;
 Function Date2Str(y,m,d:integer):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
@@ -731,7 +731,7 @@ begin
     result := d+'°'+m+''''+s+'"';
 end;
 
-Function TimToStr(tim: Double; sep:string=':') : string;
+Function TimToStr(tim: Double; sep:string=':'; showsec:boolean=true) : string;
 var dd,min1,min,sec: Double;
     d,m,s : string;
 begin
@@ -753,7 +753,8 @@ begin
     if abs(min)<10 then m:='0'+trim(m);
     str(sec:2:0,s);
     if abs(sec)<9.5 then s:='0'+trim(s);
-    result := d+sep+m+sep+s;
+    if showsec then result := d+sep+m+sep+s
+               else result := d+sep+m;
 end;
 
 Function Date2Str(y,m,d:integer):string;

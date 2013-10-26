@@ -994,7 +994,8 @@ var elem: array [0..5] of double = ( 0, 0, 0, 0, 0, 0 );
     t,TT,axis,lambda,e,lp,i,omega : double;
     M,EE,eps : double;
     GK,TAS,GK1,amo,rmu,dga,rl,rk,rh,corf,fle,cf,sf: double;
-    dlf, rsam1,asr,phi,psi,x1,y1,vx1,vy1,dwho,rtp,rtq,rdg,XX1,YY1,ZZ1: double;
+    dlf,phi,psi,x1,y1,dwho,rtp,rtq,rdg,XX1,YY1,ZZ1: double;
+    //rsam1,asr,vx1,vy1: double;
     AIA,OMA,ci,si,co,so: double;
     index: integer;
 begin
@@ -1089,15 +1090,15 @@ begin
         sf := sin(fle);
 
         dlf := -rk * sf + rh * cf;
-        rsam1 := -rk * cf - rh * sf;
-        asr := 1/(1 + rsam1);
+        //rsam1 := -rk * cf - rh * sf;
+        //asr := 1/(1 + rsam1);
         phi := sqrt(1 - rk*rk - rh*rh);
         psi := 1/(1+phi);
 
         x1 := dga * (cf - rk - psi * rh * dlf);
         y1 := dga * (sf - rh + psi * rk * dlf);
-        vx1 := amo * asr * dga * (-sf - psi * rh * rsam1);
-        vy1 := amo * asr * dga * ( cf + psi * rk * rsam1);
+        //vx1 := amo * asr * dga * (-sf - psi * rh * rsam1);
+        //vy1 := amo * asr * dga * ( cf + psi * rk * rsam1);
 
         dwho := 2 * sqrt(1 - elem[5] * elem[5] - elem[4] * elem[4]);
         rtp := 1 - 2 * elem[5] * elem[5];
@@ -1740,6 +1741,7 @@ begin
 
     // precess to J2000
     precessB1950J2000(X, Y, Z);
+    result:=true;
 end;
 
 
