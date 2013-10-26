@@ -76,7 +76,7 @@
         <LaunchingApplication PathPlusParams="/usr/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
       </local>
     </RunParams>
-    <RequiredPackages Count="20">
+    <RequiredPackages Count="19">
       <Item1>
         <PackageName Value="vosamp"/>
       </Item1>
@@ -135,21 +135,17 @@
         <DefaultFilename Value="component/radec/radec.lpk"/>
       </Item16>
       <Item17>
-        <PackageName Value="satxy"/>
-        <DefaultFilename Value="library/satxy/satxy.lpk"/>
-      </Item17>
-      <Item18>
         <PackageName Value="synapse"/>
         <DefaultFilename Value="component/synapse/source/lib/synapse.lpk"/>
-      </Item18>
-      <Item19>
+      </Item17>
+      <Item18>
         <PackageName Value="XmlParser"/>
         <DefaultFilename Value="component/xmlparser/xmlparser.lpk"/>
-      </Item19>
-      <Item20>
+      </Item18>
+      <Item19>
         <PackageName Value="zoomimage"/>
         <DefaultFilename Value="component/zoomimage/zoomimage.lpk"/>
-      </Item20>
+      </Item19>
     </RequiredPackages>
     <Units Count="73">
       <Unit0>
