@@ -15,6 +15,7 @@ New functions:
   * Add a button in Calendar to display the brightest comets first.
   * Add Ctrl+L and Ctrl+Shift+L shortcuts to switch the chart legend.
   * Add a button to change the left mouse click behavior from zoom to move.
+  * Add Observing list functions.
 
 Corrections:
   * Better picture/map transparency.
