@@ -29,7 +29,7 @@ interface
 
 uses  u_translation, u_constant, u_util, u_projection, cu_planet,
   Math, Classes, SysUtils, FileUtil, Forms, Controls, Graphics,
-  Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus;
+  Dialogs, ExtCtrls, Grids, EditBtn, StdCtrls, Menus, ComCtrls;
 
 type
 
@@ -55,11 +55,14 @@ type
     MenuView: TMenuItem;
     MenuUpdcoord: TMenuItem;
     MenuTitle: TMenuItem;
+    PageControl1: TPageControl;
     PanelBot: TPanel;
     PanelTop: TPanel;
     PopupMenu1: TPopupMenu;
     StringGrid1: TStringGrid;
-    procedure AirmassComboEditingDone(Sender: TObject);
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    procedure AirmassComboChange(Sender: TObject);
     procedure ButtonSaveClick(Sender: TObject);
     procedure ButtonCloseClick(Sender: TObject);
     procedure ButtonClearClick(Sender: TObject);
@@ -354,30 +357,54 @@ end;
 procedure Tf_obslist.SetVisibleRows;
 var ok: boolean;
     i: integer;
-    timnow,crm,cre: string;
-    astrom,nautm,civm,cive,naute,astroe: double;
+    timnow,cr1,cr2,t1,t2: double;
+    astrom,nautm,civm,cive,naute,astroe,astro1,astro2,t: double;
 begin
- timnow:=TimToStr(frac(now)*24,':',false);
- planet.Twilight(cfgsc.jd0,cfgsc.ObsLatitude,cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
- if abs(astrom)<90 then crm:=TimToStr(rmod(astrom+cfgsc.TimeZone+24,24),':',false)
-    else crm:='00:00';
- if abs(astroe)<90 then cre:=TimToStr(rmod(astroe+cfgsc.TimeZone+24,24),':',false)
-    else cre:='24:00';
+ if CheckBox1.Checked then begin
+   planet.Twilight(cfgsc.jd0,cfgsc.ObsLatitude,cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
+   if abs(astrom)<90 then begin
+     cr1:=rmod(astroe+cfgsc.TimeZone+24,24);
+     cr2:=rmod(astrom+cfgsc.TimeZone+24,24);
+   end
+   else if astrom>0 then begin
+     cr1:=-99;            // summer polar day, no "tonight"
+     cr2:=-99;
+   end
+   else begin
+     cr1:=0;             // winter polar night, always "tonight"
+     cr2:=24;
+   end;
+ end;
+ if CheckBox2.Checked then begin
+   cr1:=cfgsc.CurTime;
+   cr2:=cr1;
+ end;
  for i:=1 to StringGrid1.RowCount-1 do begin
-     if CheckBox1.Checked then begin
-       ok:=((StringGrid1.Cells[4,i]<>rsNever) and (StringGrid1.Cells[4,i]<>'N/A'))and
-           ((StringGrid1.Cells[4,i]=rsAlways) or
-            ((StringGrid1.Cells[4,i]<=crm)or
-             (StringGrid1.Cells[5,i]<=crm)) or
-            ((StringGrid1.Cells[4,i]>=cre)or
-             (StringGrid1.Cells[5,i]>=cre))) ;
-     end else if CheckBox2.Checked then begin
-       ok:=((StringGrid1.Cells[4,i]<>rsNever) and (StringGrid1.Cells[4,i]<>'N/A'))and
-           ((StringGrid1.Cells[4,i]=rsAlways) or
-            ((StringGrid1.Cells[4,i]<=timnow)and
-             (StringGrid1.Cells[5,i]>timnow))) ;
+     if CheckBox1.Checked or CheckBox2.Checked then begin
+       if cr1<0 then
+            ok:=false
+       else begin
+         ok:=((StringGrid1.Cells[4,i]<>rsNever) and (StringGrid1.Cells[4,i]<>'N/A'));
+         if ok and (StringGrid1.Cells[4,i]<>rsAlways) then begin
+           t1:=StrToTim(StringGrid1.Cells[4,i],':');
+           t2:=StrToTim(StringGrid1.Cells[5,i],':');
+           if cr1<=cr2 then begin
+             if (t1<t2) then
+               ok:=((t1>=cr1)and(t2<=cr2)) or
+                   ((t1<=cr1)and(t2>=cr1)) or
+                   ((t1<=cr2)and(t2>=cr2))
+             else
+               ok:= (t2>=cr1)or(t1<=cr2);
+           end else begin
+             if (t1<t2) then
+                ok:=(t1<cr2)or(t2>cr1)
+             else
+                ok:=true;
+           end;
+         end;
+       end;
      end
-        else ok:=true;
+       else ok:=true;
      if ok then StringGrid1.RowHeights[i]:=StringGrid1.DefaultRowHeight
            else StringGrid1.RowHeights[i]:=0;
  end;
@@ -399,7 +426,7 @@ if CheckBox3.Checked then begin
   end;
   FObjLabels.Sorted:=True;
 end;
-if Assigned(FObjLabelChange) then FObjLabelChange(self);
+if CheckBox3.Checked and Assigned(FObjLabelChange) then FObjLabelChange(self);
 end;
 
 procedure Tf_obslist.ComputeAirmassTime;
@@ -443,7 +470,6 @@ end;
 
 procedure Tf_obslist.FormCreate(Sender: TObject);
 begin
-  cfgsc:=Tconf_skychart.Create;
   FObjLabels:=TStringList.Create;
   FEmptyObjLabels:=TStringList.Create;
   FDefaultList:='NewObsList.txt';
@@ -466,7 +492,6 @@ begin
        mtConfirmation, [mbYes, mbNo], 0) = mrYes
        then SaveObsList;
   end;
-  cfgsc.Free;
   FObjLabels.Free;
   FEmptyObjLabels.Free;
 end;
@@ -545,7 +570,7 @@ end;
 
 procedure Tf_obslist.FileNameEdit1Change(Sender: TObject);
 begin
-  LoadObsList;
+  if assigned(cfgsc) then LoadObsList;
 end;
 
 procedure Tf_obslist.ButtonSaveClick(Sender: TObject);
@@ -553,7 +578,7 @@ begin
   SaveObsList;
 end;
 
-procedure Tf_obslist.AirmassComboEditingDone(Sender: TObject);
+procedure Tf_obslist.AirmassComboChange(Sender: TObject);
 var h:double;
     buf:string;
 begin

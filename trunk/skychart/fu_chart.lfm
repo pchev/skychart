@@ -6,8 +6,8 @@ object f_chart: Tf_chart
   ClientHeight = 338
   ClientWidth = 508
   TabOrder = 0
-  DesignLeft = 361
-  DesignTop = 130
+  DesignLeft = 360
+  DesignTop = 134
   object Panel1: TPanel
     Left = 0
     Height = 338
@@ -422,6 +422,10 @@ object f_chart: Tf_chart
     end
     object MenuObslist: TMenuItem
       Caption = 'Observing list'
+      object MenuViewObsList: TMenuItem
+        Caption = 'View observing list'
+        OnClick = MenuViewObsListClick
+      end
       object MenuObslistNext: TMenuItem
         Caption = 'Next'
         OnClick = MenuObslistNextClick
@@ -437,10 +441,6 @@ object f_chart: Tf_chart
       object MenuObslistLast: TMenuItem
         Caption = 'Last'
         OnClick = MenuObslistLastClick
-      end
-      object MenuViewObsList: TMenuItem
-        Caption = 'View observing list'
-        OnClick = MenuViewObsListClick
       end
       object MenuAddToObsList: TMenuItem
         Caption = 'Add object'

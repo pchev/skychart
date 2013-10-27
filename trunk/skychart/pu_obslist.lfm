@@ -114,59 +114,79 @@ object f_obslist: Tf_obslist
       OnClick = Button6Click
       TabOrder = 2
     end
-    object AirmassCombo: TComboBox
-      Left = 432
-      Height = 23
-      Top = 8
-      Width = 72
-      ItemHeight = 0
-      ItemIndex = 2
-      Items.Strings = (
-        '1.1'
-        '1.2'
-        '1.5'
-        '2'
-        '3'
-        '5'
-        'horizon'
-      )
-      OnChange = AirmassComboEditingDone
+    object PageControl1: TPageControl
+      Left = 304
+      Height = 78
+      Top = 1
+      Width = 369
+      ActivePage = TabSheet1
+      Align = alRight
+      Anchors = [akTop, akLeft, akBottom]
+      TabIndex = 0
       TabOrder = 3
-      Text = '1.5'
-    end
-    object CheckBox1: TCheckBox
-      Left = 336
-      Height = 23
-      Top = 32
-      Width = 260
-      Caption = 'Only objects within airmass limits tonight'
-      OnChange = CheckBox1Change
-      TabOrder = 4
-    end
-    object Label1: TLabel
-      Left = 336
-      Height = 16
-      Top = 13
-      Width = 45
-      Caption = 'Airmass'
-      ParentColor = False
-    end
-    object CheckBox2: TCheckBox
-      Left = 336
-      Height = 23
-      Top = 56
-      Width = 240
-      Caption = 'Only objects within airmass limits now'
-      OnChange = CheckBox2Change
-      TabOrder = 5
-    end
-    object Label2: TLabel
-      Left = 512
-      Height = 16
-      Top = 13
-      Width = 37
-      Caption = 'Label2'
-      ParentColor = False
+      TabPosition = tpLeft
+      object TabSheet1: TTabSheet
+        Caption = 'Airmass'
+        ClientHeight = 74
+        ClientWidth = 311
+        object CheckBox2: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 46
+          Width = 240
+          Caption = 'Only objects within airmass limits now'
+          OnChange = CheckBox2Change
+          TabOrder = 0
+        end
+        object CheckBox1: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 22
+          Width = 260
+          Caption = 'Only objects within airmass limits tonight'
+          OnChange = CheckBox1Change
+          TabOrder = 1
+        end
+        object Label2: TLabel
+          Left = 192
+          Height = 16
+          Top = 3
+          Width = 37
+          Caption = 'Label2'
+          ParentColor = False
+        end
+        object AirmassCombo: TComboBox
+          Left = 112
+          Height = 23
+          Top = -2
+          Width = 72
+          ItemHeight = 0
+          ItemIndex = 2
+          Items.Strings = (
+            '1.1'
+            '1.2'
+            '1.5'
+            '2'
+            '3'
+            '5'
+            'horizon'
+          )
+          OnChange = AirmassComboChange
+          TabOrder = 2
+          Text = '1.5'
+        end
+        object Label1: TLabel
+          Left = 16
+          Height = 16
+          Top = 3
+          Width = 45
+          Caption = 'Airmass'
+          ParentColor = False
+        end
+      end
+      object TabSheet2: TTabSheet
+        Caption = 'Transit'
+      end
     end
   end
   object PopupMenu1: TPopupMenu

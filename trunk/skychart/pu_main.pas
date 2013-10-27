@@ -1294,7 +1294,7 @@ if VerboseMsg then
  f_obslist.onSelectObject:=ObsListSearch;
  f_obslist.onGetObjectCoord:=GetObjectCoord;
  f_obslist.onObjLabelChange:=ObsListChange;
- f_obslist.FileNameEdit1.FileName:=slash(HomeDir)+'NewObsList.txt';
+ f_obslist.FileNameEdit1.FileName:=slash(HomeDir)+f_obslist.DefaultList;
 if VerboseMsg then
  WriteTrace('SetDefault');
  SetDefault;
@@ -1447,13 +1447,14 @@ if (not firstuse)and(config_version<cdcver) then
 if cfgm.SampAutoconnect then begin
   SAMPStart(true);
 end;
+f_obslist.cfgsc:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
 f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
 f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
 f_obslist.CheckBox3.Checked:=cfgm.ObslistMark;
 if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
   f_obslist.FileNameEdit1.FileName:=cfgm.InitObsList;
-
+  if pos(f_obslist.DefaultList,cfgm.InitObsList)>0 then f_obslist.LoadObsList;
 end;
 Autorefresh.Interval:=max(10,cfgm.autorefreshdelay)*1000;
 AutoRefreshLock:=false;
@@ -6454,7 +6455,7 @@ WriteBool(section,'OnlineDSS',f_getdss.cfgdss.OnlineDSS);
 WriteInteger(section,'OnlineDSSid',f_getdss.cfgdss.OnlineDSSid);
 section:='obslist';
 buf:=f_obslist.FileNameEdit1.FileName;
-if (buf<>'')and(FileExists(buf)) then begin
+if buf<>'' then begin
   WriteString(section,'listname',buf);
 end;
 WriteString(section,'airmass',f_obslist.AirmassCombo.Text);
