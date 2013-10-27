@@ -3899,7 +3899,7 @@ end;
 
 procedure Tf_chart.MenuViewObsListClick(Sender: TObject);
 begin
- f_obslist.cfgsc.Assign(sc.cfgsc);
+ f_obslist.cfgsc:=sc.cfgsc;
  formpos(f_obslist,mouse.CursorPos.X,mouse.CursorPos.Y);
  f_obslist.Show;
 end;

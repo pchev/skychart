@@ -72,6 +72,7 @@ Function ARmtoStr(ar: Double) : string;
 Function DEpToStr(de: Double; precision:integer=1) : string;
 Function ARptoStr(ar: Double; precision:integer=1) : string;
 Function TimToStr(tim: Double; sep:string=':'; showsec:boolean=true) : string;
+Function StrToTim(tim : string; sep:string=':') : double;
 Function YearADBC(year : integer) : string;
 Function Date2Str(y,m,d:integer):string;
 Function ARToStr2(ar: Double; var d,m,s : string) : string;
@@ -755,6 +756,33 @@ begin
     if abs(sec)<9.5 then s:='0'+trim(s);
     if showsec then result := d+sep+m+sep+s
                else result := d+sep+m;
+end;
+
+Function StrToTim(tim : string; sep:string=':') : double;
+var s,p : integer;
+    t : string;
+begin
+try
+tim:=StringReplace(tim,blank,'0',[rfReplaceAll]);
+if copy(tim,1,1)='-' then s:=-1 else s:=1;
+p:=pos(sep,tim);
+if p=0 then
+  result:=StrToFloatDef(tim,-99)
+else begin
+  t:=copy(tim,1,p-1); delete(tim,1,p);
+  result:=StrToIntDef(t,0);
+  p:=pos(sep,tim);
+  if p=0 then
+    result:=result+ s * StrToIntDef(tim,0) / 60
+  else begin
+    t:=copy(tim,1,p-1); delete(tim,1,p);
+    result:=result+ s * StrToIntDef(t,0) / 60;
+    result:=result+ s * StrToFloatDef(tim,0) / 3600;
+  end;
+end;
+except
+result:=0;
+end;
 end;
 
 Function Date2Str(y,m,d:integer):string;
