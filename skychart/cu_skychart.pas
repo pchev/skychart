@@ -61,6 +61,7 @@ Tskychart = class (TComponent)
     bgw,bgh,bgproj,bgflipx,bgflipy: integer;
     nebmagmin,nebmagmax: single;
     FObjectListLabels: TStringList;
+    FUpdObsListTime: TNotifyEvent;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
     procedure SetLabel(id:integer;xx,yy:single;radius,fontnum,labelnum:integer; txt:string; align:TLabelAlign=laLeft;orient:single=0;priority: integer=5; opt:boolean=true; lsize:single=-1);
@@ -159,6 +160,7 @@ Tskychart = class (TComponent)
     function GetChartInfo(sep:string=blank):string;
     function GetChartPos:string;
     property Image: TCanvas write SetImage;
+    property onUpdObsListTime: TNotifyEvent read FUpdObsListTime write FUpdObsListTime;
 end;
 
 
@@ -516,10 +518,12 @@ cfgsc.CurJDTT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.
 cfgsc.CurJDUT:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,cfgsc.CurTime-cfgsc.TimeZone);              // UT
 cfgsc.jd0:=jd(cfgsc.CurYear,cfgsc.CurMonth,cfgsc.CurDay,0);
 // thing to do when the date change
-if ((cfgsc.FindType<ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/24))) or     // one hour limit
+if ((ObjectListLabels.Count>0)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/1440))) or     // one minute limit
+   ((cfgsc.FindType<ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(1/24))) or     // one hour limit
    ((cfgsc.FindType>=ftPla)and(abs(cfgsc.CurJDTT-cfgsc.LastJD)>(30/86400)))   // 30 sec. limit for moving objects
    then begin
     cfgsc.FindOk:=false;    // last search no longuer valid
+    if (ObjectListLabels.Count>0)and assigned(FUpdObsListTime) then FUpdObsListTime(self);
 end;
 if cfgsc.CurJDTT<>cfgsc.LastJD then begin
    if not cfgsc.NewArtSat then cfgsc.ShowArtSat:=false;  // satellite position not valid

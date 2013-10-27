@@ -39,6 +39,7 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
+    HourAngleCombo: TComboBox;
     ButtonSave: TButton;
     ButtonClear: TButton;
     Button5: TButton;
@@ -47,10 +48,14 @@ type
     CheckBox1: TCheckBox;
     CheckBox2: TCheckBox;
     CheckBox3: TCheckBox;
+    CheckBox4: TCheckBox;
+    CheckBox5: TCheckBox;
     Edit1: TEdit;
     FileNameEdit1: TFileNameEdit;
     Label1: TLabel;
     Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
     MenuDelete: TMenuItem;
     MenuView: TMenuItem;
     MenuUpdcoord: TMenuItem;
@@ -71,6 +76,9 @@ type
     procedure CheckBox1Change(Sender: TObject);
     procedure CheckBox2Change(Sender: TObject);
     procedure CheckBox3Change(Sender: TObject);
+    procedure CheckBox4Change(Sender: TObject);
+    procedure CheckBox5Change(Sender: TObject);
+    procedure HourAngleComboChange(Sender: TObject);
     procedure MenuDeleteClick(Sender: TObject);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -78,6 +86,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure MenuUpdcoordClick(Sender: TObject);
     procedure MenuViewClick(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
     procedure StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
       sIndex, tIndex: Integer);
@@ -92,7 +101,7 @@ type
     { private declarations }
     title,FDefaultList: string;
     Faltitude: double;
-    gridchanged: boolean;
+    gridchanged, limitairmass,limittransit: boolean;
     ClickCol,ClickRow: integer;
     FSelectObject: TSelectObject;
     FGetObjectCoord: TGetObjectCoord;
@@ -113,9 +122,12 @@ type
     procedure LastObj;
     procedure NextObj;
     procedure PrevObj;
+    procedure ComputeLimits;
     procedure ComputeAirmassTime;
+    procedure ComputeTransitTime;
     procedure UpdateLabels;
     procedure SetVisibleRows;
+    procedure Refresh;
     property RowCount: integer read GetRowcount;
     property DefaultList: string read FDefaultList;
     property ObjLabels: TStringList read FObjLabels;
@@ -151,10 +163,16 @@ begin
   AirmassCombo.Items[6]:=rsHorizon;
   ButtonSave.Caption:=rsSave;
   ButtonClear.Caption:=rsClear;
-  Label1.Caption:=rsAirmass;
+  TabSheet1.Caption:=rsAirmass;
+  Label1.Caption:=rsLimit;
   CheckBox1.Caption:=rsOnlyObjectsW;
   CheckBox2.Caption:=rsOnlyObjectsW2;
   CheckBox3.Caption:=rsMarkObjectsO;
+  TabSheet2.Caption:=rsTransit;
+  Label1.Caption:=rsLimit;
+  Label4.Caption:=rsHours;
+  CheckBox4.Caption:=rsOnlyObjectsW3;
+  CheckBox5.Caption:=rsOnlyObjectsW4;
 end;
 
 procedure Tf_obslist.Newlist;
@@ -193,8 +211,6 @@ var f: textfile;
 begin
 if FileExists(FileNameEdit1.FileName) then begin
   StringGrid1.RowCount:=1;
-  CheckBox1.Checked:=false;
-  CheckBox2.Checked:=false;
   gridchanged:=false;
   try
   AssignFile(f,FileNameEdit1.FileName);
@@ -242,8 +258,7 @@ if FileExists(FileNameEdit1.FileName) then begin
   end;
   CloseFile(f);
   edit1.Text:=title;
-  ComputeAirmassTime;
-  UpdateLabels;
+  Refresh;
   Application.ProcessMessages;
   gridchanged:=false;
   except
@@ -357,10 +372,10 @@ end;
 procedure Tf_obslist.SetVisibleRows;
 var ok: boolean;
     i: integer;
-    timnow,cr1,cr2,t1,t2: double;
-    astrom,nautm,civm,cive,naute,astroe,astro1,astro2,t: double;
+    cr1,cr2,t1,t2: double;
+    astrom,nautm,civm,cive,naute,astroe: double;
 begin
- if CheckBox1.Checked then begin
+ if (limitairmass and CheckBox1.Checked) or (limittransit and CheckBox4.Checked) then begin
    planet.Twilight(cfgsc.jd0,cfgsc.ObsLatitude,cfgsc.ObsLongitude,astrom,nautm,civm,cive,naute,astroe);
    if abs(astrom)<90 then begin
      cr1:=rmod(astroe+cfgsc.TimeZone+24,24);
@@ -375,12 +390,12 @@ begin
      cr2:=24;
    end;
  end;
- if CheckBox2.Checked then begin
+ if (limitairmass and CheckBox2.Checked) or (limittransit and CheckBox5.Checked) then begin
    cr1:=cfgsc.CurTime;
    cr2:=cr1;
  end;
  for i:=1 to StringGrid1.RowCount-1 do begin
-     if CheckBox1.Checked or CheckBox2.Checked then begin
+     if (limitairmass and (CheckBox1.Checked or CheckBox2.Checked)) or (limittransit and (CheckBox4.Checked or CheckBox5.Checked)) then begin
        if cr1<0 then
             ok:=false
        else begin
@@ -429,11 +444,34 @@ end;
 if CheckBox3.Checked and Assigned(FObjLabelChange) then FObjLabelChange(self);
 end;
 
+procedure Tf_obslist.ComputeLimits;
+var i: integer;
+begin
+case PageControl1.ActivePageIndex of
+  0: ComputeAirmassTime;
+  1: ComputeTransitTime;
+  else begin
+    for i:=1 to StringGrid1.RowCount-1 do begin
+      StringGrid1.Cells[4, i]:='';
+      StringGrid1.Cells[5, i]:='';
+    end;
+  end;
+end;
+end;
+
+procedure Tf_obslist.Refresh;
+begin
+ComputeLimits;
+SetVisibleRows;
+end;
+
 procedure Tf_obslist.ComputeAirmassTime;
 var i: integer;
     ra,de,am: double;
     t1,t2: double;
 begin
+limitairmass:=true;
+limittransit:=false;
 am:=StrToFloatDef(trim(AirmassCombo.Text),-99);
 if am<0 then begin
   Faltitude:=-0.5;
@@ -468,6 +506,38 @@ for i:=1 to StringGrid1.RowCount-1 do begin
 end;
 end;
 
+procedure Tf_obslist.ComputeTransitTime;
+var i,irc: integer;
+    ha,ra,de: double;
+    hr,ht,hs,azr,azs:double;
+begin
+limitairmass:=false;
+limittransit:=true;
+ ha:=StrToFloatDef(trim(HourAngleCombo.Text),-99);
+ if ha<0 then ha:=1;
+ if ha>12 then ha:=12;
+ for i:=1 to StringGrid1.RowCount-1 do begin
+   ra:=StrToFloatDef(trim(StringGrid1.Cells[2,i]),-1);
+   de:=StrToFloatDef(trim(StringGrid1.Cells[3,i]),0);
+   if ra>=0 then begin
+     ra:=deg2rad*ra;
+     de:=deg2rad*de;
+     Precession(jd2000,cfgsc.JDChart,ra,de);
+     RiseSet(1,cfgsc.jd0,ra,de,hr,ht,hs,azr,azs,irc,cfgsc);
+     if irc=2 then begin
+       StringGrid1.Cells[4, i]:=rsNever;
+       StringGrid1.Cells[5, i]:=rsNever;
+     end else begin
+       StringGrid1.Cells[4,i]:=TimToStr(rmod(ht-ha+24,24),':',false);
+       StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+ha+24,24),':',false);
+     end;
+   end else begin
+     StringGrid1.Cells[4,i]:='N/A';
+     StringGrid1.Cells[5,i]:='N/A';
+   end;
+ end;
+end;
+
 procedure Tf_obslist.FormCreate(Sender: TObject);
 begin
   FObjLabels:=TStringList.Create;
@@ -499,7 +569,7 @@ end;
 procedure Tf_obslist.FormShow(Sender: TObject);
 begin
   SetLang;
-  ComputeAirmassTime;
+  Refresh;
 end;
 
 procedure Tf_obslist.MenuUpdcoordClick(Sender: TObject);
@@ -522,6 +592,11 @@ end;
 procedure Tf_obslist.MenuViewClick(Sender: TObject);
 begin
 SelectRow(ClickRow);
+end;
+
+procedure Tf_obslist.PageControl1Change(Sender: TObject);
+begin
+  Refresh;
 end;
 
 procedure Tf_obslist.MenuDeleteClick(Sender: TObject);
@@ -595,8 +670,25 @@ if buf<>rsHorizon then begin
     AirmassCombo.ItemIndex:=6; // horizon
   end;
 end;
-ComputeAirmassTime;
-SetVisibleRows;
+Refresh;
+end;
+
+
+procedure Tf_obslist.HourAngleComboChange(Sender: TObject);
+var ha:double;
+    buf:string;
+begin
+buf:=trim(HourAngleCombo.Text);
+if (buf='')or(buf='.') then exit;
+ha:=StrToFloatDef(buf,-99);
+if ha<0 then begin
+  HourAngleCombo.ItemIndex:=-1;
+  HourAngleCombo.ItemIndex:=1;  // default 2.0
+end
+else if ha>12 then begin
+  HourAngleCombo.Text:='12.0';
+end;
+Refresh;
 end;
 
 procedure Tf_obslist.ButtonCloseClick(Sender: TObject);
@@ -634,6 +726,18 @@ end;
 procedure Tf_obslist.CheckBox3Change(Sender: TObject);
 begin
   UpdateLabels;
+end;
+
+procedure Tf_obslist.CheckBox4Change(Sender: TObject);
+begin
+ if CheckBox4.Checked then CheckBox5.Checked:=false;
+ SetVisibleRows;
+end;
+
+procedure Tf_obslist.CheckBox5Change(Sender: TObject);
+begin
+ if CheckBox5.Checked then CheckBox4.Checked:=false;
+ SetVisibleRows;
 end;
 
 end.
