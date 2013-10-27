@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
-"PO-Revision-Date: 2013-10-03 11:59+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"PO-Revision-Date: 2013-10-23 10:22+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -141,6 +141,10 @@ msgstr "Afegeix etiqueta"
 msgid "Add the alternative names to the index"
 msgstr "Afegeix els noms suplementaris a l'índex"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Ajusta la lluminositat de superfície"
@@ -168,6 +172,10 @@ msgstr "Configuració avançada"
 #: u_translation.rsage
 msgid "Age"
 msgstr "Edat"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -232,6 +240,10 @@ msgstr "Altura"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%svoltes Alt:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -567,7 +579,7 @@ msgstr "Calendari"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "Configuració gràfica del Calendari"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -705,7 +717,7 @@ msgstr "Modifica el mode de dibuix"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "Canvia el mode del ratolí"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1399,7 +1411,7 @@ msgstr "Voleu suprimir el lloc actual de la base de dades?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "Incertesa de Delta T"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1608,6 +1620,10 @@ msgstr "Voleu moure el mapa allí?"
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Voleu desar ara les opcions del programa?"
+
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -2021,6 +2037,10 @@ msgstr "Cercle buscador"
 msgid "Finder rectangle (CCD)"
 msgstr "Rectangle del buscador (CCD)"
 
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
+
 #: u_translation.rsfirst5000
 msgid "First 5000"
 msgstr "Primers 5000"
@@ -2203,7 +2223,7 @@ msgstr "Config. avançada GPS-16\""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "Alçada del gràfic"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2565,6 +2585,10 @@ msgstr "Invisible des d'aquesta latitud"
 msgid "Is the coordinates epoch really %s?"
 msgstr "L'època de les coordenades és segur que és %s ?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "DJ:"
@@ -2649,6 +2673,10 @@ msgstr "Idiomes"
 msgid "Language selection"
 msgstr "Tria de l'idioma"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Nom llatí"
@@ -2708,6 +2736,10 @@ msgstr "anys llum"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2924,6 +2956,10 @@ msgstr "Telescopi manual"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Carta"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3217,6 +3253,10 @@ msgstr "Veïnatge"
 msgid "Neptune"
 msgstr "Neptú"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Carta nova"
@@ -3232,6 +3272,10 @@ msgstr "Nova etiqueta"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Següent  >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3437,6 +3481,10 @@ msgstr "Observatori"
 msgid "Observatory database"
 msgstr "Base de dades"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Obsolet"
@@ -3488,6 +3536,22 @@ msgstr "Resultat de la recerca en línea"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Solament els numerats"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3840,6 +3904,10 @@ msgstr "Precedent"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Vista prèvia"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4679,7 +4747,7 @@ msgstr "Mostra/Amaga les imatges DSS"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "Mostra etiqueta del nom d'imatge"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4763,7 +4831,7 @@ msgstr "Mostra les imatges en el mapa"
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr ""
+msgstr "Mostra els satèl·lits tènues dels planetes externs"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5189,6 +5257,10 @@ msgstr "Tema"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "El nombre de registres d'aquest catàleg és desconegut. La descàrrega serà limitada a %s registres"
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Hi ha %s imatges catalogades"
@@ -5244,6 +5316,10 @@ msgstr "Unitats de temps"
 #: u_translation.rstimezone
 msgid "Time zone"
 msgstr "Zona horària"
+
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
 
 #: u_translation.rsto
 msgid "to"
@@ -5301,6 +5377,10 @@ msgstr "Segueix el telescopi"
 msgid "Transformation"
 msgstr "Transformació"
 
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
+
 #: u_translation.rstranslator
 msgid "Translator:"
 msgstr "Traductor:"
@@ -5347,7 +5427,7 @@ msgstr "Prova de connectar-te al SAMP en engegar el programa"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "Delta T: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5433,6 +5513,10 @@ msgstr "Desbloca la carta"
 msgid "Update"
 msgstr "Posa al dia"
 
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
+
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
 msgstr "Actualitzat correctament!"
@@ -5455,7 +5539,7 @@ msgstr "Obre una URL"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Usar un altre valor de Delta T"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5584,6 +5668,14 @@ msgstr "Visualitzador"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Mostra l'horitzó"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

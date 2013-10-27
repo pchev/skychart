@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2013-05-27 09:25+0000\n"
 "Last-Translator: Reinhart Grüssl <ikarus1969@gmx.at>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -140,6 +140,10 @@ msgstr "Beschriftung hinzufügen"
 msgid "Add the alternative names to the index"
 msgstr "Alternativnamen zum Suchindex hinzufügen"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Farbhelligkeit anpassen"
@@ -167,6 +171,10 @@ msgstr ""
 #: u_translation.rsage
 msgid "Age"
 msgstr "Alter"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -231,6 +239,10 @@ msgstr "Höhe"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sAlt Umdrehungen:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1605,6 +1617,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr "Möchten Sie die Programmeinstellungen jetzt sichern?"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Linie zeichnen, welche die Eigenbewegung darstellt für die nächsten"
@@ -2016,6 +2032,10 @@ msgstr "Suchkreis"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Kamerafelder"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2561,6 +2581,10 @@ msgstr "Unsichtbar auf diesem Breitengrad"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Ist die Epoche der Koordinaten wirklich %s?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD"
@@ -2645,6 +2669,10 @@ msgstr "Sprache"
 msgid "Language selection"
 msgstr "Sprachauswahl"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Lateinischer Name"
@@ -2704,6 +2732,10 @@ msgstr "Lichtjahre"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2920,6 +2952,10 @@ msgstr "Manuelles Teleskop"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Karte"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3213,6 +3249,10 @@ msgstr "Nachbarn"
 msgid "Neptune"
 msgstr "Neptun"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Neue Karte"
@@ -3228,6 +3268,10 @@ msgstr "Neue Beschriftung"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Weiter >"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3433,6 +3477,10 @@ msgstr "Beobachtungsort"
 msgid "Observatory database"
 msgstr "Beobachtungsorte"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Veraltet"
@@ -3484,6 +3532,22 @@ msgstr "Onlinesuche Ergebnisse"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Nur nummerierte Asteroiden"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3836,6 +3900,10 @@ msgstr "< Zurück"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Voransicht"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -5185,6 +5253,10 @@ msgstr "Thema"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "Die Anzahl der Einträge für diesen Katalog ist unbekannt. Der Download wird auf %s Einträge beschränkt."
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Es gibt %s katalogisierte Bilder"
@@ -5241,6 +5313,10 @@ msgstr "Zeiteinheiten"
 msgid "Time zone"
 msgstr "Zeitzone"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "bis"
@@ -5296,6 +5372,10 @@ msgstr "Teleskop nachführen"
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformation"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5428,6 +5508,10 @@ msgstr "Karte freigeben"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Aktualisieren"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5580,6 +5664,14 @@ msgstr "Zeige Header"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Horizontansicht"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

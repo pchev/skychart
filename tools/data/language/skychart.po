@@ -5730,3 +5730,95 @@ msgstr ""
 msgid "Show the faint satellites of the outer planets"
 msgstr ""
 
+#: u_translation:rsalways
+msgid "always"
+msgstr ""
+
+#: u_translation:rsnever
+msgid "never"
+msgstr ""
+
+#: u_translation:rstitle
+msgid "Title"
+msgstr ""
+
+#: u_translation:rsairmass
+msgid "Airmass"
+msgstr ""
+
+#: u_translation:rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
+#: u_translation:rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation:rsobservinglis
+msgid "Observing list"
+msgstr ""
+
+#: u_translation:rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
+#: u_translation:rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
+#: u_translation:rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
+#: u_translation:rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation:rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation:rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
+
+#: u_translation:rsfirst
+msgid "First"
+msgstr ""
+
+#: u_translation:rslast
+msgid "Last"
+msgstr ""
+
+#: u_translation:rsnext2
+msgid "Next"
+msgstr ""
+
+#: u_translation:rsprevious
+msgid "Previous"
+msgstr ""
+
+#: u_translation:rslimit
+msgid "Limit"
+msgstr ""
+
+#: u_translation:rstransit
+msgid "Transit"
+msgstr ""
+
+#: u_translation:rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation:rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
+
+#: u_translation:rsviewonchart
+msgid "View on chart"
+msgstr ""
+
+#: u_translation:rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
+

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2013-10-10 08:49+0000\n"
 "Last-Translator: Mattia Verga <Unknown>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "Language: it\n"
 
 #: u_translation.rs102cddss
@@ -141,6 +141,10 @@ msgstr "Aggiungi Etichetta"
 msgid "Add the alternative names to the index"
 msgstr "Aggiungi i nomi alternativi all'indice"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Regola luminosità colore"
@@ -168,6 +172,10 @@ msgstr "Impostazioni avanzate"
 #: u_translation.rsage
 msgid "Age"
 msgstr "Età"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -232,6 +240,10 @@ msgstr "Altitudine"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%s rotazioni Alt"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1606,6 +1618,10 @@ msgstr "Vuoi centrare la mappa a quelle coordinate?"
 msgid "Do you want to save the program settings now?"
 msgstr "Vuoi salvare le impostazioni?"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Disegna una linea che rappresenti il moto proprio per i prossimi"
@@ -2017,6 +2033,10 @@ msgstr "Campo Circolare"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Campi rettangolari (CCD)"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2562,6 +2582,10 @@ msgstr "Invisibile a questa latitudine"
 msgid "Is the coordinates epoch really %s?"
 msgstr "L'epoca dei dati è veramente %s ?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2646,6 +2670,10 @@ msgstr "Lingua"
 msgid "Language selection"
 msgstr "Seleziona lingua"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Nome Latino"
@@ -2705,6 +2733,10 @@ msgstr "anni luce"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2921,6 +2953,10 @@ msgstr "Telescopio manuale"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Mappa"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3214,6 +3250,10 @@ msgstr "Vicinanze"
 msgid "Neptune"
 msgstr "Nettuno"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Nuova cartina"
@@ -3229,6 +3269,10 @@ msgstr "Nuova Etichetta"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Succ >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3434,6 +3478,10 @@ msgstr "Osservatore"
 msgid "Observatory database"
 msgstr "Database Osservatori"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Obsoleti"
@@ -3485,6 +3533,22 @@ msgstr "Risultati della ricerca"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Solo asteroidi numerati"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3837,6 +3901,10 @@ msgstr "<< Prec"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Anteprima"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -5186,6 +5254,10 @@ msgstr "Tema"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "Il numero di elementi di questo catalogo è sconosciuto. Il download sarà limitato a %s elementi"
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Ci sono %s immagini catalogate"
@@ -5242,6 +5314,10 @@ msgstr "Unità di tempo"
 msgid "Time zone"
 msgstr "Fuso Orario"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "a"
@@ -5297,6 +5373,10 @@ msgstr "Segui telescopio"
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Trasformazione"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5429,6 +5509,10 @@ msgstr "Sblocca cartina"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Aggiorna"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5581,6 +5665,14 @@ msgstr "Mostra dati"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Vista orizzonte"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

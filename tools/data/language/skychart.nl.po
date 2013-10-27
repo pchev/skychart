@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
-"PO-Revision-Date: 2013-10-11 14:24+0000\n"
-"Last-Translator: Balaam's Miracle <Unknown>\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"PO-Revision-Date: 2013-10-26 16:48+0000\n"
+"Last-Translator: Marc Fokker <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -140,6 +140,10 @@ msgstr "Voeg label toe"
 msgid "Add the alternative names to the index"
 msgstr "Voeg de extra namen toe aan de index"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Pas kleurhelderheid aan"
@@ -167,6 +171,10 @@ msgstr "Geavanceerde instelling"
 #: u_translation.rsage
 msgid "Age"
 msgstr "Leeftijd"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -231,6 +239,10 @@ msgstr "Hoogte"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sAlt as-omw.:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -566,7 +578,7 @@ msgstr "Kalender"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "Kalender grafiek instelling"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -702,7 +714,7 @@ msgstr "Verander weergavemodus"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "Verander muis modus"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -1395,7 +1407,7 @@ msgstr "Verwijder de huidige locatie uit de database?"
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "DeltaT onzekerheid"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1604,6 +1616,10 @@ msgstr "Wil je de kaart hier naar toe bewegen?"
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "Wilt u de programma-instellingen nu opslaan?"
+
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -2017,6 +2033,10 @@ msgstr "Zoekercirkel"
 msgid "Finder rectangle (CCD)"
 msgstr "Beeldveld camera"
 
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
+
 #: u_translation.rsfirst5000
 msgid "First 5000"
 msgstr "Eerste 5000"
@@ -2199,7 +2219,7 @@ msgstr "Gps-16\" geavanceerde instellingen"
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "Grafiek hoogte"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2561,6 +2581,10 @@ msgstr "Onzichtbaar op deze geografische breedte"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Is de coördinaten-epoche werkelijk %s?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2645,6 +2669,10 @@ msgstr "Taal"
 msgid "Language selection"
 msgstr "Taalselectie"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Latijnse naam"
@@ -2704,6 +2732,10 @@ msgstr "lichtjaar"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2921,6 +2953,10 @@ msgstr "Handmatige telescoop"
 msgid "Map"
 msgstr "Kaart"
 
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
+
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
 msgstr "Markeer het kaartcentrum"
@@ -3075,7 +3111,7 @@ msgstr "Ma."
 
 #: u_translation.rsmonth
 msgid "Month"
-msgstr "Month"
+msgstr "Maand"
 
 #: u_translation.rsmoon
 msgid "Moon"
@@ -3213,6 +3249,10 @@ msgstr "In directe nabijheid"
 msgid "Neptune"
 msgstr "Neptunus"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Nieuwe kaart"
@@ -3228,6 +3268,10 @@ msgstr "Nieuw label"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Volgende >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3433,6 +3477,10 @@ msgstr "Observatorium"
 msgid "Observatory database"
 msgstr "Observatoria database"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Verouderd"
@@ -3484,6 +3532,22 @@ msgstr "Online zoekresultaat"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Alleen genummerde planetoïden"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3836,6 +3900,10 @@ msgstr "<< Vorig"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Voorschouw"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4675,7 +4743,7 @@ msgstr "Toon/verberg DSS beeld"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "Toon label afbeeldingsnaam"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4759,7 +4827,7 @@ msgstr "Toon de afbeeldingen op de kaart"
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr ""
+msgstr "Toon de zwakke satellieten van de buitenplaneten"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5185,6 +5253,10 @@ msgstr "Thema"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "Het aantal records van deze catalogus is onbekend. De download is beperkt tot %s records."
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Er zijn %s gecatalogiseerde afbeeldingen"
@@ -5240,6 +5312,10 @@ msgstr "Tijdseenheden"
 #: u_translation.rstimezone
 msgid "Time zone"
 msgstr "Tijdzone"
+
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
 
 #: u_translation.rsto
 msgid "to"
@@ -5297,6 +5373,10 @@ msgstr "Volg telescoop"
 msgid "Transformation"
 msgstr "Transformatie"
 
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
+
 #: u_translation.rstranslator
 msgid "Translator:"
 msgstr "Vertaler:"
@@ -5343,7 +5423,7 @@ msgstr "Probeer automatisch te verbinden met een SAMP hub bij opstarten van prog
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5429,6 +5509,10 @@ msgstr "Deblokkeer kaart"
 msgid "Update"
 msgstr "Bijwerken"
 
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
+
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
 msgstr "Bijwerken succesvol afgerond!"
@@ -5451,7 +5535,7 @@ msgstr "URL voer commando uit"
 
 #: u_translation.rsuseanothertt
 msgid "Use another DeltaT value"
-msgstr ""
+msgstr "Gebruik andere DeltaT waarde"
 
 #: u_translation.rsuseapresetco
 msgid "Use a preset colour scheme:"
@@ -5580,6 +5664,14 @@ msgstr "Toon header"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Horizonzicht"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
