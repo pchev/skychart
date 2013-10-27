@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cartes du Ciel v.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2011-12-29 17:16+0000\n"
 "Last-Translator: Astronom <astroclubzp@gmail.com>\n"
 "Language-Team: Zaporozhye Astronomical Club Altair <astroclubzp@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "X-Poedit-Country: UKRAINE\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -143,6 +143,10 @@ msgstr "Додати мітку"
 msgid "Add the alternative names to the index"
 msgstr "Додати альтернативну назву в індекс"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Настанова яскравості кольору"
@@ -170,6 +174,10 @@ msgstr ""
 #: u_translation.rsage
 msgid "Age"
 msgstr "Вік"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -234,6 +242,10 @@ msgstr "Висота"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sAlt повороти:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1607,6 +1619,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr "Ви хочете зберегти настанови програми негайно?"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Нарисувати лінію, що показує власний рух на протязі"
@@ -2018,6 +2034,10 @@ msgstr ""
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Прямокутне поле CCD"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2563,6 +2583,10 @@ msgstr "Невидимо на цій широті"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Це дійсно така епоха координат %s ?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2647,6 +2671,10 @@ msgstr "Мова"
 msgid "Language selection"
 msgstr "Вибір мови"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Латинська назва"
@@ -2706,6 +2734,10 @@ msgstr "світлових років"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2922,6 +2954,10 @@ msgstr "Телескоп із ручним веденням"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Карта"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3215,6 +3251,10 @@ msgstr "Сусід"
 msgid "Neptune"
 msgstr "Нептун"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Нова мапа"
@@ -3230,6 +3270,10 @@ msgstr "Нова мітка"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Далі   >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3435,6 +3479,10 @@ msgstr "Обсерваторія"
 msgid "Observatory database"
 msgstr "Дані обсерваторії"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Застарілий"
@@ -3486,6 +3534,22 @@ msgstr ""
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Тільки пронумеровані астероїди"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3837,6 +3901,10 @@ msgstr "<<   Назад"
 
 #: u_translation.rspreview
 msgid "Preview"
+msgstr ""
+
+#: u_translation.rsprevious
+msgid "Previous"
 msgstr ""
 
 #: u_translation.rsprint
@@ -5187,6 +5255,10 @@ msgstr "Тема"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr ""
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Присутні %s зображень каталогу"
@@ -5243,6 +5315,10 @@ msgstr "Одиниці часу"
 msgid "Time zone"
 msgstr "Часовий пояс"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "до"
@@ -5298,6 +5374,10 @@ msgstr ""
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Перетворення"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5430,6 +5510,10 @@ msgstr "Розкрити мапу"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Обновити"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5582,6 +5666,14 @@ msgstr ""
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Показати обрій"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

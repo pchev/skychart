@@ -170,9 +170,13 @@ begin
   CheckBox3.Caption:=rsMarkObjectsO;
   TabSheet2.Caption:=rsTransit;
   Label1.Caption:=rsLimit;
+  Label3.Caption:=rsLimit;
   Label4.Caption:=rsHours;
   CheckBox4.Caption:=rsOnlyObjectsW3;
   CheckBox5.Caption:=rsOnlyObjectsW4;
+  MenuView.Caption:=rsViewOnChart;
+  MenuUpdcoord.Caption:=rsUpdateCoordi;
+  MenuDelete.Caption:=rsDelete;
 end;
 
 procedure Tf_obslist.Newlist;

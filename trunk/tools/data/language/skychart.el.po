@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2013-03-03 22:19+0000\n"
 "Last-Translator: Andreas Papalambrou <papalambrou@ieee.org>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -141,6 +141,10 @@ msgstr "Προσθήκη ετικέτας"
 msgid "Add the alternative names to the index"
 msgstr "Προσθήκη εναλλακτικών ονομάτων στο ευρετήριο"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Ρύθμιση φωτεινότητας χρώματος"
@@ -168,6 +172,10 @@ msgstr ""
 #: u_translation.rsage
 msgid "Age"
 msgstr "Ηλικία"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -232,6 +240,10 @@ msgstr "Ύψος"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sΥψ. στροφές:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1638,6 +1650,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr "Θέλετε να αποθηκεύσετε τις ρυθμίσεις του προγράμματος τώρα;"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Σχεδίαση γραμμής που εμφανίζει την ίδια κίνση για το επόμενο"
@@ -2056,6 +2072,10 @@ msgstr "Κύκλος ερευνητή"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Παραλληλόγραμο ερευνητή (CCD)"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2615,6 +2635,10 @@ msgstr "Αόρατο σε αυτό το γεωγραφικό πλάτος"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Είναι η εποχή συντεταγμένων πραγματικά %s?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "Ιουλ.Ημ."
@@ -2699,6 +2723,10 @@ msgstr "Γλώσσα"
 msgid "Language selection"
 msgstr "Επιλογή γλώσσας"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Λατινικό όνομα"
@@ -2758,6 +2786,10 @@ msgstr "έτη φωτός"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2976,6 +3008,10 @@ msgstr "Χειροκίνητο τηλεσκόπιο"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Χάρτης"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3270,6 +3306,10 @@ msgstr "Γειτονικά"
 msgid "Neptune"
 msgstr "Ποσειδώνας"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Νέος Χάρτης"
@@ -3285,6 +3325,10 @@ msgstr "Νέα ετικέτα"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Επόμενο  >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3492,6 +3536,10 @@ msgstr "Παρατηρητήριο"
 msgid "Observatory database"
 msgstr "ΒΔ παρατηρητηρίων"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Απαρχαιωμένα"
@@ -3543,6 +3591,22 @@ msgstr "Αποτέλεσματα αναζήτησης online"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Μόνο αστεροειδείς που έχουν αριθμό"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3895,6 +3959,10 @@ msgstr "<<  Προηγ"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Προεπισκόπιση"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -5265,6 +5333,10 @@ msgstr "Θέμα"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr ""
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Υπάρχουν %s καταγεγραμμένες εικόνες"
@@ -5323,6 +5395,10 @@ msgstr "Μονάδες Χρόνου"
 msgid "Time zone"
 msgstr "Ζώνη Ώρας"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "έως"
@@ -5378,6 +5454,10 @@ msgstr "Ακολούθηση τηλεσκοπίου"
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Μετασχηματισμός"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5513,6 +5593,10 @@ msgstr "Ξεκλείδωμα χάρτη"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Ανανέωση"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5665,6 +5749,14 @@ msgstr ""
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Προβολή ορίζοντα"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

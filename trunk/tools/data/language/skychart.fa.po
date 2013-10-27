@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2013-07-26 05:09+0000\n"
 "Last-Translator: mbid <mbid2010@aol.com>\n"
 "Language-Team: Persian <fa@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:29+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -140,6 +140,10 @@ msgstr ""
 msgid "Add the alternative names to the index"
 msgstr ""
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr ""
@@ -166,6 +170,10 @@ msgstr ""
 
 #: u_translation.rsage
 msgid "Age"
+msgstr ""
+
+#: u_translation.rsairmass
+msgid "Airmass"
 msgstr ""
 
 #: u_translation.rsalignment
@@ -230,6 +238,10 @@ msgstr ""
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
+msgstr ""
+
+#: u_translation.rsalways
+msgid "always"
 msgstr ""
 
 #: u_translation.rsalwayssavewi
@@ -1604,6 +1616,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr ""
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr ""
@@ -2014,6 +2030,10 @@ msgstr ""
 
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
+msgstr ""
+
+#: u_translation.rsfirst
+msgid "First"
 msgstr ""
 
 #: u_translation.rsfirst5000
@@ -2560,6 +2580,10 @@ msgstr ""
 msgid "Is the coordinates epoch really %s?"
 msgstr ""
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr ""
@@ -2644,6 +2668,10 @@ msgstr ""
 msgid "Language selection"
 msgstr ""
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr ""
@@ -2702,6 +2730,10 @@ msgstr ""
 
 #: u_translation.rslii
 msgid "LII"
+msgstr ""
+
+#: u_translation.rslimit
+msgid "Limit"
 msgstr ""
 
 #: u_translation.rslimitingmagn
@@ -2918,6 +2950,10 @@ msgstr ""
 
 #: u_translation.rsmap
 msgid "Map"
+msgstr ""
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
 msgstr ""
 
 #: u_translation.rsmarkthechart
@@ -3212,6 +3248,10 @@ msgstr ""
 msgid "Neptune"
 msgstr ""
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr ""
@@ -3226,6 +3266,10 @@ msgstr ""
 
 #: u_translation.rsnext
 msgid "Next   >>"
+msgstr ""
+
+#: u_translation.rsnext2
+msgid "Next"
 msgstr ""
 
 #: u_translation.rsnextchart
@@ -3432,6 +3476,10 @@ msgstr ""
 msgid "Observatory database"
 msgstr ""
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr ""
@@ -3482,6 +3530,22 @@ msgstr ""
 
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
 msgstr ""
 
 #: u_translation.rsonlythefirst
@@ -3834,6 +3898,10 @@ msgstr ""
 
 #: u_translation.rspreview
 msgid "Preview"
+msgstr ""
+
+#: u_translation.rsprevious
+msgid "Previous"
 msgstr ""
 
 #: u_translation.rsprint
@@ -5184,6 +5252,10 @@ msgstr ""
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr ""
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr ""
@@ -5240,6 +5312,10 @@ msgstr ""
 msgid "Time zone"
 msgstr ""
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr ""
@@ -5294,6 +5370,10 @@ msgstr ""
 
 #: u_translation.rstransformati
 msgid "Transformation"
+msgstr ""
+
+#: u_translation.rstransit
+msgid "Transit"
 msgstr ""
 
 #: u_translation.rstranslator
@@ -5426,6 +5506,10 @@ msgstr ""
 
 #: u_translation.rsupdate1
 msgid "Update"
+msgstr ""
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
 msgstr ""
 
 #: u_translation.rsupdatedsucce
@@ -5578,6 +5662,14 @@ msgstr ""
 
 #: u_translation.rsviewhorizon
 msgid "View horizon"
+msgstr ""
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
 msgstr ""
 
 #: u_translation.rsvirtualhandp

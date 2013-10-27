@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.en\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2013-09-22 05:28+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -143,6 +143,10 @@ msgstr "Címke hozzáadása"
 msgid "Add the alternative names to the index"
 msgstr "Alternatív nevek hozzáadása az indexhez"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Szín telitettség beállítása"
@@ -171,6 +175,10 @@ msgstr ""
 #: u_translation.rsage
 msgid "Age"
 msgstr "Kor"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -240,6 +248,10 @@ msgstr "Magasság"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sforgatás függőlegesen:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1706,6 +1718,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr "Akarod menteni a program beállításait?"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 #| msgid "Draw a line that represent the proper motion for the next "
 msgid "Draw a line that displays the proper motion for the next"
@@ -2138,6 +2154,10 @@ msgstr "keresőkör"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Kereső négyszög (CCD)"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2726,6 +2746,10 @@ msgstr "Ezen a szélességi körön nem megfigyelhető"
 msgid "Is the coordinates epoch really %s?"
 msgstr "A koordináták epochája %s?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2813,6 +2837,10 @@ msgstr "Nyelv"
 msgid "Language selection"
 msgstr "Nyelv választása"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 #| msgid "Latin Name"
 msgid "Latin name"
@@ -2876,6 +2904,10 @@ msgstr "fényév"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 #| msgid "Limiting magnitude, list :"
@@ -3106,6 +3138,10 @@ msgstr "Kézi vezérlésű távcső"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Térkép"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 #| msgid "Mark the chart center "
@@ -3416,6 +3452,10 @@ msgstr "Környezet"
 msgid "Neptune"
 msgstr "Neptunusz"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 #| msgid "New Chart"
 msgid "New chart"
@@ -3434,6 +3474,10 @@ msgstr "Új címke"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Következő >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3658,6 +3702,10 @@ msgstr "Megfigyelés helye"
 msgid "Observatory database"
 msgstr "Hely adatbázis"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Elavult"
@@ -3709,6 +3757,22 @@ msgstr "Az online keresés eredménye"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Csak számozott kisbolygók"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -4077,6 +4141,10 @@ msgstr "<< Előző"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Előnézet"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -5518,6 +5586,10 @@ msgstr "Téma"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "A katalógusban lévő rekordok száma ismeretlen. A letöltés %s darab rekordra korlátozódik."
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "%s db katalogizált objektum"
@@ -5577,6 +5649,10 @@ msgstr "Idő egysége"
 #| msgid "Time Zone"
 msgid "Time zone"
 msgstr "Időzóna"
+
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
 
 #: u_translation.rsto
 msgid "to"
@@ -5638,6 +5714,10 @@ msgstr "Távcső követése"
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Átalakítás"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5780,6 +5860,10 @@ msgstr "Rögzítés kikapcsolása"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Felülír"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5939,6 +6023,14 @@ msgstr "Fejléc"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Égtájra ugrás"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

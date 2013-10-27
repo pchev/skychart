@@ -1,11 +1,11 @@
 object f_obslist: Tf_obslist
-  Left = 317
-  Height = 456
-  Top = 113
-  Width = 674
+  Left = 309
+  Height = 474
+  Top = 120
+  Width = 799
   Caption = 'f_obslist'
-  ClientHeight = 456
-  ClientWidth = 674
+  ClientHeight = 474
+  ClientWidth = 799
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
@@ -13,11 +13,11 @@ object f_obslist: Tf_obslist
   object PanelBot: TPanel
     Left = 0
     Height = 50
-    Top = 406
-    Width = 674
+    Top = 424
+    Width = 799
     Align = alBottom
     ClientHeight = 50
-    ClientWidth = 674
+    ClientWidth = 799
     TabOrder = 0
     object FileNameEdit1: TFileNameEdit
       Left = 8
@@ -62,9 +62,9 @@ object f_obslist: Tf_obslist
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 326
+    Height = 344
     Top = 80
-    Width = 674
+    Width = 799
     Align = alClient
     ColCount = 8
     ColumnClickSorts = True
@@ -84,10 +84,10 @@ object f_obslist: Tf_obslist
     Left = 0
     Height = 80
     Top = 0
-    Width = 674
+    Width = 799
     Align = alTop
     ClientHeight = 80
-    ClientWidth = 674
+    ClientWidth = 799
     TabOrder = 2
     object Edit1: TEdit
       Left = 8
@@ -118,18 +118,18 @@ object f_obslist: Tf_obslist
       Left = 304
       Height = 78
       Top = 1
-      Width = 369
-      ActivePage = TabSheet2
+      Width = 494
+      ActivePage = TabSheet1
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
-      TabIndex = 1
+      TabIndex = 0
       TabOrder = 3
       TabPosition = tpLeft
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 74
-        ClientWidth = 311
+        ClientWidth = 436
         object CheckBox2: TCheckBox
           Left = 16
           Height = 23
@@ -188,7 +188,7 @@ object f_obslist: Tf_obslist
       object TabSheet2: TTabSheet
         Caption = 'Transit'
         ClientHeight = 74
-        ClientWidth = 311
+        ClientWidth = 436
         object CheckBox4: TCheckBox
           Left = 16
           Height = 23

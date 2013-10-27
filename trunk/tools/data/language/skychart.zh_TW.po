@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.zh\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
 "PO-Revision-Date: 2012-11-20 22:42+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "X-Poedit-Country: CHINA\n"
 "X-Poedit-Language: Chinese\n"
 
@@ -142,6 +142,10 @@ msgstr "增加標籤"
 msgid "Add the alternative names to the index"
 msgstr "增加别名到索引"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "調整色彩亮度"
@@ -169,6 +173,10 @@ msgstr ""
 #: u_translation.rsage
 msgid "Age"
 msgstr "年齡"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -233,6 +241,10 @@ msgstr "高度角"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%s地平緯度轉動："
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1607,6 +1619,10 @@ msgstr ""
 msgid "Do you want to save the program settings now?"
 msgstr "你要儲存現在的程式設定？"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "畫線表示天體未來的自行"
@@ -2018,6 +2034,10 @@ msgstr ""
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "尋星鏡方格（CCD）"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2563,6 +2583,10 @@ msgstr "在此緯度不可見"
 msgid "Is the coordinates epoch really %s?"
 msgstr "座標曆元是真 %s ？"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "儒略日："
@@ -2647,6 +2671,10 @@ msgstr "語言"
 msgid "Language selection"
 msgstr "語言選擇"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "拉丁名稱"
@@ -2706,6 +2734,10 @@ msgstr "光年"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2922,6 +2954,10 @@ msgstr "手動望遠鏡"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "圖"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3215,6 +3251,10 @@ msgstr "鄰近"
 msgid "Neptune"
 msgstr "海王星"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "新建星圖"
@@ -3230,6 +3270,10 @@ msgstr "新建標籤"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "下一步>>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3435,6 +3479,10 @@ msgstr "天文台"
 msgid "Observatory database"
 msgstr "天文台資料庫"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "老舊"
@@ -3486,6 +3534,22 @@ msgstr ""
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "只有编號的小行星"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3837,6 +3901,10 @@ msgstr "<<上一步"
 
 #: u_translation.rspreview
 msgid "Preview"
+msgstr ""
+
+#: u_translation.rsprevious
+msgid "Previous"
 msgstr ""
 
 #: u_translation.rsprint
@@ -5187,6 +5255,10 @@ msgstr "主題"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr ""
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "有 %s 星表圖像"
@@ -5243,6 +5315,10 @@ msgstr "時間單位"
 msgid "Time zone"
 msgstr "時區"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "到"
@@ -5298,6 +5374,10 @@ msgstr ""
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "轉換"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5430,6 +5510,10 @@ msgstr "不鎖定星圖"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "更新"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5582,6 +5666,14 @@ msgstr ""
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "視地平"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

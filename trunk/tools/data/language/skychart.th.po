@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
-"PO-Revision-Date: 2013-09-17 02:41+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"PO-Revision-Date: 2013-10-21 03:26+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -140,6 +140,10 @@ msgstr "เพิ่มชื่อ"
 msgid "Add the alternative names to the index"
 msgstr "เพิ่มชื่ออื่น ๆ ลงในดัชนี"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "ปรับความสว่างของสี"
@@ -162,11 +166,15 @@ msgstr "ตั้งค่า Scope.exe ขั้นสูง"
 
 #: u_translation.rsadvancedsett2
 msgid "Advanced setting"
-msgstr ""
+msgstr "การตั้งค่าขั้นสูง"
 
 #: u_translation.rsage
 msgid "Age"
 msgstr "อายุ"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -230,6 +238,10 @@ msgstr "ระดับความสูง"
 
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
+msgstr ""
+
+#: u_translation.rsalways
+msgid "always"
 msgstr ""
 
 #: u_translation.rsalwayssavewi
@@ -318,15 +330,15 @@ msgstr "ให้ยืนยันก่อนเชื่อมต่ออิ
 
 #: u_translation.rsaskforconfir
 msgid "Ask for confirmation before to jump to coordinates"
-msgstr ""
+msgstr "ให้ยืนยันก่อนจะกระโดดไปยังพิกัด"
 
 #: u_translation.rsaskforconfir2
 msgid "Ask for confirmation before to load the image"
-msgstr ""
+msgstr "ให้ยืนยันก่อนจะโหลดภาพ"
 
 #: u_translation.rsaskforconfir3
 msgid "Ask for confirmation before to load the table"
-msgstr ""
+msgstr "ให้ยืนยันก่อนจะโหลดตาราง"
 
 #: u_translation.rsasonscreenbl
 msgid "As on screen (black background!)"
@@ -566,7 +578,7 @@ msgstr "ปฏิทิน"
 
 #: u_translation.rscalendargrap
 msgid "Calendar graph setting"
-msgstr ""
+msgstr "การตั้งค่ากราฟปฏิทิน"
 
 #: u_translation.rscancel
 msgid "Cancel"
@@ -702,7 +714,7 @@ msgstr "เปลี่ยนโหมดการวาด"
 
 #: u_translation.rschangemousem
 msgid "Change mouse mode"
-msgstr ""
+msgstr "เปลี่ยนโหมดเมาส์"
 
 #: u_translation.rschangetothis
 msgid "Change to this setting will restart the program now!"
@@ -946,7 +958,7 @@ msgstr "การเชื่อมต่อไปยัง %s, %s ล้มเ�
 
 #: u_translation.rsconnecttosam
 msgid "Connect to SAMP hub"
-msgstr ""
+msgstr "เชื่อมต่อไปยังฮับ SAMP"
 
 #: u_translation.rsconnecttosuc
 msgid "Connection to %s, %s successful.%s"
@@ -1394,7 +1406,7 @@ msgstr "ลบสถานที่ปัจจุบันออกจากฐ
 
 #: u_translation.rsdeltaterror
 msgid "DeltaT uncertainty"
-msgstr ""
+msgstr "ความไม่แน่นอนของ DeltaT"
 
 #: u_translation.rsdepressionof
 msgid "Depression of the visible horizon"
@@ -1478,7 +1490,7 @@ msgstr "ตัดการเชื่อมต่อ"
 
 #: u_translation.rsdisconnectfr
 msgid "Disconnect from SAMP"
-msgstr ""
+msgstr "ยกเลิกการเชื่อมต่อกับ SAMP"
 
 #: u_translation.rsdisconnectte
 msgid "Disconnect telescope"
@@ -1538,7 +1550,7 @@ msgstr "ระยะห่างจากวัตถุที่แล้ว"
 
 #: u_translation.rsdonotchangea
 msgid "Do not change anything here if you are not sure what you do!"
-msgstr ""
+msgstr "อย่าเปลี่ยนแปลงหากคุณไม่แน่ใจว่ากำลังทำอะไรอยู่!"
 
 #: u_translation.rsdonotfilterm
 msgid "Do not filter Messier objects"
@@ -1594,15 +1606,19 @@ msgstr "ดาวน์โหลด TLE"
 
 #: u_translation.rsdoyouwanttol
 msgid "Do you want to load it?"
-msgstr ""
+msgstr "คุณต้องการโหลดมันหรือไม่?"
 
 #: u_translation.rsdoyouwanttom
 msgid "Do you want to move the chart there?"
-msgstr ""
+msgstr "คุณต้องการย้ายแผนที่ไปที่นั่นใช่หรือไม่?"
 
 #: u_translation.rsdoyouwanttos
 msgid "Do you want to save the program settings now?"
 msgstr "คุณต้องการบันทึกการตั้งค่าโปรแกรมเดี๋ยวนี้หรือไม่?"
+
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -2016,6 +2032,10 @@ msgstr "วงกลมเล็งเป้า"
 msgid "Finder rectangle (CCD)"
 msgstr "สี่เหลี่ยมเล็งภาพ (ซีซีดี)"
 
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
+
 #: u_translation.rsfirst5000
 msgid "First 5000"
 msgstr "5,000 ดวงแรก"
@@ -2070,7 +2090,7 @@ msgstr ""
 
 #: u_translation.rsformoreinfor
 msgid "For more information, see :"
-msgstr ""
+msgstr "สำหรับข้อมูลเพิ่มเติม ดู :"
 
 #: u_translation.rsfov
 msgid "FOV"
@@ -2198,7 +2218,7 @@ msgstr ""
 
 #: u_translation.rsgraphheight
 msgid "Graph height"
-msgstr ""
+msgstr "ความสูงของกราฟ"
 
 #: u_translation.rsgraphic
 msgid "Graphic"
@@ -2560,6 +2580,10 @@ msgstr "มองไม่เห็นในละติจูดนี้"
 msgid "Is the coordinates epoch really %s?"
 msgstr "ต้องการจะใช้จุดเริ่มยุค %s จริงหรือไม่?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2644,6 +2668,10 @@ msgstr "ภาษา"
 msgid "Language selection"
 msgstr "การเลือกภาษา"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "ชื่อละติน"
@@ -2703,6 +2731,10 @@ msgstr "ปีแสง"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2919,6 +2951,10 @@ msgstr "กล้องโทรทรรศน์บังคับด้วย
 #: u_translation.rsmap
 msgid "Map"
 msgstr "แผนที่"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3212,6 +3248,10 @@ msgstr "วัตถุข้างเคียง"
 msgid "Neptune"
 msgstr "ดาวเนปจูน"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "แผนที่ใหม่"
@@ -3227,6 +3267,10 @@ msgstr "ชื่อใหม่"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "ถัดไป   >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3432,6 +3476,10 @@ msgstr "สถานที่สังเกตการณ์"
 msgid "Observatory database"
 msgstr "ฐานข้อมูลสถานที่"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "ล้าสมัย"
@@ -3483,6 +3531,22 @@ msgstr "ผลการสืบค้นออนไลน์"
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "เฉพาะดาวเคราะห์น้อยที่มีหมายเลข"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3836,6 +3900,10 @@ msgstr "<<   ก่อนหน้า"
 msgid "Preview"
 msgstr "แสดงตัวอย่าง"
 
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
+
 #: u_translation.rsprint
 msgid "Print"
 msgstr "พิมพ์"
@@ -4058,11 +4126,11 @@ msgstr "ตัวเลือกเวลาจริง"
 
 #: u_translation.rsreceivecoord
 msgid "Receive coordinates from other applications"
-msgstr ""
+msgstr "รับพิกัดจากโปรแกรมอื่น"
 
 #: u_translation.rsreceivefitsi
 msgid "Receive FITS images from other applications"
-msgstr ""
+msgstr "รับภาพ FITS จากโปรแกรมอื่น"
 
 #: u_translation.rsreceivevotab
 msgid "Receive VO table data from other applications"
@@ -4302,11 +4370,11 @@ msgstr ""
 
 #: u_translation.rssampsetup
 msgid "SAMP setup"
-msgstr ""
+msgstr "ตั้งค่า SAMP"
 
 #: u_translation.rssampstatus
 msgid "SAMP status"
-msgstr ""
+msgstr "สถานะของ SAMP"
 
 #: u_translation.rssaros
 msgid "Saros"
@@ -4506,11 +4574,11 @@ msgstr "ส่งแผนที่ไปยังเครื่องพิม
 
 #: u_translation.rssendimageto
 msgid "Send image to"
-msgstr ""
+msgstr "ส่งภาพไปยัง"
 
 #: u_translation.rssendtableto
 msgid "Send table to"
-msgstr ""
+msgstr "ส่งตารางไปยัง"
 
 #: u_translation.rsseparation
 msgid "Separation"
@@ -4674,7 +4742,7 @@ msgstr "แสดง/ซ่อน ภาพ DSS"
 
 #: u_translation.rsshowimagenam
 msgid "Show image name label"
-msgstr ""
+msgstr "แสดงป้ายชื่อภาพ"
 
 #: u_translation.rsshowirvariab
 msgid "Show IR variables"
@@ -4758,7 +4826,7 @@ msgstr "แสดงภาพบนแผนที่"
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr ""
+msgstr "แสดงดาวบริวารที่มีความสว่างน้อยของดาวเคราะห์วงนอก"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5184,6 +5252,10 @@ msgstr ""
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "ไม่ทราบจำนวนระเบียนในแค็ตตาล็อกนี้ การดาวน์โหลดจะถูกจำกัดอยู่ที่ %s ระเบียน"
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "พบ %s ภาพในแค็ตตาล็อก"
@@ -5239,6 +5311,10 @@ msgstr "หน่วยเวลา"
 #: u_translation.rstimezone
 msgid "Time zone"
 msgstr "เขตเวลา"
+
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
 
 #: u_translation.rsto
 msgid "to"
@@ -5296,6 +5372,10 @@ msgstr "ตามกล้องโทรทรรศน์"
 msgid "Transformation"
 msgstr "การแปลง"
 
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
+
 #: u_translation.rstranslator
 msgid "Translator:"
 msgstr "ผู้แปล:"
@@ -5338,7 +5418,7 @@ msgstr "ชนิดทรัมเพลอร์"
 
 #: u_translation.rstrytoautocon
 msgid "Try to auto-connect to a SAMP hub when the program start"
-msgstr ""
+msgstr "พยายามติดต่อฮับ SAMP โดยอัตโนมัติเมื่อเริ่มโปรแกรม"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
@@ -5427,6 +5507,10 @@ msgstr "ปลดล็อกแผนที่"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "ปรับปรุง"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5579,6 +5663,14 @@ msgstr ""
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "มุมมองขอบฟ้า"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "

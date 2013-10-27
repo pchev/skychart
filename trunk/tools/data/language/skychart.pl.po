@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-15 18:21+0000\n"
-"PO-Revision-Date: 2013-10-14 13:54+0000\n"
+"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"PO-Revision-Date: 2013-10-17 13:32+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 18:28+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -144,6 +144,10 @@ msgstr "Dodaj etykietę"
 msgid "Add the alternative names to the index"
 msgstr "Dodaj nazwy alternatywne do indeksu"
 
+#: u_translation.rsaddtoobservi
+msgid "Add %s to observing list"
+msgstr ""
+
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
 msgstr "Dopasuj jasność koloru"
@@ -171,6 +175,10 @@ msgstr "Ustawienia zaawansowane"
 #: u_translation.rsage
 msgid "Age"
 msgstr "Wiek"
+
+#: u_translation.rsairmass
+msgid "Airmass"
+msgstr ""
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -236,6 +244,10 @@ msgstr "Wysokość"
 #: u_translation.rsaltturns
 msgid "%sAlt turns:"
 msgstr "%sAlt obrotów:"
+
+#: u_translation.rsalways
+msgid "always"
+msgstr ""
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
@@ -1609,6 +1621,10 @@ msgstr "Czy chcesz przesunąć tam mapę?"
 msgid "Do you want to save the program settings now?"
 msgstr "Czy chcesz zapisać ustawienia programu?"
 
+#: u_translation.rsdoyouwanttos2
+msgid "Do you want to save it?"
+msgstr ""
+
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
 msgstr "Rysuj linię prezentującą prawidłowy ruch własny obiektów na następne"
@@ -2020,6 +2036,10 @@ msgstr "Koło szukacza"
 #: u_translation.rsfinderrectan
 msgid "Finder rectangle (CCD)"
 msgstr "Ramka szukacza (CCD)"
+
+#: u_translation.rsfirst
+msgid "First"
+msgstr ""
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2565,6 +2585,10 @@ msgstr "Niewidoczne na tej szerokości geograficznej"
 msgid "Is the coordinates epoch really %s?"
 msgstr "Czy współrzędne epoki to naprawdę %s?"
 
+#: u_translation.rsittaketoolon
+msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
+msgstr ""
+
 #: u_translation.rsjd
 msgid "JD:"
 msgstr "JD:"
@@ -2649,6 +2673,10 @@ msgstr "Język"
 msgid "Language selection"
 msgstr "Wybór języka"
 
+#: u_translation.rslast
+msgid "Last"
+msgstr ""
+
 #: u_translation.rslatinname
 msgid "Latin name"
 msgstr "Nazwa łacińska"
@@ -2708,6 +2736,10 @@ msgstr "lat świetlnych"
 #: u_translation.rslii
 msgid "LII"
 msgstr "LII"
+
+#: u_translation.rslimit
+msgid "Limit"
+msgstr ""
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2924,6 +2956,10 @@ msgstr "Manualny teleskop"
 #: u_translation.rsmap
 msgid "Map"
 msgstr "Mapa"
+
+#: u_translation.rsmarkobjectso
+msgid "Mark objects on the chart"
+msgstr ""
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3217,6 +3253,10 @@ msgstr "Sąsiad"
 msgid "Neptune"
 msgstr "Neptun"
 
+#: u_translation.rsnever
+msgid "never"
+msgstr ""
+
 #: u_translation.rsnewchart
 msgid "New chart"
 msgstr "Nowa mapa"
@@ -3232,6 +3272,10 @@ msgstr "Nowa etykieta"
 #: u_translation.rsnext
 msgid "Next   >>"
 msgstr "Dalej >>"
+
+#: u_translation.rsnext2
+msgid "Next"
+msgstr ""
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3437,6 +3481,10 @@ msgstr "Obserwatorium"
 msgid "Observatory database"
 msgstr "Miejsce obserwacji"
 
+#: u_translation.rsobservinglis
+msgid "Observing list"
+msgstr ""
+
 #: u_translation.rsobsolete
 msgid "Obsolete"
 msgstr "Przestarzałe"
@@ -3488,6 +3536,22 @@ msgstr "Wynik wyszukiwania \"online\""
 #: u_translation.rsonlynumbered
 msgid "Only numbered asteroids"
 msgstr "Tylko opisane planetoidy"
+
+#: u_translation.rsonlyobjectsw
+msgid "Only objects within airmass limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw2
+msgid "Only objects within airmass limits now"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw3
+msgid "Only objects within hour angle limits tonight"
+msgstr ""
+
+#: u_translation.rsonlyobjectsw4
+msgid "Only objects within hour angle limits now"
+msgstr ""
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3840,6 +3904,10 @@ msgstr "<<   Wstecz"
 #: u_translation.rspreview
 msgid "Preview"
 msgstr "Podgląd"
+
+#: u_translation.rsprevious
+msgid "Previous"
+msgstr ""
 
 #: u_translation.rsprint
 msgid "Print"
@@ -4763,7 +4831,7 @@ msgstr "Pokaż obrazy na mapie"
 
 #: u_translation.rsshowthesmall
 msgid "Show the faint satellites of the outer planets"
-msgstr ""
+msgstr "Pokaż ciemniejsze satelity zewnętrznych planet"
 
 #: u_translation.rsshowthispict
 msgid "Show this picture"
@@ -5189,6 +5257,10 @@ msgstr "Kompozycja"
 msgid "The number of records for this catalog is unknow. The download will be limited to %s records"
 msgstr "Liczba rekordów w tym katalogu nie jest znana. Pobranych zostanie %s rekordów."
 
+#: u_translation.rstheobserving
+msgid "The observing list %s was modified."
+msgstr ""
+
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
 msgstr "Występuje %s skatalogowanych obrazów"
@@ -5245,6 +5317,10 @@ msgstr "Jednostki czasu"
 msgid "Time zone"
 msgstr "Strefa czasowa"
 
+#: u_translation.rstitle
+msgid "Title"
+msgstr ""
+
 #: u_translation.rsto
 msgid "to"
 msgstr "do"
@@ -5300,6 +5376,10 @@ msgstr "Śledź teleskop"
 #: u_translation.rstransformati
 msgid "Transformation"
 msgstr "Transformacje"
+
+#: u_translation.rstransit
+msgid "Transit"
+msgstr ""
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5432,6 +5512,10 @@ msgstr "Odblokuj mapę"
 #: u_translation.rsupdate1
 msgid "Update"
 msgstr "Uaktualnij"
+
+#: u_translation.rsupdatecoordi
+msgid "Update coordinates"
+msgstr ""
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5584,6 +5668,14 @@ msgstr "Pokaż nagłówek"
 #: u_translation.rsviewhorizon
 msgid "View horizon"
 msgstr "Widok horyzontu"
+
+#: u_translation.rsviewobservin
+msgid "View observing list"
+msgstr ""
+
+#: u_translation.rsviewonchart
+msgid "View on chart"
+msgstr ""
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
