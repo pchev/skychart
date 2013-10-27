@@ -961,8 +961,9 @@ type
     SampAutoconnect,SampKeepTables,SampKeepImages: boolean;
     SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
     SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
-    InitObsList,ObslistAirmass: string;
-    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistMark: boolean;
+    ObsListLimitType: integer;
+    InitObsList,ObslistAirmass,ObslistHourAngle: string;
+    ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2,ObslistMark: boolean;
     constructor Create;
     destructor Destroy; override;
     procedure Assign(Source: Tconf_main);
@@ -2257,9 +2258,13 @@ var
   i: integer;
 begin
   InitObsList:=Source.InitObsList;
+  ObsListLimitType:=Source.ObsListLimitType;
   ObslistAirmass:=Source.ObslistAirmass;
   ObslistAirmassLimit1:=Source.ObslistAirmassLimit1;
   ObslistAirmassLimit2:=Source.ObslistAirmassLimit2;
+  ObslistHourAngle:=Source.ObslistHourAngle;
+  ObslistHourAngleLimit1:=Source.ObslistHourAngleLimit1;
+  ObslistHourAngleLimit2:=Source.ObslistHourAngleLimit2;
   ObslistMark:=Source.ObslistMark;
   SampAutoconnect:=Source.SampAutoconnect;
   SampKeepTables:=Source.SampKeepTables;

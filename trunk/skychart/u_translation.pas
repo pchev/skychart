@@ -1481,6 +1481,10 @@ resourcestring
   rsLast = 'Last';
   rsNext2 = 'Next';
   rsPrevious = 'Previous';
+  rsLimit = 'Limit';
+  rsTransit = 'Transit';
+  rsOnlyObjectsW3 = 'Only objects within hour angle limits tonight';
+  rsOnlyObjectsW4 = 'Only objects within hour angle limits now';
 
 implementation
 

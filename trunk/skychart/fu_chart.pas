@@ -284,6 +284,7 @@ type
     procedure Image1Paint(Sender: TObject);
     procedure SetScrollBar;
     procedure ShowCoord(x,y: Integer);
+    procedure UpdObsListTime(Sender: TObject);
   public
     { Public declarations }
     Image1 : TChartDrawingControl;
@@ -500,6 +501,7 @@ inherited Create(TheOwner);
  Image1.TabStop:=true;
  sc:=Tskychart.Create(Image1);
  sc.Image:=Image1.Canvas;
+ sc.onUpdObsListTime:=UpdObsListTime;
  // set initial value
  sc.cfgsc.racentre:=1.4;
  sc.cfgsc.decentre:=0;
@@ -5094,6 +5096,11 @@ procedure Tf_chart.CoordCharttoJ2000(var ra,de: double);
 begin
 if sc.cfgsc.ApparentPos then mean_equatorial(ra,de,sc.cfgsc,true,true);
 precession(sc.cfgsc.JDChart,jd2000,ra,de);
+end;
+
+procedure Tf_chart.UpdObsListTime(Sender: TObject);
+begin
+f_obslist.Refresh;
 end;
 
 end.

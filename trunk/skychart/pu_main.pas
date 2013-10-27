@@ -1448,10 +1448,14 @@ if cfgm.SampAutoconnect then begin
   SAMPStart(true);
 end;
 f_obslist.cfgsc:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
+f_obslist.PageControl1.ActivePageIndex:=cfgm.ObsListLimitType;
 f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
 f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
 f_obslist.CheckBox3.Checked:=cfgm.ObslistMark;
+f_obslist.HourAngleCombo.Text:=cfgm.ObslistHourAngle;
+f_obslist.CheckBox4.Checked:=cfgm.ObslistHourAngleLimit1;
+f_obslist.CheckBox5.Checked:=cfgm.ObslistHourAngleLimit2;
 if (cfgm.InitObsList<>'')and(FileExists(cfgm.InitObsList)) then begin
   f_obslist.FileNameEdit1.FileName:=cfgm.InitObsList;
   if pos(f_obslist.DefaultList,cfgm.InitObsList)>0 then f_obslist.LoadObsList;
@@ -5746,7 +5750,10 @@ cfgm.ObslistAirmass:=ReadString(section,'airmass',f_obslist.AirmassCombo.Text);
 cfgm.ObslistAirmassLimit1:=ReadBool(section,'airmasslimit1',f_obslist.CheckBox1.Checked);
 cfgm.ObslistAirmassLimit2:=ReadBool(section,'airmasslimit2',f_obslist.CheckBox2.Checked);
 cfgm.ObslistMark:=ReadBool(section,'markonchart',f_obslist.CheckBox3.Checked);
-
+cfgm.ObslistHourAngle:=ReadString(section,'hourangle',f_obslist.HourAngleCombo.Text);
+cfgm.ObslistHourAngleLimit1:=ReadBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
+cfgm.ObslistHourAngleLimit2:=ReadBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
+cfgm.ObsListLimitType:=ReadInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
 except
   ShowError('Error reading '+filename+' dss');
 end;
@@ -6462,6 +6469,10 @@ WriteString(section,'airmass',f_obslist.AirmassCombo.Text);
 WriteBool(section,'airmasslimit1',f_obslist.CheckBox1.Checked);
 WriteBool(section,'airmasslimit2',f_obslist.CheckBox2.Checked);
 WriteBool(section,'markonchart',f_obslist.CheckBox3.Checked);
+WriteString(section,'hourangle',f_obslist.HourAngleCombo.Text);
+WriteBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
+WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
+WriteInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
 
 Updatefile;
 end;

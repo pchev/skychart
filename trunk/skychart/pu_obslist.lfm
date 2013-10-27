@@ -119,12 +119,13 @@ object f_obslist: Tf_obslist
       Height = 78
       Top = 1
       Width = 369
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 3
       TabPosition = tpLeft
+      OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 74
@@ -158,7 +159,7 @@ object f_obslist: Tf_obslist
         object AirmassCombo: TComboBox
           Left = 112
           Height = 23
-          Top = -2
+          Top = 1
           Width = 72
           ItemHeight = 0
           ItemIndex = 2
@@ -179,13 +180,66 @@ object f_obslist: Tf_obslist
           Left = 16
           Height = 16
           Top = 3
-          Width = 45
-          Caption = 'Airmass'
+          Width = 30
+          Caption = 'Limit'
           ParentColor = False
         end
       end
       object TabSheet2: TTabSheet
         Caption = 'Transit'
+        ClientHeight = 74
+        ClientWidth = 311
+        object CheckBox4: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 22
+          Width = 276
+          Caption = 'Only objects within hour angle limits tonight'
+          OnChange = CheckBox4Change
+          TabOrder = 0
+        end
+        object Label3: TLabel
+          Left = 16
+          Height = 16
+          Top = 3
+          Width = 30
+          Caption = 'Limit'
+          ParentColor = False
+        end
+        object HourAngleCombo: TComboBox
+          Left = 112
+          Height = 23
+          Top = 1
+          Width = 72
+          ItemHeight = 0
+          ItemIndex = 1
+          Items.Strings = (
+            '1.0'
+            '2.0'
+            '3.0'
+            '4..0'
+          )
+          OnChange = HourAngleComboChange
+          TabOrder = 1
+          Text = '2.0'
+        end
+        object Label4: TLabel
+          Left = 192
+          Height = 16
+          Top = 3
+          Width = 37
+          Caption = 'Label4'
+          ParentColor = False
+        end
+        object CheckBox5: TCheckBox
+          Left = 16
+          Height = 23
+          Top = 46
+          Width = 256
+          Caption = 'Only objects within hour angle limits now'
+          OnChange = CheckBox5Change
+          TabOrder = 2
+        end
       end
     end
   end
