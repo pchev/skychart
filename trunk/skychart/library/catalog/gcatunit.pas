@@ -911,6 +911,9 @@ ctBin : begin  // binary catalog
         if catheader.flen[12]>0 then lin.neb.morph:=GetRecString(12);
         if catheader.flen[13]>0 then lin.neb.comment:=GetRecString(13);
         if catheader.flen[14]>0 then lin.neb.color:=GetRecCard(14);
+        if lin.neb.mag>90 then lin.neb.valid[vnMag]:=false;
+        if lin.neb.sbr>90 then lin.neb.valid[vnSbr]:=false;
+        if lin.neb.pa<-900 then lin.neb.valid[vnPa]:=false;
         end;
     rtlin : begin  // outlines 1
         if catheader.flen[3]>0 then lin.outlines.id:=GetRecString(3);
