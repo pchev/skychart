@@ -1,5 +1,5 @@
 object f_catgen: Tf_catgen
-  Left = 381
+  Left = 364
   Height = 479
   Top = 94
   Width = 503
@@ -11,7 +11,7 @@ object f_catgen: Tf_catgen
   OnShow = FormShow
   ParentFont = True
   Position = poDefaultPosOnly
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object Image1: TImage
     Left = 0
     Height = 438
@@ -2899,10 +2899,10 @@ object f_catgen: Tf_catgen
     Height = 438
     Top = 0
     Width = 389
-    ActivePage = TabSheet1
+    ActivePage = TabSheet5
     Align = alClient
     ShowTabs = False
-    TabIndex = 0
+    TabIndex = 4
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -2913,7 +2913,7 @@ object f_catgen: Tf_catgen
         Left = 20
         Height = 16
         Top = 6
-        Width = 228
+        Width = 249
         Caption = 'Select the type of object in your catalog'
         ParentColor = False
         WordWrap = True
@@ -2922,7 +2922,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 16
         Top = 224
-        Width = 104
+        Width = 112
         Caption = 'Input Catalog files'
         ParentColor = False
       end
@@ -2930,7 +2930,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 16
         Top = 164
-        Width = 112
+        Width = 121
         Caption = 'Catalog short name'
         ParentColor = False
       end
@@ -2938,7 +2938,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 16
         Top = 192
-        Width = 105
+        Width = 115
         Caption = 'Catalog long name'
         ParentColor = False
       end
@@ -3041,7 +3041,7 @@ object f_catgen: Tf_catgen
       end
       object Edit4: TEdit
         Left = 145
-        Height = 23
+        Height = 24
         Top = 160
         Width = 49
         MaxLength = 4
@@ -3049,7 +3049,7 @@ object f_catgen: Tf_catgen
       end
       object Edit5: TEdit
         Left = 145
-        Height = 23
+        Height = 24
         Top = 186
         Width = 201
         MaxLength = 50
@@ -3094,7 +3094,7 @@ object f_catgen: Tf_catgen
       end
       object Edit6: TEdit
         Left = 145
-        Height = 23
+        Height = 24
         Top = 276
         Width = 201
         TabOrder = 5
@@ -3104,7 +3104,7 @@ object f_catgen: Tf_catgen
         Left = 14
         Height = 16
         Top = 280
-        Width = 73
+        Width = 79
         Caption = 'Update URL :'
         ParentColor = False
         Visible = False
@@ -3520,10 +3520,11 @@ object f_catgen: Tf_catgen
           'RA'
           'DEC'
         )
-        ItemHeight = 21
+        ItemHeight = 0
         OnKeyUp = CheckListBox1KeyUp
         OnMouseUp = CheckListBox1MouseUp
         TabOrder = 0
+        TopIndex = -1
         Data = {
           020000000000
         }
@@ -3714,24 +3715,24 @@ object f_catgen: Tf_catgen
       ClientWidth = 385
       ImageIndex = 4
       object Label9: TLabel
-        Left = 24
+        Left = 22
         Height = 16
-        Top = 24
-        Width = 274
+        Top = 6
+        Width = 302
         Caption = 'Indicate the string identifier for each type of object :'
         ParentColor = False
       end
       object StringGrid1: TStringGrid
         Left = 24
-        Height = 292
-        Top = 64
+        Height = 368
+        Top = 30
         Width = 320
         ColCount = 2
         DefaultColWidth = 120
         DefaultRowHeight = 18
         GridLineWidth = 0
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goAlwaysShowEditor]
-        RowCount = 15
+        RowCount = 20
         TabOrder = 0
         TitleFont.Height = -11
         ColWidths = (
@@ -3740,9 +3741,9 @@ object f_catgen: Tf_catgen
         )
       end
       object Button4: TButton
-        Left = 134
+        Left = 132
         Height = 25
-        Top = 376
+        Top = 406
         Width = 75
         BorderSpacing.InnerBorder = 4
         Caption = 'Return'
@@ -3757,9 +3758,9 @@ object f_catgen: Tf_catgen
       ImageIndex = 5
       object Label14: TLabel
         Left = 22
-        Height = 14
+        Height = 16
         Top = 40
-        Width = 225
+        Width = 283
         Caption = 'Indicate how to recognize the object size unit :'
         ParentColor = False
       end
