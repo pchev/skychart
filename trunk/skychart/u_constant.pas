@@ -632,7 +632,7 @@ const
     'HyperLeda'));
 
 
-  DefaultffmpegOptions = '-b 18000k -bt 10000k';
+  DefaultffmpegOptions = '-b:v 18000k -bt 10000k';
 {$ifdef linux}
   DefaultFontName = 'Helvetica';
   DefaultFontFixed = 'Courier';
