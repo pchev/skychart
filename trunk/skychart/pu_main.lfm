@@ -1,12 +1,12 @@
 object f_main: Tf_main
   Left = 316
-  Height = 549
+  Height = 600
   Top = 120
-  Width = 904
+  Width = 1024
   ActiveControl = PanelTop
   Caption = 'Cartes du Ciel'
-  ClientHeight = 526
-  ClientWidth = 904
+  ClientHeight = 577
+  ClientWidth = 1024
   KeyPreview = True
   Menu = MainMenu1
   OnActivate = FormActivate
@@ -20,12 +20,12 @@ object f_main: Tf_main
   LCLVersion = '1.0.12.0'
   object PanelLeft: TPanel
     Left = 0
-    Height = 414
+    Height = 465
     Top = 78
     Width = 28
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 414
+    ClientHeight = 465
     ClientWidth = 28
     Font.Height = 10
     FullRepaint = False
@@ -33,7 +33,7 @@ object f_main: Tf_main
     TabOrder = 2
     object ToolBar2: TToolBar
       Left = 0
-      Height = 414
+      Height = 465
       Top = 0
       Width = 28
       Align = alClient
@@ -133,19 +133,19 @@ object f_main: Tf_main
     end
   end
   object PanelRight: TPanel
-    Left = 876
-    Height = 414
+    Left = 996
+    Height = 465
     Top = 78
     Width = 28
     Align = alRight
     BevelOuter = bvNone
-    ClientHeight = 414
+    ClientHeight = 465
     ClientWidth = 28
     FullRepaint = False
     TabOrder = 3
     object ToolBar3: TToolBar
       Left = 0
-      Height = 164
+      Height = 215
       Top = 250
       Width = 28
       Align = alClient
@@ -373,12 +373,12 @@ object f_main: Tf_main
   object PanelBottom: TPanel
     Left = 0
     Height = 34
-    Top = 492
-    Width = 904
+    Top = 543
+    Width = 1024
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 34
-    ClientWidth = 904
+    ClientWidth = 1024
     FullRepaint = False
     TabOrder = 4
     object Shape1: TShape
@@ -428,30 +428,30 @@ object f_main: Tf_main
       Left = 222
       Height = 34
       Top = 0
-      Width = 682
+      Width = 802
       Align = alClient
       Alignment = taLeftJustify
       BevelOuter = bvNone
       ClientHeight = 34
-      ClientWidth = 682
+      ClientWidth = 802
       FullRepaint = False
       TabOrder = 1
       object LPanels1: TPanel
         Left = 0
         Height = 34
         Top = 0
-        Width = 682
+        Width = 802
         Align = alClient
         Alignment = taLeftJustify
         BevelOuter = bvNone
         ClientHeight = 34
-        ClientWidth = 682
+        ClientWidth = 802
         TabOrder = 0
         object P1L1: TLabel
           Left = 0
           Height = 34
           Top = 0
-          Width = 682
+          Width = 802
           Align = alClient
           AutoSize = False
           ParentColor = False
@@ -463,11 +463,11 @@ object f_main: Tf_main
     Left = 0
     Height = 78
     Top = 0
-    Width = 904
+    Width = 1024
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 78
-    ClientWidth = 904
+    ClientWidth = 1024
     FullRepaint = False
     TabOrder = 1
     TabStop = True
@@ -475,7 +475,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 25
-      Width = 904
+      Width = 1024
       Images = ImageNormal
       ParentShowHint = False
       ShowHint = True
@@ -582,65 +582,65 @@ object f_main: Tf_main
         OnMouseUp = ToolButtonListObjMouseUp
       end
       object ToolButtonCal: TToolButton
-        Left = 475
+        Left = 498
         Top = 2
         Action = Calendar
       end
       object ToolButton35: TToolButton
-        Left = 521
+        Left = 544
         Top = 2
         Width = 5
         ImageIndex = 8
         Style = tbsDivider
       end
       object ToolButtonTdec: TToolButton
-        Left = 526
+        Left = 549
         Top = 2
         Action = TimeDec
       end
       object ToolButtonTnow: TToolButton
-        Left = 549
+        Left = 572
         Top = 2
         Action = TimeReset
       end
       object ToolButtonTinc: TToolButton
-        Left = 572
+        Left = 595
         Top = 2
         Action = TimeInc
       end
       object ToolButton39: TToolButton
-        Left = 760
+        Left = 783
         Top = 2
         Width = 5
         ImageIndex = 45
         Style = tbsDivider
       end
       object TConnect: TToolButton
-        Left = 765
+        Left = 788
         Top = 2
         Action = TelescopeConnect
         OnMouseUp = TConnectMouseUp
       end
       object TSlew: TToolButton
-        Left = 811
+        Left = 834
         Top = 2
         Action = TelescopeSlew
         OnMouseUp = TConnectMouseUp
       end
       object TSync: TToolButton
-        Left = 788
+        Left = 811
         Top = 2
         Action = TelescopeSync
         OnMouseUp = TConnectMouseUp
       end
       object ToolButton6: TToolButton
-        Left = 857
+        Left = 880
         Top = 2
         Width = 5
         Style = tbsDivider
       end
       object ToolButton7: TToolButton
-        Left = 862
+        Left = 885
         Top = 2
         Width = 10
         AutoSize = True
@@ -653,13 +653,13 @@ object f_main: Tf_main
         Style = tbsDivider
       end
       object ToolButton11: TToolButton
-        Left = 675
+        Left = 698
         Top = 2
         Width = 5
         Style = tbsDivider
       end
       object ToolButton12: TToolButton
-        Left = 670
+        Left = 693
         Top = 2
         Width = 5
         Style = tbsDivider
@@ -812,7 +812,7 @@ object f_main: Tf_main
         end
       end
       object TimeU: TComboBox
-        Left = 680
+        Left = 703
         Height = 25
         Hint = 'Time Units'
         Top = 2
@@ -826,7 +826,7 @@ object f_main: Tf_main
         TabOrder = 2
       end
       object ChildControl: TPanel
-        Left = 874
+        Left = 994
         Height = 23
         Top = 2
         Width = 30
@@ -858,7 +858,7 @@ object f_main: Tf_main
         end
       end
       object TimeVal: TUpDown
-        Left = 653
+        Left = 676
         Height = 22
         Top = 2
         Width = 17
@@ -871,14 +871,14 @@ object f_main: Tf_main
         Wrap = False
       end
       object EditTimeVal: TEdit
-        Left = 618
+        Left = 641
         Height = 23
         Top = 2
         Width = 35
         TabOrder = 5
       end
       object ToolButton13: TToolButton
-        Left = 595
+        Left = 618
         Top = 2
         Caption = '>>'
         ImageIndex = 88
@@ -887,24 +887,30 @@ object f_main: Tf_main
         Style = tbsCheck
       end
       object ToolButton14: TToolButton
-        Left = 498
+        Left = 521
         Top = 2
         Caption = 'ToolButton14'
         ImageIndex = 94
         OnClick = PlanetInfoClick
       end
       object TAbortSlew: TToolButton
-        Left = 834
+        Left = 857
         Top = 2
         Action = TelescopeAbortSlew
         OnMouseUp = TConnectMouseUp
+      end
+      object ToolButtonObsList: TToolButton
+        Left = 475
+        Top = 2
+        ImageIndex = 98
+        OnClick = MenuObslistClick
       end
     end
     object ToolBar4: TToolBar
       Left = 0
       Height = 28
       Top = 50
-      Width = 904
+      Width = 1024
       Align = alBottom
       ButtonHeight = 24
       Caption = 'ToolBar4'
@@ -1140,7 +1146,7 @@ object f_main: Tf_main
       Left = 0
       Height = 25
       Top = 0
-      Width = 904
+      Width = 1024
       TabStop = False
       OnChange = TabControl1Change
       Align = alTop
@@ -7641,7 +7647,7 @@ object f_main: Tf_main
     left = 288
     top = 176
     Bitmap = {
-      4C69620000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
+      4C69630000001000000010000000EBEBEBFFEBEBEBFFEF94B5FF9C6B6BFFEF94
       B5FF9C6B6BFFEF94B5FF9C6B6BFFE78CB5FFA56B6BFFE78CB5FF945A63FFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFFEBEB
       EBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFFEBEBEBFF9C6B6BFFEBEBEBFF945A
@@ -10777,7 +10783,39 @@ object f_main: Tf_main
       FD00FEFEFD00FEFEFD008A642EFF88632DFFFEFEFD00FEFEFD00FEFEFD00FEFE
       FD00FEFEFD00FEFEFD00FEFEFD00FEFEFD00FEFEFD00FEFEFD00FEFEFD00FEFE
       FD00FEFEFD00FEFEFD00DDC19AFFFEFEFD00FEFEFD00FEFEFD00FEFEFD00FEFE
-      FD00FEFEFD00FEFEFD00FEFEFD00
+      FD00FEFEFD00FEFEFD00FEFEFD00F6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6
+      F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6
+      F7FFF6F6F7FFF6F6F7FFF6F6F7FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6F7FFF6F6
+      F6FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6F6FFF6F6
+      F7FFF6F6F6FFF6F6F6FFF6F6F6FFF5F5F5FFF5F5F5FFF6F6F6FFEEEEEEFFF5F5
+      F6FFF3F3F3FFF3F3F3FFF5F5F5FFF5F5F5FFF2F2F2FFF2F2F2FFF5F5F6FFEEEE
+      EEFFF6F6F6FFF5F5F5FFF5F5F5FFF4F4F5FFF6F6F7FFFFFDFFFFD1CFD2FFFFFA
+      FFFFEFEAEEFFEEEAEDFFFCF6FCFFFCF6FBFFEBE7EAFFEBE7EBFFFFFAFFFFD2D0
+      D2FFFFFCFFFFF6F6F7FFF4F4F5FFF5F5F5FFC8C3C8FF2E8236FF326237FF24A8
+      3BFF319546FF3BA357FF3FC567FF41C86BFF3CA058FF34954AFF28AE43FF3463
+      39FF31863BFFC8C3C8FFF5F5F5FFF4F4F5FFBEBDBEFF317B34FF2C9E35FF32A0
+      3EFF36A947FF3AAE4DFF3CAF51FF3DB052FF3DB152FF3FAF51FF3CA749FF3DA8
+      46FF377F3BFFBEBDBEFFF4F4F5FFF2F2F3FFB5B5B5FFAAB7AAFFD6E9D6FFD5E8
+      D5FFD3E6D4FFD2E5D3FFCDE0CEFFCDDFCDFFCCDFCDFFD0E0CFFFD5D8CDFFD4E7
+      D4FFA7B4A6FFB5B6B6FFF2F2F3FFEFEFEFFFA8A8A9FFCFCFCFFFFCFCFCFFF8F8
+      F8FFF1F0F1FFF1F0F0FFEDEDEDFFEDEDEDFFEBEBEBFFF1EEF0FFF9DFEDFFF8F9
+      F8FFCCCCCCFFA8A8A9FFEFEFEFFFEBEBECFF9B9B9AFFDADADAFFFAFAFAFFF5F5
+      F5FFEBEBEBFFEEEEEEFFEBEBEBFFEDEDEDFFEBEBEBFFEFEFEEFFF8DCE9FFF5F7
+      F6FFD6D6D6FF9A9A99FFEBEBECFFE7E7E7FF8E8E8EFFE7E7E7FFF7F7F7FFF1F1
+      F1FFE7E7E7FFEAEAEAFFE8E8E8FFE9E9E9FFE7E7E7FFEAEDECFFF8D4E6FFF4F3
+      F3FFE2E3E2FF8D8D8DFFE7E7E7FFE3E3E4FF838383FFF5F5F5FFF5F5F5FFF0F0
+      F0FFE8E8E8FFEAEAEAFFE8E8E8FFE9E9E9FFECECECFFECEDEDFFF4E1EBFFF2EE
+      F0FFF0F0F0FF818182FFE3E3E4FFE1E1E2FF7E7E7EFFFEFEFEFFF6F6F6FFF3F3
+      F3FFF0F0F0FFF1F1F1FFEFEFEFFFF0F0F0FFF2F2F2FFF2F2F2FFF3EFF1FFF2F0
+      F1FFF9F9F9FF7B7B7BFFE1E1E1FFDDDDDDFF545454FFA9A9A9FFA4A4A4FFA4A4
+      A4FFA4A4A4FFA3A3A3FFA4A4A4FFA3A3A3FFA2A2A2FFA3A3A3FFA2A3A3FFA3A3
+      A3FFA7A7A7FF535353FFDDDDDDFFC1C1C2FF232323FF323232FF323232FF3333
+      33FF333333FF333333FF333333FF333333FF333333FF333333FF333333FF3333
+      33FF323232FF232323FFC1C1C2FFDBDBDCFFC0C0C1FFC2C2C3FFC2C2C3FFC3C3
+      C3FFC3C3C4FFC3C3C4FFC3C3C4FFC3C3C4FFC3C3C4FFC3C3C4FFC2C2C4FFC2C2
+      C3FFC2C2C3FFC0C0C1FFDBDBDCFFECECED00EDEDEEFFEDEDEEFFEDEDEEFFEDED
+      EEFFEDEDEEFFEDEDEEFFEDEDEEFFEDEDEEFFEDEDEEFFEDEDEEFFEDEDEEFFEDED
+      EEFFEDEDEEFFEDEDEEFFECECED00
     }
   end
   object PopupMenu1: TPopupMenu
