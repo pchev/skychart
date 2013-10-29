@@ -900,7 +900,7 @@ begin
   CheckBox3.Checked:=false;
   DirectoryEdit1.Directory:=HomeDir;
   Edit1.Text:='skychart';
-  Edit5.Text:='.mp4';
+  Edit5.Text:='.avi';
   fpsedit.Value:=10;
   ComboBox1.ItemIndex:=0;
   Edit2.Text:=DefaultffmpegOptions;
