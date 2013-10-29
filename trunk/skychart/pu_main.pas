@@ -7871,9 +7871,9 @@ end;
 
 procedure Tf_main.ImageSetFocus(Sender: TObject);
 begin
-// to restore focus to the chart that as no text control
-if VerboseMsg then
- WriteTrace('ImageSetFocus');
+if ActiveControl<>quicksearch then begin // do not steal focus when typing in the quicksearch
+  if VerboseMsg then WriteTrace('ImageSetFocus');
+  // to restore focus to the chart that as no text control
   ActiveControl:=nil;
   quicksearch.Enabled:=false;   // add all main form focusable control here
   EditTimeVal.Enabled:=false;
@@ -7884,6 +7884,7 @@ if VerboseMsg then
   TimeVal.Enabled:=true;
   TimeU.Enabled:=true;
   if sender is Tf_chart then ActiveControl:=Tf_chart(sender).Image1;
+end;
 end;
 
 procedure Tf_main.GetTCPInfo(i:integer; var buf:string);
