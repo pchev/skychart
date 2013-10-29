@@ -1487,6 +1487,7 @@ resourcestring
   rsOnlyObjectsW4 = 'Only objects within hour angle limits now';
   rsViewOnChart = 'View on chart';
   rsUpdateCoordi = 'Update coordinates';
+  rsDuplicate = 'Duplicate';
 
 implementation
 

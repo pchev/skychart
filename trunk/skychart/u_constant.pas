@@ -353,9 +353,9 @@ const
     'Dim', 'Unit', 'pa', 'rv', 'class', 'desc', '', '', 'Str1', 'Str2', 'Str3',
     'Str4', 'Str5', 'Str6', 'Str7', 'Str8', 'Str9', 'Str10', 'Num1', 'Num2',
     'Num3', 'Num4', 'Num5', 'Num6', 'Num7', 'Num8', 'Num9', 'Num10');
-  nebtype: array[1..18] of
+  nebtype: array[1..19] of
     string = (' - ', ' ? ', ' Gx', ' OC', ' Gb', ' Pl', ' Nb', 'C+N', '  *', ' D*',
-    '***', 'Ast', ' Kt', 'Gcl', 'Drk', 'Cat', 'Cat', 'Cat');
+    '***', 'Ast', ' Kt', 'Gcl', 'Drk', 'Cat', 'Cat', 'Cat', 'Dup');
 
   //Observatory database
   CdcMinLocid = '99999999';

@@ -202,7 +202,7 @@ type
     catrec,catsize : integer;
     colorlst : array[1..10] of string;
     Linelst : array[1..4] of string;
-    neblst  : array[1..15] of string;
+    neblst  : array[1..19] of string;
     nebunit : array[1..3]  of string;
     altname : array[1..l_sup] of byte;
     altprefix : array[1..l_sup] of byte;
@@ -230,7 +230,7 @@ type
     Function GetFloat(p : integer; default :double) : double ;
     Function GetInt(p : integer) : Integer;
     Function GetString(p : integer) : string;
-    Function GetNebType(p : integer) : Shortint;
+    Function GetNebType(p : integer) : byte;
     Function GetNebUnit(p : integer) : Smallint;
     Function GetLineType(p : integer) : Smallint;
     Function Getcolor(p : integer) : Tcolor;
@@ -304,7 +304,7 @@ const
   lab_outlines : array[1..l_outlines] of string = ('Id','LineOp','LineWidth','LineColor','Drawing','desc');
   lab_string  : array[1..l_sup] of string = ('Str1','Str2','Str3','Str4','Str5','Str6','Str7','Str8','Str9','Str10');
   lab_num     : array[1..l_sup] of string = ('Num1','Num2','Num3','Num4','Num5','Num6','Num7','Num8','Num9','Num10');
-  nebtype : array[1..18] of integer =(1,12,2,3,4,5,13,6,11,7,8,9,10,-1,0,14,15,16);
+  nebtype : array[1..19] of integer =(1,12,2,3,4,5,13,6,11,7,8,9,10,255,0,14,15,16,17);
   linetype : array[1..5] of byte =(0,1,2,3,4);
   nebunits: array[1..3]  of integer =(1,60,3600);
   pageFiles=0;
@@ -497,6 +497,10 @@ cells[0, 12]:=rsTripleStar;
 cells[0, 13]:=rsAsterism;
 cells[0, 14]:=rsNonExistant;
 cells[0, 15]:=rsUnknow;
+cells[0, 16]:=rsCircle;
+cells[0, 17]:=rsSquare;
+cells[0, 18]:=rsLosange;
+cells[0, 19]:=rsDuplicate;
 end;
 with stringgrid2 do begin
 cells[0, 0]:=rsObjectSizeUn;
@@ -541,7 +545,7 @@ for i:=0 to 40 do begin
    calc[i,2]:=0;
 end;
 with stringgrid1 do begin
-rowcount:=16;
+rowcount:=20;
 cells[1,1]:='Gx,GALXY,QUASR';
 cells[1,2]:='GALCL';
 cells[1,3]:='OC,OPNCL,LMCOC,SMCOC';
@@ -557,6 +561,10 @@ cells[1,12]:='***,3STAR';
 cells[1,13]:='Ast,ASTER,4STAR,5STAR,6STAR,7STAR,8STAR';
 cells[1,14]:='-,PD,NONEX';
 cells[1,15]:=' ,?';
+cells[1,16]:='Circle';
+cells[1,17]:='Rectangle';
+cells[1,18]:='Lozenge';
+cells[1,19]:='Dup';
 end;
 with stringgrid2 do begin
 cells[1,1]:='d,°';
@@ -1305,16 +1313,16 @@ begin
 result:=copy(inl,textpos[p,1],textpos[p,2]);
 end;
 
-Function Tf_catgen.GetNebType(p : integer) : Shortint;
+Function Tf_catgen.GetNebType(p : integer) : byte;
 var i : integer;
     buf:string;
 begin
 buf:=trim(copy(inl,textpos[p,1],textpos[p,2]));
-if buf='' then result:=-1
+if buf='' then result:=255
 else begin
-result:=-1;
+result:=255;
 buf:=buf+',';
-for i:=1 to 15 do begin
+for i:=1 to 19 do begin
   if pos(buf,neblst[i])>0 then begin
      result:=nebtype[i];
      break;
@@ -2004,7 +2012,7 @@ try
   destdir:=slash(directoryedit1.Text);
   panel1.enabled:=false;
   if not directoryexists(destdir) then Forcedirectories(destdir);
-  for i:=1 to 15 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
+  for i:=1 to 19 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
   for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
   for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
   for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';
@@ -2131,7 +2139,7 @@ if savedialog1.execute then begin
   ini.writeBool('Page4','altindex',checkbox4.checked);
   ini.writeBool('Page4','prefname',checkbox8.checked);
   ini.writeBool('Page4','append',checkbox6.checked);
-  with stringgrid1 do for i:=1 to 15 do
+  with stringgrid1 do for i:=1 to 16 do
        ini.writeString('Page5','nebtype'+inttostr(i),cells[1,i]);
   with stringgrid2 do for i:=1 to 3 do
        ini.writeString('Page5','unit'+inttostr(i),cells[1,i]);
@@ -2230,7 +2238,7 @@ if opendialog1.execute then begin
   checkbox4.checked:=ini.readBool('Page4','altindex',checkbox4.checked);
   checkbox8.checked:=ini.readBool('Page4','prefname',checkbox8.checked);
   checkbox6.checked:=ini.readBool('Page4','append',checkbox6.checked);
-  with stringgrid1 do for i:=1 to 15 do
+  with stringgrid1 do for i:=1 to 16 do
        cells[1,i]:=ini.readString('Page5','nebtype'+inttostr(i),cells[1,i]);
   with stringgrid2 do for i:=1 to 3 do
        cells[1,i]:=ini.readString('Page5','unit'+inttostr(i),cells[1,i]);
@@ -2464,7 +2472,7 @@ var i:integer;
 begin
 abort:=false;
 chdir(appdir);
-for i:=1 to 15 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
+for i:=1 to 19 do neblst[i]:=trim(stringgrid1.cells[1,i])+',';
 for i:=1 to 3  do nebunit[i]:=trim(stringgrid2.cells[1,i])+',';
 for i:=1 to 3  do linelst[i]:=trim(stringgrid3.cells[1,i])+',';
 for i:=1 to 10  do colorlst[i]:=trim(stringgrid4.cells[0,i])+',';

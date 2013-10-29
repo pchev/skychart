@@ -973,6 +973,8 @@ begin
             PlotDSORectangle(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
           16 : // lozenge
             PlotDSOlozenge(Axx,Ayy,Adim,Ama,Asbr,Apixscale,Atyp,forcecolor,col);
+          17 : // Duplicate
+               ;// do not plot anything
           101..111: // Planet from ds2000
             PlotPlanet4(round(Axx),round(Ayy),Atyp-100,Apixscale,0,WhiteBg);
           112:  // Asteroid from ds2000

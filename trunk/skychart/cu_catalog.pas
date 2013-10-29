@@ -3615,6 +3615,7 @@ else if txt='?' then txt:=rsUnknowObject
 else if txt='' then txt:=rsUnknowObject
 else if txt='-' then txt:=rsPlateDefect
 else if txt='PD' then txt:=rsPlateDefect
+else if txt='Dup' then txt:=rsDuplicate
 else if txt='S*' then txt:=rsStar
 else if txt='P' then txt:=rsPlanet
 else if txt='DSP' then txt:=rsPlanet
