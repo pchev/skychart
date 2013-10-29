@@ -165,6 +165,7 @@ type
      Procedure LoadHorizonPicture(fname:string);
      Procedure LoadStarName(fpath,lang:string);
      function  LongLabelGreek(txt : string) : string;
+     function  GenitiveConst(txt : string) : string;
      function  LongLabelConst(txt : string) : string;
      function  LongLabel(txt:string):string;
      function  LongLabelObj(txt:string):string;
@@ -3732,6 +3733,19 @@ txt:=uppercase(trim(txt));
 for i:=0 to cfgshr.ConstelNum-1 do begin
   if txt=UpperCase(cfgshr.ConstelName[i,1]) then begin
      txt:=cfgshr.ConstelName[i,2];
+     break;
+   end;
+end;
+result:=txt;
+end;
+
+Function Tcatalog.GenitiveConst(txt : string) : string;
+var i : integer;
+begin
+txt:=uppercase(trim(txt));
+for i:=1 to maxconst do begin
+  if txt=constel[i,1] then begin
+     txt:=capitalize(constel[i,3]);
      break;
    end;
 end;
