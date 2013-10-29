@@ -121,6 +121,7 @@ function TzUTC2GMT(utctz:string):string;
 function ExtractSubPath(basepath, path: string):string;
 function RoundInt(x:double): integer;
 function GetThreadCount: integer;
+function capitalize(txt:string):string;
 {$ifdef unix}
 function ExecFork(cmd:string;p1:string='';p2:string='';p3:string='';p4:string='';p5:string=''):integer;
 function CdcSigAction(const action: pointer):boolean;
@@ -2265,6 +2266,22 @@ end;
 function GetThreadCount: integer;
 begin
 result:=GetSystemThreadCount;
+end;
+
+function capitalize(txt:string):string;
+var i: integer;
+    up: boolean;
+    c: string;
+begin
+result:='';
+up:=true;
+for i:=1 to length(txt) do begin
+  c:=copy(txt,i,1);
+  if up then c:=UpperCase(c)
+        else c:=LowerCase(c);
+  result:=result+c;
+  up:=(c=' ')or(c='-');
+end;
 end;
 
 end.

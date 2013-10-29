@@ -2817,9 +2817,9 @@ if isStar then begin
   s2:=GetDetailValue('Bayer:');
   s3:=GetDetailValue('Fl:');
   if (s1>'')and(s2>'') then begin
-     oname:=sc.catalog.LongLabelGreek(s2)+' '+sc.catalog.LongLabelConst(s1);
+     oname:=sc.catalog.LongLabelGreek(s2)+' '+sc.catalog.GenitiveConst(s1);
   end else if (s1>'')and(s3>'') then begin
-     oname:=s3+' '+sc.catalog.LongLabelConst(s1);
+     oname:=s3+' '+sc.catalog.GenitiveConst(s1);
   end;
 end;
 txt:=txt+html_b+oname+htms_b+html_br;
