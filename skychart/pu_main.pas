@@ -77,6 +77,7 @@ type
     ToolButton14: TToolButton;
     TAbortSlew: TToolButton;
     ToolButton15: TToolButton;
+    ToolButtonObsList: TToolButton;
     ToolButtonRot180: TToolButton;
     ToolButtonCompass: TToolButton;
     ToolButtonScale: TToolButton;
@@ -6689,6 +6690,7 @@ SaveImage1.caption:='&'+rsSaveImage;
 FileCloseItem.caption:='&'+rsCloseChart;
 ResetDefaultChart.Caption:='&'+rsResetChartAn+Ellipsis;
 Calendar1.caption:='&'+rsCalendar+Ellipsis;
+ToolButtonObsList.Hint:=rsObservingLis;
 MenuObslist.Caption:='&'+rsObservingLis;
 VariableStar1.Caption:='&'+rsVariableStar2+Ellipsis;
 MenuItem35.Caption:=rsConnectToSAM;
