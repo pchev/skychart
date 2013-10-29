@@ -1488,6 +1488,7 @@ resourcestring
   rsViewOnChart = 'View on chart';
   rsUpdateCoordi = 'Update coordinates';
   rsDuplicate = 'Duplicate';
+  rsForceColor = 'Force color';
 
 implementation
 

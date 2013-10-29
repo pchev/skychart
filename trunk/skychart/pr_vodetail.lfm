@@ -1,7 +1,7 @@
 object f_vodetail: Tf_vodetail
-  Left = 855
+  Left = 353
   Height = 458
-  Top = 182
+  Top = 144
   Width = 759
   HorzScrollBar.Page = 758
   VertScrollBar.Page = 426
@@ -10,7 +10,7 @@ object f_vodetail: Tf_vodetail
   ClientHeight = 458
   ClientWidth = 759
   OnCreate = FormCreate
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object MainPanel: TPanel
     Left = 0
     Height = 458
@@ -33,16 +33,16 @@ object f_vodetail: Tf_vodetail
         Left = 7
         Height = 16
         Top = 13
-        Width = 31
-        Caption = 'Table'
+        Width = 49
+        Caption = 'Table......'
         ParentColor = False
       end
       object Rows: TLabel
         Left = 175
         Height = 16
         Top = 13
-        Width = 31
-        Caption = 'Rows'
+        Width = 58
+        Caption = 'Rows.........'
         ParentColor = False
       end
       object tn: TEdit
@@ -73,7 +73,7 @@ object f_vodetail: Tf_vodetail
         Left = 559
         Height = 25
         Top = 96
-        Width = 134
+        Width = 160
         BorderSpacing.InnerBorder = 4
         Caption = 'Download catalog'
         OnClick = GetData
@@ -81,7 +81,7 @@ object f_vodetail: Tf_vodetail
       end
       object RadioGroup1: TRadioGroup
         Left = 327
-        Height = 94
+        Height = 103
         Top = 57
         Width = 209
         AutoFill = True
@@ -93,12 +93,12 @@ object f_vodetail: Tf_vodetail
         ChildSizing.ShrinkVertical = crsScaleChilds
         ChildSizing.Layout = cclLeftToRightThenTopToBottom
         ChildSizing.ControlsPerLine = 1
-        ClientHeight = 90
+        ClientHeight = 99
         ClientWidth = 205
         Items.Strings = (
-          'Cannot draw                        .'
-          'Draw as star                        .'
-          'Draw as DSO                        .'
+          'Cannot draw                 .'
+          'Draw as star                 .'
+          'Draw as DSO                 .'
         )
         OnClick = RadioGroup1Click
         TabOrder = 3
@@ -107,24 +107,24 @@ object f_vodetail: Tf_vodetail
         Left = 7
         Height = 16
         Top = 102
-        Width = 75
-        Caption = 'Default size '''
+        Width = 147
+        Caption = 'Default size '' .......................'
         ParentColor = False
       end
       object Label10: TLabel
         Left = 7
         Height = 16
         Top = 48
-        Width = 108
-        Caption = 'Default magnitude'
+        Width = 147
+        Caption = 'Default magnitude.............'
         ParentColor = False
       end
       object FullDownload: TCheckBox
         Left = 559
         Height = 23
         Top = 24
-        Width = 146
-        Caption = 'Download full catalog'
+        Width = 191
+        Caption = 'Download full catalog...............'
         OnChange = FullDownloadChange
         TabOrder = 4
       end
@@ -132,8 +132,8 @@ object f_vodetail: Tf_vodetail
         Left = 7
         Height = 16
         Top = 77
-        Width = 68
-        Caption = 'Object type'
+        Width = 149
+        Caption = 'Object type ..........................'
         ParentColor = False
       end
       object ComboBox1: TComboBox
@@ -168,10 +168,10 @@ object f_vodetail: Tf_vodetail
         Text = 'Circle'
       end
       object ButtonBack: TButton
-        Left = 618
+        Left = 631
         Height = 25
         Top = 130
-        Width = 75
+        Width = 88
         Caption = '< Back'
         OnClick = ButtonBackClick
         TabOrder = 6
@@ -208,7 +208,7 @@ object f_vodetail: Tf_vodetail
         Left = 559
         Height = 25
         Top = 64
-        Width = 134
+        Width = 160
         Caption = 'Data preview'
         OnClick = Button2Click
         TabOrder = 10
@@ -225,8 +225,8 @@ object f_vodetail: Tf_vodetail
         Left = 7
         Height = 23
         Top = 125
-        Width = 89
-        Caption = 'Force color'
+        Width = 148
+        Caption = 'Force color....................'
         OnChange = CheckBox1Change
         TabOrder = 11
       end
