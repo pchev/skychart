@@ -125,7 +125,7 @@ type
     procedure ComputeLimits;
     procedure ComputeAirmassTime;
     procedure ComputeTransitTime;
-    procedure UpdateLabels;
+    procedure UpdateLabels(sender:TObject);
     procedure SetVisibleRows;
     procedure Refresh;
     property RowCount: integer read GetRowcount;
@@ -188,7 +188,7 @@ begin
   if buf<>'' then buf:=slash(buf);
   gridchanged:=false;
   FileNameEdit1.FileName:=buf+DefaultList;
-  UpdateLabels;
+  UpdateLabels(nil);
 end;
 
 procedure Tf_obslist.Add(obj: string; ra,de:double);
@@ -204,7 +204,7 @@ if obj<>'' then begin
   buf:=FormatFloat(f5,de);
   StringGrid1.Cells[3,StringGrid1.RowCount-1]:=buf;
   StringGrid1.Cells[6,StringGrid1.RowCount-1]:='';
-  UpdateLabels;
+  UpdateLabels(nil);
 end;
 end;
 
@@ -427,10 +427,10 @@ begin
      if ok then StringGrid1.RowHeights[i]:=StringGrid1.DefaultRowHeight
            else StringGrid1.RowHeights[i]:=0;
  end;
- UpdateLabels;
+ UpdateLabels(nil);
 end;
 
-procedure Tf_obslist.UpdateLabels;
+procedure Tf_obslist.UpdateLabels(sender:TObject);
 var i: integer;
     lbl:string;
 begin
@@ -445,7 +445,7 @@ if CheckBox3.Checked then begin
   end;
   FObjLabels.Sorted:=True;
 end;
-if CheckBox3.Checked and Assigned(FObjLabelChange) then FObjLabelChange(self);
+if ((sender=CheckBox3)or CheckBox3.Checked) and Assigned(FObjLabelChange) then FObjLabelChange(self);
 end;
 
 procedure Tf_obslist.ComputeLimits;
@@ -588,7 +588,7 @@ begin
     buf1:=FormatFloat(f5,de);
     StringGrid1.Cells[3,ClickRow]:=buf1;
     StringGrid1.Cells[7,ClickRow]:=lbl;
-    UpdateLabels;
+    UpdateLabels(Sender);
     gridchanged:=true;
   end;
 end;
@@ -606,7 +606,7 @@ end;
 procedure Tf_obslist.MenuDeleteClick(Sender: TObject);
 begin
   StringGrid1.DeleteRow(ClickRow);
-  UpdateLabels;
+  UpdateLabels(Sender);
   gridchanged:=true;
 end;
 
@@ -729,7 +729,7 @@ end;
 
 procedure Tf_obslist.CheckBox3Change(Sender: TObject);
 begin
-  UpdateLabels;
+  UpdateLabels(Sender);
 end;
 
 procedure Tf_obslist.CheckBox4Change(Sender: TObject);
