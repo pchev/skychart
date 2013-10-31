@@ -696,8 +696,13 @@ if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map');
  if sc.plot.cfgplot.plaplot=2 then GetSunImage;
  if sc.cfgsc.ShowBackgroundImage then sc.cfgsc.ShowImageList:=true;
- if sc.cfgsc.quick then sc.ObjectListLabels:=f_obslist.EmptyObjLabels
-   else sc.ObjectListLabels:=f_obslist.ObjLabels;
+ if sc.cfgsc.quick then begin
+   sc.ObjectListLabels:=f_obslist.EmptyObjLabels;
+   sc.NoFilterList:=False;
+ end else begin
+   sc.ObjectListLabels:=f_obslist.ObjLabels;
+   sc.NoFilterList:=f_obslist.NoFilterList.Checked and (sc.ObjectListLabels.Count>0);
+ end;
  sc.Refresh;
 if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Draw map end');
