@@ -12,11 +12,11 @@ object f_obslist: Tf_obslist
   LCLVersion = '1.0.12.0'
   object PanelBot: TPanel
     Left = 0
-    Height = 50
-    Top = 424
+    Height = 58
+    Top = 416
     Width = 799
     Align = alBottom
-    ClientHeight = 50
+    ClientHeight = 58
     ClientWidth = 799
     TabOrder = 0
     object FileNameEdit1: TFileNameEdit
@@ -53,16 +53,27 @@ object f_obslist: Tf_obslist
     object CheckBox3: TCheckBox
       Left = 440
       Height = 23
-      Top = 13
+      Top = 0
       Width = 173
       Caption = 'Mark objects on the chart'
       OnChange = CheckBox3Change
       TabOrder = 3
     end
+    object NoFilterList: TCheckBox
+      Left = 440
+      Height = 23
+      Top = 24
+      Width = 237
+      Caption = 'Always show the objects from the list'
+      OnChange = NoFilterListChange
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 344
+    Height = 336
     Top = 80
     Width = 799
     Align = alClient

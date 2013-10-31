@@ -39,6 +39,7 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
+    NoFilterList: TCheckBox;
     HourAngleCombo: TComboBox;
     ButtonSave: TButton;
     ButtonClear: TButton;
@@ -86,6 +87,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure MenuUpdcoordClick(Sender: TObject);
     procedure MenuViewClick(Sender: TObject);
+    procedure NoFilterListChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
     procedure StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
@@ -168,6 +170,8 @@ begin
   CheckBox1.Caption:=rsOnlyObjectsW;
   CheckBox2.Caption:=rsOnlyObjectsW2;
   CheckBox3.Caption:=rsMarkObjectsO;
+  NoFilterList.Caption:=rsAlwaysShowTh;
+  NoFilterList.Hint:=rsBewareThisOp;
   TabSheet2.Caption:=rsTransit;
   Label1.Caption:=rsLimit;
   Label3.Caption:=rsLimit;
@@ -729,7 +733,18 @@ end;
 
 procedure Tf_obslist.CheckBox3Change(Sender: TObject);
 begin
+  if CheckBox3.Checked then begin
+    NoFilterList.Enabled:=true;
+  end else begin
+    NoFilterList.Checked:=false;
+    NoFilterList.Enabled:=false;
+  end;
   UpdateLabels(Sender);
+end;
+
+procedure Tf_obslist.NoFilterListChange(Sender: TObject);
+begin
+ UpdateLabels(Sender);
 end;
 
 procedure Tf_obslist.CheckBox4Change(Sender: TObject);

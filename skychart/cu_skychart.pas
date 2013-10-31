@@ -61,6 +61,7 @@ Tskychart = class (TComponent)
     bgw,bgh,bgproj,bgflipx,bgflipy: integer;
     nebmagmin,nebmagmax: single;
     FObjectListLabels: TStringList;
+    FNoFilterList: boolean;
     FUpdObsListTime: TNotifyEvent;
     Procedure DrawSatel(j,ipla:integer; ra,dec,ma,diam,pixscale : double; hidesat, showhide : boolean);
     Procedure InitLabels;
@@ -92,6 +93,7 @@ Tskychart = class (TComponent)
     property cdb: Tcdcdb read Fcdb write Fcdb;
     property Fits: TFits read FFits write FFits;
     property ObjectListLabels: TStringList read FObjectListLabels write FObjectListLabels;
+    property NoFilterList: boolean read FNoFilterList write FNoFilterList;
     function Refresh : boolean;
     function InitCatalog : boolean;
     function InitTime : boolean;
@@ -993,7 +995,7 @@ dyear:=0;
 first:=true;
 saveplot:=Fplot.cfgplot.starplot;
 savefilter:=catalog.cfgshr.StarFilter;
-if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
+if FNoFilterList then catalog.cfgshr.StarFilter:=false;
 if (not Fplot.cfgplot.UseBMP) and cfgsc.DrawPMon and (Fplot.cfgplot.starplot=2) then Fplot.cfgplot.starplot:=1;
 try
 for j:=0 to Fcatalog.cfgcat.GCatNum-1 do  begin
@@ -1020,7 +1022,7 @@ if Fcatalog.OpenStar then
      lp:=0;
      lnum:=9;
   end;
-  if (not forcelabel) and savefilter and (rec.star.magv>catalog.cfgcat.StarMagMax) then continue;
+  if FNoFilterList and (not forcelabel) and savefilter and (rec.star.magv>catalog.cfgcat.StarMagMax) then continue;
  end;
  if first then begin
     firstcat:=rec.options.ShortName;
@@ -1098,7 +1100,7 @@ begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw variable stars');
 fillchar(rec,sizeof(rec),0);
 savefilter:=catalog.cfgshr.StarFilter;
-if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
+if FNoFilterList then catalog.cfgshr.StarFilter:=false;
 try
 timelimit:=now+10/secday;
 if Fcatalog.OpenVarStar then
@@ -1114,7 +1116,7 @@ if Fcatalog.OpenVarStar then
      lp:=0;
      lnum:=9;
   end;
-  if (not forcelabel) and savefilter and (rec.variable.magmax>catalog.cfgcat.StarMagMax) then continue;
+  if FNoFilterList and (not forcelabel) and savefilter and (rec.variable.magmax>catalog.cfgcat.StarMagMax) then continue;
  end;
  lis:=rec.variable.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
  lid:=rshash(lis,$7FFFFFFF);
@@ -1148,7 +1150,7 @@ begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw double stars');
 fillchar(rec,sizeof(rec),0);
 savefilter:=catalog.cfgshr.StarFilter;
-if FObjectListLabels.Count>0 then catalog.cfgshr.StarFilter:=false;
+if FNoFilterList then catalog.cfgshr.StarFilter:=false;
 try
 timelimit:=now+10/secday;
 if Fcatalog.OpenDblStar then
@@ -1164,7 +1166,7 @@ if Fcatalog.OpenDblStar then
      lp:=0;
      lnum:=9;
   end;
-  if (not forcelabel) and savefilter and (rec.double.mag1>catalog.cfgcat.StarMagMax) then continue;
+  if FNoFilterList and (not forcelabel) and savefilter and (rec.double.mag1>catalog.cfgcat.StarMagMax) then continue;
  end;
  lis:=rec.double.id+FormatFloat(f6,rec.ra)+FormatFloat(f6,rec.dec);
  lid:=rshash(lis,$7FFFFFFF);
@@ -1271,7 +1273,7 @@ var rec:GcatRec;
     fillchar(rec,sizeof(rec),0);
     bmp:=Tbitmap.Create;
     savefilter:=catalog.cfgshr.NebFilter;
-    if FObjectListLabels.Count>0 then catalog.cfgshr.NebFilter:=false;
+    if FNoFilterList then catalog.cfgshr.NebFilter:=false;
     try
     timelimit:=now+10/secday;
     if Fcatalog.OpenNeb then
@@ -1288,7 +1290,7 @@ var rec:GcatRec;
               forcelabel:=true;
               lnum:=9;
            end;
-           if (not forcelabel) and savefilter then begin
+           if FNoFilterList and (not forcelabel) and savefilter then begin
              if rec.neb.valid[vnMag] and (rec.neb.mag>catalog.cfgcat.NebMagMax) then continue;
              if rec.neb.valid[vnDim1] and (rec.neb.dim1*60/rec.neb.nebunit<catalog.cfgcat.NebSizeMin) then continue;
              if catalog.cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=catalog.cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue;

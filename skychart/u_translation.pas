@@ -1489,6 +1489,8 @@ resourcestring
   rsUpdateCoordi = 'Update coordinates';
   rsDuplicate = 'Duplicate';
   rsForceColor = 'Force color';
+  rsAlwaysShowTh = 'Always show the objects from the list';
+  rsBewareThisOp = 'Beware this option can severly degrade the performance';
 
 implementation
 
