@@ -4569,8 +4569,6 @@ for i:=1 to numlabels do begin
      if labels[i].id=cfgsc.modlabels[j].id then begin
         skiplabel:=cfgsc.modlabels[j].hiden;
         if i>constlabelindex then txt:=cfgsc.modlabels[j].txt;
-        labelnum:=cfgsc.modlabels[j].labelnum;
-        fontnum:=cfgsc.modlabels[j].fontnum;
         if cfgsc.modlabels[j].useradec then begin
           projection(cfgsc.modlabels[j].ra,cfgsc.modlabels[j].dec,x1,y1,false,cfgsc) ;
           WindowXY(x1,y1,x,y,cfgsc);
