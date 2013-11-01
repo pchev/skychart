@@ -949,12 +949,13 @@ type
     customlabels: array[1..maxmodlabels] of Tcustomlabel;
     LabelMagDiff: array[1..numlabtype] of double;
     ShowLabel: array[1..numlabtype] of boolean;
-    circle: array [1..10, 1..4] of single; // radius, rotation, offset, mode
-    circleok: array [1..10] of boolean;
-    circlelbl: array [1..10] of string;
-    rectangle: array [1..10, 1..5] of single; // width, height, rotation, offset, mode
-    rectangleok: array [1..10] of boolean;
-    rectanglelbl: array [1..10] of string;
+    ncircle,nrectangle: integer;
+    circle: array of array [1..4] of single; // radius, rotation, offset, mode
+    circleok: array of boolean;
+    circlelbl: array  of string;
+    rectangle: array of array [1..5] of single; // width, height, rotation, offset, mode
+    rectangleok: array of boolean;
+    rectanglelbl: array of string;
     CircleLst: array[0..MaxCircle, 1..2] of double;
     CircleLabel, RectangleLabel, marknumlabel: boolean;
     msg: string;
@@ -1786,10 +1787,24 @@ constructor Tconf_skychart.Create;
 begin
   inherited Create;
   tz := TCdCTimeZone.Create;
+  ncircle:=10;
+  SetLength(circle,ncircle+1);
+  SetLength(circleok,ncircle+1);
+  SetLength(circlelbl,ncircle+1);
+  nrectangle:=10;
+  SetLength(rectangle,nrectangle+1);
+  SetLength(rectangleok,nrectangle+1);
+  SetLength(rectanglelbl,nrectangle+1);
 end;
 
 destructor Tconf_skychart.Destroy;
 begin
+  SetLength(circle,0);
+  SetLength(circleok,0);
+  SetLength(circlelbl,0);
+  SetLength(rectangle,0);
+  SetLength(rectangleok,0);
+  SetLength(rectanglelbl,0);
   SetLength(AsteroidLst, 0);
   SetLength(CometLst, 0);
   SetLength(AsteroidName, 0);
@@ -2131,28 +2146,29 @@ begin
     ShowLabel[i] := Source.ShowLabel[i];
     LabelMagDiff[i] := Source.LabelMagDiff[i];
   end;
-  for i := 1 to 10 do
+  ncircle:=Source.ncircle;
+  SetLength(circle,ncircle+1);
+  SetLength(circleok,ncircle+1);
+  SetLength(circlelbl,ncircle+1);
+  for i := 1 to ncircle do begin
     circle[i, 1] := Source.circle[i, 1];
-  for i := 1 to 10 do
     circle[i, 2] := Source.circle[i, 2];
-  for i := 1 to 10 do
     circle[i, 3] := Source.circle[i, 3];
-  for i := 1 to 10 do
     circleok[i] := Source.circleok[i];
-  for i := 1 to 10 do
     circlelbl[i] := Source.circlelbl[i];
-  for i := 1 to 10 do
+  end;
+  nrectangle:=Source.nrectangle;
+  SetLength(rectangle,nrectangle+1);
+  SetLength(rectangleok,nrectangle+1);
+  SetLength(rectanglelbl,nrectangle+1);
+  for i := 1 to nrectangle do begin
     rectangle[i, 1] := Source.rectangle[i, 1];
-  for i := 1 to 10 do
     rectangle[i, 2] := Source.rectangle[i, 2];
-  for i := 1 to 10 do
     rectangle[i, 3] := Source.rectangle[i, 3];
-  for i := 1 to 10 do
     rectangle[i, 4] := Source.rectangle[i, 4];
-  for i := 1 to 10 do
     rectangleok[i] := Source.rectangleok[i];
-  for i := 1 to 10 do
     rectanglelbl[i] := Source.rectanglelbl[i];
+  end;
   CircleLabel := Source.CircleLabel;
   CalGraphHeight := Source.CalGraphHeight;
   RectangleLabel := Source.RectangleLabel;

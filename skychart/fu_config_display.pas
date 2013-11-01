@@ -25,7 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 interface
 
-uses u_help, u_translation, u_constant, u_util,
+uses u_help, u_translation, u_constant, u_util, pu_fov,
   LCLIntf, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Grids, Spin, Buttons, StdCtrls, ExtCtrls, ComCtrls, LResources,
   EditBtn, LCLType, enhedits, LazHelpHTML;
@@ -51,6 +51,7 @@ type
     CheckBox5: TCheckBox;
     CheckBox6: TCheckBox;
     Edit14: TEdit;
+    ImageList1: TImageList;
     Label15: TLabel;
     labelcolorobslist: TShape;
     labelsizeobslist: TUpDown;
@@ -232,29 +233,9 @@ type
     MagLabel: TRadioGroup;
     constlabel: TRadioGroup;
     Label307: TLabel;
-    cb1: TCheckBox;
-    cb2: TCheckBox;
-    cb3: TCheckBox;
-    cb4: TCheckBox;
-    cb5: TCheckBox;
-    cb6: TCheckBox;
-    cb7: TCheckBox;
-    cb8: TCheckBox;
-    cb9: TCheckBox;
-    cb10: TCheckBox;
     Circlegrid: TStringGrid;
     CenterMark1: TCheckBox;
     Label308: TLabel;
-    rb1: TCheckBox;
-    rb2: TCheckBox;
-    rb3: TCheckBox;
-    rb4: TCheckBox;
-    rb5: TCheckBox;
-    rb6: TCheckBox;
-    rb7: TCheckBox;
-    rb8: TCheckBox;
-    rb9: TCheckBox;
-    rb10: TCheckBox;
     RectangleGrid: TStringGrid;
     CenterMark2: TCheckBox;
     FontDialog1: TFontDialog;
@@ -370,6 +351,15 @@ type
     procedure CheckBox2Click(Sender: TObject);
     procedure CheckBox5Click(Sender: TObject);
     procedure CheckBox6Click(Sender: TObject);
+    procedure CirclegridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+    procedure CirclegridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+    procedure CirclegridDblClick(Sender: TObject);
+    procedure CirclegridDrawCell(Sender: TObject; aCol, aRow: Integer;
+      aRect: TRect; aState: TGridDrawState);
+    procedure CirclegridMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure CirclegridSelectCell(Sender: TObject; aCol, aRow: Integer;
+      var CanSelect: Boolean);
     procedure MarkNumberClick(Sender: TObject);
     procedure ConstbFileAcceptFileName(Sender: TObject; var Value: String);
     procedure ConstlFileAcceptFileName(Sender: TObject; var Value: String);
@@ -387,6 +377,12 @@ type
     procedure OnlyMeridianClick(Sender: TObject);
     procedure OptLabelsClick(Sender: TObject);
     procedure Page3Show(Sender: TObject);
+    procedure RectangleGridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+    procedure RectangleGridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+    procedure RectangleGridDblClick(Sender: TObject);
+    procedure RectangleGridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
+    procedure RectangleGridMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+    procedure RectangleGridSelectCell(Sender: TObject; aCol, aRow: Integer; var CanSelect: Boolean);
     procedure ShowLinesClick(Sender: TObject);
     procedure ShowLineShapeMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -441,11 +437,9 @@ type
     procedure constlabelClick(Sender: TObject);
     procedure CirclegridSetEditText(Sender: TObject; ACol, ARow: Integer;
       const Value: String);
-    procedure cbClick(Sender: TObject);
     procedure CenterMark1Click(Sender: TObject);
     procedure RectangleGridSetEditText(Sender: TObject; ACol,
       ARow: Integer; const Value: String);
-    procedure rbClick(Sender: TObject);
     procedure NebGrayBarChange(Sender: TObject);
     procedure NebBrightBarChange(Sender: TObject);
     procedure DefNebColorButtonClick(Sender: TObject);
@@ -479,6 +473,7 @@ type
     { Private declarations }
     FApplyConfig: TNotifyEvent;
     LockChange: boolean;
+    CCol,CRow,RCol,RRow: integer;
     procedure ShowDisplay;
     procedure ShowFonts;
     procedure ShowColor;
@@ -711,31 +706,11 @@ Label235.caption:=rsGreekSymbol;
 Button1.caption:=rsDefault;
 Page8.caption:=rsFinderCircle;
 Label307.caption:=rsFinderCircle;
-cb1.caption:=rsNo+' 1';
-cb2.caption:=rsNo+' 2';
-cb3.caption:=rsNo+' 3';
-cb4.caption:=rsNo+' 4';
-cb5.caption:=rsNo+' 5';
-cb6.caption:=rsNo+' 6';
-cb7.caption:=rsNo+' 7';
-cb8.caption:=rsNo+' 8';
-cb9.caption:=rsNo+' 9';
-cb10.caption:=rsNo+' 10';
 CenterMark1.caption:=rsMarkTheChart;
 CheckBox1.Caption:=rsShowLabels;
 CheckBox3.Caption:=rsShowMarkInde;
 Page9.caption:=rsFinderRectan;
 Label308.caption:=rsFinderRectan;
-rb1.caption:=rsNo+' 1';
-rb2.caption:=rsNo+' 2';
-rb3.caption:=rsNo+' 3';
-rb4.caption:=rsNo+' 4';
-rb5.caption:=rsNo+' 5';
-rb6.caption:=rsNo+' 6';
-rb7.caption:=rsNo+' 7';
-rb8.caption:=rsNo+' 8';
-rb9.caption:=rsNo+' 9';
-rb10.caption:=rsNo+'10';
 CenterMark2.caption:=rsMarkTheChart;
 CheckBox2.Caption:=rsShowLabels;
 CheckBox4.Caption:=rsShowMarkInde;
@@ -744,6 +719,7 @@ Label68.caption:=rsYears;
 red_moveBox.Caption:=rsReduceDetail;
 antialias.Caption:=rsAntiAliasDra;
 CheckBox6.Caption:=rsShowOnlyText;
+f_fov.setlang;
 SetHelp(self,hlpCfgDispl);
 end;
 
@@ -760,11 +736,12 @@ begin
  cplot:=mycplot;
  cmain:=mycmain;
  inherited Create(AOwner);
-  LockChange:=true;
-  SetLang;
-  label124.Visible:=false;   // legend font
-  legendfont.Visible:=false;
-  speedbutton3.Visible:=false;
+ f_fov:=Tf_fov.Create(self);
+ LockChange:=true;
+ SetLang;
+ label124.Visible:=false;   // legend font
+ legendfont.Visible:=false;
+ speedbutton3.Visible:=false;
 {$ifndef mswindows}
   label235.Visible:=false;      // symbol same as label with utf-8
   symbfont.Visible:=false;
@@ -774,6 +751,7 @@ end;
 
 Destructor Tf_config_display.Destroy;
 begin
+f_fov.Free;
 mycsc.Free;
 myccat.Free;
 mycshr.Free;
@@ -884,6 +862,103 @@ end;
 procedure Tf_config_display.CheckBox6Click(Sender: TObject);
 begin
  cmain.TextOnlyDetail := CheckBox6.Checked;
+end;
+
+procedure Tf_config_display.CirclegridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+var i:integer;
+begin
+if LockChange then exit;
+  csc.ncircle := circlegrid.RowCount-1;
+  SetLength(csc.circle,csc.ncircle+1);
+  SetLength(csc.circleok,csc.ncircle+1);
+  SetLength(csc.circlelbl,csc.ncircle+1);
+  i:=csc.ncircle;
+  csc.circleok[i]:=false;
+  csc.circle[i,1]:=0;
+  csc.circle[i,2]:=0;
+  csc.circle[i,3]:=0;
+  csc.circlelbl[i]:='';
+  circlegrid.Cells[1,i]:='0';
+  circlegrid.Cells[2,i]:=formatfloat(f2,csc.circle[i,1]);
+  circlegrid.Cells[3,i]:=formatfloat(f2,csc.circle[i,2]);
+  circlegrid.Cells[4,i]:=formatfloat(f2,csc.circle[i,3]);
+  circlegrid.Cells[5,i]:=csc.circlelbl[i];
+
+end;
+
+procedure Tf_config_display.CirclegridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+var i,n:integer;
+    x: double;
+begin
+if LockChange then exit;
+for i:=1 to circlegrid.RowCount-1 do begin
+   csc.circleok[i]:=Circlegrid.Cells[1,i]='1';
+   val(circlegrid.Cells[2,i],x,n);
+   if n=0 then csc.circle[i,1]:=x;
+   val(circlegrid.Cells[3,i],x,n);
+   if n=0 then csc.circle[i,2]:=x;
+   val(circlegrid.Cells[4,i],x,n);
+   if n=0 then csc.circle[i,3]:=x;
+   csc.circlelbl[i]:=circlegrid.Cells[5,i];
+end;
+end;
+
+procedure Tf_config_display.CirclegridDblClick(Sender: TObject);
+begin
+if (CCol=2)and(CRow>0) then begin
+  f_fov.PageControl1.ActivePageIndex:=0;
+  f_fov.Edit9.Text:=Circlegrid.Cells[CCol,CRow];
+  FormPos(f_fov,mouse.cursorpos.x,mouse.cursorpos.y);
+  f_fov.ShowModal;
+  if f_fov.ModalResult=mrOK then begin
+    Circlegrid.Cells[CCol,CRow] := f_fov.Edit9.Text;
+    csc.circle[RRow,1]:=StrToFloatDef(Circlegrid.Cells[CCol,CRow],csc.circle[RRow,1]);
+  end;
+end;
+end;
+
+procedure Tf_config_display.CirclegridDrawCell(Sender: TObject; aCol,
+  aRow: Integer; aRect: TRect; aState: TGridDrawState);
+begin
+with Sender as TStringGrid do begin
+  if (Acol=1)and(Arow>0) then begin
+    Canvas.Brush.style := bssolid;
+    if (cells[acol,arow]='1')then begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,3);
+    end else begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
+    end;
+  end;
+end;
+end;
+
+procedure Tf_config_display.CirclegridMouseUp(Sender: TObject;
+  Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
+var i,col,row:integer;
+begin
+Circlegrid.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+1 : begin
+    if Circlegrid.Cells[col,row]='1'
+      then Circlegrid.Cells[col,row]:='0'
+      else Circlegrid.Cells[col,row]:='1';
+    csc.circleok[row]:=Circlegrid.Cells[col,row]='1';
+    end;
+end;
+end;
+
+procedure Tf_config_display.CirclegridSelectCell(Sender: TObject; aCol,
+  aRow: Integer; var CanSelect: Boolean);
+begin
+if LockChange then exit;
+if (aCol<=1) then canselect:=false else canselect:=true;
+CCol:=aCol;
+CRow:=aRow;
 end;
 
 procedure Tf_config_display.MarkNumberClick(Sender: TObject);
@@ -1319,32 +1394,33 @@ begin
 end;
 
 procedure Tf_config_display.ShowCircle;
-
 var i:integer;
+    buf:string;
 begin
-cb1.checked:=csc.circleok[1];
-cb2.checked:=csc.circleok[2];
-cb3.checked:=csc.circleok[3];
-cb4.checked:=csc.circleok[4];
-cb5.checked:=csc.circleok[5];
-cb6.checked:=csc.circleok[6];
-cb7.checked:=csc.circleok[7];
-cb8.checked:=csc.circleok[8];
-cb9.checked:=csc.circleok[9];
-cb10.checked:=csc.circleok[10];
-circlegrid.ColWidths[0]:=60;
-circlegrid.ColWidths[1]:=60;
+circlegrid.ColWidths[0]:=30;
+circlegrid.ColWidths[1]:=30;
 circlegrid.ColWidths[2]:=60;
-circlegrid.ColWidths[3]:=circlegrid.clientwidth-185;
-circlegrid.Cells[0, 0]:=rsFOV;
-circlegrid.Cells[1, 0]:=rsRotation;
-circlegrid.Cells[2, 0]:=rsOffset;
-circlegrid.Cells[3, 0]:=rsDescription;
-for i:=1 to 10 do begin
-  circlegrid.Cells[0,i]:=formatfloat(f2,csc.circle[i,1]);
-  circlegrid.Cells[1,i]:=formatfloat(f2,csc.circle[i,2]);
-  circlegrid.Cells[2,i]:=formatfloat(f2,csc.circle[i,3]);
-  circlegrid.Cells[3,i]:=csc.circlelbl[i];
+circlegrid.ColWidths[3]:=60;
+circlegrid.ColWidths[4]:=60;
+circlegrid.ColWidths[5]:=circlegrid.clientwidth-30-245;
+circlegrid.Cells[0, 0]:='n';
+circlegrid.Cells[1, 0]:='x';
+circlegrid.Cells[2, 0]:=rsFOV;
+circlegrid.Cells[3, 0]:=rsRotation;
+circlegrid.Cells[4, 0]:=rsOffset;
+circlegrid.Cells[5, 0]:=rsDescription;
+circlegrid.RowCount:=csc.ncircle+1;
+for i:=1 to csc.ncircle do begin
+  if csc.circleok[i] then
+     circlegrid.Cells[1,i]:='1'
+  else
+     circlegrid.Cells[1,i]:='0';
+  circlegrid.Cells[2,i]:=formatfloat(f2,csc.circle[i,1]);
+  circlegrid.Cells[3,i]:=formatfloat(f2,csc.circle[i,2]);
+  circlegrid.Cells[4,i]:=formatfloat(f2,csc.circle[i,3]);
+  circlegrid.Cells[5,i]:=csc.circlelbl[i];
+  buf:=inttostr(i)+csc.circlelbl[i];
+  buf:=inttostr(i)+circlegrid.Cells[5,i];
 end;
 CenterMark1.checked:=csc.ShowCircle;
 CheckBox1.Checked:=csc.CircleLabel;
@@ -1355,32 +1431,31 @@ end;
 procedure Tf_config_display.ShowRectangle;
 var i:integer;
 begin
-rb1.checked:=csc.rectangleok[1];
-rb2.checked:=csc.rectangleok[2];
-rb3.checked:=csc.rectangleok[3];
-rb4.checked:=csc.rectangleok[4];
-rb5.checked:=csc.rectangleok[5];
-rb6.checked:=csc.rectangleok[6];
-rb7.checked:=csc.rectangleok[7];
-rb8.checked:=csc.rectangleok[8];
-rb9.checked:=csc.rectangleok[9];
-rb10.checked:=csc.rectangleok[10];
-rectanglegrid.ColWidths[0]:=60;
-rectanglegrid.ColWidths[1]:=60;
+rectanglegrid.ColWidths[0]:=30;
+rectanglegrid.ColWidths[1]:=30;
 rectanglegrid.ColWidths[2]:=60;
 rectanglegrid.ColWidths[3]:=60;
-rectanglegrid.ColWidths[4]:=rectanglegrid.clientwidth-245;
-rectanglegrid.Cells[0, 0]:=rsWidth;
-rectanglegrid.Cells[1, 0]:=rsHeight;
-rectanglegrid.Cells[2, 0]:=rsRotation;
-rectanglegrid.Cells[3, 0]:=rsOffset;
-rectanglegrid.Cells[4, 0]:=rsDescription;
-for i:=1 to 10 do begin
-  rectanglegrid.Cells[0,i]:=formatfloat(f2,csc.rectangle[i,1]);
-  rectanglegrid.Cells[1,i]:=formatfloat(f2,csc.rectangle[i,2]);
-  rectanglegrid.Cells[2,i]:=formatfloat(f2,csc.rectangle[i,3]);
-  rectanglegrid.Cells[3,i]:=formatfloat(f2,csc.rectangle[i,4]);
-  rectanglegrid.Cells[4,i]:=csc.rectanglelbl[i];
+rectanglegrid.ColWidths[4]:=60;
+rectanglegrid.ColWidths[5]:=60;
+rectanglegrid.ColWidths[6]:=rectanglegrid.clientwidth-30-305;
+rectanglegrid.Cells[0, 0]:='n';
+rectanglegrid.Cells[1, 0]:='x';
+rectanglegrid.Cells[2, 0]:=rsWidth;
+rectanglegrid.Cells[3, 0]:=rsHeight;
+rectanglegrid.Cells[4, 0]:=rsRotation;
+rectanglegrid.Cells[5, 0]:=rsOffset;
+rectanglegrid.Cells[6, 0]:=rsDescription;
+rectanglegrid.RowCount:=csc.nrectangle+1;
+for i:=1 to csc.nrectangle do begin
+  if csc.rectangleok[i] then
+     rectanglegrid.Cells[1,i]:='1'
+  else
+     rectanglegrid.Cells[1,i]:='0';
+  rectanglegrid.Cells[2,i]:=formatfloat(f2,csc.rectangle[i,1]);
+  rectanglegrid.Cells[3,i]:=formatfloat(f2,csc.rectangle[i,2]);
+  rectanglegrid.Cells[4,i]:=formatfloat(f2,csc.rectangle[i,3]);
+  rectanglegrid.Cells[5,i]:=formatfloat(f2,csc.rectangle[i,4]);
+  rectanglegrid.Cells[6,i]:=csc.rectanglelbl[i];
 end;
 CenterMark2.checked:=csc.ShowCircle;
 CheckBox2.Checked:=csc.RectangleLabel;
@@ -1887,33 +1962,27 @@ csc.ConstFullLabel:=(constlabel.ItemIndex<>1);
 csc.ConstLatinLabel:=(constlabel.ItemIndex=2);
 end;
 
-
-procedure Tf_config_display.cbClick(Sender: TObject);
-begin
- with Sender as TCheckBox do csc.circleok[tag]:=checked;
-end;
-
 procedure Tf_config_display.CirclegridSetEditText(Sender: TObject; ACol,ARow: Integer; const Value: String);
 var x:single;
     n:integer;
 begin
 case ACol of
-0 : begin
+2 : begin
     val(value,x,n);
     if n=0 then csc.circle[Arow,1]:=x
            else beep;
     end;
-1 : begin
+3 : begin
     val(value,x,n);
     if n=0 then csc.circle[Arow,2]:=x
            else beep;
     end;
-2 : begin
+4 : begin
     val(value,x,n);
     if n=0 then csc.circle[Arow,3]:=x
            else beep;
     end;
-3 : begin
+5 : begin
     csc.circlelbl[ARow]:=Value;
     end;
 end;
@@ -1933,37 +2002,31 @@ var x:single;
     n:integer;
 begin
 case ACol of
-0 : begin
+2 : begin
     val(value,x,n);
     if n=0 then csc.rectangle[Arow,1]:=x
            else beep;
     end;
-1 : begin
+3 : begin
     val(value,x,n);
     if n=0 then csc.rectangle[Arow,2]:=x
            else beep;
     end;
-2 : begin
+4 : begin
     val(value,x,n);
     if n=0 then csc.rectangle[Arow,3]:=x
            else beep;
     end;
-3 : begin
+5 : begin
     val(value,x,n);
     if n=0 then csc.rectangle[Arow,4]:=x
            else beep;
     end;
-4 : begin
+6 : begin
     csc.rectanglelbl[ARow]:=Value;
     end;
 end;
 end;
-
-procedure Tf_config_display.rbClick(Sender: TObject);
-begin
-with Sender as TCheckBox do csc.rectangleok[tag]:=checked;
-end;
-
 
 procedure Tf_config_display.chkFillAstClick(Sender: TObject);
 begin
@@ -2174,6 +2237,109 @@ begin
       FillPanel1.Visible:=true;
       FillPanel2.Visible:=true;
     end;
+end;
+
+procedure Tf_config_display.RectangleGridColRowInserted(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+var i: integer;
+begin
+if LockChange then exit;
+csc.nrectangle := Rectanglegrid.RowCount-1;
+SetLength(csc.rectangle,csc.nrectangle+1);
+SetLength(csc.rectangleok,csc.nrectangle+1);
+SetLength(csc.rectanglelbl,csc.nrectangle+1);
+i:=csc.nrectangle;
+csc.rectangleok[i]:=false;
+csc.rectangle[i,1]:=0;
+csc.rectangle[i,2]:=0;
+csc.rectangle[i,3]:=0;
+csc.rectangle[i,4]:=0;
+csc.rectanglelbl[i]:='';
+Rectanglegrid.Cells[1,i]:='0';
+Rectanglegrid.Cells[2,i]:=formatfloat(f2,csc.rectangle[i,1]);
+Rectanglegrid.Cells[3,i]:=formatfloat(f2,csc.rectangle[i,2]);
+Rectanglegrid.Cells[4,i]:=formatfloat(f2,csc.rectangle[i,3]);
+Rectanglegrid.Cells[5,i]:=formatfloat(f2,csc.rectangle[i,4]);
+Rectanglegrid.Cells[6,i]:=csc.rectanglelbl[i];
+end;
+
+procedure Tf_config_display.RectangleGridColRowMoved(Sender: TObject; IsColumn: Boolean; sIndex, tIndex: Integer);
+var i,n:integer;
+    x: double;
+begin
+if LockChange then exit;
+for i:=1 to RectangleGrid.RowCount-1 do begin
+   csc.rectangleok[i]:=RectangleGrid.Cells[1,i]='1';
+   val(RectangleGrid.Cells[2,i],x,n);
+   if n=0 then csc.rectangle[i,1]:=x;
+   val(RectangleGrid.Cells[3,i],x,n);
+   if n=0 then csc.rectangle[i,2]:=x;
+   val(RectangleGrid.Cells[4,i],x,n);
+   if n=0 then csc.rectangle[i,3]:=x;
+   val(RectangleGrid.Cells[5,i],x,n);
+   if n=0 then csc.rectangle[i,4]:=x;
+   csc.rectanglelbl[i]:=RectangleGrid.Cells[6,i];
+end;
+end;
+
+procedure Tf_config_display.RectangleGridDblClick(Sender: TObject);
+begin
+if ((RCol=2)or(RCol=3))and(RRow>0) then begin
+  if f_fov=nil then f_fov:=Tf_fov.Create(self);
+  f_fov.PageControl1.ActivePageIndex:=1;
+  f_fov.Edit14.Text:=RectangleGrid.Cells[2,RRow];
+  f_fov.Edit17.Text:=RectangleGrid.Cells[3,RRow];
+  FormPos(f_fov,mouse.cursorpos.x,mouse.cursorpos.y);
+  f_fov.ShowModal;
+  if f_fov.ModalResult=mrOK then begin
+    RectangleGrid.Cells[2,RRow] := f_fov.Edit14.Text;
+    RectangleGrid.Cells[3,RRow] := f_fov.Edit17.Text;
+    csc.rectangle[RRow,1]:=StrToFloatDef(RectangleGrid.Cells[2,RRow],csc.rectangle[RRow,1]);
+    csc.rectangle[RRow,2]:=StrToFloatDef(RectangleGrid.Cells[3,RRow],csc.rectangle[RRow,2]);
+  end;
+end;
+end;
+
+procedure Tf_config_display.RectangleGridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect;
+  aState: TGridDrawState);
+begin
+with Sender as TStringGrid do begin
+  if (Acol=1)and(Arow>0) then begin
+    Canvas.Brush.style := bssolid;
+    if (cells[acol,arow]='1')then begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,3);
+    end else begin
+      Canvas.Brush.Color := clWindow;
+      Canvas.FillRect(aRect);
+      ImageList1.Draw(Canvas,aRect.left+2,aRect.top+2,2);
+    end;
+  end;
+end;
+end;
+
+procedure Tf_config_display.RectangleGridMouseUp(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X,
+  Y: Integer);
+var i,col,row:integer;
+begin
+RectangleGrid.MouseToCell(X, Y, Col, Row);
+if row=0 then exit;
+case col of
+1 : begin
+    if RectangleGrid.Cells[col,row]='1'
+      then RectangleGrid.Cells[col,row]:='0'
+      else RectangleGrid.Cells[col,row]:='1';
+    csc.rectangleok[row]:=RectangleGrid.Cells[col,row]='1';
+    end;
+end;
+end;
+
+procedure Tf_config_display.RectangleGridSelectCell(Sender: TObject; aCol, aRow: Integer; var CanSelect: Boolean);
+begin
+  if LockChange then exit;
+  if (Acol=1) then canselect:=false else canselect:=true;
+  RCol:=aCol;
+  RRow:=aRow;
 end;
 
 procedure Tf_config_display.ShowLinesClick(Sender: TObject);

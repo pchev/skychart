@@ -1491,6 +1491,12 @@ resourcestring
   rsForceColor = 'Force color';
   rsAlwaysShowTh = 'Always show the objects from the list';
   rsBewareThisOp = 'Beware this option can severly degrade the performance';
+  rsTelescopeFoc = 'Telescope focal length';
+  rsEyepieceFoca = 'Eyepiece focal length';
+  rsEyepieceAppa = 'Eyepiece apparent field of vision';
+  rsPower = 'Power';
+  rsPixelSize = 'Pixel size';
+  rsPixelCount = 'Pixel count';
 
 implementation
 

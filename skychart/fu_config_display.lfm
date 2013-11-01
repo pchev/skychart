@@ -6,8 +6,8 @@ object f_config_display: Tf_config_display
   ClientHeight = 528
   ClientWidth = 505
   TabOrder = 0
-  DesignLeft = 312
-  DesignTop = 314
+  DesignLeft = 397
+  DesignTop = 292
   object MainPanel: TPanel
     Left = 0
     Height = 528
@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page6
+      ActivePage = Page9
       Align = alClient
       ShowTabs = False
-      TabIndex = 5
+      TabIndex = 8
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -192,7 +192,7 @@ object f_config_display: Tf_config_display
             FilterIndex = 0
             HideDirectories = False
             ButtonWidth = 23
-            NumGlyphs = 0
+            NumGlyphs = 1
             MaxLength = 0
             TabOrder = 0
             OnChange = FileNameEdit1Change
@@ -2041,7 +2041,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 49
-          Width = 122
+          Width = 134
           Caption = 'Display the labels'
           OnClick = ShowlabelallClick
           TabOrder = 0
@@ -2050,7 +2050,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 5
-          Width = 285
+          Width = 302
           Caption = 'Display the chart information in the menu bar.'
           OnClick = ShowChartInfoClick
           TabOrder = 1
@@ -2077,7 +2077,7 @@ object f_config_display: Tf_config_display
             Left = 317
             Height = 16
             Top = 23
-            Width = 31
+            Width = 34
             Caption = 'Color'
             ParentColor = False
           end
@@ -2085,7 +2085,7 @@ object f_config_display: Tf_config_display
             Left = 316
             Height = 16
             Top = 6
-            Width = 30
+            Width = 34
             Caption = 'Label'
             ParentColor = False
           end
@@ -2157,7 +2157,7 @@ object f_config_display: Tf_config_display
             Left = 369
             Height = 16
             Top = 23
-            Width = 23
+            Width = 24
             Caption = 'Size'
             ParentColor = False
           end
@@ -2166,7 +2166,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 47
-            Width = 54
+            Width = 56
             Caption = 'Stars'
             OnClick = showlabelClick
             TabOrder = 0
@@ -2176,7 +2176,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 71
-            Width = 101
+            Width = 110
             Caption = 'Variable Stars'
             OnClick = showlabelClick
             TabOrder = 1
@@ -2186,7 +2186,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 95
-            Width = 104
+            Width = 110
             Caption = 'Multiple Stars'
             OnClick = showlabelClick
             TabOrder = 2
@@ -2196,7 +2196,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 119
-            Width = 71
+            Width = 76
             Caption = 'Nebulae'
             OnClick = showlabelClick
             TabOrder = 3
@@ -2206,7 +2206,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 143
-            Width = 96
+            Width = 104
             Caption = 'Solar System'
             OnClick = showlabelClick
             TabOrder = 4
@@ -2216,7 +2216,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 167
-            Width = 135
+            Width = 144
             Caption = 'Constellation name'
             OnClick = showlabelClick
             TabOrder = 5
@@ -2226,7 +2226,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 191
-            Width = 94
+            Width = 102
             Caption = 'Other labels'
             OnClick = showlabelClick
             TabOrder = 6
@@ -2236,7 +2236,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 23
             Top = 215
-            Width = 127
+            Width = 133
             Caption = 'Chart Information'
             OnClick = showlabelClick
             TabOrder = 7
@@ -2244,7 +2244,7 @@ object f_config_display: Tf_config_display
           object Edit1: TEdit
             Tag = 1
             Left = 230
-            Height = 23
+            Height = 24
             Top = 43
             Width = 38
             TabOrder = 8
@@ -2252,7 +2252,7 @@ object f_config_display: Tf_config_display
           object labelmagStar: TUpDown
             Tag = 1
             Left = 268
-            Height = 23
+            Height = 24
             Top = 43
             Width = 17
             Associate = Edit1
@@ -2266,7 +2266,7 @@ object f_config_display: Tf_config_display
           object Edit2: TEdit
             Tag = 2
             Left = 230
-            Height = 23
+            Height = 24
             Top = 67
             Width = 38
             TabOrder = 10
@@ -2274,7 +2274,7 @@ object f_config_display: Tf_config_display
           object labelmagVar: TUpDown
             Tag = 2
             Left = 268
-            Height = 23
+            Height = 24
             Top = 67
             Width = 17
             Associate = Edit2
@@ -2288,7 +2288,7 @@ object f_config_display: Tf_config_display
           object labelmagMult: TUpDown
             Tag = 3
             Left = 268
-            Height = 23
+            Height = 24
             Top = 91
             Width = 17
             Associate = Edit3
@@ -2302,7 +2302,7 @@ object f_config_display: Tf_config_display
           object Edit3: TEdit
             Tag = 3
             Left = 230
-            Height = 23
+            Height = 24
             Top = 91
             Width = 38
             TabOrder = 13
@@ -2310,7 +2310,7 @@ object f_config_display: Tf_config_display
           object labelmagNeb: TUpDown
             Tag = 4
             Left = 268
-            Height = 23
+            Height = 24
             Top = 115
             Width = 17
             Associate = Edit4
@@ -2324,7 +2324,7 @@ object f_config_display: Tf_config_display
           object Edit4: TEdit
             Tag = 4
             Left = 230
-            Height = 23
+            Height = 24
             Top = 115
             Width = 38
             TabOrder = 15
@@ -2332,7 +2332,7 @@ object f_config_display: Tf_config_display
           object labelmagSol: TUpDown
             Tag = 5
             Left = 268
-            Height = 23
+            Height = 24
             Top = 139
             Width = 17
             Associate = Edit5
@@ -2346,7 +2346,7 @@ object f_config_display: Tf_config_display
           object Edit5: TEdit
             Tag = 5
             Left = 230
-            Height = 23
+            Height = 24
             Top = 139
             Width = 38
             TabOrder = 17
@@ -2354,7 +2354,7 @@ object f_config_display: Tf_config_display
           object Edit6: TEdit
             Tag = 1
             Left = 366
-            Height = 23
+            Height = 24
             Top = 45
             Width = 38
             TabOrder = 18
@@ -2362,7 +2362,7 @@ object f_config_display: Tf_config_display
           object labelSizeStar: TUpDown
             Tag = 1
             Left = 404
-            Height = 23
+            Height = 24
             Top = 45
             Width = 17
             Associate = Edit6
@@ -2376,7 +2376,7 @@ object f_config_display: Tf_config_display
           object Edit7: TEdit
             Tag = 2
             Left = 366
-            Height = 23
+            Height = 24
             Top = 67
             Width = 38
             TabOrder = 20
@@ -2384,7 +2384,7 @@ object f_config_display: Tf_config_display
           object labelsizeVar: TUpDown
             Tag = 2
             Left = 404
-            Height = 23
+            Height = 24
             Top = 67
             Width = 17
             Associate = Edit7
@@ -2398,7 +2398,7 @@ object f_config_display: Tf_config_display
           object Edit8: TEdit
             Tag = 3
             Left = 366
-            Height = 23
+            Height = 24
             Top = 91
             Width = 38
             TabOrder = 22
@@ -2406,7 +2406,7 @@ object f_config_display: Tf_config_display
           object labelsizeMult: TUpDown
             Tag = 3
             Left = 404
-            Height = 23
+            Height = 24
             Top = 91
             Width = 17
             Associate = Edit8
@@ -2420,7 +2420,7 @@ object f_config_display: Tf_config_display
           object Edit9: TEdit
             Tag = 4
             Left = 366
-            Height = 23
+            Height = 24
             Top = 115
             Width = 38
             TabOrder = 24
@@ -2428,7 +2428,7 @@ object f_config_display: Tf_config_display
           object labelsizeNeb: TUpDown
             Tag = 4
             Left = 404
-            Height = 23
+            Height = 24
             Top = 115
             Width = 17
             Associate = Edit9
@@ -2442,7 +2442,7 @@ object f_config_display: Tf_config_display
           object Edit10: TEdit
             Tag = 5
             Left = 366
-            Height = 23
+            Height = 24
             Top = 139
             Width = 38
             TabOrder = 26
@@ -2450,7 +2450,7 @@ object f_config_display: Tf_config_display
           object labelsizeSol: TUpDown
             Tag = 5
             Left = 404
-            Height = 23
+            Height = 24
             Top = 139
             Width = 17
             Associate = Edit10
@@ -2464,7 +2464,7 @@ object f_config_display: Tf_config_display
           object Edit11: TEdit
             Tag = 6
             Left = 366
-            Height = 23
+            Height = 24
             Top = 163
             Width = 38
             TabOrder = 28
@@ -2472,7 +2472,7 @@ object f_config_display: Tf_config_display
           object labelsizeConst: TUpDown
             Tag = 6
             Left = 404
-            Height = 23
+            Height = 24
             Top = 163
             Width = 17
             Associate = Edit11
@@ -2486,7 +2486,7 @@ object f_config_display: Tf_config_display
           object Edit12: TEdit
             Tag = 7
             Left = 366
-            Height = 23
+            Height = 24
             Top = 187
             Width = 38
             TabOrder = 30
@@ -2494,7 +2494,7 @@ object f_config_display: Tf_config_display
           object labelsizeMisc: TUpDown
             Tag = 7
             Left = 404
-            Height = 23
+            Height = 24
             Top = 187
             Width = 17
             Associate = Edit12
@@ -2508,7 +2508,7 @@ object f_config_display: Tf_config_display
           object Edit13: TEdit
             Tag = 8
             Left = 366
-            Height = 23
+            Height = 24
             Top = 211
             Width = 38
             TabOrder = 32
@@ -2516,7 +2516,7 @@ object f_config_display: Tf_config_display
           object labelsizeChartInfo: TUpDown
             Tag = 8
             Left = 404
-            Height = 23
+            Height = 24
             Top = 211
             Width = 17
             Associate = Edit13
@@ -2531,7 +2531,7 @@ object f_config_display: Tf_config_display
             Left = 19
             Height = 16
             Top = 6
-            Width = 72
+            Width = 79
             Caption = 'Label Object'
             ParentColor = False
           end
@@ -2539,7 +2539,7 @@ object f_config_display: Tf_config_display
             Left = 43
             Height = 16
             Top = 242
-            Width = 135
+            Width = 145
             Caption = 'Observing list elements'
             ParentColor = False
           end
@@ -2554,7 +2554,7 @@ object f_config_display: Tf_config_display
           object Edit14: TEdit
             Tag = 9
             Left = 366
-            Height = 23
+            Height = 24
             Top = 237
             Width = 38
             TabOrder = 34
@@ -2562,7 +2562,7 @@ object f_config_display: Tf_config_display
           object labelsizeobslist: TUpDown
             Tag = 9
             Left = 404
-            Height = 23
+            Height = 24
             Top = 237
             Width = 17
             Associate = Edit14
@@ -2578,7 +2578,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 23
           Top = 437
-          Width = 205
+          Width = 225
           Caption = 'Display labels for all star catalog'
           OnClick = DrawAllStarLabelClick
           TabOrder = 5
@@ -2596,7 +2596,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 23
           Top = 27
-          Width = 165
+          Width = 175
           Caption = 'Show position in title bar'
           OnClick = ShowTitleClick
           TabOrder = 7
@@ -2605,7 +2605,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 23
           Top = 459
-          Width = 77
+          Width = 84
           Caption = 'LabelLine'
           OnClick = LabelLineClick
           TabOrder = 8
@@ -2614,7 +2614,7 @@ object f_config_display: Tf_config_display
           Left = 26
           Height = 23
           Top = 481
-          Width = 82
+          Width = 89
           Caption = 'OptLabels'
           OnClick = OptLabelsClick
           TabOrder = 9
@@ -2623,7 +2623,7 @@ object f_config_display: Tf_config_display
           Left = 325
           Height = 23
           Top = 49
-          Width = 98
+          Width = 106
           Caption = 'Chart legend'
           OnClick = CheckBox5Click
           TabOrder = 10
@@ -3163,155 +3163,61 @@ object f_config_display: Tf_config_display
         ClientHeight = 522
         ClientWidth = 499
         object Label307: TLabel
-          Left = 80
-          Height = 15
-          Top = 8
-          Width = 166
+          Left = 13
+          Height = 16
+          Top = 21
+          Width = 172
           Caption = 'Finder circle (Eyepiece/Telrad)'
           ParentColor = False
         end
-        object cb1: TCheckBox
-          Tag = 1
-          Left = 24
-          Height = 26
-          Top = 87
-          Width = 57
-          Caption = 'No. 1'
-          OnClick = cbClick
-          TabOrder = 0
-        end
-        object cb2: TCheckBox
-          Tag = 2
-          Left = 24
-          Height = 26
-          Top = 117
-          Width = 57
-          Caption = 'No. 2'
-          OnClick = cbClick
-          TabOrder = 1
-        end
-        object cb3: TCheckBox
-          Tag = 3
-          Left = 24
-          Height = 26
-          Top = 147
-          Width = 57
-          Caption = 'No. 3'
-          OnClick = cbClick
-          TabOrder = 2
-        end
-        object cb4: TCheckBox
-          Tag = 4
-          Left = 24
-          Height = 26
-          Top = 177
-          Width = 57
-          Caption = 'No. 4'
-          OnClick = cbClick
-          TabOrder = 3
-        end
-        object cb5: TCheckBox
-          Tag = 5
-          Left = 24
-          Height = 26
-          Top = 207
-          Width = 57
-          Caption = 'No. 5'
-          OnClick = cbClick
-          TabOrder = 4
-        end
-        object cb6: TCheckBox
-          Tag = 6
-          Left = 24
-          Height = 26
-          Top = 237
-          Width = 57
-          Caption = 'No. 6'
-          OnClick = cbClick
-          TabOrder = 5
-        end
-        object cb7: TCheckBox
-          Tag = 7
-          Left = 24
-          Height = 26
-          Top = 267
-          Width = 57
-          Caption = 'No. 7'
-          OnClick = cbClick
-          TabOrder = 6
-        end
-        object cb8: TCheckBox
-          Tag = 8
-          Left = 24
-          Height = 26
-          Top = 297
-          Width = 57
-          Caption = 'No. 8'
-          OnClick = cbClick
-          TabOrder = 7
-        end
-        object cb9: TCheckBox
-          Tag = 9
-          Left = 24
-          Height = 26
-          Top = 327
-          Width = 57
-          Caption = 'No. 9'
-          OnClick = cbClick
-          TabOrder = 8
-        end
-        object cb10: TCheckBox
-          Tag = 10
-          Left = 24
-          Height = 26
-          Top = 357
-          Width = 64
-          Caption = 'No. 10'
-          OnClick = cbClick
-          TabOrder = 9
-        end
         object Circlegrid: TStringGrid
-          Left = 95
+          Left = 26
           Height = 349
           Top = 50
-          Width = 380
-          ColCount = 4
+          Width = 451
+          ColCount = 6
           DefaultColWidth = 70
           DefaultRowHeight = 30
-          FixedCols = 0
           GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAutoAddRows, goRowSelect, goFixedRowNumbering]
           RowCount = 11
-          TabOrder = 10
+          ScrollBars = ssVertical
+          TabOrder = 0
           TitleFont.Height = -11
+          OnColRowInserted = CirclegridColRowInserted
+          OnColRowMoved = CirclegridColRowMoved
+          OnDblClick = CirclegridDblClick
+          OnDrawCell = CirclegridDrawCell
+          OnMouseUp = CirclegridMouseUp
+          OnSelectCell = CirclegridSelectCell
           OnSetEditText = CirclegridSetEditText
         end
         object CenterMark1: TCheckBox
-          Left = 23
-          Height = 26
-          Top = 405
-          Width = 144
+          Left = 26
+          Height = 23
+          Top = 435
+          Width = 155
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
-          TabOrder = 11
+          TabOrder = 1
         end
         object CheckBox1: TCheckBox
           Left = 293
-          Height = 26
+          Height = 23
           Top = 405
-          Width = 89
+          Width = 83
           Caption = 'Show label'
           OnClick = CheckBox1Click
-          TabOrder = 12
+          TabOrder = 2
         end
         object CheckBox3: TCheckBox
           Left = 293
-          Height = 26
+          Height = 23
           Top = 435
-          Width = 122
+          Width = 118
           Caption = 'Show mark index'
           OnClick = MarkNumberClick
-          TabOrder = 13
+          TabOrder = 3
         end
       end
       object Page9: TTabSheet
@@ -3320,153 +3226,60 @@ object f_config_display: Tf_config_display
         ClientWidth = 499
         object Label308: TLabel
           Left = 80
-          Height = 15
+          Height = 16
           Top = 8
-          Width = 182
+          Width = 184
           Caption = 'Finder rectangle (CCD / Camera)'
           ParentColor = False
         end
-        object rb1: TCheckBox
-          Tag = 1
-          Left = 24
-          Height = 19
-          Top = 87
-          Width = 50
-          Caption = 'No. 1'
-          OnClick = rbClick
-          TabOrder = 0
-        end
-        object rb2: TCheckBox
-          Tag = 2
-          Left = 24
-          Height = 19
-          Top = 117
-          Width = 50
-          Caption = 'No. 2'
-          OnClick = rbClick
-          TabOrder = 1
-        end
-        object rb3: TCheckBox
-          Tag = 3
-          Left = 24
-          Height = 19
-          Top = 147
-          Width = 50
-          Caption = 'No. 3'
-          OnClick = rbClick
-          TabOrder = 2
-        end
-        object rb4: TCheckBox
-          Tag = 4
-          Left = 24
-          Height = 19
-          Top = 177
-          Width = 50
-          Caption = 'No. 4'
-          OnClick = rbClick
-          TabOrder = 3
-        end
-        object rb5: TCheckBox
-          Tag = 5
-          Left = 24
-          Height = 19
-          Top = 207
-          Width = 50
-          Caption = 'No. 5'
-          OnClick = rbClick
-          TabOrder = 4
-        end
-        object rb6: TCheckBox
-          Tag = 6
-          Left = 24
-          Height = 19
-          Top = 237
-          Width = 50
-          Caption = 'No. 6'
-          OnClick = rbClick
-          TabOrder = 5
-        end
-        object rb7: TCheckBox
-          Tag = 7
-          Left = 24
-          Height = 19
-          Top = 267
-          Width = 50
-          Caption = 'No. 7'
-          OnClick = rbClick
-          TabOrder = 6
-        end
-        object rb8: TCheckBox
-          Tag = 8
-          Left = 24
-          Height = 19
-          Top = 297
-          Width = 50
-          Caption = 'No. 8'
-          OnClick = rbClick
-          TabOrder = 7
-        end
-        object rb9: TCheckBox
-          Tag = 9
-          Left = 24
-          Height = 19
-          Top = 327
-          Width = 50
-          Caption = 'No. 9'
-          OnClick = rbClick
-          TabOrder = 8
-        end
-        object rb10: TCheckBox
-          Tag = 10
-          Left = 24
-          Height = 19
-          Top = 357
-          Width = 51
-          Caption = 'No10'
-          OnClick = rbClick
-          TabOrder = 9
-        end
         object RectangleGrid: TStringGrid
-          Left = 95
+          Left = 26
           Height = 349
           Top = 50
-          Width = 380
+          Width = 451
+          ColCount = 7
           DefaultColWidth = 60
           DefaultRowHeight = 30
-          FixedCols = 0
           GridLineWidth = 0
-          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor]
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowMoving, goEditing, goAutoAddRows, goRowSelect, goFixedRowNumbering]
           RowCount = 11
-          TabOrder = 10
+          ScrollBars = ssVertical
+          TabOrder = 0
           TitleFont.Height = -11
+          OnColRowInserted = RectangleGridColRowInserted
+          OnColRowMoved = RectangleGridColRowMoved
+          OnDblClick = RectangleGridDblClick
+          OnDrawCell = RectangleGridDrawCell
+          OnMouseUp = RectangleGridMouseUp
+          OnSelectCell = RectangleGridSelectCell
           OnSetEditText = RectangleGridSetEditText
         end
         object CenterMark2: TCheckBox
-          Left = 24
-          Height = 19
-          Top = 403
-          Width = 137
+          Left = 26
+          Height = 23
+          Top = 435
+          Width = 155
           Caption = 'Mark the chart center '
           OnClick = CenterMark1Click
-          TabOrder = 11
+          TabOrder = 1
         end
         object CheckBox2: TCheckBox
           Left = 293
-          Height = 19
+          Height = 23
           Top = 403
-          Width = 82
+          Width = 83
           Caption = 'Show label'
           OnClick = CheckBox2Click
-          TabOrder = 12
+          TabOrder = 2
         end
         object CheckBox4: TCheckBox
           Left = 293
-          Height = 19
+          Height = 23
           Top = 435
-          Width = 115
+          Width = 118
           Caption = 'Show mark index'
           OnClick = MarkNumberClick
-          TabOrder = 13
+          TabOrder = 3
         end
       end
     end
@@ -3506,5 +3319,140 @@ object f_config_display: Tf_config_display
     )
     left = 432
     top = 470
+  end
+  object ImageList1: TImageList
+    left = 195
+    top = 465
+    Bitmap = {
+      4C69040000001000000010000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000007F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF00000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF00FFFFFFFFFF
+      FFFF00FFFFFFFFFFFFFF7F7F7FFF000000000000000000000000000000000000
+      000000000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF0000
+      000000000000000000000000000000000000000000007F7F7FFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF00FF
+      FFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF000000007F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFFFFFFFFFF0000
+      000000FFFFFF0000000000FFFFFF0000000000FFFFFF0000000000FFFFFF7F7F
+      7FFF00000000000000000000000000000000000000007F7F7FFF7F7F7FFF7F7F
+      7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F7FFF7F7F
+      7FFF000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000FFFFFEFFFBFCFAFFFDFFFEFFF9FCFAFFFAFD
+      FBFFFDFFFEFFFCFFFDFFFDFFFEFFF5F8F6FFFDFFFEFFFFFFFEFFF4F5F3FFFFFF
+      FEFFFEFEFEFFFDFFFF00FBFDFEFFFFFFFFFFF1F1F1FFFDFFFF00FDFFFF00F9FE
+      FDFFFAFFFEFFF9FEFDFFFBFFFFFFF9FBFBFFFDFFFF00FEFEFEFFFFFFFFFFF7F7
+      F7FFFFFFFFFFFDFFFF00FBFDFEFFFEFEFEFFFDFFFF00FBFDFDFFF2F7F6FFF6FB
+      FAFFFBFFFFFFFBFFFFFFF7FCFBFFFDFFFF00FDFFFF00FEFEFEFF9F9F9FFFFFFF
+      FFFFF8F8F8FFFDFFFF00FCFEFFFFFDFFFF00FAFCFDFFFDFFFF00EEF2F3FF8B8F
+      90FF595E5FFF4E5354FF6B7071FF919596FFE4E8E9FFA3A5A6FF525455FFF8FA
+      FBFFFDFFFF00FDFFFF00FCFEFFFFF7F9FAFFFBFFFFFFBEC2C3FF5A5F60FF5C61
+      62FF8A8F90FF999E9FFF919697FF6F7374FF737778FF7D7F80FF6E7071FFFDFF
+      FF00FDFFFF00FDFFFF00FCFEFFFFF8FBFFFFE7EAEEFF6B6E72FF6E7376FFECF1
+      F4FFEFF6F9FFF3FAFDFFF8FFFFFF9A9FA2FF919699FF818488FF797C80FFF8F9
+      FDFFFDFEFFFFFDFFFF00FCFEFFFFF8FBFFFF8D9094FF5F6467FFDADFE2FFF8FF
+      FFFFF4FBFEFFF8FFFFFF9DA4A7FF8D9295FF999EA1FF919498FF828589FFF6F7
+      FBFFFDFEFFFFFDFFFF00FCFEFFFFFBFEFFFF5D6064FF8B9093FFFAFFFFFFEDF4
+      F7FFF8FFFFFF979EA1FF61686BFF7B8083FF72777AFF7A7D81FF676A6EFFFCFD
+      FFFFFDFEFFFFFDFFFF00FDFFFF00FAFDFFFF53565AFF979A9EFFFAFFFFFFFAFF
+      FFFFF3FAFDFFF2F9FCFFF8FFFFFFEAEFF2FFFAFFFFFFF9FCFFFFFBFEFFFFFDFE
+      FFFFF3F4F8FFFDFFFF00FDFFFF00FDFFFF006B6F70FF8B8F90FFF9FEFFFFFAFF
+      FFFFFAFFFFFFFAFFFFFFFAFFFFFFF8FCFDFFFBFFFFFFFDFFFF00F9FBFCFFFDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00959798FF5D5F60FFD2D6D7FFF9FD
+      FEFFF7FCFDFFFAFFFFFFFAFFFFFFF8FCFDFFF4F8F9FFFDFFFF00FDFFFF00F2F4
+      F5FFFDFFFF00FDFFFF00FDFFFF00FFFFFFFFE8EAEAFF757777FF737877FFD4D9
+      D8FFFBFFFFFFF5FAF9FFF7FCFBFFCED0D0FF9B9D9DFFEEEEEEFFFFFFFFFFF8F8
+      F8FFFFFFFFFFFDFFFF00FDFFFF00FFFFFFFFFFFFFFFFC0C2C2FF5B5D5DFF5D62
+      61FF777C7BFF979C9BFF717675FF555757FF525454FFD9D9D9FFFFFFFFFFFFFF
+      FFFFF7F7F7FFFDFFFF00FDFFFF00FFFFFEFFF5F6F4FFFDFFFEFFEEF1EFFF9EA1
+      9FFF707371FF636664FF7C7F7DFFA3A6A4FFF1F4F2FFF8F9F7FFFFFFFEFFFDFB
+      FAFFFFFFFFFFFDFFFF00FDFFFF00FCFCFCFFFFFFFEFFF9FBFBFFFDFFFEFFF9FB
+      FBFFFDFFFEFFFBFDFDFFFDFFFEFFFAFCFCFFFDFFFEFFFFFFFFFFFAFBF9FFFCFC
+      FCFFFFFFFFFFFDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFFFF00FDFF
+      FF00FDFFFF00FAFCFDFFFDFFFF00000000000000000000000000000000000000
+      CB0000000000000000000000000000000000000000004848EC00000000000000
+      0000000000000000000000000000000000000000000000000000000000001C1C
+      ED1B6161F39AADADFFE1CFCFFFFF9797FEE84242EEA00000E621000000000000
+      D0000000000000000000000000000000000000000000000000000000D2790B0B
+      D2FF7B7BDEFF9292DDFF8888D7FF8989D9FF6969D8FE0000D0FF0000D0880000
+      00000000BB00000000000000000000000000000000000000BF7B0D0DBEFF8D8D
+      D9FF8787D7FF8181D6FF7D7DD5FF7878D3FF7676D0FF7C7CD0FF1414BFFF0000
+      BD90000000000000000000000000000091000000A71D0000A5FF8181D4FF7A7A
+      D3FF7474D4FF7171D4FF6D6DD3FF6A6AD1FF6464CEFF6161CAFF6565C8FF0101
+      A6FF0000A72F0000920000000000000000000000919A3939AEFE7070CFFF6969
+      D1FF6666D2FF6262D2FF5E5ED2FF5A5AD1FF5555CEFF5050C9FF4B4BC3FF3535
+      ADFE000090AB000000000000000000000000000078E15252BCFF5E5ECCFF5959
+      CFFF5656D2FF5252D4FF4F4FD5FF4B4BD3FF4646CFFF4141C9FF3C3CC0FF4545
+      BAFF000078F1000000000000000000000000000060F94C4CBFFF4D4DC9FF4A4A
+      CFFF4747D4FF4444D8FF4040D9FF3C3CD7FF3737D2FF3131C9FF2929BDFF4C4C
+      C6FF000061FF00000000000000000000000000004DE21F1FA2FF2D2DC0FF3434
+      CDFF3737D7FF3B3BDDFF3636E0FF3131DDFF2D2DD6FF2828CBFF1D1DBCFF0707
+      9EFF00004DF800000000000000000000000000003BA000006DFE0101B3FF0505
+      C6FF0707D8FF0909E4FF0B0BE8FF0A0AE4FF0808D8FF0707C6FF0404B4FF0000
+      76FE00003AB300000000000000000000390000002B26000029FF0202A8FF0707
+      C2FF0B0BD9FF0F0FECFF1010F5FF0F0FECFF0B0BD9FF0707C2FF0202ADFF0000
+      2DFF00002B370000380000000000000000000000000000002B8C00003AFF0305
+      AEFF0807CBFF0E0DE6FF1111FAFF0E0DE5FF0806C9FF0406B3FF000241FF0000
+      2AA20000000000000000000000000000000000002C00000000000003308F0512
+      3FFF0E1B84FE131AB1FF191CC2FF151DB4FF121E89FE091645FF010634A10000
+      000000002C000000000000000000000000000000000000002C00000000000513
+      432B132452AB26385EF23C4E6EFF2F4265F3192B58B1091A4C36000000000005
+      3500000000000000000000000000000000000000000000000000000000000B15
+      430000000000000000000000000000000000000000001A102900000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000002CE0
+      900000000000000000000000000000000000000000003AE29700000000000000
+      0000000000000000000000000000000000000000000000CA7000000000001BE2
+      893266EDB1B1AEFDD9F7D1FFEDFF93F9CBF740E79CAE00DD792D0000000000CA
+      70000000000000000000000000000000000000B966000000000000CB6F9A0DCD
+      77FF7ADCB3FE92DEC1FF88D9BBFF89DBBBFF5FD7A4FE00C96CFF00CC6F960000
+      000000B966000000000000000000000000000000000000BC679E0BBD6EFF8BD8
+      BCFF89D8BCFF81D7B9FF7ED5B6FF7AD3B4FF77D0B1FF77D0AFFF0ABD6EFF00BC
+      6796000000000000000000000000009A540000AD5E3500A85AFF80D4B6FF7BD3
+      B4FF76D4B3FF72D4B2FF6ED3B0FF6AD1ADFF65CEA9FF61CAA5FF61C6A1FF00A7
+      5BFF00AC5F2F009A54000000000000000000009953B337B27EFE70CFAEFF69D0
+      ADFF65D2AEFF62D2ADFF5ED2ACFF5AD1A9FF55CEA5FF50C89EFF4BC296FF2CAC
+      76FE009953AB000000000000000000000000008746F951BD94FF5ECCA5FF5AD0
+      A8FF56D2AAFF52D4ABFF4ED5ABFF4AD3A7FF46CFA1FF41C89AFF3BBF8FFF3CB3
+      85FF008746EE00000000000000000000000000753BFF4CBE93FF4DC99EFF4ACF
+      A3FF47D4A8FF44D8ABFF40D9AAFF3CD7A7FF37D1A0FF2FC894FF2ABC87FF47BC
+      8FFF00753BFF000000000000000000000000006535F51CA46CFF2CC08BFF34CD
+      9BFF36D7A7FF39DDADFF35E0ADFF30DCA9FF2DD7A1FF27CA93FF1BBB7FFF0495
+      57FF006637F000000000000000000000000000562DB1007943FE01B36EFF05C6
+      84FF08D898FF09E4A4FF0BE8A9FF0AE3A3FF08D796FF07C583FF03B26EFF0076
+      41FE00562EAC000000000000000000532C0000492634004222FF02A863FF07C2
+      7FFF0BDA99FF0FEDAEFF10F5B6FF0FEBACFF0BD797FF07C07DFF02A460FF0043
+      21FF0049262C00532D0000000000000000000000000000371B9C014021FF05AC
+      69FF06CA86FF0CE5A5FF0FF9B9FF0BE2A2FF06C884FF09AC6AFF024022FF0036
+      1B940000000000000000000000000000000000341A000000000004301A99133D
+      29FF1F7F57FE23AD78FF26BE84FF25AC77FF227F59FE143E2BFF07331E930000
+      000000341A0000000000000000000000000000000000002C1600000000001343
+      2D3020503BAC2C5945F2386451FF315E4AEE24543FA91848322D000000000D37
+      2200000000000000000000000000000000000000000000000000000000001542
+      2C00000000000000000000000000000000000000000026594100000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000
+    }
   end
 end

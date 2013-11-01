@@ -4867,7 +4867,7 @@ end else begin
 projection(ra,de,x1,y1,false,cfgsc) ;
 projection(ra,de+0.001,x2,y2,false,cfgsc) ;
 rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
-for i:=1 to 10 do if cfgsc.circleok[i] then begin
+for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then begin
     if cfgsc.circle[i,4]=0 then begin
       col:=Fplot.cfgplot.Color[18];
       lbl:=cfgsc.circlelbl[i];
@@ -4898,7 +4898,7 @@ for i:=1 to 10 do if cfgsc.circleok[i] then begin
       end;
     end;
 end;
-for i:=1 to 10 do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
+for i:=1 to cfgsc.nrectangle do if cfgsc.rectangleok[i] and (deg2rad*cfgsc.rectangle[i,2]/60<2*cfgsc.fov) then begin
     if cfgsc.rectangle[i,5]=0 then begin
       col:=Fplot.cfgplot.Color[18];
       lbl:=cfgsc.rectanglelbl[i];
