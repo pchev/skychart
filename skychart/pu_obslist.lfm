@@ -9,25 +9,25 @@ object f_obslist: Tf_obslist
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.0.12.0'
+  LCLVersion = '1.3'
   object PanelBot: TPanel
     Left = 0
-    Height = 58
-    Top = 416
+    Height = 66
+    Top = 408
     Width = 799
     Align = alBottom
-    ClientHeight = 58
+    ClientHeight = 66
     ClientWidth = 799
     TabOrder = 0
     object FileNameEdit1: TFileNameEdit
       Left = 8
-      Height = 23
-      Top = 13
+      Height = 24
+      Top = 5
       Width = 192
       FilterIndex = 0
       HideDirectories = False
       ButtonWidth = 23
-      NumGlyphs = 0
+      NumGlyphs = 1
       MaxLength = 0
       TabOrder = 0
       OnChange = FileNameEdit1Change
@@ -35,45 +35,54 @@ object f_obslist: Tf_obslist
     object ButtonSave: TButton
       Left = 240
       Height = 25
-      Top = 11
+      Top = 5
       Width = 75
       Caption = 'Save'
       OnClick = ButtonSaveClick
       TabOrder = 1
     end
     object ButtonClear: TButton
-      Left = 336
+      Left = 352
       Height = 25
-      Top = 11
+      Top = 4
       Width = 75
       Caption = 'Clear'
       OnClick = ButtonClearClick
       TabOrder = 2
     end
     object CheckBox3: TCheckBox
-      Left = 440
+      Left = 448
       Height = 23
-      Top = 0
-      Width = 173
+      Top = 4
+      Width = 183
       Caption = 'Mark objects on the chart'
       OnChange = CheckBox3Change
       TabOrder = 3
     end
     object NoFilterList: TCheckBox
-      Left = 440
+      Left = 448
       Height = 23
-      Top = 24
-      Width = 237
+      Top = 32
+      Width = 254
       Caption = 'Always show the objects from the list'
       OnChange = NoFilterListChange
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
     end
+    object UpdAllCoord: TButton
+      Left = 240
+      Height = 25
+      Top = 35
+      Width = 187
+      Caption = 'UpdAllCoord'
+      OnClick = UpdAllCoordClick
+      TabOrder = 5
+    end
   end
   object StringGrid1: TStringGrid
     Left = 0
-    Height = 336
+    Height = 328
     Top = 80
     Width = 799
     Align = alClient
@@ -102,7 +111,7 @@ object f_obslist: Tf_obslist
     TabOrder = 2
     object Edit1: TEdit
       Left = 8
-      Height = 23
+      Height = 24
       Top = 8
       Width = 291
       TabOrder = 0
@@ -117,7 +126,7 @@ object f_obslist: Tf_obslist
       TabOrder = 1
     end
     object Button6: TButton
-      Left = 112
+      Left = 104
       Height = 25
       Top = 40
       Width = 80
@@ -140,12 +149,12 @@ object f_obslist: Tf_obslist
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 74
-        ClientWidth = 436
+        ClientWidth = 433
         object CheckBox2: TCheckBox
           Left = 16
           Height = 23
           Top = 46
-          Width = 240
+          Width = 252
           Caption = 'Only objects within airmass limits now'
           OnChange = CheckBox2Change
           TabOrder = 0
@@ -154,7 +163,7 @@ object f_obslist: Tf_obslist
           Left = 16
           Height = 23
           Top = 22
-          Width = 260
+          Width = 274
           Caption = 'Only objects within airmass limits tonight'
           OnChange = CheckBox1Change
           TabOrder = 1
@@ -163,13 +172,13 @@ object f_obslist: Tf_obslist
           Left = 192
           Height = 16
           Top = 3
-          Width = 37
+          Width = 41
           Caption = 'Label2'
           ParentColor = False
         end
         object AirmassCombo: TComboBox
           Left = 112
-          Height = 23
+          Height = 24
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -199,7 +208,7 @@ object f_obslist: Tf_obslist
       object TabSheet2: TTabSheet
         Caption = 'Transit'
         ClientHeight = 74
-        ClientWidth = 436
+        ClientWidth = 433
         object CheckBox4: TCheckBox
           Left = 16
           Height = 23

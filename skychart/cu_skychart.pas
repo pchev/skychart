@@ -1291,8 +1291,8 @@ var rec:GcatRec;
               lnum:=9;
            end;
            if FNoFilterList and (not forcelabel) and savefilter then begin
-             if rec.neb.valid[vnMag] and (rec.neb.mag>catalog.cfgcat.NebMagMax) then continue;
-             if rec.neb.valid[vnDim1] and (rec.neb.dim1*60/rec.neb.nebunit<catalog.cfgcat.NebSizeMin) then continue;
+             if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and rec.neb.valid[vnMag] and (rec.neb.mag>catalog.cfgcat.NebMagMax) then continue;
+             if (not (catalog.cfgshr.NoFilterMessier and rec.neb.messierobject)) and rec.neb.valid[vnDim1] and (rec.neb.dim1*60/rec.neb.nebunit<catalog.cfgcat.NebSizeMin) then continue;
              if catalog.cfgshr.BigNebFilter and (rec.neb.dim1*60/rec.neb.nebunit>=catalog.cfgshr.BigNebLimit) and (rec.neb.nebtype<>1) then continue;
            end;
           end;
@@ -1641,7 +1641,7 @@ var
   xx,yy,lori:single;
   lopt: boolean;
   lalign: TLabelAlign;
-  i,j,jj,n,ipla,sunsize,lid: integer;
+  i,j,jj,k,n,ipla,sunsize,lid: integer;
   draworder : array[1..11] of integer;
   ltxt,lis,buf: string;
   ft: textfile;
@@ -1738,7 +1738,11 @@ for j:=0 to cfgsc.SimNb-1 do begin
         end;
         lis:=pla[ipla]+FormatFloat(f6,cfgsc.Planetlst[j,ipla,8])+FormatFloat(f6,cfgsc.Planetlst[j,ipla,9]);
         lid:=rshash(lis,$7FFFFFFF);
-        SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
+        if (FObjectListLabels.Count>0) and FObjectListLabels.Find(uppercase(trim(wordspace(ltxt))),k)
+         then
+           SetLabel(lid,xx,yy,round(pixscale*diam/2),2,9,ltxt,lalign,lori,0,lopt)
+         else
+           SetLabel(lid,xx,yy,round(pixscale*diam/2),2,5,ltxt,lalign,lori,1,lopt);
       end;
       case ipla of
         4 :  begin
@@ -1855,15 +1859,18 @@ end;
 
 function Tskychart.DrawAsteroid :boolean;
 var
-  x1,y1,x2,y2,ra,dec,magn: Double;
+  x1,y1,x2,y2,ra,dec,magn,savemagdiff: Double;
   xx,yy,lori:single;
-  lopt: boolean;
+  lopt,forcelabel: boolean;
   lalign: TLabelAlign;
-  i,j,jj,lid: integer;
+  i,j,jj,k,lid: integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowAsteroidValid then begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
+  savemagdiff:=cfgsc.AstMagDiff;
+  try
+  if FNoFilterList then cfgsc.AstMagDiff:=99;
   Fplanet.ComputeAsteroid(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[12]) then break;
@@ -1874,8 +1881,16 @@ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
       projection(ra,dec,x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
+        forcelabel:=false;
+        if FObjectListLabels.Count>0 then begin
+         if FObjectListLabels.Find(uppercase(trim(wordspace(cfgsc.AsteroidName[j,i,2]))),k) then begin
+            forcelabel:=true;
+         end else begin
+           if magn>(cfgsc.StarMagMax+savemagdiff) then continue;
+         end;
+        end;
         Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,magn);
-        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+cfgsc.AstMagDiff-cfgsc.LabelMagDiff[5]) then begin
+        if forcelabel or((doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and(magn<cfgsc.StarMagMax+savemagdiff-cfgsc.LabelMagDiff[5])) then begin
           lis:=cfgsc.AsteroidName[j,i,1]+FormatFloat(f6,cfgsc.AsteroidLst[j,i,6])+FormatFloat(f6,cfgsc.AsteroidLst[j,i,7]);
           lid:=rshash(lis,$7FFFFFFF);
           if (cfgsc.SimNb=1) or (not cfgsc.SimObject[12]) then begin
@@ -1904,12 +1919,19 @@ if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw asteroids');
             end;
             lopt:=false;
            end;
-          SetLabel(lid,xx,yy,0,2,5,ltxt,lalign,lori,4,lopt);
+          if forcelabel
+           then
+             SetLabel(lid,xx,yy,0,2,9,ltxt,lalign,lori,0,lopt)
+           else
+             SetLabel(lid,xx,yy,0,2,5,ltxt,lalign,lori,4,lopt);
         end;
       end;
     end;
   end;
   result:=true;
+  finally
+    cfgsc.AstMagDiff := savemagdiff;
+  end;
 end else begin
   cfgsc.AsteroidNb:=0;
   result:=false;
@@ -1918,15 +1940,18 @@ end;
 
 function Tskychart.DrawComet :boolean;
 var
-  x1,y1,x2,y2: Double;
+  x1,y1,x2,y2,savemagdiff: Double;
   xx,yy,cxx,cyy,lori:single;
-  lopt: boolean;
+  lopt,forcelabel: boolean;
   lalign: TLabelAlign;
-  i,j,jj,lid,sz : integer;
+  i,j,jj,k,lid,sz : integer;
   ltxt,lis:string;
 begin
 if cfgsc.ShowCometValid then begin
   if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw comets');
+  savemagdiff:=cfgsc.ComMagDiff;
+  try
+  if FNoFilterList then cfgsc.ComMagDiff:=99;
   Fplanet.ComputeComet(cfgsc);
   for j:=0 to cfgsc.SimNb-1 do begin
     if (j>0) and (not cfgsc.SimObject[13]) then break;
@@ -1934,7 +1959,15 @@ if cfgsc.ShowCometValid then begin
       projection(cfgsc.CometLst[j,i,1],cfgsc.CometLst[j,i,2],x1,y1,true,cfgsc);
       WindowXY(x1,y1,xx,yy,cfgsc);
       if (xx>cfgsc.Xmin) and (xx<cfgsc.Xmax) and (yy>cfgsc.Ymin) and (yy<cfgsc.Ymax) then begin
-        if (doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and((cfgsc.SimNb>1)or(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+cfgsc.ComMagDiff-cfgsc.LabelMagDiff[5])) then begin
+        forcelabel:=false;
+        if FObjectListLabels.Count>0 then begin
+         if FObjectListLabels.Find(uppercase(trim(wordspace(cfgsc.CometName[j,i,2]))),k) then begin
+            forcelabel:=true;
+         end else begin
+           if cfgsc.CometLst[j,i,3]>(cfgsc.StarMagMax+savemagdiff) then continue;
+         end;
+        end;
+        if forcelabel or((doSimLabel(cfgsc.SimNb,j,cfgsc.SimLabel))and((cfgsc.SimNb>1)or(cfgsc.CometLst[j,i,3]<cfgsc.StarMagMax+savemagdiff-cfgsc.LabelMagDiff[5]))) then begin
           lis:=cfgsc.CometName[j,i,1]+FormatFloat(f6,cfgsc.CometLst[j,i,9])+FormatFloat(f6,cfgsc.CometLst[j,i,10]);
           lid:=rshash(lis,$7FFFFFFF);
           sz:=round(abs(cfgsc.BxGlb)*deg2rad/60*cfgsc.CometLst[j,i,4]/2);
@@ -1965,7 +1998,11 @@ if cfgsc.ShowCometValid then begin
             end;
             lopt:=false;
            end;
-          SetLabel(lid,xx,yy,sz,2,5,ltxt,lalign,lori,4,lopt);
+          if forcelabel
+           then
+             SetLabel(lid,xx,yy,sz,2,9,ltxt,lalign,lori,0,lopt)
+           else
+             SetLabel(lid,xx,yy,sz,2,5,ltxt,lalign,lori,4,lopt);
         end;
         if projection(cfgsc.CometLst[j,i,5],cfgsc.CometLst[j,i,6],x1,y1,true,cfgsc) then
            WindowXY(x1,y1,cxx,cyy,cfgsc)
@@ -1975,6 +2012,9 @@ if cfgsc.ShowCometValid then begin
     end;
   end;
   result:=true;
+  finally
+    cfgsc.ComMagDiff := savemagdiff;
+  end;
 end else begin
   cfgsc.CometNb:=0;
   result:=false;
