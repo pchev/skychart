@@ -678,8 +678,8 @@ if VerboseMsg then
  if (not frommovecam)and(movecam or moveguide) then begin
    movecam:=false;
    moveguide:=false;
-   for i:=1 to 10 do sc.cfgsc.circle[i,4]:=0;
-   for i:=1 to 10 do sc.cfgsc.rectangle[i,5]:=0;
+   for i:=1 to sc.cfgsc.ncircle do sc.cfgsc.circle[i,4]:=0;
+   for i:=1 to sc.cfgsc.nrectangle do sc.cfgsc.rectangle[i,5]:=0;
  end;
  frommovecam:=false;
  identlabel.visible:=false;
@@ -1463,8 +1463,8 @@ begin
 if movecam or moveguide  then begin
   movecam:=false;
   moveguide:=false;
-  for i:=1 to 10 do sc.cfgsc.circle[i,4]:=0;
-  for i:=1 to 10 do sc.cfgsc.rectangle[i,5]:=0;
+  for i:=1 to sc.cfgsc.ncircle do sc.cfgsc.circle[i,4]:=0;
+  for i:=1 to sc.cfgsc.nrectangle do sc.cfgsc.rectangle[i,5]:=0;
 end
 else begin
   case cam of
@@ -1477,7 +1477,7 @@ else begin
   end;
   if movecam then begin // find main camera (max rectangle size with null offset)
      maxsize:=0;
-     for i:=1 to 10 do
+     for i:=1 to sc.cfgsc.nrectangle do
         if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]=0) then begin
           size:=sc.cfgsc.rectangle[i,1]*sc.cfgsc.rectangle[i,2];
           if size>maxsize then begin
@@ -1490,7 +1490,7 @@ else begin
   end;
   if moveguide then begin // find first guider (first circle or rectangle with offset > 0)
      guiderfound:=false;
-     for i:=1 to 10 do
+     for i:=1 to sc.cfgsc.ncircle do
         if sc.cfgsc.circleok[i] and (sc.cfgsc.circle[i,3]>0) then begin
            guiderfound:=true;
            moveguidenum:=i;
@@ -1498,7 +1498,7 @@ else begin
            sc.cfgsc.circle[i,4]:=1;
            break;
         end;
-     if not guiderfound then for i:=1 to 10 do
+     if not guiderfound then for i:=1 to sc.cfgsc.nrectangle do
         if sc.cfgsc.rectangleok[i] and (sc.cfgsc.rectangle[i,4]>0) then begin
            guiderfound:=true;
            moveguidenum:=i;
@@ -4577,7 +4577,7 @@ function Tf_chart.cmd_DefCircle(num, diameter, rotation, offset: string):string;
 var i: integer;
 begin
 i:=StrToIntDef(num,-1);
-if (i>=1)and(i<=10) then begin
+if (i>=1)and(i<=sc.cfgsc.ncircle) then begin
    sc.cfgsc.circle[i,1]:=StrToFloatDef(diameter,60);
    sc.cfgsc.circle[i,2]:=StrToFloatDef(rotation,0);
    sc.cfgsc.circle[i,3]:=StrToFloatDef(offset,0);
@@ -4592,7 +4592,7 @@ function Tf_chart.cmd_DefRectangle(num, w, h, rotation, offset: string):string;
 var i: integer;
 begin
 i:=StrToIntDef(num,-1);
-if (i>=1)and(i<=10) then begin
+if (i>=1)and(i<=sc.cfgsc.nrectangle) then begin
    sc.cfgsc.rectangle[i,1]:=StrToFloatDef(w,60);
    sc.cfgsc.rectangle[i,2]:=StrToFloatDef(h,60);
    sc.cfgsc.rectangle[i,3]:=StrToFloatDef(rotation,0);
@@ -4608,7 +4608,7 @@ function Tf_chart.cmd_ShowCircle(numlist: string):string;
 var buf: string;
     var i,p: integer;
 begin
-for i:=1 to 10 do sc.cfgsc.circleok[i]:=false;
+for i:=1 to sc.cfgsc.ncircle do sc.cfgsc.circleok[i]:=false;
 repeat
   i:=-1;
   p:=pos(',',numlist);
@@ -4619,7 +4619,7 @@ repeat
   end else begin
     i:=strtointdef(numlist,-1)
   end;
-  if (i>=1)and(i<=10) then sc.cfgsc.circleok[i]:=true;
+  if (i>=1)and(i<=sc.cfgsc.ncircle) then sc.cfgsc.circleok[i]:=true;
 until p=0;
 result:=msgOK;
 end;
@@ -4628,7 +4628,7 @@ function Tf_chart.cmd_ShowRectangle(numlist: string):string;
 var buf: string;
     var i,p: integer;
 begin
-for i:=1 to 10 do sc.cfgsc.rectangleok[i]:=false;
+for i:=1 to sc.cfgsc.nrectangle do sc.cfgsc.rectangleok[i]:=false;
 repeat
   i:=-1;
   p:=pos(',',numlist);
@@ -4639,7 +4639,7 @@ repeat
   end else begin
     i:=strtointdef(numlist,-1)
   end;
-  if (i>=1)and(i<=10) then sc.cfgsc.rectangleok[i]:=true;
+  if (i>=1)and(i<=sc.cfgsc.nrectangle) then sc.cfgsc.rectangleok[i]:=true;
 until p=0;
 result:=msgOK;
 end;
