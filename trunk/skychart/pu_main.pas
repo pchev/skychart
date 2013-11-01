@@ -6876,7 +6876,10 @@ begin
  if ok then begin
    ra:=rmod(rad2deg*ra+360,360);
    de:=rad2deg*de;
-   lbl:=catalog.FindId
+   if catalog.FindId>'' then
+     lbl:=catalog.FindId
+   else
+     lbl:=obj;
  end
   else begin
     ra:=-1;

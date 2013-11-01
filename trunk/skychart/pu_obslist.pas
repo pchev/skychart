@@ -39,6 +39,7 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
+    UpdAllCoord: TButton;
     NoFilterList: TCheckBox;
     HourAngleCombo: TComboBox;
     ButtonSave: TButton;
@@ -99,11 +100,12 @@ type
     procedure StringGrid1Resize(Sender: TObject);
     procedure StringGrid1ValidateEntry(sender: TObject; aCol, aRow: Integer;
       const OldValue: string; var NewValue: String);
+    procedure UpdAllCoordClick(Sender: TObject);
   private
     { private declarations }
     title,FDefaultList: string;
     Faltitude: double;
-    gridchanged, limitairmass,limittransit: boolean;
+    gridchanged, limitairmass,limittransit,locknewlist: boolean;
     ClickCol,ClickRow: integer;
     FSelectObject: TSelectObject;
     FGetObjectCoord: TGetObjectCoord;
@@ -128,6 +130,7 @@ type
     procedure ComputeAirmassTime;
     procedure ComputeTransitTime;
     procedure UpdateLabels(sender:TObject);
+    function UpdateCoord(arow:integer):boolean;
     procedure SetVisibleRows;
     procedure Refresh;
     property RowCount: integer read GetRowcount;
@@ -165,6 +168,7 @@ begin
   AirmassCombo.Items[6]:=rsHorizon;
   ButtonSave.Caption:=rsSave;
   ButtonClear.Caption:=rsClear;
+  UpdAllCoord.Caption:=rsUpdateCoordi;
   TabSheet1.Caption:=rsAirmass;
   Label1.Caption:=rsLimit;
   CheckBox1.Caption:=rsOnlyObjectsW;
@@ -467,6 +471,23 @@ case PageControl1.ActivePageIndex of
 end;
 end;
 
+function Tf_obslist.UpdateCoord(arow:integer): boolean;
+var buf,buf1,lbl: string;
+    ra,de: double;
+begin
+result:=false;
+buf:=trim(StringGrid1.Cells[1,arow]);
+FGetObjectCoord(buf,lbl,ra,de);
+if ra>=0 then begin
+  buf1:=FormatFloat(f5,ra);
+  StringGrid1.Cells[2,arow]:=buf1;
+  buf1:=FormatFloat(f5,de);
+  StringGrid1.Cells[3,arow]:=buf1;
+  StringGrid1.Cells[7,arow]:=lbl;
+  result:=true;
+end;
+end;
+
 procedure Tf_obslist.Refresh;
 begin
 ComputeLimits;
@@ -551,6 +572,7 @@ begin
   FObjLabels:=TStringList.Create;
   FEmptyObjLabels:=TStringList.Create;
   FDefaultList:='NewObsList.txt';
+  locknewlist:=false;
   StringGrid1.AllowOutboundEvents:=true;
   StringGrid1.ColWidths[0]:=32;
   StringGrid1.ColWidths[1]:=200;
@@ -580,20 +602,25 @@ begin
   Refresh;
 end;
 
-procedure Tf_obslist.MenuUpdcoordClick(Sender: TObject);
-var buf,buf1,lbl: string;
-    ra,de: double;
+procedure Tf_obslist.UpdAllCoordClick(Sender: TObject);
+var i: integer;
 begin
-  buf:=trim(StringGrid1.Cells[1,ClickRow]);
-  FGetObjectCoord(buf,lbl,ra,de);
-  if ra>=0 then begin
-    buf1:=FormatFloat(f5,ra);
-    StringGrid1.Cells[2,ClickRow]:=buf1;
-    buf1:=FormatFloat(f5,de);
-    StringGrid1.Cells[3,ClickRow]:=buf1;
-    StringGrid1.Cells[7,ClickRow]:=lbl;
+for i:=1 to StringGrid1.RowCount-1 do begin
+  UpdateCoord(i);
+end;
+UpdateLabels(Sender);
+gridchanged:=true;
+ComputeLimits;
+SetVisibleRows;
+end;
+
+procedure Tf_obslist.MenuUpdcoordClick(Sender: TObject);
+begin
+ if UpdateCoord(ClickRow) then begin
     UpdateLabels(Sender);
     gridchanged:=true;
+    ComputeLimits;
+    SetVisibleRows;
   end;
 end;
 
@@ -653,6 +680,7 @@ end;
 
 procedure Tf_obslist.FileNameEdit1Change(Sender: TObject);
 begin
+  if locknewlist then exit;
   if assigned(cfgsc) then LoadObsList;
 end;
 
@@ -706,7 +734,12 @@ end;
 
 procedure Tf_obslist.ButtonClearClick(Sender: TObject);
 begin
+locknewlist:=true;
+try
   Newlist;
+finally
+  locknewlist:=false;
+end;
 end;
 
 procedure Tf_obslist.Button5Click(Sender: TObject);
