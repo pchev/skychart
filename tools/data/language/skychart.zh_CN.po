@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
 "PO-Revision-Date: 2013-03-05 05:07+0000\n"
 "Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -248,6 +248,10 @@ msgstr ""
 msgid "Always save without asking."
 msgstr "总是不询问而保存。"
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "动画"
@@ -471,6 +475,10 @@ msgstr "地平线以下"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "请务必使用DOS换行符格式。"
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1096,6 +1104,10 @@ msgstr "创建postscript星图。请稍候..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "创建%s dpi的栅格星图。请稍候.."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "中天"
@@ -1672,6 +1684,10 @@ msgstr ""
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "时长"
@@ -1687,6 +1703,10 @@ msgstr "地球阴影"
 #: u_translation.rseast
 msgid "East"
 msgstr "东"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1912,6 +1932,18 @@ msgstr "外部星表天体"
 msgid "Eyepiece"
 msgstr "目镜"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "失败：%s"
@@ -2079,6 +2111,10 @@ msgstr "字体"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "对于大星表，总是选择二进制。对于经常进行更改的小星表，选择文本。这允许您直接编辑星表并立刻看到结果而不须重启本软件。"
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3716,9 +3752,17 @@ msgstr ""
 msgid "Pictures"
 msgstr "图片"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "像素"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3868,6 +3912,10 @@ msgstr ""
 msgid "PostScript"
 msgstr "PostScript"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "使用星表短名称作为前缀名"
@@ -3927,6 +3975,10 @@ msgstr "打印图例"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "打印机设置"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5204,6 +5256,10 @@ msgstr "望远镜"
 msgid "Telescope: %s"
 msgstr "望远镜：%s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "望远镜未连接"
@@ -5751,6 +5807,10 @@ msgstr "周三"
 #: u_translation.rswest
 msgid "West"
 msgstr "西"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
-"PO-Revision-Date: 2013-10-17 13:32+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
+"PO-Revision-Date: 2013-10-28 07:47+0000\n"
 "Last-Translator: Jerzy Rokicki <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "X-Poedit-Country: Poland\n"
 "Language: fr\n"
 "X-Poedit-Language: Polish\n"
@@ -146,7 +146,7 @@ msgstr "Dodaj nazwy alternatywne do indeksu"
 
 #: u_translation.rsaddtoobservi
 msgid "Add %s to observing list"
-msgstr ""
+msgstr "Dodaj %s do listy obserwacyjnej"
 
 #: u_translation.rsadjustcolour
 msgid "Adjust colour brightness"
@@ -178,7 +178,7 @@ msgstr "Wiek"
 
 #: u_translation.rsairmass
 msgid "Airmass"
-msgstr ""
+msgstr "Masa optyczna"
 
 #: u_translation.rsalignment
 msgid "Alignment"
@@ -247,11 +247,15 @@ msgstr "%sAlt obrotów:"
 
 #: u_translation.rsalways
 msgid "always"
-msgstr ""
+msgstr "zawsze"
 
 #: u_translation.rsalwayssavewi
 msgid "Always save without asking."
 msgstr "Zawsze zapisuj bez pytania."
+
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
 
 #: u_translation.rsanimation
 msgid "Animation"
@@ -476,6 +480,10 @@ msgstr "Pod horyzontem"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Upewnij się, że używają formatu DOS dla końca linii."
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1101,6 +1109,10 @@ msgstr "Tworzenie mapy w PostScript. Proszę czekać..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "Tworzenie mapy rastrowej z %s dpi. Proszę czekać..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Kulminacja"
@@ -1623,7 +1635,7 @@ msgstr "Czy chcesz zapisać ustawienia programu?"
 
 #: u_translation.rsdoyouwanttos2
 msgid "Do you want to save it?"
-msgstr ""
+msgstr "Czy chcesz zapisać?"
 
 #: u_translation.rsdrawalinetha
 msgid "Draw a line that displays the proper motion for the next"
@@ -1677,6 +1689,10 @@ msgstr "Obrazy DSO"
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Czas trwania"
@@ -1692,6 +1708,10 @@ msgstr "Cień Ziemi"
 #: u_translation.rseast
 msgid "East"
 msgstr "Wschód"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1917,6 +1937,18 @@ msgstr "Zewnętrzny katalog obiektów"
 msgid "Eyepiece"
 msgstr "Okular"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "Nie powiodło się : %s"
@@ -2039,7 +2071,7 @@ msgstr "Ramka szukacza (CCD)"
 
 #: u_translation.rsfirst
 msgid "First"
-msgstr ""
+msgstr "Pierwszy"
 
 #: u_translation.rsfirst5000
 msgid "First 5000"
@@ -2084,6 +2116,10 @@ msgstr "Czcionki"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Dla dużego katalogu wybierz zawsze tryb binarny. Dla małego zestawu danych ulegających częstej modyfikacji wybierz tryb tekstowy. Pozwoli to na edytowanie pliku i natychmiastową obserwację wyników bez konieczności powtórnego uruchamiania tego narzędzia."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -2587,7 +2623,7 @@ msgstr "Czy współrzędne epoki to naprawdę %s?"
 
 #: u_translation.rsittaketoolon
 msgid "It take too long to draw the %s from catalog %s, please consider to not use this catalog for this FOV."
-msgstr ""
+msgstr "Wyświetlenie %s z katalogu %s zajęło zbyt dużo czasu,  rozważ użycie tego katalogu dla mniejszych pól widzenia (FOV)."
 
 #: u_translation.rsjd
 msgid "JD:"
@@ -2675,7 +2711,7 @@ msgstr "Wybór języka"
 
 #: u_translation.rslast
 msgid "Last"
-msgstr ""
+msgstr "Ostatni"
 
 #: u_translation.rslatinname
 msgid "Latin name"
@@ -2739,7 +2775,7 @@ msgstr "LII"
 
 #: u_translation.rslimit
 msgid "Limit"
-msgstr ""
+msgstr "Granica"
 
 #: u_translation.rslimitingmagn
 msgid "Limiting magnitude, list:"
@@ -2959,7 +2995,7 @@ msgstr "Mapa"
 
 #: u_translation.rsmarkobjectso
 msgid "Mark objects on the chart"
-msgstr ""
+msgstr "Zaznacz obiekty na mapie"
 
 #: u_translation.rsmarkthechart
 msgid "Mark the centre of the chart"
@@ -3255,7 +3291,7 @@ msgstr "Neptun"
 
 #: u_translation.rsnever
 msgid "never"
-msgstr ""
+msgstr "nigdy"
 
 #: u_translation.rsnewchart
 msgid "New chart"
@@ -3275,7 +3311,7 @@ msgstr "Dalej >>"
 
 #: u_translation.rsnext2
 msgid "Next"
-msgstr ""
+msgstr "Następny"
 
 #: u_translation.rsnextchart
 msgid "Next Chart"
@@ -3483,7 +3519,7 @@ msgstr "Miejsce obserwacji"
 
 #: u_translation.rsobservinglis
 msgid "Observing list"
-msgstr ""
+msgstr "Lista obserwacyjna"
 
 #: u_translation.rsobsolete
 msgid "Obsolete"
@@ -3539,19 +3575,19 @@ msgstr "Tylko opisane planetoidy"
 
 #: u_translation.rsonlyobjectsw
 msgid "Only objects within airmass limits tonight"
-msgstr ""
+msgstr "Obiety tylko w granicach masy optycznej dziś w nocy"
 
 #: u_translation.rsonlyobjectsw2
 msgid "Only objects within airmass limits now"
-msgstr ""
+msgstr "Obiety tylko w granicach masy optycznej teraz"
 
 #: u_translation.rsonlyobjectsw3
 msgid "Only objects within hour angle limits tonight"
-msgstr ""
+msgstr "Obiety tylko w granicach kąta godzinnego dzisiejszej nocy"
 
 #: u_translation.rsonlyobjectsw4
 msgid "Only objects within hour angle limits now"
-msgstr ""
+msgstr "Obiety tylko w granicach kąta godzinnego teraz"
 
 #: u_translation.rsonlythefirst
 msgid "Only the first"
@@ -3675,7 +3711,7 @@ msgstr "Szerokość ścieżki"
 
 #: u_translation.rspec
 msgid "PEC"
-msgstr ""
+msgstr "PEC"
 
 #: u_translation.rspectoggle
 msgid "Pec Toggle"
@@ -3721,9 +3757,17 @@ msgstr "Przesunięcie kąta obrazu"
 msgid "Pictures"
 msgstr "Obrazy"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "pixeli"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3873,6 +3917,10 @@ msgstr "Epoka pozycji"
 msgid "PostScript"
 msgstr "PostScript"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "Prefiks nazwy z krótką nazwą katalogu"
@@ -3907,7 +3955,7 @@ msgstr "Podgląd"
 
 #: u_translation.rsprevious
 msgid "Previous"
-msgstr ""
+msgstr "Poprzedni"
 
 #: u_translation.rsprint
 msgid "Print"
@@ -3932,6 +3980,10 @@ msgstr "Legenda druku"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "Ustawienia druku"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5209,6 +5261,10 @@ msgstr "Teleskop"
 msgid "Telescope: %s"
 msgstr "Teleskop: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Teleskop nie podłączony"
@@ -5259,7 +5315,7 @@ msgstr "Liczba rekordów w tym katalogu nie jest znana. Pobranych zostanie %s re
 
 #: u_translation.rstheobserving
 msgid "The observing list %s was modified."
-msgstr ""
+msgstr "Lista obseracyjna: %s została zmodyfikowana."
 
 #: u_translation.rstherearecata
 msgid "There are %s catalogued images"
@@ -5319,7 +5375,7 @@ msgstr "Strefa czasowa"
 
 #: u_translation.rstitle
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 #: u_translation.rsto
 msgid "to"
@@ -5379,7 +5435,7 @@ msgstr "Transformacje"
 
 #: u_translation.rstransit
 msgid "Transit"
-msgstr ""
+msgstr "Tranzyt"
 
 #: u_translation.rstranslator
 msgid "Translator:"
@@ -5427,7 +5483,7 @@ msgstr "Podłącz do koncentratora SAMP podczas startu programu"
 
 #: u_translation.rsttut
 msgid "DeltaT: "
-msgstr ""
+msgstr "DeltaT: "
 
 #: u_translation.rstuesday
 msgid "Tue."
@@ -5515,7 +5571,7 @@ msgstr "Uaktualnij"
 
 #: u_translation.rsupdatecoordi
 msgid "Update coordinates"
-msgstr ""
+msgstr "Aktuzlizuj współrzędne"
 
 #: u_translation.rsupdatedsucce
 msgid "Updated successfully!"
@@ -5671,11 +5727,11 @@ msgstr "Widok horyzontu"
 
 #: u_translation.rsviewobservin
 msgid "View observing list"
-msgstr ""
+msgstr "Podgląd listy obserwacyjnej"
 
 #: u_translation.rsviewonchart
 msgid "View on chart"
-msgstr ""
+msgstr "Podgląd na mapie"
 
 #: u_translation.rsvirtualhandp
 msgid "Virtual HandPad for Scope.exe "
@@ -5756,6 +5812,10 @@ msgstr "Śr."
 #: u_translation.rswest
 msgid "West"
 msgstr "Zachód"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

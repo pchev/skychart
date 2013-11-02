@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
 "PO-Revision-Date: 2013-04-03 12:02+0000\n"
 "Last-Translator: Mikael Hiort af Ornäs <lakritslemmel@hotmail.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -248,6 +248,10 @@ msgstr ""
 msgid "Always save without asking."
 msgstr "Spara alltid utan att fråga."
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animering"
@@ -471,6 +475,10 @@ msgstr "Under horisonten"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Säkerställ att de använder radsluttecken för DOS"
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1096,6 +1104,10 @@ msgstr "Skapar postskriptkarta. Vänta..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "Skapar rasterkarta i %s dpi. Vänta..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Kulminerar"
@@ -1672,6 +1684,10 @@ msgstr ""
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Varaktighet"
@@ -1687,6 +1703,10 @@ msgstr "Jordskugga"
 #: u_translation.rseast
 msgid "East"
 msgstr "Öster"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1912,6 +1932,18 @@ msgstr "Externt katalogobjekt"
 msgid "Eyepiece"
 msgstr "Okular"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "Misslyckades: %s"
@@ -2079,6 +2111,10 @@ msgstr "Teckensnitt"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Välj alltid Binärt för stora kataloger. För små som ofta ändras välj Text. Detta ger dig möjlighet att ändra i katalogen och se resultatet på kartan omedelbart, utan att behöva använda den här funktionen."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3716,9 +3752,17 @@ msgstr "Bildens vinkelförskjutning"
 msgid "Pictures"
 msgstr "Bilder"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "pixlar"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3868,6 +3912,10 @@ msgstr "Position epok"
 msgid "PostScript"
 msgstr "PostScript fil"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "Sätt katalogens kortnamn som prefix för namn"
@@ -3927,6 +3975,10 @@ msgstr "Förklaring"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "Skrivarinställningar"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5204,6 +5256,10 @@ msgstr "Teleskop"
 msgid "Telescope: %s"
 msgstr "Teleskop: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Teleskopet inte anslutet"
@@ -5751,6 +5807,10 @@ msgstr "Ons."
 #: u_translation.rswest
 msgid "West"
 msgstr "Väster"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
