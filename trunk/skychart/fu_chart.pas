@@ -1137,9 +1137,12 @@ var savecolor: Starcolarray;
     prtname:string;
     fname:WideString;
     i,w,h,x,y,wh :integer;
+    HeaderHeight,FooterHeight: integer;
     pt:TPoint;
     ps:TPostscriptCanvas;
     previewbmp:Tbitmap;
+const DefHeaderHeight=10;
+      DefFooterHeight=20;
 Procedure InitPrintColor;
 var i:integer;
 begin
@@ -1179,6 +1182,13 @@ try
  printing:=true;
  sc.cfgsc.UseSystemTime:=false; // same time as current chart
  screen.cursor:=crHourGlass;
+ if cm.PrintHeader then begin
+    HeaderHeight:=DefHeaderHeight;
+    FooterHeight:=DefFooterHeight;
+ end else begin
+    HeaderHeight:=0;
+    FooterHeight:=0;
+ end;
  Case PrintMethod of
  0: begin    // to printer
     GetPrinterResolution(prtname,resol);
@@ -1195,13 +1205,10 @@ try
         PrintPreview.Image1.BGcolor:=clBtnFace;
         w:=Printer.PageWidth;
         h:=Printer.PageHeight;
-        wh:=max(w,h);
-        if wh>1024 then begin
-           rs:=1024/wh;
-           w:=round(w*rs);
-           h:=round(h*rs);
-           rp:=round(rp*rs);
-        end;
+        rs:=96/rp;
+        w:=round(w*rs);
+        h:=round(h*rs);
+        rp:=96;
         sc.plot.destcnv:=previewbmp.Canvas;
         sc.plot.cfgplot.UseBMP:=false;
         sc.plot.cfgchart.onprinter:=true;
@@ -1214,18 +1221,20 @@ try
         {$endif}
         sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,rp);
         sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,rp);
-        sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,rp);
-        sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,rp);
+        sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,rp);
+        sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin+FooterHeight,rp);
+        sc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,rp);
+        sc.cfgsc.FooterHeight:=mm2pi(FooterHeight,rp);
         sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
         sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
         previewbmp.Width:=w;
         previewbmp.Height:=h;
         sc.plot.init(w,h);
         sc.Refresh;
-        if trim(cm.PrintDesc)>'' then begin
-         x:=w div 2;
-         y:=h-10-sc.cfgsc.BottomMargin;
-         sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
+        if HeaderHeight>0 then begin
+          x:=w div 2;
+          y:=sc.cfgsc.TopMargin-(sc.cfgsc.HeaderHeight div 2);
+          sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laCenter,cm.PrintDesc,sc.cfgsc.WhiteBg);
         end;
         previewbmp.SaveToFile(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
@@ -1262,18 +1271,20 @@ try
     {$endif}
     sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
     sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
-    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,resol);
-    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,resol);
+    sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,resol);
+    sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin+FooterHeight,resol);
+    sc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,resol);
+    sc.cfgsc.FooterHeight:=mm2pi(FooterHeight,resol);
     sc.cfgsc.xshift:=printer.PaperSize.PaperRect.WorkRect.Left+sc.cfgsc.LeftMargin;
     sc.cfgsc.yshift:=printer.PaperSize.PaperRect.WorkRect.Top+sc.cfgsc.TopMargin;
     w:=Printer.PageWidth;
     h:=Printer.PageHeight;
     sc.plot.init(w,h);
     sc.Refresh;
-    if trim(cm.PrintDesc)>'' then begin
-     x:=w div 2;
-     y:=h-10-sc.cfgsc.BottomMargin;
-     sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
+    if HeaderHeight>0 then begin
+      x:=w div 2;
+      y:=sc.cfgsc.TopMargin-(sc.cfgsc.HeaderHeight div 2);
+      sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laCenter,cm.PrintDesc,sc.cfgsc.WhiteBg);
     end;
     Printer.EndDoc;
     end;
@@ -1303,21 +1314,23 @@ try
       sc.cfgsc.ShowBackgroundImage:=false;
       sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
       sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-      sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-      sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+      sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,printresol);
+      sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin+FooterHeight,printresol);
+      sc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,printresol);
+      sc.cfgsc.FooterHeight:=mm2pi(FooterHeight,printresol);
       sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
       sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
       sc.plot.init(ps.pagewidth,ps.pageheight);
       sc.Refresh;
-      if trim(cm.PrintDesc)>'' then begin
+      if HeaderHeight>0 then begin
         x:=ps.pagewidth div 2;
-        y:=ps.pageheight-10-sc.cfgsc.BottomMargin;
-        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
+        y:=sc.cfgsc.TopMargin-(sc.cfgsc.HeaderHeight div 2);
+        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laCenter,cm.PrintDesc,sc.cfgsc.WhiteBg);
       end;
       ps.enddoc;
       fname:=slash(printpath)+'cdcprint.ps';
       ps.savetofile(SysToUTF8(fname));
-      FixPostscript(fname,PrintLandscape,round(PaperWidth[cm.Paper]*72),round(PaperHeight[cm.Paper]*72));
+     // FixPostscript(fname,PrintLandscape,round(PaperWidth[cm.Paper]*72),round(PaperHeight[cm.Paper]*72));
       ps.Free;
       chdir(appdir);
       if assigned(Fshowinfo) then Fshowinfo(rsSendChartToP , caption);
@@ -1344,17 +1357,19 @@ try
      sc.plot.cfgchart.fontscale:=sc.plot.cfgchart.drawsize; // because we cannot set a dpi property for the bitmap
      sc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
      sc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
-     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin,printresol);
-     sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin,printresol);
+     sc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,printresol);
+     sc.cfgsc.BottomMargin:=mm2pi(cm.PrtBottomMargin+FooterHeight,printresol);
+     sc.cfgsc.HeaderHeight:=mm2pi(HeaderHeight,printresol);
+     sc.cfgsc.FooterHeight:=mm2pi(FooterHeight,printresol);
      sc.cfgsc.xshift:=sc.cfgsc.LeftMargin;
      sc.cfgsc.yshift:=sc.cfgsc.TopMargin;
      sc.plot.init(w,h);
      sc.Refresh;
-      if trim(cm.PrintDesc)>'' then begin
-        x:=w div 2;
-        y:=h-10-sc.cfgsc.BottomMargin;
-        sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laBottom,cm.PrintDesc,sc.cfgsc.WhiteBg);
-      end;
+     if HeaderHeight>0 then begin
+       x:=w div 2;
+       y:=sc.cfgsc.TopMargin-(sc.cfgsc.HeaderHeight div 2);
+       sc.plot.PlotText(x,y,6,sc.plot.cfgplot.LabelColor[8],laCenter,laCenter,cm.PrintDesc,sc.cfgsc.WhiteBg);
+     end;
      // save the bitmap
      fname:=slash(printpath)+'cdcprint.bmp';
      sc.plot.cbmp.savetofile(SysToUTF8(fname));
@@ -1388,6 +1403,8 @@ finally
  sc.cfgsc.RightMargin:=0;
  sc.cfgsc.TopMargin:=0;
  sc.cfgsc.BottomMargin:=0;
+ sc.cfgsc.HeaderHeight:=0;
+ sc.cfgsc.FooterHeight:=0;
  // redraw to screen
  sc.plot.destcnv:=Image1.canvas;
  sc.plot.cfgchart.onprinter:=false;

@@ -128,7 +128,7 @@ type
      function InitLabel : boolean;
      Procedure FlushCnv;
      procedure BGRADrawLine(x1,y1,x2,y2: single; c: TBGRAPixel; w: single; abmp:TBGRABitmap; ps: TPenStyle=psSolid);
-     Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
+     Procedure PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer);
      Procedure PlotStar(xx,yy: single; ma,b_v : Double);
      Procedure PlotVarStar(x,y: single; vmax,vmin : Double);
      Procedure PlotDblStar(x,y,r: single; ma,sep,pa,b_v : Double);
@@ -144,6 +144,7 @@ type
      Procedure PlotAsteroid(x,y:single;symbol: integer; ma : Double);
      Procedure PlotComet(x,y,cx,cy:single;symbol: integer; ma,diam,PixScale : Double);
      function  PlotLabel(i,labelnum,fontnum:integer; xxs,yys,rs,orient:single; Xalign,Yalign:TLabelAlign; WhiteBg,forcetextlabel:boolean; txt:string; var px,py: integer; opaque:boolean=false;sizex:single=1):integer;
+     function  GetTextSize(fontnum:integer; txt:string; labelnum:integer=-1; lsize:single=1):Tsize;
      procedure PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
@@ -307,7 +308,7 @@ end;
 end;
 
 function TSplot.Init(w,h : integer) : boolean;
-var Rgn : HRGN;
+//var Rgn : HRGN;
 begin
 cfgchart.Width:=w;
 cfgchart.Height:=h;
@@ -330,11 +331,11 @@ if not cfgplot.UseBMP then
  Font.CharSet:=FCS_ISO_10646_1;
 {$ifndef lclqt}      // problem with QT clipping
 {$ifndef lclcarbon}
- if cfgchart.onprinter then begin
+{ if cfgchart.onprinter then begin
      Rgn:=CreateRectRgn(cfgplot.xmin, cfgplot.ymin, cfgplot.xmax, cfgplot.ymax);
      SelectClipRgn(cnv.Handle, Rgn);
      DeleteObject(Rgn);
- end;
+ end;   }
 {$endif}
 {$endif}
 end;
@@ -347,7 +348,7 @@ end;
 result:=true;
 end;
 
-Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin: integer);
+Procedure TSplot.PlotBorder(LeftMargin,RightMargin,TopMargin,BottomMargin,HeaderHeight,FooterHeight: integer);
 var xmin,xmax,ymin,ymax: integer;
     c: TBGRAPixel;
 begin
@@ -363,6 +364,10 @@ if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
      cbmp.Rectangle(xmin,ymax-BottomMargin,xmax,ymax,c,c,dmSet);
      c:=ColorToBGRA(clBlack,0);
      cbmp.Rectangle(xmin+LeftMargin,ymin+TopMargin,xmax-RightMargin,ymax-BottomMargin,c,dmSet);
+     if HeaderHeight>0 then
+       cbmp.Rectangle(xmin+LeftMargin,ymin+TopMargin-HeaderHeight,xmax-RightMargin,ymin+TopMargin,c,dmSet);
+     if FooterHeight>0 then
+       cbmp.Rectangle(xmin+LeftMargin,ymax-BottomMargin+FooterHeight,xmax-RightMargin,ymax-BottomMargin,c,dmSet);
   end
   else begin
        if cnv<>nil then with cnv do begin
@@ -386,6 +391,22 @@ if ((LeftMargin>0)or(RightMargin>0)or(TopMargin>0)or(BottomMargin>0)) then begin
         lineto(xmax-RightMargin,ymin+TopMargin);
         moveto(xmax-RightMargin,ymin+TopMargin);
         lineto(xmin+LeftMargin,ymin+TopMargin);
+        if HeaderHeight>0 then begin
+           moveto(xmin+LeftMargin,ymin+TopMargin-HeaderHeight);
+           lineto(xmax-RightMargin,ymin+TopMargin-HeaderHeight);
+           moveto(xmin+LeftMargin,ymin+TopMargin-HeaderHeight);
+           lineto(xmin+LeftMargin,ymin+TopMargin);
+           moveto(xmax-RightMargin,ymin+TopMargin-HeaderHeight);
+           lineto(xmax-RightMargin,ymin+TopMargin);
+        end;
+        if FooterHeight>0 then begin
+           moveto(xmin+LeftMargin,ymax-BottomMargin+FooterHeight);
+           lineto(xmax-RightMargin,ymax-BottomMargin+FooterHeight);
+           moveto(xmin+LeftMargin,ymax-BottomMargin+FooterHeight);
+           lineto(xmin+LeftMargin,ymax-BottomMargin);
+           moveto(xmax-RightMargin,ymax-BottomMargin+FooterHeight);
+           lineto(xmax-RightMargin,ymax-BottomMargin);
+        end;
       end;
   end;
 end;
@@ -2228,7 +2249,7 @@ end else if cnv<>nil then with cnv do begin
   Font.Color:=cfgplot.LabelColor[labelnum];
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-  Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
+  Font.Size:=round(sizex*cfgplot.LabelSize[labelnum]*cfgchart.fontscale);
   Font.Orientation:=round(10*orient);
   ts:=TextExtent(txt);
   if r>=0 then begin
@@ -2314,6 +2335,30 @@ end;
 result:=0;
 end;
 
+function  TSplot.GetTextSize(fontnum:integer; txt:string; labelnum:integer=-1; lsize:single=1):Tsize;
+begin
+if (lsize<0)or(lsize>1.5) then lsize:=1;
+if cfgplot.UseBMP then begin;
+  cbmp.FontName:=cfgplot.FontName[fontnum];
+  if cfgplot.FontBold[fontnum] then cbmp.FontStyle:=[fsBold] else cbmp.FontStyle:=[];
+  if cfgplot.FontItalic[fontnum] then cbmp.FontStyle:=cbmp.FontStyle+[fsItalic];
+  if labelnum>0 then
+      cbmp.FontHeight:=trunc(lsize*cfgplot.LabelSize[labelnum]*cfgchart.fontscale*96/72)
+  else
+      cbmp.FontHeight:=trunc(lsize*cfgplot.FontSize[fontnum]*cfgchart.fontscale*96/72);
+  result:=cbmp.TextSize(txt);
+end else if cnv<>nil then with cnv do begin
+  Font.Name:=cfgplot.FontName[fontnum];
+  if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
+  if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
+  if labelnum>0 then
+     Font.Size:=round(lsize*cfgplot.LabelSize[labelnum]*cfgchart.fontscale)
+  else
+     Font.Size:=round(lsize*cfgplot.FontSize[fontnum]*cfgchart.fontscale);
+  result:=cnv.TextExtent(txt);
+end;
+end;
+
 procedure TSplot.PlotText(xx,yy,fontnum,lcolor:integer; Xalign,Yalign:TLabelAlign; txt:string; WhiteBg: boolean; opaque:boolean=true; clip:boolean=false; marge: integer=5; orient: integer=0);
 var ts:TSize;
     arect: TRect;
@@ -2359,7 +2404,7 @@ end else if cnv<>nil then with cnv do begin
   Font.Name:=cfgplot.FontName[fontnum];
   Font.Color:=lcolor;
   if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
-  Font.Size:=cfgplot.FontSize[fontnum]*cfgchart.fontscale;
+  Font.Size:=round(cfgplot.FontSize[fontnum]*cfgchart.fontscale);
   if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
   if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
   ts:=cnv.TextExtent(txt);
@@ -2439,7 +2484,7 @@ end else if cnv<>nil then with cnv do begin
     Font.Name:=cfgplot.FontName[fontnum];
     Font.Color:=cfgplot.LabelColor[labelnum];
     if Font.Color=Brush.Color then Font.Color:=(not Font.Color)and $FFFFFF;
-    Font.Size:=cfgplot.LabelSize[labelnum]*cfgchart.fontscale;
+    Font.Size:=round(cfgplot.LabelSize[labelnum]*cfgchart.fontscale);
     if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
     if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
     {$ifdef lclgtk}
@@ -2659,7 +2704,7 @@ end;
 
 Procedure TSplot.PlotCircleMask(x1,y1,r:single; whitebg:boolean);
 var mask: TBGRABitmap;
-    xx1,yy1,xx2,yy2,r1,np,i: integer;
+    xx1,yy1,r1,np,i: integer;
     a,da: double;
     sa,ca: extended;
     p1,p2: array[0..30] of TPoint;
@@ -2758,7 +2803,7 @@ if RoseType=3 then begin     // simple arrow
      Font.Name:=cfgplot.FontName[1];
      Font.Color:=clWhite;
      if WhiteBg then Font.Color:=clBlack;
-     Font.Size:=cfgplot.FontSize[1]*cfgchart.fontscale;
+     Font.Size:=round(cfgplot.FontSize[1]*cfgchart.fontscale);
      td:=roserd*0.9;
      rote:=rot+pid2;
      if FlipY<0 then rot:=pi-rot;
@@ -2891,7 +2936,7 @@ end else begin
        Font.Name:=cfgplot.FontName[1];
        Font.Color:=clWhite;
        if WhiteBg then Font.Color:=clBlack;
-       Font.Size:=cfgplot.FontSize[1]*cfgchart.fontscale;
+       Font.Size:=round(cfgplot.FontSize[1]*cfgchart.fontscale);
        if FlipY<0 then rot:=pi-rot;
        if FlipX<0 then rot:=-rot;
        sincos(rot,c,s);

@@ -10,7 +10,7 @@ object f_print: Tf_print
   OnCreate = FormCreate
   OnShow = FormShow
   ParentFont = True
-  LCLVersion = '1.0.8.0'
+  LCLVersion = '1.0.12.0'
   object PrinterInfo: TLabel
     Left = 9
     Height = 16
@@ -22,7 +22,7 @@ object f_print: Tf_print
   object prtcolor: TRadioGroup
     Left = 9
     Height = 82
-    Top = 88
+    Top = 96
     Width = 215
     AutoFill = True
     Caption = 'Color'
@@ -48,7 +48,7 @@ object f_print: Tf_print
   object prtorient: TRadioGroup
     Left = 240
     Height = 82
-    Top = 88
+    Top = 96
     Width = 149
     AutoFill = True
     Caption = 'Orientation'
@@ -103,15 +103,15 @@ object f_print: Tf_print
   end
   object GroupBox1: TGroupBox
     Left = 9
-    Height = 82
-    Top = 184
+    Height = 90
+    Top = 192
     Width = 380
     Caption = 'Page Margin in millimeter'
-    ClientHeight = 65
+    ClientHeight = 73
     ClientWidth = 376
     TabOrder = 5
     object Label1: TLabel
-      Left = 23
+      Left = 5
       Height = 16
       Top = 14
       Width = 25
@@ -119,7 +119,7 @@ object f_print: Tf_print
       ParentColor = False
     end
     object Label2: TLabel
-      Left = 89
+      Left = 61
       Height = 16
       Top = 14
       Width = 32
@@ -127,7 +127,7 @@ object f_print: Tf_print
       ParentColor = False
     end
     object Label3: TLabel
-      Left = 153
+      Left = 117
       Height = 16
       Top = 14
       Width = 22
@@ -135,7 +135,7 @@ object f_print: Tf_print
       ParentColor = False
     end
     object Label4: TLabel
-      Left = 216
+      Left = 173
       Height = 16
       Top = 14
       Width = 46
@@ -143,7 +143,7 @@ object f_print: Tf_print
       ParentColor = False
     end
     object LongEdit1: TLongEdit
-      Left = 21
+      Left = 5
       Height = 23
       Hint = '0..100'
       Top = 34
@@ -156,7 +156,7 @@ object f_print: Tf_print
       MaxValue = 100
     end
     object LongEdit2: TLongEdit
-      Left = 86
+      Left = 61
       Height = 23
       Hint = '0..100'
       Top = 34
@@ -169,10 +169,10 @@ object f_print: Tf_print
       MaxValue = 100
     end
     object LongEdit3: TLongEdit
-      Left = 151
+      Left = 117
       Height = 23
       Hint = '0..100'
-      Top = 35
+      Top = 34
       Width = 40
       ParentShowHint = False
       ShowHint = True
@@ -182,7 +182,7 @@ object f_print: Tf_print
       MaxValue = 100
     end
     object LongEdit4: TLongEdit
-      Left = 216
+      Left = 173
       Height = 23
       Hint = '0..100'
       Top = 34
@@ -195,20 +195,20 @@ object f_print: Tf_print
       MaxValue = 100
     end
     object Button1: TButton
-      Left = 277
+      Left = 245
       Height = 25
-      Top = 2
-      Width = 94
+      Top = 9
+      Width = 126
       BorderSpacing.InnerBorder = 4
       Caption = 'No Margin'
       OnClick = Button1Click
       TabOrder = 4
     end
     object Button2: TButton
-      Left = 277
+      Left = 245
       Height = 25
-      Top = 32
-      Width = 94
+      Top = 41
+      Width = 126
       BorderSpacing.InnerBorder = 4
       Caption = 'Default Margin'
       OnClick = Button2Click
@@ -227,23 +227,23 @@ object f_print: Tf_print
   object Label5: TLabel
     Left = 9
     Height = 16
-    Top = 51
+    Top = 40
     Width = 68
     Caption = 'Description'
     ParentColor = False
   end
   object Edit1: TEdit
-    Left = 104
+    Left = 9
     Height = 23
-    Top = 48
-    Width = 272
+    Top = 64
+    Width = 380
     OnChange = Edit1Change
     TabOrder = 7
   end
   object CopyPanel: TPanel
     Left = 9
     Height = 30
-    Top = 280
+    Top = 288
     Width = 380
     ClientHeight = 30
     ClientWidth = 380
@@ -279,5 +279,15 @@ object f_print: Tf_print
     Caption = 'Preview'
     ModalResult = 6
     TabOrder = 9
+  end
+  object CheckBox1: TCheckBox
+    Left = 112
+    Height = 23
+    Top = 37
+    Width = 158
+    Caption = 'Print header and footer'
+    Checked = True
+    State = cbChecked
+    TabOrder = 10
   end
 end

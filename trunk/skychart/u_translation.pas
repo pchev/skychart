@@ -1501,6 +1501,7 @@ resourcestring
   rsCrossMeridia = 'Cross meridian';
   rsWestSide = 'West side';
   rsEyepieceVisi = 'Eyepiece vision';
+  rsPrintHeaderA = 'Print header and footer';
 
 implementation
 

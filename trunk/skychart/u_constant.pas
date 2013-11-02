@@ -335,7 +335,7 @@ const
   f13 = '0.0000000000000';
   s6 = '+0.000000;-0.000000;+0.000000';
   dateiso = 'yyyy"-"mm"-"dd"T"hh":"nn":"ss.zzz';
-  labspacing = 10;
+  labspacing = 2;
   numlabtype = 9;
   numfont = 7;
   NumSimObject = 13;
@@ -918,7 +918,7 @@ type
     Xwrldmin, Xwrldmax, Ywrldmin, Ywrldmax: double;
     xmin, xmax, ymin, ymax, xshift, yshift, FieldNum, winx, winy,
     wintop, winleft, FindType, FindIpla: integer;
-    LeftMargin, RightMargin, TopMargin, BottomMargin, Xcentre, Ycentre: integer;
+    LeftMargin, RightMargin, TopMargin, BottomMargin,HeaderHeight,FooterHeight, Xcentre, Ycentre: integer;
     ObsRoSinPhi, ObsRoCosPhi, StarmagMax, NebMagMax, FindRA,
     FindDec, FindRA2000, FindDec2000, FindPX, FindSize, FindX, FindY, FindZ,
     FindSimjd, AstmagMax, AstMagDiff, CommagMax, Commagdiff: double;
@@ -1012,7 +1012,8 @@ type
   Tconf_chart = class(TObject)    // chart window setting
   public
     onprinter: boolean;
-    Width, Height, drawpen, drawsize, fontscale, hw, hh: integer;
+    Width, Height, drawpen, drawsize, hw, hh: integer;
+    fontscale: single;
     min_ma, max_catalog_mag: double;
     constructor Create;
     destructor Destroy; override;
@@ -1042,6 +1043,7 @@ type
     TextOnlyDetail, SimpleMove, SimpleDetail, KioskMode, KioskDebug, CenterAtNoon: boolean;
     PrintDesc, PrintCmd1, PrintCmd2: string;
     PrintTmpPath, ThemeName, IndiPanelCmd, AnimRecDir, AnimRecPrefix, AnimRecExt: string;
+    PrintHeader: boolean;
     AnimOpt, Animffmpeg: string;
     ServerIPaddr, ServerIPport: shortstring;
     AnimFps: double;
@@ -2041,6 +2043,8 @@ begin
   RightMargin := Source.RightMargin;
   TopMargin := Source.TopMargin;
   BottomMargin := Source.BottomMargin;
+  HeaderHeight:=Source.HeaderHeight;
+  FooterHeight:=Source.FooterHeight;
   Xcentre := Source.Xcentre;
   Ycentre := Source.Ycentre;
   ObsRoSinPhi := Source.ObsRoSinPhi;
@@ -2458,6 +2462,7 @@ begin
   PrintCmd1 := Source.PrintCmd1;
   PrintCmd2 := Source.PrintCmd2;
   PrintTmpPath := Source.PrintTmpPath;
+  PrintHeader := Source.PrintHeader;
   PrintDesc := Source.PrintDesc;
   PrintCopies := Source.PrintCopies;
   ThemeName := Source.ThemeName;

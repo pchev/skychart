@@ -2332,16 +2332,22 @@ end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
 begin
-f_print.cm:=cfgm;
-formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
-f_print.showmodal;
-if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
- cfgm:=f_print.cm;
- if MultiFrame1.ActiveObject is Tf_chart then
-   with MultiFrame1.ActiveObject as Tf_chart do
-      PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
+if MultiFrame1.ActiveObject is Tf_chart then begin
+  cfgm.PrintDesc:=rsSkyCharts+', '+rsObservatory+blank+
+               Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ObsName+', '+
+               rsCenter+blank+rsRA+':'+ARmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.racentre/15)+
+               blank+rsDEC+':'+DEmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.decentre);
+  if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName>'' then  cfgm.PrintDesc:=cfgm.PrintDesc+', '+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
+  f_print.cm:=cfgm;
+  formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
+  f_print.showmodal;
+  if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
+   cfgm:=f_print.cm;
+   cfgm.PrintHeader:=f_print.CheckBox1.Checked;
+   Tf_chart(MultiFrame1.ActiveObject).PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
+  end;
+  PrintPreview1.Visible:=(cfgm.PrintMethod=0);
 end;
-PrintPreview1.Visible:=(cfgm.PrintMethod=0);
 end;
 
 procedure Tf_main.PrintPreview1Click(Sender: TObject);

@@ -357,13 +357,17 @@ end;
   DrawCompass;
   DrawTarget;
 
-  // the chart legend
-  if cfgsc.showlabel[8] or cfgsc.showlegend then DrawLegend;
+  // the chart legend to the screen
+  if (not fplot.cfgchart.onprinter)and(cfgsc.showlabel[8] or cfgsc.showlegend) then DrawLegend;
 
   // refresh telescope mark
   if scopemark then cfgsc.ScopeMark:=true;
+
   // Draw the chart border
   DrawBorder;
+  // the chart legend on printer
+  if (fplot.cfgchart.onprinter) then DrawLegend;
+
   result:=true;
 if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
 finally
@@ -2959,7 +2963,7 @@ end;
 Procedure Tskychart.DrawBorder;
 begin
 if VerboseMsg then WriteTrace('SkyChart '+cfgsc.chartname+': draw chart border');
-Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin);
+Fplot.PlotBorder(cfgsc.LeftMargin,cfgsc.RightMargin,cfgsc.TopMargin,cfgsc.BottomMargin,cfgsc.HeaderHeight,cfgsc.FooterHeight);
 end;
 
 {Procedure Tskychart.LabelPos(xx,yy,w,h,marge: integer; var x,y: integer);
@@ -4381,7 +4385,7 @@ var labbox: array [0..maxlabels,1..8] of TRect;
     obmp: TBitmap;
     ts: TSize;
     pass,i,j,k,l,lsp,maxtl: integer;
-    x,y,r,dist: single;
+    x,y,r,dist,lsize: single;
     collision: boolean;
     safedistance: single;
 const
@@ -4469,18 +4473,13 @@ for j:=1 to cfgsc.nummodlabels do
 SortLabels;
 // compute text box
 for i:=1 to numlabels do begin
-  obmp.canvas.font.Name:=FPlot.cfgplot.FontName[labels[i].fontnum];
-  if FPlot.cfgplot.FontBold[labels[i].fontnum] then obmp.Canvas.Font.Style:=[fsBold] else obmp.Canvas.Font.Style:=[];
-  if FPlot.cfgplot.FontItalic[labels[i].fontnum] then obmp.Canvas.Font.Style:=obmp.Canvas.Font.Style+[fsItalic];
-  if (FPlot.cfgchart.onprinter or (not cfgsc.Editlabels)) then begin
-    if FPlot.cfgplot.UseBMP then
-     obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72)
-    else
-     obmp.canvas.Font.Height:=Fplot.cfgchart.drawsize*FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale;
-  end
-  else
-     obmp.Canvas.Font.Height:=trunc(FPlot.cfgplot.LabelSize[labels[i].labelnum]*FPlot.cfgchart.fontscale*96/72);
-  ts:=obmp.Canvas.TextExtent(labels[i].txt);
+  if (labels[i].lsize>0)and((nebmagmax-nebmagmin)>=2) then begin
+   if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)/4)) then lsize:=0.8
+   else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*2/4)) then lsize:=0.9
+    else if labels[i].lsize>(nebmagmax-((nebmagmax-nebmagmin)*3/4)) then lsize:=1
+     else lsize:=1.1
+      end else lsize:=1;
+  ts:=Fplot.GetTextSize(labels[i].fontnum,labels[i].txt,labels[i].labelnum,lsize);
   maxtl:=max(maxtl,ts.cx);
   if labels[i].optimizable then begin
     labels[i].align:=al[1];  // reset default position
@@ -4641,7 +4640,6 @@ for i:=1 to numlabels do begin
       end;
     end;
 end;
-//if cfgsc.showlabel[8] then plot.PlotTextCR(cfgsc.xshift+5,cfgsc.yshift+5,2,8,GetChartInfo(crlf),cfgsc.WhiteBg);
 result:=true;
 end;
 
@@ -4649,14 +4647,107 @@ Procedure Tskychart.DrawLegend;
 var lbmp : TBGRABitmap;
     saveubmp: boolean;
     savecbmp : TBGRABitmap;
-    savefontscale,savefontsize: integer;
+    savefontscale:single;
+    savefontsize: integer;
     col: TBGRAPixel;
     txtl,txt,buf: string;
     drawgray: boolean;
-    w,h,h0,fontnum,labelnum,p,ls,i,xx,yy,sz,tr:integer;
+    w,h,h0,fontnum,labelnum,p,ls,ws,i,xx,yy,sz,tr:integer;
     mag,dma: double;
     ts: TSize;
 begin
+if Fplot.cfgchart.onprinter and (cfgsc.FooterHeight>0) then begin
+  // chart info
+  txt:=GetChartInfo(', ');
+  ts:=Fplot.GetTextSize(6,txt);
+  xx:=Fplot.cfgchart.Width div 2;
+  yy:=Fplot.cfgchart.Height-cfgsc.BottomMargin+round(ts.cy*1.2);
+  Fplot.PlotText(xx,yy,6,Fplot.cfgplot.LabelColor[8],laCenter,laBottom,txt,cfgsc.WhiteBg);
+  h0:=yy+round(ts.cy/4);
+  Fplot.PlotLine(cfgsc.LeftMargin,h0,Fplot.cfgchart.Width-cfgsc.RightMargin,h0,clBlack,1);
+  h0:=yy+round(ts.cy*1.2);
+  fontnum:=2;
+  labelnum:=8;
+  // Stars magnitude
+  dma:=max(1,fplot.cfgchart.min_ma/6);
+  mag:=-dma;
+  sz:=8*Fplot.cfgchart.drawsize;
+  ls:=2*sz;
+  ws:=round((Fplot.cfgchart.Width-cfgsc.LeftMargin-cfgsc.RightMargin)/(7*1.5+16*2));
+  ts:=Fplot.GetTextSize(fontnum,'1');
+  ws:=min(round(1.5*ts.cy),ws);
+  sz:=min(sz,ws);
+  yy:=h0;
+  xx:=cfgsc.LeftMargin+round((Fplot.cfgchart.Width-cfgsc.LeftMargin-cfgsc.RightMargin-ws*(7*1.5+16*2))/2);
+  for i:=0 to 6 do begin
+    mag:=mag+dma;
+    xx:=round(xx+1.5*ws);
+    Fplot.PlotStar(xx,yy,mag,0);
+    Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,inttostr(round(mag)),cfgsc.WhiteBg,false);
+  end;
+  // Ast
+  xx:=round(xx+2*ws);
+  mag:=5*dma;
+  Fplot.PlotAsteroid(xx,yy,cfgsc.AstSymbol,mag);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum],laCenter, laCenter, rsAbrevAsteroid, cfgsc.WhiteBg, false);
+  // Com
+  xx:=round(xx+2*ws);
+  mag:=4*dma;
+  Fplot.PlotComet(xx,yy,xx+sz,yy+sz,cfgsc.ComSymbol,mag,1.5*sz,1);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevComet, cfgsc.WhiteBg, false);
+  // Var
+  xx:=round(xx+2*ws);
+  mag:=4*dma;
+  Fplot.PlotStar(xx,yy,mag,0);
+  Fplot.PlotVarStar(xx,yy,0,mag);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevVariable, cfgsc.WhiteBg, false);
+  // Dbl
+  xx:=round(xx+2*ws);
+  mag:=4*dma;
+  Fplot.PlotDblStar(xx,yy,0.8*sz,mag,0,-45,0);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevDouble, cfgsc.WhiteBg, false);
+  // Drk
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,13,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevDark, cfgsc.WhiteBg, false);
+  // Gcl
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,12,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxyCluster, cfgsc.WhiteBg, false);
+  // GX
+  xx:=round(xx+2*ws);
+  Fplot.PlotDSOGxy(xx,yy,sz,sz div 3,45,0,100,100,0,0,1,'',drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGalaxy, cfgsc.WhiteBg, false);
+  // OC
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,2,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevOpenCluster, cfgsc.WhiteBg, false);
+  // GB
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,3,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevGlobularCluster, cfgsc.WhiteBg, false);
+  // PL
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,4,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevPlanetaryNebula, cfgsc.WhiteBg, false);
+  // NB
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,5,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevNebula, cfgsc.WhiteBg, false);
+  // C+N
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,6,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx, yy+ls, fontnum, Fplot.cfgplot.LabelColor[labelnum], laCenter, laCenter, rsAbrevClusterNebula, cfgsc.WhiteBg, false);
+  // *
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,7,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,nebtype[9],cfgsc.WhiteBg,false);
+  // ?
+  xx:=round(xx+2*ws);
+  Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,0,'',cfgsc.WhiteBg,drawgray,clGray);
+  Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,nebtype[2],cfgsc.WhiteBg,false);
+
+end else begin
 fontnum:=2;
 labelnum:=8;
 // Save setting
@@ -4822,6 +4913,7 @@ end else begin
   Fplot.cnv.Draw(cfgsc.xshift,cfgsc.yshift,lbmp.Bitmap);
 end;
 lbmp.free;
+end;
 end;
 
 Procedure Tskychart.DrawSearchMark(ra,de :double; moving:boolean) ;
