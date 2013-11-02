@@ -902,7 +902,7 @@ type
     IndiServerHost, IndiServerPort, IndiServerCmd,
     IndiDriver, IndiPort, IndiDevice: string;
     IndiAutostart, ShowCircle, IndiTelescope, ASCOMTelescope,
-    LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages,
+    LX200Telescope, EncoderTelescope, ManualTelescope, ShowImages, EyepieceMask,
     ShowImageList, ShowImageLabel, ShowBackgroundImage, showstars, shownebulae, showline,
     showlabelall, Editlabels, OptimizeLabels: boolean;
     BackgroundImage: string;
@@ -1987,6 +1987,7 @@ begin
   IndiDevice := Source.IndiDevice;
   IndiAutostart := Source.IndiAutostart;
   ShowCircle := Source.ShowCircle;
+  EyepieceMask := Source.EyepieceMask;
   IndiTelescope := Source.IndiTelescope;
   ASCOMTelescope := Source.ASCOMTelescope;
   LX200Telescope := Source.LX200Telescope;

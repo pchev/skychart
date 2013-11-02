@@ -1500,6 +1500,7 @@ resourcestring
   rsEastSide = 'East side';
   rsCrossMeridia = 'Cross meridian';
   rsWestSide = 'West side';
+  rsEyepieceVisi = 'Eyepiece vision';
 
 implementation
 

@@ -399,6 +399,10 @@ object f_chart: Tf_chart
           OnClick = MenuRectangleClick
         end
       end
+      object EyepieceMask: TMenuItem
+        Caption = 'Eyepiece vision'
+        OnClick = EyepieceMaskClick
+      end
       object NewFinderCircle1: TMenuItem
         Caption = 'New Finder Circle'
         OnClick = NewFinderCircle1Click

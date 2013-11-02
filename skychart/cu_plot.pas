@@ -148,6 +148,7 @@ type
      procedure PlotTextCR(xx,yy,fontnum,labelnum:integer; txt:string; WhiteBg: boolean; opaque:boolean=true; orient: integer=0);
      procedure PlotOutline(x,y:single;op,lw,fs,closed: integer; r2:double; col: Tcolor);
      Procedure PlotCircle(x1,y1,x2,y2:single;lcolor:integer;moving:boolean);
+     Procedure PlotCircleMask(x1,y1,r:single; whitebg:boolean);
      Procedure PlotPolyLine(p:array of Tpoint; lcolor:integer; moving:boolean);
      procedure FloodFill(X, Y: Integer; FillColor: TColor);
      Procedure Movelabel(Sender: TObject);
@@ -2656,6 +2657,66 @@ end else if cnv<>nil then with cnv do begin
 end;
 end;
 
+Procedure TSplot.PlotCircleMask(x1,y1,r:single; whitebg:boolean);
+var mask: TBGRABitmap;
+    xx1,yy1,xx2,yy2,r1,np,i: integer;
+    a,da: double;
+    sa,ca: extended;
+    p1,p2: array[0..30] of TPoint;
+begin
+if cfgplot.UseBMP then begin
+  if whitebg then
+    mask:=TBGRABitmap.Create(cfgplot.xmax,cfgplot.ymax,BGRAWhite)
+  else
+    mask:=TBGRABitmap.Create(cfgplot.xmax,cfgplot.ymax,BGRABlack);
+  mask.EraseEllipseAntialias(x1,y1,r,r,255);
+  cbmp.PutImage(0,0,mask,dmDrawWithTransparency);
+  mask.Free;
+end else if cnv<>nil then with cnv do begin
+  xx1:=round(x1);
+  yy1:=round(y1);
+  r1:=round(r);
+  p1[0]:=Point(0,0);
+  p1[1]:=Point(xx1,0);
+  p1[2]:=Point(xx1,yy1-r1);
+  p2[0]:=Point(cfgchart.Width,0);
+  p2[1]:=Point(xx1,0);
+  p2[2]:=Point(xx1,yy1-r1);
+  np:=2;
+  a:=pi/2;
+  da:=pi/21;
+  for i:=0 to 20 do begin
+    inc(np);
+    a:=a+da;
+    sincos(a,sa,ca);
+    p2[np]:=Point(round(xx1-r1*ca),round(yy1-r1*sa));
+    p1[np]:=Point(round(xx1+r1*ca),round(yy1-r1*sa));
+  end;
+  inc(np);
+  p1[np]:=Point(xx1,yy1+r1);
+  p2[np]:=Point(xx1,yy1+r1);
+  inc(np);
+  p1[np]:=Point(xx1,cfgchart.Height);
+  p2[np]:=Point(xx1,cfgchart.Height);
+  inc(np);
+  p1[np]:=Point(0,cfgchart.Height);
+  p2[np]:=Point(cfgchart.Width,cfgchart.Height);
+  inc(np);
+  p1[np]:=Point(0,0);
+  p2[np]:=Point(cfgchart.Width,0);
+  inc(np);
+  Pen.Width:=cfgchart.drawpen;
+  Pen.Mode:=pmCopy;
+  Pen.Color:=clWhite;
+  Brush.Style:=bsSolid;
+  Brush.Color:=Pen.Color;
+  Polygon(p1,np);
+  Polygon(p2,np);
+  Pen.Color:=clBlack;
+  Brush.Style:=bsClear;
+  Ellipse(xx1-r1,yy1-r1,xx1+r1,yy1+r1);
+end;
+end;
 
 Procedure TSplot.PlotCRose(rosex,rosey,roserd,rot:single;flipx,flipy:integer; WhiteBg:boolean; RoseType: integer);
 var c,s,c1,s1,c2,s2,rote: extended;

@@ -4778,6 +4778,7 @@ def_cfgsc.rectangle[2,4]:=11;
 def_cfgsc.rectangleok[2]:=true;
 def_cfgsc.rectanglelbl[2]:='ST7 autoguider';
 def_cfgsc.NumCircle:=0;
+def_cfgsc.EyepieceMask:=false;
 def_cfgsc.IndiAutostart:=true;
 def_cfgsc.IndiServerHost:='localhost';
 def_cfgsc.IndiServerPort:='7624';
@@ -5214,6 +5215,7 @@ csc.CalGraphHeight:=ReadInteger(section,'CalGraphHeight',csc.CalGraphHeight);;
 
 section:='Finder';
 csc.ShowCircle:=ReadBool(section,'ShowCircle',csc.ShowCircle);
+csc.EyepieceMask:=ReadBool(section,'EyepieceMask',csc.EyepieceMask);
 csc.CircleLabel:=ReadBool(section,'CircleLabel',csc.CircleLabel);
 csc.RectangleLabel:=ReadBool(section,'RectangleLabel',csc.RectangleLabel);
 csc.marknumlabel:=ReadBool(section,'marknumlabel',csc.marknumlabel);
@@ -6078,6 +6080,7 @@ WriteInteger(section,'CalGraphHeight',csc.CalGraphHeight);;
 
 section:='Finder';
 WriteBool(section,'ShowCircle',csc.ShowCircle);
+WriteBool(section,'EyepieceMask',csc.EyepieceMask);
 WriteBool(section,'CircleLabel',csc.CircleLabel);
 WriteBool(section,'RectangleLabel',csc.RectangleLabel);
 WriteBool(section,'marknumlabel',csc.marknumlabel);
