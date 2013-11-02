@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
 "PO-Revision-Date: 2013-10-21 03:26+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: Thai <th@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 
 #: u_translation.rs102cddss
 msgid "102 CD DSS"
@@ -248,6 +248,10 @@ msgstr ""
 msgid "Always save without asking."
 msgstr "บันทึกเสมอโดยไม่ต้องถาม"
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "ภาพเคลื่อนไหว"
@@ -470,6 +474,10 @@ msgstr "ใต้ขอบฟ้า"
 
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
+msgstr ""
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
 msgstr ""
 
 #: u_translation.rsbigstars
@@ -1096,6 +1104,10 @@ msgstr "สร้างแผนที่โพสต์สคริปต์ �
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "สร้างแผนที่แรสเตอร์ที่ %s dpi กรุณารอ..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "ขึ้นถึงจุดสูงสุด"
@@ -1672,6 +1684,10 @@ msgstr ""
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "ระยะเวลา"
@@ -1687,6 +1703,10 @@ msgstr "เงาโลก"
 #: u_translation.rseast
 msgid "East"
 msgstr "ตะวันออก"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1912,6 +1932,18 @@ msgstr "วัตถุจากแค็ตตาล็อกภายนอก
 msgid "Eyepiece"
 msgstr "เลนส์ใกล้ตา"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "ล้มเหลว: %s"
@@ -2079,6 +2111,10 @@ msgstr "แบบอักษร"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "สำหรับแค็ตตาล็อกขนาดใหญ่ ให้เลือกไบนารีเสมอ ส่วนชุดข้อมูลขนาดเล็กที่มีการเปลี่ยนแปลงบ่อย ๆ ให้เลือกข้อความ วิธีนี้จะช่วยให้คุณสามารถแก้ไขแฟ้มและเห็นผลบนแผนที่ในทันที โดยไม่จำเป็นต้องใช้เครื่องมือนี้อีกครั้ง"
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3716,9 +3752,17 @@ msgstr ""
 msgid "Pictures"
 msgstr "ภาพ"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "จุดภาพ"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3868,6 +3912,10 @@ msgstr "จุดเริ่มยุคของตำแหน่ง"
 msgid "PostScript"
 msgstr "โพสต์สคริปต์"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "ชื่อนำหน้ากับชื่อย่อของแค็ตตาล็อก"
@@ -3927,6 +3975,10 @@ msgstr "สัญลักษณ์เครื่องพิมพ์"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "ตั้งค่าเครื่องพิมพ์"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5204,6 +5256,10 @@ msgstr "กล้องโทรทรรศน์"
 msgid "Telescope: %s"
 msgstr "กล้องโทรทรรศน์: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "ไม่มีการเชื่อมต่อกล้องโทรทรรศน์"
@@ -5751,6 +5807,10 @@ msgstr "พ"
 #: u_translation.rswest
 msgid "West"
 msgstr "ตะวันตก"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

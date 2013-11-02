@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
-"PO-Revision-Date: 2013-10-27 17:02+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
+"PO-Revision-Date: 2013-11-02 22:47+0000\n"
 "Last-Translator: Patrick Chevalley <Unknown>\n"
 "Language-Team: French <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "Language: fr\n"
 
 #: u_translation.rs102cddss
@@ -249,6 +249,10 @@ msgstr "toujours"
 msgid "Always save without asking."
 msgstr "Toujours enregistrer sans demander."
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr "Toujours voir les objets de la liste"
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animation"
@@ -472,6 +476,10 @@ msgstr "Sous l'horizon"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Contrôler que la fin des lignes du fichier sont au format DOS."
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr "Attention que cette option peut dégrader les performances"
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1098,6 +1106,10 @@ msgstr "Création du fichier postscript..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "Création du fichier raster à %s dpi..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr "A travers le méridien"
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Culmination"
@@ -1676,6 +1688,10 @@ msgstr "Images des catalogues de nébuleuses"
 msgid "DSS RealSky"
 msgstr "DSS Realsky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr "Doublon"
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Durée"
@@ -1691,6 +1707,10 @@ msgstr "Ombre de la Terre"
 #: u_translation.rseast
 msgid "East"
 msgstr "Est"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr "Côté est"
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1916,6 +1936,18 @@ msgstr "Objet d'un catalogue externe"
 msgid "Eyepiece"
 msgstr "Oculaire"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr "Champ de l'oculaire"
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr "Focale de l'oculaire"
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr "Vision de l'oculaire"
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "Erreur: %s"
@@ -2084,6 +2116,10 @@ msgstr "Police de caractères"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Pour un gros catalogue toujours choisir Binaire. Pour un petit dont les données changent fréquement choisir Texte, cela permet de modifier le fichier et de voir immédiatement le résultat sans avoir à le retraiter."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr "Forcer la couleur"
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3721,9 +3757,17 @@ msgstr "Angle de rotation de la photo"
 msgid "Pictures"
 msgstr "Images"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr "Nombre de pixels"
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "pixels"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr "Taille des pixels"
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3873,6 +3917,10 @@ msgstr "Epoque de la position"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr "Grossissement"
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "Préfixe le nom avec celui du catalogue"
@@ -3932,6 +3980,10 @@ msgstr "Legende imprimée"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "Options imprimante"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr "Imprimer l'en-tête et le pied de page"
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5210,6 +5262,10 @@ msgstr "Télescope"
 msgid "Telescope: %s"
 msgstr "Télescope: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr "Focale du télescope"
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Le télescope n'est pas connecté"
@@ -5757,6 +5813,10 @@ msgstr "Mer."
 #: u_translation.rswest
 msgid "West"
 msgstr "Ouest"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr "Côté ouest"
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

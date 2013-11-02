@@ -5822,3 +5822,63 @@ msgstr ""
 msgid "Update coordinates"
 msgstr ""
 
+#: u_translation:rsduplicate
+msgid "Duplicate"
+msgstr ""
+
+#: u_translation:rsforcecolor
+msgid "Force color"
+msgstr ""
+
+#: u_translation:rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
+#: u_translation:rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
+
+#: u_translation:rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
+#: u_translation:rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation:rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation:rspower
+msgid "Power"
+msgstr ""
+
+#: u_translation:rspixelsize
+msgid "Pixel size"
+msgstr ""
+
+#: u_translation:rspixelcount
+msgid "Pixel count"
+msgstr ""
+
+#: u_translation:rseastside
+msgid "East side"
+msgstr ""
+
+#: u_translation:rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
+#: u_translation:rswestside
+msgid "West side"
+msgstr ""
+
+#: u_translation:rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
+#: u_translation:rsprintheadera
+msgid "Print header and footer"
+msgstr ""
+

@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
 "PO-Revision-Date: 2013-03-10 08:04+0000\n"
 "Last-Translator: Jiří Mištera <boramyr@email.cz>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "X-Poedit-Bookmarks: 99,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: u_translation.rs102cddss
@@ -249,6 +249,10 @@ msgstr ""
 msgid "Always save without asking."
 msgstr "Vždy ulož bez zeptání."
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animace"
@@ -472,6 +476,10 @@ msgstr "Pod horizontem"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Ujistěte se, že používají DOSovský formát konce řádku."
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1097,6 +1105,10 @@ msgstr "Vytváření postskriptové mapy. Čekejte prosím..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "Vytváření rastrové mapy s rozlišením %s dpi. Čekejte prosím..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Kulminace"
@@ -1673,6 +1685,10 @@ msgstr ""
 msgid "DSS RealSky"
 msgstr "DSS RealSky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Trvání"
@@ -1688,6 +1704,10 @@ msgstr "Stín Země"
 #: u_translation.rseast
 msgid "East"
 msgstr "Východ"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1913,6 +1933,18 @@ msgstr "Objekt externího katalogu"
 msgid "Eyepiece"
 msgstr "Okulár"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "Chyba: %s"
@@ -2080,6 +2112,10 @@ msgstr "Písma"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Pro obsáhlé katalogy vyberte binární. Pro malé katalogy, které se často mění, vyberte textový (je možná přímá editace)."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3717,9 +3753,17 @@ msgstr ""
 msgid "Pictures"
 msgstr "Obrázky"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "pixelů"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3869,6 +3913,10 @@ msgstr "Epocha pozice"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "Prefix jména podle zkratky katalogu"
@@ -3928,6 +3976,10 @@ msgstr "Legenda (tisk)"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "Nastavení tisku"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5205,6 +5257,10 @@ msgstr "Dalekohled"
 msgid "Telescope: %s"
 msgstr "Dalekohled: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "Dalekohled není připojen"
@@ -5752,6 +5808,10 @@ msgstr "St"
 #: u_translation.rswest
 msgid "West"
 msgstr "Západ"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"

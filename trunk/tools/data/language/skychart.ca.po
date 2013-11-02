@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: skychart.ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-27 16:54+0000\n"
+"POT-Creation-Date: 2013-11-02 22:31+0000\n"
 "PO-Revision-Date: 2013-10-23 10:22+0000\n"
 "Last-Translator: Antoni Clavell <Unknown>\n"
 "Language-Team: <translation@ap-i.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-27 17:04+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-11-02 22:48+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "X-Poedit-Country: CATALONIA\n"
 
 #: u_translation.rs102cddss
@@ -249,6 +249,10 @@ msgstr ""
 msgid "Always save without asking."
 msgstr "Desa-ho sempre sense preguntar-m'ho"
 
+#: u_translation.rsalwaysshowth
+msgid "Always show the objects from the list"
+msgstr ""
+
 #: u_translation.rsanimation
 msgid "Animation"
 msgstr "Animació"
@@ -472,6 +476,10 @@ msgstr "Veure sota de l'horitzó"
 #: u_translation.rsbesuretheyus
 msgid "Be sure they use a DOS line end format."
 msgstr "Assegureu-vos que s'usa un format DOS per al final de línia"
+
+#: u_translation.rsbewarethisop
+msgid "Beware this option can severly degrade the performance"
+msgstr ""
 
 #: u_translation.rsbigstars
 msgid "Big stars"
@@ -1099,6 +1107,10 @@ msgstr "Creació de l'arxiu postscript..."
 msgid "Create raster chart at %s dpi. Please wait..."
 msgstr "Creació de l'arxiu raster a %s dpi..."
 
+#: u_translation.rscrossmeridia
+msgid "Cross meridian"
+msgstr ""
+
 #: u_translation.rsculmination
 msgid "Culmination"
 msgstr "Culminació"
@@ -1677,6 +1689,10 @@ msgstr "Catàleg imatges DSO"
 msgid "DSS RealSky"
 msgstr "DSS Realsky"
 
+#: u_translation.rsduplicate
+msgid "Duplicate"
+msgstr ""
+
 #: u_translation.rsduration
 msgid "Duration"
 msgstr "Durada"
@@ -1692,6 +1708,10 @@ msgstr "Ombra de la Terra"
 #: u_translation.rseast
 msgid "East"
 msgstr "Est"
+
+#: u_translation.rseastside
+msgid "East side"
+msgstr ""
 
 #: u_translation.rseccentricity
 msgid "Eccentricity"
@@ -1917,6 +1937,18 @@ msgstr "Objecte d'un catàleg extern"
 msgid "Eyepiece"
 msgstr "Ocular"
 
+#: u_translation.rseyepieceappa
+msgid "Eyepiece apparent field of vision"
+msgstr ""
+
+#: u_translation.rseyepiecefoca
+msgid "Eyepiece focal length"
+msgstr ""
+
+#: u_translation.rseyepiecevisi
+msgid "Eyepiece vision"
+msgstr ""
+
 #: u_translation.rsfailed
 msgid "Failed: %s"
 msgstr "Error: %s"
@@ -2084,6 +2116,10 @@ msgstr "Tipus de lletres"
 #: u_translation.rsforalargecat
 msgid "For a large catalog, always select Binary. For a small dataset that changes frequently, select Text. This enables you to edit the file and see the result immediately on the chart without the need to rerun this utility."
 msgstr "Per a un catàleg gran escolliu sempre Binari. Per a un de petit amb canvis freqüents de dades, trieu Text; això permet modificar el fitxer i veure immediatement el resultat sense processar-lo de nou."
+
+#: u_translation.rsforcecolor
+msgid "Force color"
+msgstr ""
 
 #: u_translation.rsforceeqsys
 msgid "Force EqSys"
@@ -3721,9 +3757,17 @@ msgstr "Decalatge angular de la imatge"
 msgid "Pictures"
 msgstr "Imatges"
 
+#: u_translation.rspixelcount
+msgid "Pixel count"
+msgstr ""
+
 #: u_translation.rspixels
 msgid "pixels"
 msgstr "píxels"
+
+#: u_translation.rspixelsize
+msgid "Pixel size"
+msgstr ""
 
 #: u_translation.rsplanet
 msgid "Planet"
@@ -3873,6 +3917,10 @@ msgstr "Època de la posició"
 msgid "PostScript"
 msgstr "Postscript"
 
+#: u_translation.rspower
+msgid "Power"
+msgstr ""
+
 #: u_translation.rsprefixnamewi
 msgid "Prefix name with catalog short name"
 msgstr "Nom del prefix amb el nom de catàleg abreujat"
@@ -3932,6 +3980,10 @@ msgstr "Llegenda impresa"
 #: u_translation.rsprintersetup
 msgid "Printer setup"
 msgstr "Opcions impressió"
+
+#: u_translation.rsprintheadera
+msgid "Print header and footer"
+msgstr ""
 
 #: u_translation.rsprintmethod
 msgid "Print method"
@@ -5209,6 +5261,10 @@ msgstr "Telescopi"
 msgid "Telescope: %s"
 msgstr "Telescopi: %s"
 
+#: u_translation.rstelescopefoc
+msgid "Telescope focal length"
+msgstr ""
+
 #: u_translation.rstelescopenot
 msgid "Telescope not connected"
 msgstr "El telescopi no està connectat"
@@ -5756,6 +5812,10 @@ msgstr "Dme."
 #: u_translation.rswest
 msgid "West"
 msgstr "Oest"
+
+#: u_translation.rswestside
+msgid "West side"
+msgstr ""
 
 #: u_translation.rswhiteonblack
 msgid "White on black"
