@@ -1497,6 +1497,9 @@ resourcestring
   rsPower = 'Power';
   rsPixelSize = 'Pixel size';
   rsPixelCount = 'Pixel count';
+  rsEastSide = 'East side';
+  rsCrossMeridia = 'Cross meridian';
+  rsWestSide = 'West side';
 
 implementation
 

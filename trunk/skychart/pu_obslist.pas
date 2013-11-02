@@ -39,6 +39,7 @@ type
   { Tf_obslist }
 
   Tf_obslist = class(TForm)
+    RadioGroup1: TRadioGroup;
     UpdAllCoord: TButton;
     NoFilterList: TCheckBox;
     HourAngleCombo: TComboBox;
@@ -91,6 +92,7 @@ type
     procedure NoFilterListChange(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure PopupMenu1Popup(Sender: TObject);
+    procedure RadioGroup1Click(Sender: TObject);
     procedure StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
       sIndex, tIndex: Integer);
     procedure StringGrid1MouseDown(Sender: TObject; Button: TMouseButton;
@@ -180,6 +182,9 @@ begin
   Label1.Caption:=rsLimit;
   Label3.Caption:=rsLimit;
   Label4.Caption:=rsHours;
+  RadioGroup1.Items[0]:=rsEastSide;
+  RadioGroup1.Items[1]:=rsCrossMeridia;
+  RadioGroup1.Items[2]:=rsWestSide;
   CheckBox4.Caption:=rsOnlyObjectsW3;
   CheckBox5.Caption:=rsOnlyObjectsW4;
   MenuView.Caption:=rsViewOnChart;
@@ -557,8 +562,20 @@ limittransit:=true;
        StringGrid1.Cells[4, i]:=rsNever;
        StringGrid1.Cells[5, i]:=rsNever;
      end else begin
-       StringGrid1.Cells[4,i]:=TimToStr(rmod(ht-ha+24,24),':',false);
-       StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+ha+24,24),':',false);
+       case RadioGroup1.ItemIndex of
+         0: begin
+             StringGrid1.Cells[4,i]:=TimToStr(rmod(ht-ha+24,24),':',false);
+             StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+24,24),':',false);
+            end;
+         1: begin
+             StringGrid1.Cells[4,i]:=TimToStr(rmod(ht-ha+24,24),':',false);
+             StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+ha+24,24),':',false);
+            end;
+         2: begin
+             StringGrid1.Cells[4,i]:=TimToStr(rmod(ht+24,24),':',false);
+             StringGrid1.Cells[5,i]:=TimToStr(rmod(ht+ha+24,24),':',false);
+            end;
+       end;
      end;
    end else begin
      StringGrid1.Cells[4,i]:='N/A';
@@ -644,6 +661,11 @@ end;
 procedure Tf_obslist.PopupMenu1Popup(Sender: TObject);
 begin
  MenuTitle.Caption:=StringGrid1.Cells[1,ClickRow];
+end;
+
+procedure Tf_obslist.RadioGroup1Click(Sender: TObject);
+begin
+  Refresh;
 end;
 
 procedure Tf_obslist.StringGrid1ColRowMoved(Sender: TObject; IsColumn: Boolean;
