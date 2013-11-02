@@ -1454,6 +1454,7 @@ f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
 f_obslist.CheckBox1.Checked:=cfgm.ObslistAirmassLimit1;
 f_obslist.CheckBox2.Checked:=cfgm.ObslistAirmassLimit2;
 f_obslist.CheckBox3.Checked:=cfgm.ObslistMark;
+f_obslist.RadioGroup1.ItemIndex:=cfgm.ObsListMeridianSide;
 f_obslist.HourAngleCombo.Text:=cfgm.ObslistHourAngle;
 f_obslist.CheckBox4.Checked:=cfgm.ObslistHourAngleLimit1;
 f_obslist.CheckBox5.Checked:=cfgm.ObslistHourAngleLimit2;
@@ -5767,6 +5768,7 @@ cfgm.ObslistHourAngle:=ReadString(section,'hourangle',f_obslist.HourAngleCombo.T
 cfgm.ObslistHourAngleLimit1:=ReadBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 cfgm.ObslistHourAngleLimit2:=ReadBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 cfgm.ObsListLimitType:=ReadInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
+cfgm.ObsListMeridianSide:=ReadInteger(section,'meridianside',f_obslist.RadioGroup1.ItemIndex);
 except
   ShowError('Error reading '+filename+' dss');
 end;
@@ -6488,6 +6490,7 @@ WriteString(section,'hourangle',f_obslist.HourAngleCombo.Text);
 WriteBool(section,'houranglelimit1',f_obslist.CheckBox4.Checked);
 WriteBool(section,'houranglelimit2',f_obslist.CheckBox5.Checked);
 WriteInteger(section,'limittype',f_obslist.PageControl1.ActivePageIndex);
+WriteInteger(section,'meridianside',f_obslist.RadioGroup1.ItemIndex);
 
 Updatefile;
 end;

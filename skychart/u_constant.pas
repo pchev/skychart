@@ -1054,7 +1054,7 @@ type
     SampAutoconnect,SampKeepTables,SampKeepImages: boolean;
     SampConfirmCoord,SampConfirmImage,SampConfirmTable: boolean;
     SampSubscribeCoord,SampSubscribeImage,SampSubscribeTable: boolean;
-    ObsListLimitType: integer;
+    ObsListLimitType,ObsListMeridianSide: integer;
     InitObsList,ObslistAirmass,ObslistHourAngle: string;
     ObslistAirmassLimit1,ObslistAirmassLimit2,ObslistHourAngleLimit1,ObslistHourAngleLimit2,ObslistMark: boolean;
     constructor Create;
@@ -2367,6 +2367,7 @@ var
 begin
   InitObsList:=Source.InitObsList;
   ObsListLimitType:=Source.ObsListLimitType;
+  ObsListMeridianSide:=Source.ObsListMeridianSide;
   ObslistAirmass:=Source.ObslistAirmass;
   ObslistAirmassLimit1:=Source.ObslistAirmassLimit1;
   ObslistAirmassLimit2:=Source.ObslistAirmassLimit2;

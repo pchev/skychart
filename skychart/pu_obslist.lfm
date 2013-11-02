@@ -9,7 +9,7 @@ object f_obslist: Tf_obslist
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.3'
+  LCLVersion = '1.0.12.0'
   object PanelBot: TPanel
     Left = 0
     Height = 66
@@ -21,7 +21,7 @@ object f_obslist: Tf_obslist
     TabOrder = 0
     object FileNameEdit1: TFileNameEdit
       Left = 8
-      Height = 24
+      Height = 23
       Top = 5
       Width = 192
       FilterIndex = 0
@@ -54,7 +54,7 @@ object f_obslist: Tf_obslist
       Left = 448
       Height = 23
       Top = 4
-      Width = 183
+      Width = 173
       Caption = 'Mark objects on the chart'
       OnChange = CheckBox3Change
       TabOrder = 3
@@ -63,7 +63,7 @@ object f_obslist: Tf_obslist
       Left = 448
       Height = 23
       Top = 32
-      Width = 254
+      Width = 237
       Caption = 'Always show the objects from the list'
       OnChange = NoFilterListChange
       ParentShowHint = False
@@ -111,7 +111,7 @@ object f_obslist: Tf_obslist
     TabOrder = 2
     object Edit1: TEdit
       Left = 8
-      Height = 24
+      Height = 23
       Top = 8
       Width = 291
       TabOrder = 0
@@ -139,22 +139,22 @@ object f_obslist: Tf_obslist
       Height = 78
       Top = 1
       Width = 494
-      ActivePage = TabSheet1
+      ActivePage = TabSheet2
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
-      TabIndex = 0
+      TabIndex = 1
       TabOrder = 3
       TabPosition = tpLeft
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 74
-        ClientWidth = 433
+        ClientWidth = 436
         object CheckBox2: TCheckBox
           Left = 16
           Height = 23
           Top = 46
-          Width = 252
+          Width = 240
           Caption = 'Only objects within airmass limits now'
           OnChange = CheckBox2Change
           TabOrder = 0
@@ -163,7 +163,7 @@ object f_obslist: Tf_obslist
           Left = 16
           Height = 23
           Top = 22
-          Width = 274
+          Width = 260
           Caption = 'Only objects within airmass limits tonight'
           OnChange = CheckBox1Change
           TabOrder = 1
@@ -172,13 +172,13 @@ object f_obslist: Tf_obslist
           Left = 192
           Height = 16
           Top = 3
-          Width = 41
+          Width = 37
           Caption = 'Label2'
           ParentColor = False
         end
         object AirmassCombo: TComboBox
           Left = 112
-          Height = 24
+          Height = 23
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -208,9 +208,35 @@ object f_obslist: Tf_obslist
       object TabSheet2: TTabSheet
         Caption = 'Transit'
         ClientHeight = 74
-        ClientWidth = 433
+        ClientWidth = 436
+        object RadioGroup1: TRadioGroup
+          Left = 0
+          Height = 74
+          Top = 0
+          Width = 140
+          Align = alLeft
+          AutoFill = True
+          ChildSizing.LeftRightSpacing = 6
+          ChildSizing.TopBottomSpacing = 6
+          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+          ChildSizing.EnlargeVertical = crsHomogenousChildResize
+          ChildSizing.ShrinkHorizontal = crsScaleChilds
+          ChildSizing.ShrinkVertical = crsScaleChilds
+          ChildSizing.Layout = cclLeftToRightThenTopToBottom
+          ChildSizing.ControlsPerLine = 1
+          ClientHeight = 70
+          ClientWidth = 136
+          ItemIndex = 1
+          Items.Strings = (
+            'East side'
+            'Cross meridian'
+            'West side'
+          )
+          OnClick = RadioGroup1Click
+          TabOrder = 3
+        end
         object CheckBox4: TCheckBox
-          Left = 16
+          Left = 144
           Height = 23
           Top = 22
           Width = 276
@@ -219,7 +245,7 @@ object f_obslist: Tf_obslist
           TabOrder = 0
         end
         object Label3: TLabel
-          Left = 16
+          Left = 144
           Height = 16
           Top = 3
           Width = 30
@@ -227,7 +253,7 @@ object f_obslist: Tf_obslist
           ParentColor = False
         end
         object HourAngleCombo: TComboBox
-          Left = 112
+          Left = 240
           Height = 23
           Top = 1
           Width = 72
@@ -237,22 +263,22 @@ object f_obslist: Tf_obslist
             '1.0'
             '2.0'
             '3.0'
-            '4..0'
+            '4.0'
           )
           OnChange = HourAngleComboChange
           TabOrder = 1
           Text = '2.0'
         end
         object Label4: TLabel
-          Left = 192
+          Left = 320
           Height = 16
           Top = 3
-          Width = 37
-          Caption = 'Label4'
+          Width = 34
+          Caption = 'Hours'
           ParentColor = False
         end
         object CheckBox5: TCheckBox
-          Left = 16
+          Left = 144
           Height = 23
           Top = 46
           Width = 256
