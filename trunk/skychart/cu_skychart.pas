@@ -138,6 +138,7 @@ Tskychart = class (TComponent)
     Procedure DrawLegend;
     Procedure DrawSearchMark(ra,de :double; moving:boolean) ;
     procedure DrawFinderMark(ra,de :double; moving:boolean; num:integer;mark:integer=0) ;
+    procedure DrawEyepieceMask;
     procedure DrawCircle;
     Procedure DrawTarget;
     Procedure DrawCompass;
@@ -348,6 +349,9 @@ end;
 
   // the horizon line if not transparent
   if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.horizonopaque and (not (Fplot.cfgplot.UseBMP and not cfgsc.ShowHorizonPicture)) then DrawHorizon;
+
+  // Mask the chart outside of eyepiece
+  DrawEyepieceMask;
 
   // the compass and scale
   DrawCompass;
@@ -4838,6 +4842,25 @@ Fplot.PlotCircle(xa-sz-1,ya-sz-1,xa+sz+1,ya+sz+1,Fplot.cfgplot.Color[0],moving);
 finally
 Fplot.cfgplot.UseBMP:=saveusebmp;
 end;
+end;
+
+procedure Tskychart.DrawEyepieceMask;
+var maxr,x,y: single;
+    x1,y1: double;
+    i: integer;
+begin
+if cfgsc.EyepieceMask then begin
+  maxr:=0;
+  for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then maxr:=max(maxr,cfgsc.circle[i,1]);
+  if maxr>0 then begin
+     maxr:=deg2rad*maxr/120;
+     if (maxr>(cfgsc.fov/6))and(maxr<(cfgsc.fov/2)) then begin
+       projection(cfgsc.racentre,cfgsc.decentre,x1,y1,false,cfgsc);
+       WindowXY(x1,y1,x,y,cfgsc);
+       Fplot.PlotCircleMask(x,y,cfgsc.BxGlb*maxr,cfgsc.WhiteBg);
+     end;
+  end;
+ end;
 end;
 
 Procedure Tskychart.DrawFinderMark(ra,de :double; moving:boolean; num:integer;mark:integer=0) ;

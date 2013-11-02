@@ -73,6 +73,7 @@ type
     MenuCircle1: TMenuItem;
     MenuCircle9: TMenuItem;
     MenuCircle10: TMenuItem;
+    EyepieceMask: TMenuItem;
     MenuObslistFirst: TMenuItem;
     MenuObslistNext: TMenuItem;
     MenuObslistPrev: TMenuItem;
@@ -173,6 +174,7 @@ type
     procedure Cleanupmap1Click(Sender: TObject);
     procedure CopyCoord1Click(Sender: TObject);
     procedure ChartResize(Sender: TObject);
+    procedure EyepieceMaskClick(Sender: TObject);
     procedure HorScrollBarScroll(Sender: TObject; ScrollCode: TScrollCode;
       var ScrollPos: Integer);
     procedure imglistExecute(Sender: TObject);
@@ -422,6 +424,7 @@ Zoom2.caption:=rsZoomCentre2;
 MenuFinderCircle.Caption:=rsFinderCircle2;
 SelectCircle.Caption:=rsSelectCircle;
 SelectRectangle.Caption:=rsSelectRectan;
+EyepieceMask.Caption:=rsEyepieceVisi;
 NewFinderCircle1.caption:=rsNewFinderCir;
 RemoveLastCircle1.caption:=rsRemoveLastCi;
 RemoveAllCircles1.caption:=rsRemoveAllCir;
@@ -723,6 +726,7 @@ if VerboseMsg then
  WriteTrace('Chart '+sc.cfgsc.chartname+': Release refresh lock');
  lock_refresh:=false;
  sc.plot.cfgplot.AntiAlias := saveantialias;
+ EyepieceMask.Checked:=sc.cfgsc.EyepieceMask;
  if (not lastquick) and assigned(FUpdateBtn) then FUpdateBtn(sc.cfgsc.flipx,sc.cfgsc.flipy,Connect1.checked,self);
  if (not lastquick) and sc.cfgsc.moved and assigned(FChartMove) then FChartMove(self);
 end;
@@ -800,6 +804,13 @@ RefreshTimer.Enabled:=true;
 if sc<>nil then begin
   sc.plot.init(Image1.width,Image1.height);
 end;
+end;
+
+procedure Tf_chart.EyepieceMaskClick(Sender: TObject);
+begin
+  sc.cfgsc.EyepieceMask:=not sc.cfgsc.EyepieceMask;
+  EyepieceMask.Checked:=sc.cfgsc.EyepieceMask;
+  Refresh;
 end;
 
 procedure Tf_chart.SetScrollBar;
