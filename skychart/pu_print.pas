@@ -36,6 +36,7 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    CheckBox1: TCheckBox;
     Preview: TButton;
     Edit1: TEdit;
     GroupBox1: TGroupBox;
@@ -105,6 +106,7 @@ Label3.caption:=rsTop;
 Label4.caption:=rsBottom;
 Label5.Caption:=rsDescription;
 Label6.Caption:=rsNumberOfCopi;
+CheckBox1.Caption:=rsPrintHeaderA;
 Button1.caption:=rsNoMargin;
 Button2.caption:=rsDefaultMargi;
 Button3.caption:=rsHelp;
