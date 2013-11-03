@@ -1448,6 +1448,7 @@ if (not firstuse)and(config_version<cdcver) then
 if cfgm.SampAutoconnect then begin
   SAMPStart(true);
 end;
+f_print.cm:=cfgm;
 f_obslist.cfgsc:=Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc;
 f_obslist.PageControl1.ActivePageIndex:=cfgm.ObsListLimitType;
 f_obslist.AirmassCombo.Text:=cfgm.ObslistAirmass;
@@ -2331,20 +2332,19 @@ if VerboseMsg then
 end;
 
 procedure Tf_main.Print1Execute(Sender: TObject);
+var buf: string;
 begin
 if MultiFrame1.ActiveObject is Tf_chart then begin
-  cfgm.PrintDesc:=rsSkyCharts+', '+rsObservatory+blank+
-               Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ObsName+', '+
-               rsCenter+blank+rsRA+':'+ARmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.racentre/15)+
-               blank+rsDEC+':'+DEmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.decentre);
-  if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName>'' then  cfgm.PrintDesc:=cfgm.PrintDesc+', '+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
-  f_print.cm:=cfgm;
+  buf:=rsSkyCharts+', '+rsObservatory+blank+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.ObsName+', '+
+       rsCenter+blank+rsRA+':'+ARmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.racentre/15)+
+       blank+rsDEC+':'+DEmtoStr(rad2deg*Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.decentre);
+  if Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName>'' then  buf:=buf+', '+Tf_chart(MultiFrame1.ActiveObject).sc.cfgsc.FindName;
+  cfgm.PrintDesc:=buf;
   formpos(f_print,mouse.cursorpos.x,mouse.cursorpos.y);
   f_print.showmodal;
   if (f_print.ModalResult=mrOK)or(f_print.ModalResult=mrYes) then begin
-   cfgm:=f_print.cm;
-   cfgm.PrintHeader:=f_print.CheckBox1.Checked;
-   Tf_chart(MultiFrame1.ActiveObject).PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
+    cfgm.PrintHeader:=f_print.CheckBox1.Checked;
+    Tf_chart(MultiFrame1.ActiveObject).PrintChart(cfgm.printlandscape,cfgm.printcolor,cfgm.PrintMethod,cfgm.PrinterResolution,cfgm.PrintCmd1,cfgm.PrintCmd2,cfgm.PrintTmpPath,cfgm,(f_print.ModalResult=mrYes));
   end;
   PrintPreview1.Visible:=(cfgm.PrintMethod=0);
 end;
