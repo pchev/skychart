@@ -23,10 +23,10 @@ object f_config_display: Tf_config_display
       Height = 526
       Top = 1
       Width = 503
-      ActivePage = Page9
+      ActivePage = Page7
       Align = alClient
       ShowTabs = False
-      TabIndex = 8
+      TabIndex = 6
       TabOrder = 0
       object Page1: TTabSheet
         Caption = 'Display'
@@ -2644,7 +2644,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 74
-          Width = 106
+          Width = 96
           Caption = 'Coordinates Grid'
           ParentColor = False
         end
@@ -2652,7 +2652,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 40
-          Width = 41
+          Width = 40
           Caption = 'Object'
           ParentColor = False
         end
@@ -2660,7 +2660,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 115
-          Width = 41
+          Width = 36
           Caption = 'Labels'
           ParentColor = False
         end
@@ -2668,7 +2668,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 157
-          Width = 47
+          Width = 42
           Caption = 'Legend'
           ParentColor = False
         end
@@ -2676,7 +2676,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 198
-          Width = 111
+          Width = 103
           Caption = 'Information detail'
           ParentColor = False
         end
@@ -2684,7 +2684,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 240
-          Width = 63
+          Width = 61
           Caption = 'Object list'
           ParentColor = False
         end
@@ -2692,7 +2692,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 282
-          Width = 90
+          Width = 82
           Caption = 'Printer legend'
           ParentColor = False
         end
@@ -2700,7 +2700,7 @@ object f_config_display: Tf_config_display
           Left = 192
           Height = 16
           Top = 40
-          Width = 29
+          Width = 27
           Caption = 'Font'
           ParentColor = False
         end
@@ -3073,7 +3073,7 @@ object f_config_display: Tf_config_display
           Left = 16
           Height = 16
           Top = 328
-          Width = 85
+          Width = 76
           Caption = 'Greek symbol'
           ParentColor = False
         end
