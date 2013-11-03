@@ -478,7 +478,7 @@ end;
 //todo: check if alpha transparency work
 {$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
-procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer);
+procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer; whitebg:boolean=false);
 var
   memstream:Tmemorystream;
   IntfImage: TLazIntfImage;
@@ -536,7 +536,12 @@ if (bmp.Width<2)or(bmp.Height<2) then exit;
                 else
                     CurColor.alpha:=alphaOpaque;
              end;
-           end;
+         end;
+         if whitebg then begin
+           CurColor.red:=65535-CurColor.red;
+           CurColor.green:=65535-CurColor.green;
+           CurColor.blue:=65535-CurColor.blue;
+          end;
           IntfImage.Colors[x,y]:=CurColor;
         end;
       end;
@@ -1524,7 +1529,7 @@ begin
         outbmp.free;
       end;
    end else begin
-     if DisplayIs32bpp then SetTransparencyFromLuminance(ibmp,0)
+     if DisplayIs32bpp then SetTransparencyFromLuminance(ibmp,1,WhiteBg)
                        else ibmp.TransparentColor:=clBlack;
      cnv.CopyMode:=cmSrcCopy;
      cnv.Draw(0,0,ibmp);

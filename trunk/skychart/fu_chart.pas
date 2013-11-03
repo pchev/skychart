@@ -1224,9 +1224,6 @@ try
         prtsc.plot.cfgchart.drawpen:=maxintvalue([1,rp div 150]);
         prtsc.plot.cfgchart.drawsize:=maxintvalue([1,rp div 100]);
         prtsc.plot.cfgchart.fontscale:=1;
-        {$ifndef mswindows}
-         prtsc.cfgsc.ShowBackgroundImage:=false; // do not work with Postscriptcanvas
-        {$endif}
         prtsc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,rp);
         prtsc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,rp);
         prtsc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,rp);
@@ -1275,9 +1272,6 @@ try
     prtsc.plot.cfgchart.drawpen:=maxintvalue([1,resol div 150]);
     prtsc.plot.cfgchart.drawsize:=maxintvalue([1,resol div 100]);
     prtsc.plot.cfgchart.fontscale:=1;
-    {$ifndef mswindows}
-     prtsc.cfgsc.ShowBackgroundImage:=false; // do not work with Postscriptcanvas
-    {$endif}
     prtsc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,resol);
     prtsc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,resol);
     prtsc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,resol);
@@ -1320,7 +1314,6 @@ try
       prtsc.plot.cfgchart.drawpen:=maxintvalue([1,printresol div 150]);
       prtsc.plot.cfgchart.drawsize:=maxintvalue([1,printresol div 100]);
       prtsc.plot.cfgchart.fontscale:=1;
-      prtsc.cfgsc.ShowBackgroundImage:=false;
       prtsc.cfgsc.LeftMargin:=mm2pi(cm.PrtLeftMargin,printresol);
       prtsc.cfgsc.RightMargin:=mm2pi(cm.PrtRightMargin,printresol);
       prtsc.cfgsc.TopMargin:=mm2pi(cm.PrtTopMargin+HeaderHeight,printresol);
