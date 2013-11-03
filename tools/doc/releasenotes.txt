@@ -16,6 +16,9 @@ New functions:
   * Add Ctrl+L and Ctrl+Shift+L shortcuts to switch the chart legend.
   * Add a button to change the left mouse click behavior from zoom to move.
   * Add Observing list functions.
+  * New option to mask the chart outside of the wider eyepiece.
+  * New header/footer in the printout.
+  * Capability to define more than 10 eyepieces or ccd fields.
 
 Corrections:
   * Better picture/map transparency.

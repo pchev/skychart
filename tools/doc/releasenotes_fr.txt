@@ -16,6 +16,9 @@ Nouvelles fonctions:
   * Ajout des racourcis Ctrl+L et Ctrl+Shift+L pour contrôler l'affichage de la légende.
   * Ajout d'un bouton pour modifier le comportement du clic gauche de la souris: zoom ou déplacer.
   * Ajout d'une fonction de liste d'observation.
+  * Nouvelle option pour masquer la carte à l'extérieur de l'oculaire le plus large.
+  * Nouvelle en-tête et pied de page pour l'impression.
+  * Possibilité de définir plus de 10 oculaires ou champs CCD.
 
 Corrections:
   * Meilleure transparence image/carte.
