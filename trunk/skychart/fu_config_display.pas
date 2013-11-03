@@ -739,9 +739,6 @@ begin
  f_fov:=Tf_fov.Create(self);
  LockChange:=true;
  SetLang;
- label124.Visible:=false;   // legend font
- legendfont.Visible:=false;
- speedbutton3.Visible:=false;
 {$ifndef mswindows}
   label235.Visible:=false;      // symbol same as label with utf-8
   symbfont.Visible:=false;

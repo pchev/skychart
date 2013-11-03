@@ -357,16 +357,14 @@ end;
   DrawCompass;
   DrawTarget;
 
-  // the chart legend to the screen
-  if (not fplot.cfgchart.onprinter)and(cfgsc.showlabel[8] or cfgsc.showlegend) then DrawLegend;
+  // Draw the chart border
+  DrawBorder;
+
+  // the chart legend
+  DrawLegend;
 
   // refresh telescope mark
   if scopemark then cfgsc.ScopeMark:=true;
-
-  // Draw the chart border
-  DrawBorder;
-  // the chart legend on printer
-  if (fplot.cfgchart.onprinter) then DrawLegend;
 
   result:=true;
 if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': end drawing');
@@ -4657,20 +4655,21 @@ var lbmp : TBGRABitmap;
     ts: TSize;
 begin
 if Fplot.cfgchart.onprinter and (cfgsc.FooterHeight>0) then begin
+  fontnum:=3;
+  labelnum:=8;
+  savefontsize:=Fplot.cfgplot.FontSize[fontnum];
+  try
   // chart info
   txt:=GetChartInfo(', ');
   ts:=Fplot.GetTextSize(6,txt);
   xx:=Fplot.cfgchart.Width div 2;
   yy:=Fplot.cfgchart.Height-cfgsc.BottomMargin+round(ts.cy*1.2);
   Fplot.PlotText(xx,yy,6,Fplot.cfgplot.LabelColor[8],laCenter,laBottom,txt,cfgsc.WhiteBg);
-  h0:=yy+round(ts.cy/4);
+  // legend
+  h0:=yy+round(ts.cy/2);
   Fplot.PlotLine(cfgsc.LeftMargin,h0,Fplot.cfgchart.Width-cfgsc.RightMargin,h0,clBlack,1);
-  h0:=yy+round(ts.cy*1.2);
-  fontnum:=2;
-  labelnum:=8;
-  // Stars magnitude
-  dma:=max(1,fplot.cfgchart.min_ma/6);
-  mag:=-dma;
+  h0:=h0+round(ts.cy);
+  Fplot.cfgplot.FontSize[fontnum]:=Fplot.cfgplot.FontSize[fontnum]-2;
   sz:=8*Fplot.cfgchart.drawsize;
   ls:=2*sz;
   ws:=round((Fplot.cfgchart.Width-cfgsc.LeftMargin-cfgsc.RightMargin)/(7*1.5+16*2));
@@ -4679,6 +4678,10 @@ if Fplot.cfgchart.onprinter and (cfgsc.FooterHeight>0) then begin
   sz:=min(sz,ws);
   yy:=h0;
   xx:=cfgsc.LeftMargin+round((Fplot.cfgchart.Width-cfgsc.LeftMargin-cfgsc.RightMargin-ws*(7*1.5+16*2))/2);
+  drawgray:=false;
+  dma:=max(1,fplot.cfgchart.min_ma/6);
+  mag:=-dma;
+  // Stars magnitude
   for i:=0 to 6 do begin
     mag:=mag+dma;
     xx:=round(xx+1.5*ws);
@@ -4746,9 +4749,11 @@ if Fplot.cfgchart.onprinter and (cfgsc.FooterHeight>0) then begin
   xx:=round(xx+2*ws);
   Fplot.PlotDeepSkyObject(xx,yy,sz,0,0,1,0,'',cfgsc.WhiteBg,drawgray,clGray);
   Fplot.PlotText(xx,yy+ls,fontnum,Fplot.cfgplot.LabelColor[labelnum],laCenter,laCenter,nebtype[2],cfgsc.WhiteBg,false);
-
+  finally
+    Fplot.cfgplot.FontSize[fontnum] := savefontsize;
+  end;
 end else begin
-fontnum:=2;
+fontnum:=3;
 labelnum:=8;
 // Save setting
 savecbmp:=Fplot.cbmp;

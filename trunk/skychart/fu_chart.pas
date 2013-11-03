@@ -1248,7 +1248,7 @@ try
         PrintPreview.LoadImage(SysToUTF8(slash(TempDir))+'preview.bmp');
         PrintPreview.ClientHeight:=Image1.Height;
         PrintPreview.ClientWidth:=Image1.Width;
-        PrintPreview.image1.ZoomMin:=1;
+        PrintPreview.image1.ZoomMin:=0.5;
         PrintPreview.labeltext:=rsPrintPreview;
         PrintPreview.Init;
         pt:=Image1.ClientToScreen(point(0,0));
@@ -1257,6 +1257,7 @@ try
         PrintPreview.ShowModal;
         printok:=(PrintPreview.ModalResult=mrYes);
       finally
+        Image1.SetFocus;
         PrintPreview.Free;
         previewbmp.Free;
       end;
@@ -1393,6 +1394,7 @@ finally
  printing:=false;
  chdir(appdir);
  screen.cursor:=crDefault;
+ Image1.SetFocus;
 end;
 end;
 
