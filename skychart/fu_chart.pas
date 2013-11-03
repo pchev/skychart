@@ -1217,6 +1217,9 @@ try
         w:=round(w*rs);
         h:=round(h*rs);
         rp:=96;
+        {$ifndef mswindows}
+        prtsc.cfgsc.PlotImageFirst:=true;
+        {$endif}
         prtsc.plot.destcnv:=previewbmp.Canvas;
         prtsc.plot.cfgplot.UseBMP:=false;
         prtsc.plot.cfgchart.onprinter:=true;
@@ -1266,6 +1269,9 @@ try
     Printer.Title:='CdC';
     Printer.Copies:=cm.PrintCopies;
     Printer.BeginDoc;
+    {$ifndef mswindows}
+    prtsc.cfgsc.PlotImageFirst:=true;
+    {$endif}
     prtsc.plot.destcnv:=Printer.canvas;
     prtsc.plot.cfgplot.UseBMP:=false;
     prtsc.plot.cfgchart.onprinter:=true;
@@ -1307,6 +1313,7 @@ try
       end;
      // draw the chart
       ps.begindoc;
+      prtsc.cfgsc.PlotImageFirst:=true;
       prtsc.plot.destcnv:=ps;
       prtsc.plot.cfgplot.UseBMP:=false;
       prtsc.plot.cfgchart.onprinter:=true;

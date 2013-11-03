@@ -476,7 +476,6 @@ InitStarBmp;
 end;
 
 //todo: check if alpha transparency work
-{$IFDEF LCLGTK}  {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 {$IFDEF LCLQT} {$DEFINE OLD_MASK_TRANSPARENCY} {$ENDIF}
 procedure SetTransparencyFromLuminance(bmp:Tbitmap; method: integer; whitebg:boolean=false);
 var
@@ -2459,11 +2458,7 @@ if cfgplot.UseBMP then begin;
    if WhiteBg then lcolor:=cfgplot.Color[11];
    if lcolor=cfgplot.backgroundcolor then lcolor:=(not lcolor)and $FFFFFF;
    ts:=cbmp.TextSize('1');
-   {$ifdef lclgtk}
-   ls:=round(1.5*ts.cy;));
-   {$else}
    ls:=ts.cy;
-   {$endif}
    repeat
      p:=pos(crlf,txt);
      if p=0 then buf:=txt
@@ -2492,11 +2487,7 @@ end else if cnv<>nil then with cnv do begin
     Font.Size:=round(cfgplot.LabelSize[labelnum]*cfgchart.fontscale);
     if cfgplot.FontBold[fontnum] then Font.Style:=[fsBold] else Font.Style:=[];
     if cfgplot.FontItalic[fontnum] then font.style:=font.style+[fsItalic];
-    {$ifdef lclgtk}
-    ls:=round(1.5*cnv.TextHeight('1'));
-    {$else}
     ls:=round(cnv.TextHeight('1'));
-    {$endif}
     repeat
       p:=pos(crlf,txt);
       if p=0 then buf:=txt
