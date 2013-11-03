@@ -305,6 +305,10 @@ end;
   if VerboseMsg then   WriteTrace('SkyChart '+cfgsc.chartname+': begin drawing');
   // first the extended object
   if not (cfgsc.quick and FPlot.cfgplot.red_move) then begin
+
+    // the images first on canvas that not support the transparency
+    if (not (cfgsc.quick and FPlot.cfgplot.red_move))and cfgsc.PlotImageFirst and cfgsc.ShowImageList then DrawImagesList;
+
     DrawMilkyWay; // most extended first
     // EQ grid in ALt/Az mode
     DrawAltAzEqGrid;
@@ -342,7 +346,7 @@ end;
   // Artificials satellites
   if cfgsc.ShowArtSat then DrawArtSat;
   // BG image
-  if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.ShowImageList then DrawImagesList;
+  if (not (cfgsc.quick and FPlot.cfgplot.red_move))and (not cfgsc.PlotImageFirst) and cfgsc.ShowImageList then DrawImagesList;
 
   // the labels
   if (not (cfgsc.quick and FPlot.cfgplot.red_move)) and cfgsc.showlabelall then DrawLabels;
@@ -4770,11 +4774,7 @@ if Fplot.cfgplot.FontBold[fontnum] then lbmp.FontStyle:=[fsBold] else lbmp.FontS
 if Fplot.cfgplot.FontItalic[fontnum] then lbmp.FontStyle:=lbmp.FontStyle+[fsItalic];
 lbmp.FontName:=Fplot.cfgplot.FontName[fontnum];
 ts:=lbmp.TextSize('1');
-{$ifdef lclgtk}
-ls:=round(1.5*ts.cy;));
-{$else}
 ls:=ts.cy;
-{$endif}
 w:=0; h:=ls;
 if cfgsc.showlabel[8] then begin
   repeat

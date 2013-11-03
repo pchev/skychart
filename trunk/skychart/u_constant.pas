@@ -911,7 +911,7 @@ type
     ArchiveDirActive: array[1..MaxArchiveDir] of boolean;
     // working variable
     ephvalid, ShowPlanetValid, ShowCometValid, ShowAsteroidValid, SmallSatActive,
-    ShowEarthShadowValid, ShowEclipticValid: boolean;
+    ShowEarthShadowValid, ShowEclipticValid, PlotImageFirst: boolean;
     HorizonMax, rap2000, dep2000, RefractionOffset,ObsRAU,ObsZAU,Diurab: double;
     haicx,haicy,ObsRefractionCor, ObsRefA, ObsRefB, ObsHorizonDepression, ObsELONG,ObsPHI,ObsDAZ: double;
     WindowRatio, BxGlb, ByGlb, AxGlb, AyGlb, sintheta, costheta, x2: double;
@@ -1797,6 +1797,7 @@ begin
   SetLength(rectangle,nrectangle+1);
   SetLength(rectangleok,nrectangle+1);
   SetLength(rectanglelbl,nrectangle+1);
+  PlotImageFirst:=false;
 end;
 
 destructor Tconf_skychart.Destroy;
@@ -2137,6 +2138,7 @@ begin
   ShowAsteroidValid := Source.ShowAsteroidValid;
   ShowEarthShadowValid := Source.ShowEarthShadowValid;
   ShowEclipticValid := Source.ShowEclipticValid;
+  PlotImageFirst := Source.PlotImageFirst;
   SmallSatActive := Source.SmallSatActive;
   BGalpha := Source.BGalpha;
   BGitt := Source.BGitt;

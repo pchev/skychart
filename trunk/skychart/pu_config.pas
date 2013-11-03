@@ -227,11 +227,6 @@ end;
 
 procedure Tf_config.FormCreate(Sender: TObject);
 begin
-// Hide unfinished config calendar
-{ TODO : config calendar }
-//TreeView1.Items.Item[52].Delete;
-//TreeView1.Items.Item[51].Delete;
-
 Fcsc:=Tconf_skychart.Create;
 Fccat:=Tconf_catalog.Create;
 Fcshr:=Tconf_shared.Create;

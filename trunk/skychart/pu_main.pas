@@ -849,18 +849,9 @@ implementation
 {$R *.lfm}
 
 uses
-{$if (lcl_major=0) and (lcl_minor=9) and (lcl_release<29) }
-    {$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
-     gtkproc,
-    {$endif}
-{$else}
-    {$ifdef LCLgtk}
-     gtkproc,
-    {$endif}
     {$ifdef LCLgtk2}
      gtk2proc,
     {$endif}
-{$endif}
      LCLProc,pu_detail, pu_about, pu_info, pu_getdss, u_projection, pu_config,
      pu_printsetup, pu_calendar, pu_position, pu_search, pu_zoom,
      pu_splash, pu_manualtelescope, pu_print, pu_clock;
@@ -2118,9 +2109,6 @@ SampClientDesc:=Tstringlist.Create;
 SampClientCoordpointAtsky:=TStringList.Create;
 SampClientImageLoadFits:=TStringList.Create;
 SampClientTableLoadVotable:=TStringList.Create;
-// Hide unfinished config calendar
-{ TODO : config calendar }
-//MenuItem33.Visible:=false;
 
 except
   on E: Exception do begin
@@ -8370,7 +8358,7 @@ procedure Tf_main.ViewFullScreenExecute(Sender: TObject);
 begin
 if cfgm.KioskMode then FullScreen1.Checked:=true
                   else FullScreen1.Checked:=not FullScreen1.Checked;
-{$IF DEFINED(LCLgtk) or DEFINED(LCLgtk2)}
+{$IF DEFINED(LCLgtk2)}
 { TODO : fullscreen showmodal do not work with Gnome/Unity }
  SetWindowFullScreen(f_main,FullScreen1.Checked);
  if FullScreen1.Checked then
