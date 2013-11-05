@@ -2180,7 +2180,7 @@ begin
   CalGraphHeight := Source.CalGraphHeight;
   RectangleLabel := Source.RectangleLabel;
   marknumlabel := Source.marknumlabel;
-  for i := 0 to Source.NumCircle - 1 do
+  for i := 0 to Source.NumCircle do
     for j := 1 to 2 do
       CircleLst[i, j] := Source.CircleLst[i, j];
   for i := 1 to Source.nummodlabels do

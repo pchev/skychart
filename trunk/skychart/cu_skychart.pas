@@ -4942,19 +4942,35 @@ end;
 end;
 
 procedure Tskychart.DrawEyepieceMask;
-var maxr,x,y: single;
-    x1,y1: double;
-    i: integer;
+var r,x,y,o: single;
+    x1,y1,x2,y2,rot,pa: double;
+    spa,cpa:extended;
+    i,lbl: integer;
 begin
 if cfgsc.EyepieceMask then begin
-  maxr:=0;
-  for i:=1 to cfgsc.ncircle do if cfgsc.circleok[i] then maxr:=max(maxr,cfgsc.circle[i,1]);
-  if maxr>0 then begin
-     maxr:=deg2rad*maxr/120;
-     if (maxr>(cfgsc.fov/6))and(maxr<(cfgsc.fov/2)) then begin
-       projection(cfgsc.racentre,cfgsc.decentre,x1,y1,false,cfgsc);
-       WindowXY(x1,y1,x,y,cfgsc);
-       Fplot.PlotCircleMask(x,y,cfgsc.BxGlb*maxr,cfgsc.WhiteBg);
+  lbl:=-1; r:=0;
+  for i:=1 to cfgsc.ncircle do begin
+     if cfgsc.circleok[i] then begin
+       if cfgsc.circle[i,1]>r then begin
+          r:=cfgsc.circle[i,1];
+          lbl:=i;
+       end;
+     end;
+  end;
+  if lbl>0 then begin
+     r:=deg2rad*cfgsc.circle[lbl,1]/120;
+     if (r>(cfgsc.fov/6))and(r<(cfgsc.fov/2)) then begin
+       projection(cfgsc.racentre,cfgsc.decentre,x1,y1,false,cfgsc) ;
+       projection(cfgsc.racentre,cfgsc.decentre+0.001,x2,y2,false,cfgsc) ;
+       rot:=RotationAngle(x1,y1,x2,y2,cfgsc);
+       pa:=deg2rad*cfgsc.circle[lbl,2]*cfgsc.FlipX;
+       if cfgsc.FlipY<0 then pa:=pi-pa;
+       sincos(pa+rot,spa,cpa);
+       o:=abs(cfgsc.circle[lbl,3]*deg2rad/60);
+       x2:=x1-cfgsc.flipx*o*spa;
+       y2:=y1+cfgsc.flipy*o*cpa;
+       WindowXY(x2,y2,x,y,cfgsc);
+       Fplot.PlotCircleMask(x,y,cfgsc.BxGlb*r,cfgsc.WhiteBg);
      end;
   end;
  end;

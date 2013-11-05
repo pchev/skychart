@@ -134,22 +134,42 @@ object f_obslist: Tf_obslist
       OnClick = Button6Click
       TabOrder = 2
     end
+    object ToggleBox1: TToggleBox
+      Left = 316
+      Height = 26
+      Top = 1
+      Width = 90
+      Caption = 'ToggleBox1'
+      Checked = True
+      OnClick = ToggleBox1Click
+      State = cbChecked
+      TabOrder = 4
+    end
+    object ToggleBox2: TToggleBox
+      Left = 316
+      Height = 26
+      Top = 27
+      Width = 90
+      Caption = 'ToggleBox2'
+      OnClick = ToggleBox2Click
+      TabOrder = 5
+    end
     object PageControl1: TPageControl
-      Left = 304
+      Left = 400
       Height = 78
       Top = 1
-      Width = 494
-      ActivePage = TabSheet2
+      Width = 398
+      ActivePage = TabSheet1
       Align = alRight
       Anchors = [akTop, akLeft, akBottom]
-      TabIndex = 1
+      ShowTabs = False
+      TabIndex = 0
       TabOrder = 3
-      TabPosition = tpLeft
       OnChange = PageControl1Change
       object TabSheet1: TTabSheet
         Caption = 'Airmass'
         ClientHeight = 74
-        ClientWidth = 436
+        ClientWidth = 394
         object CheckBox2: TCheckBox
           Left = 16
           Height = 23
@@ -208,38 +228,12 @@ object f_obslist: Tf_obslist
       object TabSheet2: TTabSheet
         Caption = 'Transit'
         ClientHeight = 74
-        ClientWidth = 436
-        object RadioGroup1: TRadioGroup
-          Left = 0
-          Height = 74
-          Top = 0
-          Width = 140
-          Align = alLeft
-          AutoFill = True
-          ChildSizing.LeftRightSpacing = 6
-          ChildSizing.TopBottomSpacing = 6
-          ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
-          ChildSizing.EnlargeVertical = crsHomogenousChildResize
-          ChildSizing.ShrinkHorizontal = crsScaleChilds
-          ChildSizing.ShrinkVertical = crsScaleChilds
-          ChildSizing.Layout = cclLeftToRightThenTopToBottom
-          ChildSizing.ControlsPerLine = 1
-          ClientHeight = 70
-          ClientWidth = 136
-          ItemIndex = 1
-          Items.Strings = (
-            'East side'
-            'Cross meridian'
-            'West side'
-          )
-          OnClick = RadioGroup1Click
-          TabOrder = 3
-        end
+        ClientWidth = 394
         object CheckBox4: TCheckBox
           Left = 144
           Height = 23
           Top = 22
-          Width = 276
+          Width = 294
           Caption = 'Only objects within hour angle limits tonight'
           OnChange = CheckBox4Change
           TabOrder = 0
@@ -254,7 +248,7 @@ object f_obslist: Tf_obslist
         end
         object HourAngleCombo: TComboBox
           Left = 240
-          Height = 23
+          Height = 24
           Top = 1
           Width = 72
           ItemHeight = 0
@@ -273,7 +267,7 @@ object f_obslist: Tf_obslist
           Left = 320
           Height = 16
           Top = 3
-          Width = 34
+          Width = 35
           Caption = 'Hours'
           ParentColor = False
         end
@@ -281,10 +275,50 @@ object f_obslist: Tf_obslist
           Left = 144
           Height = 23
           Top = 46
-          Width = 256
+          Width = 272
           Caption = 'Only objects within hour angle limits now'
           OnChange = CheckBox5Change
           TabOrder = 2
+        end
+        object Panel1: TPanel
+          Left = 0
+          Height = 74
+          Top = 0
+          Width = 141
+          Align = alLeft
+          BevelOuter = bvLowered
+          ClientHeight = 74
+          ClientWidth = 141
+          TabOrder = 3
+          object RadioButton1: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 2
+            Width = 108
+            Caption = 'RadioButton1'
+            Checked = True
+            OnClick = RadioGroup1Click
+            TabOrder = 0
+            TabStop = True
+          end
+          object RadioButton2: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 26
+            Width = 108
+            Caption = 'RadioButton2'
+            OnClick = RadioGroup1Click
+            TabOrder = 1
+          end
+          object RadioButton3: TRadioButton
+            Left = 2
+            Height = 23
+            Top = 50
+            Width = 108
+            Caption = 'RadioButton3'
+            OnClick = RadioGroup1Click
+            TabOrder = 2
+          end
         end
       end
     end

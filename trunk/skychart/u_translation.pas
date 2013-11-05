@@ -1502,6 +1502,7 @@ resourcestring
   rsWestSide = 'West side';
   rsEyepieceVisi = 'Eyepiece vision';
   rsPrintHeaderA = 'Print header and footer';
+  rsObservingLis2 = 'Observing list elements';
 
 implementation
 

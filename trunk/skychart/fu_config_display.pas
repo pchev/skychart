@@ -689,6 +689,7 @@ showlabelSol.caption:=rsSolarSystem;
 showlabelConst.caption:=rsConstellatio7;
 showlabelMisc.caption:=rsOtherLabel;
 ShowLabelChartInfo.caption:=rsChartInforma;
+Label15.Caption:=rsObservingLis2;
 CheckBox5.Caption:=rsChartLegend;
 Button9.Caption:=rsDefault;
 
