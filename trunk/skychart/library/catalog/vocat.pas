@@ -676,7 +676,7 @@ if Assigned(VoNode) then begin
                   if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
                       if lin.star.id='' then lin.star.id:=lin.star.id+buf
                                         else lin.star.id:=lin.star.id+'-'+buf;
-                  end else lin.star.id:=buf;
+                  end else lin.star.id:=trim(VOFields[i])+' '+buf;
             end;
             if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
               lin.star.valid[vsMagv]:=true;
@@ -695,7 +695,7 @@ if Assigned(VoNode) then begin
                   if  pos('meta.id.part',TFieldData(VOFields.Objects[i]).ucd)>0 then begin
                       if lin.neb.id='' then lin.neb.id:=lin.neb.id+buf
                                         else lin.neb.id:=lin.neb.id+'-'+buf;
-                  end else lin.neb.id:=buf;
+                  end else lin.neb.id:=trim(VOFields[i])+' '+buf;
             end;
             if (buf<>'')and(pos('phot.mag',TFieldData(VOFields.Objects[i]).ucd)=1)and(pos('phot.mag.',TFieldData(VOFields.Objects[i]).ucd)=0)and(lin.neb.mag=-99)and(pos('error',TFieldData(VOFields.Objects[i]).ucd)=0) then begin
                lin.options.flabel[lOffset+vnMag]:=VOFields[i];
